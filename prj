@@ -1,15 +1,21 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 393)
-(Parent-Version vaucanson 0 392)
-(Version-Log "2003-07-22  Loïc Fosse  <loic@lrde.epita.fr>
+(Project-Version vaucanson 0 394)
+(Parent-Version vaucanson 0 393)
+(Version-Log "2003-07-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* bootstrap.sh: Add ability to specify autoreconf command.
-	* src/tests/sanity/generate_files.sh: Correct a sed command.
-	* src/demos/vaucanswig/expand.sh: Replace some echo commands.")
-(Checkin-Time "Tue, 22 Jul 2003 16:23:55 +0200")
-(Checkin-Login fosse_l)
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Remove some 'non-used argument' warnings. Make return of Elements
+	set the 'set' attribute.
+	* include/vaucanson/automata/concept/tags.hxx: Remove some 'non-used
+	argument' wanings.
+	* include/vaucanson/algorithms/eval.hxx: Initialize the set attributes
+	when declaring Elements.
+
+")
+(Checkin-Time "Wed, 23 Jul 2003 15:52:24 +0200")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -91,7 +97,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.27 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.28 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -234,7 +240,7 @@
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.5 600))
   (include/vaucanson/algebra/concrete/predefs.hh (vaucanson/g/45_predefs.hh 1.5 600))
   (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.10 600))
-  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.19 600))
+  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.20 600))
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh (vaucanson/b/32_tropical_s 1.10 600))
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.17 600))
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.8 600))
@@ -308,7 +314,7 @@
   (include/vaucanson/automata/concept/kinds.hh (vaucanson/d/16_kinds.hh 1.16 600))
   (include/vaucanson/automata/concept/kinds.hxx (vaucanson/d/15_kinds.hxx 1.17 600))
   (include/vaucanson/automata/concept/tags.hh (vaucanson/c/48_tags.hh 1.7 600))
-  (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.6 600))
+  (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.7 600))
   (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.7 600))
   (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.7 600))
   (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.14 600))
@@ -348,7 +354,7 @@
   (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.11 600))
   (include/vaucanson/algorithms/complete.hxx (vaucanson/f/1_complete.h 1.10 600))
   (include/vaucanson/algorithms/eval.hh (vaucanson/e/6_compute.hh 1.13 600))
-  (include/vaucanson/algorithms/eval.hxx (vaucanson/e/5_compute.hx 1.17 600))
+  (include/vaucanson/algorithms/eval.hxx (vaucanson/e/5_compute.hx 1.18 600))
   (include/vaucanson/algorithms/concatenate.hh (vaucanson/h/5_concat.hh 1.9 600))
   (include/vaucanson/algorithms/concatenate.hxx (vaucanson/h/4_concat.hxx 1.9 600))
   (include/vaucanson/algorithms/determinize.hh (vaucanson/d/35_determiniz 1.13 600))

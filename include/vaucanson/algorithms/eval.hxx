@@ -63,12 +63,15 @@ namespace vcsn {
 	 ++i)
       max_hstate_t = std::max(*i, max_hstate_t);
 
-    std::vector<semiring_elt_t>		v1(max_hstate_t + 1);
-    std::vector<semiring_elt_t>		v2(max_hstate_t + 1);
-    std::list<hedge_t>			delta_ret;
-    const typename semiring_elt_t::set_t	&semiring = a.set().series().semiring();
-    semiring_elt_t zero = semiring.zero(SELECT(typename semiring_elt_t::value_t));
-    typename auto_t::monoid_elt_t empty;
+    std::vector<semiring_elt_t>	v1(max_hstate_t + 1,
+				   semiring_elt_t (a.series().semiring()));
+    std::vector<semiring_elt_t>	v2(max_hstate_t + 1,
+				   semiring_elt_t (a.series().semiring()));
+    std::list<hedge_t>		delta_ret;
+    const typename semiring_elt_t::set_t &semiring = a.series().semiring();
+    semiring_elt_t zero =
+      semiring.zero(SELECT(typename semiring_elt_t::value_t));
+    typename auto_t::monoid_elt_t empty(a.series().monoid());
 
     /*-------------------.
     | Initialize the set |
@@ -124,7 +127,7 @@ namespace vcsn {
   typename Element<A, T>::semiring_elt_t
   eval(const Element<A, T>& a, const W& word)
   {
-    typename Element<A, T>::semiring_elt_t ret;
+    typename Element<A, T>::semiring_elt_t ret(a.set().series().semiring());
 
     do_eval(a.set(), a, word, ret);
     return ret;

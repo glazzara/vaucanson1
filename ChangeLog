@@ -1,3 +1,13 @@
+2003-07-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Remove some 'non-used argument' warnings. Make return of Elements
+	set the 'set' attribute.
+	* include/vaucanson/automata/concept/tags.hxx: Remove some 'non-used
+	argument' wanings.
+	* include/vaucanson/algorithms/eval.hxx: Initialize the set attributes
+	when declaring Elements.
+
 2003-07-22  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* bootstrap.sh: Add ability to specify autoreconf command.

@@ -32,9 +32,9 @@
 
 # include <vaucanson/automata/concept/tags.hh>
 
-static inline bool operator==(const vcsn::NoTag& a, const vcsn::NoTag& b)
+static inline bool operator==(const vcsn::NoTag&, const vcsn::NoTag&)
 { return true; }
-static inline bool operator!=(const vcsn::NoTag& a, const vcsn::NoTag& b)
+static inline bool operator!=(const vcsn::NoTag&, const vcsn::NoTag&)
 { return false; }
 
 #endif // VCSN_AUTOMATA_CONCEPT_TAGS_HXX
