@@ -151,7 +151,7 @@ namespace vcsn {
     return false; 
   }
 
-  inline bool op_stareable(const algebra::NumericalSemiring&, bool b)
+  inline bool op_stareable(const algebra::NumericalSemiring&, bool)
   { 
     return true; 
   }

@@ -154,10 +154,11 @@ namespace vcsn {
   template <typename S, typename T>
   bool
   parse_word(Element<S, T>& dest, 
-	const std::string& s, 
-	typename std::string::const_iterator& i)
+	     const std::string& s, 
+	     typename std::string::const_iterator& i,
+	     const std::list<char>& escaped)
   {
-    return op_parse(dest.set(), dest.value(), s, i);
+    return op_parse(dest.set(), dest.value(), s, i, escaped);
   }
 
   // default implementation of word parsing assumes the fact that
@@ -167,15 +168,28 @@ namespace vcsn {
   template <typename S, typename T>
   bool op_parse(const algebra::FreeMonoidBase<S>& set, T& v, 
 		const std::string& s, 
-		typename std::string::const_iterator& i)
+		typename std::string::const_iterator& i,
+		const std::list<char>& escaped)
   {
     typename std::string::const_iterator j = i;
+    typename std::string::const_iterator k;
 
-    while ((i != s.end()) && (set.alphabet().contains(*i)))
-      {
-	v += *i;
-	++i;
-      }
+    while ((i != s.end()) && (set.alphabet().contains(*i)) &&
+	   (std::find(escaped.begin(), escaped.end(), *i) == escaped.end()))
+      if (*i == '\\')
+	{
+	  k = i;
+	  ++k;
+	  if (k != s.end())
+	    i = k;
+	  v += *i;
+	  ++i;
+	}
+      else
+	{
+	  v += *i;
+	  ++i;
+	}
     return (i != j);
   }
 

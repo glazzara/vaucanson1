@@ -79,11 +79,11 @@ namespace vcsn {
     /*------------.
     | Computation |
     `------------*/
+
     for (typename input_t::const_iterator e = word.begin();
 	 e != word.end();
 	 ++e)
       {
-	//	std::cout << "l : " << *e << std::endl;
  	std::fill(v2.begin(), v2.end(), zero);
 	for (unsigned i = 0; i < v1.size(); ++i)
 	  if (v1[i] != zero)
@@ -103,9 +103,10 @@ namespace vcsn {
     /*-----------------.
     | Final and Result |
     `-----------------*/
+    result = zero;
     for (unsigned i = 0; i < v1.size(); ++i)
       if (v1[i] != zero)
-	result += v1[i] * a.get_final(i).get(empty);    
+	result += v1[i] * a.get_final(i).get(empty);
   }
 
   /*--------.

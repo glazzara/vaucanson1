@@ -14,7 +14,7 @@
 #include <vaucanson/algorithms/thompson.hh>
 #include <vaucanson/algorithms/eval.hh>
 #include <vaucanson/algorithms/hopcroft_minimization.hh>
-// FIXME: when dot_dump is re-integrated : #include <vaucanson/misc/dot_dump.hh>
+#include <vaucanson/misc/dot_dump.hh>
 #include <iostream>
 #include <vector>
 #include <ctype.h>
@@ -184,9 +184,7 @@ int main(int argc, char **argv)
       // Construct the associated automaton.
       alphabet_t alpha;
       for (unsigned l = 0; l <= 255; ++l)
-	if (isprint(l) && (l != '*') && (l != '.') && (l != '+')
-	    && (l != '(') && (l != ')'))
-	  alpha.insert(char(l));
+	alpha.insert(char(l));
       
       automaton_t automaton = new_automaton(alpha);
       Element<series_t, rat::exp<monoid_elt_value_t, weight_value_t> >
@@ -195,23 +193,17 @@ int main(int argc, char **argv)
       standard_of(automaton, krat_exp.value());
       realtime_here(automaton);
       complete_here(automaton);
-      std::cerr << "complete ok" << std::endl;
       // FIXME: misc::dot_dump(std::cout, automaton, "automaton");
       // STATE FINAL => sigma * on it.
       for_each_initial_state(s, automaton)
 	for (unsigned l = 0; l <= 255; ++l)
-	  if (isprint(l) && (l != '*') && (l != '.') && (l != '+')
-	      && (l != '(') && (l != ')'))
-	    automaton.add_letter_edge(*s, *s, char(l));
+	  automaton.add_letter_edge(*s, *s, char(l));
       for_each_final_state(s, automaton)
 	for (unsigned l = 0; l <= 255; ++l)
-	  if (isprint(l) && (l != '*') && (l != '.') && (l != '+')
-	      && (l != '(') && (l != ')'))
-	    automaton.add_letter_edge(*s, *s, char(l));
-
+	  automaton.add_letter_edge(*s, *s, char(l));
+      
       automaton = determinize(automaton);
-      std::cerr << "determinize ok" << std::endl;
-      // FIXME: misc::dot_dump(std::cout, automaton, "automaton");
+      //      misc::dot_dump(std::cerr, automaton, "automaton");
       // No file means standard input.
       if (optcount == argc)
 	{

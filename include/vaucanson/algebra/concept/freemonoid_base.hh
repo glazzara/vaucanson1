@@ -25,6 +25,7 @@
 # include <vaucanson/algebra/concept/alphabets_base.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh>
 # include <string>
+# include <list>
 
 namespace vcsn {
 
@@ -157,14 +158,16 @@ namespace vcsn {
   bool
   parse_word(Element<S, T>& dest, 
 	     const std::string& s, 
-	     typename std::string::const_iterator& i);
+	     typename std::string::const_iterator& i,
+	     const std::list<char> & escaped = std::list<char>());
 
   /*! @} @} */
 
   template <typename S, typename T>
   bool op_parse(const algebra::FreeMonoidBase<S>& s, T& v, 
 		const std::string&, 
-		typename std::string::const_iterator&);
+		typename std::string::const_iterator&,
+		const std::list<char>& escaped);
 
   template<typename Self, typename T>
   void op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v);

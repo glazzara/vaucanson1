@@ -171,6 +171,11 @@ namespace vcsn {
 	return ((tok_.size() == 1) && (tok_.front().type == tok));
       }
 
+      bool is_defined()
+      {
+	return (tok_.size() > 0);
+      }
+
       bool is_schrod()
       {
 	return (tok_.size() > 1);
@@ -277,14 +282,36 @@ namespace vcsn {
 	typedef std::string::const_iterator		iterator_t;
 	
 	iterator_t i = in.begin();
+	std::list<char> operators;
 	int len = 0;
-	
+	operators.push_back('0');
+	operators.push_back('(');
+	operators.push_back(')');
+	operators.push_back('.');
+	operators.push_back('+');
+	operators.push_back('*');
+	operators.push_back('1');
+	operators.push_back(' ');
+	  
 	while (!error_ & (i != in.end()))
 	  {
 	    len = 0;
 	    krat_exp_token_t tok;
 	    switch (*i) 
 	      {
+		// escaping case.
+	      case '\\': 
+		{
+		  iterator_t j = i;
+		  ++j;
+		  if (j != in.end())
+		    {
+		      ++i;
+		      len = 1;
+		      break;
+		    }
+		}
+		// operator case.
 	      case '(' : tok = lparen; len = 1; break;
 	      case ')' : tok = rparen; len = 1; break;
 	      case '+' : tok = plus;   len = 1; break;
@@ -297,7 +324,7 @@ namespace vcsn {
 	    // try word parser.
 	    iterator_t mli = i;
 	    monoid_elt_t w(e.set().monoid());
-	    if (parse_word(w, in, mli))
+	    if (parse_word(w, in, mli, operators))
 	      {
 		if (mli - i > 1)
 		  tok.reset();
@@ -317,8 +344,6 @@ namespace vcsn {
 		    len = wli - i;
 		  }
 	      }
-	    // std::cout << tok.to_string() << std::endl;
-	    // std::cout << "len :" << len << std::endl;
 	    if (len == 0)
 	      lex_error(std::string("Invalid token '") + *i + "'.");
 	    else

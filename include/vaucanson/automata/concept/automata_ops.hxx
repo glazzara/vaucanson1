@@ -581,7 +581,7 @@ namespace vcsn {
 		OutputIterator res, 
 		hstate_t from, 
 		const L& query,
-		delta_kind::states k)
+		delta_kind::states)
   {
     v.delta(res, from, query, delta_kind::states());
   }
@@ -696,7 +696,7 @@ namespace vcsn {
   template <class S, class T,
 	    typename OutputIterator, typename L>	
   inline
-  void op_rdelta(const AutomataBase<S>& s, const T& v,
+  void op_rdelta(const AutomataBase<S>&, const T& v,
 		 OutputIterator res, 
 		 hstate_t from, 
 		 const L& query,

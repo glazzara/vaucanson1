@@ -1,5 +1,22 @@
 2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/freemonoid_base.hh
+		(parse_word): Add escaped characters.
+		(op_parse): Likewise.
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: 
+		Implement it in the generic op_parse version.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx: Fix unused arg warning.
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Adjust lexer.
+	* include/vaucanson/automata/concept/automata_base.hxx: Fix unused argument warning.
+	* include/vaucanson/automata/concept/automata_ops.hxx: Likewise.
+	* include/vaucanson/algorithms/sub_automaton.hxx: Likewise.
+	* include/vaucanson/algorithms/eval.hxx: Minor.
+	* src/demos/vgrep/vgrep.cc: Fix.
+	* include/vaucanson/algorithms/forward_closure.hxx: Fix del_edge bad use.
+	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.
+
+2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx
 	* include/vaucanson/algebra/concrete/series/krat.hxx
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx

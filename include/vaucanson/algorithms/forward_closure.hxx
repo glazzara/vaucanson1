@@ -69,7 +69,8 @@ namespace vcsn {
     
     // Initialize the matrix m_weight, m_series, m_winitial and
     // m_series_ret with the original automaton
-  
+
+    std::list<hedge_t> to_remove;
     for_each_edge(e, a)
       {
 	hstate_t origin = a.origin_of(*e);
@@ -79,8 +80,10 @@ namespace vcsn {
 	m_series[origin][aim].value_set(monoid_identity.value(),
 					weight_zero.value());
 	m_series_ret[origin][aim] = m_series[origin][aim];
-	a.del_edge(*e);
+	to_remove.push_back(*e);
       }
+    for_each_const_(std::list<hedge_t>, e, to_remove)
+      a.del_edge(*e);
 
     // Initialize the matrix m_winitial and m_winitial_tmp
     for_each_initial_state(p, a)

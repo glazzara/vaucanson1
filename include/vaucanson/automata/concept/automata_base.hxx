@@ -914,7 +914,7 @@ namespace vcsn {
 
   template<typename S, typename St, typename T>
   inline
-  St& op_rout(const AutomataBase<S>& s, St& st, const T& r)
+  St& op_rout(const AutomataBase<S>&, St& st, const T& r)
   { 
     st << "{ " 
        << r.states().size() << " states, "

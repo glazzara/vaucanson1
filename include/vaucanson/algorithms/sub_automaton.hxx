@@ -35,7 +35,7 @@ namespace vcsn {
   `----------------------------------------*/
  
   template<typename A, typename auto_t, typename list_t>
-  void do_sub_automaton(const AutomataBase<A>& 
+  void do_sub_automaton(const AutomataBase<A>&,
 		       auto_t& a,
 		       const list_t& selected, 
 		       bool check_states)
@@ -50,7 +50,8 @@ namespace vcsn {
       }
 
     for_each_const_(std::list<hstate_t>, i, to_be_removed)
-      a.del_state(*i);
+      if ((!check_states) || (a.has_state(*i)))
+	a.del_state(*i);
   }
 
 
