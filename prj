@@ -1,27 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 494)
-(Parent-Version vaucanson 0 493)
+(Project-Version vaucanson 0 495)
+(Parent-Version vaucanson 0 494)
 (New-Version-Log "")
 
-(Version-Log "2004-03-02  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+(Version-Log "2004-03-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,
-	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx:
-	New files. Provide an implementation for rational numbers.
-	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
-	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
-	Add specialization for rational numbers.
-	* include/vaucanson/misc/random.hh, include/vaucanson/misc/random.hxx:
-	Add support for rational numbers random generation.
-	* src/tests/tests-suites/generate-all.sh: Generate semiring tests with
-	rational numbers.
-	* include/Makefile.am, NEWS: Update..
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx: Add
+	a missing inline.
 
 ")
-(Checkin-Time "Tue, 02 Mar 2004 19:32:07 +0100")
-(Checkin-Login o-conn_s)
+(Checkin-Time "Tue, 02 Mar 2004 22:22:28 +0100")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -136,14 +127,14 @@
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.5 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
-  
-  
+
+
   (doc/tutorial/Makefile.am (vaucanson/h/44_Makefile.a 1.5 600))
   (doc/tutorial/definitions.tex (vaucanson/i/20_definition 1.1 600))
   (doc/tutorial/macros.tex (vaucanson/i/19_macros.tex 1.1 600))
   (doc/tutorial/packages.tex (vaucanson/i/18_packages.t 1.2 600))
   (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.8 600))
-  
+
 
   (include () :directory)
   (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.6 600))
@@ -161,7 +152,7 @@
   (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.4 600))
   (include/vaucanson/misc/container_ops.hxx (vaucanson/q/15_container_ 1.6 600))
   (include/vaucanson/misc/container_ops.hh (vaucanson/q/16_container_ 1.5 600))
-  (include/vaucanson/misc/constraints.hh (vaucanson/q/17_constraint 1.2 600)) 
+  (include/vaucanson/misc/constraints.hh (vaucanson/q/17_constraint 1.2 600))
   (include/vaucanson/misc/selectors.hh (vaucanson/14_selectors. 1.8 600))
   (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.10 600))
   (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.10 600))
@@ -212,7 +203,7 @@
   (src/tests/design_pattern/intrinsics.hh (vaucanson/q/6_intrinsics 1.3 600))
 
   (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.27 600))
-  (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.26 600))  
+  (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.26 600))
   (include/vaucanson/algebra/concept/freemonoid_base.hh (vaucanson/c/1_freemonoid 1.18 600))
   (include/vaucanson/algebra/concept/freemonoid_base.hxx (vaucanson/c/0_freemonoid 1.18 600))
   (include/vaucanson/algebra/concept/letter.hh (vaucanson/i/22_letter.hh 1.4 600))
@@ -226,7 +217,7 @@
   (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.26 600))
   (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.26 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.11 600))
-  
+
 
   (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.3.1.2 600))
   (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.4.1.2 600))
@@ -341,7 +332,7 @@
   (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.14.1.1 600))
   (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.10 600))
   (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.11 600))
-  (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.7 600)) 
+  (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.7 600))
   (include/vaucanson/automata/concrete/transpose_view.hh (vaucanson/q/21_transpose_ 1.7 600))
   (include/vaucanson/automata/concrete/transpose_view.hxx (vaucanson/q/22_transpose_ 1.5 600))
   (include/vaucanson/automata/concrete/automaton_view.hh (vaucanson/q/23_automaton_ 1.4 600))
@@ -494,7 +485,7 @@
   (src/tests/tests-suites/algebra_series_krat.defs (vaucanson/j/25_algebra_se 1.3 600))
   (src/tests/tests-suites/algebra_series_misc.defs (vaucanson/j/26_algebra_se 1.2 600))
   (src/tests/tests-suites/algebra_series_krat_derivation.defs (vaucanson/j/37_algebra_se 1.1.1.1 600))
-  
+
   (src/demos/Makefile.am (vaucanson/i/28_Makefile.a 1.8 600))
 
   (src/demos/fsm/README (vaucanson/g/23_README 1.3 600))
@@ -984,8 +975,8 @@
 ;; Files added by populate at Sun, 01 Feb 2004 20:56:13 +0100,
 ;; to version 0.478(w), by clavei_t:
 
-  
-  
+
+
 
 ;; Files deleted by depopulate at Mon, 02 Feb 2004 11:55:09 +0100,
 ;; from version 0.478(w), by clavei_t:
@@ -996,8 +987,8 @@
 ;; Files added by populate at Mon, 02 Feb 2004 11:55:17 +0100,
 ;; to version 0.478(w), by clavei_t:
 
-  
-  
+
+
 
 ;; Files deleted by depopulate at Wed, 04 Feb 2004 18:14:14 +0100,
 ;; from version 0.480(w), by clavei_t:
@@ -1041,7 +1032,7 @@
 ;; Files added by populate at Tue, 02 Mar 2004 19:17:24 +0100,
 ;; to version 0.493(w), by o-conn_s:
 
-  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.1 644))
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.2 644))
   (include/vaucanson/algebra/concrete/semiring/rational_number.hh (vaucanson/v/5_rational_n 1.1 644))
 )
 (Merge-Parents)

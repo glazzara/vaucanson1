@@ -188,6 +188,7 @@ namespace vcsn
       return static_cast<double> (num_) / denom_;
     }
 
+    inline
     std::ostream& operator<<(std::ostream& ostr, const RationalNumber& nb)
     {
       return nb.print(ostr);
