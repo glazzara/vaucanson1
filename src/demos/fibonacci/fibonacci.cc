@@ -138,7 +138,7 @@ int main()
   os_s.assoc(b_l * b_l, true);
   serie_t s_s(OSA_A_star);
   s_s.assoc(empty, os_s);
-  fibd.set_initial(s, s_q);
+  fibd.set_initial(s, s_s);
 
   output_serie_t os_t(OSA);
   os_t.assoc(b_l, true);

@@ -34,8 +34,10 @@
 
 # include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algorithms/sum.hh>
+# include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
+#include <vaucanson/tools/dot_dump.hh>
 
 namespace vcsn {
 
@@ -49,15 +51,22 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto_);
     hstate_t i = a.add_state();
-    monoid_elt_t e = algebra::identity_as<monoid_elt_value_t>
-      ::of(a.set().series().monoid());
+    std::set<hedge_t> edge_oi;
     for_each_initial_state(oi, a)
       {
 	series_elt_t s = a.get_initial(*oi);
-	a.add_spontaneous(i, *oi); // , s.get(e));
+	std::set<hedge_t> edge_oi;
+	edge_oi.clear();
+	a.deltac(edge_oi, *oi, delta_kind::edges()); 
+	for_all_const_(std::set<hedge_t>, oil, edge_oi)
+	  {
+	    series_elt_t t = s*a.serie_of(*oil);
+	    a.add_serie_edge(i,a.aim_of(*oil),t);
+	  }
       }
     a.clear_initial();
     a.set_initial(i);
+    accessible_here(a);
   }
 
   template<typename A, typename T>
