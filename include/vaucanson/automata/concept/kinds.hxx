@@ -111,7 +111,7 @@ namespace vcsn
   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
   add_spontaneous(hstate_t from, hstate_t to)			   
     {
-      return auto_self().add_edge(from, to, algebra::identity_value(SELECT(Series), SELECT(SeriesT)));
+      return auto_self().add_edge(from, to, identity_value(SELECT(Series), SELECT(SeriesT)));
     }
 
     template<typename Self, typename Series, typename SeriesT, typename LabelT>

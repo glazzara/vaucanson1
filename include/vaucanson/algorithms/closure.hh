@@ -6,7 +6,7 @@
 #ifndef ALGORITHMS_CLOSURE_HH
 # define ALGORITHMS_CLOSURE_HH
 
-# include <vaucanson/automata/automata_base.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
@@ -18,11 +18,11 @@ namespace vcsn {
   // note : this a particularily dummy closure. to be optimized.
   template<typename A, typename T>
   void
-  in_closure(const algebra::Element<A, T>& a);
+  in_closure(const Element<A, T>& a);
 
   template<typename A, typename T>
-  algebra::Element<A, T>
-  closure(const algebra::Element<A, T>& a);
+  Element<A, T>
+  closure(const Element<A, T>& a);
 
 } // vcsn
 

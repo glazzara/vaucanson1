@@ -7,6 +7,7 @@
 # define MISC_USUAL_HH
 
 # include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
@@ -39,7 +40,6 @@ namespace vcsn {
     usual_automaton_t;
 
 #define AUTOMATON_TYPES_(AutoType,Prefix)				      \
- typedef typename AutoType::series_t                Prefix##series_t;         \
  typedef typename AutoType::states_t		    Prefix##states_t;	      \
  typedef typename AutoType::state_iterator	    Prefix##state_iterator;   \
  typedef typename AutoType::edges_t		    Prefix##edges_t;	      \
@@ -49,15 +49,21 @@ namespace vcsn {
  typedef typename AutoType::initial_iterator	    Prefix##initial_iterator; \
  typedef typename AutoType::final_iterator	    Prefix##final_iterator;   \
  typedef typename AutoType::monoid_t		    Prefix##monoid_t;	      \
+ typedef typename AutoType::monoid_elt_t	    Prefix##monoid_elt_t;     \
  typedef typename Prefix##monoid_t::alphabets_elt_t Prefix##alphabets_elt_t;  \
  typedef typename Prefix##monoid_t::alphabet_t      Prefix##alphabet_t;	      \
  typedef typename Prefix##alphabet_t::iterator      Prefix##alphabet_iterator;\
  typedef typename Prefix##alphabet_t::letter_t      Prefix##letter_t;	      \
  typedef typename AutoType::weights_t               Prefix##weights_t;	      \
+ typedef typename AutoType::series_t                Prefix##series_t;	      \
+ typedef typename AutoType::series_elt_t            Prefix##series_elt_t;     \
  typedef typename AutoType::label_t		    Prefix##label_t;	      \
  typedef typename AutoType::tag_t		    Prefix##tag_t;
 
 #define AUTOMATON_TYPES(AutoType)                   AUTOMATON_TYPES_(AutoType,)
+
+#define zero_	zero(SELECT(typename series_elt_t::value_t))
+#define one_	identity(SELECT(typename series_elt_t::value_t))
 
   } // tools
 

@@ -12,7 +12,7 @@
 # include <queue>
 # include <cassert>
 
-# include <vaucanson/automata/automata_base.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/closure.hh>
 # include <vaucanson/algorithms/reachable.hh>
@@ -160,18 +160,18 @@ namespace vcsn {
  
   template<typename A, typename T, typename Chooser_>
   inline
-  typename algebra::Element<A, T>::series_elt_t
-  elimination(const algebra::Element<A, T>& a, const Chooser_& c)
+  typename Element<A, T>::series_elt_t
+  elimination(const Element<A, T>& a, const Chooser_& c)
   {
-    algebra::Element<A, T> ret(a);
+    Element<A, T> ret(a);
     ret.emancipate();
     return do_in_elimination(ret.set(), ret, c);
   }
   
   template<typename A, typename T>
   inline
-  typename algebra::Element<A, T>::series_elt_t
-  elimination(const algebra::Element<A, T>& a)
+  typename Element<A, T>::series_elt_t
+  elimination(const Element<A, T>& a)
   {
     return elimination(a, DefaultChooser());
   }

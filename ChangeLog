@@ -1,4 +1,93 @@
 2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.77)
+	* include/vaucanson/automata/concept/kinds.hxx :
+	@@ -111,7 +111,7 @@
+	   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
+	   add_spontaneous(hstate_t from, hstate_t to)			   
+	     {
+	- return auto_self().add_edge(from, to,
+	algebra::identity_value(SELECT(Series), SELECT(SeriesT)));
+	
+	+ return auto_self().add_edge(from, to,
+	identity_value(SELECT(Series), SELECT(SeriesT)));
+	}
+
+	
+	* include/vaucanson/tools/usual.hh
+	 #define AUTOMATON_TYPES_(AutoType,Prefix)				      \
+	- typedef typename AutoType::series_t                Prefix##series_t;         \
+	@@ -49,15 +49,21 @@
+	+ typedef typename AutoType::monoid_elt_t	    Prefix##monoid_elt_t;     \
+	+ typedef typename AutoType::series_t                Prefix##series_t;	      \
+	+ typedef typename AutoType::series_elt_t            Prefix##series_elt_t;     \
+	  typedef typename AutoType::label_t		    Prefix##label_t;	      \
+	  typedef typename AutoType::tag_t		    Prefix##tag_t; 
+	 #define AUTOMATON_TYPES(AutoType)                   AUTOMATON_TYPES_(AutoType,)
+	+#define zero_	zero(SELECT(typename series_elt_t::value_t))
+	+#define one_	identity(SELECT(typename series_elt_t::value_t))
+ 
+	* include/vaucanson/tools/gen_random.hxx
+	+  template <class TAutomata>
+	+  TAutomata GenRandomAutomata<TAutomata>::
+	+  generate_with_epsilon(unsigned nb_state, 
+	+			unsigned nb_edge,
+	+			unsigned nb_spontaneous)
+   
+	* include/vaucanson/tools/gen_random.hh
+	+    TAutomata generate_with_epsilon(unsigned nb_state, unsigned nb_edge, 
+	+				    unsigned nb_epsilon);
+	+
+	* src/tests/automata/algos/algo_test.cc : minor.
+
+	* include/vaucanson/algorithms/closure.hh : 
+	-# include <vaucanson/automata/automata_base.hh>
+	+# include <vaucanson/automata/concept/automata_base.hh>
+ 
+	* src/tests/automata/algos/closure_test.hh :
+	-unsigned closure_test(tests::Tester& t)
+	+bool closure_test(tests::Tester& t)
+	-  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50);
+	+  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 15);
+   	+  automaton_t cauto = closure(auto_epsilon);
+	+  TEST(t, "Increase of edges number.",  
+	+       cauto.edges().size() >= auto_epsilon.edges().size());
+	+  TEST(t, "Idempotence.", 
+	+       closure(cauto).edges().size() == cauto.edges().size());
+
+	-  return EXIT_SUCCESS;
+	+  return true;
+
+	* include/vaucanson/algorithms/elimination.hxx
+	-  typename algebra::Element<A, T>::series_elt_t
+	-  elimination(const algebra::Element<A, T>& a, const Chooser_& c)
+	+  typename Element<A, T>::series_elt_t
+	+  elimination(const Element<A, T>& a, const Chooser_& c)
+	   {
+	-    algebra::Element<A, T> ret(a);
+	+    Element<A, T> ret(a);
+	
+	-  typename algebra::Element<A, T>::series_elt_t
+	-  elimination(const algebra::Element<A, T>& a)
+	+  typename Element<A, T>::series_elt_t
+	+  elimination(const Element<A, T>& a)
+
+	* include/vaucanson/algorithms/elimination.hh
+	-# include <vaucanson/automata/automata_base.hh>
+	+# include <vaucanson/automata/concept/automata_base.hh>
+
+	-  typename algebra::Element<A, T>::series_elt_t
+	-  elimination(const algebra::Element<A, T>& a);
+	+  typename Element<A, T>::series_elt_t
+	+  elimination(const Element<A, T>& a);
+ 
+	   template<typename A, typename T, typename Chooser_>
+	-  typename algebra::Element<A, T>::series_elt_t
+	-  elimination(const algebra::Element<A, T>& a, const Chooser_& c);
+	+  typename Element<A, T>::series_elt_t
+	+  elimination(const Element<A, T>& a, const Chooser_& c);
+   
+
+2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/fundamental/element.hxx
 	-    : set_(other.set_),

@@ -1,5 +1,6 @@
 // closure_test.hh
 //
+// $Id$
 // VCSN_HEADER
 
 #include <vaucanson/fundamental/fundamental.hh>
@@ -28,7 +29,7 @@
 
 
 template <class Auto>
-unsigned closure_test(tests::Tester& t)
+bool closure_test(tests::Tester& t)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
@@ -39,15 +40,13 @@ unsigned closure_test(tests::Tester& t)
   
   gen_auto_t gen(time(0x0));
   
-  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50);
+  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 15);
   
-  auto_epsilon 
-        
+  automaton_t cauto = closure(auto_epsilon);
+  TEST(t, "Increase of edges number.",  
+       cauto.edges().size() >= auto_epsilon.edges().size());
+  TEST(t, "Idempotence.", 
+       closure(cauto).edges().size() == cauto.edges().size());
 
-
-  TEST(t, "Check ", is_normalized(normalized));
-  
-  
-
-  return EXIT_SUCCESS;
+  return true;
 }

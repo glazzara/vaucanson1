@@ -3,7 +3,6 @@
 // $Id$
 // VCSN_HEADER
 
-
 #ifndef ALGORITHMS_CLOSURE_HXX
 # define ALGORITHMS_CLOSURE_HXX
 
@@ -14,7 +13,7 @@
 # include <queue>
 # include <utility>
 
-# include <vaucanson/automata/automata_base.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 
 namespace vcsn {
@@ -97,16 +96,16 @@ namespace vcsn {
 
   template<typename A, typename T>
   void
-  in_closure(algebra::Element<A, T>& a)
+  in_closure(Element<A, T>& a)
   {
     do_in_closure(a.set(), a);
   }
 
   template<typename A, typename T>
-  algebra::Element<A, T>
-  closure(const algebra::Element<A, T>& a)
+  Element<A, T>
+  closure(const Element<A, T>& a)
   {
-    algebra::Element<A, T> ret(a);
+    Element<A, T> ret(a);
 
     ret.emancipate();
     do_in_closure(ret.set(), ret);

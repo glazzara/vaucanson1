@@ -110,6 +110,9 @@ namespace vcsn {
     return work;
   }
   
+  
+
+
   template <class TAutomata>
   unsigned GenRandomAutomata<TAutomata>::
   nb_edge_circle(TAutomata work, hstate_t state)
@@ -135,6 +138,24 @@ namespace vcsn {
     for (edge_iterator i = work.edges().begin(); i != work.edges().end(); i++)
       if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
 	work.del_edge(*i);
+  }
+
+  template <class TAutomata>
+  TAutomata GenRandomAutomata<TAutomata>::
+  generate_with_epsilon(unsigned nb_state, 
+			unsigned nb_edge,
+			unsigned nb_spontaneous)
+  {
+    TAutomata a = this->generate(nb_state, nb_edge);
+    unsigned nb_eps = alea(nb_spontaneous);
+    
+    for (unsigned i = 0; i < nb_eps; ++i)
+      {
+	hstate_t f = a.select_state(alea(a.states().size()));
+	hstate_t t = a.select_state(alea(a.states().size()));
+	a.add_spontaneous(f, t);
+      }
+    return a;
   }
   
   template <class TAutomata>
