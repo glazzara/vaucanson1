@@ -41,6 +41,7 @@
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/algebra/implementation/semiring/tropical_semiring.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
+# include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/implementation/graph.hh>
 # include <vaucanson/tools/dot_dump.hh>
@@ -73,6 +74,9 @@ namespace vcsn {
     automaton_t;
 
     AUTOMATON_TYPES_EXACT(automaton_t);
+
+    typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;
+    typedef Element<series_t, krat_exp_impl_t>			krat_exp_t;
 
     template <class T>
     automaton_t new_automaton(const T& alphabet);

@@ -1,3 +1,11 @@
+2004-04-13  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh: Add definition of rationnal
+	  expressions type.
+
 2004-04-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx,
