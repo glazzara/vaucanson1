@@ -1,28 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 156)
-(Parent-Version vaucanson 0 155)
+(Project-Version vaucanson 0 157)
+(Parent-Version vaucanson 0 156)
 (Version-Log "
 2003-02-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
-(0.156)
-	* include/vaucanson/algebra/concept/alphabets_base.hh,
-	  include/vaucanson/algebra/concept/alphabets_base.hxx,
-	  include/vaucanson/algebra/concept/concepts.hh, 
-	  include/vaucanson/algebra/concept/concepts.hxx,
-	  include/vaucanson/algebra/concrete/alphabets/alphabets.hh,
-	  include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh,
-	  include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx,
-	  doc/tutorial/tutorial.tex,
-  	  src/demos/samples/algebra/alphabet.cc: 
-		Rename 'AlphabetsBase' to 'AlphabetSetBase'
-		Rename 'SetAlphabets' to 'AlphabetSet'
-	* bootstrap.sh: Make Automake install missing files.
-
-	* src/demos/grammar_inference/lattice.hh: Minor.
+(0.157)
+	* doc/tutorial.tex: Update
 ")
 (New-Version-Log "")
-(Checkin-Time "Mon, 17 Feb 2003 14:10:19 +0100")
+(Checkin-Time "Mon, 17 Feb 2003 16:48:37 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -105,7 +92,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.97 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.98 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.14 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.3 600))
@@ -591,17 +578,17 @@
 ;; Files added by populate at Thu, 13 Feb 2003 08:41:20 +0100,
 ;; to version 0.149(w), by yann:
 
-  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.3 600))
+  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.4 600))
 
 ;; Files added by populate at Thu, 13 Feb 2003 09:20:10 +0100,
 ;; to version 0.149(w), by yann:
 
-  (doc/tutorial/Makefile.am (vaucanson/h/44_Makefile.a 1.1 600))
+  (doc/tutorial/Makefile.am (vaucanson/h/44_Makefile.a 1.2 600))
 
 ;; Files added by populate at Thu, 13 Feb 2003 09:24:00 +0100,
 ;; to version 0.150(w), by yann:
 
-  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.2 600))
+  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.2 755))
 
 ;; Files added by populate at Thu, 13 Feb 2003 18:07:22 +0100,
 ;; to version 0.152(w), by max:
@@ -651,6 +638,13 @@
   ; (include/vaucanson/algebra/concrete/order/lattice.hh ())
   ; (include/vaucanson/algebra/concrete/order/orderset.hxx ())
   ; (include/vaucanson/algebra/concrete/order/lattice.hxx ())
+
+;; Files added by populate at Mon, 17 Feb 2003 16:47:26 +0100,
+;; to version 0.156(w), by yann:
+
+  (doc/tutorial/packages.tex (vaucanson/i/18_packages.t 1.1 600))
+  (doc/tutorial/macros.tex (vaucanson/i/19_macros.tex 1.1 600))
+  (doc/tutorial/definitions.tex (vaucanson/i/20_definition 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

@@ -1,27 +1,17 @@
+% tutorial.tex
+%
+% $Id$
 \documentclass{article}
 
-\usepackage{listings}
-\usepackage{url}
-\usepackage{ulem}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{palatino}
-\usepackage{a4wide}
-\usepackage{xspace}
-\usepackage{listings}
-
+\include{packages}
 \include{macros}
-
-% TODO: écrire les macros pour les exemples de code.
-% TODO: vérifier que l'HTML est ok.
-% TODO: établir un code de lecture (remarque de lecture, exemple, ...)
+\include{definitions}
 
 \begin{document}
 
 \title{Vaucanson -- a tutorial}
 
 \maketitle
-
 \tableofcontents
 
 \section{Overview}
@@ -150,7 +140,7 @@ As a consequence, objects are build incrementally from their set.
 
 % FIXME: Write valid Vaucanson code please !
 % FIXME: add all the code into the src/demos.
-\begin{verbatim}
+\begin{code}[Use of the element services.]
 Alphabet a;
 FreeMonoid f(a);
 Semiring s;
@@ -163,7 +153,7 @@ s.set().monoid(); // the monoid.
 s.value();        // the polynom.
 m.set().alphabet() == s.set().monoid().alphabet();
 s[m] = w;
-\end{verbatim}
+\end{code}
 
 Second, the particular behaviour of an implementation 'T' viewed as an
 element of a set 'S' is defined by specialization of the class
@@ -185,7 +175,6 @@ interpretation of the implementation as a particular concept.
 
 \subsubsection{Dynamic/Static properties}
 
-
 \section{Dealing with algebraic structures}
 
 Even if classical context are provided (like letter acceptor),
@@ -198,97 +187,95 @@ expression.
 
 \subsection{Alphabet}
 
-An alphabet is collection of letters. 
+\begin{tabular}%
+{ll}
+\hline \\
+concept: & \MyDefAlphabet  \\
+concerned files: & algebra/concept/alphabets\_base.h[h, xx] \\
+                 & algebra/concrete/alphabet/* \\
+\hline 
+\end{tabular}
 
-% FIXME: add a glossary
-In Vaucanson, we have the set of all alphabet over a particular type
-of letter denoted by the AlphabetSetBase abstract class. A final class
-SetAlphabet implements this class in a trivial manner: it is an empty
-class for static typing purpose. 
+\hspace{1cm}
 
-% We also have a DecoratedAlphabets class which represents the set of alphabet 
-% decorated with particular symbol like '?' or '~(.)' \ldots 
-% A creuser \ldots
+In Vaucanson, the set of all alphabets over a particular type of
+letter is denoted by the AlphabetSetBase abstract class. Consequently,
+to get all the services you can expect from an alphabet, you must look
+at MetaElement specialized w.r.t AlphabetSetBase (in
+algebra/concept/alphabets\_base.hh)
 
-An element of the alphabet set (so an alphabet) can be implemented in a lot of
-different ways. For example, we can use std::set or std::list for
-dynamic alphabets but there are also static alphabets.
+A final class AlphabetSet implements this class in a trivial manner:
+it is an empty class only for static typing purpose. This class is
+just parameterized by the type of letter. So, we have to provide the
+kind of letter we wish to manipulate inside our future alphabet. You
+can use the C++-\textit{builtins} types (like char, int, ...)  or use
+more specific types proposed in Vaucanson.
 
-\paragraph{Example 1 (dynamical alphabet)}
+For example, let us define a type alias declaring that we want to work
+with letter implemented with 'char':
 
-\paragraph{Type Creation} 
-First we have to precise wich kind of letter we wish manipulate inside our 
-futur alphabet. You can use the builtins types of C/C++ (like char, int, ...)
-or use more specific types proposed in Vaucanson. To do that, one trivial
-typedef be enough :
-
-\begin{verbatim}
+\begin{code}[Letter implemented with char]
 typedef char Letter;
-\end{verbatim}
+\end{code}
 
-in order to have an alphabet of char, or we can type : 
+Sometimes, it is useful to work only on a subset of the 'char' type,
+that's why you can use the 'static\_ranged' class:
 
-\begin{verbatim}
+\begin{code}[Letter implemented with static\_ranged]
 typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
-\end{verbatim}
+\end{code}
 
-in order to have a more specific kind of symbols inside your alphabet. 
-If you choose this last option, symbols can only be letters between 'a'
-and 'z', nothing more.
+If you choose this last option, symbols can only be letters between
+'a' and 'z', nothing more. The set of all the alphabets that contain
+this type of letter is expressed in Vaucanson with:
 
-Then we have to create the type of set of alphabets inside which we will 
-manipulate one of them. We can do this very naturally :
-
-\begin{verbatim}
+\begin{code}[Type denoting the set of alphabet holding letter of type 'Letter']
 typedef AlphabetSet<Letter>  Alphabets;
-\end{verbatim}
+\end{code}
 
-Lastly, we can create the type of the alphabet we will effectively use,
-with the Element pattern :
+An element of the alphabet set (\textit{ie} an alphabet) can be
+implemented in many ways. For example, we can use std::set or
+std::list for dynamic alphabets. Lastly, we can create the type of
+the alphabet we will effectively use, with the Element pattern:
 
-\begin{verbatim}
+\begin{code}[Type of an alphabet implemented with std::set structure]
 typedef Element<Alphabets, std::set<Letter> >  Alphabet;
 \end{verbatim}
 
-This previous should be understand like : ``an element of the set of all
-alphabets, implemented by a set of Letter''.
-In fact this code is already present inside Vaucanson, more exactly inside
-a file named ``predefs.hh'' :
+This previous should be understand like: ``an element of the set of
+alphabets holding 'Letter' letter and implemented by a std::set of
+'Letter' ''.  Actually, this code is already present inside Vaucanson, more
+exactly inside the file ``algebra/concrete/alphabet/predefs.hh''.
 
-\begin{verbatim}
-==============================================================================
-
+\begin{code}{The pre-existing alphabet definitions in Vaucanson]
  namespace small_alpha_letter {
       
       typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
-      typedef AlphabetSet<Letter>				   Alphabets;
-      typedef Element<Alphabets, std::set<Letter> >		   Alphabet;
+      typedef AlphabetSet<Letter>                                  Alphabets;
+      typedef Element<Alphabets, std::set<Letter> >                Alphabet;
 
     } // small_alpha_letter
 
     namespace char_letter {
 
-      typedef AlphabetSet<char>				   Alphabets;
-      typedef Element<Alphabets, std::set<char> >		   Alphabet;
+      typedef AlphabetSet<char>                            Alphabets;
+      typedef Element<Alphabets, std::set<char> >                  Alphabet;
 
     } // char_letter
 
     namespace int_letter {
 
-      typedef AlphabetSet<int>					   Alphabets;
-      typedef Element<Alphabets, std::set<int> >		   Alphabet;
+      typedef AlphabetSet<int>                                     Alphabets;
+      typedef Element<Alphabets, std::set<int> >                   Alphabet;
 
     } // int_letter
+\end{code}
 
-==============================================================================
-\end{verbatim}
+You only have to choose the right namespace for your work, or create a new.
 
-You have only to choose the right namespace for your work, or create a new.
-Next a short example of alphabet manipulation :
+To finish, here is a short example of alphabet manipulation :
 
-\begin{verbatim}
-==============================================================================
-
+\begin{code}[Example of alphabet manipulation]
   using namespace vcsn;
   using namespace algebra;
   using namespace small_alpha_letter;
@@ -297,36 +284,30 @@ Next a short example of alphabet manipulation :
   using std::endl;
   
   Alphabet A;
-  
   Letter a('a');
-  
+
   A.insert(a);
-  A.insert(Letter('b'));
+  A.insert('b');
   
   cout << "Size of alphabet : "
        << A.size() << endl;                // return 2
-  
-  
+    
   cout << "Is \'a\' inside alphabet ? (0 or 1) : "
        << A.contains('a') << endl;         //return true
 
   cout << "Is \'1\' inside alphabet ? (0 or 1) : "
        << A.contains('1') << endl;         //return false
   
-  
   cout << "element of alphabet are : ";
   for (Alphabet::iterator i = A.begin(); i != A.end(); i++)
     cout << *i << " ";
   cout << endl;
   
-  cout << "random sequence of 10 symbols of alphabet : ";
+  cout << "random sequence of 10 symbols of the alphabet : ";
   for (unsigned i = 0; i < 10; i++)
     cout << A.choose() << " ";
   cout << endl;
-       
-==============================================================================
-\end{verbatim}
-
+\end{code}
 
 \subsection{Free monoid}
 
@@ -359,5 +340,7 @@ a specific operation.
 \section{Advanced use}
 
 \subsection{Extending Vaucanson}
+
+\subsection{Glossary}
 
 \end{document}
