@@ -1,3 +1,11 @@
+2004-07-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/make_session.cc: New. Assemble XML automata to build
+	an XML session.
+	* src/demos/xml/display_session.cc: New. Display the automata which
+	are part of a session.
+	* src/demos/xml/Makefile.am: Update.
+
 2004-07-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	Add a new service for the automata context headers: new_rat_exp().

@@ -9,7 +9,9 @@ if XML_CHECK
 	        -I@XERCESC@/include
   AM_LDFLAGS = -lxerces-c -L@XERCESC@/lib
 
-  noinst_PROGRAMS = static_boolean
+  noinst_PROGRAMS = static_boolean make_session display_session
 endif
 
 static_boolean_SOURCES = static_boolean.cc
+make_session_SOURCES = make_session.cc
+display_session_SOURCES = display_session.cc
