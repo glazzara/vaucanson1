@@ -46,7 +46,7 @@ namespace vcsn {
 
   } // algebra
 
-  //! \@{
+  //! @{
   
   /*! @ingroup alphabet */ /*! @{ */
 

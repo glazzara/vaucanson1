@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef FUNDAMENTAL_ELEMENTS_OPS_HH
-# define FUNDAMENTAL_ELEMENTS_OPS_HH
+#ifndef VCSN_FUNDAMENTAL_ELEMENTS_OPS_HH
+# define VCSN_FUNDAMENTAL_ELEMENTS_OPS_HH
 
 # include <vaucanson/config/system.hh>
 # include <vaucanson/fundamental/predefs.hh>
@@ -29,13 +29,8 @@
 
 namespace vcsn {
 
-  /*! \addtogroup fundamental 
-   * \@{
-   */
-
-  /*! \addtogroup operators
-   * \@{
-   */
+  /*! @addtogroup fundamental */ /*! @{ */
+  /*! @addtogroup operators   */ /*! @{ */
 
   /*! equality operator between two different elements. */
   template<typename S1, typename T1, typename S2, typename T2>	
@@ -157,39 +152,39 @@ namespace vcsn {
 		   const vcsn::Element<S, T>& e);
 
   /*! addition operator between two a priori different elements. */
-  template<typename S1, typename T1, typename S2, typename T2>			
-  static inline									
+  template<typename S1, typename T1, typename S2, typename T2>	      	
+  static inline					     			
   typename vcsn::op_add_traits<S1, S2, T1, T2>::ret_t	
   operator+(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 									
   /*! addition operator between an element and an
     implementation. (left version) */
-  template<typename S, typename T, typename U>					
+  template<typename S, typename T, typename U>	       			
   static inline vcsn::Element<S, T>					
   operator +(const vcsn::Element<S, T>& e,				
-	     const U& v);							
+	     const U& v);			       			
 	
   /*! addition operator between an element and an
     implementation. (right version) */
   template<typename U, typename S, typename T>				       
   static inline vcsn::Element<S, T>					
-  operator +(const U& v,					     		
+  operator +(const U& v,			          		
 	     const vcsn::Element<S, T>& e);
 
   /*! substraction operator between two a priori different elements. */
-  template<typename S1, typename T1, typename S2, typename T2>			
-  static inline									
+  template<typename S1, typename T1, typename S2, typename T2> 		
+  static inline						       		
   typename vcsn::op_sub_traits<S1, S2, T1, T2>::ret_t	
   operator-(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /*! substraction operator between an element and an
     implementation. (left version) */ 
-  template<typename S, typename T, typename U>					
+  template<typename S, typename T, typename U>		       		
   static inline vcsn::Element<S, T>					
   operator-(const vcsn::Element<S, T>& e,				
-	    const U& v);							
+	    const U& v);				       		
   /*! substraction operator between an element and an
     implementation. (right version) */
   template<typename U, typename S, typename T>				       
@@ -198,18 +193,18 @@ namespace vcsn {
 	    const vcsn::Element<S, T>& e);
 
   /*! multiplication operator between two a priori different elements. */
-  template<typename S1, typename T1, typename S2, typename T2>			
-  static inline									
+  template<typename S1, typename T1, typename S2, typename T2> 		
+  static inline						       		
   typename vcsn::op_mul_traits<S1, S2, T1, T2>::ret_t	
   operator*(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /*! multiplication operator between an element and an
     implementation. (left version) */ 	
-  template<typename S, typename T, typename U>					
+  template<typename S, typename T, typename U>			       	
   static inline vcsn::Element<S, T>					
-  operator*(const vcsn::Element<S, T>& e,				
-	    const U& v);							
+  operator*(const vcsn::Element<S, T>& e,			       
+	    const U& v);					     	
 
   /*! multiplication operator between an element and an
     implementation. (right version) */
@@ -219,18 +214,18 @@ namespace vcsn {
 	    const vcsn::Element<S, T>& e);
 
   /*! division operator between two a priori different elements. */
-  template<typename S1, typename T1, typename S2, typename T2>			
-  static inline									
+  template<typename S1, typename T1, typename S2, typename T2>	       	
+  static inline						       		
   typename vcsn::op_div_traits<S1, S2, T1, T2>::ret_t	
   operator/(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /*! division operator between an element and an
     implementation. (left version) */
-  template<typename S, typename T, typename U>					
+  template<typename S, typename T, typename U>			       	
   static inline vcsn::Element<S, T>					
-  operator/(const vcsn::Element<S, T>& e,				
-	    const U& v);							
+  operator/(const vcsn::Element<S, T>& e,			       
+	    const U& v);					       	
 
   /*! division operator between an element and an
     implementation. (right version) */
@@ -240,19 +235,18 @@ namespace vcsn {
 	    const vcsn::Element<S, T>& e);
 
   /*! modulo operator between two a priori different elements. */
-  template<typename S1, typename T1, typename S2, typename T2>			
-  static inline									
+  template<typename S1, typename T1, typename S2, typename T2>	       	
+  static inline						       		
   typename vcsn::op_mod_traits<S1, S2, T1, T2>::ret_t	
   operator%(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /*! modulo operator between an element and an
     implementation. (left version) */
-  template<typename S, typename T, typename U>					
+  template<typename S, typename T, typename U>		       		
   static inline vcsn::Element<S, T>					
   operator%(const vcsn::Element<S, T>& e,				
-	    const U& v);							
-
+	    const U& v);				       		
   /*! modulo operator between an element and an
     implementation. (right version) */		
   template<typename U, typename S, typename T>				       
@@ -281,21 +275,14 @@ namespace vcsn {
   static inline vcsn::Element<S, T> 
   operator-(const vcsn::Element<S, T>& e);
 
-  /*! \@} */
-
-  /*! \@} */ 
+  /*! @} @} */
 
 } // std
 
 namespace vcsn {
 
-  /*! \addtogroup fundamental 
-   * \@{
-   */
-
-  /*! \addtogroup operators
-   * \@{
-   */
+  /*! @addtogroup fundamental */ /*! @{ */
+  /*! @addtogroup operators   */ /*! @{ */
 
   /*! standard swap between two a priori different elements. */
   template<typename S1, typename T1, typename S2, typename T2>
@@ -315,14 +302,12 @@ namespace vcsn {
   template<typename U, typename S, typename T>
   void swap(U& v, vcsn::Element<S, T>& e);
 
-  /*! \@} */  
-
-  /*! \@} */
+  /*! @} @} */  
 
 } // vcsn
 
 # include <vaucanson/fundamental/element_ops.hxx>
 
-#endif // FUNDAMENTAL_ELEMENTS_OPS_HH
+#endif // VCSN_FUNDAMENTAL_ELEMENTS_OPS_HH
 
 

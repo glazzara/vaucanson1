@@ -67,7 +67,7 @@ namespace vcsn {
       typedef traits::undefined_type	letter_t;
     };
 
-    /*! \@} \@} */
+    /*! @} @} */
 
   } // algebra
 

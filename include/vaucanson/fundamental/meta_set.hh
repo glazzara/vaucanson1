@@ -24,9 +24,7 @@
 
 namespace vcsn {
 
-  /*! \addtogroup fundamental
-   *  \@{
-   */
+  /*! \addtogroup fundamental */ /*! @{ */
 
   /*--------.
   | MetaSet |
@@ -42,7 +40,7 @@ namespace vcsn {
     static const bool dynamic_set = true;
   };
 
-  /*! \@} */
+  /*! @} */
 
 } // vcsn
 

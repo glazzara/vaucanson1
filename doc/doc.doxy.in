@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 # General configuration options
 #---------------------------------------------------------------------------
-PROJECT_NAME           = @PACKAGE_NAME@
+PROJECT_NAME           = Vaucanson
 PROJECT_NUMBER         = @PACKAGE_VERSION@
 OUTPUT_DIRECTORY       = @top_srcdir@/doc/generated/
 OUTPUT_LANGUAGE        = English

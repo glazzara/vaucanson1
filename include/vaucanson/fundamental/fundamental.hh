@@ -1,5 +1,6 @@
 // fundamental/fundamental.hh
 //
+// $Id$
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001-2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
@@ -16,12 +17,11 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#ifndef VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
+# define VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 
-
-#ifndef FUNDAMENTAL_FUNDAMENTAL_HH
-# define FUNDAMENTAL_FUNDAMENTAL_HH
-
-/*! \defgroup fundamental Enriching C++ with the Element design pattern. */
+/*! @addtogroup fundamental Fundamental : Enriching C++ with the Element design pattern. 
+*/ /*! @{ @} */
 
 # include <vaucanson/fundamental/predefs.hh>
 # include <vaucanson/fundamental/slots.hh>
@@ -32,4 +32,4 @@
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/fundamental/structure.hh>
 
-#endif // FUNDAMENTAL_FUNDAMENTAL_HH
+#endif // VCSN_FUNDAMENTAL_FUNDAMENTAL_HH

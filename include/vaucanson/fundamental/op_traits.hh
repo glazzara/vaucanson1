@@ -24,9 +24,7 @@
 
 namespace vcsn {
 
-  /*! \addtogroup fundamental
-   *  \@{
-   */
+  /*! @addtogroup fundamental */ /*! @{ */
 
   /*--------------.
   | op_add_traits |
@@ -90,6 +88,8 @@ namespace vcsn {
   {
     typedef Element<S1, T1> ret_t;
   };
+
+  /*! @} */
 
 } // vcsn
 

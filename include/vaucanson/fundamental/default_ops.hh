@@ -28,13 +28,8 @@
 
 namespace vcsn {
 
-  /** \addtogroup fundamental
-   * \@{
-   */
-
-  /*! \addtogroup operators
-   * \@{
-   */
+  /*! @addtogroup fundamental */ /*! @{ */
+  /*! @addtogroup operators   */ /*! @{ */
 
   /** operator over Structure<S> that checks if a value is in a set.
    *  op_contains is an operator appliable on every structure which
@@ -248,9 +243,7 @@ namespace vcsn {
   template<typename S, typename St, typename T>
   St& op_rout(const Structure<S>& s, St& st, const T& v);
 
-  /*! \@} */ 
-  
-  /*! \@} */ 
+  /*! @} @} */ 
 
 } // vcsn
 

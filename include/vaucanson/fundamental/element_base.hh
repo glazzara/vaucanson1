@@ -18,117 +18,119 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef FUNDAMENTAL_ELEMENT_BASE_HH
-# define FUNDAMENTAL_ELEMENT_BASE_HH
+#ifndef VCSN_FUNDAMENTAL_ELEMENT_BASE_HH
+# define VCSN_FUNDAMENTAL_ELEMENT_BASE_HH
 
 # include <vaucanson/fundamental/predefs.hh>
 
-namespace vcsn
-{
+namespace vcsn {
 
   // FIXME: general remark : this file should be called syntactic_decorator.hh
 
-    /*-------------------.
-    | SyntacticDecorator |
-    `-------------------*/
-    //! SyntacticDecorator provides the standard operator to Element.
-    //
-    /*! SyntacticDecorator defines all the self-application operators
-      of C++. In fact, this decorator is essential because it is
-      the wrapper of standard operators to Vaucanson op_*. 
+  /*! @addtogroup fundamental */ /*! @{ */
 
-    */
-    template<typename S, typename T> 
-    struct SyntacticDecorator
-    {
-      /*! Structural element virtual accessor. (const) */
-      const S&	set() const;
+  /*-------------------.
+  | SyntacticDecorator |
+  `-------------------*/
+  //! SyntacticDecorator provides the standard operator to Element.
+  //
+  /*! SyntacticDecorator defines all the self-application operators
+    of C++. In fact, this decorator is essential because it is
+    the wrapper of standard operators to Vaucanson op_*. 
+  */
+  template<typename S, typename T> 
+  struct SyntacticDecorator
+  {
+    /*! Structural element virtual accessor. (const) */
+    const S&	set() const;
       
-      /*! Virtual accessor to implementation. */
-      T&		value();
+    /*! Virtual accessor to implementation. */
+    T&		value();
       
-      /*! Virtual accessor to implementation. (const version) */
-      const T&	value() const;
+    /*! Virtual accessor to implementation. (const version) */
+    const T&	value() const;
 
-      /*! self addition between two a priori different elements. */
-      template<typename OtherS, typename U>				 
-      Element<S, T>& operator+=(const Element<OtherS, U>& other);	 
+    /*! self addition between two a priori different elements. */
+    template<typename OtherS, typename U>				 
+    Element<S, T>& operator+=(const Element<OtherS, U>& other);	 
 
-      /*! self addition between an element and something else. */
-      template<typename U>						 
-      Element<S, T>& operator+=(const U& other);    
+    /*! self addition between an element and something else. */
+    template<typename U>						 
+    Element<S, T>& operator+=(const U& other);    
 
-      /*! self substraction between two a priori different elements. */
-      template<typename OtherS, typename U>				 
-      Element<S, T>& operator-=(const Element<OtherS, U>& other);	 
+    /*! self substraction between two a priori different elements. */
+    template<typename OtherS, typename U>				 
+    Element<S, T>& operator-=(const Element<OtherS, U>& other);	 
 
-      /*! self substraction between an element and something else. */
-      template<typename U>						 
-      Element<S, T>& operator-=(const U& other);    
+    /*! self substraction between an element and something else. */
+    template<typename U>						 
+    Element<S, T>& operator-=(const U& other);    
 
-      /*! self substraction between two a priori different elements. */
-      template<typename OtherS, typename U>				 
-      Element<S, T>& operator/=(const Element<OtherS, U>& other);	
+    /*! self substraction between two a priori different elements. */
+    template<typename OtherS, typename U>				 
+    Element<S, T>& operator/=(const Element<OtherS, U>& other);	
  
-      template<typename U>						 
-      Element<S, T>& operator/=(const U& other);    
+    template<typename U>						 
+    Element<S, T>& operator/=(const U& other);    
 
-      /*! self substraction between two a priori different elements. */
-      template<typename OtherS, typename U>				 
-      Element<S, T>& operator*=(const Element<OtherS, U>& other);	
+    /*! self substraction between two a priori different elements. */
+    template<typename OtherS, typename U>				 
+    Element<S, T>& operator*=(const Element<OtherS, U>& other);	
  
-      template<typename U>						 
-      Element<S, T>& operator*=(const U& other);    
+    template<typename U>						 
+    Element<S, T>& operator*=(const U& other);    
 
-      /*! self substraction between two a priori different elements. */
-      template<typename OtherS, typename U>				 
-      Element<S, T>& operator%=(const Element<OtherS, U>& other);	
+    /*! self substraction between two a priori different elements. */
+    template<typename OtherS, typename U>				 
+    Element<S, T>& operator%=(const Element<OtherS, U>& other);	
  
-      template<typename U>						 
-      Element<S, T>& operator%=(const U& other);    
+    template<typename U>						 
+    Element<S, T>& operator%=(const U& other);    
 
-      /*! pre-incrementation. */
-      Element<S, T>& operator++();
+    /*! pre-incrementation. */
+    Element<S, T>& operator++();
 
-      /*! post-incrementation. */
-      Element<S, T> operator++(int);
+    /*! post-incrementation. */
+    Element<S, T> operator++(int);
       
-      /*! pre-decrementation.  */
-      Element<S, T>& operator--();
+    /*! pre-decrementation.  */
+    Element<S, T>& operator--();
 
-      /*! post-decrementation. */
-      Element<S, T> operator--(int);
+    /*! post-decrementation. */
+    Element<S, T> operator--(int);
 
-      /*! standard swap between two a priori different
-	implementations. */
-      template<typename U>
-      Element<S, T>& swap(Element<S, U>& other);
+    /*! standard swap between two a priori different
+      implementations. */
+    template<typename U>
+    Element<S, T>& swap(Element<S, U>& other);
 
-      /*! standard swap between two a priori different elements. */
-      template<typename OtherS, typename U>
-      Element<S, T>& swap(Element<OtherS, U>& other);
+    /*! standard swap between two a priori different elements. */
+    template<typename OtherS, typename U>
+    Element<S, T>& swap(Element<OtherS, U>& other);
 
-      /*! static inheritance method. */
-      // FIXME: is it really the good place ?
-      Element<S, T>& self();
+    /*! static inheritance method. */
+    // FIXME: is it really the good place ?
+    Element<S, T>& self();
 
-      /*! static inheritance method. (const version) */
-      // FIXME: is it really the good place ?
-      const Element<S, T>& self() const;
+    /*! static inheritance method. (const version) */
+    // FIXME: is it really the good place ?
+    const Element<S, T>& self() const;
 
-    protected:
+  protected:
 
-      /*! Constructors are protected since SyntaticDecorator can be
-	instantiated alone. */
-      SyntacticDecorator();
+    /*! Constructors are protected since SyntaticDecorator can be
+      instantiated alone. */
+    SyntacticDecorator();
 
-      /*! Constructors are protected since SyntaticDecorator can be
-	instantiated alone. */
-      SyntacticDecorator(const SyntacticDecorator& other);
-    };
+    /*! Constructors are protected since SyntaticDecorator can be
+      instantiated alone. */
+    SyntacticDecorator(const SyntacticDecorator& other);
+  };
+
+  /*! @} */
 
 } // vcsn
 
 # include <vaucanson/fundamental/element_base.hxx>
 
-#endif // FUNDAMENTAL_ELEMENT_BASE_HH
+#endif // VCSN_FUNDAMENTAL_ELEMENT_BASE_HH

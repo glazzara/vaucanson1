@@ -28,7 +28,8 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*! @ingroup freemonoid */ /*! @{ */
+    /*! @addtogroup algebra    */ /*! @{ */
+    /*! @addtogroup freemonoid */ /*! @{ */
     
     /*------------.
     | SetWords<A> |
@@ -63,7 +64,8 @@ namespace vcsn {
 
   };
 
-  /*! @ingroup freemonoid */ /*! @{ */
+  /*! @addtogroup algebra    */ /*! @{ */
+  /*! @addtogroup freemonoid */ /*! @{ */
 
   /*----------------------.
   | MetaSet<SetWords<A> > |

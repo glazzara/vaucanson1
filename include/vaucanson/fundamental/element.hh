@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef FUNDAMENTAL_ELEMENT_HH
-# define FUNDAMENTAL_ELEMENT_HH
+#ifndef VCSN_FUNDAMENTAL_ELEMENT_HH
+# define VCSN_FUNDAMENTAL_ELEMENT_HH
 
 # include <vaucanson/config/system.hh>
 # include <vaucanson/fundamental/predefs.hh>
@@ -28,20 +28,18 @@
 # include <vaucanson/fundamental/default_ops.hh>
 # include <vaucanson/fundamental/element_ops.hh>
 
-namespace vcsn
-{
+namespace vcsn {
 
-  /*! \addtogroup fundamental
-   *  \@{
-   */
+  /*! @addtogroup fundamental */ /*! @{ */
 
   /*--------.
   | Element |
   `--------*/
   //! Element of the set S implemented by T. 
-  /*! 
-    Element is the center of the design pattern used in Vaucanson to
-    have an orthogonal construction of object from two different points of view :
+  /*! Element is the center of the design pattern used in Vaucanson to
+    have an orthogonal construction of object from two different
+    points of view :
+
     - Algebraic/Theorical one from the hierarchies of sets ;
     - Implementation one ;
 
@@ -175,7 +173,6 @@ namespace vcsn
 
 } // vcsn
 
-
 #include <vaucanson/fundamental/element.hxx>
 
-#endif // FUNDAMENTAL_ELEMENT_HH
+#endif // VCSN_FUNDAMENTAL_ELEMENT_HH

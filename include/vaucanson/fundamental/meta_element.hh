@@ -28,14 +28,13 @@
 
 namespace vcsn {
 
-  /*! \addtogroup fundamental
-   *  \@{
-   */
+  /*! \addtogroup fundamental */ /*! @{ */
 
   /*--------------------------------.
   | MetaElement<Structure<Self>, T> |
   `--------------------------------*/
-  //! MetaElement is the way of defining interactions between a set and an implementation.
+  //! MetaElement is the way of defining interactions between a set
+  //! and an implementation.
   
   /*! MetaElement<Structure<Self>, T> is the specialization that is at
     the top of all the hierarchy of Vaucanson.
@@ -62,7 +61,7 @@ namespace vcsn {
     MetaElement(const MetaElement& other); 
   };
 
-  /*! \@} */
+  /*! @} */
 
 } // vcsn
 
