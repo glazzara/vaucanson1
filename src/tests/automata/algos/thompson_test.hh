@@ -1,7 +1,7 @@
 // thompson_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -67,8 +67,8 @@ bool thompson_test(tests::Tester& tg)
   {
     TEST_MSG("Basic test on a well known expression.");
     krat_t exp(s);
-    krat_t a_e(s, monoid_elt_t(b));
-    exp = monoid_elt_t(a);
+    krat_t a_e(s, monoid_elt_t(monoid, b));
+    exp = monoid_elt_t(monoid, a);
     exp = (a_e + exp).star();
     exp = exp * a_e * exp;
     vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
@@ -90,7 +90,7 @@ bool thompson_test(tests::Tester& tg)
       }
     TEST(t, "Basic test ", nb_word_test == i);
   }
-  
+
   {
     TEST_MSG("Tests on random expressions.");
     unsigned success = 0;
@@ -113,7 +113,7 @@ bool thompson_test(tests::Tester& tg)
 	    {
 	      monoid_elt_t w = exp.choose_from_supp();
 	      if (t.verbose() == tests::high)
-		std::cout << "TEST: thompson (" << nb << ")" 
+		std::cout << "TEST: thompson (" << nb << ")"
 			  << i << " : test " << w << std::endl;
 	      if (eval(au, w) == zero_as<semiring_elt_value_t>::of(s.semiring()))
 		{

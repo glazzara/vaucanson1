@@ -1,7 +1,7 @@
 // compute_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -47,9 +47,9 @@ bool odd_language_test(const Auto& a, const Letter& l)
   AUTOMATON_TYPES(Auto);
   for (unsigned i = 0; i < 10; ++i)
     {
-      monoid_elt_t w;
+      monoid_elt_t w (a.set().series().monoid());
       for (unsigned j = 0; j < 2 * i + 3; ++j)
-	w *= monoid_elt_t(l);
+	w *= l;
       if (eval(a, w) == zero_as<semiring_elt_value_t>
 	  ::of(a.set().series().semiring()))
 	return false;
@@ -63,9 +63,9 @@ bool even_language_test(const Auto& a, const Letter& l)
   AUTOMATON_TYPES(Auto);
   for (unsigned i = 1; i < 10; ++i)
     {
-      monoid_elt_t w;
+      monoid_elt_t w (a.set().series().monoid());
       for (unsigned j = 0; j < 2 * i; ++j)
-	w *= monoid_elt_t(l);
+	w *= l;
       if (eval(a, w) != zero_as<semiring_elt_value_t>
 	  ::of(a.set().series().semiring()))
 	return false;

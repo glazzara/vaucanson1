@@ -129,7 +129,9 @@ namespace vcsn {
   typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
   MetaElement<algebra::SeriesBase<S>, T>::choose_from_supp() const
   {
-    return op_choose_from_supp(this->set(), this->value());
+    return
+      typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
+      (this->set().monoid(), op_choose_from_supp(this->set(), this->value()));
   }
 
   template <typename S, typename T>

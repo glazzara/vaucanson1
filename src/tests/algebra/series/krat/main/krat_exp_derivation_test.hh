@@ -1,7 +1,7 @@
 // krat_exp_derivation_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@ bool krat_exp_derivation_test(tests::Tester& tg)
   typedef typename krat_exp_t::value_t		kexp_t;
   typedef typename krat_exp_t::monoid_elt_t	monoid_elt_t;
   typedef typename monoid_elt_t::set_t		monoid_t;
-  
+
   typedef typename krat_exp_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::set_t	semiring_t;
   typedef typename krat_exp_t::set_t		series_t;
@@ -65,16 +65,16 @@ bool krat_exp_derivation_test(tests::Tester& tg)
   std::cout << exp << std::endl;
   std::pair<krat_exp_t, bool> dexp_a = derivate(exp, a);
   std::pair<krat_exp_t, bool> dexp_b = derivate(exp, b);
-  monoid_elt_t w;
+  monoid_elt_t w (monoid);
   w = a; w *= b;
   std::pair<krat_exp_t, bool> dexp_ab = word_derivate(exp, w);
   if (!dexp_a.second)
     std::cout << "undefined" << std::endl;
-  else 
+  else
     std::cout <<  a << "/" << dexp_a.first << std::endl;
   if (!dexp_b.second)
     std::cout << "undefined" << std::endl;
-  else 
+  else
     std::cout<< b << "/" << dexp_b.first << std::endl;
   return t.all_passed();
 

@@ -1,7 +1,7 @@
 // elimination_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -59,7 +59,7 @@ bool elimination_test(tests::Tester& tg)
     {
       Auto	a = gen.generate(5,10, 2, 2);
       generalized_automaton_t a_ = generalized(a);
-      gseries_elt_t language;
+      gseries_elt_t language (a_.set().series());
       language = aut_to_exp(a_);
       if (t.verbose() == tests::high)
 	{
@@ -71,14 +71,14 @@ bool elimination_test(tests::Tester& tg)
 	{
 	  monoid_elt_t w = language.choose_from_supp();
 	  if (t.verbose() == tests::high)
-	    std::cout << "TEST: aut_to_exp " << nb << " : test " 
+	    std::cout << "TEST: aut_to_exp " << nb << " : test "
 		      << w << std::endl;
 	  if (eval(a, w) ==
 	      zero_as<semiring_elt_value_t>::of(a.set().series().semiring()))
 	    {
 	      break;
 	      if (t.verbose() == tests::high)
-		std::cout << "TEST: aut_to_exp " << nb 
+		std::cout << "TEST: aut_to_exp " << nb
 			  << " failed." << std::endl;
 	    }
 	}

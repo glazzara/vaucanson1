@@ -49,21 +49,21 @@ bool krat_exp_flatten_test(tests::Tester& tg)
 
   tests::Tester t(tg.verbose());
   srand(time(0));
-  alphabet_t alphabet;
-  letter_t a = alphabet.random_letter();
-  letter_t b = alphabet.random_letter();
-  alphabet.insert(a);
-  alphabet.insert(b);
-  monoid_t monoid(alphabet);
-  semiring_t semiring;
-  series_t s(semiring, monoid);
+  alphabet_t	al;
+  letter_t	a = al.random_letter();
+  letter_t	b = al.random_letter();
+  al.insert(a);
+  al.insert(b);
+  monoid_t	md(al);
+  semiring_t	sg;
+  series_t	ss(sg, md);
 
   // Equivalent to semiring_elt_t w = 2 (but we have no << 2 >>).
   //
   // FIXME: Why do the following statement give a parse error?
   //        semiring_elt_t w = identity_as<semiring_elt_value_t>::of(semiring);
   //
-  semiring_elt_t w = semiring.identity(SELECT(semiring_elt_value_t));
+  semiring_elt_t w = sg.identity(SELECT(semiring_elt_value_t));
   w += w;
 
   letter_t larray[] = { a, b, letter_t () };
@@ -75,22 +75,22 @@ bool krat_exp_flatten_test(tests::Tester& tg)
   }
   exps[] =
     {
-      /* 0 */ { krat_exp_t (a), 1 },
-      /* 1 */ { krat_exp_t (a) + krat_exp_t (b), 2 },
-      /* 2 */ { krat_exp_t (a) * krat_exp_t (b), 2 },
-      /* 3 */ { krat_exp_t (a).star(), 1 },
-      /* 4 */ { w * krat_exp_t (a), 1 },
-      /* 5 */ { krat_exp_t (a) * w, 1 },
+      /* 0 */ { krat_exp_t (ss, a), 1 },
+      /* 1 */ { krat_exp_t (ss, a) + krat_exp_t (ss, b), 2 },
+      /* 2 */ { krat_exp_t (ss, a) * krat_exp_t (ss, b), 2 },
+      /* 3 */ { krat_exp_t (ss, a).star(), 1 },
+      /* 4 */ { w * krat_exp_t (ss, a), 1 },
+      /* 5 */ { krat_exp_t (ss, a) * w, 1 },
       //
       // FIXME: Why do the two following lines give a parse error?
       //         { zero_as<kexp_t>::of(s), 0 },
       //         { identity_as<kexp_t>::of(s) 0 },
       //
-      /* 6 */ { s.zero(SELECT(kexp_t)), 0 },
-      /* 7 */ { s.identity(SELECT(kexp_t)), 0 },
-      /* 8 */ { krat_exp_t (), 0 },
-      /* 9 */ { krat_exp_t (std::basic_string<letter_t> (larray)), 2 },
-      /* 10 */ { krat_exp_t (), -1 }
+      /* 6 */ { ss.zero(SELECT(kexp_t)), 0 },
+      /* 7 */ { ss.identity(SELECT(kexp_t)), 0 },
+      /* 8 */ { krat_exp_t (ss), 0 },
+      /* 9 */ { krat_exp_t (ss, std::basic_string<letter_t> (larray)), 2 },
+      /* 10 */ { krat_exp_t (ss), -1 }
     };
 
   unsigned int nb_tests = 0;

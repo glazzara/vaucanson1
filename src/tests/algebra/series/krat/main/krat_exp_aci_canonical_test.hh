@@ -49,7 +49,7 @@ static struct { char* fst; char* snd; } samples[] =
   { "b+a", "a+b" },
   { "a+(b+c)", "(a+b)+c" },
   { "a+a", "a" },
-  { "a+c+a", "c+a" }, 
+  { "a+c+a", "c+a" },
   { "a+(c+a)", "a+c" },
   { "(a.b)+c+a", "a+(a.b)+c" },
   { "a.(b+c+b)", "a.(c+b)" },
@@ -103,9 +103,9 @@ bool krat_exp_aci_canonical_test(tests::Tester& tg)
 
   std::string rate;
   SUCCESS_RATE(rate, nb_success, nb_tests);
-  TEST(t, "Building aci-canonical form of rational expression "
-          + rate, nb_success == nb_tests);
-  TEST_RETURN(t);
+  TEST(t, "Building aci-canonical form of rational expression " + rate,
+       nb_success == nb_tests);
+  return t.all_passed();
 }
 
 #endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_ACI_CANONICAL_TEST_HH

@@ -1,7 +1,7 @@
 // reachable_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -47,7 +47,7 @@ unsigned reachable_test(tests::Tester& t)
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
-  
+
 
   gen_auto_t	 gen(time(0x0));
   const unsigned nb_tests			     = 10;
@@ -57,40 +57,39 @@ unsigned reachable_test(tests::Tester& t)
 
   for (unsigned i = 0; i < nb_tests; i++)
     {
-      automaton_t auto_connex;
-      auto_connex = gen.generate(10, 20);
-      
+      automaton_t auto_connex = gen.generate(10, 20);
+
       unsigned nb_state = auto_connex.states().size();
 
       for (unsigned i =0; i < 10; i++)
 	auto_connex.add_state();
 
-      if (nb_state == 
+      if (nb_state ==
 	  accessible
 	  (coaccessible(auto_connex)).states().size())
 	++success_trim;
-      if (coaccessible(auto_connex).states().size() == 
+      if (coaccessible(auto_connex).states().size() ==
 	  coaccessible(coaccessible(auto_connex))
 	  .states().size())
 	++success_final_reachable_idempotence;
-      if (accessible(auto_connex).states().size() == 
+      if (accessible(auto_connex).states().size() ==
 	  accessible(accessible(auto_connex))
 	  .states().size())
 	++success_start_reachable_idempotence;
-    } 
+    }
   std::string rate_trim;
   std::string rate_f_idempotence;
   std::string rate_s_idempotence;
   SUCCESS_RATE(rate_trim, success_trim, nb_tests);
-  SUCCESS_RATE(rate_f_idempotence, success_final_reachable_idempotence, 
+  SUCCESS_RATE(rate_f_idempotence, success_final_reachable_idempotence,
 	       nb_tests);
-  SUCCESS_RATE(rate_s_idempotence, success_start_reachable_idempotence, 
+  SUCCESS_RATE(rate_s_idempotence, success_start_reachable_idempotence,
 	       nb_tests);
-  TEST(t, "composition of final/start reachable is trim. "+rate_trim, 
+  TEST(t, "composition of final/start reachable is trim. "+rate_trim,
        success_trim == nb_tests);
-  TEST(t, "final reachable is idempotent. "+rate_f_idempotence, 
+  TEST(t, "final reachable is idempotent. "+rate_f_idempotence,
        success_final_reachable_idempotence == nb_tests);
-  TEST(t, "start reachable is idempotent. "+rate_s_idempotence, 
+  TEST(t, "start reachable is idempotent. "+rate_s_idempotence,
        success_start_reachable_idempotence == nb_tests);
   return t.all_passed();
 }

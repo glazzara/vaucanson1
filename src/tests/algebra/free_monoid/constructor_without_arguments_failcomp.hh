@@ -45,7 +45,7 @@ bool constructor_without_arguments_failcomp(tests::Tester& t)
 
   // This code *should not* compile since building a free monoid without
   // an alphabet has no sense.
-  element_t::set_t a;
+  typename element_t::set_t a;
 
   return t.all_passed();
 }

@@ -1,7 +1,7 @@
 // series_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -37,7 +37,7 @@
 
 using namespace vcsn;
 
-template <typename S, typename T> 
+template <typename S, typename T>
 bool series_test(tests::Tester& t)
 {
   using namespace vcsn::algebra;
@@ -65,8 +65,8 @@ bool series_test(tests::Tester& t)
   monoid_t	monoid(alphabet);
   semiring_t	semiring;
   series_t	series(semiring, monoid);
-  monoid_elt_t  w1(a);
-  monoid_elt_t  w2(b);
+  monoid_elt_t  w1(monoid, a);
+  monoid_elt_t  w2(monoid, b);
   series_elt_t     s1(series, w1);
   series_elt_t     s2(series, w2);
   series_elt_t     s3(series, series.identity(SELECT(T)));
@@ -76,7 +76,7 @@ bool series_test(tests::Tester& t)
   TEST(t, "get of series.", s1.get(w1) != zero);
   TEST(t, "set of series.", s1.get(w2) == zero);
   TEST(t, "choose from the support.", s1.choose_from_supp() == w1);
-  return t.all_passed(); 
+  return t.all_passed();
 }
 
 

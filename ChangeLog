@@ -1,3 +1,22 @@
+2004-03-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	* src/tests/algebra/series/misc/series_test.hh,
+	* src/tests/automata/algos/compute_test.hh,
+	* src/tests/automata/algos/elimination_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/reachable_test.hh,
+	* src/tests/automata/algos/thompson_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh: Avoid
+	default construction of elements.
+
+	* src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh:
+	Fix a warning.
+	* src/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh:
+	Minor fix.
+
 2004-03-10  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/misc/support.hh,
