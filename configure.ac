@@ -8,7 +8,7 @@ AC_PREREQ([2.54])
 AC_INIT([vaucanson], [0.6.1], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config/vcsn.m4])
-AM_INIT_AUTOMAKE([1.7 no-define foreign dist-bzip2])
+AM_INIT_AUTOMAKE([1.9 tar-ustar no-define foreign dist-bzip2])
 AM_CONFIG_HEADER([config.h:config.hin])
 
 # Some C and C++ code used.
