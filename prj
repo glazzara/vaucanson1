@@ -1,19 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 423)
-(Parent-Version vaucanson 0 422)
+(Project-Version vaucanson 0 424)
+(Parent-Version vaucanson 0 423)
 (New-Version-Log "")
 
 (Version-Log "
 2003-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/realtime_composition.hh,
-	  include/vaucanson/algorithms/realtime_composition.hxx,
-	  include/vaucanson/algorithms/evaluation.hh,
-	  include/vaucanson/algorithms/evaluation.hxx: New.
+	* configure.ac: Configure awk.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	  include/vaucanson/algorithms/evaluation.hxx: Fix include.
 ")
-(Checkin-Time "Thu, 25 Sep 2003 12:41:33 +0200")
+(Checkin-Time "Thu, 25 Sep 2003 12:59:44 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -96,7 +95,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.56 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.57 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -109,7 +108,7 @@
   (README (vaucanson/f/48_README 1.8 600))
   (THANKS (vaucanson/f/36_THANKS 1.7 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.10 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.37 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.38 600))
   (prj (vaucanson.prj) :symlink)
 
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 600))
@@ -427,7 +426,7 @@
   (include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx (vaucanson/q/45_partial_ra 1.4 600))
   (include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh (vaucanson/q/46_partial_ra 1.2 600))
   (include/vaucanson/algorithms/internal/partial_rat_exp.hxx (vaucanson/q/47_partial_ra 1.5 600))
-  (include/vaucanson/algorithms/internal/partial_rat_exp.hh (vaucanson/q/48_partial_ra 1.2 600))
+  (include/vaucanson/algorithms/internal/partial_rat_exp.hh (vaucanson/q/48_partial_ra 1.3 600))
   (include/vaucanson/algorithms/is_realtime.hh (vaucanson/q/51_is_realtim 1.2 600))
   (include/vaucanson/algorithms/is_normalized.hh (vaucanson/r/0_is_normali 1.1 600))
   (include/vaucanson/algorithms/is_letterized.hh (vaucanson/r/1_is_letteri 1.1 600))
@@ -801,7 +800,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:50 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.1 600))
+  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.2 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

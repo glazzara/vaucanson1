@@ -38,7 +38,6 @@
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/misc/dot_dump.hh>
 # include <vaucanson/automata/concept/transducer.hh>
 # include <vaucanson/algorithms/extension.hh>
 # include <vaucanson/algorithms/projection.hh>

@@ -22,6 +22,9 @@ AC_PROG_CC
 VCSN_PATH_LOCAL([.])
 AC_WITH_VCSN
 
+# Awk is used.
+AC_PROG_AWK
+
 # SWIG and Python used.
 AC_CHECK_SWIG13
 AM_PATH_PYTHON([2.2])
