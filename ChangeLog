@@ -1,3 +1,10 @@
+2004-03-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/Makefile.am: Include forgotten file.
+	* include/vaucanson/algebra/concrete/series/krat.hxx,
+	* include/vaucanson/algebra/concrete/series/krat.hh: Minor correction
+	on includes.
+
 2004-03-17  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* src/tests/tests-suites/algebra_series_krat_cderivation.defs: New.

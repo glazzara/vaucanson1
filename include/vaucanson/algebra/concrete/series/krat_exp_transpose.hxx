@@ -32,7 +32,6 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_TRANSPOSE_HXX
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_TRANSPOSE_HXX
 
-# include <vaucanson/algebra/concrete/series/krat_exp_transpose.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 

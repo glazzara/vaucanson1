@@ -38,7 +38,7 @@
 
 # include <vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx>
 # include <vaucanson/algebra/concrete/series/krat_exp_support.hxx>
-# include <vaucanson/algebra/concrete/series/krat_exp_transpose.hh>
+# include <vaucanson/algebra/concrete/series/krat_exp_transpose.hxx>
 
 # include <vaucanson/misc/contract.hh>
 
