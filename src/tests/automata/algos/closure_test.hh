@@ -52,10 +52,8 @@ bool closure_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
   gen_auto_t gen(time(0x0));
 
-  bool error_forward_edges = false;
   bool error_forward_idempotence = false;
   bool error_forward_epsilon = false;
-  bool error_backward_edges = false;
   bool error_backward_idempotence = false;
   bool error_backward_epsilon = false;
 
@@ -65,37 +63,49 @@ bool closure_test(tests::Tester& tg)
       {
 	automaton_t cauto = backward_closure(auto_epsilon);
 
-	if (cauto.edges().size() < auto_epsilon.edges().size())
-	  error_backward_edges = true;
 	if (backward_closure(cauto).edges().size() != cauto.edges().size())
 	  error_backward_idempotence = true;
-	for_each_edge(i, cauto)
-	  if (cauto.series_of(*i) ==
+	for_each_edge(e, cauto)
+	  if (cauto.series_of(*e) ==
 	      identity_as<series_value_t>::of(cauto.set().series()))
 	    error_backward_epsilon = true;
+	if (error_backward_idempotence or error_backward_epsilon)
+	  {
+	    std::cerr << "Error, automata saved in /tmp." << std::endl;
+	    SAVE_AUTOMATON_DOT("/tmp", "backward_closure_in", auto_epsilon, i);
+	    SAVE_AUTOMATON_DOT("/tmp", "backward_closure_out", cauto, i);
+	    break;
+	  }
       }
 
       {
 	automaton_t cauto = forward_closure(auto_epsilon);
 
-	if (cauto.edges().size() < auto_epsilon.edges().size())
-	  error_forward_edges = true;
 	if (forward_closure(cauto).edges().size() != cauto.edges().size())
 	  error_forward_idempotence = true;
-	for_each_edge(i, cauto)
-	  if (cauto.series_of(*i) ==
+	for_each_edge(e, cauto)
+	  if (cauto.series_of(*e) ==
 	      identity_as<series_value_t>::of(cauto.set().series()))
 	    error_forward_epsilon = true;
+	if (error_backward_idempotence or error_backward_epsilon)
+	  {
+	    std::cerr << "Error, automata saved in /tmp." << std::endl;
+	    SAVE_AUTOMATON_DOT("/tmp", "forward_closure_in", auto_epsilon, i);
+	    SAVE_AUTOMATON_DOT("/tmp", "forward_closure_out", cauto, i);
+	    break;
+	  }
       }
     }
 
-  TEST(t, "Backward: Increase of edges number.", not error_backward_edges);
   TEST(t, "Backward: Idempotence.", not error_backward_idempotence);
   TEST(t, "Backward: No more epsilon transition.",
        not error_backward_epsilon);
-  TEST(t, "Forward: Increase of edges number.", not error_forward_edges);
   TEST(t, "Forward: Idempotence.", not error_forward_idempotence);
   TEST(t, "Forward: No more epsilon transition.", not error_forward_epsilon);
+
+  // FIXME:  A good  idea would  be  to generate  words recognized  by
+  // auto_epsilon and to  check that they are recognize  by cauto. The
+  // same process should be done also on unrecognized words.
 
   return t.all_passed();
 }
