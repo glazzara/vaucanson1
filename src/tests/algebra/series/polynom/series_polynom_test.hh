@@ -57,7 +57,7 @@ bool series_polynom_test(tests::Tester& t)
 
   typedef typename series_set_elt_t::monoid_elt_t	monoid_elt_t;
   typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
-  typedef typename semiring_elt_t::value_t		semiring_value_t;
+  typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
 
   alphabet_t	alphabet;
   letter_t	a = alphabet.random_letter();
@@ -79,7 +79,7 @@ bool series_polynom_test(tests::Tester& t)
 			    series.identity(SELECT(series_set_elt_value_t)));
   series_set_elt_t	s4 (series,
 			    series.zero(SELECT(series_set_elt_value_t)));
-  semiring_elt_t	zero = semiring.zero(SELECT(semiring_value_t));
+  semiring_elt_t	zero = semiring.zero(SELECT(semiring_elt_value_t));
 
   TEST(t, "get of series.", s1.get(w1) != zero);
   TEST(t, "set of series.", s1.get(w2) == zero);

@@ -1,3 +1,24 @@
+2004-05-04  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/Makefile.am: Remove a file previously deleted.
+	* src/tests/sanity/generate_files.sh: Minor fix to avoid compilation
+	problem.
+	* src/tests/algebra/series/polynom/series_polynom_test.hh: Rename
+	semiring_value_t to semiring_elt_value_t.
+
+2004-05-03  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/boolean_transducer.hxx: Really delete. See previous
+	entry.
+
+2004-05-03  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/boolean_transducer.hh: Add some typedefs to make
+	the code more readable and easier to use.
+	* include/vaucanson/contextual_transducer_functions.hxx: Update
+	accordingly.
+	* include/vaucanson/boolean_transducer.hxx: Delete useless file.
+
 2004-04-28  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/demos/vaucanswig/build-process.txt,

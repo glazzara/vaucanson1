@@ -6,7 +6,7 @@ cd "$1"
 
 # Compute files to test.
 (cd ../../../include && find vaucanson -type f -name \*.hh) | \
-  grep -vE 'old/|obsolete/|.svn/|contextual_functions\.' > files.tmp
+  grep -vE 'old/|obsolete/|\.svn/|contextual_(automaton|transducer)_' > files.tmp
 
 # Set check_PROGRAMS.
 cat > Makefile.am << EOF
