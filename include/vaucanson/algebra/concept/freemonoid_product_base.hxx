@@ -101,7 +101,7 @@ namespace vcsn {
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first()
   {
-    return op_first(structure(), value());
+    return op_first(this->structure(), this->value());
   }
 
   template <class Self, typename T>
@@ -110,7 +110,7 @@ namespace vcsn {
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first() const
   {
-    return op_first(structure(), value());
+    return op_first(this->structure(), this->value());
   }
 
   template <class Self, typename T>
@@ -118,7 +118,7 @@ namespace vcsn {
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second_monoid_elt_t&
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second()
   {
-    return op_second(structure(), value());
+    return op_second(this->structure(), this->value());
   }
 
   template <class Self, typename T>
@@ -127,7 +127,7 @@ namespace vcsn {
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second_monoid_elt_t&
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second() const
   {
-    return op_second(structure(), value());
+    return op_second(this->structure(), this->value());
   }
 
   template <class Self, typename T>
@@ -142,7 +142,7 @@ namespace vcsn {
   typename Ftor::result_type
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::length(Ftor f)
   {
-    return op_length(structure(), value(), f);
+    return op_length(this->structure(), this->value(), f);
   }
 
 } // vcsn

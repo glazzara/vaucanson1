@@ -1,3 +1,8 @@
+2005-02-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx: Minor
+	fix to make the code compile with gcc 3.4.
+
 2005-02-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/eval.hxx: Fix new overloaded
