@@ -1,16 +1,11 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 276)
-(Parent-Version vaucanson 0 275)
-(Version-Log "
-2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
-
-	* include/vaucanson/algorithms/krat_exp_cderivation.hxx: Fix namespace.
-
-")
+(Project-Version vaucanson 0 277)
+(Parent-Version vaucanson 0 276)
+(Version-Log "")
 (New-Version-Log "")
-(Checkin-Time "Tue, 24 Jun 2003 21:53:58 +0200")
+(Checkin-Time "Tue, 24 Jun 2003 21:55:04 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -387,7 +382,7 @@
   (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.8 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.6 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.2 600))
   (include/vaucanson/algorithms/krat_exp_realtime.hh (vaucanson/j/36_krat_exp_r 1.1 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.2 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.3 600))
