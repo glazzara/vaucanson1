@@ -27,21 +27,55 @@
 
 namespace vcsn {
 
+  /**
+   * @file   elimination.hh
+   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+   * @date   Tue Jun 24 19:21:17 2003
+   * 
+   * @brief  This file provides converter from automaton to expression.
+   * 
+   */
+
+
   /*! \addtogroup algorithms */  /* @{ */
 
-  //! Returns the series which describes the language of the automaton.
-
-  /*! This algorithm works on every kind of series. However, if,
-    during the computation, it must take the star of it, it can
-    fail. By passing a "generalized" automaton, that is an automaton
-    with rational expression as label, you will be sure to have the
-    algorithm succeed since we can always take the star of a rational
-    expression. */
+  /** 
+   *  @brief Returns a serie which describes the language of the automaton.
+   *
+   *  This algorithm works on every kind of series. However, if,
+   *  during the computation, it must take the star of it, it can
+   *  fail. By passing a "generalized" automaton, that is an automaton
+   *  with rational expression as label, you will be sure to have the
+   *  algorithm succeed since we can always take the star of a
+   *  rational expression.
+   *
+   *
+   * @param a the automaton to convert.
+   * 
+   * @return a rational serie that describes the language of the automaton.
+   * @see generalized
+   */
   template<typename A, typename T>
   typename Element<A, T>::series_elt_t
   elimination(const Element<A, T>& a);
 
-  //! 'Elimination' with a function the choose the next state to remove.
+  /** 
+   *  @brief Returns a serie which describes the language of the automaton.
+   *
+   *  This algorithm works on every kind of series. However, if,
+   *  during the computation, it must take the star of it, it can
+   *  fail. By passing a "generalized" automaton, that is an automaton
+   *  with rational expression as label, you will be sure to have the
+   *  algorithm succeed since we can always take the star of a
+   *  rational expression.
+   *
+   *
+   * @param c a object-function that returns the next state to remove
+   * from the current state and the automaton.
+   * 
+   * @return a rational serie that describes the language of the automaton.
+   * @see generalized
+   */
   template<typename A, typename T, typename Chooser_>
   typename Element<A, T>::series_elt_t
   elimination(const Element<A, T>& a, const Chooser_& c);
