@@ -50,17 +50,26 @@ namespace vcsn {
   }
 
   template <typename S, typename T>
-  void list_multiply_here(std::list<PartialExp<S, T> >& l,
-			  const typename PartialExp<S, T>::semiring_elt_t& w)
+  void list_multiply_here_left(std::list<PartialExp<S, T> >& l,
+			       const typename PartialExp<S, T>::semiring_elt_t& w)
   {
     typedef std::list<PartialExp<S, T> >	list_t;
     for (typename list_t::iterator i = l.begin(); i != l.end(); ++i)
-      *i ^= w;
+      *i >>= w;
+  }
+
+  template <typename S, typename T>
+  void list_multiply_here_right(std::list<PartialExp<S, T> >& l,
+			       const typename PartialExp<S, T>::semiring_elt_t& w)
+  {
+    typedef std::list<PartialExp<S, T> >	list_t;
+    for (typename list_t::iterator i = l.begin(); i != l.end(); ++i)
+      *i <<= w;
   }
 
   template <typename S, typename T>
   void list_insert_here(std::list<PartialExp<S, T> >& l,
-			const typename PartialExp<S,T>::value_t* elm)
+			const typename PartialExp<S,T>::node_t* elm)
   {
     typedef std::list<PartialExp<S, T> >	list_t;
     for (typename list_t::iterator i = l.begin(); i != l.end(); ++i)
@@ -133,7 +142,7 @@ namespace vcsn {
 	   exp_.structure().semiring().zero(SELECT(semiring_elt_value_t)))
       {
 	match(rhs);
-	list_multiply_here(result, ret.first);
+	list_multiply_here_left(result, ret.first);
 	tmp = result;
       }
 
@@ -166,21 +175,22 @@ namespace vcsn {
       }
 
       match(node);
-      list_multiply_here(result, ret.first.star());
       list_insert_here(result, father);
+      list_multiply_here_left(result, ret.first.star());
     }
 
     virtual void
     left_weight(const semiring_elt_value_t& w, const node_t* node)
     {
       match(node);
-      list_multiply_here(result, semiring_elt_t(w));
+      list_multiply_here_left(result, semiring_elt_t(w));
     }
 
     virtual void
-    right_weight(const semiring_elt_value_t& , const node_t* node)
+    right_weight(const semiring_elt_value_t& w, const node_t* node)
     {
       match(node);
+      list_multiply_here_right(result, semiring_elt_t(w));
     }
 
     virtual void
@@ -247,22 +257,30 @@ namespace vcsn {
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
     typedef T						series_set_elt_value_t;
 
+    // Save the first weight, and go to the first expression
+    const_iterator i = exp.begin();
+    semiring_elt_t w = i.semiring_elt();
+    i++;
+    
     // Check if the exp is not empty
-    if (exp.begin() == exp.end())
+    if (i == exp.end())
       return std::make_pair(exp_list_t(), true);
-
+    
     // Visit the first element of the exp
     PRatExpDerivationVisitor<Series, T> visitor(exp.exp(), a);
-    const typename exp_t::value_t*	v = *exp.begin();
-    visitor.match(v);
+    const typename exp_t::node_t*	n = i.node();
+    visitor.match(n);
 
-    // Insert other pointers into the result
-    for (const_iterator i = ++exp.begin(); i != exp.end(); ++i)
-      list_insert_here(visitor.result, *i);
+    // Insert other pointers and values into the result
+    for (i++; i != exp.end(); ++i)
+      if (i.on_node())
+	list_insert_here(visitor.result, i.node());
+      else
+	list_multiply_here_right(visitor.result, i.semiring_elt());
 
     // Calculate the constant term
     std::pair<semiring_elt_t, bool> cterm =
-      constant_term(Element<Series, T>(exp.exp_structure(), series_set_elt_value_t(v)));
+      constant_term(Element<Series, T>(exp.exp_structure(), series_set_elt_value_t(n)));
     if (cterm.second == false)
       return std::make_pair(exp_list_t(), false);
 
@@ -272,13 +290,14 @@ namespace vcsn {
     {
       // Build an exp from the orignal, without the head
       exp_t new_exp(exp);
-      new_exp.ptr_list().pop_front();
+      new_exp.nodes().pop_front();
+      new_exp.weights().pop_front();
 
       // Recall prat_exp_derivate on it
       return_type ret = prat_exp_derivate(new_exp, a);
 
       // Multiply by constant term
-      list_multiply_here(ret.first, cterm.first);
+      list_multiply_here_left(ret.first, cterm.first);
 
       // Fusion results
       visitor.undefined = visitor.undefined || !ret.second;
@@ -287,7 +306,7 @@ namespace vcsn {
     //------------------------------------------------------------------------
 
     // Multiply by the weight of exp
-    list_multiply_here(visitor.result, exp.weight());
+    list_multiply_here_left(visitor.result, w);
 
     // Return the final result
     return std::make_pair(visitor.result, !visitor.undefined);

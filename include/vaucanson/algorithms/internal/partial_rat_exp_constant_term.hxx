@@ -44,26 +44,29 @@ namespace vcsn {
   {
     typedef typename PartialExp<Series, T>::const_iterator	const_iterator;
     typedef typename PartialExp<Series, T>::semiring_elt_t	semiring_elt_t;
-    typedef
-      typename PartialExp<Series, T>::series_set_elt_value_t
+    typedef typename PartialExp<Series, T>::series_set_elt_value_t
       series_set_elt_value_t;
-    typedef
-      std::pair<typename Element<Series, T>::semiring_elt_t, bool>
+    typedef std::pair<typename Element<Series, T>::semiring_elt_t, bool>
       result_t;
+    
+    const_iterator	i = exp.begin();
+    semiring_elt_t 	res = i.semiring_elt();
+    bool		defined = true;
 
-    semiring_elt_t 	res 	  = exp.exp_structure().semiring().identity(
-			      SELECT(typename semiring_elt_t::value_t));;
-    bool	undefined = false;
-
-    for (const_iterator i = exp.begin(); i != exp.end() && !undefined; ++i)
+    for (i++; i != exp.end() && defined; ++i)
     {
-      result_t tmp = constant_term(Element<Series, T>
-				   (exp.exp_structure(),
-				    series_set_elt_value_t (*i)));
-      undefined = !tmp.second;
-      res *= tmp.first;
+      if (i.on_node())
+      {
+        result_t tmp = constant_term(
+	  Element<Series, T>(exp.exp_structure(),
+	   		     series_set_elt_value_t (i.node())));
+	defined = tmp.second;
+	res *= tmp.first;
+      }
+      else
+	res *= i.semiring_elt();
     }
-    return std::make_pair(exp.weight() * res, !undefined);
+    return std::make_pair(res, defined);
   }
 
 } // vcsn

@@ -1,3 +1,13 @@
+2004-07-02  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Change the
+	PartialExp internal type in order to fix derivatives_automaton algorithm
+	with right weights.
+
 2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* NEWS: Update. Mention krat_exp_print().

@@ -43,6 +43,25 @@
 # include <vaucanson/tools/usual_macros.hh>
 
 # ifdef DEBUG
+
+namespace std
+{
+  template <typename T>
+  std::ostream& operator << (std::ostream& o, const std::list<T>& l)
+  {
+    typename std::list<T>::const_iterator	i = l.begin();
+
+    o << '{';
+    if (i != l.end())
+    {
+      o << *i;
+      for (i++; i != l.end(); ++i)
+	o << ", " << *i;
+    }
+    return o << '}';
+  }
+}
+
 #  define DERIVATES_TRACE_DEBUG(undef, e, l, s)		\
      if (!undef)					\
      {							\
@@ -55,8 +74,11 @@
        std::cout << s << std::endl;			\
        std::cout << std::endl;				\
      }
+
 # else
+
 #  define DERIVATES_TRACE_DEBUG(undef, e, l, s)
+
 # endif
 
 namespace vcsn {
@@ -112,8 +134,8 @@ namespace vcsn {
 	  PartialExp<S, T> p_exp = *i;
 	  series_set_elt_t s_elt (e.exp_structure(),
 			      monoid_elt_t(e.exp_structure().monoid(), *a));
-	  s_elt = p_exp.weight() * s_elt;
-	  p_exp.weight() =
+	  s_elt = p_exp.begin().semiring_elt() * s_elt;
+	  p_exp.begin().semiring_elt() =
 	    e.exp_structure().semiring().identity(SELECT(semiring_elt_value_t));
 	  link_to(p_exp, s_elt);
 	}
@@ -133,8 +155,7 @@ namespace vcsn {
     derivatives_algo.run();
     if (derivatives_algo.undefined)
     {
-      /// @bug FIXME: WHAT IS THAT free() DOING HERE?
-      free(derivatives_algo.get());
+      delete derivatives_algo.get();
       return NULL;
     }
     else
