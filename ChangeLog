@@ -1,3 +1,11 @@
+2003-04-11  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh:
+		Fix missing header inclusion,
+		(compare,move,copy,assign): Move trailing code ...
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx:
+		... here.
+
 2003-04-11  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/semiring_base.hh,

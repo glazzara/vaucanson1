@@ -1,31 +1,20 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 188)
-(Parent-Version vaucanson 0 187)
-(Version-Log "2003-04-11  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 189)
+(Parent-Version vaucanson 0 188)
+(Version-Log "
+2003-04-11  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/semiring_base.hh,
-	include/vaucanson/algebra/concept/semiring_base.hxx: Add
-	can_choose_non_stareable, choose_stareable and choose_non_stareable
-	to struct SemiringBase<Self>. Also add corresponding op_ default
-	implementations.
-	* include/vaucanson/algebra/concept/tropical_semiring.hh: Add
-	struct NonStareableInterval<T> to TropicalMax and TropicalMin.
-	* include/vaucanson/algebra/concept/tropical_semiring.hxx: New.
-	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
-	include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
-	Add specialisation to op_can_choose_non_stareable, op_choose_stareable
-	and op_choose_non_stareable for integers, booleans and floats.
-	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh,
-	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:
-	Add specialisation to op_can_choose_non_stareable, op_choose_stareable
-	and op_choose_non_stareable for TropicalSemiring<TropicalKind>.
-	* include/vaucanson/misc/random.hh: Fix bugs in RandomGenerator<int>
-	and RandomGenerator<bool>. Add RandomGenerator<float>.")
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh:
+		Fix missing header inclusion,
+		(compare,move,copy,assign): Move trailing code ...
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx:
+		... here.
+")
 (New-Version-Log "")
-(Checkin-Time "Fri, 11 Apr 2003 10:11:27 +0200")
-(Checkin-Login clavei_t)
+(Checkin-Time "Fri, 11 Apr 2003 15:04:23 +0200")
+(Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -107,7 +96,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.128 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.129 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.8 600))
@@ -426,7 +415,7 @@
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 755))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 600))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
@@ -567,8 +556,8 @@
 ;; Files added by populate at Wed, 02 Apr 2003 17:31:47 +0200,
 ;; to version 0.183(w), by fosse_l:
 
-  (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.1 600))
-  (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.1 600))
+  (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.2 600))
+  (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.2 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.2 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.1 600))
 
