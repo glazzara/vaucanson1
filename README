@@ -38,18 +38,31 @@ To install Vaucanson on your system, type the classical sequence :
 
 Notice that an installation is  done for  a particular compiler  since
 ./configure  enables  some workarounds  and,  consequently, users must
-compile   with the same compiler     to avoid compatibility problems.  
+compile   with the same compiler     to avoid compatibility problems.
 
 If you want to use the interpreter whose compilation takes
 a couple of hours, use instead:
 
 	./configure --enable-vaucanswig
 
+If you do not want to use  the XML I/O system you may invoke configure
+with the following option:
+
+	./configure --disable-xml
+
+If you want to use some debug or optimization flags, please do not use
+CXXFLAGS.  Use  CXXFLAGS_DEBUG or CXXFLAGS_OPTIMIZE  instead.  This is
+needed because Vaucanson tries to use some particular flags by default
+when it encounters  some specific compilers such as  GCC or ICC. Thus,
+using CXXFLAGS may conflict with  those specific flags. If you provide
+CXXFLAGS_DEBUG and CXXFLAGS_OPTIMIZE, your values will be used instead
+of the default ones.
+
 ----------------------------------------------------------------------
 REQUIREMENTS
 
-Vaucanson    was  only tested     with      g++-3.3 and ICC.     The
-code is written  in respect to  the ISO standard   to permit a  higher
+Vaucanson was  tested with g++ 3.[234],  and shoud work  with ICC 8.1.
+The code is written in respect  to the ISO standard to permit a higher
 portability in the future.
 
 Moreover, high  verbose mode of the testing  suites uses the  AT&T dot
@@ -57,7 +70,9 @@ format to  save automaton  in a human  readable file.  Use Graphviz to
 visualize these .dot files.
 
 If you want to use the XML I/O system, you will need the Apache Xerces
-C++ library version 2.3.*.
+C++ library version 2.3.*. You will find it here:
+
+http://xml.apache.org/xerces-c/
 
 ----------------------------------------------------------------------
 LICENCE
@@ -82,9 +97,9 @@ CONTACTS
   75013 Paris
   France
 
-* Vaucanson - LRDE 
+* Vaucanson - LRDE
   24,rue Pasteur
-  Paristalie,batiment X,aile Mistral
+  Paristalie, batiment X, aile Mistral
   F-94270 Le Kremlin Bicêtre cedex
   France
 
