@@ -1,12 +1,14 @@
-==================================
- Vaucanson XML format description
-==================================
+===================================
+ Vaucanson_ XML format description
+===================================
 
 :Author: Valentin David
 :Contact: valentin@lrde.epita.fr
 :Date: December 2003
 
-This document describe the Vaucanson XML format.
+This document describes the Vaucanson_ XML format.
+
+.. _Vaucanson: http://www.lrde.epita.fr/vaucanson
 
 .. contents::
 

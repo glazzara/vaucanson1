@@ -1,5 +1,30 @@
 2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
 
+	Cleanup documentation subsystem. Use reStructuredText more.
+	
+	* doc/xml/Makefile.am,
+	* doc/beginner/Makefile.am,
+	* doc/Makefile.am: Factor common code to...
+	* doc/Makefile.doc: ...this file.
+
+	* configure.ac: Also configure for RST2HTML.
+
+	* README,
+	* FAQ,
+	* INSTALL: Rewrite to...	
+	* doc/README.txt,
+	* doc/FAQ.txt,
+	* doc/INSTALL.txt: ...these. Do not remove the originals yet.
+
+	* doc/Makefile.am: Also generate HTML output.
+	* doc/xml/Makefile.am: Likewise. Drop DVI output.
+
+	* doc/beginner/Makefile.am: Simplify.
+
+	* HEADER: Get rid of obsolete file.
+	
+2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
+
 	Get rid of the dependency on sgml2latex, which comes from
 	a huge, obsolete, non-portable and broken package.
 

@@ -1,0 +1,38 @@
+=======================================
+ Vaucanson_ Frequently Asked Questions
+=======================================
+
+:Date: January 2005
+
+Here are answers  to different questions you may  have while compiling
+or using Vaucanson_.
+
+.. _Vaucanson: http://www.lrde.epita.fr/vaucanson
+
+.. contents::
+
+Compilation Problems
+====================
+
+I have a "NAN undeclared" error. What can I do?
+-----------------------------------------------
+
+Your C++ compiler does not  support the C99 standard library.  This is
+a  known bug  (``NAN`` should  not be  used without  checking  for its
+existence  before)  and will  be  corrected.   Meanwhile, use  another
+compiler, such as the `GNU C++ Compiler`_ version 3.3 or above.
+
+.. _GNU C++ Compiler: http://gcc.gnu.org
+
+I have a conflit declaration for ``int getopt()``. How to solve it?
+-------------------------------------------------------------------
+
+The flag ``HAVE_DECL_GETOPT`` must be set. Compile with ``-DHAVE_DECL_GETOPT``.
+To use this flag with the script ``configure``, call it with::
+
+   configure CPPFLAGS='-DHAVE_DECL_GETOPT'
+
+Usage issues
+============
+
+None for the moment.

@@ -1,17 +1,8 @@
-TEXI2PDF = $(TEXI2DVI) --pdf
 
-docdir = $(datadir)/doc/$(PACKAGE_TARNAME)
-dist_tex_TEX = dev.tex format.tex
-dist_doc_DATA = dev.txt dev.tex dev.pdf dev.dvi \
-                format.txt format.tex format.pdf format.dvi
+include $(srcdir)/../Makefile.doc
 
-.txt.tex:
-	$(RST2TEX) $< >$@
+dist_doc_DATA = dev.tex dev.pdf dev.html \
+                format.tex format.pdf format.html
+EXTRA_DIST = dev.txt format.txt
+MAINTAINERCLEANFILES = $(dist_doc_DATA)
 
-.tex.pdf:
-	$(TEXI2PDF) -o $@ $<
-
-.tex.dvi:
-	$(TEXI2DVI) -o $@ $<
-
-CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp *.log

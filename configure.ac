@@ -90,6 +90,8 @@ AC_ARG_VAR([TEXI2DVI], [program to create DVI from TeX files])
 AC_CHECK_PROGS([TEXI2DVI], [texi2dvi], [$am_aux_dir/missing texi2dvi])
 AC_ARG_VAR([RST2TEX], [program to create TeX from reStructuredText documents])
 AC_CHECK_PROGS([RST2TEX], [rst2latex rst2latex.py], [$am_aux_dir/missing rst2latex])
+AC_ARG_VAR([RST2HTML], [program to create HTML from reStructuredText documents])
+AC_CHECK_PROGS([RST2HTML], [rst2html rst2html.py], [$am_aux_dir/missing rst2html])
 AC_ARG_VAR([TAR], [the tape archiver program])
 AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 
