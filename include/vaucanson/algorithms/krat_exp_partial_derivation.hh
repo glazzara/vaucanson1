@@ -21,6 +21,8 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_PARTIAL_DERIVATION_HH
 # define VCSN_ALGORITHMS_KRAT_EXP_PARTIAL_DERIVATION_HH
 
+# include <utility>
+# include <set>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
 
