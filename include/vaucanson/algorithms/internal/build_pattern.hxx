@@ -54,9 +54,8 @@ namespace vcsn
       const series_t& series, const Etiq& etiq
     )
     {
-      auto_p = new T_auto();
-      auto_p->create();
-      auto_p->series() = series;
+      automata_set_t a_set(series);
+      auto_p = new T_auto(a_set);
       unvisited = 0;
       auto_p->set_initial(add_state(etiq));
       current_state = states_map.end();
@@ -191,9 +190,8 @@ namespace vcsn
     {
       typedef typename Container::iterator	c_iterator;
 
-      auto_p = new T_auto();
-      auto_p->create();
-      auto_p->series() = series;
+      automata_set_t a_set(series);
+      auto_p = new T_auto(a_set);
 
       for (c_iterator i = container.begin(); i != container.end(); ++i)
 	states_map[*i] = auto_p->add_state();

@@ -1,5 +1,16 @@
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/series/krat_coefficient.hxx:
+	  Correct matcher call.
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx: Likewise.
+	* include/vaucanson/algorithms/aci_canonical.hxx: Likewise.
+	* include/vaucanson/algorithms/brzozowski.hxx: Fix weight comparison.
+	* include/vaucanson/algorithms/berry_sethi.hxx: Likewise.
+	* include/vaucanson/algorithms/internal/build_pattern.hxx: Adapt to new
+	  automaton implementation.
+
+2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/algo_helper.hxx: Move to...
 	* include/vaucanson/algorithms/internal/build_pattern.hxx: ... this.
 	* include/vaucanson/algorithms/algo_helper.hh: Move to...
