@@ -1,5 +1,55 @@
 2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* src/tests/bin/generate-test-suite.sh: Replace verbose_level instead of verbose_level_e.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx: Fix unused arg.
+	* include/vaucanson/algebra/concrete/series/krat.hh: Fix op_convert arg order.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Likewise.
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx: Fix unused arg.
+	* src/tests/algebra/alphabets/alphabet_test.hh
+	  src/tests/algebra/free_monoid/free_monoid_test.hh,
+	  src/tests/algebra/semiring/semiring_test.hh,
+	  src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	  src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
+	  src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	  src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh,
+	  src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh,
+	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh,
+	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
+	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh,
+	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
+	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh,
+	  src/tests/algebra/series/misc/series_test.hh,	
+	  src/tests/automata/algos/closure_test.hh,
+	  src/tests/automata/algos/complete_test.hh,
+ 	  src/tests/automata/algos/compute_test.hh,
+	  src/tests/automata/algos/concat_test.hh,
+	  src/tests/automata/algos/determinist_test.hh,
+	  src/tests/automata/algos/elimination_test.hh,
+	  src/tests/automata/algos/extract_test.hh,
+	  src/tests/automata/algos/generalized_test.hh,
+	  src/tests/automata/algos/glushkov_test.hh,
+	  src/tests/automata/algos/minimization_test.hh,
+	  src/tests/automata/algos/normalize_test.hh,
+	  src/tests/automata/algos/product_test.hh,
+	  src/tests/automata/algos/reachable_test.hh,
+	  src/tests/automata/algos/realtime_test.hh,
+	  src/tests/automata/algos/thompson_test.hh,
+	  src/tests/automata/implementation_check/add_edge_test.hh,
+	  src/tests/automata/implementation_check/add_state_test.hh,
+ 	  src/tests/automata/implementation_check/coherence_state_edge_test.hh,
+	  src/tests/automata/implementation_check/global_consistency_test.hh,
+	  src/tests/automata/implementation_check/init_final_test.hh: Fix include.
+
+	* include/vaucanson/algorithms/concatenate.hxx
+	  include/vaucanson/algorithms/normalized.hxx
+	  include/vaucanson/algorithms/realtime.hxx
+	  include/vaucanson/algorithms/thompson.hxx
+	  include/vaucanson/tools/gen_random.hxx: Fix unused args.
+
+
+2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* configure.ac: Enable automaton tests-suite.
 	* src/tests/check/Makefile.flags: Remove '-Werrors'  in AM_CXXFLAGS.
 	* src/tests/bin/generate-test-suite.sh: Fix include.

@@ -34,7 +34,7 @@ namespace vcsn {
   // transitions. 
   template <class Self, class Auto>
   void
-  do_auto_in_concat(const AutomataBase<Self>&   s, 
+  do_auto_in_concat(const AutomataBase<Self>&   , 
 		    Auto&			lhs,
 		    const Auto&			rhs)
   {

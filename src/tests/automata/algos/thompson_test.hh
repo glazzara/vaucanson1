@@ -21,7 +21,7 @@
 #ifndef THOMPSON_TEST_HH
 # define THOMPSON_TEST_HH
 
-# include <check/tests_stuff.hh>
+# include <check/tester.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/dot_dump.hh>
@@ -30,7 +30,7 @@
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/automata/concrete/generalized.hh>
 # include <vaucanson/algorithms/thompson.hh>
-# include <vaucanson/algorithms/compute.hh>
+# include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/algorithms/realtime.hh>
 
 using namespace vcsn;
@@ -72,7 +72,7 @@ bool thompson_test(tests::Tester& tg)
 	monoid_elt_t w = exp.choose_from_supp();
 	if (t.verbose() == tests::high)
 	  std::cout << "TEST: thompson " << i << " : test " << w << std::endl;
-	if (compute(au, w) == zero_as<weight_value_t>::of(s.weights()))
+	if (eval(au, w) == zero_as<weight_value_t>::of(s.weights()))
 	  {
 	    break;
 	    if (t.verbose() == tests::high)
@@ -106,7 +106,7 @@ bool thompson_test(tests::Tester& tg)
 	      if (t.verbose() == tests::high)
 		std::cout << "TEST: thompson (" << nb << ")" 
 			  << i << " : test " << w << std::endl;
-	      if (compute(au, w) == zero_as<weight_value_t>::of(s.weights()))
+	      if (eval(au, w) == zero_as<weight_value_t>::of(s.weights()))
 		{
 		  if (t.verbose() == tests::high)
 		    std::cout << "TEST: thompson " << i << " failed." << std::endl;

@@ -147,14 +147,14 @@ namespace vcsn {
   | foreign constructors |
   `---------------------*/
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
-  rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>),
-			      SELECTOR2(algebra::Series<W, M>),
+  rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+			      SELECTOR2(rat::exp<Tm, Tw>),
 			      SELECTOR(M),
 			      const oTm& m_value);
   
   template<typename Tm, typename Tw, typename W, typename M, typename oTw>
-  rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>),
-			      SELECTOR2(algebra::Series<W, M>),
+  rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+			      SELECTOR2(rat::exp<Tm, Tw>),
 			      SELECTOR(W),
 			      const oTw& w_value);
     

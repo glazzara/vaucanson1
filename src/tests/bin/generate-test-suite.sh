@@ -80,7 +80,7 @@ cat >> $DEST_DIR/$FUN_SNAME-test.cc<<EOF
   int main(int argc, char **argv)
   {
   using namespace vcsn;
-  tests::verbose_level_e verbose = tests::low;
+  tests::verbose_level verbose = tests::low;
   srand(time(0));
 
   if (argc > 1) 

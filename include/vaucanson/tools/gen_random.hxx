@@ -56,10 +56,7 @@ namespace vcsn {
     
     unsigned nb = alea(nb_letter);
     for (unsigned i = 0; i < 2 + nb; ++i)
-      {
-	letter_t l = alpha.random_letter();
-	alpha.insert(alpha.random_letter());
-      }
+      alpha.insert(alpha.random_letter());
     monoid_t monoid(alpha);
     weights_t semi;
     series_t series(semi, monoid);

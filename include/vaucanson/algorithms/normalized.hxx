@@ -88,7 +88,7 @@ namespace vcsn {
   `--------------------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_union_of_normalized_here(const AutomataBase<A>& a_set,
+  void do_union_of_normalized_here(const AutomataBase<A>&,
 				   lhs_t& lhs,
 				   const rhs_t& rhs)
   {
@@ -178,7 +178,7 @@ namespace vcsn {
   | concatenate_of_normalized |
   `--------------------------*/
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_concatenate_of_normalized_here(const AutomataBase<A>& a_set,
+  void do_concatenate_of_normalized_here(const AutomataBase<A>&,
 					 lhs_t& lhs,
 					 const rhs_t& rhs)
   {
@@ -250,7 +250,7 @@ namespace vcsn {
   | star_of_normalized |
   `-------------------*/
   template <typename A, typename auto_t>
-  void do_star_of_normalized_here(const AutomataBase<A>& a_set,
+  void do_star_of_normalized_here(const AutomataBase<A>&,
 				  auto_t& a)
   {    
     a.add_spontaneous(*a.final().begin(), *a.initial().begin());

@@ -21,7 +21,7 @@
 #ifndef KRAT_EXP_PARSE_TEST_HH
 # define KRAT_EXP_PARSE_TEST_HH
 
-# include <check/tests_stuff.hh>
+# include <check/tester.hh>
 # include <sstream>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>

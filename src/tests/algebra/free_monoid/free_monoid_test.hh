@@ -23,7 +23,7 @@
 
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
-# include <check/tests_stuff.hh>
+# include <check/tester.hh>
 # include <fundamental/design_pattern-test.hh>
 
 template <typename S, typename T> 

@@ -21,7 +21,7 @@
 #ifndef GENERALIZED_TEST_HH
 # define GENERALIZED_TEST_HH
 
-# include <check/tests_stuff.hh>
+# include <check/tester.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/dot_dump.hh>

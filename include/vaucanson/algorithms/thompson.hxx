@@ -159,7 +159,7 @@ namespace vcsn {
   template <typename A, typename auto_t,
 	    typename Letter, typename Weight>
   void
-  do_thompson_of(const AutomataBase<A>& a_set, 
+  do_thompson_of(const AutomataBase<A>&, 
 	         auto_t& output, 
 	         const rat::exp<Letter, Weight>& kexp)
   {

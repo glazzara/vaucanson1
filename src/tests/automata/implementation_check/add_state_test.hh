@@ -27,7 +27,7 @@
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <check/tests_stuff.hh>
+# include <check/tester.hh>
 
 template <class Auto> 
 unsigned add_state_test(tests::Tester& tg)

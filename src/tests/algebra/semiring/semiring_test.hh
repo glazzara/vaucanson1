@@ -22,7 +22,7 @@
 #ifndef SEMIRING_TEST_HH
 # define SEMIRING_TEST_HH
 
-# include <check/tests_stuff.hh>
+# include <check/tester.hh>
 # include <vaucanson/algebra/concept/semiring_base.hh>
 // from test battery:
 # include <fundamental/design_pattern-test.hh>

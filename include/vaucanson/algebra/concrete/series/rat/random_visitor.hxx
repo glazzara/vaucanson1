@@ -61,14 +61,14 @@ namespace vcsn {
 
     template <class M_, class W_>
     void 
-    RandomVisitor<M_,W_>::left_weight(const W_& w, const Node<M_, W_>* node)
+    RandomVisitor<M_,W_>::left_weight(const W_&, const Node<M_, W_>* node)
     {
       node->accept(*this);
     }
 
     template <class M_, class W_>
     void 
-    RandomVisitor<M_,W_>::right_weight(const W_& w, const Node<M_, W_>* node)
+    RandomVisitor<M_,W_>::right_weight(const W_&, const Node<M_, W_>* node)
     {
       node->accept(*this);
     }

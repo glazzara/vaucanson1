@@ -21,7 +21,7 @@
 #ifndef DERIVATION_TEST_HH
 # define DERIVATION_TEST_HH
 
-# include <check/tests_stuff.hh>
+# include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/fundamental/element.hh>

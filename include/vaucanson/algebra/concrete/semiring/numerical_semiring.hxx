@@ -79,7 +79,7 @@ namespace vcsn {
 
   template <class T>
   Element<algebra::NumericalSemiring, T>
-  op_choose(const algebra::NumericalSemiring& s, SELECTOR(T))
+  op_choose(const algebra::NumericalSemiring&, SELECTOR(T))
   {
     return utility::random::generate<T>();
   }

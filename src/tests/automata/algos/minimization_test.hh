@@ -37,7 +37,7 @@
 # include <vaucanson/algorithms/hopcroft_minimization.hh>
 # include <vaucanson/algorithms/minimization_moore.hh>
 # include <vaucanson/algorithms/trim.hh>
-# include <check/tests_stuff.hh>
+# include <check/tester.hh>
 
 template <class Auto>
 unsigned minimization_test(tests::Tester& tg)

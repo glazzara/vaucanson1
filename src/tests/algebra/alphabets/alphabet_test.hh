@@ -22,7 +22,7 @@
 
 #include <vaucanson/config/system.hh>
 #include <fundamental/design_pattern-test.hh>
-#include <check/tests_stuff.hh>
+#include <check/tester.hh>
 #include <vaucanson/fundamental/fundamental.hh>
 
 using namespace vcsn;
