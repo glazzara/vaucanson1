@@ -36,8 +36,8 @@ namespace vcsn {
   `-----------*/
   template <class A_, typename Auto_>
   void
-  do_in_normalize(const AutomataBase<A_>& a_set,
-	       Auto_&			 a)
+  do_normalize_here(const AutomataBase<A_>& a_set,
+		    Auto_& a)
   {
     typedef Auto_				automaton_t;
     typedef typename automaton_t::series_t      series_t;
@@ -66,20 +66,29 @@ namespace vcsn {
     a.set_final(h);
   }
 
+  template <typename A, typename T>
+  Element<A, T>
+  normalize(const Element<A, T>& a)
+  {
+    Element<A, T> result(a);
+    do_normalize_here(result.set(), result);
+    return result;
+  }
+
   template<typename A, typename T>
   void
-  normalize(Element<A, T>& a)
+  normalize_here(Element<A, T>& a)
   {
-    do_in_normalize(a.set(), a);
+    do_normalize_here(a.set(), a);
   }
 
 
-  /*-----------------.
-  | normalized_union |
-  `-----------------*/
+  /*--------------------.
+  | union_of_normalized |
+  `--------------------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_normalized_auto_in_union(const AutomataBase<A>& a_set,
+  void do_union_of_normalized_here(const AutomataBase<A>& a_set,
 				   lhs_t& lhs,
 				   const rhs_t& rhs)
   {
@@ -119,22 +128,22 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  void normalized_auto_in_union(Element<A, T>& lhs, 
+  void union_of_normalized_here(Element<A, T>& lhs, 
 				const Element<A, U>& rhs)
   {
     // assert (lhs.set() == rhs.set())
-    do_normalized_auto_in_union(lhs.set(), lhs, rhs);
+    do_union_of_normalized_here(lhs.set(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
   Element<A, T> 
-  normalized_auto_union(const Element<A, T>& lhs, 
-			const Element<A, U>& rhs)
+  union_of_normalized(const Element<A, T>& lhs, 
+		      const Element<A, U>& rhs)
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
-    do_normalized_auto_in_union(ret.set(), ret, rhs);
+    do_union_of_normalized_here(ret.set(), ret, rhs);
     return ret;
   }
 
@@ -165,13 +174,13 @@ namespace vcsn {
     return do_is_normalized(a.set(), a);
   }
 
-  /*-------------------.
-  | normalized_concat |
-  `-------------------*/
+  /*--------------------------.
+  | concatenate_of_normalized |
+  `--------------------------*/
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_normalized_auto_in_concat(const AutomataBase<A>& a_set,
-				     lhs_t& lhs,
-				     const rhs_t& rhs)
+  void do_concatenate_of_normalized_here(const AutomataBase<A>& a_set,
+					 lhs_t& lhs,
+					 const rhs_t& rhs)
   {
     typedef std::map<hstate_t, hstate_t>	       map_lhs_rhs_t;
     typedef std::set<hedge_t>			       delta_ret_t;
@@ -218,30 +227,30 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  void normalized_auto_in_concat(Element<A, T>& lhs, 
-				 const Element<A, U>& rhs)
+  void concatenate_of_normalized_here(Element<A, T>& lhs, 
+				      const Element<A, U>& rhs)
   {
     // assert (lhs.set() == rhs.set())
-    do_normalized_auto_in_concat(lhs.set(), lhs, rhs);
+    do_concatenate_of_normalized_here(lhs.set(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
   Element<A, T> 
-  normalized_auto_concat(const Element<A, T>& lhs, 
-			 const Element<A, U>& rhs)
+  concatenate_of_normalized(const Element<A, T>& lhs, 
+			    const Element<A, U>& rhs)
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
-    do_normalized_auto_in_concat(ret.set(), ret, rhs);
+    do_concatenate_of_normalized_here(ret.set(), ret, rhs);
     return ret;
   }
 
-  /*----------------.
-  | normalized_star |
-  `----------------*/
+  /*-------------------.
+  | star_of_normalized |
+  `-------------------*/
   template <typename A, typename auto_t>
-  void do_normalized_auto_in_star(const AutomataBase<A>& a_set,
+  void do_star_of_normalized_here(const AutomataBase<A>& a_set,
 				  auto_t& a)
   {    
     a.add_spontaneous(*a.final().begin(), *a.initial().begin());
@@ -256,22 +265,22 @@ namespace vcsn {
     a.unset_final(old_f);
     a.set_initial(new_i);
     a.unset_initial(old_i);
- }
+  }
 
   template<typename A, typename T>
-  void normalized_auto_in_star(Element<A, T>& a)
+  void star_of_normalized_here(Element<A, T>& a)
   {
-    do_normalized_auto_in_star(a.set(), a);
+    do_star_of_normalized_here(a.set(), a);
   }
 
   template<typename A, typename T>
   Element<A, T> 
-  normalized_auto_star(const Element<A, T>& a)
+  star_of_normalized(const Element<A, T>& a)
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(a);
     ret.emancipate();
-    do_normalized_auto_in_star(ret.set(), ret);
+    do_star_of_normalized_here(ret.set(), ret);
     return ret;
   }
 

@@ -2,7 +2,7 @@
 // 
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -60,7 +60,7 @@ unsigned normalize_test(tests::Tester& tg)
   for (unsigned i = 0; i < nb_tests; i++)
     {
       automaton_t normalized = gen.generate(30, 60);
-      normalize(normalized);
+      normalize_here(normalized);
       if (is_normalized(normalized))
 	success++;
     } 

@@ -1,3 +1,11 @@
+2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/normalized.hh,
+	include/vaucanson/algorithms/normalized.hxx,
+	include/vaucanson/algorithms/thompson.hxx,
+	src/tests/automata/algos/normalize_test.hh: Rename concatenation
+	functions with the new convention.
+
 2003-06-20  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/misc/unchecked/ref.hh,

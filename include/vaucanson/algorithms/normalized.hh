@@ -26,53 +26,58 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** \addtogroup algorithms */  /* @{ */
 
-  //! In-place Thompson normalization of the automaton.
+  /// Returns the fresh thompson-normalized automaton of a.
+  template <typename A, typename T>
+  Element<A, T>
+  normalize(const Element<A, T>& a);
+
+  /// Normalize into the thompson form (in-place).
   template<typename A, typename T>
   void
-  normalize(Element<A, T>& a);
+  normalize_here(Element<A, T>& a);
 
-  //! Returns true if the input automaton is normalized.
+  /// Returns true if the input automaton is normalized.
   template<typename A, typename T>
   bool
   is_normalized(const Element<A, T>& a);
 
-  //! In-place union of two normalized automata.
+  /// Do the in-place union of two normalized automata.
   template<typename A, typename T, typename U>
   void 
-  normalized_auto_in_union(Element<A, T>& lhs, 
+  union_of_normalized_here(Element<A, T>& lhs, 
 			   const Element<A, U>& rhs);
 
-  //! Returns the fresh union of two normalized automata.
+  /// Returns the fresh union of two normalized automata.
   template<typename A, typename T, typename U>
   Element<A, T> 
-  normalized_auto_union(const Element<A, T>& lhs, 
-			const Element<A, U>& rhs);
+  union_of_normalized(const Element<A, T>& lhs, 
+		      const Element<A, U>& rhs);
 
-  //! In-place concatenation of two normalized automata.
+  /// Do the in-place concatenation of two normalized automata.
   template<typename A, typename T, typename U>
   void 
-  normalized_auto_in_concat(Element<A, T>& lhs, 
-			     const Element<A, U>& rhs);
+  concatenate_of_normalized_here(Element<A, T>& lhs, 
+				 const Element<A, U>& rhs);
 
-  //! Returns the fresh concatenation of two normalized automata.
+  /// Returns the fresh concatenation of two normalized automata.
   template<typename A, typename T, typename U>
   Element<A, T> 
-  normalized_auto_concat(const Element<A, T>& lhs, 
-			  const Element<A, U>& rhs);
+  concatenate_of_normalized(const Element<A, T>& lhs, 
+			    const Element<A, U>& rhs);
 
-  //! In-place star transformation of the input normalized automaton.
+  /// Do the in-place star transformation of the input normalized automaton.
   template<typename A, typename T>
   void 
-  normalized_auto_in_star(Element<A, T>& a);
-
-  //! Returns the fresh star transformation of the input normalized automaton.
+  star_of_normalized_here(Element<A, T>& a);
+  
+  /// Returns the fresh star transformation of the input normalized automaton.
   template<typename A, typename T>
   Element<A, T> 
-  normalized_auto_star(const Element<A, T>& a);
+  star_of_normalized(const Element<A, T>& a);
 
-  /*! @} */
+  /** @} */
   
 } // vcsn
 

@@ -68,7 +68,7 @@ namespace vcsn {
       rhs->accept(*this);
       tmp_ = auto_;
       lhs->accept(*this);
-      normalized_auto_in_concat(*auto_, *tmp_);
+      concatenate_of_normalized_here(*auto_, *tmp_);
       delete(tmp_);
     }
 
@@ -79,14 +79,14 @@ namespace vcsn {
       lhs->accept(*this);
       tmp_ = auto_;
       rhs->accept(*this);
-      normalized_auto_in_union(*auto_, *tmp_);
+      union_of_normalized_here(*auto_, *tmp_);
     }
 
     virtual void 
     star(const node_t* node)
     {
       node->accept(*this);
-      normalized_auto_in_star(*auto_);
+      star_of_normalized_here(*auto_);
     }
 
     virtual void 
