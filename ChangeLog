@@ -1,3 +1,8 @@
+2003-02-26  Thomas Claveirole <clavei_t@lrde.epita.fr>
+	* include/vaucanson/algorithms/concat.hxx (auto_in_concat): Fix some
+	  missing code
+	* include/vaucanson/config/config.hh: Remove
+
 2003-02-26  Akim Demaille  <akim@epita.fr>
 
 	* HEADER: Bump to 2003.

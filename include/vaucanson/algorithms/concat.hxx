@@ -85,6 +85,7 @@ namespace vcsn {
   void
   auto_in_concat(Element<A, T>& lhs, const Element<A, T>& rhs)
   {
+    do_auto_in_concat(lhs.set(), lhs, rhs);
   }
 
 } // vcsn
