@@ -30,6 +30,9 @@ namespace vcsn {
 
   namespace algebra {
 
+    //! \addtogroup algebra 
+    //! \@{
+
     /*-------------------.
     | SemiringBase<Self> |
     `-------------------*/
@@ -38,40 +41,60 @@ namespace vcsn {
     struct SemiringBase : MonoidBase<Self>
     {
     protected:
+      //! Default constructor is protected since it is an abstract class.
       SemiringBase();
+
+      //! Copy constructor is protected since it is an abstract class.
       SemiringBase(const SemiringBase& other);
     };
 
+    //! @}
+
   } // algebra
 
-    /*-----------------------------------.
-    | MetaElement<SemiringBase<Self>, T> |
-    `-----------------------------------*/
 
+  //! \addtogroup algebra 
+  //! \@{
+
+  /*-----------------------------------.
+  | MetaElement<SemiringBase<Self>, T> |
+  `-----------------------------------*/
+  //! Services of every element of semiring (weight).
   template<typename Self, typename T>
   struct MetaElement<algebra::SemiringBase<Self>, T>
     : MetaElement<algebra::MonoidBase<Self>, T>
   {
+    //! in-place star transformation of the weight.
     Element<Self, T>&   star();
+
+    //! returns true if we can to compute the star of the weight.
     bool		stareable() const;
 
   protected:
+    //! Default constructor is protected since it is an abstract class.
     MetaElement();
+
+    //! Copy constructor is protected since it is an abstract class.
     MetaElement(const MetaElement& other);
   };
 
+  //! meta information about the return type of the star operation.
   template<typename S, typename T>
   struct op_star_traits
   {
     typedef Element<S, T> ret_t;
   };
   
+  //! returns a fresh weight that is the star of w.
   template<typename S, typename T>
   typename op_star_traits<S, T>::ret_t
-  star(const Element<S, T>& e);
+  star(const Element<S, T>& w);
   
+  //! returns true if we can to compute the star of the weight.
   template<typename S, typename T>
   bool stareable(const Element<S, T>& elt);
+
+  //! @}
 
   // default implementations:
 

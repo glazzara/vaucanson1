@@ -30,53 +30,76 @@ namespace vcsn {
 
   namespace algebra {
 
-    // Forward declaration.
     template <class TropicalKind>
     struct TropicalSemiring;
 
   } // algebra
 
+  //! \addtogroup algebra 
+  //! \@{
 
-    /*----------------------------------------------------.
-    | MetaSet : traits about the set of tropical semiring |
-    `----------------------------------------------------*/
-    template<class TropicalKind>
-    struct MetaSet<TropicalSemiring<TropicalKind> >
-    {
-      static const bool dynamic_set = false;
-      typedef mul_kind	semigroup_kind;
-    };
+  /*----------------------------------------------------.
+  | MetaSet : traits about the set of tropical semiring |
+  `----------------------------------------------------*/
+  //! Meta information about the tropical semirings.
+  template<class TropicalKind>
+  struct MetaSet<TropicalSemiring<TropicalKind> >
+  {
+    //! Semiring are static structures.
+    static const bool dynamic_set = false;
+    
+    //! We can see a NumericalSemiring as a semigroup with +. It is
+    //! an arbitrary decision, it could be mul_kind too.
+    typedef add_kind	semigroup_kind;
+  };
 
+  //! @}
+  
   namespace algebra {
+    
+    //! \addtogroup algebra 
+    //! \@{
 
     /*-----------------.
     | Kind of tropical |
     `-----------------*/
+    //! Static information about the kind of tropical we are
+    //! confronted with.
     struct TropicalMin
     {};
 
+    //! Static information about the kind of tropical we are
+    //! confronted with.
     struct TropicalMax
     {};
 
     /*-----------------.
     | TropicalSemiring |
     `-----------------*/
+    //! Structural element that denotes tropical semiring.
     template <class TropicalKind>
     struct TropicalSemiring
       : SemiringBase<TropicalSemiring<TropicalKind> >
     {};
 
+    //! @}
+
   } // algebra
 
-    /*------------.
-    | MetaElement |
-    `------------*/
-    template<class TropicalKind, typename T>
-    struct MetaElement<TropicalSemiring<TropicalKind> , T>
-      : MetaElement<SemiringBase<TropicalSemiring<TropicalKind> >, T>
-    {};
+  //! \addtogroup algebra 
+  //! \@{
+
+  /*---------------------------------------.
+  | MetaElement<TropicalSemiring<Kind>, T> |
+  `---------------------------------------*/
+  //! Services of element of a tropical semiring.
+  template<class TropicalKind, typename T>
+  struct MetaElement<TropicalSemiring<TropicalKind> , T>
+    : MetaElement<SemiringBase<TropicalSemiring<TropicalKind> >, T>
+  {};
+
+  //! @}
 
 } // vcsn
-
 
 #endif // ALGEBRA_CONCEPT_TROPICAL_SEMIRING_HH

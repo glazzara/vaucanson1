@@ -143,9 +143,9 @@ namespace vcsn {
     | External functions |
     `-------------------*/
 
-    template<typename S, typename T>
-    Element<S, T>
-    mirror(const Element<S, T>& e)
+    template<typename Self, typename T>
+    Element<FreeMonoidBase<Self>, T>
+    mirror(const Element<FreeMonoidBase<Self>, T>& e)
     {
       Element<S, T>	ret(e);
       ret.mirror();

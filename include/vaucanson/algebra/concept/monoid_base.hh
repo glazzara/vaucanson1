@@ -28,46 +28,64 @@ namespace vcsn {
 
   namespace algebra {
 
+    //! \addtogroup algebra 
+    //! \@{
+
     /*-----------------.
     | MonoidBase<Self> |
     `-----------------*/
     //! MonoidBase is the base class of all structures that are monoids.
-    /*! Monoid define identity for semigroups of mul_kind and zero for
+    /*! Monoid defines identity for semigroups of mul_kind and zero for
       semigroup of add_kind.
     */
-
     template<class Self>
     struct MonoidBase : SemigroupBase<Self>
     {
+      //! returns the identity of the monoid (if mul_kind).
       template<typename T>
       Element<Self, T> identity(SELECTOR(T)) const;
 
+      //! returns the zero of the monoid (if add_kind).
       template<typename T>
       Element<Self, T> zero(SELECTOR(T)) const;
 
     protected:
+      //! Default constructor is protected since it is an abstract class.
       MonoidBase();
+
+      //! Copy constructor is protected since it is an abstract class.
       MonoidBase(const MonoidBase& other);
     };
+
+    //@}
 
   } // algebra
 
   using namespace algebra;
 
-    /*---------------------------------.
-    | MetaElement<MonoidBase<Self>, T> |
-    `---------------------------------*/
-    template<class Self, typename T>
-    struct MetaElement<MonoidBase<Self>, T> 
-      : MetaElement<SemigroupBase<Self>, T>
-    { 
-    protected:
-      MetaElement();
-      MetaElement(const MetaElement& other);
-    };
+  //! \addtogroup algebra 
+  //! \@{
+  
+  /*---------------------------------.
+  | MetaElement<MonoidBase<Self>, T> |
+  `---------------------------------*/
+  //! Defines services of element of every monoid.
+  template<class Self, typename T>
+  struct MetaElement<MonoidBase<Self>, T> 
+    : MetaElement<SemigroupBase<Self>, T>
+  { 
+  protected:
+    //! Default constructor is protected since it is an abstract class.
+    MetaElement();
 
-    template<typename T, typename Self>
-    T op_default(SELECTOR(MonoidBase<Self>), SELECTOR(T));
+    //! Copy constructor is protected since it is an abstract class.
+    MetaElement(const MetaElement& other);
+  };
+  
+  //! @}
+
+  template<typename T, typename Self>
+  T op_default(SELECTOR(MonoidBase<Self>), SELECTOR(T));
 
 } // vcsn
 

@@ -1,3 +1,16 @@
+2002-09-04  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.108)
+	Documented files:
+	
+	* include/vaucanson/algebra/concept/alphabets_base.hh
+	* include/vaucanson/algebra/concept/semigroup_base.hh	
+	* include/vaucanson/algebra/concept/monoid_base.hh
+	* include/vaucanson/algebra/concept/semiring_base.hh
+	* include/vaucanson/algebra/concept/numerical_semiring.hh
+	* include/vaucanson/algebra/concept/tropical_semiring.hh
+	* include/vaucanson/algebra/concept/freemonoid_base.hh
+	* include/vaucanson/algebra/concept/series_base.hh
+	
 2002-08-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.107)
 	* include/vaucanson/fundamental/op_traits.hh: documented.

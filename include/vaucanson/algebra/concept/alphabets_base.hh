@@ -30,6 +30,9 @@ namespace vcsn {
 
   namespace algebra {
 
+    //! \addtogroup algebra 
+    //! \@{
+
     /*--------------------.
     | AlphabetsBase<Self> |
     `--------------------*/
@@ -42,7 +45,11 @@ namespace vcsn {
       : Structure<Self>
     {
     protected:
+
+      //! Default constructor is protected since it is an abstract class.
       AlphabetsBase();
+
+      //! Copy constructor is protected since it is an abstract class.
       AlphabetsBase(const AlphabetsBase& other);
     };
 
@@ -57,12 +64,18 @@ namespace vcsn {
     template<typename S, typename T>
     struct alphabet_traits 
     {
+      //! the type of letters hold by the alphabet.
       typedef traits::undefined_type	letter_t;
     };
+
+    //! @}
 
   } // algebra
 
   using namespace algebra;
+
+  //! \addtogroup algebra 
+  //! \@{
   
   /*------------------------------------.
   | MetaElement<AlphabetsBase<Self>, T> |
@@ -75,40 +88,62 @@ namespace vcsn {
     struct MetaElement<AlphabetsBase<Self>, T>
       : MetaElement<Structure<Self>, T>
     {
+      /*! the type of letters hold by the alphabet. */
       typedef typename alphabet_traits<Self, T>::letter_t	letter_t;
+
+      /*! the type of iterators that have a constant access over alphabet. */
       typedef typename op_begin_traits<Self, T>::const_ret_t	const_iterator;
+
+      /*! the type of iterators over alphabet. */
       typedef typename op_begin_traits<Self, T>::ret_t		iterator;
 
       /*! Insert a letter in the alphabet. */
       void		insert(const letter_t& l);
+
       /*! Select a random letter in the alphabet. */
       letter_t          choose() const;
+
       /*! Select a random letter in all the possible letters in letter_t */
       letter_t		random_letter() const;
+
       /*! Cardinal of the alphabet. */
       size_t		size()                      const;
+
       /*! Return true if l is in the alphabet. */
       bool		contains(const letter_t& l) const;
+
       /*! Return true if the alphabet is finite. */
       bool		is_finite()                 const;
+
       /*! Iterator that is the beginning of the alphabet. */
       iterator		begin();
+
       /*! Iterator that is the beginning of the alphabet. (const version) */
       const_iterator	begin()                     const;
+
       /*! Iterator that is the end of the alphabet. */
       iterator		end();
+
       /*! Iterator that is the end of the alphabet. (const version) */
       const_iterator	end()                       const;
 
     protected:
+      /*! Default constructor is protected since MetaElement is an
+	abstract class. */
       MetaElement();
+
+      /*! Copy constructor is protected since MetaElement is an
+	abstract class. */
       MetaElement(const MetaElement& other);
     };
 
-    template<typename Self, typename St, typename T>
-    St& op_rout(const AlphabetsBase<Self>& s, St& st, const T& a);
+  //! @}
 
-    // FIXME : add equality between two alphabets !
+  // FIXME: is it a good place for this ?
+  template<typename Self, typename St, typename T>
+  St& op_rout(const AlphabetsBase<Self>& s, St& st, const T& a);
+  
+  // FIXME : add equality between two alphabets !
 
 } // vcsn
 

@@ -29,9 +29,16 @@ namespace vcsn {
 
   namespace algebra {
 
+    //! \addtogroup algebra 
+    //! \@{
+
+    //! Empty class that is used as static information to denotes the
+    //! kind of internal operation of a semigroup. Here:operator*
     struct mul_kind 
     {};
 
+    //! Empty class that is used as static information to denotes the
+    //! kind of internal operation of a semigroup. Here:operator+
     struct add_kind 
     {};
 
@@ -41,22 +48,38 @@ namespace vcsn {
     template<class Self>
     struct SemigroupBase : Structure<Self>
     {
-      
     protected:
+      //! Default constructor is protected since it is an abstract class.
       SemigroupBase();
+
+      //! Copy constructor is protected since it is an abstract class.
       SemigroupBase(const SemigroupBase& other);
     };
 
+    //! @}
+
   } // algebra
 
+  //! \addtogroup algebra 
+  //! \@{
+
+  /*-----------------------------------.
+  | MetaElement<SemigroupBase<Self>,T> |
+  `-----------------------------------*/
+  //! Services of every element of a semigroup.
   template<class Self, typename T>
   struct MetaElement<algebra::SemigroupBase<Self>, T>
     : MetaElement<Structure<Self>, T>
   {
   protected:
+    //! Default constructor is protected since it is an abstract class.
     MetaElement();
+
+    //! Copy constructor is protected since it is an abstract class.
     MetaElement(const MetaElement& other);
   };
+
+  //! @}
   
 } // vcsn
 

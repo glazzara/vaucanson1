@@ -18,8 +18,6 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
 #ifndef ALGEBRA_CONCEPT_NUMERICAL_SEMIRING_HH
 # define ALGEBRA_CONCEPT_NUMERICAL_SEMIRING_HH
 
@@ -29,6 +27,9 @@ namespace vcsn {
 
   namespace algebra {
     
+    //! \addtogroup algebra 
+    //! \@{
+
     /*------------------.
     | NumericalSemiring |
     `------------------*/
@@ -38,21 +39,35 @@ namespace vcsn {
       : SemiringBase<NumericalSemiring>
     {};
 
-  } // algebra
+    //! @}
 
+  } // algebra
+  
+  //! \addtogroup algebra 
+  //! \@{
+  
+  //! MetaSet<NumericalSemiring> defines meta information about then
+  //! NumericalSemiring structural element. 
   template<>
   struct MetaSet<NumericalSemiring>
   {
+    //! NumericalSemiring are static structural element.
     static const bool dynamic_set = false;
-    typedef           mul_kind    semigroup_kind;
+
+    //! We can see a NumericalSemiring as a semigroup with +. It is
+    //! an arbitrary decision, it could be mul_kind too.
+    typedef           add_kind    semigroup_kind;
   };
-  
+
+  //! MetaElement<NumericalSemiring, T> defines the services of
+  //! element of numerical semirings. 
   template<typename T>
   struct MetaElement<NumericalSemiring, T>
     : MetaElement<SemiringBase<NumericalSemiring>, T>
   {};
 
-} // vcsn
+  //! @}
 
+} // vcsn
 
 #endif // ALGEBRA_CONCEPT_NUMERICAL_SEMIRING_HH
