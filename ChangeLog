@@ -1,5 +1,12 @@
 2004-03-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/demos/vaucanswig/expand.sh,
+	* src/demos/vaucanswig/meta/vaucanswig_context.i,
+	* src/demos/vaucanswig/meta/vaucanswig_automaton.i: Rename Serie to
+	Series. Rename serie_t to series_elt_t.
+
+2004-03-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/series_base.hh,
 	* include/vaucanson/algebra/concrete/series/krat.hh,
 	* include/vaucanson/algebra/concrete/series/polynoms.hh,

@@ -42,15 +42,15 @@ namespace Kind ##_types
     Kind ##_auto_t(const Kind ##_context&);
     Kind ##_auto_t(const Kind ##_auto_t&);
 
-    Kind ##_serie_t serie_of(int) const;
-    int add_serie_edge(int, int, const Kind ##_serie_t&);
+    Kind ##_series_elt_t series_of(int) const;
+    int add_series_edge(int, int, const Kind ##_series_elt_t&);
 
-    Kind ##_serie_t get_initial(int) const;
-    Kind ##_serie_t get_final(int) const;
-    
-    void set_initial(int, const Kind ##_serie_t&);
+    Kind ##_series_elt_t get_initial(int) const;
+    Kind ##_series_elt_t get_final(int) const;
 
-    void set_final(int, const Kind ##_serie_t&);
+    void set_initial(int, const Kind ##_series_elt_t&);
+
+    void set_final(int, const Kind ##_series_elt_t&);
 
     const Kind ##_automata_set_t& set() const;
 
@@ -133,7 +133,7 @@ namespace Kind ##_types
 	    throw std::runtime_error(std::string("cannot open file: ") + fname);
 	  self->save(out, "simple");
 	}
-    }	    
+    }
 
     virtual ~Kind ##_auto_t();
   };
@@ -154,12 +154,12 @@ namespace Kind ##_types
       }
     }
 
-    Kind ##_exp_t serie_of(int) const;
-    int add_serie_edge(int, int, const Kind ##_exp_t&);
+    Kind ##_exp_t series_of(int) const;
+    int add_series_edge(int, int, const Kind ##_exp_t&);
 
     Kind ##_exp_t get_initial(int) const;
     Kind ##_exp_t get_final(int) const;
-    
+
     void set_initial(int, const Kind ##_exp_t&);
 
     void set_final(int, const Kind ##_exp_t&);
@@ -245,7 +245,7 @@ namespace Kind ##_types
 	    throw std::runtime_error("cannot open file: " + fname);
 	  self->save(out, "simple");
 	}
-    }	    
+    }
   };
 
 }

@@ -34,7 +34,7 @@ end_algorithms() {
   dbapp "struct empty {};"
   dbapp "struct Kind :"
   for af in $ALGS; do
-    dbapp "Kind ##_$af," 
+    dbapp "Kind ##_$af,"
   done
   dbapp " empty {};"
   dbapp "%}"
@@ -61,7 +61,7 @@ start_family() {
 do_family_interface_impl() {
   AF=$1
   AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
-  afapp "$AF" "%define alg_${AF}_interface_impl(Automaton, GenAutomaton, Serie, Exp, HList)"
+  afapp "$AF" "%define alg_${AF}_interface_impl(Automaton, GenAutomaton, Series, Exp, HList)"
   cat "$VAUC/vaucanson/algorithms/$AF.hh" \
      | sed -n -e '/^ *\/\/ INTERFACE:/{s,^ *// INTERFACE:,static ,g;p;}' \
      >>"$AFDB"
@@ -71,7 +71,7 @@ do_family_interface_impl() {
 do_family_interface() {
   AF=$1
   AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
-  afapp "$AF" "%define alg_${AF}_interface(Automaton, GenAutomaton, Serie, Exp, HList)"
+  afapp "$AF" "%define alg_${AF}_interface(Automaton, GenAutomaton, Series, Exp, HList)"
   cat "$VAUC/vaucanson/algorithms/$AF.hh" \
      | sed -n -e '/^ *\/\/ INTERFACE:/{s,^ *// INTERFACE: \([^{]*\).*$,static \1;,g;p;}' \
      >>"$AFDB"
@@ -101,7 +101,7 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh`; do
       afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
       afapp "$family_name"  "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"
       afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_serie_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_series_elt_t, \\"
       afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
       afapp "$family_name"  "};"
       afapp "$family_name"  "%}"
@@ -112,33 +112,33 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh`; do
       afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
       afapp "$family_name"  "alg_${family_name}_interface_impl(Kind ##_types::Kind ##_auto_t, \\"
       afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_serie_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_series_elt_t, \\"
       afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
       afapp "$family_name"  "};"
       afapp "$family_name"  "%}"
       afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
       afapp "$family_name"  "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"
       afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_serie_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_series_elt_t, \\"
       afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
       afapp "$family_name"  "};"
       afapp "$family_name"  "%enddef"
-     
+
      # Mention the sub-database in the general database
      dbapp "%import vaucanswig_## Kind ##_alg_${family_name}.i"
      dbapp "%include vaucanswig_alg_${family_name}.i"
      dbapp "alg_interface_${family_name}(Kind)"
 
      # Add the sub-database to the algorithm category
-     ALGS="$ALGS alg_${family_name}"   
+     ALGS="$ALGS alg_${family_name}"
    fi
 done
 fi
 
-end_algorithms 
+end_algorithms
 #### #####
 
-if [ "x$2" = "xshort" ]; then 
+if [ "x$2" = "xshort" ]; then
   kinds="usual"
 else
   kinds="usual numerical tropical_max tropical_min"
@@ -178,7 +178,7 @@ cat <<EOF
 INCLUDES = -I/usr/include/python2.2 -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
     -I\$(top_srcdir)/include -I\$(top_builddir)/include
 AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -DEXCEPTION_TRAPS
-AM_CXXFLAGS = \$(CXXFLAGS_DEBUG) 
+AM_CXXFLAGS = \$(CXXFLAGS_DEBUG)
 AM_LDFLAGS = -module -avoid-version
 
 EOF
@@ -192,18 +192,18 @@ dump_python()
       if [ `expr $ilist % 4` = 0 ]; then
          echo " \\"; printf "\t"
       fi
-      printf " libvs_$mod.la" 
+      printf " libvs_$mod.la"
       ilist=`expr $ilist + 1`
     done
     echo; echo
     printf "python_PYTHON ="
     ilist=0
     for mod in $MODULES; do
-      if [ `expr $ilist % 4` = 0 ]; then 
-         echo " \\"; printf "\t" 
-      fi 
+      if [ `expr $ilist % 4` = 0 ]; then
+         echo " \\"; printf "\t"
+      fi
       printf " vaucanswig_${mod}.py"
-      ilist=`expr $ilist + 1` 
+      ilist=`expr $ilist + 1`
     done
     echo; echo
     for mod in $MODULES; do
@@ -214,7 +214,7 @@ dump_python()
         if test -r "$VAUCANSWIG/src/$mod.deps"; then
            printf "libvs_${mod}_la_LIBADD ="
            for dep in `cat "$VAUCANSWIG/src/$mod.deps"`; do
-              printf " libvs_${dep}.la" 
+              printf " libvs_${dep}.la"
            done
            echo
         else
@@ -225,7 +225,7 @@ dump_python()
     echo
     ilist=0
     for mod in $MODULES; do
-      if [ -r "$VAUCANSWIG/src/vaucanswig_${mod}.i" ]; then 
+      if [ -r "$VAUCANSWIG/src/vaucanswig_${mod}.i" ]; then
          sdir=src
       else
          sdir=meta
@@ -244,18 +244,18 @@ dump_python()
     for mod in $MODULES; do
       printf "\trm -f \$(DESTDIR)\$(pyexecdir)/_vaucanswig_$mod.so\n"
     done
-    echo  
+    echo
 }
 
 ############ Generic stuff ###########
 
 header_src() {
     cat <<EOF
-## Process this file through Automake to produce Makefile.in -*- Makefile -*- 
-## 
+## Process this file through Automake to produce Makefile.in -*- Makefile -*-
+##
 ## Makefile.am for vaucanswig/src
-## NOTE: this file was generated automatically by expand.sh 
-## 
+## NOTE: this file was generated automatically by expand.sh
+##
 EOF
 }
 
@@ -263,7 +263,7 @@ dump_src() {
     printf "EXTRA_DIST ="
     ilist=0
     for mod in $MODULES; do
-      if [ -r "$VAUCANSWIG/src/vaucanswig_${mod}.i" ]; then 
+      if [ -r "$VAUCANSWIG/src/vaucanswig_${mod}.i" ]; then
          if [ `expr $ilist % 4` = 0 ]; then
 	    echo " \\"
             printf "\t"
