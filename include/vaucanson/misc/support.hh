@@ -160,6 +160,7 @@ namespace utility {
     typedef SparseIterator<integer_t, excluded_container_t> iterator;
 
     SparseInterval(integer_t, integer_t, const excluded_container_t&);
+    SparseInterval(const SparseInterval&);
 
     iterator begin() const;
     iterator end() const;

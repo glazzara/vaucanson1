@@ -1,7 +1,7 @@
 // support.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -40,9 +40,9 @@ namespace utility {
   SupportIterator<C>::SupportIterator(map_iterator mp):
     i(mp)
   {}
-    
+
   template <class C>
-  typename SupportIterator<C>::key_type	
+  typename SupportIterator<C>::key_type
   SupportIterator<C>::operator*() const
   {
     return i->first;
@@ -103,7 +103,7 @@ namespace utility {
   {
     return iterator(m_.begin());
   }
-  
+
   template <class U, class T>
   SupportIterator<std::map<U, T> >
   Support<std::map<U, T> >::end() const
@@ -122,14 +122,14 @@ namespace utility {
 
   template <class Integer, class ExcludedContainer>
   SparseIterator<Integer, ExcludedContainer>::
-  SparseIterator(integer_t from, 
+  SparseIterator(integer_t from,
 		 const excluded_container_t& c):
     excluded_(&c),
     integer_(from)
   {}
 
   template <class Integer, class ExcludedContainer>
-  SparseIterator<Integer, ExcludedContainer>& 
+  SparseIterator<Integer, ExcludedContainer>&
   SparseIterator<Integer, ExcludedContainer>::operator++()
   {
     if (excluded_->size() == 0)
@@ -142,10 +142,10 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  SparseIterator<Integer, ExcludedContainer>& 
+  SparseIterator<Integer, ExcludedContainer>&
   SparseIterator<Integer, ExcludedContainer>::operator--()
   {
-    if (excluded_->size() == 0) 
+    if (excluded_->size() == 0)
       integer_ = integer_ - 1;
     else
       do
@@ -174,14 +174,14 @@ namespace utility {
 
   template <class Integer, class ExcludedContainer>
   typename SparseIterator<Integer, ExcludedContainer>::
-  integer_t	    
+  integer_t
   SparseIterator<Integer, ExcludedContainer>::operator*()
   {
     return integer_;
   }
-  
+
   template <class Integer, class ExcludedContainer>
-  bool	    
+  bool
   SparseIterator<Integer, ExcludedContainer>
   ::operator!=(const SparseIterator& i)
   {
@@ -189,7 +189,7 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  bool	    
+  bool
   SparseIterator<Integer, ExcludedContainer>
   ::operator==(const SparseIterator& i)
   {
@@ -221,6 +221,15 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
+  SparseInterval<Integer, ExcludedContainer>
+  ::SparseInterval(const SparseInterval& a) :
+    excluded_(a.excluded_),
+    from_(a.from_),
+    to_(a.to_)
+  {
+  }
+
+  template <class Integer, class ExcludedContainer>
   unsigned
   SparseInterval<Integer, ExcludedContainer>::size() const
   {
@@ -233,7 +242,7 @@ namespace utility {
   SparseInterval<Integer, ExcludedContainer>::max() const
   {
     unsigned r = to_;
-    
+
     while (excluded_.find(r) != excluded_.end())
       --r;
     return r;
@@ -253,20 +262,20 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  typename SparseInterval<Integer, ExcludedContainer>::iterator 
+  typename SparseInterval<Integer, ExcludedContainer>::iterator
   SparseInterval<Integer, ExcludedContainer>::begin() const
   {
     return iterator(from_, excluded_);
   }
 
   template <class Integer, class ExcludedContainer>
-  typename SparseInterval<Integer, ExcludedContainer>::iterator 
+  typename SparseInterval<Integer, ExcludedContainer>::iterator
   SparseInterval<Integer, ExcludedContainer>::end() const
   {
     return iterator(to_ + 1, excluded_);
   }
 
-} // utility 
+} // utility
 
 # include <vaucanson/misc/support.hxx>
 
