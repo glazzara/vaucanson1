@@ -1,3 +1,9 @@
+2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/contextual_functions.hxx,
+	* include/vaucanson/contextual_functions.hh (standard_of): Enforce
+	typing for standard_of.
+
 2004-04-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/automata/algos/product_test.hh: Add backup of failing

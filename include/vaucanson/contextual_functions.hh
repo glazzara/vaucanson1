@@ -38,9 +38,9 @@ automaton_t new_automaton(InputIterator begin,
 			  InputIterator end);
 
 
-template <class Exp>
+template <class SeriesSet, class SeriesImpl>
 automaton_t
-standard_of(const Exp& e);
+standard_of(const Element<SeriesSet, SeriesImpl>& e);
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/contextual_functions.hxx>

@@ -54,13 +54,20 @@ automaton_t new_automaton(const T& alphabet)
   return new_automaton(alphabet.begin(), alphabet.end());
 }
 
-template <class Exp>
+template <class SeriesImpl>
 automaton_t
-standard_of(const Exp& e)
+do_standard_of(const series_t& structure, const SeriesImpl& impl)
 {
-  automaton_t r = new_automaton(e.structure().monoid().alphabet());
-  standard_of(r, e.value());
+  automaton_t r = new_automaton(structure.monoid().alphabet());
+  standard_of(r, impl);
   return r;
+}
+
+template <class SeriesSet, class SeriesImpl>
+automaton_t
+standard_of(const Element<SeriesSet, SeriesImpl>& e)
+{
+  return do_standard_of(e.structure(), e.value());
 }
 
 #endif // ! VCSN_CONTEXTUAL_FUNCTIONS_HXX
