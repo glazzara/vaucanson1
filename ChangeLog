@@ -1,5 +1,11 @@
 2003-03-13  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/monoid_base.hh,
+	  include/vaucanson/algebra/concept/monoid_base.hxx: Set correct
+	  copyrights.
+
+2003-03-13  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/monoid_base.hh (identity_as,
 	zero_as): Add definition.
 	* include/vaucanson/algebra/concept/monoid_base.hxx (identity_as,
