@@ -160,28 +160,28 @@ namespace vcsn
 
     // Provides generic operators on rational (calls the explicit generic
     // constructor for rational).
-# define RATIONAL_OPERATOR(type, op, is_const) \
-template <class T> \
-type operator op(is_const RationalNumber& nb, const T nb2) \
-{ \
-  return nb op RationalNumber(nb2); \
-} \
-
-    RATIONAL_OPERATOR(RationalNumber, +, const);
-    RATIONAL_OPERATOR(RationalNumber, -, const);
-    RATIONAL_OPERATOR(RationalNumber, *, const);
-    RATIONAL_OPERATOR(RationalNumber, /, const);
-    RATIONAL_OPERATOR(RationalNumber&, +=, );
-    RATIONAL_OPERATOR(RationalNumber&, -=, );
-    RATIONAL_OPERATOR(RationalNumber&, *=, );
-    RATIONAL_OPERATOR(RationalNumber&, /=, );
-    RATIONAL_OPERATOR(bool, <, const);
-    RATIONAL_OPERATOR(bool, <=, const);
-    RATIONAL_OPERATOR(bool, >, const);
-    RATIONAL_OPERATOR(bool, >=, const);
-    RATIONAL_OPERATOR(bool, ==, const);
-    RATIONAL_OPERATOR(bool, !=, const);
+# define RATIONAL_NUMBER_OPERATOR(type, op, is_const) 		\
+template <class T> 						\
+type operator op(is_const RationalNumber& nb, const T nb2) 	\
+{ 								\
+  return nb op RationalNumber(nb2); 				\
+} 
     
+    RATIONAL_NUMBER_OPERATOR(RationalNumber, +, const);
+    RATIONAL_NUMBER_OPERATOR(RationalNumber, -, const);
+    RATIONAL_NUMBER_OPERATOR(RationalNumber, *, const);
+    RATIONAL_NUMBER_OPERATOR(RationalNumber, /, const);
+    RATIONAL_NUMBER_OPERATOR(RationalNumber&, +=, );
+    RATIONAL_NUMBER_OPERATOR(RationalNumber&, -=, );
+    RATIONAL_NUMBER_OPERATOR(RationalNumber&, *=, );
+    RATIONAL_NUMBER_OPERATOR(RationalNumber&, /=, );
+    RATIONAL_NUMBER_OPERATOR(bool, <, const);
+    RATIONAL_NUMBER_OPERATOR(bool, <=, const);
+    RATIONAL_NUMBER_OPERATOR(bool, >, const);
+    RATIONAL_NUMBER_OPERATOR(bool, >=, const);
+    RATIONAL_NUMBER_OPERATOR(bool, ==, const);
+    RATIONAL_NUMBER_OPERATOR(bool, !=, const);
+
     // FIXME: Add other goodies for standard library.
     std::ostream& operator<<(std::ostream& ostr, const RationalNumber& nb);
 

@@ -1,3 +1,8 @@
+2004-04-23  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
+	Minor fixes in generic operators.
+
 2004-04-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/test-suites/algebra_tropical_semiring_min_int.defs,
