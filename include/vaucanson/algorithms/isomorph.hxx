@@ -128,7 +128,7 @@ namespace vcsn {
 
   bool exists(const sub_possibility_t& l, const pair<hstate_t, hstate_t>& p)
   {
-    for_all_const_(sub_possilibity_t, i, l)
+    for_all_const(sub_possibility_t, i, l)
       if (*i == p) return true;
     return false;
   }
@@ -150,8 +150,8 @@ namespace vcsn {
     else
       {
 	bool res = false;
-	for_all_(set<hstate_t>, i, out_a)
-	  for_all_(set<hstate_t>, j, out_b)
+	for_all(set<hstate_t>, i, out_a)
+	  for_all(set<hstate_t>, j, out_b)
 	  if (exists(mother, pair<hstate_t, hstate_t>(*i, *j)))
 	    {
 	      out_a.erase(*i);

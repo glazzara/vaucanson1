@@ -91,6 +91,7 @@ namespace vcsn {
 				   lhs_t& lhs,
 				   const rhs_t& rhs)
   {
+    AUTOMATON_TYPES(lhs_t);
     std::stack<hstate_t> init;
 
     sum_here(lhs, rhs);

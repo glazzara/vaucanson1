@@ -143,7 +143,7 @@ namespace vcsn {
 	    while (p != part[P].end())
 	      {
 		new_p.clear();
-		for_all_const_(p_, part[P])
+		for_all_const_(hstate_list_t, p_, part[P])
 		  if ((csucc[*p_] == csucc[*p])
 		      &&
 		      (*p != *p_))
