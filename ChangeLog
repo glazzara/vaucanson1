@@ -1,3 +1,8 @@
+2004-03-22  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Make it
+	  compatible with weighted expressions.
+
 2004-03-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/tests/automata/algos/brzozowski_test.hh,

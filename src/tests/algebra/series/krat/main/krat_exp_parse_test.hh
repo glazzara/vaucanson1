@@ -1,7 +1,7 @@
 // krat_exp_parse_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -108,7 +108,9 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-static struct { char* exp; char* out; } samples[] =
+struct sample_t { char* exp; char* out; };
+
+static sample_t bool_samples[] =
   {
     // Good ones
     { "0", "0" },
@@ -133,31 +135,10 @@ static struct { char* exp; char* out; } samples[] =
     { "a.b*", "(a.b*)" },
     { "a*.b", "(a*.b)" },
     { "a*b", "(a*.b)"},
-    { "1 a", "a" },
-    { "a 1", "a" },
-    { "0 a", "0" },
-    { "1 (a+b)", "(a+b)" },
-    { "1 (a.b)", "(a.b)" },
-    { "(a.b) 1", "(a.b)" },
-    { "(a+b) 1", "(a+b)" },
-    { "2 (a+b)", "(2 (a+b))" },
-    { "2 (a.b)", "(2 (a.b))" },
-    { "(a.b) 2", "((a.b) 2)" },
-    { "(a+b) 2", "((a+b) 2)" },
-    { "0 (a.b)", "0" },
-    { "0 (a+b)", "0" },
-    { "(a.b) 0", "0" },
-    { "(a+b) 0", "0" },
     { "0.a", "0" },
     { "0a", "0" },
     { "1.a", "a" },
     { "1a", "a" },
-    { "1 a.1 b", "(a.b)" },
-    { "1 a1 b", "(a.b)" },
-    { "2 a.2 b", "((2 a).(2 b))" },
-    { "2 a2 b", "((2 a).(2 b))" },
-    { "2 1", "(2 1)"},
-    { "1 2", "(2 1)"},
     // Bad ones
     { "2", 0 },
     { "2.2", 0 },
@@ -179,8 +160,35 @@ static struct { char* exp; char* out; } samples[] =
     {0, 0}
   };
 
+static sample_t mul_samples[] =
+  {
+    // Good ones
+    { "1 a", "a" },
+    { "a 1", "a" },
+    { "0 a", "0" },
+    { "1 (a+b)", "(a+b)" },
+    { "1 (a.b)", "(a.b)" },
+    { "(a.b) 1", "(a.b)" },
+    { "(a+b) 1", "(a+b)" },
+    { "2 (a+b)", "(2 (a+b))" },
+    { "2 (a.b)", "(2 (a.b))" },
+    { "(a.b) 2", "((a.b) 2)" },
+    { "(a+b) 2", "((a+b) 2)" },
+    { "0 (a.b)", "0" },
+    { "0 (a+b)", "0" },
+    { "(a.b) 0", "0" },
+    { "(a+b) 0", "0" },
+    { "1 a.1 b", "(a.b)" },
+    { "1 a1 b", "(a.b)" },
+    { "2 a.2 b", "((2 a).(2 b))" },
+    { "2 a2 b", "((2 a).(2 b))" },
+    { "2 1", "(2 1)"},
+    { "1 2", "(2 1)"},
+    {0, 0}
+  };
+
 template <class Expr>
-bool krat_exp_parse_exhaustive_test (tests::Tester& tg)
+bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 {
   KRAT_EXP_PARSE_TEST_USUAL_DECS(Expr);
   tests::Tester t(tg.verbose());
@@ -229,12 +237,33 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg)
   return t.all_passed();
 }
 
+template <typename T, typename Expr>
+struct exhaustive_test_dispatch
+{
+  static bool run(tests::Tester& tg)
+  {
+    return krat_exp_parse_exhaustive_test<Expr>(tg, mul_samples) &&
+      krat_exp_parse_exhaustive_test<Expr>(tg, bool_samples);
+  }
+};
+
+template <typename Expr>
+struct exhaustive_test_dispatch<bool, Expr>
+{
+  static bool run(tests::Tester& tg)
+  {
+    return krat_exp_parse_exhaustive_test<Expr>(tg, bool_samples);
+  }
+};
+
 template <class Expr>
 bool krat_exp_parse_test(tests::Tester& tg)
 {
+  KRAT_EXP_PARSE_TEST_USUAL_DECS(Expr);
+  
   return
     krat_exp_parse_random_test<Expr>(tg) &&
-    krat_exp_parse_exhaustive_test<Expr>(tg);
+    exhaustive_test_dispatch<typename semiring_elt_t::value_t, Expr>::run(tg);
 }
 
 #endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_PARSE_TEST_HH
