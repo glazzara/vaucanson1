@@ -241,6 +241,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/misc/container_ops.hh				     \
 	vaucanson/misc/container_ops.hxx			     \
 	vaucanson/misc/contract.hh				     \
+	vaucanson/misc/fsm_dump.hh				     \
+	vaucanson/misc/fsm_dump.hxx				     \
 	vaucanson/misc/limits.hh				     \
 	vaucanson/misc/random.hh				     \
 	vaucanson/misc/random.hxx				     \

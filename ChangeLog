@@ -1,5 +1,10 @@
 2003-11-05  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/misc/fsm_dump.h[h,xx]: New.
+        * include/Makefile.am: Distribute them.
+	
+2003-11-05  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* src/demos/vgrep/vgrep.cc: Use getopt instead of getopt_long.
 
 2003-10-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
