@@ -35,7 +35,7 @@
 # include <vaucanson/algorithms/backward_realtime.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/backward_closure.hh>
+# include <vaucanson/algorithms/closure.hh>
 # include <vaucanson/algorithms/accessible.hh>
 
 # include <queue>

@@ -35,7 +35,7 @@
 # include <vaucanson/algorithms/forward_realtime.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/forward_closure.hh>
+# include <vaucanson/algorithms/closure.hh>
 # include <vaucanson/algorithms/accessible.hh>
 
 # include <deque>

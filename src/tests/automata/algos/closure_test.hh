@@ -38,8 +38,7 @@
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/algorithms/backward_closure.hh>
-# include <vaucanson/algorithms/forward_closure.hh>
+# include <vaucanson/algorithms/closure.hh>
 
 template <class Auto>
 bool closure_test(tests::Tester& tg)

@@ -70,10 +70,10 @@ global_consistency_test(tests::Tester& t)
   series_set_t		ss (sg, md);
   automata_set_t	aa (ss);
 
-  krat_exp_t		e (ss);
+  rat_exp_t		e (ss);
   do
-    e = ss.choose(SELECT(krat_exp_impl_t));
-  while (e == zero_as<krat_exp_impl_t>::of(ss));
+    e = ss.choose(SELECT(rat_exp_impl_t));
+  while (e == zero_as<rat_exp_impl_t>::of(ss));
 
   automaton_t		a1 = new_automaton(at);
   automaton_t		a2 = new_automaton(at.begin(), at.end());
