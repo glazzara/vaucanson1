@@ -1,5 +1,12 @@
 2004-06-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* update_config_ac.sh: Rename to...
+	* find_tests.sh: ... This. Generate m4 macros in tests.m4.
+	* configure.ac: Include tests.m4.
+	* bootstrap.sh: Update.
+
+2004-06-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/boolean_automata/Makefile.am: Add brzozowski_test.hh in
 	EXTRA_DIST.
 	* src/tests/automata/algos/Makefile.am: Remove brzozowski_test.hh from
@@ -23,7 +30,7 @@
 	* include/vaucanson/contextual_automaton_functions.thxx,
 	* include/vaucanson/contextual_transducer_functions.thxx: These.
 	* include/vaucanson/contextual_automaton_functions.thh,
-	* include/vaucanson/contextual_transducer_functions.thh: Update 
+	* include/vaucanson/contextual_transducer_functions.thh: Update
 	accordingly.
 
 2004-05-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
@@ -34,7 +41,7 @@
 2004-05-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/contextual_automaton_functions.hh,
-	* include/vaucanson/contextual_transducer_functions.hh: 
+	* include/vaucanson/contextual_transducer_functions.hh:
 	Rename to...
 	* include/vaucanson/contextual_automaton_functions.thh,
 	* include/vaucanson/contextual_transducer_functions.thh: These.
@@ -49,13 +56,13 @@
 	* include/vaucanson/boolean_automaton.hh,
 	* include/vaucanson/r_automaton.hh,
 	* include/vaucanson/z_automaton.hh,
-	* include/vaucanson/z_max_plus_automaton.hh: Add typedef for 
+	* include/vaucanson/z_max_plus_automaton.hh: Add typedef for
 	generalized automaton.
-	* include/vaucanson/contextual_headers.hh: Add header for generalized 
+	* include/vaucanson/contextual_headers.hh: Add header for generalized
 	automaton.
 	* include/vaucanson/contextual_automaton_functions.hh,
-	* include/vaucanson/contextual_automaton_functions.hxx: Add 
-	new_gen_automaton() functions to create generalized automaton and 
+	* include/vaucanson/contextual_automaton_functions.hxx: Add
+	new_gen_automaton() functions to create generalized automaton and
 	factorize some code.
 	* include/vaucanson/contextual_transducer_functions.hh,
 	* include/vaucanson/contextual_transducer_functions.hxx: Improve
@@ -110,7 +117,7 @@
 
 2004-05-12  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/concatenate.hxx: Fix problem with 
+	* include/vaucanson/algorithms/concatenate.hxx: Fix problem with
 	final multiplicity loss during concatenation.
 
 2004-05-11  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
