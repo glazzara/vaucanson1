@@ -1,5 +1,11 @@
 2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/numerical_semiring.hh : added.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx : added.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh : added.
+
+2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/semiring_base.hh   : added.
 	* include/vaucanson/algebra/concept/semiring_base.hxx  : added.
 
