@@ -1,5 +1,7 @@
 2004-03-18  Valentin David  <valentin@lrde.epita.fr>
 
+	* include/vaucanson/design_pattern/element.hxx: Fix.
+
 	* configure.ac: Delete generated lines.
 
 	* include/Makefile.am: Do not use stars anymore.

@@ -72,7 +72,7 @@ namespace vcsn {
   template <bool Cond, typename S, typename T>
   struct convert_dynamic
   {
-     static S op_convert(const SetSlot<S>& set_, const T& t)
+     static S convert(const SetSlot<S>& set_, const T& t)
      {
 	if (!set_.bound())
           return op_convert(SELECT(S), t);
@@ -84,7 +84,7 @@ namespace vcsn {
   template <typename S, typename T>
   struct convert_dynamic<false, S, T>
   {
-     static S op_convert(const SetSlot<S>&, const T&)
+     static S convert(const SetSlot<S>&, const T&)
      {
        return S();
      }
@@ -97,7 +97,7 @@ namespace vcsn {
 			other.set(), other.value()))
   {
     set_.assign(convert_dynamic<dynamic_traits<S>::ret, S, OtherS>
-		    ::op_convert(set_, other.set()));
+		    ::convert(set_, other.set()));
     //static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
   }
 
@@ -182,7 +182,7 @@ namespace vcsn {
   Element<S,T>& Element<S,T>::operator=(const Element<OtherS, U>& other)
   {
     set_.assign(convert_dynamic<dynamic_traits<S>::ret, S, OtherS>
-	    	::op_convert(set_, other.set()));
+	    	::convert(set_, other.set()));
     op_assign(set(), other.set(), value_, other.value());
     return *this;
   }
