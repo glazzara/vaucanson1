@@ -1,5 +1,16 @@
 2002-07-18  Maxime Rey  <max@lrde.epita.fr>
 
+	* Index: 0.69/include/vaucanson/tools/usual.hh
+	>     using namespace vcsn;
+	>     using namespace vcsn::algebra;
+	* include/vaucanson/tools/gen_random.hh : minor modification
+	* src/tests/automata/algos/algo_test.cc : effective on
+	* /src/tests/automata/algos/union_test.hh : modif
+	* /src/tests/automata/algos/determinist_test.hh : modif
+	* /src/tests/automata/algos/normalize_test.hh : modif
+
+2002-07-18  Maxime Rey  <max@lrde.epita.fr>
+
 	* Index: 0.68/include/vaucanson/automata/concept/transpose_impl.hxx
 	
 	<     template <typename OtherImpl, class TransposeLabelFun>

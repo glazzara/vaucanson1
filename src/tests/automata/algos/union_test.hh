@@ -23,7 +23,7 @@
 # include <vaucanson/misc/ref.hh>
 # include <vaucanson/misc/dot_dump.hh>
 
-# include <automata/implementation_check/gen_random.hh>
+# include <vaucanson/tools/gen_random.hh>
 
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
@@ -37,10 +37,11 @@
 
 using namespace vcsn;
 using namespace vcsn::algebra;
+using namespace vcsn::tools;
 
 
 template <class Auto>
-unsigned union_test(const tests::Tester& t)
+unsigned union_test(tests::Tester& t)
 {  
   std::filebuf fb;
   std::ostream os(&fb);
@@ -50,8 +51,8 @@ unsigned union_test(const tests::Tester& t)
 
   gen_auto_t gen(time(0x0));
 
-  automaton_t a = gen.generate(20);
-  automaton_t b = gen.generate(10);
+  automaton_t a = gen.generate(20, 40);
+  automaton_t b = gen.generate(10, 20);
   automaton_t c = auto_union(a, b);
   
   TEST(t, "Check Union automata [states]", a.states().size() + 

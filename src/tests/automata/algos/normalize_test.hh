@@ -23,18 +23,20 @@
 
 # include <vaucanson/misc/ref.hh>
 
-# include <automata/implementation_check/gen_random.hh>
+# include <vaucanson/tools/gen_random.hh>
 
 # include <vaucanson/algorithms/normalized.hh>
 
 template <class Auto>
-unsigned normalize_test(const tests::Tester& t)
+unsigned normalize_test(tests::Tester& t)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
-
+  using namespace vcsn::tools;
+ 
   typedef Auto automaton_t;
   
+  gen_auto_t gen(time(0x0));
   const unsigned nb_tests = 10;
   
   for (unsigned i = 0; i < nb_tests; i++)

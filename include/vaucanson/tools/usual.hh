@@ -22,6 +22,9 @@ namespace vcsn {
 
   namespace tools {
 
+    using namespace vcsn;
+    using namespace vcsn::algebra;
+    
     typedef Element
     <
       Automata, 

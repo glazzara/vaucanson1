@@ -4,7 +4,7 @@
 
 # include <check/tests_stuff.hh>
 
-# include <automata/algos/type_test.hh>
+# include <vaucanson/tools/usual.hh>
 
 # include <automata/algos/union_test.hh>
 # include <automata/algos/determinist_test.hh>
@@ -24,8 +24,8 @@ int main(int argc, char** argv)
     verbose = 1;
   tests::Tester t(verbose);
 
-//   TEST(t, "CHECK UNION : ", union_test<usual_automaton_t>(t));
-//   TEST(t, "CHECK DETERMINIST : ", determinist_test<usual_automaton_t>(t));
-//   TEST(t, "CHECK NORMALIZE : ", normalize_test<usual_automaton_t>(t));
+  TEST(t, "CHECK UNION : ", !union_test<usual_automaton_t>(t));
+  TEST(t, "CHECK DETERMINIST : ", !determinist_test<usual_automaton_t>(t));
+  TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
   
 }

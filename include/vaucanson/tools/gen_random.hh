@@ -1,6 +1,5 @@
 // gen_random.hh
 // 
-// $Id$
 // VCSN_HEADER
 
 #ifndef GEN_RANDOM_HH
@@ -52,7 +51,7 @@ namespace vcsn {
 
     typedef GenRandomAutomata<usual_automaton_t> gen_auto_t;
 
-  } // algebra
+  } // tools
 
 } // vcsn
 
