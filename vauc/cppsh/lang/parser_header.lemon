@@ -1,0 +1,100 @@
+/*---------------------------------------------------------------.
+| lang/ls/@BASENAME@.lemon : cppsh language syntax / parser defs |
+`---------------------------------------------------------------*/
+//     Copyright (C) 2002  LRDE.
+
+//     libcppshls is free software; you can redistribute it and/or
+//     modify it under the terms of the GNU Lesser General Public
+//     License as published by the Free Software Foundation; either
+//     version 2 of the License, or (at your option) any later version.
+
+//     libcppshls is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//     Lesser General Public License for more details.
+
+//     You should have received a copy of the GNU Lesser General Public
+//     License along with this library; if not, write to the Free Software
+//     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+
+%include {
+  
+#include "kern/debug.hh"
+#include "@BASENAME@.hh"
+#include "lang/ll_lisp.hh"
+#include "lang/lisp.hh"
+#include <sstream>
+#include <list>
+ 
+using namespace cppsh::lang;
+using cppsh::Cell;
+
+#ifdef DEBUG
+#define RET_DEBUG(E) \
+{ \
+  std::ostringstream os; \
+  os << "Returned exp at " << E; \
+  cppsh::debug::log("@BASENAME@", os.str()); \
+}
+
+static inline Cell* IN_DEBUG(Cell* E)
+{ 
+  std::ostringstream os;
+  os << "Using exp at " << E;
+  cppsh::debug::log("@BASENAME@", os.str()); 
+  return E;
+}
+
+#else
+#define RET_DEBUG(E)
+#define IN_DEBUG(E) E
+#endif
+
+#define CSYM(S) ll_lisp::symbol(S)
+#define LCONS(C1, C2) lisp::cons(C1, C2)
+#define CCONS(C1, C2) ll_lisp::cons(C1, C2)
+#define CLIST1(L) ll_lisp::list(L)
+#define CLIST2(L1,L2) ll_lisp::list(L1,L2)
+#define CLIST3(L1,L2,L3) ll_lisp::list(L1,L2,L3)
+#define CLIST4(L1,L2,L3,L4) ll_lisp::list(L1,L2,L3,L4)
+#define CLIST5(L1,L2,L3,L4,L5) ll_lisp::list(L1,L2,L3,L4,L5)
+#define CNIL ll_lisp::nil()
+#define CQUOTE(E) CLIST2(CSYM("quote"), E)
+#define CCDR(E) ll_lisp::cdr(E)
+#define CCAR(E) ll_lisp::car(E)
+#define CT ll_lisp::t()
+
+}
+
+%token_type { Cell* }
+%token_destructor { delete $$; }
+%token_prefix TOK_
+
+%extra_argument { cppsh::lang::parse::ParseArg *comm }
+
+%name @NAME@
+%start_symbol parse
+
+parse ::= expression(E) .
+{
+  IN_DEBUG(E);
+  comm->report_success(E);
+}
+
+parse ::= opt_end .
+{
+  comm->report_empty_parse();
+}
+
+parse ::= error opt_end .
+{
+  comm->report_syntax_error("at toplevel");
+}
+
+opt_end ::= EOL .
+
+opt_end ::= .
+
+// Local Variables:
+// mode: C++
+// End:

@@ -1,5 +1,69 @@
 2003-05-13  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/types/symbol.hh, include/types/object.hh,
+	include/vcore/streams.hh, include/vcore/exception.hh: Use
+	definitions from cppsh.
+
+	* lib/Makefile.am (noinst_LTLIBRARIES): Update library names.
+
+	* cppsh/ChangeLog, cppsh/Makefile.am, cppsh/include/kern/debug.hh,
+	cppsh/include/kern/exception.hh, cppsh/include/kern/exnprint.hh,
+	cppsh/include/kern/fstreams.hh, cppsh/include/kern/object.hh,
+	cppsh/include/kern/object.hxx, cppsh/include/kern/objvect.hh,
+	cppsh/include/kern/objvect.hxx, cppsh/include/kern/ref.hh,
+	cppsh/include/kern/ref.hxx, cppsh/include/kern/stdstreams.hh,
+	cppsh/include/kern/streams.hh, cppsh/include/kern/symbol.hh,
+	cppsh/include/kern/symbol.hxx, cppsh/include/lang,
+	cppsh/include/lang/parse_base.hh, cppsh/include/FlexLexer.h,
+	cppsh/include/bits, cppsh/include/bits/def_visitor.hh,
+	cppsh/include/bits/module_defs.hh, cppsh/include/Makefile.am,
+	cppsh/kern/Makefile.am, cppsh/kern/debug.cc,
+	cppsh/kern/exception.cc, cppsh/kern/exnprint.cc,
+	cppsh/kern/fstreams.cc, cppsh/kern/object.cc,
+	cppsh/kern/objvect.cc, cppsh/kern/stdstreams_cerr.cc,
+	cppsh/kern/stdstreams_cerr.hh, cppsh/kern/stdstreams_cin.cc,
+	cppsh/kern/stdstreams_cin.hh, cppsh/kern/stdstreams_cout.cc,
+	cppsh/kern/stdstreams_cout.hh, cppsh/kern/streams.cc,
+	cppsh/kern/symbol.cc, cppsh/lang/Makefile.am,
+	cppsh/lang/gen_parser.sh, cppsh/lang/in2grammar.sh,
+	cppsh/lang/parser_header.yy, cppsh/lang/lemon_parser.cc,
+	cppsh/lang/lemon_parser.hh, cppsh/lang/parse_base.cc,
+	cppsh/lang/parser_header.lemon, cppsh/tests/Makefile.am,
+	cppsh/tests/kern/Makefile.am, cppsh/tests/kern/exception.cc,
+	cppsh/tests/kern/object.cc, cppsh/tests/kern/objref.cc,
+	cppsh/tests/kern/objref_a.cc, cppsh/tests/kern/streams.cc,
+	cppsh/tests/kern/symbol.cc, cppsh/tests/ltdlpp/Makefile.am,
+	cppsh/tests/ltdlpp/abug1.cc, cppsh/tests/ltdlpp/abug2.cc,
+	cppsh/tests/ltdlpp/bbug1.cc, cppsh/tests/ltdlpp/bbug2.cc,
+	cppsh/tests/ltdlpp/dl.cc, cppsh/tests/ltdlpp/dlbug1.cc,
+	cppsh/tests/ltdlpp/dlbug12.cc, cppsh/tests/ltdlpp/dlbug2.cc,
+	cppsh/tests/ltdlpp/dlbug22.cc, cppsh/tests/ltdlpp/dlbug3.cc,
+	cppsh/tests/ltdlpp/dlbug32.cc, cppsh/tests/ltdlpp/s.hh: Add files.
+	
+	* Makefile.am (SUBDIRS): Reorder. Mention `ltdlpp', `lemon',
+	`cppsh' and `vcore'.
+
+	* config/readline.m4 (AC_WITH_READLINE): Fix variable setting.
+
+	* src/vcore: Rename to...
+	* vcore: this.
+	
+	* src/vutil/lemon: Rename to...
+	* lemon: this.
+	
+	* lemon/rules.am: Update copyright notice.
+
+	* vcore/exception.cc, vcore/persistant.cc, vcore/streams.cc:
+	Remove files obsoleted by cppsh.
+
+	* vcore/Makefile.am: Update INCLUDES and SOURCES.
+
+	* vcore/unwind_init.cc, vcore/object_catalog.cc,
+	vcore/lazy_print_visitor.cc, vcore/eval.cc, vcore/env.cc: Update
+	to use cppsh.
+
+2003-05-13  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/readlinebuf.hh: Add missing method
 	declarations. Fix copyright notice.
 

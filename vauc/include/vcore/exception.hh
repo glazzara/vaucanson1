@@ -1,5 +1,5 @@
 /***********************
- * <vcore/exception.hh> *
+ * <core/exception.hh> *
  ***********************/
 // $Id$
 
@@ -7,42 +7,21 @@
 #ifndef CORE_EXCEPTION_HH
 #define CORE_EXCEPTION_HH
 
-#include <stdexcept>
-#include <list>
-#include <string>
-#include <utility>
-#include <iostream>
+// import from cppsh
+# include <kern/exception.hh>
 
 namespace vcsn
 {
   namespace vauc
   {
-    class Exception 
-      : public std::exception
-    {
-    public:
-      typedef std::list<std::pair<std::string, std::string> > descr_t;
 
-      Exception(const std::string& Where, const std::string& What);
-
-      void attach(const std::string& Where, const std::string& What);
-
-      const descr_t& description() const;
-
-      ~Exception() throw() ;
-
-      void print(std::ostream& s) const;
-
-    protected:
-      descr_t descr_;
-    };
-
+    using cppsh::Exception;
   }
 }
 
-#define RAISE(Where, What) throw Exception(Where, What)
-#define EXCEPTION(e) vcsn::vauc::Exception& e
-#define ATTACH(e, Where, What) e.attach(Where, What)
-
+#define RAISE(Where, What) cppsh::failwith(Where, Where, What)
+#define EXCEPTION(e) cppsh::Exception& e
+#define ATTACH(e, Where, What) e.add_trace(Where, What)
+#define RETHROW(e) cppsh::rethrow(e)
 
 #endif

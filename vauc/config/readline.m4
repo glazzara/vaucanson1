@@ -31,7 +31,7 @@ AC_DEFUN([AC_WITH_READLINE], [dnl
         LIBS=$old_LIBS
     ])
     if test x"$ac_cv_lib_readline" != xno; then
-       LIBREADLINE="$$ac_cv_lib_readline"
+       LIBREADLINE="$ac_cv_lib_readline"
        AC_DEFINE([HAVE_LIBREADLINE], [1],
 	         [define if you have a readline compatible library])
        AC_CHECK_HEADERS(readline.h readline/readline.h)

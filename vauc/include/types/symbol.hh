@@ -7,35 +7,17 @@
 #ifndef TYPES_SYMBOL_HH
 #define TYPES_SYMBOL_HH
 
-#include <iostream>
-#include <string>
-#include <set>
+// Import from cppsh
+
+#include <kern/symbol.hh>
 
 namespace vcsn
 {
   namespace vauc
   {
-   
-    class Symbol
-    {
-    public:
-      Symbol(const std::string &s);
 
-      Symbol(const char* str);
-
-      Symbol(const Symbol& other);
-
-      Symbol& operator=(const Symbol& other);
-      const std::string& name() const;
-      
-    protected:
-      const std::string* name_;
-    };
-
-
+    using cppsh::Symbol;
   }
 }
-
-#include <types/symbol.hxx>
 
 #endif
