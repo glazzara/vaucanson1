@@ -1,5 +1,12 @@
 2005-02-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/eval.hxx: Fix new overloaded
+	version of eval().
+	* src/tests/automata/algos/product_test.hh: Correct according to
+	Vaucanson Coding Style.
+
+2005-02-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* vcs,
 	* vcs/vaucanson.rb: New. Add VCS configuration file.
 

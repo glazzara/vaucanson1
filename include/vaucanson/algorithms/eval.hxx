@@ -71,7 +71,7 @@ namespace vcsn {
     std::vector<bool>		v1_b(max_hstate_t + 1, false);
     std::vector<semiring_elt_t>	v2(max_hstate_t + 1,
 				   semiring_elt_t (a.series().semiring()));
-    std::vector<bool>		v2_b(max_hstate_t + 1, false);				     
+    std::vector<bool>		v2_b(max_hstate_t + 1, false);
     std::list<hedge_t>		delta_ret;
     const typename semiring_elt_t::set_t &semiring = a.series().semiring();
     semiring_elt_t zero =
@@ -126,7 +126,8 @@ namespace vcsn {
       if (v1_b[i])
       {
 	result += v1[i] * a.get_final(i).get(empty);
-	b_result = true;
+	if (a.is_final(i))
+	  b_result = true;
       }
   }
 

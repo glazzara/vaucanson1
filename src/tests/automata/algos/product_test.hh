@@ -57,7 +57,7 @@ using namespace vcsn::tools;
 
 template <class Auto>
 unsigned product_test(tests::Tester& tg)
-{  
+{
   typedef Auto automaton_t;
   GenRandomAutomata<automaton_t> gen(time(0x0));
   tests::Tester t(tg.verbose());
@@ -93,7 +93,7 @@ unsigned product_test(tests::Tester& tg)
 
       eval(auto_lhs, word_prod, b_eval_lhs);
       eval(auto_rhs, word_prod, b_eval_rhs);
-      if (not b_eval_lhs || not b_eval_rhs)
+      if ((not b_eval_lhs) or (not b_eval_rhs))
 	{
 	  // Print the failing expressions.
 	  generalized_t g_auto_lhs = generalized(auto_lhs);
@@ -122,29 +122,29 @@ unsigned product_test(tests::Tester& tg)
   TEST(t,"Product of automata." + rate_product,
        success_product == nb_test_product_done);
 
-  
+
   // Battery 2.
   const unsigned nb_test    = 30;
   unsigned success_identity = 0;
   unsigned success_null     = 0;
 
-  for (unsigned i = 0 ; i < nb_test; i++) 
+  for (unsigned i = 0 ; i < nb_test; i++)
     {
       automaton_t a = gen.generate(10, 20);
-      
+
       complete_here(a);
-      a = determinize(a);  
+      a = determinize(a);
       automaton_t ac = complement(a);
       automaton_t squared = product(a,a);
 
       if ((squared.states().size() == a.states().size()) &&
 	  (squared.edges().size() == a.edges().size()))
 	success_identity++;
-      
+
       if (trim(product(a, ac)).states().size() == 0)
 	success_null++;
     }
-  
+
   std::string rate_identity;
   std::string rate_null;
   SUCCESS_RATE(rate_identity, success_identity, nb_test);
