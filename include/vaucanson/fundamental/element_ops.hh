@@ -16,7 +16,7 @@ template<typename S1, typename T1, typename S2, typename T2>	\
 static inline							\
 bool operator Op(const vcsn::Element<S1, T1>& e1,	\
 		 const vcsn::Element<S2, T2>& e2)	\
-{ return e1.vslot() Op e2.vslot(); }
+{ return e1.value() Op e2.value(); }
 
     ELEMENT_OPERATOR(==);
     ELEMENT_OPERATOR(!=);

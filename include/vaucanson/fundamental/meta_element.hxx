@@ -18,7 +18,7 @@ namespace vcsn {
 
     template <class Self, class T>
     MetaElement<Structure<Self>, T>::MetaElement(const MetaElement& o) :
-      MetaElementBase<Self, T>(o)
+      SyntacticDecorator<Self, T>(o)
     {}
 
 } // vcsn

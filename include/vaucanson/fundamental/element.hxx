@@ -184,18 +184,6 @@ namespace vcsn {
     return value_.get(); 
   }
 
-  // maintenance (operator helpers)
-  template <class S, class T>
-  const SetSlot<S>& Element<S,T>::sslot() const 
-  { 
-    return set_; 
-  }
-
-  template <class S, class T>
-  const ValueSlot<S, T>& Element<S,T>::vslot() const 
-  { 
-    return value_; 
-  }
 
 } // vcsn
 

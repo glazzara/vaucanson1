@@ -10,34 +10,27 @@
 namespace vcsn
 {
 
-    // Obviously we have a funny situation here:
-    // at any time, for an element, we know both
-    // its base class (MetaElementBase) and the most
-    // derived class (Element). However the intermediary
-    // structures depend on the algebraic structure we consider.
+  // general remark : this file should be called syntactic_decorator.hh
 
-    // and remember: the key of the system is that members of templates
-    // are instanciated only when used.
+    /*-------------------.
+    | SyntacticDecorator |
+    `-------------------*/
+    //! SyntacticDecorator provides the standard operator to Element.
+    //
 
-    /*----------------------.
-    | MetaElementBase<S, T> |
-    `----------------------*/
+    /*! SyntacticDecorator defines all the self-application operators
+      of C++. In fact, this decorator is essential because it is
+      the wrapper of standard operators to Vaucanson op_*. 
+
+    */
 
     template<typename S, typename T> 
-    struct MetaElementBase
+    struct SyntacticDecorator
     {
     
       const S&  set() const;
       T&	value();
       const T&  value() const;
-
-      // Arithmetic operators
-      // --
-      // It could seem strange to see these methods here :
-      // An element is not necessary able to provide such facilities.
-      // However, these operators are here to permit a work around the
-      // problem of ambiguities in case of some operators call.
-      // 
 
       template<typename OtherS, typename U>				 
       Element<S, T>& operator+=(const Element<OtherS, U>& other);	 
@@ -83,19 +76,9 @@ namespace vcsn
 
     protected:
       // this is an abstract class
-      MetaElementBase();
-      MetaElementBase(const MetaElementBase& other);
+      SyntacticDecorator();
+      SyntacticDecorator(const SyntacticDecorator& other);
     };
-
-    /*------------------.
-    | MetaElement<S, T> |
-    `------------------*/
-    // Empty class that has to be specialized for providing meta
-    // information about each couple Element<S, T>.
-    template<typename S, typename T>
-    struct MetaElement
-    {};
-
 
 } // vcsn
 

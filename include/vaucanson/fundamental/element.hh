@@ -17,13 +17,22 @@ namespace vcsn
   /*--------.
   | Element |
   `--------*/
+  //! Element of the set S implemented by T. 
+  /*! 
+    Element is the center of the design pattern used in Vaucanson to
+    have an orthogonal construction of object from two different points of view :
+    - Algebraic/Theorical one from the hierarchies of sets ;
+    - Implementation one ;
+
+    See: MetaElement
+  */
 
   template<typename S, typename T>
   class Element : public MetaElement<S, T>
   {
   public:
-    typedef S	      	set_t;
-    typedef T		value_t;
+    typedef S	      set_t;
+    typedef T	      value_t;
     static const bool dynamic_set    = MetaSet<S>::dynamic_set;
     static const bool dynamic_values = MetaElement<S, T>::dynamic_values;
     static const bool dynamic        = dynamic_set || dynamic_values;
@@ -58,8 +67,8 @@ namespace vcsn
     Element(const S& set, const Element<OtherS, U>& other);
 
     /*-----------.
-      | Assignment |
-      `-----------*/
+    | Assignment |
+    `-----------*/
     Element& operator=(const Element& other);
 
     template<typename U>
@@ -71,38 +80,23 @@ namespace vcsn
     template<typename U>
     Element& operator=(const U& other);
 
-    //       ~Element()
-    //       { /*/ no way to call a destructor here /*/ }
+    /*--------------------------.
+    | Design pattern facilities |
+    `--------------------------*/
+    const S&	set() const;
 
+    void	attach(const S& set);
+    bool	bound() const;
 
-    /*------.
-    | Sugar |
-    `------*/
-
-    void 
-    attach(const S& set);
-
-    const S&
-    set() const;
-
-    bool bound() const;
-
-    T&	value();
-
+    T&		value();
     const T&	value() const;
 
-    T&	operator()();
-      
+    T&		operator()();
     const T&	operator()() const;
 
     operator const T& () const;
 
-    // maintenance (operator helpers)
-    const SetSlot<S>& sslot() const;
-
-    const ValueSlot<S, T>& vslot() const;
-
-  public : 
+  private : 
     SetSlot<S>		set_;
     ValueSlot<S, T>	value_;
   };
