@@ -1,5 +1,13 @@
 2003-12-08  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	  include/vaucanson/algebra/concrete/series/transpose.hxx:
+	    Fix no return warning.
+        * include/vaucanson/algorithms/projection.hxx: Fix unused var.
+	* src/demos/fibonacci/fibonacci.cc: Minor. Fix unused var.
+
+2003-12-08  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/Makefile.am: Add krat_exp_verbalization.*.
 	* src/tests/algebra/series/krat/main/Makefile.am:
 	  Add krat_exp_verbalization_test.hh

@@ -49,18 +49,16 @@ void eval_an_expression(const transducer_pt& t)
   std::string user_string;
 
   do {
-    std::cout << "Enter your expression over {a,b}*: ";
+    std::cout << "Enter your expression over {a,b}* (\"next\", otherwise): ";
     std::cin >> user_string;
     parse(user_string, e);
     usual_automaton_t w = new_automaton(t.series().monoid().alphabet());
     generalized_traits<usual_automaton_t>::automaton_t result(w.set());
     standard_of(w, e.value());
-    // misc::dot_dump(std::cerr, w, "w");
     evaluation(w, t, result);
     krat_exp_print(aut_to_exp(generalized(result)).value());
   } while (user_string != "next");
 }
-
 
 int main()
 {
@@ -81,7 +79,6 @@ int main()
   NumericalSemiring Boole;
   typedef Element<NumericalSemiring, bool> mult_t;
 
-  output_series_pt OSB(Boole, B_star);
   output_series_pt OSA(Boole, A_star);
   tr_bhv_pt OSA_A_star(OSA, A_star);
   tr_pt A_A_transducer(OSA_A_star);

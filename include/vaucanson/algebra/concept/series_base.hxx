@@ -171,6 +171,7 @@ namespace vcsn {
   Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T)) 
   {
     assertion(! "defined.");
+    return Element<S, T>();
   }
 
   template <class S, class T>

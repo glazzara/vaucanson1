@@ -64,9 +64,9 @@ namespace vcsn {
 
     for_each_edge(e, t)
       {
-	hedge_t re = ret.add_serie_edge(m[t.origin_of(*e)], 
-					m[t.aim_of(*e)], 
-					t.output_of(*e));
+	ret.add_serie_edge(m[t.origin_of(*e)], 
+			   m[t.aim_of(*e)], 
+			   t.output_of(*e));
       }
   }
 
