@@ -1,17 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 190)
-(Parent-Version vaucanson 0 189)
-(Version-Log "
-2003-04-11  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(Project-Version vaucanson 0 191)
+(Parent-Version vaucanson 0 190)
+(Version-Log "2003-04-11  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/krat_exp_linearize.hh:
-		Fix missing header inclusion.
-")
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx
+	(op_in_star): Fix a bug.")
 (New-Version-Log "")
-(Checkin-Time "Fri, 11 Apr 2003 16:18:39 +0200")
-(Checkin-Login yann)
+(Checkin-Time "Fri, 11 Apr 2003 17:07:53 +0200")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -93,7 +91,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.130 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.8 600))
@@ -149,7 +147,7 @@
   (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.7 600))
   (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.8 600))
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh (vaucanson/b/32_tropical_s 1.6 600))
-  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.8 600))
+  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.9 600))
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.15 600))
@@ -412,7 +410,7 @@
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 600))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 755))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
