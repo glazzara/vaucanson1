@@ -1,12 +1,21 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 148)
-(Parent-Version vaucanson 0 147)
-(Version-Log "")
+(Project-Version vaucanson 0 149)
+(Parent-Version vaucanson 0 148)
+(Version-Log "
+2003-02-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.149)
+	* configure.ac (VCSN_TESTS): Remove.
+	* src/tests/automata/implementation_check/Makefile.am:
+		Rename 'consistancy' to 'consistency'.
+	* vcsn.m4: New.	
+	* src/tests/bin/generate-test-suite.sh: New.	
+	* src/tests/bin/Makefile.am: Now, use generate-test-suite.sh.
+")
 (New-Version-Log "")
-(Checkin-Time "Wed, 12 Feb 2003 16:41:22 +0100")
-(Checkin-Login max)
+(Checkin-Time "Thu, 13 Feb 2003 08:33:36 +0100")
+(Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -89,8 +98,8 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.89 600))
-  (configure.ac (vaucanson/47_configure. 1.6.1.12 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.90 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.13 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.1 600))
@@ -246,7 +255,7 @@
   (include/vaucanson/automata/concrete/manylinks_states.hh (vaucanson/c/36_manylinks_ 1.6 600))
   ; (include/vaucanson/config/config.hh ())
   (include/vaucanson/config/config.hh.in (vaucanson/g/2_config.hh. 1.4 600))
-  (include/vaucanson/config/extrconf.sh (vaucanson/g/7_extrconf.s 1.5 600))
+  (include/vaucanson/config/extrconf.sh (vaucanson/g/7_extrconf.s 1.5 700))
   ; (include/vaucanson/config/pconf.hh ())
   (include/vaucanson/config/rel_ops_work_around_g++2.hh (vaucanson/f/51_rel_ops_wo 1.3 600))
   (include/vaucanson/config/system.hh (vaucanson/g/1_system.hh 1.4 600))
@@ -301,13 +310,13 @@
   (README (vaucanson/f/48_README 1.7 600))
   (src/demos/fsm/arg.cc (vaucanson/g/39_arg.cc 1.4 600))
   (src/demos/fsm/arg.hh (vaucanson/g/40_arg.hh 1.3 600))
-  (src/demos/fsm/generate_toolbox.sh (vaucanson/g/9_generate_t 1.5 600))
+  (src/demos/fsm/generate_toolbox.sh (vaucanson/g/9_generate_t 1.5 700))
   (src/demos/fsm/README (vaucanson/g/23_README 1.3 600))
   (src/demos/fsm/usual_automaton_t/arg.cc (vaucanson/g/37_arg.cc 1.4 600))
   (src/demos/fsm/usual_automaton_t/arg.hh (vaucanson/g/38_arg.hh 1.3 600))
   (src/demos/fsm/usual_automaton_t/configure.ac (vaucanson/g/22_configure. 1.2 600))
   (src/demos/fsm/usual_automaton_t/Makefile.am (vaucanson/g/21_Makefile.a 1.5 600))
-  (src/demos/fsm/usual_automaton_t/missing (vaucanson/g/17_missing 1.2 600))
+  (src/demos/fsm/usual_automaton_t/missing (vaucanson/g/17_missing 1.2 700))
   (src/demos/fsm/usual_automaton_t/toolbox.hh (vaucanson/g/14_toolbox.hh 1.4 600))
   (src/demos/fsm/usual_automaton_t/vcsn_closure.cc (vaucanson/h/2_vcsn_closu 1.1 600))
   (src/demos/fsm/usual_automaton_t/vcsn_determinize.cc (vaucanson/g/12_vcsn_deter 1.3 600))
@@ -387,10 +396,10 @@
   ; (src/tests/automata/implementation_check/global_consistance_test.hh ())
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.4 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.4 600))
-  (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.12 600))
+  (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.13 600))
   (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
   
-  (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.1 600))
+  (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
@@ -410,7 +419,7 @@
   (src/tests/Makefile.am (vaucanson/b/1_Makefile.a 1.8 600))
   ; (src/tests/Makefile.in ())
   ; (src/tests/sanity/incltest.cc ())
-  (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.1 600))
+  (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.1 700))
   (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.2 600))
   ; (src/tests/tests_stuff.hh ())
   (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 600))
@@ -445,7 +454,7 @@
   
   
   (THANKS (vaucanson/f/36_THANKS 1.5 600))
-  (tools/scandefs.pl (vaucanson/g/5_scandefs.p 1.2 600))
+  (tools/scandefs.pl (vaucanson/g/5_scandefs.p 1.2 700))
   (prj (vaucanson.prj) :symlink)
 
 ;; Files deleted by depopulate at Fri, 06 Dec 2002 16:01:01 +0100,
@@ -565,6 +574,12 @@
 ;; to version 0.145(w), by yann:
 
   (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.1 600))
+
+;; Files added by populate at Thu, 13 Feb 2003 08:30:13 +0100,
+;; to version 0.148(w), by yann:
+
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.1 700))
+  (vcsn.m4 (vaucanson/h/42_vcsn.m4 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

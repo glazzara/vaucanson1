@@ -4,4 +4,4 @@
 # $Id$
 
 
-EXTRA_DIST = automata-test-suite.sh
+EXTRA_DIST = generate-test-suite.sh

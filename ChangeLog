@@ -1,5 +1,14 @@
-2003-02-12  Maxime Rey  <max@lrde.epita.fr>
+2003-02-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.149)
+	* configure.ac (VCSN_TESTS): Remove.
+	* src/tests/automata/implementation_check/Makefile.am:
+		Rename 'consistancy' to 'consistency'.
+	* vcsn.m4: New.	
+	* src/tests/bin/generate-test-suite.sh: New.	
+	* src/tests/bin/Makefile.am: Now, use generate-test-suite.sh.
 
+2003-02-12  Maxime Rey  <max@lrde.epita.fr>
+(0.148)
 	* include/vaucanson/algebra/concept/series_base.hh : 
 	transpose modifications
 	* include/vaucanson/algebra/concept/series_base.hxx :
@@ -12,7 +21,7 @@
 	transpose modifications
 
 2003-01-31  Maxime Rey  <max@lrde.epita.fr>
-
+(0.147)
 	* vaucanson/include/vaucanson/algorithms/complementary.hxx : minor
 	suceed to make check now.
 
