@@ -1,0 +1,187 @@
+// berry_sethi.hxx
+//
+// $Id$
+// Vaucanson, a generic library for finite state machines.
+// Copyright (C) 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+#ifndef VCSN_ALGORITHMS_BERRY_SETHI_HXX
+# define VCSN_ALGORITHMS_BERRY_SETHI_HXX
+
+# include <vaucanson/algorithms/berry_sethi.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/algorithms/standard.hh>
+# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
+# include <vaucanson/algorithms/krat_exp_derivation.hh>
+# include <vaucanson/algorithms/krat_exp_constant_term.hh>
+# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/algorithms/algo_helper.hh>
+# include <vaucanson/algorithms/krat_exp_linearize.hh>
+
+namespace vcsn {
+
+  using namespace algorithm_patterns;
+  
+  // Function used to get the linearized alphabet, with a zero-letter
+  template <typename S, typename T>
+  typename linearize_element<S, T>::alphabet_t
+  linearized_alphabet(const Element<S, T>& exp)
+  {
+    typedef typename linearize_element<S, T>::alphabet_t	alphabet_t;
+    typedef typename linearize_element<S, T>::letter_t		letter_t;
+
+    alphabet_t result = linearize(exp).set().monoid().alphabet();
+    result.insert(letter_t(0, 0));
+    return result;
+  }
+  
+  // A continuation on linearized expressions
+  // That include the case when letter is zero
+  template <typename Exp, typename Letter>
+  Exp
+  linear_exp_continuation(const Exp& exp, const Letter& l)
+  {
+    typedef typename Exp::set_t::monoid_t::alphabet_t	alphabet_t;
+    typedef typename alphabet_t::iterator		iterator;
+    typedef typename Exp::value_t			value_t;
+
+    if (l == Letter(0,0))
+      return exp;
+    
+    alphabet_t	alpha = exp.set().monoid().alphabet();
+    Exp		tmp = derivate(exp, l).first;
+    Exp		zero = exp.set().zero(SELECT(value_t));
+
+    if (tmp != zero)
+      return tmp;
+    for (iterator i = alpha.begin(); i != alpha.end(); ++i)
+      if (*i != l)
+      {
+	tmp = derivate(exp, *i).first;
+	if (tmp != zero && tmp != exp)
+	{
+	  tmp = linear_exp_continuation(tmp, l);
+	  if (tmp != zero)
+	    return tmp;
+	}
+      }
+    return tmp;
+  }
+  
+  // The Berry-Sethi algorithm.
+  // It is derivated from MathAutomataConstructor because we want to use
+  // the mathematical definition of the Berry-Sethi automaton.
+  //
+  // It precises the constructor to give a correct set to
+  // MathAutomataConstructor constructor.
+  // It also precises is_initial and is_final for a labeled state,
+  // and delta function.
+  //
+  // FIXME: - change the zero-letter
+  //        - check efficience
+  //        - check result of derivation
+  template <typename T_auto, typename S, typename T>
+  struct BerrySethiAlgo : public MathAutomataConstructor <
+    BerrySethiAlgo<T_auto, S, T>,
+    T_auto,
+    typename linearize_element<S, T>::letter_t >
+  {
+  public:
+    // Type of argument of constructor
+    typedef
+    Element<S, T>					exp_t;
+    // Types from linearize_element
+    typedef typename
+    linearize_element<S, T>::element_t			linear_exp_t;
+    typedef typename
+    linearize_element<S, T>::alphabet_t			linear_alphabet_t;
+    typedef typename
+    linearize_element<S, T>::letter_t			etiq_t;
+    // Common types
+    AUTOMATON_TYPES(T_auto);
+
+    // The constructor, which ask to initial_state() for set of states.
+    //
+    // It uses linear_alphabet_t as container, because there is no
+    // restriction on MathAutomataConstructor argument.
+    BerrySethiAlgo(const series_t& series, const exp_t& exp):
+      MathAutomataConstructor <BerrySethiAlgo, T_auto, etiq_t>
+        (series, linearized_alphabet(exp)),
+      linear_exp(linearize(exp)),
+      linear_alpha(linear_exp.set().monoid().alphabet())
+    {
+      linear_alpha.insert(etiq_t(0, 0));
+    }
+
+    // Functions to know if a state is final or initial
+    bool is_initial(const etiq_t& e) const
+    {
+      return (e == etiq_t(0, 0));
+    }
+
+    bool is_final(const etiq_t& e) const
+    {
+      return constant_term(linear_exp_continuation(linear_exp, e)).first;
+    }
+
+    // Delta function
+    // It may return any kind of container
+    std::set<etiq_t>	delta(const etiq_t& e, const letter_t& l)
+    {
+      typedef typename linear_alphabet_t::iterator	iterator;
+      std::set<etiq_t>	result;
+      linear_exp_t	continuation_e = linear_exp_continuation(linear_exp, e);
+
+      for (iterator i = linear_alpha.begin(); i != linear_alpha.end(); ++i)
+	if ((i->first == l) && (derivation(continuation_e, *i) 
+	                        == linear_exp_continuation(linear_exp, *i)))
+	  result.insert(*i);
+      return result;
+    }
+
+  private:
+    // Derivation including zero
+    linear_exp_t	derivation(const linear_exp_t& exp, const etiq_t& e)
+    {
+      if (e == etiq_t(0, 0))
+	return exp;
+      else
+	return derivate(exp, e).first;
+    }
+    // The initial expression linearized
+    linear_exp_t	linear_exp;
+    linear_alphabet_t	linear_alpha;
+  };
+  
+  template<typename T_auto, typename S, typename T>
+  T_auto*	do_berry_sethi(const T_auto& out, const Element<S, T>& kexp)
+  {
+    BerrySethiAlgo<T_auto, S, T> berrysethi_algo(out.series(), kexp);
+    berrysethi_algo.run();
+    return berrysethi_algo.get();
+  }
+
+  // The function called by <<user>>
+  template<typename A, typename T, typename Exp>
+  void	berry_sethi(Element<A, T>& out, const Exp& kexp)
+  {
+    out = *do_berry_sethi(out, kexp);
+  }
+
+} // vcsn
+
+#endif // VCSN_ALGORITHMS_BERRY_SETHI_HXX

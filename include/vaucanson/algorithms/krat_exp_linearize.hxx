@@ -21,6 +21,7 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HXX
 # define VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HXX
 
+// LINEAR_INDEX_START must be != 0
 # define LINEAR_INDEX_START	1
 
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
@@ -29,8 +30,6 @@
 namespace vcsn {
 
   // The Matcher building the linearized expression
-  // FIXME: The alphabet should not be good, but it cannot be tested:
-  // the alphabet returned is strangely empty
   template <class Series, class T, class Dispatch>
   struct KRatExpLinearize : algebra::KRatExpMatcher<
     KRatExpLinearize<Series, T, Dispatch>,
@@ -110,9 +109,7 @@ namespace vcsn {
 	index_++;
       }
       // Transform it in the good type
-      return_type	s(l_serie_);
-      s = l_monoid_elt_t(res);
-      return s;
+      return return_type(l_serie_, res);
     }
     END
 
@@ -138,7 +135,6 @@ namespace vcsn {
   typename linearize_element<Series, T>::element_t
   linearize(const Element<Series, T>& exp)
   {
-    typename linearize_element<Series, T>::element_t tmp;
     KRatExpLinearize<Series, T, algebra::DispatchFunction<T> >
       matcher(exp);
     return matcher.match(exp);

@@ -30,36 +30,58 @@ namespace vcsn {
   namespace algorithm_patterns
   {
 
+    // This is the structure given to the map, which will
+    // call the appropriate function
+    template <typename Self, typename Etiq>
+    struct Comparator
+    {
+      bool operator()(const Etiq& e1, const Etiq& e2) const;
+    };
+
+    /*-----------------------.
+    | IncAutomataConstructor |
+    `-----------------------*/
+
     // This is a pattern for algorithm which build automaton in
     // an incremental way :
-    // it start with one state, and with this state, it build
+    // it starts with one state, and with this state, it builds
     // other states. New states are used to build more and
     // more states.
     // It needs the function applied on each state,
-    // and the order used by the map.
-    template <typename T_auto, typename Etiq, typename T>
-    class IncAutomataConstructor : public T
+    // and the order used by the map (a default one can be used).
+    template <typename Self, typename T_auto, typename Etiq>
+    class IncAutomataConstructor
     {
     public:
       // Useful types :))
       typedef T_auto*						T_auto_p;
       AUTOMATON_TYPES(T_auto);
-      // Types for the list -> used a hash_map with function defined in T
-      typedef std::pair<hstate_t, bool>				StateMarked;
-      typedef std::map<Etiq, StateMarked, T>			StateMap;
+      // Types for the list
+      // It uses a map with an ordered function which can be
+      // redefined in Self
+      typedef
+      std::pair<hstate_t, bool>					StateMarked;
+      typedef
+      std::map<Etiq, StateMarked, Comparator<Self, Etiq> >	StateMap;
       typedef typename StateMap::iterator			iterator;
 
-      // The constructor
-      IncAutomataConstructor(const series_t& series, const Etiq& etiq);
       // To run the algorithm
       void	run();
       // To get the result
       T_auto_p	get() const;
+      // The function which will compare 2 Etiq
+      // User may redefine it !
+      static bool compare(const Etiq& e1, const Etiq& e2);
+    protected:
+      // The constructor (protected in order to not instance the class)
+      IncAutomataConstructor(const series_t& series, const Etiq& etiq);
       // Add a link from current state to indicated state
       void	link_to(const Etiq& etiq, const letter_t& l);
       // To make the current state final
       void	set_final();
-    protected:
+    private:
+      // Function to apply on each state (call on_state function)
+      void on_state_caller(const Etiq& e);
       // Method to add properly a state
       hstate_t	add_state(const Etiq& etiq);
       // Attributes
@@ -69,16 +91,50 @@ namespace vcsn {
       iterator				current_state;
     };
 
-    template <typename T_auto, typename Etiq, typename T>
-    class MathAutomataConstructor : public T
+    /*------------------------.
+    | MathAutomataConstructor |
+    `------------------------*/
+ 
+    // This  Algorithm builder takes a struture
+    // which contains different functions (like IncAutomataConstructor)
+    // but the functions needed are mathematical definitions
+    // of the automaton, i.e. :
+    // function which return the set of final state,
+    // etc.
+    template <typename Self, typename T_auto, typename Etiq>
+    class MathAutomataConstructor
     {
-      // FIXME : Write it !
-      // This  Algorithm builder takes a struture
-      // which contains different functions (like IncAutomataConstructor)
-      // but the functions needed are mathematical definitions
-      // of the automaton, i.e. :
-      // function which return the set of final state,
-      // etc.
+    public:
+      // Types used. The map make link between Etiq and hstate_t.
+      AUTOMATON_TYPES(T_auto);
+      typedef T_auto*						T_auto_p;
+      typedef std::map<Etiq, hstate_t, Comparator<Self, Etiq> >	StateMap;
+      typedef typename StateMap::iterator			iterator;
+
+      // To run the algorithm and build the entire automaton
+      void	run();
+      // To get the result
+      T_auto_p	get() const;
+      // The function which will compare 2 Etiq
+      // User may redefine it !
+      static bool compare(const Etiq& e1, const Etiq& e2);
+    protected:
+      // The constructor
+      template <typename Container>
+      MathAutomataConstructor(const series_t& series,
+			      const Container container);
+    private:
+      // Function which will call those which are defined by user
+      bool is_initial_caller(const Etiq& e) const;
+      bool is_final_caller(const Etiq& e) const;
+      // Function which will link a state to a set of states
+      template <typename Container>
+      void link_to(const hstate_t& state,
+		   const letter_t& letter,
+		   const Container container);
+      // Attributes
+      T_auto_p				auto_p;
+      StateMap				states_map;
     };
 
   }

@@ -80,10 +80,15 @@ namespace vcsn {
     : s_(other.s_)
   {}
 
+  // The object given by reference may be NULL,
+  // so its adress must be checked.
+  // If its adress is good, we must copy it in the heap, because
+  // it could be a local set (build on the stack).
   template <class S>  
   SetSlotAttribute<S, true>::SetSlotAttribute(const S& other) 
-    : s_(&other) 
-  {}
+  {
+    s_ = &other ? new S(other) : NULL;
+  }
 
   template <class S> 
   const S& SetSlotAttribute<S, true>::get() const

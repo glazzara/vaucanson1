@@ -399,11 +399,11 @@ namespace vcsn {
     | foreign constructors |
     `---------------------*/
 
-  template<typename Tm, typename Tw, typename M, typename W>
+  template<typename Tm, typename Tw, typename M, typename W, typename S>
   inline
   rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>), 
 			      SELECTOR2(Series<M, W>),
-			      const std::string& m_value)
+			      const std::basic_string<S>& m_value)
   { 
     return new rat::Constant<Tm, Tw>(m_value); 
   }

@@ -41,6 +41,9 @@ namespace vcsn {
     value_(op_default(SELECT(S), SELECT(T)))
   {}
     
+  // For the two next constructors, the constructor of the SetSlotAttribute
+  // used is SetSlotAttribute(const SetSlotAttribute& other)
+  // because only the pointer must be copied !
   template <class S, class T>
   Element<S,T>::Element(const Element& other) :
     MetaElement<S, T>(other),
@@ -51,7 +54,7 @@ namespace vcsn {
   template <class S, class T>
   template<typename U>
   Element<S,T>::Element(const Element<S, U>& other)
-    : set_(other.set()),
+    : set_(other.set_),
       value_(op_convert(SELECT(T), SELECT(S), other.value()))
   {}
     
@@ -76,6 +79,11 @@ namespace vcsn {
       value_(op_convert(SELECT(T), SELECT(S), other))
   {}
     
+  // For the following calls of constructor of SetSlotAttribute,
+  // entire object must be copied (not only pointer).
+  // So the construcor called is :
+  // template <class S>  
+  // SetSlotAttribute<S, true>::SetSlotAttribute(const S& other)
   template <class S, class T>
   Element<S,T>::Element(const S& set)
     : set_(set),

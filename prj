@@ -1,18 +1,28 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 186)
-(Parent-Version vaucanson 0 185)
-(Version-Log "Index: ChangeLog
-from  Raphaël Poss  <raph@lrde.epita.fr>
+(Project-Version vaucanson 0 187)
+(Parent-Version vaucanson 0 186)
+(Version-Log "2003-04-10  Loic Fosse  <fosse_l@lrde.epita.fr>
 
-        * bootstrap.sh: Simplify.
-        * Makefile.am (ACLOCAL_AMFLAGS, CONFIGURE_DEPENDENCIES): Add.
-
-")
+        * include/vaucanson/algebra/concrete/series/krat.hxx: Fix minor bug.
+        * include/vaucanson/fundamental/element.hxx: Fix a bug in a constructor,
+        which called a wrong SetSlotAttribute constructor. 
+        * include/vaucanson/fundamental/slots.hxx: Change a contructor in order
+        to copy the pointed object instead of the pointer.
+        * include/vaucanson/algorithms/brzozowski.hxx: Change algorithm to match
+        the new pattern.
+        * include/vaucanson/algorithms/algo_helper.hxx: Transfrom an old pattern
+        and add a new one.
+        * include/vaucanson/algorithms/algo_helper.hh: Transform an old pattern
+        and add a new one.
+        * include/vaucanson/algorithms/krat_exp_linearize.hxx: Correct some
+        bugs.
+        * include/vaucanson/algorithms/berry_sethi.hxx: Add.
+        * include/vaucanson/algorithms/berry_sethi.hh: Add.")
 (New-Version-Log "")
-(Checkin-Time "Mon, 07 Apr 2003 11:05:24 +0200")
-(Checkin-Login raph)
+(Checkin-Time "Thu, 10 Apr 2003 17:57:03 +0200")
+(Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -94,7 +104,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.126 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.127 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.8 600))
@@ -154,7 +164,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.15 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.14 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.15 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.2 600))
@@ -265,7 +275,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/fundamental/default_ops.hh (vaucanson/25_default_op 1.9 600))
   (include/vaucanson/fundamental/default_ops.hxx (vaucanson/24_default_op 1.8 600))
   (include/vaucanson/fundamental/element.hh (vaucanson/7_element.hh 1.11 600))
-  (include/vaucanson/fundamental/element.hxx (vaucanson/6_element.hx 1.9 600))
+  (include/vaucanson/fundamental/element.hxx (vaucanson/6_element.hx 1.10 600))
   (include/vaucanson/fundamental/element_base.hh (vaucanson/9_element_ba 1.11 600))
   (include/vaucanson/fundamental/element_base.hxx (vaucanson/8_element_ba 1.8 600))
   (include/vaucanson/fundamental/element_ops.hh (vaucanson/5_element_op 1.12 600))
@@ -277,7 +287,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/fundamental/op_traits.hh (vaucanson/3_op_traits. 1.8 600))
   (include/vaucanson/fundamental/predefs.hh (vaucanson/10_predefs.hh 1.5 600))
   (include/vaucanson/fundamental/slots.hh (vaucanson/2_slots.hh 1.8 600))
-  (include/vaucanson/fundamental/slots.hxx (vaucanson/1_slots.hxx 1.5 600))
+  (include/vaucanson/fundamental/slots.hxx (vaucanson/1_slots.hxx 1.6 600))
   (include/vaucanson/fundamental/structure.hh (vaucanson/23_structure. 1.9 600))
   (include/vaucanson/fundamental/structure.hxx (vaucanson/22_structure. 1.5 600))
   (include/vaucanson/internal/traits.hh (vaucanson/19_traits.hh 1.5 600))
@@ -498,12 +508,12 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Wed, 19 Mar 2003 17:37:42 +0100,
 ;; to version 0.177(w), by fosse_l:
 
-  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.2 600))
+  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.3 600))
   (include/vaucanson/algorithms/brzozowski.hh (vaucanson/j/29_brzozowski 1.1 600))
   (include/vaucanson/algorithms/aci_canonical.hxx (vaucanson/j/30_aci_canoni 1.2 600))
   (include/vaucanson/algorithms/aci_canonical.hh (vaucanson/j/31_aci_canoni 1.1 600))
-  (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.2 600))
-  (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.2 600))
+  (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.3 600))
+  (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.3 600))
 
 ;; Files deleted by depopulate at Tue, 25 Mar 2003 13:17:35 +0100,
 ;; from version 0.180(w), by clavei_t:
@@ -556,7 +566,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
   (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.1 600))
   (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.2 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.1 600))
 
 ;; Files deleted by populate at Thu, 03 Apr 2003 18:12:09 +0200,
@@ -598,38 +608,38 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Thu, 03 Apr 2003 18:13:09 +0200,
 ;; to version 0.184(w), by max:
 
-  (mical/src/k_ri.cc (vaucanson/j/49_k_ri.cc 1.1 644))
-  (mical/src/k_tssi.cc (vaucanson/j/50_k_tssi.cc 1.1 644))
-  (mical/src/k_deterministic.cc (vaucanson/j/51_k_determin 1.1 644))
-  (mical/src/is_structurally_complete.cc (vaucanson/k/0_is_structu 1.1 644))
-  (mical/src/get_structcomp_sample.cc (vaucanson/k/1_get_struct 1.1 644))
+  (mical/src/k_ri.cc (vaucanson/j/49_k_ri.cc 1.1 600))
+  (mical/src/k_tssi.cc (vaucanson/j/50_k_tssi.cc 1.1 600))
+  (mical/src/k_deterministic.cc (vaucanson/j/51_k_determin 1.1 600))
+  (mical/src/is_structurally_complete.cc (vaucanson/k/0_is_structu 1.1 600))
+  (mical/src/get_structcomp_sample.cc (vaucanson/k/1_get_struct 1.1 600))
   (mical/src/make_mca.cc (vaucanson/k/2_make_mca.c 1.1 600))
   (mical/src/is_not_compatible.cc (vaucanson/k/3_is_not_com 1.1 600))
   (mical/src/fusion.cc (vaucanson/k/4_fusion.cc 1.1 600))
   (mical/src/bs.cc (vaucanson/k/5_bs.cc 1.1 600))
   (mical/src/training/vtrain.toy (vaucanson/k/6_vtrain.toy 1.1 600))
-  (mical/include/internal/k_window.hxx (vaucanson/k/7_k_window.h 1.1 644))
-  (mical/include/internal/k_window.hh (vaucanson/k/8_k_window.h 1.1 644))
-  (mical/include/misc/traits.hh (vaucanson/k/9_traits.hh 1.1 644))
-  (mical/include/fundamental/default_ops.hh (vaucanson/k/10_default_op 1.1 644))
-  (mical/include/fundamental/meta_set.hh (vaucanson/k/11_meta_set.h 1.1 644))
-  (mical/include/fundamental/mix.hh (vaucanson/k/12_mix.hh 1.1 644))
-  (mical/include/tools/predefs.hh (vaucanson/k/13_predefs.hh 1.1 644))
+  (mical/include/internal/k_window.hxx (vaucanson/k/7_k_window.h 1.1 600))
+  (mical/include/internal/k_window.hh (vaucanson/k/8_k_window.h 1.1 600))
+  (mical/include/misc/traits.hh (vaucanson/k/9_traits.hh 1.1 600))
+  (mical/include/fundamental/default_ops.hh (vaucanson/k/10_default_op 1.1 600))
+  (mical/include/fundamental/meta_set.hh (vaucanson/k/11_meta_set.h 1.1 600))
+  (mical/include/fundamental/mix.hh (vaucanson/k/12_mix.hh 1.1 600))
+  (mical/include/tools/predefs.hh (vaucanson/k/13_predefs.hh 1.1 600))
   (mical/include/tools/load_sample.hxx (vaucanson/k/14_load_sampl 1.1 600))
   (mical/include/tools/load_sample.hh (vaucanson/k/15_load_sampl 1.1 600))
-  (mical/include/algorithms/is_kreversible.hxx (vaucanson/k/16_is_krevers 1.1 644))
-  (mical/include/algorithms/is_kreversible.hh (vaucanson/k/17_is_krevers 1.1 644))
-  (mical/include/algorithms/is_kdeterministic.hxx (vaucanson/k/18_is_kdeterm 1.1 644))
-  (mical/include/algorithms/is_kdeterministic.hh (vaucanson/k/19_is_kdeterm 1.1 644))
-  (mical/include/algorithms/k_ri.hxx (vaucanson/k/20_k_ri.hxx 1.1 644))
-  (mical/include/algorithms/k_ri.hh (vaucanson/k/21_k_ri.hh 1.1 644))
-  (mical/include/algorithms/k_tssi.hxx (vaucanson/k/22_k_tssi.hxx 1.1 644))
-  (mical/include/algorithms/get_structcomp_sample.hxx (vaucanson/k/23_get_struct 1.1 644))
-  (mical/include/algorithms/get_structcomp_sample.hh (vaucanson/k/24_get_struct 1.1 644))
-  (mical/include/algorithms/mggi.hxx (vaucanson/k/25_mggi.hxx 1.1 644))
-  (mical/include/algorithms/rig2.hh (vaucanson/k/26_rig2.hh 1.1 644))
-  (mical/include/algorithms/mggi.hh (vaucanson/k/27_mggi.hh 1.1 644))
-  (mical/include/algorithms/k_tssi.hh (vaucanson/k/28_k_tssi.hh 1.1 644))
+  (mical/include/algorithms/is_kreversible.hxx (vaucanson/k/16_is_krevers 1.1 600))
+  (mical/include/algorithms/is_kreversible.hh (vaucanson/k/17_is_krevers 1.1 600))
+  (mical/include/algorithms/is_kdeterministic.hxx (vaucanson/k/18_is_kdeterm 1.1 600))
+  (mical/include/algorithms/is_kdeterministic.hh (vaucanson/k/19_is_kdeterm 1.1 600))
+  (mical/include/algorithms/k_ri.hxx (vaucanson/k/20_k_ri.hxx 1.1 600))
+  (mical/include/algorithms/k_ri.hh (vaucanson/k/21_k_ri.hh 1.1 600))
+  (mical/include/algorithms/k_tssi.hxx (vaucanson/k/22_k_tssi.hxx 1.1 600))
+  (mical/include/algorithms/get_structcomp_sample.hxx (vaucanson/k/23_get_struct 1.1 600))
+  (mical/include/algorithms/get_structcomp_sample.hh (vaucanson/k/24_get_struct 1.1 600))
+  (mical/include/algorithms/mggi.hxx (vaucanson/k/25_mggi.hxx 1.1 600))
+  (mical/include/algorithms/rig2.hh (vaucanson/k/26_rig2.hh 1.1 600))
+  (mical/include/algorithms/mggi.hh (vaucanson/k/27_mggi.hh 1.1 600))
+  (mical/include/algorithms/k_tssi.hh (vaucanson/k/28_k_tssi.hh 1.1 600))
   (mical/include/algorithms/rig.hxx (vaucanson/k/29_rig.hxx 1.1 600))
   (mical/include/algorithms/rig.hh (vaucanson/k/30_rig.hh 1.1 600))
   (mical/include/algorithms/make_pta.hxx (vaucanson/k/31_make_pta.h 1.1 600))
@@ -642,27 +652,33 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (mical/include/algorithms/is_not_compatible.hh (vaucanson/k/38_is_not_com 1.1 600))
   (mical/include/algorithms/fusion.hxx (vaucanson/k/39_fusion.hxx 1.1 600))
   (mical/include/algorithms/fusion.hh (vaucanson/k/40_fusion.hh 1.1 600))
-  (mical/include/algebra/concrete/k_words.hxx (vaucanson/k/41_k_words.hx 1.1 644))
-  (mical/include/algebra/concrete/k_words.hh (vaucanson/k/42_k_words.hh 1.1 644))
-  (mical/include/algebra/concrete/complete_lattice.hxx (vaucanson/k/43_complete_l 1.1 644))
-  (mical/include/algebra/concrete/complete_lattice.hh (vaucanson/k/44_complete_l 1.1 644))
+  (mical/include/algebra/concrete/k_words.hxx (vaucanson/k/41_k_words.hx 1.1 600))
+  (mical/include/algebra/concrete/k_words.hh (vaucanson/k/42_k_words.hh 1.1 600))
+  (mical/include/algebra/concrete/complete_lattice.hxx (vaucanson/k/43_complete_l 1.1 600))
+  (mical/include/algebra/concrete/complete_lattice.hh (vaucanson/k/44_complete_l 1.1 600))
   (mical/include/algebra/concrete/ordered_set.hxx (vaucanson/k/45_ordered_se 1.1 600))
   (mical/include/algebra/concrete/ordered_set.hh (vaucanson/k/46_ordered_se 1.1 600))
   (mical/include/algebra/concrete/lattice.hxx (vaucanson/k/47_lattice.hx 1.1 600))
   (mical/include/algebra/concrete/lattice.hh (vaucanson/k/48_lattice.hh 1.1 600))
   (mical/include/algebra/concrete/complemented_lattice.hxx (vaucanson/k/49_complement 1.1 600))
   (mical/include/algebra/concrete/complemented_lattice.hh (vaucanson/k/50_complement 1.1 600))
-  (mical/include/algebra/concept/k_monoid_base.hxx (vaucanson/k/51_k_monoid_b 1.1 644))
-  (mical/include/algebra/concept/k_monoid_base.hh (vaucanson/l/0_k_monoid_b 1.1 644))
-  (mical/include/algebra/concept/mix_base.hh (vaucanson/l/1_mix_base.h 1.1 644))
-  (mical/include/algebra/concept/complete_lattice_base.hh (vaucanson/l/2_complete_l 1.1 644))
-  (mical/include/algebra/concept/complete_lattice_base.hxx (vaucanson/l/3_complete_l 1.1 644))
+  (mical/include/algebra/concept/k_monoid_base.hxx (vaucanson/k/51_k_monoid_b 1.1 600))
+  (mical/include/algebra/concept/k_monoid_base.hh (vaucanson/l/0_k_monoid_b 1.1 600))
+  (mical/include/algebra/concept/mix_base.hh (vaucanson/l/1_mix_base.h 1.1 600))
+  (mical/include/algebra/concept/complete_lattice_base.hh (vaucanson/l/2_complete_l 1.1 600))
+  (mical/include/algebra/concept/complete_lattice_base.hxx (vaucanson/l/3_complete_l 1.1 600))
   (mical/include/algebra/concept/ordered_set_base.hxx (vaucanson/l/4_ordered_se 1.1 600))
   (mical/include/algebra/concept/ordered_set_base.hh (vaucanson/l/5_ordered_se 1.1 600))
   (mical/include/algebra/concept/lattice_base.hxx (vaucanson/l/6_lattice_ba 1.1 600))
   (mical/include/algebra/concept/lattice_base.hh (vaucanson/l/7_lattice_ba 1.1 600))
   (mical/include/algebra/concept/complemented_lattice_base.hxx (vaucanson/l/8_complement 1.1 600))
   (mical/include/algebra/concept/complemented_lattice_base.hh (vaucanson/l/9_complement 1.1 600))
+
+;; Files added by populate at Thu, 10 Apr 2003 17:44:39 +0200,
+;; to version 0.186(w), by fosse_l:
+
+  (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.1 600))
+  (include/vaucanson/algorithms/berry_sethi.hh (vaucanson/l/11_berry_seth 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

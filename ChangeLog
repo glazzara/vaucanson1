@@ -1,3 +1,21 @@
+2003-04-10  Loic Fosse  <fosse_l@lrde.epita.fr>
+
+        * include/vaucanson/algebra/concrete/series/krat.hxx: Fix minor bug.
+        * include/vaucanson/fundamental/element.hxx: Fix a bug in a constructor,
+        which called a wrong SetSlotAttribute constructor. 
+        * include/vaucanson/fundamental/slots.hxx: Change a contructor in order
+        to copy the pointed object instead of the pointer.
+        * include/vaucanson/algorithms/brzozowski.hxx: Change algorithm to match
+        the new pattern.
+        * include/vaucanson/algorithms/algo_helper.hxx: Transfrom an old pattern
+        and add a new one.
+        * include/vaucanson/algorithms/algo_helper.hh: Transform an old pattern
+        and add a new one.
+        * include/vaucanson/algorithms/krat_exp_linearize.hxx: Correct some
+        bugs.
+        * include/vaucanson/algorithms/berry_sethi.hxx: Add.
+        * include/vaucanson/algorithms/berry_sethi.hh: Add.
+
 2003-04-07  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* bootstrap.sh: Simplify.

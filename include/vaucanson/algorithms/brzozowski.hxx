@@ -36,39 +36,47 @@ namespace vcsn {
 
   using namespace algorithm_patterns;
   
-  // The functions which is needed by the algorithm constructor
-  struct BrzozowskiFuns
+  // The brzozowski algorithm : it is derivated from IncAutomataConstructor
+  // because it's an incremental algorithm.
+  // It gives the function which must be applied on each state,
+  // and may give the ordered function
+  template <typename T_auto, typename Exp>
+  struct BrzozowskiAlgo : public IncAutomataConstructor <
+    BrzozowskiAlgo<T_auto, Exp>,
+    T_auto,
+    Exp >  
   {
-    // FIXME : optimize the on_state function
-    
+    // Types used for the constructor
+    AUTOMATON_TYPES(T_auto);
+    // The constructor : only call the constructor of the base class
+    BrzozowskiAlgo(const series_t& series, const Exp& exp):
+      IncAutomataConstructor<BrzozowskiAlgo, T_auto, Exp>(series, exp)
+    {}
+
     // The function applied on each state
-    template <typename T_auto, typename Exp, typename T>
-    void on_state(IncAutomataConstructor<T_auto, Exp, T>& a, const Exp& e)
+    // FIXME : optimize it !
+    void on_state(const Exp& e)
     {
       AUTOMATON_TYPES(T_auto);
       
-      alphabet_t alpha = a.get()->series().monoid().alphabet();
+      alphabet_t alpha = get()->series().monoid().alphabet();
       if (constant_term(e).first)
-	a.set_final();
+	set_final();
       for (alphabet_iterator i = alpha.begin(); i != alpha.end(); ++i)
-	a.link_to(canonical(derivate(e, *i).first), *i);
+	link_to(canonical(derivate(e, *i).first), *i);
     }
 
-    // The ordered relation which is used by the map.
-    template <typename Exp>
-    bool operator()(const Exp& e1, const Exp& e2) const
-    {
-      return e1 < e2;
-    }
+    // We take the default ordered function,
+    // so we do not redefine it.
+
   };
 
   template<typename T_auto, typename Exp>
   T_auto*	do_brzozowski(const T_auto& out, const Exp &kexp)
   {
-    IncAutomataConstructor<T_auto, Exp, BrzozowskiFuns>
-      BrzozowskiAlgo(out.series(), canonical(kexp));
-    BrzozowskiAlgo.run();
-    return BrzozowskiAlgo.get();
+    BrzozowskiAlgo<T_auto, Exp> brzozowski_algo(out.series(), canonical(kexp));
+    brzozowski_algo.run();
+    return brzozowski_algo.get();
   }
 
   // The function called by <<user>>
