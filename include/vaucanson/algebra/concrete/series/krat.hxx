@@ -482,7 +482,7 @@ namespace vcsn {
       return rat::exp<Tm, Tw>::zero();
     rat::exp<Tm, Tw> ret = rat::exp<Tm, Tw>::one();
     ret.base() = new rat::LeftWeighted<Tm, Tw>
-      (op_convert(SELECT(Tw), SELECT(W), 
+      (op_convert(SELECT(W), SELECT(Tw), 
 		  w_value), ret.base());
     return ret;
   }
@@ -510,7 +510,7 @@ namespace vcsn {
 		 const oTw& src)
   {
     dst = op_convert
-      (SELECT2(rat::exp<Tm, Tw>), SELECT2(algebra::Series<W, M>), SELECT(W), src);
+      (SELECT2(algebra::Series<W, M>), SELECT2(rat::exp<Tm, Tw>), SELECT(W), src);
   }
 
   /*-----.
@@ -561,8 +561,8 @@ namespace vcsn {
 		 rat::exp<Tm, Tw>& dst,
 		 const oTm& src)
   { 
-    op_in_add(s, dst, op_convert(SELECT2(rat::exp<Tm, Tw>), 
-				 SELECT2(algebra::Series<W, M>),
+    op_in_add(s, dst, op_convert(SELECT2(algebra::Series<W, M>),
+				 SELECT2(rat::exp<Tm, Tw>),
 				 SELECT(M),
 				 src));
   }
@@ -603,8 +603,8 @@ namespace vcsn {
 		 const oTw& src)
   { 
     // assert(s.weights() == weights);
-    op_in_add(s, dst, op_convert(SELECT2(rat::exp<Tm, Tw>), 
-				 SELECT2(algebra::Series<W, M>),
+    op_in_add(s, dst, op_convert(SELECT2(algebra::Series<W, M>),
+				 SELECT2(rat::exp<Tm, Tw>),
 				 SELECT(W),
 				 src));
   }
@@ -825,10 +825,10 @@ namespace vcsn {
 		     const oTw& w)
   { 
     rat::exp<Tm, Tw> ret = 
-      rat::exp<Tm, Tw>::constant(op_convert(SELECT(Tm), SELECT(M), 
+      rat::exp<Tm, Tw>::constant(op_convert(SELECT(M), SELECT(Tm), 
 					    m));
     ret.base() = new rat::LeftWeighted<Tm, Tw>
-      (op_convert(SELECT(Tw), SELECT(W), 
+      (op_convert(SELECT(W), SELECT(Tw), 
 		  w), ret.base());
     op_in_add(s, p, ret);
   }

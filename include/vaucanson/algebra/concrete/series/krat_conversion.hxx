@@ -84,8 +84,8 @@ namespace vcsn {
     {
       node_->accept(*this);
       exp_ = op_mul(series_.weights(), series_, 
-		    op_convert(SELECT(Tw),
-			       SELECT(typename Series_::weights_t),
+		    op_convert(SELECT(typename Series_::weights_t),
+			       SELECT(Tw),
 			       w),
 		    exp_);
     }
@@ -98,8 +98,8 @@ namespace vcsn {
     {
       node_->accept(*this);
       op_in_mul(series_, series_.weights(), exp_, 
-		op_convert(SELECT(Tw), 
-			   SELECT(typename Series_::weights_t),
+		op_convert(SELECT(typename Series_::weights_t),
+			   SELECT(Tw),
 			   w));
     }
     
@@ -108,8 +108,8 @@ namespace vcsn {
      void 
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::constant(const oTm& m_)
     {
-      Tm m = op_convert(SELECT(Tm),
-			SELECT(typename Series_::monoid_t),
+      Tm m = op_convert(SELECT(typename Series_::monoid_t),
+			SELECT(Tm),
 			m_);
       if (m == identity_value(SELECT(typename Series_::monoid_t),
 			      SELECT(Tm)))

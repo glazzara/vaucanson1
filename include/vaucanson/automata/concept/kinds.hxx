@@ -34,9 +34,9 @@ namespace vcsn {
   ls_delta_letter_query<Series, MonoidElt, Weight, L>::
   ls_delta_letter_query(const Series& s, const L& l)
     : s_(s), 
-      l_(op_convert(SELECT(typename MonoidElt::value_t),
-			     SELECT(typename MonoidElt::set_t),
-			     l))
+      l_(op_convert(SELECT(typename MonoidElt::set_t),
+		    SELECT(typename MonoidElt::value_t),
+		    l))
   {}
   
   template<typename Series, typename MonoidElt, typename Weight, typename L>

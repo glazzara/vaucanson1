@@ -1,23 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 311)
-(Parent-Version vaucanson 0 310)
-(Version-Log "
-2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(Project-Version vaucanson 0 312)
+(Parent-Version vaucanson 0 311)
+(Version-Log "2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 
-	* include/vaucanson/automata/concrete/graph.hh: 
-		Define transducer traits.
-	* include/vaucanson/automata/concept/transducer_ops.hh,
-          include/vaucanson/automata/concept/transducer_ops.hxx,
-	  include/vaucanson/automata/concept/transducer.hh,
-	  include/vaucanson/automata/concept/transducer_base.hh,
-	  include/vaucanson/automata/concept/transducer.hxx,
-	  include/vaucanson/automata/concept/transducer_base.hxx: New.
-")
+	* include/vaucanson/algebra/concrete/series/krat.hxx,
+	  include/vaucanson/algebra/concrete/series/krat_conversion.hxx,
+	  include/vaucanson/algebra/concrete/series/polynoms.hxx,
+	  include/vaucanson/automata/concept/kinds.hxx: Correct op_convert
+	  calls.")
 (New-Version-Log "")
-(Checkin-Time "Tue, 01 Jul 2003 10:18:17 +0200")
-(Checkin-Login yann)
+(Checkin-Time "Tue, 01 Jul 2003 10:36:14 +0200")
+(Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -99,7 +94,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.114 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.115 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -242,9 +237,9 @@
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.20 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.30 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.31 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.7 600))
-  (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.7 600))
+  (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.4 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.11 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.13 600))
@@ -254,7 +249,7 @@
   (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.4 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx (vaucanson/p/32_krat_exp_i 1.1 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.18 600))
-  (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.24 600))
+  (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.25 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh (vaucanson/e/1_depth_visi 1.7 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx (vaucanson/d/46_depth_visi 1.6 600))
   (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh (vaucanson/e/0_dump_visit 1.7 600))
@@ -312,7 +307,7 @@
   
   
   (include/vaucanson/automata/concept/kinds.hh (vaucanson/d/16_kinds.hh 1.12 600))
-  (include/vaucanson/automata/concept/kinds.hxx (vaucanson/d/15_kinds.hxx 1.12 600))
+  (include/vaucanson/automata/concept/kinds.hxx (vaucanson/d/15_kinds.hxx 1.13 600))
   
   
   (include/vaucanson/automata/concept/tags.hh (vaucanson/c/48_tags.hh 1.6 600))

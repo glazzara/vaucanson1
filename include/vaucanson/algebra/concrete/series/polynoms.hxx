@@ -423,7 +423,7 @@ namespace vcsn {
     dst.clear();
     if (src != zero_value(SELECT(W), SELECT(oTw)))
       dst.insert(identity_value(SELECT(M), SELECT(Tm)),
-		 op_convert(SELECT(Tw), SELECT(W), src));
+		 op_convert(SELECT(W), SELECT(Tw), src));
   }
 
   /*--------------------------------------.
@@ -439,7 +439,7 @@ namespace vcsn {
   { 
     // assert(s.monoid() == monoid);
     dst.add(s.weights(), 
-	    op_convert(SELECT(Tm), SELECT(M), src),
+	    op_convert(SELECT(M), SELECT(Tm), src),
 	    identity_value(SELECT(W), SELECT(Tw)));
   }
 
