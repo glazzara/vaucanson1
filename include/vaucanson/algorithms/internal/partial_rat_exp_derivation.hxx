@@ -45,18 +45,29 @@ namespace vcsn {
     typedef typename std::list<T>::iterator		iterator;
     typedef typename T::series_set_t			series_set_t;
     typedef typename T::series_set_elt_value_t		series_set_elt_value_t;
+    typedef typename T::semiring_elt_t::value_t		semiring_elt_value_t;
 
     src.sort(unweighted_inf<series_set_t, series_set_elt_value_t>);
     dst.sort(unweighted_inf<series_set_t, series_set_elt_value_t>);
     dst.merge(src, unweighted_inf<series_set_t, series_set_elt_value_t>);
-    for (iterator i = dst.begin(); i != dst.end(); ++i)
+    iterator i = dst.begin();
+    while (i != dst.end())
     {
       iterator next = i;
       if (++next != dst.end() and unweighted_eq(*next, *i))
       {
 	i->begin().semiring_elt() += next->begin().semiring_elt();
 	dst.erase(next);
+	if (i->begin().semiring_elt() ==
+	    i->begin().semiring_elt().structure().zero(
+	      SELECT(semiring_elt_value_t)))
+	{
+	  next = i++;
+	  dst.erase(next);
+	  continue ;
+	}
       }
+      ++i;
     }
   }
 

@@ -1,5 +1,10 @@
 2004-07-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+	Remove expressions with a weight of zero.
+
+2004-07-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
 	* src/demos/samples/algorithms/derivatives_automaton.cc: Use dot_display
 	instead of dot_dump.
 
