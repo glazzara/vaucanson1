@@ -1,3 +1,32 @@
+2004-03-21  Valentin David  <valentin@lrde.epita.fr>
+
+	* include/vaucanson/xml/xml_value.hh,
+	* include/vaucanson/xml/krat_to_polynom.hh,
+	* include/vaucanson/xml/ios.hxx, include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/krat_to_polynom.hxx,
+	* include/vaucanson/xml/error_handler.hxx,
+	* include/vaucanson/xml/defaults.hh, include/vaucanson/xml/ios.hh,
+	* include/vaucanson/xml/error_handler.hh,
+	* include/vaucanson/xml/strings.hh, include/vaucanson/xml/infos.hh,
+	* include/vaucanson/xml/session.hh, include/vaucanson/xml/xml_set.hxx,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/strings.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx,
+	* include/vaucanson/xml/xml_loader.hh,
+	* include/vaucanson/xml/callback.hxx, include/vaucanson/xml/xml_set.hh,
+	* include/vaucanson/xml/xml_loader.hxx,
+	* include/vaucanson/xml/xml_ops.hh,
+	* include/vaucanson/xml/xml_value.hxx,
+	* include/vaucanson/xml/session.hxx, include/vaucanson/xml/errors.hh,
+	* include/vaucanson/xml/static.hh, include/vaucanson/xml/types.hh,
+	* include/vaucanson/xml/dynamic.hh, include/vaucanson/xml/generic.hh,
+	* include/vaucanson/xml/callback.hh,
+	* include/vaucanson/algebra/concrete/letter/int_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/int_letter.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/tools.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/tools.hxx:
+	Add missing copyright headers.
+
 2004-03-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
