@@ -1,5 +1,15 @@
 2004-03-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/xml/genutfstrings.sh: Make portable on NetBSD. Do
+	not use sed -f -.
+
+2004-03-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* config/xml.m4: Do not call AC_CHECK_LIB on libxerces-c anymore.
+	Assume that finding a header means the library is present.
+
+2004-03-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/Makefile.am: Add vaucanson/config/pconf.hh to
 	nobase_include_HEADERS.
 

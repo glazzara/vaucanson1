@@ -13,7 +13,9 @@ EOF
   exit 1
 fi
 
-sed -f - "$1"/*.hxx "$2"/loadgeometry.inc <<EOF | sort -u > "$2"/xmlstrings.inc
+CMD=/tmp/cmds
+
+cat > $CMD <<EOF
 /str_/ {
 s/^.*str_\([a-zA-Z0-9_]*\)[^a-zA-Z0-9_].*$/\1/
 s/\(.*\)/const XMLCh str_\1[] = { |\1/
@@ -38,3 +40,7 @@ p
 }
 d
 EOF
+
+sed -f $CMD "$1"/*.hxx "$2"/loadgeometry.inc | sort -u > "$2"/xmlstrings.inc
+rm $CMD
+
