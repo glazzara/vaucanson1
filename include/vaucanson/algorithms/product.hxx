@@ -59,7 +59,8 @@ namespace vcsn {
     typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
     typedef std::set<hedge_t>				delta_ret_t;
     typedef std::map<pair_hstate_t, hstate_t>		visited_t;
-    AUTOMATON_TYPES_(output_t);
+    AUTOMATON_TYPES(output_t);
+    typedef typename series_elt_t::support_t		support_t;
 
     delta_ret_t					edge_lhs; 
     delta_ret_t					edge_rhs;
@@ -111,7 +112,7 @@ namespace vcsn {
 		series_elt_t s_  = rhs.serie_of(*ier);
 		series_elt_t s__ = s;
 		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
-
+		
 		for_all_(support_t, supp, s.supp())
 		  s__.value_set(monoid_elt_t(*supp).value(), 
 		       (s_.get(*supp) * s_.get(*supp)).value());

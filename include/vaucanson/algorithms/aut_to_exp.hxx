@@ -41,6 +41,7 @@
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/algorithms/normalized.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
@@ -171,21 +172,16 @@ namespace vcsn {
 	  }
 
 	loop_sum.star();
-	for (typename sums_t::const_iterator in = in_sums.begin();
-	     in != in_sums.end();
-	     ++in)
-	  for (typename sums_t::const_iterator out = out_sums.begin();
-	       out != out_sums.end();
-	       ++out)
-	    {
-	      series_elt_t res = in->second * loop_sum * out->second;
-	      a.add_serie_edge(in->first, out->first, res);
-	    }
+	for_each_const_(sums_t, in, in_sums)
+	  for_each_const_(sums_t, out, out_sums)
+	  {
+	    series_elt_t res = in->second * loop_sum * out->second;
+	    a.add_serie_edge(in->first, out->first, res);
+	  }
 	a.del_state(q);
       }
     series_elt_t final;
-    for (typename Auto_::edge_iterator i = a.edges().begin(); 
-	 i != a.edges().end(); ++i)
+    for_each_edge(i, a)
       final += a.label_of(*i);
     return final;
   }

@@ -1,5 +1,11 @@
 2003-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	  include/vaucanson/algorithms/accessible.hxx:
+		Use new macros.
+
+2003-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/product.hxx:
 		- Clean
 		- Use new macros.

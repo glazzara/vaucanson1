@@ -40,6 +40,7 @@
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/automata/concrete/transpose_view.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
@@ -54,7 +55,7 @@ namespace vcsn {
   do_accessible_states(const AutomataBase<A_>&,
 		       const Auto_&		   a)
   {
-    typedef Auto_				automaton_t;
+    AUTOMATON_TYPES(Auto_);
     typedef std::set<hstate_t>	      		reachable_set_t;
     typedef std::set<hstate_t>		       	delta_ret_t;
     typedef std::queue<hstate_t>		queue_t;
@@ -67,9 +68,7 @@ namespace vcsn {
     /*---------------.
     | Initialization |
     `---------------*/
-    for (typename automaton_t::initial_iterator i = a.initial().begin();
-	 i != a.initial().end();
-	 ++i)
+    for_each_initial_state(i, a)
       {
 	queue.push(*i);
 	reachable_states.insert(*i);
@@ -83,12 +82,8 @@ namespace vcsn {
 	state = queue.front();
 	queue.pop();
 	delta_ret.clear();
-
-	/// \bug FIXME: Do it with a better delta.
 	a.deltac(delta_ret, state, delta_kind::states());
-	for (typename delta_ret_t::const_iterator j = delta_ret.begin();
-	     j != delta_ret.end();
-	     ++j)
+	for_each_const_(delta_ret_t, j, delta_ret)
 	  {
 	    state = *j;
 	    if (reachable_states.find(state) == reachable_states.end())
