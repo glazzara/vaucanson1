@@ -922,4 +922,6 @@ namespace vcsn {
 
 } // vcsn
 
+# undef AutoType
+
 #endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_OPS_HXX
