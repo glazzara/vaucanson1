@@ -37,9 +37,9 @@ AC_ARG_ENABLE(
         [WANT_INTERPRETER=no
 cat << \EOF
 
-WARNING: Vaucanswig WILL NOT be build. Vaucanswig is a set of bindings
-for  the  python language  which  are useful  when  one  wants to  use
-Vaucanson from an interpreter or within a scripting language.
+WARNING:  Vaucanswig  WILL NOT  be  built.   Vaucanswig  is a  set  of
+bindings for the Python language  to use Vaucanson from an interpreter
+or within a scripting language.
 
 To enable Vaucanswig, invoke this script with --enable-vaucanswig.
 To disable this warning, invoke this script with --disable-vaucanswig.
@@ -47,7 +47,7 @@ To disable this warning, invoke this script with --disable-vaucanswig.
 BE WARNED: the  compilation of Vaucanswig may take  several hours on a
 modern computer.
 
-Instructions about how to use Vaucanswig are provided in
+Instructions about Vaucanswig are provided in
 src/demos/vaucanswig/README.
 
 EOF
