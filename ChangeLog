@@ -1,5 +1,9 @@
 2004-05-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/tools/gen_random.hxx: Minor fix.
+	
+2004-05-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/tests/automata/algos/brzozowski_test.hh: 
 	Rename to...
 	* src/tests/boolean_automata/brzozowski_test.hh: This.

@@ -326,7 +326,7 @@ namespace vcsn {
 
     automata_set_t aset =
       GenRandomAutomataSet::generate(SELECT(automata_set_t), size_alphabet);
-    TAutomata a = this->generate_dfa(aset, nbstate, fstate);
+    TAutomata a = this->generate_dfa(aset, nb_state, fstate);
     return a;
   }
 
