@@ -1,3 +1,7 @@
+2004-03-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/sum_test.hh: Minor fix.
+
 2004-03-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* THANKS: Add Sarah O'Connor and Louis-Noël Pouchet.

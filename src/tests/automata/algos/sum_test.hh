@@ -99,7 +99,7 @@ unsigned sum_test(tests::Tester& tg)
       while (++iter < 20 && eval(g_rhs_r, word_lhs_unknown) != semiring_zero)
 	word_lhs_unknown = exp_lhs.choose_from_supp();
 
-      if (iter < 100)
+      if (iter < 20)
 	{
 	  if (eval(realtime(s), word_lhs_unknown) != semiring_zero)
 	    ++success_sum;
