@@ -99,23 +99,23 @@ namespace vcsn {
 
   inline
   bool
-  op_can_choose_non_stareable(const algebra::NumericalSemiring& set,
+  op_can_choose_non_starable(const algebra::NumericalSemiring& set,
 			      SELECTOR(int))
   {
-    return true; // Every integer excepted Zero is non-stareable
+    return true; // Every integer excepted Zero is non-starable
   }
 
   inline
   Element<algebra::NumericalSemiring, int>
-  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(int))
+  op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(int))
   {
-    // 0 is the only one integer to be stareable. So we have no choice !
+    // 0 is the only one integer to be starable. So we have no choice !
     return 0;
   }
   
   inline
   Element<algebra::NumericalSemiring, int> 
-  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(int))
+  op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(int))
   {
     int r = utility::random::generate<int>();
     if (!r)
@@ -160,7 +160,7 @@ namespace vcsn {
     return false; 
   }
 
-  inline bool op_stareable(const algebra::NumericalSemiring&, bool)
+  inline bool op_starable(const algebra::NumericalSemiring&, bool)
   { 
     return true; 
   }
@@ -172,17 +172,17 @@ namespace vcsn {
 
   inline
   Element<algebra::NumericalSemiring, bool>
-  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(bool))
+  op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(bool))
   {
-    // Every boolean is stareable !
+    // Every boolean is starable !
     return op_choose(set, SELECT(bool));
   }
   
   inline
   Element<algebra::NumericalSemiring, bool> 
-  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(bool))
+  op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(bool))
   {
-    assert(! "Cannot choose non-stareable boolean: that does not exist");
+    assert(! "Cannot choose non-starable boolean: that does not exist");
     return false;
   }
 
@@ -191,18 +191,18 @@ namespace vcsn {
   `--------------------------------------------*/
 
   template<typename T>
-  bool op_stareable(const algebra::NumericalSemiring&, T v)
+  bool op_starable(const algebra::NumericalSemiring&, T v)
   { 
     return v == 0; 
   }
 
-  inline bool op_stareable(const algebra::NumericalSemiring& s, 
+  inline bool op_starable(const algebra::NumericalSemiring& s, 
 			   const float& f)
   { 
     return (0.0 <= f) && (f < 1.0); 
   }
 
-  inline bool op_stareable(const algebra::NumericalSemiring& s, 
+  inline bool op_starable(const algebra::NumericalSemiring& s, 
 			   const double& f)
   { 
     return (0.0 <= f) && (f < 1.0); 
@@ -227,23 +227,23 @@ namespace vcsn {
 
   inline
   bool
-  op_can_choose_non_stareable(const algebra::NumericalSemiring& set,
+  op_can_choose_non_starable(const algebra::NumericalSemiring& set,
 			      SELECTOR(float))
   {
     return true; // Every float which is less than 0 or greater than 1 is
-		 // non-stareable.
+		 // non-starable.
   }
 
   inline
   Element<algebra::NumericalSemiring, float>
-  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(float))
+  op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(float))
   {
     return utility::random::generate<float>();
   }
   
   inline
   Element<algebra::NumericalSemiring, float> 
-  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(float))
+  op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(float))
   {
     return utility::random::generate<float>() * 1000. + 1.0;
   }

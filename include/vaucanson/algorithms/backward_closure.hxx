@@ -111,7 +111,7 @@ namespace vcsn {
     // Compute star(m_weight)
     for (int r = 0; r < size; r++)
       {
-	if (!m_weight[r][r].stareable())
+	if (!m_weight[r][r].starable())
 	  { 
 	    // FIXME: add error handling.
 	    std::cerr<< "Star not defined." << std::endl;

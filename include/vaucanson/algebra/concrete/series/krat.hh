@@ -139,7 +139,7 @@ namespace vcsn {
   `-----*/
 
   template<typename W, typename M, typename Tm, typename Tw>
-  bool op_stareable(const algebra::Series<W, M>& s,
+  bool op_starable(const algebra::Series<W, M>& s,
 		    const rat::exp<Tm, Tw>& dst);
 
   template<typename W, typename M, typename Tm, typename Tw>

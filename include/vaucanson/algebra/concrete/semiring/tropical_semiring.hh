@@ -95,7 +95,7 @@ namespace vcsn {
     `-----*/
     template <typename T>
     static inline bool 
-    op_stareable(const algebra::TropicalSemiring<algebra::TropicalMin>& s, T b);
+    op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>& s, T b);
 
     template <class T>
     static inline void 
@@ -103,7 +103,7 @@ namespace vcsn {
 
     template <typename T>
     static inline bool 
-    op_stareable(const algebra::TropicalSemiring<algebra::TropicalMax>& s, T b);
+    op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>& s, T b);
 
     template <class T>
     static inline void 
@@ -115,17 +115,17 @@ namespace vcsn {
     
     template <class TropicalKind, typename T>
     bool
-    op_can_choose_non_stareable(const algebra::TropicalSemiring<TropicalKind>& set,
+    op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
 			    SELECTOR(T));
 
     template <class TropicalKind, typename T>
     Element<algebra::TropicalSemiring<TropicalKind>, T>
-    op_choose_stareable(const algebra::TropicalSemiring<TropicalKind>& set,
+    op_choose_starable(const algebra::TropicalSemiring<TropicalKind>& set,
 			SELECTOR(T));
 
     template <class TropicalKind, typename T>
     Element<algebra::TropicalSemiring<TropicalKind>, T>
-    op_choose_non_stareable(const algebra::TropicalSemiring<TropicalKind>& set,
+    op_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
 			    SELECTOR(T));
 
     /*---------------.

@@ -360,7 +360,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool op_stareable(const algebra::Series<W, M>&,
+  bool op_starable(const algebra::Series<W, M>&,
 		    const rat::exp<Tm, Tw>&)
   { 
     return true; 

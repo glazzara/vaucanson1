@@ -80,7 +80,7 @@ namespace vcsn {
       static exp one();
       static exp zero();
       static exp constant(const monoid_value_t& l);
-      static bool stareable();
+      static bool starable();
 
     protected:
       node_t *base_;

@@ -55,7 +55,7 @@ bool semiring_test(tests::Tester& t)
        (e1 + e2) * e3 == e2 * e3 + e1 * e3);
   TEST(t, "0 is a zero for mult.", 
        (e1 * z == z));
-  TEST(t, "stareable works. (1)", z.stareable() ? true  : false);
+  TEST(t, "starable works. (1)", z.starable() ? true  : false);
   // FIXME: add some other tests.
   return t.all_passed();
 }

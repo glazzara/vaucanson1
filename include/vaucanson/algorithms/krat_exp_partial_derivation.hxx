@@ -133,7 +133,7 @@ namespace vcsn {
       MATCH_(Star, e)
       {
 	std::pair<weight_t, bool> ret = constant_term(series(e));
-	if ((ret.second == false) || (ret.first.stareable() == false))
+	if ((ret.second == false) || (ret.first.starable() == false))
 	  {
 	    undefined = true;
 	    return return_type();

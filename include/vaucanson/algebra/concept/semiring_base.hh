@@ -49,19 +49,19 @@ namespace vcsn {
     struct SemiringBase : MonoidBase<Self>
     {
     public:
-      //! Indicate wether it is possible or not to call choose_non_stareable.
-      // There's no need for can_choose_stareable, since Zero is always
-      // stareable and therefor can be choosen.
+      //! Indicate wether it is possible or not to call choose_non_starable.
+      // There's no need for can_choose_starable, since Zero is always
+      // starable and therefor can be choosen.
       template <class T>
-      bool can_choose_non_stareable(SELECTOR(T)) const;
+      bool can_choose_non_starable(SELECTOR(T)) const;
 
-      //! Return a randomly choosed stareable weight.
+      //! Return a randomly choosed starable weight.
       template <class T>
-      Element<Self, T>	choose_stareable(SELECTOR(T)) const;
+      Element<Self, T>	choose_starable(SELECTOR(T)) const;
 
-      //! Return a randomly choosed non-stareable weight.
+      //! Return a randomly choosed non-starable weight.
       template <class T>
-      Element<Self, T> choose_non_stareable(SELECTOR(T)) const;
+      Element<Self, T> choose_non_starable(SELECTOR(T)) const;
     protected:
       //! Default constructor is protected since it is an abstract class.
       SemiringBase();
@@ -102,7 +102,7 @@ namespace vcsn {
     Element<Self, T>&   star();
 
     //! returns true if we can to compute the star of the weight.
-    bool		stareable() const;
+    bool		starable() const;
 
   protected:
     //! Default constructor is protected since it is an abstract class.
@@ -132,33 +132,33 @@ namespace vcsn {
 
   //! returns true if we can to compute the star of the weight.
   template <typename S, typename T>
-  bool stareable(const Element<S, T>& elt);
+  bool starable(const Element<S, T>& elt);
 
   /*! @} @} */
 
   // default implementations:
 
-  /*! operator over SemiringBase<S> that returns whether a non-stareable
+  /*! operator over SemiringBase<S> that returns whether a non-starable
    *  element can be choosen from a Semiring, given a particular
    *  implementation.
    */
   template <typename S, typename T>
   bool
-  op_can_choose_non_stareable(const S& set, SELECTOR(T));
+  op_can_choose_non_starable(const S& set, SELECTOR(T));
 
-  /*! operator over SemiringBase<S> that returns a random stareable element in
+  /*! operator over SemiringBase<S> that returns a random starable element in
    *  the set.
    */
   template <typename S, typename T>
   Element<S, T>
-  op_choose_stareable(const algebra::SemiringBase<S>& set, SELECTOR(T));
+  op_choose_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
 
-  /*! operator over SemiringBase<S> that returns a random non-stareable
+  /*! operator over SemiringBase<S> that returns a random non-starable
    *  element in the set.
    */
   template <typename S, typename T>
   Element<S, T> 
-  op_choose_non_stareable(const algebra::SemiringBase<S>& set, SELECTOR(T));
+  op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
 
 
   template <typename S, typename T>
@@ -168,7 +168,7 @@ namespace vcsn {
 	typename std::string::const_iterator&);
 
   template <typename Self, typename T>
-  bool op_stareable(const algebra::SemiringBase<Self>& s, const T& v);
+  bool op_starable(const algebra::SemiringBase<Self>& s, const T& v);
 
   template <typename Self, typename T>
   void op_in_star(const algebra::SemiringBase<Self>& s, T& v);

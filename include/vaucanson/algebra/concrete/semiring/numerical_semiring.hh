@@ -64,13 +64,13 @@ namespace vcsn {
   `-----------------------------*/
 
   bool
-  op_can_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(int));
+  op_can_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(int));
 
   Element<algebra::NumericalSemiring, int>
-  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(int));
+  op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(int));
   
   Element<algebra::NumericalSemiring, int> 
-  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(int));
+  op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(int));
 
   /*-----------------------------.
   | specializations for booleans |
@@ -92,26 +92,26 @@ namespace vcsn {
   inline bool zero_value(SELECTOR(algebra::NumericalSemiring), 
 			 SELECTOR(bool));
   
-  inline bool op_stareable(const algebra::NumericalSemiring& s, bool b);
+  inline bool op_starable(const algebra::NumericalSemiring& s, bool b);
   
   inline void op_in_star(const algebra::NumericalSemiring& s, bool& b);
 
   Element<algebra::NumericalSemiring, bool>
-  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(bool));
+  op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(bool));
   
   Element<algebra::NumericalSemiring, bool> 
-  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(bool));
+  op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(bool));
 
   /*-------------------------.
   | goodies for real numbers |
   `-------------------------*/
   template<typename T>
-  bool op_stareable(const algebra::NumericalSemiring& s, T v);
+  bool op_starable(const algebra::NumericalSemiring& s, T v);
   
-  inline bool op_stareable(const algebra::NumericalSemiring& s, 
+  inline bool op_starable(const algebra::NumericalSemiring& s, 
 				  const float& f);
 
-   inline bool op_stareable(const algebra::NumericalSemiring& s, 
+   inline bool op_starable(const algebra::NumericalSemiring& s, 
 				  const double& f);
 
    inline void op_in_star(const algebra::NumericalSemiring& s, float& f);
@@ -119,14 +119,14 @@ namespace vcsn {
    inline void op_in_star(const algebra::NumericalSemiring& s, double& f);
 
   bool
-  op_can_choose_non_stareable(const algebra::NumericalSemiring& set,
+  op_can_choose_non_starable(const algebra::NumericalSemiring& set,
 			      SELECTOR(float));
 
   Element<algebra::NumericalSemiring, float>
-  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(float));
+  op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(float));
   
   Element<algebra::NumericalSemiring, float> 
-  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(float));
+  op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(float));
 
 } // vcsn
 

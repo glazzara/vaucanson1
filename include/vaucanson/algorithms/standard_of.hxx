@@ -172,7 +172,7 @@ namespace vcsn {
       node->accept(*this);
       assert(!w_stack.empty());
       weight_t k = w_stack.top();
-      if (!k.stareable())
+      if (!k.starable())
 	{
 	  std::cerr<< "Star not defined." << std::endl;
 	  return;

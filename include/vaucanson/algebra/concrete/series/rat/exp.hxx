@@ -185,7 +185,7 @@ namespace vcsn {
     }
     
     template<typename LetterT, typename WeightT>
-    bool exp<LetterT, WeightT>::stareable() 
+    bool exp<LetterT, WeightT>::starable() 
     {
       return true;
     }

@@ -71,7 +71,7 @@ namespace vcsn {
     MATCH_(Star, node)
     {
       weight_t ret = match(node);
-      if (ret.stareable())
+      if (ret.starable())
 	return star(ret);
       undefined = true;
       return ret;

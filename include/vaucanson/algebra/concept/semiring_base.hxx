@@ -55,25 +55,25 @@ namespace vcsn {
     template <class T>
     inline
     bool
-    SemiringBase<Self>::can_choose_non_stareable(SELECTOR(T)) const
+    SemiringBase<Self>::can_choose_non_starable(SELECTOR(T)) const
     {
-      return op_can_choose_non_stareable(self(), SELECT(T));
+      return op_can_choose_non_starable(self(), SELECT(T));
     }
 
     template <class Self>
     template <class T>
     Element<Self, T>
-    SemiringBase<Self>::choose_stareable(SELECTOR(T)) const
+    SemiringBase<Self>::choose_starable(SELECTOR(T)) const
     {
-      return op_choose_stareable(self(), SELECT(T));
+      return op_choose_starable(self(), SELECT(T));
     }
     
     template <class Self>
     template <class T>
     Element<Self, T>
-    SemiringBase<Self>::choose_non_stareable(SELECTOR(T)) const
+    SemiringBase<Self>::choose_non_starable(SELECTOR(T)) const
     {
-      return op_choose_non_stareable(self(), SELECT(T));
+      return op_choose_non_starable(self(), SELECT(T));
     }
     
   } // algebra
@@ -93,9 +93,9 @@ namespace vcsn {
 
   template <class Self, class T>
   bool 
-  MetaElement<algebra::SemiringBase<Self>, T>::stareable() const
+  MetaElement<algebra::SemiringBase<Self>, T>::starable() const
   { 
-    return op_stareable(this->set(), this->value()); 
+    return op_starable(this->set(), this->value()); 
   }
     
   template <class Self, class T>
@@ -121,9 +121,9 @@ namespace vcsn {
   }
     
   template <typename S, typename T>
-  bool stareable(const Element<S, T>& elt)
+  bool starable(const Element<S, T>& elt)
   { 
-    return op_stareable(elt.set(), elt.value()); 
+    return op_starable(elt.set(), elt.value()); 
   }
 
   template <typename S, typename T>
@@ -140,7 +140,7 @@ namespace vcsn {
   template <typename S, typename T>
   inline
   bool
-  op_can_choose_non_stareable(const S& set, SELECTOR(T))
+  op_can_choose_non_starable(const S& set, SELECTOR(T))
   {
     return false;
   }
@@ -149,21 +149,21 @@ namespace vcsn {
   template <typename S, typename T>
   inline
   Element<S, T>
-  op_choose_stareable(const algebra::SemiringBase<S>& set, SELECTOR(T))
+  op_choose_starable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
-    std::cerr << "WARNING: default implementation of op_choose_stareable "
+    std::cerr << "WARNING: default implementation of op_choose_starable "
       "called." << std::endl;
     std::cerr << "RESULT IS NOT RANDOM." << std::endl;
-    // Zero is always stareable.
+    // Zero is always starable.
     return T();
   }
 
   template <typename S, typename T>
   inline
   Element<S, T> 
-  op_choose_non_stareable(const algebra::SemiringBase<S>& set, SELECTOR(T))
+  op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
-    assert(! "default implementation of op_choose_non_stareable called");
+    assert(! "default implementation of op_choose_non_starable called");
     return T();
   }
 
@@ -193,7 +193,7 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  bool op_stareable(const algebra::SemiringBase<Self>& s, const T& v)
+  bool op_starable(const algebra::SemiringBase<Self>& s, const T& v)
   { 
     return op_eq(SELECT(Self), v, zero_value(SELECT(Self), SELECT(T)));
   }
