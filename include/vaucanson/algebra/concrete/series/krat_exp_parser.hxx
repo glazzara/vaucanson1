@@ -308,18 +308,6 @@ namespace vcsn {
 	    krat_exp_token_t tok;
 	    switch (*i) 
 	      {
-		// escaping case.
-	      case '\\': 
-		{
-		  iterator_t j = i;
-		  ++j;
-		  if (j != in.end())
-		    {
-		      ++i;
-		      len = 1;
-		      break;
-		    }
-		}
 		// operator case.
 	      case '(' : tok = lparen; len = 1; break;
 	      case ')' : tok = rparen; len = 1; break;

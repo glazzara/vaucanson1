@@ -69,20 +69,20 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
   KRAT_EXP_PARSE_TEST_USUAL_DECS(Expr);
   tests::Tester t(tg.verbose());
   srand(time(0));
-  alphabet_t alphabet;
-  letter_t a = alphabet.random_letter();
-  letter_t b = alphabet.random_letter();
-  alphabet.insert(a);
-  alphabet.insert(b);
-  alphabet.insert('a');
-  monoid_t monoid(alphabet);
-  weights_t semiring;
-  series_t s(semiring, monoid);
-  // FIXME: !!!
-  const unsigned nb_test = 100;
+
+  const unsigned nb_test = 1000;
   unsigned nb_success    = 0;
-  for (unsigned i = 0; i < 100; ++i)
+  for (unsigned i = 0; i < nb_test; ++i)
     {
+      alphabet_t alphabet;
+      letter_t a = alphabet.random_letter();
+      letter_t b = alphabet.random_letter();
+      alphabet.insert(a);
+      alphabet.insert(b);
+      alphabet.insert('a');
+      monoid_t monoid(alphabet);
+      weights_t semiring;
+      series_t s(semiring, monoid);
       krat_exp_t exp = s.choose(SELECT(kexp_t));
       std::ostringstream sstr;
       sstr << exp;

@@ -31,6 +31,7 @@
 # define VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DUMP_VISITOR_HXX
 
 # include <iostream>
+# include <set>
 # include <vaucanson/algebra/concrete/series/rat/dump_visitor.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 
@@ -40,13 +41,16 @@ namespace vcsn {
 
     template <class M_, class W_>
     DumpVisitor<M_,W_>::DumpVisitor(std::ostream& o,
-				    const char *zero,
-				    const char *one) 
+				    const std::set<typename M_::value_type>&
+				    escaped,
+				    const char* zero,
+				    const char* one)
       : o_(o),
+	escaped_(escaped),
 	z_(zero),
 	i_(one)
     {}
-
+    
     template <class M_, class W_>
     void 
     DumpVisitor<M_,W_>::product(const Node<M_, W_>* left_, 
@@ -102,9 +106,14 @@ namespace vcsn {
     void 
     DumpVisitor<M_,W_>::constant(const M_& m)
     { 
-      o_ << m; 
+      for (typename M_::const_iterator i = m.begin(); i != m.end(); ++i)
+	{
+	  if (escaped_.find(*i) != escaped_.end())
+	    o_ << "\\";
+	  o_ << *i;
+	}
     }
-
+    
     template <class M_, class W_>
     void DumpVisitor<M_,W_>::zero()
     { 

@@ -183,7 +183,8 @@ namespace vcsn {
     typename std::string::const_iterator j = i;
     typename std::string::const_iterator k;
 
-    while ((i != s.end()) && (set.alphabet().contains(*i)) &&
+    while ((i != s.end()) && 
+	   ((*i == '\\') || set.alphabet().contains(*i)) &&
 	   (std::find(escaped.begin(), escaped.end(), *i) == escaped.end()))
       if (*i == '\\')
 	{

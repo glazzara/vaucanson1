@@ -31,6 +31,7 @@
 # define VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DUMP_VISITOR_HH
 
 # include <iostream>
+# include <set>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 
 namespace vcsn {
@@ -42,9 +43,10 @@ namespace vcsn {
     {
     public:
       DumpVisitor(std::ostream& o,
-		  const char *zero = "0",
-		  const char *one = "1");
-
+		  const std::set<typename M_::value_type>& escaped,
+		  const char* zero = "0",
+		  const char* one = "1");
+      
       virtual void 
       product(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
 
@@ -68,9 +70,10 @@ namespace vcsn {
       virtual void one();
 
     protected:
-      std::ostream& o_;
-      const char *z_;
-      const char *i_;
+      std::ostream&				o_;
+      const std::set<typename M_::value_type>&	escaped_;
+      const char*				z_;
+      const char*				i_;
     };
       
   } // rat

@@ -1,3 +1,17 @@
+2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh
+	(krat_exp_parse_random_test): Make more test and change alphabet
+	between tests.
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Fix
+	handling of escaping variables.
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx:
+	Fix an escaping related bug.
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh,
+	include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx,
+	include/vaucanson/algebra/concrete/series/rat/exp.hxx:
+	Handle escaping cases.
+
 2003-07-02  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata.hxx,

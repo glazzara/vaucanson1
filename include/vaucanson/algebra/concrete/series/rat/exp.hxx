@@ -388,9 +388,20 @@ namespace vcsn {
 namespace std {
 
   template<typename M_, typename W_>
-  std::ostream& operator<<(std::ostream& o, const vcsn::rat::exp<M_, W_>& exp)
+  std::ostream& operator<<(std::ostream& o,
+			   const vcsn::rat::exp<M_, W_>& exp)
   { 
-    vcsn::rat::DumpVisitor<M_, W_> v(o);
+    std::set<typename M_::value_type> escape_set;
+    escape_set.insert('.');
+    escape_set.insert('+');
+    escape_set.insert('*');
+    escape_set.insert('(');
+    escape_set.insert(')');
+    escape_set.insert('\\');
+    escape_set.insert(' ');
+    escape_set.insert('1');
+    escape_set.insert('0');
+    vcsn::rat::DumpVisitor<M_, W_> v(o, escape_set, "0", "1");
     exp.accept(v);
     return o;
   }
