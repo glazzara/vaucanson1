@@ -132,8 +132,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/implementation/free_monoid/words.hxx		   \
 	vaucanson/algebra/implementation/free_monoid/tools.hh		   \
 	vaucanson/algebra/implementation/free_monoid/tools.hxx		   \
-	vaucanson/algebra/implementation/free_monoid_product/fremonoid_product_pair_str.hh				                                   \
-	vaucanson/algebra/implementation/free_monoid_product/fremonoid_product_pair_str.hxx				                                   \
+	vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh				                                   \
+	vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx				                                   \
 	vaucanson/algebra/implementation/semiring/numerical_semiring.hh	   \
 	vaucanson/algebra/implementation/semiring/numerical_semiring.hxx   \
 	vaucanson/algebra/implementation/semiring/tropical_semiring.hh	   \
