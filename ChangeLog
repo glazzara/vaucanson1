@@ -1,3 +1,10 @@
+2004-02-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/tools/usual.hh: Move some macros...
+	* include/vaucanson/tools/usual_macros.hh: ... Here.
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh: Adjust
+	includes.
+
 2004-02-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/algebra/alphabets/alphabet_test.hh: Fix.

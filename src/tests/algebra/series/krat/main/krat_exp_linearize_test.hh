@@ -34,6 +34,7 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/krat_exp_linearize.hh>
 # include <vaucanson/algorithms/krat_exp_flatten.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 # include <list>
 

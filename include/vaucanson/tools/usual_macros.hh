@@ -1,7 +1,7 @@
 // usual_macros.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -103,7 +103,7 @@
  typedef AutoType::label_t			Prefix##label_t;	  \
  typedef AutoType::tag_t			Prefix##tag_t;
 
-#define AUTOMATON_TYPES(AutoType)           AUTOMATON_TYPES_(AutoType,)	      
+#define AUTOMATON_TYPES(AutoType)           AUTOMATON_TYPES_(AutoType,)
 #define AUTOMATON_TYPES_EXACT(AutoType)     AUTOMATON_TYPES_EXACT_(AutoType,)
 
 // the following macros assume you have used a macro AUTOMATON_TYPES*
@@ -144,6 +144,26 @@
 
 #define remove_in(S, V) \
     S.erase(std::remove(S.begin(), S.end(), V), S.end())
+
+#define SAVE_AUTOMATON_DOT(Dir, Name, Auto, Index)		\
+    {								\
+      std::ostringstream s;					\
+      s << Dir << "/" << Name << "_" << Index << ".dot";	\
+      std::ofstream f(s.str().c_str());				\
+      tools::dot_dump(f, Auto, Name);				\
+    }
+
+#define SAVE_AUTOMATON_DOT_SIMPLE(Name, Auto)			\
+    {								\
+      std::ostringstream s;					\
+      s << Name << ".dot";					\
+      std::ofstream f(s.str().c_str());				\
+      tools::dot_dump(f, Auto, Name);				\
+    }
+
+#define RAND___(Max)						\
+((unsigned) int(((float) rand() / (float) RAND_MAX) * Max));
+
 
 // These macros can be use instead of some method calls.
 // This is really tricky and dirty but so useful !

@@ -60,12 +60,12 @@ namespace vcsn {
     typedef Series<NumericalSemiring, Words> usual_series_t;
     typedef Series<TropicalSemiring<TropicalMax>, Words> tropical_max_series_t;
     typedef Series<TropicalSemiring<TropicalMin>, Words> tropical_min_series_t;
-   
+
     typedef Graph
     <
       labels_are_series,
       WordValue,
-      bool, 
+      bool,
       usual_serie_value_t,
       char,
       NoTag>
@@ -75,7 +75,7 @@ namespace vcsn {
     <
       labels_are_series,
       WordValue,
-      int, 
+      int,
       weighted_serie_value_t,
       char,
       NoTag>
@@ -86,13 +86,13 @@ namespace vcsn {
 
     typedef Element<Automata<usual_series_t>, weighted_automaton_impl_t>
     numerical_automaton_t;
-    
+
     typedef Element<Automata<tropical_max_series_t>, weighted_automaton_impl_t>
     tropical_max_automaton_t;
 
     typedef Element<Automata<tropical_min_series_t>, weighted_automaton_impl_t>
     tropical_min_automaton_t;
-    
+
     template <class T>
     usual_automaton_t new_automaton(const T& alphabet);
 
@@ -105,25 +105,6 @@ namespace vcsn {
     template <typename R, typename InputIterator>
     R new_automaton(InputIterator, InputIterator);
 
-#define SAVE_AUTOMATON_DOT(Dir, Name, Auto, Index)		\
-    {								\
-      std::ostringstream s;					\
-      s << Dir << "/" << Name << "_" << Index << ".dot";	\
-      std::ofstream f(s.str().c_str());				\
-      tools::dot_dump(f, Auto, Name);				\
-    }
-
-#define SAVE_AUTOMATON_DOT_SIMPLE(Name, Auto)			\
-    {								\
-      std::ostringstream s;					\
-      s << Name << ".dot";					\
-      std::ofstream f(s.str().c_str());				\
-      tools::dot_dump(f, Auto, Name);				\
-    }
-
-#define RAND___(Max)						\
-((unsigned) int(((float) rand() / (float) RAND_MAX) * Max));
-
   } // tools
 
 } // vcsn
@@ -132,6 +113,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/tools/usual.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_TOOLS_USUAL_HH
