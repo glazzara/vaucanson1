@@ -32,6 +32,8 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_TRANSDUCER_OPS_HXX
 # define VCSN_AUTOMATA_CONCEPT_TRANSDUCER_OPS_HXX
 
+# include <vaucanson/algebra/concept/monoid_base.hh>
+
 namespace vcsn {
 
 #define AutoType(Type) \
@@ -77,7 +79,7 @@ namespace vcsn {
     std::cout << "add io edge :" << o << " "
 	      << output_w << " " << w << " "
 	      << os << std::endl;
-    return op_add_series_edge(s, v, from, to, is);
+   return op_add_series_edge(s, v, from, to, is);
   }
 
   template <class S, class T>
@@ -131,6 +133,51 @@ namespace vcsn {
     AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
     return op_add_series_edge(s, v, from, to, is);
+  }
+
+  template <class S, class T>
+  AutoType(series_set_elt_t)
+    make_series(const TransducerBase<S>& s,
+		AutoType(output_monoid_elt_value_t) o)
+  {
+    AutoType(input_monoid_elt_t) empty =
+      algebra::identity_as<AutoType(input_monoid_elt_value_t)>::
+      of(s.series().monoid());
+    AutoType(output_semiring_elt_t) semi_id =
+      algebra::identity_as<AutoType(output_semiring_elt_value_t)>::
+      of(s.series().semiring().semiring());
+
+    AutoType(input_monoid_elt_t) input_w(s.series().monoid());
+    AutoType(output_series_set_elt_t) os (s.series().semiring());
+
+    Element<AutoType(output_monoid_t), AutoType(output_monoid_elt_value_t)>
+      o_elt (s.series().semiring().monoid(), o);
+    os.assoc(o_elt, semi_id);
+    AutoType(series_set_elt_t) is (s.series());
+    is.assoc(empty, os);
+    return is;
+  }
+
+  template <class S, class T>
+  void
+  op_set_o_final(const TransducerBase<S>& s,
+		 T& v,
+		 hstate_t final,
+		 AutoType(output_monoid_elt_value_t) o)
+  {
+    AutoType(series_set_elt_t) is = make_series<S, T>(s, o);
+    op_set_final(s, v, final, is);
+  }
+
+  template <class S, class T>
+  void
+  op_set_o_initial(const TransducerBase<S>& s,
+		   T& v,
+		   hstate_t initial,
+		   AutoType(output_monoid_elt_value_t) o)
+  {
+    AutoType(series_set_elt_t) is = make_series<S, T>(s, o);
+    op_set_initial(s, v, initial, is);
   }
 
 } // vcsn

@@ -276,6 +276,18 @@ namespace vcsn {
 		       from, to, label);
   }
 
+  /** add a new weighted edge. */
+  template <typename Self, typename T>
+  hedge_t
+  MetaElement<AutomataBase<Self>, T>::
+  add_weighted_edge(hstate_t from,
+		    hstate_t to,
+		    const semiring_elt_t& w,
+		    const monoid_elt_t& m)
+  {
+    return op_add_weighted_edge(structure(), value(), from, to, w, m);
+  }
+
   /** add an edge using a series. */
   /** If the underlying implementation is not sufficiently general
    *  to support this operation, you will have several edges created.*/
@@ -880,6 +892,7 @@ namespace vcsn {
        << " }";
     return st;
   }
+
 
 } // vcsn
 

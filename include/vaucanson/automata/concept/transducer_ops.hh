@@ -41,7 +41,7 @@ namespace vcsn {
   typename Element<S, T>::Type
 
   template <class S, class T>
-  typename Element<S, T>::input_monoid_elt_t 
+  typename Element<S, T>::input_monoid_elt_t
   op_input_of(const TransducerBase<S>& s,
 	      const T& v,
 	      hedge_t e);
@@ -55,8 +55,8 @@ namespace vcsn {
   template <class S, class T>
   hedge_t
   op_add_io_edge(const TransducerBase<S>& s,
-		 T& v, 
-		 hstate_t from, 
+		 T& v,
+		 hstate_t from,
 		 hstate_t to,
 		 AutoType(input_letter_t) i,
 		 AutoType(output_letter_t) o,
@@ -65,8 +65,8 @@ namespace vcsn {
   template <class S, class T>
   hedge_t
   op_add_io_edge(const TransducerBase<S>& s,
-		 T& v, 
-		 hstate_t from, 
+		 T& v,
+		 hstate_t from,
 		 hstate_t to,
 		 AutoType(input_monoid_elt_t) input_w,
 		 AutoType(output_monoid_elt_t) output_w,
@@ -75,8 +75,8 @@ namespace vcsn {
   template <class S, class T>
   hedge_t
   op_add_i_edge(const TransducerBase<S>& s,
-		T& v, 
-		hstate_t from, 
+		T& v,
+		hstate_t from,
 		hstate_t to,
 		AutoType(input_letter_t) i,
 		AutoType(output_semiring_elt_t) w);
@@ -84,18 +84,36 @@ namespace vcsn {
   template <class S, class T>
   hedge_t
   op_add_o_edge(const TransducerBase<S>& s,
-		T& v, 
-		hstate_t from, 
+		T& v,
+		hstate_t from,
 		hstate_t to,
 		AutoType(input_letter_t) o,
 		AutoType(output_semiring_elt_t) w);
 
+  template <class S, class T>
+  static AutoType(series_set_elt_t)
+    make_series(const TransducerBase<S>& s,
+		AutoType(output_monoid_elt_value_t) o);
+
+  template <class S, class T>
+  void
+  op_set_o_final(const TransducerBase<S>& s,
+		 T& v,
+		 hstate_t final,
+		 AutoType(output_monoid_elt_value_t) o);
+
+  template <class S, class T>
+  void
+  op_set_o_initial(const TransducerBase<S>& s,
+		   T& v,
+		   hstate_t initial,
+		   AutoType(output_monoid_elt_value_t) o);
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concept/transducer_ops.hxx>
+# include <vaucanson/automata/concept/transducer_ops.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_TRANSDUCER_OPS_HH

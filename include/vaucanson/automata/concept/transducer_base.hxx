@@ -37,11 +37,11 @@
 
 namespace vcsn {
 
-  template <typename Self> 
-  TransducerBase<Self>::TransducerBase() 
+  template <typename Self>
+  TransducerBase<Self>::TransducerBase()
   {}
-  
-  template <typename Self> 
+
+  template <typename Self>
   TransducerBase<Self>::TransducerBase(const TransducerBase& other) :
     AutomataBase<Self>(other)
   {}
@@ -50,7 +50,7 @@ namespace vcsn {
   template <typename Self, typename T>
   MetaElement<TransducerBase<Self>, T>::MetaElement()
   {}
-  
+
   /** copy constructor */
   template <typename Self, typename T>
   MetaElement<TransducerBase<Self>, T>::MetaElement(const MetaElement& a):
@@ -71,27 +71,30 @@ namespace vcsn {
     return op_output_of(this->structure(), this->value(), e);
   }
 
-
   template <typename Self, typename T>
-  hedge_t  
+  hedge_t
   MetaElement<TransducerBase<Self>, T>::
-  add_io_edge(hstate_t from, 
-	      hstate_t to, 
-	      input_monoid_elt_t i,
-	      output_monoid_elt_t o,
+  add_io_edge(hstate_t from,
+	      hstate_t to,
+	      input_monoid_elt_value_t i,
+	      output_monoid_elt_value_t o,
 	      output_semiring_elt_t w)
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
-	::of(series().semiring().semiring());
-    return op_add_io_edge(this->structure(), value(),
-			  from, to, i, o, w);
+	::of(this->series().semiring().semiring());
+    Element<input_monoid_t, input_monoid_elt_value_t>
+      i_elt (structure().series().monoid(), i);
+    Element<output_monoid_t, output_monoid_elt_value_t>
+      o_elt (structure().series().semiring().monoid(), o);
+    return op_add_io_edge(structure(), value(), from, to, i_elt, o_elt, w);
   }
 
+
   template <typename Self, typename T>
-  hedge_t  
-  MetaElement<TransducerBase<Self>, T>::add_io_edge(hstate_t from, 
-						    hstate_t to, 
+  hedge_t
+  MetaElement<TransducerBase<Self>, T>::add_io_edge(hstate_t from,
+						    hstate_t to,
 						    input_letter_t i,
 						    output_letter_t o,
 						    output_semiring_elt_t w)
@@ -104,9 +107,9 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  hedge_t  
-  MetaElement<TransducerBase<Self>, T>::add_o_edge(hstate_t from, 
-						   hstate_t to, 
+  hedge_t
+  MetaElement<TransducerBase<Self>, T>::add_o_edge(hstate_t from,
+						   hstate_t to,
 						   output_letter_t o,
 						   output_semiring_elt_t w)
   {
@@ -119,9 +122,9 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  hedge_t  
-  MetaElement<TransducerBase<Self>, T>::add_i_edge(hstate_t from, 
-						   hstate_t to, 
+  hedge_t
+  MetaElement<TransducerBase<Self>, T>::add_i_edge(hstate_t from,
+						   hstate_t to,
 						   input_letter_t i,
 						   output_semiring_elt_t w)
   {
@@ -131,6 +134,24 @@ namespace vcsn {
 
     return op_add_i_edge(this->structure(), this->value(),
 			 from, to, i, w);
+  }
+
+  template <typename Self, typename T>
+  void
+  MetaElement<TransducerBase<Self>, T>::
+  set_o_final(hstate_t final,
+	      output_monoid_elt_value_t o)
+  {
+    op_set_o_final(structure(), value(), final, o);
+  }
+
+  template <typename Self, typename T>
+  void
+  MetaElement<TransducerBase<Self>, T>::
+  set_o_initial(hstate_t initial,
+		output_monoid_elt_value_t o)
+  {
+    op_set_o_initial(structure(), value(), initial, o);
   }
 
 } // vcsn

@@ -130,6 +130,14 @@ namespace vcsn {
 	      hstate_t to,
 	      const typename Element<S, T>::label_t& label);
 
+  template<class S, class T>
+  hedge_t
+  op_add_weighted_edge(const AutomataBase<S>&, T&,
+		       hstate_t from,
+		       hstate_t to,
+		       const typename Element<S, T>::semiring_elt_t& w,
+		       const typename Element<S, T>::monoid_elt_t& m);
+
   template <class S, class T>
   hedge_t
   op_add_series_edge(const AutomataBase<S>&, T&,

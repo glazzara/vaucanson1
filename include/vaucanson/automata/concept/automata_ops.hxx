@@ -190,6 +190,19 @@ namespace vcsn {
     return v.add_edge(from, to, label);
   }
 
+  template<class S, class T>
+  hedge_t
+  op_add_weighted_edge(const AutomataBase<S>& s, T& v,
+		       hstate_t from,
+		       hstate_t to,
+		       const typename Element<S, T>::semiring_elt_t& w,
+		       const typename Element<S, T>::monoid_elt_t& m)
+  {
+    typename Element<S, T>::series_set_elt_t series (s.series());
+    series.assoc(m, w);
+    return op_add_series_edge(s, v, from, to, series);
+  }
+
   template <class S, class T>
   hedge_t
   op_add_series_edge(const AutomataBase<S>& s, T& v,

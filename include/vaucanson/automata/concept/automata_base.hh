@@ -277,6 +277,12 @@ namespace vcsn {
     /** add a new edge between 'from' and 'to' labelled by 'label' */
     hedge_t add_edge(hstate_t from, hstate_t to, const label_t& label);
 
+    /** add a new weighted edge, specifying a semiring element and a monoid
+	element. */
+    hedge_t add_weighted_edge(hstate_t from, hstate_t to,
+			      const semiring_elt_t& w,
+			      const monoid_elt_t& m);
+
     /** add an edge using a series. */
     /** If the underlying implementation is not sufficiently general
      *  to support this operation, you will have several edges created.*/

@@ -1,10 +1,32 @@
+2004-07-07  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx: Add a new
+	method: add_weighted_edge. Give the possibility for the user to create
+	an edge with a weight seen as a semiring_elt_t.
+
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/transducer_base.hxx: Add two new
+	methods: set_o_initial, set_o_final. Give the user the possibility to
+	put a weight on the initial and final edges, with a weight seen as an
+	output_monoid_elt_value_t, that is for instance a std::string.
+	Modify the add_io_edge method to take values.
+
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/transducer_ops.hh,
+	* include/vaucanson/automata/concept/transducer_ops.hxx: Write the
+	corresponding op functions.
+
+	* src/demos/fibonacci/fibonacci.cc: Update accordingly.
+
 2004-07-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/misc/random.hxx: Add comment on real number 
+	* include/vaucanson/misc/random.hxx: Add comment on real number
 	generation.
 	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
 	Fix op_choose_non_starable for real numbers.
-	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh: 
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
 	Minor fix in the test.
 
 2004-07-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
@@ -15,7 +37,7 @@
 	* src/demos/vaucanswig/expand.sh,
 	* src/demos/vaucanswig/meta/context.hh: Use contextual headers
 	instead of usual.hh in Vaucanswig.
-	* src/demos/vaucanswig/meta-build-process.txt: Update the 
+	* src/demos/vaucanswig/meta-build-process.txt: Update the
 	documentation.
 
 2004-07-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
