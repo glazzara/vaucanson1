@@ -99,6 +99,23 @@ namespace vcsn
 	s = i->second.first;
       auto_p->add_letter_edge(current_state->second.first, s, l);
     }
+
+    template <typename Self, typename T_auto, typename Etiq>
+    void
+    IncAutomataConstructor<Self, T_auto, Etiq>::link_to
+    (
+      const Etiq& etiq, const series_elt_t& el
+    )
+    {
+      hstate_t	s;
+      iterator	i = states_map.find(etiq);
+      
+      if (i == states_map.end())
+	s = add_state(etiq);
+      else
+	s = i->second.first;
+      auto_p->add_serie_edge(current_state->second.first, s, el);
+    }
     
     // A tool to add a state in the set and the automaton
     template <typename Self, typename T_auto, typename Etiq>

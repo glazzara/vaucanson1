@@ -29,6 +29,7 @@
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automaton_impl.hh>
@@ -63,6 +64,19 @@ namespace vcsn {
 		    map> >
     >
     usual_automaton_t;
+
+    typedef Element
+    <
+      Automata, 
+      utility::ref< 
+      AutomatonImpl<labels_are_series,
+	  	    Series<TropicalSemiring<TropicalMax>, Words>,
+	  	    polynom<Word::value_t, int>,
+	  	    ManyLinks<polynom<Word::value_t, int>, NoTag, NoTag>,
+	  	    NoTag,
+	  	    map> >
+    >
+    tropical_automaton_t;
 
 #define SAVE_AUTOMATON_DOT(Dir, Name, Auto, Index)		\
     {								\

@@ -28,7 +28,8 @@
 
 namespace vcsn {
 
-  namespace algebra {
+//  FIXME: problem with namespaces
+//  namespace algebra {
 
     // We provide a generic implementation of tropical semirings
     // formed with C++-builtins and standard operations (std::min,
@@ -133,7 +134,7 @@ namespace vcsn {
     template<typename St, typename T>
     St& op_rout(const TropicalSemiring<TropicalMin>& s, St& st, const T& v);
 
-  } // algebra
+//  } // algebra
 
 } // vcsn
 

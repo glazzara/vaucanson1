@@ -32,7 +32,7 @@
 
 namespace vcsn {
 
-  namespace algebra {
+//  namespace algebra {
 
     /*---------------.
     | Identity value |
@@ -248,7 +248,7 @@ namespace vcsn {
       return st;
     }    
 
-  } // algebra
+//  } // algebra
 
 } // vcsn
 

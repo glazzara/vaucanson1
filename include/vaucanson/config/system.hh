@@ -25,11 +25,11 @@
 #  include <config.h>
 # endif 
 
-# ifndef IGNORE_PCONF_HH
-#  include <vaucanson/config/pconf.hh>
-# endif
+//# ifndef IGNORE_PCONF_HH
+//#  include <vaucanson/config/pconf.hh>
+//# endif
 
-# include <vaucanson/config/math.hh>
+//# include <vaucanson/config/math.hh>
 
 #if (defined __GNUC__) && (__GNUC__ < 3) 
 # include <stl_config.h>

@@ -77,6 +77,7 @@ namespace vcsn {
       IncAutomataConstructor(const series_t& series, const Etiq& etiq);
       // Add a link from current state to indicated state
       void	link_to(const Etiq& etiq, const letter_t& l);
+      void	link_to(const Etiq& etiq, const series_elt_t& el);
       // To make the current state final
       void	set_final();
     private:
@@ -101,6 +102,7 @@ namespace vcsn {
     // of the automaton, i.e. :
     // function which return the set of final state,
     // etc.
+    // FIXME: make it compatible with multiplicity
     template <typename Self, typename T_auto, typename Etiq>
     class MathAutomataConstructor
     {

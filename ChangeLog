@@ -1,3 +1,24 @@
+2003-05-18  Loïc Fosse  <fosse_l@lrde.epita.fr>
+
+        * include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh:
+        Change namespace.
+        * include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:
+        Change namespace.
+        * include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Fix a
+        bug in weighted expression parsing.
+        * include/vaucanson/config/system.hh: Correct header inclusion.
+        * include/vaucanson/tools/usual.hh: Add a new predefined automaton type.
+        * include/vaucanson/algorithms/algo_helper.hxx: Add a function in
+        IncAutomataConstructor.
+        * include/vaucanson/algorithms/algo_helper.hh: Add a function in
+        IncAutomataConstructor.
+        * include/vaucanson/algebra/concrete/series/krat_coefficient.hxx: Add.
+        * include/vaucanson/algebra/concrete/series/krat_coefficient.hh: Add.
+        * include/vaucanson/algorithms/derivates_automaton.hxx: Add.
+        * include/vaucanson/algorithms/derivates_automaton.hh: Add.
+        * include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Add.
+        * include/vaucanson/algorithms/krat_exp_partial_derivation.hh: Add.
+
 2003-05-18  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* mical/src/Makefile.am: Add. Make Mical binaries part of the

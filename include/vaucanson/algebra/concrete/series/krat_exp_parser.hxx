@@ -411,23 +411,28 @@ namespace vcsn {
 	    weight_t w = first(toks).as_weight();
 	    accept(toks, a_weight);
 	    accept(toks, space);
-	    // then it could be a word or 1.
-	    if (first(toks).is_a(one))
-	      {
-		monoid_elt_t word;
-		accept(toks, one);
-		exp = word;
-		exp = w * exp;
-		return;
-	      }
-	    else if (first(toks).is_a(a_word))
-	      {
-		monoid_elt_t word = first(toks).as_word();
-		accept(toks, a_word);
-		exp = word;
-		exp = w * exp;
-		return;
-	      }
+	    // FIXME: check if this correction do not create new errors.
+	    //
+	    // // then it could be a word or 1.
+	    // if (first(toks).is_a(one))
+	    //  {
+	    //	  monoid_elt_t word;
+	    //	  accept(toks, one);
+	    //	  exp = word;
+	    //	  exp = w * exp;
+	    //	  return;
+	    //  }
+	    //  else if (first(toks).is_a(a_word))
+	    //  {
+	    //	  monoid_elt_t word = first(toks).as_word();
+	    //	  accept(toks, a_word);
+	    //	  exp = word;
+	    //	  exp = w * exp;
+	    //	  return;
+	    //  }
+	    parse_exp(toks, exp);
+	    exp = w * exp;
+	    return;
 	  }
 	else if (first(toks).is_a(one))
 	  {
@@ -475,6 +480,10 @@ namespace vcsn {
       std::string	error_msg_;
     };
 
+    // FIXME: bad parsing on:
+    //        "a 2"
+    // FIXME: segfault on:
+    //        "2"
     template <class S, class T>
     std::pair<bool, std::string>
     parse(const std::string& from, Element<S, T>& exp)
