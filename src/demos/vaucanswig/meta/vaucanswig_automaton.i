@@ -65,6 +65,7 @@ namespace Kind ##_types
     virtual std::list<int> edges() const;
 
     virtual int add_state();
+    void add_states(int);
     virtual int add_spontaneous(int, int);
     virtual int add_letter_edge(int, int, char);
     virtual int add_lw_edge(int, int, int, const std::string&);

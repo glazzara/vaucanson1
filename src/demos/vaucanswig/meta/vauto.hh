@@ -51,6 +51,7 @@ namespace vcsn
     virtual std::list<int> edges() const = 0;
 
     virtual int add_state() = 0;
+    void add_states(int);
     virtual int add_spontaneous(int, int) = 0;
     virtual int add_letter_edge(int, int, char) = 0;
     virtual int add_lw_edge(int, int, int, const std::string&) = 0;

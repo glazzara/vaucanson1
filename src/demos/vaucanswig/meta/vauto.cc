@@ -46,6 +46,14 @@ namespace vcsn
     system((std::string(cmd) + ' ' + fname).c_str());
   }
 
+  void virtual_automaton::add_states(int nr)
+  {
+    if (nr < 0)
+      throw std::runtime_error("negative number of states requested");
+    for (int i = 0; i < nr; ++i)
+      this->add_state();
+  }
+
   virtual_automaton::~virtual_automaton() {}
 }
 
