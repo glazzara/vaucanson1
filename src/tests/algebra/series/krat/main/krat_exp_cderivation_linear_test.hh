@@ -63,11 +63,11 @@ bool krat_exp_cderivation_linear_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
   srand(time(0));
 
-  const unsigned int tests_num = 20;
+  const unsigned int tests_num = 10000;
   unsigned int tests = 0;
   unsigned int success = 0;
 
-  for (unsigned int i = 0; i < tests_num; i++)
+  while (tests < tests_num)
     {
       alphabet_t alphabet;
       letter_t a = alphabet.random_letter();
@@ -81,18 +81,18 @@ bool krat_exp_cderivation_linear_test(tests::Tester& tg)
 
       linearize_krat_exp_t exp = linearize(series.choose(SELECT(kexp_t)));
 
-      for (typename linearize_alphabet_t::iterator
+      for (typename linearize_alphabet_t::const_iterator
 	     it = exp.set().monoid().alphabet().value().begin();
 	   it != exp.set().monoid().alphabet().value().end();
 	   ++it)
 	{
-	  ++tests;
-
 	  std::pair<linearize_krat_exp_t, bool> dexp = derivate(exp, *it);
 	  linearize_krat_exp_t cdexp = cderivate(exp, *it);
 
 	  if (dexp.second)
 	    {
+	      ++tests;
+
 	      if (dexp.first == cdexp)
 		++success;
 	      else
@@ -103,9 +103,6 @@ bool krat_exp_cderivation_linear_test(tests::Tester& tg)
 			  << std::endl
 			  << "FAIL: (letter was " << *it << ")" << std::endl;
 	    }
-	  else
-	    std::cerr << "FAIL: derivate could not derivate the expression: "
-		      << exp << " with leter " << *it << "." << std::endl;
 	}
     }
 

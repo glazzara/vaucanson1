@@ -1,3 +1,8 @@
+2004-02-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh:
+	Fix the test.
+
 2004-02-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh: New.
