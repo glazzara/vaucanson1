@@ -53,25 +53,50 @@ unsigned krat_exp_realtime_conflict_test(tests::Tester& tg)
     vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef vcsn::Element<series_set_t, exp_t>			krat_exp_t;
 
-  alphabet_t	at;
-  at.insert(at.random_letter());
-  monoid_t	md (at);
-  semiring_t	sg;
-  series_set_t	ss(sg, md);
-  krat_exp_t	e1 = ss.choose(SELECT(exp_t));
-  krat_exp_t	e2 = realtime(e1);
-  realtime_here(e1);
-  TEST(t, "realtime(automaton) does not conflict with realtime(exp) [1].",
-       e1 == e2);
+  bool out (false);
+  while (not out)
+    {
+      // The goal is  to compile successfully. It is  not important if
+      // an exception is thrown.
+      try
+	{
+	  alphabet_t	at;
+	  at.insert(at.random_letter());
+	  monoid_t	md (at);
+	  semiring_t	sg;
+	  series_set_t	ss(sg, md);
+	  krat_exp_t	e1 = ss.choose(SELECT(exp_t));
+	  krat_exp_t	e2 = realtime(e1);
+	  realtime_here(e1);
+	  TEST(t,
+	       "realtime(automaton) does not conflict with realtime(exp) [1].",
+	       e1 == e2);
+	  out = true;
+	}
+      catch (...)
+	{
+	}
+    }
 
   vcsn::GenRandomAutomata<Auto> generator;
-
-  automaton_t	a = realtime(generator.generate(50, 60));
+  try
+    {
+      automaton_t	a = realtime(generator.generate(50, 60));
+    }
+  catch (...)
+    {
+    }
   TEST(t, "realtime(automaton) does not conflict with realtime(exp) [2].",
        true);
 
   automaton_t	b = generator.generate_with_epsilon(50, 60, 1, 15);
-  realtime_here(b);
+  try
+    {
+      realtime_here(b);
+    }
+  catch (...)
+    {
+    }
   TEST(t, "realtime(automaton) does not conflict with realtime(exp) [3].",
        true);
 
