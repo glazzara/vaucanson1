@@ -1,5 +1,12 @@
 2003-06-23  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/standard.hh,
+	  include/vaucanson/algorithms/thompson.hh,
+	  include/vaucanson/algorithms/transpose.hh,
+	  include/vaucanson/algorithms/sum.hh: Document.
+
+2003-06-23  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/realtime.hxx,
 	  include/vaucanson/algorithms/realtime.hh: Change function prototype
 	  and document.

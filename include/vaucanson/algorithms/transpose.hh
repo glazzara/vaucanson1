@@ -21,23 +21,40 @@
 #ifndef VCSN_ALGORITHMS_TRANSPOSE_HH
 # define VCSN_ALGORITHMS_TRANSPOSE_HH
 
+/**
+ * @file transpose.hh
+ * This file contain the function which transpose an automaton.
+ */
+
 # include <vaucanson/automata/concrete/transpose_view.hh>
 # include <vaucanson/automata/concept/copy.hh>
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  //! Copy in 'dst' the transposition of 'from'.
+  /**
+   * @brief Transposition of an automaton.
+   * 
+   * This function copy in @c dst the transposition of the automaton @c from.
+   * 
+   * @param from Automaton to transpose
+   * @param dst Destination
+   */
   template<typename lhs_t, typename rhs_t>
-  void transpose(lhs_t& dst,
-		 const rhs_t& from);
+  void transpose(lhs_t& dst, const rhs_t& from);
 
-  //! Return a fresh automaton which is the transposition of 'from'.
+  /**
+   * @brief Return a fresh transposed automaton.
+   *
+   * This function returns the transposition of an automaton.
+   *
+   * @param from Automaton to transpose.
+   */
   template<typename auto_t>
   auto_t transpose(const auto_t& from);
 
-  /*! @} */
+  /** @} */
 
 } //vcsn
 

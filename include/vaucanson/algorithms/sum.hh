@@ -22,25 +22,52 @@
 #ifndef VCSN_ALGORITHMS_SUM_HH
 # define VCSN_ALGORITHMS_SUM_HH
 
+/**
+ * @file sum.hh
+ * 
+ * @brief Summing of automata.
+ * 
+ * This file contains functions to sum two automata.
+ */
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  //! Add the states and edges of 'rhs' to 'lhs'.
+  /**
+   * @brief In place summing of two automata.
+   * 
+   * This function adds states and edges of an automaton to states and edges
+   * of a second automaton.
+   *
+   * @param lhs Destination of the summing
+   * @param rhs Source of summing
+   *
+   * @see sum
+   */
   template<typename A, typename T, typename U>
   void 
-  sum_here(Element<A, T>& lhs, 
-	   const Element<A, U>& rhs);
+  sum_here(Element<A, T>& lhs, const Element<A, U>& rhs);
 
-  //! Return the fresh union of 'lhs' and 'rhs'.
+  /**
+   * @brief Summing of two automata.
+   *
+   * This function returns the fresh union of two automata. It put edges and
+   * states of the two automata together, and create a news one with the
+   * result.
+   *
+   * @param lhs First automaton to sum
+   * @param rhs Second automaton to sum
+   *
+   * @see sum_here
+   */
   template<typename A, typename T, typename U>
   Element<A, T> 
-  sum(const Element<A, T>& lhs, 
-      const Element<A, U>& rhs);
+  sum(const Element<A, T>& lhs, const Element<A, U>& rhs);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

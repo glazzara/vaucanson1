@@ -22,24 +22,49 @@
 #ifndef VCSN_ALGORITHMS_THOMPSON_HH
 # define VCSN_ALGORITHMS_THOMPSON_HH
 
+/***
+ * @file thompson.hh
+ * @brief The thompson automaton.
+ *
+ * This file contains functions to build automata from rationnal expressions,
+ * using thompson algorithm.
+ */
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  //! The automaton associated to the krat expression using Thompson algorithm.
+  /**
+   * @brief The Thompson automaton associated to the krat expression.
+   *
+   * This function build the automaton associated to the rationnal expression
+   * implemented by a krat_exp, using Thompson algorithm.
+   *
+   * @param out The resulting automaton
+   * @param kexp The rationnal expression
+   */
   template<typename A,      typename T, 
 	   typename Letter, typename Weight>
   void
-  thompson_of(Element<A, T>&, const rat::exp<Letter, Weight>&);
+  thompson_of(Element<A, T>& out, const rat::exp<Letter, Weight>& kexp);
   
+  /**
+   * @brief The Thompson automaton associated to the krat expression.
+   *
+   * This function build the automaton associated to the rationnal expression
+   * implemented by a krat_exp, using Thompson algorithm. The kind of returned
+   * automaton is a default one.
+   * 
+   * @param exp The rationnal expression
+   */
   template <class AutoType, class S, class T>
   Element<Automata<S>, AutoType>
   thompson_of(const Element<S, T>& exp)
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -22,57 +22,149 @@
 #ifndef VCSN_ALGORITHMS_STANDARD_HH
 # define VCSN_ALGORITHMS_STANDARD_HH
 
+/**
+ * @file standard.hh
+ * @brief Several algorithms concerning standard automata.
+ *
+ * This file contains different operations which can be applied on standard
+ * automata.
+ */
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  //! Returns a standard automaton associated to the input.
+  /**
+   * Returns a standard automaton associated to the input.
+   *
+   * @param a The automaton to standardize
+   * 
+   * @see is_standard
+   * 
+   * @bug Not implemented yed
+   */
   template<typename A, typename T>
   void
   standardize(Element<A, T>& a);
 
-  //! Returns true if the input automaton is standard.
+  /**
+   * Returns true if the input automaton is standard.
+   *
+   * @param a The automaton to test
+   *
+   * @see standardize
+   */
   template<typename A, typename T>
   bool
   is_standard(const Element<A, T>& a);
 
-  //! In-place union of two standard automata.
+  /**
+   * @brief In-place union of two standard automata.
+   *
+   * This function make the union of two standard automata. The result is a
+   * standard automaton.
+   *
+   * @param lhs The first automaton (will contain the result)
+   * @param rhs The second automaton
+   *
+   * @see standardize
+   * @see is_standard
+   * @see union_of_standard
+   */
   template<typename A, typename T, typename U>
   void 
   union_of_standard_here(Element<A, T>& lhs, 
 			 const Element<A, U>& rhs);
 
-  //! Return a fresh union of two standard automata.
+  /**
+   * @brief Return a fresh union of two standard automata.
+   *
+   * As @c union_of_standard_here, this function build the union of two
+   * automatons, but it builds a new one.
+   *
+   * @param lhs The first automaton
+   * @param rhs The second automaton
+   *
+   * @see standardize
+   * @see is_standard
+   * @see union_of_standard_here
+   */
   template<typename A, typename T, typename U>
   Element<A, T> 
   union_of_standard(const Element<A, T>& lhs, 
 		    const Element<A, U>& rhs);
 
-  //! In-place concatenation of two standard automata.
+  /**
+   * @brief In-place concatenation of two standard automata.
+   * 
+   * This function make the concatenation of two standard automata. The
+   * result is a standard automaton.
+   *
+   * @param lhs The first automaton (will contain the result)
+   * @param rhs The second automaton
+   *
+   * @see standardize
+   * @see is_standard
+   * @see concat_of_standard
+   */
   template<typename A, typename T, typename U>
   void 
   concat_of_standard_here(Element<A, T>& lhs, 
 			  const Element<A, U>& rhs);
 
-  //! Return a fresh concatenation of two standard automata.
+  /**
+   * @fresh Return a fresh concatenation of two standard automata.
+   * 
+   * As @c concat_of_standard_here, this function build the union of two
+   * automatons, but it builds a new one.
+   *
+   * @param lhs The first automaton
+   * @param rhs The second automaton
+   *
+   * @see standardize
+   * @see is_standard
+   * @see concat_of_standard_here
+   */
   template<typename A, typename T, typename U>
   Element<A, T> 
   concat_of_standard(const Element<A, T>& lhs, 
 		     const Element<A, U>& rhs);
 
-  //! In-place star transformation of a standard automata.
+  /**
+   * @brief In-place star transformation of a standard automata.
+   *
+   * This function make the star transformation of a standard automaton,
+   * and replace those given by the result.
+   *
+   * @param a The automaton to transform
+   *
+   * @see standardize
+   * @see is_standard
+   * @see star_of_standard
+   */
   template<typename A, typename T>
   void 
   star_of_standard_here(Element<A, T>& a);
 
-  //! Return the fresh star transformation of a standard automata.
+  /**
+   * @brief Return the fresh star transformation of a standard automata.
+   *
+   * As @c star_of_standard_here, this function applies star on an automaton,
+   * but it build a new automaton.
+   *
+   * @param a The automaton on which star must be applied.
+   *
+   * @see standardize
+   * @see is_standard
+   * @see star_of_standard_here
+   */
   template<typename A, typename T>
   Element<A, T> 
   star_of_standard(const Element<A, T>& a);
 
-  /*! @} */
+  /** @} */
   
 } // vcsn
 
