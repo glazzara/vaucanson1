@@ -149,19 +149,8 @@ int main(int argc, char **argv)
   std::string filename;
   
   while (true) {
-    int option_index = 0;
-    static struct option long_options[5] = 
-      {
-	{"after-context",  1, 0, 'A'},
-	{"before-context", 1, 0, 'B'},
-	{"invert-match",   1, 0, 'v'},
-	{"file",           1, 0, 'f'},
-	{0, 0, 0, 0}
-      };
-    
-    c = getopt_long (argc, argv, "A:B:vf:",
-		     long_options, 
-		     &option_index);
+    c = getopt(argc, argv, "A:B:vf:");
+
     if (c == -1)
       break;
     
