@@ -1,5 +1,14 @@
 2003-07-02  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/series/series.hh,
+	include/vaucanson/algebra/concrete/series/series.hxx: Fix
+	attribute declaration. Remove unwanted members.
+
+	* include/vaucanson/automata/concept/automata.hh: Fix attribute
+	declaration.
+
+2003-07-02  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata.hxx,
 	include/vaucanson/algebra/concrete/series/series.hxx: Compare by
 	reference instead of by value since structural elements are now

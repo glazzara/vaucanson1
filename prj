@@ -1,19 +1,20 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 340)
-(Parent-Version vaucanson 0 338)
+(Project-Version vaucanson 0 341)
+(Parent-Version vaucanson 0 340)
 (Version-Log "Index: ChangeLog
 from  Raphaël Poss  <raph@lrde.epita.fr>
+        * include/vaucanson/algebra/concrete/series/series.hh,
+        include/vaucanson/algebra/concrete/series/series.hxx: Fix
+        attribute declaration. Remove unwanted members.
 
-        * include/vaucanson/automata/concept/automata.hxx,
-        include/vaucanson/algebra/concrete/series/series.hxx: Compare by
-        reference instead of by value since structural elements are now
-        unified.
+        * include/vaucanson/automata/concept/automata.hh: Fix attribute
+        declaration.
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Wed, 02 Jul 2003 16:59:12 +0200")
+(Checkin-Time "Wed, 02 Jul 2003 17:24:38 +0200")
 (Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -96,7 +97,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.14 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.15 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 664))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -262,8 +263,8 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algebra/concrete/series/rat/nodes.hxx (vaucanson/d/48_nodes.hxx 1.10 664))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hh (vaucanson/e/51_random_vis 1.7 664))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx (vaucanson/e/50_random_vis 1.9 664))
-  (include/vaucanson/algebra/concrete/series/series.hh (vaucanson/c/19_series.hh 1.14 664))
-  (include/vaucanson/algebra/concrete/series/series.hxx (vaucanson/c/18_series.hxx 1.12 664))
+  (include/vaucanson/algebra/concrete/series/series.hh (vaucanson/c/19_series.hh 1.15 664))
+  (include/vaucanson/algebra/concrete/series/series.hxx (vaucanson/c/18_series.hxx 1.13 664))
   (include/vaucanson/algebra/concrete/series/transpose.hh (vaucanson/e/11_transpose. 1.7 664))
   (include/vaucanson/algebra/concrete/series/transpose.hxx (vaucanson/e/10_transpose. 1.7 664))
 
@@ -296,7 +297,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 600))
 
 
-  (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.11 664))
+  (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.12 664))
   (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.12 664))
   (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.19 664))
   (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.18 664))
@@ -812,12 +813,5 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 
   )
-(Merge-Parents
-  (0.339 complete
-    (ChangeLog ChangeLog ChangeLog m) (include/vaucanson/algebra/concept/freemonoid_base.hxx include/vaucanson/algebra/concept/freemonoid_base.hxx include/vaucanson/algebra/concept/freemonoid_base.hxx r)
-    (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx r) (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh r)
-    (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx r) (include/vaucanson/algebra/concrete/series/rat/exp.hxx include/vaucanson/algebra/concrete/series/rat/exp.hxx include/vaucanson/algebra/concrete/series/rat/exp.hxx r)
-    (src/tests/algebra/series/krat/main/krat_exp_parse_test.hh src/tests/algebra/series/krat/main/krat_exp_parse_test.hh src/tests/algebra/series/krat/main/krat_exp_parse_test.hh r) 
-  )
-)
+(Merge-Parents)
 (New-Merge-Parents)

@@ -42,10 +42,6 @@ namespace vcsn {
     `------------------------*/
     
     template<typename Weights, typename Monoid>
-    Series<Weights, Monoid>::Series() : weights_(), monoid_() 
-    {}
-    
-    template<typename Weights, typename Monoid>
     Series<Weights, Monoid>::Series(const Weights& w, const Monoid& m)
       : weights_(utility::unique::get(w)), monoid_(utility::unique::get(m)) 
     {}
@@ -58,21 +54,9 @@ namespace vcsn {
     {}
     
     template<typename Weights, typename Monoid>
-    Weights& Series<Weights, Monoid>::weights()
-    { 
-      return weights_; 
-    }
-    
-    template<typename Weights, typename Monoid>
     const Weights& Series<Weights, Monoid>::weights() const
     { 
       return weights_; 
-    }
-    
-    template<typename Weights, typename Monoid>
-    Monoid& Series<Weights, Monoid>::monoid()
-    { 
-      return monoid_; 
     }
     
     template<typename Weights, typename Monoid>

@@ -70,7 +70,7 @@ namespace vcsn {
     const series_t&	series() const;
 
   private:
-    series_t	series_;
+    const series_t&	series_;
   };
 
   template <class Series>
