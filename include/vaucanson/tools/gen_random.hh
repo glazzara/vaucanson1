@@ -38,7 +38,7 @@ namespace vcsn {
     TAutomata generate(unsigned nb_state, unsigned nb_edge, 
 		       unsigned istate = 1, unsigned fstate = 1,
 		       unsigned nb_letter = 2);
-    TAutomata generate_afd(unsigned nb_state, 
+    TAutomata generate_dfa(unsigned nb_state, 
 			   unsigned size_alphabet = 2, 
 			   unsigned fstate = 1);
     TAutomata generate_with_epsilon(unsigned nb_state, unsigned nb_edge, 

@@ -1,4 +1,16 @@
 2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* src/tests/check/tests_stuff.hh
+	+    static const unsigned  nb_col_msg;
+	* src/tests/check/tests_stuff.cc : use nb_col_msg to format message.
+
+	* include/vaucanson/tools/gen_random.hxx : afd is dfa in english.
+	* include/vaucanson/tools/gen_random.hh : idem.
+	* src/tests/automata/algos/algo_test.cc : minor.
+	* src/tests/automata/algos/determinist_test.hh : minor change.
+
+
+2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.84)
 	* include/vaucanson/automata/concept/handlers.hh : minor change.
 	* include/vaucanson/algorithms/extract.hxx : minor change.

@@ -7,6 +7,8 @@
 
 namespace tests {
 
+  const unsigned Tester::nb_col_msg = 60;
+
   Tester::Tester(verbose_level_e verbose_level) : 
     passed_ (0),
     non_passed_(0),
@@ -26,7 +28,7 @@ namespace tests {
       {
 	std::cout << "TEST: ";
 	std::cout.fill(' ') ;
-	int last = std::cout.width(40);
+	int last = std::cout.width(nb_col_msg);
 	std::cout << test_label;
 	std::cout << " : OK" << std::endl;
 	std::cout.width(last);
@@ -41,7 +43,7 @@ namespace tests {
       {
 	std::cout << "TEST: ";
 	std::cout.fill(' ') ;
-	int last = std::cout.width(40);
+	int last = std::cout.width(nb_col_msg);
 	std::cout << test_label;
 	std::cout << " : KO" << std::endl;
 	std::cout.width(last);

@@ -28,7 +28,8 @@ namespace tests {
     void	     ok(std::string test_label);
     void	     ko(std::string test_label);
     verbose_level_e  verbose() const;
-  
+
+    static const unsigned  nb_col_msg;
     // FIXME: Add statistics stuff.
 
   private:

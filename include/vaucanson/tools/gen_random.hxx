@@ -189,7 +189,7 @@ namespace vcsn {
   
   template <class TAutomata>
   TAutomata GenRandomAutomata<TAutomata>::
-  generate_afd(unsigned nb_state, 
+  generate_dfa(unsigned nb_state, 
 	       unsigned size_alphabet, 
 	       unsigned fstate = 1)
   {
