@@ -55,7 +55,7 @@ namespace vcsn {
 
     MATCH__(Sum, lhs, rhs)
     {
-      return match(lhs) * match(rhs);
+      return match(lhs) + match(rhs);
     }
     END
 

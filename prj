@@ -1,15 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 166)
-(Parent-Version vaucanson 0 165)
-(Version-Log "2003-02-26  Thomas Claveirole <clavei_t@lrde.epita.fr>
-	* include/vaucanson/algorithms/concat.hxx (auto_in_concat): Fix some
-	  missing code
-	* include/vaucanson/config/config.hh: Remove")
+(Project-Version vaucanson 0 167)
+(Parent-Version vaucanson 0 166)
+(Version-Log "2003-02-27  Loic Fosse <fosse_l@lrde.epita.fr>
+        * include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Apply
+          Akim's patch
+        * include/vaucanson/algorithms/krat_exp_constant_term.hxx (match_sum):
+          Fix minor bug")
 (New-Version-Log "")
-(Checkin-Time "Wed, 26 Feb 2003 15:24:34 +0100")
-(Checkin-Login clavei_t)
+(Checkin-Time "Thu, 27 Feb 2003 15:31:07 +0100")
+(Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -89,7 +90,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.106 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.107 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -153,7 +154,7 @@
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.2 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.5 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.4 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.13 600))
@@ -195,7 +196,7 @@
   (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.4 600))
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.1 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.4 600))
-  (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.2 600))
+  (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.3 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.7 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.4 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/h/23_krat_exp_l 1.4 600))

@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -358,50 +359,45 @@ namespace vcsn {
       {
 	//	std::cout << "get " << first(toks).to_string() << std::endl;
 	if (error_) return;
-	Element<S, T> lhs;
-	parse_factor(toks, lhs);
-	if (first(toks).is_a(dot))
-	  {
-	    Element<S, T> rhs;
-	    accept(toks, dot);
-	    parse_exp(toks, rhs);
-	    exp = lhs * rhs;
-	    return;
-	  }
-	exp = lhs;
-      }
-
-      void parse_factor(token_stream_t& toks, Element<S, T>& exp)
-      {
-	// std::cout << "get " << first(toks).to_string() << std::endl;
-	if (error_) return;
-	Element<S, T> lhs;
-	parse_term(toks, lhs);
-	if (first(toks).is_a(plus))
+	parse_term (toks, exp);
+	while (first(toks).is_a(plus))
 	  {
 	    Element<S, T> rhs;
 	    accept(toks, plus);
-	    parse_exp(toks, rhs);
-	    exp = lhs + rhs;
-	    return;
+	    parse_term(toks, rhs);
+	    exp = exp + rhs;
 	  }
-	exp = lhs;
       }
 
       void parse_term(token_stream_t& toks, Element<S, T>& exp)
       {
+	// std::cout << "get " << first(toks).to_string() << std::endl;
+	if (error_) return;
+	parse_factor (toks, exp);
+	while (first(toks).is_a(dot)
+	       || first (toks).is_a (lparen))
+	  {
+	    Element<S, T> rhs;
+	    if (first(toks).is_a(dot))
+	      accept(toks, dot);
+	    parse_factor(toks, rhs);
+	    exp = exp * rhs;
+	  }
+      }
+
+      void parse_factor(token_stream_t& toks, Element<S, T>& exp)
+      {
 	//std::cout << "get " << first(toks).to_string() << std::endl;
 	if (error_) return;
-	parse_term_without_star(toks, exp);
+	parse_factor_without_star(toks, exp);
 	while (first(toks).is_a(star))
 	  {
 	    accept(toks, star);
 	    exp = exp.star();
 	  }
-	return;
       }
 
-      void parse_term_without_star(token_stream_t& toks, Element<S, T>& exp)
+      void parse_factor_without_star(token_stream_t& toks, Element<S, T>& exp)
       {
 	// std::cout << "get " << first(toks).to_string() << std::endl;
 
