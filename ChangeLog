@@ -1,3 +1,8 @@
+2004-03-10  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/standard_of.hxx: Make the 
+	Standard_OfVisitor inherits from KRatExpMatcher to simplify the code.
+
 2004-03-10  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* doc/beginner/help.tex, src/demos/universal/universal.cc:

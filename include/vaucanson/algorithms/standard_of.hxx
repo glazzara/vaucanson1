@@ -1,7 +1,7 @@
 // standard_of.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_STANDARD_OF_HXX
 # define VCSN_ALGORITHMS_STANDARD_OF_HXX
@@ -47,7 +49,7 @@ namespace vcsn {
 	    class Auto_,
 	    class Dispatch_>
   class Standard_OfVisitor : 
-    public algebra::GenericMatcher<
+    public algebra::KRatExpMatcher<
     Standard_OfVisitor<Exp_, Auto_, Dispatch_>,
     Exp_,
     Auto_*,
@@ -60,23 +62,14 @@ namespace vcsn {
     typedef Auto_*					automaton_ptr_t;
     typedef typename automaton_t::series_t		series_t; 
     typedef typename automaton_t::series_elt_t		series_elt_t;
-    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
+    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename Exp_::monoid_value_t		monoid_value_t;
     typedef typename Exp_::semiring_elt_value_t		semiring_elt_value_t;
     typedef rat::Node<monoid_value_t, semiring_elt_value_t>   node_t;
 
     typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>     this_class;
-    typedef algebra::GenericMatcher<this_class, Exp_, Auto_*, Dispatch_> parent_class;
+    typedef algebra::KRatExpMatcher<this_class, Exp_, Auto_*, Dispatch_> parent_class;
     typedef typename parent_class::return_type          return_type;
-
-    DecBinaryOp(Product, Exp_, Exp_);
-    DecBinaryOp(Sum, Exp_, Exp_);
-    DecUnaryOp(Star, Exp_);
-    DecBinaryOp(LeftWeight, semiring_elt_value_t, Exp_);
-    DecBinaryOp(RightWeight, Exp_, semiring_elt_value_t);
-    DecLeaf(Constant, monoid_value_t);
-    DecFinalLeaf(Zero);
-    DecFinalLeaf(One);
 
   public :
 
@@ -84,6 +77,8 @@ namespace vcsn {
       automata_set_(series)
     {}
 
+    INHERIT_CONSTRUCTORS(this_class, Exp_, Auto_*, Dispatch_);
+    
     MATCH__(Product, lhs, rhs)
     {
       automaton_ptr_t tmp_  = match(rhs);
