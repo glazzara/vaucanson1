@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HXX
 # define VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HXX
@@ -261,6 +263,15 @@ namespace vcsn {
         (set, utility::random::generate<float>() * 1000. + 1.0);
   }
 
+  inline
+  Element<algebra::NumericalSemiring, double>
+  op_choose(const algebra::NumericalSemiring& set, SELECTOR(double))
+  {
+    return
+      Element<algebra::NumericalSemiring, double>
+        (set, utility::random::generate<double>(-2, 2));
+  }
+  
   inline
   bool
   op_can_choose_non_starable(const algebra::NumericalSemiring&,

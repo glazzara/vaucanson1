@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_MISC_RANDOM_HH
 # define VCSN_MISC_RANDOM_HH
@@ -94,6 +96,10 @@ namespace utility {
     template<>
     double generate<double>();
 
+    /// Generate a random double between min and max.
+    template<>
+    double generate<double>(double min, double max);
+    
     /// Generate of n sample from a range to an output iterator.
     template <class InputIterator, class OutputIterator>
     void sample_n(InputIterator first, InputIterator end,

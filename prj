@@ -1,15 +1,17 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 578)
-(Parent-Version vaucanson 0 577)
+(Project-Version vaucanson 0 579)
+(Parent-Version vaucanson 0 578)
 (New-Version-Log "")
 
 (Version-Log "2004-03-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx:
-	Minor fix to avoid compilation warning.")
-(Checkin-Time "Sat, 20 Mar 2004 19:30:14 +0100")
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/misc/random.hxx: Add ranged double generation.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Make a double type specialisation of op_choose.")
+(Checkin-Time "Sat, 20 Mar 2004 21:28:32 +0100")
 (Checkin-Login pouche_l)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -92,7 +94,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.113 646))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.114 646))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 646))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 646))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 646))
@@ -143,8 +145,8 @@
   (include/vaucanson/config/math.hh (vaucanson/p/42_math.hh 1.2 646))
   (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 646))
 
-  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.24 646))
-  (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.31 646))
+  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.25 646))
+  (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.32 646))
   (include/vaucanson/misc/limits.hh (vaucanson/q/32_limits.hh 1.5 646))
   (include/vaucanson/misc/support.hh (vaucanson/q/12_support.hh 1.9 646))
   (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.6 646))
@@ -235,7 +237,7 @@
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.6 646))
   (include/vaucanson/algebra/concrete/predefs.hh (vaucanson/g/45_predefs.hh 1.5 646))
   (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.16 646))
-  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.26 646))
+  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.27 646))
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh (vaucanson/b/32_tropical_s 1.13 646))
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.21 646))
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.9 646))

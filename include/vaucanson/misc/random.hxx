@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_MISC_RANDOM_HXX
 # define VCSN_MISC_RANDOM_HXX
@@ -111,6 +113,16 @@ namespace utility {
       return ((static_cast<double> (rand()) / RAND_MAX +
 	       static_cast<double> (rand())) / RAND_MAX +
 	      static_cast<double> (rand())) / RAND_MAX;
+    }
+    template<>
+    double generate<double>(double min, double max)
+    {
+      double range = double(max - min);
+      double res = static_cast<double> (rand());
+
+      while (res > range)
+	  res /= range;
+      return min + res;
     }
 
     template <class Iterator, class OutputIterator>
