@@ -1,28 +1,12 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 146)
-(Parent-Version vaucanson 0 145)
-(Version-Log "
-2003-01-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
-(0.146)
-	* configure.ac: Fix test subdirs search.
-	* include/vaucanson/algorithms/closure.hh: Fix invalid constness.
-	* include/vaucanson/algorithms/closure.hxx: Use usual_macros.hh.
-	* include/vaucanson/algorithms/complementary.hxx:
-		- Use usual_macros.hh ;
-		- (auto_complementary): Add precondition ;
-	* include/vaucanson/algorithms/complete.hh:
-		(is_complete): New.
-	* include/vaucanson/algorithms/complete.hxx: Implement it.
-	* include/vaucanson/tools/usual.hh: Do not define macros.
-	* include/vaucanson/tools/usual_macros.hh: New 
-		(usual.hh macros moved here)
-
-")
+(Project-Version vaucanson 0 147)
+(Parent-Version vaucanson 0 146)
+(Version-Log "")
 (New-Version-Log "")
-(Checkin-Time "Mon, 27 Jan 2003 11:34:51 +0100")
-(Checkin-Login yann)
+(Checkin-Time "Fri, 31 Jan 2003 17:13:02 +0100")
+(Checkin-Login max)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -105,7 +89,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.87 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.88 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.12 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
@@ -179,7 +163,7 @@
   (include/vaucanson/algorithms/closure.hh (vaucanson/e/22_closure.hh 1.6 600))
   (include/vaucanson/algorithms/closure.hxx (vaucanson/e/21_closure.hx 1.5 600))
   (include/vaucanson/algorithms/complementary.hh (vaucanson/f/4_complement 1.4 600))
-  (include/vaucanson/algorithms/complementary.hxx (vaucanson/f/3_complement 1.4 600))
+  (include/vaucanson/algorithms/complementary.hxx (vaucanson/f/3_complement 1.5 600))
   (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.5 600))
   (include/vaucanson/algorithms/complete.hxx (vaucanson/f/1_complete.h 1.4 600))
   (include/vaucanson/algorithms/compute.hh (vaucanson/e/6_compute.hh 1.5 600))
