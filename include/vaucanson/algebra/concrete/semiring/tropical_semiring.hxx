@@ -53,11 +53,39 @@ namespace vcsn {
       return utility::limits<T>::min(); 
     }
 
+    template<>
+    inline
+    float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(float))
+    { 
+      return -utility::limits<float>::infinity(); 
+    }
+
+    template<>
+    inline
+    double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(double))
+    { 
+      return -utility::limits<double>::infinity(); 
+    }
+
     template<typename T>
     inline
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T))
     { 
       return utility::limits<T>::max(); 
+    }
+
+    template<>
+    inline
+    float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(float))
+    { 
+      return utility::limits<float>::infinity(); 
+    }
+
+    template<>
+    inline
+    double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(double))
+    { 
+      return utility::limits<double>::infinity(); 
     }
 
     /*------------.
@@ -198,13 +226,10 @@ namespace vcsn {
     op_choose_starable(const algebra::TropicalSemiring<TropicalKind>& set,
 			SELECTOR(T))
     {
-      const T min = TropicalKind::template NonStareableInterval<T>::inf();
-      const T max = TropicalKind::template NonStareableInterval<T>::sup();
-      
       T r;
       do
 	r = op_choose(set, SELECT(T));
-      while ( (min < r) && (r < max) );
+      while (!op_starable(set, r));
       return r;
     }
 
@@ -214,13 +239,10 @@ namespace vcsn {
     op_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
 			    SELECTOR(T))
     {
-      const T min = TropicalKind::template NonStareableInterval<T>::inf();
-      const T max = TropicalKind::template NonStareableInterval<T>::sup();
-      
       T r;
       do
 	r = op_choose(set, SELECT(T));
-      while ( (max <= r) || (r <= min) );
+      while (!op_starable(set, r));
       return r;
     }
 
