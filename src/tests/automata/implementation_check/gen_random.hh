@@ -51,6 +51,9 @@ namespace vcsn
     TAutomata generate_afd(unsigned nb_state, 
 			   unsigned size_alphabet = 2, 
 			   unsigned fstate = 1);
+
+    TAutomata generate_normalized(unsigned nb_state, unsigned density = 3);
+
   private:
 
     unsigned alea(unsigned max);
@@ -58,7 +61,7 @@ namespace vcsn
     unsigned nb_edge_circle(TAutomata work, hstate_t state);
 
     void del_edge_circle(TAutomata work, hstate_t state);
-
+   
   };
 
 

@@ -1,6 +1,7 @@
-// gen_random.cc
-//
+// check_normalized.cc
+// 
 // VCSN_HEADER
+
 
 #include <vaucanson/fundamental/fundamental.hh>
 #include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
@@ -24,6 +25,8 @@
 
 # include <automata/implementation_check/gen_random.hh>
 
+# include <vaucanson/algorithms/normalized.hh>
+
 int main(int argc, char **argv)
 {
   using namespace vcsn;
@@ -37,9 +40,25 @@ int main(int argc, char **argv)
     verbose = 1;
   tests::Tester t(verbose);
 
-  gen_auto_t gen(22);
+  gen_auto_t gen(42);
+  
+ 
+  const unsigned nb_tests = 10;
 
-  gen.generate_normalized(10);
+  for (unsigned i = 0; i < nb_tests; i++)
+    {
+      usual_automaton_t normalized = gen.generate_normalized(30);;
+      
+      TEST(t, "Check routine is_normalized", is_normalized(normalized));
+    } 
+
+  for (unsigned i = 0; i < nb_tests; i++)
+    {
+      usual_automaton_t normalized = gen.generate(30, 60);
+      normalize(normalized);
+      
+      TEST(t, "Is Nomalized Automaton", is_normalized(normalized));
+    } 
 
   return 0;
 }

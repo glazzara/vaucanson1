@@ -218,6 +218,52 @@ namespace vcsn
   }
 
 
+  template <class TAutomata>
+  TAutomata GenRandomAutomata<TAutomata>::
+  generate_normalized(unsigned nb_state, unsigned density)
+  {
+    typedef typename TAutomata::state_iterator state_iterator;
+    typedef typename TAutomata::monoid_t::alphabets_elt_t alphabets_elt_t;
+
+    if (density == 0) density = 1;
+
+    TAutomata work = generate(nb_state, nb_state + alea(nb_state * density));
+    
+    // file for output format (graphwiz)
+    std::filebuf fb;
+    fb.open ("automaton.dot", std::ios::out);
+    std::ostream os(&fb);
+
+    for (state_iterator i = work.states().begin(); i != work.states().end(); i++)
+      {
+	if (work.is_initial(*i)) work.unset_initial(*i);
+	if (work.is_final(*i)) work.unset_final(*i);
+      }
+    hstate_t init = work.add_state();
+    hstate_t final = work.add_state();
+
+    work.set_initial(init);
+    work.set_final(final);
+
+    alphabets_elt_t& alpha = work.series().monoid().alphabet();
+
+    hstate_t tmp;
+
+    for (unsigned i = 0; i < density; i++)
+      if ((tmp = work.select_state(alea(work.states().size()))) != init)
+	work.add_letter_edge(init, tmp, 
+			     alpha.select_letter(alea(alpha.size())));
+    
+    for (unsigned i =0; i < density; i++)
+      if ((tmp = work.select_state(alea(work.states().size()))) != final)
+	work.add_letter_edge(tmp, final,
+			     alpha.select_letter(alea(alpha.size())));
+    
+    misc::dot_dump(os, work, "test");
+    
+    return work;
+  }
+
 
   template <class TAutomata>
   unsigned GenRandomAutomata<TAutomata>::alea(unsigned max)

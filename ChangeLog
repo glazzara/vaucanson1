@@ -1,5 +1,17 @@
 2002-07-12  Maxime Rey  <max@lrde.epita.fr>
 
+	* `include/vaucanson/algorithms/union.hxx' :added
+	* `include/vaucanson/algorithms/union.hh' : added
+	* `include/vaucanson/algorithms/normalized.hxx' : added
+	* `include/vaucanson/algorithms/normalized.hh' : added
+	* Generation of normalized automatas
+	=> src/tests/automata/implementation_check/gen_random.hh : modified
+	=> src/tests/automata/implementation_check/gen_random.hxx : modified
+	* Tests for normalized automata :
+	`src/tests/automata/algos/check_normalized.cc' : added
+
+2002-07-12  Maxime Rey  <max@lrde.epita.fr>
+
 	* src/tests/automata/implementation_check/gen_random.cc : added
 	in order to test generation of automata
 	* src/tests/automata/implementation_check/gen_random.hh : modified
