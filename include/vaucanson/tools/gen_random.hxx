@@ -118,8 +118,8 @@ namespace vcsn {
       {
 	unsigned from = alea(work.states().size());
 	unsigned to = alea(work.states().size());
-	work.add_letter_edge(work.select_state(from),
-			     work.select_state(to), 
+	work.add_letter_edge(work.choose_state(),
+			     work.choose_state(), 
 			     alpha.choose());
       }
 	
@@ -127,9 +127,9 @@ namespace vcsn {
     // set initial states
     for (unsigned i = 1; i < istate; i++)
       {
-	hstate_t tmp = work.select_state(alea(work.states().size()));
+	hstate_t tmp = work.choose_state();
 	while (work.is_initial(tmp))
-	  tmp = work.select_state(alea(work.states().size()));
+	  tmp = work.choose_state();
 	work.set_initial(tmp);
       }
 
@@ -137,9 +137,9 @@ namespace vcsn {
     // set final states
     for (unsigned i = 1; i < fstate; i++)
       {
-	hstate_t tmp = work.select_state(alea(work.states().size()));
+	hstate_t tmp = work.choose_state();
 	while (work.is_final(tmp))
-	  tmp = work.select_state(alea(work.states().size()));
+	  tmp = work.choose_state();
 	work.set_final(tmp);
       }
 
@@ -188,8 +188,8 @@ namespace vcsn {
     
     for (unsigned i = 0; i < nb_eps; ++i)
       {
-	hstate_t f = a.select_state(alea(a.states().size()));
-	hstate_t t = a.select_state(alea(a.states().size()));
+	hstate_t f = a.choose_state();
+	hstate_t t = a.choose_state();
 	a.add_spontaneous(f, t);
       }
     return a;
@@ -224,27 +224,27 @@ namespace vcsn {
       {
 	for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
 	  work.add_letter_edge(*i, 
-			       work.select_state(alea(work.states().size())), 
+			       work.choose_state(),
 			       *j);
 	while (nb_edge_circle(work, *i) == alpha.size())
 	  {
 	    del_edge_circle(work, *i);
 	    for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
 	      work.add_letter_edge(*i, 
-				   work.select_state(alea(work.states().size())), 
+				   work.choose_state(), 
 				   *j);
 	  }
       }
 
     // set initial states
-    work.set_initial(work.select_state(alea(work.states().size())));
+    work.set_initial(work.choose_state());
     
     // set final states
     for (unsigned i = 0; i < fstate; i++)
       {
-	hstate_t tmp = work.select_state(alea(work.states().size()));
+	hstate_t tmp = work.choose_state();
 	while (work.is_final(tmp))
-	  tmp = work.select_state(alea(work.states().size()));
+	  tmp = work.choose_state();
 	work.set_final(tmp);
       }
 
@@ -280,12 +280,12 @@ namespace vcsn {
     hstate_t tmp;
 
     for (unsigned i = 0; i < density; i++)
-      if ((tmp = work.select_state(alea(work.states().size()))) != init)
+      if (tmp = work.choose_state() != init)
 	work.add_letter_edge(init, tmp, 
 			     alpha.choose());
     
     for (unsigned i =0; i < density; i++)
-      if ((tmp = work.select_state(alea(work.states().size()))) != final)
+      if (tmp = work.choose_state() != final)
 	work.add_letter_edge(tmp, final,
 			     alpha.choose());
     

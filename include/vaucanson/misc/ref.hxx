@@ -1,5 +1,6 @@
 // ref.hxx
 //
+// $Id$
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001-2002 Sakarovitch, Poss, Rey and Regis-Gianas.
 //
@@ -16,8 +17,6 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
 #ifndef UTILITY_REF_HXX
 #define UTILITY_REF_HXX
 

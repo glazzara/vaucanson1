@@ -27,6 +27,9 @@ namespace vcsn {
 
   namespace misc {
 
+    #define RANDOM_INT(N) \
+       ((unsigned) floor(((float) rand() / (float) RAND_MAX) * N));
+
     template <class T>
     struct RandomGenerator
     {
@@ -44,6 +47,10 @@ namespace vcsn {
     {
       static bool do_it();
     };
+
+    template <class InputIterator, class OutputIterator>
+    void random_sample_n(InputIterator first, InputIterator end, 
+			 OutputIterator out, unsigned n);
 
   } // misc
 

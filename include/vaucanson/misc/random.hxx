@@ -22,6 +22,7 @@
 # define MISC_RANDOM_HXX
 
 # include <vaucanson/misc/random.hh>
+# include <vector>
 # include <cstdlib>
 
 namespace vcsn {
@@ -52,6 +53,29 @@ namespace vcsn {
       else
 	return false;
     }
+
+    template <class Iterator, class OutputIterator>
+    void random_sample_n(Iterator first, Iterator end, 
+			 OutputIterator out, unsigned n)
+    {
+      std::vector<int> from;
+      for (Iterator i = first; i != end; ++i)
+	{
+	  std::cout << "add " << *i << std::endl;
+	  from.push_back(*i);
+	}
+
+      while ((from.size () > 0) && (n > 0))
+	{
+	  int  c = RANDOM_INT(from.size());
+	  std::cout << "find " << c << " is " << from[c] << std::endl;
+	  *out = from[c];
+	  ++out;
+	  from.erase(from.begin() + c);
+	  --n;
+	}
+    }
+
 
   } // misc
 

@@ -1,3 +1,23 @@
+2002-09-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.114)
+	* include/vaucanson/algebra/concept/alphabets_base.hh: minor
+	* configure: removed. no configure on the prcs please.
+	* aclocal.m4: removed. no aclocal on the prcs please.
+	* include/vaucanson/misc/ref.hxx: minor.
+	* include/vaucanson/automata/concept/automata_base.hxx: 
+		remove 'select_state' method.
+		replaced by 'choose_state'.
+	* include/vaucanson/automata/concept/automata_base.hh:
+		modified in consequence.
+	* include/vaucanson/automata/concept/automata.hh: minor.
+	* include/vaucanson/tools/gen_random.hxx:
+	  	now use 'choose_state'.
+	* include/vaucanson/misc/random.hxx:
+		add 'random_sample_n' (similar to SGI's one)
+	* include/vaucanson/misc/random.hh: modified in consequence.
+	* src/tests/automata/implementation_check/global_consistency_test.hh:
+		now use 'choose_state'.
+
 2002-09-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.113)
 	Please, do not add Makefile.in into the project repository !

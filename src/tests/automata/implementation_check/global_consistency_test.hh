@@ -22,7 +22,7 @@
 # define GLOBAL_CONSISTENCY_TEST_HH
 
 # include <map>
-# include <set>
+# include <stack>
 # include <time.h>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -32,6 +32,7 @@
 # include <check/tests_stuff.hh>
 # include <vaucanson/misc/ref.hh>
 # include <vaucanson/tools/gen_random.hh>
+# include <vaucanson/tools/automaton_tools.hh>
 
 template <class Auto>
 unsigned global_consistency_test(tests::Tester& tg)
@@ -50,10 +51,16 @@ unsigned global_consistency_test(tests::Tester& tg)
 
   automaton_t automaton = gen.generate(12, 20);
 
-  hstate_t 
-    s1 = automaton.select_state(2), 
-    s2 = automaton.select_state(7),
-    s3 = automaton.select_state(4);
+  std::deque<hstate_t> sc = choose_n_states(automaton, 3);
+  hstate_t s1 = sc.front();
+  std::cout << "s1 is " << s1 << std::endl;
+  sc.pop_front();
+  hstate_t s2 = sc.front();
+  std::cout << "s2 is " << s2 << std::endl;
+  sc.pop_front();
+  hstate_t s3 = sc.front();
+  std::cout << "s3 is " << s3 << std::endl;
+  sc.pop_front();
   
   automaton.del_state(s1);
   automaton.del_state(s2);

@@ -31,8 +31,7 @@ namespace vcsn {
   template<>
   struct MetaSet<Automata>
   {
-    static const bool dynamic_set = false;
-    
+    static const bool dynamic_set = false;    
   };
   
   template<typename T>
@@ -46,8 +45,6 @@ namespace vcsn {
   struct Automata
     : AutomataBase<Automata>
   { };
-
-
 
   template<typename T>
   struct automaton_traits<utility::ref<T> >

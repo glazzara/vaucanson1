@@ -132,7 +132,6 @@ namespace vcsn
   void MetaElement<AutomataBase<Self>, T>::unset_final(hstate_t what)
   { value()->unset_final(what.value()); }
   
-  // FIXME : make this a method of all
   template<typename Self, typename T>
   void MetaElement<AutomataBase<Self>, T>::clear_initial()
   {
@@ -146,37 +145,54 @@ namespace vcsn
   }
 
   template<typename Self, typename T>
-  Element<typename automaton_traits<T>::series_t, typename automaton_traits<T>::series_value_t>
+  Element<typename automaton_traits<T>::series_t, 
+	  typename automaton_traits<T>::series_value_t>
   MetaElement<AutomataBase<Self>, T>::get_initial(hstate_t what) const
-  { return value()->get_initial(what.value()); }
+  { 
+    return value()->get_initial(what.value()); 
+  }
   
   template<typename Self, typename T>
-  Element<typename automaton_traits<T>::series_t, typename automaton_traits<T>::series_value_t>
+  Element<typename automaton_traits<T>::series_t, 
+	  typename automaton_traits<T>::series_value_t>
   MetaElement<AutomataBase<Self>, T>::get_final(hstate_t what) const
-  { return value()->get_final(what.value()); }
-
-  template<typename Self, typename T>
-  hstate_t MetaElement<AutomataBase<Self>, T>::add_state()
-  {	return value()->add_state(); }
-  
-  template<typename Self, typename T>
-  hstate_t MetaElement<AutomataBase<Self>, T>::select_state(unsigned n)
-  {	
-    state_iterator h = states().begin();
-    
-    for (unsigned i = 0; i < n; i++)
-      h = ++h;
-    
-    return *h;
+  { 
+    return value()->get_final(what.value()); 
   }
 
   template<typename Self, typename T>
-  hedge_t MetaElement<AutomataBase<Self>, T>::add_edge(hstate_t from, hstate_t to, const label_t& label)
-  { return value()->add_edge(from.value(), to.value(), label); }
+  hstate_t MetaElement<AutomataBase<Self>, T>::add_state()
+  {	
+    return value()->add_state(); 
+  }
+  
+  template<typename Self, typename T>
+  hstate_t MetaElement<AutomataBase<Self>, T>::choose_state() const
+  {
+    assert (this->states().size() > 0);
+    int  n = this->states().size();
+    int  c = ((unsigned) floor(((float) rand() / (float) RAND_MAX) * n));
+
+    state_iterator it = this->states().begin();
+
+    for (int k = 0; k < c; ++k)
+      ++it;
+
+    return *it;
+  }
+
+  template<typename Self, typename T>
+  hedge_t MetaElement<AutomataBase<Self>, T>::
+  add_edge(hstate_t from, hstate_t to, const label_t& label)
+  { 
+    return value()->add_edge(from.value(), to.value(), label); 
+  }
 
   template<typename Self, typename T>
   void MetaElement<AutomataBase<Self>, T>::del_state(hstate_t s)
-  { value()->del_state(s.value()); }
+  { 
+    value()->del_state(s.value()); 
+  }
 
   template<typename Self, typename T>
   void MetaElement<AutomataBase<Self>, T>::del_edge(hedge_t e)
