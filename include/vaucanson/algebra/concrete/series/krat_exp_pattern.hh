@@ -131,24 +131,24 @@ namespace vcsn {
     };
 
 #define DecBinaryOp(N, T, U)					\
-struct N     : public BinaryOp<T, U>				\
+struct N     : public vcsn::algebra::BinaryOp<T, U>		\
 {								\
-  N(const T& lhs, const U& rhs) : BinaryOp<T, U>(lhs, rhs)	\
+  N(const T& lhs, const U& rhs) : vcsn::algebra::BinaryOp<T, U>(lhs, rhs) \
   {}								\
 };
 
-#define DecUnaryOp(N, T)			\
-struct N     : public UnaryOp<T>		\
-{						\
-  N(const T& node) : UnaryOp<T>(node)		\
-  {}						\
+#define DecUnaryOp(N, T)				\
+struct N     : public vcsn::algebra::UnaryOp<T>		\
+{							\
+  N(const T& node) : vcsn::algebra::UnaryOp<T>(node)	\
+  {}							\
 };
 
 #define DecLeaf(N, U)				\
-  struct N : public Value<U>			\
+  struct N : public vcsn::algebra::Value<U>	\
   {						\
     N(const U& v) :				\
-      Value<U>(v)				\
+      vcsn::algebra::Value<U>(v)		\
     {}						\
   };
 
