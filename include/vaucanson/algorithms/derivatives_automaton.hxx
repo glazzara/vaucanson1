@@ -36,7 +36,7 @@
 # include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 # include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/algorithms/algo_helper.hh>
+# include <vaucanson/algorithms/internal/build_pattern.hh>
 # include <vaucanson/algebra/concrete/series/krat_coefficient.hh>
 
 namespace vcsn {

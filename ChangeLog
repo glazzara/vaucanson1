@@ -1,3 +1,13 @@
+2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/algo_helper.hxx: Move to...
+	* include/vaucanson/algorithms/internal/build_pattern.hxx: ... this.
+	* include/vaucanson/algorithms/algo_helper.hh: Move to...
+	* include/vaucanson/algorithms/internal/build_pattern.hh: ... this.
+	* include/vaucanson/algorithms/brzozowski.hxx: Fix include.
+	* include/vaucanson/algorithms/berry_sethi.hxx: Likewise.
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Likewise.
+
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/misc/random.hxx (generate<bool>): Fix.

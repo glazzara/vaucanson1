@@ -1,22 +1,20 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 324)
-(Parent-Version vaucanson 0 323)
-(Version-Log "
-2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(Project-Version vaucanson 0 325)
+(Parent-Version vaucanson 0 324)
+(Version-Log "2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 
-	* include/vaucanson/misc/random.hxx (generate<bool>): Fix.
-	* include/vaucanson/algebra/concept/alphabets_base.hxx (choose): Fix.
-	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx: Minor.
-	* include/vaucanson/automata/concrete/graph.hxx: Fix.
-	* include/vaucanson/algorithms/standard_of.hh: New version.
-	* include/vaucanson/algorithms/standard_of.hxx: Idem.
-	* src/tests/automata/algos/glushkov_test.hh: Use it.
-")
+	* include/vaucanson/algorithms/algo_helper.hxx: Move to...
+	* include/vaucanson/algorithms/internal/build_pattern.hxx: ... this.
+	* include/vaucanson/algorithms/algo_helper.hh: Move to...
+	* include/vaucanson/algorithms/internal/build_pattern.hh: ... this.
+	* include/vaucanson/algorithms/brzozowski.hxx: Fix include.
+	* include/vaucanson/algorithms/berry_sethi.hxx: Likewise.
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Likewise.")
 (New-Version-Log "")
-(Checkin-Time "Tue, 01 Jul 2003 18:12:27 +0200")
-(Checkin-Login yann)
+(Checkin-Time "Tue, 01 Jul 2003 18:21:21 +0200")
+(Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -98,7 +96,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.127 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -351,12 +349,12 @@
   (include/vaucanson/algorithms/hopcroft_minimization.hxx (vaucanson/e/25_hopcroft.h 1.11 600))
   (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.7 600))
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.2 600))
-  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.4 600))
+  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.5 600))
   (include/vaucanson/algorithms/brzozowski.hh (vaucanson/j/29_brzozowski 1.2 600))
   (include/vaucanson/algorithms/aci_canonical.hxx (vaucanson/j/30_aci_canoni 1.3 600))
   (include/vaucanson/algorithms/aci_canonical.hh (vaucanson/j/31_aci_canoni 1.2 600))
-  (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.6 600))
-  (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.6 600))
+  (include/vaucanson/algorithms/internal/build_pattern.hxx (vaucanson/j/32_algo_helpe 1.7 600))
+  (include/vaucanson/algorithms/internal/build_pattern.hh (vaucanson/j/33_algo_helpe 1.7 600))
 
   (include/vaucanson/algorithms/minimization_moore.hh (vaucanson/e/24_moore.hh 1.10 600))
   (include/vaucanson/algorithms/minimization_moore.hxx (vaucanson/e/23_moore.hxx 1.12 600))
@@ -378,10 +376,10 @@
   (include/vaucanson/algorithms/trim.hxx (vaucanson/f/0_trim.hxx 1.12 600))
   (include/vaucanson/algorithms/sum.hh (vaucanson/d/42_union.hh 1.12 600))
   (include/vaucanson/algorithms/sum.hxx (vaucanson/d/41_union.hxx 1.12 600))
-  (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.2 600))
+  (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.3 600))
   (include/vaucanson/algorithms/berry_sethi.hh (vaucanson/l/11_berry_seth 1.2 600))
 
-  (include/vaucanson/algorithms/derivatives_automaton.hxx (vaucanson/p/25_derivates_ 1.4 600))
+  (include/vaucanson/algorithms/derivatives_automaton.hxx (vaucanson/p/25_derivates_ 1.5 600))
   (include/vaucanson/algorithms/derivatives_automaton.hh (vaucanson/p/26_derivates_ 1.3 600))
 
   (include/vaucanson/algorithms/krat_exp_partial_derivation.hxx (vaucanson/p/27_krat_exp_p 1.5 600))
@@ -814,5 +812,7 @@
 
 
   (include/vaucanson/automata/concept/projection.hh (vaucanson/q/41_projection 1.1 600)))
-(Merge-Parents)
+(Merge-Parents
+  (0.324 complete)
+)
 (New-Merge-Parents)

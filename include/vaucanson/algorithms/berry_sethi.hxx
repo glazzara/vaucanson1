@@ -37,7 +37,7 @@
 # include <vaucanson/algorithms/krat_exp_derivation.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 # include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/algorithms/algo_helper.hh>
+# include <vaucanson/algorithms/internal/build_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_linearize.hh>
 
 namespace vcsn {

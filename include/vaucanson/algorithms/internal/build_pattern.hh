@@ -1,4 +1,4 @@
-// algo_helper.hh: this file is part of the Vaucanson project.
+// build_pattern.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_ALGO_HELPER_HH
-# define VCSN_ALGORITHMS_ALGO_HELPER_HH
+#ifndef VCSN_ALGORITHMS_INTERNAL_BUILD_PATTERN_HH
+# define VCSN_ALGORITHMS_INTERNAL_BUILD_PATTERN_HH
 
 # include <map>
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -152,6 +152,6 @@ namespace vcsn {
   }
 }
 
-#include <vaucanson/algorithms/algo_helper.hxx>
+#include <vaucanson/algorithms/internal/build_pattern.hxx>
 
-#endif // VCSN_ALGORITHMS_ALGO_HELPER_HH
+#endif // VCSN_ALGORITHMS_INTERNAL_BUILD_PATTERN_HH

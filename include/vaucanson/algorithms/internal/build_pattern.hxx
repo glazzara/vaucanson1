@@ -1,4 +1,4 @@
-// algo_helper.hxx: this file is part of the Vaucanson project.
+// build_pattern.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_ALGO_HELPER_HXX
-# define VCSN_ALGORITHMS_ALGO_HELPER_HXX
+#ifndef VCSN_ALGORITHMS_INTERNAL_BUILD_PATTERN_HXX
+# define VCSN_ALGORITHMS_INTERNAL_BUILD_PATTERN_HXX
 
 namespace vcsn
 {
@@ -282,4 +282,4 @@ namespace vcsn
   }
 }
 
-#endif // VCSN_ALGORITHMS_ALGO_HELPER_HXX
+#endif // VCSN_ALGORITHMS_INTERNAL_BUILD_PATTERN_HXX
