@@ -1,7 +1,7 @@
 // closure_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -35,6 +35,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
+# include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/algorithms/backward_closure.hh>
 # include <vaucanson/algorithms/forward_closure.hh>
 
@@ -44,30 +45,57 @@ bool closure_test(tests::Tester& tg)
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
-  
+
   typedef Auto automaton_t;
   AUTOMATON_TYPES(Auto);
-  
+
   tests::Tester t(tg.verbose());
   gen_auto_t gen(time(0x0));
-  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 10, 20);
-  {
-    automaton_t cauto = backward_closure(auto_epsilon);
 
-    TEST(t, "Backward: Increase of edges number.",  
-	 cauto.edges().size() >= auto_epsilon.edges().size());
-    TEST(t, "Backward: Idempotence.", 
-	 backward_closure(cauto).edges().size() == cauto.edges().size());
-  }
+  bool error_forward_edges = false;
+  bool error_forward_idempotence = false;
+  bool error_forward_epsilon = false;
+  bool error_backward_edges = false;
+  bool error_backward_idempotence = false;
+  bool error_backward_epsilon = false;
 
-  {
-    automaton_t cauto = forward_closure(auto_epsilon);
+  for (int i = 0; i < 50 ; ++i)
+    {
+      automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 10, 20);
+      {
+	automaton_t cauto = backward_closure(auto_epsilon);
 
-    TEST(t, "Forward: Increase of edges number.",  
-	 cauto.edges().size() >= auto_epsilon.edges().size());
-    TEST(t, "Forward: Idempotence.", 
-	 forward_closure(cauto).edges().size() == cauto.edges().size());
-  }
+	if (cauto.edges().size() < auto_epsilon.edges().size())
+	  error_backward_edges = true;
+	if (backward_closure(cauto).edges().size() != cauto.edges().size())
+	  error_backward_idempotence = true;
+	for_each_edge(i, cauto)
+	  if (cauto.series_of(*i) ==
+	      identity_as<series_value_t>::of(cauto.set().series()))
+	    error_backward_epsilon = true;
+      }
+
+      {
+	automaton_t cauto = forward_closure(auto_epsilon);
+
+	if (cauto.edges().size() < auto_epsilon.edges().size())
+	  error_forward_edges = true;
+	if (forward_closure(cauto).edges().size() != cauto.edges().size())
+	  error_forward_idempotence = true;
+	for_each_edge(i, cauto)
+	  if (cauto.series_of(*i) ==
+	      identity_as<series_value_t>::of(cauto.set().series()))
+	    error_forward_epsilon = true;
+      }
+    }
+
+  TEST(t, "Backward: Increase of edges number.", not error_backward_edges);
+  TEST(t, "Backward: Idempotence.", not error_backward_idempotence);
+  TEST(t, "Backward: No more epsilon transition.",
+       not error_backward_epsilon);
+  TEST(t, "Forward: Increase of edges number.", not error_forward_edges);
+  TEST(t, "Forward: Idempotence.", not error_forward_idempotence);
+  TEST(t, "Forward: No more epsilon transition.", not error_forward_epsilon);
 
   return t.all_passed();
 }
