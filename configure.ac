@@ -23,6 +23,7 @@ AC_CONFIG_FILES([			\
 	src/tests/fundamental/Makefile  \
 	src/tests/algebra/Makefile		\
 	src/tests/algebra/semiring/Makefile 	\
+	src/tests/algebra/alphabets/Makefile 	\
 	include/Makefile])
 
 AC_OUTPUT

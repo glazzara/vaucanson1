@@ -5,4 +5,5 @@
 # VCSN_HEADER
 
 SUBDIRS = \
+	alphabets    \
 	semiring	

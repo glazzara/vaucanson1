@@ -8,7 +8,7 @@
 
 #include <set>
 #include <check/tests_stuff.hh>
-#include <fundamental/template_element-test.hh>
+#include <fundamental/design_pattern-test.hh>
 #include <vaucanson/fundamental/fundamental.hh>
 #include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
@@ -19,7 +19,7 @@ using namespace vcsn;
 int main(int argc, char **argv)
 {
   
-  test_design_pattern<sugar::Alphabets, std::set<char> >(std::set<char>());
+  test_design_pattern<sugar::Alphabets, std::set<char> >();
 
 //   if (t.all_passed())
 //     return EXIT_SUCCESS;

@@ -82,6 +82,7 @@ am__quote = @am__quote@
 install_sh = @install_sh@
 
 SUBDIRS = \
+	alphabets    \
 	semiring	
 
 subdir = src/tests/algebra

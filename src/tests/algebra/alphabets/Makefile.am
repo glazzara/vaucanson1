@@ -11,5 +11,3 @@ check_PROGRAMS = \
 	alphabets-basic-test
 
 alphabets_basic_test_SOURCES = alphabets-basic-test.cc
-
-
