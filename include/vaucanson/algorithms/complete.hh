@@ -34,7 +34,7 @@
 /**
  * @file   complete.hh
  *
- * Completion algorithm for deterministic and boolean automaton.
+ * Completion algorithm for deterministic and Boolean automaton.
  *
  * @see complete(), complete_here(), is_complete()
  */
@@ -60,7 +60,7 @@ namespace vcsn {
    *
    * @note This algorithm works in place.
    *
-   * @param a the deterministic and boolean automaton to complete.
+   * @param a the deterministic and Boolean automaton to complete.
    *
    * @see complete(), is_complete()
    * @author Yann Régis-Gianas
@@ -74,7 +74,7 @@ namespace vcsn {
    *
    * @note This algorithm returns a fresh automaton.
    *
-   * @param a the deterministic and boolean automaton to complete.
+   * @param a the deterministic and Boolean automaton to complete.
    *
    * @see complete_here(), is_complete()
    * @author Yann Régis-Gianas
@@ -86,7 +86,7 @@ namespace vcsn {
   /**
    * Test if the transition function is complete for each state.
    *
-   * @param a The boolean automaton to test.
+   * @param a The Boolean automaton to test.
    *
    * @return true if the transition function of e is complete w.r.t alphabet.
    *

@@ -71,7 +71,7 @@ namespace vcsn {
       {
 	return_type match_lhs = match(lhs);
       
-	// FIXME: Following code only valid for series over boolean semirings.
+	// FIXME: Following code only valid for series over Boolean semirings.
 	if (match_lhs != zero_as<T>::of(exp_.set()))
 	  return match_lhs * rhs;
 	else
@@ -86,7 +86,7 @@ namespace vcsn {
       {
 	return_type match_lhs = match(lhs);
       
-	// FIXME: Following code only valid for series over boolean semirings.
+	// FIXME: Following code only valid for series over Boolean semirings.
 	if (match_lhs != zero_as<T>::of(exp_.set()))
 	  return match_lhs;
 	else
@@ -96,7 +96,7 @@ namespace vcsn {
 
       MATCH_(Star, e)
       {
-	// FIXME: Following code only valid for series over boolean semirings.
+	// FIXME: Following code only valid for series over Boolean semirings.
 	return match(e) * e.clone().star();
       }
       END

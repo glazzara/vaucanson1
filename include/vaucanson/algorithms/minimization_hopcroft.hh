@@ -57,7 +57,7 @@ namespace vcsn {
   /**
    * Return the minimal automaton using the hopcroft algorithm.
    *
-   * @param a The deterministic boolean automaton to minimize.
+   * @param a The deterministic Boolean automaton to minimize.
    *
    * @return A fresh automaton that is the canonical minimal automaton of 'a'.
    */
@@ -68,7 +68,7 @@ namespace vcsn {
   /**
    * Return the quotient of a non deterministic acceptor.
    *
-   * @param a The boolean automaton to minimize.
+   * @param a The Boolean automaton to minimize.
    *
    * @return A fresh automaton that is the quotient of 'a'.
    */

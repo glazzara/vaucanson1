@@ -71,7 +71,7 @@ namespace vcsn {
      * </pre>
      * <p>Priority for operators is: '*' > ' ' > '.' > '+'.</p>
      *
-     * <p>This function returns a pair which first element is a boolean
+     * <p>This function returns a pair which first element is a Boolean
      * indicating whether an error occured or not. The second element
      * is an error message when a parse error have been ecountered.</p>
      *

@@ -75,7 +75,7 @@ Ret operator Op(const T1& x1, const Element<S2, T2>& x2)
 
 
   /*-----------------------------.
-  | Standard boolean delegations |
+  | Standard Boolean delegations |
   `-----------------------------*/
 
 #define BOOLEAN_DELEGATION(Op, OpName)						\

@@ -74,7 +74,7 @@ namespace vcsn {
   op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(int));
 
   /*-----------------------------.
-  | specializations for booleans |
+  | specializations for Booleans |
   `-----------------------------*/
   template<typename T>
   void op_in_mul(const algebra::NumericalSemiring& s1,

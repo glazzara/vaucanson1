@@ -34,7 +34,7 @@
 /**
  * @file   determinize.hh
  *
- * This file provides the determinization algorithm for boolean automata.
+ * This file provides the determinization algorithm for Boolean automata.
  *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 19:13:10 2003
@@ -57,11 +57,11 @@ namespace vcsn {
   /**
    * @name determinize()
    *
-   * Returns the determinized of a boolean automaton.
+   * Returns the determinized of a Boolean automaton.
    *
-   * @param a The boolean automaton to determinize.
+   * @param a The Boolean automaton to determinize.
    *
-   * @return A fresh boolean automaton that is the determinization of 'a'.
+   * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
   /** @{ */
   template<typename A, typename T>
@@ -77,7 +77,7 @@ namespace vcsn {
   /**
    * Test if an automaton is deterministic.
    *
-   * @param a A boolean automaton.
+   * @param a A Boolean automaton.
    *
    * @return true if 'a' is deterministic.
    */

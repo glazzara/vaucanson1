@@ -94,7 +94,7 @@ namespace utility
    * with a call to operator=.
    *
    * Because of that danger, you can optionally enable or disable some
-   * runtime  checks by  respectively set  or clear  a  second boolean
+   * runtime  checks by  respectively set  or clear  a  second Boolean
    * template parameter.
    *
    * When  you  compile  without  the  NDEBUG  macro,  this  parameter

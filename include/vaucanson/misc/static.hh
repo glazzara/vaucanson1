@@ -86,7 +86,7 @@ namespace utility {
   `----------*/
 
   /**
-   * Choose between two types or values depending on a constant boolean.
+   * Choose between two types or values depending on a constant Boolean.
    *
    * @author Raphael Poss <raph@lrde.epita.fr>
    * @see static_if_simple
@@ -134,7 +134,7 @@ namespace utility {
   `-----------------*/
 
   /**
-   * Choose between two types or values depending on a constant boolean.
+   * Choose between two types or values depending on a constant Boolean.
    *
    * The classical static_if  cannot choose between a type  T and void
    * because of  its choose() methods which take  references. This one

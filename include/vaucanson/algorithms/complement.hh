@@ -34,7 +34,7 @@
 /**
  * @file   complement.hh
  *
- * Complementation algorithm for boolean automata.
+ * Complementation algorithm for Boolean automata.
  *
  * @see complement(), complement_here()
  */
@@ -55,7 +55,7 @@ namespace vcsn {
   /**
    * Complement in place the set of final states.
    *
-   * @param a The deterministic boolean automaton to complement.
+   * @param a The deterministic Boolean automaton to complement.
    *
    * @note The input automaton must be complete and deterministic.
    *
@@ -69,7 +69,7 @@ namespace vcsn {
   /**
    * Complement the set of final states.
    *
-   * @param a the deterministic boolean automaton to complement.
+   * @param a the deterministic Boolean automaton to complement.
    *
    * @note the input automaton must be complete and deterministic.
    *

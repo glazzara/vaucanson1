@@ -128,7 +128,7 @@ namespace vcsn {
   }
 
   /*-----------------------------.
-  | specializations for booleans |
+  | specializations for Booleans |
   `-----------------------------*/
   template<typename T>
   void op_in_mul(const algebra::NumericalSemiring&,
@@ -179,7 +179,7 @@ namespace vcsn {
   Element<algebra::NumericalSemiring, bool>
   op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(bool))
   {
-    // Every boolean is starable !
+    // Every Boolean is starable !
     return op_choose(set, SELECT(bool));
   }
 
@@ -188,7 +188,7 @@ namespace vcsn {
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(bool))
   {
-    assertion(! "Cannot choose non-starable boolean: that does not exist");
+    assertion(! "Cannot choose non-starable Boolean: that does not exist");
     return Element<algebra::NumericalSemiring, bool>(set, false);
   }
 

@@ -1,5 +1,19 @@
 2004-03-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/misc/static.hh,
+	* include/vaucanson/design_pattern/element_ops.hxx,
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hh,
+	* include/vaucanson/algorithms/complement.hh,
+	* include/vaucanson/algorithms/complete.hh,
+	* include/vaucanson/algorithms/determinize.hh,
+	* include/vaucanson/algorithms/minimization_hopcroft.hh,
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx,
+	* include/vaucanson/misc/deferrer.hh: s/boolean/Boolean/ in comments.
+
+2004-03-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/Makefile.am: Fix the call to mkinstalldir.
 
 2004-03-09  Loïc Fosse  <loic.fosse@lrde.epita.fr>
