@@ -1,4 +1,26 @@
 2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/fundamental/element.hxx
+	-    : set_(other.set_),
+	+    : set_(other.set()),
+
+	* src/tests/automata/algos/algo_test.cc : minor change.
+
+	* src/tests/automata/algos/normalize_test.hh : minor change.
+
+	* include/vaucanson/automata/concept/generalized.hxx : fixed.
+	* include/vaucanson/automata/concept/generalized.hh : idem.
+
+	* include/vaucanson/algorithms/elimination.hxx : added.
+	* include/vaucanson/algorithms/elimination.hh : added.
+	* include/vaucanson/automata/concrete/generalized.hxx : added.
+	* include/vaucanson/automata/concrete/generalized.hh : added.
+	* include/vaucanson/algebra/concrete/series/generalized.hxx : added.
+	* include/vaucanson/algebra/concrete/series/generalized.hh : added.
+	* src/tests/automata/algos/generalized_test.hh : added.
+
+	
+2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.75)
 	* src/tests/automata/algos/compute_test.hh : added.
 

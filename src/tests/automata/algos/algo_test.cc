@@ -1,5 +1,6 @@
 // algo_test.cc
 //
+// $Id$
 // VCSN_HEADER
 
 # include <check/tests_stuff.hh>
@@ -11,7 +12,7 @@
 # include <automata/algos/normalize_test.hh>
 # include <automata/algos/reachable_test.hh>
 # include <automata/algos/extract_test.hh>
-
+# include <automata/algos/generalized_test.hh>
 
 int main(int argc, char** argv)
 {
@@ -32,6 +33,7 @@ int main(int argc, char** argv)
   TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
   TEST(t, "CHECK REACHABLE : ", !reachable_test<usual_automaton_t>(t));
   TEST(t, "CHECK EXTRACT : ", !extract_test<usual_automaton_t>(t));
+  TEST(t, "CHECK GENERALIZED : ", generalized_test<usual_automaton_t>(t));
 
   return EXIT_SUCCESS;
 }

@@ -1,11 +1,9 @@
-/***************************************
- * <vaucanson/automata/generalized_hh> *
- **************************************/
-
-
-/* this file is part of the Vaucanson project */
-#ifndef VAUCANSON_AUTOMATA_GENERALIZED_HH
-# define VAUCANSON_AUTOMATA_GENERALIZED_HH
+// generalized.hh
+//
+// $Id$
+// VCSN_HEADER
+#ifndef VAUCANSON_AUTOMATA_CONCRETE_GENERALIZED_HH
+# define VAUCANSON_AUTOMATA_CONCRETE_GENERALIZED_HH
 
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/kinds.hh>
@@ -15,8 +13,8 @@
 # include <vaucanson/automata/concept/copy.hh>
 
 # include <vaucanson/algebra/concept/series_base.hh>
-# include <vaucanson/algebra/generalized.hh>
-# include <vaucanson/rat/exp.hh>
+# include <vaucanson/algebra/concrete/series/generalized.hh>
+# include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
 # include <map>
@@ -62,6 +60,6 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/automata/concept/generalized.hxx>
+# include <vaucanson/automata/concrete/generalized.hxx>
 
 #endif // VAUCANSON_AUTOMATA_GENERALIZED_HH

@@ -1,5 +1,6 @@
 // normalize_test.hh
 // 
+// $Id$
 // VCSN_HEADER
 
 

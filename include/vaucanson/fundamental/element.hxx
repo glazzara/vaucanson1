@@ -35,7 +35,7 @@ namespace vcsn {
   template <class S, class T>
   template<typename U>
   Element<S,T>::Element(const Element<S, U>& other)
-    : set_(other.set_),
+    : set_(other.set()),
       value_(op_convert(SELECT(T), SELECT(S), other.value()))
   {}
     
