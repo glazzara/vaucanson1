@@ -1,3 +1,10 @@
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/test-suites/algebra_series_polynom_double_string.defs,
+	* src/tests/test-suites/algebra_series_polynom_int_string.defs,
+	* src/tests/test-suites/algebra_series_polynom_bool_string.defs: Add
+	missing include.
+
 2004-06-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/Makefile.am: Add boolean_automata to SUBDIRS.
