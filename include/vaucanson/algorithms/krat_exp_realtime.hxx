@@ -47,7 +47,7 @@ namespace vcsn {
       Dispatch
       >
     {
-      typedef KRatExpRealtime<Series, T, Dispatch>	self_t;
+      typedef KRatExpIsRealtime<Series, T, Dispatch>	self_t;
       typedef bool					return_type;
       typedef typename Element<Series, T>::semiring_elt_t semiring_elt_t;
       typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
@@ -64,11 +64,11 @@ namespace vcsn {
  			bool,
  			Dispatch
  			>(exp)
-      {}
+       {}
 
       MATCH_(Constant, m)
       {
-	monoid_value_t::const_iterator i = m.begin();
+	typename monoid_value_t::const_iterator i = m.begin();
 	return ++i == m.end();
       }
       END

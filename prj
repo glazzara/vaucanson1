@@ -1,18 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 550)
-(Parent-Version vaucanson 0 549)
+(Project-Version vaucanson 0 551)
+(Parent-Version vaucanson 0 550)
 (New-Version-Log "")
 
-(Version-Log "2004-03-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+(Version-Log "2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
-	* include/Makefile.am: Include forgotten file.
-	* include/vaucanson/algebra/concrete/series/krat.hxx,
-	* include/vaucanson/algebra/concrete/series/krat.hh: Minor correction
-	on includes.")
-(Checkin-Time "Wed, 17 Mar 2004 11:22:54 +0100")
-(Checkin-Login pouche_l)
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx:
+	Small corrections.")
+(Checkin-Time "Wed, 17 Mar 2004 11:38:43 +0100")
+(Checkin-Login o-conn_s)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -407,7 +405,7 @@
   (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.14 646))
   (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.10 646))
   (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.8 646))
-  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.10 646))
+  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.11 644))
   (include/vaucanson/algorithms/krat_exp_realtime.hh (vaucanson/j/36_krat_exp_r 1.8 646))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.3.1.7 646))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.13 646))
