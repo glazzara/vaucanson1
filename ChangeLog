@@ -1,5 +1,14 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* src/tests/tests-suites/algebra_tropical_max_semiring.defs: Add
+	missing namespace specification.
+	* include/vaucanson/tools/io.hxx: Remove unused argument name.
+	* src/tests/sanity/generate_files.sh (AM_CPPFLAGS): Add more
+	defines for more strict checks.
+	* src/tests/sanity/generate_files.sh (AM_CXXFLAGS): Likewise.
+
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* src/tests/tests-suites/generate-all.sh: Typo fix.
 
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>

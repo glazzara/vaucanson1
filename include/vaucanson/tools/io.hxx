@@ -70,7 +70,7 @@ namespace vcsn
     }
 
     template<typename A, typename T>
-    std::string string_out::operator()(const A& a, const T& t) const
+    std::string string_out::operator()(const A&, const T& t) const
     {
       std::ostringstream os;
       os << t;
