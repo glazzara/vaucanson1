@@ -235,12 +235,12 @@ dump_python()
 
     echo "install-exec-hook:"
     for mod in $MODULES; do
-      echo -e "\tcd \$(pyexecdir) && rm -f _vaucanswig_$mod.so && \$(LN_S) libvs_$mod.so _vaucanswig_$mod.so"
+      echo -e "\tcd \$(DESTDIR)\$(pyexecdir) && rm -f _vaucanswig_$mod.so && \$(LN_S) libvs_$mod.so _vaucanswig_$mod.so"
     done
     echo
     echo "uninstall-hook:"
     for mod in $MODULES; do
-      echo -e "\trm -f \$(pyexecdir)/_vaucanswig_$mod.so"
+      echo -e "\trm -f \$(DESTDIR)\$(pyexecdir)/_vaucanswig_$mod.so"
     done
     echo  
 }

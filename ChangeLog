@@ -1,3 +1,7 @@
+2003-07-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* src/demos/vaucanswig/expand.sh: Add missing $(DESTDIR).
+
 2003-07-09  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* Makefile.am (AUTOMAKE_OPTIONS): Removed.
