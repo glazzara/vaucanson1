@@ -45,6 +45,9 @@ namespace vcsn {
   template<typename S, typename T> 
   struct SyntacticDecorator
   {
+    /// Attribute indicating whether the implementation type has run-time data.
+    static const bool dynamic_value = true;
+
     /// Virtual accessor to the structural element
     const S&	set() const;
       

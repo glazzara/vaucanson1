@@ -75,8 +75,9 @@ namespace vcsn {
     /// Implementation type for values.
     typedef T	      value_t;
 
-    /// Attribute indicating whether the structural element has dynamic data.
-    static const bool dynamic    = dynamic_traits<S>::ret;
+    /// Attribute indicating whether Element instances have run-time data.
+    static const bool dynamic    = dynamic_traits<S>::ret 
+                                   || MetaElement<S, T>::dynamic_value;
       
     /*--------------------.
     | Default constructor |

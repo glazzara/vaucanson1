@@ -1,3 +1,10 @@
+2003-06-26  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/fundamental/element.hh: Fix bug in definition
+	of the `dynamic' attribute.
+	* include/vaucanson/fundamental/syntactic_decorator.hh: Modify
+	accordingly.
+
 2003-06-25  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/misc/contract.hh: Fix minor bug.
@@ -86,8 +93,10 @@
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/krat_exp_partial_derivation.hh: Fix include.
-	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Fix namespace.
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hh: Fix
+	include.
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx:
+	Fix namespace.
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
@@ -108,11 +117,14 @@
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/hopcroft_minimization.hh: Document and replace ...
+	* include/vaucanson/algorithms/hopcroft_minimization.hh: Document
+	and replace ...
 	* include/vaucanson/algorithms/hopcroft.hh: Document and replace ...
-	* include/vaucanson/algorithms/hopcroft_minimization.hxx: Document and replace ...
+	* include/vaucanson/algorithms/hopcroft_minimization.hxx: Document
+	and replace ...
 	* include/vaucanson/algorithms/hopcroft.hxx: Document and replace ...
-	* src/tests/automata/algos/minimization_test.hh: Use minimization_hopcroft.
+	* src/tests/automata/algos/minimization_test.hh: Use
+	minimization_hopcroft.
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
@@ -129,9 +141,11 @@
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/sub_automaton.hh: Document and replace ...
+	* include/vaucanson/algorithms/sub_automaton.hh: Document and
+	replace ...
 	* include/vaucanson/algorithms/extract.hh: it.
-	* include/vaucanson/algorithms/sub_automaton.hxx: Document and replace ...
+	* include/vaucanson/algorithms/sub_automaton.hxx: Document and
+	replace ...
 	* include/vaucanson/algorithms/extract.hxx: it.
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -156,9 +170,11 @@
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/derivatives_automaton.hxx: Document and replace ...
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Document
+	and replace ...
 	* include/vaucanson/algorithms/derivates_automaton.hxx: it.
-	* include/vaucanson/algorithms/derivatives_automaton.hh: Document and replace ...
+	* include/vaucanson/algorithms/derivatives_automaton.hh: Document
+	and replace ...
 	* include/vaucanson/algorithms/derivates_automaton.hh: it.
 	* include/vaucanson/algorithms/krat_exp_derivation.hxx: Typo.
 	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Typo. 
@@ -187,7 +203,8 @@
 	* include/vaucanson/tools/usual.hh: Fix invalid includes.
 	* include/vaucanson/algorithms/forward_closure.hxx: Typo.
 	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.
-	* include/vaucanson/algorithms/forward_realtime.hxx: Use algebra explicitly.
+	* include/vaucanson/algorithms/forward_realtime.hxx: Use algebra
+	explicitly.
 	* include/vaucanson/algorithms/backward_realtime.hxx: Likewise.
 	* include/vaucanson/tools/usual.hxx: New.
 
