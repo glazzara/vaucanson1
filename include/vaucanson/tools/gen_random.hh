@@ -27,7 +27,6 @@
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/tools/usual.hh>
-# include <vaucanson/misc/ref.hh>
 
 namespace vcsn {
 
