@@ -1,4 +1,10 @@
 2004-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Minor fix
+	in the test. Now you can directly modify randomly generated test files,
+	the test automatically deals with it.
+	
+2004-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	Since we used random expressions, random results may occur...
 	This patch fix this problem for KRat exp, using a randomly 
 	generated test battery and use always the same for each future test.

@@ -68,9 +68,8 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
   srand(time(0));
 
-  const unsigned nb_test = 2500;
+  unsigned nb_test	 = 0;
   unsigned nb_success    = 0;
-  unsigned i;
 
   char buff[2048];
   char letters[2][2] = { {'a', 'b'}, {'\\', '.'} };
@@ -81,7 +80,6 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
   std::string path_to_test = "../../algebra/series/krat/tests/";
   std::string filename =
     path_to_test + "random_krat_exp_" + typeid_name + "_ab";
-  std::cout << "file: " << filename << std::endl;
   std::ifstream file(filename.c_str());
 
   for (int j = 0; j < 2; ++j)
@@ -94,9 +92,9 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
       series_set_t s(semiring, monoid);
       krat_exp_t exp(s);
 
-      for (i = 0; i < nb_test; ++i)
+      for (file.getline(buff, 2048); !file.eof();
+	   ++nb_test, file.getline(buff, 2048))
 	{
-	  file.getline(buff, 2048);
 	  std::ostringstream sstr;
 	  sstr << buff;
 	  std::pair<bool, std::string> ret = parse(sstr.str(), exp);
@@ -116,14 +114,15 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
 	}
       
       file.close();
+      file.clear();
       filename = path_to_test + "random_krat_exp_" + typeid_name + "_weird";
       file.open(filename.c_str());
     }
 
   std::string rate;
-  SUCCESS_RATE(rate, nb_success, nb_test * 2);
+  SUCCESS_RATE(rate, nb_success, nb_test);
   TEST(t, "parsing random rational expression " + rate,
-       nb_success == nb_test * 2);
+       nb_success == nb_test);
   return t.all_passed();
 }
 
