@@ -5,7 +5,7 @@ tests=`find src/tests/tests-suites -name \*.defs | \
 
 mv configure.ac configure.ac.bak
 
-sed "/GENERATED LINES/,/END OF GENERATED LINES/c \\\
+sed "/GENERATED LINES/,/END OF GENERATED LINES/c \\
 dnl GENERATED LINES FOR TESTS - DO NOT EDIT\\
 $tests
 dnl END OF GENERATED LINES FOR TESTS - DO NOT EDIT" configure.ac.bak > \
