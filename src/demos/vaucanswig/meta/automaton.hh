@@ -67,6 +67,7 @@ template<typename Auto, typename Converter>
 struct vcsn_automaton : vcsn::virtual_automaton
 {
   AUTOMATON_TYPES(Auto)
+  AUTOMATON_FREEMONOID_TYPES(Auto)
 
 
 

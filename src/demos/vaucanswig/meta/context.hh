@@ -40,6 +40,7 @@ template<typename Auto>
 struct vcsn_context : vcsn::virtual_context
 {
   AUTOMATON_TYPES(Auto)
+  AUTOMATON_FREEMONOID_TYPES(Auto)
 
     vcsn_context(const automata_set_t& set)
       : vcsn::virtual_context(), set_(& utility::unique::get(set))
@@ -124,6 +125,7 @@ namespace FAMILY ##_types					\
 {								\
   typedef vcsn::FAMILY::automaton_t automaton_t;	\
   AUTOMATON_TYPES_EXACT_(automaton_t, FAMILY ##_)		\
+  AUTOMATON_FREEMONOID_TYPES_EXACT_(automaton_t, FAMILY ##_)		\
 }
 
 #define MAKE_GEN_AUTO_TYPES(FAMILY)						\
@@ -131,6 +133,7 @@ namespace FAMILY ##_types							\
 {										\
   typedef vcsn::generalized_traits<automaton_t>::automaton_t generalized_automaton_t;	\
   AUTOMATON_TYPES_EXACT_(generalized_automaton_t, gen_## FAMILY ##_)		\
+  AUTOMATON_FREEMONOID_TYPES_EXACT_(generalized_automaton_t, gen_## FAMILY ##_)		\
   typedef gen_## FAMILY ##_series_set_elt_t FAMILY ##_exp_t;                             \
   typedef gen_## FAMILY ##_series_set_elt_value_t FAMILY ##_exp_value_t;                 \
 }

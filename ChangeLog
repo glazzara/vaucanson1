@@ -1,3 +1,9 @@
+2005-03-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/vaucanswig/meta/context.hh,
+	* src/demos/vaucanswig/meta/automaton.hh: Add macro 
+	AUTOMATON_FREEMONOID_TYPES* where needed.
+
 2005-02-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/xml/test.src: Change standard error redirection method for 
