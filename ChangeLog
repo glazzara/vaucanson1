@@ -1,3 +1,10 @@
+2004-03-09  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/berry_sethi.hxx: Fix continuation
+	  calculation.
+	* src/tests/automata/algos/berry_sethi_test.hh: Decrease number of tests
+	  and complexity of tests.
+
 2004-03-28  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Remove trim

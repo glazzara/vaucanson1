@@ -30,6 +30,8 @@
 #ifndef VCSN_ALGORITHMS_BERRY_SETHI_HXX
 # define VCSN_ALGORITHMS_BERRY_SETHI_HXX
 
+# include <list>
+
 # include <vaucanson/algorithms/berry_sethi.hh>
 
 # include <vaucanson/algorithms/internal/build_pattern.hh>
@@ -88,24 +90,30 @@ namespace vcsn {
     if (l == Letter(0,0))
       return exp;
 
-    alphabet_t	alpha = exp.set().monoid().alphabet();
-    Exp		tmp = derivate(exp, l).first;
-    Exp		zero = exp.set().zero(SELECT(value_t));
+    alphabet_t		alpha = exp.set().monoid().alphabet();
+    Exp			zero = exp.set().zero(SELECT(value_t));
+    std::list<Exp>	exp_list;
 
-    if (tmp != zero)
-      return tmp;
-    for (iterator i = alpha.begin(); i != alpha.end(); ++i)
-      if (*i != l)
-      {
-	tmp = derivate(exp, *i).first;
-	if (tmp != zero && tmp != exp)
-	{
-	  tmp = linear_exp_continuation(tmp, l);
-	  if (tmp != zero)
-	    return tmp;
-	}
-      }
-    return tmp;
+    exp_list.push_back(exp);
+    
+    while (!exp_list.empty())
+    {
+      Exp	exp = exp_list.front();
+      exp_list.pop_front();
+      Exp	deriv = derivate(exp, l).first;
+
+      if (deriv != zero)
+	return deriv;
+      else
+	for (iterator i = alpha.begin(); i != alpha.end(); ++i)
+	  if (*i != l)
+	  {
+	    deriv = derivate(exp, *i).first;
+	    if (deriv != zero && deriv != exp)
+	      exp_list.push_back(deriv);
+	  }
+    }
+    return zero;
   }
 
   /**
@@ -227,7 +235,9 @@ namespace vcsn {
   void
   berry_sethi(Element<A, T>& out, const Exp& kexp)
   {
-    out = *do_berry_sethi(out, kexp);
+    Element<A, T>* tmp = do_berry_sethi(out, kexp);
+    out = *tmp;
+    delete tmp;
   }
 
 } // vcsn

@@ -36,6 +36,7 @@
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/berry_sethi.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
+# include <vaucanson/algorithms/krat_exp_realtime.hh>
 
 template <class Auto>
 bool	berry_sethi_test(tests::Tester& tg)
@@ -46,7 +47,7 @@ bool	berry_sethi_test(tests::Tester& tg)
 
   tests::Tester		t(tg.verbose());
 
-  for (int i = 0; i < 100; ++i)
+  for (int i = 0; i < 10; ++i)
     {
       alphabet_t	at;
       letter_t		la = at.random_letter(); at.insert(la);
@@ -56,7 +57,11 @@ bool	berry_sethi_test(tests::Tester& tg)
       series_t		ss (sg, md);
       automata_set_t	aa (ss);
 
-      krat_t		exp = ss.choose(SELECT(exp_t));
+      krat_t		exp(ss);
+      // We want short expressions
+      do
+	exp = ss.choose(SELECT(exp_t));
+      while (realtime(exp).depth() > 10);
       automaton_t	au (aa);
 
       // FIXME: Write a real test!
