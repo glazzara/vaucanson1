@@ -33,4 +33,6 @@ nobase_include_HEADERS = \
 ./vaucanson/algebra/concept/concepts.hxx\
 ./vaucanson/algebra/concept/concepts.hh\
 ./vaucanson/algebra/concept/alphabets_base.hxx\
-./vaucanson/algebra/concept/alphabets_base.hh
+./vaucanson/algebra/concept/alphabets_base.hh\
+./vaucanson/algebra/concept/semigroup_base.hh\
+./vaucanson/algebra/concept/semigroup_base.hxx

@@ -1,5 +1,10 @@
 2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/semigroup_base.hh : added.
+	* include/vaucanson/algebra/concept/semigroup_base.hxx : added.
+
+2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/fundamental/element_ops.hh : remove vslot() and sslot().
 	* include/vaucanson/fundamental/element.hxx : remove vslot() and sslot().
 	* include/vaucanson/fundamental/element.hh : added documentation.
