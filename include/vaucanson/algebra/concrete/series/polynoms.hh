@@ -284,7 +284,7 @@ namespace vcsn {
     | transpose |
     `----------*/
     template <typename W, typename M, typename Tm, typename Tw>
-    void  op_in_transpose(Series<W, M>& s, polynom<Tm, Tw>& t);
+    void  op_in_transpose(const Series<W, M>& s, polynom<Tm, Tw>& t);
 
     /*-------------.
     | input-output |

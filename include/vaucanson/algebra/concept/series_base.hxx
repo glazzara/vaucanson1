@@ -146,7 +146,7 @@ namespace vcsn {
     }
 
     template <typename S, typename T>
-    Element<S, T>&       	
+    void
     MetaElement<SeriesBase<S>, T>::transpose()
     {
       op_in_transpose(set(), value());

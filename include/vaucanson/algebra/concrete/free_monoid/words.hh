@@ -93,9 +93,9 @@ namespace vcsn {
   struct MetaElement<SetWords<A>, T>
     : MetaElement<FreeMonoidBase<SetWords<A> >, T>
   {};
-
+  
   /*! @} @} */
-
+  
   namespace traits {
     
     template <class A>
@@ -103,9 +103,9 @@ namespace vcsn {
     {
       typedef A		alphabet_t;
     };
-
+    
   } // traits
-
+  
 } // vcsn
 
 template<typename A>

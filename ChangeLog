@@ -1,3 +1,16 @@
+2003-02-12  Maxime Rey  <max@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/series_base.hh : 
+	transpose modifications
+	* include/vaucanson/algebra/concept/series_base.hxx :
+	minor
+	* /include/vaucanson/algebra/concrete/free_monoid/str_words.hxx :
+	op_choose run now
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh : 
+	minor
+	* include/vaucanson/algebra/concrete/series/polynoms.hh :
+	transpose modifications
+
 2003-01-31  Maxime Rey  <max@lrde.epita.fr>
 
 	* vaucanson/include/vaucanson/algorithms/complementary.hxx : minor

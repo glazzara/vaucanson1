@@ -632,17 +632,20 @@ namespace vcsn {
   }
 
   /*----------.
-    | transpose |
-    `----------*/
+  | transpose |
+  `----------*/
   template <typename W, typename M, typename Tm, typename Tw>
-  void  op_in_transpose(Series<W, M>& s, polynom<Tm, Tw>& t)
+  void  op_in_transpose(const Series<W, M>& s, polynom<Tm, Tw>& t)
   {
     typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
     polynom<Tm, Tw>	new_t(t);
 
     t.clear();
     for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
-      t[mirror((*i).first)] = (*i).second;
+      {
+	Element<M, Tm> w(s.monoid(), i->first);
+	t.insert(mirror(w).value(), (*i).second);
+      }
   }
 
 } // vcsn

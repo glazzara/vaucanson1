@@ -72,7 +72,7 @@ namespace vcsn {
     std::basic_string<typename A::letter_t> r;
     for (unsigned i = 0; i < length; ++i)
       r = r + s.alphabet().choose();
-    return Element<SetWords<A>, std::basic_string<typename A::letter_t> >(r);
+    return Element<SetWords<A>, std::basic_string<typename A::letter_t> >(s, r);
   }
 
 } // vcsn

@@ -121,7 +121,7 @@ namespace vcsn {
     monoid_elt_t	choose_from_supp() const;
 
     //! in-place transpose transformation of the serie.
-    element_t&       	transpose();
+    void       	transpose();
 
     // undocumented.
     const Self&	set() const;
@@ -171,9 +171,9 @@ namespace vcsn {
   void	
   op_series_set(const SeriesBase<S>& s, const T& t, const W& w);
     
-  template <typename S, typename T>
-  void	
-  op_in_transpose(SeriesBase<S>& s, T& t);
+ //  template <typename S, typename T>
+//   void	
+//   op_in_transpose(const SeriesBase<S>& s, T& t);
 
 } // vcsn
 
