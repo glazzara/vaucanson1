@@ -1,9 +1,12 @@
 2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* src/tests/algebra/semiring/semiring-numerical-test.cc : added.
+
+
+2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* src/tests/algebra/Makefile.am : added.
 	* src/tests/algebra/Makefile.in : added.
-	* src/tests/algebra/semiring/semiring-numerical-test : added.
-	* src/tests/algebra/semiring/semiring-numerical-test.cc : added.
 	* src/tests/algebra/semiring/Makefile.in : added.
 	* src/tests/algebra/semiring/Makefile.am : added.
 
