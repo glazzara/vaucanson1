@@ -1,5 +1,9 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/aut_to_exp.hxx: Fix include.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/aut_to_exp.hh: Document and replace ...
 	* include/vaucanson/algorithms/elimination.hh: it.
 	* include/vaucanson/algorithms/aut_to_exp.hxx: Document and replace ...
