@@ -48,7 +48,7 @@ my $basename = $_;
 $_ = $shortname;
 s,^[./]*,,g;
 s,^,VCSN_,g;
-s,/,_,g;
+s,[^a-zA-Z],_,g;
 y/[a-z]./[A-Z]_/;
 my $cppname = $_;
 

@@ -1,5 +1,9 @@
 2003-07-08  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* reheader.pl: Fix generation of preprocessor names.
+
+2003-07-08  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* reheader.pl: Strip common file name beginnings.
 	* Many files: Update prefix header.
 
