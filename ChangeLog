@@ -1,3 +1,22 @@
+2003-05-18  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* mical/src/Makefile.am: Add. Make Mical binaries part of the
+	`check' target.
+
+	* mical/include/Makefile.am: Add.
+
+	* mical/Makefile.am: Add.
+
+	* mical/include/algorithms/make_pta.hh: Fix typo. Import the
+	`vcsn' namespace.
+
+	* mical/src/make_mca.cc (main): Import the `mical' namespace.
+	* mical/include/algorithms/rig.hh: Likewise.
+
+	* Makefile.am (SUBDIRS): Mention `mical'.
+	* configure.ac: Likewise.
+
+
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* src/demos/samples/Makefile.am: Distribute more examples.

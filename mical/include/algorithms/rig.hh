@@ -15,6 +15,7 @@
 namespace gi {
   
   using namespace vcsn;
+  using namespace mical;
 
   template<typename A, typename T, typename W>
   struct FactoryBorderSet 

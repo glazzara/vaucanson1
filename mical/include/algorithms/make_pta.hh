@@ -6,7 +6,9 @@
 #include <set>
 #include <vaucanson/fundamental/element.hh>
 
-namespace maical {
+namespace mical {
+
+  using namespace vcsn;
 
   template<typename A, typename T, typename W>
   void

@@ -27,6 +27,7 @@ int main()
   using namespace vcsn::algebra::char_letter;
   using namespace gi;
   using namespace vcsn;
+  using namespace mical;
 
   // on recupere les echantillons positifs et negatifs
   pair<std::set<Word>, std::set<Word> > dsample;

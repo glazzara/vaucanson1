@@ -73,7 +73,10 @@ AC_CONFIG_FILES([
 	src/demos/samples/algebra/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
-        doc/doc.doxy	
+        doc/doc.doxy
+	mical/Makefile
+	mical/include/Makefile
+	mical/src/Makefile
 	include/Makefile])
 
 VCSN_TESTS([algebra_numerical_semiring])

@@ -5,7 +5,7 @@
 
 AUTOMAKE_OPTIONS = foreign 1.7
 
-SUBDIRS = include doc src
+SUBDIRS = include doc src mical
 
 EXTRA_DIST = THANKS README LICENCE 
 
