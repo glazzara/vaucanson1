@@ -36,6 +36,15 @@ namespace vcsn {
 
   }
 
+  /*-----------------------------.
+  | MetaElement<Series<W, M>, T> |
+  `-----------------------------*/
+  
+  template <class W, class M, class T>
+  struct MetaElement<Series<W, M>, T> :
+    public MetaElement<SeriesBase<Series<W, M> >, T>
+  {};
+
     /*----------------------.
     | MetaSet<Series<W, M>> |
     `----------------------*/

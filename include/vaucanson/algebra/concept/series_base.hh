@@ -64,7 +64,7 @@ namespace vcsn {
       void		value_set(const monoid_value_t& m, 
 				  const weights_value_t& w);
       const Self&	set() const;
-      void		set(const monoid_elt_t& m, const weight_t& w);
+      void		assoc(const monoid_elt_t& m, const weight_t& w);
       bool		is_finite_app() const;
       T&		supp();
       const T&		supp() const;

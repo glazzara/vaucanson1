@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     verbose = 1;
   tests::Tester t(verbose);
 
- if (test_series<Series<NumericalSemiring, Words>, rat::exp<int, std::string> >(t))
+ if (test_series<Series<NumericalSemiring, Words>, rat::exp<std::string, int> >(t))
     return EXIT_SUCCESS;
   else
     return EXIT_FAILURE;

@@ -706,6 +706,8 @@ namespace vcsn {
 
     }
 
+#define FIXME(Msg) std::cerr << "FIXME: " << Msg << std::endl;
+
     template<typename W, typename M, typename Tm, typename Tw, typename oTm>
     inline
     Tw op_series_get(const Series<W, M>& s, 
@@ -715,8 +717,21 @@ namespace vcsn {
       // FIXME : doing a get on a krat could be implemented by computed 
       //         a thompson/glushkov automaton and compute resulting series 
       //         of m.
-      assert(! "not implemeted yet");
+      FIXME("not implemented yet.");
       return zero_value(SELECT(W), SELECT(Tw));
+    }
+
+    template<typename W, typename M, typename Tm, typename Tw, typename oTm, typename oTw>
+    inline
+    void op_series_set(const Series<W, M>& s, 
+		       const rat::exp<Tm, Tw>& p,
+		       const oTm& m,
+		       const oTw& w)
+    { 
+      // FIXME : doing a get on a krat could be implemented by computed 
+      //         a thompson/glushkov automaton and compute resulting series 
+      //         of m.
+      FIXME("not implemented yet.");
     }
 
     /*----------------------------------------------------------.

@@ -274,6 +274,12 @@ namespace vcsn
 		     const rat::exp<Tm, Tw>& p,
 		     const oTm& m);
 
+    template<typename W, typename M, typename Tm, typename Tw, typename oTm, typename oTw>
+    void op_series_set(const Series<W, M>& s, 
+		       const rat::exp<Tm, Tw>& p,
+		       const oTm& m,
+		       const oTw& w);
+
 
   } // algebra
 } // vcsn

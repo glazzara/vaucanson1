@@ -91,8 +91,8 @@ namespace vcsn {
 
     template<typename S, typename T>
     void 
-    MetaElement<SeriesBase<S>, T>::set(const monoid_elt_t& m, 
-					  const weight_t& w) 
+    MetaElement<SeriesBase<S>, T>::assoc(const monoid_elt_t& m, 
+					 const weight_t& w) 
     { 
       value_set(m.value(), w.value()); 
     }

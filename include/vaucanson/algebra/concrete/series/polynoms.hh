@@ -263,7 +263,7 @@ namespace vcsn {
 
     template<typename W, typename M, typename Tm, typename Tw>
     struct MetaElement<Series<W, M>, polynom<Tm, Tw> >
-      : MetaElement<SeriesBase<Series<W, M> >, polynom<Tm, Tw> >
+      : public MetaElement<SeriesBase<Series<W, M> >, polynom<Tm, Tw> >
     {
       static const bool dynamic_values = true;
     };

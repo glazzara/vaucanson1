@@ -1,5 +1,36 @@
 2002-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/series_base.hh : modified, the
+	method 'set' is known as 'assoc' from now.
+
+	* include/vaucanson/algebra/concept/series_base.hxx : modified in
+	consequence.
+
+	* include/vaucanson/algebra/concrete/series/krat.hxx : modified.
+	* include/vaucanson/algebra/concrete/series/krat.hh : add op_series_set.
+
+	* include/vaucanson/algebra/concrete/series/polynoms.hh :
+	* include/vaucanson/algebra/concrete/series/series.hh
+
+	* src/tests/algebra/series/series-test.cc : modified.
+
+	35c35
+	<  if (test_series<Series<NumericalSemiring, Words>, polynom<int,std::string> >(t))
+	--- src/tests/algebra/series/series-test.cc
+	>   if (test_series<Series<NumericalSemiring, Words>, polynom<std::string, int> >(t))
+
+	* src/tests/algebra/series/series-test.hh : modified (add tests).
+
+	* src/tests/algebra/series/krat-test.cc : modified.
+
+	41c41
+	<  if (test_series<Series<NumericalSemiring, Words>, rat::exp<int, std::string> >(t))
+	--- src/tests/algebra/series/krat-test.cc
+	>  if (test_series<Series<NumericalSemiring, Words>, rat::exp<std::string, int> >(t))
+
+
+2002-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/exp.hh: 
 
 	* src/tests/fundamental/template_element-test.hh : header modified.
