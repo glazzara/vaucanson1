@@ -1,3 +1,13 @@
+2004-05-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/brzozowski_test.hh: 
+	Rename to...
+	* src/tests/boolean_automata/brzozowski_test.hh: This.
+	* src/tests/boolean_automata/Makefile.am: New file. Source Makefile for
+	new test folder /boolean_automata.
+	* configure.ac: Update with new test folder.
+	* src/tests/test-suites/generate-all.sh: Update.
+
 2004-05-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/demos/vaucanswig/meta/vaucanswig_algo_common.i: Minor fix to
