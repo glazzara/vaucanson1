@@ -124,11 +124,24 @@ namespace vcsn {
 			      SELECTOR(float));
 
   Element<algebra::NumericalSemiring, float>
-  op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(float));
+  op_choose_starable(const algebra::NumericalSemiring& set,
+		     SELECTOR(float));
 
   Element<algebra::NumericalSemiring, float>
-  op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(float));
+  op_choose_non_starable(const algebra::NumericalSemiring& set,
+			 SELECTOR(float));
 
+  bool
+  op_can_choose_non_starable(const algebra::NumericalSemiring& set,
+			      SELECTOR(double));
+
+  Element<algebra::NumericalSemiring, double>
+  op_choose_starable(const algebra::NumericalSemiring& set,
+		     SELECTOR(double));
+
+  Element<algebra::NumericalSemiring, double>
+  op_choose_non_starable(const algebra::NumericalSemiring& set,
+			 SELECTOR(double));
 
   /*-------------------------------------.
   | specializations for rational numbers |

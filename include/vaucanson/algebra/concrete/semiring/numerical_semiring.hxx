@@ -261,6 +261,34 @@ namespace vcsn {
         (set, utility::random::generate<float>() * 1000. + 1.0);
   }
 
+  inline
+  bool
+  op_can_choose_non_starable(const algebra::NumericalSemiring&,
+			      SELECTOR(double))
+  {
+    return true; // Every float which is less than 0 or greater than 1 is
+		 // non-starable.
+  }
+
+  inline
+  Element<algebra::NumericalSemiring, double>
+  op_choose_starable(const algebra::NumericalSemiring& set,
+		     SELECTOR(double))
+  {
+    return
+      Element<algebra::NumericalSemiring, double>
+        (set, utility::random::generate<double>());
+  }
+
+  inline
+  Element<algebra::NumericalSemiring, double>
+  op_choose_non_starable(const algebra::NumericalSemiring& set,
+			 SELECTOR(double))
+  {
+    return
+      Element<algebra::NumericalSemiring, double>
+        (set, utility::random::generate<double>() * 1000. + 1.0);
+  }
   // FIXME: add some more operators as syntactic sugar
 
 

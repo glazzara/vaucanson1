@@ -13,17 +13,20 @@
 ../bin/generate-test-suite.sh \
    algebra_numerical_semiring_double \
    algebra_numerical_semiring_double.defs \
-   ../algebra/semiring
+   ../algebra/semiring \
+   ../algebra/numerical_semiring
 
 ../bin/generate-test-suite.sh \
    algebra_numerical_semiring_float \
    algebra_numerical_semiring_float.defs \
-   ../algebra/semiring
+   ../algebra/semiring \
+   ../algebra/numerical_semiring
 
 ../bin/generate-test-suite.sh \
    algebra_numerical_semiring_rational \
    algebra_numerical_semiring_rational.defs \
-   ../algebra/semiring
+   ../algebra/semiring \
+   ../algebra/numerical_semiring
 
 ../bin/generate-test-suite.sh \
    algebra_series_krat \

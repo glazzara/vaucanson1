@@ -81,6 +81,10 @@ namespace utility {
     template<>
     inline float generate<float>();
 
+    /// Generate a random double between 0 and 1
+    template<>
+    inline double generate<double>();
+
     // Generate of n sample from a range to an output iterator.
     template <class InputIterator, class OutputIterator>
     void sample_n(InputIterator first, InputIterator end,

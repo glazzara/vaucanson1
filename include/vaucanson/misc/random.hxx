@@ -92,6 +92,14 @@ namespace utility {
 	      static_cast<float> (rand())) / RAND_MAX;
     }
 
+    template<>
+    double generate<double>()
+    {
+      return ((static_cast<double> (rand()) / RAND_MAX +
+	       static_cast<double> (rand())) / RAND_MAX +
+	      static_cast<double> (rand())) / RAND_MAX;
+    }
+
     template <class Iterator, class OutputIterator>
     void sample_n(Iterator first, Iterator end,
 		  OutputIterator out, unsigned n)
