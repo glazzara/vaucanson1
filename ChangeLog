@@ -1,5 +1,21 @@
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/automata/concept/automata_base.hh: Fix include.
+	* include/vaucanson/automata/concept/automata_ops.hh: Likewise.
+	* include/vaucanson/automata/concrete/graph.hh: Fix namespace.
+	* include/vaucanson/automata/concrete/kind_adapter.hh: Likewise.
+	* include/vaucanson/automata/concrete/generalized.hh: Fix include.
+	* include/vaucanson/automata/concrete/generalized.hxx: Likewise.
+	* include/vaucanson/automata/concept/automata_kind.hh: Remove.
+	* include/vaucanson/automata/concept/history.hh: Remove.
+	* include/vaucanson/automata/concept/history.hxx: Remove.
+	* include/vaucanson/automata/concept/relabel_impl.hh: Remove.
+	* include/vaucanson/automata/concept/relabel_impl.hxx: Remove.
+	* include/vaucanson/automata/concept/transpose_impl.hh: Remove.
+	* include/vaucanson/automata/concept/transpose_impl.hxx: Remove.
+
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/alphabets_base.hh: Document.
 	* include/vaucanson/algebra/concept/alphabets_base.hxx: Typo.
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix namespace.

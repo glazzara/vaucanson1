@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -21,17 +22,7 @@
 #ifndef VAUCANSON_AUTOMATA_CONCRETE_GENERALIZED_HXX
 # define VAUCANSON_AUTOMATA_CONCRETE_GENERALIZED_HXX
 
-# include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/kinds.hh>
-# include <vaucanson/automata/concept/tags.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concrete/manylinks.hh>
-# include <vaucanson/automata/concept/copy.hh>
-
-# include <vaucanson/algebra/concept/series_base.hh>
-# include <vaucanson/algebra/concrete/series/generalized.hh>
-# include <vaucanson/algebra/concrete/series/rat/exp.hh>
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/automata/concrete/generalized.hh>
 
 namespace vcsn {
 
@@ -39,7 +30,7 @@ namespace vcsn {
   typename generalized_traits<Auto_>::automaton_t
   generalized(const Auto_& from)
   {
-    typename generalized_traits<Auto_>::automaton_t to;
+    typename generalized_traits<Auto_>::automaton_t to(from.set());
     auto_copy(to, from);
     return to;
   }

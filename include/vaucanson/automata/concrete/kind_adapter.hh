@@ -2,8 +2,7 @@
 // 
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
-// and Regis-Gianas.
+// Copyright (C) 2001-2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -22,13 +21,12 @@
 #ifndef VCSN_AUTOMATA_CONCRETE_KIND_ADAPTER_HH
 # define VCSN_AUTOMATA_CONCRETE_KIND_ADAPTER_HH
 
-# include <vaucanson/misc/contract.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 
 namespace vcsn {
 
-  //! we define a series of macros to make the implementation of data
-  //! structure for  automaton easier.
+  //! we define a series of macros to make the data structure for
+  //! automaton easier.
 
 #define ADAPT_ADD_LETTER_EDGE_TO_SERIES_LABEL(T...)			\
   hedge_t								\
@@ -51,43 +49,43 @@ namespace vcsn {
     return op_add_edge(s, v, from, to, s1.value());			\
   }
 
-#define ADAPT_LETTER_OF_TO_SERIES_LABEL(T...)			\
+#define ADAPT_LETTER_OF_TO_SERIES_LABEL(T...)				\
   typename Element<AutomataBase<S>, T>::letter_t		\
-  op_letter_of(const AutomataBase<S>& s,			\
+  op_letter_of(const AutomataBase<S>& s,				\
 	       const T& v,					\
-               hedge_t e)					\
-  {								\
-    typedef typename S::series_t series_t;			\
-    typedef typename series_t::monoid_t monoid_t;		\
-    typedef typename Element<S, T>::monoid_elt_value_t		\
-    word_value_t;						\
-    typedef typename Element<S, T>::serie_value_t		\
-    serie_value_t;						\
-								\
-    Element<series_t, serie_value_t> sl = op_serie_of(s, v, e);	\
-    precondition(sl.supp().size() == 1);			\
-    Element<monoid_t, word_value_t> w = sl.choose_from_supp();	\
-    precondition(w.length() == 1);				\
-    return *w.begin();						\
+               hedge_t e)						\
+  {									\
+    typedef typename S::series_t series_t;				\
+    typedef typename series_t::monoid_t monoid_t;			\
+    typedef typename Element<S, T>::monoid_elt_value_t 	\
+    word_value_t;							\
+    typedef typename Element<S, T>::serie_value_t 		\
+    serie_value_t;							\
+									\
+    Element<series_t, serie_value_t> sl = op_serie_of(s, v, e);		\
+    precondition(sl.supp().size() == 1);				\
+    Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
+    precondition(w.length() == 1);					\
+    return *w.begin();							\
   }
 
-#define ADAPT_WORD_OF_TO_SERIES_LABEL(T...)			\
+#define ADAPT_WORD_OF_TO_SERIES_LABEL(T...)				\
   typename Element<AutomataBase<S>, T>::monoid_elt_t		\
-  op_word_of(const AutomataBase<S>& s,				\
+  op_word_of(const AutomataBase<S>& s,					\
 	     const T& v,					\
-             hedge_t e)						\
-  {								\
-    typedef typename S::series_t series_t;			\
-    typedef typename series_t::monoid_t monoid_t;		\
-    typedef typename Element<S, T>::monoid_elt_value_t		\
-    word_value_t;						\
+             hedge_t e)							\
+  {									\
+    typedef typename S::series_t series_t;				\
+    typedef typename series_t::monoid_t monoid_t;			\
+    typedef typename Element<S, T>::monoid_elt_value_t	\
+    word_value_t;							\
     typedef typename Element<S, T>::serie_value_t		\
-    serie_value_t;						\
-								\
-    Element<series_t, serie_value_t> sl = op_serie_of(s, v, e);	\
-    precondition(sl.supp().size() == 1);			\
-    Element<monoid_t, word_value_t> w = sl.choose_from_supp();	\
-    return w;							\
+    serie_value_t;							\
+									\
+    Element<series_t, serie_value_t> sl = op_serie_of(s, v, e);		\
+    precondition(sl.supp().size() == 1);				\
+    Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
+    return w;								\
   }
 
 } // vcsn

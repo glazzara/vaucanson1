@@ -20,6 +20,8 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_OPS_HH
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_OPS_HH
 
+# include <vaucanson/automata/concept/automata_base.hh>
+
 namespace vcsn {
 
 #define AutoType(Type) \

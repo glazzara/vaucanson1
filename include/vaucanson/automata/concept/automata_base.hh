@@ -26,6 +26,7 @@
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/delta_kind.hh>
+# include <vaucanson/algebra/concept/series_base.hh>
 
 namespace vcsn {
 

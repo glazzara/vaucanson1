@@ -57,8 +57,11 @@ namespace vcsn {
     std::set<hstate_t> predecessors;
   };
 
-  typedef SparseInterval<hstate_t, std::set<hstate_t> > StateContainer;
-  typedef SparseInterval<hedge_t, std::set<hedge_t> > EdgeContainer;
+  typedef utility::SparseInterval<hstate_t, std::set<hstate_t> > 
+  StateContainer;
+
+  typedef utility::SparseInterval<hedge_t, std::set<hedge_t> > 
+  EdgeContainer;
 
   template <
     class K,
@@ -83,8 +86,8 @@ namespace vcsn {
     typedef EdgeContainer			  edges_t;
     typedef std::map<hstate_t, serie_value_t>	  initial_t;
     typedef std::map<hstate_t, serie_value_t>     final_t;
-    typedef Support<initial_t>			  initial_support_t;
-    typedef Support<final_t>			  final_support_t;
+    typedef utility::Support<initial_t>		  initial_support_t;
+    typedef utility::Support<final_t>		  final_support_t;
 
   public:      
     Graph();
@@ -206,11 +209,10 @@ namespace vcsn {
     typedef typename EdgeContainer::iterator	     edge_iterator;
     typedef std::map<hstate_t, serie_value_t>	     initial_t;
     typedef std::map<hstate_t, serie_value_t>        final_t;
-    typedef Support<initial_t>			     initial_support_t;
-    typedef Support<final_t>			     final_support_t;
-    typedef typename Support<initial_t>::iterator    initial_iterator;
-
-    typedef typename Support<final_t>::iterator	     final_iterator;
+    typedef utility::Support<initial_t>		     initial_support_t;
+    typedef utility::Support<final_t>		     final_support_t;
+    typedef typename initial_support_t::iterator     initial_iterator;
+    typedef typename final_support_t::iterator	     final_iterator;
     typedef edge_value<label_t>			     edge_value_t;
     typedef state_value				     state_value_t;
     typedef std::vector<state_value_t>		     state_data_t;

@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -22,16 +23,15 @@
 # define VAUCANSON_AUTOMATA_CONCRETE_GENERALIZED_HH
 
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concrete/manylinks.hh>
 # include <vaucanson/automata/concept/copy.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/concrete/series/generalized.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/automata/concrete/graph.hh>
 # include <map>
+
 
 namespace vcsn {
 
@@ -43,54 +43,24 @@ namespace vcsn {
   {
     // FIXME: static check on the concept of automaton
     typedef typename Auto_::series_t		series_t;
+    typedef typename series_t::monoid_t		monoid_t;
     typedef typename Auto_::series_elt_t	series_elt_t;
     typedef typename series_elt_t::monoid_elt_t monoid_elt_t;
     typedef typename monoid_elt_t::value_t	monoid_value_t;
     typedef typename series_elt_t::weight_t     weight_t;
     typedef typename weight_t::value_t		weight_value_t;
 
-    // FIXME: such workarounds should not appear in the interface files.
-#ifdef __ICC
-    template <class F, class T>
-    struct map : std::map<F, T>
-    {};
+    typedef vcsn::Element
+    <vcsn::Automata<series_t>,
+     Graph<labels_are_series,
+	   monoid_value_t,
+	   weight_value_t,
+	   rat::exp<monoid_value_t, weight_value_t>,
+	   typename monoid_t::letter_t,
+	   NoTag>
+    > automaton_t;
+  };
 
-    typedef vcsn::Element<vcsn::Automata,
-      utility::ref<
-      vcsn::AutomatonImpl
-    <
-      vcsn::labels_are_series,
-      series_t,
-      rat::exp<monoid_value_t, weight_value_t>,
-      vcsn::ManyLinks
-      <
-      rat::exp<monoid_value_t, weight_value_t>,
-      vcsn::NoTag,
-      vcsn::NoTag 
-      >,
-      vcsn::NoTag,
-      map 
-    > > > automaton_t;
-  };
-#else
-    typedef vcsn::Element<vcsn::Automata,
-      utility::ref<
-      vcsn::AutomatonImpl
-    <
-      vcsn::labels_are_series,
-      series_t,
-      rat::exp<monoid_value_t, weight_value_t>,
-      vcsn::ManyLinks
-      <
-      rat::exp<monoid_value_t, weight_value_t>,
-      vcsn::NoTag,
-      vcsn::NoTag 
-      >,
-      vcsn::NoTag,
-      std::map 
-    > > > automaton_t;
-  };
-#endif
 
   template <class Auto_>
   typename generalized_traits<Auto_>::automaton_t

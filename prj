@@ -1,23 +1,27 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 247)
-(Parent-Version vaucanson 0 246)
+(Project-Version vaucanson 0 248)
+(Parent-Version vaucanson 0 247)
 (Version-Log "
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/alphabets_base.hh: Document.
-	* include/vaucanson/algebra/concept/alphabets_base.hxx: Typo.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix namespace.
-	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: 
-		Likewise.
-	* include/vaucanson/misc/support.hh: Rename vcsn to utility.
-	* include/vaucanson/misc/support.hxx: Likewise.
-	* include/vaucanson/misc/constraint.hh: New.
-	* include/vaucanson/misc/container_ops.h[h,xx]: New.
+	* include/vaucanson/automata/concept/automata_base.hh: Fix include.
+	* include/vaucanson/automata/concept/automata_ops.hh: Likewise.
+	* include/vaucanson/automata/concrete/graph.hh: Fix namespace.
+	* include/vaucanson/automata/concrete/kind_adapter.hh: Likewise.
+	* include/vaucanson/automata/concrete/generalized.hh: Fix include.
+	* include/vaucanson/automata/concrete/generalized.hxx: Likewise.
+	* include/vaucanson/automata/concept/automata_kind.hh: Remove.
+	* include/vaucanson/automata/concept/history.hh: Remove.
+	* include/vaucanson/automata/concept/history.hxx: Remove.
+	* include/vaucanson/automata/concept/relabel_impl.hh: Remove.
+	* include/vaucanson/automata/concept/relabel_impl.hxx: Remove.
+	* include/vaucanson/automata/concept/transpose_impl.hh: Remove.
+	* include/vaucanson/automata/concept/transpose_impl.hxx: Remove.
 ")
 (New-Version-Log "")
-(Checkin-Time "Fri, 20 Jun 2003 18:27:40 +0200")
+(Checkin-Time "Fri, 20 Jun 2003 18:51:11 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -100,7 +104,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.52 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.53 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -302,7 +306,7 @@
 
   (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.9 600))
   (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.8 600))
-  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.16 600))
+  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.17 600))
   (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.13 600))
   (include/vaucanson/automata/concept/concepts.hh (vaucanson/d/8_concepts.h 1.7 600))
   (include/vaucanson/automata/concept/concepts.hxx (vaucanson/d/7_concepts.h 1.6 600))
@@ -310,26 +314,26 @@
   (include/vaucanson/automata/concept/copy.hxx (vaucanson/d/5_copy.hxx 1.6 600))
   (include/vaucanson/automata/concept/handlers.hh (vaucanson/d/2_handlers.h 1.8 600))
   (include/vaucanson/automata/concept/handlers.hxx (vaucanson/d/1_handlers.h 1.7 600))
-  (include/vaucanson/automata/concept/history.hh (vaucanson/d/0_history.hh 1.6 600))
-  (include/vaucanson/automata/concept/history.hxx (vaucanson/c/51_history.hx 1.6 600))
+  
+  
   (include/vaucanson/automata/concept/kinds.hh (vaucanson/d/16_kinds.hh 1.12 600))
   (include/vaucanson/automata/concept/kinds.hxx (vaucanson/d/15_kinds.hxx 1.12 600))
-  (include/vaucanson/automata/concept/relabel_impl.hh (vaucanson/c/50_relabel_im 1.7 600))
-  (include/vaucanson/automata/concept/relabel_impl.hxx (vaucanson/c/49_relabel_im 1.6 600))
+  
+  
   (include/vaucanson/automata/concept/tags.hh (vaucanson/c/48_tags.hh 1.6 600))
   (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.5 600))
   (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.6 600))
   (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.6 600))
-  (include/vaucanson/automata/concept/transpose_impl.hh (vaucanson/c/42_transpose_ 1.9 600))
-  (include/vaucanson/automata/concept/transpose_impl.hxx (vaucanson/c/41_transpose_ 1.8 600))
+  
+  
   (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.2 600))
-  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.1 600))
+  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.2 600))
 
   (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.1 600))
-  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.3 600))
-  (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.1 600))
-  (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.7 600))
-  (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.5 600)) 
+  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.4 600))
+  (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.2 600))
+  (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.8 600))
+  (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.6 600)) 
 
   
   
@@ -781,6 +785,41 @@
 ;; to version 0.246(w), by yann:
 
   (include/vaucanson/misc/constraints.hh (vaucanson/q/17_constraint 1.1 600))
+
+;; Files added by populate at Fri, 20 Jun 2003 18:48:00 +0200,
+;; to version 0.247(w), by yann:
+
+  (include/vaucanson/automata/concept/automata_kind.hh (vaucanson/q/18_automata_k 1.1 600))
+
+;; Files deleted by depopulate at Fri, 20 Jun 2003 18:48:05 +0200,
+;; from version 0.247(w), by yann:
+
+  ; (include/vaucanson/automata/concept/transpose_impl.hxx ())
+
+;; Files deleted by depopulate at Fri, 20 Jun 2003 18:48:10 +0200,
+;; from version 0.247(w), by yann:
+
+  ; (include/vaucanson/automata/concept/transpose_impl.hh ())
+
+;; Files deleted by depopulate at Fri, 20 Jun 2003 18:48:14 +0200,
+;; from version 0.247(w), by yann:
+
+  ; (include/vaucanson/automata/concept/relabel_impl.hxx ())
+
+;; Files deleted by depopulate at Fri, 20 Jun 2003 18:48:21 +0200,
+;; from version 0.247(w), by yann:
+
+  ; (include/vaucanson/automata/concept/relabel_impl.hh ())
+
+;; Files deleted by depopulate at Fri, 20 Jun 2003 18:48:29 +0200,
+;; from version 0.247(w), by yann:
+
+  ; (include/vaucanson/automata/concept/history.hxx ())
+
+;; Files deleted by depopulate at Fri, 20 Jun 2003 18:48:36 +0200,
+;; from version 0.247(w), by yann:
+
+  ; (include/vaucanson/automata/concept/history.hh ())
 )
 (Merge-Parents)
 (New-Merge-Parents)
