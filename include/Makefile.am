@@ -9,6 +9,7 @@ vaucanson/fundamental/slots.hh\
 vaucanson/fundamental/op_traits.hh\
 vaucanson/fundamental/fundamental.hh\
 vaucanson/fundamental/element_ops.hh\
+vaucanson/fundamental/element_ops.hxx\
 vaucanson/fundamental/element.hh\
 vaucanson/fundamental/element_base.hh\
 vaucanson/fundamental/predefs.hh\
@@ -125,7 +126,7 @@ vaucanson/algebra/concrete/series/rat/random_visitor.hxx\
 vaucanson/algebra/concrete/series/generalized.hxx\
 vaucanson/algebra/concrete/series/transpose.hxx\
 vaucanson/algebra/concept/concepts.hxx\
-vaucanson/algebra/concept/alphabets_base.hxx\
+  vaucanson/algebra/concept/alphabets_base.hxx\
 vaucanson/algebra/concept/semigroup_base.hxx\
 vaucanson/algebra/concept/monoid_base.hxx\
 vaucanson/algebra/concept/semiring_base.hxx\
@@ -168,17 +169,17 @@ vaucanson/tools/gen_random.hxx
 EXTRA_DIST = vaucanson/config/extrconf.sh
 PERL = perl
 SCANDEFS_PL = $(top_srcdir)/tools/scandefs.pl
-PCONF_OCCURS = vaucanson/config/system.hh 
-$(top_srcdir)/include/vaucanson/config/extrconf.sh: $(SCANDEFS_PL) $(PCONF_OCCURS)
+PCONF_OCCURS = $(srcdir)/vaucanson/config/system.hh 
+$(srcdir)/vaucanson/config/extrconf.sh: $(SCANDEFS_PL) $(PCONF_OCCURS)
 	$(PERL) $(SCANDEFS_PL) $(PCONF_OCCURS) >$@
 
-vaucanson/config/pconf.hh: $(top_srcdir)/include/vaucanson/config/extrconf.sh $(CONFIG_HEADER)
+vaucanson/config/pconf.hh: $(srcdir)/vaucanson/config/extrconf.sh $(CONFIG_HEADER)
 	test -f $(CONFIG_HEADER)
 ## Ignore the result of config/extrconf.sh.  It might be non 0 if
 ## grep matched nothing, but that's ok for us.  The sole case
 ## we bother with is failure caused by an unexisting $(CONFIG_HEADER).
 ## The test -f above take care of this.
-	$(SHELL) $(top_srcdir)/include/vaucanson/config/extrconf.sh $(CONFIG_HEADER) \
+	$(SHELL) $(srcdir)/vaucanson/config/extrconf.sh $(CONFIG_HEADER) \
 	> vaucanson/config/pconf.hh; :
 
 DISTCLEANFILES = vaucanson/config/pconf.hh vaucanson/config/stamp-h1

@@ -5,4 +5,4 @@
 
 AUTOMAKE_OPTIONS= foreign 1.6
 SUBDIRS= include src
-EXTRA_DIST=THANKS README LICENCE ChangeLog
+EXTRA_DIST=THANKS README LICENCE ChangeLog tools/scandefs.pl

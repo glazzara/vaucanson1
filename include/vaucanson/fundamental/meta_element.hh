@@ -27,6 +27,11 @@
 # include <vaucanson/fundamental/element_base.hh>
 
 namespace vcsn {
+
+  /*! \addtogroup fundamental
+   *  \@{
+   */
+
   /*--------------------------------.
   | MetaElement<Structure<Self>, T> |
   `--------------------------------*/
@@ -56,6 +61,8 @@ namespace vcsn {
       abstract class in the static hierarchy. */
     MetaElement(const MetaElement& other); 
   };
+
+  /*! \@} */
 
 } // vcsn
 

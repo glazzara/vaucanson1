@@ -1,3 +1,10 @@
+2002-08-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.106)
+	* include/Makefile.am: fixed.
+	* doc/vaucanson.doxywizard: ajusted.
+	* Makefile.am: fixed.
+	* src/tests/check/Makefile.flags: add top_builddir to CPPFLAGS.
+
 2002-08-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.105)
 	* include/vaucanson/fundamental/element_ops.hh: documented and cleaned.
