@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,14 +32,14 @@ namespace utility {
   template<bool b, typename T, typename U>
   typename remove_reference<T>::t& 
   static_if<b, T, U>::choose(typename remove_reference<T>::t& p1, 
-			     typename remove_reference<U>::t& p2)
+			     typename remove_reference<U>::t&)
   { 
     return p1; 
   }
   
   template<typename T, typename U>
   typename remove_reference<U>::t& 
-  static_if<false, T, U>::choose(typename remove_reference<T>::t& p1, 
+  static_if<false, T, U>::choose(typename remove_reference<T>::t&, 
 				 typename remove_reference<U>::t& p2)
   { 
     return p2; 

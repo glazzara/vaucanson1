@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -52,7 +52,7 @@ namespace vcsn {
   `---------------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_standard_auto_in_union(const AutomataBase<A>& a_set,
+  void do_standard_auto_in_union(const AutomataBase<A>&,
 				 lhs_t& lhs,
 				 const rhs_t& rhs)
   {
@@ -149,7 +149,7 @@ namespace vcsn {
   | standard_concat |
   `----------------*/
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_standard_auto_in_concat(const AutomataBase<A>& a_set,
+  void do_standard_auto_in_concat(const AutomataBase<A>&,
 				     lhs_t& lhs,
 				  const rhs_t& rhs)
   {
@@ -239,7 +239,7 @@ namespace vcsn {
   | standard_star |
   `--------------*/
   template <typename A, typename auto_t>
-  void do_standard_auto_in_star(const AutomataBase<A>& a_set,
+  void do_standard_auto_in_star(const AutomataBase<A>&,
 				auto_t& a)
   {    
     typedef std::set<hedge_t>		edelta_ret_t;

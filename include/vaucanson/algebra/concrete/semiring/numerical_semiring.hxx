@@ -40,7 +40,7 @@ namespace vcsn {
   }
 
   template<typename T, typename U>
-  void op_in_mul(const NumericalSemiring& s1,
+  void op_in_mul(const NumericalSemiring&,
 		 T& dst, U arg)
   { 
     dst *= arg; 
@@ -131,12 +131,12 @@ namespace vcsn {
     dst = dst && src; 
   }
 
-  inline bool op_mul(const NumericalSemiring& s, bool a, bool b)
+  inline bool op_mul(const NumericalSemiring&, bool a, bool b)
   { 
     return a && b; 
   }
 
-  inline void op_in_add(const NumericalSemiring& s1,
+  inline void op_in_add(const NumericalSemiring&,
 			bool& dst, bool src)
   { 
     dst = dst || src; 

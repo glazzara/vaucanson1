@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -226,17 +226,17 @@ namespace vcsn
 #define DELTA_IMPL(Name, Type, Kind_type)						\
       template<typename Self, typename T> template<typename OutputIterator>							\
       void MetaElement<AutomataBase<Self>, T>::Name (OutputIterator res, hstate_t from,					\
-		 Kind_type k) const						\
+		 Kind_type) const						\
       { value()-> Name ## _ ## Type (res, from); }					\
 											\
       template<typename Self, typename T> template<typename OutputIterator, typename L>					\
       void MetaElement<AutomataBase<Self>, T>::Name (OutputIterator res, hstate_t from, const L& query,			\
-		 Kind_type k) const						\
+		 Kind_type) const						\
       { value()-> Name ## _ ## Type (res, from, query); }				\
 											\
       template<typename Self, typename T> template<typename Container>							\
       void MetaElement<AutomataBase<Self>, T>::Name ## c (Container& dst, hstate_t from,					\
-		      Kind_type k) const						\
+		      Kind_type) const						\
       {											\
 	std::insert_iterator<Container> i(dst, dst.begin());				\
 	value()-> Name ## _ ## Type (i, from);						\
@@ -244,7 +244,7 @@ namespace vcsn
 											\
       template<typename Self, typename T> template<typename Container, typename L>						\
       void MetaElement<AutomataBase<Self>, T>::Name ## c (Container& dst, hstate_t from, const L& query,			\
-		      Kind_type k) const						\
+		      Kind_type) const						\
       {											\
 	std::insert_iterator<Container> i(dst, dst.begin());				\
 	value()-> Name ## _ ## Type (i, from, query);					\

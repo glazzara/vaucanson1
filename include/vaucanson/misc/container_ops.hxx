@@ -1,7 +1,7 @@
 // container_ops.hxx
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -51,14 +51,14 @@ namespace vcsn
   }
 
   template<typename S, typename T>
-  typename T::const_iterator op_end(const Structure<S>& s, 
+  typename T::const_iterator op_end(const Structure<S>&, 
 				    const T& v)
   { 
     return v.end(); 
   }
 
   template<typename S, typename T>
-  typename T::const_iterator op_begin_const(const Structure<S>& s,
+  typename T::const_iterator op_begin_const(const Structure<S>&,
 					    const T& v)
   { 
     return v.begin(); 
@@ -121,7 +121,7 @@ namespace vcsn
   }
   
   template<typename S, typename T, typename U>
-  void op_insert(const Structure<S>& s, T& v,
+  void op_insert(const Structure<S>&, T& v,
 		 const U& c)
   { 
     v.insert(c); 

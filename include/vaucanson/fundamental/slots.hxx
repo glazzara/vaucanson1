@@ -1,7 +1,7 @@
 // fundamental/slots.hxx
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,7 @@ namespace vcsn {
   {}
 
   template<typename S, bool dynamic /* default: false */>  
-  SetSlotAttribute<S, dynamic>::SetSlotAttribute(const SetSlotAttribute& other) 
+  SetSlotAttribute<S, dynamic>::SetSlotAttribute(const SetSlotAttribute&) 
   {}
 
   template<typename S, bool dynamic /* default: false */>  
@@ -55,7 +55,7 @@ namespace vcsn {
   }
 
   template<typename S, bool dynamic /* default: false */>    
-  void SetSlotAttribute<S, dynamic>::assign(const SetSlotAttribute& other)
+  void SetSlotAttribute<S, dynamic>::assign(const SetSlotAttribute&)
   {}
 
   template<typename S, bool dynamic /* default: false */>

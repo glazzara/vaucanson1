@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -165,7 +165,7 @@ match_node##N(const N& p____) 		\
 
 #define MATCH(N)					\
 return_type						\
-match_node##N(const N& p____) 			\
+match_node##N(const N&)					\
 {						
    
 #define END }

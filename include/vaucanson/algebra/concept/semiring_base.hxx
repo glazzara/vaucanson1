@@ -161,7 +161,7 @@ namespace vcsn {
 
   template <typename S, typename T>
   bool 
-  op_parse(const SemiringBase<S>&		 set, 
+  op_parse(const SemiringBase<S>&, 
 	   T&	  				 w, 
 	   const std::string&			 s, 
 	   typename std::string::const_iterator& i)

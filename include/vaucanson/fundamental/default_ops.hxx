@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -118,7 +118,7 @@ namespace vcsn {
     }
 
     template<typename S, typename T, typename U>
-    void op_assign(const Structure<S>& s, 
+    void op_assign(const Structure<S>&, 
 		   T& dst, const U& src)
     { 
       dst = src; 
@@ -157,8 +157,8 @@ namespace vcsn {
 
 #define BINOP_IMPL(Name)					\
     template<typename S, typename T, typename U>		\
-    T op_ ## Name (const Structure<S>& s1, 		\
-		   const Structure<S>& s2,		\
+    T op_ ## Name (const Structure<S>& s1,			\
+		   const Structure<S>&,				\
 		   const T& v1,					\
 		   const U& v2)					\
     { 								\
@@ -180,7 +180,7 @@ namespace vcsn {
     }
 
     template<typename S, typename St, typename T>
-    St& op_rout(const Structure<S>& s, St& st, const T& v)
+    St& op_rout(const Structure<S>&, St& st, const T& v)
     { 
       st << v; 
       return st; 

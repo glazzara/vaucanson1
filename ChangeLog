@@ -1,3 +1,23 @@
+2003-05-07  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/semiring_base.hxx,
+	include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx,
+	include/vaucanson/algebra/concrete/free_monoid/str_words.hxx,
+	include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx,
+	include/vaucanson/algebra/concrete/series/krat.hxx,
+	include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh,
+	include/vaucanson/algebra/concrete/series/polynoms.hxx,
+	include/vaucanson/algorithms/glushkov.hxx,
+	include/vaucanson/algorithms/standard.hxx,
+	include/vaucanson/algorithms/union.hxx,
+	include/vaucanson/automata/concept/automata_base.hxx,
+	include/vaucanson/automata/concrete/manylinks.hxx,
+	include/vaucanson/fundamental/default_ops.hxx,
+	include/vaucanson/fundamental/element_base.hxx,
+	include/vaucanson/fundamental/slots.hxx,
+	include/vaucanson/misc/container_ops.hxx,
+	include/vaucanson/misc/static.hxx: Fix many 'unused argument' warnings.
+
 2003-05-06  Loic Fosse  <fosse_l@lrde.epita.fr>
 
         * src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh: Fix a

@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -87,7 +87,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  void op_in_add(const Series<W, M>& s, 
+  void op_in_add(const Series<W, M>&, 
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg)
   {
@@ -166,7 +166,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   bool krat_simplify_left_is_ka(const Series<W, M>& s,
-				rat::exp<Tm, Tw>& dst,
+				rat::exp<Tm, Tw>&,
 				const rat::exp<Tm, Tw>& other, 
 				rat::LeftWeighted<Tm, Tw>* left, 
 				typename rat::Node<Tm, Tw>::type other_type)
@@ -190,7 +190,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   bool krat_simplify_left_is_kany(const Series<W, M>& s,
-				  rat::exp<Tm, Tw>& dst,
+				  rat::exp<Tm, Tw>&,
 				  const rat::exp<Tm, Tw>& other, 
 				  rat::LeftWeighted<Tm, Tw>* left, 
 				  typename 
@@ -452,8 +452,8 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
-  void op_assign(const Series<W, M>& s,
-		 const M& monoid,
+  void op_assign(const Series<W, M>&,
+		 const M&,
 		 rat::exp<Tm, Tw>& dst,
 		 const oTm& src)
   {
@@ -490,7 +490,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  void op_in_star(const Series<W, M>& s,
+  void op_in_star(const Series<W, M>&,
 		  rat::exp<Tm, Tw>& dst)
   { 
     if (dst.base()->what() == rat::Node<Tm, Tw>::zero)
@@ -603,7 +603,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_in_mul(const Series<W, M>& s,
-		 const W& weights,
+		 const W&,
 		 rat::exp<Tm, Tw>& ret,
 		 const oTw& w)
   { 
@@ -688,7 +688,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   inline
-  rat::exp<Tm, Tw> op_mul(const W& weights,
+  rat::exp<Tm, Tw> op_mul(const W&,
 			  const Series<W, M>& s,
 			  const oTw& w,
 			  const rat::exp<Tm, Tw>& b)

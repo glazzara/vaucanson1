@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -148,7 +148,8 @@ namespace vcsn {
   {}
     
   template <typename S, typename T>
-  inline SyntacticDecorator<S, T>::SyntacticDecorator(const SyntacticDecorator& other) 
+  inline
+  SyntacticDecorator<S, T>::SyntacticDecorator(const SyntacticDecorator&) 
   {} 
 
 } // vcsn

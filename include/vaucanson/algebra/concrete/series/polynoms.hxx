@@ -3,7 +3,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -471,7 +471,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_mul(const Series<W, M>& s,
-		 const W& weights,
+		 const W&,
 		 polynom<Tm, Tw>& dst,
 		 const oTw& src)
   { 
@@ -501,7 +501,7 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  polynom<Tm, Tw> op_mul(const W& weights,
+  polynom<Tm, Tw> op_mul(const W&,
 			 const Series<W, M>& s,
 			 const oTw& a,
 			 const polynom<Tm, Tw>& b)

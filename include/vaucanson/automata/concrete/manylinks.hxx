@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -115,7 +115,7 @@ namespace vcsn {
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   const ManyLinksStatesCarrier<StateTag, EdgeTag, Label>&
-  auto_op_states(const Structure<S>& series,
+  auto_op_states(const Structure<S>&,
 		 const ManyLinks<Label, StateTag, EdgeTag>& impl)
   { 
     return impl.states(); 
@@ -124,7 +124,7 @@ namespace vcsn {
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   const ManyLinksEdgesCarrier<ManyLinksState<StateTag, EdgeTag, Label>, 
 			      EdgeTag, Label>&
-  auto_op_edges(const Structure<S>& series,
+  auto_op_edges(const Structure<S>&,
 		const ManyLinks<Label, StateTag, EdgeTag>& impl)
   { 
     return impl.edges(); 
@@ -132,7 +132,7 @@ namespace vcsn {
 		 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   const ManyLinksInitialCarrier<StateTag, EdgeTag, Label>&
-  auto_op_initial(const Structure<S>& series,
+  auto_op_initial(const Structure<S>&,
 		  const ManyLinks<Label, StateTag, EdgeTag>& impl)
   { 
     return impl.initial(); 
@@ -140,7 +140,7 @@ namespace vcsn {
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   const ManyLinksFinalCarrier<StateTag, EdgeTag, Label>&
-  auto_op_final(const Structure<S>& series,
+  auto_op_final(const Structure<S>&,
 		const ManyLinks<Label, StateTag, EdgeTag>& impl)
   { 
     return impl.final(); 
@@ -155,7 +155,7 @@ namespace vcsn {
   }
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
-  unsigned auto_op_new_edge(const Structure<S>& series,
+  unsigned auto_op_new_edge(const Structure<S>&,
 			    ManyLinks<Label, StateTag, EdgeTag>& impl,
 			    unsigned from, unsigned to,
 			    const Label& l)
@@ -180,7 +180,7 @@ namespace vcsn {
   }
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
-  void auto_op_clear_initial(const Structure<S>& series,
+  void auto_op_clear_initial(const Structure<S>&,
 			     ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			     unsigned s)
   { 
@@ -188,7 +188,7 @@ namespace vcsn {
   }
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
-  void auto_op_clear_final(const Structure<S>& series,
+  void auto_op_clear_final(const Structure<S>&,
 			   ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			   unsigned s)
   { 
@@ -196,7 +196,7 @@ namespace vcsn {
   }
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
-  void auto_op_set_initial(const Structure<S>& series,
+  void auto_op_set_initial(const Structure<S>&,
 			   ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			   unsigned s)
   { 
@@ -204,7 +204,7 @@ namespace vcsn {
   }
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
-  void auto_op_set_final(const Structure<S>& series,
+  void auto_op_set_final(const Structure<S>&,
 			 ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			 unsigned s)
   { 
@@ -212,7 +212,7 @@ namespace vcsn {
   }
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
-  void auto_op_del_state(const Structure<S>& series,
+  void auto_op_del_state(const Structure<S>&,
 			 ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			 unsigned s)
   { 
@@ -220,7 +220,7 @@ namespace vcsn {
   }
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
-  void auto_op_del_edge(const Structure<S>& series,
+  void auto_op_del_edge(const Structure<S>&,
 			ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			unsigned s)
   { 
@@ -273,7 +273,7 @@ namespace vcsn {
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag, 
 	   typename Iter>
-  void auto_op_delta_edges(const Structure<S>& series,
+  void auto_op_delta_edges(const Structure<S>&,
 			   const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			   Iter out,
 			   unsigned s)
@@ -309,7 +309,7 @@ namespace vcsn {
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag, 
 	   typename Iter>
-  void auto_op_rdelta_edges(const Structure<S>& series,
+  void auto_op_rdelta_edges(const Structure<S>&,
 			    const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			    Iter out,
 			    unsigned s)
