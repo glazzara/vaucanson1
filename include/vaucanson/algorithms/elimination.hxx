@@ -32,7 +32,7 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/closure.hh>
-# include <vaucanson/algorithms/reachable.hh>
+# include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/algorithms/normalized.hh>
 
 namespace vcsn {

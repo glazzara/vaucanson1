@@ -1,3 +1,20 @@
+2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/reachable.hh,
+	include/vaucanson/algorithms/reachable.hxx: Move to ...
+	* include/vaucanson/algorithms/accessible.hh,
+	include/vaucanson/algorithms/accessible.hxx: ... These. Rename
+	functions using the new convention.
+	* include/Makefile.am: Update accordingly.
+	* src/tests/automata/algos/reachable_test.hh: Move to ...
+	* src/tests/automata/algos/accessible_test.hh: ... This.
+	* src/tests/automata/algos/Makefile.am: Update accordingly.
+	* include/vaucanson/algorithms/determinize.hxx,
+	include/vaucanson/algorithms/elimination.hxx,
+	include/vaucanson/algorithms/trim.hxx,
+	src/tests/automata/algos/extract_test.hh: Update using the new
+	function names.
+
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_base.hh: Fix include.

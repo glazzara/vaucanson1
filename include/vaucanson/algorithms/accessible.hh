@@ -1,4 +1,4 @@
-// reachable.hh
+// accessible.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,50 +19,50 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_REACHABLE_HH
-# define VCSN_ALGORITHMS_REACHABLE_HH
+#ifndef VCSN_ALGORITHMS_ACCESSIBLE_HH
+# define VCSN_ALGORITHMS_ACCESSIBLE_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <set>
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** \addtogroup algorithms */  /* @{ */
 
-  //! Return reachables states from the input states.
+  /// Returns reachables states from the input states.
   template<typename A, typename T>
   std::set<hstate_t>
-  start_reachable_states(const Element<A, T>& a);
+  accessible_states(const Element<A, T>& a);
 
-  //! Extracts the sub-automaton composed of the start reachable states.
+  /// Extracts the sub-automaton composed of the start reachable states.
   template<typename A, typename T>
   Element<A, T>
-  auto_start_reachable(const Element<A, T>& a);
+  accessible(const Element<A, T>& a);
 
-  //! In-place extraction of the sub-automaton of start reachable states.
+  /// In-place extract the sub-automaton of start reachable states.
   template<typename A, typename T>
   void
-  auto_in_start_reachable(Element<A, T>& a);
+  accessible_here(Element<A, T>& a);
   
-  //! Return co-reachables states from the final states.
+  /// Returns co-accessible states from the final states.
   template<typename A, typename T>
   std::set<hstate_t>
-  final_reachable_states(const Element<A, T>& a);
-
-  //! Extracts the sub-automaton composed of the final co-reachable states. 
+  coaccessible_states(const Element<A, T>& a);
+  
+  /// Extracts the sub-automaton composed of the final co-accessible states. 
   template<typename A, typename T>
   Element<A, T>
-  auto_final_reachable(const Element<A, T>& a);
-
-  //! In-place extraction of the sub-automaton of final co-reachable states.
+  coaccessible(const Element<A, T>& a);
+  
+  /// In-place extract the sub-automaton of final co-reachable states.
   template<typename A, typename T>
   void
-  auto_in_final_reachable(Element<A, T>& a);
+  coaccessible_here(Element<A, T>& a);
 
-  /*! @} */
+  /** @} */
   
 } // vcsn
 
-# include <vaucanson/algorithms/reachable.hxx>
+# include <vaucanson/algorithms/accessible.hxx>
 
-#endif // ALGORITHMS_REACHABLE_HH
+#endif // ALGORITHMS_ACCESSIBLE_HH

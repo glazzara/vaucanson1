@@ -32,7 +32,7 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/extract.hh>
-# include <vaucanson/algorithms/reachable.hh>
+# include <vaucanson/algorithms/accessible.hh>
 
 namespace vcsn {
 
@@ -47,8 +47,8 @@ namespace vcsn {
   do_useful_states(const AutomataBase<A_>& a_set,
 		   const Auto_&		   a)
   {
-    std::set<hstate_t> start = start_reachable_states(a);
-    std::set<hstate_t> final = final_reachable_states(a);
+    std::set<hstate_t> start = accessible_states(a);
+    std::set<hstate_t> final = coaccessible_states(a);
     std::set<hstate_t> result;
     std::insert_iterator<std::set<hstate_t> > i(result, result.begin());
 

@@ -28,7 +28,7 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/history.hh>
-# include <vaucanson/algorithms/reachable.hh>
+# include <vaucanson/algorithms/accessible.hh>
 
 namespace vcsn {
 
@@ -158,10 +158,12 @@ namespace vcsn {
 	      output_t&			output,
 	      const input_t&		input)
   {
-  // FIXME : for the moment, it uses subset_construction and trim but
-  // it must be rewritten to do the twice at the same time more efficiently.
+    /** \bug
+     * FIXME: for the moment, it uses subset_construction and trim but
+     * it must be rewritten to do the twice at the same time more efficiently.
+     */
     do_subset_construction(a_set, output, input);
-    auto_in_start_reachable(output);
+    accessible_here(output);
   }
 
   template<typename A, typename T>

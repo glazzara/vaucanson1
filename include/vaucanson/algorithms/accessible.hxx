@@ -1,4 +1,4 @@
-// reachable.hxx
+// accessible.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,10 +19,10 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_REACHABLE_HXX
-# define ALGORITHMS_REACHABLE_HXX
+#ifndef ALGORITHMS_ACCESSIBLE_HXX
+# define ALGORITHMS_ACCESSIBLE_HXX
 
-# include <vaucanson/algorithms/reachable.hh>
+# include <vaucanson/algorithms/accessible.hh>
 
 # include <algorithm>
 # include <set>
@@ -35,16 +35,16 @@
 
 namespace vcsn {
 
-  /*--------------------------.
-  | do_start_reachable_states |
-  `--------------------------*/
+  /*---------------------.
+  | do_accessible_states |
+  `---------------------*/
   // preconditions :
   //
   //
   template <class A_, typename Auto_>
   std::set<hstate_t>
-  do_start_reachable_states(const AutomataBase<A_>& a_set,
-			    const Auto_&		   a)
+  do_accessible_states(const AutomataBase<A_>& a_set,
+		       const Auto_&		   a)
   {
     typedef Auto_				automaton_t;
     typedef std::set<hstate_t>	      		reachable_set_t;
@@ -76,7 +76,7 @@ namespace vcsn {
 	queue.pop();
 	delta_ret.clear();
 
-	// FIXME : do it with a better delta !
+	/// \bug FIXME: Do it with a better delta.
 	a.deltac(delta_ret, state, delta_kind::states());
 	for (typename delta_ret_t::const_iterator j = delta_ret.begin();
 	     j != delta_ret.end();
@@ -95,60 +95,60 @@ namespace vcsn {
 
   template<typename A, typename T>
   std::set<hstate_t>
-  start_reachable_states(const Element<A, T>& a)
+  accessible_states(const Element<A, T>& a)
   {
-    return do_start_reachable_states(a.set(), a);
+    return do_accessible_states(a.set(), a);
   }
 
   template<typename A, typename T>
   void
-  auto_in_start_reachable(Element<A, T>& a)
+  accessible_here(Element<A, T>& a)
   {    
-    auto_in_extract(a, start_reachable_states(a));
+    auto_in_extract(a, accessible_states(a));
   }
 
   template<typename A, typename T>
   Element<A, T>
-  auto_start_reachable(const Element<A, T>& a)
+  accessible(const Element<A, T>& a)
   {    
-    return auto_extract(a, start_reachable_states(a));
+    return auto_extract(a, accessible_states(a));
   }
 
-  /*--------------------------.
-  | do_start_reachable_states |
-  `--------------------------*/
+  /*-----------------------.
+  | do_coaccessible_states |
+  `-----------------------*/
   // preconditions :
   //
   //
   template <class A_, typename Auto_>
   std::set<hstate_t>
-  do_final_reachable_states(const AutomataBase<A_>& a_set,
-			    const Auto_&		   a)
+  do_coaccessible_states(const AutomataBase<A_>& a_set,
+			 const Auto_&		   a)
   {
-    return start_reachable_states(transpose_view(a));
+    return accessible_states(transpose_view(a));
   }
 
   template<typename A, typename T>
   std::set<hstate_t>
-  final_reachable_states(const Element<A, T>& a)
+  coaccessible_states(const Element<A, T>& a)
   {
-    return do_final_reachable_states(a.set(), a);
+    return do_coaccessible_states(a.set(), a);
   }
 
   template<typename A, typename T>
   Element<A, T>
-  auto_final_reachable(const Element<A, T>& a)
+  coaccessible(const Element<A, T>& a)
   {
-    return auto_extract(a, final_reachable_states(a));
+    return auto_extract(a, coaccessible_states(a));
   }
 
   template<typename A, typename T>
   void
-  auto_in_final_reachable(Element<A, T>& a)
+  coaccessible_here(Element<A, T>& a)
   {
-    auto_in_extract(a, final_reachable_states(a));
+    auto_in_extract(a, coaccessible_states(a));
   }
   
 } // vcsn
 
-#endif // ALGORITHMS_REACHABLE_HXX
+#endif // ALGORITHMS_ACCESSIBLE_HXX

@@ -14,7 +14,7 @@ EXTRA_DIST= 					\
 	realtime_test.hh			\
 	sum_test.hh				\
 	normalize_test.hh			\
-	reachable_test.hh			\
+	accessible_test.hh			\
 	elimination_test.hh			\
 	minimization_test.hh			\
 	extract_test.hh				\
