@@ -54,6 +54,10 @@ namespace vcsn {
     typedef typename Exp_::weight_value_t		weight_value_t;
     typedef rat::Node<monoid_value_t, weight_value_t>   node_t;
 
+    typedef GlushkovVisitor<Exp_, Auto_, Dispatch_>     this_class;
+    typedef GenericMatcher<this_class, Exp_, Auto_*, Dispatch_> parent_class;
+    typedef typename parent_class::return_type          return_type;
+
     DecBinaryOp(Product, Exp_, Exp_);
     DecBinaryOp(Sum, Exp_, Exp_);
     DecUnaryOp(Star, Exp_);
@@ -175,7 +179,7 @@ namespace vcsn {
 	      Output& output, 
 	      const Exp& kexp)
   {
-    GlushkovVisitor<Exp, Output, ExpDispatch> m(output.series()); 
+    GlushkovVisitor<Exp, Output, DispatchFunction<Exp> > m(output.series()); 
     output = *m.match(kexp);
   }
 

@@ -15,4 +15,4 @@ while (<>) {
     }
 }
 
-print "cat \${1+\"\$\@\"} | egrep '^#.*(" . join ('|', @words), ")'\n";
+print "cat \${1+\"\$\@\"} | sed -e 's,PACKAGE,VCSN_PACKAGE,g;s, VERSION, VCSN_VERSION,g' | egrep '^#.*(VCSN_|" . join ('|', @words), ")'\n";

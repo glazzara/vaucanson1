@@ -44,6 +44,7 @@ namespace vcsn {
       return ('a' + offs);
     }
 
+    
     bool
     RandomGenerator<bool>::do_it()
     {
@@ -54,6 +55,7 @@ namespace vcsn {
 	return false;
     }
 
+    
     int
     RandomGenerator<int>::do_it()
     {

@@ -23,6 +23,11 @@
 
 # define _ISOC99_SOURCE 1
 # include <vaucanson/config/pconf.hh>
+#ifdef HAVE_LIMITS
+#define USE_CXX_LIMITS
+#undef HAVE_LIMITS
+#endif
+
 # include <cmath>
 
 #if (defined __GNUC__) && (__GNUC__ < 3) 
@@ -34,6 +39,5 @@
 #  define __STL_USE_NAMESPACES
 # include <vaucanson/config/rel_ops_work_around_g++2.hh>
 #endif
-
 
 #endif // VCSN_CONFIG_SYSTEM_HH

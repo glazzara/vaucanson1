@@ -1,4 +1,19 @@
 2002-10-23  Raphaël Poss  <raph@lrde.epita.fr>
+(0.127)
+	
+	* include/vaucanson/misc/numerical_constraints.hh,
+	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx,
+	include/vaucanson/config/system.hh,
+	include/vaucanson/config/extrconf.sh, tools/scandefs.pl: 
+		change the configuration system to import package version
+		and name while preventing name clashes.
+	* include/vaucanson/tools/automaton_tools.hh: minor.
+	* include/vaucanson/misc/random.hxx: minor.
+	* include/vaucanson/algorithms/glushkov.hxx: minor.
+
+	make check works again.
+	
+2002-10-23  Raphaël Poss  <raph@lrde.epita.fr>
 (0.126)
 	
 	* configure.ac: use AM_MAINTAINER_MODE

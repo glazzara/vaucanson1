@@ -33,7 +33,7 @@ namespace vcsn {
   choose_n_states(const Auto& a, unsigned n)
   {
     std::deque<hstate_t> s;
-    std::insert_iterator<deque<hstate_t> > i(s, s.begin());
+    std::insert_iterator<std::deque<hstate_t> > i(s, s.begin());
     vcsn::misc::random_sample_n(a.states().begin(), 
 				a.states().end(), 
 				i,
