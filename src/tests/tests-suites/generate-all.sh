@@ -1,8 +1,23 @@
 #!/bin/sh
 
 ../bin/generate-test-suite.sh \
-   algebra_numerical_semiring \
-   algebra_numerical_semiring.defs \
+   algebra_numerical_semiring_int \
+   algebra_numerical_semiring_int.defs \
+   ../algebra/semiring
+
+../bin/generate-test-suite.sh \
+   algebra_numerical_semiring_bool \
+   algebra_numerical_semiring_bool.defs \
+   ../algebra/semiring
+
+../bin/generate-test-suite.sh \
+   algebra_numerical_semiring_double \
+   algebra_numerical_semiring_double.defs \
+   ../algebra/semiring
+
+../bin/generate-test-suite.sh \
+   algebra_numerical_semiring_float \
+   algebra_numerical_semiring_float.defs \
    ../algebra/semiring
 
 ../bin/generate-test-suite.sh \
@@ -31,13 +46,13 @@
    ../algebra/alphabets
 
 ../bin/generate-test-suite.sh \
-   algebra_string_free_monoid \
-   algebra_string_free_monoid.defs \
+   algebra_free_monoid_string \
+   algebra_free_monoid_string.defs \
    ../algebra/free_monoid
 
 ../bin/generate-test-suite.sh \
-   algebra_tropical_max_semiring \
-   algebra_tropical_max_semiring.defs \
+   algebra_tropical_semiring_max \
+   algebra_tropical_semiring_max.defs \
    ../algebra/semiring
 
 ../bin/generate-test-suite.sh \

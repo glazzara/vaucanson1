@@ -1,7 +1,28 @@
+2004-03-05  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/tests/tests-suites/algebra_numerical_semiring_bool.defs,
+	* src/tests/tests-suites/algebra_numerical_semiring_double.defs,
+	* src/tests/tests-suites/algebra_numerical_semiring_float.defs:
+	Add new definition test files on numerical semirings.
+	* src/tests/tests-suites/algebra_numerical_semiring.defs,
+	* src/tests/tests-suites/algebra_string_free_monoid.defs,
+	* src/tests/tests-suites/algebra_tropical_max_semiring.defs:
+	Move to...
+	* src/tests/tests-suites/algebra_numerical_semiring_int.defs,
+	* src/tests/tests-suites/algebra_free_monoid_string.defs,
+	* src/tests/tests-suites/algebra_tropical_semiring_max.defs:
+	... These.
+	* src/tests/tests-suites/generate-all.sh: Update.
+
+	* update_config_ac.sh: New file. Update VCSN_TESTS macros in
+	configure.ac, according	to the .defs files in the test directory.
+	* bootstrap.sh: Call the script to update configure.ac.
+	* configure.ac: Add tags for test macros generation.
+
 2004-03-04  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_moore.hh,
-	* include/vaucanson/algorithms/minimization_moore.hxx: Rewrite the 
+	* include/vaucanson/algorithms/minimization_moore.hxx: Rewrite the
 	implementation of Moore's minimization algorithm.
 
 2004-03-03  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>

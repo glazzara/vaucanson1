@@ -10,6 +10,7 @@ fi
 (cd src/tests/tests-suites && /bin/sh ./generate-all.sh)
 (cd src/tests/sanity && /bin/sh ./generate_files.sh .)
 (cd src/demos/vaucanswig && /bin/sh ./expand.sh .)
+./update_config_ac.sh
 $AUTORECONF -v -f -i
 
 # disabled temporarily

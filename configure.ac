@@ -31,7 +31,7 @@ AM_PATH_PYTHON([2.2])
 
 WANT_INTERPRETER=no
 AC_ARG_WITH([vaucanswig],
-            [AC_HELP_STRING([--without-vaucanswig], 
+            [AC_HELP_STRING([--without-vaucanswig],
 			    [disable building vaucanswig])],
             [WANT_INTERPRETER=$withval],
             [WANT_INTERPRETER=yes])
@@ -39,8 +39,8 @@ AC_ARG_WITH([vaucanswig],
 VCSN_VAUCANSWIG_SUBDIR=""
 if test "x$WANT_INTERPRETER" != "xno"; then
 if test "x$ac_cv_recent_swig" != "xyes"; then
-    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig. 
-	  	  You can disable vaucanswig by specifying 
+    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.
+	  	  You can disable vaucanswig by specifying
 		  --without-vaucanswig to configure.])
 else
   AC_CONFIG_FILES([src/demos/vaucanswig/Makefile
@@ -117,14 +117,9 @@ AC_CONFIG_FILES([
         doc/doc.doxy
 	include/Makefile])
 
-VCSN_TESTS([usual_automaton_t])
-VCSN_TESTS([algebra_series_krat])
-VCSN_TESTS([algebra_series_krat_derivation])
-VCSN_TESTS([algebra_series_misc])
-VCSN_TESTS([algebra_numerical_semiring])
-VCSN_TESTS([algebra_set_alphabet])
-VCSN_TESTS([algebra_string_free_monoid])
-VCSN_TESTS([algebra_tropical_max_semiring])
+
+dnl GENERATED LINES FOR TESTS - DO NOT EDIT
+dnl END OF GENERATED LINES FOR TESTS - DO NOT EDIT
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 AC_SUBST([VCSN_VAUCANSWIG_SUBDIR])
