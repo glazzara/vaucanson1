@@ -18,102 +18,112 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHM_GLUSHKOV_HXX
-# define VCSN_ALGORITHM_GLUSHKOV_HXX
+#ifndef VCSN_ALGORITHMS_GLUSHKOV_HXX
+# define VCSN_ALGORITHMS_GLUSHKOV_HXX
 
 # include <set>
 # include <vaucanson/algorithms/glushkov.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/standard.hh>
-# include <vaucanson/algebra/concrete/series/rat/exp.hh>
+# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 
 namespace vcsn {
 
   /*----------------.
   | GlushkovVisitor |
   `----------------*/
-  // FIXME : Non optimal version.
-  //         There are too much construction of automaton.
-  // FIXME : this implementation is not generic at all and needs a generic
-  // visitor pattern for all kexp. (now, it is only adaptable to rat::exp).
-  // FIXME : from now, it is only working over LetterAutomaton
-
-  template <class Auto_, class Monoid_, class Semiring_>
+  template <class Exp_, 
+	    class Auto_,
+	    class Dispatch_>
   class GlushkovVisitor : 
-    public rat::ConstNodeVisitor<Monoid_, Semiring_>
+    public GenericMatcher
+  <
+    GlushkovVisitor<Exp_, Auto_, Dispatch_>,
+    Exp_,
+    Auto_*,
+    Dispatch_
+    >      
   {
   public :
-    typedef Auto_						automaton_t;
-    typedef typename automaton_t::series_t			series_t; 
-    typedef typename automaton_t::series_elt_t			series_elt_t;
-    typedef typename series_elt_t::weight_t			weight_t;
-    typedef Monoid_						monoid_value_t;
-    typedef Semiring_						weight_value_t;
-    typedef rat::Node<monoid_value_t, weight_value_t>           node_t;
+    typedef Auto_					automaton_t;
+    typedef Auto_*					automaton_ptr_t;
+    typedef typename automaton_t::series_t		series_t; 
+    typedef typename automaton_t::series_elt_t		series_elt_t;
+    typedef typename series_elt_t::weight_t		weight_t;
+    typedef typename Exp_::monoid_value_t		monoid_value_t;
+    typedef typename Exp_::weight_value_t		weight_value_t;
+    typedef rat::Node<monoid_value_t, weight_value_t>   node_t;
+
+    DecBinaryOp(Product, Exp_, Exp_);
+    DecBinaryOp(Sum, Exp_, Exp_);
+    DecUnaryOp(Star, Exp_);
+    DecBinaryOp(LeftWeight, weight_value_t, Exp_);
+    DecBinaryOp(RightWeight, Exp_, weight_value_t);
+    DecLeaf(Constant, monoid_value_t);
+    DecFinalLeaf(Zero);
+    DecFinalLeaf(One);
 
   public :
 
-    GlushkovVisitor(const series_t& s) : series_(s)
+    GlushkovVisitor(const series_t& series) :
+      series_(series)
     {}
 
-    virtual
-    ~GlushkovVisitor()
-    {}
-
-    virtual void 
-    product(const node_t* lhs, const node_t* rhs) 
+    MATCH__(Product, lhs, rhs)
     {
-      automaton_t	*tmp_;
-      rhs->accept(*this);
-      tmp_ = auto_;
-      lhs->accept(*this);
+      automaton_ptr_t tmp_  = match(rhs);
+      automaton_ptr_t auto_ = match(lhs);
       standard_auto_in_concat(*auto_, *tmp_);
-      delete(tmp_);
+      delete (tmp_);
+      return auto_;
     }
-
-    virtual void 
-    sum(const node_t* lhs, const node_t* rhs) 
+    END	
+    
+    MATCH__(Sum, lhs, rhs)
     {
-      automaton_t	*tmp_;
-      lhs->accept(*this);
-      tmp_ = auto_;
-      rhs->accept(*this);
+      automaton_ptr_t tmp_  = match(rhs);
+      automaton_ptr_t auto_ = match(lhs);
       standard_auto_in_union(*auto_, *tmp_);
+      delete (tmp_);
+      return auto_;
     }
+    END
 
-    virtual void 
-    star(const node_t* node)
+    MATCH_(Star, node)
     {
-      node->accept(*this);
-      standard_auto_in_star(*auto_);
+      automaton_ptr_t stared = match(node);
+      standard_auto_in_star(*stared);
+      return stared;
     }
+    END
 
-    virtual void 
-    left_weight(const weight_value_t& w, const node_t* node) 
+    MATCH__(LeftWeight, w, node)
     {
-      node->accept(*this);
+      automaton_ptr_t auto_ = match(node);
 
       for (typename automaton_t::initial_iterator i = auto_->initial().begin();
 	   i != auto_->initial().end();
 	   ++i)
 	auto_->set_initial(*i, weight_t(w) * auto_->get_initial(*i));
+      return auto_;
     }
-    
-    virtual void 
-    right_weight(const weight_value_t& w, const node_t* node)
+    END
+
+    MATCH__(RightWeight, node, w)
     {
-      node->accept(*this);
+      automaton_ptr_t auto_ = match(node);
 
       for (typename automaton_t::initial_iterator i = auto_->initial().begin();
 	   i != auto_->initial().end();
 	   ++i)
 	auto_->set_initial(*i, auto_->get_initial(*i) * weight_t(w));
+      return auto_;
     }
+    END
 
-    virtual void 
-    constant(const monoid_value_t& m)
+    MATCH_(Constant, m)
     {
-      auto_ = new automaton_t();
+      automaton_ptr_t auto_ = new automaton_t();
       auto_->create();
       auto_->series() = series_;
       hstate_t new_i = auto_->add_state();
@@ -128,63 +138,57 @@ namespace vcsn {
 	}
       auto_->set_initial(new_i);
       auto_->set_final(new_f);
+      return auto_;
     }
+    END
 
-    virtual void 
-    zero()
+    MATCH(Zero)
     {
-      auto_ = new automaton_t();
+      automaton_ptr_t auto_ = new automaton_t();
       auto_->create();
       auto_->series() = series_;
+      return auto_;
     }
+    END
 
-    virtual void 
-    one()
+    MATCH(One)
     {
-      auto_ = new automaton_t();
+      automaton_ptr_t auto_ = new automaton_t();
       auto_->create();
       auto_->series() = series_;
       hstate_t new_i = auto_->add_state();
       auto_->set_initial(new_i);
       auto_->set_final(new_i);
+      return auto_;
     }
+    END
 
-    const automaton_t		&get_auto() const
-    {
-      return *auto_;
-    }
-    
-  private :
-    automaton_t		*auto_;
-    series_t		series_;
+  private:
+    series_t series_;
   };
 
-  template <typename A, typename auto_t,
-	    typename Letter, typename Weight>
+  template <typename A, 
+	    typename Output,
+	    typename Exp>
   void
   do_glushkov(const AutomataBase<A>& a_set, 
-	      auto_t& output, 
-	      const rat::exp<Letter, Weight>& kexp)
+	      Output& output, 
+	      const Exp& kexp)
   {
-    GlushkovVisitor<auto_t, Letter, Weight>	visitor(output.series());
-   
-    // FIXME : 
-    // Static assert : Letter = monoid_elt_value_t, 
-    //                 Weight = weight_value_t
- 
-    kexp.accept(visitor);
-    output = visitor.get_auto();    
+    GlushkovVisitor<Exp, Output, ExpDispatch> m(output.series()); 
+    output = *m.match(kexp);
   }
 
-  template<typename A,      typename T, 
-	   typename Letter, typename Weight>
+  template<typename A,      
+	   typename T, 
+	   typename Exp>
   void
   glushkov(Element<A, T>& out, 
-	   const rat::exp<Letter, Weight>& kexp)
+	   const Exp& kexp)
   {
     do_glushkov(out.set(), out, kexp);
   }
   
 } // vcsn
 
-#endif // VCSN_ALGORITHM_GLUSHKOV_HH
+#endif // VCSN_ALGORITHMS_GLUSHKOV_HXX

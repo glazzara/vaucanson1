@@ -25,48 +25,76 @@ namespace vcsn {
 
   namespace algebra {
 
-    template <class T>
-    BinOp<T>::BinOp()
+    template <class T, class U>
+    BinaryOp<T, U>::BinaryOp()
     {}
 
-    template <class T>
-    BinOp<T>::BinOp(const BinOp& b) :
+    template <class T, class U>
+    BinaryOp<T, U>::BinaryOp(const BinaryOp& b) :
       lhs_(b.lhs_), 
       rhs_(b.rhs_)
     {}
 
-    template <class T>
-    BinOp<T>::BinOp(const T& lhs, const T& rhs) : 
+    template <class T, class U>
+    BinaryOp<T, U>::BinaryOp(const T& lhs, const U& rhs) : 
       lhs_(lhs), 
       rhs_(rhs)
     {}
 
-    template <class T>
+    template <class T, class U>
     T&
-    BinOp<T>::lhs()
+    BinaryOp<T, U>::lhs()
     {
       return lhs_;
+    }
+
+    template <class T, class U>
+    const T&
+    BinaryOp<T, U>::lhs() const
+    {
+      return lhs_;
+    }
+
+    template <class T, class U>
+    U&
+    BinaryOp<T, U>::rhs()
+    {
+      return rhs_;
+    }
+
+    template <class T, class U>
+    const U&
+    BinaryOp<T, U>::rhs() const
+    {
+      return rhs_;
+    }
+
+    template <class T>
+    UnaryOp<T>::UnaryOp()
+    {}
+
+    template <class T>
+    UnaryOp<T>::UnaryOp(const UnaryOp& b) :
+      node_(b.node_)
+    {}
+
+    template <class T>
+    UnaryOp<T>::UnaryOp(const T& node) :
+      node_(node)
+    {}
+
+    template <class T>
+    T&
+    UnaryOp<T>::value()
+    {
+      return node_;
     }
 
     template <class T>
     const T&
-    BinOp<T>::lhs() const
+    UnaryOp<T>::value() const
     {
-      return lhs_;
-    }
-
-    template <class T>
-    T&
-    BinOp<T>::rhs()
-    {
-      return lhs_;
-    }
-
-    template <class T>
-    const T&
-    BinOp<T>::rhs() const
-    {
-      return lhs_;
+      return node_;
     }
 
     template <class T>
@@ -105,7 +133,6 @@ namespace vcsn {
     }
 
     template <class Self, class T, class U, class F>
-    U
     GenericMatcher<Self, T, U, F>::GenericMatcher()
     {}
     

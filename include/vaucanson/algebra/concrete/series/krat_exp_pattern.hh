@@ -30,27 +30,51 @@ namespace vcsn {
   namespace algebra {
     
     /*------.
-    | BinOp |
+    | BinaryOp |
     `------*/
-    //! BinOp is a generic class which symbolised binary operator.
-    /*! BinOp is integrated in the pattern matching system to permit
+    //! BinaryOp is a generic class which symbolised binary operator.
+    /*! BinaryOp is integrated in the pattern matching system to permit
+      a factorization of the accessors.
+    */
+    template <class T, class U>
+    struct BinaryOp
+    {
+      typedef T lhs_node_type;
+      typedef U rhs_node_type;
+
+      BinaryOp();
+      BinaryOp(const BinaryOp& b);
+      BinaryOp(const T& lhs, const U& rhs);
+      T&		lhs();
+      const T&		lhs() const;
+      U&		rhs();
+      const U&		rhs() const;
+      
+    private:
+      T lhs_;
+      U rhs_;
+    };
+
+    /*--------.
+    | UnaryOp |
+    `--------*/
+    //! UnaryOp is a generic class which symbolised binary operator.
+    /*! UnaryOp is integrated in the pattern matching system to permit
       a factorization of the accessors.
     */
     template <class T>
-    struct BinOp
+    struct UnaryOp
     {
-      typedef T node_type;
+      typedef T value_type;
       
-      BinOp();
-      BinOp(const BinOp& b);
-      BinOp(const T& lhs, const T& rhs);
-      T&		lhs();
-      const T&		lhs() const;
-      T&		rhs();
-      const T&		rhs() const;
+      UnaryOp();
+      UnaryOp(const UnaryOp& b);
+      UnaryOp(const T& node);
+      T&		value();
+      const T&		value() const;
       
     private:
-      T lhs_, rhs_;
+      T node_;
     };
 
     /*------.
@@ -86,6 +110,8 @@ namespace vcsn {
     template <class Self, class T, class U, class F>
     struct GenericMatcher
     {
+      typedef U return_type;
+
       U
       match(const T& ast) const;
       
@@ -93,11 +119,18 @@ namespace vcsn {
       GenericMatcher();
     };
 
-#define DecBinOp(N, T)					\
-struct N     : public BinOp<T>				\
-{							\
-  N(const T& lhs, const T& rhs) : BinOp<T>(lhs, rhs)	\
-  {}							\
+#define DecBinaryOp(N, T, U)					\
+struct N     : public BinaryOp<T, U>				\
+{								\
+  N(const T& lhs, const U& rhs) : BinaryOp<T, U>(lhs, rhs)	\
+  {}								\
+};
+
+#define DecUnaryOp(N, T)			\
+struct N     : public UnaryOp<T>		\
+{						\
+  N(const T& node) : UnaryOp<T>(node)		\
+  {}						\
 };
 
 #define DecLeaf(N, U)				\
@@ -108,24 +141,39 @@ struct N     : public BinOp<T>				\
     {}						\
   };
 
+#define DecFinalLeaf(N)				\
+  struct N					\
+  {						\
+    N()						\
+    {}						\
+  };
 
-#define MATCH__(N, lhs, rhs)			\
-U						\
+
+#define MATCH__(N, Lhs, Rhs)			\
+return_type					\
 match_node(const N& p____) const		\
 {						\
-  typename N::node_type lhs = p____.lhs_;	\
-  typename N::node_type rhs = p____.rhs_;
+  typename N::lhs_node_type Lhs = p____.lhs();	\
+  typename N::rhs_node_type Rhs = p____.rhs();
   
-#define MATCH_(N, v)				\
-U						\
+#define MATCH_(N, Val)				\
+return_type					\
 match_node(const N& p____) const		\
 {						\
-  typename N::value_type v = p____.v_;
+  typename N::value_type Val(p____.value());
+
+#define MATCH(N)					\
+return_type						\
+match_node(const N& p____) const			\
+{						
+
   
 #define END }
 
     } // algebra
 
 } // vcsn
+
+# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hxx>
 
 #endif // VCSN_ALGEBRA_CONCRETE_KRAT_EXP_PATTERN_HH

@@ -47,18 +47,19 @@ namespace vcsn {
       typedef rat::Constant<LetterT, WeightT>			n_const_t;
 
     public:
-      typedef LetterT letter_t;
-      typedef WeightT weight_t;
+      typedef LetterT monoid_value_t; 
+      typedef WeightT weight_value_t;
 
       exp();
       exp(node_t* p);
+      exp(const node_t* p);
       exp(const exp& other);
       exp& operator=(const exp& other);
       exp& swap(exp& otether);
       exp& operator+=(const exp& other);
       exp& operator*=(const exp& other);
       exp& star();
-      void accept(ConstNodeVisitor<letter_t, weight_t>& v) const;
+      void accept(ConstNodeVisitor<monoid_value_t, weight_value_t>& v) const;
       size_t depth() const;
       ~exp();
       node_t* &base();
@@ -69,8 +70,7 @@ namespace vcsn {
       exp clone() const;
       static exp one();
       static exp zero();
-      static exp constant(const letter_t& l);
-      // compatibility
+      static exp constant(const monoid_value_t& l);
       static bool stareable();
 
     protected:
@@ -120,7 +120,7 @@ namespace vcsn {
     
     template <class Matcher, class Monoid, class Semiring>
     class DispatchVisitor : 
-      public rat::ConstNodeVisitor<Monoid, Semiring>
+      public rat::DefaultMutableNodeVisitor<Monoid, Semiring> 
     {
     public:
       typedef Matcher					 matcher_t;
@@ -128,7 +128,7 @@ namespace vcsn {
       typedef Semiring					 weight_value_t;
       typedef rat::Node<monoid_value_t, weight_value_t>  node_t;
       
-      DispatchVisitor(Matcher& m);
+      DispatchVisitor(const Matcher& m);
       
       virtual
       ~DispatchVisitor();
@@ -167,8 +167,9 @@ namespace vcsn {
     struct ExpDispatch 
     {
       template <class Matcher, class M, class W>
-      static inline typename Matcher::return_type
-      d(const Matcher& matcher, 
+      static inline 
+      typename Matcher::return_type
+      d(const Matcher&        matcher, 
 	const rat::exp<M, W>& exp);
     };
 

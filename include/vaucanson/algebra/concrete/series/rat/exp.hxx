@@ -46,6 +46,11 @@ namespace vcsn {
     {}
 
     template<typename LetterT, typename WeightT>
+    exp<LetterT, WeightT>::exp(const node_t* p)
+      : base_(p->clone())
+    {}
+
+    template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT>::exp(const exp& other)
       : base_(other.base_->clone())
     {}
@@ -94,7 +99,8 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    void exp<LetterT, WeightT>::accept(ConstNodeVisitor<letter_t, weight_t>& v) const
+    void exp<LetterT, WeightT>::
+    accept(ConstNodeVisitor<monoid_value_t, weight_value_t>& v) const
     {
       base_->accept(v);
     }
@@ -102,12 +108,13 @@ namespace vcsn {
     template<typename LetterT, typename WeightT>
     size_t exp<LetterT, WeightT>::depth() const
     {
-      DepthVisitor<letter_t, weight_t> v;
+      DepthVisitor<monoid_value_t, weight_value_t> v;
       accept(v);
       return v.get();
     }
     
-    template<typename LetterT, typename WeightT>   exp<LetterT, WeightT>::~exp()
+    template<typename LetterT, typename WeightT>   
+    exp<LetterT, WeightT>::~exp()
     {
       delete base_;
     }
@@ -162,12 +169,12 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    exp<LetterT, WeightT> exp<LetterT, WeightT>::constant(const letter_t& l)
+    exp<LetterT, WeightT> exp<LetterT, WeightT>::
+    constant(const monoid_value_t& l)
     {
       return exp(new n_const_t(l));
     }
     
-    // compatibility
     template<typename LetterT, typename WeightT>
     bool exp<LetterT, WeightT>::stareable() 
     {
@@ -241,7 +248,7 @@ namespace vcsn {
   
     template <class Matcher, class Monoid, class Semiring>
     DispatchVisitor<Matcher, Monoid, Semiring>::
-    DispatchVisitor(Matcher& m) :
+    DispatchVisitor(const Matcher& m) :
       matcher_(m)
     {}
     
@@ -252,7 +259,7 @@ namespace vcsn {
     {}
     
     template <class Matcher, class Monoid, class Semiring>
-     void
+    void
     DispatchVisitor<Matcher, Monoid, Semiring>::
     product(const node_t* lhs, const node_t* rhs) 
     {
@@ -260,14 +267,14 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-     void 
+    void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     sum(const node_t* lhs, const node_t* rhs) 
     {
       ret_ = matcher_.match_node(typename Matcher::Sum(lhs, rhs));
     }
     template <class Matcher, class Monoid, class Semiring>
-     void 
+    void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     star(const node_t* node)
     {
@@ -275,7 +282,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>   
-     void 
+    void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     left_weight(const weight_value_t& w, const node_t* node) 
     {
@@ -283,15 +290,15 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>  
-     void 
+    void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     right_weight(const weight_value_t& w, const node_t* node)
     {
-      ret_ = matcher_.match_node(typename Matcher::RightWeight(w, node));
+      ret_ = matcher_.match_node(typename Matcher::RightWeight(node, w));
     }
 
     template <class Matcher, class Monoid, class Semiring>
-     void 
+    void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     constant(const monoid_value_t& m)
     {
@@ -299,7 +306,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-     void 
+    void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     zero()
     {
@@ -307,7 +314,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-     void 
+    void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     one()
     {
@@ -315,7 +322,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-     typename Matcher::return_type 
+    typename Matcher::return_type 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     get_ret()
     {
@@ -331,7 +338,6 @@ namespace vcsn {
       exp.accept(v);
       return v.get_ret ();
     }
-
 
   } // algebra
 

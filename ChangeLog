@@ -1,8 +1,28 @@
+2002-10-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.124)
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx:
+		add a constructor from const node_t*.
+		fixed some bug in DispatchVisitor.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh: 
+		modified in consequence.
+	* include/vaucanson/algorithms/glushkov.hxx:
+		now Glushkov is generic over the k-expr implementation.
+	* include/vaucanson/algorithms/glushkov.hh: 
+		a more souple signature now.
+ 
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx:
+		add UnaryOp class
+		rename BinOp to BinaryOp
+     
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh:
+		modified in consequence
+		add DecFinalLeaf macro
+
 2002-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.123)
 	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh
 	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx
-		Added
+		added
 	* include/vaucanson/algebra/concrete/series/krat.hh: minor change.
 	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: 
 		add DispatchExp and DispatchVisitor.

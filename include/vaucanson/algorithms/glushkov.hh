@@ -29,10 +29,11 @@ namespace vcsn {
   /*---------.
   | glushkov |
   `---------*/
-  template<typename A,      typename T, 
-	   typename Letter, typename Weight>
+  template<typename A,      
+	   typename T, 
+	   typename Exp>
   void
-  glushkov(Element<A, T>&, const rat::exp<Letter, Weight>&);
+  glushkov(Element<A, T>&, const Exp&);
   
 } // vcsn
 
