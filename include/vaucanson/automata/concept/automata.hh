@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and 
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -18,44 +19,58 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef AUTOMATA_AUTOMATA_HH
-# define AUTOMATA_AUTOMATA_HH
+#ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_HH
+# define VCSN_AUTOMATA_CONCEPT_AUTOMATA_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/misc/ref.hh>
+# include <vaucanson/internal/traits.hh>
 
 namespace vcsn {
 
+  template <class Series>
   struct Automata;
   
-  template<>
-  struct MetaSet<Automata>
+  template <class Series>
+  struct MetaSet<Automata<Series> >
   {
-    static const bool dynamic_set = false;    
+    static const bool dynamic_set = MetaSet<Series>::dynamic_set;    
   };
   
-  template<typename T>
-  struct MetaElement<Automata, T>
-    : MetaElement<AutomataBase<Automata>, T>
-  { };
-  
-  template<typename T>
-  bool op_contains(const Automata& a, const utility::ref<T>& r);
-  
-  struct Automata
-    : AutomataBase<Automata>
-  { };
+  template <class Series, typename T>
+  struct MetaElement<Automata<Series>, T>
+    : MetaElement<AutomataBase<Automata<Series> >, T>
+  {};
 
-  template<typename T>
-  struct automaton_traits<utility::ref<T> >
-   : automaton_traits<T>
-  { };
-  
-}
+  namespace traits {
+    
+    template <class Series>
+    struct virtual_types<Automata<Series> >
+    {
+      typedef Series		series_t;
+    };
+    
+  } // traits.
 
+
+  template <class Series>
+  class Automata
+    : public AutomataBase<Automata<Series> >
+  {
+  public:
+    typedef Automata<Series>				     self_t;
+    typedef typename traits::virtual_types<self_t>::series_t series_t;
+
+    Automata(const series_t&);
+
+    const series_t&	series() const;
+
+  private:
+    series_t	series_;
+  };
+
+} // vcsn
 
 # include <vaucanson/automata/concept/automata.hxx>
-# include <vaucanson/automata/concept/automaton_impl.hh>
 
-#endif
+#endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_HH
 

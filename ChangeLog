@@ -1,5 +1,31 @@
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/automata/concept/automata.hh:
+		(MetaSet): Use MetaSet<Series>.
+		(MetaElement<Automata, ..>): Provide accessors to series.
+
+	* include/vaucanson/automata/concept/automata.hxx: 
+		Implement accessors.
+
+	* include/vaucanson/automata/concept/automata_base.hh:
+		Major changes.
+		New services in MetaElement<AutomataBase<Self>, ...>.
+		Do not use automaton_impl, ref and kinds anymore.
+		Disable history.
+	
+	* include/vaucanson/automata/concept/automata_base.hxx:
+		Add wrappers to external operators.
+		Add default implementations.
+
+	* include/vaucanson/automata/concept/automata_ops.hh: New.
+	* include/vaucanson/automata/concept/automata_ops.hxx: New.
+		Provide default implementation for operators.
+
+	* include/vaucanson/automata/concept/automaton_impl.hh,
+	  include/vaucanson/automata/concept/automaton_impl.hxx: Remove.
+
+2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/krat.hh(series_traits):
 		Add support_t.
 	

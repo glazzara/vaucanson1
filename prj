@@ -1,33 +1,37 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 215)
-(Parent-Version vaucanson 0 214)
+(Project-Version vaucanson 0 216)
+(Parent-Version vaucanson 0 215)
 (Version-Log "
-from  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/series/krat.hh(series_traits):
-		Add support_t.
+	* include/vaucanson/automata/concept/automata.hh:
+		(MetaSet): Use MetaSet<Series>.
+		(MetaElement<Automata, ..>): Provide accessors to series.
+
+	* include/vaucanson/automata/concept/automata.hxx: 
+		Implement accessors.
+
+	* include/vaucanson/automata/concept/automata_base.hh:
+		Major changes.
+		New services in MetaElement<AutomataBase<Self>, ...>.
+		Do not use automaton_impl, ref and kinds anymore.
+		Disable history.
 	
-	* include/vaucanson/algebra/concrete/series/krat.hxx:
-		Implement op_support, op_is_finite_app.
+	* include/vaucanson/automata/concept/automata_base.hxx:
+		Add wrappers to external operators.
+		Add default implementations.
 
-	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: 
-		Minor changes.
+	* include/vaucanson/automata/concept/automata_ops.hh: New.
+	* include/vaucanson/automata/concept/automata_ops.hxx: New.
+		Provide default implementation for operators.
 
-	* include/vaucanson/algebra/concrete/series/polynoms.hh:
-		Add support_t, 
-		Add output facilities.
-
-	* include/vaucnson/algebra/concrete/series/polynoms.hxx:
-		Implement op_support and output facilities.
-	
-	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx,
-	  include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx:
-		New.
+	* include/vaucanson/automata/concept/automaton_impl.hh,
+	  include/vaucanson/automata/concept/automaton_impl.hxx: Remove.
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 20 May 2003 14:48:19 +0200")
+(Checkin-Time "Tue, 20 May 2003 15:20:03 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -110,7 +114,7 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.20 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.21 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -243,12 +247,12 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
   (include/vaucanson/algorithms/trim.hxx (vaucanson/f/0_trim.hxx 1.7 600))
   (include/vaucanson/algorithms/union.hh (vaucanson/d/42_union.hh 1.8 600))
   (include/vaucanson/algorithms/union.hxx (vaucanson/d/41_union.hxx 1.9 600))
-  (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.7 600))
-  (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.6 600))
-  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.14 600))
-  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.11 600))
-  (include/vaucanson/automata/concept/automaton_impl.hh (vaucanson/d/10_automaton_ 1.7 600))
-  (include/vaucanson/automata/concept/automaton_impl.hxx (vaucanson/d/9_automaton_ 1.9 600))
+  (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.8 600))
+  (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.7 600))
+  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.15 600))
+  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.12 600))
+  
+  
   (include/vaucanson/automata/concept/concepts.hh (vaucanson/d/8_concepts.h 1.7 600))
   (include/vaucanson/automata/concept/concepts.hxx (vaucanson/d/7_concepts.h 1.6 600))
   (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.6 600))
@@ -1034,6 +1038,22 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
 ;; from version 0.214(w), by yann:
 
   ; (include/vaucanson/algebra/concrete/series/krat_is_finite_app.hxx ())
+
+;; Files deleted by depopulate at Tue, 20 May 2003 14:59:21 +0200,
+;; from version 0.215(w), by yann:
+
+  ; (include/vaucanson/automata/concept/automaton_impl.hh ())
+
+;; Files deleted by depopulate at Tue, 20 May 2003 14:59:22 +0200,
+;; from version 0.215(w), by yann:
+
+  ; (include/vaucanson/automata/concept/automaton_impl.hxx ())
+
+;; Files added by populate at Tue, 20 May 2003 15:06:59 +0200,
+;; to version 0.215(w), by yann:
+
+  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.1 600))
+  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

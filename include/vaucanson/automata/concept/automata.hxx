@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -18,20 +19,26 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef AUTOMATA_AUTOMATA_HXX
-# define AUTOMATA_AUTOMATA_HXX
+#ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX
+# define VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX
 
 #include <vaucanson/automata/concept/automata_base.hh>
 #include <vaucanson/misc/ref.hh>
 
 namespace vcsn {
 
-  template<typename T>
-  bool op_contains(const Automata& a, const utility::ref<T>& r)
-  { 
-    return true; 
+  template <class Series>
+  Automata<Series>::Automata(const series_t& s):
+    series_(s)
+  {}
+
+  template <class Series>
+  const typename Automata<Series>::series_t&
+  Automata<Series>::series() const
+  {
+    return series_;
   }
-  
+
 } // vcsn
 
-#endif // AUTOMATA_AUTOMATA_HXX
+#endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX
