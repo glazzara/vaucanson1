@@ -1,5 +1,10 @@
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* src/Makefile.am (SUBDIRS): Re-order.
+	* src/demos/vgrep/Makefile.am: Sanitize. 
+
+2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* vcsn.m4: Rename to...
 	* config/vcsn.m4: this.
 
