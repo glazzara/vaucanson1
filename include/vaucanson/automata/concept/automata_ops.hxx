@@ -96,7 +96,7 @@ namespace vcsn {
   {
     typedef typename Element<S, T>::serie_value_t serie_value_t;
     v.set_initial(state, s.value(), 
-		  algebra::zero_as<serie_value_t>::of(ss.series()));
+      (algebra::zero_as<serie_value_t>::of(ss.series())).value());
   }
 
   template <class S, class T>
@@ -120,7 +120,7 @@ namespace vcsn {
 	       const typename Element<S, T>::serie_t& s)
   {
     v.set_final(state, s.value(),
-		algebra::zero_as<AutoType(serie_value_t)>::of(ss.series()));
+      (algebra::zero_as<AutoType(serie_value_t)>::of(ss.series())).value());
   }
 
   template <class S, class T>
@@ -195,7 +195,7 @@ namespace vcsn {
 		    hstate_t to, 
 		    const typename Element<S, T>::serie_t& l)
   {
-    return op_add_edge(s, v, from, to, l);
+    return op_add_edge(s, v, from, to, l.value());
   }
 
   template <class S, class T>

@@ -71,8 +71,9 @@ namespace vcsn {
 	hstate_t aim = a.aim_of(*e);
 	hstate_t origin = a.origin_of(*e);
 	m_weight[origin][aim] += a.serie_of(*e).get(monoid_identity);
-	m_series[origin][aim] += a.serie_of(*e).supp();
-	m_series[origin][aim].value_set(monoid_identity, weight_zero);
+	m_series[origin][aim] += a.serie_of(*e);
+	m_series[origin][aim].value_set(monoid_identity.value(),
+					weight_zero.value());
 	m_series_ret[origin][aim] = m_series[origin][aim];
 	a.del_edge(*e);
       }

@@ -151,9 +151,9 @@ namespace utility {
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
 			     std::string(Message) + ": " #Cond)
 
-#define assertion(Cond) static_cast<void>((Cond) ? 0 : __trap("Assertion failed", Cond))
-#define precondition(Cond) static_cast<void>((Cond) ? 0 : __trap("Precondition failed", Cond))
-#define postcondition(Cond) static_cast<void>((Cond) ? 0 : __trap("Precondition failed", Cond))
+#define assertion(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Assertion failed", Cond))
+#define precondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Precondition failed", Cond))
+#define postcondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Precondition failed", Cond))
 
 #define pure_service_call(Service) __trap("Pure absract service called", Service)
 

@@ -376,8 +376,8 @@ namespace vcsn {
     `---------------------*/
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
   inline
-  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::polynom<Tm, Tw>),
-				      SELECTOR2(algebra::Series<W, M>),
+  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+				      SELECTOR2(algebra::polynom<Tm, Tw>),
 				      SELECTOR(M),
 				      const oTm& m_value)
   {
@@ -389,15 +389,15 @@ namespace vcsn {
 
   template<typename Tm, typename Tw, typename W, typename M, typename oTw>
   inline
-  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::polynom<Tm, Tw>),
-				      SELECTOR2(algebra::Series<W, M>),
+  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+				      SELECTOR2(algebra::polynom<Tm, Tw>),
 				      SELECTOR(W),
 				      const oTw& w_value)
   {
     algebra::polynom<Tm, Tw> ret;
     if (w_value != zero_value(SELECT(W), SELECT(oTw)))
       ret.insert(identity_value(SELECT(M), SELECT(Tm)),
-		 op_convert(SELECT(Tw), SELECT(W), w_value));
+		 op_convert(SELECT(W), SELECT(Tw), w_value));
     return ret;
   }
     
@@ -409,7 +409,7 @@ namespace vcsn {
 		 const oTm& src)
   {
     dst.clear();
-    dst.insert(op_convert(SELECT(Tm), SELECT(M), src),
+    dst.insert(op_convert(SELECT(M), SELECT(Tm), src),
 	       identity_value(SELECT(W), SELECT(Tw)));
   }
 
@@ -615,7 +615,7 @@ namespace vcsn {
 		   const algebra::polynom<Tm, Tw>& p,
 		   const oTm& m)
   { 
-    return p.get(SELECT(W), op_convert(SELECT(Tm), SELECT(M), m)); 
+    return p.get(SELECT(W), op_convert(SELECT(M), SELECT(Tm), m)); 
   }
 
   template <typename W, typename M, 
@@ -629,10 +629,10 @@ namespace vcsn {
   {
     typename utility::static_if
       <utility::static_eq<Tm, oTm>::value, const Tm&, Tm>::t
-      new_m = op_convert(SELECT(Tm), SELECT(M), m);
+      new_m = op_convert(SELECT(M), SELECT(Tm), m);
     typename utility::static_if
       <utility::static_eq<Tw, oTw>::value, const Tw&, Tw>::t
-      new_w = op_convert(SELECT(Tw), SELECT(W), w);
+      new_w = op_convert(SELECT(W), SELECT(Tw), w);
 
     typename algebra::polynom<Tm, Tw>::iterator i = p.find(new_m);
     if (new_w == zero_value(SELECT(W), SELECT(Tw)))

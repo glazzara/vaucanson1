@@ -72,8 +72,8 @@ namespace vcsn {
 
   template<typename A>
   std::basic_string<typename A::letter_t>
-  op_convert(SELECTOR(std::basic_string<typename A::letter_t>),
-	     SELECTOR(algebra::FreeMonoid<A>), const typename A::letter_t& c)
+  op_convert(SELECTOR(algebra::FreeMonoid<A>),
+	     SELECTOR(std::basic_string<typename A::letter_t>), const typename A::letter_t& c)
   { 
     std::basic_string<typename A::letter_t> str; 
     str = c; 

@@ -56,6 +56,25 @@ namespace vcsn {
     return v1 < v2; 
   }
 
+
+  template<typename S, typename V, typename T, typename U>
+  bool op_eq(const Structure<S>&,
+	     const Structure<V>&,
+	     const T& v1, 
+	     const U& v2)
+  { 
+    return v1 == v2; 
+  }
+
+  template<typename S, typename V, typename T, typename U>
+  bool op_lt(const Structure<S>&,
+	     const Structure<V>&,
+	     const T& v1, 
+	     const U& v2)
+  {
+    return v1 < v2; 
+  }
+
   /*------------.
   | Conversions |
   `------------*/

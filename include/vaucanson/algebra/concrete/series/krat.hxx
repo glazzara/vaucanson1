@@ -154,7 +154,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_k(const algebra::Series<W, M>&,
+  bool krat_simplify_left_is_k(const algebra::Series<W, M>& s,
 			       rat::exp<Tm, Tw>& dst,
 			       const rat::exp<Tm, Tw>& other, 
 			       rat::LeftWeighted<Tm, Tw>* left, 
@@ -200,7 +200,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_ka(const algebra::Series<W, M>&,
+  bool krat_simplify_left_is_ka(const algebra::Series<W, M>& s,
 				rat::exp<Tm, Tw>& dst,
 				const rat::exp<Tm, Tw>& other, 
 				rat::LeftWeighted<Tm, Tw>* left, 
@@ -224,7 +224,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_kany(const algebra::Series<W, M>&,
+  bool krat_simplify_left_is_kany(const algebra::Series<W, M>& s,
 				  rat::exp<Tm, Tw>& dst,
 				  const rat::exp<Tm, Tw>& other, 
 				  rat::LeftWeighted<Tm, Tw>* left, 
@@ -248,7 +248,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_lweight(const algebra::Series<W, M>&,
+  bool krat_simplify_left_is_lweight(const algebra::Series<W, M>& s,
 				     rat::exp<Tm, Tw>& dst,
 				     const rat::exp<Tm, Tw>& other, 
 				     rat::LeftWeighted<Tm, Tw>* left, 
@@ -270,7 +270,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_anyk(const algebra::Series<W, M>&,
+  bool krat_simplify_left_is_anyk(const algebra::Series<W, M>& s,
 				  rat::exp<Tm, Tw>& dst,
 				  const rat::exp<Tm, Tw>& other, 
 				  rat::RightWeighted<Tm, Tw>* left, 
@@ -338,7 +338,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  void op_in_mul(const algebra::Series<W, M>&, 
+  void op_in_mul(const algebra::Series<W, M>& s, 
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg)
   {
@@ -763,7 +763,7 @@ namespace vcsn {
 	n_lweight_t* p
 	  = dynamic_cast<n_lweight_t*>(ret.base());
 	p->weight_ = op_mul
-	  (s.weights(), op_convert(SELECT(Tw), SELECT(W), w), p->weight_);
+	  (s.weights(), op_convert(SELECT(W), SELECT(Tw), w), p->weight_);
 	return ret;
       }
 
@@ -773,7 +773,7 @@ namespace vcsn {
 	n_rweight_t* p
 	  = dynamic_cast<n_rweight_t*>(ret.base());
 	p->child_ = 
-	  new n_lweight_t(op_convert(SELECT(Tw), SELECT(W), w), p->child_);
+	  new n_lweight_t(op_convert(SELECT(W), SELECT(Tw), w), p->child_);
 	return ret;
       }
 

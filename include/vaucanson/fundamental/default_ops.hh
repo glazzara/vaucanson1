@@ -54,11 +54,27 @@ namespace vcsn {
 
   /// Equality between two structured values.
   template<typename S, typename T, typename U>
-  bool op_eq(const Structure<S> &se, const T& v1, const U& v2);
+  bool op_eq(const Structure<S>&,
+	     const T& v1, 
+	     const U& v2);
+
+  template<typename S, typename V, typename T, typename U>
+  bool op_eq(const Structure<S>&,
+	     const Structure<V>&,
+	     const T& v1, 
+	     const U& v2);
 
   /// Ordered comparison between two structured values.
   template<typename S, typename T, typename U>
-  bool op_lt(const Structure<S> &se, const T& v1, const U& v2);
+  bool op_lt(const Structure<S>&,
+	     const T& v1, 
+	     const U& v2);
+
+  template<typename S, typename V, typename T, typename U>
+  bool op_lt(const Structure<S>&,
+	     const Structure<V>&,
+	     const T& v1, 
+	     const U& v2);
 
   /*------------.
   | Conversions |

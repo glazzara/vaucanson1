@@ -166,14 +166,14 @@ namespace vcsn {
     | foreign constructors |
     `---------------------*/
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
-  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::polynom<Tm, Tw>),
-				      SELECTOR2(algebra::Series<W, M>),
+  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+				      SELECTOR2(algebra::polynom<Tm, Tw>),
 				      SELECTOR(M),
 				      const oTm& m_value);
 
   template<typename Tm, typename Tw, typename W, typename M, typename oTw>
-  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::polynom<Tm, Tw>),
-				      SELECTOR2(algebra::Series<W, M>),
+  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+				      SELECTOR2(algebra::polynom<Tm, Tw>),
 				      SELECTOR(W),
 				      const oTw& w_value);
     

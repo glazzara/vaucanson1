@@ -1,5 +1,24 @@
 2003-06-25  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/misc/contract.hh: Fix minor bug.
+	* include/vaucanson/fundamental/default_ops.hh,
+	  include/vaucanson/fundamental/default_ops.hxx: Add function.
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh
+	  include/vaucanson/algebra/concrete/free_monoid/str_words.hxx: Change
+	  argument order in op_convert().
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Add argument name
+	  in several functions.
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Fix
+	  minor bug.
+	* include/vaucanson/algebra/concrete/series/polynoms.hh
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Change
+	  argument order in op_convert().
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	  include/vaucanson/algorithms/forward_closure.hxx,
+	  include/vaucanson/algorithms/backward_closure.hxx: Fix minor bugs.
+
+2003-06-25  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata_ops.hxx: Fix minor bugs.
 	* include/vaucanson/algorithms/backward_closure.hxx: Correct function
 	  call.

@@ -268,7 +268,7 @@ namespace vcsn {
 	    {
 	      if (mli - i > 1)
 		tok.reset();
-	      tok = w;
+	      tok = w.value();
 	      len = mli - i;
 	    }
 	  // try weight lexer.
@@ -280,7 +280,7 @@ namespace vcsn {
 		tok.reset();
 	      if (wli - i >= len)
 		{
-		  tok = ww;
+		  tok = ww.value();
 		  len = wli - i;
 		}
 	    }
