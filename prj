@@ -1,31 +1,19 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 202)
-(Parent-Version vaucanson 0 201)
+(Project-Version vaucanson 0 203)
+(Parent-Version vaucanson 0 202)
 (Version-Log "Index: ChangeLog
 from  Raphaël Poss  <raph@lrde.epita.fr>
-   * include/vaucanson/config/system.hh: Add new macro XUNUSED.
+   * include/vaucanson/config/config.hh.in: Remove obsolete file.
 
-   * include/vaucanson/misc/constraints.hh (utility): Use XUNUSED.
+   * include/vaucanson/config/extrconf.sh,
+   include/vaucanson/config/pconf.sh, tools/scandefs.pl: Likewise.
 
-   * include/vaucanson/algorithms/compute.hxx,
-   * include/vaucanson/algorithms/realtime.hxx,
-   * include/vaucanson/algorithms/determinize.hxx,
-   * include/vaucanson/fundamental/default_ops.hxx 
-   * include/vaucanson/algorithms/closure.hxx,
-   * include/vaucanson/algebra/concrete/series/polynoms.hxx,
-   * include/vaucanson/automata/concept/kinds.hxx,
-   * include/vaucanson/algorithms/reachable.hxx,
-   * include/vaucanson/algorithms/extract.hxx,
-   * include/vaucanson/fundamental/slots.hxx,
-   * include/vaucanson/automata/concrete/manylinks.hxx,
-   * include/vaucanson/misc/container_ops.hxx: Omit argument names
-   where necessary to shut up the compiler.
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Thu, 15 May 2003 13:44:33 +0200")
+(Checkin-Time "Thu, 15 May 2003 15:03:09 +0200")
 (Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -108,7 +96,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.8 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.9 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 664))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -273,9 +261,9 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/automata/concrete/manylinks_edges.hh (vaucanson/c/38_manylinks_ 1.6 600))
   (include/vaucanson/automata/concrete/manylinks_states.hh (vaucanson/c/36_manylinks_ 1.8 600))
   
-  (include/vaucanson/config/config.hh.in (vaucanson/g/2_config.hh. 1.4 600))
-  (include/vaucanson/config/extrconf.sh (vaucanson/g/7_extrconf.s 1.5 700))
-  (include/vaucanson/config/pconf.hh (vaucanson/j/12_pconf.hh 1.1 600))
+  
+  
+  
   (include/vaucanson/config/rel_ops_work_around_g++2.hh (vaucanson/f/51_rel_ops_wo 1.4 600))
   (include/vaucanson/config/system.hh (vaucanson/g/1_system.hh 1.7 600))
   (include/vaucanson/fundamental/default_ops.hh (vaucanson/25_default_op 1.9 600))
@@ -449,7 +437,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (src/tests/tests-suites/algebra_string_free_monoid.defs (vaucanson/h/31_algebra_st 1.1 600))
   (src/tests/tests-suites/algebra_tropical_max_semiring.defs (vaucanson/h/30_algebra_tr 1.1 600))
   (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 600))
-  (tools/scandefs.pl (vaucanson/g/5_scandefs.p 1.2 700))
+  
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.3 600))
 
 ;; Files deleted by depopulate at Wed, 26 Feb 2003 15:17:32 +0100,
@@ -988,6 +976,14 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; to version 0.200(w), by raph:
 
   (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 664))
+
+;; Files deleted by depopulate at Thu, 15 May 2003 15:02:07 +0200,
+;; from version 0.202(w), by raph:
+
+  ; (include/vaucanson/config/config.hh.in ())
+  ; (include/vaucanson/config/extrconf.sh ())
+  ; (include/vaucanson/config/pconf.hh ())
+  ; (tools/scandefs.pl ())
 )
 (Merge-Parents)
 (New-Merge-Parents)
