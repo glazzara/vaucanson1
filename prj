@@ -1,45 +1,24 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 196)
-(Parent-Version vaucanson 0 195)
+(Project-Version vaucanson 0 197)
+(Parent-Version vaucanson 0 196)
 (Version-Log "Index: vauc/ChangeLog
 from  Raphaël Poss  <raph@lrde.epita.fr>
+   * include/readlinebuf.hh: Add missing method
+   declarations. Fix copyright notice.
 
-   * Makefile.am (EXTRA_DIST): Fix.
+   * src/Makefile.am (SUBDIRS): Mention 'vutil'.
 
-   * include/constants/inf.hh, include/constants/one.hh,
-   include/constants/zero.hh, include/vcore/callable.hh,
-   include/vcore/closure.hh, include/vcore/env.hh,
-   include/vcore/exception.hh, include/vcore/interrupt_handler.hh,
-   include/vcore/module_base.hh, include/vcore/module_loader.hh,
-   include/vcore/object_catalog.hh, include/vcore/partial_call.hh,
-   include/vcore/streams.hh, include/lazy/eval_visitor.hh,
-   include/lazy/exp.hh, include/lazy/exp.hxx,
-   include/lazy/exp_base.hh, include/lazy/exp_base.hxx,
-   include/lazy/print_visitor.hh, include/lazy/vauc_constructs.hh,
-   include/lazy/vauc_constructs.hxx, include/lazy/visitor_base.hh,
-   include/readlinebuf.hh, include/toplevel/parse.hh,
-   include/toplevel/wrappers.hh, include/triplet.hh,
-   include/types/object.hh, include/types/object.hxx,
-   include/types/symbol.hh, include/types/symbol.hxx,
-   include/types/type.hh, src/vcore/Makefile.am,
-   src/vcore/callable.cc, src/vcore/closure.cc, src/vcore/env.cc,
-   src/vcore/eval.cc, src/vcore/exception.cc, src/vcore/explode.cc,
-   src/vcore/find_cost.cc, src/vcore/find_path.cc,
-   src/vcore/functionimpl.cc, src/vcore/interrupt_handler.cc,
-   src/vcore/lazy_print_visitor.cc, src/vcore/module_loader.cc,
-   src/vcore/object_catalog.cc, src/vcore/partial_call.cc,
-   src/vcore/persistant.cc, src/vcore/streams.cc,
-   src/vcore/unwind_init.cc, src/vcore/unwind_init.hh: Add files.
+   * configure.ac: Mention 'src/vutil' and 'src/vutil/lemon'.
 
-   * src/Makefile.am (SUBDIRS): Mention 'vcore'.
-
-   * bootstrap.sh: More cleanup.
+   * src/vutil/lemon/Makefile.am, src/vutil/lemon/lemon.c,
+   src/vutil/lemon/lempar.in src/vutil/lemon/rules.am,
+   src/vutil/Makefile.am, src/vutil/readlinebuf.cc: Add files.     
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 13 May 2003 00:51:17 +0200")
+(Checkin-Time "Tue, 13 May 2003 01:19:44 +0200")
 (Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -123,7 +102,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 (Project-Keywords)
 (Files
   (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.4 600))
-  (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.2 664))
+  (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.3 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.1 664))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
@@ -716,7 +695,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/config/libz.m4 (vaucanson/l/32_libz.m4 1.1 664))
   (vauc/config/readline.m4 (vaucanson/l/33_readline.m 1.1 664))
   (vauc/cleanup.sh (vaucanson/l/34_cleanup.sh 1.1 775))
-  (vauc/src/Makefile.am (vaucanson/l/35_Makefile.a 1.2 664))
+  (vauc/src/Makefile.am (vaucanson/l/35_Makefile.a 1.3 664))
   (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.2 664))
   (vauc/lib/getopt.h (vaucanson/l/37_getopt.h 1.1 644))
   (vauc/lib/getopt1.c (vaucanson/l/38_getopt1.c 1.1 644))
@@ -803,7 +782,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/include/triplet.hh (vaucanson/n/11_triplet.hh 1.1 644))
   (vauc/include/toplevel/wrappers.hh (vaucanson/n/12_wrappers.h 1.1 644))
   (vauc/include/toplevel/parse.hh (vaucanson/n/13_parse.hh 1.1 644))
-  (vauc/include/readlinebuf.hh (vaucanson/n/14_readlinebu 1.1 644))
+  (vauc/include/readlinebuf.hh (vaucanson/n/14_readlinebu 1.2 644))
   (vauc/include/lazy/visitor_base.hh (vaucanson/n/15_visitor_ba 1.1 644))
   (vauc/include/lazy/vauc_constructs.hh (vaucanson/n/16_vauc_const 1.1 644))
   (vauc/include/lazy/print_visitor.hh (vaucanson/n/17_print_visi 1.1 644))
@@ -855,6 +834,26 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; to version 0.195(w), by raph:
 
   (vauc/src/vcore/unwind_init.hh (vaucanson/o/1_unwind_ini 1.1 644))
+
+;; Files added by populate at Tue, 13 May 2003 00:57:16 +0200,
+;; to version 0.196(w), by raph:
+
+  
+  (vauc/src/vutil/lemon/lemon.c (vaucanson/o/2_lemon.c 1.1 660))
+  (vauc/src/vutil/lemon/Makefile.am (vaucanson/o/3_Makefile.a 1.1 664))
+  (vauc/src/vutil/readlinebuf.cc (vaucanson/o/4_readlinebu 1.1 644))
+  (vauc/src/vutil/Makefile.am (vaucanson/o/5_Makefile.a 1.1 644))
+
+;; Files deleted by depopulate at Tue, 13 May 2003 00:59:04 +0200,
+;; from version 0.196(w), by raph:
+
+  ; (vauc/src/vutil/lemon/lempar.c ())
+
+;; Files added by populate at Tue, 13 May 2003 00:59:17 +0200,
+;; to version 0.196(w), by raph:
+
+  (vauc/src/vutil/lemon/rules.am (vaucanson/o/6_rules.am 1.1 644))
+  (vauc/src/vutil/lemon/lempar.in (vaucanson/o/7_lempar.in 1.1 660))
 )
 (Merge-Parents)
 (New-Merge-Parents)

@@ -1,5 +1,18 @@
 2003-05-13  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/readlinebuf.hh: Add missing method
+	declarations. Fix copyright notice.
+
+	* src/Makefile.am (SUBDIRS): Mention 'vutil'.
+	
+	* configure.ac: Mention 'src/vutil' and 'src/vutil/lemon'.
+
+	* src/vutil/lemon/Makefile.am, src/vutil/lemon/lemon.c,
+	src/vutil/lemon/lempar.in src/vutil/lemon/rules.am,
+	src/vutil/Makefile.am, src/vutil/readlinebuf.cc: Add files.	
+
+2003-05-13  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* Makefile.am (EXTRA_DIST): Fix.
 
 	* include/constants/inf.hh, include/constants/one.hh,

@@ -1,2 +1,2 @@
 
-SUBDIRS = vcore
+SUBDIRS = vutil vcore

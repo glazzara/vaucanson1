@@ -1,13 +1,13 @@
 /*******************************************************************************
  * $LastChangedRevision$
- * $Date: Tue, 13 May 2003 00:51:17 +0200 $
+ * $Date: Tue, 13 May 2003 01:19:44 +0200 $
  * $LastChangedBy$
  *
  * Contents: A streambuf which uses the GNU readline library for line I/O
  *           http://www.media.mit.edu/~vyzo/hacks/readlinebuf.html
  *           Patched by Raphael Poss for use in the Vaucanson project.
  * (c) 2001 by Dimitris Vyzovitis [vyzo@media.mit.edu]
- * (c) 2001-2002 by Raphael Poss [r.poss@online.fr]
+ * (c) 2001,2002,2003 by Raphael Poss [r.poss@online.fr]
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -136,6 +136,11 @@ public:
 				      rl_compentry_func_t *f);
   static void rl_attempted_completion_function(rl_completion_func_t *f);
   static rl_completion_func_t* rl_attempted_completion_function();
+
+  void set_prompt(const char *prompt);
+  void set_hist_file(const std::string& fname);
+  int write_history(const char *) const;
+  int read_history(const char *) const;
 
 };
 
