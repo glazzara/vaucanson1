@@ -62,7 +62,7 @@ generate_CCs()
     FUN_SNAME=`echo $FUN_NAME | sed s/"_$SUFFIX"/''/`
     NAME_TEST_FILE=$NAME
     for TEST_DIR in $TEST_DIRS; do
-      NAME_TEST_FILE=`echo $NAME_TEST_FILE | sed s,$TEST_DIR/,,`
+      NAME_TEST_FILE=`echo $NAME_TEST_FILE | sed s,$TEST_DIR//\*,,`
     done
 
     # Include licence.

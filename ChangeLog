@@ -1,4 +1,9 @@
-2005-01-15  Raphael Poss  <kena@Vodka-Pomme.local>
+2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
+
+	* src/tests/bin/generate-test-suite.sh: Take care of stripping
+	extraneous '/' before header names to test. 
+
+2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
 
         Sanitize the behaviour of Xerces-C++ configuration.
 	
