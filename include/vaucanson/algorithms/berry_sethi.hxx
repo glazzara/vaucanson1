@@ -31,21 +31,21 @@
 # define VCSN_ALGORITHMS_BERRY_SETHI_HXX
 
 # include <vaucanson/algorithms/berry_sethi.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/standard.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
-# include <vaucanson/algorithms/krat_exp_derivation.hh>
-# include <vaucanson/algorithms/krat_exp_constant_term.hh>
-# include <vaucanson/tools/usual_macros.hh>
+
 # include <vaucanson/algorithms/internal/build_pattern.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+
+# include <vaucanson/algorithms/krat_exp_constant_term.hh>
+# include <vaucanson/algorithms/krat_exp_derivation.hh>
 # include <vaucanson/algorithms/krat_exp_linearize.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
   using namespace algorithm_patterns;
 
   /**
-   * @brief Computes a linearized alphabet from a rational expression.
+   * Computes a linearized alphabet from a rational expression.
    *
    * This function  returns a  linearized alphabet corresponding  to a
    * rational expression, with an extra zero-letter in it.
@@ -109,7 +109,7 @@ namespace vcsn {
   }
 
   /**
-   * @brief This is the visitor that really computes Berry-Sethi.
+   * This is the visitor that really computes Berry-Sethi.
    *
    * This class should be used  only in berry_sethi() and should not
    * be instanciated from elsewhere.
@@ -215,16 +215,17 @@ namespace vcsn {
   };
 
   template<typename T_auto, typename S, typename T>
-  T_auto*	do_berry_sethi(const T_auto& out, const Element<S, T>& kexp)
+  T_auto*
+  do_berry_sethi(const T_auto& out, const Element<S, T>& kexp)
   {
     BerrySethiAlgo<T_auto, S, T> berrysethi_algo(out.series(), kexp);
     berrysethi_algo.run();
     return berrysethi_algo.get();
   }
 
-  // The function called by <<user>>
   template<typename A, typename T, typename Exp>
-  void	berry_sethi(Element<A, T>& out, const Exp& kexp)
+  void
+  berry_sethi(Element<A, T>& out, const Exp& kexp)
   {
     out = *do_berry_sethi(out, kexp);
   }

@@ -30,35 +30,39 @@
 #ifndef VCSN_ALGORITHMS_ACI_CANONICAL_HXX
 # define VCSN_ALGORITHMS_ACI_CANONICAL_HXX
 
+# include <vaucanson/algorithms/aci_canonical.hh>
+
+# include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
-# include <vaucanson/algorithms/krat_exp_constant_term.hh>
+
 # include <set>
 
 namespace vcsn
 {
 
-  // Here is the visitor which build a canonical form
-  // of an krat, following aci-rules.
-  //
-  //     FIXME: the algorithm is good, but the implementation
-  //                  may not be efficient !
+  /**
+   * Visitor to build a canonical form of an expression, following aci-rules.
+   *
+   * @see canonical()
+   *
+   * @bug FIXME: The algorithm  is correct, but the implementation may
+   *             not be efficient!
+   */
   template <class Series, class T, class Dispatch>
   struct KRatExpAciCanonical : algebra::KRatExpMatcher<
     KRatExpAciCanonical<Series, T, Dispatch>,
     T,
-    std::set<Element<Series, T> >,
+    std::set< Element<Series, T> >,
     Dispatch
     >
   {
-  // The return-type is a set of exps
     typedef Element<Series, T>				exp_t;
     typedef std::set<exp_t>				set_t;
     typedef std::set<exp_t>				return_type;
     typedef typename set_t::iterator			iterator_t;
-  // Other common types
     typedef KRatExpAciCanonical<Series, T, Dispatch>	self_t;
     typedef typename Element<Series, T>::semiring_elt_t	semiring_elt_t;
-    typedef typename semiring_elt_t::value_t			semiring_elt_value_t;
+    typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
     typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
     typedef typename monoid_elt_t::set_t		monoid_t;
     typedef typename monoid_t::alphabet_t		alphabet_t;
@@ -69,7 +73,7 @@ namespace vcsn
       exp_(exp)
     {}
 
-  // Usefull functions :
+    // Useful functions:
   private:
     set_t apply_sum(set_t expset)
     {
@@ -87,7 +91,7 @@ namespace vcsn
       return expset;
     }
 
-    set_t&	put_in(set_t& s, exp_t e)
+    set_t& put_in(set_t& s, exp_t e)
     {
       s.clear();
       s.insert(e);
@@ -95,13 +99,13 @@ namespace vcsn
     }
 
   public:
-    exp_t	set2exp(set_t expset)
+    exp_t set2exp(set_t expset)
     {
       expset = apply_sum(expset);
       return *expset.begin();
     }
 
-  // Matches :
+    // Matches:
     MATCH__(Product, lhs, rhs)
     {
       set_t lset = apply_sum(match(lhs));
@@ -177,13 +181,22 @@ namespace vcsn
     Element<Series, T>	exp_;
   };
 
+  template <class Series_, class Exp_>
+  Exp_
+  do_canonical(const algebra::SeriesBase<Series_>&, const Exp_& exp)
+  {
+    typedef Series_			S;
+    typedef typename Exp_::value_t	T;
+
+    KRatExpAciCanonical< S, T, algebra::DispatchFunction<T> >	matcher(exp);
+    return matcher.set2exp(matcher.match(exp.value()));
+  }
+
   template <class Series, class T>
   Element<Series, T>
   canonical(const Element<Series, T>& exp)
   {
-    KRatExpAciCanonical<Series, T, algebra::DispatchFunction<T> >
-      matcher(exp);
-    return matcher.set2exp(matcher.match(exp.value()));
+    return do_canonical(exp.set(), exp);
   }
 
 }

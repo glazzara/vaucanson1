@@ -1,7 +1,7 @@
 // complete.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,8 +30,12 @@
 #ifndef VCSN_ALGORITHMS_COMPLETE_HXX
 # define VCSN_ALGORITHMS_COMPLETE_HXX
 
+# include <vaucanson/algorithms/complete.hh>
+
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/usual.hh>
+# include <vaucanson/tools/usual_macros.hh>
+
+# include <list>
 # include <set>
 
 namespace vcsn {
@@ -39,7 +43,7 @@ namespace vcsn {
   /*--------------.
   | complete_here |
   `--------------*/
-  // author: Yann Régis-Gianas
+
   template <typename A, typename T>
   void
   complete_here(Element<A, T>& work)
@@ -65,7 +69,7 @@ namespace vcsn {
   /*---------.
   | complete |
   `---------*/
-  // author: Yann Régis-Gianas.
+
   template <typename A, typename T>
   Element<A, T>
   complete(const Element<A, T>& e)
@@ -78,7 +82,7 @@ namespace vcsn {
   /*------------.
   | is_complete |
   `------------*/
-  // author: Yann Régis-Gianas.
+
   template <class A, class T>
   bool
   is_complete(const Element<A, T>& e)
@@ -94,7 +98,7 @@ namespace vcsn {
 	  {
 	    aim.clear();
 	    e.letter_deltac(aim, *i, *j, delta_kind::states());
-	  
+
 	    if (aim.size() == 0)
 	      return false;
 	  }

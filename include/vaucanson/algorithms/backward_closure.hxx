@@ -30,39 +30,36 @@
 #ifndef VCSN_ALGORITHMS_BACKWARD_CLOSURE_HXX
 # define VCSN_ALGORITHMS_BACKWARD_CLOSURE_HXX
 
-# include <set>
-# include <vector>
-# include <vaucanson/misc/selectors.hh>
-# include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/backward_closure.hh>
+
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
+
+# include <vector>
 
 namespace vcsn {
 
   /*-----------------.
   | backward closure |
   `-----------------*/
-  // Algorithm based on Floyd/McNaughton/Yamada
-  // author: Thanh-Hoc NGUYEN
   template <class A_, typename Auto>
   void
-  do_backward_closure_here(const AutomataBase<A_>&,
-			   Auto&			   a)
+  do_backward_closure_here(const AutomataBase<A_>&, Auto& a)
   {
     AUTOMATON_TYPES(Auto);
-    typedef std::vector<std::vector<semiring_elt_t> >  matrix_semiring_elt_t;
-    typedef std::vector<std::vector<series_elt_t> >    matrix_series_t;
-    typedef std::vector<semiring_elt_t>            matrix_semiring_elt_final_t;
+    typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
+    typedef std::vector<std::vector<series_elt_t> >	matrix_series_t;
+    typedef std::vector<semiring_elt_t>		matrix_semiring_elt_final_t;
 
-    series_elt_t        series_identity  = a.series().zero_;
-    semiring_elt_t	semiring_elt_zero     = a.series().semiring().wzero_;
+    series_elt_t        series_identity = a.series().zero_;
+    semiring_elt_t	semiring_elt_zero = a.series().semiring().wzero_;
     monoid_elt_t        monoid_identity = a.series().monoid().empty_;
 
     int                   i, j, k, size = a.states().size();
 
-    matrix_series_t       m_series(size), m_series_ret(size);
-    matrix_semiring_elt_t       m_semiring_elt(size), m_semiring_elt_tmp(size);
-    matrix_semiring_elt_final_t m_wfinal(size), m_wfinal_tmp(size);
+    matrix_series_t		m_series(size), m_series_ret(size);
+    matrix_semiring_elt_t	m_semiring_elt(size), m_semiring_elt_tmp(size);
+    matrix_semiring_elt_final_t	m_wfinal(size), m_wfinal_tmp(size);
 
     for (i = 0; i < size; i++)
       {
@@ -72,7 +69,7 @@ namespace vcsn {
 	m_series_ret[i].resize(size, series_elt_t(a.series()));
       }
 
-    /// @bug FIXME: This converters should be removed
+    /// @bug FIXME: This converters should be removed.
     // Initialize converters between matrix index and states.
     std::vector<hstate_t>	index_to_state(size);
     std::map<hstate_t, int>	state_to_index;
@@ -83,8 +80,8 @@ namespace vcsn {
       state_to_index[*s] = i++;
     }
 
-    // Initialize the matrix m_semiring_elt, m_series and m_series_ret with
-    // the original automaton
+    // Initialize the matrix m_semiring_elt, m_series and m_series_ret
+    // with the original automaton.
     std::list<hedge_t> to_remove;
     for_each_edge(e, a)
       {
@@ -100,7 +97,7 @@ namespace vcsn {
     for_each_const_(std::list<hedge_t>, e, to_remove)
       	a.del_edge(*e);
 
-    // Initialize the m_wfinal, m_wfinal_tmp
+    // Initialize the m_wfinal, m_wfinal_tmp.
     for_each_final_state(p, a)
       {
 	int pos = state_to_index[*p];
@@ -108,7 +105,7 @@ namespace vcsn {
 	m_wfinal_tmp[pos] = m_wfinal[pos];
       }
 
-    // Compute star(m_semiring_elt)
+    // Compute star(m_semiring_elt).
     for (int r = 0; r < size; r++)
       {
 	if (!m_semiring_elt[r][r].starable())
@@ -152,7 +149,7 @@ namespace vcsn {
   void
   backward_closure_here(Element<A, T>& a)
   {
-    // FIXME: here, Hoc wrote : "a.renumber_states();"
+    // FIXME: Here, Hoc wrote: "a.renumber_states();"
     do_backward_closure_here(a.set(), a);
   }
 

@@ -1,5 +1,31 @@
 2004-03-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/complement.hh,
+	* include/vaucanson/algorithms/complement.hxx,
+	* include/vaucanson/algorithms/complete.hh:,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/concatenate.hh,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hh,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/algorithms/brzozowski.hh,
+	* include/vaucanson/algorithms/aci_canonical.hxx,
+	* include/vaucanson/algorithms/aci_canonical.hh,
+	* include/vaucanson/algorithms/accessible.hh,
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/berry_sethi.hxx,
+	* include/vaucanson/algorithms/berry_sethi.hh,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx,
+	* include/vaucanson/algorithms/derivatives_automaton.hh,
+	* include/vaucanson/algorithms/backward_closure.hh,
+	* include/vaucanson/algorithms/backward_closure.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hh: Clean. Remove
+	useless includes. Improve doxygen documentation.
+
+2004-03-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/krat_exp_realtime.hxx: Remove a useless
 	include.
 	* src/tests/automata/algos/realtime_test.hh: Remove useless includes.

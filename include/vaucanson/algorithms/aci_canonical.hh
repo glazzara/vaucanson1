@@ -42,8 +42,7 @@
 
 // INTERFACE: Exp canonical(const Exp& e) { return vcsn::canonical(e); }
 
-# include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/algebra/concept/series_base.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 

@@ -1,7 +1,7 @@
 // concatenate.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,19 +30,18 @@
 #ifndef VCSN_ALGORITHMS_CONCATENATE_HXX
 # define VCSN_ALGORITHMS_CONCATENATE_HXX
 
-# include <map>
 # include <vaucanson/algorithms/concatenate.hh>
-# include <vaucanson/tools/usual.hh>
+
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
+
+# include <map>
 
 namespace vcsn {
 
-  // author: Yann Regis-Gianas.
-  // Return the concatenation of two automata using epsilon
-  // transitions. 
   template <class Self, class Auto>
   void
-  do_auto_in_concat(const AutomataBase<Self>&   , 
+  do_auto_in_concat(const AutomataBase<Self>&   ,
 		    Auto&			lhs,
 		    const Auto&			rhs)
   {
@@ -58,19 +57,17 @@ namespace vcsn {
 	    lhs.add_spontaneous(*f, ns);
       }
     for_each_edge(e, rhs)
-      lhs.add_edge(trans[rhs.origin_of(*e)], 
-		   trans[rhs.aim_of(*e)], 
+      lhs.add_edge(trans[rhs.origin_of(*e)],
+		   trans[rhs.aim_of(*e)],
 		   rhs.label_of(*e));
     lhs.clear_final();
     for_each_final_state(f, rhs)
-      lhs.set_final(trans[*f], rhs.get_final(*f)); 
+      lhs.set_final(trans[*f], rhs.get_final(*f));
   }
-  
 
-  // Return the concatenation of two automata using epsilon
-  // transitions. 
+
   template <class A, class T>
-  Element<A, T> 
+  Element<A, T>
   concatenate(const Element<A, T>& lhs, const Element<A, T>& rhs)
   {
     Element<A, T> ret(lhs);
@@ -78,8 +75,6 @@ namespace vcsn {
     return ret;
   }
 
-  // Return the concatenation of two automata using epsilon
-  // transitions. 
   template <class A, class T>
   void
   concatenate_here(Element<A, T>& lhs, const Element<A, T>& rhs)

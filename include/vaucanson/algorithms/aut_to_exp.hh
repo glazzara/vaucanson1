@@ -44,8 +44,7 @@
 
 // INTERFACE: Exp aut_to_exp(const GenAutomaton& a) { return vcsn::aut_to_exp(*a); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/misc/selectors.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 

@@ -26,9 +26,19 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
-//
+
 #ifndef VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 # define VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
+
+# include <vaucanson/algorithms/derivatives_automaton.hh>
+
+# include <vaucanson/algorithms/internal/build_pattern.hh>
+# include <vaucanson/algorithms/internal/partial_rat_exp.hh>
+# include <vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh>
+# include <vaucanson/algorithms/internal/partial_rat_exp_derivation.hh>
+
+# include <vaucanson/algorithms/krat_exp_realtime.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 # ifdef DEBUG
 #  define DERIVATES_TRACE_DEBUG(undef, e, l, s)		\
@@ -46,14 +56,6 @@
 # else
 #  define DERIVATES_TRACE_DEBUG(undef, e, l, s)
 # endif
-
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/algorithms/internal/build_pattern.hh>
-# include <vaucanson/algorithms/internal/partial_rat_exp.hh>
-# include <vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh>
-# include <vaucanson/algorithms/internal/partial_rat_exp_derivation.hh>
-# include <vaucanson/algorithms/krat_exp_realtime.hh>
 
 namespace vcsn {
 
@@ -119,14 +121,16 @@ namespace vcsn {
   };
 
   template<typename T_auto, typename S, typename T>
-  T_auto*	do_derivatives_automaton(const T_auto& out,
-					 const Element<S, T>& kexp)
+  T_auto*
+  do_derivatives_automaton(const T_auto& out,
+			   const Element<S, T>& kexp)
   {
-    Element<S, T> exp = realtime(kexp);
-    DerivativesAlgo<T_auto, S, T> derivatives_algo(out.series(), exp);
+    Element<S, T>			exp = realtime(kexp);
+    DerivativesAlgo<T_auto, S, T>	derivatives_algo(out.series(), exp);
     derivatives_algo.run();
     if (derivatives_algo.undefined)
     {
+      /// @bug FIXME: WHAT IS THAT free() DOING HERE?
       free(derivatives_algo.get());
       return NULL;
     }
@@ -134,21 +138,21 @@ namespace vcsn {
       return derivatives_algo.get();
   }
 
-  // The function called by <<user>>
   template<typename A, typename T, typename Exp>
-  void	derivatives_automaton(Element<A, T>& out, const Exp& kexp)
+  void
+  derivatives_automaton(Element<A, T>& out, const Exp& kexp)
   {
     Element<A, T>*	result = do_derivatives_automaton(out, kexp);
     if (result != NULL)
       out = *result;
   }
 
-  // The function called by <<user>> returning a fresh automaton
   template<typename A, typename T, typename Exp>
-  Element<A, T>	derivatives_automaton(const Exp& kexp)
+  Element<A, T>
+  derivatives_automaton(const Exp& kexp)
   {
-    A a_set(kexp.set());
-    Element<A, T> out(a_set);
+    A			a_set(kexp.set());
+    Element<A, T>	out(a_set);
     Element<A, T>*	result = do_derivatives_automaton(out, kexp);
     if (result != NULL)
       out = *result;

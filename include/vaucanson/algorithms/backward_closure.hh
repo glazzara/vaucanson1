@@ -46,7 +46,7 @@
 // INTERFACE: Automaton backward_closure(const Automaton& a) { return vcsn::backward_closure(*a); }
 // INTERFACE: GenAutomaton backward_closure(const GenAutomaton& a) { return vcsn::backward_closure(*a); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 
@@ -58,9 +58,12 @@ namespace vcsn {
    * This algorithm completes in place  the given automaton to make it
    * close over epsilon transition.
    *
+   * It is based on the Floyd/McNaughton/Yamada algorithm.
+   *
    * @param a The weighted automaton to close.
    *
    * @see forward_closure_here(), forward_closure(), backward_closure_here()
+   * @author Thanh-Hoc NGUYEN
    */
   template<typename A, typename T>
   void
@@ -72,9 +75,12 @@ namespace vcsn {
    * This algorithm completes the given  automaton into a copy to make
    * it close over epsilon transition.
    *
+   * It is based on the Floyd/McNaughton/Yamada algorithm.
+   *
    * @param a The weighted automaton to close.
    *
    * @see forward_closure(), forward_closure_here(), backward_closure_here()
+   * @author Thanh-Hoc NGUYEN
    */
   template<typename A, typename T>
   Element<A, T>

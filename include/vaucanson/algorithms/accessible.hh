@@ -62,7 +62,9 @@
 // INTERFACE: void coaccessible_here(Automaton& a) { return vcsn::coaccessible_here(*a); }
 // INTERFACE: void coaccessible_here(GenAutomaton& a) { return vcsn::coaccessible_here(*a); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/automata/concept/handlers.hh>
+
 # include <set>
 
 namespace vcsn {

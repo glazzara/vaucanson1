@@ -30,14 +30,14 @@
 #ifndef VCSN_ALGORITHMS_BACKWARD_REALTIME_HXX
 # define VCSN_ALGORITHMS_BACKWARD_REALTIME_HXX
 
-# include <algorithm>
-# include <set>
-# include <queue>
 # include <vaucanson/algorithms/backward_realtime.hh>
+
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/backward_closure.hh>
 # include <vaucanson/algorithms/accessible.hh>
+
+# include <queue>
+# include <set>
 
 namespace vcsn {
 
@@ -45,18 +45,17 @@ namespace vcsn {
   void
   do_backward_realtime_here(const AutomataBase<A_>&, Auto_& a)
   {
-    typedef Auto_				automaton_t;
-    AUTOMATON_TYPES(automaton_t);
+    AUTOMATON_TYPES(Auto_);
     typedef std::set<hedge_t>		    	delta_ret_t;
     typedef std::deque<hedge_t>	     		queue_t;
 
-    queue_t		  to_del, origin_d;
-    delta_ret_t		  aim_d;
-    monoid_elt_t	  monoid_identity =
+    queue_t		to_del, origin_d;
+    delta_ret_t		aim_d;
+    monoid_elt_t	monoid_identity =
       algebra::identity_as<monoid_elt_value_t>::of(a.set().series().monoid());
-    semiring_elt_t		  semiring_zero =
+    semiring_elt_t	semiring_zero =
       algebra::zero_as<semiring_elt_value_t>::of(a.set().series().semiring());
-    series_elt_t          series_identity =
+    series_elt_t	series_identity =
       algebra::identity_as<series_value_t>::of(a.set().series());
 
     backward_closure_here(a);

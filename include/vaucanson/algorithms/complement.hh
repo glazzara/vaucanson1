@@ -46,7 +46,7 @@
 // INTERFACE: Automaton complement(const Automaton& a) { return vcsn::complement(*a); }
 // INTERFACE: GenAutomaton complement(const GenAutomaton& a) { return vcsn::complement(*a); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 
@@ -60,6 +60,7 @@ namespace vcsn {
    * @note The input automaton must be complete and deterministic.
    *
    * @see complement()
+   * @author Yann Régis-Gianas
    */
   template <typename A, typename T>
   void
@@ -73,6 +74,7 @@ namespace vcsn {
    * @note the input automaton must be complete and deterministic.
    *
    * @see complement_here()
+   * @author Yann Régis-Gianas
    */
   template <typename A, typename T>
   Element<A, T>

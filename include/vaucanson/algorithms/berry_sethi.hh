@@ -43,8 +43,7 @@
 // INTERFACE: void berry_sethi(Automaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
 // INTERFACE: void berry_sethi(GenAutomaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 

@@ -1,7 +1,7 @@
 // accessible.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,15 +32,14 @@
 
 # include <vaucanson/algorithms/accessible.hh>
 
-# include <algorithm>
-# include <set>
-# include <queue>
-
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/misc/selectors.hh>
-# include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/automata/concrete/transpose_view.hh>
+# include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/tools/usual_macros.hh>
+
+# include <queue>
+# include <set>
+
 
 namespace vcsn {
 
@@ -78,7 +77,7 @@ namespace vcsn {
     | Main loop |
     `----------*/
     while (!queue.empty())
-      {	
+      {
 	state = queue.front();
 	queue.pop();
 	delta_ret.clear();
@@ -106,14 +105,14 @@ namespace vcsn {
   template<typename A, typename T>
   void
   accessible_here(Element<A, T>& a)
-  {    
+  {
     sub_automaton_here(a, accessible_states(a));
   }
 
   template<typename A, typename T>
   Element<A, T>
   accessible(const Element<A, T>& a)
-  {    
+  {
     return sub_automaton(a, accessible_states(a));
   }
 
@@ -151,7 +150,7 @@ namespace vcsn {
   {
     sub_automaton_here(a, coaccessible_states(a));
   }
-  
+
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_ACCESSIBLE_HXX

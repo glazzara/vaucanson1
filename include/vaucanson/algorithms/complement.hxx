@@ -1,7 +1,7 @@
 // complement.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,18 +30,17 @@
 #ifndef VCSN_ALGORITHMS_COMPLEMENT_HXX
 # define VCSN_ALGORITHMS_COMPLEMENT_HXX
 
+# include <vaucanson/algorithms/complement.hh>
+
+# include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/misc/contract.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/complete.hh>
-# include <vaucanson/tools/usual.hh>
-# include <vaucanson/algorithms/determinize.hh>
 
 namespace vcsn {
-  
+
   /*----------------.
   | Complement_here |
   `----------------*/
-  // author: Yann Régis-Gianas
+
   template <typename A, typename T>
   void
   complement_here(Element<A, T>& e)
@@ -60,7 +59,7 @@ namespace vcsn {
   /*----------------.
   | Complement_here |
   `----------------*/
-  // author: Yann Régis-Gianas
+
   template <typename A, typename T>
   Element<A, T>
   complement(const Element<A, T>& e)

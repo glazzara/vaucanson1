@@ -30,8 +30,6 @@
 #ifndef VCSN_ALGORITHMS_COMPLETE_HH
 # define VCSN_ALGORITHMS_COMPLETE_HH
 
-# include <vaucanson/automata/concept/automata_base.hh>
-
 /** @addtogroup algorithms */  /** @{ */
 /**
  * @file   complete.hh
@@ -51,6 +49,8 @@
 // INTERFACE: bool is_complete(const Automaton& a) { return vcsn::is_complete(*a); }
 // INTERFACE: bool is_complete(const GenAutomaton& a) { return vcsn::is_complete(*a); }
 
+# include <vaucanson/design_pattern/element.hh>
+
 namespace vcsn {
 
   /** @addtogroup algorithms */  /** @{ */
@@ -63,6 +63,7 @@ namespace vcsn {
    * @param a the deterministic and boolean automaton to complete.
    *
    * @see complete(), is_complete()
+   * @author Yann Régis-Gianas
    */
   template <typename A, typename T>
   void
@@ -76,6 +77,7 @@ namespace vcsn {
    * @param a the deterministic and boolean automaton to complete.
    *
    * @see complete_here(), is_complete()
+   * @author Yann Régis-Gianas
    */
   template <typename A, typename T>
   Element<A, T>
@@ -89,6 +91,7 @@ namespace vcsn {
    * @return true if the transition function of e is complete w.r.t alphabet.
    *
    * @see complete(), complete_here()
+   * @author Yann Régis-Gianas
    */
   template <class A, class T>
   bool

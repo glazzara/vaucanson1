@@ -32,16 +32,13 @@
 
 # include <vaucanson/algorithms/aut_to_exp.hh>
 
-# include <algorithm>
-# include <set>
-# include <queue>
-# include <vaucanson/misc/contract.hh>
-
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/misc/selectors.hh>
-# include <vaucanson/algorithms/accessible.hh>
+# include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/algorithms/normalized.hh>
 # include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/contract.hh>
+
+# include <list>
+# include <set>
 
 namespace vcsn {
 
@@ -49,10 +46,12 @@ namespace vcsn {
   | DefaultChooser |
   `---------------*/
 
-  // Description: a  chooser is intended  to respond what is  the next
-  // state to eliminate.
-  //
-  // Precondition: there must be at least one state in the automaton.
+  /**
+   * Default chooser for aut_to_exp().
+   *
+   * @precondition There must be at least one state in the automaton.
+   * @see aut_to_exp()
+   */
   struct DefaultChooser
   {
     template <class Auto_>
@@ -74,8 +73,14 @@ namespace vcsn {
   | ListChooser |
   `------------*/
 
-  // FIXME: Could be extended to continue if the list is empty and there
-  //	    remain states in the automaton ;
+  /**
+   * Chooser for aut_to_exp().
+   *
+   * This chooser  is built  using a std::list<hstate_t>.   It returns
+   * the states of the automaton with the same order as in the list.
+   *
+   * @see aut_to_exp().
+   */
   class ListChooser
   {
   public :
@@ -100,9 +105,6 @@ namespace vcsn {
   | aut_to_exp |
   `-----------*/
 
-  // Preconditions:
-  //  - Automaton's labels must support "star".
-  //  => In fact, generalized automaton are generally expected here.
   template <class A_, typename Auto_, typename Chooser_>
   typename Auto_::series_elt_t
   do_in_aut_to_exp(const AutomataBase<A_>&  a_set,
@@ -190,9 +192,6 @@ namespace vcsn {
   | aut_to_exp |
   `-----------*/
 
-  // Preconditions:
-  //  - Automaton's labels must support "star".
-  //  => In fact, generalized automaton are generally expected here.
   template<typename A, typename T, typename Chooser_>
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a, const Chooser_& c)

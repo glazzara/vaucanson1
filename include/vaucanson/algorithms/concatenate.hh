@@ -49,7 +49,7 @@
 // INTERFACE: void concatenate_here(Automaton& a1, const Automaton& a2) { return vcsn::concatenate_here(*a1, *a2); }
 // INTERFACE: void concatenate_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_here(*a1, *a2); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 
@@ -78,10 +78,14 @@ namespace vcsn {
    * This function modifies lhs to concatenate the language L(rhs) to its
    * language.
    *
+   * It returns the concatenation of two automata using epsilon
+   * transitions.
+   *
    * @param lhs The first automaton.
    * @param rhs The second automaton.
    *
    * @see concatenate()
+   * @author Yann Regis-Gianas.
    *
    */
   template <class A, class T>
