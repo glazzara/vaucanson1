@@ -180,7 +180,7 @@ namespace vcsn {
 	  }
 	a.del_state(q);
       }
-    series_elt_t final;
+    series_elt_t final(a_set.series());
     for_each_edge(i, a)
       final += a.label_of(*i);
     return final;

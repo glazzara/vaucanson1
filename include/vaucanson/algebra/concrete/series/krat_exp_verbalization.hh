@@ -47,7 +47,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concrete/series/krat_exp_verbalization.hxx>
+# include <vaucanson/algebra/concrete/series/krat_exp_verbalization.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
     
 

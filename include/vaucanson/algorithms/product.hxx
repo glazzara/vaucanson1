@@ -134,8 +134,8 @@ namespace vcsn {
 		      }
 		    else
 		      aim = found->second;
-		    hedge_t new_edge = output.add_serie_edge(current_state,
-							     aim, s__);
+		    output.add_serie_edge(current_state,
+					  aim, s__);
 		  }
 	      }
 	  }

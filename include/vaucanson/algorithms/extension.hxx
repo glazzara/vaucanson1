@@ -151,7 +151,7 @@ namespace vcsn {
 	    os.assoc(*m, tmp);
 	  }
 	
-	hedge_t f = tt.add_serie_edge(conv[a.origin_of(*e)], conv[a.aim_of(*e)], os);
+	tt.add_serie_edge(conv[a.origin_of(*e)], conv[a.aim_of(*e)], os);
       }
     
     for(a_initial_iterator p = a.initial().begin();

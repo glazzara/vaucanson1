@@ -8,6 +8,7 @@
 #include <vaucanson/algorithms/realtime_composition.hh>
 #include <vaucanson/automata/concrete/generalized.hh>
 #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+#include <vaucanson/algebra/concrete/series/krat_exp_verbalization.hh>
 #include <vaucanson/algebra/concrete/series/krat.hh>
 
 using namespace vcsn;
@@ -56,7 +57,7 @@ void eval_an_expression(const transducer_pt& t)
     generalized_traits<usual_automaton_t>::automaton_t result(w.set());
     standard_of(w, e.value());
     evaluation(w, t, result);
-    krat_exp_print(aut_to_exp(generalized(result)).value());
+    krat_exp_print(verbalize(aut_to_exp(generalized(result))).value());
   } while (user_string != "next");
 }
 
