@@ -37,7 +37,7 @@ namespace vcsn {
 	  rparen,
 	  space, 
 	  plus,
-	  star,
+	  e_star,
 	  dot,
 	  zero,
 	  one,
@@ -90,7 +90,7 @@ namespace vcsn {
 	  case one      : return "one";
 	  case zero     : return "zero";
 	  case dot      : return ".";
-	  case star     : return "*";
+	  case e_star     : return "*";
 	  case plus     : return "+";
 	  case space    : return " ";
 	  case eof      : return "EOF";
@@ -255,7 +255,7 @@ namespace vcsn {
 	    case '(' : tok = lparen; len = 1; break;
 	    case ')' : tok = rparen; len = 1; break;
 	    case '+' : tok = plus;   len = 1; break;
-	    case '*' : tok = star;   len = 1; break;
+	    case '*' : tok = e_star;   len = 1; break;
 	    case '.' : tok = dot;    len = 1; break;
 	    case ' ' : tok = space;  len = 1; break;
 	    case '0' : tok = zero;   len = 1; break;
@@ -390,9 +390,9 @@ namespace vcsn {
 	//std::cout << "get " << first(toks).to_string() << std::endl;
 	if (error_) return;
 	parse_factor_without_star(toks, exp);
-	while (first(toks).is_a(star))
+	while (first(toks).is_a(e_star))
 	  {
-	    accept(toks, star);
+	    accept(toks, e_star);
 	    exp = exp.star();
 	  }
       }
