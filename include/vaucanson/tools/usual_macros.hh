@@ -148,7 +148,7 @@
       std::ostringstream s;					\
       s << Dir << "/" << Name << "_" << Index << ".dot";	\
       std::ofstream f(s.str().c_str());				\
-      tools::dot_dump(f, Auto, Name);				\
+      vcsn::tools::dot_dump(f, Auto, Name);			\
     }
 
 #define SAVE_AUTOMATON_DOT_SIMPLE(Name, Auto)			\

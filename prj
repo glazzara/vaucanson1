@@ -1,19 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 583)
-(Parent-Version vaucanson 0 582)
+(Project-Version vaucanson 0 584)
+(Parent-Version vaucanson 0 583)
 (New-Version-Log "")
 
-(Version-Log "2004-03-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+(Version-Log "2004-03-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* include/vaucanson/misc/random.hh,
-	* include/vaucanson/misc/random.hxx: Fix double generation, add float
-	ranged generation, fix integer generation.
-	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
-	Remove specialisation of op_choose for double.")
-(Checkin-Time "Sun, 21 Mar 2004 17:39:54 +0100")
-(Checkin-Login pouche_l)
+	* include/vaucanson/tools/usual_macros.hh (SAVE_AUTOMATON_DOT): Fix.")
+(Checkin-Time "Sun, 21 Mar 2004 18:02:00 +0100")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -95,7 +91,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.118 646))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.119 644))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 646))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 646))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 646))
@@ -443,7 +439,7 @@
   (include/vaucanson/tools/gen_random.hh (vaucanson/e/4_gen_random 1.18 646))
   (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.24 646))
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.36 646))
-  (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.18 646))
+  (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.19 644))
   (include/vaucanson/tools/usual.hxx (vaucanson/q/29_usual.hxx 1.6 646))
   (include/vaucanson/tools/dot_dump.hh (vaucanson/q/31_dot_dump.h 1.7 646))
   (include/vaucanson/tools/dot_format.hxx (vaucanson/r/25_dot_format 1.8 646))
