@@ -32,11 +32,11 @@
 #ifndef VCSN_ALGORITHMS_STANDARD_OF_HXX
 # define VCSN_ALGORITHMS_STANDARD_OF_HXX
 
-# include <set>
 # include <vaucanson/algorithms/standard_of.hh>
+
+# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/standard.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 
 namespace vcsn {
 
@@ -45,30 +45,38 @@ namespace vcsn {
   /*-------------------.
   | Standard_OfVisitor |
   `-------------------*/
-  template <class Exp_, 
+  template <class Exp_,
 	    class Auto_,
 	    class Dispatch_>
-  class Standard_OfVisitor : 
+  class Standard_OfVisitor :
     public algebra::KRatExpMatcher<
     Standard_OfVisitor<Exp_, Auto_, Dispatch_>,
     Exp_,
     Auto_*,
     Dispatch_
-    >      
+    >
   {
   public :
+    typedef Auto_*					automaton_ptr_t;
     typedef Auto_					automaton_t;
     typedef typename automaton_t::set_t			automata_set_t;
-    typedef Auto_*					automaton_ptr_t;
-    typedef typename automaton_t::series_t		series_t; 
+
+    typedef typename automaton_t::series_t		series_t;
+    typedef typename automaton_t::monoid_t		monoid_t;
+    typedef typename automaton_t::semiring_t		semiring_t;
+
     typedef typename automaton_t::series_elt_t		series_elt_t;
-    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
+    typedef typename automaton_t::monoid_elt_t		monoid_elt_t;
+    typedef typename automaton_t::semiring_elt_t	semiring_elt_t;
+
     typedef typename Exp_::monoid_value_t		monoid_value_t;
     typedef typename Exp_::semiring_elt_value_t		semiring_elt_value_t;
-    typedef rat::Node<monoid_value_t, semiring_elt_value_t>   node_t;
 
-    typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>     this_class;
-    typedef algebra::KRatExpMatcher<this_class, Exp_, Auto_*, Dispatch_> parent_class;
+    typedef rat::Node<monoid_value_t, semiring_elt_value_t> node_t;
+
+    typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>	this_class;
+    typedef algebra::KRatExpMatcher<this_class, Exp_, Auto_*, Dispatch_>
+							parent_class;
     typedef typename parent_class::return_type          return_type;
 
   public :
@@ -78,7 +86,7 @@ namespace vcsn {
     {}
 
     INHERIT_CONSTRUCTORS(this_class, Exp_, Auto_*, Dispatch_);
-    
+
     MATCH__(Product, lhs, rhs)
     {
       automaton_ptr_t tmp_  = match(rhs);
@@ -87,8 +95,8 @@ namespace vcsn {
       delete (tmp_);
       return auto_;
     }
-    END	
-    
+    END
+
     MATCH__(Sum, lhs, rhs)
     {
       automaton_ptr_t tmp_  = match(rhs);
@@ -102,19 +110,48 @@ namespace vcsn {
     MATCH_(Star, node)
     {
       automaton_ptr_t stared = match(node);
-      star_of_standard_here(*stared); 
+      star_of_standard_here(*stared);
       return stared;
     }
     END
 
     MATCH__(LeftWeight, w, node)
     {
-      automaton_ptr_t auto_ = match(node);
+      const semiring_t&		semiring = automata_set_.series().semiring();
+      const semiring_elt_t	weight (semiring, w);
+      automaton_ptr_t		auto_ = match(node);
 
       for (typename automaton_t::initial_iterator i = auto_->initial().begin();
 	   i != auto_->initial().end();
 	   ++i)
-	auto_->set_initial(*i, semiring_elt_t(w) * auto_->get_initial(*i));
+	{
+	  std::list<hedge_t>	e;
+	  auto_->deltac(e, *i, delta_kind::edges());
+	  for (typename std::list<hedge_t>::const_iterator j = e.begin();
+	       j != e.end();
+	       ++j)
+	    {
+	      // FIXME: The following code is only correct when labels are
+	      // FIXME: series. We should add meta code to make the code
+	      // FIXME: fail at runtime when this function is called
+	      // FIXME: with label as letters. However, we cannot afford
+	      // FIXME: doing an error at compile time, because the rest
+	      // FIXME: of this matcher is valid on Boolean automata with
+	      // FIXME: label as letter.
+	      typedef typename automaton_t::label_t	label_t;
+	      typedef Element<series_t, label_t>	label_elt_t;
+
+	      label_elt_t label (automata_set_.series(), auto_->label_of(*j));
+	      label  = weight * label;
+
+	      hstate_t				aim = auto_->aim_of(*j);
+	      auto_->del_edge(*j);
+
+	      if (label != zero_as<label_t>::of(automata_set_.series()))
+		auto_->add_edge(*i, aim, label.value());
+	    }
+	  auto_->set_final(*i, weight * auto_->get_final(*i));
+	}
       return auto_;
     }
     END
@@ -172,29 +209,29 @@ namespace vcsn {
 
   }
 
-  template <typename A, 
+  template <typename A,
 	    typename Output,
 	    typename Exp>
   void
-  do_standard_of(const AutomataBase<A>&, 
-	      Output& output, 
+  do_standard_of(const AutomataBase<A>&,
+	      Output& output,
 	      const Exp& kexp)
   {
-    algebra::Standard_OfVisitor<Exp, Output, algebra::DispatchFunction<Exp> > 
-      m(output.set().series()); 
+    algebra::Standard_OfVisitor<Exp, Output, algebra::DispatchFunction<Exp> >
+      m(output.set().series());
     output = *m.match(kexp);
   }
 
-  template<typename A,      
-	   typename T, 
+  template<typename A,
+	   typename T,
 	   typename Exp>
   void
-  standard_of(Element<A, T>& out, 
+  standard_of(Element<A, T>& out,
 	   const Exp& kexp)
   {
     do_standard_of(out.set(), out, kexp);
   }
-  
+
   template <typename A, typename T, typename Exp>
   Element<A, T>
   standard_of(const Exp& e)

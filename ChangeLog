@@ -1,3 +1,7 @@
+2004-03-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/standard_of.hxx: Fix.
+
 2004-03-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh:
