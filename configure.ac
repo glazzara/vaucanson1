@@ -74,9 +74,6 @@ AC_CONFIG_FILES([
 	doc/Makefile
 	doc/tutorial/Makefile
         doc/doc.doxy
-	mical/Makefile
-	mical/include/Makefile
-	mical/src/Makefile
 	include/Makefile])
 
 VCSN_TESTS([algebra_numerical_semiring])
