@@ -284,10 +284,10 @@ namespace vcsn {
       void
       lex(const std::string& in, const Element<S, T>& e)
       {
-	typedef typename Element<S, T>::monoid_elt_t	monoid_elt_t;
-	typedef typename Element<S, T>::monoid_elt_value_t	monoid_elt_value_t;
-	typedef typename Element<S, T>::semiring_elt_t	semiring_elt_t;
-	typedef std::string::const_iterator		iterator_t;
+	typedef typename Element<S, T>::monoid_elt_t	   monoid_elt_t;
+	typedef typename Element<S, T>::monoid_elt_value_t monoid_elt_value_t;
+	typedef typename Element<S, T>::semiring_elt_t	   semiring_elt_t;
+	typedef std::string::const_iterator		   iterator_t;
 
 	iterator_t i = in.begin();
 	std::set<char> escaped = tools::usual_escaped_characters();
@@ -311,7 +311,7 @@ namespace vcsn {
 	      }
 	    // try word parser.
 	    iterator_t mli = i;
-	    monoid_elt_t w(e.structure().monoid());
+	    monoid_elt_t w (e.structure().monoid());
 	    if (parse_word(w, in, mli, escaped))
 	      {
 		if (mli - i > 1)
@@ -321,7 +321,7 @@ namespace vcsn {
 	      }
 	    // try weight lexer.
 	    iterator_t wli = i;
-	    semiring_elt_t ww;
+	    semiring_elt_t ww (e.structure().semiring());
 	    if (parse_weight(ww, in, wli))
 	      {
 		if (wli - i > len)

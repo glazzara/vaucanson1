@@ -32,10 +32,6 @@
 #ifndef VCSN_XML_INFOS_HH
 # define VCSN_XML_INFOS_HH
 
-# include <vaucanson/automata/concept/automata.hh>
-
-# include <string>
-
 /** @addtogroup xml *//** @{ */
 /**
  * @file infos.hh
@@ -45,6 +41,10 @@
  * @author Valentin David <valentin@lrde.epita.fr>
  */
 /** @} */
+
+# include <string>
+
+# include <vaucanson/automata/concept/automata.hh>
 
 namespace vcsn
 {

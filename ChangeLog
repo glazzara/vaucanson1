@@ -1,3 +1,76 @@
+2004-07-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	In order to have Vaucanson  XML work properly and be maintainable,
+	I rewrote quite a lot of things. There is no more needs for hybrid
+	static/xml automata:  only usual static automata  and XML automata
+	are used. Huge parts of the code have been cleaned, and everything
+	should be much  more safe now. The hacks  that were in element.hxx
+	have also been removed.
+
+	* include/vaucanson/xml/xml_ops.hh, include/vaucanson/xml/xml_ops.hxx:
+	Rewrite. Move if_tag<T>...
+	* include/vaucanson/xml/if_tag.hh, include/vaucanson/xml/if_tag.hxx:
+	... Here. New.
+	* include/Makefile.am: Update.
+	* include/vaucanson/xml/xml_set.hh, include/vaucanson/xml/xml_set.hxx:
+	Rewrite. Rename semiring_type() to semiring_structure() and
+	semiring_structure() to semiring_value().
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/xml_automaton.hxx: Rewrite.
+	* include/vaucanson/xml/session.hh, include/vaucanson/xml/session.hxx:
+	Adjust stream operators: >>, <<, op_rin and op_rout.
+	* include/vaucanson/xml/xml_loader.hxx: Rewrite operator () for the
+	xml_loader.
+
+	To have  the previous  modifications work fine,  I had to  do some
+	changes on the rest of Vaucanson XML:
+
+	* include/vaucanson/xml/callback.hxx: Adjust accordingly.
+	* include/vaucanson/xml/krat_to_polynom.hh,
+	* include/vaucanson/xml/krat_to_polynom.hxx: Delete.
+	* include/vaucanson/xml/strings.hh, include/vaucanson/xml/strings.hxx,
+	* include/vaucanson/xml/dynamic.hh: Clean.
+	* include/vaucanson/xml/static.hh: Include tools/io.hh.
+	* include/vaucanson/xml/types.hh: Remove the XmlOf traits and its
+	corresponding XML_OF macro. Add forward declarations and typedefs.
+	* include/vaucanson/xml/errors.hh: Minor fix in the WITH_EXIT macro.
+	* include/vaucanson/xml/infos.hh: Adjust includes.
+	* include/vaucanson/xml/defaults.hh: Remove the ugly definition of
+	the macro VCSN_XML_EMPTY_ELEMENTS.
+
+	I also  had to  do some cleaning  and small  fixes in the  core of
+	Vaucanson:
+
+	* include/vaucanson/algebra/implementation/free_monoid/predefs.hh: Use
+	std::basic_string<Letter> instead of std::string.
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx:
+	Remove an unused argument warning.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	Avoid building a semiring element without its structure.
+	* include/vaucanson/tools/usual_macros.hh: Add a typedef to letter_t
+	in AUTOMATA_SET_TYPES.
+	* include/vaucanson/design_pattern/element_ops.hxx: Adjust.
+	* include/vaucanson/design_pattern/element.hxx: Remove the hacks that
+	were needed to have Vaucanson XML works properly ; they are no longer
+	needed.
+	* src/tests/design_pattern/intrinsics.hh: Adjust accordingly.
+	* include/vaucanson/design_pattern/slots.hxx,
+	* include/vaucanson/design_pattern/default_ops.hxx: Clean.
+
+	And of course, the test suite has been updated:
+
+	* src/tests/xml/export_session.cc,
+	* src/tests/xml/export_dynamic.cc,
+	* src/tests/xml/export_static.cc,
+	* src/tests/xml/nodata.cc,
+	* src/tests/xml/import_generic.cc,
+	* src/tests/xml/import_session.cc,
+	* src/tests/xml/import_dynamic.cc,
+	* src/tests/xml/import_static.cc: Adjust.
+	* src/tests/xml/export_dynamic-session.xml.ref,
+	* src/tests/xml/export_dynamic-simple.xml.ref: Adjust: remove the
+	extra trailing \n at end of file.
+
 2004-07-09  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/realtime_composition.hxx: Fix a wrong

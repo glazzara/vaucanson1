@@ -154,6 +154,13 @@ namespace vcsn {
     MetaElement(const MetaElement& other) : MetaElement<Structure<vcsn_test::Sna>, T>(other) {}
   };
 
+  // Operators to build an eS structural element from Sna.
+  vcsn_test::eS
+  op_convert(const vcsn_test::eS&, const vcsn_test::Sna&)
+  {
+    return vcsn_test::eS ();
+  }
+
 }
 
 // shortcut to types

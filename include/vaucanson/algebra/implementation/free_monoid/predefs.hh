@@ -36,16 +36,16 @@
 # include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
 
 namespace vcsn {
-  
+
   namespace algebra {
 
     namespace small_alpha_letter {
 
-      typedef 
+      typedef
       FreeMonoid<Alphabet>					Words;
 
       typedef std::basic_string<Letter>				WordValue;
-      
+
       typedef
       Element<Words, WordValue>			     	        Word;
 
@@ -53,50 +53,50 @@ namespace vcsn {
 
     namespace char_letter {
 
-      typedef 
+      typedef
       FreeMonoid<Alphabet>					Words;
-      
-      typedef std::string					WordValue;
+
+      typedef std::basic_string<Letter>				WordValue;
 
       typedef
-      Element<Words, std::string>			        Word;
-    
+      Element<Words, WordValue>					Word;
+
     } // char_letter
 
     namespace char_pair {
 
-      typedef 
+      typedef
       FreeMonoid<Alphabet>					Words;
-      
+
       typedef std::basic_string<Letter>			        WordValue;
 
       typedef
       Element<Words, WordValue>			                Word;
-    
+
     } // char_pair
 
     namespace weighted_letter {
 
-      typedef 
+      typedef
       FreeMonoid<Alphabet>					Words;
-      
+
       typedef std::basic_string<Letter>			        WordValue;
 
       typedef
       Element<Words, WordValue>			                Word;
-    
+
     } // weighted_letter
 
     namespace int_letter {
 
-      typedef 
+      typedef
       FreeMonoid<Alphabet>					Words;
-      
+
       typedef std::list<Letter>			                WordValue;
 
       typedef
       Element<Words, WordValue>			                Word;
-    
+
     } // int_letter
 
   } // algebra

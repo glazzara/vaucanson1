@@ -32,528 +32,58 @@
 #ifndef VCSN_XML_XML_OPS_HXX
 # define VCSN_XML_XML_OPS_HXX
 
-# include <vaucanson/xml/xml_ops.hh>
-# include <vaucanson/xml/krat_to_polynom.hh>
-# include <vaucanson/xml/infos.hh>
-
-# include <vaucanson/algebra/implementation/letter/couple_letter.hh>
-# include <vaucanson/xml/errors.hh>
-
 # include <string>
+
+# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+
+# include <vaucanson/xml/xml_ops.hh>
+
+# include <vaucanson/xml/if_tag.hh>
+# include <vaucanson/xml/errors.hh>
 
 namespace vcsn
 {
+
   namespace xml
   {
-    using namespace xercesc;
 
-    template <typename Tag>
-    struct if_tag
-    {
-      static
-      inline
-      void set_root(DOMElement*, const Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_structure(DOMElement*, const Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_states(DOMElement*, Tag)
-      {
-      }
-
-      static
-      inline
-      void set_edges(DOMElement*, const Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_initials(DOMElement*, const Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_finals(DOMElement*, const Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_state(DOMElement*, hstate_t, const Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_edge(DOMElement*, hedge_t, const Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_initial(DOMElement*, hstate_t, const Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_final(DOMElement*, hstate_t, const Tag&)
-      {
-      }
-
-      static
-      inline
-      xercesc::DOMElement*
-      add_state(XmlAutomaton& x, hstate_t s, const Tag&)
-      {
-	x.add_state(s);
-	return NULL;
-      }
-
-      static
-      inline
-      void get_root(const DOMElement*, Tag&)
-      {
-      }
-
-      static
-      inline
-      void set_structure(const DOMElement*, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_structure(const DOMElement*, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_states(const DOMElement*, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_edges(const DOMElement*, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_initials(const DOMElement*, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_finals(const DOMElement*, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_state(const DOMElement*, hstate_t, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_edge(const DOMElement*, hedge_t, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_initial(const DOMElement*, hstate_t, Tag&)
-      {
-      }
-
-      static
-      inline
-      void get_final(const DOMElement*, hstate_t, Tag&)
-      {
-      }
-
-    };
-
-    template <>
-    struct if_tag<XmlInfosTag>
-    {
-
-# define SET_ATTR(Section, Attr)                                      \
-         if ( Section (). get_##Attr ().is_set()) {                   \
-	   std::ostringstream strs;                                   \
-	   strs << (Section (). get_##Attr() ());                     \
-           node->removeAttribute(str_##Attr);                         \
-           XMLCh* value = XMLString::transcode(strs.str().c_str());   \
-           if (node->hasAttribute(str_##Attr)) {                      \
-             if (XMLString::compareIString(node->                     \
-		        		   getAttribute(str_##Attr),  \
-                                           value))                    \
-               node->setAttribute(str_##Attr, value);                 \
-           }                                                          \
-           else                                                       \
-           node->setAttribute(str_##Attr, value);                     \
-	   XMLString::release(&value);                                \
-         }
-
-# define OPTION_ATTR(Field, Attr, Do)                                 \
-         if ( Field() . get_##Attr() .is_set()) {                       \
-           Do                                                         \
-         }
-
-# define OPTION(Section, Attr, Value, Str)                            \
-         if ( Section (). get_##Attr ()() == Value )                  \
-           node->setAttribute(str_##Attr, str_##Str);
-
-      static
-      inline
-      void set_default(DOMElement* n, const XmlInfosTag::Geometry& g)
-      {
-	DOMElement* node = NULL;
-	DOMNode* child = n->getFirstChild();
-	while (child) {
-	  if ((child->getNodeType() == DOMNode::ELEMENT_NODE)
-	      && (!XMLString::compareIString(child->getNodeName(),
-					     str_geometry))) {
-	    node = static_cast<DOMElement*>(child);
-	  }
-	  child = child->getNextSibling();
-	}
-
-	if (!node) {
-	  if (g.is_set()) {
-	    node = n->getOwnerDocument()->createElement(str_geometry);
-	    if (n->hasChildNodes())
-	      n->insertBefore(node, n->getFirstChild());
-	    else
-	      n->appendChild(node);
-	  }
-	  else {
-	    return ;
-	  }
-	}
-
-	if (!g.is_set()) {
-	  n->removeChild(node);
-	}
-
-# include <vaucanson/xml/loadgeometry.inc>
-
-      }
-
-# undef SET_ATTR
-# undef OPTION_ATTR
-# undef OPTION
-
-      static
-      inline
-      void set_root(DOMElement* node, const XmlInfosTag& tag)
-      {
-	set_default(node, tag.get_root());
-      }
-
-      static
-      inline
-      void set_structure(DOMElement* node, const XmlInfosTag& tag)
-      {
-	set_default(node, tag.get_structure());
-      }
-
-      static
-      inline
-      void set_states(DOMElement* node, const XmlInfosTag& tag)
-      {
-	set_default(node, tag.get_states());
-      }
-
-      static
-      inline
-      void set_edges(DOMElement* node, const XmlInfosTag& tag)
-      {
-	set_default(node, tag.get_edges());
-      }
-
-      static
-      inline
-      void set_initials(DOMElement* node, const XmlInfosTag& tag)
-      {
-	set_default(node, tag.get_initials());
-      }
-
-      static
-      inline
-      void set_finals(DOMElement* node, const XmlInfosTag& tag)
-      {
-	set_default(node, tag.get_finals());
-      }
-
-      static
-      inline
-      void set_state(DOMElement* n, hstate_t s, XmlInfosTag tag)
-      {
-	if (tag.get_states().get_label()[s].is_set()) {
-	  XMLCh* label = XMLString::transcode(tag.get_states()
-					     .get_label()[s]().c_str());
-	  n->setAttribute(str_label, label);
-	  XMLString::release(&label);
-	}
-
-	set_default(n, tag.get_states()[s]);
-      }
-
-      static
-      inline
-      void set_edge(DOMElement* node, hedge_t s, XmlInfosTag tag)
-      {
-	set_default(node, tag.get_edges()[s]);
-      }
-
-      static
-      inline
-      void set_initial(DOMElement* node, hstate_t s, XmlInfosTag tag)
-      {
-	set_default(node, tag.get_initials()[s]);
-      }
-
-      static
-      inline
-      void set_final(DOMElement* node, hstate_t s, XmlInfosTag tag)
-      {
-	set_default(node, tag.get_initials()[s]);
-      }
-
-      static
-      inline
-      xercesc::DOMElement*
-      add_state(XmlAutomaton& x, hstate_t s, const XmlInfosTag& tag)
-      {
-	if (tag.get_states().get_name().find(s)
-	    == tag.get_states().get_name().end()) {
-	  return x.add_state_elt(s);
-	}
-	else if (tag.get_states().get_name().find(s)->second == "") {
-	  return x.add_state_elt(s);
-	}
-	else {
-	  return x.add_state_elt(s,
-				 tag.get_states().get_name().find(s)->second);
-	}
-      }
-
-# define SET_ATTR(Section, Attr)                                     \
-        if (node->hasAttribute(str_##Attr )) {                       \
-          std::istringstream strs(xml2str(node                       \
-		->getAttribute(str_##Attr )));                       \
-          strs >> Section() . get_##Attr ()();                       \
-        }                                                            \
-        else                                                         \
-          Section (). get_##Attr() .is_set() = false;
-
-# define OPTION_ATTR(Field, Attr, Do)                                \
-         if (node->hasAttribute(str_##Attr )) {                      \
-           Do                                                        \
-         }
-
-# define OPTION(Section, Attr, Value, Str)                           \
-         if (!XMLString::compareIString(str_##Str,                   \
-              node->getAttribute(str_##Attr ))) {                    \
-           Section (). get_##Attr ()() = Value;                      \
-         }
-
-      static
-      inline
-      void get_default(const DOMElement* n, XmlInfosTag::Geometry& g)
-      {
-	const DOMNode* child = n->getFirstChild();
-	while (child) {
-	  if ((child->getNodeType() == DOMNode::ELEMENT_NODE)
-	      && (!XMLString::compareIString(child->getNodeName(),
-					     str_geometry))) {
-	    const DOMElement* node = static_cast<const DOMElement*>(child);
-
-	    g.is_set() = true;
-
-# include <vaucanson/xml/loadgeometry.inc>
-
-	    return ;
-	  }
-	  child = child->getNextSibling();
-	}
-
-	g.is_set() = false;
-      }
-
-# undef SET_ATTR
-# undef OPTION_ATTR
-# undef OPTION
-
-      static
-      inline
-      void get_root(const DOMElement* node, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_root());
-      }
-
-      static
-      inline
-      void get_structure(const DOMElement* node, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_structure());
-      }
-
-      static
-      inline
-      void get_states(const DOMElement* node, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_states());
-      }
-
-      static
-      inline
-      void get_edges(const DOMElement* node, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_edges());
-      }
-
-      static
-      inline
-      void get_initials(const DOMElement* node, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_initials());
-      }
-
-      static
-      inline
-      void get_finals(const DOMElement* node, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_finals());
-      }
-
-      static
-      inline
-      void get_state(const DOMElement* n, hstate_t s, XmlInfosTag& tag)
-      {
-	tag.get_states().get_name()[s]
-	  = xml2str(n->getAttribute(str_name));
-	if (n->hasAttribute(str_label)) {
-	  tag.get_states().get_label()[s]()
-	    = xml2str(n->getAttribute(str_label));
-	}
-	else
-	  tag.get_states().get_label()[s].is_set() = false;
-
-	get_default(n, tag.get_states()[s]);
-      }
-
-      static
-      inline
-      void get_edge(const DOMElement* node, hedge_t s, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_edges()[s]);
-      }
-
-      static
-      inline
-      void get_initial(const DOMElement* node, hstate_t s, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_initials()[s]);
-      }
-
-      static
-      inline
-      void get_final(const DOMElement* node, hstate_t s, XmlInfosTag& tag)
-      {
-	get_default(node, tag.get_finals()[s]);
-      }
-    };
-  }
-
-  template<typename S, typename St>
-  inline
-  St& op_rout(const AutomataBase<S>&, St& st, const xml::XmlAutomaton& v)
-  {
-    v.serialize(st);
-    return st;
-  }
-
-  template<typename S, typename St>
-  inline
-  St& op_rin(const AutomataBase<S>& s, St& st, xml::XmlAutomaton& v)
-  {
-    using namespace xercesc;
-    using namespace xml;
-
-    typedef Element<S, XmlAutomaton> auto_t;
-    AUTOMATON_TYPES(auto_t);
-
-    DOMImplementation* impl = xercesc::DOMImplementationRegistry
-      ::getDOMImplementation(str_LS);
-
-    DOMBuilder* parser = ((DOMImplementationLS*)impl)
-      ->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
-
-    DOMDocument* doc = loaddocument(parser, st);
-    DOMNodeList* nodelist = doc->
-      getElementsByTagNameNS(str_http_c_s_swww_plrde_pepita_pfr_svaucanson,
-			     str_automaton);
-    if (!nodelist->getLength())
-      FAIL("Cannot find any automaton root.");
-    DOMNode* node = nodelist->item(0);
-    XmlAutomaton x(doc, static_cast<DOMElement*>(node));
-
-    v = x;
-    return st;
-  }
-
-  xml::XmlAutomaton
-  op_default(SELECTOR(xml::XmlStructure), SELECTOR(xml::XmlAutomaton))
-  {
-    return xml::XmlAutomaton();
-  }
-
-  namespace xml {
     inline
     xercesc::DOMDocument*
-    loaddocument(DOMBuilder* parser, std::istream& in)
+    loaddocument(DOMBuilder* parser, std::istream& is)
     {
       using namespace xercesc;
 
       if (parser->canSetFeature(XMLUni::fgDOMValidation, true))
 	parser->setFeature(XMLUni::fgDOMValidation, true);
+
       if (parser->canSetFeature(XMLUni::fgDOMNamespaces, true))
 	parser->setFeature(XMLUni::fgDOMNamespaces, true);
+
       if (parser->canSetFeature(XMLUni::fgDOMDatatypeNormalization, true))
 	parser->setFeature(XMLUni::fgDOMDatatypeNormalization, true);
+
       myDOMErrorHandler* err = new myDOMErrorHandler();
       parser->setErrorHandler(err);
 
       DOMDocument* doc;
-      try {
-	CxxInputSource input(&in);
-	Wrapper4InputSource w(&input, false);
-	doc = parser->parse(w);
-      }
-      catch (const XMLException& e) {
-	FAIL(std::string("XML exception: ") + xml2str(e.getMessage()));
-      }
-      catch (const DOMException& e) {
-	FAIL(std::string("DOM exception: ") + xml2str(e.msg));
-      }
-      catch (...) {
-	FAIL("Unknown caught exception.");
-      }
+      try
+	{
+	  CxxInputSource	i (&is);
+	  Wrapper4InputSource	w (&i, false);
+	  doc = parser->parse(w);
+	}
+      catch (const XMLException& e)
+	{
+	  FAIL(std::string ("XML exception: ") + xml2str(e.getMessage()));
+	}
+      catch (const DOMException& e)
+	{
+	  FAIL(std::string ("DOM exception: ") + xml2str(e.msg));
+	}
+      catch (...)
+	{
+	  FAIL("Unknown exception caught.");
+	}
 
       if (err->has_error())
 	FAIL(err->get_msg());
@@ -561,525 +91,510 @@ namespace vcsn
       delete err;
       return doc;
     }
-  }
 
-  template<typename St>
-  inline
-  St& op_rin(xml::XmlStructure& s, St& st, xml::XmlAutomaton& v)
-  {
-    using namespace xercesc;
-    using namespace xml;
+    /*-------------.
+    | Op functions |
+    `-------------*/
 
-    typedef Element<XmlStructure, XmlAutomaton> auto_t;
+    using xercesc::DOMElement;
+    using xercesc::DOMNode;
 
-    DOMImplementation* impl = xercesc::DOMImplementationRegistry
-      ::getDOMImplementation(str_LS);
+    /*--------------.
+    | I/O Functions |
+    `--------------*/
 
-    DOMBuilder* parser = ((DOMImplementationLS*)impl)
-      ->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
+    template <class Ostream>
+    Ostream&
+    op_rout(const xml_automata_set_t& xs,
+	    Ostream& os,
+	    const xml_automaton_impl_t& xv)
+    {
+      using namespace xercesc;
 
-    DOMDocument* doc = loaddocument(parser, st);
-    DOMNodeList* nodelist = doc->
-      getElementsByTagNameNS(str_http_c_s_swww_plrde_pepita_pfr_svaucanson,
-			     str_automaton);
-    if (!nodelist->getLength())
-      FAIL("Cannot find any automaton root.");
-    DOMNode* node = nodelist->item(0);
-    XmlAutomaton x(static_cast<DOMElement*>(node));
-    auto_t xa = auto_t(XmlStructure(static_cast<DOMElement*>(node)), x);
+      DOMImplementation* impl =
+	DOMImplementationRegistry::getDOMImplementation(str_LS);
 
-    v = xa.value();
-    s = xa.structure();
-    return st;
-  }
+      MemBufFormatTarget buf;
 
-  template <typename Tm, typename Tw, typename S>
-  inline
-  algebra::polynom<Tm,Tw> op_convert(const algebra::SeriesBase<S>& s,
-				     SELECTOR2(algebra::polynom<Tm, Tw>),
-				     const xml::XmlValue& v)
-  {
-    Element<S,
-      rat::exp<Tm, Tw> >
-      exp(s.self());
+      DOMWriter* serializer =
+	static_cast<DOMImplementationLS*> (impl)->createDOMWriter();
+      serializer->setEncoding(str_ISO8859_d1);
 
-    algebra::parse(v.value(), exp);
+      if (serializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent,
+				    true))
+	serializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, true);
 
-    return algebra::krat_to_polynom(exp).value();
-  }
+      if (serializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
+	serializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
 
-  template<typename I, typename J>
-  inline
-  I op_convert(const I& i, const J&)
-  {
-    return i;
-  }
+      DOMDocumentType* doctype =
+	impl->createDocumentType(str_automaton, 0, str_vaucanson_pdtd);
+      DOMDocument* doc =
+	impl->createDocument(str_http_c_s_swww_plrde_pepita_pfr_svaucanson,
+			     str_automaton, doctype);
 
-  template<typename Tm, typename Tw, typename S>
-  inline
-  rat::exp<Tw,Tm> op_convert(const algebra::SeriesBase<S>& s,
-			     SELECTOR2(rat::exp<Tw, Tm>),
-			     const xml::XmlValue& v)
-  {
-    Element<S,
-      rat::exp<Tw, Tm> >
-      exp(s.self());
+      DOMElement*	root = doc->getDocumentElement();
 
-    algebra::parse(v.value(), exp);
+      DOMNode*		type =
+	doc->importNode(const_cast<DOMElement*> (xs.type()), true);
+      DOMNode*		structure =
+	doc->importNode(const_cast<DOMElement*> (xv.structure()), true);
 
-    return exp.value();
-  }
+      root->appendChild(type);
+      root->appendChild(structure);
 
-  template<typename Tm, typename Tw, typename S>
-  inline
-  xml::XmlValue op_convert(const algebra::SeriesBase<S>& s,
-			   SELECTOR(xml::XmlValue),
-			   const algebra::polynom<Tm, Tw>& p)
-  {
-    xml::XmlValue v;
+      serializer->writeNode(&buf, *doc);
+      os << buf.getRawBuffer();
+      serializer->release();
 
-    std::ostringstream o;
-
-    op_rout(s.self(), o, p);
-    v.value() = o.str();
-
-    return v;
-  }
-
-  template<typename Tm, typename Tw, typename S>
-  inline
-  xml::XmlValue op_convert(const algebra::SeriesBase<S>& s,
-			   SELECTOR(xml::XmlValue),
-			   const rat::exp<Tm, Tw>& e)
-  {
-    xml::XmlValue v;
-
-    std::ostringstream o;
-
-    op_rout(s.self(), o, e);
-    v.value() = o.str();
-
-    return v;
-  }
-
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag,
-	    typename W,
-	    typename M>
-  xml::XmlAutomaton op_convert(const Automata<algebra::Series<W, M> >& s,
-			       SELECTOR(xml::XmlAutomaton),
-			       const Graph<Kind,
-			       WordValue,
-			       WeightValue,
-			       SerieValue,
-			       Letter,
-			       Tag>& a)
-  {
-    using namespace xml;
-
-    typedef Element<Automata<algebra::Series<W, M> >,
-      Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag> > auto_t;
-    AUTOMATON_TYPES(auto_t);
-    XmlAutomaton x;
-
-    x.semiring_node_->setAttribute(str_operations, attr_semiring<W>::getstr());
-    x.semiring_node_->setAttribute(str_set, attr_semiring_impl<WeightValue>
-				   ::getstr());
-    x.monoid_node_->setAttribute(str_generators, attr_monoid<M>::getstr());
-    x.monoid_node_->setAttribute(str_type, attr_monoid_impl<WordValue>::getstr());
-
-    for_each_letter(i, s.series().monoid().alphabet()) {
-      std::ostringstream s;
-      s << *i;
-      XMLCh* xs = XMLString::transcode(s.str().c_str());
-      DOMElement* node = x.doc_->createElement(str_generator);
-      node->setAttribute(str_value, xs);
-      XMLString::release(&xs);
-      x.monoid_node_->appendChild(node);
+      delete doc;
+      return os;
     }
 
-    if_tag<Tag>::set_root(x.root_, a.tag());
-    if_tag<Tag>::set_structure(x.structure_, a.tag());
-    if_tag<Tag>::set_states(x.states_node_, a.tag());
-    for_each_state(i, a) {
-      if_tag<Tag>::set_state(if_tag<Tag>::add_state(x, *i, a.tag()),
-			     *i, a.tag());
+    template <class Istream>
+    Istream&
+    op_rin(xml_automata_set_t& s, Istream& is, xml_automaton_impl_t& v)
+    {
+      using namespace xercesc;
+
+      DOMImplementation* impl =
+	DOMImplementationRegistry::getDOMImplementation(str_LS);
+
+      DOMBuilder* parser = static_cast<DOMImplementationLS*> (impl)
+	->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
+
+      DOMDocument* doc = loaddocument(parser, is);
+      DOMNodeList* nodelist = doc->
+	getElementsByTagNameNS(str_http_c_s_swww_plrde_pepita_pfr_svaucanson,
+			       str_automaton);
+      if (not nodelist->getLength())
+	FAIL("Cannot find any automaton root.");
+      DOMNode* node = nodelist->item(0);
+
+      v = xml_automaton_impl_t (static_cast<DOMElement*> (node));
+      s = xml_automata_set_t (static_cast<DOMElement*> (node));
+
+      return is;
     }
 
-    if_tag<Tag>::set_edges(x.edges_node_, a.tag());
-    for_each_edge(i, a) {
-      x.add_edge(a.origin_of(*i), a.aim_of(*i),
-		 Element<algebra::Series<W,M>, SerieValue>(s.series(),
-							   a.label_of(*i)));
-      if_tag<Tag>::set_edge(x.edges_nodes_[*i], *i, a.tag());
-    }
+    /*----------------------.
+    | Structure conversions |
+    `----------------------*/
 
-    Element<algebra::Series<W,M>,SerieValue>
-      zero(s.series(),
-	   zero_value(SELECT2(algebra::Series<W,M>),SELECT(SerieValue)));
+    template <class Auto>
+    xml_automata_set_t
+    op_convert(const xml_automata_set_t&, const AutomataBase<Auto>& s)
+    {
+      AUTOMATA_SET_TYPES(Auto);
 
-    if_tag<Tag>::set_initials(x.initials_node_, a.tag());
-    for_each_initial_state(i, a) {
-      Element<algebra::Series<W,M>,SerieValue>
-	v(s.series(), a.get_initial(*i, zero.value()));
-      if_tag<Tag>::set_initial(x.set_initial(*i, v, zero), *i, a.tag());
-    }
+      xml_automata_set_t xs;
 
-    if_tag<Tag>::set_finals(x.finals_node_, a.tag());
-    for_each_final_state(i, a) {
-      Element<algebra::Series<W,M>,SerieValue>
-	v(s.series(), a.get_final(*i, zero.value()));
-      if_tag<Tag>::set_final(x.set_final(*i, v, zero), *i, a.tag());
-    }
+      // Set the structure.
+      xs.semiring()->setAttribute(str_operations,
+				  attr_semiring<semiring_t>::getstr());
+      xs.monoid()->setAttribute(str_generators,
+				attr_monoid<monoid_t>::getstr());
 
-    return x;
-  }
+      // Set the alphabet.
 
-  template <class W,
-	    class M>
-  Automata<algebra::Series<W, M> >
-  op_convert(const Automata<algebra::Series<W, M> >&,
-	     const xml::XmlStructure& set)
-  {
-    using namespace xml;
-    using namespace xercesc;
-    typedef typename algebra::Series<W, M>::monoid_t::alphabet_t alpha_t;
+      typedef typename alphabet_t::const_iterator alphabet_iterator;
 
-    alpha_t alphabet;
+      for_each_letter(i, s.series().monoid().alphabet())
+	{
+	  std::ostringstream	os;
+	  os << *i;
+	  XMLCh*		c = XMLString::transcode(os.str().c_str());
+	  DOMElement*		node = xs.doc()->createElement(str_generator);
 
-    const DOMNode* child = set.monoid_alphabet();
-    while (child) {
-      if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
-	const DOMElement* elt = static_cast<const DOMElement*>(child);
-	if (!XMLString::compareIString(elt->getNodeName(), str_generator)) {
-	  const XMLCh* value = elt->getAttribute(str_value);
-	  std::stringstream s;
-	  typename M::letter_t i;
-
-	  s << xml2str(value);
-	  s >> i;
-	  alphabet.insert(i);
+	  node->setAttribute(str_value, c);
+	  XMLString::release(&c);
+	  xs.monoid()->appendChild(node);
 	}
-      }
-      child = child->getNextSibling();
+
+      return xs;
     }
 
-    return Automata<algebra::Series<W, M> >
-      (algebra::Series<W, M>(W(), M(alphabet)));
-  }
+    template <class Auto>
+    Auto
+    op_convert(const AutomataBase<Auto>&, const xml_automata_set_t& s)
+    {
+      using namespace xercesc;
 
-  template <typename W,
-	    typename M>
-  xml::XmlAutomaton
-  op_convert(const Automata<algebra::Series<W, M> >&,
-	     const xml::XmlAutomaton&,
-	     const xml::XmlStructure&,
-	     const xml::XmlAutomaton& x)
-  {
-    return x;
-  }
+      AUTOMATA_SET_TYPES(Auto);
 
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag,
-	    typename W,
-	    typename M>
-  Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
-  op_convert(const Automata<algebra::Series<W, M> >& type,
-	     const Graph<Kind,
-	     WordValue,
-	     WeightValue,
-	     SerieValue,
-	     Letter,
-	     Tag>&,
-	     const xml::XmlAutomaton& x)
-  {
-    using namespace xml;
+      // Check the semiring.
+      if (s.semiring()->hasAttribute(str_operations) and
+	  XMLString::compareIString(s.semiring()->getAttribute(str_operations),
+				    attr_semiring<semiring_t>::getstr()))
+	FAIL("Bad semiring");
 
-    typedef Element<Automata<algebra::Series<W, M> >,
-      Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag> > auto_t;
-    AUTOMATON_TYPES(auto_t);
+      // Check the monoid.
+      if (s.monoid()->hasAttribute(str_generators) and
+	  XMLString::compareIString(s.monoid()->getAttribute(str_generators),
+				    attr_monoid<monoid_t>::getstr()))
+	FAIL("Bad monoid");
 
-    Graph<Kind,
-      WordValue,
-      WeightValue,
-      SerieValue,
-      Letter,
-      Tag> a;
+      // Get the alphabet.
+      alphabet_t	alphabet;
+      const DOMNode*	child = s.monoid()->getFirstChild();
 
-    if (x.semiring_node_->hasAttribute(str_operations)
-	&& (XMLString::compareIString(x.semiring_node_
-				      ->getAttribute(str_operations),
-				      attr_semiring<W>::getstr())))
-      FAIL("Bad semiring");
-    if (x.semiring_node_->hasAttribute(str_set)
-	&& (XMLString::compareIString(x.semiring_node_
-				      ->getAttribute(str_set),
-				      attr_semiring_impl<WeightValue>
-				      ::getstr())))
-      FAIL("Bad semiring");
-    if (x.monoid_node_->hasAttribute(str_generators)
-	&& (XMLString::compareIString(x.monoid_node_
-				      ->getAttribute(str_generators),
-				      attr_monoid<M>::getstr())))
-      FAIL("Bad monoid");
-    if (x.monoid_node_->hasAttribute(str_type)
-	&& (XMLString::compareIString(x.monoid_node_
-				      ->getAttribute(str_type),
-				      attr_monoid_impl<WordValue>::getstr())))
-      FAIL("Bad monoid");
+      while (child)
+	{
+	  if (child->getNodeType() == DOMNode::ELEMENT_NODE)
+	    {
+	      const DOMElement* elt = static_cast<const DOMElement*> (child);
+	      if (not XMLString::compareIString(elt->getNodeName(),
+						str_generator))
+		{
+		  const XMLCh*		v = elt->getAttribute(str_value);
+		  std::stringstream	s;
+		  letter_t		i;
 
-    if_tag<Tag>::get_root(x.root_, a.tag());
-    if_tag<Tag>::get_structure(x.structure_, a.tag());
-    if_tag<Tag>::get_states(x.states_node_, a.tag());
-    for (std::map<hstate_t,std::string>::const_iterator i
-	   = x.snum2name_.begin();
-	 i != x.snum2name_.end();
-	 i++) {
-      while (!a.has_state((*i).first))
-	a.add_state();
-    }
-    for_each_state(i, a) {
-      if (!(x.has_state(*i)))
-	a.del_state(*i);
-    }
-
-    DOMNode* child = x.states_node_->getFirstChild();
-    while (child) {
-      if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
-	DOMElement* elt = static_cast<DOMElement*>(child);
-	if (!XMLString::compareIString(elt->getNodeName(), str_state)) {
-	  if (elt->hasAttribute(str_name)) {
-	    if_tag<Tag>::get_state(elt,
-				   x.sname2num_.
-				   find(xml2str(elt->getAttribute(str_name)))
-				   ->second,
-				   a.tag());
-	  }
-	}
-      }
-      child = child->getNextSibling();
-    }
-
-    if_tag<Tag>::get_edges(x.edges_node_, a.tag());
-    child = x.edges_node_->getFirstChild();
-    while (child) {
-      if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
-	DOMElement* elt = static_cast<DOMElement*>(child);
-	if (!XMLString::compareIString(elt->getNodeName(), str_edge)) {
-	  if (elt->hasAttribute(str_src)
-	      && elt->hasAttribute(str_dst)
-	      && elt->hasAttribute(str_label)) {
-	    const XMLCh* src = elt->getAttribute(str_src);
-	    const XMLCh* dst = elt->getAttribute(str_dst);
-	    const XMLCh* label = elt->getAttribute(str_label);
-	    std::string l;
-	    if (elt->hasAttribute(str_weight)) {
-	      const XMLCh* weight = elt->getAttribute(str_weight);
-	      l = "(" + xml2str(weight) + " " + xml2str(label) + ")";
+		  s << xml2str(v);
+		  s >> i;
+		  alphabet.insert(i);
+		}
 	    }
-	    else
-	      l = xml2str(label);
-	    series_set_elt_t lelt(type.series());
-	    lelt = xml::XmlValue(l);
-	    hedge_t e = a.add_edge(x.sname2num_.find(xml2str(src))->second,
-				   x.sname2num_.find(xml2str(dst))->second,
-				   lelt.value());
-	    if_tag<Tag>::get_edge(elt, e, a.tag());
-	  }
+	  child = child->getNextSibling();
 	}
-      }
-      child = child->getNextSibling();
+
+      // Return a fresh structure.
+      return
+	automata_set_t (series_set_t (semiring_t (), monoid_t (alphabet)));
     }
 
-    if_tag<Tag>::get_initials(x.initials_node_, a.tag());
-    child = x.initials_node_->getFirstChild();
-    while (child) {
-      if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
-	DOMElement* elt = static_cast<DOMElement*>(child);
-	if (!XMLString::compareIString(elt->getNodeName(), str_initial)) {
-	  if (elt->hasAttribute(str_state)) {
-	    const XMLCh* state = elt->getAttribute(str_state);
-	    const XMLCh* label = elt->getAttribute(str_label);
-	    std::string l;
-	    if (elt->hasAttribute(str_weight)) {
-	      const XMLCh* weight = elt->getAttribute(str_weight);
-	      l = "(" + xml2str(weight) + " " + xml2str(label) + ")";
+    /*------------------.
+    | Value conversions |
+    `------------------*/
+
+    template <class S, class T>
+    xml_automaton_impl_t
+    op_convert(const xml_automata_set_t& xs, const xml_automaton_impl_t& ,
+	       const AutomataBase<S>&	 s,  const T&			 v)
+    {
+      using namespace xercesc;
+
+      typedef Element<S, T> automaton_t;
+      AUTOMATON_TYPES(automaton_t);
+
+      // FIXME: We should not modify the structure from here.
+      // FIXME: Damn, those casts are ugly.
+      const_cast<xml_automata_set_t&> (xs)
+	.semiring()->setAttribute(str_set,
+				  attr_semiring_impl<semiring_elt_value_t>
+				  ::getstr());
+      const_cast<xml_automata_set_t&> (xs)
+	.monoid()->setAttribute(str_type,
+				attr_monoid_impl<monoid_elt_value_t>
+				::getstr());
+
+      xml_automaton_impl_t a;
+
+      if_tag<tag_t>::set_root(a.root(), op_tag(s.self(), v));
+      if_tag<tag_t>::set_structure(a.structure(), op_tag(s.self(), v));
+
+      // Create states.
+      if_tag<tag_t>::set_states(a.states(), op_tag(s.self(), v));
+      for_each_state(i, v) // FIXME: That macro should not be used on values.
+	{
+	  DOMElement* h =
+	    if_tag<tag_t>::add_state(a, *i, op_tag(s.self(), v));
+
+	  if_tag<tag_t>::set_state(h, *i, op_tag(s.self(), v));
+	}
+
+      // Create edges.
+      if_tag<tag_t>::set_edges(a.edges(), op_tag(s.self(), v));
+      for_each_edge(i, v)  // FIXME: That macro should not be used on values.
+	{
+	  a.add_edge(op_origin_of(s.self(), v, *i),
+		     op_aim_of(s.self(), v, *i),
+		     op_convert(s.series(),
+				SELECT(xml_value_t),
+				op_label_of(s.self(), v, *i)));
+
+	  if_tag<tag_t>::set_edge(a.edges_nodes_[*i], *i, op_tag(s.self(), v));
+	}
+
+      series_set_elt_t zero = s.series().zero(SELECT(series_set_elt_value_t));
+
+      // Set initials.
+      if_tag<tag_t>::set_initials(a.initials(), op_tag(s.self(), v));
+      for_each_initial_state(i, v)
+	{
+	  series_set_elt_t w = op_get_initial(s.self(), v, *i);
+	  if_tag<tag_t>::set_initial(a.set_initial(*i, w, zero),
+				     *i, op_tag(s.self(), v));
+	}
+
+      // Set finals.
+      if_tag<tag_t>::set_finals(a.finals(), op_tag(s.self(), v));
+      for_each_final_state(i, v)
+	{
+	  series_set_elt_t w = op_get_final(s.self(), v, *i);
+	  if_tag<tag_t>::set_final(a.set_final(*i, w, zero),
+				   *i, op_tag(s.self(), v));
+	}
+
+      return a;
+    }
+
+    template <class S, class T>
+    T
+    op_convert(const AutomataBase<S>&	 s,  const T&			 ,
+	       const xml_automata_set_t& xs, const xml_automaton_impl_t& xv)
+
+    {
+      using namespace xercesc;
+
+      typedef Element<S, T> automaton_t;
+      AUTOMATON_TYPES(automaton_t);
+
+      T a;
+
+      // Semiring implementation check.
+      if (xs.semiring()->hasAttribute(str_set) and
+	  XMLString::compareIString(xs.semiring()
+				    ->getAttribute(str_set),
+				    attr_semiring_impl<semiring_elt_value_t>
+				    ::getstr()))
+	FAIL("Bad semiring");
+
+      // Monoid implementation check.
+      if (xs.monoid()->hasAttribute(str_type) and
+	  XMLString::compareIString(xs.monoid()
+				    ->getAttribute(str_type),
+				    attr_monoid_impl<monoid_elt_value_t>
+				    ::getstr()))
+	FAIL("Bad monoid");
+
+      // Mystic tag stuff.
+      if_tag<tag_t>::get_root(xv.root(), op_tag(s.self(), a));
+      if_tag<tag_t>::get_structure(xv.structure(), op_tag(s.self(), a));
+
+      // Create states.
+      // FIXME: That method is an ugly hack and should be done a better way.
+      if_tag<tag_t>::get_states(xv.states(), op_tag(s.self(), a));
+      {
+	typedef
+	  typename std::map<hstate_t, std::string>::const_iterator
+	  const_iterator;
+
+	for (const_iterator i = xv.snum2name_.begin();
+	     i != xv.snum2name_.end();
+	     ++i)
+	  while (not op_has_state(s.self(), a, i->first))
+	    op_add_state(s.self(), a);
+	for_each_state(i, a) // FIXME: That macro should not be used.
+	  if (not xv.has_state(*i))
+	    op_del_state(s.self(), a, *i);
+      }
+
+      // Get states tag.
+      DOMNode* child = xv.states()->getFirstChild();
+      while (child)
+	{
+	  if (child->getNodeType() == DOMNode::ELEMENT_NODE)
+	    {
+	      DOMElement* elt = static_cast<DOMElement*> (child);
+	      if (not XMLString::compareIString(elt->getNodeName(), str_state)
+		  and elt->hasAttribute(str_name))
+		{
+		  const std::string t = xml2str(elt->getAttribute(str_name));
+
+		  if_tag<tag_t>::get_state(elt,
+					   xv.sname2num_.find(t)->second,
+					   op_tag(s.self(), a));
+		}
 	    }
-	    else
-	      l = xml2str(label);
-
-	    series_set_elt_t lelt(type.series());
-	    lelt = xml::XmlValue(l);
-	    hstate_t s = x.sname2num_.find(xml2str(state))->second;
-	    a.set_initial(s, lelt.value(),
-			  zero_value(SELECT(series_set_t),
-				     SELECT(series_set_elt_value_t)));
-	    if_tag<Tag>::get_initial(elt, s, a.tag());
-	  }
+	  child = child->getNextSibling();
 	}
-      }
-      child = child->getNextSibling();
-    }
 
-    if_tag<Tag>::get_finals(x.finals_node_, a.tag());
-    child = x.finals_node_->getFirstChild();
-    while (child) {
-      if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
-	DOMElement* elt = static_cast<DOMElement*>(child);
-	if (!XMLString::compareIString(elt->getNodeName(), str_final)) {
-	  if (elt->hasAttribute(str_state)) {
-	    const XMLCh* state = elt->getAttribute(str_state);
-	    const XMLCh* label = elt->getAttribute(str_label);
-	    std::string l;
-	    if (elt->hasAttribute(str_weight)) {
-	      const XMLCh* weight = elt->getAttribute(str_weight);
-	      l = "(" + xml2str(weight) + " " + xml2str(label) + ")";
+      // Create edges.
+      if_tag<tag_t>::get_edges(xv.edges(), op_tag(s.self(), a));
+      child = xv.edges()->getFirstChild();
+
+      while (child)
+	{
+	  if (child->getNodeType() == DOMNode::ELEMENT_NODE)
+	    {
+	      DOMElement* elt = static_cast<DOMElement*> (child);
+	      if (not XMLString::compareIString(elt->getNodeName(), str_edge)
+		  and elt->hasAttribute(str_src)
+		  and elt->hasAttribute(str_dst)
+		  and elt->hasAttribute(str_label))
+		{
+		  const XMLCh*	src = elt->getAttribute(str_src);
+		  const XMLCh*	dst = elt->getAttribute(str_dst);
+		  const XMLCh*	lbl = elt->getAttribute(str_label);
+
+		  std::string str = xml2str(lbl);
+		  if (elt->hasAttribute(str_weight))
+		    {
+		      const XMLCh* weight = elt->getAttribute(str_weight);
+		      str = str + " " + xml2str(weight);
+		    }
+
+		  typedef
+		    rat::exp<monoid_elt_value_t, semiring_elt_value_t>
+		    krat_exp_impl_t;
+		  typedef Element<series_set_t, krat_exp_impl_t> krat_exp_t;
+
+		  krat_exp_t exp (s.series());
+		  parse(str, exp);
+
+		  hedge_t e =
+		    op_add_series_edge(s.self(), a,
+				       xv.sname2num_.find(xml2str(src))
+				       ->second,
+				       xv.sname2num_.find(xml2str(dst))
+				       ->second,
+				       exp);
+
+		  if_tag<tag_t>::get_edge(elt, e, op_tag(s.self(), a));
+		}
 	    }
-	    else
-	      l = xml2str(label);
-
-	    series_set_elt_t lelt(type.series());
-	    lelt = xml::XmlValue(l);
-	    hstate_t s = x.sname2num_.find(xml2str(state))->second;
-	    a.set_final(s,
-			lelt.value(),
-			zero_value(SELECT(series_set_t),
-				   SELECT(series_set_elt_value_t)));
-	    if_tag<Tag>::get_final(elt, s, a.tag());
-	  }
+	  child = child->getNextSibling();
 	}
-      }
-      child = child->getNextSibling();
+
+      // Set initials.
+      if_tag<tag_t>::get_initials(xv.initials(), op_tag(s.self(), a));
+      child = xv.initials()->getFirstChild();
+      while (child)
+	{
+	  if (child->getNodeType() == DOMNode::ELEMENT_NODE)
+	    {
+	      DOMElement* elt = static_cast<DOMElement*> (child);
+	      if (not XMLString::compareIString(elt->getNodeName(),
+						str_initial) and
+		  elt->hasAttribute(str_state))
+		{
+		  const XMLCh* state = elt->getAttribute(str_state);
+		  const XMLCh* label = elt->getAttribute(str_label);
+		  std::string l;
+		  if (elt->hasAttribute(str_weight))
+		    {
+		      const XMLCh* weight = elt->getAttribute(str_weight);
+		      l = "(" + xml2str(weight) + " " + xml2str(label) + ")";
+		    }
+		  else
+		    l = xml2str(label);
+
+		  const hstate_t h =
+		    xv.sname2num_.find(xml2str(state))->second;
+		  op_set_initial(s.self(), a, h,
+				 series_set_elt_t (s.series(),
+						   xml_value_t (l)));
+
+		  if_tag<tag_t>::get_initial(elt, h, op_tag(s.self(), a));
+		}
+	    }
+	  child = child->getNextSibling();
+	}
+
+      // Set finals.
+      if_tag<tag_t>::get_finals(xv.finals(), op_tag(s.self(), a));
+      child = xv.finals()->getFirstChild();
+      while (child)
+	{
+	  if (child->getNodeType() == DOMNode::ELEMENT_NODE)
+	    {
+	      DOMElement* elt = static_cast<DOMElement*> (child);
+	      if (not XMLString::compareIString(elt->getNodeName(), str_final)
+		  and elt->hasAttribute(str_state))
+		{
+		  const XMLCh* state = elt->getAttribute(str_state);
+		  const XMLCh* label = elt->getAttribute(str_label);
+		  std::string l;
+		  if (elt->hasAttribute(str_weight))
+		    {
+		      const XMLCh* weight = elt->getAttribute(str_weight);
+		      l = "(" + xml2str(weight) + " " + xml2str(label) + ")";
+		    }
+		  else
+		    l = xml2str(label);
+
+		  const hstate_t h =
+		    xv.sname2num_.find(xml2str(state))->second;
+		  op_set_final(s.self(), a, h,
+			       series_set_elt_t (s.series(),
+						 xml_value_t (l)));
+
+		  if_tag<tag_t>::get_final(elt, h, op_tag(s.self(), a));
+		}
+	    }
+	  child = child->getNextSibling();
+	}
+
+      return a;
     }
 
-    return a;
-  }
+    /*-----------.
+    | Assignment |
+    `-----------*/
 
-  template<typename Tm, typename Tw, typename W, typename M>
-  inline
-  void op_assign(const algebra::Series<W, M>& s,
-		 algebra::polynom<Tm, Tw>& dst,
-		 const xml::XmlValue& src)
-  {
-    dst = op_convert(s,
-		     dst,
-		     src);
-  }
+    template <typename S>
+    void
+    op_assign(AutomataBase<S>&		lhs,
+	      const xml_automata_set_t&	rhs)
+    {
+      lhs.self() = op_convert(lhs.self(), rhs);
+    }
 
-  xml::XmlAutomaton
-  op_convert(const xml::XmlStructure&,
-	     const xml::XmlAutomaton&,
-	     const xml::XmlAutomaton& src)
-  {
-    return src;
-  }
+    template <typename S, typename T>
+    void
+    op_assign(const AutomataBase<S>&		lhs_s,
+	      const xml_automata_set_t&		rhs_s,
+	      T&				lhs_v,
+	      const xml_automaton_impl_t&	rhs_v)
+    {
+      lhs_v = op_convert(lhs_s, lhs_v, rhs_s, rhs_v);
+    }
 
-  void op_assign(const xml::XmlStructure&,
-		 const xml::XmlStructure&,
-		 xml::XmlAutomaton& dst,
-		 const xml::XmlAutomaton& src)
-  {
-    dst = src;
-  }
+    /*---------------------.
+    | Conversion of series |
+    `---------------------*/
 
-  template<class S>
-  inline
-  void op_assign(const AutomataBase<S>&,
-		 const xml::XmlStructure&,
-		 xml::XmlAutomaton& dst,
-		 const xml::XmlAutomaton& src)
-  {
-    dst = src;
-  }
+    template <typename S, typename T>
+    T
+    op_convert(const algebra::SeriesBase<S>& s,
+	       const T&,
+	       const xml_value_t& v)
+    {
+      typedef Element<S, T>				series_set_elt_t;
+      typedef
+	typename series_set_elt_t::monoid_elt_value_t	monoid_elt_value_t;
+      typedef
+	typename series_set_elt_t::semiring_elt_value_t	semiring_elt_value_t;
 
-  template<typename Tm, typename Tw, typename W, typename M>
-  inline
-  void op_assign(const algebra::Series<W, M>& s,
-		 rat::exp<Tm, Tw>& dst,
-		 const xml::XmlValue& src)
-  {
-    dst = op_convert(s,
-		     dst,
-		     src);
-  }
+      typedef
+	rat::exp<monoid_elt_value_t, semiring_elt_value_t>
+	krat_exp_impl_t;
+      typedef Element<S, krat_exp_impl_t>		krat_exp_t;
 
-  template<typename Tm, typename Tw, typename W, typename M>
-  inline
-  void op_assign(const algebra::Series<W, M>& s,
-		 xml::XmlValue& dst,
-		 const rat::exp<Tm, Tw>& src)
-  {
-    dst = op_convert(s,
-		     dst,
-		     src);
-  }
+      krat_exp_t exp (s.self());
+      parse(v.value(), exp);
 
-  template<typename Tm, typename Tw, typename W, typename M>
-  inline
-  void op_assign(const algebra::Series<W, M>& s,
-		 xml::XmlValue& dst,
-		 const algebra::polynom<Tm, Tw>& src)
-  {
-    dst = op_convert(s,
-		     dst,
-		     src);
-  }
+      return op_convert(s.self(), SELECT(T),
+			// FIXME: Why the hell is that cast needed?!
+			// FIXME: The linker fails when it is not here.
+			static_cast<krat_exp_impl_t> (exp.value()));
+    }
 
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag,
-	    typename W,
-	    typename M>
-  inline
-  void
-  op_assign(const Automata<algebra::Series<W, M> >& s,
-	    Graph<Kind,
-	    WordValue,
-	    WeightValue,
-	    SerieValue,
-	    Letter,
-	    Tag>& dst,
-	    const xml::XmlAutomaton& src)
-  {
-    dst = op_convert(s,
-		     dst,
-		     src);
-  }
+    template<typename S, typename T>
+    xml_value_t
+    op_convert(const algebra::SeriesBase<S>& s,
+	       SELECTOR(xml_value_t),
+	       const T& p)
+    {
+      std::ostringstream o;
+      op_rout(s.self(), o, p);
 
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag,
-	    typename W,
-	    typename M>
-  inline
-  void
-  op_assign(const Automata<algebra::Series<W, M> >& s,
-	    xml::XmlAutomaton& dst,
-	    const Graph<Kind,
-	    WordValue,
-	    WeightValue,
-	    SerieValue,
-	    Letter,
-	    Tag>& src)
-  {
-    dst = op_convert(s,
-		     dst,
-		     src);
-  }
-}
+      return xml_value_t (o.str());
+    }
+
+  } // End of namespace xml.
+
+} // End of namespace vcsn.
 
 #endif // ! VCSN_XML_XML_OPS_HXX

@@ -43,8 +43,8 @@ namespace vcsn {
 
   template<typename S, typename T>
   bool op_contains(const Structure<S>&, const T&)
-  { 
-    return false; 
+  {
+    return false;
   }
 
   /*--------------------.
@@ -53,37 +53,37 @@ namespace vcsn {
 
   template<typename S, typename T, typename U>
   bool op_eq(const Structure<S>&,
-	     const T& v1, 
+	     const T& v1,
 	     const U& v2)
-  { 
-    return v1 == v2; 
+  {
+    return v1 == v2;
   }
 
   template<typename S, typename T, typename U>
   bool op_lt(const Structure<S>&,
-	     const T& v1, 
+	     const T& v1,
 	     const U& v2)
   {
-    return v1 < v2; 
+    return v1 < v2;
   }
 
 
   template<typename S, typename V, typename T, typename U>
   bool op_eq(const Structure<S>&,
 	     const Structure<V>&,
-	     const T& v1, 
+	     const T& v1,
 	     const U& v2)
-  { 
-    return v1 == v2; 
+  {
+    return v1 == v2;
   }
 
   template<typename S, typename V, typename T, typename U>
   bool op_lt(const Structure<S>&,
 	     const Structure<V>&,
-	     const T& v1, 
+	     const T& v1,
 	     const U& v2)
   {
-    return v1 < v2; 
+    return v1 < v2;
   }
 
   /*------------.
@@ -91,21 +91,21 @@ namespace vcsn {
   `------------*/
 
   template<typename S, typename R, typename T>
-  R op_convert(const Structure<S> &, 
+  R op_convert(const Structure<S> &,
 	       SELECTOR(R), const T& data)
   {
     return static_cast<R>(data);
   }
-      
+
   template<typename S, typename T>
   const T& op_convert(const Structure<S>&,
 		      SELECTOR(T), const T& from_data)
-  { 
+  {
     return from_data;
   }
 
   template<typename S, typename T>
-  const T& op_convert(const Structure<S>& s1, SELECTOR(T), 
+  const T& op_convert(const Structure<S>& s1, SELECTOR(T),
 		      const Structure<S>& s2, const T& from_data)
   {
     precondition(& s1 == & s2);
@@ -124,8 +124,8 @@ namespace vcsn {
 
   template<typename S, typename T>
   T op_default(const Structure<S>&, SELECTOR(T))
-  { 
-    return T(); 
+  {
+    return T();
   }
 
   /*-----.
@@ -134,10 +134,10 @@ namespace vcsn {
 
   template<typename S, typename T>
   void op_swap(const Structure<S>&,
-	       T& v1, 
+	       T& v1,
 	       T& v2)
-  { 
-    std::swap(v1, v2); 
+  {
+    std::swap(v1, v2);
   }
 
   /*-----------.
@@ -146,20 +146,19 @@ namespace vcsn {
 
 
   template<typename S, typename T, typename U>
-  void op_assign(const Structure<S>&, 
-		 T& dst, const U& src)
-  { 
-    dst = src; 
+  void op_assign(const Structure<S>&, T& dst, const U& src)
+  {
+    dst = src;
   }
 
   template<typename S, typename T, typename U>
   void op_assign(const Structure<S>& s1,
 		 const Structure<S>& s2,
-		 T& dst, 
+		 T& dst,
 		 const U& src)
-  { 
+  {
     precondition(& s1 == & s2);
-    op_assign(s1.self(), dst, src); 
+    op_assign(s1.self(), dst, src);
   }
 
 #define INOP_IMPL(Name)						\
@@ -172,7 +171,7 @@ namespace vcsn {
       precondition(& s1 == & s2);			\
       return op_in_ ## Name (s1.self(), dst, arg); 		\
     }
-      
+
   INOP_IMPL(add);
   INOP_IMPL(sub);
   INOP_IMPL(mul);
@@ -202,15 +201,15 @@ namespace vcsn {
 
   template<typename S, typename St, typename T>
   St& op_rin(const Structure<S>& s, St& st, const T& v)
-  { 
-    return st >> v; 
+  {
+    return st >> v;
   }
 
   template<typename S, typename St, typename T>
   St& op_rout(const Structure<S>&, St& st, const T& v)
-  { 
-    st << v; 
-    return st; 
+  {
+    st << v;
+    return st;
   }
 
 } // vcsn

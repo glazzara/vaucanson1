@@ -32,16 +32,15 @@
 #ifndef VCSN_XML_SESSION_HH
 # define VCSN_XML_SESSION_HH
 
-# include <vaucanson/xml/dynamic.hh>
-# include <vaucanson/xml/error_handler.hh>
-# include <vaucanson/xml/xml_automaton.hh>
-# include <vaucanson/xml/xml_set.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
-
 # include <xercesc/util/PlatformUtils.hpp>
 # include <xercesc/dom/DOM.hpp>
 
 # include <list>
+
+# include <vaucanson/xml/dynamic.hh>
+# include <vaucanson/xml/error_handler.hh>
+
+# include <vaucanson/automata/concept/automata_base.hh>
 
 /** @addtogroup xml *//** @{ */
 /**
@@ -59,7 +58,8 @@ namespace vcsn
   namespace xml
   {
 
-    using namespace xercesc;
+    using xercesc::DOMDocument;
+    using xercesc::DOMBuilder;
 
     /** @addtogroup xml *//** @{ */
 
@@ -67,10 +67,10 @@ namespace vcsn
     class XmlSession
     {
     public:
-      DOMDocument* doc_;
-      myDOMErrorHandler* err_;
-      DOMBuilder* parser_;
-      std::list<DOMElement*> roots_;
+      DOMDocument*		doc_;
+      myDOMErrorHandler*	err_;
+      DOMBuilder*		parser_;
+      std::list<DOMElement*>	roots_;
     public:
       /// Default constructor.
       XmlSession();
@@ -78,30 +78,35 @@ namespace vcsn
 
       //      template <typename T>
       /// Pop operator.
-      void operator<<(const XmlAutomaton&);
+      void operator << (const xml_automaton_t&);
       /// Queue operator.
-      void operator>>(Element<XmlStructure, XmlAutomaton>&);
+      void operator >> (xml_automaton_t&);
     };
+
+    /// Read operator.
+    std::ostream&
+    operator << (std::ostream&, const XmlSession&);
+
+    /// Write operator.
+    std::istream&
+    operator >> (std::istream&, XmlSession&);
+
+    template<typename S, typename T>
+    XmlSession&
+    op_rout(const AutomataBase<S>&,
+	    XmlSession&,
+	    const T&);
+
+
+    template <class S, class T>
+    XmlSession&
+    op_rin(AutomataBase<S>& structure,
+	   XmlSession& st,
+	   T& v);
 
     /** @} */
 
   } // End of namespace xml.
-
-  /** @addtogroup xml *//** @{ */
-
-  template<typename S>
-  xml::XmlSession& op_rout(const AutomataBase<S>&,
-			   xml::XmlSession&,
-			   const xml::XmlAutomaton&);
-
-  /// Read operator.
-  std::ostream&
-  operator<<(std::ostream&, const xml::XmlSession&);
-  /// Write operator.
-  std::istream&
-  operator>>(std::istream&, xml::XmlSession&);
-
-  /** @} */
 
 } // End of namespace vcsn.
 

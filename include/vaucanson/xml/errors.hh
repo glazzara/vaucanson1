@@ -42,6 +42,8 @@
  * @author Valentin David <valentin@lrde.epita.fr>
  */
 
+# include <cstdlib>
+
 # ifndef FAIL
 #  define FAIL WITH_EXIT
 # endif
@@ -49,7 +51,7 @@
 /** @} */
 
 /// Errors make exits, use with @c #define @c FAIL @c WITH_EXIT
-# define WITH_EXIT(X) { warning( X ); exit(-1); }
+# define WITH_EXIT(X) { warning( X ); ::exit(1); }
 
 /// Errors make throws, use with @c #define @c FAIL @c WITH_THROW
 # define WITH_THROW(X) throw(LoaderException( X ))

@@ -47,10 +47,8 @@ namespace vcsn {
     structure_(),
     value_(op_default(SELECT(S), SELECT(T)))
   {
-//FIXME: Find another way to have empty elements.
-#ifndef VCSN_XML_EMPTY_ELEMENTS
-    static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
-#endif //VCSN_XML_EMPTY_ELEMENTS
+    static_assertion_(not dynamic_traits<S>::ret,
+		      need_dynamic_structural_element);
   }
 
   /*--------------------------.
@@ -71,36 +69,13 @@ namespace vcsn {
     value_(op_convert(other.structure(), SELECT(T), other.value()))
   {}
 
-  template <bool Cond, typename S, typename T>
-  struct convert_dynamic
-  {
-     static S convert(const SetSlot<S>& structure_, const T& t)
-     {
-	if (!structure_.bound())
-          return op_convert(SELECT(S), t);
-	else
-          return structure_.get();
-     }
-  };
-
-  template <typename S, typename T>
-  struct convert_dynamic<false, S, T>
-  {
-     static S convert(const SetSlot<S>&, const T&)
-     {
-       return S();
-     }
-  };
-  
   template <class S, class T>
   template<typename OtherS, typename U>
   Element<S,T>::Element(const Element<OtherS, U>& other)
-    : value_(op_convert(SELECT(S), SELECT(T), 
-			other.structure(), other.value()))
+    : structure_ (op_convert(SELECT(S), other.structure())),
+      value_ (op_convert(structure_.get(), value_,
+			 other.structure(), other.value()))
   {
-    structure_.assign(convert_dynamic<dynamic_traits<S>::ret, S, OtherS>
-		    ::convert(structure_, other.structure()));
-    //static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
   }
 
   /*-------------------------.
@@ -160,10 +135,9 @@ namespace vcsn {
 
   template <class S, class T>
   Element<S,T>&
-  Element<S,T>::operator=(const Element& other)
+  Element<S,T>::operator = (const Element& other)
   {
-    if (!structure_.bound())
-      structure_.assign(other.structure());
+    structure_.assign(other.structure());
     op_assign(structure(), other.structure(), value_, other.value());
     return *this;
   }
@@ -171,27 +145,25 @@ namespace vcsn {
   template <class S, class T>
   template<typename U>
   Element<S,T>&
-  Element<S,T>::operator=(const Element<S, U>& other)
+  Element<S,T>::operator = (const Element<S, U>& other)
   {
-    if (!structure_.bound())
-      structure_.assign(other.structure());
+    structure_.assign(other.structure());
     op_assign(structure(), other.structure(), value_, other.value());
     return *this;
   }
 
   template <class S, class T>
   template<typename OtherS, typename U>
-  Element<S,T>& Element<S,T>::operator=(const Element<OtherS, U>& other)
+  Element<S,T>& Element<S,T>::operator = (const Element<OtherS, U>& other)
   {
-    structure_.assign(convert_dynamic<dynamic_traits<S>::ret, S, OtherS>
-	    	::convert(structure_, other.structure()));
+    structure_.assign(op_convert(SELECT(S), other.structure()));
     op_assign(structure(), other.structure(), value_, other.value());
     return *this;
   }
 
   template <class S, class T>
   template<typename U>
-  Element<S,T>& Element<S,T>::operator=(const U& other)
+  Element<S,T>& Element<S,T>::operator = (const U& other)
   {
     op_assign(structure(), value(), other);
     return *this;

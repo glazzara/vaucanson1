@@ -45,9 +45,11 @@
 namespace vcsn {
 
   /// XML tools for Vaucason.
-  namespace xml {}
+  namespace xml {
 
-}
+  } // End of namespace xml.
+
+} // End of namespace vcsn.
 
 # include <vaucanson/xml/defaults.hh>
 # include <vaucanson/xml/xml_automaton.hh>

@@ -31,24 +31,32 @@
 //
 #ifndef VCSN_XML_STRINGS_HH
 # define VCSN_XML_STRINGS_HH
-# include <xercesc/util/XMLUniDefs.hpp>
-# include <xercesc/util/XMLString.hpp>
 
 # include <string>
 
+# include <xercesc/util/XMLUniDefs.hpp>
+# include <xercesc/util/XMLString.hpp>
+
 namespace vcsn
 {
+
   namespace xml
   {
-    using namespace xercesc;
 
     std::string
     xml2str(const XMLCh*);
 
-# include <vaucanson/xml/xmlstrings.inc>
-  }
-}
+    // FIXME: We need that horror for xmlstrings.inc to work properly!
+    using namespace xercesc;
 
-# include <vaucanson/xml/strings.hxx>
+# include <vaucanson/xml/xmlstrings.inc>
+
+  } // End of namespace xml.
+
+} // End of namespace vcsn.
+
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/xml/strings.hxx>
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_XML_STRINGS_HH

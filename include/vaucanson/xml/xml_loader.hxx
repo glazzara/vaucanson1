@@ -34,6 +34,7 @@
 
 # include <vaucanson/xml/xml_loader.hh>
 
+# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/xml/types.hh>
 
 # include <vaucanson/tools/usual_macros.hh>
@@ -45,44 +46,22 @@ namespace vcsn
   namespace xml
   {
     template <typename Saver, typename Conv>
-    inline
     void
-    xml_loader::operator()(std::ostream& out,
-			   const Saver& s,
-			   const Conv&) const
+    xml_loader::operator () (std::ostream& out,
+			     const Saver& s,
+			     const Conv&) const
     {
-      typedef typename Saver::automaton_t auto_t;
-      typedef typename XmlOf<auto_t>::ret xml_auto_t;
-      AUTOMATON_TYPES(auto_t);
-
-      const automaton_t& a = s.automaton();
-
-      xml_auto_t xml_a;
-
-      xml_a = a;
-
-      out << xml_a;
+      out << xml_automaton_t (s.automaton());
     }
 
     template <typename Loader>
-    inline
     void
-    xml_loader::operator()(std::istream& in, Loader& l)
+    xml_loader::operator () (std::istream& in, Loader& l)
     {
-      typedef typename Loader::automaton_t auto_t;
-      typedef typename XmlOf<auto_t>::ret xml_auto_t;
-      AUTOMATON_TYPES(auto_t);
-
-      xml_automaton_t dyn_xml_a;
-      xml_auto_t xml_a;
-
-      automaton_t& a = l.automaton();
-
-      in >> dyn_xml_a;
-
-      xml_a = dyn_xml_a;
-
-      a = xml_a;
+      xml_automata_set_t	s;
+      xml_automaton_t		a (s);
+      in >> a;
+      l.automaton() = a;
     }
   }
 }

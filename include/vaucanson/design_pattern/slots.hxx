@@ -44,24 +44,24 @@ namespace vcsn {
   `------------------------------------------*/
 
   template<typename S, bool dynamic /* default: false */>
-  SetSlotAttribute<S, dynamic>::SetSlotAttribute() 
+  SetSlotAttribute<S, dynamic>::SetSlotAttribute()
   {}
 
-  template<typename S, bool dynamic /* default: false */>  
-  SetSlotAttribute<S, dynamic>::SetSlotAttribute(const SetSlotAttribute&) 
+  template<typename S, bool dynamic /* default: false */>
+  SetSlotAttribute<S, dynamic>::SetSlotAttribute(const SetSlotAttribute&)
   {}
 
-  template<typename S, bool dynamic /* default: false */>  
-  SetSlotAttribute<S, dynamic>::SetSlotAttribute(const S&) 
+  template<typename S, bool dynamic /* default: false */>
+  SetSlotAttribute<S, dynamic>::SetSlotAttribute(const S&)
   {}
 
-  template<typename S, bool dynamic /* default: false */>   
+  template<typename S, bool dynamic /* default: false */>
   const S& SetSlotAttribute<S, dynamic>::get() const
-  {	
-    return *static_cast<const S*>(NULL); 
+  {
+    return *static_cast<const S*>(NULL);
   }
 
-  template<typename S, bool dynamic /* default: false */>    
+  template<typename S, bool dynamic /* default: false */>
   void SetSlotAttribute<S, dynamic>::assign(const SetSlotAttribute&)
   {}
 
@@ -71,8 +71,8 @@ namespace vcsn {
 
   template<typename S, bool dynamic /* default: false */>
   bool SetSlotAttribute<S, dynamic>::bound() const
-  { 
-    return true; 
+  {
+    return true;
   }
 
   /*--------------------------------------------------.
@@ -80,43 +80,43 @@ namespace vcsn {
   `--------------------------------------------------*/
 
   template <class S>
-  SetSlotAttribute<S, true>::SetSlotAttribute() 
-    : s_(NULL) 
+  SetSlotAttribute<S, true>::SetSlotAttribute()
+    : s_(NULL)
   {}
 
-  template <class S>  
-  SetSlotAttribute<S, true>::SetSlotAttribute(const SetSlotAttribute& other) 
+  template <class S>
+  SetSlotAttribute<S, true>::SetSlotAttribute(const SetSlotAttribute& other)
     : s_(other.s_)
   {}
 
-  template <class S>  
-  SetSlotAttribute<S, true>::SetSlotAttribute(const S& other) 
+  template <class S>
+  SetSlotAttribute<S, true>::SetSlotAttribute(const S& other)
     : s_(& other ? & utility::unique::get(other) : NULL)
   {}
 
-  template <class S> 
+  template <class S>
   const S& SetSlotAttribute<S, true>::get() const
-  { 
-    return *s_; 
+  {
+    return *s_;
   }
 
   template <class S>
   void SetSlotAttribute<S, true>::assign(const SetSlotAttribute& other)
-  { 
-    s_ = other.s_; 
+  {
+    s_ = other.s_;
   }
 
   template <class S>
   void SetSlotAttribute<S, true>::attach(const S& s)
-  { 
+  {
     precondition(&s != NULL);
-    s_ = & utility::unique::get(s); 
+    s_ = & utility::unique::get(s);
   }
 
   template <class S>
   bool SetSlotAttribute<S, true>::bound() const
-  { 
-    return s_; 
+  {
+    return s_;
   }
 
   /*---------------------.
@@ -128,7 +128,7 @@ namespace vcsn {
   SetSlot<S>::SetSlot()
     : SetSlotAttribute<S, dynamic_traits<S>::ret>()
   {}
-  
+
   template <class S>
   SetSlot<S>::SetSlot(const SetSlot& other)
     : SetSlotAttribute<S, dynamic_traits<S>::ret>(other)

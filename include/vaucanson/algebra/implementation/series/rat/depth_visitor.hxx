@@ -96,7 +96,7 @@ namespace vcsn {
 
     template<typename M_, typename W_>
     void
-    DepthVisitor<M_, W_>::constant(const M_& m)
+    DepthVisitor<M_, W_>::constant(const M_&)
     {
       d = 0;
     }

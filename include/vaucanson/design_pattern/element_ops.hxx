@@ -169,21 +169,18 @@ ELEMENT_OPERATOR(%, mod)
 
 template<typename St, typename S, typename T>
 static St&
-operator <<(St& s, const Element<S, T>& e)
+operator << (St& s, const Element<S, T>& e)
 {
   return op_rout(e.structure(), s, e.value());
 }
 
 template<typename St, typename S, typename T>
 static St&
-operator >>(St& s, Element<S, T>& e)
+operator >> (St& s, Element<S, T>& e)
 {
-  S set = S();
-//FIXME: check for set
-//  if (e.bound())
-//    set = S(e.structure());
-  op_rin(set, s, e.value());
-  e = Element<S, T>(utility::unique::get(S(set)), e.value());
+  S structure = e.structure();
+  op_rin(structure, s, e.value());
+  e.attach(structure);
   return s;
 }
 

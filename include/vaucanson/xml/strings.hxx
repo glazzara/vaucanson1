@@ -33,24 +33,31 @@
 # define VCSN_XML_STRINGS_HXX
 
 # include <vaucanson/xml/strings.hh>
-# include <cassert>
+
+# include <vaucanson/misc/contract.hh>
 
 namespace vcsn
 {
   namespace xml
   {
+
     inline
     std::string
     xml2str(const XMLCh* xmlstr)
     {
-      assert(xmlstr != NULL);
+      assertion(xmlstr != 0);
+
       char* cstr = xercesc::XMLString::transcode(xmlstr);
-      assert(cstr != NULL);
-      std::string ret = cstr;
+      assertion(cstr != 0);
+
+      std::string ret (cstr);
       xercesc::XMLString::release(&cstr);
+
       return ret;
     }
-  }
-}
+
+  } // End of namespace xml.
+
+} // End of namespace vcsn.
 
 #endif // ! VCSN_XML_STRINGS_HXX

@@ -341,8 +341,8 @@ XMLSOURCES = \
 	vaucanson/xml/infos.hh			\
 	vaucanson/xml/ios.hh			\
 	vaucanson/xml/ios.hxx			\
-	vaucanson/xml/krat_to_polynom.hh	\
-	vaucanson/xml/krat_to_polynom.hxx	\
+	vaucanson/xml/if_tag.hh			\
+	vaucanson/xml/if_tag.hxx		\
 	vaucanson/xml/session.hh		\
 	vaucanson/xml/session.hxx		\
 	vaucanson/xml/static.hh			\

@@ -46,4 +46,6 @@
 # include <vaucanson/xml/dynamic.hh>
 # include <vaucanson/xml/xml_loader.hh>
 
+# include <vaucanson/tools/io.hh>
+
 #endif // ! VCSN_XML_STATIC_HH
