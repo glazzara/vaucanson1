@@ -229,6 +229,7 @@ namespace utility {
 # else // NDEBUG
 
 #  define static_assertion(Cond, Message) typedef void Message
+#  define static_assertion_(Cond, Message) typedef void Message
 #  define static_error(Message) typedef void Message
 
 #  define assertion(Cond) static_cast<void>(0)

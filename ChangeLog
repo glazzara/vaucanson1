@@ -1,3 +1,8 @@
+2004-07-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/misc/contract.hh: Add a missing macro to define
+	static_assertion_ when -DNDEBUG is used.
+
 2004-07-02  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx,
