@@ -53,10 +53,10 @@ automaton_t new_automaton(InputIterator input_alphabet_begin,
        e != output_alphabet_end; ++e)
     output_alpha.insert(*e);
   monoid_t output_freemonoid(output_alpha);
-  typename semiring_t::semiring_t semiring;
-  semiring_t output_series(semiring, output_freemonoid);
+  typename output_series_set_t::semiring_t semiring;
+  output_series_set_t output_series(semiring, output_freemonoid);
   monoid_t freemonoid(input_alpha);
-  series_t series(output_series, freemonoid);
+  series_set_t series(output_series, freemonoid);
   automata_set_t automata_set(series);
   return automaton_t(automata_set);
 }

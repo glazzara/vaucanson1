@@ -44,36 +44,54 @@ namespace vcsn {
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, polynom<WordValue, bool> >
+
+    typedef char				letter_t;
+
+    typedef Words				monoid_t;
+    typedef WordValue				monoid_elt_value_t;
+    typedef Element<monoid_t, monoid_elt_value_t>
+						monoid_elt_t;
+
+    typedef NumericalSemiring			output_semiring_t;
+    typedef bool				output_semiring_elt_value_t;
+    typedef Element<output_semiring_t, output_semiring_elt_value_t>
+						output_semiring_elt_t;
+
+    typedef Series<output_semiring_t, monoid_t>
+						output_series_set_t;
+    typedef rat::exp<monoid_elt_value_t, output_semiring_elt_value_t>
+						output_series_set_elt_value_t;
+    typedef Element<output_series_set_t, output_series_set_elt_value_t>
+						output_series_set_elt_t;
+
+    typedef Series<output_series_set_t, monoid_t>
+						series_set_t;
+    typedef polynom<monoid_elt_value_t, output_series_set_elt_value_t>
 						series_set_elt_value_t;
-    typedef Series<NumericalSemiring, Words>	output_series_t;
-    typedef Series<output_series_t, Words>	series_t;
+
+    typedef Element<series_set_t, series_set_elt_value_t>
+						series_set_elt_t;
+
+
+    typedef Transducer<series_set_t>		automata_set_t;
 
     typedef Graph
     <
       labels_are_series,
-      WordValue,
-      polynom<WordValue, bool>,
+      monoid_elt_value_t,
+      output_series_set_elt_value_t,
       series_set_elt_value_t,
-      char,
-      NoTag>
-    automaton_impl_t;
+      letter_t,
+      NoTag>					automaton_impl_t;
 
-    typedef Element<Transducer<series_t>, automaton_impl_t>
-    automaton_t;
+    typedef Element<automata_set_t, automaton_impl_t>
+						automaton_t;
 
     AUTOMATON_TYPES_EXACT(automaton_t);
-
-    typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;
-    typedef Element<series_t, krat_exp_impl_t>			krat_exp_t;
 
 # include <vaucanson/contextual_transducer_functions.hh>
 
   } // boolean_transducer
 } // vcsn
-
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/boolean_transducer.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_BOOLEAN_TRANSDUCER_HH
