@@ -5,10 +5,10 @@
 #ifndef INTERNAL_LIMITS_HH
 # define INTERNAL_LIMITS_HH
 
-# ifdef HAVE_LIMITS
+# ifndef USE_C_LIMITS
 #  include <limits>
 # else
-# include <climits>
+#  include <climits>
 
 namespace std {
 
@@ -150,6 +150,6 @@ template<>
     };
 
 } // std
-#endif // HAVE_LIMITS
+#endif // USE_C_LIMITS
 
 #endif // INTERNAL_LIMITS_HH
