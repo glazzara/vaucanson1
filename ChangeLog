@@ -1,5 +1,10 @@
 2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/misc/unique.hh: Remove stupid and erroneous
+	inclusion of `unique.hcc'.
+
+2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* bootstrap.sh: Mention vaucanswig.
 
 	* src/demos/vaucanswig/ChangeLog: Add.

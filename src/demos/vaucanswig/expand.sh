@@ -8,10 +8,10 @@ VAUCANSWIG=`cd $1 && pwd`
 mkdir -p "$VAUCANSWIG/src"
 mkdir -p "$VAUCANSWIG/python"
 
-MODULES="$MODULES"
+MODULES="core $MODULES"
 
 for cat in usual numerical tropical_max tropical_min; do
-  for mod in context; do
+  for mod in context automaton; do
      cat >"$VAUCANSWIG/src/vaucanswig_${cat}_${mod}.i" <<EOF
 %include vaucanswig_${mod}.i
 %module vaucanswig_${cat}_${mod}
@@ -39,7 +39,7 @@ INCLUDES = -I/usr/include/python2.2 -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
     -I\$(top_srcdir)/include -I\$(top_builddir)/include
 AM_CPPFLAGS = -DEXCEPTION_TRAPS
 # AM_CXXFLAGS = \$(CXXFLAGS_OPTIMIZE) 
-AM_LDFLAGS = -shared -lswigpy 
+AM_LDFLAGS = -shared -lswigpy -L../meta -lvv
 
 EOF
 }
@@ -118,4 +118,3 @@ header_src >"$VAUCANSWIG/src/Makefile.am"
 dump_src >>"$VAUCANSWIG/src/Makefile.am"
 header_python >"$VAUCANSWIG/python/Makefile.am"
 dump_python >>"$VAUCANSWIG/python/Makefile.am"
-

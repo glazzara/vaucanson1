@@ -133,6 +133,5 @@ namespace utility
 }
 
 #include <vaucanson/misc/unique.hxx>
-#include <vaucanson/misc/unique.hcc>
 
 #endif // VCSN_MISC_UNIQUE_HH

@@ -1,8 +1,12 @@
 #ifndef CONTEXT_HH
 # define CONTEXT_HH
 
+#include "vcontext.hh"
+#include <string>
+#include <sstream>
+
 template<typename Auto>
-struct vcsn_context
+struct vcsn_context : vcsn::virtual_context
 {
   AUTOMATON_TYPES(Auto)
 
@@ -28,6 +32,53 @@ struct vcsn_context
   const weights_t& weights() const
   { return set_->series().weights(); }
   
+  virtual std::list<char> alphabet_letters() const
+  { return std::list<char>(alphabet().begin(), alphabet().end()); }
+
+  virtual std::string describe_alphabet(bool cpp) const
+  { 
+    std::ostringstream ret;
+    ret << "Alphabet (" << alphabet() << ')';
+    if (cpp)
+      ret << " <" << typeid(alphabet_t).name() << '>';
+    return ret.str();
+  }
+
+  virtual std::string describe_weights(bool cpp) const
+  { 
+    std::string ret = "Semiring";
+    if (cpp)
+      ret = ret + " <" + typeid(weights_t).name() + '>';
+    return ret;
+  }
+
+  virtual std::string describe_monoid(bool cpp) const
+  { 
+    std::string ret = "Monoid (" + describe_alphabet(cpp) + ')';
+    if (cpp)
+      ret = ret + " <" + typeid(monoid_t).name() + '>';
+    return ret;
+  }
+
+  virtual std::string describe_series(bool cpp) const
+  { 
+    std::string ret = "Series (" + describe_weights(cpp) 
+      + ", " + describe_monoid(cpp) + ')';
+    if (cpp)
+      ret = ret + " <" + typeid(series_t).name() + '>';
+    return ret;
+  }
+
+  virtual std::string describe_automata_set(bool cpp) const
+  {
+    std::string ret = "AutomataSet (" + describe_series(cpp) + ')';
+    if (cpp)
+      ret = ret + " <" + typeid(automata_set_t).name() + '>';
+    return ret;
+  }    
+
+  virtual ~vcsn_context() {}
+
 protected:
   const automata_set_t* set_;
 };

@@ -1,5 +1,20 @@
 2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* meta/vaucanswig_exception.i: Remove superfluous declaration of
+	`std::exception'.
+
+	* meta/vaucanswig_core.i, meta/vaucanswig_automaton.i,
+	meta/automaton.hh, meta/vauto.hh, meta/vauto.cc, meta/vcontext.cc,
+	meta/vcontext.hh: Add.
+	* meta/Makefile.am: Update accordingly. Make `libvv' a target.
+
+	* meta/context.hh: Update for inheritance from `virtual_context'.
+	* meta/vaucanswig_context.i: Update accordingly. Import `vaucanswig_core'.
+
+	* expand.sh: Update.
+
+2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* Makefile.am: Add.
 
 	* expand.sh, meta/context.hh, meta/vaucanswig_context.i,

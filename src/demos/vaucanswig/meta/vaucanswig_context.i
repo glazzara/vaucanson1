@@ -65,6 +65,7 @@
 
 %include vaucanswig_exception.i
 %include vaucanswig_describe.i
+%import vaucanswig_core.i
 
 %{
 #include <vaucanson/tools/usual.hh>
@@ -213,7 +214,7 @@ namespace Kind ##_types
     EXTEND_DESCRIBE(Kind ##_automata_set_t)
   };
 
-  struct Kind ##_context
+  struct Kind ##_context : vcsn::virtual_context
   {
     Kind ##_context(const Kind ##_automata_set_t& set);
     Kind ##_context(const Kind ##_context& other);
@@ -223,6 +224,15 @@ namespace Kind ##_types
     const Kind ##_monoid_t& monoid() const;
     const Kind ##_alphabet_t& alphabet() const;
     const Kind ##_weights_t& weights() const;
+
+    virtual std::list<char> alphabet_letters() const;
+    virtual std::string describe_alphabet(bool with_cpp = false) const;
+    virtual std::string describe_weights(bool with_cpp = false) const;
+    virtual std::string describe_monoid(bool with_cpp = false) const;
+    virtual std::string describe_series(bool with_cpp = false) const;
+    virtual std::string describe_automata_set(bool with_cpp = false) const;
+    virtual ~Kind ##_context();
+
 
     %extend {
       Kind ##_weight_t weight(int i) const
