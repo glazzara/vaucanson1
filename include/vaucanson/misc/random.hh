@@ -88,11 +88,15 @@ namespace utility {
     template<>
     unsigned generate<unsigned>(unsigned min, unsigned max);
 
-    /// Generate a random float between 0 and 1.
+    /// Generate a random float between -2 and 2.
     template<>
     float generate<float>();
 
-    /// Generate a random double between 0 and 1.
+    /// Generate a random float between min and max.
+    template<>
+    float generate<float>(float min, float max);
+
+    /// Generate a random double between -2 and 2.
     template<>
     double generate<double>();
 

@@ -264,15 +264,6 @@ namespace vcsn {
   }
 
   inline
-  Element<algebra::NumericalSemiring, double>
-  op_choose(const algebra::NumericalSemiring& set, SELECTOR(double))
-  {
-    return
-      Element<algebra::NumericalSemiring, double>
-        (set, utility::random::generate<double>(-2, 2));
-  }
-  
-  inline
   bool
   op_can_choose_non_starable(const algebra::NumericalSemiring&,
 			      SELECTOR(double))

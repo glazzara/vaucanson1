@@ -1,3 +1,11 @@
+2004-03-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/misc/random.hxx: Fix double generation, add float
+	ranged generation, fix integer generation.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Remove specialisation of op_choose for double.
+
 2004-03-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/design_pattern/design_pattern.hh,

@@ -75,7 +75,8 @@ namespace utility {
     template<>
     inline int generate<int>()
     {
-      return rand() % utility::limits<int>::max();
+      int res = rand() % utility::limits<int>::max();
+      return generate<bool>() ? res : res * -1;
     }
 
     template<>
@@ -102,27 +103,39 @@ namespace utility {
     inline float generate<float>()
     {
       // This formula comes from the caml stdlib.
-      return ((static_cast<float> (rand()) / RAND_MAX +
-	       static_cast<float> (rand())) / RAND_MAX +
-	      static_cast<float> (rand())) / RAND_MAX;
+      return (((static_cast<float> (rand()) / RAND_MAX +
+		static_cast<float> (rand())) / RAND_MAX +
+	       static_cast<float> (rand())) / RAND_MAX) * 4 - 2;
     }
 
+    template<>
+    inline float generate<float>(float min, float max)
+    {
+      float range = float(max - min);
+      float generate_one = ((static_cast<float> (rand()) / RAND_MAX +
+			      static_cast<float> (rand())) / RAND_MAX +
+			     static_cast<float> (rand())) / RAND_MAX;
+      
+      return min + generate_one * range;;
+    }
+    
     template<>
     inline double generate<double>()
     {
-      return ((static_cast<double> (rand()) / RAND_MAX +
+      return (((static_cast<double> (rand()) / RAND_MAX +
 	       static_cast<double> (rand())) / RAND_MAX +
-	      static_cast<double> (rand())) / RAND_MAX;
+	      static_cast<double> (rand())) / RAND_MAX) * 4 - 2;
     }
+
     template<>
-    double generate<double>(double min, double max)
+    inline double generate<double>(double min, double max)
     {
       double range = double(max - min);
-      double res = static_cast<double> (rand());
-
-      while (res > range)
-	  res /= range;
-      return min + res;
+      double generate_one = ((static_cast<double> (rand()) / RAND_MAX +
+			      static_cast<double> (rand())) / RAND_MAX +
+			     static_cast<double> (rand())) / RAND_MAX;
+      
+      return min + generate_one * range;;
     }
 
     template <class Iterator, class OutputIterator>
