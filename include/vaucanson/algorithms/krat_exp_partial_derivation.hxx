@@ -103,7 +103,7 @@ namespace vcsn {
       MATCH__(Product, lhs, rhs)
       {
 	std::pair<weight_t, bool> ret = constant_term(series(lhs));
-	if ((ret.second == false) || (ret.first.stareable() == false))
+	if (ret.second == false)
 	  {
 	    undefined = true;
 	    return return_type();

@@ -1,5 +1,11 @@
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Remove
+	  test on star of the constant term in product. 
+	* include/vaucanson/algorithms/krat_exp_derivation.hxx: Likewise.
+
+2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/krat.hxx,
 	  include/vaucanson/algebra/concrete/series/krat_conversion.hxx,
 	  include/vaucanson/algebra/concrete/series/polynoms.hxx,
