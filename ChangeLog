@@ -1,5 +1,16 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* configure.ac: 
+		- (VCSN_TESTS): Remove (problems with distcheck).
+		- Adjust package version.
+	* src/Makefile.am: Minor.
+	* doc/tutorial/Makefile.am: Add tex files into the distribution.
+	* include/Makefile.am: Refresh file list.
+	* src/demos/samples/algebra/Makefile.am: Deactivate demos.
+	* src/demos/vgrep/Makefile.am: Likewise.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/tools/gen_random.hh: Fix include
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>

@@ -14,6 +14,6 @@ tutorial.pdf: $(tex_TEX) $(tutorial_tex_TEX)
 	$(TEXI2PDF) `test -f '$(tex_TEX)' || echo '$(srcdir)/'`$(tex_TEX)
 
 docdir = $(datadir)/doc/@PACKAGE_TARNAME@
-dist_doc_DATA = tutorial.dvi tutorial.pdf
+dist_doc_DATA = tutorial.dvi tutorial.pdf tutorial.tex macros.tex packages.tex definitions.tex
 
 CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp

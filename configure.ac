@@ -5,7 +5,7 @@
 # VCSN_HEADER
 
 AC_PREREQ([2.54])
-AC_INIT([vaucanson], [0.1.0], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [0.2.0], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config/vcsn.m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
@@ -76,15 +76,6 @@ AC_CONFIG_FILES([
         doc/doc.doxy
 	include/Makefile])
 
-VCSN_TESTS([algebra_numerical_semiring])
-VCSN_TESTS([algebra_set_alphabet])
-VCSN_TESTS([algebra_string_free_monoid])
-VCSN_TESTS([algebra_tropical_max_semiring])
-VCSN_TESTS([usual_automaton_t])
-VCSN_TESTS([algebra_series_krat])
-VCSN_TESTS([algebra_series_misc])
-VCSN_TESTS([algebra_series_krat_derivation])
-VCSN_TESTS([algebra_series_krat_cderivation])
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 
 AC_OUTPUT
