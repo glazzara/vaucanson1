@@ -123,17 +123,17 @@ namespace vcsn {
 	{
 	  switch (type)
 	    {
-	    case a_word   : return "word";
-	    case a_weight : return "weight";
-	    case lparen   : return "(";
-	    case rparen   : return ")";
-	    case one      : return "one";
-	    case zero     : return "zero";
-	    case dot      : return ".";
-	    case e_star   : return "*";
-	    case plus     : return "+";
-	    case space    : return " ";
-	    case eof      : return "EOF";
+	    case a_word			: return "word";
+	    case a_weight		: return "weight";
+	    case lparen			: return "(";
+	    case rparen			: return ")";
+	    case one			: return "one";
+	    case zero			: return "zero";
+	    case dot			: return ".";
+	    case e_star			: return "*";
+	    case krat_exp_lexing::plus	: return "+";
+	    case space			: return " ";
+	    case eof			: return "EOF";
 	    }
 	  return "";
 	}
@@ -300,14 +300,14 @@ namespace vcsn {
 	    switch (*i)
 	      {
 		// operator case.
-	      case '(' : tok = lparen; len = 1; break;
-	      case ')' : tok = rparen; len = 1; break;
-	      case '+' : tok = plus;   len = 1; break;
-	      case '*' : tok = e_star; len = 1; break;
-	      case '.' : tok = dot;    len = 1; break;
-	      case ' ' : tok = space;  len = 1; break;
-	      case '0' : tok = zero;   len = 1; break;
-	      case '1' : tok = one;    len = 1; break;
+	      case '(' : tok = lparen;			len = 1; break;
+	      case ')' : tok = rparen;			len = 1; break;
+	      case '+' : tok = krat_exp_lexing::plus;	len = 1; break;
+	      case '*' : tok = e_star;			len = 1; break;
+	      case '.' : tok = dot;			len = 1; break;
+	      case ' ' : tok = space;			len = 1; break;
+	      case '0' : tok = zero;			len = 1; break;
+	      case '1' : tok = one;			len = 1; break;
 	      }
 	    // try word parser.
 	    iterator_t mli = i;
@@ -547,9 +547,9 @@ namespace vcsn {
       {
 	trace("parse_exp: Start");
 	parse_term (exp);
-	while (lexer_.first().is_a(plus))
+	while (lexer_.first().is_a(krat_exp_lexing::plus))
 	  {
-	    accept(plus);
+	    accept(krat_exp_lexing::plus);
 	    Element<S, T> rhs (exp.structure());
 	    parse_term(rhs);
 	    exp = exp + rhs;

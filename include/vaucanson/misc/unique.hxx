@@ -39,7 +39,7 @@ namespace utility {
   namespace unique {
 
     inline
-    unique_map::ti_slot::ti_slot(const std::type_info& _id)
+    unique_map::ti_slot::TiSlot(const std::type_info& _id)
       : id(_id) {}
 
     inline
@@ -104,7 +104,7 @@ namespace utility {
     }
 
     inline
-    uniquelist_base::~uniquelist_base() {}
+    uniquelist_base::~UniqueListBase() {}
 
     template <class T>
     typename UniqueMap<T>::map_t&

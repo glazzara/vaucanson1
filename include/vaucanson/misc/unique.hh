@@ -48,9 +48,9 @@ namespace utility
     {
       virtual ~UniqueListBase();
     };
-    
-#define uniquelist_base UniqueListBase<int>
-    
+
+    typedef UniqueListBase<int> uniquelist_base;
+
     /** Simple unique list structure
      *
      * @arg @c T the type of stored values
@@ -81,16 +81,16 @@ namespace utility
     {
       /** Helper to make @c std::type_info into a valid key type for
 	  @c std::map */
-#define ti_slot TiSlot<int>
-
       template <class U>
       struct TiSlot
       {
 	TiSlot(const std::type_info& );
 	const std::type_info &id;
-	bool operator==(const ti_slot& other) const;
-	bool operator<(const ti_slot& other) const;
+	bool operator==(const TiSlot& other) const;
+	bool operator<(const TiSlot& other) const;
       };
+
+      typedef TiSlot<int> ti_slot;
 
       /** The map type used */
       typedef std::map<ti_slot, uniquelist_base*> map_t;
@@ -99,10 +99,10 @@ namespace utility
       static map_t& instance();
     protected:
       map_t map_;
-      /** Constructor for the class. 
-       *  It is protected so that no secondary instances may be created. 
+      /** Constructor for the class.
+       *  It is protected so that no secondary instances may be created.
        */
-      UniqueMap(); 
+      UniqueMap();
       /** Destructor for the class.
        *
        * This destructor actually destroys all stored canonical
@@ -112,7 +112,7 @@ namespace utility
       ~UniqueMap();
     };
 
-#define unique_map UniqueMap<int>
+    typedef UniqueMap<int> unique_map;
 
     struct unifiable
     {
@@ -144,10 +144,8 @@ namespace utility
 
 }
 
-
-#ifndef INTERFACE_ONLY
-    #include <vaucanson/misc/unique.hxx>
-#endif // INTERFACE_ONLY
-    
+# ifndef INTERFACE_ONLY
+#  include <vaucanson/misc/unique.hxx>
+# endif // INTERFACE_ONLY
 
 #endif // ! VCSN_MISC_UNIQUE_HH

@@ -1,3 +1,18 @@
+2004-08-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Fix  some  compilation  errors   with  ICC.   The  compilation  of
+	Vaucanswig has  not been tested,  neither has the test  suite. But
+	`make' works correctly.
+
+	* include/vaucanson/misc/unique.hh, include/vaucanson/misc/unique.hxx:
+	Do not use the preprocessor to declare ti_slot, unique_map and
+	uniquelist_base. Use typedef instead.
+	* include/vaucanson/misc/deferrer.hxx: Use memset() instead of bzero().
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	Fix ambiguous references to plus.
+	* include/vaucanson/automata/concept/transducer_base.hh: Remove a
+	superfluous typedef.
+
 2004-08-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	Make Vaucanson compile correctly with g++ version 3.4.

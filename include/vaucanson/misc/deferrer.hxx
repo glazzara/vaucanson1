@@ -62,7 +62,7 @@ namespace utility
   DeferrerDebugPart<T, B>::DeferrerDebugPart(void* ptr, bool is_valid) :
     is_valid_ (is_valid)
   {
-    bzero(ptr, sizeof(T));
+    memset(ptr, 0, sizeof(T));
   }
 
   template <class T, bool B>
