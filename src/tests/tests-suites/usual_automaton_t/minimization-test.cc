@@ -35,7 +35,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	verbose = tests::high;
       else 
 	verbose = tests::low;
-    };
+    }; 
     tests::Tester t(verbose);
     if (minimization_test<usual_automaton_t>(t)) 
       return EXIT_SUCCESS;

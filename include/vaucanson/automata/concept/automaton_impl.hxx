@@ -395,7 +395,8 @@ namespace vcsn {
     else
       {
 	auto_op_set_final(series(), impl_, s);
-	final_[s] = op_convert(SELECT(series_value_t), SELECT(series_t), v.value());
+	final_[s] = op_convert(SELECT(series_value_t), SELECT(series_t), 
+			       v.value());
       }
   }
 

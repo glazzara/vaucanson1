@@ -53,13 +53,10 @@ unsigned global_consistency_test(tests::Tester& tg)
 
   std::deque<hstate_t> sc = choose_n_states(automaton, 3);
   hstate_t s1 = sc.front();
-  std::cout << "s1 is " << s1 << std::endl;
   sc.pop_front();
   hstate_t s2 = sc.front();
-  std::cout << "s2 is " << s2 << std::endl;
   sc.pop_front();
   hstate_t s3 = sc.front();
-  std::cout << "s3 is " << s3 << std::endl;
   sc.pop_front();
   
   automaton.del_state(s1);

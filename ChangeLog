@@ -1,4 +1,22 @@
 2002-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.121)
+	* include/vaucanson/automata/concept/automaton_impl.hxx: minor.
+	* include/vaucanson/tools/usual.hh:
+		foreach_* macros added.
+	* include/vaucanson/misc/random.hxx: remove debug garbage.
+	* include/vaucanson/algorithms/standard.hxx: fix prototypes.
+	* include/vaucanson/algorithms/standard.hh: minor.
+	* src/tests/automata/algos/minimization_test.hh: minor.
+	* src/tests/tests-suites/usual_automaton_t/Makefile.am: 
+		add concat_test.
+	* src/tests/automata/implementation_check/global_consistency_test.hh:
+		remove debug garbage.
+	* include/vaucanson/algorithms/concat.hh: added.
+	* include/vaucanson/algorithms/concat.hxx: added.
+	* src/tests/automata/algos/concat_test.hh: added.
+	* src/tests/tests-suites/usual_automaton_t/concat-test.cc: added.
+
+2002-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.120)
 
 	* src/README: added to document src/* content.

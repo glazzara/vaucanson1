@@ -1,10 +1,11 @@
 include $(top_srcdir)/src/tests/check/Makefile.check
-check_PROGRAMS=global_consistency-test add_state-test coherence_state_edge-test init_final-test add_edge-test generalized-test extract-test minimization-test elimination-test reachable-test normalize-test union-test realtime-test determinist-test glushkov-test product-test thompson-test closure-test complete-test compute-test
+check_PROGRAMS=global_consistency-test add_state-test coherence_state_edge-test init_final-test add_edge-test concat-test generalized-test extract-test minimization-test elimination-test reachable-test normalize-test union-test realtime-test determinist-test glushkov-test product-test thompson-test closure-test complete-test compute-test
 global_consistency_test_SOURCES = global_consistency-test.cc 
  add_state_test_SOURCES = add_state-test.cc 
  coherence_state_edge_test_SOURCES = coherence_state_edge-test.cc 
  init_final_test_SOURCES = init_final-test.cc 
  add_edge_test_SOURCES = add_edge-test.cc 
+ concat_test_SOURCES = concat-test.cc 
  generalized_test_SOURCES = generalized-test.cc 
  extract_test_SOURCES = extract-test.cc 
  minimization_test_SOURCES = minimization-test.cc 

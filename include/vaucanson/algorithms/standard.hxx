@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_STANDARD_HXX
-# define ALGORITHMS_STANDARD_HXX
+#ifndef VCSN_ALGORITHMS_STANDARD_HXX
+# define VCSN_ALGORITHMS_STANDARD_HXX
 
 # include <iostream>
 
@@ -34,8 +34,8 @@ namespace vcsn {
   `---------*/
   template <class A_, typename Auto_>
   void
-  do_standardize(const AutomataBase<A_>& a_set,
-		 Auto_&			 a)
+  do_in_standardize(const AutomataBase<A_>& a_set,
+		    Auto_&			a)
   {
     std::cerr << "not implemented yed." << std::endl;
   }
@@ -66,7 +66,8 @@ namespace vcsn {
 	 i != lhs.initial().end();
 	   ++i)
       {
-	// FIXME : is there something like an iterator over the support of initial ?
+	// FIXME : is there something like an iterator over the
+	// support of initial ?
 	if (*i != new_i)
 	  {
 	    old_i = *i;
@@ -159,7 +160,7 @@ namespace vcsn {
     | Concat of states |
     `-----------------*/
     map_t	map_h;
-    delta_ret_t		aim;
+    delta_ret_t	aim;
     hstate_t	new_state;
 
     // Add states except the initial one
@@ -189,7 +190,9 @@ namespace vcsn {
 	 ++s)
       lhs.set_final(*s, lhs.get_final(*s) * rhs.get_final(rhs_i));
     
-    for (typename map_t::const_iterator nf = map_h.begin(); nf != map_h.end(); ++nf)
+    for (typename map_t::const_iterator nf = map_h.begin(); 
+	 nf != map_h.end(); 
+	 ++nf)
       if (rhs.is_final(nf->first))
 	lhs.set_final(nf->second);
 
@@ -276,7 +279,6 @@ namespace vcsn {
     return ret;
   }
 
-
 } // vcsn
 
-#endif // ALGORITHMS_STANDARD_HXX
+#endif // VCSN_ALGORITHMS_STANDARD_HXX

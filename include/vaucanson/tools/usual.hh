@@ -66,7 +66,7 @@ namespace vcsn {
 #define AUTOMATON_TYPES_(AutoType,Prefix)				      \
  typedef AutoType				    Prefix##automaton_t;      \
  typedef typename AutoType::states_t		    Prefix##states_t;	      \
- typedef typename AutoType::state_iterator	    Prefix##state_iterator;   \
+ typedef typename AutoType::state_iterator	    Prefix##state_iterator;  \
  typedef typename AutoType::edges_t		    Prefix##edges_t;	      \
  typedef typename AutoType::edge_iterator	    Prefix##edge_iterator;    \
  typedef typename AutoType::initial_t	            Prefix##initial_t;	      \
@@ -87,6 +87,30 @@ namespace vcsn {
  typedef typename Prefix##weight_t::value_t         Prefix##weight_value_t;   \
  typedef typename AutoType::label_t		    Prefix##label_t;	      \
  typedef typename AutoType::tag_t		    Prefix##tag_t;
+
+// the following macros assume you have used a macro AUTOMATON_TYPES
+// previously.
+
+#define for_each_state(S, A) \
+    for (state_iterator S = A.states().begin(); 	\
+	 S != A.states().end(); 			\
+	 ++S)
+
+#define for_each_edge(E, A) \
+    for (edge_iterator E = A.edges().begin(); 	\
+	 E != A.edges().end(); 			\
+	 ++E)
+
+#define for_each_final_state(S, A) \
+    for (final_iterator S = A.final().begin(); 	\
+	 S != A.final().end(); 			\
+	 ++S)
+
+#define for_each_initial_state(S, A) \
+    for (initial_iterator S = A.inital().begin(); 	\
+	 S != A.initial().end(); 			\
+	 ++S)
+
 
 #define AUTOMATON_TYPES(AutoType)                   AUTOMATON_TYPES_(AutoType,)
 

@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 #include <vaucanson/tools/usual.hh>
   #include <check/tests_stuff.hh>
-  #include <automata/algos/determinist_test.hh>
+  #include <automata/algos/concat_test.hh>
 
   int main(int argc, char **argv)
   {
@@ -37,7 +37,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	verbose = tests::low;
     }; 
     tests::Tester t(verbose);
-    if (determinist_test<usual_automaton_t>(t)) 
+    if (concat_test<usual_automaton_t>(t)) 
       return EXIT_SUCCESS;
     else
       return EXIT_FAILURE;
