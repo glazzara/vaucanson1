@@ -30,17 +30,11 @@
 #ifndef VCSN_R_AUTOMATON_HH
 # define VCSN_R_AUTOMATON_HH
 
-# include <vaucanson/config/system.hh>
-# include <fstream>
-# include <sstream>
-# include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algebra/implementation/predefs.hh>
 # include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
+# include <vaucanson/algebra/implementation/series/krat.hh>
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
-# include <vaucanson/algebra/implementation/series/series.hh>
-# include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/implementation/graph.hh>
 # include <vaucanson/tools/dot_dump.hh>
@@ -76,21 +70,14 @@ namespace vcsn {
     typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;
     typedef Element<series_t, krat_exp_impl_t>			krat_exp_t;
 
-    template <class T>
-    automaton_t new_automaton(const T& alphabet);
-
-    template <class InputIterator>
-    automaton_t new_automaton(InputIterator begin,
-			      InputIterator end);
+# include <vaucanson/contextual_functions.hh>
 
   } // r_automaton
 
 } // vcsn
 
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/r_automaton.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-
 
 #endif // VCSN_R_AUTOMATON_HH

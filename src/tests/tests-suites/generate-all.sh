@@ -128,3 +128,23 @@
    tropical_min_automaton_t \
    tropical_min_automaton_t.defs \
    ../automata
+
+../bin/generate-test-suite.sh \
+   context_headers_boolean \
+   context_headers_boolean.defs \
+   ../context_headers/automata
+
+../bin/generate-test-suite.sh \
+   context_headers_r \
+   context_headers_r.defs \
+   ../context_headers/automata
+
+../bin/generate-test-suite.sh \
+   context_headers_z \
+   context_headers_z.defs \
+   ../context_headers/automata
+
+../bin/generate-test-suite.sh \
+   context_headers_z_max_plus \
+   context_headers_z_max_plus.defs \
+   ../context_headers/automata

@@ -1,7 +1,39 @@
+2004-04-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/contextual_functions.hh,
+	* include/vaucanson/contextual_functions.hxx: New. Factorize the
+	code from context headers (boolean_automaton, r_automaton, z_automaton
+	and z_max_plus_automaton). Add a standard_of() function for those
+	headers with a unique krat_exp_t as argument.
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/boolean_automaton.hxx,
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/r_automaton.hxx,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_automaton.hxx,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hxx: Update. Use
+	contextual_functions.hh. Remove useless includes. Fix some
+	comments.
+
+	* src/tests/context_headers/automata/global_consistency_test.hh: New.
+	Tests for the context headers.
+	* src/tests/tests-suites/generate-all.sh: Update. Instantiate tests
+	for the different context headers.
+	* src/tests/sanity/generate_files.sh: Do not check
+	contextual_functions.hh and contextual_functions.hxx for sanity,
+	those headers need to be included from context headers to be sane.
+
+	* src/tests/context_headers/Makefile.am,
+	* src/tests/context_headers/automata/Makefile.am: New.
+	* include/Makefile.am,
+	* src/tests/Makefile.am,
+	* configure.ac: Update accordingly.
+
 2004-04-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/automata/algos/product_test.hh: Improve the test.
-	
+
 2004-04-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hh,

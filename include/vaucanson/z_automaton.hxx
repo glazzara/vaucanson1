@@ -34,28 +34,12 @@ namespace vcsn {
 
   namespace z_automaton {
 
-    template <class InputIterator>
-    automaton_t new_automaton(InputIterator begin,
-			      InputIterator end)
-    {
-      Alphabet alpha;
-      for (InputIterator e = begin; e != end; ++e)
-	alpha.insert(*e);
-      NumericalSemiring semiring;
-      Words freemonoid(alpha);
-      series_t series(semiring, freemonoid);
-      Automata<series_t> automata_set(series);
-      return automaton_t(automata_set);
-    }
-
-    template <class T>
-    automaton_t new_automaton(const T& alphabet)
-    {
-      return new_automaton(alphabet.begin(), alphabet.end());
-    }
+    // FIXME: Is there any interest to keep that empty file?
+    // FIXME: I guess the real question is: is there any chance for
+    // FIXME: this file to be filled with C++ code in the future?
 
   } // z_automaton
 
 } // vcsn
 
-#endif // VCSN_BOOLEAN_AUTOMATON_HXX
+#endif // VCSN_Z_AUTOMATON_HXX

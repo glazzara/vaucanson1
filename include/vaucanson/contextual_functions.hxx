@@ -1,7 +1,7 @@
-// r_automaton.hxx: this file is part of the Vaucanson project.
+// contextual_functions.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -27,19 +27,40 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_R_AUTOMATON_HXX
-# define VCSN_R_AUTOMATON_HXX
+#ifndef VCSN_CONTEXTUAL_FUNCTIONS_HXX
+# define VCSN_CONTEXTUAL_FUNCTIONS_HXX
 
-namespace vcsn {
+# include <vaucanson/contextual_functions.hh>
 
-  namespace r_automaton {
+# include <vaucanson/algorithms/standard_of.hh>
 
-    // FIXME: Is there any interest to keep that empty file?
-    // FIXME: I guess the real question is: is there any chance for
-    // FIXME: this file to be filled with C++ code in the future?
+template <class InputIterator>
+automaton_t new_automaton(InputIterator begin,
+			  InputIterator end)
+{
+  alphabet_t		alpha;
+  for (InputIterator e = begin; e != end; ++e)
+    alpha.insert(*e);
+  semiring_t		semiring;
+  monoid_t		freemonoid (alpha);
+  series_t		series (semiring, freemonoid);
+  automata_set_t	automata_set(series);
+  return automaton_t (automata_set);
+}
 
-  } // r_automaton
+template <class T>
+automaton_t new_automaton(const T& alphabet)
+{
+  return new_automaton(alphabet.begin(), alphabet.end());
+}
 
-} // vcsn
+template <class Exp>
+automaton_t
+standard_of(const Exp& e)
+{
+  automaton_t r = new_automaton(e.structure().monoid().alphabet());
+  standard_of(r, e.value());
+  return r;
+}
 
-#endif // VCSN_R_AUTOMATON_HXX
+#endif // ! VCSN_CONTEXTUAL_FUNCTIONS_HXX
