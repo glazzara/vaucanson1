@@ -1,4 +1,4 @@
-// alphabets.hh
+// predefs.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -17,52 +17,28 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#ifndef VCSN_ALGEBRA_CONCRETE_FREE_MONOID_PREDEFS_HH
+# define VCSN_ALGEBRA_CONCRETE_FREE_MONOID_PREDEFS_HH
 
-#ifndef VCSN_ALGEBRA_ALPHABETS_HH
-# define VCSN_ALGEBRA_ALPHABETS_HH
-
-# include <vaucanson/algebra/concept/alphabets_base.hh>
-# include <set>
+# include <vaucanson/algebra/concrete/alphabets/predefs.hh>
+# include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 
 namespace vcsn {
-
+  
   namespace algebra {
 
-    //! @ingroup algebra
-    //! @{
+    namespace char_letter {
 
-    /*----------------.
-    | SetAlphabets<L> |
-    `----------------*/
-    //! Static implementation of alphabet structural element.
-    template<typename L>
-    struct SetAlphabets
-      : AlphabetsBase<SetAlphabets<L> >
-    {
-      //! The type of letter hold by the alphabets.
-      typedef L		letter_t;
-    };
+      typedef 
+      SetWords<Element<Alphabets, std::set<char> > >		Words;
+      
+      typedef
+      Element<Words, std::string>			        Word;
     
-    //! @}
+    } // char_letter
 
   } // algebra
 
-  //! \@{
-  
-  /*------------------------.
-  | MetaSet<SetAlphabets<L> |
-  `------------------------*/
-  //! meta information about SetAlphabets.
-  template<typename L>
-  struct MetaSet<SetAlphabets<L> >
-  {
-    //! The set of alphabet is a static structure.
-    static const bool		dynamic_set = false;
-  };     
+} // vcsn
 
-  //! @}
-
-} // vcsn 
-
-#endif // VCSN_ALGEBRA_ALPHABETS_HH
-
+#endif // VCSN_ALGEBRA_CONCRETE_FREE_MONOID_PREDEFS_HH

@@ -3,7 +3,7 @@ test -z "$VERBOSE" && {
    exec > /dev/null 2>&1
 }
 
-CXX=g++-3.0
+CXX=g++
 abs_top_builddir=/home/lrde/stud/yann/work/vaucanson/vaucanson
 abs_top_srcdir=/home/lrde/stud/yann/work/vaucanson/vaucanson
 

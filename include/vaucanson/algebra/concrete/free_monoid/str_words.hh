@@ -17,12 +17,10 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-#ifndef ALGEBRA_STR_WORDS_HH
-# define ALGEBRA_STR_WORDS_HH
+#ifndef VCSN_ALGEBRA_CONCRETE_STR_WORDS_HH
+# define VCSN_ALGEBRA_CONCRETE_STR_WORDS_HH
 
 # include <string>
-
 # include <vaucanson/algebra/concrete/free_monoid/words.hh>
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
@@ -59,23 +57,7 @@ namespace vcsn {
   Element<SetWords<A>, std::basic_string<typename A::letter_t> >
   op_choose(const SetWords<A>& s, 
 	    SELECTOR(std::basic_string<typename A::letter_t>));
-
-
-
-  /*------.
-    | sugar |
-    `------*/
-  // Define the classical structuring element Words which denotes A*
-  // implemented by alphabet implemented by std::set<char>.
-  // Consequently, Word is the type of element structured by Words and
-  // implemented by std::string.
-  //
-
-  typedef 
-  algebra::SetWords<Element<Alphabets, std::set<char> > >  Words;
-  typedef
-  Element<Words, std::string>				  Word;
-
+  
 } // vcsn
 
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hxx>

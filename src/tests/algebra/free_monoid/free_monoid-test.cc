@@ -20,6 +20,7 @@
 
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 
 # include <check/tests_stuff.hh>
@@ -44,10 +45,9 @@ bool test_free_monoid(tests::Tester& t)
   return t.all_passed(); 
 }
 
-
-
 int main(int argc, char **argv)
 {
+  using namespace vcsn::algebra;
   tests::verbose_level_e verbose;
 
   if ((argc > 1) && (argv[1] == std::string("--noverbose")))
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
     verbose = tests::low;
   tests::Tester t(verbose);
 
-  if (test_free_monoid<vcsn::Words, std::string>(t))
+  if (test_free_monoid<char_letter::Words, std::string>(t))
     return EXIT_SUCCESS;
   else
     return EXIT_FAILURE;

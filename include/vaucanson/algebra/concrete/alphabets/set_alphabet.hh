@@ -17,10 +17,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
-#ifndef ALGEBRA_SET_ALPHABET_HH
-# define ALGEBRA_SET_ALPHABET_HH
+#ifndef VCSN_ALGEBRA_SET_ALPHABET_HH
+# define VCSN_ALGEBRA_SET_ALPHABET_HH
 
 # include <vaucanson/algebra/concrete/alphabets/alphabets.hh>
 
@@ -28,43 +26,55 @@ namespace vcsn {
 
   namespace algebra {
 
+    //! \addtogroup algebra
+    //! \@{
 
-    /*-----------------------------------------------------------.
-    | Definition of an alphabet implementation based on std::set |
-    `-----------------------------------------------------------*/
+    /*---------------------------------------------.
+    | alphabet_traits<SetAlphabets<L>,std::set<L>> |
+    `---------------------------------------------*/
+    //! meta information about the mixing of SetAlphabets with
+    //! std::set.
     template<typename L>
     struct alphabet_traits<SetAlphabets<L>, std::set<L> >
     {
+      //! The type of letter hold by the alphabet.
       typedef L			letter_t;
     };
 
+    //! @}
+
   } // algebra
+  
+  //! \addtogroup algebra
+  //! \@{
 
-    template<typename L>
-    struct MetaElement<SetAlphabets<L>, std::set<L> >
-      : MetaElement<AlphabetsBase<SetAlphabets<L> >, std::set<L> >
-    {
-      static const bool dynamic_values = true;
-    };
+  /*------------------------------------------.
+  | MetaElement<SetAlphabets<L>, std::set<L>> |
+  `------------------------------------------*/
+  //! Services of every alphabet implemented with std::set.
+  //! See MetaElement<AlphabetsBase<Self>, T>.
+  template<typename L>
+  struct MetaElement<SetAlphabets<L>, std::set<L> >
+    : MetaElement<AlphabetsBase<SetAlphabets<L> >, std::set<L> >
+  {
+    //! An alphabet implemented with std::set is a dynamic value.
+    static const bool dynamic_values = true;
+  };
+  
+  //! @}
 
-    template<typename L>
-    bool op_contains(const SetAlphabets<L>& s, const std::set<L>& a);
-
-    template<typename L>
-    bool op_is_finite(const SetAlphabets<L>& s, const std::set<L>& a);
-
-    template<typename L>
-    bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a, 
-		       const L& v);
-
-  /*----------------------------------.
-  | Define some useful alphabet stuff |
-  `----------------------------------*/
-    typedef algebra::SetAlphabets<char>				Alphabets;
-    typedef Element<Alphabets, std::set<char> >			Alphabet;
-
+  template<typename L>
+  bool op_contains(const SetAlphabets<L>& s, const std::set<L>& a);
+  
+  template<typename L>
+  bool op_is_finite(const SetAlphabets<L>& s, const std::set<L>& a);
+  
+  template<typename L>
+  bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a, 
+		     const L& v);
+    
 } // vcsn
 
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hxx>
  
-#endif // ALGEBRA_SET_ALPHABET_HH
+#endif // VCSNALGEBRA_SET_ALPHABET_HH

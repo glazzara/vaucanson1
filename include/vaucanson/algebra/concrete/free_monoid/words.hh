@@ -18,70 +18,84 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGEBRA_WORDS_HH
-# define ALGEBRA_WORDS_HH
+#ifndef VCSN_ALGEBRA_CONCRETE_WORDS_HH
+# define VCSN_ALGEBRA_CONCRETE_WORDS_HH
 
-# include <string>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <string>
 
 namespace vcsn {
 
   namespace algebra {
-
+    
     /*------------.
     | SetWords<A> |
     `------------*/
-
+    //! Implementation of a free monoid which aggregates its alphabet.
     template<typename A>
     struct SetWords 
       : FreeMonoidBase<SetWords<A> >
     {
       typedef A alphabets_elt_t;
 
-      // in case of default constructor, do not forget to attach an
-      // alphabet, otherwise the alphabet is empty.
+      //! Default constructor.
       SetWords();
+
+      //! Constructor based on an alphabet.
       SetWords(const A& a);
+
+      //! Copy constructor.
       SetWords(const SetWords& w);
 
+      //! Alphabet's accessor.
       A&	alphabet();
+
+      //! Alphabet's accessor (const version).
       const A&	alphabet() const;
 
     protected:
       A alph_;
     };
 
-  }
+  };
 
-    /*----------------------.
-    | MetaSet<SetWords<A> > |
-    `----------------------*/
-    template<typename A>
-    struct MetaSet<SetWords<A> >
-    {
-      static const bool		dynamic_set = A::dynamic;
-      typedef algebra::mul_kind semigroup_kind;
-      typedef A			alphabet_t;
-    };
-
-    /*-------------------------.
-    | MetaElement<SetWords<A>, T> |
-    `-------------------------*/
-    template<typename A, typename T>
-    struct MetaElement<SetWords<A>, T>
-      : MetaElement<FreeMonoidBase<SetWords<A> >, T>
-    {};
+  /*----------------------.
+  | MetaSet<SetWords<A> > |
+  `----------------------*/
+  //! Meta information about SetWords.
+  template<typename A>
+  struct MetaSet<SetWords<A> >
+  {
+    //! SetWord is dynamic iff its alphabet is.
+    static const bool		dynamic_set = A::dynamic;
+    
+    //! Commonly a free monoid use the multiplication symbol as operation.
+    typedef algebra::mul_kind semigroup_kind;
+    
+    //! The type of the alphabet.
+    typedef A			alphabet_t;
+  };
+  
+  /*----------------------------.
+  | MetaElement<SetWords<A>, T> |
+  `----------------------------*/
+  //! Services of an element of a free monoid implemented with
+  //! SetWords.
+  template<typename A, typename T>
+  struct MetaElement<SetWords<A>, T>
+    : MetaElement<FreeMonoidBase<SetWords<A> >, T>
+  {};
 
   namespace traits {
     
-    template<typename A>
-    struct virtual_types<algebra::SetWords<A> >
+    template <class A>
+    struct virtual_types<SetWords<A> >
     {
-      typedef A alphabet_t;
+      typedef A		alphabet_t;
     };
 
   } // traits
-
+  
 } // vcsn
 
 template<typename A>
@@ -90,5 +104,5 @@ bool operator==(const vcsn::algebra::SetWords<A>& a,
 
 # include <vaucanson/algebra/concrete/free_monoid/words.hxx>
 
-#endif // ALGEBRA_WORDS_HH
+#endif // VCSN_ALGEBRA_CONCRETE_WORDS_HH
 

@@ -17,8 +17,6 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
 #ifndef TOOLS_USUAL_HH
 # define TOOLS_USUAL_HH
 
@@ -27,6 +25,7 @@
 # include <sstream>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/misc/selectors.hh>
+# include <vaucanson/algebra/concrete/predefs.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
@@ -45,6 +44,7 @@ namespace vcsn {
 
     using namespace vcsn;
     using namespace vcsn::algebra;
+    using namespace vcsn::algebra::char_letter;
 
     template <class F, class T>
     struct map : std::map<F,T>

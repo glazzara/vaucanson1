@@ -16,10 +16,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
-#ifndef ALGEBRA_WORDS_HXX
-# define ALGEBRA_WORDS_HXX
+#ifndef VCSN_ALGEBRA_CONCRETE_WORDS_HXX
+# define VCSN_ALGEBRA_CONCRETE_WORDS_HXX
 
 # include <vaucanson/algebra/concrete/free_monoid/words.hh>
 
@@ -68,5 +66,5 @@ bool operator==(const vcsn::algebra::SetWords<A>& a,
   return a.alphabet() == b.alphabet(); 
 }
 
-#endif // ALGEBRA_WORDS_HXX
+#endif // VCSN_ALGEBRA_CONCRETE_WORDS_HXX
 

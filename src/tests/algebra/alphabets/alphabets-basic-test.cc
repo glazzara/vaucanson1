@@ -22,6 +22,7 @@
 #include <check/tests_stuff.hh>
 #include <set>
 #include <vaucanson/fundamental/fundamental.hh>
+#include <vaucanson/algebra/concrete/alphabets/predefs.hh>
 #include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
 
@@ -31,7 +32,6 @@ template <typename S, typename T>
 bool test_alphabet(tests::Tester& t)
 {
   using namespace vcsn::algebra;
-  using namespace vcsn;
 
   typedef Element<S, T> element_t;
 
@@ -53,7 +53,6 @@ bool test_alphabet(tests::Tester& t)
 int main(int argc, char **argv)
 {
   using namespace vcsn::algebra;
-  using namespace vcsn;
 
   tests::verbose_level_e verbose;
 
@@ -63,7 +62,7 @@ int main(int argc, char **argv)
     verbose = tests::low;
   tests::Tester t(verbose);
 
-  if (test_alphabet<Alphabets, std::set<char> >(t))
+  if (test_alphabet<char_letter::Alphabets, std::set<char> >(t))
     return EXIT_SUCCESS;
   else
     return EXIT_FAILURE;

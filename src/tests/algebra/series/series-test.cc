@@ -1,6 +1,5 @@
 // series-test.cc
 //
-//
 // $Id$
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001-2002 Sakarovitch, Poss, Rey and Regis-Gianas.
@@ -25,6 +24,7 @@
 #include <fundamental/design_pattern-test.hh>
 #include <algebra/series/series-test.hh>
 #include <vaucanson/fundamental/fundamental.hh>
+#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
 #include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 #include <vaucanson/algebra/concrete/series/polynoms.hh>
 #include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
@@ -44,7 +44,10 @@ int main(int argc, char **argv)
     verbose = tests::low;
   tests::Tester t(verbose);
 
-  if (test_series<Series<NumericalSemiring, Words>, polynom<std::string, int> >(t))
+  if (test_series<
+      Series<
+      NumericalSemiring, char_letter::Words>, 
+      polynom<std::string, int> >(t))
     return EXIT_SUCCESS;
   else
     return EXIT_FAILURE;
