@@ -1,3 +1,4 @@
+// lattice_base.hh
 
 #ifndef   LATTICE_BASE_HH_
 # define   LATTICE_BASE_HH_
@@ -42,13 +43,13 @@ namespace vcsn {
       //! Copy constructor is protected since it is an abstract class.
       MetaElement(const MetaElement& other);
     };
-
+ 
   template <typename S, typename T>
   std::set<T> get_mins(const Element<S,T>& lhs, 
 		       const Element<S,T>& rhs);
   
   template <typename S, typename T>
-  Element<S,T> get_max(const Element<S,T>& lhs, 
+  Element<S,T> get_maxs(const Element<S,T>& lhs, 
 		       const Element<S,T>& rhs);
   
 

@@ -1,3 +1,4 @@
+// lattice_base.hxx
 
 #ifndef   LATTICE_BASE_HXX_
 # define   LATTICE_BASE_HXX_
@@ -19,6 +20,9 @@ namespace vcsn {
     {}
     
   } // algebra
+
+  
+  // constructors
   
   template<class Self, typename T>
   MetaElement<LatticeBase<Self>, T>::MetaElement()
@@ -28,20 +32,25 @@ namespace vcsn {
   MetaElement<LatticeBase<Self>, T>::MetaElement(const MetaElement& other)
   {}
 
+
+
+  // return the set of tallest minorants
   template <typename S, typename T>
   std::set<T> get_mins(const Element<S,T>& lhs, 
 		       const Element<S,T>& rhs)
   {
-    std::cout << "get_min" << std::endl;
+    std::cout << "get_mins" << std::endl;
     return op_get_mins(lhs.set(), lhs.value(), rhs.value());
   }
   
+  // return the set of tallest majorants
   template <typename S, typename T>
-  Element<S,T> get_max(const Element<S,T>& lhs, 
+  Element<S,T> get_maxs(const Element<S,T>& lhs, 
 		       const Element<S,T>& rhs)
   {
-    return Element<S,T>(op_get_max(lhs.set(), 
-				   lhs.value(), rhs.value()));
+    std::cout << "get_maxs" << std::endl;
+    return Element<S,T>(op_get_maxs(lhs.set(), 
+				    lhs.value(), rhs.value()));
   }
 
 

@@ -44,7 +44,7 @@ namespace vcsn {
   //
   template <class A_, typename Auto_>
   std::set<hstate_t>
-  do_useful_states(const AutomataBase<A_>& a_set,
+  do_usefull_states(const AutomataBase<A_>& a_set,
 		   const Auto_&		   a)
   {
     std::set<hstate_t> start = start_reachable_states(a);
@@ -58,16 +58,16 @@ namespace vcsn {
 
   template<typename A, typename T>
   std::set<hstate_t>
-  useful_states(const Element<A, T>& a)
+  usefull_states(const Element<A, T>& a)
   {
-    return do_useful_states(a.set(), a);
+    return do_usefull_states(a.set(), a);
   }
 
   template<typename A, typename T>
   Element<A, T>
   trim(const Element<A, T>& a)
   {
-    return auto_extract(a, useful_states(a));
+    return auto_extract(a, usefull_states(a));
   }
 
 } // vcsn

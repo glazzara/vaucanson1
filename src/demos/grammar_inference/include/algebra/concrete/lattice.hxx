@@ -1,3 +1,4 @@
+// lattice.hxx
 
 #ifndef   LATTICE_HXX_
 # define   LATTICE_HXX_
@@ -8,11 +9,12 @@
 
 namespace vcsn {
 
+  // operators for minorants
+
   template<typename T>
   std::set<T>
   op_get_mins(const algebra::Lattice& Lat, T lhs, T rhs)
   {
-    std::cout << "op_get_mins" << std::endl;
     return op_get_prevs(Lat, op_min(lhs, rhs));
   }
 
@@ -20,8 +22,6 @@ namespace vcsn {
   op_get_prevs(const algebra::Lattice& Lat, unsigned elt)
   {
     std::set<unsigned> res;
-
-    std::cout << "op_get_prevs" << std::endl;
 
     if (elt)
       res.insert(elt - 1);
@@ -31,7 +31,8 @@ namespace vcsn {
     return res;
   }
     
-  unsigned op_min(unsigned lhs, unsigned rhs)
+  template<typename T>
+  T op_min(T lhs, T rhs)
   {
     if (lhs < rhs)
       return lhs;
@@ -39,7 +40,33 @@ namespace vcsn {
   }
   
 
+  // operators for majorants
+  
+  template<typename T>
+  std::set<T>
+  op_get_maxs(const algebra::Lattice& Lat, T lhs, T rhs)
+  {
+    return op_get_nexts(Lat, op_max(lhs, rhs));
+  }
 
+  std::set<unsigned>
+  op_get_nexts(const algebra::Lattice& Lat, unsigned elt)
+  {
+    std::set<unsigned> res;
+    
+    res.insert(elt + 1);
+    
+    return res;
+  }
+  
+  template<typename T>
+  T op_max(T lhs, T rhs)
+  {
+    if (lhs > rhs)
+      return lhs;
+    return rhs;
+  }
+  
 } // vcsn
 
 

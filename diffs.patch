@@ -1,0 +1,2021 @@
+Index: ChangeLog
+from  +2003-02-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.160)
+	* src/demos/vgrep/vgrep.cc: New.
+	* src/demos/Makefile.am: New.
+	* src/demos/vgrep/Makefile.am: New.
+	* configure.ac: Generate them.
+	* include/vaucanson/algebra/concept/semiring_base.hxx:
+	Remove unused variable.
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx	
+	* include/vaucanson/algebra/concrete/series/krat.hh,	
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh,	
+	* include/vaucanson/algebra/concrete/series/polynoms.hh:
+	Rename "weights_value_t" to "weight_value_t".
+	* include/vaucanson/algorithms/compute.hh: Return weight_t.
+	* include/vaucanson/algorithms/compute.hxx: Implement this change.
+	* include/vaucanson/algorithms/union.hxx: Remove unused variable.
+
+	* include/vaucanson/automata/concept/kinds.hh: Fix minor bug.
+	* include/vaucanson/automata/concept/kinds.hxx: Idem.
+	* include/vaucanson/misc/container_ops.hxx: Fix op_begin const version.
+	* Makefile.am: distribute vcsn.m4
+	* include/vaucanson/tools/usual_macros.hh (for_each_initial_state):
+	Fix a typing error.
+	* doc/tutorial/tutorial.tex: Update.
+
+Index: configure.ac
+--- configure.ac Thu, 13 Feb 2003 09:23:29 +0100 yann (vaucanson/47_configure. 1.6.1.14 600)
++++ configure.ac Wed, 19 Feb 2003 18:23:16 +0100 max (vaucanson/47_configure. 1.6.1.15 600)
+@@ -52,6 +52,8 @@
+ 	src/tests/sanity/Makefile
+ 	src/tests/tests-suites/Makefile
+ 	src/tests/bin/Makefile
++	src/demos/Makefile
++	src/demos/vgrep/Makefile
+ 	doc/Makefile
+ 	doc/tutorial/Makefile
+         doc/doc.doxy	
+Index: include/vaucanson/algebra/concept/semiring_base.hxx
+--- include/vaucanson/algebra/concept/semiring_base.hxx Mon, 04 Nov 2002 10:14:55 +0100 yann (vaucanson/b/15_semiring_b 1.4 600)
++++ include/vaucanson/algebra/concept/semiring_base.hxx Wed, 19 Feb 2003 18:23:21 +0100 max (vaucanson/b/15_semiring_b 1.5 600)
+@@ -108,8 +108,6 @@
+ 	   const std::string&			 s, 
+ 	   typename std::string::const_iterator& i)
+   {
+-    typename std::string::const_iterator j = i;
+-    
+     std::string buf;
+     if ((i != s.end()) && (*i == '-'))
+       {
+Index: include/vaucanson/algebra/concept/series_base.hh
+--- include/vaucanson/algebra/concept/series_base.hh Wed, 12 Feb 2003 16:41:22 +0100 max (vaucanson/c/11_series_bas 1.10 600)
++++ include/vaucanson/algebra/concept/series_base.hh Wed, 19 Feb 2003 18:23:23 +0100 max (vaucanson/c/11_series_bas 1.11 600)
+@@ -87,13 +87,13 @@
+   {
+   public:
+     //! type of the implementation of weight (element of semiring).
+-    typedef typename series_traits<Self, T>::weights_value_t   weights_value_t;
++    typedef typename series_traits<Self, T>::weight_value_t   weight_value_t;
+ 
+     //! type of the implementation of free monoid element.
+     typedef typename series_traits<Self, T>::monoid_value_t    monoid_value_t;
+ 
+-    //! type of the element of the semiring (element).
+-    typedef Element<typename Self::weights_t, weights_value_t> weight_t;
++    //! type of the element of the semiring element.
++    typedef Element<typename Self::weights_t, weight_value_t> weight_t;
+ 
+     //! type of the element of the monoid.
+     typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
+@@ -102,14 +102,14 @@
+     typedef Element<Self, T>					 element_t;
+ 
+     //! returns the weight associated to a word. 
+-    weights_value_t	value_get(const monoid_value_t& m) const;
++    weight_value_t	value_get(const monoid_value_t& m) const;
+ 
+     //! returns the weight associated to a word. 
+     weight_t		get(const monoid_elt_t& m) const;
+ 
+     //! associates a weight to a word. 
+     void		value_set(const monoid_value_t& m, 
+-				  const weights_value_t& w);
++				  const weight_value_t& w);
+ 
+     //! associates a weight to a word. 
+     void		assoc(const monoid_elt_t& m, const weight_t& w);
+Index: include/vaucanson/algebra/concept/series_base.hxx
+--- include/vaucanson/algebra/concept/series_base.hxx Wed, 12 Feb 2003 16:41:22 +0100 max (vaucanson/c/10_series_bas 1.9 600)
++++ include/vaucanson/algebra/concept/series_base.hxx Wed, 19 Feb 2003 18:23:24 +0100 max (vaucanson/c/10_series_bas 1.10 600)
+@@ -77,7 +77,7 @@
+     `---------------------------------*/
+     
+     template<typename S, typename T>
+-    typename MetaElement<SeriesBase<S>, T>::weights_value_t 
++    typename MetaElement<SeriesBase<S>, T>::weight_value_t 
+     MetaElement<SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
+     { 
+       // assert(set().monoid().contains(m));
+@@ -94,7 +94,7 @@
+     template<typename S, typename T>
+     void 
+     MetaElement<SeriesBase<S>, T>::value_set(const monoid_value_t& m, 
+-						const weights_value_t& w) 
++					     const weight_value_t& w) 
+     { 
+       // assert(set().monoid().contains(m));
+       // assert(set().weights().contains(w));
+Index: include/vaucanson/algebra/concrete/free_monoid/str_words.hh
+--- include/vaucanson/algebra/concrete/free_monoid/str_words.hh Tue, 18 Feb 2003 14:40:31 +0100 yann (vaucanson/c/5_str_words. 1.10 600)
++++ include/vaucanson/algebra/concrete/free_monoid/str_words.hh Wed, 19 Feb 2003 18:23:26 +0100 max (vaucanson/c/5_str_words. 1.11 600)
+@@ -53,10 +53,6 @@
+   op_convert(SELECTOR(std::basic_string<typename A::letter_t>),
+ 	     SELECTOR(FreeMonoid<A>), const typename A::letter_t& c);
+ 
+-  template <class A>
+-  Element<FreeMonoid<A>, std::basic_string<typename A::letter_t> >
+-  op_choose(const FreeMonoid<A>& s, 
+-	    SELECTOR(std::basic_string<typename A::letter_t>));
+   
+ } // vcsn
+ 
+Index: include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx
+--- include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx Wed, 13 Nov 2002 11:30:49 +0100 yann (vaucanson/h/12_krat_exp_p 1.2 600)
++++ include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx Wed, 19 Feb 2003 18:23:27 +0100 max (vaucanson/h/12_krat_exp_p 1.3 600)
+@@ -221,7 +221,7 @@
+ 	      std::list<KRatExpToken
+     <
+       typename Element<S, T>::monoid_value_t,
+-      typename Element<S, T>::weights_value_t
++      typename Element<S, T>::weight_value_t
+     > 
+     > >
+     lex(const std::string& in, 
+@@ -232,12 +232,12 @@
+       typedef typename monoid_elt_t::set_t	      monoid_t;
+       typedef typename Element<S, T>::weight_t	      weight_t;
+       typedef typename weight_t::set_t		      weights_t;
+-      typedef typename Element<S, T>::weights_value_t weight_value_t;
++      typedef typename Element<S, T>::weight_value_t  weight_value_t;
+       typedef typename std::string::const_iterator    iterator_t;
+       typedef KRatExpToken
+ 	<
+ 	typename Element<S, T>::monoid_value_t,
+-	typename Element<S, T>::weights_value_t
++	typename Element<S, T>::weight_value_t
+ 	> 
+ 	krat_exp_token_t;
+ 
+@@ -302,14 +302,14 @@
+       typedef KRatExpToken
+       <
+ 	typename Element<S, T>::monoid_value_t,
+-	typename Element<S, T>::weights_value_t
++	typename Element<S, T>::weight_value_t
+       >						      krat_exp_token_t; 
+       typedef typename Element<S, T>::monoid_elt_t    monoid_elt_t;
+       typedef typename Element<S, T>::monoid_value_t  monoid_value_t;
+       typedef typename monoid_elt_t::set_t	      monoid_t;
+       typedef typename Element<S, T>::weight_t	      weight_t;
+       typedef typename weight_t::set_t		      weights_t;
+-      typedef typename Element<S, T>::weights_value_t weight_value_t;
++      typedef typename Element<S, T>::weight_value_t  weight_value_t;
+       typedef krat_exp_token_t			      token_t;
+       typedef std::list<krat_exp_token_t>	      token_stream_t;
+       
+@@ -479,7 +479,7 @@
+       typedef KRatExpToken
+       <
+ 	typename Element<S, T>::monoid_value_t,
+-	typename Element<S, T>::weights_value_t
++	typename Element<S, T>::weight_value_t
+       > krat_exp_token_t; 
+ 
+       std::pair<bool, 
+Index: include/vaucanson/algebra/concrete/series/krat.hh
+--- include/vaucanson/algebra/concrete/series/krat.hh Mon, 14 Oct 2002 19:31:49 +0200 yann (vaucanson/c/15_krat.hh 1.12 600)
++++ include/vaucanson/algebra/concrete/series/krat.hh Wed, 19 Feb 2003 18:23:34 +0100 max (vaucanson/c/15_krat.hh 1.13 600)
+@@ -37,7 +37,7 @@
+     struct series_traits<Series<W, M>, rat::exp<Tm, Tw> >
+     {
+       typedef Tm	monoid_value_t;
+-      typedef Tw	weights_value_t;
++      typedef Tw	weight_value_t;
+     };
+ 
+   } // algebra
+Index: include/vaucanson/algebra/concrete/series/polynoms.hh
+--- include/vaucanson/algebra/concrete/series/polynoms.hh Wed, 12 Feb 2003 16:41:22 +0100 max (vaucanson/c/17_polynoms.h 1.11 600)
++++ include/vaucanson/algebra/concrete/series/polynoms.hh Wed, 19 Feb 2003 18:23:35 +0100 max (vaucanson/c/17_polynoms.h 1.12 600)
+@@ -19,9 +19,8 @@
+ // License along with this library; if not, write to the Free Software
+ // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ 
+-
+-#ifndef ALGEBRA_POLYNOMS_HH
+-# define ALGEBRA_POLYNOMS_HH
++#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
++# define VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
+ 
+ # include <map>
+ # include <utility>
+@@ -86,7 +85,7 @@
+   struct series_traits<Series<W, M>, polynom<Tm, Tw> >
+   {
+     typedef Tm monoid_value_t;
+-    typedef Tw weights_value_t;
++    typedef Tw weight_value_t;
+   };
+ 
+     template <class Series, class Tm, class Tw>
+@@ -334,5 +333,5 @@
+ 
+ # include <vaucanson/algebra/concrete/series/polynoms.hxx>
+ 
+-#endif // ALGEBRA_POLYNOMS_HH
++#endif // VCSN_ALGEBRA_POLYNOMS_HH
+ 
+Index: include/vaucanson/algorithms/compute.hh
+--- include/vaucanson/algorithms/compute.hh Fri, 22 Nov 2002 11:04:29 +0100 yann (vaucanson/e/6_compute.hh 1.5 600)
++++ include/vaucanson/algorithms/compute.hh Wed, 19 Feb 2003 18:23:38 +0100 max (vaucanson/e/6_compute.hh 1.6 600)
+@@ -37,7 +37,7 @@
+   */
+ 
+   template<typename A, typename T, typename W>
+-  typename Element<A, T>::series_elt_t
++  typename Element<A, T>::weight_t
+   compute(const Element<A, T>& a, const W& word);
+ 
+   /*! @} */
+Index: include/vaucanson/algorithms/compute.hxx
+--- include/vaucanson/algorithms/compute.hxx Fri, 22 Nov 2002 11:04:29 +0100 yann (vaucanson/e/5_compute.hx 1.7 600)
++++ include/vaucanson/algorithms/compute.hxx Wed, 19 Feb 2003 18:23:39 +0100 max (vaucanson/e/5_compute.hx 1.8 600)
+@@ -36,16 +36,17 @@
+   //
+   //
+   template <typename A, typename auto_t, 
+-	    typename serie_t, typename input_t>
++	    typename weight_t, typename input_t>
+   void 
+   do_compute(const AutomataBase<A>& a_set,
+ 	     const auto_t&	    a,
+ 	     const input_t&	    word, 
+-	     serie_t&		    result)
++	     weight_t&		    result)
+   {
+     // FIXME: for the moment, we use large vectors because the set of hstate_t
+     // FIXME: can be sparsed. We wanted to be as general as possible.
+     // FIXME: Variants of compute will be available soon of course.
++    typedef typename auto_t::monoid_elt_t monoid_elt_t;
+ 
+     hstate_t max_hstate_t = 0;
+     for (typename auto_t::state_iterator i = a.states().begin();
+@@ -53,25 +54,26 @@
+ 	 ++i)
+       max_hstate_t = std::max(*i, unsigned(max_hstate_t));
+ 
+-    std::vector<serie_t>		v1(max_hstate_t + 1);
+-    std::vector<serie_t>		v2(max_hstate_t + 1);
++    std::vector<weight_t>		v1(max_hstate_t + 1);
++    std::vector<weight_t>		v2(max_hstate_t + 1);
+     std::list<hedge_t>			delta_ret;
+-    const typename serie_t::set_t	&serie_set = result.set();
+-
++    const typename weight_t::set_t	&semiring = a.series().weights();
++    weight_t zero = semiring.zero(SELECT(typename weight_t::value_t));
++    typename auto_t::monoid_elt_t empty;
+     
+     /*-------------------.
+     | Initialize the set |
+     `-------------------*/
+-     std::fill(v1.begin(), v1.end(), 
+-	       serie_set.zero(SELECT(typename serie_t::value_t)));
++    std::fill(v1.begin(), v1.end(), zero);
+ 
+     /*--------.
+     | Initial |
+     `--------*/
++    // FIXME: here we assume that there is only weight in the initial app.
+     for (typename auto_t::initial_iterator i = a.initial().begin();
+ 	 i != a.initial().end();
+ 	 ++i)
+-      v1[*i] = a.get_initial(*i);
++      v1[*i] = a.get_initial(*i).get(empty);
+ 
+     /*------------.
+     | Computation |
+@@ -80,10 +82,10 @@
+ 	 e != word.end();
+ 	 ++e)
+       {
+- 	std::fill(v2.begin(), v2.end(), 
+- 		  serie_set.zero(SELECT(typename serie_t::value_t)));
++	//	std::cout << "l : " << *e << std::endl;
++ 	std::fill(v2.begin(), v2.end(), zero);
+ 	for (unsigned i = 0; i < v1.size(); ++i)
+-	  if (v1[i] != serie_set.zero(SELECT(typename serie_t::value_t)))
++	  if (v1[i] != zero)
+ 	  {
+ 	    // FIXME : use the other version of delta to be more efficient !
+ 	    delta_ret.clear();
+@@ -92,7 +94,7 @@
+ 		   delta_ret.begin();
+ 		 l != delta_ret.end();
+ 		 ++l)
+-	      v2[a.aim_of(*l)] += v1[i] * a.label_of(*l) ;
++	      v2[a.aim_of(*l)] += v1[i] * a.serie_of(*l).get(monoid_elt_t(*e));
+ 	  }
+ 	std::swap(v1, v2);
+       }
+@@ -101,18 +103,18 @@
+     | Final and Result |
+     `-----------------*/
+     for (unsigned i = 0; i < v1.size(); ++i)
+-      if (v1[i] != serie_set.zero(SELECT(typename serie_t::value_t)))
+-	result += v1[i] * a.get_final(i);    
++      if (v1[i] != zero)
++	result += v1[i] * a.get_final(i).get(empty);    
+   }
+ 
+   /*--------.
+   | Wrapper |
+   `--------*/
+   template<typename A, typename T, typename W>
+-  typename Element<A, T>::series_elt_t
++  typename Element<A, T>::weight_t
+   compute(const Element<A, T>& a, const W& word)
+   {
+-    typename Element<A, T>::series_elt_t ret;
++    typename Element<A, T>::weight_t ret;
+ 
+     do_compute(a.set(), a, word, ret);
+     return ret;
+Index: include/vaucanson/algorithms/trim.hh
+--- include/vaucanson/algorithms/trim.hh Fri, 22 Nov 2002 11:04:29 +0100 yann (vaucanson/f/5_trim.hh 1.5 600)
++++ include/vaucanson/algorithms/trim.hh Wed, 19 Feb 2003 10:37:49 +0100 max (vaucanson/f/5_trim.hh 1.5 600)
+@@ -31,7 +31,7 @@
+   //! Returns a useful states of the automaton (start reachable and final co-).
+   template<typename A, typename T>
+   std::set<hstate_t>
+-  useful_states(const Element<A, T>& a);
++  usefull_states(const Element<A, T>& a);
+ 
+   //! Return a fresh automaton in which non useful states are removed.
+   template<typename A, typename T>
+Index: include/vaucanson/algorithms/trim.hxx
+--- include/vaucanson/algorithms/trim.hxx Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/f/0_trim.hxx 1.3 600)
++++ include/vaucanson/algorithms/trim.hxx Wed, 19 Feb 2003 18:47:42 +0100 max (vaucanson/f/0_trim.hxx 1.3 600)
+@@ -44,7 +44,7 @@
+   //
+   template <class A_, typename Auto_>
+   std::set<hstate_t>
+-  do_useful_states(const AutomataBase<A_>& a_set,
++  do_usefull_states(const AutomataBase<A_>& a_set,
+ 		   const Auto_&		   a)
+   {
+     std::set<hstate_t> start = start_reachable_states(a);
+@@ -58,16 +58,16 @@
+ 
+   template<typename A, typename T>
+   std::set<hstate_t>
+-  useful_states(const Element<A, T>& a)
++  usefull_states(const Element<A, T>& a)
+   {
+-    return do_useful_states(a.set(), a);
++    return do_usefull_states(a.set(), a);
+   }
+ 
+   template<typename A, typename T>
+   Element<A, T>
+   trim(const Element<A, T>& a)
+   {
+-    return auto_extract(a, useful_states(a));
++    return auto_extract(a, usefull_states(a));
+   }
+ 
+ } // vcsn
+Index: include/vaucanson/algorithms/union.hxx
+--- include/vaucanson/algorithms/union.hxx Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/d/41_union.hxx 1.6 600)
++++ include/vaucanson/algorithms/union.hxx Wed, 19 Feb 2003 18:23:43 +0100 max (vaucanson/d/41_union.hxx 1.7 600)
+@@ -76,7 +76,6 @@
+ 	     d != aim.end();
+ 	     ++d)
+ 	  {
+-	    hedge_t new_edge = 
+ 	      lhs.add_edge(states_map[rhs.origin_of(*d)],
+ 			   states_map[rhs.aim_of(*d)],
+ 			   rhs.label_of(*d));
+Index: include/vaucanson/automata/concept/automata_base.hh
+--- include/vaucanson/automata/concept/automata_base.hh Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/d/12_automata_b 1.11 600)
++++ include/vaucanson/automata/concept/automata_base.hh Wed, 19 Feb 2003 18:23:45 +0100 max (vaucanson/d/12_automata_b 1.12 600)
+@@ -18,8 +18,8 @@
+ // License along with this library; if not, write to the Free Software
+ // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ 
+-#ifndef AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+-# define AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
++#ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
++# define VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+ 
+ # include <iterator>
+ # include <vaucanson/automata/concept/handlers.hh>
+@@ -100,10 +100,16 @@
+     /*! type of the free monoid. */
+     typedef typename series_t::monoid_t			      monoid_t;
+ 
++    /*! type of the free monoid element. */
++    typedef typename series_elt_t::monoid_elt_t		      monoid_elt_t;
++
+     /*! type of the weights set. */
+     typedef typename series_t::weights_t		      weights_t;
+ 
+-    /*! type of additional information that is aggregate to the automaton. */
++    /*! type of the free monoid element. */
++    typedef typename series_elt_t::weight_t		      weight_t;
++
++    /*! type of additional information that is aggregated to the automaton. */
+     typedef typename automaton_traits<T>::tag_t		      tag_t;
+ 
+     /*! type of the label of the automaton. can be different from
+@@ -391,4 +397,4 @@
+ 
+ # include <vaucanson/automata/concept/automata_base.hxx>
+ 
+-#endif // AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
++#endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+Index: include/vaucanson/automata/concept/kinds.hh
+--- include/vaucanson/automata/concept/kinds.hh Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/d/16_kinds.hh 1.9 600)
++++ include/vaucanson/automata/concept/kinds.hh Wed, 19 Feb 2003 18:23:47 +0100 max (vaucanson/d/16_kinds.hh 1.10 600)
+@@ -228,7 +228,6 @@
+     hedge_t add_letter_edge(hstate_t from, hstate_t to,
+ 			    const L& l);
+ 
+-
+     template <typename OutputIterator, typename L>   
+     void letter_delta(OutputIterator	res, 
+ 		      hstate_t		from, 
+@@ -236,7 +235,7 @@
+ 		      delta_kind::edges k = delta_kind::edges()) const;
+ 
+     template <typename Container, typename L>
+-    void letter_delta(Container&	 dst, 
++    void letter_deltac(Container&	 dst, 
+ 		       hstate_t		 from, 
+ 		       const L&		 l, 
+ 		       delta_kind::edges k = delta_kind::edges()) const;
+@@ -248,7 +247,7 @@
+ 		      delta_kind::edges k = delta_kind::edges()) const;
+ 
+     template <typename Container, typename L>
+-    void letter_rdelta(Container&	 dst, 
++    void letter_rdeltac(Container&	 dst, 
+ 		       hstate_t		 from, 
+ 		       const L&		 l, 
+ 		       delta_kind::edges k = delta_kind::edges()) const;
+@@ -260,7 +259,7 @@
+ 		      delta_kind::states k) const;
+ 
+     template <typename Container, typename L>
+-    void letter_delta(Container&	  dst, 
++    void letter_deltac(Container&	  dst, 
+ 		       hstate_t		  from, 
+ 		       const L&		  l, 
+ 		       delta_kind::states k) const;
+@@ -272,7 +271,7 @@
+ 		       delta_kind::states k) const;
+     
+     template <typename Container, typename L>
+-    void letter_rdelta(Container&	   dst, 
++    void letter_rdeltac(Container&	   dst, 
+ 			hstate_t	   from, 
+ 			const L&	   l, 
+ 			delta_kind::states k) const;
+Index: include/vaucanson/automata/concept/kinds.hxx
+--- include/vaucanson/automata/concept/kinds.hxx Mon, 25 Nov 2002 12:14:02 +0100 yann (vaucanson/d/15_kinds.hxx 1.8 600)
++++ include/vaucanson/automata/concept/kinds.hxx Wed, 19 Feb 2003 18:23:48 +0100 max (vaucanson/d/15_kinds.hxx 1.9 600)
+@@ -207,8 +207,8 @@
+       typedef typename Element
+ 	<Monoid, typename Label::second_type>::const_iterator letter_iterator;
+       
+-      letter_iterator b = op_begin(m_.get(), label.second);
+-      letter_iterator e = op_end(m_.get(), label.second);
++      letter_iterator b = op_begin_const(m_.get(), label.second);
++      letter_iterator e = op_end_const(m_.get(), label.second);
+       
+       return std::find(b, e, l_) != e;
+     }
+@@ -226,7 +226,7 @@
+     const Series& s = auto_self().series();
+     
+     series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
+-    return see *= weight_t(s.weights(), label.first);
++    return se *= weight_t(s.weights(), label.first);
+   }
+   
+   template<typename Self, typename Series, typename SeriesT, typename LabelT>
+@@ -318,12 +318,15 @@
+     template<typename L>
+     hedge_t 
+     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
+-    add_letter_edge(hstate_t from, hstate_t to,
++    add_letter_edge(hstate_t from, 
++		    hstate_t to,
+ 		    const L& l)
+     { 
+       return auto_self().add_edge
+-	(from, to, 
+-	 std::make_pair(identity_value(SELECT(weights_t), SELECT(typename weight_t::value_t)),
++	(from, 
++	 to, 
++	 std::make_pair(identity_value(SELECT(weights_t), 
++				       SELECT(typename weight_t::value_t)),
+ 			monoid_elt_t(auto_self().series().monoid(), l).value()));
+     }
+ 
+@@ -343,7 +346,7 @@
+     template<typename Container, typename L>								\
+     void                                                                                         \
+     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::                                 \
+-    letter_ ## Name (Container &dst, hstate_t from, const L& l, Kind_type k) const		\
++    letter_ ## Name ##c(Container &dst, hstate_t from, const L& l, Kind_type k) const		\
+     {													\
+       std::insert_iterator<Container> i(dst, dst.begin());						\
+       return auto_self().value()-> Name ## _ ## Type							\
+@@ -368,7 +371,7 @@
+     template<typename Self, typename Series, typename SeriesT, typename LabelT>
+     const Self& 
+     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
+-    auto_self() const { return static_cast<Self&>(*this); }
++    auto_self() const { return static_cast<const Self&>(*this); }
+ 
+ }
+ 
+Index: include/vaucanson/automata/concrete/manylinks_states.hh
+--- include/vaucanson/automata/concrete/manylinks_states.hh Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/c/36_manylinks_ 1.6 600)
++++ include/vaucanson/automata/concrete/manylinks_states.hh Thu, 20 Feb 2003 02:31:54 +0100 max (vaucanson/c/36_manylinks_ 1.6 600)
+@@ -185,14 +185,16 @@
+   | State iterator |
+   `---------------*/
+   template<typename State, state_link_type kind>
+-  class state_iterator /* : public std::iterator<std::bidirectional_iterator_tag,
++  class state_iterator  : public std::iterator<std::bidirectional_iterator_tag,
+ 					     unsigned,
+ 					     ptrdiff_t,
+ 					     const unsigned*,
+-					     const unsigned&> */
++					       const unsigned&>
+   {
+   public:
+     
++    
++
+     state_iterator() : p_(0) {}
+     state_iterator(const state_iterator& other)
+       : p_(other.p_) 
+Index: include/vaucanson/misc/container_ops.hxx
+--- include/vaucanson/misc/container_ops.hxx Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/34_container_ 1.5 600)
++++ include/vaucanson/misc/container_ops.hxx Wed, 19 Feb 2003 18:23:49 +0100 max (vaucanson/34_container_ 1.6 600)
+@@ -37,6 +37,13 @@
+   }
+   
+   template<typename S, typename T>
++  typename T::const_iterator op_begin(const Structure<S>& s, 
++				      const T& v)
++  { 
++    return v.begin(); 
++  }
++  
++  template<typename S, typename T>
+   typename T::iterator op_end(const Structure<S>& s, 
+ 			      T& v)
+   { 
+@@ -44,6 +51,13 @@
+   }
+ 
+   template<typename S, typename T>
++  typename T::const_iterator op_end(const Structure<S>& s, 
++				    const T& v)
++  { 
++    return v.end(); 
++  }
++
++  template<typename S, typename T>
+   typename T::const_iterator op_begin_const(const Structure<S>& s,
+ 				      const T& v)
+   { 
+@@ -51,7 +65,7 @@
+   }
+ 
+   template<typename S, typename T>
+-  typename T::const_iterator op_end(const Structure<S>& s, 
++  typename T::const_iterator op_end_const(const Structure<S>& s, 
+ 				    const T& v)
+   { 
+     return v.end(); 
+@@ -72,14 +86,14 @@
+   }
+ 
+   template<typename S, typename T>
+-  typename T::const_reverse_iterator op_rbegin(const Structure<S>& s,
++  typename T::const_reverse_iterator op_rbegin_const(const Structure<S>& s,
+ 					       const T& v)
+   { 
+     return v.rbegin(); 
+   }
+ 
+   template<typename S, typename T>
+-  typename T::const_reverse_iterator op_rend(const Structure<S>& s,
++  typename T::const_reverse_iterator op_rend_const(const Structure<S>& s,
+ 					     const T& v)
+   { 
+     return v.rend(); 
+Index: Makefile.am
+--- Makefile.am Thu, 13 Feb 2003 09:23:29 +0100 yann (vaucanson/48_Makefile.a 1.6 600)
++++ Makefile.am Wed, 19 Feb 2003 18:23:50 +0100 max (vaucanson/48_Makefile.a 1.7 600)
+@@ -5,7 +5,7 @@
+ 
+ AUTOMAKE_OPTIONS= foreign 1.6
+ SUBDIRS= include src doc
+-EXTRA_DIST=THANKS README LICENCE ChangeLog tools/scandefs.pl
++EXTRA_DIST=THANKS README LICENCE ChangeLog tools/scandefs.pl vcsn.m4
+ 
+ .PHONY: doc
+ 
+Index: include/vaucanson/tools/usual_macros.hh
+--- include/vaucanson/tools/usual_macros.hh Mon, 27 Jan 2003 11:34:51 +0100 yann (vaucanson/h/40_usual_macr 1.1 600)
++++ include/vaucanson/tools/usual_macros.hh Wed, 19 Feb 2003 18:23:52 +0100 max (vaucanson/h/40_usual_macr 1.2 600)
+@@ -92,7 +92,7 @@
+ 	 ++S)
+ 
+ #define for_each_initial_state(S, A) \
+-    for (initial_iterator S = A.inital().begin(); 	\
++    for (initial_iterator S = A.initial().begin(); 	\
+ 	 S != A.initial().end(); 			\
+ 	 ++S)
+ 
+Index: doc/tutorial/tutorial.tex
+--- doc/tutorial/tutorial.tex Tue, 18 Feb 2003 14:40:31 +0100 yann (vaucanson/h/43_tutorial.t 1.5 600)
++++ doc/tutorial/tutorial.tex Wed, 19 Feb 2003 18:23:52 +0100 max (vaucanson/h/43_tutorial.t 1.6 600)
+@@ -404,30 +404,321 @@
+ To obtain all the services of a word, please look at
+ algebra/free\_monoid/concept/freemonoid\_base.hh.
+ 
++How to get the neutral element of the semiring (the empty word) ? It
++is not the role of an element to provide it, the set is the only owner
++of this information. Yet, the set is not aware of the implementation
++to choose to instantiate the neutral element ! 
++
++The solution is to precise to the set the implementation we want. To
++do that, we use a tricky typed null pointer:
++
++\begin{code}[Get the empty string]
++free_monoid.identity((std::string*)(0));   // horrible but it works.
++free_monoid.identity(SELECT(std::string)); // macro to hide it.
++identity_as<std::string>::of(free_monoid); // solution using a template function.
++\end{code}
++
+ \subsection{Semiring}
+ 
+-To characterize some words of the language, we can 
++\begin{tabular}%
++{ll}
++\hline \\
++concept: & \textbf{Semiring}  \\
++concerned files: & algebra/concept/semiring\_base.h[h, xx] \\
++                 & algebra/concrete/semiring/* \\
++\hline 
++\end{tabular}
++
++To characterize some words of the language, we usually use element
++from a semiring. A semiring is a set which provides a multiplication,
++an addition and neutral elements for each of these operations.
++Consequently, we can compute the ``score'' of every words in function of
++these primitive operations.
++
++The unweighted finite state machines are also called ``acceptors''. In
++fact, there are just weighted with boolean. Consequently, we can
++instantiate the Boolean semiring:
++
++\begin{code}[The Boolean semiring]
++BooleanSemiring semiring;
++\end{code}
++
++If you look at algebra/concept/boolean\_semiring.hh, you will see that
++the BooleanSemiring is an empty class. Indeed, there is no dynamic
++data associated to it: it is only present for static purpose.
++
++A straightforward implementation of a boolean weight is the builtin
++``bool''. Vaucanson provides such an implementation:
++
++\begin{code}[A boolean in action !]
++Element<BooleanSemiring, bool> t = true;
++Element<BooleanSemiring, bool> f = false;
++std::cout << t * f << std::endl;
++std::cout << t + f << std::endl;
++\end{code}
++
++As with free monoid, particular elements can be retrieved using the set:
++
++\begin{code}[Get the identity and the zero of the semiring]
++semiring.identity(SELECT(bool));
++semiring.identity((bool*)(0));
++zero_as<bool>::of(semiring);
++\end{code}
++
++Some other semirings are useful for weighted automaton. For example,
++Vaucanson provides the MaxTropical semiring. An element of such a
++semiring can be an integer encoded as an 'int' builtin:
++
++\begin{code}[(Z, Max, +) tropical semiring]
++MaxTropical semiring;
++Element<MaxTropical, int> a = 1;
++Element<MaxTropical, int> b = zero_as<int>::of(semiring);
++Element<MaxTropical, int> c = identity_as<int>::of(semiring);
++
++cout << a << endl;
++cout << b << endl;
++cout << c << endl;
++
++\end{code}
++
++A really important operation is the ``star'' of a semiring element x
++that is defined by:
++
++\begin{center}
++\begin{math}
++x^{\star} = \sum_{k=0}^{\infty}{x^k}
++\end{math}
++\end{center}
++The star is useful when you want to symbolize a non bounded computing
++of weight (for example, when you want to associate a weight to a star
++regular expression). Yet, the star operation is not defined everywhere.
++Consequently, Vaucanson provides two services star() and is\_stareable():
++
++\begin{code}[The star of a semiring element]
++Element<MaxTropical, int> a = 1;
++Element<MaxTropical, int> b = -1;
++Element<MaxTropical, int> z = zero_as<int>::of(semiring);
++Element<MaxTropical, int> i = identity_as<int>::of(semiring);
++cout << a.is_stareable() << std::endl;
++cout << b.is_stareable() << std::endl;
++cout << z.is_stareable() << std::endl;
++cout << i.is_stareable() << std::endl;
++cout << z.star() << std::endl;
++\end{code}
+ 
+ \subsection{Series}
+ 
++\begin{tabular}%
++{ll}
++\hline \\
++concept: & \textbf{Series}  \\
++concerned files: & algebra/concept/series\_base.h[h, xx] \\
++                 & algebra/concrete/series/* \\
++\hline 
++\end{tabular}
++
++We want to manipulate the mapping between words and weights as object.
++This kind of object is called formal series. Vaucanson enables the
++construction of series element. 
++
++The set of series is constructed from a free monoid and a semiring:
++
++\begin{code}[The set of series]
++Series<BooleanSemiring, FreeMonoid<Alphabet> > series; 
++\end{code}
++
++Then, we can implement a finite serie using a finite support map.
++Vaucanson provides such an implementation through the polynoms class:
++
++\begin{code}[A serie]
++Element<BooleanSeries, polynom<std::string, bool> > serie(series);
++\end{code}
++
++FIXME: the constructor is necessary !
++
++As a map, a serie can associate a weight to a word:
++
++\begin{code}[Serie's services]
++serie.assoc(``foo'') = true;
++cout << serie.get(``foo'') << endl;
++cout << serie.get(``baz'') << endl;
++\end{code}
++
++The set of series can be seen as a semiring, then a serie inherits all
++the services of a semiring element:
++
++\begin{code}[A serie as a semiring]
++serie.star();
++Element<BooleanSeries, polynom<std::string, bool> > serie2(series);
++serie2.assoc(``a'') = true;
++Element<BooleanSeries, polynom<std::string, bool> > serie3(series);
++serie3.assoc(``a'') = true;
++cout << serie1 + serie2 << endl;
++cout << serie1 + serie3 << endl;
++cout << serie2 * serie1 << endl;
++cout << serie1.is_stareable() << endl;
++\end{code}
++
+ \subsection{Rational expression}
+ 
++The polynom implementation does not manage infinite series. Indeed, we
++can't denote such serie in an extensional way. Yet, a particular class
++of infinite series can be expressed using a finite formalism: the
++rationale expressions. The Kleene theorem says that this class of
++series is exactly what can be recognized with a finite state machine.
++
++Vaucanson enables us to define such series:
++
++\begin{code}[A rational expression]
++Element<BooleanSeries, polynom<std::string, bool> > serie(series);
++series = "a";
++Element<BooleanSeries, polynom<std::string, bool> > serie2(series);
++series2 = "ab";
++Element<BooleanSeries, polynom<std::string, bool> > serie3(series);
++series3 = "b";
++cout << serie1 + serie2 << endl;
++cout << serie1 + serie3 << endl;
++cout << serie2 * serie1 << endl;
++cout << serie1.is_stareable() << endl;
++cout << (serie1.star() + serie2) * serie3 << endl; 
++\end{code}
++
++FIXME: Parler du pattern matching !
++
+ \section{Automaton}
+ 
+-\subsection{Simple usage}
++FIXME: definition automate.
++
++An automaton is both a theorical and a computational object.
++Therefore, the services must be both general and atomic as possible. 
++
++However, the underlying data structure can be more or less adapted to each of these trends. For example, a graph with letter as label is a great structure for computation but to be seen as series the label must be enriched. At the contrary, a graph with series as label will be a great theorical object but will be heavy in memory and at computation.
++
++A basic data structure must be enough to define the primitive services but some sugar is necessary to help the user. FIXME: exemple !
++
++Finally, automaton are big structures, they must be reference-counted.
++
++\subsection{Instantiating an automaton}
++
++\begin{tabular}%
++{ll}
++\hline \\
++concept: & \textbf{Automaton}  \\
++concerned files: & automata/concept/automata\_base.h[h, xx] \\
++\hline 
++\end{tabular}
++
++A set of automaton is characterized by a series set. So, first, we have to define it:
++
++\begin{code}[The set of automata]
++Automata automata_set(series);
++cout << automata_set.series().monoid().alphabet() << endl;
++\end{code}
++
++The implementation of an automaton is the composition of 3 three things:
++
++\begin{itemize}
++\item a kind
++\item an implementation adapter
++\item a reference counter
++\end{itemize}
++
++The kind is parameterized by the type of the automaton label and adapt final services consequently. The implementation adapter is responsible of sugar. The reference counter suppress unuseful copy.
++
++\subsubsection{Structure operations}
++
++As a graph, an automaton is composed of states and edges. Usually, handlers are used to represent nodes and edges. In fact, handlers are comparable to unsigned integer. 
++
++The automaton is able to create and remove nodes and edges :
++
++\begin{code}[Structural operations]
++hstate_t s1 = a.add_state();
++hstate_t s2 = a.add_state();
++hedge_t e1 = a.add_letter_edge(s1, s2, 'a');
++hedge_t e2 = a.add_letter_edge(s1, s2, 'b');
++hstate_t s3 = a.add_state();
++hedge_t e3 = a.add_edge(s1, s3, 'a');
++hedge_t e3 = a.add_spontaneous(s1, s3);
++a.del_state(s3);
++a.del_edge(s3);
++\end{code}
++
++When you remove a state/edge, the other handlers are not updated.
++
++\subsubsection{Delta function}
++
++The delta function represents the outer transitions associated to a state. However, there are many ways of viewing this set. 
++
++\paragraph{what kind of information to retrieve ?}
++
++The last argument of delta is the type of the retrieve information. It can be hstate\_t or hedge\_t.
++
++\paragraph{where to store the information ?}
++
++Their are two kinds of return storing: you can use a standard container or an output iterator. FIXME: other kind of DELTA with two iterators !
++
++\paragraph{what criteria to filter transition ?}
++
++The simplest way to select transitions is to get them all. Another way is quite natural: you can specify a letter that must matches with the label. The last one is to use an object function that represents the criteria as an operator() with a label as argument.
++
++\subsection{Standard services}
++
++The set of states and the set of edges are provided to permit to iterate over the states and the edges. 
++
++The initial and the final applications are modelised using mapping. 
++
++Additional information can be attached to  the nodes or to the edges: this is what is called Tag in Vaucanson.
++
++\subsection{Standard macros}
++
++To help the user when writing automaton algorithms, a set of macros is provided.
++
++\subsection{Usage example}
++
++FIXME: fusion max !
+ 
+ \section{Algorithms}
+ 
++\subsection{General form}
++
++\subsection{Manipulation}
++
++\subsection{Determinisation}
++
++\subsection{Minimisation}
++
++\section{Grammar inference}
++
++MAX !
++
+ \section{Your 'grep'}
+ 
++'grep' is a well known unix tools used to look for pattern in a text. The pattern is described as a rationale expression: if a substring of the line is in the language denoted by the expression, the line is print in the output.
++
++A naive implementation of grep uses an automaton of the form:
++
+ \subsection{From a regular expression to an automaton}
+ 
+-\subsection{Speed}
++There exists many algorithms to construct an automaton that recognizes the language denoted by an expression. The most popular is the Thompson's one.
++
++\begin{code}[A naive grep]
++
++\end{code}
++
++\subsection{Speed consideration}
++
++Do not be pessimistic, we can improve our naive implementation of grep.
++
++\paragraph{What implementation ?}
++
++\paragraph{Algorithm's refinement ...}
+ 
+ \subsection{Multiplicity in action}
+ 
+ \section{Play with multiplicity}
+ 
++Imagine now that we want to determine the shortest length of the pattern that has been matched.
++
+ \section{Advanced use}
+ 
+ \subsection{Extending Vaucanson}
+Index: log
+--- log Thu, 13 Feb 2003 18:11:44 +0100 max (vaucanson/h/46_log 1.1 600)
++++ log Thu, 20 Feb 2003 16:20:08 +0100 max (vaucanson/h/46_log 1.1 600)
+@@ -1,143 +1,629 @@
+-Index: 0.151/ChangeLog
+-0a1,6
+-> 2003-02-13  Maxime Rey  <max@lrde.epita.fr>
+-> 
+-> 	* /include/vaucanson/algebra/concrete/letter/range.hxx :
+-> 	static_ranged work now
+-> 	* doc/tutorial/tutorial.tex: upgrade
+-> 
+-Index: 0.151/include/vaucanson/algebra/concrete/letter/range.hxx
+-35,36c35,38
+-<       Interval::check(v);
+-<       value_ = v;
+----
+->       if (Interval::check(v))
+-> 	value_ = v;
+->       else
+-> 	value_ = Interval::from();
+-Index: 0.151/doc/tutorial/tutorial.tex
+-213c213
+-< An element of the alphabet set can be implemented in a lot of
+----
+-> An element of the alphabet set (so an alphabet) can be implemented in a lot of
+-217c217,329
+-< % FIXME: example.
+----
+-> \paragraph{Example 1 (dynamical alphabet)}
+-> 
+-> \paragraph{Type Creation} 
+-> First we have to precise wich kind of letter we wish manipulate inside our 
+-> futur alphabet. You can use the builtins types of C/C++ (like char, int, ...)
+-> or use more specific types proposed in Vaucanson. To do that, one trivial
+-> typedef be enough :
+-> 
+-> \begin{verbatim}
+-> typedef char Letter;
+-> \end{verbatim}
+-> 
+-> in order to have an alphabet of char, or we can type : 
+-> 
+-> \begin{verbatim}
+-> typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
+-> \end{verbatim}
+-> 
+-> in order to have a more specific kind of symbols inside your alphabet. 
+-> If you choose this last option, symbols can only be letters between 'a'
+-> and 'z', nothing more.
+-> 
+-> Then we have to create the type of set of alphabets inside which we will 
+-> manipulate one of them. We can do this very naturally :
+-> 
+-> \begin{verbatim}
+-> typedef SetAlphabets<Letter>  Alphabets;
+-> \end{verbatim}
+-> 
+-> Lastly, we can create the type of the alphabet we will effectively use,
+-> with the Element pattern :
+-> 
+-> \begin{verbatim}
+-> typedef Element<Alphabets, std::set<Letter> >  Alphabet;
+-> \end{verbatim}
+-> 
+-> This previous should be understand like : ``an element of the set of all
+-> alphabets, implemented by a set of Letter''.
+-> In fact this code is already present inside Vaucanson, more exactly inside
+-> a file named ``predefs.hh'' :
+-> 
+-> \begin{verbatim}
+-> ==============================================================================
+-> 
+->  namespace small_alpha_letter {
+->       
+->       typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
+->       typedef SetAlphabets<Letter>				   Alphabets;
+->       typedef Element<Alphabets, std::set<Letter> >		   Alphabet;
+-> 
+->     } // small_alpha_letter
+-> 
+->     namespace char_letter {
+-> 
+->       typedef SetAlphabets<char>				   Alphabets;
+->       typedef Element<Alphabets, std::set<char> >		   Alphabet;
+-> 
+->     } // char_letter
+-> 
+->     namespace int_letter {
+-> 
+->       typedef SetAlphabets<int>					   Alphabets;
+->       typedef Element<Alphabets, std::set<int> >		   Alphabet;
+-> 
+->     } // int_letter
+-> 
+-> ==============================================================================
+-> \end{verbatim}
+-> 
+-> You have only to choose the right namespace for your work, or create a new.
+-> Next a short example of alphabet manipulation :
+-> 
+-> \begin{verbatim}
+-> ==============================================================================
+-> 
+->   using namespace vcsn;
+->   using namespace algebra;
+->   using namespace small_alpha_letter;
+->   
+->   using std::cout;
+->   using std::endl;
+->   
+->   Alphabet A;
+->   
+->   Letter a('a');
+->   
+->   A.insert(a);
+->   A.insert(Letter('b'));
+->   
+->   cout << "Size of alphabet : "
+->        << A.size() << endl;                // return 2
+->   
+->   
+->   cout << "Is \'a\' inside alphabet ? (0 or 1) : "
+->        << A.contains('a') << endl;         //return true
+-> 
+->   cout << "Is \'1\' inside alphabet ? (0 or 1) : "
+->        << A.contains('1') << endl;         //return false
+->   
+->   
+->   cout << "element of alphabet are : ";
+->   for (Alphabet::iterator i = A.begin(); i != A.end(); i++)
+->     cout << *i << " ";
+->   cout << endl;
+->   
+->   cout << "random sequence of 10 symbols of alphabet : ";
+->   for (unsigned i = 0; i < 10; i++)
+->     cout << A.choose() << " ";
+->   cout << endl;
+->        
+-> ==============================================================================
+-> \end{verbatim}
+-> 
+-220a333,336
+-> Now we use an algebraic structure called a free moinoid. It is the set of
+-> words we can represent with an alphabet (a collection of symbols) and
+-> a specific operation. 
+-> 
++
++Index: ChangeLog
++from  +2003-02-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
++(0.160)
++	* src/demos/vgrep/vgrep.cc: New.
++	* src/demos/Makefile.am: New.
++	* src/demos/vgrep/Makefile.am: New.
++	* configure.ac: Generate them.
++	* include/vaucanson/algebra/concept/semiring_base.hxx:
++	Remove unused variable.
++	* include/vaucanson/automata/concept/automata_base.hh,
++	* include/vaucanson/algebra/concept/series_base.hh,
++	* include/vaucanson/algebra/concept/series_base.hxx,
++	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx	
++	* include/vaucanson/algebra/concrete/series/krat.hh,	
++	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh,	
++	* include/vaucanson/algebra/concrete/series/polynoms.hh:
++	Rename "weights_value_t" to "weight_value_t".
++	* include/vaucanson/algorithms/compute.hh: Return weight_t.
++	* include/vaucanson/algorithms/compute.hxx: Implement this change.
++	* include/vaucanson/algorithms/union.hxx: Remove unused variable.
++
++	* include/vaucanson/automata/concept/kinds.hh: Fix minor bug.
++	* include/vaucanson/automata/concept/kinds.hxx: Idem.
++	* include/vaucanson/misc/container_ops.hxx: Fix op_begin const version.
++	* Makefile.am: distribute vcsn.m4
++	* include/vaucanson/tools/usual_macros.hh (for_each_initial_state):
++	Fix a typing error.
++	* doc/tutorial/tutorial.tex: Update.
++
++Index: configure.ac
++--- configure.ac Thu, 13 Feb 2003 09:23:29 +0100 yann (vaucanson/47_configure. 1.6.1.14 600)
+++++ configure.ac Wed, 19 Feb 2003 18:23:16 +0100 max (vaucanson/47_configure. 1.6.1.15 600)
++@@ -52,6 +52,8 @@
++ 	src/tests/sanity/Makefile
++ 	src/tests/tests-suites/Makefile
++ 	src/tests/bin/Makefile
+++	src/demos/Makefile
+++	src/demos/vgrep/Makefile
++ 	doc/Makefile
++ 	doc/tutorial/Makefile
++         doc/doc.doxy	
++Index: include/vaucanson/algebra/concept/semiring_base.hxx
++--- include/vaucanson/algebra/concept/semiring_base.hxx Mon, 04 Nov 2002 10:14:55 +0100 yann (vaucanson/b/15_semiring_b 1.4 600)
+++++ include/vaucanson/algebra/concept/semiring_base.hxx Wed, 19 Feb 2003 18:23:21 +0100 max (vaucanson/b/15_semiring_b 1.5 600)
++@@ -108,8 +108,6 @@
++ 	   const std::string&			 s, 
++ 	   typename std::string::const_iterator& i)
++   {
++-    typename std::string::const_iterator j = i;
++-    
++     std::string buf;
++     if ((i != s.end()) && (*i == '-'))
++       {
++Index: include/vaucanson/algebra/concept/series_base.hh
++--- include/vaucanson/algebra/concept/series_base.hh Wed, 12 Feb 2003 16:41:22 +0100 max (vaucanson/c/11_series_bas 1.10 600)
+++++ include/vaucanson/algebra/concept/series_base.hh Wed, 19 Feb 2003 18:23:23 +0100 max (vaucanson/c/11_series_bas 1.11 600)
++@@ -87,13 +87,13 @@
++   {
++   public:
++     //! type of the implementation of weight (element of semiring).
++-    typedef typename series_traits<Self, T>::weights_value_t   weights_value_t;
+++    typedef typename series_traits<Self, T>::weight_value_t   weight_value_t;
++ 
++     //! type of the implementation of free monoid element.
++     typedef typename series_traits<Self, T>::monoid_value_t    monoid_value_t;
++ 
++-    //! type of the element of the semiring (element).
++-    typedef Element<typename Self::weights_t, weights_value_t> weight_t;
+++    //! type of the element of the semiring element.
+++    typedef Element<typename Self::weights_t, weight_value_t> weight_t;
++ 
++     //! type of the element of the monoid.
++     typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
++@@ -102,14 +102,14 @@
++     typedef Element<Self, T>					 element_t;
++ 
++     //! returns the weight associated to a word. 
++-    weights_value_t	value_get(const monoid_value_t& m) const;
+++    weight_value_t	value_get(const monoid_value_t& m) const;
++ 
++     //! returns the weight associated to a word. 
++     weight_t		get(const monoid_elt_t& m) const;
++ 
++     //! associates a weight to a word. 
++     void		value_set(const monoid_value_t& m, 
++-				  const weights_value_t& w);
+++				  const weight_value_t& w);
++ 
++     //! associates a weight to a word. 
++     void		assoc(const monoid_elt_t& m, const weight_t& w);
++Index: include/vaucanson/algebra/concept/series_base.hxx
++--- include/vaucanson/algebra/concept/series_base.hxx Wed, 12 Feb 2003 16:41:22 +0100 max (vaucanson/c/10_series_bas 1.9 600)
+++++ include/vaucanson/algebra/concept/series_base.hxx Wed, 19 Feb 2003 18:23:24 +0100 max (vaucanson/c/10_series_bas 1.10 600)
++@@ -77,7 +77,7 @@
++     `---------------------------------*/
++     
++     template<typename S, typename T>
++-    typename MetaElement<SeriesBase<S>, T>::weights_value_t 
+++    typename MetaElement<SeriesBase<S>, T>::weight_value_t 
++     MetaElement<SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
++     { 
++       // assert(set().monoid().contains(m));
++@@ -94,7 +94,7 @@
++     template<typename S, typename T>
++     void 
++     MetaElement<SeriesBase<S>, T>::value_set(const monoid_value_t& m, 
++-						const weights_value_t& w) 
+++					     const weight_value_t& w) 
++     { 
++       // assert(set().monoid().contains(m));
++       // assert(set().weights().contains(w));
++Index: include/vaucanson/algebra/concrete/free_monoid/str_words.hh
++--- include/vaucanson/algebra/concrete/free_monoid/str_words.hh Tue, 18 Feb 2003 14:40:31 +0100 yann (vaucanson/c/5_str_words. 1.10 600)
+++++ include/vaucanson/algebra/concrete/free_monoid/str_words.hh Wed, 19 Feb 2003 18:23:26 +0100 max (vaucanson/c/5_str_words. 1.11 600)
++@@ -53,10 +53,6 @@
++   op_convert(SELECTOR(std::basic_string<typename A::letter_t>),
++ 	     SELECTOR(FreeMonoid<A>), const typename A::letter_t& c);
++ 
++-  template <class A>
++-  Element<FreeMonoid<A>, std::basic_string<typename A::letter_t> >
++-  op_choose(const FreeMonoid<A>& s, 
++-	    SELECTOR(std::basic_string<typename A::letter_t>));
++   
++ } // vcsn
++ 
++Index: include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx
++--- include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx Wed, 13 Nov 2002 11:30:49 +0100 yann (vaucanson/h/12_krat_exp_p 1.2 600)
+++++ include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx Wed, 19 Feb 2003 18:23:27 +0100 max (vaucanson/h/12_krat_exp_p 1.3 600)
++@@ -221,7 +221,7 @@
++ 	      std::list<KRatExpToken
++     <
++       typename Element<S, T>::monoid_value_t,
++-      typename Element<S, T>::weights_value_t
+++      typename Element<S, T>::weight_value_t
++     > 
++     > >
++     lex(const std::string& in, 
++@@ -232,12 +232,12 @@
++       typedef typename monoid_elt_t::set_t	      monoid_t;
++       typedef typename Element<S, T>::weight_t	      weight_t;
++       typedef typename weight_t::set_t		      weights_t;
++-      typedef typename Element<S, T>::weights_value_t weight_value_t;
+++      typedef typename Element<S, T>::weight_value_t  weight_value_t;
++       typedef typename std::string::const_iterator    iterator_t;
++       typedef KRatExpToken
++ 	<
++ 	typename Element<S, T>::monoid_value_t,
++-	typename Element<S, T>::weights_value_t
+++	typename Element<S, T>::weight_value_t
++ 	> 
++ 	krat_exp_token_t;
++ 
++@@ -302,14 +302,14 @@
++       typedef KRatExpToken
++       <
++ 	typename Element<S, T>::monoid_value_t,
++-	typename Element<S, T>::weights_value_t
+++	typename Element<S, T>::weight_value_t
++       >						      krat_exp_token_t; 
++       typedef typename Element<S, T>::monoid_elt_t    monoid_elt_t;
++       typedef typename Element<S, T>::monoid_value_t  monoid_value_t;
++       typedef typename monoid_elt_t::set_t	      monoid_t;
++       typedef typename Element<S, T>::weight_t	      weight_t;
++       typedef typename weight_t::set_t		      weights_t;
++-      typedef typename Element<S, T>::weights_value_t weight_value_t;
+++      typedef typename Element<S, T>::weight_value_t  weight_value_t;
++       typedef krat_exp_token_t			      token_t;
++       typedef std::list<krat_exp_token_t>	      token_stream_t;
++       
++@@ -479,7 +479,7 @@
++       typedef KRatExpToken
++       <
++ 	typename Element<S, T>::monoid_value_t,
++-	typename Element<S, T>::weights_value_t
+++	typename Element<S, T>::weight_value_t
++       > krat_exp_token_t; 
++ 
++       std::pair<bool, 
++Index: include/vaucanson/algebra/concrete/series/krat.hh
++--- include/vaucanson/algebra/concrete/series/krat.hh Mon, 14 Oct 2002 19:31:49 +0200 yann (vaucanson/c/15_krat.hh 1.12 600)
+++++ include/vaucanson/algebra/concrete/series/krat.hh Wed, 19 Feb 2003 18:23:34 +0100 max (vaucanson/c/15_krat.hh 1.13 600)
++@@ -37,7 +37,7 @@
++     struct series_traits<Series<W, M>, rat::exp<Tm, Tw> >
++     {
++       typedef Tm	monoid_value_t;
++-      typedef Tw	weights_value_t;
+++      typedef Tw	weight_value_t;
++     };
++ 
++   } // algebra
++Index: include/vaucanson/algebra/concrete/series/polynoms.hh
++--- include/vaucanson/algebra/concrete/series/polynoms.hh Wed, 12 Feb 2003 16:41:22 +0100 max (vaucanson/c/17_polynoms.h 1.11 600)
+++++ include/vaucanson/algebra/concrete/series/polynoms.hh Wed, 19 Feb 2003 18:23:35 +0100 max (vaucanson/c/17_polynoms.h 1.12 600)
++@@ -19,9 +19,8 @@
++ // License along with this library; if not, write to the Free Software
++ // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ 
++-
++-#ifndef ALGEBRA_POLYNOMS_HH
++-# define ALGEBRA_POLYNOMS_HH
+++#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
+++# define VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
++ 
++ # include <map>
++ # include <utility>
++@@ -86,7 +85,7 @@
++   struct series_traits<Series<W, M>, polynom<Tm, Tw> >
++   {
++     typedef Tm monoid_value_t;
++-    typedef Tw weights_value_t;
+++    typedef Tw weight_value_t;
++   };
++ 
++     template <class Series, class Tm, class Tw>
++@@ -334,5 +333,5 @@
++ 
++ # include <vaucanson/algebra/concrete/series/polynoms.hxx>
++ 
++-#endif // ALGEBRA_POLYNOMS_HH
+++#endif // VCSN_ALGEBRA_POLYNOMS_HH
++ 
++Index: include/vaucanson/algorithms/compute.hh
++--- include/vaucanson/algorithms/compute.hh Fri, 22 Nov 2002 11:04:29 +0100 yann (vaucanson/e/6_compute.hh 1.5 600)
+++++ include/vaucanson/algorithms/compute.hh Wed, 19 Feb 2003 18:23:38 +0100 max (vaucanson/e/6_compute.hh 1.6 600)
++@@ -37,7 +37,7 @@
++   */
++ 
++   template<typename A, typename T, typename W>
++-  typename Element<A, T>::series_elt_t
+++  typename Element<A, T>::weight_t
++   compute(const Element<A, T>& a, const W& word);
++ 
++   /*! @} */
++Index: include/vaucanson/algorithms/compute.hxx
++--- include/vaucanson/algorithms/compute.hxx Fri, 22 Nov 2002 11:04:29 +0100 yann (vaucanson/e/5_compute.hx 1.7 600)
+++++ include/vaucanson/algorithms/compute.hxx Wed, 19 Feb 2003 18:23:39 +0100 max (vaucanson/e/5_compute.hx 1.8 600)
++@@ -36,16 +36,17 @@
++   //
++   //
++   template <typename A, typename auto_t, 
++-	    typename serie_t, typename input_t>
+++	    typename weight_t, typename input_t>
++   void 
++   do_compute(const AutomataBase<A>& a_set,
++ 	     const auto_t&	    a,
++ 	     const input_t&	    word, 
++-	     serie_t&		    result)
+++	     weight_t&		    result)
++   {
++     // FIXME: for the moment, we use large vectors because the set of hstate_t
++     // FIXME: can be sparsed. We wanted to be as general as possible.
++     // FIXME: Variants of compute will be available soon of course.
+++    typedef typename auto_t::monoid_elt_t monoid_elt_t;
++ 
++     hstate_t max_hstate_t = 0;
++     for (typename auto_t::state_iterator i = a.states().begin();
++@@ -53,25 +54,26 @@
++ 	 ++i)
++       max_hstate_t = std::max(*i, unsigned(max_hstate_t));
++ 
++-    std::vector<serie_t>		v1(max_hstate_t + 1);
++-    std::vector<serie_t>		v2(max_hstate_t + 1);
+++    std::vector<weight_t>		v1(max_hstate_t + 1);
+++    std::vector<weight_t>		v2(max_hstate_t + 1);
++     std::list<hedge_t>			delta_ret;
++-    const typename serie_t::set_t	&serie_set = result.set();
++-
+++    const typename weight_t::set_t	&semiring = a.series().weights();
+++    weight_t zero = semiring.zero(SELECT(typename weight_t::value_t));
+++    typename auto_t::monoid_elt_t empty;
++     
++     /*-------------------.
++     | Initialize the set |
++     `-------------------*/
++-     std::fill(v1.begin(), v1.end(), 
++-	       serie_set.zero(SELECT(typename serie_t::value_t)));
+++    std::fill(v1.begin(), v1.end(), zero);
++ 
++     /*--------.
++     | Initial |
++     `--------*/
+++    // FIXME: here we assume that there is only weight in the initial app.
++     for (typename auto_t::initial_iterator i = a.initial().begin();
++ 	 i != a.initial().end();
++ 	 ++i)
++-      v1[*i] = a.get_initial(*i);
+++      v1[*i] = a.get_initial(*i).get(empty);
++ 
++     /*------------.
++     | Computation |
++@@ -80,10 +82,10 @@
++ 	 e != word.end();
++ 	 ++e)
++       {
++- 	std::fill(v2.begin(), v2.end(), 
++- 		  serie_set.zero(SELECT(typename serie_t::value_t)));
+++	//	std::cout << "l : " << *e << std::endl;
+++ 	std::fill(v2.begin(), v2.end(), zero);
++ 	for (unsigned i = 0; i < v1.size(); ++i)
++-	  if (v1[i] != serie_set.zero(SELECT(typename serie_t::value_t)))
+++	  if (v1[i] != zero)
++ 	  {
++ 	    // FIXME : use the other version of delta to be more efficient !
++ 	    delta_ret.clear();
++@@ -92,7 +94,7 @@
++ 		   delta_ret.begin();
++ 		 l != delta_ret.end();
++ 		 ++l)
++-	      v2[a.aim_of(*l)] += v1[i] * a.label_of(*l) ;
+++	      v2[a.aim_of(*l)] += v1[i] * a.serie_of(*l).get(monoid_elt_t(*e));
++ 	  }
++ 	std::swap(v1, v2);
++       }
++@@ -101,18 +103,18 @@
++     | Final and Result |
++     `-----------------*/
++     for (unsigned i = 0; i < v1.size(); ++i)
++-      if (v1[i] != serie_set.zero(SELECT(typename serie_t::value_t)))
++-	result += v1[i] * a.get_final(i);    
+++      if (v1[i] != zero)
+++	result += v1[i] * a.get_final(i).get(empty);    
++   }
++ 
++   /*--------.
++   | Wrapper |
++   `--------*/
++   template<typename A, typename T, typename W>
++-  typename Element<A, T>::series_elt_t
+++  typename Element<A, T>::weight_t
++   compute(const Element<A, T>& a, const W& word)
++   {
++-    typename Element<A, T>::series_elt_t ret;
+++    typename Element<A, T>::weight_t ret;
++ 
++     do_compute(a.set(), a, word, ret);
++     return ret;
++Index: include/vaucanson/algorithms/trim.hh
++--- include/vaucanson/algorithms/trim.hh Fri, 22 Nov 2002 11:04:29 +0100 yann (vaucanson/f/5_trim.hh 1.5 600)
+++++ include/vaucanson/algorithms/trim.hh Wed, 19 Feb 2003 10:37:49 +0100 max (vaucanson/f/5_trim.hh 1.5 600)
++@@ -31,7 +31,7 @@
++   //! Returns a useful states of the automaton (start reachable and final co-).
++   template<typename A, typename T>
++   std::set<hstate_t>
++-  useful_states(const Element<A, T>& a);
+++  usefull_states(const Element<A, T>& a);
++ 
++   //! Return a fresh automaton in which non useful states are removed.
++   template<typename A, typename T>
++Index: include/vaucanson/algorithms/trim.hxx
++--- include/vaucanson/algorithms/trim.hxx Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/f/0_trim.hxx 1.3 600)
+++++ include/vaucanson/algorithms/trim.hxx Wed, 19 Feb 2003 18:47:42 +0100 max (vaucanson/f/0_trim.hxx 1.3 600)
++@@ -44,7 +44,7 @@
++   //
++   template <class A_, typename Auto_>
++   std::set<hstate_t>
++-  do_useful_states(const AutomataBase<A_>& a_set,
+++  do_usefull_states(const AutomataBase<A_>& a_set,
++ 		   const Auto_&		   a)
++   {
++     std::set<hstate_t> start = start_reachable_states(a);
++@@ -58,16 +58,16 @@
++ 
++   template<typename A, typename T>
++   std::set<hstate_t>
++-  useful_states(const Element<A, T>& a)
+++  usefull_states(const Element<A, T>& a)
++   {
++-    return do_useful_states(a.set(), a);
+++    return do_usefull_states(a.set(), a);
++   }
++ 
++   template<typename A, typename T>
++   Element<A, T>
++   trim(const Element<A, T>& a)
++   {
++-    return auto_extract(a, useful_states(a));
+++    return auto_extract(a, usefull_states(a));
++   }
++ 
++ } // vcsn
++Index: include/vaucanson/algorithms/union.hxx
++--- include/vaucanson/algorithms/union.hxx Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/d/41_union.hxx 1.6 600)
+++++ include/vaucanson/algorithms/union.hxx Wed, 19 Feb 2003 18:23:43 +0100 max (vaucanson/d/41_union.hxx 1.7 600)
++@@ -76,7 +76,6 @@
++ 	     d != aim.end();
++ 	     ++d)
++ 	  {
++-	    hedge_t new_edge = 
++ 	      lhs.add_edge(states_map[rhs.origin_of(*d)],
++ 			   states_map[rhs.aim_of(*d)],
++ 			   rhs.label_of(*d));
++Index: include/vaucanson/automata/concept/automata_base.hh
++--- include/vaucanson/automata/concept/automata_base.hh Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/d/12_automata_b 1.11 600)
+++++ include/vaucanson/automata/concept/automata_base.hh Wed, 19 Feb 2003 18:23:45 +0100 max (vaucanson/d/12_automata_b 1.12 600)
++@@ -18,8 +18,8 @@
++ // License along with this library; if not, write to the Free Software
++ // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++ 
++-#ifndef AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
++-# define AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+++#ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+++# define VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
++ 
++ # include <iterator>
++ # include <vaucanson/automata/concept/handlers.hh>
++@@ -100,10 +100,16 @@
++     /*! type of the free monoid. */
++     typedef typename series_t::monoid_t			      monoid_t;
++ 
+++    /*! type of the free monoid element. */
+++    typedef typename series_elt_t::monoid_elt_t		      monoid_elt_t;
+++
++     /*! type of the weights set. */
++     typedef typename series_t::weights_t		      weights_t;
++ 
++-    /*! type of additional information that is aggregate to the automaton. */
+++    /*! type of the free monoid element. */
+++    typedef typename series_elt_t::weight_t		      weight_t;
+++
+++    /*! type of additional information that is aggregated to the automaton. */
++     typedef typename automaton_traits<T>::tag_t		      tag_t;
++ 
++     /*! type of the label of the automaton. can be different from
++@@ -391,4 +397,4 @@
++ 
++ # include <vaucanson/automata/concept/automata_base.hxx>
++ 
++-#endif // AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+++#endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
++Index: include/vaucanson/automata/concept/kinds.hh
++--- include/vaucanson/automata/concept/kinds.hh Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/d/16_kinds.hh 1.9 600)
+++++ include/vaucanson/automata/concept/kinds.hh Wed, 19 Feb 2003 18:23:47 +0100 max (vaucanson/d/16_kinds.hh 1.10 600)
++@@ -228,7 +228,6 @@
++     hedge_t add_letter_edge(hstate_t from, hstate_t to,
++ 			    const L& l);
++ 
++-
++     template <typename OutputIterator, typename L>   
++     void letter_delta(OutputIterator	res, 
++ 		      hstate_t		from, 
++@@ -236,7 +235,7 @@
++ 		      delta_kind::edges k = delta_kind::edges()) const;
++ 
++     template <typename Container, typename L>
++-    void letter_delta(Container&	 dst, 
+++    void letter_deltac(Container&	 dst, 
++ 		       hstate_t		 from, 
++ 		       const L&		 l, 
++ 		       delta_kind::edges k = delta_kind::edges()) const;
++@@ -248,7 +247,7 @@
++ 		      delta_kind::edges k = delta_kind::edges()) const;
++ 
++     template <typename Container, typename L>
++-    void letter_rdelta(Container&	 dst, 
+++    void letter_rdeltac(Container&	 dst, 
++ 		       hstate_t		 from, 
++ 		       const L&		 l, 
++ 		       delta_kind::edges k = delta_kind::edges()) const;
++@@ -260,7 +259,7 @@
++ 		      delta_kind::states k) const;
++ 
++     template <typename Container, typename L>
++-    void letter_delta(Container&	  dst, 
+++    void letter_deltac(Container&	  dst, 
++ 		       hstate_t		  from, 
++ 		       const L&		  l, 
++ 		       delta_kind::states k) const;
++@@ -272,7 +271,7 @@
++ 		       delta_kind::states k) const;
++     
++     template <typename Container, typename L>
++-    void letter_rdelta(Container&	   dst, 
+++    void letter_rdeltac(Container&	   dst, 
++ 			hstate_t	   from, 
++ 			const L&	   l, 
++ 			delta_kind::states k) const;
++Index: include/vaucanson/automata/concept/kinds.hxx
++--- include/vaucanson/automata/concept/kinds.hxx Mon, 25 Nov 2002 12:14:02 +0100 yann (vaucanson/d/15_kinds.hxx 1.8 600)
+++++ include/vaucanson/automata/concept/kinds.hxx Wed, 19 Feb 2003 18:23:48 +0100 max (vaucanson/d/15_kinds.hxx 1.9 600)
++@@ -207,8 +207,8 @@
++       typedef typename Element
++ 	<Monoid, typename Label::second_type>::const_iterator letter_iterator;
++       
++-      letter_iterator b = op_begin(m_.get(), label.second);
++-      letter_iterator e = op_end(m_.get(), label.second);
+++      letter_iterator b = op_begin_const(m_.get(), label.second);
+++      letter_iterator e = op_end_const(m_.get(), label.second);
++       
++       return std::find(b, e, l_) != e;
++     }
++@@ -226,7 +226,7 @@
++     const Series& s = auto_self().series();
++     
++     series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
++-    return see *= weight_t(s.weights(), label.first);
+++    return se *= weight_t(s.weights(), label.first);
++   }
++   
++   template<typename Self, typename Series, typename SeriesT, typename LabelT>
++@@ -318,12 +318,15 @@
++     template<typename L>
++     hedge_t 
++     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
++-    add_letter_edge(hstate_t from, hstate_t to,
+++    add_letter_edge(hstate_t from, 
+++		    hstate_t to,
++ 		    const L& l)
++     { 
++       return auto_self().add_edge
++-	(from, to, 
++-	 std::make_pair(identity_value(SELECT(weights_t), SELECT(typename weight_t::value_t)),
+++	(from, 
+++	 to, 
+++	 std::make_pair(identity_value(SELECT(weights_t), 
+++				       SELECT(typename weight_t::value_t)),
++ 			monoid_elt_t(auto_self().series().monoid(), l).value()));
++     }
++ 
++@@ -343,7 +346,7 @@
++     template<typename Container, typename L>								\
++     void                                                                                         \
++     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::                                 \
++-    letter_ ## Name (Container &dst, hstate_t from, const L& l, Kind_type k) const		\
+++    letter_ ## Name ##c(Container &dst, hstate_t from, const L& l, Kind_type k) const		\
++     {													\
++       std::insert_iterator<Container> i(dst, dst.begin());						\
++       return auto_self().value()-> Name ## _ ## Type							\
++@@ -368,7 +371,7 @@
++     template<typename Self, typename Series, typename SeriesT, typename LabelT>
++     const Self& 
++     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
++-    auto_self() const { return static_cast<Self&>(*this); }
+++    auto_self() const { return static_cast<const Self&>(*this); }
++ 
++ }
++ 
++Index: include/vaucanson/automata/concrete/manylinks_states.hh
++--- include/vaucanson/automata/concrete/manylinks_states.hh Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/c/36_manylinks_ 1.6 600)
+++++ include/vaucanson/automata/concrete/manylinks_states.hh Thu, 20 Feb 2003 02:31:54 +0100 max (vaucanson/c/36_manylinks_ 1.6 600)
++@@ -185,14 +185,16 @@
++   | State iterator |
++   `---------------*/
++   template<typename State, state_link_type kind>
++-  class state_iterator /* : public std::iterator<std::bidirectional_iterator_tag,
+++  class state_iterator  : public std::iterator<std::bidirectional_iterator_tag,
++ 					     unsigned,
++ 					     ptrdiff_t,
++ 					     const unsigned*,
++-					     const unsigned&> */
+++					       const unsigned&>
++   {
++   public:
++     
+++    
+++
++     state_iterator() : p_(0) {}
++     state_iterator(const state_iterator& other)
++       : p_(other.p_) 
++Index: include/vaucanson/misc/container_ops.hxx
++--- include/vaucanson/misc/container_ops.hxx Thu, 03 Oct 2002 11:48:37 +0200 yann (vaucanson/34_container_ 1.5 600)
+++++ include/vaucanson/misc/container_ops.hxx Wed, 19 Feb 2003 18:23:49 +0100 max (vaucanson/34_container_ 1.6 600)
++@@ -37,6 +37,13 @@
++   }
++   
++   template<typename S, typename T>
+++  typename T::const_iterator op_begin(const Structure<S>& s, 
+++				      const T& v)
+++  { 
+++    return v.begin(); 
+++  }
+++  
+++  template<typename S, typename T>
++   typename T::iterator op_end(const Structure<S>& s, 
++ 			      T& v)
++   { 
++@@ -44,6 +51,13 @@
++   }
++ 
++   template<typename S, typename T>
+++  typename T::const_iterator op_end(const Structure<S>& s, 
+++				    const T& v)
+++  { 
+++    return v.end(); 
+++  }
+++
+++  template<typename S, typename T>
++   typename T::const_iterator op_begin_const(const Structure<S>& s,
++ 				      const T& v)
++   { 
++@@ -51,7 +65,7 @@
++   }
++ 
++   template<typename S, typename T>
++-  typename T::const_iterator op_end(const Structure<S>& s, 
+++  typename T::const_iterator op_end_const(const Structure<S>& s, 
++ 				    const T& v)
++   { 
++     return v.end(); 
++@@ -72,14 +86,14 @@
++   }
++ 
++   template<typename S, typename T>
++-  typename T::const_reverse_iterator op_rbegin(const Structure<S>& s,
+++  typename T::const_reverse_iterator op_rbegin_const(const Structure<S>& s,
++ 					       const T& v)
++   { 
++     return v.rbegin(); 
++   }
++ 
++   template<typename S, typename T>
++-  typename T::const_reverse_iterator op_rend(const Structure<S>& s,
+++  typename T::const_reverse_iterator op_rend_const(const Structure<S>& s,
++ 					     const T& v)
++   { 
++     return v.rend(); 
++Index: Makefile.am
++--- Makefile.am Thu, 13 Feb 2003 09:23:29 +0100 yann (vaucanson/48_Makefile.a 1.6 600)
+++++ Makefile.am Wed, 19 Feb 2003 18:23:50 +0100 max (vaucanson/48_Makefile.a 1.7 600)
++@@ -5,7 +5,7 @@
++ 
++ AUTOMAKE_OPTIONS= foreign 1.6
++ SUBDIRS= include src doc
++-EXTRA_DIST=THANKS README LICENCE ChangeLog tools/scandefs.pl
+++EXTRA_DIST=THANKS README LICENCE ChangeLog tools/scandefs.pl vcsn.m4
++ 
++ .PHONY: doc
++ 
++Index: include/vaucanson/tools/usual_mac
+\ No newline at end of file
+Index: src/demos/vgrep/vgrep.cc
+--- src/demos/vgrep/vgrep.cc Thu, 20 Feb 2003 16:31:58 +0100 max ()
++++ src/demos/vgrep/vgrep.cc Wed, 19 Feb 2003 18:23:54 +0100 max (vaucanson/i/26_vgrep.cc 1.1 600)
+@@ -0,0 +1,232 @@
++// vgrep.cc
++//
++// $Id$
++
++#include <vaucanson/fundamental/fundamental.hh>
++#include <vaucanson/tools/usual.hh>
++#include <vaucanson/algorithms/determinize.hh>
++#include <vaucanson/algorithms/realtime.hh>
++#include <vaucanson/algorithms/complete.hh>
++#include <vaucanson/algebra/concrete/series/rat/exp.hh>
++#include <vaucanson/algebra/concrete/series/krat.hh>
++#include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
++#include <vaucanson/algorithms/glushkov.hh>
++#include <vaucanson/algorithms/thompson.hh>
++#include <vaucanson/algorithms/compute.hh>
++#include <vaucanson/algorithms/hopcroft.hh>
++#include <vaucanson/misc/dot_dump.hh>
++#include <iostream>
++#include <vector>
++#include <ctype.h>
++#include <string>
++#include <getopt.h>
++#include <unistd.h>
++#include <cstdlib>
++
++class window
++{
++public:  
++  window(std::istream& is, unsigned before, unsigned after) :
++    stream_(is),
++    before_(before),
++    after_(after)
++  {
++    int count = 0;
++    char buffer[512];
++    std::string s;
++    while (count < after_ + 1) {
++    do {
++      stream_.getline(buffer, 512);
++      s += buffer;
++    } while (stream_.fail() && (!(s.size() == 0  || stream_.eof())));
++    buffer_.push_back(s);
++    if (stream_.eof())
++      break;
++    ++count;
++    }
++    current_pos_ = buffer_.begin();
++    for (int i = 0; i != after_; ++i)
++      current_pos_++;
++  }
++
++  bool discard_line()
++  {
++    char buffer[512];
++    std::string s;
++    do {
++      stream_.getline(buffer, 512);
++      s += buffer;
++    } while (stream_.fail() && (!stream_.eof()));
++    if (stream_.eof())
++      {
++	++current_pos_;
++	if (current_pos_ == buffer_.end())
++	  return false;
++	return true;
++      }
++    buffer_.push_back(s);
++    ++current_pos_;
++    buffer_.pop_front();
++    return true;
++  }
++
++  std::string current()
++  {
++    return *current_pos_;
++  }
++
++private:
++  std::istream&				   stream_;
++  std::list<std::string>		   buffer_;
++  std::list<std::string>::iterator	   current_pos_;
++  int					   before_;
++  int					   after_;
++};
++
++void grep(std::ostream& out, const vcsn::tools::usual_automaton_t& automaton, 
++	  window w)
++{
++  do
++    {
++      bool ret = false;
++      //      for (unsigned i = 0; i != w.current().size() && !ret; ++i)
++      ret = compute(automaton, w.current());
++      //      ret |= (accept(automaton, w.current().substr(i, 
++      //						   w.current().size() - i + 1)));
++      if (ret)
++	out << w.current() << std::endl;
++    }
++  while (w.discard_line());
++}
++
++//
++// Error handling
++//
++void exit_on_error(const std::string& msg)
++{
++  std::cerr << "vgrep:" << msg << std::endl;
++  exit(EXIT_FAILURE);
++}
++
++const std::string error_before_context =
++"'before-context' expect a valid integer argument";
++const std::string error_after_context =
++"'after-context' expect a valid integer argument";
++
++//
++// What's the program does ...
++// 
++int main(int argc, char **argv)
++{
++  // Parse options.
++  int c;
++  int after_context = 0;
++  int before_context = 0;
++  bool invert_match = false;
++  std::string filename;
++  
++  while (true) {
++    int option_index = 0;
++    static struct option long_options[5] = 
++      {
++	{"after-context",  1, 0, 'A'},
++	{"before-context", 1, 0, 'B'},
++	{"invert-match",   1, 0, 'v'},
++	{"file",           1, 0, 'f'},
++	{0, 0, 0, 0}
++      };
++    
++    c = getopt_long (argc, argv, "A:B:vf:",
++		     long_options, 
++		     &option_index);
++    if (c == -1)
++      break;
++    
++    switch (c) 
++      {
++      case 'A':
++	{
++	  char *endptr;
++	  after_context = strtol(optarg, &endptr, 10);
++	  if (optarg == endptr)
++	    exit_on_error(error_after_context);
++	  break;
++	}
++      case 'B':
++	{
++	  char *endptr;
++	  before_context = strtol(optarg, &endptr, 10);
++	  if (optarg == endptr)
++	    exit_on_error(error_before_context);
++			  
++	  break;
++	}
++      case 'v':
++	{
++	  invert_match = true;
++	  break;
++	}
++      case 'f':
++	{
++	  filename = optarg;
++	}
++      }
++  }
++  // Determine the streams to be filtered.
++  int optcount = optind;
++  if (optind < argc) 
++    {
++      using namespace vcsn;
++      using namespace vcsn::tools;
++      AUTOMATON_TYPES_EXACT(usual_automaton_t);
++
++      // The first argument is the rational expression.
++      std::string exp = argv[1];
++      ++optcount;
++
++      // Construct the associated automaton.
++      alphabet_t alpha;
++      for (unsigned l = 0; l <= 255; ++l)
++	if (isprint(l))
++	  alpha.insert(char(l));
++
++      monoid_t freemonoid(alpha);
++      weights_t semiring;
++      series_t series(semiring, freemonoid);
++      Element<series_t, rat::exp<monoid_elt_value_t, weight_value_t> >
++	krat_exp(series);
++      parse(exp, krat_exp);
++      automaton_t automaton;
++      automaton.create();
++      automaton.series() = series;
++      glushkov(automaton, krat_exp.value());
++      in_realtime(automaton);
++      auto_in_complete(automaton);
++      // misc::dot_dump(std::cerr, automaton, "automaton");
++
++      // STATE FINAL => sigma * on it.
++      for_each_initial_state(s, automaton)
++	for (unsigned l = 0; l <= 255; ++l)
++	  if (isprint(l))
++	    automaton.add_letter_edge(*s, *s, char(l));
++      for_each_final_state(s, automaton)
++	for (unsigned l = 0; l <= 255; ++l)
++	  if (isprint(l))
++	    automaton.add_letter_edge(*s, *s, char(l));
++      automaton = determinize(automaton);
++
++      // No file means standard input.
++      if (optcount == argc)
++	{
++	  grep(std::cout,
++	       automaton,
++	       window(std::cin, before_context, after_context));
++	}
++      //
++      // 	if (argv[optind++] == std::string("-"))
++      // 	  grep(window win(std::cin, before_context, after_context),
++	       
++    }
++  // Parse the rational expression.
++  
++}
+Index: src/demos/vgrep/Makefile.am
+--- src/demos/vgrep/Makefile.am Thu, 20 Feb 2003 16:31:58 +0100 max ()
++++ src/demos/vgrep/Makefile.am Thu, 20 Feb 2003 16:35:38 +0100 max (vaucanson/i/27_Makefile.a 1.1 600)
+@@ -0,0 +1,15 @@
++# Makefile.am
++#
++# $Id$
++
++.PHONY: demos
++
++demos: $(EXTRA_PROGRAMS)
++
++AM_CPPFLAGS = -I $(top_srcdir)/include/
++
++EXTRA_PROGRAMS = vgrep
++
++vgrep_SOURCES = vgrep.cc
++
++CLEANFILES = vgrep
+\ No newline at end of file
+Index: src/demos/Makefile.am
+--- src/demos/Makefile.am Thu, 20 Feb 2003 16:31:58 +0100 max ()
++++ src/demos/Makefile.am Thu, 20 Feb 2003 16:37:57 +0100 max (vaucanson/i/28_Makefile.a 1.1 600)
+@@ -0,0 +1,17 @@
++# Makefile.am
++#
++# $Id$
++
++SUBDIRS = vgrep grammar_inference samples
++
++.PHONY: demos
++
++vgrep:
++	cd vgrep && $(MAKE) demos
++
++gi:
++	cd grammar_inference && $(MAKE) demos
++
++samples:
++	cd samples && $(MAKE) demos
++

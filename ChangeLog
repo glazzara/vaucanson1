@@ -1,3 +1,40 @@
+2003-02-20  Maxime Rey  <max@lrde.epita.fr>
+
+	* `src/demos/grammar_inference/src/make_mca.cc' : New
+	* `src/demos/grammar_inference/src/is_not_compatible.cc' : New 
+	* `src/demos/grammar_inference/src/bs.cc' : New 
+	* `src/demos/grammar_inference/src/fusion.cc' : New
+	* `src/demos/grammar_inference/src/training/vtrain.toy' : New
+	* `src/demos/grammar_inference/include/tools/load_sample.hh' : New
+	* `src/demos/grammar_inference/include/tools/load_sample.hxx' : New 
+	* `src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hxx' : New
+	* `src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hh' : New
+	* `src/demos/grammar_inference/include/algebra/concrete/lattice.hxx' : New
+	* `src/demos/grammar_inference/include/algebra/concrete/lattice.hh' : New
+	* `src/demos/grammar_inference/include/algebra/concrete/ordered_set.hxx' : New
+	* `src/demos/grammar_inference/include/algebra/concrete/ordered_set.hh' : New
+	* `src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hxx' : New
+      
+	* `src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hh' : New
+      	* `src/demos/grammar_inference/include/algebra/concept/lattice_base.hxx' : New
+	* `src/demos/grammar_inference/include/algebra/concept/lattice_base.hh' : New
+
+	* `src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hxx' : New
+	* `src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hh' : New
+	* `src/demos/grammar_inference/include/algorithms/rig.hh' : New
+	* `src/demos/grammar_inference/include/algorithms/rig.hxx' : New 
+	* `src/demos/grammar_inference/include/algorithms/make_pta.hxx' : New 
+	* `src/demos/grammar_inference/include/algorithms/make_mca.hxx' : New 
+	* `src/demos/grammar_inference/include/algorithms/make_pta.hh' : New 
+	* `src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx' : New 
+	* `src/demos/grammar_inference/include/algorithms/is_not_compatible.hh' : New 
+	* `src/demos/grammar_inference/include/algorithms/make_mca.hh' : New
+	* `src/demos/grammar_inference/include/algorithms/is_structurally_complete.hh' : New
+	* `src/demos/grammar_inference/include/algorithms/fusion.hh' : New
+	* `src/demos/grammar_inference/include/algorithms/is_structurally_complete.hxx' : New
+	* `src/demos/grammar_inference/include/algorithms/fusion.hxx' : New
+
+
 2003-02-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.160)
 	* src/demos/vgrep/vgrep.cc: New.

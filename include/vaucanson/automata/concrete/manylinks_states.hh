@@ -185,14 +185,16 @@ namespace vcsn {
   | State iterator |
   `---------------*/
   template<typename State, state_link_type kind>
-  class state_iterator /* : public std::iterator<std::bidirectional_iterator_tag,
-					     unsigned,
-					     ptrdiff_t,
-					     const unsigned*,
-					     const unsigned&> */
+  class state_iterator  : public std::iterator<std::bidirectional_iterator_tag,
+					       unsigned,
+					       ptrdiff_t,
+					       const unsigned*,
+					       const unsigned&>
   {
   public:
     
+    
+
     state_iterator() : p_(0) {}
     state_iterator(const state_iterator& other)
       : p_(other.p_) 
