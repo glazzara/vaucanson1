@@ -155,7 +155,9 @@ namespace vcsn {
 	    
 	  return true;
 	}
-	  
+	 
+      // FIXME: reduce (k 1) * E -> (k E)
+ 
       default: break;
 	  
       }

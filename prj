@@ -1,86 +1,19 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 198)
-(Parent-Version vaucanson 0 197)
-(Version-Log "Index: vauc/ChangeLog
-from  Raphaël Poss  <raph@lrde.epita.fr>
-   * include/types/symbol.hh, include/types/object.hh,
-   include/vcore/streams.hh, include/vcore/exception.hh: Use
-   definitions from cppsh.
-
-   * lib/Makefile.am (noinst_LTLIBRARIES): Update library names.
-
-   * cppsh/ChangeLog, cppsh/Makefile.am, cppsh/include/kern/debug.hh,
-   cppsh/include/kern/exception.hh, cppsh/include/kern/exnprint.hh,
-   cppsh/include/kern/fstreams.hh, cppsh/include/kern/object.hh,
-   cppsh/include/kern/object.hxx, cppsh/include/kern/objvect.hh,
-   cppsh/include/kern/objvect.hxx, cppsh/include/kern/ref.hh,
-   cppsh/include/kern/ref.hxx, cppsh/include/kern/stdstreams.hh,
-   cppsh/include/kern/streams.hh, cppsh/include/kern/symbol.hh,
-   cppsh/include/kern/symbol.hxx, cppsh/include/lang,
-   cppsh/include/lang/parse_base.hh, cppsh/include/FlexLexer.h,
-   cppsh/include/bits, cppsh/include/bits/def_visitor.hh,
-   cppsh/include/bits/module_defs.hh, cppsh/include/Makefile.am,
-   cppsh/kern/Makefile.am, cppsh/kern/debug.cc,
-   cppsh/kern/exception.cc, cppsh/kern/exnprint.cc,
-   cppsh/kern/fstreams.cc, cppsh/kern/object.cc,
-   cppsh/kern/objvect.cc, cppsh/kern/stdstreams_cerr.cc,
-   cppsh/kern/stdstreams_cerr.hh, cppsh/kern/stdstreams_cin.cc,
-   cppsh/kern/stdstreams_cin.hh, cppsh/kern/stdstreams_cout.cc,
-   cppsh/kern/stdstreams_cout.hh, cppsh/kern/streams.cc,
-   cppsh/kern/symbol.cc, cppsh/lang/Makefile.am,
-   cppsh/lang/gen_parser.sh, cppsh/lang/in2grammar.sh,
-   cppsh/lang/parser_header.yy, cppsh/lang/lemon_parser.cc,
-   cppsh/lang/lemon_parser.hh, cppsh/lang/parse_base.cc,
-   cppsh/lang/parser_header.lemon, cppsh/tests/Makefile.am,
-   cppsh/tests/kern/Makefile.am, cppsh/tests/kern/exception.cc,
-   cppsh/tests/kern/object.cc, cppsh/tests/kern/objref.cc,
-   cppsh/tests/kern/objref_a.cc, cppsh/tests/kern/streams.cc,
-   cppsh/tests/kern/symbol.cc, cppsh/tests/ltdlpp/Makefile.am,
-   cppsh/tests/ltdlpp/abug1.cc, cppsh/tests/ltdlpp/abug2.cc,
-   cppsh/tests/ltdlpp/bbug1.cc, cppsh/tests/ltdlpp/bbug2.cc,
-   cppsh/tests/ltdlpp/dl.cc, cppsh/tests/ltdlpp/dlbug1.cc,
-   cppsh/tests/ltdlpp/dlbug12.cc, cppsh/tests/ltdlpp/dlbug2.cc,
-   cppsh/tests/ltdlpp/dlbug22.cc, cppsh/tests/ltdlpp/dlbug3.cc,
-   cppsh/tests/ltdlpp/dlbug32.cc, cppsh/tests/ltdlpp/s.hh: Add files.
-
-   * Makefile.am (SUBDIRS): Reorder. Mention `ltdlpp', `lemon',
-   `cppsh' and `vcore'.
-
-   * config/readline.m4 (AC_WITH_READLINE): Fix variable setting.
-
-   * src/vcore: Rename to...
-   * vcore: this.
-
-   * src/vutil/lemon: Rename to...
-   * lemon: this.
-
-   * lemon/rules.am: Update copyright notice.
-
-   * vcore/exception.cc, vcore/persistant.cc, vcore/streams.cc:
-   Remove files obsoleted by cppsh.
-
-   * vcore/Makefile.am: Update INCLUDES and SOURCES.
-
-   * vcore/unwind_init.cc, vcore/object_catalog.cc,
-   vcore/lazy_print_visitor.cc, vcore/eval.cc, vcore/env.cc: Update
-   to use cppsh.
-
-+2003-05-13  Raphaël Poss  <raph@lrde.epita.fr>
-+
-        * include/readlinebuf.hh: Add missing method
-        declarations. Fix copyright notice.
- 
-Index: vauc/mpp++/ChangeLog
+(Project-Version vaucanson 0 199)
+(Parent-Version vaucanson 0 198)
+(Version-Log "Index: ChangeLog
 from  Raphaël Poss  <raph@lrde.epita.fr>
 
-   * src/Makefile.am (fun_trans_LDADD, ty_trans_LDADD): Update
-   library names.
+   * include/vaucanson/algebra/concrete/series/krat.hxx: Add reminder
+   for future bugfix.
+
+   * vcsn.m4: Add macros, courtesy of the Olena distribution.
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 13 May 2003 04:28:16 +0200")
+(Checkin-Time "Thu, 15 May 2003 11:41:18 +0200")
 (Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -163,7 +96,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.4 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.5 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 664))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -225,7 +158,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.15 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.16 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.17 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.2 600))
@@ -505,7 +438,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (src/tests/tests-suites/algebra_tropical_max_semiring.defs (vaucanson/h/30_algebra_tr 1.1 600))
   (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 600))
   (tools/scandefs.pl (vaucanson/g/5_scandefs.p 1.2 700))
-  (vcsn.m4 (vaucanson/h/42_vcsn.m4 1.1 600))
+  (vcsn.m4 (vaucanson/h/42_vcsn.m4 1.2 600))
 
 ;; Files deleted by depopulate at Wed, 26 Feb 2003 15:17:32 +0100,
 ;; from version 0.165(w), by clavei_t:
@@ -750,14 +683,14 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/bootstrap.sh (vaucanson/l/25_bootstrap. 1.2 775))
   (vauc/mpp++/TODO (vaucanson/l/26_TODO 1.1 644))
   (vauc/toplevel/Makefile.am (vaucanson/l/27_Makefile.a 1.1 664))
-  (vauc/modules/Makefile.am (vaucanson/l/28_Makefile.a 1.1 664))
+  (vauc/modules/Makefile.am (vaucanson/l/28_Makefile.a 1.2 664))
   (vauc/config/ltwrap-sh.in (vaucanson/l/29_ltwrap-sh. 1.1 664))
   (vauc/config/cxxwrap-sh.in (vaucanson/l/30_cxxwrap-sh 1.1 664))
   (vauc/config/libtool-fix.m4 (vaucanson/l/31_libtool-fi 1.1 664))
   (vauc/config/libz.m4 (vaucanson/l/32_libz.m4 1.1 664))
   (vauc/config/readline.m4 (vaucanson/l/33_readline.m 1.2 664))
   (vauc/cleanup.sh (vaucanson/l/34_cleanup.sh 1.1 775))
-  (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.3 664))
+  (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.4 664))
   (vauc/lib/getopt.h (vaucanson/l/37_getopt.h 1.1 644))
   (vauc/lib/getopt1.c (vaucanson/l/38_getopt1.c 1.1 644))
   (vauc/lib/Makefile.am (vaucanson/l/39_Makefile.a 1.2 664))
@@ -961,7 +894,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/cppsh/lang/parser_header.lemon (vaucanson/o/28_parser_hea 1.1 664))
   (vauc/cppsh/lang/parse_base.cc (vaucanson/o/29_parse_base 1.1 664))
   (vauc/cppsh/lang/lemon_parser.cc (vaucanson/o/30_lemon_pars 1.1 664))
-  (vauc/cppsh/lang/in2grammar.sh (vaucanson/o/31_in2grammar 1.1 664))
+  (vauc/cppsh/lang/in2grammar.sh (vaucanson/o/31_in2grammar 1.2 664))
   (vauc/cppsh/lang/gen_parser.sh (vaucanson/o/32_gen_parser 1.1 664))
   (vauc/cppsh/lang/parser_header.yy (vaucanson/o/33_parser_hea 1.1 664))
   (vauc/cppsh/lang/lemon_parser.hh (vaucanson/o/34_lemon_pars 1.1 664))

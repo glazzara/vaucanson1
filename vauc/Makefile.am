@@ -1,4 +1,4 @@
-SUBDIRS = include lib libltdl ltdlpp lemon cppsh vcore mpp++
+SUBDIRS = include lib libltdl ltdlpp lemon cppsh vcore vparse mpp++
 
 EXTRA_DIST = bootstrap.sh cleanup.sh \
 	     config/ltwrap-sh.in config/cxxwrap-sh.in \
