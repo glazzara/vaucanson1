@@ -1,3 +1,20 @@
+2003-12-18  Valentin David  <valentin@lrde.epita.fr>
+
+	* include/vaucanson/xml/infos.hh, include/vaucanson/xml/session.hh,
+	* include/vaucanson/xml/xml_loader.hh,
+	* include/vaucanson/xml/xml_set.hh, include/vaucanson/xml/errors.hh,
+	* include/vaucanson/xml/static.hh, include/vaucanson/xml/types.hh,
+	* include/vaucanson/xml/dynamic.hh, include/vaucanson/xml/generic.hh,
+	* include/vaucanson/xml/callback.hh:
+	Add comments for doxygen.
+
+	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/session.hxx,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/xml_automaton.hxx:
+	Delete useless 'doc' parameter.
+
+	* include/vaucanson/xml/callback.hxx: Fix.
+
 2003-12-17  Valentin David  <valentin@lrde.epita.fr>
 
 	* config/xml.m4: New.

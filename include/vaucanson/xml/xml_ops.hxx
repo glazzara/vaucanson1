@@ -572,7 +572,7 @@ namespace vcsn
     if (!nodelist->getLength())
       FAIL("Cannot find any automaton root.");
     DOMNode* node = nodelist->item(0);
-    XmlAutomaton x(doc, static_cast<DOMElement*>(node));
+    XmlAutomaton x(static_cast<DOMElement*>(node));
     auto_t xa = auto_t(XmlSet(static_cast<DOMElement*>(node)), x);
 
     v = xa.value();

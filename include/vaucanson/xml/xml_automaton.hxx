@@ -99,8 +99,8 @@ namespace vcsn
     }
 
     inline
-    XmlAutomaton::XmlAutomaton(DOMDocument* doc, DOMElement* root)
-      : doc_(doc), handled_doc_(false), root_(root)
+    XmlAutomaton::XmlAutomaton(DOMElement* root)
+      : doc_(root->getOwnerDocument()), handled_doc_(false), root_(root)
     {
       DOMNode* i = root->getFirstChild();
 
@@ -156,35 +156,35 @@ namespace vcsn
 	i = i ->getNextSibling();
       }
       if (!structure_) {
-	structure_   = doc->createElement(str_structure);
+	structure_ = doc_->createElement(str_structure);
 	root_->appendChild(structure_);
       }
       if (!type_) {
-	type_   = doc->createElement(str_type);
+	type_ = doc_->createElement(str_type);
 	root_->insertBefore(type_, structure_);
       }
       if (!finals_node_) {
-	finals_node_   = doc->createElement(str_finals);
+	finals_node_ = doc_->createElement(str_finals);
 	structure_->appendChild(finals_node_);
       }
       if (!initials_node_) {
-	initials_node_ = doc->createElement(str_initials);
+	initials_node_ = doc_->createElement(str_initials);
 	structure_->insertBefore(initials_node_, finals_node_);
       }
       if (!edges_node_) {
-	edges_node_    = doc->createElement(str_edges);
+	edges_node_ = doc_->createElement(str_edges);
 	structure_->insertBefore(edges_node_, finals_node_);
       }
       if (!states_node_) {
-	states_node_   = doc->createElement(str_states);
+	states_node_ = doc_->createElement(str_states);
 	structure_->insertBefore(states_node_, edges_node_);
       }
       if (!semiring_node_) {
-	semiring_node_   = doc->createElement(str_semiring);
+	semiring_node_ = doc_->createElement(str_semiring);
 	type_->appendChild(semiring_node_);
       }
       if (!monoid_node_) {
-	monoid_node_   = doc->createElement(str_monoid);
+	monoid_node_ = doc_->createElement(str_monoid);
 	type_->insertBefore(monoid_node_, semiring_node_);
       }
 

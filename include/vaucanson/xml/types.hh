@@ -8,6 +8,18 @@
 # include <vaucanson/xml/xml_automaton.hh>
 # include <vaucanson/xml/xml_set.hh>
 
+/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/**
+ * @file type.hh
+ * @brief Utilities for XML Vaucanson types.
+ * @author Valentin David <valentin@lrde.epita.fr>
+ */
+
+/// Get the corresponding Xml implementation.
+# define XML_OF(X...) ::vcsn::xml::XmlOf< X >::ret
+/// Attach XML infos on Vaucanson graph.
+# define ATTACH_XML_INFOS(X...) ::vcsn::xml::AttachXmlInfos< X >::ret
+
 namespace vcsn
 {
   namespace xml
@@ -30,8 +42,11 @@ namespace vcsn
       typedef Element<I, Graph<J, K, L, M, N, XmlInfosTag> > ret;
     };
 
+    /// Dynamic XML automaton type.
     typedef Element<XmlSet, XmlAutomaton> xml_automaton_t;
   }
 }
+
+/** @} */
 
 #endif // VCSN_XML_TYPES_HH

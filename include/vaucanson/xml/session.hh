@@ -12,12 +12,20 @@
 
 # include <list>
 
+/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/**
+ * @file session.hh
+ * @brief XML sessions tools.
+ * @author Valentin David <valentin@lrde.epita.fr>
+ */
+
 namespace vcsn
 {
   namespace xml
   {
     using namespace xercesc;
 
+    /// Session handler.
     class XmlSession
     {
     public:
@@ -26,11 +34,14 @@ namespace vcsn
       DOMBuilder* parser_;
       std::list<DOMElement*> roots_;
     public:
+      /// Default constructor.
       XmlSession();
       ~XmlSession();
 
       //      template <typename T>
+      /// Pop operator.
       void operator<<(const XmlAutomaton&);
+      /// Queue operator.
       void operator>>(Element<XmlSet, XmlAutomaton>&);
     };
 
@@ -41,11 +52,15 @@ namespace vcsn
 			   xml::XmlSession&,
 			   const xml::XmlAutomaton&);
 
+  /// Read operator.
   std::ostream&
   operator<<(std::ostream&, const xml::XmlSession&);
+  /// Write operator.
   std::istream&
   operator>>(std::istream&, xml::XmlSession&);
 }
+
+/** @} */
 
 # include <vaucanson/xml/session.hxx>
 

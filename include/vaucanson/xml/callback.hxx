@@ -20,14 +20,15 @@
   else                                                       \
     FAIL("Unknown semiring set.");
 
-//FIXME: handle tansducers.
-//  else if (x.set().semiring_set() == XmlSet::LETTERS) {      \
-//    typedef vcsn::algebra::char_letter::                     \
-//            WordValue semiring_set;                          \
-//    CHOOSE_SEMIRING_TYPE;                                    \
-//  }                                                          \
-//  else                                                       \
-//    FAIL("Unknown semiring set.");
+/*FIXME: handle tansducers.
+  else if (x.set().semiring_set() == XmlSet::LETTERS) {      \
+    typedef vcsn::algebra::char_letter::                     \
+            WordValue semiring_set;                          \
+    CHOOSE_SEMIRING_TYPE;                                    \
+  }                                                          \
+  else                                                       \
+    FAIL("Unknown semiring set.");
+ */
 
 # define CHOOSE_SEMIRING_TYPE	                             \
   if ((x.set().semiring_type() == XmlSet::UNSET)             \

@@ -7,12 +7,20 @@
 
 # include <xercesc/dom/DOM.hpp>
 
+/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/**
+ * @file xml_automaton.hh
+ * @brief XML automaton implementation.
+ * @author Valentin David <valentin@lrde.epita.fr>
+ */
+
 namespace vcsn
 {
   namespace xml
   {
     using namespace xercesc;
 
+    /// Xml automaton implementation
     class XmlAutomaton
     {
     public:
@@ -38,8 +46,13 @@ namespace vcsn
       std::map<hstate_t,std::string>  snum2name_;
 
     public:
+      /// Default constructor.
       XmlAutomaton();
-      XmlAutomaton(DOMDocument*, DOMElement*);
+      /**
+       * @brief Read constructor.
+       * @param elt XML automaton root element.
+       */
+      XmlAutomaton(DOMElement* elt);
       ~XmlAutomaton();
 
       void			    serialize(std::ostream&) const;
@@ -50,6 +63,7 @@ namespace vcsn
       hstate_t			    add_state(hstate_t);
       hstate_t			    add_state(const std::string&);
       hstate_t		            add_state(hstate_t, const std::string&);
+
       // for internal only
       xercesc::DOMElement*	    add_state_elt(hstate_t);
       xercesc::DOMElement*          add_state_elt(hstate_t,
@@ -118,6 +132,8 @@ namespace vcsn
   };
 
 }
+
+/** @} */
 
 # include <vaucanson/xml/xml_automaton.hxx>
 

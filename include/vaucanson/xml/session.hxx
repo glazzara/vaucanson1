@@ -161,7 +161,7 @@ namespace vcsn
       DOMElement *root = roots_.back();
       roots_.pop_back();
       x = Element<XmlSet, XmlAutomaton>(XmlSet(root),
-					XmlAutomaton(doc_, root));
+					XmlAutomaton(root));
     }
   }
 }

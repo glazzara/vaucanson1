@@ -8,22 +8,22 @@
 
 namespace vcsn
 {
-    namespace xml
+  namespace xml
+  {
+    struct myDOMErrorHandler : public xercesc::DOMErrorHandler
     {
-      struct myDOMErrorHandler : public xercesc::DOMErrorHandler
-      {
-      protected:
-	std::string message;
-	bool error_;
-      public:
-	myDOMErrorHandler() : DOMErrorHandler(), message(), error_(false) { };
-	myDOMErrorHandler(const myDOMErrorHandler& c);
-	std::string get_msg() const;
-	bool has_error() const;
-	virtual bool handleError(const xercesc::DOMError& err);
-      };
-    }
+    protected:
+      std::string message;
+      bool error_;
+    public:
+      myDOMErrorHandler() : DOMErrorHandler(), message(), error_(false) { };
+      myDOMErrorHandler(const myDOMErrorHandler& c);
+      std::string get_msg() const;
+      bool has_error() const;
+      virtual bool handleError(const xercesc::DOMError& err);
+    };
   }
+}
 
 # include <vaucanson/xml/error_handler.hxx>
 

@@ -3,10 +3,18 @@
 
 # include <iostream>
 
+/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/**
+ * @file xml_loader.hh
+ * @brief Static load tools for @c automaton_loader .
+ * @author Valentin David <valentin@lrde.epita.fr>
+ */
+
 namespace vcsn
 {
   namespace xml
   {
+    /// XML Loader.
     class xml_loader {
     public:
       template <typename Saver, typename Conv>
@@ -17,6 +25,8 @@ namespace vcsn
     };
   }
 }
+
+/** @} */
 
 # include <vaucanson/xml/xml_loader.hxx>
 
