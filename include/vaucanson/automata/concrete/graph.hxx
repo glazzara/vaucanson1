@@ -176,10 +176,10 @@ namespace vcsn {
     const edge_value_t& ev = edges_[e];
 
     // remove reference to this edge in linked states.
-    states_[ev.from].successors.remove(ev.to);
-    states_[ev.from].output_edges.remove(e);
-    states_[ev.to].predecessors.remove(ev.from);
-    states_[ev.to].input_edges.remove(e);
+    remove_in(states_[ev.from].successors, ev.to);
+    remove_in(states_[ev.from].output_edges, e);
+    remove_in(states_[ev.to].predecessors, ev.from);
+    remove_in(states_[ev.to].input_edges, e);
     removed_edges_.insert(e);
 
     // edges_.size() - 1 must be used.
@@ -496,7 +496,8 @@ namespace vcsn {
 		 const Query& q,
 		 delta_kind::edges) const
   {
-    const std::list<hedge_t>& edges = states_[from].input_edges;
+    const typename state_value_t::edges_t& edges = 
+      states_[from].input_edges;
     for_each_const_(std::list<hedge_t>, e, edges)
       if (q(*e))
       {
@@ -514,7 +515,8 @@ namespace vcsn {
 		 const Query& q,
 		 delta_kind::states) const
   {
-    const std::list<hedge_t>& edges = states_[from].input_edges;
+    const state_value_t::edges_t& edges = 
+      states_[from].input_edges;
     for_each_const_(std::list<hedge_t>, e, edges)
       if (q(*e))
       {

@@ -38,6 +38,7 @@
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/history.hh>
+# include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 
 namespace vcsn {
 
@@ -365,9 +366,11 @@ namespace vcsn {
   //
   template <typename A, typename input_t, typename output_t>
   void 
-  do_hopcroft_minimization_undet(const AutomataBase<A>&	a_set,
-			      output_t&			output,
-			      const input_t&		input)
+  do_quotient(const AutomataBase<A>&	a_set,
+	      const algebra::NumericalSemiring&,
+	      SELECTOR(bool),
+	      output_t&			output,
+	      const input_t&		input)
   {
     typedef std::set<hstate_t>			     	      delta_ret_t;
     typedef typename input_t::label_t		       	      label_t;
@@ -674,15 +677,257 @@ namespace vcsn {
       output.set_initial(out_states[class_[*i]]);
   }
   
+  template <class S, class T,
+	    typename A, typename input_t, typename output_t>
+  void 
+  do_quotient(const AutomataBase<A>& a_set,
+	      const S&		      ,
+	      const T&,
+	      output_t&              output,
+	      const input_t&         input)
+  {
+    AUTOMATON_TYPES(input_t);
+    using namespace std;
+
+    /*-------------------------------------
+      Declare data structures and variables
+      -------------------------------------*/
+    typedef set<hedge_t>                       set_edges_t;
+    typedef set<hstate_t>                      set_states_t;
+    typedef set<weight_t>                      set_weight_t;
+    typedef vector<weight_t>                   vector_weight_t;
+    typedef pair<unsigned, letter_t>           pair_class_letter_t;
+    typedef pair<hstate_t, weight_t>           pair_state_weight_t;
+    typedef set<pair_state_weight_t>           set_pair_state_weight_t;
+    
+    set<unsigned>                              met_classes;
+    set_edges_t                                edges_comming, edges_leaving;
+    queue<pair_class_letter_t>                 the_queue;
+    vector<vector<set_pair_state_weight_t> >   inverse;
+    series_elt_t                               serie_identity    = input.series().zero_;
+    weight_t                                   weight_zero       = input.series().weights().wzero_;
+    monoid_elt_t                               monoid_identity   = input.series().monoid().empty_;
+    const alphabet_t&	                       alphabet(input.series().monoid().alphabet());
+    unsigned                                   max_partition, max_letters, pos;
+
+    pos              = 0;
+    max_partition    = 0;
+    max_letters      = alphabet.size();
+    map<letter_t, unsigned> pos_of_letter;
+    
+    unsigned			max_states = 0;
+    for_each_state(q, input)
+      {	
+	max_states = std::max(*q, max_states);
+      }
+    ++max_states;
+    // to avoid special case problem (one state initial and final ...)
+    max_states = std::max(max_states, 2u);
+
+    for_each_letter(a, alphabet){
+      pos_of_letter[*a] = pos;
+      pos++;
+    }
+
+    inverse.resize(max_states);
+
+    set_states_t           states_visited;
+    set_weight_t           weights_had_class;
+    vector<set_states_t>   classes(max_states);
+    vector<unsigned>       class_of_state(max_states);
+    vector_weight_t        old_weight(max_states), class_of_weight(max_states), val(max_states);
+
+    for(int i = 0; i < max_states; i++)
+      inverse[i].resize(max_states);
+
+    for_each_state(q, input)
+      {
+	for_each_letter(a, alphabet)
+	  {	    
+	    for_each_const_(set_states_t, r, states_visited)
+	      old_weight[*r] = weight_zero;
+	    states_visited.clear();
+	    edges_comming.clear();
+	
+	    input.letter_rdeltac(edges_comming, *q, *a, delta_kind::edges()); 
+	    
+	    for_each_const_(set_edges_t, e, edges_comming)
+	      {	      	      
+		hstate_t p = input.origin_of(*e);
+		if (states_visited.find(p) != states_visited.end())
+		  inverse[*q][pos_of_letter[*a]].erase(pair_state_weight_t(p, old_weight[p]));
+		else 
+		  states_visited.insert(p);
+
+		old_weight[p] += input.serie_of(*e).get(*a);
+		inverse[*q][pos_of_letter[*a]].insert(pair_state_weight_t(p, old_weight[p]));
+	      }
+	  }
+      }
+
+    /*-------------------------------------------------------------
+      Initialize the partition with 2 classes : final and non-final
+      -------------------------------------------------------------*/    
+    bool         empty = true;
+    unsigned     class_non_final;
+
+    for_each_state(q, input)
+      {
+	if (!input.is_final(*q))
+	  {
+	    if (empty == true)
+	      {
+		empty = false;
+		class_non_final = max_partition;
+		max_partition++;
+	      }
+	    classes[class_non_final].insert(*q);
+	    class_of_state[*q] = class_non_final;
+	  } 
+	else 
+	  { 
+	    weight_t w = input.get_final(*q).get(monoid_identity);
+	    if (weights_had_class.find(w) == weights_had_class.end())
+	      { 
+		weights_had_class.insert(w);
+		classes[max_partition].insert(*q);
+		class_of_weight[w] = max_partition;
+		class_of_state[*q] = max_partition;
+		max_partition++;
+	      } 
+	    else 
+	      {	    
+		classes[class_of_weight[w]].insert(*q);
+		class_of_state[*q] = class_of_weight[w];
+	      }
+	  }
+      }
+    
+    /*--------------------------------------------------
+      Initialize the queue with pairs <class_id, letter>
+      --------------------------------------------------*/
+    for (int i = 0; i < max_partition; i++)
+	for_each_letter(a, alphabet)
+	  the_queue.push(pair_class_letter_t(i, *a));
+
+    /*-------------
+      The main loop
+      -------------*/
+    unsigned old_max_partition = max_partition;
+        
+    while(!the_queue.empty())
+      {	
+	pair_class_letter_t pair = the_queue.front();
+	the_queue.pop();       
+	val.clear();
+	met_classes.clear();
+
+	for_each_const_(set_states_t, q, classes[pair.first])	// First, calculcate val[state] and note met_classes
+	  {	  
+	    for_each_const_(set_pair_state_weight_t, pair_, inverse[*q][pos_of_letter[pair.second]]) 
+	      {                                                                               
+		unsigned  state = (*pair_).first;
+		if (met_classes.find(class_of_state[state]) == met_classes.end())
+		  met_classes.insert(class_of_state[state]);
+		val[state] += (*pair_).second;
+	      }
+	  }
+
+	for_each_const_(set<unsigned>, class_id, met_classes) 	// Next,for each met class, do the partition.
+	  {	    
+	    if (classes[*class_id].size() == 1)
+	      continue;
+
+	    queue<hstate_t>   to_erase;
+	    weight_t          first_val, next_val; 
+	    first_val = val[*(classes[*class_id].begin())];
+	    class_of_weight.clear();
+	    weights_had_class.clear();
+	    
+	    for_each_const_(set_states_t, p, classes[*class_id])
+	      {
+		next_val = val[*p];
+		if (next_val != first_val) // This state must be moved to another class !
+		  {			
+		    if (weights_had_class.find(next_val) == weights_had_class.end()) // Must create a new class
+		      { 			    
+			classes[max_partition].insert(*p);
+			class_of_state[*p] = max_partition;
+			weights_had_class.insert(next_val);
+			class_of_weight[next_val] = max_partition;
+			max_partition++;
+		      }
+		    else 
+		      {
+			classes[class_of_weight[next_val]].insert(*p);
+			class_of_state[*p] = class_of_weight[next_val];
+		      }
+		    to_erase.push(*p);
+		  }
+	      }	    
+       
+       	    while(!to_erase.empty())
+	      {
+		hstate_t state_to_erase = to_erase.front();
+		to_erase.pop();
+		classes[*class_id].erase(state_to_erase);
+	      }
+	    
+	    for (int i = old_max_partition; i < max_partition; i++) // Push pairs <new_class_id, letter> into the queue
+	      for_each_letter(b, alphabet)
+		the_queue.push(pair_class_letter_t(i, *b));
+	    
+	    old_max_partition = max_partition;
+	  } 
+      }
+    
+    /*----------------
+      Form the output
+      ----------------*/
+    typedef map<unsigned, series_elt_t> map_class_serie_t;
+    map_class_serie_t serie_of;
+
+    for(int i = 0; i < max_partition; i++) // Add states
+      {
+	hstate_t p = output.add_state();
+	hstate_t a_state = *classes[i].begin();
+	series_elt_t a_serie = serie_identity;
+	
+	for_each_const_(set_states_t, state, classes[i])
+	  if(input.is_initial(*state))
+	    a_serie += input.get_initial(*state);
+
+	output.set_initial(p, a_serie);
+	
+	if (input.is_final(a_state))
+	  output.set_final(p, input.get_final(a_state));
+      }
+
+    for(int i = 0; i < max_partition; i++) // Add edges
+      {
+	serie_of.clear();
+	edges_leaving.clear();       
+	input.deltac(edges_leaving, *classes[i].begin(), delta_kind::edges());
+
+	for_each_const_(set_edges_t, e, edges_leaving)
+	    serie_of[class_of_state[input.aim_of(*e)]] += input.serie_of(*e);
+
+	for_each_const_(map_class_serie_t, it, serie_of)
+	    output.add_serie_edge(i, (*it).first, (*it).second);
+      }
+  }
   
   template<typename A, typename T>
   Element<A, T>
   quotient(const Element<A, T>& a)
   {
+    typedef Element<A, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
     Element<A, T> output;
     output.create();
     output.series() = a.series();
-    do_hopcroft_minimization_undet(a.set(), output, a);
+    do_quotient(a.set(), a.set().series().weights(), 
+		SELECT(weight_value_t), output, a);
     return output;
   }
 

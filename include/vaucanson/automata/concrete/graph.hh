@@ -61,10 +61,12 @@ namespace vcsn {
   // The only precondition is that StateLabel must be a class.
   struct state_value 
   {
-    std::list<hedge_t>  input_edges;
-    std::list<hedge_t>  output_edges;
-    std::list<hstate_t> successors;
-    std::list<hstate_t> predecessors;
+    typedef std::list<hedge_t> edges_t;
+    typedef std::list<hstate_t> states_t;
+    edges_t  input_edges;
+    edges_t  output_edges;
+    states_t successors;
+    states_t predecessors;
   };
 
   typedef utility::SparseInterval<hstate_t, std::set<hstate_t> > 
@@ -218,8 +220,10 @@ namespace vcsn {
 		       const L& letter,
 		       delta_kind::states k)
   {
-    const std::list<hedge_t>& edges = v.states_[from].output_edges;
-    for_each_const_(std::list<hedge_t>, e, edges)
+    typedef typename state_value::edges_t edges_t;
+    const edges_t& edges = 
+      v.states_[from].output_edges;
+    for_each_const_(edges_t, e, edges)
       if (v.edges_[*e].label == letter)
 	*res++ = v.edges_[*e].to;
   }
