@@ -1,3 +1,21 @@
+2004-03-18  Valentin David  <valentin@lrde.epita.fr>
+
+	* configure.ac: Delete generated lines.
+
+	* include/Makefile.am: Do not use stars anymore.
+
+	* include/vaucanson/design_pattern/element.hxx,
+	* include/vaucanson/design_pattern/default_ops.hxx:
+	Fail with the default set converter.
+
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh:
+	Remove deprecated code.
+
+	* include/vaucanson/automata/concrete/graph.hxx,
+	* include/vaucanson/automata/concrete/graph.hh:
+	Handle tags.
+
 2004-03-17  Valentin David <valentin@lrde.epita.fr>
 
 	* Makefile.am, configure.ac, src/tests/Makefile.am,

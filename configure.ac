@@ -123,29 +123,7 @@ AC_CONFIG_FILES([
 	include/Makefile
 	xml/Makefile])
 
-
 dnl GENERATED LINES FOR TESTS - DO NOT EDIT
-VCSN_TESTS([algebra_numerical_semiring_int])
-VCSN_TESTS([algebra_alphabet_set_char])
-VCSN_TESTS([algebra_free_monoid_string])
-VCSN_TESTS([algebra_tropical_semiring_max])
-VCSN_TESTS([usual_automaton_t])
-VCSN_TESTS([algebra_series_krat_int_string])
-VCSN_TESTS([algebra_series_misc])
-VCSN_TESTS([algebra_series_krat_derivation])
-VCSN_TESTS([algebra_numerical_semiring_rational])
-VCSN_TESTS([algebra_numerical_semiring_float])
-VCSN_TESTS([algebra_numerical_semiring_double])
-VCSN_TESTS([algebra_numerical_semiring_bool])
-VCSN_TESTS([algebra_series_polynom_bool_string])
-VCSN_TESTS([algebra_series_polynom_double_string])
-VCSN_TESTS([algebra_series_polynom_int_string])
-VCSN_TESTS([algebra_series_krat_cderivation])
-VCSN_TESTS([algebra_alphabet_set_alpha])
-VCSN_TESTS([algebra_alphabet_set_int])
-VCSN_TESTS([algebra_alphabet_set_pair_char_int])
-VCSN_TESTS([algebra_series_krat_bool_string])
-VCSN_TESTS([algebra_series_krat_double_string])
 dnl END OF GENERATED LINES FOR TESTS - DO NOT EDIT
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])

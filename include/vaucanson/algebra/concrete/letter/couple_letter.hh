@@ -91,26 +91,6 @@ namespace std {
   template <typename U, typename V>
   istream& operator>>(istream& i, pair<U, V>& p);
 
-  //! The char trait on pair (needed by basic_string for example)
-  template <typename U, typename V>
-  struct char_traits<pair<U, V> >
-  {
-    typedef pair<U, V> 	char_type;
-
-    static int 
-    compare(const char_type* __s1, const char_type* __s2, size_t __n);
-
-    static char_type* 
-    move(char_type* __s1, const char_type* __s2, size_t __n);
-
-    typename char_traits<std::pair<U, V> >::char_type*
-    copy(char_type* __s1, const char_type* __s2, size_t __n);
-
-    typename char_traits<std::pair<U, V> >::char_type*
-    assign(char_type* __s, size_t __n, char_type __a);
-
-  };
-
 } //std
 
 # ifndef VCSN_USE_INTERFACE_ONLY

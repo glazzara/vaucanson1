@@ -9,7 +9,7 @@ CLEANFILES = vaucanson/xml/xmlstrings.inc \
 	     vaucanson/xml/geometry.inc   \
 	     vaucanson/xml/loadgeometry.inc
 
-vaucanson/xml/xmlstrings.inc: $(top_srcdir)/xml/vaucanson-g.style $(srcdir)/vaucanson/xml/*.hxx $(srcdir)/vaucanson/xml/genutfstrings.sh vaucanson/xml/loadgeometry.inc
+vaucanson/xml/xmlstrings.inc: $(top_srcdir)/xml/vaucanson-g.style $(XMLSOURCES) $(srcdir)/vaucanson/xml/genutfstrings.sh vaucanson/xml/loadgeometry.inc
 	cd vaucanson/xml && $(SHELL) $(srcdir)/genutfstrings.sh
 
 vaucanson/xml/geometry.inc: $(top_srcdir)/xml/style-to-geometryvalue.awk $(top_srcdir)/xml/vaucanson-g.style
@@ -314,6 +314,13 @@ nobase_include_HEADERS =					     \
 	vaucanson/tools/dot_format.hxx		\
 	vaucanson/tools/simple_format.hh	\
 	vaucanson/tools/simple_format.hxx	\
+	$(XMLSOURCES)				\
+	vaucanson/xml/xmlstrings.inc            \
+	vaucanson/xml/geometry.inc              \
+	vaucanson/xml/loadgeometry.inc
+
+
+XMLSOURCES = \
 	vaucanson/xml/callback.hh		\
 	vaucanson/xml/callback.hxx		\
 	vaucanson/xml/defaults.hh		\
@@ -342,7 +349,4 @@ nobase_include_HEADERS =					     \
 	vaucanson/xml/xml_set.hh		\
 	vaucanson/xml/xml_set.hxx		\
 	vaucanson/xml/xml_value.hh		\
-	vaucanson/xml/xml_value.hxx		\
-	vaucanson/xml/xmlstrings.inc		\
-	vaucanson/xml/geometry.inc		\
-	vaucanson/xml/loadgeometry.inc
+	vaucanson/xml/xml_value.hxx

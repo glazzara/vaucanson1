@@ -96,52 +96,6 @@ namespace std {
     return i;
   }
 
-  template <typename U, typename V>
-  int 
-  char_traits<std::pair<U, V> >::
-  compare(const char_type* __s1, const char_type* __s2, size_t __n)
-  {
-    size_t i;
-      for (i = 0; (i != __n) && (__s1[i] == __s2[i]); ++i)
-	;
-      if (i == __n)
-	return 0;
-      else
-	return __s1[i] > __s2[i] ? 1 : -1;
-    }
-
-  template <typename U, typename V>
-  typename char_traits<std::pair<U, V> >::char_type* 
-  char_traits<std::pair<U, V> >::
-  move(char_type* __s1, const char_type* __s2, size_t __n)
-  {
-      char_type* tmp = new char_type[__n];
-      copy(tmp, __s2, __n);
-      copy(__s1, tmp, __n);
-      delete[] tmp;
-      return __s1;
-  }
-  
-  template <typename U, typename V>
-  typename char_traits<std::pair<U, V> >::char_type* 
-  char_traits<std::pair<U, V> >::
-  copy(char_type* __s1, const char_type* __s2, size_t __n)
-  {  
-    for (size_t i = 0; i != __n; ++i)
-      __s1[i] = __s2[i];
-    return __s1;
-  }
-  
-  template <typename U, typename V>
-  typename char_traits<std::pair<U, V> >::char_type* 
-  char_traits<std::pair<U, V> >::
-  assign(char_type* __s, size_t __n, char_type __a)
-  { 
-    for (size_t i = 0; i != __n; ++i)
-      __s[i] = __a;
-    return __s;
-  }
-  
 } // std
 
 #endif // VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HXX
