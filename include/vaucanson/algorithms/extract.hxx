@@ -34,10 +34,10 @@ namespace vcsn {
   `----------------------------------------*/
  
   template<typename A, typename auto_t, typename list_t>
-  void auto_do_extract(const AutomataBase<A>& a_set, 
+  void auto_do_extract(const AutomataBase<A>&, 
 		       auto_t& a,
 		       const list_t& selected, 
-		       bool check_states)
+		       bool /* FIXME: useless argument */)
   {
     std::deque<hstate_t> to_be_removed;
     for (typename auto_t::state_iterator i = a.states().begin();

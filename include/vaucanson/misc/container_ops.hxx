@@ -30,21 +30,21 @@ namespace vcsn
 {
 
   template<typename S, typename T>
-  typename T::iterator op_begin(const Structure<S>& s, 
+  typename T::iterator op_begin(const Structure<S>&, 
 				T& v)
   { 
     return v.begin(); 
   }
 
   template<typename S, typename T>
-  typename T::const_iterator op_begin(const Structure<S>& s, 
+  typename T::const_iterator op_begin(const Structure<S>&, 
 				      const T& v)
   { 
     return v.begin(); 
   }
   
   template<typename S, typename T>
-  typename T::iterator op_end(const Structure<S>& s, 
+  typename T::iterator op_end(const Structure<S>&, 
 			      T& v)
   { 
     return v.end(); 
@@ -65,49 +65,49 @@ namespace vcsn
   }
 
   template<typename S, typename T>
-  typename T::const_iterator op_end_const(const Structure<S>& s, 
+  typename T::const_iterator op_end_const(const Structure<S>&, 
 					  const T& v)
   { 
     return v.end(); 
   }
 
   template<typename S, typename T>
-  typename T::reverse_iterator op_rbegin(const Structure<S>& s, 
+  typename T::reverse_iterator op_rbegin(const Structure<S>&, 
 					 T& v)
   { 
     return v.rbegin(); 
   }
 
   template<typename S, typename T>
-  typename T::reverse_iterator op_rend(const Structure<S>& s, 
+  typename T::reverse_iterator op_rend(const Structure<S>&, 
 				       T& v)
   { 
     return v.rend(); 
   }
 
   template<typename S, typename T>
-  typename T::const_reverse_iterator op_rbegin_const(const Structure<S>& s,
+  typename T::const_reverse_iterator op_rbegin_const(const Structure<S>&,
 						     const T& v)
   { 
     return v.rbegin(); 
   }
 
   template<typename S, typename T>
-  typename T::const_reverse_iterator op_rend_const(const Structure<S>& s,
+  typename T::const_reverse_iterator op_rend_const(const Structure<S>&,
 						   const T& v)
   { 
     return v.rend(); 
   }
 
   template<typename S, typename T>
-  bool op_empty(const Structure<S>& s,
+  bool op_empty(const Structure<S>&,
 		const T& v)
   { 
     return v.empty(); 
   }
     
   template<typename S, typename T>
-  size_t op_size(const Structure<S>& s, 
+  size_t op_size(const Structure<S>&, 
 		 const T& v)
   { 
     return v.size(); 
@@ -128,8 +128,8 @@ namespace vcsn
   }
 
   template<typename S, typename T>
-  bool op_is_finite(const Structure<S>& s,
-		    const T& a)
+  bool op_is_finite(const Structure<S>&s,
+		    const T&)
   { 
     return false; 
   }

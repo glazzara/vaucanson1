@@ -40,7 +40,7 @@ namespace vcsn {
   //
   template <class A_, typename Auto_>
   bool
-  do_is_realtime(const AutomataBase<A_>& a_set,
+  do_is_realtime(const AutomataBase<A_>&,
 		 const Auto_&		   a)
   {
     for (typename Auto_::edge_iterator e = a.edges().begin();
@@ -64,7 +64,7 @@ namespace vcsn {
   `------------*/
   template <class A_, typename Auto_>
   void
-  do_in_realtime(const AutomataBase<A_>& a_set,
+  do_in_realtime(const AutomataBase<A_>&,
 		 Auto_&			 a)
   {
     typedef Auto_				automaton_t;

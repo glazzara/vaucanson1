@@ -42,7 +42,7 @@ namespace vcsn {
   //
   template <class A_, typename Auto_>
   std::set<hstate_t>
-  do_start_reachable_states(const AutomataBase<A_>& a_set,
+  do_start_reachable_states(const AutomataBase<A_>&,
 			    const Auto_&		   a)
   {
     typedef Auto_				automaton_t;

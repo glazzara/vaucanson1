@@ -34,18 +34,12 @@ namespace utility
   // this stuff is heavily inspired from the C++ Boost Library.
   // Use it sparingly, it can cause HUGE amounts of template instanciations.
 
-#if defined(__GNUC__)
-#define UnusedConceptVar __attribute__ ((__unused__))
-#else
-#define UnusedConceptVar /* unused */
-#endif
-
   namespace concepts
   {
     template <typename Concept_>
     static inline void function_requires()
     {
-      void (Concept_::*ptr)() UnusedConceptVar = &Concept_::constraints;
+      void XUNUSED((Concept_::*ptr)()) = &Concept_::constraints;
     }
 
     // deep wizardry at work here...

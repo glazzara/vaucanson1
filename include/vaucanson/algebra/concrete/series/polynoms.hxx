@@ -562,7 +562,7 @@ namespace vcsn {
 
     
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  Tw op_series_get(const Series<W, M>& s, 
+  Tw op_series_get(const Series<W, M>&, 
 		   const polynom<Tm, Tw>& p,
 		   const oTm& m)
   { 

@@ -1,5 +1,25 @@
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/config/system.hh: Add new macro XUNUSED.
+
+	* include/vaucanson/misc/constraints.hh (utility): Use XUNUSED.
+
+	* include/vaucanson/algorithms/compute.hxx,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/fundamental/default_ops.hxx 
+	* include/vaucanson/algorithms/closure.hxx,
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx,
+	* include/vaucanson/automata/concept/kinds.hxx,
+	* include/vaucanson/algorithms/reachable.hxx,
+	* include/vaucanson/algorithms/extract.hxx,
+	* include/vaucanson/fundamental/slots.hxx,
+	* include/vaucanson/automata/concrete/manylinks.hxx,
+	* include/vaucanson/misc/container_ops.hxx: Omit argument names
+	where necessary to shut up the compiler.
+
+2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* src/Makefile.am (SUBDIRS): Re-order.
 	* src/demos/vgrep/Makefile.am: Sanitize. 
 

@@ -38,7 +38,7 @@ namespace vcsn {
   template <typename A, typename auto_t, 
 	    typename weight_t, typename input_t>
   void 
-  do_compute(const AutomataBase<A>& a_set,
+  do_compute(const AutomataBase<A>&,
 	     const auto_t&	    a,
 	     const input_t&	    word, 
 	     weight_t&		    result)

@@ -39,7 +39,7 @@ namespace vcsn {
   {}
 
   template<typename S, bool dynamic /* default: false */>  
-  SetSlotAttribute<S, dynamic>::SetSlotAttribute(const S& other) 
+  SetSlotAttribute<S, dynamic>::SetSlotAttribute(const S&) 
   {}
 
   template<typename S, bool dynamic /* default: false */>   

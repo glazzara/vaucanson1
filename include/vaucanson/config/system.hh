@@ -41,4 +41,12 @@
 # include <vaucanson/config/rel_ops_work_around_g++2.hh>
 #endif
 
+// FIXME: these should be tested
+
+# if (defined __GNUC__)
+#  define XUNUSED(X) X __attribute__ ((__unused__))
+# else
+#  define XUNUSED(X) /* unused */
+# endif
+
 #endif // VCSN_CONFIG_SYSTEM_HH

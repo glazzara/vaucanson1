@@ -255,7 +255,7 @@ namespace vcsn {
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag, 
 	   typename Iter>
-  void auto_op_delta_states(const Structure<S>& series,
+  void auto_op_delta_states(const Structure<S>&,
 			    const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			    Iter out,
 			    unsigned s)
@@ -327,7 +327,7 @@ namespace vcsn {
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag, 
 	   typename Iter, typename Q>
-  void auto_op_delta_states(const Structure<S>& series,
+  void auto_op_delta_states(const Structure<S>&,
 			    const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			    Iter out,
 			    unsigned s,
@@ -347,7 +347,7 @@ namespace vcsn {
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag, 
 	   typename Iter, typename Q>
-  void auto_op_delta_edges(const Structure<S>& series,
+  void auto_op_delta_edges(const Structure<S>&,
 			   const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			   Iter out,
 			   unsigned s,

@@ -43,7 +43,7 @@ namespace vcsn {
 
   template <typename A, typename input_t, typename output_t>
   void 
-  do_subset_construction(const AutomataBase<A>&	a_set,
+  do_subset_construction(const AutomataBase<A>&	,
 			 output_t&	       	output,
 			 const input_t&		input)
   {    

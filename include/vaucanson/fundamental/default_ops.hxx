@@ -138,7 +138,7 @@ namespace vcsn {
 #define INOP_IMPL(Name)						\
     template<typename S, typename T, typename U>		\
     void op_in_ ## Name (const Structure<S>& s1, 	\
-			 const Structure<S>& s2,	\
+			 const Structure<S>&,	\
 			 T& dst,				\
 			 const U& arg)				\
     { 								\

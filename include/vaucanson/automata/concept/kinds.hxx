@@ -146,7 +146,7 @@ namespace vcsn {
     template<typename OutputIterator, typename L>							\
     void                                                                                               \
     AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::                                        \
-    letter_ ## Name (OutputIterator res, hstate_t from, const L& l, Kind_type k) const	\
+    letter_ ## Name (OutputIterator res, hstate_t from, const L& l, Kind_type) const	\
     {													\
       return auto_self().value()-> Name ## _ ## Type							\
 	(res, from,											\
@@ -157,7 +157,7 @@ namespace vcsn {
     template<typename Container, typename L>								\
     void                                                                                                \
     AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::                                        \
-    letter_ ## Name ## c (Container &dst, hstate_t from, const L& l, Kind_type k) const	\
+    letter_ ## Name ## c (Container &dst, hstate_t from, const L& l, Kind_type) const	\
     {													\
       std::insert_iterator<Container> i(dst, dst.begin());						\
       return auto_self().value()-> Name ## _ ## Type							\

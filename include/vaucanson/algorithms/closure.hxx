@@ -39,7 +39,7 @@ namespace vcsn {
   `-----------*/
   template <class A_, typename Auto_>
   void
-  do_in_closure(const AutomataBase<A_>& a_set,
+  do_in_closure(const AutomataBase<A_>&,
 		Auto_&			   a)
   {
     AUTOMATON_TYPES(Auto_);
