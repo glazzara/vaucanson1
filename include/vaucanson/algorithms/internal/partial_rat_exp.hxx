@@ -42,7 +42,7 @@ namespace vcsn
   PartialExp<Series, T>::PartialExp(const exp_t &e):
     rat_exp_(&e),
     weight_(rat_exp_->set().semiring().identity(
-      SELECT(typename weight_t::value_t))),
+      SELECT(typename semiring_elt_t::value_t))),
     ptr_list_()
   { }
 
@@ -54,7 +54,7 @@ namespace vcsn
   { }
     
   template <typename Series, typename T>
-  PartialExp<Series, T>& PartialExp<Series, T>::operator^=(weight_t w)
+  PartialExp<Series, T>& PartialExp<Series, T>::operator^=(semiring_elt_t w)
   {
     weight_ = w * weight_;
     return *this;
@@ -69,14 +69,14 @@ namespace vcsn
   }
 
   template <typename Series, typename T>
-  typename PartialExp<Series, T>::weight_t&
+  typename PartialExp<Series, T>::semiring_elt_t&
   PartialExp<Series, T>::weight()
   {
     return weight_;
   }
 
   template <typename Series, typename T>
-  const typename PartialExp<Series, T>::weight_t&
+  const typename PartialExp<Series, T>::semiring_elt_t&
   PartialExp<Series, T>::weight() const
   {
     return weight_;

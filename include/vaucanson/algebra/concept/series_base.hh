@@ -79,7 +79,7 @@ namespace vcsn {
     struct series_traits
     {
        typedef undefined_type	monoid_value_t;
-       typedef undefined_type	weight_value_t;
+       typedef undefined_type	semiring_elt_value_t;
     };
 
     template <typename T, typename W, typename M>
@@ -126,14 +126,14 @@ namespace vcsn {
     : public MetaElement<algebra::SemiringBase<Self>, T>
   {
   public:
-    //! type of the implementation of weight (element of semiring).
-    typedef typename algebra::series_traits<T>::weight_value_t   weight_value_t;
+    //! type of the implementation of semiring_elt (element of semiring).
+    typedef typename algebra::series_traits<T>::semiring_elt_value_t   semiring_elt_value_t;
 
     //! type of the implementation of free monoid element.
     typedef typename algebra::series_traits<T>::monoid_value_t    monoid_value_t;
 
     //! type of the element of the semiring element.
-    typedef Element<typename Self::semiring_t, weight_value_t> weight_t;
+    typedef Element<typename Self::semiring_t, semiring_elt_value_t> semiring_elt_t;
 
     //! type of the element of the monoid.
     typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
@@ -145,17 +145,17 @@ namespace vcsn {
     typedef typename algebra::series_traits<T>::support_t	support_t;
 
     //! returns the weight associated to a word. 
-    weight_value_t	value_get(const monoid_value_t& m) const;
+    semiring_elt_value_t	value_get(const monoid_value_t& m) const;
 
     //! returns the weight associated to a word. 
-    weight_t		get(const monoid_elt_t& m) const;
+    semiring_elt_t		get(const monoid_elt_t& m) const;
 
-    //! associates a weight to a word. 
+    //! associates a semiring_elt to a word. 
     void		value_set(const monoid_value_t& m, 
-				  const weight_value_t& w);
+				  const semiring_elt_value_t& w);
 
     //! associates a weight to a word. 
-    void		assoc(const monoid_elt_t& m, const weight_t& w);
+    void		assoc(const monoid_elt_t& m, const semiring_elt_t& w);
 
     //! returns true if the serie support is finite.
     bool		is_finite_app() const;

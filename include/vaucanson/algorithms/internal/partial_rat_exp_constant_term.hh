@@ -48,7 +48,7 @@
 namespace vcsn {
 
   template <class Series, class T>
-  std::pair<typename Element<Series, T>::weight_t, bool>
+  std::pair<typename Element<Series, T>::semiring_elt_t, bool>
   constant_term(const PartialExp<Series, T>& exp);
 
 } // vcsn

@@ -40,16 +40,16 @@
 template <class Expr>
 bool krat_exp_derivation_test(tests::Tester& tg)
 {
-  typedef Expr				      krat_exp_t;
-  typedef typename krat_exp_t::value_t	      kexp_t;
-  typedef typename krat_exp_t::monoid_elt_t   monoid_elt_t;
-  typedef typename monoid_elt_t::set_t        monoid_t;
+  typedef Expr					krat_exp_t;
+  typedef typename krat_exp_t::value_t		kexp_t;
+  typedef typename krat_exp_t::monoid_elt_t	monoid_elt_t;
+  typedef typename monoid_elt_t::set_t		monoid_t;
   
-  typedef typename krat_exp_t::weight_t   weight_t;
-  typedef typename weight_t::set_t	  semiring_t;
-  typedef typename krat_exp_t::set_t 	  series_t;
-  typedef typename monoid_t::letter_t     letter_t;
-  typedef typename monoid_t::alphabet_t   alphabet_t;
+  typedef typename krat_exp_t::semiring_elt_t	semiring_elt_t;
+  typedef typename semiring_elt_t::set_t	semiring_t;
+  typedef typename krat_exp_t::set_t		series_t;
+  typedef typename monoid_t::letter_t		letter_t;
+  typedef typename monoid_t::alphabet_t		alphabet_t;
 
   tests::Tester t(tg.verbose());
   srand(time(0));

@@ -39,8 +39,8 @@
 
 namespace vcsn {
   
-  template<typename Series, typename MonoidElt, typename Weight, typename L>  
-  ls_delta_letter_query<Series, MonoidElt, Weight, L>::
+  template<typename Series, typename MonoidElt, typename SemiringElt, typename L>  
+  ls_delta_letter_query<Series, MonoidElt, SemiringElt, L>::
   ls_delta_letter_query(const Series& s, const L& l)
     : s_(s), 
       l_(op_convert(SELECT(typename MonoidElt::set_t),
@@ -48,14 +48,14 @@ namespace vcsn {
 		    l))
   {}
   
-  template<typename Series, typename MonoidElt, typename Weight, typename L>
+  template<typename Series, typename MonoidElt, typename SemiringElt, typename L>
   template<typename Label>
-  bool ls_delta_letter_query<Series, MonoidElt, Weight, L>::
+  bool ls_delta_letter_query<Series, MonoidElt, SemiringElt, L>::
   operator()(const Label& label) const
   {
     return (op_series_get(s_.get(), label, l_)
-	    != zero_value(SELECT(typename Weight::set_t), 
-				   SELECT(typename Weight::value_t)));
+	    != zero_value(SELECT(typename SemiringElt::set_t), 
+				   SELECT(typename SemiringElt::value_t)));
   }
 
 
@@ -159,7 +159,7 @@ namespace vcsn {
     {													\
       return auto_self().value()-> Name ## _ ## Type							\
 	(res, from,											\
-	 ls_delta_letter_query<Series, monoid_elt_t, weight_t, L>					\
+	 ls_delta_letter_query<Series, monoid_elt_t, semiring_elt_t, L>					\
 	 (auto_self().series(), l));						 			\
     }										                        \
     template<typename Self, typename Series, typename SeriesT, typename LabelT>			\
@@ -171,7 +171,7 @@ namespace vcsn {
       std::insert_iterator<Container> i(dst, dst.begin());						\
       return auto_self().value()-> Name ## _ ## Type							\
 	(i, from,											\
-	 ls_delta_letter_query<Series, monoid_elt_t, weight_t, L>					\
+	 ls_delta_letter_query<Series, monoid_elt_t, semiring_elt_t, L>					\
 	 (auto_self().series(), l));									\
     }
 
@@ -197,7 +197,7 @@ namespace vcsn {
 
 
   /*-----------------------------------------------------------.
-  | Automaton labels are pairs (weight value, monoidelt value) |
+  | Automaton labels are pairs (semiring_elt value, monoidelt value) |
   `-----------------------------------------------------------*/
 
   
@@ -235,7 +235,7 @@ namespace vcsn {
     const Series& s = auto_self().series();
     
     series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
-    return se *= weight_t(s.semiring(), label.first);
+    return se *= semiring_elt_t(s.semiring(), label.first);
   }
   
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
@@ -247,7 +247,7 @@ namespace vcsn {
     const Series& s = auto_self().series();
     
     series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
-    return (se *= weight_t(s.semiring(), label.first)).value();
+    return (se *= semiring_elt_t(s.semiring(), label.first)).value();
   }
 
     template<typename Self, typename Series, typename SeriesT, typename LabelT>
@@ -318,7 +318,7 @@ namespace vcsn {
 		  std::make_pair(identity_value(SELECT(monoid_t), 
 						SELECT(typename monoid_elt_t::value_t)), 
 				 identity_value(SELECT(semiring_t), 
-						SELECT(typename weight_t::value_t)))
+						SELECT(typename semiring_elt_t::value_t)))
 		  );
     }
 
@@ -335,7 +335,7 @@ namespace vcsn {
 	(from, 
 	 to, 
 	 std::make_pair(identity_value(SELECT(semiring_t), 
-				       SELECT(typename weight_t::value_t)),
+				       SELECT(typename semiring_elt_t::value_t)),
 			monoid_elt_t(auto_self().series().monoid(), l).value()));
     }
 

@@ -134,14 +134,14 @@ namespace Kind ##_types
 
   struct Kind ##_semiring_t;
 
-  struct Kind ##_weight_t
+  struct Kind ##_semiring_elt_t
   {
-    Kind ##_weight_t(const Kind ##_weight_t&);
-    Kind ##_weight_t(const Kind ##_semiring_t&);
-    Kind ##_weight_t(const Kind ##_semiring_t&, int);
+    Kind ##_semiring_elt_t(const Kind ##_semiring_elt_t&);
+    Kind ##_semiring_elt_t(const Kind ##_semiring_t&);
+    Kind ##_semiring_elt_t(const Kind ##_semiring_t&, int);
     const Kind ##_semiring_t& set() const;
-    EXTEND_DESCRIBE(Kind ##_weight_t)
-    semiring_ops(Kind ##_weight_t)
+    EXTEND_DESCRIBE(Kind ##_semiring_elt_t)
+    semiring_ops(Kind ##_semiring_elt_t)
   };
 
   struct Kind ##_semiring_t 
@@ -149,12 +149,12 @@ namespace Kind ##_types
     Kind ##_semiring_t();
     EXTEND_DESCRIBE(Kind ##_semiring_t)
     %extend {
-      Kind ##_weight_t make(int i)
-	{ return Kind ##_weight_t(*self, i); }
-      Kind ##_weight_t identity()
-	{ return self->identity(SELECT(Kind ## _weight_value_t)); }
-      Kind ##_weight_t zero()
-	{ return self->zero(SELECT(Kind ## _weight_value_t)); }
+      Kind ##_semiring_elt_t make(int i)
+	{ return Kind ##_semiring_elt_t(*self, i); }
+      Kind ##_semiring_elt_t identity()
+	{ return self->identity(SELECT(Kind ## _semiring_elt_value_t)); }
+      Kind ##_semiring_elt_t zero()
+	{ return self->zero(SELECT(Kind ## _semiring_elt_value_t)); }
     }
   };      
 
@@ -166,11 +166,11 @@ namespace Kind ##_types
   {
     Kind ##_serie_t(const Kind ##_serie_t&);
     Kind ##_serie_t(const Kind ##_series_t&);
-    Kind ##_serie_t(const Kind ##_series_t&, const Kind ##_weight_t&);
+    Kind ##_serie_t(const Kind ##_series_t&, const Kind ##_semiring_elt_t&);
     Kind ##_serie_t(const Kind ##_series_t&, const Kind ##_monoid_elt_t&);
     const Kind ##_series_t& set() const;
     EXTEND_DESCRIBE(Kind ##_serie_t)
-    series_ops(Kind ##_serie_t, Kind ##_weight_t, Kind ##_monoid_elt_t)
+    series_ops(Kind ##_serie_t, Kind ##_semiring_elt_t, Kind ##_monoid_elt_t)
   };
 
   struct Kind ##_exp_t 
@@ -178,7 +178,7 @@ namespace Kind ##_types
     Kind ##_exp_t(const Kind ##_exp_t&);
     Kind ##_exp_t(const Kind ##_series_t&);
     Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_serie_t&);
-    Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_weight_t&);
+    Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_semiring_elt_t&);
     Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_monoid_elt_t&);
     %extend {
     Kind ##_exp_t star() const
@@ -186,7 +186,7 @@ namespace Kind ##_types
     }  
     const Kind ##_series_t& set() const;
     EXTEND_DESCRIBE(Kind ##_exp_t)
-    series_ops(Kind ##_exp_t, Kind ##_weight_t, Kind ##_monoid_elt_t)
+    series_ops(Kind ##_exp_t, Kind ##_semiring_elt_t, Kind ##_monoid_elt_t)
   };
 
   struct Kind ##_series_t {
@@ -196,7 +196,7 @@ namespace Kind ##_types
     EXTEND_DESCRIBE(Kind ##_series_t)
     %extend {
     Kind ##_serie_t make(int i) const
-    { return Kind ##_serie_t(*self, Kind ##_weight_t(self->semiring(), i)); }
+    { return Kind ##_serie_t(*self, Kind ##_semiring_elt_t(self->semiring(), i)); }
     Kind ##_serie_t make(const std::string& l) const
     { return Kind ##_serie_t(*self, Kind ##_monoid_elt_t(self->monoid(), l)); }
 
@@ -240,8 +240,8 @@ namespace Kind ##_types
 
 
     %extend {
-      Kind ##_weight_t weight(int i) const
-	{ return Kind ##_weight_t(self->semiring(), i); }
+      Kind ##_semiring_elt_t semiring_elt(int i) const
+	{ return Kind ##_semiring_elt_t(self->semiring(), i); }
       Kind ##_monoid_elt_t word(const std::string& l) const
 	{ 
 	  for (unsigned i = 0; i < l.size(); ++i)
@@ -250,7 +250,7 @@ namespace Kind ##_types
 	  return Kind ##_monoid_elt_t(self->monoid(), l); 
 	}
       Kind ##_serie_t serie(int i) const
-	{ return Kind ##_serie_t(self->series(), Kind ##_weight_t(self->semiring(), i)); }
+	{ return Kind ##_serie_t(self->series(), Kind ##_semiring_elt_t(self->semiring(), i)); }
       Kind ##_serie_t serie(const std::string& l) const
 	{ 
 	  for (unsigned i = 0; i < l.size(); ++i)

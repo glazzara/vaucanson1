@@ -47,14 +47,14 @@ namespace vcsn {
     {
       typedef KRatExpCDerivation<Series, T, Dispatch>   self_t;
       typedef Element<Series, T>                        return_type;
-      typedef typename Element<Series, T>::weight_t     weight_t;
-      typedef typename weight_t::value_t		      weight_value_t;
+      typedef typename Element<Series, T>::semiring_elt_t     semiring_elt_t;
+      typedef typename semiring_elt_t::value_t		      semiring_elt_value_t;
       typedef typename Element<Series, T>::monoid_elt_t monoid_elt_t;
       typedef typename monoid_elt_t::value_t	      monoid_elt_value_t;
       typedef typename monoid_elt_t::set_t	      monoid_t;
       typedef typename monoid_t::alphabet_t	      alphabet_t;
       typedef typename alphabet_t::letter_t	      letter_t;
-      INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
+      INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
       KRatExpCDerivation(const Element<Series, T>& exp,
 			 letter_t                  a) :
@@ -76,7 +76,7 @@ namespace vcsn {
 	  return match_lhs * rhs;
 	else
 	  {
-	    std::pair<weight_t, bool> ret = constant_term(series(lhs));
+	    std::pair<semiring_elt_t, bool> ret = constant_term(series(lhs));
 	    return ret.first * match(rhs);
 	  }
       }
@@ -103,13 +103,13 @@ namespace vcsn {
 
       MATCH__(LeftWeight, w, e)
       {
-	return weight_t(w) * match(e);
+	return semiring_elt_t(w) * match(e);
       }
       END
 
       MATCH__(RightWeight, e, w)
       {
-	return match(e) * weight_t(w);
+	return match(e) * semiring_elt_t(w);
       }
       END
 

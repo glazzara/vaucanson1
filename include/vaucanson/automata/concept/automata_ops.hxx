@@ -401,7 +401,7 @@ namespace vcsn {
       return (op_series_get(s_->series(), 
  			    op_serie_of(*s_, *v_, e).value(),
  			    w_.value())
- 	      != algebra::zero_as<AutoType(weight_value_t)>
+ 	      != algebra::zero_as<AutoType(semiring_elt_value_t)>
  	      ::of(s_->series().semiring()));
     }
 
@@ -438,7 +438,7 @@ namespace vcsn {
       return (op_serie_of(s_, v_, e)
 	      .get(algebra::identity_as<AutoType(monoid_elt_value_t)>::of
 		   (s_.series().monoid()))
-	      != algebra::zero_as<AutoType(weight_value_t)>
+	      != algebra::zero_as<AutoType(semiring_elt_value_t)>
 	      ::of(s_.series().semiring()));
     }
 

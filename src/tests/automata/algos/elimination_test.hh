@@ -74,7 +74,7 @@ bool elimination_test(tests::Tester& tg)
 	    std::cout << "TEST: aut_to_exp " << nb << " : test " 
 		      << w << std::endl;
 	  if (eval(a, w) ==
-	      zero_as<weight_value_t>::of(a.set().series().semiring()))
+	      zero_as<semiring_elt_value_t>::of(a.set().series().semiring()))
 	    {
 	      break;
 	      if (t.verbose() == tests::high)

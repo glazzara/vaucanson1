@@ -55,10 +55,10 @@ namespace vcsn {
     typedef typename automaton_t::set_t				automata_set_t;
     typedef typename automaton_t::series_t			series_t; 
     typedef typename automaton_t::series_elt_t			series_elt_t;
-    typedef typename series_elt_t::weight_t			weight_t;
+    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
     typedef Monoid_						monoid_value_t;
-    typedef Semiring_						weight_value_t;
-    typedef rat::Node<monoid_value_t, weight_value_t>           node_t;
+    typedef Semiring_						semiring_elt_value_t;
+    typedef rat::Node<monoid_value_t, semiring_elt_value_t>           node_t;
 
   public :
 
@@ -98,25 +98,25 @@ namespace vcsn {
     }
 
     virtual void 
-    left_weight(const weight_value_t& w, const node_t* node) 
+    left_weight(const semiring_elt_value_t& w, const node_t* node) 
     {
       node->accept(*this);
 
       for (typename automaton_t::initial_iterator i = auto_->initial().begin();
 	   i != auto_->initial().end();
 	   ++i)
-	auto_->set_initial(*i, weight_t(w) * auto_->get_initial(*i));
+	auto_->set_initial(*i, semiring_elt_t(w) * auto_->get_initial(*i));
     }
     
     virtual void 
-    right_weight(const weight_value_t& w, const node_t* node)
+    right_weight(const semiring_elt_value_t& w, const node_t* node)
     {
       node->accept(*this);
 
       for (typename automaton_t::initial_iterator i = auto_->initial().begin();
 	   i != auto_->initial().end();
 	   ++i)
-	auto_->set_initial(*i, auto_->get_initial(*i) * weight_t(w));
+	auto_->set_initial(*i, auto_->get_initial(*i) * semiring_elt_t(w));
     }
 
     virtual void 
@@ -175,7 +175,7 @@ namespace vcsn {
    
     // FIXME : 
     // Static assert : Letter = monoid_elt_value_t, 
-    //                 Weight = weight_value_t
+    //                 Weight = semiring_elt_value_t
     kexp.accept(visitor);
     output = visitor.get_auto();    
   }

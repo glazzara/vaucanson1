@@ -40,16 +40,16 @@ namespace vcsn {
   class ConstantTermEval : public algebra::KRatExpMatcher<
     ConstantTermEval<Series, T, Dispatch>,
     T, 
-    typename Element<Series, T>::weight_t,
+    typename Element<Series, T>::semiring_elt_t,
     Dispatch
     >
   {
   public:
     typedef ConstantTermEval<Series, T, Dispatch>	self_t;
-    typedef typename Element<Series, T>::weight_t       return_type;
-    typedef typename Element<Series, T>::weight_t       weight_t;
-    typedef typename weight_t::value_t		        weight_value_t;
-    INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
+    typedef typename Element<Series, T>::semiring_elt_t       return_type;
+    typedef typename Element<Series, T>::semiring_elt_t       semiring_elt_t;
+    typedef typename semiring_elt_t::value_t		        semiring_elt_value_t;
+    INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
     ConstantTermEval(const Element<Series, T>& exp) :
       undefined(false),
@@ -70,7 +70,7 @@ namespace vcsn {
 
     MATCH_(Star, node)
     {
-      weight_t ret = match(node);
+      semiring_elt_t ret = match(node);
       if (ret.starable())
 	return star(ret);
       undefined = true;
@@ -92,19 +92,19 @@ namespace vcsn {
 
     MATCH_(Constant, m)
     {
-      return exp_.set().semiring().zero(SELECT(weight_value_t));
+      return exp_.set().semiring().zero(SELECT(semiring_elt_value_t));
     }
     END
 
     MATCH(Zero)
     {
-      return exp_.set().semiring().zero(SELECT(weight_value_t));
+      return exp_.set().semiring().zero(SELECT(semiring_elt_value_t));
     }
     END
 
     MATCH(One)
     {
-      return exp_.set().semiring().identity(SELECT(weight_value_t));
+      return exp_.set().semiring().identity(SELECT(semiring_elt_value_t));
     }
     END
 
@@ -115,12 +115,12 @@ namespace vcsn {
   };
   
   template <class Series, class T>
-  std::pair<typename Element<Series, T>::weight_t, bool>
+  std::pair<typename Element<Series, T>::semiring_elt_t, bool>
   constant_term(const Element<Series, T>& exp)
   {
-    typedef typename Element<Series, T>::weight_t     weight_t;
+    typedef typename Element<Series, T>::semiring_elt_t     semiring_elt_t;
     ConstantTermEval<Series, T, algebra::DispatchFunction<T> > matcher(exp);
-    weight_t v = matcher.match(exp.value());
+    semiring_elt_t v = matcher.match(exp.value());
     if (matcher.undefined)
       return std::make_pair(v, false);
     return std::make_pair(v, true);

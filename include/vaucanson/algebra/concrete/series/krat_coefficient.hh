@@ -38,7 +38,7 @@ namespace vcsn {
   namespace algebra {
 
     template <class Series, class T>
-    std::pair<typename Element<Series, T>::weight_t, Element<Series, T> >
+    std::pair<typename Element<Series, T>::semiring_elt_t, Element<Series, T> >
     coefficient(const Element<Series, T>& exp);
 
   } // algebra

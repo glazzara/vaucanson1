@@ -70,7 +70,7 @@ namespace vcsn {
     typedef typename automaton_traits<T>::label_t label_t;
     typedef typename automaton_traits<T>::serie_value_t serie_value_t;
     typedef typename automaton_traits<T>::word_value_t word_value_t;
-    typedef typename automaton_traits<T>::weight_value_t weight_value_t;
+    typedef typename automaton_traits<T>::semiring_elt_value_t semiring_elt_value_t;
     typedef typename automaton_traits<T>::letter_t letter_t;
     typedef typename automaton_traits<T>::tag_t tag_t;
     typedef typename automaton_traits<T>::states_t states_t;

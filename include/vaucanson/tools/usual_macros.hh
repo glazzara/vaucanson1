@@ -53,8 +53,8 @@
  typedef typename AutoType::serie_t             Prefix##serie_t;    \
  typedef typename AutoType::serie_value_t	Prefix##serie_value_t; \
  typedef typename AutoType::series_elt_t             Prefix##series_elt_t;    \
- typedef typename Prefix##series_elt_t::weight_t     Prefix##weight_t;	      \
- typedef typename Prefix##weight_t::value_t          Prefix##weight_value_t;  \
+ typedef typename Prefix##series_elt_t::semiring_elt_t     Prefix##semiring_elt_t;	      \
+ typedef typename Prefix##semiring_elt_t::value_t          Prefix##semiring_elt_value_t;  \
  typedef typename AutoType::label_t			Prefix##label_t;      \
  typedef typename AutoType::tag_t			Prefix##tag_t;
 
@@ -81,8 +81,8 @@
  typedef AutoType::serie_t		Prefix##serie_t;		  \
  typedef AutoType::serie_value_t	Prefix##serie_value_t;		  \
  typedef AutoType::series_elt_t		Prefix##series_elt_t;		  \
- typedef Prefix##series_elt_t::weight_t	Prefix##weight_t;		  \
- typedef Prefix##weight_t::value_t		Prefix##weight_value_t;	  \
+ typedef Prefix##series_elt_t::semiring_elt_t	Prefix##semiring_elt_t;		  \
+ typedef Prefix##semiring_elt_t::value_t		Prefix##semiring_elt_value_t;	  \
  typedef AutoType::label_t			Prefix##label_t;	  \
  typedef AutoType::tag_t			Prefix##tag_t;
 
@@ -134,6 +134,6 @@
 #define zero_	zero(SELECT(typename series_elt_t::value_t))
 #define one_	identity(SELECT(typename series_elt_t::value_t))
 #define empty_ identity(SELECT(typename monoid_elt_t::value_t))
-#define wzero_  zero(SELECT(typename weight_t::value_t))
+#define wzero_  zero(SELECT(typename semiring_elt_t::value_t))
 
 #endif // VCSN_TOOLS_USUAL_MACROS_HH

@@ -61,7 +61,7 @@ namespace vcsn
     typedef Series				series_t;
     typedef T					series_impl_t;
     typedef typename T::node_t			value_t;
-    typedef typename exp_t::weight_t		weight_t;
+    typedef typename exp_t::semiring_elt_t	semiring_elt_t;
 
     /* 
      * A std::list is used because pop_front is needed,
@@ -78,12 +78,12 @@ namespace vcsn
 
     // Be carefull: this operator multiply the two weight, but
     // it is w * weight_ that is computed.
-    PartialExp& operator^=(weight_t w);
+    PartialExp& operator^=(semiring_elt_t w);
     PartialExp& insert(const value_t *v);
     
     // Accessors
-    weight_t&		weight();
-    const weight_t&	weight() const;
+    semiring_elt_t&		weight();
+    const semiring_elt_t&	weight() const;
     ptr_list_t&		ptr_list();
     const ptr_list_t&	ptr_list() const;
 
@@ -100,7 +100,7 @@ namespace vcsn
 
   protected:
     const exp_t*	rat_exp_;
-    weight_t		weight_;
+    semiring_elt_t	weight_;
     ptr_list_t		ptr_list_;
   };
 

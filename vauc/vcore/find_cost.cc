@@ -40,7 +40,7 @@ namespace vcsn
       return i->first;
     }
 
-    static inline unsigned weight(const g_t& g, const vertex_t& from, const vertex_t& to)
+    static inline unsigned semiring_elt(const g_t& g, const vertex_t& from, const vertex_t& to)
     {
       const Env::converters_map_t& c = g.converters();
       Env::converters_map_t::const_iterator i = c.find(std::make_pair(from, to));
@@ -72,7 +72,7 @@ namespace vcsn
 
       unsigned dv = d[v];
       unsigned du = d[u];
-      unsigned wuv = weight(g, u, v);
+      unsigned wuv = semiring_elt(g, u, v);
       unsigned sum = du + wuv;
 
       d("-- relaxing from u = " << u << " to v = " << v);

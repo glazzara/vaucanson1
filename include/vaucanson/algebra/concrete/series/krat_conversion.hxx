@@ -89,7 +89,7 @@ namespace vcsn {
 	     typename Series_>
      void
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::left_weight(const oTw& w, 
-						     const node_t* node_)
+							      const node_t* node_)
     {
       node_->accept(*this);
       exp_ = op_mul(series_.semiring(), series_, 
@@ -103,7 +103,8 @@ namespace vcsn {
 	     typename Series_>
      void
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::right_weight(const oTw& w, 
-						      const node_t* node_)
+							       const node_t*
+								 node_)
     {
       node_->accept(*this);
       op_in_mul(series_, series_.semiring(), exp_, 

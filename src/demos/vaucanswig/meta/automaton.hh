@@ -58,7 +58,7 @@
 
 #define WORD_OF_LETTER(Self, L) monoid_elt_t(MONOID_OF(Self), L)
 
-#define WEIGHT(Self, W) weight_t(WEIGHTS_OF(Self), W)
+#define WEIGHT(Self, W) semiring_elt_t(WEIGHTS_OF(Self), W)
 
 
 template<typename Auto, typename Converter>

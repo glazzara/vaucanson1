@@ -57,7 +57,7 @@ namespace vcsn {
 
     public:
       typedef LetterT monoid_value_t; 
-      typedef WeightT weight_value_t;
+      typedef WeightT semiring_elt_value_t;
 
       exp();
       exp(node_t* p);
@@ -68,7 +68,7 @@ namespace vcsn {
       exp& operator+=(const exp& other);
       exp& operator*=(const exp& other);
       exp& star();
-      void accept(ConstNodeVisitor<monoid_value_t, weight_value_t>& v) const;
+      void accept(ConstNodeVisitor<monoid_value_t, semiring_elt_value_t>& v) const;
       size_t depth() const;
       ~exp();
       node_t* &base();
@@ -134,8 +134,8 @@ namespace vcsn {
     public:
       typedef Matcher					 matcher_t;
       typedef Monoid					 monoid_value_t;
-      typedef Semiring					 weight_value_t;
-      typedef rat::Node<monoid_value_t, weight_value_t>  node_t;
+      typedef Semiring					 semiring_elt_value_t;
+      typedef rat::Node<monoid_value_t, semiring_elt_value_t>  node_t;
       
       DispatchVisitor(Matcher& m);
       
@@ -152,10 +152,10 @@ namespace vcsn {
       star(const node_t* node);
       
       virtual void 
-      left_weight(const weight_value_t& w, const node_t* node);
+      left_weight(const semiring_elt_value_t& w, const node_t* node);
     
       virtual void 
-      right_weight(const weight_value_t& w, const node_t* node);
+      right_weight(const semiring_elt_value_t& w, const node_t* node);
 
       virtual void 
       constant(const monoid_value_t& m);

@@ -75,7 +75,7 @@ namespace vcsn {
     typedef undefined_type label_t;
     typedef undefined_type serie_value_t;
     typedef undefined_type word_value_t;
-    typedef undefined_type weight_value_t;
+    typedef undefined_type semiring_elt_value_t;
     typedef undefined_type letter_t;
     typedef undefined_type tag_t;
     typedef undefined_type states_t;
@@ -158,10 +158,10 @@ namespace vcsn {
     typedef typename series_t::semiring_t		      semiring_t;
 
     /*! type of the free monoid element. */
-    typedef typename series_elt_t::weight_t		      weight_t;
+    typedef typename series_elt_t::semiring_elt_t		      semiring_elt_t;
 
-    /*! type of the implementation of a weight. */
-    typedef typename series_elt_t::weight_value_t	     weight_value_t;
+    /*! type of the implementation of a semiring_elt. */
+    typedef typename series_elt_t::semiring_elt_value_t	     semiring_elt_value_t;
 
     /*! type of additional information that is aggregated to the automaton. */
     typedef typename automaton_traits<T>::tag_t		      tag_t;

@@ -50,7 +50,7 @@ bool odd_language_test(const Auto& a, const Letter& l)
       monoid_elt_t w;
       for (unsigned j = 0; j < 2 * i + 3; ++j)
 	w *= monoid_elt_t(l);
-      if (eval(a, w) == zero_as<weight_value_t>
+      if (eval(a, w) == zero_as<semiring_elt_value_t>
 	  ::of(a.set().series().semiring()))
 	return false;
     }
@@ -66,7 +66,7 @@ bool even_language_test(const Auto& a, const Letter& l)
       monoid_elt_t w;
       for (unsigned j = 0; j < 2 * i; ++j)
 	w *= monoid_elt_t(l);
-      if (eval(a, w) != zero_as<weight_value_t>
+      if (eval(a, w) != zero_as<semiring_elt_value_t>
 	  ::of(a.set().series().semiring()))
 	return false;
     }

@@ -57,13 +57,13 @@ namespace vcsn
     typedef typename set_t::iterator			iterator_t;
   // Other common types
     typedef KRatExpAciCanonical<Series, T, Dispatch>	self_t;
-    typedef typename Element<Series, T>::weight_t	weight_t;
-    typedef typename weight_t::value_t			weight_value_t;
+    typedef typename Element<Series, T>::semiring_elt_t	semiring_elt_t;
+    typedef typename semiring_elt_t::value_t			semiring_elt_value_t;
     typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
     typedef typename monoid_elt_t::set_t		monoid_t;
     typedef typename monoid_t::alphabet_t		alphabet_t;
     typedef typename alphabet_t::letter_t		letter_t;
-    INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
+    INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
     KRatExpAciCanonical(const Element<Series, T>& exp) :
       exp_(exp)
@@ -135,7 +135,7 @@ namespace vcsn
     MATCH__(LeftWeight, w, e)
     {
       set_t	cset = apply_sum(match(e));
-      put_in(cset, weight_t(w) * *cset.begin());
+      put_in(cset, semiring_elt_t(w) * *cset.begin());
       return cset;
     }
     END
@@ -143,7 +143,7 @@ namespace vcsn
     MATCH__(RightWeight, e, w)
     {
       set_t	cset = apply_sum(match(e));
-      put_in(cset, *cset.begin() * weight_t(w));
+      put_in(cset, *cset.begin() * semiring_elt_t(w));
       return cset;
     }
     END

@@ -50,7 +50,7 @@ bool series_test(tests::Tester& t)
   typedef typename S::semiring_t			semiring_t;
   typedef Element<S, T>				series_elt_t;
   typedef typename series_elt_t::monoid_elt_t   monoid_elt_t;
-  typedef typename series_elt_t::weight_t	semiring_elt_t;
+  typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_value_t;
 
   alphabet_t	alphabet;

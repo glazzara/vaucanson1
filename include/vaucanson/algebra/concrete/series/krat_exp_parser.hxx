@@ -92,7 +92,7 @@ namespace vcsn {
      *
      * @see KRatExpToken::token, token_e
      */
-    template <class MonoidValue, class WeightValue>
+    template <class MonoidValue, class SemiringEltValue>
     class KRatExpToken
     {
     public:      
@@ -118,7 +118,7 @@ namespace vcsn {
 	  type = tok_type;
 	}
 
-	token(const token_e& tok_type, const WeightValue& weight)
+	token(const token_e& tok_type, const SemiringEltValue& weight)
 	{
 	  w = weight;
 	  type = tok_type;
@@ -145,7 +145,7 @@ namespace vcsn {
 
 	token_e type;
 	MonoidValue m;
-	WeightValue w;
+	SemiringEltValue w;
       };
 
       KRatExpToken(const token_e& tok)
@@ -210,7 +210,7 @@ namespace vcsn {
 	return MonoidValue();
       }
 
-      WeightValue as_weight()
+      SemiringEltValue as_weight()
       {
 	for (typename std::list<token>::const_iterator i = tok_.begin();
 	     i != tok_.end();
@@ -218,7 +218,7 @@ namespace vcsn {
 	  if (i->type == a_weight)
 	    return i->w;
 	assertion(! "internal error in krat_exp parser.");
-	return WeightValue();
+	return SemiringEltValue();
       }
 
       KRatExpToken& operator=(const token_e tok)
@@ -233,7 +233,7 @@ namespace vcsn {
 	return *this;
       }
 
-      KRatExpToken& operator=(const WeightValue& weight_value)
+      KRatExpToken& operator=(const SemiringEltValue& weight_value)
       {
 	tok_.push_back(token(a_weight, weight_value));
 	return *this;
@@ -255,7 +255,7 @@ namespace vcsn {
       typedef KRatExpToken
       <
 	typename Element<S, T>::monoid_value_t,
-	typename Element<S, T>::weight_value_t
+	typename Element<S, T>::semiring_elt_value_t
       >						      krat_exp_token_t; 
       typedef std::list<krat_exp_token_t>	      token_stream_t;
 
@@ -287,7 +287,7 @@ namespace vcsn {
       {
 	typedef typename Element<S, T>::monoid_elt_t	monoid_elt_t;
 	typedef typename Element<S, T>::monoid_value_t	monoid_value_t;
-	typedef typename Element<S, T>::weight_t	weight_t;
+	typedef typename Element<S, T>::semiring_elt_t	semiring_elt_t;
 	typedef std::string::const_iterator		iterator_t;
 	
 	iterator_t i = in.begin();
@@ -330,7 +330,7 @@ namespace vcsn {
 	      }
 	    // try weight lexer.
 	    iterator_t wli = i;
-	    weight_t ww;
+	    semiring_elt_t ww;
 	    if (parse_weight(ww, in, wli))
 	      {
 		if (wli - i > len)
@@ -444,14 +444,14 @@ namespace vcsn {
       typedef KRatExpToken
       <
 	typename Element<S, T>::monoid_value_t,
-	typename Element<S, T>::weight_value_t
+	typename Element<S, T>::semiring_elt_value_t
       >						      krat_exp_token_t; 
       typedef typename Element<S, T>::monoid_elt_t    monoid_elt_t;
       typedef typename Element<S, T>::monoid_value_t  monoid_value_t;
       typedef typename monoid_elt_t::set_t	      monoid_t;
-      typedef typename Element<S, T>::weight_t	      weight_t;
-      typedef typename weight_t::set_t		      semiring_t;
-      typedef typename Element<S, T>::weight_value_t  weight_value_t;
+      typedef typename Element<S, T>::semiring_elt_t	      semiring_elt_t;
+      typedef typename semiring_elt_t::set_t		      semiring_t;
+      typedef typename Element<S, T>::semiring_elt_value_t  semiring_elt_value_t;
       typedef std::list<krat_exp_token_t>	      token_stream_t;
       
       Parser(Lexer<S, T>& lexer, bool trace = false) :
@@ -595,7 +595,7 @@ namespace vcsn {
 	    accept(space);
 	    krat_exp_token_t tok = lexer_.first();
 	    accept(a_weight);
-	    exp = exp * weight_t (tok.as_weight());
+	    exp = exp * semiring_elt_t (tok.as_weight());
 	  }
 	trace("parse_right_weighted: End", exp);
       }
@@ -612,7 +612,7 @@ namespace vcsn {
 	    // i.e. in "1 2" or "0 2".
 	    // token may even be a word!
 	    // i.e. in '2 3' when 2 is in the alphabet
-	    weight_t w (exp.set().semiring(), lexer_.first().as_weight());
+	    semiring_elt_t w (exp.set().semiring(), lexer_.first().as_weight());
 	    bool just_a_weight = true;
 	    Element<S, T> m (exp.set());
 	    if (lexer_.first().is_a(zero))

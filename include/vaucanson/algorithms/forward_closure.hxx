@@ -54,23 +54,23 @@ namespace vcsn {
 			  Auto&			   a)
   {
     AUTOMATON_TYPES(Auto);
-    typedef std::vector<std::vector<weight_t> >        matrix_weight_t;
+    typedef std::vector<std::vector<semiring_elt_t> >        matrix_semiring_elt_t;
     typedef std::vector<std::vector<series_elt_t> >    matrix_series_t;
-    typedef std::vector<weight_t>                      matrix_weight_initial_t;
+    typedef std::vector<semiring_elt_t>                      matrix_semiring_elt_initial_t;
 
     series_elt_t            serie_identity  = a.series().zero_; 
-    weight_t	            weight_zero     = a.series().semiring().wzero_; 
+    semiring_elt_t	    semiring_elt_zero     = a.series().semiring().wzero_; 
     monoid_elt_t            monoid_identity = a.series().monoid().empty_; 
     
     int                     i, j, k, size = a.states().size();
 
     matrix_series_t         m_series(size), m_series_ret(size); 
-    matrix_weight_t         m_weight(size), m_weight_tmp(size);
-    matrix_weight_initial_t m_winitial(size), m_winitial_tmp(size);
+    matrix_semiring_elt_t   m_semiring_elt(size), m_semiring_elt_tmp(size);
+    matrix_semiring_elt_initial_t m_winitial(size), m_winitial_tmp(size);
     
     for (i = 0; i < size; i++){
-      m_weight[i].resize(size, weight_t(a.series().semiring()));
-      m_weight_tmp[i].resize(size, weight_t(a.series().semiring()));
+      m_semiring_elt[i].resize(size, semiring_elt_t(a.series().semiring()));
+      m_semiring_elt_tmp[i].resize(size, semiring_elt_t(a.series().semiring()));
       m_series[i].resize(size, series_elt_t(a.series()));
       m_series_ret[i].resize(size, series_elt_t(a.series()));
     }
@@ -86,17 +86,17 @@ namespace vcsn {
       state_to_index[*s] = i++;
     }
     
-    // Initialize the matrix m_weight, m_series, m_winitial and
+    // Initialize the matrix m_semiring_elt, m_series, m_winitial and
     // m_series_ret with the original automaton
     std::list<hedge_t> to_remove;
     for_each_edge(e, a)
       {
 	int origin = state_to_index[a.origin_of(*e)];
 	int aim = state_to_index[a.aim_of(*e)];
-	m_weight[origin][aim] += a.serie_of(*e).get(monoid_identity);
+	m_semiring_elt[origin][aim] += a.serie_of(*e).get(monoid_identity);
 	m_series[origin][aim] += a.serie_of(*e);
 	m_series[origin][aim].value_set(monoid_identity.value(),
-					weight_zero.value());
+					semiring_elt_zero.value());
 	m_series_ret[origin][aim] = m_series[origin][aim];
 	to_remove.push_back(*e);
       }
@@ -111,39 +111,39 @@ namespace vcsn {
 	m_winitial_tmp[pos] = m_winitial[pos];
       }
     
-    // Compute star(m_weight)
+    // Compute star(m_semiring_elt)
     for (int r = 0; r < size; r++)
       {
-	if (! m_weight[r][r].starable())
+	if (! m_semiring_elt[r][r].starable())
 	  { 
 	    // FIXME: add error handling.
 	    std::cerr<< "Star not defined." << std::endl;
 	    return;
 	  }	
-      weight_t        w_tmp   = m_weight[r][r];
-      weight_t        w       = w_tmp.star();
+      semiring_elt_t        w_tmp   = m_semiring_elt[r][r];
+      semiring_elt_t        w       = w_tmp.star();
       for (i = 0; i < size; i++)
 	for (j = 0; j < size; j++)
-	  m_weight_tmp[i][j] = 
-	    m_weight[i][j] + m_weight[i][r] * w * m_weight[r][j]; 
-      m_weight = m_weight_tmp;
+	  m_semiring_elt_tmp[i][j] = 
+	    m_semiring_elt[i][j] + m_semiring_elt[i][r] * w * m_semiring_elt[r][j]; 
+      m_semiring_elt = m_semiring_elt_tmp;
     }
 
-    // Compute m_winitial*star(m_weight), m_series*star(m_weight)
+    // Compute m_winitial*star(m_semiring_elt), m_series*star(m_semiring_elt)
     // and remove all spontaneous edges.
     for (i = 0; i < size; i++){
       for (j = 0; j < size; j++){
 	for (k = 0; k < size; k++)
-	  m_series_ret[j][i] += m_series[j][k]*m_weight[k][i];
+	  m_series_ret[j][i] += m_series[j][k]*m_semiring_elt[k][i];
 	  
 	if (m_series_ret[j][i] != serie_identity)
 	  a.add_serie_edge(index_to_state[j],
 			   index_to_state[i],
 			   m_series_ret[j][i]);
 
-	m_winitial[i] += m_winitial_tmp[j]*m_weight[j][i];
+	m_winitial[i] += m_winitial_tmp[j]*m_semiring_elt[j][i];
       } 
-      if (m_winitial[i] != weight_zero)
+      if (m_winitial[i] != semiring_elt_zero)
 	a.set_initial(index_to_state[i],
 		      series_elt_t(a.series(), m_winitial[i]));
     }    

@@ -82,10 +82,10 @@ namespace vcsn {
 						    hstate_t to, 
 						    input_letter_t i,
 						    output_letter_t o,
-						    output_weight_t w)
+						    output_semiring_elt_t w)
   {
-    if (w == output_weight_t())
-      w = algebra::identity_as<output_weight_value_t>
+    if (w == output_semiring_elt_t())
+      w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(series().semiring().semiring());
     return op_add_io_edge(this->set(), value(),
 			  from, to, i, o, w);
@@ -97,10 +97,10 @@ namespace vcsn {
   MetaElement<TransducerBase<Self>, T>::add_o_edge(hstate_t from, 
 						   hstate_t to, 
 						   output_letter_t o,
-						   output_weight_t w)
+						   output_semiring_elt_t w)
   {
-    if (w == output_weight_t())
-      w = algebra::identity_as<output_weight_value_t>
+    if (w == output_semiring_elt_t())
+      w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(series().semiring().semiring());
 
     return op_add_o_edge(this->set(), value(),
@@ -113,10 +113,10 @@ namespace vcsn {
   MetaElement<TransducerBase<Self>, T>::add_i_edge(hstate_t from, 
 						   hstate_t to, 
 						   input_letter_t i,
-						   output_weight_t w)
+						   output_semiring_elt_t w)
   {
-    if (w == output_weight_t())
-      w = algebra::identity_as<output_weight_value_t>
+    if (w == output_semiring_elt_t())
+      w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(series().semiring().semiring());
 
     return op_add_i_edge(this->set(), value(),

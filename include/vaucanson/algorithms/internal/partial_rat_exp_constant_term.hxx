@@ -37,20 +37,20 @@
 namespace vcsn {
 
   template <class Series, class T>
-  std::pair<typename Element<Series, T>::weight_t, bool>
+  std::pair<typename Element<Series, T>::semiring_elt_t, bool>
   constant_term(const PartialExp<Series, T>& exp)
   {
     typedef
     typename PartialExp<Series, T>::const_iterator		const_iterator;
     typedef
-    typename PartialExp<Series, T>::weight_t			weight_t;
+    typename PartialExp<Series, T>::semiring_elt_t			semiring_elt_t;
     typedef
     typename PartialExp<Series, T>::series_impl_t		series_impl_t;
     typedef
-    std::pair<typename Element<Series, T>::weight_t, bool>	result_t;
+    std::pair<typename Element<Series, T>::semiring_elt_t, bool>	result_t;
     
-    weight_t 	res 	  = exp.exp_set().semiring().identity(
-			      SELECT(typename weight_t::value_t));;
+    semiring_elt_t 	res 	  = exp.exp_set().semiring().identity(
+			      SELECT(typename semiring_elt_t::value_t));;
     bool	undefined = false;
     
     for (const_iterator i = exp.begin(); i != exp.end() && !undefined; ++i)

@@ -47,7 +47,7 @@ namespace vcsn {
   struct linearize_element
   {
     // Get types which are useful to build the new type 
-    typedef typename T::weight_value_t		orig_weight_value_t;
+    typedef typename T::semiring_elt_value_t		orig_semiring_elt_value_t;
     typedef typename S::semiring_t		orig_semiring_t;
     typedef typename S::monoid_t		orig_monoid_t;
     typedef typename orig_monoid_t::letter_t	orig_letter_t;
@@ -68,7 +68,7 @@ namespace vcsn {
     // FIXME: same remark here.
     typedef algebra::Series<orig_semiring_t, monoid_t>		series_t;
     typedef std::basic_string<letter_t>				monoid_value_t;
-    typedef rat::exp<monoid_value_t, orig_weight_value_t>	serie_impl_t;
+    typedef rat::exp<monoid_value_t, orig_semiring_elt_value_t>	serie_impl_t;
     // And the resulting type:
     typedef Element<series_t, serie_impl_t>			element_t;
   };

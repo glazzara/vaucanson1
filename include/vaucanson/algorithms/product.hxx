@@ -62,7 +62,7 @@ namespace vcsn {
     typedef typename output_t::series_t			series_t;
     typedef typename output_t::series_elt_t		series_elt_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
-    typedef typename series_elt_t::weight_t		weight_t;
+    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
     typedef typename series_elt_t::value_t		series_value_t;
     typedef typename series_elt_t::support_t		support_t;
 

@@ -67,7 +67,7 @@ namespace vcsn {
   template <
     typename Series, 
     typename MonoidElt, 
-    typename Weight, 
+    typename SemiringElt, 
     typename L
     >
   struct ls_delta_letter_query
@@ -105,7 +105,7 @@ namespace vcsn {
     typedef typename Series::monoid_t			monoid_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
     typedef typename Series::semiring_t			semiring_t;
-    typedef typename series_elt_t::weight_t		weight_t;
+    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
 
   public:
 
@@ -210,7 +210,7 @@ namespace vcsn {
     typedef typename Series::monoid_t			monoid_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
     typedef typename Series::semiring_t			semiring_t;
-    typedef typename series_elt_t::weight_t		weight_t;
+    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
 
   public:
 

@@ -36,7 +36,6 @@
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
-# include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 # include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>
 
@@ -109,7 +108,7 @@ namespace vcsn {
 
     template<typename LetterT, typename WeightT>
     void exp<LetterT, WeightT>::
-    accept(ConstNodeVisitor<monoid_value_t, weight_value_t>& v) const
+    accept(ConstNodeVisitor<monoid_value_t, semiring_elt_value_t>& v) const
     {
       base_->accept(v);
     }
@@ -117,7 +116,7 @@ namespace vcsn {
     template<typename LetterT, typename WeightT>
     size_t exp<LetterT, WeightT>::depth() const
     {
-      DepthVisitor<monoid_value_t, weight_value_t> v;
+      DepthVisitor<monoid_value_t, semiring_elt_value_t> v;
       accept(v);
       return v.get();
     }
@@ -293,7 +292,7 @@ namespace vcsn {
     template <class Matcher, class Monoid, class Semiring>   
     void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
-    left_weight(const weight_value_t& w, const node_t* node) 
+    left_weight(const semiring_elt_value_t& w, const node_t* node) 
     {
       ret_ = matcher_.match_nodeLeftWeight(typename Matcher::LeftWeight(w, 
 									node));
@@ -302,7 +301,7 @@ namespace vcsn {
     template <class Matcher, class Monoid, class Semiring>  
     void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
-    right_weight(const weight_value_t& w, const node_t* node)
+    right_weight(const semiring_elt_value_t& w, const node_t* node)
     {
       ret_ = matcher_.match_nodeRightWeight
 	(typename Matcher::RightWeight(node, w));

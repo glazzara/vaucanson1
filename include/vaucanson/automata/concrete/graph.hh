@@ -247,7 +247,7 @@ namespace vcsn {
     typedef SerieValue				     serie_value_t;
     typedef WordValue				     word_value_t;
     typedef WordValue				     monoid_elt_value_t;
-    typedef WeightValue				     weight_value_t;
+    typedef WeightValue				     semiring_elt_value_t;
     typedef Letter				     letter_t;
     typedef typename LabelOf<Kind, WordValue, WeightValue, SerieValue, Letter>
     ::ret					     label_t;
@@ -286,8 +286,8 @@ namespace vcsn {
     typedef WordValue			input_monoid_elt_value_t;
     typedef typename algebra::series_traits<WeightValue>::monoid_value_t 
     output_monoid_elt_value_t;
-    typedef typename algebra::series_traits<WeightValue>::weight_value_t
-    output_weight_value_t;
+    typedef typename algebra::series_traits<WeightValue>::semiring_elt_value_t
+    output_semiring_elt_value_t;
   };
 
   // Explain how to project type of transducer into input automaton type.
@@ -307,19 +307,19 @@ namespace vcsn {
   {
     typedef Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
     self_t;
-    typedef typename transducer_traits<self_t>::output_weight_value_t
-    weight_value_t;
+    typedef typename transducer_traits<self_t>::output_semiring_elt_value_t
+    semiring_elt_value_t;
     typedef typename transducer_traits<self_t>::input_monoid_elt_value_t
     monoid_value_t;
     typedef typename algebra::mute_serie_impl<SerieValue,
-					      weight_value_t,
+					      semiring_elt_value_t,
 					      monoid_value_t>
     ::ret serie_value_t;
 
     typedef
     Graph<Kind,
 	  monoid_value_t,
-	  weight_value_t,
+	  semiring_elt_value_t,
 	  serie_value_t,
 	  Letter,
 	  Tag>

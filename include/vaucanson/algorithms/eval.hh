@@ -68,7 +68,7 @@ namespace vcsn {
   // INTERFACE: int eval(const Automaton& a, const std::string& s) { return vcsn::eval(*a, Serie::monoid_elt_t((*a).set().series().monoid(), s)).value(); }
   // INTERFACE: int eval(const GenAutomaton& a, const std::string& s) { return vcsn::eval(*a, Serie::monoid_elt_t((*a).set().series().monoid(), s)).value(); }
   template<typename A, typename T, typename W>
-  typename Element<A, T>::weight_t
+  typename Element<A, T>::semiring_elt_t
   eval(const Element<A, T>& a, const W& word);
 
   /*! @} */

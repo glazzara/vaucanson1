@@ -55,11 +55,11 @@ namespace vcsn {
       template <class T>
       bool can_choose_non_starable(SELECTOR(T)) const;
 
-      //! Return a randomly choosed starable weight.
+      //! Return a randomly choosed starable semiring_elt.
       template <class T>
       Element<Self, T>	choose_starable(SELECTOR(T)) const;
 
-      //! Return a randomly choosed non-starable weight.
+      //! Return a randomly choosed non-starable semiring_elt.
       template <class T>
       Element<Self, T> choose_non_starable(SELECTOR(T)) const;
     protected:
@@ -93,7 +93,7 @@ namespace vcsn {
   /*-----------------------------------.
   | MetaElement<SemiringBase<Self>, T> |
   `-----------------------------------*/
-  //! Services of every element of semiring (weight).
+  //! Services of every element of semiring (semiring_elt).
   template <typename Self, typename T>
   struct MetaElement<algebra::SemiringBase<Self>, T>
     : MetaElement<algebra::MonoidBase<Self>, T>
@@ -101,7 +101,7 @@ namespace vcsn {
     //! in-place star transformation of the weight.
     Element<Self, T>&   star();
 
-    //! returns true if we can to compute the star of the weight.
+    //! returns true if we can compute the star of the weight.
     bool		starable() const;
 
   protected:
@@ -130,7 +130,7 @@ namespace vcsn {
   parse_weight(Element<S, T>& w, const std::string&, 
 	       typename std::string::const_iterator&);
 
-  //! returns true if we can to compute the star of the weight.
+  //! returns true if we can compute the star of the weight.
   template <typename S, typename T>
   bool starable(const Element<S, T>& elt);
 

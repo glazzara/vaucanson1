@@ -184,14 +184,14 @@ match_node##N(const N&) 			\
     struct KRatExpMatcher : public GenericMatcher<Self, T, U, F>
     {
       typedef U                          return_type;
-      typedef typename T::weight_value_t weight_value_t;
+      typedef typename T::semiring_elt_value_t semiring_elt_value_t;
       typedef typename T::monoid_value_t monoid_value_t;
 
       DecBinaryOp(Product, T, T);
       DecBinaryOp(Sum, T, T);
       DecUnaryOp(Star, T);
-      DecBinaryOp(LeftWeight, weight_value_t, T);
-      DecBinaryOp(RightWeight, T, weight_value_t);
+      DecBinaryOp(LeftWeight, semiring_elt_value_t, T);
+      DecBinaryOp(RightWeight, T, semiring_elt_value_t);
       DecLeaf(Constant, monoid_value_t);
       DecFinalLeaf(One);
       DecFinalLeaf(Zero);
@@ -224,13 +224,13 @@ match_node##N(const N&) 			\
 	{
 	  typedef Self				            self_t;
 	  typedef Element<Series, T>                        return_type;
-	  typedef typename Element<Series, T>::weight_t     weight_t;
-	  typedef typename weight_t::value_t		    weight_value_t;
+	  typedef typename Element<Series, T>::semiring_elt_t     semiring_elt_t;
+	  typedef typename semiring_elt_t::value_t		    semiring_elt_value_t;
 	  typedef typename Element<Series, T>::monoid_elt_t monoid_elt_t;
 	  typedef typename monoid_elt_t::set_t		    monoid_t;
 	  typedef typename monoid_t::alphabet_t		    alphabet_t;
 	  typedef typename alphabet_t::letter_t		    letter_t;
-	  INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
+	  INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
 	  KRatExpIdentity(const Element<Series, T>& exp) :
 	    exp_(exp)
@@ -256,13 +256,13 @@ match_node##N(const N&) 			\
 
 	  MATCH__(LeftWeight, w, e)
 	  {
-	    return  weight_t(w) * match(e);
+	    return  semiring_elt_t(w) * match(e);
 	  }
 	  END
 
 	  MATCH__(RightWeight, e, w)
 	  {
-	    return match(e) * weight_t(w);
+	    return match(e) * semiring_elt_t(w);
 	  }
 	  END
 

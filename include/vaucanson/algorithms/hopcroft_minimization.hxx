@@ -694,18 +694,18 @@ namespace vcsn {
       -------------------------------------*/
     typedef set<hedge_t>                       set_edges_t;
     typedef set<hstate_t>                      set_states_t;
-    typedef set<weight_t>                      set_weight_t;
-    typedef vector<weight_t>                   vector_weight_t;
+    typedef set<semiring_elt_t>                set_semiring_elt_t;
+    typedef vector<semiring_elt_t>             vector_semiring_elt_t;
     typedef pair<unsigned, letter_t>           pair_class_letter_t;
-    typedef pair<hstate_t, weight_t>           pair_state_weight_t;
-    typedef set<pair_state_weight_t>           set_pair_state_weight_t;
+    typedef pair<hstate_t, semiring_elt_t>     pair_state_semiring_elt_t;
+    typedef set<pair_state_semiring_elt_t>     set_pair_state_semiring_elt_t;
     
     set<unsigned>                              met_classes;
     set_edges_t                                edges_comming, edges_leaving;
     queue<pair_class_letter_t>                 the_queue;
-    vector<vector<set_pair_state_weight_t> >   inverse;
+    vector<vector<set_pair_state_semiring_elt_t> >   inverse;
     series_elt_t                               serie_identity    = input.series().zero_;
-    weight_t                                   weight_zero       = input.series().semiring().wzero_;
+    semiring_elt_t                             weight_zero       = input.series().semiring().wzero_;
     monoid_elt_t                               monoid_identity   = input.series().monoid().empty_;
     const alphabet_t&	                       alphabet(input.series().monoid().alphabet());
     unsigned                                   max_partition, max_letters, pos;
@@ -732,10 +732,10 @@ namespace vcsn {
     inverse.resize(max_states);
 
     set_states_t           states_visited;
-    set_weight_t           semiring_had_class;
+    set_semiring_elt_t           semiring_had_class;
     vector<set_states_t>   classes(max_states);
     vector<unsigned>       class_of_state(max_states);
-    vector_weight_t        old_weight(max_states), class_of_weight(max_states), val(max_states);
+    vector_semiring_elt_t        old_weight(max_states), class_of_weight(max_states), val(max_states);
 
     for(int i = 0; i < max_states; i++)
       inverse[i].resize(max_states);
@@ -755,12 +755,12 @@ namespace vcsn {
 	      {	      	      
 		hstate_t p = input.origin_of(*e);
 		if (states_visited.find(p) != states_visited.end())
-		  inverse[*q][pos_of_letter[*a]].erase(pair_state_weight_t(p, old_weight[p]));
+		  inverse[*q][pos_of_letter[*a]].erase(pair_state_semiring_elt_t(p, old_weight[p]));
 		else 
 		  states_visited.insert(p);
 
 		old_weight[p] += input.serie_of(*e).get(*a);
-		inverse[*q][pos_of_letter[*a]].insert(pair_state_weight_t(p, old_weight[p]));
+		inverse[*q][pos_of_letter[*a]].insert(pair_state_semiring_elt_t(p, old_weight[p]));
 	      }
 	  }
       }
@@ -786,7 +786,7 @@ namespace vcsn {
 	  } 
 	else 
 	  { 
-	    weight_t w = input.get_final(*q).get(monoid_identity);
+	    semiring_elt_t w = input.get_final(*q).get(monoid_identity);
 	    if (semiring_had_class.find(w) == semiring_had_class.end())
 	      { 
 		semiring_had_class.insert(w);
@@ -824,7 +824,7 @@ namespace vcsn {
 
 	for_each_const_(set_states_t, q, classes[pair.first])	// First, calculcate val[state] and note met_classes
 	  {	  
-	    for_each_const_(set_pair_state_weight_t, pair_, inverse[*q][pos_of_letter[pair.second]]) 
+	    for_each_const_(set_pair_state_semiring_elt_t, pair_, inverse[*q][pos_of_letter[pair.second]]) 
 	      {                                                                               
 		unsigned  state = (*pair_).first;
 		if (met_classes.find(class_of_state[state]) == met_classes.end())
@@ -839,7 +839,7 @@ namespace vcsn {
 	      continue;
 
 	    queue<hstate_t>   to_erase;
-	    weight_t          first_val, next_val; 
+	    semiring_elt_t          first_val, next_val; 
 	    first_val = val[*(classes[*class_id].begin())];
 	    class_of_weight.clear();
 	    semiring_had_class.clear();
@@ -925,7 +925,7 @@ namespace vcsn {
     AUTOMATON_TYPES(auto_t);
     Element<A, T> output(a.set());
     do_quotient(a.set(), a.set().series().semiring(), 
-		SELECT(weight_value_t), output, a);
+		SELECT(semiring_elt_value_t), output, a);
     return output;
   }
 

@@ -44,9 +44,9 @@ namespace vcsn
     precondition(org.is_finite_app());
 
     typedef typename Element<S, T>::monoid_elt_t me_t;
-    typedef typename Element<S, T>::weight_t se_t;
+    typedef typename Element<S, T>::semiring_elt_t se_t;
     typedef typename Element<Ss, Ts>::monoid_elt_t sme_t;
-    typedef typename Element<Ss, Ts>::weight_t sse_t;
+    typedef typename Element<Ss, Ts>::semiring_elt_t sse_t;
 
     typedef typename Element<Ss, Ts>::support_t support_t;
     

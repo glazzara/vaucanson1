@@ -48,7 +48,7 @@ namespace vcsn {
 
   template <typename S, typename T>
   void list_multiply_here(std::list<PartialExp<S, T> >& l,
-			  const typename PartialExp<S, T>::weight_t& w)
+			  const typename PartialExp<S, T>::semiring_elt_t& w)
   {
     typedef std::list<PartialExp<S, T> >	list_t;
     for (typename list_t::iterator i = l.begin(); i != l.end(); ++i)
@@ -68,15 +68,15 @@ namespace vcsn {
   template <typename Series, typename T>
   class PRatExpDerivationVisitor : 
     public rat::ConstNodeVisitor<typename T::monoid_value_t,
-  				 typename T::weight_value_t>
+  				 typename T::semiring_elt_value_t>
   {
   public:
     typedef Element<Series, T>					exp_t;
     typedef T							series_impl_t;
     typedef typename T::node_t					node_t;
     typedef typename std::list<PartialExp<Series, T> >		return_type;
-    typedef typename Element<Series, T>::weight_t		weight_t;
-    typedef typename weight_t::value_t				weight_value_t;
+    typedef typename Element<Series, T>::semiring_elt_t		semiring_elt_t;
+    typedef typename semiring_elt_t::value_t				semiring_elt_value_t;
     typedef typename Element<Series, T>::monoid_elt_t		monoid_elt_t;
     typedef typename monoid_elt_t::value_t			monoid_value_t;
     typedef typename monoid_elt_t::set_t			monoid_t;
@@ -112,7 +112,7 @@ namespace vcsn {
     virtual void 
     product(const node_t* lhs, const node_t* rhs) 
     {
-      std::pair<weight_t, bool> ret = constant_term(series(series_impl_t(lhs)));
+      std::pair<semiring_elt_t, bool> ret = constant_term(series(series_impl_t(lhs)));
       if (ret.second == false)
       {
 	undefined = true;
@@ -120,7 +120,7 @@ namespace vcsn {
       }
       
       return_type tmp;
-      if ( ret.first != exp_.set().semiring().zero(SELECT(weight_value_t)) )
+      if ( ret.first != exp_.set().semiring().zero(SELECT(semiring_elt_value_t)) )
       {
 	match(rhs);
 	list_multiply_here(result, ret.first);
@@ -147,7 +147,7 @@ namespace vcsn {
       assertion(father_ != NULL);
       const typename T::node_t* father = father_;
 
-      std::pair<weight_t, bool> ret =
+      std::pair<semiring_elt_t, bool> ret =
 	constant_term(series(series_impl_t(node)));
       if ((ret.second == false) || (ret.first.starable() == false))
       {
@@ -161,14 +161,14 @@ namespace vcsn {
     }
 
     virtual void 
-    left_weight(const weight_value_t& w, const node_t* node) 
+    left_weight(const semiring_elt_value_t& w, const node_t* node) 
     {
       match(node);
-      list_multiply_here(result, weight_t(w));
+      list_multiply_here(result, semiring_elt_t(w));
     }
     
     virtual void 
-    right_weight(const weight_value_t& , const node_t* node)
+    right_weight(const semiring_elt_value_t& , const node_t* node)
     {
       match(node);
     }
@@ -233,8 +233,8 @@ namespace vcsn {
     typedef std::list<PartialExp<Series, T> >		exp_list_t;
     typedef std::pair<exp_list_t, bool>			return_type;
     typedef typename exp_t::const_iterator		const_iterator;
-    typedef typename Element<Series, T>::weight_t	weight_t;
-    typedef typename weight_t::value_t			weight_value_t;
+    typedef typename Element<Series, T>::semiring_elt_t	semiring_elt_t;
+    typedef typename semiring_elt_t::value_t			semiring_elt_value_t;
     typedef T						series_impl_t;
 
     // Check if the exp is not empty
@@ -251,13 +251,13 @@ namespace vcsn {
       list_insert_here(visitor.result, *i);
 
     // Calculate the constant term
-    std::pair<weight_t, bool> cterm =
+    std::pair<semiring_elt_t, bool> cterm =
       constant_term(Element<Series, T>(exp.exp_set(), series_impl_t(v)));
     if (cterm.second == false)
       return std::make_pair(exp_list_t(), false);
 
     // --------  If cterm != 0, look at the rest of the list  ---------------
-    if (cterm.first != exp.exp_set().semiring().zero(SELECT(weight_value_t)) )
+    if (cterm.first != exp.exp_set().semiring().zero(SELECT(semiring_elt_value_t)) )
     {
       // Build an exp from the orignal, without the head
       exp_t new_exp(exp);

@@ -114,7 +114,7 @@ void grep(std::ostream& out, const vcsn::tools::usual_automaton_t& automaton,
 {
   do
     {
-      vcsn::tools::usual_automaton_t::weight_t ret =
+      vcsn::tools::usual_automaton_t::semiring_elt_t ret =
 	eval(automaton, w.current());
       if (ret.value())
 	out << w.current() << std::endl;
@@ -213,7 +213,7 @@ int main(int argc, char **argv)
 	alpha.insert(char(l));
       
       automaton_t automaton = new_automaton(alpha);
-      Element<series_t, rat::exp<monoid_elt_value_t, weight_value_t> >
+      Element<series_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
 	krat_exp(automaton.set().series());
       parse(exp, krat_exp);
       standard_of(automaton, krat_exp.value());

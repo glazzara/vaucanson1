@@ -60,10 +60,10 @@ namespace vcsn {
     typedef Auto_*					automaton_ptr_t;
     typedef typename automaton_t::series_t		series_t; 
     typedef typename automaton_t::series_elt_t		series_elt_t;
-    typedef typename series_elt_t::weight_t		weight_t;
+    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
     typedef typename Exp_::monoid_value_t		monoid_value_t;
-    typedef typename Exp_::weight_value_t		weight_value_t;
-    typedef rat::Node<monoid_value_t, weight_value_t>   node_t;
+    typedef typename Exp_::semiring_elt_value_t		semiring_elt_value_t;
+    typedef rat::Node<monoid_value_t, semiring_elt_value_t>   node_t;
 
     typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>     this_class;
     typedef algebra::GenericMatcher<this_class, Exp_, Auto_*, Dispatch_> parent_class;
@@ -72,8 +72,8 @@ namespace vcsn {
     DecBinaryOp(Product, Exp_, Exp_);
     DecBinaryOp(Sum, Exp_, Exp_);
     DecUnaryOp(Star, Exp_);
-    DecBinaryOp(LeftWeight, weight_value_t, Exp_);
-    DecBinaryOp(RightWeight, Exp_, weight_value_t);
+    DecBinaryOp(LeftWeight, semiring_elt_value_t, Exp_);
+    DecBinaryOp(RightWeight, Exp_, semiring_elt_value_t);
     DecLeaf(Constant, monoid_value_t);
     DecFinalLeaf(Zero);
     DecFinalLeaf(One);
@@ -119,7 +119,7 @@ namespace vcsn {
       for (typename automaton_t::initial_iterator i = auto_->initial().begin();
 	   i != auto_->initial().end();
 	   ++i)
-	auto_->set_initial(*i, weight_t(w) * auto_->get_initial(*i));
+	auto_->set_initial(*i, semiring_elt_t(w) * auto_->get_initial(*i));
       return auto_;
     }
     END
@@ -130,7 +130,7 @@ namespace vcsn {
       for (typename automaton_t::initial_iterator i = auto_->initial().begin();
 	   i != auto_->initial().end();
 	   ++i)
-	auto_->set_initial(*i, auto_->get_initial(*i) * weight_t(w));
+	auto_->set_initial(*i, auto_->get_initial(*i) * semiring_elt_t(w));
       return auto_;
     }
     END

@@ -48,7 +48,7 @@ template <class Auto>
 bool glushkov_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
-  typedef rat::exp<monoid_elt_value_t, weight_value_t>	exp_t;
+  typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef Element<series_t, exp_t>		krat_t;
   tests::Tester t(tg.verbose());
 
@@ -81,7 +81,7 @@ bool glushkov_test(tests::Tester& tg)
 	monoid_elt_t w = exp.choose_from_supp();
 	if (t.verbose() == tests::high)
 	  std::cout << "TEST: glushkov " << i << " on " << exp << " : test " << w << std::endl;
-	if (eval(au, w) == zero_as<weight_value_t>::of(s.semiring()))
+	if (eval(au, w) == zero_as<semiring_elt_value_t>::of(s.semiring()))
 	  {
 	    break;
 	    if (t.verbose() == tests::high)
@@ -116,7 +116,7 @@ bool glushkov_test(tests::Tester& tg)
 	      monoid_elt_t w = exp.choose_from_supp();
 	      if (t.verbose() == tests::high)
 		std::cout << "TEST: glushkov " << i << " : test " << w << std::endl;
-	      if (eval(au, w) == zero_as<weight_value_t>::of(s.semiring()))
+	      if (eval(au, w) == zero_as<semiring_elt_value_t>::of(s.semiring()))
 		{
 		  if (t.verbose() == tests::high)
 		    std::cout << "TEST: glushkov " << i << " failed." << std::endl;

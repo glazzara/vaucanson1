@@ -58,13 +58,13 @@ namespace vcsn {
     typedef typename l_monoid_t::alphabet_t			l_alphabet_t;
     typedef typename l_monoid_t::letter_t			l_letter_t;
     typedef typename return_type::monoid_elt_t			l_monoid_elt_t;
-    typedef typename return_type::weight_t			l_weight_t;
+    typedef typename return_type::semiring_elt_t			l_semiring_elt_t;
     // Types of the source expression
     typedef KRatExpLinearize<Series, T, Dispatch>		self_t;
-    typedef typename Element<Series, T>::weight_t		weight_t;
+    typedef typename Element<Series, T>::semiring_elt_t		semiring_elt_t;
     typedef typename Element<Series, T>::monoid_elt_t		monoid_elt_t;
     typedef typename monoid_elt_t::value_t	      		monoid_value_t;
-    INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
+    INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
     KRatExpLinearize(const Element<Series, T>& exp) :
       index_(LINEAR_INDEX_START), exp_(exp), l_alpha_(), l_serie_(l_semiring_t(), l_monoid_t(l_alpha_))
@@ -100,13 +100,13 @@ namespace vcsn {
 
     MATCH__(LeftWeight, w, e)
     {
-      return l_weight_t(w) * match(e);
+      return l_semiring_elt_t(w) * match(e);
     }
     END
 
     MATCH__(RightWeight, e, w)
     {
-      return match(e) * l_weight_t(w);
+      return match(e) * l_semiring_elt_t(w);
     }
     END
 

@@ -62,14 +62,14 @@ namespace vcsn {
     typedef typename input_t::series_elt_t		series_elt_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
     typedef typename input_t::serie_value_t		serie_value_t;
-    typedef typename series_elt_t::weight_t		weight_t;
+    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
     // FIXME : here we assume monoid is a free monoid -> concept checking ?
     typedef typename monoid_t::alphabet_t		alphabet_t;
     typedef typename alphabet_t::letter_t		letter_t;
 
     typedef std::set<hedge_t>				delta_ret_t;
     typedef std::set<hstate_t>				subset_t;
-    typedef std::map<letter_t, std::pair<weight_t, unsigned> >		map_t;
+    typedef std::map<letter_t, std::pair<semiring_elt_t, unsigned> >		map_t;
     typedef std::map<serie_value_t, unsigned>		final_map_t;
     typedef std::list<hstate_t>				hstate_list_t;
     typedef std::vector<hstate_list_t>  	       	partitions_t;;

@@ -144,14 +144,14 @@ namespace vcsn {
     typedef typename series_t::monoid_t monoid_t;		\
     typedef typename Element<S, value_t>::monoid_elt_value_t	\
     word_value_t;						\
-    typedef typename Element<S, value_t>::weight_value_t	\
-        weight_value_t;						\
+    typedef typename Element<S, value_t>::semiring_elt_value_t	\
+        semiring_elt_value_t;						\
     typedef typename Element<S, value_t>::serie_value_t		\
     serie_value_t;						\
     Element<monoid_t, word_value_t> w(a_set.series().monoid());	\
     w = op_letter_of(a_set, v, e);				\
     Element<series_t, serie_value_t> s(a_set.series());		\
-    s.assoc(w, algebra::identity_as<weight_value_t>		\
+    s.assoc(w, algebra::identity_as<semiring_elt_value_t>		\
 	    ::of(a_set.series().semiring()));			\
     return s;							\
   }		

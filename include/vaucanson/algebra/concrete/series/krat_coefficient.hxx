@@ -42,26 +42,26 @@ namespace vcsn {
     class CoefficientEval : public algebra::KRatExpMatcher<
       CoefficientEval<Series, T, Dispatch>,
       T,
-      std::pair<typename Element<Series, T>::weight_t, Element<Series, T> >,
+      std::pair<typename Element<Series, T>::semiring_elt_t, Element<Series, T> >,
       Dispatch
       >
     {
     public:
       typedef ConstantTermEval<Series, T, Dispatch>	self_t;
-      typedef typename Element<Series, T>::weight_t     weight_t;
-      typedef std::pair<weight_t, Element<Series, T> >  return_type;
-      typedef typename weight_t::value_t	        weight_value_t;
-      INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
+      typedef typename Element<Series, T>::semiring_elt_t     semiring_elt_t;
+      typedef std::pair<semiring_elt_t, Element<Series, T> >  return_type;
+      typedef typename semiring_elt_t::value_t	        semiring_elt_value_t;
+      INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
   
       CoefficientEval(const Element<Series, T>& exp) :
 	exp_(exp)
       {}
 
-      weight_t	one()
-      { return exp_.set().semiring().identity(SELECT(weight_value_t)); }
+      semiring_elt_t	one()
+      { return exp_.set().semiring().identity(SELECT(semiring_elt_value_t)); }
 
-      weight_t zero()
-      { return exp_.set().semiring().zero(SELECT(weight_value_t)); }
+      semiring_elt_t zero()
+      { return exp_.set().semiring().zero(SELECT(semiring_elt_value_t)); }
 
       MATCH__(Product, lhs, rhs)
       {
@@ -116,7 +116,7 @@ namespace vcsn {
     };
   
     template <class Series, class T>
-    std::pair<typename Element<Series, T>::weight_t, Element<Series, T> >
+    std::pair<typename Element<Series, T>::semiring_elt_t, Element<Series, T> >
     coefficient(const Element<Series, T>& exp)
     {
       CoefficientEval<Series, T, algebra::DispatchFunction<T> > matcher(exp);

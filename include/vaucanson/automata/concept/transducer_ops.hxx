@@ -63,7 +63,7 @@ namespace vcsn {
 		 hstate_t to,
 		 AutoType(input_letter_t) i,
 		 AutoType(output_letter_t) o,
-		 AutoType(output_weight_t) w)
+		 AutoType(output_semiring_elt_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);
@@ -81,7 +81,7 @@ namespace vcsn {
 		 hstate_t from, 
 		 hstate_t to,
 		 AutoType(input_letter_t) i,
-		 AutoType(output_weight_t) w)
+		 AutoType(output_semiring_elt_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid());
@@ -99,7 +99,7 @@ namespace vcsn {
 		 hstate_t from, 
 		 hstate_t to,
 		 AutoType(input_letter_t) o,
-		 AutoType(output_weight_t) w)
+		 AutoType(output_semiring_elt_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid());
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);

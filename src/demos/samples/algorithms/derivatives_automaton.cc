@@ -64,7 +64,7 @@ int main(int argc, char **argv)
   series_t series(semiring, freemonoid);
 
   // Set krat value
-  Element<series_t, rat::exp<monoid_elt_value_t, weight_value_t> >
+  Element<series_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
     krat_exp(series);
   parse(exp, krat_exp);
 

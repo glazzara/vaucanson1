@@ -50,10 +50,10 @@ namespace vcsn {
     typedef Element<Series, T>				serie_t;
     typedef typename serie_t::monoid_elt_t		monoid_elt_t;
     typedef typename monoid_elt_t::value_t		monoid_value_t;
-    typedef typename serie_t::weight_t			weight_t;
-    typedef typename weight_t::value_t			weight_value_t;
+    typedef typename serie_t::semiring_elt_t			semiring_elt_t;
+    typedef typename semiring_elt_t::value_t			semiring_elt_value_t;
     typedef std::list<monoid_value_t>			support_t;
-    typedef std::list<std::pair<weight_value_t, monoid_value_t> > 
+    typedef std::list<std::pair<semiring_elt_value_t, monoid_value_t> > 
 							ext_support_t;
     INHERIT_CONSTRUCTORS(self_t, T, return_type, Dispatch);
 
@@ -73,8 +73,8 @@ namespace vcsn {
 	  monoid_elt_t mc(series_.monoid(), c->second);
 	  monoid_elt_t md(series_.monoid(), d->second);
 	  //	  ret.push_back((mc * md).value());
-	  weight_t wc(series_.semiring(), c->first);
-	  weight_t wd(series_.semiring(), d->first);
+	  semiring_elt_t wc(series_.semiring(), c->first);
+	  semiring_elt_t wd(series_.semiring(), d->first);
 	  ret.push_back(std::make_pair((wc * wd).value(), 
 				       (mc * md).value()));
 	}
@@ -100,8 +100,8 @@ namespace vcsn {
     {
       match(node);
       for_each_(ext_support_t, c, supp_)
-	c->first = (weight_t(series_.semiring(), w) * 
-		    weight_t(series_.semiring(), c->first)).value();
+	c->first = (semiring_elt_t(series_.semiring(), w) * 
+		    semiring_elt_t(series_.semiring(), c->first)).value();
     }
     END
 
@@ -114,7 +114,7 @@ namespace vcsn {
     MATCH_(Constant, m)
     {
       supp_.push_back(std::make_pair
-		      (algebra::identity_as<weight_value_t>
+		      (algebra::identity_as<semiring_elt_value_t>
 		       ::of(series_.semiring()).value(),
 		       m));
     }
@@ -128,7 +128,7 @@ namespace vcsn {
     MATCH(One)
     {
       supp_.push_back(std::make_pair
-		      (algebra::identity_as<weight_value_t>
+		      (algebra::identity_as<semiring_elt_value_t>
 		       ::of(series_.semiring()).value(),
 		       algebra::identity_as<monoid_value_t>
 		       ::of(series_.monoid()).value()));

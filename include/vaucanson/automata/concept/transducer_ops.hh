@@ -58,7 +58,7 @@ namespace vcsn {
 		 hstate_t to,
 		 AutoType(input_letter_t) i,
 		 AutoType(output_letter_t) o,
-		 AutoType(output_weight_t) w);
+		 AutoType(output_semiring_elt_t) w);
 
   template <class S, class T>
   hedge_t
@@ -67,7 +67,7 @@ namespace vcsn {
 		hstate_t from, 
 		hstate_t to,
 		AutoType(input_letter_t) i,
-		AutoType(output_weight_t) w);
+		AutoType(output_semiring_elt_t) w);
 
   template <class S, class T>
   hedge_t
@@ -76,7 +76,7 @@ namespace vcsn {
 		hstate_t from, 
 		hstate_t to,
 		AutoType(input_letter_t) o,
-		AutoType(output_weight_t) w);
+		AutoType(output_semiring_elt_t) w);
 
 } // vcsn
 

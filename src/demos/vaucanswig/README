@@ -39,8 +39,8 @@ The module vaucanswig_D_context contains:
 * D_semiring_t:
       standard vaucanson constructors and operators
       make(int);
-      D_weight_t identity();
-      D_weight_t zero();
+      D_semiring_elt_t identity();
+      D_semiring_elt_t zero();
 * D_series_t:
       standard vaucanson constructors and operators
       D_serie_t make(int);
@@ -59,7 +59,7 @@ The module vaucanswig_D_context contains:
          automata_set(), series(), 
          monoid(), alphabet(), semiring()
       shortcut constructors:
-         D_weight_t(int);
+         D_semiring_elt_t(int);
          D_monoid_elt_t(const std::string&);
          D_serie_t serie(int);
          D_serie_t serie(const std::string&);
@@ -72,7 +72,7 @@ The module vaucanswig_D_context contains:
     // shortcut context from alphabet
 
 * D_monoid_elt_t:
-* D_weight_t:
+* D_semiring_elt_t:
 * D_serie_t:
 * D_exp_t:
       standard vaucanson constructors and operators

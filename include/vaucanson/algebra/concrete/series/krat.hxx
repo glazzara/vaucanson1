@@ -178,7 +178,7 @@ namespace vcsn {
     typedef rat::Zero<Tm, Tw>			n_zero_t;
     typedef rat::Star<Tm, Tw>			n_star_t;
     typedef rat::LeftWeighted<Tm, Tw>		n_lweight_t;
-    typedef rat::RightWeighted<Tm, Tw>	n_rweight_t;
+    typedef rat::RightWeighted<Tm, Tw>		n_rweight_t;
     typedef rat::Sum<Tm, Tw>			n_sum_t;
     typedef rat::Product<Tm, Tw>		n_prod_t;
       
@@ -497,7 +497,7 @@ namespace vcsn {
     typedef rat::Zero<Tm, Tw>				n_zero_t;
     typedef rat::Star<Tm, Tw>				n_star_t;
     typedef rat::LeftWeighted<Tm, Tw>			n_lweight_t;
-    typedef rat::RightWeighted<Tm, Tw>		n_rweight_t;
+    typedef rat::RightWeighted<Tm, Tw>			n_rweight_t;
     typedef rat::Sum<Tm, Tw>				n_sum_t;
     typedef rat::Product<Tm, Tw>			n_prod_t;
 
@@ -589,7 +589,7 @@ namespace vcsn {
     typedef rat::Zero<Tm, Tw>				n_zero_t;
     typedef rat::Star<Tm, Tw>				n_star_t;
     typedef rat::LeftWeighted<Tm, Tw>			n_lweight_t;
-    typedef rat::RightWeighted<Tm, Tw>		n_rweight_t;
+    typedef rat::RightWeighted<Tm, Tw>			n_rweight_t;
     typedef rat::Sum<Tm, Tw>				n_sum_t;
     typedef rat::Product<Tm, Tw>			n_prod_t;
 

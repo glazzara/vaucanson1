@@ -86,7 +86,7 @@ namespace vcsn {
       `---------------------------------*/
     
   template<typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::weight_value_t 
+  typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_value_t 
   MetaElement<algebra::SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
   { 
     // assertion(set().monoid().contains(m));
@@ -94,16 +94,16 @@ namespace vcsn {
   }
 
   template<typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::weight_t 
+  typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_t 
   MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_t& m) const
   { 
-    return weight_t(this->set().semiring(), value_get(m.value())); 
+    return semiring_elt_t(this->set().semiring(), value_get(m.value())); 
   }
 
   template<typename S, typename T>
   void 
   MetaElement<algebra::SeriesBase<S>, T>::value_set(const monoid_value_t& m, 
-					   const weight_value_t& w) 
+					   const semiring_elt_value_t& w) 
   { 
     // assertion(set().monoid().contains(m));
     // assertion(set().semiring().contains(w));
@@ -113,7 +113,7 @@ namespace vcsn {
   template<typename S, typename T>
   void 
   MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_t& m, 
-				       const weight_t& w) 
+				       const semiring_elt_t& w) 
   { 
     value_set(m.value(), w.value()); 
   }
@@ -208,9 +208,9 @@ namespace vcsn {
   extract_support(Element<S1, T1>& s1, Element<S2, T2>& s2)
   {
     typedef typename algebra::series_traits<T2>::support_t support_t;
-    typedef typename algebra::series_traits<T1>::weight_value_t weight_value_t;
+    typedef typename algebra::series_traits<T1>::semiring_elt_value_t semiring_elt_value_t;
     for_each_const_(support_t, e, s2.supp())
-      s1.assoc(*e, algebra::identity_as<weight_value_t>::of(s1.set().semiring()));
+      s1.assoc(*e, algebra::identity_as<semiring_elt_value_t>::of(s1.set().semiring()));
   }
 
   template <class S, class T>
@@ -219,7 +219,7 @@ namespace vcsn {
   {
     typedef Element<S, T> serie_t;
     typedef typename Element<S, T>::monoid_elt_t monoid_elt_t;
-    typedef typename Element<S, T>::weight_t weight_t;
+    typedef typename Element<S, T>::semiring_elt_t semiring_elt_t;
     typedef typename Element<S, T>::support_t support_t;
     Element<S, T> output;
     support_t support = lhs.supp();

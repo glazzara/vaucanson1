@@ -200,13 +200,13 @@ namespace vcsn {
     typedef typename input_t::serie_value_t	serie_value_t;
     typedef typename series_t::semiring_t	semiring_t;
     typedef typename input_t::series_elt_t     	series_elt_t;
-    typedef typename series_elt_t::weight_t	weight_t;
+    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename series_elt_t::support_t	support_t;
 
     delta_ret_t	delta_ret;
-    weight_t		  zero_semiring
+    semiring_elt_t		  zero_semiring
       = input.set().series().semiring()
-      .zero(SELECT(typename weight_t::value_t));
+      .zero(SELECT(typename semiring_elt_t::value_t));
 
     // Empty automaton is not deterministic
     if (input.states().size() == 0)

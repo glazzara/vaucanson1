@@ -70,8 +70,7 @@ namespace vcsn {
   struct transducer_traits
   {
      typedef undefined_type input_monoid_elt_value_t;
-     typedef undefined_type output_monoid_elt_value_tt;
-     typedef undefined_type output_weight_value_tt;
+     typedef undefined_type output_monoid_elt_value_t;
   };
 
   template <typename T>
@@ -113,11 +112,11 @@ namespace vcsn {
     typedef MetaElement<AutomataBase<Self>, T>		      mother_t;
 
     /*! type of the output. */
-    typedef typename mother_t::weight_t output_serie_t;
+    typedef typename mother_t::semiring_elt_t output_serie_t;
 
     /*! type of the output monoid element implementation. */
-    typedef typename automaton_traits<T>::weight_value_t weight_value_t;
-    typedef typename algebra::series_traits<weight_value_t>::monoid_value_t 
+    typedef typename automaton_traits<T>::semiring_elt_value_t semiring_elt_value_t;
+    typedef typename algebra::series_traits<semiring_elt_value_t>::monoid_value_t 
 						output_monoid_elt_value_t;
 
     /*! type of the output monoid. */
@@ -142,15 +141,15 @@ namespace vcsn {
     typedef typename input_monoid_t::letter_t input_letter_t;
 
     /*! type of the output weight implementation. */
-    typedef typename algebra::series_traits<weight_value_t>::weight_value_t
-    output_weight_value_t;
+    typedef typename algebra::series_traits<semiring_elt_value_t>::semiring_elt_value_t
+    output_semiring_elt_value_t;
     
     /*! type of the output semiring. */
     typedef typename semiring_t::semiring_t	output_semiring_t;
 
     /*! type of the output weight. */
-    typedef Element<output_semiring_t, output_weight_value_t>
-    output_weight_t;
+    typedef Element<output_semiring_t, output_semiring_elt_value_t>
+    output_semiring_elt_t;
 
     /*! return the input of an edge */
     input_monoid_elt_t input_of(hedge_t) const;
@@ -162,20 +161,20 @@ namespace vcsn {
       a weight linked to it. */
     hedge_t add_io_edge(hstate_t, hstate_t, input_monoid_elt_t, 
 			output_monoid_elt_t, 
-			output_weight_t = output_weight_t());
+			output_semiring_elt_t = output_semiring_elt_t());
 
     /*! add an edge specified using an input letter, an output letter and
       a weight linked to it. */
     hedge_t add_io_edge(hstate_t, hstate_t, input_letter_t, output_letter_t,
-			output_weight_t = output_weight_t());
+			output_semiring_elt_t = output_semiring_elt_t());
 
     /*! add an only-output edge (epsilon as input). */
     hedge_t add_o_edge(hstate_t, hstate_t, output_letter_t, 
-		       output_weight_t = output_weight_t());
+		       output_semiring_elt_t = output_semiring_elt_t());
 
     /*! add an only-input edge (epsilon as output). */
     hedge_t add_i_edge(hstate_t, hstate_t, input_letter_t, 
-		       output_weight_t = output_weight_t());
+		       output_semiring_elt_t = output_semiring_elt_t());
 
   protected:
     MetaElement();
