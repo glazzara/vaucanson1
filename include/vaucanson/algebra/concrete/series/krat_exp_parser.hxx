@@ -1,7 +1,7 @@
 // krat_exp_parser.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,10 @@
 
 # include <vaucanson/algebra/concept/monoid_base.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+# include <vaucanson/tools/usual_escaped_characters.hh>
+
 # include <list>
+# include <set>
 
 namespace vcsn {
 
@@ -60,21 +63,21 @@ namespace vcsn {
        * @brief Token types enumeration.
        *
        * Those are the different token types the lexer could encounter.
-       * 
+       *
        * @see KRatExpToken, KRatExpToken::token
        */
-      enum token_e 
+      enum token_e
 	{
 	  lparen,
 	  rparen,
-	  space, 
+	  space,
 	  plus,
 	  e_star,
 	  dot,
 	  zero,
 	  one,
-	  a_word, 
-	  a_weight, 
+	  a_word,
+	  a_weight,
 	  eof
 	};
 
@@ -95,7 +98,7 @@ namespace vcsn {
     template <class MonoidValue, class SemiringEltValue>
     class KRatExpToken
     {
-    public:      
+    public:
       /**
        * @brief Simple token.
        *
@@ -106,7 +109,7 @@ namespace vcsn {
        *
        * @see KRatExpToken, token_e
        */
-      struct token 
+      struct token
       {
 	token(const token_e& tok_type) :
 	  type(tok_type)
@@ -126,7 +129,7 @@ namespace vcsn {
 
 	std::string to_string() const
 	{
-	  switch (type) 
+	  switch (type)
 	    {
 	    case a_word   : return "word";
 	    case a_weight : return "weight";
@@ -163,7 +166,7 @@ namespace vcsn {
 	  return "no token";
 	else if (tok_.size() == 1)
 	  return tok_.front().to_string();
-	else 
+	else
 	  {
 	    std::string s("schrod(");
 	    typename std::list<token>::const_iterator i = tok_.begin();
@@ -226,7 +229,7 @@ namespace vcsn {
 	tok_.push_back(token(tok));
 	return *this;
       }
-      
+
       KRatExpToken& operator=(const MonoidValue& word_value)
       {
 	tok_.push_back(token(a_word, word_value));
@@ -256,7 +259,7 @@ namespace vcsn {
       <
 	typename Element<S, T>::monoid_value_t,
 	typename Element<S, T>::semiring_elt_value_t
-      >						      krat_exp_token_t; 
+      >						      krat_exp_token_t;
       typedef std::list<krat_exp_token_t>	      token_stream_t;
 
       Lexer(bool trace = false) :
@@ -289,24 +292,16 @@ namespace vcsn {
 	typedef typename Element<S, T>::monoid_value_t	monoid_value_t;
 	typedef typename Element<S, T>::semiring_elt_t	semiring_elt_t;
 	typedef std::string::const_iterator		iterator_t;
-	
+
 	iterator_t i = in.begin();
-	std::list<char> operators;
+	std::set<char> escaped = tools::usual_escaped_characters();
 	int len = 0;
-	operators.push_back('0');
-	operators.push_back('(');
-	operators.push_back(')');
-	operators.push_back('.');
-	operators.push_back('+');
-	operators.push_back('*');
-	operators.push_back('1');
-	operators.push_back(' ');
-	  
+
 	while (!error_ & (i != in.end()))
 	  {
 	    len = 0;
 	    krat_exp_token_t tok;
-	    switch (*i) 
+	    switch (*i)
 	      {
 		// operator case.
 	      case '(' : tok = lparen; len = 1; break;
@@ -321,7 +316,7 @@ namespace vcsn {
 	    // try word parser.
 	    iterator_t mli = i;
 	    monoid_elt_t w(e.set().monoid());
-	    if (parse_word(w, in, mli, operators))
+	    if (parse_word(w, in, mli, escaped))
 	      {
 		if (mli - i > 1)
 		  tok.reset();
@@ -355,7 +350,7 @@ namespace vcsn {
       {
 	return error_;
       }
-      
+
       /// Return the error message.
       const std::string&
       error_msg() const
@@ -369,7 +364,7 @@ namespace vcsn {
 	return (tokens_.size() > 0) ? tokens_.front() :
 	  krat_exp_token_t (eof);
       }
-      
+
       /// Return the second token.
       krat_exp_token_t second() const
       {
@@ -398,7 +393,7 @@ namespace vcsn {
       {
 	trace_ = trace;
       }
-      
+
     protected:
       token_stream_t tokens_;
       bool trace_;
@@ -445,7 +440,7 @@ namespace vcsn {
       <
 	typename Element<S, T>::monoid_value_t,
 	typename Element<S, T>::semiring_elt_value_t
-      >						      krat_exp_token_t; 
+      >						      krat_exp_token_t;
       typedef typename Element<S, T>::monoid_elt_t    monoid_elt_t;
       typedef typename Element<S, T>::monoid_value_t  monoid_value_t;
       typedef typename monoid_elt_t::set_t	      monoid_t;
@@ -453,7 +448,7 @@ namespace vcsn {
       typedef typename semiring_elt_t::set_t		      semiring_t;
       typedef typename Element<S, T>::semiring_elt_value_t  semiring_elt_value_t;
       typedef std::list<krat_exp_token_t>	      token_stream_t;
-      
+
       Parser(Lexer<S, T>& lexer, bool trace = false) :
 	lexer_		(lexer),
 	trace_		(trace),
@@ -498,7 +493,7 @@ namespace vcsn {
       {
 	trace_ = trace;
       }
-      
+
     protected:
 
       /// Trace parsing.
@@ -520,13 +515,13 @@ namespace vcsn {
       /** @} */
 
       /// Generate a parse error.
-      void parse_error(const std::string& msg = "parse_error.") 
+      void parse_error(const std::string& msg = "parse_error.")
 	throw (const std::string&)
       {
 	trace("Stop on error", msg);
 	throw msg;
       }
-      
+
       /**
        * @brief Accept token, or generate an error.
        *
@@ -563,7 +558,7 @@ namespace vcsn {
 	  }
 	trace("parse_exp: End",  exp);
       }
-      
+
       /// term ::= right_weighted ('.'? right_weighted)*
       void parse_term(Element<S, T>& exp)
       {
@@ -584,7 +579,7 @@ namespace vcsn {
 	  }
 	trace("parse_term: End",  exp);
       }
-      
+
       /// right_weighted ::= left_weighted (' ' weight)*
       void parse_right_weighted(Element<S, T>& exp)
       {
@@ -599,7 +594,7 @@ namespace vcsn {
 	  }
 	trace("parse_right_weighted: End", exp);
       }
-      
+
       /// left_weighted ::= weight ' ' left_weighted | stared
       void parse_left_weighted(Element<S, T>& exp)
       {
@@ -649,13 +644,13 @@ namespace vcsn {
 		exp = m * w;
 	      }
 	  }
-	else 
-	  /* !lexer_.first().is_a(a_weight)  || 
+	else
+	  /* !lexer_.first().is_a(a_weight)  ||
 	     (lexer_.first.is_schrod() && !lexer_.second().is_a(space)) */
 	  parse_stared(exp);
 	trace("parse_left_weighted: End",  exp);
       }
-      
+
       /// stared ::= factor '*'*
       void parse_stared(Element<S, T>& exp)
       {
@@ -668,7 +663,7 @@ namespace vcsn {
 	  }
 	trace("parse_stared: End",  exp);
       }
-      
+
       /// factor ::= 1 | 0 | word | '(' exp ')'
       void parse_factor(Element<S, T>& exp)
       {
@@ -699,13 +694,13 @@ namespace vcsn {
 		      lexer_.first().to_string());
 	trace("parse_factor: End",  exp);
       }
-      
+
       Lexer<S, T>&	lexer_;
       bool		trace_;
       bool		error_;
       std::string	error_msg_;
     };
-    
+
     template <class S, class T>
     std::pair<bool, std::string>
     parse(const std::string& from,
@@ -719,12 +714,12 @@ namespace vcsn {
       parser.parse(exp);
       return std::make_pair(parser.error(), parser.error_msg());
     }
-  
+
     /** @} */
     /** @} */
-    
+
   } // algebra
-  
+
 } // vcsn
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX

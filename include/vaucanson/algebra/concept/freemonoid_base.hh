@@ -1,7 +1,7 @@
 // freemonoid_base.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -51,10 +51,10 @@ namespace vcsn {
       a way of iterating through letters of words. */
 
     template<class Self>
-    struct FreeMonoidBase 
+    struct FreeMonoidBase
       : MonoidBase<Self>
     {
-      /*! The type of the alphabet A. */ 
+      /*! The type of the alphabet A. */
       typedef typename virtual_types<Self>::alphabet_t  alphabet_t;
 
       /*! The type of letter hold by the alphabet. */
@@ -92,7 +92,7 @@ namespace vcsn {
   template<typename S>
   struct virtual_types<algebra::FreeMonoidBase<S> >
     : virtual_types<algebra::MonoidBase<S> >
-  { 
+  {
     typedef undefined_type alphabet_t;
   };
 
@@ -108,17 +108,17 @@ namespace vcsn {
     typedef typename op_begin_traits<Self, T>::ret_t	iterator;
 
     //! iterator over the word. (const version)
-    typedef typename 
+    typedef typename
     op_begin_traits<Self, T>::const_ret_t		const_iterator;
 
     //! iterator over the mirror image of the word.
     typedef typename op_rbegin_traits<Self, T>::ret_t	reverse_iterator;
 
     //! iterator over the mirror image of the word. (const version)
-    typedef typename 
+    typedef typename
     op_rbegin_traits<Self, T>::const_ret_t		const_reverse_iterator;
 
-    //! returns the lenght of the word. 
+    //! returns the lenght of the word.
     size_t		      length() const;
 
     //! in-place mirror transformation.
@@ -156,26 +156,26 @@ namespace vcsn {
     MetaElement(const MetaElement& other);
   };
 
-  //! Return a fresh word that is the mirror 
+  //! Return a fresh word that is the mirror
   template<typename S, typename T>
   Element<S, T>
   mirror(const Element<S, T>& e);
 
   //! Parse the beginning of the string looking for a word.
-  template <typename S, typename T>
+  template <typename S, typename T, typename CharContainer>
   bool
-  parse_word(Element<S, T>& dest, 
-	     const std::string& s, 
+  parse_word(Element<S, T>& dest,
+	     const std::string& s,
 	     typename std::string::const_iterator& i,
-	     const std::list<char> & escaped = std::list<char>());
+	     const CharContainer& escaped = CharContainer ());
 
   /*! @} @} */
 
-  template <typename S, typename T>
-  bool op_parse(const algebra::FreeMonoidBase<S>& s, T& v, 
-		const std::string&, 
+  template <typename S, typename T, typename CharContainer>
+  bool op_parse(const algebra::FreeMonoidBase<S>& s, T& v,
+		const std::string&,
 		typename std::string::const_iterator&,
-		const std::list<char>& escaped);
+		const CharContainer& escaped);
 
   template<typename Self, typename T>
   void op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v);
@@ -192,6 +192,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concept/freemonoid_base.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCEPT_FREEMONOID_BASE_HH

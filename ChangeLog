@@ -1,5 +1,18 @@
 2004-02-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx
+	(Lexer::lex): Use tools::usual_escaped_characters.
+	* include/vaucanson/algebra/concept/freemonoid_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx
+	(parse_word, op_parse): Fix.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx,
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx,
+	* include/vaucanson/tools/usual_escaped_characters.hxx,
+	* include/vaucanson/tools/usual_escaped_characters.hh: Typo. Rename
+	usual_escaped_charaters to usual_escaped_characters.
+
+2004-02-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh:
 	Fix the test.
 

@@ -1,7 +1,7 @@
 // polynoms.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -43,7 +43,7 @@ namespace vcsn {
     /*----------------.
       | polynom<Tm, Tw> |
       `----------------*/
-    
+
     template<typename Tm, typename Tw>
     template<typename M, typename W>
     inline
@@ -52,109 +52,109 @@ namespace vcsn {
       map_.insert(std::make_pair(identity_value(SELECT(M), SELECT(Tm)),
 				 identity_value(SELECT(W), SELECT(Tw))));
     }
-    
+
     template<typename Tm, typename Tw>
     inline
-    polynom<Tm, Tw>::polynom(const polynom& other) : map_(other.map_) 
+    polynom<Tm, Tw>::polynom(const polynom& other) : map_(other.map_)
     {}
-    
+
     template<typename Tm, typename Tw>
     inline
-    polynom<Tm, Tw>::polynom() : map_() 
+    polynom<Tm, Tw>::polynom() : map_()
     {}
-    
+
     template<typename Tm, typename Tw>
     inline
-    size_t 
+    size_t
     polynom<Tm, Tw>::size() const
-    { 
-      return map_.size(); 
+    {
+      return map_.size();
     }
-    
+
     template<typename Tm, typename Tw>
     inline
     bool polynom<Tm, Tw>::empty() const
-    { 
-      return map_.empty(); 
-    }
-    
-    template<typename Tm, typename Tw>
-    inline
-    typename polynom<Tm, Tw>::iterator 
-    polynom<Tm, Tw>::begin() 
-    { 
-      return map_.begin(); 
-    }
-    
-    template<typename Tm, typename Tw>    
-    inline
-    typename polynom<Tm, Tw>::const_iterator 
-    polynom<Tm, Tw>::begin() const 
-    { 
-      return map_.begin(); 
-    }
-    
-    template<typename Tm, typename Tw>
-    inline
-    typename polynom<Tm, Tw>::iterator 
-    polynom<Tm, Tw>::end() 
-    { 
-      return map_.end(); 
-    }
-    
-    template<typename Tm, typename Tw>    
-    inline
-    typename polynom<Tm, Tw>::const_iterator 
-    polynom<Tm, Tw>::end() const 
-    { 
-      return map_.end(); 
-    }
-    
-    template<typename Tm, typename Tw>    
-    inline
-    typename polynom<Tm, Tw>::iterator 
-    polynom<Tm, Tw>::find(const Tm& m) 
-    { 
-      return map_.find(m); 
-    }
-    
-    template<typename Tm, typename Tw>
-    inline
-    typename polynom<Tm, Tw>::const_iterator 
-    polynom<Tm, Tw>::find(const Tm& m) const
-    { 
-      return map_.find(m); 
+    {
+      return map_.empty();
     }
 
-    template<typename Tm, typename Tw>    
+    template<typename Tm, typename Tw>
+    inline
+    typename polynom<Tm, Tw>::iterator
+    polynom<Tm, Tw>::begin()
+    {
+      return map_.begin();
+    }
+
+    template<typename Tm, typename Tw>
+    inline
+    typename polynom<Tm, Tw>::const_iterator
+    polynom<Tm, Tw>::begin() const
+    {
+      return map_.begin();
+    }
+
+    template<typename Tm, typename Tw>
+    inline
+    typename polynom<Tm, Tw>::iterator
+    polynom<Tm, Tw>::end()
+    {
+      return map_.end();
+    }
+
+    template<typename Tm, typename Tw>
+    inline
+    typename polynom<Tm, Tw>::const_iterator
+    polynom<Tm, Tw>::end() const
+    {
+      return map_.end();
+    }
+
+    template<typename Tm, typename Tw>
+    inline
+    typename polynom<Tm, Tw>::iterator
+    polynom<Tm, Tw>::find(const Tm& m)
+    {
+      return map_.find(m);
+    }
+
+    template<typename Tm, typename Tw>
+    inline
+    typename polynom<Tm, Tw>::const_iterator
+    polynom<Tm, Tw>::find(const Tm& m) const
+    {
+      return map_.find(m);
+    }
+
+    template<typename Tm, typename Tw>
     template<typename W>
     inline
     Tw& polynom<Tm, Tw>::make_get(SELECTOR(W), const Tm& m)
     {
-      std::pair<iterator, bool> i = 
+      std::pair<iterator, bool> i =
 	map_.insert(std::make_pair(m, zero_value(SELECT(W), SELECT(Tw))));
       return i.first->second;
     }
-    
-    template<typename Tm, typename Tw>    
+
+    template<typename Tm, typename Tw>
     template<typename W>
     inline
     Tw polynom<Tm, Tw>::get(SELECTOR(W), const Tm& m) const
     {
-      const_iterator i;            
+      const_iterator i;
       if ((i = map_.find(m)) == map_.end())
 	return zero_value(SELECT(W), SELECT(Tw));
       return i->second;
     }
-    
-    template<typename Tm, typename Tw>    
+
+    template<typename Tm, typename Tw>
     inline
     void polynom<Tm, Tw>::insert(const Tm& m, const Tw& w)
-    { 
-      map_.insert(std::make_pair(m, w)); 
+    {
+      map_.insert(std::make_pair(m, w));
     }
-    
-    template<typename Tm, typename Tw>    
+
+    template<typename Tm, typename Tw>
     template<typename W>
     inline
     void polynom<Tm, Tw>::add(const W& semiring, const Tm& m, const Tw& w)
@@ -162,33 +162,33 @@ namespace vcsn {
       Tw& o = make_get(SELECT(W), m);
       op_in_add(semiring, o, w);
     }
-    
-    template<typename Tm, typename Tw>        
+
+    template<typename Tm, typename Tw>
     inline
     void polynom<Tm, Tw>::erase(iterator i)
-    { 
-      map_.erase(i); 
-    }
-    
-    template<typename Tm, typename Tw>    
-    inline
-    void polynom<Tm, Tw>::clear() 
-    { 
-      map_.clear(); 
-    }
-    
-    template<typename Tm, typename Tw>        
-    inline
-    void polynom<Tm, Tw>::swap(polynom<Tm, Tw>& other)
-    { 
-      map_.swap(other.map_); 
+    {
+      map_.erase(i);
     }
 
-    template<typename Tm, typename Tw>        
+    template<typename Tm, typename Tw>
+    inline
+    void polynom<Tm, Tw>::clear()
+    {
+      map_.clear();
+    }
+
+    template<typename Tm, typename Tw>
+    inline
+    void polynom<Tm, Tw>::swap(polynom<Tm, Tw>& other)
+    {
+      map_.swap(other.map_);
+    }
+
+    template<typename Tm, typename Tw>
     inline
     const std::map<Tm, Tw>&
     polynom<Tm, Tw>::as_map() const
-    { 
+    {
       return map_;
     }
 
@@ -214,15 +214,15 @@ namespace vcsn {
     {
       return lhs.as_map() == rhs.as_map();
     }
-  
+
     template <class Tm, class Tw>
     inline
     bool operator!=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
     {
       return !(lhs == rhs);
     }
-  
-  
+
+
     template <class Tm, class Tw>
     inline
     bool operator<(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
@@ -254,7 +254,7 @@ namespace vcsn {
 
   } // algebra
 
- 
+
   /*-------------------.
     | External functions |
     `-------------------*/
@@ -262,43 +262,43 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   bool op_contains(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m)
-  { 
+  {
     for (typename algebra::polynom<Tm, Tw>::const_iterator i = m.begin();
 	 i != m.end();
 	 ++i)
       if (!s.monoid().contains(i->first) || !s.semiring().contains(i->second))
 	return false;
-    return true; 
+    return true;
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   bool op_is_finite_app(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m)
-  { 
-    return true; 
+  {
+    return true;
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   typename algebra::series_traits<algebra::polynom<Tm, Tw> >::support_t
   op_support(const algebra::Series<W, M>&, const algebra::polynom<Tm, Tw>& m)
-  { 
+  {
     return typename algebra::series_traits<algebra::polynom<Tm, Tw> >::support_t(m.as_map());
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  const algebra::polynom<Tm, Tw>& identity_value(SELECTOR2(algebra::Series<W, M>), 
+  const algebra::polynom<Tm, Tw>& identity_value(SELECTOR2(algebra::Series<W, M>),
 						 SELECTOR2(algebra::polynom<Tm, Tw>))
   {
-    static const algebra::polynom<Tm, Tw> instance = 
+    static const algebra::polynom<Tm, Tw> instance =
       algebra::polynom<Tm, Tw>(SELECT(M), SELECT(W));
     return instance;
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  const algebra::polynom<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>), 
+  const algebra::polynom<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>),
 					     SELECTOR2(algebra::polynom<Tm, Tw>))
   {
     static const algebra::polynom<Tm, Tw> instance;
@@ -307,7 +307,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  void op_in_add(const algebra::Series<W, M>& s, 
+  void op_in_add(const algebra::Series<W, M>& s,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const algebra::polynom<Tm, Tw>& arg)
   {
@@ -371,10 +371,10 @@ namespace vcsn {
 	}
     return ret;
   }
-    
+
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  void op_in_mul(const algebra::Series<W, M>& s, 
+  void op_in_mul(const algebra::Series<W, M>& s,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const algebra::polynom<Tm, Tw>& arg)
   {
@@ -395,7 +395,7 @@ namespace vcsn {
     p.insert(m_value, identity_value(SELECT(W), SELECT(Tw)));
     return p;
   }
-  
+
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
   inline
   algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
@@ -422,7 +422,7 @@ namespace vcsn {
 		 op_convert(SELECT(W), SELECT(Tw), w_value));
     return ret;
   }
-    
+
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
   void op_assign(const algebra::Series<W, M>&,
@@ -458,9 +458,9 @@ namespace vcsn {
 		 const algebra::MonoidBase<M>& monoid,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTm& src)
-  { 
+  {
     precondition(& s.monoid() == & monoid);
-    dst.add(s.semiring(), 
+    dst.add(s.semiring(),
 	    op_convert(SELECT(M), SELECT(Tm), src),
 	    identity_value(SELECT(W), SELECT(Tw)));
   }
@@ -471,7 +471,7 @@ namespace vcsn {
 				  const algebra::MonoidBase<M>& monoid,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTm& b)
-  { 
+  {
     algebra::polynom<Tm, Tw> ret(a);
     op_in_add(s, monoid, ret, b);
     return ret;
@@ -483,7 +483,7 @@ namespace vcsn {
 				  const algebra::Series<W, M>& s,
 				  const oTm& a,
 				  const algebra::polynom<Tm, Tw>& b)
-  { 
+  {
     algebra::polynom<Tm, Tw> ret(b);
     op_in_add(s, monoid, ret, a);
     return ret;
@@ -499,10 +499,10 @@ namespace vcsn {
 		 const algebra::SemiringBase<W>& semiring,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src)
-  { 
+  {
     precondition(& s.semiring() == & semiring);
     if (src != zero_value(SELECT(W), SELECT(oTw)))
-      dst.add(s.semiring(), 
+      dst.add(s.semiring(),
 	      identity_value(SELECT(M), SELECT(Tm)),
 	      op_convert(SELECT(W), SELECT(Tw), src));
   }
@@ -513,7 +513,7 @@ namespace vcsn {
 				  const algebra::SemiringBase<W>& semiring,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTw& b)
-  { 
+  {
     algebra::polynom<Tm, Tw> ret(a);
     op_in_add(s, semiring, ret, b);
     return ret;
@@ -525,7 +525,7 @@ namespace vcsn {
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b)
-  { 
+  {
     algebra::polynom<Tm, Tw> ret(b);
     op_in_add(s, semiring, ret, a);
     return ret;
@@ -541,7 +541,7 @@ namespace vcsn {
 		 const algebra::SemiringBase<W>& semiring,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src)
-  { 
+  {
     precondition(& s.semiring() == & semiring);
 
     typename algebra::polynom<Tm, Tw>::iterator p;
@@ -562,7 +562,7 @@ namespace vcsn {
 				  const algebra::SemiringBase<W>& semiring,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTw& b)
-  { 
+  {
     algebra::polynom<Tm, Tw> ret(a);
     op_in_mul(s, semiring, ret, b);
     return ret;
@@ -574,7 +574,7 @@ namespace vcsn {
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b)
-  { 
+  {
     precondition(& s.semiring() == & semiring);
 
     algebra::polynom<Tm, Tw> ret(b);
@@ -612,13 +612,13 @@ namespace vcsn {
     }
     return ost;
   }
-  
+
   template<typename W, typename M, typename St, typename Tm, typename Tw>
   inline
   St& op_rout(const algebra::Series<W, M>& s, St& st, const algebra::polynom<Tm, Tw>& p)
   {
     typename algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    std::set<char> escape_set = tools::usual_escaped_charaters();
+    std::set<char> escape_set = tools::usual_escaped_characters();
 
     while(i != p.end())
       {
@@ -631,7 +631,7 @@ namespace vcsn {
 	  op_rout(s.semiring(), st, i->second);
 	  st << " ";
 	}
-	
+
 	if (i->first != identity_value(SELECT(M), SELECT(Tm)))
 	{
 	  std::ostringstream o_str;
@@ -640,10 +640,10 @@ namespace vcsn {
 	}
 	else
 	  st << "1";
-	
+
 	if (i->second != identity_value(SELECT(W), SELECT(Tw)))
 	  st << ")";
-	  
+
 	++i;
       }
     if (i == p.begin()) /* case zero */
@@ -659,18 +659,18 @@ namespace vcsn {
     | design_pattern series operations |
     `------------------------------*/
 
-    
+
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
-  Tw op_series_get(const algebra::Series<W, M>&, 
+  Tw op_series_get(const algebra::Series<W, M>&,
 		   const algebra::polynom<Tm, Tw>& p,
 		   const oTm& m)
-  { 
-    return p.get(SELECT(W), op_convert(SELECT(M), SELECT(Tm), m)); 
+  {
+    return p.get(SELECT(W), op_convert(SELECT(M), SELECT(Tm), m));
   }
 
-  template <typename W, typename M, 
-	    typename Tm, typename Tw, 
+  template <typename W, typename M,
+	    typename Tm, typename Tw,
 	    typename oTm, typename oTw>
   inline
   void op_series_set(const algebra::Series<W, M>&,
@@ -687,7 +687,7 @@ namespace vcsn {
 
     typename algebra::polynom<Tm, Tw>::iterator i = p.find(new_m);
     if (new_w == zero_value(SELECT(W), SELECT(Tw)))
-      { 
+      {
 	if (i != p.end())
 	  p.erase(i);
       }
@@ -701,7 +701,7 @@ namespace vcsn {
 
   template <class W, class M, class Tm, class Tw>
   inline
-  Tm op_choose_from_supp(const algebra::Series<W, M>&, 
+  Tm op_choose_from_supp(const algebra::Series<W, M>&,
 			 const algebra::polynom<Tm, Tw>& p)
   {
     typedef typename algebra::polynom<Tm, Tw>::const_iterator const_iterator;
@@ -722,8 +722,8 @@ namespace vcsn {
 
   template <class W, class M, class Tm, class Tw>
   inline
-  Element<algebra::Series<W,M>, algebra::polynom<Tm,Tw> > 
-  op_choose(const algebra::Series<W,M>& s, 
+  Element<algebra::Series<W,M>, algebra::polynom<Tm,Tw> >
+  op_choose(const algebra::Series<W,M>& s,
 	    SELECTOR2(algebra::polynom<Tm,Tw>))
   {
     algebra::polynom<Tm, Tw> p;
@@ -739,7 +739,7 @@ namespace vcsn {
     `----------*/
   template <typename W, typename M, typename Tm, typename Tw>
   inline
-  void  op_in_transpose(const algebra::Series<W, M>& s, 
+  void  op_in_transpose(const algebra::Series<W, M>& s,
 			algebra::polynom<Tm, Tw>& t)
   {
     typedef typename algebra::polynom<Tm, Tw>::const_iterator const_iterator;
@@ -760,25 +760,25 @@ namespace std {
   // FIXME: Must this operator exist ?
   template <class Tm, class Tw>
   inline
-  std::ostream& operator<<(std::ostream& out, 
+  std::ostream& operator<<(std::ostream& out,
 			   const vcsn::algebra::polynom<Tm, Tw>& p)
   {
     typename vcsn::algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    std::set<char> escape_set = vcsn::tools::usual_escaped_charaters();
+    std::set<char> escape_set = vcsn::tools::usual_escaped_characters();
 
     while (i != p.end())
       {
 	if (i != p.begin())
-	  out << "+";	
+	  out << "+";
 	out << "(" << i->second << " ";
 	vcsn::escaped_output(out, escape_set, i->first) ;
 	out << ")";
 	++i;
       }
-    
+
     if (i == p.begin()) /* case zero */
       out << "0";
-    
+
     return out;
   }
 

@@ -35,14 +35,14 @@
 namespace vcsn {
   namespace tools {
 
-    std::set<char> usual_escaped_charaters();
-      
+    std::set<char> usual_escaped_characters();
+
   } // tools
 } // vcsn
 
 #ifndef VCSN_USE_INTERFACE_ONLY
 # include <vaucanson/tools/usual_escaped_characters.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_TOOLS_USUAL_ESCAPED_CHARACTERS_HH

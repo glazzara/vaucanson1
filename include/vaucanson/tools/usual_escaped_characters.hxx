@@ -35,7 +35,7 @@
 namespace vcsn {
   namespace tools {
 
-    std::set<char> usual_escaped_charaters()
+    std::set<char> usual_escaped_characters()
     {
       std::set<char> result;
       result.insert('.');
@@ -51,7 +51,7 @@ namespace vcsn {
       result.insert(']');
       return result;
     }
-    
+
   } // tools
 } // vcsn
 

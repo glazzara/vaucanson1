@@ -1,7 +1,7 @@
 // exp.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -48,7 +48,7 @@ namespace vcsn {
     exp<LetterT, WeightT>::exp()
       : base_(new n_zero_t)
     {}
-    
+
     template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT>::exp(node_t* p)
       : base_(p)
@@ -63,9 +63,9 @@ namespace vcsn {
     exp<LetterT, WeightT>::exp(const exp& other)
       : base_(other.base_->clone())
     {}
-    
+
     template<typename LetterT, typename WeightT>
-    exp<LetterT, WeightT>& 
+    exp<LetterT, WeightT>&
     exp<LetterT, WeightT>::operator=(const exp& other)
     {
       if (other.base_ != base_)
@@ -77,15 +77,15 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    exp<LetterT, WeightT>& 
+    exp<LetterT, WeightT>&
     exp<LetterT, WeightT>::swap(exp& otether)
     {
       std::swap(base_, other.base_);
       return *this;
     }
 
-    template<typename LetterT, typename WeightT>  
-    exp<LetterT, WeightT>& 
+    template<typename LetterT, typename WeightT>
+    exp<LetterT, WeightT>&
     exp<LetterT, WeightT>::operator+=(const exp& other)
     {
       base_ = new n_sum_t(base_, other.base_->clone());
@@ -93,7 +93,7 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    exp<LetterT, WeightT>& 
+    exp<LetterT, WeightT>&
     exp<LetterT, WeightT>::operator*=(const exp& other)
     {
       base_ = new n_prod_t(base_, other.base_->clone());
@@ -121,18 +121,18 @@ namespace vcsn {
       accept(v);
       return v.get();
     }
-    
-    template<typename LetterT, typename WeightT>   
+
+    template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT>::~exp()
     {
       delete base_;
     }
-    
+
     template<typename LetterT, typename WeightT>
     typename exp<LetterT, WeightT>::node_t* &
-    exp<LetterT, WeightT>::base() 
-    { 
-      return base_; 
+    exp<LetterT, WeightT>::base()
+    {
+      return base_;
     }
 
     template<typename LetterT, typename WeightT>
@@ -170,7 +170,7 @@ namespace vcsn {
     {
       return exp(new n_one_t);
     }
-    
+
     template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT> exp<LetterT, WeightT>::zero()
     {
@@ -183,9 +183,9 @@ namespace vcsn {
     {
       return exp(new n_const_t(l));
     }
-    
+
     template<typename LetterT, typename WeightT>
-    bool exp<LetterT, WeightT>::starable() 
+    bool exp<LetterT, WeightT>::starable()
     {
       return true;
     }
@@ -230,23 +230,23 @@ namespace vcsn {
     // in calls to exp * number or num * exp
 
     template<typename M, typename S, typename T>
-    exp<M, Element<S, T> > 
+    exp<M, Element<S, T> >
     operator*(const Element<S, T>& lhs,
 	      const exp<M, Element<S, T> >& rhs)
     {
       exp<M, Element<S, T> > ret(rhs);
-      ret.base() 
+      ret.base()
 	= new LeftWeighted<M, Element<S, T> >(lhs, ret.base());
       return ret;
     }
 
     template<typename M, typename S, typename T>
-    exp<M, Element<S, T> > 
+    exp<M, Element<S, T> >
     operator*(const exp<M, Element<S, T> >& lhs,
 	      const Element<S, T>& rhs)
     {
       exp<M, Element<S, T> > ret(lhs);
-      ret.base() 
+      ret.base()
 	= new RightWeighted<M, Element<S, T> >(rhs, ret.base());
       return ret;
     }
@@ -254,53 +254,53 @@ namespace vcsn {
   } // rat
 
   namespace algebra {
-  
+
     template <class Matcher, class Monoid, class Semiring>
     DispatchVisitor<Matcher, Monoid, Semiring>::
     DispatchVisitor(Matcher& m) :
       matcher_(m)
     {}
-    
+
     template <class Matcher, class Monoid, class Semiring>
-    
+
     DispatchVisitor<Matcher, Monoid, Semiring>::
     ~DispatchVisitor()
     {}
-    
+
     template <class Matcher, class Monoid, class Semiring>
     void
     DispatchVisitor<Matcher, Monoid, Semiring>::
-    product(const node_t* lhs, const node_t* rhs) 
+    product(const node_t* lhs, const node_t* rhs)
     {
       ret_ = matcher_.match_nodeProduct(typename Matcher::Product(lhs, rhs));
     }
 
     template <class Matcher, class Monoid, class Semiring>
-    void 
+    void
     DispatchVisitor<Matcher, Monoid, Semiring>::
-    sum(const node_t* lhs, const node_t* rhs) 
+    sum(const node_t* lhs, const node_t* rhs)
     {
       ret_ = matcher_.match_nodeSum(typename Matcher::Sum(lhs, rhs));
     }
     template <class Matcher, class Monoid, class Semiring>
-    void 
+    void
     DispatchVisitor<Matcher, Monoid, Semiring>::
     star(const node_t* node)
     {
       ret_ = matcher_.match_nodeStar(typename Matcher::Star(node));
     }
 
-    template <class Matcher, class Monoid, class Semiring>   
-    void 
+    template <class Matcher, class Monoid, class Semiring>
+    void
     DispatchVisitor<Matcher, Monoid, Semiring>::
-    left_weight(const semiring_elt_value_t& w, const node_t* node) 
+    left_weight(const semiring_elt_value_t& w, const node_t* node)
     {
-      ret_ = matcher_.match_nodeLeftWeight(typename Matcher::LeftWeight(w, 
+      ret_ = matcher_.match_nodeLeftWeight(typename Matcher::LeftWeight(w,
 									node));
     }
 
-    template <class Matcher, class Monoid, class Semiring>  
-    void 
+    template <class Matcher, class Monoid, class Semiring>
+    void
     DispatchVisitor<Matcher, Monoid, Semiring>::
     right_weight(const semiring_elt_value_t& w, const node_t* node)
     {
@@ -309,7 +309,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-    void 
+    void
     DispatchVisitor<Matcher, Monoid, Semiring>::
     constant(const monoid_value_t& m)
     {
@@ -317,7 +317,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-    void 
+    void
     DispatchVisitor<Matcher, Monoid, Semiring>::
     zero()
     {
@@ -325,7 +325,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-    void 
+    void
     DispatchVisitor<Matcher, Monoid, Semiring>::
     one()
     {
@@ -333,7 +333,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-    typename Matcher::return_type 
+    typename Matcher::return_type
     DispatchVisitor<Matcher, Monoid, Semiring>::
     get_ret()
     {
@@ -343,7 +343,7 @@ namespace vcsn {
     template <class M, class W>
     template <class Matcher>
     inline typename Matcher::return_type
-    DispatchFunction<rat::exp<M, W> >::d(Matcher& matcher, 
+    DispatchFunction<rat::exp<M, W> >::d(Matcher& matcher,
 					 const rat::exp<M, W>& exp)
     {
       DispatchVisitor<Matcher, M, W> v(matcher);
@@ -358,9 +358,9 @@ namespace vcsn {
 namespace vcsn {
 
   template <class Monoid_, class Semiring_>
-  void 
+  void
   ReverseVisitor<Monoid_,Semiring_>::
-  product(rat::Node<Monoid_, Semiring_>* lhs,  
+  product(rat::Node<Monoid_, Semiring_>* lhs,
 	  rat::Node<Monoid_, Semiring_>* rhs)
   {
     lhs->accept(*this);
@@ -374,7 +374,7 @@ namespace vcsn {
   operator()(const S&, const rat::exp<M, W>& exp)
   {
     rat::exp<M, W>*  rexp = new rat::exp<M, W>(exp);
-    
+
     ReverseVisitor<M,W>  rv;
     rexp.accept(*this);
     return *rexp;
@@ -390,15 +390,15 @@ namespace std {
   template<typename M_, typename W_>
   std::ostream& operator<<(std::ostream& o,
 			   const vcsn::rat::exp<M_, W_>& exp)
-  { 
-    std::set<char> escape_set = vcsn::tools::usual_escaped_charaters();
+  {
+    std::set<char> escape_set = vcsn::tools::usual_escaped_characters();
     vcsn::rat::DumpVisitor<M_, W_> v(o, escape_set, "0", "1");
     exp.accept(v);
     return o;
   }
-  
+
   template<typename M, typename W>
-  void swap(vcsn::rat::exp<M, W>& lhs, 
+  void swap(vcsn::rat::exp<M, W>& lhs,
 	    vcsn::rat::exp<M, W>& rhs)
   {
     lhs.swap(rhs);
