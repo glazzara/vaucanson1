@@ -1,16 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 450)
-(Parent-Version vaucanson 0 449)
+(Project-Version vaucanson 0 451)
+(Parent-Version vaucanson 0 450)
 (New-Version-Log "")
 
 (Version-Log "
-2003-10-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-10-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/Makefile.am (dot_dump.hxx): New.
+	* doc/src/main.dox,
+	  doc/vaucanson.doxywizard: Remove.
+
 ")
-(Checkin-Time "Wed, 29 Oct 2003 14:46:42 +0100")
+(Checkin-Time "Thu, 30 Oct 2003 19:16:46 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -93,7 +95,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.83 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.84 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -106,7 +108,7 @@
   (README (vaucanson/f/48_README 1.8 600))
   (THANKS (vaucanson/f/36_THANKS 1.7 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.10 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.42 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.43 600))
   (prj (vaucanson.prj) :symlink)
 
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 600))
@@ -127,13 +129,13 @@
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.4 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.7 600))
-  (doc/src/main.dox (vaucanson/38_main.dox 1.2 600))
+  
   (doc/tutorial/Makefile.am (vaucanson/h/44_Makefile.a 1.4 600))
   (doc/tutorial/definitions.tex (vaucanson/i/20_definition 1.1 600))
   (doc/tutorial/macros.tex (vaucanson/i/19_macros.tex 1.1 600))
   (doc/tutorial/packages.tex (vaucanson/i/18_packages.t 1.2 600))
   (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.7 600))
-  (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
+  
 
   (include () :directory)
   (include/Makefile.am (vaucanson/11_Makefile.a 1.44 600))
@@ -874,6 +876,16 @@
 ;; to version 0.448(w), by yann:
 
   (include/vaucanson/tools/dot_dump.hxx (vaucanson/s/15_dot_dump.h 1.1 600))
+
+;; Files deleted by depopulate at Thu, 30 Oct 2003 19:15:26 +0100,
+;; from version 0.450(w), by yann:
+
+  ; (doc/src/main.dox ())
+
+;; Files deleted by depopulate at Thu, 30 Oct 2003 19:15:31 +0100,
+;; from version 0.450(w), by yann:
+
+  ; (doc/vaucanson.doxywizard ())
 )
 (Merge-Parents)
 (New-Merge-Parents)
