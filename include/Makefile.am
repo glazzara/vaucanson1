@@ -97,6 +97,10 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/concept/alphabets_base.hxx			   \
 	vaucanson/algebra/concept/freemonoid_base.hh			   \
 	vaucanson/algebra/concept/freemonoid_base.hxx			   \
+	vaucanson/algebra/concept/freemonoid_product_base.hh		   \
+	vaucanson/algebra/concept/freemonoid_product_base.hxx		   \
+	vaucanson/algebra/concept/freemonoid_product.hh			   \
+	vaucanson/algebra/concept/freemonoid_product.hxx		   \
 	vaucanson/algebra/concept/letter.hh				   \
 	vaucanson/algebra/concept/monoid_base.hh			   \
 	vaucanson/algebra/concept/monoid_base.hxx			   \
@@ -128,6 +132,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/implementation/free_monoid/words.hxx		   \
 	vaucanson/algebra/implementation/free_monoid/tools.hh		   \
 	vaucanson/algebra/implementation/free_monoid/tools.hxx		   \
+	vaucanson/algebra/implementation/free_monoid_product/fremonoid_product_pair_str.hh				                                   \
+	vaucanson/algebra/implementation/free_monoid_product/fremonoid_product_pair_str.hxx				                                   \
 	vaucanson/algebra/implementation/semiring/numerical_semiring.hh	   \
 	vaucanson/algebra/implementation/semiring/numerical_semiring.hxx   \
 	vaucanson/algebra/implementation/semiring/tropical_semiring.hh	   \
@@ -311,9 +317,9 @@ nobase_include_HEADERS =						   \
 	vaucanson/boolean_automaton.hh					   \
 	vaucanson/boolean_automaton.hxx					   \
 	vaucanson/boolean_transducer.hh					   \
-	vaucanson/contextual_automaton_functions.hh			   \
+	vaucanson/contextual_automaton_functions.thh			   \
 	vaucanson/contextual_automaton_functions.hxx			   \
-	vaucanson/contextual_transducer_functions.hh			   \
+	vaucanson/contextual_transducer_functions.thh			   \
 	vaucanson/contextual_transducer_functions.hxx			   \
 	vaucanson/contextual_headers.hh					   \
 	vaucanson/z_max_plus.hxx					   \

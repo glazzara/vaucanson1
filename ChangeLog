@@ -1,5 +1,28 @@
 2004-06-01  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_product.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: New. Add
+	the concept of free monoid product to Vaucanson.
+
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: New. Implementation of free monoid product with a pair
+	of strings.
+
+	* include/Makefile.am: Update accordingly.
+
+	* src/tests/algebra/free_monoid_product/free_monoid_product_test.hh:
+	New. Write a test on free monoid product.
+	* src/tests/algebra/free_monoid_product/Makefile.am: New. Update.
+	* src/tests/algebra/Makefile.am: Update accordingly.
+
+	* src/tests/test-suites/algebra_free_monoid_product_string.defs: New.
+	Instanciate a test on free monoid product.
+	* src/tests/test-suites/generate-all.sh: Update accordingly.
+
+2004-06-01  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* fmp: Apply changes done in trunk to the fmp branch. See the two
 	previous Changelog entries.
 

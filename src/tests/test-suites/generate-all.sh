@@ -22,6 +22,16 @@ done;
    ../algebra/free_monoid
 
 
+#    /*--------------------.
+#    | Free monoid product |
+#    `--------------------*/
+
+../bin/generate-test-suite.sh \
+   algebra_free_monoid_product_string \
+   algebra_free_monoid_product_string.defs \
+   ../algebra/free_monoid_product
+
+
 #    /*---------.
 #    | Semiring |
 #    `---------*/
@@ -30,9 +40,9 @@ for semiring_type in numerical_semiring tropical_semiring_max tropical_semiring_
     for semiring_elt_value_t in int double float rational bool; do
 	TEST="../algebra/semiring";
 	case $semiring_type:$semiring_elt_value_t in
-	    numerical_semiring:bool) 
+	    numerical_semiring:bool)
 		continue;;
-	    numerical_semiring:*) 
+	    numerical_semiring:*)
 		TEST="$TEST ../algebra/numerical_semiring";;
 	esac
 	../bin/generate-test-suite.sh \
@@ -77,7 +87,7 @@ for automata_kind in boolean r z z_max_plus; do
     context_headers_${automata_kind} \
     context_headers_${automata_kind}.defs \
     ../context_headers/automata
-    
+
     TEST="../automata";
     if [ $automata_kind = "boolean" ]; then
 	TEST="$TEST ../boolean_automata"
