@@ -1,3 +1,25 @@
+2004-03-15  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/misc/container_ops.hxx: Move to...
+	* include/vaucanson/tools/container_ops.hxx: ...this.
+	* include/vaucanson/misc/container_ops.hh: Move to...
+	* include/vaucanson/tools/container_ops.hh: ...this.
+	* include/vaucanson/misc/fsm_dump.hh: Move to...
+	* include/vaucanson/tools/fsm_dump.hh: ...this.
+	* include/vaucanson/misc/fsm_dump.hxx: Move to...
+	* include/vaucanson/tools/fsm_dump.hxx: ...this.
+	* include/Makefile.am,
+	  include/vaucanson/algebra/concept/alphabets_base.hh,
+	  src/demos/fsm/generate_toolbox.sh,
+	  src/demos/fsm/usual_automaton_t/vcsn_determinize.cc,
+	  src/demos/fsm/usual_automaton_t/vcsn_dotdump.cc,
+	  src/demos/fsm/usual_automaton_t/vcsn_intersect.cc,
+	  src/demos/fsm/usual_automaton_t/vcsn_minimize.cc,
+	  src/demos/fsm/usual_automaton_t/vcsn_prune.cc,
+	  src/demos/fsm/usual_automaton_t/vcsn_random_generator.cc,
+	  src/demos/fsm/usual_automaton_t/vcsn_reverse.cc: Change inclusions and
+	  namespaces for fsm_dump and container_ops.
+
 2004-03-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/algebra/series/polynom/Makefile.am: Minor fix.

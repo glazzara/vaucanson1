@@ -20,7 +20,7 @@ cat > $FILE <<EOF
    #include "toolbox.hh"
    #include "arg.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh>   
+   #include <vaucanson/tools/fsm_dump.hh>   
 
    using namespace toolbox;
     using namespace vcsn;
@@ -42,7 +42,7 @@ cat > $FILE <<EOF
      srand(time(0));
      GenRandomAutomata<automaton_t> gen;
      automaton_t automaton = gen.generate(nb_states, nb_edges);
-     misc::fsm_dump(std::cout, automaton);
+     tools::fsm_dump(std::cout, automaton);
      return EXIT_SUCCESS;
    }
 EOF
@@ -58,7 +58,7 @@ cat > $FILE <<EOF
 #include <vaucanson/algorithms/glushkov.hh>
 #include <vaucanson/algorithms/thompson.hh>
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
     using namespace vcsn;
     using namespace toolbox;
@@ -89,7 +89,7 @@ cat > $FILE <<EOF
 	glushkov(automaton, krat_exp.value());
     else
 	thompson_of(automaton, krat_exp.value());
-     misc::fsm_dump(std::cout, automaton);
+     tools::fsm_dump(std::cout, automaton);
      return EXIT_SUCCESS;
 
    }
@@ -101,16 +101,16 @@ cat > $FILE <<EOF
    #include <iostream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algorithms/determinize.hh>
     using namespace vcsn;
 
    int main(int argc, char **argv)
    {
      automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
+     tools::fsm_load(std::cin, automaton);
      automaton_t auto_d = determinize(automaton);
-     misc::fsm_dump(std::cout, auto_d);
+     tools::fsm_dump(std::cout, auto_d);
      return EXIT_SUCCESS;
    }
 EOF
@@ -122,7 +122,7 @@ cat > $FILE <<EOF
    #include <iostream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algorithms/hopcroft.hh>
    #include <vaucanson/algorithms/determinize.hh>
     using namespace vcsn;
@@ -130,11 +130,11 @@ cat > $FILE <<EOF
    int main(int argc, char **argv)
    {
      automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
+     tools::fsm_load(std::cin, automaton);
      if (!is_deterministic(automaton))
        automaton = determinize(automaton);
      automaton_t auto_m = hopcroft_minimization_det(automaton);
-     misc::fsm_dump(std::cout, auto_m);
+     tools::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }
 EOF
@@ -145,16 +145,16 @@ cat > $FILE <<EOF
    #include <iostream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algorithms/forward_closure.hh>
    using namespace vcsn;
 
    int main(int argc, char **argv)
    {
      automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
+     tools::fsm_load(std::cin, automaton);
      automaton_t auto_m = forward_closure(automaton);
-     misc::fsm_dump(std::cout, auto_m);
+     tools::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }
 EOF
@@ -165,16 +165,16 @@ cat > $FILE <<EOF
    #include <iostream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algorithms/realtime.hh>
    using namespace vcsn;
 
    int main(int argc, char **argv)
    {
      automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
+     tools::fsm_load(std::cin, automaton);
      automaton_t auto_m = realtime(automaton);
-     misc::fsm_dump(std::cout, auto_m);
+     tools::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }
 EOF
@@ -185,16 +185,16 @@ cat > $FILE <<EOF
    #include <iostream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algorithms/transpose.hh>
    using namespace vcsn;
 
    int main(int argc, char **argv)
    {
      automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
+     tools::fsm_load(std::cin, automaton);
      automaton_t auto_m = transpose(automaton);
-     misc::fsm_dump(std::cout, auto_m);
+     tools::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }
 EOF
@@ -205,16 +205,16 @@ cat > $FILE <<EOF
    #include <iostream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algorithms/trim.hh>
    using namespace vcsn;
 
    int main(int argc, char **argv)
    {
      automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
+     tools::fsm_load(std::cin, automaton);
      automaton_t auto_m = trim(automaton);
-     misc::fsm_dump(std::cout, auto_m);
+     tools::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }
 EOF
@@ -226,7 +226,7 @@ cat > $FILE <<EOF
    #include <fstream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algorithms/product.hh>
    using namespace vcsn;
 
@@ -237,11 +237,11 @@ cat > $FILE <<EOF
      std::ifstream lhs(argv[1]);
      std::ifstream rhs(argv[2]);
      automaton_t lhs_a;
-     misc::fsm_load(lhs, lhs_a);
+     tools::fsm_load(lhs, lhs_a);
      automaton_t rhs_a;
-     misc::fsm_load(rhs, rhs_a);  
+     tools::fsm_load(rhs, rhs_a);  
      automaton_t auto_m = product(lhs_a, rhs_a);
-	misc::fsm_dump(std::cout, auto_m);
+	tools::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }
 EOF
@@ -253,7 +253,7 @@ cat > $FILE <<EOF
    #include <fstream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/algorithms/sum.hh>
    using namespace vcsn;
 
@@ -264,11 +264,11 @@ cat > $FILE <<EOF
      std::ifstream lhs(argv[1]);
      std::ifstream rhs(argv[2]);
      automaton_t lhs_a;
-     misc::fsm_load(lhs, lhs_a);
+     tools::fsm_load(lhs, lhs_a);
      automaton_t rhs_a;
-     misc::fsm_load(rhs, rhs_a);  
+     tools::fsm_load(rhs, rhs_a);  
      automaton_t auto_m = sum(lhs_a, rhs_a);
-	misc::fsm_dump(std::cout, auto_m);
+	tools::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }
 EOF
@@ -279,7 +279,7 @@ cat > $FILE <<EOF
    #include <iostream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/misc/dot_dump.hh> 
 
     using namespace vcsn;
@@ -288,7 +288,7 @@ cat > $FILE <<EOF
    {
      srand(time(0));
      automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
+     tools::fsm_load(std::cin, automaton);
      misc::dot_dump(std::cout, automaton, "automaton");
      return EXIT_SUCCESS;
    }

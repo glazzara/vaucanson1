@@ -18,17 +18,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef MISC_FSM_DUMP_HXX
-# define MISC_FSM_DUMP_HXX
+#ifndef TOOLS_FSM_DUMP_HXX
+# define TOOLS_FSM_DUMP_HXX
 
-# include <vaucanson/misc/fsm_dump.hh>
+# include <vaucanson/tools/fsm_dump.hh>
 # include <map>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
   
-  namespace misc {
+  namespace tools {
 
     /*---------.
     | fsm_dump |
@@ -218,8 +218,8 @@ namespace vcsn {
       a = automaton;
     }
 
-  } // misc 
+  } // tools 
   
 } // vcsn
 
-#endif // MISC_FSM_DUMP_HH
+#endif // TOOLS_FSM_DUMP_HH

@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef MISC_FSM_DUMP_HH
-# define MISC_FSM_DUMP_HH
+#ifndef TOOLS_FSM_DUMP_HH
+# define TOOLS_FSM_DUMP_HH
 
 # include <map>
 # include <vaucanson/automata/concept/handlers.hh>
@@ -27,7 +27,7 @@
 
 namespace vcsn {
   
-  namespace misc {
+  namespace tools {
 
     /*---------.
     | fsm_dump |
@@ -47,8 +47,12 @@ namespace vcsn {
     template <typename St, typename AutoType_>
     void fsm_load(St& in, AutoType_& a);
 
-  } // misc 
+  } // tools 
   
 } // vcsn
 
-#endif // MISC_FSM_DUMP_HH
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/tools/fsm_dump.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
+
+#endif // TOOLS_FSM_DUMP_HH

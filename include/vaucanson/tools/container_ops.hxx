@@ -1,4 +1,4 @@
-// container_ops.hh: this file is part of the Vaucanson project.
+// container_ops.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
@@ -27,93 +27,116 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_MISC_CONTAINER_OPS_HH
-# define VCSN_MISC_CONTAINER_OPS_HH
+#ifndef VCSN_TOOLS_CONTAINER_OPS_HXX
+# define VCSN_TOOLS_CONTAINER_OPS_HXX
 
 # include <algorithm>
 
+# include <vaucanson/tools/container_ops.hh>
 # include <vaucanson/design_pattern/predecls.hh>
 
 namespace vcsn
 {
 
   template<typename S, typename T>
-  struct op_begin_traits
+  typename T::iterator op_begin(const Structure<S>&,
+				T& v)
   {
-    typedef typename T::iterator		ret_t;
-    typedef typename T::const_iterator		const_ret_t;
-  };
+    return v.begin();
+  }
 
   template<typename S, typename T>
-  struct op_rbegin_traits
+  typename T::iterator op_end(const Structure<S>&,
+			      T& v)
   {
-    typedef typename T::reverse_iterator	 ret_t;
-    typedef typename T::const_reverse_iterator	 const_ret_t;
-  };
+    return v.end();
+  }
 
   template<typename S, typename T>
-  typename T::iterator op_begin(const Structure<S>& s,
-				T& v);
+  typename T::const_iterator op_begin_const(const Structure<S>&,
+					    const T& v)
+  {
+    return v.begin();
+  }
 
   template<typename S, typename T>
-  typename T::iterator op_end(const Structure<S>& s,
-			      T& v);
+  typename T::const_iterator op_end_const(const Structure<S>&,
+					  const T& v)
+  {
+    return v.end();
+  }
 
   template<typename S, typename T>
-  typename T::const_iterator op_begin_const(const Structure<S>& s,
-					    const T& v);
+  typename T::reverse_iterator op_rbegin(const Structure<S>&,
+					 T& v)
+  {
+    return v.rbegin();
+  }
 
   template<typename S, typename T>
-  typename T::const_iterator op_end_const(const Structure<S>& s,
-					  const T& v);
+  typename T::reverse_iterator op_rend(const Structure<S>&,
+				       T& v)
+  {
+    return v.rend();
+  }
 
   template<typename S, typename T>
-  typename T::reverse_iterator op_rbegin(const Structure<S>& s,
-					 T& v);
+  typename T::const_reverse_iterator op_rbegin_const(const Structure<S>&,
+						     const T& v)
+  {
+    return v.rbegin();
+  }
 
   template<typename S, typename T>
-  typename T::reverse_iterator op_rend(const Structure<S>& s,
-				       T& v);
+  typename T::const_reverse_iterator op_rend_const(const Structure<S>&,
+						   const T& v)
+  {
+    return v.rend();
+  }
 
   template<typename S, typename T>
-  typename T::const_reverse_iterator op_rbegin_const(const Structure<S>& s,
-					       const T& v);
+  bool op_empty(const Structure<S>&,
+		const T& v)
+  {
+    return v.empty();
+  }
 
   template<typename S, typename T>
-  typename T::const_reverse_iterator op_rend_const(const Structure<S>& s,
-					     const T& v);
+  size_t op_size(const Structure<S>&,
+		 const T& v)
+  {
+    return v.size();
+  }
 
   template<typename S, typename T>
-  bool op_empty(const Structure<S>& s,
-		const T& v);
-
-  template<typename S, typename T>
-  size_t op_size(const Structure<S>& s,
-		 const T& v);
-
-  template<typename S, typename T>
-  size_t op_max_size(const Structure<S>& s,
-		 const T& v);
+  size_t op_max_size(const Structure<S>&,
+		     const T& v)
+  {
+    return v.max_size();
+  }
 
   template<typename S, typename T, typename U>
-  bool op_contains_e(const Structure<S>& s, const T& v,
-		     const U& c);
+  bool op_contains_e(const Structure<S>&, const T& v,
+		     const U& c)
+  {
+    return std::find(v.begin(), v.end(), c) != v.end();
+  }
 
   template<typename S, typename T, typename U>
-  void op_insert(const Structure<S>& s, T& v,
-		 const U& c);
+  void op_insert(const Structure<S>&, T& v,
+		 const U& c)
+  {
+    v.insert(c);
+  }
 
   template<typename S, typename T>
-  bool op_is_finite(const Structure<S>& s,
-		    const T& a);
-
+  bool op_is_finite(const Structure<S>&,
+		    const T&)
+  {
+    return false;
+  }
 
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/misc/container_ops.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
-
-#endif // VCSN_MISC_CONTAINER_OPS_HH
+#endif // VCSN_TOOLS_CONTAINER_OPS_HXX

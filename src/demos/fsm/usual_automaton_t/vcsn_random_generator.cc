@@ -31,7 +31,7 @@
    #include "toolbox.hh"
    #include "arg.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh>   
+   #include <vaucanson/tools/fsm_dump.hh>   
 
    using namespace toolbox;
     using namespace vcsn;
@@ -53,7 +53,7 @@
      srand(time(0));
      GenRandomAutomata<automaton_t> gen;
      automaton_t automaton = gen.generate(nb_states, nb_edges);
-     misc::fsm_dump(std::cout, automaton);
+     tools::fsm_dump(std::cout, automaton);
      return EXIT_SUCCESS;
    }
 

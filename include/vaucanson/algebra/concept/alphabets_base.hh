@@ -36,7 +36,7 @@
  */
 
 # include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/misc/container_ops.hh>
+# include <vaucanson/tools/container_ops.hh>
 
 namespace vcsn {
 

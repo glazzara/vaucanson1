@@ -30,7 +30,7 @@
 #include <iostream>
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/tools/fsm_dump.hh> 
    #include <vaucanson/tools/dot_dump.hh> 
 
     using namespace vcsn;
@@ -39,7 +39,7 @@
    {
      srand(time(0));
      automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
+     tools::fsm_load(std::cin, automaton);
      tools::dot_dump(std::cout, automaton, "automaton");
      return EXIT_SUCCESS;
    }

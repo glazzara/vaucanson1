@@ -253,11 +253,7 @@ nobase_include_HEADERS =					     \
 	vaucanson/misc/deferrer.hxx				     \
 	vaucanson/misc/special_char_traits.hh			     \
 	vaucanson/misc/constraints.hh				     \
-	vaucanson/misc/container_ops.hh				     \
-	vaucanson/misc/container_ops.hxx			     \
 	vaucanson/misc/contract.hh				     \
-	vaucanson/misc/fsm_dump.hh				     \
-	vaucanson/misc/fsm_dump.hxx				     \
 	vaucanson/misc/limits.hh				     \
 	vaucanson/misc/random.hh				     \
 	vaucanson/misc/random.hxx				     \
@@ -271,6 +267,10 @@ nobase_include_HEADERS =					     \
 	vaucanson/misc/utility.hh				     \
 	vaucanson/misc/window.hh				     \
 	vaucanson/misc/window.hxx				     \
+	vaucanson/tools/container_ops.hh			     \
+	vaucanson/tools/container_ops.hxx			     \
+	vaucanson/tools/fsm_dump.hh				     \
+	vaucanson/tools/fsm_dump.hxx				     \
 	vaucanson/tools/automaton_tools.hh			     \
 	vaucanson/tools/gen_book.hh				     \
 	vaucanson/tools/gen_book.hxx				     \
