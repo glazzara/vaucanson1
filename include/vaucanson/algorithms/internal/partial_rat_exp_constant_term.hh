@@ -41,7 +41,7 @@
  * on @c PartialExp.
  */
 
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algorithms/internal/partial_rat_exp.hh>
 # include <utility>
 

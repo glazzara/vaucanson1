@@ -218,23 +218,23 @@ nobase_include_HEADERS =					     \
 	vaucanson/config/math.hh				     \
 	vaucanson/config/pconf.hh				     \
 	vaucanson/config/system.hh				     \
-	vaucanson/fundamental/default_ops.hh			     \
-	vaucanson/fundamental/default_ops.hxx			     \
-	vaucanson/fundamental/element.hh			     \
-	vaucanson/fundamental/element.hxx			     \
-	vaucanson/fundamental/element_ops.hh			     \
-	vaucanson/fundamental/element_ops.hxx			     \
-	vaucanson/fundamental/element_op_traits.hh		     \
-	vaucanson/fundamental/fundamental.hh			     \
-	vaucanson/fundamental/meta_element_root.hh		     \
-	vaucanson/fundamental/meta_element_root.hxx		     \
-	vaucanson/fundamental/predecls.hh			     \
-	vaucanson/fundamental/slots.hh				     \
-	vaucanson/fundamental/slots.hxx				     \
-	vaucanson/fundamental/structure.hh			     \
-	vaucanson/fundamental/structure.hxx			     \
-	vaucanson/fundamental/syntactic_decorator.hh		     \
-	vaucanson/fundamental/syntactic_decorator.hxx		     \
+	vaucanson/design_pattern/default_ops.hh			     \
+	vaucanson/design_pattern/default_ops.hxx			     \
+	vaucanson/design_pattern/element.hh			     \
+	vaucanson/design_pattern/element.hxx			     \
+	vaucanson/design_pattern/element_ops.hh			     \
+	vaucanson/design_pattern/element_ops.hxx			     \
+	vaucanson/design_pattern/element_op_traits.hh		     \
+	vaucanson/design_pattern/design_pattern.hh			     \
+	vaucanson/design_pattern/meta_element_root.hh		     \
+	vaucanson/design_pattern/meta_element_root.hxx		     \
+	vaucanson/design_pattern/predecls.hh			     \
+	vaucanson/design_pattern/slots.hh				     \
+	vaucanson/design_pattern/slots.hxx				     \
+	vaucanson/design_pattern/structure.hh			     \
+	vaucanson/design_pattern/structure.hxx			     \
+	vaucanson/design_pattern/syntactic_decorator.hh		     \
+	vaucanson/design_pattern/syntactic_decorator.hxx		     \
 	vaucanson/misc/bitset.hh				     \
 	vaucanson/misc/bitset.hxx				     \
 	vaucanson/misc/constraints.hh				     \

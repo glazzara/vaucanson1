@@ -33,7 +33,7 @@
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 # include <vaucanson/misc/selectors.hh>
 

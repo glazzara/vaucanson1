@@ -30,7 +30,7 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
 # define VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/misc/support.hh>
@@ -313,7 +313,7 @@ namespace vcsn {
   };
 
   /*------------------------------.
-    | fundamental series operations |
+    | design_pattern series operations |
     `------------------------------*/
     
   template <class W, class M, class Tm, class Tw>

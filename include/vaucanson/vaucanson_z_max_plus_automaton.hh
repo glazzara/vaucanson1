@@ -34,7 +34,7 @@
 # include <vaucanson/config/system.hh>
 # include <fstream>
 # include <sstream>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algebra/concrete/predefs.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>

@@ -29,7 +29,7 @@
 //
 #include <iostream>
 
-// #include <vaucanson/fundamental/fundamental.hh>
+// #include <vaucanson/design_pattern/design_pattern.hh>
 #include <vaucanson/algebra/concrete/alphabets/predefs.hh>
 
 

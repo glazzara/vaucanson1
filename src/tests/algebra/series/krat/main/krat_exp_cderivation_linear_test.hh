@@ -33,7 +33,7 @@
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 // FIXME: Code krat_exp_linearize.hh !
 //# include <vaucanson/algorithms/krat_exp_linearize.hh>
 # include <vaucanson/algorithms/krat_exp_derivation.hh>

@@ -27,7 +27,7 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#include <vaucanson/fundamental/fundamental.hh>
+#include <vaucanson/design_pattern/design_pattern.hh>
 #include <vaucanson/tools/usual.hh>
 #include <vaucanson/algebra/concrete/series/rat/exp.hh>
 #include <vaucanson/algebra/concrete/series/krat.hh>

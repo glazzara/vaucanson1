@@ -31,8 +31,8 @@
 # define VCSN_AUTOMATA_CONCEPT_TRANSDUCER_BASE_HH
 
 # include <iterator>
-# include <vaucanson/fundamental/fundamental.hh>
-# include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
+# include <vaucanson/design_pattern/predecls.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
 

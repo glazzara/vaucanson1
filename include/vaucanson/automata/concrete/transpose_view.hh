@@ -31,7 +31,7 @@
 # define VCSN_AUTOMATA_CONCRETE_TRANSPOSE_VIEW_HH
 
 # include <vaucanson/automata/concrete/automaton_view.hh>
-# include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/design_pattern/predecls.hh>
 
 namespace vcsn {
 

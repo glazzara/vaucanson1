@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_DEFAULT_OPS_HH
 # define VCSN_FUNDAMENTAL_DEFAULT_OPS_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /** @addtogroup operators   *//** @{ */
 /**
  * @file default_ops.hh
@@ -38,12 +38,12 @@
  */
 /** @} */
 
-# include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/design_pattern/predecls.hh>
 # include <vaucanson/misc/selectors.hh>
 
 namespace vcsn {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup design_pattern *//** @{ */
   /** @addtogroup operators   *//** @{ */
 
   /*--------------------.
@@ -250,7 +250,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/fundamental/default_ops.hxx>
+    # include <vaucanson/design_pattern/default_ops.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
     
 

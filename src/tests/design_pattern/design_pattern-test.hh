@@ -30,7 +30,7 @@
 #ifndef VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN_TEST_HH
 # define VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN_TEST_HH
 
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 template <class Tset, class Tvalue> 
 void test_design_pattern()

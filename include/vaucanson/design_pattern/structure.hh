@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_STRUCTURE_HH
 # define VCSN_FUNDAMENTAL_STRUCTURE_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /**
  * @file structure.hh
  * @brief Definition of class @c Structure, the root of all structural element types
@@ -38,12 +38,12 @@
 /** @} */
 
 # include <vaucanson/misc/selectors.hh>
-# include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/design_pattern/predecls.hh>
 # include <vaucanson/misc/unique.hh>
 
 namespace vcsn {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup design_pattern *//** @{ */
 
   /*-------------.
   | Structure<S> |
@@ -153,7 +153,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/fundamental/structure.hxx>
+    # include <vaucanson/design_pattern/structure.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
     
 

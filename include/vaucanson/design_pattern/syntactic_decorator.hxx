@@ -31,7 +31,7 @@
 # define VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HXX
 
 # include <vaucanson/misc/selectors.hh>
-# include <vaucanson/fundamental/syntactic_decorator.hh>
+# include <vaucanson/design_pattern/syntactic_decorator.hh>
 # include <vaucanson/misc/contract.hh>
 
 namespace vcsn {

@@ -30,19 +30,19 @@
 #ifndef VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HH
 # define VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /**
  * @file meta_element_root.hh
  * @brief Definition of the specialization of @c MetaElement for the root @c Structure
  */
 /** @} */
 
-# include <vaucanson/fundamental/structure.hh>
-# include <vaucanson/fundamental/syntactic_decorator.hh>
+# include <vaucanson/design_pattern/structure.hh>
+# include <vaucanson/design_pattern/syntactic_decorator.hh>
 
 namespace vcsn {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup design_pattern *//** @{ */
 
   /*--------------------------------.
   | MetaElement<Structure<Self>, T> |
@@ -79,7 +79,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/fundamental/meta_element_root.hxx>
+    # include <vaucanson/design_pattern/meta_element_root.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
     
 

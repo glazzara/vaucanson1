@@ -30,7 +30,7 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_COEFFICIENT_HH
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_COEFFICIENT_HH
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
 
 namespace vcsn {

@@ -668,7 +668,7 @@ namespace vcsn {
     `---------------*/
 
   /*------------------------------.
-    | fundamental series operations |
+    | design_pattern series operations |
     `------------------------------*/
 
     

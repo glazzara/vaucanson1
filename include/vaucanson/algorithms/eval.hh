@@ -30,7 +30,7 @@
 #ifndef VCSN_ALGORITHMS_EVAL_HH
 # define VCSN_ALGORITHMS_EVAL_HH
 
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 

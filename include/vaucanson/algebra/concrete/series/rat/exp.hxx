@@ -33,7 +33,7 @@
 # include <algorithm>
 # include <iostream>
 
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>

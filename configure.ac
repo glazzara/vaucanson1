@@ -86,7 +86,7 @@ AC_CONFIG_FILES([
 	src/tests/check/Makefile
 	src/tests/check/defs
 	src/tests/sanity/Makefile
-	src/tests/fundamental/Makefile
+	src/tests/design_pattern/Makefile
 	src/tests/misc/Makefile
 	src/tests/algebra/Makefile
 	src/tests/algebra/series/Makefile

@@ -32,7 +32,7 @@
 
 # include <vaucanson/config/system.hh>
 # include <check/tester.hh>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/tools/usual.hh>
 
 using namespace vcsn;

@@ -30,18 +30,18 @@
 #ifndef VCSN_FUNDAMENTAL_SLOTS_HH
 # define VCSN_FUNDAMENTAL_SLOTS_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /** 
  * @file slots.hh
  * @brief Declaration of set attribute slot for @c Element
  */
 /** @} */
 
-# include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/design_pattern/predecls.hh>
 
 namespace vcsn {
 
-/*! @addtogroup fundamental *//*!@{*/
+/*! @addtogroup design_pattern *//*!@{*/
 
   /*------------------------------.
   | Basic class for SetSlot below |
@@ -199,7 +199,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/fundamental/slots.hxx>
+    # include <vaucanson/design_pattern/slots.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
     
 

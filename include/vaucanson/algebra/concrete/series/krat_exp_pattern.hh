@@ -30,7 +30,7 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HH
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HH
 
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <iostream>
 # include <utility>

@@ -31,7 +31,7 @@
 # define VCSN_ALGORITHMS_ISOMORPH_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

@@ -30,7 +30,7 @@
 #ifndef VCSN_ALGORITHMS_IS_REALTIME_HH
 # define VCSN_ALGORITHMS_IS_REALTIME_HH
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 /**
  * @file   is_realtime.hh

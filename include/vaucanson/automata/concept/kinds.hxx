@@ -34,7 +34,7 @@
 #include <vaucanson/misc/contract.hh>
 #include <algorithm>
 
-#include <vaucanson/fundamental/fundamental.hh>
+#include <vaucanson/design_pattern/design_pattern.hh>
 #include <vaucanson/automata/concept/handlers.hh>
 
 namespace vcsn {

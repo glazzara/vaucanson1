@@ -30,7 +30,7 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_TRANSDUCER_OPS_HH
 # define VCSN_AUTOMATA_CONCEPT_TRANSDUCER_OPS_HH
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 
 namespace vcsn {

@@ -30,10 +30,10 @@
 #ifndef VCSN_TESTS_ALGEBRA_FREE_MONOID_FREE_MONOID_TEST_HH
 # define VCSN_TESTS_ALGEBRA_FREE_MONOID_FREE_MONOID_TEST_HH
 
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <check/tester.hh>
-# include <fundamental/design_pattern-test.hh>
+# include <design_pattern/design_pattern-test.hh>
 
 template <typename S, typename T> 
 bool free_monoid_test(tests::Tester& t)

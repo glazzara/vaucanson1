@@ -31,7 +31,7 @@
 # define VCSN_ALGEBRA_CONCRETE_SERIES_SERIES_HH
 
 #include <vaucanson/algebra/concept/series_base.hh>
-#include <vaucanson/fundamental/slots.hh>
+#include <vaucanson/design_pattern/slots.hh>
 
 
 namespace vcsn {

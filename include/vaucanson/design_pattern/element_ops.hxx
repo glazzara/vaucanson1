@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
 # define VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /** @addtogroup operators   *//** @{ */
 /**
  * @file element_ops.hxx
@@ -38,7 +38,7 @@
  */
 /** @} @} */
 
-# include <vaucanson/fundamental/element_ops.hh>
+# include <vaucanson/design_pattern/element_ops.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/misc/static.hh>
 

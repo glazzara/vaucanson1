@@ -30,16 +30,16 @@
 #ifndef VCSN_FUNDAMENTAL_PREDECLS_HH
 # define VCSN_FUNDAMENTAL_PREDECLS_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /** 
  * @file predecls.hh
- * @brief Forward declarations of the fundamental template classes of Vaucanson
+ * @brief Forward declarations of the design_pattern template classes of Vaucanson
  */
 /** @} */
 
 # include <vaucanson/config/system.hh>
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /// The main namespace of the Vaucanson library
 namespace vcsn {
 

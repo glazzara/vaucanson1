@@ -30,7 +30,7 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_IN_CONCAT_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_IN_CONCAT_TEST_HH
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tester.hh>

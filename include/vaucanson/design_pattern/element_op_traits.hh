@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENT_OP_TRAITS_HH
 # define VCSN_FUNDAMENTAL_ELEMENT_OP_TRAITS_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /** @addtogroup operators *//** @{ */
 /** 
  * @file element_op_traits.hh
@@ -38,11 +38,11 @@
  */
 /** @} @} */
 
-#include <vaucanson/fundamental/predecls.hh>
+#include <vaucanson/design_pattern/predecls.hh>
 
 namespace vcsn {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup design_pattern *//** @{ */
   /** @addtogroup operators *//** @{ */
 
   /*--------------.

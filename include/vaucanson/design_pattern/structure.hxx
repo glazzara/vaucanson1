@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_STRUCTURE_HXX
 # define VCSN_FUNDAMENTAL_STRUCTURE_HXX
 
-# include <vaucanson/fundamental/structure.hh>
+# include <vaucanson/design_pattern/structure.hh>
 
 namespace vcsn {
     

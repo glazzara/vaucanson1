@@ -33,7 +33,7 @@
 # include <algorithm>
 
 # include <vaucanson/misc/container_ops.hh>
-# include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/design_pattern/predecls.hh>
 
 namespace vcsn
 {

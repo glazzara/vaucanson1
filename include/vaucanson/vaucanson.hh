@@ -32,7 +32,7 @@
 
 # include <vaucanson/config/system.hh>
 # include <vaucanson/misc/utility.hh>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 /** @mainpage Vaucanson Documentation
  *
@@ -91,7 +91,7 @@
  *  <A HREF="hierarchy.html">hierarchy</A> describe the different data
  * structures.</li>
  *
- * <li>The @link fundamental Fundamental @endlink section describes the
+ * <li>The @link design_pattern Fundamental @endlink section describes the
  *     peculiar design pattern used in Vaucanson.</li>
  *
  * <li>The @link algebra algebra constructs listing @endlink describe the algebraic

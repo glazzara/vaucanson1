@@ -31,7 +31,7 @@
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/fundamental/slots.hh>
+# include <vaucanson/design_pattern/slots.hh>
 
 namespace vcsn {
 

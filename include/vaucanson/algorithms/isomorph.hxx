@@ -31,7 +31,7 @@
 # define VCSN_ALGORITHMS_ISOMORPH_HXX
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <queue>

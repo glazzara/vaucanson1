@@ -1,3 +1,117 @@
+<<<<<<< 0.456(w)/ChangeLog Wed, 26 Nov 2003 14:47:59 +0100 yann (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.89 600)
+2003-11-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+          * include/vaucanson/fundamental: Move to ...
+	  * include/vaucanson/design_pattern: here.
+          * src/tests/fundamental: Move to ...
+	  * src/tests/design_pattern: here.
+          * include/vaucanson/fundamental/fundamental.hh: Move to ...
+	  * include/vaucanson/design_pattern/design_pattern.hh: here.
+	  * configure.ac
+	  src/tests/Makefile.am
+	  src/tests/bin/generate-test-suite.sh
+	  doc/tutorial/tutorial.tex
+          include/Makefile.am
+	  include/vaucanson/vaucanson.hh
+	  include/vaucanson/misc/container_ops.hxx
+	  include/vaucanson/misc/container_ops.hh
+	  include/vaucanson/design_pattern/default_ops.hh
+	  include/vaucanson/design_pattern/default_ops.hxx
+	  include/vaucanson/design_pattern/element.hh
+	  include/vaucanson/design_pattern/element.hxx
+	  include/vaucanson/design_pattern/meta_element_root.hh
+	  include/vaucanson/design_pattern/meta_element_root.hxx
+	  include/vaucanson/design_pattern/element_ops.hh
+	  include/vaucanson/design_pattern/element_ops.hxx
+	  include/vaucanson/design_pattern/design_pattern.hh
+	  include/vaucanson/design_pattern/syntactic_decorator.hh
+	  include/vaucanson/design_pattern/syntactic_decorator.hxx
+	  include/vaucanson/design_pattern/element_op_traits.hh
+	  include/vaucanson/design_pattern/predecls.hh
+	  include/vaucanson/design_pattern/slots.hh
+	  include/vaucanson/design_pattern/slots.hxx
+	  include/vaucanson/design_pattern/structure.hh
+	  include/vaucanson/design_pattern/structure.hxx
+	  src/tests/design_pattern/Makefile.am
+	  src/tests/design_pattern/design_pattern-test.hh
+	  src/tests/design_pattern/element-full-test.cc
+	  src/tests/design_pattern/intrinsics.hh
+	  include/vaucanson/algebra/concept/alphabets_base.hh
+	  include/vaucanson/algebra/concept/semigroup_base.hh
+	  include/vaucanson/algebra/concept/semigroup_base.hxx
+	  include/vaucanson/algebra/concrete/series/krat_exp_parser.hh
+	  include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh
+	  include/vaucanson/algebra/concrete/series/krat_coefficient.hh
+	  include/vaucanson/algebra/concrete/series/polynoms.hh
+	  include/vaucanson/algebra/concrete/series/polynoms.hxx
+	  include/vaucanson/algebra/concrete/series/rat/exp.hh
+	  include/vaucanson/algebra/concrete/series/rat/exp.hxx
+	  include/vaucanson/algebra/concrete/series/series.hh
+	  src/tests/algebra/alphabets/alphabet_test.hh
+	  src/tests/algebra/free_monoid/free_monoid_test.hh
+	  src/tests/algebra/series/krat/main/krat_exp_parse_test.hh
+	  src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh
+	  src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh
+	  src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh
+	  src/tests/algebra/series/misc/series_test.hh
+	  include/vaucanson/automata/concept/automata.hh
+	  include/vaucanson/automata/concept/automata_base.hh
+	  include/vaucanson/automata/concept/kinds.hh
+	  include/vaucanson/automata/concept/kinds.hxx
+	  include/vaucanson/automata/concept/transducer_ops.hh
+	  include/vaucanson/automata/concept/transducer.hh
+	  include/vaucanson/automata/concept/transducer_base.hh
+	  include/vaucanson/automata/concrete/transpose_view.hh
+	  src/tests/automata/implementation_check/add_edge_test.hh
+	  src/tests/automata/implementation_check/add_state_test.hh
+	  src/tests/automata/implementation_check/global_consistency_test.hh
+	  src/tests/automata/implementation_check/init_final_test.hh
+	  include/vaucanson/algorithms/eval.hh
+	  include/vaucanson/algorithms/determinize.hh
+	  include/vaucanson/algorithms/isomorph.hh
+	  include/vaucanson/algorithms/isomorph.hxx
+	  include/vaucanson/algorithms/aci_canonical.hh
+	  include/vaucanson/algorithms/krat_exp_partial_derivation.hh
+	  include/vaucanson/algorithms/krat_exp_constant_term.hh
+	  include/vaucanson/algorithms/krat_exp_derivation.hh
+	  include/vaucanson/algorithms/krat_exp_cderivation.hh
+	  include/vaucanson/algorithms/krat_exp_realtime.hh
+	  include/vaucanson/algorithms/krat_exp_linearize.hh
+	  include/vaucanson/algorithms/is_realtime.hh
+	  include/vaucanson/algorithms/is_normalized.hh
+	  include/vaucanson/algorithms/is_letterized.hh
+	  include/vaucanson/algorithms/finite_support_conversion.hh
+	  include/vaucanson/tools/gen_random.hh
+	  include/vaucanson/tools/usual.hh
+	  src/tests/automata/algos/closure_test.hh
+	  src/tests/automata/algos/complete_test.hh
+	  src/tests/automata/algos/compute_test.hh
+	  src/tests/automata/algos/concat_test.hh
+	  src/tests/automata/algos/determinist_test.hh
+	  src/tests/automata/algos/elimination_test.hh
+	  src/tests/automata/algos/extract_test.hh
+	  src/tests/automata/algos/generalized_test.hh
+	  src/tests/automata/algos/glushkov_test.hh
+	  src/tests/automata/algos/minimization_test.hh
+	  src/tests/automata/algos/normalize_test.hh
+	  src/tests/automata/algos/product_test.hh
+	  src/tests/automata/algos/reachable_test.hh
+	  src/tests/automata/algos/realtime_test.hh
+	  src/tests/automata/algos/thompson_test.hh
+	  src/tests/automata/algos/sum_test.hh
+	  src/tests/automata/algos/in_concat_test.hh
+	  src/tests/tests-suites/algebra_set_alphabet.defs
+	  src/demos/samples/algebra/decorated_alphabet.cc
+	  src/demos/samples/algorithms/derivatives_automaton.cc
+	  src/demos/vgrep/vgrep.cc
+	  include/vaucanson/vaucanson_boolean_automaton.hh
+	  include/vaucanson/vaucanson_z_max_plus_automaton.hh
+	  include/vaucanson/vaucanson_z_automaton.hh
+	  include/vaucanson/vaucanson_r_automaton.hh: 
+	    Update reference to design_pattern.
+
+
+=======
 2003-11-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/unique.hxx: Add missing inline.
@@ -7,6 +121,7 @@
 
 	* doc/doxy.in (INPUT): Remove doc/src.
 
+>>>>>>> 0.458/ChangeLog Tue, 25 Nov 2003 21:59:57 +0100 clavei_t (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.91 600)
 2003-11-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_print.h{hxx}: New.

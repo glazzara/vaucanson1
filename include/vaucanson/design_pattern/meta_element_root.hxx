@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HXX
 # define VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HXX
 
-# include <vaucanson/fundamental/meta_element_root.hh>
+# include <vaucanson/design_pattern/meta_element_root.hh>
 
 namespace vcsn {
 

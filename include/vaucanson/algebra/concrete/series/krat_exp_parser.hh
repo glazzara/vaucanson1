@@ -40,7 +40,7 @@
  * @see parse()
  */
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <utility>
 # include <string>
 

@@ -36,7 +36,7 @@
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 # include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 

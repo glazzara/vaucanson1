@@ -1,4 +1,4 @@
-# fundamental/Makefile.am
+# design_pattern/Makefile.am
 #
 #
 # $Id$

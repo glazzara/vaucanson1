@@ -30,7 +30,7 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_CONSTANT_TERM_HH
 # define VCSN_ALGORITHMS_KRAT_EXP_CONSTANT_TERM_HH
 
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 # include <utility>
 
 namespace vcsn {

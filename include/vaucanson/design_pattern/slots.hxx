@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_SLOTS_HXX
 # define VCSN_FUNDAMENTAL_SLOTS_HXX
 
-# include <vaucanson/fundamental/slots.hh>
+# include <vaucanson/design_pattern/slots.hh>
 # include <cstdlib>
 # include <vaucanson/misc/unique.hh>
 # include <vaucanson/misc/contract.hh>

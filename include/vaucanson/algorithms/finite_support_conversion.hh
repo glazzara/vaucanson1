@@ -38,7 +38,7 @@
  * finite support applications from one type to another.
  */
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn
 {

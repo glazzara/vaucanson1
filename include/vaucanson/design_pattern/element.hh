@@ -30,22 +30,22 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENT_HH
 # define VCSN_FUNDAMENTAL_ELEMENT_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /**
  * @file element.hh
  * @brief Declaration of @c Element
  */
 /** @} */
 
-# include <vaucanson/fundamental/predecls.hh>
-# include <vaucanson/fundamental/meta_element_root.hh>
-# include <vaucanson/fundamental/element_ops.hh>
-# include <vaucanson/fundamental/default_ops.hh>
-# include <vaucanson/fundamental/slots.hh>
+# include <vaucanson/design_pattern/predecls.hh>
+# include <vaucanson/design_pattern/meta_element_root.hh>
+# include <vaucanson/design_pattern/element_ops.hh>
+# include <vaucanson/design_pattern/default_ops.hh>
+# include <vaucanson/design_pattern/slots.hh>
 
 namespace vcsn {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup design_pattern *//** @{ */
 
   /*--------.
   | Element |
@@ -203,7 +203,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    #include <vaucanson/fundamental/element.hxx>
+    #include <vaucanson/design_pattern/element.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
     
 

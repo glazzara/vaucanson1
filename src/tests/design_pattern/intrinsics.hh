@@ -30,7 +30,7 @@
 #ifndef VCSN_TESTS_FUNDAMENTAL_INTRINSICS_HH
 # define VCSN_TESTS_FUNDAMENTAL_INTRINSICS_HH
 
-#include <vaucanson/fundamental/fundamental.hh>
+#include <vaucanson/design_pattern/design_pattern.hh>
 #include <cassert>
 #include <string>
 #include "check/tester.hh"

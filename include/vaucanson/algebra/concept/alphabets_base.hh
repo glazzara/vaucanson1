@@ -35,7 +35,7 @@
  * @brief  Definition of the alphabet concept.
  */
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/misc/container_ops.hh>
 
 namespace vcsn {

@@ -31,7 +31,7 @@
 # define VCSN_TOOLS_GEN_RANDOM_HH
 
 # include <vaucanson/config/system.hh>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>

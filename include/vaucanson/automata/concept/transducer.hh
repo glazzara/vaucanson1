@@ -30,7 +30,7 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH
 # define VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>

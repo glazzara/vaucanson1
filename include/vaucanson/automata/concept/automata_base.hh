@@ -31,7 +31,7 @@
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
 
 # include <iterator>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/delta_kind.hh>
 # include <vaucanson/algebra/concept/series_base.hh>

@@ -78,15 +78,15 @@ The Vaucanson library is organized as follows:
     |   |-- concept
     |   `-- concrete
     |-- config
-    |-- fundamental
+    |-- design_pattern
     |-- internal
     |-- misc
     `-- tools
 \end{verbatim}
 
 \begin{itemize}
-\item \textbf{fundamental}: the core of the library, its goal is to
-  enriched C++. (see section \ref{sec:fundamental}) ;
+\item \textbf{design_pattern}: the core of the library, its goal is to
+  enriched C++. (see section \ref{sec:design_pattern}) ;
 
 \item \textbf{config}: the internal configuration system ;
 \item \textbf{internal}: the internal C++ headers ;
@@ -135,7 +135,7 @@ void complete(Element<Automata, T>& auto)
 
 \section{Fundamental: enriched c++}
 
-The fundamental module provides some sugar to build the system
+The design_pattern module provides some sugar to build the system
 genericity. It can be seen as the core of the system and, then,
 non-expert users do not have to understand it. Yet, a so-called
 'Element' design pattern is used in every lines of Vaucanson to enable

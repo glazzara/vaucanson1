@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENT_HXX
 # define VCSN_FUNDAMENTAL_ELEMENT_HXX
 
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 namespace vcsn {
 

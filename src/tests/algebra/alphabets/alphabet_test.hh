@@ -31,9 +31,9 @@
 # define VCSN_TESTS_ALGEBRA_ALPHABETS_ALPHABET_TEST_HH
 
 #include <vaucanson/config/system.hh>
-#include <fundamental/design_pattern-test.hh>
+#include <design_pattern/design_pattern-test.hh>
 #include <check/tester.hh>
-#include <vaucanson/fundamental/fundamental.hh>
+#include <vaucanson/design_pattern/design_pattern.hh>
 
 using namespace vcsn;
 

@@ -30,7 +30,7 @@
 #ifndef VCSN_ALGEBRA_CONCEPT_SEMIGROUP_BASE_HXX
 # define VCSN_ALGEBRA_CONCEPT_SEMIGROUP_BASE_HXX
 
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

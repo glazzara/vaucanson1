@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENT_OPS_HH
 # define VCSN_FUNDAMENTAL_ELEMENT_OPS_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup design_pattern *//** @{ */
 /** @addtogroup operators   *//** @{ */
 /**
  * @file element_ops.hh
@@ -38,11 +38,11 @@
  */
 /** @} @} */
 
-# include <vaucanson/fundamental/element_op_traits.hh>
+# include <vaucanson/design_pattern/element_op_traits.hh>
 
 namespace vcsn {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup design_pattern *//** @{ */
   /** @addtogroup operators   *//** @{ */
 
   /*-------------------.
@@ -317,7 +317,7 @@ namespace vcsn {
 
 namespace std {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup design_pattern *//** @{ */
   /** @addtogroup operators   *//** @{ */
 
   /*-----.
@@ -346,7 +346,7 @@ namespace std {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/fundamental/element_ops.hxx>
+    # include <vaucanson/design_pattern/element_ops.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
     
 

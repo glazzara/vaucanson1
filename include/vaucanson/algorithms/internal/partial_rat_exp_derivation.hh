@@ -42,7 +42,7 @@
  */
 
 # include <list>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algorithms/internal/partial_rat_exp.hh>
 

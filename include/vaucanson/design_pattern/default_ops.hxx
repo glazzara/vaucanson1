@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_DEFAULT_OPS_HXX
 # define VCSN_FUNDAMENTAL_DEFAULT_OPS_HXX
 
-# include <vaucanson/fundamental/default_ops.hh>
+# include <vaucanson/design_pattern/default_ops.hh>
 # include <vaucanson/misc/contract.hh>
 
 namespace vcsn {

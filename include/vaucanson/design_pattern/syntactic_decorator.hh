@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HH
 # define VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HH
 
-# include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/design_pattern/predecls.hh>
 
 /**
  * @file syntactic_decorator.hh
@@ -39,7 +39,7 @@
 
 namespace vcsn {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup design_pattern *//** @{ */
 
   /*-------------------.
   | SyntacticDecorator |
@@ -149,7 +149,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/fundamental/syntactic_decorator.hxx>
+    # include <vaucanson/design_pattern/syntactic_decorator.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
     
 

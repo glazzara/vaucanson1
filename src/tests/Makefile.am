@@ -7,7 +7,7 @@ SUBDIRS = \
 	check 					\
 	sanity                                  \
 	misc					\
-	fundamental				\
+	design_pattern				\
 	tests-suites 				\
 	algebra    				\
 	automata				

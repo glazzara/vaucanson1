@@ -1,4 +1,4 @@
-// fundamental.hh: this file is part of the Vaucanson project.
+// design_pattern.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -30,7 +30,7 @@
 #ifndef VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 # define VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 
-/** @addtogroup fundamental Fundamental C++ : the Element design pattern. 
+/** @addtogroup design_pattern Fundamental C++ : the Element design pattern. 
  *
  * @brief Core constructs for Vaucanson.
  *
@@ -46,7 +46,7 @@
 */
 
 
-# include <vaucanson/fundamental/default_ops.hh>
-# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/design_pattern/default_ops.hh>
+# include <vaucanson/design_pattern/element.hh>
 
 #endif // VCSN_FUNDAMENTAL_FUNDAMENTAL_HH

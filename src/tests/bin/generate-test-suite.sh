@@ -66,7 +66,7 @@ EOF
 # Include necessary Vaucanson header
 cat >> $DEST_DIR/$FUN_SNAME-test.cc<<EOF
   #include <cassert>
-  #include <vaucanson/fundamental/fundamental.hh>
+  #include <vaucanson/design_pattern/design_pattern.hh>
 EOF
 
 # Include headers inclusion.
