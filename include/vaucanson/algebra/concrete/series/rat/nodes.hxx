@@ -112,7 +112,7 @@ namespace vcsn {
     {}
     
     template <class M_, class W_>
-    Node<M_, W_>::type	
+    typename Node<M_, W_>::type	
     Zero<M_,W_>::what() const 
     { 
       return Node<M_, W_>::zero; 
@@ -163,7 +163,7 @@ namespace vcsn {
     {}
     
     template<typename M_, typename W_>
-    Node<M_, W_>::type 
+    typename Node<M_, W_>::type 
     One<M_,W_>::what() const 
     { 
       return Node<M_, W_>::one; 
@@ -214,7 +214,7 @@ namespace vcsn {
     {}
 
     template<typename M_, typename W_>
-    Node<M_, W_>::type 
+    typename Node<M_, W_>::type 
     Constant<M_,W_>::what() const 
     { 
       return Node<M_, W_>::constant; 
@@ -284,7 +284,7 @@ namespace vcsn {
     {}
 
     template<typename M_, typename W_>
-    Node<M_, W_>::type 
+    typename Node<M_, W_>::type 
     LeftWeighted<M_,W_>::what() const 
     { 
       return Node<M_, W_>::lweight; 
@@ -356,7 +356,7 @@ namespace vcsn {
     {}
     
     template<typename M_, typename W_>
-    Node<M_, W_>::type 
+    typename Node<M_, W_>::type 
     RightWeighted<M_,W_>::what() const 
     { 
       return Node<M_, W_>::rweight; 
@@ -422,7 +422,7 @@ namespace vcsn {
     {}
 
     template <class M_,class W_>
-    Node<M_, W_>::type 
+    typename Node<M_, W_>::type 
     Star<M_,W_>::what() const 
     { 
       return Node<M_, W_>::star; 
@@ -489,7 +489,7 @@ namespace vcsn {
     {}
 
     template <class M_,class W_> 
-    Node<M_, W_>::type 
+    typename Node<M_, W_>::type 
     Product<M_,W_>::what() const 
     { 
       return Node<M_, W_>::prod; 
@@ -563,7 +563,7 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-    Node<M_, W_>::type 
+    typename Node<M_, W_>::type 
     Sum<M_,W_>::what() const 
     { 
       return Node<M_, W_>::sum; 

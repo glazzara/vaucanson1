@@ -109,18 +109,14 @@ namespace vcsn {
     public:
       Zero();
 
-      virtual Node<M_, W_>::type	
-      what() const;
-      virtual Node<M_, W_>*	
-      clone() const;
-      virtual void	       	
-      accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual bool		
-      operator!=(const Node<M_, W_>& other) const;
-      virtual bool		
-      operator<(const Node<M_, W_>& other) const;
       virtual 
-      ~Zero();
+      typename Node<M_, W_>::type	what() const;
+      virtual 
+      Node<M_, W_>*			clone() const;
+      virtual void			accept(ConstNodeVisitor<M_, W_>& v) const;
+      virtual bool		        operator!=(const Node<M_, W_>& other) const;
+      virtual bool		        operator<(const Node<M_, W_>& other) const;
+      virtual				~Zero();
     };
 
     /*----.
@@ -131,7 +127,7 @@ namespace vcsn {
     {
     public:
       One();
-      virtual Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type 
       what() const;
       virtual Node<M_, W_>* 
       clone() const;
@@ -154,7 +150,7 @@ namespace vcsn {
     {
     public:
       Constant(const M_ &v);
-      virtual Node<M_, W_>::type     what() const; 
+      virtual typename Node<M_, W_>::type     what() const; 
       virtual Node<M_, W_>*          clone() const;
       virtual void 
       accept(ConstNodeVisitor<M_, W_>& v) const;
@@ -181,7 +177,7 @@ namespace vcsn {
       LeftWeighted(const W_& w, const Node<M_, W_>& c);
       LeftWeighted(const W_& w, Node<M_, W_>* c);
       LeftWeighted(const W_& w);
-      virtual Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type 
       what() const;
       virtual Node<M_, W_>* 
       clone() const;
@@ -210,7 +206,7 @@ namespace vcsn {
       RightWeighted(const W_& w, const Node<M_, W_>& c);
       RightWeighted(const W_& w, Node<M_, W_>* c);
       RightWeighted(const W_& w);
-      virtual Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type 
       what() const; 
       virtual Node<M_, W_>* 
       clone() const;
@@ -239,7 +235,7 @@ namespace vcsn {
 
       Star(const Node<M_, W_>& other);
       Star(Node<M_, W_>* other);
-      virtual Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type 
       what() const;
       virtual Node<M_, W_>* 
       clone() const;
@@ -268,7 +264,7 @@ namespace vcsn {
 
       Product(const Node<M_, W_>& left, const Node<M_, W_>& right);
       Product(Node<M_, W_>* left, Node<M_, W_>* right);
-      virtual Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type 
       what() const;
       virtual Node<M_, W_>* 
       clone() const;
@@ -298,7 +294,7 @@ namespace vcsn {
       Sum(Node<M_, W_>* left, Node<M_, W_>* right);
       virtual void 
       accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type 
       what() const;
       virtual Node<M_, W_>* 
       clone() const;

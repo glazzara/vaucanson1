@@ -31,8 +31,8 @@ namespace vcsn {
 
     template <class M_, class W_>
     DumpVisitor<M_,W_>::DumpVisitor(std::ostream& o,
-				    const char *zero = "0",
-				    const char *one = "1") 
+				    const char *zero,
+				    const char *one) 
       : o_(o),
 	z_(zero),
 	i_(one)

@@ -1,0 +1,343 @@
+Index: ChangeLog
+(0.94)
+	* 
+
+2002-07-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+Index: include/vaucanson/algebra/concrete/series/polynoms.hxx
+--- include/vaucanson/algebra/concrete/series/polynoms.hxx Wed, 24 Jul 2002 17:33:25 +0200 yann (vaucanson/c/16_polynoms.h 1.9 600)
++++ include/vaucanson/algebra/concrete/series/polynoms.hxx Wed, 24 Jul 2002 17:37:10 +0200 yann (vaucanson/c/16_polynoms.h 1.9 600)
+@@ -77,25 +77,29 @@
+     }
+     
+     template<typename Tm, typename Tw>
+-    polynom<Tm, Tw>::iterator polynom<Tm, Tw>::end() 
++    typename polynom<Tm, Tw>::iterator 
++    polynom<Tm, Tw>::end() 
+     { 
+       return map_.end(); 
+     }
+     
+     template<typename Tm, typename Tw>    
+-    polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::end() const 
++    typename polynom<Tm, Tw>::const_iterator 
++    polynom<Tm, Tw>::end() const 
+     { 
+       return map_.end(); 
+     }
+     
+     template<typename Tm, typename Tw>
+-    polynom<Tm, Tw>::iterator polynom<Tm, Tw>::find(const Tm& m) 
++    typename polynom<Tm, Tw>::iterator 
++    polynom<Tm, Tw>::find(const Tm& m) 
+     { 
+       return map_.find(m); 
+     }
+     
+     template<typename Tm, typename Tw>
+-    polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::find(const Tm& m) const
++    typename polynom<Tm, Tw>::const_iterator 
++    polynom<Tm, Tw>::find(const Tm& m) const
+     { 
+       return map_.find(m); 
+     }
+Index: include/vaucanson/algorithms/determinize.hxx
+--- include/vaucanson/algorithms/determinize.hxx Tue, 23 Jul 2002 14:46:29 +0200 yann (vaucanson/d/34_determiniz 1.3 600)
++++ include/vaucanson/algorithms/determinize.hxx Wed, 24 Jul 2002 17:45:52 +0200 yann (vaucanson/d/34_determiniz 1.3 600)
+@@ -25,30 +25,10 @@
+ # include <set>
+ # include <queue>
+ 
+-// FIXME : non ISO headers :
+-# include <hash_map.h>
+-
+ # include <vaucanson/automata/concept/automata_base.hh>
+ # include <vaucanson/automata/concept/history.hh>
+ # include <vaucanson/algorithms/reachable.hh>
+ 
+-namespace std {
+-
+-  template <>
+-  struct hash<std::set<vcsn::hstate_t> >
+-  {
+-    size_t operator()(const std::set<vcsn::hstate_t>& s) const
+-    {
+-      size_t res = 0;
+-      for (std::set<vcsn::hstate_t>::const_iterator i = s.begin(); 
+-	   i != s.end(); ++i)
+-	res |= 1 << unsigned(*i);
+-      return res;
+-    }
+-  };
+-
+-} // std
+-
+ namespace vcsn {
+ 
+   /*--------------------.
+@@ -71,10 +51,7 @@
+     typedef typename series_t::monoid_t			    monoid_t;
+     typedef typename std::set<hstate_t>	                    subset_t;
+ 
+-    // FIXME : hash_map is an SGI extension -> not ISO C++
+-    //         => add a good trait and a vaucanson implementation of this
+-    //            useful data structure
+-    typedef typename std::hash_map<subset_t, hstate_t>      subset_set_t;
++    typedef typename std::map<subset_t, hstate_t>           subset_set_t;
+     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
+    
+     // FIXME : here we assume monoid is a free monoid -> concept checking ?
+Index: include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx
+--- include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx Tue, 23 Jul 2002 14:46:29 +0200 yann (vaucanson/d/47_dump_visit 1.3 600)
++++ include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx Wed, 24 Jul 2002 17:43:16 +0200 yann (vaucanson/d/47_dump_visit 1.3 600)
+@@ -31,8 +31,8 @@
+ 
+     template <class M_, class W_>
+     DumpVisitor<M_,W_>::DumpVisitor(std::ostream& o,
+-				    const char *zero = "0",
+-				    const char *one = "1") 
++				    const char *zero,
++				    const char *one) 
+       : o_(o),
+ 	z_(zero),
+ 	i_(one)
+Index: include/vaucanson/algebra/concrete/series/rat/nodes.hxx
+--- include/vaucanson/algebra/concrete/series/rat/nodes.hxx Tue, 23 Jul 2002 14:46:29 +0200 yann (vaucanson/d/48_nodes.hxx 1.4 600)
++++ include/vaucanson/algebra/concrete/series/rat/nodes.hxx Wed, 24 Jul 2002 17:41:11 +0200 yann (vaucanson/d/48_nodes.hxx 1.4 600)
+@@ -112,7 +112,7 @@
+     {}
+     
+     template <class M_, class W_>
+-    Node<M_, W_>::type	
++    typename Node<M_, W_>::type	
+     Zero<M_,W_>::what() const 
+     { 
+       return Node<M_, W_>::zero; 
+@@ -163,7 +163,7 @@
+     {}
+     
+     template<typename M_, typename W_>
+-    Node<M_, W_>::type 
++    typename Node<M_, W_>::type 
+     One<M_,W_>::what() const 
+     { 
+       return Node<M_, W_>::one; 
+@@ -214,7 +214,7 @@
+     {}
+ 
+     template<typename M_, typename W_>
+-    Node<M_, W_>::type 
++    typename Node<M_, W_>::type 
+     Constant<M_,W_>::what() const 
+     { 
+       return Node<M_, W_>::constant; 
+@@ -284,7 +284,7 @@
+     {}
+ 
+     template<typename M_, typename W_>
+-    Node<M_, W_>::type 
++    typename Node<M_, W_>::type 
+     LeftWeighted<M_,W_>::what() const 
+     { 
+       return Node<M_, W_>::lweight; 
+@@ -356,7 +356,7 @@
+     {}
+     
+     template<typename M_, typename W_>
+-    Node<M_, W_>::type 
++    typename Node<M_, W_>::type 
+     RightWeighted<M_,W_>::what() const 
+     { 
+       return Node<M_, W_>::rweight; 
+@@ -422,7 +422,7 @@
+     {}
+ 
+     template <class M_,class W_>
+-    Node<M_, W_>::type 
++    typename Node<M_, W_>::type 
+     Star<M_,W_>::what() const 
+     { 
+       return Node<M_, W_>::star; 
+@@ -489,7 +489,7 @@
+     {}
+ 
+     template <class M_,class W_> 
+-    Node<M_, W_>::type 
++    typename Node<M_, W_>::type 
+     Product<M_,W_>::what() const 
+     { 
+       return Node<M_, W_>::prod; 
+@@ -563,7 +563,7 @@
+     }
+ 
+     template<typename M_, typename W_>
+-    Node<M_, W_>::type 
++    typename Node<M_, W_>::type 
+     Sum<M_,W_>::what() const 
+     { 
+       return Node<M_, W_>::sum; 
+Index: include/vaucanson/algebra/concrete/series/rat/exp.hxx
+--- include/vaucanson/algebra/concrete/series/rat/exp.hxx Tue, 23 Jul 2002 14:46:29 +0200 yann (vaucanson/d/49_exp.hxx 1.5 600)
++++ include/vaucanson/algebra/concrete/series/rat/exp.hxx Wed, 24 Jul 2002 17:43:40 +0200 yann (vaucanson/d/49_exp.hxx 1.5 600)
+@@ -112,14 +112,14 @@
+     }
+     
+     template<typename LetterT, typename WeightT>
+-    exp<LetterT, WeightT>::node_t* &
++    typename exp<LetterT, WeightT>::node_t* &
+     exp<LetterT, WeightT>::base() 
+     { 
+       return base_; 
+     }
+ 
+     template<typename LetterT, typename WeightT>
+-    exp<LetterT, WeightT>::node_t* const &
++    typename exp<LetterT, WeightT>::node_t* const &
+     exp<LetterT, WeightT>::base() const { return base_; }
+ 
+     template<typename LetterT, typename WeightT>
+Index: include/vaucanson/algebra/concrete/series/rat/nodes.hh
+--- include/vaucanson/algebra/concrete/series/rat/nodes.hh Tue, 23 Jul 2002 14:46:29 +0200 yann (vaucanson/d/50_nodes.hh 1.4 600)
++++ include/vaucanson/algebra/concrete/series/rat/nodes.hh Wed, 24 Jul 2002 17:40:46 +0200 yann (vaucanson/d/50_nodes.hh 1.4 600)
+@@ -109,18 +109,14 @@
+     public:
+       Zero();
+ 
+-      virtual Node<M_, W_>::type	
+-      what() const;
+-      virtual Node<M_, W_>*	
+-      clone() const;
+-      virtual void	       	
+-      accept(ConstNodeVisitor<M_, W_>& v) const;
+-      virtual bool		
+-      operator!=(const Node<M_, W_>& other) const;
+-      virtual bool		
+-      operator<(const Node<M_, W_>& other) const;
+       virtual 
+-      ~Zero();
++      typename Node<M_, W_>::type	what() const;
++      virtual 
++      Node<M_, W_>*			clone() const;
++      virtual void			accept(ConstNodeVisitor<M_, W_>& v) const;
++      virtual bool		        operator!=(const Node<M_, W_>& other) const;
++      virtual bool		        operator<(const Node<M_, W_>& other) const;
++      virtual				~Zero();
+     };
+ 
+     /*----.
+@@ -131,7 +127,7 @@
+     {
+     public:
+       One();
+-      virtual Node<M_, W_>::type 
++      virtual typename Node<M_, W_>::type 
+       what() const;
+       virtual Node<M_, W_>* 
+       clone() const;
+@@ -154,7 +150,7 @@
+     {
+     public:
+       Constant(const M_ &v);
+-      virtual Node<M_, W_>::type     what() const; 
++      virtual typename Node<M_, W_>::type     what() const; 
+       virtual Node<M_, W_>*          clone() const;
+       virtual void 
+       accept(ConstNodeVisitor<M_, W_>& v) const;
+@@ -181,7 +177,7 @@
+       LeftWeighted(const W_& w, const Node<M_, W_>& c);
+       LeftWeighted(const W_& w, Node<M_, W_>* c);
+       LeftWeighted(const W_& w);
+-      virtual Node<M_, W_>::type 
++      virtual typename Node<M_, W_>::type 
+       what() const;
+       virtual Node<M_, W_>* 
+       clone() const;
+@@ -210,7 +206,7 @@
+       RightWeighted(const W_& w, const Node<M_, W_>& c);
+       RightWeighted(const W_& w, Node<M_, W_>* c);
+       RightWeighted(const W_& w);
+-      virtual Node<M_, W_>::type 
++      virtual typename Node<M_, W_>::type 
+       what() const; 
+       virtual Node<M_, W_>* 
+       clone() const;
+@@ -239,7 +235,7 @@
+ 
+       Star(const Node<M_, W_>& other);
+       Star(Node<M_, W_>* other);
+-      virtual Node<M_, W_>::type 
++      virtual typename Node<M_, W_>::type 
+       what() const;
+       virtual Node<M_, W_>* 
+       clone() const;
+@@ -268,7 +264,7 @@
+ 
+       Product(const Node<M_, W_>& left, const Node<M_, W_>& right);
+       Product(Node<M_, W_>* left, Node<M_, W_>* right);
+-      virtual Node<M_, W_>::type 
++      virtual typename Node<M_, W_>::type 
+       what() const;
+       virtual Node<M_, W_>* 
+       clone() const;
+@@ -298,7 +294,7 @@
+       Sum(Node<M_, W_>* left, Node<M_, W_>* right);
+       virtual void 
+       accept(ConstNodeVisitor<M_, W_>& v) const;
+-      virtual Node<M_, W_>::type 
++      virtual typename Node<M_, W_>::type 
+       what() const;
+       virtual Node<M_, W_>* 
+       clone() const;
+Index: include/vaucanson/algebra/concrete/series/rat/exp.hh
+--- include/vaucanson/algebra/concrete/series/rat/exp.hh Tue, 23 Jul 2002 14:46:29 +0200 yann (vaucanson/d/51_exp.hh 1.5 600)
++++ include/vaucanson/algebra/concrete/series/rat/exp.hh Wed, 24 Jul 2002 17:42:56 +0200 yann (vaucanson/d/51_exp.hh 1.5 600)
+@@ -38,7 +38,7 @@
+     {
+     protected:
+       typedef rat::Node<LetterT, WeightT>		node_t;
+-      typedef rat::Node<LetterT, WeightT>::type		type;
++      typedef typename rat::Node<LetterT, WeightT>::type        type;
+       typedef rat::Zero<LetterT, WeightT>		n_zero_t;
+       typedef rat::One<LetterT, WeightT>		n_one_t;
+       typedef rat::Sum<LetterT, WeightT>		n_sum_t;
+Index: include/vaucanson/tools/gen_random.hxx
+--- include/vaucanson/tools/gen_random.hxx Tue, 23 Jul 2002 14:46:29 +0200 yann (vaucanson/e/3_gen_random 1.9 600)
++++ include/vaucanson/tools/gen_random.hxx Wed, 24 Jul 2002 17:38:38 +0200 yann (vaucanson/e/3_gen_random 1.9 600)
+@@ -77,8 +77,8 @@
+   template <class TAutomata>
+   TAutomata GenRandomAutomata<TAutomata>::
+   generate(unsigned nb_state, unsigned nb_edge, 
+-	   unsigned istate = 1, unsigned fstate = 1,
+-	   unsigned nb_letter = 2)
++	   unsigned istate, unsigned fstate,
++	   unsigned nb_letter)
+   {
+     AUTOMATON_TYPES(TAutomata);
+     // check consistency of automaton
+@@ -207,7 +207,7 @@
+   TAutomata GenRandomAutomata<TAutomata>::
+   generate_dfa(unsigned nb_state, 
+ 	       unsigned size_alphabet, 
+-	       unsigned fstate = 1)
++	       unsigned fstate)
+   {
+     // check for coherence 
+     if (size_alphabet > 26) size_alphabet = 26;
+Index: src/tests/automata/algos/minimization_test.hh
+--- src/tests/automata/algos/minimization_test.hh Tue, 23 Jul 2002 14:46:29 +0200 yann (vaucanson/f/10_minimizati 1.4 600)
++++ src/tests/automata/algos/minimization_test.hh Wed, 24 Jul 2002 17:46:01 +0200 yann (vaucanson/f/10_minimizati 1.4 600)
+@@ -68,8 +68,8 @@
+ 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_initial", work, i);
+ 	}
+       
+-      typedef transpose_traits<automaton_t>::transpose_t transpose_t;
+-      typedef transpose_traits<transpose_t>::transpose_t tranpose_transpose_t;
++      typedef typename transpose_traits<automaton_t>::transpose_t transpose_t;
++      typedef typename transpose_traits<transpose_t>::transpose_t tranpose_transpose_t;
+       
+       tranpose_transpose_t minimize = 
+ 	determinize(transpose_view(trim(determinize(transpose_view(work)))));
+Index: src/tests/tests-suites/usual_automaton_t/add_edge-test
+--- src/tests/tests-suites/usual_automaton_t/add_edge-test Wed, 24 Jul 2002 17:33:25 +0200 yann (vaucanson/f/39_add_edge-t 1.3 700)
++++ src/tests/tests-suites/usual_automaton_t/add_edge-test Wed, 24 Jul 2002 17:37:44 +0200 yann (vaucanson/f/39_add_edge-t 1.3 700)
+@@ -586,7 +586,7 @@
+ ;

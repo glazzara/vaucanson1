@@ -1,4 +1,21 @@
 2002-07-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.94)
+	Changes to be g++-3.1 compliant :
+		
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: add some typename.
+	* include/vaucanson/algorithms/determinize.hxx : suppress hash_map for ever.
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx : 
+		suppress default values for arguments in implementation.
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hxx : 
+		idem + some typename were forgotten.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx : idem.
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hh : idem.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh : idem
+	* include/vaucanson/tools/gen_random.hxx : idem.
+	* src/tests/automata/algos/minimization_test.hh : idem.
+
+
+2002-07-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.93)
 	* include/Makefile.am : update distributed files.
 	* configure.ac :

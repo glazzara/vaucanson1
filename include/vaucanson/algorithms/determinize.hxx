@@ -25,29 +25,9 @@
 # include <set>
 # include <queue>
 
-// FIXME : non ISO headers :
-# include <hash_map.h>
-
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/history.hh>
 # include <vaucanson/algorithms/reachable.hh>
-
-namespace std {
-
-  template <>
-  struct hash<std::set<vcsn::hstate_t> >
-  {
-    size_t operator()(const std::set<vcsn::hstate_t>& s) const
-    {
-      size_t res = 0;
-      for (std::set<vcsn::hstate_t>::const_iterator i = s.begin(); 
-	   i != s.end(); ++i)
-	res |= 1 << unsigned(*i);
-      return res;
-    }
-  };
-
-} // std
 
 namespace vcsn {
 
@@ -71,10 +51,7 @@ namespace vcsn {
     typedef typename series_t::monoid_t			    monoid_t;
     typedef typename std::set<hstate_t>	                    subset_t;
 
-    // FIXME : hash_map is an SGI extension -> not ISO C++
-    //         => add a good trait and a vaucanson implementation of this
-    //            useful data structure
-    typedef typename std::hash_map<subset_t, hstate_t>      subset_set_t;
+    typedef typename std::map<subset_t, hstate_t>           subset_set_t;
     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
    
     // FIXME : here we assume monoid is a free monoid -> concept checking ?

@@ -77,25 +77,29 @@ namespace vcsn {
     }
     
     template<typename Tm, typename Tw>
-    polynom<Tm, Tw>::iterator polynom<Tm, Tw>::end() 
+    typename polynom<Tm, Tw>::iterator 
+    polynom<Tm, Tw>::end() 
     { 
       return map_.end(); 
     }
     
     template<typename Tm, typename Tw>    
-    polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::end() const 
+    typename polynom<Tm, Tw>::const_iterator 
+    polynom<Tm, Tw>::end() const 
     { 
       return map_.end(); 
     }
     
     template<typename Tm, typename Tw>
-    polynom<Tm, Tw>::iterator polynom<Tm, Tw>::find(const Tm& m) 
+    typename polynom<Tm, Tw>::iterator 
+    polynom<Tm, Tw>::find(const Tm& m) 
     { 
       return map_.find(m); 
     }
     
     template<typename Tm, typename Tw>
-    polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::find(const Tm& m) const
+    typename polynom<Tm, Tw>::const_iterator 
+    polynom<Tm, Tw>::find(const Tm& m) const
     { 
       return map_.find(m); 
     }

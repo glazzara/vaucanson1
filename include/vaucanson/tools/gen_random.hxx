@@ -77,8 +77,8 @@ namespace vcsn {
   template <class TAutomata>
   TAutomata GenRandomAutomata<TAutomata>::
   generate(unsigned nb_state, unsigned nb_edge, 
-	   unsigned istate = 1, unsigned fstate = 1,
-	   unsigned nb_letter = 2)
+	   unsigned istate, unsigned fstate,
+	   unsigned nb_letter)
   {
     AUTOMATON_TYPES(TAutomata);
     // check consistency of automaton
@@ -207,7 +207,7 @@ namespace vcsn {
   TAutomata GenRandomAutomata<TAutomata>::
   generate_dfa(unsigned nb_state, 
 	       unsigned size_alphabet, 
-	       unsigned fstate = 1)
+	       unsigned fstate)
   {
     // check for coherence 
     if (size_alphabet > 26) size_alphabet = 26;

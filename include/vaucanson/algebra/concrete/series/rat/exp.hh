@@ -37,14 +37,14 @@ namespace vcsn {
     class exp
     {
     protected:
-      typedef rat::Node<LetterT, WeightT>		node_t;
-      typedef rat::Node<LetterT, WeightT>::type		type;
-      typedef rat::Zero<LetterT, WeightT>		n_zero_t;
-      typedef rat::One<LetterT, WeightT>		n_one_t;
-      typedef rat::Sum<LetterT, WeightT>		n_sum_t;
-      typedef rat::Product<LetterT, WeightT>		n_prod_t;
-      typedef rat::Star<LetterT, WeightT>		n_star_t;
-      typedef rat::Constant<LetterT, WeightT>		n_const_t;
+      typedef rat::Node<LetterT, WeightT>			node_t;
+      typedef typename rat::Node<LetterT, WeightT>::type        type;
+      typedef rat::Zero<LetterT, WeightT>			n_zero_t;
+      typedef rat::One<LetterT, WeightT>			n_one_t;
+      typedef rat::Sum<LetterT, WeightT>			n_sum_t;
+      typedef rat::Product<LetterT, WeightT>			n_prod_t;
+      typedef rat::Star<LetterT, WeightT>			n_star_t;
+      typedef rat::Constant<LetterT, WeightT>			n_const_t;
 
     public:
       typedef LetterT letter_t;

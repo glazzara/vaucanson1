@@ -68,8 +68,8 @@ unsigned minimization_test(tests::Tester& tg)
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_initial", work, i);
 	}
       
-      typedef transpose_traits<automaton_t>::transpose_t transpose_t;
-      typedef transpose_traits<transpose_t>::transpose_t tranpose_transpose_t;
+      typedef typename transpose_traits<automaton_t>::transpose_t transpose_t;
+      typedef typename transpose_traits<transpose_t>::transpose_t tranpose_transpose_t;
       
       tranpose_transpose_t minimize = 
 	determinize(transpose_view(trim(determinize(transpose_view(work)))));

@@ -112,14 +112,14 @@ namespace vcsn {
     }
     
     template<typename LetterT, typename WeightT>
-    exp<LetterT, WeightT>::node_t* &
+    typename exp<LetterT, WeightT>::node_t* &
     exp<LetterT, WeightT>::base() 
     { 
       return base_; 
     }
 
     template<typename LetterT, typename WeightT>
-    exp<LetterT, WeightT>::node_t* const &
+    typename exp<LetterT, WeightT>::node_t* const &
     exp<LetterT, WeightT>::base() const { return base_; }
 
     template<typename LetterT, typename WeightT>
