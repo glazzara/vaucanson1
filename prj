@@ -1,18 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 416)
-(Parent-Version vaucanson 0 415)
-(Version-Log "2003-09-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 417)
+(Parent-Version vaucanson 0 416)
+(Version-Log "2003-09-10  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/automata/concept/automata_base.hxx (rdelta),
-	* include/vaucanson/automata/concept/automata_ops.hxx (op_rdelta): Fix
-	bugs.
-	* include/vaucanson/automata/concrete/graph.hxx: Add a specialisation
-	of op_rdelta for Graph.
-	* src/tests/automata/implementation_check/rdelta_test.hh: Add more
-	tests for rdelta.")
-(Checkin-Time "Tue, 09 Sep 2003 14:11:40 +0200")
+	* src/tests/misc/bitset.cc: New. Add tests for misc::Bitset.
+	* src/tests/misc/Makefile.am: Update.
+	* include/vaucanson/misc/bitset.hxx, include/vaucanson/misc/bitset.hh:
+	Fix bugs pointed out by the new testsuite. Add preconditions.")
+(Checkin-Time "Wed, 10 Sep 2003 10:57:22 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -95,7 +92,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.49 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.50 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -162,7 +159,7 @@
   (include/vaucanson/misc/utility.hh (vaucanson/p/43_utility.hh 1.4 600))
   (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.8 600))
 
-  (src/tests/misc/Makefile.am (vaucanson/p/44_Makefile.a 1.4 600))
+  (src/tests/misc/Makefile.am (vaucanson/p/44_Makefile.a 1.5 600))
   (src/tests/misc/limits.cc (vaucanson/q/33_limits.cc 1.2 600))
   (src/tests/misc/unique.cc (vaucanson/p/45_unique.cc 1.3 600))
   (src/tests/misc/static.cc (vaucanson/p/46_static.cc 1.3 600))
@@ -763,7 +760,7 @@
 ;; Files added by populate at Thu, 04 Sep 2003 13:57:03 +0200,
 ;; to version 0.405(w), by clavei_t:
 
-  (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.3 600))
+  (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.4 600))
   (include/vaucanson/misc/bitset.hh (vaucanson/r/40_bitset.hh 1.3 600))
 
 ;; Files added by populate at Fri, 05 Sep 2003 17:36:32 +0200,
@@ -776,6 +773,11 @@
 ;; to version 0.414(w), by clavei_t:
 
   (src/tests/automata/algos/sub_automaton_test.hh (vaucanson/r/43_sub_automa 1.1 600))
+
+;; Files added by populate at Wed, 10 Sep 2003 10:31:48 +0200,
+;; to version 0.416(w), by clavei_t:
+
+  (src/tests/misc/bitset.cc (vaucanson/r/44_bitset.cc 1.1 600))
 )
 (New-Version-Log "")
 (Merge-Parents)

@@ -1,3 +1,10 @@
+2003-09-10  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* src/tests/misc/bitset.cc: New. Add tests for misc::Bitset.
+	* src/tests/misc/Makefile.am: Update.
+	* include/vaucanson/misc/bitset.hxx, include/vaucanson/misc/bitset.hh:
+	Fix bugs pointed out by the new testsuite. Add preconditions.
+
 2003-09-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_base.hxx (rdelta),

@@ -126,6 +126,7 @@ namespace utility
 	size_ = rhs.size_;
 	end_ = rhs.end_;
       }
+    postcondition(*this == rhs);
     return *this;
   }
 
@@ -233,6 +234,8 @@ namespace utility
   std::pair<Bitset::iterator, bool>
   Bitset::insert(const value_type& x)
   {
+    precondition(static_cast<size_type> (x) < max_size_);
+
     size_type	idx = get_index(x);
     size_type	bnm = get_bitnum(x);
 
@@ -273,6 +276,8 @@ namespace utility
   void
   Bitset::erase(iterator position)
   {
+    precondition(static_cast<size_type> (*position) < max_size_);
+
     erase(*position);
   }
 
@@ -280,6 +285,8 @@ namespace utility
   Bitset::size_type
   Bitset::erase(const key_type& x)
   {
+    precondition(static_cast<size_type> (x) < max_size_);
+
     size_type	idx = get_index(x);
     size_type	bnm = get_bitnum(x);
 
@@ -292,6 +299,17 @@ namespace utility
       }
     else
       return 0;
+  }
+
+  inline
+  void
+  Bitset::erase(iterator first, iterator last)
+  {
+    while (first != last)
+      {
+	erase(*first);
+	++first;
+      }
   }
   
   /*------------------.
@@ -340,6 +358,8 @@ namespace utility
   Bitset::iterator
   Bitset::find(const key_type& x) const
   {
+    precondition(static_cast<size_type> (x) < max_size_);
+
     bit_iterator	it(get_index(x), get_bitnum(x));
     if (get_bit(it))
       return iterator (this, it);
@@ -352,6 +372,8 @@ namespace utility
   Bitset::size_type
   Bitset::count(const key_type& x) const
   {
+    precondition(static_cast<size_type> (x) < max_size_);
+
     return get_bit(get_index(x), get_bitnum(x)) ? 1 : 0;
   }
 
@@ -360,6 +382,8 @@ namespace utility
   Bitset::iterator
   Bitset::lower_bound(const key_type& x) const
   {
+    precondition(static_cast<size_type> (x) < max_size_);
+
     bit_iterator	it(get_index(x), get_bitnum(x));
 
     while ((it != bit_end()) && !get_bit(it))
@@ -372,6 +396,8 @@ namespace utility
   Bitset::iterator
   Bitset::upper_bound(const key_type& x) const
   {
+    precondition(static_cast<size_type> (x) < max_size_);
+
     bit_iterator	it(get_index(x), get_bitnum(x));
 
     if (it == bit_begin())
@@ -404,14 +430,14 @@ namespace utility
   bool
   Bitset::operator == (const Bitset& rhs) const
   {
-    if (rhs.max_size_ < max_size_)
+    if (rhs.data_size_ < data_size_)
       return rhs.operator == (*this);
     else
       {
-	for (size_type i = 0; i < max_size_; ++i)
+	for (size_type i = 0; i < data_size_; ++i)
 	  if (data_[i] != rhs.data_[i])
 	    return false;
-	for (size_type i = max_size_; i < rhs.max_size_; ++i)
+	for (size_type i = data_size_; i < rhs.data_size_; ++i)
 	  if (rhs.data_[i])
 	    return false;
 	return true;
@@ -474,19 +500,19 @@ namespace utility
   Bitset
   Bitset::operator | (const Bitset& rhs) const
   {
-    if (rhs.max_size_ < max_size_)
+    if (rhs.data_size_ < data_size_)
       return rhs.operator | (*this);
     else
       {
 	Bitset	result (rhs.max_size_);
 	
-	for (size_type i = 0; i < max_size_; ++i)
+	for (size_type i = 0; i < data_size_; ++i)
 	  {
 	    result.data_[i] = data_[i] | rhs.data_[i];
 	    if (result.data_[i])
 	      result.size_ = invalid_size;
 	  }
-	for (size_type i = max_size_; i < rhs.max_size_; ++i)
+	for (size_type i = data_size_; i < rhs.data_size_; ++i)
 	  {
 	    result.data_[i] = rhs.data_[i];
 	    if (result.data_[i])
@@ -587,7 +613,7 @@ namespace utility
   Bitset::size_type
   Bitset::get_data_size(size_type max)
   {
-    assertion(max > 0);
+    precondition(max > 0);
     
     const size_type data_bits = sizeof (data_type) * 8;
     return max / data_bits + (max % data_bits ? 1 : 0);
@@ -656,12 +682,12 @@ namespace utility
   {
     --value_;
     if (bitnum_)
+      --bitnum_;
+    else
       {
 	bitnum_ = sizeof (data_type) * 8 - 1;
 	--index_;
       }
-    else
-      --bitnum_;
     return (*this);
   }
 
