@@ -158,7 +158,7 @@ namespace vcsn {
   void  
   MetaElement<AutomataBase<Self>, T>::set_initial(hstate_t state)
   {
-    op_set_initial(set(), value(), state, set().series().identity(SELECT(serie_value_t));
+    op_set_initial(set(), value(), state, set().series().identity(SELECT(serie_value_t)));
   }
 
   /*! set an initial multiplicity to the state. */

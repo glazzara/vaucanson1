@@ -1,5 +1,10 @@
 2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/fundamental/element.hxx: Add inline.
+	* include/vaucanson/automata/concept/automata_base.hxx: Typo.
+
+2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/series_base.hh: 
 		op_convert between same implementations.
 	* include/vaucanson/algebra/concept/series_base.hxx: Implement it.
