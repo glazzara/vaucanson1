@@ -61,6 +61,7 @@ nobase_include_HEADERS =						   \
 	vaucanson/tools/gen_random.hxx					   \
 	vaucanson/tools/usual_macros.hh					   \
 	vaucanson/tools/dot_dump.hh					   \
+	vaucanson/tools/dot_display.hh					   \
 	vaucanson/tools/dot_format.hxx					   \
 	vaucanson/tools/dot_format.hh					   \
 	vaucanson/tools/io.hxx						   \
@@ -70,6 +71,7 @@ nobase_include_HEADERS =						   \
 	vaucanson/tools/usual_io.hxx					   \
 	vaucanson/tools/usual_io.hh					   \
 	vaucanson/tools/dot_dump.hxx					   \
+	vaucanson/tools/dot_display.hxx					   \
 	vaucanson/tools/fsm_dump.hh					   \
 	vaucanson/tools/fsm_dump.hxx					   \
 	vaucanson/tools/usual_escaped_characters.hxx			   \
