@@ -49,7 +49,7 @@ unsigned determinist_test(tests::Tester& tg)
 	++success;
     } 
   SUCCESS_RATE(rate, success, nb_tests);
-  TEST(t, "determinize on randomly generated dfa " + rate, success == nb_tests);
+  TEST(t, "determinize on randomly generated automaton " + rate, success == nb_tests);
   
   return t.all_passed();
 }

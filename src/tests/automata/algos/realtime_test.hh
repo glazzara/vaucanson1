@@ -20,19 +20,20 @@
 
 
 template <class Auto>
-unsigned realtime_test(tests::Tester& t)
+unsigned realtime_test(tests::Tester& tg)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
 
   typedef Auto automaton_t;
+  tests::Tester t(tg.verbose());
 
   gen_auto_t gen(time(0x0));
   
   const unsigned nb_ok_tests     = 20;
   const unsigned nb_non_ok_tests = 20;
-  unsigned success = 0;
+  unsigned success               = 0;
 
   for (unsigned i = 0; i < nb_ok_tests; i++)
     {

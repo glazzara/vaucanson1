@@ -1,56 +1,37 @@
 // extract_test.hh
 //
+// $Id$
 // VCSN_HEADER
+#ifndef EXTRACT_TEST_HH
+# define EXTRACT_TEST_HH
 
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-
-
+# include <time.h>
+# include <map>
+# include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automaton_impl.hh>
-
 # include <vaucanson/automata/concept/kinds.hh>
-
 # include <vaucanson/automata/concept/tags.hh>
-
-# include <vaucanson/automata/concrete/manylinks.hh>
-
 # include <check/tests_stuff.hh>
-# include <map>
-
-# include <vaucanson/misc/ref.hh>
-
 # include <vaucanson/tools/gen_random.hh>
-
 # include <vaucanson/algorithms/reachable.hh>
-
-# include <vaucanson/algorithms/moore.hh>
 # include <vaucanson/misc/dot_dump.hh>
 
-# include <vaucanson/tools/usual.hh>
-
-
 template <class Auto>
-unsigned extract_test(tests::Tester& t)
+unsigned extract_test(tests::Tester& tg)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
- 
   AUTOMATON_TYPES(Auto);
   typedef Auto automaton_t;
   
+  tests::Tester t(tg.verbose());
   gen_auto_t gen(time(0x0));
   
   const unsigned nb_tests = 10;
+  unsigned	 success  = 0;
   
-//   std::filebuf fb;
-//   fb.open ("automaton.dot", std::ios::out);
-//   std::ostream os(&fb);
-  
-
   for (unsigned i = 0; i < nb_tests; i++)
     {
       unsigned nb_state = 5;
@@ -59,12 +40,14 @@ unsigned extract_test(tests::Tester& t)
       
       a = auto_extract(a, a.states());
       
-      // misc::dot_dump(os, a, "test");
-
-      TEST(t, "Check Extract ok", (a.states().size() == nb_state) &&
-	   (a.edges().size() == nb_edge));
+      if ((a.states().size() == nb_state) &&
+	  (a.edges().size() == nb_edge))
+	++success;
     }
-
-  return EXIT_SUCCESS;
+  std::string rate;
+  SUCCESS_RATE(rate, success, nb_tests);
+  TEST(t, "extract "+rate, success == nb_tests);
+  return t.all_passed();
 }
     
+#endif // EXTRACT_TEST_HH

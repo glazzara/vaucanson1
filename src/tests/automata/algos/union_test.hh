@@ -4,6 +4,7 @@
 // VCSN_HEADER
 #ifndef UNION_TEST_HH
 # define UNION_TEST_HH
+
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automaton_impl.hh>

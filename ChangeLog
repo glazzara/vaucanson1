@@ -1,4 +1,12 @@
 2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.87)
+	*  src/tests/automata/algos/union_test.hh : redesigned.
+	* src/tests/automata/algos/determinist_test.hh : minor change.
+	* src/tests/automata/algos/normalize_test.hh : redesigned.
+	* src/tests/automata/algos/reachable_test.hh : redesigned.
+	* src/tests/automata/algos/extract_test.hh : redesigned.
+
+2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.86)
 	* src/tests/automata/algos/union_test.hh : redesigned.
 
