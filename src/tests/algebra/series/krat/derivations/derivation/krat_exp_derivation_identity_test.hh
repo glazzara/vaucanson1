@@ -1,7 +1,7 @@
 // krat_exp_derivation_identity_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -48,20 +48,15 @@ bool krat_exp_derivation_identity_test(tests::Tester& tg)
   srand(time(0));
   TEST_DERIVATION_USUAL_DECS(alphabet, a, b, monoid, semiring, series);
 
-  const int nb_iter = 20;
   int sucs = 0;
   int tsts = 0;
-  for (int i = 0; i < nb_iter; ++i)
-    {
-      krat_exp_t random = series.choose(SELECT(kexp_t));
-      TEST_DERIVATE(tsts, sucs,
-		    identity_as<kexp_t>::of(series), a, 
-		    zero_as<kexp_t>::of(series));
-      TEST_DERIVATE(tsts, sucs,
-		    identity_as<kexp_t>::of(series), b, 
-		    zero_as<kexp_t>::of(series));
-    }
-  
+  TEST_DERIVATE(tsts, sucs,
+		identity_as<kexp_t>::of(series), a, 
+		zero_as<kexp_t>::of(series));
+  TEST_DERIVATE(tsts, sucs,
+		identity_as<kexp_t>::of(series), b, 
+		zero_as<kexp_t>::of(series));
+
   std::string rate;
   SUCCESS_RATE(rate, sucs, tsts);
   TEST(t, "Various derivation tests on identity. " + rate, sucs == tsts);

@@ -4,7 +4,6 @@
 #include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 #include <vaucanson/algebra/concrete/series/series.hh>
 #include <vaucanson/algebra/concrete/series/krat.hh>
-#include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 
 template <class Expr>
 class Derivation

@@ -1,3 +1,20 @@
+2004-03-17  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/derivations/cderivation/Makefile.am:
+	  Correct header and add missing inclusion.
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
+	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh: Remove useless loops
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_zero_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_sum_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_star_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_product_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_letter_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_identity_test.hh: Correct copyrights dates and remove commented code.
+	* src/tests/tests-suites/algebra_series_krat_cderivation.defs,
+	  src/tests/tests-suites/algebra_series_krat_derivation.defs: Remove
+	  an useless inclusion.
+
 2004-03-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/Makefile.am: Include forgotten file.

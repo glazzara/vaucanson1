@@ -1,7 +1,7 @@
 // krat_exp_cderivation_letter_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,12 +30,9 @@
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_DERIVATION_KRAT_EXP_DERIVATION_LETTER_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_DERIVATION_KRAT_EXP_DERIVATION_LETTER_TEST_HH
 
-# include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
-# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algorithms/krat_exp_cderivation.hh>
-# include <vaucanson/misc/selectors.hh>
 
 using namespace vcsn;
 
@@ -48,21 +45,16 @@ bool krat_exp_cderivation_letter_test(tests::Tester& tg)
   srand(time(0));
   TEST_DERIVATION_USUAL_DECS(al, a, b, md, sg, ss);
 
-  // const int nb_iter = 20;
   int sucs = 0;
   int tsts = 0;
-  // for (int i = 0; i < nb_iter; ++i)
-    // {
-      // krat_exp_t random = ss.choose(SELECT(kexp_t));
-      TEST_DERIVATE(tsts, sucs,
-		    krat_exp_t (ss, a), a, identity_as<kexp_t>::of(ss));
-      TEST_DERIVATE(tsts, sucs,
-		    krat_exp_t (ss, b), a, zero_as<kexp_t>::of(ss));
-      TEST_DERIVATE(tsts, sucs,
-		    krat_exp_t (ss, a), b, zero_as<kexp_t>::of(ss));
-      TEST_DERIVATE(tsts, sucs,
-		    krat_exp_t (ss, b), b, identity_as<kexp_t>::of(ss));
-    // }
+  TEST_DERIVATE(tsts, sucs,
+		krat_exp_t (ss, a), a, identity_as<kexp_t>::of(ss));
+  TEST_DERIVATE(tsts, sucs,
+		krat_exp_t (ss, b), a, zero_as<kexp_t>::of(ss));
+  TEST_DERIVATE(tsts, sucs,
+		krat_exp_t (ss, a), b, zero_as<kexp_t>::of(ss));
+  TEST_DERIVATE(tsts, sucs,
+		krat_exp_t (ss, b), b, identity_as<kexp_t>::of(ss));
 
   std::string rate;
   SUCCESS_RATE(rate, sucs, tsts);
