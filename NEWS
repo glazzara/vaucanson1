@@ -3,6 +3,10 @@ Vaucanson 0.4
 	* Addition of automata I/O subsystem.
 	* Nearly-complete SWIG bindings for algorithms in Vaucanswig.
 	* Preliminary documentation for Vaucanswig.
+	* Addition of a Bitset class which behave almost like a std::set<int>.
+	* Addition of a Window class to permit easy text manipulation.
+	* Addition of a generic search algorithm able to skip characters in
+	  the input stream.
 
 Vaucanson 0.3	July 11, 2003
 

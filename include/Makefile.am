@@ -135,6 +135,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/product.hxx			     \
 	vaucanson/algorithms/realtime.hh			     \
 	vaucanson/algorithms/realtime.hxx			     \
+	vaucanson/algorithms/search.hh				     \
+	vaucanson/algorithms/search.hxx				     \
 	vaucanson/algorithms/standard.hh			     \
 	vaucanson/algorithms/standard.hxx			     \
 	vaucanson/algorithms/standard_of.hh			     \

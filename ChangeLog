@@ -1,5 +1,14 @@
 2003-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/search.hh: New. This file contains an
+	algorithm able to skip characters to perform search with automata
+	on streams.
+	* include/Makefile.am: Update.
+	* NEWS: Update and mention Bitset, Window and search.
+
+2003-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/misc/window.hxx, include/vaucanson/misc/window.hh:
 	Add a Window::moveto method which takes an iterator as argument. Add
 	an accessor to eol_ named eol_value().

@@ -1,18 +1,19 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 412)
-(Parent-Version vaucanson 0 411)
+(Project-Version vaucanson 0 413)
+(Parent-Version vaucanson 0 412)
 (Version-Log "2003-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* include/vaucanson/misc/window.hxx, include/vaucanson/misc/window.hh:
-	Add a Window::moveto method which takes an iterator as argument. Add
-	an accessor to eol_ named eol_value().
-	* include/vaucanson/misc/bitset.hxx, include/vaucanson/misc/bitset.hh:
-	Specialize std::insert_iterator for Bitset.
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/search.hh: New. This file contains an
+	algorithm able to skip characters to perform search with automata
+	on streams.
+	* include/Makefile.am: Update.
+	* NEWS: Update and mention Bitset, Window and search.
 
 ")
-(Checkin-Time "Fri, 05 Sep 2003 16:42:57 +0200")
+(Checkin-Time "Fri, 05 Sep 2003 17:45:35 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -95,11 +96,11 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.46 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.47 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
-  (NEWS (vaucanson/r/34_NEWS 1.1 600))
+  (NEWS (vaucanson/r/34_NEWS 1.2 600))
 
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (reheader.pl (vaucanson/q/40_reheader.p 1.4 700))
@@ -138,7 +139,7 @@
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.39 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.40 600))
 
   (include/vaucanson/vaucanson.hh (vaucanson/q/42_vaucanson. 1.1 600))
 
@@ -765,6 +766,12 @@
 
   (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.3 600))
   (include/vaucanson/misc/bitset.hh (vaucanson/r/40_bitset.hh 1.3 600))
+
+;; Files added by populate at Fri, 05 Sep 2003 17:36:32 +0200,
+;; to version 0.412(w), by clavei_t:
+
+  (include/vaucanson/algorithms/search.hxx (vaucanson/r/41_search.hxx 1.1 600))
+  (include/vaucanson/algorithms/search.hh (vaucanson/r/42_search.hh 1.1 600))
 )
 (New-Version-Log "")
 (Merge-Parents)
