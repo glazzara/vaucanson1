@@ -6,4 +6,5 @@
 
 
 SUBDIRS = krat \
-	  misc
+	  misc \
+	polynom

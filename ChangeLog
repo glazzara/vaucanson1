@@ -1,3 +1,16 @@
+2004-03-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/algebra/series/polynom/Makefile.am,
+	* src/tests/algebra/series/polynom/series_polynom_test.hh: New files.
+	Tests on polynoms.
+	* src/tests/tests-suites/algebra_series_polynom_bool.defs,
+	* src/tests/tests-suites/algebra_series_polynom_double.defs,
+	* src/tests/tests-suites/algebra_series_polynom_int.defs: New files.
+	Instanciation of tests on polynoms.
+	* src/tests/algebra/series/Makefile.am,
+	* src/tests/tests-suites/generate-all.sh: Update to instanciate more
+	tests on polynoms.
+
 2004-03-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/letter/char_letter.hh: Minor

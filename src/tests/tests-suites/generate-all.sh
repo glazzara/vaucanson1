@@ -63,3 +63,17 @@
    usual_automaton_t.defs \
    ../automata
 
+../bin/generate-test-suite.sh \
+   algebra_series_polynom_int \
+   algebra_series_polynom_int.defs \
+    ../algebra/series/polynom
+
+../bin/generate-test-suite.sh \
+   algebra_series_polynom_double \
+   algebra_series_polynom_double.defs \
+    ../algebra/series/polynom
+
+../bin/generate-test-suite.sh \
+   algebra_series_polynom_bool \
+   algebra_series_polynom_bool.defs \
+    ../algebra/series/polynom
