@@ -1,3 +1,8 @@
+2004-03-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/complement.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx: Add missing includes.
+
 2004-03-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/complement.hh,
