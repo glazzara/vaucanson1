@@ -1,3 +1,14 @@
+2004-02-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh
+	* (std::char_traits< std::pair<U, V> >): Move specialized
+	char_traits...
+	* include/vaucanson/misc/char_traits/pair.hxx,
+	* include/vaucanson/misc/char_traits/pair.hh: ... Here
+	* include/vaucanson/algorithms/krat_exp_linearize.hh,
+	* include/Makefile.am: Update accordingly.
+
 2004-01-30  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/tools/usual_escaped_characters.hxx: New.

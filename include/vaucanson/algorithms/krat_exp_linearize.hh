@@ -1,7 +1,7 @@
 // krat_exp_linearize.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,6 +36,7 @@
 # include <vaucanson/algebra/concrete/alphabets/alphabets.hh>
 # include <vaucanson/algebra/concrete/free_monoid/words.hh>
 # include <vaucanson/algebra/concrete/letter/couple_letter.hh>
+# include <vaucanson/misc/char_traits/pair.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
 namespace vcsn {
@@ -46,7 +47,7 @@ namespace vcsn {
   template <typename S, typename T>
   struct linearize_element
   {
-    // Get types which are useful to build the new type 
+    // Get types which are useful to build the new type
     typedef typename T::semiring_elt_value_t		orig_semiring_elt_value_t;
     typedef typename S::semiring_t		orig_semiring_t;
     typedef typename S::monoid_t		orig_monoid_t;
@@ -60,7 +61,7 @@ namespace vcsn {
     typedef algebra::AlphabetSet<letter_t>			alphabets_t;
     typedef std::set<letter_t>				       alphabet_impl_t;
     typedef Element<alphabets_t, alphabet_impl_t>		alphabet_t;
-    // FIXME: in fact, here we want X<alphabet_t> where X is the type of 
+    // FIXME: in fact, here we want X<alphabet_t> where X is the type of
     // FIXME: the monoid concept. For the moment, we just have FreeMonoid, so
     // FIXME: it is not important but in the future, we will have to introduce
     // FIXME: a convenient way of substituting types parameters ...
@@ -86,6 +87,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algorithms/krat_exp_linearize.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HH

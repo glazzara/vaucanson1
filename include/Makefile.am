@@ -241,6 +241,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/design_pattern/syntactic_decorator.hxx		     \
 	vaucanson/misc/bitset.hh				     \
 	vaucanson/misc/bitset.hxx				     \
+	vaucanson/misc/char_traits/pair.hh			     \
+	vaucanson/misc/char_traits/pair.hxx			     \
 	vaucanson/misc/constraints.hh				     \
 	vaucanson/misc/container_ops.hh				     \
 	vaucanson/misc/container_ops.hxx			     \
@@ -277,5 +279,5 @@ nobase_include_HEADERS =					     \
 	vaucanson/tools/dot_format.hh		\
 	vaucanson/tools/dot_format.hxx		\
 	vaucanson/tools/simple_format.hh	\
-	vaucanson/tools/simple_format.hxx				   
+	vaucanson/tools/simple_format.hxx
 

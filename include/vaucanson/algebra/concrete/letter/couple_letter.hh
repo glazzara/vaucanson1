@@ -1,7 +1,7 @@
 // couple_letter.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,11 +33,7 @@
 # include <string>
 # include <iostream>
 
-// Here is functions and traits used to manipulate letters
-// which are couples
-
-// FIXME: Only used function are defined in the char_traits.
-// FIXME: So some functions and types are missing.
+// Here are functions to manipulate pairs.
 
 namespace std {
 
@@ -51,31 +47,12 @@ namespace std {
   template <typename U, typename V>
   ostream& operator<<(ostream& o, basic_string<pair<U, V> > s);
 
-  //! The char trait on pair (needed by basic_string for example)
-  template <typename U, typename V>
-  struct char_traits<pair<U, V> >
-  {
-    typedef pair<U, V> 	char_type;
-
-    static int 
-    compare(const char_type* __s1, const char_type* __s2, size_t __n);
-
-    static char_type* 
-    move(char_type* __s1, const char_type* __s2, size_t __n);
-
-    static char_type* 
-    copy(char_type* __s1, const char_type* __s2, size_t __n);
-
-    static char_type* 
-    assign(char_type* __s, size_t __n, char_type __a);
-  };
-
 } // std
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concrete/letter/couple_letter.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH
