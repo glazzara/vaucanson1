@@ -1,15 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 318)
-(Parent-Version vaucanson 0 317)
+(Project-Version vaucanson 0 319)
+(Parent-Version vaucanson 0 318)
 (Version-Log "
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/Makefile.am: Fix.
+	* include/vaucanson/Makefile.am: Re-Fix.
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 01 Jul 2003 14:25:14 +0200")
+(Checkin-Time "Tue, 01 Jul 2003 14:39:27 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -92,7 +92,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.121 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.122 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -132,7 +132,7 @@
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.25 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.26 600))
 
   (include/vaucanson/config/system.hh (vaucanson/g/1_system.hh 1.12 600))
   (include/vaucanson/config/math.hh (vaucanson/p/42_math.hh 1.2 600))

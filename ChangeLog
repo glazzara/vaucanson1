@@ -1,5 +1,9 @@
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/Makefile.am: Re-Fix.
+
+2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/Makefile.am: Fix.
 
 2003-07-01  Raphaël Poss  <raph@lrde.epita.fr>
