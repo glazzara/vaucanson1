@@ -1,5 +1,10 @@
 2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Fix parsing of
+	weights.
+
+2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/tests/automata/algos/realtime_test.hh: Fix missing namespace 
 	specification.
 	

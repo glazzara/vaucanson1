@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGEBRA_CONCEPT_SEMIRING_BASE_HXX
 # define VCSN_ALGEBRA_CONCEPT_SEMIRING_BASE_HXX
@@ -33,6 +35,7 @@
 # include <vaucanson/algebra/concept/semiring_base.hh>
 
 # include <iostream>
+# include <string>
 
 namespace vcsn {
 
@@ -169,21 +172,20 @@ namespace vcsn {
 	   const std::string&			 s,
 	   typename std::string::const_iterator& i)
   {
-    std::string buf;
-    if ((i != s.end()) && (*i == '-'))
-      {
-	buf += *i;
-	++i;
-      }
-    while ((i != s.end()) && (*i >= '0' && *i <= '9'))
-      {
-	buf += *i;
-	++i;
-      }
-    if (buf == "")
+    if (*i != '-' && (*i < '0' || *i > '9'))
       return false;
-    int ret = atoi(buf.c_str());
-    w = ret;
+    T res;
+    std::stringstream ret;
+    ret << std::string(i, s.end());
+    int init = ret.tellg();
+    ret >> std::dec >> res;
+    if (ret.tellg() < 0)
+      return false;
+    for (int cur = ret.tellg(); (cur - init - 1) && i != s.end(); ++i, ++init)
+      ;
+    if (*i != '.')
+      ++i;
+    w = res;
     return true;
   }
 
