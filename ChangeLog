@@ -1,5 +1,10 @@
 2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/semiring_base.hh   : added.
+	* include/vaucanson/algebra/concept/semiring_base.hxx  : added.
+
+2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/monoid_base.hh  : added.
 	* include/vaucanson/algebra/concept/monoid_base.hxx : added.
 
