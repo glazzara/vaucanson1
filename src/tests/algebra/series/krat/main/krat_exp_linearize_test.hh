@@ -41,6 +41,7 @@
 template <class Expr>
 bool krat_exp_linearize_test(tests::Tester& tg)
 {
+  using namespace utility;
   // Original types (for the input expression).
   typedef Expr						krat_exp_t;
   typedef typename krat_exp_t::value_t			kexp_t;

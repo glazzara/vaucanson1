@@ -61,26 +61,27 @@ namespace vcsn {
   }
 } // vcsn
 
-namespace std {
+namespace utility {
 
   template <typename U, typename V>
-  ostream& operator<<(ostream& o, pair<U, V> p)
+  std::ostream& operator<<(std::ostream& o, std::pair<U, V> p)
   {
     return o << "(" << p.first << "," << p.second << ")";
   }
 
   template <typename U, typename V, class Traits, class Allocator>
-  ostream& operator<<(ostream& o,
-		      basic_string<pair<U, V>, Traits, Allocator> s)
+  std::ostream& operator<<(std::ostream& o,
+    std::basic_string<std::pair<U, V>, Traits, Allocator> s)
   {
-    typename basic_string<pair<U, V>, Traits, Allocator>::const_iterator i;
+    typename
+    std::basic_string<std::pair<U, V>, Traits, Allocator>::const_iterator i;
     for (i = s.begin(); i != s.end(); ++i)
       o << "(" << i->first << "," << i->second << ")";
     return o;
   }
 
   template <typename U, typename V>
-  istream& operator>>(istream& i, pair<U, V>& p)
+  std::istream& operator>>(std::istream& i, std::pair<U, V>& p)
   {
     char c = i.get();
     if (c != '(')
@@ -96,6 +97,6 @@ namespace std {
     return i;
   }
 
-} // std
+} // utility
 
 #endif // VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HXX

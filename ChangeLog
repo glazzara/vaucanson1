@@ -1,3 +1,12 @@
+2004-03-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh: Change
+	  namespace of operators.
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh: Make it
+	  use utility namespace.
+
 2004-03-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/misc/random.hh,

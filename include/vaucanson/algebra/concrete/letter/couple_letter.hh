@@ -74,24 +74,24 @@ namespace vcsn {
 		const std::list<char>& escaped);
 }
 
-namespace std {
+namespace utility {
 
   /// To display a single pair
   /// It assumes that each element of the pair is printable
   /// (i.e. the operator << is defined on it)
   template <typename U, typename V>
-  ostream& operator<<(ostream& o, pair<U, V> p);
+  std::ostream& operator<<(std::ostream& o, std::pair<U, V> p);
 
   /// To display a basic_string of pair (idem)
   template <typename U, typename V, class Traits, class Allocator>
-  ostream& operator<<(ostream& o,
-		      basic_string<pair<U, V>, Traits, Allocator> s);
+  std::ostream& operator<<(std::ostream& o,
+    std::basic_string<std::pair<U, V>, Traits, Allocator> s);
 
   //! To read a single pair.
   template <typename U, typename V>
-  istream& operator>>(istream& i, pair<U, V>& p);
+  std::istream& operator>>(std::istream& i, std::pair<U, V>& p);
 
-} //std
+} // utility
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/concrete/letter/couple_letter.hxx>

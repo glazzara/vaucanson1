@@ -45,6 +45,8 @@
 template <class Expr>
 bool krat_exp_cderivation_linear_test(tests::Tester& tg)
 {
+  using namespace utility;
+  
   typedef Expr						krat_exp_t;
   typedef typename krat_exp_t::value_t			kexp_t;
   typedef typename krat_exp_t::monoid_elt_t		monoid_elt_t;
