@@ -1,3 +1,11 @@
+2004-11-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_transducer_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx,
+	* include/vaucanson/contextual_transducer_functions.thxx: Manually fix 
+	typo for Sylvain's email.
+
 2004-10-26  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* configure.ac: Bump to Vaucanson 0.6.1.
