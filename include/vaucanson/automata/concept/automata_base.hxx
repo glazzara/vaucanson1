@@ -146,6 +146,17 @@ namespace vcsn
   template<typename Self, typename T>
   hstate_t MetaElement<AutomataBase<Self>, T>::add_state()
   {	return value()->add_state(); }
+  
+  template<typename Self, typename T>
+  hstate_t MetaElement<AutomataBase<Self>, T>::select_state(unsigned n)
+  {	
+    state_iterator h = states().begin();
+    
+    for (unsigned i = 0; i < n; i++)
+      h = ++h;
+    
+    return *h;
+  }
 
   template<typename Self, typename T>
   hedge_t MetaElement<AutomataBase<Self>, T>::add_edge(hstate_t from, hstate_t to, const label_t& label)

@@ -120,6 +120,8 @@ namespace vcsn
 
     hstate_t add_state();
 
+    hstate_t select_state(unsigned n);
+
     hedge_t add_edge(hstate_t from, hstate_t to, const label_t& label);
 
     void del_state(hstate_t s);

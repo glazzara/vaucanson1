@@ -23,6 +23,8 @@
 
 # include <vaucanson/misc/ref.hh>
 
+# include <automata/implementation_check/gen_random.hh>
+
 int main(int argc, char **argv)
 {
   using namespace vcsn;
@@ -36,30 +38,39 @@ int main(int argc, char **argv)
     verbose = 1;
   tests::Tester t(verbose);
 
+  gen_auto_t gen(42);
 
-  Element<Automata, 
-    utility::ref <AutomatonImpl<labels_are_series, 
-    Series<NumericalSemiring, Words>,
-    polynom<std::string, int>,
-    ManyLinks<polynom<std::string, int>, NoTag, NoTag>,
-    NoTag,
-    std::map> >
-    > automaton;
+  usual_automaton_t automaton = gen.generate(12, 20);
+
+  hstate_t 
+    s1 = automaton.select_state(2), 
+    s2 = automaton.select_state(7),
+    s3 = automaton.select_state(4);
   
-  automaton.create();
+  automaton.del_state(s1);
+  automaton.del_state(s2);
+  automaton.del_state(s3);
 
-  hstate_t s1 = automaton.add_state();
-  hstate_t s2 = automaton.add_state();
+  // call our function for make consistance on your automata
 
-  hedge_t h1 = automaton.add_letter_edge(s1, s2, 'a');
+  bool final = true;
+  for (usual_automaton_t::edge_iterator i = automaton.edges().begin(); 
+       i != automaton.edges().end();
+       i++)
+    {
+      hstate_t tmp = automaton.aim_of(*i);
+      bool res = false;
 
-  std::set<hstate_t> dest;
+      for (usual_automaton_t::state_iterator j = automaton.states().begin();
+	   j != automaton.states().end();
+	   j++)
+	if (*j == tmp)
+	  res = true;
+      TEST(t, "Label passed", res);
+      final = final && res;
+    }
 
-  std::cout << s1.value() << std::endl;
-
-  automaton.deltac(dest, s1, delta_kind::edges());
-
-  std::cout << *dest.begin() << std::endl;
-
+  TEST(t, "All Labels are passed !", final);
+  
   return 0;
 }

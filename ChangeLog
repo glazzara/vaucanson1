@@ -1,3 +1,19 @@
+2002-07-09  Maxime Rey  <max@lrde.epita.fr>
+
+	* src/tests/automata/implementation_check/check_global_consistance.cc
+	modified and finished
+	* gen_radom.hh modified
+	* gen_random.hxx modified
+
+2002-07-09  Maxime Rey  <max@lrde.epita.fr>
+
+	* vaucanson/automata/concept/automata_base.hh modified:
+       	hstate_t select_state(unsigned n) added
+	* check_gen_random.cc deleted
+	* remplaced by :
+	* src/tests/automata/implementation_check/gen_random.hh added
+	* src/tests/automata/implementation_check/gen_random.hxx added
+
 2002-07-05  Maxime Rey  <max@lrde.epita.fr>
 
 	* Index: 0.53/include/vaucanson/algebra/concept/alphabets_base.hh
