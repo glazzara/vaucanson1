@@ -57,7 +57,7 @@ int main(int argc, char **argv)
       usual_automaton_t normalized = gen.generate(30, 60);
       normalize(normalized);
       
-      TEST(t, "Is Nomalized Automaton", is_normalized(normalized));
+      TEST(t, "Is normalized automaton", is_normalized(normalized));
     } 
 
   return 0;

@@ -1,5 +1,19 @@
 2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.65)
+	* include/vaucanson/algebra/concept/alphabets_base.hxx : 
+	* include/vaucanson/algebra/concept/alphabets_base.hh :
+		add random_letter.
 
+	* src/tests/automata/implementation_check/gen_random.hh : 
+	* src/tests/automata/implementation_check/gen_random.hxx
+		use it.
+
+	* src/tests/automata/algos/check_determinist.cc : minor modif.
+	* src/tests/automata/algos/check_normalized.cc : idem.
+
+
+2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.64)
 	* include/vaucanson/automata/concept/history.hxx : minor modif.
 	* include/vaucanson/automata/concept/history.hh : minor modif.
 

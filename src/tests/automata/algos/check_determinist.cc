@@ -1,5 +1,6 @@
 // check_determinist.cc
 // 
+// $Id$
 // VCSN_HEADER
 
 

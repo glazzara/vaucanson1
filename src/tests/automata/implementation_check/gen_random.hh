@@ -41,27 +41,28 @@ namespace vcsn
   template <class TAutomata> class GenRandomAutomata
   {
   public:
+    typedef typename TAutomata::states_t		  states_t;
+    typedef typename TAutomata::state_iterator		  state_iterator;
+    typedef typename TAutomata::monoid_t::alphabet_t	  alphabet_t;
+    typedef typename alphabet_t::iterator		  alphabet_iterator;
+    typedef typename TAutomata::states_t		  states_t;
+    typedef typename TAutomata::state_iterator		  state_iterator;
+    typedef typename TAutomata::monoid_t::alphabets_elt_t alphabets_elt_t;
     
     GenRandomAutomata();
     GenRandomAutomata(unsigned init);
-  
-
     TAutomata generate(unsigned nb_state, unsigned nb_edge, 
 		       unsigned istate = 1, unsigned fstate = 1);
-
     TAutomata generate_afd(unsigned nb_state, 
 			   unsigned size_alphabet = 2, 
 			   unsigned fstate = 1);
-
     TAutomata generate_normalized(unsigned nb_state, unsigned density = 3);
 
   private:
 
     unsigned alea(unsigned max);
-
     unsigned nb_edge_circle(TAutomata work, hstate_t state);
-
-    void del_edge_circle(TAutomata work, hstate_t state);
+    void     del_edge_circle(TAutomata work, hstate_t state);
    
   };
 

@@ -5,10 +5,9 @@
 #ifndef ALGEBRA_ALPHABETS_BASE_HXX
 # define ALGEBRA_ALPHABETS_BASE_HXX
 
-# include <vaucanson/misc/container_ops.hh>
-
 # include <vaucanson/algebra/concept/alphabets_base.hh>
-
+# include <vaucanson/misc/container_ops.hh>
+# include <vaucanson/misc/random.hh>
 
 namespace vcsn {
 
@@ -101,11 +100,21 @@ namespace vcsn {
 
     iterator it = this->begin();
 
-    for (unsigned k = 0; k < c; ++k)
+    for (int k = 0; k < c; ++k)
       ++it;
 
     return *it;
   }
+
+  template <class Self, typename T>
+  typename alphabet_traits<Self, T>::letter_t
+  MetaElement<AlphabetsBase<Self>, T>::random_letter()
+  {
+    return
+      misc::RandomGenerator<typename alphabet_traits<Self, T>::letter_t>
+      ::do_it();
+  }
+
 
   template<class Self, typename T>
   MetaElement<AlphabetsBase<Self>, T>::MetaElement() 

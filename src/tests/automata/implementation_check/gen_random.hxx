@@ -37,20 +37,22 @@ namespace vcsn
 
   using namespace algebra;
 
-
   template <class TAutomata>
-  GenRandomAutomata<TAutomata>::GenRandomAutomata() {}
+  GenRandomAutomata<TAutomata>::GenRandomAutomata() 
+  {}
 
   template <class TAutomata>
   GenRandomAutomata<TAutomata>::GenRandomAutomata(unsigned init) 
-  { srandom(init); }
+  { 
+    srandom(init); 
+  }
   
   template <class TAutomata>
   TAutomata GenRandomAutomata<TAutomata>::
   generate(unsigned nb_state, unsigned nb_edge, 
 	   unsigned istate = 1, unsigned fstate = 1)
   {
-    // check coherence of automaton
+    // check consistency of automaton
     if (nb_edge < nb_state - 1)
       nb_edge = nb_state - 1;
     if (fstate > nb_state) fstate = nb_state;
@@ -58,25 +60,16 @@ namespace vcsn
     if (istate > nb_state) istate = nb_state;
     if (istate <= 0) istate = 1;
     
-    // file for output format (graphviz)
-    std::filebuf fb;
-    fb.open ("automaton.dot", std::ios::out);
-    std::ostream os(&fb);
-
     TAutomata work;
     work.create();
 
-    typedef typename TAutomata::states_t states_t;
-    typedef typename TAutomata::state_iterator state_iterator;
-    typedef typename TAutomata::monoid_t::alphabets_elt_t alphabets_elt_t;
-    
     for (unsigned i = 0; i < nb_state; i++)
       work.add_state();
 
     // alphabet construction 
     alphabets_elt_t& alpha = work.series().monoid().alphabet();
-    alpha.insert('a');
-    alpha.insert('b');
+    alpha.insert(alpha.random_letter());
+    alpha.insert(alpha.random_letter());
 
     // minimal construction
     state_iterator prev = work.states().begin();
@@ -166,12 +159,6 @@ namespace vcsn
     TAutomata work;
     work.create();
 
-    typedef typename TAutomata::states_t states_t;
-    typedef typename TAutomata::state_iterator state_iterator;
-    typedef typename TAutomata::monoid_t::alphabet_t alphabet_t;
-    typedef typename alphabet_t::iterator alphabet_iterator;
-
-
     for (unsigned i = 0; i < nb_state; i++)
       work.add_state();
 
@@ -258,8 +245,6 @@ namespace vcsn
       if ((tmp = work.select_state(alea(work.states().size()))) != final)
 	work.add_letter_edge(tmp, final,
 			     alpha.choose());
-    
-    misc::dot_dump(os, work, "test");
     
     return work;
   }
