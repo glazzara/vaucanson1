@@ -1,3 +1,16 @@
+2003-03-31  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx
+	(match_nodeConstant),
+	include/vaucanson/algorithms/krat_exp_cderivation.hxx
+	(match_nodeConstant): Remove the link to vcsn::rat, so 
+	derivation/cderivation are implementation independant (so now pass the
+	sanity check).
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Add an
+	op_convert function to convert std::string to rat::exp
+	(as a constant). So permit the Element constructor for rat::exp to
+	have a string as value argument.
+
 2003-03-26  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/Makefile.am: Update source list.
@@ -5,7 +18,7 @@
 	the test, when two random letters are equals.
 	* src/tests/algebra/series/krat/krat_exp_linearize_test.hh
 	include/vaucanson/algorithms/krat_exp_linearize.hxx,
-	include/vaucanson/algorithms/krat_exp_linearize.hh: Move from ...
+	include/vaucanson/algorithms/krat_exp_linearize.hh: Move to ...
 	* src/tests/algebra/series/krat/krat_exp_realtime_test.hh,
 	include/vaucanson/algorithms/krat_exp_realtime.hxx,
 	include/vaucanson/algorithms/krat_exp_realtime.hh: ... These.

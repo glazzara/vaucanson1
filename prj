@@ -1,23 +1,22 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 181)
-(Parent-Version vaucanson 0 180)
-(Version-Log "2003-03-26  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 182)
+(Parent-Version vaucanson 0 181)
+(Version-Log "2003-03-31  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/Makefile.am: Update source list.
-	* src/tests/algebra/series/misc/series_test.hh: Fix a small bug in
-	the test, when two random letters are equals.
-	* src/tests/algebra/series/krat/krat_exp_linearize_test.hh
-	include/vaucanson/algorithms/krat_exp_linearize.hxx,
-	include/vaucanson/algorithms/krat_exp_linearize.hh: Move from ...
-	* src/tests/algebra/series/krat/krat_exp_realtime_test.hh,
-	include/vaucanson/algorithms/krat_exp_realtime.hxx,
-	include/vaucanson/algorithms/krat_exp_realtime.hh: ... These.
-	* src/tests/algebra/series/krat/Makefile.am: Move
-	'krat_exp_linearize_test.hh' to 'krat_exp_realtime_test.hh'.")
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx
+	(match_nodeConstant),
+	include/vaucanson/algorithms/krat_exp_cderivation.hxx
+	(match_nodeConstant): Remove the link to vcsn::rat, so 
+	derivation/cderivation are implementation independant (so now pass the
+	sanity check).
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Add an
+	op_convert function to convert std::string to rat::exp
+	(as a constant). So permit the Element constructor for rat::exp to
+	have a string as value argument.")
 (New-Version-Log "")
-(Checkin-Time "Wed, 26 Mar 2003 11:23:51 +0100")
+(Checkin-Time "Mon, 31 Mar 2003 13:44:22 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -98,7 +97,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.121 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.122 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -157,8 +156,8 @@
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.7 600))
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.5 600))
-  (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.14 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.12 600))
+  (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.15 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.13 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.2 600))
@@ -206,7 +205,7 @@
   (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.4 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.3 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.7 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.6 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.7 600))
   
   
   (include/vaucanson/algorithms/moore.hh (vaucanson/e/24_moore.hh 1.6 600))
@@ -453,7 +452,7 @@
 ;; Files added by populate at Fri, 07 Mar 2003 16:54:26 +0100,
 ;; to version 0.170(w), by clavei_t:
 
-  (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.4 600))
+  (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.5 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.1 600))
 
 ;; Files deleted by depopulate at Mon, 17 Mar 2003 21:14:58 +0100,

@@ -142,7 +142,7 @@ namespace vcsn {
 			      SELECTOR2(Series<W, M>),
 			      SELECTOR(M),
 			      const oTm& m_value);
-
+  
   template<typename Tm, typename Tw, typename W, typename M, typename oTw>
   rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>),
 			      SELECTOR2(Series<W, M>),

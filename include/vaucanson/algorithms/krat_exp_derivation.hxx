@@ -107,10 +107,7 @@ namespace vcsn {
 	  if (m.length() == 1)
 	    return identity_as<T>::of(exp_.set());
 	  else
-	    return
-	      rat::exp<monoid_elt_value_t, weight_value_t> (
-		new rat::Constant<monoid_elt_value_t, weight_value_t> (
-		  m.substr(1)));
+	    return Element<Series, T> (exp_.set(), m.substr(1));
 	}
       else
 	return zero_as<T>::of(exp_.set());

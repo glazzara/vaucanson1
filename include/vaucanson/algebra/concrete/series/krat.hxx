@@ -398,6 +398,16 @@ namespace vcsn {
   /*---------------------.
     | foreign constructors |
     `---------------------*/
+
+    template<typename Tm, typename Tw, typename M, typename W>
+    inline
+    rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>), 
+				SELECTOR2(Series<M, W>),
+				const std::string& m_value)
+    { 
+      return new rat::Constant<Tm, Tw>(m_value); 
+    }
+
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
   inline
   rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>),
@@ -410,7 +420,7 @@ namespace vcsn {
     if (m_value == identity_value(SELECT(M), SELECT(oTm)))
       return rat::exp<Tm, Tw>::one();
     return rat::exp<Tm, Tw>::constant(op_convert(SELECT(Tm), SELECT(M), 
-						 m_value));
+    						 m_value));
   }
 
   template<typename Tm, typename Tw, typename W, typename M, typename oTw>
