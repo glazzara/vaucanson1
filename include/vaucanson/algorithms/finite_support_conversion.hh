@@ -55,7 +55,7 @@ namespace vcsn
    * @param dst The destination application.
    */
   // INTERFACE: void finite_support_convert(Exp& dst, const Serie& org) { return vcsn::finite_support_convert(dst, org); }
-  // INTERFACE: void finite_support_convert(Serie& dst, const Exp& org) { return vcsn::finite_support_convert(dst, org); }
+  // INTERFACE: void finite_support_convert(Serie& dst, const Exp& org) { return vcsn::finite_support_convert(dst, org); }
   template<typename S, typename T, typename Ss, typename Ts>
   void finite_support_convert(Element<S, T>& dst, const Element<Ss, Ts>& org);
 

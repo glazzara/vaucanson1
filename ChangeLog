@@ -1,5 +1,10 @@
 2003-09-05  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/finite_support_conversion.hh: Remove
+	  invalid character.
+
+2003-09-05  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx:
 	  Correct namespaces and op_mul calls.
 
