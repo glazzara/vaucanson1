@@ -1,5 +1,13 @@
 2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/accessible.hh: Equip for
+	`vaucanswig'.
+	* include/vaucanson/algorithms/backward_closure.hh,
+	include/vaucanson/algorithms/aut_to_exp.hh,
+	include/vaucanson/algorithms/aci_canonical.hh: Likewise.	
+
+2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/fundamental/syntactic_decorator.hxx,
 	include/vaucanson/algebra/concept/alphabets_base.hxx,
 	include/vaucanson/fundamental/slots.hxx: Fix contract.

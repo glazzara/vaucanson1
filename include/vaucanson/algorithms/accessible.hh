@@ -58,6 +58,8 @@ namespace vcsn {
    *
    * @see accessible(), coaccessible(), coaccessible_states()
    */
+  // INTERFACE: HList accessible_states(const Automaton& a) { return list_of_set(vcsn::accessible_states(*a)); }
+  // INTERFACE: HList accessible_states(const GenAutomaton& a) { return list_of_set(vcsn::accessible_states(*a)); }
   template<typename A, typename T>
   std::set<hstate_t>
   accessible_states(const Element<A, T>& a);
@@ -73,6 +75,8 @@ namespace vcsn {
    * @see accessible_here(), accessible_states(), coaccessible(),
    *      coaccessible_states()
    */
+  // INTERFACE: Automaton accessible(const Automaton& a) { return vcsn::accessible(*a); }
+  // INTERFACE: GenAutomaton accessible(const GenAutomaton& a) { return vcsn::accessible(*a); }
   template<typename A, typename T>
   Element<A, T>
   accessible(const Element<A, T>& a);
@@ -88,6 +92,8 @@ namespace vcsn {
    *
    * @see accessible(), accessible_states(), coaccessible(), coaccessible_states()
    */
+  // INTERFACE: void accessible_here(Automaton& a) { return vcsn::accessible_here(*a); }
+  // INTERFACE: void accessible_here(GenAutomaton& a) { return vcsn::accessible_here(*a); }
   template<typename A, typename T>
   void
   accessible_here(Element<A, T>& a);
@@ -102,6 +108,8 @@ namespace vcsn {
    *
    * @see coaccessible(), accessible(), accessible_states()
    */
+  // INTERFACE: HList coaccessible_states(const Automaton& a) { return list_of_set(vcsn::coaccessible_states(*a)); }
+  // INTERFACE: HList coaccessible_states(const GenAutomaton& a) { return list_of_set(vcsn::coaccessible_states(*a)); }
   template<typename A, typename T>
   std::set<hstate_t>
   coaccessible_states(const Element<A, T>& a);
@@ -118,6 +126,8 @@ namespace vcsn {
    * @see coaccessible_here(), coaccessible_states(), accessible(),
    *      accessible_states()
    */
+  // INTERFACE: Automaton coaccessible(const Automaton& a) { return vcsn::coaccessible(*a); }
+  // INTERFACE: GenAutomaton coaccessible(const GenAutomaton& a) { return vcsn::coaccessible(*a); }
   template<typename A, typename T>
   Element<A, T>
   coaccessible(const Element<A, T>& a);
@@ -133,6 +143,8 @@ namespace vcsn {
    *
    * @see coaccessible(), coaccessible_states(), accessible(), accessible_states()
    */
+  // INTERFACE: void coaccessible_here(Automaton& a) { return vcsn::coaccessible_here(*a); }
+  // INTERFACE: void coaccessible_here(GenAutomaton& a) { return vcsn::coaccessible_here(*a); }
   template<typename A, typename T>
   void
   coaccessible_here(Element<A, T>& a);

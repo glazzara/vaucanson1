@@ -12,11 +12,11 @@
 
 /*** Convenient macros ***/
 #define CHECK_STATE(Self,State) 		\
-   if (!(Self)->auto_.has_state(State)) 		\
+   if (!(Self)->auto_->has_state(State)) 		\
      throw std::runtime_error("no such state")
 
 #define CHECK_EDGE(Self, Edge)			\
-   if (!(Self)->auto_.has_edge(Edge))			\
+   if (!(Self)->auto_->has_edge(Edge))			\
      throw std::runtime_error("no such edge")
 
 #define CHECK_LETTER(Self, L)			\
@@ -33,95 +33,121 @@ struct vcsn_automaton : vcsn::virtual_automaton
 {
   AUTOMATON_TYPES(Auto)
 
+    
+
     vcsn_automaton(const Auto& other)
-      : ctx_(other.set()), auto_(other)
+      : ctx_(new vcsn_context<Auto>(other.set())), auto_(new Auto(other))
   {}
     vcsn_automaton(const automata_set_t& other)
-      : ctx_(other), auto_(other)
+      : ctx_(new vcsn_context<Auto>(other)), auto_(new Auto(other))
   {}
     vcsn_automaton(const vcsn_automaton& other)
-      : ctx_(other.ctx_), auto_(other.auto_)
+      : ctx_(new vcsn_context<Auto>(*other.ctx_)), auto_(new Auto(*other.auto_))
   {}
 
   vcsn_automaton(const vcsn_context<Auto>& ctx)
-    : ctx_(ctx), auto_(ctx.automata_set())
+    : ctx_(new vcsn_context<Auto>(ctx)), auto_(new Auto(ctx_->automata_set()))
   {}
 
-  const automaton_t& the_automaton() const { return auto_; }
-  const automata_set_t &set() const { return auto_.set(); }
+  vcsn_automaton()
+    : ctx_(0), auto_(0)
+  {}
+
+  vcsn_automaton& operator=(const vcsn_automaton& other)
+  {
+    delete auto_;
+    delete ctx_;
+    ctx_ = new vcsn_context<Auto>(*other.ctx_);
+    auto_ = new Auto(*other.auto_);
+  }
+
+  vcsn_automaton& operator=(const Auto& other)
+  {
+    delete auto_;
+    delete ctx_;
+    ctx_ = new vcsn_context<Auto>(other.set());
+    auto_ = new Auto(other);
+  }
+
+  const automaton_t& the_automaton() const { return (*auto_); }
+
+  const automaton_t& operator*() const { return (*auto_); }
+  automaton_t& operator*() { return (*auto_); }
+
+  const automata_set_t &set() const { return (*auto_).set(); }
 
   serie_t serie_of(int e) const
   {
     CHECK_EDGE(this, e);
-    return auto_.serie_of(e);
+    return (*auto_).serie_of(e);
   }
 
   int add_serie_edge(int from, int to, const serie_t& s)
   {
     CHECK_STATE(this, from); CHECK_STATE(this, to);
-    return auto_.add_serie_edge(from, to, s);
+    return (*auto_).add_serie_edge(from, to, s);
   }
 
   serie_t get_initial(int state) const
   {
     CHECK_STATE(this, state);
-    return auto_.get_initial(state);
+    return (*auto_).get_initial(state);
   }
 
   serie_t get_final(int state) const
   {
     CHECK_STATE(this, state);
-    return auto_.get_final(state);
+    return (*auto_).get_final(state);
   }
 
   void set_initial(int state, const serie_t& s)
   {
     CHECK_STATE(this, state);
-    return auto_.set_initial(state, s);
+    return (*auto_).set_initial(state, s);
   }
 
   void set_final(int state, const serie_t& s)
   {
     CHECK_STATE(this, state);
-    return auto_.set_final(state, s);
+    return (*auto_).set_final(state, s);
   }
 
 
   virtual const vcsn_context<Auto> &context() const
-  { return ctx_; }
+  { return *ctx_; }
   
-  virtual bool has_state(int s) const { return auto_.has_state(s); }
-  virtual bool has_edge(int e) const { return auto_.has_edge(e); }
+  virtual bool has_state(int s) const { return (*auto_).has_state(s); }
+  virtual bool has_edge(int e) const { return (*auto_).has_edge(e); }
   
   virtual void del_state(int s)
   { 
     CHECK_STATE(this, s);
-    return auto_.del_state(s);
+    return (*auto_).del_state(s);
   }
 
   virtual void del_edge(int e)
   {
     CHECK_EDGE(this, e);
-    return auto_.del_edge(e);
+    return (*auto_).del_edge(e);
   }
 
   virtual std::list<int> states() const
   {
-    std::list<int> ret(auto_.states().begin(), auto_.states().end());
+    std::list<int> ret((*auto_).states().begin(), (*auto_).states().end());
   }
 
   virtual std::list<int> edges() const
   {
-    std::list<int> ret(auto_.edges().begin(), auto_.edges().end());
+    std::list<int> ret((*auto_).edges().begin(), (*auto_).edges().end());
   }
 
-  virtual int add_state() { return auto_.add_state(); }
+  virtual int add_state() { return (*auto_).add_state(); }
 
   // Creation of spontaneous edge between two states
   virtual int add_spontaneous(int from, int to)  
   {
     CHECK_STATE(this, from); CHECK_STATE(this, to);
-    return auto_.add_spontaneous(from, to);
+    return (*auto_).add_spontaneous(from, to);
   }
   
   // Creation of edge with single letter label
@@ -129,7 +155,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   { 
     CHECK_STATE(this, from); CHECK_STATE(this, to);
     CHECK_LETTER(this, l);
-    return auto_.add_letter_edge(from, to, l);
+    return (*auto_).add_letter_edge(from, to, l);
   }
   
   // Creation of edge with weight on the left
@@ -142,7 +168,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = WEIGHT(this, w) * s;
-    return auto_.add_serie_edge(from, to, s);
+    return (*auto_).add_serie_edge(from, to, s);
   }
 
   // Creation of edge with weight on the right
@@ -155,7 +181,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = s * WEIGHT(this, w);
-    return auto_.add_serie_edge(from, to, s);
+    return (*auto_).add_serie_edge(from, to, s);
   }
 
   // Creation of edge with weight on left and right
@@ -168,7 +194,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = WEIGHT(this, lw) * s * WEIGHT(this, rw);
-    return auto_.add_serie_edge(from, to, s);
+    return (*auto_).add_serie_edge(from, to, s);
   }
 
   // Edge label retrieval
@@ -176,34 +202,34 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {
     CHECK_EDGE(this, edge);
     std::ostringstream s;
-    s << auto_.serie_of(edge);
+    s << (*auto_).serie_of(edge);
     return s.str();
   }
 
   virtual int origin_of(int edge) const 
   {
     CHECK_EDGE(this, edge);
-    return auto_.origin_of(edge);
+    return (*auto_).origin_of(edge);
   }
 
   virtual int aim_of(int edge) const 
   {
     CHECK_EDGE(this, edge);
-    return auto_.aim_of(edge);
+    return (*auto_).aim_of(edge);
   }
 
 #define DefInitialFinalMembers(InitialFinal)					\
   /* Clear the initial or final set */						\
   virtual void clear_## InitialFinal ()						\
   {										\
-    return auto_.clear_## InitialFinal ();					\
+    return (*auto_).clear_## InitialFinal ();					\
   }										\
 										\
   /* Access to the initial and final sets */					\
   virtual std::list<int> InitialFinal () const					\
   {										\
-    std::list<int> ret(auto_. InitialFinal ().begin(),				\
-		       auto_. InitialFinal ().end());				\
+    std::list<int> ret((*auto_). InitialFinal ().begin(),				\
+		       (*auto_). InitialFinal ().end());				\
     return ret;									\
   }										\
 										\
@@ -211,21 +237,21 @@ struct vcsn_automaton : vcsn::virtual_automaton
   virtual bool is_## InitialFinal (int state) const				\
   {										\
     CHECK_STATE(this, state);							\
-    return auto_.is_## InitialFinal(state);					\
+    return (*auto_).is_## InitialFinal(state);					\
   }										\
 										\
   /* Unset a state as initial or final */					\
   virtual void unset_## InitialFinal (int state)				\
   {										\
     CHECK_STATE(this, state);							\
-    return auto_.unset_## InitialFinal(state);					\
+    return (*auto_).unset_## InitialFinal(state);					\
   }										\
 										\
   /* Set a state initial or final without weight */				\
   virtual void set_## InitialFinal (int state)					\
   {										\
     CHECK_STATE(this, state);							\
-    return auto_.set_## InitialFinal(state);					\
+    return (*auto_).set_## InitialFinal(state);					\
   }										\
 										\
   /*  Set a state initial or final with an associated letter */			\
@@ -233,7 +259,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {										\
     CHECK_STATE(this, state);							\
     CHECK_LETTER(this, letter);							\
-    return auto_.set_## InitialFinal (state, WORD_OF_LETTER(this, letter));	\
+    return (*auto_).set_## InitialFinal (state, WORD_OF_LETTER(this, letter));	\
   }										\
 										\
   /* Set a state initial or final with an associated weight and letter */	\
@@ -245,7 +271,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));						\
     s = WORD_OF_LETTER(this, letter);						\
     s = WEIGHT(this, weight) * s;						\
-    return auto_.set_## InitialFinal (state, s);				\
+    return (*auto_).set_## InitialFinal (state, s);				\
   }										\
   virtual void set_## InitialFinal ##_rw(int state, char letter, int weight)	\
   {										\
@@ -255,7 +281,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));						\
     s = WORD_OF_LETTER(this, letter);						\
     s = s * WEIGHT(this, weight);						\
-    return auto_.set_## InitialFinal (state, s);				\
+    return (*auto_).set_## InitialFinal (state, s);				\
   }										\
   virtual void set_## InitialFinal ##_lrw(int state,				\
 				  int lweight, char letter, int rweight)	\
@@ -266,7 +292,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));						\
     s = WORD_OF_LETTER(this, letter);						\
     s = WEIGHT(this, lweight) * s * WEIGHT(this, rweight);			\
-    return auto_.set_## InitialFinal (state, s);				\
+    return (*auto_).set_## InitialFinal (state, s);				\
   }										\
 										\
   /* Set a state initial or final with an associated weight and identity */	\
@@ -277,7 +303,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));						\
     s = SERIES_OF(this).identity(SELECT(serie_value_t));			\
     s = WEIGHT(this, weight) * s;						\
-    return auto_.set_## InitialFinal (state, s);				\
+    return (*auto_).set_## InitialFinal (state, s);				\
   }										\
   virtual void set_## InitialFinal ##_rw(int state, int weight)			\
   {										\
@@ -286,7 +312,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));						\
     s = SERIES_OF(this).identity(SELECT(serie_value_t));			\
     s = s * WEIGHT(this, weight);						\
-    return auto_.set_## InitialFinal (state, s);				\
+    return (*auto_).set_## InitialFinal (state, s);				\
   }										\
   virtual void set_## InitialFinal ##_lrw(int state, int lweight, int rweight)	\
   {										\
@@ -295,7 +321,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));						\
     s = SERIES_OF(this).identity(SELECT(serie_value_t));			\
     s = WEIGHT(this, lweight) * s * WEIGHT(this, rweight);			\
-    return auto_.set_## InitialFinal (state, s);				\
+    return (*auto_).set_## InitialFinal (state, s);				\
   }							\
 							\
   virtual std::string InitialFinal ##_label(int state)	\
@@ -303,7 +329,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);				\
     							\
     std::ostringstream os;				\
-    os << auto_.get_## InitialFinal(state);		\
+    os << (*auto_).get_## InitialFinal(state);		\
     return os.str();					\
   }
 
@@ -322,9 +348,9 @@ struct vcsn_automaton : vcsn::virtual_automaton
     std::insert_iterator<std::list<int> > i(ret, ret.begin());			\
 										\
     if (states_only)								\
-      auto_.Direction(i, from, vcsn::delta_kind::states());			\
+      (*auto_).Direction(i, from, vcsn::delta_kind::states());			\
     else									\
-      auto_.Direction(i, from, vcsn::delta_kind::edges());			\
+      (*auto_).Direction(i, from, vcsn::delta_kind::edges());			\
 										\
     return ret;									\
   }										\
@@ -339,9 +365,9 @@ struct vcsn_automaton : vcsn::virtual_automaton
     std::insert_iterator<std::list<int> > i(ret, ret.begin());			\
 										\
     if (states_only)								\
-      auto_.letter_## Direction(i, from, l, vcsn::delta_kind::states());	\
+      (*auto_).letter_## Direction(i, from, l, vcsn::delta_kind::states());	\
     else									\
-      auto_.letter_## Direction(i, from, l, vcsn::delta_kind::edges());		\
+      (*auto_).letter_## Direction(i, from, l, vcsn::delta_kind::edges());		\
 										\
     return ret;									\
   }										\
@@ -355,9 +381,9 @@ struct vcsn_automaton : vcsn::virtual_automaton
     std::insert_iterator<std::list<int> > i(ret, ret.begin());			\
 										\
     if (states_only)								\
-      auto_.spontaneous_## Direction(i, from, vcsn::delta_kind::states());	\
+      (*auto_).spontaneous_## Direction(i, from, vcsn::delta_kind::states());	\
     else									\
-      auto_.spontaneous_## Direction(i, from, vcsn::delta_kind::edges());	\
+      (*auto_).spontaneous_## Direction(i, from, vcsn::delta_kind::edges());	\
       										\
     return ret;									\
   }
@@ -368,22 +394,22 @@ struct vcsn_automaton : vcsn::virtual_automaton
   virtual std::string describe() const
   {
     std::ostringstream s;
-    s << auto_;
+    s << (*auto_);
     return s.str();
   }
 
   virtual std::string as_dot(const char *name = "automaton") const
   {
     std::ostringstream st;
-    vcsn::misc::dot_dump(st, auto_, name);
+    vcsn::misc::dot_dump(st, (*auto_), name);
     return st.str();
   }
 
-  virtual ~vcsn_automaton() {}
+  virtual ~vcsn_automaton() { delete auto_; delete ctx_; }
 
 protected:
-  vcsn_context<Auto> ctx_;
-  Auto auto_;
+  vcsn_context<Auto>* ctx_;
+  Auto *auto_;
 };
 
 #define MAKE_VAUTO_TYPES(FAMILY)					\

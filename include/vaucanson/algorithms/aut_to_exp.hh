@@ -63,6 +63,7 @@ namespace vcsn {
    * @return a rational serie that describes the language of the automaton.
    * @see generalized
    */
+  // INTERFACE: Exp aut_to_exp(const GenAutomaton& a) { return vcsn::aut_to_exp(*a); }
   template<typename A, typename T>
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a);

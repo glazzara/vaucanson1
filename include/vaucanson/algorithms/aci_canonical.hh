@@ -38,6 +38,7 @@ namespace vcsn {
   /*! \addtogroup algorithms */  /* @{ */
 
   //! Transform a krat expression into its canonical form, following aci-rules. 
+  // INTERFACE: Exp canonical(const Exp& e) { return vcsn::canonical(e); }
   template <class Series, class T>
   Element<Series, T>
   canonical(const Element<Series, T>& exp);

@@ -2,6 +2,10 @@
 
 %include exception.i
 
+%{
+#include <stdexcept>
+%}
+
 %define START_PROTECT()
 %exception {
   try {

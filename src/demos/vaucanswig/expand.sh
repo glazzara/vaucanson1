@@ -1,24 +1,161 @@
 #! /bin/sh
 
+set -e
+
 [ -d "$1" -a -f "$1/expand.sh" -a -f "$1/ChangeLog" ] || \
   { echo "usage: $0 <vaucanswig srcdir>" >&2; exit 1; }
 
 VAUCANSWIG=`cd $1 && pwd`
+VAUC=$VAUCANSWIG/../../../include
 
 mkdir -p "$VAUCANSWIG/src"
 mkdir -p "$VAUCANSWIG/python"
-cp -f "$VAUCANSWIG"/meta/vauto.cc "$VAUCANSWIG"/meta/vcontext.cc "$VAUCANSWIG/python"
 
 MODULES="core $MODULES"
+ALGS=""
 
-for cat in usual numerical tropical_max tropical_min; do
-  for mod in context automaton; do
+#### ALGORITHM DATABASE RETRIEVAL ####
+
+ALGDB=$VAUCANSWIG/src/vaucanswig_algorithms.i
+dbapp() {
+  echo "$@" >>"$ALGDB"
+}
+
+start_algorithms() {
+  # General database header
+  echo "%include vaucanswig_algo_common.i" >"$ALGDB"
+  dbapp "%define decl_algorithms(Kind)"
+  dbapp "%include vaucanswig_exception.i"
+  dbapp "algo_common_decls(Kind)"
+}
+
+end_algorithms() {
+  dbapp "%inline %{"
+  dbapp "struct empty {};"
+  dbapp "struct Kind :"
+  for af in $ALGS; do
+    dbapp "Kind ##_$af," 
+  done
+  dbapp " empty {};"
+  dbapp "%}"
+  dbapp "%enddef"
+}
+
+afapp() {
+  AF=$1
+  AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
+  shift
+  echo "$@" >>"$AFDB"
+}
+
+start_family() {
+  AF=$1
+  AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
+  echo >"$AFDB"
+  afapp "$AF" "%include vaucanswig_algo_common.i"
+  afapp "$AF" "%{"
+  afapp "$AF" "#include <vaucanson/algorithms/$AF.hh>"
+  afapp "$AF" "%}"
+}
+
+do_family_interface_impl() {
+  AF=$1
+  AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
+  afapp "$AF" "%define alg_${AF}_interface_impl(Automaton, GenAutomaton, Serie, Exp, HList)"
+  cat "$VAUC/vaucanson/algorithms/$AF.hh" \
+     | sed -n -e '/^ *\/\/ INTERFACE:/{s,^ *// INTERFACE:,static ,g;p;}' \
+     >>"$AFDB"
+  afapp "$AF" "%enddef"
+}
+
+do_family_interface() {
+  AF=$1
+  AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
+  afapp "$AF" "%define alg_${AF}_interface(Automaton, GenAutomaton, Serie, Exp, HList)"
+  cat "$VAUC/vaucanson/algorithms/$AF.hh" \
+     | sed -n -e '/^ *\/\/ INTERFACE:/{s,^ *// INTERFACE: \([^{]*\).*$,static \1;,g;p;}' \
+     >>"$AFDB"
+  afapp "$AF" "%enddef"
+}
+
+start_algorithms
+
+# Loop over all algorithm families
+for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh`; do
+
+   # Test whether the file declares some interfaces
+   if grep "^ *// INTERFACE:" <"$VAUC/$family_header" >/dev/null 2>&1; then
+
+      # Yes, retrieve the algorithm family name
+      family_name=`basename "$family_header" .hh`
+
+      # Create a sub-database with its header
+      start_family "$family_name"
+
+      do_family_interface "$family_name"
+      do_family_interface_impl "$family_name"
+
+      afapp "$family_name"  "%define alg_interface_${family_name}(Kind)"
+      afapp "$family_name"  "%{"
+      afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
+      afapp "$family_name"  "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_serie_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
+      afapp "$family_name"  "};"
+      afapp "$family_name"  "%}"
+      afapp "$family_name"  "%enddef"
+      afapp "$family_name"  "%define decl_alg_${family_name}(Kind)"
+      afapp "$family_name"  "algo_common_decls(Kind)"
+      afapp "$family_name"  "%{"
+      afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
+      afapp "$family_name"  "alg_${family_name}_interface_impl(Kind ##_types::Kind ##_auto_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_serie_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
+      afapp "$family_name"  "};"
+      afapp "$family_name"  "%}"
+      afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
+      afapp "$family_name"  "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_serie_t, \\"
+      afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
+      afapp "$family_name"  "};"
+      afapp "$family_name"  "%enddef"
+     
+     # Mention the sub-database in the general database
+     dbapp "%import vaucanswig_## Kind ##_alg_${family_name}.i"
+     dbapp "%include vaucanswig_alg_${family_name}.i"
+     dbapp "alg_interface_${family_name}(Kind)"
+
+     # Add the sub-database to the algorithm category
+     ALGS="$ALGS alg_${family_name}"   
+   fi
+done
+
+end_algorithms 
+#### #####
+
+if [ "x$2" = "xshort" ]; then 
+  kinds="usual"
+else
+  kinds="usual numerical tropical_max tropical_min"
+fi
+
+for cat in $kinds; do
+  for mod in context automaton $ALGS algorithms; do
      cat >"$VAUCANSWIG/src/vaucanswig_${cat}_${mod}.i" <<EOF
 %include vaucanswig_${mod}.i
 %module vaucanswig_${cat}_${mod}
 decl_${mod}(${cat})
 EOF
      MODULES="$MODULES ${cat}_${mod}"
+  done
+  echo "${cat}_context" >"$VAUCANSWIG/src/${cat}_automaton.deps"
+  echo >"$VAUCANSWIG/src/${cat}_algorithms.deps"
+  for alg in $ALGS; do
+    echo "${cat}_automaton" >"$VAUCANSWIG/src/${cat}_${alg}.deps"
+    echo "${cat}_${alg}" >>"$VAUCANSWIG/src/${cat}_algorithms.deps"
   done
 done
 
@@ -72,9 +209,12 @@ dump_python()
       if [ "$mod" = "core" ]; then
         echo "libvs_core_la_LIBADD = ../meta/libvv.la -lswigpy"
       else
-        if echo "$mod" | grep "_automaton" >/dev/null 2>&1; then
-           ctx=`echo "$mod" | sed -e 's,_automaton,,g'`
-           echo "libvs_${mod}_la_LIBADD = libvs_${ctx}_context.la"
+        if test -r "$VAUCANSWIG/src/$mod.deps"; then
+           echo -n "libvs_${mod}_la_LIBADD ="
+           for dep in `cat "$VAUCANSWIG/src/$mod.deps"`; do
+              echo -n " libvs_${dep}.la" 
+           done
+           echo
         else
            echo "libvs_${mod}_la_LIBADD = libvs_core.la"
         fi

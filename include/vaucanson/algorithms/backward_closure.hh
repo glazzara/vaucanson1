@@ -51,6 +51,8 @@ namespace vcsn {
    * @see forward_closure
    * @see backward_closure_here
    */
+  // INTERFACE: void backward_closure_here(Automaton& a) { return vcsn::backward_closure_here(*a); }
+  // INTERFACE: void backward_closure_here(GenAutomaton& a) { return vcsn::backward_closure_here(*a); }
   template<typename A, typename T>
   void
   backward_closure_here(Element<A, T>& a);
@@ -65,6 +67,8 @@ namespace vcsn {
    * @see forward_closure_here
    * @see backward_closure_here
    */
+  // INTERFACE: Automaton backward_closure(const Automaton& a) { return vcsn::backward_closure(*a); }
+  // INTERFACE: GenAutomaton backward_closure(const GenAutomaton& a) { return vcsn::backward_closure(*a); }
   template<typename A, typename T>
   Element<A, T>
   backward_closure(const Element<A, T>& a);
