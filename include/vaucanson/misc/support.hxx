@@ -75,6 +75,13 @@ namespace utility {
     return o.i != i;
   }
 
+  template <class C>
+  bool
+  SupportIterator<C>::operator == (const SupportIterator& o) const
+  {
+    return !(*this != o);
+  }
+
   //! support<map<U, T> > is a const adapter of std::map to container.
   template <class U, class T>
   inline
@@ -112,6 +119,13 @@ namespace utility {
   Support<std::map<U, T> >::end() const
   {
     return iterator(m_.end());
+  }
+
+  template <class U, class T>
+  U
+  Support< std::map<U, T> >::max() const
+  {
+    return *max_element(begin(), end());
   }
 
   //! SparseIterator
@@ -233,6 +247,17 @@ namespace utility {
   {
     //    std::cerr << this->to_string() << std::endl;
     return to_ < from_ ? 0 : to_ - from_ + 1 - excluded_.size();
+  }
+
+  template <class Integer, class ExcludedContainer>
+  typename SparseInterval<Integer, ExcludedContainer>::integer_t
+  SparseInterval<Integer, ExcludedContainer>::max() const
+  {
+    unsigned r = to_;
+    
+    while (excluded_.find(r) != excluded_.end())
+      --r;
+    return r;
   }
 
   template <class Integer, class ExcludedContainer>

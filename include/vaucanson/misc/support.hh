@@ -63,6 +63,7 @@ namespace utility {
     self_t&	operator++();
     self_t	operator++(int);
     bool	operator!=(const SupportIterator&) const;
+    bool	operator==(const SupportIterator&) const;
 
   private:
     map_iterator	i;
@@ -83,6 +84,7 @@ namespace utility {
     iterator end() const;
     unsigned size() const;
 
+    U max() const;
   private:
     const std::map<U, T>&	m_;
   };
@@ -156,6 +158,7 @@ namespace utility {
     iterator begin() const;
     iterator end() const;
     unsigned size() const;
+    integer_t max() const;
     std::string to_string() const;
 
   private:
