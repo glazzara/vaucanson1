@@ -1,7 +1,7 @@
 // krat.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,6 +39,13 @@
 # include <vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx>
 # include <vaucanson/algebra/concrete/series/krat_exp_support.hxx>
 # include <vaucanson/algebra/concrete/series/krat_exp_transpose.hxx>
+
+# include <vaucanson/algorithms/eval.hh>
+# include <vaucanson/algorithms/standard_of.hh>
+
+# include <vaucanson/algebra/concrete/series/polynoms.hh>
+# include <vaucanson/automata/concept/automata.hh>
+# include <vaucanson/automata/concrete/graph.hh>
 
 # include <vaucanson/misc/contract.hh>
 
@@ -621,28 +628,25 @@ namespace vcsn {
 		   const rat::exp<Tm, Tw>& p,
 		   const oTm& m)
   { 
-    // FIXME: this does not work since SupportMatcher does not work.
-    typedef vcsn::SupportMatcher<algebra::Series<W, M>, rat::exp<Tm, Tw>,
-      algebra::DispatchFunction<rat::exp<Tm, Tw> > > matcher_t;
-    typedef typename matcher_t::ext_support_t ext_support_t;
-    // we can do it only on polynomial expresssion.
-   matcher_t matcher(s);
+    typedef typename algebra::Series<W,M>			series_t;
+    typedef typename algebra::polynom<Tm, Tw>			series_value_t;
+    typedef typename rat::exp<Tm, Tw>				exp_t;
+    typedef Graph
+      <
+      labels_are_series,
+      Tm,
+      Tw,
+      series_value_t,
+      Tm,
+      NoTag
+      >
+      automaton_impl_t;
+    typedef Element<Automata<series_t>, automaton_impl_t>	automaton_t;
     
-    matcher.match(p);
-    ext_support_t supp = matcher.ext_get();
-    
-    for_each_const_(ext_support_t, c, supp)
-      if (c->second == m)
-	return c->first;
-
-    // FIXME: another solution :
-    // FIXME: doing a get on a krat could be implemented by computed 
-    // FIXME: a thompson/glushkov automaton and compute resulting series 
-    // FIXME: of m.
-    //    FIXME("not implemented yet.");
-    
-
-    return zero_value(SELECT(W), SELECT(Tw));
+    typename automaton_t::set_t	automata (s);
+    automaton_t			a (automata);
+    standard_of(a, p);
+    return eval(a, m).value();
   }
 
   template<typename W, typename M, typename Tm, typename Tw, 

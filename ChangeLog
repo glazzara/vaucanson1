@@ -1,3 +1,9 @@
+2004-03-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix 
+	op_series_get.
+	* src/tests/algebra/series/misc/series_test.hh: Fix the test.
+
 2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/tests/algebra/series/polynom/series_polynom_test.hh,

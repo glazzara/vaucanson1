@@ -121,8 +121,7 @@ bool series_test(tests::Tester& t)
       TEST_GROUP("Advanced tests with set().");
       std::map<monoid_elt_t, semiring_elt_t>	random_values;
       const size_t				max =
-	utility::random::generate<unsigned>(0, op_choose_max_word_length *
-					    test_sizes[i]);
+	utility::random::generate<unsigned>(0, op_choose_max_word_length);
       series_elt_t		s5 (series);
       bool			allright = true;
       for (size_t j = 0; j < max; ++j)
