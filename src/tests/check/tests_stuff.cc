@@ -18,12 +18,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
+#include <iomanip>
 #include "tests_stuff.hh"
 
 namespace tests {
 
-  const unsigned Tester::nb_col_msg = 60;
+  const unsigned Tester::nb_col_msg = 50;
 
   Tester::Tester(verbose_level_e verbose_level) : 
     passed_ (0),
@@ -41,14 +41,7 @@ namespace tests {
   Tester::ok(std::string test_label)
   {
     if (verbose_ != none)
-      {
-	std::cout << "TEST: ";
-	std::cout.fill(' ') ;
-	int last = std::cout.width(nb_col_msg);
-	std::cout << test_label;
-	std::cout << " : OK" << std::endl;
-	std::cout.width(last);
-      }
+      std::cout << "TEST: [OK]   " << test_label << std::endl;
     passed_++;
   }
 
@@ -56,14 +49,7 @@ namespace tests {
   Tester::ko(std::string test_label)
   {
     if (verbose_ != none)
-      {
-	std::cout << "TEST: ";
-	std::cout.fill(' ') ;
-	int last = std::cout.width(nb_col_msg);
-	std::cout << test_label;
-	std::cout << " : KO" << std::endl;
-	std::cout.width(last);
-      }
+      std::cout << "TEST: [KO]   " << test_label << std::endl;
     non_passed_++;
   }
   

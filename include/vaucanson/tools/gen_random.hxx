@@ -22,14 +22,12 @@
 #ifndef GEN_RANDOM_HXX
 # define GEN_RANDOM_HXX
 
+# include <vaucanson/config/system.hh>
 # include <vaucanson/tools/gen_random.hh>
-
 # include <map>
-# include <stdlib.h>
-# include <math.h>
+# include <cstdlib>
 # include <iostream>
 # include <fstream>
-
 # include <vaucanson/tools/usual.hh>
 
 namespace vcsn {
@@ -43,7 +41,7 @@ namespace vcsn {
   template <class TAutomata>
   GenRandomAutomata<TAutomata>::GenRandomAutomata(unsigned init) 
   { 
-    srandom(init); 
+    srand(init); 
   }
   
   template <class TAutomata>
@@ -126,11 +124,14 @@ namespace vcsn {
       }
 
     for (unsigned i = 0; i < nb_edge; i++)
-      work.add_letter_edge(work.select_state(alea(work.states().size())), 
-			   work.select_state(alea(work.states().size())), 
-			   alpha.choose());
-
-    
+      {
+	unsigned from = alea(work.states().size());
+	unsigned to = alea(work.states().size());
+	work.add_letter_edge(work.select_state(from),
+			     work.select_state(to), 
+			     alpha.choose());
+      }
+	
     work.set_initial(*work.states().begin());
     // set initial states
     for (unsigned i = 1; i < istate; i++)
@@ -303,7 +304,7 @@ namespace vcsn {
   template <class TAutomata>
   unsigned GenRandomAutomata<TAutomata>::alea(unsigned max)
   {
-    return ((unsigned) trunc(((float) random() / (float) RAND_MAX) * max));
+    return ((unsigned) round(((float) rand() / (float) RAND_MAX) * (max-1)));
   }
 
 } // vcsn

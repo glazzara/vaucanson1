@@ -22,6 +22,7 @@
 #ifndef ALGO_MOORE_MINIMIZE_HXX
 # define ALGO_MOORE_MINIMIZE_HXX
 
+# include <vaucanson/config/system.hh>
 # include <map>
 # include <set>
 # include <queue>
@@ -29,7 +30,7 @@
 # include <list>
 # include <utility>
 # include <stack>
-
+# include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/history.hh>
 
@@ -70,7 +71,6 @@ namespace vcsn {
     typedef std::vector<succ_t>				current_succ_t;
     typedef std::map<letter_t, current_succ_t>		letter_succ_t;
     typedef std::map<unsigned, hstate_t>		conv_map_t;
-
 
     const alphabet_t	&alphabet = input.series().monoid().alphabet();
     unsigned		max_partitions = 0;
@@ -154,7 +154,9 @@ namespace vcsn {
 		       part[P].begin();
 		     p_ != part[P].end(); 
 		     ++p_)
-		  if ((csucc[*p_] == csucc[*p]) && (*p != *p_))
+		  if ((csucc[*p_] == csucc[*p])
+		      &&
+		      (*p != *p_))
 		      new_p.push_back(*p_);
 		new_p.push_back(*p);
 		if (new_p.size() != part[P].size())
@@ -244,7 +246,7 @@ namespace vcsn {
     output.create();
     output.series() = a.series();
     do_moore_minimization(a.set(), output, a);
-    return output;
+    return trim(output);
   }
 
 } // vcsn

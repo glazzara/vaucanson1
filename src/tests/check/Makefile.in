@@ -18,7 +18,8 @@
 #
 # $Id$
 
-# -*- Makefile -*-
+# Makefile.flags -*- Makefile -*-
+# $Id$
 SHELL = @SHELL@
 
 srcdir = @srcdir@
@@ -82,7 +83,7 @@ am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
 
-AM_CXXFLAGS = -Wall -W -Wno-unused -O2
+AM_CXXFLAGS = -Wall -W -Wno-unused -O2 -ftemplate-depth-99
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/src/tests/
 
 check_LIBRARIES = libcheck.a
@@ -95,6 +96,7 @@ libcheck_a_SOURCES = \
 EXTRA_DIST = Makefile.flags Makefile.check
 subdir = src/tests/check
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = $(top_builddir)/include/vaucanson/config/config.hh
 CONFIG_CLEAN_FILES =
 libcheck_a_AR = $(AR) cru
 libcheck_a_LIBADD =
@@ -102,7 +104,7 @@ am_libcheck_a_OBJECTS = tests_stuff.$(OBJEXT)
 libcheck_a_OBJECTS = $(am_libcheck_a_OBJECTS)
 
 DEFS = @DEFS@
-DEFAULT_INCLUDES =  -I. -I$(srcdir)
+DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)/include/vaucanson/config
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@

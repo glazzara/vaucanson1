@@ -24,7 +24,8 @@
 # $Id$
 # VCSN_HEADER
 
-# -*- Makefile -*-
+# Makefile.flags -*- Makefile -*-
+# $Id$
 SHELL = @SHELL@
 
 srcdir = @srcdir@
@@ -88,7 +89,7 @@ am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
 
-AM_CXXFLAGS = -Wall -W -Wno-unused -O2
+AM_CXXFLAGS = -Wall -W -Wno-unused -O2 -ftemplate-depth-99
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/src/tests/
 
 LDADD = $(top_builddir)/src/tests/check/libcheck.a
@@ -101,6 +102,7 @@ check_PROGRAMS = \
 alphabets_basic_test_SOURCES = alphabets-basic-test.cc
 subdir = src/tests/algebra/alphabets
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = $(top_builddir)/include/vaucanson/config/config.hh
 CONFIG_CLEAN_FILES =
 check_PROGRAMS = alphabets-basic-test$(EXEEXT)
 am_alphabets_basic_test_OBJECTS = alphabets-basic-test.$(OBJEXT)
@@ -111,7 +113,7 @@ alphabets_basic_test_DEPENDENCIES = \
 alphabets_basic_test_LDFLAGS =
 
 DEFS = @DEFS@
-DEFAULT_INCLUDES =  -I. -I$(srcdir)
+DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)/include/vaucanson/config
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@

@@ -22,7 +22,9 @@
 #ifndef TOOLS_USUAL_HH
 # define TOOLS_USUAL_HH
 
+# include <vaucanson/config/system.hh>
 # include <fstream>
+# include <sstream>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
@@ -86,15 +88,15 @@ namespace vcsn {
 #define one_	identity(SELECT(typename series_elt_t::value_t))
 
 #define SAVE_AUTOMATON_DOT(Dir, Name, Auto, Index)		\
-    {							\
-      char buf[128];					\
-      snprintf(buf, 128, "%s/%s_%d.dot", Dir, Name, Index);	\
-      std::ofstream f(buf);				\
+    {								\
+      std::ostringstream s;					\
+      s << Dir << "/" << Name << "_" << Index << ".dot";	\
+      std::ofstream f(s.str().c_str());				\
       misc::dot_dump(f, Auto, Name);				\
     }
 
-#define RAND___(Max)							\
-((unsigned) trunc(((float) random() / (float) RAND_MAX) * Max));
+#define RAND___(Max)						\
+((unsigned) round(((float) rand() / (float) RAND_MAX) * Max));
 
   } // tools
 

@@ -243,6 +243,7 @@ vaucanson/tools/gen_random.hxx
 
 subdir = include
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = $(top_builddir)/include/vaucanson/config/config.hh
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
 HEADERS = $(nobase_include_HEADERS)

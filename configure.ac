@@ -7,13 +7,15 @@
 AC_PREREQ([2.50])
 AC_INIT([vaucanson], [0.1.0], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_SRCDIR([ChangeLog])
-
+AM_CONFIG_HEADER(include/vaucanson/config/config.hh)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
 AC_PROG_CXX
 AC_PROG_RANLIB
-
 AC_LANG(C++)
+
+AC_CHECK_HEADERS([limits])
+AC_CHECK_HEADERS([stl_config.h])
 
 AC_CONFIG_FILES([
 	Makefile

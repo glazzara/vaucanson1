@@ -21,26 +21,27 @@
 #ifndef FUNDAMENTAL_ELEMENTS_OPS_HH
 # define FUNDAMENTAL_ELEMENTS_OPS_HH
 
+# include <vaucanson/config/system.hh>
 # include <vaucanson/fundamental/predefs.hh>
 # include <vaucanson/fundamental/op_traits.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/misc/static.hh>
 
 namespace vcsn {
-  
+
 #define ELEMENT_OPERATOR(Op)					\
 template<typename S1, typename T1, typename S2, typename T2>	\
 static inline							\
 bool operator Op(const vcsn::Element<S1, T1>& e1,	\
 		 const vcsn::Element<S2, T2>& e2)	\
-{ return e1.value() Op e2.value(); }
+{  using namespace std; return e1.value() Op e2.value(); }
 
-    ELEMENT_OPERATOR(==);
-    ELEMENT_OPERATOR(!=);
-    ELEMENT_OPERATOR(<);
-    ELEMENT_OPERATOR(>);
-    ELEMENT_OPERATOR(<=);
-    ELEMENT_OPERATOR(>=);
+  ELEMENT_OPERATOR(==);
+  ELEMENT_OPERATOR(!=);
+  ELEMENT_OPERATOR(<);
+  ELEMENT_OPERATOR(>);
+  ELEMENT_OPERATOR(<=);
+  ELEMENT_OPERATOR(>=);
 
 #undef ELEMENT_OPERATOR
 
@@ -223,7 +224,7 @@ operator-(const vcsn::Element<S, T>& e)
   return vcsn::op_neg(e.set(), e.value()); 
 }
 
-} // vcsn
+} // std
 
 
 

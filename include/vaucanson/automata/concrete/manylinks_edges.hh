@@ -19,9 +19,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #ifndef AUTOMATA_MANYLINKS_EDGES_HH
-#define AUTOMATA_MANYLINKS_EDGES_HH
+# define AUTOMATA_MANYLINKS_EDGES_HH
 
-#include <iterator>
+# include <vaucanson/config/system.hh>
+# include <iterator>
 
 namespace vcsn
 {
@@ -173,11 +174,11 @@ namespace vcsn
   | Edge iterator |
   `--------------*/
   template<typename Edge>
-  class edge_iterator : public std::iterator<std::bidirectional_iterator_tag,
-					     unsigned,
-					     ptrdiff_t,
-					     const unsigned*,
-					     const unsigned&>
+  class edge_iterator /* : public iterator<bidirectional_iterator_tag,
+					unsigned,
+					ptrdiff_t,
+					const unsigned*,
+					const unsigned&> */
   {
   public:
     typedef typename Edge::label_t label_t;

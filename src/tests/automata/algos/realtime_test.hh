@@ -57,9 +57,9 @@ unsigned realtime_test(tests::Tester& tg)
       if (is_realtime(a))
 	++success;
     } 
-  char buff[128];
-  snprintf(buff, 128, "is_realtime on realtime (%d/%d)", success, nb_ok_tests);
-  TEST(t, buff, success == nb_ok_tests);
+  std::string rate;
+  SUCCESS_RATE(rate, success, nb_ok_tests);
+  TEST(t, "is_realtime on realtime "+rate, success == nb_ok_tests);
 
   success = 0;
   for (unsigned i = 0; i < nb_non_ok_tests; i++)
@@ -68,8 +68,8 @@ unsigned realtime_test(tests::Tester& tg)
       if (!is_realtime(a))
 	++success;
     } 
-  snprintf(buff, 128, "is_realtime on non-realtime (%d/%d)", success, nb_non_ok_tests);
-  TEST(t, buff, success == nb_non_ok_tests);
+  SUCCESS_RATE(rate, success, nb_non_ok_tests);
+  TEST(t, "is_realtime on non-realtime "+rate, success == nb_non_ok_tests);
 
   unsigned nb_tests = 20;
   success = 0;
@@ -80,8 +80,8 @@ unsigned realtime_test(tests::Tester& tg)
       if (is_realtime(non_epsilon))
 	++success;
     } 
-  snprintf(buff, 128, "realtime on non-realtime (%d/%d)", success, nb_tests);
-  TEST(t, buff, success == nb_non_ok_tests);
+  SUCCESS_RATE(rate, success, nb_tests);
+  TEST(t, "realtime on non-realtime "+rate, success == nb_tests);
 
   return t.all_passed();
 }

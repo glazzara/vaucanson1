@@ -1,3 +1,50 @@
+2002-07-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.95)
+	Changes to be g++-2.95.4 compliant :
+	
+	* include/vaucanson/fundamental/element_ops.hh : change operator namespace std.
+	* include/vaucanson/fundamental/element.hh : use system.hh.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx : use system.hh, set() => this->set().
+	* configure.ac
+	+AM_CONFIG_HEADER(include/vaucanson/config/config.hh)
+	+AC_CHECK_HEADERS([limits])
+	+AC_CHECK_HEADERS([stl_config.h])
+	* src/tests/check/tests_stuff.cc : add iomanip. redesign msg.
+	* include/vaucanson/misc/numerical_constraints.hh : 
+		use limits.hh if limit std header does not exists.
+	* src/tests/algebra/semiring/semiring-test.hh : minor.
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx : use
+	* src/tests/algebra/alphabets/alphabets-basic-test.cc : use system.hh
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx : replace set() by this->set().
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx : use rand() not random().
+	* src/tests/algebra/series/series-test.cc : use system.hh
+	* src/tests/algebra/series/series-test.hh : idem.
+	* include/vaucanson/automata/concrete/manylinks_states.hh : 	
+		does not use std::iterator for the moment since g++-2 does not implement it.
+	* include/vaucanson/automata/concrete/manylinks_edges.hh : use system.hh
+	* include/vaucanson/automata/concept/automata_base.hxx : remove default arg for deltac.
+	* include/vaucanson/automata/concept/automata_base.hh : remove default arg for deltac.
+	-    DELTA_DECL(delta, delta_kind::edges, = delta_kind::edges());
+	-    DELTA_DECL(rdelta, delta_kind::edges, = delta_kind::edges());
+	+    DELTA_DECL(delta, delta_kind::edges, );
+	+    DELTA_DECL(rdelta, delta_kind::edges, );
+ 	* include/vaucanson/automata/concept/kinds.hh : use system.hh
+	* include/vaucanson/algorithms/union.hxx : use new version of deltac.
+	* include/vaucanson/algorithms/normalized.hxx : idem.
+	* include/vaucanson/tools/usual.hh : use system.hh
+	* include/vaucanson/tools/gen_random.hxx : use rand() not random() !
+	* include/vaucanson/tools/gen_random.hh : use system.hh 
+	* include/vaucanson/misc/random.hxx : use rand() not random().
+	* include/vaucanson/algorithms/moore.hxx : trim the result.
+	* include/vaucanson/algorithms/hopcroft.hxx : idem.
+	* src/tests/automata/algos/realtime_test.hh : use SUCCESS_RATE macro.
+	* src/tests/automata/algos/minimization_test.hh : idem.
+	* include/vaucanson/config/rel_ops_work_around_g++2.hh : added.
+	* include/vaucanson/config/config.hh : added.
+	* include/vaucanson/config/system.hh : added.
+	* include/vaucanson/config/config.hh.in : added.
+	* include/vaucanson/misc/limits.hh : added.
+
 2002-07-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.94)
 	Changes to be g++-3.1 compliant :

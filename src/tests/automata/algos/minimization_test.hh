@@ -21,6 +21,7 @@
 #ifndef MINIMIZATION_TEST_HH
 # define MINIMIZATION_TEST_HH
 
+# include <sstream>
 # include <map>
 # include <algorithm>
 # include <list>
@@ -54,13 +55,13 @@ unsigned minimization_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
   gen_auto_t    gen(time(0x0));
 
-  const unsigned nb_test    = 10;
+  const unsigned nb_test    = 20;
   unsigned success_hopcroft = 0;
   unsigned success_moore    = 0;
 
   for (unsigned i = 0; i < nb_test; i++)
     {
-      automaton_t work = gen.generate_dfa(5, 10);
+      automaton_t work = gen.generate_dfa(10, 10);
 
       if (t.verbose() == tests::high)
 	{
@@ -69,11 +70,10 @@ unsigned minimization_test(tests::Tester& tg)
 	}
       
       typedef typename transpose_traits<automaton_t>::transpose_t transpose_t;
-      typedef typename transpose_traits<transpose_t>::transpose_t tranpose_transpose_t;
+      typedef typename transpose_traits<transpose_t>::transpose_t transpose_transpose_t;
       
-      tranpose_transpose_t minimize = 
+      transpose_transpose_t minimize = 
 	determinize(transpose_view(trim(determinize(transpose_view(work)))));
-      
       automaton_t hopcroft = hopcroft_minimization_det(work);
       automaton_t moore = moore_minimization(work);
 
@@ -92,10 +92,23 @@ unsigned minimization_test(tests::Tester& tg)
       if ((minimize.states().size() == hopcroft.states().size()) &&
 	  (minimize.edges().size() ==  hopcroft.edges().size()))
 	++success_hopcroft;
-
+      else if (t.verbose() == tests::high)
+	{
+	  std::ostringstream s;					
+	  s << "Hopcroft failed on " << i << std::ends;
+	  TEST_MSG(s.str());
+	}
+	  
       if ((minimize.states().size() == moore.states().size()) &&
 	  (minimize.edges().size() ==  moore.edges().size()))
 	++success_moore;
+      else if (t.verbose() == tests::high)
+	{
+	  std::ostringstream s;					
+	  s << "Moore failed on " << i << std::ends;
+	  TEST_MSG(s.str());
+	}
+
     }
 
   std::string rate_hopcroft;

@@ -24,7 +24,8 @@
 # $Id$
 # VCSN_HEADER
 
-# -*- Makefile -*-
+# Makefile.flags -*- Makefile -*-
+# $Id$
 SHELL = @SHELL@
 
 srcdir = @srcdir@
@@ -88,7 +89,7 @@ am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
 
-AM_CXXFLAGS = -Wall -W -Wno-unused -O2
+AM_CXXFLAGS = -Wall -W -Wno-unused -O2 -ftemplate-depth-99
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/src/tests/
 
 LDADD = $(top_builddir)/src/tests/check/libcheck.a
@@ -101,6 +102,7 @@ check_PROGRAMS = \
 free_monoid_test_SOURCES = free_monoid-test.cc
 subdir = src/tests/algebra/free_monoid
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = $(top_builddir)/include/vaucanson/config/config.hh
 CONFIG_CLEAN_FILES =
 check_PROGRAMS = free-monoid-test$(EXEEXT)
 am_free_monoid_test_OBJECTS = free_monoid-test.$(OBJEXT)
@@ -111,7 +113,7 @@ free_monoid_test_DEPENDENCIES = \
 free_monoid_test_LDFLAGS =
 
 DEFS = @DEFS@
-DEFAULT_INCLUDES =  -I. -I$(srcdir)
+DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)/include/vaucanson/config
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@

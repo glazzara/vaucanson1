@@ -21,6 +21,7 @@
 #ifndef FUNDAMENTAL_ELEMENT_HH
 # define FUNDAMENTAL_ELEMENT_HH
 
+# include <vaucanson/config/system.hh>
 # include <vaucanson/fundamental/predefs.hh>
 # include <vaucanson/fundamental/meta_set.hh>
 # include <vaucanson/fundamental/meta_element.hh>

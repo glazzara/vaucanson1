@@ -21,9 +21,10 @@
 #ifndef AUTOMATA_KINDS_HH
 # define AUTOMATA_KINDS_HH
 
-#include <iterator>
-#include <cassert>
-#include <algorithm>
+# include <vaucanson/config/system.hh>
+# include <iterator>
+# include <cassert>
+# include <algorithm>
 
 #include <vaucanson/fundamental/fundamental.hh>
 #include <vaucanson/automata/concept/handlers.hh>

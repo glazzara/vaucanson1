@@ -64,70 +64,70 @@ namespace vcsn {
     size_t 
     MetaElement<FreeMonoidBase<Self>, T>::length() const
     { 
-      return op_size(set(), value()); 
+      return op_size(this->set(), this->value()); 
     }
 
     template<class Self, typename T>
     void
     MetaElement<FreeMonoidBase<Self>, T>::mirror()
     {
-      op_in_mirror(set(), value());
+      op_in_mirror(this->set(), this->value());
     }
 
     template<class Self, typename T>
     typename MetaElement<FreeMonoidBase<Self>, T>::iterator 
     MetaElement<FreeMonoidBase<Self>, T>::begin() 
     { 
-      return op_begin(set(), value()); 
+      return op_begin(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<FreeMonoidBase<Self>, T>::const_iterator 
     MetaElement<FreeMonoidBase<Self>, T>::begin() const
     { 
-      return op_begin(set(), value()); 
+      return op_begin(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<FreeMonoidBase<Self>, T>::reverse_iterator 
     MetaElement<FreeMonoidBase<Self>, T>::rbegin()
     { 
-      return op_rbegin(set(), value()); 
+      return op_rbegin(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<FreeMonoidBase<Self>, T>::const_reverse_iterator 
     MetaElement<FreeMonoidBase<Self>, T>::rbegin() const
     { 
-      return op_rbegin(set(), value()); 
+      return op_rbegin(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<FreeMonoidBase<Self>, T>::iterator 
     MetaElement<FreeMonoidBase<Self>, T>::end() 
     { 
-      return op_end(set(), value()); 
+      return op_end(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<FreeMonoidBase<Self>, T>::const_iterator 
     MetaElement<FreeMonoidBase<Self>, T>::end() const
     { 
-      return op_end(set(), value()); 
+      return op_end(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<FreeMonoidBase<Self>, T>::reverse_iterator 
     MetaElement<FreeMonoidBase<Self>, T>::rend()
     { 
-      return op_rend(set(), value()); 
+      return op_rend(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<FreeMonoidBase<Self>, T>::const_reverse_iterator 
     MetaElement<FreeMonoidBase<Self>, T>::rend() const
     { 
-      return op_rend(set(), value()); 
+      return op_rend(this->set(), this->value()); 
     }
 
     template<class Self, typename T>

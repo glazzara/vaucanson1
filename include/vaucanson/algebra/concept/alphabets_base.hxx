@@ -21,6 +21,7 @@
 #ifndef ALGEBRA_ALPHABETS_BASE_HXX
 # define ALGEBRA_ALPHABETS_BASE_HXX
 
+# include <vaucanson/config/system.hh>
 # include <vaucanson/algebra/concept/alphabets_base.hh>
 # include <vaucanson/misc/container_ops.hh>
 # include <vaucanson/misc/random.hh>
@@ -55,56 +56,56 @@ namespace vcsn {
     size_t 
     MetaElement<AlphabetsBase<Self>, T>::size() const
     { 
-      return op_size(set(), value()); 
+      return op_size(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     bool 
     MetaElement<AlphabetsBase<Self>, T>::contains(const letter_t& l) const
     { 
-      return op_contains_e(set(), value(), l); 
+      return op_contains_e(this->set(), this->value(), l); 
     }
     
     template<class Self, typename T>
     bool 
     MetaElement<AlphabetsBase<Self>, T>::is_finite() const
     { 
-      return op_is_finite(set(), value()); 
+      return op_is_finite(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<AlphabetsBase<Self>, T>::iterator 
     MetaElement<AlphabetsBase<Self>, T>::begin() 
     { 
-      return op_begin(set(), value()); 
+      return op_begin(this->set(), this->value()); 
     }
     
     template<class Self, typename T> 
     typename MetaElement<AlphabetsBase<Self>, T>::const_iterator 
     MetaElement<AlphabetsBase<Self>, T>::begin() const
     { 
-      return op_begin(set(), value()); 
+      return op_begin(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<AlphabetsBase<Self>, T>::iterator 
     MetaElement<AlphabetsBase<Self>, T>::end() 
     { 
-      return op_end(set(), value()); 
+      return op_end(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     typename MetaElement<AlphabetsBase<Self>, T>::const_iterator 
     MetaElement<AlphabetsBase<Self>, T>::end() const
     { 
-      return op_end(set(), value()); 
+      return op_end(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     void 
     MetaElement<AlphabetsBase<Self>, T>::insert(const letter_t& l) 
     { 
-      op_insert(set(), value(), l); 
+      op_insert(this->set(), this->value(), l); 
     }
     
   template<class Self, typename T>
@@ -113,7 +114,7 @@ namespace vcsn {
   { 
     assert (this->size() > 0);
     int  n = this->size() - 1;
-    int  c = ((unsigned) trunc(((float) random() / (float) RAND_MAX) * n));
+    int  c = ((unsigned) trunc(((float) rand() / (float) RAND_MAX) * n));
 
     iterator it = this->begin();
 

@@ -23,6 +23,7 @@
 #ifndef SERIES_TEST_HH
 # define SERIES_TEST_HH
 
+# include <vaucanson/config/system.hh>
 # include <check/tests_stuff.hh>
 # include <fundamental/design_pattern-test.hh>
 # include <vaucanson/fundamental/fundamental.hh>

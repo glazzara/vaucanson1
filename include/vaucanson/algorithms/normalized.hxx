@@ -150,8 +150,8 @@ namespace vcsn {
     if (a.final().size() != 1)
       return false;
     std::set<hstate_t> delta_ret;
-    a.rdeltac(delta_ret, *a.initial().begin());
-    a.deltac(delta_ret, *a.final().begin());
+    a.rdeltac(delta_ret, *a.initial().begin(), delta_kind::states());
+    a.deltac(delta_ret, *a.final().begin(), delta_kind::states());
     if (delta_ret.size() != 0)
       return false;
     return true;

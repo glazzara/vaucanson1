@@ -71,9 +71,7 @@ namespace vcsn {
 	 ++i)
       {
 	aim.clear();
-
-	rhs.deltac(aim, *i);
-
+	rhs.deltac(aim, *i, delta_kind::edges());
 	for (typename aim_t::const_iterator d = aim.begin();
 	     d != aim.end();
 	     ++d)

@@ -1,4 +1,4 @@
-// random.hxx
+// system.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,43 +18,23 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef MISC_RANDOM_HXX
-# define MISC_RANDOM_HXX
+#ifndef VCSN_CONFIG_SYSTEM_HH
+# define VCSN_CONFIG_SYSTEM_HH
 
-# include <vaucanson/misc/random.hh>
-# include <cstdlib>
+# define _ISOC99_SOURCE 1
+# include <vaucanson/config/config.hh>
+# include <cmath>
 
-namespace vcsn {
+#if (defined __GNUC__) && (__GNUC__ < 3) 
+# include <stl_config.h>
+#  undef __STL_BEGIN_RELOPS_NAMESPACE
+#  define __STL_BEGIN_RELOPS_NAMESPACE namespace rel_ops {
+#  undef __STL_END_RELOPS_NAMESPACE
+#  define __STL_END_RELOPS_NAMESPACE }
+#  define __STL_USE_NAMESPACES
+# include <vaucanson/config/rel_ops_work_around_g++2.hh>
+#endif
 
-  namespace misc {
-    
-    template <class T>
-    T 
-    RandomGenerator<T>::do_it()
-    {
-      assert(!"No random generator for this type :"+(typeid(T)));
-    }
 
-    char 
-    RandomGenerator<char>::do_it()
-    {
-      float f = float(rand()) / float(RAND_MAX);
-      unsigned offs = unsigned((26 * f));
-      return ('a' + offs);
-    }
 
-    bool
-    RandomGenerator<bool>::do_it()
-    {
-      unsigned r = rand() * 2 / RAND_MAX;
-      if (r < 1) 
-	return true;
-      else
-	return false;
-    }
-
-  } // misc
-
-} // vcsn
-
-#endif // MISC_RANDOM_HH
+#endif // VCSN_CONFIG_SYSTEM_HH

@@ -42,8 +42,6 @@ namespace vcsn
   | MetaElement<AutomataBase<Self>, T> |
   `-----------------------------------*/
 
-   
-
   template<typename Self, typename T>
   void MetaElement<AutomataBase<Self>, T>::create()
   { 

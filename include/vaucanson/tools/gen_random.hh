@@ -18,10 +18,10 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
 #ifndef GEN_RANDOM_HH
 # define GEN_RANDOM_HH
 
+# include <vaucanson/config/system.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 
 # include <vaucanson/automata/concept/automata.hh>
@@ -43,8 +43,6 @@ namespace vcsn {
     typedef typename TAutomata::state_iterator		  state_iterator;
     typedef typename TAutomata::monoid_t::alphabet_t	  alphabet_t;
     typedef typename alphabet_t::iterator		  alphabet_iterator;
-    typedef typename TAutomata::states_t		  states_t;
-    typedef typename TAutomata::state_iterator		  state_iterator;
     typedef typename TAutomata::monoid_t::alphabets_elt_t alphabets_elt_t;
     
     GenRandomAutomata();

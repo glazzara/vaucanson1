@@ -21,9 +21,12 @@
 
 #ifndef ALGEBRA_TROPICAL_SEMIRING_HXX
 # define ALGEBRA_TROPICAL_SEMIRING_HXX
-
-# include <limits>
-
+# include <vaucanson/config/system.hh>
+# ifdef HAVE_LIMITS
+#  include <limits>
+# else
+#  include <vaucanson/misc/limits.hh>
+# endif // HAVE_LIMITS
 # include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
 
 namespace vcsn {

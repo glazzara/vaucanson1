@@ -27,6 +27,7 @@
 # include <queue>
 # include <list>
 
+# include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/history.hh>
 
@@ -348,7 +349,7 @@ namespace vcsn {
     output.create();
     output.series() = a.series();
     do_hopcroft_minimization_det(a.set(), output, a);
-    return output;
+    return trim(output);
   }
 
 
