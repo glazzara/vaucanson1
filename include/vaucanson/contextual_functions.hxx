@@ -32,9 +32,6 @@
 
 # include <vaucanson/contextual_functions.hh>
 
-# include <vaucanson/algorithms/standard_of.hh>
-# include <vaucanson/algorithms/thompson.hh>
-
 /*----------------.
 | new_automaton() |
 `----------------*/

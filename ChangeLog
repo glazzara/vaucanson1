@@ -1,5 +1,16 @@
 2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/contextual_headers.hh: New. Factor include
+	directives for context headers.
+	* include/Makefile.am: Update.
+	* include/vaucanson/contextual_functions.hxx: Remove buggy includes.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh: Use contextual_headers.hh.
+
+2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/contextual_functions.hxx,
 	* include/vaucanson/contextual_functions.hh: Add a version of
 	thompson_of with a unique rational expression as argument.

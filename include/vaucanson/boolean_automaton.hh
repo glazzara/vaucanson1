@@ -30,15 +30,8 @@
 #ifndef VCSN_BOOLEAN_AUTOMATON_HH
 # define VCSN_BOOLEAN_AUTOMATON_HH
 
-# include <vaucanson/algebra/implementation/predefs.hh>
-# include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
+# include <vaucanson/contextual_headers.hh>
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
-# include <vaucanson/algebra/implementation/series/polynoms.hh>
-# include <vaucanson/algebra/implementation/series/krat.hh>
-# include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/implementation/graph.hh>
-# include <vaucanson/tools/dot_dump.hh>
-# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
