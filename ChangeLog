@@ -1,5 +1,12 @@
 2003-05-18  Loïc Fosse  <fosse_l@lrde.epita.fr>
 
+        * include/vaucanson/algorithms/algo_helper.hxx: Add new function.
+        * include/vaucanson/algorithms/algo_helper.hh: Add new function.
+        * include/vaucanson/algorithms/derivates_automaton.hxx: Add weight on
+        exit transitions.
+
+2003-05-18  Loïc Fosse  <fosse_l@lrde.epita.fr>
+
         * include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh:
         Change namespace.
         * include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:

@@ -136,6 +136,16 @@ namespace vcsn
       auto_p->set_final(current_state->second.first);
     }
 
+    // To make the current state final
+    template <typename Self, typename T_auto, typename Etiq>
+    void
+    IncAutomataConstructor<Self, T_auto, Etiq>::set_final
+    (const series_elt_t& el)
+    {
+      auto_p->set_final(current_state->second.first, el);
+    }
+
+
     // The function called on each state :
     // it just call the on_each_state function, which must be defined
     // by user.

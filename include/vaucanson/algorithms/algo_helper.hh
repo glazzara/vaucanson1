@@ -80,6 +80,7 @@ namespace vcsn {
       void	link_to(const Etiq& etiq, const series_elt_t& el);
       // To make the current state final
       void	set_final();
+      void	set_final(const series_elt_t& el);
     private:
       // Function to apply on each state (call on_state function)
       void on_state_caller(const Etiq& e);

@@ -65,7 +65,7 @@ namespace vcsn {
       if (!c_term.second)
 	undefined = true;
       if (c_term.first != e.set().weights().zero(SELECT(weight_value_t)))
-	set_final();
+	set_final(c_term.first);
 
       // Create links between current state and states corresponding to
       // partial derivates of current expression
