@@ -10,19 +10,21 @@ AC_CONFIG_SRCDIR([ChangeLog])
 AM_CONFIG_HEADER(include/vaucanson/config/config.hh)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
+AM_MAINTAINER_MODE
+
+AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
 AC_PROG_CXX
+
 AC_PROG_RANLIB
 AC_LANG(C++)
 
 AC_CHECK_HEADERS([limits])
 AC_CHECK_HEADERS([stl_config.h])
 
-AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
-
 AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, no)
 if test x"$DOXYGEN" = x"no"; then
-  echo "Cannot found doxygen. Documentation will be disabled" 2>&1
-  DOXYGEN=true
+  echo "Cannot find doxygen. Disabling auto-generation of the documentation" 2>&1
+  DOXYGEN=/bin/true
 fi
 
 AC_CONFIG_FILES([

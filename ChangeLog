@@ -1,3 +1,8 @@
+2002-10-23  Raphaël Poss  <raph@lrde.epita.fr>
+(0.126)
+	
+	* configure.ac: use AM_MAINTAINER_MODE
+
 2002-10-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.125)
 	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx: minor.
