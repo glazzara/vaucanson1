@@ -281,7 +281,7 @@ namespace vcsn {
 	element. */
     hedge_t add_weighted_edge(hstate_t from, hstate_t to,
 			      const semiring_elt_t& w,
-			      const monoid_elt_t& m);
+			      const monoid_elt_value_t& m);
 
     /** add an edge using a series. */
     /** If the underlying implementation is not sufficiently general
