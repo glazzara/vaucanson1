@@ -85,6 +85,8 @@ for automata_kind in boolean r z z_max_plus z_min_plus; do
     TEST="../automata";
     if [ $automata_kind = "boolean" ]; then
 	TEST="$TEST ../boolean_automata"
+    else
+	TEST="$TEST ../k_automata"
     fi
     ../bin/generate-test-suite.sh \
 	${automata_kind}_automaton \

@@ -1,7 +1,25 @@
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	* src/tests/automata/algos/standard_of_regression_test.hh: Move to...
+	* src/tests/k_automata/standard_of_regression_test.hh: ... This.
+	* src/tests/k_automata/Makefile.am: New. Makefile for test directory 
+	k_automata.
+	* src/tests/test-suites/generate-all.sh,
+	* src/tests/automata/algos/Makefile.am,
+	* configure.ac: Update accordingly.
+
 2004-06-26  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/krat.hxx: Fix
 	op_series_set in order to simplify produced rationnal expressions.
+
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	* src/tests/automata/algos/standard_of_regression_test.hh: Move to...
+	* src/tests/k_automata/standard_of_regression_test.hh: ... This.
+	* src/tests/k_automata/Makefile.am: New. Makefile for test directory 
+	k_automata.
+	* src/tests/test-suites/generate-all.sh,
+	* src/tests/automata/algos/Makefile.am,
+	* configure.ac: Update accordingly.
 
 2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh:
