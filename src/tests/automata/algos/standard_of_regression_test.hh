@@ -32,6 +32,7 @@
 
 # include <vaucanson/algebra/implementation/series/krat.hh>
 # include <vaucanson/algorithms/standard_of.hh>
+# include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
 template <class Auto>
@@ -63,12 +64,12 @@ standard_of_regression_test(tests::Tester& tg)
   while (w == identity_as<semiring_elt_value_t>::of(sg) or
 	 w == zero_as<semiring_elt_value_t>::of(sg)) ;
 
-  krat_t e = a.star() * w;
+  krat_t e = a.star() * w; // WARNING: star() has side effects on a!
 
   automaton_t		au (aa);
   standard_of(au, e.value());
 
-  TEST_MSG("Tests on \"a* 2\".");
+  TEST_MSG("Tests on \"a* w\".");
   TEST(t, "Number of states", au.states().size() == 2);
   TEST(t, "Number of initial states", au.initial().size() == 1);
   TEST(t, "Number of final states", au.final().size() == 2);
@@ -89,6 +90,20 @@ standard_of_regression_test(tests::Tester& tg)
   for_each_final_state(f, au)
     b = b and au.get_final(*f) == series_set_elt_t (ss, w);
   TEST(t, "Weight of finals", b);
+
+  TEST_MSG("Tests on \"(w a*)(w a*)\".");
+
+  e = (w * a) * (w * a);
+  standard_of(au, e.value());
+
+  TEST(t, "Evaluation of 1 gives w * w.",
+       eval(au, monoid_elt_t (md)) == w * w);
+
+  TEST(t, "Evaluation of a gives w * w + w * w.",
+       eval(au, ma) == w * w + w * w);
+
+  TEST(t, "Evaluation of aa gives w * w + w * w + w * w.",
+       eval(au, ma * ma) == w * w + w * w + w * w);
 
   return t.all_passed();
 }

@@ -219,10 +219,15 @@ namespace vcsn {
     for (typename lhs_t::final_iterator f = lhs.final().begin();
 	 f != lhs.final().end();
 	 ++f)
-      for (typename delta_ret_t::const_iterator d = aim.begin();
-	   d != aim.end();
-	   ++d)
-	lhs.add_edge(*f, map_h[rhs.aim_of(*d)], rhs.label_of(*d));
+      {
+	typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
+	for (typename delta_ret_t::const_iterator d = aim.begin();
+	     d != aim.end();
+	     ++d)
+	  lhs.add_series_edge(*f,
+			      map_h[rhs.aim_of(*d)],
+			      weight * rhs.label_of(*d));
+      }
 
     for (typename lhs_t::state_iterator s = lhs.states().begin();
 	 s != lhs.states().end();

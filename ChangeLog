@@ -1,5 +1,12 @@
 2004-06-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/standard.hxx
+	(do_concat_of_standard_here): Fix. Mind the final series of lhs.
+	* src/tests/automata/algos/standard_of_regression_test.hh: New.
+	Corresponding test for this fix.
+
+2004-06-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	standard_of() was broken for  right weights because it changed the
 	weight  of the  initial  transition, which  should  always be  the
 	identity on a standard automaton.
