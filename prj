@@ -1,15 +1,37 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 174)
-(Parent-Version vaucanson 0 173)
-(Version-Log "2003-03-13  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 175)
+(Parent-Version vaucanson 0 174)
+(Version-Log "2003-03-17  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/monoid_base.hh,
-	  include/vaucanson/algebra/concept/monoid_base.hxx: Set correct
-	  copyrights.")
+	* src/tests/bin/generate-test-suite.sh: Change CPPFLAGS to AM_CPPFLAGS
+	to avoid an automake warning.
+	* src/tests/tests-suites/algebra_series_krat.defs: Add.
+	* configure.ac: Add new test directories.
+	* src/tests/algebra/series/Makefile.am: Create subdirectories, for the
+	test generator to work properly, with definition files for
+	algebra_series_krat and algebra_series_misc.
+	* src/tests/algebra/series/krat/Makefile.am: Add.
+	* src/tests/algebra/series/misc/Makefile.am: Add.
+	* src/tests/algebra/series/krat/krat_exp_parse_test.hh,
+	src/tests/algebra/series/krat/krat_exp_linearize_test.hh,
+	src/tests/algebra/series/krat/krat_exp_derivation_test.hh,
+	src/tests/algebra/series/krat/krat_exp_constant_term_test.hh: Move
+	from parent directory in a newly created directory 'krat'.
+	* src/tests/algebra/series/misc/series_test.hh: Move from parent 
+	directory in a newly created directory 'misc', and rename
+	'series-test.hh' to 'series_test.hh' for compatibility with the test
+	generator.
+	* src/tests/algebra/series/krat_exp_constant_term_test.hh,
+	src/tests/algebra/series/krat_exp_derivation_test.hh,
+	src/tests/algebra/series/krat_exp_linearize_test.hh,
+	src/tests/algebra/series/krat_exp_parse_test.hh: Move to subdirectory
+	'krat'.
+	* src/tests/algebra/series/series-test.hh: Move to subdirectory 'misc'
+	and rename to 'series_test.hh'.")
 (New-Version-Log "")
-(Checkin-Time "Thu, 13 Mar 2003 20:19:18 +0100")
+(Checkin-Time "Mon, 17 Mar 2003 21:37:05 +0100")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -90,14 +112,14 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.114 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.115 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
   (README (vaucanson/f/48_README 1.7 600))
   (THANKS (vaucanson/f/36_THANKS 1.5 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.2 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.15 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.16 600))
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.2 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy (vaucanson/j/14_doc.doxy 1.1 600))
@@ -378,12 +400,12 @@
   (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.2 600))
   (src/tests/algebra/semiring/Makefile.am (vaucanson/h/39_Makefile.a 1.1 600))
   (src/tests/algebra/semiring/semiring_test.hh (vaucanson/h/38_semiring_t 1.2 600))
-  (src/tests/algebra/series/Makefile.am (vaucanson/c/22_Makefile.a 1.7 600))
-  (src/tests/algebra/series/krat_exp_constant_term_test.hh (vaucanson/h/16_krat_exp_c 1.2 600))
-  (src/tests/algebra/series/krat_exp_derivation_test.hh (vaucanson/h/20_krat_exp_d 1.3 600))
-  (src/tests/algebra/series/krat_exp_linearize_test.hh (vaucanson/h/25_krat_exp_l 1.2 600))
-  (src/tests/algebra/series/krat_exp_parse_test.hh (vaucanson/h/14_krat_exp_p 1.2 600))
-  (src/tests/algebra/series/series-test.hh (vaucanson/c/27_series-tes 1.8 600))
+  (src/tests/algebra/series/Makefile.am (vaucanson/c/22_Makefile.a 1.8 600))
+  
+  
+  
+  
+  
   (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
   (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.7 600))
   (src/tests/automata/algos/closure_test.hh (vaucanson/e/27_closure_te 1.7 600))
@@ -409,7 +431,7 @@
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.2 600))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 600))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
@@ -447,6 +469,39 @@
 
   (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.3 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.1 600))
+
+;; Files deleted by depopulate at Mon, 17 Mar 2003 21:14:58 +0100,
+;; from version 0.174(w), by clavei_t:
+
+  ; (src/tests/algebra/series/krat_exp_constant_term_test.hh ())
+  ; (src/tests/algebra/series/krat_exp_derivation_test.hh ())
+  ; (src/tests/algebra/series/krat_exp_linearize_test.hh ())
+  ; (src/tests/algebra/series/krat_exp_parse_test.hh ())
+
+;; Files deleted by depopulate at Mon, 17 Mar 2003 21:15:31 +0100,
+;; from version 0.174(w), by clavei_t:
+
+  ; (src/tests/algebra/series/series-test.hh ())
+
+;; Files added by populate at Mon, 17 Mar 2003 21:16:21 +0100,
+;; to version 0.174(w), by clavei_t:
+
+  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.1 600))
+  (src/tests/algebra/series/krat/krat_exp_parse_test.hh (vaucanson/j/19_krat_exp_p 1.1 600))
+  (src/tests/algebra/series/krat/krat_exp_linearize_test.hh (vaucanson/j/20_krat_exp_l 1.1 600))
+  (src/tests/algebra/series/krat/krat_exp_derivation_test.hh (vaucanson/j/21_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/krat_exp_constant_term_test.hh (vaucanson/j/22_krat_exp_c 1.1 600))
+
+;; Files added by populate at Mon, 17 Mar 2003 21:16:52 +0100,
+;; to version 0.174(w), by clavei_t:
+
+  (src/tests/algebra/series/misc/series_test.hh (vaucanson/j/23_series_tes 1.1 600))
+  (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 600))
+
+;; Files added by populate at Mon, 17 Mar 2003 21:21:14 +0100,
+;; to version 0.174(w), by clavei_t:
+
+  (src/tests/tests-suites/algebra_series_krat.defs (vaucanson/j/25_algebra_se 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

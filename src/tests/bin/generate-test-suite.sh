@@ -118,7 +118,7 @@ done
 TEST_CC=`echo $TEST_CC | tr '%' '\n'`
 cat > $DEST_DIR/Makefile.am << EOF
 include \$(top_srcdir)/src/tests/check/Makefile.check
-CPPFLAGS= $INCLUDES
+AM_CPPFLAGS += $INCLUDES
 check_PROGRAMS=$CHECK_PROG
 $TEST_CC
 EOF

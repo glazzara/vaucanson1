@@ -43,6 +43,8 @@ AC_CONFIG_FILES([
 	src/tests/fundamental/Makefile
 	src/tests/algebra/Makefile
 	src/tests/algebra/series/Makefile
+	src/tests/algebra/series/krat/Makefile
+	src/tests/algebra/series/misc/Makefile
 	src/tests/algebra/semiring/Makefile
 	src/tests/algebra/alphabets/Makefile
 	src/tests/algebra/free_monoid/Makefile
@@ -64,6 +66,8 @@ VCSN_TESTS([algebra_set_alphabet])
 VCSN_TESTS([algebra_string_free_monoid])
 VCSN_TESTS([algebra_tropical_max_semiring])
 VCSN_TESTS([usual_automaton_t])
+VCSN_TESTS([algebra_series_krat])
+VCSN_TESTS([algebra_series_misc])
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 
 AC_OUTPUT
