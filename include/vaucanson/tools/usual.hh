@@ -96,8 +96,14 @@ namespace vcsn {
     template <class T>
     usual_automaton_t new_automaton(const T& alphabet);
 
+    template <typename R, typename T>
+    R new_automaton(const T& alphabet);
+
     template <class InputIterator>
     usual_automaton_t new_automaton(InputIterator, InputIterator);
+
+    template <typename R, typename InputIterator>
+    R new_automaton(InputIterator, InputIterator);
 
 #define SAVE_AUTOMATON_DOT(Dir, Name, Auto, Index)		\
     {								\

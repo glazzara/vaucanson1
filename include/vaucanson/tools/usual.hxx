@@ -49,11 +49,39 @@ namespace vcsn {
       return usual_automaton_t(automata_set);
     }
 
+    template <typename R, typename InputIterator>
+    inline
+    R new_automaton(InputIterator begin, InputIterator end)
+    {
+      typedef typename R::set_t Automata;
+      typedef typename Automata::series_t Series;
+      typedef typename Series::monoid_t Monoid;
+      typedef typename Series::weights_t Weights;
+      typedef typename Monoid::alphabet_t Alphabet;
+
+      Alphabet alpha;
+      for (InputIterator e = begin; e != end; ++e)
+	alpha.insert(*e);
+      Weights semiring;
+      Monoid freemonoid(alpha);
+      Series series(semiring, freemonoid);
+      Automata automata_set(series);
+      return R(automata_set);
+    }
+      
+
     template <class T>
     inline
     usual_automaton_t new_automaton(const T& alphabet)
     {
       return new_automaton(alphabet.begin(), alphabet.end());
+    }
+
+    template <class R, class T>
+    inline
+    R new_automaton(const T& alphabet)
+    {
+      return new_automaton<R>(alphabet.begin(), alphabet.end());
     }
 
 

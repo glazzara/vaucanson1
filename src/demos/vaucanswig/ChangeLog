@@ -1,0 +1,7 @@
+2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* Makefile.am: Add.
+
+	* expand.sh, meta/context.hh, meta/vaucanswig_context.i,
+	meta/vaucanswig_exception.i, meta/vaucanswig_describe: Add.
+

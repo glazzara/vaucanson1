@@ -37,18 +37,14 @@
 
 namespace vcsn {
 
-  namespace algebra {
-    
     /*----------------------.
     | Generalized converter |
     `----------------------*/
-    template<typename Tm, typename Tw, typename W, typename M>
-    rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>),
-				SELECTOR2(Series<W, M>),
-				const polynom<Tm, Tw>& p_value);
-
-
-  } // algebra
+    template<typename W, typename M, typename Tm, typename Tw>
+    rat::exp<Tm, Tw> op_convert(const algebra::Series<W, M>& s1,
+				SELECTOR2(rat::exp<Tm, Tw>),
+				const algebra::Series<W, M>& s2,
+				const algebra::polynom<Tm, Tw>& p_value);
 
 } // vcsn
 

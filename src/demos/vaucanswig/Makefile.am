@@ -1,0 +1,3 @@
+
+SUBDIRS = meta src python
+

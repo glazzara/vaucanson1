@@ -19,6 +19,10 @@ AC_WITH_VCSN
 AC_PROG_RANLIB
 AC_PROG_CC
 
+# SWIG and Python used.
+AC_CHECK_SWIG13
+AM_PATH_PYTHON([2.2])
+
 # Attempt to use strict language conformance checking.
 AC_CXX_FLAGS
 
@@ -72,6 +76,10 @@ AC_CONFIG_FILES([
 	src/demos/samples/Makefile
 	src/demos/samples/algebra/Makefile
 	src/demos/samples/algorithms/Makefile
+        src/demos/vaucanswig/Makefile
+        src/demos/vaucanswig/meta/Makefile
+        src/demos/vaucanswig/src/Makefile
+        src/demos/vaucanswig/python/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
         doc/doc.doxy

@@ -175,24 +175,24 @@ namespace vcsn {
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
   algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
 				      SELECTOR2(algebra::polynom<Tm, Tw>),
-				      SELECTOR(M),
+				      SELECTOR(algebra::MonoidBase<M>),
 				      const oTm& m_value);
 
   template<typename Tm, typename Tw, typename W, typename M, typename oTw>
   algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
 				      SELECTOR2(algebra::polynom<Tm, Tw>),
-				      SELECTOR(W),
+				      SELECTOR(algebra::SemiringBase<W>),
 				      const oTw& w_value);
     
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   void op_assign(const algebra::Series<W, M>& s,
-		 const M& monoid,
+		 const algebra::MonoidBase<M>& monoid,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTm& src);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_assign(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const algebra::SemiringBase<W>& weights,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src);
 
@@ -202,13 +202,13 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   void op_in_add(const algebra::Series<W, M>& s,
-		 const M& monoid,
+		 const algebra::MonoidBase<M>& monoid,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTm& src);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-				  const M& monoid,
+				  const algebra::MonoidBase<M>& monoid,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTm& b);
 
@@ -220,7 +220,7 @@ namespace vcsn {
   };
   
   template<typename M, typename W, typename oTm, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_add(const M& monoid,
+  algebra::polynom<Tm, Tw> op_add(const algebra::MonoidBase<M>& monoid,
 				  const algebra::Series<W, M>& s,
 				  const oTm& a,
 				  const algebra::polynom<Tm, Tw>& b);
@@ -231,13 +231,13 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_add(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const algebra::SemiringBase<W>& weights,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-				  const W& weights,
+				  const algebra::SemiringBase<W>& weights,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTw& b);
 
@@ -248,7 +248,7 @@ namespace vcsn {
   };
   
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_add(const W& weights,
+  algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& weights,
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b);
@@ -259,13 +259,13 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_mul(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const algebra::SemiringBase<W>& weights,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-				  const W& weights,
+				  const algebra::SemiringBase<W>& weights,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTw& b);
 
@@ -276,7 +276,7 @@ namespace vcsn {
   };
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_mul(const W& weights,
+  algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& weights,
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b);

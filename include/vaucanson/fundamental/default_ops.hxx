@@ -31,7 +31,7 @@
 # define VCSN_FUNDAMENTAL_DEFAULT_OPS_HXX
 
 # include <vaucanson/fundamental/default_ops.hh>
-# include <cassert>
+# include <vaucanson/misc/contract.hh>
 
 namespace vcsn {
 
@@ -106,7 +106,7 @@ namespace vcsn {
   const T& op_convert(const Structure<S>& s1, SELECTOR(T), 
 		      const Structure<S>& s2, const T& from_data)
   {
-    assert(& s1 == & s2);
+    precondition(& s1 == & s2);
     return from_data;
   }
 
@@ -150,7 +150,7 @@ namespace vcsn {
 		 T& dst, 
 		 const U& src)
   { 
-    assert(& s1 == & s2);
+    precondition(& s1 == & s2);
     op_assign(s1.self(), dst, src); 
   }
 
@@ -161,7 +161,7 @@ namespace vcsn {
 			 T& dst,				\
 			 const U& arg)				\
     { 								\
-      assert(& s1 == & s2);			\
+      precondition(& s1 == & s2);			\
       return op_in_ ## Name (s1.self(), dst, arg); 		\
     }
       
@@ -181,7 +181,7 @@ namespace vcsn {
 		   const T& v1,					\
 		   const U& v2)					\
     { 								\
-      assert(& s1 == & s2); 			\
+      precondition(& s1 == & s2); 			\
       return op_ ## Name(s1.self(), v1, v2); 			\
     }
 

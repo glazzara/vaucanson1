@@ -120,7 +120,7 @@
 #include <iostream>
 #include <string>
 #ifdef EXCEPTION_TRAPS
-#include <sstring>
+#include <sstream>
 #include <stdexcept>
 #else
 #include <cstdlib>

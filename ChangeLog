@@ -1,3 +1,32 @@
+2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* bootstrap.sh: Mention vaucanswig.
+
+	* src/demos/vaucanswig/ChangeLog: Add.
+	
+	* config/vcsn.m4: Add AC_CHECK_SWIG13.
+
+	* configure.ac: Invoke AC_CHECK_SWIG13 and AM_PATH_PYTHON. Mention
+	vaucanswig.
+
+	* include/vaucanson/fundamental/default_ops.hxx: Fix contracts.
+
+	* include/vaucanson/algebra/concrete/series/generalized.hh: Fix
+	namespace for `op_convert'. Re-order arguments and parameters.
+	* include/vaucanson/algebra/concrete/series/generalized.hxx:
+	Update accordingly.
+	
+	* include/vaucanson/algebra/concrete/series/polynoms.hh: Make
+	subtyping requirement explicit for operators.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Update
+	accordingly.
+
+	* include/vaucanson/misc/contract.hh: Fix include.
+
+	* include/vaucanson/tools/usual.hh: Add new version of
+	`new_automaton'.
+	* include/vaucanson/tools/usual.hxx: Update accordingly.
+
 2003-07-04  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* README: Fix.
