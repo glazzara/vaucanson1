@@ -25,7 +25,7 @@
 # include <iostream>
 
 # include <vaucanson/algorithms/standard.hh>
-# include <vaucanson/algorithms/union.hh>
+# include <vaucanson/algorithms/sum.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
@@ -62,7 +62,7 @@ namespace vcsn {
     hstate_t		new_i, old_i;
 
     new_i = *lhs.initial().begin();
-    auto_in_union(lhs, rhs);
+    sum_here(lhs, rhs);
     for (typename lhs_t::initial_iterator i = lhs.initial().begin();
 	 i != lhs.initial().end();
 	   ++i)

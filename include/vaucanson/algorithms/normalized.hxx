@@ -26,7 +26,7 @@
 
 # include <stack>
 
-# include <vaucanson/algorithms/union.hh>
+# include <vaucanson/algorithms/sum.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
@@ -83,7 +83,7 @@ namespace vcsn {
 				   lhs_t& lhs,
 				   const rhs_t& rhs)
   {
-    auto_in_union(lhs, rhs);
+    sum_here(lhs, rhs);
     hstate_t new_i = lhs.add_state();
     hstate_t new_f = lhs.add_state();
 

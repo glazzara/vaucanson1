@@ -12,7 +12,7 @@ EXTRA_DIST= 					\
 	glushkov_test.hh			\
 	determinist_test.hh			\
 	realtime_test.hh			\
-	union_test.hh				\
+	sum_test.hh				\
 	normalize_test.hh			\
 	reachable_test.hh			\
 	elimination_test.hh			\

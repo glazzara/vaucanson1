@@ -24,7 +24,6 @@
 
 # include <map>
 # include <vaucanson/algorithms/concat.hh>
-# include <vaucanson/algorithms/union.hh>
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 
