@@ -1,9 +1,23 @@
+2004-12-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Fix the bug reported by Petr Ambroz <ampy@liafa.jussieu.fr> in
+	<mailman.103.1101739592.787.vaucanson-bugs@lrde.epita.fr>. It was
+	due to a loop which used iterators on strings constructed by an
+	std::ostringstream. In fact, nothing guarantees that two
+	consecutive calls to the str() method will return a string with
+	the same storage. Although correct with many versions of GCC, it
+	does not work with GCC 3.4.2.
+
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	Do not get iterators on strings returned by the str() method of
+	std::ostringstream, that is not safe.
+
 2004-11-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/contextual_automaton_functions.thh,
 	* include/vaucanson/contextual_transducer_functions.thh,
 	* include/vaucanson/contextual_automaton_functions.thxx,
-	* include/vaucanson/contextual_transducer_functions.thxx: Manually fix 
+	* include/vaucanson/contextual_transducer_functions.thxx: Manually fix
 	typo for Sylvain's email.
 
 2004-10-26  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>

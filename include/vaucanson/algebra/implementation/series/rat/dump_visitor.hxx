@@ -294,10 +294,11 @@ namespace vcsn {
 	  (ostr_.pword(escaped()));
 
 	// FIXME: This code should be in operator << for monoid elements.
-	std::ostringstream o;
+	std::ostringstream	o;
 	o << m;
-	for (std::string::const_iterator i = o.str().begin();
-	     i != o.str().end();
+	std::string		w = o.str();
+	for (std::string::const_iterator i = w.begin();
+	     i != w.end();
 	     ++i)
 	  if (e.find(*i) != e.end())
 	    ostr_ << "\\" << *i;
