@@ -142,13 +142,6 @@ nobase_include_HEADERS =					     \
 	vaucanson/automata/concrete/automaton_view.hxx		       \
 	vaucanson/algorithms/complement.hxx			       \
 	vaucanson/algorithms/complement.hh			       \
-	vaucanson/algorithms/obsolete/concat.hxx.v0		       \
-	vaucanson/algorithms/obsolete/minimization_moore.hh.v0	       \
-	vaucanson/algorithms/obsolete/minimization_moore.hxx.v0	       \
-	vaucanson/algorithms/obsolete/normalized.hxx.v0		       \
-	vaucanson/algorithms/obsolete/standard.hxx.v0		       \
-	vaucanson/algorithms/obsolete/transpose.hh.v0		       \
-	vaucanson/algorithms/obsolete/transpose.hxx.v0		       \
 	vaucanson/algorithms/eval.hh				       \
 	vaucanson/algorithms/complete.hh			       \
 	vaucanson/algorithms/complete.hxx			       \
@@ -186,8 +179,6 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/sum.hh				       \
 	vaucanson/algorithms/trim.hh				       \
 	vaucanson/algorithms/trim.hxx				       \
-	vaucanson/algorithms/union.hh				       \
-	vaucanson/algorithms/union.hxx				       \
 	vaucanson/algorithms/berry_sethi.hxx			       \
 	vaucanson/algorithms/berry_sethi.hh			       \
 	vaucanson/algorithms/aut_to_exp.hh			       \

@@ -1,5 +1,10 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/Makefile.am: Fix.
+	* include/vaucanson/automata/concrete/kind_adapter.hxx: New.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* configure.ac: 
 		- (VCSN_TESTS): Remove (problems with distcheck).
 		- Adjust package version.
