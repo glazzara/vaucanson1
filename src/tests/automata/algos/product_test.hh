@@ -48,12 +48,12 @@ using namespace vcsn::algebra;
 using namespace vcsn::tools;
 
 template <class Auto>
-unsigned product_test(tests::Tester& t)
+unsigned product_test(tests::Tester& tg)
 {  
 //   std::filebuf fb;
 //   std::ostream os(&fb);
 //   fb.open ("automaton.dot", std::ios::out);
-
+  tests::Tester t(tg.verbose());
   typedef Auto automaton_t;
 
   gen_auto_t gen(time(0x0));
@@ -80,5 +80,5 @@ unsigned product_test(tests::Tester& t)
 
   //  misc::dot_dump(os, trim(d), "Product"); 
 
-  return EXIT_SUCCESS;
+  return t.all_passed();
 }

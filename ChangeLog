@@ -1,4 +1,15 @@
 2002-07-22  Maxime Rey  <max@lrde.epita.fr>
+	* Added `src/tests/automata/implementation_check/global_consistance_test.hh'
+	* Added `src/tests/automata/implementation_check/init_final_test.hh'
+	* Added `src/tests/automata/implementation_check/coherence_state_edge_test.hh'
+	* Added `src/tests/automata/implementation_check/add_state_test.hh'
+	* Added `src/tests/automata/implementation_check/add_edge_test.hh'
+	* Index: 0.88/src/tests/automata/algos/reachable_test.hh : minor
+	* Index: 0.88/src/tests/automata/algos/product_test.hh : minor
+	* Index: 0.88/src/tests/automata/algos/minimization_test.hh : changes
+
+
+2002-07-22  Maxime Rey  <max@lrde.epita.fr>
 
 	* Added `include/vaucanson/algorithms/trim.hxx' 
 	* Added `include/vaucanson/algorithms/complete.hxx' 
