@@ -3,3 +3,34 @@
 # $Id$
 # VCSN
 
+nobase_include_HEADERS = \
+./vaucanson/fundamental/slots.hxx\
+./vaucanson/fundamental/predefs.hh\
+./vaucanson/fundamental/meta_set.hh\
+./vaucanson/fundamental/slots.hh\
+./vaucanson/fundamental/element_base.hh\
+./vaucanson/fundamental/op_traits.hh\
+./vaucanson/fundamental/element_base.hxx\
+./vaucanson/fundamental/element.hh\
+./vaucanson/fundamental/element.hxx\
+./vaucanson/fundamental/element_ops.hh\
+./vaucanson/fundamental/fundamental.hh\
+./vaucanson/fundamental/meta_element.hxx\
+./vaucanson/fundamental/meta_element.hh\
+./vaucanson/fundamental/structure.hxx\
+./vaucanson/fundamental/structure.hh\
+./vaucanson/fundamental/default_ops.hxx\
+./vaucanson/fundamental/default_ops.hh\
+./vaucanson/misc/static.hh\
+./vaucanson/misc/container_ops.hxx\
+./vaucanson/misc/static.hxx\
+./vaucanson/misc/container_ops.hh\
+./vaucanson/misc/selectors.hh\
+./vaucanson/internal/traits.hh\
+./vaucanson/algebra/concrete/alphabets/set_alphabet.hxx\
+./vaucanson/algebra/concrete/alphabets/set_alphabet.hh\
+./vaucanson/algebra/concrete/alphabets/alphabets.hh\
+./vaucanson/algebra/concept/concepts.hxx\
+./vaucanson/algebra/concept/concepts.hh\
+./vaucanson/algebra/concept/alphabets_base.hxx\
+./vaucanson/algebra/concept/alphabets_base.hh

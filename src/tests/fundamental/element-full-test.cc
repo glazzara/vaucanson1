@@ -7,7 +7,7 @@
 // - to instantiate all services of element parameterized by empty classes.
 //
 
-#include <tests/tests_stuff.hh>
+#include <check/tests_stuff.hh>
 #include <vaucanson/fundamental/fundamental.hh>
 #include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
