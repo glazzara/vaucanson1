@@ -1,7 +1,7 @@
 // automata_ops.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -100,7 +100,7 @@ namespace vcsn {
   template <class S, class T>
   inline
   void
-  op_set_initial(const AutomataBase<S>& ss, T& v, 
+  op_set_initial(const AutomataBase<S>& ss, T& v,
 		 hstate_t state,
 		 const AutoType(series_elt_t)& s)
   {
@@ -114,8 +114,8 @@ namespace vcsn {
   template <class S, class T>
   inline
   typename Element<S, T>::series_elt_t
-  op_get_initial(const AutomataBase<S>& s, 
-		 const T& v, 
+  op_get_initial(const AutomataBase<S>& s,
+		 const T& v,
 		 hstate_t state)
   {
     return typename Element<S, T>::series_elt_t
@@ -124,11 +124,11 @@ namespace vcsn {
 		     zero_value(s.series(),
 				SELECT(AutoType(serie_value_t)))));
        }
-  
+
   template <class S, class T>
   inline
   void
-  op_set_final(const AutomataBase<S>& ss, T& v, 
+  op_set_final(const AutomataBase<S>& ss, T& v,
 	       hstate_t state,
 	       const typename Element<S, T>::series_elt_t& s)
   {
@@ -141,8 +141,8 @@ namespace vcsn {
   template <class S, class T>
   inline
   typename Element<S, T>::series_elt_t
-  op_get_final(const AutomataBase<S>& s, 
-	       const T& v, 
+  op_get_final(const AutomataBase<S>& s,
+	       const T& v,
 	       hstate_t state)
   {
     return typename Element<S, T>::series_elt_t
@@ -151,7 +151,7 @@ namespace vcsn {
 		   zero_value(s.series(),
 			      SELECT(AutoType(serie_value_t)))));
   }
-  
+
   template <class S, class T>
   inline
   void
@@ -167,7 +167,7 @@ namespace vcsn {
   {
     return v.clear_final();
   }
-  
+
   template <class S, class T>
   inline
   hstate_t
@@ -194,10 +194,10 @@ namespace vcsn {
 
   template <class S, class T>
   inline
-  hedge_t 
+  hedge_t
   op_add_edge(const AutomataBase<S>&, T& v,
-	      hstate_t from, 
-	      hstate_t to, 
+	      hstate_t from,
+	      hstate_t to,
 	      const typename Element<S, T>::label_t& label)
   {
     return v.add_edge(from, to, label);
@@ -205,10 +205,10 @@ namespace vcsn {
 
   template <class S, class T>
   inline
-  hedge_t 
+  hedge_t
   op_add_serie_edge(const AutomataBase<S>& s, T& v,
-		    hstate_t from, 
-		    hstate_t to, 
+		    hstate_t from,
+		    hstate_t to,
 		    const typename Element<S, T>::series_elt_t& l)
   {
     return op_add_edge(s, v, from, to, l.value());
@@ -216,12 +216,12 @@ namespace vcsn {
 
   template <class S, class T>
   inline
-  hedge_t 
+  hedge_t
   op_add_spontaneous(const AutomataBase<S>& s, T& v,
-		     hstate_t from, 
+		     hstate_t from,
 		     hstate_t to,
 		     const typename Element<S, T>::semiring_elt_t& w)
-  {    
+  {
     AutoType(series_elt_t) ss(s.series());
     ss.assoc(algebra::identity_as<AutoType(monoid_elt_value_t)>::
 	    of(s.series().monoid()), w);
@@ -230,26 +230,26 @@ namespace vcsn {
 
   template <class S, class T>
   inline
-  hedge_t 
+  hedge_t
   op_add_letter_edge(const AutomataBase<S>& s, T& v,
-		     hstate_t from, 
-		     hstate_t to, 
+		     hstate_t from,
+		     hstate_t to,
 		     const typename Element<S, T>::letter_t& l)
   {
     return op_add_edge(s, v, from, to, l);
   }
-  
+
   template <class S, class T>
   inline
   void
   op_update(const AutomataBase<S>&, T& v,
-	    hedge_t  e, 
+	    hedge_t  e,
 	    const AutoType(label_t)& l)
   {
     // FIXME: test that l != 0.
     v.update(e, l);
   }
-  
+
   template <class S, class T>
   inline
   void
@@ -267,7 +267,7 @@ namespace vcsn {
   {
     v.del_edge(e);
   }
-	 
+
   template <class S, class T>
   inline
   void
@@ -312,7 +312,7 @@ namespace vcsn {
   {
     return v.aim_of(e);
   }
-  
+
   template <class S, class T>
   inline
   typename Element<S, T>::label_t
@@ -321,7 +321,7 @@ namespace vcsn {
   {
     return v.label_of(e);
   }
-   
+
   template <class S, class T>
   inline
   const typename Element<S, T>::series_elt_t
@@ -332,7 +332,7 @@ namespace vcsn {
       (s.series(),
        v.label_of(e));
   }
-   
+
   template <class S, class T>
   inline
   typename Element<S, T>::serie_value_t
@@ -341,7 +341,7 @@ namespace vcsn {
   {
     return op_serie_of(s, v, e).value();
   }
-  
+
   template <class S, class T>
   inline
   typename Element<S, T>::monoid_elt_t
@@ -370,14 +370,14 @@ namespace vcsn {
   {
     return v.label_of(e);
   }
-  
+
   template <class S, class T>
   inline
   bool
   op_is_spontaneous(const AutomataBase<S>& s, const T& v,
 		    hedge_t e)
   {
-    return (op_serie_of(s, v, e) == 
+    return (op_serie_of(s, v, e) ==
 	    algebra::identity_as<AutoType(serie_value_t)>::of(s.series()));
   }
 
@@ -400,7 +400,7 @@ namespace vcsn {
 
     bool operator()(hedge_t e) const
     {
-      return (op_series_get(s_->series(), 
+      return (op_series_get(s_->series(),
  			    op_serie_of(*s_, *v_, e).value(),
  			    w_.value())
  	      != algebra::zero_as<AutoType(semiring_elt_value_t)>
@@ -461,54 +461,48 @@ namespace vcsn {
   // output_type        = hedge_t
   // direction	  = output
 
-  /*! store the output edges of the state 'from' using 'res'. */
-  template <class S, class T, 
-	    typename OutputIterator>					
+  template <class S, class T,
+	    typename OutputIterator>
   inline
   void op_delta(const AutomataBase<S>& s, const T& v,
-		OutputIterator res, 
-		hstate_t from, 
+		OutputIterator res,
+		hstate_t from,
 		delta_kind::edges k)
   {
     op_delta(s, v, res, from, always_true(), k);
   }
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true using 'res'. */
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
   void op_delta(const AutomataBase<S>&, const T& v,
-		OutputIterator res, 
-		hstate_t from, 
+		OutputIterator res,
+		hstate_t from,
 		const L& query,
 		delta_kind::edges k)
   {
     v.delta(res, from, query, k);
   }
-    
-  /*! store the output edges of the state 'from' where
-    the label matches the letter. */
+
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
   void op_letter_delta(const AutomataBase<S>& s, const T& v,
-		       OutputIterator res, 
-		       hstate_t from, 
+		       OutputIterator res,
+		       hstate_t from,
 		       const L& letter,
 		       delta_kind::edges k)
   {
     op_delta(s, v, res, from, make_letter_query(s.self(), v, letter), k);
   }
 
-  /*! store the output spontaneous transitions. */
   template <class S, class T,
 	    typename OutputIterator>
   inline
-  void op_spontaneous_delta(const AutomataBase<S>& s, 
+  void op_spontaneous_delta(const AutomataBase<S>& s,
 			    const T& v,
-			    OutputIterator res, 
-			    hstate_t from, 
+			    OutputIterator res,
+			    hstate_t from,
 			    delta_kind::edges k)
   {
     op_delta(s, v, res, from, make_spontaneous_query(s.self(), v), k);
@@ -518,8 +512,6 @@ namespace vcsn {
   // output_type        = hedge_t
   // direction	        = output
 
-  /*! store the output edges of the state 'from' in the container
-    'res' */
   template <class S, class T,
 	    typename Container>
   inline
@@ -530,15 +522,13 @@ namespace vcsn {
     op_delta(s, v, i, from, k);
   }
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   inline
-  void op_deltac(const AutomataBase<S>& s, 
+  void op_deltac(const AutomataBase<S>& s,
 		 const T& v,
-		 Container& res, 
-		 hstate_t from, 
+		 Container& res,
+		 hstate_t from,
 		 const L& query,
 		 delta_kind::edges k)
   {
@@ -547,15 +537,13 @@ namespace vcsn {
   }
 
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   inline
-  void op_letter_deltac(const AutomataBase<S>& s, 
+  void op_letter_deltac(const AutomataBase<S>& s,
 			const T& v,
-			Container& res, 
-			hstate_t from, 
+			Container& res,
+			hstate_t from,
 			const L& letter,
 			delta_kind::edges k)
   {
@@ -564,13 +552,12 @@ namespace vcsn {
 		    from, letter, k);
   }
 
-  /*! store the output op_spontaneous transitions. */
   template <class S, class T, class Container>
   inline
-  void op_spontaneous_deltac(const AutomataBase<S>& s, 
+  void op_spontaneous_deltac(const AutomataBase<S>& s,
 			     const T& v,
-			     Container& res, 
-			     hstate_t from, 
+			     Container& res,
+			     hstate_t from,
 			     delta_kind::edges k)
   {
     std::insert_iterator<Container> i(res, res.begin());
@@ -581,53 +568,47 @@ namespace vcsn {
   // output_type        = hstate_t
   // direction	  = output
 
-  /*! store the output states of the state 'from' using 'res'. */
-  template <class S, class T, 
-	    typename OutputIterator>					
+  template <class S, class T,
+	    typename OutputIterator>
   inline
   void op_delta(const AutomataBase<S>& s, const T& v,
-		OutputIterator res, 
-		hstate_t from, 
+		OutputIterator res,
+		hstate_t from,
 		delta_kind::states k)
   {
     op_delta(s, v, res, from, always_true(), k);
   }
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true using 'res'. */
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
   void op_delta(const AutomataBase<S>&, const T& v,
-		OutputIterator res, 
-		hstate_t from, 
+		OutputIterator res,
+		hstate_t from,
 		const L& query,
 		delta_kind::states)
   {
     v.delta(res, from, query, delta_kind::states());
   }
-    
-  /*! store the output states of the state 'from' where
-    the label matches the letter. */
+
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
   void op_letter_delta(const AutomataBase<S>& s, const T& v,
-		       OutputIterator res, 
-		       hstate_t from, 
+		       OutputIterator res,
+		       hstate_t from,
 		       const L& letter,
 		       delta_kind::states k)
   {
     op_delta(s, v, res, from, make_letter_query(s.self(), v, letter), k);
   }
 
-  /*! store the output spontaneous transitions. */
   template <class S, class T,
 	    typename OutputIterator>
   inline
   void op_spontaneous_delta(const AutomataBase<S>& s, const T& v,
-			    OutputIterator res, 
-			    hstate_t from, 
+			    OutputIterator res,
+			    hstate_t from,
 			    delta_kind::states k)
   {
     op_delta(s, v, res, from, make_spontaneous_query(s.self(), v), k);
@@ -637,8 +618,6 @@ namespace vcsn {
   // output_type        = hstate_t
   // direction	  = output
 
-  /*! store the output states of the state 'from' in the container
-    'res' */
   template <class S, class T,
 	    typename Container>
   inline
@@ -649,15 +628,13 @@ namespace vcsn {
     op_delta(s, v, i, from, k);
   }
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   inline
-  void op_deltac(const AutomataBase<S>& s, 
+  void op_deltac(const AutomataBase<S>& s,
 		 const T& v,
-		 Container& res, 
-		 hstate_t from, 
+		 Container& res,
+		 hstate_t from,
 		 const L& query,
 		 delta_kind::states k)
   {
@@ -666,15 +643,13 @@ namespace vcsn {
   }
 
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   inline
-  void op_letter_deltac(const AutomataBase<S>& s, 
+  void op_letter_deltac(const AutomataBase<S>& s,
 			const T& v,
-			Container& res, 
-			hstate_t from, 
+			Container& res,
+			hstate_t from,
 			const L& letter,
 			delta_kind::states k)
   {
@@ -683,13 +658,12 @@ namespace vcsn {
 		    from, letter, k);
   }
 
-  /*! store the output op_spontaneous transitions. */
   template <class S, class T, class Container>
   inline
-  void op_spontaneous_deltac(const AutomataBase<S>& s, 
+  void op_spontaneous_deltac(const AutomataBase<S>& s,
 			     const T& v,
-			     Container& res, 
-			     hstate_t from, 
+			     Container& res,
+			     hstate_t from,
 			     delta_kind::states k)
   {
     std::insert_iterator<Container> i(res, res.begin());
@@ -700,53 +674,47 @@ namespace vcsn {
   // output_type        = hedge_t
   // direction	  = output
 
-  /*! store the output edges of the state 'from' using 'res'. */
-  template <class S, class T, 
-	    typename OutputIterator>					
+  template <class S, class T,
+	    typename OutputIterator>
   inline
   void op_rdelta(const AutomataBase<S>& s, const T& v,
-		 OutputIterator res, 
-		 hstate_t from, 
+		 OutputIterator res,
+		 hstate_t from,
 		 delta_kind::edges k)
   {
     op_rdelta(s, v, res, from, always_true(), k);
   }
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true using 'res'. */
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
   void op_rdelta(const AutomataBase<S>&, const T& v,
-		 OutputIterator res, 
-		 hstate_t from, 
+		 OutputIterator res,
+		 hstate_t from,
 		 const L& query,
 		 delta_kind::edges k)
   {
     v.rdelta(res, from, query, k);
   }
-    
-  /*! store the output edges of the state 'from' where
-    the label matches the letter. */
+
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
   void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
-			OutputIterator res, 
-			hstate_t from, 
+			OutputIterator res,
+			hstate_t from,
 			const L& letter,
 			delta_kind::edges k)
   {
     op_rdelta(s, v, res, from, make_letter_query(s.self(), v, letter), k);
   }
 
-  /*! store the output spontaneous transitions. */
   template <class S, class T,
 	    typename OutputIterator>
   inline
   void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
-			     OutputIterator res, 
-			     hstate_t from, 
+			     OutputIterator res,
+			     hstate_t from,
 			     delta_kind::edges k)
   {
     op_rdelta(s, v, res, from, make_spontaneous_query(s.self(), v), k);
@@ -756,8 +724,6 @@ namespace vcsn {
   // output_type        = hedge_t
   // direction	  = output
 
-  /*! store the output edges of the state 'from' in the container
-    'res' */
   template <class S, class T,
 	    typename Container>
   inline
@@ -768,15 +734,13 @@ namespace vcsn {
     op_rdelta(s, v, i, from, k);
   }
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   inline
-  void op_rdeltac(const AutomataBase<S>& s, 
+  void op_rdeltac(const AutomataBase<S>& s,
 		  const T& v,
-		  Container& res, 
-		  hstate_t from, 
+		  Container& res,
+		  hstate_t from,
 		  const L& query,
 		  delta_kind::edges k)
   {
@@ -785,15 +749,13 @@ namespace vcsn {
   }
 
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   inline
-  void op_letter_rdeltac(const AutomataBase<S>& s, 
+  void op_letter_rdeltac(const AutomataBase<S>& s,
 			 const T& v,
-			 Container& res, 
-			 hstate_t from, 
+			 Container& res,
+			 hstate_t from,
 			 const L& letter,
 			 delta_kind::edges k)
   {
@@ -801,13 +763,12 @@ namespace vcsn {
     op_letter_rdelta(s, v, i, from, letter, k);
   }
 
-  /*! store the output op_spontaneous transitions. */
   template <class S, class T, class  Container>
   inline
-  void op_spontaneous_rdeltac(const AutomataBase<S>& s, 
+  void op_spontaneous_rdeltac(const AutomataBase<S>& s,
 			      const T& v,
-			      Container& res, 
-			      hstate_t from, 
+			      Container& res,
+			      hstate_t from,
 			      delta_kind::edges k)
   {
     std::insert_iterator<Container> i(res, res.begin());
@@ -818,26 +779,23 @@ namespace vcsn {
   // output_type        = hstate_t
   // direction	  = output
 
-  /*! store the output states of the state 'from' using 'res'. */
-  template <class S, class T, 
-	    typename OutputIterator>					
+  template <class S, class T,
+	    typename OutputIterator>
   inline
   void op_rdelta(const AutomataBase<S>&, const T& v,
-		 OutputIterator res, 
-		 hstate_t from, 
+		 OutputIterator res,
+		 hstate_t from,
 		 delta_kind::states k)
   {
     v.rdelta(res, from, always_true(), k);
   }
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true using 'res'. */
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
   void op_rdelta(const AutomataBase<S>& s, const T& v,
-		 OutputIterator res, 
-		 hstate_t from, 
+		 OutputIterator res,
+		 hstate_t from,
 		 const L& query,
 		 delta_kind::states)
   {
@@ -852,28 +810,25 @@ namespace vcsn {
 	++res;
       }
   }
-    
-  /*! store the output states of the state 'from' where
-    the label matches the letter. */
+
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
   void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
-			OutputIterator res, 
-			hstate_t from, 
+			OutputIterator res,
+			hstate_t from,
 			const L& letter,
 			delta_kind::states k)
   {
     op_rdelta(s, v, res, from, make_letter_query(s.self(), v, letter), k);
   }
 
-  /*! store the output spontaneous transitions. */
   template <class S, class T,
 	    typename OutputIterator>
   inline
   void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
-			     OutputIterator res, 
-			     hstate_t from, 
+			     OutputIterator res,
+			     hstate_t from,
 			     delta_kind::states k)
   {
     op_rdelta(s, v, res, from, make_spontaneous_query(s.self(), v), k);
@@ -883,8 +838,6 @@ namespace vcsn {
   // output_type        = hstate_t
   // direction	  = output
 
-  /*! store the output states of the state 'from' in the container
-    'res' */
   template <class S, class T,
 	    typename Container>
   inline
@@ -895,15 +848,13 @@ namespace vcsn {
     op_rdelta(s, v, i, from, k);
   }
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   inline
-  void op_rdeltac(const AutomataBase<S>& s, 
+  void op_rdeltac(const AutomataBase<S>& s,
 		  const T& v,
-		  Container& res, 
-		  hstate_t from, 
+		  Container& res,
+		  hstate_t from,
 		  const L& query,
 		  delta_kind::states k)
   {
@@ -912,15 +863,13 @@ namespace vcsn {
   }
 
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   inline
-  void op_letter_rdeltac(const AutomataBase<S>& s, 
+  void op_letter_rdeltac(const AutomataBase<S>& s,
 			 const T& v,
-			 Container& res, 
-			 hstate_t from, 
+			 Container& res,
+			 hstate_t from,
 			 const L& letter,
 			 delta_kind::states k)
   {
@@ -928,13 +877,12 @@ namespace vcsn {
     op_letter_rdelta(s, v, i, from, letter, k);
   }
 
-  /*! store the output op_spontaneous transitions. */
   template <class S, class T, class Container>
   inline
-  void op_spontaneous_rdeltac(const AutomataBase<S>& s, 
+  void op_spontaneous_rdeltac(const AutomataBase<S>& s,
 			      const T& v,
-			      Container& res, 
-			      hstate_t from, 
+			      Container& res,
+			      hstate_t from,
 			      delta_kind::states k)
   {
     std::insert_iterator<Container> i(res, res.begin());

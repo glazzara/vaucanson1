@@ -80,7 +80,7 @@ namespace utility
     generic_int_type();
     generic_int_type(const char_type&);
 
-    operator char_type () const;
+    operator CharT () const;
 
     bool operator == (const generic_int_type<CharT>&) const;
     bool eof() const;

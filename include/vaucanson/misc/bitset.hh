@@ -1,7 +1,7 @@
 // bitset.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -86,7 +86,7 @@ namespace utility
 
     /// Constructor with user-provided bit field.
     Bitset(size_type max, const data_type* data);
-    
+
     /// Copy constructor.
     Bitset(const Bitset& bs);
 
@@ -96,45 +96,45 @@ namespace utility
 
     /// Standard destructor.
     ~Bitset();
-  
+
     /// Affectation.
     Bitset&	operator = (const Bitset& rhs);
 
     /// Iterators.
-    /// @{
+    /** @{ */
     iterator		begin();
     const_iterator	begin() const;
     iterator		end();
     const_iterator	end() const;
-    /// @}
+    /** @} */
 
     /// Reverse iterators.
-    /// @{
+    /** @{ */
     reverse_iterator		rbegin();
     const_reverse_iterator	rbegin() const;
     reverse_iterator		rend();
     const_reverse_iterator	rend() const;
-    /// @}
+    /** @} */
 
     bool	empty() const;
     size_type	size() const;
     size_type	max_size() const;
 
     /// Insert an element into the set.
-    /// @{
+    /** @{ */
     std::pair<iterator, bool>	insert(const value_type& x);
     iterator			insert(iterator position, const value_type& x);
     template <class InputIterator>
     void			insert(InputIterator first,
 				       InputIterator last);
-    /// @}
+    /** @} */
 
     /// Erase an element from the set.
-    /// @{
+    /** @{ */
     void	erase(iterator position);
     size_type	erase(const key_type& x);
     void	erase(iterator first, iterator last);
-    /// @}
+    /** @} */
 
     /// Swap with another Bitset.
     void	swap(Bitset& other);
@@ -147,10 +147,10 @@ namespace utility
 
     /// Find an element in the set.
     iterator	find(const key_type& x) const;
-    
+
     /// Used for compatibility with std::set. Returns 0 or 1.
     size_type	count(const key_type& x) const;
-  
+
     iterator				lower_bound(const key_type& x) const;
     iterator				upper_bound(const key_type& x) const;
     std::pair<iterator, iterator>	equal_range(const key_type& x) const;
@@ -202,7 +202,7 @@ namespace utility
     /// Get the bit number of x inside the data_[i] attribute.
     static
     size_type	get_bitnum(const key_type& x);
-  
+
     /// Get a bit inside data_.
     bool	get_bit(size_type index, size_type bit) const;
 
@@ -230,7 +230,7 @@ namespace utility
 
     bit_iterator	bit_begin() const;
     const bit_iterator&	bit_end() const;
-    
+
     /// Get a bit inside data_ given an iterator.
     bool	get_bit(const bit_iterator& it) const;
 
@@ -242,42 +242,42 @@ namespace utility
     struct BitActionCount
     {
       BitActionCount();
-    
+
       CountType	value;
-    
+
       bool	operator () (const Bitset& bitset,
 			     size_type index,
 			     size_type bit,
 			     bool value);
     };
-    
+
     /*--------------------------------.
     | do_on_bit(BitAction, element_t) |
     `--------------------------------*/
-  
+
     /// Perform an action onto the bit corresponding to an element.
-    /// @{
+    /** @{ */
     template <class BitAction>
     bool	do_on_bit(BitAction& action, const key_type& x);
     template <class BitAction>
     bool	do_on_bit(BitAction& action, const bit_iterator& it);
-    /// @}
+    /** @} */
 
     /// Perform an action onto the bit corresponding to an element, const.
-    /// @{
+    /** @{ */
     template <class ConstBitAction>
     bool	do_on_bit(ConstBitAction& action, const key_type& x) const;
     template <class ConstBitAction>
     bool	do_on_bit(ConstBitAction& action,
 			  const bit_iterator& it) const;
-    /// @}
+    /** @} */
 
     /*-------------------.
     | Attributes, misc.  |
     `-------------------*/
 
     enum { invalid_size = static_cast <unsigned int> (-1) };
-  
+
     size_type		data_size_;
     data_type*		data_;
 
@@ -314,7 +314,7 @@ namespace utility
       bool			operator != (const const_iterator& rhs) const;
       bool			operator != (const iterator& rhs) const;
       value_type		operator * () const;
-      
+
     protected:
       void			skip_zeros_forward();
       void			skip_zeros_backward();
@@ -352,7 +352,7 @@ namespace utility
       bool		operator != (const iterator& rhs) const;
       bool		operator != (const const_iterator& rhs) const;
       value_type	operator * () const;
-      
+
     protected:
       void		skip_zeros_forward();
       void		skip_zeros_backward();
@@ -361,8 +361,8 @@ namespace utility
       bit_iterator cbit_;
     };
   };
-  
-  
+
+
   /// Print a bitset onto an output stream.
   std::ostream&
   operator << (std::ostream& ostr, const Bitset& set);
@@ -382,9 +382,9 @@ namespace std
   {
   public:
     typedef utility::Bitset		container_type;
-    
+
     insert_iterator(utility::Bitset& x, utility::Bitset::iterator);
-    
+
     insert_iterator<utility::Bitset>&
     operator = (utility::Bitset::const_reference value);
 
@@ -405,6 +405,6 @@ namespace std
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/misc/bitset.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // BITSET_HH

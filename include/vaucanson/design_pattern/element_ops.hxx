@@ -1,7 +1,7 @@
 // element_ops.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -50,18 +50,15 @@ namespace vcsn {
 
 #define ELEMENT_OP_PROTO_SYM(Op, Ret)				\
 template<typename S1, typename T1, typename S2, typename T2>	\
-static inline							\
 Ret operator Op(const Element<S1, T1>& x1,			\
 		const Element<S2, T2>& x2)
 
 #define ELEMENT_OP_PROTO_LEFT_FOREIGN(Op, Ret)			\
 template<typename S1, typename T1, typename T2>			\
-static inline							\
 Ret operator Op(const Element<S1, T1>& x1, const T2& x2)
 
 #define ELEMENT_OP_PROTO_RIGHT_FOREIGN(Op, Ret)			\
 template<typename T1, typename S2, typename T2>			\
-static inline							\
 Ret operator Op(const T1& x1, const Element<S2, T2>& x2)
 
   /*--------------------------.
@@ -71,7 +68,7 @@ Ret operator Op(const T1& x1, const Element<S2, T2>& x2)
 #define DELEGATE_SYM(OpName) \
  return op_ ## OpName(x1.set(), x2.set(), x1.value(), x2.value())
 #define DELEGATE_LEFT_FOREIGN(OpName) \
- return op_ ## OpName(x1.set(), x1.value(), op_convert(x1.set(), SELECT(T1), x2)) 
+ return op_ ## OpName(x1.set(), x1.value(), op_convert(x1.set(), SELECT(T1), x2))
 #define DELEGATE_RIGHT_FOREIGN(OpName) \
  return op_ ## OpName(x2.set(), op_convert(x2.set(), SELECT(T2), x1), x2.value())
 
@@ -164,17 +161,17 @@ ELEMENT_OPERATOR(%, mod)
 `-----------------------------------------------*/
 
 template<typename St, typename S, typename T>
-static inline St& 
+static inline St&
 operator <<(St& s, const Element<S, T>& e)
-{ 
-  return op_rout(e.set(), s, e.value()); 
+{
+  return op_rout(e.set(), s, e.value());
 }
 
 template<typename St, typename S, typename T>
-static inline St& 
+static inline St&
 operator >>(St& s, const Element<S, T>& e)
-{ 
-  return op_rin(e.set(), s, e.value()); 
+{
+  return op_rin(e.set(), s, e.value());
 }
 
 /*------------------------------------------.
@@ -182,10 +179,10 @@ operator >>(St& s, const Element<S, T>& e)
 `------------------------------------------*/
 
 template<typename S, typename T>
-static inline Element<S, T> 
+static inline Element<S, T>
 operator-(const Element<S, T>& e)
-{ 
-  return Element<S, T>(e.set(), op_neg(e.set(), e.value())); 
+{
+  return Element<S, T>(e.set(), op_neg(e.set(), e.value()));
 }
 
 } // vcsn
@@ -198,22 +195,22 @@ operator-(const Element<S, T>& e)
 namespace std
 {
   template<typename S, typename T1, typename T2>
-  void swap(vcsn::Element<S, T1>& e1, 
+  void swap(vcsn::Element<S, T1>& e1,
 	    vcsn::Element<S, T2>& e2)
-  { 
+  {
     assertion(&e1.set() == &e2.set());
-    vcsn::op_swap(e1.set(), e1.value(), e2.value()); 
-  } 
+    vcsn::op_swap(e1.set(), e1.value(), e2.value());
+  }
 
   template<typename S, typename T>
   void swap(vcsn::Element<S, T>& e1, T& v2)
-  { 
+  {
     vcsn::op_swap(e1.set(), e1.value(), v2);
   }
 
   template<typename T, typename S>
   void swap(T& v1, vcsn::Element<S, T>& e2)
-  { 
+  {
     vcsn::op_swap(e2.set(), v1, e2.value());
   }
 } // std

@@ -101,16 +101,16 @@ namespace utility {
      * @param n The number of character the window must be shifted. When
      *           not specified, the window length is taken.
      */
-    /// @{
+    /** @{ */
     void		shift(unsigned int n);
     void		shift();
-    /// @}
+    /** @} */
 
     /// Move to a specific offset.
-    /// @{
+    /** @{ */
     void		moveto(length_t offset);
     void		moveto(iterator_t position);
-    /// @}
+    /** @} */
 
     /// Returns the actual window size.
     length_t		size() const;
@@ -122,7 +122,7 @@ namespace utility {
     std::ostream&	print(std::ostream& ostr) const;
 
     /// Accessor to class members.
-    /// @{
+    /** @{ */
     iterator_t		begin() const;
     iterator_t		stream() const;
     iterator_t		end() const;
@@ -130,7 +130,7 @@ namespace utility {
     letter_t		eol_value() const;
     length_t		length() const;
     string_t		window() const;
-    /// @}
+    /** @} */
   protected:
     void		compute_size();
 

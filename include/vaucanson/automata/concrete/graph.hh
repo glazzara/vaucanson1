@@ -1,7 +1,7 @@
 // graph.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -59,7 +59,7 @@ namespace vcsn {
 
   // Mixin class to add state stuff to StateLabel.
   // The only precondition is that StateLabel must be a class.
-  struct state_value 
+  struct state_value
   {
     typedef std::list<hedge_t> edges_t;
     typedef std::list<hstate_t> states_t;
@@ -69,12 +69,25 @@ namespace vcsn {
     states_t predecessors;
   };
 
-  typedef utility::SparseInterval<hstate_t, std::set<hstate_t> > 
+  typedef utility::SparseInterval<hstate_t, std::set<hstate_t> >
   StateContainer;
 
-  typedef utility::SparseInterval<hedge_t, std::set<hedge_t> > 
+  typedef utility::SparseInterval<hedge_t, std::set<hedge_t> >
   EdgeContainer;
 
+  /**
+   * @brief Graph class to provide a generic implementation of automaton.
+   *
+   * This class represents a  classic graph, but provides services and
+   * uses a vocabulary which are specific to automata.
+   *
+   * It may be used as a generic implementation for automata.  This is
+   * the  only implementation  in  Vaucanson which  can  be used  with
+   * automata for the moment, but there should be other implementation
+   * soon.
+   *
+   * @bug FIXME: This stuff is not sufficiently documented.
+   */
   template <
     class K,
     class WordValue,
@@ -101,7 +114,7 @@ namespace vcsn {
     typedef utility::Support<initial_t>		  initial_support_t;
     typedef utility::Support<final_t>		  final_support_t;
 
-  public:      
+  public:
     Graph();
 
     hstate_t			add_state();
@@ -116,7 +129,7 @@ namespace vcsn {
     hstate_t			origin_of(hedge_t) const;
     hstate_t			aim_of(hedge_t) const;
     const label_t&		label_of(hedge_t) const;
-    
+
     initial_support_t		initial() const;
     void			set_initial(hstate_t, const serie_value_t&,
 					    const serie_value_t&);
@@ -127,7 +140,7 @@ namespace vcsn {
     final_support_t		final() const;
     void			set_final(hstate_t, const serie_value_t&,
 					  const serie_value_t&);
-    const serie_value_t&	get_final(hstate_t, 
+    const serie_value_t&	get_final(hstate_t,
 					  const serie_value_t&) const;
     void			clear_final();
 
@@ -140,7 +153,7 @@ namespace vcsn {
     template <class OutputIterator, class Query>
     void			delta(OutputIterator res,
 				      hstate_t from,
-				      const Query& q, 
+				      const Query& q,
 				      delta_kind::edges) const;
 
     template <class OutputIterator, class Query>
@@ -207,21 +220,21 @@ namespace vcsn {
 					WordValue, WeightValue,
 					SerieValue, Letter, Tag>);
 
-  template <class S, class WordValue, class WeightValue, class SerieValue, 
+  template <class S, class WordValue, class WeightValue, class SerieValue,
 	    class Letter, class Tag,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   inline
-  void op_letter_delta(const AutomataBase<S>& s, 
+  void op_letter_delta(const AutomataBase<S>& s,
 		       const Graph<labels_are_letters,
 		       WordValue, WeightValue,
-		       SerieValue, Letter, Tag>& v,					
-		       OutputIterator res, 
-		       hstate_t from, 
+		       SerieValue, Letter, Tag>& v,
+		       OutputIterator res,
+		       hstate_t from,
 		       const L& letter,
 		       delta_kind::states k)
   {
     typedef typename state_value::edges_t edges_t;
-    const edges_t& edges = 
+    const edges_t& edges =
       v.states_[from].output_edges;
     for_each_const_(edges_t, e, edges)
       if (v.edges_[*e].label == letter)
@@ -237,10 +250,10 @@ namespace vcsn {
 	    class SerieValue,
 	    class Letter,
 	    class Tag>
-  struct automaton_traits<Graph<Kind, 
-				WordValue, 
-				WeightValue, 
-				SerieValue, 
+  struct automaton_traits<Graph<Kind,
+				WordValue,
+				WeightValue,
+				SerieValue,
 				Letter,
 				Tag>  >
   {
@@ -276,15 +289,15 @@ namespace vcsn {
 	    class SerieValue,
 	    class Letter,
 	    class Tag>
-  struct transducer_traits<Graph<Kind, 
-				 WordValue, 
-				 WeightValue, 
-				 SerieValue, 
+  struct transducer_traits<Graph<Kind,
+				 WordValue,
+				 WeightValue,
+				 SerieValue,
 				 Letter,
-				 Tag>  > 
+				 Tag>  >
   {
     typedef WordValue			input_monoid_elt_value_t;
-    typedef typename algebra::series_traits<WeightValue>::monoid_value_t 
+    typedef typename algebra::series_traits<WeightValue>::monoid_value_t
     output_monoid_elt_value_t;
     typedef typename algebra::series_traits<WeightValue>::semiring_elt_value_t
     output_semiring_elt_value_t;
@@ -345,11 +358,11 @@ namespace vcsn {
     typedef typename automaton_traits<self_t>::semiring_elt_value_t
     series_elt_value_t;
 
-    typedef typename 
+    typedef typename
     algebra::series_traits<series_elt_value_t>::monoid_value_t
     monoid_value_t;
 
-    typedef typename 
+    typedef typename
     algebra::series_traits<series_elt_value_t>::semiring_elt_value_t
     semiring_elt_value_t;
 
@@ -400,6 +413,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/automata/concrete/graph.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_AUTOMATA_CONCRETE_GRAPH_HH

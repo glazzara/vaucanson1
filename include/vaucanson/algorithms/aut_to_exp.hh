@@ -1,7 +1,7 @@
 // aut_to_exp.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,15 +39,15 @@ namespace vcsn {
    * @file   aut_to_exp.hh
    * @author Yann Régis-Gianas <yann@lrde.epita.fr>
    * @date   Tue Jun 24 19:21:17 2003
-   * 
+   *
    * @brief  This file provides converter from automaton to expression.
-   * 
+   *
    */
 
 
   /*! \addtogroup algorithms */  /* @{ */
 
-  /** 
+  /**
    *  @brief Returns a serie which describes the language of the automaton.
    *
    *  This algorithm works on every kind of series. However, if,
@@ -59,7 +59,7 @@ namespace vcsn {
    *
    *
    * @param a the automaton to convert.
-   * 
+   *
    * @return a rational serie that describes the language of the automaton.
    * @see generalized
    */
@@ -68,7 +68,7 @@ namespace vcsn {
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a);
 
-  /** 
+  /**
    *  @brief Returns a serie which describes the language of the automaton.
    *
    *  This algorithm works on every kind of series. However, if,
@@ -79,16 +79,17 @@ namespace vcsn {
    *  rational expression.
    *
    *
-   * @param c a object-function that returns the next state to remove
+   * @param a The automaton to work on.
+   * @param c An object-function that returns the next state to remove
    * from the current state and the automaton.
-   * 
+   *
    * @return a rational serie that describes the language of the automaton.
    * @see generalized
    */
   template<typename A, typename T, typename Chooser_>
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a, const Chooser_& c);
-  
+
   /*! @} */
 
 } // vcsn
@@ -97,6 +98,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algorithms/aut_to_exp.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGORITHMS_AUT_TO_EXP_HH

@@ -1,7 +1,7 @@
 // partial_rat_exp_derivation.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@
 # include <vaucanson/misc/contract.hh>
 
 namespace vcsn {
-  
+
   template <typename T>
   void list_fusion_here(std::list<T>& dst, const std::list<T>& src)
   {
@@ -65,9 +65,14 @@ namespace vcsn {
       i->insert(elm);
   }
 
-  // FIXME: make list be a unique container
+  /**
+   * @brief  This class performs partial rational expression derivations.
+   *
+   * @bug FIXME: This class heavily lacks of documentation.
+   * @bug FIXME: Make list be a unique container.
+   */
   template <typename Series, typename T>
-  class PRatExpDerivationVisitor : 
+  class PRatExpDerivationVisitor :
     public rat::ConstNodeVisitor<typename T::monoid_value_t,
   				 typename T::semiring_elt_value_t>
   {
@@ -77,7 +82,7 @@ namespace vcsn {
     typedef typename T::node_t					node_t;
     typedef typename std::list<PartialExp<Series, T> >		return_type;
     typedef typename Element<Series, T>::semiring_elt_t		semiring_elt_t;
-    typedef typename semiring_elt_t::value_t				semiring_elt_value_t;
+    typedef typename semiring_elt_t::value_t			semiring_elt_value_t;
     typedef typename Element<Series, T>::monoid_elt_t		monoid_elt_t;
     typedef typename monoid_elt_t::value_t			monoid_value_t;
     typedef typename monoid_elt_t::set_t			monoid_t;
@@ -102,16 +107,16 @@ namespace vcsn {
       father_ = node;
       node->accept(*this);
     }
-    
+
   private:
     Element<Series, T> series(const T& e)
     {
       return Element<Series, T>(exp_.set(), e);
     }
-    
+
   public:
-    virtual void 
-    product(const node_t* lhs, const node_t* rhs) 
+    virtual void
+    product(const node_t* lhs, const node_t* rhs)
     {
       std::pair<semiring_elt_t, bool> ret = constant_term(series(series_impl_t(lhs)));
       if (ret.second == false)
@@ -119,7 +124,7 @@ namespace vcsn {
 	undefined = true;
 	return ;
       }
-      
+
       return_type tmp;
       if ( ret.first != exp_.set().semiring().zero(SELECT(semiring_elt_value_t)) )
       {
@@ -133,8 +138,8 @@ namespace vcsn {
       list_fusion_here(result, tmp);
     }
 
-    virtual void 
-    sum(const node_t* lhs, const node_t* rhs) 
+    virtual void
+    sum(const node_t* lhs, const node_t* rhs)
     {
       match(rhs);
       return_type tmp = result;
@@ -142,7 +147,7 @@ namespace vcsn {
       list_fusion_here(result, tmp);
     }
 
-    virtual void 
+    virtual void
     star(const node_t* node)
     {
       assertion(father_ != NULL);
@@ -161,20 +166,20 @@ namespace vcsn {
       list_insert_here(result, father);
     }
 
-    virtual void 
-    left_weight(const semiring_elt_value_t& w, const node_t* node) 
+    virtual void
+    left_weight(const semiring_elt_value_t& w, const node_t* node)
     {
       match(node);
       list_multiply_here(result, semiring_elt_t(w));
     }
-    
-    virtual void 
+
+    virtual void
     right_weight(const semiring_elt_value_t& , const node_t* node)
     {
       match(node);
     }
 
-    virtual void 
+    virtual void
     constant(const monoid_value_t& m)
     {
       result = return_type();
@@ -188,13 +193,13 @@ namespace vcsn {
       	result.push_back(PartialExp<Series, T>(exp_));
     }
 
-    virtual void 
+    virtual void
     zero()
     {
       result = return_type();
     }
 
-    virtual void 
+    virtual void
     one()
     {
       result = return_type();
@@ -214,10 +219,10 @@ namespace vcsn {
 /*****************************************************************************/
 /***************************** User's functions ******************************/
 /*****************************************************************************/
-    
+
   template <class Series, class T, class Letter>
   std::pair<std::list<PartialExp<Series, T> >, bool>
-  prat_exp_derivate(const Element<Series, T>& exp, 
+  prat_exp_derivate(const Element<Series, T>& exp,
  	  	    Letter a)
   {
     PRatExpDerivationVisitor<Series, T> visitor(exp, a);
@@ -227,7 +232,7 @@ namespace vcsn {
 
   template <class Series, class T, class Letter>
   std::pair<std::list<PartialExp<Series, T> >, bool>
-  prat_exp_derivate(const PartialExp<Series, T>& exp, 
+  prat_exp_derivate(const PartialExp<Series, T>& exp,
  	  	    Letter a)
   {
     typedef PartialExp<Series, T>			exp_t;
@@ -241,7 +246,7 @@ namespace vcsn {
     // Check if the exp is not empty
     if (exp.begin() == exp.end())
       return std::make_pair(exp_list_t(), true);
-    
+
     // Visit the first element of the exp
     PRatExpDerivationVisitor<Series, T> visitor(exp.exp(), a);
     const typename exp_t::value_t*	v = *exp.begin();
@@ -269,16 +274,16 @@ namespace vcsn {
 
       // Multiply by constant term
       list_multiply_here(ret.first, cterm.first);
-      
+
       // Fusion results
       visitor.undefined = visitor.undefined || !ret.second;
       list_fusion_here(visitor.result, ret.first);
     }
     //------------------------------------------------------------------------
-    
+
     // Multiply by the weight of exp
     list_multiply_here(visitor.result, exp.weight());
-    
+
     // Return the final result
     return std::make_pair(visitor.result, !visitor.undefined);
   }

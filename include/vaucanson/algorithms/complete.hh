@@ -1,7 +1,7 @@
 // complete.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -41,39 +41,42 @@ namespace vcsn {
 
   /*! \addtogroup algorithms */  /* @{ */
 
-  /** 
+  /**
    * Make the transition function of an automaton total w.r.t alphabet.
    * Work in place.
    *
    * @param a the deterministic and boolean automaton to complete.
    * @see complete.
    * @see is_complete.
-   */ 
+   */
   // INTERFACE: void complete_here(Automaton& a) { return vcsn::complete_here(*a); }
   // INTERFACE: void complete_here(GenAutomaton& a) { return vcsn::complete_here(*a); }
   template <typename A, typename T>
   void
   complete_here(Element<A, T>& a);
 
-  /** 
+  /**
    * Make the transition function of an automaton total w.r.t alphabet.
    * Return a fresh automaton.
    *
    * @param a the deterministic and boolean automaton to complete.
+   *
    * @see complete_here.
    * @see is_complete.
-   */ 
+   */
   // INTERFACE: Automaton complete(const Automaton& a) { return vcsn::complete(*a); }
   // INTERFACE: GenAutomaton complete(const GenAutomaton& a) { return vcsn::complete(*a); }
   template <typename A, typename T>
   Element<A, T>
-  complete(const Element<A, T>&);
+  complete(const Element<A, T>& a);
 
-  /** 
+  /**
    * Test if the transition function is complete for each state.
-   * 
+   *
    * @param a the boolean automaton to test.
+   *
    * @return true is the transition function of e is complete w.r.t alphabet.
+   *
    * @see complete.
    * @see complete_here.
    */
@@ -81,16 +84,16 @@ namespace vcsn {
   // INTERFACE: bool is_complete(const GenAutomaton& a) { return vcsn::is_complete(*a); }
   template <class A, class T>
   bool
-  is_complete(const Element<A, T>& e);
+  is_complete(const Element<A, T>& a);
 
   /*! @} */
 
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/complete.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/complete.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
+
 
 #endif // VCSN_ALGORITHMS_COMPLETE_HH

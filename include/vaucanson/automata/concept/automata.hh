@@ -1,7 +1,7 @@
 // automata.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -37,19 +37,22 @@ namespace vcsn {
 
   template <class Series>
   struct Automata;
-  
+
+  /// Dynamic traits for automata.
   template <class Series>
   struct dynamic_traits<Automata<Series> >
     : dynamic_traits<AutomataBase<Automata<Series> > >
   {
-    static const bool ret = dynamic_traits<Series>::ret;    
+    static const bool ret = dynamic_traits<Series>::ret;
   };
-  
+
+  /// MetaElement specialization for automata.
   template <class Series, typename T>
   struct MetaElement<Automata<Series>, T>
     : MetaElement<AutomataBase<Automata<Series> >, T>
   {};
 
+  /// Virtual types for automata.
   template <class Series>
   struct virtual_types<Automata<Series> >
     : virtual_types<AutomataBase<Automata<Series> > >
@@ -84,6 +87,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/automata/concept/automata.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_HH

@@ -1,7 +1,7 @@
 // standard.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -48,9 +48,9 @@ namespace vcsn {
    * Returns a standard automaton associated to the input.
    *
    * @param a The automaton to standardize
-   * 
+   *
    * @see is_standard
-   * 
+   *
    * @bug Not implemented yed
    */
   // INTERFACE: void standardize(Automaton& a) { return vcsn::standardize(*a); }
@@ -84,12 +84,12 @@ namespace vcsn {
    * @see standardize
    * @see is_standard
    * @see union_of_standard
-   */ 
+   */
   // INTERFACE: void union_of_standard_here(Automaton& a1, const Automaton& a2) { return vcsn::union_of_standard_here(*a1, *a2); }
   // INTERFACE: void union_of_standard_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_standard_here(*a1, *a2); }
   template<typename A, typename T, typename U>
-  void 
-  union_of_standard_here(Element<A, T>& lhs, 
+  void
+  union_of_standard_here(Element<A, T>& lhs,
 			 const Element<A, U>& rhs);
 
   /**
@@ -108,13 +108,13 @@ namespace vcsn {
   // INTERFACE: Automaton union_of_standard(const Automaton& a1, const Automaton& a2) { return vcsn::union_of_standard(*a1, *a2); }
   // INTERFACE: GenAutomaton union_of_standard(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_standard(*a1, *a2); }
   template<typename A, typename T, typename U>
-  Element<A, T> 
-  union_of_standard(const Element<A, T>& lhs, 
+  Element<A, T>
+  union_of_standard(const Element<A, T>& lhs,
 		    const Element<A, U>& rhs);
 
   /**
    * @brief In-place concatenation of two standard automata.
-   * 
+   *
    * This function make the concatenation of two standard automata. The
    * result is a standard automaton.
    *
@@ -128,13 +128,13 @@ namespace vcsn {
   // INTERFACE: void concat_of_standard_here(Automaton& a1, const Automaton& a2) { return vcsn::concat_of_standard_here(*a1, *a2); }
   // INTERFACE: void concat_of_standard_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concat_of_standard_here(*a1, *a2); }
   template<typename A, typename T, typename U>
-  void 
-  concat_of_standard_here(Element<A, T>& lhs, 
+  void
+  concat_of_standard_here(Element<A, T>& lhs,
 			  const Element<A, U>& rhs);
 
   /**
-   * @fresh Return a fresh concatenation of two standard automata.
-   * 
+   * @brief Return a fresh concatenation of two standard automata.
+   *
    * As @c concat_of_standard_here, this function build the union of two
    * automatons, but it builds a new one.
    *
@@ -148,8 +148,8 @@ namespace vcsn {
   // INTERFACE: Automaton concat_of_standard(const Automaton& a1, const Automaton& a2) { return vcsn::concat_of_standard(*a1, *a2); }
   // INTERFACE: GenAutomaton concat_of_standard(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concat_of_standard(*a1, *a2); }
   template<typename A, typename T, typename U>
-  Element<A, T> 
-  concat_of_standard(const Element<A, T>& lhs, 
+  Element<A, T>
+  concat_of_standard(const Element<A, T>& lhs,
 		     const Element<A, U>& rhs);
 
   /**
@@ -167,7 +167,7 @@ namespace vcsn {
   // INTERFACE: void star_of_standard_here(Automaton& a) { return vcsn::star_of_standard_here(*a); }
   // INTERFACE: void star_of_standard_here(GenAutomaton& a) { return vcsn::star_of_standard_here(*a); }
   template<typename A, typename T>
-  void 
+  void
   star_of_standard_here(Element<A, T>& a);
 
   /**
@@ -185,17 +185,17 @@ namespace vcsn {
   // INTERFACE: Automaton star_of_standard(const Automaton& a) { return vcsn::star_of_standard(*a); }
   // INTERFACE: GenAutomaton star_of_standard(const GenAutomaton& a) { return vcsn::star_of_standard(*a); }
   template<typename A, typename T>
-  Element<A, T> 
+  Element<A, T>
   star_of_standard(const Element<A, T>& a);
 
   /** @} */
-  
+
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algorithms/standard.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGORITHMS_STANDARD_HH

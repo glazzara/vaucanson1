@@ -1,7 +1,7 @@
 // tropical_semiring.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,53 +39,53 @@ namespace vcsn {
     /*---------------.
     | Identity value |
     `---------------*/
-    template<class TropicalKind, typename T> 
+    template<class TropicalKind, typename T>
     inline
     T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>), SELECTOR(T))
-    { 
-      return T(0); 
+    {
+      return T(0);
     }
-        
+
     template<typename T>
     inline
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T))
-    { 
-      return utility::limits<T>::min(); 
+    {
+      return utility::limits<T>::min();
     }
 
     template<>
     inline
     float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(float))
-    { 
-      return -utility::limits<float>::infinity(); 
+    {
+      return -utility::limits<float>::infinity();
     }
 
     template<>
     inline
     double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(double))
-    { 
-      return -utility::limits<double>::infinity(); 
+    {
+      return -utility::limits<double>::infinity();
     }
 
     template<typename T>
     inline
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T))
-    { 
-      return utility::limits<T>::max(); 
+    {
+      return utility::limits<T>::max();
     }
 
     template<>
     inline
     float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(float))
-    { 
-      return utility::limits<float>::infinity(); 
+    {
+      return utility::limits<float>::infinity();
     }
 
     template<>
     inline
     double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(double))
-    { 
-      return utility::limits<double>::infinity(); 
+    {
+      return utility::limits<double>::infinity();
     }
 
     /*------------.
@@ -94,8 +94,8 @@ namespace vcsn {
     template<class TropicalKind, typename T>
     inline
     bool op_contains(const algebra::TropicalSemiring<TropicalKind>& s, T c)
-    { 
-      return true; 
+    {
+      return true;
     }
 
     /*--------------------.
@@ -105,26 +105,26 @@ namespace vcsn {
     inline
     void op_in_mul(const algebra::TropicalSemiring<TropicalKind>& s1,
 		   T& dst, U arg)
-    { 
-      if ((dst == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), 
+    {
+      if ((dst == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
 			     SELECT(T))) ||
-	  (arg == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), 
+	  (arg == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
 			     SELECT(U))))
 	dst = zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), SELECT(T));
       else
-	dst += arg; 
+	dst += arg;
     }
 
     template<class TropicalKind, typename T, typename U>
     inline
     T op_mul(const algebra::TropicalSemiring<TropicalKind>&, T a, U b)
-    { 
-      if ((a == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), 
+    {
+      if ((a == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
 			   SELECT(T))) ||
-	  (b == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), 
+	  (b == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
 			   SELECT(U))))
 	return zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), SELECT(T));
-      return a + b; 
+      return a + b;
     }
 
     /*---------.
@@ -134,45 +134,45 @@ namespace vcsn {
     inline
     void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s1,
 		   T& dst, U arg)
-    { 
-      dst = std::max(dst, arg); 
+    {
+      dst = std::max(dst, arg);
     }
 
     template<typename T, typename U>
     void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMin>& s1,
 		   T& dst, U arg)
-    { 
-      dst = std::min(dst, arg); 
+    {
+      dst = std::min(dst, arg);
     }
 
     template<typename T, typename U>
     T op_add(const algebra::TropicalSemiring<algebra::TropicalMax>&, T a, U b)
-    { 
-      return std::max(a, b); 
+    {
+      return std::max(a, b);
     }
 
     template<typename T, typename U>
     T op_add(const algebra::TropicalSemiring<algebra::TropicalMin>&, T a, U b)
-    { 
-      return std::min(a, b); 
+    {
+      return std::min(a, b);
     }
 
     /*-----.
     | Star |
     `-----*/
     template <typename T>
-    static inline bool 
+    bool
     op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>&, T b)
-    { 
-      if (b < 0) 
+    {
+      if (b < 0)
 	return false;
       return true;
     }
 
     template <class T>
-    static inline void 
+    void
     op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>&, T& b)
-    { 
+    {
       if (b >= 0)
 	{
 	  b = 0;
@@ -182,18 +182,18 @@ namespace vcsn {
     }
 
     template <typename T>
-    static inline bool 
+    bool
     op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>&, T b)
-    { 
-      if (b > 0) 
+    {
+      if (b > 0)
 	return false;
       return true;
     }
 
     template <class T>
-    static inline void 
+    void
     op_in_star(const algebra::TropicalSemiring<algebra::TropicalMax>&, T& b)
-    { 
+    {
       if (b <= 0)
 	{
 	  b = 0;
@@ -203,7 +203,6 @@ namespace vcsn {
     }
 
     template <class TropicalKind, class T>
-    inline
     Element<algebra::TropicalSemiring<TropicalKind>, T>
     op_choose(const algebra::TropicalSemiring<TropicalKind>& set, SELECTOR(T))
     {
@@ -212,7 +211,6 @@ namespace vcsn {
     }
 
     template <class TropicalKind, typename T>
-    inline
     bool
     op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
 				SELECTOR(T))
@@ -251,23 +249,23 @@ namespace vcsn {
     `---------------*/
     template<typename St, typename T>
     St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMax>&, St& st, const T& v)
-    { 
+    {
       if (v == zero_value(SELECT(algebra::TropicalSemiring<algebra::TropicalMax>), SELECT(T)))
 	st << "-oo";
       else
 	st << v;
       return st;
-    }    
+    }
 
     template<typename St, typename T>
     St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>& s, St& st, const T& v)
-    { 
+    {
       if (v == zero_value(SELECT(algebra::TropicalSemiring<algebra::TropicalMin>), SELECT(T)))
 	st << "+oo";
       else
 	st << v;
       return st;
-    }    
+    }
 
 } // vcsn
 

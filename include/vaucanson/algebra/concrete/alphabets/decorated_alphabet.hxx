@@ -1,7 +1,7 @@
 // decorated_alphabet.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -38,14 +38,14 @@ namespace vcsn {
   namespace algebra
   {
     template <typename L, typename T>
-    AlphabetDecorator<L, T>::~AlphabetDecorator() 
+    AlphabetDecorator<L, T>::~AlphabetDecorator()
     {
       if (alphabet_owner_)
 	delete alphabet_;
     }
 
     template <typename L, typename T>
-    AlphabetDecorator<L, T>::AlphabetDecorator() 
+    AlphabetDecorator<L, T>::AlphabetDecorator()
     {
       alphabet_ = new T();
       joker_ = letter_traits<L>::default_joker;
@@ -54,11 +54,11 @@ namespace vcsn {
     }
 
     template <typename L, typename T>
-    AlphabetDecorator<L, T>::AlphabetDecorator(T& alphabet) :
+    AlphabetDecorator<L, T>::AlphabetDecorator(alphabet_impl_t& alphabet) :
       alphabet_(&alphabet)
     {
       alphabet_owner_ = false;
-      if (std::find(alphabet.begin(), alphabet.end(), 
+      if (std::find(alphabet.begin(), alphabet.end(),
 		    letter_traits<L>::default_joker())
 	  == alphabet.end())
 	joker_ = letter_traits<L>::default_joker();
@@ -76,7 +76,7 @@ namespace vcsn {
 	  } while (std::find(alphabet.begin(), alphabet.end(),
 			     joker_) != alphabet.end());
 	}
-      if (std::find(alphabet.begin(), alphabet.end(), 
+      if (std::find(alphabet.begin(), alphabet.end(),
 		    letter_traits<L>::default_other())
 	  == alphabet.end())
 	other_ = letter_traits<L>::default_other();
@@ -98,7 +98,7 @@ namespace vcsn {
 
     template <typename L, typename T>
     void
-    AlphabetDecorator<L, T>::insert(L l) 
+    AlphabetDecorator<L, T>::insert(L l)
     {
       alphabet().insert(l);
     }
@@ -113,14 +113,14 @@ namespace vcsn {
 
     template <typename L, typename T>
     typename AlphabetDecorator<L, T>::iterator
-    AlphabetDecorator<L, T>::begin() 
+    AlphabetDecorator<L, T>::begin()
     {
       return alphabet().begin();
     }
 
     template <typename L, typename T>
     typename AlphabetDecorator<L, T>::iterator
-    AlphabetDecorator<L, T>::end() 
+    AlphabetDecorator<L, T>::end()
     {
       return alphabet().end();
     }
@@ -134,7 +134,7 @@ namespace vcsn {
 
     template <typename L, typename T>
     typename AlphabetDecorator<L, T>::const_iterator
-    AlphabetDecorator<L, T>::end() const 
+    AlphabetDecorator<L, T>::end() const
     {
       return alphabet().end();
     }
@@ -146,7 +146,7 @@ namespace vcsn {
     }
 
     template <typename L, typename T>
-    T& AlphabetDecorator<L, T>::alphabet() 
+    T& AlphabetDecorator<L, T>::alphabet()
     {
       return *alphabet_;
     }
@@ -185,36 +185,36 @@ namespace vcsn {
 
   template <typename L, typename T>
   bool op_contains(const algebra::AlphabetSet<L>& s, const algebra::AlphabetDecorator<L, T>& a)
-  { 
-    return true; 
+  {
+    return true;
   }
 
   template <typename L, typename T>
   bool op_is_finite(const algebra::AlphabetSet<L>& s, const algebra::AlphabetDecorator<L, T>& a)
-  { 
-    return true; 
+  {
+    return true;
   }
 
   template <typename L, typename T>
-  bool op_contains_e(const algebra::AlphabetSet<L>& s, 
-		     const algebra::AlphabetDecorator<L, T>& a, 
+  bool op_contains_e(const algebra::AlphabetSet<L>& s,
+		     const algebra::AlphabetDecorator<L, T>& a,
 		     const L& v)
-  { 
-    if (v == a.joker()) 
+  {
+    if (v == a.joker())
       return true;
     if (v == a.other())
       return false;
-    return Element<algebra::AlphabetSet<L>, T>(s, a.alphabet()).contains(v); 
+    return Element<algebra::AlphabetSet<L>, T>(s, a.alphabet()).contains(v);
   }
 
   template <typename T, typename L>
-  bool op_letter_equality(const algebra::AlphabetSet<L>& s, 
-				 const algebra::AlphabetDecorator<L, T>& a, 
+  bool op_letter_equality(const algebra::AlphabetSet<L>& s,
+				 const algebra::AlphabetDecorator<L, T>& a,
 				 L lhs,
 				 L rhs)
   {
     Element<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> > e(s, a);
-    if (lhs == a.joker()) 
+    if (lhs == a.joker())
       return e.contains(rhs);
     if (rhs == a.joker())
       return e.contains(lhs);

@@ -1,7 +1,7 @@
 // berry_sethi.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -43,8 +43,18 @@
 namespace vcsn {
 
   using namespace algorithm_patterns;
-  
-  // Function used to get the linearized alphabet, with a zero-letter
+
+  /**
+   * @brief Computes a linearized alphabet from a rational expression.
+   *
+   * This function  returns a  linearized alphabet corresponding  to a
+   * rational expression, with an extra zero-letter in it.
+   *
+   * @param exp The expression to work on.
+   *
+   * @author Loic Fosse <loic@lrde.epita.fr>
+   * @see linearize()
+   */
   template <typename S, typename T>
   typename linearize_element<S, T>::alphabet_t
   linearized_alphabet(const Element<S, T>& exp)
@@ -56,9 +66,17 @@ namespace vcsn {
     result.insert(letter_t(0, 0));
     return result;
   }
-  
-  // A continuation on linearized expressions
-  // That include the case when letter is zero
+
+  /**
+   * This function computes a continuation on linearized expressions.
+   *
+   * This include the case when letter is zero.
+   *
+   * @param exp The expression to work on.
+   * @param l The letter used to compute the derivation.
+   *
+   * @author Loic Fosse <loic@lrde.epita.fr>
+   */
   template <typename Exp, typename Letter>
   Exp
   linear_exp_continuation(const Exp& exp, const Letter& l)
@@ -69,7 +87,7 @@ namespace vcsn {
 
     if (l == Letter(0,0))
       return exp;
-    
+
     alphabet_t	alpha = exp.set().monoid().alphabet();
     Exp		tmp = derivate(exp, l).first;
     Exp		zero = exp.set().zero(SELECT(value_t));
@@ -89,19 +107,26 @@ namespace vcsn {
       }
     return tmp;
   }
-  
-  // The Berry-Sethi algorithm.
-  // It is derivated from MathAutomataConstructor because we want to use
-  // the mathematical definition of the Berry-Sethi automaton.
-  //
-  // It precises the constructor to give a correct set to
-  // MathAutomataConstructor constructor.
-  // It also precises is_initial and is_final for a labeled state,
-  // and delta function.
-  //
-  // FIXME: - change the zero-letter
-  //        - check efficience
-  //        - check result of derivation
+
+  /**
+   * @brief This is the visitor that really computes Berry-Sethi.
+   *
+   * This class should be used  only in berry_sethi() and should not
+   * be instanciated from elsewhere.
+   *
+   * It is derived from MathAutomataConstructor because we want to use
+   * the mathematical definition of the Berry-Sethi automaton.
+   *
+   * It   defines  the   constructor  to   give  a   correct   set  to
+   * MathAutomataConstructor constructor.   It also defines is_initial
+   * and is_final for a labeled state, and delta function.
+   *
+   * @bug FIXME: Change the zero-letter.
+   * @bug FIXME: Check efficiency.
+   * @bug FIXME: Check results of derivation.
+   *
+   * @see berry_sethi()
+   */
   template <typename T_auto, typename S, typename T>
   struct BerrySethiAlgo : public MathAutomataConstructor <
     BerrySethiAlgo<T_auto, S, T>,
@@ -109,23 +134,33 @@ namespace vcsn {
     typename linearize_element<S, T>::letter_t >
   {
   public:
-    // Type of argument of constructor
+    /// Type of the argument to provide to the constructor.
     typedef
     Element<S, T>					exp_t;
-    // Types from linearize_element
+    /// Types from linearize_element.
+    /** @{ */
     typedef typename
     linearize_element<S, T>::element_t			linear_exp_t;
     typedef typename
     linearize_element<S, T>::alphabet_t			linear_alphabet_t;
     typedef typename
     linearize_element<S, T>::letter_t			etiq_t;
-    // Common types
+    /** @} */
+    // Common types.
     AUTOMATON_TYPES(T_auto);
 
-    // The constructor, which ask to initial_state() for set of states.
-    //
-    // It uses linear_alphabet_t as container, because there is no
-    // restriction on MathAutomataConstructor argument.
+    /**
+     * @brief Default constructor.
+     *
+     * This is  the default  constructor for BerrySethiAlgo,  it calls
+     * the  MathAutomataConstructor  constructor  with the  linearized
+     * alphabet enriched with an extra letter as the set of states for
+     * the resulting automaton.
+     *
+     * @see MathAutomataConstructor
+     *
+     * @bug FIXME: Is it necessary to give the series as a separate argument?
+     */
     BerrySethiAlgo(const series_t& series, const exp_t& exp):
       MathAutomataConstructor <BerrySethiAlgo, T_auto, etiq_t>
         (series, linearized_alphabet(exp)),
@@ -135,7 +170,8 @@ namespace vcsn {
       linear_alpha.insert(etiq_t(0, 0));
     }
 
-    // Functions to know if a state is final or initial
+    /// Those functions indicates whether a state is final or initial.
+    /** @{ */
     bool is_initial(const etiq_t& e) const
     {
       return (e == etiq_t(0, 0));
@@ -146,24 +182,24 @@ namespace vcsn {
       return constant_term(linear_exp_continuation(linear_exp, e)).first
 	!= linear_exp.set().semiring().zero(SELECT(semiring_elt_value_t));
     }
+    /** @} */
 
-    // Delta function
-    // It may return any kind of container
-    std::set<etiq_t>	delta(const etiq_t& e, const letter_t& l)
+    /// This is the delta function for the constructed automaton.
+    std::set<etiq_t> delta(const etiq_t& e, const letter_t& l)
     {
       typedef typename linear_alphabet_t::iterator	iterator;
       std::set<etiq_t>	result;
       linear_exp_t	continuation_e = linear_exp_continuation(linear_exp, e);
 
       for (iterator i = linear_alpha.begin(); i != linear_alpha.end(); ++i)
-	if ((i->first == l) && (derivation(continuation_e, *i) 
+	if ((i->first == l) && (derivation(continuation_e, *i)
 	                        == linear_exp_continuation(linear_exp, *i)))
 	  result.insert(*i);
       return result;
     }
 
   private:
-    // Derivation including zero
+    /// This is the derivation function, including zero.
     linear_exp_t	derivation(const linear_exp_t& exp, const etiq_t& e)
     {
       if (e == etiq_t(0, 0))
@@ -171,11 +207,13 @@ namespace vcsn {
       else
 	return derivate(exp, e).first;
     }
-    // The initial expression linearized
+
+    /// A linearized version of the initial expression.
     linear_exp_t	linear_exp;
+    /// A linearized alphabet of the initial expression.
     linear_alphabet_t	linear_alpha;
   };
-  
+
   template<typename T_auto, typename S, typename T>
   T_auto*	do_berry_sethi(const T_auto& out, const Element<S, T>& kexp)
   {

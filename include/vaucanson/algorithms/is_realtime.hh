@@ -1,7 +1,7 @@
 // is_realtime.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,34 +36,33 @@
  * @file   is_realtime.hh
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Fri Jul  4 13:49:07 2003
- * 
+ *
  * @brief  This file contains a test for realtime transducers.
- * 
+ *
  */
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  /** 
+  /**
    * @brief Test to detect realtime transducers.
-   * 
+   *
    * @param t the transducer to test.
-   * 
+   *
    * @return true if the transducer is realtime.
    */
 
   template<typename S, typename A>
   bool
-  is_realtime(const Element<S, A>&);
+  is_realtime(const Element<S, A>& t);
+
+  /** @} */
 
 } // vcsn
 
-  /*! @} */
-
-
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/is_realtime.hxx>
+# include <vaucanson/algorithms/is_realtime.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 #endif // VCSN_ALGORITHMS_IS_REALTIME_HH

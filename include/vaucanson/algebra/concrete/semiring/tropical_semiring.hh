@@ -1,7 +1,7 @@
 // tropical_semiring.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -41,10 +41,10 @@ namespace vcsn {
     /*---------------.
     | Identity value |
     `---------------*/
-    template<class TropicalKind, typename T> 
+    template<class TropicalKind, typename T>
     inline
     T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>), SELECTOR(T));
-        
+
     template<typename T>
     inline
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T));
@@ -59,7 +59,7 @@ namespace vcsn {
     template<class TropicalKind, typename T>
     inline
     bool op_contains(const algebra::TropicalSemiring<TropicalKind>& s, T c);
- 
+
     /*--------------------.
     | Multiplication is + |
     `--------------------*/
@@ -94,25 +94,25 @@ namespace vcsn {
     | Star |
     `-----*/
     template <typename T>
-    static inline bool 
-    op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>& s, T b);
+    bool
+    op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>&, T b);
 
     template <class T>
-    static inline void 
+    void
     op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>& s, T& b);
 
     template <typename T>
-    static inline bool 
-    op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>& s, T b);
+    bool
+    op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>&, T b);
 
     template <class T>
-    static inline void 
-    op_in_star(const algebra::TropicalSemiring<algebra::TropicalMax>& s, T& b);
-    
+    void
+    op_in_star(const algebra::TropicalSemiring<algebra::TropicalMax>&, T& b);
+
     template <class TropicalKind, class T>
     Element<algebra::TropicalSemiring<TropicalKind>, T>
     op_choose(const algebra::TropicalSemiring<TropicalKind>& set, SELECTOR(T));
-    
+
     template <class TropicalKind, typename T>
     bool
     op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
@@ -145,6 +145,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concrete/semiring/tropical_semiring.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_SEMIRING_TROPICAL_SEMIRING_HH

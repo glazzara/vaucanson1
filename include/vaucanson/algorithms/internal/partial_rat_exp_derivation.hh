@@ -1,7 +1,7 @@
 // partial_rat_exp_derivation.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,13 +31,13 @@
 # define VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_DERIVATION_HH
 
 /**
- * @file partial_rat_exp_constant_term.hh
+ * @file partial_rat_exp_derivation.hh
  * @author Loic Fosse <loic@lrde.epita.fr>
  * @date   Fri Jul  4 11:53:07 CEST 2003
- * 
+ *
  * @brief The @c derivation of @c PartialExp. (undocumented)
  *
- * This file described the derivation on PartialExp.
+ * This file describes the derivation on PartialExp.
  * It is for this algorithm that PartialExp was created.
  */
 
@@ -52,20 +52,20 @@ namespace vcsn {
   // Be carefull: the exp must be realtime !
   template <class Series, class T, class Letter>
   std::pair<std::list<PartialExp<Series, T> >, bool>
-  prat_exp_derivate(const Element<Series, T>& exp, 
+  prat_exp_derivate(const Element<Series, T>& exp,
  	  	    Letter a);
 
   template <class Series, class T, class Letter>
   std::pair<std::list<PartialExp<Series, T> >, bool>
-  prat_exp_derivate(const PartialExp<Series, T>& exp, 
+  prat_exp_derivate(const PartialExp<Series, T>& exp,
  	  	    Letter a);
 
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx>
+# include <vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_DERIVATION_HH

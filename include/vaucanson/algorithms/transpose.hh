@@ -1,7 +1,7 @@
 // transpose.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,7 @@
 # define VCSN_ALGORITHMS_TRANSPOSE_HH
 
 /**
- * @file transpose.hh
+ * @file algorithms/transpose.hh
  * This file contain the function which transpose an automaton.
  */
 
@@ -44,9 +44,9 @@ namespace vcsn {
 
   /**
    * @brief Transposition of an automaton.
-   * 
+   *
    * This function copy in @c dst the transposition of the automaton @c from.
-   * 
+   *
    * @param from Automaton to transpose
    * @param dst Destination
    */
@@ -75,6 +75,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algorithms/transpose.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGORITHMS_TRANSPOSE_HH

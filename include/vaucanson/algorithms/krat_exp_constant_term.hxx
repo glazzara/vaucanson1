@@ -1,7 +1,7 @@
 // krat_exp_constant_term.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,10 +36,18 @@
 
 namespace vcsn {
 
+  /**
+   * @brief This is the visitor that really computes the constant term.
+   *
+   * This class should be used  only in constant_term() and should not
+   * be instanciated from elsewhere.
+   *
+   * @see constant_term()
+   */
   template <class Series, class T, class Dispatch>
   class ConstantTermEval : public algebra::KRatExpMatcher<
     ConstantTermEval<Series, T, Dispatch>,
-    T, 
+    T,
     typename Element<Series, T>::semiring_elt_t,
     Dispatch
     >
@@ -109,11 +117,11 @@ namespace vcsn {
     END
 
     bool undefined;
-    
+
   private:
     Element<Series, T> exp_;
   };
-  
+
   template <class Series, class T>
   std::pair<typename Element<Series, T>::semiring_elt_t, bool>
   constant_term(const Element<Series, T>& exp)

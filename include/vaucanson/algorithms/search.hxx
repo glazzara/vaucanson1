@@ -1,7 +1,7 @@
 // search.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,13 +31,15 @@
 #ifndef VCSN_ALGORITHMS_SEARCH_HXX
 # define VCSN_ALGORITHMS_SEARCH_HXX
 
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file search.hxx
- * 
+ *
  * @brief Rational expression search in text.
- * 
+ *
  * This file contains functions to perform rational expression search.
  */
+/** @} */
 
 # include <vaucanson/algorithms/search.hh>
 # include <vaucanson/misc/window.hh>
@@ -46,8 +48,6 @@
 # include <vector>
 
 namespace vcsn {
-
-  /** @addtogroup algorithms *//** @{ */
 
   template <class InputIterator, class FoundFunctor, class Series, class T>
   void
@@ -59,7 +59,7 @@ namespace vcsn {
   {
     FindBestSearch::search(a, begin, end, eol, f);
   }
-  
+
   template <class InputIterator, class FoundFunctor, class Series, class T>
   void
   FindBestSearch::search(const Element<Automata<Series>, T>& a,
@@ -71,6 +71,8 @@ namespace vcsn {
   {
     WindowedBackSearch::search(a, begin, end, eol, f);
   }
+
+  /** @addtogroup algorithms *//** @{ */
 
   /**
    * @brief Compute distances from initial states to final states.
@@ -123,7 +125,7 @@ namespace vcsn {
     postcondition(i == distances.size());
     return i - 1;
   }
-  
+
   /**
    * @brief Back search inside a window.
    *
@@ -181,8 +183,7 @@ namespace vcsn {
     return std::make_pair(false, critpos);
   }
 
-  /// Finds the longest match of a starting from w, and report it to
-  /// the functor.
+  /// Finds the longest match of a starting from w, and report it to the functor.
   template <class InputIterator, class FoundFunctor, class Series, class T>
   static
   InputIterator
@@ -226,6 +227,8 @@ namespace vcsn {
     else
       return w.stream();
   }
+
+  /** @} */
 
   template <class InputIterator, class FoundFunctor, class Series, class T>
   void
@@ -272,8 +275,6 @@ namespace vcsn {
       }
   }
 
-  /** @} */
-  
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_SEARCH_HH

@@ -1,7 +1,7 @@
 // alphabets_base.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -61,7 +61,7 @@ namespace vcsn {
      * </ul>
      */
     template<class S>
-    struct AlphabetSetBase 
+    struct AlphabetSetBase
       : Structure<S>
     {
     protected:
@@ -77,7 +77,7 @@ namespace vcsn {
     | alphabet_traits |
     `----------------*/
 
-    /** 
+    /**
      * @brief Trait for virtual types of structural elements for alphabets.
      *
      * This trait contains a definition of @c letter_t, the type of
@@ -85,11 +85,11 @@ namespace vcsn {
      * derivated structures.
      */
     template<typename S, typename T>
-    struct alphabet_traits 
+    struct alphabet_traits
     {
       /// The type of letters in any alphabet.
 typedef undefined_type	letter_t;
-      
+
       /// Whether an alphabet contains dynamic data.
 static const bool dynamic_data = false;
     };
@@ -101,15 +101,15 @@ static const bool dynamic_data = false;
 
   /** @addtogroup algebra *//** @{ */
   /** @addtogroup alphabet *//** @{ */
- 
+
 
   /*---------------.
   | dynamic_traits |
   `---------------*/
-  
+
   /// Specialization of @c dynamic_traits for @c AlphabetSetBase.
   template<typename S>
-  struct dynamic_traits<algebra::AlphabetSetBase<S> > 
+  struct dynamic_traits<algebra::AlphabetSetBase<S> >
     : dynamic_traits<Structure<S> >
   { };
 
@@ -124,27 +124,27 @@ static const bool dynamic_data = false;
   { };
 
 
-  
+
   /*--------------------------------------.
   | MetaElement<AlphabetSetBase<Self>, T> |
   `--------------------------------------*/
 
   /**
    * @brief Specialization of @c MetaElement for @c AlphabetSetBase.
-   * 
+   *
    * This class defines services shared by all alphabets.
    */
   template<class S, typename T>
   struct MetaElement<algebra::AlphabetSetBase<S>, T>
     : MetaElement<Structure<S>, T>
   {
-    
+
     /// The type of letters in the alphabet.
-typedef typename algebra::alphabet_traits<S, T>::letter_t letter_t;
-    
+    typedef typename algebra::alphabet_traits<S, T>::letter_t letter_t;
+
     /// The type of the letter iterator for constant alphabets.
     typedef typename op_begin_traits<S, T>::const_ret_t	const_iterator;
-    
+
     /// The type of the letter iterator for mutable alphabets.
     typedef typename op_begin_traits<S, T>::ret_t iterator;
 
@@ -171,21 +171,21 @@ typedef typename algebra::alphabet_traits<S, T>::letter_t letter_t;
     /// Tell whether the alphabet contains a finite number of letters.
     bool is_finite() const;
 
-    /** @{ */
     /// Retrieve a begin iterator.
+    /** @{ */
     iterator begin();
     const_iterator begin() const;
     /** @} */
 
-    /** @{ */
     /// Retrieve an end iterator.
+    /** @{ */
     iterator end();
     const_iterator end() const;
     /** @} */
 
   protected:
-    /** @{ */
     /// Protected constructors.
+    /** @{ */
     MetaElement();
     MetaElement(const MetaElement& other);
   };
@@ -193,11 +193,11 @@ typedef typename algebra::alphabet_traits<S, T>::letter_t letter_t;
   /// Implementation of generic stream output operator for alphabets.
   template<typename S, typename St, typename T>
   St& op_rout(const algebra::AlphabetSetBase<S>& s, St& st, const T& a);
- 
+
   /// Implementation of generic letter equality modulo meta-characters.
   template <typename S, typename T, typename L>
-  bool op_letter_equality(const algebra::AlphabetSetBase<S>& s, 
-			  const T& a, 
+  bool op_letter_equality(const algebra::AlphabetSetBase<S>& s,
+			  const T& a,
 			  L lhs,
 			  L rhs);
 
@@ -210,6 +210,6 @@ typedef typename algebra::alphabet_traits<S, T>::letter_t letter_t;
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concept/alphabets_base.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCEPT_ALPHABETS_BASE_HH

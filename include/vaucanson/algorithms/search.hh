@@ -1,7 +1,7 @@
 // search.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,13 +31,15 @@
 #ifndef VCSN_ALGORITHMS_SEARCH_HH
 # define VCSN_ALGORITHMS_SEARCH_HH
 
+/** @addtogroup algorithm *//** @{ */
 /**
  * @file search.hh
- * 
+ *
  * @brief Rational expression search in text.
- * 
+ *
  * This file contains functions to perform rational expression search.
  */
+/** @} */
 
 # include <vaucanson/automata/concept/automata.hh>
 
@@ -54,21 +56,21 @@ namespace vcsn {
    *
    * @param a The automaton which recognizes the searched words.
    * @param begin An input iterator to the begining of the text.
-   * @begin end An iterator to the end of the text.
-   * @begin eol The character to use for ending a line.
-   * @param f A functor with an operator () method taking 3 InputIterator as 
+   * @param end An iterator to the end of the text.
+   * @param eol The character to use for ending a line.
+   * @param f A functor with an operator () method taking 3 InputIterator as
    *	      argument which will be called each time a match is found.
    *          the first one points to the begining of the stream. The two
    *          following ones are respectively the first and the last position
    *          of the match in the stream.
    *
    * @authors Thomas Claveirole <thomas@lrde.epita.fr>
-   * 
-   * @bugs Multiple implementations of search() should be
-   *	   implemented. When a call to search is performed an heuristic
-   *       should decide which implementation to use. For the moment there
-   *       is no such mechanism since only one implementation of search is
-   *       provided.
+   *
+   * @bug Multiple implementations of search() should be
+   *	  implemented. When a call to search is performed an heuristic
+   *      should decide which implementation to use. For the moment there
+   *      is no such mechanism since only one implementation of search is
+   *      provided.
    */
   template <class InputIterator, class FoundFunctor, class Series, class T>
   void
@@ -92,7 +94,7 @@ namespace vcsn {
   struct FindBestSearch
   {
     template <class InputIterator, class FoundFunctor, class Series, class T>
-    static 
+    static
     void
     search(const Element<Automata<Series>, T>& a,
 	   const InputIterator& begin,
@@ -107,7 +109,7 @@ namespace vcsn {
    * This class owns a specific implementation of search. This implementation
    * use an algorithm able to skip characters in the input stream, using a
    * backward search inside windows in the stream.
-   * 
+   *
    * One important precondition for using this algorithm is that there *must*
    * be no spontaneous transition inside the given automaton.
    *
@@ -118,7 +120,7 @@ namespace vcsn {
   struct WindowedBackSearch
   {
     template <class InputIterator, class FoundFunctor, class Series, class T>
-    static 
+    static
     void
     search(const Element<Automata<Series>, T>& a,
 	   const InputIterator& begin,
@@ -126,15 +128,15 @@ namespace vcsn {
 	   typename Element<Automata<Series>, T>::letter_t eol,
 	   FoundFunctor& f);
   };
-  
+
   /** @} */
-  
+
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/search.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/search.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
+
 
 #endif // VCSN_ALGORITHMS_SEARCH_HH

@@ -1,7 +1,7 @@
 // transducer.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,24 +39,28 @@ namespace vcsn {
 
   template <class Series>
   struct Transducer;
-  
-   template <class Series>
-   struct dynamic_traits<Transducer<Series> >
-   {
-     static const bool ret = dynamic_traits<Series>::ret;    
-   };
- 
+
+  /// Dynamic traits for transducers.
+  template <class Series>
+  struct dynamic_traits<Transducer<Series> >
+  {
+    static const bool ret = dynamic_traits<Series>::ret;
+  };
+
+  /// Specialization of MetaElement for transducers.
   template <class Series, typename T>
   struct MetaElement<Transducer<Series>, T>
     : MetaElement<TransducerBase<Transducer<Series> >, T>
   {};
 
+  /// Virtual types for transducers.
   template <class Series>
   struct virtual_types<Transducer<Series> >
   {
     typedef Series		series_t;
   };
-    
+
+  /// This is the final class for the set of transducers.
   template <class Series>
   class Transducer
     : public TransducerBase<Transducer<Series> >
@@ -76,17 +80,17 @@ namespace vcsn {
   template <class S, class T>
   struct output_projection_helper
   {
-    typedef typename S::series_t::semiring_t                    
+    typedef typename S::series_t::semiring_t
     typeof_auto_series_t;
     typedef typename S::series_t::monoid_t              auto_monoid_t;
     typedef typename typeof_auto_series_t::semiring_t           auto_semiring_t;
     typedef typename algebra::mute_series_traits<typeof_auto_series_t,
 						 auto_semiring_t,
-						 auto_monoid_t>::ret    
+						 auto_monoid_t>::ret
     auto_series_t;
-    
+
     typedef typename output_projection_traits<T>::ret          auto_impl_t;
-    typedef Element<Automata<auto_series_t>, 
+    typedef Element<Automata<auto_series_t>,
 		    auto_impl_t>      ret;
   };
 
@@ -112,6 +116,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/automata/concept/transducer.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH

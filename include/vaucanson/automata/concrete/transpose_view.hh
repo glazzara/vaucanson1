@@ -1,7 +1,7 @@
 // transpose_view.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -35,6 +35,16 @@
 
 namespace vcsn {
 
+  /**
+   * @brief Provides a transposed view of an automaton.
+   *
+   * This  structure  allow  a  programmer  to work  on  a  transposed
+   * automaton   without  having   really   transposed  the   original
+   * automaton.  It  is  just  a  kind of  proxy  for  an  automaton's
+   * implementation.
+   *
+   * @see transpose()
+   */
   template <class T>
   struct TransposeView : public IdentityView<T>
   {
@@ -43,7 +53,9 @@ namespace vcsn {
     TransposeView(T&);
     TransposeView(const TransposeView&);
   };
-  
+
+  /// Traits for TransposeView.
+  /** @{ */
   template <class T>
   struct transpose_traits
   {
@@ -55,7 +67,14 @@ namespace vcsn {
   {
     typedef Element<S, TransposeView<T> > type;
   };
+  /** @} */
 
+  /**
+   * @brief This function creates a transposed view of an automaton.
+   *
+   * @see transpose(), TransposeView
+   */
+  /** @{ */
   template <class S, class T>
   Element<S, TransposeView<T> >
   transpose_view(Element<S, T>&);
@@ -63,7 +82,9 @@ namespace vcsn {
   template <class S, class T>
   const Element<S, TransposeView<T> >
   transpose_view(const Element<S, T>&);
+  /** @} */
 
+  /// automaton_traits specialization for the TransposeView implementation.
   template <typename T>
   struct automaton_traits<TransposeView<T> >
   {
@@ -90,6 +111,8 @@ namespace vcsn {
 #define AutoType(Type) \
   typename Element<S, TransposeView<T> >::Type
 
+  /// Operations on automata implemented with TransposeView.
+  /** @{ */
   template <class S, class T>
   typename automaton_traits<TransposeView<T> >::initial_support_t
   op_initial(const AutomataBase<S>&, const TransposeView<T>&);
@@ -100,28 +123,28 @@ namespace vcsn {
 
   template <class S, class T>
   void
-  op_set_initial(const AutomataBase<S>&, TransposeView<T>&, 
+  op_set_initial(const AutomataBase<S>&, TransposeView<T>&,
 		 hstate_t state,
 		 const AutoType(series_elt_t)& s);
 
   template <class S, class T>
   AutoType(series_elt_t)
-  op_get_initial(const AutomataBase<S>&, 
-		 const TransposeView<T>&, 
-		 hstate_t state);
-  
+  op_get_initial(const AutomataBase<S>&,
+		 const TransposeView<T>&,
+		 hstate_t);
+
   template <class S, class T>
   void
-  op_set_final(const AutomataBase<S>&, TransposeView<T>&, 
+  op_set_final(const AutomataBase<S>&, TransposeView<T>&,
 	       hstate_t state,
 	       const typename Element<S, T>::series_elt_t& s);
 
   template <class S, class T>
   typename Element<S, T>::series_elt_t
-  op_get_final(const AutomataBase<S>&, 
-	       const TransposeView<T>&, 
+  op_get_final(const AutomataBase<S>&,
+	       const TransposeView<T>&,
 	       hstate_t state);
-  
+
   template <class S, class T>
   void
   op_clear_initial(const AutomataBase<S>&, TransposeView<T>&);
@@ -129,7 +152,7 @@ namespace vcsn {
   template <class S, class T>
   void
   op_clear_final(const AutomataBase<S>&, TransposeView<T>&);
-  
+
   template <class S, class T>
   hstate_t
   op_origin_of(const AutomataBase<S>&, const TransposeView<T>&,
@@ -139,296 +162,380 @@ namespace vcsn {
   hstate_t
   op_aim_of(const AutomataBase<S>&, const TransposeView<T>&,
 	    hedge_t);
-  
+
+  /** @} */
+
   // output_return_type = OutputIterator
   // output_type        = hedge_t
-  // direction	  = output
+  // direction		= output
 
-  /*! store the output edges of the state 'from' using 'res'. */
-  template <class S, class T, 
-	    typename OutputIterator>					
+  /// store the output edges of the state 'from' using 'res'.
+  template <class S, class T,
+	    typename OutputIterator>
   void op_delta(const AutomataBase<S>&, const TransposeView<T>&,
-		OutputIterator res, 
-		hstate_t from, 
+		OutputIterator res,
+		hstate_t from,
 		delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true using 'res'. */
+  /**
+   * @brief Delta with a query and iterator output.
+   *
+   * Store the output edges  of the state 'from' where query(label(e))
+   * is true using 'res'.
+   */
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   void op_delta(const AutomataBase<S>&, const TransposeView<T>&,
-		OutputIterator res, 
-		hstate_t from, 
+		OutputIterator res,
+		hstate_t from,
 		const L& query,
 		delta_kind::edges k);
-    
-  /*! store the output edges of the state 'from' where
-    the label matches the letter. */
+
+  /**
+   * @brief Delta on a letter with iterator output.
+   *
+   * Store  the output  edges  of  the state  'from'  where the  label
+   * matches the letter.
+   */
   template <class S, class T,
-	    typename OutputIterator, typename L>	
+	    typename OutputIterator, typename L>
   void op_letter_delta(const AutomataBase<S>&, const TransposeView<T>&,
-		       OutputIterator res, 
-		       hstate_t from, 
+		       OutputIterator res,
+		       hstate_t from,
 		       const L& letter,
 		       delta_kind::edges k);
 
-  /*! store the output spontaneous transitions. */
+  /// Store the output spontaneous transitions.
   template <class S, class T,
 	    typename OutputIterator>
   void op_spontaneous_delta(const AutomataBase<S>&, const TransposeView<T>&,
-			    OutputIterator res, 
-			    hstate_t from, 
+			    OutputIterator res,
+			    hstate_t from,
 			    delta_kind::edges k);
 
   // output_return_type = Container
   // output_type        = hedge_t
-  // direction	  = output
+  // direction		= output
 
-  /*! store the output edges of the state 'from' in the container
-    'res' */
+  /// Store the output edges of the state 'from' in the container 'res'.
   template <class S, class T,
 	    typename Container>
   void op_deltac(const AutomataBase<S>&, const TransposeView<T>&,
 		 Container& res, hstate_t from, delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+  /**
+   * @brief Delta with a query and container output.
+   *
+   * Store the output edges  of the state 'from' where query(label(e))
+   * is true in the container 'res'.
+   */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   void op_deltac(const AutomataBase<S>&, const TransposeView<T>&,
-		 Container& res, 
-		 hstate_t from, 
+		 Container& res,
+		 hstate_t from,
 		 const L& query,
 		 delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+  /**
+   * @brief Delta on a letter with container output.
+   *
+   * Store the output edges  of the state 'from' where query(label(e))
+   * is true in the container 'res'.
+   */
   template <class S, class T,
-	    typename Container, typename L>	
+	    typename Container, typename L>
   void op_letter_deltac(const AutomataBase<S>&, const TransposeView<T>&,
-			Container& res, 
-			hstate_t from, 
+			Container& res,
+			hstate_t from,
 			const L& letter,
 			delta_kind::edges k);
 
-  /*! store the output op_spontaneous transitions. */
+  /// store the output op_spontaneous transitions.
   template <class S, class T, class Container>
   void op_spontaneous_deltac(const AutomataBase<S>&, const TransposeView<T>&,
-			     Container& res, 
-			     hstate_t from, 
+			     Container& res,
+			     hstate_t from,
 			     delta_kind::edges k);
 
   // output_return_type = OutputIterator
   // output_type        = hstate_t
-  // direction	  = output
+  // direction		= output
 
-  /*! store the output states of the state 'from' using 'res'. */
-  template<class S, class T, typename OutputIterator> 
+  /**
+   * @brief Delta with no condition and iterator output.
+   *
+   * Store the output states of the state 'from' using 'res'.
+   */
+  template<class S, class T, typename OutputIterator>
   void op_delta(const AutomataBase<S>&, const TransposeView<T>&,
-		OutputIterator res, 
-		hstate_t from, 
+		OutputIterator res,
+		hstate_t from,
 		delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true using 'res'. */
-  template<class S, class T, typename OutputIterator, typename L>	
+  /**
+   * @brief Delta using a query, with iterator output.
+   *
+   * Store the output states of the state 'from' where query(label(e))
+   * is true using 'res'.
+   */
+  template<class S, class T, typename OutputIterator, typename L>
   void op_delta(const AutomataBase<S>&, const TransposeView<T>&,
-		OutputIterator res, 
-		hstate_t from, 
+		OutputIterator res,
+		hstate_t from,
 		const L& query,
 		delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
-    the label matches the letter. */
-  template<class S, class T, typename OutputIterator, typename L>	
+  /**
+   * @brief Delta on a letter with iterator output.
+   *
+   * Store  the output  states of  the  state 'from'  where the  label
+   * matches the letter.
+   */
+  template<class S, class T, typename OutputIterator, typename L>
   void op_letter_delta(const AutomataBase<S>&, const TransposeView<T>&,
-		       OutputIterator res, 
-		       hstate_t from, 
+		       OutputIterator res,
+		       hstate_t from,
 		       const L& letter,
 		       delta_kind::states k);
 
-  /*! store the output op_spontaneous transitions. */
-  template<class S, class T, typename OutputIterator>	
+  /// store the output op_spontaneous transitions.
+  template<class S, class T, typename OutputIterator>
   void op_spontaneous_delta(const AutomataBase<S>&, const TransposeView<T>&,
-			    OutputIterator res, 
-			    hstate_t from, 
+			    OutputIterator res,
+			    hstate_t from,
 			    delta_kind::states k);
 
   // output_return_type = Container
   // output_type        = hstate_t
-  // direction	  = output
+  // direction		= output
 
-  /*! store the output states of the state 'from' in the container
-    'res' */
+  /**
+   * @brief Delta without condition, container output.
+   *
+   * Store  the output  states of  the state  'from' in  the container
+   * 'res'.
+   */
   template<class S, class T, typename Container>
   void op_deltac(const AutomataBase<S>&, const TransposeView<T>&,
 		 Container& res, hstate_t from, delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
-  template<class S, class T, typename Container, typename L>	
+  /**
+   * @brief Delta with a query, using container output.
+   *
+   * Store the output states of the state 'from' where query(label(e))
+   * is true in the container 'res'.
+   */
+  template<class S, class T, typename Container, typename L>
   void op_deltac(const AutomataBase<S>&, const TransposeView<T>&,
-		 Container& res, 
-		 hstate_t from, 
+		 Container& res,
+		 hstate_t from,
 		 const L& query,
 		 delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
-  template<class S, class T, typename Container, typename L>	
+  /**
+   * @brief Delta on a letter, with container output.
+   *
+   * Store the output states of the state 'from' where query(label(e))
+   * is true in the container 'res'.
+   */
+  template<class S, class T, typename Container, typename L>
   void op_letter_deltac(const AutomataBase<S>&, const TransposeView<T>&,
-			Container& res, 
-			hstate_t from, 
+			Container& res,
+			hstate_t from,
 			const L& letter,
 			delta_kind::states k);
 
-  /*! store the output op_spontaneous transitions. */
+  /// store the output op_spontaneous transitions.
   template<class S, class T, typename Container>
   void op_spontaneous_deltac(const AutomataBase<S>&, const TransposeView<T>&,
-			     Container& res, 
-			     hstate_t from, 
+			     Container& res,
+			     hstate_t from,
 			     delta_kind::states k);
 
   // output_return_type = OutputIterator
   // output_type        = hedge_t
-  // direction	  = input
+  // direction		= input
 
-  /*! store the output edges of the state 'from' using 'res'. */
-  template<class S, class T, typename OutputIterator>		
+  /**
+   * @brief Reverse delta without condition, and iterator output.
+   *
+   * Store the output edges of the state 'from' using 'res'.
+   */
+  template<class S, class T, typename OutputIterator>
   void op_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
-		 OutputIterator res, 
-		 hstate_t from, 
+		 OutputIterator res,
+		 hstate_t from,
 		 delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true using 'res'. */
-  template<class S, class T, typename OutputIterator, typename L>	
+  /**
+   * @brief Reverse delta with query, with iterator output.
+   *
+   * Store the output edges  of the state 'from' where query(label(e))
+   * is true using 'res'.
+   */
+  template<class S, class T, typename OutputIterator, typename L>
   void op_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
-		 OutputIterator res, 
-		 hstate_t from, 
+		 OutputIterator res,
+		 hstate_t from,
 		 const L& query,
 		 delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
-    the label matches the letter. */
-  template<class S, class T, typename OutputIterator, typename L>	
+  /**
+   * @brief Reverse delta on a letter, with iterator output.
+   *
+   * Store  the output  edges  of  the state  'from'  where the  label
+   * matches the letter.
+   */
+  template<class S, class T, typename OutputIterator, typename L>
   void op_letter_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
-			OutputIterator res, 
-			hstate_t from, 
+			OutputIterator res,
+			hstate_t from,
 			const L& letter,
 			delta_kind::edges k);
 
-  /*! store the output op_spontaneous transitions. */
+  /// store the output op_spontaneous transitions.
   template<class S, class T, typename OutputIterator>
   void op_spontaneous_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
-			     OutputIterator res, 
-			     hstate_t from, 
+			     OutputIterator res,
+			     hstate_t from,
 			     delta_kind::edges k);
 
   // output_return_type = Container
   // output_type        = hedge_t
-  // direction	  = input
+  // direction		= input
 
-  /*! store the output edges of the state 'from' in the container
-    'res' */
+  /**
+   * @brief Reverse delta on a container, with no condition.
+   *
+   * Store the output edges of the state 'from' in the container 'res'.
+   */
   template<class S, class T, typename Container>
   void op_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
 		  Container& res, hstate_t from, delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
-  template<class S, class T, typename Container, typename L>	
+  /**
+   * @brief Reverse delta using a query, with container output.
+   *
+   * Store the output edges  of the state 'from' where query(label(e))
+   * is true in the container 'res'.
+   */
+  template<class S, class T, typename Container, typename L>
   void op_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
-		  Container& res, 
-		  hstate_t from, 
+		  Container& res,
+		  hstate_t from,
 		  const L& query,
 		  delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
-  template<class S, class T, typename Container, typename L>	
+  /**
+   * @brief Reverse delta on a letter, with container output.
+   *
+   * Store the output edges  of the state 'from' where query(label(e))
+   * is true in the container 'res'.
+   */
+  template<class S, class T, typename Container, typename L>
   void op_letter_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
-			 Container& res, 
-			 hstate_t from, 
+			 Container& res,
+			 hstate_t from,
 			 const L& letter,
 			 delta_kind::edges k);
 
-  /*! store the output op_spontaneous transitions. */
+  /// store the output op_spontaneous transitions.
   template<class S, class T, typename Container>
   void op_spontaneous_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
-			      Container& res, 
-			      hstate_t from, 
+			      Container& res,
+			      hstate_t from,
 			      delta_kind::edges k);
 
   // output_return_type = OutputIterator
   // output_type        = hstate_t
-  // direction	  = input
+  // direction		= input
 
-  /*! store the output states of the state 'from' using 'res'. */
-  template<class S, class T, typename OutputIterator>		
+  /// store the output states of the state 'from' using 'res'.
+  template<class S, class T, typename OutputIterator>
   void op_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
-		 OutputIterator res, 
-		 hstate_t from, 
+		 OutputIterator res,
+		 hstate_t from,
 		 delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true using 'res'. */
-  template<class S, class T, typename OutputIterator, typename L>	
+  /**
+   * @brief Reverse delta using a query, with iterator output.
+   *
+   * Store the output states of the state 'from' where query(label(e))
+   * is true using 'res'.
+   */
+  template<class S, class T, typename OutputIterator, typename L>
   void op_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
-		 OutputIterator res, 
-		 hstate_t from, 
+		 OutputIterator res,
+		 hstate_t from,
 		 const L& query,
 		 delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
-    the label matches the letter. */
-  template<class S, class T, typename OutputIterator, typename L>	
+  /**
+   * @brief Reverse delta on a letter, with iterator output.
+   *
+   * Store  the output  states of  the  state 'from'  where the  label
+   * matches the letter.
+   */
+  template<class S, class T, typename OutputIterator, typename L>
   void op_letter_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
-			OutputIterator res, 
-			hstate_t from, 
+			OutputIterator res,
+			hstate_t from,
 			const L& letter,
 			delta_kind::states k);
 
-  /*! store the output op_spontaneous transitions. */
+  //// store the output op_spontaneous transitions.
   template<class S, class T, typename OutputIterator>
   void op_spontaneous_rdelta(const AutomataBase<S>&, const TransposeView<T>&,
-			     OutputIterator res, 
-			     hstate_t from, 
+			     OutputIterator res,
+			     hstate_t from,
 			     delta_kind::states k);
 
   // output_return_type = Container
   // output_type        = hstate_t
-  // direction	  = input
+  // direction		= input
 
-  /*! store the output states of the state 'from' in the container
-    'res' */
+  /**
+   * @brief Reverse delta on a container, with no conditions.
+   *
+   * Store  the output  states of  the state  'from' in  the container
+   * 'res'
+   */
   template<class S, class T, typename Container>
   void op_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
 		  Container& res, hstate_t from, delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
-  template<class S, class T, typename Container, typename L>	
+  /**
+   * @brief Reverse delta in a container, with a query.
+   *
+   * Store the output states of the state 'from' where query(label(e))
+   * is true in the container 'res'
+   */
+  template<class S, class T, typename Container, typename L>
   void op_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
-		  Container& res, 
-		  hstate_t from, 
+		  Container& res,
+		  hstate_t from,
 		  const L& query,
 		  delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
-  template<class S, class T, typename Container, typename L>	
+  /**
+   * @brief Reverse delta in a container, on a letter.
+   *
+   * Store  in the  container 'res'  the  output states  of the  state
+   * 'from' where query(label(e)) is true.
+   */
+  template<class S, class T, typename Container, typename L>
   void op_letter_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
-			 Container& res, 
-			 hstate_t from, 
+			 Container& res,
+			 hstate_t from,
 			 const L& letter,
 			 delta_kind::states k);
 
-  /*! store the output op_spontaneous transitions. */
+  /// Store the output op_spontaneous transitions.
   template<class S, class T, typename Container>
   void op_spontaneous_rdeltac(const AutomataBase<S>&, const TransposeView<T>&,
-			      Container& res, 
-			      hstate_t from, 
+			      Container& res,
+			      hstate_t from,
 			      delta_kind::states k);
 
 } // vcsn
@@ -437,8 +544,8 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concrete/transpose_view.hxx>
+# include <vaucanson/automata/concrete/transpose_view.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_AUTOMATA_CONCRETE_TRANSPOSE_VIEW_HH

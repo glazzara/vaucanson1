@@ -1,7 +1,7 @@
 // static.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -41,13 +41,14 @@ namespace utility {
   | remove_reference |
   `-----------------*/
 
-  /** Turn a reference type into its corresponding plain type */
+  /// Turn a reference type into its corresponding plain type.
+  /** @{ */
   template<typename T>
   struct remove_reference
   {
     typedef T t;
   };
-  
+
   template<typename T>
   struct remove_reference<T&>
   {
@@ -59,116 +60,125 @@ namespace utility {
   {
     typedef const T t;
   };
+  /** @} */
 
   /*-------------.
   | remove_const |
   `-------------*/
 
-  /** Turn a const type into its corresponding mutable type */
+  /// Turn a const type into its corresponding mutable type.
+  /** @{ */
   template<typename T>
   struct remove_const
   {
     typedef T t;
   };
-  
+
   template<typename T>
   struct remove_const<const T>
   {
     typedef T t;
   };
-
+  /** @} */
 
   /*----------.
   | static_if |
   `----------*/
 
-  /** Choose between two types or values depending on a constant boolean */
+  /// Choose between two types or values depending on a constant boolean.
+  /** @{ */
   template<bool b, typename T, typename U>
   struct static_if
-  { 
-    typedef T t; 
+  {
+    typedef T t;
 
     typedef typename remove_const<typename remove_reference<T>::t>::t bare_t1;
     typedef typename remove_const<typename remove_reference<U>::t>::t bare_t2;
 
-    static bare_t1& 
-    choose(bare_t1& p1, 
+    static bare_t1&
+    choose(bare_t1& p1,
 	   bare_t2& )
     { return p1; }
-    static const bare_t1& 
-    choose(const bare_t1& p1, 
+    static const bare_t1&
+    choose(const bare_t1& p1,
 	   const bare_t2& )
     { return p1; }
   };
 
   template<typename T, typename U>
   struct static_if<false, T, U>
-  { 
-    typedef U t; 
+  {
+    typedef U t;
 
     typedef typename remove_const<typename remove_reference<T>::t>::t bare_t1;
     typedef typename remove_const<typename remove_reference<U>::t>::t bare_t2;
 
-    static bare_t2& 
-    choose(bare_t1& , 
+    static bare_t2&
+    choose(bare_t1& ,
 	   bare_t2& p2)
     { return p2; }
-    static const bare_t2& 
-    choose(const bare_t1& , 
+    static const bare_t2&
+    choose(const bare_t1& ,
 	   const bare_t2& p2)
     { return p2; }
   };
+  /** @} */
 
   /*----------.
   | static_eq |
   `----------*/
 
-  /** Test for equality between two types */
+  /// Test for equality between two types.
+  /** @{ */
   template<typename T, typename U>
   struct static_eq
-  { 
-    static const bool value = false; 
+  {
+    static const bool value = false;
   };
 
   template<typename T>
   struct static_eq<T, T>
-  { 
-    static const bool value = true; 
+  {
+    static const bool value = true;
   };
+  /** @} */
 
   /*-----------.
   | static_pow |
   `-----------*/
 
+  /// These are auxilliary functions for static_pow.
+  /** @{ */
   template<size_t N, size_t P, bool pair_p = false>
   struct static_pow_compute
-  { 
-    static const size_t value = 
-    N * static_pow_compute<N, P-1, (((P-1) % 2) == 0)>::value ; 
+  {
+    static const size_t value =
+    N * static_pow_compute<N, P-1, (((P-1) % 2) == 0)>::value ;
   };
 
   template<size_t N, size_t P>
   struct static_pow_compute<N, P, true>
-  { 
-    static const size_t temp = 
+  {
+    static const size_t temp =
     static_pow_compute<N, P/2, (((P/2) % 2) == 0)>::value;
     static const size_t value = temp * temp;
   };
-    
+
   template<size_t N>
   struct static_pow_compute<N, 0, true>
-  { 
-    static const size_t value = 1; 
+  {
+    static const size_t value = 1;
   };
+  /** @} */
 
-  /** Static exponentiation. 
+  /** Static exponentiation.
    * It uses the fast exponentiation algorithm to save
    * template recursion depth.
    */
   template<size_t N, size_t P>
   struct static_pow
   {
-    static const size_t value = 
+    static const size_t value =
     static_pow_compute<N, P, ((P % 2) == 0)>::value ;
   };
 
@@ -180,7 +190,7 @@ namespace utility {
   template<size_t N, size_t P>
   struct static_pow_minus_one
   {
-    static const size_t value = 
+    static const size_t value =
     static_pow_compute<N, P, ((P % 2) == 0)>::value - 1;
   };
 
