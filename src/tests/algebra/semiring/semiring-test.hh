@@ -8,6 +8,7 @@
 # define SEMIRING_TEST_HH
 
 # include <check/tests_stuff.hh>
+# include <fundamental/design_pattern-test.hh>
 
 template <class S, class T>
 bool test_semiring(tests::Tester& t)
@@ -21,6 +22,8 @@ bool test_semiring(tests::Tester& t)
   element_t o = e1.set().identity(SELECT(T));
   element_t e2;
   element_t e3(o);
+
+  test_design_pattern<S, T>();
 
   TEST(t, "commutativity of plus.", (e1 + e2) == (e2 + e1));
   TEST(t, "distributivity of mult with plus.", 

@@ -38,15 +38,7 @@ void test_design_pattern()
   a >= sample;
   sample >= a;
 
-  // Arithmetic operators.
-  a + b;
-  a - b;
-  a * b;
-  a / b;
-  a % b;
-  -a;
-
-  // swap(a,a) is ambigus.
+  //FIXME: swap(a,a) is ambigus.
 }
 
 #endif // DESIGN_PATTERN_TEST_HH
