@@ -69,12 +69,13 @@ unsigned add_state_test(tests::Tester& tg)
 	 automaton.states().size(), 0);  
 
   std::set<hstate_t> s;
+  const std::set<hstate_t>& sc = s;
   for (unsigned i = 0; i < 3; ++i)
     s.insert(automaton.add_state());
   EQTEST(t, "Number of state after three state additions = 3.", 
 	 automaton.states().size(), 3);
-  for (std::set<hstate_t>::const_iterator i = s.begin();
-       i != s.end(); ++i)
+  for (std::set<hstate_t>::const_iterator i = sc.begin();
+       i != sc.end(); ++i)
     automaton.del_state(*i);
   EQTEST(t, "Number of state after total deletion in growing order = 0.",
 	 automaton.states().size(), 0);  
@@ -83,8 +84,8 @@ unsigned add_state_test(tests::Tester& tg)
     s.insert(automaton.add_state());
   EQTEST(t, "Number of state after three state additions = 3.", 
 	 automaton.states().size(), 3);
-  for (std::set<hstate_t>::const_reverse_iterator i = s.rbegin();
-       i != s.rend(); ++i)
+  for (std::set<hstate_t>::const_reverse_iterator i = sc.rbegin();
+       i != sc.rend(); ++i)
     automaton.del_state(*i);
   EQTEST(t, "Number of state after total deletion in decreasing order = 0.",
 	 automaton.states().size(), 0);  

@@ -106,7 +106,7 @@ namespace vcsn {
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_reverse_iterator 
   MetaElement<algebra::FreeMonoidBase<Self>, T>::rbegin() const
   { 
-    return op_rbegin(this->set(), this->value()); 
+    return op_rbegin_const(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
@@ -120,7 +120,7 @@ namespace vcsn {
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_iterator 
   MetaElement<algebra::FreeMonoidBase<Self>, T>::end() const
   { 
-    return op_end(this->set(), this->value()); 
+    return op_end_const(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
@@ -134,7 +134,7 @@ namespace vcsn {
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_reverse_iterator 
   MetaElement<algebra::FreeMonoidBase<Self>, T>::rend() const
   { 
-    return op_rend(this->set(), this->value()); 
+    return op_rend_const(this->set(), this->value()); 
   }
 
   template <class Self, typename T>
@@ -211,8 +211,8 @@ namespace vcsn {
       = op_begin(s.self(), v);
 
     for (typename MetaElement<algebra::FreeMonoidBase<Self>, T>::
-	   const_reverse_iterator i = op_rbegin(s.self(), new_v);
-	 i != op_rend(s.self(), new_v);
+	   const_reverse_iterator i = op_rbegin_const(s.self(), new_v);
+	 i != op_rend_const(s.self(), new_v);
 	 ++i)
       *it++ = *i;
   }
@@ -223,8 +223,8 @@ namespace vcsn {
   { 
     typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
-    for (const_iterator i = op_begin(s.self(), v);
-	 i != op_end(s.self(), v);
+    for (const_iterator i = op_begin_const(s.self(), v);
+	 i != op_end_const(s.self(), v);
 	 ++i)
       if (! s.alphabet().contains(*i))
 	return false;
@@ -240,7 +240,7 @@ namespace vcsn {
     typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
       
     for (const_iterator i = op_begin_const(s.self(), v);
-	 i != op_end(s.self(), v);
+	 i != op_end_const(s.self(), v);
 	 ++i)
       st << *i;
     return st;

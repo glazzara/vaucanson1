@@ -64,8 +64,8 @@ namespace vcsn
 					    const T& v);
 
   template<typename S, typename T>
-  typename T::const_iterator op_end(const Structure<S>& s, 
-				    const T& v);
+  typename T::const_iterator op_end_const(const Structure<S>& s, 
+					  const T& v);
 
   template<typename S, typename T>
   typename T::reverse_iterator op_rbegin(const Structure<S>& s, 
@@ -76,11 +76,11 @@ namespace vcsn
 				       T& v);
 
   template<typename S, typename T>
-  typename T::const_reverse_iterator op_rbegin(const Structure<S>& s,
+  typename T::const_reverse_iterator op_rbegin_const(const Structure<S>& s,
 					       const T& v);
 
   template<typename S, typename T>
-  typename T::const_reverse_iterator op_rend(const Structure<S>& s,
+  typename T::const_reverse_iterator op_rend_const(const Structure<S>& s,
 					     const T& v);
 
   template<typename S, typename T>

@@ -70,6 +70,7 @@ unsigned add_edge_test(tests::Tester& tg)
        automaton.edges().size() == 0);
 
   std::set<hedge_t> s;
+  const std::set<hedge_t>& sc = s;
   for (unsigned i = 0; i < 3; ++i)
     {
       hstate_t p1 = automaton.add_state();
@@ -79,8 +80,8 @@ unsigned add_edge_test(tests::Tester& tg)
     }
   EQTEST(t, "Number of edge after three edge additions = 3.", 
 	 automaton.edges().size(), 3);
-  for (std::set<hedge_t>::const_iterator i = s.begin();
-       i != s.end(); ++i)
+  for (std::set<hedge_t>::const_iterator i = sc.begin();
+       i != sc.end(); ++i)
     automaton.del_edge(*i);
   EQTEST(t, "Number of edge after total deletion in growing order = 0.",
 	 automaton.edges().size(), 0);  
@@ -94,8 +95,8 @@ unsigned add_edge_test(tests::Tester& tg)
     }
   EQTEST(t, "Number of edge after three edge additions = 3.", 
 	 automaton.edges().size(), 3);
-  for (std::set<hedge_t>::const_reverse_iterator i = s.rbegin();
-       i != s.rend(); ++i)
+  for (std::set<hedge_t>::const_reverse_iterator i = sc.rbegin();
+       i != sc.rend(); ++i)
     automaton.del_edge(*i);
   EQTEST(t, "Number of edge after total deletion in decreasing order = 0.",
 	 automaton.edges().size(), 0);  

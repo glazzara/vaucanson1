@@ -46,7 +46,7 @@
  typedef typename Prefix##monoid_elt_t::value_t	Prefix##monoid_elt_value_t;   \
  typedef typename Prefix##monoid_t::alphabets_elt_t  Prefix##alphabets_elt_t; \
  typedef typename Prefix##monoid_t::alphabet_t       Prefix##alphabet_t;      \
- typedef typename Prefix##alphabet_t::iterator   Prefix##alphabet_iterator;   \
+ typedef typename Prefix##alphabet_t::const_iterator   Prefix##alphabet_iterator;   \
  typedef typename Prefix##alphabet_t::letter_t       Prefix##letter_t;	      \
  typedef typename AutoType::weights_t                Prefix##weights_t;	      \
  typedef typename AutoType::series_t                 Prefix##series_t;	      \
@@ -74,7 +74,7 @@
  typedef Prefix##monoid_elt_t::value_t	Prefix##monoid_elt_value_t;	  \
  typedef Prefix##monoid_t::alphabets_elt_t	Prefix##alphabets_elt_t;  \
  typedef Prefix##monoid_t::alphabet_t	Prefix##alphabet_t;		  \
- typedef Prefix##alphabet_t::iterator	Prefix##alphabet_iterator;	  \
+ typedef Prefix##alphabet_t::const_iterator	Prefix##alphabet_iterator;	  \
  typedef Prefix##alphabet_t::letter_t	Prefix##letter_t;		  \
  typedef AutoType::weights_t			Prefix##weights_t;	  \
  typedef AutoType::series_t			Prefix##series_t;	  \

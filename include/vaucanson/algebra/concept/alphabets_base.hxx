@@ -104,7 +104,7 @@ namespace vcsn {
   typename MetaElement<algebra::AlphabetSetBase<S>, T>::const_iterator 
   MetaElement<algebra::AlphabetSetBase<S>, T>::end() const
   { 
-    return op_end(set(), value()); 
+    return op_end_const(set(), value()); 
   }
     
   template<typename S, typename T>
@@ -169,11 +169,11 @@ namespace vcsn {
   {
     st << "{ ";
     if (op_is_finite(s.self(), a))
-      for (typename op_begin_traits<S, T>::const_ret_t i = op_begin(s.self(), a);
-	   i != op_end(s.self(), a);
+      for (typename op_begin_traits<S, T>::const_ret_t i = op_begin_const(s.self(), a);
+	   i != op_end_const(s.self(), a);
 	   ++i)
 	{
-	  if (i != op_begin(s.self(), a))
+	  if (i != op_begin_const(s.self(), a))
 	    st << ", ";
 	  st << *i;
 	}
