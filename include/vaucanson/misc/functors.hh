@@ -1,9 +1,7 @@
-/******************************************************************
- * <vaucanson/misc/functors.hh>: several utility object functions *
- ******************************************************************/
-// $Id$
+// functors.hh
+// 
+// VCSN_HEADER
 
-/* this file is part of the Vaucanson project. */
 #ifndef UTILITY_FUNCTORS_HH
 # define UTILITY_FUNCTORS_HH
 

@@ -1,5 +1,12 @@
 2002-06-27  Maxime Rey  <max@lrde.epita.fr>
 
+	* `include/vaucanson/misc/converter.hxx' added (split)
+	* `include/vaucanson/misc/ref.hxx' added (split)
+	* misc_constraints.hh header modified
+	
+
+2002-06-27  Maxime Rey  <max@lrde.epita.fr>
+
 	* Add for futures automata files which need them
 	* Added `include/vaucanson/misc/converter.hh'
 	* Added `include/vaucanson/misc/functors.hh' 

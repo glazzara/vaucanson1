@@ -1,10 +1,10 @@
+// misc_constraints.hh
 /*******************************************************
  * <vaucanson/misc/misc_constraints.hh>: various minor *
  * constraint-checking classes                         *
  *******************************************************/
-// $Id$
-
-/* this file is part of the Vaucanson project. */
+//
+// VCSN_HEADER
 #ifndef UTILITY_MISC_CONSTRAINTS_HH
 #define UTILITY_MISC_CONSTRAINTS_HH
 
