@@ -19,6 +19,6 @@ namespace vcsn
 
 } //vcsn
 
-# include <vaucanson/algorithms/transpose.hxx>
+# include <vaucanson/automata/concept/transpose.hxx>
 
 #endif
