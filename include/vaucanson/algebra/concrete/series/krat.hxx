@@ -164,190 +164,6 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_k(const algebra::Series<W, M>& s,
-			       rat::exp<Tm, Tw>& dst,
-			       const rat::exp<Tm, Tw>& other, 
-			       rat::LeftWeighted<Tm, Tw>* left, 
-			       typename rat::Node<Tm, Tw>::type other_type)
-  {
-    typedef rat::Node<Tm, Tw>			node_t;
-    typedef rat::LeftWeighted<Tm, Tw>		n_lweight_t;
-    typedef rat::RightWeighted<Tm, Tw>	n_rweight_t;
-    switch (other_type)
-      {
-      case node_t::lweight:
-	{    // case (k 1) * (k' E') -> ([k k'] E')
-	  const n_lweight_t* right =
-	    dynamic_cast<const n_lweight_t*>(other.base());
-	    
-	  op_in_mul(s.weights(), left->weight_, right->weight_); 
-	  // ([k k'] 1) * (k' E')
-	  delete left->child_;			// ([k k'] %) * (k' E')
-	  left->child_ = right->child_->clone();	// ([k k'] E')
-	    
-	  return true; 
-	}
-	  
-      case node_t::rweight:
-	{   // case (k 1) * (E' k') -> ((k E) k')
-	  const n_rweight_t* right =
-	    dynamic_cast<const n_rweight_t*>(other.base());
-	    
-	  delete left->child_;			   // (k %) * (E' k')
-	  left->child_ = right->child_->clone();       // (k E') * (E' k')
-	  dst.base() = new n_rweight_t(right->weight_, dst.base()); 
-	  // ((k E') k')
-	    
-	  return true;
-	}
-	  
-      default: break;
-	  
-      }
-      
-    return false; // no simplification occured
-  }
-
-  template<typename W, typename M, typename Tm, typename Tw>
-  inline
-  bool krat_simplify_left_is_ka(const algebra::Series<W, M>& s,
-				rat::exp<Tm, Tw>&,
-				const rat::exp<Tm, Tw>& other, 
-				rat::LeftWeighted<Tm, Tw>* left, 
-				typename rat::Node<Tm, Tw>::type other_type)
-  {
-    typedef rat::Node<Tm, Tw>		node_t;
-    typedef rat::LeftWeighted<Tm, Tw>	n_lweight_t;
-      
-    const n_lweight_t* right;
-      
-    if (other_type == node_t::lweight &&
-	(right = dynamic_cast<const n_lweight_t* >(other.base()))
-	->what() == node_t::one)
-      {
-	// case (k a) * (k' 1) -> ([k k'] a)
-	op_in_mul(s.weights(), left->weight_, right->weight_); 
-	return true;
-      }
-    return false; // could not simplify
-  }
-    
-  template<typename W, typename M, typename Tm, typename Tw>
-  inline
-  bool krat_simplify_left_is_kany(const algebra::Series<W, M>& s,
-				  rat::exp<Tm, Tw>&,
-				  const rat::exp<Tm, Tw>& other, 
-				  rat::LeftWeighted<Tm, Tw>* left, 
-				  typename 
-				  rat::Node<Tm, Tw>::type other_type)
-  {
-    typedef rat::Node<Tm, Tw>		node_t;
-    typedef rat::LeftWeighted<Tm, Tw>	n_lweight_t;
-    const n_lweight_t* right;
-
-    if (other_type == node_t::lweight &&
-	(right = dynamic_cast<const n_lweight_t* >(other.base()))
-	->what() == node_t::one)
-      {
-	// case (k E') * (k' 1) -> ([k k'] E')
-	op_in_mul(s.weights(), left->weight_, right->weight_); 
-	return true;
-      }
-    return false; // could not simplify
-  }
-    
-  template<typename W, typename M, typename Tm, typename Tw>
-  inline
-  bool krat_simplify_left_is_lweight(const algebra::Series<W, M>& s,
-				     rat::exp<Tm, Tw>& dst,
-				     const rat::exp<Tm, Tw>& other, 
-				     rat::LeftWeighted<Tm, Tw>* left, 
-				     typename 
-				     rat::Node<Tm, Tw>::type other_type)
-  {
-    typename rat::Node<Tm, Tw>::type left_child_type = left->child_->what();
-      
-    switch(left_child_type)
-      {
-      case rat::Node<Tm, Tw>::one:
-	return krat_simplify_left_is_k(s, dst, other, left, other_type);
-      case rat::Node<Tm, Tw>::constant:
-	return krat_simplify_left_is_ka(s, dst, other, left, other_type);
-      default:
-	return krat_simplify_left_is_kany(s, dst, other, left, other_type);
-      }
-  }
-    
-  template<typename W, typename M, typename Tm, typename Tw>
-  inline
-  bool krat_simplify_left_is_anyk(const algebra::Series<W, M>& s,
-				  rat::exp<Tm, Tw>& dst,
-				  const rat::exp<Tm, Tw>& other, 
-				  rat::RightWeighted<Tm, Tw>* left, 
-				  typename 
-				  rat::Node<Tm, Tw>::type other_type)
-  {
-    typedef rat::Node<Tm, Tw>		node_t;
-    typedef rat::LeftWeighted<Tm, Tw>	n_lweight_t;
-    typedef rat::RightWeighted<Tm, Tw>	n_rweight_t;
-    typedef rat::Product<Tm, Tw>	n_prod_t;
-
-    if (other_type == node_t::lweight)
-      {
-	const n_lweight_t *right = 
-	  dynamic_cast<const n_lweight_t *>(other.base());
-	  
-	if (right->child_->what() == node_t::one) // case E k * k' 1
-	  {
-	    // case (E k) * (k' 1) -> (E [k k'])
-	    op_in_mul(s.weights(), left->weight_, right->weight_); 
-	    return true; 
-	  }
-	  
-	// case (E k) * (k' E') -> (E * (k k' E'))
-	  
-	n_lweight_t *new_right = // (k k' E')
-	  new n_lweight_t(op_mul(s.weights(), left->weight_, right->weight_),
-			  *right->child_->clone());
-	  
-	dst.base() = left->child_;		// (E k) -> E
-	left->child_ = 0;
-	delete left;    // delete (% k)
-	  
-	dst.base() = new n_prod_t(dst.base(), new_right); 
-	// build E * ([k k'] E')
-	return true;
-      }
-    return false;
-  }
-
-  template<typename Tm, typename Tw>
-  inline
-  bool krat_simplify_left_is_const(rat::exp<Tm, Tw>& dst,
-				   const rat::exp<Tm, Tw>& other, 
-				   typename 
-				   rat::Node<Tm, Tw>::type other_type)
-  {
-    typedef rat::Node<Tm, Tw>			node_t;
-    typedef rat::LeftWeighted<Tm, Tw>		n_lweight_t;
-    typedef rat::RightWeighted<Tm, Tw>	n_rweight_t;
-      
-    const n_lweight_t *right;
-      
-    if (other_type == node_t::lweight &&
-	(right = dynamic_cast<const n_lweight_t*>(other.base()))
-	->child_->what() == node_t::one)
-      {
-	// case a * (k 1) -> (k a)
-	dst.base() = new n_lweight_t(right->weight_, dst.base()); 
-	return true; 
-      }
-    return false;
-  }
-
-    
-  template<typename W, typename M, typename Tm, typename Tw>
-  inline
   void op_in_mul(const algebra::Series<W, M>& s, 
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg)
@@ -366,11 +182,11 @@ namespace vcsn {
     type this_type = dst.base()->what();
     type arg_type  = arg.base()->what();
 
-    // case 0 * E
+    // case 0 * E -> 0
     if (this_type == node_t::zero)
       return; 
 
-    // case E * 0
+    // case E * 0 -> 0
     if (arg_type == node_t::zero)
       { 
 	delete dst.base(); 
@@ -378,7 +194,7 @@ namespace vcsn {
 	return; 
       }
       
-    // case 1 * E
+    // case 1 * E -> E
     if (this_type == node_t::one)
       { 
 	delete dst.base(); 
@@ -386,42 +202,59 @@ namespace vcsn {
 	return; 
       }
       
-    // case E * 1
+    // case E * 1 -> E
     if (arg_type == node_t::one)
       {
 	return; 
       }
 
-    switch (this_type)
-      { 
-      case node_t::lweight:	// case (k E) * E'
-	{
-	  n_lweight_t* left = dynamic_cast<n_lweight_t*>(dst.base());
+    // case E * (k' 1) -> E k'
+    if (arg_type == node_t::lweight)
+    {
+      n_lweight_t *p = dynamic_cast<n_lweight_t*>(arg.base());
+      if (p->child_->what() == node_t::one)
+      {
+	op_in_mul(s, s.weights(), dst, p->weight_);
+        return;
+      }
+    }
 
-	  if (krat_simplify_left_is_lweight(s, dst, arg, left, arg_type))
-	    return;
-	  break;
-	}
-	    
-      case node_t::rweight: // case (E k) * E'
-	{
-	  n_rweight_t *left = dynamic_cast<n_rweight_t*>(dst.base());
-	      
-	  if (krat_simplify_left_is_anyk(s, dst, arg, left, arg_type))
-	    return;
-	  break;
-	} 
+    /// @bug FIXME: Add the following transformation in a separated function.
+    /*
+    // case (k E) * E' -> k (E * E')
+    // it manages case (k 1) * E' -> k E'
+    if (this_type == node_t::lweight)
+    {
+      n_lweight_t *p = dynamic_cast<n_lweight_t*>(dst.base());
+      if (p->child_->what() == node_t::one)
+	// case (k 1) * E' -> k E'
+	dst = op_mul(s.weights(), s, p->weight_, arg);
+      else
+	// case (k E) * E' -> k (E * E')
+	p->child_ = new n_prod_t(p->child_, arg.base()->clone());
+      return;
+    }
 
-      case node_t::constant: // case a * E'
-	{
-	  if (krat_simplify_left_is_const(dst, arg, arg_type))
-	    return;
+    // case E * (E' k') -> (E * E') k'
+    if (arg_type == node_t::rweight)
+    {
+      n_rweight_t *p = dynamic_cast<n_rweight_t*>(arg.base());
+      dst.base() = new n_rweight_t(p->weight_,	   
+	new n_prod_t(dst.base(), p->child_->clone()));
+      return;
+    }
+    */
 
-	  break;
-	}
-
-      default: break;
-      } 
+    // case (k 1) * E' -> k E'
+    if (this_type == node_t::lweight)
+    {
+      n_lweight_t *p = dynamic_cast<n_lweight_t*>(dst.base());
+      if (p->child_->what() == node_t::one)
+      {
+	dst = op_mul(s.weights(), s, p->weight_, arg);
+        return;
+      }
+    }
 
     // general case
     dst.base() = new n_prod_t(dst.base(), arg.base()->clone());
@@ -653,6 +486,7 @@ namespace vcsn {
 		 const oTw& w)
   { 
     // assert(s.weights() == weights);
+
     typedef rat::Node<Tm, Tw>				node_t;
     typedef typename rat::Node<Tm, Tw>::type		type;
     typedef rat::One<Tm, Tw>				n_one_t;
@@ -666,15 +500,15 @@ namespace vcsn {
 
     type this_type = ret.base()->what();
       
-    // case 0 * k
+    // case 0 * k -> 0
     if (this_type == node_t::zero)
       return;
 
-    // case E * 1
+    // case E * 1 -> E
     if (w == identity_value(SELECT(W), SELECT(oTw)))
       return;
 
-    // case E * 0
+    // case E * 0 -> 0
     if (w == zero_value(SELECT(W), SELECT(oTw)))
       { 
 	delete ret.base(); 
@@ -682,41 +516,46 @@ namespace vcsn {
 	return; 
       }
 
-    // case 1 * k or a * k
-    if (this_type == node_t::one || this_type == node_t::constant)
+    // case 1 * k -> k * 1
+    if (this_type == node_t::one)
       { 
 	ret.base() = new n_lweight_t
 	  (op_convert(SELECT(W), SELECT(Tw), w), ret.base()); 
 	return; 
       }
 
-    // case k' E * k
+    /// @bug FIXME: Add the following transformation in a separated function.
+    /*
+    // case (k' 1) * k -> [k' k] 1
     if (this_type == node_t::lweight)
       {
-	n_lweight_t* p
-	  = dynamic_cast<n_lweight_t*>(ret.base());
+	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
 	type child_type = p->child_->what();
 
-	// case k'1 *k -> k'k 1 and k'a k -> k'k a
-	if (child_type == node_t::one || child_type == node_t::constant)
+	if (child_type == node_t::one)
 	  { 
 	    op_in_mul
 	      (s.weights(), p->weight_, op_convert(SELECT(W), SELECT(Tw), w)); 
 	    return; 
 	  }
       }
-    else if (this_type == node_t::rweight)
+
+    // case (k' E) * k -> general case
+
+    // case (E k') * k -> E [k' k]
+    if (this_type == node_t::rweight)
       {
 	op_in_mul(s.weights(),
 		  dynamic_cast<n_rweight_t* >(ret.base())
 		  ->weight_, op_convert(SELECT(W), SELECT(Tw), w));
 	return;
       }
+    */
 
     // general case
     ret.base() = 
       new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w), ret.base()); 
-    return; 
+    return;
   }
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
@@ -755,42 +594,44 @@ namespace vcsn {
 
     type this_type = ret.base()->what();
 
-    // case k * 0
+    // case k * 0 -> 0
     if (this_type == node_t::zero)
       return ret;
 
-    // case 0 * E
+    // case k * 1 -> general case
+    
+    // case 0 * E -> 0
     if (w == zero_value(SELECT(W), SELECT(oTw)))
       { return rat::exp<Tm, Tw>::zero(); }
 
-    // case 1 * E
+    // case 1 * E -> E
     if (w == identity_value(SELECT(W), SELECT(oTw)))
       return ret;
 
-    // case k * k' E -> [k k'] E
+    /// @bug FIXME: Add the following transformation in a separated function.
+    /*
+    // case k * (k' E) -> [k k'] E
     if (this_type == node_t::lweight)
       {
-	n_lweight_t* p
-	  = dynamic_cast<n_lweight_t*>(ret.base());
+	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
 	p->weight_ = op_mul
 	  (s.weights(), op_convert(SELECT(W), SELECT(Tw), w), p->weight_);
 	return ret;
       }
 
-    // case k * E k' -> (k E) k'
+    // case k * (E k') -> (k E) k'
     if (this_type == node_t::rweight)
       {
-	n_rweight_t* p
-	  = dynamic_cast<n_rweight_t*>(ret.base());
+	n_rweight_t* p = dynamic_cast<n_rweight_t*>(ret.base());
 	p->child_ = 
 	  new n_lweight_t(op_convert(SELECT(W), SELECT(Tw), w), p->child_);
 	return ret;
       }
+    */
 
     // general case
     ret.base() = new n_lweight_t(w, ret.base());
-    return ret; 
-
+    return ret;
   }
 
 #define FIXME(Msg) std::cerr << "FIXME: " << Msg << std::endl;

@@ -97,50 +97,6 @@ namespace vcsn {
 		 const rat::exp<Tm, Tw>& arg);
     
   template<typename W, typename M, typename Tm, typename Tw>
-  bool krat_simplify_left_is_k(const algebra::Series<W, M>& s,
-			       rat::exp<Tm, Tw>& dst,
-			       const rat::exp<Tm, Tw>& other, 
-			       rat::LeftWeighted<Tm, Tw>* left, 
-			       typename rat::Node<Tm, Tw>::type other_type);
-
-  template<typename W, typename M, typename Tm, typename Tw>
-  bool krat_simplify_left_is_ka(const algebra::Series<W, M>& s,
-				rat::exp<Tm, Tw>& dst,
-				const rat::exp<Tm, Tw>& other, 
-				rat::LeftWeighted<Tm, Tw>* left, 
-				typename rat::Node<Tm, Tw>::type other_type);
-    
-  template<typename W, typename M, typename Tm, typename Tw>
-  bool krat_simplify_left_is_kany(const algebra::Series<W, M>& s,
-				  rat::exp<Tm, Tw>& dst,
-				  const rat::exp<Tm, Tw>& other, 
-				  rat::LeftWeighted<Tm, Tw>* left, 
-				  typename rat::Node<Tm, Tw>::type 
-				  other_type);
-    
-  template<typename W, typename M, typename Tm, typename Tw>
-  bool krat_simplify_left_is_lweight(const algebra::Series<W, M>& s,
-				     rat::exp<Tm, Tw>& dst,
-				     const rat::exp<Tm, Tw>& other, 
-				     rat::LeftWeighted<Tm, Tw>* left, 
-				     typename rat::Node<Tm, Tw>::type 
-				     other_type);
- 
-  template<typename W, typename M, typename Tm, typename Tw>
-  bool krat_simplify_left_is_anyk(const algebra::Series<W, M>& s,
-				  rat::exp<Tm, Tw>& dst,
-				  const rat::exp<Tm, Tw>& other, 
-				  rat::RightWeighted<Tm, Tw>* left, 
-				  typename rat::Node<Tm, Tw>::type 
-				  other_type);
-
-  template<typename Tm, typename Tw>
-  bool krat_simplify_left_is_const( rat::exp<Tm, Tw>& dst,
-				    const rat::exp<Tm, Tw>& other, 
-				    typename 
-				    rat::Node<Tm, Tw>::type other_type);
-    
-  template<typename W, typename M, typename Tm, typename Tw>
   void op_in_mul(const algebra::Series<W, M>& s, 
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg);
