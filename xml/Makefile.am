@@ -1,7 +1,7 @@
-data_DATA = automaton-to-dot.xsl \
-	    automaton-to-neato.xsl \
-	    automaton-to-vcsng.xsl \
-	    vaucanson.dtd
+pkgdata_DATA = automaton-to-dot.xsl \
+	       automaton-to-neato.xsl \
+	       automaton-to-vcsng.xsl \
+	       vaucanson.dtd
 
 CLEANFILES = vaucanson.dtd automaton-to-vcsng.xsl
 

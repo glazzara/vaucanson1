@@ -1,5 +1,9 @@
 2004-03-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* xml/Makefile.am: Fix installation directory for XML related files.
+
+2004-03-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/xml/genutfstrings.sh: Make the script take
 	srcdir and builddir as arguments.
 	* include/Makefile.am: Fix generation of of .inc files from outside
