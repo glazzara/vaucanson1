@@ -1,5 +1,11 @@
 2004-03-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/automata/algos/complete_test.hh,
+	* src/tests/algebra/series/polynom/series_polynom_test.hh: Fix
+	bad copyrights.
+
+2004-03-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/tests/automata/algos/complete_test.hh: Improve the test.
 
 2004-03-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
