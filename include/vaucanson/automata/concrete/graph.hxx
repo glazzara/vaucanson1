@@ -488,10 +488,8 @@ namespace vcsn {
 		 const Query& q,
 		 delta_kind::edges) const
   {
-    const std::set<hedge_t>& edges = states_[from].input_edges;
-    for (typename std::set<hedge_t>::const_iterator e = edges.begin();
-	 e != edges.end();
-	 ++e)
+    const std::list<hedge_t>& edges = states_[from].input_edges;
+    for_each_const_(std::list<hedge_t>, e, edges)
       if (q(*e))
       {
 	*res = *e;
@@ -508,10 +506,8 @@ namespace vcsn {
 		 const Query& q,
 		 delta_kind::states) const
   {
-    const std::set<hedge_t>& edges = states_[from].input_edges;
-    for (typename std::set<hedge_t>::const_iterator e = edges.begin();
-	 e != edges.end();
-	 ++e)
+    const std::list<hedge_t>& edges = states_[from].input_edges;
+    for_each_const_(std::list<hedge_t>, e, edges)
       if (q(*e))
       {
 	*res = edges_[*e].from;

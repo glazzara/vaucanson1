@@ -77,7 +77,8 @@ namespace vcsn {
 						    output_weight_t w)
   {
     if (w == output_weight_t())
-      w = identity_as<output_weight_value_t>::of(series().weights().weights());
+      w = algebra::identity_as<output_weight_value_t>
+	::of(series().weights().weights());
     return op_add_io_edge(this->set(), value(),
 			  from, to, i, o, w);
   }
@@ -91,7 +92,8 @@ namespace vcsn {
 						   output_weight_t w)
   {
     if (w == output_weight_t())
-      w = identity_as<output_weight_value_t>::of(series().weights().weights());
+      w = algebra::identity_as<output_weight_value_t>
+	::of(series().weights().weights());
 
     return op_add_o_edge(this->set(), value(),
 			  from, to, o, w);
@@ -106,20 +108,13 @@ namespace vcsn {
 						   output_weight_t w)
   {
     if (w == output_weight_t())
-      w = identity_as<output_weight_value_t>::of(series().weights().weights());
+      w = algebra::identity_as<output_weight_value_t>
+	::of(series().weights().weights());
 
     return op_add_i_edge(this->set(), value(),
 			 from, to, i, w);
   }
 
-
-//   template <typename S, typename St, typename T>
-//   St& op_rout(const TransducerBase<S>& s, St& st, const T& r)
-//   {
-//     st << "transducer";
-//     return st;
-//   }
-      
 } // vcsn
 
 #endif // VCSN_AUTOMATA_CONCEPT_TRANSDUCER_BASE_HXX

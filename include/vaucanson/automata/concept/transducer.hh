@@ -29,35 +29,30 @@ namespace vcsn {
   template <class Series>
   struct Transducer;
   
-  template <class Series>
-  struct MetaSet<Transducer<Series> >
-  {
-    static const bool dynamic_set = MetaSet<Series>::dynamic_set;    
-  };
-  
+   template <class Series>
+   struct dynamic_traits<Transducer<Series> >
+   {
+     static const bool ret = dynamic_traits<Series>::ret;    
+   };
+ 
   template <class Series, typename T>
   struct MetaElement<Transducer<Series>, T>
     : MetaElement<TransducerBase<Transducer<Series> >, T>
   {};
 
-  namespace traits {
+  template <class Series>
+  struct virtual_types<Transducer<Series> >
+  {
+    typedef Series		series_t;
+  };
     
-    template <class Series>
-    struct virtual_types<Transducer<Series> >
-    {
-      typedef Series		series_t;
-    };
-    
-  } // traits.
-
-
   template <class Series>
   class Transducer
     : public TransducerBase<Transducer<Series> >
   {
   public:
     typedef Transducer<Series>				     self_t;
-    typedef typename traits::virtual_types<self_t>::series_t series_t;
+    typedef typename virtual_types<self_t>::series_t	     series_t;
 
     Transducer(const series_t&);
 
@@ -73,8 +68,8 @@ namespace vcsn {
     typedef typename S::series_t	 series_t;
     typedef typename series_t::monoid_t  monoid_t;
     typedef typename series_t::weights_t weights_t;
-    typedef typename mute_series_traits<series_t, series_t, monoid_t>::ret
-    tseries_t;
+    typedef typename algebra::mute_series_traits<series_t, series_t, monoid_t>
+    ::ret    tseries_t;
     typedef typename extension_traits<T>::ret impl_t;
     typedef Element<Transducer<tseries_t>, impl_t> ret;
   };

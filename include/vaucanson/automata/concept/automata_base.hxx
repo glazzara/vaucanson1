@@ -913,8 +913,9 @@ namespace vcsn {
 
   template<typename S, typename St, typename T>
   inline
-  St& op_rout(const AutomataBase<S>&, St& st, const T& r)
+  St& op_rout(const AutomataBase<S>& s, St& st, const T& v)
   { 
+    Element<S, T> r(s.self(), v);
     st << "{ " 
        << r.states().size() << " states, "
        << r.edges().size() << " edges, "

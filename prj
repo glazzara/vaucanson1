@@ -1,18 +1,26 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 314)
-(Parent-Version vaucanson 0 313)
-(Version-Log "2003-07-01  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 315)
+(Parent-Version vaucanson 0 314)
+(Version-Log "
+2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* configure.ac: Add the algebra_series_krat_derivation test directory.
-	* include/vaucanson/misc/random.hxx (generate<char>): Fix the
-	random character generation.
-	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Set
-	more verbose error messages.")
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix op_convert.
+	* include/vaucanson/algebra/concrete/series/series.hh: 
+		(mute_series_traits, mute_series): New.
+	* include/vaucanson/algebra/concrete/series/series.hxx: Implement it.
+	* include/vaucanson/automata/concept/automata_base.hxx (op_rout): Fix.
+	* include/vaucanson/automata/concrete/graph.hxx: Minor fix.
+	* include/vaucanson/automata/concrete/graph.hh: Adapt to transducer.
+	* include/vaucanson/automata/concept/transducer.hh,
+	  include/vaucanson/automata/concept/transducer_base.hh,
+	  include/vaucanson/automata/concept/transducer_base.hxx:
+		Fix traits and namespaces.
+")
 (New-Version-Log "")
-(Checkin-Time "Tue, 01 Jul 2003 11:15:58 +0200")
-(Checkin-Login clavei_t)
+(Checkin-Time "Tue, 01 Jul 2003 11:20:43 +0200")
+(Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -94,7 +102,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.117 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.118 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -208,7 +216,7 @@
   (include/vaucanson/algebra/concept/semigroup_base.hxx (vaucanson/b/11_semigroup_ 1.6 600))
   (include/vaucanson/algebra/concept/semiring_base.hh (vaucanson/b/16_semiring_b 1.10 600))
   (include/vaucanson/algebra/concept/semiring_base.hxx (vaucanson/b/15_semiring_b 1.10 600))
-  (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.20 600))
+  (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.21 600))
   (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.17 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.9 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hxx (vaucanson/l/12_tropical_s 1.2 600))
@@ -237,7 +245,7 @@
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.20 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.31 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.32 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.4 600))
@@ -260,8 +268,8 @@
   (include/vaucanson/algebra/concrete/series/rat/nodes.hxx (vaucanson/d/48_nodes.hxx 1.9 600))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hh (vaucanson/e/51_random_vis 1.6 600))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx (vaucanson/e/50_random_vis 1.8 600))
-  (include/vaucanson/algebra/concrete/series/series.hh (vaucanson/c/19_series.hh 1.11 600))
-  (include/vaucanson/algebra/concrete/series/series.hxx (vaucanson/c/18_series.hxx 1.8 600))
+  (include/vaucanson/algebra/concrete/series/series.hh (vaucanson/c/19_series.hh 1.12 600))
+  (include/vaucanson/algebra/concrete/series/series.hxx (vaucanson/c/18_series.hxx 1.9 600))
   (include/vaucanson/algebra/concrete/series/transpose.hh (vaucanson/e/11_transpose. 1.6 600))
   (include/vaucanson/algebra/concrete/series/transpose.hxx (vaucanson/e/10_transpose. 1.6 600))
 
@@ -297,7 +305,7 @@
   (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.9 600))
   (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.8 600))
   (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.18 600))
-  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.16 600))
+  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.17 600))
   
   
   (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.6 600))
@@ -319,8 +327,8 @@
   (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.9 600))
   (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.2 600))
 
-  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.2 600))
-  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.6 600))
+  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.3 600))
+  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.7 600))
   (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.3 600))
   (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.8 600))
   (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.6 600)) 
@@ -795,14 +803,14 @@
 ;; to version 0.310(w), by yann:
 
   (include/vaucanson/automata/concept/transducer_ops.hh (vaucanson/q/34_transducer 1.1 600))
-  (include/vaucanson/automata/concept/transducer.hh (vaucanson/q/35_transducer 1.1 600))
-  (include/vaucanson/automata/concept/transducer_base.hh (vaucanson/q/36_transducer 1.1 600))
+  (include/vaucanson/automata/concept/transducer.hh (vaucanson/q/35_transducer 1.2 600))
+  (include/vaucanson/automata/concept/transducer_base.hh (vaucanson/q/36_transducer 1.2 600))
 
 ;; Files added by populate at Tue, 01 Jul 2003 10:09:10 +0200,
 ;; to version 0.310(w), by yann:
 
   (include/vaucanson/automata/concept/transducer.hxx (vaucanson/q/37_transducer 1.1 600))
-  (include/vaucanson/automata/concept/transducer_base.hxx (vaucanson/q/38_transducer 1.1 600))
+  (include/vaucanson/automata/concept/transducer_base.hxx (vaucanson/q/38_transducer 1.2 600))
 
 ;; Files added by populate at Tue, 01 Jul 2003 10:17:19 +0200,
 ;; to version 0.310(w), by yann:

@@ -24,6 +24,7 @@
 
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/projection.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/concrete/kind_adapter.hh>
@@ -200,7 +201,7 @@ namespace vcsn {
 	    class Letter, class Tag,
 	    typename OutputIterator, typename L>	
   inline
-  void op_letter_delta(const Automata<S>& s, 
+  void op_letter_delta(const AutomataBase<S>& s, 
 		       const Graph<labels_are_letters,
 		       WordValue, WeightValue,
 		       SerieValue, Letter, Tag>& v,					
@@ -233,6 +234,7 @@ namespace vcsn {
   {
     typedef SerieValue				     serie_value_t;
     typedef WordValue				     word_value_t;
+    typedef WordValue				     monoid_elt_value_t;
     typedef WeightValue				     weight_value_t;
     typedef Letter				     letter_t;
     typedef typename LabelOf<Kind, WordValue, WeightValue, SerieValue, Letter>
@@ -270,7 +272,7 @@ namespace vcsn {
 				 Tag>  > 
   {
     typedef WordValue			input_monoid_elt_value_t;
-    typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t 
+    typedef typename algebra::series_traits<WeightValue>::monoid_value_t 
     output_monoid_elt_value_t;
     typedef typename algebra::series_traits<WeightValue>::weight_value_t
     output_weight_value_t;
@@ -294,11 +296,11 @@ namespace vcsn {
     self_t;
     typedef typename transducer_traits<self_t>::output_weight_value_t
     weight_value_t;
-    typedef typename transducer_traits<self_t>::input_monoid_value_t
+    typedef typename transducer_traits<self_t>::input_monoid_elt_value_t
     monoid_value_t;
-    typedef typename mute_serie_impl<SerieValue,
-				     weight_value_t,
-				     monoid_value_t>
+    typedef typename algebra::mute_serie_impl<SerieValue,
+					      weight_value_t,
+					      monoid_value_t>
     ::ret serie_value_t;
 
     typedef
@@ -327,9 +329,9 @@ namespace vcsn {
   {
     typedef Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
     self_t;
-    typedef typename automaton_traits<self_t>::monoid_value_t
+    typedef typename automaton_traits<self_t>::monoid_elt_value_t
     monoid_value_t;
-    typedef typename mute_serie_impl<SerieValue, SerieValue, monoid_value_t>
+    typedef typename algebra::mute_serie_impl<SerieValue, SerieValue, monoid_value_t>
     ::ret serie_value_t;
 
     typedef

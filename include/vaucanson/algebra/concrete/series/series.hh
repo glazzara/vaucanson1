@@ -55,7 +55,17 @@ namespace vcsn {
 		    const Series<W, M>&);
     
 
-  }
+    template <class W, class M, class NewW, class NewM>
+    struct mute_series_traits<Series<W, M>, NewW, NewM >
+    {
+      typedef Series<NewW, NewM> ret;
+    };
+
+    template <class W, class M, class NewW, class NewM>
+    typename mute_series_traits<Series<W, M>, NewW, NewM >::ret
+    mute_series(const Series<W, M>& s, const NewW& w, const NewM& m);
+
+  } // algebra
 
   /*-----------------------------.
   | MetaElement<Series<W, M>, T> |

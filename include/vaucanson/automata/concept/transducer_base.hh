@@ -24,7 +24,7 @@
 
 # include <iterator>
 # include <vaucanson/fundamental/fundamental.hh>
-# include <vaucanson/internal/traits.hh>
+# include <vaucanson/fundamental/predecls.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
@@ -47,7 +47,7 @@ namespace vcsn {
   {
   public:
     //! The type of the series set associated with the automaton.
-    typedef typename traits::virtual_types<Self>::series_t  series_t;
+    typedef typename virtual_types<Self>::series_t  series_t;
 
   protected:
     //! The default constructor is protected since it is an abstract class.
@@ -61,15 +61,15 @@ namespace vcsn {
   template <typename T>
   struct transducer_traits
   {
-     typedef traits::undefined_type input_monoid_elt_value_t;
-     typedef traits::undefined_type output_monoid_elt_value_tt;
-     typedef traits::undefined_type output_weight_value_tt;
+     typedef undefined_type input_monoid_elt_value_t;
+     typedef undefined_type output_monoid_elt_value_tt;
+     typedef undefined_type output_weight_value_tt;
   };
 
   template <typename T>
   struct extension_traits
   {
-    typedef traits::undefined_type ret;
+    typedef undefined_type ret;
   };
 
   /*-------------------------------------.
@@ -97,7 +97,7 @@ namespace vcsn {
 
     /*! type of the output monoid element implementation. */
     typedef typename automaton_traits<T>::weight_value_t weight_value_t;
-    typedef typename series_traits<weight_value_t>::monoid_value_t 
+    typedef typename algebra::series_traits<weight_value_t>::monoid_value_t 
 						output_monoid_elt_value_t;
 
     /*! type of the output monoid. */
@@ -122,7 +122,7 @@ namespace vcsn {
     typedef typename input_monoid_t::letter_t input_letter_t;
 
     /*! type of the output weight implementation. */
-    typedef typename series_traits<weight_value_t>::weight_value_t
+    typedef typename algebra::series_traits<weight_value_t>::weight_value_t
     output_weight_value_t;
     
     /*! type of the output weights. */
