@@ -1,5 +1,10 @@
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/misc/support.hh: New.
+	* include/vaucanson/misc/support.hxx: Likewise.
+
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/complete.hh: Document.
 		(auto_in_complete): Rename to complete_here.
 	* include/vaucanson/algorithms/complete.hxx: Likewise.

@@ -1,19 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 240)
-(Parent-Version vaucanson 0 239)
+(Project-Version vaucanson 0 241)
+(Parent-Version vaucanson 0 240)
 (Version-Log "
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/complete.hh: Document.
-		(auto_in_complete): Rename to complete_here.
-	* include/vaucanson/algorithms/complete.hxx: Likewise.
-	* src/tests/automata/algos/complete_test.hh: Likewise.
-	* src/demos/fsm/generate_toolbox.sh: Use forward_closure.
+	* include/vaucanson/misc/support.hh: New.
+	* include/vaucanson/misc/support.hxx: Likewise.
 ")
 (New-Version-Log "")
-(Checkin-Time "Fri, 20 Jun 2003 16:39:08 +0200")
+(Checkin-Time "Fri, 20 Jun 2003 16:41:27 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -96,7 +93,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.45 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.46 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -846,6 +843,16 @@
 ;; from version 0.232(w), by yann:
 
   ; (include/vaucanson/algorithms/closure.hxx ())
+
+;; Files added by populate at Fri, 20 Jun 2003 16:39:54 +0200,
+;; to version 0.240(w), by yann:
+
+  (include/vaucanson/misc/support.hh (vaucanson/q/12_support.hh 1.1 600))
+
+;; Files added by populate at Fri, 20 Jun 2003 16:39:55 +0200,
+;; to version 0.240(w), by yann:
+
+  (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)
