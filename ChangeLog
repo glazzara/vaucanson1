@@ -1,3 +1,7 @@
+2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/Makefile.am: Fix.
+
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat.hh: Remove useless
