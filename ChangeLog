@@ -1,3 +1,8 @@
+2004-04-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* update_config_ac.sh: Do not use the .defs files to generate
+	the VCSN_TEST macros in configure.ac. Use rather the directories.
+
 2004-04-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/tests-suites/generate-all.sh: Instanciate tests on more

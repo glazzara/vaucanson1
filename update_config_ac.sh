@@ -1,7 +1,7 @@
 #!/bin/sh
 
-tests=`find src/tests/tests-suites -name \*.defs | \
-       sed 's,.*/\(.*\)\.defs,VCSN_TESTS([\1])\\\\,'`
+tests=`ls -d src/tests/tests-suites/*/ | \
+       sed 's,.*/\(.*\)/$,VCSN_TESTS([\1])\\\\,'`
 
 mv configure.ac configure.ac.bak
 
