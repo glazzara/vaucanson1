@@ -11,6 +11,7 @@ SUBDIRS =					\
 	test-suites				\
 	algebra					\
 	automata				\
+	boolean_automata			\
 	transducers				\
 	xml					\
 	context_headers

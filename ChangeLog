@@ -1,3 +1,7 @@
+2004-06-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/Makefile.am: Add boolean_automata to SUBDIRS.
+
 2004-06-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/standard.hxx
