@@ -49,6 +49,7 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
   typedef typename krat_exp_t::value_t		kexp_t;
   typedef typename krat_exp_t::monoid_elt_t	monoid_elt_t;
   typedef typename monoid_elt_t::set_t		monoid_t;
+  typedef typename monoid_elt_t::value_t	monoid_elt_value_t;
   
   typedef typename krat_exp_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_elt_value_t;
@@ -70,117 +71,178 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
 
   semiring_elt_t s_identity = semiring.identity(SELECT(semiring_elt_value_t));
   semiring_elt_t s_zero = semiring.zero(SELECT(semiring_elt_value_t));
-  semiring_elt_t s_2identity = s_identity + s_identity;
 
+  monoid_elt_t m_identity = monoid.identity(SELECT(monoid_elt_value_t));
+  
+  semiring_elt_t s_2identity = s_identity + s_identity;
+  bool s_identity_computable =
+    (semiring.identity(SELECT(semiring_elt_value_t))).starable();
+  
   letter_t larray[] = { a, b, letter_t () };
 
   unsigned int nb_tests = 0;
   unsigned int nb_succs = 0;
-  
+
   for (int cpt = 0; cpt < 100; ++cpt)
   {
     semiring_elt_t w = semiring.choose(SELECT(semiring_elt_value_t));
+    semiring_elt_t w_star = w;
+    semiring_elt_t s_identity_star = s_identity;
+    if (s_identity.starable())
+      s_identity_star = s_identity_star.star();
+    if (w.starable())
+      w_star = w_star.star();
 
-    struct
-    {
-      krat_exp_t	exp;
-      semiring_elt_t	res;
-      bool		computable;
-    }
-    exps[] =
+    struct s_check
       {
-	{
+	krat_exp_t	exp;
+	semiring_elt_t	res;
+	bool		computable;
+      }
+      exps[] =
+      {
+	{ // 0
 	  s.zero(SELECT(kexp_t)),
 	  s_zero,
 	  true
 	},
-	{
+	{ // 1
 	  s.identity(SELECT(kexp_t)),
 	  s_identity,
 	  true
 	},
-	{
-	  krat_exp_t (s),
-	  s_zero,
-	  true
-	},
-	{
+	{ // a
 	  krat_exp_t (s, a),
 	  s_zero,
 	  true
 	},
-	{
-	  krat_exp_t (s, a) + krat_exp_t (s, b),
-	  s_zero,
-	  true
-	},
-	{
-	  krat_exp_t (s, a) * krat_exp_t (s, b),
-	  s_zero,
-	  true
-	},
-	{
+	{ // ab
 	  krat_exp_t (s, std::basic_string<letter_t>(larray)),
 	  s_zero,
 	  true
 	},
-	{
+	{ // a+b
+	  krat_exp_t (s, a) + krat_exp_t (s, b),
+	  s_zero,
+	  true
+	},
+	{ // a.b
+	  krat_exp_t (s, a) * krat_exp_t (s, b),
+	  s_zero,
+	  true
+	},
+	{ // a*
 	  krat_exp_t (s, a).star(),
 	  s_identity,
 	  true
 	},
-	{
+	{ // 1*
 	  (s.identity(SELECT(kexp_t))).star(),
-	  s_identity,
-	  false
+	  s_identity_star,
+	  s_identity_computable
 	},
-	{
+	{ // (2 a)*
 	  (s_2identity * krat_exp_t (s, a)).star(),
 	  s_identity,
 	  true
 	},
-	{
+	{ // w a
 	  w * krat_exp_t (s, a),
 	  s_zero,
-	  w.starable()
+	  true
 	},
-	{
+	{ // a w
 	  krat_exp_t (s, a) * w,
 	  s_zero,
-	  w.starable()
+	  true
 	},
-	{
+	{ // a w+a
 	  krat_exp_t (s, a) * w + krat_exp_t (s, a),
 	  s_zero,
-	  w.starable()
+	  true
 	},
-	{
+	{ // a w+a*
 	  krat_exp_t (s, a) * w + krat_exp_t (s, a).star(),
 	  s_identity,
+	  true
+	},
+	{// w 1
+	  w * krat_exp_t (s, m_identity),
+	  w,
+	  true
+	},
+	{// 1 w
+	  krat_exp_t (s, m_identity) * w,
+	  w,
+	  true
+	},
+	{// (w 1)*
+	  (w * krat_exp_t (s, m_identity)).star(),
+	  w_star,
 	  w.starable()
+	},
+	{// (1 w)*
+	  (krat_exp_t (s, m_identity) * w).star(),
+	  w_star,
+	  w.starable()
+	},
+	{// a+1 
+	  krat_exp_t (s, a) + krat_exp_t (s, m_identity),
+	  s_identity,
+	  true
+	},
+	{// (a+1)* 
+	  (krat_exp_t (s, a) + krat_exp_t (s, m_identity)).star(),
+	  s_identity_star,
+	  s_identity_computable
+	},
+	{// 0.a
+	  s.zero(SELECT(kexp_t)) * krat_exp_t (s, a),
+	  s_zero,
+	  true
+	},
+	{// a.0
+	  krat_exp_t (s, a) * s.zero(SELECT(kexp_t)),
+	  s_zero,
+	  true
+	},
+	{// 0*
+	  (s.zero(SELECT(kexp_t))).star(),
+	  s_identity,
+	  true
 	}
       };
 
-    for (unsigned int i = 0; i < 14; ++i)
+    for (unsigned int i = 0; i < sizeof(exps) / sizeof(struct s_check); ++i)
       {
 	std::pair<semiring_elt_t, bool> ret = constant_term(exps[i].exp);
-
 	if (exps[i].computable != ret.second)
 	  {
-	    std::cerr << "FAIL: Constant term shouldn't be computed"
-		      << std::endl;
+	    if (exps[i].computable)
+	      std::cerr << "FAIL: Constant term should be computed in "
+			<< exps[i].exp
+			<< std::endl;
+	    else
+	      std::cerr << "FAIL: Constant term shouldn't be computed in "
+			<< exps[i].exp
+			<< std::endl;
 	  }
 	else
-	  if (ret.first == exps[i].res)
-	    ++nb_succs;
+	  if (exps[i].computable)
+	    {
+	      if (ret.first == exps[i].res)
+		++nb_succs;
+	      else
+		std::cerr << "FAIL: Expression "
+			  << exps[i].exp
+			  << " returned "
+			  << ret.first
+			  << " as constant term, instead of "
+			  << exps[i].res
+			  << std::endl;
+	    }
 	  else
-	    std::cerr << "FAIL: Expression "
-		      << exps[i].exp
-		      << " returned "
-		      << ret.first
-		      << " as constant term, instead of "
-		      << exps[i].res
-		      << std::endl;
+	    ++nb_succs;
 	++nb_tests;
       }
   }
