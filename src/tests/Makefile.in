@@ -84,7 +84,8 @@ install_sh = @install_sh@
 SUBDIRS = \
 	check 					\
 	fundamental				\
-	algebra    				
+	algebra    				\
+	automata
 
 subdir = src/tests
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

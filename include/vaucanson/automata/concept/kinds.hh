@@ -85,7 +85,7 @@ namespace vcsn
     hedge_t add_letter_edge(hstate_t from, hstate_t to,
 			    const L& l);
 
-#define DELTA_IMPL(Name, Type, Kind_type, Init)								\
+#define DELTA_IMPL(Name, Kind_type, Init)								\
     template<typename OutputIterator, typename L>							\
     void letter_ ## Name (OutputIterator res, hstate_t from, const L& l, Kind_type k Init) const;	\
                                                                                                         \
@@ -93,11 +93,11 @@ namespace vcsn
     void letter_ ## Name ## c (Container &dst, hstate_t from, const L& l, Kind_type k Init) const;	
 
 
-    DELTA_IMPL(delta, edges, delta_kind::edges, = delta_kind::edges());
-    DELTA_IMPL(rdelta, edges, delta_kind::edges, = delta_kind::edges());
+    DELTA_IMPL(delta, delta_kind::edges, = delta_kind::edges());
+    DELTA_IMPL(rdelta, delta_kind::edges, = delta_kind::edges());
 
-    DELTA_IMPL(delta, states, delta_kind::states, );
-    DELTA_IMPL(rdelta, states, delta_kind::states, );
+    DELTA_IMPL(delta, delta_kind::states, );
+    DELTA_IMPL(rdelta, delta_kind::states, );
 #undef DELTA_IMPL
 
   protected:

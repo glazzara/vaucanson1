@@ -1,3 +1,49 @@
+2002-07-05  Maxime Rey  <max@lrde.epita.fr>
+
+	* Index: 0.53/include/vaucanson/algebra/concept/alphabets_base.hh
+	62a63,65
+	>       // add-on
+	>       letter_t          select_letter(unsigned n);
+	>
+	* /include/vaucanson/algebra/concept/alphabets_base.hxx implement 
+	in consequence the method select_letter
+	* Index: /include/vaucanson/algebra/concrete/free_monoid/words.hh
+	23a24,25
+	>       typedef A alphabets_elt_t;
+	
+	* Index:/include/vaucanson/automata/concrete/manylinks_states.hh
+	59c59
+	<       assert((*counters_)[st_global] != 0);
+	---
+	>       // assert((*counters_)[st_global] != 0);
+	64c64
+	<         assert(*counters_[st_initial] != 0);
+	---
+	>         assert((*counters_)[st_initial] != 0);
+	* Index: 0.53/include/vaucanson/automata/concept/automata_base.hxx
+	restored ("value()->" restored instead of "value()." )
+	* Index: 0.53/include/vaucanson/automata/concept/automata_base.hh
+	143c143
+	< #define DELTA_DECL(Name, Type, Kind_type, Init)    
+        \---
+	> #define DELTA_DECL(Name, Kind_type, Init)
+	(automata_base.hh cleaned - Type unused)
+
+	* Added `include/vaucanson/misc/dot_dump.hh'
+	* Added
+      	`src/tests/automata/implementation_check/check_global_consistance.cc'
+	* Added `src/tests/automata/implementation_check/gen_random_automata.cc'
+
+	* Modified check files - ref added on AutomatonImpl
+	/src/tests/automata/implementation_check/check_add_edge.cc
+	/src/tests/automata/implementation_check/check_init_final.cc
+	tests/automata/implementation_check/check_coherence_state_edge.cc
+	/src/tests/automata/implementation_check/check_add_state.cc
+
+	* check_global_consistance.cc & gen_random_automata.cc not finished
+
+	
+
 2002-07-01  Maxime Rey  <max@lrde.epita.fr>
 
 	* header of implementation_check/check_init_final.cc modified

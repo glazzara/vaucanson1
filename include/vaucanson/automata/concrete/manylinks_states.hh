@@ -56,12 +56,12 @@ namespace vcsn
       assert(mark_.next(co_out) == &mark_);
 
       // unlink from the states lists
-      assert((*counters_)[st_global] != 0);
+      // assert((*counters_)[st_global] != 0);
       --(*counters_)[st_global];
 
       if (is_special(st_initial))
 	{
-	  assert(*counters_[st_initial] != 0);
+	  assert((*counters_)[st_initial] != 0);
 	  --(*counters_)[st_initial];
 	}
       if (is_special(st_final))

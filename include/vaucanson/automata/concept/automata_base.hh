@@ -140,7 +140,7 @@ namespace vcsn
     label_of(hedge_t e) const;
 
 
-#define DELTA_DECL(Name, Type, Kind_type, Init)						\
+#define DELTA_DECL(Name, Kind_type, Init)						\
       template<typename OutputIterator>							\
       void Name (OutputIterator res, hstate_t from,					\
 		 Kind_type k Init) const;					\
@@ -157,11 +157,11 @@ namespace vcsn
       void Name ## c (Container& dst, hstate_t from, const L& query,			\
 		      Kind_type k Init) const;
 
-    DELTA_DECL(delta, edges, delta_kind::edges, = delta_kind::edges());
-    DELTA_DECL(rdelta, edges, delta_kind::edges, = delta_kind::edges());
+    DELTA_DECL(delta, delta_kind::edges, = delta_kind::edges());
+    DELTA_DECL(rdelta, delta_kind::edges, = delta_kind::edges());
 
-    DELTA_DECL(delta, states, delta_kind::states, );
-    DELTA_DECL(rdelta, states, delta_kind::states, );
+    DELTA_DECL(delta, delta_kind::states, );
+    DELTA_DECL(rdelta, delta_kind::states, );
 
 #undef DELTA_DECL
 

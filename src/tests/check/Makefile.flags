@@ -1,4 +1,4 @@
 # -*- Makefile -*-
 
-AM_CXXFLAGS = -Wall -W -Wno-unused -ansi -pedantic
+AM_CXXFLAGS = -Wall -W -Wno-unused -ggdb
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/src/tests/

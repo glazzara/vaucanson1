@@ -79,7 +79,7 @@ namespace vcsn
   const Tag& 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
   tag() const { return tag_; }
-    
+   
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>

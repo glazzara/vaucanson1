@@ -93,6 +93,22 @@ namespace vcsn {
       op_insert(set(), value(), l); 
     }
     
+  // add-on
+  template<class Self, typename T>
+  typename alphabet_traits<Self, T>::letter_t
+  MetaElement<AlphabetsBase<Self>, T>::select_letter(unsigned n) 
+  { 
+    if (n >= this->size())
+      n = this->size() - 1;
+
+    iterator it = this->begin();
+    for (unsigned i = 0; i <= n; i++, it++)
+      ;
+    //    it += n;
+
+    return *it;
+  }
+
     template<class Self, typename T>
     MetaElement<AlphabetsBase<Self>, T>::MetaElement() 
     {}

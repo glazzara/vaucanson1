@@ -20,6 +20,8 @@
 # include <check/tests_stuff.hh>
 # include <map>
 
+# include <vaucanson/misc/ref.hh>
+
 
 int main(int argc, char **argv)
 {
@@ -36,14 +38,16 @@ int main(int argc, char **argv)
 
 
   Element<Automata, 
-    AutomatonImpl<labels_are_series, 
+    utility::ref <AutomatonImpl<labels_are_series, 
     Series<NumericalSemiring, Words>,
     polynom<std::string, int>,
     ManyLinks<polynom<std::string, int>, NoTag, NoTag>,
     NoTag,
-    std::map> 
+    std::map> >
     > automaton;
   
+  automaton.create();
+
   TEST(t, "Initial Number of States (0)", automaton.states().size() == 0);
 
   hstate_t s1 = automaton.add_state();

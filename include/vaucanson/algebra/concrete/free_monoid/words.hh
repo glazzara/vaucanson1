@@ -21,6 +21,8 @@ namespace vcsn {
     struct SetWords 
       : FreeMonoidBase<SetWords<A> >
     {
+      typedef A alphabets_elt_t;
+
       // in case of default constructor, do not forget to attach an
       // alphabet, otherwise the alphabet is empty.
       SetWords();

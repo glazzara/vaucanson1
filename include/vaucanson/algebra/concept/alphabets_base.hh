@@ -60,6 +60,9 @@ namespace vcsn {
       /* sugar */
       void		insert(const letter_t& l);
 
+      // add-on
+      letter_t          select_letter(unsigned n);
+
     protected:
       MetaElement();
       MetaElement(const MetaElement& other);

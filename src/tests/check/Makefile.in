@@ -77,7 +77,7 @@ am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
 
-AM_CXXFLAGS = -Wall -W -Wno-unused -ansi -pedantic
+AM_CXXFLAGS = -Wall -W -Wno-unused -ggdb
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/src/tests/
 
 check_LIBRARIES = libcheck.a

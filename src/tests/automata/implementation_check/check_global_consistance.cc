@@ -1,4 +1,4 @@
-// check_init_final.cc
+// check_global_consistance.cc
 //
 // VCSN_HEADER
 
@@ -19,9 +19,9 @@
 
 # include <check/tests_stuff.hh>
 # include <map>
+# include <set>
 
 # include <vaucanson/misc/ref.hh>
-
 
 int main(int argc, char **argv)
 {
@@ -49,22 +49,17 @@ int main(int argc, char **argv)
   automaton.create();
 
   hstate_t s1 = automaton.add_state();
-  automaton.set_initial(s1);
+  hstate_t s2 = automaton.add_state();
 
-  TEST(t, "Is Initial State [set]", automaton.is_initial(s1));
+  hedge_t h1 = automaton.add_letter_edge(s1, s2, 'a');
 
-  automaton.unset_initial(s1);
+  std::set<hstate_t> dest;
 
-  TEST(t, "Is Initial State [unset]", !automaton.is_initial(s1));
+  std::cout << s1.value() << std::endl;
 
+  automaton.deltac(dest, s1, delta_kind::edges());
 
-  automaton.set_final(s1);
-
-  TEST(t, "Is Final State [set]", automaton.is_final(s1));
-
-  automaton.unset_final(s1);
-
-  TEST(t, "Is Final State [unset]", !automaton.is_final(s1));
+  std::cout << *dest.begin() << std::endl;
 
   return 0;
 }
