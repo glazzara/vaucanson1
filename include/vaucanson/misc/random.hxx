@@ -175,12 +175,13 @@ namespace utility {
       return std::make_pair(generate<char>(), generate<int>());
     }
 
-//     template <>
-//     vcsn::algebra::small_alpha_letter::Letter
-//     generate<vcsn::algebra::small_alpha_letter::Letter>()
-//     {
-//       return generate<char>('a', 'z');
-//     }
+    template <>
+    inline
+    vcsn::algebra::small_alpha_letter::Letter
+    generate<vcsn::algebra::small_alpha_letter::Letter>()
+    {
+      return generate<char>('a', 'z');
+    }
 
   } // Random
 

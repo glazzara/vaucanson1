@@ -1,3 +1,11 @@
+2004-03-18  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/misc/random.hxx: Add random generation for
+	small_alpha_letter.
+	* include/vaucanson/algebra/concrete/letter/range.hh: Fix cardinal
+	formula.
+
 2004-03-18  Valentin David  <valentin@lrde.epita.fr>
 
 	* include/vaucanson/design_pattern/element.hxx: Fix.

@@ -30,17 +30,29 @@
 #ifndef VCSN_MISC_RANDOM_HH
 # define VCSN_MISC_RANDOM_HH
 
-# include <vaucanson/algebra/concrete/alphabets/predefs.hh>
 # include <vaucanson/algebra/concrete/semiring/rational_number.hh>
+
+// Forward declaration.
+
+namespace vcsn {
+  namespace algebra {
+    template <class T, class Interval>
+    class static_ranged;
+
+    namespace small_alpha_letter {
+      typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
+    }
+  }
+}
 
 namespace utility {
 
-  /// the namespace for the random generation tools
+  /// The namespace for the random generation tools.
   namespace random {
 
     /** @addtogroup utility *//** @{ */
 
-    /// Generate a random value
+    /// Generate a random value.
     template<typename T>
     T generate();
 
@@ -110,14 +122,14 @@ namespace utility {
     (const vcsn::algebra::RationalNumber min,
      const vcsn::algebra::RationalNumber max);
 
-    /// Generate a random std::pair<char, int> (needed for the test suite).
+    /// Generate a random std::pair<char, int>.
     template <>
     std::pair<char, int> generate<std::pair<char, int> >();
 
-    /// Generate a random small_alpha_letter (needed for the test suite).
-//     template <>
-//     vcsn::algebra::small_alpha_letter::Letter
-//     generate<vcsn::algebra::small_alpha_letter::Letter>();
+    /// Generate a random small_alpha_letter.
+    template <>
+    vcsn::algebra::small_alpha_letter::Letter
+    generate<vcsn::algebra::small_alpha_letter::Letter>();
     /** @} */
 
   }

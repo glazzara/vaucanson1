@@ -73,7 +73,7 @@ namespace vcsn {
     {
       enum
 	{
-	  cardinal = Interval::from_value - Interval::to_value + 1
+	  cardinal = Interval::to_value - Interval::from_value + 1
 	};
     };
 
