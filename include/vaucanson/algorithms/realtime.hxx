@@ -50,7 +50,7 @@ namespace vcsn {
 	 ++e)
       if (a.series_of(*e) ==
 	  a.structure().series().
-	  identity(SELECT(typename Auto_::series_value_t)))
+	  identity(SELECT(typename Auto_::series_set_elt_value_t)))
 	return false;
     return true;
   }

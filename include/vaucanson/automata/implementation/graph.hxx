@@ -411,8 +411,8 @@ namespace vcsn {
   }
 
   TParam
-  const typename GClass::series_value_t&
-  GClass::get_initial(hstate_t n, const series_value_t& z) const
+  const typename GClass::series_set_elt_value_t&
+  GClass::get_initial(hstate_t n, const series_set_elt_value_t& z) const
   {
     typename initial_t::const_iterator i = initial_.find(n);
     if (i == initial_.end())
@@ -422,8 +422,8 @@ namespace vcsn {
 
   TParam
   void
-  GClass::set_initial(hstate_t n, const series_value_t& v, 
-		      const series_value_t& z)
+  GClass::set_initial(hstate_t n, const series_set_elt_value_t& v, 
+		      const series_set_elt_value_t& z)
   {
     if (z == v)
       initial_.erase(n);
@@ -432,8 +432,8 @@ namespace vcsn {
   }
 
   TParam
-  const typename GClass::series_value_t&
-  GClass::get_final(hstate_t n, const series_value_t& z) const
+  const typename GClass::series_set_elt_value_t&
+  GClass::get_final(hstate_t n, const series_set_elt_value_t& z) const
   {
     typename final_t::const_iterator i = final_.find(n);
     if (i == final_.end())
@@ -443,8 +443,8 @@ namespace vcsn {
 
   TParam
   void
-  GClass::set_final(hstate_t n, const series_value_t& v, 
-		    const series_value_t& z)
+  GClass::set_final(hstate_t n, const series_set_elt_value_t& v, 
+		    const series_set_elt_value_t& z)
   {
     if (v == z)
       final_.erase(n);

@@ -41,7 +41,7 @@ namespace vcsn {
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, bool> series_value_t;
+    typedef polynom<WordValue, bool> series_set_elt_value_t;
 
     typedef Series<NumericalSemiring, Words> series_set_t;
 
@@ -50,7 +50,7 @@ namespace vcsn {
       labels_are_series,
       WordValue,
       bool,
-      series_value_t,
+      series_set_elt_value_t,
       char,
       NoTag>
     automaton_impl_t;

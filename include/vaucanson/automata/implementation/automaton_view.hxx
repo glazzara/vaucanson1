@@ -335,7 +335,7 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  typename Element<S, T>::series_value_t
+  typename Element<S, T>::series_set_elt_value_t
   op_series_value_of(const AutomataBase<S>& s,
 		    const IdentityView<T>& v,
 		    hedge_t e)

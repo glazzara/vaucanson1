@@ -61,7 +61,7 @@
 	else if (au.series_of(*e) == series_elt_t (ss, mb))		\
 	  ++tr_b;							\
 	else if (au.series_of(*e) ==					\
-		 identity_as<series_value_t>::of(ss))			\
+		 identity_as<series_set_elt_value_t>::of(ss))		\
 	  ++tr_1;							\
 	else								\
 	  ++tr_X;							\
@@ -149,7 +149,7 @@ bool thompson_test(tests::Tester& tg)
     TEST_MSG("Tests on random expressions.");
     unsigned success = 0;
     unsigned nb_test_done = 0;
-    
+
     for (unsigned nb = 0; nb < nb_test; ++nb)
       {
 	krat_t		exp = ss.choose(SELECT(exp_t));

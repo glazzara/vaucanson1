@@ -88,24 +88,31 @@ namespace vcsn {
   template <typename T>
   struct automaton_traits<TransposeView<T> >
   {
-    typedef typename automaton_traits<T>::label_t label_t;
-    typedef typename automaton_traits<T>::series_value_t series_value_t;
-    typedef typename automaton_traits<T>::word_value_t word_value_t;
-    typedef typename automaton_traits<T>::semiring_elt_value_t semiring_elt_value_t;
-    typedef typename automaton_traits<T>::letter_t letter_t;
-    typedef typename automaton_traits<T>::tag_t tag_t;
-    typedef typename automaton_traits<T>::states_t states_t;
-    typedef typename automaton_traits<T>::state_data_t state_data_t;
-    typedef typename automaton_traits<T>::state_iterator state_iterator;
-    typedef typename automaton_traits<T>::edges_t edges_t;
-    typedef typename automaton_traits<T>::edge_data_t edge_data_t;
-    typedef typename automaton_traits<T>::edge_iterator edge_iterator;
-    typedef typename automaton_traits<T>::initial_t initial_t;
-    typedef typename automaton_traits<T>::initial_iterator initial_iterator;
-    typedef typename automaton_traits<T>::initial_support_t initial_support_t;
-    typedef typename automaton_traits<T>::final_t final_t;
-    typedef typename automaton_traits<T>::final_iterator final_iterator;
-    typedef typename automaton_traits<T>::final_support_t final_support_t;
+    typedef typename automaton_traits<T>::label_t	label_t;
+    typedef typename automaton_traits<T>::series_set_elt_value_t
+							series_set_elt_value_t;
+    typedef typename automaton_traits<T>::word_value_t	word_value_t;
+    typedef typename automaton_traits<T>::semiring_elt_value_t
+							semiring_elt_value_t;
+    typedef typename automaton_traits<T>::letter_t	letter_t;
+    typedef typename automaton_traits<T>::tag_t		tag_t;
+    typedef typename automaton_traits<T>::states_t	states_t;
+    typedef typename automaton_traits<T>::state_data_t	state_data_t;
+    typedef typename automaton_traits<T>::state_iterator
+							state_iterator;
+    typedef typename automaton_traits<T>::edges_t	edges_t;
+    typedef typename automaton_traits<T>::edge_data_t	edge_data_t;
+    typedef typename automaton_traits<T>::edge_iterator	edge_iterator;
+    typedef typename automaton_traits<T>::initial_t	initial_t;
+    typedef typename automaton_traits<T>::initial_iterator
+							initial_iterator;
+    typedef typename automaton_traits<T>::initial_support_t
+							initial_support_t;
+    typedef typename automaton_traits<T>::final_t	final_t;
+    typedef typename automaton_traits<T>::final_iterator
+							final_iterator;
+    typedef typename automaton_traits<T>::final_support_t
+							final_support_t;
   };
 
 #define AutoType(Type) \

@@ -73,7 +73,7 @@ namespace vcsn {
   template <typename T>
   struct automaton_traits {
     typedef undefined_type label_t;
-    typedef undefined_type series_value_t;
+    typedef undefined_type series_set_elt_value_t;
     typedef undefined_type word_value_t;
     typedef undefined_type semiring_elt_value_t;
     typedef undefined_type letter_t;
@@ -130,71 +130,72 @@ namespace vcsn {
     : MetaElement<Structure<Self>, T>
   {
     /** type of the interface of an automaton. */
-    typedef MetaElement<AutomataBase<Self>, T>		      self_t;
+    typedef MetaElement<AutomataBase<Self>, T>		self_t;
 
     /** type the series set from which is build the automaton. */
-    typedef typename AutomataBase<Self>::series_set_t	      series_set_t;
+    typedef typename AutomataBase<Self>::series_set_t	series_set_t;
 
     /** type of the implementation of series that holds the automaton. */
-    typedef typename automaton_traits<T>::series_value_t      series_value_t;
+    typedef typename automaton_traits<T>::series_set_elt_value_t
+							series_set_elt_value_t;
 
     /** type of the element of the set of series that holds the automaton. */
-    typedef Element<series_set_t, series_value_t>		      series_elt_t;
-    typedef Element<series_set_t, series_value_t>		      series_elt_t;
+    typedef Element<series_set_t, series_set_elt_value_t> series_elt_t;
+    typedef Element<series_set_t, series_set_elt_value_t> series_elt_t;
 
     /** type of the free monoid. */
-    typedef typename series_set_t::monoid_t			      monoid_t;
+    typedef typename series_set_t::monoid_t		monoid_t;
 
     /** type of the free monoid element. */
-    typedef typename series_elt_t::monoid_elt_t		      monoid_elt_t;
+    typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
 
     /** type of the implementation of a word. */
-    typedef typename monoid_elt_t::value_t		   monoid_elt_value_t;
+    typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
 
     /** type of the letter. */
-    typedef typename monoid_t::letter_t			      letter_t;
+    typedef typename monoid_t::letter_t			letter_t;
 
     /** type of the semiring set. */
-    typedef typename series_set_t::semiring_t		      semiring_t;
+    typedef typename series_set_t::semiring_t		semiring_t;
 
     /** type of the free monoid element. */
-    typedef typename series_elt_t::semiring_elt_t	      semiring_elt_t;
+    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
 
     /** type of the implementation of a semiring_elt. */
-    typedef typename series_elt_t::semiring_elt_value_t	     semiring_elt_value_t;
+    typedef typename series_elt_t::semiring_elt_value_t	semiring_elt_value_t;
 
     /** type of additional information that is aggregated to the automaton. */
-    typedef typename automaton_traits<T>::tag_t		      tag_t;
+    typedef typename automaton_traits<T>::tag_t		tag_t;
 
     /** type of the label of the automaton implementation. */
-    typedef typename automaton_traits<T>::label_t	      label_t;
+    typedef typename automaton_traits<T>::label_t	label_t;
 
     /** type of the states container. */
-    typedef typename automaton_traits<T>::states_t	      states_t;
+    typedef typename automaton_traits<T>::states_t	states_t;
 
     /** type of the iterator over the states set. */
-    typedef typename automaton_traits<T>::state_iterator     state_iterator;
+    typedef typename automaton_traits<T>::state_iterator state_iterator;
 
     /** type of the edges set. */
-    typedef typename automaton_traits<T>::edges_t	      edges_t;
+    typedef typename automaton_traits<T>::edges_t	edges_t;
 
     /** type of the iterator over the edges. */
-    typedef typename automaton_traits<T>::edge_iterator      edge_iterator;
+    typedef typename automaton_traits<T>::edge_iterator edge_iterator;
 
     /** type of the initial application. */
-    typedef typename automaton_traits<T>::initial_t	      initial_t;
+    typedef typename automaton_traits<T>::initial_t	initial_t;
 
     /** type of the initial application support. */
-    typedef typename automaton_traits<T>::initial_support_t  initial_support_t;
+    typedef typename automaton_traits<T>::initial_support_t initial_support_t;
 
     /** type of the iterator of the initial application support. */
-    typedef typename automaton_traits<T>::initial_iterator    initial_iterator;
+    typedef typename automaton_traits<T>::initial_iterator initial_iterator;
 
     /** type of the final application. */
-    typedef typename automaton_traits<T>::final_t	      final_t;
+    typedef typename automaton_traits<T>::final_t	final_t;
 
     /** type of the iterator of the final application support. */
-    typedef typename automaton_traits<T>::final_iterator      final_iterator;
+    typedef typename automaton_traits<T>::final_iterator final_iterator;
 
     /** the set of series from which is build the automaton (const version). */
     const series_set_t& series() const;
@@ -256,11 +257,11 @@ namespace vcsn {
     void clear_final();
 
     /** return the initial multiplicity of the state. */
-    Element<series_set_t, series_value_t>
+    Element<series_set_t, series_set_elt_value_t>
     get_initial(hstate_t state) const;
 
     /** return the final multiplicity of the state. */
-    Element<series_set_t, series_value_t>
+    Element<series_set_t, series_set_elt_value_t>
     get_final(hstate_t what) const;
 
     /** add a new state to the automaton. */
@@ -320,7 +321,7 @@ namespace vcsn {
     series_elt_t series_of(hedge_t e) const;
 
     /** return the label seen as a series implementation. */
-    series_value_t series_value_of(hedge_t e) const;
+    series_set_elt_value_t series_value_of(hedge_t e) const;
 
     /** return true if the transition is spontaneous. */
     bool is_spontaneous(hedge_t e) const;

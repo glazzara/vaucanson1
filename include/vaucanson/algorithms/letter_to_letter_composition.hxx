@@ -57,7 +57,8 @@ namespace vcsn {
     transducer_t output(set);
     delta_ret_t f_delta_ret, g_delta_ret;
     assoc_t conv;
-    series_elt_t zero = algebra::zero_as<series_value_t>::of(output.series());
+    series_elt_t zero =
+      algebra::zero_as<series_set_elt_value_t>::of(output.series());
 
     for_each_state(s, f)
       for_each_state(t, g)

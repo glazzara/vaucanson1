@@ -134,7 +134,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::is_initial(hstate_t state) const
   {
     return (op_get_initial(this->structure(), this->value(), state) !=
-	    this->structure().series().zero(SELECT(series_value_t)));
+	    this->structure().series().zero(SELECT(series_set_elt_value_t)));
   }
 
   /** return true if the state is final (ie it is in the final support). */
@@ -142,8 +142,10 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::is_final(hstate_t state) const
   {
-    return (op_get_final(this->structure(), this->value(), state) !=
-	    algebra::zero_as<series_value_t>::of(this->structure().series()));
+    return
+      op_get_final(this->structure(), this->value(), state) !=
+      algebra::zero_as<series_set_elt_value_t>::
+      of(this->structure().series());
   }
 
   /** set the state to be initial. */
@@ -151,7 +153,11 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::set_initial(hstate_t state)
   {
-    op_set_initial(this->structure(), this->value(), state, this->structure().series().identity(SELECT(series_value_t)));
+    op_set_initial(this->structure(),
+		   this->value(),
+		   state,
+		   this->structure().series().
+		   identity(SELECT(series_set_elt_value_t)));
   }
 
   /** set an initial multiplicity to the state. */
@@ -168,8 +174,11 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::set_final(hstate_t state)
   {
-    op_set_final(this->structure(), this->value(), state,
-		 this->structure().series().identity(SELECT(series_value_t)));
+    op_set_final(this->structure(),
+		 this->value(),
+		 state,
+		 this->structure().series().
+		 identity(SELECT(series_set_elt_value_t)));
   }
 
   /** set a final multiplicity to the state. */
@@ -186,8 +195,11 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::unset_initial(hstate_t state)
   {
-    op_set_initial(this->structure(), this->value(), state,
-		   algebra::zero_as<series_value_t>::of(this->structure().series()));
+    op_set_initial(this->structure(),
+		   this->value(),
+		   state,
+		   algebra::zero_as<series_set_elt_value_t>::
+		   of(this->structure().series()));
   }
 
   /** set the set not to be final. */
@@ -195,8 +207,11 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::unset_final(hstate_t state)
   {
-    op_set_final(this->structure(), this->value(), state,
-		 algebra::zero_as<series_value_t>::of(this->structure().series()));
+    op_set_final(this->structure(),
+		 this->value(),
+		 state,
+		 algebra::zero_as<series_set_elt_value_t>::
+		 of(this->structure().series()));
   }
 
   /** make the support of the initial application to be empty. */
@@ -385,7 +400,7 @@ namespace vcsn {
 
   /** return the label seen as a series implementation. */
   template <typename Self, typename T>
-  typename MetaElement<AutomataBase<Self>, T>::series_value_t
+  typename MetaElement<AutomataBase<Self>, T>::series_set_elt_value_t
   MetaElement<AutomataBase<Self>, T>::series_value_of(hedge_t e) const
   {
     return op_series_value_of(this->structure(), this->value(), e);

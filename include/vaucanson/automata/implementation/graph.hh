@@ -105,17 +105,17 @@ namespace vcsn {
     ::ret label_t;
     typedef Graph<K, WordValue, WeightValue, SeriesValue, Letter, Tag>
     self_t;
-    typedef edge_value<label_t>			  edge_value_t;
-    typedef SeriesValue				  series_value_t;
-    typedef state_value				  state_value_t;
-    typedef std::vector<state_value_t>		  state_data_t;
-    typedef std::vector<edge_value_t>		  edge_data_t;
-    typedef StateContainer			  states_t;
-    typedef EdgeContainer			  edges_t;
-    typedef std::map<hstate_t, series_value_t>	  initial_t;
-    typedef std::map<hstate_t, series_value_t>     final_t;
-    typedef utility::Support<initial_t>		  initial_support_t;
-    typedef utility::Support<final_t>		  final_support_t;
+    typedef edge_value<label_t>				edge_value_t;
+    typedef SeriesValue					series_set_elt_value_t;
+    typedef state_value					state_value_t;
+    typedef std::vector<state_value_t>			state_data_t;
+    typedef std::vector<edge_value_t>			edge_data_t;
+    typedef StateContainer				states_t;
+    typedef EdgeContainer				edges_t;
+    typedef std::map<hstate_t, series_set_elt_value_t>	initial_t;
+    typedef std::map<hstate_t, series_set_elt_value_t>	final_t;
+    typedef utility::Support<initial_t>			initial_support_t;
+    typedef utility::Support<final_t>			final_support_t;
 
   public:
     Graph();
@@ -124,7 +124,7 @@ namespace vcsn {
     bool			exists(const AutomataBase<S>& s) const;
 
     void			safe_del_state(hstate_t);
-    
+
     hstate_t			add_state();
     void			del_state(hstate_t);
     bool			has_state(hstate_t) const;
@@ -139,17 +139,21 @@ namespace vcsn {
     const label_t&		label_of(hedge_t) const;
 
     initial_support_t		initial() const;
-    void			set_initial(hstate_t, const series_value_t&,
-					    const series_value_t&);
-    const series_value_t&	get_initial(hstate_t,
-					    const series_value_t&) const;
+    void			set_initial(hstate_t,
+					    const series_set_elt_value_t&,
+					    const series_set_elt_value_t&);
+    const series_set_elt_value_t& get_initial(hstate_t,
+					      const
+					      series_set_elt_value_t&) const;
     void			clear_initial();
 
     final_support_t		final() const;
-    void			set_final(hstate_t, const series_value_t&,
-					  const series_value_t&);
-    const series_value_t&	get_final(hstate_t,
-					  const series_value_t&) const;
+    void			set_final(hstate_t,
+					  const series_set_elt_value_t&,
+					  const series_set_elt_value_t&);
+    const series_set_elt_value_t& get_final(hstate_t,
+					    const
+					    series_set_elt_value_t&) const;
     void			clear_final();
 
     self_t&			clone() const;
@@ -281,29 +285,29 @@ namespace vcsn {
 				Letter,
 				Tag>  >
   {
-    typedef SeriesValue				     series_value_t;
-    typedef WordValue				     word_value_t;
-    typedef WordValue				     monoid_elt_value_t;
-    typedef WeightValue				     semiring_elt_value_t;
-    typedef Letter				     letter_t;
+    typedef SeriesValue					series_set_elt_value_t;
+    typedef WordValue					word_value_t;
+    typedef WordValue					monoid_elt_value_t;
+    typedef WeightValue					semiring_elt_value_t;
+    typedef Letter					letter_t;
     typedef typename LabelOf<Kind, WordValue, WeightValue, SeriesValue, Letter>
-    ::ret					     label_t;
-    typedef Tag					     tag_t;
-    typedef StateContainer			     states_t;
+    ::ret						label_t;
+    typedef Tag						tag_t;
+    typedef StateContainer				states_t;
 
-    typedef typename StateContainer::iterator	     state_iterator;
-    typedef EdgeContainer			     edges_t;
-    typedef typename EdgeContainer::iterator	     edge_iterator;
-    typedef std::map<hstate_t, series_value_t>	     initial_t;
-    typedef std::map<hstate_t, series_value_t>        final_t;
-    typedef utility::Support<initial_t>		     initial_support_t;
-    typedef utility::Support<final_t>		     final_support_t;
-    typedef typename initial_support_t::iterator     initial_iterator;
-    typedef typename final_support_t::iterator	     final_iterator;
-    typedef edge_value<label_t>			     edge_value_t;
-    typedef state_value				     state_value_t;
-    typedef std::vector<state_value_t>		     state_data_t;
-    typedef std::vector<edge_value_t>		     edge_data_t;
+    typedef typename StateContainer::iterator		state_iterator;
+    typedef EdgeContainer				edges_t;
+    typedef typename EdgeContainer::iterator		edge_iterator;
+    typedef std::map<hstate_t, series_set_elt_value_t>	initial_t;
+    typedef std::map<hstate_t, series_set_elt_value_t>	final_t;
+    typedef utility::Support<initial_t>			initial_support_t;
+    typedef utility::Support<final_t>			final_support_t;
+    typedef typename initial_support_t::iterator	initial_iterator;
+    typedef typename final_support_t::iterator		final_iterator;
+    typedef edge_value<label_t>				edge_value_t;
+    typedef state_value					state_value_t;
+    typedef std::vector<state_value_t>			state_data_t;
+    typedef std::vector<edge_value_t>			edge_data_t;
   };
 
   // This implementation can be used as a transducer one.
@@ -351,13 +355,13 @@ namespace vcsn {
     typedef typename algebra::mute_series_impl<SeriesValue,
 					      semiring_elt_value_t,
 					      monoid_elt_value_t>
-    ::ret series_value_t;
+    ::ret series_set_elt_value_t;
 
     typedef
     Graph<Kind,
 	  monoid_elt_value_t,
 	  semiring_elt_value_t,
-	  series_value_t,
+	  series_set_elt_value_t,
 	  Letter,
 	  Tag>
     ret;
@@ -419,13 +423,13 @@ namespace vcsn {
     typedef typename automaton_traits<self_t>::monoid_elt_value_t
     monoid_elt_value_t;
     typedef typename algebra::mute_series_impl<SeriesValue, SeriesValue, monoid_elt_value_t>
-    ::ret series_value_t;
+    ::ret series_set_elt_value_t;
 
     typedef
     Graph<Kind,
 	  monoid_elt_value_t,
 	  SeriesValue,
-	  series_value_t,
+	  series_set_elt_value_t,
 	  Letter,
 	  Tag>
     ret;

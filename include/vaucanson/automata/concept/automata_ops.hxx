@@ -98,11 +98,12 @@ namespace vcsn {
 		 hstate_t state,
 		 const AutoType(series_elt_t)& s)
   {
-    typedef typename Element<S, T>::series_value_t series_value_t;
+    typedef
+      typename Element<S, T>::series_set_elt_value_t series_set_elt_value_t;
     v.set_initial(state,
 		  s.value(),
 		  zero_value(ss.series(),
-			     SELECT(series_value_t)));
+			     SELECT(series_set_elt_value_t)));
   }
 
   template <class S, class T>
@@ -115,7 +116,7 @@ namespace vcsn {
       (s.series(),
        v.get_initial(state,
 		     zero_value(s.series(),
-				SELECT(AutoType(series_value_t)))));
+				SELECT(AutoType(series_set_elt_value_t)))));
   }
 
   template <class S, class T>
@@ -127,7 +128,7 @@ namespace vcsn {
     v.set_final(state,
 		s.value(),
 		zero_value(ss.series(),
-			   SELECT(AutoType(series_value_t))));
+			   SELECT(AutoType(series_set_elt_value_t))));
   }
 
   template <class S, class T>
@@ -140,7 +141,7 @@ namespace vcsn {
       (s.series(),
        v.get_final(state,
 		   zero_value(s.series(),
-			      SELECT(AutoType(series_value_t)))));
+			      SELECT(AutoType(series_set_elt_value_t)))));
   }
 
   template <class S, class T>
@@ -307,7 +308,7 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  typename Element<S, T>::series_value_t
+  typename Element<S, T>::series_set_elt_value_t
   op_series_value_of(const AutomataBase<S>& s, const T& v,
 		    hedge_t e)
   {
@@ -346,7 +347,7 @@ namespace vcsn {
 		    hedge_t e)
   {
     return (op_series_of(s, v, e) ==
-	    algebra::identity_as<AutoType(series_value_t)>::of(s.series()));
+	    algebra::identity_as<AutoType(series_set_elt_value_t)>::of(s.series()));
   }
 
   struct always_true

@@ -113,7 +113,7 @@ namespace vcsn {
     INHERIT_TYPEDEF_(automaton_t, series_set_t);
 
     /** type of the implementation of series that holds the automaton. */
-    INHERIT_TYPEDEF_(automaton_t, series_value_t);
+    INHERIT_TYPEDEF_(automaton_t, series_set_elt_value_t);
 
     /** type of the element of the set of series that holds the automaton. */
     INHERIT_TYPEDEF_(automaton_t, series_elt_t);

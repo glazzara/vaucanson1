@@ -45,7 +45,7 @@ bool series_test(tests::Tester& t)
 
   typedef SeriesElt				series_elt_t;
   typedef typename series_elt_t::set_t		series_set_t;
-  typedef typename series_elt_t::value_t	series_value_t;
+  typedef typename series_elt_t::value_t	series_set_elt_value_t;
 
   typedef typename series_set_t::monoid_t		monoid_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
@@ -95,8 +95,8 @@ bool series_test(tests::Tester& t)
 
       series_elt_t	s1(series, w1);
       series_elt_t	s2(series, w2);
-      series_elt_t	s3 = identity_as<series_value_t>::of(series);
-      series_elt_t	s4 = zero_as<series_value_t>::of(series);
+      series_elt_t	s3 = identity_as<series_set_elt_value_t>::of(series);
+      series_elt_t	s4 = zero_as<series_set_elt_value_t>::of(series);
 
       semiring_elt_t	zero = zero_as<semiring_value_t>::of(semiring);
 

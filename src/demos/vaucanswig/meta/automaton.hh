@@ -335,7 +335,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
 										\
     series_elt_t s(SERIES_OF(this));						\
-    s = SERIES_OF(this).identity(SELECT(series_value_t));			\
+    s = SERIES_OF(this).identity(SELECT(series_set_elt_value_t));			\
     s = WEIGHT(this, weight) * s;						\
     return (*auto_).set_## InitialFinal (state, s);				\
   }										\
@@ -344,7 +344,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
 										\
     series_elt_t s(SERIES_OF(this));						\
-    s = SERIES_OF(this).identity(SELECT(series_value_t));			\
+    s = SERIES_OF(this).identity(SELECT(series_set_elt_value_t));			\
     s = s * WEIGHT(this, weight);						\
     return (*auto_).set_## InitialFinal (state, s);				\
   }										\
@@ -353,7 +353,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
 										\
     series_elt_t s(SERIES_OF(this));						\
-    s = SERIES_OF(this).identity(SELECT(series_value_t));			\
+    s = SERIES_OF(this).identity(SELECT(series_set_elt_value_t));			\
     s = WEIGHT(this, lweight) * s * WEIGHT(this, rweight);			\
     return (*auto_).set_## InitialFinal (state, s);				\
   }							\

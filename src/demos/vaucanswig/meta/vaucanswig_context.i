@@ -201,9 +201,9 @@ namespace Kind ##_types
     { return Kind ##_series_elt_t(*self, Kind ##_monoid_elt_t(self->monoid(), l)); }
 
     Kind ##_series_elt_t identity()
-    { return self->identity(SELECT(Kind ## _series_value_t)); }
+    { return self->identity(SELECT(Kind ## _series_set_elt_value_t)); }
     Kind ##_series_elt_t zero()
-    { return self->zero(SELECT(Kind ## _series_value_t)); }
+    { return self->zero(SELECT(Kind ## _series_set_elt_value_t)); }
     Kind ##_exp_t exp_identity()
     { return self->identity(SELECT(Kind ## _exp_value_t)); }
     Kind ##_exp_t exp_zero()

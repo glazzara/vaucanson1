@@ -1,5 +1,45 @@
 2004-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/tools/usual.hh,
+	* include/vaucanson/tools/usual_macros.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh,
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/automata/implementation/automaton_view.hh,
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/kind_adapter.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/automata/implementation/graph.hxx,
+	* include/vaucanson/automata/implementation/automaton_view.hxx,
+	* include/vaucanson/automata/implementation/transpose_view.hxx,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* src/tests/automata/algos/thompson_test.hh,
+	* src/tests/automata/algos/closure_test.hh,
+	* src/tests/algebra/series/misc/series_test.hh,
+	* src/tests/algebra/series/polynom/series_polynom_test.hh,
+	* src/demos/vaucanswig/meta/vaucanswig_context.i,
+	* src/demos/vaucanswig/meta/context.hh,
+	* src/demos/vaucanswig/meta/automaton.hh,
+	* src/demos/fibonacci/fibonacci.cc: Rename all typedefs to
+	series_value_t to series_set_elt_value_t.
+
+2004-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/contextual_automaton_functions.hxx: Fix inclusion
 	of its corresponding contextual_automaton_functions.hh file.
 

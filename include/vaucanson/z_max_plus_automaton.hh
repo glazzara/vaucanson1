@@ -42,7 +42,7 @@ namespace vcsn {
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, int> series_value_t;
+    typedef polynom<WordValue, int> series_set_elt_value_t;
 
     typedef TropicalSemiring<TropicalMax> semiring_t;
     typedef Series<semiring_t, Words> series_set_t;
@@ -52,7 +52,7 @@ namespace vcsn {
       labels_are_series,
       WordValue,
       int,
-      series_value_t,
+      series_set_elt_value_t,
       char,
       NoTag>
     automaton_impl_t;

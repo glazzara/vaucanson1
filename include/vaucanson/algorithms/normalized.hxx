@@ -195,9 +195,9 @@ namespace vcsn {
     // we can merge the lhs final state and the rhs initial state.
     bool merge_lhs_final_and_rhs_initial = 
       (lhs.get_final(*lhs.final().begin()).value() ==
-       lhs.series().identity(SELECT(series_value_t)) &&
+       lhs.series().identity(SELECT(series_set_elt_value_t)) &&
        rhs.get_initial(*rhs.initial().begin()).value() ==
-       rhs.series().identity(SELECT(series_value_t)));
+       rhs.series().identity(SELECT(series_set_elt_value_t)));
     
     for_each_state(s, rhs)
       {

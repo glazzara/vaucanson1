@@ -44,16 +44,17 @@ namespace vcsn {
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, polynom<WordValue, bool> > series_value_t;
-    typedef Series<NumericalSemiring, Words>		  output_series_t;
-    typedef Series<output_series_t, Words>		  series_t;
+    typedef polynom<WordValue, polynom<WordValue, bool> >
+						series_set_elt_value_t;
+    typedef Series<NumericalSemiring, Words>	output_series_t;
+    typedef Series<output_series_t, Words>	series_t;
 
     typedef Graph
     <
       labels_are_series,
       WordValue,
       polynom<WordValue, bool>,
-      series_value_t,
+      series_set_elt_value_t,
       char,
       NoTag>
     automaton_impl_t;

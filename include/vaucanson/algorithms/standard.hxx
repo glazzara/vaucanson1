@@ -159,7 +159,7 @@ namespace vcsn {
   do_is_standard(const AutomataBase<A>& ,
 		 const auto_t& a)
   {
-    typedef typename auto_t::series_value_t	series_value_t;
+    typedef typename auto_t::series_set_elt_value_t	series_set_elt_value_t;
 
     // Check there is only one initial state.
     if (a.initial().size() != 1)
@@ -174,7 +174,7 @@ namespace vcsn {
 
     // Check the multiplicity of the initial state.
     return
-      a.get_initial(s) == a.series().identity(SELECT(series_value_t));
+      a.get_initial(s) == a.series().identity(SELECT(series_set_elt_value_t));
   }
 
   template<typename A, typename T>

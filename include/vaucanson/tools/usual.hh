@@ -54,8 +54,8 @@ namespace vcsn {
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, bool>		usual_series_value_t;
-    typedef polynom<WordValue, int>		weighted_series_value_t;
+    typedef polynom<WordValue, bool>	usual_series_set_elt_value_t;
+    typedef polynom<WordValue, int>	weighted_series_set_elt_value_t;
 
     typedef Series<NumericalSemiring, Words>	usual_series_set_t;
     typedef Series<TropicalSemiring<TropicalMax>, Words>
@@ -68,7 +68,7 @@ namespace vcsn {
       labels_are_series,
       WordValue,
       bool,
-      usual_series_value_t,
+      usual_series_set_elt_value_t,
       char,
       NoTag>
     usual_automaton_impl_t;
@@ -78,7 +78,7 @@ namespace vcsn {
       labels_are_series,
       WordValue,
       int,
-      weighted_series_value_t,
+      weighted_series_set_elt_value_t,
       char,
       NoTag>
     weighted_automaton_impl_t;

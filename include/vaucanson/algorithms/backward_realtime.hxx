@@ -58,7 +58,7 @@ namespace vcsn {
       algebra::zero_as<semiring_elt_value_t>::
       of(a.structure().series().semiring());
     series_elt_t	series_identity =
-      algebra::identity_as<series_value_t>::of(a.structure().series());
+      algebra::identity_as<series_set_elt_value_t>::of(a.structure().series());
 
     backward_closure_here(a);
 

@@ -50,58 +50,58 @@
 #define INHERIT_TYPEDEF_(From, Type) \
    typedef typename From::Type Type;
 
-#define AUTOMATON_TYPES_(AutoType,Prefix)					\
- typedef AutoType				Prefix##automaton_t;		\
- typedef typename AutoType::set_t		Prefix##automata_set_t;		\
- typedef typename AutoType::states_t		Prefix##states_t;		\
- typedef typename AutoType::state_iterator	Prefix##state_iterator;		\
- typedef typename AutoType::edges_t		Prefix##edges_t;		\
- typedef typename AutoType::edge_iterator	Prefix##edge_iterator;		\
- typedef typename AutoType::initial_t		Prefix##initial_t;		\
- typedef typename AutoType::final_t		Prefix##final_t;		\
- typedef typename AutoType::initial_iterator	Prefix##initial_iterator;	\
- typedef typename AutoType::final_iterator	Prefix##final_iterator;		\
- typedef typename AutoType::monoid_t		Prefix##monoid_t;		\
- typedef typename AutoType::monoid_elt_t	Prefix##monoid_elt_t;		\
- typedef typename Prefix##monoid_elt_t::value_t	Prefix##monoid_elt_value_t;	\
- typedef typename Prefix##monoid_t::alphabets_elt_t Prefix##alphabets_elt_t;	\
- typedef typename Prefix##monoid_t::alphabet_t	Prefix##alphabet_t;		\
- typedef typename Prefix##alphabet_t::const_iterator Prefix##alphabet_iterator;	\
- typedef typename Prefix##alphabet_t::letter_t	Prefix##letter_t;		\
- typedef typename AutoType::semiring_t		Prefix##semiring_t;		\
- typedef typename AutoType::series_set_t	Prefix##series_set_t;		\
- typedef typename AutoType::series_value_t	Prefix##series_value_t;		\
- typedef typename AutoType::series_elt_t	Prefix##series_elt_t;		\
- typedef typename Prefix##series_elt_t::semiring_elt_t Prefix##semiring_elt_t;	\
- typedef typename Prefix##semiring_elt_t::value_t Prefix##semiring_elt_value_t;	\
- typedef typename AutoType::label_t		Prefix##label_t;		\
- typedef typename AutoType::tag_t		Prefix##tag_t;
+#define AUTOMATON_TYPES_(AutoType,Prefix)						\
+ typedef AutoType					Prefix##automaton_t;		\
+ typedef typename AutoType::set_t			Prefix##automata_set_t;		\
+ typedef typename AutoType::states_t			Prefix##states_t;		\
+ typedef typename AutoType::state_iterator		Prefix##state_iterator;		\
+ typedef typename AutoType::edges_t			Prefix##edges_t;		\
+ typedef typename AutoType::edge_iterator		Prefix##edge_iterator;		\
+ typedef typename AutoType::initial_t			Prefix##initial_t;		\
+ typedef typename AutoType::final_t			Prefix##final_t;		\
+ typedef typename AutoType::initial_iterator		Prefix##initial_iterator;	\
+ typedef typename AutoType::final_iterator		Prefix##final_iterator;		\
+ typedef typename AutoType::monoid_t			Prefix##monoid_t;		\
+ typedef typename AutoType::monoid_elt_t		Prefix##monoid_elt_t;		\
+ typedef typename Prefix##monoid_elt_t::value_t		Prefix##monoid_elt_value_t;	\
+ typedef typename Prefix##monoid_t::alphabets_elt_t	Prefix##alphabets_elt_t;	\
+ typedef typename Prefix##monoid_t::alphabet_t		Prefix##alphabet_t;		\
+ typedef typename Prefix##alphabet_t::const_iterator	Prefix##alphabet_iterator;	\
+ typedef typename Prefix##alphabet_t::letter_t		Prefix##letter_t;		\
+ typedef typename AutoType::semiring_t			Prefix##semiring_t;		\
+ typedef typename AutoType::series_set_t		Prefix##series_set_t;		\
+ typedef typename AutoType::series_set_elt_value_t	Prefix##series_set_elt_value_t;	\
+ typedef typename AutoType::series_elt_t		Prefix##series_elt_t;		\
+ typedef typename Prefix##series_elt_t::semiring_elt_t	Prefix##semiring_elt_t;		\
+ typedef typename Prefix##semiring_elt_t::value_t	Prefix##semiring_elt_value_t;	\
+ typedef typename AutoType::label_t			Prefix##label_t;		\
+ typedef typename AutoType::tag_t			Prefix##tag_t;
 
-#define AUTOMATON_TYPES_EXACT_(AutoType,Prefix)				  \
- typedef AutoType				Prefix##automaton_t;	  \
- typedef AutoType::set_t			Prefix##automata_set_t;   \
- typedef AutoType::states_t			Prefix##states_t;	  \
- typedef AutoType::state_iterator		Prefix##state_iterator;	  \
- typedef AutoType::edges_t			Prefix##edges_t;	  \
- typedef AutoType::edge_iterator		Prefix##edge_iterator;	  \
- typedef AutoType::initial_t			Prefix##initial_t;	  \
- typedef AutoType::final_t			Prefix##final_t;	  \
- typedef AutoType::initial_iterator		Prefix##initial_iterator; \
- typedef AutoType::final_iterator		Prefix##final_iterator;	  \
- typedef AutoType::monoid_t			Prefix##monoid_t;	  \
- typedef AutoType::monoid_elt_t	        Prefix##monoid_elt_t;		  \
- typedef Prefix##monoid_elt_t::value_t	Prefix##monoid_elt_value_t;	  \
- typedef Prefix##monoid_t::alphabets_elt_t	Prefix##alphabets_elt_t;  \
- typedef Prefix##monoid_t::alphabet_t	Prefix##alphabet_t;		  \
- typedef Prefix##alphabet_t::const_iterator	Prefix##alphabet_iterator;	  \
- typedef Prefix##alphabet_t::letter_t	Prefix##letter_t;		  \
- typedef AutoType::semiring_t			Prefix##semiring_t;	  \
- typedef AutoType::series_set_t			Prefix##series_set_t;	  \
- typedef AutoType::series_value_t	Prefix##series_value_t;		  \
- typedef AutoType::series_elt_t		Prefix##series_elt_t;		  \
- typedef Prefix##series_elt_t::semiring_elt_t	Prefix##semiring_elt_t;		  \
- typedef Prefix##semiring_elt_t::value_t		Prefix##semiring_elt_value_t;	  \
- typedef AutoType::label_t			Prefix##label_t;	  \
+#define AUTOMATON_TYPES_EXACT_(AutoType,Prefix)					\
+ typedef AutoType				Prefix##automaton_t;		\
+ typedef AutoType::set_t			Prefix##automata_set_t;		\
+ typedef AutoType::states_t			Prefix##states_t;		\
+ typedef AutoType::state_iterator		Prefix##state_iterator;		\
+ typedef AutoType::edges_t			Prefix##edges_t;		\
+ typedef AutoType::edge_iterator		Prefix##edge_iterator;		\
+ typedef AutoType::initial_t			Prefix##initial_t;		\
+ typedef AutoType::final_t			Prefix##final_t;		\
+ typedef AutoType::initial_iterator		Prefix##initial_iterator;	\
+ typedef AutoType::final_iterator		Prefix##final_iterator;		\
+ typedef AutoType::monoid_t			Prefix##monoid_t;		\
+ typedef AutoType::monoid_elt_t			Prefix##monoid_elt_t;		\
+ typedef Prefix##monoid_elt_t::value_t		Prefix##monoid_elt_value_t;	\
+ typedef Prefix##monoid_t::alphabets_elt_t	Prefix##alphabets_elt_t;	\
+ typedef Prefix##monoid_t::alphabet_t		Prefix##alphabet_t;		\
+ typedef Prefix##alphabet_t::const_iterator	Prefix##alphabet_iterator;	\
+ typedef Prefix##alphabet_t::letter_t		Prefix##letter_t;		\
+ typedef AutoType::semiring_t			Prefix##semiring_t;		\
+ typedef AutoType::series_set_t			Prefix##series_set_t;		\
+ typedef AutoType::series_set_elt_value_t	Prefix##series_set_elt_value_t;	\
+ typedef AutoType::series_elt_t			Prefix##series_elt_t;		\
+ typedef Prefix##series_elt_t::semiring_elt_t	Prefix##semiring_elt_t;		\
+ typedef Prefix##semiring_elt_t::value_t	Prefix##semiring_elt_value_t;	\
+ typedef AutoType::label_t			Prefix##label_t;		\
  typedef AutoType::tag_t			Prefix##tag_t;
 
 #define AUTOMATON_TYPES(AutoType)           AUTOMATON_TYPES_(AutoType,)
@@ -171,7 +171,7 @@
 // !! * must be well documented * !!
 #define zero_	zero(SELECT(typename series_elt_t::value_t))
 #define one_	identity(SELECT(typename series_elt_t::value_t))
-#define empty_ identity(SELECT(typename monoid_elt_t::value_t))
+#define empty_	identity(SELECT(typename monoid_elt_t::value_t))
 #define wzero_  zero(SELECT(typename semiring_elt_t::value_t))
 
 #endif // VCSN_TOOLS_USUAL_MACROS_HH

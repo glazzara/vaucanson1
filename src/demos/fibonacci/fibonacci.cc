@@ -21,16 +21,17 @@ using namespace vcsn::tools;
 //
 typedef Series<NumericalSemiring, Words> output_series_pt;
 typedef Element<output_series_pt, rat::exp<WordValue, bool> > exp_t;
-typedef Series<output_series_pt, Words>  tr_bhv_pt;
-typedef rat::exp<WordValue, bool> output_series_value_t;
-typedef Element<output_series_pt, output_series_value_t> output_series_elt_t;
-typedef polynom<WordValue, output_series_value_t> tr_bhv_value_t;
+typedef Series<output_series_pt, Words> tr_bhv_pt;
+typedef rat::exp<WordValue, bool> output_series_set_elt_value_t;
+typedef Element<output_series_pt, output_series_set_elt_value_t>
+  output_series_elt_t;
+typedef polynom<WordValue, output_series_set_elt_value_t> tr_bhv_value_t;
 
 typedef Graph
 <
   labels_are_series,
   WordValue,
-  output_series_value_t,
+  output_series_set_elt_value_t,
   tr_bhv_value_t,
   char,
   NoTag>
