@@ -1,3 +1,9 @@
+2003-07-19  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* meta/vaucanswig_automaton.i: Add missing virtual method
+	declarations, so that SWIG does not think `gen_auto_t' is pure
+	abstract.
+
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* README: Mention I/O methods.

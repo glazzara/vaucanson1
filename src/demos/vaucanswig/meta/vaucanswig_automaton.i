@@ -227,6 +227,9 @@ namespace Kind ##_types
 
     virtual std::string describe(bool cpptype = false) const;
 
+    virtual void load(std::istream&, const std::string&);
+    virtual void save(std::ostream&, const std::string&) const;
+
     %extend {
       bool load(const std::string& fname)
 	{
