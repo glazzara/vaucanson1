@@ -1,4 +1,15 @@
 2002-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.120)
+
+	* src/README: added to document src/* content.
+	
+	Local development files must _keep_ local. Do not add files that
+	will not be integrated in the project:
+	
+	* src/dev/isomorph-test.cc: removed.
+	* src/dev/Makefile.am: removed.
+
+2002-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.119)
 	* include/vaucanson/fundamental/op_traits.hh: documentation fix.
 	* include/vaucanson/fundamental/fundamental.hh : idem.
