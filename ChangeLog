@@ -1,5 +1,11 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/misc/random.hh (sample_n): New.
+	* include/vaucanson/misc/random.hxx (sample_n): Implement it.
+	* include/vaucanson/tools/automaton_tools.hh: Use it.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/backward_realtime.hh: Fix include.
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>

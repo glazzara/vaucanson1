@@ -70,6 +70,12 @@ namespace utility {
     /// Generate a random float between 0 and 1
     template<>
     inline float generate<float>();
+    
+    // Generate of n sample from a range to an output iterator.
+    template <class InputIterator, class OutputIterator>
+    void sample_n(InputIterator first, InputIterator end, 
+		  OutputIterator out, unsigned n);
+
 
     /** @} */
 

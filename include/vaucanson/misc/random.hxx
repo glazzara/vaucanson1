@@ -28,6 +28,7 @@
 #else
 # include <limits>
 #endif
+# include <vector>
 
 namespace utility {
   namespace random {
@@ -88,8 +89,26 @@ namespace utility {
 	      static_cast<float> (rand())) / RAND_MAX;
     }
 
+    template <class Iterator, class OutputIterator>
+    void sample_n(Iterator first, Iterator end, 
+		  OutputIterator out, unsigned n)
+    {
+      std::vector<int> from;
+      for (Iterator i = first; i != end; ++i)
+	  from.push_back(*i);
 
-  }
-}
+      while ((from.size () > 0) && (n > 0))
+	{
+	  int  c = RANDOM_INT(from.size());
+	  *out = from[c];
+	  ++out;
+	  from.erase(from.begin() + c);
+	  --n;
+	}
+    }
 
-#endif
+  } // random
+
+} // vcsn
+
+#endif // VCSN_MISC_RANDOM_HXX
