@@ -1,5 +1,10 @@
 2002-07-01  Maxime Rey  <max@lrde.epita.fr>
 
+	* Tests Initial / Final states added with :
+	  src/tests/automata/implementation_check/check_init_final.cc
+
+2002-07-01  Maxime Rey  <max@lrde.epita.fr>
+
 	* check_add_state extended  
 	* Test to check edges appear with :
 	  src/tests/automata/implementation_check/check_coherence_state_edge.cc
