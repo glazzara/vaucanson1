@@ -39,6 +39,7 @@
   typedef Expr					krat_exp_t;	\
   typedef typename krat_exp_t::value_t		kexp_t;		\
   typedef typename krat_exp_t::monoid_elt_t	monoid_elt_t;	\
+  typedef typename krat_exp_t::semiring_elt_value_t semiring_elt_value_t;\
   typedef typename monoid_elt_t::set_t		monoid_t;	\
   typedef typename krat_exp_t::semiring_elt_t		semiring_elt_t;	\
   typedef typename semiring_elt_t::set_t		semiring_t;	\
@@ -67,41 +68,62 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
   srand(time(0));
 
-  const unsigned nb_test = 1000;
+  const unsigned nb_test = 2500;
   unsigned nb_success    = 0;
-  for (unsigned i = 0; i < nb_test; ++i)
+  unsigned i;
+
+  char buff[2048];
+  char letters[2][2] = { {'a', 'b'}, {'\\', '.'} };
+  
+  std::string typeid_name = typeid(semiring_elt_value_t).name();
+  typeid_name = typeid_name == "d" ? "f" : typeid_name;
+  
+  std::string path_to_test = "../../algebra/series/krat/tests/";
+  std::string filename =
+    path_to_test + "random_krat_exp_" + typeid_name + "_ab";
+  std::cout << "file: " << filename << std::endl;
+  std::ifstream file(filename.c_str());
+
+  for (int j = 0; j < 2; ++j)
     {
       alphabet_t alphabet;
-      letter_t a = alphabet.random_letter();
-      letter_t b = alphabet.random_letter();
-      alphabet.insert(a);
-      alphabet.insert(b);
-      alphabet.insert('a');
+      alphabet.insert(letters[j][0]);
+      alphabet.insert(letters[j][1]);
       monoid_t monoid(alphabet);
       semiring_t semiring;
       series_set_t s(semiring, monoid);
-      krat_exp_t exp = s.choose(SELECT(kexp_t));
-      std::ostringstream sstr;
-      sstr << exp;
-      krat_exp_t out(s);
-      std::pair<bool, std::string> ret = parse(sstr.str(), out);
-      if (ret.first)
-	error(sstr.str(), ret.second, sstr.str(),
-	      exp.structure().monoid().alphabet());
-      else
+      krat_exp_t exp(s);
+
+      for (i = 0; i < nb_test; ++i)
 	{
-	  std::ostringstream ostr;
-	  ostr << out;
-	  if (ostr.str() != sstr.str())
-	    error(sstr.str(), ostr.str(), sstr.str(),
+	  file.getline(buff, 2048);
+	  std::ostringstream sstr;
+	  sstr << buff;
+	  std::pair<bool, std::string> ret = parse(sstr.str(), exp);
+	  if (ret.first)
+	    error(sstr.str(), ret.second, sstr.str(),
 		  exp.structure().monoid().alphabet());
 	  else
-	    ++nb_success;
+	    {
+	      std::ostringstream ostr;
+	      ostr << exp;
+	      if (ostr.str() != sstr.str())
+		error(sstr.str(), ostr.str(), sstr.str(),
+		      exp.structure().monoid().alphabet());
+	      else
+		++nb_success;
+	    }
 	}
+      
+      file.close();
+      filename = path_to_test + "random_krat_exp_" + typeid_name + "_weird";
+      file.open(filename.c_str());
     }
+
   std::string rate;
-  SUCCESS_RATE(rate, nb_success, nb_test);
-  TEST(t, "parsing random rational expression " + rate, nb_success == nb_test);
+  SUCCESS_RATE(rate, nb_success, nb_test * 2);
+  TEST(t, "parsing random rational expression " + rate,
+       nb_success == nb_test * 2);
   return t.all_passed();
 }
 

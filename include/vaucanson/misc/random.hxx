@@ -102,8 +102,8 @@ namespace utility {
     template<>
     inline float generate<float>()
     {
-      /// This formula comes from the caml stdlib. It generates numbers
-      /// between -2 and 2.
+      // This formula comes from the caml stdlib. It generates numbers
+      // between -2 and 2 (values that can be starable or not).
       return (((static_cast<float> (rand()) / RAND_MAX +
 		static_cast<float> (rand())) / RAND_MAX +
 	       static_cast<float> (rand())) / RAND_MAX) * 4 - 2;
@@ -123,8 +123,8 @@ namespace utility {
     template<>
     inline double generate<double>()
     {
-      /// This formula comes from the caml stdlib. It generates numbers
-      /// between -2 and 2.
+      // This formula comes from the caml stdlib. It generates numbers
+      // between -2 and 2 (values that can be starable or not).
       return (((static_cast<double> (rand()) / RAND_MAX +
 	       static_cast<double> (rand())) / RAND_MAX +
 	      static_cast<double> (rand())) / RAND_MAX) * 4 - 2;

@@ -7,4 +7,5 @@ include $(top_srcdir)/src/tests/check/Makefile.check
 
 SUBDIRS = derivations \
 	  boolean \
-	  main 
+	  main \
+	  tests

@@ -102,6 +102,7 @@ AC_CONFIG_FILES([
 	src/tests/algebra/series/krat/derivations/partial_derivation/Makefile
 	src/tests/algebra/series/krat/main/Makefile
 	src/tests/algebra/series/krat/boolean/Makefile
+	src/tests/algebra/series/krat/tests/Makefile
 	src/tests/algebra/series/misc/Makefile
 	src/tests/algebra/series/polynom/Makefile
 	src/tests/algebra/semiring/Makefile

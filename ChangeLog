@@ -1,3 +1,29 @@
+2004-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Since we used random expressions, random results may occur...
+	This patch fix this problem for KRat exp, using a randomly 
+	generated test battery and use always the same for each future test.
+	
+	* include/vaucanson/misc/random.hxx: Fix typo in comments.
+
+	* src/tests/algebra/series/krat/tests/generate_random_krat.cc: New 
+	file. Used to generate random KRat expressions.
+
+	* src/tests/algebra/series/krat/tests/random_krat_exp_b_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_i_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_f_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_i_weird,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_f_weird,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_b_weird: New
+	files. Randomly generated KRat expressions.
+
+	* src/tests/algebra/series/krat/tests/Makefile.am: New file. 
+	Corresponding Makefile for the new tests directory for KRat.
+	* configure.ac,
+	* src/tests/algebra/series/krat/Makefile.am: Update accordingly.
+
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Update
+	the KRat exp test with the new test system.
+
 2004-07-07  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	Fix a huge bug in fibonacci:
