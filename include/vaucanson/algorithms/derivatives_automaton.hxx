@@ -30,7 +30,7 @@
 #ifndef VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 # define VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 
-# ifndef NDEBUG
+# ifdef DEBUG
 #  define DERIVATES_TRACE_DEBUG(undef, e, l, s)		\
      if (!undef)					\
      {							\

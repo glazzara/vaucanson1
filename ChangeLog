@@ -1,3 +1,10 @@
+2003-09-04  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Disable debug
+	  macro by default.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx: Correct
+	  conversion to PartialExp.
+
 2003-09-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/bitset.hxx: New.

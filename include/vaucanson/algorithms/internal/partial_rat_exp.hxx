@@ -165,12 +165,44 @@ namespace vcsn
     return o << "}]";
   }
 
+  // FIXME: write a more clean function
+  template <typename S, typename T, typename M, typename W>
+  void prat_exp_list(PartialExp<S, T>&		pexp,
+		     const rat::Node<M, W>*	node)
+  {
+    if (node->what() == rat::Node<M, W>::prod)
+    {
+      const rat::Product<M, W>* p = 
+	dynamic_cast<const rat::Product<M, W>*>(node);
+      prat_exp_list(pexp, p->left_);
+      prat_exp_list(pexp, p->right_);
+    }
+    else
+      pexp.ptr_list().push_back(node);
+  }
+
+  // FIXME: write a more clean function
+  template <typename S, typename T, typename M, typename W>
+  PartialExp<S, T> prat_exp_convert(const Element<S, T>& exp,
+				    const rat::Node<M, W>* node)
+  {
+    PartialExp<S, T>	res(exp);
+    if (node->what() == rat::Node<M, W>::lweight)
+    {
+      const rat::LeftWeighted<M, W>* p =
+	dynamic_cast<const rat::LeftWeighted<M, W>*>(node);
+      res.weight() = p->weight_;
+      prat_exp_list(res, p->child_);
+    }
+    else
+      prat_exp_list(res, node);
+    return res;
+  }
+  
   template <typename S, typename T>
   PartialExp<S, T> prat_exp_convert(const Element<S, T>& exp)
   {
-    PartialExp<S, T>	res(exp);
-    res.insert(exp.value().base());
-    return res;
+    return prat_exp_convert(exp, exp.value().base());
   }
 
   template <typename S, typename T>
