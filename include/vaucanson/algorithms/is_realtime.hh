@@ -63,4 +63,3 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/is_realtime.hxx>
 #endif // VCSN_ALGORITHMS_IS_REALTIME_HH
-

@@ -1,5 +1,14 @@
 2003-07-08  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* meta/context.hh,
+	meta/vcontext.hh,
+	meta/vauto.hh,
+	meta/automaton.hh,
+	meta/vauto.cc,
+	meta/vcontext.cc: Update prefix headers.
+
+2003-07-08  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* meta/context.hh (virtual_context): Call parent constructors.
 	
 	* meta/automaton.hh (virtual_automaton): Add missing `return'

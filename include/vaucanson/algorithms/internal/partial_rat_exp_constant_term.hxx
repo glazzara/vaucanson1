@@ -1,4 +1,4 @@
-// krat_exp_constant_term.hxx: this file is part of the Vaucanson project.
+// partial_rat_exp_constant_term.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.

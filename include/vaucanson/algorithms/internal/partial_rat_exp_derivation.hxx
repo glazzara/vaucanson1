@@ -27,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_PARTIAL_RAT_EXP_DERIVATION_HXX
-# define VCSN_ALGORITHMS_PARTIAL_RAT_EXP_DERIVATION_HXX
+#ifndef VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_DERIVATION_HXX
+# define VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_DERIVATION_HXX
 
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
@@ -284,4 +284,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_PARTIAL_RAT_EXP_DERIVATION_HXX
+#endif // VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_DERIVATION_HXX

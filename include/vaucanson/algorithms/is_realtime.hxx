@@ -60,4 +60,3 @@ namespace vcsn {
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_IS_REALTIME_HXX
-

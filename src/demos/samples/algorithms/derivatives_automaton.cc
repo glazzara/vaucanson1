@@ -1,4 +1,4 @@
-// vgrep.cc: this file is part of the Vaucanson project.
+// derivatives_automaton.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -87,3 +87,4 @@ int main(int argc, char **argv)
     std::cout << "Automaton saved!" << std::endl;
   }
 }
+
