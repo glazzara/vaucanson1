@@ -35,7 +35,6 @@ bool test_alphabet(tests::Tester& t)
 }
 
 
-
 int main(int argc, char **argv)
 {
   using namespace vcsn::algebra;

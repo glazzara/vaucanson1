@@ -25,8 +25,8 @@ bool test_semiring(tests::Tester& t)
 
   test_design_pattern<S, T>();
 
-  TEST(t, "commutativity of plus.", (e1 + e2) == (e2 + e1));
-  TEST(t, "distributivity of mult with plus.", 
+  TEST(t, "Commutativity of plus.", (e1 + e2) == (e2 + e1));
+  TEST(t, "Distributivity of mult with plus.", 
        (e1 + e2) * e3 == e2 * e3 + e1 * e3);
   TEST(t, "0 is a zero for mult.", 
        (e1 * z == z));

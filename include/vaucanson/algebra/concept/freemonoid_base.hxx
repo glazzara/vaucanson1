@@ -1,9 +1,7 @@
-/******************************************
- * <vaucanson/algebra/freemonoid_base.hxx> *
- ******************************************/
+// freemonoid_base.hxx
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGEBRA_FREEMONOID_BASE_HXX
 # define ALGEBRA_FREEMONOID_BASE_HXX
 
@@ -54,11 +52,10 @@ namespace vcsn {
     }
 
     template<class Self, typename T>
-    Element<Self, T>&
+    void
     MetaElement<FreeMonoidBase<Self>, T>::mirror()
     {
       op_in_mirror(set(), value());
-      return self();
     }
 
     template<class Self, typename T>
@@ -135,7 +132,8 @@ namespace vcsn {
     mirror(const Element<S, T>& e)
     {
       Element<S, T>	ret(e);
-      return ret.mirror();
+      ret.mirror();
+      return ret;
     }
     
     template<typename Self, typename T>

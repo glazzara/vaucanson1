@@ -1,5 +1,6 @@
 // free_monoid-test.cc
 //
+// $Id$
 // VCSN_HEADER
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
@@ -15,12 +16,13 @@ bool test_free_monoid(tests::Tester& t)
 
   typedef Element<S, T> element_t;
   element_t a;
+  TEST_MSG("Get the neural element of this free monoid.");
   element_t e = a.set().identity(SELECT(T));
   
-
   test_design_pattern<S, T>();
-  TEST(t, "Neutral element right.", (a * e) == a);
-  TEST(t, "Neutral element left.", (e * a) == a);
+  TEST(t, "Neutral element on the right.", (a * e) == a);
+  TEST(t, "Neutral element on the left." , (e * a) == a);
+  TEST(t, "Mirror is idempotent.", mirror(mirror(a)) == a);
 
   return t.all_passed(); 
 }

@@ -1,3 +1,35 @@
+2002-07-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh : minor.
+	* include/vaucanson/algebra/concrete/alphabets/alphabets.hh : minor.
+	* include/vaucanson/algebra/concept/alphabets_base.hh : minor.
+	* src/tests/algebra/semiring/semiring-test.hh : minor.
+	* src/tests/algebra/alphabets/alphabets-basic-test.cc : minor.
+
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx : 
+		mirror method return void because it generate side-effects.
+	* include/vaucanson/algebra/concept/freemonoid_base.hh : 
+		modified in consequence.
+
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh : minor.
+
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh : minor.
+	* src/tests/algebra/free_monoid/free_monoid-test.cc : add mirror test.
+	* include/vaucanson/algebra/concrete/series/krat.hxx 
+	* include/vaucanson/algebra/concrete/series/krat.hh 
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx: 
+		added.
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx: 
+		added.
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hxx: added.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: added.
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hh: added.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh: added.
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh: added.
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh: 
+		added.
+
+
 2002-07-16  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/alphabets_base.hxx :

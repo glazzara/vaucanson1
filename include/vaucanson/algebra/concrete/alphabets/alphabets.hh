@@ -27,9 +27,9 @@ namespace vcsn {
 
   } // algebra
 
-    /*---------------------.
+    /*------------------------.
     | MetaSet<SetAlphabets<L> |
-    `---------------------*/
+    `------------------------*/
     //
     // Meta information about the structuring element
     //

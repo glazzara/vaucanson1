@@ -1,5 +1,6 @@
 // alphabets_base.hh
 //
+// $Id$
 // VCSN_HEADER
 
 #ifndef ALGEBRA_ALPHABETS_BASE_HH
@@ -19,8 +20,6 @@ namespace vcsn {
     //! Structural element of alphabet.
     /*!
      * Empty class. Its role is essentially in static typing.
-     * 
-     *
      */
     template<class Self>
     struct AlphabetsBase 

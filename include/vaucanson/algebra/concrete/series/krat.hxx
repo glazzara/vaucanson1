@@ -19,7 +19,7 @@ namespace vcsn {
     inline
     bool op_contains(const Series<W, M>& s, const rat::exp<Tm, Tw>& m)
     { 
-      // FIXME: check this carefully
+      assert(! "op_contains for Element<Series<W,M>, exp<Tm,Tw> > not defined.");
       return true; 
     }
 

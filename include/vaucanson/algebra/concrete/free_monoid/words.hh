@@ -13,9 +13,9 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*---------.
+    /*------------.
     | SetWords<A> |
-    `---------*/
+    `------------*/
 
     template<typename A>
     struct SetWords 
@@ -38,9 +38,9 @@ namespace vcsn {
 
   }
 
-    /*-------------------.
+    /*----------------------.
     | MetaSet<SetWords<A> > |
-    `-------------------*/
+    `----------------------*/
     template<typename A>
     struct MetaSet<SetWords<A> >
     {

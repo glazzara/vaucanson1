@@ -1,5 +1,6 @@
 // set_alphabet.hh
 //
+// $Id$
 // VCSN_HEADER
 
 #ifndef ALGEBRA_SET_ALPHABET_HH

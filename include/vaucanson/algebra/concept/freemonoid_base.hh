@@ -1,9 +1,7 @@
-/******************************************
- * <vaucanson/algebra/freemonoid_base.hh> *
- ******************************************/
+// freemonoid_base.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGEBRA_FREEMONOID_BASE_HH
 # define ALGEBRA_FREEMONOID_BASE_HH
 
@@ -16,8 +14,10 @@ namespace vcsn
   {
 
     /*---------------------.
-      | FreeMonoidBase<Self> |
-      `---------------------*/
+    | FreeMonoidBase<Self> |
+    `---------------------*/
+    //! Structural element for free monoid.
+    /*! */
 
     template<class Self>
     struct FreeMonoidBase 
@@ -38,15 +38,15 @@ namespace vcsn
 
 
   /*-------------------------------------.
-    | MetaElement<FreeMonoidBase<Self>, T> |
-    `-------------------------------------*/
+  | MetaElement<FreeMonoidBase<Self>, T> |
+  `-------------------------------------*/
 
   template<class Self, typename T>
   struct MetaElement<FreeMonoidBase<Self>, T>
     : MetaElement<MonoidBase<Self>, T>
   {
-    size_t		length() const;
-    Element<Self, T>  &mirror();
+    size_t		      length() const;
+    void		      mirror();
     
     typedef typename op_begin_traits<Self, T>::ret_t	iterator;
     typedef typename 

@@ -1,5 +1,6 @@
 // str_words.hh
 //
+// $Id$
 // VCSN_HEADER
 #ifndef ALGEBRA_STR_WORDS_HH
 # define ALGEBRA_STR_WORDS_HH

@@ -1,20 +1,18 @@
-/*******************************
- * <vaucanson/algebra/krat.hh> *
- *******************************/
+// krat.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGEBRA_KRAT_HH
 # define ALGEBRA_KRAT_HH
 
-# include <vaucanson/algebra/concrete/series/series.hh>
-# include <vaucanson/algebra/concrete/series/exp.hh>
 # include <utility>
 
-namespace vcsn
-{
-  namespace algebra
-  {
+# include <vaucanson/algebra/concrete/series/series.hh>
+# include <vaucanson/algebra/concrete/series/exp.hh>
+
+namespace vcsn {
+
+  namespace algebra {
 
     /*------------------.
     | Series compliance |
@@ -45,7 +43,6 @@ namespace vcsn
 
   namespace algebra
   {   
-    
     
     template<typename W, typename M, typename Tm, typename Tw>
     bool op_contains(const Series<W, M>& s, const rat::exp<Tm, Tw>& m);
@@ -123,8 +120,8 @@ namespace vcsn
 
 
     /*---------------------.
-      | foreign constructors |
-      `---------------------*/
+    | foreign constructors |
+    `---------------------*/
     template<typename Tm, typename Tw, typename W, typename M, typename oTm>
     rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>),
 				SELECTOR2(Series<W, M>),
@@ -150,8 +147,8 @@ namespace vcsn
 		   const oTw& src);
 
     /*-----.
-      | star |
-      `-----*/
+    | star |
+    `-----*/
 
     template<typename W, typename M, typename Tm, typename Tw>
     bool op_stareable(const Series<W, M>& s,
@@ -169,8 +166,8 @@ namespace vcsn
   }  //algebra
 
     /*--------------------------------------.
-      | foreign addition with monoid elements |
-      `--------------------------------------*/
+    | foreign addition with monoid elements |
+    `--------------------------------------*/
 
     template<typename M, typename W, typename oTm, typename Tm, typename Tw>
     struct op_add_traits<M, Series<W, M>, oTm, rat::exp<Tm, Tw> >
@@ -200,8 +197,8 @@ namespace vcsn
 			    const rat::exp<Tm, Tw>& b);
 
     /*---------------------------------------.
-      | foreign addition with weights elements |
-      `---------------------------------------*/
+    | foreign addition with weights elements |
+    `---------------------------------------*/
 
   }  // algebra
 
@@ -274,7 +271,8 @@ namespace vcsn
 		     const rat::exp<Tm, Tw>& p,
 		     const oTm& m);
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTm, typename oTw>
+    template<typename W, typename M, typename Tm, 
+	     typename Tw, typename oTm, typename oTw>
     void op_series_set(const Series<W, M>& s, 
 		       const rat::exp<Tm, Tw>& p,
 		       const oTm& m,
@@ -282,6 +280,7 @@ namespace vcsn
 
 
   } // algebra
+
 } // vcsn
 
 # include <vaucanson/algebra/concrete/series/krat.hxx>
