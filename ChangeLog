@@ -1,3 +1,8 @@
+2004-03-27  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/derivations/Makefile.am: Add the
+	partial_derivation subdirectory.
+
 2004-03-26  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/derivations/partial_derivation/Makefile.am: Add a missing file.
