@@ -23,6 +23,7 @@
 # define VCSN_ALGORITHMS_BACKWARD_CLOSURE_HXX
 
 # include <set>
+# include <vector>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -77,7 +78,7 @@ namespace vcsn {
       }
 
     // Initialize the m_wfinal, m_wfinal_tmp
-    for_each_final(p, a)
+    for_each_final_state(p, a)
       {
 	m_wfinal[*p] = a.get_final(*p).get(monoid_identity);
 	m_wfinal_tmp[*p] = m_wfinal[*p];

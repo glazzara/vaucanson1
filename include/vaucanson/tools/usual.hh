@@ -33,8 +33,7 @@
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concrete/graph.hh>
-# include <vaucanson/misc/ref.hh>
-# include <vaucanson/misc/dot_dump.hh>
+// FIXME: when dot_dump is re-integrated : # include <vaucanson/misc/dot_dump.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {

@@ -82,7 +82,7 @@ namespace vcsn {
       }
 
     // Initialize the matrix m_winitial and m_winitial_tmp
-    for_each_initial(p, a)
+    for_each_initial_state(p, a)
       {
 	m_winitial[*p] = a.get_initial(*p).get(monoid_identity);
 	m_winitial_tmp[*p] = m_winitial[*p];

@@ -45,11 +45,11 @@ namespace vcsn {
     queue_t		  to_del, origin_d;
     delta_ret_t		  aim_d;
     monoid_elt_t	  monoid_identity =
-      identity_as<monoid_elt_value_t>::of(a.set().series().monoid());
+      algebra::identity_as<monoid_elt_value_t>::of(a.set().series().monoid());
     weight_t		  semiring_zero =
-      zero_as<weight_value_t>::of(a.set().series().weights());
+      algebra::zero_as<weight_value_t>::of(a.set().series().weights());
     series_elt_t          series_identity =
-      identity_as<serie_value_t>::of(a.set().series());
+      algebra::identity_as<serie_value_t>::of(a.set().series());
 
     backward_closure_here(a);
 
