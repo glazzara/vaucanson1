@@ -1,7 +1,7 @@
 // set_alphabet.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,30 +32,40 @@
 
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
+# include <limits>
+
 namespace vcsn
 {
 
-    /*-----------------------------------------------------------.
-    | Definition of an alphabet implementation based on std::set |
-    `-----------------------------------------------------------*/
-    template<typename L>
-    bool op_contains(const algebra::AlphabetSet<L>&, const std::set<L>&)
-    { 
-      return true; 
-    }
+  /*-----------------------------------------------------------.
+  | Definition of an alphabet implementation based on std::set |
+  `-----------------------------------------------------------*/
 
-    template<typename L>
-    bool op_is_finite(const algebra::AlphabetSet<L>&, const std::set<L>&)
-    { 
-      return true; 
-    }
+  template <typename L>
+  size_t
+  op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&)
+  {
+    return std::numeric_limits<L>::max() - std::numeric_limits<L>::min();
+  }
 
-    template<typename L>
-    bool op_contains_e(const algebra::AlphabetSet<L>&, const std::set<L>& a, 
-		       const L& v)
-    { 
-      return a.find(v) != a.end(); 
-    }
+  template<typename L>
+  bool op_contains(const algebra::AlphabetSet<L>&, const std::set<L>&)
+  {
+    return true;
+  }
+
+  template<typename L>
+  bool op_is_finite(const algebra::AlphabetSet<L>&, const std::set<L>&)
+  {
+    return true;
+  }
+
+  template<typename L>
+  bool op_contains_e(const algebra::AlphabetSet<L>&, const std::set<L>& a,
+		     const L& v)
+  {
+    return a.find(v) != a.end();
+  }
 
 
 } // vcsn

@@ -48,10 +48,20 @@ bool free_monoid_test(tests::Tester& t)
   typedef typename freemonoid_t::alphabets_elt_t	alphabet_t;
   typedef typename freemonoid_t::letter_t		letter_t;
 
-  for (int i = 0; i < 200; ++i)
+  alphabet_t		base;
+  size_t		test_sizes[] =
     {
-      alphabet_t		alpha;
-      for (int j = 0; j < i; ++j)
+      0,
+      1,
+      base.max_size() >= 2 ? 2 : 1,
+      base.max_size() <= 256 ? base.max_size() / 2 : 128,
+      base.max_size() <= 256 ? base.max_size() : 256
+    };
+
+  for (size_t i = 0; i < sizeof (test_sizes) / sizeof (size_t); ++i)
+    {
+      alphabet_t alpha (base);
+      for (size_t j = 0; j < test_sizes[i]; ++j)
 	{
 	  letter_t l;
 	  do
@@ -118,7 +128,6 @@ bool free_monoid_test(tests::Tester& t)
 
       TEST(t, "iterators [1].", l == m);
       TEST(t, "iterators [2].", (abi2 == ab.end()) and (bai2 == ba.rend()));
-      std::cout << ab << std::endl << old_ba << std::endl;
       TEST(t, "iterators [3].", (ab == old_ba) and (ba == old_ab));
 
 

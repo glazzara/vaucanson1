@@ -157,10 +157,11 @@ static const bool dynamic_data = false;
     /// Select a random letter in all the possible letters in letter_t.
     letter_t    random_letter() const;
 
-
-
     /// Retrieve the number of letters in the alphabet.
     size_t size()                      const;
+
+    /// Retrieve the maximum number of letters the alphabet can contain.
+    size_t max_size()			const;
 
     /// Test for matching letters modulo the alphabet meta-symbols.
     bool letter_equality(letter_t, letter_t) const;

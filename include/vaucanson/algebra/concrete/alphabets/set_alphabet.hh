@@ -1,7 +1,7 @@
 // set_alphabet.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -53,7 +53,7 @@ namespace vcsn {
     /// @}
 
   } // algebra
-  
+
   /** @ingroup alphabet */ /** @{ */
 
   /*------------------------------------------.
@@ -68,25 +68,29 @@ namespace vcsn {
     /// An alphabet implemented with std::set is a dynamic value.
     static const bool dynamic_values = true;
   };
-  
+
   /// @}
 
   template <typename L>
+  size_t
+  op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&);
+
+  template <typename L>
   bool op_contains(const algebra::AlphabetSet<L>& s, const std::set<L>& a);
-  
+
   template <typename L>
   bool op_is_finite(const algebra::AlphabetSet<L>& s, const std::set<L>& a);
-  
+
   template <typename L>
-  bool op_contains_e(const algebra::AlphabetSet<L>& s, const std::set<L>& a, 
+  bool op_contains_e(const algebra::AlphabetSet<L>& s, const std::set<L>& a,
 		     const L& v);
-    
+
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
- 
+
+
 #endif // VCSN_ALGEBRA_CONCRETE_ALPHABETS_SET_ALPHABET_HH

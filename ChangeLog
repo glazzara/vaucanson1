@@ -1,5 +1,17 @@
 2004-03-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	* include/vaucanson/algebra/concept/alphabets_base.hxx: Add a
+	max_size() method to Element<AlphabetSet<S>, T>.
+	* include/vaucanson/misc/container_ops.hxx,
+	* include/vaucanson/misc/container_ops.hh: Add op_max_size().
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh,
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx:
+	Specialize op_max_size() for alphabets implemented with std::set.
+	* src/tests/algebra/free_monoid/free_monoid_test.hh: Fix.
+
+2004-03-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/series_base.hxx,
 	* src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
 	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
