@@ -1,5 +1,19 @@
 2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* configure.ac: Enable automaton tests-suite.
+	* src/tests/check/Makefile.flags: Remove '-Werrors'  in AM_CXXFLAGS.
+	* src/tests/bin/generate-test-suite.sh: Fix include.
+	* include/vaucanson/algebra/concept/alphabets_base.hh (random_letter): New.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx (random_letter): New.
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx: Fix unused args.
+	* include/vaucanson/automata/concept/automata_ops.hxx: Use random::generate.
+	* include/vaucanson/tools/gen_random.hxx: Remove unused variables.
+	* src/tests/automata/algos/sum_test.hh: Fix include.
+	* src/tests/automata/algos/in_concat_test.hh: Fix include. 
+
+
+2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/freemonoid_base.hh
 		(parse_word): Add escaped characters.
 		(op_parse): Likewise.

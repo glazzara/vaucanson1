@@ -120,8 +120,6 @@ namespace vcsn {
 
     for (int i = 0; i < nb_edge; i++)
       {
-	unsigned from = alea(work.states().size());
-	unsigned to = alea(work.states().size());
 	std::set<hstate_t> aim;
 	letter_t e = alpha.choose();
 	hstate_t s = work.choose_state();

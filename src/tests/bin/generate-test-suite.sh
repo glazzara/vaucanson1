@@ -74,7 +74,7 @@ cat $DESCRIPTION_FILE >> $DEST_DIR/$FUN_SNAME-test.cc;
 # Include "main".
 cat >> $DEST_DIR/$FUN_SNAME-test.cc<<EOF
 
-  #include <check/tests_stuff.hh>
+  #include <check/tester.hh>
   #include <$NAME_TEST_FILE>
 
   int main(int argc, char **argv)

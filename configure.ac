@@ -76,6 +76,8 @@ AC_CONFIG_FILES([
         doc/doc.doxy
 	include/Makefile])
 
+VCSN_TESTS([usual_automaton_t])
+
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 
 AC_OUTPUT

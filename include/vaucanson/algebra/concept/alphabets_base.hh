@@ -145,6 +145,11 @@ typedef typename algebra::alphabet_traits<S, T>::letter_t letter_t;
     /// Randomly choose a letter in the alphabet.
     letter_t choose() const;
 
+    /// Select a random letter in all the possible letters in letter_t.
+    letter_t    random_letter() const;
+
+
+
     /// Retrieve the number of letters in the alphabet.
     size_t size()                      const;
 

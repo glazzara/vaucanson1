@@ -124,10 +124,17 @@ namespace vcsn {
     int  nr = ::utility::random::generate<int>(0, size());
 
     const_iterator it = begin();
-    for (int k = 0; k < c; ++k)
+    for (int k = 0; k < nr; ++k)
       ++it;
 
     return *it;
+  }
+
+  template <class Self, typename T>
+  typename algebra::alphabet_traits<Self, T>::letter_t
+  MetaElement<algebra::AlphabetSetBase<Self>, T>::random_letter() const
+  {
+    return utility::random::generate<typename algebra::alphabet_traits<Self, T>::letter_t>();
   }
 
   template<typename S, typename T>

@@ -1,28 +1,24 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 294)
-(Parent-Version vaucanson 0 293)
+(Project-Version vaucanson 0 295)
+(Parent-Version vaucanson 0 294)
 (Version-Log "
 2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/freemonoid_base.hh
-		(parse_word): Add escaped characters.
-		(op_parse): Likewise.
-	* include/vaucanson/algebra/concept/freemonoid_base.hxx: 
-		Implement it in the generic op_parse version.
-	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx: Fix unused arg warning.
-	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Adjust lexer.
-	* include/vaucanson/automata/concept/automata_base.hxx: Fix unused argument warning.
-	* include/vaucanson/automata/concept/automata_ops.hxx: Likewise.
-	* include/vaucanson/algorithms/sub_automaton.hxx: Likewise.
-	* include/vaucanson/algorithms/eval.hxx: Minor.
-	* src/demos/vgrep/vgrep.cc: Fix.
-	* include/vaucanson/algorithms/forward_closure.hxx: Fix del_edge bad use.
-	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.
+	* configure.ac: Enable automaton tests-suite.
+	* src/tests/check/Makefile.flags: Remove '-Werrors'  in AM_CXXFLAGS.
+	* src/tests/bin/generate-test-suite.sh: Fix include.
+	* include/vaucanson/algebra/concept/alphabets_base.hh (random_letter): New.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx (random_letter): New.
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx: Fix unused args.
+	* include/vaucanson/automata/concept/automata_ops.hxx: Use random::generate.
+	* include/vaucanson/tools/gen_random.hxx: Remove unused variables.
+	* src/tests/automata/algos/sum_test.hh: Fix include.
+	* src/tests/automata/algos/in_concat_test.hh: Fix include. 
 ")
 (New-Version-Log "")
-(Checkin-Time "Sun, 29 Jun 2003 16:21:20 +0200")
+(Checkin-Time "Sun, 29 Jun 2003 18:12:42 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -105,7 +101,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.97 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.98 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -114,7 +110,7 @@
   (README (vaucanson/f/48_README 1.7 600))
   (THANKS (vaucanson/f/36_THANKS 1.5 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.5 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.26 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.27 600))
   (prj (vaucanson.prj) :symlink)
 
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.4 600))
@@ -124,14 +120,14 @@
   (src/tests/Makefile.am (vaucanson/b/1_Makefile.a 1.9 600))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.6 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.3 600))
-  (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.12 600))
+  (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.13 600))
   (src/tests/check/tester.cc (vaucanson/b/3_tests_stuf 1.11 600))
   (src/tests/check/tester.hh (vaucanson/b/2_tests_stuf 1.13 600))
   (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.5 600))
   (src/tests/check/unique.cc (vaucanson/p/49_unique.cc 1.1 600))
   (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.4 600))
   (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.3 700))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 700))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.5 700))
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.3 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
@@ -205,8 +201,8 @@
   (src/tests/fundamental/intrinsics_assign.cc (vaucanson/q/5_intrinsics 1.1 600))
   (src/tests/fundamental/intrinsics.hh (vaucanson/q/6_intrinsics 1.1 600))
 
-  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.21 600))
-  (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.19 600))
+  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.22 600))
+  (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.20 600))
   
   
   (include/vaucanson/algebra/concept/freemonoid_base.hh (vaucanson/c/1_freemonoid 1.15 600))
@@ -231,7 +227,7 @@
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx (vaucanson/i/25_decorated_ 1.4 600))
   (include/vaucanson/algebra/concrete/alphabets/predefs.hh (vaucanson/g/47_predefs.hh 1.7 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh (vaucanson/28_set_alphab 1.13 600))
-  (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.10 600))
+  (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.11 600))
   (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.7 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.15 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.14 600))
@@ -327,7 +323,7 @@
   (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.6 600))
   
   
-  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.7 600))
+  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.8 600))
   (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.2 600))
 
   (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.1 600))
@@ -408,7 +404,7 @@
   (include/vaucanson/tools/gen_book.hh (vaucanson/g/34_gen_book.h 1.4 600))
   (include/vaucanson/tools/gen_book.hxx (vaucanson/g/33_gen_book.h 1.4 600))
   (include/vaucanson/tools/gen_random.hh (vaucanson/e/4_gen_random 1.15 600))
-  (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.18 600))
+  (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.19 600))
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.28 600))
   (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.6 600))
 
@@ -429,8 +425,8 @@
   (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.8 600))
   (src/tests/automata/algos/realtime_test.hh (vaucanson/e/49_realtime_t 1.7 600))
   (src/tests/automata/algos/thompson_test.hh (vaucanson/e/46_thompson_t 1.9 600))
-  (src/tests/automata/algos/sum_test.hh (vaucanson/e/15_union_test 1.10 600))
-  (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.4 600))
+  (src/tests/automata/algos/sum_test.hh (vaucanson/e/15_union_test 1.11 600))
+  (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.5 600))
   (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.13 600))
   (src/tests/automata/implementation_check/add_edge_test.hh (vaucanson/f/15_add_edge_t 1.6 600))
   (src/tests/automata/implementation_check/add_state_test.hh (vaucanson/f/14_add_state_ 1.6 600))
