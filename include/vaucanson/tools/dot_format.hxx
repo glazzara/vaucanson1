@@ -36,7 +36,7 @@ namespace vcsn
 	      out << name_ << count 
 		  << " [style=invis,label=\"\",width=.01,height=.01];" << std::endl
 		  << name_ << count << " -> " << name_ << c 
-		  << " [label=\"" << a.get_initial(*i) << "\"];" << std::endl;
+		  << " [label=\"" << conv(a, a.get_initial(*i)) << "\"];" << std::endl;
 	      ++count;
 	    }
 	  if (a.is_final(*i))
@@ -44,7 +44,7 @@ namespace vcsn
 	      out << name_ << count 
 		  << " [style=invis,label=\"\",width=.01,height=.01];" << std::endl 
 		  << name_ << c << " -> "  << name_ << count 
-		  << " [label=\""<< a.get_final(*i) <<"\"];" << std::endl;
+		  << " [label=\""<< conv(a, a.get_final(*i)) <<"\"];" << std::endl;
 	      ++count;
 	    }
 	  out << name_ << c << " [label=\"" << *i << "\"];" << std::endl;
@@ -56,7 +56,7 @@ namespace vcsn
 	  out << name_ << state_map[a.origin_of(*i)] 
 	      << " -> " 
 	      << name_ << state_map[a.aim_of(*i)];
-	  out << "[label=\"" << conv(a, a.serie_of(*i)) << "\"];" << std::endl;
+	  out << " [label=\"" << conv(a, a.serie_of(*i)) << "\"];" << std::endl;
 	}
       out << "}" << std::endl;
     }

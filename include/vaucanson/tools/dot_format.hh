@@ -32,9 +32,11 @@
 
 #include <string>
 
-namespace vcsn {
+namespace vcsn 
+{
   
-  namespace io {
+  namespace io 
+  {
 
     struct dot
     {

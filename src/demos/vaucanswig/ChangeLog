@@ -1,3 +1,13 @@
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* meta/vaucanswig_context.i: Dot not include `dot_dump.hh'.
+	* meta/vauto.hh: Fix includes. Update I/O method prototypes.
+	* meta/automaton.hh: Update accordingly. Add new I/O.
+	* meta/automaton.hh (MAKE_VAUTO_TYPES): Mention converter.
+	* meta/vaucanswig_automaton.i: Update declarations. Add new I/O.
+	* meta/vaucanswig_core.i: Reorder to recognise std::string.
+	* meta/vauto.cc: Add new I/O.
+
 2003-07-13  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* meta/vaucanswig_context.i: Update for new I/O.

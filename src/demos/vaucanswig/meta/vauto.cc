@@ -30,18 +30,32 @@
 #include "vauto.hh"
 #include <vaucanson/misc/unique.hcc>
 #include <fstream>
+#include <sstream>
 #include <stdexcept>
 #include <cstdlib>
 
 namespace vcsn
 {
+  void virtual_automaton::string_load(const std::string& in, const std::string& param)
+  {
+    std::istringstream is(in);
+    return this->load(is, param);
+  }
+
+  std::string virtual_automaton::string_save(const std::string& param) const
+  {
+    std::ostringstream os;
+    this->save(os, param);
+    return os.str();
+  }
+
   void virtual_automaton::dot_run(const char *fname, const char *cmd, const char *name) const
   {
     {
       std::ofstream of(fname);
       if (!of)
 	throw std::runtime_error("could not open file for writing");
-      of << this->as_dot(name);
+      this->save(of, std::string("dot:") + name);
     }
     system((std::string(cmd) + ' ' + fname).c_str());
   }

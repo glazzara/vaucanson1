@@ -31,7 +31,7 @@
 # define VCSN_DEMOS_VAUCANSWIG_META_VAUTO_HH
 
 #include "vcontext.hh"
-#include <fstream>
+#include <iostream>
 #include <cstdlib>
 #include <string>
 #include <stdexcept>
@@ -99,8 +99,14 @@ namespace vcsn
     virtual std::list<int> letter_rdelta(int, char, bool states_only = true) const = 0;
     virtual std::list<int> spontaneous_rdelta(int, bool states_only = true) const = 0;
 
-    virtual std::string describe() const = 0;
-    virtual std::string as_dot(const char *name = "automaton") const = 0;
+    virtual std::string describe(bool cpptype = false) const = 0;
+
+    virtual void load(std::istream&, const std::string& format) = 0;
+    virtual void save(std::ostream&, const std::string& format) const = 0;
+
+    void string_load(const std::string& in, const std::string& format);
+    std::string string_save(const std::string& format) const;
+
     void dot_run(const char *fname, const char *cmd = "gv", const char *name = "automaton") const;
     virtual ~virtual_automaton();
   };

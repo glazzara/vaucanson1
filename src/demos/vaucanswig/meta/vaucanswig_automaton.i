@@ -12,9 +12,9 @@
 #include <vaucanson/tools/usual.hh>
 #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 #include <vaucanson/automata/concrete/generalized.hh>
-#include <vaucanson/tools/dot_dump.hh>
 #include <stdexcept>
 #include <sstream>
+#include <fstream>
 #include <iterator>
 #include <cstdlib>
 #include <fstream>
@@ -113,8 +113,27 @@ namespace Kind ##_types
     virtual std::list<int> letter_rdelta(int, char, bool states_only = true) const;
     virtual std::list<int> spontaneous_rdelta(int, bool states_only = true) const;
 
-    virtual std::string describe() const;
-    virtual std::string as_dot(const char *name = "automaton") const;
+    virtual std::string describe(bool cpptype = false) const;
+
+    virtual void load(std::istream&, const std::string&);
+    virtual void save(std::ostream&, const std::string&) const;
+
+    %extend {
+      void load(const char* fname)
+	{
+	  std::ifstream in(fname);
+	  if (!in)
+	    throw std::runtime_error(std::string("cannot open file: ") + fname);
+	  self->load(in, "simple");
+	}
+      void save(const char* fname) const
+	{
+	  std::ofstream out(fname);
+	  if (!out)
+	    throw std::runtime_error(std::string("cannot open file: ") + fname);
+	  self->save(out, "simple");
+	}
+    }	    
 
     virtual ~Kind ##_auto_t();
   };
@@ -206,8 +225,24 @@ namespace Kind ##_types
     virtual std::list<int> letter_rdelta(int, char, bool states_only = true) const;
     virtual std::list<int> spontaneous_rdelta(int, bool states_only = true) const;
 
-    virtual std::string describe() const;
-    virtual std::string as_dot(const char *name = "gen_automaton") const;
+    virtual std::string describe(bool cpptype = false) const;
+
+    %extend {
+      bool load(const std::string& fname)
+	{
+	  std::ifstream in(fname.c_str());
+	  if (!in)
+	    throw std::runtime_error("cannot open file: " + fname);
+	  self->load(in, "simple");
+	}
+      bool save(const std::string& fname) const
+	{
+	  std::ofstream out(fname.c_str());
+	  if (!out)
+	    throw std::runtime_error("cannot open file: " + fname);
+	  self->save(out, "simple");
+	}
+    }	    
   };
 
 }

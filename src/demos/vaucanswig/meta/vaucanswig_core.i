@@ -3,6 +3,8 @@
 
 %include std_list.i
 
+%include std_string.i
+
 %{
 #include "vcontext.hh"
 %}
@@ -11,8 +13,6 @@
 #include "vauto.hh"
 %}
 %include vauto.hh
-
-%include std_string.i
 
 %template (hlist) std::list<int>;
 %template (clist) std::list<char>;

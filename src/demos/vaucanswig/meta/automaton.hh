@@ -32,6 +32,10 @@
 
 #include "context.hh"
 #include "vauto.hh"
+#include <vaucanson/tools/io.hh>
+#include <vaucanson/tools/usual_io.hh>
+#include <vaucanson/tools/simple_format.hh>
+#include <vaucanson/tools/dot_format.hh>
 
 /*** Structural element extraction ***/
 #define SERIES_OF(Self) (Self)->set().series()
@@ -57,7 +61,7 @@
 #define WEIGHT(Self, W) weight_t(WEIGHTS_OF(Self), W)
 
 
-template<typename Auto>
+template<typename Auto, typename Converter>
 struct vcsn_automaton : vcsn::virtual_automaton
 {
   AUTOMATON_TYPES(Auto)
@@ -65,21 +69,21 @@ struct vcsn_automaton : vcsn::virtual_automaton
     
 
     vcsn_automaton(const Auto& other)
-      : ctx_(new vcsn_context<Auto>(other.set())), auto_(new Auto(other))
+      : ctx_(new vcsn_context<Auto>(other.set())), auto_(new Auto(other)), conv_()
   {}
     vcsn_automaton(const automata_set_t& other)
-      : ctx_(new vcsn_context<Auto>(other)), auto_(new Auto(other))
+      : ctx_(new vcsn_context<Auto>(other)), auto_(new Auto(other)), conv_()
   {}
     vcsn_automaton(const vcsn_automaton& other)
-      : ctx_(new vcsn_context<Auto>(*other.ctx_)), auto_(new Auto(*other.auto_))
+      : ctx_(new vcsn_context<Auto>(*other.ctx_)), auto_(new Auto(*other.auto_)), conv_()
   {}
 
   vcsn_automaton(const vcsn_context<Auto>& ctx)
-    : ctx_(new vcsn_context<Auto>(ctx)), auto_(new Auto(ctx_->automata_set()))
+    : ctx_(new vcsn_context<Auto>(ctx)), auto_(new Auto(ctx_->automata_set())), conv_()
   {}
 
   vcsn_automaton()
-    : ctx_(0), auto_(0)
+    : ctx_(0), auto_(0), conv_()
   {}
 
   vcsn_automaton& operator=(const vcsn_automaton& other)
@@ -420,32 +424,55 @@ struct vcsn_automaton : vcsn::virtual_automaton
   DefDeltaMembers(delta)
   DefDeltaMembers(rdelta)
 
-  virtual std::string describe() const
+  virtual std::string describe(bool cpptype = false) const
   {
     std::ostringstream s;
+    if (cpptype)
+      s << typeid(Auto).name() << '@' << auto_ << " = ";
     s << (*auto_);
     return s.str();
   }
 
-  virtual std::string as_dot(const char *name = "automaton") const
+  virtual void load(std::istream& in, const std::string& format)
   {
-    std::ostringstream st;
-    vcsn::tools::dot_dump(st, (*auto_), name);
-    return st.str();
+    if (format.substr(0, 6) == "simple")
+      {
+	in >> vcsn::automaton_loader(*auto_, conv_, vcsn::io::simple());
+      }
+    else
+      throw std::runtime_error("format not supported: " + format);
   }
-
+  
+  virtual void save(std::ostream& out, const std::string& format) const
+  {
+    if (format.substr(0, 3) == "dot")
+      {
+	std::string name = format;
+	name.erase(name.begin(), name.begin() + 3);
+	if (name.size() < 2)
+	  name = ":automaton";
+	name.erase(name.begin(), name.begin() + 1);
+	out << vcsn::automaton_saver(*auto_, vcsn::io::string_out(), vcsn::io::dot(name));
+      }
+    else if (format.substr(0, 6) == "simple")
+      out << vcsn::automaton_saver(*auto_, conv_, vcsn::io::simple());
+    else
+      throw std::runtime_error("format not supported: " + format);
+  }
+  
   virtual ~vcsn_automaton() { delete auto_; delete ctx_; }
 
 protected:
   vcsn_context<Auto>* ctx_;
   Auto *auto_;
+  Converter conv_;
 };
 
 #define MAKE_VAUTO_TYPES(FAMILY)					\
 namespace FAMILY ##_types						\
 {									\
-  typedef vcsn_automaton<automaton_t> FAMILY ##_auto_t;			\
-  typedef vcsn_automaton<generalized_automaton_t> gen_## FAMILY ##_auto_t; \
+  typedef vcsn_automaton<automaton_t, vcsn::io::usual_converter_poly<FAMILY ##_exp_t> > FAMILY ##_auto_t; \
+  typedef vcsn_automaton<generalized_automaton_t, vcsn::io::usual_converter_exp> gen_## FAMILY ##_auto_t; \
 }
 
 

@@ -218,7 +218,6 @@ nobase_include_HEADERS =					     \
 	vaucanson/misc/container_ops.hh				     \
 	vaucanson/misc/container_ops.hxx			     \
 	vaucanson/misc/contract.hh				     \
-	vaucanson/misc/dot_dump.hh				     \
 	vaucanson/misc/limits.hh				     \
 	vaucanson/misc/random.hh				     \
 	vaucanson/misc/random.hxx				     \
@@ -237,4 +236,14 @@ nobase_include_HEADERS =					     \
 	vaucanson/tools/gen_random.hxx				     \
 	vaucanson/tools/usual.hh				     \
 	vaucanson/tools/usual.hxx				     \
-	vaucanson/tools/usual_macros.hh
+	vaucanson/tools/usual_macros.hh				     \
+	vaucanson/tools/dot_dump.hh				     \
+	vaucanson/tools/io.hh			\
+	vaucanson/tools/io.hxx			\
+	vaucanson/tools/usual_io.hh		\
+	vaucanson/tools/usual_io.hxx		\
+	vaucanson/tools/dot_format.hh		\
+	vaucanson/tools/dot_format.hxx		\
+	vaucanson/tools/simple_format.hh	\
+	vaucanson/tools/simple_format.hxx
+

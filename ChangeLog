@@ -1,3 +1,20 @@
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/tools/dot_format.hxx,
+	* include/vaucanson/tools/dot_format.hh,
+	* include/vaucanson/tools/io.hxx,
+	* include/vaucanson/tools/io.hh: Update. Fix bugs.
+
+	* include/vaucanson/tools/usual_io.hh,
+	include/vaucanson/tools/usual_io.hxx,
+	include/vaucanson/tools/simple_format.hh,
+	include/vaucanson/tools/simple_format.hxx: New.
+	* include/Makefile.am: Update accordingly.
+
+	* src/tests/sanity/generate_files.sh (AM_CPPFLAGS): Mention
+	`$(top_builddir)/include'.
+	* configure.ac: Re-activate testsuites.
+
 2003-07-13  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/sanity/Makefile.am, src/tests/sanity/includes.test: Remove.

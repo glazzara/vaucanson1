@@ -101,21 +101,9 @@ namespace vcsn
     }
 
     template<typename Auto, typename EdgeConverter, typename Format>
-    void automaton_loader_<Auto, EdgeConverter, Format>::set_initial(unsigned s)
-    {
-      a_.set_initial(add_state(s));
-    }
-
-    template<typename Auto, typename EdgeConverter, typename Format>
     void automaton_loader_<Auto, EdgeConverter, Format>::set_initial(unsigned s, const std::string& lbl)
     {
       a_.set_initial(add_state(s), conv_(a_, lbl));
-    }
-
-    template<typename Auto, typename EdgeConverter, typename Format>
-    void automaton_loader_<Auto, EdgeConverter, Format>::set_final(unsigned s)
-    {
-      a_.set_final(add_state(s));
     }
 
     template<typename Auto, typename EdgeConverter, typename Format>
@@ -137,7 +125,7 @@ namespace vcsn
     }
 
     template<typename Auto, typename EdgeConverter, typename Format> 
-    std::istream& operator>>(std::istream& in, automaton_loader_<Auto, EdgeConverter, Format>& l)
+    std::istream& operator>>(std::istream& in, automaton_loader_<Auto, EdgeConverter, Format> l)
     {
       l.format_(in, l);
       return in;

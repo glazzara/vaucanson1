@@ -4,6 +4,7 @@
 # include <vaucanson/automata/concept/handlers.hh>
 # include <iostream>
 # include <string>
+# include <map>
 
 namespace vcsn
 {
@@ -77,9 +78,7 @@ namespace vcsn
 
       hstate_t add_state(unsigned);
       void set_initial(unsigned, const std::string&);
-      void set_initial(unsigned);
       void set_final(unsigned, const std::string&);
-      void set_final(unsigned);
       void add_edge(unsigned, unsigned, const std::string&);
       void add_spontaneous(unsigned, unsigned);
 
@@ -96,7 +95,7 @@ namespace vcsn
     };
 
     template<typename Auto, typename EdgeConverter, typename Format>
-    std::istream& operator>>(std::istream&, automaton_loader_<Auto, EdgeConverter, Format>&);
+    std::istream& operator>>(std::istream&, automaton_loader_<Auto, EdgeConverter, Format>);
 
 
   }
@@ -105,7 +104,8 @@ namespace vcsn
   template<typename Auto, typename EdgeConverter, typename Format>
   io::automaton_loader_<Auto, EdgeConverter, Format> automaton_loader(Auto& a, 
 								      const EdgeConverter& e = EdgeConverter(),
-								      const Format& f = Format());
+								      const Format& f = Format(),
+								      bool merge_states = false);
   
 
 

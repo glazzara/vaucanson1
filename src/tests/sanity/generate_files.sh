@@ -13,6 +13,7 @@ cat > Makefile.am << EOF
 test_base.cc: generate_files.sh
 	\$(SHELL) "\$(srcdir)"/generate_files.sh "\$(srcdir)"
 
+AM_CPPFLAGS = -I\$(top_srcdir)/include -I\$(top_builddir)/include
 check_PROGRAMS = \\
 EOF
 awk '{ gsub(/[.\/]/, "_"); print "\t"$0" \\" }' files.tmp | \
@@ -24,7 +25,7 @@ awk '
     target = $1
     gsub(/[.\/]/, "_", target)
     print target"_SOURCES = test_base.cc"
-    print target"_CPPFLAGS = -I$(top_srcdir)/include -DINCLUDE="$1"\n"
+    print target"_CPPFLAGS = \$(AM_CPPFLAGS) -DINCLUDE="$1"\n"
   }
 ' files.tmp >> Makefile.am
 
