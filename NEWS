@@ -25,7 +25,7 @@ using namespace vcsn::xml;
 using namespace vcsn::io;
 
 Many  more  examples and  utilities  can  be  found in  the  directory
-src/demos/xml.  Just browse the source!
+src/demos/xml.  Just browse the sources!
 
 ** Few more examples.
 
@@ -58,6 +58,11 @@ series_set_t		rat_exp_t		rat_exp_impl_t
 As  the user,  you will  probably  only be  interested in  alphabet_t,
 automaton_t  and rat_exp_t, respectively  for alphabets,  automata and
 rational expressions.
+
+For transducers, you will get the following extra types:
+
+output_semiring_t	output_semiring_elt_t	output_semiring_elt_value_t
+output_series_set_t	output_series_set_elt_t	output_series_set_elt_value_t
 
 In addition  to that, a context  provides the user  with the following
 functions:
@@ -95,6 +100,24 @@ different alphabets in different automata in the same program.
 
 Also, rational expressions which  weights are implemented as floats or
 doubles now work correctly.
+
+** verbalize() is deprecated, use expand()!
+
+A new expand() function was created. It performs a simple expansion of
+a rational expression. For example:
+
+expand(a(a+b))		=	aa+ab
+expand(a(a+b*))		=	aa+a.b*
+expand(a(a+(a+b*)))	=	aa+a.(a+b)*
+expand(a+(a(a+b))*)	=	a+(aa+ab)*
+
+To use  this function, include vaucanson/algorithms/krat_exp_expand.hh
+and  call   the  vcsn::expand()   function  on  an   Element<  Series,
+rat::exp<M, W> > (or a rat_exp_t if you are using a context).
+
+While this function behave exactly as verbalize on series which have a
+finite support, the latter is  deprecated. It will probably be removed
+in next releases.
 
 ** krat_exp_print() does not exist anymore.
 
