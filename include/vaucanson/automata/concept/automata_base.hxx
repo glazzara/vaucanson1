@@ -704,7 +704,7 @@ namespace vcsn {
 					    hstate_t from, 
 					    delta_kind::edges k) const
   {
-    op_delta(set(), value(), res, from, k);
+    op_rdelta(set(), value(), res, from, k);
   }
 
   /*! store the output edges of the state 'from' where
@@ -718,7 +718,7 @@ namespace vcsn {
 					    const L& query,
 					    delta_kind::edges k) const
   {
-    op_delta(set(), value(), res, from, query, k);
+    op_rdelta(set(), value(), res, from, query, k);
   }
 
   /*! store the output edges of the state 'from' where
@@ -732,7 +732,7 @@ namespace vcsn {
 						   const L& letter,
 						   delta_kind::edges k) const
   {
-    op_letter_delta(set(), value(), res, from, letter, k);
+    op_letter_rdelta(set(), value(), res, from, letter, k);
   }
 
   /*! store the output spontaneous transitions. */

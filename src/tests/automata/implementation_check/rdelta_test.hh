@@ -67,15 +67,26 @@ unsigned rdelta_test(tests::Tester& tg)
   automaton.add_letter_edge(s2, s1, b);
 
   // Show me the bug!
-  std::list<unsigned> r;
+  std::list<int> r;
   automaton.rdelta(inserter(r, r.begin()), s2, vcsn::delta_kind::edges());
-  TEST(t, "rdelta returns consistent results (1/2). ",
+  TEST(t, "rdelta returns consistent results (1/4). ",
        !r.empty() && (automaton.origin_of(r.front()) == s1));
 
   r.clear();
+  automaton.rdelta(inserter(r, r.begin()), s2, vcsn::delta_kind::states());
+  TEST(t, "rdelta returns consistent results (2/4). ",
+      	!r.empty() && r.front() == s1);
+
+  r.clear();
   automaton.rdelta(inserter(r, r.begin()), s1, vcsn::delta_kind::edges());
-  TEST(t, "rdelta returns consistent results (2/2). ",
+  TEST(t, "rdelta returns consistent results (3/4). ",
        !r.empty() && (automaton.origin_of(r.front()) == s2));
+
+  r.clear();
+  automaton.rdelta(inserter(r, r.begin()), s1, vcsn::delta_kind::states());
+  TEST(t, "rdelta returns consistent results (4/4). ",
+      	!r.empty() && r.front() == s2);
+
   return t.all_passed();
 }
 

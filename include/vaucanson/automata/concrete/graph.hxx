@@ -525,6 +525,25 @@ namespace vcsn {
       }
   }
 
+  template <class S,
+	    class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SerieValue,
+	    class Letter,
+	    class Tag,
+	    typename  OutputIterator,
+	    typename L>
+  void op_rdelta(const AutomataBase<S>&,
+		 const GClass& v,
+		 OutputIterator res,
+		 hstate_t from,
+		 const L& query,
+		 delta_kind::states k)
+  {
+    v.rdelta(res, from, query, k);
+  }
+
   // Remove macros to avoid name clashes.
 #undef TParam
 #undef GClass

@@ -1,3 +1,13 @@
+2003-09-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_base.hxx (rdelta),
+	* include/vaucanson/automata/concept/automata_ops.hxx (op_rdelta): Fix
+	bugs.
+	* include/vaucanson/automata/concrete/graph.hxx: Add a specialisation
+	of op_rdelta for Graph.
+	* src/tests/automata/implementation_check/rdelta_test.hh: Add more
+	tests for rdelta.
+	
 2003-09-08  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/tests-suites/generate-all.sh: Generate algorithms tests.

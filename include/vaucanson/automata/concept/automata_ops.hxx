@@ -846,7 +846,7 @@ namespace vcsn {
     for (typename std::set<hedge_t>::const_iterator e = ret.begin();
 	 e != ret.end(); ++e)
       {
-	*res = a.aim_of(*e);
+	*res = a.origin_of(*e);
 	++res;
       }
   }
