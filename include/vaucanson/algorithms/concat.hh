@@ -27,12 +27,12 @@ namespace vcsn {
 
   /*! \addtogroup algorithms */  /* @{ */
 
-  /*! Return the concatenation of two automata using epsilon transitions. */
+  //! Return the concatenation of two automata using epsilon transitions. */
   template <class A, class T>
   Element<A, T> 
   auto_concat(const Element<A, T>& lhs, const Element<A, T>& rhs);
 
-  /*! Return the concatenation of two automata using epsilon transitions. */
+  //! Return the concatenation of two automata using epsilon transitions. */
   template <class A, class T>
   void
   auto_in_concat(Element<A, T>& lhs, const Element<A, T>& rhs);

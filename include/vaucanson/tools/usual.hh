@@ -44,7 +44,7 @@ namespace vcsn {
 
     using namespace vcsn;
     using namespace vcsn::algebra;
-    using namespace vcsn::algebra::char_letter;
+    using namespace vcsn::algebra::small_alpha_letter;
 
     template <class F, class T>
     struct map : std::map<F,T>
@@ -56,8 +56,8 @@ namespace vcsn {
       utility::ref< 
       AutomatonImpl<labels_are_series,
 		    Series<NumericalSemiring, Words>,
-		    polynom<std::string, bool>,
-		    ManyLinks<polynom<std::string, bool>, NoTag, NoTag>,
+		    polynom<Word::value_t, bool>,
+		    ManyLinks<polynom<Word::value_t, bool>, NoTag, NoTag>,
 		    NoTag,
 		    map> >
     >

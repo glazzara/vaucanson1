@@ -33,7 +33,9 @@ namespace vcsn {
     T 
     RandomGenerator<T>::do_it()
     {
-      assert(!"No random generator for this type ");
+      // try to use a 'randomized' method in T.
+      // (work for static_ranged for instance.
+      return T().randomized();
     }
 
     template <class Iterator, class OutputIterator>

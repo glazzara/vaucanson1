@@ -27,10 +27,20 @@ namespace vcsn {
   
   namespace algebra {
 
+    namespace small_alpha_letter {
+
+      typedef 
+      SetWords<Alphabet>					Words;
+      
+      typedef
+      Element<Words, std::basic_string<Letter> >     	        Word;
+
+    } // static_alpha_letter
+
     namespace char_letter {
 
       typedef 
-      SetWords<Element<Alphabets, std::set<char> > >		Words;
+      SetWords<Alphabet>					Words;
       
       typedef
       Element<Words, std::string>			        Word;

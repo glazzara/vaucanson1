@@ -20,22 +20,31 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_ALPHABETS_PREDEFS_HH
 # define VCSN_ALGEBRA_CONCRETE_ALPHABETS_PREDEFS_HH
 
+# include <vaucanson/algebra/concrete/letter/range.hh>
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
 namespace vcsn {
 
   namespace algebra {
 
+    namespace small_alpha_letter {
+      
+      typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
+      typedef SetAlphabets<Letter>				   Alphabets;
+      typedef Element<Alphabets, std::set<Letter> >		   Alphabet;
+
+    } // small_alpha_letter
+
     namespace char_letter {
 
-      typedef algebra::SetAlphabets<char>			   Alphabets;
+      typedef SetAlphabets<char>				   Alphabets;
       typedef Element<Alphabets, std::set<char> >		   Alphabet;
 
     } // char_letter
 
     namespace int_letter {
 
-      typedef algebra::SetAlphabets<int>			   Alphabets;
+      typedef SetAlphabets<int>					   Alphabets;
       typedef Element<Alphabets, std::set<int> >		   Alphabet;
 
     } // int_letter
