@@ -183,8 +183,8 @@ namespace vcsn {
 
   TParam
   ADAPT_WORD_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
-				WordValue, WeightValue,
-				SerieValue, Letter, Tag>);
+				 WordValue, WeightValue,
+				 SerieValue, Letter, Tag>);
 
   TParam
   ADAPT_SERIE_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
@@ -256,25 +256,91 @@ namespace vcsn {
   };
 
   // This implementation can be used as a transducer one.
-//   template <class Kind,
-// 	    class WordValue,
-// 	    class WeightValue,
-// 	    class SerieValue,
-// 	    class Letter,
-// 	    class Tag>
-//   struct transducer_traits<Graph<Kind, 
-// 				 WordValue, 
-// 				 WeightValue, 
-// 				 SerieValue, 
-// 				 Letter,
-// 				 Tag>  > 
-//   {
-//     typedef WordValue			input_monoid_elt_value_t;
-//     typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t 
-//     output_monoid_elt_value_t;
-//     typedef typename algebra::series_traits<WeightValue>::weight_value_t
-//     output_weight_value_t;
-//   };
+  template <class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SerieValue,
+	    class Letter,
+	    class Tag>
+  struct transducer_traits<Graph<Kind, 
+				 WordValue, 
+				 WeightValue, 
+				 SerieValue, 
+				 Letter,
+				 Tag>  > 
+  {
+    typedef WordValue			input_monoid_elt_value_t;
+    typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t 
+    output_monoid_elt_value_t;
+    typedef typename algebra::series_traits<WeightValue>::weight_value_t
+    output_weight_value_t;
+  };
+
+  // Explain how to project type of transducer into input automaton type.
+  template <class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SerieValue,
+	    class Letter,
+	    class Tag>
+  struct projection_traits<Graph<Kind,
+				 WordValue,
+				 WeightValue,
+				 SerieValue,
+				 Letter,
+				 Tag>  >
+  {
+    typedef Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
+    self_t;
+    typedef typename transducer_traits<self_t>::output_weight_value_t
+    weight_value_t;
+    typedef typename transducer_traits<self_t>::input_monoid_value_t
+    monoid_value_t;
+    typedef typename mute_serie_impl<SerieValue,
+				     weight_value_t,
+				     monoid_value_t>
+    ::ret serie_value_t;
+
+    typedef
+    Graph<Kind,
+	  monoid_value_t,
+	  weight_value_t,
+	  serie_value_t,
+	  Letter,
+	  Tag>
+    ret;
+  };
+
+  // Explain how to extend an input automaton into a transducer.
+  template <class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SerieValue,
+	    class Letter,
+	    class Tag>
+  struct extension_traits<Graph<Kind,
+				WordValue,
+				WeightValue,
+				SerieValue,
+				Letter,
+				Tag>  >
+  {
+    typedef Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
+    self_t;
+    typedef typename automaton_traits<self_t>::monoid_value_t
+    monoid_value_t;
+    typedef typename mute_serie_impl<SerieValue, SerieValue, monoid_value_t>
+    ::ret serie_value_t;
+
+    typedef
+    Graph<Kind,
+	  monoid_value_t,
+	  SerieValue,
+	  serie_value_t,
+	  Letter,
+	  Tag>
+    ret;
+  };
 
 } // vcsn
 

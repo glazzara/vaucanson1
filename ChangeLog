@@ -1,5 +1,16 @@
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/automata/concrete/graph.hh: 
+		Define transducer traits.
+	* include/vaucanson/automata/concept/transducer_ops.hh,
+  	  include/vaucanson/automata/concept/transducer_ops.hxx,
+	  include/vaucanson/automata/concept/transducer.hh,
+	  include/vaucanson/automata/concept/transducer_base.hh,
+	  include/vaucanson/automata/concept/transducer.hxx,
+	  include/vaucanson/automata/concept/transducer_base.hxx: New.
+
+2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata_ops.hxx: Improve letter_query.
 	* include/vaucanson/automata/concrete/graph.hxx: 
 		Use std::list<hedge_t> instead of std::set<hedge_t>
