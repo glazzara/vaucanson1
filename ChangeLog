@@ -1,5 +1,12 @@
 2004-07-12  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx: Modify
+	op_add_weighted_edge to take a monoid element value.
+	* include/vaucanson/automata/concept/automata_base.hxx: Update.
+
+2004-07-12  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata_base.hh,
 	* include/vaucanson/automata/concept/automata_base.hxx: Modify
 	add_weighted_edge to take a monoid element value.

@@ -196,10 +196,10 @@ namespace vcsn {
 		       hstate_t from,
 		       hstate_t to,
 		       const typename Element<S, T>::semiring_elt_t& w,
-		       const typename Element<S, T>::monoid_elt_t& m)
+		       const typename Element<S, T>::monoid_elt_value_t& m)
   {
     typename Element<S, T>::series_set_elt_t series (s.series());
-    series.assoc(m, w);
+    series.assoc(m, w.value());
     return op_add_series_edge(s, v, from, to, series);
   }
 

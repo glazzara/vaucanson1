@@ -136,7 +136,7 @@ namespace vcsn {
 		       hstate_t from,
 		       hstate_t to,
 		       const typename Element<S, T>::semiring_elt_t& w,
-		       const typename Element<S, T>::monoid_elt_t& m);
+		       const typename Element<S, T>::monoid_elt_value_t& m);
 
   template <class S, class T>
   hedge_t
