@@ -32,11 +32,10 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DUMP_VISITOR_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DUMP_VISITOR_HXX
 
-# include <sstream>
-
 # include <vaucanson/algebra/implementation/series/rat/dump_visitor.hh>
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
-# include <vaucanson/tools/usual_escaped_characters.hh>
+
+# include <vaucanson/misc/escaper.hh>
 
 namespace vcsn {
 
@@ -49,15 +48,6 @@ namespace vcsn {
     inline
     int
     print_mode()
-    {
-      static const int idx = std::ios::xalloc();
-      return idx;
-    }
-
-    /// Characters to escape.
-    inline
-    int
-    escaped()
     {
       static const int idx = std::ios::xalloc();
       return idx;
@@ -101,13 +91,10 @@ namespace vcsn {
       DumpVisitor(std::ostream& ostr = std::cout)
 	: ostr_ (ostr)
       {
-	if (not ostr_.pword(escaped()))
-	  ostr_ << setesc (tools::usual_escaped_characters());
-
 	if (not ostr_.pword(rat::zero()))
 	  ostr_ << setzero ("0");
 
-	if (not ostr_.pword(id()))
+	if (not ostr_.pword(rat::id()))
 	  ostr_ << setid ("1");
       }
 
@@ -290,36 +277,21 @@ namespace vcsn {
       void
       constant(const monoid_elt_value_t& m)
       {
-	const std::set<char>& e = *static_cast<const std::set<char>*>
-	  (ostr_.pword(escaped()));
-
-	// FIXME: This code should be in operator << for monoid elements.
-	std::ostringstream	o;
-	o << m;
-	std::string		w = o.str();
-	for (std::string::const_iterator i = w.begin();
-	     i != w.end();
-	     ++i)
-	  if (e.find(*i) != e.end())
-	    ostr_ << "\\" << *i;
-	  else
-	    ostr_ << *i;
+	ostr_ << utility::make_escaper(m);
       }
 
       virtual
       void
       zero()
       {
-	ostr_ << *static_cast<const std::string*>
-	  (ostr_.pword(rat::zero()));
+	ostr_ << *static_cast<const std::string*> (ostr_.pword(rat::zero()));
       }
 
       virtual
       void
       one()
       {
-	ostr_ << *static_cast<const std::string*>
-	  (ostr_.pword(id()));
+	ostr_ << *static_cast<const std::string*> (ostr_.pword(id()));
       }
 
     protected:
@@ -337,24 +309,6 @@ namespace vcsn {
       DumpVisitor<Word, Weight> v (ostr);
       e.accept(v);
       return ostr;
-    }
-
-    /*--------.
-    | iomanip |
-    `--------*/
-
-    template <class Self>
-    const Self&
-    iomanip<Self>::self() const
-    {
-      return *static_cast<const Self*> (this);
-    }
-
-    template <class IOM>
-    std::ostream&
-    operator << (std::ostream& ostr, const iomanip<IOM>& m)
-    {
-      return m.self() (ostr);
     }
 
     /*------.
@@ -385,35 +339,6 @@ namespace vcsn {
       return print_mode_t (ostr.iword(print_mode()));
     }
 
-    /*-------.
-    | setesc |
-    `-------*/
-
-    inline
-    setesc::setesc(const std::set<char>& s) : s_ (s)
-    {
-    }
-
-    inline
-    std::ostream&
-    setesc::operator () (std::ostream& ostr) const
-    {
-      if (ostr.pword(escaped()))
-	delete static_cast<std::set<char>*> (ostr.pword(escaped()));
-      ostr.pword(escaped()) = new std::set<char> (s_);
-      return ostr;
-    }
-
-    /*-------.
-    | getesc |
-    `-------*/
-
-    inline
-    std::set<char>& getesc(std::ostream& ostr)
-    {
-      return *static_cast<std::set<char>*> (ostr.pword(escaped()));
-    }
-
     /*--------.
     | setzero |
     `--------*/
@@ -427,9 +352,13 @@ namespace vcsn {
     std::ostream&
     setzero::operator () (std::ostream& ostr) const
     {
-      if (ostr.pword(zero()))
-	delete static_cast<std::string*> (ostr.pword(zero()));
-      ostr.pword(zero()) = new std::string (z_);
+      const int idx = zero();
+
+      if (not ostr.pword(idx))
+	ostr.register_callback(utility::pword_delete<std::string>, idx);
+      else
+	delete static_cast<std::string*> (ostr.pword(idx));
+      ostr.pword(idx) = new std::string (z_);
       return ostr;
     }
 
@@ -446,9 +375,13 @@ namespace vcsn {
     std::ostream&
     setid::operator () (std::ostream& ostr) const
     {
-      if (ostr.pword(id()))
-	delete static_cast<std::string*> (ostr.pword(id()));
-      ostr.pword(id()) = new std::string (i_);
+      const int idx = id();
+
+      if (not ostr.pword(idx))
+	ostr.register_callback(utility::pword_delete<std::string>, idx);
+      else
+	delete static_cast<std::string*> (ostr.pword(idx));
+      ostr.pword(idx) = new std::string (i_);
       return ostr;
     }
 

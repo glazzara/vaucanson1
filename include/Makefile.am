@@ -31,6 +31,10 @@ nobase_include_HEADERS =						   \
 	vaucanson/config/system.hh					   \
 	vaucanson/config/math.hh					   \
 	vaucanson/config/pconf.hh					   \
+	vaucanson/misc/iomanip.hh					   \
+	vaucanson/misc/iomanip.hxx					   \
+	vaucanson/misc/escaper.hh					   \
+	vaucanson/misc/escaper.hxx					   \
 	vaucanson/misc/random.hh					   \
 	vaucanson/misc/random.hxx					   \
 	vaucanson/misc/limits.hh					   \

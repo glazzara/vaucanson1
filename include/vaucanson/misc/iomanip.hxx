@@ -1,7 +1,7 @@
-// usual_escaped_characters.hh: this file is part of the Vaucanson project.
+// iomanip.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -29,33 +29,52 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_TOOLS_USUAL_ESCAPED_CHARACTERS_HH
-# define VCSN_TOOLS_USUAL_ESCAPED_CHARACTERS_HH
+#ifndef VCSN_MISC_IOMANIP_HXX
+# define VCSN_MISC_IOMANIP_HXX
 
 /**
- * @file usual_escaped_characters.hh
+ * @file iomanip.hxx
  *
- * Declarations of the usual_escaped_characters() function.
- * @see vcsn::tools::usual_escaped_characters().
- * @author Loic Fosse <loic.fosse@lrde.epita.fr>
+ * Definitions of the iomanip class and related functions.
+ * @see utility::iomanip.
+ * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
  */
 
-# include <set>
+# include <vaucanson/misc/iomanip.hh>
 
-namespace vcsn {
+namespace utility
+{
 
-  namespace tools {
+  /*--------.
+  | iomanip |
+  `--------*/
 
-    /// Return a set filled with ".+*()\ 10[]".
-    std::set<char> usual_escaped_characters();
+  template <class Self>
+  const Self&
+  iomanip<Self>::self() const
+  {
+    return *static_cast<const Self*> (this);
+  }
 
-  } // End of namespace tools.
+  template <class IOM>
+  std::ostream&
+  operator << (std::ostream& ostr, const iomanip<IOM>& m)
+  {
+    return m.self() (ostr);
+  }
 
-} // End of namespace vcsn.
+  /*-------------.
+  | pword_delete |
+  `-------------*/
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/tools/usual_escaped_characters.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+  template <class T>
+  void
+  pword_delete(std::ios_base::event ev, std::ios_base &io, int idx)
+  {
+    if (ev == std::ios_base::erase_event)
+      delete static_cast<T*> (io.pword(idx));
+  }
 
+} // End of namespace utility.
 
-#endif // ! VCSN_TOOLS_USUAL_ESCAPED_CHARACTERS_HH
+#endif // ! VCSN_MISC_IOMANIP_HXX

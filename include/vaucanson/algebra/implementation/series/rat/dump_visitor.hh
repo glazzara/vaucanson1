@@ -37,6 +37,7 @@
 # include <set>
 
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
+# include <vaucanson/misc/iomanip.hh>
 
 namespace vcsn
 {
@@ -62,20 +63,8 @@ namespace vcsn
     std::ostream&
     operator << (std::ostream& ostr, const exp<Word, Weight>& e);
 
-
-    /// Base class for IO manipulations.
-    template <class Self>
-    struct iomanip
-    {
-      const Self& self() const;
-    };
-
-    template <class IOM>
-    std::ostream&
-    operator << (std::ostream& ostr, const iomanip<IOM>& m);
-
     /// Manipulator to set the print mode of a rational expression.
-    struct setpm : public iomanip<setpm>
+    struct setpm : public utility::iomanip<setpm>
     {
       setpm (print_mode_t mode);
       std::ostream& operator () (std::ostream& ostr) const;
@@ -86,21 +75,8 @@ namespace vcsn
     /// Retrieve the print mode of a stream.
     print_mode_t getpm(const std::ostream& ostr);
 
-    /// Manipulator to set the characters that need to be escaped.
-    struct setesc : public iomanip<setesc>
-    {
-      setesc(const std::set<char>& s);
-      std::ostream& operator () (std::ostream& ostr) const;
-    protected:
-      const std::set<char>& s_;
-    };
-
-    /// Retrieve the escaped characters set of a stream.
-    std::set<char>& getesc(std::ostream& ostr);
-
-
     /// Manipulator to set the representation of the null series.
-    struct setzero : public iomanip<setzero>
+    struct setzero : public utility::iomanip<setzero>
     {
       setzero(const std::string& zero);
       std::ostream& operator () (std::ostream& ostr) const;
@@ -109,7 +85,7 @@ namespace vcsn
     };
 
     /// Manipulator to set the representation of the identity series.
-    struct setid : public iomanip<setid>
+    struct setid : public utility::iomanip<setid>
     {
       setid(const std::string& id);
       std::ostream& operator () (std::ostream& ostr) const;

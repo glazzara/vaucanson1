@@ -33,6 +33,7 @@
 # define VCSN_ALGEBRA_CONCEPT_FREEMONOID_BASE_HXX
 
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <vaucanson/misc/escaper.hh>
 
 namespace vcsn {
 
@@ -172,6 +173,10 @@ namespace vcsn {
     return op_parse(dest.structure(), dest.value(), s, i, escaped);
   }
 
+  /*----------.
+  | Operators |
+  `----------*/
+
   // default implementation of word parsing assumes the fact that
   // an alphabet letter can be constructed from a 'char'.
   // specialized this function according to your alphabet if this
@@ -247,7 +252,8 @@ namespace vcsn {
     for (const_iterator i = op_begin_const(s.self(), v);
 	 i != op_end_const(s.self(), v);
 	 ++i)
-      st << *i;
+      st << utility::make_escaper(*i);
+
     return st;
   }
 

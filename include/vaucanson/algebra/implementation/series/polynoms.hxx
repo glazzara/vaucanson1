@@ -32,11 +32,13 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HXX
 
+# include <sstream>
+
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
+
 # include <vaucanson/misc/contract.hh>
-# include <sstream>
-# include <vaucanson/tools/usual_escaped_characters.hh>
+# include <vaucanson/misc/escaper.hh>
 
 namespace vcsn {
 
@@ -620,28 +622,12 @@ namespace vcsn {
     | input-output |
     `-------------*/
 
-  // FIXME: use it in rat::DumpVisitor
-  template <typename Ost, typename T>
-  Ost& escaped_output(Ost& ost, const std::set<char>& escaped, const T& t)
-  {
-    std::ostringstream	o_str;
-    o_str << t;
-    std::string		w = o_str.str();
-
-    for (std::string::const_iterator i = w.begin(); i != w.end(); ++i)
-      {
-	if (escaped.find(*i) != escaped.end())
-	  ost << "\\";
-	ost << *i;
-      }
-    return ost;
-  }
-
   template<typename W, typename M, typename St, typename Tm, typename Tw>
-  St& op_rout(const algebra::Series<W, M>& s, St& st, const algebra::polynom<Tm, Tw>& p)
+  St& op_rout(const algebra::Series<W, M>& s,
+	      St& st,
+	      const algebra::polynom<Tm, Tw>& p)
   {
     typename algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    std::set<char> escape_set = tools::usual_escaped_characters();
 
     while(i != p.end())
       {
@@ -656,11 +642,7 @@ namespace vcsn {
 	}
 
 	if (i->first != identity_value(SELECT(M), SELECT(Tm)))
-	{
-	  std::ostringstream o_str;
-	  op_rout(s.monoid(), o_str, i->first);
-	  escaped_output(st, escape_set, o_str.str());
-	}
+	  op_rout(s.monoid(), st, i->first);
 	else
 	  st << "1";
 
@@ -775,15 +757,13 @@ namespace std {
 			   const vcsn::algebra::polynom<Tm, Tw>& p)
   {
     typename vcsn::algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    std::set<char> escape_set = vcsn::tools::usual_escaped_characters();
 
     while (i != p.end())
       {
 	if (i != p.begin())
 	  out << "+";
-	out << "(" << i->second << " ";
-	vcsn::escaped_output(out, escape_set, i->first) ;
-	out << ")";
+	out << "(" << i->second << " "
+	    << utility::make_escaper(i->first) << ")";
 	++i;
       }
 

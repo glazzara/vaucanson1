@@ -1,3 +1,23 @@
+2004-12-03  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	Do not handle character escaping directly. Remove memory leaks by
+	registering callback in streams. Move iomanip and escaped characters
+	handling in the following files.
+	* include/vaucanson/misc/iomanip.hh,
+	* include/vaucanson/misc/iomanip.hxx: New. Base class for
+	IO manipulators and related functions. Mostly comes from
+	dump_visitor.hh and dump_visitor.hxx.
+	* include/vaucanson/misc/escaper.hh,
+	* include/vaucanson/misc/escaper.hxx: New. Stuff related with caracter
+	escaping. Mostly comes from dump_visitor.hh and dump_visitor.hxx.
+	* include/Makefile.am: Update.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Use
+	utility::escaper.
+	* include/vaucanson/tools/usual_escaped_characters.hh: Add comments.
+
 2004-12-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	Another bug from Petr Ambroz. See below for more information.
