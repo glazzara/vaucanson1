@@ -1,5 +1,13 @@
 2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
 
+	* reheader.pl: Add 2005 to copyright appends.
+	
+	* Makefile.am: Mention forgotten xml.m4 in the installable m4
+	extensions. Remove EXTRA_DIST since the dist_m4data_DATA already
+	mentions the files.
+
+2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
+
 	Document some more.
 	
 	* doc/FAQ.txt: Document a hidden misfeature of the expression
