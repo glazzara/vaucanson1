@@ -53,6 +53,61 @@ std::string test(tests::Tester& t,
   return s.str();
 }
 
+template <typename T, typename Expr>
+struct specialized_tests
+{
+  static void run(tests::Tester& t, Expr& e)
+  {
+    test(t, e, "0", "0");
+    test(t, e, "1", "1");
+    test(t, e, "a", "a");
+    test(t, e, "(5 1)", "(5 1)");
+    test(t, e, "(2 a)", "(2 a)");
+    test(t, e, "(a+b)", "(a+b)");
+    test(t, e, "a.(a+b)", "(aa+ab)");
+    test(t, e, "(a+b).a", "(aa+ba)");
+    test(t, e, "a+a", "(2 a)");  
+    test(t, e, "(2 a)+a", "(3 a)");
+    test(t, e, "a+(2 a)", "(3 a)");
+    test(t, e, "(a+(2 a+b))", "((3 a)+b)");
+    test(t, e, "((a+b)+a))", "((2 a)+b)");
+    test(t, e, "3 b.(a+2 b)", "((3 ba)+(6 bb))");
+    test(t, e, "(a+2 b).(4 a)", "((4 aa)+(8 ba))");
+    test(t, e, "(a+2 b).(a 4)", "((4 aa)+(8 ba))");
+    test(t, e, "2 a.(a+b).3 b", "((6 aab)+(6 abb))");
+    test(t, e, "a+(a+(a+(a+a))+a)", "(6 a)");
+    test(t, e, "(1 2)", "(2 1)");
+    test(t, e, "(a 3)", "(3 a)");
+    test(t, e, "((3 a) 4)", "(12 a)");
+    test(t, e, "(a 2)+a", "(3 a)");
+    test(t, e, "a+(a 2)", "(3 a)");
+    test(t, e, "(a+(a 2+b))", "((3 a)+b)");
+    test(t, e, "b 3.(a+b 2)", "((3 ba)+(6 bb))");
+    test(t, e, "(a+b 2).(a 4)", "((4 aa)+(8 ba))");
+    test(t, e, "a 2.(a+b).b 3", "((6 aab)+(6 abb))");
+  }
+};
+
+template <typename Expr>
+struct specialized_tests<bool, Expr>
+{
+  static void run(tests::Tester& t, Expr& e)
+  {
+    test(t, e, "0", "0");
+    test(t, e, "1", "1");
+    test(t, e, "a", "a");
+    test(t, e, "(a+b)", "(a+b)");
+    test(t, e, "a.(a+b)", "(aa+ab)");
+    test(t, e, "(a+b).a", "(aa+ba)");
+    test(t, e, "a+a", "a");  
+    test(t, e, "(a+(a+b))", "(a+b)");
+    test(t, e, "((a+b)+a))", "(a+b)");
+    test(t, e, "a.(a+b).b", "(aab+abb)");
+    test(t, e, "a+(a+(a+(a+a))+a)", "a");
+    test(t, e, "(a+b).(a+b)", "(((aa+ab)+ba)+bb)");
+  }
+};
+
 template <class Expr>
 bool krat_exp_verbalization_test(tests::Tester& tg)
 {
@@ -79,22 +134,9 @@ bool krat_exp_verbalization_test(tests::Tester& tg)
   series_t s(semiring, monoid);
 
   krat_exp_t e(s);
+  specialized_tests<typename semiring_elt_t::value_t, Expr>::run(t, e);
 
-  test(t, e, "(a+b)", "(a+b)");
-  test(t, e, "a.(a+b)", "(aa+ab)");
-  test(t, e, "(a+b).a", "(aa+ba)");
-  test(t, e, "a+a", "(2 a)");  
-  test(t, e, "(2 a)+a", "(3 a)");
-  test(t, e, "a+(2 a)", "(3 a)");
-  test(t, e, "(a+(2 a+b))", "((3 a)+b)");
-  test(t, e, "((a+b)+a))", "((2 a)+b)");
-  test(t, e, "3 b.(a+2 b)", "((3 ba)+(6 bb))");
-  test(t, e, "(a+2 b).(4 a)", "((4 aa)+(8 ba))");
-  test(t, e, "(a+2 b).(a 4)", "((4 aa)+(8 ba))");
-  test(t, e, "2 a.(a+b).3 b", "((6 aab)+(6 abb))");
-  test(t, e, "a+(a+(a+(a+a))+a)", "(6 a)");
   return t.all_passed();
-
 }
 
 #endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_REALTIME_TEST_HH

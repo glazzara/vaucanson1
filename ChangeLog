@@ -1,3 +1,8 @@
+2004-03-09  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh:
+	  Correct it for boolean series and complete it.
+
 2004-03-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* xml/Makefile.am: Fix installation directory for XML related files.
