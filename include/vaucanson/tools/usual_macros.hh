@@ -126,7 +126,7 @@
          ++S)
 
 #define remove_in(S, V) \
-    S.erase(std::remove(S.begin(), S.end(), v), S.end())
+    S.erase(std::remove(S.begin(), S.end(), V), S.end())
 
 // These macros can be use instead of some method calls.
 // This is really tricky and dirty but so useful !

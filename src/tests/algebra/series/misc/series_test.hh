@@ -32,7 +32,6 @@
 
 # include <vaucanson/config/system.hh>
 # include <check/tester.hh>
-# include <fundamental/design_pattern-test.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/tools/usual.hh>
 
@@ -73,9 +72,6 @@ bool series_test(tests::Tester& t)
   series_elt_t     s3(series, series.identity(SELECT(T)));
   series_elt_t     s4(series, series.zero(SELECT(T)));
   semiring_elt_t   zero = weights.zero(SELECT(semiring_value_t));
-
-  // FIXME: add element operators to krat to permit this static test.
-  // test_design_pattern<S, T>();
 
   TEST(t, "get of series.", s1.get(w1) != zero);
   TEST(t, "set of series.", s1.get(w2) == zero);

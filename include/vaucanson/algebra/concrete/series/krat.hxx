@@ -90,7 +90,8 @@ namespace vcsn {
   }
 
   template <typename W, typename M, typename Tm, typename Tw>
-  Tm op_choose_from_supp(const algebra::Series<W, M>&, const rat::exp<Tm, Tw>& m)
+  Tm op_choose_from_supp(const algebra::Series<W, M>&, 
+			 const rat::exp<Tm, Tw>& m)
   {
     rat::RandomVisitor<Tm, Tw> v;
     m.accept(v);

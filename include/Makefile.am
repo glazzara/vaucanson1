@@ -108,6 +108,12 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/hopcroft_minimization.hxx		     \
 	vaucanson/algorithms/isomorph.hh			     \
 	vaucanson/algorithms/isomorph.hxx			     \
+	vaucanson/algorithms/is_letterized.hh			     \
+	vaucanson/algorithms/is_letterized.hxx                       \
+	vaucanson/algorithms/is_normalized.hh			     \
+	vaucanson/algorithms/is_normalized.hxx                       \
+	vaucanson/algorithms/is_realtime.hh			     \
+	vaucanson/algorithms/is_realtime.hxx                         \
 	vaucanson/algorithms/krat_exp_cderivation.hh		     \
 	vaucanson/algorithms/krat_exp_cderivation.hxx		     \
 	vaucanson/algorithms/krat_exp_constant_term.hh		     \
