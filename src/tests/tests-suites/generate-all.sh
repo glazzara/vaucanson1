@@ -38,6 +38,5 @@
 ../bin/generate-test-suite.sh \
    usual_automaton_t \
    usual_automaton_t.defs \
-   ../automata/implementation_check
+   ../automata
 
-   

@@ -1,3 +1,14 @@
+2003-09-08  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* src/tests/tests-suites/generate-all.sh: Generate algorithms tests.
+	* src/tests/automata/algos/sub_automaton_test.hh: New test.
+	
+2003-09-08  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+	
+	* include/vaucanson/misc/support.hh,
+	* include/vaucanson/misc/support.hxx: Add a max() method to
+	SparseInterval and Support. Add an == operator to SupportIterator.
+
 2003-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/search.hxx,
