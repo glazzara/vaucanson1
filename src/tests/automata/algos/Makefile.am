@@ -23,7 +23,6 @@ EXTRA_DIST = 					\
 	minimization_test.hh			\
 	extract_test.hh				\
 	generalized_test.hh			\
-	brzozowski_test.hh			\
 	berry_sethi_test.hh			\
 	derivatives_automaton_test.hh		\
 	is_isomorph_test.hh			\

@@ -1,3 +1,12 @@
+2004-06-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/boolean_automata/Makefile.am: Add brzozowski_test.hh in
+	EXTRA_DIST.
+	* src/tests/automata/algos/Makefile.am: Remove brzozowski_test.hh from
+	EXTRA_DIST.
+	* configure.ac: Generate
+	src/tests/context_headers/transducers/Makefile.
+
 2004-06-09  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/standard_of.hxx: Typo.

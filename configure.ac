@@ -113,6 +113,7 @@ AC_CONFIG_FILES([
 	src/tests/transducers/Makefile
 	src/tests/context_headers/Makefile
 	src/tests/context_headers/automata/Makefile
+	src/tests/context_headers/transducers/Makefile
 	src/tests/test-suites/Makefile
 	src/tests/xml/Makefile
 	src/demos/Makefile
@@ -132,6 +133,45 @@ AC_CONFIG_FILES([
 	xml/Makefile])
 
 dnl GENERATED LINES FOR TESTS - DO NOT EDIT
+VCSN_TESTS([algebra_alphabet_set_alpha])
+VCSN_TESTS([algebra_alphabet_set_char])
+VCSN_TESTS([algebra_alphabet_set_int])
+VCSN_TESTS([algebra_alphabet_set_pair_char_int])
+VCSN_TESTS([algebra_free_monoid_string])
+VCSN_TESTS([algebra_numerical_semiring_double])
+VCSN_TESTS([algebra_numerical_semiring_float])
+VCSN_TESTS([algebra_numerical_semiring_int])
+VCSN_TESTS([algebra_numerical_semiring_rational])
+VCSN_TESTS([algebra_series_krat_bool_string])
+VCSN_TESTS([algebra_series_krat_cderivation])
+VCSN_TESTS([algebra_series_krat_derivation])
+VCSN_TESTS([algebra_series_krat_double_string])
+VCSN_TESTS([algebra_series_krat_int_string])
+VCSN_TESTS([algebra_series_krat_partial_derivation])
+VCSN_TESTS([algebra_series_polynom_bool_string])
+VCSN_TESTS([algebra_series_polynom_double_string])
+VCSN_TESTS([algebra_series_polynom_int_string])
+VCSN_TESTS([algebra_tropical_semiring_max_bool])
+VCSN_TESTS([algebra_tropical_semiring_max_double])
+VCSN_TESTS([algebra_tropical_semiring_max_float])
+VCSN_TESTS([algebra_tropical_semiring_max_int])
+VCSN_TESTS([algebra_tropical_semiring_max_rational])
+VCSN_TESTS([algebra_tropical_semiring_min_bool])
+VCSN_TESTS([algebra_tropical_semiring_min_double])
+VCSN_TESTS([algebra_tropical_semiring_min_float])
+VCSN_TESTS([algebra_tropical_semiring_min_int])
+VCSN_TESTS([algebra_tropical_semiring_min_rational])
+VCSN_TESTS([boolean_automaton])
+VCSN_TESTS([boolean_transducer])
+VCSN_TESTS([context_headers_boolean])
+VCSN_TESTS([context_headers_boolean_transducer])
+VCSN_TESTS([context_headers_r])
+VCSN_TESTS([context_headers_z])
+VCSN_TESTS([context_headers_z_max_plus])
+VCSN_TESTS([r_automaton])
+VCSN_TESTS([tropical_min_automaton])
+VCSN_TESTS([z_automaton])
+VCSN_TESTS([z_max_plus_automaton])
 dnl END OF GENERATED LINES FOR TESTS - DO NOT EDIT
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
