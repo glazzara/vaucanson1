@@ -1,7 +1,7 @@
 // words.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -40,20 +40,16 @@ namespace vcsn {
 
     /*! @addtogroup algebra    */ /*! @{ */
     /*! @addtogroup freemonoid */ /*! @{ */
-    
+
     /*------------.
     | FreeMonoid<A> |
     `------------*/
     //! Implementation of a free monoid which aggregates its alphabet.
     template<typename A>
-    struct FreeMonoid 
+    struct FreeMonoid
       : FreeMonoidBase<FreeMonoid<A> >
     {
       typedef A alphabets_elt_t;
-
-      //! Default constructor.
-      //! @bug FIXME: this interface should not exist (freemonoid is not defined without an alphabet)
-      FreeMonoid();
 
       //! Constructor based on an alphabet.
       FreeMonoid(const A& a);
@@ -95,7 +91,7 @@ namespace vcsn {
     //! SetWord is dynamic iff its alphabet is.
     static const bool		ret = A::dynamic;
   };
-  
+
   /*----------------------------.
   | MetaElement<FreeMonoid<A>, T> |
   `----------------------------*/
@@ -105,7 +101,7 @@ namespace vcsn {
   struct MetaElement<algebra::FreeMonoid<A>, T>
     : MetaElement<algebra::FreeMonoidBase<algebra::FreeMonoid<A> >, T>
   {};
-  
+
   /*! @} @} */
 
   template <class A>
@@ -114,17 +110,17 @@ namespace vcsn {
   {
     //! Commonly a free monoid use the multiplication symbol as operation.
     typedef algebra::mul_kind semigroup_kind;
-    
+
     typedef A		alphabet_t;
   };
 
-  
+
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concrete/free_monoid/words.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_FREE_MONOID_WORDS_HH

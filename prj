@@ -1,52 +1,31 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 492)
-(Parent-Version vaucanson 0 491)
+(Project-Version vaucanson 0 493)
+(Parent-Version vaucanson 0 492)
 (New-Version-Log "")
 
-(Version-Log "2004-02-27  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+(Version-Log "2004-03-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* include/vaucanson/misc/static.hh,
-	* include/vaucanson/misc/contract.hh,
-	* include/vaucanson/design_pattern/element_ops.hxx,
-	* include/vaucanson/algebra/concept/alphabets_base.hh,
-	* include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx,
-	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh,
-	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx,
-	* include/vaucanson/algebra/concrete/series/series.hh,
-	* include/vaucanson/automata/concept/automata.hh,
-	* include/vaucanson/automata/concept/automata.hxx,
-	* include/vaucanson/automata/concept/automata_base.hxx,
-	* include/vaucanson/automata/concept/automata_ops.hxx,
-	* include/vaucanson/automata/concept/automata_ops.hh,
-	* include/vaucanson/automata/concept/transducer.hh,
-	* include/vaucanson/automata/concrete/graph.hh,
-	* include/vaucanson/automata/concrete/transpose_view.hh,
-	* include/vaucanson/automata/concrete/transpose_view.hxx,
-	* include/vaucanson/automata/concrete/automaton_view.hxx,
-	* include/vaucanson/algorithms/complete.hh,
-	* include/vaucanson/algorithms/aut_to_exp.hh,
-	* include/vaucanson/algorithms/normalized.hh,
-	* include/vaucanson/algorithms/standard.hh,
-	* include/vaucanson/algorithms/transpose.hh,
-	* include/vaucanson/algorithms/berry_sethi.hxx,
-	* include/vaucanson/algorithms/krat_exp_constant_term.hxx,
-	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
-	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hh,
-	* include/vaucanson/algorithms/is_realtime.hh,
-	* include/vaucanson/misc/window.hh,
-	* include/vaucanson/misc/bitset.hh,
-	* include/vaucanson/algorithms/search.hxx,
-	* include/vaucanson/algorithms/search.hh,
-	* include/vaucanson/misc/char_traits.hh,
-	* include/vaucanson/algorithms/krat_exp_flatten.hh: Adapt the comments
-	and some declarations to avoid some doxygen warnings. Add some
-	documentation.
-	* doc/doc.doxy.in: Update for version 1.3.6 of doxygen.
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/words.hxx: Remove
+	constructor for FreeMonoid with no arguments.
+	* src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh:
+	New.
+	* src/tests/algebra/free_monoid/free_monoid_test.hh: Fix instanciation
+	of an Element<S, T> without initialiazing the set. Improve.
+	* src/tests/bin/generate-test-suite.sh: Adapt to handle test which are
+	expected to fail compilation.
+	* src/tests/algebra/free_monoid/Makefile.am,
+	* src/demos/fibonacci/fibonacci.cc: Update.
+
+	* src/tests/algebra/alphabets/alphabet_test.hh: Improve.
+
+	* include/vaucanson/tools/usual_escaped_characters.hxx: Add a missing
+	inline.
 
 ")
-(Checkin-Time "Fri, 27 Feb 2004 12:32:32 +0100")
+(Checkin-Time "Mon, 01 Mar 2004 11:40:33 +0100")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -129,7 +108,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.30 644))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.31 644))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -158,7 +137,7 @@
   (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.5 600))
   (src/tests/check/unique.cc (vaucanson/p/49_unique.cc 1.3 600))
   (src/tests/sanity/generate_files.sh (vaucanson/r/29_generate_f 1.8.1.1 700))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.8 700))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.9 700))
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.5 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
@@ -265,8 +244,8 @@
   (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.8 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.17 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.18 600))
-  (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.21 600))
-  (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.12 600))
+  (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.22 600))
+  (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.13 600))
   (include/vaucanson/algebra/concrete/letter/char_letter.hh (vaucanson/i/23_char_lette 1.4 600))
   (include/vaucanson/algebra/concrete/letter/range.hh (vaucanson/h/28_range.hh 1.6 600))
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.5 600))
@@ -308,9 +287,9 @@
 
   (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.6 600))
   (src/tests/algebra/alphabets/Makefile.am (vaucanson/h/36_Makefile.a 1.1 600))
-  (src/tests/algebra/alphabets/alphabet_test.hh (vaucanson/h/37_alphabet_t 1.7 600))
-  (src/tests/algebra/free_monoid/Makefile.am (vaucanson/h/34_Makefile.a 1.1 600))
-  (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.5 600))
+  (src/tests/algebra/alphabets/alphabet_test.hh (vaucanson/h/37_alphabet_t 1.8 600))
+  (src/tests/algebra/free_monoid/Makefile.am (vaucanson/h/34_Makefile.a 1.2 600))
+  (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.6 600))
   (src/tests/algebra/semiring/Makefile.am (vaucanson/h/39_Makefile.a 1.1 600))
   (src/tests/algebra/semiring/semiring_test.hh (vaucanson/h/38_semiring_t 1.6 600))
   (src/tests/algebra/series/Makefile.am (vaucanson/c/22_Makefile.a 1.8 600))
@@ -939,7 +918,7 @@
 ;; Files added by populate at Fri, 14 Nov 2003 23:46:29 +0100,
 ;; to version 0.454(w), by yann:
 
-  (src/demos/fibonacci/fibonacci.cc (vaucanson/s/19_fibonacci. 1.4 600))
+  (src/demos/fibonacci/fibonacci.cc (vaucanson/s/19_fibonacci. 1.5 600))
 
 ;; Files added by populate at Sat, 15 Nov 2003 21:52:28 +0100,
 ;; to version 0.455(w), by yann:
@@ -1004,7 +983,7 @@
 ;; Files added by populate at Fri, 30 Jan 2004 14:10:43 +0100,
 ;; to version 0.477(w), by fosse_l:
 
-  (include/vaucanson/tools/usual_escaped_characters.hxx (vaucanson/u/43_usual_esca 1.2 600))
+  (include/vaucanson/tools/usual_escaped_characters.hxx (vaucanson/u/43_usual_esca 1.3 600))
   (include/vaucanson/tools/usual_escaped_characters.hh (vaucanson/u/44_usual_esca 1.2 600))
 
 ;; Files added by populate at Sun, 01 Feb 2004 20:56:13 +0100,
@@ -1058,6 +1037,11 @@
 ;; to version 0.484(w), by clavei_t:
 
   (src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh (vaucanson/v/2_krat_exp_l 1.2 600))
+
+;; Files added by populate at Sun, 29 Feb 2004 15:45:11 +0100,
+;; to version 0.492(w), by clavei_t:
+
+  (src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh (vaucanson/v/3_constructo 1.1 644))
 )
 (Merge-Parents)
 (New-Merge-Parents)

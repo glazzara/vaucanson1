@@ -63,7 +63,7 @@ void eval_an_expression(const transducer_pt& t)
 
 int main()
 {
-  // 
+  //
   // Instanciation of the objects.
   //
   alphabet_t A, B;
@@ -73,9 +73,7 @@ int main()
   B.insert('x');
   B.insert('y');
   B.insert('z');
-  monoid_t A_star, B_star;
-  A_star = monoid_t(A);
-  B_star = monoid_t(B);
+  monoid_t A_star (A), B_star (B);
 
   NumericalSemiring Boole;
   typedef Element<NumericalSemiring, bool> mult_t;
@@ -92,7 +90,7 @@ int main()
   monoid_elt_t empty = identity_as<monoid_elt_value_t>::of(A_star);
   monoid_elt_t a_l(A_star, "a");
   monoid_elt_t b_l(A_star, "b");
-  
+
   fibg.add_io_edge(p, p, b_l, b_l);
   fibg.add_io_edge(p, q, a_l, empty);
   fibg.add_io_edge(q, q, a_l, a_l);
@@ -124,7 +122,7 @@ int main()
   hstate_t s = fibd.add_state();
   hstate_t t = fibd.add_state();
   hstate_t u = fibd.add_state();
-  
+
   fibd.add_io_edge(s, s, b_l, b_l);
   fibd.add_io_edge(s, t, b_l, empty);
   fibd.add_io_edge(t, s, a_l, a_l * a_l);
@@ -148,7 +146,7 @@ int main()
   tools::dot_dump(std::cerr, fibd, "fibd");
   eval_an_expression(fibd);
 
-  transducer_pt fibgd(A_A_transducer);  
+  transducer_pt fibgd(A_A_transducer);
   realtime_composition(fibg, fibd, fibgd);
   tools::dot_dump(std::cerr, fibgd, "fibgd");
   eval_an_expression(fibgd);

@@ -1,3 +1,22 @@
+2004-03-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/words.hxx: Remove
+	constructor for FreeMonoid with no arguments.
+	* src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh:
+	New.
+	* src/tests/algebra/free_monoid/free_monoid_test.hh: Fix instanciation
+	of an Element<S, T> without initialiazing the set. Improve.
+	* src/tests/bin/generate-test-suite.sh: Adapt to handle test which are
+	expected to fail compilation.
+	* src/tests/algebra/free_monoid/Makefile.am,
+	* src/demos/fibonacci/fibonacci.cc: Update.
+
+	* src/tests/algebra/alphabets/alphabet_test.hh: Improve.
+
+	* include/vaucanson/tools/usual_escaped_characters.hxx: Add a missing
+	inline.
+
 2004-02-27  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/static.hh,

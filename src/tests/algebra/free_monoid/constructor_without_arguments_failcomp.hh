@@ -1,7 +1,8 @@
-// words.hxx: this file is part of the Vaucanson project.
+// constructor_without_arguments_failcomp.hh: this file is part of the
+// Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -27,51 +28,26 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_FREE_MONOID_WORDS_HXX
-# define VCSN_ALGEBRA_CONCRETE_FREE_MONOID_WORDS_HXX
+#ifndef VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS_FAILCOMP_HH
+# define VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS_FAILCOMP_HH
 
-# include <vaucanson/algebra/concrete/free_monoid/words.hh>
+# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <design_pattern/design_pattern-test.hh>
 
-namespace vcsn {
+template <typename S, typename T>
+bool constructor_without_arguments_failcomp(tests::Tester& t)
+{
+  using namespace vcsn::algebra;
+  using namespace vcsn;
 
-  namespace algebra {
+  typedef Element<S, T> element_t;
 
-    /*---------.
-    | Words<A> |
-    `---------*/
+  // This code *should not* compile since building a free monoid without
+  // an alphabet has no sense.
+  element_t::set_t a;
 
-    template <class A>
-    inline FreeMonoid<A>::FreeMonoid(const A& a) : alph_(a)
-    {}
+  return t.all_passed();
+}
 
-    template <class A>
-    inline FreeMonoid<A>::FreeMonoid(const FreeMonoid& w) :
-      FreeMonoidBase<FreeMonoid<A> >(w),
-      alph_(w.alph_)
-    {}
-
-    template <class A>
-    inline A& FreeMonoid<A>::alphabet()
-    {
-      return alph_;
-    }
-
-    template <class A>
-    inline const A& FreeMonoid<A>::alphabet() const
-    {
-      return alph_;
-    }
-
-    template<typename A>
-    bool operator==(const FreeMonoid<A>& a,
-		    const FreeMonoid<A>& b)
-    {
-      return a.alphabet() == b.alphabet();
-    }
-
-  } // algebra
-
-} // vcsn
-
-
-#endif // VCSN_ALGEBRA_CONCRETE_FREE_MONOID_WORDS_HXX
+#endif // VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS_FAILCOMP_HH

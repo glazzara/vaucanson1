@@ -46,19 +46,37 @@ bool alphabet_test(tests::Tester& t)
 
   TEST_MSG("Instantiate an alphabet A.");
   element_t A;
+  TEST_MSG("Check A is empty");
+  for (typename element_t::const_iterator i = A.begin(); i != A.end(); ++i)
+    TEST(t, "A is not empty", false);
+
   TEST_MSG("Insert a random letter a in A.");
   letter_t a = A.random_letter();
+  A.insert(a);
+
   letter_t b;
+  int timeout = 0;
   do
     {
       b = A.random_letter();
+      ++timeout;
     }
-  while (b == a);
-  A.insert(a);
+  while ((b == a) and timeout < 100);
+  TEST(t, "A.random_letter() produces different letters.", timeout < 100);
+
+  bool error = false;
+  for (int i = 0; i < 100; ++i)
+    if (A.choose() != a)
+      error = true;
+  TEST(t, "A.choose() gives good values.", not error);
+
   TEST(t, "a is in A.", A.contains(a));
   TEST(t, "b is not in A.", !A.contains(b));
   TEST(t, "A is finite and its cardinal is one.",
        (A.is_finite()) && (A.size() == 1));
+
+  TEST(t, "A.begin() is correct.", *A.begin() == a);
+  TEST(t, "A.end() is correct.", ++A.begin() == A.end());
   return t.all_passed();
 }
 
