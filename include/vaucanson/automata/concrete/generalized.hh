@@ -50,7 +50,30 @@ namespace vcsn {
     typedef typename monoid_elt_t::value_t	monoid_value_t;
     typedef typename series_elt_t::weight_t     weight_t;
     typedef typename weight_t::value_t		weight_value_t;
-    
+
+#ifdef __ICC
+    template <class F, class T>
+    struct map : std::map<F, T>
+    {};
+
+    typedef vcsn::Element<vcsn::Automata,
+      utility::ref<
+      vcsn::AutomatonImpl
+    <
+      vcsn::labels_are_series,
+      series_t,
+      rat::exp<monoid_value_t, weight_value_t>,
+      vcsn::ManyLinks
+      <
+      rat::exp<monoid_value_t, weight_value_t>,
+      vcsn::NoTag,
+      vcsn::NoTag 
+      >,
+      vcsn::NoTag,
+      map 
+    > > > automaton_t;
+  };
+#else
     typedef vcsn::Element<vcsn::Automata,
       utility::ref<
       vcsn::AutomatonImpl
@@ -68,6 +91,7 @@ namespace vcsn {
       std::map 
     > > > automaton_t;
   };
+#endif
 
   template <class Auto_>
   typename generalized_traits<Auto_>::automaton_t

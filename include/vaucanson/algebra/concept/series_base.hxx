@@ -69,6 +69,8 @@ namespace vcsn {
       SemiringBase<Self>(other)
     {}
 
+  } // algebra
+
 
     /*---------------------------------.
     | MetaElement<SeriesBase<Self>, T> |
@@ -197,8 +199,6 @@ namespace vcsn {
       new_t.transpose();
       return new_t;
     }
-
-  } // algebra
   
 } // vcsn
 

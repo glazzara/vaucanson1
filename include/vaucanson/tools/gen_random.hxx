@@ -304,7 +304,7 @@ namespace vcsn {
   template <class TAutomata>
   unsigned GenRandomAutomata<TAutomata>::alea(unsigned max)
   {
-    return ((unsigned) round(((float) rand() / (float) RAND_MAX) * (max-1)));
+    return ((unsigned) floor(((float) rand() / (float) RAND_MAX) * (max-1)));
   }
 
 } // vcsn

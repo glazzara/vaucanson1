@@ -78,8 +78,8 @@ namespace vcsn {
     };
 
     template<typename M, typename W>
-    exp<M, W> operator*(const exp<M, W>& lhs,
-			const exp<M, W>& rhs);
+    const exp<M, W> operator*(const exp<M, W>& lhs,
+			      const exp<M, W>& rhs);
 
     template<typename M, typename W>
     exp<M, W> operator+(const exp<M, W>& lhs,

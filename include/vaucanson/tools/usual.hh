@@ -44,6 +44,10 @@ namespace vcsn {
 
     using namespace vcsn;
     using namespace vcsn::algebra;
+
+    template <class F, class T>
+    struct map : std::map<F,T>
+    {};
     
     typedef Element
     <
@@ -54,7 +58,7 @@ namespace vcsn {
 		    polynom<std::string, bool>,
 		    ManyLinks<polynom<std::string, bool>, NoTag, NoTag>,
 		    NoTag,
-		    std::map> >
+		    map> >
     >
     usual_automaton_t;
 

@@ -1,3 +1,50 @@
+2002-07-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.97)
+	These files hide some package variables not to overlap user's one.
+	* tools/scandefs.pl : added. 
+	* include/vaucanson/config/pconf.hh : added.
+	* include/vaucanson/config/extrconf.sh : added.	
+	* include/vaucanson/config/system.hh
+	-# include <vaucanson/config/config.hh>
+	+# include <vaucanson/config/pconf.hh>
+	* include/Makefile.am : use pconf.hh from now.
+	
+	* include/vaucanson/misc/fsm_dump.hh : added.
+	* src/demos/fsm/generate_toolbox.sh : added.
+	* src/demos/fsm/usual_automaton_t/toolbox.hh : added.
+	* src/demos/fsm/usual_automaton_t/configure : added.
+	* src/demos/fsm/usual_automaton_t/depcomp : added.
+	* src/demos/fsm/usual_automaton_t/missing : added.
+	* src/demos/fsm/usual_automaton_t/mkinstalldirs : added.
+	* src/demos/fsm/usual_automaton_t/aclocal.m4 : added.
+	* src/demos/fsm/usual_automaton_t/install-sh : added.
+	* src/demos/fsm/usual_automaton_t/Makefile.am : added.
+	* src/demos/fsm/usual_automaton_t/configure.ac : added.
+	* src/demos/fsm/usual_automaton_t/random_generator.cc : added.
+	* src/demos/fsm/README : added.
+
+	* include/vaucanson/fundamental/fundamental.hh : add defaults_ops.hh
+
+	* include/vaucanson/algebra/concept/alphabets_base.hxx : minor change.
+	* include/vaucanson/misc/container_ops.hxx : idem.
+	* include/vaucanson/misc/container_ops.hh : idem.
+	* include/vaucanson/misc/misc_constraints.hh : work for ICC compatibility.
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx : idem.
+	* include/vaucanson/algebra/concept/series_base.hxx : minor.
+	* include/vaucanson/misc/ref.hh : idem.
+	* include/vaucanson/misc/ref.hxx : idem.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx : idem.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh : idem.
+	* include/vaucanson/tools/usual.hh : idem.
+	* include/vaucanson/tools/gen_random.hxx : idem.
+	* include/vaucanson/automata/concrete/generalized.hh : idem.
+	* README : modified :
+	+Notice that an installation is done for a particular compiler since
+	+./configure enables some workarounds and, consequently, users must
+	+compile with the same compiler to avoid compatibility problems.
+	+
+ 
+
 2002-07-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.96)
 	* include/Makefile.am : add new files to be distributed.

@@ -32,6 +32,7 @@ namespace utility
 
     ~ref();
 
+    ref();
     ref(T* p);
 
     ref(const ref<T>& r);

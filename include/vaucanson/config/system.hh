@@ -22,7 +22,7 @@
 # define VCSN_CONFIG_SYSTEM_HH
 
 # define _ISOC99_SOURCE 1
-# include <vaucanson/config/config.hh>
+# include <vaucanson/config/pconf.hh>
 # include <cmath>
 
 #if (defined __GNUC__) && (__GNUC__ < 3) 
@@ -34,7 +34,6 @@
 #  define __STL_USE_NAMESPACES
 # include <vaucanson/config/rel_ops_work_around_g++2.hh>
 #endif
-
 
 
 #endif // VCSN_CONFIG_SYSTEM_HH

@@ -35,6 +35,10 @@ To install Vaucanson on your system, type the classical sequence :
 	make check
 	make install (as root)
 
+Notice that an installation is done for a particular compiler since
+./configure enables some workarounds and, consequently, users must
+compile with the same compiler to avoid compatibility problems.
+
 ----------------------------------------------------------------------------
 REQUIREMENTS
 

@@ -23,65 +23,70 @@
 
 # include <vaucanson/misc/ref.hh>
 
-namespace utility
-{
+namespace utility {
 
+  template<typename T>
+  ref<T>::~ref() 
+  { dispose(); }
 
-    template<typename T>
-    ref<T>::~ref() 
-    { dispose(); }
+  template <class T>
+  ref<T>::ref() :
+    data_(0)
+  {
+    count_ = new long(1);
+  }
 
-    template<typename T>
-    ref<T>::ref(T* p = 0) : data_(p)
-    { count_ = new long(1); }
+  template<typename T>
+  ref<T>::ref(T* p) : data_(p)
+  { count_ = new long(1); }
 
-    template<typename T>
-    ref<T>::ref(const ref<T>& r) 
-      : data_(r.data_)
-    { 
-      ++*(count_ = r.count_); 
-    }
+  template<typename T>
+  ref<T>::ref(const ref<T>& r) 
+    : data_(r.data_)
+  { 
+    ++*(count_ = r.count_); 
+  }
 
-//     template<typename T>
-//     template<typename Y>
-//     ref<T>& ref<T>::operator=(const ref<Y>& r)
-//     {
-//       share(r.get(), &r.ref_count());
-//       return *this;
-//     }
+  //     template<typename T>
+  //     template<typename Y>
+  //     ref<T>& ref<T>::operator=(const ref<Y>& r)
+  //     {
+  //       share(r.get(), &r.ref_count());
+  //       return *this;
+  //     }
     
-//     template<typename T>
-//     ref<T>::ref(const ref& r)
-//       : data_(r.data_)
-//     { 
-//       ++*(count_ = r.count_); 
-//     }
+  //     template<typename T>
+  //     ref<T>::ref(const ref& r)
+  //       : data_(r.data_)
+  //     { 
+  //       ++*(count_ = r.count_); 
+  //     }
 
-    template<typename T>
-     ref<T>& ref<T>::operator=(const ref& r)
-     {
-       share(r.data_, r.count_);
-       return *this;
-     }
+  template<typename T>
+  ref<T>& ref<T>::operator=(const ref& r)
+  {
+    share(r.data_, r.count_);
+    return *this;
+  }
 
-    template<typename T>
-    void ref<T>::reset(T* p) 
-    {
-      if (data_ == p)
-	return ;
-      if (! --*count_)
-	delete data_;
-      else
-	count_ = new long;
-      *count_ = 1;
-      data_ = p;
-    }
+  template<typename T>
+  void ref<T>::reset(T* p) 
+  {
+    if (data_ == p)
+      return ;
+    if (! --*count_)
+      delete data_;
+    else
+      count_ = new long;
+    *count_ = 1;
+    data_ = p;
+  }
 
-    template<typename T> T& ref<T>::operator*() const 
-    { return *data_; }
+  template<typename T> T& ref<T>::operator*() const 
+  { return *data_; }
 
-    template<typename T> T* ref<T>::operator->() const
-    { return data_; }
+  template<typename T> T* ref<T>::operator->() const
+  { return data_; }
     
   template<typename T> T* ref<T>::get() const
   { return data_; }

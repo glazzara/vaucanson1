@@ -85,7 +85,7 @@ namespace vcsn {
     typename MetaElement<FreeMonoidBase<Self>, T>::const_iterator 
     MetaElement<FreeMonoidBase<Self>, T>::begin() const
     { 
-      return op_begin(this->set(), this->value()); 
+      return op_begin_const(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
@@ -189,7 +189,7 @@ namespace vcsn {
     {
       typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
       
-      for (const_iterator i = op_begin(s.self(), v);
+      for (const_iterator i = op_begin_const(s.self(), v);
 	   i != op_end(s.self(), v);
 	   ++i)
 	st << *i;

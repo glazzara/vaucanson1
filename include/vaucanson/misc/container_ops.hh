@@ -51,8 +51,8 @@ namespace vcsn
 			      T& v);
 
   template<typename S, typename T>
-  typename T::const_iterator op_begin(const Structure<S>& s,
-				      const T& v);
+  typename T::const_iterator op_begin_const(const Structure<S>& s,
+					    const T& v);
 
   template<typename S, typename T>
   typename T::const_iterator op_end(const Structure<S>& s, 

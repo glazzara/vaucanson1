@@ -84,7 +84,7 @@ namespace vcsn {
     typename MetaElement<AlphabetsBase<Self>, T>::const_iterator 
     MetaElement<AlphabetsBase<Self>, T>::begin() const
     { 
-      return op_begin(this->set(), this->value()); 
+      return op_begin_const(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
@@ -114,9 +114,9 @@ namespace vcsn {
   { 
     assert (this->size() > 0);
     int  n = this->size() - 1;
-    int  c = ((unsigned) trunc(((float) rand() / (float) RAND_MAX) * n));
+    int  c = ((unsigned) floor(((float) rand() / (float) RAND_MAX) * n));
 
-    iterator it = this->begin();
+    const_iterator it = this->begin();
 
     for (int k = 0; k < c; ++k)
       ++it;

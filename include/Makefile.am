@@ -2,6 +2,8 @@
 #
 # $Id$
 
+nobase_nodist_include_HEADERS = vaucanson/config/pconf.hh
+
 nobase_include_HEADERS = \
 vaucanson/fundamental/slots.hh\
 vaucanson/fundamental/op_traits.hh\
@@ -95,7 +97,6 @@ vaucanson/algorithms/trim.hh\
 vaucanson/tools/usual.hh\
 vaucanson/tools/gen_random.hh\
 vaucanson/config/system.hh\
-vaucanson/config/config.hh\
 vaucanson/config/rel_ops_work_around_g++2.hh\
 vaucanson/fundamental/slots.hxx\
 vaucanson/fundamental/element.hxx\
@@ -166,3 +167,22 @@ vaucanson/algorithms/trim.hxx\
 vaucanson/algorithms/complete.hxx\
 vaucanson/algorithms/complementary.hxx\
 vaucanson/tools/gen_random.hxx
+
+EXTRA_DIST = vaucanson/config/extrconf.sh
+PERL = perl
+SCANDEFS_PL = $(top_srcdir)/tools/scandefs.pl
+PCONF_OCCURS = vaucanson/config/system.hh 
+$(top_srcdir)/include/vaucanson/config/extrconf.sh: $(SCANDEFS_PL) $(PCONF_OCCURS)
+	$(PERL) $(SCANDEFS_PL) $(PCONF_OCCURS) >$@
+
+vaucanson/config/pconf.hh: $(top_srcdir)/include/vaucanson/config/extrconf.sh $(CONFIG_HEADER)
+	test -f $(CONFIG_HEADER)
+## Ignore the result of config/extrconf.sh.  It might be non 0 if
+## grep matched nothing, but that's ok for us.  The sole case
+## we bother with is failure caused by an unexisting $(CONFIG_HEADER).
+## The test -f above take care of this.
+	$(SHELL) $(top_srcdir)/include/vaucanson/config/extrconf.sh $(CONFIG_HEADER) \
+	>$(top_srcdir)/include/vaucanson/config/pconf.hh; :
+
+DISTCLEANFILES = vaucanson/config/pconf.hh vaucanson/config/stamp-h1
+

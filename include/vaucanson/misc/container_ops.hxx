@@ -44,7 +44,7 @@ namespace vcsn
   }
 
   template<typename S, typename T>
-  typename T::const_iterator op_begin(const Structure<S>& s,
+  typename T::const_iterator op_begin_const(const Structure<S>& s,
 				      const T& v)
   { 
     return v.begin(); 

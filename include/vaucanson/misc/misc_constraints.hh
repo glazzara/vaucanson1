@@ -32,7 +32,7 @@ namespace utility
     | SameValue, SameType and DifferentType concepts |
     `-----------------------------------------------*/
 
-#ifndef __KCC
+#ifndef __ICC
     template <typename T, T A, T B>
     struct SameValue_chooser {};
 
@@ -45,7 +45,7 @@ namespace utility
     {
       void constraints() 
       {
-#ifndef __KCC       
+#ifndef __ICC       
 	typedef typename SameValue_chooser<T, A, B>::t required; 
 #endif
       }
