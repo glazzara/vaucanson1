@@ -30,20 +30,8 @@
 #ifndef VCSN_MISC_RANDOM_HH
 # define VCSN_MISC_RANDOM_HH
 
+# include <vaucanson/algebra/concrete/letter/range.hh>
 # include <vaucanson/algebra/concrete/semiring/rational_number.hh>
-
-// Forward declaration.
-
-namespace vcsn {
-  namespace algebra {
-    template <class T, class Interval>
-    class static_ranged;
-
-    namespace small_alpha_letter {
-      typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
-    }
-  }
-}
 
 namespace utility {
 
@@ -126,19 +114,31 @@ namespace utility {
     template <>
     std::pair<char, int> generate<std::pair<char, int> >();
 
-    /// Generate a random small_alpha_letter.
+    /// @title Small alphabetic letters random generation tools.
+    /** @{ */
+    typedef
+    vcsn::algebra::static_char_interval<'a', 'z'>
+    small_alpha_interval_t;
+
+    typedef
+    vcsn::algebra::static_ranged<char, small_alpha_interval_t>
+    small_alpha_letter_t;
+
+    /// Generates a random small alphabetic letter.
     template <>
-    vcsn::algebra::small_alpha_letter::Letter
-    generate<vcsn::algebra::small_alpha_letter::Letter>();
+    small_alpha_letter_t
+    generate<small_alpha_letter_t>();
+    /** @} */
+
     /** @} */
 
   }
 }
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/misc/random.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/misc/random.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // VCSN_MISC_RANDOM_HH

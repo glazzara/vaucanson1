@@ -1,3 +1,9 @@
+2004-03-18  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/misc/random.hxx: Fix generation of random
+	small_alpha_letter. Fix a circular header inclusion.
+
 2004-03-18  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* src/tests/tests-suites/generate-all.sh: Correct conflict created by

@@ -30,7 +30,6 @@
 #ifndef VCSN_MISC_RANDOM_HXX
 # define VCSN_MISC_RANDOM_HXX
 
-# include <vaucanson/algebra/concrete/alphabets/predefs.hh>
 # include <vaucanson/misc/random.hh>
 # include <vaucanson/misc/limits.hh>
 
@@ -177,10 +176,11 @@ namespace utility {
 
     template <>
     inline
-    vcsn::algebra::small_alpha_letter::Letter
-    generate<vcsn::algebra::small_alpha_letter::Letter>()
+    small_alpha_letter_t
+    generate<small_alpha_letter_t>()
     {
-      return generate<char>('a', 'z');
+      return generate<char>(small_alpha_interval_t::from_value,
+			    small_alpha_interval_t::to_value);
     }
 
   } // Random
