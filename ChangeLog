@@ -1,5 +1,10 @@
 2003-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/misc/limits.hh: 
+		Fix missing type specialization.
+
+2003-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* configure.ac: Add Makefile for fibonacci.
 	* include/vaucanson/misc/unique.hh: Use template class
 		UniqueListBase instead of uniquelist_base.

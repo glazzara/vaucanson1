@@ -187,6 +187,29 @@ namespace utility
     static const bool is_modulo = false;
   };
 
+  template<>
+  struct limits<double>
+  {
+    static const int digits = sizeof(float)*8;
+    static const int digits10 = 33;
+    static const bool is_specialized = true;
+    static float min() throw()   { return -HUGE_VAL; }
+    static float max() throw() { return HUGE_VAL; }
+    static const bool is_signed = true;
+    static const bool is_integer = false;
+    static const bool is_exact = false;
+    static const int radix = 2;
+    static const bool has_infinity = true;
+    static float infinity() throw() 
+    { return HUGE_VAL; }
+    static const bool has_quiet_NaN = true;
+    static float quiet_NaN() throw()
+    { return NAN; }
+    static const bool is_iec559 = false;
+    static const bool is_bounded = false;
+    static const bool is_modulo = false;
+  };
+
 # endif
 
 }
