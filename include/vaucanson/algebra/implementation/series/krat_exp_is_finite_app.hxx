@@ -73,14 +73,14 @@ namespace vcsn {
 
     MATCH__(LeftWeight, w, node)
     {
-      w = w;
+      (void) w;
       return match(node);
     }
     END
 
     MATCH__(RightWeight, node, w)
     {
-      w = w;
+      (void) w;
       return match(node);
     }
     END

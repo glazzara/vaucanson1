@@ -1,3 +1,10 @@
+2004-04-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx:
+	Remove unused variable.
+	* include/vaucanson/algebra/implementation/series/krat_exp_is_finite_app.hxx: Fix unused variable.
+
 2004-04-19  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/normalized.hxx: Fix algorithms in order
