@@ -67,8 +67,8 @@ namespace vcsn
 		 const T& v);
     
   template<typename S, typename T, typename U>
-  bool op_contains_e(const Structure<S>& s,
-		     const T& v, const U& c);
+  bool op_contains_e(const Structure<S>& s, const T& v, 
+		     const U& c);
   
   template<typename S, typename T, typename U>
   void op_insert(const Structure<S>& s, T& v,

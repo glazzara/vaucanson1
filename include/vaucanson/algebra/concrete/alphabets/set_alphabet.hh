@@ -37,7 +37,7 @@ namespace vcsn {
     bool op_is_finite(const SetAlphabets<L>& s, const std::set<L>& a);
 
     template<typename L>
-    bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a,
+    bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a, 
 		       const L& v);
 
   /*----------------------------------.

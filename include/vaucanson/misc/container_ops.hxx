@@ -84,8 +84,8 @@ namespace vcsn
   }
     
   template<typename S, typename T, typename U>
-  bool op_contains_e(const Structure<S>& s,
-		     const T& v, const U& c)
+  bool op_contains_e(const Structure<S>& s, const T& v, 
+		     const U& c)
   { 
     return std::find(v.begin(), v.end(), c) != v.end(); 
   }

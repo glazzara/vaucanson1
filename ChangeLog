@@ -1,8 +1,7 @@
-2002-06-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2002-06-18  Maxime Rey  <max@lrde.epita.fr>
 
-	* src/tests/algebra/free_monoid/free-monoid-test : removed. (error
-	in populate)
- 
+	* src/tests/algebra/alphabets/alphabets-basic-test.cc extend
+	  (a element is contained in Alphabet)
 
 2002-06-18  Maxime Rey  <max@lrde.epita.fr>
 

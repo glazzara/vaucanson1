@@ -9,8 +9,6 @@
 
 namespace vcsn
 {
-  namespace algebra
-  {
 
     /*-----------------------------------------------------------.
     | Definition of an alphabet implementation based on std::set |
@@ -28,13 +26,13 @@ namespace vcsn
     }
 
     template<typename L>
-    bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a,
+    bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a, 
 		       const L& v)
     { 
       return a.find(v) != a.end(); 
     }
 
-  } // algebra
+
 } // vcsn
- 
+
 #endif // ALGEBRA_SET_ALPHABET_HXX

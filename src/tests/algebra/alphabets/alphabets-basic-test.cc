@@ -16,14 +16,42 @@
 using namespace vcsn;
 
 
+template <typename S, typename T> 
+bool test_alphabet(tests::Tester& t)
+{
+  using namespace vcsn::algebra;
+  using namespace vcsn;
+
+  typedef Element<S, T> element_t;
+  std::set<char> sample; 
+  sample.insert('a');
+  element_t a(sample);
+
+  test_design_pattern<S, T>();
+  TEST(t, "'a' Is contained in Alphabet", a.contains('a'));
+  TEST(t, "'b' Is not contained in Alphabet", !a.contains('b'));
+
+  return t.all_passed(); 
+}
+
+
+
 int main(int argc, char **argv)
 {
-  
-  test_design_pattern<Alphabets, std::set<char> >();
+  using namespace vcsn::algebra;
+  using namespace vcsn;
 
-//   if (t.all_passed())
-//     return EXIT_SUCCESS;
-//   else
-//     return EXIT_FAILURE;
+  unsigned verbose;
+
+  if ((argc > 1) && (argv[1] == std::string("--noverbose")))
+    verbose = 0;
+  else
+    verbose = 1;
+  tests::Tester t(verbose);
+
+  if (test_alphabet<Alphabets, std::set<char> >(t))
+    return EXIT_SUCCESS;
+  else
+    return EXIT_FAILURE;
 }
 

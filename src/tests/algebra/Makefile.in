@@ -84,7 +84,8 @@ install_sh = @install_sh@
 SUBDIRS = \
 	semiring    \
 	alphabets   \
-	free_monoid 
+	free_monoid \
+	bimonoid
 
 subdir = src/tests/algebra
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
