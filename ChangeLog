@@ -1,4 +1,11 @@
 2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.79)
+	* include/vaucanson/algorithms/thompson.hxx : added.
+	* include/vaucanson/algorithms/thompson.hh : added.
+	* src/tests/automata/algos/thompson_test.hh : added.
+	
+
+2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.78)
 	* include/vaucanson/algorithms/standard.hxx : added.
 	* include/vaucanson/algorithms/standard.hh : added.

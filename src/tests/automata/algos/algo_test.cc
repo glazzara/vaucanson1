@@ -15,6 +15,7 @@
 # include <automata/algos/elimination_test.hh>
 # include <automata/algos/closure_test.hh>
 # include <automata/algos/glushkov_test.hh>
+# include <automata/algos/thompson_test.hh>
 
 int main(int argc, char** argv)
 {
@@ -38,7 +39,8 @@ int main(int argc, char** argv)
 //   TEST(t, "CHECK GENERALIZED : ", generalized_test<usual_automaton_t>(t));
 //   TEST(t, "CHECK ELIMINATION : ", elimination_test<usual_automaton_t>(t));
 //   TEST(t, "CHECK CLOSURE : ", closure_test<usual_automaton_t>(t));
-  TEST(t, "CHECK GLUSHKOV : ", glushkov_test<usual_automaton_t>(t));
+//  TEST(t, "CHECK GLUSHKOV : ", glushkov_test<usual_automaton_t>(t));
+  TEST(t, "CHECK THOMPSON : ", thompson_test<usual_automaton_t>(t));
 
   return EXIT_SUCCESS;
 }
