@@ -1,3 +1,84 @@
+2003-04-03  Maxime Rey  <max@lrde.epita.fr>
+
+	* src/demos/grammar_inference: Removed
+
+	* Algorithms:
+
+	* mical/include/algorithms/is_kreversible.hxx: Added
+	* mical/include/algorithms/is_kreversible.hh: Added
+	* mical/include/algorithms/is_kdeterministic.hxx: Added
+	* mical/include/algorithms/is_kdeterministic.hh: Added
+	* mical/include/algorithms/k_ri.hxx: Added
+	* mical/include/algorithms/k_ri.hh: Added
+	* mical/include/algorithms/k_tssi.hxx: Added
+	* mical/include/algorithms/get_structcomp_sample.hxx: Added
+	* mical/include/algorithms/get_structcomp_sample.hh: Added
+	* mical/include/algorithms/mggi.hxx: Added
+	* mical/include/algorithms/rig2.hh: Added
+	* mical/include/algorithms/mggi.hh: Added
+	* mical/include/algorithms/k_tssi.hh: Added
+	* mical/include/algorithms/rig.hxx: Added
+	* mical/include/algorithms/rig.hh: Added
+	* mical/include/algorithms/make_pta.hxx: Added
+	* mical/include/algorithms/make_pta.hh: Added
+	* mical/include/algorithms/make_mca.hxx: Added
+	* mical/include/algorithms/make_mca.hh: Added
+	* mical/include/algorithms/is_structurally_complete.hxx: Added
+	* mical/include/algorithms/is_structurally_complete.hh: Added
+	* mical/include/algorithms/is_not_compatible.hxx: Added
+	* mical/include/algorithms/is_not_compatible.hh: Added
+	* mical/include/algorithms/fusion.hxx: Added
+	* mical/include/algorithms/fusion.hh: Added
+
+	* Simple Tests:
+	
+	* mical/src/k_ri.cc: Added
+	* mical/src/k_tssi.cc: Added
+	* mical/src/k_deterministic.cc: Added
+	* mical/src/is_structurally_complete.cc: Added
+	* mical/src/get_structcomp_sample.cc: Added
+	* mical/src/make_mca.cc: Added
+	* mical/src/is_not_compatible.cc: Added
+	* mical/src/fusion.cc: Added
+	* mical/src/bs.cc: Added
+	* mical/src/training/vtrain.toy: Added
+
+	* Algebra:
+	
+	* mical/include/algebra/concrete/k_words.hxx: Added
+	* mical/include/algebra/concrete/k_words.hh: Added
+	* mical/include/algebra/concrete/complete_lattice.hxx: Added
+	* mical/include/algebra/concrete/complete_lattice.hh: Added
+	* mical/include/algebra/concrete/ordered_set.hxx: Added
+	* mical/include/algebra/concrete/ordered_set.hh: Added
+	* mical/include/algebra/concrete/lattice.hxx: Added
+	* mical/include/algebra/concrete/lattice.hh: Added
+	* mical/include/algebra/concrete/complemented_lattice.hxx: Added
+	* mical/include/algebra/concrete/complemented_lattice.hh: Added
+	* mical/include/algebra/concept/k_monoid_base.hxx: Added
+	* mical/include/algebra/concept/k_monoid_base.hh: Added
+	* mical/include/algebra/concept/mix_base.hh: Added
+	* mical/include/algebra/concept/complete_lattice_base.hh: Added
+	* mical/include/algebra/concept/complete_lattice_base.hxx: Added
+	* mical/include/algebra/concept/ordered_set_base.hxx: Added
+	* mical/include/algebra/concept/ordered_set_base.hh: Added
+	* mical/include/algebra/concept/lattice_base.hxx: Added
+	* mical/include/algebra/concept/lattice_base.hh: Added
+	* mical/include/algebra/concept/complemented_lattice_base.hxx: Added
+	* mical/include/algebra/concept/complemented_lattice_base.hh: Added
+	
+	* Other:
+	
+	* mical/include/internal/k_window.hxx: Added
+	* mical/include/internal/k_window.hh: Added
+	* mical/include/misc/traits.hh: Added
+	* mical/include/fundamental/default_ops.hh: Added
+	* mical/include/fundamental/meta_set.hh: Added
+	* mical/include/fundamental/mix.hh: Added
+	* mical/include/tools/predefs.hh: Added
+	* mical/include/tools/load_sample.hxx: Added
+	* mical/include/tools/load_sample.hh: Added
+
 2003-04-02  Loic Fosse  <fosse_l@lrde.epita.fr>
 
         * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: Change

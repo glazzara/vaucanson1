@@ -1,27 +1,12 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 184)
-(Parent-Version vaucanson 0 183)
-(Version-Log "2003-04-02  Loic Fosse  <fosse_l@lrde.epita.fr>
-
-        * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: Change
- 	the result of the KRatExpIdentity when a constant is matched.
-        * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx: Remove
-        the const of the call of dispatch function.
-        * include/vaucanson/algebra/concrete/series/rat/exp.hh: Change the
-        matcher attribute into a reference in the dispatch visitor.
-        * include/vaucanson/algebra/concrete/series/rat/exp.hxx: Apply changes
-        made by the change in the dispatch visitor.
-        * include/vaucanson/algorithms/aci_canonical.hxx: Change the result when
-        a constant is matched.
-        * include/vaucanson/algebra/concrete/letter/couple_letter.hxx: Add.
-        * include/vaucanson/algebra/concrete/letter/couple_letter.hh: Add.
-        * include/vaucanson/algorithms/krat_exp_linearize.hxx: Add.
-        * include/vaucanson/algorithms/krat_exp_linearize.hh: Add.")
+(Project-Version vaucanson 0 185)
+(Parent-Version vaucanson 0 184)
+(Version-Log "")
 (New-Version-Log "")
-(Checkin-Time "Wed, 02 Apr 2003 17:48:20 +0200")
-(Checkin-Login fosse_l)
+(Checkin-Time "Thu, 03 Apr 2003 18:13:27 +0200")
+(Checkin-Login max)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -91,6 +76,8 @@
 	"src/demos/fsm/usual_automaton_t/vcsn_random_generator$"
         ".cvsignore$"
         "autom4te.cache"
+	"configure"
+	"aclocal.m4"
         "\\.html$"
         "\\.png$"
         "\\.pdf$"
@@ -101,7 +88,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.124 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.125 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -338,38 +325,38 @@
   (src/demos/fsm/usual_automaton_t/vcsn_prune.cc (vaucanson/h/0_vcsn_prune 1.1 600))
   (src/demos/fsm/usual_automaton_t/vcsn_random_generator.cc (vaucanson/g/13_vcsn_rando 1.2 600))
   (src/demos/fsm/usual_automaton_t/vcsn_reverse.cc (vaucanson/g/51_vcsn_rever 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hh (vaucanson/i/47_complement 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hxx (vaucanson/i/46_complement 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concept/lattice_base.hh (vaucanson/i/49_lattice_ba 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concept/lattice_base.hxx (vaucanson/i/48_lattice_ba 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hh (vaucanson/i/51_ordered_se 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hxx (vaucanson/i/50_ordered_se 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hh (vaucanson/i/41_complement 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hxx (vaucanson/i/40_complement 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concrete/lattice.hh (vaucanson/i/43_lattice.hh 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concrete/lattice.hxx (vaucanson/i/42_lattice.hx 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concrete/ordered_set.hh (vaucanson/i/45_ordered_se 1.1 600))
-  (src/demos/grammar_inference/include/algebra/concrete/ordered_set.hxx (vaucanson/i/44_ordered_se 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/fusion.hh (vaucanson/j/9_fusion.hh 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/fusion.hxx (vaucanson/j/11_fusion.hxx 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/is_not_compatible.hh (vaucanson/j/6_is_not_com 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx (vaucanson/j/5_is_not_com 1.2 600))
-  (src/demos/grammar_inference/include/algorithms/is_structurally_complete.hh (vaucanson/j/8_is_structu 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/is_structurally_complete.hxx (vaucanson/j/10_is_structu 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/make_mca.hh (vaucanson/j/7_make_mca.h 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/make_mca.hxx (vaucanson/j/3_make_mca.h 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/make_pta.hh (vaucanson/j/4_make_pta.h 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/make_pta.hxx (vaucanson/j/2_make_pta.h 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/rig.hh (vaucanson/j/0_rig.hh 1.2 600))
-  (src/demos/grammar_inference/include/algorithms/rig.hxx (vaucanson/j/1_rig.hxx 1.1 600))
-  (src/demos/grammar_inference/include/tools/load_sample.hh (vaucanson/i/38_load_sampl 1.1 600))
-  (src/demos/grammar_inference/include/tools/load_sample.hxx (vaucanson/i/39_load_sampl 1.1 600))
-  (src/demos/grammar_inference/ordered_set_base.hxx (vaucanson/i/12_ordered_se 1.1 600))
-  (src/demos/grammar_inference/src/bs.cc (vaucanson/i/35_bs.cc 1.2 600))
-  (src/demos/grammar_inference/src/fusion.cc (vaucanson/i/36_fusion.cc 1.1 600))
-  (src/demos/grammar_inference/src/is_not_compatible.cc (vaucanson/i/34_is_not_com 1.1 600))
-  (src/demos/grammar_inference/src/make_mca.cc (vaucanson/i/33_make_mca.c 1.1 600))
-  (src/demos/grammar_inference/src/training/vtrain.toy (vaucanson/i/37_vtrain.toy 1.1 600))
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   (src/demos/samples/algebra/alphabet.cc (vaucanson/h/50_alphabet.c 1.3 600))
   (src/demos/samples/algebra/decorated_alphabet.cc (vaucanson/i/21_decorated_ 1.1 600))
   (src/demos/samples/algebra/free_monoid.cc (vaucanson/h/49_free_monoi 1.2 600))
@@ -565,6 +552,111 @@
   (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.1 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.1 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.1 600))
+
+;; Files deleted by populate at Thu, 03 Apr 2003 18:12:09 +0200,
+;; from version 0.184(w), by max:
+
+  ; (src/demos/grammar_inference/src/training/vtrain.toy ())
+  ; (src/demos/grammar_inference/src/make_mca.cc ())
+  ; (src/demos/grammar_inference/src/is_not_compatible.cc ())
+  ; (src/demos/grammar_inference/src/fusion.cc ())
+  ; (src/demos/grammar_inference/src/bs.cc ())
+  ; (src/demos/grammar_inference/ordered_set_base.hxx ())
+  ; (src/demos/grammar_inference/include/tools/load_sample.hxx ())
+  ; (src/demos/grammar_inference/include/tools/load_sample.hh ())
+  ; (src/demos/grammar_inference/include/algorithms/rig.hxx ())
+  ; (src/demos/grammar_inference/include/algorithms/rig.hh ())
+  ; (src/demos/grammar_inference/include/algorithms/make_pta.hxx ())
+  ; (src/demos/grammar_inference/include/algorithms/make_pta.hh ())
+  ; (src/demos/grammar_inference/include/algorithms/make_mca.hxx ())
+  ; (src/demos/grammar_inference/include/algorithms/make_mca.hh ())
+  ; (src/demos/grammar_inference/include/algorithms/is_structurally_complete.hxx ())
+  ; (src/demos/grammar_inference/include/algorithms/is_structurally_complete.hh ())
+  ; (src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx ())
+  ; (src/demos/grammar_inference/include/algorithms/is_not_compatible.hh ())
+  ; (src/demos/grammar_inference/include/algorithms/fusion.hxx ())
+  ; (src/demos/grammar_inference/include/algorithms/fusion.hh ())
+  ; (src/demos/grammar_inference/include/algebra/concrete/ordered_set.hxx ())
+  ; (src/demos/grammar_inference/include/algebra/concrete/ordered_set.hh ())
+  ; (src/demos/grammar_inference/include/algebra/concrete/lattice.hxx ())
+  ; (src/demos/grammar_inference/include/algebra/concrete/lattice.hh ())
+  ; (src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hxx ())
+  ; (src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hh ())
+  ; (src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hxx ())
+  ; (src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hh ())
+  ; (src/demos/grammar_inference/include/algebra/concept/lattice_base.hxx ())
+  ; (src/demos/grammar_inference/include/algebra/concept/lattice_base.hh ())
+  ; (src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hxx ())
+  ; (src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hh ())
+
+;; Files added by populate at Thu, 03 Apr 2003 18:13:09 +0200,
+;; to version 0.184(w), by max:
+
+  (mical/src/k_ri.cc (vaucanson/j/49_k_ri.cc 1.1 644))
+  (mical/src/k_tssi.cc (vaucanson/j/50_k_tssi.cc 1.1 644))
+  (mical/src/k_deterministic.cc (vaucanson/j/51_k_determin 1.1 644))
+  (mical/src/is_structurally_complete.cc (vaucanson/k/0_is_structu 1.1 644))
+  (mical/src/get_structcomp_sample.cc (vaucanson/k/1_get_struct 1.1 644))
+  (mical/src/make_mca.cc (vaucanson/k/2_make_mca.c 1.1 600))
+  (mical/src/is_not_compatible.cc (vaucanson/k/3_is_not_com 1.1 600))
+  (mical/src/fusion.cc (vaucanson/k/4_fusion.cc 1.1 600))
+  (mical/src/bs.cc (vaucanson/k/5_bs.cc 1.1 600))
+  (mical/src/training/vtrain.toy (vaucanson/k/6_vtrain.toy 1.1 600))
+  (mical/include/internal/k_window.hxx (vaucanson/k/7_k_window.h 1.1 644))
+  (mical/include/internal/k_window.hh (vaucanson/k/8_k_window.h 1.1 644))
+  (mical/include/misc/traits.hh (vaucanson/k/9_traits.hh 1.1 644))
+  (mical/include/fundamental/default_ops.hh (vaucanson/k/10_default_op 1.1 644))
+  (mical/include/fundamental/meta_set.hh (vaucanson/k/11_meta_set.h 1.1 644))
+  (mical/include/fundamental/mix.hh (vaucanson/k/12_mix.hh 1.1 644))
+  (mical/include/tools/predefs.hh (vaucanson/k/13_predefs.hh 1.1 644))
+  (mical/include/tools/load_sample.hxx (vaucanson/k/14_load_sampl 1.1 600))
+  (mical/include/tools/load_sample.hh (vaucanson/k/15_load_sampl 1.1 600))
+  (mical/include/algorithms/is_kreversible.hxx (vaucanson/k/16_is_krevers 1.1 644))
+  (mical/include/algorithms/is_kreversible.hh (vaucanson/k/17_is_krevers 1.1 644))
+  (mical/include/algorithms/is_kdeterministic.hxx (vaucanson/k/18_is_kdeterm 1.1 644))
+  (mical/include/algorithms/is_kdeterministic.hh (vaucanson/k/19_is_kdeterm 1.1 644))
+  (mical/include/algorithms/k_ri.hxx (vaucanson/k/20_k_ri.hxx 1.1 644))
+  (mical/include/algorithms/k_ri.hh (vaucanson/k/21_k_ri.hh 1.1 644))
+  (mical/include/algorithms/k_tssi.hxx (vaucanson/k/22_k_tssi.hxx 1.1 644))
+  (mical/include/algorithms/get_structcomp_sample.hxx (vaucanson/k/23_get_struct 1.1 644))
+  (mical/include/algorithms/get_structcomp_sample.hh (vaucanson/k/24_get_struct 1.1 644))
+  (mical/include/algorithms/mggi.hxx (vaucanson/k/25_mggi.hxx 1.1 644))
+  (mical/include/algorithms/rig2.hh (vaucanson/k/26_rig2.hh 1.1 644))
+  (mical/include/algorithms/mggi.hh (vaucanson/k/27_mggi.hh 1.1 644))
+  (mical/include/algorithms/k_tssi.hh (vaucanson/k/28_k_tssi.hh 1.1 644))
+  (mical/include/algorithms/rig.hxx (vaucanson/k/29_rig.hxx 1.1 600))
+  (mical/include/algorithms/rig.hh (vaucanson/k/30_rig.hh 1.1 600))
+  (mical/include/algorithms/make_pta.hxx (vaucanson/k/31_make_pta.h 1.1 600))
+  (mical/include/algorithms/make_pta.hh (vaucanson/k/32_make_pta.h 1.1 600))
+  (mical/include/algorithms/make_mca.hxx (vaucanson/k/33_make_mca.h 1.1 600))
+  (mical/include/algorithms/make_mca.hh (vaucanson/k/34_make_mca.h 1.1 600))
+  (mical/include/algorithms/is_structurally_complete.hxx (vaucanson/k/35_is_structu 1.1 600))
+  (mical/include/algorithms/is_structurally_complete.hh (vaucanson/k/36_is_structu 1.1 600))
+  (mical/include/algorithms/is_not_compatible.hxx (vaucanson/k/37_is_not_com 1.1 600))
+  (mical/include/algorithms/is_not_compatible.hh (vaucanson/k/38_is_not_com 1.1 600))
+  (mical/include/algorithms/fusion.hxx (vaucanson/k/39_fusion.hxx 1.1 600))
+  (mical/include/algorithms/fusion.hh (vaucanson/k/40_fusion.hh 1.1 600))
+  (mical/include/algebra/concrete/k_words.hxx (vaucanson/k/41_k_words.hx 1.1 644))
+  (mical/include/algebra/concrete/k_words.hh (vaucanson/k/42_k_words.hh 1.1 644))
+  (mical/include/algebra/concrete/complete_lattice.hxx (vaucanson/k/43_complete_l 1.1 644))
+  (mical/include/algebra/concrete/complete_lattice.hh (vaucanson/k/44_complete_l 1.1 644))
+  (mical/include/algebra/concrete/ordered_set.hxx (vaucanson/k/45_ordered_se 1.1 600))
+  (mical/include/algebra/concrete/ordered_set.hh (vaucanson/k/46_ordered_se 1.1 600))
+  (mical/include/algebra/concrete/lattice.hxx (vaucanson/k/47_lattice.hx 1.1 600))
+  (mical/include/algebra/concrete/lattice.hh (vaucanson/k/48_lattice.hh 1.1 600))
+  (mical/include/algebra/concrete/complemented_lattice.hxx (vaucanson/k/49_complement 1.1 600))
+  (mical/include/algebra/concrete/complemented_lattice.hh (vaucanson/k/50_complement 1.1 600))
+  (mical/include/algebra/concept/k_monoid_base.hxx (vaucanson/k/51_k_monoid_b 1.1 644))
+  (mical/include/algebra/concept/k_monoid_base.hh (vaucanson/l/0_k_monoid_b 1.1 644))
+  (mical/include/algebra/concept/mix_base.hh (vaucanson/l/1_mix_base.h 1.1 644))
+  (mical/include/algebra/concept/complete_lattice_base.hh (vaucanson/l/2_complete_l 1.1 644))
+  (mical/include/algebra/concept/complete_lattice_base.hxx (vaucanson/l/3_complete_l 1.1 644))
+  (mical/include/algebra/concept/ordered_set_base.hxx (vaucanson/l/4_ordered_se 1.1 600))
+  (mical/include/algebra/concept/ordered_set_base.hh (vaucanson/l/5_ordered_se 1.1 600))
+  (mical/include/algebra/concept/lattice_base.hxx (vaucanson/l/6_lattice_ba 1.1 600))
+  (mical/include/algebra/concept/lattice_base.hh (vaucanson/l/7_lattice_ba 1.1 600))
+  (mical/include/algebra/concept/complemented_lattice_base.hxx (vaucanson/l/8_complement 1.1 600))
+  (mical/include/algebra/concept/complemented_lattice_base.hh (vaucanson/l/9_complement 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)
