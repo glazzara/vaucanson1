@@ -1,7 +1,7 @@
-// hopcroft_minimization.hh: this file is part of the Vaucanson project.
+// minimization_hopcroft.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,16 +26,18 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_HOPCROFT_MINIMIZATION_HH
-# define VCSN_ALGORITHMS_HOPCROFT_MINIMIZATION_HH
+#ifndef VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HH
+# define VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
   /**
-   * @file   hopcroft_minimization.hh
+   * @file   minimization_hopcroft.hh
    * @author Yann Régis-Gianas <yann@lrde.epita.fr>
    * @date   Tue Jun 24 21:08:54 2003
    * 
@@ -78,9 +80,9 @@ namespace vcsn {
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/hopcroft_minimization.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/minimization_hopcroft.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
     
 
-#endif // VCSN_ALGORITHMS_HOPCROFT_MINIMIZATION_HH
+#endif // VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HH

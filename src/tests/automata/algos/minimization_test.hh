@@ -43,7 +43,7 @@
 # include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/algorithms/hopcroft_minimization.hh>
+# include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/algorithms/minimization_moore.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <check/tester.hh>

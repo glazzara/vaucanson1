@@ -123,8 +123,6 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/forward_closure.hxx		     \
 	vaucanson/algorithms/forward_realtime.hh		     \
 	vaucanson/algorithms/forward_realtime.hxx		     \
-	vaucanson/algorithms/hopcroft_minimization.hh		     \
-	vaucanson/algorithms/hopcroft_minimization.hxx		     \
 	vaucanson/algorithms/isomorph.hh			     \
 	vaucanson/algorithms/isomorph.hxx			     \
 	vaucanson/algorithms/is_letterized.hh			     \
@@ -151,6 +149,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/krat_exp_realtime.hxx		     \
 	vaucanson/algorithms/letter_to_letter_composition.hxx	     \
 	vaucanson/algorithms/letter_to_letter_composition.hh	     \
+	vaucanson/algorithms/minimization_hopcroft.hh		     \
+	vaucanson/algorithms/minimization_hopcroft.hxx		     \
 	vaucanson/algorithms/minimization_moore.hh		     \
 	vaucanson/algorithms/minimization_moore.hxx		     \
 	vaucanson/algorithms/normalized.hh			     \

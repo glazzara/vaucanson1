@@ -38,7 +38,7 @@
 #include <vaucanson/algorithms/standard_of.hh>
 #include <vaucanson/algorithms/thompson.hh>
 #include <vaucanson/algorithms/eval.hh>
-#include <vaucanson/algorithms/hopcroft_minimization.hh>
+#include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/tools/dot_dump.hh>
 // #include <vaucanson/misc/unique.hcc>
 #include <iostream>

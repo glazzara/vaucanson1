@@ -2,7 +2,7 @@
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/algorithms/complete.hh>
-#include <vaucanson/algorithms/hopcroft_minimization.hh>
+#include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/tools/dot_dump.hh>
 #include <iostream>
 

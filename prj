@@ -1,16 +1,24 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 502)
-(Parent-Version vaucanson 0 501)
+(Project-Version vaucanson 0 503)
+(Parent-Version vaucanson 0 502)
 (New-Version-Log "")
 
-(Version-Log "2004-03-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+(Version-Log "2004-03-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/minimization_moore.hxx: Put the
-	precondition with exists().
-")
-(Checkin-Time "Fri, 05 Mar 2004 22:08:18 +0100")
+	* include/vaucanson/algorithms/hopcroft_minimization.hh,
+	* include/vaucanson/algorithms/hopcroft_minimization.hh: 
+	Rename
+	* include/vaucanson/algorithms/minimization_hopcroft.hh,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx:
+	To these, and update. 
+	* include/Makefile.am: Update.
+	* src/tests/automata/algos/minimization_test.hh: Update.
+	* src/demos/vgrep/vgrep.cc: Update.
+	* include/vaucanson/standard_algorithms.hh: Update.
+	* src/demos/universal/universal.cc: Update.")
+(Checkin-Time "Sat, 06 Mar 2004 19:44:36 +0100")
 (Checkin-Login pouche_l)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -93,7 +101,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.39 777))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.40 777))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 777))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 777))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 777))
@@ -136,7 +144,7 @@
 
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.7 777))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.8 777))
 
   (include/vaucanson/vaucanson.hh (vaucanson/q/42_vaucanson. 1.2 777))
 
@@ -361,8 +369,8 @@
   (include/vaucanson/algorithms/sub_automaton.hxx (vaucanson/d/30_extract.hx 1.15 777))
   (include/vaucanson/algorithms/standard_of.hh (vaucanson/e/42_glushkov.h 1.16 777))
   (include/vaucanson/algorithms/standard_of.hxx (vaucanson/e/41_glushkov.h 1.20 777))
-  (include/vaucanson/algorithms/hopcroft_minimization.hh (vaucanson/e/26_hopcroft.h 1.13 777))
-  (include/vaucanson/algorithms/hopcroft_minimization.hxx (vaucanson/e/25_hopcroft.h 1.18 777))
+  (include/vaucanson/algorithms/minimization_hopcroft.hh (vaucanson/e/26_hopcroft.h 1.14 777))
+  (include/vaucanson/algorithms/minimization_hopcroft.hxx (vaucanson/e/25_hopcroft.h 1.19 777))
   (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.10 777))
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.5 777))
   (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.5.1.3 777))
@@ -464,7 +472,7 @@
   (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.12 777))
   (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.9 777))
   (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.19 777))
-  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.17 777))
+  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.18 777))
   (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.16 777))
   (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.13 777))
   (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.13 777))
@@ -518,7 +526,7 @@
   (src/demos/samples/algorithms/derivatives_automaton.cc (vaucanson/q/50_derivative 1.9 777))
 
   (src/demos/vgrep/Makefile.am (vaucanson/i/27_Makefile.a 1.8 777))
-  (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.14 777))
+  (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.15 777))
 
   (src/demos/vaucanswig/README (vaucanson/r/22_README 1.4 777))
   (src/demos/vaucanswig/expand.sh (vaucanson/r/7_expand.sh 1.8 777))
@@ -848,7 +856,7 @@
 ;; Files added by populate at Fri, 17 Oct 2003 21:35:12 +0200,
 ;; to version 0.445(w), by yann:
 
-  (include/vaucanson/standard_algorithms.hh (vaucanson/s/10_standard_a 1.1 777))
+  (include/vaucanson/standard_algorithms.hh (vaucanson/s/10_standard_a 1.2 777))
 
 ;; Files added by populate at Fri, 17 Oct 2003 21:38:05 +0200,
 ;; to version 0.445(w), by yann:
@@ -953,7 +961,7 @@
 ;; Files added by populate at Tue, 23 Dec 2003 10:05:20 +0100,
 ;; to version 0.472(w), by yann:
 
-  (src/demos/universal/universal.cc (vaucanson/u/40_universal. 1.1 777))
+  (src/demos/universal/universal.cc (vaucanson/u/40_universal. 1.2 777))
 
 ;; Files added by populate at Thu, 15 Jan 2004 11:38:33 +0100,
 ;; to version 0.475(w), by yann:

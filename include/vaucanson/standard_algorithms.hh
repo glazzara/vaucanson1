@@ -31,7 +31,7 @@
 # define VCSN_VAUCANSON_STANDARD_ALGORITHMS_HH
 
 # include <vaucanson/algorithms/determinize.hh>
-# include <vaucanson/algorithms/hopcroft_minimization.hh>
+# include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/trim.hh>
