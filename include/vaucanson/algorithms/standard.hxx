@@ -285,11 +285,17 @@ namespace vcsn {
   void do_star_of_standard_here(const AutomataBase<A>& ,
 				auto_t& a)
   {
-    typedef std::set<hedge_t>		edelta_ret_t;
-    edelta_ret_t	aim;
+    AUTOMATON_TYPES(auto_t);
 
-    hstate_t 	new_i = *a.initial().begin();
+    typedef std::set<hedge_t>		edelta_ret_t;
+    edelta_ret_t			aim;
+
+    hstate_t				new_i = *a.initial().begin();
+    series_set_elt_t			out_mult = a.get_final(new_i);
+    out_mult.star();
+
     a.deltac(aim, new_i, delta_kind::edges());
+
     for (typename auto_t::final_iterator f = a.final().begin();
 	 f != a.final().end();
 	 ++f)
@@ -301,8 +307,20 @@ namespace vcsn {
 	    // FIXME: it is wanted that we can create two similar edges.
 	    // FIXME: is it a good thing ?
 	    a.add_edge(*f, a.aim_of(*d), a.label_of(*d));
-    }
-    a.set_final(new_i);
+
+      }
+
+    for (typename edelta_ret_t::iterator d = aim.begin();
+	 d != aim.end();
+	 ++d)
+      {
+	series_set_elt_t st = out_mult * a.series_of(*d);
+	hstate_t to = a.aim_of(*d);
+	a.del_edge(*d);
+	a.add_series_edge(new_i, to, st);
+      }
+
+    a.set_final(new_i, out_mult);
   }
 
   template<typename A, typename T>

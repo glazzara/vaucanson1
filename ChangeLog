@@ -1,3 +1,16 @@
+2004-07-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Fix standard_of algorithm problem with star.
+	
+	* include/vaucanson/algorithms/standard.hxx: Fix the star of standard
+	automaton.
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/implementation/series/polynoms.hh: Add 
+	op_in_star for polynoms. Needed in standard_of.
+
+	* src/tests/context_headers/automata/global_consistency_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh: Update accordingly.
+
 2004-07-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/demos/fibonacci/generalized.cc: Rename as...

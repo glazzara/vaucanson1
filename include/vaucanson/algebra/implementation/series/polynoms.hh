@@ -151,6 +151,10 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
 
+  template<typename Self, typename Tm, typename Tw>
+  void op_in_star(const algebra::SeriesBase<Self>& s,
+		  algebra::polynom<Tm, Tw>& m);
+
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_is_finite_app(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
 

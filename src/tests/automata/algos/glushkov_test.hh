@@ -115,6 +115,7 @@ bool glushkov_test(tests::Tester& tg)
 
   unsigned nb_word_test = 100;
   unsigned nb_test = 40;
+  unsigned nb_test_done = 0;
 
   letter_t	lalb[] = { la, lb, letter_t () };
 
@@ -148,47 +149,55 @@ bool glushkov_test(tests::Tester& tg)
 	krat_t		exp = ss.choose(SELECT(exp_t));
 	automaton_t	au (aa);
 
-	if (t.verbose() == tests::high)
-	  std::cerr << "Expression : " << exp << std::endl;
-
-	standard_of(au, exp.value());
-	bool standard = is_standard(au) or exp == zero_as<exp_t>::of(ss);
-	realtime_here(au);
-
-	if (t.verbose() == tests::high)
+	try
 	  {
-	    TEST_MSG("Automaton saved in /tmp.");
-	    SAVE_AUTOMATON_DOT("/tmp", "glushkov", au, nb);
-	  }
+	    if (t.verbose() == tests::high)
+	      std::cerr << "Expression : " << exp << std::endl;
+	    standard_of(au, exp.value());
+	    bool standard = is_standard(au) or exp == zero_as<exp_t>::of(ss);
+	    realtime_here(au);
 
-	if (exp != ss.zero(SELECT(exp_t)))
-	  {
-	    unsigned i;
-	    for (i = 0; i < nb_word_test; ++i)
+	    if (t.verbose() == tests::high)
 	      {
-		monoid_elt_t w = exp.choose_from_supp();
-		if (t.verbose() == tests::high)
-		  std::cout << "TEST: glushkov " << i << " : test " << w
-			    << std::endl;
-		if (eval(au, w) ==
-		    zero_as<semiring_elt_value_t>::of(ss.semiring()))
-		  {
-		    if (t.verbose() == tests::high)
-		      std::cout << "TEST: glushkov " << i << " failed."
-				<< std::endl;
-		    break;
-		  }
+		TEST_MSG("Automaton saved in /tmp.");
+		SAVE_AUTOMATON_DOT("/tmp", "glushkov", au, nb);
 	      }
-	    if (standard and
-		((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
+
+	    if (exp != ss.zero(SELECT(exp_t)))
+	      {
+		unsigned i;
+		for (i = 0; i < nb_word_test; ++i)
+		  {
+		    monoid_elt_t w = exp.choose_from_supp();
+		    if (t.verbose() == tests::high)
+		      std::cout << "TEST: glushkov " << i << " : test " << w
+				<< std::endl;
+		    if (eval(au, w) ==
+			zero_as<semiring_elt_value_t>::of(ss.semiring()))
+		      {
+			if (t.verbose() == tests::high)
+			  std::cout << "TEST: glushkov " << i << " failed."
+				    << std::endl;
+			break;
+		      }
+		  }
+		if (standard and
+		    ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
+		  ++success;
+	      }
+	    else if (standard)
 	      ++success;
+	    ++nb_test_done;
 	  }
-	else if (standard)
-	  ++success;
+	catch (...)
+	  {
+	    ++nb_test;
+	    //	    std::cout << exp << std::endl;
+	  }
       }
     std::string rate;
-    SUCCESS_RATE(rate, success, nb_test);
-    TEST(t, "Random test " + rate, success == nb_test);
+    SUCCESS_RATE(rate, success, nb_test_done);
+    TEST(t, "Random test " + rate, success == nb_test_done);
   }
 
   return t.all_passed();

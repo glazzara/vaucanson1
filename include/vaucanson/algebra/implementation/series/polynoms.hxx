@@ -291,6 +291,33 @@ namespace vcsn {
     return true;
   }
 
+  template<typename Self, typename Tm, typename Tw>
+  void op_in_star(const algebra::SeriesBase<Self>&,
+		  algebra::polynom<Tm, Tw>& m)
+  {
+    if (m.size() == 0)
+      {
+	Tw val (0);
+	op_in_star(SELECT(typename Self::semiring_t), val);
+	m.insert(identity_value(SELECT(typename Self::monoid_t), SELECT(Tm)),
+		 val);
+      }
+    else
+      {
+	typename std::pair<Tm, Tw> elt = *m.as_map().begin();
+	if (m.size() > 1 ||
+	    elt.first != identity_value(SELECT(typename Self::monoid_t),
+					SELECT(Tm)))
+	  assertion(! "Support is not empty, start can not be computed.");
+	else
+	  {
+	    op_in_star(SELECT(typename Self::semiring_t), elt.second);
+	    m.clear();
+	    m.insert(elt.first, elt.second);
+	  }
+      }
+  }
+
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_is_finite_app(const algebra::Series<W, M>&, const algebra::polynom<Tm, Tw>&)
   {
