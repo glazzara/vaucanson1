@@ -147,13 +147,13 @@ namespace vcsn {
   inline bool op_stareable(const NumericalSemiring& s, 
 			   const float& f)
   { 
-    return (f >= 0.0) && (f < 1.0); 
+    return (0.0 <= f) && (f < 1.0); 
   }
 
   inline bool op_stareable(const NumericalSemiring& s, 
 			   const double& f)
   { 
-    return (f >= 0.0) && (f < 1.0); 
+    return (0.0 <= f) && (f < 1.0); 
   }
 
   inline void op_in_star(const NumericalSemiring& s, float& f)
