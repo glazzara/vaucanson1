@@ -1,5 +1,7 @@
 2002-06-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/misc/selectors.hh: Added.
+
 	* include/vaucanson/misc/static.hh: Added.
 
 	* include/vaucanson/misc/static.hxx: Added.

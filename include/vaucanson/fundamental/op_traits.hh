@@ -7,7 +7,7 @@
 #ifndef FUNDAMENTAL_OP_TRAITS_HH
 # define FUNDAMENTAL_OP_TRAITS_HH
 
-#include <vaucanson/fundamental/struct_decl.hh>
+# include <vaucanson/fundamental/predefs.hh>
 
 namespace vcsn {
 
