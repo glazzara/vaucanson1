@@ -1,14 +1,14 @@
-/*******************************
- * <vaucanson/algebra/krat.hxx> *
- *******************************/
+// krat.hxx
+//
+//
 // $Id$
+// VCSN_HEADER
 
-/* this file is part of the Vaucanson project */
 #ifndef ALGEBRA_KRAT_HXX
 # define ALGEBRA_KRAT_HXX
 
 # include <vaucanson/algebra/concrete/series/series.hh>
-# include <vaucanson/rat/exp.hh>
+# include <vaucanson/algebra/concrete/series/exp.hh>
 # include <utility>
 
 namespace vcsn {

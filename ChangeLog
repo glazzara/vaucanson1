@@ -1,3 +1,22 @@
+2002-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/exp.hh: 
+
+	* src/tests/fundamental/template_element-test.hh : header modified.
+	* include/vaucanson/algebra/concrete/series/krat.hxx : idem.
+	* include/vaucanson/algebra/concrete/series/krat.hh : idem.
+
+	* src/tests/algebra/series/series_test.hh : added.
+	* src/tests/algebra/series/series-test.cc : use it.
+	* src/tests/algebra/series/krat-test.cc : added and use it too.
+
+	An implementation of krat with visitor :
+	* include/vaucanson/algebra/concrete/series/nodes.hh : new file.
+	* include/vaucanson/algebra/concrete/series/exp.hh : new file.
+	* include/vaucanson/algebra/concrete/series/dump_visitor.hh : new file.
+	* include/vaucanson/algebra/concrete/series/depth_visitor.hh : new file.
+
+	
 2002-06-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx : modified.

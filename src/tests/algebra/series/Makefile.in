@@ -95,14 +95,22 @@ LDADD = $(top_builddir)/src/tests/check/libcheck.a
 TESTS = $(check_PROGRAMS)
 
 check_PROGRAMS = \
-	series-test
+	series-test	\
+	krat-test
 
 
 series_test_SOURCES = series-test.cc
+
+krat_test_SOURCES = krat-test.cc
 subdir = src/tests/algebra/series
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES =
-check_PROGRAMS = series-test$(EXEEXT)
+check_PROGRAMS = series-test$(EXEEXT) krat-test$(EXEEXT)
+am_krat_test_OBJECTS = krat-test.$(OBJEXT)
+krat_test_OBJECTS = $(am_krat_test_OBJECTS)
+krat_test_LDADD = $(LDADD)
+krat_test_DEPENDENCIES = $(top_builddir)/src/tests/check/libcheck.a
+krat_test_LDFLAGS =
 am_series_test_OBJECTS = series-test.$(OBJEXT)
 series_test_OBJECTS = $(am_series_test_OBJECTS)
 series_test_LDADD = $(LDADD)
@@ -116,16 +124,17 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/series-test.Po
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/krat-test.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/series-test.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 CXXFLAGS = @CXXFLAGS@
-DIST_SOURCES = $(series_test_SOURCES)
+DIST_SOURCES = $(krat_test_SOURCES) $(series_test_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(series_test_SOURCES)
+SOURCES = $(krat_test_SOURCES) $(series_test_SOURCES)
 
 all: all-am
 
@@ -139,6 +148,9 @@ Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 
 clean-checkPROGRAMS:
 	-test -z "$(check_PROGRAMS)" || rm -f $(check_PROGRAMS)
+krat-test$(EXEEXT): $(krat_test_OBJECTS) $(krat_test_DEPENDENCIES) 
+	@rm -f krat-test$(EXEEXT)
+	$(CXXLINK) $(krat_test_LDFLAGS) $(krat_test_OBJECTS) $(krat_test_LDADD) $(LIBS)
 series-test$(EXEEXT): $(series_test_OBJECTS) $(series_test_DEPENDENCIES) 
 	@rm -f series-test$(EXEEXT)
 	$(CXXLINK) $(series_test_LDFLAGS) $(series_test_OBJECTS) $(series_test_LDADD) $(LIBS)
@@ -149,6 +161,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/krat-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/series-test.Po@am__quote@
 
 distclean-depend:

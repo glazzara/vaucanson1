@@ -1,4 +1,4 @@
-// series-test.cc
+// krat-test.cc
 //
 //
 // $Id$
@@ -14,10 +14,16 @@
 #include <algebra/series/series-test.hh>
 #include <vaucanson/fundamental/fundamental.hh>
 #include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
+#include <vaucanson/algebra/concrete/series/krat.hh>
 #include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 
 using namespace vcsn;
+
+template <class S, class T>
+bool test_krat(tests::Tester& t)
+{
+  bool series_test = test_series(t);
+}
 
 int main(int argc, char **argv)
 {
@@ -32,7 +38,7 @@ int main(int argc, char **argv)
     verbose = 1;
   tests::Tester t(verbose);
 
- if (test_series<Series<NumericalSemiring, Words>, polynom<int,std::string> >(t))
+ if (test_series<Series<NumericalSemiring, Words>, rat::exp<int, std::string> >(t))
     return EXIT_SUCCESS;
   else
     return EXIT_FAILURE;

@@ -7,6 +7,9 @@
 include $(top_srcdir)/src/tests/check/Makefile.check
 
 check_PROGRAMS = \
-	series-test
+	series-test	\
+	krat-test
 
 series_test_SOURCES = series-test.cc
+
+krat_test_SOURCES = krat-test.cc
