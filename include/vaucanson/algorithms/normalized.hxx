@@ -97,7 +97,7 @@ namespace vcsn {
     sum_here(lhs, rhs);
     hstate_t new_i = lhs.add_state();
     hstate_t new_f = lhs.add_state();
-    for_each_initial_state(i, lhs.initial())
+    for_each_initial_state(i, lhs)
       {
 	lhs.add_spontaneous(new_i, *i);
 	init.push(*i);
@@ -107,7 +107,7 @@ namespace vcsn {
 	lhs.unset_initial(init.top());
 	init.pop();
       }
-    for_each_final_state(f, lhs.final())
+    for_each_final_state(f, lhs)
       {
 	lhs.add_spontaneous(*f, new_f);
 	init.push(*f);

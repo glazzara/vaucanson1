@@ -1,3 +1,8 @@
+2003-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/normalized.hxx:
+		Fix macro usage.
+
 2003-10-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/isomorph.hxx: Fix macro usage.
