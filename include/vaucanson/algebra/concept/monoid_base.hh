@@ -28,8 +28,8 @@ namespace vcsn {
 
   namespace algebra {
 
-    //! \addtogroup algebra 
-    //! \@{
+    /*! \addtogroup algebra */  /* @{ */
+    /*! \addtogroup monoid */ /* @{ */
 
     /*-----------------.
     | MonoidBase<Self> |
@@ -57,14 +57,14 @@ namespace vcsn {
       MonoidBase(const MonoidBase& other);
     };
 
-    //@}
+    /*! @} @} */
 
   } // algebra
 
   using namespace algebra;
-
-  //! \addtogroup algebra 
-  //! \@{
+  
+  /*! \addtogroup algebra */  /* @{ */
+  /*! \addtogroup monoid */ /* @{ */
   
   /*---------------------------------.
   | MetaElement<MonoidBase<Self>, T> |
@@ -82,7 +82,7 @@ namespace vcsn {
     MetaElement(const MetaElement& other);
   };
   
-  //! @}
+  /*! @} @} */
 
   template<typename T, typename Self>
   T op_default(SELECTOR(MonoidBase<Self>), SELECTOR(T));

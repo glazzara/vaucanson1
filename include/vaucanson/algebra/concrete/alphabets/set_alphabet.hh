@@ -11,14 +11,15 @@
 //
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
+
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#ifndef VCSN_ALGEBRA_SET_ALPHABET_HH
-# define VCSN_ALGEBRA_SET_ALPHABET_HH
+#ifndef VCSN_ALGEBRA_CONCRETE_ALPHABET_SET_ALPHABET_HH
+# define VCSN_ALGEBRA_CONCRETE_ALPHABET_SET_ALPHABET_HH
 
 # include <vaucanson/algebra/concrete/alphabets/alphabets.hh>
 
@@ -26,8 +27,7 @@ namespace vcsn {
 
   namespace algebra {
 
-    //! \addtogroup algebra
-    //! \@{
+    /*! @ingroup alphabet */ /*! @{ */
 
     /*---------------------------------------------.
     | alphabet_traits<SetAlphabets<L>,std::set<L>> |
@@ -45,8 +45,7 @@ namespace vcsn {
 
   } // algebra
   
-  //! \addtogroup algebra
-  //! \@{
+  /*! @ingroup alphabet */ /*! @{ */
 
   /*------------------------------------------.
   | MetaElement<SetAlphabets<L>, std::set<L>> |
@@ -77,4 +76,4 @@ namespace vcsn {
 
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hxx>
  
-#endif // VCSNALGEBRA_SET_ALPHABET_HH
+#endif // VCSN_ALGEBRA_CONCRETE_ALPHABET_SET_ALPHABET_HH

@@ -30,8 +30,8 @@ namespace vcsn {
 
   namespace algebra {
 
-    //! \addtogroup algebra 
-    //! \@{
+    /*! \addtogroup algebra */  /* @{ */
+    /*! \addtogroup semiring */ /* @{ */
 
     /*-------------------.
     | SemiringBase<Self> |
@@ -48,13 +48,12 @@ namespace vcsn {
       SemiringBase(const SemiringBase& other);
     };
 
-    //! @}
+    /*! @} @} */
 
   } // algebra
 
-
-  //! \addtogroup algebra 
-  //! \@{
+  /*! \addtogroup algebra */  /* @{ */
+  /*! \addtogroup semiring */ /* @{ */
 
   /*-----------------------------------.
   | MetaElement<SemiringBase<Self>, T> |
@@ -94,7 +93,7 @@ namespace vcsn {
   template<typename S, typename T>
   bool stareable(const Element<S, T>& elt);
 
-  //! @}
+  /*! @} @} */
 
   // default implementations:
 

@@ -28,8 +28,8 @@ namespace vcsn {
 
   namespace algebra {
 
-    //! \addtogroup algebra 
-    //! \@{
+    /*! \addtogroup algebra */  /* @{ */
+    /*! \addtogroup series */ /* @{ */
 
     /*-----------------.
     | SeriesBase<Self> |
@@ -71,12 +71,12 @@ namespace vcsn {
     struct series_traits
     {};
 
-    //! @}
+    /*! @} @} */
 
   } // algebra
 
-  //! \addtogroup algebra 
-  //! \@{
+  /*! \addtogroup algebra */  /* @{ */
+  /*! \addtogroup series */ /* @{ */
 
   /*---------------------------------.
   | MetaElement<SeriesBase<Self>, T> |
@@ -146,7 +146,7 @@ namespace vcsn {
   Element<S, T>
   transpose(const SeriesBase<S>& s, const T& t);
 
-  //! @}
+  /*! @} @} */
 
   template <typename S, typename T>
   T&		

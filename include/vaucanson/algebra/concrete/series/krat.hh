@@ -22,7 +22,6 @@
 # define ALGEBRA_KRAT_HH
 
 # include <utility>
-
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 
@@ -31,8 +30,8 @@ namespace vcsn {
   namespace algebra {
 
     /*------------------.
-      | Series compliance |
-      `------------------*/
+    | Series compliance |
+    `------------------*/
 
     template<typename W, typename M, typename Tm, typename Tw>
     struct series_traits<Series<W, M>, rat::exp<Tm, Tw> >
@@ -46,7 +45,6 @@ namespace vcsn {
  /*---------------------------------------------.
  | MetaElement<Series<W, M>, rat::exp<Tm, Tw> > |
  `---------------------------------------------*/
-
   template<typename W, typename M, typename Tm, typename Tw>
   struct MetaElement<Series<W, M>, rat::exp<Tm, Tw> >
     : MetaElement<SeriesBase<Series<W, M> >, rat::exp<Tm, Tw> >

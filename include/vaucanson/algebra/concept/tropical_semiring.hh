@@ -35,8 +35,8 @@ namespace vcsn {
 
   } // algebra
 
-  //! \addtogroup algebra 
-  //! \@{
+  /*! \addtogroup algebra */  /* @{ */
+  /*! \addtogroup semiring */ /* @{ */
 
   /*----------------------------------------------------.
   | MetaSet : traits about the set of tropical semiring |
@@ -53,12 +53,12 @@ namespace vcsn {
     typedef add_kind	semigroup_kind;
   };
 
-  //! @}
+  /*! @} @} */
   
   namespace algebra {
-    
-    //! \addtogroup algebra 
-    //! \@{
+
+    /*! \addtogroup algebra */  /* @{ */
+    /*! \addtogroup semiring */ /* @{ */
 
     /*-----------------.
     | Kind of tropical |
@@ -82,7 +82,7 @@ namespace vcsn {
       : SemiringBase<TropicalSemiring<TropicalKind> >
     {};
 
-    //! @}
+    /*! @} @} */
 
   } // algebra
 

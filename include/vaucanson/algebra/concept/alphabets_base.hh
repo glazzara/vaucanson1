@@ -30,8 +30,8 @@ namespace vcsn {
 
   namespace algebra {
 
-    //! \addtogroup algebra 
-    //! \@{
+    /*! \addtogroup algebra */  /* @{ */
+    /*! \addtogroup alphabet */ /* @{ */
 
     /*--------------------.
     | AlphabetsBase<Self> |
@@ -68,14 +68,14 @@ namespace vcsn {
       typedef traits::undefined_type	letter_t;
     };
 
-    //! @}
+    /*! \@} \@} */
 
   } // algebra
 
   using namespace algebra;
 
-  //! \addtogroup algebra 
-  //! \@{
+  /*! \addtogroup algebra */  /* @{ */
+  /*! \addtogroup alphabet */ /* @{ */
   
   /*------------------------------------.
   | MetaElement<AlphabetsBase<Self>, T> |
@@ -137,7 +137,7 @@ namespace vcsn {
       MetaElement(const MetaElement& other);
     };
 
-  //! @}
+  /*! @} @} */
 
   // FIXME: is it a good place for this ?
   template<typename Self, typename St, typename T>

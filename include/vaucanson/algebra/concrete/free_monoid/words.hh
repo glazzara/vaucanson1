@@ -21,12 +21,14 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_WORDS_HH
 # define VCSN_ALGEBRA_CONCRETE_WORDS_HH
 
-# include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <string>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 namespace vcsn {
 
   namespace algebra {
+
+    /*! @ingroup freemonoid */ /*! @{ */
     
     /*------------.
     | SetWords<A> |
@@ -57,7 +59,11 @@ namespace vcsn {
       A alph_;
     };
 
+    /*! @} @} */
+
   };
+
+  /*! @ingroup freemonoid */ /*! @{ */
 
   /*----------------------.
   | MetaSet<SetWords<A> > |
@@ -86,6 +92,8 @@ namespace vcsn {
     : MetaElement<FreeMonoidBase<SetWords<A> >, T>
   {};
 
+  /*! @} @} */
+
   namespace traits {
     
     template <class A>
@@ -95,7 +103,7 @@ namespace vcsn {
     };
 
   } // traits
-  
+
 } // vcsn
 
 template<typename A>

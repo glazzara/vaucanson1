@@ -78,12 +78,12 @@ namespace vcsn {
   
       
   /*-------------------------.
-    | goodies for real numbers |
-    `-------------------------*/
+  | goodies for real numbers |
+  `-------------------------*/
   template<typename T>
   bool op_stareable(const NumericalSemiring& s, T v);
-
-   inline bool op_stareable(const NumericalSemiring& s, 
+  
+  inline bool op_stareable(const NumericalSemiring& s, 
 				  const float& f);
 
    inline bool op_stareable(const NumericalSemiring& s, 
@@ -92,8 +92,6 @@ namespace vcsn {
    inline void op_in_star(const NumericalSemiring& s, float& f);
 
    inline void op_in_star(const NumericalSemiring& s, double& f);
-
-  // TODO: add some more operators as syntactic sugar
 
 } // vcsn
 

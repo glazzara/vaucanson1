@@ -28,8 +28,8 @@ namespace vcsn {
 
   namespace algebra {
 
-    //! \addtogroup algebra 
-    //! \@{
+    /*! \addtogroup algebra */  /* @{ */
+    /*! \addtogroup freemonoid */ /* @{ */
 
     /*---------------------.
     | FreeMonoidBase<Self> |
@@ -63,14 +63,13 @@ namespace vcsn {
       FreeMonoidBase(const FreeMonoidBase& m);
     };
 
-    //! @}
+    /*! @} @} */
 
   } // algebra
 
-
-  //! \addtogroup algebra 
-  //! \@{
-
+  /*! \addtogroup algebra */  /* @{ */
+  /*! \addtogroup freemonoid */ /* @{ */
+  
   /*-------------------------------------.
   | MetaElement<FreeMonoidBase<Self>, T> |
   `-------------------------------------*/
@@ -136,7 +135,7 @@ namespace vcsn {
   Element<S, T>
   mirror(const Element<S, T>& e);
 
-  //! @}
+  /*! @} @} */
 
   template<typename Self, typename T>
   void op_in_mirror(const FreeMonoidBase<Self>& s, T& v);

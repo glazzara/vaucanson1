@@ -28,8 +28,7 @@ namespace vcsn {
 
   namespace algebra {
 
-    //! @ingroup algebra
-    //! @{
+    /*! @ingroup alphabet */ /*! @{ */
 
     /*----------------.
     | SetAlphabets<L> |
@@ -49,6 +48,8 @@ namespace vcsn {
 
   //! \@{
   
+  /*! @ingroup alphabet */ /*! @{ */
+
   /*------------------------.
   | MetaSet<SetAlphabets<L> |
   `------------------------*/

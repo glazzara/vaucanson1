@@ -29,8 +29,8 @@ namespace vcsn {
 
   namespace algebra {
 
-    //! \addtogroup algebra 
-    //! \@{
+    /*! \addtogroup algebra */  /* @{ */
+    /*! \addtogroup semigroup */ /* @{ */
 
     //! Empty class that is used as static information to denotes the
     //! kind of internal operation of a semigroup. Here:operator*
@@ -56,12 +56,12 @@ namespace vcsn {
       SemigroupBase(const SemigroupBase& other);
     };
 
-    //! @}
+    /*! @} @} */
 
   } // algebra
 
-  //! \addtogroup algebra 
-  //! \@{
+  /*! \addtogroup algebra */  /* @{ */
+  /*! \addtogroup semigroup */ /* @{ */
 
   /*-----------------------------------.
   | MetaElement<SemigroupBase<Self>,T> |
@@ -79,7 +79,7 @@ namespace vcsn {
     MetaElement(const MetaElement& other);
   };
 
-  //! @}
+  /*! @} @} */
   
 } // vcsn
 

@@ -27,9 +27,9 @@ namespace vcsn {
 
   namespace algebra {
     
-    //! \addtogroup algebra 
-    //! \@{
-
+    /*! \addtogroup algebra */  /* @{ */
+    /*! \addtogroup semiring */ /* @{ */
+    
     /*------------------.
     | NumericalSemiring |
     `------------------*/
@@ -39,13 +39,16 @@ namespace vcsn {
       : SemiringBase<NumericalSemiring>
     {};
 
-    //! @}
+    /*! @} @} */
 
   } // algebra
   
-  //! \addtogroup algebra 
-  //! \@{
+  /*! \addtogroup algebra */  /* @{ */
+  /*! \addtogroup semiring */ /* @{ */
   
+  /*---------------------------.
+  | MetaSet<NumericalSemiring> |
+  `---------------------------*/
   //! MetaSet<NumericalSemiring> defines meta information about then
   //! NumericalSemiring structural element. 
   template<>
@@ -66,7 +69,7 @@ namespace vcsn {
     : MetaElement<SemiringBase<NumericalSemiring>, T>
   {};
 
-  //! @}
+  /*! @} @} */
 
 } // vcsn
 
