@@ -3,7 +3,7 @@
 #
 # $Id$
 
-SUBDIRS = include doc src
+SUBDIRS = xml include doc src
 
 ###
 ### Autoconf needs additional macros. 

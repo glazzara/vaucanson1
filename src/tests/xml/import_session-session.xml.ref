@@ -1,0 +1,32 @@
+Letters: A B C
+States:
+0 zero2
+1 one2
+2 two2
+3 three2
+Edges:
+0 1 0 (1 A)
+1 1 2 (1 C)
+2 1 1 (1 B)
+3 3 2 (1 A)
+4 3 3 (1 C)
+Initials:
+0 1
+Finals:
+2 1
+Letters: A B C
+States:
+0 zero2
+1 one2
+2 two2
+3 three2
+Edges:
+0 1 0 (1 A)
+1 1 2 (1 C)
+2 1 1 (1 B)
+3 3 2 (1 A)
+4 3 3 (1 C)
+Initials:
+0 1
+Finals:
+2 1
