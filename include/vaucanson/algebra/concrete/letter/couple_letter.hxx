@@ -40,10 +40,11 @@ namespace std {
     return o << "(" << p.first << "," << p.second << ")";
   }
 
-  template <typename U, typename V>
-  ostream& operator<<(ostream& o, basic_string<pair<U, V> > s)
+  template <typename U, typename V, class Traits, class Allocator>
+  ostream& operator<<(ostream& o,
+		      basic_string<pair<U, V>, Traits, Allocator> s)
   {
-    typename basic_string<pair<U, V> >::const_iterator	i;
+    typename basic_string<pair<U, V>, Traits, Allocator>::const_iterator i;
     for (i = s.begin(); i != s.end(); ++i)
       o << "(" << i->first << "," << i->second << ")";
     return o;

@@ -44,8 +44,9 @@ namespace std {
   ostream& operator<<(ostream& o, pair<U, V> p);
 
   //! To display a basic_string of pair (idem)
-  template <typename U, typename V>
-  ostream& operator<<(ostream& o, basic_string<pair<U, V> > s);
+  template <typename U, typename V, class Traits, class Allocator>
+  ostream& operator<<(ostream& o,
+		      basic_string<pair<U, V>, Traits, Allocator> s);
 
 } // std
 

@@ -36,7 +36,7 @@
 # include <vaucanson/algebra/concrete/alphabets/alphabets.hh>
 # include <vaucanson/algebra/concrete/free_monoid/words.hh>
 # include <vaucanson/algebra/concrete/letter/couple_letter.hh>
-# include <vaucanson/misc/char_traits/pair.hh>
+# include <vaucanson/misc/char_traits.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
 namespace vcsn {
@@ -68,7 +68,8 @@ namespace vcsn {
     typedef algebra::FreeMonoid<alphabet_t>			monoid_t;
     // FIXME: same remark here.
     typedef algebra::Series<orig_semiring_t, monoid_t>		series_t;
-    typedef std::basic_string<letter_t>				monoid_value_t;
+    typedef std::basic_string<letter_t, utility::char_traits<letter_t> >
+								monoid_value_t;
     typedef rat::exp<monoid_value_t, orig_semiring_elt_value_t>	serie_impl_t;
     // And the resulting type:
     typedef Element<series_t, serie_impl_t>			element_t;

@@ -1,5 +1,19 @@
 2004-02-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh: Fix
+	prototype of operator << (ostream&, const basic_string<pair<U, V>,
+	Traits, Allocator>.
+	* include/vaucanson/misc/char_traits.hxx,
+	* include/vaucanson/misc/char_traits.hh,
+	* include/vaucanson/misc/special_char_traits.hh: New.
+	* include/vaucanson/misc/char_traits/pair.hxx,
+	* include/vaucanson/misc/char_traits/pair.hh: Remove.
+	* include/vaucanson/algorithms/krat_exp_linearize.hh,
+	* include/Makefile.am: Update accordingly.
+
+2004-02-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/accessible.hh: Typo.
 
 2004-02-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
