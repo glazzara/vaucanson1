@@ -170,8 +170,6 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/implementation/series/series.hxx		   \
 	vaucanson/algebra/implementation/series/transpose.hh		   \
 	vaucanson/algebra/implementation/series/transpose.hxx		   \
-	vaucanson/algebra/implementation/series/krat_exp_verbalization.hh  \
-	vaucanson/algebra/implementation/series/krat_exp_verbalization.hxx \
 	vaucanson/algebra/implementation/series/krat_exp_transpose.hxx	   \
 	vaucanson/algebra/implementation/predefs.hh			   \
 	vaucanson/algebra/algebra.hh					   \

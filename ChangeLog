@@ -1,3 +1,15 @@
+2004-10-11  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/Makefile.am: Remove krat_exp_verbalization entries.
+	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hh: Delete.
+	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hxx: Delete.
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh:
+	Move to...
+	* src/tests/algebra/series/krat/main/krat_exp_expand_test.hh: ...this.
+	* src/tests/algebra/series/krat/main/Makefile.am: Replace
+	krat_exp_verbalization_test by krat_exp_expand_test.
+	* ChangeLog: Complete old comments.
+
 2004-10-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	Those modifications make Vaucanson compatible with g++ 3.2, 3.3,
@@ -648,7 +660,10 @@
 2004-07-16  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
-	Change derivation behavior when performing union of two expression sets.
+	Change derivation behavior when performing union of two expression sets:
+	if the same expression is present in the two sets, the union does not
+	contain the expression twice any more. It contains the expression
+	weighted by the sum of the two weights, as expected.
 	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
 	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx: Add
 	functions to compare expressions without their first weight.
@@ -738,7 +753,9 @@
 
 	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hxx,
 	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hh:
-	  New. Improved version of verbalization.
+	  New. This is an improved version of verbalization. It is able to
+	  handle stared expressions by recursively performing the same
+	  operations as verbalize into the stars.
 
 2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 

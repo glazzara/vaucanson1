@@ -13,5 +13,5 @@ EXTRA_DIST = \
   krat_exp_linearize_test.hh \
   krat_exp_linearize_structure_test.hh \
   krat_exp_parse_test.hh \
-  krat_exp_verbalization_test.hh \
+  krat_exp_expand_test.hh \
   krat_exp_realtime_test.hh

@@ -1,4 +1,4 @@
-// krat_exp_verbalization_test.hh: this file is part of the Vaucanson project.
+// krat_exp_expand_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
@@ -29,11 +29,11 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_VERBALIZATION_TEST_HH
-# define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_VERBALIZATION_TEST_HH
+#ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_EXPAND_TEST_HH
+# define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_EXPAND_TEST_HH
 
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
+# include <vaucanson/algorithms/krat_exp_expand.hh>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 
 # include <sstream>
@@ -47,7 +47,7 @@ std::string test(tests::Tester& t,
 {
   parse(input, e);
   std::stringstream s;
-  s << vcsn::rat::setpm (vcsn::rat::MODE_ALL) << verbalize(e);
+  s << vcsn::rat::setpm (vcsn::rat::MODE_ALL) << expand(e);
   EQTEST(t, input, s.str(), expected);
   return s.str();
 }
@@ -108,7 +108,7 @@ struct specialized_tests<bool, Expr>
 };
 
 template <class Expr>
-bool krat_exp_verbalization_test(tests::Tester& tg)
+bool krat_exp_expand_test(tests::Tester& tg)
 {
   typedef Expr				      krat_exp_t;
   typedef typename krat_exp_t::value_t	      kexp_t;
@@ -138,4 +138,4 @@ bool krat_exp_verbalization_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-#endif // ! VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_VERBALIZATION_TEST_HH
+#endif // ! VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_EXPAND_TEST_HH
