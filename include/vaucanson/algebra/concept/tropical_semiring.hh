@@ -78,24 +78,12 @@ namespace vcsn {
     //! confronted with.
     struct TropicalMin
     {
-      template <class T>
-      struct NonStareableInterval
-      {
-	static T inf();
-	static T sup();
-      };
     };
 
     //! Static information about the kind of tropical we are
     //! confronted with.
     struct TropicalMax
     {
-      template <class T>
-      struct NonStareableInterval
-      {
-	static T inf();
-	static T sup();
-      };
     };
 
     /*-----------------.
@@ -126,7 +114,5 @@ namespace vcsn {
   //! @}
 
 } // vcsn
-
-# include <vaucanson/algebra/concept/tropical_semiring.hxx>
 
 #endif // VCSN_ALGEBRA_CONCEPT_TROPICAL_SEMIRING_HH
