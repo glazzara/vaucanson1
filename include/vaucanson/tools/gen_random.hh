@@ -1,7 +1,7 @@
 // gen_random.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -45,22 +45,40 @@ namespace vcsn {
   class GenRandomAutomata
   {
   public:
+    typedef typename TAutomata::set_t	automata_set_t;
+
+  public:
     GenRandomAutomata();
     GenRandomAutomata(unsigned init);
 
     TAutomata empty(unsigned nb_letter = 2); 
+    TAutomata empty(const automata_set_t& set); 
 
     TAutomata generate(unsigned nb_state, unsigned nb_edge, 
 		       unsigned istate = 1, unsigned fstate = 1,
 		       unsigned nb_letter = 2);
+    TAutomata generate(const automata_set_t& set,
+		       unsigned nb_state, unsigned nb_edge,
+		       unsigned istate = 1, unsigned fstate = 1);
+
     TAutomata generate_dfa(unsigned nb_state, 
 			   unsigned size_alphabet = 2, 
 			   unsigned fstate = 1);
+    TAutomata generate_dfa(const automata_set_t& set,
+			   unsigned nb_state, 
+			   unsigned fstate = 1);
+
     TAutomata generate_with_epsilon(unsigned nb_state, unsigned nb_edge, 
+				    unsigned nb_epsilon_min, 
+				    unsigned nb_epsilon_max);
+    TAutomata generate_with_epsilon(const automata_set_t& set,
+				    unsigned nb_state, unsigned nb_edge, 
 				    unsigned nb_epsilon_min, 
 				    unsigned nb_epsilon_max);
 
     TAutomata generate_normalized(unsigned nb_state, unsigned density = 3);
+    TAutomata generate_normalized(const automata_set_t& set,
+				  unsigned nb_state, unsigned density = 3);
 
   private:
 

@@ -1,3 +1,11 @@
+2004-03-22  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/tools/gen_random.hh,
+	* include/vaucanson/tools/gen_random.hxx: Add functions using a
+	  predefined set for automata construction.
+	* src/tests/automata/algos/concat_test.hh,
+	* src/tests/automata/algos/in_concat_test.hh: Improve it.
+
 2004-03-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* Makefile.am: Add config/xml.m4 to EXTRA_DIST.

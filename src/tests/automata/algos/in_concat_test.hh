@@ -1,7 +1,7 @@
 // in_concat_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,6 +36,9 @@
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/concatenate.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
+# include <vaucanson/algorithms/realtime.hh>
+# include <vaucanson/automata/concrete/generalized.hh>
 
 template <class Auto>
 bool in_concat_test(tests::Tester& tg)
@@ -43,28 +46,49 @@ bool in_concat_test(tests::Tester& tg)
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
+
   AUTOMATON_TYPES(Auto);
+  typedef typename generalized_traits<Auto>::automaton_t generalized_t;
+  AUTOMATON_TYPES_(generalized_t, g_);
   
   unsigned int nb_test = 20;
   unsigned int size    = 0;
   tests::Tester t(tg.verbose());
 
-  gen_auto_t gen(time(0x0));
+  vcsn::tools::GenRandomAutomata<Auto> gen(time(0x0));
   for (unsigned i = 0; i < nb_test; ++i)
     {
-      automaton_t	auto_lhs = gen.generate_with_epsilon(30, 50, 10, 20);
-      automaton_t	auto_rhs = gen.generate_with_epsilon(30, 50, 10, 20);
-      int		lhs_states_num = auto_lhs.states().size();
-      
+      automaton_t auto_lhs = gen.generate_with_epsilon(5, 10, 3, 7);
+      automaton_t auto_rhs = gen.generate_with_epsilon(auto_lhs.set(),
+						       5, 10, 3, 7);
+      int lhs_states_num = auto_lhs.states().size();
+      generalized_t g_auto_lhs = generalized(auto_lhs);
+      generalized_t g_auto_rhs = generalized(auto_rhs);
+      g_series_elt_t exp_lhs(g_auto_lhs.set().series());
+      g_series_elt_t exp_rhs(g_auto_rhs.set().series());
+      exp_lhs = aut_to_exp(g_auto_lhs);
+      exp_rhs = aut_to_exp(g_auto_rhs);
+      monoid_elt_t word = (exp_lhs * exp_rhs).choose_from_supp();
+
       concatenate_here(auto_lhs, auto_rhs);
-      if (auto_lhs.states().size() ==
-	      lhs_states_num + auto_rhs.states().size())
+
+      if (auto_lhs.states().size() == 
+	    lhs_states_num + auto_rhs.states().size() &&
+	  eval(realtime(auto_lhs), word) !=
+	    zero_as<semiring_elt_value_t>::of(auto_lhs.set().series().semiring()))
 	++size;
+      else
+      {
+	std::cerr << "TEST: concatenation of automata corresponding"
+		  << "to following expressions failed."
+		  << std::endl;
+	std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs << std::endl;
+      }
     }
 
   std::string size_rate;
   SUCCESS_RATE(size_rate, size, nb_test);
-  TEST(t, "Number of states is the addition of the two."+size_rate,
+  TEST(t, "In place concatenation of two automata." + size_rate,
        size == nb_test);
   // FIXME: add tests based on samples from the languages.
   return t.all_passed();
