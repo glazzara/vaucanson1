@@ -41,8 +41,7 @@ namespace vcsn {
 
     template <class M_, class W_>
     DumpVisitor<M_,W_>::DumpVisitor(std::ostream& o,
-				    const std::set<typename M_::value_type>&
-				    escaped,
+				    const std::set<char>& escaped,
 				    const char* zero,
 				    const char* one)
       : o_(o),
@@ -105,8 +104,14 @@ namespace vcsn {
     template <class M_, class W_>
     void 
     DumpVisitor<M_,W_>::constant(const M_& m)
-    { 
-      for (typename M_::const_iterator i = m.begin(); i != m.end(); ++i)
+    {
+      std::ostringstream out_stream;
+      out_stream << m;
+      std::string out_string(out_stream.str());
+      
+      for (typename std::string::const_iterator i = out_string.begin();
+	   i != out_string.end();
+	   ++i)
 	{
 	  if (escaped_.find(*i) != escaped_.end())
 	    o_ << "\\";

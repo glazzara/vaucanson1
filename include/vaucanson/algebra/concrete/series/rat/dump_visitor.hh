@@ -43,7 +43,7 @@ namespace vcsn {
     {
     public:
       DumpVisitor(std::ostream& o,
-		  const std::set<typename M_::value_type>& escaped,
+		  const std::set<char>& escaped,
 		  const char* zero = "0",
 		  const char* one = "1");
       
@@ -70,10 +70,10 @@ namespace vcsn {
       virtual void one();
 
     protected:
-      std::ostream&				o_;
-      const std::set<typename M_::value_type>&	escaped_;
-      const char*				z_;
-      const char*				i_;
+      std::ostream&		o_;
+      const std::set<char>&	escaped_;
+      const char*		z_;
+      const char*		i_;
     };
       
   } // rat

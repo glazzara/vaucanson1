@@ -391,7 +391,7 @@ namespace std {
   std::ostream& operator<<(std::ostream& o,
 			   const vcsn::rat::exp<M_, W_>& exp)
   { 
-    std::set<typename M_::value_type> escape_set;
+    std::set<char> escape_set;
     escape_set.insert('.');
     escape_set.insert('+');
     escape_set.insert('*');
