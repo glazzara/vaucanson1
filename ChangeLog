@@ -1,3 +1,20 @@
+
+2003-02-14  Maxime Rey  <max@nirgal>
+
+	* A new static hierarchy branch !! in order to show a more simple
+	algebraic for VaucansonDay. Otherwise this code will be use in
+	soon futur for GRAMMATICAL INFERENCE.
+	* Added `include/vaucanson/algebra/concrete/order/lattice.hxx'
+	* Added `include/vaucanson/algebra/concrete/order/orderset.hxx' 
+	* Added `include/vaucanson/algebra/concrete/order/lattice.hh'
+	* Added `include/vaucanson/algebra/concrete/order/orderset.hh'
+	* Added `include/vaucanson/algebra/concept/lattice_base.hxx' 
+	* Added `include/vaucanson/algebra/concept/lattice_base.hh' 
+	* Added `include/vaucanson/algebra/concept/orderset_base.hxx'
+	* Added `include/vaucanson/algebra/concept/orderset_base.hh'
+
+	
+
 2003-02-13  Maxime Rey  <max@lrde.epita.fr>
 
 	* Added `src/demos/samples/algebra/series.cc'

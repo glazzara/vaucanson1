@@ -1,11 +1,11 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 153)
-(Parent-Version vaucanson 0 152)
+(Project-Version vaucanson 0 154)
+(Parent-Version vaucanson 0 153)
 (Version-Log "")
 (New-Version-Log "")
-(Checkin-Time "Thu, 13 Feb 2003 18:11:44 +0100")
+(Checkin-Time "Fri, 14 Feb 2003 19:22:25 +0100")
 (Checkin-Login max)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -88,7 +88,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.94 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.95 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.14 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.3 600))
@@ -598,6 +598,18 @@
   (src/demos/samples/pattern/fundamental/structure.hh (vaucanson/i/0_structure. 1.1 600))
   (src/demos/samples/pattern/concrete () :directory)
   (src/demos/samples/pattern/concept/element.hh (vaucanson/i/1_element.hh 1.1 600))
+
+;; Files added by populate at Fri, 14 Feb 2003 19:07:25 +0100,
+;; to version 0.153(w), by max:
+
+  (include/vaucanson/algebra/concrete/order/lattice.hxx (vaucanson/i/2_lattice.hx 1.1 600))
+  (include/vaucanson/algebra/concrete/order/orderset.hxx (vaucanson/i/3_orderset.h 1.1 600))
+  (include/vaucanson/algebra/concrete/order/lattice.hh (vaucanson/i/4_lattice.hh 1.1 600))
+  (include/vaucanson/algebra/concrete/order/orderset.hh (vaucanson/i/5_orderset.h 1.1 600))
+  (include/vaucanson/algebra/concept/lattice_base.hxx (vaucanson/i/6_lattice_ba 1.1 600))
+  (include/vaucanson/algebra/concept/lattice_base.hh (vaucanson/i/7_lattice_ba 1.1 600))
+  (include/vaucanson/algebra/concept/orderset_base.hxx (vaucanson/i/8_orderset_b 1.1 600))
+  (include/vaucanson/algebra/concept/orderset_base.hh (vaucanson/i/9_orderset_b 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)
