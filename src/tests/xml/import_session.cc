@@ -66,7 +66,7 @@ int main()
 
   try {
     session >> dyn;
-    x = a;
+    x = dyn;
     a = x;
   }
   catch (const xml::LoaderException& e) {

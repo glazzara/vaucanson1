@@ -1,4 +1,8 @@
-data_DATA = automaton-to-dot.xsl automaton-to-vcsng.xsl vaucanson.dtd
+data_DATA = automaton-to-dot.xsl \
+	    automaton-to-neato.xsl \
+	    automaton-to-vcsng.xsl \
+	    vaucanson.dtd
+
 CLEANFILES = vaucanson.dtd automaton-to-vcsng.xsl
 
 vaucanson.dtd: vaucanson-g.style style-to-dtd.awk gendtd.sh
@@ -8,6 +12,7 @@ automaton-to-vcsng.xsl: automaton-to-vcsng.xsl.sh vaucanson-g.style style-to-xsl
 	$(SHELL) $(srcdir)/automaton-to-vcsng.xsl.sh $(srcdir)
 
 EXTRA_DIST = automaton-to-dot.xsl \
+	     automaton-to-neato.xsl \
 	     automaton-to-vcsng.xsl.sh \
 	     gendtd.sh \
 	     vaucanson-g.style \

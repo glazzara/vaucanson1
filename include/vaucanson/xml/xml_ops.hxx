@@ -269,11 +269,6 @@ namespace vcsn
       inline
       void set_state(DOMElement* n, hstate_t s, XmlInfosTag tag)
       {
-	XMLCh* name = XMLString::transcode(tag.states
-					   .name[s].c_str());
-	n->setAttribute(str_name, name);
-	XMLString::release(&name);
-
 	if (tag.states.label[s].set) {
 	  XMLCh* label = XMLString::transcode(tag.states
 					     .label[s].value.c_str());
@@ -310,7 +305,10 @@ namespace vcsn
       xercesc::DOMElement*
       add_state(XmlAutomaton& x, hstate_t s, const XmlInfosTag& tag)
       {
-	if (tag.states.name.find(s)->second == "") {
+	if (tag.states.name.find(s) == tag.states.name.end()) {
+	  return x.add_state_elt(s);
+	}
+	else if (tag.states.name.find(s)->second == "") {
 	  return x.add_state_elt(s);
 	}
 	else {
@@ -894,8 +892,7 @@ namespace vcsn
       if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
 	DOMElement* elt = static_cast<DOMElement*>(child);
 	if (!XMLString::compareIString(elt->getNodeName(), str_initial)) {
-	  if (elt->hasAttribute(str_state)
-	      && elt->hasAttribute(str_label)) {
+	  if (elt->hasAttribute(str_state)) {
 	    const XMLCh* state = elt->getAttribute(str_state);
 	    const XMLCh* label = elt->getAttribute(str_label);
 	    std::string l;
@@ -925,8 +922,7 @@ namespace vcsn
       if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
 	DOMElement* elt = static_cast<DOMElement*>(child);
 	if (!XMLString::compareIString(elt->getNodeName(), str_final)) {
-	  if (elt->hasAttribute(str_state)
-	      && elt->hasAttribute(str_label)) {
+	  if (elt->hasAttribute(str_state)) {
 	    const XMLCh* state = elt->getAttribute(str_state);
 	    const XMLCh* label = elt->getAttribute(str_label);
 	    std::string l;

@@ -179,7 +179,7 @@ operator >>(St& s, Element<S, T>& e)
   if (e.bound())
      set = S(e.set());
   op_rin(set, s, e.value());
-  e = Element<S, T>(utility::unique::get(set), e.value());
+  e = Element<S, T>(utility::unique::get(S(set)), e.value());
   return s;
 }
 

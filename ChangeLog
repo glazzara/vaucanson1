@@ -1,3 +1,20 @@
+2003-12-17  Valentin David  <valentin@lrde.epita.fr>
+
+	* config/xml.m4: New.
+	* configure.ac: Update.
+
+	* include/vaucanson/algorithms/product.hxx: Modify the geometry.
+
+	* include/vaucanson/design_pattern/element_ops.hxx,
+	* include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/infos.hh: Fix.
+
+	* src/tests/xml/import_session.cc,
+	* src/tests/xml/import_session-session.xml.ref: Fix.
+
+	* xml/vaucanson-g.style, xml/automaton-to-neato.xsl: New.
+	* xml/Makefile.am: Update.
+
 2003-12-05  Valentin David  <valentin@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/main/Makefile.am: Fix.

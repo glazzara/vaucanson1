@@ -26,6 +26,7 @@ namespace vcsn
       }
       I& operator()()
       {
+	set = true;
 	return value;
       }
     };

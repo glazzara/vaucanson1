@@ -1,0 +1,168 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This files contains initial values
+%  of Vaucanson's parameter
+%  Modify it to create your own style
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%
+% State aspect
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+StateLabelColor,\SetStateLabelColor{#1},color,black
+StateLabelScale,\SetStateLabelScale{#1},float,1.7
+StateLineStyle,\SetStateLineStyle{#1},(none|solid|dashed|dotted),solid
+StateLineWidth,\SetStateLineWidth{#1},length,1.8pt
+StateLineColor,\SetStateLineColor{#1},color,black
+StateFillStatus,\SetStateFillStatus{#1},(none|solid|dashed|dotted),solid
+StateFillColor,\SetStateFillColor{#1},color,white
+DimStateLineStyle,\FixDimState{#1}{$DimStateLineColor}{$DimStateLineCoef}{$DimStateLabelColor}{$DimStateFillColor},(none|solid|dashed|dotted),solid
+DimStateLineColor,\FixDimState{$DimStateLineStyle}{#1}{$DimStateLineCoef}{$DimStateLabelColor}{$DimStateFillColor},color,gray
+DimStateLineCoef,\FixDimState{$DimStateLineStyle}{$DimStateLineColor}{#1}{$DimStateLabelColor}{$DimStateFillColor},float,1
+DimStateLabelColor,\FixDimState{$DimStateLineStyle}{$DimStateLineColor}{$DimStateLineCoef}{#1}{$DimStateFillColor},color,gray
+DimStateFillColor,\FixDimState{$DimStateLineStyle}{$DimStateLineColor}{$DimStateLineCoef}{$DimStateLabelColor}{#1},color,gray
+StateLineDblCoef,\FixStateLineDouble{#1}{$StateLineDblSep},float,0.6
+StateLineDblSep,\FixStateLineDouble{$StateLineDblCoef}{#1},float,0.4
+
+%%%%%%%%%%%%%%
+% Edge aspect
+%%%%%%%%%%%%%%
+
+EdgeLabelColor,\SetEdgeLabelColor{#1},color,black
+EdgeLabelScale,\SetEdgeLabelScale{#1},float,1.7
+EdgeLineStyle,\SetEdgeLineStyle{#1},(none|solid|dashed|dotted),solid
+EdgeLineWidth,\SetEdgeLineWidth{#1},length,1pt
+EdgeLineColor,\SetEdgeLineColor{#1},color,black
+ArcAngle,\SetArcAngle{#1},int,15
+LArcAngle,\SetLArcAngle{#1},int,30
+ArcCurvature,\SetArcCurvature{#1},float,0.8
+EdgeOffset,\SetEdgeOffset{#1},length,0pt
+ArcOffset,\SetArcOffset{#1},length,1pt
+LoopOffset,\SetLoopOffset{#1},length,0pt
+ForthBackEdgeOffset,\renewcommand{\ForthBackEdgeOffset}{#1},float,5
+DimEdgeLineStyle,\FixDimEdge{#1}{$DimEdgeLineCoef}{$DimEdgeLineColor}{$DimEdgeLabelColor},(none|solid|dashed|dotted),solid
+DimEdgeLineCoef,\FixDimEdge{$DimEdgeLineStyle}{#1}{$DimEdgeLineColor}{$DimEdgeLabelColor},float,1.2
+DimEdgeLineColor,\FixDimEdge{$DimEdgeLineStyle}{$DimEdgeLineCoef}{#1}{$DimEdgeLabelColor},color,gray
+DimEdgeLabelColor,\FixDimEdge{$DimEdgeLineStyle}{$DimEdgeLineCoef}{$DimEdgeLineColor}{#1},color,gray
+EdgeBorderCoef,\FixEdgeBorder{#1}{$EdgeBorderColor},int,2
+EdgeBorderColor,\FixEdgeBorder{$EdgeBorderCoef}{#1},color,white
+EdgeLineDoubleCoefOne,\FixEdgeLineDouble{#1}{$EdgeLineDoubleCoefTwo},float,0.5
+EdgeLineDoubleCoefTwo,\FixEdgeLineDouble{$EdgeLineDoubleCoefOne}{#1},float,0.6
+
+%%%%%%%%%%%%%%
+% ZZ aspect
+%%%%%%%%%%%%%%
+
+ZZSize,\setlength{\ZZSize}{#1},length,.9cm
+ZZShape,\renewcommand{\ZZShape}{#1},float,0.5
+ZZLineWidth,\SetZZLineWidth{#1},float,1.7
+TransLabelZZCoef,\renewcommand{\TransLabelZZCoef}{#1},float,0.6
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Scales  --- Default settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+LargeScale,\renewcommand{\LargeScale}{#1},float,0.85
+MediumScale,\renewcommand{\MediumScale}{#1},float,0.6
+SmallScale,\renewcommand{\SmallScale}{#1},float,0.5
+TinyScale,\renewcommand{\TinyScale}{#1},float,0.42
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% State parameters  --- Default settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+MediumStateDiameter,\setlength{\MediumStateDiameter}{#1},length,.9cm
+SmallStateDiameter,\setlength{\SmallStateDiameter}{#1},length,.6cm
+LargeStateDiameter,\setlength{\LargeStateDiameter}{#1},length,1.2cm
+VerySmallStateDiameter,\setlength{\VerySmallStateDiameter}{#1},length,.3cm
+VSStateLineCoef,\renewcommand{\VSStateLineCoef}{#1},float,.6
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ArrowOnMediumState,\renewcommand{\ArrowOnMediumState}{#1},float,1.5
+ArrowOnSmallState,\renewcommand{\ArrowOnSmallState}{#1},float,1.7
+ArrowOnLargeState,\renewcommand{\ArrowOnLargeState}{#1},float,1.3
+ArrowOnVerySmallState,\renewcommand{\ArrowOnVerySmallState}{#1},float,5
+LoopOnMediumState,\renewcommand{\LoopOnMediumState}{#1},float,7
+LoopOnSmallState,\renewcommand{\LoopOnSmallState}{#1},float,9.6
+LoopOnLargeState,\renewcommand{\LoopOnLargeState}{#1},float,5.8
+LoopOnVariableState,\renewcommand{\LoopOnVariableState}{#1},float,5.1
+CLoopOnMediumState,\renewcommand{\CLoopOnMediumState}{#1},float,8
+CLoopOnSmallState,\renewcommand{\CLoopOnSmallState}{#1},float,12
+CLoopOnLargeState,\renewcommand{\CLoopOnLargeState}{#1},float,6
+CLoopOnVariableState,\renewcommand{\CLoopOnVariableState}{#1},float,5.2
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Edge parameters  --- Default settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+EdgeLabelPosit,\renewcommand{\EdgeLabelPosit}{#1},float,.45
+EdgeLabelRevPosit,\renewcommand{\EdgeLabelRevPosit}{#1},float,.55
+ArcLabelPosit,\renewcommand{\ArcLabelPosit}{#1},float,.40
+ArcLabelRevPosit,\renewcommand{\ArcLabelRevPosit}{#1},float,.60
+LArcLabelPosit,\renewcommand{\LArcLabelPosit}{#1},float,.40
+LArcLabelRevPosit,\renewcommand{\LArcLabelRevPosit}{#1},float,.60
+LoopLabelPosit,\renewcommand{\LoopLabelPosit}{#1},float,.25
+LoopLabelRevPosit,\renewcommand{\LoopLabelRevPosit}{#1},float,.75
+CLoopLabelPosit,\renewcommand{\CLoopLabelPosit}{#1},float,.25
+CLoopLabelRevPosit,\renewcommand{\CLoopLabelRevPosit}{#1},float,.75
+InitStateLabelPosit,\renewcommand{\InitStateLabelPosit}{#1},float,.10
+InitStateLabelRevPosit,\renewcommand{\InitStateLabelRevPosit}{#1},float,.90
+FinalStateLabelPosit,\renewcommand{\FinalStateLabelPosit}{#1},float,.90
+FinalStateLabelRevPosit,\renewcommand{\FinalStateLabelRevPosit}{#1},float,.10
+EdgeArrowWidth,\SetEdgeArrowWidth{#1},length,5pt
+EdgeArrowLengthCoef,\SetEdgeArrowLengthCoef{#1},float,1.4
+EdgeDblArrowWidth,\setlength{\EdgeDblArrowWidth}{#1},length,5.5pt
+EdgeDblArrowLengthCoef,\renewcommand{\EdgeDblArrowLengthCoef}{#1},float,1.7
+EdgeArrowInsetCoef,\SetEdgeArrowInsetCoef{#1},float,0.1
+EdgeArrowStyle,\SetEdgeArrowStyle{#1},string,->
+EdgeRevArrowStyle,\renewcommand{\EdgeRevArrowStyle}{#1},string,<-
+StateDimen,\renewcommand{\StateDimen}{#1},(outer|middle|inner),outer
+StateDblDimen,\renewcommand{\StateDblDimen}{#1},(outer|middle|inner),middle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Initialization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\SetVCDirectory{}        %default dir=current dir
+\HideFrame
+\HideGrid
+\MediumPicture
+\HideName
+\RigidLabel
+\FullState				%% PlainState
+\MediumState
+
+% End of LaTeX
+
+%
+% XML Only
+%
+
+%%
+% automaton
+left,,float,0
+bottom,,float,0
+top,,float,0
+right,,float,0
+
+%%
+% states
+label,,string,
+x,,float,0
+y,,float,0
+
+%%
+% edges
+curvature,,(edge|arc|larc|loop),edge
+% not for edges and loops
+curvside,,(left|right),left
+
+%%
+% initials, finals
+direction,,string,w
+
+% only for finals
+doubleline,,bool,
+
