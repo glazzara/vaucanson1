@@ -1,3 +1,8 @@
+2004-05-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/concat_test.hh: Fix the test so it checks
+	multiplicity correctness.
+
 2004-05-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/contextual_automaton_functions.hh,
