@@ -1,4 +1,22 @@
-Vaucanson 0.4
+* Vaucanson 0.5
+
+** New implementation for numerical semiring.
+** -----------------------------------------
+
+   It is now possible to use rational numbers as an implementation in
+numerical semirings. In order to do so, the header
+<vaucanson/algebra/concrete/semiring/rational_number.hh> must be included.
+All you need to do then, is to declare a variable as follows:
+
+    vcsn::Element<semiring_t, vcsn::algebra::RationalNumber> q(num, denom);
+
+semiring_t can be any numerical semiring.
+
+The usual operators have been  overloaded, and you can get the integer
+or double value of the  fraction by using to_int() or to_double(). You
+can also access the numerator with num() and denominator with denom().
+
+* Vaucanson 0.4
 
 	* Addition of automata I/O subsystem.
 	* Nearly-complete SWIG bindings for algorithms in Vaucanswig.
@@ -8,14 +26,14 @@ Vaucanson 0.4
 	* Addition of a generic search algorithm able to skip characters in
 	  the input stream.
 
-Vaucanson 0.3	July 11, 2003
+* Vaucanson 0.3	July 11, 2003
 
 	* More documentation efforts.
 	* Addition of SWIG modules (Vaucanswig).
 	* Noticeable performance boost thanks to a working unification
 	of references to structural elements.
 
-Vaucanson 0.2	July 02, 2003
+* Vaucanson 0.2	July 02, 2003
 
 	* First public release.
 	* Rewrite of the 'fundamental' module.
@@ -25,7 +43,7 @@ Vaucanson 0.2	July 02, 2003
 	* Implementation of algorithms on rational expressions.
 	* Initial Doxygen documentation efforts.
 
-Vaucanson 0.1	January, 2002
+* Vaucanson 0.1	January, 2002
 
 	* Initial release.
 

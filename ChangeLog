@@ -1,3 +1,17 @@
+2004-03-02  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx:
+	New files. Provide an implementation for rational numbers.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Add specialization for rational numbers.
+	* include/vaucanson/misc/random.hh, include/vaucanson/misc/random.hxx:
+	Add support for rational numbers random generation.
+	* src/tests/tests-suites/generate-all.sh: Generate semiring tests with
+	rational numbers.
+	* include/Makefile.am, NEWS: Update.
+
 2004-03-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/free_monoid/words.hh,

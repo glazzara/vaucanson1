@@ -51,6 +51,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algebra/concrete/semiring/numerical_semiring.hxx   \
 	vaucanson/algebra/concrete/semiring/tropical_semiring.hh     \
 	vaucanson/algebra/concrete/semiring/tropical_semiring.hxx    \
+	vaucanson/algebra/concrete/semiring/rational_number.hh		     \
+	vaucanson/algebra/concrete/semiring/rational_number.hxx	     \
 	vaucanson/algebra/concrete/series/generalized.hh	     \
 	vaucanson/algebra/concrete/series/generalized.hxx	     \
 	vaucanson/algebra/concrete/series/krat_coefficient.hh	     \

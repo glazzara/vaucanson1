@@ -1,7 +1,7 @@
 // numerical_semiring.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,6 +31,7 @@
 # define VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HH
 
 # include <vaucanson/algebra/concept/numerical_semiring.hh>
+# include <vaucanson/algebra/concrete/semiring/rational_number.hh>
 
 namespace vcsn {
 
@@ -51,7 +52,7 @@ namespace vcsn {
 
   template<typename T>
   T identity_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T));
-    
+
   template<typename T>
   T zero_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T));
 
@@ -68,8 +69,8 @@ namespace vcsn {
 
   Element<algebra::NumericalSemiring, int>
   op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(int));
-  
-  Element<algebra::NumericalSemiring, int> 
+
+  Element<algebra::NumericalSemiring, int>
   op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(int));
 
   /*-----------------------------.
@@ -78,28 +79,28 @@ namespace vcsn {
   template<typename T>
   inline void op_in_mul(const algebra::NumericalSemiring& s1,
 			bool& dst, bool src);
-  
+
   inline bool op_mul(const algebra::NumericalSemiring& s, bool a, bool b);
-  
+
   inline void op_in_add(const algebra::NumericalSemiring& s1,
 			bool& dst, bool src);
-  
+
   inline bool op_add(const algebra::NumericalSemiring& s, bool a, bool b);
-  
-  inline bool identity_value(SELECTOR(algebra::NumericalSemiring), 
+
+  inline bool identity_value(SELECTOR(algebra::NumericalSemiring),
 			     SELECTOR(bool));
-  
-  inline bool zero_value(SELECTOR(algebra::NumericalSemiring), 
+
+  inline bool zero_value(SELECTOR(algebra::NumericalSemiring),
 			 SELECTOR(bool));
-  
+
   inline bool op_starable(const algebra::NumericalSemiring& s, bool b);
-  
+
   inline void op_in_star(const algebra::NumericalSemiring& s, bool& b);
 
   Element<algebra::NumericalSemiring, bool>
   op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(bool));
-  
-  Element<algebra::NumericalSemiring, bool> 
+
+  Element<algebra::NumericalSemiring, bool>
   op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(bool));
 
   /*-------------------------.
@@ -107,16 +108,16 @@ namespace vcsn {
   `-------------------------*/
   template<typename T>
   bool op_starable(const algebra::NumericalSemiring& s, T v);
-  
-  inline bool op_starable(const algebra::NumericalSemiring& s, 
-				  const float& f);
 
-   inline bool op_starable(const algebra::NumericalSemiring& s, 
-				  const double& f);
+  inline bool op_starable(const algebra::NumericalSemiring& s,
+			  const float& f);
 
-   inline void op_in_star(const algebra::NumericalSemiring& s, float& f);
+  inline bool op_starable(const algebra::NumericalSemiring& s,
+			  const double& f);
 
-   inline void op_in_star(const algebra::NumericalSemiring& s, double& f);
+  inline void op_in_star(const algebra::NumericalSemiring& s, float& f);
+
+  inline void op_in_star(const algebra::NumericalSemiring& s, double& f);
 
   bool
   op_can_choose_non_starable(const algebra::NumericalSemiring& set,
@@ -124,9 +125,34 @@ namespace vcsn {
 
   Element<algebra::NumericalSemiring, float>
   op_choose_starable(const algebra::NumericalSemiring& set, SELECTOR(float));
-  
-  Element<algebra::NumericalSemiring, float> 
+
+  Element<algebra::NumericalSemiring, float>
   op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(float));
+
+
+  /*-------------------------------------.
+  | specializations for rational numbers |
+  `-------------------------------------*/
+  template<typename T>
+  bool op_starable(const algebra::NumericalSemiring& s, T v);
+
+  inline bool op_starable(const algebra::NumericalSemiring& s,
+			  const algebra::RationalNumber& r);
+
+  inline void op_in_star(const algebra::NumericalSemiring& s,
+			 algebra::RationalNumber& r);
+
+  bool
+  op_can_choose_non_starable(const algebra::NumericalSemiring& set,
+			     SELECTOR(algebra::RationalNumber));
+
+  Element<algebra::NumericalSemiring, algebra::RationalNumber>
+  op_choose_starable(const algebra::NumericalSemiring& set,
+		     SELECTOR(algebra::RationalNumber));
+
+  Element<algebra::NumericalSemiring, algebra::RationalNumber>
+  op_choose_non_starable(const algebra::NumericalSemiring& set,
+			 SELECTOR(algebra::RationalNumber));
 
 } // vcsn
 
@@ -134,6 +160,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HH

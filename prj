@@ -1,32 +1,27 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 493)
-(Parent-Version vaucanson 0 492)
+(Project-Version vaucanson 0 494)
+(Parent-Version vaucanson 0 493)
 (New-Version-Log "")
 
-(Version-Log "2004-03-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+(Version-Log "2004-03-02  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/free_monoid/words.hh,
-	* include/vaucanson/algebra/concrete/free_monoid/words.hxx: Remove
-	constructor for FreeMonoid with no arguments.
-	* src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh:
-	New.
-	* src/tests/algebra/free_monoid/free_monoid_test.hh: Fix instanciation
-	of an Element<S, T> without initialiazing the set. Improve.
-	* src/tests/bin/generate-test-suite.sh: Adapt to handle test which are
-	expected to fail compilation.
-	* src/tests/algebra/free_monoid/Makefile.am,
-	* src/demos/fibonacci/fibonacci.cc: Update.
-
-	* src/tests/algebra/alphabets/alphabet_test.hh: Improve.
-
-	* include/vaucanson/tools/usual_escaped_characters.hxx: Add a missing
-	inline.
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx:
+	New files. Provide an implementation for rational numbers.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Add specialization for rational numbers.
+	* include/vaucanson/misc/random.hh, include/vaucanson/misc/random.hxx:
+	Add support for rational numbers random generation.
+	* src/tests/tests-suites/generate-all.sh: Generate semiring tests with
+	rational numbers.
+	* include/Makefile.am, NEWS: Update..
 
 ")
-(Checkin-Time "Mon, 01 Mar 2004 11:40:33 +0100")
-(Checkin-Login clavei_t)
+(Checkin-Time "Tue, 02 Mar 2004 19:32:07 +0100")
+(Checkin-Login o-conn_s)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -108,11 +103,11 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.31 644))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.32 644))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
-  (NEWS (vaucanson/r/34_NEWS 1.2 600))
+  (NEWS (vaucanson/r/34_NEWS 1.3 600))
 
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (reheader.pl (vaucanson/q/40_reheader.p 1.4 700))
@@ -151,7 +146,7 @@
   
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.5 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.6 600))
 
   (include/vaucanson/vaucanson.hh (vaucanson/q/42_vaucanson. 1.2 600))
 
@@ -159,8 +154,8 @@
   (include/vaucanson/config/math.hh (vaucanson/p/42_math.hh 1.2 600))
   (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 600))
 
-  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.15 600))
-  (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.23 600))
+  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.16 600))
+  (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.24 600))
   (include/vaucanson/misc/limits.hh (vaucanson/q/32_limits.hh 1.5 600))
   (include/vaucanson/misc/support.hh (vaucanson/q/12_support.hh 1.7 600))
   (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.4 600))
@@ -250,8 +245,8 @@
   (include/vaucanson/algebra/concrete/letter/range.hh (vaucanson/h/28_range.hh 1.6 600))
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.5 600))
   (include/vaucanson/algebra/concrete/predefs.hh (vaucanson/g/45_predefs.hh 1.5 600))
-  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.11 600))
-  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.20 600))
+  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.12 600))
+  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.21 600))
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh (vaucanson/b/32_tropical_s 1.12 600))
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.19 600))
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.9 600))
@@ -489,7 +484,7 @@
   (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.7 600))
 
   (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 600))
-  (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.4 700))
+  (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.5 700))
   (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 600))
   (src/tests/tests-suites/algebra_numerical_semiring.defs (vaucanson/h/33_algebra_nu 1.1 600))
   (src/tests/tests-suites/algebra_set_alphabet.defs (vaucanson/h/32_algebra_se 1.2 600))
@@ -1042,6 +1037,12 @@
 ;; to version 0.492(w), by clavei_t:
 
   (src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh (vaucanson/v/3_constructo 1.1 644))
+
+;; Files added by populate at Tue, 02 Mar 2004 19:17:24 +0100,
+;; to version 0.493(w), by o-conn_s:
+
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.1 644))
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hh (vaucanson/v/5_rational_n 1.1 644))
 )
 (Merge-Parents)
 (New-Merge-Parents)

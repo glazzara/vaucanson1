@@ -1,7 +1,7 @@
 // random.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,9 +30,11 @@
 #ifndef VCSN_MISC_RANDOM_HH
 # define VCSN_MISC_RANDOM_HH
 
+# include <vaucanson/algebra/concrete/semiring/rational_number.hh>
+
 namespace utility {
 
-  /// the namespace for the random generation tools 
+  /// the namespace for the random generation tools
   namespace random {
 
     /** @addtogroup utility *//** @{ */
@@ -42,12 +44,12 @@ namespace utility {
     T generate();
 
     /** Generate a random value between bounds.
-     * This function returns a value between @c min 
+     * This function returns a value between @c min
      * and @c max (inclusive).
      */
     template<typename T>
     T generate(T min, T max);
-    
+
 
     /// Generate a random character
     template<>
@@ -78,13 +80,24 @@ namespace utility {
     /// Generate a random float between 0 and 1
     template<>
     inline float generate<float>();
-    
+
     // Generate of n sample from a range to an output iterator.
     template <class InputIterator, class OutputIterator>
-    void sample_n(InputIterator first, InputIterator end, 
+    void sample_n(InputIterator first, InputIterator end,
 		  OutputIterator out, unsigned n);
 
+    // Generate a random rational number
+    template<>
+    inline
+    vcsn::algebra::RationalNumber generate<vcsn::algebra::RationalNumber>();
 
+    // Generate a random rational number between bounds
+    template<>
+    inline
+    vcsn::algebra::RationalNumber
+    generate<vcsn::algebra::RationalNumber>
+    (const vcsn::algebra::RationalNumber min,
+     const vcsn::algebra::RationalNumber max);
     /** @} */
 
   }
@@ -92,8 +105,8 @@ namespace utility {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    #include <vaucanson/misc/random.hxx>
+# include <vaucanson/misc/random.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_MISC_RANDOM_HH

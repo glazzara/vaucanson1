@@ -1,7 +1,7 @@
 // random.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,7 @@
 # include <vaucanson/misc/random.hh>
 # include <vaucanson/misc/limits.hh>
 
+# include <cmath>
 # include <cstdlib>
 # include <vector>
 
@@ -41,7 +42,7 @@ namespace utility {
 
     template<>
     char generate<char>()
-    { 
+    {
       // We do not want any 0, because it could generate errors in strings.
       return char (1 + unsigned(rand()) % ((1 << (sizeof(char) * 8)) - 1));
     }
@@ -55,17 +56,17 @@ namespace utility {
 
     char generate_letter()
     {
-      return generate<char>('a', 'z'); 
+      return generate<char>('a', 'z');
     }
 
     char generate_digit()
     {
-      return generate<char>('0', '9'); 
+      return generate<char>('0', '9');
     }
 
     template<>
     bool generate<bool>()
-    { 
+    {
       return static_cast<bool>(rand() & 1);
     }
 
@@ -86,13 +87,13 @@ namespace utility {
     float generate<float>()
     {
       // This formula comes from the caml stdlib.
-      return ((static_cast<float> (rand()) / RAND_MAX + 
+      return ((static_cast<float> (rand()) / RAND_MAX +
 	       static_cast<float> (rand())) / RAND_MAX +
 	      static_cast<float> (rand())) / RAND_MAX;
     }
 
     template <class Iterator, class OutputIterator>
-    void sample_n(Iterator first, Iterator end, 
+    void sample_n(Iterator first, Iterator end,
 		  OutputIterator out, unsigned n)
     {
       std::vector<int> from;
@@ -109,7 +110,41 @@ namespace utility {
 	}
     }
 
-  } // random
+    template<>
+    vcsn::algebra::RationalNumber
+    generate<vcsn::algebra::RationalNumber>()
+    {
+      const int num = generate<int>();
+      const unsigned denom =
+	generate<unsigned>(1, utility::limits<unsigned>::max());
+      return vcsn::algebra::RationalNumber(num, denom);
+    }
+
+    /**
+     * Generates a bounded random rational number.
+     *
+     * Both fractions are first brought to the same denominator. Then,
+     * the  maximum   of  the  denominator  and   both  numerators  is
+     * taken. With this number, we work  out a ratio, which is used to
+     * have a larger range of choice for our new fraction.
+     */
+    template<>
+    vcsn::algebra::RationalNumber
+    generate<vcsn::algebra::RationalNumber>
+    (const vcsn::algebra::RationalNumber min,
+     const vcsn::algebra::RationalNumber max)
+    {
+      const int denom = vcsn::algebra::lcm(min.denom(), max.denom());
+      const int num1 = min.num()*denom/min.denom();
+      const int num2 = max.num()*denom/max.denom();
+      const int maxi = std::max(std::max(abs(num1), abs(num2)),denom);
+      const int ratio = (utility::limits<int>::max()-1)/maxi;
+      return
+	vcsn::algebra::RationalNumber(generate<int>(num1*ratio, num2*ratio),
+				      denom * ratio);
+    }
+
+  } // Random
 
 } // vcsn
 

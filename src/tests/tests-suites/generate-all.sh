@@ -6,6 +6,11 @@
    ../algebra/semiring
 
 ../bin/generate-test-suite.sh \
+   algebra_numerical_semiring_rational \
+   algebra_numerical_semiring_rational.defs \
+   ../algebra/semiring
+
+../bin/generate-test-suite.sh \
    algebra_series_krat \
    algebra_series_krat.defs \
    ../algebra/series/krat/main

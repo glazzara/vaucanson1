@@ -1,7 +1,7 @@
 // numerical_semiring.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,7 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HXX
 # define VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HXX
 
+# include <cmath>
 # include <vaucanson/algebra/concept/semiring_base.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 # include <vaucanson/misc/random.hh>
@@ -40,50 +41,50 @@ namespace vcsn {
 
   template<typename T>
   bool op_contains(const algebra::NumericalSemiring&, T)
-  { 
-    return true; 
+  {
+    return true;
   }
 
   template<typename T, typename U>
   void op_in_mul(const algebra::NumericalSemiring&,
 		 T& dst, U arg)
-  { 
-    dst *= arg; 
+  {
+    dst *= arg;
   }
 
   template<typename T, typename U>
   void op_in_add(const algebra::NumericalSemiring&,
 		 T& dst, U arg)
-  { 
-    dst += arg; 
+  {
+    dst += arg;
   }
 
   // FIXME: there should be specializations of op_add_traits and
   // op_mul_traits giving the type of the result depending on the
-  // type of the arguments. 
+  // type of the arguments.
 
   template<typename T, typename U>
   T op_mul(const algebra::NumericalSemiring&, T a, U b)
-  { 
-    return a * b; 
+  {
+    return a * b;
   }
 
   template<typename T, typename U>
   T op_add(const algebra::NumericalSemiring&, T a, U b)
-  { 
-    return a + b; 
+  {
+    return a + b;
   }
 
   template<typename T>
   T identity_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T))
-  { 
-    return T(1); 
+  {
+    return T(1);
   }
-    
+
   template<typename T>
   T zero_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T))
-  { 
-    return T(0); 
+  {
+    return T(0);
   }
 
   template <class T>
@@ -114,9 +115,9 @@ namespace vcsn {
     // 0 is the only one integer to be starable. So we have no choice !
     return Element<algebra::NumericalSemiring, int>(set, 0);
   }
-  
+
   inline
-  Element<algebra::NumericalSemiring, int> 
+  Element<algebra::NumericalSemiring, int>
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(int))
   {
@@ -132,46 +133,46 @@ namespace vcsn {
   template<typename T>
   inline void op_in_mul(const algebra::NumericalSemiring&,
 			bool& dst, bool src)
-  { 
-    dst = dst && src; 
+  {
+    dst = dst && src;
   }
 
   inline bool op_mul(const algebra::NumericalSemiring&, bool a, bool b)
-  { 
-    return a && b; 
+  {
+    return a && b;
   }
 
   inline void op_in_add(const algebra::NumericalSemiring&,
 			bool& dst, bool src)
-  { 
-    dst = dst || src; 
+  {
+    dst = dst || src;
   }
 
   inline bool op_add(const algebra::NumericalSemiring&, bool a, bool b)
-  { 
-    return a || b; 
+  {
+    return a || b;
   }
 
-  inline bool identity_value(SELECTOR(algebra::NumericalSemiring), 
+  inline bool identity_value(SELECTOR(algebra::NumericalSemiring),
 			     SELECTOR(bool))
-  { 
-    return true; 
+  {
+    return true;
   }
 
   inline bool zero_value(SELECTOR(algebra::NumericalSemiring),
 			 SELECTOR(bool))
-  { 
-    return false; 
+  {
+    return false;
   }
 
   inline bool op_starable(const algebra::NumericalSemiring&, bool)
-  { 
-    return true; 
+  {
+    return true;
   }
 
   inline void op_in_star(const algebra::NumericalSemiring&, bool& b)
-  { 
-    b = true; 
+  {
+    b = true;
   }
 
   inline
@@ -181,9 +182,9 @@ namespace vcsn {
     // Every boolean is starable !
     return op_choose(set, SELECT(bool));
   }
-  
+
   inline
-  Element<algebra::NumericalSemiring, bool> 
+  Element<algebra::NumericalSemiring, bool>
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(bool))
   {
@@ -197,24 +198,24 @@ namespace vcsn {
 
   template<typename T>
   bool op_starable(const algebra::NumericalSemiring&, T v)
-  { 
-    return v == 0; 
+  {
+    return v == 0;
   }
 
-  inline bool op_starable(const algebra::NumericalSemiring&, 
+  inline bool op_starable(const algebra::NumericalSemiring&,
 			   const float& f)
-  { 
-    return (0.0 <= f) && (f < 1.0); 
+  {
+    return (0.0 <= f) && (f < 1.0);
   }
 
-  inline bool op_starable(const algebra::NumericalSemiring&, 
+  inline bool op_starable(const algebra::NumericalSemiring&,
 			   const double& f)
-  { 
-    return (0.0 <= f) && (f < 1.0); 
+  {
+    return (0.0 <= f) && (f < 1.0);
   }
 
   inline void op_in_star(const algebra::NumericalSemiring&, float& f)
-  { 
+  {
     static_assertion(utility::limits<float>::has_infinity,
 		     float_has_infinity);
     if (f < 1.0)
@@ -224,7 +225,7 @@ namespace vcsn {
   }
 
   inline void op_in_star(const algebra::NumericalSemiring&, double& f)
-  { 
+  {
     if (f < 1.0)
       f = (1.0 / (1.0 - f));
     else
@@ -249,9 +250,9 @@ namespace vcsn {
       Element<algebra::NumericalSemiring, float>
         (set, utility::random::generate<float>());
   }
-  
+
   inline
-  Element<algebra::NumericalSemiring, float> 
+  Element<algebra::NumericalSemiring, float>
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(float))
   {
@@ -261,6 +262,68 @@ namespace vcsn {
   }
 
   // FIXME: add some more operators as syntactic sugar
+
+
+  /*------------------------------------.
+  | specialization for rational numbers |
+   `------------------------------------*/
+
+  inline bool op_starable(const algebra::NumericalSemiring&,
+			  const algebra::RationalNumber& r)
+  {
+    int denom = r.denom();
+    return abs(r.num()) < denom;
+  }
+
+  inline void op_in_star(const algebra::NumericalSemiring&,
+			 algebra::RationalNumber& r)
+  {
+    int denom = r.denom();
+    algebra::RationalNumber one = algebra::RationalNumber(1, 1);
+    if (denom > abs(r.num()))
+      r = (one / (r - one));
+    else
+      assertion(! "star not defined.");
+  }
+
+  inline
+  bool
+  op_can_choose_non_starable(const algebra::NumericalSemiring&,
+			      SELECTOR(algebra::RationalNumber))
+  {
+    return true; // Every rational number which is greater than 1 and
+                 // less than -1 is non-starable
+  }
+
+  inline
+  Element<algebra::NumericalSemiring, algebra::RationalNumber>
+  op_choose_starable(const algebra::NumericalSemiring& set,
+		     SELECTOR(algebra::RationalNumber))
+  {
+    algebra::RationalNumber min = algebra::RationalNumber(-1, 1);
+    algebra::RationalNumber max = algebra::RationalNumber(1, 1);
+    return
+      Element<algebra::NumericalSemiring, algebra::RationalNumber>
+        (set, utility::random::generate<algebra::RationalNumber>(min, max));
+  }
+
+  inline
+  Element<algebra::NumericalSemiring, algebra::RationalNumber>
+  op_choose_non_starable(const algebra::NumericalSemiring& set,
+			 SELECTOR(algebra::RationalNumber))
+  {
+    algebra::RationalNumber res = algebra::RationalNumber(1, 1);
+    int denom;
+    do
+      {
+	res = utility::random::generate<algebra::RationalNumber>();
+	denom = res.denom();
+      }
+    while (denom > abs(res.num()));
+    return
+      Element<algebra::NumericalSemiring, algebra::RationalNumber>
+      (set, res);
+  }
 
 } // vcsn
 
