@@ -106,7 +106,7 @@ namespace vcsn {
     MATCH_(Constant, m)
     {
       supp_.push_back(std::make_pair
-		      (identity_as<weight_value_t>
+		      (algebra::identity_as<weight_value_t>
 		       ::of(series_.weights()).value(),
 		       m));
     }
@@ -120,9 +120,9 @@ namespace vcsn {
     MATCH(One)
     {
       supp_.push_back(std::make_pair
-		      (identity_as<weight_value_t>
+		      (algebra::identity_as<weight_value_t>
 		       ::of(series_.weights()).value(),
-		       identity_as<monoid_value_t>
+		       algebra::identity_as<monoid_value_t>
 		       ::of(series_.monoid()).value()));
     }
     END
