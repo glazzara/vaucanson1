@@ -72,7 +72,7 @@ namespace vcsn {
       if (ret.second == false)
 	{
 	  undefined = true;
-	  return lhs;
+	  return return_type(exp_.set());
 	}
       return (match(lhs) * rhs) + ret.first * match(rhs);
     }
@@ -90,7 +90,7 @@ namespace vcsn {
       if ((ret.second == false) || (ret.first.stareable() == false))
 	{
 	  undefined = true;
-	  return e;
+	  return return_type(exp_.set());
 	}
       return ret.first.star() * match(e) * e.clone().star();
     }
@@ -115,7 +115,7 @@ namespace vcsn {
 	  if (m.length() == 1)
 	    return algebra::identity_as<T>::of(exp_.set());
 	  else
-	    return Element<Series, T> (exp_.set(), m.substr(1));
+ 	    return Element<Series, T> (exp_.set(), m.substr(1));
 	}
       else
 	return algebra::zero_as<T>::of(exp_.set());

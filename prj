@@ -1,22 +1,20 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 331)
-(Parent-Version vaucanson 0 330)
-(Version-Log "
-2003-07-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(Project-Version vaucanson 0 332)
+(Parent-Version vaucanson 0 331)
+(Version-Log "	
+2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/automata/concept/automata.hh: 
-		(operator==): New.
-	* include/vaucanson/automata/concept/automata.hxx: 
-		(operator==): Implement.
-	* include/vaucanson/algorithms/complete.hxx: Minor.
-	* include/vaucanson/tools/gen_random.hxx: Typo.
-	* src/tests/automata/algos/complete_test.hh: Minor.
-")
+	* include/Makefile.am: Update algo_helper.hh and algo_helper.hxx (which
+	have moved precedently).
+	* include/vaucanson/fundamental/syntactic_decorator.hxx (self): Fix
+	a bug due to the compiler.
+	* include/vaucanson/algorithms/krat_exp_derivation.hxx: Fix a bug when
+	derivatives for the expression is not defined.")
 (New-Version-Log "")
-(Checkin-Time "Wed, 02 Jul 2003 10:32:34 +0200")
-(Checkin-Login yann)
+(Checkin-Time "Wed, 02 Jul 2003 13:22:20 +0200")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -98,7 +96,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.5 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.6 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -138,7 +136,7 @@
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.28 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.29 600))
 
   (include/vaucanson/config/system.hh (vaucanson/g/1_system.hh 1.12 600))
   (include/vaucanson/config/math.hh (vaucanson/p/42_math.hh 1.2 600))
@@ -176,7 +174,7 @@
   (include/vaucanson/fundamental/element_ops.hxx (vaucanson/g/44_element_op 1.7 600))
   (include/vaucanson/fundamental/fundamental.hh (vaucanson/4_fundamenta 1.14 600))
   (include/vaucanson/fundamental/syntactic_decorator.hh (vaucanson/21_meta_eleme 1.12 600))
-  (include/vaucanson/fundamental/syntactic_decorator.hxx (vaucanson/20_meta_eleme 1.11 600))
+  (include/vaucanson/fundamental/syntactic_decorator.hxx (vaucanson/20_meta_eleme 1.12 600))
   (include/vaucanson/fundamental/element_op_traits.hh (vaucanson/3_op_traits. 1.12 600))
   (include/vaucanson/fundamental/predecls.hh (vaucanson/10_predefs.hh 1.10 600))
   (include/vaucanson/fundamental/slots.hh (vaucanson/2_slots.hh 1.14 600))
@@ -389,7 +387,7 @@
   (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.6 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.6 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.9 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.11 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.12 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.8 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.2 600))
   (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.4 600))

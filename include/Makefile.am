@@ -76,8 +76,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/accessible.hxx			     \
 	vaucanson/algorithms/aci_canonical.hh			     \
 	vaucanson/algorithms/aci_canonical.hxx			     \
-	vaucanson/algorithms/algo_helper.hh			     \
-	vaucanson/algorithms/algo_helper.hxx			     \
+	vaucanson/algorithms/internal/build_pattern.hh		     \
+	vaucanson/algorithms/internal/build_pattern.hxx	     	     \
 	vaucanson/algorithms/aut_to_exp.hh			     \
 	vaucanson/algorithms/aut_to_exp.hxx			     \
 	vaucanson/algorithms/backward_closure.hh		     \

@@ -38,14 +38,14 @@ namespace vcsn {
   inline Element<S, T>&
   SyntacticDecorator<S, T>::self() 
   { 
-    return static_cast<Element<S, T>&>(*this); 
+    return *static_cast<Element<S, T>*>(this); 
   }
     
   template <typename S, typename T>
   inline const Element<S, T>& 
   SyntacticDecorator<S, T>::self() const
   { 
-    return static_cast<const Element<S, T>&>(*this); 
+    return *static_cast<const Element<S, T>*>(this); 
   }
     
 
