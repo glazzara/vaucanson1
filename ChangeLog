@@ -1,3 +1,7 @@
+2003-07-08  raph  <elrond@lrde.epita.fr>
+
+	* THANKS:
+
 2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/accessible.hh: Equip for
