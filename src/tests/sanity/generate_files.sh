@@ -32,7 +32,7 @@ awk '
     target = $1
     gsub(/[.\/]/, "_", target)
     print target"_test_SOURCES = test_base.cc"
-    print target"_test_CPPFLAGS = \$(AM_CPPFLAGS) -DINCLUDE="$1"\n"
+    print target"_test_CPPFLAGS = $(AM_CPPFLAGS) -DINCLUDE="$1"\n"
   }
 ' files.tmp >> Makefile.am
 
