@@ -33,6 +33,13 @@
 # define VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS_HXX
 
 # include <vaucanson/contextual_transducer_functions.hh>
+# include <vaucanson/algorithms/evaluation.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
+# include <vaucanson/algorithms/standard_of.hh>
+# include <vaucanson/automata/implementation/generalized.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
+
 
 /*----------------.
 | new automaton() |
@@ -70,5 +77,40 @@ automaton_t new_automaton(const T& input_alphabet,
 		       output_alphabet.begin(),
 		       output_alphabet.end());
 }
+
+template<typename TS, typename TT>
+output_series_set_elt_t
+evaluation(const monoid_elt_t& input_word, const Element<TS, TT>& t)
+{
+  typedef polynom<WordValue, bool> bool_series_set_elt_value_t;
+  typedef Series<NumericalSemiring, Words> bool_series_set_t;
+  typedef Graph
+    <
+      labels_are_series,
+      WordValue,
+      bool,
+      bool_series_set_elt_value_t,
+      char,
+      NoTag>
+    bool_automaton_impl_t;
+
+    typedef Element<Automata<bool_series_set_t>, bool_automaton_impl_t>
+    bool_automaton_t;
+  AUTOMATON_TYPES_EXACT_(bool_automaton_t, b_);
+    
+  output_series_set_elt_t e(t.structure().series().semiring());
+  parse(input_word.value(), e);
+  b_monoid_t b_monoid(t.series().monoid().alphabet());
+  b_semiring_t b_semiring;
+  b_series_set_t b_series(b_semiring, b_monoid);
+  b_automata_set_t b_automata_set(b_series);
+  bool_automaton_t w(b_automata_set);
+  generalized_traits<bool_automaton_t>::automaton_t
+    result(w.structure());
+  standard_of(w, e.value());
+  evaluation(w, t, result);
+  return verbalize(aut_to_exp(generalized(result)));
+}
+
 
 #endif // !VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS_HXX

@@ -42,6 +42,10 @@ automaton_t new_automaton(InputIterator input_alphabet_begin,
 			  InputIterator output_alphabet_begin,
 			  InputIterator output_alphabet_end);
 
+template<typename TS, typename TT>
+output_series_set_elt_t
+evaluation(const monoid_elt_t& input_word, const Element<TS, TT>& t);
+
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/contextual_transducer_functions.hxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY
