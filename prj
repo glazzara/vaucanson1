@@ -1,30 +1,21 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 158)
-(Parent-Version vaucanson 0 157)
+(Project-Version vaucanson 0 159)
+(Parent-Version vaucanson 0 158)
 (Version-Log "
-2003-02-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
-(0.158)
-
-	* src/demos/samples/algebra/decorated_alphabet.cc: New.
-	* include/vaucanson/algebra/concept/letter.hh: New.
-	* include/vaucanson/algebra/concrete/letter/char_letter.hh: New.
-	* include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh: New.
-	* include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx: New.
-	* include/vaucanson/algebra/concept/alphabets_base.hh:
-		(letter_equality): New.
-		(op_letter_equality_modulo): New.
-	* include/vaucanson/algebra/concept/alphabets_base.hxx: 
-		Implement them.
-	* include/vaucanson/algebra/concrete/alphabets/predefs.hh:
-		Add decorated alphabets typedefs.
-	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx:
-		(op_xeq): Use alphabet's letter_equality.
-	* include/vaucanson/algebra/concrete/letter/range.hh: Add a 'FIXME'.
+2003-02-18  Yann Régis-Gianas  <yann@sandrock>
+(0.159)
+	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh,
+	  include/vaucanson/algebra/concrete/free_monoid/str_words.hh,
+	  include/vaucanson/algebra/concrete/free_monoid/str_words.hxx,
+	  include/vaucanson/algebra/concrete/free_monoid/words.hh,
+	  include/vaucanson/algebra/concrete/free_monoid/words.hxx:
+	    Rename 'SetWords' to 'FreeMonoid'.
+	 * doc/tutorial/tutorial.tex: Update.
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 18 Feb 2003 13:28:19 +0100")
+(Checkin-Time "Tue, 18 Feb 2003 14:40:31 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -107,7 +98,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.99 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.100 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.14 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.3 600))
@@ -137,11 +128,11 @@
   (include/vaucanson/algebra/concrete/alphabets/predefs.hh (vaucanson/g/47_predefs.hh 1.5 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh (vaucanson/28_set_alphab 1.10 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.7 600))
-  (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.3 600))
-  (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.9 600))
-  (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.9 600))
-  (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.12 600))
-  (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.5 600))
+  (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.4 600))
+  (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.10 600))
+  (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.10 600))
+  (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.13 600))
+  (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.6 600))
   (include/vaucanson/algebra/concrete/letter/range.hh (vaucanson/h/28_range.hh 1.2 600))
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.2 600))
   (include/vaucanson/algebra/concrete/predefs.hh (vaucanson/g/45_predefs.hh 1.2 600))
@@ -593,7 +584,7 @@
 ;; Files added by populate at Thu, 13 Feb 2003 08:41:20 +0100,
 ;; to version 0.149(w), by yann:
 
-  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.4 600))
+  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.5 600))
 
 ;; Files added by populate at Thu, 13 Feb 2003 09:20:10 +0100,
 ;; to version 0.149(w), by yann:
@@ -611,7 +602,7 @@
   (log (vaucanson/h/46_log 1.1 600))
   (src/demos/samples/algebra/series.cc (vaucanson/h/47_series.cc 1.1 600))
   (src/demos/samples/algebra/semiring.cc (vaucanson/h/48_semiring.c 1.1 600))
-  (src/demos/samples/algebra/free_monoid.cc (vaucanson/h/49_free_monoi 1.1 600))
+  (src/demos/samples/algebra/free_monoid.cc (vaucanson/h/49_free_monoi 1.2 600))
   (src/demos/samples/algebra/alphabet.cc (vaucanson/h/50_alphabet.c 1.2 600))
   (src/demos/samples/pattern/fundamental/structure.hxx (vaucanson/h/51_structure. 1.1 600))
   (src/demos/samples/pattern/fundamental/structure.hh (vaucanson/i/0_structure. 1.1 600))
@@ -657,7 +648,7 @@
 ;; Files added by populate at Mon, 17 Feb 2003 16:47:26 +0100,
 ;; to version 0.156(w), by yann:
 
-  (doc/tutorial/packages.tex (vaucanson/i/18_packages.t 1.1 600))
+  (doc/tutorial/packages.tex (vaucanson/i/18_packages.t 1.2 600))
   (doc/tutorial/macros.tex (vaucanson/i/19_macros.tex 1.1 600))
   (doc/tutorial/definitions.tex (vaucanson/i/20_definition 1.1 600))
 

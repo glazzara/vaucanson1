@@ -30,7 +30,7 @@ namespace vcsn {
     namespace small_alpha_letter {
 
       typedef 
-      SetWords<Alphabet>					Words;
+      FreeMonoid<Alphabet>					Words;
       
       typedef
       Element<Words, std::basic_string<Letter> >     	        Word;
@@ -40,7 +40,7 @@ namespace vcsn {
     namespace char_letter {
 
       typedef 
-      SetWords<Alphabet>					Words;
+      FreeMonoid<Alphabet>					Words;
       
       typedef
       Element<Words, std::string>			        Word;

@@ -30,27 +30,27 @@ namespace vcsn {
     `---------*/
 
     template <class A>
-    inline SetWords<A>::SetWords() 
+    inline FreeMonoid<A>::FreeMonoid() 
     {}
     
     template <class A>
-    inline SetWords<A>::SetWords(const A& a) : alph_(a) 
+    inline FreeMonoid<A>::FreeMonoid(const A& a) : alph_(a) 
     {}
     
     template <class A>
-    inline SetWords<A>::SetWords(const SetWords& w) : 
-      FreeMonoidBase<SetWords<A> >(w),
+    inline FreeMonoid<A>::FreeMonoid(const FreeMonoid& w) : 
+      FreeMonoidBase<FreeMonoid<A> >(w),
       alph_(w.alph_) 
     {}
     
     template <class A>
-    inline A& SetWords<A>::alphabet()
+    inline A& FreeMonoid<A>::alphabet()
     { 
       return alph_; 
     }
     
     template <class A>
-    inline const A& SetWords<A>::alphabet() const
+    inline const A& FreeMonoid<A>::alphabet() const
     { 
       return alph_; 
     }
@@ -60,8 +60,8 @@ namespace vcsn {
 } // vcsn
 
 template<typename A>
-bool operator==(const vcsn::algebra::SetWords<A>& a,
-		const vcsn::algebra::SetWords<A>& b)
+bool operator==(const vcsn::algebra::FreeMonoid<A>& a,
+		const vcsn::algebra::FreeMonoid<A>& b)
 { 
   return a.alphabet() == b.alphabet(); 
 }

@@ -32,30 +32,30 @@ namespace vcsn {
 
   template <typename A>
   void 
-  op_in_mul(const SetWords<A>& s, 
+  op_in_mul(const FreeMonoid<A>& s, 
 	    std::basic_string<typename A::letter_t>& dst,
 	    const std::basic_string<typename A::letter_t>& src);
     
   template<typename A>
   std::basic_string<typename A::letter_t>
-  op_mul(const SetWords<A>& s,
+  op_mul(const FreeMonoid<A>& s,
 	 const std::basic_string<typename A::letter_t>& a,
 	 const std::basic_string<typename A::letter_t>& b);
 
   template<typename A>
   const std::basic_string<typename A::letter_t>&
-  identity_value(SELECTOR(SetWords<A>),
+  identity_value(SELECTOR(FreeMonoid<A>),
 		 SELECTOR(std::basic_string<typename A::letter_t>));
 
   // one can create words from a single character
   template<typename A>
   std::basic_string<typename A::letter_t>
   op_convert(SELECTOR(std::basic_string<typename A::letter_t>),
-	     SELECTOR(SetWords<A>), const typename A::letter_t& c);
+	     SELECTOR(FreeMonoid<A>), const typename A::letter_t& c);
 
   template <class A>
-  Element<SetWords<A>, std::basic_string<typename A::letter_t> >
-  op_choose(const SetWords<A>& s, 
+  Element<FreeMonoid<A>, std::basic_string<typename A::letter_t> >
+  op_choose(const FreeMonoid<A>& s, 
 	    SELECTOR(std::basic_string<typename A::letter_t>));
   
 } // vcsn

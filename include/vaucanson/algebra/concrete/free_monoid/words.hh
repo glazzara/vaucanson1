@@ -32,23 +32,23 @@ namespace vcsn {
     /*! @addtogroup freemonoid */ /*! @{ */
     
     /*------------.
-    | SetWords<A> |
+    | FreeMonoid<A> |
     `------------*/
     //! Implementation of a free monoid which aggregates its alphabet.
     template<typename A>
-    struct SetWords 
-      : FreeMonoidBase<SetWords<A> >
+    struct FreeMonoid 
+      : FreeMonoidBase<FreeMonoid<A> >
     {
       typedef A alphabets_elt_t;
 
       //! Default constructor.
-      SetWords();
+      FreeMonoid();
 
       //! Constructor based on an alphabet.
-      SetWords(const A& a);
+      FreeMonoid(const A& a);
 
       //! Copy constructor.
-      SetWords(const SetWords& w);
+      FreeMonoid(const FreeMonoid& w);
 
       //! Alphabet's accessor.
       A&	alphabet();
@@ -68,11 +68,11 @@ namespace vcsn {
   /*! @addtogroup freemonoid */ /*! @{ */
 
   /*----------------------.
-  | MetaSet<SetWords<A> > |
+  | MetaSet<FreeMonoid<A> > |
   `----------------------*/
-  //! Meta information about SetWords.
+  //! Meta information about FreeMonoid.
   template<typename A>
-  struct MetaSet<SetWords<A> >
+  struct MetaSet<FreeMonoid<A> >
   {
     //! SetWord is dynamic iff its alphabet is.
     static const bool		dynamic_set = A::dynamic;
@@ -85,13 +85,13 @@ namespace vcsn {
   };
   
   /*----------------------------.
-  | MetaElement<SetWords<A>, T> |
+  | MetaElement<FreeMonoid<A>, T> |
   `----------------------------*/
   //! Services of an element of a free monoid implemented with
-  //! SetWords.
+  //! FreeMonoid.
   template<typename A, typename T>
-  struct MetaElement<SetWords<A>, T>
-    : MetaElement<FreeMonoidBase<SetWords<A> >, T>
+  struct MetaElement<FreeMonoid<A>, T>
+    : MetaElement<FreeMonoidBase<FreeMonoid<A> >, T>
   {};
   
   /*! @} @} */
@@ -99,7 +99,7 @@ namespace vcsn {
   namespace traits {
     
     template <class A>
-    struct virtual_types<SetWords<A> >
+    struct virtual_types<FreeMonoid<A> >
     {
       typedef A		alphabet_t;
     };
@@ -109,8 +109,8 @@ namespace vcsn {
 } // vcsn
 
 template<typename A>
-bool operator==(const vcsn::algebra::SetWords<A>& a,
-		const vcsn::algebra::SetWords<A>& b);
+bool operator==(const vcsn::algebra::FreeMonoid<A>& a,
+		const vcsn::algebra::FreeMonoid<A>& b);
 
 # include <vaucanson/algebra/concrete/free_monoid/words.hxx>
 
