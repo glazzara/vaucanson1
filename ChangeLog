@@ -1,5 +1,10 @@
 2004-03-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
+	* src/tests/algebra/series/krat/main/Makefile.am: Add a test file.
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh: New.
+
+2004-03-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
 	* include/vaucanson/algebra/concrete/letter/couple_letter.hh: Change
 	  namespace of operators.
