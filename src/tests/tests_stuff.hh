@@ -13,9 +13,9 @@ class Tester
 {
 public:
   Tester(int verbose_level) : 
-    verbose(verbose_level),
     passed(0),
-    non_passed(0)
+    non_passed(0),
+    verbose(verbose_level)
   {}
 
   bool all_passed() 

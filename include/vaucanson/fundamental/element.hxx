@@ -6,6 +6,9 @@
 # define FUNDAMENTAL_ELEMENT_HXX
 
 # include <vaucanson/fundamental/element_ops.hh>
+# include <vaucanson/fundamental/predefs.hh>
+# include <vaucanson/fundamental/meta_set.hh>
+# include <vaucanson/fundamental/meta_element.hh>
 # include <vaucanson/fundamental/default_ops.hh>
 # include <vaucanson/fundamental/element.hh>
 
@@ -16,9 +19,10 @@ namespace vcsn {
   `-------------*/
 
   template <class S, class T>
-  Element<S,T>::Element() 
-    : set_(), 
-      value_(op_default(SELECT(S), SELECT(T)))
+  Element<S,T>::Element() :
+    MetaElement<S, T>(),
+    set_(), 
+    value_(op_default(SELECT(S), SELECT(T)))
   {}
     
   template <class S, class T>

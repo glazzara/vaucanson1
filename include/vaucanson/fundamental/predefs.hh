@@ -23,7 +23,10 @@ namespace vcsn {
   
   template<typename S, typename T>
   struct ValueSlot;
-  
+
+  template<typename Self>
+  struct Structure;
+
 } // vcsn
 
 #endif // FUNDAMENTAL_PREDEFS_HH

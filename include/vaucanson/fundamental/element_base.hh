@@ -26,9 +26,7 @@ namespace vcsn
     template<typename S, typename T> 
     struct MetaElementBase
     {
-      // should be redefined
-      static const bool dynamic_values = true;
-
+    
       const S&  set() const;
       T&	value();
       const T&  value() const;

@@ -11,8 +11,10 @@
 
 namespace utility {
 
+  // max : virage des statics 
+
   template<bool b, typename T, typename U>
-  static typename remove_reference<T>::t& 
+  typename remove_reference<T>::t& 
   static_if<b, T, U>::choose(typename remove_reference<T>::t& p1, 
 			     typename remove_reference<U>::t& p2)
   { 
@@ -20,7 +22,7 @@ namespace utility {
   }
   
   template<typename T, typename U>
-  static typename remove_reference<U>::t& 
+  typename remove_reference<U>::t& 
   static_if<false, T, U>::choose(typename remove_reference<T>::t& p1, 
 				 typename remove_reference<U>::t& p2)
   { 

@@ -234,6 +234,6 @@ CALL_OP(>=, vcsn::internal::ge, true);
 
 } // vcsn
 
-//# include <vaucanson/fundamental/slots.hxx>
+# include <vaucanson/fundamental/slots.hxx>
 
 #endif // FUNDAMENTAL_SLOTS_HH

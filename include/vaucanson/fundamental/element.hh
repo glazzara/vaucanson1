@@ -5,7 +5,11 @@
 #ifndef FUNDAMENTAL_ELEMENT_HH
 # define FUNDAMENTAL_ELEMENT_HH
 
-#include <vaucanson/fundamental/predefs.hh>
+# include <vaucanson/fundamental/predefs.hh>
+# include <vaucanson/fundamental/meta_set.hh>
+# include <vaucanson/fundamental/meta_element.hh>
+# include <vaucanson/fundamental/default_ops.hh>
+# include <vaucanson/fundamental/element_ops.hh>
 
 namespace vcsn
 {
