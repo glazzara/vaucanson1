@@ -1,3 +1,9 @@
+2002-09-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.113)
+	Please, do not add Makefile.in into the project repository !
+	
+	* ./**/Makefile.in: 11 files removed.
+
 2002-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.112)
 
