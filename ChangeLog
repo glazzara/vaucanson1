@@ -1,4 +1,26 @@
 2002-12-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.143)
+	* configure.ac: Add new generated test suites, remove static one.
+	* src/tests/tests-suites/Makefile.am: Add subdirs.
+	* src/tests/tests-suites/README: Adjusted.
+	* src/tests/tests-suites/usual_automaton_t.defs: New.
+	* src/tests/tests-suites/algebra_tropical_max_semiring.defs: Likewise.
+	* src/tests/tests-suites/algebra_string_free_monoid.defs: Likewise.
+	* src/tests/tests-suites/algebra_set_alphabet.defs: Likewise
+	* src/tests/tests-suites/algebra_numerical_semiring.defs: Likewise
+	* src/tests/algebra/alphabets/alphabets-basic-test.cc: Removed.
+	* src/tests/algebra/alphabets/Makefile.am: Removed.
+	* src/tests/algebra/free_monoid/free_monoid-test.cc: Removed.
+	* src/tests/algebra/free_monoid/Makefile.am: Removed.
+	* src/tests/algebra/semiring/Makefile.am: Removed.
+	* src/tests/algebra/semiring/semiring-numerical-test.cc: Removed.
+	* src/tests/algebra/semiring/semiring-test.hh: Removed.
+	* src/tests/algebra/semiring/semiring-tropical-test.cc: Removed.
+	* src/tests/dev/isomorph-test.cc: Removed (dev files must be independant).
+	* src/tests/dev/Makefile.am: Removed.
+	* src/tests/tests-suites/usual_automaton_t/Makefile.am: Removed.
+
+2002-12-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.142)
 	* include/vaucanson/algebra/concept/alphabets_base.hh: Minor.
 	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx: idem.

@@ -1,0 +1,6 @@
+#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
+#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
+#include <string>
+
+#define TEST_STATIC_ARGS \
+	vcsn::algebra::char_letter::Words, std::string

@@ -35,9 +35,6 @@ AC_CONFIG_FILES([
 	src/tests/check/Makefile
 	src/tests/fundamental/Makefile
 	src/tests/algebra/Makefile
-	src/tests/algebra/semiring/Makefile
-	src/tests/algebra/alphabets/Makefile
-	src/tests/algebra/free_monoid/Makefile
 	src/tests/algebra/series/Makefile
 	src/tests/automata/Makefile
 	src/tests/automata/algos/Makefile
@@ -46,6 +43,10 @@ AC_CONFIG_FILES([
 	src/tests/tests-suites/Makefile
 	src/tests/bin/Makefile
 	src/tests/tests-suites/usual_automaton_t/Makefile
+	src/tests/tests-suites/algebra_set_alphabet/Makefile
+	src/tests/tests-suites/algebra_string_free_monoid/Makefile
+	src/tests/tests-suites/algebra_numerical_semiring/Makefile
+	src/tests/tests-suites/algebra_tropical_max_semiring/Makefile
 	doc/Makefile
         doc/doc.doxy	
 	include/Makefile])

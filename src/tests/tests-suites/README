@@ -3,8 +3,6 @@
 
 	For example, to generate the usual_automaton_t test suite, we used:
 
-../bin/automata-test-suite.sh usual_automaton_t          \ 
-			      usual_automaton_t.includes \ 
-			      usual_automaton_t          \ 
-			      ../
-
+../bin/generate-test-suite.sh usual_automaton_t          \ 
+			      usual_automaton_t.defs     \ 
+			      ../automata/

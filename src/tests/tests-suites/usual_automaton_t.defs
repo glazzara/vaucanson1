@@ -1,2 +1,4 @@
 #include <vaucanson/tools/usual.hh>
-typedef vcsn::tools::usual_automaton_t automaton_t;
+
+#define TEST_STATIC_ARGS \
+   vcsn::tools::usual_automaton_t

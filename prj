@@ -1,23 +1,33 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 142)
-(Parent-Version vaucanson 0 141)
+(Project-Version vaucanson 0 143)
+(Parent-Version vaucanson 0 142)
 (Version-Log "
 2002-12-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
-(0.142)
-	* include/vaucanson/algebra/concept/alphabets_base.hh: Minor.
-	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx: idem.
-	* include/vaucanson/algorithms/krat_exp_derivation.hh: Minor.
-	* src/tests/defs.in: Adjust CXXFLAGS.
-	* src/tests/bin/automata-test-suite.sh: Removed.
-	* src/tests/tests-suites/usual_automaton_t.includes: Remove.
-	* src/tests/tests-suites/usual_automaton_t.defs: New.	
-	* src/tests/bin/generate-test-suite.sh: New.
-	* src/tests/tests-suites/usual_automaton_t/*: Remove.
+(0.143)
+	* configure.ac: Add new generated test suites, remove static one.
+	* src/tests/tests-suites/Makefile.am: Add subdirs.
+	* src/tests/tests-suites/README: Adjusted.
+	* src/tests/tests-suites/usual_automaton_t.defs: New.
+	* src/tests/tests-suites/algebra_tropical_max_semiring.defs: Likewise.
+	* src/tests/tests-suites/algebra_string_free_monoid.defs: Likewise.
+	* src/tests/tests-suites/algebra_set_alphabet.defs: Likewise
+	* src/tests/tests-suites/algebra_numerical_semiring.defs: Likewise
+	* src/tests/algebra/alphabets/alphabets-basic-test.cc: Removed.
+	* src/tests/algebra/alphabets/Makefile.am: Removed.
+	* src/tests/algebra/free_monoid/free_monoid-test.cc: Removed.
+	* src/tests/algebra/free_monoid/Makefile.am: Removed.
+	* src/tests/algebra/semiring/Makefile.am: Removed.
+	* src/tests/algebra/semiring/semiring-numerical-test.cc: Removed.
+	* src/tests/algebra/semiring/semiring-test.hh: Removed.
+	* src/tests/algebra/semiring/semiring-tropical-test.cc: Removed.
+	* src/tests/dev/isomorph-test.cc: Removed (dev files must be independant).
+	* src/tests/dev/Makefile.am: Removed.
+	* src/tests/tests-suites/usual_automaton_t/Makefile.am: Removed.
 ")
 (New-Version-Log "")
-(Checkin-Time "Fri, 06 Dec 2002 16:40:22 +0100")
+(Checkin-Time "Fri, 06 Dec 2002 18:48:07 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -101,8 +111,8 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.83 600))
-  (configure.ac (vaucanson/47_configure. 1.6.1.9 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.84 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.10 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.1 600))
@@ -335,16 +345,16 @@
   (src/Makefile.am (vaucanson/51_Makefile.a 1.2 600))
   ; (src/Makefile.in ())
   (src/README (vaucanson/h/3_README 1.1 600))
-  (src/tests/algebra/alphabets/alphabets-basic-test.cc (vaucanson/b/33_alphabets- 1.11 600))
-  (src/tests/algebra/alphabets/Makefile.am (vaucanson/b/35_Makefile.a 1.4 600))
+  
+  
   ; (src/tests/algebra/alphabets/Makefile.in ())
-  (src/tests/algebra/free_monoid/free_monoid-test.cc (vaucanson/c/8_free_monoi 1.7 600))
-  (src/tests/algebra/free_monoid/Makefile.am (vaucanson/c/7_Makefile.a 1.2 600))
+  
+  
   (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.6 600))
-  (src/tests/algebra/semiring/Makefile.am (vaucanson/b/26_Makefile.a 1.3 600))
-  (src/tests/algebra/semiring/semiring-numerical-test.cc (vaucanson/b/27_semiring-n 1.6 600))
-  (src/tests/algebra/semiring/semiring-test.hh (vaucanson/b/29_semiring-t 1.6 600))
-  (src/tests/algebra/semiring/semiring-tropical-test.cc (vaucanson/b/28_semiring-t 1.4 600))
+  
+  
+  
+  
   (src/tests/algebra/series/krat_exp_constant_term-test.cc (vaucanson/h/15_krat_exp_c 1.1 600))
   (src/tests/algebra/series/krat_exp_constant_term_test.hh (vaucanson/h/16_krat_exp_c 1.1 600))
   (src/tests/algebra/series/krat_exp_derivation-test.cc (vaucanson/h/19_krat_exp_d 1.1 600))
@@ -411,8 +421,8 @@
   (src/tests/check/tests_stuff.hh (vaucanson/b/2_tests_stuf 1.10 600))
   ; (src/tests/defs ())
   (src/tests/defs.in (vaucanson/g/25_defs.in 1.2 600))
-  (src/tests/dev/isomorph-test.cc (vaucanson/g/31_isomorph-t 1.1 600))
-  (src/tests/dev/Makefile.am (vaucanson/g/32_Makefile.a 1.1 600))
+  
+  
   ; (src/tests/fundamental/basic_type.hh ())
   (src/tests/fundamental/design_pattern-test.hh (vaucanson/b/10_design_pat 1.5 600))
   (src/tests/fundamental () :directory)
@@ -425,8 +435,8 @@
   (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.1 700))
   (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.1 600))
   ; (src/tests/tests_stuff.hh ())
-  (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.3 600))
-  (src/tests/tests-suites/README (vaucanson/g/42_README 1.1 600))
+  (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.4 600))
+  (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 600))
   
   ; (src/tests/tests-suites/usual_automaton_t/add_edge-test () :no-keywords)
   
@@ -448,7 +458,7 @@
   
   
   ; (src/tests/tests-suites/usual_automaton_t/init_final-test () :no-keywords)
-  (src/tests/tests-suites/usual_automaton_t/Makefile.am (vaucanson/f/18_Makefile.a 1.5 600))
+  
   
   
   
@@ -473,7 +483,7 @@
 ;; Files added by populate at Fri, 06 Dec 2002 16:14:35 +0100,
 ;; to version 0.141(w), by yann:
 
-  (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.1 600))
+  (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 600))
 
 ;; Files deleted by depopulate at Fri, 06 Dec 2002 16:37:43 +0100,
 ;; from version 0.141(w), by yann:
@@ -499,6 +509,34 @@
   ; (src/tests/tests-suites/usual_automaton_t/realtime-test.cc ())
   ; (src/tests/tests-suites/usual_automaton_t/thompson-test.cc ())
   ; (src/tests/tests-suites/usual_automaton_t/union-test.cc ())
+
+;; Files deleted by depopulate at Fri, 06 Dec 2002 16:42:25 +0100,
+;; from version 0.142(w), by yann:
+
+  ; (src/tests/tests-suites/usual_automaton_t/Makefile.am ())
+
+;; Files deleted by populate at Fri, 06 Dec 2002 18:17:58 +0100,
+;; from version 0.142(w), by yann:
+
+  ; (src/tests/dev/Makefile.am ())
+  ; (src/tests/dev/isomorph-test.cc ())
+  ; (src/tests/algebra/semiring/semiring-tropical-test.cc ())
+  ; (src/tests/algebra/semiring/semiring-test.hh ())
+  ; (src/tests/algebra/semiring/semiring-numerical-test.cc ())
+  ; (src/tests/algebra/semiring/Makefile.am ())
+  ; (src/tests/algebra/free_monoid/Makefile.am ())
+  ; (src/tests/algebra/free_monoid/free_monoid-test.cc ())
+  ; (src/tests/algebra/alphabets/Makefile.am ())
+  ; (src/tests/algebra/alphabets/alphabets-basic-test.cc ())
+
+;; Files added by populate at Fri, 06 Dec 2002 18:19:20 +0100,
+;; to version 0.142(w), by yann:
+
+  (src/tests/tests-suites/algebra_tropical_max_semiring.defs (vaucanson/h/30_algebra_tr 1.1 600))
+  (src/tests/tests-suites/algebra_string_free_monoid.defs (vaucanson/h/31_algebra_st 1.1 600))
+  (src/tests/tests-suites/algebra_set_alphabet.defs (vaucanson/h/32_algebra_se 1.1 600))
+  (src/tests/tests-suites/algebra_numerical_semiring.defs (vaucanson/h/33_algebra_nu 1.1 600))
+
 )
 (Merge-Parents)
 (New-Merge-Parents)
