@@ -1,3 +1,7 @@
+2002-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.122)
+	* include/vaucanson/misc/automaton_tools.hh: added.
+
 2002-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.121)
 	* include/vaucanson/automata/concept/automaton_impl.hxx: minor.
@@ -41,7 +45,7 @@
 	* include/vaucanson/algebra/concept/alphabets_base.hh: idem.
 	* include/vaucanson/algebra/concrete/free_monoid/words.hh: idem.
 	* README: add Sylvain to the Vaucanson's address at ENST.
-	* doc/doc.doxy.in: prefer a Capital 'V' to Vaucanson.
+	* doc/doc.doxy.in: prefer a capital 'V' in "Vaucanson".
 
 2002-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.118)
