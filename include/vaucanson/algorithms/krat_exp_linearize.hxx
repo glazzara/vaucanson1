@@ -67,13 +67,21 @@ namespace vcsn {
     INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
 
     KRatExpLinearize(const Element<Series, T>& exp) :
-      index_(LINEAR_INDEX_START), exp_(exp)
+      index_(LINEAR_INDEX_START), exp_(exp), l_alpha_()
     {
-      // Build a serie with the new type
-      l_alphabet_t	l_alpha;
-      l_monoid_t	l_monoid(l_alpha);
+      // Build a serie with the new type but with an empty alphabet.
+      l_monoid_t	l_monoid(l_alpha_);
       l_weights_t	l_semiring;
       l_serie_ = l_serie_t(l_semiring, l_monoid);
+    }
+
+    return_type linearize()
+    {
+      // Build a Element with the correct alphabet.
+      return_type	result = match(exp_.value());
+      l_monoid_t	l_monoid(l_alpha_);
+      l_weights_t	l_semiring;
+      return return_type(l_serie_t(l_semiring, l_monoid), result.value());
     }
 
     MATCH__(Product, lhs, rhs)
@@ -108,12 +116,12 @@ namespace vcsn {
 
     MATCH_(Constant, m)
     {
-      // Build new constant
+      // Build new constant and update alphabet
       l_monoid_value_t	res;
       typedef typename monoid_value_t::const_iterator	const_iterator;
       for (const_iterator i = m.begin(); i != m.end(); ++i)
       {
-	l_serie_.monoid().alphabet().insert(l_letter_t(*i, index_));
+	l_alpha_.insert(l_letter_t(*i, index_));
 	res.push_back(l_letter_t(*i, index_));
 	index_++;
       }
@@ -137,6 +145,7 @@ namespace vcsn {
   private:
     index_t		index_;
     Element<Series, T>	exp_;
+    l_alphabet_t	l_alpha_;
     l_serie_t		l_serie_;
   };
 
@@ -146,7 +155,7 @@ namespace vcsn {
   {
     KRatExpLinearize<Series, T, algebra::DispatchFunction<T> >
       matcher(exp);
-    return matcher.match(exp.value());
+    return matcher.linearize();
   }
 
 } // vcsn

@@ -1,3 +1,8 @@
+2003-07-02  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx: Fix alphabet
+	  building.
+
 2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat_coefficient.hxx,
