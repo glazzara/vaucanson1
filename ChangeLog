@@ -1,3 +1,7 @@
+2004-10-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* README: Typo.
+
 2004-10-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* config/vcsn.m4: Add documentation about ICC flags.

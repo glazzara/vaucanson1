@@ -58,7 +58,7 @@ CXXFLAGS_DEBUG and CXXFLAGS_OPTIMIZE override these default flags.
 ----------------------------------------------------------------------
 REQUIREMENTS
 
-Vaucanson was  tested with g++ 3.[234],  and shoud work  with ICC 8.1.
+Vaucanson was tested  with g++ 3.[234], and should  work with ICC 8.1.
 The code is written in respect  to the ISO standard to permit a higher
 portability in the future.
 
