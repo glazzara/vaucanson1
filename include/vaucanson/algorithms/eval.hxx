@@ -1,4 +1,4 @@
-// compute.hxx
+// eval.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,10 +19,10 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_COMPUTE_HXX
-# define VCSN_ALGORITHMS_COMPUTE_HXX
+#ifndef VCSN_ALGORITHMS_EVAL_HXX
+# define VCSN_ALGORITHMS_EVAL_HXX
 
-# include <vaucanson/algorithms/compute.hh>
+# include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <algorithm>
@@ -31,22 +31,22 @@
 namespace vcsn {
 
   /*--------.
-  | Compute |
+  | Eval |
   `--------*/
   // precondition : the automaton is realtime
   //
-  //
+  // author: Yann Regis-Gianas.
   template <typename A, typename auto_t, 
 	    typename weight_t, typename input_t>
   void 
-  do_compute(const AutomataBase<A>&,
+  do_eval(const AutomataBase<A>&,
 	     const auto_t&	    a,
 	     const input_t&	    word, 
 	     weight_t&		    result)
   {
     // FIXME: for the moment, we use large vectors because the set of hstate_t
     // FIXME: can be sparsed. We wanted to be as general as possible.
-    // FIXME: Variants of compute will be available soon of course.
+    // FIXME: Variants of eval will be available soon of course.
     typedef typename auto_t::monoid_elt_t monoid_elt_t;
 
     hstate_t max_hstate_t = 0;
@@ -113,14 +113,14 @@ namespace vcsn {
   `--------*/
   template<typename A, typename T, typename W>
   typename Element<A, T>::weight_t
-  compute(const Element<A, T>& a, const W& word)
+  eval(const Element<A, T>& a, const W& word)
   {
     typename Element<A, T>::weight_t ret;
 
-    do_compute(a.set(), a, word, ret);
+    do_eval(a.set(), a, word, ret);
     return ret;
   }
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_COMPUTE_HXX
+#endif // VCSN_ALGORITHMS_EVAL_HXX

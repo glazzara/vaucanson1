@@ -1,19 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 261)
-(Parent-Version vaucanson 0 260)
+(Project-Version vaucanson 0 262)
+(Parent-Version vaucanson 0 261)
 (Version-Log "
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/concatenate.hh: Replace ...
-	* include/vaucanson/algorithms/concat.hh: it.
-	* include/vaucanson/algorithms/concatenate.hxx: Replace ...
-	* include/vaucanson/algorithms/concat.hxx: it.
-	* src/tests/automata/algos/in_concat_test.hh: Use concatenate.
+	* include/vaucanson/algorithms/eval.hh: Document and replace ...
+	* include/vaucanson/algorithms/compute.hh: it.
+	* include/vaucanson/algorithms/eval.hxx: Document and replace ...
+	* include/vaucanson/algorithms/compute.hxx: it.
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 24 Jun 2003 17:46:08 +0200")
+(Checkin-Time "Tue, 24 Jun 2003 17:55:58 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -96,7 +95,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.66 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.67 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -333,8 +332,8 @@
   (include/vaucanson/algorithms/complement.hxx (vaucanson/f/3_complement 1.8 600))
   (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.9 600))
   (include/vaucanson/algorithms/complete.hxx (vaucanson/f/1_complete.h 1.8 600))
-  (include/vaucanson/algorithms/compute.hh (vaucanson/e/6_compute.hh 1.9 600))
-  (include/vaucanson/algorithms/compute.hxx (vaucanson/e/5_compute.hx 1.12 600))
+  (include/vaucanson/algorithms/eval.hh (vaucanson/e/6_compute.hh 1.10 600))
+  (include/vaucanson/algorithms/eval.hxx (vaucanson/e/5_compute.hx 1.13 600))
   (include/vaucanson/algorithms/concatenate.hh (vaucanson/h/5_concat.hh 1.7 600))
   (include/vaucanson/algorithms/concatenate.hxx (vaucanson/h/4_concat.hxx 1.7 600))
   (include/vaucanson/algorithms/determinize.hh (vaucanson/d/35_determiniz 1.9 600))

@@ -1,4 +1,4 @@
-// compute.hh
+// eval.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,31 +19,52 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_COMPUTE_HH
-# define VCSN_ALGORITHMS_COMPUTE_HH
+#ifndef VCSN_ALGORITHMS_EVAL_HH
+# define VCSN_ALGORITHMS_EVAL_HH
 
 # include <vaucanson/fundamental/element.hh>
 
 namespace vcsn {
 
+  /**
+   * @file   eval.hh
+   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+   * @date   Tue Jun 24 17:50:38 2003
+   * 
+   * @brief  This file provides the evaluation of a word w.r.t an automaton.
+   * 
+   */
+
   /*! \addtogroup algorithms */  /* @{ */
 
   //! Return the image of the word in the automaton.
 
-  /*! compute(a, w) returns a serie that is the image of the word 'w'
+  /*! eval(a, w) returns a serie that is the image of the word 'w'
     in the automaton. This version of computation is the most general
     one : it works on every types of automaton, deterministic or not. 
     Yet, the automaton must be realtime.
   */
 
+  /** 
+   * @brief Compute the image of a word into an automaton.
+   *
+   * eval(a, w) returns a weight that is the image of the word 'w' in
+   * the automaton. This algorithm works an weighted deterministic or
+   * not realtime automata.
+   * 
+   * @param a the automaton.
+   * @param word the word to give as an input to the automaton.
+   * 
+   * @return the weight associated to the word
+   */
   template<typename A, typename T, typename W>
   typename Element<A, T>::weight_t
-  compute(const Element<A, T>& a, const W& word);
+  eval(const Element<A, T>& a, const W& word);
 
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/compute.hxx>
+# include <vaucanson/algorithms/eval.hxx>
 
-#endif // VCSN_ALGORITHMS_COMPUTE_HH
+#endif // VCSN_ALGORITHMS_EVAL_HH
