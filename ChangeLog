@@ -1,3 +1,8 @@
+2004-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/contextual_automaton_functions.hxx: Fix inclusion
+	of its corresponding contextual_automaton_functions.hh file.
+
 2004-04-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/boolean_transducer.hh,

@@ -1,4 +1,5 @@
-// contextual_automaton_functions.hxx: this file is part of the Vaucanson project.
+// contextual_automaton_functions.hxx: this file is part of the Vaucanson
+// project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004 The Vaucanson Group.
@@ -30,7 +31,7 @@
 #ifndef VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HXX
 # define VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HXX
 
-# include <vaucanson/contextual_functions.hh>
+# include <vaucanson/contextual_automaton_functions.hh>
 
 /*----------------.
 | new_automaton() |
