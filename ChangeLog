@@ -1,3 +1,9 @@
+2002-08-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.99)
+	* include/vaucanson/config/extrconf.sh : fixed.
+	+cat ${1+"$@"} | egrep '^#.*(VCSN_CONFIG_SYSTEM_HH|HAVE_LIMITS)'
+
+
 2002-07-31  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.98)
 	These files hide some package variables not to overlap user's one.

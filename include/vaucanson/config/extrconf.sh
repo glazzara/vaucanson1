@@ -1,1 +1,1 @@
-cat ${1+"$@"} | egrep '^#.*(OLENA_CONFIG_SYSTEM_HH|M_PI|__GNUC__|__GNUC__|HAVE_STL_CONFIG_H|HAVE_ZLIB)'
+cat ${1+"$@"} | egrep '^#.*(VCSN_CONFIG_SYSTEM_HH|HAVE_LIMITS)'
