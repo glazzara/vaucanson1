@@ -1,5 +1,17 @@
 2003-02-13  Maxime Rey  <max@lrde.epita.fr>
 
+	* Added `src/demos/samples/algebra/series.cc'
+	* Added `src/demos/samples/algebra/semiring.cc'
+	* Added `src/demos/samples/algebra/free_monoid.cc'
+	* Added `src/demos/samples/algebra/alphabet.cc' 
+	* Added `src/demos/samples/pattern/fundamental/structure.hxx'
+	* Added `src/demos/samples/pattern/fundamental/structure.hh' 
+	* Added `src/demos/samples/pattern/concrete' 
+	* Added `src/demos/samples/pattern/concept/element.hh'
+	* => differents tutorials samples codes to show Vaucanson's possibility
+
+2003-02-13  Maxime Rey  <max@lrde.epita.fr>
+
 	* /include/vaucanson/algebra/concrete/letter/range.hxx :
 	static_ranged work now
 	* doc/tutorial/tutorial.tex: upgrade
