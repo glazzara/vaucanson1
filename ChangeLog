@@ -1,5 +1,15 @@
 2004-05-04  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* src/tests/context_headers/transducers/global_consistency_test.hh:
+	New file. Add a test on transducer context headers.
+	* src/tests/test-suites/context_headers_boolean_transducer.defs:
+	New file. Instanciate a test boolean context headers.
+	* src/tests/context_headers/transducers/Makefile.am,
+	* src/tests/context_headers/Makefile.am,
+	* src/tests/test-suites/generate-all.sh: Update accordingly.
+
+2004-05-04  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/Makefile.am: Remove a file previously deleted.
 	* src/tests/sanity/generate_files.sh: Minor fix to avoid compilation
 	problem.

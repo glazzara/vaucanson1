@@ -104,6 +104,12 @@ done;
 #    `-----------*/
 
 ../bin/generate-test-suite.sh \
+   context_headers_boolean_transducer \
+   context_headers_boolean_transducer.defs \
+   ../context_headers/transducers
+
+../bin/generate-test-suite.sh \
    boolean_transducer \
    boolean_transducer.defs \
    ../transducers
+

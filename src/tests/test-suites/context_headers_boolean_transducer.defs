@@ -1,0 +1,5 @@
+#include <vaucanson/boolean_transducer.hh>
+
+using namespace vcsn::boolean_transducer;
+
+#define TEST_STATIC_ARGS automaton_t
