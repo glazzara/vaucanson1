@@ -1,5 +1,9 @@
 2005-01-19  Raphael Poss  <raph@lrde.epita.fr>
 
+	* FAQ: Remove in favor of doc/FAQ.txt.
+
+2005-01-19  Raphael Poss  <raph@lrde.epita.fr>
+
 	* README: Refer to the doc/ subdirectory.
 
 	* NEWS: Rewrite to...
