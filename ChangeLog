@@ -1,5 +1,11 @@
 2004-09-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/demos/xml/algorithms.cc: Improve. Minor fix in comments. Factor.
+	Use an array of pointer to functions for command handling. Allow the
+	user to specify a state list for the state elimination algorithm.
+
+2004-09-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	This  change creates a  src/demos/xml/samples directory,  in which
 	sample XML files may be found. Programs that generate XML automata
 	are also included.  Those samples  have been designed for the CIAA

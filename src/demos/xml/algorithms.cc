@@ -30,7 +30,7 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-/*
+/**
  * @file algorithms.cc
  *
  * Run  various algorithms.  Results are  dumped  in a  XML format  on
@@ -41,7 +41,7 @@
  * standard_of <exp>
  * thompson_of <exp>
  * derivatives_automaton <exp>
- * aut_to_exp <file>
+ * aut_to_exp <file> [state ordering for for eliminations]
  * quotient <file>
  * product <file1> <file2>
  * closure <file>
@@ -53,7 +53,9 @@
  */
 
 #include <fstream>
+#include <sstream>
 #include <cstdlib>
+#include <list>
 
 #include CONTEXT_HEADER
 #include <vaucanson/xml/static.hh>
@@ -70,14 +72,20 @@
 
 using namespace CONTEXT_NAMESPACE;
 
+using namespace vcsn;
+using namespace vcsn::io;
+using namespace vcsn::xml;
+
+static
 void
 usage(int, char** argv)
 {
-  std::cerr << "Usage: " << argv[0] << " <algorithm> (<exp> | <file>)"
-	    << std::endl;
+  std::cerr << "Usage: " << std::endl
+	    << "\t" << argv[0] << " <algorithm> <args...>" << std::endl;
   exit(1);
 }
 
+static
 alphabet_t
 alphabet()
 {
@@ -87,12 +95,14 @@ alphabet()
   return a;
 }
 
+static
 rat_exp_t
 get_exp(std::string s)
 {
   return new_rat_exp(alphabet(), s);
 }
 
+static
 automaton_t
 get_aut(std::string s)
 {
@@ -116,66 +126,153 @@ get_aut(std::string s)
     }
 }
 
+static
+void
+derivatives_automaton_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+  rat_exp_t	e = get_exp(argv[2]);
+  automaton_t	a = new_automaton(alphabet());
+  derivatives_automaton(a, e);
+  std::cout << automaton_saver(a, string_out (), xml_loader ());
+}
+
+static
+void
+aut_to_exp_command(int argc, char** argv)
+{
+  if (argc < 3)
+    usage(argc, argv);
+  else if (argc == 3)
+    std::cout << aut_to_exp(get_aut(argv[2])) << std::endl;
+  else
+    {
+      automaton_t		a = get_aut(argv[2]);
+      if (a.states().size() != unsigned (argc - 3))
+	{
+	  std::cerr << "ERROR: Invalid state list." << std::endl;
+	  exit(2);
+	}
+
+      std::list<hstate_t>	l;
+      for (int i = 3; i < argc; ++i)
+	{
+	  std::istringstream	is (argv[i]);
+	  int			s;
+
+	  is >> s;
+	  if (s < 0 or unsigned (s) >= a.states().size())
+	    {
+	      std::cerr << "ERROR: " << s << " is not a valid state."
+			<< std::endl;
+	      exit(2);
+	    }
+	  l.push_back(s);
+	}
+
+      std::cout << aut_to_exp(a, ListChooser (l)) << std::endl;
+    }
+}
+
+static
+void
+product_command(int argc, char** argv)
+{
+  if (argc != 4)
+    usage(argc, argv);
+
+  std::cout << automaton_saver(product(get_aut(argv[2]), get_aut(argv[3])),
+			       string_out (),
+			       xml_loader ());
+}
+
+void
+eval_command(int argc, char** argv)
+{
+  if (argc != 4)
+    usage(argc, argv);
+
+  std::cout << eval(get_aut(argv[2]), std::string (argv[3])) << std::endl;
+}
+
+static
+void
+display_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+  vcsn::tools::dot_display(get_aut(argv[2]), "A", true);
+}
+
+#define ONE_ARG_COMMAND(GetArg, Algo) one_arg_command_ ## Algo ## _ ## GetArg
+
+#define DEFINE_ONE_ARG_COMMAND(GetArg, Algo)		\
+static							\
+void							\
+ONE_ARG_COMMAND(GetArg, Algo)(int argc, char** argv)	\
+{							\
+  if (argc != 3)					\
+    usage(argc, argv);					\
+  std::cout << automaton_saver(Algo(GetArg(argv[2])),	\
+			       string_out (),		\
+			       xml_loader ());		\
+}
+
+DEFINE_ONE_ARG_COMMAND(get_exp, standard_of)
+DEFINE_ONE_ARG_COMMAND(get_exp, thompson_of)
+DEFINE_ONE_ARG_COMMAND(get_aut, quotient)
+DEFINE_ONE_ARG_COMMAND(get_aut, closure)
+DEFINE_ONE_ARG_COMMAND(get_aut, determinize)
+DEFINE_ONE_ARG_COMMAND(get_aut, trim)
+DEFINE_ONE_ARG_COMMAND(get_aut, transpose)
+
+#undef DEFINE_ONE_ARG_COMMAND
+
+const struct
+{
+  char*	name;
+  void	(*command)(int, char**);
+}
+command_map[] =
+  {
+    { "standard_of",		ONE_ARG_COMMAND(get_exp, standard_of)	},
+    { "thompson_of",		ONE_ARG_COMMAND(get_exp, thompson_of)	},
+    { "derivatives_automaton",	derivatives_automaton_command		},
+    { "aut_to_exp",		aut_to_exp_command			},
+    { "quotient",		ONE_ARG_COMMAND(get_aut, quotient)	},
+    { "product",		product_command				},
+    { "closure",		ONE_ARG_COMMAND(get_aut, closure)	},
+    { "determinize",		ONE_ARG_COMMAND(get_aut, determinize)	},
+    { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
+    { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},
+    { "eval",			eval_command				},
+    { "display",		display_command				},
+    { 0,			0					}
+  };
+
+#undef ONE_ARG_COMMAND
+
 int
 main(int argc, char** argv)
 {
-  using namespace vcsn::io;
-  using namespace vcsn::xml;
-
-  std::string cmd;
-  if (argc > 1)
-    cmd = argv[1];
-  if (argc != 3 and (argc != 4 or (cmd != "product" and cmd != "eval")))
+  if (argc < 2)
     usage(argc, argv);
 
   XML_BEGIN;
 
-  if (cmd == "standard_of")
-    std::cout << automaton_saver(standard_of(get_exp(argv[2])),
-				 string_out (),
-				 xml_loader ());
-  else if (cmd == "thompson_of")
-    std::cout << automaton_saver(thompson_of(get_exp(argv[2])),
-				 string_out (),
-				 xml_loader ());
-  else if (cmd == "derivatives_automaton")
-    {
-      rat_exp_t		e = get_exp(argv[2]);
-      automaton_t	a = new_automaton(alphabet());
-      derivatives_automaton(a, e);
-      std::cout << automaton_saver(a, string_out (), xml_loader ());
-    }
-  else if (cmd == "aut_to_exp")
-    std::cout << aut_to_exp(get_aut(argv[2])) << std::endl;
-  else if (cmd == "quotient")
-    std::cout << automaton_saver(quotient(get_aut(argv[2])),
-					  string_out (),
-					  xml_loader ());
-  else if (cmd == "product")
-    std::cout << automaton_saver(product(get_aut(argv[2]), get_aut(argv[3])),
-				 string_out (),
-				 xml_loader ());
-  else if (cmd == "closure")
-    std::cout << automaton_saver(backward_closure(get_aut(argv[2])),
-				 string_out (),
-				 xml_loader ());
-  else if (cmd == "determinize")
-    std::cout << automaton_saver(determinize(get_aut(argv[2])),
-				 string_out (),
-				 xml_loader ());
-  else if (cmd == "trim")
-    std::cout << automaton_saver(trim(get_aut(argv[2])),
-				 string_out (),
-				 xml_loader ());
-  else if (cmd == "transpose")
-    std::cout << automaton_saver(transpose(get_aut(argv[2])),
-				 string_out (),
-				 xml_loader ());
-  else if (cmd == "eval")
-    std::cout << eval(get_aut(argv[2]), std::string (argv[3])) << std::endl;
-  else if (cmd == "display")
-    vcsn::tools::dot_display(get_aut(argv[2]), "A", true);
-  else
+  std::string cmd (argv[1]);
+  int i;
+
+  for (i = 0; command_map[i].name != 0; ++i)
+    if (cmd == command_map[i].name)
+      {
+	command_map[i].command(argc, argv);
+	break ;
+      }
+  if (command_map[i].name == 0)
     usage(argc, argv);
 
   XML_END;
