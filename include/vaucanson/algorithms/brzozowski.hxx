@@ -68,8 +68,7 @@ namespace vcsn {
       AUTOMATON_TYPES(T_auto);
       
       alphabet_t alpha = get()->series().monoid().alphabet();
-      if (constant_term(e).first
-	  != e.set().weights().zero(SELECT(weight_value_t)))
+      if (constant_term(e).first)
 	set_final();
       for (alphabet_iterator i = alpha.begin(); i != alpha.end(); ++i)
 	link_to(canonical(derivate(e, *i).first), *i);

@@ -184,7 +184,7 @@ namespace vcsn
   {
     KRatExpAciCanonical<Series, T, algebra::DispatchFunction<T> > 
       matcher(exp);
-    return matcher.set2exp(matcher.match(exp.value()));
+    return matcher.set2exp(matcher.match(exp));
   }
 
 }

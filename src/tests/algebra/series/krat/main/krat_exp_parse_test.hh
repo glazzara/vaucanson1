@@ -88,16 +88,19 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
       sstr << exp;
       krat_exp_t out(s);
       std::pair<bool, std::string> ret = parse(sstr.str(), out);
-      std::ostringstream ostr;
-      ostr << out;
-      if (ostr.str() != sstr.str())
-	error(sstr.str(), ostr.str(), sstr.str(),
-	      exp.set().monoid().alphabet());
-      else if (ret.first)
+      if (ret.first)
 	error(sstr.str(), ret.second, sstr.str(),
 	      exp.set().monoid().alphabet());
       else 
-	++nb_success;
+	{
+	  std::ostringstream ostr;
+	  ostr << out;
+	  if (ostr.str() != sstr.str())
+	    error(sstr.str(), ostr.str(), sstr.str(),
+		  exp.set().monoid().alphabet());
+	  else 
+	    ++nb_success;
+	}
     }
   std::string rate;
   SUCCESS_RATE(rate, nb_success, nb_test);

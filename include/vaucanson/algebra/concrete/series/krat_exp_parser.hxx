@@ -259,8 +259,9 @@ namespace vcsn {
       >						      krat_exp_token_t; 
       typedef std::list<krat_exp_token_t>	      token_stream_t;
 
-      Lexer() :
+      Lexer(bool trace = false) :
 	tokens_ (),
+	trace_ (trace),
 	error_msg_ ("No error."),
 	error_ (false)
       {
@@ -397,11 +398,22 @@ namespace vcsn {
       void eat()
       {
 	if (tokens_.size() > 0)
-	  tokens_.pop_front();
+	  {
+	    if (trace_)
+	      std::cerr << "LEXER: eating '" << tokens_.front().to_string()
+			<< "'." << std::endl;
+	    tokens_.pop_front();
+	  }
       }
 
+      void set_trace(bool trace)
+      {
+	trace_ = trace;
+      }
+      
     protected:
       token_stream_t tokens_;
+      bool trace_;
       std::string error_msg_;
       bool error_;
     };
@@ -454,8 +466,9 @@ namespace vcsn {
       typedef typename Element<S, T>::weight_value_t  weight_value_t;
       typedef std::list<krat_exp_token_t>	      token_stream_t;
       
-      Parser(Lexer<S, T>& lexer) :
+      Parser(Lexer<S, T>& lexer, bool trace = false) :
 	lexer_		(lexer),
+	trace_		(trace),
 	error_		(lexer.error()),
 	error_msg_	(lexer.error_msg())
       {
@@ -465,16 +478,20 @@ namespace vcsn {
       void parse(Element<S, T>& exp)
       {
 	if (!error_)
-	  try
-	    {
-	      parse_exp(exp);
-	      accept(eof);
-	    }
-	  catch (const std::string& s)
-	    {
-	      error_ = true;
-	      error_msg_ = s;
-	    }
+	  {
+	    trace("*** START ***");
+	    try
+	      {
+		parse_exp(exp);
+		accept(eof);
+	      }
+	    catch (const std::string& s)
+	      {
+		error_ = true;
+		error_msg_ = s;
+	      }
+	    trace("*** END ***");
+	  }
       }
 
       /// Return true when an error occured.
@@ -488,12 +505,37 @@ namespace vcsn {
       {
 	return error_msg_;
       }
+
+      void set_trace(bool trace)
+      {
+	trace_ = trace;
+      }
       
     protected:
+
+      /// Trace parsing.
+      /** @{ */
+      void
+      trace(const std::string& msg)
+      {
+	if (trace_)
+	  std::cerr << "PARSER: " << msg << '.' << std::endl;
+      }
+
+      template <class Misc>
+      void
+      trace(const std::string& msg, const Misc& v)
+      {
+	if (trace_)
+	  std::cerr << "PARSER: " << msg << " (" << v << ")." << std::endl;
+      }
+      /** @} */
+
       /// Generate a parse error.
       void parse_error(const std::string& msg = "parse_error.") 
 	throw (const std::string&)
       {
+	trace("Stop on error", msg);
 	throw msg;
       }
       
@@ -508,9 +550,10 @@ namespace vcsn {
        */
       void accept(token_e tok)
       {
-	// std::cout << "accept a " << tok << std::endl;
 	krat_exp_token_t			get_token = lexer_.first();
 	typename krat_exp_token_t::token	expected (tok);
+
+	trace("accept", expected.to_string());
 	if (!get_token.is_a(tok))
 	  parse_error("waiting for a '" + expected.to_string() +
 		      "' get a '" + get_token.to_string() + "'.");
@@ -521,7 +564,7 @@ namespace vcsn {
       /// exp ::= term ('+' term)*
       void parse_exp(Element<S, T>& exp)
       {
-	// std::cout << "get " << lexer_.first().to_string() << std::endl;
+	trace("parse_exp: Start");
 	parse_term (exp);
 	while (lexer_.first().is_a(plus))
 	  {
@@ -530,12 +573,13 @@ namespace vcsn {
 	    parse_term(rhs);
 	    exp = exp + rhs;
 	  }
+	trace("parse_exp: End",  exp);
       }
       
       /// term ::= right_weighted ('.'? right_weighted)*
       void parse_term(Element<S, T>& exp)
       {
-	// std::cout << "get " << lexer_.first().to_string() << std::endl;
+	trace("parse_term: Start");
 	parse_right_weighted (exp);
 	while (lexer_.first().is_a(dot)		||
 	       lexer_.first().is_a(a_weight)	||
@@ -550,11 +594,13 @@ namespace vcsn {
 	    parse_right_weighted(rhs);
 	    exp = exp * rhs;
 	  }
+	trace("parse_term: End",  exp);
       }
       
       /// right_weighted ::= left_weighted (' ' weight)*
       void parse_right_weighted(Element<S, T>& exp)
       {
+	trace("parse_right_weighted: Start");
 	parse_left_weighted(exp);
 	while (lexer_.first().is_a(space))
 	  {
@@ -563,11 +609,13 @@ namespace vcsn {
 	    accept(a_weight);
 	    exp = exp * weight_t (tok.as_weight());
 	  }
+	trace("parse_right_weighted: End", exp);
       }
       
       /// left_weighted ::= weight ' ' left_weighted | stared
       void parse_left_weighted(Element<S, T>& exp)
       {
+	trace("parse_left_weighted: Start");
 	// a 2-lookahead will be sufficient to disambiguate.
 	if (lexer_.first().is_a(a_weight) &&
 	    (!lexer_.first().is_schrod() || lexer_.second().is_a(space)))
@@ -610,24 +658,26 @@ namespace vcsn {
 	  /* !lexer_.first().is_a(a_weight)  || 
 	     (lexer_.first.is_schrod() && !lexer_.second().is_a(space)) */
 	  parse_stared(exp);
+	trace("parse_left_weighted: End",  exp);
       }
       
       /// stared ::= factor '*'*
       void parse_stared(Element<S, T>& exp)
       {
-	// std::cout << "get " << lexer_.first().to_string() << std::endl;
+	trace("parse_stared: Start");
 	parse_factor(exp);
 	while (lexer_.first().is_a(e_star))
 	  {
 	    accept(e_star);
 	    exp.star();
 	  }
+	trace("parse_stared: End",  exp);
       }
       
       /// factor ::= 1 | 0 | word | '(' exp ')'
       void parse_factor(Element<S, T>& exp)
       {
-	// std::cout << "get " << lexer_.first().to_string() << std::endl;
+	trace("parse_factor: Start");
 	if (lexer_.first().is_a(one))
 	  {
 	    accept(one);
@@ -652,20 +702,25 @@ namespace vcsn {
 	else
 	  parse_error("waiting for a factor get a " +
 		      lexer_.first().to_string());
+	trace("parse_factor: End",  exp);
       }
       
       Lexer<S, T>&	lexer_;
+      bool		trace_;
       bool		error_;
       std::string	error_msg_;
     };
     
     template <class S, class T>
     std::pair<bool, std::string>
-    parse(const std::string& from, Element<S, T>& exp)
+    parse(const std::string& from,
+	  Element<S, T>& exp,
+	  bool lex_trace,
+	  bool parse_trace)
     {
-      Lexer<S, T> lexer;
+      Lexer<S, T> lexer(lex_trace);
       lexer.lex(from, exp);
-      Parser<S, T> parser(lexer);
+      Parser<S, T> parser(lexer, parse_trace);
       parser.parse(exp);
       return std::make_pair(parser.error(), parser.error_msg());
     }

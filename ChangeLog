@@ -1,13 +1,12 @@
-2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
+2003-07-01  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/series/krat_coefficient.hxx:
-	  Correct matcher call.
-	* include/vaucanson/algorithms/krat_exp_linearize.hxx: Likewise.
-	* include/vaucanson/algorithms/aci_canonical.hxx: Likewise.
-	* include/vaucanson/algorithms/brzozowski.hxx: Fix weight comparison.
-	* include/vaucanson/algorithms/berry_sethi.hxx: Likewise.
-	* include/vaucanson/algorithms/internal/build_pattern.hxx: Adapt to new
-	  automaton implementation.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix unused
+	arguments warnings.
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hh,
+	include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Add
+	trace capabilities for the krat parser and lexer.
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Fix the
+	random tests function.
 
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 

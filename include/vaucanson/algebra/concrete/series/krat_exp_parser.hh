@@ -78,13 +78,18 @@ namespace vcsn {
      * @param from The rational expression, as a string.
      * @param exp The element to store the result in. Be sure its set
      *            is correct before calling parse.
+     * @param lex_trace Enable lexer trace (for debuging purposes).
+     * @param parse_trace Enable parser trace (for debuging purposes).
      *
      * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
      *         Thomas Claveirole <thomas@lrde.epita.fr>
      */
     template <class S, class T>
     std::pair<bool, std::string>
-    parse(const std::string& from, Element<S, T>& exp);
+    parse(const std::string& from,
+	  Element<S, T>& exp,
+	  bool lex_trace = false,
+	  bool parse_trace = false);
 
     /** @} */
     /** @} */

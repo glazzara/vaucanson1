@@ -120,7 +120,7 @@ namespace vcsn {
     coefficient(const Element<Series, T>& exp)
     {
       CoefficientEval<Series, T, algebra::DispatchFunction<T> > matcher(exp);
-      return matcher.match(exp.value());
+      return matcher.match(exp);
     }
 
   } // algebra
