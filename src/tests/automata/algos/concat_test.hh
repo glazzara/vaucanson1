@@ -40,6 +40,7 @@
 # include <vaucanson/algorithms/concatenate.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/algorithms/realtime.hh>
+# include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/automata/implementation/generalized.hh>
 
 template <class Auto>
@@ -70,23 +71,27 @@ bool concat_test(tests::Tester& tg)
       g_series_set_elt_t exp_rhs(g_auto_rhs.structure().series());
       exp_lhs = aut_to_exp(g_auto_lhs);
       exp_rhs = aut_to_exp(g_auto_rhs);
-      monoid_elt_t word = (exp_lhs * exp_rhs).choose_from_supp();
-
+      monoid_elt_t word_1 = exp_lhs.choose_from_supp();
+      monoid_elt_t word_2 = exp_rhs.choose_from_supp();
+      monoid_elt_t word = word_1 * word_2;
+     
       try
 	{
 	  automaton_t ret = concatenate(auto_lhs, auto_rhs);
-
+	  semiring_elt_t val =
+	    eval(determinize(realtime(auto_lhs)), word_1) *
+	    eval(determinize(realtime(auto_rhs)), word_2);
 	  if (ret.states().size() ==
 	      auto_lhs.states().size() + auto_rhs.states().size() &&
-	      eval(realtime(ret), word) !=
-	      zero_as<semiring_elt_value_t>::of(ret.structure().series().semiring()))
+	      eval(determinize(realtime(ret)), word) == val)
 	    ++size;
 	  else
 	    {
 	      std::cerr << "TEST: concatenation of automata corresponding"
 			<< "to following expressions failed."
 			<< std::endl;
-	      std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs << std::endl;
+	      std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs
+			<< std::endl;
 	    }
 	  ++nb_test_done;
 	}

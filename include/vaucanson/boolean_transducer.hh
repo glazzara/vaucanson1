@@ -95,7 +95,7 @@ namespace vcsn {
 
     AUTOMATON_TYPES_EXACT(automaton_t);
 
-# include <vaucanson/contextual_transducer_functions.hh>
+# include <vaucanson/contextual_transducer_functions.thh>
 
   } // boolean_transducer
 } // vcsn
