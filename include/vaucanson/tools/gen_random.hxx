@@ -313,10 +313,6 @@ namespace vcsn {
 	       unsigned size_alphabet,
 	       unsigned fstate)
   {
-    // check for coherence
-    if (size_alphabet > 26) size_alphabet = 26;
-    if (nb_state < 1) size_alphabet = 1;
-
     automata_set_t aset =
       GenRandomAutomataSet::generate(SELECT(automata_set_t), size_alphabet);
     TAutomata a = generate_dfa(aset, nb_state, fstate);
