@@ -1,3 +1,10 @@
+2004-07-14  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hh:
+	  New. Improved version of verbalization.
+
 2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* NEWS: Adjust the entry about context headers. Mention
