@@ -127,6 +127,27 @@ namespace utility {
   }
 
   template <class InputIterator, class Letter>
+  typename Window<InputIterator, Letter>::iterator_t
+  Window<InputIterator, Letter>::begin() const
+  {
+    return begin_;
+  }
+
+  template <class InputIterator, class Letter>
+  typename Window<InputIterator, Letter>::iterator_t
+  Window<InputIterator, Letter>::stream() const
+  {
+    return stream_;
+  }
+
+  template <class InputIterator, class Letter>
+  typename Window<InputIterator, Letter>::iterator_t
+  Window<InputIterator, Letter>::end() const
+  {
+    return end_;
+  }
+
+  template <class InputIterator, class Letter>
   size_t
   Window<InputIterator, Letter>::offset() const
   {

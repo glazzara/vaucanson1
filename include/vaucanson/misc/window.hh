@@ -120,6 +120,9 @@ namespace utility {
 
     /// Accessor to class members.
     /// @{
+    iterator_t		begin() const;
+    iterator_t		stream() const;
+    iterator_t		end() const;
     size_t		offset() const;
     length_t		length() const;
     string_t		window() const;

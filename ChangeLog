@@ -1,3 +1,8 @@
+2003-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/misc/window.hxx, include/vaucanson/misc/window.hh:
+	Add begin(), stream() and end() accessors to the Window class.
+
 2003-09-04  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/derivatives_automaton.hxx: Disable debug
