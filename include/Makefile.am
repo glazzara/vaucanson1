@@ -99,6 +99,10 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/determinize.hxx			     \
 	vaucanson/algorithms/eval.hh				     \
 	vaucanson/algorithms/eval.hxx				     \
+	vaucanson/algorithms/evaluation.hh			     \
+	vaucanson/algorithms/evaluation.hxx			     \
+	vaucanson/algorithms/extension.hh			     \
+	vaucanson/algorithms/extension.hxx			     \
 	vaucanson/algorithms/finite_support_conversion.hh	     \
 	vaucanson/algorithms/finite_support_conversion.hxx	     \
 	vaucanson/algorithms/forward_closure.hh			     \
@@ -133,8 +137,12 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/normalized.hxx			     \
 	vaucanson/algorithms/product.hh				     \
 	vaucanson/algorithms/product.hxx			     \
+	vaucanson/algorithms/projection.hh			     \
+	vaucanson/algorithms/projection.hxx			     \
 	vaucanson/algorithms/realtime.hh			     \
 	vaucanson/algorithms/realtime.hxx			     \
+	vaucanson/algorithms/realtime_composition.hh		     \
+	vaucanson/algorithms/realtime_composition.hxx		     \
 	vaucanson/algorithms/search.hh				     \
 	vaucanson/algorithms/search.hxx				     \
 	vaucanson/algorithms/standard.hh			     \

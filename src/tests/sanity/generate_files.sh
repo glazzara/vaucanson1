@@ -11,7 +11,7 @@ cd "$1"
 # Set check_PROGRAMS.
 cat > Makefile.am << EOF
 EXTRA_DIST = generate_files.sh
-test_base.cc: generate_files.sh
+test_base.cc: generate_files.sh \$(topsrc_dir)/include/Makefile.am
 	\$(SHELL) "\$(srcdir)"/generate_files.sh "\$(srcdir)"
 
 AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -I\$(top_srcdir)/include -I\$(top_builddir)/include
