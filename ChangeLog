@@ -1,3 +1,9 @@
+2003-07-13  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* src/tests/sanity/Makefile.am, src/tests/sanity/includes.test: Remove.
+	* src/tests/sanity/generate_files.sh: New.
+	* bootstrap.sh: Add the src/tests/sanity files generation.
+
 2003-07-13  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/tools/io.hh: Add.
