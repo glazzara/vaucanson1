@@ -29,8 +29,21 @@
    ../algebra/numerical_semiring
 
 ../bin/generate-test-suite.sh \
-   algebra_series_krat \
-   algebra_series_krat.defs \
+   algebra_series_krat_bool_string \
+   algebra_series_krat_bool_string.defs \
+   ../algebra/series/misc \
+   ../algebra/series/krat/main
+
+../bin/generate-test-suite.sh \
+   algebra_series_krat_double_string \
+   algebra_series_krat_double_string.defs \
+   ../algebra/series/misc \
+   ../algebra/series/krat/main
+
+../bin/generate-test-suite.sh \
+   algebra_series_krat_int_string \
+   algebra_series_krat_int_string.defs \
+   ../algebra/series/misc \
    ../algebra/series/krat/main
 
 ../bin/generate-test-suite.sh \
@@ -44,13 +57,23 @@
    ../algebra/series/krat/derivations/cderivation
 
 ../bin/generate-test-suite.sh \
-   algebra_series_misc \
-   algebra_series_misc.defs \
-   ../algebra/series/misc
+   algebra_alphabet_set_alpha \
+   algebra_alphabet_set_alpha.defs \
+   ../algebra/alphabets
 
 ../bin/generate-test-suite.sh \
-   algebra_set_alphabet \
-   algebra_set_alphabet.defs \
+   algebra_alphabet_set_char \
+   algebra_alphabet_set_char.defs \
+   ../algebra/alphabets
+
+../bin/generate-test-suite.sh \
+   algebra_alphabet_set_int \
+   algebra_alphabet_set_int.defs \
+   ../algebra/alphabets
+
+../bin/generate-test-suite.sh \
+   algebra_alphabet_set_pair_char_int \
+   algebra_alphabet_set_pair_char_int.defs \
    ../algebra/alphabets
 
 ../bin/generate-test-suite.sh \
@@ -69,16 +92,19 @@
    ../automata
 
 ../bin/generate-test-suite.sh \
-   algebra_series_polynom_int \
-   algebra_series_polynom_int.defs \
-    ../algebra/series/polynom
+   algebra_series_polynom_int_string \
+   algebra_series_polynom_int_string.defs \
+   ../algebra/series/misc \
+   ../algebra/series/polynom
 
 ../bin/generate-test-suite.sh \
-   algebra_series_polynom_double \
-   algebra_series_polynom_double.defs \
-    ../algebra/series/polynom
+   algebra_series_polynom_double_string \
+   algebra_series_polynom_double_string.defs \
+   ../algebra/series/misc \
+   ../algebra/series/polynom
 
 ../bin/generate-test-suite.sh \
-   algebra_series_polynom_bool \
-   algebra_series_polynom_bool.defs \
-    ../algebra/series/polynom
+   algebra_series_polynom_bool_string \
+   algebra_series_polynom_bool_string.defs \
+   ../algebra/series/misc \
+   ../algebra/series/polynom

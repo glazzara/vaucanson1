@@ -1,3 +1,34 @@
+2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/tests/tests-suites/algebra_series_polynom_bool.defs,
+	* src/tests/tests-suites/algebra_series_polynom_double.defs,
+	* src/tests/tests-suites/algebra_series_polynom_int.defs:
+	Rename to...
+	* src/tests/tests-suites/algebra_series_polynom_bool_string.defs,
+	* src/tests/tests-suites/algebra_series_polynom_double_string.defs,
+	* src/tests/tests-suites/algebra_series_polynom_int_string.defs:
+	... These. And modified to instanciate an Element.
+
+	* src/tests/tests-suites/algebra_set_alphabet.defs: Rename to...
+	* src/tests/tests-suites/algebra_alphabet_set_char.defs: ...This.
+
+	* src/tests/tests-suites/algebra_series_krat.defs: Rename to...
+	* src/tests/tests-suites/algebra_series_krat_int_string.defs: ...This.
+
+	* src/tests/tests-suites/algebra_series_misc.defs: Remove.
+
+	* src/tests/tests-suites/algebra_alphabet_set_alpha.defs,
+	* src/tests/tests-suites/algebra_alphabet_set_int.defs,
+	* src/tests/tests-suites/algebra_alphabet_set_pair_char_int.defs:
+	Add new definition files for tests on alphabets.
+	* src/tests/tests-suites/algebra_series_krat_bool_string.defs,
+	* src/tests/tests-suites/algebra_series_krat_double_string.defs:
+	Add new definition files for tests on series.
+	* src/tests/tests-suites/generate-all.sh: Update.
+	* src/tests/algebra/series/misc/series_test.hh,
+	* src/tests/algebra/series/polynom/series_polynom_test.hh: Change
+	templates to take an Element instead of S, T.
+
 2004-03-17  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/derivations/cderivation/Makefile.am:
@@ -46,7 +77,7 @@
 	* include/vaucanson/algebra/concrete/series/krat.hh,
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Update to add
 	transpose for rationnal expressions.
-	
+
 2004-03-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/complement.hxx,

@@ -1,0 +1,12 @@
+#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
+#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+#include <vaucanson/algebra/concrete/series/series.hh>
+
+#define TEST_STATIC_ARGS				\
+	vcsn::Element<					\
+	  vcsn::algebra::Series<			\
+	    vcsn::algebra::NumericalSemiring,		\
+	    vcsn::algebra::char_letter::Words>,		\
+	  vcsn::algebra::polynom<			\
+	    vcsn::algebra::char_letter::Word::value_t,	\
+	    int> >

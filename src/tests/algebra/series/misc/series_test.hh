@@ -37,27 +37,26 @@
 
 using namespace vcsn;
 
-template <typename S, typename T>
+template <class SeriesElt>
 bool series_test(tests::Tester& t)
 {
   using namespace vcsn::algebra;
   using namespace vcsn;
 
-  typedef S					series_t;
-  typedef T					series_value_t;
-  typedef Element<S, T>				series_elt_t;
+  typedef SeriesElt				series_elt_t;
+  typedef typename series_elt_t::set_t		series_t;
+  typedef typename series_elt_t::value_t	series_value_t;
 
   typedef typename series_t::monoid_t		monoid_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
   typedef typename alphabet_t::letter_t		letter_t;
-  typedef typename series_t::semiring_t		semiring_t;
 
+  typedef typename series_t::semiring_t		semiring_t;
   typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_value_t;
 
   typedef typename series_elt_t::monoid_elt_t	monoid_elt_t;
   typedef typename monoid_elt_t::value_t	monoid_value_t;
-
   typedef typename series_elt_t::support_t	support_t;
 
   alphabet_t		base;
@@ -96,8 +95,8 @@ bool series_test(tests::Tester& t)
 
       series_elt_t	s1(series, w1);
       series_elt_t	s2(series, w2);
-      series_elt_t	s3 = identity_as<T>::of(series);
-      series_elt_t	s4 = zero_as<T>::of(series);
+      series_elt_t	s3 = identity_as<series_value_t>::of(series);
+      series_elt_t	s4 = zero_as<series_value_t>::of(series);
 
       semiring_elt_t	zero = zero_as<semiring_value_t>::of(semiring);
 
@@ -124,8 +123,8 @@ bool series_test(tests::Tester& t)
       const size_t				max =
 	utility::random::generate<unsigned>(0, op_choose_max_word_length *
 					    test_sizes[i]);
-      series_elt_t				s5 (series);
-      bool					allright = true;
+      series_elt_t		s5 (series);
+      bool			allright = true;
       for (size_t j = 0; j < max; ++j)
 	{
 	  monoid_elt_t		m (monoid);

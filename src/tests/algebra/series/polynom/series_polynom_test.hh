@@ -41,18 +41,19 @@
 
 using namespace vcsn;
 
-template <typename S, typename T>
+template <class SeriesElt>
 bool series_polynom_test(tests::Tester& t)
 {
   using namespace vcsn::algebra;
   using namespace vcsn;
 
-  typedef S					series_t;
-  typedef typename S::monoid_t			monoid_t;
+  typedef SeriesElt				series_elt_t;
+  typedef series_elt_t::set_t			series_t;
+  typedef typename series_t::monoid_t		monoid_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
   typedef typename alphabet_t::letter_t		letter_t;
-  typedef typename S::semiring_t		semiring_t;
-  typedef Element<S, T>				series_elt_t;
+  typedef typename series_t::semiring_t		semiring_t;
+
   typedef typename series_elt_t::monoid_elt_t   monoid_elt_t;
   typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_value_t;
@@ -80,7 +81,7 @@ bool series_polynom_test(tests::Tester& t)
   TEST(t, "get of series.", s1.get(w1) != zero);
   TEST(t, "set of series.", s1.get(w2) == zero);
   TEST(t, "choose from the support.", s1.choose_from_supp() == w1);
-  
+
   return t.all_passed();
 }
 
