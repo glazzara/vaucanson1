@@ -51,7 +51,7 @@ namespace vcsn {
     hstate_t h = a.add_state();
 
     for_each_initial_state(i, a)
-      a.add_serie_edge(h, *i, a.get_initial(*i));
+      a.add_series_edge(h, *i, a.get_initial(*i));
 
     a.clear_initial();
     a.set_initial(h);
@@ -59,7 +59,7 @@ namespace vcsn {
     h = a.add_state();
 
     for_each_final_state(i, a)
-      a.add_serie_edge(*i, h, a.get_final(*i));
+      a.add_series_edge(*i, h, a.get_final(*i));
     
     a.clear_final();
     a.set_final(h);

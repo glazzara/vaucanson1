@@ -53,8 +53,8 @@ namespace vcsn {
     for (typename Auto_::edge_iterator e = a.edges().begin();
 	 e != a.edges().end();
 	 ++e)
-      if (a.serie_of(*e) == 
-	  a.set().series().identity(SELECT(typename Auto_::serie_value_t)))
+      if (a.series_of(*e) == 
+	  a.set().series().identity(SELECT(typename Auto_::series_value_t)))
 	return false;
     return true;
   }

@@ -208,7 +208,7 @@ namespace vcsn {
 	       {
 		 set<hedge_t>::iterator y = out_b.begin();
 		 while ((y != out_b.end()) && 
-			(a.serie_of(*x) != b.serie_of(*y)))
+			(a.series_of(*x) != b.series_of(*y)))
 		   y++;
 		 if (y == out_b.end()) 
 		   bool_edge = false;

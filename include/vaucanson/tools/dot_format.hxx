@@ -91,7 +91,7 @@ namespace vcsn
 	  out << name_ << state_map[a.origin_of(*i)]
 	      << " -> "
 	      << name_ << state_map[a.aim_of(*i)];
-	  out << " [label=\"" << conv(a, a.serie_of(*i)) << "\"];"
+	  out << " [label=\"" << conv(a, a.series_of(*i)) << "\"];"
 	      << std::endl;
 	}
       out << "}" << std::endl;
@@ -129,7 +129,7 @@ namespace vcsn
 		  << name_ << count << " -> " << name_ << c ;
 	      std::ostringstream o;
 	      series_elt_t ss = a.get_initial(*i);
-	      for_each_const_(serie_t::support_t, s, ss.supp())
+	      for_each_const_(series_elt_t::support_t, s, ss.supp())
 		o << *s << "|"
 		  << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
 		  << " ";
@@ -145,7 +145,7 @@ namespace vcsn
 		  << name_ << c << " -> "  << name_ << count;
 	      std::ostringstream o;
 	      series_elt_t ss = a.get_final(*i);
-	      for_each_const_(serie_t::support_t, s, ss.supp())
+	      for_each_const_(series_elt_t::support_t, s, ss.supp())
 		o << *s << "|"
 		  << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
 		  << " ";
@@ -163,8 +163,8 @@ namespace vcsn
 	      << " -> "
 	      << name_ << state_map[a.aim_of(*i)];
 	  std::ostringstream o;
-	  series_elt_t ss = a.serie_of(*i);
-	  for_each_const_(serie_t::support_t, s, ss.supp())
+	  series_elt_t ss = a.series_of(*i);
+	  for_each_const_(series_elt_t::support_t, s, ss.supp())
 	    o << *s << "|"
 	      << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
 	      << " ";

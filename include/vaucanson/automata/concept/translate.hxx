@@ -58,8 +58,8 @@ namespace vcsn {
     for (typename rhs_t::edge_iterator i = from.edges().begin();
 	 i != from.edges().end();
 	 ++i)
-      dst.add_serie_edge(stmap[i.origin()], stmap[i.aim()], 
-			 translate_fun(from.serie_of(*i)));
+      dst.add_series_edge(stmap[i.origin()], stmap[i.aim()], 
+			 translate_fun(from.series_of(*i)));
     dst_.swap(dst);
   }
 

@@ -50,7 +50,7 @@ namespace vcsn {
 	       const T& v,
 	       hedge_t e)
   {
-    AutoType(series_elt_t) is = op_serie_of(s, v, e);
+    AutoType(series_elt_t) is = op_series_of(s, v, e);
     precondition(is.supp().size() == 1);
     return
       is.get(AutoType(monoid_elt_t) (is.set().monoid(), *is.supp().begin()));
@@ -75,7 +75,7 @@ namespace vcsn {
     std::cout << "add io edge :" << o << " "
 	      << output_w << " " << w << " "
 	      << os << std::endl;
-    return op_add_serie_edge(s, v, from, to, is);
+    return op_add_series_edge(s, v, from, to, is);
   }
 
   template <class S, class T>
@@ -92,7 +92,7 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_elt_t) is(s.series());
     is.assoc(input_w, os);
-    return op_add_serie_edge(s, v, from, to, is);
+    return op_add_series_edge(s, v, from, to, is);
   }
 
   template <class S, class T>
@@ -110,7 +110,7 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_elt_t) is(s.series());
     is.assoc(input_w, os);
-    return op_add_serie_edge(s, v, from, to, is);
+    return op_add_series_edge(s, v, from, to, is);
   }
 
   template <class S, class T>
@@ -128,7 +128,7 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_elt_t) is(s.series());
     is.assoc(input_w, os);
-    return op_add_serie_edge(s, v, from, to, is);
+    return op_add_series_edge(s, v, from, to, is);
   }
 
 } // vcsn

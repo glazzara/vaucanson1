@@ -59,7 +59,7 @@ unsigned add_edge_test(tests::Tester& tg)
 
   TEST(t, "Initial number of edge = 0.", automaton.edges().size() == 0);
 
-  hedge_t h1 = automaton.add_serie_edge(s1, s2, series_elt_t(automaton.set().series()));
+  hedge_t h1 = automaton.add_series_edge(s1, s2, series_elt_t(automaton.set().series()));
 
   TEST(t, "Number of edge after one add_edge = 1.", 
        automaton.edges().size() == 1);
@@ -75,7 +75,7 @@ unsigned add_edge_test(tests::Tester& tg)
     {
       hstate_t p1 = automaton.add_state();
       hstate_t p2 = automaton.add_state();
-      s.insert(automaton.add_serie_edge(p1, p2, 
+      s.insert(automaton.add_series_edge(p1, p2, 
 					series_elt_t(automaton.set().series())));
     }
   EQTEST(t, "Number of edge after three edge additions = 3.", 
@@ -90,7 +90,7 @@ unsigned add_edge_test(tests::Tester& tg)
     {
       hstate_t p1 = automaton.add_state();
       hstate_t p2 = automaton.add_state();
-      s.insert(automaton.add_serie_edge(p1, p2, 
+      s.insert(automaton.add_series_edge(p1, p2, 
 					series_elt_t(automaton.set().series())));
     }
   EQTEST(t, "Number of edge after three edge additions = 3.", 
@@ -106,7 +106,7 @@ unsigned add_edge_test(tests::Tester& tg)
     {
       hstate_t p1 = automaton.add_state();
       hstate_t p2 = automaton.add_state();
-      vs.push_back(automaton.add_serie_edge(p1, p2, 
+      vs.push_back(automaton.add_series_edge(p1, p2, 
 					    series_elt_t(automaton.set().series())));
     }
   std::random_shuffle(vs.begin(), vs.end());

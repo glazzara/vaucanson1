@@ -45,7 +45,7 @@ namespace vcsn {
 	   Letter a);
 
   /// The c-derivative of the krat expression w.r.t to a word.
-  // INTERFACE: Exp cderivate(const Exp& e, const std::string& w) { return vcsn::word_cderivate(e, Serie::monoid_elt_t(e.set().monoid(), w)); }
+  // INTERFACE: Exp cderivate(const Exp& e, const std::string& w) { return vcsn::word_cderivate(e, Series::monoid_elt_t(e.set().monoid(), w)); }
   template <class Series, class T, class Word>
   Element<Series, T>
   word_cderivate(const Element<Series, T>& exp, 

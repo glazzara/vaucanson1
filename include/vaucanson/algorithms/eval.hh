@@ -47,7 +47,7 @@ namespace vcsn {
 
   /// Return the image of the word in the automaton.
 
-  /** eval(a, w) returns a serie that is the image of the word 'w'
+  /** eval(a, w) returns a series that is the image of the word 'w'
     in the automaton. This version of computation is the most general
     one : it works on every types of automaton, deterministic or not. 
     Yet, the automaton must be realtime.
@@ -65,8 +65,8 @@ namespace vcsn {
    * 
    * @return the weight associated to the word
    */
-  // INTERFACE: int eval(const Automaton& a, const std::string& s) { return vcsn::eval(*a, Serie::monoid_elt_t((*a).set().series().monoid(), s)).value(); }
-  // INTERFACE: int eval(const GenAutomaton& a, const std::string& s) { return vcsn::eval(*a, Serie::monoid_elt_t((*a).set().series().monoid(), s)).value(); }
+  // INTERFACE: int eval(const Automaton& a, const std::string& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).set().series().monoid(), s)).value(); }
+  // INTERFACE: int eval(const GenAutomaton& a, const std::string& s) { return vcsn::eval(*a, Series::monoid_elt_t((*a).set().series().monoid(), s)).value(); }
   template<typename A, typename T, typename W>
   typename Element<A, T>::semiring_elt_t
   eval(const Element<A, T>& a, const W& word);

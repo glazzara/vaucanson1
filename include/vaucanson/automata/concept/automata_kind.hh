@@ -42,46 +42,46 @@ namespace vcsn {
   template <class Kind, 
 	    class WordValue,
 	    class WeightValue,
-	    class SerieValue,
+	    class SeriesValue,
 	    class Letter>
   struct LabelOf;
 
   template <class WordValue,
 	    class WeightValue,
-	    class SerieValue,
+	    class SeriesValue,
 	    class Letter>
   struct LabelOf<labels_are_letters, WordValue, WeightValue, 
-		 SerieValue, Letter>
+		 SeriesValue, Letter>
   {
     typedef Letter	ret;
   };
 
   template <class WordValue,
 	    class WeightValue,
-	    class SerieValue,
+	    class SeriesValue,
 	    class Letter>
   struct LabelOf<labels_are_series, WordValue, WeightValue, 
-		 SerieValue, Letter>
+		 SeriesValue, Letter>
   {
-    typedef SerieValue	ret;
+    typedef SeriesValue	ret;
   };
 
   template <class WordValue,
 	    class WeightValue,
-	    class SerieValue,
+	    class SeriesValue,
 	    class Letter>
   struct LabelOf<labels_are_couples, WordValue, WeightValue, 
-		 SerieValue, Letter>
+		 SeriesValue, Letter>
   {
     typedef std::pair<WeightValue, WordValue>	ret;
   };
 
   template <class WordValue,
 	    class WeightValue,
-	    class SerieValue,
+	    class SeriesValue,
 	    class Letter>
   struct LabelOf<labels_are_words, WordValue, WeightValue, 
-		 SerieValue, Letter>
+		 SeriesValue, Letter>
   {
     typedef WordValue	ret;
   };

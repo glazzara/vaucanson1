@@ -22,15 +22,15 @@ using namespace vcsn::tools;
 typedef Series<NumericalSemiring, Words> output_series_pt;
 typedef Element<output_series_pt, rat::exp<WordValue, bool> > exp_t;
 typedef Series<output_series_pt, Words>  tr_bhv_pt;
-typedef rat::exp<WordValue, bool> output_serie_value_t;
-typedef Element<output_series_pt, output_serie_value_t> output_serie_t;
-typedef polynom<WordValue, output_serie_value_t> tr_bhv_value_t;
+typedef rat::exp<WordValue, bool> output_series_value_t;
+typedef Element<output_series_pt, output_series_value_t> output_series_elt_t;
+typedef polynom<WordValue, output_series_value_t> tr_bhv_value_t;
 
 typedef Graph
 <
   labels_are_series,
   WordValue,
-  output_serie_value_t,
+  output_series_value_t,
   tr_bhv_value_t,
   char,
   NoTag>
@@ -98,16 +98,16 @@ int main()
   fibg.add_io_edge(r, q, a_l, a_l * b_l);
   fibg.add_io_edge(r, q, b_l, b_l * a_l);
 
-  output_serie_t os_q(OSA);
+  output_series_elt_t os_q(OSA);
   os_q.assoc(a_l, true);
-  serie_t s_q(OSA_A_star);
+  series_elt_t s_q(OSA_A_star);
   s_q.assoc(empty, os_q);
 
   fibg.set_final(q, s_q);
 
-  output_serie_t os_r(OSA);
+  output_series_elt_t os_r(OSA);
   os_r.assoc(a_l * b_l, true);
-  serie_t s_r(OSA_A_star);
+  series_elt_t s_r(OSA_A_star);
   s_r.assoc(empty, os_r);
   fibg.set_final(r, s_r);
 
@@ -130,15 +130,15 @@ int main()
   fibd.add_io_edge(u, t, a_l, a_l * b_l);
   fibd.add_io_edge(u, u, a_l, a_l);
 
-  output_serie_t os_s(OSA);
+  output_series_elt_t os_s(OSA);
   os_s.assoc(b_l * b_l, true);
-  serie_t s_s(OSA_A_star);
+  series_elt_t s_s(OSA_A_star);
   s_s.assoc(empty, os_s);
   fibd.set_initial(s, s_s);
 
-  output_serie_t os_t(OSA);
+  output_series_elt_t os_t(OSA);
   os_t.assoc(b_l, true);
-  serie_t s_t(OSA_A_star);
+  series_elt_t s_t(OSA_A_star);
   s_t.assoc(empty, os_t);
   fibd.set_initial(t, s_t);
   fibd.set_initial(u);

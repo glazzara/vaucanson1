@@ -63,7 +63,7 @@ namespace vcsn {
       a.deltac(succ, *initial, delta_kind::edges());
       for_all_const_(std::set<hedge_t>, e, succ)
 	out << *initial << "\t" << a.aim_of(*e) << "\t" 
-	    << a.serie_of(*e) << "\t 0" 
+	    << a.series_of(*e) << "\t 0" 
 	    << std::endl;
       for_each_state(s, a)
 	if (!a.is_initial(*s))
@@ -72,7 +72,7 @@ namespace vcsn {
 	  a.deltac(succ, *s, delta_kind::edges());
 	  for_all_const_(std::set<hedge_t>, e, succ)
 	    out << *s << "\t" << a.aim_of(*e) << "\t" 
-		<< a.serie_of(*e) << "\t 0" 
+		<< a.series_of(*e) << "\t 0" 
 		<< std::endl;
 	}
       for_each_final_state(f, a)

@@ -134,7 +134,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::is_initial(hstate_t state) const
   {
     return (op_get_initial(this->set(), this->value(), state) !=
-	    this->set().series().zero(SELECT(serie_value_t)));
+	    this->set().series().zero(SELECT(series_value_t)));
   }
 
   /** return true if the state is final (ie it is in the final support). */
@@ -143,7 +143,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::is_final(hstate_t state) const
   {
     return (op_get_final(this->set(), this->value(), state) !=
-	    algebra::zero_as<serie_value_t>::of(this->set().series()));
+	    algebra::zero_as<series_value_t>::of(this->set().series()));
   }
 
   /** set the state to be initial. */
@@ -151,7 +151,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::set_initial(hstate_t state)
   {
-    op_set_initial(this->set(), this->value(), state, this->set().series().identity(SELECT(serie_value_t)));
+    op_set_initial(this->set(), this->value(), state, this->set().series().identity(SELECT(series_value_t)));
   }
 
   /** set an initial multiplicity to the state. */
@@ -169,7 +169,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::set_final(hstate_t state)
   {
     op_set_final(this->set(), this->value(), state,
-		 this->set().series().identity(SELECT(serie_value_t)));
+		 this->set().series().identity(SELECT(series_value_t)));
   }
 
   /** set a final multiplicity to the state. */
@@ -187,7 +187,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::unset_initial(hstate_t state)
   {
     op_set_initial(this->set(), this->value(), state,
-		   algebra::zero_as<serie_value_t>::of(this->set().series()));
+		   algebra::zero_as<series_value_t>::of(this->set().series()));
   }
 
   /** set the set not to be final. */
@@ -196,7 +196,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::unset_final(hstate_t state)
   {
     op_set_final(this->set(), this->value(), state,
-		 algebra::zero_as<serie_value_t>::of(this->set().series()));
+		 algebra::zero_as<series_value_t>::of(this->set().series()));
   }
 
   /** make the support of the initial application to be empty. */
@@ -259,16 +259,16 @@ namespace vcsn {
 		       from, to, label);
   }
 
-  /** add an edge using a serie. */
+  /** add an edge using a series. */
   /** If the underlying implementation is not sufficiently general
    *  to support this operation, you will have several edges created.*/
   template <typename Self, typename T>
   hedge_t
-  MetaElement<AutomataBase<Self>, T>::add_serie_edge(hstate_t from,
+  MetaElement<AutomataBase<Self>, T>::add_series_edge(hstate_t from,
 						     hstate_t to,
 						     const series_elt_t& e)
   {
-    return op_add_serie_edge(this->set(), this->value(), from, to, e);
+    return op_add_series_edge(this->set(), this->value(), from, to, e);
   }
 
   /** add a spontaneous transition between 'from' and 'to'. */
@@ -375,20 +375,20 @@ namespace vcsn {
     return op_label_of(this->set(), this->value(), e);
   }
 
-  /** return the label seen as a serie. */
+  /** return the label seen as a series. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::series_elt_t
-  MetaElement<AutomataBase<Self>, T>::serie_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::series_of(hedge_t e) const
   {
-    return op_serie_of(this->set(), this->value(), e);
+    return op_series_of(this->set(), this->value(), e);
   }
 
-  /** return the label seen as a serie implementation. */
+  /** return the label seen as a series implementation. */
   template <typename Self, typename T>
-  typename MetaElement<AutomataBase<Self>, T>::serie_value_t
-  MetaElement<AutomataBase<Self>, T>::serie_value_of(hedge_t e) const
+  typename MetaElement<AutomataBase<Self>, T>::series_value_t
+  MetaElement<AutomataBase<Self>, T>::series_value_of(hedge_t e) const
   {
-    return op_serie_value_of(this->set(), this->value(), e);
+    return op_series_value_of(this->set(), this->value(), e);
   }
 
   /** return true if the transition is spontaneous. */

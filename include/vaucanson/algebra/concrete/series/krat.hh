@@ -52,7 +52,7 @@ namespace vcsn {
     };
 
     template <class Tm, class Tw, class W, class M>
-    struct mute_serie_impl<rat::exp<Tm, Tw>, W, M>
+    struct mute_series_impl<rat::exp<Tm, Tw>, W, M>
     {
       typedef rat::exp<M, W>	ret;
     };

@@ -49,10 +49,10 @@ namespace vcsn {
     typedef typename series_t::monoid_t monoid_t;			\
     typedef typename Element<S, T >::monoid_elt_value_t			\
     word_value_t;							\
-    typedef typename Element<S, T >::serie_value_t			\
-    serie_value_t;							\
+    typedef typename Element<S, T >::series_value_t			\
+    series_value_t;							\
     Element<monoid_t, word_value_t> w(s.series().monoid());		\
-    Element<series_t, serie_value_t> s1(s.series());			\
+    Element<series_t, series_value_t> s1(s.series());			\
     w = l;								\
     s1 = w;								\
     return op_add_edge(s, v, from, to, s1.value());			\
@@ -68,10 +68,10 @@ namespace vcsn {
     typedef typename series_t::monoid_t monoid_t;			\
     typedef typename Element<S, T >::monoid_elt_value_t 	\
     word_value_t;							\
-    typedef typename Element<S, T >::serie_value_t 		\
-    serie_value_t;							\
+    typedef typename Element<S, T >::series_value_t 		\
+    series_value_t;							\
 									\
-    Element<series_t, serie_value_t> sl = op_serie_of(s, v, e);		\
+    Element<series_t, series_value_t> sl = op_series_of(s, v, e);		\
     precondition(sl.supp().size() == 1);				\
     Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
     precondition(w.length() == 1);					\
@@ -88,10 +88,10 @@ namespace vcsn {
     typedef typename series_t::monoid_t monoid_t;			\
     typedef typename Element<S, T >::monoid_elt_value_t	\
     word_value_t;							\
-    typedef typename Element<S, T >::serie_value_t		\
-    serie_value_t;							\
+    typedef typename Element<S, T >::series_value_t		\
+    series_value_t;							\
 									\
-    Element<series_t, serie_value_t> sl = op_serie_of(s, v, e);		\
+    Element<series_t, series_value_t> sl = op_series_of(s, v, e);		\
     precondition(sl.supp().size() == 1);				\
     Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
     return w;								\
@@ -99,7 +99,7 @@ namespace vcsn {
 
 #define ADAPT_ADD_SERIE_EDGE_TO_LETTERS_LABEL(T...)			\
   hedge_t 								\
-  op_add_serie_edge(const AutomataBase<S>& a_set,			\
+  op_add_series_edge(const AutomataBase<S>& a_set,			\
 		    T& v,						\
 		    hstate_t from, 					\
 		    hstate_t to, 					\
@@ -128,7 +128,7 @@ namespace vcsn {
 
 #define ADAPT_SERIE_OF_TO_LETTERS_LABEL(T...)			\
   typename Element<AutomataBase<S>, T >::series_elt_t			\
-  op_serie_of(const AutomataBase<S>& a_set,			\
+  op_series_of(const AutomataBase<S>& a_set,			\
 	      const T& v,					\
 	      hedge_t e)					\
   {								\
@@ -140,11 +140,11 @@ namespace vcsn {
     word_value_t;						\
     typedef typename Element<S, value_t>::semiring_elt_value_t	\
         semiring_elt_value_t;						\
-    typedef typename Element<S, value_t>::serie_value_t		\
-    serie_value_t;						\
+    typedef typename Element<S, value_t>::series_value_t		\
+    series_value_t;						\
     Element<monoid_t, word_value_t> w(a_set.series().monoid());	\
     w = op_letter_of(a_set, v, e);				\
-    Element<series_t, serie_value_t> s(a_set.series());		\
+    Element<series_t, series_value_t> s(a_set.series());		\
     s.assoc(w, algebra::identity_as<semiring_elt_value_t>		\
 	    ::of(a_set.series().semiring()));			\
     return s;							\

@@ -98,11 +98,11 @@ namespace vcsn {
 		 hstate_t state,
 		 const AutoType(series_elt_t)& s)
   {
-    typedef typename Element<S, T>::serie_value_t serie_value_t;
+    typedef typename Element<S, T>::series_value_t series_value_t;
     v.set_initial(state,
 		  s.value(),
 		  zero_value(ss.series(),
-			     SELECT(serie_value_t)));
+			     SELECT(series_value_t)));
   }
 
   template <class S, class T>
@@ -115,7 +115,7 @@ namespace vcsn {
       (s.series(),
        v.get_initial(state,
 		     zero_value(s.series(),
-				SELECT(AutoType(serie_value_t)))));
+				SELECT(AutoType(series_value_t)))));
   }
 
   template <class S, class T>
@@ -127,7 +127,7 @@ namespace vcsn {
     v.set_final(state,
 		s.value(),
 		zero_value(ss.series(),
-			   SELECT(AutoType(serie_value_t))));
+			   SELECT(AutoType(series_value_t))));
   }
 
   template <class S, class T>
@@ -140,7 +140,7 @@ namespace vcsn {
       (s.series(),
        v.get_final(state,
 		   zero_value(s.series(),
-			      SELECT(AutoType(serie_value_t)))));
+			      SELECT(AutoType(series_value_t)))));
   }
 
   template <class S, class T>
@@ -191,7 +191,7 @@ namespace vcsn {
 
   template <class S, class T>
   hedge_t
-  op_add_serie_edge(const AutomataBase<S>& s, T& v,
+  op_add_series_edge(const AutomataBase<S>& s, T& v,
 		    hstate_t from,
 		    hstate_t to,
 		    const typename Element<S, T>::series_elt_t& l)
@@ -209,7 +209,7 @@ namespace vcsn {
     AutoType(series_elt_t) ss(s.series());
     ss.assoc(algebra::identity_as<AutoType(monoid_elt_value_t)>::
 	    of(s.series().monoid()), w);
-    return op_add_serie_edge(s, v, from, to, ss);
+    return op_add_series_edge(s, v, from, to, ss);
   }
 
   template <class S, class T>
@@ -298,7 +298,7 @@ namespace vcsn {
 
   template <class S, class T>
   const typename Element<S, T>::series_elt_t
-  op_serie_of(const AutomataBase<S>& s, const T& v,
+  op_series_of(const AutomataBase<S>& s, const T& v,
 	      hedge_t e)
   {
     return typename Element<S, T>::series_elt_t
@@ -307,11 +307,11 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  typename Element<S, T>::serie_value_t
-  op_serie_value_of(const AutomataBase<S>& s, const T& v,
+  typename Element<S, T>::series_value_t
+  op_series_value_of(const AutomataBase<S>& s, const T& v,
 		    hedge_t e)
   {
-    return op_serie_of(s, v, e).value();
+    return op_series_of(s, v, e).value();
   }
 
   template <class S, class T>
@@ -345,8 +345,8 @@ namespace vcsn {
   op_is_spontaneous(const AutomataBase<S>& s, const T& v,
 		    hedge_t e)
   {
-    return (op_serie_of(s, v, e) ==
-	    algebra::identity_as<AutoType(serie_value_t)>::of(s.series()));
+    return (op_series_of(s, v, e) ==
+	    algebra::identity_as<AutoType(series_value_t)>::of(s.series()));
   }
 
   struct always_true
@@ -371,7 +371,7 @@ namespace vcsn {
     bool operator()(hedge_t e) const
     {
       return (op_series_get(s_->series(),
- 			    op_serie_of(*s_, *v_, e).value(),
+ 			    op_series_of(*s_, *v_, e).value(),
  			    w_.value())
  	      != algebra::zero_as<AutoType(semiring_elt_value_t)>
  	      ::of(s_->series().semiring()));
@@ -401,7 +401,7 @@ namespace vcsn {
 
     bool operator()(hedge_t e) const
     {
-      return (op_serie_of(s_, v_, e)
+      return (op_series_of(s_, v_, e)
 	      .get(algebra::identity_as<AutoType(monoid_elt_value_t)>::of
 		   (s_.series().monoid()))
 	      != algebra::zero_as<AutoType(semiring_elt_value_t)>

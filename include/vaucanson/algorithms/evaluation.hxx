@@ -143,12 +143,12 @@ namespace vcsn {
 	    j = i; ++j;
 
 	    if (b.aim_of(*i) == q)
-	      loop_sum += b.serie_of(*i);
+	      loop_sum += b.series_of(*i);
 	    else if ((f = out_sums.find(b.aim_of(*i))) !=
 		     out_sums.end())
-	      f->second += b.serie_of(*i);
+	      f->second += b.series_of(*i);
 	    else
-	      out_sums.insert(std::make_pair(b.aim_of(*i), b.serie_of(*i)));
+	      out_sums.insert(std::make_pair(b.aim_of(*i), b.series_of(*i)));
 	    b.del_edge(*i);
 	  }
 	edges.clear();
@@ -160,9 +160,9 @@ namespace vcsn {
 	    // here all loops have already been removed
 	    if ((f = in_sums.find(b.origin_of(*i))) !=
 		     in_sums.end())
-	      f->second += b.serie_of(*i);
+	      f->second += b.series_of(*i);
 	    else
-	      in_sums.insert(std::make_pair(b.origin_of(*i), b.serie_of(*i)));
+	      in_sums.insert(std::make_pair(b.origin_of(*i), b.series_of(*i)));
 	    b.del_edge(*i);
 	  }
 	loop_sum.star();
@@ -170,7 +170,7 @@ namespace vcsn {
 	  for_each_const_(sums_t, out, out_sums)
 	  {
 	    series_elt_t res = in->second * loop_sum * out->second;
-	    b.add_serie_edge(in->first, out->first, res);
+	    b.add_series_edge(in->first, out->first, res);
 	  }
 	b.del_state(q);
       }

@@ -63,7 +63,7 @@ namespace vcsn {
     template<typename Self, typename Series, typename SeriesT, typename LabelT>
     Element<Series, SeriesT>
     AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
-    serie_of(hedge_t e) const
+    series_of(hedge_t e) const
     { 
       return series_elt_t(auto_self().series(),
 			  auto_self().label_of(e));
@@ -72,7 +72,7 @@ namespace vcsn {
     template<typename Self, typename Series, typename SeriesT, typename LabelT>
     const SeriesT& 
     AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
-    serie_value_of(hedge_t e) const
+    series_value_of(hedge_t e) const
     {
       return auto_self().label_of(e);
     }
@@ -119,7 +119,7 @@ namespace vcsn {
   template<typename S>
   hedge_t 
   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
-  add_serie_edge(hstate_t from, hstate_t to, 
+  add_series_edge(hstate_t from, hstate_t to, 
 		 const S& e)
     { 
       return auto_self().add_edge(from, to, e.value()); 
@@ -229,7 +229,7 @@ namespace vcsn {
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
   Element<Series, SeriesT>
   AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
-  serie_of(hedge_t e) const
+  series_of(hedge_t e) const
   { 
     const LabelT& label = auto_self().label_of(e);
     const Series& s = auto_self().series();
@@ -241,7 +241,7 @@ namespace vcsn {
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
   const SeriesT 
   AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
-  serie_value_of(hedge_t e) const
+  series_value_of(hedge_t e) const
   {
     const LabelT& label = auto_self().label_of(e);
     const Series& s = auto_self().series();
@@ -293,7 +293,7 @@ namespace vcsn {
     template<typename S>
     hedge_t 
     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
-    add_serie_edge(hstate_t from, hstate_t to, 
+    add_series_edge(hstate_t from, hstate_t to, 
 		   const S& e)
     { 
       assertion(e.is_finite_app());

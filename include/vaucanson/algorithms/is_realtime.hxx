@@ -44,7 +44,7 @@ namespace vcsn {
     AUTOMATON_TYPES(A);
     for_each_edge(e, trans)
       {
-        if (!is_letter_support(trans.serie_of(*e)))
+        if (!is_letter_support(trans.series_of(*e)))
 	  return false;
       }
     return true;

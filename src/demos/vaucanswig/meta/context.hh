@@ -130,7 +130,7 @@ namespace FAMILY ##_types							\
   typedef vcsn::generalized_traits<automaton_t>::automaton_t generalized_automaton_t;	\
   AUTOMATON_TYPES_EXACT_(generalized_automaton_t, gen_## FAMILY ##_)		\
   typedef gen_## FAMILY ##_series_elt_t FAMILY ##_exp_t;                             \
-  typedef gen_## FAMILY ##_serie_value_t FAMILY ##_exp_value_t;                 \
+  typedef gen_## FAMILY ##_series_value_t FAMILY ##_exp_value_t;                 \
 }
 
 

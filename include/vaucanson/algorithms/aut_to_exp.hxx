@@ -141,7 +141,7 @@ namespace vcsn {
 	    j = i; ++j;
 
 	    if (a.aim_of(*i) == q)
-		loop_sum += a.serie_of(*i);
+		loop_sum += a.series_of(*i);
 	    else
 	      {
 		typename sums_t::iterator f = out_sums.find(a.aim_of(*i));
@@ -149,7 +149,7 @@ namespace vcsn {
 		  f = out_sums.insert
 		    (std::make_pair(a.aim_of(*i),
 				    series_elt_t(a_set.series()))).first;
-	        f->second += a.serie_of(*i);
+	        f->second += a.series_of(*i);
 	      }
 	    a.del_edge(*i);
 	  }
@@ -167,7 +167,7 @@ namespace vcsn {
 		(std::make_pair(a.origin_of(*i),
 				series_elt_t(a_set.series()))).first;
 	    
-	    f->second += a.serie_of(*i);
+	    f->second += a.series_of(*i);
 	    a.del_edge(*i);
 	  }
 
@@ -176,7 +176,7 @@ namespace vcsn {
 	  for_each_const_(sums_t, out, out_sums)
 	  {
 	    series_elt_t res = in->second * loop_sum * out->second;
-	    a.add_serie_edge(in->first, out->first, res);
+	    a.add_series_edge(in->first, out->first, res);
 	  }
 	a.del_state(q);
       }

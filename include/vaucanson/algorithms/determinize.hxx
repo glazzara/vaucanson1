@@ -219,12 +219,12 @@ namespace vcsn {
 	// FIXME : O(n^2) => O(nlog(n))
 	for_all_const_(delta_ret_t, j, delta_ret)
 	  {
-	    series_elt_t s = input.serie_of(*j);
+	    series_elt_t s = input.series_of(*j);
 	    typename delta_ret_t::const_iterator k = j;
 	    ++k;
 	    for (; k != delta_ret.end(); ++k)
 	      {
-		series_elt_t s_ = input.serie_of(*k);
+		series_elt_t s_ = input.series_of(*k);
 		for_all_(support_t, supp, s.supp())
 		  if (s_.get(*supp) != zero_semiring)
 		    return false;

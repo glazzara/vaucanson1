@@ -48,7 +48,7 @@ namespace vcsn {
   /** @addtogroup algorithms */  /** @{ */
 
   /**
-   *  @brief Returns a serie which describes the language of the automaton.
+   *  @brief Returns a series which describes the language of the automaton.
    *
    *  This algorithm works on every kind of series. However, if,
    *  during the computation, it must take the star of it, it can
@@ -60,7 +60,7 @@ namespace vcsn {
    *
    * @param a the automaton to convert.
    *
-   * @return a rational serie that describes the language of the automaton.
+   * @return a rational series that describes the language of the automaton.
    * @see generalized
    */
   // INTERFACE: Exp aut_to_exp(const GenAutomaton& a) { return vcsn::aut_to_exp(*a); }
@@ -69,7 +69,7 @@ namespace vcsn {
   aut_to_exp(const Element<A, T>& a);
 
   /**
-   *  @brief Returns a serie which describes the language of the automaton.
+   *  @brief Returns a series which describes the language of the automaton.
    *
    *  This algorithm works on every kind of series. However, if,
    *  during the computation, it must take the star of it, it can
@@ -83,7 +83,7 @@ namespace vcsn {
    * @param c An object-function that returns the next state to remove
    * from the current state and the automaton.
    *
-   * @return a rational serie that describes the language of the automaton.
+   * @return a rational series that describes the language of the automaton.
    * @see generalized
    */
   template<typename A, typename T, typename Chooser_>

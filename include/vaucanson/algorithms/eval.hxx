@@ -98,7 +98,7 @@ namespace vcsn {
 	    a.letter_deltac(delta_ret, i, *e, delta_kind::edges());
 	    for_all_const_(std::list<hedge_t>, l, delta_ret)
 	      v2[a.aim_of(*l)] += v1[i] *
-	      a.serie_of(*l).get(monoid_elt_t(a.set().series().monoid(), *e));
+	      a.series_of(*l).get(monoid_elt_t(a.set().series().monoid(), *e));
 	  }
 	std::swap(v1, v2);
       }

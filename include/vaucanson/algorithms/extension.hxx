@@ -67,7 +67,7 @@ namespace vcsn {
 
     for_each_edge(e, a)
       {
-	series_elt_t t = a.serie_of(*e);
+	series_elt_t t = a.series_of(*e);
 	series_elt_t s(t);
 	output_series_elt_t os(t_ret.set().series());
 	support_t supp = s.supp();
@@ -75,28 +75,28 @@ namespace vcsn {
 	  {
 	    series_elt_t tmp(a.set().series());
 	    // try to associate the neutral monoid element with a weight
-	    // to create a serie which will be a weight in the serie os
+	    // to create a series which will be a weight in the series os
 	    tmp.assoc(neutre, s.get(*m));
 	    os.assoc(*m, tmp);
 	  }
-	hedge_t f = t_ret.add_serie_edge(conv[a.origin_of(*e)],
+	hedge_t f = t_ret.add_series_edge(conv[a.origin_of(*e)],
 					 conv[a.aim_of(*e)],
 					 os);
       }
 
     for_each_initial_state(i, a)
       {
-	series_elt_t a_serie = a.get_initial(*i);
+	series_elt_t a_series = a.get_initial(*i);
 	t_series_elt_t s;
-	s.value_set(t_neutre, a_serie);
+	s.value_set(t_neutre, a_series);
 	t_ret.set_initial(conv[*i], s);
       }
 
     for_each_final_state(f, a)
       {
-	series_elt_t a_serie = a.get_final(*f);
+	series_elt_t a_series = a.get_final(*f);
 	t_series_elt_t s;
-	s.value_set(t_neutre, a_serie);
+	s.value_set(t_neutre, a_series);
 	t_ret.set_final(conv[*f], s);
       }
 
@@ -137,7 +137,7 @@ namespace vcsn {
     // convert edges
     for(a_edge_iterator e = a.edges().begin(); e != a.edges().end(); ++e)
       {
-	a_series_elt_t s_ = a.serie_of(*e);
+	a_series_elt_t s_ = a.series_of(*e);
 	a_series_elt_t s(s_);
 
 	t_output_series_elt_t os(t.set().series());
@@ -151,16 +151,16 @@ namespace vcsn {
 	    os.assoc(a_monoid_elt_t (a.set().series().monoid(), *m), tmp);
 	  }
 
-	tt.add_serie_edge(conv[a.origin_of(*e)], conv[a.aim_of(*e)], os);
+	tt.add_series_edge(conv[a.origin_of(*e)], conv[a.aim_of(*e)], os);
       }
 
     for(a_initial_iterator p = a.initial().begin();
 	p != a.initial().end();
 	++p)
       {
-	a_series_elt_t a_serie = a.get_initial(*p);
+	a_series_elt_t a_series = a.get_initial(*p);
 	t_series_elt_t s (t.set().series());
-	s.assoc(t_neutre, a_serie);
+	s.assoc(t_neutre, a_series);
 	tt.set_initial(conv[*p], s);
       }
 
@@ -168,9 +168,9 @@ namespace vcsn {
 	p != a.final().end();
 	++p)
       {
-	a_series_elt_t a_serie = a.get_final(*p);
+	a_series_elt_t a_series = a.get_final(*p);
 	t_series_elt_t s (t.set().series());
-	s.assoc(t_neutre, a_serie);
+	s.assoc(t_neutre, a_series);
 	tt.set_final(conv[*p], s);
       }
 

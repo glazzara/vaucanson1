@@ -133,13 +133,13 @@ namespace vcsn {
 
   template <class S, class T>
   hedge_t
-  op_add_serie_edge(const AutomataBase<S>& s,
+  op_add_series_edge(const AutomataBase<S>& s,
 		    TransposeView<T>& v,
 		    hstate_t from,
 		    hstate_t to,
 		    const typename Element<S, T>::series_elt_t& se)
   {
-    return op_add_serie_edge(s, v.object(), from, to, se);
+    return op_add_series_edge(s, v.object(), from, to, se);
   }
 
   template <class S, class T>
@@ -223,20 +223,20 @@ namespace vcsn {
 
   template <class S, class T>
   const typename Element<S, T>::series_elt_t
-  op_serie_of(const AutomataBase<S>& s,
+  op_series_of(const AutomataBase<S>& s,
 	      const TransposeView<T>& v,
 	      hedge_t e)
   {
-    return op_serie_of(s, v.object(), e);
+    return op_series_of(s, v.object(), e);
   }
 
   template <class S, class T>
-  typename Element<S, T>::serie_value_t
-  op_serie_value_of(const AutomataBase<S>& s,
+  typename Element<S, T>::series_value_t
+  op_series_value_of(const AutomataBase<S>& s,
 		    const TransposeView<T>& v,
 		    hedge_t e)
   {
-    return op_serie_value_of(s, v.object(), e);
+    return op_series_value_of(s, v.object(), e);
   }
 
   template <class S, class T>

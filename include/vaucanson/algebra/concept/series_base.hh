@@ -83,7 +83,7 @@ namespace vcsn {
     };
 
     template <typename T, typename W, typename M>
-    struct mute_serie_impl
+    struct mute_series_impl
     {
       typedef undefined_type	ret;
     };
@@ -120,7 +120,7 @@ namespace vcsn {
   /*---------------------------------.
   | MetaElement<SeriesBase<Self>, T> |
   `---------------------------------*/
-  /// Services of every serie.
+  /// Services of every series.
   template<class Self, typename T>
   class MetaElement<algebra::SeriesBase<Self>, T>
     : public MetaElement<algebra::SemiringBase<Self>, T>
@@ -138,7 +138,7 @@ namespace vcsn {
     /// type of the element of the monoid.
     typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
 
-    /// type of the serie.
+    /// type of the series.
     typedef Element<Self, T>				 element_t;
 
     /// type of the iterator over the series when finite.
@@ -157,18 +157,18 @@ namespace vcsn {
     /// associates a weight to a word.
     void		assoc(const monoid_elt_t& m, const semiring_elt_t& w);
 
-    /// returns true if the serie support is finite.
+    /// returns true if the series support is finite.
     bool		is_finite_app() const;
 
-    /// returns a word that is in the support of the serie.
+    /// returns a word that is in the support of the series.
     monoid_elt_t	choose_from_supp() const;
 
-    /// in-place transpose transformation of the serie.
+    /// in-place transpose transformation of the series.
     void       	        transpose();
 
-    /// returns a container which is the support of the serie.
+    /// returns a container which is the support of the series.
     /// The container elements are couples (m, k) where m is in
-    /// the support and k is the image of m by the serie.
+    /// the support and k is the image of m by the series.
     /// The support is accessible only if is_finite_app is true.
     support_t		supp() const;
 
@@ -180,18 +180,18 @@ namespace vcsn {
     MetaElement(const MetaElement& other);
   };
 
-  /// returns a fresh serie that is the transposed of the argument.
+  /// returns a fresh series that is the transposed of the argument.
   template <typename S, typename T>
   Element<S, T>
   transpose(const algebra::SeriesBase<S>& s, const T& t);
 
-  /// returns true if the support of the serie is only composed of
+  /// returns true if the support of the series is only composed of
   /// letters.
   template <typename S, typename T>
   bool
   is_letter_support(const Element<S, T>& s);
 
-  /// make the first serie be the support of the second.
+  /// make the first series be the support of the second.
   template <typename S1, typename S2, typename T1, typename T2>
   void
   extract_support(Element<S1, T1>&, Element<S2, T2>&);

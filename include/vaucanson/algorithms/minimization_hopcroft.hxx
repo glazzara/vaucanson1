@@ -666,7 +666,7 @@ namespace vcsn {
     set_edges_t                                edges_comming, edges_leaving;
     queue<pair_class_letter_t>                 the_queue;
     vector<vector<set_pair_state_semiring_elt_t> >   inverse;
-    series_elt_t                               serie_identity    = input.series().zero_;
+    series_elt_t                               series_identity    = input.series().zero_;
     semiring_elt_t                             weight_zero       = input.series().semiring().wzero_;
     monoid_elt_t                               monoid_identity   = input.series().monoid().empty_;
     const alphabet_t&	                       alphabet(input.series().monoid().alphabet());
@@ -721,7 +721,7 @@ namespace vcsn {
 		else 
 		  states_visited.insert(p);
 
-		old_weight[p] += input.serie_of(*e).get(*a);
+		old_weight[p] += input.series_of(*e).get(*a);
 		inverse[*q][pos_of_letter[*a]].insert(pair_state_semiring_elt_t(p, old_weight[p]));
 	      }
 	  }
@@ -847,19 +847,19 @@ namespace vcsn {
       Form the output
       ----------------*/
     typedef map<unsigned, series_elt_t> map_class_series_elt_t;
-    map_class_series_elt_t serie_of;
+    map_class_series_elt_t series_of;
 
     for(int i = 0; i < max_partition; i++) // Add states
       {
 	hstate_t p = output.add_state();
 	hstate_t a_state = *classes[i].begin();
-	series_elt_t a_serie = serie_identity;
+	series_elt_t a_series = series_identity;
 	
 	for_each_const_(set_states_t, state, classes[i])
 	  if(input.is_initial(*state))
-	    a_serie += input.get_initial(*state);
+	    a_series += input.get_initial(*state);
 
-	output.set_initial(p, a_serie);
+	output.set_initial(p, a_series);
 	
 	if (input.is_final(a_state))
 	  output.set_final(p, input.get_final(a_state));
@@ -867,15 +867,15 @@ namespace vcsn {
 
     for(int i = 0; i < max_partition; i++) // Add edges
       {
-	serie_of.clear();
+	series_of.clear();
 	edges_leaving.clear();       
 	input.deltac(edges_leaving, *classes[i].begin(), delta_kind::edges());
 
 	for_each_const_(set_edges_t, e, edges_leaving)
-	    serie_of[class_of_state[input.aim_of(*e)]] += input.serie_of(*e);
+	    series_of[class_of_state[input.aim_of(*e)]] += input.series_of(*e);
 
-	for_each_const_(map_class_series_elt_t, it, serie_of)
-	    output.add_serie_edge(i, (*it).first, (*it).second);
+	for_each_const_(map_class_series_elt_t, it, series_of)
+	    output.add_series_edge(i, (*it).first, (*it).second);
       }
   }
   

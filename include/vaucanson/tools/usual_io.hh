@@ -41,7 +41,7 @@ namespace vcsn
       template<typename Auto>
       typename Auto::series_elt_t operator()(const Auto&, const std::string& lbl) const;
       template<typename Auto>
-      std::string operator()(const Auto&, const typename Auto::series_elt_t& exp_serie) const;
+      std::string operator()(const Auto&, const typename Auto::series_elt_t& exp_series) const;
     };
 
     template<typename ExpType>
@@ -50,7 +50,7 @@ namespace vcsn
       template<typename Auto>
       typename Auto::series_elt_t operator()(const Auto&, const std::string& lbl) const;
       template<typename Auto>
-      std::string operator()(const Auto&, const typename Auto::series_elt_t& poly_serie) const;
+      std::string operator()(const Auto&, const typename Auto::series_elt_t& poly_series) const;
     };
   }
 }

@@ -54,7 +54,7 @@ int main(int argc, char **argv)
   }
   std::string exp = argv[1];
 
-  // Declare and initialize serie
+  // Declare and initialize series
   alphabet_t alpha;
   alpha.insert('a');
   alpha.insert('b');

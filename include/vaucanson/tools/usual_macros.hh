@@ -67,8 +67,7 @@
  typedef typename Prefix##alphabet_t::letter_t       Prefix##letter_t;	      \
  typedef typename AutoType::semiring_t                Prefix##semiring_t;	      \
  typedef typename AutoType::series_t                 Prefix##series_t;	      \
- typedef typename AutoType::series_elt_t             Prefix##serie_t;    \
- typedef typename AutoType::serie_value_t	Prefix##serie_value_t; \
+ typedef typename AutoType::series_value_t	Prefix##series_value_t; \
  typedef typename AutoType::series_elt_t             Prefix##series_elt_t;    \
  typedef typename Prefix##series_elt_t::semiring_elt_t     Prefix##semiring_elt_t;	      \
  typedef typename Prefix##semiring_elt_t::value_t          Prefix##semiring_elt_value_t;  \
@@ -95,8 +94,7 @@
  typedef Prefix##alphabet_t::letter_t	Prefix##letter_t;		  \
  typedef AutoType::semiring_t			Prefix##semiring_t;	  \
  typedef AutoType::series_t			Prefix##series_t;	  \
- typedef AutoType::series_elt_t		Prefix##serie_t;		  \
- typedef AutoType::serie_value_t	Prefix##serie_value_t;		  \
+ typedef AutoType::series_value_t	Prefix##series_value_t;		  \
  typedef AutoType::series_elt_t		Prefix##series_elt_t;		  \
  typedef Prefix##series_elt_t::semiring_elt_t	Prefix##semiring_elt_t;		  \
  typedef Prefix##semiring_elt_t::value_t		Prefix##semiring_elt_value_t;	  \

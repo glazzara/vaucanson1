@@ -109,9 +109,9 @@ namespace vcsn {
 
   public:
 
-    series_elt_t serie_of(hedge_t e) const;
+    series_elt_t series_of(hedge_t e) const;
 
-    const SeriesT& serie_value_of(hedge_t e) const;
+    const SeriesT& series_value_of(hedge_t e) const;
 
     bool is_spontaneous(hedge_t e) const;
 
@@ -123,7 +123,7 @@ namespace vcsn {
     const typename monoid_elt_t::value_t& word_value_of(hedge_t e) const;
 
     template<typename S>
-    hedge_t add_serie_edge(hstate_t from, hstate_t to, 
+    hedge_t add_series_edge(hstate_t from, hstate_t to, 
 			   const S& e);
 
     hedge_t add_spontaneous(hstate_t from, hstate_t to);
@@ -214,9 +214,9 @@ namespace vcsn {
 
   public:
 
-    series_elt_t  serie_of(hedge_t e) const;
+    series_elt_t  series_of(hedge_t e) const;
 
-    const SeriesT serie_value_of(hedge_t e) const;
+    const SeriesT series_value_of(hedge_t e) const;
 
     bool is_spontaneous(hedge_t e) const;
 
@@ -228,7 +228,7 @@ namespace vcsn {
     const typename monoid_elt_t::value_t& word_value_of(hedge_t e) const;
 
     template<typename S>
-    hedge_t add_serie_edge(hstate_t from, hstate_t to, 
+    hedge_t add_series_edge(hstate_t from, hstate_t to, 
 			   const S& e);
 
     hedge_t add_spontaneous(hstate_t from, hstate_t to);

@@ -62,8 +62,8 @@ namespace vcsn
 	 i != from.edges().end();
 	 ++i)
       {
-	dst_series_elt_t s(from.serie_of(*i));
-	dst.add_serie_edge(stmap[from.origin_of(*i)], stmap[from.aim_of(*i)], s);
+	dst_series_elt_t s(from.series_of(*i));
+	dst.add_series_edge(stmap[from.origin_of(*i)], stmap[from.aim_of(*i)], s);
       }
     dst_.swap(dst);
   }

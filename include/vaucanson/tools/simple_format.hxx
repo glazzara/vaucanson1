@@ -68,7 +68,7 @@ namespace vcsn
 	  if (a.is_spontaneous(*i))
 	    o << 'S';
 	  else
-	    o << "l[" << conv(a, a.serie_of(*i)) << "]" << std::endl;
+	    o << "l[" << conv(a, a.series_of(*i)) << "]" << std::endl;
 	}
       o << '.' << std::endl;
     }

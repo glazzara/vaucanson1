@@ -65,7 +65,7 @@ namespace vcsn {
       conv[ret.add_state()] = *s;
     for_each_edge(e, a)
       {
-	series_elt_t t = a.serie_of(*e);
+	series_elt_t t = a.series_of(*e);
 	series_elt_t s(t);
 	output_series_elt_t os(ret.set().series());
 	support_t supp = s.supp();
@@ -75,7 +75,7 @@ namespace vcsn {
 	    tmp.assoc(*m, s.get(*m));
 	    os.assoc(*m, tmp);
 	  }
-	hedge_t f = ret.add_serie_edge(conv[a.origin_of(*e)],
+	hedge_t f = ret.add_series_edge(conv[a.origin_of(*e)],
 				       conv[a.aim_of(*e)],
 				       os);
       }

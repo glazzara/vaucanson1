@@ -122,7 +122,7 @@ namespace vcsn
 	s = add_state(etiq);
       else
 	s = i->second.first;
-      auto_p->add_serie_edge(current_state->second.first, s, el);
+      auto_p->add_series_edge(current_state->second.first, s, el);
     }
     
     // A tool to add a state in the set and the automaton

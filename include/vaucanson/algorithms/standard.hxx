@@ -60,8 +60,8 @@ namespace vcsn {
 	a.deltac(edge_oi, *oi, delta_kind::edges()); 
 	for_all_const_(std::set<hedge_t>, oil, edge_oi)
 	  {
-	    series_elt_t t = s*a.serie_of(*oil);
-	    a.add_serie_edge(i,a.aim_of(*oil),t);
+	    series_elt_t t = s*a.series_of(*oil);
+	    a.add_series_edge(i,a.aim_of(*oil),t);
 	  }
       }
     a.clear_initial();

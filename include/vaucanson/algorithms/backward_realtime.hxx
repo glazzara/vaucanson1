@@ -58,7 +58,7 @@ namespace vcsn {
     semiring_elt_t		  semiring_zero =
       algebra::zero_as<semiring_elt_value_t>::of(a.set().series().semiring());
     series_elt_t          series_identity =
-      algebra::identity_as<serie_value_t>::of(a.set().series());
+      algebra::identity_as<series_value_t>::of(a.set().series());
 
     backward_closure_here(a);
 
@@ -73,14 +73,14 @@ namespace vcsn {
 	  {
 	    hedge_t d_o = origin_d.front();
 	    origin_d.pop_front();
-	    if (a.serie_of(d_o).get(monoid_identity) != semiring_zero)
+	    if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
 	      {
 		aim_d.clear();	 
 		a.deltac(aim_d, a.aim_of(d_o), delta_kind::edges());
 		for (typename delta_ret_t::const_iterator d = aim_d.begin();
 		     d != aim_d.end();
 		     ++d)
-		  if (a.serie_of(*d).get(monoid_identity) == semiring_zero)
+		  if (a.series_of(*d).get(monoid_identity) == semiring_zero)
 		    {
 		      bool new_edge = true;
 		      for (typename queue_t::const_iterator d__o = 
@@ -96,10 +96,10 @@ namespace vcsn {
 		      
 		      if (new_edge)
 			{
-			  hedge_t new_hedge = a.add_serie_edge
+			  hedge_t new_hedge = a.add_series_edge
 			    (*origin,
 			     a.aim_of(*d),
-			     a.serie_of(d_o) * a.serie_of(*d));
+			     a.series_of(d_o) * a.series_of(*d));
 			  origin_d.push_back(new_hedge);
 			}
 		    }
@@ -112,7 +112,7 @@ namespace vcsn {
     for (typename automaton_t::edge_iterator e = a.edges().begin();
 	 e != a.edges().end();
 	 ++e)
-      if (a.serie_of(*e).get(monoid_identity) != semiring_zero)
+      if (a.series_of(*e).get(monoid_identity) != semiring_zero)
 	to_del.push_back(*e);
 
     while (!to_del.empty())

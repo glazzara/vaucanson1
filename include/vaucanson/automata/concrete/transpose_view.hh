@@ -89,7 +89,7 @@ namespace vcsn {
   struct automaton_traits<TransposeView<T> >
   {
     typedef typename automaton_traits<T>::label_t label_t;
-    typedef typename automaton_traits<T>::serie_value_t serie_value_t;
+    typedef typename automaton_traits<T>::series_value_t series_value_t;
     typedef typename automaton_traits<T>::word_value_t word_value_t;
     typedef typename automaton_traits<T>::semiring_elt_value_t semiring_elt_value_t;
     typedef typename automaton_traits<T>::letter_t letter_t;

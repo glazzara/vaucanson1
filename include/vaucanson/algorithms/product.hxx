@@ -107,11 +107,11 @@ namespace vcsn {
 
 	for_all_const_(delta_ret_t, iel, edge_lhs)
 	  {
-	    series_elt_t s     = lhs.serie_of(*iel);
+	    series_elt_t s     = lhs.series_of(*iel);
 
 	    for_all_const_(delta_ret_t, ier, edge_rhs)
 	      {
-		series_elt_t s_  = rhs.serie_of(*ier);
+		series_elt_t s_  = rhs.series_of(*ier);
 		series_elt_t s__ = s;
 		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
 
@@ -133,7 +133,7 @@ namespace vcsn {
 		      }
 		    else
 		      aim = found->second;
-		    output.add_serie_edge(current_state,
+		    output.add_series_edge(current_state,
 					  aim, s__);
 		  }
 	      }

@@ -112,10 +112,10 @@ namespace vcsn {
 	    output_exp_t exp1 (a.series());
 	    partial_2(a, rhs, q, exp1);
 
-	    output_exp_t null_serie =
+	    output_exp_t null_series =
 	      a.series().zero(SELECT(typename a_series_elt_t::value_t));
 
-	    if (exp1 != null_serie)
+	    if (exp1 != null_series)
 	      {
 		exp_t s (lhs.series());
 		s.assoc(empty, exp1);
@@ -129,7 +129,7 @@ namespace vcsn {
 	for_each_const_(set_of_edges_t, e, edges)
 	  {
 	    hstate_t p_ = lhs.aim_of(*e);
-	    exp_t exp = lhs.serie_of(*e);
+	    exp_t exp = lhs.series_of(*e);
 
 	    assertion(exp.supp().size() == 1);
 	    monoid_elt_t word (exp.set().monoid(), *(exp.supp().begin()));
@@ -154,7 +154,7 @@ namespace vcsn {
 
 		exp_t s (lhs.set().series());
 		s.assoc(word, (*mypair).second);
-		ret.add_serie_edge( sp_map[sp], sp_map[sp1], s);
+		ret.add_series_edge( sp_map[sp], sp_map[sp1], s);
 	      }
 	  }
       }

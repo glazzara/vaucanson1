@@ -99,7 +99,7 @@ namespace vcsn {
     };
 
     template <class Tm, class Tw, class W, class M>
-    struct mute_serie_impl<polynom<Tm, Tw>, W, M>
+    struct mute_series_impl<polynom<Tm, Tw>, W, M>
     {
       typedef polynom<M, W>	ret;
     };

@@ -57,7 +57,7 @@ namespace vcsn {
     transducer_t output(set);
     delta_ret_t f_delta_ret, g_delta_ret;
     assoc_t conv;
-    series_elt_t zero = algebra::zero_as<serie_value_t>::of(output.series());
+    series_elt_t zero = algebra::zero_as<series_value_t>::of(output.series());
 
     for_each_state(s, f)
       for_each_state(t, g)
@@ -82,24 +82,24 @@ namespace vcsn {
 	
 	for_all_const_(delta_ret_t, lhs_e, f_delta_ret)
 	  {
-	    series_elt_t l = f.serie_of(*lhs_e);
+	    series_elt_t l = f.series_of(*lhs_e);
 	    for_all_const_(delta_ret_t, rhs_e, g_delta_ret)
 	      {
-		series_elt_t l_ = g.serie_of(*rhs_e);
+		series_elt_t l_ = g.series_of(*rhs_e);
 		series_elt_t l__(series);
-		typedef typename serie_t::support_t support_t;
+		typedef typename series_t::support_t support_t;
 		for_all_const_(support_t, supp, l.supp())
 		  {
 		    semiring_elt_t ol = l.get(*supp);
 		    typedef typename semiring_elt_t::support_t wsupport_t;
 		    wsupport_t wsupp = ol.supp();
-		    serie_t ts(series, monoid_elt_t(*supp));
+		    series_t ts(series, monoid_elt_t(*supp));
 		    for_all_const_(wsupport_t, ss, wsupp)
 		      l__ += ts * l_.get(*ss);
 		  }
 		if (l__ != zero)
 		  {
-		    output.add_serie_edge(conv[std::make_pair(*s, *t)],
+		    output.add_series_edge(conv[std::make_pair(*s, *t)],
 					  conv[std::make_pair(f.aim_of(*lhs_e),
 							      g.aim_of(*rhs_e))
 					  ],

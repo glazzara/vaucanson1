@@ -109,16 +109,16 @@ struct vcsn_automaton : vcsn::virtual_automaton
 
   const automata_set_t &set() const { return (*auto_).set(); }
 
-  series_elt_t serie_of(int e) const
+  series_elt_t series_of(int e) const
   {
     CHECK_EDGE(this, e);
-    return (*auto_).serie_of(e);
+    return (*auto_).series_of(e);
   }
 
-  int add_serie_edge(int from, int to, const series_elt_t& s)
+  int add_series_edge(int from, int to, const series_elt_t& s)
   {
     CHECK_STATE(this, from); CHECK_STATE(this, to);
-    return (*auto_).add_serie_edge(from, to, s);
+    return (*auto_).add_series_edge(from, to, s);
   }
 
   series_elt_t get_initial(int state) const
@@ -201,7 +201,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = WEIGHT(this, w) * s;
-    return (*auto_).add_serie_edge(from, to, s);
+    return (*auto_).add_series_edge(from, to, s);
   }
 
   // Creation of edge with weight on the right
@@ -214,7 +214,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = s * WEIGHT(this, w);
-    return (*auto_).add_serie_edge(from, to, s);
+    return (*auto_).add_series_edge(from, to, s);
   }
 
   // Creation of edge with weight on left and right
@@ -227,7 +227,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = WEIGHT(this, lw) * s * WEIGHT(this, rw);
-    return (*auto_).add_serie_edge(from, to, s);
+    return (*auto_).add_series_edge(from, to, s);
   }
 
   // Edge label retrieval
@@ -235,7 +235,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {
     CHECK_EDGE(this, edge);
     std::ostringstream s;
-    s << (*auto_).serie_of(edge);
+    s << (*auto_).series_of(edge);
     return s.str();
   }
 
@@ -335,7 +335,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
 										\
     series_elt_t s(SERIES_OF(this));						\
-    s = SERIES_OF(this).identity(SELECT(serie_value_t));			\
+    s = SERIES_OF(this).identity(SELECT(series_value_t));			\
     s = WEIGHT(this, weight) * s;						\
     return (*auto_).set_## InitialFinal (state, s);				\
   }										\
@@ -344,7 +344,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
 										\
     series_elt_t s(SERIES_OF(this));						\
-    s = SERIES_OF(this).identity(SELECT(serie_value_t));			\
+    s = SERIES_OF(this).identity(SELECT(series_value_t));			\
     s = s * WEIGHT(this, weight);						\
     return (*auto_).set_## InitialFinal (state, s);				\
   }										\
@@ -353,7 +353,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
 										\
     series_elt_t s(SERIES_OF(this));						\
-    s = SERIES_OF(this).identity(SELECT(serie_value_t));			\
+    s = SERIES_OF(this).identity(SELECT(series_value_t));			\
     s = WEIGHT(this, lweight) * s * WEIGHT(this, rweight);			\
     return (*auto_).set_## InitialFinal (state, s);				\
   }							\

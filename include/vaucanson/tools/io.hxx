@@ -166,7 +166,7 @@ namespace vcsn
     void automaton_loader_<Auto, EdgeConverter, Format>::
     add_edge(unsigned from, unsigned to, const std::string& lbl)
     {
-      a_.add_serie_edge(add_state(from), add_state(to), conv_(a_, lbl));
+      a_.add_series_edge(add_state(from), add_state(to), conv_(a_, lbl));
     }
 
     template<typename Auto, typename EdgeConverter, typename Format> 

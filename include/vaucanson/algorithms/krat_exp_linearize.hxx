@@ -67,7 +67,7 @@ namespace vcsn {
     INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
     KRatExpLinearize(const Element<Series, T>& exp) :
-      index_(LINEAR_INDEX_START), exp_(exp), l_alpha_(), l_serie_(l_semiring_t(), l_monoid_t(l_alpha_))
+      index_(LINEAR_INDEX_START), exp_(exp), l_alpha_(), l_series_(l_semiring_t(), l_monoid_t(l_alpha_))
     {
     }
 
@@ -122,19 +122,19 @@ namespace vcsn {
 	index_++;
       }
       // Transform it in the good type
-      return return_type(l_serie_, res);
+      return return_type(l_series_, res);
     }
     END
 
     MATCH(Zero)
     {
-      return l_serie_.zero(SELECT(exp_impl_t));
+      return l_series_.zero(SELECT(exp_impl_t));
     }
     END
 
     MATCH(One)
     {
-      return l_serie_.identity(SELECT(exp_impl_t));
+      return l_series_.identity(SELECT(exp_impl_t));
     }
     END
 
@@ -142,7 +142,7 @@ namespace vcsn {
     index_t		index_;
     Element<Series, T>	exp_;
     l_alphabet_t	l_alpha_;
-    l_series_elt_t		l_serie_;
+    l_series_elt_t		l_series_;
   };
 
   template <class Series, class T>

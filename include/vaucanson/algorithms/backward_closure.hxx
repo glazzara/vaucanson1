@@ -54,7 +54,7 @@ namespace vcsn {
     typedef std::vector<std::vector<series_elt_t> >    matrix_series_t;
     typedef std::vector<semiring_elt_t>            matrix_semiring_elt_final_t;
 
-    series_elt_t        serie_identity  = a.series().zero_; 
+    series_elt_t        series_identity  = a.series().zero_; 
     semiring_elt_t	semiring_elt_zero     = a.series().semiring().wzero_; 
     monoid_elt_t        monoid_identity = a.series().monoid().empty_; 
     
@@ -90,8 +90,8 @@ namespace vcsn {
       {
 	int aim = state_to_index[a.aim_of(*e)];
 	int origin = state_to_index[a.origin_of(*e)];
-	m_semiring_elt[origin][aim] += a.serie_of(*e).get(monoid_identity);
-	m_series[origin][aim] += a.serie_of(*e);
+	m_semiring_elt[origin][aim] += a.series_of(*e).get(monoid_identity);
+	m_series[origin][aim] += a.series_of(*e);
 	m_series[origin][aim].value_set(monoid_identity.value(),
 					semiring_elt_zero.value());
 	m_series_ret[origin][aim] = m_series[origin][aim];
@@ -134,8 +134,8 @@ namespace vcsn {
 	for (k = 0; k < size; k++)
 	  m_series_ret[i][j] += m_semiring_elt[i][k]*m_series[k][j]; 
 	
-	if (m_series_ret[i][j] != serie_identity)
-	  a.add_serie_edge(index_to_state[i],
+	if (m_series_ret[i][j] != series_identity)
+	  a.add_series_edge(index_to_state[i],
 			   index_to_state[j],
 			   m_series_ret[i][j]); 
 
