@@ -1,6 +1,13 @@
+2003-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime_composition.hh,
+	  include/vaucanson/algorithms/realtime_composition.hxx,
+	  include/vaucanson/algorithms/evaluation.hh,
+	  include/vaucanson/algorithms/evaluation.hxx: New.
+
 2003-09-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	*include/vaucanson/algebra/concrete/series/polynoms.hxx:
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx:
 		Fix include and typo.
 
 2003-09-16  Loïc Fosse  <loic@lrde.pita.fr>
