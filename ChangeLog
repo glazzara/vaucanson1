@@ -1,4 +1,21 @@
 2003-02-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.156)
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	  include/vaucanson/algebra/concept/alphabets_base.hxx,
+	  include/vaucanson/algebra/concept/concepts.hh, 
+	  include/vaucanson/algebra/concept/concepts.hxx,
+	  include/vaucanson/algebra/concrete/alphabets/alphabets.hh,
+	  include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh,
+	  include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx,
+	  doc/tutorial/tutorial.tex,
+  	  src/demos/samples/algebra/alphabet.cc: 
+		Rename 'AlphabetsBase' to 'AlphabetSetBase'
+		Rename 'SetAlphabets' to 'AlphabetSet'
+	* bootstrap.sh: Make Automake install missing files.
+
+	* src/demos/grammar_inference/lattice.hh: Minor.
+
+2003-02-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.155)
 	* include/vaucanson/algebra/concrete/order/lattice.hxx,
 	  include/vaucanson/algebra/concrete/order/orderset.hxx, 
@@ -1195,13 +1212,13 @@
 	* include/vaucanson/algorithms/glushkov.hh : added.
 	* src/tests/automata/algos/glushkov_test.hh : added.
 	* include/vaucanson/algebra/concept/alphabets_base.hxx :
-	-  MetaElement<AlphabetsBase<Self>, T>::choose()
-	+  MetaElement<AlphabetsBase<Self>, T>::choose() const
+	-  MetaElement<AlphabetSetBase<Self>, T>::choose()
+	+  MetaElement<AlphabetSetBase<Self>, T>::choose() const
 	   {
 	+    assert (this->size() > 0);
 
-	-  MetaElement<AlphabetsBase<Self>, T>::random_letter()
-	+  MetaElement<AlphabetsBase<Self>, T>::random_letter() const
+	-  MetaElement<AlphabetSetBase<Self>, T>::random_letter()
+	+  MetaElement<AlphabetSetBase<Self>, T>::random_letter() const
 	* include/vaucanson/algebra/concept/alphabets_base.hh :
 	-      letter_t          choose();
 	+      letter_t          choose() const;
@@ -1784,8 +1801,8 @@
 	* include/vaucanson/algebra/concept/alphabets_base.hxx :
 	-  /* sugar */
 	-  // add-on
-	-  MetaElement<AlphabetsBase<Self>, T>::select_letter(unsigned n)
-	+  MetaElement<AlphabetsBase<Self>, T>::choose()
+	-  MetaElement<AlphabetSetBase<Self>, T>::select_letter(unsigned n)
+	+  MetaElement<AlphabetSetBase<Self>, T>::choose()
 
 	* include/vaucanson/algebra/concept/alphabets_base.hh : Add doc.
 

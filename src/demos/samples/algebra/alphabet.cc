@@ -78,7 +78,7 @@ int main(int argc, char** argv)
    
 
 
-  typedef const Element<SetAlphabets<char>, basic_alphabet> Alphabet;
+  typedef const Element<AlphabetSet<char>, basic_alphabet> Alphabet;
 
   Alphabet a;
 

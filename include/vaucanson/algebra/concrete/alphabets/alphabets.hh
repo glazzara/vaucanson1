@@ -31,12 +31,12 @@ namespace vcsn {
     /*! @ingroup alphabet */ /*! @{ */
 
     /*----------------.
-    | SetAlphabets<L> |
+    | AlphabetSet<L> |
     `----------------*/
     //! Static implementation of alphabet structural element.
     template<typename L>
-    struct SetAlphabets
-      : AlphabetsBase<SetAlphabets<L> >
+    struct AlphabetSet
+      : AlphabetSetBase<AlphabetSet<L> >
     {
       //! The type of letter hold by the alphabets.
       typedef L		letter_t;
@@ -51,11 +51,11 @@ namespace vcsn {
   /*! @ingroup alphabet */ /*! @{ */
 
   /*------------------------.
-  | MetaSet<SetAlphabets<L> |
+  | MetaSet<AlphabetSet<L> |
   `------------------------*/
-  //! meta information about SetAlphabets.
+  //! meta information about AlphabetSet.
   template<typename L>
-  struct MetaSet<SetAlphabets<L> >
+  struct MetaSet<AlphabetSet<L> >
   {
     //! The set of alphabet is a static structure.
     static const bool		dynamic_set = false;

@@ -33,30 +33,30 @@ namespace vcsn {
     /*! \addtogroup alphabet */ /* @{ */
 
     /*--------------------.
-    | AlphabetsBase<Self> |
+    | AlphabetSetBase<Self> |
     `--------------------*/
     //! Structural element of alphabet.
     /*!
      * Empty class. Its role is essentially in static typing.
      */
     template<class Self>
-    struct AlphabetsBase 
+    struct AlphabetSetBase 
       : Structure<Self>
     {
     protected:
 
       //! Default constructor is protected since it is an abstract class.
-      AlphabetsBase();
+      AlphabetSetBase();
 
       //! Copy constructor is protected since it is an abstract class.
-      AlphabetsBase(const AlphabetsBase& other);
+      AlphabetSetBase(const AlphabetSetBase& other);
     };
 
     /*----------------.
     | alphabet_traits |
     `----------------*/
-    //! Traits defined by Element<AlphabetsBase, T>.
-    /*! Each specialization of Element<AlphabetsBase, T> must
+    //! Traits defined by Element<AlphabetSetBase, T>.
+    /*! Each specialization of Element<AlphabetSetBase, T> must
      * specialize this traits too. 
      * letter_t defines the type of letters the set contains.
      */
@@ -77,14 +77,14 @@ namespace vcsn {
   /*! \addtogroup alphabet */ /* @{ */
   
   /*------------------------------------.
-  | MetaElement<AlphabetsBase<Self>, T> |
+  | MetaElement<AlphabetSetBase<Self>, T> |
   `------------------------------------*/
   //! Services of every alphabet.
-  /*! MetaElement<AlphabetsBase<Self>, T> defines the services of
+  /*! MetaElement<AlphabetSetBase<Self>, T> defines the services of
    *  alphabet.
    */
     template<class Self, typename T>
-    struct MetaElement<AlphabetsBase<Self>, T>
+    struct MetaElement<AlphabetSetBase<Self>, T>
       : MetaElement<Structure<Self>, T>
     {
       /*! the type of letters hold by the alphabet. */
@@ -140,11 +140,11 @@ namespace vcsn {
 
   // FIXME: is it a good place for this ?
   template<typename Self, typename St, typename T>
-  St& op_rout(const AlphabetsBase<Self>& s, St& st, const T& a);
+  St& op_rout(const AlphabetSetBase<Self>& s, St& st, const T& a);
   
   // FIXME: add equality between two alphabets !
 
-  // FIXME: add the op_choose for Element<AlphabetsBase, T>
+  // FIXME: add the op_choose for Element<AlphabetSetBase, T>
   // FIXME: it means that you can generate a random alphabet.
 
 } // vcsn

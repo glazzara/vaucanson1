@@ -2,9 +2,9 @@
 #ifndef   LATTICE_HH_
 # define   LATTICE_HH_
 
-#include <vaucanson/algebra/concept/lattice_base.hh>
+# include <vaucanson/algebra/concept/lattice_base.hh>
 
-#include <set>
+# include <set>
 
 namespace vcsn {
 
@@ -17,7 +17,6 @@ namespace vcsn {
   } // algebra
   
   using namespace algebra;
-
 
   template<typename T>
   struct MetaElement<Lattice, T>

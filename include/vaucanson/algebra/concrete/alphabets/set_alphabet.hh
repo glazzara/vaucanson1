@@ -30,12 +30,12 @@ namespace vcsn {
     /*! @ingroup alphabet */ /*! @{ */
 
     /*---------------------------------------------.
-    | alphabet_traits<SetAlphabets<L>,std::set<L>> |
+    | alphabet_traits<AlphabetSet<L>,std::set<L>> |
     `---------------------------------------------*/
-    //! meta information about the mixing of SetAlphabets with
+    //! meta information about the mixing of AlphabetSet with
     //! std::set.
     template<typename L>
-    struct alphabet_traits<SetAlphabets<L>, std::set<L> >
+    struct alphabet_traits<AlphabetSet<L>, std::set<L> >
     {
       //! The type of letter hold by the alphabet.
       typedef L			letter_t;
@@ -48,13 +48,13 @@ namespace vcsn {
   /*! @ingroup alphabet */ /*! @{ */
 
   /*------------------------------------------.
-  | MetaElement<SetAlphabets<L>, std::set<L>> |
+  | MetaElement<AlphabetSet<L>, std::set<L>> |
   `------------------------------------------*/
   //! Services of every alphabet implemented with std::set.
-  //! See MetaElement<AlphabetsBase<Self>, T>.
+  //! See MetaElement<AlphabetSetBase<Self>, T>.
   template<typename L>
-  struct MetaElement<SetAlphabets<L>, std::set<L> >
-    : MetaElement<AlphabetsBase<SetAlphabets<L> >, std::set<L> >
+  struct MetaElement<AlphabetSet<L>, std::set<L> >
+    : MetaElement<AlphabetSetBase<AlphabetSet<L> >, std::set<L> >
   {
     //! An alphabet implemented with std::set is a dynamic value.
     static const bool dynamic_values = true;
@@ -63,13 +63,13 @@ namespace vcsn {
   //! @}
 
   template<typename L>
-  bool op_contains(const SetAlphabets<L>& s, const std::set<L>& a);
+  bool op_contains(const AlphabetSet<L>& s, const std::set<L>& a);
   
   template<typename L>
-  bool op_is_finite(const SetAlphabets<L>& s, const std::set<L>& a);
+  bool op_is_finite(const AlphabetSet<L>& s, const std::set<L>& a);
   
   template<typename L>
-  bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a, 
+  bool op_contains_e(const AlphabetSet<L>& s, const std::set<L>& a, 
 		     const L& v);
     
 } // vcsn

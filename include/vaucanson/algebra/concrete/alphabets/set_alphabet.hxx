@@ -30,19 +30,19 @@ namespace vcsn
     | Definition of an alphabet implementation based on std::set |
     `-----------------------------------------------------------*/
     template<typename L>
-    bool op_contains(const SetAlphabets<L>& s, const std::set<L>& a)
+    bool op_contains(const AlphabetSet<L>& s, const std::set<L>& a)
     { 
       return true; 
     }
 
     template<typename L>
-    bool op_is_finite(const SetAlphabets<L>& s, const std::set<L>& a)
+    bool op_is_finite(const AlphabetSet<L>& s, const std::set<L>& a)
     { 
       return true; 
     }
 
     template<typename L>
-    bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a, 
+    bool op_contains_e(const AlphabetSet<L>& s, const std::set<L>& a, 
 		       const L& v)
     { 
       return a.find(v) != a.end(); 

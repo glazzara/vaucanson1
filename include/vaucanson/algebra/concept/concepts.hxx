@@ -65,13 +65,13 @@ namespace vcsn
       }
 
     template<typename S, typename T> 
-    AlphabetsBase<S>& AlphabetsConcept<S, T>::check_inheritance()     
+    AlphabetSetBase<S>& AlphabetsConcept<S, T>::check_inheritance()     
     { 
       return s; 
     }
 
     template<typename S, typename T> 
-    MetaElement<AlphabetsBase<S>, T>&
+    MetaElement<AlphabetSetBase<S>, T>&
     AlphabetsConcept<S, T>::check_elt_inheritance() 
     { 
       return a; 

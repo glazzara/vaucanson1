@@ -2,5 +2,5 @@
 
 aclocal -I .
 autoconf -f
-automake
+automake -a
 echo "Reconfiguration done."

@@ -202,7 +202,7 @@ An alphabet is collection of letters.
 
 % FIXME: add a glossary
 In Vaucanson, we have the set of all alphabet over a particular type
-of letter denoted by the AlphabetsBase abstract class. A final class
+of letter denoted by the AlphabetSetBase abstract class. A final class
 SetAlphabet implements this class in a trivial manner: it is an empty
 class for static typing purpose. 
 
@@ -240,7 +240,7 @@ Then we have to create the type of set of alphabets inside which we will
 manipulate one of them. We can do this very naturally :
 
 \begin{verbatim}
-typedef SetAlphabets<Letter>  Alphabets;
+typedef AlphabetSet<Letter>  Alphabets;
 \end{verbatim}
 
 Lastly, we can create the type of the alphabet we will effectively use,
@@ -261,21 +261,21 @@ a file named ``predefs.hh'' :
  namespace small_alpha_letter {
       
       typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
-      typedef SetAlphabets<Letter>				   Alphabets;
+      typedef AlphabetSet<Letter>				   Alphabets;
       typedef Element<Alphabets, std::set<Letter> >		   Alphabet;
 
     } // small_alpha_letter
 
     namespace char_letter {
 
-      typedef SetAlphabets<char>				   Alphabets;
+      typedef AlphabetSet<char>				   Alphabets;
       typedef Element<Alphabets, std::set<char> >		   Alphabet;
 
     } // char_letter
 
     namespace int_letter {
 
-      typedef SetAlphabets<int>					   Alphabets;
+      typedef AlphabetSet<int>					   Alphabets;
       typedef Element<Alphabets, std::set<int> >		   Alphabet;
 
     } // int_letter

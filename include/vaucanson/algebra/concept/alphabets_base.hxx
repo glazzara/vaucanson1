@@ -31,15 +31,15 @@ namespace vcsn {
   namespace algebra {
 
     /*--------------------.
-    | AlphabetsBase<Self> |
+    | AlphabetSetBase<Self> |
     `--------------------*/
 
     template<class Self>
-    AlphabetsBase<Self>::AlphabetsBase()
+    AlphabetSetBase<Self>::AlphabetSetBase()
     {}
 
     template<class Self>
-    AlphabetsBase<Self>::AlphabetsBase(const AlphabetsBase& other) 
+    AlphabetSetBase<Self>::AlphabetSetBase(const AlphabetSetBase& other) 
     {}
 
   } // algebra
@@ -47,70 +47,70 @@ namespace vcsn {
   using namespace algebra;
   
     /*------------------------------------.
-    | MetaElement<AlphabetsBase<Self>, T> |
+    | MetaElement<AlphabetSetBase<Self>, T> |
     `------------------------------------*/
-    // Meta-information about element formed from an AlphabetsBase
+    // Meta-information about element formed from an AlphabetSetBase
     // structuring element.
     
     template<class Self, typename T>
     size_t 
-    MetaElement<AlphabetsBase<Self>, T>::size() const
+    MetaElement<AlphabetSetBase<Self>, T>::size() const
     { 
       return op_size(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     bool 
-    MetaElement<AlphabetsBase<Self>, T>::contains(const letter_t& l) const
+    MetaElement<AlphabetSetBase<Self>, T>::contains(const letter_t& l) const
     { 
       return op_contains_e(this->set(), this->value(), l); 
     }
     
     template<class Self, typename T>
     bool 
-    MetaElement<AlphabetsBase<Self>, T>::is_finite() const
+    MetaElement<AlphabetSetBase<Self>, T>::is_finite() const
     { 
       return op_is_finite(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
-    typename MetaElement<AlphabetsBase<Self>, T>::iterator 
-    MetaElement<AlphabetsBase<Self>, T>::begin() 
+    typename MetaElement<AlphabetSetBase<Self>, T>::iterator 
+    MetaElement<AlphabetSetBase<Self>, T>::begin() 
     { 
       return op_begin(this->set(), this->value()); 
     }
     
     template<class Self, typename T> 
-    typename MetaElement<AlphabetsBase<Self>, T>::const_iterator 
-    MetaElement<AlphabetsBase<Self>, T>::begin() const
+    typename MetaElement<AlphabetSetBase<Self>, T>::const_iterator 
+    MetaElement<AlphabetSetBase<Self>, T>::begin() const
     { 
       return op_begin_const(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
-    typename MetaElement<AlphabetsBase<Self>, T>::iterator 
-    MetaElement<AlphabetsBase<Self>, T>::end() 
+    typename MetaElement<AlphabetSetBase<Self>, T>::iterator 
+    MetaElement<AlphabetSetBase<Self>, T>::end() 
     { 
       return op_end(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
-    typename MetaElement<AlphabetsBase<Self>, T>::const_iterator 
-    MetaElement<AlphabetsBase<Self>, T>::end() const
+    typename MetaElement<AlphabetSetBase<Self>, T>::const_iterator 
+    MetaElement<AlphabetSetBase<Self>, T>::end() const
     { 
       return op_end(this->set(), this->value()); 
     }
     
     template<class Self, typename T>
     void 
-    MetaElement<AlphabetsBase<Self>, T>::insert(const letter_t& l) 
+    MetaElement<AlphabetSetBase<Self>, T>::insert(const letter_t& l) 
     { 
       op_insert(this->set(), this->value(), l); 
     }
     
   template<class Self, typename T>
   typename alphabet_traits<Self, T>::letter_t
-  MetaElement<AlphabetsBase<Self>, T>::choose() const
+  MetaElement<AlphabetSetBase<Self>, T>::choose() const
   { 
     assert (this->size() > 0);
     int  n = this->size();
@@ -126,7 +126,7 @@ namespace vcsn {
 
   template <class Self, typename T>
   typename alphabet_traits<Self, T>::letter_t
-  MetaElement<AlphabetsBase<Self>, T>::random_letter() const
+  MetaElement<AlphabetSetBase<Self>, T>::random_letter() const
   {
     return
       misc::RandomGenerator<typename alphabet_traits<Self, T>::letter_t>
@@ -135,16 +135,16 @@ namespace vcsn {
 
 
   template<class Self, typename T>
-  MetaElement<AlphabetsBase<Self>, T>::MetaElement() 
+  MetaElement<AlphabetSetBase<Self>, T>::MetaElement() 
   {}
     
     template<class Self, typename T>
-    MetaElement<AlphabetsBase<Self>, T>::MetaElement(const MetaElement& other) :
+    MetaElement<AlphabetSetBase<Self>, T>::MetaElement(const MetaElement& other) :
       MetaElement<Structure<Self>, T>(other)
     {}
   
     template<typename Self, typename St, typename T>
-    St& op_rout(const AlphabetsBase<Self>& s, St& st, const T& a)
+    St& op_rout(const AlphabetSetBase<Self>& s, St& st, const T& a)
     {
       st << "{ ";
       if (op_is_finite(s.self(), a))

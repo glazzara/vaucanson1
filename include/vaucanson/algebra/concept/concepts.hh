@@ -47,10 +47,10 @@ namespace vcsn
 
       void constraints();
 
-      AlphabetsBase<S>& 
+      AlphabetSetBase<S>& 
       check_inheritance();
 
-      MetaElement<AlphabetsBase<S>, T>& 
+      MetaElement<AlphabetSetBase<S>, T>& 
       check_elt_inheritance();
 
       bool check_is_finite(const elt_t& a);
