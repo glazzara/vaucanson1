@@ -1,3 +1,11 @@
+2003-03-20  Loic Fosse  <fosse_l@lrde.epita.fr>
+
+        * include/vaucanson/algorithms/brzozowski.hxx: Change names of variables
+        and structures, rewrite some comments.
+        * include/vaucanson/algorithms/algo_helper.hxx: Change names.
+        * include/vaucanson/algorithms/algo_helper.hh: Change names and
+        comments.
+
 2003-03-19  Loic Fosse  <fosse_l@lrde.epita.fr>
 
         * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh

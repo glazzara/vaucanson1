@@ -1,22 +1,17 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 178)
-(Parent-Version vaucanson 0 177)
-(Version-Log "2003-03-19  Loic Fosse  <fosse_l@lrde.epita.fr>
+(Project-Version vaucanson 0 179)
+(Parent-Version vaucanson 0 178)
+(Version-Log "2003-03-20  Loic Fosse  <fosse_l@lrde.epita.fr>
 
-        * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh
-        (KRatExpIdentity): Correct the class.
-        * include/vaucanson/algebra/concrete/series/rat/nodes.hxx: Correct the
-        operator < which was not a true ordering relation.
-        * include/vaucanson/algorithms/brzozowski.hxx: Add.
-        * include/vaucanson/algorithms/brzozowski.hh: Add.
-        * include/vaucanson/algorithms/aci_canonical.hxx: Add.
-        * include/vaucanson/algorithms/aci_canonical.hh: Add.
-        * include/vaucanson/algorithms/algo_helper.hxx: Add.
-        * include/vaucanson/algorithms/algo_helper.hh: Add.")
+        * include/vaucanson/algorithms/brzozowski.hxx: Change names of variables
+        and structures, rewrite some comments.
+        * include/vaucanson/algorithms/algo_helper.hxx: Change names.
+        * include/vaucanson/algorithms/algo_helper.hh: Change names and
+        comments.")
 (New-Version-Log "")
-(Checkin-Time "Wed, 19 Mar 2003 18:00:34 +0100")
+(Checkin-Time "Thu, 20 Mar 2003 14:20:31 +0100")
 (Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -97,7 +92,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.118 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.119 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -501,12 +496,12 @@
 ;; Files added by populate at Wed, 19 Mar 2003 17:37:42 +0100,
 ;; to version 0.177(w), by fosse_l:
 
-  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.1 600))
+  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.2 600))
   (include/vaucanson/algorithms/brzozowski.hh (vaucanson/j/29_brzozowski 1.1 600))
   (include/vaucanson/algorithms/aci_canonical.hxx (vaucanson/j/30_aci_canoni 1.1 600))
   (include/vaucanson/algorithms/aci_canonical.hh (vaucanson/j/31_aci_canoni 1.1 600))
-  (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.1 600))
-  (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.1 600))
+  (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.2 600))
+  (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.2 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

@@ -23,7 +23,7 @@
 
 namespace vcsn
 {
-  namespace constructor 
+  namespace algorithm_patterns 
   {
 
     // The constructor
@@ -73,13 +73,13 @@ namespace vcsn
     // Link current state to an other, which can be created
     template <typename T_auto, typename Etiq, typename T>
     void
-    IncAutomataConstructor<T_auto, Etiq, T>::link2
+    IncAutomataConstructor<T_auto, Etiq, T>::link_to
     (
       const Etiq& etiq, const letter_t& l
     )
     {
       hstate_t	s;
-      Iterator	i = states_map.find(etiq);
+      iterator	i = states_map.find(etiq);
       
       if (i == states_map.end())
 	s = add_state(etiq);
@@ -93,7 +93,6 @@ namespace vcsn
     hstate_t
     IncAutomataConstructor<T_auto, Etiq, T>::add_state(const Etiq& etiq)
     {
-      std::cout << "Ajout de: " << etiq << std::endl;
       hstate_t	res = auto_p->add_state();
       states_map[etiq] = std::pair<hstate_t, bool>(res, false);
       unvisited += 1;
@@ -103,7 +102,7 @@ namespace vcsn
     // To make the current state final
     template <typename T_auto, typename Etiq, typename T>
     void
-    IncAutomataConstructor<T_auto, Etiq, T>::setfinal()
+    IncAutomataConstructor<T_auto, Etiq, T>::set_final()
     {
       auto_p->set_final(current_state->second.first);
     }

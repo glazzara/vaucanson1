@@ -34,12 +34,12 @@
 
 namespace vcsn {
 
-  using namespace constructor;
+  using namespace algorithm_patterns;
   
-  // The functions which calculate the automaton
-  struct Algo
+  // The functions which is needed by the algorithm constructor
+  struct BrzozowskiFuns
   {
-    // TODO : optimize and build true hash function
+    // FIXME : optimize the on_state function
     
     // The function applied on each state
     template <typename T_auto, typename Exp, typename T>
@@ -49,12 +49,12 @@ namespace vcsn {
       
       alphabet_t alpha = a.get()->series().monoid().alphabet();
       if (constant_term(e).first)
-	a.setfinal();
+	a.set_final();
       for (alphabet_iterator i = alpha.begin(); i != alpha.end(); ++i)
-	a.link2(canonical(derivate(e, *i).first), *i);
+	a.link_to(canonical(derivate(e, *i).first), *i);
     }
 
-    // The egality function.
+    // The ordered relation which is used by the map.
     template <typename Exp>
     bool operator()(const Exp& e1, const Exp& e2) const
     {
@@ -65,13 +65,13 @@ namespace vcsn {
   template<typename T_auto, typename Exp>
   T_auto*	do_brzozowski(const T_auto& out, const Exp &kexp)
   {
-    IncAutomataConstructor<T_auto, Exp, Algo>
-      Construc(out.series(), canonical(kexp));
-    Construc.run();
-    return Construc.get();
+    IncAutomataConstructor<T_auto, Exp, BrzozowskiFuns>
+      BrzozowskiAlgo(out.series(), canonical(kexp));
+    BrzozowskiAlgo.run();
+    return BrzozowskiAlgo.get();
   }
 
-  // The fonction called by <<user>>
+  // The function called by <<user>>
   template<typename A, typename T, typename Exp>
   void	brzozowski(Element<A, T>& out, const Exp& kexp)
   {

@@ -27,20 +27,27 @@
 # include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
-  namespace constructor
+  namespace algorithm_patterns
   {
 
+    // This is a pattern for algorithm which build automaton in
+    // an incremental way :
+    // it start with one state, and with this state, it build
+    // other states. New states are used to build more and
+    // more states.
+    // It needs the function applied on each state,
+    // and the order used by the map.
     template <typename T_auto, typename Etiq, typename T>
     class IncAutomataConstructor : public T
     {
     public:
-      // Usefull types :))
+      // Useful types :))
       typedef T_auto*						T_auto_p;
       AUTOMATON_TYPES(T_auto);
       // Types for the list -> used a hash_map with function defined in T
       typedef std::pair<hstate_t, bool>				StateMarked;
       typedef std::map<Etiq, StateMarked, T>			StateMap;
-      typedef typename StateMap::iterator			Iterator;
+      typedef typename StateMap::iterator			iterator;
 
       // The constructor
       IncAutomataConstructor(const series_t& series, const Etiq& etiq);
@@ -49,9 +56,9 @@ namespace vcsn {
       // To get the result
       T_auto_p	get() const;
       // Add a link from current state to indicated state
-      void	link2(const Etiq& etiq, const letter_t& l);
+      void	link_to(const Etiq& etiq, const letter_t& l);
       // To make the current state final
-      void	setfinal();
+      void	set_final();
     protected:
       // Method to add properly a state
       hstate_t	add_state(const Etiq& etiq);
@@ -59,13 +66,19 @@ namespace vcsn {
       int				unvisited;
       T_auto_p				auto_p;
       StateMap				states_map;
-      Iterator				current_state;
+      iterator				current_state;
     };
 
     template <typename T_auto, typename Etiq, typename T>
     class MathAutomataConstructor : public T
     {
-      // TODO
+      // FIXME : Write it !
+      // This  Algorithm builder takes a struture
+      // which contains different functions (like IncAutomataConstructor)
+      // but the functions needed are mathematical definitions
+      // of the automaton, i.e. :
+      // function which return the set of final state,
+      // etc.
     };
 
   }
