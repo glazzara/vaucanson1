@@ -117,6 +117,7 @@ AC_CONFIG_FILES([
 	src/tests/test-suites/Makefile
 	src/tests/xml/Makefile
 	src/demos/Makefile
+	src/demos/ciaa/Makefile
 	src/demos/vgrep/Makefile
 	src/demos/fibonacci/Makefile
 	src/demos/universal/Makefile

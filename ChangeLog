@@ -1,5 +1,12 @@
 2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/demos/ciaa/ex1.cc, src/demos/ciaa/ex2.cc, src/demos/ciaa/ex3.cc:
+	New. Sample files from J. Sakarovitch.
+	* src/demos/ciaa/Makefile.am: New.
+	* src/demos/Makefile.am, configure.ac: Update.
+
+2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/krat_exp_print.hh,
 	* include/vaucanson/algorithms/krat_exp_print.hxx: Change prototype
 	to take an Element instead of an implementation. Adapt to print on
