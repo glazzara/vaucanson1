@@ -211,6 +211,7 @@ nobase_include_HEADERS =					     \
 	vaucanson/misc/support.hh				     \
 	vaucanson/misc/support.hxx				     \
 	vaucanson/misc/unique.hh				     \
+	vaucanson/misc/unique.hcc				     \
 	vaucanson/misc/unique.hxx				     \
 	vaucanson/misc/utility.hh				     \
 	vaucanson/tools/automaton_tools.hh			     \
