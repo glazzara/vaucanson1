@@ -43,7 +43,7 @@
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concrete/graph.hh>
-# include <vaucanson/misc/dot_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
@@ -110,7 +110,7 @@ namespace vcsn {
       std::ostringstream s;					\
       s << Dir << "/" << Name << "_" << Index << ".dot";	\
       std::ofstream f(s.str().c_str());				\
-      misc::dot_dump(f, Auto, Name);				\
+      tools::dot_dump(f, Auto, Name);				\
     }
 
 #define SAVE_AUTOMATON_DOT_SIMPLE(Name, Auto)			\
@@ -118,7 +118,7 @@ namespace vcsn {
       std::ostringstream s;					\
       s << Name << ".dot";					\
       std::ofstream f(s.str().c_str());				\
-      misc::dot_dump(f, Auto, Name);				\
+      tools::dot_dump(f, Auto, Name);				\
     }
 
 #define RAND___(Max)						\

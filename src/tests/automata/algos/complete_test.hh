@@ -38,7 +38,7 @@
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/algorithms/determinize.hh>
-# include <vaucanson/misc/dot_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
 
 using namespace vcsn;
 using namespace vcsn::algebra;
@@ -68,8 +68,8 @@ unsigned complete_test(tests::Tester& tg)
 	++nb_success;
       else if (tg.verbose() == tests::high)
 	{
-	  misc::dot_dump(std::cout, b, "input");
-	  misc::dot_dump(std::cout, a, "automaton");
+	  tools::dot_dump(std::cout, b, "input");
+	  tools::dot_dump(std::cout, a, "automaton");
 	}
      }
   std::string rate;

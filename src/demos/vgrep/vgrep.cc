@@ -39,7 +39,7 @@
 #include <vaucanson/algorithms/thompson.hh>
 #include <vaucanson/algorithms/eval.hh>
 #include <vaucanson/algorithms/hopcroft_minimization.hh>
-#include <vaucanson/misc/dot_dump.hh>
+#include <vaucanson/tools/dot_dump.hh>
 #include <vaucanson/misc/unique.hcc>
 #include <iostream>
 #include <vector>
@@ -219,7 +219,7 @@ int main(int argc, char **argv)
       standard_of(automaton, krat_exp.value());
       realtime_here(automaton);
       complete_here(automaton);
-      // FIXME: misc::dot_dump(std::cout, automaton, "automaton");
+      // FIXME: tools::dot_dump(std::cout, automaton, "automaton");
       // STATE FINAL => sigma * on it.
       for_each_initial_state(s, automaton)
 	for (unsigned l = 0; l <= 255; ++l)
@@ -229,7 +229,7 @@ int main(int argc, char **argv)
 	  automaton.add_letter_edge(*s, *s, char(l));
       
       automaton = determinize(automaton);
-      //      misc::dot_dump(std::cerr, automaton, "automaton");
+      //      tools::dot_dump(std::cerr, automaton, "automaton");
       // No file means standard input.
       if (optcount == argc)
 	{

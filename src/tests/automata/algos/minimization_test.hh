@@ -40,7 +40,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/misc/dot_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/hopcroft_minimization.hh>

@@ -35,12 +35,12 @@
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tester.hh>
-# include <vaucanson/misc/dot_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/product.hh>
-# include <vaucanson/misc/dot_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/algorithms/complement.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/trim.hh>

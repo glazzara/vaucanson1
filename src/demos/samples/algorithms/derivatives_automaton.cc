@@ -32,7 +32,7 @@
 #include <vaucanson/algebra/concrete/series/rat/exp.hh>
 #include <vaucanson/algebra/concrete/series/krat.hh>
 #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
-#include <vaucanson/misc/dot_dump.hh>
+#include <vaucanson/tools/dot_dump.hh>
 #include <string>
 #include <vaucanson/algorithms/derivatives_automaton.hh>
 #include <vaucanson/misc/unique.hcc>

@@ -38,7 +38,7 @@
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/realtime.hh>
-# include <vaucanson/misc/dot_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
 
 
 template <class Auto>

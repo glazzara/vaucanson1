@@ -12,7 +12,7 @@
 #include <vaucanson/tools/usual.hh>
 #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 #include <vaucanson/automata/concrete/generalized.hh>
-#include <vaucanson/misc/dot_dump.hh>
+#include <vaucanson/tools/dot_dump.hh>
 #include <stdexcept>
 #include <sstream>
 #include <iterator>

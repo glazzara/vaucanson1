@@ -1,4 +1,4 @@
-// vcsn_dotdump.cc: this file is part of the Vaucanson project.
+// dot_dump.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,20 +27,28 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#include <iostream>
-   #include "toolbox.hh"
-   #include <vaucanson/tools/gen_random.hh>
-   #include <vaucanson/misc/fsm_dump.hh> 
-   #include <vaucanson/tools/dot_dump.hh> 
+#ifndef VCSN_MISC_DOT_DUMP_HH
+# define VCSN_MISC_DOT_DUMP_HH
 
-    using namespace vcsn;
+#include <string>
 
-   int main(int argc, char **argv)
-   {
-     srand(time(0));
-     automaton_t automaton;
-     misc::fsm_load(std::cin, automaton);
-     tools::dot_dump(std::cout, automaton, "automaton");
-     return EXIT_SUCCESS;
-   }
+namespace vcsn {
+  
+  namespace io {
 
+    struct dot
+    {
+      inline dot(const std::string& auto_name = "automaton");
+
+      template <typename Saver, typename Conv>
+      void operator()(std::ostream& out, const Saver& s, const Conv& conv) const;
+
+    protected:
+      std::string name_;
+    };
+  }
+}
+
+# include <vaucanson/tools/dot_format.hxx>
+
+#endif

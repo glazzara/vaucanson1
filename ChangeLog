@@ -1,3 +1,36 @@
+2003-07-13  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/tools/io.hh: Add.
+	* include/vaucanson/tools/io.hxx: Add.
+	* include/vaucanson/tools/dot_format.hh: Add.
+	* include/vaucanson/tools/dot_format.hxx: Add.
+	
+	* include/vaucanson/misc/dot_dump.hh: Rename to...
+	* include/vaucanson/tools/dot_dump.hh: This. Use new I/O
+	subsystem. Move `dot_dump' to namespace `tools'.
+
+	* src/demos/vgrep/vgrep.cc: Update accordingly.
+	* src/demos/samples/algorithms/derivatives_automaton.cc:
+	src/demos/fsm/usual_automaton_t/vcsn_dotdump.cc,
+	src/tests/automata/algos/complete_test.hh,
+	src/tests/automata/algos/complete_test.hh,
+	src/tests/automata/algos/compute_test.hh,
+	src/tests/automata/algos/determinist_test.hh,
+	src/tests/automata/algos/elimination_test.hh,
+	src/tests/automata/algos/extract_test.hh,
+	src/tests/automata/algos/generalized_test.hh,
+	src/tests/automata/algos/glushkov_test.hh,
+	src/tests/automata/algos/minimization_test.hh,
+	src/tests/automata/algos/normalize_test.hh,
+	src/tests/automata/algos/product_test.hh,
+	src/tests/automata/algos/reachable_test.hh,
+	src/tests/automata/algos/realtime_test.hh,
+	src/tests/automata/algos/thompson_test.hh,
+	src/tests/automata/algos/sum_test.hh,
+	include/vaucanson/tools/usual.hh,
+	include/vaucanson/tools/usual.hh,
+	include/vaucanson/tools/usual.hh: Likewise.
+
 2003-07-11  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/finite_support_conversion.hh: Add 

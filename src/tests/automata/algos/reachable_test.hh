@@ -37,7 +37,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/misc/dot_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/algorithms/accessible.hh>
 
 template <class Auto>

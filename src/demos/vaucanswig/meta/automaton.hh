@@ -430,7 +430,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   virtual std::string as_dot(const char *name = "automaton") const
   {
     std::ostringstream st;
-    vcsn::misc::dot_dump(st, (*auto_), name);
+    vcsn::tools::dot_dump(st, (*auto_), name);
     return st.str();
   }
 

@@ -80,6 +80,7 @@ do_family_interface() {
 
 start_algorithms
 
+if [ "$3" != "noalg" ]; then
 # Loop over all algorithm families
 for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh`; do
 
@@ -132,6 +133,7 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh`; do
      ALGS="$ALGS alg_${family_name}"   
    fi
 done
+fi
 
 end_algorithms 
 #### #####

@@ -73,7 +73,7 @@
 #include <vaucanson/automata/concrete/generalized.hh>
 #include <vaucanson/algorithms/finite_support_conversion.hh>
 #include <vaucanson/algorithms/aci_canonical.hh>
-#include <vaucanson/misc/dot_dump.hh>
+#include <vaucanson/tools/dot_dump.hh>
 #include <stdexcept>
 #include <sstream>
 #include <iterator>

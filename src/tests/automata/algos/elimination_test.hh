@@ -32,7 +32,7 @@
 
 # include <check/tester.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/misc/dot_dump.hh>
+# include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/fundamental/element.hh>
