@@ -1,5 +1,6 @@
 // series_base.hh
 //
+// $Id$
 // VCSN_HEADER
 
 #ifndef ALGEBRA_SERIES_BASE_HH
@@ -14,9 +15,6 @@ namespace vcsn {
     /*-----------------.
     | SeriesBase<Self> |
     `-----------------*/
-    // static abstract class.
-    // 
-    //
     template<class Self>
     struct SeriesBase 
       : SemiringBase<Self>
@@ -42,63 +40,65 @@ namespace vcsn {
 
   } // algebra
 
-    /*---------------------------------.
-    | MetaElement<SeriesBase<Self>, T> |
-    `---------------------------------*/
-    // FIXME : what can be expected from an series implementation
-    // is not clearly defined -> add static check of this concept soon.
-    //
+  /*---------------------------------.
+  | MetaElement<SeriesBase<Self>, T> |
+  `---------------------------------*/
+  template<class Self, typename T>
+  struct MetaElement<SeriesBase<Self>, T> 
+    : MetaElement<SemiringBase<Self>, T>
+  {
+    typedef typename series_traits<Self, T>::weights_value_t   weights_value_t;
+    typedef typename series_traits<Self, T>::monoid_value_t    monoid_value_t;
+    typedef Element<typename Self::weights_t, weights_value_t> weight_t;
+    typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
+    typedef Element<Self, T>					 element_t;
 
-    template<class Self, typename T>
-    struct MetaElement<SeriesBase<Self>, T> 
-      : MetaElement<SemiringBase<Self>, T>
-    {
-      typedef typename series_traits<Self, T>::weights_value_t weights_value_t;
-      typedef typename series_traits<Self, T>::monoid_value_t  monoid_value_t;
-      typedef Element<typename Self::weights_t, weights_value_t> weight_t;
-      typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
-      typedef Element<Self, T>					 element_t;
-
-      weights_value_t	value_get(const monoid_value_t& m) const;
-      weight_t		get(const monoid_elt_t& m) const;
-      void		value_set(const monoid_value_t& m, 
+    weights_value_t	value_get(const monoid_value_t& m) const;
+    weight_t		get(const monoid_elt_t& m) const;
+    void		value_set(const monoid_value_t& m, 
 				  const weights_value_t& w);
-      const Self&	set() const;
-      void		assoc(const monoid_elt_t& m, const weight_t& w);
-      bool		is_finite_app() const;
-      T&		supp();
-      const T&		supp() const;
+    const Self&	set() const;
+    void		assoc(const monoid_elt_t& m, const weight_t& w);
+    bool		is_finite_app() const;
+    T&		supp();
+    const T&		supp() const;
+    monoid_elt_t	choose_from_supp() const;
 
-      element_t&       	transpose();
+    element_t&       	transpose();
       
-    protected:
-      MetaElement();
-      MetaElement(const MetaElement& other);
-    };
+  protected:
+    MetaElement();
+    MetaElement(const MetaElement& other);
+  };
 
-    template <typename S, typename T>
-    T&		
-    supp(Element<S, T>& e);
+  template <typename S, typename T>
+  T&		
+  supp(Element<S, T>& e);
 
-    template <typename S, typename T>
-    const T&	
-    supp(const Element<S, T>& e);
+  template <typename S, typename T>
+  const T&	
+  supp(const Element<S, T>& e);
 
-    template <typename S, typename T>
-    bool	
-    op_is_finite_app(const SeriesBase<S>& s, const T& t);
+  template <typename S, typename T>
+  bool	
+  op_is_finite_app(const SeriesBase<S>& s, const T& t);
 
-    template <typename S, typename T, typename M, typename W>
-    void	
-    op_series_set(const SeriesBase<S>& s, const T& t, const W& w);
+  template <typename S, typename T>
+  typename MetaElement<SeriesBase<S>, T>::monoid_elt_t 
+
+  op_choose_from_supp(const SeriesBase<S>& s, const T& t);
+  
+  template <typename S, typename T, typename M, typename W>
+  void	
+  op_series_set(const SeriesBase<S>& s, const T& t, const W& w);
     
-    template <typename S, typename T>
-    void	
-    op_in_transpose(SeriesBase<S>& s, T& t);
+  template <typename S, typename T>
+  void	
+  op_in_transpose(SeriesBase<S>& s, T& t);
 
-    template <typename S, typename T>
-    Element<S, T>
-    transpose(const SeriesBase<S>& s, const T& t);
+  template <typename S, typename T>
+  Element<S, T>
+  transpose(const SeriesBase<S>& s, const T& t);
 
 } // vcsn
 

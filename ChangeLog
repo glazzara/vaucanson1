@@ -1,4 +1,16 @@
 2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.81)
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx : added.
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hh : added.
+	* include/vaucanson/algebra/concept/series_base.hxx : add choose_from_supp.
+	* include/vaucanson/algebra/concept/series_base.hh : idem.
+	* include/vaucanson/algebra/concrete/series/krat.hxx :
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh:minor include bug.
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx: virtual removed.
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hxx : minor change.
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hh : minor change.
+
+2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.80)
 	* include/vaucanson/algorithms/realtime.hxx : added.
 	* include/vaucanson/algorithms/realtime.hh : added.

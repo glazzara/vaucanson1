@@ -1,6 +1,5 @@
 // algebra/polynoms.hh
 //
-//
 // $Id$
 // VCSN_HEADER
 
@@ -66,12 +65,12 @@ namespace vcsn {
       std::map<Tm, Tw> map_;
     };
 
-  template<typename W, typename M, typename Tm, typename Tw>
-  struct series_traits<Series<W, M>, polynom<Tm, Tw> >
-  {
-    typedef Tm monoid_value_t;
-    typedef Tw weights_value_t;
-  };
+    template<typename W, typename M, typename Tm, typename Tw>
+    struct series_traits<Series<W, M>, polynom<Tm, Tw> >
+    {
+      typedef Tm monoid_value_t;
+      typedef Tw weights_value_t;
+    };
 
     template <class Series, class Tm, class Tw>
     struct DefaultTransposeFun<Series, polynom<Tm,Tw> >
@@ -129,60 +128,60 @@ namespace vcsn {
 			 const polynom<Tm, Tw>& b);
   
   /*-----------------.
-    | cauchy's product |
-    `-----------------*/
+  | cauchy's product |
+  `-----------------*/
   template<typename W, typename M, typename Tm, typename Tw>
-    polynom<Tm, Tw> op_mul(const Series<W, M>& s,
-			   const polynom<Tm, Tw>& a,
-			   const polynom<Tm, Tw>& b);
+  polynom<Tm, Tw> op_mul(const Series<W, M>& s,
+			 const polynom<Tm, Tw>& a,
+			 const polynom<Tm, Tw>& b);
     
-    template<typename W, typename M, typename Tm, typename Tw>
-    void op_in_mul(const Series<W, M>& s, 
-		   polynom<Tm, Tw>& dst,
-		   const polynom<Tm, Tw>& arg);
+  template<typename W, typename M, typename Tm, typename Tw>
+  void op_in_mul(const Series<W, M>& s, 
+		 polynom<Tm, Tw>& dst,
+		 const polynom<Tm, Tw>& arg);
 
-    /*---------------------.
-    | foreign constructors |
-    `---------------------*/
-    template<typename Tm, typename Tw, typename W, typename M, typename oTm>
-    polynom<Tm, Tw> op_convert(SELECTOR2(polynom<Tm, Tw>),
-			       SELECTOR2(Series<W, M>),
-			       SELECTOR(M),
-			       const oTm& m_value);
+  /*---------------------.
+  | foreign constructors |
+  `---------------------*/
+  template<typename Tm, typename Tw, typename W, typename M, typename oTm>
+  polynom<Tm, Tw> op_convert(SELECTOR2(polynom<Tm, Tw>),
+			     SELECTOR2(Series<W, M>),
+			     SELECTOR(M),
+			     const oTm& m_value);
 
-    template<typename Tm, typename Tw, typename W, typename M, typename oTw>
-    polynom<Tm, Tw> op_convert(SELECTOR2(polynom<Tm, Tw>),
-			       SELECTOR2(Series<W, M>),
-			       SELECTOR(W),
-			       const oTw& w_value);
+  template<typename Tm, typename Tw, typename W, typename M, typename oTw>
+  polynom<Tm, Tw> op_convert(SELECTOR2(polynom<Tm, Tw>),
+			     SELECTOR2(Series<W, M>),
+			     SELECTOR(W),
+			     const oTw& w_value);
     
-    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-    void op_assign(const Series<W, M>& s,
-		   const M& monoid,
-		   polynom<Tm, Tw>& dst,
-		   const oTm& src);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+  void op_assign(const Series<W, M>& s,
+		 const M& monoid,
+		 polynom<Tm, Tw>& dst,
+		 const oTm& src);
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-    void op_assign(const Series<W, M>& s,
-		   const W& weights,
-		   polynom<Tm, Tw>& dst,
-		   const oTw& src);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+  void op_assign(const Series<W, M>& s,
+		 const W& weights,
+		 polynom<Tm, Tw>& dst,
+		 const oTw& src);
 
-    /*--------------------------------------.
-    | foreign addition with monoid elements |
-    `--------------------------------------*/
+  /*--------------------------------------.
+  | foreign addition with monoid elements |
+  `--------------------------------------*/
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-    void op_in_add(const Series<W, M>& s,
-		   const M& monoid,
-		   polynom<Tm, Tw>& dst,
-		   const oTm& src);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+  void op_in_add(const Series<W, M>& s,
+		 const M& monoid,
+		 polynom<Tm, Tw>& dst,
+		 const oTm& src);
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-    polynom<Tm, Tw> op_add(const Series<W, M>& s,
-			   const M& monoid,
-			   const polynom<Tm, Tw>& a,
-			   const oTm& b);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+  polynom<Tm, Tw> op_add(const Series<W, M>& s,
+			 const M& monoid,
+			 const polynom<Tm, Tw>& a,
+			 const oTm& b);
 
 
   template<typename M, typename W, typename oTm, typename Tm, typename Tw>
@@ -197,21 +196,21 @@ namespace vcsn {
 			 const oTm& a,
 			 const polynom<Tm, Tw>& b);
 
-    /*---------------------------------------.
-    | foreign addition with weights elements |
-    `---------------------------------------*/
+  /*---------------------------------------.
+  | foreign addition with weights elements |
+  `---------------------------------------*/
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-    void op_in_add(const Series<W, M>& s,
-		   const W& weights,
-		   polynom<Tm, Tw>& dst,
-		   const oTw& src);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+  void op_in_add(const Series<W, M>& s,
+		 const W& weights,
+		 polynom<Tm, Tw>& dst,
+		 const oTw& src);
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-    polynom<Tm, Tw> op_add(const Series<W, M>& s,
-			   const W& weights,
-			   const polynom<Tm, Tw>& a,
-			   const oTw& b);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+  polynom<Tm, Tw> op_add(const Series<W, M>& s,
+			 const W& weights,
+			 const polynom<Tm, Tw>& a,
+			 const oTw& b);
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   struct op_add_traits<W, Series<W, M>, oTw, polynom<Tm, Tw> >
@@ -219,80 +218,84 @@ namespace vcsn {
     typedef Element<Series<W, M>, polynom<Tm, Tw> > ret_t;
   };
   
-    template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-    polynom<Tm, Tw> op_add(const W& weights,
-			   const Series<W, M>& s,
-			   const oTw& a,
-			   const polynom<Tm, Tw>& b);
+  template<typename W, typename M, typename oTw, typename Tm, typename Tw>
+  polynom<Tm, Tw> op_add(const W& weights,
+			 const Series<W, M>& s,
+			 const oTw& a,
+			 const polynom<Tm, Tw>& b);
 
-    /*-------------------------------------------.
-    | foreign multiplication by weights elements |
-    `-------------------------------------------*/
+  /*-------------------------------------------.
+  | foreign multiplication by weights elements |
+  `-------------------------------------------*/
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-    void op_in_mul(const Series<W, M>& s,
-		   const W& weights,
-		   polynom<Tm, Tw>& dst,
-		   const oTw& src);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+  void op_in_mul(const Series<W, M>& s,
+		 const W& weights,
+		 polynom<Tm, Tw>& dst,
+		 const oTw& src);
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-    polynom<Tm, Tw> op_mul(const Series<W, M>& s,
-			   const W& weights,
-			   const polynom<Tm, Tw>& a,
-			   const oTw& b);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTw>
+  polynom<Tm, Tw> op_mul(const Series<W, M>& s,
+			 const W& weights,
+			 const polynom<Tm, Tw>& a,
+			 const oTw& b);
 
-    template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-    struct op_mul_traits<W, Series<W, M>, oTw, polynom<Tm, Tw> >
-    {
-      typedef Element<Series<W, M>, polynom<Tm, Tw> > ret_t;
-    };
+  template<typename W, typename M, typename oTw, typename Tm, typename Tw>
+  struct op_mul_traits<W, Series<W, M>, oTw, polynom<Tm, Tw> >
+  {
+    typedef Element<Series<W, M>, polynom<Tm, Tw> > ret_t;
+  };
 
-    template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-    polynom<Tm, Tw> op_mul(const W& weights,
-			   const Series<W, M>& s,
-			   const oTw& a,
-			   const polynom<Tm, Tw>& b);
+  template<typename W, typename M, typename oTw, typename Tm, typename Tw>
+  polynom<Tm, Tw> op_mul(const W& weights,
+			 const Series<W, M>& s,
+			 const oTw& a,
+			 const polynom<Tm, Tw>& b);
 
-    /*----------.
-    | transpose |
-    `----------*/
-    template <typename W, typename M, typename Tm, typename Tw>
-    void  op_in_transpose(Series<W, M>& s, polynom<Tm, Tw>& t);
+  /*----------.
+  | transpose |
+  `----------*/
+  template <typename W, typename M, typename Tm, typename Tw>
+  void  op_in_transpose(Series<W, M>& s, polynom<Tm, Tw>& t);
 
-    /*-------------.
-    | input-output |
-    `-------------*/
+  /*-------------.
+  | input-output |
+  `-------------*/
 
-    template<typename W, typename M, typename St, typename Tm, typename Tw>
-    St& op_rout(const Series<W, M>& s, St& st, const polynom<Tm, Tw>& p);
+  template<typename W, typename M, typename St, typename Tm, typename Tw>
+  St& op_rout(const Series<W, M>& s, St& st, const polynom<Tm, Tw>& p);
 
-    /*---------------.
-    | specialization |
-    `---------------*/
+  /*---------------.
+  | specialization |
+  `---------------*/
 
-    template<typename W, typename M, typename Tm, typename Tw>
-    struct MetaElement<Series<W, M>, polynom<Tm, Tw> >
-      : public MetaElement<SeriesBase<Series<W, M> >, polynom<Tm, Tw> >
-    {
-      static const bool dynamic_values = true;
-    };
+  template<typename W, typename M, typename Tm, typename Tw>
+  struct MetaElement<Series<W, M>, polynom<Tm, Tw> >
+    : public MetaElement<SeriesBase<Series<W, M> >, polynom<Tm, Tw> >
+  {
+    static const bool dynamic_values = true;
+  };
 
-    /*------------------------------.
-    | fundamental series operations |
-    `------------------------------*/
+  /*------------------------------.
+  | fundamental series operations |
+  `------------------------------*/
+
+  template <class W, class M, class Tm, class Tw>
+  Tm op_choose_from_supp(const Series<W, M>& s, 
+			 const polynom<Tm, Tw>& p);
     
-    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-    Tw op_series_get(const Series<W, M>& s, 
-		     const polynom<Tm, Tw>& p,
-		     const oTm& m);
+  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+  Tw op_series_get(const Series<W, M>& s, 
+		   const polynom<Tm, Tw>& p,
+		   const oTm& m);
 
-    template<typename W, typename M, 
-	     typename Tm, typename Tw, 
-	     typename oTm, typename oTw>
-    void op_series_set(const Series<W, M>& s,
-		       polynom<Tm, Tw>& p,
-		       const oTm& m,
-		       const oTw& w);
+  template<typename W, typename M, 
+	   typename Tm, typename Tw, 
+	   typename oTm, typename oTw>
+  void op_series_set(const Series<W, M>& s,
+		     polynom<Tm, Tw>& p,
+		     const oTm& m,
+		     const oTw& w);
 
 } // vcsn
 

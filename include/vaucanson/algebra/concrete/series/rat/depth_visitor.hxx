@@ -33,7 +33,7 @@ namespace vcsn {
     }
     
     template<typename M_, typename W_>
-    virtual void 
+    void 
     DepthVisitor<M_,W_>::product(const Node<M_, W_>* left_, 
 				 const Node<M_, W_>* right_)
     { 
@@ -41,7 +41,7 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-    virtual void 
+    void 
     DepthVisitor<M_,W_>::sum(const Node<M_, W_>* left_, 
 			     const Node<M_, W_>* right_)
     { 
@@ -49,41 +49,41 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-    virtual void 
+    void 
     DepthVisitor<M_,W_>::star(const Node<M_, W_>* node)
     { 
       weight_or_star(node); 
     }
 
     template<typename M_, typename W_>
-    virtual void 
+    void 
     DepthVisitor<M_,W_>::left_weight(const W_& w, const Node<M_, W_>* node)
     { 
       weight_or_star(node); 	
     }
 
     template<typename M_, typename W_>
-    virtual void 
+    void 
     DepthVisitor<M_,W_>::right_weight(const W_& w, const Node<M_, W_>* node)
     { 
       weight_or_star(node); 
     }
 
     template<typename M_, typename W_>
-    virtual void 
+    void 
     DepthVisitor<M_,W_>::constant(const M_& m)
     { 
       d = 0; 
     }
 
     template<typename M_, typename W_>
-    virtual void DepthVisitor<M_,W_>::zero()
+    void DepthVisitor<M_,W_>::zero()
     { 
       d = 0; 
     }
 
     template<typename M_, typename W_>
-    virtual void DepthVisitor<M_,W_>::one()
+    void DepthVisitor<M_,W_>::one()
     { 
       d = 0; 
     }

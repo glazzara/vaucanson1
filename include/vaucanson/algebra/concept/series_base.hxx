@@ -1,5 +1,6 @@
 // series_base.hxx
 //
+// $Id$
 // VCSN_HEADER
 
 #ifndef ALGEBRA_SERIES_BASE_HXX
@@ -102,8 +103,6 @@ namespace vcsn {
       value_set(m.value(), w.value()); 
     }
 
-    // when a serie is a finite support app, it is its own support
-
     template<typename S, typename T>
     bool 
     MetaElement<SeriesBase<S>, T>::is_finite_app() const
@@ -123,6 +122,13 @@ namespace vcsn {
     MetaElement<SeriesBase<S>, T>::supp() const 
     { 
       return value(); 
+    }
+
+    template <typename S, typename T>
+    typename MetaElement<SeriesBase<S>, T>::monoid_elt_t
+    MetaElement<SeriesBase<S>, T>::choose_from_supp() const
+    {
+      return op_choose_from_supp(set(), value());
     }
 
     template <typename S, typename T>

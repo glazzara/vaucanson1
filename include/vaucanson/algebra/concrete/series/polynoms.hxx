@@ -14,8 +14,8 @@ namespace vcsn {
   namespace algebra {
 
     /*----------------.
-      | polynom<Tm, Tw> |
-      `----------------*/
+    | polynom<Tm, Tw> |
+    `----------------*/
 
     template<typename Tm, typename Tw>
     template<typename M, typename W>
@@ -520,14 +520,13 @@ namespace vcsn {
   }
 
   /*---------------.
-    | specialization |
-    `---------------*/
+  | specialization |
+  `---------------*/
 
   /*------------------------------.
-    | fundamental series operations |
-    `------------------------------*/
+  | fundamental series operations |
+  `------------------------------*/
 
-    
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   Tw op_series_get(const Series<W, M>& s, 
 		   const polynom<Tm, Tw>& p,
@@ -564,9 +563,29 @@ namespace vcsn {
 	i->second = new_w;
   }
 
+  template <class W, class M, class Tm, class Tw>
+  Tm op_choose_from_supp(const Series<W, M>& s, 
+			 const polynom<Tm, Tw>& p)
+  {
+    typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
+
+    if (p.size() == 0)
+      return Tw();
+
+    unsigned       index = rand() * p.size() / RAND_MAX;
+    const_iterator i = p.begin();
+    while ((index > 0) && (i != p.end()))
+      {
+	--index;
+	++i;
+      }
+    return (*i).first;
+  }
+
+
   /*----------.
-    | transpose |
-    `----------*/
+  | transpose |
+  `----------*/
   template <typename W, typename M, typename Tm, typename Tw>
   void  op_in_transpose(Series<W, M>& s, polynom<Tm, Tw>& t)
   {

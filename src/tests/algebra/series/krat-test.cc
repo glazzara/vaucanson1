@@ -4,10 +4,6 @@
 // $Id$
 // VCSN_HEADER
 
-// Goal: 
-// - to instantiate all services of element parameterized by empty classes.
-//
-
 #include <set>
 #include <check/tests_stuff.hh>
 #include <fundamental/design_pattern-test.hh>

@@ -39,7 +39,7 @@ namespace vcsn {
       virtual void product( Node<M_, W_>* lhs,  Node<M_, W_>* rhs);
       virtual void sum( Node<M_, W_>* lhs,  Node<M_, W_>* rhs);
       virtual void star( Node<M_, W_>* n);
-      virtual void left_weight( W_&,  Node<M_, W_>* n);
+      virtual void left_weight(W_&,  Node<M_, W_>* n);
       virtual void right_weight( W_&,  Node<M_, W_>* n);
       virtual void constant( M_&);
       virtual void zero();

@@ -21,48 +21,48 @@ namespace vcsn {
     }
 
     template<class M_, class W_>
-     void DefaultMutableNodeVisitor<M_,W_>::sum(Node<M_, W_>* lhs,  
-						       Node<M_, W_>* rhs)
+    void DefaultMutableNodeVisitor<M_,W_>::sum(Node<M_, W_>* lhs,  
+					       Node<M_, W_>* rhs)
     {
       lhs->accept(*this);
       rhs->accept(*this);
     }
 
     template<class M_, class W_>
-     void DefaultMutableNodeVisitor<M_,W_>::star(Node<M_, W_>* n)
+    void DefaultMutableNodeVisitor<M_,W_>::star(Node<M_, W_>* n)
     {
       n->accept(*this);
     }
 
     template<class M_, class W_>
-     void DefaultMutableNodeVisitor<M_,W_>::left_weight(W_&,  
-							       Node<M_, W_>* n)
+    void DefaultMutableNodeVisitor<M_,W_>::left_weight(W_&,  
+						       Node<M_, W_>* n)
     {
-	n->accept(*this);
+      n->accept(*this);
     }
     
     template<class M_, class W_>
-     void DefaultMutableNodeVisitor<M_,W_>::right_weight(W_&,  
-								Node<M_, W_>*n)
+    void DefaultMutableNodeVisitor<M_,W_>::right_weight(W_&,  
+							Node<M_, W_>*n)
     {
       n->accept(*this);
     }
 
     template<class M_, class W_>
-     void DefaultMutableNodeVisitor<M_,W_>::constant( M_&)
+    void DefaultMutableNodeVisitor<M_,W_>::constant( M_&)
     {}
 
     template<class M_, class W_>
-     void DefaultMutableNodeVisitor<M_,W_>::zero()
+    void DefaultMutableNodeVisitor<M_,W_>::zero()
     {}
 
     template<class M_, class W_>
-     void DefaultMutableNodeVisitor<M_,W_>::one()
+    void DefaultMutableNodeVisitor<M_,W_>::one()
     {}
 
     /*-----.
-    | Node |
-    `-----*/
+      | Node |
+      `-----*/
 
     // Defined methods
     template<typename M_, typename W_>  			
@@ -89,21 +89,21 @@ namespace vcsn {
     {}
     
     /*-----.
-    | Zero |
-    `-----*/
+      | Zero |
+      `-----*/
     template <class M_, class W_>
     Zero<M_,W_>::Zero() 
     {}
     
     template <class M_, class W_>
-     Node<M_, W_>::type	
+    Node<M_, W_>::type	
     Zero<M_,W_>::what() const 
     { 
       return Node<M_, W_>::zero; 
     }
 
     template <class M_, class W_>
-     Node<M_, W_>*	
+    Node<M_, W_>*	
     Zero<M_,W_>::clone() const 
     { 
       Node<M_, W_>* p = new Zero<M_, W_>; 
@@ -113,21 +113,21 @@ namespace vcsn {
     }
 
     template <class M_, class W_>
-     void	       	
+    void	       	
     Zero<M_,W_>::accept(ConstNodeVisitor<M_, W_>& v) const
     { 
       v.zero(); 
     }
 
     template <class M_, class W_>
-     bool		
+    bool		
     Zero<M_,W_>::operator!=(const Node<M_, W_>& other) const
     { 
       return (dynamic_cast<const Zero<M_, W_>*>(&other) == 0); 
     }
 
     template <class M_, class W_>
-     bool		
+    bool		
     Zero<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
       return (dynamic_cast<const Zero<M_, W_>*>(&other) == 0); 
@@ -139,22 +139,22 @@ namespace vcsn {
     {}
 
     /*----.
-    | One |
-    `----*/
+      | One |
+      `----*/
 
     template<typename M_, typename W_>
     One<M_,W_>::One() 
     {}
     
     template<typename M_, typename W_>
-     Node<M_, W_>::type 
+    Node<M_, W_>::type 
     One<M_,W_>::what() const 
     { 
       return Node<M_, W_>::one; 
     }
     
     template<typename M_, typename W_>
-     Node<M_, W_>* 
+    Node<M_, W_>* 
     One<M_,W_>::clone() const 
     { 
       Node<M_, W_>* p = new One<M_, W_>; 
@@ -164,21 +164,21 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-     void 
+    void 
     One<M_,W_>::accept(ConstNodeVisitor<M_, W_>& v) const
     { 
       v.one(); 
     }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     One<M_,W_>::operator!=(const Node<M_, W_>& other) const
     { 
       return (dynamic_cast<const One<M_, W_>*>(&other) == 0); 
     }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     One<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
       return (dynamic_cast<const One<M_, W_>*>(&other) == 0);
@@ -190,22 +190,22 @@ namespace vcsn {
     {}
     
     /*---------.
-    | Constant |
-    `---------*/
+      | Constant |
+      `---------*/
 
     template<typename M_, typename W_>
     Constant<M_,W_>::Constant(const M_ &v) : value_(v) 
     {}
 
     template<typename M_, typename W_>
-     Node<M_, W_>::type 
+    Node<M_, W_>::type 
     Constant<M_,W_>::what() const 
     { 
       return Node<M_, W_>::constant; 
     }
     
     template<typename M_, typename W_>
-     Node<M_, W_>* 
+    Node<M_, W_>* 
     Constant<M_,W_>::clone() const 
     { 
       Node<M_, W_>* p = new Constant<M_, W_>(value_); 
@@ -215,14 +215,14 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-     void 
+    void 
     Constant<M_,W_>::accept(ConstNodeVisitor<M_, W_>& v) const
     { 
       v.constant(value_); 
     }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     Constant<M_,W_>::operator!=(const Node<M_, W_>& other) const
     { 
       const Constant<M_, W_>* otherp =
@@ -233,11 +233,11 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     Constant<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
       const Constant<M_, W_>* otherp =
-	  dynamic_cast<const Constant<M_, W_>*>(&other);
+	dynamic_cast<const Constant<M_, W_>*>(&other);
       if(!otherp)
 	return true;
       return (value_ < otherp->value_);
@@ -249,8 +249,8 @@ namespace vcsn {
     {};
     
     /*-------------.
-    | LeftWeighted |
-    `-------------*/
+      | LeftWeighted |
+      `-------------*/
     template<typename M_, typename W_>	
     LeftWeighted<M_,W_>::LeftWeighted(const W_& w, const Node<M_, W_>& c)
       : weight_(w), child_(c.clone())
@@ -268,14 +268,14 @@ namespace vcsn {
     {}
 
     template<typename M_, typename W_>
-     Node<M_, W_>::type 
+    Node<M_, W_>::type 
     LeftWeighted<M_,W_>::what() const 
     { 
       return Node<M_, W_>::lweight; 
     }
 
     template<typename M_, typename W_>
-     Node<M_, W_>* 
+    Node<M_, W_>* 
     LeftWeighted<M_,W_>::clone() const 
     { 
       Node<M_, W_>* p = new LeftWeighted<M_, W_>(weight_, *child_); 
@@ -285,14 +285,14 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-     void 
+    void 
     LeftWeighted<M_,W_>::accept(ConstNodeVisitor<M_, W_>& v) const
     { 
       v.left_weight(weight_, child_); 
     }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     LeftWeighted<M_,W_>::operator!=(const Node<M_, W_>& other) const
     { 
       const LeftWeighted<M_, W_>* otherp =
@@ -303,7 +303,7 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     LeftWeighted<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
       const LeftWeighted<M_, W_>* otherp =
@@ -321,8 +321,8 @@ namespace vcsn {
     }
     
     /*--------------.
-    | RightWeighted |
-    `--------------*/
+      | RightWeighted |
+      `--------------*/
     template<typename M_, typename W_>	
     RightWeighted<M_,W_>::RightWeighted(const W_& w, const Node<M_, W_>& c)
       : weight_(w), child_(c.clone())
@@ -340,14 +340,14 @@ namespace vcsn {
     {}
     
     template<typename M_, typename W_>
-     Node<M_, W_>::type 
+    Node<M_, W_>::type 
     RightWeighted<M_,W_>::what() const 
     { 
       return Node<M_, W_>::rweight; 
     }
 
     template<typename M_, typename W_>
-     Node<M_, W_>* 
+    Node<M_, W_>* 
     RightWeighted<M_,W_>::clone() const 
     { 
       Node<M_, W_>* p = new RightWeighted<M_, W_>(weight_, *child_); 
@@ -357,14 +357,14 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-     void 
+    void 
     RightWeighted<M_,W_>::accept(ConstNodeVisitor<M_, W_>& v) const
     { 
       v.right_weight(weight_, child_); 
     }
     
     template<typename M_, typename W_>
-     bool 
+    bool 
     RightWeighted<M_,W_>::operator!=(const Node<M_, W_>& other) const
     { 
       const RightWeighted<M_, W_>* otherp =
@@ -375,7 +375,7 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     RightWeighted<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
       const RightWeighted<M_, W_>* otherp =
@@ -393,12 +393,12 @@ namespace vcsn {
     }
 
     /*-----.
-    | Star |
-    `-----*/
+      | Star |
+      `-----*/
     template <class M_,class W_>
-      Star<M_,W_>::Star(const Node<M_, W_>& other)
-	: child_(other.clone())
-      {}
+    Star<M_,W_>::Star(const Node<M_, W_>& other)
+      : child_(other.clone())
+    {}
 
     template <class M_,class W_>
     Star<M_,W_>::Star(Node<M_, W_>* other)
@@ -406,14 +406,14 @@ namespace vcsn {
     {}
 
     template <class M_,class W_>
-     Node<M_, W_>::type 
+    Node<M_, W_>::type 
     Star<M_,W_>::what() const 
     { 
       return Node<M_, W_>::star; 
     }
 
     template <class M_,class W_>
-     Node<M_, W_>* 
+    Node<M_, W_>* 
     Star<M_,W_>::clone() const
     { 
       Node<M_, W_>* p = new Star<M_, W_>(*child_); 
@@ -423,14 +423,14 @@ namespace vcsn {
     }
 
     template <class M_,class W_>
-     void 
+    void 
     Star<M_,W_>::accept(ConstNodeVisitor<M_, W_>& v) const
     { 
       v.star(child_); 
     }
 
     template <class M_,class W_>
-     bool 
+    bool 
     Star<M_,W_>::operator!=(const Node<M_, W_>& other) const
     { 
       const Star<M_, W_>* otherp =
@@ -441,7 +441,7 @@ namespace vcsn {
     }
 
     template <class M_,class W_>
-     bool 
+    bool 
     Star<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
       const Star<M_, W_>* otherp =
@@ -459,8 +459,8 @@ namespace vcsn {
     }
 
     /*--------.
-    | Product |
-    `--------*/
+      | Product |
+      `--------*/
     template <class M_,class W_>
     Product<M_,W_>::Product(const Node<M_, W_>& left, 
 			    const Node<M_, W_>& right)
@@ -473,14 +473,14 @@ namespace vcsn {
     {}
 
     template <class M_,class W_> 
-     Node<M_, W_>::type 
+    Node<M_, W_>::type 
     Product<M_,W_>::what() const 
     { 
       return Node<M_, W_>::prod; 
     }
 
     template <class M_,class W_>
-     Node<M_, W_>* 
+    Node<M_, W_>* 
     Product<M_,W_>::clone() const
     { 
       Node<M_, W_>* p = new Product<M_, W_>(*left_, *right_);  
@@ -490,14 +490,14 @@ namespace vcsn {
     }
 
     template <class M_,class W_>
-     void 
+    void 
     Product<M_,W_>::accept(ConstNodeVisitor<M_, W_>& v) const
     { 
       return v.product(left_, right_); 
     }
 
     template <class M_,class W_>
-     bool 
+    bool 
     Product<M_,W_>::operator!=(const Node<M_, W_>& other) const
     { 
       const Product<M_, W_>* otherp =
@@ -508,7 +508,7 @@ namespace vcsn {
     }
 
     template <class M_,class W_>
-     bool 
+    bool 
     Product<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
       const Product<M_, W_>* otherp =
@@ -527,8 +527,8 @@ namespace vcsn {
     }
 
     /*----.
-    | Sum |
-    `----*/
+      | Sum |
+      `----*/
     template<typename M_, typename W_>  
     Sum<M_,W_>::Sum(const Node<M_, W_>& left, const Node<M_, W_>& right)
       : left_(left.clone()), right_(right.clone())
@@ -540,21 +540,21 @@ namespace vcsn {
     {}
 
     template<typename M_, typename W_>
-     void 
+    void 
     Sum<M_,W_>::accept(ConstNodeVisitor<M_, W_>& v) const
     { 
       return v.sum(left_, right_); 
     }
 
     template<typename M_, typename W_>
-     Node<M_, W_>::type 
+    Node<M_, W_>::type 
     Sum<M_,W_>::what() const 
     { 
       return Node<M_, W_>::sum; 
     }
 
     template<typename M_, typename W_>
-     Node<M_, W_>* 
+    Node<M_, W_>* 
     Sum<M_,W_>::clone() const
     { 
       Node<M_, W_>* p = new Sum<M_, W_>(*left_, *right_); 
@@ -564,20 +564,20 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     Sum<M_,W_>::operator!=(const Node<M_, W_>& other) const
-      { 
-	const Sum<M_, W_>* otherp =
-	  dynamic_cast<const Sum<M_, W_>*>(&other);
-	if(!otherp)
-	  return true;
-	// X + Y and Y + X are equal
-	return ((*left_ != *otherp->left_) || (*right_ != *otherp->right_))
-	  && ((*left_ != *otherp->right_) || (*right_ != *otherp->left_));
-      }
+    { 
+      const Sum<M_, W_>* otherp =
+	dynamic_cast<const Sum<M_, W_>*>(&other);
+      if(!otherp)
+	return true;
+      // X + Y and Y + X are equal
+      return ((*left_ != *otherp->left_) || (*right_ != *otherp->right_))
+	&& ((*left_ != *otherp->right_) || (*right_ != *otherp->left_));
+    }
 
     template<typename M_, typename W_>
-     bool 
+    bool 
     Sum<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
       const Sum<M_, W_>* otherp =

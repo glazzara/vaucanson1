@@ -53,4 +53,6 @@ namespace vcsn {
 
 } // vcsn
 
+# include <vaucanson/algebra/concrete/series/rat/depth_visitor.hxx>
+
 #endif // RAT_DEPTH_VISITOR_HH
