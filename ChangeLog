@@ -1,5 +1,10 @@
 2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/product.hxx (product): Fix and clean.
+	The resulting series when computing a transition was badly initialized.
+
+2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/automata/algos/product_regression_test.hh: New. Basic
 	test for product().
 
