@@ -1,3 +1,7 @@
+2003-07-21  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* FAQ: New.
+
 2003-07-18  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/series_base.hh,

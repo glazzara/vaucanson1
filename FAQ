@@ -1,0 +1,39 @@
+							       -*- outline -*-
+* FAQ
+* ---
+
+Here are answers to different questions you may have while compiling or using
+Vaucanson.
+
+* Table of contents:
+* ------------------
+
+** I) Compilation Problems
+***  1) I have a "`NAN' undeclared" error. What can I do ?
+***  2) I have a declaration of function `int getopt()' conflict. How can I
+***     resolve it ?
+	
+** II) Use problems
+
+
+----------------------------------------------------------------------------
+** I) Compilation Problems
+
+***  1) I have a "`NAN' undeclared" error. What can I do ?
+
+        The version of the compiler which you are using does not have the macro
+	NAN defined. Try another version, as g++ version 3.3.
+	To indicate the version of the compiler you want to use to the
+	"configure" script, just call it with "CXX=<compiler>".
+
+***  2) I have a declaration of function `int getopt()' conflict. How can I
+***     resolve it ?
+
+        The flag HAVE_DECL_GETOPT must be set. Compile with -DHAVE_DECL_GETOPT.
+        To indicate it to the "configure" script, call it with
+        "CXXFLAGS=-DHAVE_DECL_GETOPT".
+
+----------------------------------------------------------------------------
+** II) Use problems
+
+----------------------------------------------------------------------------
