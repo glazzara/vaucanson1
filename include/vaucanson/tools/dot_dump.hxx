@@ -41,8 +41,8 @@ namespace vcsn {
   namespace tools {
 
     template <class S, class Auto>
-    void dot_dump(const AutomataBase<S>& s,
-		  std::ostream& o, 
+    void dot_dump(const AutomataBase<S>&,
+		  std::ostream& o,
 		  const Auto& a,
 		  const std::string& name)
     {
@@ -51,7 +51,7 @@ namespace vcsn {
 
     template <class S, class Auto>
     void dot_dump(const TransducerBase<S>& s,
-		  std::ostream& o, 
+		  std::ostream& o,
 		  const Auto& a,
 		  const std::string& name)
     {

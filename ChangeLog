@@ -1,3 +1,8 @@
+2003-11-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/misc/unique.hxx: Add missing inline.
+	* include/vaucanson/tools/dot_dump.hxx: Fix an unused argument warning.
+
 2003-11-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* doc/doxy.in (INPUT): Remove doc/src.
@@ -13,12 +18,12 @@
 
 2003-11-05  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/product.hxx: 
+	* include/vaucanson/algorithms/product.hxx:
 	   Remove debugging code.
 	* include/vaucanson/tools/dot_dump.hh: Fix missing includes.
 	* include/vaucanson/tools/dot_format.hxx: Likewise.
 	* src/demos/vgrep/vgrep.cc: Do not use 'getopt.h' anymore.
-	* include/vaucanson/algorithms/projection.hxx: 
+	* include/vaucanson/algorithms/projection.hxx:
 	  Include map and explicit std::.
 	* include/vaucanson/tools/dot_dump.hxx: Fix missing includes.
 
@@ -26,7 +31,7 @@
 
 	* include/vaucanson/misc/fsm_dump.h[h,xx]: New.
         * include/Makefile.am: Distribute them.
-	
+
 2003-11-05  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* src/demos/vgrep/vgrep.cc: Use getopt instead of getopt_long.
@@ -54,7 +59,7 @@
 	  include/vaucanson/automata/concept/transducer_ops.hxx:
 		Implement and use it.
 	* include/vaucanson/algorithms/product.hxx: Fix a major bug.
-	* include/vaucanson/algorithms/standard.hxx: 
+	* include/vaucanson/algorithms/standard.hxx:
 		Disable initial weight since krat::get is broken.
 	* include/vaucanson/tools/dot_dump.hh: Move implementation ...
 	* include/vaucanson/tools/dot_dump.hxx: New. ... here.
@@ -135,7 +140,7 @@
 	  (op_add_spontaneous):  Use a new paramater.
 	* include/vaucanson/automata/concrete/graph.hxx: Minor change.
 	* include/vaucanson/algorithms/product.hxx: Fix.
-	* include/vaucanson/algorithms/standard.hxx: 
+	* include/vaucanson/algorithms/standard.hxx:
 	  (do_in_standardize): Implement.
 	* include/vaucanson/algorithms/realtime_composition.hxx,
 	  include/vaucanson/algorithms/projection.hxx,
@@ -146,7 +151,7 @@
 
 2003-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/misc/limits.hh: 
+	* include/vaucanson/misc/limits.hh:
 		Fix missing type specialization.
 
 2003-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -167,7 +172,7 @@
 	* include/vaucanson/algorithms/realtime_composition.hxx,
 	  include/vaucanson/algorithms/extension.hxx,
 	  include/vaucanson/algorithms/projection.hxx,
-	  include/vaucanson/algorithms/evaluation.hxx: 
+	  include/vaucanson/algorithms/evaluation.hxx:
 			Fix typedef use.
 
 2003-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -281,7 +286,7 @@
      include/vaucanson/algorithms/realtime_composition.hh
      include/vaucanson/algorithms/extension.hh
      include/vaucanson/algorithms/projection.hh
-     include/vaucanson/vaucanson_boolean_automaton.hh: 
+     include/vaucanson/vaucanson_boolean_automaton.hh:
 	Add #ifndef VCSN_USE_INTERFACE_ONLY.
 
 2003-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -293,7 +298,7 @@
 
 	* include/vaucanson/algorithms/isomorph.hxx: Fix macro usage.
 	* include/vaucanson/algorithms/minimization_moore.hxx: Likewise.
-	* include/vaucanson/algorithms/normalized.hxx: 
+	* include/vaucanson/algorithms/normalized.hxx:
 		Fix missing AUTOMATON_TYPES.
 
 2003-10-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -357,17 +362,17 @@
 
 2003-10-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/misc/unique.hh, 
+	* include/vaucanson/misc/unique.hh,
 	* include/vaucanson/misc/unique.hxx:
 		Try a trick for the removal of unique.hcc.
 	* include/vaucanson/misc/unique.hcc: Minor.
-	
+
 	* src/demos/samples/algorithms/derivatives_automaton.cc,
 	  src/demos/vgrep/vgrep.cc,
-	  src/demos/vaucanswig/meta/vauto.cc: Do not use 
+	  src/demos/vaucanswig/meta/vauto.cc: Do not use
 		unique.hcc anymore.
 
-	
+
 	* include/vaucanson/algebra/concept/alphabets_base.hxx,
 	  include/vaucanson/algebra/concept/freemonoid_base.hxx,
 	  include/vaucanson/algebra/concept/monoid_base.hxx,
@@ -387,7 +392,7 @@
 	  include/vaucanson/algorithms/product.hxx,
 	  include/vaucanson/algorithms/sum.hxx,
 	  include/vaucanson/tools/usual_macros.hh: Be g++-3.4 compliant
-		- add "this->" when the compiler fails to resolve 
+		- add "this->" when the compiler fails to resolve
 		  self method call,
 		- add explicit inheritance of typedef in hairy
 		  inheritance between template classes.
@@ -409,7 +414,7 @@
 
 2003-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* src/tests/sanity/generate_files.sh: 
+	* src/tests/sanity/generate_files.sh:
 		Depend on include/Makefile.am
 	* include/Makefile.am: Update.
 
@@ -454,7 +459,7 @@
 
 	* include/vaucanson/algebra/concrete/series/krat.hh: Add op_convert
 	  declarations.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: Change an 
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Change an
 	  op_convert argument.
 	* include/vaucanson/algebra/concrete/series/polynoms.hh: Add op_convert
 	  declarations.
@@ -486,14 +491,14 @@
 	of op_rdelta for Graph.
 	* src/tests/automata/implementation_check/rdelta_test.hh: Add more
 	tests for rdelta.
-	
+
 2003-09-08  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/tests-suites/generate-all.sh: Generate algorithms tests.
 	* src/tests/automata/algos/sub_automaton_test.hh: New test.
-	
+
 2003-09-08  Thomas Claveirole  <clavei_t@lrde.epita.fr>
-	
+
 	* include/vaucanson/misc/support.hh,
 	* include/vaucanson/misc/support.hxx: Add a max() method to
 	SparseInterval and Support. Add an == operator to SupportIterator.
@@ -567,7 +572,7 @@
 
 2003-08-17  Raphaël Poss  <raph@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/finite_support_conversion.hh: Add 
+	* include/vaucanson/algorithms/finite_support_conversion.hh: Add
 	missing comment delimiter.
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Mention FIXME.
 	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Mention
@@ -804,7 +809,7 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/product.hxx: Get rid of calls to
-	`emancipate'. 
+	`emancipate'.
 
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
@@ -885,7 +890,7 @@
 
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
-	* src/tests/tests-suites/generate-all.sh: Mention 
+	* src/tests/tests-suites/generate-all.sh: Mention
 	usual_automaton_t.
 	* bootstrap.sh: Initialise test suite.
 
@@ -931,7 +936,7 @@
 	* include/vaucanson/tools/io.hxx: Add.
 	* include/vaucanson/tools/dot_format.hh: Add.
 	* include/vaucanson/tools/dot_format.hxx: Add.
-	
+
 	* include/vaucanson/misc/dot_dump.hh: Rename to...
 	* include/vaucanson/tools/dot_dump.hh: This. Use new I/O
 	subsystem. Move `dot_dump' to namespace `tools'.
@@ -960,7 +965,7 @@
 
 2003-07-11  Raphaël Poss  <raph@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/finite_support_conversion.hh: Add 
+	* include/vaucanson/algorithms/finite_support_conversion.hh: Add
 	missing includes.
 	* include/vaucanson/algorithms/finite_support_conversion.hxx:
 	Likewise.
@@ -970,16 +975,16 @@
 	* include/vaucanson/algorithms/minimization_moore.hh: Likewise.
 	* include/vaucanson/algorithms/transpose.hh: Likewise.
 
-2003-07-10  Raphaël Poss  <raph@lrde.epita.fr> 
-                                   
-        * include/vaucanson/algebra/concrete/series/krat.hh: Add missing 
-        prototype.              
-        * include/Makefile.am (nobase_include_HEADERS): Mention  
-        `finite_support_convert'.      
-        * include/algorithms/finite_support_convert.hh: New. 
-        * include/algorithms/finite_support_convert.hxx; New. 
-        * include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx: 
-        remove extraneous `_'. 
+2003-07-10  Raphaël Poss  <raph@lrde.epita.fr>
+
+        * include/vaucanson/algebra/concrete/series/krat.hh: Add missing
+        prototype.
+        * include/Makefile.am (nobase_include_HEADERS): Mention
+        `finite_support_convert'.
+        * include/algorithms/finite_support_convert.hh: New.
+        * include/algorithms/finite_support_convert.hxx; New.
+        * include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx:
+        remove extraneous `_'.
 
 2003-07-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
@@ -1033,7 +1038,7 @@
 	`vaucanswig'.
 	* include/vaucanson/algorithms/backward_closure.hh,
 	include/vaucanson/algorithms/aut_to_exp.hh,
-	include/vaucanson/algorithms/aci_canonical.hh: Likewise.	
+	include/vaucanson/algorithms/aci_canonical.hh: Likewise.
 
 2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
 
@@ -1058,7 +1063,7 @@
 	* bootstrap.sh: Mention vaucanswig.
 
 	* src/demos/vaucanswig/ChangeLog: Add.
-	
+
 	* config/vcsn.m4: Add AC_CHECK_SWIG13.
 
 	* configure.ac: Invoke AC_CHECK_SWIG13 and AM_PATH_PYTHON. Mention
@@ -1070,7 +1075,7 @@
 	namespace for `op_convert'. Re-order arguments and parameters.
 	* include/vaucanson/algebra/concrete/series/generalized.hxx:
 	Update accordingly.
-	
+
 	* include/vaucanson/algebra/concrete/series/polynoms.hh: Make
 	subtyping requirement explicit for operators.
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Update
@@ -1168,15 +1173,15 @@
 	include/vaucanson/algorithms/krat_exp_derivation.hxx,
 	include/vaucanson/algorithms/krat_exp_partial_derivation.hxx,
 	include/vaucanson/algorithms/standard_of.hxx,
-	src/tests/algebra/semiring/semiring_test.hh: 
+	src/tests/algebra/semiring/semiring_test.hh:
 		Rename `stareable' to `starable'.
 
 
 2003-07-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/automata/concrete/graph.hxx: 
+	* include/vaucanson/automata/concrete/graph.hxx:
 		Use state_value's abstract types.
-	* include/vaucanson/automata/concrete/graph.hh: 
+	* include/vaucanson/automata/concrete/graph.hh:
 		Define abstract types.
 	* include/vaucanson/algorithms/hopcroft_minimization.hxx:
 		(do_quotient): New version.
@@ -1196,7 +1201,7 @@
 
 	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx,
 	include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx,
-	include/vaucanson/algebra/concrete/series/rat/exp.hxx: Fix escaping 
+	include/vaucanson/algebra/concrete/series/rat/exp.hxx: Fix escaping
 	output.
 
 2003-07-02  Raphaël Poss  <raph@lrde.epita.fr>
@@ -1214,7 +1219,7 @@
 	include/vaucanson/algebra/concrete/series/series.hxx: Compare by
 	reference instead of by value since structural elements are now
 	unified.
-	
+
 2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh
@@ -1263,7 +1268,7 @@
 
 	* include/vaucanson/automata/concrete/kind_adapter.hh: Add missing
 	spaces in uses of macro arguments.
-	
+
 	* src/tests/check/Makefile.flags (AM_CPPFLAGS): Beautify.
 
 	* src/demos/vgrep/Makefile.am (AM_CPPFLAGS): Add missing include
@@ -1284,13 +1289,13 @@
 	* include/vaucanson/automata/concept/projection.hh: Remove.
 	* include/Makefile.am: Remove it.
 	* include/vaucanson/automata/concrete/graph.hh: Fix traits.
-	* include/vaucanson/automata/concept/transducer.hh: 
+	* include/vaucanson/automata/concept/transducer.hh:
 		Fix includes.
 		(output_projection_helper): New.
 	* include/vaucanson/automata/concept/transducer_base.hh:
 		(projection_traits): New.
 		(output_projection_traits): New.
-	* include/vaucanson/automata/concept/transducer.hxx: 
+	* include/vaucanson/automata/concept/transducer.hxx:
 		(partial_identity): Fix.
 
 2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
@@ -1309,9 +1314,9 @@
 
 2003-07-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/automata/concept/automata.hh: 
+	* include/vaucanson/automata/concept/automata.hh:
 		(operator==): New.
-	* include/vaucanson/automata/concept/automata.hxx: 
+	* include/vaucanson/automata/concept/automata.hxx:
 		(operator==): Implement.
 	* include/vaucanson/algorithms/complete.hxx: Minor.
 	* include/vaucanson/tools/gen_random.hxx: Typo.
@@ -1395,7 +1400,7 @@
 
 	* include/vaucanson/vaucanson.hh: Add for documentation purposes.
 	* include/Makefile.am: Update accordingly.
-	
+
 	* include/vaucanson/fundamental/fundamental.hh: Document more.
 
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -1414,18 +1419,18 @@
 
 	* doc/doc.doxy.in: Remove LaTeX output.
 
-	* include/vaucanson/misc/limits.hh, 
+	* include/vaucanson/misc/limits.hh,
 	include/vaucanson/misc/utility.hh: Fix documentation.
 
-	* src/demos/vgrep/Makefile.am: Re-arrange compilation flags. 
+	* src/demos/vgrep/Makefile.am: Re-arrange compilation flags.
 
 	* reheader.pl: Add.
-	
+
 	* Most files: fix comment in headers.
-	
+
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/series_base.hxx: 
+	* include/vaucanson/algebra/concept/series_base.hxx:
 		Replace set() by this->set() for g++-2.95.
 	* include/vaucanson/automata/concrete/graph.hh: Fix include.
 	* include/vaucanson/misc/support.hh: Likewise.
@@ -1438,7 +1443,7 @@
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix op_convert.
-	* include/vaucanson/algebra/concrete/series/series.hh: 
+	* include/vaucanson/algebra/concrete/series/series.hh:
 		(mute_series_traits, mute_series): New.
 	* include/vaucanson/algebra/concrete/series/series.hxx: Implement it.
 	* include/vaucanson/automata/concept/automata_base.hxx (op_rout): Fix.
@@ -1460,7 +1465,7 @@
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Remove
-	  test on star of the constant term in product. 
+	  test on star of the constant term in product.
 	* include/vaucanson/algorithms/krat_exp_derivation.hxx: Likewise.
 
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
@@ -1473,7 +1478,7 @@
 
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/automata/concrete/graph.hh: 
+	* include/vaucanson/automata/concrete/graph.hh:
 		Define transducer traits.
 	* include/vaucanson/automata/concept/transducer_ops.hh,
   	  include/vaucanson/automata/concept/transducer_ops.hxx,
@@ -1485,12 +1490,12 @@
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_ops.hxx: Improve letter_query.
-	* include/vaucanson/automata/concrete/graph.hxx: 
+	* include/vaucanson/automata/concrete/graph.hxx:
 		Use std::list<hedge_t> instead of std::set<hedge_t>
 	* include/vaucanson/automata/concrete/graph.hh: Likewise.
 	* include/vaucanson/automata/concrete/kind_adapter.hh:
 		Add label_are_letters case.
-	* include/vaucanson/algorithms/determinize.hxx: 
+	* include/vaucanson/algorithms/determinize.hxx:
 		Use std::vector instead of std::set.
 	* src/tests/automata/algos/Makefile.am: Fix missing files.
 
@@ -1511,7 +1516,7 @@
 
 2003-06-30  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/semiring_base.hxx: Fix an 
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Fix an
 	'unused argument' warning.
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
 	Fix an 'unused argument' warning and a wrong typed static assertion.
@@ -1535,7 +1540,7 @@
 
 2003-06-30  Raphaël Poss  <raph@lrde.epita.fr>
 
-	* include/vaucanson/misc/limits.hh: New.  
+	* include/vaucanson/misc/limits.hh: New.
 	* include/vaucanson/misc/random.hxx,
 	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx,
 	include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx,
@@ -1552,18 +1557,18 @@
 2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/misc/random.hxx (generate<float>): Fix.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: 
+	* include/vaucanson/algebra/concrete/series/krat.hxx:
 		Fix bad element init.
 	* src/tests/automata/algos/glushkov_test.hh: Likewise.
-	* src/tests/automata/algos/thompson_test.hh: Likewise.	
+	* src/tests/automata/algos/thompson_test.hh: Likewise.
 	* include/vaucanson/algorithms/minimization_moore.hxx: Likewise.
-	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.	
+	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Fix.
-	* include/vaucanson/algorithms/aut_to_exp.hxx: 
+	* include/vaucanson/algorithms/aut_to_exp.hxx:
 		Use normalize_here.
 		Fix bad element init.
 	* src/tests/automata/implementation_check/add_edge_test.hh: Fix.
-	* src/tests/automata/implementation_check/global_consistency_test.hh: 
+	* src/tests/automata/implementation_check/global_consistency_test.hh:
 		Fix include.
 	* src/tests/automata/implementation_check/init_final_test.hh: Likewise.
 
@@ -1572,7 +1577,7 @@
 	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Fix
 	  namespace.
 	* include/vaucanson/misc/dot_dump.hh: Add.
-	
+
 2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/fundamental/element.hxx: Add inline.
@@ -1580,7 +1585,7 @@
 
 x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/series_base.hh: 
+	* include/vaucanson/algebra/concept/series_base.hh:
 		op_convert between same implementations.
 	* include/vaucanson/algebra/concept/series_base.hxx: Implement it.
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix arg order.
@@ -1640,7 +1645,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
 	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
 	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh,
-	  src/tests/algebra/series/misc/series_test.hh,	
+	  src/tests/algebra/series/misc/series_test.hh,
 	  src/tests/automata/algos/closure_test.hh,
 	  src/tests/automata/algos/complete_test.hh,
  	  src/tests/automata/algos/compute_test.hh,
@@ -1680,7 +1685,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/automata/concept/automata_ops.hxx: Use random::generate.
 	* include/vaucanson/tools/gen_random.hxx: Remove unused variables.
 	* src/tests/automata/algos/sum_test.hh: Fix include.
-	* src/tests/automata/algos/in_concat_test.hh: Fix include. 
+	* src/tests/automata/algos/in_concat_test.hh: Fix include.
 
 
 2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -1688,7 +1693,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/algebra/concept/freemonoid_base.hh
 		(parse_word): Add escaped characters.
 		(op_parse): Likewise.
-	* include/vaucanson/algebra/concept/freemonoid_base.hxx: 
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx:
 		Implement it in the generic op_parse version.
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx: Fix unused arg warning.
 	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Adjust lexer.
@@ -1797,7 +1802,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* configure.ac: 
+	* configure.ac:
 		- (VCSN_TESTS): Remove (problems with distcheck).
 		- Adjust package version.
 	* src/Makefile.am: Minor.
@@ -1846,7 +1851,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/product.hxx: Fix include.
-	* include/vaucanson/algorithms/realtime.hh: 
+	* include/vaucanson/algorithms/realtime.hh:
 		(forward_realtime): Rename to "forward" because of conflict.
 		(backward_realtime): Rename to "backward" because of conflict.
 	* include/vaucanson/algorithms/realtime.hxx: Likewise.
@@ -1896,7 +1901,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/algorithms/aut_to_exp.hxx: Document and replace ...
 	* include/vaucanson/algorithms/elimination.hxx: it.
 	* src/tests/automata/algos/elimination_test.hh: Use aut_to_exp.
-	
+
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/elimination.hh: Document.
@@ -1914,7 +1919,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	and replace ...
 	* include/vaucanson/algorithms/derivates_automaton.hh: it.
 	* include/vaucanson/algorithms/krat_exp_derivation.hxx: Typo.
-	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Typo. 
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Typo.
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
@@ -1998,7 +2003,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/automata/concrete/transpose_view.h[xx,h]: New.
 	* include/vaucanson/automata/concrete/automaton_view.h[xx,h]: New.
-	
+
 2003-06-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/history.h[h,xx]: New.
@@ -2049,7 +2054,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/algebra/concept/alphabets_base.hh: Document.
 	* include/vaucanson/algebra/concept/alphabets_base.hxx: Typo.
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix namespace.
-	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: 
+	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx:
 		Likewise.
 	* include/vaucanson/misc/support.hh: Rename vcsn to utility.
 	* include/vaucanson/misc/support.hxx: Likewise.
@@ -2112,15 +2117,15 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	include/vaucanson/algebra/concept/tropical_semiring.hh,
 	include/vaucanson/automata/concept/automata_base.hh,
 	include/vaucanson/automata/concept/automata.hh,
-	include/vaucanson/automata/concept/automata.hxx, 
+	include/vaucanson/automata/concept/automata.hxx,
 	include/vaucanson/automata/concept/automata.hh,
 	include/vaucanson/automata/concept/automata_base.hxx,
 	include/vaucanson/automata/concept/automata_ops.hxx,
 	include/vaucanson/algebra/concrete/series/polynoms.hxx,
 	include/vaucanson/algebra/concrete/series/polynoms.hh,
-	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh: 
-	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx: 
-	include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh: 
+	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh:
+	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:
+	include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh:
 	include/vaucanson/algebra/concrete/series/series.hh: Place missing
 	namespace specifications. Rename `MetaSet' to `dynamic_traits',
 	move `virtual_types' out of namespace `traits'. Add missing
@@ -2130,7 +2135,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/concepts.hh,
 	include/vaucanson/algebra/concept/concepts.hxx: Remove.
-	
+
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/misc/support.hh: Document.
@@ -2187,7 +2192,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* src/tests/automata/algos/closure_test.hh: 
+	* src/tests/automata/algos/closure_test.hh:
 		Test backward/forward closure.
 
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -2221,16 +2226,16 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	Simplify. Cleanup. Document more.
 	* include/vaucanson/algebra/concept/alphabets_base.hxx:
 	Simplify. Cleanup.
-	
+
 	* include/vaucanson/misc/unique.hh: Fix comment.
 
 	* include/vaucanson/misc/utility.hh: Mention `random.hh'.
 
 	* include/misc/random.hh: Cleanup. Document. Simplify.
 	* include/misc/random.hxx: Update accordingly.
-	* src/tests/misc/random.cc: Add. 
+	* src/tests/misc/random.cc: Add.
 	* src/tests/misc/Makefile.am: Update accordingly.
-	
+
 2003-06-19  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* src/tests/fundamental/intrinsics.hh,
@@ -2303,7 +2308,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	default constructor which reads from $VERBOSE in the
 	environment. Rename some identifiers. Add macros TEST_GROUP,
 	TEST_ASSERT and TEST_XASSERT.
-	
+
 	* include/vaucanson/fundamental/predecls.hh: Mention `virtual_types'.
 
 	* include/vaucanson/fundamental/element_ops.hxx: Typo fixes.
@@ -2334,18 +2339,18 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	include/vaucanson/misc/numerical_constraints.hh,
 	include/vaucanson/misc/type_constraints.hh,
 	include/vaucanson/misc/static.hxx: Remove.
-	
+
 	* include/vaucanson/config/rel_ops_work_around_g++2.hh: Remove.
 	* include/vaucanson/fundamental/meta_set.hh: Remove.
-	
+
 	* src/tests/misc/Makefile.am, src/tests/misc/unique.cc,
 	src/tests/misc/static.cc, src/tests/misc/selectors.cc,
 	src/tests/misc/koenig.cc: Add.
 	* src/tests/check/assert_test.cc: Rename to...
 	* src/tests/misc/assert_test.cc: this.
-	
+
 	* include/vaucanson/config/math.hh: Add. Document.
-	
+
 	* include/vaucanson/fundamental/structure.hh: Document
 	more. Cleanup. Simplify.
 	* include/vaucanson/fundamental/structure.hxx: Cleanup. Simplify.
@@ -2353,12 +2358,12 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/fundamental/slots.hh: Eradicate
 	ValueSlots's. Use dynamic_traits instead of MetaSet.
 	* include/vaucanson/fundamental/slots.hxx: Update accordingly.
-	
+
 	* include/vaucanson/fundamental/predefs.hh: Rename to...
 	* include/vaucanson/fundamental/predecls.hh: this. Document
 	more. Cleanup. Import undefined_type from traits.hh.
 	* include/vaucanson/internal/traits.hh: Remove.
-	
+
 	* include/vaucanson/fundamental/op_traits.hh: Rename to...
 	* include/vaucanson/fundamental/element_op_traits.hh:
 	this. Document. Cleanup. Simplify.
@@ -2377,7 +2382,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/fundamental/element_ops.hh: Document more. Cleanup. Simplify.
 	* include/vaucanson/fundamental/element_ops.hxx: Cleanup. Simplify. More sanity checks.
-	
+
 	* include/vaucanson/fundamental/element_base.hh: Rename to...
 	* include/vaucanson/fundamental/meta_element_root.hh:
 	this. Document. Cleanup. Simplify.
@@ -2424,7 +2429,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/algebra/concept/freemonoid_base.hh: Typo.
 	* include/vaucanson/algebra/concept/series_base.hh: Typo.
 	* include/vaucanson/algebra/concrete/free_monoid/words.hxx,
-	  include/vaucanson/algebra/concrete/series/series.hxx	
+	  include/vaucanson/algebra/concrete/series/series.hxx
 		(hash): Remove because it is obsolete.
 
 	* src/tests/check/tests_stuff.hh (EQTEST): New.
@@ -2463,9 +2468,9 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/algebra/concept/series_base.hxx:
 		(is_letter_support): Fix supp() use.
 		(extract_support), (hadamard): Implement them.
-	* include/vaucanson/algebra/concrete/series/krat.hh: 
+	* include/vaucanson/algebra/concrete/series/krat.hh:
 		(mute_serie_impl): Specialize for rat::exp.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: 
+	* include/vaucanson/algebra/concrete/series/krat.hxx:
 		Enable 'get' for polynomial expressions.
 	* include/vaucanson/algebra/concrete/series/polynoms.hh:
 		(mute_serie_impl): Specialize for polynom.
@@ -2518,7 +2523,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/fundamental/slots.hh: Document.
 
-	* doc/doc.doxy.in: Minor tweaks. 
+	* doc/doc.doxy.in: Minor tweaks.
 
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
@@ -2571,13 +2576,13 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
 		(WordValue): New.
 	* include/vaucanson/misc/functors.h[h,xx]: Comment defect include.
-	* include/vaucanson/tools/usual.hh: 
+	* include/vaucanson/tools/usual.hh:
 		Adjust to new automaton type definition.
-		(new_automaton): New.		
+		(new_automaton): New.
 	* include/vaucanson/tools/usual.hxx(new_automaton): Implement.
 	* src/demos/vgrep/vgrep.cc: Adjust.
 
-	* include/vaucanson/automata/concrete/graph.hh: 
+	* include/vaucanson/automata/concrete/graph.hh:
 		(transducer_traits): Disable.
 
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -2589,9 +2594,9 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/automata/concrete/manylinks.hh,
-  	  include/vaucanson/automata/concrete/manylinks.hxx,	
-	  include/vaucanson/automata/concrete/manylinks_carriers.hh,	
-	  include/vaucanson/automata/concrete/manylinks_states.hh	
+  	  include/vaucanson/automata/concrete/manylinks.hxx,
+	  include/vaucanson/automata/concrete/manylinks_carriers.hh,
+	  include/vaucanson/automata/concrete/manylinks_states.hh
           include/vaucanson/automata/concrete/manylinks_edges.hh:
 		Remove.
 
@@ -2610,7 +2615,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 		(MetaSet): Use MetaSet<Series>.
 		(MetaElement<Automata, ..>): Provide accessors to series.
 
-	* include/vaucanson/automata/concept/automata.hxx: 
+	* include/vaucanson/automata/concept/automata.hxx:
 		Implement accessors.
 
 	* include/vaucanson/automata/concept/automata_base.hh:
@@ -2618,7 +2623,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 		New services in MetaElement<AutomataBase<Self>, ...>.
 		Do not use automaton_impl, ref and kinds anymore.
 		Disable history.
-	
+
 	* include/vaucanson/automata/concept/automata_base.hxx:
 		Add wrappers to external operators.
 		Add default implementations.
@@ -2634,20 +2639,20 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat.hh(series_traits):
 		Add support_t.
-	
+
 	* include/vaucanson/algebra/concrete/series/krat.hxx:
 		Implement op_support, op_is_finite_app.
 
-	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: 
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh:
 		Minor changes.
 
 	* include/vaucanson/algebra/concrete/series/polynoms.hh:
-		Add support_t, 
+		Add support_t,
 		Add output facilities.
 
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx:
 		Implement op_support and output facilities.
-	
+
 	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx,
 	  include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx:
 		New.
@@ -2664,7 +2669,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	  include/vaucanson/misc/random.hh:
 		Use our 'limits' wrapper.
 	* include/vaucanson/misc/limits.hh: Is now a wrapper.
-		
+
 2003-05-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* doc/doc.doxy: Remove this generated file.
@@ -2742,7 +2747,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:
 	More argument name omissions.
-	
+
 	* include/Makefile.am (nobase_include_HEADERS): Cleanup.
 
 	* configure.ac: Add more `Makefile's to AC_CONFIG_FILES.
@@ -2765,14 +2770,14 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* doc/Makefile.am, doc/tutorial/Makefile.am: Likewise. Sanitize.
 
 	* doc/doc.doxy.in: Sanitize.
-	
+
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/config/config.hh.in: Remove obsolete file.
 
 	* include/vaucanson/config/extrconf.sh,
 	include/vaucanson/config/pconf.sh, tools/scandefs.pl: Likewise.
-	
+
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/config/system.hh: Add new macro XUNUSED.
@@ -2796,7 +2801,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* src/Makefile.am (SUBDIRS): Re-order.
-	* src/demos/vgrep/Makefile.am: Sanitize. 
+	* src/demos/vgrep/Makefile.am: Sanitize.
 
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
@@ -2908,7 +2913,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
         * include/vaucanson/algebra/concrete/series/krat.hxx: Fix minor bug.
         * include/vaucanson/fundamental/element.hxx: Fix a bug in a constructor,
-        which called a wrong SetSlotAttribute constructor. 
+        which called a wrong SetSlotAttribute constructor.
         * include/vaucanson/fundamental/slots.hxx: Change a contructor in order
         to copy the pointed object instead of the pointer.
         * include/vaucanson/algorithms/brzozowski.hxx: Change algorithm to match
@@ -2960,7 +2965,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* mical/include/algorithms/fusion.hh: Added
 
 	* Simple Tests:
-	
+
 	* mical/src/k_ri.cc: Added
 	* mical/src/k_tssi.cc: Added
 	* mical/src/k_deterministic.cc: Added
@@ -2973,7 +2978,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* mical/src/training/vtrain.toy: Added
 
 	* Algebra:
-	
+
 	* mical/include/algebra/concrete/k_words.hxx: Added
 	* mical/include/algebra/concrete/k_words.hh: Added
 	* mical/include/algebra/concrete/complete_lattice.hxx: Added
@@ -2995,9 +3000,9 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* mical/include/algebra/concept/lattice_base.hh: Added
 	* mical/include/algebra/concept/complemented_lattice_base.hxx: Added
 	* mical/include/algebra/concept/complemented_lattice_base.hh: Added
-	
+
 	* Other:
-	
+
 	* mical/include/internal/k_window.hxx: Added
 	* mical/include/internal/k_window.hh: Added
 	* mical/include/misc/traits.hh: Added
@@ -3052,13 +3057,13 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	Add.
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Add a new
 	template specialiciazion to op_convert().
-	
+
 2003-03-31  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_cderivation.hxx
 	(match_nodeConstant),
 	include/vaucanson/algorithms/krat_exp_cderivation.hxx
-	(match_nodeConstant): Remove the link to vcsn::rat, so 
+	(match_nodeConstant): Remove the link to vcsn::rat, so
 	derivation/cderivation are implementation independant (so now pass the
 	sanity check).
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Add an
@@ -3113,7 +3118,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 2003-03-19  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/misc/contract.hh: Add.
-	* include/vaucanson/algorithms/complementary.hxx: Include 
+	* include/vaucanson/algorithms/complementary.hxx: Include
 	vaucanson/misc/contract.hh, so it compile.
 	* src/tests/automata/algos/compute_test.hh,
 	src/tests/automata/algos/elimination_test.hh
@@ -3142,7 +3147,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	src/tests/algebra/series/krat/krat_exp_derivation_test.hh,
 	src/tests/algebra/series/krat/krat_exp_constant_term_test.hh: Move
 	from parent directory in a newly created directory "krat".
-	* src/tests/algebra/series/misc/series_test.hh: Move from parent 
+	* src/tests/algebra/series/misc/series_test.hh: Move from parent
 	directory in a newly created directory "misc", and rename
 	"series-test.hh" to "series_test.hh" for compatibility with the test
 	generator.
@@ -3181,7 +3186,7 @@ x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 	* include/vaucanson/algorithms/krat_exp_cderivation.hxx
 	(match_nodeProduct): Fix a dummy bug, due to a misreading in the
 	c-derivation definition.
-	
+
 2003-03-07  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_cderivation.hxx:  Add.

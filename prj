@@ -1,18 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 457)
-(Parent-Version vaucanson 0 456)
+(Project-Version vaucanson 0 458)
+(Parent-Version vaucanson 0 457)
 (New-Version-Log "")
 
-(Version-Log "
-2003-11-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(Version-Log "2003-11-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* doc/doxy.in (INPUT): Remove doc/src.
+	* include/vaucanson/misc/unique.hxx: Add missing inline.
+	* include/vaucanson/tools/dot_dump.hxx: Fix an unused argument warning.
 
 ")
-(Checkin-Time "Sat, 15 Nov 2003 23:28:01 +0100")
-(Checkin-Login yann)
+(Checkin-Time "Tue, 25 Nov 2003 21:59:57 +0100")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -94,7 +94,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.90 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.91 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -157,7 +157,7 @@
   (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.9 600))
   (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.10 600))
   (include/vaucanson/misc/unique.hcc (vaucanson/p/39_unique.hcc 1.5 600))
-  (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.5 600))
+  (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.6 600))
   (include/vaucanson/misc/utility.hh (vaucanson/p/43_utility.hh 1.4 600))
   (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.8 600))
 
@@ -874,7 +874,7 @@
 ;; Files added by populate at Wed, 29 Oct 2003 14:38:02 +0100,
 ;; to version 0.448(w), by yann:
 
-  (include/vaucanson/tools/dot_dump.hxx (vaucanson/s/15_dot_dump.h 1.2 600))
+  (include/vaucanson/tools/dot_dump.hxx (vaucanson/s/15_dot_dump.h 1.3 600))
 
 ;; Files deleted by depopulate at Thu, 30 Oct 2003 19:15:26 +0100,
 ;; from version 0.450(w), by yann:

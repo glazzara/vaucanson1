@@ -36,29 +36,35 @@ namespace utility {
 
   namespace unique {
 
+    inline
     unique_map::ti_slot::ti_slot(const std::type_info& _id)
       : id(_id) {}
+
+    inline
     bool unique_map::ti_slot::
     operator==(const unique_map::ti_slot& other) const
-    { 
-      return id == other.id; 
+    {
+      return id == other.id;
     }
 
+    inline
     bool unique_map::ti_slot::
     operator<(const unique_map::ti_slot& other) const
-    { 
-      return id.before(other.id); 
+    {
+      return id.before(other.id);
     }
 
     template<typename T>
-    uniquelist<T>::~uniquelist() 
+    uniquelist<T>::~uniquelist()
     {}
 
-    unifiable::unifiable() : unique_(false) 
+    inline
+    unifiable::unifiable() : unique_(false)
     {}
 
-    unifiable::unifiable(const unifiable& ) : unique_(false) 
-    {} 
+    inline
+    unifiable::unifiable(const unifiable& ) : unique_(false)
+    {}
 
     template<typename T>
     const T& get(const T& v)
@@ -67,11 +73,11 @@ namespace utility {
 	return v;
 
       unique_map::map_t& m = unique_map::instance();
-      
+
       unique_map::map_t::iterator i = m.find(typeid(T));
       if (i == m.end())
 	{
-	  uniquelist<T> *l = 
+	  uniquelist<T> *l =
 	    static_cast<uniquelist<T>* >(m[typeid(T)] = new uniquelist<T>);
 	  l->push_front(v);
 	  static_cast<unifiable&>(l->front()).unique_ = true;
@@ -91,16 +97,17 @@ namespace utility {
 
     template<typename T>
     const T* get(const T* v)
-    { 
-      return & get(*v); 
+    {
+      return & get(*v);
     }
 
+    inline
     uniquelist_base::~uniquelist_base() {}
 
     template <class T>
-    typename UniqueMap<T>::map_t& 
+    typename UniqueMap<T>::map_t&
     UniqueMap<T>::instance()
-    { 
+    {
       static unique_map instance_;
       return instance_.map_;
     }
