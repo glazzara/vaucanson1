@@ -19,7 +19,7 @@ implementing only a pseudo behaviour.
 Yet, Vaucanson is still in a fundamental development phase and
 algorithms, data structures and global architecture are not totally
 stable and well tested. The src directory will be extended with
-demonstration program soon. For the moment, you can look at the
+demonstration programs soon. For the moment, you can look at the
 include/vaucanson/algorithms to be introduced to the basics of
 Vaucanson.
 
@@ -38,9 +38,9 @@ To install Vaucanson on your system, type the classical sequence :
 ----------------------------------------------------------------------------
 REQUIREMENTS
 
-Vaucanson was only tested with g++-3.0.4. The code is written in
-respect to the ISO standard to permit a higher portability in the
-future. Adjustment and configure protocol will be available soon.
+Vaucanson was only tested with g++-3.0.4, g++-3.1.0, g++-2.95.4. The
+code is written in respect to the ISO standard to permit a higher
+portability in the future.
 
 Moreover, high verbose mode of the testing suites uses the AT&T dot
 format to save automaton in a human readable file. Use Graphviz to
@@ -58,7 +58,7 @@ CONTACTS
   France
 
 * Vaucanson - ENST
-  Jacques Sakarovitch.
+  Jacques Sakarovitch
   46, rue Barrault
   75013 Paris
   France

@@ -22,7 +22,9 @@ for NAME in $ALL_TEST; do
   BNAME=`basename $NAME`
   FUN_NAME=`echo $BNAME | sed s/'.hh'/''/`
   FUN_SNAME=`echo $FUN_NAME | sed s/_test/''/`
-  echo $NAME
+  TEST_DIR_ECHAP=`echo $TEST_DIR | sed -e s/'\\/'/'\\\\\\/'/`
+  NAME_TEST_FILE=`echo $NAME | sed s/"$TEST_DIR_ECHAP"// | sed s/'\\/'// `
+  echo $NAME_TEST_FILE
   `cat > $DEST_DIR/$FUN_SNAME-test.cc << EOF
 /*  Vaucanson, a generic library for finite state machines.
 Copyright (C) 2001-2002 Sakarovitch, Poss, Rey and Regis-Gianas.
@@ -46,7 +48,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   cat $INCLUDES_FILE >> $DEST_DIR/$FUN_SNAME-test.cc;
   cat >> $DEST_DIR/$FUN_SNAME-test.cc << EOF
   #include <check/tests_stuff.hh>
-  #include <$NAME>
+  #include <$NAME_TEST_FILE>
 
   int main(int argc, char **argv)
   {

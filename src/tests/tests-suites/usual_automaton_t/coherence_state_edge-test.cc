@@ -16,8 +16,8 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 #include <vaucanson/tools/usual.hh>
-#include <check/tests_stuff.hh>
-#include </home/lrde/stud/yann/work/vaucanson/vaucanson/src/tests//automata/implementation_check/coherence_state_edge_test.hh>
+  #include <check/tests_stuff.hh>
+  #include <automata/implementation_check/coherence_state_edge_test.hh>
 
   int main(int argc, char **argv)
   {

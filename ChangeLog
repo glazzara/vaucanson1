@@ -1,3 +1,31 @@
+2002-07-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.96)
+	* include/Makefile.am : add new files to be distributed.
+	* src/tests/automata/algos/Makefile.am : add tests in distribution.
+	* src/tests/automata/implementation_check/Makefile.am : idem.
+	* src/tests/tests-suites/usual_automaton_t/minimization-test.cc : use good directory for tests.
+	* src/tests/tests-suites/usual_automaton_t/product-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/generalized-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/extract-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/elimination-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/reachable-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/glushkov-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/normalize-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/union-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/realtime-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/determinist-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/thompson-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/closure-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/complete-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/compute-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/add_state-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/coherence_state_edge-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/add_edge-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/init_final-test.cc : idem.
+	* src/tests/tests-suites/usual_automaton_t/global_consistance-test.cc : idem.
+	* src/tests/bin/automata-test-suite.sh : generate good directory for tests.
+	* README : now we are compatible with g++-3.1 and g++-2.95.4
+
 2002-07-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.95)
 	Changes to be g++-2.95.4 compliant :

@@ -2,6 +2,4 @@
 #
 # $Id$
 
-
-
 SUBDIRS=usual_automaton_t
