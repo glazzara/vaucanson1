@@ -60,8 +60,8 @@ namespace vcsn {
       return_type match_lhs = match(lhs);
       
       // FIXME: Following code only valid for series over boolean semirings.
-      if (match_lhs != Element<Series, T>())
-      	return match(lhs) * rhs;
+      if (match_lhs != zero_as<T>::of(exp_.set()))
+      	return match_lhs * rhs;
       else
 	{
 	  std::pair<weight_t, bool> ret = constant_term(series(lhs));
@@ -75,7 +75,7 @@ namespace vcsn {
       return_type match_lhs = match(lhs);
       
       // FIXME: Following code only valid for series over boolean semirings.
-      if (match_lhs != Element<Series, T>())
+      if (match_lhs != zero_as<T>::of(exp_.set()))
 	return match_lhs;
       else
 	return match(rhs);
@@ -85,7 +85,7 @@ namespace vcsn {
     MATCH_(Star, e)
     {
       // FIXME: Following code only valid for series over boolean semirings.
-      return match(e) * e.star();
+      return match(e) * e.clone().star();
     }
     END
 
@@ -104,21 +104,21 @@ namespace vcsn {
     MATCH_(Constant, m)
     {
       if (m[0] == a_)
-	return exp_.set().weights().identity(SELECT(weight_value_t));
+	return identity_as<T>::of(exp_.set());
       else
-	return exp_.set().weights().zero(SELECT(weight_value_t));
+	return zero_as<T>::of(exp_.set());
     }
     END
 
     MATCH(Zero)
     {
-      return exp_.set().weights().zero(SELECT(weight_value_t));
+      return zero_as<T>::of(exp_.set());
     }
     END
 
     MATCH(One)
     {
-      return exp_.set().weights().zero(SELECT(weight_value_t));
+      return zero_as<T>::of(exp_.set());
     }
     END
 

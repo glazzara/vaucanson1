@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001-2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -55,6 +55,22 @@ namespace vcsn {
 
       //! Copy constructor is protected since it is an abstract class.
       MonoidBase(const MonoidBase& other);
+    };
+
+    template <class T>
+    struct identity_as
+    {
+      template <class S>
+      static inline
+      Element<S, T> of(const S& s);
+    };
+
+    template <class T>
+    struct zero_as
+    {
+      template <class S>
+      static inline
+      Element<S, T> of(const S& s);
     };
 
     /*! @} @} */

@@ -1,19 +1,39 @@
+2003-03-13  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/monoid_base.hh (identity_as,
+	zero_as): Add definition.
+	* include/vaucanson/algebra/concept/monoid_base.hxx (identity_as,
+	zero_as): Add implementation.
+	* include/vaucanson/algorithms/krat_exp_derivation.hxx
+	(match_nodeStar): Fix a infinite loop bug, due to an evil side effect
+	in exp::star().
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx
+	(match_nodeStar): Fix a infinite loop bug, due to an evil side effect
+	in exp::star().
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx
+	(match_nodeProduct, match_nodeSum, match_nodeConstant, match_nodeOne,
+	match_nodeZero): Clean the code.
+
 2003-03-07  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/krat_exp_cderivation.hxx (match_nodeProduct):
-	  Fix a dummy bug, due to a misreading in the c-derivation definition.
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx
+	(match_nodeProduct): Fix a dummy bug, due to a misreading in the
+	c-derivation definition.
 	
 2003-03-07  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_cderivation.hxx:  Add.
 	* include/vaucanson/algorithms/krat_exp_cderivation.hh: Add.
-	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (op_stareable): Remove >= to put <=.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx
+	(op_stareable): Remove >= to put <=.
 	* ChangeLog: Add a few blank lines accordingly to the standard.
 
 2003-03-05  Thomas Claveirole <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (op_stareable, op_in_star): Fix a bug.
-	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (op_in_star): Fix a bug.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx
+	(op_stareable, op_in_star): Fix a bug.
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx
+	(op_in_star): Fix a bug.
 
 2003-03-05  Thomas Claveirole <clavei_t@lrde.epita.fr>
 

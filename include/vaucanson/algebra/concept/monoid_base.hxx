@@ -3,7 +3,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001-2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,25 @@ namespace vcsn {
     MonoidBase<Self>::MonoidBase(const MonoidBase& other) :
       SemigroupBase<Self>(other)
     {}
-    
+
+    template <class T>
+    template <class S>
+    inline
+    Element<S, T>
+    identity_as<T>::of(const S& s)
+    {
+      return s.identity(SELECT(T));
+    }
+
+    template <class T>
+    template <class S>
+    inline
+    Element<S, T>
+    zero_as<T>::of(const S& s)
+    {
+      return s.zero(SELECT(T));
+    }
+
   } // algebra
   
     /*---------------------------------.

@@ -82,7 +82,7 @@ namespace vcsn {
 	  undefined = true;
 	  return e;
 	}
-      return ret.first.star() * match(e) * e.star();
+      return ret.first.star() * match(e) * e.clone().star();
     }
     END
 
