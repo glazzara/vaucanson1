@@ -1,3 +1,16 @@
+2004-05-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/contextual_automaton_functions.hh,
+	* include/vaucanson/contextual_transducer_functions.hh: 
+	Rename to...
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_transducer_functions.thh: These.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh: Update accordingly.
+
 2004-05-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/boolean_automaton.hh,
@@ -64,8 +77,8 @@
 
 2004-05-12  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/concatenate.hxx: Use another method
-	to handle multiplicity.
+	* include/vaucanson/algorithms/concatenate.hxx: Fix problem with 
+	final multiplicity loss during concatenation.
 
 2004-05-11  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
