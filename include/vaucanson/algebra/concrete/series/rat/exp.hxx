@@ -328,10 +328,11 @@ namespace vcsn {
     {
       return ret_;
     }
-    
-    template <class Matcher, class M, class W>
+
+    template <class M, class W>
+    template <class Matcher>
     inline typename Matcher::return_type
-    ExpDispatch::d(const Matcher& matcher, 
+    DispatchFunction<rat::exp<M, W> >::d(const Matcher& matcher, 
 		   const rat::exp<M, W>& exp)
     {
       DispatchVisitor<Matcher, M, W> v(matcher);

@@ -18,12 +18,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGEBRA_CONCRETE_SERIES_EXP_HH
-# define ALGEBRA_CONCRETE_SERIES_EXP_HH
+#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_EXP_HH
+# define VCSN_ALGEBRA_CONCRETE_SERIES_EXP_HH
 
 # include <algorithm>
 # include <iostream>
-
+# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 # include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
@@ -164,9 +164,10 @@ namespace vcsn {
       typename Matcher::return_type	ret_;
     };    
     
-    struct ExpDispatch 
+    template <class M, class W>
+    struct DispatchFunction<rat::exp<M, W> >
     {
-      template <class Matcher, class M, class W>
+      template <class Matcher>
       static inline 
       typename Matcher::return_type
       d(const Matcher&        matcher, 
@@ -208,6 +209,6 @@ namespace std
 
 # include <vaucanson/algebra/concrete/series/rat/exp.hxx>
 
-#endif // ALGEBRA_CONCRETE_SERIES_EXP_HH
+#endif // VCSN_ALGEBRA_CONCRETE_SERIES_EXP_HH
 
 

@@ -33,7 +33,7 @@ namespace vcsn {
     T 
     RandomGenerator<T>::do_it()
     {
-      assert(!"No random generator for this type :"+(typeid(T)));
+      assert(!"No random generator for this type ");
     }
 
     char 
@@ -52,6 +52,12 @@ namespace vcsn {
 	return true;
       else
 	return false;
+    }
+
+    int
+    RandomGenerator<int>::do_it()
+    {
+      return rand();
     }
 
     template <class Iterator, class OutputIterator>

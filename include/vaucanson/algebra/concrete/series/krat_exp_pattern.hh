@@ -113,7 +113,7 @@ namespace vcsn {
       typedef U return_type;
 
       U
-      match(const T& ast) const;
+      match(const T& ast);
       
     protected:
       GenericMatcher();
@@ -151,24 +151,49 @@ struct N     : public UnaryOp<T>		\
 
 #define MATCH__(N, Lhs, Rhs)			\
 return_type					\
-match_node(const N& p____) const		\
+match_node(const N& p____) 		\
 {						\
   typename N::lhs_node_type Lhs = p____.lhs();	\
   typename N::rhs_node_type Rhs = p____.rhs();
   
 #define MATCH_(N, Val)				\
 return_type					\
-match_node(const N& p____) const		\
+match_node(const N& p____) 		\
 {						\
   typename N::value_type Val(p____.value());
 
 #define MATCH(N)					\
 return_type						\
-match_node(const N& p____) const			\
+match_node(const N& p____) 			\
 {						
 
   
 #define END }
+
+
+    template <class Self, class T, class U, class F>
+    struct KRatExpMatcher : public GenericMatcher<Self, T, U, F>
+    {
+      typedef U                          return_type;
+      typedef typename T::weight_value_t weight_value_t;
+      typedef typename T::monoid_value_t monoid_value_t;
+
+      DecBinaryOp(Product, T, T);
+      DecBinaryOp(Sum, T, T);
+      DecUnaryOp(Star, T);
+      DecBinaryOp(LeftWeight, weight_value_t, T);
+      DecBinaryOp(RightWeight, T, weight_value_t);
+      DecLeaf(Constant, monoid_value_t);
+      DecFinalLeaf(One);
+      DecFinalLeaf(Zero);
+      
+    protected:
+      KRatExpMatcher() {}
+    };
+
+    template <class T>
+      struct DispatchFunction;
+    
 
     } // algebra
 

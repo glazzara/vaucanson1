@@ -1,3 +1,19 @@
+2002-10-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.125)
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx: minor.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: 
+		rename ExpDispatch to DispatchFunction 
+		(global object function).
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh: minor.
+ 
+	* include/vaucanson/tools/usual.hh: minor.
+	* include/vaucanson/misc/random.hxx: add specialization for int.
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx:
+		de-constify krat pattern.
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: 
+		idem.
+
 2002-10-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.124)
 	* include/vaucanson/algebra/concrete/series/rat/exp.hxx:

@@ -68,7 +68,7 @@ namespace vcsn {
 	    SELECTOR(std::basic_string<typename A::letter_t>))
   {
     // FIXME : use global constants to define this !
-    unsigned length = ((unsigned) trunc(((float) rand() / (float) RAND_MAX) * 5));
+    unsigned length = ((unsigned)(((float) rand() / (float) RAND_MAX) * 5));
     std::basic_string<typename A::letter_t> r;
     for (unsigned i = 0; i < length; ++i)
       r = r + s.alphabet().choose();

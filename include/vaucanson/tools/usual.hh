@@ -134,7 +134,7 @@ namespace vcsn {
     }
 
 #define RAND___(Max)						\
-((unsigned) round(((float) rand() / (float) RAND_MAX) * Max));
+((unsigned) int(((float) rand() / (float) RAND_MAX) * Max));
 
   } // tools
 

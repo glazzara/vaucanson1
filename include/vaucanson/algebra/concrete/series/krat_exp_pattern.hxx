@@ -127,7 +127,7 @@ namespace vcsn {
     
     template <class Self, class T, class U, class F>
     U
-    GenericMatcher<Self, T, U, F>::match(const T& ast) const
+    GenericMatcher<Self, T, U, F>::match(const T& ast) 
     {
       return F::d(static_cast<const Self&>(*this), ast);
     }
