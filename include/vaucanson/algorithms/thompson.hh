@@ -33,8 +33,12 @@ namespace vcsn {
   template<typename A,      typename T, 
 	   typename Letter, typename Weight>
   void
-  thompson(Element<A, T>&, const rat::exp<Letter, Weight>&);
+  thompson_of(Element<A, T>&, const rat::exp<Letter, Weight>&);
   
+  template <class AutoType, class S, class T>
+  Element<Automata<S>, AutoType>
+  thompson_of(const Element<S, T>& exp)
+
   /*! @} */
 
 } // vcsn

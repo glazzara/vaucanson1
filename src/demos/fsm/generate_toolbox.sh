@@ -88,7 +88,7 @@ cat > $FILE <<EOF
      if (values.get("-glushkov"))
 	glushkov(automaton, krat_exp.value());
     else
-	thompson(automaton, krat_exp.value());
+	thompson_of(automaton, krat_exp.value());
      misc::fsm_dump(std::cout, automaton);
      return EXIT_SUCCESS;
 

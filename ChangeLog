@@ -1,3 +1,11 @@
+2003-06-20  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/thompson.hh,
+	  include/vaucanson/algorithms/thompson.hxx: Change function name and
+	  add another version of the thompson function.
+	* src/tests/automata/algos/thompson_test.hh,
+	  src/demos/fsm/generate_toolbox.sh: Change functionn call.
+
 2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/normalized.hh,

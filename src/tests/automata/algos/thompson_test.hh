@@ -64,7 +64,7 @@ bool thompson_test(tests::Tester& tg)
     exp = exp * a_e * exp;
     vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
     Auto	au = gen.empty();
-    thompson(au, exp.value());
+    thompson_of(au, exp.value());
     in_realtime(au);
     unsigned i = 0;
     for (; i < nb_word_test; ++i)
@@ -91,7 +91,7 @@ bool thompson_test(tests::Tester& tg)
 	krat_t exp = s.choose(SELECT(exp_t));
 	vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
 	Auto	au = gen.empty();
-	thompson(au, exp.value());
+	thompson_of(au, exp.value());
 	in_realtime(au);
 	if (t.verbose() == tests::high)
 	  {
