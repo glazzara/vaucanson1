@@ -3,7 +3,7 @@
 #include <vaucanson/algebra/concrete/series/series.hh>
 
 #define TEST_STATIC_ARGS				\
-	vcsn:Element<					\
+	vcsn::Element<					\
 	  vcsn::algebra::Series<			\
 	    vcsn::algebra::NumericalSemiring,		\
 	    vcsn::algebra::char_letter::Words>,		\

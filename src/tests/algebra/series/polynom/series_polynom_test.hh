@@ -48,7 +48,8 @@ bool series_polynom_test(tests::Tester& t)
   using namespace vcsn;
 
   typedef SeriesElt				series_elt_t;
-  typedef series_elt_t::set_t			series_t;
+  typedef typename series_elt_t::set_t		series_t;
+  typedef typename series_elt_t::value_t	series_value_t;
   typedef typename series_t::monoid_t		monoid_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
   typedef typename alphabet_t::letter_t		letter_t;
@@ -74,8 +75,8 @@ bool series_polynom_test(tests::Tester& t)
   monoid_elt_t  w2(monoid, b);
   series_elt_t     s1(series, w1);
   series_elt_t     s2(series, w2);
-  series_elt_t     s3(series, series.identity(SELECT(T)));
-  series_elt_t     s4(series, series.zero(SELECT(T)));
+  series_elt_t     s3(series, series.identity(SELECT(series_value_t)));
+  series_elt_t     s4(series, series.zero(SELECT(series_value_t)));
   semiring_elt_t   zero = semiring.zero(SELECT(semiring_value_t));
 
   TEST(t, "get of series.", s1.get(w1) != zero);

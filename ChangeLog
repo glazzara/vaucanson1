@@ -1,3 +1,11 @@
+2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/tests/algebra/series/polynom/series_polynom_test.hh,
+	* src/tests/tests-suites/algebra_series_polynom_double_string.defs,
+	* src/tests/tests-suites/algebra_alphabet_set_pair_char_int.defs:
+	Fix small errors.
+	* src/tests/tests-suites/algebra_series_misc.defs: Remove.
+
 2004-03-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/misc/char_traits.cc: New test.
