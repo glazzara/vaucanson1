@@ -1,3 +1,21 @@
+2004-05-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh: Add typedef for 
+	generalized automaton.
+	* include/vaucanson/contextual_headers.hh: Add header for generalized 
+	automaton.
+	* include/vaucanson/contextual_automaton_functions.hh,
+	* include/vaucanson/contextual_automaton_functions.hxx: Add 
+	new_gen_automaton() functions to create generalized automaton and 
+	factorize some code.
+	* include/vaucanson/contextual_transducer_functions.hh,
+	* include/vaucanson/contextual_transducer_functions.hxx: Improve
+	overloaded version of evaluation algorithm.
+	* include/vaucanson/boolean_transducer.hh: Update accordingly.
+
 2004-05-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/tools/gen_random.hxx: Small fix.

@@ -27,6 +27,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
 /*----------------.
@@ -34,8 +36,8 @@
 `----------------*/
 
 template <class InputIterator>
-automaton_t new_automaton(InputIterator begin,
-			  InputIterator end)
+automata_set_t new_automata_set(InputIterator begin,
+				InputIterator end)
 {
   alphabet_t		alpha;
   for (InputIterator e = begin; e != end; ++e)
@@ -43,14 +45,33 @@ automaton_t new_automaton(InputIterator begin,
   semiring_t		semiring;
   monoid_t		freemonoid (alpha);
   series_set_t		series (semiring, freemonoid);
-  automata_set_t	automata_set(series);
-  return automaton_t (automata_set);
+  return automata_set_t	(series);
+}
+
+template <class InputIterator>
+automaton_t new_automaton(InputIterator begin,
+			  InputIterator end)
+{
+  return automaton_t (new_automata_set(begin, end));
 }
 
 template <class T>
 automaton_t new_automaton(const T& alphabet)
 {
   return new_automaton(alphabet.begin(), alphabet.end());
+}
+
+template <class InputIterator>
+gen_automaton_t new_gen_automaton(InputIterator begin,
+				  InputIterator end)
+{
+  return gen_automaton_t (new_automata_set(begin, end));
+}
+
+template <class T>
+gen_automaton_t new_gen_automaton(const T& alphabet)
+{
+  return new_gen_automaton(alphabet.begin(), alphabet.end());
 }
 
 /*--------------.

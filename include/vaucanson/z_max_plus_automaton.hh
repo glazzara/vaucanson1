@@ -27,6 +27,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_Z_MAX_PLUS_AUTOMATON_HH
 # define VCSN_Z_MAX_PLUS_AUTOMATON_HH
@@ -60,6 +62,8 @@ namespace vcsn {
     typedef Element<Automata<series_set_t>, automaton_impl_t>
     automaton_t;
 
+    typedef generalized_traits<automaton_t>::automaton_t gen_automaton_t;
+    
     AUTOMATON_TYPES_EXACT(automaton_t);
 
     typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;

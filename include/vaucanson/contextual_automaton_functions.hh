@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
 template <class T>
@@ -35,6 +37,12 @@ template <class InputIterator>
 automaton_t new_automaton(InputIterator begin,
 			  InputIterator end);
 
+template <class T>
+gen_automaton_t new_gen_automaton(const T& alphabet);
+
+template <class InputIterator>
+gen_automaton_t new_gen_automaton(InputIterator begin,
+				  InputIterator end);
 
 template <class SeriesSet, class SeriesImpl>
 automaton_t

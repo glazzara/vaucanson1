@@ -57,6 +57,7 @@ automaton_t new_automaton(InputIterator input_alphabet_begin,
   return automaton_t(automata_set);
 }
 
+
 template <class T>
 automaton_t new_automaton(const T& input_alphabet,
 			  const T& output_alphabet)
@@ -67,36 +68,55 @@ automaton_t new_automaton(const T& input_alphabet,
 		       output_alphabet.end());
 }
 
-template <typename SeriesSet,
-	  typename TransImpl,
-	  typename Alpha,
-	  typename MonoidImpl>
-output_series_set_elt_t
-do_evaluation(const Element<vcsn::Transducer<SeriesSet>, TransImpl>& t,
-	      const Element<vcsn::algebra::FreeMonoid<Alpha>, MonoidImpl>&
-	      input)
-{
-  typedef typename boolean_automaton::automaton_t bool_automaton_t;
-  
-  output_series_set_elt_t e(t.structure().series().semiring());
-  parse(input.value(), e);
-  bool_automaton_t w = boolean_automaton::
-    new_automaton(t.structure().series().monoid().alphabet());
-  generalized_traits<bool_automaton_t>::automaton_t
-    result(w.structure());
-  standard_of(w, e.value());
-  evaluation(w, t, result);
-  return verbalize(aut_to_exp(generalized(result)));
-}
-
 
 template <typename TransStruct,
 	  typename TransImpl,
 	  typename MonoidStruct,
 	  typename MonoidImpl>
 output_series_set_elt_t
-evaluation(const Element<TransStruct, TransImpl>& t,
-	   const Element<MonoidStruct, MonoidImpl>& input_word)
+do_evaluation(const vcsn::TransducerBase<TransStruct>&,
+	      const TransImpl&,
+	      const vcsn::algebra::FreeMonoidBase<MonoidStruct>&,
+	      const MonoidImpl& input,
+	      const Element<TransStruct, TransImpl>& t,
+	      const Element<MonoidStruct, MonoidImpl>&)
 {
-  return do_evaluation(t, input_word);
+  return verbalize(eval(t, input));
+}
+
+
+template <typename TransStruct,
+	  typename TransImpl,
+	  typename SeriesStruct,
+	  typename SeriesImpl,
+	  typename S,
+	  typename T>
+output_series_set_elt_t
+do_evaluation(const vcsn::TransducerBase<TransStruct>&,
+	      const TransImpl&,
+	      const SeriesStruct&,
+	      const vcsn::rat::exp<S, T>& input,
+	      const Element<TransStruct, TransImpl>& t,
+	      const Element<SeriesStruct, SeriesImpl>&)
+{
+  boolean_automaton::automaton_t w = boolean_automaton::
+    new_automaton(t.structure().series().monoid().alphabet());
+  boolean_automaton::gen_automaton_t result (w.structure());
+  standard_of(w, input);
+  evaluation(w, t, result);
+  return verbalize(aut_to_exp(result));
+}
+
+
+template <typename TransStruct,
+	  typename TransImpl,
+	  typename ArgStruct,
+	  typename ArgImpl>
+output_series_set_elt_t
+evaluation(const Element<TransStruct, TransImpl>& t,
+	   const Element<ArgStruct, ArgImpl>& input)
+{
+  return do_evaluation(t.structure(), t.value(),
+		       input.structure(), input.value(),
+		       t, input);
 }

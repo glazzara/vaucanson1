@@ -42,11 +42,12 @@ automaton_t new_automaton(InputIterator input_alphabet_begin,
 
 template <typename TransStruct,
 	  typename TransImpl,
-	  typename MonoidStruct,
-	  typename MonoidImpl>
+	  typename ArgStruct,
+	  typename ArgImpl>
 output_series_set_elt_t
 evaluation(const Element<TransStruct, TransImpl>& t,
-	   const Element<MonoidStruct, MonoidImpl>& input_word);
+	   const Element<ArgStruct, ArgImpl>& input);
+
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/contextual_transducer_functions.hxx>
