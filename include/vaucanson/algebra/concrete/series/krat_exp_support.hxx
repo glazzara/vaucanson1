@@ -50,8 +50,8 @@ namespace vcsn {
     typedef Element<Series, T>				series_elt_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
     typedef typename monoid_elt_t::value_t		monoid_value_t;
-    typedef typename series_elt_t::semiring_elt_t			semiring_elt_t;
-    typedef typename semiring_elt_t::value_t			semiring_elt_value_t;
+    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
+    typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
     typedef std::list<monoid_value_t>			support_t;
     typedef std::list<std::pair<semiring_elt_value_t, monoid_value_t> > 
 							ext_support_t;
@@ -65,6 +65,7 @@ namespace vcsn {
     {
       match(lhs);
       ext_support_t lhs_s = supp_;
+      supp_.clear();
       match(rhs);
       ext_support_t ret;
       for_each_const_(ext_support_t, c, lhs_s)
@@ -101,22 +102,23 @@ namespace vcsn {
 
     MATCH__(LeftWeight, w, node)
     {
-      // FIXME: this is bogus.
-      // The current version says (a + k.b) = k.a + k.b
-      // whereas it should say    (a + k.b) = a + k.b
-      // (it does not save the current support before recurring)
+      ext_support_t old_supp_ = supp_;
+      supp_.clear();
       match(node);
       for_each_(ext_support_t, c, supp_)
 	c->first = op_mul(series_.semiring(), w, c->first);
+      supp_.insert(supp_.begin(), old_supp_.begin(), old_supp_.end());
     }
     END
 
     MATCH__(RightWeight, node, w)
     {
-      // FIXME: this is bogus. See before.
+      ext_support_t old_supp_ = supp_;
+      supp_.clear();      
       match(node);
       for_each_(ext_support_t, c, supp_)
 	c->first = op_mul(series_.semiring(), c->first, w);
+      supp_.insert(supp_.begin(), old_supp_.begin(), old_supp_.end());
     }
     END
 
@@ -147,13 +149,28 @@ namespace vcsn {
     support_t get() const
     {
       support_t ret;
-      for_each_const_(ext_support_t, c, supp_)
+      ext_support_t s = ext_get();
+      for_each_const_(ext_support_t, c, s)
 	ret.push_back(c->second);
       return ret;
     }
       
-    const ext_support_t& ext_get() const
+    ext_support_t& ext_get() 
     {
+      // Now join same words.
+      typedef std::map<monoid_value_t, semiring_elt_value_t> tmap_t;
+      tmap_t v;
+      typename tmap_t::iterator f;
+      for_each_const_(ext_support_t, c, supp_)
+	{
+	  if ((f = v.find(c->second)) == v.end())
+	    v[c->second] = c->first;
+	  else
+	    v[c->second] = op_add(series_.semiring(), v[c->second], c->first);
+	}
+      supp_.clear();
+      for_each_const_(tmap_t, m, v)
+	supp_.push_back(std::make_pair(m->second, m->first));
       return supp_;
     }
 

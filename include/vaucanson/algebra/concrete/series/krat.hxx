@@ -85,7 +85,6 @@ namespace vcsn {
   typename algebra::series_traits<rat::exp<Tm, Tw> >::support_t
   op_support(const algebra::Series<W, M>& s, const rat::exp<Tm, Tw>& m)
   {
-    // FIXME: this is bogus since SupportMatcher does not work.
     vcsn::SupportMatcher<algebra::Series<W, M>, rat::exp<Tm, Tw>,
       algebra::DispatchFunction<rat::exp<Tm, Tw> > > matcher(s);
     matcher.match(m);

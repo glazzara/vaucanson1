@@ -98,18 +98,20 @@ namespace tests {
    }						\
 }
 
-#define EQTEST(Tester, Label, Code, V)		\
-{						\
-  bool result = ((Code) == (V));		\
-  if (result)					\
-    Tester.ok(Label);				\
-  else						\
-   {						\
-     std::cout << "(" << #Code << " != " << #V  \
-               << ")"				\
-               << std::endl;			\
-     Tester.ko(Label);				\
-   }						\
+#define EQTEST(Tester, Label, Code, V)			\
+{							\
+  bool result = ((Code) == (V));			\
+  if (Tester.verbose() == tests::high)			\
+    std::cout << Code << " =? " << V << std::endl;	\
+  if (result)						\
+    Tester.ok(Label);					\
+  else							\
+   {							\
+     std::cout << "(" << Code << " != " << V		\
+               << ")"					\
+               << std::endl;				\
+     Tester.ko(Label);					\
+   }							\
 }
 
 #define SUCCESS_RATE(OutStr, success, over)	\

@@ -1,4 +1,12 @@
-<<<<<<< 0.456(w)/ChangeLog Wed, 26 Nov 2003 14:47:59 +0100 yann (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.89 600)
+2003-11-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+      * src/tests/check/tester.hh (EQTEST): 
+	   Display more information when verbose is high.
+      * include/vaucanson/algebra/concrete/series/krat.hxx: Remove FIXME.
+      * include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Fix. 
+      * include/vaucanson/algebra/concrete/series/krat_exp_verbalization.h{h,xx}: New.
+      * src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh: New.
+
 2003-11-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
           * include/vaucanson/fundamental: Move to ...
@@ -110,8 +118,6 @@
 	  include/vaucanson/vaucanson_r_automaton.hh: 
 	    Update reference to design_pattern.
 
-
-=======
 2003-11-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/unique.hxx: Add missing inline.
@@ -121,7 +127,6 @@
 
 	* doc/doxy.in (INPUT): Remove doc/src.
 
->>>>>>> 0.458/ChangeLog Tue, 25 Nov 2003 21:59:57 +0100 clavei_t (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.91 600)
 2003-11-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_print.h{hxx}: New.
