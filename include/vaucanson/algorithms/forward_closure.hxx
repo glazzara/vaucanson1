@@ -63,8 +63,8 @@ namespace vcsn {
     for (i = 0; i < size; i++){
       m_weight[i].resize(size);
       m_weight_tmp[i].resize(size);
-      m_series[i].resize(size);
-      m_series_ret[i].resize(size);
+      m_series[i].resize(size, series_elt_t(a_set.series()));
+      m_series_ret[i].resize(size, series_elt_t(a_set.series()));
     }
     
     // Initialize the matrix m_weight, m_series, m_winitial and

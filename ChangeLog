@@ -1,5 +1,11 @@
 2003-06-07  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/misc/contract.hh: Correct message in
+	  marco postcondition.
+	* include/vaucanson/algorithms/forward_closure.hxx: Initialize matrix.
+
+2003-06-07  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/misc/unique.hh: Include needed file.
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Change function
 	  calls.
