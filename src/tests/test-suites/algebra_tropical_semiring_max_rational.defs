@@ -1,0 +1,5 @@
+# include <vaucanson/algebra/implementation/semiring/tropical_semiring.hh>
+# include <vaucanson/algebra/implementation/semiring/rational_number.hh>
+
+#define TEST_STATIC_ARGS \
+	vcsn::algebra::TropicalSemiring<vcsn::algebra::TropicalMax>, vcsn::algebra::RationalNumber

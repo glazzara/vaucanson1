@@ -1,5 +1,22 @@
 2004-04-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/test-suites/algebra_tropical_semiring_min_int.defs,
+	* src/tests/test-suites/algebra_tropical_semiring_min_float.defs,
+	* src/tests/test-suites/algebra_tropical_semiring_min_double.defs,
+	* src/tests/test-suites/algebra_tropical_semiring_min_bool.defs,
+	* src/tests/test-suites/algebra_tropical_semiring_min_rational.defs,
+	* src/tests/test-suites/algebra_tropical_semiring_max_float.defs,
+	* src/tests/test-suites/algebra_tropical_semiring_max_double.defs,
+	* src/tests/test-suites/algebra_tropical_semiring_max_bool.defs,
+	* src/tests/test-suites/algebra_tropical_semiring_max_rational.defs:
+	New files. Instanciate tests on various tropical semirings.
+	* src/tests/test-suites/algebra_tropical_semiring_max.defs: 
+	Rename to ...
+	* src/tests/test-suites/algebra_tropical_semiring_max_int.defs: This.
+	* src/tests/test-suites/generate-all.sh: Update accordingly.
+	
+2004-04-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
 	Provide generic operators on rational.
 

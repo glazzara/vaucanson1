@@ -26,17 +26,24 @@ done;
 #    | Semiring |
 #    `---------*/
 
+for semiring_type in numerical_semiring tropical_semiring_max tropical_semiring_min; do
 ../bin/generate-test-suite.sh \
-   algebra_tropical_semiring_max \
-   algebra_tropical_semiring_max.defs \
+   algebra_${semiring_type}_bool \
+   algebra_${semiring_type}_bool.defs \
    ../algebra/semiring
-
-../bin/generate-test-suite.sh \
-   algebra_numerical_semiring_bool \
-   algebra_numerical_semiring_bool.defs \
-   ../algebra/semiring
+done;
 
 for semiring_elt_value_t in int double float rational; do
+../bin/generate-test-suite.sh \
+   algebra_tropical_semiring_max_${semiring_elt_value_t} \
+   algebra_tropical_semiring_max_${semiring_elt_value_t}.defs \
+   ../algebra/semiring
+
+../bin/generate-test-suite.sh \
+   algebra_tropical_semiring_min_${semiring_elt_value_t} \
+   algebra_tropical_semiring_min_${semiring_elt_value_t}.defs \
+   ../algebra/semiring
+
 ../bin/generate-test-suite.sh \
    algebra_numerical_semiring_${semiring_elt_value_t} \
    algebra_numerical_semiring_${semiring_elt_value_t}.defs \
