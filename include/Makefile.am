@@ -228,6 +228,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/misc/unique.hcc				     \
 	vaucanson/misc/unique.hxx				     \
 	vaucanson/misc/utility.hh				     \
+	vaucanson/misc/window.hh				     \
+	vaucanson/misc/window.hxx				     \
 	vaucanson/tools/automaton_tools.hh			     \
 	vaucanson/tools/gen_book.hh				     \
 	vaucanson/tools/gen_book.hxx				     \
