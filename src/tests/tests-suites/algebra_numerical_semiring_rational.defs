@@ -1,4 +1,4 @@
-# include <vaucanson/algebra/concrete/semiring/rational.hh>
+# include <vaucanson/algebra/concrete/semiring/rational_number.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 
 #define TEST_STATIC_ARGS \

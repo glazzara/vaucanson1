@@ -58,6 +58,11 @@ namespace vcsn
       set_result();
     }
 
+    inline
+    RationalNumber::RationalNumber():num_ (0), denom_ (1)
+    {
+    }
+
     // Copy constructor.
     inline
     RationalNumber::RationalNumber(const RationalNumber& nb) :
@@ -173,6 +178,42 @@ namespace vcsn
       return set_result(num_ * nb.denom(), denom_ * nb.num());
     }
 
+    bool	RationalNumber::operator<(const RationalNumber& nb) const
+    {
+      const int m = lcm(denom_, nb.denom());
+      return num_ * m / denom_ < nb.num() * m / nb.denom();
+    }
+
+    bool	RationalNumber::operator>(const RationalNumber& nb) const
+    {
+      const int m = lcm(denom_, nb.denom());
+      return num_ * m / denom_ > nb.num() * m / nb.denom();
+    }
+
+    bool	RationalNumber::operator<=(const RationalNumber& nb) const
+    {
+      const int m = lcm(denom_, nb.denom());
+      return num_ * m / denom_ <= nb.num() * m / nb.denom();
+    }
+
+    bool	RationalNumber::operator>=(const RationalNumber& nb) const
+    {
+      const int m = lcm(denom_, nb.denom());
+      return num_ * m / denom_ >= nb.num() * m / nb.denom();
+    }
+
+    bool	RationalNumber::operator==(const RationalNumber& nb) const
+    {
+      const int m = lcm(denom_, nb.denom());
+      return num_ * m / denom_ == nb.num() * m / nb.denom();
+    }
+
+    bool	RationalNumber::operator!=(const RationalNumber& nb) const
+    {
+      const int m = lcm(denom_, nb.denom());
+      return num_ * m / denom_ != nb.num() * m / nb.denom();
+    }
+
     // Goodies.
 
     inline
@@ -195,19 +236,21 @@ namespace vcsn
     }
 
     inline
-    int	gcd(const int& a, const unsigned int& b)
+    int	gcd(int a, unsigned int b)
     {
       int n = b;
 
-      if (!n || (n == a))
-	return a;
-      if (a < n)
-	return gcd(a, n-a);
-      return gcd(b, a-n);
+      while (n != 0)
+	{
+	  int t = a % n;
+	  a = n;
+	  n = t;
+	}
+      return a;
     }
 
     inline
-    int	lcm(const int& a, const unsigned int& b)
+    int	lcm(int a, unsigned int b)
     {
       int d;
       if (!a || !b || !(d = gcd(a, b)))

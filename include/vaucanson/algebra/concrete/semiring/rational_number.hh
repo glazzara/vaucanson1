@@ -73,6 +73,7 @@ namespace vcsn
       /// Standard constructors.
       /** @{ */
       RationalNumber(int num, unsigned int denom);
+      RationalNumber();
       RationalNumber(const RationalNumber& nb);
       template <typename T>
       RationalNumber(const T num);
@@ -96,6 +97,12 @@ namespace vcsn
       RationalNumber&	operator-=(const RationalNumber& nb);
       RationalNumber&	operator*=(const RationalNumber& nb);
       RationalNumber&	operator/=(const RationalNumber& nb);
+      bool	operator<(const RationalNumber& nb) const;
+      bool	operator>(const RationalNumber& nb) const;
+      bool	operator<=(const RationalNumber& nb) const;
+      bool	operator>=(const RationalNumber& nb) const;
+      bool	operator==(const RationalNumber& nb) const;
+      bool	operator!=(const RationalNumber& nb) const;
       /** @} */
 
       /**
@@ -129,8 +136,8 @@ namespace vcsn
     };
 
     std::ostream& operator<<(std::ostream& ostr, const RationalNumber& nb);
-    int		gcd(const int& a, const unsigned int& b);
-    int		lcm(const int& a, const unsigned int& b);
+    int		gcd(int a, unsigned int b);
+    int		lcm(int a, unsigned int b);
     // FIXME: Other goodies for standard library.
     // FIXME: We might prefer to define gcd and lcm somewhere else.
     /** @} @} */

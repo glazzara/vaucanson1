@@ -268,6 +268,20 @@ namespace vcsn {
   | specialization for rational numbers |
    `------------------------------------*/
 
+  inline algebra::RationalNumber
+  identity_value(SELECTOR(algebra::NumericalSemiring),
+		 SELECTOR(algebra::RationalNumber))
+  {
+    return algebra::RationalNumber(1);
+  }
+
+  inline algebra::RationalNumber
+  zero_value(SELECTOR(algebra::NumericalSemiring),
+	     SELECTOR(algebra::RationalNumber))
+  {
+    return algebra::RationalNumber(0);
+  }
+
   inline bool op_starable(const algebra::NumericalSemiring&,
 			  const algebra::RationalNumber& r)
   {

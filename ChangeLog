@@ -1,3 +1,16 @@
+2004-03-07  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Add identity and zero for rational numbers.
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx:
+	Add comparison operators and new constructor.
+	* src/tests/tests-suites/algebra_numerical_semiring_rational.defs:
+	Change wrong filename included.
+	* include/vaucanson/vaucanson_z_max_plus.hxx: Change wrong filename
+	in header.
+
 2004-03-07  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/main/Makefile.am: Add new file.
@@ -10,7 +23,7 @@
 
 2004-03-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh, 
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh,
 	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:
 	Remove superfluous inline.
 

@@ -133,6 +133,15 @@ namespace vcsn {
   /*-------------------------------------.
   | specializations for rational numbers |
   `-------------------------------------*/
+
+  inline algebra::RationalNumber
+  identity_value(SELECTOR(algebra::NumericalSemiring),
+		 SELECTOR(algebra::RationalNumber));
+
+  inline algebra::RationalNumber
+  zero_value(SELECTOR(algebra::NumericalSemiring),
+	     SELECTOR(algebra::RationalNumber));
+
   template<typename T>
   bool op_starable(const algebra::NumericalSemiring& s, T v);
 
