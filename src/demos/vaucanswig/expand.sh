@@ -262,7 +262,7 @@ EOF
 dump_src() {
     printf "EXTRA_DIST ="
     ilist=0
-    for mod in $MODULES; do
+    for mod in $MODULES $ALGS; do
       if [ -r "$VAUCANSWIG/src/vaucanswig_${mod}.i" ]; then
          if [ `expr $ilist % 4` = 0 ]; then
 	    echo " \\"
