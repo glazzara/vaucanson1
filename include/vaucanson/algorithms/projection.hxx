@@ -33,6 +33,7 @@
 
 #include <vaucanson/algorithms/projection.hh>
 //#include <vaucanson/algorithms/krat_exp_print.hh>
+#include <map>
 
 namespace vcsn {
 
@@ -46,7 +47,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Trans_t);
 
-    map<hstate_t, hstate_t> m;
+    std::map<hstate_t, hstate_t> m;
     
     for_each_state(p, t)
       m[*p] = ret.add_state();

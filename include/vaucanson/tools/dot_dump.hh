@@ -30,6 +30,8 @@
 #ifndef VCSN_TOOLS_DOT_DUMP_HH
 # define VCSN_TOOLS_DOT_DUMP_HH
 
+# include <iostream>
+
 namespace vcsn
 {
   namespace tools

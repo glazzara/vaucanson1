@@ -33,6 +33,8 @@
 # include <string>
 # include <vaucanson/tools/io.hh>
 # include <vaucanson/tools/dot_format.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/transducer_base.hh>
 
 namespace vcsn {
 

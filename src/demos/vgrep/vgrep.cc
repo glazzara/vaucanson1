@@ -45,7 +45,6 @@
 #include <vector>
 #include <ctype.h>
 #include <string>
-#include <getopt.h>
 #include <unistd.h>
 #include <cstdlib>
 

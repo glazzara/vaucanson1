@@ -32,7 +32,8 @@
 
 # include <vaucanson/tools/dot_format.hh>
 # include <vaucanson/automata/concept/handlers.hh>
-#include <map>
+# include <map>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn
 {
