@@ -332,11 +332,11 @@ namespace vcsn {
 
   template <typename A, typename input_t, typename output_t>
   void
-  do_quotient(const AutomataBase<A>&	a_set,
-	      const algebra::NumericalSemiring&,
-	      SELECTOR(bool),
-	      output_t&			output,
-	      const input_t&		input)
+  do_quotient(const AutomataBase<A>&		,
+	      const algebra::NumericalSemiring&	,
+	      SELECTOR(bool)			,
+	      output_t&				output,
+	      const input_t&			input)
   {
     AUTOMATON_TYPES(input_t);
     typedef std::set<hstate_t>			     	      delta_ret_t;
