@@ -1,11 +1,12 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 137)
-(Parent-Version vaucanson 0 136)
-(Version-Log "* configure: Remove from the repo.")
+(Project-Version vaucanson 0 138)
+(Parent-Version vaucanson 0 137)
+(Version-Log "* config.guess, config.sub, depcomp, install-sh
+* missing, mkinstalldirs: Remove from repo. ")
 (New-Version-Log "")
-(Checkin-Time "Thu, 21 Nov 2002 14:23:01 +0100")
+(Checkin-Time "Thu, 21 Nov 2002 14:56:34 +0100")
 (Checkin-Login akim)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -81,20 +82,17 @@
         "\\.png$"
         "\\.pdf$"
         "\\.eps$"
-	"doc/generated"))
+	"doc/generated"
+  "^config.guess\\|config.sub\\|depcomp\\|install-sh\\|missing\\|mkinstalldirs*$"
+))
 
 
 
 (Project-Keywords)
 (Files
   (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.79 600))
-  (config.guess (vaucanson/b/51_config.gue 1.1 700))
-  (config.sub (vaucanson/b/49_config.sub 1.1 700))
   (configure.ac (vaucanson/47_configure. 1.6.1.9 600))
-  (depcomp (vaucanson/41_depcomp 1.2 700))
-  ; (diffs.patch ())
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
-  ; (doc/doc.doxy ())
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.1 600))
   (doc/src/main.dox (vaucanson/38_main.dox 1.2 600))
@@ -102,8 +100,6 @@
   (HEADER (vaucanson/f/35_HEADER 1.3 600))
   (include () :directory)
   (include/Makefile.am (vaucanson/11_Makefile.a 1.14 600))
-  ; (include/Makefile.in ())
-  ; (include/vaucanson/algebra/concept/algebra_base.hh ())
   (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.12 600))
   (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.12 600))
   (include/vaucanson/algebra/concept/concepts.hh (vaucanson/31_concepts.h 1.4 600))
@@ -149,7 +145,6 @@
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.3 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.12 600))
   (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.11 600))
-  ; (include/vaucanson/algebra/concrete/series/nodes.hh ())
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.10 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.11 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh (vaucanson/e/1_depth_visi 1.5 600))
@@ -302,12 +297,8 @@
   (include/vaucanson/tools/gen_random.hh (vaucanson/e/4_gen_random 1.11 600))
   (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.15 600))
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.21 600))
-  (install-sh (vaucanson/46_install-sh 1.2 700))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.5 600))
-  ; (Makefile.in ())
-  (missing (vaucanson/43_missing 1.2 700))
-  (mkinstalldirs (vaucanson/44_mkinstalld 1.2 700))
   (README (vaucanson/f/48_README 1.6 600))
   (src/demos/fsm/arg.cc (vaucanson/g/39_arg.cc 1.3 600))
   (src/demos/fsm/arg.hh (vaucanson/g/40_arg.hh 1.3 600))
@@ -337,13 +328,9 @@
   (src/tests/algebra/alphabets/Makefile.am (vaucanson/b/35_Makefile.a 1.4 600))
   ; (src/tests/algebra/alphabets/Makefile.in ())
   (src/tests/algebra/free_monoid/free_monoid-test.cc (vaucanson/c/8_free_monoi 1.7 600))
-  ; (src/tests/algebra/free_monoid/free-monoid-test () :no-keywords)
   (src/tests/algebra/free_monoid/Makefile.am (vaucanson/c/7_Makefile.a 1.2 600))
-  ; (src/tests/algebra/free_monoid/Makefile.in ())
   (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.6 600))
-  ; (src/tests/algebra/Makefile.in ())
   (src/tests/algebra/semiring/Makefile.am (vaucanson/b/26_Makefile.a 1.3 600))
-  ; (src/tests/algebra/semiring/Makefile.in ())
   (src/tests/algebra/semiring/semiring-numerical-test.cc (vaucanson/b/27_semiring-n 1.6 600))
   (src/tests/algebra/semiring/semiring-test.hh (vaucanson/b/29_semiring-t 1.6 600))
   (src/tests/algebra/semiring/semiring-tropical-test.cc (vaucanson/b/28_semiring-t 1.4 600))
@@ -460,86 +447,6 @@
   (src/tests/tests-suites/usual_automaton_t/union-test.cc (vaucanson/f/27_union-test 1.7 600))
   (THANKS (vaucanson/f/36_THANKS 1.4 600))
   (tools/scandefs.pl (vaucanson/g/5_scandefs.p 1.2 700))
-;; to version 0.100(w), by max:
-;; to version 0.101(w), by yann:
-;; to version 0.102(w), by yann:
-;; to version 0.104(w), by yann:
-;; to version 0.109(w), by yann:
-;; to version 0.10(w), by max:
-;; to version 0.111(w), by yann:
-;; to version 0.115(w), by yann:
-;; to version 0.117(w), by yann:
-;; to version 0.119(w), by yann:
-;; to version 0.120(w), by yann:
-;; to version 0.121(w), by yann:
-;; to version 0.122(w), by yann:
-;; to version 0.127(w), by yann:
-;; to version 0.129(w), by yann:
-;; to version 0.130(w), by yann:
-;; to version 0.131(w), by yann:
-;; to version 0.133(w), by yann:
-;; to version 0.13(w), by max:
-;; to version 0.14(w), by yann:
-;; to version 0.15(w), by yann:
-;; to version 0.17(w), by yann:
-;; to version 0.19(w), by yann:
-;; to version 0.20(w), by yann:
-;; to version 0.21(w), by yann:
-;; to version 0.22(w), by yann:
-;; to version 0.24(w), by yann:
-;; to version 0.25(w), by yann:
-;; to version 0.27(w), by yann:
-;; to version 0.2(w), by yann:
-;; to version 0.30(w), by yann:
-;; to version 0.31(w), by yann:
-;; to version 0.33(w), by max:
-;; to version 0.35(w), by max:
-;; to version 0.3(w), by yann:
-;; to version 0.40(w), by max:
-;; to version 0.43(w), by yann:
-;; to version 0.45(w), by max:
-;; to version 0.46(w), by max:
-;; to version 0.47(w), by max:
-;; to version 0.48(w), by max:
-;; to version 0.49(w), by max:
-;; to version 0.4(w), by max:
-;; to version 0.50(w), by max:
-;; to version 0.51(w), by max:
-;; to version 0.53(w), by max:
-;; to version 0.54(w), by max:
-;; to version 0.55(w), by max:
-;; to version 0.58(w), by max:
-;; to version 0.59(w), by max:
-;; to version 0.61(w), by yann:
-;; to version 0.65(w), by yann:
-;; to version 0.66(w), by yann:
-;; to version 0.68(w), by max:
-;; to version 0.71(w), by yann:
-;; to version 0.73(w), by max:
-;; to version 0.74(w), by yann:
-;; to version 0.75(w), by yann:
-;; to version 0.76(w), by yann:
-;; to version 0.77(w), by yann:
-;; to version 0.78(w), by yann:
-;; to version 0.79(w), by yann:
-;; to version 0.7(w), by yann:
-;; to version 0.80(w), by yann:
-;; to version 0.87(w), by max:
-;; to version 0.88(w), by max:
-;; to version 0.89(w), by yann:
-;; to version 0.90(w), by yann:
-;; to version 0.91(w), by yann:
-;; to version 0.92(w), by yann:
-;; to version 0.93(w), by yann:
-;; to version 0.94(w), by yann:
-;; to version 0.95(w), by yann:
-;; to version 0.97(w), by yann:
-;; to version 0.99(w), by yann:
-;; to version 0.9(w), by yann:
-
-;; Files added by populate at Thu, 21 Nov 2002 14:22:16 +0100,
-;; to version 0.136(w), by akim:
-
   (prj (vaucanson.prj) :symlink)
 )
 (Merge-Parents)
