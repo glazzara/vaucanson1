@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001-2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001-2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -18,9 +18,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+#ifndef VCSN_ALGORITHMS_COMPLEMENTARY_HXX
+# define VCSN_ALGORITHMS_COMPLEMENTARY_HXX 
 
+# include <vaucanson/misc/contract.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-
+# include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/tools/usual.hh>
 
 namespace vcsn {
@@ -32,10 +35,11 @@ namespace vcsn {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
-    for (state_iterator i = e.states().begin(); i != e.states().end(); i++)
+    precondition(is_complete(e) && is_deterministic(e));
+    for_each_state(i, e)
       if (e.is_final(*i))
 	e.unset_final(*i);
-      else if (!e.is_initial(*i))
+      else
 	e.set_final(*i);
   }
 
@@ -53,3 +57,5 @@ namespace vcsn {
   }
 
 } // vcsn
+
+#endif // VCSN_ALGORITHMS_COMPLEMENTARY_HXX 

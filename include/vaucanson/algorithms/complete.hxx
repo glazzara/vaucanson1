@@ -18,12 +18,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-# include <set>
+#ifndef VCSN_ALGORITHMS_COMPLETE_HXX
+# define VCSN_ALGORITHMS_COMPLETE_HXX
 
 # include <vaucanson/automata/concept/automata_base.hh>
-
 # include <vaucanson/tools/usual.hh>
+# include <set>
 
 namespace vcsn {
 
@@ -35,14 +35,11 @@ namespace vcsn {
     AUTOMATON_TYPES(automaton_t);
 
     hstate_t puits = work.add_state();
-
-    for (state_iterator i = work.states().begin();
-	 i != work.states().end(); i++)
+    for_each_state(i, work)
       {
 	std::set<hstate_t> aim;
 	alphabet_t& alpha = work.series().monoid().alphabet();
-	for (alphabet_iterator j = alpha.begin();
-	     j != alpha.end(); j++)
+	for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
 	  {
 	    aim.clear();
 	    work.letter_deltac(aim, *i, *j, delta_kind::states());
@@ -50,11 +47,9 @@ namespace vcsn {
 	    if (!aim.size())
 	      work.add_letter_edge(*i, puits, *j);
 	  }
-	
       }
   }
 
-  
   template <typename A, typename T>
   Element<A, T>
   auto_complete(const Element<A, T>& e)
@@ -65,4 +60,29 @@ namespace vcsn {
     return res;
   }
 
-} //vcsn
+  template <class A, class T>
+  bool
+  is_complete(const Element<A, T>& e)
+  {
+    typedef Element<A, T> automaton_t;
+    AUTOMATON_TYPES(automaton_t);
+
+    for_each_state(i, e)
+      {
+	std::set<hstate_t> aim;
+	const alphabet_t& alpha = e.series().monoid().alphabet();
+	for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
+	  {
+	    aim.clear();
+	    e.letter_deltac(aim, *i, *j, delta_kind::states());
+	  
+	    if (!aim.size())
+	      return false;
+	  }
+      }
+    return true;
+  }
+
+} // vcsn
+
+#endif // VCSN_ALGORITHMS_COMPLETE_HXX

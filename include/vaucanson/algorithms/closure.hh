@@ -30,7 +30,7 @@ namespace vcsn {
   //! Complete the automaton to make it close over epsilon transition.
   template<typename A, typename T>
   void
-  in_closure(const Element<A, T>& a);
+  in_closure(Element<A, T>& a);
 
   //! Return the epsilon-closure of the automaton.
   template<typename A, typename T>

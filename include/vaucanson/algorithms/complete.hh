@@ -37,6 +37,11 @@ namespace vcsn {
   Element<A, T>
   auto_complete(const Element<A, T>&);
 
+  //! Return true if the automaton is complete.
+  template <class A, class T>
+  bool
+  is_complete(const Element<A, T>& e);
+
   /*! @} */
 
 } // vcsn

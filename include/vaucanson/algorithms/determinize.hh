@@ -37,6 +37,11 @@ namespace vcsn {
   template<typename A, typename T>
   Element<A, T>
   subset_construction(const Element<A, T>& a);
+
+  //! Return true if the automaton is deterministic. */
+  template<typename A, typename T>
+  bool
+  is_deterministic(const Element<A, T>& a);
   
   /*! @} */
 

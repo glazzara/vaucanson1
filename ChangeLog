@@ -1,4 +1,19 @@
 2003-01-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.146)
+	* configure.ac: Fix test subdirs search.
+	* include/vaucanson/algorithms/closure.hh: Fix invalid constness.
+	* include/vaucanson/algorithms/closure.hxx: Use usual_macros.hh.
+	* include/vaucanson/algorithms/complementary.hxx:
+		- Use usual_macros.hh ;
+		- (auto_complementary): Add precondition ;
+	* include/vaucanson/algorithms/complete.hh:
+		(is_complete): New.
+	* include/vaucanson/algorithms/complete.hxx: Implement it.
+	* include/vaucanson/tools/usual.hh: Do not define macros.
+	* include/vaucanson/tools/usual_macros.hh: New 
+		(usual.hh macros moved here)
+
+2003-01-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.145)
 	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh:
 		Fix a macro bug.

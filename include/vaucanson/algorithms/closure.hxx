@@ -18,9 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_CLOSURE_HXX
-# define ALGORITHMS_CLOSURE_HXX
+#ifndef VCSN_ALGORITHMS_CLOSURE_HXX
+# define VCSN_ALGORITHMS_CLOSURE_HXX
 
 # include <vaucanson/algorithms/closure.hh>
 
@@ -31,55 +30,42 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
   /*-----------.
   | in_closure |
   `-----------*/
-  // preconditions :
-  //
-  // note : this a particularily dummy closure. to be optimized.
   template <class A_, typename Auto_>
   void
   do_in_closure(const AutomataBase<A_>& a_set,
 		Auto_&			   a)
   {
-    typedef Auto_						automaton_t;
-    typedef typename automaton_t::series_t			series_t;
-    typedef typename automaton_t::series_elt_t			series_elt_t;
-    typedef typename series_elt_t::monoid_elt_t			monoid_elt_t;
-    typedef typename series_t::monoid_t				monoid_t;
-    typedef typename series_t::weights_t			weights_t;
-    typedef typename series_elt_t::weight_t			weight_t;
+    AUTOMATON_TYPES(Auto_);
     typedef std::set<hedge_t>					edelta_ret_t;
     typedef std::set<hstate_t>					sdelta_ret_t;
-    typedef std::queue<std::pair<hstate_t, weight_t> >	queue_t;
+    typedef std::queue<std::pair<hstate_t, weight_t> >		queue_t;
     
     unsigned		  new_edge = 0;
     sdelta_ret_t	  known_succ;
     edelta_ret_t	  new_succ, succ, aim;
     queue_t		  queue;
-    monoid_elt_t	  monoid_identity 
-      = a.series().monoid().identity(SELECT(typename monoid_elt_t::value_t));
-    series_elt_t          series_identity 
-      = a.series().identity(SELECT(typename series_elt_t::value_t));
-    weight_t		  weight_zero 
-      = a.series().weights().zero(SELECT(typename weight_t::value_t));
+    monoid_elt_t	  monoid_identity = a.series().monoid().empty_;
+    weight_t		  weight_zero = a.series().weights().wzero_;
 
-    for (typename automaton_t::state_iterator i = a.states().begin();
-	 i != a.states().end();
-	 ++i)
+    for_each_state(i, a)
       {
 	known_succ.clear();
 	succ.clear();
-	// FIXME : use a new delta version here !
+	// get every spontaneous transition.
 	a.letter_deltac(succ, *i, monoid_identity, delta_kind::edges());
-	for (typename edelta_ret_t::const_iterator d = succ.begin();
-	     d != succ.end();
-	     ++d)
+	// and insert next states into the queue.
+	for_each_const_(edelta_ret_t, d, succ)
 	  {
-	    queue.push(std::make_pair(a.aim_of(*d), a.serie_of(*d).value_get(monoid_identity.value())));
+	    queue.push(std::make_pair
+		       (a.aim_of(*d), 
+			a.serie_of(*d).value_get(monoid_identity.value())));
 	    known_succ.insert(a.aim_of(*d));
 	  }
 	
@@ -90,20 +76,23 @@ namespace vcsn {
 	    queue.pop();
 	    new_edge = 0;
 	    aim.clear();
+	    // get every spontaneous transition.
 	    a.letter_deltac(aim, c, monoid_identity, delta_kind::edges());
-	    for (typename edelta_ret_t::const_iterator e = aim.begin();
-		 e != aim.end();
-		 ++e)
+	    for_each_const_(edelta_ret_t, e, aim)
 	      {
-		series_elt_t s =  a.serie_of(*e);
-		weight_t w_  = s.get(monoid_identity);
+		series_elt_t s   = a.serie_of(*e);
+		weight_t     w_  = s.get(monoid_identity);
+		hstate_t     ns  = a.aim_of(*e);
+		// we must create a new edge between A and C when
+		// there is two subsequent epsilon transitions between
+		// A and B and between B and C.
 		if ((w_ != weight_zero) && 
-		    (known_succ.find(a.aim_of(*e)) == known_succ.end()))
+		    (known_succ.find(ns) == known_succ.end()))
 		  {
 		    weight_t w__ = w * w_;
-		    queue.push(std::make_pair(a.aim_of(*e), w__));
-		    known_succ.insert(a.aim_of(*e));
-		    a.add_serie_edge(*i, a.aim_of(*e), series_elt_t(w__));
+		    queue.push(std::make_pair(ns, w__));
+		    known_succ.insert(ns);
+		    a.add_serie_edge(*i, ns, series_elt_t(w__));
 		  }
 	      }
 	  }
@@ -130,4 +119,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // ALGORITHMS_CLOSURE_HXX
+#endif // VCSN_ALGORITHMS_CLOSURE_HXX
