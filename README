@@ -3,7 +3,7 @@ OVERVIEW
 
 Vaucanson, a C++ generic library for weighted finite state machine.
 
-Firstly initiated by Jacques Sakarovitch in 2000, Vaucanson is a
+Firstly initiated by Jacques Sakarovitch, Lombardy in 2000, Vaucanson is a
 project developed by the Ecole Nationale Supérieure des
 Télécommunications and the EPITA Research and Development Laboratory
 (LRDE).
@@ -62,7 +62,7 @@ CONTACTS
   France
 
 * Vaucanson - ENST
-  Jacques Sakarovitch
+  Jacques Sakarovitch, Lombardy
   46, rue Barrault
   75013 Paris
   France

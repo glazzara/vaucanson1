@@ -32,7 +32,7 @@ for NAME in $ALL_TEST; do
   echo $NAME_TEST_FILE
 `cat > $DEST_DIR/$FUN_SNAME-test.cc << EOF
 /*  Vaucanson, a generic library for finite state machines.
-Copyright (C) 2001-2002 Sakarovitch, Poss, Rey and Regis-Gianas.
+Copyright (C) 2001-2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public

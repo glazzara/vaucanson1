@@ -7,14 +7,14 @@ Une plateforme générique pour les automates à multiplicité.
 Le projet Vaucanson a pour objectif de créer une plateforme de calcul
 scientifique pour la théorie des automates à multiplicité en
 s'appuyant sur les dernières techniques de programmation générique en
-C++. Il a été initié par Jacques Sakarovitch en 2000 et son
+C++. Il a été initié par Jacques Sakarovitch, Lombardy en 2000 et son
 développement se poursuit en collaboration avec l'ENST.
 
 The Vaucanson project is meant to develop a plateform for 
 scientific computing applied to the theory of weighted
 finite state machines, using modern C++ techniques for generic 
 programming. It was initiated by Jacques
-Sakarovitch in 2000 and its development is still in work in
+Sakarovitch, Lombardy in 2000 and its development is still in work in
 collaboration with the ENST.
 
 Les utilisateurs visés sont :
