@@ -1,3 +1,226 @@
+2003-02-26  Akim Demaille  <akim@epita.fr>
+
+	* HEADER: Bump to 2003.
+
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	* include/vaucanson/algebra/concept/alphabets_base.hxx,
+	* include/vaucanson/algebra/concept/concepts.hh,
+	* include/vaucanson/algebra/concept/concepts.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx,
+	* include/vaucanson/algebra/concept/letter.hh,
+	* include/vaucanson/algebra/concept/monoid_base.hh,
+	* include/vaucanson/algebra/concept/monoid_base.hxx,
+	* include/vaucanson/algebra/concept/numerical_semiring.hh,
+	* include/vaucanson/algebra/concept/semigroup_base.hh,
+	* include/vaucanson/algebra/concept/semigroup_base.hxx,
+	* include/vaucanson/algebra/concept/semiring_base.hh,
+	* include/vaucanson/algebra/concept/semiring_base.hxx,
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* include/vaucanson/algebra/concept/tropical_semiring.hh,
+	* include/vaucanson/algebra/concrete/alphabets/alphabets.hh,
+	* include/vaucanson/algebra/concrete/alphabets/predefs.hh,
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh,
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx,
+	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx,
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/words.hxx,
+	* include/vaucanson/algebra/concrete/letter/char_letter.hh,
+	* include/vaucanson/algebra/concrete/letter/range.hh,
+	* include/vaucanson/algebra/concrete/letter/range.hxx,
+	* include/vaucanson/algebra/concrete/predefs.hh,
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx,
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh,
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx,
+	* include/vaucanson/algebra/concrete/series/generalized.hh,
+	* include/vaucanson/algebra/concrete/series/generalized.hxx,
+	* include/vaucanson/algebra/concrete/series/krat.hh,
+	* include/vaucanson/algebra/concrete/series/krat.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_conversion.hh,
+	* include/vaucanson/algebra/concrete/series/krat_conversion.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hh,
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh,
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx,
+	* include/vaucanson/algebra/concrete/series/polynoms.hh,
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx,
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh,
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx,
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh,
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx,
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh,
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx,
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hh,
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hxx,
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hh,
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx,
+	* include/vaucanson/algebra/concrete/series/series.hh,
+	* include/vaucanson/algebra/concrete/series/series.hxx,
+	* include/vaucanson/algebra/concrete/series/transpose.hh,
+	* include/vaucanson/algebra/concrete/series/transpose.hxx,
+	* include/vaucanson/algorithms/closure.hh,
+	* include/vaucanson/algorithms/closure.hxx,
+	* include/vaucanson/algorithms/complementary.hh,
+	* include/vaucanson/algorithms/complete.hh,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/compute.hh,
+	* include/vaucanson/algorithms/compute.hxx,
+	* include/vaucanson/algorithms/concat.hh,
+	* include/vaucanson/algorithms/concat.hxx,
+	* include/vaucanson/algorithms/determinize.hh,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/elimination.hh,
+	* include/vaucanson/algorithms/elimination.hxx,
+	* include/vaucanson/algorithms/extract.hh,
+	* include/vaucanson/algorithms/extract.hxx,
+	* include/vaucanson/algorithms/glushkov.hh,
+	* include/vaucanson/algorithms/glushkov.hxx,
+	* include/vaucanson/algorithms/hopcroft.hh,
+	* include/vaucanson/algorithms/hopcroft.hxx,
+	* include/vaucanson/algorithms/isomorph.hh,
+	* include/vaucanson/algorithms/krat_exp_constant_term.hh,
+	* include/vaucanson/algorithms/krat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/krat_exp_derivation.hh,
+	* include/vaucanson/algorithms/krat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/krat_exp_linearize.hh,
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx,
+	* include/vaucanson/algorithms/moore.hh,
+	* include/vaucanson/algorithms/moore.hxx,
+	* include/vaucanson/algorithms/normalized.hh,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/product.hh,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/reachable.hh,
+	* include/vaucanson/algorithms/reachable.hxx,
+	* include/vaucanson/algorithms/realtime.hh,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/standard.hh,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/thompson.hh,
+	* include/vaucanson/algorithms/thompson.hxx,
+	* include/vaucanson/algorithms/transpose.hh,
+	* include/vaucanson/algorithms/transpose.hxx,
+	* include/vaucanson/algorithms/trim.hh,
+	* include/vaucanson/algorithms/trim.hxx,
+	* include/vaucanson/algorithms/union.hh,
+	* include/vaucanson/algorithms/union.hxx,
+	* include/vaucanson/automata/concept/automata.hh,
+	* include/vaucanson/automata/concept/automata.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/automaton_impl.hh,
+	* include/vaucanson/automata/concept/automaton_impl.hxx,
+	* include/vaucanson/automata/concept/concepts.hh,
+	* include/vaucanson/automata/concept/concepts.hxx,
+	* include/vaucanson/automata/concept/copy.hh,
+	* include/vaucanson/automata/concept/copy.hxx,
+	* include/vaucanson/automata/concept/handlers.hh,
+	* include/vaucanson/automata/concept/handlers.hxx,
+	* include/vaucanson/automata/concept/history.hh,
+	* include/vaucanson/automata/concept/history.hxx,
+	* include/vaucanson/automata/concept/kinds.hh,
+	* include/vaucanson/automata/concept/kinds.hxx,
+	* include/vaucanson/automata/concept/relabel_impl.hh,
+	* include/vaucanson/automata/concept/relabel_impl.hxx,
+	* include/vaucanson/automata/concept/tags.hh,
+	* include/vaucanson/automata/concept/tags.hxx,
+	* include/vaucanson/automata/concept/translate.hh,
+	* include/vaucanson/automata/concept/translate.hxx,
+	* include/vaucanson/automata/concept/transpose_impl.hh,
+	* include/vaucanson/automata/concept/transpose_impl.hxx,
+	* include/vaucanson/automata/concrete/generalized.hh,
+	* include/vaucanson/automata/concrete/generalized.hxx,
+	* include/vaucanson/automata/concrete/manylinks.hh,
+	* include/vaucanson/automata/concrete/manylinks.hxx,
+	* include/vaucanson/automata/concrete/manylinks_carriers.hh,
+	* include/vaucanson/automata/concrete/manylinks_edges.hh,
+	* include/vaucanson/automata/concrete/manylinks_states.hh,
+	* include/vaucanson/config/rel_ops_work_around_g++2.hh,
+	* include/vaucanson/config/system.hh,
+	* include/vaucanson/fundamental/default_ops.hh,
+	* include/vaucanson/fundamental/default_ops.hxx,
+	* include/vaucanson/fundamental/element.hh,
+	* include/vaucanson/fundamental/element.hxx,
+	* include/vaucanson/fundamental/element_base.hh,
+	* include/vaucanson/fundamental/element_base.hxx,
+	* include/vaucanson/fundamental/element_ops.hh,
+	* include/vaucanson/fundamental/element_ops.hxx,
+	* include/vaucanson/fundamental/fundamental.hh,
+	* include/vaucanson/fundamental/meta_element.hh,
+	* include/vaucanson/fundamental/meta_element.hxx,
+	* include/vaucanson/fundamental/meta_set.hh,
+	* include/vaucanson/fundamental/op_traits.hh,
+	* include/vaucanson/fundamental/predefs.hh,
+	* include/vaucanson/fundamental/slots.hh,
+	* include/vaucanson/fundamental/slots.hxx,
+	* include/vaucanson/fundamental/structure.hh,
+	* include/vaucanson/fundamental/structure.hxx,
+	* include/vaucanson/internal/traits.hh,
+	* include/vaucanson/misc/constraints.hh,
+	* include/vaucanson/misc/container_ops.hh,
+	* include/vaucanson/misc/container_ops.hxx,
+	* include/vaucanson/misc/converter.hh,
+	* include/vaucanson/misc/converter.hxx,
+	* include/vaucanson/misc/dot_dump.hh,
+	* include/vaucanson/misc/fsm_dump.hh,
+	* include/vaucanson/misc/functors.hh,
+	* include/vaucanson/misc/functors.hxx,
+	* include/vaucanson/misc/misc_constraints.hh,
+	* include/vaucanson/misc/numerical_constraints.hh,
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/misc/random.hxx, include/vaucanson/misc/ref.hh,
+	* include/vaucanson/misc/ref.hxx,
+	* include/vaucanson/misc/selectors.hh,
+	* include/vaucanson/misc/static.hh,
+	* include/vaucanson/misc/static.hxx,
+	* include/vaucanson/misc/type_constraints.hh,
+	* include/vaucanson/tools/automaton_tools.hh,
+	* include/vaucanson/tools/gen_book.hh,
+	* include/vaucanson/tools/gen_book.hxx,
+	* include/vaucanson/tools/gen_random.hh,
+	* include/vaucanson/tools/gen_random.hxx,
+	* include/vaucanson/tools/usual.hh,
+	* include/vaucanson/tools/usual_macros.hh, src/demos/fsm/arg.cc,
+	* src/demos/fsm/arg.hh, src/demos/fsm/usual_automaton_t/arg.cc,
+	* src/demos/fsm/usual_automaton_t/arg.hh,
+	* src/tests/algebra/alphabets/alphabet_test.hh,
+	* src/tests/algebra/free_monoid/free_monoid_test.hh,
+	* src/tests/algebra/semiring/semiring_test.hh,
+	* src/tests/algebra/series/krat_exp_constant_term_test.hh,
+	* src/tests/algebra/series/krat_exp_derivation_test.hh,
+	* src/tests/algebra/series/krat_exp_linearize_test.hh,
+	* src/tests/algebra/series/krat_exp_parse_test.hh,
+	* src/tests/algebra/series/series-test.hh,
+	* src/tests/automata/algos/closure_test.hh,
+	* src/tests/automata/algos/complete_test.hh,
+	* src/tests/automata/algos/compute_test.hh,
+	* src/tests/automata/algos/concat_test.hh,
+	* src/tests/automata/algos/determinist_test.hh,
+	* src/tests/automata/algos/elimination_test.hh,
+	* src/tests/automata/algos/extract_test.hh,
+	* src/tests/automata/algos/generalized_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/minimization_test.hh,
+	* src/tests/automata/algos/normalize_test.hh,
+	* src/tests/automata/algos/product_test.hh,
+	* src/tests/automata/algos/reachable_test.hh,
+	* src/tests/automata/algos/realtime_test.hh,
+	* src/tests/automata/algos/thompson_test.hh,
+	* src/tests/automata/algos/union_test.hh,
+	* src/tests/automata/implementation_check/add_edge_test.hh,
+	* src/tests/automata/implementation_check/add_state_test.hh,
+	* src/tests/automata/implementation_check/global_consistency_test.hh
+	* src/tests/automata/implementation_check/init_final_test.hh,
+	* src/tests/bin/generate-test-suite.sh,
+	* src/tests/check/tests_stuff.cc, src/tests/check/tests_stuff.hh,
+	* src/tests/fundamental/design_pattern-test.hh,
+	* src/tests/fundamental/element-full-test.cc: s/2001-2002/2001,
+	2002/g.
+
 2003-02-20  Maxime Rey  <max@lrde.epita.fr>
 
         *
@@ -17,16 +240,16 @@
 		Update.
 	* src/demos/samples/algebra/series.cc: Update.
 	* src/demos/vgrep/vgrep.cc: Escape '+', '*' and '.'
-	
+
 2003-02-20  Maxime Rey  <max@lrde.epita.fr>
 
 	* `src/demos/grammar_inference/src/make_mca.cc' : New
-	* `src/demos/grammar_inference/src/is_not_compatible.cc' : New 
-	* `src/demos/grammar_inference/src/bs.cc' : New 
+	* `src/demos/grammar_inference/src/is_not_compatible.cc' : New
+	* `src/demos/grammar_inference/src/bs.cc' : New
 	* `src/demos/grammar_inference/src/fusion.cc' : New
 	* `src/demos/grammar_inference/src/training/vtrain.toy' : New
 	* `src/demos/grammar_inference/include/tools/load_sample.hh' : New
-	* `src/demos/grammar_inference/include/tools/load_sample.hxx' : New 
+	* `src/demos/grammar_inference/include/tools/load_sample.hxx' : New
 	* `src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hxx' : New
 	* `src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hh' : New
 	* `src/demos/grammar_inference/include/algebra/concrete/lattice.hxx' : New
@@ -34,7 +257,7 @@
 	* `src/demos/grammar_inference/include/algebra/concrete/ordered_set.hxx' : New
 	* `src/demos/grammar_inference/include/algebra/concrete/ordered_set.hh' : New
 	* `src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hxx' : New
-      
+
 	* `src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hh' : New
       	* `src/demos/grammar_inference/include/algebra/concept/lattice_base.hxx' : New
 	* `src/demos/grammar_inference/include/algebra/concept/lattice_base.hh' : New
@@ -42,12 +265,12 @@
 	* `src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hxx' : New
 	* `src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hh' : New
 	* `src/demos/grammar_inference/include/algorithms/rig.hh' : New
-	* `src/demos/grammar_inference/include/algorithms/rig.hxx' : New 
-	* `src/demos/grammar_inference/include/algorithms/make_pta.hxx' : New 
-	* `src/demos/grammar_inference/include/algorithms/make_mca.hxx' : New 
-	* `src/demos/grammar_inference/include/algorithms/make_pta.hh' : New 
-	* `src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx' : New 
-	* `src/demos/grammar_inference/include/algorithms/is_not_compatible.hh' : New 
+	* `src/demos/grammar_inference/include/algorithms/rig.hxx' : New
+	* `src/demos/grammar_inference/include/algorithms/make_pta.hxx' : New
+	* `src/demos/grammar_inference/include/algorithms/make_mca.hxx' : New
+	* `src/demos/grammar_inference/include/algorithms/make_pta.hh' : New
+	* `src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx' : New
+	* `src/demos/grammar_inference/include/algorithms/is_not_compatible.hh' : New
 	* `src/demos/grammar_inference/include/algorithms/make_mca.hh' : New
 	* `src/demos/grammar_inference/include/algorithms/is_structurally_complete.hh' : New
 	* `src/demos/grammar_inference/include/algorithms/fusion.hh' : New
@@ -66,9 +289,9 @@
 	* include/vaucanson/automata/concept/automata_base.hh,
 	* include/vaucanson/algebra/concept/series_base.hh,
 	* include/vaucanson/algebra/concept/series_base.hxx,
-	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx	
-	* include/vaucanson/algebra/concrete/series/krat.hh,	
-	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh,	
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx
+	* include/vaucanson/algebra/concrete/series/krat.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh,
 	* include/vaucanson/algebra/concrete/series/polynoms.hh:
 		Rename "weights_value_t" to "weight_value_t".
 	* include/vaucanson/algorithms/compute.hh: Return weight_t.
@@ -104,14 +327,14 @@
 	* include/vaucanson/algebra/concept/alphabets_base.hh:
 		(letter_equality): New.
 		(op_letter_equality_modulo): New.
-	* include/vaucanson/algebra/concept/alphabets_base.hxx: 
+	* include/vaucanson/algebra/concept/alphabets_base.hxx:
 		Implement them.
 	* include/vaucanson/algebra/concrete/alphabets/predefs.hh:
 		Add decorated alphabets typedefs.
 	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx:
 		(op_xeq): Use alphabet's letter_equality.
 	* include/vaucanson/algebra/concrete/letter/range.hh: Add a 'FIXME'.
-	
+
 2003-02-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.157)
 	* doc/tutorial.tex: Update
@@ -120,13 +343,13 @@
 (0.156)
 	* include/vaucanson/algebra/concept/alphabets_base.hh,
 	  include/vaucanson/algebra/concept/alphabets_base.hxx,
-	  include/vaucanson/algebra/concept/concepts.hh, 
+	  include/vaucanson/algebra/concept/concepts.hh,
 	  include/vaucanson/algebra/concept/concepts.hxx,
 	  include/vaucanson/algebra/concrete/alphabets/alphabets.hh,
 	  include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh,
 	  include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx,
 	  doc/tutorial/tutorial.tex,
-  	  src/demos/samples/algebra/alphabet.cc: 
+  	  src/demos/samples/algebra/alphabet.cc:
 		Rename 'AlphabetsBase' to 'AlphabetSetBase'
 		Rename 'SetAlphabets' to 'AlphabetSet'
 	* bootstrap.sh: Make Automake install missing files.
@@ -136,20 +359,20 @@
 2003-02-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.155)
 	* include/vaucanson/algebra/concrete/order/lattice.hxx,
-	  include/vaucanson/algebra/concrete/order/orderset.hxx, 
+	  include/vaucanson/algebra/concrete/order/orderset.hxx,
 	  include/vaucanson/algebra/concrete/order/lattice.hh,
 	  include/vaucanson/algebra/concrete/order/orderset.hh,
 	  include/vaucanson/algebra/concept/lattice_base.hxx,
 	  include/vaucanson/algebra/concept/lattice_base.hh,
 	  include/vaucanson/algebra/concept/orderset_base.hxx,
 	  include/vaucanson/algebra/concept/orderset_base.hh: Moved to ...
-	
+
 	* src/demos/grammar_inference: Here.
 
 2003-02-14  Maxime Rey  <max@lrde.epita.fr>
 (0.154)
 	* include/vaucanson/algebra/concrete/order/lattice.hxx,
-	  include/vaucanson/algebra/concrete/order/orderset.hxx, 
+	  include/vaucanson/algebra/concrete/order/orderset.hxx,
 	  include/vaucanson/algebra/concrete/order/lattice.hh,
 	  include/vaucanson/algebra/concrete/order/orderset.hh,
 	  include/vaucanson/algebra/concept/lattice_base.hxx,
@@ -176,13 +399,13 @@
 
 2003-02-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.151)
-	
+
 	* bootstrap.sh: New.
 
 2003-02-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.150)
 	* doc/tutorial/tutorial.tex: New.
-	* doc/tutorial/Makefile.am: New.	
+	* doc/tutorial/Makefile.am: New.
 	* configure.ac: Check LaTeX, Generate doc/tutorial/Makefile.
 	* doc/doc.doxy.in: Generate in 'ref' not in 'generated'.
 	* doc/Makefile.am: Enter in 'tutorial'.
@@ -193,19 +416,19 @@
 	* configure.ac (VCSN_TESTS): Remove.
 	* src/tests/automata/implementation_check/Makefile.am:
 		Rename 'consistancy' to 'consistency'.
-	* vcsn.m4: New.	
-	* src/tests/bin/generate-test-suite.sh: New.	
+	* vcsn.m4: New.
+	* src/tests/bin/generate-test-suite.sh: New.
 	* src/tests/bin/Makefile.am: Now, use generate-test-suite.sh.
 
 2003-02-12  Maxime Rey  <max@lrde.epita.fr>
 (0.148)
-	* include/vaucanson/algebra/concept/series_base.hh : 
+	* include/vaucanson/algebra/concept/series_base.hh :
 	transpose modifications
 	* include/vaucanson/algebra/concept/series_base.hxx :
 	minor
 	* /include/vaucanson/algebra/concrete/free_monoid/str_words.hxx :
 	op_choose run now
-	* include/vaucanson/algebra/concrete/free_monoid/words.hh : 
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh :
 	minor
 	* include/vaucanson/algebra/concrete/series/polynoms.hh :
 	transpose modifications
@@ -227,7 +450,7 @@
 		(is_complete): New.
 	* include/vaucanson/algorithms/complete.hxx: Implement it.
 	* include/vaucanson/tools/usual.hh: Do not define macros.
-	* include/vaucanson/tools/usual_macros.hh: New 
+	* include/vaucanson/tools/usual_macros.hh: New
 		(usual.hh macros moved here)
 
 2003-01-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -286,9 +509,9 @@
 	* src/tests/defs.in: Adjust CXXFLAGS.
 	* src/tests/bin/automata-test-suite.sh: Removed.
 	* src/tests/tests-suites/usual_automaton_t.includes: Remove.
-	* src/tests/tests-suites/usual_automaton_t.defs: New.	
+	* src/tests/tests-suites/usual_automaton_t.defs: New.
 	* src/tests/bin/generate-test-suite.sh: New.
-	* src/tests/tests-suites/usual_automaton_t/*: Remove. 
+	* src/tests/tests-suites/usual_automaton_t/*: Remove.
 		(no tests suite on the repository from now)
 
 2002-11-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -307,8 +530,8 @@
 	* include/vaucanson/automata/concept/kinds.hxx: minor.
 	* include/vaucanson/misc/fsm_dump.hh: fix the interpretation of '1'.
 	* src/demos/fsm/arg.cc: add --help.
-	* src/demos/fsm/generate_toolbox.sh: 
-		add 'realtime', 
+	* src/demos/fsm/generate_toolbox.sh:
+		add 'realtime',
 		fix vcsn_krat2auto options
 	* src/demos/fsm/README: add CPPFLAGS in configure command.
 	* src/demos/fsm/usual_automaton_t/arg.cc: minor.
