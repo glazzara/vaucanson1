@@ -1,5 +1,9 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx: Fix namespace.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/krat_exp_partial_derivation.hh: Fix include.
 	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Fix namespace.
 
