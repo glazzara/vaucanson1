@@ -1,4 +1,4 @@
-// backward_closure.hh
+// backward_closure.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.

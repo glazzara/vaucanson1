@@ -1,4 +1,4 @@
-// backward_closure.hh
+// forward_closure.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -21,6 +21,11 @@
 
 #ifndef VCSN_ALGORITHMS_FORWARD_CLOSURE_HH
 # define VCSN_ALGORITHMS_FORWARD_CLOSURE_HH
+
+/**
+ * @file   forward_closure.hh
+ * @brief  Forward closure algorithm.
+ */
 
 # include <vaucanson/automata/concept/automata_base.hh>
 

@@ -1,20 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 233)
-(Parent-Version vaucanson 0 232)
+(Project-Version vaucanson 0 234)
+(Parent-Version vaucanson 0 233)
 (Version-Log "
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/forward_closure.hh: New.
-	* include/vaucanson/algorithms/forward_closure.hxx: Likewise.
-	* include/vaucanson/algorithms/backward_closure.hh: Likewise.
-	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.
-	* include/vaucanson/algorithms/closure.hh: Remove.
-	* include/vaucanson/algorithms/closure.hxx: Likewise
+	* include/vaucanson/algorithms/forward_closure.hh: Add file doc.
+	* include/vaucanson/algorithms/forward_closure.hxx: Typo.
+	* include/vaucanson/algorithms/backward_closure.hh: Add file doc.
+	* include/vaucanson/algorithms/backward_closure.hxx: Typo.
 ")
 (New-Version-Log "")
-(Checkin-Time "Fri, 20 Jun 2003 15:26:44 +0200")
+(Checkin-Time "Fri, 20 Jun 2003 15:32:06 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -97,7 +95,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.38 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.39 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -821,22 +819,22 @@
 ;; Files added by populate at Fri, 20 Jun 2003 15:04:39 +0200,
 ;; to version 0.232(w), by yann:
 
-  (include/vaucanson/algorithms/forward_closure.hh (vaucanson/q/8_forward_cl 1.1 600))
+  (include/vaucanson/algorithms/forward_closure.hh (vaucanson/q/8_forward_cl 1.2 600))
 
 ;; Files added by populate at Fri, 20 Jun 2003 15:04:40 +0200,
 ;; to version 0.232(w), by yann:
 
-  (include/vaucanson/algorithms/forward_closure.hxx (vaucanson/q/9_forward_cl 1.1 600))
+  (include/vaucanson/algorithms/forward_closure.hxx (vaucanson/q/9_forward_cl 1.2 600))
 
 ;; Files added by populate at Fri, 20 Jun 2003 15:04:43 +0200,
 ;; to version 0.232(w), by yann:
 
-  (include/vaucanson/algorithms/backward_closure.hh (vaucanson/q/10_backward_c 1.1 600))
+  (include/vaucanson/algorithms/backward_closure.hh (vaucanson/q/10_backward_c 1.2 600))
 
 ;; Files added by populate at Fri, 20 Jun 2003 15:04:45 +0200,
 ;; to version 0.232(w), by yann:
 
-  (include/vaucanson/algorithms/backward_closure.hxx (vaucanson/q/11_backward_c 1.1 600))
+  (include/vaucanson/algorithms/backward_closure.hxx (vaucanson/q/11_backward_c 1.2 600))
 
 ;; Files deleted by depopulate at Fri, 20 Jun 2003 15:05:09 +0200,
 ;; from version 0.232(w), by yann:
