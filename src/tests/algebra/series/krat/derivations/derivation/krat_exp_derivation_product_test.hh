@@ -56,22 +56,21 @@ bool krat_exp_derivation_product_test(tests::Tester& tg)
       // 1/ LHS is non-cancelable
 
       krat_exp_t random = series.choose(SELECT(kexp_t));
+      krat_exp_t krat_a (series, a);
+      krat_exp_t krat_b (series, b);
       // 0.xyz
       TEST_DERIVATE(tsts, sucs, zero_as<kexp_t>::of(series) * random, a,
 		    zero_as<kexp_t>::of(series));
       // a.xyz
-      TEST_DERIVATE(tsts, sucs, a * random, a, random);
-      TEST_DERIVATE(tsts, sucs, a * random, b, zero_as<kexp_t>::of(series));
+      TEST_DERIVATE(tsts, sucs, krat_a * random, a, random);
+      TEST_DERIVATE(tsts, sucs, krat_a * random, b,
+		    zero_as<kexp_t>::of(series));
       // (a+b).xyz
-      TEST_DERIVATE(tsts, sucs,
-		    (krat_exp_t (a) + krat_exp_t (b)) * random, a, random);
-      TEST_DERIVATE(tsts, sucs,
-		    (krat_exp_t (a) + krat_exp_t (b)) * random, b, random);
+      TEST_DERIVATE(tsts, sucs, (krat_a + krat_b) * random, a, random);
+      TEST_DERIVATE(tsts, sucs, (krat_a + krat_b) * random, b, random);
       // (a.b).xyz
-      TEST_DERIVATE(tsts, sucs,
-		    (krat_exp_t (a) * krat_exp_t (b)) * random, a, b * random);
-      TEST_DERIVATE(tsts, sucs,
-		    (krat_exp_t (a) * krat_exp_t (b)) * random, b,
+      TEST_DERIVATE(tsts, sucs, krat_a * krat_b * random, a, krat_b * random);
+      TEST_DERIVATE(tsts, sucs, krat_a * krat_b * random, b,
 		    zero_as<kexp_t>::of(series));
 
       // 2/ LHS *is* cancelable

@@ -1,5 +1,10 @@
 2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh
+	(krat_exp_derivation_product_test): Fix bugs.
+
+2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
 	* include/Makefile.am: Update algo_helper.hh and algo_helper.hxx (which
 	have moved precedently).
 	* include/vaucanson/fundamental/syntactic_decorator.hxx (self): Fix
