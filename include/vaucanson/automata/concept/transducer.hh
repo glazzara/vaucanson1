@@ -69,14 +69,14 @@ namespace vcsn {
   {
   public:
     typedef Transducer<Series>				     self_t;
-    typedef typename virtual_types<self_t>::series_set_t	     series_set_t;
+    typedef typename virtual_types<self_t>::series_set_t     series_set_t;
 
     Transducer(const series_set_t&);
 
     const series_set_t&	series() const;
 
   private:
-    series_set_t	series_;
+    SetSlot<series_set_t>	series_;
   };
 
   template <class S, class T>

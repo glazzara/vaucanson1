@@ -60,6 +60,11 @@ global_consistency_test(tests::Tester& t)
   alphabet_t		at;
   at.insert('a');
   at.insert('b');
+
+  alphabet_t		other_at;
+  at.insert('c');
+  at.insert('d');
+
   monoid_t		md (at);
   semiring_t		sg;
   series_set_t		ss (sg, md);
@@ -75,15 +80,19 @@ global_consistency_test(tests::Tester& t)
   automaton_t		a3 (aa);
   automaton_t		a4 = standard_of(e);
   automaton_t		a5 = thompson_of(e);
+  automaton_t		a6 = new_automaton(other_at);
 
   TEST(t, "new_automaton is consistent.", a1 == a2);
   TEST(t, "new_automaton gives a correct alphabet.",
        a1.structure().series().monoid().alphabet() == at);
+  TEST(t, "new automaton alphabet is consistent.",
+       a1.structure().series().monoid().alphabet() != other_at);
   TEST(t, "new_automaton gives a correct monoid.",
        a1.structure().series().monoid() == md);
   TEST(t, "new_automaton gives a correct semiring.",
        a1.structure().series().semiring() == sg);
   TEST(t, "new_automaton gives a correct automata set.", a1.structure() == aa);
+  TEST(t, "new automata set is consistent.", a1.structure() != a6.structure());
 
   standard_of(a3, e.value());
   TEST(t, "standard_of is consistent.", a3 == a4);

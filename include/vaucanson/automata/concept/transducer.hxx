@@ -45,7 +45,7 @@ namespace vcsn {
   const typename Transducer<Series>::series_set_t&
   Transducer<Series>::series() const
   {
-    return series_;
+    return series_.get();
   }
 
   template <class Series>

@@ -67,18 +67,26 @@ global_consistency_test(tests::Tester& t)
   out_at.insert('c');
   out_at.insert('d');
 
+  alphabet_t				other_in_at;
+  out_at.insert('e');
+  out_at.insert('f');
+
   monoid_t				out_md (out_at);
+  monoid_t				other_in_md (other_in_at);
   monoid_t				in_md(in_at);
   output_series_set_t::semiring_t	out_sg;
   output_series_set_t			out_ss(out_sg, out_md);
   series_set_t				ss (out_ss, in_md);
   automata_set_t			aa (ss);
 
+  series_set_t				ss_2 (out_ss, other_in_md);
 
   automaton_t		a1 = new_automaton(in_at, out_at);
   automaton_t		a2 = new_automaton(in_at.begin(), in_at.end(),
 					   out_at.begin(), out_at.end());
+  automaton_t		a3 = new_automaton(other_in_at, out_at);
 
+  TEST(t, "alphabet inegality is consistent", in_md != other_in_md);
   TEST(t, "new_automaton is consistent.", a1 == a2);
   TEST(t, "new_automaton gives a correct alphabet.",
        a1.structure().series().monoid().alphabet() == in_at);
@@ -86,7 +94,9 @@ global_consistency_test(tests::Tester& t)
        a1.structure().series().monoid() == in_md);
   TEST(t, "new_automaton gives a correct semiring.",
        a1.structure().series().semiring() == out_ss);
-  TEST(t, "new_automaton gives a correct automata set.", a1.structure() == aa);
+ TEST(t, "new_automaton gives a correct automata set.", a1.structure() == aa);
+ TEST(t, "automata set inegality is consistent.",
+      a1.structure() != a3.structure());
 
   return t.all_passed();
 }

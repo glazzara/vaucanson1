@@ -71,6 +71,9 @@ namespace vcsn_test {
   bool operator==(const S& s1, const S& s2)
   { return s1.s_ == s2.s_; }
 
+  bool operator==(const eT&, const eS&)
+  { return true; }
+
   // simple non-singleton structure without attribute
 
   struct Sna : vcsn::Structure<Sna> {

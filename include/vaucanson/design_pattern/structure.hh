@@ -116,22 +116,16 @@ namespace vcsn {
 
   /** @addtogroup operators *//** @{ */
   /**
-   * @name Equality operators for Structures
+   * @name Inequality operator for Structures
    *
-   * The deep equality operator between @c Structure instances.
+   * This operator calls equality operator of sub-class.
    *
-   * The implementation for @c Structure always return true since
-   * there is no dynamic type information attached to @c Structure itself.
    */
   /** @{ */
-  template<typename S>
-  bool operator==(const vcsn::Structure<S>& a,
-		  const vcsn::Structure<S>& b);
-
 
   template<typename S>
-  bool operator!=(const vcsn::Structure<S>& a,
-		  const vcsn::Structure<S>& b);
+  bool operator != (const vcsn::Structure<S>& a,
+		    const vcsn::Structure<S>& b);
   /** @} */
   /** @} */
 
