@@ -5,7 +5,7 @@
 # VCSN_HEADER
 
 AC_PREREQ([2.50])
-AC_INIT([vaucanson], [0.1], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [0.1.0], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_SRCDIR([ChangeLog])
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
@@ -30,6 +30,7 @@ AC_CONFIG_FILES([
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile
 	src/tests/tests-suites/Makefile
+	src/tests/bin/Makefile
 	src/tests/tests-suites/usual_automaton_t/Makefile
 	include/Makefile])
 

@@ -73,28 +73,28 @@ namespace vcsn {
     }
     
     template<class Self, typename T>
-    MetaElement<AlphabetsBase<Self>, T>::iterator 
+    typename MetaElement<AlphabetsBase<Self>, T>::iterator 
     MetaElement<AlphabetsBase<Self>, T>::begin() 
     { 
       return op_begin(set(), value()); 
     }
     
     template<class Self, typename T> 
-    MetaElement<AlphabetsBase<Self>, T>::const_iterator 
+    typename MetaElement<AlphabetsBase<Self>, T>::const_iterator 
     MetaElement<AlphabetsBase<Self>, T>::begin() const
     { 
       return op_begin(set(), value()); 
     }
     
     template<class Self, typename T>
-    MetaElement<AlphabetsBase<Self>, T>::iterator 
+    typename MetaElement<AlphabetsBase<Self>, T>::iterator 
     MetaElement<AlphabetsBase<Self>, T>::end() 
     { 
       return op_end(set(), value()); 
     }
     
     template<class Self, typename T>
-    MetaElement<AlphabetsBase<Self>, T>::const_iterator 
+    typename MetaElement<AlphabetsBase<Self>, T>::const_iterator 
     MetaElement<AlphabetsBase<Self>, T>::end() const
     { 
       return op_end(set(), value()); 

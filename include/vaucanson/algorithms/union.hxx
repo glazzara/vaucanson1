@@ -23,9 +23,7 @@
 
 # include <set>
 # include <map>
-
 # include <vaucanson/algorithms/union.hh>
-
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/history.hh>
 
@@ -55,7 +53,7 @@ namespace vcsn {
 	hstate_t new_state = lhs.add_state();
 	states_map[*i] = new_state;
 
-	lhs.history().set_state_event_about(INUNION_EVENT, new_state, *i);
+	//	lhs.history().set_state_event_about(INUNION_EVENT, new_state, *i);
 
 	lhs.set_final(new_state, rhs.get_final(*i));
 	lhs.set_initial(new_state, rhs.get_initial(*i));
@@ -85,7 +83,7 @@ namespace vcsn {
 			   states_map[rhs.aim_of(*d)],
 			   rhs.label_of(*d));
 
-	    lhs.history().set_edge_event_about(INUNION_EVENT, new_edge, *d);
+	    //  lhs.history().set_edge_event_about(INUNION_EVENT, new_edge, *d);
 	  }
       }
   }
@@ -105,7 +103,7 @@ namespace vcsn {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
-    ret.history().set_auto_event_about(INUNION_EVENT, lhs, rhs);
+    //    ret.history().set_auto_event_about(INUNION_EVENT, lhs, rhs);
     auto_do_union(ret.set(), ret, rhs);
     return ret;
   }

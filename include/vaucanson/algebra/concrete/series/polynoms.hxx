@@ -63,13 +63,15 @@ namespace vcsn {
     }
     
     template<typename Tm, typename Tw>
-    polynom<Tm, Tw>::iterator polynom<Tm, Tw>::begin() 
+    typename polynom<Tm, Tw>::iterator 
+    polynom<Tm, Tw>::begin() 
     { 
       return map_.begin(); 
     }
     
     template<typename Tm, typename Tw>    
-    polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::begin() const 
+    typename polynom<Tm, Tw>::const_iterator 
+    polynom<Tm, Tw>::begin() const 
     { 
       return map_.begin(); 
     }

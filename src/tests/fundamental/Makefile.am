@@ -2,7 +2,8 @@
 #
 #
 # $Id$
-# VCSN_HEADER
+
+
 
 
 include $(top_srcdir)/src/tests/check/Makefile.check

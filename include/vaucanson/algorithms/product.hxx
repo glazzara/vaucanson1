@@ -64,7 +64,7 @@ namespace vcsn {
       = output.series().zero(SELECT(typename series_elt_t::value_t));
 
     // FIXME : log history : it should be optional
-    output.history().set_auto_event_about(PRODUCT_EVENT, lhs, rhs);
+    // output.history().set_auto_event_about(PRODUCT_EVENT, lhs, rhs);
     
     /*----------------------------------.
     | Get initial states of the product |
@@ -82,7 +82,7 @@ namespace vcsn {
 	  // Log history : FIXME it should be optional.
 	  // what about added a static information in the automaton type ?
 	  // log_history(history::product_kind(), output, new_state, *lhs_s, *rhs_s);
-	  output.history().set_state_event_about(PRODUCT_EVENT, new_state, *lhs_s, *rhs_s);
+	  //  output.history().set_state_event_about(PRODUCT_EVENT, new_state, *lhs_s, *rhs_s);
 
 	  visited[new_pair] = new_state;
 	  to_process.push(new_pair);
@@ -143,10 +143,10 @@ namespace vcsn {
 			// Log history : FIXME : it should be optional
 			// log_history(history::product_kind(), 
 			//             output, aim, lhs_s, rhs_s);
-			output.history().set_state_event_about(PRODUCT_EVENT, 
-							       aim, 
-							       lhs_s, 
-							       rhs_s);
+// 			output.history().set_state_event_about(PRODUCT_EVENT, 
+// 							       aim, 
+// 							       lhs_s, 
+// 							       rhs_s);
 			
 			visited[new_pair] = aim;
 			to_process.push(new_pair);
@@ -156,10 +156,10 @@ namespace vcsn {
 		    hedge_t new_edge = output.add_serie_edge(current_state, aim, s__);
 		    // Log history : FIXME it should be optional !
 		    // log_history(history::product_kind(), output, new_e, *iel, *ier);
-		    output.history().set_edge_event_about(PRODUCT_EVENT, 
-							  new_edge, 
-							  *iel, 
-							  *ier);
+		    // output.history().set_edge_event_about(PRODUCT_EVENT, 
+// 							  new_edge, 
+// 							  *iel, 
+// 							  *ier);
 		  }
 	      }
 	  }
@@ -188,12 +188,12 @@ namespace vcsn {
   void do_auto_diagonal(const AutomataBase<A>&	a_set,
 			auto_t&			a)
   {
-    if (a.history().get_auto_event_about(PRODUCT_EVENT) == 0)
-      {
-	std::cerr << "Warning : trying to get the diagonal of an non product automaton."
-		  << std::endl;
-	return;
-      }
+//     if (a.history().get_auto_event_about(PRODUCT_EVENT) == 0)
+//       {
+// 	std::cerr << "Warning : trying to get the diagonal of an non product automaton."
+// 		  << std::endl;
+// 	return;
+//       }
 
     std::set<hstate_t>				diagonal_states;
     const history::BinaryEvent<hstate_t>*	b_event;

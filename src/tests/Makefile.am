@@ -2,11 +2,11 @@
 #
 # 
 # $Id$
-# VCSN_HEADER
 
 SUBDIRS = \
 	check 					\
 	tests-suites 				\
 	fundamental				\
 	algebra    				\
+	bin                                     \
 	automata

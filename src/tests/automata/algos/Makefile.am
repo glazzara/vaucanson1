@@ -2,6 +2,7 @@
 #
 #
 # $Id$
-# VCSN_HEADER
+
+
 
 

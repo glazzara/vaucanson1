@@ -1,3 +1,35 @@
+2002-07-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.93)
+	* include/Makefile.am : update distributed files.
+	* configure.ac :
+	-AC_INIT([vaucanson], [0.1], [vaucanson-bugs@lrde.epita.fr])
+	+AC_INIT([vaucanson], [0.1.0], [vaucanson-bugs@lrde.epita.fr])
+	@@ -30,6 +30,7 @@
+	 	src/tests/automata/algos/Makefile
+	 	src/tests/automata/implementation_check/Makefile
+ 		src/tests/tests-suites/Makefile
+	+	src/tests/bin/Makefile
+	 	src/tests/tests-suites/usual_automaton_t/Makefile
+	 	include/Makefile])
+ 
+	* Makefile.am : 
+	+EXTRA_DIST=THANKS README LICENCE ChangeLog
+	* src/Makefile.am : minor change.
+	* src/tests/Makefile.am : add bin to SUBDIRS.
+	* src/tests/check/Makefile.flags : -O2.
+	* src/tests/check/Makefile.am : minor. 
+	* src/tests/algebra/series/Makefile.am
+	+EXTRA_DIST = series-test.hh 
+	* src/tests/algebra/series/krat-test.cc : deactivated for the release.
+	* include/vaucanson/algorithms/union.hxx : bug due to history fixed.
+	* include/vaucanson/algorithms/product.hxx : idem.
+	* src/tests/bin/automata-test-suite.sh : initialize verbose.
+
+2002-07-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.92)
+	* *.hh, *.cc, *.hxx : replace VCSN_HEADER by LGPL.
+	
+
 2002-07-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.91)
 

@@ -2,9 +2,7 @@
 #
 #
 # $Id$
-# VCSN_HEADER
-
 
 AUTOMAKE_OPTIONS= foreign 1.6
 SUBDIRS= include src
-EXTRA_DIST=
+EXTRA_DIST=THANKS README LICENCE ChangeLog

@@ -1,7 +1,55 @@
+----------------------------------------------------------------------------
+OVERVIEW
 
-Contact:
+Vaucanson, a C++ generic library for weighted finite state machine.
 
-* mail : vaucanson@lrde.epita.fr
+Firstly initiated by Jacques Sakarovitch in 2000, Vaucanson is a
+project developed by the Ecole Nationale Supérieure des
+Télécommunications and the EPITA Research and Development Laboratory
+(LRDE).
+
+The goal of this library is to enable the development of C++ programs
+in an abstract and general way with, at the same time, a large
+specialization power. Indeed, on the one hand, we can write algorithms
+working on every automaton with weights over any semirings and with
+words from any free monoids. And on the other hand, a particular
+algorithm can be specialized for a particular data structure
+implementing only a pseudo behaviour.
+
+Yet, Vaucanson is still in a fundamental development phase and
+algorithms, data structures and global architecture are not totally
+stable and well tested. The src directory will be extended with
+demonstration program soon. For the moment, you can look at the
+include/vaucanson/algorithms to be introduced to the basics of
+Vaucanson.
+
+Please send any question or comments to <vaucanson@lrde.epita.fr>, or
+<vaucanson-bugs@lrde.epita.fr>.
+
+----------------------------------------------------------------------------
+INSTALL
+
+To install Vaucanson on your system, type the classical sequence :
+
+	./configure
+	make check
+	make install (as root)
+
+----------------------------------------------------------------------------
+REQUIREMENTS
+
+Vaucanson was only tested with g++-3.0.4. The code is written in
+respect to the ISO standard to permit a higher portability in the
+future. Adjustment and configure protocol will be available soon.
+
+Moreover, high verbose mode of the testing suites uses the AT&T dot
+format to save automaton in a human readable file. Use Graphviz to
+visualize these .dot files.
+
+----------------------------------------------------------------------------
+CONTACTS
+
+* mail: vaucanson@lrde.epita.fr
 
 * Vaucanson - LRDE 
   24,rue Pasteur
