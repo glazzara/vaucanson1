@@ -12,7 +12,7 @@
 #include <vaucanson/fundamental/fundamental.hh>
 #include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 #include <vaucanson/algebra/concrete/series/polynoms.hh>
-
+#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 
 using namespace vcsn;
 
@@ -46,11 +46,9 @@ int main(int argc, char **argv)
     verbose = 1;
   tests::Tester t(verbose);
 
- test_design_pattern<Series<int, Words>, polynom<int,int> > ();
-
- //  if (test_series<Series<int, Words>, polynom<int,int> >(t))
-//     return EXIT_SUCCESS;
-//   else
-//     return EXIT_FAILURE;
+ if (test_series<Series<NumericalSemiring, Words>, polynom<int,std::string> >(t))
+    return EXIT_SUCCESS;
+  else
+    return EXIT_FAILURE;
 }
 

@@ -85,7 +85,7 @@ SUBDIRS = \
 	semiring    \
 	alphabets   \
 	free_monoid \
-	bimonoid
+	series
 
 subdir = src/tests/algebra
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

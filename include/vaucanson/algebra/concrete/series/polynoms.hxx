@@ -1,9 +1,8 @@
-/***********************************
- * <vaucanson/algebra/polynoms.hxx> *
- ***********************************/
+// algebra/polynoms.hxx
+//
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGEBRA_POLYNOMS_HXX
 # define ALGEBRA_POLYNOMS_HXX
 
@@ -11,19 +10,9 @@
 
 namespace vcsn {
 
-  // TODO: std::map should be a static parameter.
-  // In fact, the container type expected by the following class must
-  // only meet those of a finite support application.
-
-  // TODO: specialize this class for Tw == bool, using std::set as
-  // a container. The problem is, many functions have to be rewritten,
-  // and a new, customized iterator must be written.
-  // idea: use utility::tied_pair when dereferencing this iterator,
-  // with one part of the pair linked to the value field of the std::iterator.
-
   /*----------------.
-    | polynom<Tm, Tw> |
-    `----------------*/
+  | polynom<Tm, Tw> |
+  `----------------*/
 
   template<typename Tm, typename Tw>
   template<typename M, typename W>
@@ -141,22 +130,54 @@ namespace vcsn {
   { 
     map_.swap(other.map_); 
   }
-    
-  template<typename Tm, typename Tw>    
-  bool polynom<Tm, Tw>::operator==(const polynom<Tm, Tw>& other) const
+
+  template<typename Tm, typename Tw>        
+  const std::map<Tm, Tw>
+  polynom<Tm, Tw>::as_map() const
   { 
-    return map_ == other.map_; 
+    return map_;
   }
 
-  template<typename Tm, typename Tw>    
-  bool polynom<Tm, Tw>::operator<(const polynom<Tm, Tw>& other) const
-  { 
-    return map_ < other.map_; 
+  template <class Tm, class Tw>
+  bool operator==(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
+  {
+    return lhs.as_map() == rhs.as_map();
   }
-    
+
+  template <class Tm, class Tw>
+  bool operator!=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
+  {
+    return !(lhs == rhs);
+  }
+
+
+  template <class Tm, class Tw>
+  bool operator<(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
+  {
+    return lhs.as_map() < rhs.as_map();
+  }
+
+  template <class Tm, class Tw>
+  bool operator>(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
+  {
+    return lhs.as_map() > rhs.as_map();
+  }
+
+  template <class Tm, class Tw>
+  bool operator<=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
+  {
+    return lhs.as_map() <= rhs.as_map();
+  }
+
+  template <class Tm, class Tw>
+  bool operator>=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
+  {
+    return lhs.as_map() >= rhs.as_map();
+  }
+ 
   /*-------------------.
-    | External functions |
-    `-------------------*/
+  | External functions |
+  `-------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const Series<W, M>& s, const polynom<Tm, Tw>& m)

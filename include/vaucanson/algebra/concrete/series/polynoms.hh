@@ -1,9 +1,9 @@
-/***********************************
- * <vaucanson/algebra/polynoms.hh> *
- ***********************************/
+// algebra/polynoms.hh
+//
+//
 // $Id$
+// VCSN_HEADER
 
-/* this file is part of the Vaucanson project */
 #ifndef ALGEBRA_POLYNOMS_HH
 # define ALGEBRA_POLYNOMS_HH
 
@@ -17,16 +17,6 @@ namespace vcsn {
 
   namespace algebra  {
 
-    // TODO: std::map should be a static parameter.
-    // In fact, the container type expected by the following class must
-    // only meet those of a finite support application.
-
-    // TODO: specialize this class for Tw == bool, using std::set as
-    // a container. The problem is, many functions have to be rewritten,
-    // and a new, customized iterator must be written.
-    // idea: use utility::tied_pair when dereferencing this iterator,
-    // with one part of the pair linked to the value field of the std::iterator.
-
     /*----------------.
     | polynom<Tm, Tw> |
     `----------------*/
@@ -35,43 +25,44 @@ namespace vcsn {
     class polynom
     {
     public:
+      typedef typename std::map<Tm, Tw>::const_iterator const_iterator;
+      typedef typename std::map<Tm, Tw>::iterator	iterator;
+
       template<typename M, typename W>
       polynom(SELECTOR(M), SELECTOR(W));
       polynom(const polynom& other);
       polynom();
 
-      size_t size() const;
-      bool empty() const;
+      size_t		size() const;
+      bool		empty() const;
 
-      typedef typename std::map<Tm, Tw>::const_iterator const_iterator;
-      typedef typename std::map<Tm, Tw>::iterator	iterator;
-
-      iterator begin();      
-      const_iterator begin() const;
+      iterator		begin();      
+      const_iterator	begin() const;
       
-      iterator end();     
-      const_iterator end() const;
+      iterator		end();     
+      const_iterator	end() const;
 
-      iterator find(const Tm& m); 
-      const_iterator find(const Tm& m) const;
+      iterator		find(const Tm& m); 
+      const_iterator	find(const Tm& m) const;
 
       template<typename W>
-      Tw& make_get(SELECTOR(W), const Tm& m);
+      Tw&		make_get(SELECTOR(W), const Tm& m);
       template<typename W>
-      Tw get(SELECTOR(W), const Tm& m) const;
+      Tw		get(SELECTOR(W), const Tm& m) const;
 
-      void insert(const Tm& m, const Tw& w);
+      void		insert(const Tm& m, const Tw& w);
+
       template<typename W>
-      void add(const W& weights, const Tm& m, const Tw& w);
-      void erase(iterator i);
-      void clear();
-      void swap(polynom<Tm, Tw>& other);
-      bool operator==(const polynom<Tm, Tw>& other) const;
-      bool operator<(const polynom<Tm, Tw>& other) const;
-      
+      void		add(const W& weights, const Tm& m, const Tw& w);
+      void		erase(iterator i);
+      void		clear();
+      void		swap(polynom<Tm, Tw>& other);
+
+      const std::map<Tm, Tw>
+      as_map() const;
+
     protected:
       std::map<Tm, Tw> map_;
-
     };
 
   template<typename W, typename M, typename Tm, typename Tw>
@@ -86,7 +77,24 @@ namespace vcsn {
 
   using namespace algebra;
 
-  
+  template <class Tm, class Tw>
+  bool operator==(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs); 
+
+  template <class Tm, class Tw>
+  bool operator!=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs); 
+
+  template <class Tm, class Tw>
+  bool operator<(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);   
+
+  template <class Tm, class Tw>
+  bool operator>(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);   
+
+  template <class Tm, class Tw>
+  bool operator<=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);   
+
+  template <class Tm, class Tw>
+  bool operator>=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);   
+
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const Series<W, M>& s, const polynom<Tm, Tw>& m);
   
