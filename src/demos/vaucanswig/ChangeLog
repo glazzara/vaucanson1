@@ -1,5 +1,9 @@
 2003-07-08  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* meta/vaucanswig_core.i: Handle list<string>.
+
+2003-07-08  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* meta/vauto.hh: Add new method `add_states'.
 	* meta/vaucanswig_automaton.i: Update accordingly.
 	* meta/vauto.cc: Update accordingly.
