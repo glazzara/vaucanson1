@@ -81,7 +81,7 @@ am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
 
-AUTOMAKE_OPTIONS = foreign 1.5
+AUTOMAKE_OPTIONS = foreign 1.6
 SUBDIRS = include src
 EXTRA_DIST = 
 subdir = .

@@ -1,3 +1,12 @@
+2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* src/tests/fundamental/design_pattern-test.hh: added. Hold static tests for element.
+	* src/tests/fundamental/element-full-test.cc : modified. Now use design_pattern-test.hh.
+
+	* Makefile.am : automake 1.6 is expected from now on.
+	* src/tests/check/Makefile.flags :AM_CXXFLAGS = -Wall -W -Wno-unused -ansi -pedantic
+		To avoid stupid warnings.
+
 2002-06-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* Removed `src/tests/tests_stuff.hh' : moved to src/tests/check.
