@@ -71,16 +71,25 @@ unsigned realtime_test(tests::Tester& tg)
   TEST(t, "is_realtime on non-realtime "+rate, success == nb_non_ok_tests);
 
   unsigned nb_tests = 20;
+  unsigned nb_tests_done = 0;
   success = 0;
   for (unsigned i = 0; i < nb_tests; i++)
     {
       automaton_t automata = gen.generate_with_epsilon(4, 8, 1, 2);
-      automaton_t non_epsilon = realtime(automata);
-      if (is_realtime(non_epsilon))
-	++success;
+      try
+	{
+	  automaton_t non_epsilon = realtime(automata);
+	  if (is_realtime(non_epsilon))
+	    ++success;
+	  ++nb_tests_done;
+	}
+      catch (std::logic_error&)
+	{
+	  ++nb_tests;
+	}
     }
-  SUCCESS_RATE(rate, success, nb_tests);
-  TEST(t, "realtime on non-realtime "+rate, success == nb_tests);
+  SUCCESS_RATE(rate, success, nb_tests_done);
+  TEST(t, "realtime on non-realtime "+rate, success == nb_tests_done);
 
   return t.all_passed();
 }

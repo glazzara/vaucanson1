@@ -86,35 +86,43 @@ unsigned sum_test(tests::Tester& tg)
       exp_lhs = aut_to_exp(g_auto_lhs);
       exp_rhs = aut_to_exp(g_auto_rhs);
 
-      generalized_t g_rhs_r = realtime(g_auto_rhs);
-      semiring_elt_t semiring_zero =
-	zero_as<semiring_elt_value_t>::of(g_rhs_r.structure().series().semiring());
-
-      automaton_t s = sum(auto_lhs, auto_rhs);
-
-      monoid_elt_t word_lhs_unknown = exp_lhs.choose_from_supp();
-
-      // Regenerate automata if 20 choose_from_supp didn't gave a valid test
-      // word (auto_lhs can be equal to auto_rhs).
-      while (++iter < 20 && eval(g_rhs_r, word_lhs_unknown) != semiring_zero)
-	word_lhs_unknown = exp_lhs.choose_from_supp();
-
-      if (iter < 20)
+      try
 	{
-	  if (eval(realtime(s), word_lhs_unknown) != semiring_zero)
-	    ++success_sum;
-	  else
+	  generalized_t g_rhs_r = realtime(g_auto_rhs);
+	  semiring_elt_t semiring_zero =
+	    zero_as<semiring_elt_value_t>::of(g_rhs_r.structure().series().semiring());
+
+	  automaton_t s = sum(auto_lhs, auto_rhs);
+
+	  monoid_elt_t word_lhs_unknown = exp_lhs.choose_from_supp();
+
+  // Regenerate automata if 20 choose_from_supp didn't gave a valid test
+  // word (auto_lhs can be equal to auto_rhs).
+	  while (++iter < 20 &&
+		 eval(g_rhs_r, word_lhs_unknown) != semiring_zero)
+	    word_lhs_unknown = exp_lhs.choose_from_supp();
+
+	  if (iter < 20)
 	    {
-	      std::cerr << "FAIL: in union of "
-			<< exp_lhs
-			<< " and "
-			<< exp_rhs
-			<< std::endl;
+	      if (eval(realtime(s), word_lhs_unknown) != semiring_zero)
+		++success_sum;
+	      else
+		{
+		  std::cerr << "FAIL: in union of "
+			    << exp_lhs
+			    << " and "
+			    << exp_rhs
+			    << std::endl;
+		}
+	      ++nb_tests_sum_done;
 	    }
-	  ++nb_tests_sum_done;
+	  else
+	    ++nb_tests_sum;
 	}
-      else
-	++nb_tests_sum;
+      catch (std::logic_error&)
+	{
+	  ++nb_tests_sum;
+	}
     }
   std::string rate_sum;
   SUCCESS_RATE(rate_sum, success_sum, nb_tests_sum_done);

@@ -59,44 +59,59 @@ bool closure_test(tests::Tester& tg)
   bool error_backward_idempotence = false;
   bool error_backward_epsilon = false;
 
-  for (int i = 0; i < 50 ; ++i)
+  int nb_test = 50;
+
+  for (int i = 0; i < nb_test; ++i)
     {
-      automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 10, 20);
-      {
-	automaton_t cauto = backward_closure(auto_epsilon);
-
-	if (backward_closure(cauto).edges().size() != cauto.edges().size())
-	  error_backward_idempotence = true;
-	for_each_edge(e, cauto)
-	  if (cauto.series_of(*e) ==
-	      identity_as<series_value_t>::of(cauto.structure().series()))
-	    error_backward_epsilon = true;
-	if (error_backward_idempotence or error_backward_epsilon)
+      try
+	{
+	  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 10, 20);
 	  {
-	    std::cerr << "Error, automata saved in /tmp." << std::endl;
-	    SAVE_AUTOMATON_DOT("/tmp", "backward_closure_in", auto_epsilon, i);
-	    SAVE_AUTOMATON_DOT("/tmp", "backward_closure_out", cauto, i);
-	    break;
+	    automaton_t cauto = backward_closure(auto_epsilon);
+
+	    if (backward_closure(cauto).edges().size() != cauto.edges().size())
+	      error_backward_idempotence = true;
+	    for_each_edge(e, cauto)
+	      if (cauto.series_of(*e) ==
+		  identity_as<series_value_t>::of(cauto.structure().series()))
+		error_backward_epsilon = true;
+	    if (error_backward_idempotence or error_backward_epsilon)
+	      {
+		std::cerr << "Error, automata saved in /tmp." << std::endl;
+		SAVE_AUTOMATON_DOT("/tmp",
+				   "backward_closure_in",
+				   auto_epsilon,
+				   i);
+		SAVE_AUTOMATON_DOT("/tmp", "backward_closure_out", cauto, i);
+		break;
+	      }
 	  }
-      }
 
-      {
-	automaton_t cauto = forward_closure(auto_epsilon);
-
-	if (forward_closure(cauto).edges().size() != cauto.edges().size())
-	  error_forward_idempotence = true;
-	for_each_edge(e, cauto)
-	  if (cauto.series_of(*e) ==
-	      identity_as<series_value_t>::of(cauto.structure().series()))
-	    error_forward_epsilon = true;
-	if (error_backward_idempotence or error_backward_epsilon)
 	  {
-	    std::cerr << "Error, automata saved in /tmp." << std::endl;
-	    SAVE_AUTOMATON_DOT("/tmp", "forward_closure_in", auto_epsilon, i);
-	    SAVE_AUTOMATON_DOT("/tmp", "forward_closure_out", cauto, i);
-	    break;
+	    automaton_t cauto = forward_closure(auto_epsilon);
+
+	    if (forward_closure(cauto).edges().size() != cauto.edges().size())
+	      error_forward_idempotence = true;
+	    for_each_edge(e, cauto)
+	      if (cauto.series_of(*e) ==
+		  identity_as<series_value_t>::of(cauto.structure().series()))
+		error_forward_epsilon = true;
+	    if (error_backward_idempotence or error_backward_epsilon)
+	      {
+		std::cerr << "Error, automata saved in /tmp." << std::endl;
+		SAVE_AUTOMATON_DOT("/tmp",
+				   "forward_closure_in",
+				   auto_epsilon,
+				   i);
+		SAVE_AUTOMATON_DOT("/tmp", "forward_closure_out", cauto, i);
+		break;
+	      }
 	  }
-      }
+	}
+      catch (std::logic_error&)
+	{
+	  ++nb_test;
+	}
     }
 
   TEST(t, "Backward: Idempotence.", not error_backward_idempotence);

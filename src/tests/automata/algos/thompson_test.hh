@@ -148,45 +148,55 @@ bool thompson_test(tests::Tester& tg)
   {
     TEST_MSG("Tests on random expressions.");
     unsigned success = 0;
-
+    unsigned nb_test_done = 0;
+    
     for (unsigned nb = 0; nb < nb_test; ++nb)
       {
 	krat_t		exp = ss.choose(SELECT(exp_t));
 	automaton_t	au (aa);
 
-	thompson_of(au, exp.value());
-	bool normalized = is_normalized(au) or exp == zero_as<exp_t>::of(ss);
-	realtime_here(au);
-
-	if (t.verbose() == tests::high)
+	try
 	  {
-	    TEST_MSG("Automaton saved in /tmp.");
-	    SAVE_AUTOMATON_DOT("/tmp", "thompson", au, nb);
-	  }
-	unsigned i = 0;
-	if (exp != ss.zero(SELECT(exp_t)))
-	  for (; i < nb_word_test; ++i)
-	    {
-	      monoid_elt_t w = exp.choose_from_supp();
-	      if (t.verbose() == tests::high)
-		std::cout << "TEST: thompson (" << nb << ")"
-			  << i << " : test " << w << std::endl;
-	      if (eval(au, w) ==
-		  zero_as<semiring_elt_value_t>::of(ss.semiring()))
+	    thompson_of(au, exp.value());
+	    bool normalized = is_normalized(au) or
+	      exp == zero_as<exp_t>::of(ss);
+	    realtime_here(au);
+
+	    if (t.verbose() == tests::high)
+	      {
+		TEST_MSG("Automaton saved in /tmp.");
+		SAVE_AUTOMATON_DOT("/tmp", "thompson", au, nb);
+	      }
+	    unsigned i = 0;
+	    if (exp != ss.zero(SELECT(exp_t)))
+	      for (; i < nb_word_test; ++i)
 		{
+		  monoid_elt_t w = exp.choose_from_supp();
 		  if (t.verbose() == tests::high)
-		    std::cout << "TEST: thompson " << i
-			      << " failed." << std::endl;
-		  break;
+		    std::cout << "TEST: thompson (" << nb << ")"
+			      << i << " : test " << w << std::endl;
+		  if (eval(au, w) ==
+		      zero_as<semiring_elt_value_t>::of(ss.semiring()))
+		    {
+		      if (t.verbose() == tests::high)
+			std::cout << "TEST: thompson " << i
+				  << " failed." << std::endl;
+		      break;
+		    }
 		}
-	    }
-	if (normalized and
-	    ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
-	  ++success;
+	    if (normalized and
+		((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
+	      ++success;
+	    ++nb_test_done;
+	  }
+	catch (std::logic_error&)
+	  {
+	    ++nb_test;
+	  }
       }
     std::string rate;
-    SUCCESS_RATE(rate, success, nb_test);
-    TEST(t, "Random test " + rate, success == nb_test);
+    SUCCESS_RATE(rate, success, nb_test_done);
+    TEST(t, "Random test " + rate, success == nb_test_done);
   }
   return t.all_passed();
 }

@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_IN_CONCAT_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_IN_CONCAT_TEST_HH
@@ -50,8 +52,9 @@ bool in_concat_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
   typedef typename generalized_traits<Auto>::automaton_t generalized_t;
   AUTOMATON_TYPES_(generalized_t, g_);
-  
+
   unsigned int nb_test = 20;
+  unsigned int nb_test_done = 0;
   unsigned int size    = 0;
   tests::Tester t(tg.verbose());
 
@@ -68,28 +71,37 @@ bool in_concat_test(tests::Tester& tg)
       g_series_elt_t exp_rhs(g_auto_rhs.structure().series());
       exp_lhs = aut_to_exp(g_auto_lhs);
       exp_rhs = aut_to_exp(g_auto_rhs);
+
       monoid_elt_t word = (exp_lhs * exp_rhs).choose_from_supp();
 
-      concatenate_here(auto_lhs, auto_rhs);
+      try
+	{
+	  concatenate_here(auto_lhs, auto_rhs);
 
-      if (auto_lhs.states().size() == 
-	    lhs_states_num + auto_rhs.states().size() &&
-	  eval(realtime(auto_lhs), word) !=
-	    zero_as<semiring_elt_value_t>::of(auto_lhs.structure().series().semiring()))
-	++size;
-      else
-      {
-	std::cerr << "TEST: concatenation of automata corresponding"
-		  << "to following expressions failed."
-		  << std::endl;
-	std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs << std::endl;
-      }
+	  if (auto_lhs.states().size() ==
+	      lhs_states_num + auto_rhs.states().size() &&
+	      eval(realtime(auto_lhs), word) !=
+	      zero_as<semiring_elt_value_t>::of(auto_lhs.structure().series().semiring()))
+	    ++size;
+	  else
+	    {
+	      std::cerr << "TEST: concatenation of automata corresponding"
+			<< "to following expressions failed."
+			<< std::endl;
+	      std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs << std::endl;
+	    }
+	  ++nb_test_done;
+	}
+      catch (std::logic_error&)
+	{
+	  ++nb_test;
+	}
     }
 
   std::string size_rate;
-  SUCCESS_RATE(size_rate, size, nb_test);
+  SUCCESS_RATE(size_rate, size, nb_test_done);
   TEST(t, "In place concatenation of two automata." + size_rate,
-       size == nb_test);
+       size == nb_test_done);
   // FIXME: add tests based on samples from the languages.
   return t.all_passed();
 }

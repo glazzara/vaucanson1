@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_CONCAT_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_CONCAT_TEST_HH
@@ -52,6 +54,7 @@ bool concat_test(tests::Tester& tg)
   AUTOMATON_TYPES_(generalized_t, g_);
   
   unsigned int nb_test = 20;
+  unsigned int nb_test_done = 0;
   unsigned int size    = 0;
   tests::Tester t(tg.verbose());
 
@@ -69,26 +72,34 @@ bool concat_test(tests::Tester& tg)
       exp_rhs = aut_to_exp(g_auto_rhs);
       monoid_elt_t word = (exp_lhs * exp_rhs).choose_from_supp();
 
-      automaton_t ret = concatenate(auto_lhs, auto_rhs);
+      try
+	{
+	  automaton_t ret = concatenate(auto_lhs, auto_rhs);
 
-      if (ret.states().size() == 
-	    auto_lhs.states().size() + auto_rhs.states().size() &&
-	  eval(realtime(ret), word) !=
-	    zero_as<semiring_elt_value_t>::of(ret.structure().series().semiring()))
-	++size;
-      else
-      {
-	std::cerr << "TEST: concatenation of automata corresponding"
-		  << "to following expressions failed."
-		  << std::endl;
-	std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs << std::endl;
-      }
+	  if (ret.states().size() == 
+	      auto_lhs.states().size() + auto_rhs.states().size() &&
+	      eval(realtime(ret), word) !=
+	      zero_as<semiring_elt_value_t>::of(ret.structure().series().semiring()))
+	    ++size;
+	  else
+	    {
+	      std::cerr << "TEST: concatenation of automata corresponding"
+			<< "to following expressions failed."
+			<< std::endl;
+	      std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs << std::endl;
+	    }
+	  ++nb_test_done;
+	}
+      catch (std::logic_error&)
+	{
+	  ++nb_test;
+	}
     }
 
   std::string size_rate;
-  SUCCESS_RATE(size_rate, size, nb_test);
+  SUCCESS_RATE(size_rate, size, nb_test_done);
   TEST(t, "Concatenation of two automata." + size_rate,
-       size == nb_test);
+       size == nb_test_done);
   // FIXME: add tests based on samples from the languages.
   return t.all_passed();
 }

@@ -1,5 +1,15 @@
 2004-04-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/automata/algos/in_concat_test.hh,
+	* src/tests/automata/algos/realtime_test.hh,
+	* src/tests/automata/algos/sum_test.hh,
+	* src/tests/automata/algos/thompson_test.hh,
+	* src/tests/automata/algos/concat_test.hh,
+	* src/tests/automata/algos/closure_test.hh: Update these tests in order
+	to handle computation exceptions.
+	
+2004-04-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/misc/contract.hh: Add a macro for exception 
 	handling.
 	* include/vaucanson/algorithms/forward_closure.hxx,
