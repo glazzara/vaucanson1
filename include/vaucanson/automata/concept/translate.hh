@@ -1,5 +1,6 @@
 // translate.hh
 //
+// $Id$
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001-2002 Sakarovitch, Poss, Rey and Regis-Gianas.
 //
@@ -16,10 +17,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
-#ifndef AUTOMATA_COPY_HH
-#define AUTOMATA_COPY_HH
+#ifndef AUTOMATA_CONCEPT_TRANSLATE_HH
+# define AUTOMATA_CONCEPT_TRANSLATE_HH
 
 # include <vaucanson/automata/concept/handlers.hh>
 # include <map>
@@ -27,16 +26,17 @@
 namespace vcsn
 {
 
-  template<typename lhs_t, typename rhs_t, typename F>
-  void auto_translate_edges(lhs_t& dst_,
-			    const rhs_t& from,
-			    const F& translate_fun);
+  template <typename lhs_t, typename rhs_t, typename F>
+  void auto_translate_edges(lhs_t&          dst,
+			    const rhs_t&    from,
+			    const F&        translate_fun);
 
-  template<typename auto_t, typename F>
-  auto_t auto_translate_edges(const auto_t& from, const F& translate_fun);
+  template <typename auto_t, typename F>
+  auto_t auto_translate_edges(const auto_t& from, 
+			      const F&      translate_fun);
 
 }
 
 # include <vaucanson/automata/concept/translate.hxx>
 
-#endif
+#endif // AUTOMATA_CONCEPT_TRANSLATE_HH

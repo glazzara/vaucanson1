@@ -17,10 +17,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
-#ifndef AUTOMATA_TRANSPOSE_IMPL_HH
-# define AUTOMATA_TRANSPOSE_IMPL_HH
+#ifndef AUTOMATA_CONCEPT_TRANSPOSE_IMPL_HH
+# define AUTOMATA_CONCEPT_TRANSPOSE_IMPL_HH
 
 # include <functional>
 
@@ -48,12 +46,14 @@ namespace vcsn
   };
 
 
-  //
-  // TransposeImpl
-  //
-  // Description : it is an automaton adapter to view an automaton as its
-  //               transposed (no data copied.)
-
+  /*--------------.
+  | TransposeImpl |
+  `--------------*/
+  //! TransposeImpl is an implementation adapter which transpose the automaton.
+  /*! TransposeImpl encapsulates an automaton implementation and
+    modifies accessors so as to view the automaton as its transposed
+    without the construction of a new one.
+   */
   template
   <
     typename OtherImpl, 
@@ -200,7 +200,6 @@ namespace vcsn
     edge_iterator;
   };
 
-
   template<typename Auto>
   struct transpose_traits
   {
@@ -222,7 +221,6 @@ namespace vcsn
     transpose_t;
   };
 
-  
   template<typename Auto>
   typename transpose_traits<Auto>::transpose_t
   transpose_view(const Auto& a);
@@ -231,4 +229,4 @@ namespace vcsn
 
 # include <vaucanson/automata/concept/transpose_impl.hxx>
 
-#endif
+#endif // AUTOMATA_CONCEPT_TRANSPOSE_IMPL_HH

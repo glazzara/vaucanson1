@@ -27,23 +27,21 @@
 # include <vaucanson/automata/concept/automaton_impl.hh>
 # include <vaucanson/automata/concrete/manylinks.hh>
 # include <vaucanson/automata/concept/copy.hh>
-
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/concrete/series/generalized.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
-
 # include <map>
 
 namespace vcsn {
 
-    /*----------------------.
-    | Generalized automaton |
-    `----------------------*/
+  /*----------------------.
+  | Generalized automaton |
+  `----------------------*/
   template <class Auto_>
   struct generalized_traits
   {
-    // FIXME : static check on the concept of automaton
+    // FIXME: static check on the concept of automaton
     typedef typename Auto_::series_t		series_t;
     typedef typename Auto_::series_elt_t	series_elt_t;
     typedef typename series_elt_t::monoid_elt_t monoid_elt_t;
@@ -51,6 +49,7 @@ namespace vcsn {
     typedef typename series_elt_t::weight_t     weight_t;
     typedef typename weight_t::value_t		weight_value_t;
 
+    // FIXME: such workarounds should not appear in the interface files.
 #ifdef __ICC
     template <class F, class T>
     struct map : std::map<F, T>
@@ -97,7 +96,6 @@ namespace vcsn {
   typename generalized_traits<Auto_>::automaton_t
   generalized(const Auto_& from);
   
-
 } // vcsn
 
 # include <vaucanson/automata/concrete/generalized.hxx>

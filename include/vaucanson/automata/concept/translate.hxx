@@ -1,5 +1,6 @@
 // translate.hxx
 //
+// $Id$
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001-2002 Sakarovitch, Poss, Rey and Regis-Gianas.
 //
@@ -16,17 +17,14 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
-#ifndef AUTOMATA_COPY_HXX
-#define AUTOMATA_COPY_HXX
+#ifndef AUTOMATA_CONCEPT_TRANSLATE_HXX
+# define AUTOMATA_CONCEPT_TRANSLATE_HXX
 
 # include <vaucanson/automata/concept/translate.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <map>
 
-namespace vcsn
-{
+namespace vcsn {
 
   template<typename lhs_t, typename rhs_t, typename F>
   void auto_translate_edges(lhs_t& dst_,
@@ -47,12 +45,11 @@ namespace vcsn
 	dst.set_initial(s, from.get_initial(*i));
 	stmap[*i] = s;
       }
-
     for (typename rhs_t::edge_iterator i = from.edges().begin();
 	 i != from.edges().end();
 	 ++i)
-      dst.add_serie_edge(stmap[i.origin()], stmap[i.aim()], translate_fun(from.serie_of(*i)));
-
+      dst.add_serie_edge(stmap[i.origin()], stmap[i.aim()], 
+			 translate_fun(from.serie_of(*i)));
     dst_.swap(dst);
   }
 
@@ -60,12 +57,10 @@ namespace vcsn
   auto_t auto_translate_edges(const auto_t& from, const F& translate_fun)
   {
     auto_t dst;
-    auto_translate(dst, from, translate_fun);
+    auto_translate_edges(dst, from, translate_fun);
     return dst;
   }
   
-  
-} //vcsn
+} // vcsn
 
-
-#endif
+#endif // AUTOMATA_CONCEPT_TRANSLATE_HXX

@@ -17,9 +17,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-#ifndef AUTOMATA_RELABEL_IMPL_HH
-# define AUTOMATA_RELABEL_IMPL_HH
+#ifndef AUTOMATA_CONCEPT_RELABEL_IMPL_HH
+# define AUTOMATA_CONCEPT_RELABEL_IMPL_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/ref.hh>
@@ -287,8 +286,8 @@ namespace vcsn
 	       const Sf& sfun);
 
 
-}
+} // vcsn
 
 # include <vaucanson/automata/concept/relabel_impl.hxx>
 
-#endif
+#endif // AUTOMATA_CONCEPT_RELABEL_IMPL_HH

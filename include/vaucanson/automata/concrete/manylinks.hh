@@ -17,17 +17,22 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-#ifndef AUTOMATA_MANYLINKS_HH
-# define AUTOMATA_MANYLINKS_HH
+#ifndef AUTOMATA_CONCRETE_MANYLINKS_HH
+# define AUTOMATA_CONCRETE_MANYLINKS_HH
 
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concrete/manylinks_carriers.hh>
 
-namespace vcsn
-{
- 
+namespace vcsn {
+
+  /*----------.
+  | ManyLinks |
+  `----------*/
+  //! ManyLinks implements an automaton with every services in O(1). 
+  /*! This is an implementation that uses a lot of pointers (its name
+    come from this fact). 
+  */ 
   template<typename Label, typename StateTag, typename EdgeTag>
   class ManyLinks
   {
@@ -39,45 +44,25 @@ namespace vcsn
     typedef ManyLinksEdgesCarrier<state_t, EdgeTag, Label>	edges_t;
     typedef Label						label_t;
 
-    ManyLinks()
-    {}
-
-    ManyLinks(const ManyLinks& other)
-    {
-      for (typename states_t::const_iterator i = other.states().begin();
-	   i != other.states().end();
-	   ++i)
-	{
-	  states().alloc(*i);
-	  if (other.initial().find(*i) != other.initial().end())
-	    initial().insert(*i);
-	  if (other.final().find(*i) != other.final().end())
-	    final().insert(*i);
-	}
-      states().collect_free_slots();
-
-      for (typename edges_t::const_iterator i = other.edges().begin();
-	   i != other.edges().end();
-	   ++i)
-	edges().alloc(*i, 
-		     states().state_at(i.origin()), 
-		     states().state_at(i.aim()),
-		     i.label());
+    ManyLinks();
       
-      edges().collect_free_slots();
-    }
+    ManyLinks(const ManyLinks& other);
 
-    states_t& states() { return final_.states(); }
-    const states_t& states() const { return final_.states(); }
+    states_t& states();
+
+    const states_t& states() const;
     
-    edges_t& edges() { return edges_; }
-    const edges_t& edges() const { return edges_; }
+    edges_t& edges(); 
 
-    final_t& final() { return final_; }
-    const final_t& final() const { return final_; }
+    const edges_t& edges() const; 
 
-    initial_t& initial() { return final_.initial(); }
-    const initial_t& initial() const { return final_.initial(); }
+    final_t& final();
+
+    const final_t& final() const;
+
+    initial_t& initial();
+
+    const initial_t& initial() const;
 
   protected:
     final_t final_;
@@ -99,262 +84,147 @@ namespace vcsn
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   const ManyLinksStatesCarrier<StateTag, EdgeTag, Label>&
   auto_op_states(const Structure<S>& series,
-		 const ManyLinks<Label, StateTag, EdgeTag>& impl)
-  { return impl.states(); }
+		 const ManyLinks<Label, StateTag, EdgeTag>& impl);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
-  const ManyLinksEdgesCarrier<ManyLinksState<StateTag, EdgeTag, Label>, EdgeTag, Label>&
+  const ManyLinksEdgesCarrier<ManyLinksState<StateTag, EdgeTag, Label>, 
+			      EdgeTag, Label>&
   auto_op_edges(const Structure<S>& series,
-		const ManyLinks<Label, StateTag, EdgeTag>& impl)
-  { return impl.edges(); }
+		const ManyLinks<Label, StateTag, EdgeTag>& impl);
 		 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   const ManyLinksInitialCarrier<StateTag, EdgeTag, Label>&
   auto_op_initial(const Structure<S>& series,
-		 const ManyLinks<Label, StateTag, EdgeTag>& impl)
-  { return impl.initial(); }
-
+		  const ManyLinks<Label, StateTag, EdgeTag>& impl);
+  
+  
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   const ManyLinksFinalCarrier<StateTag, EdgeTag, Label>&
   auto_op_final(const Structure<S>& series,
-		 const ManyLinks<Label, StateTag, EdgeTag>& impl)
-  { return impl.final(); }
+		const ManyLinks<Label, StateTag, EdgeTag>& impl);
+
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   unsigned auto_op_add_state(const Structure<S>& series,
-			     ManyLinks<Label, StateTag, EdgeTag>& impl)
-  { 
-    (void)(&series);
-    return *impl.states().alloc(); 
-  }
-
+			     ManyLinks<Label, StateTag, EdgeTag>& impl);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   unsigned auto_op_new_edge(const Structure<S>& series,
 			    ManyLinks<Label, StateTag, EdgeTag>& impl,
 			    unsigned from, unsigned to,
-			    const Label& l)
-  { 
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::states_t states_t;
-    const states_t& s = impl.states();
-
-    return *impl.edges().alloc(s.state_at(from),
-			      s.state_at(to),
-			      l);
-  }
+			    const Label& l);
 			     
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   unsigned auto_op_add_edge(const Structure<S>& series,
 			    ManyLinks<Label, StateTag, EdgeTag>& impl,
 			    unsigned from, unsigned to,
-			    const Label& l)
-  { 
-    // FIXME: the behaviour should be different here
-
-    return auto_op_new_edge(series, impl, from, to, l);
-  }
+			    const Label& l);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   void auto_op_clear_initial(const Structure<S>& series,
-			     ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned s)
-  { impl.initial().erase(s); }
+			     ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			     unsigned s);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   void auto_op_clear_final(const Structure<S>& series,
-			   ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned s)
-  { impl.final().erase(s); }
+			   ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			   unsigned s);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   void auto_op_set_initial(const Structure<S>& series,
-			     ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned s)
-  { impl.initial().insert(s); }
+			   ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			   unsigned s);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   void auto_op_set_final(const Structure<S>& series,
-			 ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned s)
-  { impl.final().insert(s); }
+			 ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			 unsigned s);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   void auto_op_del_state(const Structure<S>& series,
-			 ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned s)
-  { impl.states().erase(s); }
+			 ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			 unsigned s);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   void auto_op_del_edge(const Structure<S>& series,
-			ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned s)
-  { impl.edges().erase(s); }
+			ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			unsigned s);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   void auto_op_safe_del_state(const Structure<S>& series,
-			      ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned s)
-  { 
-    // in our case it is the same as del_state, but this is possible
-    // only because the destructor ~State takes care of everything.
-    impl.states().erase(s); 
-  }
+			      ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			      unsigned s);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   bool auto_op_has_state(const Structure<S>& series,
-			 const ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned s)
-  { return impl.states().find(s) != impl.states().end(); }
+			 const ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			 unsigned s);
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>
   bool auto_op_has_edge(const Structure<S>& series,
-			const ManyLinks<Label, StateTag, EdgeTag>& impl, unsigned e)
-  { return impl.edges().find(e) != impl.edges().end(); }
+			const ManyLinks<Label, StateTag, EdgeTag>& impl, 
+			unsigned e);
 
-
-
-
-
-  template<typename S, typename Label, typename StateTag, typename EdgeTag, typename Iter>
+  template<typename S, typename Label, typename StateTag, typename EdgeTag, 
+	   typename Iter>
   void auto_op_delta_states(const Structure<S>& series,
 			    const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			    Iter out,
-			    unsigned s)
-  {
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::state_t state_t;
-    typedef ManyLinksEdge<state_t, EdgeTag, Label> edge_t;
+			    unsigned s);
 
-    const state_t* p = impl.states().state_at(s);
-    
-    for (const edge_t* e = p->mark()->next(co_out);
-	 e != p->mark();
-	 e = e->next(co_out))
-      *(out++) = e->aim()->index();
-  }
-
-  template<typename S, typename Label, typename StateTag, typename EdgeTag, typename Iter>
+  template<typename S, typename Label, typename StateTag, typename EdgeTag, 
+	   typename Iter>
   void auto_op_delta_edges(const Structure<S>& series,
 			   const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			   Iter out,
-			   unsigned s)
-  {
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::state_t state_t;
-    typedef ManyLinksEdge<state_t, EdgeTag, Label> edge_t;
+			   unsigned s);
 
-    const state_t* p = impl.states().state_at(s);
-    
-    for (const edge_t* e = p->mark()->next(co_out);
-	 e != p->mark();
-	 e = e->next(co_out))
-      *(out++) = e->index();
-  }
-
-  template<typename S, typename Label, typename StateTag, typename EdgeTag, typename Iter>
+  template<typename S, typename Label, typename StateTag, typename EdgeTag,
+	   typename Iter>
   void auto_op_rdelta_states(const Structure<S>& series,
 			     const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			     Iter out,
-			     unsigned s)
-  {
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::state_t state_t;
-    typedef ManyLinksEdge<state_t, EdgeTag, Label> edge_t;
+			     unsigned s);
 
-    const state_t* p = impl.states().state_at(s);
-    
-    for (const edge_t* e = p->mark()->next(co_in);
-	 e != p->mark();
-	 e = e->next(co_in))
-      *(out++) = e->origin()->index();
-  }
-
-  template<typename S, typename Label, typename StateTag, typename EdgeTag, typename Iter>
+  template<typename S, typename Label, typename StateTag, typename EdgeTag, 
+	   typename Iter>
   void auto_op_rdelta_edges(const Structure<S>& series,
 			    const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			    Iter out,
-			    unsigned s)
-  {
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::state_t state_t;
-    typedef ManyLinksEdge<state_t, EdgeTag, Label> edge_t;
+			    unsigned s);
 
-    const state_t* p = impl.states().state_at(s);
-    
-    for (const edge_t* e = p->mark()->next(co_in);
-	 e != p->mark();
-	 e = e->next(co_in))
-      *(out++) = e->index();
-  }
-
-
-
-
-
-  template<typename S, typename Label, typename StateTag, typename EdgeTag, typename Iter, typename Q>
+  template<typename S, typename Label, typename StateTag, typename EdgeTag, 
+	   typename Iter, typename Q>
   void auto_op_delta_states(const Structure<S>& series,
 			    const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			    Iter out,
 			    unsigned s,
-			    const Q& q)
-  {
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::state_t state_t;
-    typedef ManyLinksEdge<state_t, EdgeTag, Label> edge_t;
+			    const Q& q);
 
-    const state_t* p = impl.states().state_at(s);
-    
-    for (const edge_t* e = p->mark()->next(co_out);
-	 e != p->mark();
-	 e = e->next(co_out))
-      if (q(e->label()))
-	*(out++) = e->aim()->index();
-  }
-
-  template<typename S, typename Label, typename StateTag, typename EdgeTag, typename Iter, typename Q>
+  template<typename S, typename Label, typename StateTag, typename EdgeTag, 
+	   typename Iter, typename Q>
   void auto_op_delta_edges(const Structure<S>& series,
 			   const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			   Iter out,
 			   unsigned s,
-			   const Q& q)
-  {
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::state_t state_t;
-    typedef ManyLinksEdge<state_t, EdgeTag, Label> edge_t;
+			   const Q& q);
 
-    const state_t* p = impl.states().state_at(s);
-    
-    for (const edge_t* e = p->mark()->next(co_out);
-	 e != p->mark();
-	 e = e->next(co_out))
-      if (q(e->label()))
-	*(out++) = e->index();
-  }
-
-  template<typename S, typename Label, typename StateTag, typename EdgeTag, typename Iter, typename Q>
+  template<typename S, typename Label, typename StateTag, typename EdgeTag, 
+	   typename Iter, typename Q>
   void auto_op_rdelta_states(const Structure<S>& series,
 			     const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			     Iter out,
 			     unsigned s,
-			     const Q& q)
-  {
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::state_t state_t;
-    typedef ManyLinksEdge<state_t, EdgeTag, Label> edge_t;
+			     const Q& q);
 
-    const state_t* p = impl.states().state_at(s);
-    
-    for (const edge_t* e = p->mark()->next(co_in);
-	 e != p->mark();
-	 e = e->next(co_in))
-      if (q(e->label()))
-	*(out++) = e->origin()->index();
-  }
-
-  template<typename S, typename Label, typename StateTag, typename EdgeTag, typename Iter, typename Q>
+  template<typename S, typename Label, typename StateTag, typename EdgeTag, 
+	   typename Iter, typename Q>
   void auto_op_rdelta_edges(const Structure<S>& series,
 			    const ManyLinks<Label, StateTag, EdgeTag>& impl, 
 			    Iter out,
 			    unsigned s,
-			    const Q& q)
-  {
-    typedef typename ManyLinks<Label, StateTag, EdgeTag>::state_t state_t;
-    typedef ManyLinksEdge<state_t, EdgeTag, Label> edge_t;
-
-    const state_t* p = impl.states().state_at(s);
-    
-    for (const edge_t* e = p->mark()->next(co_in);
-	 e != p->mark();
-	 e = e->next(co_in))
-      if (q(e->label()))
-	*(out++) = e->index();
-  }
+			    const Q& q);
   
-}
+} // vcsn
 
-#endif
+#endif // AUTOMATA_CONCRETE_MANYLINKS_HH
