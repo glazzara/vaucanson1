@@ -137,6 +137,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/krat_exp_constant_term.hxx		     \
 	vaucanson/algorithms/krat_exp_derivation.hh		     \
 	vaucanson/algorithms/krat_exp_derivation.hxx		     \
+	vaucanson/algorithms/krat_exp_flatten.hh		     \
+	vaucanson/algorithms/krat_exp_flatten.hxx		     \
 	vaucanson/algorithms/krat_exp_linearize.hh		     \
 	vaucanson/algorithms/krat_exp_linearize.hxx		     \
 	vaucanson/algorithms/krat_exp_partial_derivation.hh	     \

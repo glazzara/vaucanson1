@@ -1,5 +1,13 @@
 2004-02-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/krat_exp_flatten.hxx,
+	* include/vaucanson/algorithms/krat_exp_flatten.hh: New algorithm.
+	* src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh:
+	Corresponding test.
+	* include/Makefile.am: Update.
+
+2004-02-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/misc/window.cc: New test.
 	* src/tests/misc/Makefile.am: Update.
 
