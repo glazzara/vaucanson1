@@ -1,3 +1,14 @@
+2003-09-10  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat.hh: Add op_convert
+	  declarations.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Change an 
+	  op_convert argument.
+	* include/vaucanson/algebra/concrete/series/polynoms.hh: Add op_convert
+	  declarations.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Add op_convert
+	  functions and make op_rout compatible with parser.
+
 2003-09-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/window.hxx: Typo.

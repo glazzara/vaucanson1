@@ -33,6 +33,7 @@
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <vaucanson/misc/contract.hh>
+# include <sstream>
 
 namespace vcsn {
 
@@ -382,6 +383,18 @@ namespace vcsn {
   /*---------------------.
     | foreign constructors |
     `---------------------*/
+
+  template <typename Tm, typename Tw, typename W, typename M>
+  inline
+  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+				      SELECTOR2(algebra::polynom<Tm, Tw>),
+				      const Tm& m_value)
+  {
+    algebra::polynom<Tm, Tw> p(SELECT(M), SELECT(W));
+    p.insert(m_value, identity_value(SELECT(W), SELECT(Tw)));
+    return p;
+  }
+  
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
   inline
   algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
@@ -577,29 +590,69 @@ namespace vcsn {
     return ret;
   }
 
-  /*-------------.
+    /*-------------.
     | input-output |
     `-------------*/
 
+  // FIXME: use it in rat::DumpVisitor
+  template <typename Ost, typename T>
+  Ost& escaped_output(Ost& ost, const std::set<char>& escaped, const T& t)
+  {
+    std::ostringstream o_str;
+    o_str << t;
+
+    for (typename std::string::const_iterator i = o_str.str().begin();
+	 i != o_str.str().end();
+	 ++i)
+    {
+      if (escaped.find(*i) != escaped.end())
+	ost << "\\";
+      ost << *i;
+    }
+    return ost;
+  }
+  
   template<typename W, typename M, typename St, typename Tm, typename Tw>
   inline
   St& op_rout(const algebra::Series<W, M>& s, St& st, const algebra::polynom<Tm, Tw>& p)
   {
-      
+    // FIXME: export this set
     typename algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
+    std::set<char> escape_set;
+    escape_set.insert('.');
+    escape_set.insert('+');
+    escape_set.insert('*');
+    escape_set.insert('(');
+    escape_set.insert(')');
+    escape_set.insert('\\');
+    escape_set.insert(' ');
+    escape_set.insert('1');
+    escape_set.insert('0');
+
     while(i != p.end())
       {
 	if (i != p.begin())
 	  st << "+";
-	if (i->second != identity_value(SELECT(W), SELECT(Tw)) ||
-	    i->first == identity_value(SELECT(M), SELECT(Tm)))
+
+	if (i->second != identity_value(SELECT(W), SELECT(Tw)))
+	{
+	  st << "(";
 	  op_rout(s.semiring(), st, i->second);
+	  st << " ";
+	}
+	
 	if (i->first != identity_value(SELECT(M), SELECT(Tm)))
-	  {
-	    if (i->second != identity_value(SELECT(W), SELECT(Tw)))
-	      st << ".";
-	    op_rout(s.monoid(), st, i->first);
-	  }
+	{
+	  std::ostringstream o_str;
+	  op_rout(s.monoid(), o_str, i->first);
+	  escaped_output(st, escape_set, o_str.str());
+	}
+	else
+	  st << "1";
+	
+	if (i->second != identity_value(SELECT(W), SELECT(Tw)))
+	  st << ")";
+	  
 	++i;
       }
     if (i == p.begin()) /* case zero */
@@ -712,23 +765,40 @@ namespace vcsn {
 
 namespace std {
 
+  // FIXME: Must this operator exists ?
   template <class Tm, class Tw>
   inline
   std::ostream& operator<<(std::ostream& out, const vcsn::algebra::polynom<Tm, Tw>& p)
   {
     typename vcsn::algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    while(i != p.end())
+    std::set<char> escape_set;
+    escape_set.insert('.');
+    escape_set.insert('+');
+    escape_set.insert('*');
+    escape_set.insert('(');
+    escape_set.insert(')');
+    escape_set.insert('\\');
+    escape_set.insert(' ');
+    escape_set.insert('1');
+    escape_set.insert('0');
+
+    while (i != p.end())
       {
 	if (i != p.begin())
-	  out << "+";
-	out << i->second << "." << i->first;
+	  out << "+";	
+	out << "(" << i->second << " ";
+	vcsn::escaped_output(out, escape_set, i->first) ;
+	out << ")";
 	++i;
       }
+    
     if (i == p.begin()) /* case zero */
       out << "0";
+    
     return out;
   }
 
 } // std
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HXX
+
