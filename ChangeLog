@@ -1,3 +1,8 @@
+2004-04-19  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/normalized.hxx: Fix algorithms in order
+	to handle multiplicity.
+
 2004-04-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/tests-suites/generate-all.sh: Re-enable tests on rational

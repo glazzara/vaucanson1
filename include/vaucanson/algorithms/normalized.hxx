@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_NORMALIZED_HXX
 # define VCSN_ALGORITHMS_NORMALIZED_HXX
@@ -95,13 +97,14 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(lhs_t);
     std::stack<hstate_t> init;
-
     sum_here(lhs, rhs);
     hstate_t new_i = lhs.add_state();
     hstate_t new_f = lhs.add_state();
+    monoid_elt_t ident =
+      lhs.series().monoid().identity(SELECT(monoid_elt_value_t));
     for_each_initial_state(i, lhs)
       {
-	lhs.add_spontaneous(new_i, *i);
+ 	lhs.add_spontaneous(new_i, *i, lhs.get_initial(*i).get(ident));
 	init.push(*i);
       }
     while (!init.empty())
@@ -111,7 +114,7 @@ namespace vcsn {
       }
     for_each_final_state(f, lhs)
       {
-	lhs.add_spontaneous(*f, new_f);
+ 	lhs.add_spontaneous(*f, new_f, lhs.get_final(*f).get(ident));
 	init.push(*f);
       }
     while (!init.empty())
@@ -187,15 +190,28 @@ namespace vcsn {
     | Concat of states |
     `-----------------*/
     map_lhs_rhs_t	map_h;
+
+    // If rhs initial multiplicity is 1 and so is lhs final multiplicity,
+    // we can merge the lhs final state and the rhs initial state.
+    bool merge_lhs_final_and_rhs_initial = 
+      (lhs.get_final(*lhs.final().begin()).value() ==
+       lhs.series().identity(SELECT(series_value_t)) &&
+       rhs.get_initial(*rhs.initial().begin()).value() ==
+       rhs.series().identity(SELECT(series_value_t)));
+    
     for_each_state(s, rhs)
       {
 	hstate_t new_state;
-
-	if (rhs.is_initial(*s))
-	  new_state = glue_state;
+	
+	if (merge_lhs_final_and_rhs_initial)
+	  {
+	    if (rhs.is_initial(*s))
+	      new_state = glue_state;
+	    else
+	      new_state = lhs.add_state();
+	  }
 	else
 	  new_state = lhs.add_state();
-
 	map_h[*s] = new_state;
 	lhs.set_final(new_state, rhs.get_final(*s));
       }
@@ -214,6 +230,20 @@ namespace vcsn {
 	  lhs.add_edge(map_h[rhs.origin_of(*d)],
 		       map_h[rhs.aim_of(*d)],
 		       rhs.label_of(*d));
+      }
+    // If initial multiplicity of rhs isn't 1, add a spontaneous transition
+    // between lhs final state and rhs initial state, with lhs final
+    // multiplicity * rhs initial multiplicity.
+    if (!merge_lhs_final_and_rhs_initial)
+      {
+	monoid_elt_t ident =
+	  rhs.series().monoid().identity(SELECT(monoid_elt_value_t));
+	lhs.add_spontaneous(*lhs.final().begin(),
+			    map_h[*rhs.initial().begin()],
+			    lhs.get_final(*lhs.final().begin()).get(ident) *
+			   rhs.get_initial(*rhs.initial().begin()).get(ident));
+	lhs.unset_final(*lhs.final().begin());
+	lhs.unset_initial(map_h[*rhs.initial().begin()]);
       }
   }
 
@@ -243,13 +273,18 @@ namespace vcsn {
   void do_star_of_normalized_here(const AutomataBase<A>&,
 				  auto_t& a)
   {
-    a.add_spontaneous(*a.final().begin(), *a.initial().begin());
+    AUTOMATON_TYPES(auto_t);
+    monoid_elt_t ident =
+      a.series().monoid().identity(SELECT(monoid_elt_value_t));
+    a.add_spontaneous(*a.final().begin(),
+		      *a.initial().begin(),
+		      a.get_initial(*a.initial().begin()).get(ident));
     hstate_t old_i = *a.initial().begin();
     hstate_t old_f = *a.final().begin();
     hstate_t new_i = a.add_state();
     hstate_t new_f = a.add_state();
-    a.add_spontaneous(new_i, old_i);
-    a.add_spontaneous(old_f, new_f);
+    a.add_spontaneous(new_i, old_i, a.get_initial(old_i).get(ident));
+    a.add_spontaneous(old_f, new_f, a.get_final(old_f).get(ident));
     a.add_spontaneous(new_i, new_f);
     a.set_final(new_f);
     a.unset_final(old_f);
