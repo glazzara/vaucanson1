@@ -46,7 +46,7 @@
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
-
+# include <vaucanson/misc/contract.hh>
 
 // Usefull macros for Moore's minimization algorithm.
 
@@ -60,11 +60,6 @@
 # define for_each_state_in_partition(I, P) \
   PARTITION_END = P.end(); \
   for (partition_t::iterator I = P.begin(); I != PARTITION_END; ++I)
-
-
-# define echo(S) \
-  std::cout << S << std::endl
-
 
 
 namespace vcsn {
@@ -142,9 +137,8 @@ namespace vcsn {
     | Initialization |
     `---------------*/
 
-    // FIXME: precondition(input.exists())
-    // misc/contract.hh
-
+    precondition(input.exists());
+    
     for_each_edge(e, input)
       {
 	if (letter_map.find(input.label_of(*e)) == letter_map.end())
@@ -280,5 +274,10 @@ namespace vcsn {
   }
 
 } // vcsn
+
+// Prevent potential conflicts.
+# undef for_each_partition
+# undef for_each_state_in_partition
+
 
 #endif // VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX

@@ -1,12 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 501)
-(Parent-Version vaucanson 0 500)
+(Project-Version vaucanson 0 502)
+(Parent-Version vaucanson 0 501)
 (New-Version-Log "")
 
-(Version-Log "")
-(Checkin-Time "Fri, 05 Mar 2004 21:20:55 +0100")
+(Version-Log "2004-03-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_moore.hxx: Put the
+	precondition with exists().
+")
+(Checkin-Time "Fri, 05 Mar 2004 22:08:18 +0100")
 (Checkin-Login pouche_l)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -89,7 +93,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.38 606))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.39 777))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 777))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 777))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 777))
@@ -101,8 +105,8 @@
   (Makefile.am (vaucanson/48_Makefile.a 1.16 777))
   (README (vaucanson/f/48_README 1.9 777))
   (THANKS (vaucanson/f/36_THANKS 1.7 777))
-  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.11 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.44.1.4 644))
+  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.11 777))
+  (configure.ac (vaucanson/47_configure. 1.6.1.44.1.4 777))
   (prj (vaucanson.prj) :symlink)
 
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 777))
@@ -309,8 +313,8 @@
   (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.7 777))
   (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.8 777))
   (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.7 777))
-  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.21 600))
-  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.8 600))
+  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.21 777))
+  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.8 777))
   (include/vaucanson/automata/concept/delta_kind.hh (vaucanson/q/14_delta_kind 1.2 777))
   (include/vaucanson/automata/concept/automata_kind.hh (vaucanson/q/18_automata_k 1.2 777))
   (include/vaucanson/automata/concept/history.hh (vaucanson/q/19_history.hh 1.3 777))
@@ -323,8 +327,8 @@
   (include/vaucanson/automata/concept/transducer_base.hxx (vaucanson/q/38_transducer 1.9 777))
   (include/vaucanson/automata/concept/transducer_ops.hxx (vaucanson/q/39_transducer 1.6 777))
 
-  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.8.1.1 600))
-  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.14.1.2 600))
+  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.8.1.1 777))
+  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.14.1.2 777))
   (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.10 777))
   (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.11 777))
   (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.7 777))
@@ -369,7 +373,7 @@
   (include/vaucanson/algorithms/internal/build_pattern.hh (vaucanson/j/33_algo_helpe 1.8 777))
 
   (include/vaucanson/algorithms/minimization_moore.hh (vaucanson/e/24_moore.hh 1.13 777))
-  (include/vaucanson/algorithms/minimization_moore.hxx (vaucanson/e/23_moore.hxx 1.17 777))
+  (include/vaucanson/algorithms/minimization_moore.hxx (vaucanson/e/23_moore.hxx 1.18 777))
   (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.15 777))
   (include/vaucanson/algorithms/normalized.hxx (vaucanson/d/43_normalized 1.18 777))
   (include/vaucanson/algorithms/product.hh (vaucanson/e/20_product.hh 1.16 777))
@@ -470,12 +474,12 @@
   (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.7 777))
 
   (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 777))
-  (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.6 700))
+  (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.6 777))
   (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 777))
-  (src/tests/tests-suites/algebra_numerical_semiring_int.defs (vaucanson/h/33_algebra_nu 1.1 600))
+  (src/tests/tests-suites/algebra_numerical_semiring_int.defs (vaucanson/h/33_algebra_nu 1.1 777))
   (src/tests/tests-suites/algebra_set_alphabet.defs (vaucanson/h/32_algebra_se 1.2 777))
-  (src/tests/tests-suites/algebra_free_monoid_string.defs (vaucanson/h/31_algebra_st 1.1 600))
-  (src/tests/tests-suites/algebra_tropical_semiring_max.defs (vaucanson/h/30_algebra_tr 1.2 600))
+  (src/tests/tests-suites/algebra_free_monoid_string.defs (vaucanson/h/31_algebra_st 1.1 777))
+  (src/tests/tests-suites/algebra_tropical_semiring_max.defs (vaucanson/h/30_algebra_tr 1.2 777))
   (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 777))
   (src/tests/tests-suites/algebra_series_krat.defs (vaucanson/j/25_algebra_se 1.3 777))
   (src/tests/tests-suites/algebra_series_misc.defs (vaucanson/j/26_algebra_se 1.2 777))
@@ -1005,47 +1009,47 @@
 ;; Files added by populate at Tue, 10 Feb 2004 15:59:34 +0100,
 ;; to version 0.481(w), by clavei_t:
 
-  (src/tests/misc/window.cc (vaucanson/u/50_window.cc 1.1 600))
+  (src/tests/misc/window.cc (vaucanson/u/50_window.cc 1.1 777))
 
 ;; Files added by populate at Tue, 10 Feb 2004 19:56:45 +0100,
 ;; to version 0.482(w), by clavei_t:
 
-  (include/vaucanson/algorithms/krat_exp_flatten.hxx (vaucanson/u/51_krat_exp_f 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_flatten.hh (vaucanson/v/0_krat_exp_f 1.3 600))
-  (src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh (vaucanson/v/1_krat_exp_f 1.2 600))
+  (include/vaucanson/algorithms/krat_exp_flatten.hxx (vaucanson/u/51_krat_exp_f 1.1 777))
+  (include/vaucanson/algorithms/krat_exp_flatten.hh (vaucanson/v/0_krat_exp_f 1.3 777))
+  (src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh (vaucanson/v/1_krat_exp_f 1.2 777))
 
 ;; Files added by populate at Tue, 10 Feb 2004 22:05:20 +0100,
 ;; to version 0.484(w), by clavei_t:
 
-  (src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh (vaucanson/v/2_krat_exp_l 1.2 600))
+  (src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh (vaucanson/v/2_krat_exp_l 1.2 777))
 
 ;; Files added by populate at Sun, 29 Feb 2004 15:45:11 +0100,
 ;; to version 0.492(w), by clavei_t:
 
-  (src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh (vaucanson/v/3_constructo 1.1 644))
+  (src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh (vaucanson/v/3_constructo 1.1 777))
 
 ;; Files added by populate at Tue, 02 Mar 2004 19:17:24 +0100,
 ;; to version 0.493(w), by o-conn_s:
 
-  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.3 644))
-  (include/vaucanson/algebra/concrete/semiring/rational_number.hh (vaucanson/v/5_rational_n 1.2 644))
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.3 777))
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hh (vaucanson/v/5_rational_n 1.2 777))
 
 ;; Files added by populate at Wed, 03 Mar 2004 10:25:32 +0100,
 ;; to version 0.496(w), by o-conn_s:
 
-  (src/tests/tests-suites/algebra_numerical_semiring_rational.defs (vaucanson/v/6_algebra_nu 1.1 600))
+  (src/tests/tests-suites/algebra_numerical_semiring_rational.defs (vaucanson/v/6_algebra_nu 1.1 777))
 
 ;; Files added by populate at Fri, 05 Mar 2004 14:30:29 +0100,
 ;; to version 0.499(w), by o-conn_s:
 
-  (src/tests/tests-suites/algebra_numerical_semiring_float.defs (vaucanson/v/7_algebra_nu 1.1 644))
-  (src/tests/tests-suites/algebra_numerical_semiring_double.defs (vaucanson/v/8_algebra_nu 1.1 644))
-  (src/tests/tests-suites/algebra_numerical_semiring_bool.defs (vaucanson/v/9_algebra_nu 1.1 644))
+  (src/tests/tests-suites/algebra_numerical_semiring_float.defs (vaucanson/v/7_algebra_nu 1.1 777))
+  (src/tests/tests-suites/algebra_numerical_semiring_double.defs (vaucanson/v/8_algebra_nu 1.1 777))
+  (src/tests/tests-suites/algebra_numerical_semiring_bool.defs (vaucanson/v/9_algebra_nu 1.1 777))
 
 ;; Files added by populate at Fri, 05 Mar 2004 14:42:44 +0100,
 ;; to version 0.499(w), by o-conn_s:
 
-  (update_config_ac.sh (vaucanson/v/10_update_con 1.1 755))
+  (update_config_ac.sh (vaucanson/v/10_update_con 1.1 777))
 )
 (Merge-Parents)
 (New-Merge-Parents)
