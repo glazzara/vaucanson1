@@ -1,16 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 512)
-(Parent-Version vaucanson 0 511)
+(Project-Version vaucanson 0 513)
+(Parent-Version vaucanson 0 512)
 (New-Version-Log "")
 
-(Version-Log "2004-03-08  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+(Version-Log "2004-03-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* include/vaucanson/misc/random.hh,
-	  include/vaucanson/misc/random.hxx: Correct inlines.")
-(Checkin-Time "Mon, 08 Mar 2004 18:41:52 +0100")
-(Checkin-Login fosse_l)
+	* src/tests/algebra/numerical_semiring/Makefile.am: New.
+	* configure.ac: Update.
+
+")
+(Checkin-Time "Mon, 08 Mar 2004 19:41:20 +0100")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -92,7 +94,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.49 644))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.50 644))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -105,7 +107,7 @@
   (README (vaucanson/f/48_README 1.9 600))
   (THANKS (vaucanson/f/36_THANKS 1.7 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.11 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.44.1.4 644))
+  (configure.ac (vaucanson/47_configure. 1.6.1.44.1.5 644))
   (prj (vaucanson.prj) :symlink)
 
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 600))
@@ -1065,6 +1067,11 @@
 ;; to version 0.509(w), by o-conn_s:
 
   (src/tests/algebra/numerical_semiring/numerical_semiring_test.hh (vaucanson/v/14_numerical_ 1.1 600))
+
+;; Files added by populate at Mon, 08 Mar 2004 19:40:34 +0100,
+;; to version 0.512(w), by clavei_t:
+
+  (src/tests/algebra/numerical_semiring/Makefile.am (vaucanson/v/15_Makefile.a 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

@@ -89,6 +89,7 @@ AC_CONFIG_FILES([
 	src/tests/design_pattern/Makefile
 	src/tests/misc/Makefile
 	src/tests/algebra/Makefile
+	src/tests/algebra/numerical_semiring/Makefile
 	src/tests/algebra/series/Makefile
 	src/tests/algebra/series/krat/Makefile
 	src/tests/algebra/series/krat/derivations/Makefile
