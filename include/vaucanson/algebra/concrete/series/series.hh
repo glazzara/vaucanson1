@@ -1,5 +1,6 @@
 // series.hh
 //
+// $Id$
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001-2002 Sakarovitch, Poss, Rey and Regis-Gianas.
 //

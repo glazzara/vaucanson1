@@ -1,0 +1,15 @@
+# demos/fsm/README
+#
+# $Id$
+
+
+	This demo is meant to generate tool-boxes "à la" FSM [1] from
+	a configuration file toolbox.hh that defines what kind of
+	automaton the user wants to manipulate.
+
+	The generated files can be used to benchmark Vaucanson in
+	comparison with fsm when it is instantiated with different
+	implementation.
+
+
+[1] http://www.research.att.com/~mohri/fsm/

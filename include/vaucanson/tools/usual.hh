@@ -30,6 +30,7 @@
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automaton_impl.hh>
 # include <vaucanson/automata/concept/kinds.hh>

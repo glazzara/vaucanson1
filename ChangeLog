@@ -1,5 +1,5 @@
-2002-07-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
-(0.97)
+2002-07-31  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.98)
 	These files hide some package variables not to overlap user's one.
 	* tools/scandefs.pl : added. 
 	* include/vaucanson/config/pconf.hh : added.
@@ -22,7 +22,12 @@
 	* src/demos/fsm/usual_automaton_t/configure.ac : added.
 	* src/demos/fsm/usual_automaton_t/random_generator.cc : added.
 	* src/demos/fsm/README : added.
+	
+	* include/vaucanson/algebra/concrete/series/series.hh : add $Id$.
+	* include/vaucanson/tools/usual.hh : include fix.
 
+2002-07-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.97)
 	* include/vaucanson/fundamental/fundamental.hh : add defaults_ops.hh
 
 	* include/vaucanson/algebra/concept/alphabets_base.hxx : minor change.
