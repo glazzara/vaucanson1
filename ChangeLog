@@ -1,3 +1,113 @@
+2005-02-04  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* Merge FMP branch into trunk (See 11 previous Changelog entries).
+
+2005-02-01  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* Merge trunk into FMP branch
+
+2005-01-28  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: Modify the prototype of op_length in order to be able
+	to specialize the concept.
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx: Update
+	accordingly.
+
+	* include/vaucanson/misc/functors.hh,
+	* include/vaucanson/misc/functors.hxx: Add a new functor, the "length
+	discrepancy".
+
+	* src/tests/algebra/free_monoid_product/free_monoid_product_test.hh:
+	Update accordingly.
+
+2005-01-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	Add MetaElement<FreeMonoidProduct<S>, T>::length(), that takes a
+	functor as an argument.
+
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx: Add
+	the length() method.
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: Add the op_length() function.
+
+	* include/vaucanson/misc/functors.hh,
+	* include/vaucanson/misc/functors.hxx: New. Enable creation of new
+	functors.
+	* include/Makefile.am: Update accordingly.
+
+	* src/tests/algebra/free_monoid_product/free_monoid_product_test.hh:
+	Update test.
+
+2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx:
+	Modify MetaElement methods first() and second() to delegate the work
+	to op_* functions op_first and op_second.
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: Add op_first and op_second functions.
+
+2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* configure.ac: Generate src/tests/algebra/free_monoid_product/Makefile
+	and src/tests/context_headers/transducers/Makefile.
+
+2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/algebra.hh: Add reference to
+	FreeMonoidProduct in Doxygen documentation.
+
+2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/Makefile.am: Correct typo.
+
+2004-06-01  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_product.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product.hxx: New. Add
+	the concept of free monoid product to Vaucanson.
+
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: New. Implementation of free monoid product with a pair
+	of strings.
+
+	* include/Makefile.am: Update accordingly.
+
+	* src/tests/algebra/free_monoid_product/free_monoid_product_test.hh:
+	New. Write a test on free monoid product.
+	* src/tests/algebra/free_monoid_product/Makefile.am: New. Update.
+	* src/tests/algebra/Makefile.am: Update accordingly.
+
+	* src/tests/test-suites/algebra_free_monoid_product_string.defs: New.
+	Instanciate a test on free monoid product.
+	* src/tests/test-suites/generate-all.sh: Update accordingly.
+
+2004-06-01  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* fmp: Apply changes done in trunk to the fmp branch. See the two
+	previous Changelog entries.
+
+2004-05-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/concat_test.hh: Fix the test so it checks
+	multiplicity correctness.
+
+2004-05-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/contextual_automaton_functions.hh,
+	* include/vaucanson/contextual_transducer_functions.hh:
+	Rename to...
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_transducer_functions.thh: These.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh: Update accordingly.
+
 2005-01-19  Raphael Poss  <raph@lrde.epita.fr>
 
 	* FAQ: Remove in favor of doc/FAQ.txt.
@@ -15,9 +125,9 @@
 
 	Fix a compiler warning introducted on 2005-01-14 (SetSlot
 	optimisation). Simplify.
-	
+
 	* include/vaucanson/design_pattern/element.hxx: Simplify call to
-	base constructor. 
+	base constructor.
 	* include/vaucanson/algebra/implementation/series/series.hxx:
 	Likewise.
 
@@ -25,11 +135,11 @@
 	member of base class with "this->" since G++ 3.4 whines about it.
 	* include/vaucanson/automata/concept/automata.hxx,
 	* include/vaucanson/automata/concept/transducer.hxx: Likewise.
-	
+
 2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
 
 	* reheader.pl: Add 2005 to copyright appends.
-	
+
 	* Makefile.am: Mention forgotten xml.m4 in the installable m4
 	extensions. Remove EXTRA_DIST since the dist_m4data_DATA already
 	mentions the files.
@@ -37,25 +147,25 @@
 2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
 
 	Document some more.
-	
+
 	* doc/FAQ.txt: Document a hidden misfeature of the expression
 	parser (a 2*).
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh:
 	Fix minor typo.
-	
+
 	* src/demos/vaucanswig/doc/build-process.txt: Rewrite in
 	reStructured Text format. Clarify documentation.
 	* src/demos/vaucanswig/doc/meta-build-process.txt: Likewise.
 	* src/demos/vaucanswig/doc/Makefile.am: Generate HTML and PDF
 	output for build-process.txt and meta-build-process.txt.
-	
+
 2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
 
 	Allow for distribution of the whole test suite. Before this patch,
 	tar choked on filenames longer than 99 characters, and source
 	names in the test suites are longer than that. Note that this
 	patch requires GNU Automake >=1.9.
-	
+
 	* configure.ac: Use Automake option 'tar-ustar' for more potent
 	use of tar during distribution.
 
@@ -64,15 +174,15 @@
 	Update documentation.
 
 	* doc/README.txt: Fix some mistakes. Add a "See Also" section.
-	
+
 	* src/demos/fsm/README: Rewrite to...
 	* src/demos/fsm/README.txt: ...this.
 
 	* src/demos/vaucanswig/doc,
 	* src/demos/vaucanswig/doc/Makefile.am: New directory.
 	* src/demos/vaucanswig/Makefile.am: Update accordingly.
-	
-	* src/demos/vaucanswig/README: Rewrite to...	
+
+	* src/demos/vaucanswig/README: Rewrite to...
 	* src/demos/vaucanswig/doc/README.txt: ...this. Fix some
 	mistakes. Add more information. Change the layout for easier
 	reading.
@@ -86,11 +196,11 @@
 
 	* src/demos/vaucanswig/Makefile.am: Distribute expand.sh, since it
 	is mentioned in the documentation.
-	
+
 2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
 
 	Cleanup documentation subsystem. Use reStructuredText more.
-	
+
 	* doc/xml/Makefile.am,
 	* doc/beginner/Makefile.am,
 	* doc/Makefile.am: Factor common code to...
@@ -100,7 +210,7 @@
 
 	* README,
 	* FAQ,
-	* INSTALL: Rewrite to...	
+	* INSTALL: Rewrite to...
 	* doc/README.txt,
 	* doc/FAQ.txt,
 	* doc/INSTALL.txt: ...these. Do not remove the originals yet.
@@ -111,15 +221,15 @@
 	* doc/beginner/Makefile.am: Simplify.
 
 	* HEADER: Get rid of obsolete file.
-	
+
 2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
 
 	Get rid of the dependency on sgml2latex, which comes from
 	a huge, obsolete, non-portable and broken package.
 
-	Use reStructuredText from Docutils instead. 
+	Use reStructuredText from Docutils instead.
 	See: http://docutils.sourceforge.net/rst.html
-	
+
 	* doc/xml/dev.sgml: Rewrite to...
 	* doc/xml/dev.txt: ...this. Fix (some) mistakes.
 	* doc/xml/format.sgml: Rewrite to...
@@ -132,16 +242,16 @@
 
 	* doc/beginner/Makefile.am,
 	* doc/tutorial/Makefile.am: Use properly autoconf expansions.
-	
+
 2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
 
 	* src/tests/bin/generate-test-suite.sh: Take care of stripping
-	extraneous '/' before header names to test. 
+	extraneous '/' before header names to test.
 
 2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
 
         Sanitize the behaviour of Xerces-C++ configuration.
-	
+
 	* config/xml.m4: Change help messages. Use the autoconf variable
 	cache. Test for availability of the Xerces-C++ library beside the
 	headers. Append detected values to standard variables.
@@ -165,9 +275,9 @@
 	* include/vaucanson/design_pattern/slots.hh: Prefix methods with
 	_structure_ so that they do not collide with MetaElement methods
 	when inherited by Element. Allow tagging SetSlot<S> classes for
-	unambiguous multiple inheritance.	
+	unambiguous multiple inheritance.
 	* include/vaucanson/design_pattern/slots.hxx: Modify accordingly.
-	
+
 	* include/vaucanson/design_pattern/predecls.hh: Use a default
 	type for the SetSlot tag argument.
 
@@ -175,19 +285,19 @@
 	structure_ attribute. Inherit from SetSlot<S> instead.
 	* include/vaucanson/design_pattern/element.hxx: Modify
 	accordingly.
-	
+
 	* include/vaucanson/algebra/implementation/series/series.hh:
 	Remove the semiring_ and monoid_ attributes. Inherit from
 	SetSlot<Semiring,semiring_slot_tag> and
 	SetSlot<Monoid,monoid_slot_tag> instead.
-	
+
 	* include/vaucanson/algebra/implementation/series/series.hxx:
 	Modify accordingly.
-	
+
 	* include/vaucanson/automata/concept/automata.hh,
 	* include/Vaucanson/automata/concept/tranducer.hh: Remove the
 	series_ attribute. Inherit from SetSlot<Series> instead.
-	
+
 	* include/vaucanson/automata/concept/automata.hxx,
 	* include/vaucanson/automata/concept/transducer.hxx: Modify
 	accordingly.

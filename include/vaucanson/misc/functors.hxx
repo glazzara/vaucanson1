@@ -1,9 +1,7 @@
-//								-*- c++ -*-
-// contextual_transducer_functions.thh: this file is part of the
-// Vaucanson project.
+// functors.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -21,7 +19,7 @@
 //
 // The Vaucanson Group represents the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -32,25 +30,31 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-template <class T>
-automaton_t new_automaton(const T& input_alphabet,
-			  const T& output_alphabet);
+#ifndef VCSN_MISC_FUNCTORS_HXX
+# define VCSN_MISC_FUNCTORS_HXX
 
-template <class InputIterator>
-automaton_t new_automaton(InputIterator input_alphabet_begin,
-			  InputIterator input_alphabet_end,
-			  InputIterator output_alphabet_begin,
-			  InputIterator output_alphabet_end);
+# include <vaucanson/misc/functors.hh>
+# include <algorithm>
 
-template <typename TransStruct,
-	  typename TransImpl,
-	  typename ArgStruct,
-	  typename ArgImpl>
-output_series_set_elt_t
-evaluation(const Element<TransStruct, TransImpl>& t,
-	   const Element<ArgStruct, ArgImpl>& input);
+namespace utility
+{
+
+  template <typename T>
+  std::pair<T, T> pair<T>::operator()(T x, T y) const
+  {
+    return std::pair<T, T> (x, y);
+  }
 
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/contextual_transducer_functions.thxx>
-# endif // ! VCSN_USE_INTERFACE_ONLY
+  template <typename T>
+  std::pair<T, T> discrepancy<T>::operator() (T x, T y) const
+  {
+    T	left = std::max<T>(0, x - y);
+    T	right = std::max<T>(0, y - x);
+
+    return std::pair<T, T> (left, right);
+  }
+
+} // End of namespace utility.
+
+#endif // VCSN_MISC_FUNCTORS_HXX

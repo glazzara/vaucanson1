@@ -127,6 +127,7 @@ AC_CONFIG_FILES([
 	src/tests/algebra/semiring/Makefile
 	src/tests/algebra/alphabets/Makefile
 	src/tests/algebra/free_monoid/Makefile
+	src/tests/algebra/free_monoid_product/Makefile
 	src/tests/automata/Makefile
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile

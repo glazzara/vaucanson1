@@ -1,0 +1,7 @@
+#include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
+#include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh>
+
+#define TEST_STATIC_ARGS						    \
+	vcsn::algebra::FreeMonoidProduct<vcsn::algebra::char_letter::Words, \
+			  vcsn::algebra::char_letter::Words>,		    \
+	std::pair<std::string, std::string>
