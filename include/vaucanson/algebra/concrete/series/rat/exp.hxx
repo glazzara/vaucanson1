@@ -248,7 +248,7 @@ namespace vcsn {
   
     template <class Matcher, class Monoid, class Semiring>
     DispatchVisitor<Matcher, Monoid, Semiring>::
-    DispatchVisitor(const Matcher& m) :
+    DispatchVisitor(Matcher& m) :
       matcher_(m)
     {}
     
@@ -334,8 +334,8 @@ namespace vcsn {
     template <class M, class W>
     template <class Matcher>
     inline typename Matcher::return_type
-    DispatchFunction<rat::exp<M, W> >::d(const Matcher& matcher, 
-		   const rat::exp<M, W>& exp)
+    DispatchFunction<rat::exp<M, W> >::d(Matcher& matcher, 
+					 const rat::exp<M, W>& exp)
     {
       DispatchVisitor<Matcher, M, W> v(matcher);
       exp.accept(v);

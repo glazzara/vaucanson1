@@ -259,7 +259,9 @@ match_node##N(const N& p____) 			\
 
 	  MATCH_(Constant, m)
 	  {
-	    return monoid_elt_t(m);
+	    Element<Series, T> s(exp_.set());
+	    s = monoid_elt_t(m);
+	    return s;
 	  }
 	  END
 

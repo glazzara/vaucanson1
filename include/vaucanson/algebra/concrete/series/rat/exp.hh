@@ -128,7 +128,7 @@ namespace vcsn {
       typedef Semiring					 weight_value_t;
       typedef rat::Node<monoid_value_t, weight_value_t>  node_t;
       
-      DispatchVisitor(const Matcher& m);
+      DispatchVisitor(Matcher& m);
       
       virtual
       ~DispatchVisitor();
@@ -160,7 +160,7 @@ namespace vcsn {
       typename Matcher::return_type get_ret();
 
     private:
-      matcher_t				matcher_;
+      matcher_t&			matcher_;
       typename Matcher::return_type	ret_;
     };    
     
@@ -170,8 +170,8 @@ namespace vcsn {
       template <class Matcher>
       static inline 
       typename Matcher::return_type
-      d(const Matcher&        matcher, 
-	const rat::exp<M, W>& exp);
+      d(Matcher&		matcher, 
+	const rat::exp<M, W>&	exp);
     };
 
   } // algebra

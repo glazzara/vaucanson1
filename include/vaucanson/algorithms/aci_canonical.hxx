@@ -31,7 +31,7 @@ namespace vcsn
   // Here is the visitor which build a canonical form
   // of an krat, following aci-rules.
   //
-  //     TODO : the algorithm is good, but the implementation
+  //     FIXME: the algorithm is good, but the implementation
   //                  may not be efficient !
   template <class Series, class T, class Dispatch>
   struct KRatExpAciCanonical : algebra::KRatExpMatcher<
@@ -142,7 +142,9 @@ namespace vcsn
     MATCH_(Constant, m)
     {
       set_t	res;
-      res.insert(monoid_elt_t(m));
+      Element<Series, T> s(exp_.set());
+      s = monoid_elt_t(m);
+      res.insert(s);
       return res;
     }
     END

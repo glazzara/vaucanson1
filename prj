@@ -1,38 +1,27 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 183)
-(Parent-Version vaucanson 0 182)
-(Version-Log "2003-04-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 184)
+(Parent-Version vaucanson 0 183)
+(Version-Log "2003-04-02  Loic Fosse  <fosse_l@lrde.epita.fr>
 
-	* src/tests/algebra/series/krat/krat_exp_constant_term_test.hh,
-	src/tests/algebra/series/krat/krat_exp_derivation_test.hh,
-	src/tests/algebra/series/krat/krat_exp_parse_test.hh,
-	src/tests/algebra/series/krat/krat_exp_realtime_test.hh: Move to ...
-	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
-	src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
-	src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
-	src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh:
-	... These.
-	* src/tests/algebra/series/krat/Makefile.am: Update.
-	* src/tests/algebra/series/krat/derivations/Makefile.am: Add.
-	* src/tests/algebra/series/krat/derivations/derivation/Makefile.am:
-	Add.
-	* src/tests/algebra/series/krat/derivations/cderivation/Makefile.am:
-	Add.
-	* src/tests/algebra/series/krat/main/Makefile.am: Add.
-	* configure.ac: Update.
-	* src/tests/tests-suites/algebra_series_krat_derivation.defs: Add.
-	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh:
-	Add.
-	* src/tests/algebra/series/krat/derivations/derivations_common.hh: Add.
-	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh:
-	Add.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: Add a new
-	template specialiciazion to op_convert().")
+        * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: Change
+ 	the result of the KRatExpIdentity when a constant is matched.
+        * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx: Remove
+        the const of the call of dispatch function.
+        * include/vaucanson/algebra/concrete/series/rat/exp.hh: Change the
+        matcher attribute into a reference in the dispatch visitor.
+        * include/vaucanson/algebra/concrete/series/rat/exp.hxx: Apply changes
+        made by the change in the dispatch visitor.
+        * include/vaucanson/algorithms/aci_canonical.hxx: Change the result when
+        a constant is matched.
+        * include/vaucanson/algebra/concrete/letter/couple_letter.hxx: Add.
+        * include/vaucanson/algebra/concrete/letter/couple_letter.hh: Add.
+        * include/vaucanson/algorithms/krat_exp_linearize.hxx: Add.
+        * include/vaucanson/algorithms/krat_exp_linearize.hh: Add.")
 (New-Version-Log "")
-(Checkin-Time "Wed, 02 Apr 2003 17:11:53 +0200")
-(Checkin-Login clavei_t)
+(Checkin-Time "Wed, 02 Apr 2003 17:48:20 +0200")
+(Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -112,7 +101,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.123 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.124 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -177,16 +166,16 @@
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.2 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.7 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.9 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.4 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.10 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.5 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.13 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.13 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh (vaucanson/e/1_depth_visi 1.6 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx (vaucanson/d/46_depth_visi 1.5 600))
   (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh (vaucanson/e/0_dump_visit 1.6 600))
   (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx (vaucanson/d/47_dump_visit 1.6 600))
-  (include/vaucanson/algebra/concrete/series/rat/exp.hh (vaucanson/d/51_exp.hh 1.12 600))
-  (include/vaucanson/algebra/concrete/series/rat/exp.hxx (vaucanson/d/49_exp.hxx 1.14 600))
+  (include/vaucanson/algebra/concrete/series/rat/exp.hh (vaucanson/d/51_exp.hh 1.13 600))
+  (include/vaucanson/algebra/concrete/series/rat/exp.hxx (vaucanson/d/49_exp.hxx 1.15 600))
   (include/vaucanson/algebra/concrete/series/rat/nodes.hh (vaucanson/d/50_nodes.hh 1.7 600))
   (include/vaucanson/algebra/concrete/series/rat/nodes.hxx (vaucanson/d/48_nodes.hxx 1.8 600))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hh (vaucanson/e/51_random_vis 1.5 600))
@@ -431,7 +420,7 @@
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 755))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 600))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
@@ -518,7 +507,7 @@
 
   (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.2 600))
   (include/vaucanson/algorithms/brzozowski.hh (vaucanson/j/29_brzozowski 1.1 600))
-  (include/vaucanson/algorithms/aci_canonical.hxx (vaucanson/j/30_aci_canoni 1.1 600))
+  (include/vaucanson/algorithms/aci_canonical.hxx (vaucanson/j/30_aci_canoni 1.2 600))
   (include/vaucanson/algorithms/aci_canonical.hh (vaucanson/j/31_aci_canoni 1.1 600))
   (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.2 600))
   (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.2 600))
@@ -568,6 +557,14 @@
 ;; to version 0.182(w), by clavei_t:
 
   (src/tests/algebra/series/krat/derivations/cderivation/Makefile.am (vaucanson/j/44_Makefile.a 1.1 600))
+
+;; Files added by populate at Wed, 02 Apr 2003 17:31:47 +0200,
+;; to version 0.183(w), by fosse_l:
+
+  (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.1 600))
+  (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)
