@@ -1,19 +1,15 @@
-/*************************************
- * <vaucanson/algorithms/history.hh> *
- *************************************/
-// $ID$
-
-/* this file is part of the Vaucanson project */
+// history.hh
+//
+// $Id$
+// VCSN_HEADER
 #ifndef AUTOMATA_HISTORY_HH
 # define AUTOMATA_HISTORY_HH
-
-
-# include <vaucanson/automata/concept/handlers.hh>
-
 
 # include <list>
 # include <map>
 # include <string>
+
+# include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/misc/ref.hh>
 
 namespace vcsn {
@@ -74,11 +70,11 @@ namespace vcsn {
     class AutomatonHistory
     {
     public :
-      typedef std::list<utility::ref<Event<AutoType_> > >	auto_events_t;
-      typedef std::list<utility::ref<Event<hstate_t> > >	state_events_t;
-      typedef std::list<utility::ref<Event<hedge_t>  > >	edge_events_t;
-      typedef std::map<hstate_t, state_events_t>		states_events_t;
-      typedef std::map<hedge_t, edge_events_t>			edges_events_t;
+      typedef std::list<utility::ref<Event<AutoType_> > >      auto_events_t;
+      typedef std::list<utility::ref<Event<hstate_t> > >       state_events_t;
+      typedef std::list<utility::ref<Event<hedge_t>  > >       edge_events_t;
+      typedef std::map<hstate_t, state_events_t>	       states_events_t;
+      typedef std::map<hedge_t, edge_events_t>		       edges_events_t;
       
       bool 
       set_state_event_about(event_kind_t, hstate_t);

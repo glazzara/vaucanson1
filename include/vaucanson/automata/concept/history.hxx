@@ -1,16 +1,14 @@
-/*************************************
- * <vaucanson/algorithms/history.hxx> *
- *************************************/
+// history.hxx
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_HISTORY_HXX
 # define AUTOMATA_HISTORY_HXX
 
-# include <vaucanson/automata/concept/history.hh>
-
 # include <list>
 # include <map>
+
+# include <vaucanson/automata/concept/history.hh>
 
 namespace vcsn {
 
@@ -36,7 +34,8 @@ namespace vcsn {
 
     template <class T>
     inline
-    BinaryEvent<T>::BinaryEvent(event_kind_t e, const T& first, const T& second) :
+    BinaryEvent<T>::BinaryEvent(event_kind_t e, const T& first, 
+				const T& second) :
       Event<T>(e),
       first_(first),
       second_(second)
@@ -114,12 +113,14 @@ namespace vcsn {
 						       hstate_t first, 
 						       hstate_t second)
     {
-      for (typename state_events_t::const_iterator ev = states_events_[s].begin();
+      for (typename state_events_t::const_iterator ev = 
+	     states_events_[s].begin();
 	   ev != states_events_[s].end();
 	   ++ev)
 	if ((*ev)->get_event_kind() == e)
 	  return false;
-      states_events_[s].push_front(new BinaryEvent<hstate_t>(e, first, second));
+      states_events_[s].push_front(new BinaryEvent<hstate_t>
+				   (e, first, second));
       return true;
     }
     
