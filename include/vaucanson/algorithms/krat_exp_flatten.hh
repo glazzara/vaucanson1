@@ -42,6 +42,10 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_FLATTEN_HH
 # define VCSN_ALGORITHMS_KRAT_EXP_FLATTEN_HH
 
+# include <vaucanson/design_pattern/element.hh>
+
+# include <list>
+
 namespace vcsn
 {
 

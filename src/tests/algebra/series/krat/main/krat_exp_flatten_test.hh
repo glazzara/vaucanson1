@@ -1,4 +1,4 @@
-// krat_exp_linearize_test.hh: this file is part of the Vaucanson project.
+// krat_exp_flatten_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004 The Vaucanson Group.
@@ -27,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_TEST_HH
-# define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_TEST_HH
+#ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_FLATTEN_TEST_HH
+# define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_FLATTEN_TEST_HH
 
 # include <check/tester.hh>
 # include <vaucanson/algorithms/krat_exp_flatten.hh>
@@ -134,4 +134,4 @@ bool krat_exp_flatten_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-#endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_TEST_HH
+#endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_FLATTEN_TEST_HH
