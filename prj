@@ -1,17 +1,17 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 624)
-(Parent-Version vaucanson 0 623)
+(Project-Version vaucanson 0 625)
+(Parent-Version vaucanson 0 624)
 (New-Version-Log "")
 
 (Version-Log "2004-03-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* include/Makefile.am: Add vaucanson/config/pconf.hh to
-	nobase_include_HEADERS.
+	* config/xml.m4: Do not call AC_CHECK_LIB on libxerces-c anymore.
+	Assume that finding a header means the library is present.
 
 ")
-(Checkin-Time "Mon, 29 Mar 2004 15:00:32 +0200")
+(Checkin-Time "Mon, 29 Mar 2004 15:26:02 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -1285,7 +1285,7 @@
   (src/tests/xml/export_session-float.xml.ref (vaucanson/u/24_export_ses 1.1 600))
   (src/tests/xml/export_dynamic-float.xml.ref (vaucanson/u/25_export_dyn 1.1 600))
   (xml/vaucanson-g.style (vaucanson/u/28_vaucanson- 1.1 600))
-  (config/xml.m4 (vaucanson/u/29_xml.m4 1.1 600))
+  (config/xml.m4 (vaucanson/u/29_xml.m4 1.2 600))
   (xml/automaton-to-neato.xsl (vaucanson/u/30_automaton- 1.1 600))
   (include/vaucanson/algebra/implementation/letter/int_letter.hxx (vaucanson/u/35_int_letter 1.3 600))
   (include/vaucanson/algebra/implementation/letter/int_letter.hh (vaucanson/u/36_int_letter 1.3 600))
