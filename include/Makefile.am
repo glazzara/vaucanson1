@@ -263,6 +263,7 @@ nobase_include_HEADERS =					     \
 	vaucanson/tools/usual.hxx				     \
 	vaucanson/tools/usual_macros.hh				     \
 	vaucanson/tools/dot_dump.hh				     \
+	vaucanson/tools/dot_dump.hxx				     \
 	vaucanson/tools/io.hh			\
 	vaucanson/tools/io.hxx			\
 	vaucanson/tools/usual_io.hh		\

@@ -1,5 +1,9 @@
 2003-10-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/Makefile.am (dot_dump.hxx): New.
+
+2003-10-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx:
 		Fix typo.
 	* include/vaucanson/algebra/concrete/series/krat.hxx:
