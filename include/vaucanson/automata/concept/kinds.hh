@@ -1,9 +1,7 @@
-/*********************************
- * <vaucanson/automata/kinds.hh> *
- *********************************/
+// kinds.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_KINDS_HH
 # define AUTOMATA_KINDS_HH
 
@@ -12,7 +10,6 @@
 #include <algorithm>
 
 #include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concept/algebra_base.hh>
 #include <vaucanson/automata/concept/handlers.hh>
 
 namespace vcsn

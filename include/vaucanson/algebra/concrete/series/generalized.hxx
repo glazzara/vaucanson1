@@ -5,7 +5,6 @@
 #ifndef VAUCANSON_ALGEBRA_CONCRETE_GENERALIZED_HXX
 # define VAUCANSON_ALGEBRA_CONCRETE_GENERALIZED_HXX
 
-# include <vaucanson/algebra/concept/algebra_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>

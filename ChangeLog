@@ -1,4 +1,70 @@
 2002-07-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.91)
+
+	Add good header for these files :
+	* include/Makefile.am
+	* include/vaucanson/internal/traits.hh
+	* include/vaucanson/fundamental/default_ops.hxx
+	* include/vaucanson/fundamental/default_ops.hh
+	* src/tests/check/Makefile.am
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh
+	* include/vaucanson/algebra/concrete/series/krat_conversion.hxx
+	* include/vaucanson/algebra/concrete/series/krat_conversion.hh
+	* include/vaucanson/automata/concrete/manylinks_states.hh
+	* include/vaucanson/automata/concrete/manylinks_impl.hh
+	* include/vaucanson/automata/concrete/manylinks_edges.hh
+	* include/vaucanson/automata/concrete/manylinks_carriers.hh
+	* include/vaucanson/automata/concept/tags.hh
+	* include/vaucanson/automata/concept/relabel_impl.hxx
+	* include/vaucanson/automata/concept/relabel_impl.hh
+	* include/vaucanson/automata/concept/handlers.hxx
+	* include/vaucanson/automata/concept/copy.hxx
+	* include/vaucanson/automata/concept/copy.hh
+	* include/vaucanson/automata/concept/concepts.hxx
+	* include/vaucanson/automata/concept/concepts.hh
+	* include/vaucanson/automata/concept/automaton_impl.hxx
+	* include/vaucanson/automata/concept/automaton_impl.hh
+	* include/vaucanson/automata/concept/automata_base.hxx
+	* include/vaucanson/automata/concept/automata.hxx
+	* include/vaucanson/automata/concept/kinds.hxx
+	* include/vaucanson/automata/concept/kinds.hh
+	* include/vaucanson/algorithms/reachable.hh
+	* include/vaucanson/algorithms/determinize.hxx
+	* include/vaucanson/algorithms/determinize.hh
+	* include/vaucanson/algorithms/union.hxx
+	* include/vaucanson/algorithms/union.hh
+	* include/vaucanson/algorithms/normalized.hxx
+	* include/vaucanson/algorithms/normalized.hh
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh
+	* include/vaucanson/algebra/concrete/series/generalized.hxx
+	* include/vaucanson/algebra/concrete/series/generalized.hh
+	* include/vaucanson/automata/concept/generalized.hxx
+	* include/vaucanson/automata/concept/generalized.hh
+	* src/tests/tests-suites/usual_automaton_t/Makefile.am
+	* src/tests/tests-suites/usual_automaton_t/minimization-test.cc
+	* src/tests/tests-suites/usual_automaton_t/product-test.cc
+	* src/tests/tests-suites/usual_automaton_t/generalized-test.cc
+	* src/tests/tests-suites/usual_automaton_t/extract-test.cc
+	* src/tests/tests-suites/usual_automaton_t/elimination-test.cc
+	* src/tests/tests-suites/usual_automaton_t/reachable-test.cc
+	* src/tests/tests-suites/usual_automaton_t/glushkov-test.cc
+	* src/tests/tests-suites/usual_automaton_t/normalize-test.cc
+	* src/tests/tests-suites/usual_automaton_t/union-test.cc
+	* src/tests/tests-suites/usual_automaton_t/realtime-test.cc
+	* src/tests/tests-suites/usual_automaton_t/determinist-test.cc
+	* src/tests/tests-suites/usual_automaton_t/thompson-test.cc
+	* src/tests/tests-suites/usual_automaton_t/closure-test.cc
+	* src/tests/tests-suites/usual_automaton_t/complete-test.cc
+	* src/tests/tests-suites/usual_automaton_t/compute-test.cc
+	* src/tests/bin/automata-test-suite.sh
+
+	* HEADER : added.
+	* THANKS : added.
+	* LICENCE : added.
+
+
+2002-07-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.90)
 	* include/vaucanson/fundamental/structure.hh : minor.
 	* src/tests/Makefile.am : add tests-suites subdir.

@@ -1,18 +1,14 @@
-/********************************************
- * <vaucanson/automaton/manylinks_edges.hh> *
- ********************************************/
+// manylinks_states.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_MANYLINKS_STATES_HH
 # define AUTOMATA_MANYLINKS_STATES_HH
 
 #include <iterator>
-
 #include <vaucanson/automata/concrete/manylinks_edges.hh>
 
-namespace vcsn
-{
+namespace vcsn {
 
   enum state_link_type { st_global = 0, st_final = 1, st_initial = 2 };
 

@@ -1,10 +1,9 @@
-/************************************
- * <vaucanson/automata/handlers.hxx> *
- ************************************/
-
-/* this file is part of the Vaucanson project */
+// handlers.hxx
+//
+// $Id$
+// VCSN_HEADER
 #ifndef AUTOMATA_HANDLERS_HXX
-#define AUTOMATA_HANDLERS_HXX
+# define AUTOMATA_HANDLERS_HXX
 
 # include <iostream>
 

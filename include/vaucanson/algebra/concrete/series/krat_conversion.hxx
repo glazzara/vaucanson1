@@ -1,12 +1,11 @@
 // krat_conversion.hxx
 //
-//
-
+// $Id$
+// VCSN_HEADER
 #ifndef ALGEBRA_KRAT_CONVERSION_HXX
 # define ALGEBRA_KRAT_CONVERSION_HXX
 
-# include <vaucanson/algebra/krat_conversion.hh>
-
+# include <vaucanson/algebra/concrete/series/krat_conversion.hh>
 
 namespace vcsn {
 

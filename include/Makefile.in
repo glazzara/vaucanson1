@@ -17,7 +17,7 @@
 # Makefile.am
 #
 # $Id$
-# VCSN
+# VCSN_HEADER
 SHELL = @SHELL@
 
 srcdir = @srcdir@

@@ -1,10 +1,7 @@
-/*******************************************************************
- * <vaucanson/algebra/default_ops.hh>: default implementations for *
- * several ops                                                     *
- *******************************************************************/
+// default_ops.hxx
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef FUNDAMENTAL_DEFAULT_OPS_HXX
 # define FUNDAMENTAL_DEFAULT_OPS_HXX
 

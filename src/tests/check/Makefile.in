@@ -80,6 +80,11 @@ install_sh = @install_sh@
 AM_CXXFLAGS = -Wall -W -Wno-unused 
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/src/tests/
 
+
+# Makefile.am
+#
+# $Id$
+# VCSN_HEADER
 check_LIBRARIES = libcheck.a
 
 libcheck_a_SOURCES = \

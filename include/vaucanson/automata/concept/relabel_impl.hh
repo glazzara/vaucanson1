@@ -1,9 +1,7 @@
-/****************************************
- * <vaucanson/automata/relabel_impl.hh> *
- ****************************************/
+// relabel_impl.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_RELABEL_IMPL_HH
 # define AUTOMATA_RELABEL_IMPL_HH
 

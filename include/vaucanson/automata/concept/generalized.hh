@@ -1,9 +1,7 @@
-/***************************************
- * <vaucanson/automata/generalized_hh> *
- **************************************/
-
-
-/* this file is part of the Vaucanson project */
+// generalized.hh
+//
+// $Id$
+// VCSN_HEADER
 #ifndef VAUCANSON_AUTOMATA_GENERALIZED_HH
 # define VAUCANSON_AUTOMATA_GENERALIZED_HH
 

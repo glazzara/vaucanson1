@@ -1,11 +1,11 @@
 // krat_conversion.hh
 //
-//
-
+// $Id$
+// VCSN_HEADER
 #ifndef ALGEBRA_KRAT_CONVERSION_HH
 # define ALGEBRA_KRAT_CONVERSION_HH
 
-# include <vaucanson/algebra/krat.hh>
+# include <vaucanson/algebra/concrete/series/krat.hh>
 
 namespace vcsn {
 
@@ -14,10 +14,6 @@ namespace vcsn {
     /*------------------.
     | ExpConvertVisitor |
     `------------------*/
-    // Description : FIXME
-    //
-    //
-
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
     class ExpConvertVisitor : public rat::ConstNodeVisitor<oTm, oTw>

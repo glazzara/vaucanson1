@@ -1,11 +1,9 @@
-
-/************************************
- * <vaucanson/automata/concepts.hxx> *
- ************************************/
-
-/* this file is part of the Vaucanson project */
+// concepts.hxx
+//
+// $Id$
+// VCSN_HEADER
 #ifndef AUTOMATA_CONCEPTS_HXX
-#define AUTOMATA_CONCEPTS_HXX
+# define AUTOMATA_CONCEPTS_HXX
 
 #include <vaucanson/algebra/concept/concepts.hh>
 #include <vaucanson/automata/concept/automata_base.hh>

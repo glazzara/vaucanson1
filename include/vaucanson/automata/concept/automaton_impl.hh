@@ -1,9 +1,7 @@
-/******************************************
- * <vaucanson/automata/automaton_impl.hh> *
- ******************************************/
+// automaton_impl.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_AUTOMATON_IMPL_HH
 #define AUTOMATA_AUTOMATON_IMPL_HH
 

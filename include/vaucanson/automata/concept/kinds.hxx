@@ -10,7 +10,6 @@
 #include <algorithm>
 
 #include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concept/algebra_base.hh>
 #include <vaucanson/automata/concept/handlers.hh>
 
 namespace vcsn {

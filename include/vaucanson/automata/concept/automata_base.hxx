@@ -1,12 +1,10 @@
-/*****************************************
- * <vaucanson/automata/automata_base.hxx> *
- *****************************************/
-
-/* this file is part of the Vaucanson project */
+// automata_base.hxx
+//
+// $Id$
+// VCSN_HEADER
 #ifndef AUTOMATA_AUTOMATA_BASE_HXX
 # define AUTOMATA_AUTOMATA_BASE_HXX
 
-# include <vaucanson/algebra/concept/algebra_base.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/history.hh>

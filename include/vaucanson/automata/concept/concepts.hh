@@ -1,9 +1,7 @@
-/************************************
- * <vaucanson/automata/concepts.hh> *
- ************************************/
+// concepts.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_CONCEPTS_HH
 #define AUTOMATA_CONCEPTS_HH
 

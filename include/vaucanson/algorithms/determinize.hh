@@ -1,14 +1,11 @@
-/**************************************
- * <vaucanson/algorithms/determinize.hh> *
- **************************************/
+// determinize.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGORITHMS_DETERMINIZE_HH
 # define ALGORITHMS_DETERMINIZE_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
-
 # include <vaucanson/fundamental/fundamental.hh>
 
 namespace vcsn {

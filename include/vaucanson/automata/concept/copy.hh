@@ -1,18 +1,14 @@
-/********************************
- * <vaucanson/automata/copy.hh> *
- ********************************/
+// copy.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_COPY_HH
-#define AUTOMATA_COPY_HH
+# define AUTOMATA_COPY_HH
 
 #include <vaucanson/automata/concept/handlers.hh>
 #include <map>
 
-
-namespace vcsn
-{
+namespace vcsn {
 
   template<typename lhs_t, typename rhs_t>
   void auto_copy(lhs_t& dst_,
@@ -21,7 +17,7 @@ namespace vcsn
   template<typename auto_t>
   auto_t auto_copy(const auto_t& from);
 
-}
+} // vcsn
 
 # include <vaucanson/automata/concept/copy.hxx>
 

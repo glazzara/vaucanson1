@@ -1,9 +1,7 @@
-/*******************************************
- * <vaucanson/automaton/manylinks_impl.hh> *
- *******************************************/
+// manylinks_impl.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_MANYLINK_IMPL_HH
 #define AUTOMATA_MANYLINK_IMPL_HH
 

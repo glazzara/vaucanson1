@@ -1,10 +1,9 @@
-/********************************
- * <vaucanson/automata/copy.hxx> *
- ********************************/
-
-/* this file is part of the Vaucanson project */
+// copy.hxx
+//
+// $Id$
+// VCSN_HEADER
 #ifndef AUTOMATA_COPY_HXX
-#define AUTOMATA_COPY_HXX
+# define AUTOMATA_COPY_HXX
 
 #include <vaucanson/automata/concept/handlers.hh>
 #include <map>

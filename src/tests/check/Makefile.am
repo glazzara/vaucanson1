@@ -1,3 +1,7 @@
+# Makefile.am
+#
+# $Id$
+# VCSN_HEADER
 include Makefile.flags
 
 check_LIBRARIES = libcheck.a

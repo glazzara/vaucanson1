@@ -1,11 +1,9 @@
-/***********************************************
- * <vaucanson/automaton/manylinks_carriers.hh> *
- ***********************************************/
+// manylinks_carriers.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_MANYLINK_CARRIERS_HH
-#define AUTOMATA_MANYLINK_CARRIERS_HH
+# define AUTOMATA_MANYLINK_CARRIERS_HH
 
 #include <vector>
 #include <stack>

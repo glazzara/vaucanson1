@@ -1,9 +1,7 @@
-/********************************************
- * <vaucanson/algebra/tropical_semiring.hh> *
- ********************************************/
+// tropical_semiring.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGEBRA_TROPICAL_SEMIRING_HH
 # define ALGEBRA_TROPICAL_SEMIRING_HH
 

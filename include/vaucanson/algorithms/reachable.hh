@@ -1,14 +1,11 @@
-/***********************************
- * <vaucanson/algorithms/union.hh> *
- ***********************************/
+// reachable.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGORITHMS_REACHABLE_HH
 # define ALGORITHMS_REACHABLE_HH
 
 # include <set>
-
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {

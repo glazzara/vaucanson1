@@ -1,9 +1,7 @@
-/***********************************
- * <vaucanson/algorithms/union.hh> *
- ***********************************/
+// union.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGORITHMS_UNION_HH
 # define ALGORITHMS_UNION_HH
 

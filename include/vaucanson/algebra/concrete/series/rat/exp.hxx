@@ -9,7 +9,6 @@
 # include <iostream>
 
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
-# include <vaucanson/algebra/concept/algebra_base.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 # include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>

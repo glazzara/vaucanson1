@@ -1,7 +1,7 @@
 # Makefile.am
 #
 # $Id$
-# VCSN
+# VCSN_HEADER
 
 nobase_include_HEADERS = \
 vaucanson/fundamental/slots.hxx				   \

@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 #include <vaucanson/tools/usual.hh>
   #include <check/tests_stuff.hh>
-  #include </home/lrde/stud/yann/work/vaucanson/vaucanson/src/tests//automata/algos/complete_test.hh>
+  #include </home/lrde/stud/yann/work/vaucanson/vaucanson/src/tests//automata/implementation_check/coherence_state_edge_test.hh>
 
   int main(int argc, char **argv)
   {
@@ -37,7 +37,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	verbose = tests::low;
     }
     tests::Tester t(verbose);
-    if (complete_test<usual_automaton_t>(t)) 
+    if (coherence_state_edge_test<usual_automaton_t>(t)) 
       return EXIT_SUCCESS;
     else
       return EXIT_FAILURE;

@@ -1,7 +1,7 @@
 // determinize.hxx
 //
-// Description :
-//  - 
+// $Id$
+// VCSN_HEADER
 #ifndef ALGO_DETERMINIZE_HXX
 # define ALGO_DETERMINIZE_HXX
 
@@ -16,9 +16,6 @@
 # include <vaucanson/automata/concept/history.hh>
 # include <vaucanson/algorithms/reachable.hh>
 
-// FIXME : bitpool are not operational
-// std::set is used for the moment and we need an hash function
-// -> std::hash<std::set<unsigned>>
 namespace std {
 
   template <>

@@ -1,11 +1,9 @@
-/********************************
- * <vaucanson/automata/tags.hh> *
- ********************************/
+// tags.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_TAGS_HH
-#define AUTOMATA_TAGS_HH
+# define AUTOMATA_TAGS_HH
 
 
 namespace vcsn

@@ -1,9 +1,7 @@
-/****************************************
- * <vaucanson/algorithms/normalized.hh> *
- ****************************************/
+// normalized.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGORITHMS_NORMALIZED_HH
 # define ALGORITHMS_NORMALIZED_HH
 

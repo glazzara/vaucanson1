@@ -1,8 +1,7 @@
-/***************************************
- * <vaucanson/automata/generalized_hxx> *
- **************************************/
-
-/* this file is part of the Vaucanson project */
+// generalized.hxx
+//
+// $Id$
+// VCSN_HEADER
 #ifndef VAUCANSON_AUTOMATA_GENERALIZED_HXX
 # define VAUCANSON_AUTOMATA_GENERALIZED_HXX
 

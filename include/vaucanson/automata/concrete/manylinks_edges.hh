@@ -1,9 +1,7 @@
-/********************************************
- * <vaucanson/automaton/manylinks_edges.hh> *
- ********************************************/
+// manylinks_edges.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_MANYLINKS_EDGES_HH
 #define AUTOMATA_MANYLINKS_EDGES_HH
 
