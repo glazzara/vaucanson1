@@ -48,9 +48,10 @@ bool alphabet_test(tests::Tester& t)
   element_t A;
   TEST_MSG("Insert a random letter a in A.");
   letter_t a = A.random_letter();
+  letter_t b;
   do
     {
-      letter_t b = A.random_letter();
+      b = A.random_letter();
     }
   while (b == a);
   A.insert(a);
