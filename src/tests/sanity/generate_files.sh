@@ -10,6 +10,7 @@ cd "$1"
 
 # Set check_PROGRAMS.
 cat > Makefile.am << EOF
+EXTRA_DIST = generate_files.sh
 test_base.cc: generate_files.sh
 	\$(SHELL) "\$(srcdir)"/generate_files.sh "\$(srcdir)"
 

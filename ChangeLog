@@ -1,3 +1,7 @@
+2003-07-15  Thomas Claveirole  clavei_t@marvejols
+
+	* src/tests/sanity/generate_files.sh: Mention itself when generating
+	Makefile.am.
 2003-07-14  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_ops.hxx: Move
