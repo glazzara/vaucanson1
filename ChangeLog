@@ -1,5 +1,11 @@
 2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/xml/import_session-session.xml.ref: Adjust the test:
+	the sessions now load automata in the order they were entered.
+	See my last entry on 2004-07-13 about bug fixes in sessions.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* xml/gendtd.sh: Allow a monoid to be a product a therefore contain
 	other monoids.
 
