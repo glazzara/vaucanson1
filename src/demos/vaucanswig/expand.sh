@@ -231,7 +231,7 @@ dump_python()
          sdir=meta
       fi
       echo "vaucanswig_${mod}_wrap.cxx vaucanswig_${mod}.py: \$(srcdir)/../$sdir/vaucanswig_${mod}.i"
-      printf "\t\$(SWIG) -c -c++ -python -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
+      printf "\t\$(SWIG) -c -c++ -python -I../src -I../meta -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
       echo
     done
 
@@ -262,7 +262,7 @@ EOF
 dump_src() {
     printf "EXTRA_DIST ="
     ilist=0
-    for mod in $MODULES $ALGS; do
+    for mod in $MODULES $ALGS algorithms; do
       if [ -r "$VAUCANSWIG/src/vaucanswig_${mod}.i" ]; then
          if [ `expr $ilist % 4` = 0 ]; then
 	    echo " \\"
