@@ -32,18 +32,18 @@ namespace vcsn {
    *  \@{
    */
 
-    /*----------------.
-    | Structure<Self> |
-    `----------------*/
+  /*----------------.
+  | Structure<Self> |
+  `----------------*/
   //! Structure is on the top of the hierarchy of structural elements.
   /*! Structure provides static inheritance facilities and the concept
     of compatibility between element and structural element (through
     the contains method).
   */
 
-    template<typename Self>
-    struct Structure
-    {
+  template<typename Self>
+  struct Structure
+  {
     /*! Exact type of the concrete class. */
     typedef Self		self_t;
 
@@ -60,6 +60,11 @@ namespace vcsn {
     template<typename T>
     bool  contains(const T& elt_value) const;
 
+    /*! Choose randomly an element in the structure. */
+    template <class T>
+    Element<Self, T>
+    choose(SELECTOR(T)) const;
+
     /*! Return the instance viewed as its exact type. */
     self_t&        self();
 
@@ -74,7 +79,7 @@ namespace vcsn {
     /*! Copy constructor is protected because Structure is an abstract class. 
      */
     Structure(const Structure& other);
-    };
+  };
 
   /*! @} */
 
@@ -83,6 +88,7 @@ namespace vcsn {
 /*--------------------.
 | default comparisons |
 `--------------------*/
+// FIXME: why there are here ?
 template<typename S>
 bool operator==(const vcsn::Structure<S>& a,
 		const vcsn::Structure<S>& b);

@@ -27,25 +27,25 @@
 
 namespace vcsn {
 
-  template <typename S, typename T> 
-  inline const S& 
-  SyntacticDecorator<S, T>::set() const 
-  { 
-    return self().set(); 
+  template <typename S, typename T>
+  inline const S&
+  SyntacticDecorator<S, T>::set() const
+  {
+    return self().set();
   }
 
   template <typename S, typename T>
-  inline T& 
+  inline T&
   SyntacticDecorator<S, T>::value()
-  { 
-    return self().value(); 
+  {
+    return self().value();
   }
-    
+
   template <typename S, typename T>
-  inline const T& 
+  inline const T&
   SyntacticDecorator<S, T>::value() const
-  { 
-    return self().value(); 
+  {
+    return self().value();
   }
     
 #define ELEMENT_IN_OPERATOR(Op, HookName)				 \
@@ -54,7 +54,7 @@ namespace vcsn {
       inline Element<S, T>&						 \
       SyntacticDecorator<S, T>::Op (const Element<OtherS, U>& other)	 \
       {									 \
-	op_in_ ## HookName (set(), other.set(), value(), other.value()); \
+	op_in_ ## HookName (this->set(), other.set(), value(), other.value()); \
 	return self();							 \
       }									 \
       template <typename S, typename T>					 \
@@ -62,7 +62,7 @@ namespace vcsn {
       inline Element<S, T>&						 \
       SyntacticDecorator<S, T>::Op (const U& other)			 \
       {									 \
-	op_in_ ## HookName (set(), value(),				 \
+	op_in_ ## HookName (this->set(), value(),			 \
 			    op_convert(SELECT(T), SELECT(S), other));	 \
 	return self();							 \
       }
@@ -79,7 +79,7 @@ namespace vcsn {
   inline Element<S, T>& 
   SyntacticDecorator<S, T>::operator++()
   { 
-    op_in_inc(set(), value()); 
+    op_in_inc(this->set(), value()); 
     return self(); 
   }
     
@@ -88,7 +88,7 @@ namespace vcsn {
   SyntacticDecorator<S, T>::operator++(int)
   { 
     Element<S, T> ret(*this); 
-    op_in_inc(set(), value()); 
+    op_in_inc(this->set(), value()); 
     return ret; 
   }
     
@@ -96,7 +96,7 @@ namespace vcsn {
   inline Element<S, T>& 
   SyntacticDecorator<S, T>::operator--()
   { 
-    op_in_dec(set(), value()); 
+    op_in_dec(this->set(), value()); 
     return self(); 
   }
     
@@ -105,7 +105,7 @@ namespace vcsn {
   SyntacticDecorator<S, T>::operator--(int)
   { 
     Element<S, T> ret(*this); 
-    op_in_dec(set(), value()); 
+    op_in_dec(this->set(), value()); 
     return ret; 
   }
     

@@ -41,56 +41,89 @@ namespace vcsn
     template<typename S, typename T> 
     struct SyntacticDecorator
     {
-    
-      const S&  set() const;
-      T&	value();
-      const T&  value() const;
+      /*! Structural element virtual accessor. (const) */
+      const S&	set() const;
+      
+      /*! Virtual accessor to implementation. */
+      T&		value();
+      
+      /*! Virtual accessor to implementation. (const version) */
+      const T&	value() const;
 
+      /*! self addition between two a priori different elements. */
       template<typename OtherS, typename U>				 
       Element<S, T>& operator+=(const Element<OtherS, U>& other);	 
+
+      /*! self addition between an element and something else. */
       template<typename U>						 
       Element<S, T>& operator+=(const U& other);    
 
+      /*! self substraction between two a priori different elements. */
       template<typename OtherS, typename U>				 
       Element<S, T>& operator-=(const Element<OtherS, U>& other);	 
+
+      /*! self substraction between an element and something else. */
       template<typename U>						 
       Element<S, T>& operator-=(const U& other);    
 
+      /*! self substraction between two a priori different elements. */
       template<typename OtherS, typename U>				 
-      Element<S, T>& operator/=(const Element<OtherS, U>& other);	 
+      Element<S, T>& operator/=(const Element<OtherS, U>& other);	
+ 
       template<typename U>						 
       Element<S, T>& operator/=(const U& other);    
 
+      /*! self substraction between two a priori different elements. */
       template<typename OtherS, typename U>				 
-      Element<S, T>& operator*=(const Element<OtherS, U>& other);	 
+      Element<S, T>& operator*=(const Element<OtherS, U>& other);	
+ 
       template<typename U>						 
       Element<S, T>& operator*=(const U& other);    
 
+      /*! self substraction between two a priori different elements. */
       template<typename OtherS, typename U>				 
-      Element<S, T>& operator%=(const Element<OtherS, U>& other);	 
+      Element<S, T>& operator%=(const Element<OtherS, U>& other);	
+ 
       template<typename U>						 
       Element<S, T>& operator%=(const U& other);    
 
+      /*! pre-incrementation. */
       Element<S, T>& operator++();
-      Element<S, T> operator++(int);
 
+      /*! post-incrementation. */
+      Element<S, T> operator++(int);
+      
+      /*! pre-decrementation.  */
       Element<S, T>& operator--();
+
+      /*! post-decrementation. */
       Element<S, T> operator--(int);
 
+      /*! standard swap between two a priori different
+	implementations. */
       template<typename U>
       Element<S, T>& swap(Element<S, U>& other);
 
+      /*! standard swap between two a priori different elements. */
       template<typename OtherS, typename U>
       Element<S, T>& swap(Element<OtherS, U>& other);
 
-      // static inheritance stuff. what's good is that we know
-      // at this point the derived type.
+      /*! static inheritance method. */
+      // FIXME: is it really the good place ?
       Element<S, T>& self();
+
+      /*! static inheritance method. (const version) */
+      // FIXME: is it really the good place ?
       const Element<S, T>& self() const;
 
     protected:
-      // this is an abstract class
+
+      /*! Constructors are protected since SyntaticDecorator can be
+	instantiated alone. */
       SyntacticDecorator();
+
+      /*! Constructors are protected since SyntaticDecorator can be
+	instantiated alone. */
       SyntacticDecorator(const SyntacticDecorator& other);
     };
 

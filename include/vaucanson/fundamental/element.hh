@@ -70,7 +70,6 @@ namespace vcsn
 
     /*! an element is dynamic iff its structural element or its implementation
     is. */
-    
     static const bool dynamic        = dynamic_set || dynamic_values;
       
     /*-------------.
@@ -107,8 +106,8 @@ namespace vcsn
       constructor of the implementation is called. */
     explicit Element(const S& set);
 
-    /*! Constructor from the structural element and the implementation. 
-    Element(const S& set, const T& other);
+    /*! Constructor from the structural element and the implementation. */
+    Element(const S& set, const T& other); 
 
     /*! Constructor from the structural element and another
     implementation type. */

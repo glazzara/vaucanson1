@@ -1,1 +1,1 @@
-cat ${1+"$@"} | egrep '^#.*(VCSN_CONFIG_SYSTEM_HH|HAVE_LIMITS)'
+cat ${1+"$@"} | egrep '^#.*(VCSN_CONFIG_SYSTEM_HH|__GNUC__|__GNUC__)'

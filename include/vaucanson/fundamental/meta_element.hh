@@ -34,6 +34,9 @@ namespace vcsn {
   
   /*! MetaElement<Structure<Self>, T> is the specialization that is at
     the top of all the hierarchy of Vaucanson.
+
+    MetaElement<Structure<Self>, T> is decorated with a
+    SyntacticDecorator<Self, T>.
   */
 
   template<class Self, typename T>
@@ -41,12 +44,17 @@ namespace vcsn {
     : SyntacticDecorator<Self, T>
   {
   public:
-
-      static const bool dynamic_values = true;
+    /*! Default value of dynamic_values is true. */
+    static const bool dynamic_values = true;
 
   protected:
-    MetaElement();
-    MetaElement(const MetaElement& other);
+    /*! Every constructor is protected since MetaElement is an
+      abstract class in the static hierarchy. */
+    MetaElement(); 
+
+    /*! Every constructor is protected since MetaElement is an
+      abstract class in the static hierarchy. */
+    MetaElement(const MetaElement& other); 
   };
 
 } // vcsn

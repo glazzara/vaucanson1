@@ -28,14 +28,14 @@
 namespace vcsn {
 
  template <class Self, class T>
-    MetaElement<Structure<Self>, T>::MetaElement()
-    {}
-
-    template <class Self, class T>
-    MetaElement<Structure<Self>, T>::MetaElement(const MetaElement& o) :
-      SyntacticDecorator<Self, T>(o)
-    {}
-
+ MetaElement<Structure<Self>, T>::MetaElement()
+ {}
+  
+  template <class Self, class T>
+  MetaElement<Structure<Self>, T>::MetaElement(const MetaElement& o) :
+    SyntacticDecorator<Self, T>(o)
+  {}
+  
 } // vcsn
 
 #endif //  FUNDAMENTAL_META_ELEMENT_HXX
