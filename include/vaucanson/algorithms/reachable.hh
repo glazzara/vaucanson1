@@ -21,10 +21,12 @@
 #ifndef VCSN_ALGORITHMS_REACHABLE_HH
 # define VCSN_ALGORITHMS_REACHABLE_HH
 
-# include <set>
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <set>
 
 namespace vcsn {
+
+  /*! \addtogroup algorithms */  /* @{ */
 
   //! Return reachables states from the input states.
   template<typename A, typename T>
@@ -55,6 +57,8 @@ namespace vcsn {
   template<typename A, typename T>
   void
   auto_in_final_reachable(Element<A, T>& a);
+
+  /*! @} */
   
 } // vcsn
 

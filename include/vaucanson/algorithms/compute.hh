@@ -28,6 +28,14 @@ namespace vcsn {
   /*! \addtogroup algorithms */  /* @{ */
 
   //! Return the image of the word in the automaton.
+
+  /*! compute(a, w) returns a serie that is the image of the word 'w'
+    in the automaton. This version of computation is the most general
+    one : it works on every types of automaton, deterministic or not. 
+    Yet, the automaton must be realtime since epsilon transition could
+    imply non termination.
+  */
+
   template<typename A, typename T, typename W>
   typename Element<A, T>::series_elt_t
   compute(const Element<A, T>& a, const W& word);

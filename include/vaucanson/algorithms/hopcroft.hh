@@ -25,6 +25,8 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! The canonical minimal automaton of the deterministic input automaton.
   template<typename A, typename T>
   Element<A, T>
@@ -35,6 +37,8 @@ namespace vcsn {
   Element<A, T>
   hopcroft_minimization_undet(const Element<A, T>& a);
   
+  /*! @} */
+
 } // vcsn
 
 # include <vaucanson/algorithms/hopcroft.hxx>

@@ -25,6 +25,8 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Returns true if the input automaton is realtime (no epsilon transition).
   template<typename A, typename T>
   bool
@@ -39,6 +41,8 @@ namespace vcsn {
   template<typename A, typename T>
   Element<A, T>
   realtime(const Element<A, T>& a);
+
+  /*! @} */
   
 } // vcsn
 

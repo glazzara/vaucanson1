@@ -26,11 +26,15 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Convert a krat expression into an automaton using Glushkov construction.
   template <typename A, typename T, typename Exp>
   void
   glushkov(Element<A, T>&, const Exp&);
   
+  /*! @} */
+
 } // vcsn
 
 # include <vaucanson/algorithms/glushkov.hxx>

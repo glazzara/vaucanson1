@@ -25,6 +25,8 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Add the states and edges of 'rhs' to 'lhs'.
   template<typename A, typename T, typename U>
   void 
@@ -36,6 +38,8 @@ namespace vcsn {
   Element<A, T> 
   auto_union(const Element<A, T>& lhs, 
 	     const Element<A, U>& rhs);
+
+  /*! @} */
 
 } // vcsn
 

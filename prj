@@ -1,13 +1,31 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 138)
-(Parent-Version vaucanson 0 137)
-(Version-Log "* config.guess, config.sub, depcomp, install-sh
-* missing, mkinstalldirs: Remove from repo. ")
+(Project-Version vaucanson 0 139)
+(Parent-Version vaucanson 0 138)
+(Version-Log "
+	* include/vaucanson/algorithms/compute.hh: documented.
+	* include/vaucanson/algorithms/compute.hxx: idem.
+	* include/vaucanson/algorithms/glushkov.hh: idem.
+	* include/vaucanson/algorithms/hopcroft.hh: idem.
+	* include/vaucanson/algorithms/isomorph.hh: idem.
+	* include/vaucanson/algorithms/krat_exp_constant_term.hh: idem.
+	* include/vaucanson/algorithms/krat_exp_derivation.hh: idem.
+	* include/vaucanson/algorithms/krat_exp_linearize.hh: idem.
+	* include/vaucanson/algorithms/moore.hh: idem.
+	* include/vaucanson/algorithms/normalized.hh: idem.
+	* include/vaucanson/algorithms/product.hh: idem.
+	* include/vaucanson/algorithms/reachable.hh: idem.
+	* include/vaucanson/algorithms/realtime.hh: idem.
+	* include/vaucanson/algorithms/standard.hh: idem.
+	* include/vaucanson/algorithms/thompson.hh: idem.
+	* include/vaucanson/algorithms/transpose.hh: idem.
+	* include/vaucanson/algorithms/trim.hh: idem.
+	* include/vaucanson/algorithms/union.hh: idem.
+")
 (New-Version-Log "")
-(Checkin-Time "Thu, 21 Nov 2002 14:56:34 +0100")
-(Checkin-Login akim)
+(Checkin-Time "Fri, 22 Nov 2002 11:04:29 +0100")
+(Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -90,7 +108,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.79 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.80 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.9 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
@@ -167,8 +185,8 @@
   (include/vaucanson/algorithms/complementary.hxx (vaucanson/f/3_complement 1.3 600))
   (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.4 600))
   (include/vaucanson/algorithms/complete.hxx (vaucanson/f/1_complete.h 1.3 600))
-  (include/vaucanson/algorithms/compute.hh (vaucanson/e/6_compute.hh 1.4 600))
-  (include/vaucanson/algorithms/compute.hxx (vaucanson/e/5_compute.hx 1.6 600))
+  (include/vaucanson/algorithms/compute.hh (vaucanson/e/6_compute.hh 1.5 600))
+  (include/vaucanson/algorithms/compute.hxx (vaucanson/e/5_compute.hx 1.7 600))
   (include/vaucanson/algorithms/concat.hh (vaucanson/h/5_concat.hh 1.3 600))
   (include/vaucanson/algorithms/concat.hxx (vaucanson/h/4_concat.hxx 1.1 600))
   (include/vaucanson/algorithms/determinize.hh (vaucanson/d/35_determiniz 1.5 600))
@@ -177,37 +195,37 @@
   (include/vaucanson/algorithms/elimination.hxx (vaucanson/e/31_eliminatio 1.4 600))
   (include/vaucanson/algorithms/extract.hh (vaucanson/d/31_extract.hh 1.6 600))
   (include/vaucanson/algorithms/extract.hxx (vaucanson/d/30_extract.hx 1.7 600))
-  (include/vaucanson/algorithms/glushkov.hh (vaucanson/e/42_glushkov.h 1.5 600))
+  (include/vaucanson/algorithms/glushkov.hh (vaucanson/e/42_glushkov.h 1.6 600))
   (include/vaucanson/algorithms/glushkov.hxx (vaucanson/e/41_glushkov.h 1.6 600))
-  (include/vaucanson/algorithms/hopcroft.hh (vaucanson/e/26_hopcroft.h 1.5 600))
+  (include/vaucanson/algorithms/hopcroft.hh (vaucanson/e/26_hopcroft.h 1.6 600))
   (include/vaucanson/algorithms/hopcroft.hxx (vaucanson/e/25_hopcroft.h 1.5 600))
-  (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.2 600))
+  (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.3 600))
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.2 600))
+  (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.3 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.2 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.3 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.2 600))
-  (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/h/23_krat_exp_l 1.2 600))
+  (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/h/23_krat_exp_l 1.3 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/h/24_krat_exp_l 1.2 600))
-  (include/vaucanson/algorithms/moore.hh (vaucanson/e/24_moore.hh 1.4 600))
+  (include/vaucanson/algorithms/moore.hh (vaucanson/e/24_moore.hh 1.5 600))
   (include/vaucanson/algorithms/moore.hxx (vaucanson/e/23_moore.hxx 1.5 600))
-  (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.5 600))
+  (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.6 600))
   (include/vaucanson/algorithms/normalized.hxx (vaucanson/d/43_normalized 1.5 600))
-  (include/vaucanson/algorithms/product.hh (vaucanson/e/20_product.hh 1.5 600))
+  (include/vaucanson/algorithms/product.hh (vaucanson/e/20_product.hh 1.6 600))
   (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.5 600))
-  (include/vaucanson/algorithms/reachable.hh (vaucanson/d/33_reachable. 1.6 600))
+  (include/vaucanson/algorithms/reachable.hh (vaucanson/d/33_reachable. 1.7 600))
   (include/vaucanson/algorithms/reachable.hxx (vaucanson/d/32_reachable. 1.5 600))
-  (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.5 600))
+  (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.6 600))
   (include/vaucanson/algorithms/realtime.hxx (vaucanson/e/47_realtime.h 1.4 600))
-  (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.5 600))
+  (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.6 600))
   (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.4 600))
-  (include/vaucanson/algorithms/thompson.hh (vaucanson/e/45_thompson.h 1.4 600))
+  (include/vaucanson/algorithms/thompson.hh (vaucanson/e/45_thompson.h 1.5 600))
   (include/vaucanson/algorithms/thompson.hxx (vaucanson/e/44_thompson.h 1.4 600))
-  (include/vaucanson/algorithms/transpose.hh (vaucanson/d/37_transpose. 1.6 600))
+  (include/vaucanson/algorithms/transpose.hh (vaucanson/d/37_transpose. 1.7 600))
   (include/vaucanson/algorithms/transpose.hxx (vaucanson/d/36_transpose. 1.6 600))
-  (include/vaucanson/algorithms/trim.hh (vaucanson/f/5_trim.hh 1.4 600))
+  (include/vaucanson/algorithms/trim.hh (vaucanson/f/5_trim.hh 1.5 600))
   (include/vaucanson/algorithms/trim.hxx (vaucanson/f/0_trim.hxx 1.3 600))
-  (include/vaucanson/algorithms/union.hh (vaucanson/d/42_union.hh 1.5 600))
+  (include/vaucanson/algorithms/union.hh (vaucanson/d/42_union.hh 1.6 600))
   (include/vaucanson/algorithms/union.hxx (vaucanson/d/41_union.hxx 1.6 600))
   (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.11 600))
   (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.9 600))

@@ -25,6 +25,8 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
+
+  /*! \addtogroup algorithms */  /* @{ */
   
   //! Returns a useful states of the automaton (start reachable and final co-).
   template<typename A, typename T>
@@ -36,6 +38,8 @@ namespace vcsn {
   Element<A, T>
   trim(const Element<A, T>& a);
     
+  /*! @} */
+
 } // vcsn
 
 # include <vaucanson/algorithms/trim.hxx>

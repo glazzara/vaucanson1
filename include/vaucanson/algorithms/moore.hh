@@ -25,11 +25,15 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Returns the minimal deterministic automaton associated to the input one.
   template<typename A, typename T>
   Element<A, T>
   moore_minimization(const Element<A, T>& a);
   
+  /*! @} */
+
 } // vcsn
 
 # include <vaucanson/algorithms/moore.hxx>

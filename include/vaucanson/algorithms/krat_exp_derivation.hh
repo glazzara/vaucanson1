@@ -25,11 +25,15 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Returns the derivation of the krat expression.
   template <class Series, class T, class Letter>
   std::pair<Element<Series, T>, bool>
   derivate(const Element<Series, T>& exp, 
 	   Letter a);
+
+  /*! @} */
 
 } // vcsn
 

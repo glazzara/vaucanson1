@@ -23,8 +23,10 @@
 # include <vaucanson/automata/concept/transpose_impl.hh>
 # include <vaucanson/automata/concept/copy.hh>
 
-namespace vcsn
-{
+namespace vcsn {
+
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Copy in 'dst' the transposition of 'from'.
   template<typename lhs_t, typename rhs_t>
   void auto_transpose(lhs_t& dst,
@@ -33,6 +35,8 @@ namespace vcsn
   //! Return a fresh automaton which is the transposition of 'from'.
   template<typename auto_t>
   auto_t auto_transpose(const auto_t& from);
+
+  /*! @} */
 
 } //vcsn
 

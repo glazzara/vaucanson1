@@ -26,12 +26,16 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! The automaton associated to the krat expression using Thompson algorithm.
   template<typename A,      typename T, 
 	   typename Letter, typename Weight>
   void
   thompson(Element<A, T>&, const rat::exp<Letter, Weight>&);
   
+  /*! @} */
+
 } // vcsn
 
 # include <vaucanson/algorithms/thompson.hxx>

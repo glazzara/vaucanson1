@@ -26,10 +26,14 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Returns true if the two automata are isomorph.
   template<typename A, typename T>
   bool
   is_isomorph(const Element<A, T>& a, const Element<A, T>& b);
+
+  /*! @} */
 
 } // vcsn
 

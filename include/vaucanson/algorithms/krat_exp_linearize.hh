@@ -25,10 +25,14 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Expand words in the expression as a product of letters.
   template <class Series, class T>
   Element<Series, T>
   linearize(const Element<Series, T>& exp);
+
+  /*! @} */
 
 } // vcsn
 

@@ -25,6 +25,8 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Returns a fresh automaton that is the product of the two input ones.
   template<typename A, typename T, typename U>
   Element<A, T> 
@@ -39,6 +41,8 @@ namespace vcsn {
   template <typename A, typename T>
   Element<A, T>
   auto_diagonal(const Element<A, T>&);
+
+  /*! @} */
 
 } // vcsn
 

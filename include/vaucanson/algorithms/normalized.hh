@@ -25,6 +25,8 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! In-place Thompson normalization of the automaton.
   template<typename A, typename T>
   void
@@ -68,6 +70,8 @@ namespace vcsn {
   template<typename A, typename T>
   Element<A, T> 
   normalized_auto_star(const Element<A, T>& a);
+
+  /*! @} */
   
 } // vcsn
 

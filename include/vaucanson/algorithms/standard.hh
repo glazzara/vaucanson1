@@ -25,6 +25,8 @@
 
 namespace vcsn {
 
+  /*! \addtogroup algorithms */  /* @{ */
+
   //! Returns a standard automaton associated to the input.
   template<typename A, typename T>
   void
@@ -68,6 +70,8 @@ namespace vcsn {
   template<typename A, typename T>
   Element<A, T> 
   standard_auto_star(const Element<A, T>& a);
+
+  /*! @} */
   
 } // vcsn
 

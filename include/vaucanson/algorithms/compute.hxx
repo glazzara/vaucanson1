@@ -18,14 +18,14 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_COMPUTE_HXX
-# define ALGORITHMS_COMPUTE_HXX
+#ifndef VCSN_ALGORITHMS_COMPUTE_HXX
+# define VCSN_ALGORITHMS_COMPUTE_HXX
 
-# include <algorithm>
-# include <vector>
 # include <vaucanson/algorithms/compute.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
+# include <algorithm>
+# include <vector>
 
 namespace vcsn {
 
@@ -120,4 +120,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // ALGORITHMS_COMPUTE_HXX
+#endif // VCSN_ALGORITHMS_COMPUTE_HXX
