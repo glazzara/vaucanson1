@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -66,9 +67,12 @@ namespace vcsn {
     };
 
     //! Meta information about series.
-    template<typename S, typename T>
+    template<typename T>
     struct series_traits
-    {};
+    {
+//       typedef traits::undefined_type	monoid_value_t;
+//       typedef traits::undefined_type	weight_value_t;
+    };
 
     /*! @} @} */
 
@@ -87,10 +91,10 @@ namespace vcsn {
   {
   public:
     //! type of the implementation of weight (element of semiring).
-    typedef typename series_traits<Self, T>::weight_value_t   weight_value_t;
+    typedef typename series_traits<T>::weight_value_t   weight_value_t;
 
     //! type of the implementation of free monoid element.
-    typedef typename series_traits<Self, T>::monoid_value_t    monoid_value_t;
+    typedef typename series_traits<T>::monoid_value_t    monoid_value_t;
 
     //! type of the element of the semiring element.
     typedef Element<typename Self::weights_t, weight_value_t> weight_t;
@@ -99,7 +103,10 @@ namespace vcsn {
     typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
 
     //! type of the serie.
-    typedef Element<Self, T>					 element_t;
+    typedef Element<Self, T>				 element_t;
+
+    //! type of the iterator over the series when finite.
+    typedef typename series_traits<T>::support_t	support_t;
 
     //! returns the weight associated to a word. 
     weight_value_t	value_get(const monoid_value_t& m) const;
@@ -121,17 +128,14 @@ namespace vcsn {
     monoid_elt_t	choose_from_supp() const;
 
     //! in-place transpose transformation of the serie.
-    void       	transpose();
+    void       	        transpose();
 
-    // undocumented.
-    const Self&	set() const;
+    //! returns a container which is the support of the serie.
+    //! The container elements are couples (m, k) where m is in
+    //! the support and k is the image of m by the serie.
+    //! The support is accessible only if is_finite_app is true.
+    support_t		supp() const;
 
-    // undocumented.
-    T&		supp();
-
-    // undocumented.
-    const T&		supp() const;
-      
   protected:
     //! Default constructor is protected since it is an abstract class.
     MetaElement();
@@ -145,15 +149,13 @@ namespace vcsn {
   Element<S, T>
   transpose(const SeriesBase<S>& s, const T& t);
 
+  //! returns true if the support of the serie is only composed of
+  //! letters.
+  template <typename S, typename T>
+  bool
+  is_letter_support(const Element<S, T>& s);
+
   /*! @} @} */
-
-  template <typename S, typename T>
-  T&		
-  supp(Element<S, T>& e);
-
-  template <typename S, typename T>
-  const T&	
-  supp(const Element<S, T>& e);
 
   template <typename S, typename T>
   bool	
@@ -170,10 +172,10 @@ namespace vcsn {
   template <typename S, typename T, typename M, typename W>
   void	
   op_series_set(const SeriesBase<S>& s, const T& t, const W& w);
-    
- //  template <typename S, typename T>
-//   void	
-//   op_in_transpose(const SeriesBase<S>& s, T& t);
+
+  template <class S, class T>
+  typename series_traits<T>::support_t
+  op_support(const SeriesBase<S>&, const T& v);
 
 } // vcsn
 

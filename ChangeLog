@@ -1,5 +1,14 @@
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/series_base.hh(series_traits):
+		(series_traits): Update number of parameters.
+		(MetaElement): Add support_t and supp().
+		Add is_letter_support and op_support.
+	* include/vaucanson/algebra/concept/series_base.hxx:
+		Implement them.
+
+2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata.hh:
 		(MetaSet): Use MetaSet<Series>.
 		(MetaElement<Automata, ..>): Provide accessors to series.
@@ -39,7 +48,7 @@
 		Add support_t, 
 		Add output facilities.
 
-	* include/vaucnson/algebra/concrete/series/polynoms.hxx:
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx:
 		Implement op_support and output facilities.
 	
 	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx,
