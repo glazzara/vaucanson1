@@ -1,56 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 511)
-(Parent-Version vaucanson 0 510)
+(Project-Version vaucanson 0 512)
+(Parent-Version vaucanson 0 511)
 (New-Version-Log "")
 
 (Version-Log "2004-03-08  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/misc/random.hh,
-	  include/vaucanson/misc/support.hxx,
-	  include/vaucanson/misc/constraints.hh,
-	  include/vaucanson/misc/unique.hh,
-	  include/vaucanson/design_pattern/element.hxx,
-	  include/vaucanson/design_pattern/element_ops.hh,
-	  include/vaucanson/design_pattern/element_ops.hxx,
-	  include/vaucanson/design_pattern/syntactic_decorator.hxx,
-	  include/vaucanson/algebra/concept/monoid_base.hh,
-	  include/vaucanson/algebra/concept/monoid_base.hxx,
-	  include/vaucanson/algebra/concept/semiring_base.hxx,
-	  include/vaucanson/algebra/concept/series_base.hxx,
-	  include/vaucanson/algebra/concrete/free_monoid/words.hxx,
-	  include/vaucanson/algebra/concrete/letter/range.hh,
-	  include/vaucanson/algebra/concrete/letter/range.hxx,
-	  include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
-	  include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx,
-	  include/vaucanson/algebra/concrete/series/krat.hh,
-	  include/vaucanson/algebra/concrete/series/krat.hxx,
-	  include/vaucanson/algebra/concrete/series/polynoms.hh,
-	  include/vaucanson/algebra/concrete/series/polynoms.hxx,
-	  include/vaucanson/algebra/concrete/series/rat/exp.hh,
-	  include/vaucanson/algebra/concrete/series/rat/exp.hxx,
-	  include/vaucanson/automata/concept/automata_base.hxx,
-	  include/vaucanson/automata/concept/handlers.hxx,
-	  include/vaucanson/automata/concept/automata_ops.hxx,
-	  include/vaucanson/automata/concept/history.hxx,
-	  include/vaucanson/automata/concept/transducer.hxx,
-	  include/vaucanson/automata/concept/transducer_base.hxx,
-	  include/vaucanson/automata/concrete/graph.hxx,
-	  include/vaucanson/automata/concrete/graph.hh,
-	  include/vaucanson/automata/concrete/kind_adapter.hh,
-	  include/vaucanson/automata/concrete/transpose_view.hxx,
-	  include/vaucanson/algorithms/aut_to_exp.hxx,
-	  include/vaucanson/tools/gen_random.hxx,
-	  include/vaucanson/tools/usual.hxx,
-	  include/vaucanson/misc/bitset.hxx,
-	  include/vaucanson/vaucanson_boolean_automaton.hxx,
-	  include/vaucanson/vaucanson_z_max_plus.hxx,
-	  include/vaucanson/vaucanson_z_max_plus_automaton.hxx,
-	  include/vaucanson/vaucanson_z_automaton.hxx,
-	  include/vaucanson/vaucanson_r_automaton.hxx: Remove superfluous
-	  inline keywords.")
-(Checkin-Time "Mon, 08 Mar 2004 15:21:45 +0100")
+	  include/vaucanson/misc/random.hxx: Correct inlines.")
+(Checkin-Time "Mon, 08 Mar 2004 18:41:52 +0100")
 (Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -133,11 +92,11 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.48 700))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.49 644))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
-  (NEWS (vaucanson/r/34_NEWS 1.3 700))
+  (NEWS (vaucanson/r/34_NEWS 1.3 644))
 
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (reheader.pl (vaucanson/q/40_reheader.p 1.4 700))
@@ -146,7 +105,7 @@
   (README (vaucanson/f/48_README 1.9 600))
   (THANKS (vaucanson/f/36_THANKS 1.7 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.11 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.44.1.4 700))
+  (configure.ac (vaucanson/47_configure. 1.6.1.44.1.4 644))
   (prj (vaucanson.prj) :symlink)
 
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 600))
@@ -176,7 +135,7 @@
 
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.9 700))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.9 644))
 
   (include/vaucanson/vaucanson.hh (vaucanson/q/42_vaucanson. 1.2 600))
 
@@ -184,8 +143,8 @@
   (include/vaucanson/config/math.hh (vaucanson/p/42_math.hh 1.2 600))
   (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 600))
 
-  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.18 700))
-  (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.25 700))
+  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.19 644))
+  (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.26 644))
   (include/vaucanson/misc/limits.hh (vaucanson/q/32_limits.hh 1.5 600))
   (include/vaucanson/misc/support.hh (vaucanson/q/12_support.hh 1.7 600))
   (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.5 600))
@@ -193,12 +152,12 @@
   (include/vaucanson/misc/container_ops.hh (vaucanson/q/16_container_ 1.5 600))
   (include/vaucanson/misc/constraints.hh (vaucanson/q/17_constraint 1.3 600))
   (include/vaucanson/misc/selectors.hh (vaucanson/14_selectors. 1.8 600))
-  (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.11 700))
+  (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.11 644))
   (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.11 600))
   (include/vaucanson/misc/unique.hcc (vaucanson/p/39_unique.hcc 1.5 600))
   (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.6 600))
   (include/vaucanson/misc/utility.hh (vaucanson/p/43_utility.hh 1.4 600))
-  (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.10 700))
+  (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.10 644))
 
   (src/tests/misc/Makefile.am (vaucanson/p/44_Makefile.a 1.6 600))
   (src/tests/misc/limits.cc (vaucanson/q/33_limits.cc 1.2 600))
@@ -211,12 +170,12 @@
 
   (include/vaucanson/design_pattern/default_ops.hh (vaucanson/25_default_op 1.15 600))
   (include/vaucanson/design_pattern/default_ops.hxx (vaucanson/24_default_op 1.16 600))
-  (include/vaucanson/design_pattern/element.hh (vaucanson/7_element.hh 1.22 700))
-  (include/vaucanson/design_pattern/element.hxx (vaucanson/6_element.hx 1.17.1.3 700))
+  (include/vaucanson/design_pattern/element.hh (vaucanson/7_element.hh 1.22 644))
+  (include/vaucanson/design_pattern/element.hxx (vaucanson/6_element.hx 1.17.1.3 644))
   (include/vaucanson/design_pattern/meta_element_root.hh (vaucanson/9_element_ba 1.17 600))
   (include/vaucanson/design_pattern/meta_element_root.hxx (vaucanson/8_element_ba 1.12 600))
   (include/vaucanson/design_pattern/element_ops.hh (vaucanson/5_element_op 1.20 600))
-  (include/vaucanson/design_pattern/element_ops.hxx (vaucanson/g/44_element_op 1.9.1.2 700))
+  (include/vaucanson/design_pattern/element_ops.hxx (vaucanson/g/44_element_op 1.9.1.2 644))
   (include/vaucanson/design_pattern/design_pattern.hh (vaucanson/4_fundamenta 1.15 600))
   (include/vaucanson/design_pattern/syntactic_decorator.hh (vaucanson/21_meta_eleme 1.14 600))
   (include/vaucanson/design_pattern/syntactic_decorator.hxx (vaucanson/20_meta_eleme 1.15 600))
@@ -241,8 +200,8 @@
   (src/tests/design_pattern/intrinsics_assign.cc (vaucanson/q/5_intrinsics 1.3 600))
   (src/tests/design_pattern/intrinsics.hh (vaucanson/q/6_intrinsics 1.4 600))
 
-  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.27 700))
-  (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.26 700))
+  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.27 644))
+  (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.26 644))
   (include/vaucanson/algebra/concept/freemonoid_base.hh (vaucanson/c/1_freemonoid 1.18 600))
   (include/vaucanson/algebra/concept/freemonoid_base.hxx (vaucanson/c/0_freemonoid 1.18 600))
   (include/vaucanson/algebra/concept/letter.hh (vaucanson/i/22_letter.hh 1.4 600))
@@ -254,7 +213,7 @@
   (include/vaucanson/algebra/concept/semiring_base.hh (vaucanson/b/16_semiring_b 1.15 600))
   (include/vaucanson/algebra/concept/semiring_base.hxx (vaucanson/b/15_semiring_b 1.15 600))
   (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.26 600))
-  (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.28 700))
+  (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.28 644))
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.11 600))
 
 
@@ -262,23 +221,23 @@
   (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.4.1.2 600))
   (include/vaucanson/algebra/concrete/alphabets/alphabets.hh (vaucanson/29_alphabets. 1.14 600))
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh (vaucanson/i/24_decorated_ 1.4 600))
-  (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx (vaucanson/i/25_decorated_ 1.7 700))
+  (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx (vaucanson/i/25_decorated_ 1.7 644))
   (include/vaucanson/algebra/concrete/alphabets/predefs.hh (vaucanson/g/47_predefs.hh 1.8 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh (vaucanson/28_set_alphab 1.15 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.12 600))
   (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.8 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.17 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.18 600))
-  (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.22 700))
-  (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.14 700))
+  (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.22 644))
+  (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.14 644))
   (include/vaucanson/algebra/concrete/letter/char_letter.hh (vaucanson/i/23_char_lette 1.4 600))
   (include/vaucanson/algebra/concrete/letter/range.hh (vaucanson/h/28_range.hh 1.7 600))
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.6 600))
   (include/vaucanson/algebra/concrete/predefs.hh (vaucanson/g/45_predefs.hh 1.5 600))
-  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.15 700))
-  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.24 700))
-  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh (vaucanson/b/32_tropical_s 1.13 700))
-  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.20 700))
+  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.15 644))
+  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.24 644))
+  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh (vaucanson/b/32_tropical_s 1.13 644))
+  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.20 644))
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.9 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.29 600))
@@ -286,12 +245,12 @@
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.9 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.11 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.8 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.20 700))
-  (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.20 700))
+  (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.20 644))
+  (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.20 644))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.9 600))
   (include/vaucanson/algebra/concrete/series/krat_coefficient.hxx (vaucanson/p/23_krat_coeff 1.2.1.3 600))
   (include/vaucanson/algebra/concrete/series/krat_coefficient.hh (vaucanson/p/24_krat_coeff 1.5 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.6.1.13 700))
+  (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.6.1.13 644))
   (include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx (vaucanson/p/32_krat_exp_i 1.3 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.26 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.37 600))
@@ -299,22 +258,22 @@
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx (vaucanson/d/46_depth_visi 1.7 600))
   (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh (vaucanson/e/0_dump_visit 1.11 600))
   (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx (vaucanson/d/47_dump_visit 1.10 600))
-  (include/vaucanson/algebra/concrete/series/rat/exp.hh (vaucanson/d/51_exp.hh 1.22 700))
-  (include/vaucanson/algebra/concrete/series/rat/exp.hxx (vaucanson/d/49_exp.hxx 1.27 700))
+  (include/vaucanson/algebra/concrete/series/rat/exp.hh (vaucanson/d/51_exp.hh 1.22 644))
+  (include/vaucanson/algebra/concrete/series/rat/exp.hxx (vaucanson/d/49_exp.hxx 1.27 644))
   (include/vaucanson/algebra/concrete/series/rat/nodes.hh (vaucanson/d/50_nodes.hh 1.10 600))
   (include/vaucanson/algebra/concrete/series/rat/nodes.hxx (vaucanson/d/48_nodes.hxx 1.10 600))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hh (vaucanson/e/51_random_vis 1.8 600))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx (vaucanson/e/50_random_vis 1.10 600))
-  (include/vaucanson/algebra/concrete/series/series.hh (vaucanson/c/19_series.hh 1.20 700))
+  (include/vaucanson/algebra/concrete/series/series.hh (vaucanson/c/19_series.hh 1.20 644))
   (include/vaucanson/algebra/concrete/series/series.hxx (vaucanson/c/18_series.hxx 1.15 600))
   (include/vaucanson/algebra/concrete/series/transpose.hh (vaucanson/e/11_transpose. 1.8 600))
   (include/vaucanson/algebra/concrete/series/transpose.hxx (vaucanson/e/10_transpose. 1.9 600))
 
   (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.7 600))
   (src/tests/algebra/alphabets/Makefile.am (vaucanson/h/36_Makefile.a 1.1 600))
-  (src/tests/algebra/alphabets/alphabet_test.hh (vaucanson/h/37_alphabet_t 1.8 700))
-  (src/tests/algebra/free_monoid/Makefile.am (vaucanson/h/34_Makefile.a 1.3 700))
-  (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.6 700))
+  (src/tests/algebra/alphabets/alphabet_test.hh (vaucanson/h/37_alphabet_t 1.8 644))
+  (src/tests/algebra/free_monoid/Makefile.am (vaucanson/h/34_Makefile.a 1.3 644))
+  (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.6 644))
   (src/tests/algebra/semiring/Makefile.am (vaucanson/h/39_Makefile.a 1.1 600))
   (src/tests/algebra/semiring/semiring_test.hh (vaucanson/h/38_semiring_t 1.6 600))
   (src/tests/algebra/series/Makefile.am (vaucanson/c/22_Makefile.a 1.8 600))
@@ -324,7 +283,7 @@
   (src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh (vaucanson/j/22_krat_exp_c 1.6 600))
   (src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh (vaucanson/j/34_krat_exp_r 1.7 600))
   (src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh (vaucanson/j/42_krat_exp_c 1.8 600))
-  (src/tests/algebra/series/krat/main/Makefile.am (vaucanson/j/43_Makefile.a 1.1.1.3 700))
+  (src/tests/algebra/series/krat/main/Makefile.am (vaucanson/j/43_Makefile.a 1.1.1.3 644))
   (src/tests/algebra/series/krat/derivations/Makefile.am (vaucanson/j/40_Makefile.a 1.1 600))
   (src/tests/algebra/series/krat/derivations/derivations_common.hh (vaucanson/j/41_derivation 1.1.1.4 600))
   (src/tests/algebra/series/krat/derivations/cderivation/Makefile.am (vaucanson/j/44_Makefile.a 1.1 600))
@@ -339,10 +298,10 @@
   (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 600))
 
 
-  (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.16 700))
-  (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.14 700))
+  (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.16 644))
+  (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.14 644))
   (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.26 600))
-  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.24 700))
+  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.24 644))
   (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.8 600))
   (include/vaucanson/automata/concept/copy.hxx (vaucanson/d/5_copy.hxx 1.8 600))
   (include/vaucanson/automata/concept/handlers.hh (vaucanson/d/2_handlers.h 1.11 600))
@@ -353,29 +312,29 @@
   (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.7 600))
   (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.8 600))
   (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.7 600))
-  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.23 700))
-  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.8 700))
+  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.23 644))
+  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.8 644))
   (include/vaucanson/automata/concept/delta_kind.hh (vaucanson/q/14_delta_kind 1.2 600))
   (include/vaucanson/automata/concept/automata_kind.hh (vaucanson/q/18_automata_k 1.2 600))
   (include/vaucanson/automata/concept/history.hh (vaucanson/q/19_history.hh 1.3 600))
   (include/vaucanson/automata/concept/history.hxx (vaucanson/q/20_history.hx 1.4 600))
 
   (include/vaucanson/automata/concept/transducer_ops.hh (vaucanson/q/34_transducer 1.8 600))
-  (include/vaucanson/automata/concept/transducer.hh (vaucanson/q/35_transducer 1.8 700))
+  (include/vaucanson/automata/concept/transducer.hh (vaucanson/q/35_transducer 1.8 644))
   (include/vaucanson/automata/concept/transducer_base.hh (vaucanson/q/36_transducer 1.11 600))
   (include/vaucanson/automata/concept/transducer.hxx (vaucanson/q/37_transducer 1.5 600))
   (include/vaucanson/automata/concept/transducer_base.hxx (vaucanson/q/38_transducer 1.10 600))
-  (include/vaucanson/automata/concept/transducer_ops.hxx (vaucanson/q/39_transducer 1.7 700))
+  (include/vaucanson/automata/concept/transducer_ops.hxx (vaucanson/q/39_transducer 1.7 644))
 
-  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.8.1.2 700))
-  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.14.1.3 700))
+  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.8.1.2 644))
+  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.14.1.3 644))
   (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.11 600))
   (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.11 600))
   (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.7 600))
-  (include/vaucanson/automata/concrete/transpose_view.hh (vaucanson/q/21_transpose_ 1.7 700))
-  (include/vaucanson/automata/concrete/transpose_view.hxx (vaucanson/q/22_transpose_ 1.6 700))
+  (include/vaucanson/automata/concrete/transpose_view.hh (vaucanson/q/21_transpose_ 1.7 644))
+  (include/vaucanson/automata/concrete/transpose_view.hxx (vaucanson/q/22_transpose_ 1.6 644))
   (include/vaucanson/automata/concrete/automaton_view.hh (vaucanson/q/23_automaton_ 1.4 600))
-  (include/vaucanson/automata/concrete/automaton_view.hxx (vaucanson/q/24_automaton_ 1.5 700))
+  (include/vaucanson/automata/concrete/automaton_view.hxx (vaucanson/q/24_automaton_ 1.5 644))
   (include/vaucanson/automata/concrete/kind_adapter.hxx (vaucanson/q/30_kind_adapt 1.2 600))
 
   (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.14 600))
@@ -387,22 +346,22 @@
 
   (include/vaucanson/algorithms/complement.hh (vaucanson/f/4_complement 1.11 600))
   (include/vaucanson/algorithms/complement.hxx (vaucanson/f/3_complement 1.10 600))
-  (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.13 700))
+  (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.13 644))
   (include/vaucanson/algorithms/complete.hxx (vaucanson/f/1_complete.h 1.10 600))
   (include/vaucanson/algorithms/eval.hh (vaucanson/e/6_compute.hh 1.15 600))
-  (include/vaucanson/algorithms/eval.hxx (vaucanson/e/5_compute.hx 1.20 700))
+  (include/vaucanson/algorithms/eval.hxx (vaucanson/e/5_compute.hx 1.20 644))
   (include/vaucanson/algorithms/concatenate.hh (vaucanson/h/5_concat.hh 1.10 600))
   (include/vaucanson/algorithms/concatenate.hxx (vaucanson/h/4_concat.hxx 1.9 600))
   (include/vaucanson/algorithms/determinize.hh (vaucanson/d/35_determiniz 1.16 600))
   (include/vaucanson/algorithms/determinize.hxx (vaucanson/d/34_determiniz 1.19 600))
-  (include/vaucanson/algorithms/aut_to_exp.hh (vaucanson/e/32_eliminatio 1.14 700))
+  (include/vaucanson/algorithms/aut_to_exp.hh (vaucanson/e/32_eliminatio 1.14 644))
   (include/vaucanson/algorithms/aut_to_exp.hxx (vaucanson/e/31_eliminatio 1.17 600))
   (include/vaucanson/algorithms/sub_automaton.hh (vaucanson/d/31_extract.hh 1.13 600))
   (include/vaucanson/algorithms/sub_automaton.hxx (vaucanson/d/30_extract.hx 1.15 600))
   (include/vaucanson/algorithms/standard_of.hh (vaucanson/e/42_glushkov.h 1.16 600))
   (include/vaucanson/algorithms/standard_of.hxx (vaucanson/e/41_glushkov.h 1.20 600))
-  (include/vaucanson/algorithms/minimization_hopcroft.hh (vaucanson/e/26_hopcroft.h 1.14 700))
-  (include/vaucanson/algorithms/minimization_hopcroft.hxx (vaucanson/e/25_hopcroft.h 1.19 700))
+  (include/vaucanson/algorithms/minimization_hopcroft.hh (vaucanson/e/26_hopcroft.h 1.14 644))
+  (include/vaucanson/algorithms/minimization_hopcroft.hxx (vaucanson/e/25_hopcroft.h 1.19 644))
   (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.10 600))
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.5 600))
   (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.5.1.3 600))
@@ -412,41 +371,41 @@
   (include/vaucanson/algorithms/internal/build_pattern.hxx (vaucanson/j/32_algo_helpe 1.7.1.1 600))
   (include/vaucanson/algorithms/internal/build_pattern.hh (vaucanson/j/33_algo_helpe 1.8 600))
 
-  (include/vaucanson/algorithms/minimization_moore.hh (vaucanson/e/24_moore.hh 1.13 700))
-  (include/vaucanson/algorithms/minimization_moore.hxx (vaucanson/e/23_moore.hxx 1.18 700))
-  (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.15 700))
+  (include/vaucanson/algorithms/minimization_moore.hh (vaucanson/e/24_moore.hh 1.13 644))
+  (include/vaucanson/algorithms/minimization_moore.hxx (vaucanson/e/23_moore.hxx 1.18 644))
+  (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.15 644))
   (include/vaucanson/algorithms/normalized.hxx (vaucanson/d/43_normalized 1.18 600))
   (include/vaucanson/algorithms/product.hh (vaucanson/e/20_product.hh 1.16 600))
-  (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.25 700))
+  (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.25 644))
   (include/vaucanson/algorithms/accessible.hh (vaucanson/d/33_reachable. 1.16 600))
   (include/vaucanson/algorithms/accessible.hxx (vaucanson/d/32_reachable. 1.15 600))
   (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.15 600))
   (include/vaucanson/algorithms/realtime.hxx (vaucanson/e/47_realtime.h 1.14 600))
-  (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.15 700))
+  (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.15 644))
   (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.16 600))
   (include/vaucanson/algorithms/thompson.hh (vaucanson/e/45_thompson.h 1.14 600))
   (include/vaucanson/algorithms/thompson.hxx (vaucanson/e/44_thompson.h 1.12 600))
-  (include/vaucanson/algorithms/transpose.hh (vaucanson/d/37_transpose. 1.16 700))
+  (include/vaucanson/algorithms/transpose.hh (vaucanson/d/37_transpose. 1.16 644))
   (include/vaucanson/algorithms/transpose.hxx (vaucanson/d/36_transpose. 1.11 600))
   (include/vaucanson/algorithms/trim.hh (vaucanson/f/5_trim.hh 1.13 600))
   (include/vaucanson/algorithms/trim.hxx (vaucanson/f/0_trim.hxx 1.12 600))
   (include/vaucanson/algorithms/sum.hh (vaucanson/d/42_union.hh 1.14 600))
   (include/vaucanson/algorithms/sum.hxx (vaucanson/d/41_union.hxx 1.14 600))
-  (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.3.1.4 700))
+  (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.3.1.4 644))
   (include/vaucanson/algorithms/berry_sethi.hh (vaucanson/l/11_berry_seth 1.4 600))
 
-  (include/vaucanson/algorithms/derivatives_automaton.hxx (vaucanson/p/25_derivates_ 1.11 700))
+  (include/vaucanson/algorithms/derivatives_automaton.hxx (vaucanson/p/25_derivates_ 1.11 644))
   (include/vaucanson/algorithms/derivatives_automaton.hh (vaucanson/p/26_derivates_ 1.5 600))
 
   (include/vaucanson/algorithms/krat_exp_partial_derivation.hxx (vaucanson/p/27_krat_exp_p 1.9 600))
   (include/vaucanson/algorithms/krat_exp_partial_derivation.hh (vaucanson/p/28_krat_exp_p 1.5 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.9 600))
-  (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.10 700))
+  (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.10 644))
   (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.11 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.14 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.10 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.5 600))
-  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.6 700))
+  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.6 644))
   (include/vaucanson/algorithms/krat_exp_realtime.hh (vaucanson/j/36_krat_exp_r 1.5 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.3.1.6 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.10 600))
@@ -459,13 +418,13 @@
   (include/vaucanson/algorithms/forward_realtime.hh (vaucanson/q/26_forward_re 1.6 600))
   (include/vaucanson/algorithms/backward_realtime.hxx (vaucanson/q/27_backward_r 1.7 600))
   (include/vaucanson/algorithms/backward_realtime.hh (vaucanson/q/28_backward_r 1.5 600))
-  (include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx (vaucanson/q/43_partial_ra 1.8 700))
-  (include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hh (vaucanson/q/44_partial_ra 1.4 700))
+  (include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx (vaucanson/q/43_partial_ra 1.8 644))
+  (include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hh (vaucanson/q/44_partial_ra 1.4 644))
   (include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx (vaucanson/q/45_partial_ra 1.4 600))
   (include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh (vaucanson/q/46_partial_ra 1.4 600))
   (include/vaucanson/algorithms/internal/partial_rat_exp.hxx (vaucanson/q/47_partial_ra 1.5 600))
   (include/vaucanson/algorithms/internal/partial_rat_exp.hh (vaucanson/q/48_partial_ra 1.4 600))
-  (include/vaucanson/algorithms/is_realtime.hh (vaucanson/q/51_is_realtim 1.5 700))
+  (include/vaucanson/algorithms/is_realtime.hh (vaucanson/q/51_is_realtim 1.5 644))
   (include/vaucanson/algorithms/is_normalized.hh (vaucanson/r/0_is_normali 1.3 600))
   (include/vaucanson/algorithms/is_letterized.hh (vaucanson/r/1_is_letteri 1.3 600))
   (include/vaucanson/algorithms/is_realtime.hxx (vaucanson/r/2_is_realtim 1.2 600))
@@ -482,9 +441,9 @@
   (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.24 600))
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.35 600))
   (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.17 600))
-  (include/vaucanson/tools/usual.hxx (vaucanson/q/29_usual.hxx 1.6 700))
+  (include/vaucanson/tools/usual.hxx (vaucanson/q/29_usual.hxx 1.6 644))
   (include/vaucanson/tools/dot_dump.hh (vaucanson/q/31_dot_dump.h 1.7 600))
-  (include/vaucanson/tools/dot_format.hxx (vaucanson/r/25_dot_format 1.7 700))
+  (include/vaucanson/tools/dot_format.hxx (vaucanson/r/25_dot_format 1.7 644))
   (include/vaucanson/tools/dot_format.hh (vaucanson/r/26_dot_format 1.5 600))
   (include/vaucanson/tools/io.hxx (vaucanson/r/27_io.hxx 1.5 600))
   (include/vaucanson/tools/io.hh (vaucanson/r/28_io.hh 1.5 600))
@@ -504,7 +463,7 @@
   (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.12 600))
   (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.9 600))
   (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.19 600))
-  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.18 700))
+  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.18 644))
   (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.16 600))
   (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.13 600))
   (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.13 600))
@@ -516,10 +475,10 @@
   (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 600))
   (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.7 700))
   (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 600))
-  (src/tests/tests-suites/algebra_numerical_semiring_int.defs (vaucanson/h/33_algebra_nu 1.1 700))
+  (src/tests/tests-suites/algebra_numerical_semiring_int.defs (vaucanson/h/33_algebra_nu 1.1 644))
   (src/tests/tests-suites/algebra_set_alphabet.defs (vaucanson/h/32_algebra_se 1.2 600))
-  (src/tests/tests-suites/algebra_free_monoid_string.defs (vaucanson/h/31_algebra_st 1.1 700))
-  (src/tests/tests-suites/algebra_tropical_semiring_max.defs (vaucanson/h/30_algebra_tr 1.2 700))
+  (src/tests/tests-suites/algebra_free_monoid_string.defs (vaucanson/h/31_algebra_st 1.1 644))
+  (src/tests/tests-suites/algebra_tropical_semiring_max.defs (vaucanson/h/30_algebra_tr 1.2 644))
   (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 600))
   (src/tests/tests-suites/algebra_series_krat.defs (vaucanson/j/25_algebra_se 1.3 600))
   (src/tests/tests-suites/algebra_series_misc.defs (vaucanson/j/26_algebra_se 1.2 600))
@@ -558,7 +517,7 @@
   (src/demos/samples/algorithms/derivatives_automaton.cc (vaucanson/q/50_derivative 1.9 600))
 
   (src/demos/vgrep/Makefile.am (vaucanson/i/27_Makefile.a 1.8 600))
-  (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.15 700))
+  (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.15 644))
 
   (src/demos/vaucanswig/README (vaucanson/r/22_README 1.4 600))
   (src/demos/vaucanswig/expand.sh (vaucanson/r/7_expand.sh 1.8 700))
@@ -796,19 +755,19 @@
 ;; to version 0.404(w), by clavei_t:
 
   (include/vaucanson/misc/window.hxx (vaucanson/r/37_window.hxx 1.5 600))
-  (include/vaucanson/misc/window.hh (vaucanson/r/38_window.hh 1.6 700))
+  (include/vaucanson/misc/window.hh (vaucanson/r/38_window.hh 1.6 644))
 
 ;; Files added by populate at Thu, 04 Sep 2003 13:57:03 +0200,
 ;; to version 0.405(w), by clavei_t:
 
   (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.7 600))
-  (include/vaucanson/misc/bitset.hh (vaucanson/r/40_bitset.hh 1.7 700))
+  (include/vaucanson/misc/bitset.hh (vaucanson/r/40_bitset.hh 1.7 644))
 
 ;; Files added by populate at Fri, 05 Sep 2003 17:36:32 +0200,
 ;; to version 0.412(w), by clavei_t:
 
-  (include/vaucanson/algorithms/search.hxx (vaucanson/r/41_search.hxx 1.3 700))
-  (include/vaucanson/algorithms/search.hh (vaucanson/r/42_search.hh 1.4 700))
+  (include/vaucanson/algorithms/search.hxx (vaucanson/r/41_search.hxx 1.3 644))
+  (include/vaucanson/algorithms/search.hh (vaucanson/r/42_search.hh 1.4 644))
 
 ;; Files added by populate at Mon, 08 Sep 2003 13:16:27 +0200,
 ;; to version 0.414(w), by clavei_t:
@@ -828,7 +787,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:41 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/realtime_composition.hxx (vaucanson/r/46_realtime_c 1.6 700))
+  (include/vaucanson/algorithms/realtime_composition.hxx (vaucanson/r/46_realtime_c 1.6 644))
 
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:48 +0200,
 ;; to version 0.422(w), by yann:
@@ -838,7 +797,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:50 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.10 700))
+  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.10 644))
 
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:05 +0200,
 ;; to version 0.424(w), by yann:
@@ -848,7 +807,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:06 +0200,
 ;; to version 0.424(w), by yann:
 
-  (include/vaucanson/algorithms/extension.hxx (vaucanson/r/50_extension. 1.6 700))
+  (include/vaucanson/algorithms/extension.hxx (vaucanson/r/50_extension. 1.6 644))
 
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:11 +0200,
 ;; to version 0.424(w), by yann:
@@ -888,7 +847,7 @@
 ;; Files added by populate at Fri, 17 Oct 2003 21:35:12 +0200,
 ;; to version 0.445(w), by yann:
 
-  (include/vaucanson/standard_algorithms.hh (vaucanson/s/10_standard_a 1.2 700))
+  (include/vaucanson/standard_algorithms.hh (vaucanson/s/10_standard_a 1.2 644))
 
 ;; Files added by populate at Fri, 17 Oct 2003 21:38:05 +0200,
 ;; to version 0.445(w), by yann:
@@ -943,7 +902,7 @@
 ;; Files added by populate at Fri, 14 Nov 2003 23:46:29 +0100,
 ;; to version 0.454(w), by yann:
 
-  (src/demos/fibonacci/fibonacci.cc (vaucanson/s/19_fibonacci. 1.5 700))
+  (src/demos/fibonacci/fibonacci.cc (vaucanson/s/19_fibonacci. 1.5 644))
 
 ;; Files added by populate at Sat, 15 Nov 2003 21:52:28 +0100,
 ;; to version 0.455(w), by yann:
@@ -958,7 +917,7 @@
 ;; Files added by populate at Wed, 26 Nov 2003 14:52:08 +0100,
 ;; to version 0.456(w), by yann:
 
-  (doc/doc.doxy.in (vaucanson/s/22_doc.doxy.i 1.2 700))
+  (doc/doc.doxy.in (vaucanson/s/22_doc.doxy.i 1.2 644))
 
 ;; Files added by populate at Wed, 26 Nov 2003 15:01:56 +0100,
 ;; to version 0.459(w), by yann:
@@ -968,7 +927,7 @@
 ;; Files added by populate at Wed, 26 Nov 2003 15:01:57 +0100,
 ;; to version 0.459(w), by yann:
 
-  (include/vaucanson/algebra/concrete/series/krat_exp_verbalization.hxx (vaucanson/s/24_krat_exp_v 1.2 700))
+  (include/vaucanson/algebra/concrete/series/krat_exp_verbalization.hxx (vaucanson/s/24_krat_exp_v 1.2 644))
 
 ;; Files added by populate at Wed, 26 Nov 2003 15:02:29 +0100,
 ;; to version 0.459(w), by yann:
@@ -993,7 +952,7 @@
 ;; Files added by populate at Tue, 23 Dec 2003 10:05:20 +0100,
 ;; to version 0.472(w), by yann:
 
-  (src/demos/universal/universal.cc (vaucanson/u/40_universal. 1.2 700))
+  (src/demos/universal/universal.cc (vaucanson/u/40_universal. 1.2 644))
 
 ;; Files added by populate at Thu, 15 Jan 2004 11:38:33 +0100,
 ;; to version 0.475(w), by yann:
@@ -1008,7 +967,7 @@
 ;; Files added by populate at Fri, 30 Jan 2004 14:10:43 +0100,
 ;; to version 0.477(w), by fosse_l:
 
-  (include/vaucanson/tools/usual_escaped_characters.hxx (vaucanson/u/43_usual_esca 1.3 700))
+  (include/vaucanson/tools/usual_escaped_characters.hxx (vaucanson/u/43_usual_esca 1.3 644))
   (include/vaucanson/tools/usual_escaped_characters.hh (vaucanson/u/44_usual_esca 1.2 600))
 
 ;; Files added by populate at Sun, 01 Feb 2004 20:56:13 +0100,
@@ -1039,7 +998,7 @@
 ;; to version 0.480(w), by clavei_t:
 
   (include/vaucanson/misc/char_traits.hxx (vaucanson/u/47_char_trait 1.1 600))
-  (include/vaucanson/misc/char_traits.hh (vaucanson/u/48_char_trait 1.2 700))
+  (include/vaucanson/misc/char_traits.hh (vaucanson/u/48_char_trait 1.2 644))
 
 ;; Files added by populate at Wed, 04 Feb 2004 18:14:57 +0100,
 ;; to version 0.480(w), by clavei_t:
@@ -1055,7 +1014,7 @@
 ;; to version 0.482(w), by clavei_t:
 
   (include/vaucanson/algorithms/krat_exp_flatten.hxx (vaucanson/u/51_krat_exp_f 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_flatten.hh (vaucanson/v/0_krat_exp_f 1.3 700))
+  (include/vaucanson/algorithms/krat_exp_flatten.hh (vaucanson/v/0_krat_exp_f 1.3 644))
   (src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh (vaucanson/v/1_krat_exp_f 1.2 600))
 
 ;; Files added by populate at Tue, 10 Feb 2004 22:05:20 +0100,
@@ -1066,25 +1025,25 @@
 ;; Files added by populate at Sun, 29 Feb 2004 15:45:11 +0100,
 ;; to version 0.492(w), by clavei_t:
 
-  (src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh (vaucanson/v/3_constructo 1.1 700))
+  (src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh (vaucanson/v/3_constructo 1.1 644))
 
 ;; Files added by populate at Tue, 02 Mar 2004 19:17:24 +0100,
 ;; to version 0.493(w), by o-conn_s:
 
-  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.4 700))
-  (include/vaucanson/algebra/concrete/semiring/rational_number.hh (vaucanson/v/5_rational_n 1.3 700))
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.4 644))
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hh (vaucanson/v/5_rational_n 1.3 644))
 
 ;; Files added by populate at Wed, 03 Mar 2004 10:25:32 +0100,
 ;; to version 0.496(w), by o-conn_s:
 
-  (src/tests/tests-suites/algebra_numerical_semiring_rational.defs (vaucanson/v/6_algebra_nu 1.2 700))
+  (src/tests/tests-suites/algebra_numerical_semiring_rational.defs (vaucanson/v/6_algebra_nu 1.2 644))
 
 ;; Files added by populate at Fri, 05 Mar 2004 14:30:29 +0100,
 ;; to version 0.499(w), by o-conn_s:
 
-  (src/tests/tests-suites/algebra_numerical_semiring_float.defs (vaucanson/v/7_algebra_nu 1.1 700))
-  (src/tests/tests-suites/algebra_numerical_semiring_double.defs (vaucanson/v/8_algebra_nu 1.1 700))
-  (src/tests/tests-suites/algebra_numerical_semiring_bool.defs (vaucanson/v/9_algebra_nu 1.1 700))
+  (src/tests/tests-suites/algebra_numerical_semiring_float.defs (vaucanson/v/7_algebra_nu 1.1 644))
+  (src/tests/tests-suites/algebra_numerical_semiring_double.defs (vaucanson/v/8_algebra_nu 1.1 644))
+  (src/tests/tests-suites/algebra_numerical_semiring_bool.defs (vaucanson/v/9_algebra_nu 1.1 644))
 
 ;; Files added by populate at Fri, 05 Mar 2004 14:42:44 +0100,
 ;; to version 0.499(w), by o-conn_s:
@@ -1094,8 +1053,8 @@
 ;; Files added by populate at Sat, 06 Mar 2004 19:53:09 +0100,
 ;; to version 0.503(w), by clavei_t:
 
-  (include/vaucanson/misc/deferrer.hxx (vaucanson/v/11_deferrer.h 1.1 700))
-  (include/vaucanson/misc/deferrer.hh (vaucanson/v/12_deferrer.h 1.1 700))
+  (include/vaucanson/misc/deferrer.hxx (vaucanson/v/11_deferrer.h 1.1 644))
+  (include/vaucanson/misc/deferrer.hh (vaucanson/v/12_deferrer.h 1.1 644))
 
 ;; Files added by populate at Sun, 07 Mar 2004 13:50:59 +0100,
 ;; to version 0.506(w), by fosse_l:

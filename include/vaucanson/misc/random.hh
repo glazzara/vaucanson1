@@ -60,10 +60,10 @@ namespace utility {
     char generate<char>(char min, char max);
 
     /// Generate a random lowercase letter
-    inline char generate_letter();
+    char generate_letter();
 
     /// Generate a random digit
-    inline char generate_digit();
+    char generate_digit();
 
     /// Generate a random Boolean
     template<>

@@ -41,50 +41,50 @@ namespace utility {
   namespace random {
 
     template<>
-    char generate<char>()
+    inline char generate<char>()
     {
       // We do not want any 0, because it could generate errors in strings.
       return char (1 + unsigned(rand()) % ((1 << (sizeof(char) * 8)) - 1));
     }
 
     template<>
-    char generate<char>(char min, char max)
+    inline char generate<char>(char min, char max)
     {
       unsigned range = unsigned(max - min) + 1;
       return char(min + rand() % range);
     }
 
-    char generate_letter()
+    inline char generate_letter()
     {
       return generate<char>('a', 'z');
     }
 
-    char generate_digit()
+    inline char generate_digit()
     {
       return generate<char>('0', '9');
     }
 
     template<>
-    bool generate<bool>()
+    inline bool generate<bool>()
     {
       return static_cast<bool>(rand() & 1);
     }
 
     template<>
-    int generate<int>()
+    inline int generate<int>()
     {
       return rand() % utility::limits<int>::max();
     }
 
     template<>
-    int generate<int>(int min, int max)
+    inline int generate<int>(int min, int max)
     {
       unsigned range = unsigned(max - min) + 1;
       return min + rand() % range;
     }
 
     template<>
-    float generate<float>()
+    inline float generate<float>()
     {
       // This formula comes from the caml stdlib.
       return ((static_cast<float> (rand()) / RAND_MAX +
@@ -93,7 +93,7 @@ namespace utility {
     }
 
     template<>
-    double generate<double>()
+    inline double generate<double>()
     {
       return ((static_cast<double> (rand()) / RAND_MAX +
 	       static_cast<double> (rand())) / RAND_MAX +
@@ -119,6 +119,7 @@ namespace utility {
     }
 
     template<>
+    inline
     vcsn::algebra::RationalNumber
     generate<vcsn::algebra::RationalNumber>()
     {
@@ -137,6 +138,7 @@ namespace utility {
      * have a larger range of choice for our new fraction.
      */
     template<>
+    inline
     vcsn::algebra::RationalNumber
     generate<vcsn::algebra::RationalNumber>
     (const vcsn::algebra::RationalNumber min,

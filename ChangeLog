@@ -1,6 +1,11 @@
 2004-03-08  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/misc/random.hh,
+	  include/vaucanson/misc/random.hxx: Correct inlines.
+
+2004-03-08  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hh,
 	  include/vaucanson/misc/support.hxx,
 	  include/vaucanson/misc/constraints.hh,
 	  include/vaucanson/misc/unique.hh,
