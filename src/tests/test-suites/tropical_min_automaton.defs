@@ -1,0 +1,4 @@
+#include <vaucanson/tools/usual.hh>
+
+#define TEST_STATIC_ARGS \
+   vcsn::tools::tropical_min_automaton_t

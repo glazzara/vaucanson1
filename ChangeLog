@@ -1,5 +1,20 @@
 2004-04-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/test-suites/generate-all.sh: Minor fixes.
+	* src/tests/test-suites/tropical_min_automaton.defs: New file. 
+	Instanciate tests on tropical_min automaton.
+	* src/tests/test-suites/r_automaton_t.defs,
+	* src/tests/test-suites/z_automaton_t.defs,
+	* src/tests/test-suites/z_max_plus_automaton_t.defs,
+	* src/tests/test-suites/booolean_automaton_t.defs: 
+	Renamed to
+	* src/tests/test-suites/r_automaton.defs,
+	* src/tests/test-suites/z_automaton.defs,
+	* src/tests/test-suites/z_max_plus_automaton.defs,
+	* src/tests/test-suites/booolean_automaton.defs: These. 
+
+2004-04-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
 	Minor fix to avoid compilation warning.
 
