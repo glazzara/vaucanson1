@@ -31,7 +31,6 @@
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_LETTER_TEST_HH
 
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
 # include <krat_exp_partial_derivation_common.hh>
 
@@ -48,7 +47,7 @@ bool krat_exp_partial_derivation_letter_test(tests::Tester& tg)
 
   std::set<Expr>	id_set;
   id_set.insert(identity_as<kexp_t>::of(ss));
-  
+
   int sucs = 0;
   int tsts = 0;
   TEST_DERIVATE(tsts, sucs,

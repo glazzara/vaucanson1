@@ -31,7 +31,6 @@
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_STAR_TEST_HH
 
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
 # include <krat_exp_partial_derivation_common.hh>
 
@@ -67,7 +66,7 @@ bool krat_exp_partial_derivation_star_test(tests::Tester& tg)
 		    rnd_star_b, b,
 		    rnd_b.second ^ rnd_star_b);
     }
-  
+
   std::string rate;
   SUCCESS_RATE(rate, sucs, tsts);
   TEST(t, "Various derivation tests on a star. " + rate, sucs == tsts);
