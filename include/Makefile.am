@@ -274,6 +274,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/tools/gen_random.hxx				     \
 	vaucanson/tools/usual.hh				     \
 	vaucanson/tools/usual.hxx				     \
+	vaucanson/tools/usual_escaped_characters.hh		     \
+	vaucanson/tools/usual_escaped_characters.hxx		     \
 	vaucanson/tools/usual_macros.hh				     \
 	vaucanson/tools/dot_dump.hh				     \
 	vaucanson/tools/dot_dump.hxx				     \
