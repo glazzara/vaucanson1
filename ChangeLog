@@ -1,3 +1,7 @@
+2002-07-11  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* configure.ac: simplified.
+
 2002-07-09  Maxime Rey  <max@lrde.epita.fr>
 
 	* src/tests/automata/implementation_check/check_global_consistance.cc
