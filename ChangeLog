@@ -1,3 +1,21 @@
+2004-03-18  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh: Make
+	  result type more generic.
+	* src/tests/tests-suites/generate-all.sh: Add generation of new tests.
+	* src/tests/tests-suites/algebra_series_krat_derivation.defs,
+	* src/tests/tests-suites/algebra_series_krat_cderivation.defs: Add
+	  typedef for result type.
+	* src/tests/tests-suites/algebra_series_krat_partial_derivation.defs,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_common.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/Makefile.am,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh: New.
+
 2004-03-18  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/misc/random.hh,
