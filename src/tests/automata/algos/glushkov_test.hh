@@ -31,6 +31,7 @@
 # define VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH
 
 # include <vaucanson/algorithms/standard_of.hh>
+# include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/eval.hh>
 
@@ -46,6 +47,8 @@
     automaton_t	au (aa);						\
 									\
     standard_of(au, e.value());						\
+    TEST(t, "a is a standard automaton.", is_standard(au) or		\
+	 e == zero_as<exp_t>::of(ss));					\
 									\
     TEST(t, "a has a consistent number of states.",			\
 	 au.states().size() == St);					\
@@ -147,6 +150,7 @@ bool glushkov_test(tests::Tester& tg)
 	  std::cerr << "Expression : " << exp << std::endl;
 
 	standard_of(au, exp.value());
+	bool standard = is_standard(au) or exp == zero_as<exp_t>::of(ss);
 	realtime_here(au);
 
 	if (t.verbose() == tests::high)
@@ -173,10 +177,11 @@ bool glushkov_test(tests::Tester& tg)
 		    break;
 		  }
 	      }
-	    if ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t))))
+	    if (standard and
+		((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
 	      ++success;
 	  }
-	else
+	else if (standard)
 	  ++success;
       }
     std::string rate;

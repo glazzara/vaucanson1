@@ -1,18 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 591)
-(Parent-Version vaucanson 0 590)
+(Project-Version vaucanson 0 592)
+(Parent-Version vaucanson 0 591)
 (New-Version-Log "")
 
-(Version-Log "2004-03-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+(Version-Log "2004-03-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh:
-	Improve the test on krat_exp_realtime.
-	* include/vaucanson/algorithms/krat_exp_realtime.hxx:
-	Update accordingly.")
-(Checkin-Time "Sun, 21 Mar 2004 20:46:41 +0100")
-(Checkin-Login o-conn_s)
+	* src/tests/automata/algos/glushkov_test.hh: Test that standard_of
+	produces standard automata.
+
+")
+(Checkin-Time "Sun, 21 Mar 2004 22:41:56 +0100")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -94,56 +94,56 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.126 644))
-  (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 644))
-  (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 644))
-  (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 644))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.127 644))
+  (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
+  (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
+  (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
   (NEWS (vaucanson/r/34_NEWS 1.3 644))
 
-  (HEADER (vaucanson/f/35_HEADER 1.4 644))
-  (reheader.pl (vaucanson/q/40_reheader.p 1.4 755))
-  (COPYING (vaucanson/f/37_LICENCE 1.1 644))
-  (Makefile.am (vaucanson/48_Makefile.a 1.16.1.1 644))
-  (README (vaucanson/f/48_README 1.9 644))
-  (THANKS (vaucanson/f/36_THANKS 1.7 644))
-  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.11 755))
+  (HEADER (vaucanson/f/35_HEADER 1.4 600))
+  (reheader.pl (vaucanson/q/40_reheader.p 1.4 700))
+  (COPYING (vaucanson/f/37_LICENCE 1.1 600))
+  (Makefile.am (vaucanson/48_Makefile.a 1.16.1.1 600))
+  (README (vaucanson/f/48_README 1.9 600))
+  (THANKS (vaucanson/f/36_THANKS 1.7 600))
+  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.11 700))
   (configure.ac (vaucanson/47_configure. 1.6.1.44.1.9 644))
   (prj (vaucanson.prj) :symlink)
 
-  (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 644))
+  (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 600))
 
-  (src/Makefile.am (vaucanson/51_Makefile.a 1.5 644))
-  (src/README (vaucanson/h/3_README 1.1 644))
-  (src/tests/Makefile.am (vaucanson/b/1_Makefile.a 1.10.1.1 644))
-  (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.6 644))
-  (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.3 644))
-  (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.14 644))
+  (src/Makefile.am (vaucanson/51_Makefile.a 1.5 600))
+  (src/README (vaucanson/h/3_README 1.1 600))
+  (src/tests/Makefile.am (vaucanson/b/1_Makefile.a 1.10.1.1 600))
+  (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.6 600))
+  (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.3 600))
+  (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.14 600))
   (src/tests/check/tester.cc (vaucanson/b/3_tests_stuf 1.12 644))
   (src/tests/check/tester.hh (vaucanson/b/2_tests_stuf 1.15 644))
-  (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.5 644))
+  (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.5 600))
   (src/tests/check/unique.cc (vaucanson/p/49_unique.cc 1.3 644))
-  (src/tests/sanity/generate_files.sh (vaucanson/r/29_generate_f 1.8.1.2 755))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.9 755))
+  (src/tests/sanity/generate_files.sh (vaucanson/r/29_generate_f 1.8.1.2 700))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.9 700))
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.6 644))
-  (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 644))
+  (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
 
 
-  (doc/tutorial/Makefile.am (vaucanson/h/44_Makefile.a 1.5 644))
-  (doc/tutorial/definitions.tex (vaucanson/i/20_definition 1.1 644))
-  (doc/tutorial/macros.tex (vaucanson/i/19_macros.tex 1.1 644))
-  (doc/tutorial/packages.tex (vaucanson/i/18_packages.t 1.2 644))
-  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.8 644))
+  (doc/tutorial/Makefile.am (vaucanson/h/44_Makefile.a 1.5 600))
+  (doc/tutorial/definitions.tex (vaucanson/i/20_definition 1.1 600))
+  (doc/tutorial/macros.tex (vaucanson/i/19_macros.tex 1.1 600))
+  (doc/tutorial/packages.tex (vaucanson/i/18_packages.t 1.2 600))
+  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.8 600))
 
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.17 644))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.46.1.17 600))
 
   (include/vaucanson/vaucanson.hh (vaucanson/q/42_vaucanson. 1.3 644))
 
   (include/vaucanson/config/system.hh (vaucanson/g/1_system.hh 1.12 644))
   (include/vaucanson/config/math.hh (vaucanson/p/42_math.hh 1.2 644))
-  (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 644))
+  (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 600))
 
   (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.26 644))
   (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.33 644))
@@ -161,7 +161,7 @@
   (include/vaucanson/misc/utility.hh (vaucanson/p/43_utility.hh 1.5 644))
   (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.10 644))
 
-  (src/tests/misc/Makefile.am (vaucanson/p/44_Makefile.a 1.7 644))
+  (src/tests/misc/Makefile.am (vaucanson/p/44_Makefile.a 1.7 600))
   (src/tests/misc/limits.cc (vaucanson/q/33_limits.cc 1.2 644))
   (src/tests/misc/unique.cc (vaucanson/p/45_unique.cc 1.3 644))
   (src/tests/misc/static.cc (vaucanson/p/46_static.cc 1.3 644))
@@ -189,7 +189,7 @@
   (include/vaucanson/design_pattern/structure.hxx (vaucanson/22_structure. 1.11 644))
 
   (src/tests/design_pattern () :directory)
-  (src/tests/design_pattern/Makefile.am (vaucanson/b/9_Makefile.a 1.7 644))
+  (src/tests/design_pattern/Makefile.am (vaucanson/b/9_Makefile.a 1.7 600))
   (src/tests/design_pattern/design_pattern-test.hh (vaucanson/b/10_design_pat 1.12 644))
   (src/tests/design_pattern/element-full-test.cc (vaucanson/17_element-fu 1.15 644))
   (src/tests/design_pattern/intrinsics_orphanage.cc (vaucanson/p/50_intrinsics 1.3 644))
@@ -233,7 +233,7 @@
   (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.25 644))
   (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.14 644))
   (include/vaucanson/algebra/concrete/letter/char_letter.hh (vaucanson/i/23_char_lette 1.6 644))
-  (include/vaucanson/algebra/concrete/letter/range.hh (vaucanson/h/28_range.hh 1.10 755))
+  (include/vaucanson/algebra/concrete/letter/range.hh (vaucanson/h/28_range.hh 1.10 644))
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.6 644))
   (include/vaucanson/algebra/concrete/predefs.hh (vaucanson/g/45_predefs.hh 1.5 644))
   (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.16 644))
@@ -271,25 +271,25 @@
   (include/vaucanson/algebra/concrete/series/transpose.hh (vaucanson/e/11_transpose. 1.8 644))
   (include/vaucanson/algebra/concrete/series/transpose.hxx (vaucanson/e/10_transpose. 1.9 644))
 
-  (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.7 644))
-  (src/tests/algebra/alphabets/Makefile.am (vaucanson/h/36_Makefile.a 1.2 644))
+  (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.7 600))
+  (src/tests/algebra/alphabets/Makefile.am (vaucanson/h/36_Makefile.a 1.2 600))
   (src/tests/algebra/alphabets/alphabet_test.hh (vaucanson/h/37_alphabet_t 1.8 644))
   (src/tests/algebra/free_monoid/Makefile.am (vaucanson/h/34_Makefile.a 1.3 644))
   (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.9 644))
-  (src/tests/algebra/semiring/Makefile.am (vaucanson/h/39_Makefile.a 1.1 644))
+  (src/tests/algebra/semiring/Makefile.am (vaucanson/h/39_Makefile.a 1.1 600))
   (src/tests/algebra/semiring/semiring_test.hh (vaucanson/h/38_semiring_t 1.6 644))
   (src/tests/algebra/series/Makefile.am (vaucanson/c/22_Makefile.a 1.9 644))
-  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.3 644))
+  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.3 600))
   (src/tests/algebra/series/krat/main/krat_exp_parse_test.hh (vaucanson/j/19_krat_exp_p 1.11 644))
   (src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh (vaucanson/j/21_krat_exp_d 1.7 644))
   (src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh (vaucanson/j/22_krat_exp_c 1.9 644))
   (src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh (vaucanson/j/34_krat_exp_r 1.8 644))
   (src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh (vaucanson/j/42_krat_exp_c 1.9 644))
   (src/tests/algebra/series/krat/main/Makefile.am (vaucanson/j/43_Makefile.a 1.1.1.4 644))
-  (src/tests/algebra/series/krat/derivations/Makefile.am (vaucanson/j/40_Makefile.a 1.1 644))
+  (src/tests/algebra/series/krat/derivations/Makefile.am (vaucanson/j/40_Makefile.a 1.1 600))
   (src/tests/algebra/series/krat/derivations/derivations_common.hh (vaucanson/j/41_derivation 1.1.1.5 644))
-  (src/tests/algebra/series/krat/derivations/cderivation/Makefile.am (vaucanson/j/44_Makefile.a 1.3 644))
-  (src/tests/algebra/series/krat/derivations/derivation/Makefile.am (vaucanson/j/38_Makefile.a 1.2 644))
+  (src/tests/algebra/series/krat/derivations/cderivation/Makefile.am (vaucanson/j/44_Makefile.a 1.3 600))
+  (src/tests/algebra/series/krat/derivations/derivation/Makefile.am (vaucanson/j/38_Makefile.a 1.2 600))
   (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh (vaucanson/j/39_krat_exp_d 1.1.1.5 644))
   (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh (vaucanson/l/18_krat_exp_d 1.5 644))
   (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh (vaucanson/l/19_krat_exp_d 1.4 644))
@@ -297,7 +297,7 @@
   (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh (vaucanson/l/21_krat_exp_d 1.6 644))
   (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh (vaucanson/l/22_krat_exp_d 1.5 644))
   (src/tests/algebra/series/misc/series_test.hh (vaucanson/j/23_series_tes 1.14 644))
-  (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 644))
+  (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 600))
 
 
   (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.16 644))
@@ -339,7 +339,7 @@
   (include/vaucanson/automata/concrete/automaton_view.hxx (vaucanson/q/24_automaton_ 1.6 644))
   (include/vaucanson/automata/concrete/kind_adapter.hxx (vaucanson/q/30_kind_adapt 1.2 644))
 
-  (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.14 644))
+  (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.14 600))
   (src/tests/automata/implementation_check/add_edge_test.hh (vaucanson/f/15_add_edge_t 1.12 644))
   (src/tests/automata/implementation_check/add_state_test.hh (vaucanson/f/14_add_state_ 1.10 644))
   (src/tests/automata/implementation_check/coherence_state_edge_test.hh (vaucanson/f/13_coherence_ 1.9 644))
@@ -454,8 +454,8 @@
   (include/vaucanson/tools/usual_io.hxx (vaucanson/r/32_usual_io.h 1.4 644))
   (include/vaucanson/tools/usual_io.hh (vaucanson/r/33_usual_io.h 1.5 644))
 
-  (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 644))
-  (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.14 644))
+  (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
+  (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.14 600))
   (src/tests/automata/algos/closure_test.hh (vaucanson/e/27_closure_te 1.12 644))
   (src/tests/automata/algos/complete_test.hh (vaucanson/f/8_complete_t 1.13 644))
   (src/tests/automata/algos/compute_test.hh (vaucanson/e/30_compute_te 1.14 644))
@@ -464,7 +464,7 @@
   (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.17 644))
   (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.12 644))
   (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.9 644))
-  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.22 644))
+  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.23 644))
   (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.18 644))
   (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.16 644))
   (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.13 644))
@@ -474,29 +474,29 @@
   (src/tests/automata/algos/sum_test.hh (vaucanson/e/15_union_test 1.14 644))
   (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.7 644))
 
-  (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 644))
-  (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.12 755))
-  (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 644))
+  (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 600))
+  (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.12 700))
+  (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 600))
   (src/tests/tests-suites/algebra_numerical_semiring_int.defs (vaucanson/h/33_algebra_nu 1.1 644))
-  (src/tests/tests-suites/algebra_alphabet_set_char.defs (vaucanson/h/32_algebra_se 1.3 644))
+  (src/tests/tests-suites/algebra_alphabet_set_char.defs (vaucanson/h/32_algebra_se 1.3 600))
   (src/tests/tests-suites/algebra_free_monoid_string.defs (vaucanson/h/31_algebra_st 1.1 644))
   (src/tests/tests-suites/algebra_tropical_semiring_max.defs (vaucanson/h/30_algebra_tr 1.2 644))
-  (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 644))
-  (src/tests/tests-suites/algebra_series_krat_int_string.defs (vaucanson/j/25_algebra_se 1.3 644))
+  (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 600))
+  (src/tests/tests-suites/algebra_series_krat_int_string.defs (vaucanson/j/25_algebra_se 1.3 600))
 
-  (src/tests/tests-suites/algebra_series_krat_derivation.defs (vaucanson/j/37_algebra_se 1.1.1.3 644))
+  (src/tests/tests-suites/algebra_series_krat_derivation.defs (vaucanson/j/37_algebra_se 1.1.1.3 600))
 
-  (src/demos/Makefile.am (vaucanson/i/28_Makefile.a 1.8 644))
+  (src/demos/Makefile.am (vaucanson/i/28_Makefile.a 1.8 600))
 
-  (src/demos/fsm/README (vaucanson/g/23_README 1.3 644))
+  (src/demos/fsm/README (vaucanson/g/23_README 1.3 600))
   (src/demos/fsm/arg.cc (vaucanson/g/39_arg.cc 1.6 644))
   (src/demos/fsm/arg.hh (vaucanson/g/40_arg.hh 1.5 644))
-  (src/demos/fsm/generate_toolbox.sh (vaucanson/g/9_generate_t 1.12 755))
-  (src/demos/fsm/usual_automaton_t/Makefile.am (vaucanson/g/21_Makefile.a 1.5 644))
+  (src/demos/fsm/generate_toolbox.sh (vaucanson/g/9_generate_t 1.12 700))
+  (src/demos/fsm/usual_automaton_t/Makefile.am (vaucanson/g/21_Makefile.a 1.5 600))
   (src/demos/fsm/usual_automaton_t/arg.cc (vaucanson/g/37_arg.cc 1.6 644))
   (src/demos/fsm/usual_automaton_t/arg.hh (vaucanson/g/38_arg.hh 1.5 644))
-  (src/demos/fsm/usual_automaton_t/configure.ac (vaucanson/g/22_configure. 1.2 644))
-  (src/demos/fsm/usual_automaton_t/missing (vaucanson/g/17_missing 1.2 755))
+  (src/demos/fsm/usual_automaton_t/configure.ac (vaucanson/g/22_configure. 1.2 600))
+  (src/demos/fsm/usual_automaton_t/missing (vaucanson/g/17_missing 1.2 700))
   (src/demos/fsm/usual_automaton_t/toolbox.hh (vaucanson/g/14_toolbox.hh 1.5 644))
   (src/demos/fsm/usual_automaton_t/vcsn_closure.cc (vaucanson/h/2_vcsn_closu 1.3 644))
   (src/demos/fsm/usual_automaton_t/vcsn_determinize.cc (vaucanson/g/12_vcsn_deter 1.5 644))
@@ -507,25 +507,25 @@
   (src/demos/fsm/usual_automaton_t/vcsn_random_generator.cc (vaucanson/g/13_vcsn_rando 1.4 644))
   (src/demos/fsm/usual_automaton_t/vcsn_reverse.cc (vaucanson/g/51_vcsn_rever 1.4 644))
 
-  (src/demos/samples/Makefile.am (vaucanson/p/29_Makefile.a 1.2 644))
-  (src/demos/samples/algebra/Makefile.am (vaucanson/p/30_Makefile.a 1.2 644))
+  (src/demos/samples/Makefile.am (vaucanson/p/29_Makefile.a 1.2 600))
+  (src/demos/samples/algebra/Makefile.am (vaucanson/p/30_Makefile.a 1.2 600))
   (src/demos/samples/algebra/alphabet.cc (vaucanson/h/50_alphabet.c 1.5 644))
   (src/demos/samples/algebra/decorated_alphabet.cc (vaucanson/i/21_decorated_ 1.4 644))
   (src/demos/samples/algebra/free_monoid.cc (vaucanson/h/49_free_monoi 1.3 644))
   (src/demos/samples/algebra/semiring.cc (vaucanson/h/48_semiring.c 1.3 644))
   (src/demos/samples/algebra/series.cc (vaucanson/h/47_series.cc 1.4 644))
 
-  (src/demos/samples/algorithms/Makefile.am (vaucanson/q/49_Makefile.a 1.1 644))
+  (src/demos/samples/algorithms/Makefile.am (vaucanson/q/49_Makefile.a 1.1 600))
   (src/demos/samples/algorithms/derivatives_automaton.cc (vaucanson/q/50_derivative 1.10 644))
 
-  (src/demos/vgrep/Makefile.am (vaucanson/i/27_Makefile.a 1.8 644))
+  (src/demos/vgrep/Makefile.am (vaucanson/i/27_Makefile.a 1.8 600))
   (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.15 644))
 
-  (src/demos/vaucanswig/README (vaucanson/r/22_README 1.4 644))
-  (src/demos/vaucanswig/expand.sh (vaucanson/r/7_expand.sh 1.9 755))
-  (src/demos/vaucanswig/Makefile.am (vaucanson/r/8_Makefile.a 1.1 644))
+  (src/demos/vaucanswig/README (vaucanson/r/22_README 1.4 600))
+  (src/demos/vaucanswig/expand.sh (vaucanson/r/7_expand.sh 1.9 700))
+  (src/demos/vaucanswig/Makefile.am (vaucanson/r/8_Makefile.a 1.1 600))
   (src/demos/vaucanswig/meta/context.hh (vaucanson/r/9_context.hh 1.8 644))
-  (src/demos/vaucanswig/meta/Makefile.am (vaucanson/r/10_Makefile.a 1.4 644))
+  (src/demos/vaucanswig/meta/Makefile.am (vaucanson/r/10_Makefile.a 1.4 600))
   (src/demos/vaucanswig/meta/vaucanswig_exception.i (vaucanson/r/11_vaucanswig 1.3 644))
   (src/demos/vaucanswig/meta/vaucanswig_describe.i (vaucanson/r/12_vaucanswig 1.1 644))
   (src/demos/vaucanswig/meta/vaucanswig_context.i (vaucanson/r/13_vaucanswig 1.10 644))
@@ -538,29 +538,29 @@
   (src/demos/vaucanswig/meta/vcontext.cc (vaucanson/r/20_vcontext.c 1.2 644))
   (src/demos/vaucanswig/meta/vaucanswig_algo_common.i (vaucanson/r/21_vaucanswig 1.1 644))
 
-  (vauc/bootstrap.sh (vaucanson/l/25_bootstrap. 1.2 755))
-  (vauc/mpp++/TODO (vaucanson/l/26_TODO 1.1 644))
-  (vauc/toplevel/Makefile.am (vaucanson/l/27_Makefile.a 1.1 644))
-  (vauc/modules/Makefile.am (vaucanson/l/28_Makefile.a 1.2 644))
-  (vauc/config/ltwrap-sh.in (vaucanson/l/29_ltwrap-sh. 1.1 644))
-  (vauc/config/cxxwrap-sh.in (vaucanson/l/30_cxxwrap-sh 1.1 644))
-  (vauc/config/libtool-fix.m4 (vaucanson/l/31_libtool-fi 1.1 644))
-  (vauc/config/libz.m4 (vaucanson/l/32_libz.m4 1.1 644))
-  (vauc/config/readline.m4 (vaucanson/l/33_readline.m 1.2 644))
-  (vauc/cleanup.sh (vaucanson/l/34_cleanup.sh 1.1 755))
-  (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.4 644))
-  (vauc/lib/getopt.h (vaucanson/l/37_getopt.h 1.1 644))
-  (vauc/lib/getopt1.c (vaucanson/l/38_getopt1.c 1.1 644))
-  (vauc/lib/Makefile.am (vaucanson/l/39_Makefile.a 1.2 644))
-  (vauc/lib/getopt.c (vaucanson/l/40_getopt.c 1.1 644))
-  (vauc/mpp++/Makefile.am (vaucanson/l/41_Makefile.a 1.1 644))
+  (vauc/bootstrap.sh (vaucanson/l/25_bootstrap. 1.2 700))
+  (vauc/mpp++/TODO (vaucanson/l/26_TODO 1.1 600))
+  (vauc/toplevel/Makefile.am (vaucanson/l/27_Makefile.a 1.1 600))
+  (vauc/modules/Makefile.am (vaucanson/l/28_Makefile.a 1.2 600))
+  (vauc/config/ltwrap-sh.in (vaucanson/l/29_ltwrap-sh. 1.1 600))
+  (vauc/config/cxxwrap-sh.in (vaucanson/l/30_cxxwrap-sh 1.1 600))
+  (vauc/config/libtool-fix.m4 (vaucanson/l/31_libtool-fi 1.1 600))
+  (vauc/config/libz.m4 (vaucanson/l/32_libz.m4 1.1 600))
+  (vauc/config/readline.m4 (vaucanson/l/33_readline.m 1.2 600))
+  (vauc/cleanup.sh (vaucanson/l/34_cleanup.sh 1.1 700))
+  (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.4 600))
+  (vauc/lib/getopt.h (vaucanson/l/37_getopt.h 1.1 600))
+  (vauc/lib/getopt1.c (vaucanson/l/38_getopt1.c 1.1 600))
+  (vauc/lib/Makefile.am (vaucanson/l/39_Makefile.a 1.2 600))
+  (vauc/lib/getopt.c (vaucanson/l/40_getopt.c 1.1 600))
+  (vauc/mpp++/Makefile.am (vaucanson/l/41_Makefile.a 1.1 600))
   (vauc/mpp++/src/ty_trans.cc (vaucanson/l/42_ty_trans.c 1.1 644))
   (vauc/mpp++/src/fun_trans.cc (vaucanson/l/43_fun_trans. 1.1 644))
   (vauc/mpp++/src/transformer/ty_transformer.hh (vaucanson/l/44_ty_transfo 1.1 644))
   (vauc/mpp++/src/transformer/funs.hh (vaucanson/l/45_funs.hh 1.1 644))
   (vauc/mpp++/src/transformer/fun_transformer.hh (vaucanson/l/46_fun_transf 1.1 644))
   (vauc/mpp++/src/transformer/ty_transformer.cc (vaucanson/l/47_ty_transfo 1.1 644))
-  (vauc/mpp++/src/transformer/Makefile.am (vaucanson/l/48_Makefile.a 1.1 644))
+  (vauc/mpp++/src/transformer/Makefile.am (vaucanson/l/48_Makefile.a 1.1 600))
   (vauc/mpp++/src/transformer/fun_transformer.cc (vaucanson/l/49_fun_transf 1.1 644))
   (vauc/mpp++/src/spec/module_spec.hh (vaucanson/l/50_module_spe 1.1 644))
   (vauc/mpp++/src/spec/module_spec.cc (vaucanson/l/51_module_spe 1.1 644))
@@ -570,31 +570,31 @@
   (vauc/mpp++/src/spec/cpp_code.cc (vaucanson/m/3_cpp_code.c 1.1 644))
   (vauc/mpp++/src/spec/class_spec.hh (vaucanson/m/4_class_spec 1.1 644))
   (vauc/mpp++/src/spec/class_spec.cc (vaucanson/m/5_class_spec 1.1 644))
-  (vauc/mpp++/src/spec/Makefile.am (vaucanson/m/6_Makefile.a 1.1 644))
+  (vauc/mpp++/src/spec/Makefile.am (vaucanson/m/6_Makefile.a 1.1 600))
   (vauc/mpp++/src/parse/module_spec_scan.cc (vaucanson/m/7_module_spe 1.1 644))
-  (vauc/mpp++/src/parse/module_spec.h (vaucanson/m/8_module_spe 1.1 644))
+  (vauc/mpp++/src/parse/module_spec.h (vaucanson/m/8_module_spe 1.1 600))
   (vauc/mpp++/src/parse/module_spec.cc (vaucanson/m/9_module_spe 1.1 644))
   (vauc/mpp++/src/parse/fun_spec_scan.cc (vaucanson/m/10_fun_spec_s 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec.h (vaucanson/m/11_fun_spec.h 1.1 644))
+  (vauc/mpp++/src/parse/fun_spec.h (vaucanson/m/11_fun_spec.h 1.1 600))
   (vauc/mpp++/src/parse/fun_spec.cc (vaucanson/m/12_fun_spec.c 1.1 644))
-  (vauc/mpp++/src/parse/class_spec_scan.d (vaucanson/m/13_class_spec 1.1 644))
+  (vauc/mpp++/src/parse/class_spec_scan.d (vaucanson/m/13_class_spec 1.1 600))
   (vauc/mpp++/src/parse/class_spec_scan.cc (vaucanson/m/14_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/class_spec.h (vaucanson/m/15_class_spec 1.1 644))
+  (vauc/mpp++/src/parse/class_spec.h (vaucanson/m/15_class_spec 1.1 600))
   (vauc/mpp++/src/parse/class_spec.cc (vaucanson/m/16_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/module_spec_scan.ll (vaucanson/m/17_module_spe 1.1 644))
+  (vauc/mpp++/src/parse/module_spec_scan.ll (vaucanson/m/17_module_spe 1.1 600))
   (vauc/mpp++/src/parse/module_spec_parse.hh (vaucanson/m/18_module_spe 1.1 644))
-  (vauc/mpp++/src/parse/module_spec.yy (vaucanson/m/19_module_spe 1.1 644))
+  (vauc/mpp++/src/parse/module_spec.yy (vaucanson/m/19_module_spe 1.1 600))
   (vauc/mpp++/src/parse/location.hh (vaucanson/m/20_location.h 1.1 644))
   (vauc/mpp++/src/parse/location.cc (vaucanson/m/21_location.c 1.1 644))
   (vauc/mpp++/src/parse/libparse.hh (vaucanson/m/22_libparse.h 1.1 644))
   (vauc/mpp++/src/parse/libparse.cc (vaucanson/m/23_libparse.c 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec_scan.ll (vaucanson/m/24_fun_spec_s 1.1 644))
+  (vauc/mpp++/src/parse/fun_spec_scan.ll (vaucanson/m/24_fun_spec_s 1.1 600))
   (vauc/mpp++/src/parse/fun_spec_parse.hh (vaucanson/m/25_fun_spec_p 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec.yy (vaucanson/m/26_fun_spec.y 1.1 644))
-  (vauc/mpp++/src/parse/class_spec_scan.ll (vaucanson/m/27_class_spec 1.1 644))
+  (vauc/mpp++/src/parse/fun_spec.yy (vaucanson/m/26_fun_spec.y 1.1 600))
+  (vauc/mpp++/src/parse/class_spec_scan.ll (vaucanson/m/27_class_spec 1.1 600))
   (vauc/mpp++/src/parse/class_spec_parse.hh (vaucanson/m/28_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/class_spec.yy (vaucanson/m/29_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/Makefile.am (vaucanson/m/30_Makefile.a 1.1 644))
+  (vauc/mpp++/src/parse/class_spec.yy (vaucanson/m/29_class_spec 1.1 600))
+  (vauc/mpp++/src/parse/Makefile.am (vaucanson/m/30_Makefile.a 1.1 600))
   (vauc/mpp++/src/modules/make_tool.hh (vaucanson/m/31_make_tool. 1.1 644))
   (vauc/mpp++/src/modules/make_tool.cc (vaucanson/m/32_make_tool. 1.1 644))
   (vauc/mpp++/src/modules/make_module_desc.hh (vaucanson/m/33_make_modul 1.1 644))
@@ -605,20 +605,20 @@
   (vauc/mpp++/src/modules/make_class_desc.cc (vaucanson/m/38_make_class 1.1 644))
   (vauc/mpp++/src/modules/libmodules.hh (vaucanson/m/39_libmodules 1.1 644))
   (vauc/mpp++/src/modules/class_spec_template.hh (vaucanson/m/40_class_spec 1.1 644))
-  (vauc/mpp++/src/modules/Makefile.am (vaucanson/m/41_Makefile.a 1.1 644))
+  (vauc/mpp++/src/modules/Makefile.am (vaucanson/m/41_Makefile.a 1.1 600))
   (vauc/mpp++/src/internal/mangling.hh (vaucanson/m/42_mangling.h 1.1 644))
   (vauc/mpp++/src/internal/mangling.cc (vaucanson/m/43_mangling.c 1.1 644))
-  (vauc/mpp++/src/internal/Makefile.am (vaucanson/m/44_Makefile.a 1.1 644))
+  (vauc/mpp++/src/internal/Makefile.am (vaucanson/m/44_Makefile.a 1.1 600))
   (vauc/mpp++/src/common.hh (vaucanson/m/45_common.hh 1.1 644))
-  (vauc/mpp++/src/Makefile.am (vaucanson/m/46_Makefile.a 1.2 644))
-  (vauc/mpp++/src/examples/letter_automaton.modules.spec (vaucanson/m/47_letter_aut 1.1 644))
-  (vauc/mpp++/src/examples/State.class (vaucanson/m/48_State.clas 1.1 644))
-  (vauc/mpp++/src/examples/LetterAutomaton.class (vaucanson/m/49_LetterAuto 1.1 644))
-  (vauc/mpp++/src/examples/Edge.class (vaucanson/m/50_Edge.class 1.1 644))
-  (vauc/mpp++/src/examples/Automaton.class (vaucanson/m/51_Automaton. 1.1 644))
-  (vauc/mpp++/src/examples/Alphabet.class (vaucanson/n/0_Alphabet.c 1.1 644))
-  (vauc/mpp++/src/examples/AddState.fun (vaucanson/n/1_AddState.f 1.1 644))
-  (vauc/mpp++/lib/Makefile.am (vaucanson/n/2_Makefile.a 1.1 644))
+  (vauc/mpp++/src/Makefile.am (vaucanson/m/46_Makefile.a 1.2 600))
+  (vauc/mpp++/src/examples/letter_automaton.modules.spec (vaucanson/m/47_letter_aut 1.1 600))
+  (vauc/mpp++/src/examples/State.class (vaucanson/m/48_State.clas 1.1 600))
+  (vauc/mpp++/src/examples/LetterAutomaton.class (vaucanson/m/49_LetterAuto 1.1 600))
+  (vauc/mpp++/src/examples/Edge.class (vaucanson/m/50_Edge.class 1.1 600))
+  (vauc/mpp++/src/examples/Automaton.class (vaucanson/m/51_Automaton. 1.1 600))
+  (vauc/mpp++/src/examples/Alphabet.class (vaucanson/n/0_Alphabet.c 1.1 600))
+  (vauc/mpp++/src/examples/AddState.fun (vaucanson/n/1_AddState.f 1.1 600))
+  (vauc/mpp++/lib/Makefile.am (vaucanson/n/2_Makefile.a 1.1 600))
   (vauc/include/lazy/vauc_constructs.hxx (vaucanson/n/5_vauc_const 1.1 644))
   (vauc/include/lazy/exp_base.hxx (vaucanson/n/6_exp_base.h 1.1 644))
   (vauc/include/lazy/exp.hxx (vaucanson/n/7_exp.hxx 1.1 644))
@@ -648,8 +648,8 @@
   (vauc/include/constants/zero.hh (vaucanson/n/31_zero.hh 1.1 644))
   (vauc/include/constants/one.hh (vaucanson/n/32_one.hh 1.1 644))
   (vauc/include/constants/inf.hh (vaucanson/n/33_inf.hh 1.1 644))
-  (vauc/include/Makefile.am (vaucanson/n/34_Makefile.a 1.1 644))
-  (vauc/vcore/Makefile.am (vaucanson/n/35_Makefile.a 1.2 644))
+  (vauc/include/Makefile.am (vaucanson/n/34_Makefile.a 1.1 600))
+  (vauc/vcore/Makefile.am (vaucanson/n/35_Makefile.a 1.2 600))
   (vauc/vcore/unwind_init.cc (vaucanson/n/36_unwind_ini 1.2 644))
   (vauc/vcore/partial_call.cc (vaucanson/n/39_partial_ca 1.1 644))
   (vauc/vcore/object_catalog.cc (vaucanson/n/40_object_cat 1.2 644))
@@ -665,11 +665,11 @@
   (vauc/vcore/closure.cc (vaucanson/n/51_closure.cc 1.1 644))
   (vauc/vcore/callable.cc (vaucanson/o/0_callable.c 1.1 644))
   (vauc/vcore/unwind_init.hh (vaucanson/o/1_unwind_ini 1.1 644))
-  (vauc/lemon/lemon.c (vaucanson/o/2_lemon.c 1.1 644))
-  (vauc/lemon/Makefile.am (vaucanson/o/3_Makefile.a 1.1 644))
+  (vauc/lemon/lemon.c (vaucanson/o/2_lemon.c 1.1 600))
+  (vauc/lemon/Makefile.am (vaucanson/o/3_Makefile.a 1.1 600))
   (vauc/lib/readlinebuf.cc (vaucanson/o/4_readlinebu 1.1 644))
-  (vauc/lemon/rules.am (vaucanson/o/6_rules.am 1.2 644))
-  (vauc/lemon/lempar.in (vaucanson/o/7_lempar.in 1.1 644))
+  (vauc/lemon/rules.am (vaucanson/o/6_rules.am 1.2 600))
+  (vauc/lemon/lempar.in (vaucanson/o/7_lempar.in 1.1 600))
   (vauc/cppsh/include/bits/module_defs.hh (vaucanson/o/8_module_def 1.1 644))
   (vauc/cppsh/include/bits/def_visitor.hh (vaucanson/o/9_def_visito 1.1 644))
   (vauc/cppsh/include/kern/symbol.hxx (vaucanson/o/10_symbol.hxx 1.1 644))
@@ -686,26 +686,26 @@
   (vauc/cppsh/include/kern/exnprint.hh (vaucanson/o/21_exnprint.h 1.1 644))
   (vauc/cppsh/include/kern/exception.hh (vaucanson/o/22_exception. 1.1 644))
   (vauc/cppsh/include/kern/debug.hh (vaucanson/o/23_debug.hh 1.1 644))
-  (vauc/cppsh/include/FlexLexer.h (vaucanson/o/24_FlexLexer. 1.1 644))
-  (vauc/cppsh/include/Makefile.am (vaucanson/o/25_Makefile.a 1.1 644))
+  (vauc/cppsh/include/FlexLexer.h (vaucanson/o/24_FlexLexer. 1.1 600))
+  (vauc/cppsh/include/Makefile.am (vaucanson/o/25_Makefile.a 1.1 600))
   (vauc/cppsh/include/lang/parse_base.hh (vaucanson/o/26_parse_base 1.1 644))
-  (vauc/cppsh/lang/Makefile.am (vaucanson/o/27_Makefile.a 1.1 644))
-  (vauc/cppsh/lang/parser_header.lemon (vaucanson/o/28_parser_hea 1.1 644))
+  (vauc/cppsh/lang/Makefile.am (vaucanson/o/27_Makefile.a 1.1 600))
+  (vauc/cppsh/lang/parser_header.lemon (vaucanson/o/28_parser_hea 1.1 600))
   (vauc/cppsh/lang/parse_base.cc (vaucanson/o/29_parse_base 1.1 644))
   (vauc/cppsh/lang/lemon_parser.cc (vaucanson/o/30_lemon_pars 1.1 644))
-  (vauc/cppsh/lang/in2grammar.sh (vaucanson/o/31_in2grammar 1.2 644))
-  (vauc/cppsh/lang/gen_parser.sh (vaucanson/o/32_gen_parser 1.1 644))
-  (vauc/cppsh/lang/parser_header.yy (vaucanson/o/33_parser_hea 1.1 644))
+  (vauc/cppsh/lang/in2grammar.sh (vaucanson/o/31_in2grammar 1.2 600))
+  (vauc/cppsh/lang/gen_parser.sh (vaucanson/o/32_gen_parser 1.1 600))
+  (vauc/cppsh/lang/parser_header.yy (vaucanson/o/33_parser_hea 1.1 600))
   (vauc/cppsh/lang/lemon_parser.hh (vaucanson/o/34_lemon_pars 1.1 644))
-  (vauc/cppsh/tests/Makefile.am (vaucanson/o/35_Makefile.a 1.1 644))
-  (vauc/cppsh/tests/kern/Makefile.am (vaucanson/o/36_Makefile.a 1.1 644))
+  (vauc/cppsh/tests/Makefile.am (vaucanson/o/35_Makefile.a 1.1 600))
+  (vauc/cppsh/tests/kern/Makefile.am (vaucanson/o/36_Makefile.a 1.1 600))
   (vauc/cppsh/tests/kern/symbol.cc (vaucanson/o/37_symbol.cc 1.1 644))
   (vauc/cppsh/tests/kern/streams.cc (vaucanson/o/38_streams.cc 1.1 644))
   (vauc/cppsh/tests/kern/objref_a.cc (vaucanson/o/39_objref_a.c 1.1 644))
   (vauc/cppsh/tests/kern/objref.cc (vaucanson/o/40_objref.cc 1.1 644))
   (vauc/cppsh/tests/kern/object.cc (vaucanson/o/41_object.cc 1.1 644))
   (vauc/cppsh/tests/kern/exception.cc (vaucanson/o/42_exception. 1.1 644))
-  (vauc/cppsh/tests/ltdlpp/Makefile.am (vaucanson/o/43_Makefile.a 1.1 644))
+  (vauc/cppsh/tests/ltdlpp/Makefile.am (vaucanson/o/43_Makefile.a 1.1 600))
   (vauc/cppsh/tests/ltdlpp/dlbug32.cc (vaucanson/o/44_dlbug32.cc 1.1 644))
   (vauc/cppsh/tests/ltdlpp/dlbug22.cc (vaucanson/o/45_dlbug22.cc 1.1 644))
   (vauc/cppsh/tests/ltdlpp/dlbug12.cc (vaucanson/o/46_dlbug12.cc 1.1 644))
@@ -732,7 +732,7 @@
   (vauc/cppsh/kern/exnprint.cc (vaucanson/p/15_exnprint.c 1.1 644))
   (vauc/cppsh/kern/exception.cc (vaucanson/p/16_exception. 1.1 644))
   (vauc/cppsh/kern/debug.cc (vaucanson/p/17_debug.cc 1.1 644))
-  (vauc/cppsh/kern/Makefile.am (vaucanson/p/18_Makefile.a 1.1 644))
+  (vauc/cppsh/kern/Makefile.am (vaucanson/p/18_Makefile.a 1.1 600))
 
 ;; Files added by populate at Wed, 16 Jul 2003 17:16:44 +0200,
 ;; to version 0.387(w), by elrond:
@@ -741,7 +741,7 @@
 ;; Files added by populate at Mon, 21 Jul 2003 12:51:27 +0200,
 ;; to version 0.390(w), by fosse_l:
 
-  (FAQ (vaucanson/r/35_FAQ 1.2 644))
+  (FAQ (vaucanson/r/35_FAQ 1.2 600))
 
 ;; Files added by populate at Wed, 23 Jul 2003 19:49:01 +0200,
 ;; to version 0.396(w), by clavei_t:
@@ -854,22 +854,22 @@
 ;; Files added by populate at Fri, 17 Oct 2003 21:38:05 +0200,
 ;; to version 0.445(w), by yann:
 
-  (doc/beginner/help.tex (vaucanson/s/11_help.tex 1.3 644))
+  (doc/beginner/help.tex (vaucanson/s/11_help.tex 1.3 600))
 
 ;; Files added by populate at Fri, 17 Oct 2003 21:38:14 +0200,
 ;; to version 0.445(w), by yann:
 
-  (doc/beginner/Makefile.am (vaucanson/s/12_Makefile.a 1.2 644))
+  (doc/beginner/Makefile.am (vaucanson/s/12_Makefile.a 1.2 600))
 
 ;; Files added by populate at Fri, 17 Oct 2003 21:38:21 +0200,
 ;; to version 0.445(w), by yann:
 
-  (doc/beginner/macros.tex (vaucanson/s/13_macros.tex 1.1 644))
+  (doc/beginner/macros.tex (vaucanson/s/13_macros.tex 1.1 600))
 
 ;; Files added by populate at Fri, 17 Oct 2003 21:38:29 +0200,
 ;; to version 0.445(w), by yann:
 
-  (doc/beginner/packages.tex (vaucanson/s/14_packages.t 1.1 644))
+  (doc/beginner/packages.tex (vaucanson/s/14_packages.t 1.1 600))
 
 ;; Files added by populate at Wed, 29 Oct 2003 14:38:02 +0100,
 ;; to version 0.448(w), by yann:
@@ -899,7 +899,7 @@
 ;; Files added by populate at Fri, 14 Nov 2003 23:46:24 +0100,
 ;; to version 0.454(w), by yann:
 
-  (src/demos/fibonacci/Makefile.am (vaucanson/s/18_Makefile.a 1.1 644))
+  (src/demos/fibonacci/Makefile.am (vaucanson/s/18_Makefile.a 1.1 600))
 
 ;; Files added by populate at Fri, 14 Nov 2003 23:46:29 +0100,
 ;; to version 0.454(w), by yann:
@@ -949,7 +949,7 @@
 ;; Files added by populate at Tue, 23 Dec 2003 10:05:16 +0100,
 ;; to version 0.472(w), by yann:
 
-  (src/demos/universal/Makefile.am (vaucanson/u/39_Makefile.a 1.1 644))
+  (src/demos/universal/Makefile.am (vaucanson/u/39_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 23 Dec 2003 10:05:20 +0100,
 ;; to version 0.472(w), by yann:
@@ -959,12 +959,12 @@
 ;; Files added by populate at Thu, 15 Jan 2004 11:38:33 +0100,
 ;; to version 0.475(w), by yann:
 
-  (doc/makefiles/Makefile.am (vaucanson/u/41_Makefile.a 1.1 644))
+  (doc/makefiles/Makefile.am (vaucanson/u/41_Makefile.a 1.1 600))
 
 ;; Files added by populate at Thu, 15 Jan 2004 11:39:32 +0100,
 ;; to version 0.475(w), by yann:
 
-  (doc/makefiles/vcsn-Makefile (vaucanson/u/42_vcsn-Makef 1.1 644))
+  (doc/makefiles/vcsn-Makefile (vaucanson/u/42_vcsn-Makef 1.1 600))
 
 ;; Files added by populate at Fri, 30 Jan 2004 14:10:43 +0100,
 ;; to version 0.477(w), by fosse_l:
@@ -1050,7 +1050,7 @@
 ;; Files added by populate at Fri, 05 Mar 2004 14:42:44 +0100,
 ;; to version 0.499(w), by o-conn_s:
 
-  (update_config_ac.sh (vaucanson/v/10_update_con 1.2 755))
+  (update_config_ac.sh (vaucanson/v/10_update_con 1.2 700))
 
 ;; Files added by populate at Sat, 06 Mar 2004 19:53:09 +0100,
 ;; to version 0.503(w), by clavei_t:
@@ -1071,7 +1071,7 @@
 ;; Files added by populate at Mon, 08 Mar 2004 19:40:34 +0100,
 ;; to version 0.512(w), by clavei_t:
 
-  (src/tests/algebra/numerical_semiring/Makefile.am (vaucanson/v/15_Makefile.a 1.1 644))
+  (src/tests/algebra/numerical_semiring/Makefile.am (vaucanson/v/15_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 09 Mar 2004 21:12:11 +0100,
 ;; to version 0.517(w), by clavei_t:
@@ -1133,7 +1133,7 @@
 ;; Files added by populate at Wed, 17 Mar 2004 00:44:10 +0100,
 ;; to version 0.547(w), by fosse_l:
 
-  (src/tests/tests-suites/algebra_series_krat_cderivation.defs (vaucanson/v/33_algebra_se 1.3 644))
+  (src/tests/tests-suites/algebra_series_krat_cderivation.defs (vaucanson/v/33_algebra_se 1.3 600))
 
 ;; Files added by populate at Wed, 17 Mar 2004 15:07:09 +0100,
 ;; to version 0.552(w), by o-conn_s:
@@ -1284,9 +1284,9 @@
   (src/tests/xml/export_dynamic-numerical.xml.ref (vaucanson/u/23_export_dyn 1.1 644))
   (src/tests/xml/export_session-float.xml.ref (vaucanson/u/24_export_ses 1.1 644))
   (src/tests/xml/export_dynamic-float.xml.ref (vaucanson/u/25_export_dyn 1.1 644))
-  (xml/vaucanson-g.style (vaucanson/u/28_vaucanson- 1.1 644))
+  (xml/vaucanson-g.style (vaucanson/u/28_vaucanson- 1.1 600))
   (config/xml.m4 (vaucanson/u/29_xml.m4 1.1 644))
-  (xml/automaton-to-neato.xsl (vaucanson/u/30_automaton- 1.1 644))
+  (xml/automaton-to-neato.xsl (vaucanson/u/30_automaton- 1.1 600))
   (include/vaucanson/algebra/concrete/letter/int_letter.hxx (vaucanson/u/35_int_letter 1.2 644))
   (include/vaucanson/algebra/concrete/letter/int_letter.hh (vaucanson/u/36_int_letter 1.2 644))
   (include/vaucanson/algebra/concrete/free_monoid/tools.hh (vaucanson/u/37_tools.hh 1.2 644))
@@ -1294,7 +1294,7 @@
 ;; Files added by populate at Thu, 18 Mar 2004 16:16:58 +0100,
 ;; to version 0.562(w), by fosse_l:
 
-  (src/tests/tests-suites/algebra_series_krat_partial_derivation.defs (vaucanson/v/40_algebra_se 1.1 644))
+  (src/tests/tests-suites/algebra_series_krat_partial_derivation.defs (vaucanson/v/40_algebra_se 1.1 600))
 
 ;; Files added by populate at Thu, 18 Mar 2004 16:17:16 +0100,
 ;; to version 0.562(w), by fosse_l:
@@ -1303,7 +1303,7 @@
   (src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_sum_test.hh (vaucanson/v/42_krat_exp_p 1.1 644))
   (src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh (vaucanson/v/43_krat_exp_p 1.1 644))
   (src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh (vaucanson/v/44_krat_exp_p 1.1 644))
-  (src/tests/algebra/series/krat/derivations/partial_derivation/Makefile.am (vaucanson/v/45_Makefile.a 1.1 644))
+  (src/tests/algebra/series/krat/derivations/partial_derivation/Makefile.am (vaucanson/v/45_Makefile.a 1.1 600))
   (src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh (vaucanson/v/46_krat_exp_p 1.1 644))
   (src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh (vaucanson/v/47_krat_exp_p 1.1 644))
   (src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh (vaucanson/v/48_krat_exp_p 1.1 644))
@@ -1316,7 +1316,7 @@
 ;; Files added by populate at Sun, 21 Mar 2004 13:56:35 +0100,
 ;; to version 0.580(w), by fosse_l:
 
-  (src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh (vaucanson/v/50_krat_exp_l 1.1 644))
+  (src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh (vaucanson/v/50_krat_exp_l 1.1 600))
 
 ;; Files added by populate at Sun, 21 Mar 2004 20:04:43 +0100,
 ;; to version 0.589(w), by david_v:
