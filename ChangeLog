@@ -1,3 +1,14 @@
+2004-03-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/design_pattern/element-full-test.cc: Fix.
+	* src/tests/design_pattern/Makefile.am: Add element-full-test as a
+	test.
+	* src/tests/design_pattern/design_pattern-test.hh: Avoid default
+	construction of Element.
+	* src/tests/algebra/free_monoid/free_monoid_test.hh: Improve.
+	* src/tests/algebra/free_monoid/constructor_without_arguments2_failcomp.hh:
+	New.
+
 2004-03-09  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/vaucanson_boolean_automaton.hh,

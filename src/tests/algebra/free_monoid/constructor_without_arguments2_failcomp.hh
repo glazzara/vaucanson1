@@ -1,7 +1,8 @@
-// design_pattern-test.hh: this file is part of the Vaucanson project.
+// constructor_without_arguments2_failcomp.hh: this file is part of the
+// Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -27,41 +28,26 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN_TEST_HH
-# define VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN_TEST_HH
+#ifndef VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS2_FAILCOMP_HH
+# define VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS2_FAILCOMP_HH
 
 # include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <design_pattern/design_pattern-test.hh>
 
-template <class Tset, class Tvalue>
-void test_design_pattern(const Tset& s)
+template <typename S, typename T>
+bool constructor_without_arguments2_failcomp(tests::Tester& t)
 {
-  vcsn::Element<Tset, Tvalue> a (s);
-  vcsn::Element<Tset, Tvalue> b (s);
-  Tvalue		      sample;
+  using namespace vcsn::algebra;
+  using namespace vcsn;
 
-  // Comparison operators.
-  a == b;
-  a != b;
-  a < b;
-  a > b;
-  a <= b;
-  a >= b;
+  typedef Element<S, T> element_t;
 
-  // Comparison operators with implementation.
-  a == sample;
-  sample == a;
-  a != sample;
-  sample != a;
-  a < sample;
-  sample < a;
-  a > sample;
-  sample > a;
-  a <= sample;
-  sample <= a;
-  a >= sample;
-  sample >= a;
+  // This code *should not* compile since building a free monoid without
+  // an alphabet has no sense.
+  element_t a;
 
-  //FIXME: swap(a,a) is ambiguous.
+  return t.all_passed();
 }
 
-#endif // VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN_TEST_HH
+#endif // VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS2_FAILCOMP_HH

@@ -35,6 +35,8 @@
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <design_pattern/design_pattern-test.hh>
 
+# include <sstream>
+
 template <typename S, typename T>
 bool free_monoid_test(tests::Tester& t)
 {
@@ -44,24 +46,90 @@ bool free_monoid_test(tests::Tester& t)
   typedef Element<S, T>					element_t;
   typedef typename element_t::set_t			freemonoid_t;
   typedef typename freemonoid_t::alphabets_elt_t	alphabet_t;
+  typedef typename freemonoid_t::letter_t		letter_t;
 
-  // Instanciate a non-empty alphabet and a corresponding free monoid.
-  alphabet_t	alpha;
-  alpha.insert(alpha.random_letter());
-  freemonoid_t	freemonoid (alpha);
+  for (int i = 0; i < 200; ++i)
+    {
+      alphabet_t		alpha;
+      for (int j = 0; j < i; ++j)
+	{
+	  letter_t l;
+	  do
+	    l = alpha.random_letter();
+	  while (alpha.contains(l));
+	  alpha.insert(l);
+	}
+      std::ostringstream astr;
+      astr << alpha;
+      TEST_MSG("Alphabet is " + astr.str() + ".");
 
-  // Create a word.
-  element_t a = freemonoid.choose(SELECT(T));
+      freemonoid_t		freemonoid (alpha);
+      const freemonoid_t	const_freemonoid (alpha);
 
-  // Do the tests.
-  TEST_MSG("Get the neural element of this free monoid.");
-  element_t e = freemonoid.identity(SELECT(T));
+      TEST(t, "alphabet() (non-const).", freemonoid.alphabet() == alpha);
+      TEST(t, "alphabet() (const).", const_freemonoid.alphabet() == alpha);
 
-  test_design_pattern<S, T>();
-  TEST(t, "Neutral element on the right.", (a * e) == a);
-  TEST(t, "Neutral element on the left." , (e * a) == a);
-  TEST(t, "Mirror is idempotent.", mirror(mirror(a)) == a);
+      // Create a word and its mirror.
+      element_t ab (freemonoid);
+      if (alpha.size())
+	ab = freemonoid.choose(SELECT(T));
+      element_t ba (ab);
+      ba.mirror();
 
+      // Do the tests.
+      int l = ab.length() + ba.length();
+      int m = l;
+      TEST(t, "mirror() and length().", ab.length() == ba.length());
+
+      bool						allright = true;
+      typename element_t::const_iterator		abi = ab.begin();
+      typename element_t::const_reverse_iterator	bai = ba.rbegin();
+      while (allright and (abi != ab.end()) and
+	     (bai != const_cast<const element_t&> (ba).rend()))
+	{
+	  if (*abi != *bai)
+	    allright = false;
+	  ++abi; --l;
+	  ++bai; --l;
+	}
+      TEST(t, "const iterators.", not l);
+      TEST(t, "mirror() [1].", (allright));
+      TEST(t, "mirror() [2].", (abi == ab.end()) and
+	   (bai == const_cast<const element_t&> (ba).rend()));
+
+      element_t					old_ab = ab;
+      element_t					old_ba = ba;
+      typename element_t::iterator		abi2 = ab.begin();
+      typename element_t::reverse_iterator	bai2 = ba.rbegin();
+      for (typename element_t::const_iterator i = old_ba.begin();
+	   i != old_ba.end();
+	   ++i)
+	{
+	  *abi2 = *i;
+	  abi2++; ++l;
+	}
+      for (typename element_t::const_reverse_iterator i = old_ab.rbegin();
+	   i != const_cast<const element_t&> (old_ab).rend();
+	   ++i)
+	{
+	  *bai2 = *i;
+	  bai2++; ++l;
+	}
+
+      TEST(t, "iterators [1].", l == m);
+      TEST(t, "iterators [2].", (abi2 == ab.end()) and (bai2 == ba.rend()));
+      std::cout << ab << std::endl << old_ba << std::endl;
+      TEST(t, "iterators [3].", (ab == old_ba) and (ba == old_ab));
+
+
+      TEST_MSG("Get the neural element of this free monoid.");
+      element_t e = freemonoid.identity(SELECT(T));
+
+      test_design_pattern<S, T>(const_freemonoid);
+      TEST(t, "Neutral element on the right.", (ab * e) == ab);
+      TEST(t, "Neutral element on the left." , (e * ba) == ba);
+      TEST(t, "Mirror is idempotent.", mirror(mirror(ab)) == ab);
+    }
   return t.all_passed();
 }
 
