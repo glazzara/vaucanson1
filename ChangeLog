@@ -1,3 +1,12 @@
+2004-03-03  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/algebra/free_monoid/Makefile.am: Typo.
+
+2004-03-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx: Add
+	a missing inline.
+
 2004-03-02  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,
