@@ -1,5 +1,9 @@
 2004-03-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/standard.hxx: Fix is_standard.
+
+2004-03-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh:
 	Fix and improve the test.
 

@@ -1,7 +1,7 @@
 // standard.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_STANDARD_HXX
 # define VCSN_ALGORITHMS_STANDARD_HXX
@@ -37,7 +39,7 @@
 # include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
-#include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/misc/selectors.hh>
 
 namespace vcsn {
 
@@ -157,13 +159,22 @@ namespace vcsn {
   do_is_standard(const AutomataBase<A>& ,
 		 const auto_t& a)
   {
+    typedef typename auto_t::series_value_t	series_value_t;
+
+    // Check there is only one initial state.
     if (a.initial().size() != 1)
       return false;
-    std::set<hstate_t> delta_ret;
-    a.rdeltac(delta_ret, *a.initial().begin(), vcsn::delta_kind::states());
+
+    // Check there is no input transition on the initial state.
+    hstate_t		s = *a.initial().begin();
+    std::set<hstate_t>	delta_ret;
+    a.rdeltac(delta_ret, s, vcsn::delta_kind::states());
     if (delta_ret.size() != 0)
       return false;
-    return true;
+
+    // Check the multiplicity of the initial state.
+    return
+      a.get_initial(s) == a.series().identity(SELECT(series_value_t));
   }
 
   template<typename A, typename T>
