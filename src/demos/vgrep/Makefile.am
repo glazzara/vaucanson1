@@ -4,7 +4,7 @@
 
 AM_CPPFLAGS = $(CXXFLAGS_STRICT)
 
-check_PROGRAMS = vgrep
+noinst_PROGRAMS = vgrep
 
 vgrep_SOURCES = vgrep.cc
 
