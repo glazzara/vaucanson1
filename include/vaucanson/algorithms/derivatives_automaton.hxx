@@ -1,4 +1,4 @@
-// derivates_automaton.hxx
+// derivatives_automaton.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_DERIVATES_AUTOMATON_HXX
-# define VCSN_ALGORITHMS_DERIVATES_AUTOMATON_HXX
+#ifndef VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
+# define VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/standard.hh>
@@ -35,10 +35,10 @@ namespace vcsn {
   using namespace algorithm_patterns;
   
   // In order to avoid re-calculation, the algorithm building
-  // derivates automaton is implemented in a incremental way
+  // derivatives automaton is implemented in a incremental way
   template <typename T_auto, typename Exp>
-  struct DerivatesAlgo : public IncAutomataConstructor <
-    DerivatesAlgo<T_auto, Exp>,
+  struct DerivativesAlgo : public IncAutomataConstructor <
+    DerivativesAlgo<T_auto, Exp>,
     T_auto,
     Exp >  
   {
@@ -47,8 +47,8 @@ namespace vcsn {
     
     // Contructor -> initialize mother class and undefined attribute,
     // which indicate if the resulting automaton is valide
-    DerivatesAlgo(const series_t& series, const Exp& exp):
-      IncAutomataConstructor<DerivatesAlgo, T_auto, Exp>(series, exp),
+    DerivativesAlgo(const series_t& series, const Exp& exp):
+      IncAutomataConstructor<DerivativesAlgo, T_auto, Exp>(series, exp),
       undefined(false)
     {}
 
@@ -68,7 +68,7 @@ namespace vcsn {
 	set_final(c_term.first);
 
       // Create links between current state and states corresponding to
-      // partial derivates of current expression
+      // partial derivatives of current expression
       for (alphabet_iterator a = alpha.begin(); a != alpha.end(); ++a)
       {
 	std::pair<std::set<Exp>, bool>	s = partial_derivate(e, *a);
@@ -88,28 +88,40 @@ namespace vcsn {
   };
 
   template<typename T_auto, typename Exp>
-  T_auto*	do_derivates_automaton(const T_auto& out, const Exp &kexp)
+  T_auto*	do_derivatives_automaton(const T_auto& out, const Exp &kexp)
   {
-    DerivatesAlgo<T_auto, Exp> derivates_algo(out.series(), kexp);
-    derivates_algo.run();
-    if (derivates_algo.undefined)
+    DerivativesAlgo<T_auto, Exp> derivatives_algo(out.series(), kexp);
+    derivatives_algo.run();
+    if (derivatives_algo.undefined)
     {
-      free(derivates_algo.get());
+      free(derivatives_algo.get());
       return NULL;
     }
     else
-      return derivates_algo.get();
+      return derivatives_algo.get();
   }
 
   // The function called by <<user>>
   template<typename A, typename T, typename Exp>
-  void	derivates_automaton(Element<A, T>& out, const Exp& kexp)
+  void	derivatives_automaton(Element<A, T>& out, const Exp& kexp)
   {
-    Element<A, T>*	result = do_derivates_automaton(out, kexp);
+    Element<A, T>*	result = do_derivatives_automaton(out, kexp);
     if (result != NULL)
       out = *result;
   }
 
+  // The function called by <<user>>
+  template<typename A, typename T, typename Exp>
+  Element<A, T>	derivatives_automaton(const Exp& kexp)
+  {
+    A a_set(kexp.set());
+    Element<A, T> out(a_set);
+    Element<A, T>*	result = do_derivatives_automaton(out, kexp);
+    if (result != NULL)
+      out = *result;
+    return out;
+  }
+
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_DERIVATES_AUTOMATON_HXX
+#endif // VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX

@@ -149,7 +149,7 @@ namespace vcsn {
       if (m[0] == a_)
       {
 	if (m.length() == 1)
-	  res.insert(identity_as<T>::of(exp_.set()));
+	  res.insert(algebra::identity_as<T>::of(exp_.set()));
 	else
 	  res.insert(Element<Series, T> (exp_.set(), m.substr(1)));
       }

@@ -105,24 +105,24 @@ namespace vcsn {
       if (m[0] == a_)
 	{
 	  if (m.length() == 1)
-	    return identity_as<T>::of(exp_.set());
+	    return algebra::identity_as<T>::of(exp_.set());
 	  else
 	    return Element<Series, T> (exp_.set(), m.substr(1));
 	}
       else
-	return zero_as<T>::of(exp_.set());
+	return algebra::zero_as<T>::of(exp_.set());
     }
     END
 
     MATCH(Zero)
     {
-      return zero_as<T>::of(exp_.set());
+      return algebra::zero_as<T>::of(exp_.set());
     }
     END
 
     MATCH(One)
     {
-      return zero_as<T>::of(exp_.set());
+      return algebra::zero_as<T>::of(exp_.set());
     }
     END
 
