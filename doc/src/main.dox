@@ -1,0 +1,57 @@
+Vaucanson.
+Vaucanson.
+
+A generic plateform for weighted finite state machines.
+Une plateforme générique pour les automates à multiplicité.
+
+Le projet Vaucanson a pour objectif de créer une plateforme de calcul
+scientifique pour la théorie des automates à multiplicité en
+s'appuyant sur les dernières techniques de programmation générique en
+C++. Il a été initié par Jacques Sakarovitch en 2000 et son
+développement se poursuit en collaboration avec l'ENST.
+
+The Vaucanson project is meant to develop a plateform for 
+scientific computing applied to the theory of weighted
+finite state machines, using modern C++ techniques for generic 
+programming. It was initiated by Jacques
+Sakarovitch in 2000 and its development is still in work in
+collaboration with the ENST.
+
+Les utilisateurs visés sont :
+. Les théoriciens du domaine qui trouveront  une interface haut niveau, souple et
+permettant l'instanciation d'objets formels très variés ;
+. Les programmeurs C++ qui pourront utiliser une bibliothèque générique alliant
+abstraction, sécurité, forte granularité de spécialisation et performance ;
+. Les débutants qui utiliseront une interface \textit{à la} Maple(R) contenant un
+ensemble d'algorithmes classiques simples à utiliser.
+
+Our users are : 
+. Experts who will find a high level and flexible interface
+which enables instantiation of various formal objects ;
+. C++ programmers who will be provided with a generic library which has both
+abstraction, code safety, high specialization granularity and performance ;
+. Novices who will find an ergonomic interface \textit{à la} Maple(R)
+bundled with a toolbox of classical algorithms.
+
+Actuellement, le projet est découpé comme suit :
+. La bibliothèque C++ "Vaucanson" :
+une bibliothèque générique permettant la manipulation d'automates à
+multiplicité dans un semi-anneau quelconque.
+. Un interpréteur de commandes : un outil pour terminal Unix permettant
+d'utiliser les fonctionnalités de Vaucanson dans un langage de programmation
+souple et interprété.
+. Un système de génération de modules : un outil capable de transformer
+du code C++ générique en outil concret utilisable depuis, par exemple,
+l'interpréteur de commande.
+
+
+Currently, the project is separated as follows :
+. The C++ library "Vaucanson" : a generic library containing C++ code
+to manipulate weighted finite state machines in arbitrary algebraic semirings.
+. A command line interpreter : a tool for unix terminals that allows
+the user to use Vaucanson features from a simple, dynamically interpreted,
+programming language.
+. A module generation system : a toolsuite able to turn generic C++ meta-code
+into actual, runnable tools which can be, for example, made available
+in the interpreter's programming language.
+

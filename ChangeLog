@@ -1,3 +1,11 @@
+2002-06-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	Doxygen files:
+	* Added `doc/vaucanson.doxywizard' 
+	* Added `doc/src/main.dox' 
+	* Added `doc/css/vaucanson.css' 
+	
+
 2002-06-07  Maxime Rey  <max@lrde.epita.fr>
 
 	* Added `include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx'
