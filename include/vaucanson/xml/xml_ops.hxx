@@ -2,7 +2,9 @@
 # define VCSN_XML_XML_OPS_HXX
 
 # include <vaucanson/xml/xml_ops.hh>
+# include <vaucanson/xml/krat_to_polynom.hh>
 
+# include <vaucanson/algebra/concrete/letter/couple_letter.hh>
 # include <vaucanson/xml/errors.hh>
 
 # include <string>
@@ -478,29 +480,8 @@ namespace vcsn
       FAIL("Cannot find any automaton root.");
     DOMNode* node = nodelist->item(0);
     XmlAutomaton x(doc, static_cast<DOMElement*>(node));
-    alphabet_t alphabet;
 
-    DOMNode* child = x.monoid_node_->getFirstChild();
-    while (child) {
-      if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
-	DOMElement* elt = static_cast<DOMElement*>(child);
-	if (!XMLString::compareIString(elt->getNodeName(), str_letter)) {
-	  const XMLCh* str = elt->getAttribute(str_value);
-	  if (str) {
-	    std::istringstream s(xml2str(str));
-	    char value;
-	    s >> value;
-	    alphabet.insert(char(value));
-	  }
-	}
-      }
-      child = child->getNextSibling();
-    }
-    auto_t xa = auto_t(series_t(semiring_t(),
-				monoid_t(alphabet)), x);
-
-    v = xa.value();
-    // s.self() = xa.set();
+    v = x;
     return st;
   }
 
@@ -589,6 +570,7 @@ namespace vcsn
     Element<S,
       rat::exp<Tm, Tw> >
       exp(s.self());
+
     algebra::parse(v.value(), exp);
 
     return algebra::krat_to_polynom(exp).value();
@@ -603,25 +585,24 @@ namespace vcsn
 
   template<typename Tm, typename Tw, typename S>
   inline
-  rat::exp<Tm,Tw> op_convert(const algebra::SeriesBase<S>& s,
-			     SELECTOR2(rat::exp<Tm, Tw>),
+  rat::exp<Tw,Tm> op_convert(const algebra::SeriesBase<S>& s,
+			     SELECTOR2(rat::exp<Tw, Tm>),
 			     const xml::XmlValue& v)
   {
     Element<S,
-      rat::exp<Tm, Tw> >
+      rat::exp<Tw, Tm> >
       exp(s.self());
+
     algebra::parse(v.value(), exp);
 
     return exp.value();
   }
 
-  // Specializations does not work on function template
-
   template<typename Tm, typename Tw, typename S>
   inline
-  xml::XmlValue op_convertx(const algebra::SeriesBase<S>& s,
-			    SELECTOR(xml::XmlValue),
-			    const algebra::polynom<Tm, Tw>& p)
+  xml::XmlValue op_convert(const algebra::SeriesBase<S>& s,
+			   SELECTOR(xml::XmlValue),
+			   const algebra::polynom<Tm, Tw>& p)
   {
     xml::XmlValue v;
 
@@ -635,9 +616,9 @@ namespace vcsn
 
   template<typename Tm, typename Tw, typename S>
   inline
-  xml::XmlValue op_convertx(const algebra::SeriesBase<S>& s,
-			    SELECTOR(xml::XmlValue),
-			    const rat::exp<Tm, Tw>& e)
+  xml::XmlValue op_convert(const algebra::SeriesBase<S>& s,
+			   SELECTOR(xml::XmlValue),
+			   const rat::exp<Tm, Tw>& e)
   {
     xml::XmlValue v;
 
@@ -673,17 +654,17 @@ namespace vcsn
     AUTOMATON_TYPES(auto_t);
     XmlAutomaton x;
 
-    x.semiring_node_->setAttribute(str_structural, attr_semiring<W>::getstr());
+    x.semiring_node_->setAttribute(str_operations, attr_semiring<W>::getstr());
     x.semiring_node_->setAttribute(str_set, attr_semiring_impl<WeightValue>
 				   ::getstr());
-    x.monoid_node_->setAttribute(str_structural, attr_monoid<M>::getstr());
-    x.monoid_node_->setAttribute(str_set, attr_monoid_impl<WordValue>::getstr());
+    x.monoid_node_->setAttribute(str_generators, attr_monoid<M>::getstr());
+    x.monoid_node_->setAttribute(str_type, attr_monoid_impl<WordValue>::getstr());
 
     for_each_letter(i, s.series().monoid().alphabet()) {
       std::ostringstream s;
       s << *i;
       XMLCh* xs = XMLString::transcode(s.str().c_str());
-      DOMElement* node = x.doc_->createElement(str_letter);
+      DOMElement* node = x.doc_->createElement(str_generator);
       node->setAttribute(str_value, xs);
       XMLString::release(&xs);
       x.monoid_node_->appendChild(node);
@@ -742,14 +723,14 @@ namespace vcsn
     while (child) {
       if (child->getNodeType() == DOMNode::ELEMENT_NODE) {
 	const DOMElement* elt = static_cast<const DOMElement*>(child);
-	if (!XMLString::compareIString(elt->getNodeName(), str_letter)) {
+	if (!XMLString::compareIString(elt->getNodeName(), str_generator)) {
 	  const XMLCh* value = elt->getAttribute(str_value);
 	  std::stringstream s;
-	  char i;
+	  typename M::letter_t i;
 
 	  s << xml2str(value);
 	  s >> i;
-	  alphabet.insert(char(i));
+	  alphabet.insert(i);
 	}
       }
       child = child->getNextSibling();
@@ -801,9 +782,9 @@ namespace vcsn
       Letter,
       Tag> a;
 
-    if (x.semiring_node_->hasAttribute(str_structural)
+    if (x.semiring_node_->hasAttribute(str_operations)
 	&& (XMLString::compareIString(x.semiring_node_
-				      ->getAttribute(str_structural),
+				      ->getAttribute(str_operations),
 				      attr_semiring<W>::getstr())))
       FAIL("Bad semiring");
     if (x.semiring_node_->hasAttribute(str_set)
@@ -812,14 +793,14 @@ namespace vcsn
 				      attr_semiring_impl<WeightValue>
 				      ::getstr())))
       FAIL("Bad semiring");
-    if (x.monoid_node_->hasAttribute(str_structural)
+    if (x.monoid_node_->hasAttribute(str_generators)
 	&& (XMLString::compareIString(x.monoid_node_
-				      ->getAttribute(str_structural),
+				      ->getAttribute(str_generators),
 				      attr_monoid<M>::getstr())))
       FAIL("Bad monoid");
-    if (x.monoid_node_->hasAttribute(str_set)
+    if (x.monoid_node_->hasAttribute(str_type)
 	&& (XMLString::compareIString(x.monoid_node_
-				      ->getAttribute(str_set),
+				      ->getAttribute(str_type),
 				      attr_monoid_impl<WordValue>::getstr())))
       FAIL("Bad monoid");
 

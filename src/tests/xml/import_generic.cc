@@ -1,4 +1,5 @@
 #define FAIL WITH_THROW
+#define VCSN_XML_GENRERIC_WEIGHTED 1
 
 #include <vaucanson/xml/generic.hh>
 #include <vaucanson/tools/usual.hh>

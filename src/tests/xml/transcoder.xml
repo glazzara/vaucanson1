@@ -3,19 +3,21 @@
 <automaton xmlns="http://www.lrde.epita.fr/vaucanson">
  <type>
   <monoid>
-    <letter value="A"/>
-    <letter value="B"/>
-    <letter value="C"/>
+    <generator value="A"/>
+    <generator value="B"/>
+    <generator value="C"/>
   </monoid>
 
-  <semiring set="words">
-    <letter value="D"/>
-    <letter value="E"/>
-    <letter value="F"/>
+  <semiring set="ratseries" operations="function">
+    <monoid>
+      <generator value="D"/>
+      <generator value="E"/>
+      <generator value="F"/>
+    </monoid>
   </semiring>
  </type>
 
- <structure>
+ <content>
   <states>
     <state name="zero"/>
     <state name="one"/>
@@ -38,5 +40,5 @@
   <finals>
     <final label="A" state="two"/>
   </finals>
- </structure>
+ </content>
 </automaton>

@@ -24,8 +24,11 @@ namespace vcsn
     public:
       /// Type values.
       enum { UNSET, UNKNOWN,
-	     LETTERS, B, Z, R, WORDS,
-	     NUMERICAL, TROPICAL_MIN, TROPICAL_MAX };
+	     BOOLEAN, NUMERICAL, TROPICAL_MIN, TROPICAL_MAX,
+	     FUNCTION, HADAMARD, SHUFFLE,
+	     LETTERS, PAIRS, WEIGHTED, INTEGERS,
+	     WORDS, UNIT, CPFM, FCM, FC,
+	     B, Z, R, RATSERIES };
       /**
        * @brief Read constructor.
        * @param elt XML automaton root node.
@@ -35,14 +38,19 @@ namespace vcsn
       XmlSet();
       XmlSet(const XmlSet&);
 
-      /// Check semiring type (NUMERICAL, TROPICAL_MIN, TROPICAL_MAX).
+      /**
+       * Check semiring type (BOOLEAN,NUMERICAL, TROPICAL_MIN, TROPICAL_MAX,
+       * FUNCTION, HADAMARD, SHUFFLE).
+       */
       int semiring_type() const;
-      /// Check semiring set (B, Z, R, WORDS).
+      /// Check semiring set (B, Z, R, RATSERIES).
       int semiring_set() const;
-      /// Check monoid type (LETTERS).
+      /// Check monoid type (LETTERS, PAIRS, WEIGHTED, INTEGERS).
       int monoid_type() const;
-      /// Check monoid set (WORDS).
+      /// Check monoid set (WORDS, UNIT, CPFM, FCM, FC).
       int monoid_set() const;
+
+      XmlSet get_subset();
 
       const DOMNode*	monoid_alphabet() const;
       const DOMNode*	semiring_alphabet() const;

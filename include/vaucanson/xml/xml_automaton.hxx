@@ -44,6 +44,7 @@ namespace vcsn
 
     NEW_ATTR(semiring)
     NEW_ATTR_VALUE(semiring, algebra::NumericalSemiring, str_numerical)
+    //    NEW_ATTR_VALUE(semiring, algebra::NumericalSemiring, str_boolean)
     NEW_ATTR_VALUE(semiring, algebra::TropicalSemiring<algebra::TropicalMax>,
 		   str_tropicalMax)
     NEW_ATTR_VALUE(semiring, algebra::TropicalSemiring<algebra::TropicalMin>,
@@ -53,13 +54,19 @@ namespace vcsn
     NEW_ATTR_VALUE(semiring_impl, bool, str_B)
     NEW_ATTR_VALUE(semiring_impl, int, str_Z)
     NEW_ATTR_VALUE(semiring_impl, float, str_R)
-    NEW_ATTR_VALUE(semiring_impl, algebra::char_letter::WordValue, str_words)
 
     NEW_ATTR(monoid)
     NEW_ATTR_VALUE(monoid, algebra::char_letter::Words, str_letters)
+    NEW_ATTR_VALUE(monoid, algebra::char_pair::Words, str_pairs)
+    NEW_ATTR_VALUE(monoid, algebra::weighted_letter::Words, str_weighted)
+    NEW_ATTR_VALUE(monoid, algebra::int_letter::Words, str_integers)
 
     NEW_ATTR(monoid_impl)
-    NEW_ATTR_VALUE(monoid_impl, algebra::char_letter::WordValue, str_words)
+    NEW_ATTR_VALUE(monoid_impl, algebra::char_letter::WordValue, str_free)
+    NEW_ATTR_VALUE(monoid_impl, algebra::char_pair::WordValue, str_free)
+    NEW_ATTR_VALUE(monoid_impl, algebra::weighted_letter::WordValue, str_free)
+    NEW_ATTR_VALUE(monoid_impl, algebra::int_letter::WordValue, str_free)
+    // NEW_ATTR_VALUE(monoid_impl, algebra::char_letter::WordValue, str_unit)
 
     inline
     XmlAutomaton::XmlAutomaton()
@@ -85,7 +92,7 @@ namespace vcsn
       finals_node_   = doc_->createElement(str_finals);
 
       type_          = doc_->createElement(str_type);
-      structure_     = doc_->createElement(str_structure);
+      structure_     = doc_->createElement(str_content);
 
       type_->appendChild(monoid_node_);
       type_->appendChild(semiring_node_);
@@ -131,7 +138,7 @@ namespace vcsn
 	    }
 	  }
 	  else if (!XMLString::compareIString(i->getNodeName(),
-					      str_structure)) {
+					      str_content)) {
 	    structure_ = static_cast<DOMElement*>(i);
 	    DOMNode* child = i->getFirstChild();
 	    while (child) {
@@ -156,7 +163,7 @@ namespace vcsn
 	i = i ->getNextSibling();
       }
       if (!structure_) {
-	structure_ = doc_->createElement(str_structure);
+	structure_ = doc_->createElement(str_content);
 	root_->appendChild(structure_);
       }
       if (!type_) {

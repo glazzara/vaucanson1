@@ -15,18 +15,18 @@ cat >vaucanson.dtd <<EOF
 
 <!-- Document structure -->
 <!ELEMENT session (geometry?, automaton*)>
-<!ELEMENT automaton (geometry?, type, structure)>
+<!ELEMENT automaton (geometry?, type, content)>
 <!ELEMENT type (monoid, semiring?)>
-<!ELEMENT structure (geometry?, states, edges, initials, finals)>
-<!ELEMENT monoid (letter*)>
-<!ELEMENT semiring (letter*)>
+<!ELEMENT content (geometry?, states, edges, initials, finals)>
+<!ELEMENT monoid (generator*)>
+<!ELEMENT semiring (monoid?, semiring?)>
 <!ELEMENT states (geometry?, state*)>
 <!ELEMENT edges (geometry?, edge*)>
 <!ELEMENT state (geometry?)>
 <!ELEMENT edge (geometry?)>
 <!ELEMENT initials (geometry?, initial*)>
 <!ELEMENT finals (geometry?, final*)>
-<!ELEMENT letter EMPTY>
+<!ELEMENT generator EMPTY>
 <!ELEMENT initial (geometry?)>
 <!ELEMENT final (geometry?)>
 <!ELEMENT geometry EMPTY>
@@ -53,23 +53,18 @@ cat >>vaucanson.dtd <<EOF
 <!ATTLIST automaton
 	xmlns	CDATA	#FIXED "http://www.lrde.epita.fr/vaucanson"
 
-	type    (determinized|codeterminized|nonambiguous|invalued|any)
-	                "any"
-	labels	(series|polynoms|words|couples|letters|pure)
-	                "letters"
-	result	(product|determinization|standard|thompson|none)
-	                "none"
+	name	ID	#IMPLIED
 >
 
 <!--
-Monoid node. At this moment, it can only be a classical free monoid.
+Monoid node.
   -->
 <!ATTLIST monoid
-	structural
-		(letters|any)
+	type	(unit|free|CPFM|FCM|FC)
+			"free"
+	generators
+		(letters|pairs|weigthed|integers)
 			"letters"
-	set	(words)
-			"words"
 >
 
 <!--
@@ -78,17 +73,14 @@ If you want to write a tranducer, you have to specify that the semiring is
 constructed from a free monoid.
   -->
 <!ATTLIST semiring
-	structural
-		(numerical|tropicalMax|tropicalMin|words)
+	operations
+	(boolean|numerical|tropicalMax|tropicalMin|function|hadamard|shuffle)
 			"numerical"
-	set	(B|Z|R|words)
+	set	(B|Z|R|ratseries)
 			"B"
 >
 
-<!--
-ASCII
-  -->
-<!ATTLIST letter
+<!ATTLIST generator
 	value	CDATA	#REQUIRED
 >
 

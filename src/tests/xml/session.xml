@@ -5,15 +5,15 @@
 <automaton>
  <type>
   <monoid>
-    <letter value="A"/>
-    <letter value="B"/>
-    <letter value="C"/>
+    <generator value="A"/>
+    <generator value="B"/>
+    <generator value="C"/>
   </monoid>
 
-  <semiring set="B" structural="numerical"/>
+  <semiring set="B"/>
  </type>
 
- <structure>
+ <content>
   <states>
     <state name="zero"/>
     <state name="one"/>
@@ -36,21 +36,21 @@
   <finals>
     <final label="1" state="two"/>
   </finals>
- </structure>
+ </content>
 </automaton>
 
 <automaton>
  <type>
   <monoid>
-    <letter value="A"/>
-    <letter value="B"/>
-    <letter value="C"/>
+    <generator value="A"/>
+    <generator value="B"/>
+    <generator value="C"/>
   </monoid>
 
-  <semiring set="B" structural="numerical"/>
+  <semiring set="B"/>
  </type>
 
- <structure>
+ <content>
   <states>
     <state name="zero2"/>
     <state name="one2"/>
@@ -73,7 +73,7 @@
   <finals>
     <final label="1" state="two2"/>
   </finals>
- </structure>
+ </content>
 </automaton>
 
 </session>

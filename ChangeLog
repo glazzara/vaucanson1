@@ -1,3 +1,40 @@
+2003-12-22  Valentin David  <valentin@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh:
+	Make able to read.
+
+	* include/vaucanson/algebra/concrete/alphabets/predefs.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
+	Add some extra types.
+
+	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/xml_set.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx,
+	* include/vaucanson/xml/callback.hxx, include/vaucanson/xml/xml_set.hh,
+	* include/vaucanson/xml/xml_ops.hh,
+	* include/vaucanson/xml/xml_value.hxx, xml/gendtd.sh,
+	* src/tests/xml/nodata-simple.xml.ref, src/tests/xml/import_generic.cc,
+	* src/tests/xml/simple.xml, src/tests/xml/tropical.xml,
+	* src/tests/xml/numerical.xml, src/tests/xml/float.xml,
+	* src/tests/xml/transcoder.xml, src/tests/xml/session.xml,
+	* src/tests/xml/import_generic-tropical.xml.ref,
+	* src/tests/xml/nodata-session.xml.ref,
+	* src/tests/xml/export_static-session.xml.ref,
+	* src/tests/xml/import_dynamic-numerical.xml.ref,
+	* src/tests/xml/export_static-simple.xml.ref,
+	* src/tests/xml/export_session-simple.xml.ref,
+	* src/tests/xml/export_session-session.xml.ref,
+	* src/tests/xml/export_dynamic-simple.xml.ref,
+	* src/tests/xml/export_dynamic-session.xml.ref:
+	Update to new format.
+
+	* include/vaucanson/algebra/concrete/letter/int_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/int_letter.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/tools.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/tools.hxx: New.
+
+	* include/Makefile.am: Update.
+
 2003-12-18  Valentin David  <valentin@lrde.epita.fr>
 
 	* include/vaucanson/xml/infos.hh, include/vaucanson/xml/session.hh,

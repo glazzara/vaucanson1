@@ -43,19 +43,19 @@ namespace vcsn
 				     const xml::XmlValue&);
 
   template <typename Tm, typename Tw, typename S>
-  rat::exp<Tm,Tw> op_convert(const algebra::SeriesBase<S>&,
-			     SELECTOR2(rat::exp<Tm, Tw>),
+  rat::exp<Tw,Tm> op_convert(const algebra::SeriesBase<S>&,
+			     SELECTOR2(rat::exp<Tw, Tm>),
 			     const xml::XmlValue&);
 
   template <typename Tm, typename Tw, typename S>
-  xml::XmlValue op_convertx(const algebra::SeriesBase<S>&,
-			    SELECTOR(xml::XmlValue),
-			    const algebra::polynom<Tm, Tw>&);
+  xml::XmlValue op_convert(const algebra::SeriesBase<S>&,
+			   SELECTOR(xml::XmlValue),
+			   const algebra::polynom<Tm, Tw>&);
 
   template <typename Tm, typename Tw, typename S>
-  xml::XmlValue op_convertx(const algebra::SeriesBase<S>&,
-			    SELECTOR(xml::XmlValue),
-			    const rat::exp<Tm, Tw>&);
+  xml::XmlValue op_convert(const algebra::SeriesBase<S>&,
+			   SELECTOR(xml::XmlValue),
+			   const rat::exp<Tm, Tw>&);
 
 
   template <class Kind,

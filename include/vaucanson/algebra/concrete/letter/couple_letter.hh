@@ -30,6 +30,7 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH
 # define VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH
 
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <string>
 # include <iostream>
 
@@ -38,6 +39,16 @@
 
 // FIXME: Only used function are defined in the char_traits.
 // FIXME: So some functions and types are missing.
+
+namespace vcsn {
+  // Specialization for pairs.
+  template <typename S, typename U, typename V>
+  bool op_parse(const algebra::FreeMonoidBase<S>& set,
+		std::string<std::pair<U,V> >& v,
+		const std::string& s,
+		typename std::string::const_iterator& i,
+		const std::list<char>& escaped);
+}
 
 namespace std {
 
@@ -50,6 +61,10 @@ namespace std {
   //! To display a basic_string of pair (idem)
   template <typename U, typename V>
   ostream& operator<<(ostream& o, basic_string<pair<U, V> > s);
+
+  //! To read a single pair.
+  template <typename U, typename V>
+  istream& operator>>(istream& i, pair<U, V>& p);
 
   //! The char trait on pair (needed by basic_string for example)
   template <typename U, typename V>

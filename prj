@@ -1,28 +1,49 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson XML 4)
-(Parent-Version vaucanson XML 3)
+(Project-Version vaucanson XML 5)
+(Parent-Version vaucanson XML 4)
 (New-Version-Log "")
 
-(Version-Log "2003-12-18  Valentin David  <valentin@lrde.epita.fr>
+(Version-Log "2003-12-22  Valentin David  <valentin@lrde.epita.fr>
 
-	* include/vaucanson/xml/infos.hh, include/vaucanson/xml/session.hh,
-	* include/vaucanson/xml/xml_loader.hh,
-	* include/vaucanson/xml/xml_set.hh, include/vaucanson/xml/errors.hh,
-	* include/vaucanson/xml/static.hh, include/vaucanson/xml/types.hh,
-	* include/vaucanson/xml/dynamic.hh, include/vaucanson/xml/generic.hh,
-	* include/vaucanson/xml/callback.hh:
-	Add comments for doxygen.
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh:
+	Make able to read.
 
-	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/session.hxx,
-	* include/vaucanson/xml/xml_automaton.hh,
-	* include/vaucanson/xml/xml_automaton.hxx:
-	Delete useless 'doc' parameter.
+	* include/vaucanson/algebra/concrete/alphabets/predefs.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
+	Add some extra types.
 
-	* include/vaucanson/xml/callback.hxx: Fix.
+	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/xml_set.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx,
+	* include/vaucanson/xml/callback.hxx, include/vaucanson/xml/xml_set.hh,
+	* include/vaucanson/xml/xml_ops.hh,
+	* include/vaucanson/xml/xml_value.hxx, xml/gendtd.sh,
+	* src/tests/xml/nodata-simple.xml.ref, src/tests/xml/import_generic.cc,
+	* src/tests/xml/simple.xml, src/tests/xml/tropical.xml,
+	* src/tests/xml/numerical.xml, src/tests/xml/float.xml,
+	* src/tests/xml/transcoder.xml, src/tests/xml/session.xml,
+	* src/tests/xml/import_generic-tropical.xml.ref,
+	* src/tests/xml/nodata-session.xml.ref,
+	* src/tests/xml/export_static-session.xml.ref,
+	* src/tests/xml/import_dynamic-numerical.xml.ref,
+	* src/tests/xml/export_static-simple.xml.ref,
+	* src/tests/xml/export_session-simple.xml.ref,
+	* src/tests/xml/export_session-session.xml.ref,
+	* src/tests/xml/export_dynamic-simple.xml.ref,
+	* src/tests/xml/export_dynamic-session.xml.ref:
+	Update to new format.
+
+	* include/vaucanson/algebra/concrete/letter/int_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/int_letter.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/tools.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/tools.hxx: New.
+
+	* include/Makefile.am: Update.
+
 ")
-(Checkin-Time "Thu, 18 Dec 2003 13:07:20 +0100")
+(Checkin-Time "Mon, 22 Dec 2003 18:04:18 +0100")
 (Checkin-Login david_v)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -105,7 +126,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.99 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.100 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -148,7 +169,7 @@
   
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.47 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.48 600))
 
   (include/vaucanson/vaucanson.hh (vaucanson/q/42_vaucanson. 1.2 600))
 
@@ -230,15 +251,15 @@
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.11 600))
   
 
-  (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.3 600))
-  (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.4 600))
+  (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.4 600))
+  (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.5 600))
   (include/vaucanson/algebra/concrete/alphabets/alphabets.hh (vaucanson/29_alphabets. 1.14 600))
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh (vaucanson/i/24_decorated_ 1.4 600))
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx (vaucanson/i/25_decorated_ 1.6 600))
-  (include/vaucanson/algebra/concrete/alphabets/predefs.hh (vaucanson/g/47_predefs.hh 1.8 600))
+  (include/vaucanson/algebra/concrete/alphabets/predefs.hh (vaucanson/g/47_predefs.hh 1.9 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh (vaucanson/28_set_alphab 1.15 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.12 600))
-  (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.8 600))
+  (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.9 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.17 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.18 600))
   (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.21 600))
@@ -956,13 +977,13 @@
   (xml/style-to-geometryvalue.awk (vaucanson/s/29_style-to-g 1.1 644))
   (xml/style-to-tex.awk (vaucanson/s/30_style-to-t 1.1 644))
   (xml/style-to-xsl-vcsng.awk (vaucanson/s/31_style-to-x 1.1 644))
-  (xml/gendtd.sh (vaucanson/s/32_gendtd.sh 1.1 644))
+  (xml/gendtd.sh (vaucanson/s/32_gendtd.sh 1.2 644))
   (xml/Makefile.am (vaucanson/s/33_Makefile.a 1.2 644))
   (xml/automaton-to-vcsng.xsl.sh (vaucanson/s/34_automaton- 1.1 644))
   (include/vaucanson/xml/xml_value.hh (vaucanson/s/35_xml_value. 1.1 644))
   (include/vaucanson/xml/krat_to_polynom.hh (vaucanson/s/36_krat_to_po 1.1 644))
   (include/vaucanson/xml/ios.hxx (vaucanson/s/37_ios.hxx 1.1 644))
-  (include/vaucanson/xml/xml_ops.hxx (vaucanson/s/38_xml_ops.hx 1.3 644))
+  (include/vaucanson/xml/xml_ops.hxx (vaucanson/s/38_xml_ops.hx 1.4 644))
   (include/vaucanson/xml/krat_to_polynom.hxx (vaucanson/s/39_krat_to_po 1.1 644))
   (include/vaucanson/xml/error_handler.hxx (vaucanson/s/40_error_hand 1.1 644))
   (include/vaucanson/xml/defaults.hh (vaucanson/s/41_defaults.h 1.1 644))
@@ -971,16 +992,16 @@
   (include/vaucanson/xml/strings.hh (vaucanson/s/44_strings.hh 1.1 644))
   (include/vaucanson/xml/infos.hh (vaucanson/s/45_infos.hh 1.3 644))
   (include/vaucanson/xml/session.hh (vaucanson/s/46_session.hh 1.2 644))
-  (include/vaucanson/xml/xml_set.hxx (vaucanson/s/47_xml_set.hx 1.1 644))
+  (include/vaucanson/xml/xml_set.hxx (vaucanson/s/47_xml_set.hx 1.2 644))
   (include/vaucanson/xml/xml_automaton.hh (vaucanson/s/48_xml_automa 1.2 644))
   (include/vaucanson/xml/strings.hxx (vaucanson/s/49_strings.hx 1.1 644))
-  (include/vaucanson/xml/xml_automaton.hxx (vaucanson/s/50_xml_automa 1.2 644))
+  (include/vaucanson/xml/xml_automaton.hxx (vaucanson/s/50_xml_automa 1.3 644))
   (include/vaucanson/xml/xml_loader.hh (vaucanson/s/51_xml_loader 1.2 644))
-  (include/vaucanson/xml/callback.hxx (vaucanson/t/0_callback.h 1.2 644))
-  (include/vaucanson/xml/xml_set.hh (vaucanson/t/1_xml_set.hh 1.2 644))
+  (include/vaucanson/xml/callback.hxx (vaucanson/t/0_callback.h 1.3 644))
+  (include/vaucanson/xml/xml_set.hh (vaucanson/t/1_xml_set.hh 1.3 644))
   (include/vaucanson/xml/xml_loader.hxx (vaucanson/t/2_xml_loader 1.1 644))
-  (include/vaucanson/xml/xml_ops.hh (vaucanson/t/3_xml_ops.hh 1.1 644))
-  (include/vaucanson/xml/xml_value.hxx (vaucanson/t/4_xml_value. 1.1 644))
+  (include/vaucanson/xml/xml_ops.hh (vaucanson/t/3_xml_ops.hh 1.2 644))
+  (include/vaucanson/xml/xml_value.hxx (vaucanson/t/4_xml_value. 1.2 644))
   (include/vaucanson/xml/session.hxx (vaucanson/t/5_session.hx 1.2 644))
   (include/vaucanson/xml/errors.hh (vaucanson/t/6_errors.hh 1.2 644))
   (include/vaucanson/xml/static.hh (vaucanson/t/7_static.hh 1.2 644))
@@ -993,26 +1014,26 @@
   (src/tests/xml/import_generic-session.xml.ref (vaucanson/t/14_import_gen 1.1 644))
   (src/tests/xml/nodata-tropical.xml.ref (vaucanson/t/15_nodata-tro 1.1 644))
   (src/tests/xml/nodata-transcoder.xml.ref (vaucanson/t/16_nodata-tra 1.1 644))
-  (src/tests/xml/nodata-simple.xml.ref (vaucanson/t/17_nodata-sim 1.1 644))
+  (src/tests/xml/nodata-simple.xml.ref (vaucanson/t/17_nodata-sim 1.2 644))
   (src/tests/xml/test.src (vaucanson/t/18_test.src 1.1 755))
   (src/tests/xml/Makefile.am (vaucanson/t/19_Makefile.a 1.1 644))
   (src/tests/xml/import_static.cc (vaucanson/t/20_import_sta 1.1 644))
   (src/tests/xml/export_static.cc (vaucanson/t/21_export_sta 1.1 644))
   (src/tests/xml/import_dynamic.cc (vaucanson/t/22_import_dyn 1.1 644))
   (src/tests/xml/export_dynamic.cc (vaucanson/t/23_export_dyn 1.1 644))
-  (src/tests/xml/import_generic.cc (vaucanson/t/24_import_gen 1.1 644))
+  (src/tests/xml/import_generic.cc (vaucanson/t/24_import_gen 1.2 644))
   (src/tests/xml/import_session.cc (vaucanson/t/25_import_ses 1.2 644))
   (src/tests/xml/export_session.cc (vaucanson/t/26_export_ses 1.1 644))
-  (src/tests/xml/simple.xml (vaucanson/t/27_simple.xml 1.1 644))
-  (src/tests/xml/tropical.xml (vaucanson/t/28_tropical.x 1.1 644))
-  (src/tests/xml/numerical.xml (vaucanson/t/29_numerical. 1.1 644))
-  (src/tests/xml/float.xml (vaucanson/t/30_float.xml 1.1 644))
-  (src/tests/xml/transcoder.xml (vaucanson/t/31_transcoder 1.1 644))
+  (src/tests/xml/simple.xml (vaucanson/t/27_simple.xml 1.2 644))
+  (src/tests/xml/tropical.xml (vaucanson/t/28_tropical.x 1.2 644))
+  (src/tests/xml/numerical.xml (vaucanson/t/29_numerical. 1.2 644))
+  (src/tests/xml/float.xml (vaucanson/t/30_float.xml 1.2 644))
+  (src/tests/xml/transcoder.xml (vaucanson/t/31_transcoder 1.2 644))
   (src/tests/xml/nodata.cc (vaucanson/t/32_nodata.cc 1.1 644))
-  (src/tests/xml/session.xml (vaucanson/t/33_session.xm 1.1 644))
+  (src/tests/xml/session.xml (vaucanson/t/33_session.xm 1.2 644))
   (src/tests/xml/nodata-numerical.xml.ref (vaucanson/t/34_nodata-num 1.1 644))
   (src/tests/xml/import_generic-transcoder.xml.ref (vaucanson/t/35_import_gen 1.1 644))
-  (src/tests/xml/import_generic-tropical.xml.ref (vaucanson/t/36_import_gen 1.1 644))
+  (src/tests/xml/import_generic-tropical.xml.ref (vaucanson/t/36_import_gen 1.2 644))
   (src/tests/xml/import_generic-simple.xml.ref (vaucanson/t/37_import_gen 1.1 644))
   (src/tests/xml/nodata-float.xml.ref (vaucanson/t/38_nodata-flo 1.1 644))
   (src/tests/xml/import_generic-numerical.xml.ref (vaucanson/t/39_import_gen 1.1 644))
@@ -1028,29 +1049,29 @@
   (src/tests/xml/import_session-session.xml.ref (vaucanson/t/49_import_ses 1.2 644))
   (src/tests/xml/import_static-float.xml.ref (vaucanson/t/50_import_sta 1.1 644))
   (src/tests/xml/import_session-numerical.xml.ref (vaucanson/t/51_import_ses 1.1 644))
-  (src/tests/xml/nodata-session.xml.ref (vaucanson/u/0_nodata-ses 1.1 644))
+  (src/tests/xml/nodata-session.xml.ref (vaucanson/u/0_nodata-ses 1.2 644))
   (src/tests/xml/import_dynamic-transcoder.xml.ref (vaucanson/u/1_import_dyn 1.1 644))
   (src/tests/xml/import_dynamic-tropical.xml.ref (vaucanson/u/2_import_dyn 1.1 644))
   (src/tests/xml/import_dynamic-simple.xml.ref (vaucanson/u/3_import_dyn 1.1 644))
   (src/tests/xml/import_dynamic-session.xml.ref (vaucanson/u/4_import_dyn 1.1 644))
-  (src/tests/xml/export_static-session.xml.ref (vaucanson/u/5_export_sta 1.1 644))
-  (src/tests/xml/import_dynamic-numerical.xml.ref (vaucanson/u/6_import_dyn 1.1 644))
+  (src/tests/xml/export_static-session.xml.ref (vaucanson/u/5_export_sta 1.2 644))
+  (src/tests/xml/import_dynamic-numerical.xml.ref (vaucanson/u/6_import_dyn 1.2 644))
   (src/tests/xml/export_static-tropical.xml.ref (vaucanson/u/7_export_sta 1.1 644))
   (src/tests/xml/export_static-transcoder.xml.ref (vaucanson/u/8_export_sta 1.1 644))
   (src/tests/xml/import_dynamic-float.xml.ref (vaucanson/u/9_import_dyn 1.1 644))
-  (src/tests/xml/export_static-simple.xml.ref (vaucanson/u/10_export_sta 1.1 644))
+  (src/tests/xml/export_static-simple.xml.ref (vaucanson/u/10_export_sta 1.2 644))
   (src/tests/xml/export_static-numerical.xml.ref (vaucanson/u/11_export_sta 1.1 644))
   (src/tests/xml/export_session-transcoder.xml.ref (vaucanson/u/12_export_ses 1.1 644))
   (src/tests/xml/export_session-tropical.xml.ref (vaucanson/u/13_export_ses 1.1 644))
-  (src/tests/xml/export_session-simple.xml.ref (vaucanson/u/14_export_ses 1.1 644))
-  (src/tests/xml/export_session-session.xml.ref (vaucanson/u/15_export_ses 1.1 644))
+  (src/tests/xml/export_session-simple.xml.ref (vaucanson/u/14_export_ses 1.2 644))
+  (src/tests/xml/export_session-session.xml.ref (vaucanson/u/15_export_ses 1.2 644))
   (src/tests/xml/export_static-float.xml.ref (vaucanson/u/16_export_sta 1.1 644))
   (src/tests/xml/export_session-numerical.xml.ref (vaucanson/u/17_export_ses 1.1 644))
   (src/tests/xml/import_session-float.xml.ref (vaucanson/u/18_import_ses 1.1 644))
   (src/tests/xml/export_dynamic-transcoder.xml.ref (vaucanson/u/19_export_dyn 1.1 644))
   (src/tests/xml/export_dynamic-tropical.xml.ref (vaucanson/u/20_export_dyn 1.1 644))
-  (src/tests/xml/export_dynamic-simple.xml.ref (vaucanson/u/21_export_dyn 1.1 644))
-  (src/tests/xml/export_dynamic-session.xml.ref (vaucanson/u/22_export_dyn 1.1 644))
+  (src/tests/xml/export_dynamic-simple.xml.ref (vaucanson/u/21_export_dyn 1.2 644))
+  (src/tests/xml/export_dynamic-session.xml.ref (vaucanson/u/22_export_dyn 1.2 644))
   (src/tests/xml/export_dynamic-numerical.xml.ref (vaucanson/u/23_export_dyn 1.1 644))
   (src/tests/xml/export_session-float.xml.ref (vaucanson/u/24_export_ses 1.1 644))
   (src/tests/xml/export_dynamic-float.xml.ref (vaucanson/u/25_export_dyn 1.1 644))
@@ -1066,6 +1087,14 @@
 
   (config/xml.m4 (vaucanson/u/29_xml.m4 1.1 644))
   (xml/automaton-to-neato.xsl (vaucanson/u/30_automaton- 1.1 600))
+
+;; Files added by populate at Mon, 22 Dec 2003 17:53:46 +0100,
+;; to version XML.4(w), by david_v:
+
+  (include/vaucanson/algebra/concrete/letter/int_letter.hxx (vaucanson/u/35_int_letter 1.1 644))
+  (include/vaucanson/algebra/concrete/letter/int_letter.hh (vaucanson/u/36_int_letter 1.1 644))
+  (include/vaucanson/algebra/concrete/free_monoid/tools.hh (vaucanson/u/37_tools.hh 1.1 644))
+  (include/vaucanson/algebra/concrete/free_monoid/tools.hxx (vaucanson/u/38_tools.hxx 1.1 644))
 )
 (Merge-Parents)
 (New-Merge-Parents)

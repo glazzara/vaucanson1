@@ -57,11 +57,16 @@ nobase_include_HEADERS =					     \
 	vaucanson/algebra/concrete/free_monoid/predefs.hh	       \
 	vaucanson/algebra/concrete/free_monoid/str_words.hh	     \
 	vaucanson/algebra/concrete/free_monoid/str_words.hxx	     \
+	vaucanson/algebra/concrete/free_monoid/lst_words.hh          \
+	vaucanson/algebra/concrete/free_monoid/lst_words.hxx         \
+	vaucanson/algebra/concrete/free_monoid/tools.hh		     \
 	vaucanson/algebra/concrete/free_monoid/words.hh		     \
 	vaucanson/algebra/concrete/free_monoid/words.hxx	     \
 	vaucanson/algebra/concrete/letter/char_letter.hh	     \
 	vaucanson/algebra/concrete/letter/couple_letter.hh	     \
 	vaucanson/algebra/concrete/letter/couple_letter.hxx	     \
+	vaucanson/algebra/concrete/letter/int_letter.hh	             \
+	vaucanson/algebra/concrete/letter/int_letter.hxx	     \
 	vaucanson/algebra/concrete/letter/range.hh		     \
 	vaucanson/algebra/concrete/letter/range.hxx		     \
 	vaucanson/algebra/concrete/predefs.hh			     \

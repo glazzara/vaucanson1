@@ -3,15 +3,15 @@
 <automaton xmlns="http://www.lrde.epita.fr/vaucanson">
  <type>
   <monoid>
-    <letter value="A"/>
-    <letter value="B"/>
-    <letter value="C"/>
+    <generator value="A"/>
+    <generator value="B"/>
+    <generator value="C"/>
   </monoid>
 
-  <semiring set="B" structural="numerical"/>
+  <semiring set="B"/>
  </type>
 
- <structure>
+ <content>
   <states>
     <state name="zero"/>
     <state name="one"/>
@@ -34,5 +34,5 @@
   <finals>
     <final label="1" state="two"/>
   </finals>
- </structure>
+ </content>
 </automaton>
