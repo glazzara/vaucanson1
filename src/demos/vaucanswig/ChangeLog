@@ -1,5 +1,9 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* README: Mention I/O methods.
+
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* meta/vaucanswig_context.i: Dot not include `dot_dump.hh'.
 	* meta/vauto.hh: Fix includes. Update I/O method prototypes.
 	* meta/automaton.hh: Update accordingly. Add new I/O.

@@ -117,7 +117,8 @@ In addition to the standard vaucanson methods, these classes have been
 enriched with the following operators:
 
   describe()          // short description
-  as_dot()            // textual representation in "dot" format
+  load(fname)         // output to file
+  save(fname)         // input from file
   dot_run(tmpf, cmd)  // run "cmd tmpf" after dumping to "tmpf"
 
 Example use:
@@ -137,7 +138,12 @@ Example use:
 0
 2
 >>> a.dot_run("tmp", "dot_view")
->>>
+
+>>> a.save("foo")
+>>> a2 = usual_auto_t(c)
+>>> a2.load("foo");
+>>> a2.states().size()
+2
 
 Algorithms
 ----------
