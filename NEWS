@@ -1,4 +1,18 @@
 								-*- outline -*-
+* Vaucanson 0.6
+* -------------
+
+** tools/usual.hh has been removed.
+
+A  system of  context headers  is present  since vaucanson  0.4.2, and
+therefore usual.hh has  become useless. Furthermore it was  a bad idea
+to use it since it has many includes and may slow a lot a compilation.
+
+This include has been removed from the distribution. if you were using
+some of its  definitions (e.g. usual_automaton_t) you now  need to use
+the  context  headers  (e.g.   include  boolean_automaton.hh  and  use
+automaton_t in namespace  vcsn::boolean_automaton). You will also find
+all the macros that may be needed in tools/usual_macros.hh
 
 * Vaucanson 0.5 March 24, 2004
 * ----------------------------

@@ -1,5 +1,9 @@
 2004-06-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* NEWS: Add an entry about the removal of usual.hh.
+
+2004-06-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/demos/samples/algorithms/determinize_standard.cc: New. Sample
 	file to compute the standard of an expression and determinize it.
 	* src/demos/samples/algorithms/classics.cc: New. Sample file for
