@@ -1,3 +1,16 @@
+2004-06-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	standard_of() was broken for  right weights because it changed the
+	weight  of the  initial  transition, which  should  always be  the
+	identity on a standard automaton.
+
+	* include/vaucanson/algorithms/standard_of.hxx (match_RightWeight):
+	Fix. Report weights of an expression onto the final states, not
+	the initial one.
+	* src/tests/automata/algos/standard_of_regression_test.hh: New. Test
+	for this fix.
+	* src/tests/automata/algos/Makefile.am: Update.
+
 2004-06-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/tools/dot_display.hh,

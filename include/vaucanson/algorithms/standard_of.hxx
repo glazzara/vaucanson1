@@ -155,11 +155,14 @@ namespace vcsn {
 
     MATCH__(RightWeight, node, w)
     {
-      automaton_ptr_t auto_ = match(node);
-      for (typename automaton_t::initial_iterator i = auto_->initial().begin();
-	   i != auto_->initial().end();
+      const semiring_t&		semiring = automata_set_.series().semiring();
+      const semiring_elt_t	weight (semiring, w);
+      automaton_ptr_t		auto_ = match(node);
+
+      for (typename automaton_t::final_iterator i = auto_->final().begin();
+	   i != auto_->final().end();
 	   ++i)
-	auto_->set_initial(*i, auto_->get_initial(*i) * semiring_elt_t(w));
+	auto_->set_final(*i, auto_->get_final(*i) * weight);
       return auto_;
     }
     END

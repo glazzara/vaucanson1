@@ -21,6 +21,7 @@ EXTRA_DIST = 					\
 	normalize_test.hh			\
 	elimination_test.hh			\
 	minimization_test.hh			\
+	standard_of_regression_test.hh		\
 	extract_test.hh				\
 	generalized_test.hh			\
 	berry_sethi_test.hh			\
