@@ -199,16 +199,15 @@ namespace vcsn {
 		  unsigned i = class_[*q];
 		  if (split[i] < part[i].size())
 		    {
-		      if (place[*q] == b)
-			to_erase.push(b);
+		      if (twin[i] == 0)
+			{
+			  twin[i] = max_partitions;
+			  max_partitions++;
+			}
+		      if (i==p)
+			to_erase.push(place[*q]);
 		      else
 			{
-			  if (twin[i] == 0)
-			    {
-			      twin[i] = max_partitions;
-			      max_partitions++;
-			    }
-
 			  part[i].erase(place[*q]);
 			  --split[i];;
 
@@ -226,12 +225,10 @@ namespace vcsn {
 		typename std::list<hstate_t>::iterator b=to_erase.front();
 		part[p].erase(b);
 		place[*b] =
-		  part[max_partitions].insert(part[max_partitions].end(), *b);
-		class_[*b] = max_partitions;
-
+		  part[twin[p]].insert(part[twin[p]].end(), *b);
+		class_[*b] = twin[p];
 		to_erase.pop();
-	      }
-	    max_partitions++;
+	    }
 	  }
 
 	/*----.
@@ -335,11 +332,11 @@ namespace vcsn {
 
   template <typename A, typename input_t, typename output_t>
   void
-  do_quotient(const AutomataBase<A>&,
-	      const algebra::NumericalSemiring&,
-	      SELECTOR(bool),
-	      output_t&			output,
-	      const input_t&		input)
+  do_quotient(const AutomataBase<A>&		,
+	      const algebra::NumericalSemiring&	,
+	      SELECTOR(bool)			,
+	      output_t&				output,
+	      const input_t&			input)
   {
     AUTOMATON_TYPES(input_t);
     typedef std::set<hstate_t>			     	      delta_ret_t;
@@ -643,11 +640,11 @@ namespace vcsn {
   template <class S, class T,
 	    typename A, typename input_t, typename output_t>
   void
-  do_quotient(const AutomataBase<A>& a_set,
-	      const S&		      ,
-	      const T&,
-	      output_t&              output,
-	      const input_t&         input)
+  do_quotient(const AutomataBase<A>&	,
+	      const S&			,
+	      const T&			,
+	      output_t&			output,
+	      const input_t&		input)
   {
     AUTOMATON_TYPES(input_t);
     using namespace std;

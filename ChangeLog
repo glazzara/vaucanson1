@@ -1,5 +1,12 @@
 2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	Proposed by Sylvain Lombardy.
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx (do_quotient):
+	Fix.
+
+2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/demos/ciaa/ex1.cc, src/demos/ciaa/ex2.cc, src/demos/ciaa/ex3.cc:
 	New. Sample files from J. Sakarovitch.
 	* src/demos/ciaa/Makefile.am: New.
