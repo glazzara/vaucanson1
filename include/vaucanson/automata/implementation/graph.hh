@@ -384,21 +384,21 @@ namespace vcsn {
     self_t;
 
     typedef typename automaton_traits<self_t>::semiring_elt_value_t
-    series_elt_value_t;
+    series_set_elt_value_t;
 
     typedef typename
-    algebra::series_traits<series_elt_value_t>::monoid_elt_value_t
+    algebra::series_traits<series_set_elt_value_t>::monoid_elt_value_t
     monoid_elt_value_t;
 
     typedef typename
-    algebra::series_traits<series_elt_value_t>::semiring_elt_value_t
+    algebra::series_traits<series_set_elt_value_t>::semiring_elt_value_t
     semiring_elt_value_t;
 
     typedef
     Graph<Kind,
 	  monoid_elt_value_t,
 	  semiring_elt_value_t,
-	  series_elt_value_t,
+	  series_set_elt_value_t,
 	  Letter,
 	  Tag>
     ret;

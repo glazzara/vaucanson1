@@ -1,5 +1,10 @@
 2004-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/automata/implementation/graph.hh: Rename the
+	typedef to series_elt_value_t to series_set_elt_value_t.
+
+2004-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx,
 	* include/vaucanson/algebra/concept/series_base.hxx,
 	* include/vaucanson/tools/usual_io.hxx,
