@@ -42,7 +42,8 @@ namespace vcsn {
 			   unsigned size_alphabet = 2, 
 			   unsigned fstate = 1);
     TAutomata generate_with_epsilon(unsigned nb_state, unsigned nb_edge, 
-				    unsigned nb_epsilon);
+				    unsigned nb_epsilon_min, 
+				    unsigned nb_epsilon_max);
 
     TAutomata generate_normalized(unsigned nb_state, unsigned density = 3);
 

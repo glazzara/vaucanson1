@@ -172,10 +172,11 @@ namespace vcsn {
   TAutomata GenRandomAutomata<TAutomata>::
   generate_with_epsilon(unsigned nb_state, 
 			unsigned nb_edge,
-			unsigned nb_spontaneous)
+			unsigned nb_epsilon_min,
+			unsigned nb_epsilon_max)
   {
     TAutomata a = this->generate(nb_state, nb_edge);
-    unsigned nb_eps = alea(nb_spontaneous);
+    unsigned nb_eps = nb_epsilon_min + alea(nb_epsilon_max - nb_epsilon_min);
     
     for (unsigned i = 0; i < nb_eps; ++i)
       {

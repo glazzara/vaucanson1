@@ -1,4 +1,14 @@
 2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.80)
+	* include/vaucanson/algorithms/realtime.hxx : added.
+	* include/vaucanson/algorithms/realtime.hh : added.
+	* src/tests/automata/algos/realtime_test.hh : added.
+	* include/vaucanson/tools/gen_random.hxx : 
+		added range selection to generate_with_epsilon.
+	* include/vaucanson/tools/gen_random.hh : idem.
+	* src/tests/automata/algos/closure_test.hh : modified in consequence.
+	
+2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.79)
 	* include/vaucanson/algorithms/thompson.hxx : added.
 	* include/vaucanson/algorithms/thompson.hh : added.

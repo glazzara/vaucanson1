@@ -40,7 +40,7 @@ bool closure_test(tests::Tester& t)
   
   gen_auto_t gen(time(0x0));
   
-  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 15);
+  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 10, 20);
   
   automaton_t cauto = closure(auto_epsilon);
   TEST(t, "Increase of edges number.",  
