@@ -30,12 +30,12 @@ namespace vcsn {
 
   //! Copy in 'dst' the transposition of 'from'.
   template<typename lhs_t, typename rhs_t>
-  void auto_transpose(lhs_t& dst,
-		      const rhs_t& from);
+  void transpose(lhs_t& dst,
+		 const rhs_t& from);
 
   //! Return a fresh automaton which is the transposition of 'from'.
   template<typename auto_t>
-  auto_t auto_transpose(const auto_t& from);
+  auto_t transpose(const auto_t& from);
 
   /*! @} */
 

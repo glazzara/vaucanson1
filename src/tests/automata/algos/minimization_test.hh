@@ -65,10 +65,10 @@ unsigned minimization_test(tests::Tester& tg)
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_initial", work, i);
 	}
       
-      automaton_t temp = trim(determinize(auto_transpose(work)));
+      automaton_t temp = trim(determinize(transpose(work)));
       //      temp = trim(determinize(temp));
       automaton_t minimize = 
-	trim(determinize(auto_transpose(temp)));
+	trim(determinize(transpose(temp)));
       if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");

@@ -1,3 +1,11 @@
+2003-06-20  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/transpose.hh,
+	  include/vaucanson/algorithms/transpose.hxx: Rename function.
+	* src/tests/automata/algos/minimization_test.hh,
+	  src/demos/fsm/generate_toolbox.sh,
+	  src/demos/fsm/usual_automaton_t/vcsn_reverse.cc: Change function call.
+
 2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/moore.hh,
