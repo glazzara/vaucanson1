@@ -110,7 +110,7 @@ Ret operator Op(const T1& x1, const Element<S2, T2>& x2)
 
 #define ELEMENT_OPERATOR(Op, HookName)							\
 template<typename S1, typename T1, typename S2, typename T2>				\
-static inline										\
+static 										\
 typename op_##HookName##_traits<S1, S2, T1, T2>::ret_t					\
 operator Op(const Element<S1, T1>& e1, const Element<S2, T2>& e2)			\
 {											\
@@ -129,7 +129,7 @@ operator Op(const Element<S1, T1>& e1, const Element<S2, T2>& e2)			\
 }											\
 											\
 template<typename S, typename T, typename U>						\
-static inline Element<S, T>								\
+static Element<S, T>								\
 operator Op(const Element<S, T>& e, const U& v)						\
 {											\
   return Element<S, T> (e.set(),					\
@@ -139,7 +139,7 @@ operator Op(const Element<S, T>& e, const U& v)						\
 }											\
 											\
 template<typename U, typename S, typename T>						\
-static inline Element<S, T>								\
+static Element<S, T>								\
 operator Op(const U& v, const Element<S, T>& e)						\
 {											\
   return Element<S, T> (e.set(),					\
@@ -161,14 +161,14 @@ ELEMENT_OPERATOR(%, mod)
 `-----------------------------------------------*/
 
 template<typename St, typename S, typename T>
-static inline St&
+static St&
 operator <<(St& s, const Element<S, T>& e)
 {
   return op_rout(e.set(), s, e.value());
 }
 
 template<typename St, typename S, typename T>
-static inline St&
+static St&
 operator >>(St& s, const Element<S, T>& e)
 {
   return op_rin(e.set(), s, e.value());
@@ -179,7 +179,7 @@ operator >>(St& s, const Element<S, T>& e)
 `------------------------------------------*/
 
 template<typename S, typename T>
-static inline Element<S, T>
+static Element<S, T>
 operator-(const Element<S, T>& e)
 {
   return Element<S, T>(e.set(), op_neg(e.set(), e.value()));

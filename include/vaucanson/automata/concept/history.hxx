@@ -40,17 +40,14 @@ namespace vcsn {
   namespace history {
 
     template <class T>
-    inline
     Event<T>::Event(event_kind_t e) : kind_(e)
     {}
 
     template <class T>
-    inline
     Event<T>::~Event() 
     {}
 
     template <class T>
-    inline
     event_kind_t	
     Event<T>::get_event_kind() const
     {
@@ -58,7 +55,6 @@ namespace vcsn {
     }
 
     template <class T>
-    inline
     BinaryEvent<T>::BinaryEvent(event_kind_t e, const T& first, 
 				const T& second) :
       Event<T>(e),
@@ -67,7 +63,6 @@ namespace vcsn {
     {}
 
     template <class T>
-    inline
     const T&
     BinaryEvent<T>::get_first() const
     {
@@ -75,7 +70,6 @@ namespace vcsn {
     }
 
     template <class T>
-    inline
     const T&
     BinaryEvent<T>::get_second() const
     {
@@ -89,7 +83,6 @@ namespace vcsn {
     {}
 
     template <class T>
-    inline
     const T&
     UnaryEvent<T>::get_first() const
     {
@@ -98,7 +91,6 @@ namespace vcsn {
 
     // FIXME : use std::find_if with a good function object.
     template <class AutoType_>      
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e, 
 						       hstate_t s)
@@ -115,7 +107,6 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e, 
 						       hstate_t s, 
@@ -132,7 +123,6 @@ namespace vcsn {
     }
       
     template <class AutoType_>
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e, 
 						       hstate_t s, 
@@ -151,7 +141,6 @@ namespace vcsn {
     }
     
     template <class AutoType_>
-    inline
     const Event<hstate_t> 
     AutomatonHistory<AutoType_>::get_state_event_about(event_kind_t e, 
 						       hstate_t     s) const
@@ -168,7 +157,6 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e,
 						      hedge_t edge)
@@ -184,7 +172,6 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e, 
 						      hedge_t edge, 
@@ -201,7 +188,6 @@ namespace vcsn {
     }
     
     template <class AutoType_>
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e,
 						      hedge_t edge, 
@@ -220,7 +206,6 @@ namespace vcsn {
     }
     
     template <class AutoType_>
-    inline
     const Event<hedge_t> 
     AutomatonHistory<AutoType_>::get_edge_event_about(event_kind_t e,
 						      hedge_t edge
@@ -238,7 +223,6 @@ namespace vcsn {
     }
     
     template <class AutoType_>
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_auto_event_about(event_kind_t e)
     {
@@ -252,7 +236,6 @@ namespace vcsn {
     }
     
     template <class AutoType_>
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_auto_event_about(event_kind_t e, 
 						      AutoType_ first)
@@ -267,7 +250,6 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    inline
     bool 
     AutomatonHistory<AutoType_>::set_auto_event_about(event_kind_t e, 
 						      AutoType_ first,
@@ -283,7 +265,6 @@ namespace vcsn {
     }
     
     template <class AutoType_>
-    inline
     const Event<AutoType_> 
     AutomatonHistory<AutoType_>::get_auto_event_about(event_kind_t e) const
     {
@@ -296,7 +277,6 @@ namespace vcsn {
     }
 
     template <class T>
-    inline
     std::ostream&
     operator<<(std::ostream& out, const Event<T>& e)
     {

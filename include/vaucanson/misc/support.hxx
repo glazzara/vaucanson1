@@ -37,13 +37,11 @@
 namespace utility {
 
   template <class C>
-  inline
   SupportIterator<C>::SupportIterator(map_iterator mp):
     i(mp)
   {}
     
   template <class C>
-  inline
   typename SupportIterator<C>::key_type	
   SupportIterator<C>::operator*() const
   {
@@ -51,7 +49,6 @@ namespace utility {
   }
 
   template <class C>
-  inline
   SupportIterator<C>&	SupportIterator<C>::operator++()
   {
     ++i;
@@ -59,7 +56,6 @@ namespace utility {
   }
 
   template <class C>
-  inline
   SupportIterator<C>	SupportIterator<C>::operator++(int)
   {
     SupportIterator<C> tmp = *this;
@@ -68,7 +64,6 @@ namespace utility {
   }
 
   template <class C>
-  inline
   bool
   SupportIterator<C>::operator!=(const SupportIterator& o) const
   {
@@ -84,21 +79,18 @@ namespace utility {
 
   //! support<map<U, T> > is a const adapter of std::map to container.
   template <class U, class T>
-  inline
   Support<std::map<U, T> >::Support(const Support& s):
     m_(s.m_)
   {
   }
 
   template <class U, class T>
-  inline
   Support<std::map<U, T> >::Support(const std::map<U, T>& m):
     m_(m)
   {
   }
 
   template <class U, class T>
-  inline
   unsigned
   Support<std::map<U, T> >::size() const
   {
@@ -106,7 +98,6 @@ namespace utility {
   }
 
   template <class U, class T>
-  inline
   SupportIterator<std::map<U, T> >
   Support<std::map<U, T> >::begin() const
   {
@@ -114,7 +105,6 @@ namespace utility {
   }
   
   template <class U, class T>
-  inline
   SupportIterator<std::map<U, T> >
   Support<std::map<U, T> >::end() const
   {
@@ -131,7 +121,6 @@ namespace utility {
   //! SparseIterator
 
   template <class Integer, class ExcludedContainer>
-  inline
   SparseIterator<Integer, ExcludedContainer>::
   SparseIterator(integer_t from, 
 		 const excluded_container_t& c):
@@ -140,7 +129,6 @@ namespace utility {
   {}
 
   template <class Integer, class ExcludedContainer>
-  inline
   SparseIterator<Integer, ExcludedContainer>& 
   SparseIterator<Integer, ExcludedContainer>::operator++()
   {
@@ -154,7 +142,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   SparseIterator<Integer, ExcludedContainer>& 
   SparseIterator<Integer, ExcludedContainer>::operator--()
   {
@@ -168,7 +155,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   SparseIterator<Integer, ExcludedContainer>
   SparseIterator<Integer, ExcludedContainer>::operator++(int)
   {
@@ -178,7 +164,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   SparseIterator<Integer, ExcludedContainer>
   SparseIterator<Integer, ExcludedContainer>::operator--(int)
   {
@@ -188,7 +173,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   typename SparseIterator<Integer, ExcludedContainer>::
   integer_t	    
   SparseIterator<Integer, ExcludedContainer>::operator*()
@@ -197,7 +181,6 @@ namespace utility {
   }
   
   template <class Integer, class ExcludedContainer>
-  inline
   bool	    
   SparseIterator<Integer, ExcludedContainer>
   ::operator!=(const SparseIterator& i)
@@ -206,7 +189,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   bool	    
   SparseIterator<Integer, ExcludedContainer>
   ::operator==(const SparseIterator& i)
@@ -215,7 +197,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   SparseIterator<Integer, ExcludedContainer>&
   SparseIterator<Integer, ExcludedContainer>
   ::operator=(const SparseIterator& i)
@@ -229,7 +210,6 @@ namespace utility {
   //! (from, begin, excluded).
   //! SparseInterval verifies the container concept.
   template <class Integer, class ExcludedContainer>
-  inline
   SparseInterval<Integer, ExcludedContainer>
   ::SparseInterval(integer_t f, integer_t t, const excluded_container_t& c):
     excluded_(c),
@@ -241,7 +221,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   unsigned
   SparseInterval<Integer, ExcludedContainer>::size() const
   {
@@ -261,7 +240,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   std::string
   SparseInterval<Integer, ExcludedContainer>::to_string() const
   {
@@ -275,7 +253,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   typename SparseInterval<Integer, ExcludedContainer>::iterator 
   SparseInterval<Integer, ExcludedContainer>::begin() const
   {
@@ -283,7 +260,6 @@ namespace utility {
   }
 
   template <class Integer, class ExcludedContainer>
-  inline
   typename SparseInterval<Integer, ExcludedContainer>::iterator 
   SparseInterval<Integer, ExcludedContainer>::end() const
   {

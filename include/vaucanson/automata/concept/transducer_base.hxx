@@ -36,31 +36,26 @@
 namespace vcsn {
 
   template <typename Self> 
-  inline
   TransducerBase<Self>::TransducerBase() 
   {}
   
   template <typename Self> 
-  inline
   TransducerBase<Self>::TransducerBase(const TransducerBase& other) :
     AutomataBase<Self>(other)
   {}
 
   /*! */
   template <typename Self, typename T>
-  inline
   MetaElement<TransducerBase<Self>, T>::MetaElement()
   {}
   
   /*! copy constructor */
   template <typename Self, typename T>
-  inline
   MetaElement<TransducerBase<Self>, T>::MetaElement(const MetaElement& a):
     MetaElement<AutomataBase<Self>, T>::MetaElement(a)
   {}
 
   template <typename Self, typename T>
-  inline
   typename MetaElement<TransducerBase<Self>, T>::input_monoid_elt_t
   MetaElement<TransducerBase<Self>, T>::input_of(hedge_t e) const
   {
@@ -68,7 +63,6 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  inline
   typename MetaElement<TransducerBase<Self>, T>::output_series_elt_t
   MetaElement<TransducerBase<Self>, T>::output_of(hedge_t e) const
   {
@@ -77,7 +71,6 @@ namespace vcsn {
 
 
   template <typename Self, typename T>
-  inline
   hedge_t  
   MetaElement<TransducerBase<Self>, T>::
   add_io_edge(hstate_t from, 
@@ -94,7 +87,6 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  inline
   hedge_t  
   MetaElement<TransducerBase<Self>, T>::add_io_edge(hstate_t from, 
 						    hstate_t to, 
@@ -110,7 +102,6 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  inline
   hedge_t  
   MetaElement<TransducerBase<Self>, T>::add_o_edge(hstate_t from, 
 						   hstate_t to, 
@@ -126,7 +117,6 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  inline
   hedge_t  
   MetaElement<TransducerBase<Self>, T>::add_i_edge(hstate_t from, 
 						   hstate_t to, 

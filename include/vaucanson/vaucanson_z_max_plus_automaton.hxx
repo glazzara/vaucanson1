@@ -36,7 +36,6 @@ namespace vcsn {
   namespace z_max_plus_automaton {
 
     template <class InputIterator>
-    inline
     automaton_t new_automaton(InputIterator begin,
 			      InputIterator end)
     {
@@ -51,7 +50,6 @@ namespace vcsn {
     }
 
     template <class T>
-    inline
     automaton_t new_automaton(const T& alphabet)
     {
       return new_automaton(alphabet.begin(), alphabet.end());

@@ -117,13 +117,11 @@ namespace vcsn {
   `---------------------*/
 
   template<typename Tm, typename Tw, typename M, typename W>
-  inline
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
 			      SELECTOR2(rat::exp<Tm, Tw>), 
 			      const Tm& m_value);
 
   template<typename Tm, typename Tw, typename M, typename W>
-  inline
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
 			      SELECTOR2(rat::exp<Tm, Tw>), 
 			      char m_value);

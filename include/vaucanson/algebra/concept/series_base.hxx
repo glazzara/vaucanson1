@@ -175,7 +175,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename algebra::series_traits<T>::support_t
   op_support(const algebra::SeriesBase<S>&, const T& v)
   {
@@ -204,7 +203,6 @@ namespace vcsn {
   }
 
   template <typename S1, typename S2, typename T1, typename T2>
-  inline
   void
   extract_support(Element<S1, T1>& s1, Element<S2, T2>& s2)
   {

@@ -60,7 +60,6 @@ namespace vcsn {
 
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   bool op_contains(const algebra::Series<W, M>&, const rat::exp<Tm, Tw>&)
   { 
     assertion(! "op_contains for Element<Series<W,M>, exp<Tm,Tw> > not defined.");
@@ -68,7 +67,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   bool op_is_finite_app(const algebra::Series<W, M>&, 
 			const rat::exp<Tm, Tw>& m)
   { 
@@ -79,7 +77,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   typename algebra::series_traits<rat::exp<Tm, Tw> >::support_t
   op_support(const algebra::Series<W, M>& s, const rat::exp<Tm, Tw>& m)
   {
@@ -115,7 +112,6 @@ namespace vcsn {
   }
 
   template <typename W, typename M, typename Tm, typename Tw>
-  inline
   void op_in_tranpose(const algebra::Series<W, M>&, 
 		      rat::exp<Tm, Tw>& dst)
   {
@@ -132,7 +128,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   void op_in_add(const algebra::Series<W, M>&, 
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg)
@@ -153,7 +148,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   rat::exp<Tm, Tw> op_add(const algebra::Series<W, M>& s,
 			  const rat::exp<Tm, Tw>& a,
 			  const rat::exp<Tm, Tw>& b)
@@ -164,7 +158,6 @@ namespace vcsn {
   }
     
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   void op_in_mul(const algebra::Series<W, M>& s, 
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg)
@@ -263,7 +256,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   rat::exp<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
 			  const rat::exp<Tm, Tw>& a,
 			  const rat::exp<Tm, Tw>& b)
@@ -279,7 +271,6 @@ namespace vcsn {
     `---------------------*/
 
   template<typename Tm, typename Tw, typename M, typename W>
-  inline
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
 			      SELECTOR2(rat::exp<Tm, Tw>), 
 			      const Tm& m_value)
@@ -288,7 +279,6 @@ namespace vcsn {
   }
   
   template<typename Tm, typename Tw, typename M, typename W>
-  inline
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
 			      SELECTOR2(rat::exp<Tm, Tw>), 
 			      char m_value)
@@ -298,7 +288,6 @@ namespace vcsn {
   }
   
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
-  inline
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
 			      SELECTOR2(rat::exp<Tm, Tw>),
 			      SELECTOR(M),
@@ -330,7 +319,6 @@ namespace vcsn {
   }
     
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  inline
   void op_assign(const algebra::Series<W, M>&,
 		 const M&,
 		 rat::exp<Tm, Tw>& dst,
@@ -345,7 +333,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  inline
   void op_assign(const algebra::Series<W, M>&,
 		 const W& semiring,
 		 rat::exp<Tm, Tw>& dst,
@@ -360,7 +347,6 @@ namespace vcsn {
     `-----*/
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   bool op_starable(const algebra::Series<W, M>&,
 		    const rat::exp<Tm, Tw>&)
   { 
@@ -368,7 +354,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   void op_in_star(const algebra::Series<W, M>&,
 		  rat::exp<Tm, Tw>& dst)
   { 
@@ -379,7 +364,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
-  inline
   rat::exp<Tm, Tw> 
   op_star(const algebra::Series<W, M>&,
 	  const rat::exp<Tm, Tw>& src)
@@ -397,7 +381,6 @@ namespace vcsn {
     `--------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  inline
   void op_in_add(const algebra::Series<W, M>& s,
 		 const M& monoid,
 		 rat::exp<Tm, Tw>& dst,
@@ -410,7 +393,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  inline
   rat::exp<Tm, Tw> op_add(const algebra::Series<W, M>& s,
 			  const M& monoid,
 			  const rat::exp<Tm, Tw>& a,
@@ -422,7 +404,6 @@ namespace vcsn {
   }
 
   template<typename M, typename W, typename oTm, typename Tm, typename Tw>
-  inline
   rat::exp<Tm, Tw> op_add(const M& monoid,
 			  const algebra::Series<W, M>& s,
 			  const oTm& a,
@@ -438,7 +419,6 @@ namespace vcsn {
     `---------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  inline
   void op_in_add(const algebra::Series<W, M>& s,
 		 const W& semiring,
 		 rat::exp<Tm, Tw>& dst,
@@ -452,7 +432,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  inline
   rat::exp<Tm, Tw> op_add(const algebra::Series<W, M>& s,
 			  const W& semiring,
 			  const rat::exp<Tm, Tw>& a,
@@ -464,7 +443,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  inline
   rat::exp<Tm, Tw> op_add(const W& semiring,
 			  const algebra::Series<W, M>& s,
 			  const oTw& a,
@@ -480,7 +458,6 @@ namespace vcsn {
     `-------------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  inline
   void op_in_mul(const algebra::Series<W, M>& s,
 		 const W& semiring,
 		 rat::exp<Tm, Tw>& ret,
@@ -560,7 +537,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
-  inline
   rat::exp<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
 			  const W& semiring,
 			  const rat::exp<Tm, Tw>& a,
@@ -572,7 +548,6 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  inline
   rat::exp<Tm, Tw> op_mul(const W& semiring,
 			  const algebra::Series<W, M>& s,
 			  const oTw& w,
@@ -638,7 +613,6 @@ namespace vcsn {
 #define FIXME(Msg) std::cerr << "FIXME: " << Msg << std::endl;
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  inline
   Tw op_series_get(const algebra::Series<W, M>& s, 
 		   const rat::exp<Tm, Tw>& p,
 		   const oTm& m)
@@ -669,7 +643,6 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, 
 	   typename oTm, typename oTw>
-  inline
   void op_series_set(const algebra::Series<W, M>& s, 
 		     rat::exp<Tm, Tw>& p,
 		     const oTm& m,
@@ -699,7 +672,6 @@ namespace vcsn {
     `----------------------------------------------------------*/
       
   template <typename W, typename M, typename Tm, typename Tw>
-  inline
   void 
   MetaElement<algebra::Series<W, M>, rat::exp<Tm, Tw> >::accept
   (const rat::ConstNodeVisitor<Tm, Tw>& v) const
@@ -708,7 +680,6 @@ namespace vcsn {
   }
     
   template <typename W, typename M, typename Tm, typename Tw>
-  inline
   size_t 
   MetaElement<algebra::Series<W, M>, rat::exp<Tm, Tw> >::depth() const
   {

@@ -55,10 +55,10 @@ namespace vcsn {
     template <char From, char To>
     struct static_char_interval
     {
-      static inline bool check(char c);
-      static inline char from();
-      static inline char to();
-      static inline char random();
+      static bool check(char c);
+      static char from();
+      static char to();
+      static char random();
     };
 
     // FIXME: op_leq may be more adapted.

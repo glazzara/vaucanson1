@@ -47,7 +47,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename identity_transducer_helper<S, T>::ret
   partial_identity(const Element<S, T>& a)
   {

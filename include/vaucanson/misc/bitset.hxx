@@ -776,14 +776,12 @@ namespace utility
 
   // Count
   template <typename CountType, CountType Start, CountType Step>
-  inline
   Bitset::
   BitActionCount<CountType, Start, Step>::BitActionCount() : value(Start)
   {
   }
 
   template <typename CountType, CountType Start, CountType Step>
-  inline
   bool
   Bitset::
   BitActionCount<CountType, Start, Step>::operator () (const Bitset&,
@@ -802,7 +800,6 @@ namespace utility
 
   // non-const
   template <class BitAction>
-  inline
   bool
   Bitset::do_on_bit(BitAction& action, const key_type& x)
   {
@@ -815,7 +812,6 @@ namespace utility
   }
 
   template <class BitAction>
-  inline
   bool
   Bitset::do_on_bit(BitAction& action, const bit_iterator& it)
   {
@@ -824,7 +820,6 @@ namespace utility
 
   // const
   template <class ConstBitAction>
-  inline
   bool
   Bitset::do_on_bit(ConstBitAction& action, const key_type& x) const
   {
@@ -837,7 +832,6 @@ namespace utility
   }
 
   template <class ConstBitAction>
-  inline
   bool
   Bitset::do_on_bit(ConstBitAction& action, const bit_iterator& it) const
   {

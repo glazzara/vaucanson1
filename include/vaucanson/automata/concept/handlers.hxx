@@ -36,22 +36,18 @@ namespace vcsn
 {
   
   template<typename Tag>
-  inline
   handler<Tag>::handler() : v_(0) 
   {}
 
   template<typename Tag>
-  inline
   handler<Tag>::handler(int h) : v_(h) 
   {}
 
   template<typename Tag>
-  inline
   handler<Tag>::handler(const handler& h) : v_(h.v_) 
   {}
     
   template<typename Tag>
-  inline
   handler<Tag>& handler<Tag>::operator=(const handler<Tag>& h)
   { 
     v_ = h.v_; 
@@ -59,7 +55,6 @@ namespace vcsn
   }
 
   template<typename Tag>
-  inline
   handler<Tag>& handler<Tag>::operator=(int h)
   { 
     v_ = h; 
@@ -67,14 +62,12 @@ namespace vcsn
   }
     
   template<typename Tag>
-  inline
   int handler<Tag>::value() const 
   { 
     return v_; 
   }
     
   template<typename Tag>
-  inline
   handler<Tag>::operator int () const 
   { 
     return v_; 
@@ -84,7 +77,6 @@ namespace vcsn
 
 #define HOPERATOR(Op)					\
 template<typename kind>					\
-inline							\
 bool operator Op (const handler<kind>& h1,	\
                   const handler<kind>& h2)	\
 { return h1.value() Op h2.value(); }

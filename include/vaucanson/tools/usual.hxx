@@ -35,7 +35,6 @@ namespace vcsn {
   namespace tools {
 
     template <class InputIterator>
-    inline
     usual_automaton_t new_automaton(InputIterator begin,
 				    InputIterator end)
     {
@@ -50,7 +49,6 @@ namespace vcsn {
     }
 
     template <typename R, typename InputIterator>
-    inline
     R new_automaton(InputIterator begin, InputIterator end)
     {
       typedef typename R::set_t Automata;
@@ -71,14 +69,12 @@ namespace vcsn {
 
 
     template <class T>
-    inline
     usual_automaton_t new_automaton(const T& alphabet)
     {
       return new_automaton(alphabet.begin(), alphabet.end());
     }
 
     template <class R, class T>
-    inline
     R new_automaton(const T& alphabet)
     {
       return new_automaton<R>(alphabet.begin(), alphabet.end());

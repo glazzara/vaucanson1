@@ -131,7 +131,7 @@ namespace vcsn {
   | specializations for booleans |
   `-----------------------------*/
   template<typename T>
-  inline void op_in_mul(const algebra::NumericalSemiring&,
+  void op_in_mul(const algebra::NumericalSemiring&,
 			bool& dst, bool src)
   {
     dst = dst && src;

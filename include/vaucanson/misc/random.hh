@@ -53,11 +53,11 @@ namespace utility {
 
     /// Generate a random character
     template<>
-    inline char generate<char>();
+    char generate<char>();
 
     /// Generate a random character between bounds
     template<>
-    inline char generate<char>(char min, char max);
+    char generate<char>(char min, char max);
 
     /// Generate a random lowercase letter
     inline char generate_letter();
@@ -67,23 +67,23 @@ namespace utility {
 
     /// Generate a random Boolean
     template<>
-    inline bool generate<bool>();
+    bool generate<bool>();
 
     /// Generate a random integer
     template<>
-    inline int generate<int>();
+    int generate<int>();
 
     /// Generate a random integer between two bounds
     template<>
-    inline int generate<int>(int min, int max);
+    int generate<int>(int min, int max);
 
     /// Generate a random float between 0 and 1
     template<>
-    inline float generate<float>();
+    float generate<float>();
 
     /// Generate a random double between 0 and 1
     template<>
-    inline double generate<double>();
+    double generate<double>();
 
     // Generate of n sample from a range to an output iterator.
     template <class InputIterator, class OutputIterator>
@@ -92,12 +92,10 @@ namespace utility {
 
     // Generate a random rational number
     template<>
-    inline
     vcsn::algebra::RationalNumber generate<vcsn::algebra::RationalNumber>();
 
     // Generate a random rational number between bounds
     template<>
-    inline
     vcsn::algebra::RationalNumber
     generate<vcsn::algebra::RationalNumber>
     (const vcsn::algebra::RationalNumber min,

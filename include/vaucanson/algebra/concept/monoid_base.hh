@@ -69,7 +69,7 @@ namespace vcsn {
     struct identity_as
     {
       template <class S>
-      static inline
+      static
       Element<S, T> of(const S& s);
     };
 
@@ -77,7 +77,7 @@ namespace vcsn {
     struct zero_as
     {
       template <class S>
-      static inline
+      static
       Element<S, T> of(const S& s);
     };
 

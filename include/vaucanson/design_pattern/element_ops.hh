@@ -51,73 +51,73 @@ namespace vcsn {
 
   /// Comparison between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	
-  static inline							
+  static
   bool operator<(const vcsn::Element<S1, T1>& e1,	
 		 const vcsn::Element<S2, T2>& e2);	
 
   /// Comparison between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	
-  static inline							
+  static
   bool operator>(const vcsn::Element<S1, T1>& e1,	
 		 const vcsn::Element<S2, T2>& e2);	
 
   /// Comparison between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	
-  static inline							
+  static
   bool operator<=(const vcsn::Element<S1, T1>& e1,	
 		  const vcsn::Element<S2, T2>& e2);	
 
   /// Comparison between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	
-  static inline							
+  static
   bool operator>=(const vcsn::Element<S1, T1>& e1,	
 		  const vcsn::Element<S2, T2>& e2);	
 
   /// Comparison between Element and foreign values (left version)
   template<typename S, typename T, typename U>
-  static inline
+  static
   bool operator <(const vcsn::Element<S, T>& e,
 		  const U& v);
 
   /// Comparison between Element and foreign values (left version)
   template<typename S, typename T, typename U>
-  static inline
+  static
   bool operator >(const vcsn::Element<S, T>& e,
 		  const U& v);
 
   /// Comparison between Element and foreign values (left version)
   template<typename S, typename T, typename U>
-  static inline
+  static
   bool operator >=(const vcsn::Element<S, T>& e,
 		   const U& v);
 
   /// Comparison between Element and foreign values (left version)
   template<typename S, typename T, typename U>
-  static inline
+  static
   bool operator <=(const vcsn::Element<S, T>& e,
 		   const U& v);
 
   /// Comparison between Element and foreign values (right version)
   template<typename U, typename S, typename T>
-  static inline
+  static
   bool operator <(const U& v,
 		  const vcsn::Element<S, T>& e);
 
   /// Comparison between Element and foreign values (right version)
   template<typename U, typename S, typename T>
-  static inline
+  static
   bool operator >(const U& v,
 		  const vcsn::Element<S, T>& e);
 
   /// Comparison between Element and foreign values (right version)
   template<typename U, typename S, typename T>
-  static inline
+  static
   bool operator >=(const U& v,
 		   const vcsn::Element<S, T>& e);
 
   /// Comparison between Element and foreign values (right version)
   template<typename U, typename S, typename T>
-  static inline
+  static
   bool operator <=(const U& v,
 		   const vcsn::Element<S, T>& e);
 
@@ -127,19 +127,19 @@ namespace vcsn {
 
   /// Equality between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	
-  static inline							
+  static
   bool operator ==(const vcsn::Element<S1, T1>& e1,	
 		  const vcsn::Element<S2, T2>& e2);	
 
   /// Equality between Element and foreign values (left version)
   template<typename S, typename T, typename U>
-  static inline
+  static
   bool operator ==(const vcsn::Element<S, T>& e,
 		   const U& v);
 
   /// Equality between Element and foreign values (right version)
   template<typename U, typename S, typename T>
-  static inline
+  static
   bool operator ==(const U& v,
 		   const vcsn::Element<S, T>& e);
 
@@ -149,19 +149,19 @@ namespace vcsn {
 
   /// Difference between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	
-  static inline							
+  static
   bool operator !=(const vcsn::Element<S1, T1>& e1,	
 		  const vcsn::Element<S2, T2>& e2);	
 
   /// Difference between Element and foreign values (left version)
   template<typename S, typename T, typename U>
-  static inline
+  static
   bool operator !=(const vcsn::Element<S, T>& e,
 		   const U& v);
 
   /// Difference between Element and foreign values (right version)
   template<typename U, typename S, typename T>
-  static inline
+  static
   bool operator !=(const U& v,
 		   const vcsn::Element<S, T>& e);
 
@@ -171,20 +171,20 @@ namespace vcsn {
 
   /// Addition between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	      	
-  static inline					     			
+  static
   typename vcsn::op_add_traits<S1, S2, T1, T2>::ret_t	
   operator+(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /// Addition between Element and foreign values (left)
   template<typename S, typename T, typename U>	       			
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator +(const vcsn::Element<S, T>& e,				
 	     const U& v);			       			
 
   /// Addition between Element and foreign values (right)
   template<typename U, typename S, typename T>				       
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator +(const U& v,			          		
 	     const vcsn::Element<S, T>& e);
 
@@ -194,20 +194,20 @@ namespace vcsn {
 
   /// Substraction between Element instances
   template<typename S1, typename T1, typename S2, typename T2> 		
-  static inline						       		
+  static
   typename vcsn::op_sub_traits<S1, S2, T1, T2>::ret_t	
   operator-(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /// Substraction between Element and foreign values (left)
   template<typename S, typename T, typename U>		       		
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator-(const vcsn::Element<S, T>& e,				
 	    const U& v);				       		
 
   /// Substraction between Element and foreign values (right)
   template<typename U, typename S, typename T>				       
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator-(const U& v,					     		
 	    const vcsn::Element<S, T>& e);
 
@@ -217,20 +217,20 @@ namespace vcsn {
 
   /// Multiplication between Element instances
   template<typename S1, typename T1, typename S2, typename T2> 		
-  static inline						       		
+  static
   typename vcsn::op_mul_traits<S1, S2, T1, T2>::ret_t	
   operator*(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /// Multiplication between Element and foreign values (left)
   template<typename S, typename T, typename U>			       	
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator*(const vcsn::Element<S, T>& e,			       
 	    const U& v);					     	
 
   /// Multiplication between Element and foreign values (right)
   template<typename U, typename S, typename T>				       
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator*(const U& v,					     		
 	    const vcsn::Element<S, T>& e);
 
@@ -240,20 +240,20 @@ namespace vcsn {
 
   /// Division between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	       	
-  static inline						       		
+  static
   typename vcsn::op_div_traits<S1, S2, T1, T2>::ret_t	
   operator/(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /// Division between Element and foreign values (left)
   template<typename S, typename T, typename U>			       	
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator/(const vcsn::Element<S, T>& e,			       
 	    const U& v);					       	
 
   /// Division between Element and foreign values (right)
   template<typename U, typename S, typename T>				       
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator/(const U& v,					     		
 	    const vcsn::Element<S, T>& e);
 
@@ -263,20 +263,20 @@ namespace vcsn {
 
   /// Modulus between Element instances
   template<typename S1, typename T1, typename S2, typename T2>	       	
-  static inline						       		
+  static
   typename vcsn::op_mod_traits<S1, S2, T1, T2>::ret_t	
   operator%(const vcsn::Element<S1, T1>& e1,			
 	    const vcsn::Element<S2, T2>& e2);				
 
   /// Modulus between Element and foreign values (left)
   template<typename S, typename T, typename U>		       		
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator%(const vcsn::Element<S, T>& e,				
 	    const U& v);				       		
 
   /// Modulus between Element and foreign values (right
   template<typename U, typename S, typename T>				       
-  static inline vcsn::Element<S, T>					
+  static vcsn::Element<S, T>					
   operator%(const U& v,					     		
 	    const vcsn::Element<S, T>& e);
 
@@ -286,7 +286,7 @@ namespace vcsn {
  
   /// Unary negation of Element instances
   template<typename S, typename T>
-  static inline vcsn::Element<S, T> 
+  static vcsn::Element<S, T> 
   operator -(const vcsn::Element<S, T>&);
 
   /*-----------------.
@@ -295,18 +295,18 @@ namespace vcsn {
 
   /// Output to stream
   template<typename St, typename S, typename T>
-  static inline St& 
+  static St& 
   operator <<(St& s, const vcsn::Element<S, T>& e);
 
   /// Input from stream
   template<typename St, typename S, typename T>
-  static inline St& 
+  static St& 
   operator >>(St& s, const vcsn::Element<S, T>& e);
 
   // This operator does not exist.
 
 //   template<typename S1, typename T1, typename S2, typename T2>
-//   static inline void /* do not use or specialize */
+//   static void /* do not use or specialize */
 //   operator <<(const vcsn::Element<S1, T1>& e1,
 // 	      const vcsn::Element<S2, T2>& e2);
   

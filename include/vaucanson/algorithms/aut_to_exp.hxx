@@ -195,7 +195,6 @@ namespace vcsn {
   //  
  
   template<typename A, typename T, typename Chooser_>
-  inline
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a, const Chooser_& c)
   {
@@ -204,7 +203,6 @@ namespace vcsn {
   }
   
   template<typename A, typename T>
-  inline
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a)
   {

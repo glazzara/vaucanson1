@@ -342,7 +342,7 @@ namespace vcsn {
 
     template <class M, class W>
     template <class Matcher>
-    inline typename Matcher::return_type
+    typename Matcher::return_type
     DispatchFunction<rat::exp<M, W> >::d(Matcher& matcher,
 					 const rat::exp<M, W>& exp)
     {

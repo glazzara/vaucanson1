@@ -84,10 +84,10 @@ namespace utility
       template <class U>
       struct TiSlot
       {
-	inline TiSlot(const std::type_info& );
+	TiSlot(const std::type_info& );
 	const std::type_info &id;
-	inline bool operator==(const ti_slot& other) const;
-	inline bool operator<(const ti_slot& other) const;
+	bool operator==(const ti_slot& other) const;
+	bool operator<(const ti_slot& other) const;
       };
 
       /** The map type used */

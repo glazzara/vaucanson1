@@ -53,7 +53,6 @@ namespace vcsn {
     
     template <class Self>
     template <class T>
-    inline
     bool
     SemiringBase<Self>::can_choose_non_starable(SELECTOR(T)) const
     {
@@ -138,7 +137,6 @@ namespace vcsn {
   // default implementations:
 
   template <typename S, typename T>
-  inline
   bool
   op_can_choose_non_starable(const S& set, SELECTOR(T))
   {
@@ -147,7 +145,6 @@ namespace vcsn {
 
 
   template <typename S, typename T>
-  inline
   Element<S, T>
   op_choose_starable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
@@ -159,7 +156,6 @@ namespace vcsn {
   }
 
   template <typename S, typename T>
-  inline
   Element<S, T> 
   op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {

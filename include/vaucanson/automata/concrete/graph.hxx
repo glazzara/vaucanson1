@@ -42,12 +42,10 @@
 namespace vcsn {
 
   template <class EdgeLabel>
-  inline
   edge_value<EdgeLabel>::edge_value()
   {}
 
   template <class EdgeLabel>
-  inline
   edge_value<EdgeLabel>::edge_value(const EdgeLabel& label, 
 				    hstate_t from, 
 				    hstate_t to):
@@ -71,7 +69,6 @@ namespace vcsn {
     Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
 
   TParam
-  inline
   GClass::Graph()
   {
     first_state_ = 0;
@@ -127,7 +124,6 @@ namespace vcsn {
 
 
   TParam
-  inline
   hstate_t GClass::add_state()
   {
     // case 1: there is no empty cells in the chunk.
@@ -160,7 +156,6 @@ namespace vcsn {
   }
 
   TParam
-  inline 
   void GClass::del_state(hstate_t n)
   {
     assertion(has_state(n));
@@ -217,7 +212,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   void 
   GClass::del_edge(hedge_t e)
   {
@@ -268,7 +262,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   bool
   GClass::has_state(hstate_t n) const
   {
@@ -293,7 +286,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   hedge_t
   GClass::add_edge(hstate_t n1, hstate_t n2, const label_t& l)
   {
@@ -348,7 +340,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   bool
   GClass::has_edge(hedge_t e) const
   {
@@ -378,7 +369,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   hstate_t
   GClass::aim_of(hedge_t e) const
   {
@@ -387,7 +377,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   hstate_t
   GClass::origin_of(hedge_t e) const
   {
@@ -396,7 +385,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   const typename GClass::label_t&
   GClass::label_of(hedge_t e) const
   {
@@ -405,7 +393,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   typename GClass::states_t
   GClass::states() const
   {
@@ -415,7 +402,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   typename GClass::edges_t
   GClass::edges() const
   {
@@ -425,7 +411,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   const typename GClass::serie_value_t&
   GClass::get_initial(hstate_t n, const serie_value_t& z) const
   {
@@ -436,7 +421,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   void
   GClass::set_initial(hstate_t n, const serie_value_t& v, 
 		      const serie_value_t& z)
@@ -448,7 +432,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   const typename GClass::serie_value_t&
   GClass::get_final(hstate_t n, const serie_value_t& z) const
   {
@@ -459,7 +442,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   void
   GClass::set_final(hstate_t n, const serie_value_t& v, 
 		    const serie_value_t& z)
@@ -471,7 +453,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   void
   GClass::clear_final()
   {
@@ -479,7 +460,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   void
   GClass::clear_initial()
   {
@@ -487,7 +467,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   typename GClass::initial_support_t
   GClass::initial() const
   {
@@ -495,7 +474,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   typename GClass::final_support_t
   GClass::final() const
   {
@@ -503,7 +481,6 @@ namespace vcsn {
   }
 
   TParam
-  inline
   void
   GClass::update(hedge_t e, label_t l)
   {
@@ -512,7 +489,6 @@ namespace vcsn {
 
   TParam
   template <class OutputIterator, class Query>
-  inline
   void
   GClass::delta(OutputIterator res, 
 		hstate_t from,
@@ -528,7 +504,6 @@ namespace vcsn {
 
   TParam
   template <class OutputIterator, class Query>
-  inline
   void
   GClass::delta(OutputIterator res, 
 		hstate_t from,
@@ -543,7 +518,6 @@ namespace vcsn {
 
   TParam
   template <class OutputIterator, class Query>
-  inline
   void
   GClass::rdelta(OutputIterator res, 
 		 hstate_t from,
@@ -562,7 +536,6 @@ namespace vcsn {
 
   TParam
   template <class OutputIterator, class Query>
-  inline
   void
   GClass::rdelta(OutputIterator res, 
 		 hstate_t from,

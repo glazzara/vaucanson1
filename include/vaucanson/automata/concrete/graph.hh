@@ -231,7 +231,6 @@ namespace vcsn {
   template <class S, class WordValue, class WeightValue, class SerieValue,
 	    class Letter, class Tag,
 	    typename OutputIterator, typename L>
-  inline
   void op_letter_delta(const AutomataBase<S>& s,
 		       const Graph<labels_are_letters,
 		       WordValue, WeightValue,

@@ -57,7 +57,6 @@ namespace vcsn {
   {}
 
   template <class S, class T>
-  inline
   Element<S, TransposeView<T> >
   transpose_view(Element<S, T>& a)
   {
@@ -66,7 +65,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   const Element<S, TransposeView<T> >
   transpose_view(const Element<S, T>& a)
   {

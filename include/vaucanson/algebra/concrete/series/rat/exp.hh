@@ -186,7 +186,7 @@ namespace vcsn {
     struct DispatchFunction<rat::exp<M, W> >
     {
       template <class Matcher>
-      static inline
+      static
       typename Matcher::return_type
       d(Matcher& matcher, const rat::exp<M, W>& exp);
     };

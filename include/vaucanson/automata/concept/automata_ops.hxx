@@ -44,7 +44,6 @@ namespace vcsn {
   typename Element<S, T>::Type
 
   template <class S, class T>
-  inline
   const typename automaton_traits<T>::tag_t&
   op_get_tag(const AutomataBase<S>&, const T& v)
   {
@@ -52,7 +51,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename automaton_traits<T>::tag_t&
   op_get_tag(const AutomataBase<S>&, T& v)
   {
@@ -60,7 +58,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   bool
   op_exists(const AutomataBase<S>& s, const T& v)
   {
@@ -68,7 +65,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename automaton_traits<T>::states_t
   op_states(const AutomataBase<S>&, const T& v)
   {
@@ -76,7 +72,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename automaton_traits<T>::edges_t
   op_edges(const AutomataBase<S>&, const T& v)
   {
@@ -84,7 +79,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename automaton_traits<T>::initial_support_t
   op_initial(const AutomataBase<S>&, const T& v)
   {
@@ -92,7 +86,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename automaton_traits<T>::final_support_t
   op_final(const AutomataBase<S>&, const T& v)
   {
@@ -100,7 +93,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   void
   op_set_initial(const AutomataBase<S>& ss, T& v,
 		 hstate_t state,
@@ -114,7 +106,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename Element<S, T>::series_elt_t
   op_get_initial(const AutomataBase<S>& s,
 		 const T& v,
@@ -128,7 +119,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   void
   op_set_final(const AutomataBase<S>& ss, T& v,
 	       hstate_t state,
@@ -141,7 +131,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename Element<S, T>::series_elt_t
   op_get_final(const AutomataBase<S>& s,
 	       const T& v,
@@ -155,7 +144,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   void
   op_clear_initial(const AutomataBase<S>&, T& v)
   {
@@ -163,7 +151,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   void
   op_clear_final(const AutomataBase<S>&, T& v)
   {
@@ -171,7 +158,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   hstate_t
   op_add_state(const AutomataBase<S>&, T& v)
   {
@@ -179,7 +165,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   hstate_t
   op_choose_state(const AutomataBase<S>& s, const T& v)
   {
@@ -195,7 +180,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   hedge_t
   op_add_edge(const AutomataBase<S>&, T& v,
 	      hstate_t from,
@@ -206,7 +190,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   hedge_t
   op_add_serie_edge(const AutomataBase<S>& s, T& v,
 		    hstate_t from,
@@ -217,7 +200,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   hedge_t
   op_add_spontaneous(const AutomataBase<S>& s, T& v,
 		     hstate_t from,
@@ -231,7 +213,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   hedge_t
   op_add_letter_edge(const AutomataBase<S>& s, T& v,
 		     hstate_t from,
@@ -242,7 +223,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   void
   op_update(const AutomataBase<S>&, T& v,
 	    hedge_t  e,
@@ -253,7 +233,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   void
   op_del_state(const AutomataBase<S>&, T& v,
 	       hstate_t s)
@@ -262,7 +241,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   void
   op_del_edge(const AutomataBase<S>&, T& v,
 	      hedge_t e)
@@ -271,7 +249,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   void
   op_safe_del_state(const AutomataBase<S>&, T& v,
 		    hstate_t s)
@@ -280,7 +257,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   bool
   op_has_state(const AutomataBase<S>&, const T& v,
 	       hstate_t s)
@@ -289,7 +265,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   bool
   op_has_edge(const AutomataBase<S>&, const T& v,
 	      hedge_t e)
@@ -298,7 +273,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   hstate_t
   op_origin_of(const AutomataBase<S>&, const T& v,
 	       hedge_t e)
@@ -307,7 +281,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   hstate_t
   op_aim_of(const AutomataBase<S>&, const T& v,
 	    hedge_t e)
@@ -316,7 +289,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename Element<S, T>::label_t
   op_label_of(const AutomataBase<S>&, const T& v,
 	      hedge_t e)
@@ -325,7 +297,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   const typename Element<S, T>::series_elt_t
   op_serie_of(const AutomataBase<S>& s, const T& v,
 	      hedge_t e)
@@ -336,7 +307,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename Element<S, T>::serie_value_t
   op_serie_value_of(const AutomataBase<S>& s, const T& v,
 		    hedge_t e)
@@ -345,7 +315,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename Element<S, T>::monoid_elt_t
   op_word_of(const AutomataBase<S>& s, const T& v,
 	     hedge_t e)
@@ -356,7 +325,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename Element<S, T>::monoid_elt_value_t
   op_word_value_of(const AutomataBase<S>& s, const T& v,
 		   hedge_t e)
@@ -365,7 +333,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   typename Element<S, T>::letter_t
   op_letter_of(const AutomataBase<S>&, const T& v,
 	       hedge_t e)
@@ -374,7 +341,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   bool
   op_is_spontaneous(const AutomataBase<S>& s, const T& v,
 		    hedge_t e)
@@ -448,7 +414,6 @@ namespace vcsn {
   };
 
   template <class S, class T>
-  inline
   spontaneous_query<S, T> make_spontaneous_query(const S& s,
 					    const T& t)
   {
@@ -461,7 +426,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator>
-  inline
   void op_delta(const AutomataBase<S>& s, const T& v,
 		OutputIterator res,
 		hstate_t from,
@@ -472,7 +436,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator, typename L>
-  inline
   void op_delta(const AutomataBase<S>&, const T& v,
 		OutputIterator res,
 		hstate_t from,
@@ -484,7 +447,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator, typename L>
-  inline
   void op_letter_delta(const AutomataBase<S>& s, const T& v,
 		       OutputIterator res,
 		       hstate_t from,
@@ -496,7 +458,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator>
-  inline
   void op_spontaneous_delta(const AutomataBase<S>& s,
 			    const T& v,
 			    OutputIterator res,
@@ -512,7 +473,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container>
-  inline
   void op_deltac(const AutomataBase<S>& s, const T& v,
 		 Container& res, hstate_t from, delta_kind::edges k)
   {
@@ -522,7 +482,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container, typename L>
-  inline
   void op_deltac(const AutomataBase<S>& s,
 		 const T& v,
 		 Container& res,
@@ -537,7 +496,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container, typename L>
-  inline
   void op_letter_deltac(const AutomataBase<S>& s,
 			const T& v,
 			Container& res,
@@ -551,7 +509,6 @@ namespace vcsn {
   }
 
   template <class S, class T, class Container>
-  inline
   void op_spontaneous_deltac(const AutomataBase<S>& s,
 			     const T& v,
 			     Container& res,
@@ -568,7 +525,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator>
-  inline
   void op_delta(const AutomataBase<S>& s, const T& v,
 		OutputIterator res,
 		hstate_t from,
@@ -579,7 +535,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator, typename L>
-  inline
   void op_delta(const AutomataBase<S>&, const T& v,
 		OutputIterator res,
 		hstate_t from,
@@ -591,7 +546,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator, typename L>
-  inline
   void op_letter_delta(const AutomataBase<S>& s, const T& v,
 		       OutputIterator res,
 		       hstate_t from,
@@ -603,7 +557,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator>
-  inline
   void op_spontaneous_delta(const AutomataBase<S>& s, const T& v,
 			    OutputIterator res,
 			    hstate_t from,
@@ -618,7 +571,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container>
-  inline
   void op_deltac(const AutomataBase<S>& s, const T& v,
 		 Container& res, hstate_t from, delta_kind::states k)
   {
@@ -628,7 +580,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container, typename L>
-  inline
   void op_deltac(const AutomataBase<S>& s,
 		 const T& v,
 		 Container& res,
@@ -643,7 +594,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container, typename L>
-  inline
   void op_letter_deltac(const AutomataBase<S>& s,
 			const T& v,
 			Container& res,
@@ -657,7 +607,6 @@ namespace vcsn {
   }
 
   template <class S, class T, class Container>
-  inline
   void op_spontaneous_deltac(const AutomataBase<S>& s,
 			     const T& v,
 			     Container& res,
@@ -674,7 +623,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator>
-  inline
   void op_rdelta(const AutomataBase<S>& s, const T& v,
 		 OutputIterator res,
 		 hstate_t from,
@@ -685,7 +633,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator, typename L>
-  inline
   void op_rdelta(const AutomataBase<S>&, const T& v,
 		 OutputIterator res,
 		 hstate_t from,
@@ -697,7 +644,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator, typename L>
-  inline
   void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
 			OutputIterator res,
 			hstate_t from,
@@ -709,7 +655,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator>
-  inline
   void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
 			     OutputIterator res,
 			     hstate_t from,
@@ -724,7 +669,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container>
-  inline
   void op_rdeltac(const AutomataBase<S>& s, const T& v,
 		  Container& res, hstate_t from, delta_kind::edges k)
   {
@@ -734,7 +678,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container, typename L>
-  inline
   void op_rdeltac(const AutomataBase<S>& s,
 		  const T& v,
 		  Container& res,
@@ -749,7 +692,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container, typename L>
-  inline
   void op_letter_rdeltac(const AutomataBase<S>& s,
 			 const T& v,
 			 Container& res,
@@ -762,7 +704,6 @@ namespace vcsn {
   }
 
   template <class S, class T, class  Container>
-  inline
   void op_spontaneous_rdeltac(const AutomataBase<S>& s,
 			      const T& v,
 			      Container& res,
@@ -779,7 +720,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator>
-  inline
   void op_rdelta(const AutomataBase<S>&, const T& v,
 		 OutputIterator res,
 		 hstate_t from,
@@ -790,7 +730,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator, typename L>
-  inline
   void op_rdelta(const AutomataBase<S>& s, const T& v,
 		 OutputIterator res,
 		 hstate_t from,
@@ -811,7 +750,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator, typename L>
-  inline
   void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
 			OutputIterator res,
 			hstate_t from,
@@ -823,7 +761,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename OutputIterator>
-  inline
   void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
 			     OutputIterator res,
 			     hstate_t from,
@@ -838,7 +775,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container>
-  inline
   void op_rdeltac(const AutomataBase<S>& s, const T& v,
 		  Container& res, hstate_t from, delta_kind::states k)
   {
@@ -848,7 +784,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container, typename L>
-  inline
   void op_rdeltac(const AutomataBase<S>& s,
 		  const T& v,
 		  Container& res,
@@ -863,7 +798,6 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Container, typename L>
-  inline
   void op_letter_rdeltac(const AutomataBase<S>& s,
 			 const T& v,
 			 Container& res,
@@ -876,7 +810,6 @@ namespace vcsn {
   }
 
   template <class S, class T, class Container>
-  inline
   void op_spontaneous_rdeltac(const AutomataBase<S>& s,
 			      const T& v,
 			      Container& res,

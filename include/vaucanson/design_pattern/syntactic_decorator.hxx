@@ -36,14 +36,14 @@
 
 namespace vcsn {
   template <typename S, typename T>
-  inline Element<S, T>&
+  Element<S, T>&
   SyntacticDecorator<S, T>::self() 
   { 
     return *static_cast<Element<S, T>*>(this); 
   }
     
   template <typename S, typename T>
-  inline const Element<S, T>& 
+  const Element<S, T>& 
   SyntacticDecorator<S, T>::self() const
   { 
     return *static_cast<const Element<S, T>*>(this); 
@@ -51,21 +51,21 @@ namespace vcsn {
     
 
   template <typename S, typename T>
-  inline const S&
+  const S&
   SyntacticDecorator<S, T>::set() const
   {
     return self().set();
   }
 
   template <typename S, typename T>
-  inline T&
+  T&
   SyntacticDecorator<S, T>::value()
   {
     return self().value();
   }
 
   template <typename S, typename T>
-  inline const T&
+  const T&
   SyntacticDecorator<S, T>::value() const
   {
     return self().value();
@@ -74,7 +74,7 @@ namespace vcsn {
 #define ELEMENT_IN_OPERATOR(Op, HookName)					\
       template <typename S, typename T>						\
       template<typename OtherS, typename U>					\
-      inline Element<S, T>&							\
+      Element<S, T>&							\
       SyntacticDecorator<S, T>::Op (const Element<OtherS, U>& other)		\
       {										\
 	op_in_ ## HookName (self().set(), other.set(), value(), other.value());	\
@@ -82,7 +82,7 @@ namespace vcsn {
       }										\
       template <typename S, typename T>						\
       template<typename U>							\
-      inline Element<S, T>&							\
+      Element<S, T>&							\
       SyntacticDecorator<S, T>::Op (const U& other)				\
       {										\
 	op_in_ ## HookName (self().set(), value(),				\
@@ -99,7 +99,7 @@ namespace vcsn {
 #undef ELEMENT_IN_OPERATOR
 
   template <typename S, typename T>
-  inline Element<S, T>& 
+  Element<S, T>& 
   SyntacticDecorator<S, T>::operator++()
   { 
     op_in_inc(self().set(), self().value()); 
@@ -107,7 +107,7 @@ namespace vcsn {
   }
     
   template <typename S, typename T>
-  inline Element<S, T> 
+  Element<S, T> 
   SyntacticDecorator<S, T>::operator++(int)
   { 
     Element<S, T> ret(self()); 
@@ -116,7 +116,7 @@ namespace vcsn {
   }
     
   template <typename S, typename T>
-  inline Element<S, T>& 
+  Element<S, T>& 
   SyntacticDecorator<S, T>::operator--()
   { 
     op_in_dec(self().set(), self().value()); 
@@ -124,7 +124,7 @@ namespace vcsn {
   }
     
   template <typename S, typename T>
-  inline Element<S, T> 
+  Element<S, T> 
   SyntacticDecorator<S, T>::operator--(int)
   { 
     Element<S, T> ret(self()); 
@@ -134,7 +134,7 @@ namespace vcsn {
     
   template <typename S, typename T>
   template <typename U>
-  inline Element<S, T>& 
+  Element<S, T>& 
   SyntacticDecorator<S, T>::swap(Element<S, U>& other)
   { 
     precondition(&set() == &other.set());
@@ -143,11 +143,10 @@ namespace vcsn {
   }
     
   template <typename S, typename T>
-  inline SyntacticDecorator<S, T>::SyntacticDecorator() 
+  SyntacticDecorator<S, T>::SyntacticDecorator() 
   {}
     
   template <typename S, typename T>
-  inline
   SyntacticDecorator<S, T>::SyntacticDecorator(const SyntacticDecorator&) 
   {} 
 

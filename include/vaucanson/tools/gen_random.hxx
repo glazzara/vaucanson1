@@ -43,19 +43,16 @@ namespace vcsn {
   using namespace algebra;
 
   template <class TAutomata>
-  inline
   GenRandomAutomata<TAutomata>::GenRandomAutomata() 
   {}
 
   template <class TAutomata>
-  inline
   GenRandomAutomata<TAutomata>::GenRandomAutomata(unsigned init) 
   { 
     srand(init); 
   }
   
   template <class TAutomata>
-  inline
   TAutomata GenRandomAutomata<TAutomata>::
   empty(unsigned nb_letter) 
   {
@@ -76,7 +73,6 @@ namespace vcsn {
   }
 
   template <class TAutomata>
-  inline
   TAutomata GenRandomAutomata<TAutomata>::
   generate(unsigned nb_state, unsigned nb_edge_, 
 	   unsigned istate, unsigned fstate,
@@ -160,7 +156,6 @@ namespace vcsn {
   }
   
   template <class TAutomata>
-  inline
   unsigned GenRandomAutomata<TAutomata>::
   nb_edge_circle(TAutomata work, hstate_t state)
   {    
@@ -175,7 +170,6 @@ namespace vcsn {
   }
   
   template <class TAutomata>
-  inline
   void GenRandomAutomata<TAutomata>::
   del_edge_circle(TAutomata& work, hstate_t state)
   {    
@@ -192,7 +186,6 @@ namespace vcsn {
   }
 
   template <class TAutomata>
-  inline
   TAutomata GenRandomAutomata<TAutomata>::
   generate_with_epsilon(unsigned nb_state, 
 			unsigned nb_edge,
@@ -212,7 +205,6 @@ namespace vcsn {
   }
   
   template <class TAutomata>
-  inline
   TAutomata GenRandomAutomata<TAutomata>::
   generate_dfa(unsigned nb_state, 
 	       unsigned size_alphabet, 
@@ -277,7 +269,6 @@ namespace vcsn {
 
 
   template <class TAutomata>
-  inline
   TAutomata GenRandomAutomata<TAutomata>::
   generate_normalized(unsigned nb_state, unsigned density)
   {
@@ -318,7 +309,6 @@ namespace vcsn {
   }
 
   template <class TAutomata>
-  inline
   unsigned GenRandomAutomata<TAutomata>::alea(unsigned max)
   {
     return ((unsigned) floor(((float) rand() / (float) RAND_MAX) * (max-1)));

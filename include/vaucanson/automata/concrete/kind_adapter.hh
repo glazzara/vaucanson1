@@ -38,7 +38,6 @@ namespace vcsn {
   //! automaton simpler.
 
 #define ADAPT_ADD_LETTER_EDGE_TO_SERIES_LABEL(T...)			\
-  inline \
   hedge_t								\
   op_add_letter_edge(const AutomataBase<S>& s,				\
 		     T& v,						\
@@ -60,7 +59,6 @@ namespace vcsn {
   }
 
 #define ADAPT_LETTER_OF_TO_SERIES_LABEL(T...)				\
-  inline \
   typename Element<AutomataBase<S>, T >::letter_t		\
   op_letter_of(const AutomataBase<S>& s,				\
 	       const T& v,					\
@@ -81,7 +79,6 @@ namespace vcsn {
   }
 
 #define ADAPT_WORD_OF_TO_SERIES_LABEL(T...)				\
-  inline \
   typename Element<AutomataBase<S>, T >::monoid_elt_t		\
   op_word_of(const AutomataBase<S>& s,					\
 	     const T& v,					\
@@ -101,7 +98,6 @@ namespace vcsn {
   }
 
 #define ADAPT_ADD_SERIE_EDGE_TO_LETTERS_LABEL(T...)			\
-  inline								\
   hedge_t 								\
   op_add_serie_edge(const AutomataBase<S>& a_set,			\
 		    T& v,						\
@@ -114,7 +110,6 @@ namespace vcsn {
   }
 
 #define ADAPT_WORD_OF_TO_LETTERS_LABEL(T...)			\
-  inline							\
   typename Element<AutomataBase<S>, T >::monoid_elt_t		\
   op_word_of(const AutomataBase<S>& a_set,			\
 	     const T& v,					\
@@ -132,7 +127,6 @@ namespace vcsn {
   }		
 
 #define ADAPT_SERIE_OF_TO_LETTERS_LABEL(T...)			\
-  inline							\
   typename Element<AutomataBase<S>, T >::series_elt_t			\
   op_serie_of(const AutomataBase<S>& a_set,			\
 	      const T& v,					\

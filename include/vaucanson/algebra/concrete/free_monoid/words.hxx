@@ -41,23 +41,23 @@ namespace vcsn {
     `---------*/
 
     template <class A>
-    inline FreeMonoid<A>::FreeMonoid(const A& a) : alph_(a)
+    FreeMonoid<A>::FreeMonoid(const A& a) : alph_(a)
     {}
 
     template <class A>
-    inline FreeMonoid<A>::FreeMonoid(const FreeMonoid& w) :
+    FreeMonoid<A>::FreeMonoid(const FreeMonoid& w) :
       FreeMonoidBase<FreeMonoid<A> >(w),
       alph_(w.alph_)
     {}
 
     template <class A>
-    inline A& FreeMonoid<A>::alphabet()
+    A& FreeMonoid<A>::alphabet()
     {
       return alph_;
     }
 
     template <class A>
-    inline const A& FreeMonoid<A>::alphabet() const
+    const A& FreeMonoid<A>::alphabet() const
     {
       return alph_;
     }

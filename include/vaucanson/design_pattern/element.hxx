@@ -40,7 +40,6 @@ namespace vcsn {
   `-------------*/
 
   template <class S, class T>
-  inline
   Element<S,T>::Element() :
     MetaElement<S, T>(),
     set_(),
@@ -54,7 +53,6 @@ namespace vcsn {
   `--------------------------*/
 
   template <class S, class T>
-  inline
   Element<S,T>::Element(const Element& other) :
     MetaElement<S, T>(other),
     set_(other.set_),
@@ -63,7 +61,6 @@ namespace vcsn {
 
   template <class S, class T>
   template<typename U>
-  inline
   Element<S,T>::Element(const Element<S, U>& other)
     : set_(other.set()),
       value_(op_convert(other.set(), SELECT(T), other.value()))
@@ -71,7 +68,6 @@ namespace vcsn {
 
   template <class S, class T>
   template<typename OtherS, typename U>
-  inline
   Element<S,T>::Element(const Element<OtherS, U>& other)
     : set_(),
       value_(op_convert(SELECT(S), SELECT(T),
@@ -85,7 +81,6 @@ namespace vcsn {
   `-------------------------*/
 
   template <class S, class T>
-  inline
   Element<S,T>::Element(const T& other)
     : set_(),
       value_(op_convert(SELECT(S), SELECT(T), other))
@@ -95,7 +90,6 @@ namespace vcsn {
 
   template <class S, class T>
   template<typename U>
-  inline
   Element<S,T>::Element(const U& other)
     : set_(),
       value_(op_convert(SELECT(S), SELECT(T), other))
@@ -108,21 +102,18 @@ namespace vcsn {
   `--------------------------------------*/
 
   template <class S, class T>
-  inline
   Element<S,T>::Element(const S& set)
     : set_(set),
       value_(op_default(set_.get(), SELECT(T)))
   {}
 
   template <class S, class T>
-  inline
   Element<S,T>::Element(const S& set, const T& other)
     : set_(set),
       value_(op_convert(set_.get(), SELECT(T), other))
   {}
   template <class S, class T>
   template<typename U>
-  inline
   Element<S,T>::Element(const S& set, const U& other)
     : set_(set),
       value_(op_convert(set_.get(), SELECT(T), other))
@@ -130,7 +121,6 @@ namespace vcsn {
 
   template <class S, class T>
   template<typename OtherS, typename U>
-  inline
   Element<S,T>::Element(const S& set, const Element<OtherS, U>& other)
     : set_(set),
       value_(op_convert(set_.get(), SELECT(T),
@@ -142,7 +132,6 @@ namespace vcsn {
   `-----------*/
 
   template <class S, class T>
-  inline
   Element<S,T>&
   Element<S,T>::operator=(const Element& other)
   {
@@ -152,7 +141,6 @@ namespace vcsn {
 
   template <class S, class T>
   template<typename U>
-  inline
   Element<S,T>&
   Element<S,T>::operator=(const Element<S, U>& other)
   {
@@ -162,7 +150,6 @@ namespace vcsn {
 
   template <class S, class T>
   template<typename OtherS, typename U>
-  inline
   Element<S,T>& Element<S,T>::operator=(const Element<OtherS, U>& other)
   {
     op_assign(set(), other.set(), value_, other.value());
@@ -171,7 +158,6 @@ namespace vcsn {
 
   template <class S, class T>
   template<typename U>
-  inline
   Element<S,T>& Element<S,T>::operator=(const U& other)
   {
     op_assign(set(), value(), other);
@@ -183,7 +169,6 @@ namespace vcsn {
   `------*/
 
   template <class S, class T>
-  inline
   void
   Element<S,T>::attach(const S& set)
   {
@@ -191,7 +176,6 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   const S&
   Element<S,T>::set() const
   {
@@ -199,14 +183,12 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  inline
   T&	Element<S,T>::value()
   {
     return value_;
   }
 
   template <class S, class T>
-  inline
   const T&	Element<S,T>::value() const
   {
     return value_;

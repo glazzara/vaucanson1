@@ -50,7 +50,7 @@ namespace utility
   namespace concepts
   {
     template <typename Concept_>
-    static inline void function_requires()
+    static void function_requires()
     {
       void (Concept_::*ptr)() UnusedConceptVar = &Concept_::constraints;
     }

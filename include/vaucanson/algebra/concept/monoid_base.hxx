@@ -68,7 +68,6 @@ namespace vcsn {
 
     template <class T>
     template <class S>
-    inline
     Element<S, T>
     identity_as<T>::of(const S& s)
     {
@@ -77,7 +76,6 @@ namespace vcsn {
 
     template <class T>
     template <class S>
-    inline
     Element<S, T>
     zero_as<T>::of(const S& s)
     {

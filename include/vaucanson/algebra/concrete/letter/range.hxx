@@ -93,7 +93,6 @@ namespace vcsn {
     }
 
     template <char From, char To>
-    inline
     bool
     static_char_interval<From, To>::check(char c)
     {
@@ -101,21 +100,18 @@ namespace vcsn {
     }
 
     template <char From, char To>
-    inline
     char static_char_interval<From, To>::from()
     {
       return From;
     }
 
     template <char From, char To>
-    inline
     char static_char_interval<From, To>::to()
     {
       return To;
     }
 
     template <char From, char To>
-    inline
     char static_char_interval<From, To>::random()
     {
       unsigned r = 
