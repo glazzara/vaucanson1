@@ -92,6 +92,20 @@ namespace vcsn {
   void
   realtime_here(Element<S, T>& e);
 
+
+  /**
+   * Test whether an automaton or a regular expression is realtime.
+   *
+   * This function returns true if the input is realtime.
+   *
+   * @param a The automaton or regular expression to test.
+   *
+   * @see realtime()
+   */
+  template <typename S, typename T>
+  bool
+  is_realtime(const Element<S, T>& e);
+
   /** @} */
 
 } // vcsn

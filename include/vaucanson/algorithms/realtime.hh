@@ -56,19 +56,6 @@ namespace vcsn {
   enum realtime_type { forward, backward };
 
   /**
-   * Test whether an automaton is realtime.
-   *
-   * This function returns true if the input automaton is realtime.
-   *
-   * @param a The automaton to test.
-   *
-   * @see realtime()
-   */
-  template<typename A, typename T>
-  bool
-  is_realtime(const Element<A, T>& a);
-
-  /**
    * In place modification of the automaton to make it realtime.
    *
    * This  algorithm   makes  an  automaton  realtime.   It  calls  @c

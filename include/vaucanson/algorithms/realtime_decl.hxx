@@ -48,6 +48,13 @@ namespace vcsn {
     return do_realtime_here(e.set(), e);
   }
 
+  template<typename S, typename T>
+  bool
+  is_realtime(const Element<S, T>& e)
+  {
+    return do_is_realtime(e.set(), e);
+  }
+
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_REALTIME_DECL_HXX

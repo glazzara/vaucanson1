@@ -59,12 +59,6 @@ namespace vcsn {
     return true;
   }
 
-  template<typename A, typename T>
-  bool
-  is_realtime(const Element<A, T>& a)
-  {
-    return do_is_realtime(a.set(), a);
-  }
 
   /*--------------.
   | realtime_here |

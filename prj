@@ -1,15 +1,21 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 548)
-(Parent-Version vaucanson 0 547)
+(Project-Version vaucanson 0 549)
+(Parent-Version vaucanson 0 548)
 (New-Version-Log "")
 
-(Version-Log "2004-03-17  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+(Version-Log "2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
-	* src/tests/tests-suites/algebra_series_krat_cderivation.defs: New.")
-(Checkin-Time "Wed, 17 Mar 2004 00:45:42 +0100")
-(Checkin-Login fosse_l)
+	* include/vaucanson/algorithms/realtime.hh,
+	* include/vaucanson/algorithms/realtime.hxx: Move declaration of
+	is_realtime...
+	* include/vaucanson/algorithms/realtime_decl.hh,
+	* include/vaucanson/algorithms/realtime_decl.hxx: ... To here.
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx:
+	Add do_is_realtime.")
+(Checkin-Time "Wed, 17 Mar 2004 11:20:38 +0100")
+(Checkin-Login o-conn_s)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -378,8 +384,8 @@
   (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.29 600))
   (include/vaucanson/algorithms/accessible.hh (vaucanson/d/33_reachable. 1.18 600))
   (include/vaucanson/algorithms/accessible.hxx (vaucanson/d/32_reachable. 1.16 600))
-  (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.17 600))
-  (include/vaucanson/algorithms/realtime.hxx (vaucanson/e/47_realtime.h 1.16 600))
+  (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.18 644))
+  (include/vaucanson/algorithms/realtime.hxx (vaucanson/e/47_realtime.h 1.17 644))
   (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.16 600))
   (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.17 600))
   (include/vaucanson/algorithms/thompson.hh (vaucanson/e/45_thompson.h 1.15 600))
@@ -404,7 +410,7 @@
   (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.14 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.10 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.8 600))
-  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.9 600))
+  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.10 644))
   (include/vaucanson/algorithms/krat_exp_realtime.hh (vaucanson/j/36_krat_exp_r 1.8 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.3.1.7 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.13 600))
@@ -1104,8 +1110,8 @@
 ;; Files added by populate at Sun, 14 Mar 2004 23:46:12 +0100,
 ;; to version 0.538(w), by clavei_t:
 
-  (include/vaucanson/algorithms/realtime_decl.hxx (vaucanson/v/23_realtime_d 1.1 600))
-  (include/vaucanson/algorithms/realtime_decl.hh (vaucanson/v/24_realtime_d 1.2 600))
+  (include/vaucanson/algorithms/realtime_decl.hxx (vaucanson/v/23_realtime_d 1.2 600))
+  (include/vaucanson/algorithms/realtime_decl.hh (vaucanson/v/24_realtime_d 1.3 600))
 
 ;; Files added by populate at Mon, 15 Mar 2004 18:23:53 +0100,
 ;; to version 0.542(w), by clavei_t:

@@ -37,6 +37,58 @@
 
 namespace vcsn {
 
+  namespace algebra
+  {
+    template <class Series, class T, class Dispatch>
+    struct KRatExpIsRealtime : algebra::KRatExpIdentity<
+      KRatExpIsRealtime<Series, T, Dispatch>,
+      Series,
+      bool,
+      Dispatch
+      >
+    {
+      typedef KRatExpRealtime<Series, T, Dispatch>	self_t;
+      typedef bool					return_type;
+      typedef typename Element<Series, T>::semiring_elt_t semiring_elt_t;
+      typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
+      typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
+      typedef typename monoid_elt_t::value_t		monoid_value_t;
+      typedef typename monoid_elt_t::set_t		monoid_t;
+      typedef typename monoid_t::alphabet_t		alphabet_t;
+      typedef typename alphabet_t::letter_t		letter_t;
+      INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
+
+      KRatExpIsRealtime(const Element<Series, T>& exp) :
+ 	KRatExpIdentity<KRatExpIsRealtime<Series, T, Dispatch>,
+ 			Series,
+ 			bool,
+ 			Dispatch
+ 			>(exp)
+      {}
+
+      MATCH_(Constant, m)
+      {
+	monoid_value_t::const_iterator i = m.begin();
+	return ++i == m.end();
+      }
+      END
+    };
+
+  } // End of namespace algebra.
+
+  template <class Exp_, class S_>
+  bool
+  do_is_realtime(const algebra::SeriesBase<S_>&, const Exp_& exp)
+  {
+    typedef S_				S;
+    typedef typename Exp_::value_t	T;
+
+    algebra::KRatExpIsRealtime< S, T, algebra::DispatchFunction<T> >
+      matcher(exp);
+    return matcher.match(exp.value());
+  }
+
+
   namespace algebra {
 
     template <class Series, class T, class Dispatch>
@@ -82,6 +134,8 @@ namespace vcsn {
       }
       END
     };
+
+
 
   } // algebra
 
