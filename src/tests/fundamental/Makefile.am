@@ -12,4 +12,4 @@ check_PROGRAMS = \
 
 element_full_test_SOURCES = element-full-test.cc
 
-
+EXTRA_DIST = design_pattern-test.hh
