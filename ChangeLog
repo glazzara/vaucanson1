@@ -1,3 +1,9 @@
+2003-05-30  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/misc/unique.hcc,
+	  include/vaucanson/misc/unique.hh,
+	  include/vaucanson/misc/unique.hxx: New.
+
 2003-05-27  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/internal/traits.hh: Document.
