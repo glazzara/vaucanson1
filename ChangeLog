@@ -1,3 +1,12 @@
+2004-03-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/automata/concrete/graph.hh,
+	* include/vaucanson/automata/concrete/graph.hxx: Implements exists()
+	and safe_del_state().
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx:Modify 
+	op_exists() prototype.
+
 2004-03-05  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/tests/tests-suites/algebra_numerical_semiring_bool.defs,

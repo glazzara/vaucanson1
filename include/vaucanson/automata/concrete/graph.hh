@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_CONCRETE_GRAPH_HH
 # define VCSN_AUTOMATA_CONCRETE_GRAPH_HH
@@ -41,6 +43,7 @@
 # include <set>
 # include <map>
 # include <vector>
+
 
 namespace vcsn {
 
@@ -117,6 +120,11 @@ namespace vcsn {
   public:
     Graph();
 
+    template <class S>
+    bool			exists(const AutomataBase<S>& s) const;
+
+    void			safe_del_state(hstate_t);
+    
     hstate_t			add_state();
     void			del_state(hstate_t);
     bool			has_state(hstate_t) const;
@@ -410,9 +418,9 @@ namespace vcsn {
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concrete/graph.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/automata/concrete/graph.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // VCSN_AUTOMATA_CONCRETE_GRAPH_HH

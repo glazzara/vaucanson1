@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
 #ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_OPS_HH
@@ -59,9 +61,11 @@ namespace vcsn {
   typename automaton_traits<T>::tag_t&
   op_get_tag(const AutomataBase<S>&, T&);
 
+
+  // Interface modified for exists()
   template <class S, class T>
   bool
-  op_exists(const AutomataBase<S>&, const T&);
+  op_exists(const AutomataBase<S>& s, const T&);
 
   template <class S, class T>
   typename automaton_traits<T>::states_t

@@ -1,7 +1,7 @@
 // graph.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_CONCRETE_GRAPH_HXX
 # define VCSN_AUTOMATA_CONCRETE_GRAPH_HXX
@@ -33,6 +35,9 @@
 # include <vaucanson/automata/concrete/graph.hh>
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/tools/usual_macros.hh>
+
+# include <vaucanson/algebra/concept/series_base.hh>
+
 
 namespace vcsn {
 
@@ -72,6 +77,54 @@ namespace vcsn {
     first_state_ = 0;
     first_edge_ = 0;
   }
+
+  
+  TParam
+  template <class S>
+  bool
+  GClass::exists(const AutomataBase<S>& s) const
+  {
+    typename WordValue::iterator				it;
+    typename label_t::const_iterator				r;
+    label_t							l;
+    WordValue							w;
+								  
+    for (int i = first_edge_; i < int(edges_.size()); ++i)
+      {
+	// Make sure that origin and aim of edge are part of the automaton
+	if (!has_state(aim_of(hedge_t(i))) ||
+	    !has_state(origin_of(hedge_t(i))))
+	  return false;
+
+	// Make sure that every letter of the edge is in the alphabet.
+	l = label_of(hedge_t(i));
+	for (r = l.begin(); r != l.end(); ++r)
+	  {
+	    w = r->first;
+	    for (it = w.begin(); it != w.end(); ++it)
+	      if (!s.series().monoid().alphabet().contains(*it))
+		return false;
+	  }
+      }
+    return true;
+  }
+
+
+  TParam
+  void GClass::safe_del_state(hstate_t n)
+  {
+    precondition(has_state(n));
+
+    // Call standard del_state.
+    del_state(n);
+    
+    // Perform a check with all edges to see if no ones are related,
+    // and delete them if so.
+    for (int i = first_edge_; i < int(edges_.size()); ++i)
+      if (aim_of(hedge_t(i)) == n || origin_of(hedge_t(i)) == n)
+	del_edge(hedge_t(i));
+  }
+
 
   TParam
   inline

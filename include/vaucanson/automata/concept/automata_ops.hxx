@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_OPS_HXX
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_OPS_HXX
@@ -60,9 +62,9 @@ namespace vcsn {
   template <class S, class T>
   inline
   bool
-  op_exists(const AutomataBase<S>&, const T& v)
+  op_exists(const AutomataBase<S>& s, const T& v)
   {
-    return v.exists();
+    return v.exists(s);
   }
 
   template <class S, class T>
@@ -123,7 +125,7 @@ namespace vcsn {
        v.get_initial(state,
 		     zero_value(s.series(),
 				SELECT(AutoType(serie_value_t)))));
-       }
+  }
 
   template <class S, class T>
   inline
