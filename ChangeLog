@@ -1,5 +1,9 @@
 2003-11-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* doc/doxy.in (INPUT): Remove doc/src.
+
+2003-11-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/krat_exp_print.h{hxx}: New.
 
 2003-11-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
