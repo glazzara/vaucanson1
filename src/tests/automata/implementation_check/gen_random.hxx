@@ -120,6 +120,104 @@ namespace vcsn
     return work;
   }
   
+  template <class TAutomata>
+  unsigned GenRandomAutomata<TAutomata>::
+  nb_edge_circle(TAutomata work, hstate_t state)
+  {    
+    typedef typename TAutomata::edges_t edges_t;
+    typedef typename TAutomata::edge_iterator edge_iterator;
+    unsigned res = 0;
+    
+    for (edge_iterator i = work.edges().begin(); i != work.edges().end(); i++)
+      if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
+	res++;
+
+    return res;
+  }
+  
+  template <class TAutomata>
+  void GenRandomAutomata<TAutomata>::
+  del_edge_circle(TAutomata work, hstate_t state)
+  {    
+    typedef typename TAutomata::edges_t edges_t;
+    typedef typename TAutomata::edge_iterator edge_iterator;
+    
+    for (edge_iterator i = work.edges().begin(); i != work.edges().end(); i++)
+      if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
+	work.del_edge(*i);
+  }
+  
+  template <class TAutomata>
+  TAutomata GenRandomAutomata<TAutomata>::
+  generate_afd(unsigned nb_state, 
+	       unsigned size_alphabet, 
+	       unsigned fstate = 1)
+  {
+    // check for coherence 
+    if (size_alphabet > 26) size_alphabet = 26;
+    if (nb_state < 1) size_alphabet = 1;
+    
+
+    // file for output format (graphwiz)
+    std::filebuf fb;
+    fb.open ("automaton.dot", std::ios::out);
+    std::ostream os(&fb);
+
+    TAutomata work;
+    work.create();
+
+    typedef typename TAutomata::states_t states_t;
+    typedef typename TAutomata::state_iterator state_iterator;
+    typedef typename TAutomata::monoid_t::alphabet_t alphabet_t;
+    typedef typename alphabet_t::iterator alphabet_iterator;
+
+
+    for (unsigned i = 0; i < nb_state; i++)
+      work.add_state();
+
+    // alphabet construction 
+    alphabet_t& alpha = work.series().monoid().alphabet();
+
+    for (unsigned i = 0; i < size_alphabet; i++)
+      alpha.insert('a' + i);
+     
+    
+    for (state_iterator i = work.states().begin();
+	 i != work.states().end(); i++)
+      {
+	for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
+	  work.add_letter_edge(*i, 
+			       work.select_state(alea(work.states().size())), 
+			       *j);
+	while (nb_edge_circle(work, *i) == alpha.size())
+	  {
+	    del_edge_circle(work, *i);
+	    for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
+	      work.add_letter_edge(*i, 
+				   work.select_state(alea(work.states().size())), 
+				   *j);
+	  }
+      }
+
+    // set initial states
+    work.set_initial(work.select_state(alea(work.states().size())));
+    
+    // set final states
+    for (unsigned i = 0; i < fstate; i++)
+      {
+	hstate_t tmp = work.select_state(alea(work.states().size()));
+	while (work.is_final(tmp))
+	  tmp = work.select_state(alea(work.states().size()));
+	work.set_final(tmp);
+      }
+
+    // generation of output file
+    misc::dot_dump(os, work, "test");
+    
+    return work;
+  }
+
+
 
   template <class TAutomata>
   unsigned GenRandomAutomata<TAutomata>::alea(unsigned max)

@@ -1,3 +1,13 @@
+2002-07-12  Maxime Rey  <max@lrde.epita.fr>
+
+	* src/tests/automata/implementation_check/gen_random.cc : added
+	in order to test generation of automata
+	* src/tests/automata/implementation_check/gen_random.hh : modified
+	src/tests/automata/implementation_check/gen_random.hxx : modified
+	in order to add generation of determinist automata.
+	* src/tests/automata/algos/check_determinist.cc : modified 
+	Check of is_deterministic routine
+
 2002-07-11  Maxime Rey  <max@lrde.epita.fr>
 
 	* little changes in kinds.hxx :
