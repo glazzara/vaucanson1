@@ -1,3 +1,15 @@
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	The expansion of a rational expression is an algorithm, and has nothing
+	to do with an implementation of series.
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hh:
+	Move...
+	* include/vaucanson/algorithms/krat_exp_expand.hxx,
+	* include/vaucanson/algorithms/series/krat_exp_expand.hh: ... Here.
+	* include/Makefile.am: Add krat_exp_expand.hh and krat_exp_expand.hxx.
+
 2004-07-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* configure.ac: Re-enable Vaucanswig by default.

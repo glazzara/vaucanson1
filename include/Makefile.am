@@ -279,6 +279,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/krat_exp_realtime.hh			   \
 	vaucanson/algorithms/krat_exp_linearize.hxx			   \
 	vaucanson/algorithms/krat_exp_linearize.hh			   \
+	vaucanson/algorithms/krat_exp_expand.hh				   \
+	vaucanson/algorithms/krat_exp_expand.hxx			   \
 	vaucanson/algorithms/closure.hh					   \
 	vaucanson/algorithms/closure.hxx				   \
 	vaucanson/algorithms/forward_realtime.hxx			   \
