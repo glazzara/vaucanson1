@@ -71,9 +71,11 @@ namespace utility
      *
      * @see @c vcsn::Structure
      */
-    struct unique_map
+    template <class T>
+    struct UniqueMap
     {
-      /** Helper to make @c std::type_info into a valid key type for @c std::map */
+      /** Helper to make @c std::type_info into a valid key type for
+	  @c std::map */
       struct ti_slot
       {
 	inline ti_slot(const std::type_info& );
@@ -92,15 +94,17 @@ namespace utility
       /** Constructor for the class. 
        *  It is protected so that no secondary instances may be created. 
        */
-      unique_map(); 
+      UniqueMap(); 
       /** Destructor for the class.
        *
        * This destructor actually destroys all stored canonical
        * instances. Any further reference to the canonical values is
        * invalid.
        */
-      ~unique_map();
+      ~UniqueMap();
     };
+
+#define unique_map UniqueMap<int>
 
     struct unifiable
     {

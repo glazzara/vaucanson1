@@ -1,5 +1,43 @@
 2003-10-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/misc/unique.hh, 
+	* include/vaucanson/misc/unique.hxx:
+		Try a trick for the removal of unique.hcc.
+	* include/vaucanson/misc/unique.hcc: Minor.
+	
+	* src/demos/samples/algorithms/derivatives_automaton.cc,
+	  src/demos/vgrep/vgrep.cc,
+	  src/demos/vaucanswig/meta/vauto.cc: Do not use 
+		unique.hcc anymore.
+
+	
+	* include/vaucanson/algebra/concept/alphabets_base.hxx,
+	  include/vaucanson/algebra/concept/freemonoid_base.hxx,
+	  include/vaucanson/algebra/concept/monoid_base.hxx,
+	  include/vaucanson/algebra/concept/semiring_base.hxx,
+	  include/vaucanson/algebra/concept/series_base.hxx,
+	  include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx,
+	  include/vaucanson/automata/concept/automata_base.hxx,
+	  include/vaucanson/automata/concept/automata_ops.hxx,
+	  include/vaucanson/automata/concept/history.hxx,
+	  include/vaucanson/automata/concept/transducer_base.hh,
+	  include/vaucanson/automata/concept/transducer_base.hxx,
+	  include/vaucanson/automata/concrete/transpose_view.hxx,
+	  include/vaucanson/automata/concrete/automaton_view.hxx,
+	  include/vaucanson/algorithms/determinize.hxx,
+	  include/vaucanson/algorithms/hopcroft_minimization.hxx,
+	  include/vaucanson/algorithms/minimization_moore.hxx,
+	  include/vaucanson/algorithms/product.hxx,
+	  include/vaucanson/algorithms/sum.hxx,
+	  include/vaucanson/tools/usual_macros.hh: Be g++-3.4 compliant
+		- add "this->" when the compiler fails to resolve 
+		  self method call,
+		- add explicit inheritance of typedef in hairy
+		  inheritance between template classes.
+		- fix new error detected by g++-3.4.
+
+2003-10-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/Makefile.am: Adjust.
 
 2003-10-02  Yann Régis-Gianas  <yann@lrde.epita.fr>

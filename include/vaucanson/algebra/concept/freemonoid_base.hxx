@@ -43,14 +43,14 @@ namespace vcsn {
     typename FreeMonoidBase<Self>::alphabet_t& 
     FreeMonoidBase<Self>::alphabet() 
     { 
-      return self().alphabet(); 
+      return this->self().alphabet(); 
     }
     
     template <class Self>
     const typename FreeMonoidBase<Self>::alphabet_t& 
     FreeMonoidBase<Self>::alphabet() const
     { 
-      return self().alphabet(); 
+      return this->self().alphabet(); 
     }
     
     template <class Self>

@@ -28,7 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
 #include "vauto.hh"
-#include <vaucanson/misc/unique.hcc>
+// #include <vaucanson/misc/unique.hcc>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
@@ -49,7 +49,9 @@ namespace vcsn
     return os.str();
   }
 
-  void virtual_automaton::dot_run(const char *fname, const char *cmd, const char *name) const
+  void virtual_automaton::dot_run(const char *fname, 
+				  const char *cmd, 
+				  const char *name) const
   {
     {
       std::ofstream of(fname);

@@ -45,28 +45,28 @@ namespace vcsn {
     const typename SeriesBase<Self>::monoid_t& 
     SeriesBase<Self>::monoid() const
     { 
-      return self().monoid(); 
+      return this->self().monoid(); 
     }
     
     template<class Self>
     const typename SeriesBase<Self>::semiring_t& 
     SeriesBase<Self>::semiring() const
     { 
-      return self().semiring(); 
+      return this->self().semiring(); 
     }
 
     template<class Self>
     typename SeriesBase<Self>::monoid_t& 
     SeriesBase<Self>::monoid() 
     { 
-      return self().monoid(); 
+      return this->self().monoid(); 
     }
 
     template<class Self>     
     typename SeriesBase<Self>::semiring_t& 
     SeriesBase<Self>::semiring() 
     { 
-      return self().semiring(); 
+      return this->self().semiring(); 
     }
 
     template<class Self>     
@@ -90,7 +90,7 @@ namespace vcsn {
   MetaElement<algebra::SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
   { 
     // assertion(set().monoid().contains(m));
-    return op_series_get(this->set(), value(), m);
+    return op_series_get(this->set(), this->value(), m);
   }
 
   template<typename S, typename T>
@@ -107,7 +107,7 @@ namespace vcsn {
   { 
     // assertion(set().monoid().contains(m));
     // assertion(set().semiring().contains(w));
-    return op_series_set(this->set(), value(), m, w);
+    return op_series_set(this->set(), this->value(), m, w);
   }
 
   template<typename S, typename T>
@@ -122,28 +122,28 @@ namespace vcsn {
   bool 
   MetaElement<algebra::SeriesBase<S>, T>::is_finite_app() const
   { 
-    return op_is_finite_app(this->set(), value()); 
+    return op_is_finite_app(this->set(), this->value()); 
   }
 
   template <typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
   MetaElement<algebra::SeriesBase<S>, T>::choose_from_supp() const
   {
-    return op_choose_from_supp(this->set(), value());
+    return op_choose_from_supp(this->set(), this->value());
   }
 
   template <typename S, typename T>
   void
   MetaElement<algebra::SeriesBase<S>, T>::transpose()
   {
-    op_in_transpose(this->set(), value());
+    op_in_transpose(this->set(), this->value());
   }
 
   template <typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::support_t
   MetaElement<algebra::SeriesBase<S>, T>::supp() const  
   {
-    return op_support(this->set(), value());
+    return op_support(this->set(), this->value());
   }
 
   template<typename S, typename T>

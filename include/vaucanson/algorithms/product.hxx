@@ -38,7 +38,6 @@
 # include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
-# include <vaucanson/automata/concept/history.hh>
 
 namespace vcsn {
 

@@ -37,7 +37,6 @@
 
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/automata/concept/history.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 
 namespace vcsn {

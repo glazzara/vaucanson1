@@ -30,6 +30,9 @@
 #ifndef VCSN_TOOLS_USUAL_MACROS_HH
 # define VCSN_TOOLS_USUAL_MACROS_HH
 
+#define INHERIT_TYPEDEF_(From, Type) \
+   typedef typename From::Type Type;
+
 #define AUTOMATON_TYPES_(AutoType,Prefix)				      \
  typedef AutoType			Prefix##automaton_t;		      \
  typedef typename AutoType::set_t	Prefix##automata_set_t;		      \

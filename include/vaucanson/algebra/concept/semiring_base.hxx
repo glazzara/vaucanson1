@@ -57,7 +57,7 @@ namespace vcsn {
     bool
     SemiringBase<Self>::can_choose_non_starable(SELECTOR(T)) const
     {
-      return op_can_choose_non_starable(self(), SELECT(T));
+      return op_can_choose_non_starable(this->self(), SELECT(T));
     }
 
     template <class Self>
@@ -65,7 +65,7 @@ namespace vcsn {
     Element<Self, T>
     SemiringBase<Self>::choose_starable(SELECTOR(T)) const
     {
-      return op_choose_starable(self(), SELECT(T));
+      return op_choose_starable(this->self(), SELECT(T));
     }
     
     template <class Self>
@@ -73,7 +73,7 @@ namespace vcsn {
     Element<Self, T>
     SemiringBase<Self>::choose_non_starable(SELECTOR(T)) const
     {
-      return op_choose_non_starable(self(), SELECT(T));
+      return op_choose_non_starable(this->self(), SELECT(T));
     }
     
   } // algebra
@@ -88,7 +88,7 @@ namespace vcsn {
   MetaElement<algebra::SemiringBase<Self>, T>::star()
   { 
     op_in_star(this->set(), this->value());
-    return self();
+    return this->self();
   }
 
   template <class Self, class T>

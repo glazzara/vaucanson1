@@ -34,6 +34,7 @@
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/fundamental/predecls.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
@@ -105,6 +106,74 @@ namespace vcsn {
   struct MetaElement<TransducerBase<Self>, T>
     : MetaElement<AutomataBase<Self>, T>
   {
+    /*! type of the interface of an automaton. */
+    typedef MetaElement<AutomataBase<Self>, T>		      automaton_t;
+
+    /*! type the series set from which is build the automaton. */
+    INHERIT_TYPEDEF_(automaton_t, series_t);
+
+    /*! type of the implementation of series that holds the automaton. */
+    INHERIT_TYPEDEF_(automaton_t, serie_value_t);
+
+    /*! type of the element of the set of series that holds the automaton. */
+    INHERIT_TYPEDEF_(automaton_t, serie_t);
+
+    INHERIT_TYPEDEF_(automaton_t, series_elt_t);
+
+    /*! type of the free monoid. */
+    INHERIT_TYPEDEF_(automaton_t, monoid_t);
+
+    /*! type of the free monoid element. */
+    INHERIT_TYPEDEF_(automaton_t, monoid_elt_t);
+
+    /*! type of the implementation of a word. */
+    INHERIT_TYPEDEF_(automaton_t, monoid_elt_value_t);
+
+    /*! type of the letter. */
+    INHERIT_TYPEDEF_(automaton_t, letter_t);
+
+    /*! type of the semiring set. */
+    INHERIT_TYPEDEF_(automaton_t, semiring_t);
+
+    /*! type of the free monoid element. */
+    INHERIT_TYPEDEF_(automaton_t, semiring_elt_t);
+
+    /*! type of the implementation of a semiring_elt. */
+    INHERIT_TYPEDEF_(automaton_t, semiring_elt_value_t);
+
+    /*! type of additional information that is aggregated to the automaton. */
+    INHERIT_TYPEDEF_(automaton_t, tag_t);
+
+    /*! type of the label of the automaton implementation. */
+    INHERIT_TYPEDEF_(automaton_t, label_t);
+
+    /*! type of the states container. */
+    INHERIT_TYPEDEF_(automaton_t, states_t);
+
+    /*! type of the iterator over the states set. */
+    INHERIT_TYPEDEF_(automaton_t, state_iterator);
+
+    /*! type of the edges set. */
+    INHERIT_TYPEDEF_(automaton_t, edges_t);
+
+    /*! type of the iterator over the edges. */
+    INHERIT_TYPEDEF_(automaton_t, edge_iterator);
+
+    /*! type of the initial application. */
+    INHERIT_TYPEDEF_(automaton_t, initial_t);
+
+    /*! type of the initial application support. */
+    INHERIT_TYPEDEF_(automaton_t, initial_support_t);
+
+    /*! type of the iterator of the initial application support. */
+    INHERIT_TYPEDEF_(automaton_t, initial_iterator);
+
+    /*! type of the final application. */
+    INHERIT_TYPEDEF_(automaton_t, final_t);
+
+    /*! type of the iterator of the final application support. */
+    INHERIT_TYPEDEF_(automaton_t, final_iterator);
+
     /*! type of the interface of an automaton. */
     typedef MetaElement<TransducerBase<Self>, T>	      self_t;
 

@@ -103,13 +103,14 @@ namespace vcsn {
     AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e, 
 						       hstate_t s)
     {
-      for (typename state_events_t::const_iterator ev 
-	     = states_events_[s].begin();
-	   ev != states_events_[s].end();
-	   ++ev)
-	if (ev->second->get_event_kind() == e)
-	  return false;
-      states_events_[s].push_front(new Event<hstate_t>(e));
+      // FIXME: fix this code.
+//       for (typename state_events_t::const_iterator ev 
+// 	     = states_events_[s].begin();
+// 	   ev != states_events_[s].end();
+// 	   ++ev)
+// 	if (ev->second->get_event_kind() == e)
+// 	  return false;
+//       states_events_[s].push_front(new Event<hstate_t>(e));
       return true;
     }
 

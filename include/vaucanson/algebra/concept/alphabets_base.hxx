@@ -63,56 +63,56 @@ namespace vcsn {
   size_t 
   MetaElement<algebra::AlphabetSetBase<S>, T>::size() const
   { 
-    return op_size(set(), value()); 
+    return op_size(this->set(), this->value()); 
   }
     
   template<typename S, typename T>
   bool 
   MetaElement<algebra::AlphabetSetBase<S>, T>::contains(const letter_t& l) const
   { 
-    return op_contains_e(set(), value(), l); 
+    return op_contains_e(this->set(), this->value(), l); 
   }
     
   template<typename S, typename T>
   bool 
   MetaElement<algebra::AlphabetSetBase<S>, T>::is_finite() const
   { 
-    return op_is_finite(set(), value()); 
+    return op_is_finite(this->set(), this->value()); 
   }
     
   template<typename S, typename T>
   typename MetaElement<algebra::AlphabetSetBase<S>, T>::iterator 
   MetaElement<algebra::AlphabetSetBase<S>, T>::begin() 
   { 
-    return op_begin(set(), value()); 
+    return op_begin(this->set(), this->value()); 
   }
     
   template<typename S, typename T> 
   typename MetaElement<algebra::AlphabetSetBase<S>, T>::const_iterator 
   MetaElement<algebra::AlphabetSetBase<S>, T>::begin() const
   { 
-    return op_begin_const(set(), value()); 
+    return op_begin_const(this->set(), this->value()); 
   }
     
   template<typename S, typename T>
   typename MetaElement<algebra::AlphabetSetBase<S>, T>::iterator 
   MetaElement<algebra::AlphabetSetBase<S>, T>::end() 
   { 
-    return op_end(set(), value()); 
+    return op_end(this->set(), this->value()); 
   }
     
   template<typename S, typename T>
   typename MetaElement<algebra::AlphabetSetBase<S>, T>::const_iterator 
   MetaElement<algebra::AlphabetSetBase<S>, T>::end() const
   { 
-    return op_end_const(set(), value()); 
+    return op_end_const(this->set(), this->value()); 
   }
     
   template<typename S, typename T>
   void 
   MetaElement<algebra::AlphabetSetBase<S>, T>::insert(const letter_t& l) 
   { 
-    op_insert(set(), value(), l); 
+    op_insert(this->set(), this->value(), l); 
   }
 
   template<typename S, typename T>
@@ -120,7 +120,7 @@ namespace vcsn {
   MetaElement<algebra::AlphabetSetBase<S>, T>::letter_equality(letter_t lhs, 
 							       letter_t rhs) const
   { 
-    return op_letter_equality(set(), value(), lhs, rhs);
+    return op_letter_equality(this->set(), this->value(), lhs, rhs);
   }
     
   template<typename S, typename T>

@@ -35,7 +35,6 @@
 # include <queue>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/automata/concept/history.hh>
 # include <vaucanson/algorithms/accessible.hh>
 
 namespace vcsn {

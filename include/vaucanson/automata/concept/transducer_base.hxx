@@ -64,7 +64,7 @@ namespace vcsn {
   typename MetaElement<TransducerBase<Self>, T>::input_monoid_elt_t
   MetaElement<TransducerBase<Self>, T>::input_of(hedge_t e) const
   {
-    return op_input_of(this->set(), value(), e);
+    return op_input_of(this->set(), this->value(), e);
   }
 
   template <typename Self, typename T>
@@ -72,7 +72,7 @@ namespace vcsn {
   typename MetaElement<TransducerBase<Self>, T>::output_serie_t
   MetaElement<TransducerBase<Self>, T>::output_of(hedge_t e) const
   {
-    return op_output_of(this->set(), value(), e);
+    return op_output_of(this->set(), this->value(), e);
   }
 
   template <typename Self, typename T>
@@ -86,8 +86,8 @@ namespace vcsn {
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
-	::of(series().semiring().semiring());
-    return op_add_io_edge(this->set(), value(),
+	::of(this->series().semiring().semiring());
+    return op_add_io_edge(this->set(), this->value(),
 			  from, to, i, o, w);
   }
 
@@ -101,9 +101,9 @@ namespace vcsn {
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
-	::of(series().semiring().semiring());
+	::of(this->series().semiring().semiring());
 
-    return op_add_o_edge(this->set(), value(),
+    return op_add_o_edge(this->set(), this->value(),
 			  from, to, o, w);
   }
 
@@ -117,9 +117,9 @@ namespace vcsn {
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
-	::of(series().semiring().semiring());
+	::of(this->series().semiring().semiring());
 
-    return op_add_i_edge(this->set(), value(),
+    return op_add_i_edge(this->set(), this->value(),
 			 from, to, i, w);
   }
 

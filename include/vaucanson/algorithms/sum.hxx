@@ -34,7 +34,6 @@
 # include <map>
 # include <vaucanson/algorithms/sum.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/automata/concept/history.hh>
 
 namespace vcsn {
 

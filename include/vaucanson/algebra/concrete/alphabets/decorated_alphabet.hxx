@@ -165,15 +165,17 @@ namespace vcsn {
   }
 
   template <typename L, typename T>
-  L MetaElement<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> >::joker() const
+  L MetaElement<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> >::
+  joker() const
   {
-    return value().joker();
+    return this->value().joker();
   }
 
   template <typename L, typename T>
-  L MetaElement<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> >::other() const
+  L MetaElement<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> >::
+  other() const
   {
-    return value().other();
+    return this->value().other();
   }
 
   /*--------------------------------------------------.

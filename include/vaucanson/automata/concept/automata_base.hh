@@ -158,7 +158,7 @@ namespace vcsn {
     typedef typename series_t::semiring_t		      semiring_t;
 
     /*! type of the free monoid element. */
-    typedef typename series_elt_t::semiring_elt_t		      semiring_elt_t;
+    typedef typename series_elt_t::semiring_elt_t	      semiring_elt_t;
 
     /*! type of the implementation of a semiring_elt. */
     typedef typename series_elt_t::semiring_elt_value_t	     semiring_elt_value_t;

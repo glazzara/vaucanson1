@@ -61,7 +61,6 @@ namespace utility
     }
   }
 
-
 }
 
 #endif // VCSN_MISC_UNIQUE_HCC

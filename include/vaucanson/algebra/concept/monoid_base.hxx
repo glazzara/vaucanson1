@@ -45,7 +45,7 @@ namespace vcsn {
     Element<Self, T> 
     MonoidBase<Self>::identity(SELECTOR(T)) const
     {
-      return Element<Self, T>(self(), 
+      return Element<Self, T>(this->self(), 
 			      identity_value(SELECT(Self), SELECT(T)));
     }
     
@@ -53,7 +53,7 @@ namespace vcsn {
     template<typename T>
     Element<Self, T>  MonoidBase<Self>::zero(SELECTOR(T)) const
     {
-      return Element<Self, T>(self(), 
+      return Element<Self, T>(this->self(), 
 			      zero_value(SELECT(Self), SELECT(T)));
     }
     

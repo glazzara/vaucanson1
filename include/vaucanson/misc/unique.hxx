@@ -32,24 +32,33 @@
 
 #include <vaucanson/misc/unique.hh>
 
+namespace utility {
 
-namespace utility
-{
+  namespace unique {
 
-  namespace unique
-  {
     unique_map::ti_slot::ti_slot(const std::type_info& _id)
       : id(_id) {}
-    bool unique_map::ti_slot::operator==(const unique_map::ti_slot& other) const
-    { return id == other.id; }
-    bool unique_map::ti_slot::operator<(const unique_map::ti_slot& other) const
-    { return id.before(other.id); }
+    bool unique_map::ti_slot::
+    operator==(const unique_map::ti_slot& other) const
+    { 
+      return id == other.id; 
+    }
+
+    bool unique_map::ti_slot::
+    operator<(const unique_map::ti_slot& other) const
+    { 
+      return id.before(other.id); 
+    }
 
     template<typename T>
-    uniquelist<T>::~uniquelist() {}
+    uniquelist<T>::~uniquelist() 
+    {}
 
-    unifiable::unifiable() : unique_(false) {}
-    unifiable::unifiable(const unifiable& ) : unique_(false) {} 
+    unifiable::unifiable() : unique_(false) 
+    {}
+
+    unifiable::unifiable(const unifiable& ) : unique_(false) 
+    {} 
 
     template<typename T>
     const T& get(const T& v)
@@ -82,11 +91,35 @@ namespace utility
 
     template<typename T>
     const T* get(const T* v)
-    { return & get(*v); }
+    { 
+      return & get(*v); 
+    }
 
-  }
-}
+    uniquelist_base::~uniquelist_base() {}
 
+    template <class T>
+    typename UniqueMap<T>::map_t& 
+    UniqueMap<T>::instance()
+    { 
+      static unique_map instance_;
+      return instance_.map_;
+    }
 
+    template <class T>
+    UniqueMap<T>::UniqueMap()
+    {}
+
+    template <class T>
+    UniqueMap<T>::~UniqueMap()
+    {
+      for (typename map_t::iterator i = map_.begin();
+	   i != map_.end();
+	   ++i)
+	delete i->second;
+    }
+
+  } // unique
+
+} // utility
 
 #endif // VCSN_MISC_UNIQUE_HXX

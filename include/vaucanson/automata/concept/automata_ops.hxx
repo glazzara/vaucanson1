@@ -183,10 +183,10 @@ namespace vcsn {
   {
     typedef typename automaton_traits<T>::states_t states_t;
     typedef typename states_t::iterator state_iterator;
-    const states_t& states = op_states(s, v);
-    assertion(states.size() > 0);
-    int n = utility::random::generate(0, int(states.size() - 1));
-    state_iterator ss = states.begin();
+    const states_t& st = op_states(s, v);
+    assertion(st.size() > 0);
+    int n = utility::random::generate(0, int(st.size() - 1));
+    state_iterator ss = st.begin();
     for (; n > 0; --n)
       ++ss;
     return *ss;
@@ -343,8 +343,8 @@ namespace vcsn {
   template <class S, class T>
   inline
   typename Element<S, T>::monoid_elt_t
-  op_word_of(const AutomataBase<S>& s, const T&,
-	     hedge_t)
+  op_word_of(const AutomataBase<S>& s, const T& v,
+	     hedge_t e)
   {
     return typename Element<S, T>::monoid_elt_t
       (s.series().monoid(),

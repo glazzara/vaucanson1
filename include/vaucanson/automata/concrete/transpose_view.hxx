@@ -336,7 +336,7 @@ namespace vcsn {
 
   template <class S, class T>
   void
-  op_clear_final(const AutomataBase<S>& s, TransposeView<T>&)
+  op_clear_final(const AutomataBase<S>& s, TransposeView<T>& v)
   {
     op_clear_initial(s, v.object());
   }
