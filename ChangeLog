@@ -1,5 +1,9 @@
 2003-06-25  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/tools/usual.hh: Add usual automaton types.
+
+2003-06-25  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata_ops.hxx: Undefine macro
 	  at end of file.
 

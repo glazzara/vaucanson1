@@ -30,6 +30,7 @@
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concrete/graph.hh>
@@ -44,23 +45,45 @@ namespace vcsn {
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, bool> usual_serie_value;
+    typedef polynom<WordValue, bool> usual_serie_value_t;
+    typedef polynom<WordValue, int> weighted_serie_value_t;
 
     typedef Series<NumericalSemiring, Words> usual_series_t;
+    typedef Series<TropicalSemiring<TropicalMax>, Words> tropical_max_series_t;
+    typedef Series<TropicalSemiring<TropicalMin>, Words> tropical_min_series_t;
    
     typedef Graph
     <
       labels_are_series,
       WordValue,
       bool, 
-      polynom<WordValue, bool>,
+      usual_serie_value_t,
       char,
       NoTag>
     usual_automaton_impl_t;
 
+    typedef Graph
+    <
+      labels_are_series,
+      WordValue,
+      int, 
+      weighted_serie_value_t,
+      char,
+      NoTag>
+    weighted_automaton_impl_t;
+
     typedef Element<Automata<usual_series_t>, usual_automaton_impl_t>
     usual_automaton_t;
 
+    typedef Element<Automata<usual_series_t>, weighted_automaton_impl_t>
+    numerical_automaton_t;
+    
+    typedef Element<Automata<tropical_max_series_t>, weighted_automaton_impl_t>
+    tropical_max_automaton_t;
+
+    typedef Element<Automata<tropical_min_series_t>, weighted_automaton_impl_t>
+    tropical_min_automaton_t;
+    
     template <class T>
     usual_automaton_t new_automaton(const T& alphabet);
 
