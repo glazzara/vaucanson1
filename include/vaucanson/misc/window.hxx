@@ -33,7 +33,7 @@
 /**
  * @file   window.hxx
  * @brief  Window class for regular expression search on streams.
- * 
+ *
  * @author Thomas Claveirole <thomas@lrde.epita.fr>
  * @see Window
  */
@@ -44,7 +44,7 @@
 namespace utility {
 
   /** @addtogroup utility *//** @{ */
-  
+
   template <class InputIterator, class Letter>
   Window<InputIterator, Letter>::Window(const iterator_t& stream,
 					const iterator_t& eof,
@@ -57,30 +57,30 @@ namespace utility {
     length_	(length)
   {
     precondition(length > 0);
-    
+
     compute_size();
   }
-      
+
   template <class InputIterator, class Letter>
   bool
   Window<InputIterator, Letter>::eof() const
   {
     return stream_ == end_;
   }
-  
+
   template <class InputIterator, class Letter>
   bool
   Window<InputIterator, Letter>::eol() const
   {
     return eof() || (*stream_ == eol_);
   }
-  
+
   template <class InputIterator, class Letter>
   void
   Window<InputIterator, Letter>::shift(unsigned int n)
   {
     precondition(n <= size_);
-    
+
     if ((stream_ != end_) && (*stream_ == eol_))
       ++stream_;
     else
@@ -117,16 +117,16 @@ namespace utility {
   {
     return size_;
   }
-  
+
   template <class InputIterator, class Letter>
   typename Window<InputIterator, Letter>::letter_t
   Window<InputIterator, Letter>::operator [] (length_t i) const
   {
     precondition (i < size_);
-    
+
     return stream_[i];
   }
-  
+
   template <class InputIterator, class Letter>
   std::ostream&
   Window<InputIterator, Letter>::print(std::ostream& ostr) const
@@ -168,7 +168,7 @@ namespace utility {
   {
     return stream_ - begin_;
   }
-  
+
   template <class InputIterator, class Letter>
   typename Window<InputIterator, Letter>::length_t
   Window<InputIterator, Letter>::length() const
@@ -193,16 +193,16 @@ namespace utility {
 	   (stream_[size_] != eol_))
       ++size_;
   }
-  
+
   template <class InputIterator, class Letter>
   std::ostream&
   operator << (std::ostream& ostr, const Window<InputIterator, Letter>& w)
   {
     return w.print(ostr);
   }
-  
+
   /** @} */
-  
+
 } // utility
 
 #endif // VCSN_MISC_WINDOW_HXX

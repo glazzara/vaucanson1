@@ -1,7 +1,7 @@
 // window.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,7 +33,7 @@
 /**
  * @file   window.hh
  * @brief  Window class for regular expression search on streams.
- * 
+ *
  * @author Thomas Claveirole <thomas@lrde.epita.fr>
  * @see Window
  */
@@ -45,7 +45,7 @@ namespace utility {
 
   /** @addtogroup utility *//** @{ */
 
-  /** 
+  /**
    * @brief Handle windows in streams for performing regular expression search.
    *
    * A window is a portion of a stream, viewable as a string, on which
@@ -57,7 +57,7 @@ namespace utility {
    * A window has a constant size, unless an end of line ('\n') or an
    * end of file occurs, in which case a window is shorter than its
    * supposed size.
-   * 
+   *
    * @param InputIterator The type of input iterator used to read the stream.
    *                      It shall be a random access iterator.
    * @param Letter The type  used for letters.
@@ -71,7 +71,7 @@ namespace utility {
     typedef Letter					letter_t;
     typedef typename std::basic_string<letter_t>	string_t;
     typedef unsigned int				length_t;
-    
+
     /**
      * @ brief Standard constructor for the Window class.
      *
@@ -89,7 +89,7 @@ namespace utility {
 	   const iterator_t& eof,
 	   letter_t eol,
 	   length_t length);
-    
+
     /// Indicates wether the end of the stream has been reached or not.
     bool		eof() const;
     /// Indicates wether a new line has been reached or not.
@@ -98,7 +98,7 @@ namespace utility {
     /**
      * @brief Shift the window.
      *
-     * @params n The number of character the window must be shifted. When
+     * @param n The number of character the window must be shifted. When
      *           not specified, the window length is taken.
      */
     /// @{
@@ -141,11 +141,11 @@ namespace utility {
     length_t		length_;
     length_t		size_;
   };
-  
+
   template <class InputIterator, class Letter>
   std::ostream&
   operator << (std::ostream& ostr, const Window<InputIterator, Letter>& w);
-  
+
   /** @} */
 
 } // utility
@@ -154,6 +154,6 @@ namespace utility {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/misc/window.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_MISC_WINDOW_HH
