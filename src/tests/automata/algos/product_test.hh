@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -58,13 +58,13 @@ unsigned product_test(tests::Tester& tg)
       auto_in_complete(a);
       a = determinize(a);  
       automaton_t ac = auto_complementary(a);
-      automaton_t squared = auto_product(a,a);
+      automaton_t squared = product(a,a);
 
       if ((squared.states().size() == a.states().size()) &&
 	  (squared.edges().size() == a.edges().size()))
 	success_identity++;
       
-      if (trim(auto_product(a, ac)).states().size() == 0)
+      if (trim(product(a, ac)).states().size() == 0)
 	success_null++;
     }
   

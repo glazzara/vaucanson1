@@ -26,24 +26,14 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** \addtogroup algorithms */  /* @{ */
 
-  //! Returns a fresh automaton that is the product of the two input ones.
+  /// Returns a fresh automaton that is the product of the two input ones.
   template<typename A, typename T, typename U>
   Element<A, T> 
-  auto_product(const Element<A, T>& lhs, const Element<A, U>& rhs);
+  product(const Element<A, T>& lhs, const Element<A, U>& rhs);
 
-  //! In-place diagonal extraction.
-  template <typename A, typename T>
-  void
-  auto_in_diagonal(Element<A, T>&);
-
-  //! Return a fresh automaton that is the diagonal of the input one.
-  template <typename A, typename T>
-  Element<A, T>
-  auto_diagonal(const Element<A, T>&);
-
-  /*! @} */
+  /** @} */
 
 } // vcsn
 
