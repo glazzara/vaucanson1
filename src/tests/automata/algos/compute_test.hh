@@ -30,13 +30,8 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_COMPUTE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_COMPUTE_TEST_HH
 
-# include <check/tester.hh>
-
-# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
-# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algorithms/eval.hh>
 
 using namespace vcsn;
@@ -78,7 +73,7 @@ bool compute_test(tests::Tester& t)
 {
   AUTOMATON_TYPES(Auto);
   TEST_MSG("Basic test on a well-known automaton.");
-  vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
+  vcsn::GenRandomAutomata<Auto> gen(time(0));
   Auto	a = gen.empty();
   hstate_t h1 = a.add_state();
   hstate_t h2 = a.add_state();

@@ -35,7 +35,6 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/automata/implementation/generalized.hh>
 

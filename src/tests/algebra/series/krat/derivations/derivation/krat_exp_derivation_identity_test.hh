@@ -30,12 +30,8 @@
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_DERIVATION_KRAT_EXP_DERIVATION_IDENTITY_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_DERIVATION_KRAT_EXP_DERIVATION_IDENTITY_TEST_HH
 
-# include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
-# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algorithms/krat_exp_derivation.hh>
-# include <vaucanson/misc/selectors.hh>
 
 using namespace vcsn;
 

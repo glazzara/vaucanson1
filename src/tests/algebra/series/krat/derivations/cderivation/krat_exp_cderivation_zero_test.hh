@@ -31,7 +31,6 @@
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_DERIVATION_KRAT_EXP_DERIVATION_ZERO_TEST_HH
 
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/krat_exp_cderivation.hh>
 
 using namespace vcsn;

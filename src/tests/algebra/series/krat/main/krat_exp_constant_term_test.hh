@@ -32,12 +32,8 @@
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_CONSTANT_TERM_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_CONSTANT_TERM_TEST_HH
 
-# include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
-# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
-# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algebra/concept/semiring_base.hh>
 
 template <class Expr>

@@ -37,8 +37,6 @@
 
 # include <vaucanson/algebra/implementation/series/krat.hh>
 
-# include <vaucanson/tools/usual.hh>
-
 # define TEST_ON(ExpStr, Exp, St, TrA, TrB)				\
   {									\
     TEST_MSG("Basic test on " ExpStr ".");				\

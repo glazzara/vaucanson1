@@ -33,7 +33,6 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_BERRY_SETHI_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_BERRY_SETHI_TEST_HH
 
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/berry_sethi.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
 # include <vaucanson/algorithms/krat_exp_realtime.hh>

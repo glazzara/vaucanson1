@@ -30,14 +30,11 @@
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_ACI_CANONICAL_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_ACI_CANONICAL_TEST_HH
 
-# include <check/tester.hh>
-# include <sstream>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
-# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/aci_canonical.hh>
+
+# include <sstream>
 
 static struct { char* fst; char* snd; } samples[] =
 {

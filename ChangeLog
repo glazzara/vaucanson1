@@ -1,5 +1,42 @@
 2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/boolean_automata/brzozowski_test.hh,
+	* src/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/automata/algos/generalized_test.hh,
+	* src/tests/automata/algos/is_isomorph_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/aci_canonical_test.hh,
+	* src/tests/automata/algos/elimination_test.hh,
+	* src/tests/automata/algos/trim_test.hh,
+	* src/tests/automata/algos/compute_test.hh,
+	* src/tests/automata/algos/derivatives_automaton_test.hh,
+	* src/tests/automata/algos/transpose_test.hh,
+	* src/tests/automata/algos/berry_sethi_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_identity_test.hh,
+	* src/tests/algebra/series/misc/series_test.hh: Remove inclusions of
+	usual.hh. Clean include directives.
+
+2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/z_min_plus_automaton.hh: New. Context for tropical
 	semirings with min and plus operators.
 	* include/Makefile.am: Update.

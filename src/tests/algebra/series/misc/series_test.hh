@@ -30,11 +30,6 @@
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_MISC_SERIES_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_MISC_SERIES_TEST_HH
 
-# include <vaucanson/config/system.hh>
-# include <check/tester.hh>
-# include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/tools/usual.hh>
-
 using namespace vcsn;
 
 template <class SeriesElt>

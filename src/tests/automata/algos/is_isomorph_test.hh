@@ -33,7 +33,6 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_IS_ISOMORPH_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_IS_ISOMORPH_TEST_HH
 
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/isomorph.hh>
 
 template <class Auto>

@@ -33,7 +33,6 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_TRANSPOSE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_TRANSPOSE_TEST_HH
 
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/transpose.hh>
 
 template <class Auto>

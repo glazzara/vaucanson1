@@ -33,7 +33,6 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_ACI_CANONICAL_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_ACI_CANONICAL_TEST_HH
 
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/aci_canonical.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
 

@@ -31,7 +31,6 @@
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_IDENTITY_TEST_HH
 
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
 # include <krat_exp_partial_derivation_common.hh>
 

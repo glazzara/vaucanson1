@@ -33,7 +33,6 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_DERIVATIVES_AUTOMATON_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_DERIVATIVES_AUTOMATON_TEST_HH
 
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/derivatives_automaton.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
 
