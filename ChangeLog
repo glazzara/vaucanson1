@@ -1,5 +1,9 @@
 2004-03-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/automata/algos/glushkov_test.hh: Improve.
+
+2004-03-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/tools/usual_macros.hh (SAVE_AUTOMATON_DOT): Fix.
 
 2004-03-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>

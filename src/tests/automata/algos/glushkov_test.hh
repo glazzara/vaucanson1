@@ -36,57 +36,103 @@
 
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
-# include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
 
-using namespace vcsn;
+# define TEST_ON(ExpStr, Exp, St, TrA, TrB)				\
+  {									\
+    TEST_MSG("Basic test on " ExpStr ".");				\
+									\
+    krat_t	e = Exp;						\
+    automaton_t	au (aa);						\
+									\
+    standard_of(au, e.value());						\
+									\
+    TEST(t, "a has a consistent number of states.",			\
+	 au.states().size() == St);					\
+    int tr_a = 0;							\
+    int tr_b = 0;							\
+    int tr_X = 0;							\
+    for_each_edge(e, au)						\
+      {									\
+	if (au.series_of(*e) == series_elt_t (ss, ma))			\
+	  ++tr_a;							\
+	else if (au.series_of(*e) == series_elt_t (ss, mb))		\
+	  ++tr_b;							\
+	else								\
+	  ++tr_X;							\
+      }									\
+    TEST(t, "a has consistent transitions.",				\
+	 tr_a == TrA and tr_b == TrB and tr_X == 0);			\
+									\
+    realtime_here(au);							\
+									\
+    if (e != zero_as<exp_t>::of(ss))					\
+      {									\
+	unsigned i;							\
+	for (i = 0; i < nb_word_test; ++i)				\
+	  {								\
+	    monoid_elt_t w = e.choose_from_supp();			\
+	    if (t.verbose() == tests::high)				\
+	      std::cout << "TEST: glushkov " << i << " on " << e	\
+			<< " : test " << w << std::endl;		\
+	    if (eval(au, w) ==						\
+		zero_as<semiring_elt_value_t>::of(ss.semiring()))	\
+	      {								\
+		if (t.verbose() == tests::high)				\
+		  std::cout << "TEST: glushkov " << i			\
+			    << " failed." << std::endl;			\
+		break;							\
+	      }								\
+	  }								\
+	TEST(t, "Basic test.", nb_word_test == i);			\
+      }									\
+    else								\
+      TEST(t, "Basic test.", true);					\
+  }
+
 
 template <class Auto>
 bool glushkov_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
-  typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
-  typedef Element<series_t, exp_t>		krat_t;
-  tests::Tester t(tg.verbose());
+  typedef vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
+  typedef vcsn::Element<series_t, exp_t>				krat_t;
 
-  alphabet_t alphabet;
-  letter_t a = alphabet.random_letter();
-  letter_t b = alphabet.random_letter();
-  alphabet.insert(a);
-  alphabet.insert(b);
-  monoid_t monoid(alphabet);
-  semiring_t semiring;
-  series_t s(semiring, monoid);
+  tests::Tester t (tg.verbose());
+
+  alphabet_t		at;
+  letter_t		la = at.random_letter(); at.insert(la);
+  letter_t		lb = at.random_letter(); at.insert(lb);
+  monoid_t		md (at);
+  semiring_t		sg;
+  series_t		ss (sg, md);
+  automata_set_t	aa (ss);
 
   unsigned nb_word_test = 100;
   unsigned nb_test = 40;
 
-  {
-    TEST_MSG("Basic test on a well known expression.");
-    krat_t exp(s);
-    krat_t a_e(s, monoid_elt_t(monoid, b));
-    exp = monoid_elt_t(monoid, a);
-    exp = (a_e + exp).star();
-    exp = exp * a_e * exp;
-    vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
-    Auto	au = gen.empty();
-    standard_of(au, exp.value());
-    realtime_here(au);
-    unsigned i = 0;
-    for (; i < nb_word_test; ++i)
-      {
-	monoid_elt_t w = exp.choose_from_supp();
-	if (t.verbose() == tests::high)
-	  std::cout << "TEST: glushkov " << i << " on " << exp << " : test " << w << std::endl;
-	if (eval(au, w) == zero_as<semiring_elt_value_t>::of(s.semiring()))
-	  {
-	    break;
-	    if (t.verbose() == tests::high)
-	      std::cout << "TEST: glushkov " << i << " failed." << std::endl;
-	  }
-      }
-    TEST(t, "Basic test ", nb_word_test == i);
-  }
+  letter_t	lalb[] = { la, lb, letter_t () };
+
+  monoid_elt_t	ma (md, la);
+  monoid_elt_t	mb (md, lb);
+  monoid_elt_t	mamb (md, lalb);
+
+  krat_t	a (ss, ma);
+  krat_t	b (ss, mb);
+  krat_t	ab (ss, mamb);
+
+  using vcsn::algebra::zero_as;
+  using vcsn::algebra::identity_as;
+
+  TEST_ON("0", zero_as<exp_t>::of(ss), 0, 0, 0);
+  TEST_ON("1", identity_as<exp_t>::of(ss), 1, 0, 0);
+  TEST_ON("a", a, 2, 1, 0);
+  TEST_ON("b", b, 2, 0, 1);
+  TEST_ON("ab", ab, 3, 1, 1);
+  TEST_ON("a.b", a * b, 3, 1, 1);
+  TEST_ON("a+b", a + b, 3, 1, 1);
+  TEST_ON("a*", krat_t (a).star(), 2, 2, 0);
+  TEST_ON("(a+b)*a(a+b)*", (a + b).star() * a * (a + b).star(), 6, 9, 6);
 
   {
     TEST_MSG("Tests on random expressions.");
@@ -94,39 +140,50 @@ bool glushkov_test(tests::Tester& tg)
 
     for (unsigned nb = 0; nb < nb_test; ++nb)
       {
-	krat_t exp = s.choose(SELECT(exp_t));
+	krat_t		exp = ss.choose(SELECT(exp_t));
+	automaton_t	au (aa);
+
 	if (t.verbose() == tests::high)
 	  std::cerr << "Expression : " << exp << std::endl;
-	vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
-	Auto	au = gen.empty();
+
 	standard_of(au, exp.value());
 	realtime_here(au);
+
 	if (t.verbose() == tests::high)
 	  {
 	    TEST_MSG("Automaton saved in /tmp.");
 	    SAVE_AUTOMATON_DOT("/tmp", "glushkov", au, nb);
 	  }
-	unsigned i = 0;
-	if (exp != s.zero(SELECT(exp_t)))
-	  for (; i < nb_word_test; ++i)
-	    {
-	      monoid_elt_t w = exp.choose_from_supp();
-	      if (t.verbose() == tests::high)
-		std::cout << "TEST: glushkov " << i << " : test " << w << std::endl;
-	      if (eval(au, w) == zero_as<semiring_elt_value_t>::of(s.semiring()))
-		{
-		  if (t.verbose() == tests::high)
-		    std::cout << "TEST: glushkov " << i << " failed." << std::endl;
-		  break;
-		}
-	    }
-	if ((nb_word_test == i) || (exp == s.zero(SELECT(exp_t))))
+
+	if (exp != ss.zero(SELECT(exp_t)))
+	  {
+	    unsigned i;
+	    for (i = 0; i < nb_word_test; ++i)
+	      {
+		monoid_elt_t w = exp.choose_from_supp();
+		if (t.verbose() == tests::high)
+		  std::cout << "TEST: glushkov " << i << " : test " << w
+			    << std::endl;
+		if (eval(au, w) ==
+		    zero_as<semiring_elt_value_t>::of(ss.semiring()))
+		  {
+		    if (t.verbose() == tests::high)
+		      std::cout << "TEST: glushkov " << i << " failed."
+				<< std::endl;
+		    break;
+		  }
+	      }
+	    if ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t))))
+	      ++success;
+	  }
+	else
 	  ++success;
       }
     std::string rate;
     SUCCESS_RATE(rate, success, nb_test);
     TEST(t, "Random test " + rate, success == nb_test);
   }
+
   return t.all_passed();
 }
 
