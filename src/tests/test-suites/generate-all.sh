@@ -47,17 +47,21 @@ done;
 #    `-------*/
 
 for semiring_elt_value_t in bool double int; do
-../bin/generate-test-suite.sh \
-   algebra_series_krat_${semiring_elt_value_t}_string \
-   algebra_series_krat_${semiring_elt_value_t}_string.defs \
-   ../algebra/series/misc \
-   ../algebra/series/krat/main
+    TEST="../algebra/series/misc ../algebra/series/krat/main"
+    if [ $semiring_elt_value_t = "bool" ]; then
+	TEST="$TEST ../algebra/series/krat/boolean"
+    fi
 
-../bin/generate-test-suite.sh \
-   algebra_series_polynom_${semiring_elt_value_t}_string \
-   algebra_series_polynom_${semiring_elt_value_t}_string.defs \
-   ../algebra/series/misc \
-   ../algebra/series/polynom
+    ../bin/generate-test-suite.sh \
+	algebra_series_krat_${semiring_elt_value_t}_string \
+	algebra_series_krat_${semiring_elt_value_t}_string.defs \
+	${TEST}
+
+    ../bin/generate-test-suite.sh \
+	algebra_series_polynom_${semiring_elt_value_t}_string \
+	algebra_series_polynom_${semiring_elt_value_t}_string.defs \
+	../algebra/series/misc \
+	../algebra/series/polynom
 done;
 
 for derivation_type in derivation cderivation partial_derivation; do

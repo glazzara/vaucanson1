@@ -1,4 +1,15 @@
 2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh:
+	Move to...
+	* src/tests/algebra/series/krat/boolean/krat_exp_cderivation_linear_test.hh:
+	... This.
+	* src/tests/algebra/series/krat/boolean/Makefile.am: New.
+	* src/tests/algebra/series/krat/Makefile.am,
+	* configure.ac,
+	* src/tests/algebra/series/krat/main/Makefile.am,
+	* src/tests/test-suites/generate-all.sh: Update accordingly.
+
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/test-suites/algebra_series_polynom_double_string.defs,
 	* src/tests/test-suites/algebra_series_polynom_int_string.defs,
