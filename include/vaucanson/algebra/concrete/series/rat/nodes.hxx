@@ -146,7 +146,7 @@ namespace vcsn {
     bool		
     Zero<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
-      return (dynamic_cast<const Zero<M_, W_>*>(&other) == 0); 
+      return what() < other.what(); 
     }
     
     template <class M_, class W_>
@@ -197,7 +197,7 @@ namespace vcsn {
     bool 
     One<M_,W_>::operator<(const Node<M_, W_>& other) const
     { 
-      return (dynamic_cast<const One<M_, W_>*>(&other) == 0);
+      return what() < other.what();
     }
 
     template<typename M_, typename W_>
@@ -254,9 +254,10 @@ namespace vcsn {
     { 
       const Constant<M_, W_>* otherp =
 	dynamic_cast<const Constant<M_, W_>*>(&other);
-      if(!otherp)
-	return true;
-      return (value_ < otherp->value_);
+      if (otherp)
+	return value_ < otherp->value_;
+      else
+	return what() < other.what();
     }
 
     template<typename M_, typename W_>
@@ -324,9 +325,15 @@ namespace vcsn {
     { 
       const LeftWeighted<M_, W_>* otherp =
 	dynamic_cast<const LeftWeighted<M_, W_>*>(&other);
-      if(!otherp || (weight_ != otherp->weight_))
-	return true;
-      return (*child_ < *otherp->child_);
+      if (otherp)
+      {
+	if (weight_ == otherp->weight_)
+	  return *child_ < *otherp->child_;
+	else
+	  return weight_ < otherp->weight_;
+      }
+      else
+	return what() < other.what();
     }
 
     template<typename M_, typename W_>
@@ -396,9 +403,15 @@ namespace vcsn {
     { 
       const RightWeighted<M_, W_>* otherp =
 	dynamic_cast<const RightWeighted<M_, W_>*>(&other);
-      if(!otherp || (weight_ != otherp->weight_))
-	return true;
-      return (*child_ < *otherp->child_);
+      if (otherp)
+      {
+	if (weight_ == otherp->weight_)
+	  return *child_ < *otherp->child_;
+	else
+	  return weight_ < otherp->weight_;
+      }
+      else
+	return what() < other.what();
     }
 
     template<typename M_, typename W_>
@@ -462,9 +475,10 @@ namespace vcsn {
     { 
       const Star<M_, W_>* otherp =
 	dynamic_cast<const Star<M_, W_>*>(&other);
-      if(!otherp)
-	return true;
-      return (*child_ < *otherp->child_);
+      if (otherp)
+      	return *child_ < *otherp->child_;
+      else
+	return what() < other.what();
     }
 
     template <class M_,class W_>
@@ -529,9 +543,15 @@ namespace vcsn {
     { 
       const Product<M_, W_>* otherp =
 	dynamic_cast<const Product<M_, W_>*>(&other);
-      if(!otherp || (*left_ < *otherp->left_))
-	return true;
-      return (*right_ < *otherp->right_);
+      if (otherp)
+      {
+	if (*left_ != *otherp->left_)
+	  return *left_ < *otherp->left_;
+	else
+	  return *right_ < *otherp->right_;
+      }
+      else
+	return what() < other.what();
     }
 
     template <class M_,class W_>
@@ -587,9 +607,10 @@ namespace vcsn {
 	dynamic_cast<const Sum<M_, W_>*>(&other);
       if(!otherp)
 	return true;
-      // X + Y and Y + X are equal
-      return ((*left_ != *otherp->left_) || (*right_ != *otherp->right_))
-	&& ((*left_ != *otherp->right_) || (*right_ != *otherp->left_));
+      // X + Y and Y + X are NOT equal
+      // Indeed : if   b + X < a + c   and   a + c = c + a
+      // then   b + X > a + c   !
+      return (*left_ != *otherp->left_) || (*right_ != *otherp->right_);
     }
 
     template<typename M_, typename W_>
@@ -598,11 +619,15 @@ namespace vcsn {
     { 
       const Sum<M_, W_>* otherp =
 	dynamic_cast<const Sum<M_, W_>*>(&other);
-      if(!otherp)
-	return true;
-      // X + Y and Y + X are equal
-      return ((*left_ < *otherp->left_) || (*right_ < *otherp->right_))
-	&& ((*left_ < *otherp->right_) || (*right_ < *otherp->left_));
+      if (otherp)
+      {
+	if (*left_ != *otherp->left_)
+	  return *left_ < *otherp->left_;
+	else
+	  return *right_ < *otherp->right_;
+      }
+      else
+	return what() < other.what();
     }
 
     template<typename M_, typename W_>

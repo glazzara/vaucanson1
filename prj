@@ -1,20 +1,23 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 177)
-(Parent-Version vaucanson 0 176)
-(Version-Log "2003-03-19  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 178)
+(Parent-Version vaucanson 0 177)
+(Version-Log "2003-03-19  Loic Fosse  <fosse_l@lrde.epita.fr>
 
-	* include/vaucanson/misc/contract.hh: Add.
-	* include/vaucanson/algorithms/complementary.hxx: Include 
-	vaucanson/misc/contract.hh, so it compile.
-	* src/tests/automata/algos/compute_test.hh,
-	src/tests/automata/algos/elimination_test.hh
-	src/tests/automata/algos/thompson_test.hh: Correct the tests to compile
-	with the actual version of compute.")
+        * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh
+        (KRatExpIdentity): Correct the class.
+        * include/vaucanson/algebra/concrete/series/rat/nodes.hxx: Correct the
+        operator < which was not a true ordering relation.
+        * include/vaucanson/algorithms/brzozowski.hxx: Add.
+        * include/vaucanson/algorithms/brzozowski.hh: Add.
+        * include/vaucanson/algorithms/aci_canonical.hxx: Add.
+        * include/vaucanson/algorithms/aci_canonical.hh: Add.
+        * include/vaucanson/algorithms/algo_helper.hxx: Add.
+        * include/vaucanson/algorithms/algo_helper.hh: Add.")
 (New-Version-Log "")
-(Checkin-Time "Wed, 19 Mar 2003 17:17:14 +0100")
-(Checkin-Login clavei_t)
+(Checkin-Time "Wed, 19 Mar 2003 18:00:34 +0100")
+(Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -94,7 +97,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.117 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.118 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -159,7 +162,7 @@
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.2 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.7 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.8 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.9 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.4 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.13 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.13 600))
@@ -170,7 +173,7 @@
   (include/vaucanson/algebra/concrete/series/rat/exp.hh (vaucanson/d/51_exp.hh 1.12 600))
   (include/vaucanson/algebra/concrete/series/rat/exp.hxx (vaucanson/d/49_exp.hxx 1.14 600))
   (include/vaucanson/algebra/concrete/series/rat/nodes.hh (vaucanson/d/50_nodes.hh 1.7 600))
-  (include/vaucanson/algebra/concrete/series/rat/nodes.hxx (vaucanson/d/48_nodes.hxx 1.7 600))
+  (include/vaucanson/algebra/concrete/series/rat/nodes.hxx (vaucanson/d/48_nodes.hxx 1.8 600))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hh (vaucanson/e/51_random_vis 1.5 600))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx (vaucanson/e/50_random_vis 1.6 600))
   (include/vaucanson/algebra/concrete/series/series.hh (vaucanson/c/19_series.hh 1.7 600))
@@ -494,6 +497,16 @@
 ;; to version 0.176(w), by clavei_t:
 
   (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.1 600))
+
+;; Files added by populate at Wed, 19 Mar 2003 17:37:42 +0100,
+;; to version 0.177(w), by fosse_l:
+
+  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.1 600))
+  (include/vaucanson/algorithms/brzozowski.hh (vaucanson/j/29_brzozowski 1.1 600))
+  (include/vaucanson/algorithms/aci_canonical.hxx (vaucanson/j/30_aci_canoni 1.1 600))
+  (include/vaucanson/algorithms/aci_canonical.hh (vaucanson/j/31_aci_canoni 1.1 600))
+  (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.1 600))
+  (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

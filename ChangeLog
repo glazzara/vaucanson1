@@ -1,3 +1,16 @@
+2003-03-19  Loic Fosse  <fosse_l@lrde.epita.fr>
+
+        * include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh
+        (KRatExpIdentity): Correct the class.
+        * include/vaucanson/algebra/concrete/series/rat/nodes.hxx: Correct the
+        operator < which was not a true ordering relation.
+        * include/vaucanson/algorithms/brzozowski.hxx: Add.
+        * include/vaucanson/algorithms/brzozowski.hh: Add.
+        * include/vaucanson/algorithms/aci_canonical.hxx: Add.
+        * include/vaucanson/algorithms/aci_canonical.hh: Add.
+        * include/vaucanson/algorithms/algo_helper.hxx: Add.
+        * include/vaucanson/algorithms/algo_helper.hh: Add.
+
 2003-03-19  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/misc/contract.hh: Add.

@@ -229,37 +229,37 @@ match_node##N(const N& p____) 			\
 
 	  MATCH__(Product, lhs, rhs)
 	  {
-	    return lhs * rhs;
+	    return match(lhs) * match(rhs);
 	  }
 	  END
 
 	  MATCH__(Sum, lhs, rhs)
 	  {
-	    return lhs + rhs;
+	    return match(lhs) + match(rhs);
 	  }
 	  END
 
 	  MATCH_(Star, e)
 	  {
-	    return e.star();
+	    return match(e).star();
 	  }
 	  END
 
 	  MATCH__(LeftWeight, w, e)
 	  {
-	    return w * e;
+	    return  weight_t(w) * match(e);
 	  }
 	  END
 
 	  MATCH__(RightWeight, e, w)
 	  {
-	    return e * w;
+	    return match(e) * weight_t(w);
 	  }
 	  END
 
 	  MATCH_(Constant, m)
 	  {
-	    return m;
+	    return monoid_elt_t(m);
 	  }
 	  END
 
