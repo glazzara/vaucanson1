@@ -133,12 +133,12 @@ struct vcsn_automaton : vcsn::virtual_automaton
 
   virtual std::list<int> states() const
   {
-    std::list<int> ret((*auto_).states().begin(), (*auto_).states().end());
+    return std::list<int>((*auto_).states().begin(), (*auto_).states().end());
   }
 
   virtual std::list<int> edges() const
   {
-    std::list<int> ret((*auto_).edges().begin(), (*auto_).edges().end());
+    return std::list<int>((*auto_).edges().begin(), (*auto_).edges().end());
   }
 
   virtual int add_state() { return (*auto_).add_state(); }

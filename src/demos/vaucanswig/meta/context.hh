@@ -11,15 +11,15 @@ struct vcsn_context : vcsn::virtual_context
   AUTOMATON_TYPES(Auto)
 
     vcsn_context(const automata_set_t& set)
-      : set_(& utility::unique::get(set))
+      : vcsn::virtual_context(), set_(& utility::unique::get(set))
   {}
   vcsn_context(const vcsn_context& other)
-    : set_(other.set_)
+    : vcsn::virtual_context(other), set_(other.set_)
   {}
   
   template<typename OtherAuto>
   vcsn_context(const vcsn_context<OtherAuto>& other)
-    : set_(& other.automata_set())
+    : vcsn::virtual_context(), set_(& other.automata_set())
   {}
 
   const automata_set_t& automata_set() const
