@@ -1,5 +1,10 @@
 2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/automata/algos/realtime_test.hh: Fix missing namespace 
+	specification.
+	
+2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx: Remove unused variables.
 
 2004-06-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
