@@ -51,15 +51,18 @@ unsigned union_test(tests::Tester& t)
 
   gen_auto_t gen(time(0x0));
 
-  automaton_t a = gen.generate(20, 40);
-  automaton_t b = gen.generate(10, 20);
-  automaton_t c = auto_union(a, b);
-  
-  TEST(t, "Check Union automata [states]", a.states().size() + 
-       b.states().size() == c.states().size());
-
-  TEST(t, "Check Union automata [edges]", a.edges().size() + 
-       b.edges().size() == c.edges().size());
+  for (unsigned i = 0 ; i < 10; i++) 
+    {
+      automaton_t a = gen.generate(20, 40);
+      automaton_t b = gen.generate(10, 20);
+      automaton_t c = auto_union(a, b);
+      
+      TEST(t, "Check Union automata [states]", a.states().size() + 
+	   b.states().size() == c.states().size());
+      
+      TEST(t, "Check Union automata [edges]", a.edges().size() + 
+	   b.edges().size() == c.edges().size());
+    }
 
   return EXIT_SUCCESS;
 }

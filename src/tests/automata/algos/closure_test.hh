@@ -1,7 +1,6 @@
-// normalize_test.hh
-// 
+// closure_test.hh
+//
 // VCSN_HEADER
-
 
 #include <vaucanson/fundamental/fundamental.hh>
 #include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
@@ -25,34 +24,30 @@
 
 # include <vaucanson/tools/gen_random.hh>
 
-# include <vaucanson/algorithms/normalized.hh>
+# include <vaucanson/algorithms/closure.hh>
+
 
 template <class Auto>
-unsigned normalize_test(tests::Tester& t)
+unsigned closure_test(tests::Tester& t)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
- 
+  
   typedef Auto automaton_t;
+  AUTOMATON_TYPES(Auto);
   
   gen_auto_t gen(time(0x0));
-  const unsigned nb_tests = 10;
   
-  for (unsigned i = 0; i < nb_tests; i++)
-    {
-      automaton_t normalized = gen.generate_normalized(30);;
-      
-      TEST(t, "Check routine is_normalized", is_normalized(normalized));
-    } 
+  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50);
+  
+  auto_epsilon 
+        
 
-  for (unsigned i = 0; i < nb_tests; i++)
-    {
-      automaton_t normalized = gen.generate(30, 60);
-      normalize(normalized);
-      
-      TEST(t, "Is normalized automaton", is_normalized(normalized));
-    } 
+
+  TEST(t, "Check ", is_normalized(normalized));
+  
+  
 
   return EXIT_SUCCESS;
 }

@@ -17,6 +17,7 @@ int main(int argc, char** argv)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
+    using namespace vcsn::tools;
 
   unsigned verbose;
 
@@ -31,4 +32,6 @@ int main(int argc, char** argv)
   TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
   TEST(t, "CHECK REACHABLE : ", !reachable_test<usual_automaton_t>(t));
   TEST(t, "CHECK EXTRACT : ", !extract_test<usual_automaton_t>(t));
+
+  return EXIT_SUCCESS;
 }

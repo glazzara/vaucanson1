@@ -1,5 +1,13 @@
 2002-07-19  Maxime Rey  <max@lrde.epita.fr>
 
+	* Index: 0.73/include/vaucanson/tools/usual.hh
+	41a42
+	>  typedef typename AutoType::series_t                Prefix##series_t;
+	* gen_random.hxx : it's ok
+	* Index: 0.73/src/tests/automata/algos/union_test.hh : minor
+	
+2002-07-19  Maxime Rey  <max@lrde.epita.fr>
+
 	* Added `include/vaucanson/algorithms/closure.hxx' 
 	* Added `include/vaucanson/algorithms/closure.hh' 
 	* Added `include/vaucanson/algorithms/moore.hxx' 

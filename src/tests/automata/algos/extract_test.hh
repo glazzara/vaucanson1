@@ -1,7 +1,6 @@
-// normalize_test.hh
-// 
+// extract_test.hh
+//
 // VCSN_HEADER
-
 
 #include <vaucanson/fundamental/fundamental.hh>
 #include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
@@ -25,34 +24,47 @@
 
 # include <vaucanson/tools/gen_random.hh>
 
-# include <vaucanson/algorithms/normalized.hh>
+# include <vaucanson/algorithms/reachable.hh>
+
+# include <vaucanson/algorithms/moore.hh>
+# include <vaucanson/misc/dot_dump.hh>
+
+# include <vaucanson/tools/usual.hh>
+
 
 template <class Auto>
-unsigned normalize_test(tests::Tester& t)
+unsigned extract_test(tests::Tester& t)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
  
+  AUTOMATON_TYPES(Auto);
   typedef Auto automaton_t;
   
   gen_auto_t gen(time(0x0));
+  
   const unsigned nb_tests = 10;
   
-  for (unsigned i = 0; i < nb_tests; i++)
-    {
-      automaton_t normalized = gen.generate_normalized(30);;
-      
-      TEST(t, "Check routine is_normalized", is_normalized(normalized));
-    } 
+//   std::filebuf fb;
+//   fb.open ("automaton.dot", std::ios::out);
+//   std::ostream os(&fb);
+  
 
   for (unsigned i = 0; i < nb_tests; i++)
     {
-      automaton_t normalized = gen.generate(30, 60);
-      normalize(normalized);
+      unsigned nb_state = 5;
+      unsigned nb_edge = 10;
+      automaton_t a = gen.generate(nb_state, nb_edge);
       
-      TEST(t, "Is normalized automaton", is_normalized(normalized));
-    } 
+      a = auto_extract(a, a.states());
+      
+      // misc::dot_dump(os, a, "test");
+
+      TEST(t, "Check Extract ok", (a.states().size() == nb_state) &&
+	   (a.edges().size() == nb_edge));
+    }
 
   return EXIT_SUCCESS;
 }
+    

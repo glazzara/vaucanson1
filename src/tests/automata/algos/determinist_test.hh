@@ -29,6 +29,9 @@
 
 # include <time.h>
 
+# include <vaucanson/misc/dot_dump.hh>
+
+
 template <class Auto>
 unsigned determinist_test(tests::Tester& t)
 {
@@ -40,21 +43,29 @@ unsigned determinist_test(tests::Tester& t)
 
   gen_auto_t gen(time(0x0));
   
-  const unsigned nb_tests = 10;
+
+
+  const unsigned nb_tests = 20;
   
-  for (unsigned i = 0; i < nb_tests; i++)
-    {
-      automaton_t afd = gen.generate_afd(50);;
+//   for (unsigned i = 0; i < nb_tests; i++)
+//     {
+//       automaton_t afd = gen.generate_afd(50);;
       
-      TEST(t, "Check routine is_determinist", is_deterministic(afd));
-    } 
+//       TEST(t, "Check routine is_determinist", is_deterministic(afd));
+//     } 
+  std::filebuf fb;
+  fb.open ("automaton.dot", std::ios::out);
+  std::ostream os(&fb);
 
   for (unsigned i = 0; i < nb_tests; i++)
-    {
-      automaton_t afd = determinize(gen.generate(30, 60));
+    {     
+      automaton_t automata = gen.generate(40, 80);
+
+      automaton_t afd = determinize(automata);
       
       TEST(t, "Is determinist Automaton", is_deterministic(afd));
     } 
-
+  //      misc::dot_dump(os, automata, "test");
+  fb.close();
   return EXIT_SUCCESS;
 }
