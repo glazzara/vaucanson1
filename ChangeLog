@@ -1,5 +1,11 @@
 2002-06-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* src/tests/tests_stuff.hh : Added.
+
+	* src/tests/fundamental/element-full-test.cc: Use tests_stuff.hh.
+
+2002-06-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* src/tests/fundamental/element-full-test.cc: Added.
 
 2002-06-03  Maxime Rey  <max@lrde.epita.fr>
