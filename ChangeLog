@@ -1,5 +1,10 @@
 2004-03-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* doc/xml/Makefile.am: Move .tex generated files from EXTRA_DIST
+	to dist_doc_DATA.
+
+2004-03-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/demos/vaucanswig/expand.sh: Fix the generation of
 	src/demos/vaucanswig/src/Makefile.am.
 
