@@ -34,6 +34,8 @@
 
 # include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
 
+# include <vaucanson/misc/char_traits.hh>
+
 namespace vcsn {
 
   template<typename A>
@@ -81,6 +83,18 @@ namespace vcsn {
     return instance;
   }
 
+  template<typename A>
+  const std::basic_string<typename A::letter_t,
+			  utility::char_traits<typename A::letter_t> >&
+  identity_value(SELECTOR(algebra::FreeMonoid<A>),
+		 SELECTOR2(std::basic_string<typename A::letter_t,
+			  utility::char_traits<typename A::letter_t> >))
+  {
+    static const std::basic_string<typename A::letter_t,
+      utility::char_traits<typename A::letter_t> > instance;
+    return instance;
+  }
+  
   template<typename A>
   std::basic_string<typename A::letter_t>
   op_convert(SELECTOR(algebra::FreeMonoid<A>),

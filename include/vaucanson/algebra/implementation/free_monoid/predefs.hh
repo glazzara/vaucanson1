@@ -34,6 +34,7 @@
 
 # include <vaucanson/algebra/implementation/alphabets/predefs.hh>
 # include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
+# include <vaucanson/misc/char_traits.hh>
 
 namespace vcsn {
 
@@ -44,7 +45,8 @@ namespace vcsn {
       typedef
       FreeMonoid<Alphabet>					Words;
 
-      typedef std::basic_string<Letter>				WordValue;
+      typedef std::basic_string<Letter,
+				utility::char_traits<Letter> >	WordValue;
 
       typedef
       Element<Words, WordValue>			     	        Word;
