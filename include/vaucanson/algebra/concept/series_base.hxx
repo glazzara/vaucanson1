@@ -82,14 +82,14 @@ namespace vcsn {
   MetaElement<algebra::SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
   { 
     // assert(set().monoid().contains(m));
-    return op_series_get(set(), value(), m);
+    return op_series_get(this->set(), value(), m);
   }
 
   template<typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::weight_t 
   MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_t& m) const
   { 
-    return weight_t(set().weights(), value_get(m.value())); 
+    return weight_t(this->set().weights(), value_get(m.value())); 
   }
 
   template<typename S, typename T>
@@ -99,7 +99,7 @@ namespace vcsn {
   { 
     // assert(set().monoid().contains(m));
     // assert(set().weights().contains(w));
-    return op_series_set(set(), value(), m, w);
+    return op_series_set(this->set(), value(), m, w);
   }
 
   template<typename S, typename T>
@@ -114,28 +114,28 @@ namespace vcsn {
   bool 
   MetaElement<algebra::SeriesBase<S>, T>::is_finite_app() const
   { 
-    return op_is_finite_app(set(), value()); 
+    return op_is_finite_app(this->set(), value()); 
   }
 
   template <typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
   MetaElement<algebra::SeriesBase<S>, T>::choose_from_supp() const
   {
-    return op_choose_from_supp(set(), value());
+    return op_choose_from_supp(this->set(), value());
   }
 
   template <typename S, typename T>
   void
   MetaElement<algebra::SeriesBase<S>, T>::transpose()
   {
-    op_in_transpose(set(), value());
+    op_in_transpose(this->set(), value());
   }
 
   template <typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::support_t
   MetaElement<algebra::SeriesBase<S>, T>::supp() const  
   {
-    return op_support(set(), value());
+    return op_support(this->set(), value());
   }
 
   template<typename S, typename T>

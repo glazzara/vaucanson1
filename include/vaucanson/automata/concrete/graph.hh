@@ -24,6 +24,7 @@
 
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/transducer_base.hh>
 # include <vaucanson/automata/concept/projection.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/automata/concept/tags.hh>

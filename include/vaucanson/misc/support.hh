@@ -30,6 +30,7 @@
 
 # include <iterator>
 # include <map>
+# include <string>
 
 namespace utility {
 

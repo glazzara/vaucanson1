@@ -1,5 +1,17 @@
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/series_base.hxx: 
+		Replace set() by this->set() for g++-2.95.
+	* include/vaucanson/automata/concrete/graph.hh: Fix include.
+	* include/vaucanson/misc/support.hh: Likewise.
+	* include/vaucanson/automata/concept/transducer_ops.hh: Likewise.
+	* include/vaucanson/misc/unchecked/dot_dump.hh,
+	  include/vaucanson/misc/unchecked/fsm_dump.hh,
+	  include/vaucanson/misc/unchecked/ref.hh,
+	  include/vaucanson/misc/unchecked/ref.hxx: Remove.
+
+2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix op_convert.
 	* include/vaucanson/algebra/concrete/series/series.hh: 
 		(mute_series_traits, mute_series): New.
