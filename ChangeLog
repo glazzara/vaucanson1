@@ -1,5 +1,12 @@
 2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/misc/random.hxx: Add random generation for
+	std::pair<char, int> (needed for the test suite).
+	* include/vaucanson/algebra/concept/letter.hh: Remove useless include.
+
+2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/letter.hh,
 	* include/vaucanson/algebra/concrete/letter/range.hh:
 	Use static value instead of dynamic function calls.

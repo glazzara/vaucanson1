@@ -30,6 +30,7 @@
 #ifndef VCSN_MISC_RANDOM_HXX
 # define VCSN_MISC_RANDOM_HXX
 
+# include <vaucanson/algebra/concrete/alphabets/predefs.hh>
 # include <vaucanson/misc/random.hh>
 # include <vaucanson/misc/limits.hh>
 
@@ -166,6 +167,20 @@ namespace utility {
 	vcsn::algebra::RationalNumber(generate<int>(num1*ratio, num2*ratio),
 				      denom * ratio);
     }
+
+    template <>
+    inline
+    std::pair<char, int> generate<std::pair<char, int> >()
+    {
+      return std::make_pair(generate<char>(), generate<int>());
+    }
+
+//     template <>
+//     vcsn::algebra::small_alpha_letter::Letter
+//     generate<vcsn::algebra::small_alpha_letter::Letter>()
+//     {
+//       return generate<char>('a', 'z');
+//     }
 
   } // Random
 

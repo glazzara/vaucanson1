@@ -30,6 +30,7 @@
 #ifndef VCSN_MISC_RANDOM_HH
 # define VCSN_MISC_RANDOM_HH
 
+# include <vaucanson/algebra/concrete/alphabets/predefs.hh>
 # include <vaucanson/algebra/concrete/semiring/rational_number.hh>
 
 namespace utility {
@@ -51,63 +52,72 @@ namespace utility {
     T generate(T min, T max);
 
 
-    /// Generate a random character
+    /// Generate a random character.
     template<>
     char generate<char>();
 
-    /// Generate a random character between bounds
+    /// Generate a random character between bounds.
     template<>
     char generate<char>(char min, char max);
 
-    /// Generate a random lowercase letter
+    /// Generate a random lowercase letter.
     char generate_letter();
 
-    /// Generate a random digit
+    /// Generate a random digit.
     char generate_digit();
 
-    /// Generate a random Boolean
+    /// Generate a random Boolean.
     template<>
     bool generate<bool>();
 
-    /// Generate a random integer
+    /// Generate a random integer.
     template<>
     int generate<int>();
 
-    /// Generate a random integer between two bounds
+    /// Generate a random integer between two bounds.
     template<>
     int generate<int>(int min, int max);
 
-    /// Generate a random unsigned integer
+    /// Generate a random unsigned integer.
     template<>
     unsigned generate<unsigned>();
 
-    /// Generate a random unsigned between two bounds
+    /// Generate a random unsigned between two bounds.
     template<>
     unsigned generate<unsigned>(unsigned min, unsigned max);
 
-    /// Generate a random float between 0 and 1
+    /// Generate a random float between 0 and 1.
     template<>
     float generate<float>();
 
-    /// Generate a random double between 0 and 1
+    /// Generate a random double between 0 and 1.
     template<>
     double generate<double>();
 
-    // Generate of n sample from a range to an output iterator.
+    /// Generate of n sample from a range to an output iterator.
     template <class InputIterator, class OutputIterator>
     void sample_n(InputIterator first, InputIterator end,
 		  OutputIterator out, unsigned n);
 
-    // Generate a random rational number
+    /// Generate a random rational number.
     template<>
     vcsn::algebra::RationalNumber generate<vcsn::algebra::RationalNumber>();
 
-    // Generate a random rational number between bounds
+    /// Generate a random rational number between bounds.
     template<>
     vcsn::algebra::RationalNumber
     generate<vcsn::algebra::RationalNumber>
     (const vcsn::algebra::RationalNumber min,
      const vcsn::algebra::RationalNumber max);
+
+    /// Generate a random std::pair<char, int> (needed for the test suite).
+    template <>
+    std::pair<char, int> generate<std::pair<char, int> >();
+
+    /// Generate a random small_alpha_letter (needed for the test suite).
+//     template <>
+//     vcsn::algebra::small_alpha_letter::Letter
+//     generate<vcsn::algebra::small_alpha_letter::Letter>();
     /** @} */
 
   }

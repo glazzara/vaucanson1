@@ -31,7 +31,6 @@
 # define VCSN_ALGEBRA_CONCEPT_LETTER_HH
 
 # include <vaucanson/misc/static.hh>
-# include <climits>
 
 namespace vcsn {
 
