@@ -74,7 +74,6 @@ namespace vcsn {
 	{
 	  monoid_elt_t mc(series_.monoid(), c->second);
 	  monoid_elt_t md(series_.monoid(), d->second);
-	  //	  ret.push_back((mc * md).value());
 	  semiring_elt_t wc(series_.semiring(), c->first);
 	  semiring_elt_t wd(series_.semiring(), d->first);
 	  ret.push_back(std::make_pair((wc * wd).value(), 
@@ -86,9 +85,6 @@ namespace vcsn {
 
     MATCH__(Sum, lhs, rhs)
     {
-      // FIXME: this is bogus.
-      // The current version says (k1.a + b) + k2.a = k1.a + k2.a + b
-      // whereas it should say    (k1.a + b) + k2.a = (k1+k2).a + b
       match(lhs);
       match(rhs);
     }

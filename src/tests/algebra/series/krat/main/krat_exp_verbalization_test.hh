@@ -82,14 +82,17 @@ bool krat_exp_verbalization_test(tests::Tester& tg)
 
   test(t, e, "(a+b)", "(a+b)");
   test(t, e, "a.(a+b)", "(aa+ab)");
-  test(t, e, "b.(a+b)", "(ba+bb)");
   test(t, e, "(a+b).a", "(aa+ba)");
   test(t, e, "a+a", "(2 a)");  
-  test(t, e, "a+2 a", "(3 a)");
+  test(t, e, "(2 a)+a", "(3 a)");
+  test(t, e, "a+(2 a)", "(3 a)");
+  test(t, e, "(a+(2 a+b))", "((3 a)+b)");
+  test(t, e, "((a+b)+a))", "((2 a)+b)");
   test(t, e, "3 b.(a+2 b)", "((3 ba)+(6 bb))");
   test(t, e, "(a+2 b).(4 a)", "((4 aa)+(8 ba))");
   test(t, e, "(a+2 b).(a 4)", "((4 aa)+(8 ba))");
-
+  test(t, e, "2 a.(a+b).3 b", "((6 aab)+(6 abb))");
+  test(t, e, "a+(a+(a+(a+a))+a)", "(6 a)");
   return t.all_passed();
 
 }
