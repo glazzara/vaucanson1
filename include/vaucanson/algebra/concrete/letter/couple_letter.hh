@@ -30,10 +30,38 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH
 # define VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH
 
+# include <vaucanson/algebra/concept/letter.hh>
+
 # include <string>
 # include <iostream>
 
 // Here are functions to manipulate pairs.
+
+namespace vcsn
+{
+
+  namespace algebra
+  {
+
+    template <typename U, typename V>
+    struct letter_traits< std::pair<U, V> >
+    {
+      enum
+	{
+	  /*
+	   * Theoretically   cardinal   should   be   the   product   of
+	   * letter_traits<U>::cardinal and letter_traits<V>::cardinal.
+	   * But to  avoid overflows and for
+	   * practical reasons, it is better to consider it infinite.
+	   *
+	   * FIXME: Maybe doing this is not a good idea?
+	   */
+	  cardinal = std::numeric_limits<unsigned>::max()
+	};
+    };
+
+  } // End of namespace algebra.
+} // End of namespace vcsn.
 
 namespace std {
 
@@ -51,9 +79,9 @@ namespace std {
 } // std
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concrete/letter/couple_letter.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concrete/letter/couple_letter.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH

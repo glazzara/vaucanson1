@@ -1,3 +1,14 @@
+2004-03-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/letter.hh: Add a cardinal value
+	to letter_traits.
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh,
+	* include/vaucanson/algebra/concrete/letter/char_letter.hh,
+	* include/vaucanson/algebra/concrete/letter/range.hh: Add/update
+	the specialization of letter_traits.
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx: Use
+	letter_traits in op_max_size().
+
 2004-03-10  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/standard_of.hxx: Make the 

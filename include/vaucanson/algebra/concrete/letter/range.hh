@@ -1,7 +1,7 @@
 // range.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,8 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_LETTER_RANGE_HH
 # define VCSN_ALGEBRA_CONCRETE_LETTER_RANGE_HH
 
+# include <vaucanson/algebra/concept/letter.hh>
+
 namespace vcsn {
 
   namespace algebra {
@@ -51,7 +53,7 @@ namespace vcsn {
     private:
       T	       value_;
     };
-    
+
     template <char From, char To>
     struct static_char_interval
     {
@@ -61,13 +63,22 @@ namespace vcsn {
       static char random();
     };
 
+    template <class T, class Interval>
+    struct letter_traits< static_ranged<T, Interval> >
+    {
+      enum
+	{
+	  cardinal = Interval::from() - Interval::to() + 1
+	};
+    };
+
     // FIXME: op_leq may be more adapted.
     template <class T, class Interval>
-    bool operator<(const static_ranged<T, Interval>& lhs, 
+    bool operator<(const static_ranged<T, Interval>& lhs,
 		   const static_ranged<T, Interval>& rhs);
 
     template <class T, class Interval>
-    bool operator==(const static_ranged<T, Interval>& lhs, 
+    bool operator==(const static_ranged<T, Interval>& lhs,
 		    const static_ranged<T, Interval>& rhs);
 
     template <class Stream, class T, class Interval>
@@ -82,9 +93,9 @@ namespace vcsn {
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concrete/letter/range.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concrete/letter/range.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_LETTER_RANGE_HH

@@ -30,6 +30,7 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_ALPHABETS_SET_ALPHABET_HXX
 # define VCSN_ALGEBRA_CONCRETE_ALPHABETS_SET_ALPHABET_HXX
 
+# include <vaucanson/algebra/concept/letter.hh>
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
 # include <limits>
@@ -45,7 +46,7 @@ namespace vcsn
   size_t
   op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&)
   {
-    return std::numeric_limits<L>::max() - std::numeric_limits<L>::min();
+    return algebra::letter_traits<L>::cardinal;
   }
 
   template<typename L>

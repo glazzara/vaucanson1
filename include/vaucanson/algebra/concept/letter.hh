@@ -1,7 +1,7 @@
 // letter.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,20 @@
 #ifndef VCSN_ALGEBRA_CONCEPT_LETTER_HH
 # define VCSN_ALGEBRA_CONCEPT_LETTER_HH
 
+# include <limits>
+
 namespace vcsn {
 
   namespace algebra {
 
     template <class L>
-    struct letter_traits 
+    struct letter_traits
     {
+      enum
+	{
+	  cardinal =
+	    std::numeric_limits<L>::max() - std::numeric_limits<L>::min() + 1
+	};
     };
 
   } // algebra
