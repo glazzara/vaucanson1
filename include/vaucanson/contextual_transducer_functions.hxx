@@ -29,8 +29,6 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS_HXX
-# define VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS_HXX
 
 # include <vaucanson/contextual_transducer_functions.hh>
 # include <vaucanson/algorithms/evaluation.hh>
@@ -111,6 +109,3 @@ evaluation(const monoid_elt_t& input_word, const Element<TS, TT>& t)
   evaluation(w, t, result);
   return verbalize(aut_to_exp(generalized(result)));
 }
-
-
-#endif // !VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS_HXX

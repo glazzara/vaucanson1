@@ -27,8 +27,6 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HH
-# define VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HH
 
 template <class T>
 automaton_t new_automaton(const T& alphabet);
@@ -51,5 +49,3 @@ thompson_of(const Element<SeriesSet, SeriesImpl>& e);
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/contextual_automaton_functions.hxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY
-
-#endif // ! VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HH

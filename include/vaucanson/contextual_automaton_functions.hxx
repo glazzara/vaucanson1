@@ -28,10 +28,6 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HXX
-# define VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HXX
-
-# include <vaucanson/contextual_automaton_functions.hh>
 
 /*----------------.
 | new_automaton() |
@@ -96,5 +92,3 @@ thompson_of(const Element<SeriesSet, SeriesImpl>& e)
 {
   return do_thompson_of(e.structure(), e.value());
 }
-
-#endif // ! VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HXX

@@ -29,8 +29,6 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS
-# define VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS
 
 template <class T>
 automaton_t new_automaton(const T& input_alphabet,
@@ -49,5 +47,3 @@ evaluation(const monoid_elt_t& input_word, const Element<TS, TT>& t);
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/contextual_transducer_functions.hxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY
-
-#endif // ! VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS_HH
