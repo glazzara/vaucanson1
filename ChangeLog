@@ -1,5 +1,11 @@
 2004-03-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/thompson_test.hh: Fix insertion of
+	letters in the alphabet.
+
+2004-03-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/xml/genutfstrings.sh: Make portable on NetBSD. Do
 	not use sed -f -.
 

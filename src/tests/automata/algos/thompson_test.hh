@@ -108,8 +108,12 @@ bool thompson_test(tests::Tester& tg)
   tests::Tester t (tg.verbose());
 
   alphabet_t		at;
-  letter_t		la = at.random_letter(); at.insert(la);
-  letter_t		lb = at.random_letter(); at.insert(lb);
+  letter_t		la = at.random_letter();
+  at.insert(la);
+  letter_t		lb = at.random_letter();
+  while (at.contains(lb))
+    lb = at.random_letter();
+  at.insert(lb);
   monoid_t		md (at);
   semiring_t		sg;
   series_t		ss (sg, md);
