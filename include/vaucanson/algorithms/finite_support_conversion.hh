@@ -59,6 +59,8 @@ namespace vcsn
   template<typename S, typename T, typename Ss, typename Ts>
   void finite_support_convert(Element<S, T>& dst, const Element<Ss, Ts>& org);
 
+  /** @} */
+
 }
 
 #include <vaucanson/algorithms/finite_support_conversion.hxx>

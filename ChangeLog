@@ -1,5 +1,13 @@
 2003-08-17  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/finite_support_conversion.hh: Add 
+	missing comment delimiter.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Mention FIXME.
+	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Mention
+	bugs.
+
+2003-08-17  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/finite_support_conversion.hh: Document.
 
 2003-07-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>

@@ -84,6 +84,9 @@ namespace vcsn {
 
     MATCH__(Sum, lhs, rhs)
     {
+      // FIXME: this is bogus.
+      // The current version says (k1.a + b) + k2.a = k1.a + k2.a + b
+      // whereas it should say    (k1.a + b) + k2.a = (k1+k2).a + b
       match(lhs);
       match(rhs);
     }
@@ -92,31 +95,39 @@ namespace vcsn {
     MATCH_(Star, node)
     {
       // undefined case.
-      assertion(0);
+      assertion(!"valid");
     }
     END
 
     MATCH__(LeftWeight, w, node)
     {
+      // FIXME: this is bogus.
+      // The current version says (a + k.b) = k.a + k.b
+      // whereas it should say    (a + k.b) = a + k.b
+      // (it does not save the current support before recurring)
       match(node);
       for_each_(ext_support_t, c, supp_)
-	c->first = (semiring_elt_t(series_.semiring(), w) * 
-		    semiring_elt_t(series_.semiring(), c->first)).value();
+	c->first = algebra::op_mul(series_.semiring(), w,
+				   series_.semiring(), c->first);
     }
     END
 
     MATCH__(RightWeight, node, w)
     {
+      // FIXME: this is bogus. See before.
       match(node);
+      for_each_(ext_support_t, c, supp_)
+	c->first = algebra::op_mul(series_.semiring(), c->first,
+				   series_.semiring(), w);
     }
     END
 
     MATCH_(Constant, m)
     {
       supp_.push_back(std::make_pair
-		      (algebra::identity_as<semiring_elt_value_t>
-		       ::of(series_.semiring()).value(),
-		       m));
+		      (algebra::identity_value(series_.semiring(), 
+					       SELECT(semiring_elt_value_t)),
+		       m))
     }
     END
 
@@ -128,10 +139,10 @@ namespace vcsn {
     MATCH(One)
     {
       supp_.push_back(std::make_pair
-		      (algebra::identity_as<semiring_elt_value_t>
-		       ::of(series_.semiring()).value(),
-		       algebra::identity_as<monoid_value_t>
-		       ::of(series_.monoid()).value()));
+		      (algebra::identity_value(series_.semiring(), 
+					       SELECT(semiring_elt_value_t)),
+		       algebra::identity_value(series_.monoid(), 
+					       SELECT(monoid_value_t))));
     }
     END
 
