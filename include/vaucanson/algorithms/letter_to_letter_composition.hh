@@ -30,6 +30,8 @@
 #ifndef VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HH
 # define VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HH
 
+# include <vaucanson/design_pattern/design_pattern.hh>
+
 namespace vcsn {
 
   template <class S, class T>

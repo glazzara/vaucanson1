@@ -1,5 +1,13 @@
 2003-12-10  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/Makefile.am: Update.
+	* include/vaucanson/algorithms/letter_to_letter_composition.hh:
+	    Fix missing header.
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx:
+	    Fix typename.
+
+2003-12-10  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/letter_to_letter_composition.h[h,xx]:
 	   New.
 

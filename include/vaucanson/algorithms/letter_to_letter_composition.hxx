@@ -51,8 +51,8 @@ namespace vcsn {
     typedef std::map<std::pair<hstate_t, hstate_t>, hstate_t> assoc_t;
     typedef std::set<hedge_t> delta_ret_t;
 
-    weights_t output_series(f.series().weights().weights(), 
-			    f.series().weights().monoid());
+    semiring_t output_series(f.series().semiring().semiring(), 
+			    f.series().semiring().monoid());
     series_t series(output_series, g.series().monoid());
     automata_set_t set(series);
     transducer_t output(set);
@@ -80,18 +80,18 @@ namespace vcsn {
 	f.deltac(f_delta_ret, *s, delta_kind::edges());
 	g.deltac(g_delta_ret, *t, delta_kind::edges());
 	
-	for_all_const(delta_ret_t, lhs_e, f_delta_ret)
+	for_all_const_(delta_ret_t, lhs_e, f_delta_ret)
 	  {
 	    series_elt_t l = f.serie_of(*lhs_e);
-	    for_all_const(delta_ret_t, rhs_e, g_delta_ret)
+	    for_all_const_(delta_ret_t, rhs_e, g_delta_ret)
 	      {
 		series_elt_t l_ = g.serie_of(*rhs_e);
 		series_elt_t l__(series);
 		typedef typename serie_t::support_t support_t;
-		for_all_const(support_t, supp, l.supp())
+		for_all_const_(support_t, supp, l.supp())
 		  {
-		    weight_t ol = l.get(*supp);
-		    typedef typename weight_t::support_t wsupport_t;
+		    semiring_elt_t ol = l.get(*supp);
+		    typedef typename semiring_elt_t::support_t wsupport_t;
 		    wsupport_t wsupp = ol.supp();
 		    for_all_const_(wsupport_t, ss, wsupp)
 		      l__ += serie_t(monoid_elt_t(*supp)) * l_.get(*ss);

@@ -145,6 +145,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/krat_exp_print.hxx	     \
 	vaucanson/algorithms/krat_exp_realtime.hh		     \
 	vaucanson/algorithms/krat_exp_realtime.hxx		     \
+	vaucanson/algorithms/letter_to_letter_composition.hxx	     \
+	vaucanson/algorithms/letter_to_letter_composition.hh	     \
 	vaucanson/algorithms/minimization_moore.hh		     \
 	vaucanson/algorithms/minimization_moore.hxx		     \
 	vaucanson/algorithms/normalized.hh			     \
