@@ -1,4 +1,4 @@
-// standard_of.hh: this file is part of the Vaucanson project.
+// determinize.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -35,41 +35,12 @@
 
 namespace vcsn {
 
-  /**
-   * @file   standard_of.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 20:46:53 2003
-   * 
-   * @brief  This file provides a converter from expression to standard automaton.
-   * 
-   */
-
-
   /*! \addtogroup algorithms */  /* @{ */
 
-  /** 
-   * @brief Convert a rational expression into a standard automaton.
-   * 
-   * @param  e the expression to convert.
-   * @param  a the automaton to store the result.
-   *
-   * @note the automaton is used to enable the use of different series
-   * from the expression.
-   */
+  //! Convert a krat expression into an automaton using Standard_Of construction.
   template <typename A, typename T, typename Exp>
   void
-  standard_of(Element<A, T>& a, const Exp& e);
-
-  /** 
-   * @brief Convert a rational expression into a standard automaton.
-   * 
-   * @param  e the expression to convert.
-   * @return a standard automaton.
-   * @note the automaton is defined using the series of the expression.
-   */
-  template <typename A, typename T, typename Exp>
-  Element<A, T>
-  standard_of(const Exp& e);
+  standard_of(Element<A, T>&, const Exp&);
   
   /*! @} */
 

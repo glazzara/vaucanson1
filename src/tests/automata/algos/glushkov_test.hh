@@ -80,7 +80,7 @@ bool glushkov_test(tests::Tester& tg)
       {
 	monoid_elt_t w = exp.choose_from_supp();
 	if (t.verbose() == tests::high)
-	  std::cout << "TEST: glushkov " << i << " : test " << w << std::endl;
+	  std::cout << "TEST: glushkov " << i << " on " << exp << " : test " << w << std::endl;
 	if (eval(au, w) == zero_as<weight_value_t>::of(s.weights()))
 	  {
 	    break;
@@ -98,6 +98,8 @@ bool glushkov_test(tests::Tester& tg)
     for (unsigned nb = 0; nb < nb_test; ++nb)
       {
 	krat_t exp = s.choose(SELECT(exp_t));
+	if (t.verbose() == tests::high)
+	  std::cerr << "Expression : " << exp << std::endl;
 	vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
 	Auto	au = gen.empty();
 	standard_of(au, exp.value());

@@ -117,7 +117,7 @@ namespace vcsn {
 
     // remove linked edges.
     std::list<hedge_t> edges = states_[n].input_edges;
-    for_each_const_(std::set<hedge_t>, e, edges)
+    for_each_const_(std::list<hedge_t>, e, edges)
       this->del_edge(*e);
     edges = states_[n].output_edges;
     for_each_const_(std::list<hedge_t>, e, edges)

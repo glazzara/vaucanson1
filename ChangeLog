@@ -1,5 +1,15 @@
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/misc/random.hxx (generate<bool>): Fix.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx (choose): Fix.
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx: Minor.
+	* include/vaucanson/automata/concrete/graph.hxx: Fix.
+	* include/vaucanson/algorithms/standard_of.hh: New version.
+	* include/vaucanson/algorithms/standard_of.hxx: Idem.
+	* src/tests/automata/algos/glushkov_test.hh: Use it.
+
+2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/Makefile.am: Fix.
 
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>

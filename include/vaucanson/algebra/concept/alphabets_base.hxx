@@ -130,7 +130,7 @@ namespace vcsn {
  
     assert (is_finite() && size() > 0);
     
-    int  nr = ::utility::random::generate<int>(0, size());
+    int  nr = ::utility::random::generate<int>(0, size() - 1);
 
     const_iterator it = begin();
     for (int k = 0; k < nr; ++k)
