@@ -34,7 +34,7 @@
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <vaucanson/misc/contract.hh>
 # include <sstream>
-# include <set>
+# include <vaucanson/tools/usual_escaped_characters.hh>
 
 namespace vcsn {
 
@@ -617,20 +617,8 @@ namespace vcsn {
   inline
   St& op_rout(const algebra::Series<W, M>& s, St& st, const algebra::polynom<Tm, Tw>& p)
   {
-    // FIXME: export this set
     typename algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    std::set<char> escape_set;
-    escape_set.insert('.');
-    escape_set.insert('+');
-    escape_set.insert('*');
-    escape_set.insert('(');
-    escape_set.insert(')');
-    escape_set.insert('\\');
-    escape_set.insert(' ');
-    escape_set.insert('1');
-    escape_set.insert('0');
-    escape_set.insert('[');
-    escape_set.insert(']');
+    std::set<char> escape_set = tools::usual_escaped_charaters();
 
     while(i != p.end())
       {
@@ -776,18 +764,7 @@ namespace std {
 			   const vcsn::algebra::polynom<Tm, Tw>& p)
   {
     typename vcsn::algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    std::set<char> escape_set;
-    escape_set.insert('.');
-    escape_set.insert('+');
-    escape_set.insert('*');
-    escape_set.insert('(');
-    escape_set.insert(')');
-    escape_set.insert('\\');
-    escape_set.insert(' ');
-    escape_set.insert('1');
-    escape_set.insert('0');
-    escape_set.insert('[');
-    escape_set.insert(']');
+    std::set<char> escape_set = vcsn::tools::usual_escaped_charaters();
 
     while (i != p.end())
       {

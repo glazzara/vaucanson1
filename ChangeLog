@@ -1,3 +1,11 @@
+2004-01-30  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/tools/usual_escaped_characters.hxx: New.
+	* include/vaucanson/tools/usual_escaped_characters.hh: New.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Change escaped
+	  characters set initialization.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: Likewise.
+
 2004-01-21  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Fix a

@@ -38,6 +38,7 @@
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 # include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>
+# include <vaucanson/tools/usual_escaped_characters.hh>
 
 namespace vcsn {
 
@@ -390,18 +391,7 @@ namespace std {
   std::ostream& operator<<(std::ostream& o,
 			   const vcsn::rat::exp<M_, W_>& exp)
   { 
-    std::set<char> escape_set;
-    escape_set.insert('.');
-    escape_set.insert('+');
-    escape_set.insert('*');
-    escape_set.insert('(');
-    escape_set.insert(')');
-    escape_set.insert('\\');
-    escape_set.insert(' ');
-    escape_set.insert('1');
-    escape_set.insert('0');
-    escape_set.insert('[');
-    escape_set.insert(']');
+    std::set<char> escape_set = vcsn::tools::usual_escaped_charaters();
     vcsn::rat::DumpVisitor<M_, W_> v(o, escape_set, "0", "1");
     exp.accept(v);
     return o;
