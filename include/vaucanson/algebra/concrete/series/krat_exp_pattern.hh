@@ -150,20 +150,20 @@ struct N     : public UnaryOp<T>		\
 
 #define MATCH__(N, Lhs, Rhs)			\
 return_type					\
-match_node(const N& p____) 		\
+match_node##N##(const N& p____) 		\
 {						\
   typename N::lhs_node_type Lhs = p____.lhs();	\
   typename N::rhs_node_type Rhs = p____.rhs();
   
 #define MATCH_(N, Val)				\
 return_type					\
-match_node(const N& p____) 		\
+match_node##N##(const N& p____) 		\
 {						\
   typename N::value_type Val(p____.value());
 
 #define MATCH(N)					\
 return_type						\
-match_node(const N& p____) 			\
+match_node##N##(const N& p____) 			\
 {						
    
 #define END }
@@ -203,6 +203,81 @@ match_node(const N& p____) 			\
     template <class T>
       struct DispatchFunction;
 
+      template <class Self, class Series, class T, class Dispatch>
+	struct KRatExpIdentity : algebra::KRatExpMatcher<
+	Self,
+	T, 
+	Element<Series, T>,
+	Dispatch
+	>
+	{
+	  typedef Self				            self_t;
+	  typedef Element<Series, T>                        return_type;
+	  typedef typename Element<Series, T>::weight_t     weight_t;
+	  typedef typename weight_t::value_t		    weight_value_t;
+	  typedef typename Element<Series, T>::monoid_elt_t monoid_elt_t;
+	  typedef typename monoid_elt_t::set_t		    monoid_t;
+	  typedef typename monoid_t::alphabet_t		    alphabet_t;
+	  typedef typename alphabet_t::letter_t		    letter_t;
+	  INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
+
+	  KRatExpIdentity(const Element<Series, T>& exp) :
+	    exp_(exp)
+	  {}
+
+	  MATCH__(Product, lhs, rhs)
+	  {
+	    return lhs * rhs;
+	  }
+	  END
+
+	  MATCH__(Sum, lhs, rhs)
+	  {
+	    return lhs + rhs;
+	  }
+	  END
+
+	  MATCH_(Star, e)
+	  {
+	    return e.star();
+	  }
+	  END
+
+	  MATCH__(LeftWeight, w, e)
+	  {
+	    return w * e;
+	  }
+	  END
+
+	  MATCH__(RightWeight, e, w)
+	  {
+	    return e * w;
+	  }
+	  END
+
+	  MATCH_(Constant, m)
+	  {
+	    return m;
+	  }
+	  END
+
+	  MATCH(Zero)
+	  {
+	    return exp_.set().zero(SELECT(T));	  
+	  }
+	  END
+
+	  MATCH(One)
+	  {
+	    return exp_.set().identity(SELECT(T));	  
+	  }
+	  END
+
+	protected:
+	  Element<Series, T>  exp_;
+	};
+
+      
     } // algebra
 
 } // vcsn

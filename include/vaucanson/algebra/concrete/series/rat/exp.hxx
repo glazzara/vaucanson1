@@ -263,7 +263,7 @@ namespace vcsn {
     DispatchVisitor<Matcher, Monoid, Semiring>::
     product(const node_t* lhs, const node_t* rhs) 
     {
-      ret_ = matcher_.match_node(typename Matcher::Product(lhs, rhs));
+      ret_ = matcher_.match_nodeProduct(typename Matcher::Product(lhs, rhs));
     }
 
     template <class Matcher, class Monoid, class Semiring>
@@ -271,14 +271,14 @@ namespace vcsn {
     DispatchVisitor<Matcher, Monoid, Semiring>::
     sum(const node_t* lhs, const node_t* rhs) 
     {
-      ret_ = matcher_.match_node(typename Matcher::Sum(lhs, rhs));
+      ret_ = matcher_.match_nodeSum(typename Matcher::Sum(lhs, rhs));
     }
     template <class Matcher, class Monoid, class Semiring>
     void 
     DispatchVisitor<Matcher, Monoid, Semiring>::
     star(const node_t* node)
     {
-      ret_ = matcher_.match_node(typename Matcher::Star(node));
+      ret_ = matcher_.match_nodeStar(typename Matcher::Star(node));
     }
 
     template <class Matcher, class Monoid, class Semiring>   
@@ -286,7 +286,8 @@ namespace vcsn {
     DispatchVisitor<Matcher, Monoid, Semiring>::
     left_weight(const weight_value_t& w, const node_t* node) 
     {
-      ret_ = matcher_.match_node(typename Matcher::LeftWeight(w, node));
+      ret_ = matcher_.match_nodeLeftWeight(typename Matcher::LeftWeight(w, 
+									node));
     }
 
     template <class Matcher, class Monoid, class Semiring>  
@@ -294,7 +295,8 @@ namespace vcsn {
     DispatchVisitor<Matcher, Monoid, Semiring>::
     right_weight(const weight_value_t& w, const node_t* node)
     {
-      ret_ = matcher_.match_node(typename Matcher::RightWeight(node, w));
+      ret_ = matcher_.match_nodeRightWeight
+	(typename Matcher::RightWeight(node, w));
     }
 
     template <class Matcher, class Monoid, class Semiring>
@@ -302,7 +304,7 @@ namespace vcsn {
     DispatchVisitor<Matcher, Monoid, Semiring>::
     constant(const monoid_value_t& m)
     {
-      ret_ = matcher_.match_node(typename Matcher::Constant(m));
+      ret_ = matcher_.match_nodeConstant(typename Matcher::Constant(m));
     }
 
     template <class Matcher, class Monoid, class Semiring>
@@ -310,7 +312,7 @@ namespace vcsn {
     DispatchVisitor<Matcher, Monoid, Semiring>::
     zero()
     {
-      ret_ = matcher_.match_node(typename Matcher::Zero());
+      ret_ = matcher_.match_nodeZero(typename Matcher::Zero());
     }
 
     template <class Matcher, class Monoid, class Semiring>
@@ -318,7 +320,7 @@ namespace vcsn {
     DispatchVisitor<Matcher, Monoid, Semiring>::
     one()
     {
-      ret_ = matcher_.match_node(typename Matcher::One());
+      ret_ = matcher_.match_nodeOne(typename Matcher::One());
     }
 
     template <class Matcher, class Monoid, class Semiring>

@@ -64,10 +64,6 @@ namespace vcsn {
 	  undefined = true;
 	  return lhs;
 	}
-//       std::cout  << "dlhs >>> " << a_ << "/" << match(lhs) << std::endl;
-//       std::cout  << "rhs  >>> " << a_ << "/"<< rhs << std::endl;
-//       std::cout  << "cout >>> " << a_ << "/"<< ret.first << std::endl;
-//       std::cout  << "drhs >>> " << a_ << "/"<< match(rhs) << std::endl;
       return (match(lhs) * rhs) + ret.first * match(rhs);
     }
     END
@@ -86,8 +82,6 @@ namespace vcsn {
 	  undefined = true;
 	  return e;
 	}
-      //      std::cout << "de    >>> " << a_ << "/" << match(e) << std::endl;
-      //      std::cout << "c(e)  >>> " << a_ << "/" << ret.first << std::endl;
       return ret.first.star() * match(e) * e.star();
     }
     END
@@ -137,7 +131,8 @@ namespace vcsn {
   derivate(const Element<Series, T>& exp, 
 	   Letter a)
   {
-    KRatExpDerivation<Series, T, algebra::DispatchFunction<T> > matcher(exp, a);
+    KRatExpDerivation<Series, T, algebra::DispatchFunction<T> > 
+      matcher(exp, a);
     Element<Series, T> ret = matcher.match(exp);
     if (matcher.undefined)
       return std::make_pair(ret, false);

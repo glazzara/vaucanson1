@@ -10,6 +10,7 @@ check_PROGRAMS =                    \
 	krat_exp_constant_term-test \
 	krat_exp_derivation-test    \
 	krat_exp_parse-test         \
+	krat_exp_linearize-test     \
 	krat-test
 
 series_test_SOURCES = series-test.cc
@@ -21,5 +22,7 @@ krat_exp_parse_test_SOURCES = krat_exp_parse-test.cc
 krat_exp_constant_term_test_SOURCES = krat_exp_constant_term-test.cc
 
 krat_exp_derivation_test_SOURCES = krat_exp_derivation-test.cc
+
+krat_exp_linearize_test_SOURCES = krat_exp_linearize-test.cc
 
 EXTRA_DIST = series-test.hh 

@@ -1,3 +1,26 @@
+2002-11-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.133)
+	* 
+
+2002-11-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.132)
+	* include/vaucanson/algebra/concrete/series:
+		krat.hxx: minor.
+	* include/vaucanson/algorithms/:
+		krat_exp_derivation.hxx: minor.
+		krat_exp_linearize.h[h,xx]: added.
+	* src/tests/algebra/series:
+		krat_exp_linearize_test.hh: added.
+		krat_exp_linearize-test.cc: added.
+		Makefile.am: use it.
+	* include/vaucanson/algebra/concrete/series/rat:
+		krat_exp_pattern.hh:
+		   rename match_node in MATCH* to match_node##Node##
+		     (because of non inherited overloaded methods)
+		   add KRatExpIdentity.
+		rat/exp.hxx: use match_node##Node## in the dispatcher 
+		   specialization.
+
 2002-11-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.131)
 	* include/vaucanson/algorithms:

@@ -18,9 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGEBRA_KRAT_HXX
-# define ALGEBRA_KRAT_HXX
+#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HXX
+# define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HXX
 
 # include <utility>
 # include <vaucanson/algebra/concrete/series/series.hh>
@@ -801,7 +800,8 @@ namespace vcsn {
 	    // plus
 	  case 1 :
 	    {
-	      Element<Series<W,M>, rat::exp<Tm,Tw> > ep = s.monoid().choose(SELECT(Tm));
+	      Element<Series<W,M>, rat::exp<Tm,Tw> > ep = 
+		s.monoid().choose(SELECT(Tm));
 	      ep = ep * s.weights().choose(SELECT(Tw));
 	      unsigned t = RAND___(2);
 	      if (t < 1)
@@ -813,7 +813,8 @@ namespace vcsn {
 	    // mult
 	  case 2 :
 	    {
-	      Element<Series<W,M>, rat::exp<Tm,Tw> > ep = s.monoid().choose(SELECT(Tm));
+	      Element<Series<W,M>, rat::exp<Tm,Tw> > ep = 
+		s.monoid().choose(SELECT(Tm));
 	      ep = ep * s.weights().choose(SELECT(Tw));
 	      unsigned t = RAND___(2);
 	      if (t < 1)
@@ -829,5 +830,5 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // ALGEBRA_KRAT_HH
+#endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HXX
 
