@@ -1,4 +1,4 @@
-// determinize.hh: this file is part of the Vaucanson project.
+// is_realtime.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,52 +27,37 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_DETERMINIZE_HH
-# define VCSN_ALGORITHMS_DETERMINIZE_HH
+#ifndef VCSN_ALGORITHMS_IS_REALTIME_HXX
+# define VCSN_ALGORITHMS_IS_REALTIME_HXX
 
+# include <vaucanson/algorithms/is_realtime.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/tools/usual.hh>
 
 namespace vcsn {
 
-  /**
-   * @file   determinize.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 19:13:10 2003
-   * 
-   * @brief  This file provides the determinization algorithm for boolean automata.
-   * 
-   */
-
-
-  /*! \addtogroup algorithms */  /* @{ */
-
-  /** 
-   * @brief Returns the determinized of a boolean automaton.
-   * 
-   * @param a the boolean automaton to determinize.
-   * 
-   * @return a fresh boolean automaton that is the determinization of 'a'.
-   */
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a);
-
-  /** 
-   * @brief Test if an automaton is deterministic.
-   * 
-   * @param a a boolean automaton.
-   * 
-   * @return true if 'a' is deterministic.
-   */
-  template<typename A, typename T>
+  template<typename S, typename A>
   bool
-  is_deterministic(const Element<A, T>& a);
-  
-  /*! @} */
+  do_is_realtime_transducer(const AutomataBase<S>& trans_set, 
+		   const A& trans)
+  {
+    AUTOMATON_TYPES(A);
+    for_each_edge(e, trans)
+      {
+        if (!is_letter_support(trans.serie_of(*e)))
+	  return false;
+      }
+    return true;
+  }
+
+  template<typename S, typename A>
+  bool
+  is_realtime(const Element<S, A>& a)
+  {
+    return do_is_realtime_transducer(a.set(), a);
+  }
 
 } // vcsn
 
-# include <vaucanson/algorithms/determinize.hxx>
+#endif // VCSN_ALGORITHMS_IS_REALTIME_HXX
 
-#endif // VCSN_ALGORITHMS_DETERMINIZE_HH

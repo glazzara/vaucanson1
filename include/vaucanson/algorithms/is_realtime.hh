@@ -1,4 +1,4 @@
-// determinize.hh: this file is part of the Vaucanson project.
+// is_realtime.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,52 +27,40 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_DETERMINIZE_HH
-# define VCSN_ALGORITHMS_DETERMINIZE_HH
+#ifndef VCSN_ALGORITHMS_IS_REALTIME_HH
+# define VCSN_ALGORITHMS_IS_REALTIME_HH
 
-# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 
+/**
+ * @file   is_realtime.hh
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @date   Fri Jul  4 13:49:07 2003
+ * 
+ * @brief  This file contains a test for realtime transducers.
+ * 
+ */
+
 namespace vcsn {
-
-  /**
-   * @file   determinize.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 19:13:10 2003
-   * 
-   * @brief  This file provides the determinization algorithm for boolean automata.
-   * 
-   */
-
 
   /*! \addtogroup algorithms */  /* @{ */
 
   /** 
-   * @brief Returns the determinized of a boolean automaton.
+   * @brief Test to detect realtime transducers.
    * 
-   * @param a the boolean automaton to determinize.
+   * @param t the transducer to test.
    * 
-   * @return a fresh boolean automaton that is the determinization of 'a'.
+   * @return true if the transducer is realtime.
    */
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a);
 
-  /** 
-   * @brief Test if an automaton is deterministic.
-   * 
-   * @param a a boolean automaton.
-   * 
-   * @return true if 'a' is deterministic.
-   */
-  template<typename A, typename T>
+  template<typename S, typename A>
   bool
-  is_deterministic(const Element<A, T>& a);
-  
-  /*! @} */
+  is_realtime(const Element<S, A>&);
 
 } // vcsn
 
-# include <vaucanson/algorithms/determinize.hxx>
+  /*! @} */
 
-#endif // VCSN_ALGORITHMS_DETERMINIZE_HH
+# include <vaucanson/algorithms/is_realtime.hxx>
+#endif // VCSN_ALGORITHMS_IS_REALTIME_HH
+

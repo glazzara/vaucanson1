@@ -1,3 +1,13 @@
+2003-07-04  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/determinize.hh: Fix documentation.
+	* include/vaucanson/algorithms/is_realtime.hh,
+	  include/vaucanson/algorithms/is_normalized.hh,
+	  include/vaucanson/algorithms/is_letterized.hh,
+	  include/vaucanson/algorithms/is_realtime.hxx,
+	  include/vaucanson/algorithms/is_normalized.hxx,
+	  include/vaucanson/algorithms/is_letterized.hxx: Re-add.
+
 2003-07-04  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* configure.ac: Add the algorithms demo directory.

@@ -1,4 +1,4 @@
-// determinize.hh: this file is part of the Vaucanson project.
+// is_letterized.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,52 +27,38 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_DETERMINIZE_HH
-# define VCSN_ALGORITHMS_DETERMINIZE_HH
+#ifndef VCSN_ALGORITHMS_IS_LETTERIZED_HH
+# define VCSN_ALGORITHMS_IS_LETTERIZED_HH
 
-# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 
+
+/**
+ * @file   is_letterized.hh
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @date   Fri Jul  4 13:42:52 2003
+ * 
+ * @brief  This file contains letter-to-letter feature testing.
+ * 
+ */
 namespace vcsn {
-
-  /**
-   * @file   determinize.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 19:13:10 2003
-   * 
-   * @brief  This file provides the determinization algorithm for boolean automata.
-   * 
-   */
-
 
   /*! \addtogroup algorithms */  /* @{ */
 
   /** 
-   * @brief Returns the determinized of a boolean automaton.
+   * @brief Test the letter to letter features.
    * 
-   * @param a the boolean automaton to determinize.
+   * @param t the transducer to test.
    * 
-   * @return a fresh boolean automaton that is the determinization of 'a'.
+   * @return true if the transducer is letter to letter.
    */
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a);
-
-  /** 
-   * @brief Test if an automaton is deterministic.
-   * 
-   * @param a a boolean automaton.
-   * 
-   * @return true if 'a' is deterministic.
-   */
-  template<typename A, typename T>
+  template<typename S, typename A>
   bool
-  is_deterministic(const Element<A, T>& a);
-  
+  is_letterized_transducer(const Element<S, A>& t);
+
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/determinize.hxx>
-
-#endif // VCSN_ALGORITHMS_DETERMINIZE_HH
+# include <vaucanson/algorithms/is_letterized.hxx>
+#endif // VCSN_ALGORITHMS_IS_LETTERIZED_HH

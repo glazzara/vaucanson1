@@ -1,4 +1,4 @@
-// determinize.hh: this file is part of the Vaucanson project.
+// is_letterized.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,52 +27,41 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_DETERMINIZE_HH
-# define VCSN_ALGORITHMS_DETERMINIZE_HH
+#ifndef VCSN_ALGORITHMS_IS_LETTERIZED_HXX
+# define VCSN_ALGORITHMS_IS_LETTERIZED_HXX
 
+# include <vaucanson/algorithms/is_letterized.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
-  /**
-   * @file   determinize.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 19:13:10 2003
-   * 
-   * @brief  This file provides the determinization algorithm for boolean automata.
-   * 
-   */
-
-
-  /*! \addtogroup algorithms */  /* @{ */
-
-  /** 
-   * @brief Returns the determinized of a boolean automaton.
-   * 
-   * @param a the boolean automaton to determinize.
-   * 
-   * @return a fresh boolean automaton that is the determinization of 'a'.
-   */
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a);
-
-  /** 
-   * @brief Test if an automaton is deterministic.
-   * 
-   * @param a a boolean automaton.
-   * 
-   * @return true if 'a' is deterministic.
-   */
-  template<typename A, typename T>
+  template<typename S, typename A>
   bool
-  is_deterministic(const Element<A, T>& a);
-  
-  /*! @} */
+  do_is_letterized_transducer(const AutomataBase<S>& trans_set, 
+			      const A& trans)
+  {
+    AUTOMATON_TYPES(A);
+    bool is_letterized = true;
+    for_each_edge(e, trans)
+      {
+        is_letterized &= is_letter_support(trans.serie_of(*e));
+	for_each_const_(serie_t::support_t, i, trans.serie_of(*e).supp())
+	  {	
+	    is_letterized &= is_letter_support(trans.serie_of(*e).get(*i)); 
+	    if (!is_letterized)
+	      return false;
+	  }
+      }
+    return true;
+  }
 
-} // vcsn
+  template<typename S, typename A>
+  bool
+  is_letterized_transducer(const Element<S, A>& a)
+  {
+    return do_is_letterized_transducer(a.set(), a);
+  }
+}
 
-# include <vaucanson/algorithms/determinize.hxx>
-
-#endif // VCSN_ALGORITHMS_DETERMINIZE_HH
+#endif // VCSN_ALGORITHMS_IS_LETTERIZED_HXX
