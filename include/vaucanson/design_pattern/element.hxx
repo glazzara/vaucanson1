@@ -58,7 +58,7 @@ namespace vcsn {
   template <class S, class T>
   Element<S,T>::Element(const Element& other) :
     MetaElement<S, T>(other),
-    SetSlot<S>(static_cast<const SetSlot<S>& >(other)),
+    SetSlot<S>(other),
     value_(other.value_)
   {}
 
@@ -184,7 +184,7 @@ namespace vcsn {
   const S&
   Element<S,T>::structure() const
   {
-    return _structure_get();
+    return this->_structure_get();
   }
 
   template <class S, class T>

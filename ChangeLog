@@ -1,5 +1,20 @@
 2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
 
+	Fix a compiler warning introducted on 2005-01-14 (SetSlot
+	optimisation). Simplify.
+	
+	* include/vaucanson/design_pattern/element.hxx: Simplify call to
+	base constructor. 
+	* include/vaucanson/algebra/implementation/series/series.hxx:
+	Likewise.
+
+	* include/vaucanson/design_pattern/element.hxx: Prepend call to
+	member of base class with "this->" since G++ 3.4 whines about it.
+	* include/vaucanson/automata/concept/automata.hxx,
+	* include/vaucanson/automata/concept/transducer.hxx: Likewise.
+	
+2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
+
 	* reheader.pl: Add 2005 to copyright appends.
 	
 	* Makefile.am: Mention forgotten xml.m4 in the installable m4

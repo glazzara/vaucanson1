@@ -46,7 +46,7 @@ namespace vcsn {
   const Series&
   Automata<Series>::series() const
   {
-    return _structure_get();
+    return this->_structure_get();
   }
 
   template <class Series>
