@@ -1,3 +1,28 @@
+2004-07-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	Add a new service for the automata context headers: new_rat_exp().
+	For a matter of coherence, the type krat_exp_t has been changed to
+	rat_exp_t.
+
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh: Rename krat_exp_t as
+	rat_exp_t.
+
+	* src/demos/samples/algorithms/derivatives_automaton.cc,
+	* src/demos/samples/algorithms/determinize_standard.cc,
+	* src/demos/ciaa/ex2.cc,
+	* src/demos/ciaa/ex3.cc: Update.
+
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx: Add the
+	new_rat_exp() function.
+
+	* src/demos/fibonacci/fibonacci.cc: Update.
+
+
 2004-07-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	This is the first of a series of demos for Vaucanson XML.

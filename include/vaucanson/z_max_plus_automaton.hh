@@ -62,11 +62,11 @@ namespace vcsn {
     automaton_t;
 
     typedef generalized_traits<automaton_t>::automaton_t gen_automaton_t;
-    
+
     AUTOMATON_TYPES_EXACT(automaton_t);
 
-    typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;
-    typedef Element<series_set_t, krat_exp_impl_t>			krat_exp_t;
+    typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	rat_exp_impl_t;
+    typedef Element<series_set_t, rat_exp_impl_t>			rat_exp_t;
 
 # include <vaucanson/contextual_automaton_functions.thh>
 

@@ -52,12 +52,12 @@ int main(int argc, char **argv)
   alpha.insert('b');
   alpha.insert('c');
   automaton_t	automaton = new_automaton(alpha);
-  krat_exp_t	krat_exp (automaton.structure().series());
+  rat_exp_t	rat_exp (automaton.structure().series());
 
-  parse(argv[1], krat_exp);
-  std::cout << "Expression to transform: " << krat_exp << std::endl;
+  parse(argv[1], rat_exp);
+  std::cout << "Expression to transform: " << rat_exp << std::endl;
 
-  derivatives_automaton(automaton, krat_exp);
+  derivatives_automaton(automaton, rat_exp);
 
   // If the automaton is valid, save it !
   if (automaton.states().size())

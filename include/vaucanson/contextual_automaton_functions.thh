@@ -46,6 +46,9 @@ template <class InputIterator>
 gen_automaton_t new_gen_automaton(InputIterator begin,
 				  InputIterator end);
 
+template <class T>
+rat_exp_t new_rat_exp(const T& alphabet);
+
 template <class SeriesSet, class SeriesImpl>
 automaton_t
 standard_of(const Element<SeriesSet, SeriesImpl>& e);
@@ -55,11 +58,11 @@ template <class SeriesSet, class SeriesImpl>
 automaton_t
 thompson_of(const Element<SeriesSet, SeriesImpl>& e);
 
-krat_exp_t
+rat_exp_t
 aut_to_exp(const automaton_t& a);
 
 template <class Chooser>
-krat_exp_t
+rat_exp_t
 aut_to_exp(const automaton_t& a, const Chooser& c);
 
 # ifndef VCSN_USE_INTERFACE_ONLY

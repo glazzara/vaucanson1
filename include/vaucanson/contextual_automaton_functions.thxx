@@ -75,6 +75,21 @@ gen_automaton_t new_gen_automaton(const T& alphabet)
   return new_gen_automaton(alphabet.begin(), alphabet.end());
 }
 
+
+/*--------------.
+| new_rat_exp() |
+`--------------*/
+
+template <class T>
+rat_exp_t new_rat_exp(const T& alphabet)
+{
+  monoid_t monoid(alphabet);
+  semiring_t semiring;
+  series_set_t series(semiring, monoid);
+  return rat_exp_t (series);
+}
+
+
 /*--------------.
 | standard_of() |
 `--------------*/
@@ -120,14 +135,14 @@ thompson_of(const Element<SeriesSet, SeriesImpl>& e)
 `-------------*/
 
 inline
-krat_exp_t
+rat_exp_t
 aut_to_exp(const automaton_t& a)
 {
   return aut_to_exp(generalized(a));
 }
 
 template <class Chooser>
-krat_exp_t
+rat_exp_t
 aut_to_exp(const automaton_t& a, const Chooser& c)
 {
   return aut_to_exp(generalized(a), c);

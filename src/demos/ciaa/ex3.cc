@@ -116,7 +116,7 @@ main(int argc, char** argv)
       | Work on the automaton C_n |
       `--------------------------*/
 
-     krat_exp_t e = aut_to_exp(cn);
+     rat_exp_t e = aut_to_exp(cn);
      std::cout << e << std::endl;
 
      automaton_t sn = standard_of(e);

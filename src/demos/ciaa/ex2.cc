@@ -189,7 +189,7 @@ main(int argc, char** argv)
       std::cout << q << std::endl;
 
       const std::list<hstate_t> l (q.begin(), q.end());
-      krat_exp_t e = aut_to_exp(an, ListChooser (l));
+      rat_exp_t e = aut_to_exp(an, ListChooser (l));
       std::cout << e << std::endl;
 
       automaton_t sn = standard_of(e);

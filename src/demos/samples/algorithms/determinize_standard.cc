@@ -54,12 +54,12 @@ int main(int argc, char **argv)
   alpha.insert('c');
 
   automaton_t	automaton = new_automaton(alpha);
-  krat_exp_t	krat_exp (automaton.structure().series());
+  rat_exp_t	rat_exp (automaton.structure().series());
 
-  parse(argv[1], krat_exp);
-  std::cout << "Expression to transform: " << krat_exp << std::endl;
+  parse(argv[1], rat_exp);
+  std::cout << "Expression to transform: " << rat_exp << std::endl;
 
-  automaton = trim(determinize(standard_of(krat_exp)));
+  automaton = trim(determinize(standard_of(rat_exp)));
 
 
   // If the automaton is valid, save it !

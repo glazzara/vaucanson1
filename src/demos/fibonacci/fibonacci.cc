@@ -12,42 +12,26 @@
 void
 eval_an_expression(const vcsn::boolean_transducer::automaton_t& t)
 {
-  std::string user_string;
+  using namespace vcsn::boolean_transducer;
+
+  const alphabet_t&	alphabet = t.structure().series().monoid().alphabet();
+  std::string		user_string;
 
   do
     {
-      using namespace vcsn;
-      using namespace vcsn::boolean_transducer;
-
-      const series_set_t&	series_set = t.structure().series();
-      const monoid_t&		monoid     = series_set.monoid();
-      const semiring_t&		semiring   = series_set.semiring();
-      const alphabet_t&		alphabet   = monoid.alphabet();
-
-      const monoid_t&		o_monoid   = semiring.monoid();
-      const output_semiring_t&	o_semiring = semiring.semiring();
-      const alphabet_t&		o_alphabet = o_monoid.alphabet();
-
       std::cout << "Enter your expression over " << alphabet
 		<<" (\"next\", otherwise): ";
       std::cin >> user_string;
 
-      output_series_set_t	series (o_semiring, monoid);
-      output_series_set_elt_t	exp (series);
+      if (user_string != "next")
+	{
+	  using namespace vcsn::boolean_automaton;
 
-      parse(user_string, exp);
+	  rat_exp_t exp = new_rat_exp(alphabet);
+	  parse(user_string, exp);
+	  std::cout << evaluation(t, exp) << std::endl;
+	}
 
-      {
-	using boolean_automaton::automaton_t;
-
-	using boolean_automaton::aut_to_exp;
-	using boolean_automaton::standard_of;
-	using boolean_automaton::new_automaton;
-
-	automaton_t	result = new_automaton(o_alphabet);
-	evaluation(standard_of(exp), t, result);
-	std::cout << verbalize(aut_to_exp(result)) << std::endl;
-      }
     }
   while (user_string != "next");
 }
