@@ -19,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_ACCESSIBLE_HXX
-# define ALGORITHMS_ACCESSIBLE_HXX
+#ifndef VCSN_ALGORITHMS_ACCESSIBLE_HXX
+# define VCSN_ALGORITHMS_ACCESSIBLE_HXX
 
 # include <vaucanson/algorithms/accessible.hh>
 
@@ -30,7 +30,7 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
-# include <vaucanson/algorithms/extract.hh>
+# include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/automata/concrete/transpose_view.hh>
 
 namespace vcsn {
@@ -104,14 +104,14 @@ namespace vcsn {
   void
   accessible_here(Element<A, T>& a)
   {    
-    auto_in_extract(a, accessible_states(a));
+    sub_automaton_here(a, accessible_states(a));
   }
 
   template<typename A, typename T>
   Element<A, T>
   accessible(const Element<A, T>& a)
   {    
-    return auto_extract(a, accessible_states(a));
+    return sub_automaton(a, accessible_states(a));
   }
 
   /*-----------------------.
@@ -139,14 +139,14 @@ namespace vcsn {
   Element<A, T>
   coaccessible(const Element<A, T>& a)
   {
-    return auto_extract(a, coaccessible_states(a));
+    return sub_automaton(a, coaccessible_states(a));
   }
 
   template<typename A, typename T>
   void
   coaccessible_here(Element<A, T>& a)
   {
-    auto_in_extract(a, coaccessible_states(a));
+    sub_automaton_here(a, coaccessible_states(a));
   }
   
 } // vcsn

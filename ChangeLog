@@ -1,5 +1,10 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/accessible.hxx: Use sub_automaton. Typo.
+	* src/tests/automata/algos/extract_test.hh: Use sub_automaton.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/standard_of.hh: Document and replace ...
 	* include/vaucanson/algorithms/glushkov.hh: it.
 	* include/vaucanson/algorithms/standard_of.hxx: Document and replace ...

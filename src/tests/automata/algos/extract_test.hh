@@ -51,14 +51,14 @@ unsigned extract_test(tests::Tester& tg)
       unsigned nb_state = 5;
       unsigned nb_edge = 10;
       automaton_t a = gen.generate(nb_state, nb_edge);
-      automaton_t b = auto_extract(a, a.states());
+      automaton_t b = sub_automaton(a, a.states());
       if ((a.states().size() == b.states().size()) &&
 	  (a.edges().size() == b.edges().size()))
 	++success;
     }
   std::string rate;
   SUCCESS_RATE(rate, success, nb_tests);
-  TEST(t, "extract "+rate, success == nb_tests);
+  TEST(t, "sub automaton "+rate, success == nb_tests);
   return t.all_passed();
 }
     
