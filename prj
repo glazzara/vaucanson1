@@ -1,14 +1,24 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 191)
-(Parent-Version vaucanson 0 190)
-(Version-Log "2003-04-11  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 192)
+(Parent-Version vaucanson 0 191)
+(Version-Log "2003-05-05  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx
-	(op_in_star): Fix a bug.")
+	* src/tests/tests-suites/algebra_series_krat_derivation.defs: Remove
+	a superfluous typename.
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh
+	(choose_exp_and_derivate, choose_cancelable_exp_and_derivate): Add.
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh:
+	Add code that was missing to complete the test.
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
+	src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh,
+	src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
+	src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh:
+	New.")
 (New-Version-Log "")
-(Checkin-Time "Fri, 11 Apr 2003 17:07:53 +0200")
+(Checkin-Time "Mon, 05 May 2003 17:11:38 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -91,7 +101,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.1 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.8 600))
@@ -527,15 +537,15 @@
 ;; Files added by populate at Wed, 02 Apr 2003 14:58:12 +0200,
 ;; to version 0.182(w), by clavei_t:
 
-  (src/tests/tests-suites/algebra_series_krat_derivation.defs (vaucanson/j/37_algebra_se 1.1 600))
+  (src/tests/tests-suites/algebra_series_krat_derivation.defs (vaucanson/j/37_algebra_se 1.1.1.1 600))
 
 ;; Files added by populate at Wed, 02 Apr 2003 15:00:32 +0200,
 ;; to version 0.182(w), by clavei_t:
 
   (src/tests/algebra/series/krat/derivations/derivation/Makefile.am (vaucanson/j/38_Makefile.a 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh (vaucanson/j/39_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh (vaucanson/j/39_krat_exp_d 1.1.1.1 600))
   (src/tests/algebra/series/krat/derivations/Makefile.am (vaucanson/j/40_Makefile.a 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivations_common.hh (vaucanson/j/41_derivation 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivations_common.hh (vaucanson/j/41_derivation 1.1.1.1 600))
 
 ;; Files added by populate at Wed, 02 Apr 2003 15:07:16 +0200,
 ;; to version 0.182(w), by clavei_t:
@@ -671,6 +681,15 @@
 ;; to version 0.187(w), by clavei_t:
 
   (include/vaucanson/algebra/concept/tropical_semiring.hxx (vaucanson/l/12_tropical_s 1.1 600))
+
+;; Files added by populate at Mon, 05 May 2003 17:09:31 +0200,
+;; to version 0.191(w), by clavei_t:
+
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh (vaucanson/l/18_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh (vaucanson/l/19_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh (vaucanson/l/20_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh (vaucanson/l/21_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh (vaucanson/l/22_krat_exp_d 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

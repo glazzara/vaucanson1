@@ -1,3 +1,18 @@
+2003-05-05  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* src/tests/tests-suites/algebra_series_krat_derivation.defs: Remove
+	a superfluous typename.
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh
+	(choose_exp_and_derivate, choose_cancelable_exp_and_derivate): Add.
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh:
+	Add code that was missing to complete the test.
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
+	src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh,
+	src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
+	src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh:
+	New.
+
 2003-04-11  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx

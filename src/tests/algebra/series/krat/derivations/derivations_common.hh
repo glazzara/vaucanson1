@@ -21,6 +21,51 @@
 #ifndef TEST_DERIVATIONS_COMMON_HH
 # define TEST_DERIVATIONS_COMMON_HH
 
+# include <utility>
+
+template <class Derivation,
+	  class Expr,
+	  class Series,
+	  class Letter>
+inline
+std::pair<Expr, Expr>
+choose_exp_and_derivate(const Series& series,
+			const Letter& l)
+{
+  Expr random = series.choose(SELECT(typename Expr::value_t));
+  Derivation d(random, l);
+  
+  while (!d.is_defined())
+    {
+      random = series.choose(SELECT(typename Expr::value_t));
+      d = Derivation (random, l);
+    }
+  return make_pair(random, d.get_result());
+}
+
+template <class Derivation,
+	  class Expr,
+	  class Series,
+	  class Letter>
+inline
+std::pair<Expr, Expr>
+choose_cancelable_exp_and_derivate(const Series& series,
+				   const Letter& l)
+{
+  // FIXME: To ensure our krat_exp_t is cancelable, we just star it.
+  //        It is not very smart !
+  Expr random = series.choose(SELECT(typename Expr::value_t));
+  random.star();
+  Derivation d(random, l);
+  
+  while (!d.is_defined())
+    {
+      random = series.choose(SELECT(typename Expr::value_t));
+      d = Derivation (random, l);
+    }
+  return make_pair(random, d.get_result());
+}
+
 template <class Derivation,
 	  class Expr,
 	  class Letter>

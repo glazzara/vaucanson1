@@ -1,4 +1,4 @@
-// krat_exp_derivation_product_test.hh
+// krat_exp_derivation_sum_test.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef DERIVATION_PRODUCT_TEST_HH
-# define DERIVATION_PRODUCT_TEST_HH
+#ifndef DERIVATION_SUM_TEST_HH
+# define DERIVATION_SUM_TEST_HH
 
 # include <check/tests_stuff.hh>
 # include <vaucanson/tools/gen_random.hh>
@@ -31,7 +31,7 @@
 using namespace vcsn;
 
 template <class Expr, class Derivation>
-bool krat_exp_derivation_product_test(tests::Tester& tg)
+bool krat_exp_derivation_sum_test(tests::Tester& tg)
 {
   TEST_DERIVATION_TYPEDEF_DECS(Expr, Derivation);
 
@@ -44,50 +44,26 @@ bool krat_exp_derivation_product_test(tests::Tester& tg)
   int tsts = 0;
   for (int i = 0; i < nb_iter; ++i)
     {
-      // 1/ LHS is non-cancelable
-
-      krat_exp_t random = series.choose(SELECT(kexp_t));
-      // 0.xyz
-      TEST_DERIVATE(tsts, sucs, zero_as<kexp_t>::of(series) * random, a,
-		    zero_as<kexp_t>::of(series));
-      // a.xyz
-      TEST_DERIVATE(tsts, sucs, a * random, a, random);
-      TEST_DERIVATE(tsts, sucs, a * random, b, zero_as<kexp_t>::of(series));
-      // (a+b).xyz
-      TEST_DERIVATE(tsts, sucs,
-		    (krat_exp_t (a) + krat_exp_t (b)) * random, a, random);
-      TEST_DERIVATE(tsts, sucs,
-		    (krat_exp_t (a) + krat_exp_t (b)) * random, b, random);
-      // (a.b).xyz
-      TEST_DERIVATE(tsts, sucs,
-		    (krat_exp_t (a) * krat_exp_t (b)) * random, a, b * random);
-      TEST_DERIVATE(tsts, sucs,
-		    (krat_exp_t (a) * krat_exp_t (b)) * random, b,
-		    zero_as<kexp_t>::of(series));
-
-      // 2/ LHS *is* cancelable
-
-      std::pair<krat_exp_t, krat_exp_t> random_a =
+      std::pair<krat_exp_t, krat_exp_t> lhs_a =
 	choose_exp_and_derivate<derivation_t, krat_exp_t>(series, a);
-      std::pair<krat_exp_t, krat_exp_t> random_b =
+      std::pair<krat_exp_t, krat_exp_t> lhs_b =
 	choose_exp_and_derivate<derivation_t, krat_exp_t>(series, b);
-      std::pair<krat_exp_t, krat_exp_t> cancel_a =
-       choose_cancelable_exp_and_derivate<derivation_t, krat_exp_t>(series, a);
-      std::pair<krat_exp_t, krat_exp_t> cancel_b =
-       choose_cancelable_exp_and_derivate<derivation_t, krat_exp_t>(series, b);
-      // cancelable * random
+      std::pair<krat_exp_t, krat_exp_t> rhs_a =
+	choose_exp_and_derivate<derivation_t, krat_exp_t>(series, a);
+      std::pair<krat_exp_t, krat_exp_t> rhs_b =
+	choose_exp_and_derivate<derivation_t, krat_exp_t>(series, b);
       TEST_DERIVATE(tsts, sucs,
-		    cancel_a.first * random_a.first, a,
-		    cancel_a.second * random_a.first + random_a.second);
+		    lhs_a.first + rhs_a.first, a,
+		    lhs_a.second + rhs_a.second);
       TEST_DERIVATE(tsts, sucs,
-		    cancel_b.first * random_b.first, b,
-		    cancel_b.second * random_b.first + random_b.second);
+		    lhs_b.first + rhs_b.first, b,
+		    lhs_b.second + rhs_b.second);
     }
   
   std::string rate;
   SUCCESS_RATE(rate, sucs, tsts);
-  TEST(t, "Various derivation tests on a product. " + rate, sucs == tsts);
+  TEST(t, "Various derivation tests on a sum. " + rate, sucs == tsts);
   return t.all_passed();
 }
 
-#endif // DERIVATION_PRODUCT_TEST_HH
+#endif // DERIVATION_SUM_TEST_HH
