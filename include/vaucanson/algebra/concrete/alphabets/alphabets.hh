@@ -12,15 +12,15 @@ namespace vcsn {
   namespace algebra {
 
     /*-------------.
-    | Alphabets<L> |
+    | SetAlphabets<L> |
     `-------------*/
     // 
     // Structuring element to define an alphabet
     //
 
     template<typename L>
-    struct Alphabets
-      : AlphabetsBase<Alphabets<L> >
+    struct SetAlphabets
+      : AlphabetsBase<SetAlphabets<L> >
     {
 	typedef L		canonical_letter_t;
     };
@@ -28,14 +28,14 @@ namespace vcsn {
   } // algebra
 
     /*---------------------.
-    | MetaSet<Alphabets<L> |
+    | MetaSet<SetAlphabets<L> |
     `---------------------*/
     //
     // Meta information about the structuring element
     //
 
     template<typename L>
-    struct MetaSet<Alphabets<L> >
+    struct MetaSet<SetAlphabets<L> >
     {
       // by default an alphabet is a static object
       static const bool		dynamic_set = false;

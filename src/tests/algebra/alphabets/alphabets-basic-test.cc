@@ -19,7 +19,7 @@ using namespace vcsn;
 int main(int argc, char **argv)
 {
   
-  test_design_pattern<sugar::Alphabets, std::set<char> >();
+  test_design_pattern<Alphabets, std::set<char> >();
 
 //   if (t.all_passed())
 //     return EXIT_SUCCESS;

@@ -50,7 +50,7 @@ namespace vcsn {
   //
 
   typedef 
-  algebra::TWords<Element<sugar::Alphabets, std::set<char> > >  Words;
+  algebra::TWords<Element<Alphabets, std::set<char> > >  Words;
   typedef
   Element<Words, std::string>				  Word;
 

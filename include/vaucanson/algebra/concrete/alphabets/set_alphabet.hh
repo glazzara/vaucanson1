@@ -16,7 +16,7 @@ namespace vcsn {
     | Definition of an alphabet implementation based on std::set |
     `-----------------------------------------------------------*/
     template<typename L>
-    struct alphabet_traits<Alphabets<L>, std::set<L> >
+    struct alphabet_traits<SetAlphabets<L>, std::set<L> >
     {
       typedef L			letter_t;
     };
@@ -24,31 +24,27 @@ namespace vcsn {
   } // algebra
 
     template<typename L>
-    struct MetaElement<Alphabets<L>, std::set<L> >
-      : MetaElement<AlphabetsBase<Alphabets<L> >, std::set<L> >
+    struct MetaElement<SetAlphabets<L>, std::set<L> >
+      : MetaElement<AlphabetsBase<SetAlphabets<L> >, std::set<L> >
     {
       static const bool dynamic_values = true;
     };
 
     template<typename L>
-    bool op_contains(const Alphabets<L>& s, const std::set<L>& a);
+    bool op_contains(const SetAlphabets<L>& s, const std::set<L>& a);
 
     template<typename L>
-    bool op_is_finite(const Alphabets<L>& s, const std::set<L>& a);
+    bool op_is_finite(const SetAlphabets<L>& s, const std::set<L>& a);
 
     template<typename L>
-    bool op_contains_e(const Alphabets<L>& s, const std::set<L>& a,
+    bool op_contains_e(const SetAlphabets<L>& s, const std::set<L>& a,
 		       const L& v);
 
-  namespace sugar {
-  
   /*----------------------------------.
   | Define some useful alphabet stuff |
   `----------------------------------*/
-    typedef algebra::Alphabets<char>				Alphabets;
+    typedef algebra::SetAlphabets<char>				Alphabets;
     typedef Element<Alphabets, std::set<char> >			Alphabet;
-
-  } // sugar
 
 } // vcsn
 

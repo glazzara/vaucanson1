@@ -1,5 +1,13 @@
 2002-06-18  Maxime Rey  <max@lrde.epita.fr>
 
+	* namespace sugar for alphabets deleted :
+	* include/vaucanson/algebra/concrete/alphabets/alphabets.hh modified
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabets.hh modified
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabets.hxx modified
+	* tests modified for the consequence
+
+2002-06-18  Maxime Rey  <max@lrde.epita.fr>
+
 	* Added `include/vaucanson/algebra/concept/freemonoid_base.hxx'
 	* Added `include/vaucanson/algebra/concept/freemonoid_base.hh' 
 	* Added `include/vaucanson/algebra/concrete/free_monoid/words.hxx'
