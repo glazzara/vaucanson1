@@ -51,6 +51,24 @@ namespace utility {
     typedef const T t;
   };
 
+  /*-------------.
+  | remove_const |
+  `-------------*/
+
+  /** Turn a const type into its corresponding mutable type */
+  template<typename T>
+  struct remove_const
+  {
+    typedef T t;
+  };
+  
+  template<typename T>
+  struct remove_const<const T>
+  {
+    typedef T t;
+  };
+
+
   /*----------.
   | static_if |
   `----------*/
@@ -61,13 +79,16 @@ namespace utility {
   { 
     typedef T t; 
 
-    static typename remove_reference<T>::t& 
-    choose(typename remove_reference<T>::t& p1, 
-	   typename remove_reference<U>::t& p2)
+    typedef typename remove_const<typename remove_reference<T>::t>::t bare_t1;
+    typedef typename remove_const<typename remove_reference<U>::t>::t bare_t2;
+
+    static bare_t1& 
+    choose(bare_t1& p1, 
+	   bare_t2& )
     { return p1; }
-    static const typename remove_reference<T>::t& 
-    choose(const typename remove_reference<T>::t& p1, 
-	   const typename remove_reference<U>::t& p2)
+    static const bare_t1& 
+    choose(const bare_t1& p1, 
+	   const bare_t2& )
     { return p1; }
   };
 
@@ -76,13 +97,16 @@ namespace utility {
   { 
     typedef U t; 
 
-    static typename remove_reference<U>::t& 
-    choose(typename remove_reference<T>::t& p1, 
-	   typename remove_reference<U>::t& p2)
+    typedef typename remove_const<typename remove_reference<T>::t>::t bare_t1;
+    typedef typename remove_const<typename remove_reference<U>::t>::t bare_t2;
+
+    static bare_t2& 
+    choose(bare_t1& , 
+	   bare_t2& p2)
     { return p2; }
-    static const typename remove_reference<U>::t& 
-    choose(const typename remove_reference<T>::t& p1, 
-	   const typename remove_reference<U>::t& p2)
+    static const bare_t2& 
+    choose(const bare_t1& , 
+	   const bare_t2& p2)
     { return p2; }
   };
 

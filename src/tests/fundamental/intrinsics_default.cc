@@ -1,8 +1,8 @@
-// fundamental/fundamental.hh
+// intrinsics_default.cc
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,12 +17,37 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#ifndef VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
-# define VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 
-/** @addtogroup fundamental Fundamental C++ : the Element design pattern. */
+#include "intrinsics.hh"
+  
+namespace vcsn {
+  vcsn_test::T op_default(const vcsn_test::S& s, SELECTOR(vcsn_test::T))
+  {
+    if (&s)
+      tag += "set";
+    tag += "default";
+    return vcsn_test::T();
+  }
+}
 
-# include <vaucanson/fundamental/default_ops.hh>
-# include <vaucanson/fundamental/element.hh>
+void test_default()
+{
+  TEST_GROUP("delegation for default construction");
 
-#endif // VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
+  tag = "";
+  t e;
+  TEST_ASSERT(tag == "default", "delegation to default without s. e.");
+  e.bound(); // use var
+
+  vcsn_test::S s;
+  tag = "";
+  t e2(s);
+  TEST_ASSERT(tag == "setdefault", "delegation to default with s. e.");
+  e2.bound(); // use var
+}
+
+
+int main()
+{
+  test_default();
+}

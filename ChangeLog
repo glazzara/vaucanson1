@@ -1,3 +1,90 @@
+2003-06-19  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* src/tests/fundamental/intrinsics.hh,
+	src/tests/fundamental/intrinsics_orphanage.cc,
+	src/tests/fundamental/intrinsics_link.cc
+	src/tests/fundamental/intrinsics_extra.cc
+	src/tests/fundamental/intrinsics_default.cc
+	src/tests/fundamental/intrinsics_convert.cc
+	src/tests/fundamental/intrinsics_assign.cc
+	src/tests/fundamental/intrinsics_ops.cc: Add.
+	* src/tests/fundamental/Makefile.am: Update accordingly.
+
+	* include/vaucanson/fundamental/structure.hh: Make `Structure'
+	inherit from `unifiable'. Add missing `operator!='.
+	* include/vaucanson/fundamental/structure.hxx: Update accordingly.
+
+	* include/vaucanson/fundamental/slots.hh: Remove deprecated
+	methods. Fix constructor call in `SetSlot'.
+
+	* include/vaucanson/fundamental/syntactic_decorator.hxx: Add
+	missing calls to self().
+
+	* include/vaucanson/fundamental/element_ops.hxx: Typo fixes. Unify
+	comparison declarators. Sanitize operator logic. Use /* */
+	comments in macros. Remove calls to `avoid_uniquify'.
+
+	* include/vaucanson/fundamental/element_ops.hh: Fix template
+	declarations.
+
+	* include/vaucanson/fundamental/element.hxx: Make more calls to
+	`op_convert' in constructors. Sanitize assignment logic.
+
+	* include/vaucanson/fundamental/element.hh: Include `slot.hh'.
+
+	* include/vaucanson/fundamental/default_ops.hxx: Use `static_cast'
+	where appropriate to quiet the compiler. Add calls to assert()
+	where useful.
+
+	* src/tests/misc/static.cc (main): Fix syntax.
+
+	* src/tests/misc/unique.cc: Remove include of `unique.hcc' since
+	it is now imported by libcheck. Inherit from `unifiable' where
+	needed.
+
+	* include/vaucanson/misc/unique.hcc: Include `unique.hh'.
+
+	* include/vaucanson/misc/unique.hxx,
+	include/vaucanson/misc/unique.hh (utility): Specify `inline' where
+	needed. Add base type `unifiable'. Update `get'
+	accordingly. Remove `uniquified' and `avoid_uniquify'.
+
+	* include/vaucanson/misc/static.hh: Add remove_const. Fix
+	remove_reference.
+
+	* src/tests/check/defs.in (CPPFLAGS): Quote substitutions.
+
+	* src/tests/check/Makefile.flags (AM_CXXFLAGS): Do not add debug
+	flags by default.
+
+	* src/tests/check/Makefile.check: Adjust paths.
+
+	* src/tests/check/unique.hcc: Add.
+	* src/tests/check/tests_stuff.hh: Rename to ...
+	* src/tests/check/tester.hh: this.
+	* src/tests/check/tests_stuff.cc: Rename to ...
+	* src/tests/check/tester.cc: this.
+	* src/tests/check/Makefile.am (libcheck_a_SOURCES): Update accordingly.
+
+	* src/tests/check/tester.hh, src/tests/check/tester.cc: Add
+	default constructor which reads from $VERBOSE in the
+	environment. Rename some identifiers. Add macros TEST_GROUP,
+	TEST_ASSERT and TEST_XASSERT.
+	
+	* include/vaucanson/fundamental/predecls.hh: Mention `virtual_types'.
+
+	* include/vaucanson/fundamental/element_ops.hxx: Typo fixes.
+
+	* config/vcsn.m4: Remove Vaucanson includes from CPPFLAGS.
+
+	* configure.ac: Remove mention of src/tests/bin/Makefile.
+
+	* src/tests/sanity/includes.test: Use variables. Fix `defs'
+	include.
+
+	* src/tests/sanity/Makefile.am (check-local): Mention
+	TOP_BUILDDIR.
+
 2003-06-10  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/misc/utility.hh: Add. Document.

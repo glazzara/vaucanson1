@@ -19,9 +19,15 @@ namespace utility
     template<typename T>
     uniquelist<T>::~uniquelist() {}
 
+    unifiable::unifiable() : unique_(false) {}
+    unifiable::unifiable(const unifiable& ) : unique_(false) {} 
+
     template<typename T>
     const T& get(const T& v)
     {
+      if (static_cast<const unifiable&>(v).unique_)
+	return v;
+
       unique_map::map_t& m = unique_map::instance();
       
       unique_map::map_t::iterator i = m.find(typeid(T));
@@ -30,6 +36,7 @@ namespace utility
 	  uniquelist<T> *l = 
 	    static_cast<uniquelist<T>* >(m[typeid(T)] = new uniquelist<T>);
 	  l->push_front(v);
+	  static_cast<unifiable&>(l->front()).unique_ = true;
 	  return l->front();
 	}
       uniquelist<T> *l =
@@ -38,6 +45,7 @@ namespace utility
       if ((j = std::find(l->begin(), l->end(), v)) == l->end())
 	{
 	  l->push_front(v);
+	  static_cast<unifiable&>(l->front()).unique_ = true;
 	  return l->front();
 	}
       return *j;
@@ -46,20 +54,6 @@ namespace utility
     template<typename T>
     const T* get(const T* v)
     { return & get(*v); }
-
-
-    template<typename T>
-    uniquified<T>::uniquified(const T& r)
-      : r_(r) 
-    {}
-    
-    template<typename T>
-    uniquified<T>::uniquified(const uniquified& other)
-      : r_(other.r_)
-    {}
-
-    template<typename T>
-    uniquified<T>::operator const T& () 
 
   }
 }

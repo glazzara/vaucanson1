@@ -1,8 +1,8 @@
-// fundamental/fundamental.hh
+// intrinsics_extra.cc
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,12 +17,26 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#ifndef VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
-# define VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 
-/** @addtogroup fundamental Fundamental C++ : the Element design pattern. */
+#include "intrinsics.hh"
 
-# include <vaucanson/fundamental/default_ops.hh>
-# include <vaucanson/fundamental/element.hh>
 
-#endif // VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
+void test_extra()
+{
+  TEST_GROUP("additional services via MetaElement");
+
+  t e;
+
+  tag = ""; e.foo();
+  TEST_ASSERT(tag == "foo", "call delegation operator without s. e.");
+
+  vcsn_test::S s;
+  e.attach(s);
+  tag = ""; e.foo();
+  TEST_ASSERT(tag == "setfoo", "call delegation with s. e.");
+}
+
+int main()
+{
+  test_extra();
+}

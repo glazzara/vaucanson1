@@ -47,10 +47,10 @@ namespace utility
       /** Helper to make @c std::type_info into a valid key type for @c std::map */
       struct ti_slot
       {
-	ti_slot(const std::type_info& );
+	inline ti_slot(const std::type_info& );
 	const std::type_info &id;
-	bool operator==(const ti_slot& other) const;
-	bool operator<(const ti_slot& other) const;
+	inline bool operator==(const ti_slot& other) const;
+	inline bool operator<(const ti_slot& other) const;
       };
 
       /** The map type used */
@@ -73,6 +73,16 @@ namespace utility
       ~unique_map();
     };
 
+    struct unifiable
+    {
+      inline unifiable();
+      inline unifiable(const unifiable&);
+    private:
+      template<typename T>
+      friend const T& get(const T&);
+      bool unique_;
+    };
+
     /** @addtogroup utility *//** @{ */
     /** @brief The canonicalization operator
      *
@@ -87,21 +97,6 @@ namespace utility
     /// Version of the canonicalization operator for pointers
     template<typename T>
     const T* get(const T*);
-
-    template<typename T>
-    struct uniquified
-    { 
-      uniquified(const T&);
-      uniquified(const uniquified&);
-      operator const T& () const;
-    protected:
-      const T& r_;
-    };
-
-    template<typename T>
-    uniquified<S> avoid_uniquify(const T&);
-    template<typename T>
-    uniquified<S> avoid_uniquify(const T*);
 
     /** @} */
   }

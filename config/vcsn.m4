@@ -96,10 +96,7 @@ AC_DEFUN([VCSN_PATH_HEADERS],
 
       #
       VCSN_EXTRA_CPPFLAGS="-I$vcsn_cv_local_src/include -I$srcdir/$vcsn_cv_local_src/include"
-      VCSN_LOCAL_CPPFLAGS="-I\$(top_srcdir)/$vcsn_cv_local_src/include -I\$(top_builddir)/$vcsn_cv_local_src/include"
 
-      # CPPFLAGS will need local paths.
-      CPPFLAGS="$VCSN_LOCAL_CPPFLAGS $CPPFLAGS"
       AC_SUBST([VCSN_LOCAL_SRC])
       AC_SUBST([VCSN_LOCAL_BUILD])
     fi
@@ -370,8 +367,8 @@ AC_DEFUN([AC_CXX_FLAGS],
      Intel)
       _CXXFLAGS_OPTIMIZE="-O3"
       _CXXFLAGS_DEBUG="-g"
-      _CXXFLAGS_STRICT="-w1 -Wall"
-      _CXXFLAGS_STRICT_ERRORS="-w1 -Wall"
+      _CXXFLAGS_STRICT="-w1"
+      _CXXFLAGS_STRICT_ERRORS="-w1"
       ;;
    esac
 

@@ -4,7 +4,7 @@
 
 : ${VERBOSE=1}
 
-. ../defs || exit 1
+. ../check/defs || exit 1
 
 set -e
 
@@ -13,15 +13,16 @@ rm -f incltest.*
 ( cd $TOP_SRCDIR/include; find vaucanson -name \*.hh | grep -v '/old/\|/obsolete/' ) | \
 while read file; do
    echo "#include <$file>" > incltest.cc
-   if $CXXCOMPILE -c incltest.cc -o incltest.o >/dev/null 2>incltest.err; then
+   if $CXX $CXXFLAGS $EXTRA_CXXFLAGS $CPPFLAGS -I$TOP_SRCDIR/include -I$TOP_BUILDDIR/include \
+         -c incltest.cc -o incltest.o >/dev/null 2>incltest.err; then
       if [ $VERBOSE -ne 0 ]; then
-        echo "TEST: [OK]   $name"
+        echo "TEST: [OK]   $file"
       fi
    else
       if [ $VERBOSE -ne 0 ]; then
-        echo "TEST: [FAIL] $name"
+        echo "TEST: [FAIL] $file"
       fi
-      echo ">>> $name:" >> incltest.fail
+      echo ">>> $file:" >> incltest.fail
       cat incltest.err >> incltest.fail
       rm -f incltest.err
    fi
@@ -29,8 +30,7 @@ done
 
 if test -f incltest.fail; then
    echo "Failed files:"
-   cat incltest.fail
-   rm -f incltest.fail
+   cat incltest.fail | grep '^>>>'
    exit 1
 fi
 exit 0

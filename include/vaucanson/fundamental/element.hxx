@@ -50,7 +50,7 @@ namespace vcsn {
   template <class S, class T>
   template<typename U>
   Element<S,T>::Element(const Element<S, U>& other)
-    : set_(other.set_),
+    : set_(other.set()),
       value_(op_convert(other.set(), SELECT(T), other.value()))
   {}
     
@@ -69,7 +69,7 @@ namespace vcsn {
   template <class S, class T>
   Element<S,T>::Element(const T& other)
     : set_(),
-      value_(other)
+      value_(op_convert(SELECT(S), SELECT(T), other))
   {}
     
   template <class S, class T>
@@ -86,27 +86,27 @@ namespace vcsn {
   template <class S, class T>
   Element<S,T>::Element(const S& set)
     : set_(set),
-      value_(op_default(set, SELECT(T)))
+      value_(op_default(set_.get(), SELECT(T)))
   {}
     
   template <class S, class T>
   Element<S,T>::Element(const S& set, const T& other)
     : set_(set),
-      value_(other)
+      value_(op_convert(set_.get(), SELECT(T), other))
   {}
     
   template <class S, class T>
   template<typename U>
   Element<S,T>::Element(const S& set, const U& other)
     : set_(set),
-      value_(op_convert(set, SELECT(T), other))
+      value_(op_convert(set_.get(), SELECT(T), other))
   {}
     
   template <class S, class T>
   template<typename OtherS, typename U>
   Element<S,T>::Element(const S& set, const Element<OtherS, U>& other)
     : set_(set),
-      value_(op_convert(set, SELECT(T), 
+      value_(op_convert(set_.get(), SELECT(T), 
 		        other.set(), other.value()))
   {}
     
@@ -120,9 +120,7 @@ namespace vcsn {
   {
     if (!set_.bound())
       set_.assign(other.set_);
-    else
-      assert(&set() == &other.set());
-    op_assign(set(), set(), value_, other.value());
+    op_assign(set(), other.set(), value_, other.value());
     return *this;
   }
     
@@ -133,9 +131,7 @@ namespace vcsn {
   {
     if (!set_.bound())
       set_.assign(other.set());
-    else
-      assert(&set() == &other.set());
-    op_assign(set(), set(), value_, other.value());
+    op_assign(set(), other.set(), value_, other.value());
     return *this; 
   }
 
@@ -143,7 +139,7 @@ namespace vcsn {
   template<typename OtherS, typename U>
   Element<S,T>& Element<S,T>::operator=(const Element<OtherS, U>& other)
   { 
-    assert(set_.bound());
+    // FIXME: recommendation(set_.bound())
     op_assign(set(), other.set(), value_, other.value());
     return *this; 
   }
@@ -152,7 +148,7 @@ namespace vcsn {
   template<typename U>
   Element<S,T>& Element<S,T>::operator=(const U& other)
   {
-    assert(set_.bound());
+    // FIXME: recommendation(set_.bound());
     op_assign(set(), value(), other);
     return *this;
   }

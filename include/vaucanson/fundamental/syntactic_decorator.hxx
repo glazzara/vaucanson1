@@ -93,7 +93,7 @@ namespace vcsn {
   inline Element<S, T>& 
   SyntacticDecorator<S, T>::operator++()
   { 
-    op_in_inc(self().set(), value()); 
+    op_in_inc(self().set(), self().value()); 
     return self(); 
   }
     
@@ -101,8 +101,8 @@ namespace vcsn {
   inline Element<S, T> 
   SyntacticDecorator<S, T>::operator++(int)
   { 
-    Element<S, T> ret(*this); 
-    op_in_inc(self().set(), value()); 
+    Element<S, T> ret(self()); 
+    op_in_inc(self().set(), self().value()); 
     return ret; 
   }
     
@@ -110,7 +110,7 @@ namespace vcsn {
   inline Element<S, T>& 
   SyntacticDecorator<S, T>::operator--()
   { 
-    op_in_dec(self().set(), value()); 
+    op_in_dec(self().set(), self().value()); 
     return self(); 
   }
     
@@ -118,8 +118,8 @@ namespace vcsn {
   inline Element<S, T> 
   SyntacticDecorator<S, T>::operator--(int)
   { 
-    Element<S, T> ret(*this); 
-    op_in_dec(self().set(), value()); 
+    Element<S, T> ret(self()); 
+    op_in_dec(self().set(), self().value()); 
     return ret; 
   }
     

@@ -17,15 +17,15 @@ int main()
   const int b = -2;
   remove_reference<int>::t x = 0;
   remove_reference<int&>::t y = 1;
-  remove_reference<const int&>::t z = 2;
+  xassert(remove_reference<const int&>::t(2) == 2);
 
   xassert(static_if<false, int, int>::choose(x, y) == y);
   xassert(static_if<true, int, int>::choose(x, y) == x);
   xassert(static_if<false, int, int>::choose(a, b) == b);
   xassert(static_if<false, int, int>::choose(a, x) == x);
   
-  static_if<true, int, v>::t i = 3;
-  static_if<false, v, int>::t j = 4;
+  xassert(static_if<true, int, v>::t(3) == 3);
+  xassert(static_if<false, v, int>::t(4) == 4);
 
   xassert(static_eq<int, int>::value);
   xassert(! static_eq<int, v>::value);

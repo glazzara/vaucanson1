@@ -30,6 +30,7 @@
 
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/misc/unique.hh>
 
 namespace vcsn {
 
@@ -50,7 +51,7 @@ namespace vcsn {
    * </ul>
    */
   template<typename S>
-  struct Structure
+  struct Structure : utility::unique::unifiable
   {
     /// Check if a given element is compatible with the structural element
     template<typename T>
@@ -109,6 +110,10 @@ namespace vcsn {
   bool operator==(const vcsn::Structure<S>& a,
 		  const vcsn::Structure<S>& b);
 
+
+  template<typename S>
+  bool operator!=(const vcsn::Structure<S>& a,
+		  const vcsn::Structure<S>& b);
 
   /*------------------------------.
   | dynamic_traits<Structure<S> > |

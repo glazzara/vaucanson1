@@ -89,25 +89,25 @@ namespace vcsn {
 		   const U& v);
 
   /// Comparison between Element and foreign values (right version)
-  template<typename S, typename T, typename U>
+  template<typename U, typename S, typename T>
   static inline
   bool operator <(const U& v,
 		  const vcsn::Element<S, T>& e);
 
   /// Comparison between Element and foreign values (right version)
-  template<typename S, typename T, typename U>
+  template<typename U, typename S, typename T>
   static inline
   bool operator >(const U& v,
 		  const vcsn::Element<S, T>& e);
 
   /// Comparison between Element and foreign values (right version)
-  template<typename S, typename T, typename U>
+  template<typename U, typename S, typename T>
   static inline
   bool operator >=(const U& v,
 		   const vcsn::Element<S, T>& e);
 
   /// Comparison between Element and foreign values (right version)
-  template<typename S, typename T, typename U>
+  template<typename U, typename S, typename T>
   static inline
   bool operator <=(const U& v,
 		   const vcsn::Element<S, T>& e);
@@ -129,7 +129,7 @@ namespace vcsn {
 		   const U& v);
 
   /// Equality between Element and foreign values (right version)
-  template<typename S, typename T, typename U>
+  template<typename U, typename S, typename T>
   static inline
   bool operator ==(const U& v,
 		   const vcsn::Element<S, T>& e);

@@ -6,6 +6,8 @@
  * @see @c unique.hh
  */
 
+#include <vaucanson/misc/unique.hh>
+
 namespace utility
 {
   namespace unique

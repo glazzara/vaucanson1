@@ -48,18 +48,12 @@ namespace vcsn {
     return *static_cast<const S*>(NULL); 
   }
 
-  template<typename S, bool dynamic /* default: false */>   
-  S& SetSlotAttribute<S, dynamic>::get()
-  { 
-      return *static_cast<S*>(NULL); 
-  }
-
   template<typename S, bool dynamic /* default: false */>    
   void SetSlotAttribute<S, dynamic>::assign(const SetSlotAttribute&)
   {}
 
   template<typename S, bool dynamic /* default: false */>
-  void SetSlotAttribute<S, dynamic>::attach(const S& other)
+  void SetSlotAttribute<S, dynamic>::attach(const S& )
   {}
 
   template<typename S, bool dynamic /* default: false */>
@@ -94,12 +88,6 @@ namespace vcsn {
   }
 
   template <class S>
-  S& SetSlotAttribute<S, true>::get()
-  { 
-    return *s_; 
-  }
-
-  template <class S>
   void SetSlotAttribute<S, true>::assign(const SetSlotAttribute& other)
   { 
     s_ = other.s_; 
@@ -125,7 +113,7 @@ namespace vcsn {
 
   template <class S>
   SetSlot<S>::SetSlot()
-    : SetSlotAttribute<S, dynamic_traits<S>::ret>(other)
+    : SetSlotAttribute<S, dynamic_traits<S>::ret>()
   {}
   
   template <class S>

@@ -77,9 +77,6 @@ namespace vcsn {
      */
     const S&	get() const;
 
-    //! This method is being deprecated and should disappear soon.
-    S&		get();
-
     //! @{
     /**
      * Because this version of the class pertains to static S.E.'s,
@@ -136,9 +133,6 @@ namespace vcsn {
 
     //! Retrieve the structural element reference from the attribute.
     const S&	get() const;
-
-    //! This method is being deprecated and should disappear soon.
-    S&		get();
 
     //! @{
     /** Update the reference in the slot.

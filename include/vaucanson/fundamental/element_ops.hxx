@@ -24,13 +24,14 @@
 /** @addtogroup fundamental *//** @{ */
 /** @addtogroup operators   *//** @{ */
 /**
- * @file element_ops.hxx
+ * @file element_ops.hxx
  * @brief Implementations of external operators standard delegations for @c Element
  */
 /** @} @} */
 
-# include <vaucanson/fundamental/element_ops.hh>
-# include <vaucanson/misc/selectors.hh>
+# include <vaucanson/fundamental/element_ops.hh>
+# include <vaucanson/misc/selectors.hh>
+# include <vaucanson/misc/static.hh>
 
 namespace vcsn {
 
@@ -41,43 +42,29 @@ namespace vcsn {
 #define ELEMENT_OP_PROTO_SYM(Op, Ret)				\
 template<typename S1, typename T1, typename S2, typename T2>	\
 static inline							\
-Ret operator Op(const Element<S1, T1>& e1,			\
-		const Element<S2, T2>& e2)
+Ret operator Op(const Element<S1, T1>& x1,			\
+		const Element<S2, T2>& x2)
 
 #define ELEMENT_OP_PROTO_LEFT_FOREIGN(Op, Ret)			\
 template<typename S1, typename T1, typename T2>			\
 static inline							\
-Ret operator Op(const Element<S1, T1>& e1, const T2& v2)
-
-#define ELEMENT_OP_PROTO_LEFT(Op, Ret)				\
-template<typename S1, typename T1>				\
-static inline							\
-Ret operator Op(const Element<S1, T1>& e1, const T1& v2)
+Ret operator Op(const Element<S1, T1>& x1, const T2& x2)
 
 #define ELEMENT_OP_PROTO_RIGHT_FOREIGN(Op, Ret)			\
 template<typename T1, typename S2, typename T2>			\
 static inline							\
-Ret operator Op(const T1& v1, const Element<S1, T1>& e2)
-
-#define ELEMENT_OP_PROTO_RIGHT(Op, Ret)				\
-template<typename T1, typename S1>				\
-static inline							\
-Ret operator Op(const T1& v1, const Element<S1, T1>& e2)
+Ret operator Op(const T1& x1, const Element<S2, T2>& x2)
 
   /*--------------------------.
   | Standard delegation forms |
   `--------------------------*/
 
 #define DELEGATE_SYM(OpName) \
- return op_ ## OpName(e1.set(), e2.set(), e1.value(), e2.value())
-#define DELEGATE_LEFT(OpName) \
- return op_ ## OpName(e1.set(), e1.value(), v2) 
-#define DELEGATE_RIGHT(OpName) \
- return op_ ## OpName(e2.set(), v1, e2.value())
+ return op_ ## OpName(x1.set(), x2.set(), x1.value(), x2.value())
 #define DELEGATE_LEFT_FOREIGN(OpName) \
- return op_ ## OpName(e1.set(), e1.value(), op_convert(e1.set(), SELECT(T1), v2)) 
+ return op_ ## OpName(x1.set(), x1.value(), op_convert(x1.set(), SELECT(T1), x2)) 
 #define DELEGATE_RIGHT_FOREIGN(OpName) \
- return op_ ## OpName(e2.set(), op_convert(e2.set(), SELECT(T2), v1), e2.value())
+ return op_ ## OpName(x2.set(), op_convert(x2.set(), SELECT(T2), x1), x2.value())
 
 
   /*-----------------------------.
@@ -85,28 +72,31 @@ Ret operator Op(const T1& v1, const Element<S1, T1>& e2)
   `-----------------------------*/
 
 #define BOOLEAN_DELEGATION(Op, OpName)						\
-  ELEMENT_OP_PROTO_SYM(Op, bool) { DELEGATE_SYM(OpName); }			\
-  ELEMENT_OP_PROTO_LEFT(Op, bool) { DELEGATE_LEFT(OpName); }			\
-  ELEMENT_OP_PROTO_RIGHT(Op, bool) { DELEGATE_RIGHT(OpName); }			\
-  ELEMENT_OP_PROTO_LEFT_FOREIGN(Op, bool) { DELEGATE_LEFT_FOREIGN(OpName); }	\
-  ELEMENT_OP_PROTO_RIGHT_FOREIGN(Op, bool) { DELEGATE_RIGHT_FOREIGN(OpName); }
+  ELEMENT_OP_PROTO_SYM(Op, bool) { DELEGATE_SYM(OpName); }			\
+  ELEMENT_OP_PROTO_LEFT_FOREIGN(Op, bool) { DELEGATE_LEFT_FOREIGN(OpName); }	\
+  ELEMENT_OP_PROTO_RIGHT_FOREIGN(Op, bool) { DELEGATE_RIGHT_FOREIGN(OpName); }
 
   BOOLEAN_DELEGATION(==, eq)
   BOOLEAN_DELEGATION(<, lt)
 #undef BOOLEAN_DELEGATION
 
 #define BOOLEAN_CANONICAL_DELEGATION(Op, Not, X1, Del, X2)				\
-  ELEMENT_OP_PROTO_SYM(Op, bool) { return Not (e ## X1 Del e ## X2); }			\
-  ELEMENT_OP_PROTO_LEFT(Op, bool) { return Not (e ## X1 Del v ## X2); }			\
-  ELEMENT_OP_PROTO_RIGHT(Op, bool) { return Not (v ## X1 Del e ## X2); }		\
-  ELEMENT_OP_PROTO_LEFT_FOREIGN(Op, bool) { return Not (e ## X1 Del v ## X2); }		\
-  ELEMENT_OP_PROTO_RIGHT_FOREIGN(Op, bool) { return Not (v ## X1 Del e ## X2); }
+  ELEMENT_OP_PROTO_SYM(Op, bool) { return Not (x ## X1 Del x ## X2); }			\
+  ELEMENT_OP_PROTO_LEFT_FOREIGN(Op, bool) { return Not (x ## X1 Del x ## X2); }		\
+  ELEMENT_OP_PROTO_RIGHT_FOREIGN(Op, bool) { return Not (x ## X1 Del x ## X2); }
 
   BOOLEAN_CANONICAL_DELEGATION(!=, !, 1, ==, 2)
   BOOLEAN_CANONICAL_DELEGATION(> ,  , 2, <, 1)
   BOOLEAN_CANONICAL_DELEGATION(>=, !, 1, <, 2)
   BOOLEAN_CANONICAL_DELEGATION(<=, !, 2, <, 1)
 #undef BOOLEAN_CANONICAL_DELEGATION
+
+#undef ELEMENT_PROTO_SYM
+#undef ELEMENT_PROTO_LEFT_FOREIGN
+#undef ELEMENT_PROTO_RIGHT_FOREIGN
+#undef DELEGATE_SYM
+#undef DELEGATE_LEFT_FOREIGN
+#undef DELEGATE_RIGHT_FOREIGN
 
     /*----------------------------------.
     | Standard arithmetical delegations |
@@ -118,25 +108,25 @@ static inline										\
 typename op_##HookName##_traits<S1, S2, T1, T2>::ret_t					\
 operator Op(const Element<S1, T1>& e1, const Element<S2, T2>& e2)			\
 {											\
-  // Compute return Element type							\
+  /* Compute return Element type */							\
   typedef typename op_##HookName##_traits<S1, S2, T1, T2>::ret_t ret_t;			\
 											\
-  // Compute return structural element from return Element type				\
+  /* Compute return structural element from return Element type	*/			\
   const bool want_s1 = utility::static_eq<S1, typename ret_t::set_t>::value;		\
   typedef typename utility::static_if<want_s1, S1, S2>::t ret_set_t;			\
   const ret_set_t& s = 									\
     utility::static_if<want_s1, const S1, const S2>::choose(e1.set(), e2.set());	\
 											\
-  // Delegate										\
+  /* Delegate */									\
   return Element<ret_set_t, typename ret_t::value_t>					\
-    (avoid_uniquify(s), op_##HookName(e1.set(), e2.set(), e1.value(), e2.value()));	\
+    (s, op_##HookName(e1.set(), e2.set(), e1.value(), e2.value()));		\
 }											\
 											\
 template<typename S, typename T, typename U>						\
 static inline Element<S, T>								\
 operator Op(const Element<S, T>& e, const U& v)						\
 {											\
-  return Element<S, T> (avoid_uniquify(e.set()),					\
+  return Element<S, T> (e.set(),					\
 			op_##HookName(e.set(),						\
 				      e.value(),					\
 				      op_convert(e.set(), SELECT(T), v)));		\
@@ -146,17 +136,17 @@ template<typename U, typename S, typename T>						\
 static inline Element<S, T>								\
 operator Op(const U& v, const Element<S, T>& e)						\
 {											\
-  return Element<S, T> (avoid_uniquify(e.set()),					\
+  return Element<S, T> (e.set(),					\
 			op_ ## HookName(e.set(),					\
 					op_convert(e.set(), SELECT(T), v),		\
 					e.value()));					\
 }
 
-ELEMENT_OPERATOR(+, add);
-ELEMENT_OPERATOR(-, sub);
-ELEMENT_OPERATOR(*, mul);
-ELEMENT_OPERATOR(/, div);
-ELEMENT_OPERATOR(%, mod);
+ELEMENT_OPERATOR(+, add)
+ELEMENT_OPERATOR(-, sub)
+ELEMENT_OPERATOR(*, mul)
+ELEMENT_OPERATOR(/, div)
+ELEMENT_OPERATOR(%, mod)
 
 #undef ELEMENT_OPERATOR
 
@@ -186,7 +176,7 @@ template<typename S, typename T>
 static inline Element<S, T> 
 operator-(const Element<S, T>& e)
 { 
-  return Element<S, T>(avoid_uniquify(e.set()), op_neg(e.set(), e.value())); 
+  return Element<S, T>(e.set(), op_neg(e.set(), e.value())); 
 }
 
 } // vcsn

@@ -24,14 +24,13 @@
 //
 
 #include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
-#include <check/tests_stuff.hh>
+#include <check/tester.hh>
 #include <fundamental/design_pattern-test.hh>
 
-namespace vcsn {
+namespace vcsn_test {
 
-  struct Natural : public Structure<Natural> 
+  struct Natural : public vcsn::Structure<Natural> 
   { 
     Natural() 
     {}

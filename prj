@@ -1,107 +1,100 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 228)
-(Parent-Version vaucanson 0 227)
+(Project-Version vaucanson 0 229)
+(Parent-Version vaucanson 0 228)
 (Version-Log "Index: ChangeLog
 from  Raphaël Poss  <raph@lrde.epita.fr>
 
-   * include/vaucanson/misc/utility.hh: Add. Document.
+   * src/tests/fundamental/intrinsics.hh,
+   src/tests/fundamental/intrinsics_orphanage.cc,
+   src/tests/fundamental/intrinsics_link.cc
+   src/tests/fundamental/intrinsics_extra.cc
+   src/tests/fundamental/intrinsics_default.cc
+   src/tests/fundamental/intrinsics_convert.cc
+   src/tests/fundamental/intrinsics_assign.cc
+   src/tests/fundamental/intrinsics_ops.cc: Add.
+   * src/tests/fundamental/Makefile.am: Update accordingly.
 
-   * include/vaucanson/misc/constraints.hh,
-   include/vaucanson/misc/container_ops.hh,
-   include/vaucanson/misc/container_ops.hxx,
-   include/vaucanson/misc/converter.hh,
-   include/vaucanson/misc/converter.hxx,
-   include/vaucanson/misc/functors.hh,
-   include/vaucanson/misc/functors.hxx,
-   include/vaucanson/misc/limits.hh,
-   include/vaucanson/misc/misc_constraints.hh,
-   include/vaucanson/misc/numerical_constraints.hh,
-   include/vaucanson/misc/type_constraints.hh,
-   include/vaucanson/misc/static.hxx: Remove.
+   * include/vaucanson/fundamental/structure.hh: Make `Structure'
+   inherit from `unifiable'. Add missing `operator!='.
+   * include/vaucanson/fundamental/structure.hxx: Update accordingly.
 
-   * include/vaucanson/config/rel_ops_work_around_g++2.hh: Remove.
-   * include/vaucanson/fundamental/meta_set.hh: Remove.
+   * include/vaucanson/fundamental/slots.hh: Remove deprecated
+   methods. Fix constructor call in `SetSlot'.
 
-   * src/tests/misc/Makefile.am, src/tests/misc/unique.cc,
-   src/tests/misc/static.cc, src/tests/misc/selectors.cc,
-   src/tests/misc/koenig.cc: Add.
-   * src/tests/check/assert_test.cc: Rename to...
-   * src/tests/misc/assert_test.cc: this.
+   * include/vaucanson/fundamental/syntactic_decorator.hxx: Add
+   missing calls to self().
 
-   * include/vaucanson/config/math.hh: Add. Document.
+   * include/vaucanson/fundamental/element_ops.hxx: Typo fixes. Unify
+   comparison declarators. Sanitize operator logic. Use /* */
+   comments in macros. Remove calls to `avoid_uniquify'.
 
-   * include/vaucanson/fundamental/structure.hh: Document
-   more. Cleanup. Simplify.
-   * include/vaucanson/fundamental/structure.hxx: Cleanup. Simplify.
+   * include/vaucanson/fundamental/element_ops.hh: Fix template
+   declarations.
 
-   * include/vaucanson/fundamental/slots.hh: Eradicate
-   ValueSlots's. Use dynamic_traits instead of MetaSet.
-   * include/vaucanson/fundamental/slots.hxx: Update accordingly.
+   * include/vaucanson/fundamental/element.hxx: Make more calls to
+   `op_convert' in constructors. Sanitize assignment logic.
 
-   * include/vaucanson/fundamental/predefs.hh: Rename to...
-   * include/vaucanson/fundamental/predecls.hh: this. Document
-   more. Cleanup. Import undefined_type from traits.hh.
-   * include/vaucanson/internal/traits.hh: Remove.
+   * include/vaucanson/fundamental/element.hh: Include `slot.hh'.
 
-   * include/vaucanson/fundamental/op_traits.hh: Rename to...
-   * include/vaucanson/fundamental/element_op_traits.hh:
-   this. Document. Cleanup. Simplify.
-   * include/vaucanson/fundamental/op_traits.hxx: Rename to...
-   * include/vaucanson/fundamental/element_op_traits.hxx:
-   this. Cleanup. Simplify.
+   * include/vaucanson/fundamental/default_ops.hxx: Use `static_cast'
+   where appropriate to quiet the compiler. Add calls to assert()
+   where useful.
 
-   * include/vaucanson/fundamental/meta_element.hh: Rename to...
-   * include/vaucanson/fundamental/syntactic_decorator.hh:
-   this. Document. Cleanup. Simplify.
-   * include/vaucanson/fundamental/meta_element.hxx: Rename to...
-   * include/vaucanson/fundamental/syntactic_decorator.hxx:
-   this. Cleanup. Simplify.
+   * src/tests/misc/static.cc (main): Fix syntax.
 
-   * include/vaucanson/fundamental/fundamental.hh: Simplify.
+   * src/tests/misc/unique.cc: Remove include of `unique.hcc' since
+   it is now imported by libcheck. Inherit from `unifiable' where
+   needed.
 
-   * include/vaucanson/fundamental/element_ops.hh: Document more. Cleanup. Simplify.
-   * include/vaucanson/fundamental/element_ops.hxx: Cleanup. Simplify. More sanity checks.
+   * include/vaucanson/misc/unique.hcc: Include `unique.hh'.
 
-   * include/vaucanson/fundamental/element_base.hh: Rename to...
-   * include/vaucanson/fundamental/meta_element_root.hh:
-   this. Document. Cleanup. Simplify.
-   * include/vaucanson/fundamental/element_base.hxx: Rename to...
-   * include/vaucanson/fundamental/meta_element_root.hxx:
-   this. Cleanup. Simplify.
-   * include/vaucanson/fundamental/element.hh: Document more
-   accurately. Cleanup. Simplify.
-   * include/vaucanson/fundamental/element.hxx:
-   Cleanup. Simplify. More sanity checks.
-   * include/vaucanson/fundamental/default_ops.hh:
-   Document. Cleanup. Simplify.
-   * include/vaucanson/fundamental/default_ops.hxx:
-   Cleanup. Simplify.
-   * src/tests/misc/assert_test.cc: Include system.hh.
-   * include/vaucanson/misc/unique.hh,
-   include/vaucanson/misc/unique.hcc,
-   include/vaucanson/misc/unique.hxx: Document. Simplify.
-   * include/vaucanson/misc/selectors.hh: Document.
-   * include/vaucanson/misc/static.hh: Document. Complete
+
+   * include/vaucanson/misc/unique.hxx,
+   include/vaucanson/misc/unique.hh (utility): Specify `inline' where
+   needed. Add base type `unifiable'. Update `get'
+   accordingly. Remove `uniquified' and `avoid_uniquify'.
+
+   * include/vaucanson/misc/static.hh: Add remove_const. Fix
    remove_reference.
-   * include/vaucanson/config/system.hh: Document. Cleanup. Simplify.
-   * include/Makefile.am: Beautify.
-   * doc/doc.doxy.in: Cleanup eye candies.
-   * src/tests/sanity/Makefile.am, src/tests/sanity/includes.test:
-   Cleanup.
-   * src/tests/defs.in: Rename to...
-   * src/tests/check/defs.in: this. Cleanup. Use flags computed by
-   configure.
-   * src/tests/check/Makefile.flags: Use flags computed by configure.
-   * src/tests/check/Makefile.check: Simplify.
-   * src/tests/check/Makefile.am: Remove mention of `assert_test'.
-   * src/tests/Makefile.am (SUBDIRS): Re-order. Mention `misc'.
-   * configure.ac: Arrange directory order in AC_CONFIG_FILES.
+
+   * src/tests/check/defs.in (CPPFLAGS): Quote substitutions.
+
+   * src/tests/check/Makefile.flags (AM_CXXFLAGS): Do not add debug
+   flags by default.
+
+   * src/tests/check/Makefile.check: Adjust paths.
+
+   * src/tests/check/unique.hcc: Add.
+   * src/tests/check/tests_stuff.hh: Rename to ...
+   * src/tests/check/tester.hh: this.
+   * src/tests/check/tests_stuff.cc: Rename to ...
+   * src/tests/check/tester.cc: this.
+   * src/tests/check/Makefile.am (libcheck_a_SOURCES): Update accordingly.
+
+   * src/tests/check/tester.hh, src/tests/check/tester.cc: Add
+   default constructor which reads from $VERBOSE in the
+   environment. Rename some identifiers. Add macros TEST_GROUP,
+   TEST_ASSERT and TEST_XASSERT.
+
+   * include/vaucanson/fundamental/predecls.hh: Mention `virtual_types'.
+
+   * include/vaucanson/fundamental/element_ops.hxx: Typo fixes.
+
+   * config/vcsn.m4: Remove Vaucanson includes from CPPFLAGS.
+
+   * configure.ac: Remove mention of src/tests/bin/Makefile.
+
+   * src/tests/sanity/includes.test: Use variables. Fix `defs'
+   include.
+
+   * src/tests/sanity/Makefile.am (check-local): Mention
+   TOP_BUILDDIR.
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 10 Jun 2003 15:56:42 +0200")
+(Checkin-Time "Thu, 19 Jun 2003 15:31:31 +0200")
 (Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -184,7 +177,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.33 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.34 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 664))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -193,22 +186,23 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (README (vaucanson/f/48_README 1.7 600))
   (THANKS (vaucanson/f/36_THANKS 1.5 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.5 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.23 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.24 600))
   (prj (vaucanson.prj) :symlink)
 
-  (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.3 600))
+  (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.4 600))
 
   (src/Makefile.am (vaucanson/51_Makefile.a 1.4 600))
   (src/README (vaucanson/h/3_README 1.1 600))
   (src/tests/Makefile.am (vaucanson/b/1_Makefile.a 1.9 600))
-  (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.5 600))
-  (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.2 600))
-  (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.11 600))
-  (src/tests/check/tests_stuff.cc (vaucanson/b/3_tests_stuf 1.10 600))
-  (src/tests/check/tests_stuff.hh (vaucanson/b/2_tests_stuf 1.12 600))
-  (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.4 664))
-  (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.3 600))
-  (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.2 700))
+  (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.6 600))
+  (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.3 600))
+  (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.12 600))
+  (src/tests/check/tester.cc (vaucanson/b/3_tests_stuf 1.11 600))
+  (src/tests/check/tester.hh (vaucanson/b/2_tests_stuf 1.13 600))
+  (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.5 664))
+  (src/tests/check/unique.cc (vaucanson/p/49_unique.cc 1.1 664))
+  (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.4 600))
+  (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.3 700))
   (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 711))
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.3 600))
@@ -236,42 +230,51 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/misc/unchecked/ref.hh (vaucanson/c/31_ref.hh 1.8 600))
   (include/vaucanson/misc/unchecked/ref.hxx (vaucanson/c/33_ref.hxx 1.9 600))
   (include/vaucanson/misc/selectors.hh (vaucanson/14_selectors. 1.7 644))
-  (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.6 664))
-  (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.2 664))
-  (include/vaucanson/misc/unique.hcc (vaucanson/p/39_unique.hcc 1.2 664))
-  (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.2 664))
+  (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.7 664))
+  (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.3 664))
+  (include/vaucanson/misc/unique.hcc (vaucanson/p/39_unique.hcc 1.3 664))
+  (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.3 664))
   (include/vaucanson/misc/utility.hh (vaucanson/p/43_utility.hh 1.1 644))
   (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.1 600))
 
   (src/tests/misc/Makefile.am (vaucanson/p/44_Makefile.a 1.1 664))
-  (src/tests/misc/unique.cc (vaucanson/p/45_unique.cc 1.1 644))
-  (src/tests/misc/static.cc (vaucanson/p/46_static.cc 1.1 664))
+  (src/tests/misc/unique.cc (vaucanson/p/45_unique.cc 1.2 644))
+  (src/tests/misc/static.cc (vaucanson/p/46_static.cc 1.2 664))
   (src/tests/misc/selectors.cc (vaucanson/p/47_selectors. 1.1 644))
   (src/tests/misc/koenig.cc (vaucanson/p/48_koenig.cc 1.1 644))
   (src/tests/misc/assert_test.cc (vaucanson/p/41_assert_tes 1.2 664))
 
   (include/vaucanson/fundamental/default_ops.hh (vaucanson/25_default_op 1.11 664))
-  (include/vaucanson/fundamental/default_ops.hxx (vaucanson/24_default_op 1.11 664))
-  (include/vaucanson/fundamental/element.hh (vaucanson/7_element.hh 1.14 664))
-  (include/vaucanson/fundamental/element.hxx (vaucanson/6_element.hx 1.12 664))
+  (include/vaucanson/fundamental/default_ops.hxx (vaucanson/24_default_op 1.12 664))
+  (include/vaucanson/fundamental/element.hh (vaucanson/7_element.hh 1.15 664))
+  (include/vaucanson/fundamental/element.hxx (vaucanson/6_element.hx 1.13 664))
   (include/vaucanson/fundamental/meta_element_root.hh (vaucanson/9_element_ba 1.13 664))
   (include/vaucanson/fundamental/meta_element_root.hxx (vaucanson/8_element_ba 1.10 664))
-  (include/vaucanson/fundamental/element_ops.hh (vaucanson/5_element_op 1.14 664))
-  (include/vaucanson/fundamental/element_ops.hxx (vaucanson/g/44_element_op 1.5 664))
-  (include/vaucanson/fundamental/fundamental.hh (vaucanson/4_fundamenta 1.11 664))
+  (include/vaucanson/fundamental/element_ops.hh (vaucanson/5_element_op 1.15 664))
+  (include/vaucanson/fundamental/element_ops.hxx (vaucanson/g/44_element_op 1.6 664))
+  (include/vaucanson/fundamental/fundamental.hh (vaucanson/4_fundamenta 1.12 664))
   (include/vaucanson/fundamental/syntactic_decorator.hh (vaucanson/21_meta_eleme 1.10 664))
-  (include/vaucanson/fundamental/syntactic_decorator.hxx (vaucanson/20_meta_eleme 1.9 664))
+  (include/vaucanson/fundamental/syntactic_decorator.hxx (vaucanson/20_meta_eleme 1.10 664))
   (include/vaucanson/fundamental/element_op_traits.hh (vaucanson/3_op_traits. 1.10 664))
-  (include/vaucanson/fundamental/predecls.hh (vaucanson/10_predefs.hh 1.7 664))
-  (include/vaucanson/fundamental/slots.hh (vaucanson/2_slots.hh 1.11 664))
-  (include/vaucanson/fundamental/slots.hxx (vaucanson/1_slots.hxx 1.9 664))
-  (include/vaucanson/fundamental/structure.hh (vaucanson/23_structure. 1.12 664))
-  (include/vaucanson/fundamental/structure.hxx (vaucanson/22_structure. 1.8 664))
+  (include/vaucanson/fundamental/predecls.hh (vaucanson/10_predefs.hh 1.8 664))
+  (include/vaucanson/fundamental/slots.hh (vaucanson/2_slots.hh 1.12 664))
+  (include/vaucanson/fundamental/slots.hxx (vaucanson/1_slots.hxx 1.10 664))
+  (include/vaucanson/fundamental/structure.hh (vaucanson/23_structure. 1.13 664))
+  (include/vaucanson/fundamental/structure.hxx (vaucanson/22_structure. 1.9 664))
 
   (src/tests/fundamental () :directory)
-  (src/tests/fundamental/Makefile.am (vaucanson/b/9_Makefile.a 1.3 600))
+  (src/tests/fundamental/Makefile.am (vaucanson/b/9_Makefile.a 1.4 600))
   (src/tests/fundamental/design_pattern-test.hh (vaucanson/b/10_design_pat 1.6 600))
-  (src/tests/fundamental/element-full-test.cc (vaucanson/17_element-fu 1.11 600))
+  (src/tests/fundamental/element-full-test.cc (vaucanson/17_element-fu 1.12 600))
+  (src/tests/fundamental/intrinsics_orphanage.cc (vaucanson/p/50_intrinsics 1.1 664))
+  (src/tests/fundamental/intrinsics_ops.cc (vaucanson/p/51_intrinsics 1.1 664))
+  (src/tests/fundamental/intrinsics_link.cc (vaucanson/q/0_intrinsics 1.1 664))
+  (src/tests/fundamental/intrinsics_extra.cc (vaucanson/q/1_intrinsics 1.1 664))
+  (src/tests/fundamental/intrinsics_default.cc (vaucanson/q/2_intrinsics 1.1 664))
+  (src/tests/fundamental/intrinsics_convert.cc (vaucanson/q/3_intrinsics 1.1 664))
+  (src/tests/fundamental/intrinsics_binops.cc (vaucanson/q/4_intrinsics 1.1 664))
+  (src/tests/fundamental/intrinsics_assign.cc (vaucanson/q/5_intrinsics 1.1 664))
+  (src/tests/fundamental/intrinsics.hh (vaucanson/q/6_intrinsics 1.1 664))
 
   (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.18 600))
   (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.17 600))
@@ -814,8 +817,12 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 
 
+
+;; Files added by populate at Thu, 19 Jun 2003 14:12:09 +0200,
+;; to version 0.228(w), by raph:
+
 )
 (Merge-Parents
-  (0.227 complete)
+  (0.228 complete)
 )
 (New-Merge-Parents)

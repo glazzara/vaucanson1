@@ -61,10 +61,10 @@ namespace vcsn {
   `------------*/
 
   template<typename S, typename R, typename T>
-  R op_convert(const Structure<S> &se, 
+  R op_convert(const Structure<S> &, 
 	       SELECTOR(R), const T& data)
   {
-    return data;
+    return static_cast<R>(data);
   }
       
   template<typename S, typename T>
@@ -75,9 +75,10 @@ namespace vcsn {
   }
 
   template<typename S, typename T>
-  const T& op_convert(const Structure<S>&, SELECTOR(T), 
-		      const Structure<S>&, const T& from_data)
+  const T& op_convert(const Structure<S>& s1, SELECTOR(T), 
+		      const Structure<S>& s2, const T& from_data)
   {
+    assert(& s1 == & s2);
     return from_data;
   }
 
@@ -121,19 +122,18 @@ namespace vcsn {
 		 T& dst, 
 		 const U& src)
   { 
-    // FIXME: we want to be able to write :
-    // assert(s1.self() == s2.self());
+    assert(& s1 == & s2);
     op_assign(s1.self(), dst, src); 
   }
 
 #define INOP_IMPL(Name)						\
     template<typename S, typename T, typename U>		\
     void op_in_ ## Name (const Structure<S>& s1, 	\
-			 const Structure<S>&,	\
+			 const Structure<S>& s2,	\
 			 T& dst,				\
 			 const U& arg)				\
     { 								\
-      /* assert(s1.self() == s2.self()); */			\
+      assert(& s1 == & s2);			\
       return op_in_ ## Name (s1.self(), dst, arg); 		\
     }
       
@@ -149,11 +149,11 @@ namespace vcsn {
 #define BINOP_IMPL(Name)					\
     template<typename S, typename T, typename U>		\
     T op_ ## Name (const Structure<S>& s1,			\
-		   const Structure<S>&,				\
+		   const Structure<S>& s2,			\
 		   const T& v1,					\
 		   const U& v2)					\
     { 								\
-      /* assert(s1.self() == s2.self()); */			\
+      assert(& s1 == & s2); 			\
       return op_ ## Name(s1.self(), v1, v2); 			\
     }
 

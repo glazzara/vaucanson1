@@ -1,12 +1,22 @@
 #include <vaucanson/misc/unique.hh>
-#include <vaucanson/misc/unique.hcc>
 #include <cassert>
 #include <set>
 #include <string>
 
 #define MAXITER 10000
 
-struct A {};
+struct I : public utility::unique::unifiable
+{
+  I(int x) : x_(x) {}
+
+  int x_;
+};
+bool operator==(const I& i1, const I& i2)
+{ return i1.x_ == i2.x_; }
+
+struct A : public utility::unique::unifiable 
+{ };
+
 std::string tag;
 bool operator==(const A&, const A&)
 {
@@ -16,11 +26,11 @@ bool operator==(const A&, const A&)
 
 int main()
 {
-  std::set<const int*> s;
+  std::set<const I*> s;
   
   for (int i = 0; i < MAXITER; ++i)
     {
-      const int *p = & utility::unique::get(i);
+      const I *p = & utility::unique::get(I(i));
       assert(s.find(p) == s.end());
       s.insert(p);
     }

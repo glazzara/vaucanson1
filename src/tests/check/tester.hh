@@ -1,4 +1,4 @@
-// tests/tests_stuff.hh
+// tests/tester.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef TESTS_TESTS_STUFF_HH
-# define TESTS_TESTS_STUFF_HH
+#ifndef TESTS_TESTER_HH
+# define TESTS_TESTER_HH
 
 # include <sstream>
 # include <iostream>
@@ -27,7 +27,7 @@
 
 namespace tests {
 
-  enum verbose_level_e 
+  enum verbose_level 
     {
       none,
       low,
@@ -38,26 +38,36 @@ namespace tests {
   class Tester
   {
   public:
-    Tester(verbose_level_e verbose_level);
+    Tester();
+    Tester(verbose_level l);
 
     bool	     all_passed();
     void	     ok(std::string test_label);
     void	     ko(std::string test_label);
-    verbose_level_e  verbose() const;
+    verbose_level    verbose() const;
 
     static const unsigned  nb_col_msg;
     // FIXME: Add statistics stuff.
 
   private:
     unsigned int	passed_;
-    unsigned int	non_passed_;
-    verbose_level_e	verbose_;
+    unsigned int	failed_;
+    verbose_level	verbose_;
   };
 
 } // tests
 
 #define TEST_MSG(Label) \
   std::cout << "TEST: * " << Label << std::endl;
+
+#define TEST_GROUP(Label) \
+  std::cout << "GROUP *** " << Label << " ***" << std::endl;
+
+#define TEST_ASSERT(Code, Label) \
+  std::cout << ((Code) ? "PASS" : "FAIL") << " * " << Label << std::endl; assert(Code);
+#define TEST_XASSERT(Code, Label) \
+  std::cout << ((Code) ? "PASS" : "XFAIL") << " * " << Label << std::endl;
+  
 
 #define TEST_RETURN(Tester) \
   if (Tester.all_passed())			\
@@ -86,7 +96,7 @@ namespace tests {
     Tester.ok(Label);				\
   else						\
    {						\
-     std::cout << "(" << (Code) << " != " << #V \
+     std::cout << "(" << #Code << " != " << #V  \
                << ")"				\
                << std::endl;			\
      Tester.ko(Label);				\
@@ -100,4 +110,4 @@ namespace tests {
   OutStr = s.str();				\
 }
 
-#endif // TESTS_TESTS_STUFF_HH
+#endif // TESTS_TESTER_HH

@@ -51,6 +51,9 @@ namespace vcsn {
   template<typename Self>
   struct Structure;
 
+  template<typename Self>
+  struct virtual_types;
+
   struct undefined_type {};
 
 } // vcsn

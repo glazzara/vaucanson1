@@ -19,22 +19,36 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include <iomanip>
-#include "tests_stuff.hh"
+#include <string>
+#include "tester.hh"
 
 namespace tests {
 
   const unsigned Tester::nb_col_msg = 50;
 
-  Tester::Tester(verbose_level_e verbose_level) : 
+  Tester::Tester() :
+    passed_(0),
+    failed_(0),
+    verbose_(none)
+  {
+    std::string s = getenv("VERBOSE");
+    if (s == "x" || s == "high")
+      verbose_ = high;
+    else if (s != "")
+      verbose_ = medium;  
+  }
+
+  Tester::Tester(verbose_level v) : 
     passed_ (0),
-    non_passed_(0),
-    verbose_(verbose_level)
-  {}
+    failed_(0),
+    verbose_(v)
+  {
+  }
 
   bool 
   Tester::all_passed() 
   {
-    return (non_passed_ == 0);
+    return (failed_ == 0);
   }
 
   void 
@@ -50,10 +64,10 @@ namespace tests {
   {
     if (verbose_ != none)
       std::cout << "TEST: [KO]   " << test_label << std::endl;
-    non_passed_++;
+    failed_++;
   }
   
-  verbose_level_e Tester::verbose() const
+  verbose_level Tester::verbose() const
   {
     return verbose_;
   }

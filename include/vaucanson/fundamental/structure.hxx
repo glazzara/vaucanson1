@@ -90,10 +90,12 @@ namespace vcsn {
 
   template <typename S>
   Structure<S>::Structure()
+    : utility::unique::unifiable()
   {}
 
   template <typename S>
-  Structure<S>::Structure(const Structure&)
+  Structure<S>::Structure(const Structure& other)
+    : utility::unique::unifiable(other)
   {}
 
 
@@ -101,11 +103,16 @@ namespace vcsn {
   | Default Comparison  |
   `--------------------*/
   template<typename S>
-  bool operator==(const vcsn::Structure<S>& a,
-		  const vcsn::Structure<S>& b)
+  bool operator==(const vcsn::Structure<S>& ,
+		  const vcsn::Structure<S>& )
   { 
     return true; 
   }
+
+  template<typename S>
+  bool operator!=(const vcsn::Structure<S>& a,
+		  const vcsn::Structure<S>& b)
+  { return !(a == b); }
 
 } // vcsn
 

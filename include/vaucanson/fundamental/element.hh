@@ -32,6 +32,7 @@
 # include <vaucanson/fundamental/meta_element_root.hh>
 # include <vaucanson/fundamental/element_ops.hh>
 # include <vaucanson/fundamental/default_ops.hh>
+# include <vaucanson/fundamental/slots.hh>
 
 namespace vcsn {
 

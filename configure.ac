@@ -66,9 +66,7 @@ AC_CONFIG_FILES([
 	src/tests/automata/Makefile
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile
-	src/tests/sanity/Makefile
 	src/tests/tests-suites/Makefile
-	src/tests/bin/Makefile
 	src/demos/Makefile
 	src/demos/vgrep/Makefile
 	src/demos/samples/Makefile
