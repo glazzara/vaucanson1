@@ -121,7 +121,9 @@ namespace vcsn {
   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
   add_spontaneous(hstate_t from, hstate_t to)			   
     {
-      return auto_self().add_edge(from, to, identity_value(SELECT(Series), SELECT(SeriesT)));
+      return auto_self().add_edge(from, to, 
+				  identity_value(SELECT(Series), 
+						 SELECT(SeriesT)));
     }
 
     template<typename Self, typename Series, typename SeriesT, typename LabelT>
@@ -302,12 +304,13 @@ namespace vcsn {
     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
     add_spontaneous(hstate_t from, hstate_t to)			   
     {
-      return auto_self().add_edge(from, to, 
-				  std::make_pair(identity_value(SELECT(monoid_t), 
-								SELECT(typename monoid_elt_t::value_t)), 
-						 identity_value(SELECT(weights_t), 
-								SELECT(typename weight_t::value_t)))
-				  );
+      return auto_self()
+	.add_edge(from, to, 
+		  std::make_pair(identity_value(SELECT(monoid_t), 
+						SELECT(typename monoid_elt_t::value_t)), 
+				 identity_value(SELECT(weights_t), 
+						SELECT(typename weight_t::value_t)))
+		  );
     }
 
 

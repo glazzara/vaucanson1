@@ -18,6 +18,7 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+#include <string>
 #include <iostream>
 #include <cstdlib>
 #include <sstream>
@@ -71,8 +72,9 @@ namespace toolbox {
 	 ++i)
       if (!i->optional)
 	++nb_non_optional;
-
-    if (argc < 1 + nb_non_optional)
+    if ((argc < 1 + nb_non_optional) || 
+	((argc == 2) && (std::string("--help") == argv[1]))
+	)
       {
 	usage_msg();
 	exit(EXIT_FAILURE);
@@ -82,7 +84,8 @@ namespace toolbox {
       for (std::vector<Options>::const_iterator o = options.begin();
 	   o != options.end();
 	   ++o)
-	if (o->name == argv[i])
+	{
+	  if (o->name == argv[i])
 	  {
 	    if (!o->optional)
 	      nb_non_optional--;
@@ -132,6 +135,7 @@ namespace toolbox {
 	  }
 	else
 	  remainder_.push_front(argv[i]);
+	}
     if (nb_non_optional != 0)
       {
 	for (std::vector<Options>::const_iterator o = options.begin();

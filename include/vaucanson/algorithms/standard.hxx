@@ -255,9 +255,9 @@ namespace vcsn {
 	  for (typename edelta_ret_t::iterator d = aim.begin();
 	       d != aim.end();
 	       ++d)
-	    {
-	      a.add_edge(*f, a.aim_of(*d), a.label_of(*d));
-	    }
+	    // FIXME: it is wanted that we can create two similar edges.
+	    // FIXME: is it a good thing ?
+	    a.add_edge(*f, a.aim_of(*d), a.label_of(*d));
     }
     a.set_final(new_i);      
   }

@@ -1,30 +1,24 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 139)
-(Parent-Version vaucanson 0 138)
-(Version-Log "
-	* include/vaucanson/algorithms/compute.hh: documented.
-	* include/vaucanson/algorithms/compute.hxx: idem.
-	* include/vaucanson/algorithms/glushkov.hh: idem.
-	* include/vaucanson/algorithms/hopcroft.hh: idem.
-	* include/vaucanson/algorithms/isomorph.hh: idem.
-	* include/vaucanson/algorithms/krat_exp_constant_term.hh: idem.
-	* include/vaucanson/algorithms/krat_exp_derivation.hh: idem.
-	* include/vaucanson/algorithms/krat_exp_linearize.hh: idem.
-	* include/vaucanson/algorithms/moore.hh: idem.
-	* include/vaucanson/algorithms/normalized.hh: idem.
-	* include/vaucanson/algorithms/product.hh: idem.
-	* include/vaucanson/algorithms/reachable.hh: idem.
-	* include/vaucanson/algorithms/realtime.hh: idem.
-	* include/vaucanson/algorithms/standard.hh: idem.
-	* include/vaucanson/algorithms/thompson.hh: idem.
-	* include/vaucanson/algorithms/transpose.hh: idem.
-	* include/vaucanson/algorithms/trim.hh: idem.
-	* include/vaucanson/algorithms/union.hh: idem.
+(Project-Version vaucanson 0 140)
+(Parent-Version vaucanson 0 139)
+(Version-Log "2002-11-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/standard.hxx: add a FIXME.
+	* include/vaucanson/automata/concept/kinds.hxx: minor.
+	* include/vaucanson/misc/fsm_dump.hh: fix the interpretation of '1'.
+	* src/demos/fsm/arg.cc: add --help.
+	* src/demos/fsm/generate_toolbox.sh: 
+		add 'realtime', 
+		fix vcsn_krat2auto options
+	* src/demos/fsm/README: add CPPFLAGS in configure command.
+	* src/demos/fsm/usual_automaton_t/arg.cc: minor.
+	* src/demos/fsm/usual_automaton_t/Makefile.am: minor.
+
 ")
 (New-Version-Log "")
-(Checkin-Time "Fri, 22 Nov 2002 11:04:29 +0100")
+(Checkin-Time "Mon, 25 Nov 2002 12:14:02 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -108,7 +102,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.80 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.81 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.9 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
@@ -196,7 +190,7 @@
   (include/vaucanson/algorithms/extract.hh (vaucanson/d/31_extract.hh 1.6 600))
   (include/vaucanson/algorithms/extract.hxx (vaucanson/d/30_extract.hx 1.7 600))
   (include/vaucanson/algorithms/glushkov.hh (vaucanson/e/42_glushkov.h 1.6 600))
-  (include/vaucanson/algorithms/glushkov.hxx (vaucanson/e/41_glushkov.h 1.6 600))
+  (include/vaucanson/algorithms/glushkov.hxx (vaucanson/e/41_glushkov.h 1.7 600))
   (include/vaucanson/algorithms/hopcroft.hh (vaucanson/e/26_hopcroft.h 1.6 600))
   (include/vaucanson/algorithms/hopcroft.hxx (vaucanson/e/25_hopcroft.h 1.5 600))
   (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.3 600))
@@ -218,7 +212,7 @@
   (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.6 600))
   (include/vaucanson/algorithms/realtime.hxx (vaucanson/e/47_realtime.h 1.4 600))
   (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.6 600))
-  (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.4 600))
+  (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.5 600))
   (include/vaucanson/algorithms/thompson.hh (vaucanson/e/45_thompson.h 1.5 600))
   (include/vaucanson/algorithms/thompson.hxx (vaucanson/e/44_thompson.h 1.4 600))
   (include/vaucanson/algorithms/transpose.hh (vaucanson/d/37_transpose. 1.7 600))
@@ -244,7 +238,7 @@
   (include/vaucanson/automata/concept/history.hh (vaucanson/d/0_history.hh 1.4 600))
   (include/vaucanson/automata/concept/history.hxx (vaucanson/c/51_history.hx 1.4 600))
   (include/vaucanson/automata/concept/kinds.hh (vaucanson/d/16_kinds.hh 1.9 600))
-  (include/vaucanson/automata/concept/kinds.hxx (vaucanson/d/15_kinds.hxx 1.7 600))
+  (include/vaucanson/automata/concept/kinds.hxx (vaucanson/d/15_kinds.hxx 1.8 600))
   (include/vaucanson/automata/concept/relabel_impl.hh (vaucanson/c/50_relabel_im 1.5 600))
   (include/vaucanson/automata/concept/relabel_impl.hxx (vaucanson/c/49_relabel_im 1.4 600))
   (include/vaucanson/automata/concept/tags.hh (vaucanson/c/48_tags.hh 1.4 600))
@@ -294,7 +288,7 @@
   (include/vaucanson/misc/converter.hh (vaucanson/c/29_converter. 1.4 600))
   (include/vaucanson/misc/converter.hxx (vaucanson/c/32_converter. 1.3 600))
   (include/vaucanson/misc/dot_dump.hh (vaucanson/d/25_dot_dump.h 1.4 600))
-  (include/vaucanson/misc/fsm_dump.hh (vaucanson/g/8_fsm_dump.h 1.6 600))
+  (include/vaucanson/misc/fsm_dump.hh (vaucanson/g/8_fsm_dump.h 1.7 600))
   (include/vaucanson/misc/functors.hh (vaucanson/c/30_functors.h 1.5 600))
   (include/vaucanson/misc/functors.hxx (vaucanson/c/35_functors.h 1.3 600))
   (include/vaucanson/misc/limits.hh (vaucanson/g/3_limits.hh 1.2 600))
@@ -318,14 +312,14 @@
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.5 600))
   (README (vaucanson/f/48_README 1.6 600))
-  (src/demos/fsm/arg.cc (vaucanson/g/39_arg.cc 1.3 600))
+  (src/demos/fsm/arg.cc (vaucanson/g/39_arg.cc 1.4 600))
   (src/demos/fsm/arg.hh (vaucanson/g/40_arg.hh 1.3 600))
-  (src/demos/fsm/generate_toolbox.sh (vaucanson/g/9_generate_t 1.4 700))
-  (src/demos/fsm/README (vaucanson/g/23_README 1.2 600))
-  (src/demos/fsm/usual_automaton_t/arg.cc (vaucanson/g/37_arg.cc 1.3 600))
+  (src/demos/fsm/generate_toolbox.sh (vaucanson/g/9_generate_t 1.5 700))
+  (src/demos/fsm/README (vaucanson/g/23_README 1.3 600))
+  (src/demos/fsm/usual_automaton_t/arg.cc (vaucanson/g/37_arg.cc 1.4 600))
   (src/demos/fsm/usual_automaton_t/arg.hh (vaucanson/g/38_arg.hh 1.3 600))
   (src/demos/fsm/usual_automaton_t/configure.ac (vaucanson/g/22_configure. 1.2 600))
-  (src/demos/fsm/usual_automaton_t/Makefile.am (vaucanson/g/21_Makefile.a 1.4 600))
+  (src/demos/fsm/usual_automaton_t/Makefile.am (vaucanson/g/21_Makefile.a 1.5 600))
   (src/demos/fsm/usual_automaton_t/missing (vaucanson/g/17_missing 1.2 700))
   (src/demos/fsm/usual_automaton_t/toolbox.hh (vaucanson/g/14_toolbox.hh 1.4 600))
   (src/demos/fsm/usual_automaton_t/vcsn_closure.cc (vaucanson/h/2_vcsn_closu 1.1 600))

@@ -56,7 +56,7 @@ cat > $FILE <<EOF
 #include <vaucanson/algebra/concrete/series/rat/exp.hh>
 #include <vaucanson/algebra/concrete/series/krat.hh>
 #include <vaucanson/algorithms/glushkov.hh>
-
+#include <vaucanson/algorithms/thompson.hh>
    #include <vaucanson/tools/gen_random.hh>
    #include <vaucanson/misc/fsm_dump.hh> 
    #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
@@ -68,7 +68,7 @@ cat > $FILE <<EOF
   AUTOMATON_TYPES_EXACT(automaton_t);
      Options  options[2] =
        {
-	 { "-gluhskov", o_none, "prefer glushkov construction.", true }
+	 { "-glushkov", o_none, "prefer glushkov construction.", true }
        };
      OptionsValues values(std::vector<Options>(options, options+1),argc,argv);
      std::list<std::string> remainder = values.get_remainder();
@@ -85,7 +85,10 @@ cat > $FILE <<EOF
      automaton_t automaton;
      automaton.create();
      automaton.series() = series();
-     glushkov(automaton, krat_exp.value());
+     if (values.get("-glushkov"))
+	glushkov(automaton, krat_exp.value());
+    else
+	thompson(automaton, krat_exp.value());
      misc::fsm_dump(std::cout, automaton);
      return EXIT_SUCCESS;
 
@@ -151,6 +154,26 @@ cat > $FILE <<EOF
      automaton_t automaton;
      misc::fsm_load(std::cin, automaton);
      automaton_t auto_m = closure(automaton);
+     misc::fsm_dump(std::cout, auto_m);
+     return EXIT_SUCCESS;
+   }
+EOF
+
+# vcsn_realtime.cc
+FILE=$DESTDIR/vcsn_realtime.cc
+cat > $FILE <<EOF
+   #include <iostream>
+   #include "toolbox.hh"
+   #include <vaucanson/tools/gen_random.hh>
+   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/algorithms/realtime.hh>
+   using namespace vcsn;
+
+   int main(int argc, char **argv)
+   {
+     automaton_t automaton;
+     misc::fsm_load(std::cin, automaton);
+     automaton_t auto_m = realtime(automaton);
      misc::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }
@@ -307,6 +330,7 @@ bin_PROGRAMS = \
     vcsn_closure	     \
     vcsn_prune		     \
     vcsn_reverse	     \
+    vcsn_realtime	     \
     vcsn_union		     \
     vcsn_intersect	     \
     vcsn_dotdump
@@ -318,6 +342,7 @@ vcsn_dotdump_SOURCES		= vcsn_dotdump.cc arg.cc toolbox.cc
 vcsn_minimize_SOURCES		= vcsn_minimize.cc arg.cc toolbox.cc
 vcsn_closure_SOURCES		= vcsn_closure.cc arg.cc toolbox.cc
 vcsn_reverse_SOURCES		= vcsn_reverse.cc arg.cc toolbox.cc
+vcsn_realtime_SOURCES		= vcsn_realtime.cc arg.cc toolbox.cc
 vcsn_intersect_SOURCES		= vcsn_intersect.cc arg.cc toolbox.cc
 vcsn_prune_SOURCES		= vcsn_prune.cc arg.cc toolbox.cc
 EXTRA_DIST = arg.hh toolbox.hh

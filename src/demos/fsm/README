@@ -29,7 +29,7 @@ USAGE
 	4. in the directory, use the classical:
 
 		autoreconf
-		./configure
+		CPPFLAGS="-I your_vaucanson_include_dir" ./configure
 		make
 
 NOTICE

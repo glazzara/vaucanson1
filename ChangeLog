@@ -1,3 +1,16 @@
+2002-11-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/standard.hxx: add a FIXME.
+	* include/vaucanson/automata/concept/kinds.hxx: minor.
+	* include/vaucanson/misc/fsm_dump.hh: fix the interpretation of '1'.
+	* src/demos/fsm/arg.cc: add --help.
+	* src/demos/fsm/generate_toolbox.sh: 
+		add 'realtime', 
+		fix vcsn_krat2auto options
+	* src/demos/fsm/README: add CPPFLAGS in configure command.
+	* src/demos/fsm/usual_automaton_t/arg.cc: minor.
+	* src/demos/fsm/usual_automaton_t/Makefile.am: minor.
+
 2002-11-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.139)
 	* include/vaucanson/algorithms/compute.hh: documented.

@@ -209,9 +209,14 @@ namespace vcsn {
 		to_h[i->to] = automaton.add_state();
 	      if (i == stock.begin())
 		automaton.set_initial(to_h[i->from]);
-	      automaton.add_letter_edge(to_h[i->from], 
-					to_h[i->to], 
-					i->letter);
+	      // FIXME: please be generic w.r.t spontaneous transition.
+	      if (i->letter == '1')
+		automaton.add_spontaneous(to_h[i->from],
+					  to_h[i->to]);
+	      else
+		automaton.add_letter_edge(to_h[i->from], 
+					  to_h[i->to], 
+					  letter_t(i->letter));
 	    }
 	  else if (i->type == final)
 	    {

@@ -96,7 +96,7 @@ namespace vcsn {
     MATCH_(Star, node)
     {
       automaton_ptr_t stared = match(node);
-      standard_auto_in_star(*stared);
+      standard_auto_in_star(*stared); 
       return stared;
     }
     END
