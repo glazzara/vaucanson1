@@ -1,5 +1,13 @@
 2003-06-25  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/automata/concept/automata_ops.hxx: Fix minor bugs.
+	* include/vaucanson/algorithms/backward_closure.hxx: Correct function
+	  call.
+	* include/vaucanson/algorithms/forward_realtime.hxx: Correct function
+	  call.
+
+2003-06-25  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/realtime.hxx,
 	  src/demos/vgrep/vgrep.cc: Correct function call.
 	* include/vaucanson/algorithms/forward_realtime.hh: Correct inclusion

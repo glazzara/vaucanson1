@@ -125,7 +125,7 @@ namespace vcsn {
   backward_closure_here(Element<A, T>& a)
   {
     // FIXME: here, Hoc wrote : "a.renumber_states();"
-    do_backward_closure(a.set(), a);
+    do_backward_closure_here(a.set(), a);
   }
   
   template<typename  A, typename  T>
@@ -133,7 +133,7 @@ namespace vcsn {
   backward_closure(const Element<A, T>& a)
   {
     Element<A, T> ret(a);
-    do_backward_closure(ret.set(), ret);
+    do_backward_closure_here(ret.set(), ret);
     return ret;
   }
 

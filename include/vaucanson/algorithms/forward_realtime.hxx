@@ -110,7 +110,7 @@ namespace vcsn {
 	a.del_edge(e);
       }
 
-    auto_in_start_reachable(a);
+    accessible_here(a);
   }
 
   template<typename A, typename T>

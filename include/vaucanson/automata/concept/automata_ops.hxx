@@ -109,7 +109,7 @@ namespace vcsn {
     return typename Element<S, T>::series_elt_t
       (s.series(),
        v.get_initial(state, 
-		     algebra::zero_as<AutoType(serie_value_t)>::of(s.series())));
+         (algebra::zero_as<AutoType(serie_value_t)>::of(s.series())).value()));
   }
   
   template <class S, class T>
@@ -133,7 +133,7 @@ namespace vcsn {
     return typename Element<S, T>::series_elt_t
       (s.series(),
        v.get_final(state,
-		   algebra::zero_as<AutoType(serie_value_t)>::of(s.series())));
+	 (algebra::zero_as<AutoType(serie_value_t)>::of(s.series())).value()));
   }
   
   template <class S, class T>
