@@ -1,3 +1,14 @@
+2002-11-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.130)
+	* src/tests/algebra/series/:
+		Makefile.am: add krat_exp_constant_term-test.
+ 		krat_exp_constant_term-test.cc: added.
+		krat_exp_constant_term_test.hh: idem.
+		krat_exp_constant_term.hxx: idem.
+	* include/vaucanson/algorithms/:
+		krat_exp_constant_term.hxx: added.
+		krat_exp_constant_term.hh: added.
+
 2002-11-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.129)
 	* include/vaucanson/algebra/concrete/series/:
