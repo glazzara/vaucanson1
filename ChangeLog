@@ -1,3 +1,25 @@
+2002-07-16  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/alphabets_base.hxx :
+	-  /* sugar */
+	-  // add-on
+	-  MetaElement<AlphabetsBase<Self>, T>::select_letter(unsigned n) 
+	+  MetaElement<AlphabetsBase<Self>, T>::choose() 
+     
+	* include/vaucanson/algebra/concept/alphabets_base.hh : Add doc.
+	
+	* doc/vaucanson.doxywizard : Adjusted.
+
+	* src/tests/check/tests_stuff.hh : Add macro TEST_MSG.
+
+	* src/tests/fundamental/design_pattern-test.hh : spell fix.
+
+	* src/tests/algebra/alphabets/alphabets-basic-test.cc : add some tests.
+
+	* src/tests/automata/implementation_check/gen_random.hxx :
+	modified. it used select_letter.
+
+
 2002-07-12  Maxime Rey  <max@lrde.epita.fr>
 
 	* `include/vaucanson/algorithms/union.hxx' :added

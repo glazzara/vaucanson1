@@ -85,7 +85,6 @@ namespace vcsn {
       return op_end(set(), value()); 
     }
     
-    /* sugar */
     template<class Self, typename T>
     void 
     MetaElement<AlphabetsBase<Self>, T>::insert(const letter_t& l) 
@@ -93,25 +92,24 @@ namespace vcsn {
       op_insert(set(), value(), l); 
     }
     
-  // add-on
   template<class Self, typename T>
   typename alphabet_traits<Self, T>::letter_t
-  MetaElement<AlphabetsBase<Self>, T>::select_letter(unsigned n) 
+  MetaElement<AlphabetsBase<Self>, T>::choose()
   { 
-    if (n >= this->size())
-      n = this->size() - 1;
+    int  n = this->size() - 1;
+    int  c = ((unsigned) trunc(((float) random() / (float) RAND_MAX) * n));
 
     iterator it = this->begin();
-    for (unsigned i = 0; i <= n; i++, it++)
-      ;
-    //    it += n;
+
+    for (unsigned k = 0; k < c; ++k)
+      ++it;
 
     return *it;
   }
 
-    template<class Self, typename T>
-    MetaElement<AlphabetsBase<Self>, T>::MetaElement() 
-    {}
+  template<class Self, typename T>
+  MetaElement<AlphabetsBase<Self>, T>::MetaElement() 
+  {}
     
     template<class Self, typename T>
     MetaElement<AlphabetsBase<Self>, T>::MetaElement(const MetaElement& other) :

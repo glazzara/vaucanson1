@@ -28,6 +28,9 @@ namespace tests {
 
 } // tests
 
+#define TEST_MSG(Label) \
+  std::cerr << "TEST: " << Label << std::endl;
+
 #define TEST(Tester, Label, Code) \
 {						\
   bool result = (Code);				\

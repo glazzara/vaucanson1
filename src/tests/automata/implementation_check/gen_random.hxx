@@ -87,14 +87,14 @@ namespace vcsn
 	 i != work.states().end(); i++)
       {
 	nb_edge--;
-	work.add_letter_edge(*i, *prev, alpha.select_letter(alea(alpha.size())));
+	work.add_letter_edge(*i, *prev, alpha.choose());
 	prev = i;
       }
 
     for (unsigned i = 0; i < nb_edge; i++)
       work.add_letter_edge(work.select_state(alea(work.states().size())), 
 			   work.select_state(alea(work.states().size())), 
-			   alpha.select_letter(alea(alpha.size())));
+			   alpha.choose());
 
     // set initial states
     for (unsigned i = 0; i < istate; i++)
@@ -252,12 +252,12 @@ namespace vcsn
     for (unsigned i = 0; i < density; i++)
       if ((tmp = work.select_state(alea(work.states().size()))) != init)
 	work.add_letter_edge(init, tmp, 
-			     alpha.select_letter(alea(alpha.size())));
+			     alpha.choose());
     
     for (unsigned i =0; i < density; i++)
       if ((tmp = work.select_state(alea(work.states().size()))) != final)
 	work.add_letter_edge(tmp, final,
-			     alpha.select_letter(alea(alpha.size())));
+			     alpha.choose());
     
     misc::dot_dump(os, work, "test");
     

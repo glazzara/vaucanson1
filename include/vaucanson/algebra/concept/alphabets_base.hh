@@ -16,7 +16,12 @@ namespace vcsn {
     /*--------------------.
     | AlphabetsBase<Self> |
     `--------------------*/
-
+    //! Structural element of alphabet.
+    /*!
+     * Empty class. Its role is essentially in static typing.
+     * 
+     *
+     */
     template<class Self>
     struct AlphabetsBase 
       : Structure<Self>
@@ -29,6 +34,11 @@ namespace vcsn {
     /*----------------.
     | alphabet_traits |
     `----------------*/
+    //! Traits defined by Element<AlphabetsBase, T>.
+    /*! Each specialization of Element<AlphabetsBase, T> must
+     * specialize this traits too. 
+     * letter_t defines the type of letters the set contains.
+     */
     template<typename S, typename T>
     struct alphabet_traits 
     {
@@ -42,6 +52,10 @@ namespace vcsn {
   /*------------------------------------.
   | MetaElement<AlphabetsBase<Self>, T> |
   `------------------------------------*/
+  //! Services of every alphabet.
+  /*! MetaElement<AlphabetsBase<Self>, T> defines the services of
+   *  alphabet.
+   */
     template<class Self, typename T>
     struct MetaElement<AlphabetsBase<Self>, T>
       : MetaElement<Structure<Self>, T>
@@ -50,18 +64,24 @@ namespace vcsn {
       typedef typename op_begin_traits<Self, T>::const_ret_t	const_iterator;
       typedef typename op_begin_traits<Self, T>::ret_t		iterator;
 
-      size_t		size() const;
-      bool		contains(const letter_t& l) const;
-      bool		is_finite() const;
-      iterator		begin();
-      const_iterator	begin() const;
-      iterator		end();
-      const_iterator	end() const;
-      /* sugar */
+      /*! Insert a letter in the alphabet. */
       void		insert(const letter_t& l);
-
-      // add-on
-      letter_t          select_letter(unsigned n);
+      /*! Select a random letter in the alphabet. */
+      letter_t          choose();
+      /*! Cardinal of the alphabet. */
+      size_t		size()                      const;
+      /*! Return true if l is in the alphabet. */
+      bool		contains(const letter_t& l) const;
+      /*! Return true if the alphabet is finite. */
+      bool		is_finite()                 const;
+      /*! Iterator that is the beginning of the alphabet. */
+      iterator		begin();
+      /*! Iterator that is the beginning of the alphabet. (const version) */
+      const_iterator	begin()                     const;
+      /*! Iterator that is the end of the alphabet. */
+      iterator		end();
+      /*! Iterator that is the end of the alphabet. (const version) */
+      const_iterator	end()                       const;
 
     protected:
       MetaElement();

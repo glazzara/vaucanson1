@@ -38,7 +38,7 @@ void test_design_pattern()
   a >= sample;
   sample >= a;
 
-  //FIXME: swap(a,a) is ambigus.
+  //FIXME: swap(a,a) is ambiguous.
 }
 
 #endif // DESIGN_PATTERN_TEST_HH
