@@ -2,15 +2,107 @@
 * Vaucanson 0.6
 * -------------
 
+** Big cleanings in Vaucanson XML.
+
+A big work was done around  Vaucanson XML, which should be fairly more
+usable now. To save an automaton in a XML representation, just include
+vaucanson/xml/static.hh and do:
+
+stream << vcsn::automaton_saver(auto,
+				vcsn::io::string_out (),
+				vcsn::xml::xml_loader ());
+
+To reload the automaton, you may do the opposite operation:
+
+stream >> vcsn::automaton_loader(auto,
+				 vcsn::io::string_out (),
+				 vcsn::xml::xml_loader ());
+
+Of course, if you want to get rid of vcsn::io, vcsn::xml, etc. you may
+do:
+
+using namespace vcsn::xml;
+using namespace vcsn::io;
+
+Many  more  examples and  utilities  can  be  found in  the  directory
+src/demos/xml.  Just browse the source!
+
+** Few more examples.
+
+A few programs were written for the CIAA 2004 conference. It is not an
+extraordinary or complex code, but  it demonstrates how quick and easy
+it may be to use Vaucanson for assembling some algorithms and building
+simple automata. It may also be a good introduction to learn Vaucanson
+by practice.
+
+These examples are in src/demos/ciaa.
+
+** New features in context headers.
+
+A new context header for  automata over the tropical semiring with the
+min and  + operators  was added. Furthermore,  some new  functions and
+typedefs are declared in each header.
+
+If you want to use the context "foo", then include vaucanson/foo.hh. You
+will get the following types in the namespace vcsn::foo:
+
+ALGEBRAIC SETS		ELEMENTS OF SET		LOW LEVEL IMPLEMENTATIONS
+
+alphabet_t					letter_t
+monoid_t		monoid_elt_t		monoid_elt_value_t
+semiring_t		semiring_elt_t		semiring_elt_value_t
+series_set_t		series_set_elt_t	series_set_elt_value_t
+automata_set_t		automaton_t		automaton_impl_t
+series_set_t		rat_exp_t		rat_exp_impl_t
+
+As  the user,  you will  probably  only be  interested in  alphabet_t,
+automaton_t  and rat_exp_t, respectively  for alphabets,  automata and
+rational expressions.
+
+In addition  to that, a context  provides the user  with the following
+functions:
+
+automaton_t new_automaton(alphabet_t); // Create an empty automaton.
+rat_exp_t   new_rat_exp(alphabet_t); // Create an empty rational expression.
+automaton_t standard_of(rat_exp_t); // Build the standard automaton of an exp.
+automaton_t thompson_of(rat_exp_t); // Build the thompson automaton of an exp.
+rat_exp_t   aut_to_exp(automaton_t); // Build an exp from an automaton.
+
+If  you want  more  algorithms, just  browse the  vaucanson/algorithms
+directory, or look in the HTML documentation.
+
+Currently, the following contexts are available:
+
+boolean_automaton
+z_automaton
+r_automaton
+z_max_plus
+z_min_plus
+boolean_transducer
+
+** Many bug fixes.
+
+As  usual many  bugs were  fixed.  Especially  the quotient  should be
+correct now.  There were also  some fixes in the standard_of algorithm,
+and derivatives_automaton  now works with expressions  that have right
+weights.  The closure was rewritten and should be faster now.
+
+Beside from the algorithms a big  bug was fixed in the algebra core of
+Vaucanson, which  used to cause some  problems when one  wanted to use
+different alphabets in different automata in the same program.
+
+Also, rational expressions which  weights are implemented as floats or
+doubles now work correctly.
+
 ** krat_exp_print() does not exist anymore.
 
-The file  vaucanson/algorithms/krat_exp_print.hh has been  removed. To
-print a rational expression with  no extra parenthesis, just use the <<
+The file vaucanson/algorithms/krat_exp_print.hh  was removed. To print
+a  rational expression  with no  extra  parenthesis, just  use the  <<
 operator onto a C++ stream:
 
 std::cout << exp << std::endl;
 
-To make this operator behave as in previous versions, just send the right
+To make this  operator behave as in previous  versions, send the right
 format onto the stream:
 
 std::cout << setpm (MODE_ALL) << exp << std::endl;
@@ -19,11 +111,11 @@ std::cout << setpm (MODE_ALL) << exp << std::endl;
 exhaustive list of the different manipulators and print modes, you may
 look in vaucanson/algebra/implementation/series/rat/dump_visitor.hh.
 
-** tools/usual.hh has been removed.
+** tools/usual.hh was removed.
 
-A system of  context headers is being used  since vaucanson 0.4.2, and
-therefore usual.hh has  become useless. Furthermore it was  a bad idea
-to use it since it has many includes and may slow a lot a compilation.
+A  system  of context  headers  is  used  since vaucanson  0.4.2,  and
+therefore usual.hh  became useless. Furthermore  it was a bad  idea to
+use it since it has many includes and may slow a lot a compilation.
 
 This include has been removed from the distribution. if you were using
 some of its  definitions (e.g. usual_automaton_t) you now  need to use

@@ -1,3 +1,7 @@
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Update.
+
 2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/free_monoid/predefs.hh,
