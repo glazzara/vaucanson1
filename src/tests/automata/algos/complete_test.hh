@@ -39,6 +39,7 @@
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 using namespace vcsn;
 using namespace vcsn::algebra;
@@ -48,24 +49,47 @@ template <class Auto>
 unsigned complete_test(tests::Tester& tg)
 {  
   tests::Tester t(tg.verbose());
-  typedef Auto			  automaton_t;
-  typedef GenRandomAutomata<Auto> gen_auto_t;
+  typedef Auto				automaton_t;
+  typedef GenRandomAutomata<Auto>	gen_auto_t;
+  AUTOMATON_TYPES(automaton_t);
   
-  gen_auto_t gen(time(0x0));
+  gen_auto_t				gen(time(0x0));
 
-  const unsigned nb_test = 50;
-  unsigned nb_success    = 0;
+  const unsigned			nb_test = 50;
+  unsigned				nb_success = 0;
 
+  typedef std::set<hstate_t>		delta_ret_t;
+  delta_ret_t				delta_ret;
+  bool					result_test;
+  
   for (unsigned i = 0 ; i < nb_test; i++) 
     {
       automaton_t a = gen.generate_dfa(30);
       automaton_t b = a;
       complete_here(a);
-      
+      alphabet_t alphabet = a.set().series().monoid().alphabet();
+      result_test = true;
+
       if ((a.edges().size() == a.states().size() * 
 	   a.set().series().monoid().alphabet().size()) 
 	  && is_deterministic(a))
-	++nb_success;
+	{
+	  for (alphabet_iterator l = alphabet.begin();
+	       l != alphabet.end();
+	       ++l)
+	    {
+	      for_each_state(s, a)
+		{
+		  delta_ret.clear();
+		  a.letter_deltac(delta_ret, *s, *l,
+				  delta_kind::states());
+		  if (delta_ret.size() == 0)
+		    result_test = false;
+		}
+	    }
+	  if (result_test)
+	    ++nb_success;
+	}
       else if (tg.verbose() == tests::high)
 	{
 	  tools::dot_dump(std::cout, b, "input");
