@@ -1,4 +1,4 @@
-// extract.hxx
+// sub_automaton.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,12 +19,11 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_EXTRACT_HXX
-# define ALGORITHMS_EXTRACT_HXX
+#ifndef VCSN_ALGORITHMS_SUB_AUTOMATON_HXX
+# define VCSN_ALGORITHMS_SUB_AUTOMATON_HXX
 
 # include <queue>
-# include <vaucanson/algorithms/extract.hh>
+# include <vaucanson/algorithms/sub_automaton.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
@@ -36,7 +35,7 @@ namespace vcsn {
   `----------------------------------------*/
  
   template<typename A, typename auto_t, typename list_t>
-  void auto_do_extract(const AutomataBase<A>& a_set, 
+  void do_sub_automaton(const AutomataBase<A>& a_set, 
 		       auto_t& a,
 		       const list_t& selected, 
 		       bool check_states)
@@ -58,19 +57,19 @@ namespace vcsn {
   // wrapper:
   template<typename A, typename T, typename StatesSet>
   Element<A, T> 
-  auto_extract(const Element<A, T>& a, const StatesSet& s, bool check_states)
+  sub_automaton(const Element<A, T>& a, const StatesSet& s, bool check_states)
   { 
     Element<A, T> ret(a);
-    auto_do_extract(ret.set(), ret, s, check_states);
+    do_sub_automaton(ret.set(), ret, s, check_states);
     return ret;
   }
 
   template<typename A, typename T, typename StatesSet>
-  void auto_in_extract(Element<A, T>& a, const StatesSet& s, bool check_states)
+  void sub_automaton_here(Element<A, T>& a, const StatesSet& s, bool check_states)
   {
-    auto_do_extract(a.set(), a, s, check_states);
+    do_sub_automaton(a.set(), a, s, check_states);
   }
   
 } // vcsn
 
-#endif // ALGO_EXTRACT_HXX
+#endif // VCSN_ALGORITHMS_SUB_AUTOMATON_HXX
