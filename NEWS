@@ -1,9 +1,23 @@
 								-*- outline -*-
 
-* Vaucanson 0.5
-* -------------
+* Vaucanson 0.5 March 24, 2004
+* ----------------------------
 
 ** New XML Input/Output system.
+
+An XML  Input/Output system have been  added to vaucanson.  To use it,
+you will need  the Apache Xerces C++ library  version 2.3.*. To enable
+the test  suite on the XML I/O  system, you need to  use the configure
+option "--enable-xml".
+
+ * doc/xml/
+     You can find a minimal documentation here.
+ * xml/
+     DTD and XSL files and some scripts.
+ * include/vaucanson/xml/
+     Header files.
+ * src/test/xml/
+     Test files. Can be used as examples.
 
 ** Better documentation.
 
@@ -92,8 +106,8 @@ avoid doing that.
 rewritten. It should be more readable and more reliable now.
 
 
-* Vaucanson 0.4
-* -------------
+* Vaucanson 0.4 October 29, 2003
+* ------------------------------
 
 	* Addition of automata I/O subsystem.
 	* Nearly-complete SWIG bindings for algorithms in Vaucanswig.
