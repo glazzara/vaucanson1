@@ -1,7 +1,5 @@
-// krat-test.cc
+// alphabet_test.hh
 //
-//
-// $Id$
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001-2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
@@ -19,45 +17,34 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+#ifndef ALPHABET_TEST_HH
+# define ALPHABET_TEST_HH
 
-#include <set>
-#include <check/tests_stuff.hh>
+#include <vaucanson/config/system.hh>
 #include <fundamental/design_pattern-test.hh>
+#include <check/tests_stuff.hh>
 #include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
-#include <vaucanson/algebra/concrete/series/krat.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-#include <algebra/series/krat_exp_constant_term_test.hh>
 
 using namespace vcsn;
 
-template <class S, class T>
-bool test_krat(tests::Tester& t)
-{
-  bool series_test = test_series(t);
-}
-
-int main(int argc, char **argv)
+template <typename S, typename T> 
+bool alphabet_test(tests::Tester& t)
 {
   using namespace vcsn::algebra;
-  using namespace vcsn;
-  using namespace vcsn::algebra::char_letter;
+  typedef Element<S, T> element_t;
+  typedef typename element_t::letter_t letter_t;
 
-  tests::verbose_level_e verbose;
-
-  if ((argc > 1) && (argv[1] == std::string("--noverbose")))
-    verbose = tests::none;
-  else
-    verbose = tests::low;
-  tests::Tester t(verbose);
-
-  if (krat_exp_constant_term_test<
-      Element<
-      Series<NumericalSemiring, Words>, 
-      rat::exp<std::string, int> > >(t))
-    return EXIT_SUCCESS;
-  else
-    return EXIT_FAILURE;
-  return EXIT_SUCCESS;
+  TEST_MSG("Instantiate an alphabet A.");
+  element_t A;
+  TEST_MSG("Insert a random letter a in A.");  
+  letter_t a = A.random_letter();
+  letter_t b = A.random_letter();
+  A.insert(a);
+  TEST(t, "a is in A.", A.contains(a));
+  TEST(t, "b is not in A.", !A.contains(b));
+  TEST(t, "A is finite and its cardinal is one.",
+       (A.is_finite()) && (A.size() == 1));
+  return t.all_passed(); 
 }
+
+#endif // ALPHABET_TEST_HH

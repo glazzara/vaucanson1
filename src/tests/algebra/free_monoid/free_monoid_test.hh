@@ -1,4 +1,4 @@
-// series-test.cc
+// free_monoid_test.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,38 +18,31 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#include <vaucanson/config/system.hh>
-#include <set>
-#include <check/tests_stuff.hh>
-#include <fundamental/design_pattern-test.hh>
-#include <algebra/series/series-test.hh>
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+#ifndef FREE_MONOID_TEST_HH
+# define FREE_MONOID_TEST_HH
 
-using namespace vcsn;
+# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <check/tests_stuff.hh>
+# include <fundamental/design_pattern-test.hh>
 
-int main(int argc, char **argv)
+template <typename S, typename T> 
+bool free_monoid_test(tests::Tester& t)
 {
   using namespace vcsn::algebra;
   using namespace vcsn;
 
-  tests::verbose_level_e verbose;
+  typedef Element<S, T> element_t;
+  element_t a;
+  TEST_MSG("Get the neural element of this free monoid.");
+  element_t e = a.set().identity(SELECT(T));
+  
+  test_design_pattern<S, T>();
+  TEST(t, "Neutral element on the right.", (a * e) == a);
+  TEST(t, "Neutral element on the left." , (e * a) == a);
+  TEST(t, "Mirror is idempotent.", mirror(mirror(a)) == a);
 
-  if ((argc > 1) && (argv[1] == std::string("--noverbose")))
-    verbose = tests::none;
-  else
-    verbose = tests::low;
-  tests::Tester t(verbose);
-
-  if (test_series<
-      Series<
-      NumericalSemiring, char_letter::Words>, 
-      polynom<std::string, int> >(t))
-    return EXIT_SUCCESS;
-  else
-    return EXIT_FAILURE;
+  return t.all_passed(); 
 }
 
+#endif // FREE_MONOID_TEST_HH

@@ -1,4 +1,4 @@
-// krat-test.cc
+// semiring_test.hh
 //
 //
 // $Id$
@@ -19,42 +19,37 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+#ifndef SEMIRING_TEST_HH
+# define SEMIRING_TEST_HH
 
-#include <set>
-#include <check/tests_stuff.hh>
-#include <fundamental/design_pattern-test.hh>
-#include <algebra/series/series-test.hh>
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/krat.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-
-using namespace vcsn;
+# include <check/tests_stuff.hh>
+# include <vaucanson/algebra/concept/semiring_base.hh>
+// from test battery:
+# include <fundamental/design_pattern-test.hh>
 
 template <class S, class T>
-bool test_krat(tests::Tester& t)
-{
-  bool series_test = test_series(t);
-}
-
-int main(int argc, char **argv)
+bool semiring_test(tests::Tester& t)
 {
   using namespace vcsn::algebra;
   using namespace vcsn;
 
-  tests::verbose_level_e verbose;
+  typedef Element<S, T> element_t;
+  element_t e1;
+  element_t z = e1.set().zero(SELECT(T));
+  element_t o = e1.set().identity(SELECT(T));
+  element_t e2;
+  element_t e3(o);
 
-  if ((argc > 1) && (argv[1] == std::string("--noverbose")))
-    verbose = tests::none;
-  else
-    verbose = tests::low;
-  tests::Tester t(verbose);
+  test_design_pattern<S, T>();
 
-//  if (test_series<Series<NumericalSemiring, Words>, rat::exp<std::string, int> >(t))
-//     return EXIT_SUCCESS;
-//   else
-//     return EXIT_FAILURE;
-  // FIXME: this test is deactivate temporarily.
-  return EXIT_SUCCESS;
+  TEST(t, "Commutativity of plus.", (e1 + e2) == (e2 + e1));
+  TEST(t, "Distributivity of mult with plus.", 
+       (e1 + e2) * e3 == e2 * e3 + e1 * e3);
+  TEST(t, "0 is a zero for mult.", 
+       (e1 * z == z));
+  TEST(t, "stareable works. (1)", z.stareable() ? true  : false);
+  // FIXME: add some other tests.
+  return t.all_passed();
 }
 
+#endif // SEMIRING_TEST_HH

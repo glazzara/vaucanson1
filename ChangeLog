@@ -1,3 +1,22 @@
+2003-01-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.144)
+	* configure.ac: Tests-suites Makefile are configured only if present.
+	* src/tests/algebra/series/Makefile.am: No more PROGRAMS.
+	* src/tests/tests-suites/Makefile.am: Replace SUBDIRS by @VCSN_TESTS_SUBDIRS@
+	* THANKS: Add Akim for its contribution (sanity).
+	* src/tests/algebra/free_monoid/Makefile.am: New.
+	* src/tests/algebra/free_monoid/free_monoid_test.hh: New.
+	* src/tests/algebra/alphabets/Makefile.am: New.
+	* src/tests/algebra/alphabets/alphabet_test.hh: New.
+	* src/tests/algebra/semiring/semiring_test.hh: New.
+	* src/tests/algebra/semiring/Makefile.am: New.
+	* src/tests/algebra/series/krat_exp_constant_term-test.cc: Removed.
+	* src/tests/algebra/series/krat_exp_derivation-test.cc: Removed.
+	* src/tests/algebra/series/krat_exp_linearize-test.cc: Removed
+	* src/tests/algebra/series/krat_exp_parse-test.cc: Removed.
+	* src/tests/algebra/series/krat-test.cc: Removed.
+	* src/tests/algebra/series/series-test.cc: Removed.
+
 2002-12-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.143)
 	* configure.ac: Add new generated test suites, remove static one.

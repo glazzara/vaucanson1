@@ -27,6 +27,15 @@ if test x"$DOXYGEN" = x"no"; then
   DOXYGEN=/bin/true
 fi
 
+VCSN_TESTS_SUBDIRS=""
+AC_DEFUN([VCSN_TESTS], [
+if test -d $1; then
+   AC_MSG_WARN([Add $1])
+   VCSN_TESTS_SUBDIRS="$VCSN_TESTS_SUBDIRS $1"
+   AC_CONFIG_FILES([src/tests/tests-suites/$1/Makefile])
+fi
+])
+
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
@@ -36,19 +45,24 @@ AC_CONFIG_FILES([
 	src/tests/fundamental/Makefile
 	src/tests/algebra/Makefile
 	src/tests/algebra/series/Makefile
+	src/tests/algebra/semiring/Makefile
+	src/tests/algebra/alphabets/Makefile
+	src/tests/algebra/free_monoid/Makefile
 	src/tests/automata/Makefile
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile
 	src/tests/sanity/Makefile
 	src/tests/tests-suites/Makefile
 	src/tests/bin/Makefile
-	src/tests/tests-suites/usual_automaton_t/Makefile
-	src/tests/tests-suites/algebra_set_alphabet/Makefile
-	src/tests/tests-suites/algebra_string_free_monoid/Makefile
-	src/tests/tests-suites/algebra_numerical_semiring/Makefile
-	src/tests/tests-suites/algebra_tropical_max_semiring/Makefile
 	doc/Makefile
         doc/doc.doxy	
 	include/Makefile])
+
+VCSN_TESTS([algebra_numerical_semiring])
+VCSN_TESTS([algebra_set_alphabet])
+VCSN_TESTS([algebra_string_free_monoid])
+VCSN_TESTS([algebra_tropical_max_semiring])
+VCSN_TESTS([usual_automaton_t])
+AC_SUBST([VCSN_TESTS_SUBDIRS])
 
 AC_OUTPUT
