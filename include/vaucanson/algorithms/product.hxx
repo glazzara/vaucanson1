@@ -61,7 +61,7 @@ namespace vcsn {
     typedef typename output_t::series_t			series_t;
     typedef typename output_t::series_elt_t		series_elt_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
-    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
+    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename series_elt_t::value_t		series_value_t;
     typedef typename series_elt_t::support_t		support_t;
 
@@ -188,56 +188,6 @@ namespace vcsn {
     // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(rhs.set());
     product(ret.set(), ret, lhs, rhs);
-    return ret;
-  }
-
-
-    /*---------.
-    | Diagonal |
-    `----------*/
-
-  template <typename A, typename auto_t>
-  void do_diagonal_here(const AutomataBase<A>&	a_set,
-			auto_t&			a)
-  {
-//     if (a.history().get_auto_event_about(PRODUCT_EVENT) == 0)
-//       {
-// 	std::cerr << "Warning : trying to get the diagonal of an"
-// 	  " non product automaton."
-// 		  << std::endl;
-// 	return;
-//       }
-
-    std::set<hstate_t>				diagonal_states;
-    const history::BinaryEvent<hstate_t>*	b_event;
-
-    for (typename auto_t::state_iterator s = a.states().begin();
-	 s != a.states().end();
-	 ++s)
-      {
-	b_event = dynamic_cast<const history::BinaryEvent<hstate_t> *>
-	  (a.history().get_state_event_about(PRODUCT_EVENT, *s));
-	assertion(b_event);
-	if (b_event->get_first() == b_event->get_second())
-	  diagonal_states.insert(*s);
-      }
-    sub_automaton_here(a, diagonal_states);
-  }
-
-  template <typename A, typename T>
-  void
-  diagonal_here(Element<A, T>& a)
-  {
-    do_diagonal_here(a.set(), a);
-  }
-
-
-  template<typename A, typename T>
-  Element<A, T> 
-  diagonal(const Element<A, T>& a)
-  {
-    Element<A, T>    ret(a);
-    do_diagonal_here(ret.set(), ret);
     return ret;
   }
 

@@ -43,12 +43,6 @@ namespace vcsn
   template<typename A, typename T, typename U>
   Element<A, T> 
   product(const Element<A, T>& lhs, const Element<A, U>& rhs);
-
-//   // INTERFACE: void diagonal_here(Automaton& a) { return vcsn::diagonal_here(*a); }
-//   // INTERFACE: void diagonal_here(GenAutomaton& a) { return vcsn::diagonal_here(*a); }
-
-//   // INTERFACE: Automaton diagonal(const Automaton& a) { return vcsn::diagonal(*a); }
-//   // INTERFACE: GenAutomaton diagonal(const GenAutomaton& a) { return vcsn::diagonal(*a); }
   
   /** @} */
   

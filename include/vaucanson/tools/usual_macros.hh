@@ -30,6 +30,20 @@
 #ifndef VCSN_TOOLS_USUAL_MACROS_HH
 # define VCSN_TOOLS_USUAL_MACROS_HH
 
+
+#define for_all_const(T, I, C) \
+   for (T::const_iterator I = C.begin(); I != C.end(); ++I)
+
+#define for_all(T, I, C) \
+   for (T::iterator I = C.begin(); I != C.end(); ++I)
+
+#define for_all_const_(T, I, C) \
+   for (typename T::const_iterator I = C.begin(); I != C.end(); ++I)
+
+#define for_all_(T, I, C) \
+   for (typename T::iterator I = C.begin(); I != C.end(); ++I)
+
+
 #define INHERIT_TYPEDEF_(From, Type) \
    typedef typename From::Type Type;
 

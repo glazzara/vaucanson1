@@ -27,5 +27,5 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#include <vaucanson/misc/unique.hcc>
+#include <vaucanson/misc/unique.hh>
 
