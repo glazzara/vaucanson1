@@ -16,11 +16,12 @@ words from any   free monoids. And  on  the other hand,  a  particular
 algorithm  can    be specialized for     a particular  data  structure
 implementing only a pseudo behaviour.
 
-Yet,  Vaucanson is still  in   a  fundamental  development  phase  and
-algorithms, data structures  and global  architecture are not  totally
-stable and  well tested.  The   src directory will  be  extended  with
-demonstration programs   soon. For the  moment, you   can look  at the
-include/vaucanson/algorithms  to  be  introduced  to  the  basics   of
+Yet, Vaucanson is still in a fundamental development phase and
+algorithms, data structures and global architecture are not totally
+stable and well tested.  In the doc/help directory, you can find a
+short howto to start programming with Vaucanson. The src directory
+contains several demonstrations but you can also look at the
+include/vaucanson/algorithms to be introduced to the basics of
 Vaucanson.
 
 Please send any question or comments to <vaucanson@lrde.epita.fr>, or
@@ -38,6 +39,11 @@ To install Vaucanson on your system, type the classical sequence :
 Notice that an installation is  done for  a particular compiler  since
 ./configure  enables  some workarounds  and,  consequently, users must
 compile   with the same compiler     to avoid compatibility problems.  
+
+If you do not want to use the interpreter whose compilation takes
+a couple of hours, use instead:
+
+	./configure --without-vaucanswig
 
 ----------------------------------------------------------------------
 REQUIREMENTS
@@ -61,14 +67,21 @@ CONTACTS
 
 * mail: vaucanson@lrde.epita.fr
 
+* Vaucanson - ENST
+  Jacques Sakarovitch
+  46, rue Barrault
+  75013 Paris
+  France
+
+* Vaucanson - LIAFA
+  Sylvain Lombardy
+  175, rue du Chevaleret
+  75013 Paris
+  France
+
 * Vaucanson - LRDE 
   24,rue Pasteur
   Paristalie,batiment X,aile Mistral
   F-94270 Le Kremlin Bicêtre cedex
   France
 
-* Vaucanson - ENST
-  Jacques Sakarovitch, Sylvain Lombardy
-  46, rue Barrault
-  75013 Paris
-  France
