@@ -53,10 +53,6 @@ namespace vcsn {
       SemiringBase<Self>(other)
     {}
 
-    /*--------------------.
-    | DefaultTransposeFun |
-    `--------------------*/
-
 
     /*---------------------------------.
     | MetaElement<SeriesBase<Self>, T> |
@@ -168,7 +164,13 @@ namespace vcsn {
     template<typename S, typename T, typename M, typename W>
     void op_series_set(const SeriesBase<S>& s, const T& t, const W& w)
     {
-      assert(! "defined");
+      assert(! "defined.");
+    }
+
+    template <class S, class T>
+    Element<S, T> op_series_choose(const SeriesBase<S>& s, SELECTOR(T)) 
+    {
+      assert(! "defined.");
     }
 
     template <typename S, typename T>

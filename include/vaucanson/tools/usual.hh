@@ -3,8 +3,8 @@
 // $Id$
 // VCSN_HEADER
 
-#ifndef MISC_USUAL_HH
-# define MISC_USUAL_HH
+#ifndef TOOLS_USUAL_HH
+# define TOOLS_USUAL_HH
 
 # include <fstream>
 # include <vaucanson/fundamental/fundamental.hh>
@@ -69,16 +69,19 @@ namespace vcsn {
 #define zero_	zero(SELECT(typename series_elt_t::value_t))
 #define one_	identity(SELECT(typename series_elt_t::value_t))
 
-#define SAVE_AUTOMATON_DOT(Name, Auto, Index)		\
+#define SAVE_AUTOMATON_DOT(Dir, Name, Auto, Index)		\
     {							\
       char buf[128];					\
-      snprintf(buf, 128, "%s_%d.dot", Name, Index);	\
+      snprintf(buf, 128, "%s/%s_%d.dot", Dir, Name, Index);	\
       std::ofstream f(buf);				\
-      misc::dot_dump(f, Auto, buf);				\
+      misc::dot_dump(f, Auto, Name);				\
     }
+
+#define RAND___(Max)							\
+((unsigned) trunc(((float) random() / (float) RAND_MAX) * Max));
 
   } // tools
 
 } // vcsn
 
-# endif // MISC_USUAL_HH
+# endif // TOOLS_USUAL_HH

@@ -25,24 +25,30 @@ int main(int argc, char** argv)
   using namespace vcsn::tools;
 
   tests::verbose_level_e verbose;
+  srand(time(0));
 
-  if ((argc > 1) && (argv[1] == std::string("--noverbose")))
-    verbose = tests::none;
-  else
-    verbose = tests::low;
+  if (argc > 1) 
+    {
+      if (argv[1] == std::string("--no-verbose"))
+	verbose = tests::none;
+      else if (argv[1] == std::string ("--high-verbose"))
+	verbose = tests::high;
+      else 
+	verbose = tests::low;
+    }
   tests::Tester t(verbose);
 
-//    TEST(t, "CHECK UNION : ", !union_test<usual_automaton_t>(t));
-//    TEST(t, "CHECK DETERMINIST : ", !determinist_test<usual_automaton_t>(t));
-//    TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
-//    TEST(t, "CHECK REACHABLE : ", !reachable_test<usual_automaton_t>(t));
-//    TEST(t, "CHECK EXTRACT : ", !extract_test<usual_automaton_t>(t));
-//    TEST(t, "CHECK GENERALIZED : ", generalized_test<usual_automaton_t>(t));
+   TEST(t, "CHECK UNION : ", !union_test<usual_automaton_t>(t));
+   TEST(t, "CHECK DETERMINIST : ", !determinist_test<usual_automaton_t>(t));
+   TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
+   TEST(t, "CHECK REACHABLE : ", !reachable_test<usual_automaton_t>(t));
+   TEST(t, "CHECK EXTRACT : ", !extract_test<usual_automaton_t>(t));
+   TEST(t, "CHECK GENERALIZED : ", generalized_test<usual_automaton_t>(t));
    TEST(t, "CHECK ELIMINATION ", elimination_test<usual_automaton_t>(t));
-//    TEST(t, "CHECK CLOSURE : ", closure_test<usual_automaton_t>(t));
-//   TEST(t, "CHECK GLUSHKOV : ", glushkov_test<usual_automaton_t>(t));
-//   TEST(t, "CHECK THOMPSON : ", thompson_test<usual_automaton_t>(t));
-//   TEST(t, "CHECK REALTIME : ", realtime_test<usual_automaton_t>(t));
+   TEST(t, "CHECK CLOSURE : ", closure_test<usual_automaton_t>(t));
+   TEST(t, "CHECK GLUSHKOV : ", glushkov_test<usual_automaton_t>(t));
+  TEST(t, "CHECK THOMPSON : ", thompson_test<usual_automaton_t>(t));
+  TEST(t, "CHECK REALTIME : ", realtime_test<usual_automaton_t>(t));
 
   return EXIT_SUCCESS;
 }

@@ -23,6 +23,12 @@ namespace vcsn {
       static char do_it();
     };
 
+    template <>
+    struct RandomGenerator<bool>
+    {
+      static bool do_it();
+    };
+
   } // misc
 
 } // vcsn

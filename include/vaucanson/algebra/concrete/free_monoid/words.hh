@@ -1,5 +1,6 @@
 // words.hh
 //
+// $Id$
 // VCSN_HEADER
 #ifndef ALGEBRA_WORDS_HH
 # define ALGEBRA_WORDS_HH
@@ -7,7 +8,6 @@
 # include <string>
 
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
-// # include <vaucanson/algebra/concrete/alphabets.hh>
 
 namespace vcsn {
 

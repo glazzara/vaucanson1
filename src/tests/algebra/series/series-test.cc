@@ -4,10 +4,6 @@
 // $Id$
 // VCSN_HEADER
 
-// Goal: 
-// - to instantiate all services of element parameterized by empty classes.
-//
-
 #include <set>
 #include <check/tests_stuff.hh>
 #include <fundamental/design_pattern-test.hh>
@@ -24,12 +20,12 @@ int main(int argc, char **argv)
   using namespace vcsn::algebra;
   using namespace vcsn;
 
-  unsigned verbose;
+  tests::verbose_level_e verbose;
 
   if ((argc > 1) && (argv[1] == std::string("--noverbose")))
-    verbose = 0;
+    verbose = tests::none;
   else
-    verbose = 1;
+    verbose = tests::low;
   tests::Tester t(verbose);
 
   if (test_series<Series<NumericalSemiring, Words>, polynom<std::string, int> >(t))

@@ -1,6 +1,5 @@
 // monoid_base.hh
 //
-//
 // $Id$
 // VCSN_HEADER
 

@@ -10,6 +10,7 @@
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concrete/series/rat/random_visitor.hh>
+# include <vaucanson/tools/usual.hh>
 
 namespace vcsn {
 
@@ -759,6 +760,55 @@ namespace vcsn {
   MetaElement<Series<W, M>, rat::exp<Tm, Tw> >::depth() const
   {
     return value().depth();
+  }
+
+  template <class W, class M, class Tm, class Tw>
+  Element<Series<W,M>, rat::exp<Tm,Tw> > 
+  op_choose(const Series<W,M>& s, 
+	    SELECTOR2(rat::exp<Tm,Tw>))
+  {
+    Element<Series<W,M>, rat::exp<Tm, Tw> > e(s);
+    // FIXME : add global constants to do this !
+    unsigned nb = RAND___(10);
+    while (nb != 0)
+      {
+	--nb;
+	unsigned t = RAND___(3);
+	switch (t)
+	  {
+	    // star
+	  case 0 : 
+	    {
+	      e = e.star(); 
+	      continue;
+	    }
+	    // plus
+	  case 1 :
+	    {
+	      Element<Series<W,M>, rat::exp<Tm,Tw> > ep = s.monoid().choose(SELECT(Tm));
+	      ep = ep * s.weights().choose(SELECT(Tw));
+	      unsigned t = RAND___(2);
+	      if (t < 1)
+		e = e + ep;
+	      else
+		e = ep + e;
+	      continue;
+	    }
+	    // mult
+	  case 2 :
+	    {
+	      Element<Series<W,M>, rat::exp<Tm,Tw> > ep = s.monoid().choose(SELECT(Tm));
+	      ep = ep * s.weights().choose(SELECT(Tw));
+	      unsigned t = RAND___(2);
+	      if (t < 1)
+		e = e * ep;
+	      else
+		e = ep * e;
+	      continue;
+	    }
+	  }
+      }
+    return Element<Series<W,M>, rat::exp<Tm,Tw> >(s, e);
   }
 
 } // vcsn

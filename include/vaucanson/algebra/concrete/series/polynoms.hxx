@@ -583,6 +583,19 @@ namespace vcsn {
   }
 
 
+  template <class W, class M, class Tm, class Tw>
+  Element<Series<W,M>, polynom<Tm,Tw> > 
+  op_choose(const Series<W,M>& s, 
+	    SELECTOR2(polynom<Tm,Tw>))
+  {
+    polynom<Tm, Tw> p;
+    // FIXME: add global constants to define this !
+    unsigned nb_monome = rand() * 10 / RAND_MAX;
+    for (unsigned i = 0; i < nb_monome; ++i)
+      p[s.monoid().choose()] = s.weights().choose();
+    return Element<Series<W,M>, polynom<Tm,Tw> >(s, p);
+  }
+
   /*----------.
   | transpose |
   `----------*/

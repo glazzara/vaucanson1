@@ -26,6 +26,16 @@ namespace vcsn {
       return ('a' + offs);
     }
 
+    bool
+    RandomGenerator<bool>::do_it()
+    {
+      unsigned r = rand() * 2 / RAND_MAX;
+      if (r < 1) 
+	return true;
+      else
+	return false;
+    }
+
   } // misc
 
 } // vcsn

@@ -52,6 +52,6 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algebra/concrete/series/rat/dump_visitor.hh>
+# include <vaucanson/algebra/concrete/series/rat/dump_visitor.hxx>
 
 #endif // RAT_DUMP_VISITOR_HH

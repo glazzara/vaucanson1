@@ -137,7 +137,7 @@ namespace vcsn {
 
   template<typename A, typename T>
   void
-  in_realtime(const Element<A, T>& a)
+  in_realtime(Element<A, T>& a)
   {
     do_in_realtime(a.set(), a);
   }

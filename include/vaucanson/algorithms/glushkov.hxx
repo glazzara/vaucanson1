@@ -18,7 +18,8 @@ namespace vcsn {
   `----------------*/
   // FIXME : Non optimal version.
   //         There are too much construction of automaton.
-
+  // FIXME : this implementation is not generic at all and needs a generic
+  // visitor pattern for all kexp. (now, it is only adaptable to rat::exp).
   // FIXME : from now, it is only working over LetterAutomaton
 
   template <class Auto_, class Monoid_, class Semiring_>
@@ -100,10 +101,17 @@ namespace vcsn {
       auto_->create();
       auto_->series() = series_;
       hstate_t new_i = auto_->add_state();
-      hstate_t new_f = auto_->add_state();
+      hstate_t last = new_i;
+      hstate_t new_f;
+      for (typename monoid_value_t::const_iterator i = m.begin();
+	   i != m.end(); ++i)
+	{
+	  new_f = auto_->add_state();
+	  auto_->add_letter_edge(last, new_f, *i);
+	  last = new_f;
+	}
       auto_->set_initial(new_i);
       auto_->set_final(new_f);
-      auto_->add_letter_edge(new_i, new_f, m);
     }
 
     virtual void 

@@ -4,9 +4,6 @@
 // $Id$
 // VCSN_HEADER
 
-// goal : provide a first static tests for tropical semiring families.
-// FIXME: it will be use in a tests generator.
-
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
 
@@ -18,12 +15,12 @@ using namespace vcsn::algebra;
 
 int main(int argc, char **argv)
 {
-  unsigned verbose;
+  tests::verbose_level_e verbose;
 
   if ((argc > 1) && (argv[1] == std::string("--noverbose")))
-    verbose = 0;
+    verbose = tests::none;
   else
-    verbose = 1;
+    verbose = tests::low;
   tests::Tester t(verbose);
   if (test_semiring<TropicalSemiring<TropicalMax>, int>(t))
     return EXIT_SUCCESS;

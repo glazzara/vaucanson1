@@ -7,7 +7,9 @@
 #ifndef FUNDAMENTAL_STRUCTURE_HH
 # define FUNDAMENTAL_STRUCTURE_HH
 
+# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/fundamental/predefs.hh>
+# include <vaucanson/fundamental/element.hh>
 # include <vaucanson/internal/traits.hh>
 
 namespace vcsn {
@@ -32,6 +34,9 @@ namespace vcsn {
       template<typename T>
       bool 
       contains(const T& elt_value) const;
+
+      template <class T>
+      Element<Self, T> choose(SELECTOR(T)) const;
 
       // static inheritance stuff below
       self_t&        

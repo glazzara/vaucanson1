@@ -41,6 +41,7 @@ namespace vcsn {
 
     protected:
       M_		w_;
+      bool		not_empty;
       unsigned		nb_star_max_;
     };
 

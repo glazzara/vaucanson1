@@ -1,3 +1,68 @@
+2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.83)
+
+	* include/vaucanson/fundamental/structure.hxx:
+	+  template <class Self>
+	+  template <class T>
+	+  Element<Self, T>
+	+  Structure<Self>::choose(SELECTOR(T)) const
+	+  {
+	+    return op_choose(self(), SELECT(T));
+	+  }
+
+	* include/vaucanson/fundamental/structure.hh
+	+      template <class T>
+	+      Element<Self, T> choose(SELECTOR(T)) const;
+ 
+	* include/vaucanson/fundamental/default_ops.hh
+	+  template <typename S, typename T>
+	+  Element<S, T> op_choose(const Structure<S>& set, SELECTOR(T));
+	* include/vaucanson/algebra/concept/monoid_base.hh : minor.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx : op_choose.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh : op_choose.
+	
+	* src/tests/check/Makefile.flags : -ggdb removed.
+	* src/tests/algebra/semiring/semiring-numerical-test.cc : uses verbose_level_e.
+	* src/tests/algebra/semiring/semiring-tropical-test.cc : idem.
+	* src/tests/algebra/alphabets/alphabets-basic-test.cc : idem.
+	* src/tests/algebra/free_monoid/free_monoid-test.cc : idem.
+	* src/tests/algebra/series/series-test.cc : idem.
+	* src/tests/algebra/series/krat-test.cc : idem.
+	* src/tests/automata/implementation_check/check_add_state.cc : idem.
+	* src/tests/automata/implementation_check/check_coherence_state_edge.cc : idem.
+	* src/tests/automata/implementation_check/check_add_edge.cc : idem.
+	* src/tests/automata/implementation_check/check_init_final.cc : idem.
+	* src/tests/automata/implementation_check/check_global_consistance.cc : idem.
+	* src/tests/automata/algos/algo_test.cc : minor.
+	* src/tests/automata/algos/elimination_test.hh : use SAVE_AUTOMATON_DOT new vers.
+
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh : minor.
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx : op_choose.
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh : idem.
+	* include/vaucanson/algebra/concept/series_base.hxx : idem.
+	* include/vaucanson/algebra/concept/series_base.hh : idem.
+	* include/vaucanson/algebra/concrete/series/krat.hxx : idem.
+	* include/vaucanson/algebra/concrete/series/krat.hh : idem.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx : idem.
+	* include/vaucanson/algebra/concrete/series/polynoms.hh : idem.
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx : minor.
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh : minor.
+	* include/vaucanson/tools/usual.hh : add one argument to SAVE_AUTOMATON_DOT.
+	* include/vaucanson/misc/random.hxx : spec for bool.
+	* include/vaucanson/misc/random.hh : idem.
+	
+	* include/vaucanson/algorithms/glushkov.hxx : minor.
+	* src/tests/automata/algos/glushkov_test.hh : use choose.
+	* include/vaucanson/algorithms/realtime.hxx : bug fixed in in_realtime.
+	-  in_realtime(const Element<A, T>& a)
+	+  in_realtime(Element<A, T>& a)
+	* include/vaucanson/algorithms/realtime.hh : idem.
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx :
+		zero krat cannot generate words.
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hh : idem.
+ 
+	(Sorry for this too big change).
+
 2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.82)
 	* src/tests/check/tests_stuff.hh : 

@@ -1,6 +1,5 @@
 //  numerical_semiring.hxx
 //
-//
 // $Id$
 // VCSN_HEADER
 
@@ -9,148 +8,155 @@
 
 # include <vaucanson/algebra/concept/semiring_base.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-
+# include <vaucanson/misc/random.hh>
 # include <vaucanson/misc/numerical_constraints.hh>
 
 namespace vcsn {
 
-    template<typename T>
-    bool op_contains(const NumericalSemiring& s, T c)
-    { 
-      using namespace utility::concepts;
+  template<typename T>
+  bool op_contains(const NumericalSemiring& s, T c)
+  { 
+    using namespace utility::concepts;
 
-      function_requires<HasLimits<T> >();
-      return true; 
-    }
+    function_requires<HasLimits<T> >();
+    return true; 
+  }
 
-    template<typename T, typename U>
-    void op_in_mul(const NumericalSemiring& s1,
-		   T& dst, U arg)
-    { 
-      dst *= arg; 
-    }
+  template<typename T, typename U>
+  void op_in_mul(const NumericalSemiring& s1,
+		 T& dst, U arg)
+  { 
+    dst *= arg; 
+  }
 
-    template<typename T, typename U>
-    void op_in_add(const NumericalSemiring& s1,
-		   T& dst, U arg)
-    { 
-      dst += arg; 
-    }
+  template<typename T, typename U>
+  void op_in_add(const NumericalSemiring& s1,
+		 T& dst, U arg)
+  { 
+    dst += arg; 
+  }
 
-    // FIXME: there should be specializations of op_add_traits and
-    // op_mul_traits giving the type of the result depending on the
-    // type of the arguments. 
+  // FIXME: there should be specializations of op_add_traits and
+  // op_mul_traits giving the type of the result depending on the
+  // type of the arguments. 
 
-    template<typename T, typename U>
-    T op_mul(const NumericalSemiring& s, T a, U b)
-    { 
-      return a * b; 
-    }
+  template<typename T, typename U>
+  T op_mul(const NumericalSemiring& s, T a, U b)
+  { 
+    return a * b; 
+  }
 
-    template<typename T, typename U>
-    T op_add(const NumericalSemiring& s, T a, U b)
-    { 
-      return a + b; 
-    }
+  template<typename T, typename U>
+  T op_add(const NumericalSemiring& s, T a, U b)
+  { 
+    return a + b; 
+  }
 
-    template<typename T>
-    T identity_value(SELECTOR(NumericalSemiring), SELECTOR(T))
-    { 
-      return T(1); 
-    }
+  template<typename T>
+  T identity_value(SELECTOR(NumericalSemiring), SELECTOR(T))
+  { 
+    return T(1); 
+  }
     
-    template<typename T>
-    T zero_value(SELECTOR(NumericalSemiring), SELECTOR(T))
-    { 
-      return T(0); 
-    }
+  template<typename T>
+  T zero_value(SELECTOR(NumericalSemiring), SELECTOR(T))
+  { 
+    return T(0); 
+  }
 
-    /*-----------------------------.
-    | specializations for booleans |
-    `-----------------------------*/
-    template<typename T>
-    static inline void op_in_mul(const NumericalSemiring& s1,
-				 bool& dst, bool src)
-    { 
-      dst = dst && src; 
-    }
+  template <class T>
+  Element<NumericalSemiring, T>
+  op_choose(const NumericalSemiring& s, SELECTOR(T))
+  {
+    return misc::RandomGenerator<T>::do_it();
+  }
 
-    static inline bool op_mul(const NumericalSemiring& s, bool a, bool b)
-    { 
-      return a && b; 
-    }
+  /*-----------------------------.
+  | specializations for booleans |
+  `-----------------------------*/
+  template<typename T>
+  inline void op_in_mul(const NumericalSemiring& s1,
+			bool& dst, bool src)
+  { 
+    dst = dst && src; 
+  }
 
-    static inline void op_in_add(const NumericalSemiring& s1,
-				 bool& dst, bool src)
-    { 
-      dst = dst || src; 
-    }
+  inline bool op_mul(const NumericalSemiring& s, bool a, bool b)
+  { 
+    return a && b; 
+  }
 
-    static inline bool op_add(const NumericalSemiring& s, bool a, bool b)
-    { 
-      return a || b; 
-    }
+  inline void op_in_add(const NumericalSemiring& s1,
+			bool& dst, bool src)
+  { 
+    dst = dst || src; 
+  }
 
-    static inline bool identity_value(SELECTOR(NumericalSemiring), 
-				      SELECTOR(bool))
-    { 
-      return true; 
-    }
+  inline bool op_add(const NumericalSemiring& s, bool a, bool b)
+  { 
+    return a || b; 
+  }
 
-    static inline bool zero_value(SELECTOR(NumericalSemiring), SELECTOR(bool))
-    { 
-      return false; 
-    }
+  inline bool identity_value(SELECTOR(NumericalSemiring), 
+			     SELECTOR(bool))
+  { 
+    return true; 
+  }
 
-    static inline bool op_stareable(const NumericalSemiring& s, bool b)
-    { 
-      return true; 
-    }
+  inline bool zero_value(SELECTOR(NumericalSemiring), SELECTOR(bool))
+  { 
+    return false; 
+  }
 
-    static inline void op_in_star(const NumericalSemiring& s, bool& b)
-    { 
-      b = true; 
-    }
+  inline bool op_stareable(const NumericalSemiring& s, bool b)
+  { 
+    return true; 
+  }
 
-    /*--------------------------------------------.
-    | specialization for floating point numbers.  |
-    `--------------------------------------------*/
+  inline void op_in_star(const NumericalSemiring& s, bool& b)
+  { 
+    b = true; 
+  }
 
-    template<typename T>
-    bool op_stareable(const NumericalSemiring& s, T v)
-    { 
-      return v == 0; 
-    }
+  /*--------------------------------------------.
+  | specialization for floating point numbers.  |
+  `--------------------------------------------*/
 
-    static inline bool op_stareable(const NumericalSemiring& s, 
-				    const float& f)
-    { 
-      return (f >= 0.0); 
-    }
+  template<typename T>
+  bool op_stareable(const NumericalSemiring& s, T v)
+  { 
+    return v == 0; 
+  }
 
-    static inline bool op_stareable(const NumericalSemiring& s, 
-				    const double& f)
-    { 
-      return (f >= 0.0); 
-    }
+  inline bool op_stareable(const NumericalSemiring& s, 
+			   const float& f)
+  { 
+    return (f >= 0.0); 
+  }
 
-    static inline void op_in_star(const NumericalSemiring& s, float& f)
-    { 
-      if (f < 1.0)
-	f = (1.0 / (1.0 - f));
-      else
-	f = std::numeric_limits<float>::infinity();
-    }
+  inline bool op_stareable(const NumericalSemiring& s, 
+			   const double& f)
+  { 
+    return (f >= 0.0); 
+  }
 
-    static inline void op_in_star(const NumericalSemiring& s, double& f)
-    { 
-      if (f < 1.0)
-	f = (1.0 / (1.0 - f));
-      else
-	f = std::numeric_limits<double>::infinity();
-    }
+  inline void op_in_star(const NumericalSemiring& s, float& f)
+  { 
+    if (f < 1.0)
+      f = (1.0 / (1.0 - f));
+    else
+      f = std::numeric_limits<float>::infinity();
+  }
 
-    // FIXME: add some more operators as syntactic sugar
+  inline void op_in_star(const NumericalSemiring& s, double& f)
+  { 
+    if (f < 1.0)
+      f = (1.0 / (1.0 - f));
+    else
+      f = std::numeric_limits<double>::infinity();
+  }
+
+  // FIXME: add some more operators as syntactic sugar
 
 } // vcsn
 

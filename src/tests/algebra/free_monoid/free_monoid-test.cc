@@ -31,12 +31,12 @@ bool test_free_monoid(tests::Tester& t)
 
 int main(int argc, char **argv)
 {
-  unsigned verbose;
+  tests::verbose_level_e verbose;
 
   if ((argc > 1) && (argv[1] == std::string("--noverbose")))
-    verbose = 0;
+    verbose = tests::none;
   else
-    verbose = 1;
+    verbose = tests::low;
   tests::Tester t(verbose);
 
   if (test_free_monoid<vcsn::Words, std::string>(t))

@@ -1,68 +1,74 @@
-/*------------------------------------------------------------.
-| <vaucanson/fundamental/structure.hh>: companion to meta_set |
-`------------------------------------------------------------*/
+// structure.hxx
+//
 // $Id$
-
-/* this file is part of the Vaucanson project. */
+// VCSN_HEADER
 #ifndef FUNDAMENTAL_STRUCTURE_HXX
 # define FUNDAMENTAL_STRUCTURE_HXX
 
 # include <vaucanson/fundamental/structure.hh>
-
+# include <vaucanson/fundamental/element.hh>
 # include <vaucanson/internal/traits.hh>
 
 namespace vcsn {
     
-    /*----------.
-    | Structure |
-    `----------*/
+  /*----------.
+  | Structure |
+  `----------*/
 
-    template <typename Self>
-    template <typename T>
-    bool 
-    Structure<Self>::contains(const Element<Self, T>& elt) const
-    { 
-      return op_contains(self(), elt.value()); 
-    }
+  template <typename Self>
+  template <typename T>
+  bool 
+  Structure<Self>::contains(const Element<Self, T>& elt) const
+  { 
+    return op_contains(self(), elt.value()); 
+  }
 
-    template <typename Self>
-    template <typename T>
-    bool 
-    Structure<Self>::contains(const T& elt_value) const
-    { 
-      return op_contains(self(), elt_value); 
-    }
-    
-    template <typename Self>
-    template <typename S, typename T>
-    bool 
-    Structure<Self>::contains(const Element<S, T>& other) const
-    { 
-      return false; 
-    }
-    
-    // static inheritance stuff below
-    template <typename Self>
-    Self&        
-    Structure<Self>::self()
-    { 
-      return static_cast<self_t&>(*this); 
-    }
-    
-    template <typename Self>
-    const Self&  
-    Structure<Self>::self() const 
-    { 
-      return static_cast<const self_t&>(*this); 
-    }
-    
-    template <typename Self>
-    Structure<Self>::Structure()
-    {}
+  template <class Self>
+  template <class T>
+  Element<Self, T>
+  Structure<Self>::choose(SELECTOR(T)) const
+  {
+    return op_choose(self(), SELECT(T));
+  }
 
-    template <typename Self>
-    Structure<Self>::Structure(const Structure&)
-    {}
+  template <typename Self>
+  template <typename T>
+  bool 
+  Structure<Self>::contains(const T& elt_value) const
+  { 
+    return op_contains(self(), elt_value); 
+  }
+    
+  template <typename Self>
+  template <typename S, typename T>
+  bool 
+  Structure<Self>::contains(const Element<S, T>& other) const
+  { 
+    return false; 
+  }
+    
+  // static inheritance stuff below
+  template <typename Self>
+  Self&        
+  Structure<Self>::self()
+  { 
+    return static_cast<self_t&>(*this); 
+  }
+    
+  template <typename Self>
+  const Self&  
+  Structure<Self>::self() const 
+  { 
+    return static_cast<const self_t&>(*this); 
+  }
+    
+  template <typename Self>
+  Structure<Self>::Structure()
+  {}
+
+  template <typename Self>
+  Structure<Self>::Structure(const Structure&)
+  {}
 
 
 } // vcsn

@@ -20,11 +20,13 @@ namespace vcsn {
 
     template <typename M_, typename W_>
     RandomVisitor<M_, W_>::RandomVisitor(unsigned nb_star_max) :
+      not_empty(false),
       nb_star_max_(nb_star_max)
     {}
 
     template <typename M_, typename W_>
     RandomVisitor<M_, W_>::RandomVisitor() :
+      not_empty(false),
       nb_star_max_(nb_star_max_default)
     {}
 
@@ -71,6 +73,7 @@ namespace vcsn {
     void 
     RandomVisitor<M_,W_>::star(const Node<M_, W_>* node)
     { 
+      not_empty = true;
       unsigned n = rand() * nb_star_max_ / RAND_MAX;
       M_       tmp;
 
@@ -87,6 +90,7 @@ namespace vcsn {
     void 
     RandomVisitor<M_,W_>::constant(const M_& m)
     { 
+      not_empty = true;
       w_ = m;
     }
 
@@ -94,6 +98,7 @@ namespace vcsn {
     void 
     RandomVisitor<M_,W_>::one()
     {
+      not_empty = true;
     }
 
     template <class M_, class W_>
@@ -102,10 +107,10 @@ namespace vcsn {
     {
     }
 
-
     template<typename M_, typename W_>
     M_ RandomVisitor<M_,W_>::get() const 
     { 
+      assert(not_empty);
       return w_; 
     } 
 

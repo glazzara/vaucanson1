@@ -6,8 +6,8 @@
 # define RAT_DUMP_VISITOR_HXX
 
 # include <iostream>
-# include <vaucanson/algebra/concrete/series/dump_visitor.hh>
-# include <vaucanson/algebra/concrete/series/nodes.hh>
+# include <vaucanson/algebra/concrete/series/rat/dump_visitor.hh>
+# include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 
 namespace vcsn {
 
@@ -23,7 +23,7 @@ namespace vcsn {
     {}
 
     template <class M_, class W_>
-    virtual void 
+    void 
     DumpVisitor<M_,W_>::product(const Node<M_, W_>* left_, 
 				const Node<M_, W_>* right_)
     { 
@@ -35,7 +35,7 @@ namespace vcsn {
     }
 
     template <class M_, class W_>
-    virtual void 
+    void 
     DumpVisitor<M_,W_>::sum(const Node<M_, W_>* left_, 
 			    const Node<M_, W_>* right_)
     { 
@@ -47,7 +47,7 @@ namespace vcsn {
     }
 
     template <class M_, class W_>
-    virtual void 
+    void 
     DumpVisitor<M_,W_>::star(const Node<M_, W_>* node)
     { 
       //	  o_ << "(";
@@ -56,7 +56,7 @@ namespace vcsn {
     }
 
     template <class M_, class W_>
-    virtual void 
+    void 
     DumpVisitor<M_,W_>::left_weight(const W_& w, const Node<M_, W_>* node)
     { 
       o_ << "(" << w << " ";
@@ -65,7 +65,7 @@ namespace vcsn {
     }
 
     template <class M_, class W_>
-    virtual void 
+    void 
     DumpVisitor<M_,W_>::right_weight(const W_& w, const Node<M_, W_>* node)
     { 
       o_ << "(";
@@ -74,20 +74,20 @@ namespace vcsn {
     }
 
     template <class M_, class W_>
-    virtual void 
+    void 
     DumpVisitor<M_,W_>::constant(const M_& m)
     { 
       o_ << m; 
     }
 
     template <class M_, class W_>
-    virtual void DumpVisitor<M_,W_>::zero()
+    void DumpVisitor<M_,W_>::zero()
     { 
       o_ << z_; 
     }
 
     template <class M_, class W_>
-    virtual void DumpVisitor<M_,W_>::one()
+    void DumpVisitor<M_,W_>::one()
     { 
       o_ << i_; 
     }

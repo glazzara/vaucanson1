@@ -297,6 +297,12 @@ namespace vcsn {
 		     const oTm& m,
 		     const oTw& w);
 
+  template <class W, class M, class Tm, class Tw>
+  Element<Series<W,M>, polynom<Tm,Tw> > 
+  op_choose(const Series<W,M>& s, 
+	    SELECTOR2(polynom<Tm,Tw>));
+
+
 } // vcsn
 
 # include <vaucanson/algebra/concrete/series/polynoms.hxx>

@@ -264,6 +264,12 @@ namespace vcsn {
 		     const rat::exp<Tm, Tw>& p,
 		     const oTm& m,
 		     const oTw& w);
+
+  template <class W, class M, class Tm, class Tw>
+  Element<Series<W,M>, rat::exp<Tm,Tw> > 
+  op_choose(const Series<W,M>& s, 
+	    SELECTOR2(rat::exp<Tm,Tw>));
+
   
 } // vcsn
 

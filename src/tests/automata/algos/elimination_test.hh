@@ -39,7 +39,7 @@ bool elimination_test(tests::Tester& tg)
       if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("elimination", a, nb);
+	  SAVE_AUTOMATON_DOT("/tmp", "elimination", a, nb);
 	}
       unsigned i = 0;
       for (; i < nb_word_test; ++i)

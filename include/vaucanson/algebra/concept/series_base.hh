@@ -87,6 +87,9 @@ namespace vcsn {
   typename MetaElement<SeriesBase<S>, T>::monoid_elt_t 
 
   op_choose_from_supp(const SeriesBase<S>& s, const T& t);
+
+  template <class S, class T>
+  Element<S, T> op_series_choose(const SeriesBase<S>& s, SELECTOR(T));
   
   template <typename S, typename T, typename M, typename W>
   void	

@@ -1,5 +1,6 @@
 // check_global_consistance.cc
 //
+// $Id$
 // VCSN_HEADER
 
 #include <vaucanson/fundamental/fundamental.hh>
@@ -30,12 +31,12 @@ int main(int argc, char **argv)
   using namespace vcsn;
   using namespace vcsn::algebra;
 
-  unsigned verbose;
+  tests::verbose_level_e verbose;
 
   if ((argc > 1) && (argv[1] == std::string("--noverbose")))
-    verbose = 0;
+    verbose = tests::none;
   else
-    verbose = 1;
+    verbose = tests::low;
   tests::Tester t(verbose);
 
   tools::gen_auto_t gen(42);
