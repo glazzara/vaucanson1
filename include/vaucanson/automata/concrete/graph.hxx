@@ -545,6 +545,40 @@ namespace vcsn {
     v.rdelta(res, from, query, k);
   }
 
+  TParam
+  inline
+  Tag& GClass::tag()
+  {
+    return tag_;
+  }
+
+  TParam
+  inline
+  const Tag& GClass::tag() const
+  {
+    return tag_;
+  }
+
+  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+            class Letter, class Tag, class I>
+  inline
+  Tag& op_tag(const AutomataBase<I>&,
+              Graph<Kind, WordValue, WeightValue,
+                    SerieValue ,Letter, Tag>& v)
+  {
+    return v.tag();
+  }
+
+  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+            class Letter, class Tag, class I>
+  inline
+  const Tag& op_tag(const AutomataBase<I>&,
+                    const Graph<Kind, WordValue, WeightValue,
+		                SerieValue ,Letter, Tag>& v)
+  {			    
+    return v.tag();
+  }
+
   // Remove macros to avoid name clashes.
 #undef TParam
 #undef GClass

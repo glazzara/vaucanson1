@@ -110,6 +110,13 @@ namespace vcsn {
     return from_data;
   }
 
+  template<typename S, typename T>
+  const S& op_convert(const Structure<S>& s, const Structure<T>&)
+  {
+    warning("No conversion available.");
+    return s.self();
+  }
+
   /*---------------------.
   | Default construction |
   `---------------------*/

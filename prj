@@ -1,19 +1,28 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 462)
-(Parent-Version vaucanson 0 461)
+(Project-Version vaucanson XML 1)
+(Parent-Version vaucanson 0 462)
 (New-Version-Log "")
 
 (Version-Log "
-2003-11-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-12-04  Valentin David  <valentin@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/standard.hxx (do_in_standardize):
-	   Fix.
-	* src/demos/fibonacci/fibonacci.cc: Typo.
+	* src/tests/sanity/generate_files.sh: Fix.
+
+	* include/vaucanson/design_pattern/default_ops.hxx:
+	Add default set conversion.
+	* include/vaucanson/design_pattern/element.hxx: Convert sets.
+
+	* include/vaucanson/design_pattern/element_ops.hxx: Able op_rin to
+	write on set.
+
+	* include/vaucanson/automata/concrete/graph.hxx,
+	* include/vaucanson/automata/concrete/graph.hh: Add some missing
+	operations for tags.
 ")
-(Checkin-Time "Thu, 27 Nov 2003 19:39:21 +0100")
-(Checkin-Login yann)
+(Checkin-Time "Thu, 04 Dec 2003 10:54:35 +0100")
+(Checkin-Login david_v)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -95,7 +104,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.96 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -123,7 +132,7 @@
   (src/tests/check/tester.hh (vaucanson/b/2_tests_stuf 1.15 600))
   (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.5 600))
   (src/tests/check/unique.cc (vaucanson/p/49_unique.cc 1.3 600))
-  (src/tests/sanity/generate_files.sh (vaucanson/r/29_generate_f 1.8 700))
+  (src/tests/sanity/generate_files.sh (vaucanson/r/29_generate_f 1.9 700))
   (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.8 700))
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.4 600))
@@ -172,13 +181,13 @@
   (src/tests/misc/random.cc (vaucanson/q/7_random.cc 1.2 600))
 
   (include/vaucanson/design_pattern/default_ops.hh (vaucanson/25_default_op 1.15 600))
-  (include/vaucanson/design_pattern/default_ops.hxx (vaucanson/24_default_op 1.16 600))
+  (include/vaucanson/design_pattern/default_ops.hxx (vaucanson/24_default_op 1.17 600))
   (include/vaucanson/design_pattern/element.hh (vaucanson/7_element.hh 1.20 600))
-  (include/vaucanson/design_pattern/element.hxx (vaucanson/6_element.hx 1.17 600))
+  (include/vaucanson/design_pattern/element.hxx (vaucanson/6_element.hx 1.18 600))
   (include/vaucanson/design_pattern/meta_element_root.hh (vaucanson/9_element_ba 1.17 600))
   (include/vaucanson/design_pattern/meta_element_root.hxx (vaucanson/8_element_ba 1.12 600))
   (include/vaucanson/design_pattern/element_ops.hh (vaucanson/5_element_op 1.19 600))
-  (include/vaucanson/design_pattern/element_ops.hxx (vaucanson/g/44_element_op 1.9 600))
+  (include/vaucanson/design_pattern/element_ops.hxx (vaucanson/g/44_element_op 1.10 600))
   (include/vaucanson/design_pattern/design_pattern.hh (vaucanson/4_fundamenta 1.15 600))
   (include/vaucanson/design_pattern/syntactic_decorator.hh (vaucanson/21_meta_eleme 1.14 600))
   (include/vaucanson/design_pattern/syntactic_decorator.hxx (vaucanson/20_meta_eleme 1.14 600))
@@ -329,8 +338,8 @@
   (include/vaucanson/automata/concept/transducer_base.hxx (vaucanson/q/38_transducer 1.9 600))
   (include/vaucanson/automata/concept/transducer_ops.hxx (vaucanson/q/39_transducer 1.6 600))
 
-  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.8 600))
-  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.14 600))
+  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.9 600))
+  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.15 600))
   (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.10 600))
   (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.11 600))
   (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.7 600)) 

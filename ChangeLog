@@ -1,3 +1,18 @@
+2003-12-04  Valentin David  <valentin@lrde.epita.fr>
+
+	* src/tests/sanity/generate_files.sh: Fix.
+
+	* include/vaucanson/design_pattern/default_ops.hxx:
+	Add default set conversion.
+	* include/vaucanson/design_pattern/element.hxx: Convert sets.
+
+	* include/vaucanson/design_pattern/element_ops.hxx: Able op_rin to
+	write on set.
+
+	* include/vaucanson/automata/concrete/graph.hxx,
+	* include/vaucanson/automata/concrete/graph.hh: Add some missing
+	operations for tags.
+
 2003-11-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/standard.hxx (do_in_standardize):

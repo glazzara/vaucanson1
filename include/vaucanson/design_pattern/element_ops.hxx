@@ -41,6 +41,7 @@
 # include <vaucanson/design_pattern/element_ops.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/misc/static.hh>
+# include <vaucanson/misc/unique.hh>
 
 namespace vcsn {
 
@@ -172,9 +173,14 @@ operator <<(St& s, const Element<S, T>& e)
 
 template<typename St, typename S, typename T>
 static inline St& 
-operator >>(St& s, const Element<S, T>& e)
+operator >>(St& s, Element<S, T>& e)
 { 
-  return op_rin(e.set(), s, e.value()); 
+  S set = S();
+  if (e.bound())
+     set = S(e.set());
+  op_rin(set, s, e.value());
+  e = Element<S, T>(utility::unique::get(set), e.value());
+  return s;
 }
 
 /*------------------------------------------.
