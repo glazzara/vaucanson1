@@ -23,7 +23,6 @@
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/internal/traits.hh>
 
 namespace vcsn {
 
@@ -31,9 +30,10 @@ namespace vcsn {
   struct Automata;
   
   template <class Series>
-  struct MetaSet<Automata<Series> >
+  struct dynamic_traits<Automata<Series> >
+    : dynamic_traits<AutomataBase<Automata<Series> > >
   {
-    static const bool dynamic_set = MetaSet<Series>::dynamic_set;    
+    static const bool ret = dynamic_traits<Series>::ret;    
   };
   
   template <class Series, typename T>
@@ -41,15 +41,12 @@ namespace vcsn {
     : MetaElement<AutomataBase<Automata<Series> >, T>
   {};
 
-  namespace traits {
-    
-    template <class Series>
-    struct virtual_types<Automata<Series> >
-    {
-      typedef Series		series_t;
-    };
-    
-  } // traits.
+  template <class Series>
+  struct virtual_types<Automata<Series> >
+    : virtual_types<AutomataBase<Automata<Series> > >
+  {
+    typedef Series		series_t;
+  };
 
 
   template <class Series>
@@ -58,7 +55,7 @@ namespace vcsn {
   {
   public:
     typedef Automata<Series>				     self_t;
-    typedef typename traits::virtual_types<self_t>::series_t series_t;
+    typedef typename virtual_types<self_t>::series_t series_t;
 
     Automata(const series_t&);
 

@@ -29,7 +29,7 @@
 
 # include <vaucanson/config/system.hh>
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup fundamental *//** @{ */
 /// The main namespace of the Vaucanson library
 namespace vcsn {
 

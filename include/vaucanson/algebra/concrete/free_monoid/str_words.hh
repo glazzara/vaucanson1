@@ -32,26 +32,26 @@ namespace vcsn {
 
   template <typename A>
   void 
-  op_in_mul(const FreeMonoid<A>& s, 
+  op_in_mul(const algebra::FreeMonoid<A>& s, 
 	    std::basic_string<typename A::letter_t>& dst,
 	    const std::basic_string<typename A::letter_t>& src);
     
   template<typename A>
   std::basic_string<typename A::letter_t>
-  op_mul(const FreeMonoid<A>& s,
+  op_mul(const algebra::FreeMonoid<A>& s,
 	 const std::basic_string<typename A::letter_t>& a,
 	 const std::basic_string<typename A::letter_t>& b);
 
   template<typename A>
   const std::basic_string<typename A::letter_t>&
-  identity_value(SELECTOR(FreeMonoid<A>),
+  identity_value(SELECTOR(algebra::FreeMonoid<A>),
 		 SELECTOR(std::basic_string<typename A::letter_t>));
 
   // one can create words from a single character
   template<typename A>
   std::basic_string<typename A::letter_t>
   op_convert(SELECTOR(std::basic_string<typename A::letter_t>),
-	     SELECTOR(FreeMonoid<A>), const typename A::letter_t& c);
+	     SELECTOR(algebra::FreeMonoid<A>), const typename A::letter_t& c);
 
   
 } // vcsn

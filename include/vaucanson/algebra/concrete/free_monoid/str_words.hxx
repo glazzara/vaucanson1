@@ -27,7 +27,7 @@ namespace vcsn {
 
   template<typename A>
   void 
-  op_in_mul(const FreeMonoid<A>& s, 
+  op_in_mul(const algebra::FreeMonoid<A>& s, 
 	    std::basic_string<typename A::letter_t>& dst,
 	    const std::basic_string<typename A::letter_t>& src)
   { 
@@ -36,7 +36,7 @@ namespace vcsn {
 
   template<typename A>
   std::basic_string<typename A::letter_t>
-  op_mul(const FreeMonoid<A>&,
+  op_mul(const algebra::FreeMonoid<A>&,
 	 const std::basic_string<typename A::letter_t>& a,
 	 const std::basic_string<typename A::letter_t>& b)
   { 
@@ -45,7 +45,7 @@ namespace vcsn {
 
   template <typename A>
   bool
-  op_xeq(const FreeMonoid<A>& s, 
+  op_xeq(const algebra::FreeMonoid<A>& s, 
 	 const std::basic_string<typename A::letter_t>& a, 
 	 const std::basic_string<typename A::letter_t>& b)
   {
@@ -63,7 +63,7 @@ namespace vcsn {
 
   template<typename A>
   const std::basic_string<typename A::letter_t>&
-  identity_value(SELECTOR(FreeMonoid<A>),
+  identity_value(SELECTOR(algebra::FreeMonoid<A>),
 		 SELECTOR(std::basic_string<typename A::letter_t>))
   {
     static const std::basic_string<typename A::letter_t> instance;
@@ -73,7 +73,7 @@ namespace vcsn {
   template<typename A>
   std::basic_string<typename A::letter_t>
   op_convert(SELECTOR(std::basic_string<typename A::letter_t>),
-	     SELECTOR(FreeMonoid<A>), const typename A::letter_t& c)
+	     SELECTOR(algebra::FreeMonoid<A>), const typename A::letter_t& c)
   { 
     std::basic_string<typename A::letter_t> str; 
     str = c; 
@@ -81,16 +81,16 @@ namespace vcsn {
   }
 
   template <class A>
-  Element<FreeMonoid<A>, std::basic_string<typename A::letter_t> >
-  op_choose(const FreeMonoid<A>& s, 
+  Element<algebra::FreeMonoid<A>, std::basic_string<typename A::letter_t> >
+  op_choose(const algebra::FreeMonoid<A>& s, 
 	    SELECTOR(std::basic_string<typename A::letter_t>))
   {
     // FIXME : use global constants to define this !
-    unsigned length = ((unsigned)(((float) rand() / (float) RAND_MAX) * 5));
+    unsigned length = rand() % 5;
     std::basic_string<typename A::letter_t> r;
     for (unsigned i = 0; i < length; ++i)
       r = r + s.alphabet().choose();
-    return Element<FreeMonoid<A>, std::basic_string<typename A::letter_t> >(s, r);
+    return Element<algebra::FreeMonoid<A>, std::basic_string<typename A::letter_t> >(s, r);
   }
 
 } // vcsn

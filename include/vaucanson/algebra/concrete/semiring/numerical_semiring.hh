@@ -24,103 +24,102 @@
 # define ALGEBRA_NUMERICAL_SEMIRING_HH
 
 # include <vaucanson/algebra/concept/numerical_semiring.hh>
-# include <vaucanson/misc/numerical_constraints.hh>
 
 namespace vcsn {
 
   template<typename T>
-  bool op_contains(const NumericalSemiring& s, T c);
+  bool op_contains(const algebra::NumericalSemiring& s, T c);
 
   template<typename T, typename U>
-  void op_in_mul(const NumericalSemiring& s1, T& dst, U arg);
+  void op_in_mul(const algebra::NumericalSemiring& s1, T& dst, U arg);
 
   template<typename T, typename U>
-  void op_in_add(const NumericalSemiring& s1, T& dst, U arg);
+  void op_in_add(const algebra::NumericalSemiring& s1, T& dst, U arg);
 
   template<typename T, typename U>
-  T op_mul(const NumericalSemiring& s, T a, U b);
+  T op_mul(const algebra::NumericalSemiring& s, T a, U b);
 
   template<typename T, typename U>
-  T op_add(const NumericalSemiring& s, T a, U b);
+  T op_add(const algebra::NumericalSemiring& s, T a, U b);
 
   template<typename T>
-  T identity_value(SELECTOR(NumericalSemiring), SELECTOR(T));
+  T identity_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T));
     
   template<typename T>
-  T zero_value(SELECTOR(NumericalSemiring), SELECTOR(T));
+  T zero_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T));
 
   template <class T>
-  Element<NumericalSemiring, T>
-  op_choose(const NumericalSemiring& s, SELECTOR(T));
+  Element<algebra::NumericalSemiring, T>
+  op_choose(const algebra::NumericalSemiring& s, SELECTOR(T));
 
   /*-----------------------------.
   | specializations for integers |
   `-----------------------------*/
 
   bool
-  op_can_choose_non_stareable(const NumericalSemiring& set, SELECTOR(int));
+  op_can_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(int));
 
-  Element<NumericalSemiring, int>
-  op_choose_stareable(const NumericalSemiring& set, SELECTOR(int));
+  Element<algebra::NumericalSemiring, int>
+  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(int));
   
-  Element<NumericalSemiring, int> 
-  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(int));
+  Element<algebra::NumericalSemiring, int> 
+  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(int));
 
   /*-----------------------------.
   | specializations for booleans |
   `-----------------------------*/
   template<typename T>
-  inline void op_in_mul(const NumericalSemiring& s1,
+  inline void op_in_mul(const algebra::NumericalSemiring& s1,
 			bool& dst, bool src);
   
-  inline bool op_mul(const NumericalSemiring& s, bool a, bool b);
+  inline bool op_mul(const algebra::NumericalSemiring& s, bool a, bool b);
   
-  inline void op_in_add(const NumericalSemiring& s1,
+  inline void op_in_add(const algebra::NumericalSemiring& s1,
 			bool& dst, bool src);
   
-  inline bool op_add(const NumericalSemiring& s, bool a, bool b);
+  inline bool op_add(const algebra::NumericalSemiring& s, bool a, bool b);
   
-  inline bool identity_value(SELECTOR(NumericalSemiring), 
+  inline bool identity_value(SELECTOR(algebra::NumericalSemiring), 
 			     SELECTOR(bool));
   
-  inline bool zero_value(SELECTOR(NumericalSemiring), 
+  inline bool zero_value(SELECTOR(algebra::NumericalSemiring), 
 			 SELECTOR(bool));
   
-  inline bool op_stareable(const NumericalSemiring& s, bool b);
+  inline bool op_stareable(const algebra::NumericalSemiring& s, bool b);
   
-  inline void op_in_star(const NumericalSemiring& s, bool& b);
+  inline void op_in_star(const algebra::NumericalSemiring& s, bool& b);
 
-  Element<NumericalSemiring, bool>
-  op_choose_stareable(const NumericalSemiring& set, SELECTOR(bool));
+  Element<algebra::NumericalSemiring, bool>
+  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(bool));
   
-  Element<NumericalSemiring, bool> 
-  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(bool));
+  Element<algebra::NumericalSemiring, bool> 
+  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(bool));
 
   /*-------------------------.
   | goodies for real numbers |
   `-------------------------*/
   template<typename T>
-  bool op_stareable(const NumericalSemiring& s, T v);
+  bool op_stareable(const algebra::NumericalSemiring& s, T v);
   
-  inline bool op_stareable(const NumericalSemiring& s, 
+  inline bool op_stareable(const algebra::NumericalSemiring& s, 
 				  const float& f);
 
-   inline bool op_stareable(const NumericalSemiring& s, 
+   inline bool op_stareable(const algebra::NumericalSemiring& s, 
 				  const double& f);
 
-   inline void op_in_star(const NumericalSemiring& s, float& f);
+   inline void op_in_star(const algebra::NumericalSemiring& s, float& f);
 
-   inline void op_in_star(const NumericalSemiring& s, double& f);
+   inline void op_in_star(const algebra::NumericalSemiring& s, double& f);
 
   bool
-  op_can_choose_non_stareable(const NumericalSemiring& set,
+  op_can_choose_non_stareable(const algebra::NumericalSemiring& set,
 			      SELECTOR(float));
 
-  Element<NumericalSemiring, float>
-  op_choose_stareable(const NumericalSemiring& set, SELECTOR(float));
+  Element<algebra::NumericalSemiring, float>
+  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(float));
   
-  Element<NumericalSemiring, float> 
-  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(float));
+  Element<algebra::NumericalSemiring, float> 
+  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(float));
 
 } // vcsn
 

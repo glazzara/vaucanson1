@@ -78,23 +78,23 @@ namespace vcsn {
       `---------------------------------*/
     
   template<typename S, typename T>
-  typename MetaElement<SeriesBase<S>, T>::weight_value_t 
-  MetaElement<SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
+  typename MetaElement<algebra::SeriesBase<S>, T>::weight_value_t 
+  MetaElement<algebra::SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
   { 
     // assert(set().monoid().contains(m));
     return op_series_get(set(), value(), m);
   }
 
   template<typename S, typename T>
-  typename MetaElement<SeriesBase<S>, T>::weight_t 
-  MetaElement<SeriesBase<S>, T>::get(const monoid_elt_t& m) const
+  typename MetaElement<algebra::SeriesBase<S>, T>::weight_t 
+  MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_t& m) const
   { 
     return weight_t(set().weights(), value_get(m.value())); 
   }
 
   template<typename S, typename T>
   void 
-  MetaElement<SeriesBase<S>, T>::value_set(const monoid_value_t& m, 
+  MetaElement<algebra::SeriesBase<S>, T>::value_set(const monoid_value_t& m, 
 					   const weight_value_t& w) 
   { 
     // assert(set().monoid().contains(m));
@@ -104,7 +104,7 @@ namespace vcsn {
 
   template<typename S, typename T>
   void 
-  MetaElement<SeriesBase<S>, T>::assoc(const monoid_elt_t& m, 
+  MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_t& m, 
 				       const weight_t& w) 
   { 
     value_set(m.value(), w.value()); 
@@ -112,70 +112,70 @@ namespace vcsn {
 
   template<typename S, typename T>
   bool 
-  MetaElement<SeriesBase<S>, T>::is_finite_app() const
+  MetaElement<algebra::SeriesBase<S>, T>::is_finite_app() const
   { 
     return op_is_finite_app(set(), value()); 
   }
 
   template <typename S, typename T>
-  typename MetaElement<SeriesBase<S>, T>::monoid_elt_t
-  MetaElement<SeriesBase<S>, T>::choose_from_supp() const
+  typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
+  MetaElement<algebra::SeriesBase<S>, T>::choose_from_supp() const
   {
-    return op_choose_from_supp(this->set(), value());
+    return op_choose_from_supp(set(), value());
   }
 
   template <typename S, typename T>
   void
-  MetaElement<SeriesBase<S>, T>::transpose()
+  MetaElement<algebra::SeriesBase<S>, T>::transpose()
   {
-    op_in_transpose(this->set(), value());
+    op_in_transpose(set(), value());
   }
 
   template <typename S, typename T>
-  typename MetaElement<SeriesBase<S>, T>::support_t
-  MetaElement<SeriesBase<S>, T>::supp() const  
+  typename MetaElement<algebra::SeriesBase<S>, T>::support_t
+  MetaElement<algebra::SeriesBase<S>, T>::supp() const  
   {
-    return op_support(this->set(), value());
+    return op_support(set(), value());
   }
 
   template<typename S, typename T>
-  MetaElement<SeriesBase<S>, T>::MetaElement() 
+  MetaElement<algebra::SeriesBase<S>, T>::MetaElement() 
   {}
     
   template<typename S, typename T>
-  MetaElement<SeriesBase<S>, T>::MetaElement(const MetaElement& other) :
-    MetaElement<SemiringBase<S>, T>(other)
+  MetaElement<algebra::SeriesBase<S>, T>::MetaElement(const MetaElement& other) :
+    MetaElement<algebra::SemiringBase<S>, T>(other)
   {}
     
   template<typename S, typename T>
-  bool op_is_finite_app(const SeriesBase<S>& s, const T& t)
+  bool op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t)
   { 
     return false; 
   }
     
   template<typename S, typename T, typename M, typename W>
-  void op_series_set(const SeriesBase<S>& s, const T& t, const W& w)
+  void op_series_set(const algebra::SeriesBase<S>& s, const T& t, const W& w)
   {
     assert(! "defined.");
   }
 
   template <class S, class T>
-  Element<S, T> op_series_choose(const SeriesBase<S>& s, SELECTOR(T)) 
+  Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T)) 
   {
     assert(! "defined.");
   }
 
   template <class S, class T>
   inline
-  typename series_traits<T>::support_t
-  op_support(const SeriesBase<S>&, const T& v)
+  typename algebra::series_traits<T>::support_t
+  op_support(const algebra::SeriesBase<S>&, const T& v)
   {
     return v;
   }
 
   template <class S, class T>
   Element<S, T>
-  transpose(const SeriesBase<S>& s, const T& t)
+  transpose(const algebra::SeriesBase<S>& s, const T& t)
   {
     T	new_t(t);
     new_t.transpose();
@@ -186,7 +186,7 @@ namespace vcsn {
   bool
   is_letter_support(const Element<S, T>& s)
   {
-    typedef typename series_traits<T>::support_t support_t;
+    typedef typename algebra::series_traits<T>::support_t support_t;
     support_t supp = s.supp();
     for_each_const_(support_t, e, supp)
       if (op_size(s.set().monoid(), *e) != 1)
@@ -199,10 +199,10 @@ namespace vcsn {
   void
   extract_support(Element<S1, T1>& s1, Element<S2, T2>& s2)
   {
-    typedef typename series_traits<T2>::support_t support_t;
-    typedef typename series_traits<T1>::weight_value_t weight_value_t;
+    typedef typename algebra::series_traits<T2>::support_t support_t;
+    typedef typename algebra::series_traits<T1>::weight_value_t weight_value_t;
     for_each_const_(support_t, e, s2.supp())
-      s1.assoc(*e, identity_as<weight_value_t>::of(s1.set().weights()));
+      s1.assoc(*e, algebra::identity_as<weight_value_t>::of(s1.set().weights()));
   }
 
   template <class S, class T>

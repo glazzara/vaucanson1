@@ -26,28 +26,24 @@
 # include <vaucanson/algebra/concept/semiring_base.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 # include <vaucanson/misc/random.hh>
-# include <vaucanson/misc/numerical_constraints.hh>
 
 namespace vcsn {
 
   template<typename T>
-  bool op_contains(const NumericalSemiring& s, T c)
+  bool op_contains(const algebra::NumericalSemiring& s, T c)
   { 
-    using namespace utility::concepts;
-
-    function_requires<HasLimits<T> >();
     return true; 
   }
 
   template<typename T, typename U>
-  void op_in_mul(const NumericalSemiring&,
+  void op_in_mul(const algebra::NumericalSemiring&,
 		 T& dst, U arg)
   { 
     dst *= arg; 
   }
 
   template<typename T, typename U>
-  void op_in_add(const NumericalSemiring&,
+  void op_in_add(const algebra::NumericalSemiring&,
 		 T& dst, U arg)
   { 
     dst += arg; 
@@ -58,34 +54,34 @@ namespace vcsn {
   // type of the arguments. 
 
   template<typename T, typename U>
-  T op_mul(const NumericalSemiring&, T a, U b)
+  T op_mul(const algebra::NumericalSemiring&, T a, U b)
   { 
     return a * b; 
   }
 
   template<typename T, typename U>
-  T op_add(const NumericalSemiring&, T a, U b)
+  T op_add(const algebra::NumericalSemiring&, T a, U b)
   { 
     return a + b; 
   }
 
   template<typename T>
-  T identity_value(SELECTOR(NumericalSemiring), SELECTOR(T))
+  T identity_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T))
   { 
     return T(1); 
   }
     
   template<typename T>
-  T zero_value(SELECTOR(NumericalSemiring), SELECTOR(T))
+  T zero_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(T))
   { 
     return T(0); 
   }
 
   template <class T>
-  Element<NumericalSemiring, T>
-  op_choose(const NumericalSemiring& s, SELECTOR(T))
+  Element<algebra::NumericalSemiring, T>
+  op_choose(const algebra::NumericalSemiring& s, SELECTOR(T))
   {
-    return misc::RandomGenerator<T>::do_it();
+    return utility::random::generate<T>();
   }
 
   /*-----------------------------.
@@ -94,30 +90,27 @@ namespace vcsn {
 
   inline
   bool
-  op_can_choose_non_stareable(const NumericalSemiring& set,
+  op_can_choose_non_stareable(const algebra::NumericalSemiring& set,
 			      SELECTOR(int))
   {
     return true; // Every integer excepted Zero is non-stareable
   }
 
   inline
-  Element<NumericalSemiring, int>
-  op_choose_stareable(const NumericalSemiring& set, SELECTOR(int))
+  Element<algebra::NumericalSemiring, int>
+  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(int))
   {
     // 0 is the only one integer to be stareable. So we have no choice !
     return 0;
   }
   
   inline
-  Element<NumericalSemiring, int> 
-  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(int))
+  Element<algebra::NumericalSemiring, int> 
+  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(int))
   {
-    // We want anything but 0.
-    int r;
-
-    do
-      r = op_choose(set, SELECT(int));
-    while (r == 0);
+    int r = utility::random::generate<int>();
+    if (!r)
+      r = 1;
     return r;
   }
 
@@ -125,60 +118,60 @@ namespace vcsn {
   | specializations for booleans |
   `-----------------------------*/
   template<typename T>
-  inline void op_in_mul(const NumericalSemiring& s1,
+  inline void op_in_mul(const algebra::NumericalSemiring& s1,
 			bool& dst, bool src)
   { 
     dst = dst && src; 
   }
 
-  inline bool op_mul(const NumericalSemiring&, bool a, bool b)
+  inline bool op_mul(const algebra::NumericalSemiring&, bool a, bool b)
   { 
     return a && b; 
   }
 
-  inline void op_in_add(const NumericalSemiring&,
+  inline void op_in_add(const algebra::NumericalSemiring&,
 			bool& dst, bool src)
   { 
     dst = dst || src; 
   }
 
-  inline bool op_add(const NumericalSemiring& s, bool a, bool b)
+  inline bool op_add(const algebra::NumericalSemiring& s, bool a, bool b)
   { 
     return a || b; 
   }
 
-  inline bool identity_value(SELECTOR(NumericalSemiring), 
+  inline bool identity_value(SELECTOR(algebra::NumericalSemiring), 
 			     SELECTOR(bool))
   { 
     return true; 
   }
 
-  inline bool zero_value(SELECTOR(NumericalSemiring), SELECTOR(bool))
+  inline bool zero_value(SELECTOR(algebra::NumericalSemiring), SELECTOR(bool))
   { 
     return false; 
   }
 
-  inline bool op_stareable(const NumericalSemiring& s, bool b)
+  inline bool op_stareable(const algebra::NumericalSemiring& s, bool b)
   { 
     return true; 
   }
 
-  inline void op_in_star(const NumericalSemiring& s, bool& b)
+  inline void op_in_star(const algebra::NumericalSemiring& s, bool& b)
   { 
     b = true; 
   }
 
   inline
-  Element<NumericalSemiring, bool>
-  op_choose_stareable(const NumericalSemiring& set, SELECTOR(bool))
+  Element<algebra::NumericalSemiring, bool>
+  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(bool))
   {
     // Every boolean is stareable !
     return op_choose(set, SELECT(bool));
   }
   
   inline
-  Element<NumericalSemiring, bool> 
-  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(bool))
+  Element<algebra::NumericalSemiring, bool> 
+  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(bool))
   {
     assert(! "Cannot choose non-stareable boolean: that does not exist");
     return false;
@@ -189,24 +182,24 @@ namespace vcsn {
   `--------------------------------------------*/
 
   template<typename T>
-  bool op_stareable(const NumericalSemiring& s, T v)
+  bool op_stareable(const algebra::NumericalSemiring& s, T v)
   { 
     return v == 0; 
   }
 
-  inline bool op_stareable(const NumericalSemiring& s, 
+  inline bool op_stareable(const algebra::NumericalSemiring& s, 
 			   const float& f)
   { 
     return (0.0 <= f) && (f < 1.0); 
   }
 
-  inline bool op_stareable(const NumericalSemiring& s, 
+  inline bool op_stareable(const algebra::NumericalSemiring& s, 
 			   const double& f)
   { 
     return (0.0 <= f) && (f < 1.0); 
   }
 
-  inline void op_in_star(const NumericalSemiring& s, float& f)
+  inline void op_in_star(const algebra::NumericalSemiring& s, float& f)
   { 
     if (f < 1.0)
       f = (1.0 / (1.0 - f));
@@ -214,7 +207,7 @@ namespace vcsn {
       f = std::numeric_limits<float>::infinity();
   }
 
-  inline void op_in_star(const NumericalSemiring& s, double& f)
+  inline void op_in_star(const algebra::NumericalSemiring& s, double& f)
   { 
     if (f < 1.0)
       f = (1.0 / (1.0 - f));
@@ -224,7 +217,7 @@ namespace vcsn {
 
   inline
   bool
-  op_can_choose_non_stareable(const NumericalSemiring& set,
+  op_can_choose_non_stareable(const algebra::NumericalSemiring& set,
 			      SELECTOR(float))
   {
     return true; // Every float which is less than 0 or greater than 1 is
@@ -232,21 +225,17 @@ namespace vcsn {
   }
 
   inline
-  Element<NumericalSemiring, float>
-  op_choose_stareable(const NumericalSemiring& set, SELECTOR(float))
+  Element<algebra::NumericalSemiring, float>
+  op_choose_stareable(const algebra::NumericalSemiring& set, SELECTOR(float))
   {
-    return misc::RandomGenerator<float>::do_it(true);
+    return utility::random::generate<float>();
   }
   
   inline
-  Element<NumericalSemiring, float> 
-  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(float))
+  Element<algebra::NumericalSemiring, float> 
+  op_choose_non_stareable(const algebra::NumericalSemiring& set, SELECTOR(float))
   {
-    float r;
-    do
-      r = misc::RandomGenerator<float>::do_it();
-    while ((0.0 <= r) && (r < 1.0));
-    return r;
+    return utility::random::generate<float>() * 1000. + 1.0;
   }
 
   // FIXME: add some more operators as syntactic sugar

@@ -98,7 +98,18 @@ static const bool dynamic_data = false;
   struct dynamic_traits<algebra::AlphabetSetBase<S> > 
     : dynamic_traits<Structure<S> >
   { };
-  
+
+  /*--------------.
+  | virtual_types |
+  `--------------*/
+
+  /// Specialization of @c virtual_types for @c AlphabetSetBase.
+  template<typename S>
+  struct virtual_types<algebra::AlphabetSetBase<S> >
+    : virtual_types<Structure<S> >
+  { };
+
+
   
   /*--------------------------------------.
   | MetaElement<AlphabetSetBase<Self>, T> |

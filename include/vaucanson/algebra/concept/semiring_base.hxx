@@ -141,7 +141,7 @@ namespace vcsn {
   template <typename S, typename T>
   inline
   Element<S, T>
-  op_choose_stareable(const SemiringBase<S>& set, SELECTOR(T))
+  op_choose_stareable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
     std::cerr << "WARNING: default implementation of op_choose_stareable "
       "called." << std::endl;
@@ -153,7 +153,7 @@ namespace vcsn {
   template <typename S, typename T>
   inline
   Element<S, T> 
-  op_choose_non_stareable(const SemiringBase<S>& set, SELECTOR(T))
+  op_choose_non_stareable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
     assert(! "default implementation of op_choose_non_stareable called");
     return T();
@@ -161,7 +161,7 @@ namespace vcsn {
 
   template <typename S, typename T>
   bool 
-  op_parse(const SemiringBase<S>&, 
+  op_parse(const algebra::SemiringBase<S>&, 
 	   T&	  				 w, 
 	   const std::string&			 s, 
 	   typename std::string::const_iterator& i)

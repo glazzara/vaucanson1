@@ -99,12 +99,12 @@ namespace vcsn {
   //! Services of every alphabet implemented with AlphabetDecorator<T>.
   //! See MetaElement<AlphabetSetBase<Self>, T>.
   template<typename L, typename T>
-  struct MetaElement<AlphabetSet<L>, AlphabetDecorator<L, T> >
-    : MetaElement<AlphabetSetBase<AlphabetSet<L> >, AlphabetDecorator<L, T> >
+  struct MetaElement<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> >
+    : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, algebra::AlphabetDecorator<L, T> >
   {
     //! The dynamic properties depends on the implementation one.
     static const bool dynamic_values = 
-    MetaElement<AlphabetSet<L>,T >::dynamic_values;
+    MetaElement<algebra::AlphabetSet<L>,T >::dynamic_values;
 
     //! The meta-symbol that symbolizes all the alphabet's symbols.
     L	joker() const;
@@ -116,19 +116,21 @@ namespace vcsn {
   //! @}
 
   template<typename L, typename T>
-  bool op_contains(const AlphabetSet<L>& s, const AlphabetDecorator<L, T>& a);
+  bool op_contains(const algebra::AlphabetSet<L>& s, 
+		   const algebra::AlphabetDecorator<L, T>& a);
   
   template<typename L, typename T>
-  bool op_is_finite(const AlphabetSet<L>& s, const AlphabetDecorator<L, T>& a);
+  bool op_is_finite(const algebra::AlphabetSet<L>& s, 
+		    const algebra::AlphabetDecorator<L, T>& a);
   
   template<typename L, typename T>
-  bool op_contains_e(const AlphabetSet<L>& s, 
-		     const AlphabetDecorator<L, T>& a, 
+  bool op_contains_e(const algebra::AlphabetSet<L>& s, 
+		     const algebra::AlphabetDecorator<L, T>& a, 
 		     const L& v);
     
   template <typename T, typename L>
-  bool op_letter_equality_modulo(const AlphabetSet<L>& s, 
-				 const AlphabetDecorator<L, T>& a, 
+  bool op_letter_equality(const algebra::AlphabetSet<L>& s, 
+				 const algebra::AlphabetDecorator<L, T>& a, 
 				 L lhs,
 				 L rhs);
 

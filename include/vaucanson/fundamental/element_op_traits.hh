@@ -20,8 +20,8 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENT_OP_TRAITS_HH
 # define VCSN_FUNDAMENTAL_ELEMENT_OP_TRAITS_HH
 
-/** @addtogroup fundamental *//** @{ */
-/** @addtogroup operators *//** @{ */
+/** @addtogroup fundamental *//** @{ */
+/** @addtogroup operators *//** @{ */
 /** 
  * @file element_op_traits.hh
  * @brief Declaration of default arithmetical operator traits for @c Element
@@ -101,7 +101,7 @@ namespace vcsn {
     typedef Element<S1, T1> ret_t;
   };
 
-  /** @} @} */
+  /** @} @} */
 
 } // vcsn
 

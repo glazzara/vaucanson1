@@ -53,8 +53,8 @@ namespace vcsn {
   //! Services of every alphabet implemented with std::set.
   //! See MetaElement<AlphabetSetBase<Self>, T>.
   template<typename L>
-  struct MetaElement<AlphabetSet<L>, std::set<L> >
-    : MetaElement<AlphabetSetBase<AlphabetSet<L> >, std::set<L> >
+  struct MetaElement<algebra::AlphabetSet<L>, std::set<L> >
+    : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, std::set<L> >
   {
     //! An alphabet implemented with std::set is a dynamic value.
     static const bool dynamic_values = true;
@@ -63,13 +63,13 @@ namespace vcsn {
   //! @}
 
   template <typename L>
-  bool op_contains(const AlphabetSet<L>& s, const std::set<L>& a);
+  bool op_contains(const algebra::AlphabetSet<L>& s, const std::set<L>& a);
   
   template <typename L>
-  bool op_is_finite(const AlphabetSet<L>& s, const std::set<L>& a);
+  bool op_is_finite(const algebra::AlphabetSet<L>& s, const std::set<L>& a);
   
   template <typename L>
-  bool op_contains_e(const AlphabetSet<L>& s, const std::set<L>& a, 
+  bool op_contains_e(const algebra::AlphabetSet<L>& s, const std::set<L>& a, 
 		     const L& v);
     
 } // vcsn

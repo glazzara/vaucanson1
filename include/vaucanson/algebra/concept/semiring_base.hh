@@ -69,12 +69,17 @@ namespace vcsn {
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup semiring */ /* @{ */
 
-  /*-----------------------------.
-  | MetaSet<SemiringBase<Self> > |
-  `-----------------------------*/
+  /*------------------------------------.
+  | dynamic_traits<SemiringBase<Self> > |
+  `------------------------------------*/
   template<typename Self>
-  struct MetaSet<algebra::SemiringBase<Self> >
-    : MetaSet<algebra::MonoidBase<Self> >
+  struct dynamic_traits<algebra::SemiringBase<Self> >
+    : dynamic_traits<algebra::MonoidBase<Self> >
+  { };
+
+  template<typename S>
+  struct virtual_types<algebra::SemiringBase<S> >
+    : virtual_types<algebra::MonoidBase<S> >
   { };
 
   /*-----------------------------------.
@@ -138,30 +143,30 @@ namespace vcsn {
    */
   template <typename S, typename T>
   Element<S, T>
-  op_choose_stareable(const SemiringBase<S>& set, SELECTOR(T));
+  op_choose_stareable(const algebra::SemiringBase<S>& set, SELECTOR(T));
 
   /*! operator over SemiringBase<S> that returns a random non-stareable
    *  element in the set.
    */
   template <typename S, typename T>
   Element<S, T> 
-  op_choose_non_stareable(const SemiringBase<S>& set, SELECTOR(T));
+  op_choose_non_stareable(const algebra::SemiringBase<S>& set, SELECTOR(T));
 
 
   template <typename S, typename T>
   bool 
-  op_parse(const SemiringBase<S>&, T& w, 
+  op_parse(const algebra::SemiringBase<S>&, T& w, 
 	const std::string&, 
 	typename std::string::const_iterator&);
 
   template <typename Self, typename T>
-  bool op_stareable(const SemiringBase<Self>& s, const T& v);
+  bool op_stareable(const algebra::SemiringBase<Self>& s, const T& v);
 
   template <typename Self, typename T>
-  void op_in_star(const SemiringBase<Self>& s, T& v);
+  void op_in_star(const algebra::SemiringBase<Self>& s, T& v);
 
   template <typename Self, typename T>
-  T op_default(SELECTOR(SemiringBase<Self>), SELECTOR(T));
+  T op_default(SELECTOR(algebra::SemiringBase<Self>), SELECTOR(T));
 
 } // vcsn
 

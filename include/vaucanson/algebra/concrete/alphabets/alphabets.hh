@@ -51,12 +51,12 @@ namespace vcsn {
   /*! @ingroup alphabet */ /*! @{ */
 
   /*------------------------.
-  | MetaSet<AlphabetSet<L> |
+  | dynamic_traits<AlphabetSet<L> |
   `------------------------*/
   //! meta information about AlphabetSet.
   template<typename L>
-  struct MetaSet<algebra::AlphabetSet<L> >
-    : MetaSet<algebra::AlphabetSetBase<L> >
+  struct dynamic_traits<algebra::AlphabetSet<L> >
+    : dynamic_traits<algebra::AlphabetSetBase<L> >
   { };     
 
   //! @}

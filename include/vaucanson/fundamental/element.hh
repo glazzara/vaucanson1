@@ -26,7 +26,7 @@
  * @file element.hh
  * @brief Declaration of @c Element
  */
-/** @} */
+/** @} */
 
 # include <vaucanson/fundamental/predecls.hh>
 # include <vaucanson/fundamental/meta_element_root.hh>
@@ -112,7 +112,7 @@ namespace vcsn {
     | Constructors from values |
     `-------------------------*/
 
-    /** @{ */
+    /** @{ */
     /** Copy constructor from anonymous values.
      * Note that using this constructor when the structural element is dynamic,
      * leaves the constructed @c Element instance in an incomplete state, 

@@ -22,7 +22,6 @@
 
 # include <iterator>
 # include <set>
-# include <vaucanson/misc/functors.hh>
 # include <vaucanson/misc/random.hh>
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
@@ -97,7 +96,7 @@ namespace vcsn {
   {
     typedef typename Element<S, T>::serie_value_t serie_value_t;
     v.set_initial(state, s.value(), 
-		  zero_as<serie_value_t>::of(ss.series()));
+		  algebra::zero_as<serie_value_t>::of(ss.series()));
   }
 
   template <class S, class T>
@@ -110,7 +109,7 @@ namespace vcsn {
     return typename Element<S, T>::series_elt_t
       (s.series(),
        v.get_initial(state, 
-		     zero_as<AutoType(serie_value_t)>::of(s.series())));
+		     algebra::zero_as<AutoType(serie_value_t)>::of(s.series())));
   }
   
   template <class S, class T>
@@ -121,7 +120,7 @@ namespace vcsn {
 	       const typename Element<S, T>::serie_t& s)
   {
     v.set_final(state, s.value(),
-		zero_as<AutoType(serie_value_t)>::of(ss.series()));
+		algebra::zero_as<AutoType(serie_value_t)>::of(ss.series()));
   }
 
   template <class S, class T>
@@ -134,7 +133,7 @@ namespace vcsn {
     return typename Element<S, T>::series_elt_t
       (s.series(),
        v.get_final(state,
-		   zero_as<AutoType(serie_value_t)>::of(s.series())));
+		   algebra::zero_as<AutoType(serie_value_t)>::of(s.series())));
   }
   
   template <class S, class T>
@@ -207,7 +206,7 @@ namespace vcsn {
 		     hstate_t to)
   {    
     return op_add_serie_edge(s, v, from, to,
-			     identity_as<AutoType(serie_value_t)>::
+			     algebra::identity_as<AutoType(serie_value_t)>::
 			     of(s.series()));
   }
 
@@ -361,7 +360,7 @@ namespace vcsn {
 		    hedge_t e)
   {
     return (op_serie_of(s, v, e) == 
-	    identity_as<AutoType(serie_value_t)>::of(s.series()));
+	    algebra::identity_as<AutoType(serie_value_t)>::of(s.series()));
   }
 
   struct always_true
@@ -387,7 +386,7 @@ namespace vcsn {
       return (op_series_get(s_.series(), 
 			    op_label_of(s_, v_, e),
 			    l_)
-	      != zero_as<AutoType(weight_value_t)>
+	      != algebra::zero_as<AutoType(weight_value_t)>
 	      ::of(s_.series().weights()));
     }
 
@@ -418,9 +417,9 @@ namespace vcsn {
     bool operator()(hedge_t e) const
     {
       return (op_serie_of(s_, v_, e)
-	      .get(identity_as<AutoType(monoid_elt_value_t)>::of
+	      .get(algebra::identity_as<AutoType(monoid_elt_value_t)>::of
 		   (s_.series().monoid()))
-	      != zero_as<AutoType(weight_value_t)>
+	      != algebra::zero_as<AutoType(weight_value_t)>
 	      ::of(s_.series().weights()));
     }
 

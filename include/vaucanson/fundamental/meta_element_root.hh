@@ -22,7 +22,7 @@
 #ifndef VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HH
 # define VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup fundamental *//** @{ */
 /**
  * @file meta_element_root.hh
  * @brief Definition of the specialization of @c MetaElement for the root @c Structure
@@ -34,7 +34,7 @@
 
 namespace vcsn {
 
-  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup fundamental *//** @{ */
 
   /*--------------------------------.
   | MetaElement<Structure<Self>, T> |
@@ -58,7 +58,7 @@ namespace vcsn {
     : SyntacticDecorator<S, T>
   {
   protected:
-    /** @{ */
+    /** @{ */
     /// Protected constructor for class abstraction
     MetaElement(); 
     MetaElement(const MetaElement& other); 

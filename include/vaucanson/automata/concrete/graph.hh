@@ -232,9 +232,9 @@ namespace vcsn {
 // 				 Tag>  > 
 //   {
 //     typedef WordValue			input_monoid_elt_value_t;
-//     typedef typename series_traits<WeightValue>::monoid_elt_value_t 
+//     typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t 
 //     output_monoid_elt_value_t;
-//     typedef typename series_traits<WeightValue>::weight_value_t
+//     typedef typename algebra::series_traits<WeightValue>::weight_value_t
 //     output_weight_value_t;
 //   };
 

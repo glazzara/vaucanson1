@@ -20,7 +20,7 @@
 #ifndef UTILITY_REF_HXX
 #define UTILITY_REF_HXX
 
-# include <vaucanson/misc/ref.hh>
+# include <vaucanson/misc/unchecked/ref.hh>
 
 namespace utility {
 

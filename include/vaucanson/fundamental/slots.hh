@@ -163,12 +163,12 @@ namespace vcsn {
    *
    * The actual implementation of @c SetSlot\<S\>, for a given
    * structural element @c S, depends on the value of @c
-   * MetaSet\<S\>::dynamic_set, which chooses which version of @c
+   * dynamic_traits\<S\>::ret, which chooses which version of @c
    * SetSlotAttribute to inherit from.
    *
    * @see
    *  - @c SetSlotAttribute
-   *  - @c MetaSet
+   *  - @c dynamic_traits
    *  - @c Element
    */
   template<typename S>

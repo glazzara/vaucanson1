@@ -69,21 +69,15 @@ namespace vcsn {
   /*! @addtogroup freemonoid */ /*! @{ */
 
   /*----------------------.
-  | MetaSet<FreeMonoid<A> > |
+  | dynamic_traits<FreeMonoid<A> > |
   `----------------------*/
   //! Meta information about FreeMonoid.
   template<typename A>
-  struct MetaSet<FreeMonoid<A> >
-    : MetaSet<FreeMonoidBase<FreeMonoid<A> > >
+  struct dynamic_traits<algebra::FreeMonoid<A> >
+    : dynamic_traits<algebra::FreeMonoidBase<algebra::FreeMonoid<A> > >
   {
     //! SetWord is dynamic iff its alphabet is.
-    static const bool		dynamic_set = A::dynamic;
-    
-    //! Commonly a free monoid use the multiplication symbol as operation.
-    typedef algebra::mul_kind semigroup_kind;
-    
-    //! The type of the alphabet.
-    typedef A			alphabet_t;
+    static const bool		ret = A::dynamic;
   };
   
   /*----------------------------.
@@ -92,21 +86,21 @@ namespace vcsn {
   //! Services of an element of a free monoid implemented with
   //! FreeMonoid.
   template<typename A, typename T>
-  struct MetaElement<FreeMonoid<A>, T>
-    : MetaElement<FreeMonoidBase<FreeMonoid<A> >, T>
+  struct MetaElement<algebra::FreeMonoid<A>, T>
+    : MetaElement<algebra::FreeMonoidBase<algebra::FreeMonoid<A> >, T>
   {};
   
   /*! @} @} */
-  
-  namespace traits {
+
+  template <class A>
+  struct virtual_types<algebra::FreeMonoid<A> >
+    : virtual_types<algebra::FreeMonoidBase<algebra::FreeMonoid<A> > >
+  {
+    //! Commonly a free monoid use the multiplication symbol as operation.
+    typedef algebra::mul_kind semigroup_kind;
     
-    template <class A>
-    struct virtual_types<FreeMonoid<A> >
-    {
-      typedef A		alphabet_t;
-    };
-    
-  } // traits
+    typedef A		alphabet_t;
+  };
   
 } // vcsn
 

@@ -21,7 +21,7 @@
 #ifndef VCSN_FUNDAMENTAL_STRUCTURE_HH
 # define VCSN_FUNDAMENTAL_STRUCTURE_HH
 
-/** @addtogroup fundamental *//** @{ */
+/** @addtogroup fundamental *//** @{ */
 /**
  * @file structure.hh
  * @brief Definition of class @c Structure, the root of all structural element types
@@ -91,7 +91,7 @@ namespace vcsn {
 
   protected:
 
-    /** @{ */
+    /** @{ */
     /// Protected constructor for class abstraction
     Structure();
     Structure(const Structure& other);
@@ -128,6 +128,15 @@ namespace vcsn {
   {
     static const bool ret = false;
   };
+
+  /*-----------------------------.
+  | virtual_types<Structure<S> > |
+  `-----------------------------*/
+
+  /// Specialization of @c virtual_types for @c Structure.
+  template<typename S>
+  struct virtual_types<Structure<S> >
+  { };
 
   /** @} */   
 

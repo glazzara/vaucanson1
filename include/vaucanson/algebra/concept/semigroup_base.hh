@@ -43,7 +43,7 @@ namespace vcsn {
     {};
 
     //! SemigroupBase is the base class of all structures that are semigroups.
-    /*! All derived classes must define type MetaSet<S>::semigroup_kind.
+    /*! All derived classes must define type virtual_types<S>::semigroup_kind.
      */
     template<class Self>
     struct SemigroupBase : Structure<Self>
@@ -64,12 +64,19 @@ namespace vcsn {
   /*! \addtogroup semigroup */ /* @{ */
 
   /*------------------------------.
-  | MetaSet<SemigroupBase<Self> > |
+  | dynamic_traits<SemigroupBase<Self> > |
   `------------------------------*/
   template<class Self>
-  struct MetaSet<algebra::SemigroupBase<Self> >
-    : MetaSet<Structure<Self> >
+  struct dynamic_traits<algebra::SemigroupBase<Self> >
+    : dynamic_traits<Structure<Self> >
   { };
+
+  template<typename S>
+  struct virtual_types<algebra::SemigroupBase<S> >
+    : virtual_types<Structure<S> >
+  {
+    typedef undefined_type semigroup_kind;
+  };
 
 
   /*-----------------------------------.

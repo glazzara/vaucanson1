@@ -24,11 +24,9 @@
 
 # include <iterator>
 # include <vaucanson/fundamental/fundamental.hh>
-# include <vaucanson/internal/traits.hh>
 # include <vaucanson/automata/concept/handlers.hh>
-# include <vaucanson/automata/concept/history.hh>
 # include <vaucanson/automata/concept/delta_kind.hh>
-# include <vaucanson/algebra/concrete/series/polynoms.hh>
+
 namespace vcsn {
 
   /*! \addtogroup automata */  /* @{ */
@@ -48,7 +46,7 @@ namespace vcsn {
   {
   public:
     //! The type of the series set associated with the automaton.
-    typedef typename traits::virtual_types<Self>::series_t  series_t;
+    typedef typename virtual_types<Self>::series_t  series_t;
 
   protected:
     //! The default constructor is protected since it is an abstract class.
@@ -65,24 +63,24 @@ namespace vcsn {
   // traits for automaton implementation.
   template <typename T>
   struct automaton_traits {
-    typedef traits::undefined_type label_t;
-    typedef traits::undefined_type serie_value_t;
-    typedef traits::undefined_type word_value_t;
-    typedef traits::undefined_type weight_value_t;
-    typedef traits::undefined_type letter_t;
-    typedef traits::undefined_type tag_t;
-    typedef traits::undefined_type states_t;
-    typedef traits::undefined_type state_data_t;
-    typedef traits::undefined_type state_iterator;
-    typedef traits::undefined_type edges_t;
-    typedef traits::undefined_type edge_data_t;
-    typedef traits::undefined_type edge_iterator;
-    typedef traits::undefined_type initial_t;
-    typedef traits::undefined_type initial_iterator;
-    typedef traits::undefined_type initial_support_t;
-    typedef traits::undefined_type final_t;
-    typedef traits::undefined_type final_iterator;
-    typedef traits::undefined_type final_support_t;
+    typedef undefined_type label_t;
+    typedef undefined_type serie_value_t;
+    typedef undefined_type word_value_t;
+    typedef undefined_type weight_value_t;
+    typedef undefined_type letter_t;
+    typedef undefined_type tag_t;
+    typedef undefined_type states_t;
+    typedef undefined_type state_data_t;
+    typedef undefined_type state_iterator;
+    typedef undefined_type edges_t;
+    typedef undefined_type edge_data_t;
+    typedef undefined_type edge_iterator;
+    typedef undefined_type initial_t;
+    typedef undefined_type initial_iterator;
+    typedef undefined_type initial_support_t;
+    typedef undefined_type final_t;
+    typedef undefined_type final_iterator;
+    typedef undefined_type final_support_t;
  };
 
   /*-----------------------------------.

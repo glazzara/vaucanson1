@@ -21,8 +21,8 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENTS_OPS_HH
 # define VCSN_FUNDAMENTAL_ELEMENTS_OPS_HH
 
-/** @addtogroup fundamental *//** @{ */
-/** @addtogroup operators   *//** @{ */
+/** @addtogroup fundamental *//** @{ */
+/** @addtogroup operators   *//** @{ */
 /**
  * @file element_ops.hh
  * @brief Declarations of standard external operator delegations for @c Element

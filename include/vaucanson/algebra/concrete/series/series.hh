@@ -57,36 +57,33 @@ namespace vcsn {
   `-----------------------------*/
   
   template <class W, class M, class T>
-  struct MetaElement<Series<W, M>, T> :
-    public MetaElement<SeriesBase<Series<W, M> >, T>
+  struct MetaElement<algebra::Series<W, M>, T> :
+    public MetaElement<algebra::SeriesBase<algebra::Series<W, M> >, T>
   { };
 
-    /*----------------------.
-    | MetaSet<Series<W, M>> |
-    `----------------------*/
+    /*-----------------------------.
+    | dynamic_traits<Series<W, M>> |
+    `-----------------------------*/
 
-    template<typename W, typename M>
-    struct MetaSet<Series<W, M> >
-      : MetaSet<SeriesBase<Series<W, M> > >
-    {
-      typedef algebra::mul_kind semigroup_kind;
-
-      static const bool dynamic_set = 
-      MetaSet<W>::dynamic_set || MetaSet<M>::dynamic_set;
-		       
-    };
-
-  namespace traits {
-
-    template<typename W, typename M>
-    struct virtual_types<algebra::Series<W, M> >
-    {
-      typedef W weights_t;
-      typedef M monoid_t;
-    };
-
-  } // traits
-
+  template<typename W, typename M>
+  struct dynamic_traits<algebra::Series<W, M> >
+    : dynamic_traits<algebra::SeriesBase<algebra::Series<W, M> > >
+  {
+    static const bool ret = 
+      dynamic_traits<W>::ret || dynamic_traits<M>::ret;
+    
+  };
+  
+  template<typename W, typename M>
+  struct virtual_types<algebra::Series<W, M> >
+    : virtual_types<algebra::SeriesBase<algebra::Series<W, M> > >
+  {
+    typedef algebra::mul_kind semigroup_kind;
+    
+    typedef W weights_t;
+    typedef M monoid_t;
+  };
+  
 } // vcsn
 
 template<typename W, typename M>

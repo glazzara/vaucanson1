@@ -55,88 +55,87 @@ namespace vcsn {
 
   } // algebra 
 
-  using namespace algebra;
-
   /*-------------------------------------.
   | MetaElement<FreeMonoidBase<Self>, T> |
   `-------------------------------------*/
   template <class Self, typename T>
   size_t 
-  MetaElement<FreeMonoidBase<Self>, T>::length() const
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::length() const
   { 
     return op_size(this->set(), this->value()); 
   }
 
   template <class Self, typename T>
   void
-  MetaElement<FreeMonoidBase<Self>, T>::mirror()
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::mirror()
   {
     op_in_mirror(this->set(), this->value());
   }
 
   template <class Self, typename T>
-  typename MetaElement<FreeMonoidBase<Self>, T>::iterator 
-  MetaElement<FreeMonoidBase<Self>, T>::begin() 
+  typename MetaElement<algebra::FreeMonoidBase<Self>, T>::iterator 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::begin() 
   { 
     return op_begin(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
-  typename MetaElement<FreeMonoidBase<Self>, T>::const_iterator 
-  MetaElement<FreeMonoidBase<Self>, T>::begin() const
+  typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_iterator 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::begin() const
   { 
     return op_begin_const(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
-  typename MetaElement<FreeMonoidBase<Self>, T>::reverse_iterator 
-  MetaElement<FreeMonoidBase<Self>, T>::rbegin()
+  typename MetaElement<algebra::FreeMonoidBase<Self>, T>::reverse_iterator 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::rbegin()
   { 
     return op_rbegin(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
-  typename MetaElement<FreeMonoidBase<Self>, T>::const_reverse_iterator 
-  MetaElement<FreeMonoidBase<Self>, T>::rbegin() const
+  typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_reverse_iterator 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::rbegin() const
   { 
     return op_rbegin(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
-  typename MetaElement<FreeMonoidBase<Self>, T>::iterator 
-  MetaElement<FreeMonoidBase<Self>, T>::end() 
+  typename MetaElement<algebra::FreeMonoidBase<Self>, T>::iterator 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::end() 
   { 
     return op_end(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
-  typename MetaElement<FreeMonoidBase<Self>, T>::const_iterator 
-  MetaElement<FreeMonoidBase<Self>, T>::end() const
+  typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_iterator 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::end() const
   { 
     return op_end(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
-  typename MetaElement<FreeMonoidBase<Self>, T>::reverse_iterator 
-  MetaElement<FreeMonoidBase<Self>, T>::rend()
+  typename MetaElement<algebra::FreeMonoidBase<Self>, T>::reverse_iterator 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::rend()
   { 
     return op_rend(this->set(), this->value()); 
   }
     
   template <class Self, typename T>
-  typename MetaElement<FreeMonoidBase<Self>, T>::const_reverse_iterator 
-  MetaElement<FreeMonoidBase<Self>, T>::rend() const
+  typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_reverse_iterator 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::rend() const
   { 
     return op_rend(this->set(), this->value()); 
   }
 
   template <class Self, typename T>
-  MetaElement<FreeMonoidBase<Self>, T>::MetaElement() 
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::MetaElement() :
+    MetaElement<algebra::MonoidBase<Self>, T>()
   {}
     
   template <class Self, typename T>
-  MetaElement<FreeMonoidBase<Self>, T>::MetaElement(const MetaElement& o) :
-    MetaElement<MonoidBase<Self>, T>(o)
+  MetaElement<algebra::FreeMonoidBase<Self>, T>::MetaElement(const MetaElement& o)  :
+    MetaElement<algebra::MonoidBase<Self>, T>(o)
   {}
 
   /*-------------------.
@@ -166,7 +165,7 @@ namespace vcsn {
   // specialized this function according to your alphabet if this
   // is not the case.
   template <typename S, typename T>
-  bool op_parse(const FreeMonoidBase<S>& set, T& v, 
+  bool op_parse(const algebra::FreeMonoidBase<S>& set, T& v, 
 		const std::string& s, 
 		typename std::string::const_iterator& i)
   {
@@ -182,13 +181,13 @@ namespace vcsn {
 
   template <typename Self, typename T>
   void 
-  op_in_mirror(const FreeMonoidBase<Self>& s, T& v)
+  op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v)
   {
     const T		new_v(v);
-    typename MetaElement<FreeMonoidBase<Self>, T>::iterator  it 
+    typename MetaElement<algebra::FreeMonoidBase<Self>, T>::iterator  it 
       = op_begin(s.self(), v);
 
-    for (typename MetaElement<FreeMonoidBase<Self>, T>::
+    for (typename MetaElement<algebra::FreeMonoidBase<Self>, T>::
 	   const_reverse_iterator i = op_rbegin(s.self(), new_v);
 	 i != op_rend(s.self(), new_v);
 	 ++i)
@@ -197,7 +196,7 @@ namespace vcsn {
 
   template <typename Self, typename T>
   bool 
-  op_contains(const FreeMonoidBase<Self>& s, const T& v)
+  op_contains(const algebra::FreeMonoidBase<Self>& s, const T& v)
   { 
     typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
@@ -211,7 +210,7 @@ namespace vcsn {
 
   template <typename Self, typename St, typename T>
   St& 
-  op_rout(const FreeMonoidBase<Self>& s,
+  op_rout(const algebra::FreeMonoidBase<Self>& s,
 	  St& st, 
 	  const T& v)
   {

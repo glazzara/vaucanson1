@@ -47,24 +47,31 @@ namespace vcsn {
   /*! \addtogroup semiring */ /* @{ */
   
   /*---------------------------.
-  | MetaSet<NumericalSemiring> |
+  | dynamic_traits<NumericalSemiring> |
   `---------------------------*/
-  //! MetaSet<NumericalSemiring> defines meta information about then
+  //! dynamic_traits<NumericalSemiring> defines meta information about then
   //! NumericalSemiring structural element. 
   template<>
-  struct MetaSet<NumericalSemiring>
-    : MetaSet<SemiringBase<NumericalSemiring> >
+  struct dynamic_traits<algebra::NumericalSemiring>
+    : dynamic_traits<algebra::SemiringBase<algebra::NumericalSemiring> >
+  {
+  };
+
+
+  template<>
+  struct virtual_types<algebra::NumericalSemiring>
+    : virtual_types<algebra::SemiringBase<algebra::NumericalSemiring> >
   {
     //! We can see a NumericalSemiring as a semigroup with +. It is
     //! an arbitrary decision, it could be mul_kind too.
-    typedef           add_kind    semigroup_kind;
+    typedef           algebra::add_kind    semigroup_kind;
   };
 
   //! MetaElement<NumericalSemiring, T> defines the services of
   //! element of numerical semirings. 
   template<typename T>
-  struct MetaElement<NumericalSemiring, T>
-    : MetaElement<SemiringBase<NumericalSemiring>, T>
+  struct MetaElement<algebra::NumericalSemiring, T>
+    : MetaElement<algebra::SemiringBase<algebra::NumericalSemiring>, T>
   {};
 
   /*! @} @} */

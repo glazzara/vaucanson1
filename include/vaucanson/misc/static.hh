@@ -175,7 +175,7 @@ namespace utility {
     static_pow_compute<N, P, ((P % 2) == 0)>::value - 1;
   };
 
-  /** @} */
+  /** @} */
 
 } // utility
 

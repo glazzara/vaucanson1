@@ -40,17 +40,24 @@ namespace vcsn {
   /*! \addtogroup semiring */ /* @{ */
 
   /*----------------------------------------------------.
-  | MetaSet : traits about the set of tropical semiring |
+  | dynamic_traits : traits about the set of tropical semiring |
   `----------------------------------------------------*/
   //! Meta information about the tropical semirings.
   template<class TropicalKind>
-  struct MetaSet<TropicalSemiring<TropicalKind> >
-    : MetaSet<SemiringBase<TropicalSemiring<TropicalKind> > >
+  struct dynamic_traits<algebra::TropicalSemiring<TropicalKind> >
+    : dynamic_traits<algebra::SemiringBase<algebra::TropicalSemiring<TropicalKind> > >
+  {
+  };
+
+  template<class TropicalKind>
+  struct virtual_types<algebra::TropicalSemiring<TropicalKind> >
+    : virtual_types<algebra::SemiringBase<algebra::TropicalSemiring<TropicalKind> > >
   {
     //! We can see a NumericalSemiring as a semigroup with +. It is
     //! an arbitrary decision, it could be mul_kind too.
-    typedef add_kind	semigroup_kind;
+    typedef algebra::add_kind	semigroup_kind;
   };
+  
 
   /*! @} @} */
   
@@ -107,8 +114,8 @@ namespace vcsn {
   `---------------------------------------*/
   //! Services of element of a tropical semiring.
   template<class TropicalKind, typename T>
-  struct MetaElement<TropicalSemiring<TropicalKind> , T>
-    : MetaElement<SemiringBase<TropicalSemiring<TropicalKind> >, T>
+  struct MetaElement<algebra::TropicalSemiring<TropicalKind> , T>
+    : MetaElement<algebra::SemiringBase<algebra::TropicalSemiring<TropicalKind> >, T>
   {};
 
   //! @}

@@ -94,6 +94,6 @@ namespace std
   void swap(utility::ref<T>& a, utility::ref<T>& b);
 } // std
 
-# include <vaucanson/misc/ref.hxx>
+# include <vaucanson/misc/unchecked/ref.hxx>
 
 #endif

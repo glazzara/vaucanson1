@@ -46,7 +46,7 @@ namespace vcsn {
       : MonoidBase<Self>
     {
       /*! The type of the alphabet A. */ 
-      typedef typename traits::virtual_types<Self>::alphabet_t  alphabet_t;
+      typedef typename virtual_types<Self>::alphabet_t  alphabet_t;
 
       /*! The type of letter hold by the alphabet. */
       typedef typename alphabet_t::letter_t			letter_t;
@@ -72,21 +72,28 @@ namespace vcsn {
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup freemonoid */ /* @{ */
 
-  /*-------------------------------.
-  | MetaSet<FreeMonoidBase<Self> > |
-  `-------------------------------*/
+  /*--------------------------------------.
+  | dynamic_traits<FreeMonoidBase<Self> > |
+  `--------------------------------------*/
   template<class Self>
-  struct MetaSet<algebra::FreeMonoidBase<Self> >
-    : MetaSet<algebra::MonoidBase<Self> >
+  struct dynamic_traits<algebra::FreeMonoidBase<Self> >
+    : dynamic_traits<algebra::MonoidBase<Self> >
   { };
+
+  template<typename S>
+  struct virtual_types<algebra::FreeMonoidBase<S> >
+    : virtual_types<algebra::MonoidBase<S> >
+  { 
+    typedef undefined_type alphabet_t;
+  };
 
   /*-------------------------------------.
   | MetaElement<FreeMonoidBase<Self>, T> |
   `-------------------------------------*/
   //! Element of a free monoid ie words.
   template<class Self, typename T>
-  struct MetaElement<FreeMonoidBase<Self>, T>
-    : MetaElement<MonoidBase<Self>, T>
+  struct MetaElement<algebra::FreeMonoidBase<Self>, T>
+    : MetaElement<algebra::MonoidBase<Self>, T>
   {
     //! iterator over the word.
     typedef typename op_begin_traits<Self, T>::ret_t	iterator;
@@ -155,18 +162,18 @@ namespace vcsn {
   /*! @} @} */
 
   template <typename S, typename T>
-  bool op_parse(const FreeMonoidBase<S>& s, T& v, 
+  bool op_parse(const algebra::FreeMonoidBase<S>& s, T& v, 
 		const std::string&, 
 		typename std::string::const_iterator&);
 
   template<typename Self, typename T>
-  void op_in_mirror(const FreeMonoidBase<Self>& s, T& v);
+  void op_in_mirror(const algebra::FreeMonoidBase<Self>& s, T& v);
 
   template<typename Self, typename T>
-  bool op_contains(const FreeMonoidBase<Self>& s, const T& v);
+  bool op_contains(const algebra::FreeMonoidBase<Self>& s, const T& v);
 
   template<typename Self, typename St, typename T>
-  St& op_rout(const FreeMonoidBase<Self>& s, St& st, const T& v);
+  St& op_rout(const algebra::FreeMonoidBase<Self>& s, St& st, const T& v);
 
 } // vcsn
 

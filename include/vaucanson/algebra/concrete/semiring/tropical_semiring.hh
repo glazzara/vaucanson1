@@ -23,13 +23,8 @@
 # define ALGEBRA_TROPICAL_SEMIRING_HH
 
 # include <vaucanson/algebra/concept/tropical_semiring.hh>
-# include <vaucanson/misc/numerical_constraints.hh>
-# include <vaucanson/misc/random.hh>
 
 namespace vcsn {
-
-//  FIXME: problem with namespaces
-//  namespace algebra {
 
     // We provide a generic implementation of tropical semirings
     // formed with C++-builtins and standard operations (std::min,
@@ -40,99 +35,99 @@ namespace vcsn {
     `---------------*/
     template<class TropicalKind, typename T> 
     inline
-    T identity_value(SELECTOR(TropicalSemiring<TropicalKind>), SELECTOR(T));
+    T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>), SELECTOR(T));
         
     template<typename T>
     inline
-    T zero_value(SELECTOR(TropicalSemiring<TropicalMax>), SELECTOR(T));
+    T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T));
 
     template<typename T>
     inline
-    T zero_value(SELECTOR(TropicalSemiring<TropicalMin>), SELECTOR(T));
+    T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T));
 
     /*------------.
     | op_contains |
     `------------*/
     template<class TropicalKind, typename T>
     inline
-    bool op_contains(const TropicalSemiring<TropicalKind>& s, T c);
+    bool op_contains(const algebra::TropicalSemiring<TropicalKind>& s, T c);
  
     /*--------------------.
     | Multiplication is + |
     `--------------------*/
     template<class TropicalKind, typename T, typename U>
     inline
-    void op_in_mul(const TropicalSemiring<TropicalKind>& s1,
+    void op_in_mul(const algebra::TropicalSemiring<TropicalKind>& s1,
 		   T& dst, U arg);
 
     template<class TropicalKind, typename T, typename U>
     inline
-    T op_mul(const TropicalSemiring<TropicalKind>& s, T a, U b);
+    T op_mul(const algebra::TropicalSemiring<TropicalKind>& s, T a, U b);
 
     /*---------.
     | Addition |
     `---------*/
     template<typename T, typename U>
     inline
-    void op_in_add(const TropicalSemiring<TropicalMax>& s1,
+    void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s1,
 		   T& dst, U arg);
 
     template<typename T, typename U>
-    void op_in_add(const TropicalSemiring<TropicalMin>& s1,
+    void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMin>& s1,
 		   T& dst, U arg);
 
     template<typename T, typename U>
-    T op_add(const TropicalSemiring<TropicalMax>& s, T a, U b);
+    T op_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s, T a, U b);
 
     template<typename T, typename U>
-    T op_add(const TropicalSemiring<TropicalMin>& s, T a, U b);
+    T op_add(const algebra::TropicalSemiring<algebra::TropicalMin>& s, T a, U b);
 
     /*-----.
     | Star |
     `-----*/
     template <typename T>
     static inline bool 
-    op_stareable(const TropicalSemiring<TropicalMin>& s, T b);
+    op_stareable(const algebra::TropicalSemiring<algebra::TropicalMin>& s, T b);
 
     template <class T>
     static inline void 
-    op_in_star(const TropicalSemiring<TropicalMin>& s, T& b);
+    op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>& s, T& b);
 
     template <typename T>
     static inline bool 
-    op_stareable(const TropicalSemiring<TropicalMax>& s, T b);
+    op_stareable(const algebra::TropicalSemiring<algebra::TropicalMax>& s, T b);
 
     template <class T>
     static inline void 
-    op_in_star(const TropicalSemiring<TropicalMax>& s, T& b);
+    op_in_star(const algebra::TropicalSemiring<algebra::TropicalMax>& s, T& b);
     
     template <class TropicalKind, class T>
-    Element<TropicalSemiring<TropicalKind>, T>
-    op_choose(const TropicalSemiring<TropicalKind>& set, SELECTOR(T));
+    Element<algebra::TropicalSemiring<TropicalKind>, T>
+    op_choose(const algebra::TropicalSemiring<TropicalKind>& set, SELECTOR(T));
     
     template <class TropicalKind, typename T>
     bool
-    op_can_choose_non_stareable(const TropicalSemiring<TropicalKind>& set,
+    op_can_choose_non_stareable(const algebra::TropicalSemiring<TropicalKind>& set,
 			    SELECTOR(T));
 
     template <class TropicalKind, typename T>
-    Element<TropicalSemiring<TropicalKind>, T>
-    op_choose_stareable(const TropicalSemiring<TropicalKind>& set,
+    Element<algebra::TropicalSemiring<TropicalKind>, T>
+    op_choose_stareable(const algebra::TropicalSemiring<TropicalKind>& set,
 			SELECTOR(T));
 
     template <class TropicalKind, typename T>
-    Element<TropicalSemiring<TropicalKind>, T>
-    op_choose_non_stareable(const TropicalSemiring<TropicalKind>& set,
+    Element<algebra::TropicalSemiring<TropicalKind>, T>
+    op_choose_non_stareable(const algebra::TropicalSemiring<TropicalKind>& set,
 			    SELECTOR(T));
 
     /*---------------.
     | Pretty printer |
     `---------------*/
     template<typename St, typename T>
-    St& op_rout(const TropicalSemiring<TropicalMax>& s, St& st, const T& v);
+    St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMax>& s, St& st, const T& v);
 
     template<typename St, typename T>
-    St& op_rout(const TropicalSemiring<TropicalMin>& s, St& st, const T& v);
+    St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>& s, St& st, const T& v);
 
 //  } // algebra
 

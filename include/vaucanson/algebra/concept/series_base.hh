@@ -41,10 +41,10 @@ namespace vcsn {
       : SemiringBase<Self>
     {
       //! The type of the free monoid A*.
-      typedef typename traits::virtual_types<Self>::monoid_t  monoid_t;
+      typedef typename virtual_types<Self>::monoid_t  monoid_t;
 
       //! The type of the semiring K.
-      typedef typename traits::virtual_types<Self>::weights_t weights_t;
+      typedef typename virtual_types<Self>::weights_t weights_t;
 
       //! Accessor to the monoid (const version).
       const monoid_t&	monoid() const;      
@@ -70,20 +70,20 @@ namespace vcsn {
     template<typename T>
     struct series_traits
     {
-      typedef traits::undefined_type	monoid_value_t;
-      typedef traits::undefined_type	weight_value_t;
+      typedef undefined_type	monoid_value_t;
+      typedef undefined_type	weight_value_t;
     };
 
     template <typename T, typename W, typename M>
     struct mute_serie_impl
     {
-      typedef traits::undefined_type	ret;
+      typedef undefined_type	ret;
     };
 
     template <typename T, typename W, typename M>
     struct mute_series_traits
     {
-      typedef traits::undefined_type    ret;
+      typedef undefined_type    ret;
     };
 
     /*! @} @} */
@@ -93,28 +93,36 @@ namespace vcsn {
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup series */ /* @{ */
 
-  /*---------------------------.
-  | MetaSet<SeriesBase<Self> > |
-  `---------------------------*/
+  /*----------------------------------.
+  | dynamic_traits<SeriesBase<Self> > |
+  `----------------------------------*/
   template<typename Self>
-  struct MetaSet<algebra::SeriesBase<Self> >
-    : MetaSet<algebra::SemiringBase<Self> >
+  struct dynamic_traits<algebra::SeriesBase<Self> >
+    : dynamic_traits<algebra::SemiringBase<Self> >
   {};
 
+  template<typename S>
+  struct virtual_types<algebra::SeriesBase<S> >
+    : virtual_types<algebra::SemiringBase<S> >
+  {
+    typedef undefined_type monoid_t;
+    typedef undefined_type weights_t;
+  };
+  
   /*---------------------------------.
   | MetaElement<SeriesBase<Self>, T> |
   `---------------------------------*/
   //! Services of every serie.
   template<class Self, typename T>
-  class MetaElement<SeriesBase<Self>, T> 
-    : public MetaElement<SemiringBase<Self>, T>
+  class MetaElement<algebra::SeriesBase<Self>, T> 
+    : public MetaElement<algebra::SemiringBase<Self>, T>
   {
   public:
     //! type of the implementation of weight (element of semiring).
-    typedef typename series_traits<T>::weight_value_t   weight_value_t;
+    typedef typename algebra::series_traits<T>::weight_value_t   weight_value_t;
 
     //! type of the implementation of free monoid element.
-    typedef typename series_traits<T>::monoid_value_t    monoid_value_t;
+    typedef typename algebra::series_traits<T>::monoid_value_t    monoid_value_t;
 
     //! type of the element of the semiring element.
     typedef Element<typename Self::weights_t, weight_value_t> weight_t;
@@ -126,7 +134,7 @@ namespace vcsn {
     typedef Element<Self, T>				 element_t;
 
     //! type of the iterator over the series when finite.
-    typedef typename series_traits<T>::support_t	support_t;
+    typedef typename algebra::series_traits<T>::support_t	support_t;
 
     //! returns the weight associated to a word. 
     weight_value_t	value_get(const monoid_value_t& m) const;
@@ -167,7 +175,7 @@ namespace vcsn {
   //! returns a fresh serie that is the transposed of the argument.
   template <typename S, typename T>
   Element<S, T>
-  transpose(const SeriesBase<S>& s, const T& t);
+  transpose(const algebra::SeriesBase<S>& s, const T& t);
 
   //! returns true if the support of the serie is only composed of
   //! letters.
@@ -189,23 +197,23 @@ namespace vcsn {
 
   template <typename S, typename T>
   bool	
-  op_is_finite_app(const SeriesBase<S>& s, const T& t);
+  op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t);
 
   template <typename S, typename T>
-  typename MetaElement<SeriesBase<S>, T>::monoid_elt_t 
+  typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t 
 
-  op_choose_from_supp(const SeriesBase<S>& s, const T& t);
+  op_choose_from_supp(const algebra::SeriesBase<S>& s, const T& t);
 
   template <class S, class T>
-  Element<S, T> op_series_choose(const SeriesBase<S>& s, SELECTOR(T));
+  Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T));
   
   template <typename S, typename T, typename M, typename W>
   void	
-  op_series_set(const SeriesBase<S>& s, const T& t, const W& w);
+  op_series_set(const algebra::SeriesBase<S>& s, const T& t, const W& w);
 
   template <class S, class T>
-  typename series_traits<T>::support_t
-  op_support(const SeriesBase<S>&, const T& v);
+  typename algebra::series_traits<T>::support_t
+  op_support(const algebra::SeriesBase<S>&, const T& v);
 
 } // vcsn
 

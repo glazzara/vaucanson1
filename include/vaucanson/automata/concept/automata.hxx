@@ -23,7 +23,6 @@
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX
 
 #include <vaucanson/automata/concept/automata_base.hh>
-#include <vaucanson/misc/ref.hh>
 
 namespace vcsn {
 

@@ -77,18 +77,21 @@ namespace vcsn {
     /*! @} @} */
 
   } // algebra
-
-  using namespace algebra;
   
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup monoid */ /* @{ */
 
   /*---------------------------.
-  | MetaSet<MonoidBase<Self> > |
+  | dynamic_traits<MonoidBase<Self> > |
   `---------------------------*/
   template<class Self>
-  struct MetaSet<MonoidBase<Self> >
-    : MetaSet<SemigroupBase<Self> >
+  struct dynamic_traits<algebra::MonoidBase<Self> >
+    : dynamic_traits<algebra::SemigroupBase<Self> >
+  { };
+
+  template<typename S>
+  struct virtual_types<algebra::MonoidBase<S> >
+    : virtual_types<algebra::SemigroupBase<S> >
   { };
 
   /*---------------------------------.
@@ -96,8 +99,8 @@ namespace vcsn {
   `---------------------------------*/
   //! Defines services of element of every monoid.
   template<class Self, typename T>
-  struct MetaElement<MonoidBase<Self>, T> 
-    : MetaElement<SemigroupBase<Self>, T>
+  struct MetaElement<algebra::MonoidBase<Self>, T> 
+    : MetaElement<algebra::SemigroupBase<Self>, T>
   { 
   protected:
     //! Default constructor is protected since it is an abstract class.
@@ -110,7 +113,7 @@ namespace vcsn {
   /*! @} @} */
 
   template<typename T, typename Self>
-  T op_default(SELECTOR(MonoidBase<Self>), SELECTOR(T));
+  T op_default(SELECTOR(algebra::MonoidBase<Self>), SELECTOR(T));
 
 } // vcsn
 
