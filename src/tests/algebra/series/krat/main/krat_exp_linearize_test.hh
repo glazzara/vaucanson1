@@ -85,9 +85,6 @@ bool krat_exp_linearize_test(tests::Tester& tg)
       std::list<typename linearize_element_t::letter_t>
 				llin = flatten(lin);
 
-      std::cerr << "TEST: in: " << exp << std::endl;
-      std::cerr << "TEST: out: " << lin << std::endl;
-
       typename std::list<letter_t>::const_iterator j = lexp.begin();
       typename std::list<typename linearize_element_t::letter_t>::
 	const_iterator i = llin.begin();
@@ -98,6 +95,8 @@ bool krat_exp_linearize_test(tests::Tester& tg)
 	      lin.set().monoid().alphabet().value().end())
 	    {
 	      success = false;
+	      std::cerr << "TEST: in: " << exp << std::endl;
+	      std::cerr << "TEST: out: " << lin << std::endl;
 	      std::cerr << "FAIL: Letter not in alphabet: " << *i << "."
 			<< std::endl;
 	    }
@@ -106,6 +105,8 @@ bool krat_exp_linearize_test(tests::Tester& tg)
 	  if ((t = count(llin.begin(), llin.end(), *i)) != 1)
 	    {
 	      success = false;
+	      std::cerr << "TEST: in: " << exp << std::endl;
+	      std::cerr << "TEST: out: " << lin << std::endl;
 	      std::cerr << "FAIL: Letter <<" << *i << ">> found " << t
 			<< " times in the expression instead of 1."
 			<< std::endl;
@@ -114,6 +115,8 @@ bool krat_exp_linearize_test(tests::Tester& tg)
 	  if (i->first != *j)
 	    {
 	      success = false;
+	      std::cerr << "TEST: in: " << exp << std::endl;
+	      std::cerr << "TEST: out: " << lin << std::endl;
 	      std::cerr << "FAIL: Letter <<" << *i << ">> in the linearized"
 		"expression does not match letter " << *j << " in the "
 		"base expression." << std::endl;

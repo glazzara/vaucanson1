@@ -69,9 +69,9 @@ bool free_monoid_test(tests::Tester& t)
 	  while (alpha.contains(l));
 	  alpha.insert(l);
 	}
-      std::ostringstream astr;
-      astr << alpha;
-      TEST_MSG("Alphabet is " + astr.str() + ".");
+      std::ostringstream os;
+      os << alpha.size();
+      TEST_MSG("Alphabet has " + os.str() + " characters.");
 
       freemonoid_t		freemonoid (alpha);
       const freemonoid_t	const_freemonoid (alpha);
