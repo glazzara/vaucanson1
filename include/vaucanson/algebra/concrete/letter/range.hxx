@@ -32,8 +32,10 @@ namespace vcsn {
     template <class T, class Interval>
     static_ranged<T, Interval>::static_ranged(const T& v)
     {
-      Interval::check(v);
-      value_ = v;
+      if (Interval::check(v))
+	value_ = v;
+      else
+	value_ = Interval::from();
     }
 
     template <class T, class Interval>

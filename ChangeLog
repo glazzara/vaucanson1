@@ -1,3 +1,9 @@
+2003-02-13  Maxime Rey  <max@lrde.epita.fr>
+
+	* /include/vaucanson/algebra/concrete/letter/range.hxx :
+	static_ranged work now
+	* doc/tutorial/tutorial.tex: upgrade
+
 2003-02-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.151)
 	
