@@ -1,4 +1,11 @@
 2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime_composition.hh,
+	* include/vaucanson/algorithms/realtime_composition.hxx: Add overloaded
+	version of realtime_composition, that returns the composition of the
+	two given automaton.
+
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	Include Sylvain Lombardy's modified closure. The algorithm is now 
 	really faster. 
 	

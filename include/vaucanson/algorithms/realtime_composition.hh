@@ -56,6 +56,12 @@ namespace vcsn {
 		       const Element<S, T>&,
 		       Element<S, T>&);
 
+  /// Composition for realtime transducers.
+  template< typename S, typename T>
+  Element<S, T>
+  realtime_composition(const Element<S, T>&,
+		       const Element<S, T>&);
+
   /** @} */
 
 }

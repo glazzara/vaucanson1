@@ -177,6 +177,16 @@ namespace vcsn {
     do_realtime_composition(lhs.structure(), lhs, rhs, ret);
   }
 
+  
+  template< typename S, typename T>
+  Element<S, T>
+  realtime_composition(const Element<S, T>& lhs,
+		       const Element<S, T>& rhs)
+  {
+    Element<S, T> ret (lhs.structure());
+    do_realtime_composition(lhs.structure(), lhs, rhs, ret);
+    return ret;
+  }
 }
 
 #endif // ! VCSN_ALGORITHMS_REALTIME_COMPOSITION_HXX
