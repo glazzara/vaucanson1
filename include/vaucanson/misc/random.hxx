@@ -22,12 +22,9 @@
 # define VCSN_MISC_RANDOM_HXX
 
 # include <vaucanson/misc/random.hh>
+# include <vaucanson/misc/limits.hh>
+
 # include <cstdlib>
-#ifdef USE_C_LIMTS
-# include <climits>
-#else
-# include <limits>
-#endif
 # include <vector>
 
 namespace utility {
@@ -65,12 +62,7 @@ namespace utility {
     template<>
     int generate<int>()
     {
-      // FIXME: is RAND_MAX always large enough ?
-#ifdef USE_C_LIMITS
-      return rand() % INT_MAX;
-#else
-      return rand() % std::numeric_limits<int>::max();
-#endif
+      return rand() % utility::limits<int>::max();
     }
 
     template<>

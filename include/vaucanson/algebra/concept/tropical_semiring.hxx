@@ -25,7 +25,7 @@
 # define ALGEBRA_CONCEPT_TROPICAL_SEMIRING_HXX
 
 # include <vaucanson/algebra/concept/tropical_semiring.hh>
-# include <limits>
+# include <vaucanson/misc/limits.hh>
 
 namespace vcsn
 {
@@ -36,7 +36,8 @@ namespace vcsn
     T
     TropicalMin::NonStareableInterval<T>::inf()
     {
-      return -std::numeric_limits<T>::max();
+      // FIXME: this code smells. It lacks documentation.
+      return -utility::limits<T>::max();
     }
     
     template <class T>
@@ -60,7 +61,7 @@ namespace vcsn
     T
     TropicalMax::NonStareableInterval<T>::sup()
     {
-      return std::numeric_limits<T>::max();
+      return utility::limits<T>::max();
     }
     
   } // algebra

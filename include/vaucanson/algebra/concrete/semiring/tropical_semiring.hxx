@@ -25,7 +25,7 @@
 # include <vaucanson/config/system.hh>
 # include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
 # include <vaucanson/misc/random.hh>
-# include <limits>
+# include <vaucanson/misc/limits.hh>
 
 namespace vcsn {
 
@@ -43,14 +43,14 @@ namespace vcsn {
     inline
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T))
     { 
-      return std::numeric_limits<T>::min(); 
+      return utility::limits<T>::min(); 
     }
 
     template<typename T>
     inline
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T))
     { 
-      return std::numeric_limits<T>::max(); 
+      return utility::limits<T>::max(); 
     }
 
     /*------------.

@@ -26,6 +26,8 @@
 # include <vaucanson/algebra/concept/semiring_base.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 # include <vaucanson/misc/random.hh>
+# include <vaucanson/misc/limits.hh>
+# include <vaucanson/misc/contract.hh>
 
 namespace vcsn {
 
@@ -201,10 +203,11 @@ namespace vcsn {
 
   inline void op_in_star(const algebra::NumericalSemiring& s, float& f)
   { 
+    static_assertion(utility::limits<float>::has_infinity, "");
     if (f < 1.0)
       f = (1.0 / (1.0 - f));
     else
-      f = std::numeric_limits<float>::infinity();
+      f = utility::limits<float>::infinity();
   }
 
   inline void op_in_star(const algebra::NumericalSemiring& s, double& f)

@@ -20,6 +20,7 @@ nobase_include_HEADERS =					     \
 	vaucanson/misc/unique.hcc				       \
 	vaucanson/misc/unique.hxx				       \
 	vaucanson/misc/utility.hh				       \
+	vaucanson/misc/limits.hh				       \
 	vaucanson/misc/contract.hh				       \
 	vaucanson/misc/support.hh				       \
 	vaucanson/misc/support.hxx				       \

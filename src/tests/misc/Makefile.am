@@ -6,8 +6,9 @@ include $(srcdir)/../check/Makefile.check
 
 XFAIL_TESTS = assert_test$(EXEEXT)
 
-check_PROGRAMS = assert_test koenig unique selectors static random
+check_PROGRAMS = assert_test koenig unique selectors static random limits
 
+limits_SOURCES = limits.cc
 assert_test_SOURCES = assert_test.cc
 koenig_SOURCES = koenig.cc
 unique_SOURCES = unique.cc
