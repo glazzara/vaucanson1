@@ -23,7 +23,11 @@
 
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
+# include <vaucanson/algebra/concrete/series/series.hh>
+# include <vaucanson/algebra/concrete/alphabets/alphabets.hh>
+# include <vaucanson/algebra/concrete/free_monoid/words.hh>
 # include <vaucanson/algebra/concrete/letter/couple_letter.hh>
+# include <vaucanson/algebra/concrete/series/krat.hh>
 
 namespace vcsn {
 
@@ -42,10 +46,17 @@ namespace vcsn {
     // Build it !
     typedef int							index_t;
     typedef std::pair<orig_letter_t, index_t>			letter_t;
+    // FIXME: Here, we want X<letter_t> where X is the type of the alphabet
+    // FIXME: concept. See next FIXME.
     typedef AlphabetSet<letter_t>				alphabets_t;
-    typedef std::set<letter_t>					alphabet_impl_t;
+    typedef std::set<letter_t>				       alphabet_impl_t;
     typedef Element<alphabets_t, alphabet_impl_t>		alphabet_t;
+    // FIXME: in fact, here we want X<alphabet_t> where X is the type of 
+    // FIXME: the monoid concept. For the moment, we just have FreeMonoid, so
+    // FIXME: it is not important but in the future, we will have to introduce
+    // FIXME: a convenient way of substituting types parameters ...
     typedef FreeMonoid<alphabet_t>				monoid_t;
+    // FIXME: same remark here.
     typedef Series<orig_semiring_t, monoid_t>			series_t;
     typedef std::basic_string<letter_t>				monoid_value_t;
     typedef rat::exp<monoid_value_t, orig_weight_value_t>	serie_impl_t;
@@ -53,7 +64,7 @@ namespace vcsn {
     typedef Element<series_t, serie_impl_t>			element_t;
   };
 
-  //! The linearization of the krat expression
+  //! The linearization of the krat expression.
   template <class Series, class T>
   typename linearize_element<Series, T>::element_t
   linearize(const Element<Series, T>& exp);
