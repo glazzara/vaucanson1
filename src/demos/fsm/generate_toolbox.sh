@@ -52,7 +52,6 @@ cat > $FILE <<EOF
 
    int main(int argc, char **argv)
    {
-     srand(time(0));
      automaton_t automaton;
      misc::fsm_load(std::cin, automaton);
      automaton_t auto_d = determinize(automaton);
@@ -75,7 +74,6 @@ cat > $FILE <<EOF
 
    int main(int argc, char **argv)
    {
-     srand(time(0));
      automaton_t automaton;
      misc::fsm_load(std::cin, automaton);
      if (!is_deterministic(automaton))
@@ -86,6 +84,119 @@ cat > $FILE <<EOF
    }
 EOF
 
+# vcsn_closure.cc
+FILE=$DESTDIR/vcsn_closure.cc
+cat > $FILE <<EOF
+   #include <iostream>
+   #include "toolbox.hh"
+   #include <vaucanson/tools/gen_random.hh>
+   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/algorithms/closure.hh>
+   using namespace vcsn;
+
+   int main(int argc, char **argv)
+   {
+     automaton_t automaton;
+     misc::fsm_load(std::cin, automaton);
+     automaton_t auto_m = closure(automaton);
+     misc::fsm_dump(std::cout, auto_m);
+     return EXIT_SUCCESS;
+   }
+EOF
+
+# vcsn_reverse.cc
+FILE=$DESTDIR/vcsn_reverse.cc
+cat > $FILE <<EOF
+   #include <iostream>
+   #include "toolbox.hh"
+   #include <vaucanson/tools/gen_random.hh>
+   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/algorithms/transpose.hh>
+   using namespace vcsn;
+
+   int main(int argc, char **argv)
+   {
+     automaton_t automaton;
+     misc::fsm_load(std::cin, automaton);
+     automaton_t auto_m = auto_transpose(automaton);
+     misc::fsm_dump(std::cout, auto_m);
+     return EXIT_SUCCESS;
+   }
+EOF
+
+# vcsn_prune.cc
+FILE=$DESTDIR/vcsn_prune.cc
+cat > $FILE <<EOF
+   #include <iostream>
+   #include "toolbox.hh"
+   #include <vaucanson/tools/gen_random.hh>
+   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/algorithms/trim.hh>
+   using namespace vcsn;
+
+   int main(int argc, char **argv)
+   {
+     automaton_t automaton;
+     misc::fsm_load(std::cin, automaton);
+     automaton_t auto_m = trim(automaton);
+     misc::fsm_dump(std::cout, auto_m);
+     return EXIT_SUCCESS;
+   }
+EOF
+
+# vcsn_intersect.cc
+FILE=$DESTDIR/vcsn_intersect.cc
+cat > $FILE <<EOF
+   #include <iostream>
+   #include <fstream>
+   #include "toolbox.hh"
+   #include <vaucanson/tools/gen_random.hh>
+   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/algorithms/product.hh>
+   using namespace vcsn;
+
+   int main(int argc, char **argv)
+   {
+    if (argc < 2)
+      exit(EXIT_FAILURE);
+     std::ifstream lhs(argv[1]);
+     std::ifstream rhs(argv[2]);
+     automaton_t lhs_a;
+     misc::fsm_load(lhs, lhs_a);
+     automaton_t rhs_a;
+     misc::fsm_load(rhs, rhs_a);  
+     automaton_t auto_m = auto_product(lhs_a, rhs_a);
+	misc::fsm_dump(std::cout, auto_m);
+     return EXIT_SUCCESS;
+   }
+EOF
+
+# vcsn_union.cc
+FILE=$DESTDIR/vcsn_union.cc
+cat > $FILE <<EOF
+   #include <iostream>
+   #include <fstream>
+   #include "toolbox.hh"
+   #include <vaucanson/tools/gen_random.hh>
+   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/algorithms/union.hh>
+   using namespace vcsn;
+
+   int main(int argc, char **argv)
+   {
+    if (argc < 2)
+      exit(EXIT_FAILURE);
+     std::ifstream lhs(argv[1]);
+     std::ifstream rhs(argv[2]);
+     automaton_t lhs_a;
+     misc::fsm_load(lhs, lhs_a);
+     automaton_t rhs_a;
+     misc::fsm_load(rhs, rhs_a);  
+     automaton_t auto_m = auto_union(lhs_a, rhs_a);
+	misc::fsm_dump(std::cout, auto_m);
+     return EXIT_SUCCESS;
+   }
+EOF
 
 # vcsn_dotdump.cc
 FILE=$DESTDIR/vcsn_dotdump.cc
@@ -140,10 +251,18 @@ bin_PROGRAMS = \
     vcsn_random_generator    \
     vcsn_determinize	     \
     vcsn_minimize	     \
+    vcsn_closure	     \
+    vcsn_prune		     \
+    vcsn_reverse	     \
+    vcsn_intersect	     \
     vcsn_dotdump
 vcsn_random_generator_SOURCES   = vcsn_random_generator.cc arg.cc
 vcsn_determinize_SOURCES        = vcsn_determinize.cc arg.cc
 vcsn_dotdump_SOURCES		= vcsn_dotdump.cc arg.cc
 vcsn_minimize_SOURCES		= vcsn_minimize.cc arg.cc
+vcsn_closure_SOURCES		= vcsn_closure.cc arg.cc
+vcsn_reverse_SOURCES		= vcsn_reverse.cc arg.cc
+vcsn_intersect_SOURCES		= vcsn_intersect.cc arg.cc
+vcsn_prune_SOURCES		= vcsn_prune.cc arg.cc
 EXTRA_DIST = arg.hh toolbox.hh
 EOF

@@ -41,7 +41,19 @@ namespace vcsn {
     template <typename St, typename auto_t>
     void fsm_dump(St& out, const auto_t& a)
     {
-      assert(a.initial().size() <= 1);
+      AUTOMATON_TYPES(auto_t);
+      if (a.initial().size() > 1)
+	{
+	  auto_t b(a);
+	  hstate_t i = b.add_state();
+	  for (initial_iterator j = b.initial().begin(); 
+	       j != b.initial().end(); ++j)
+	    b.add_spontaneous(i, *j);
+	  b.clear_initial();
+	  b.set_initial(i);
+	  fsm_dump(out, b);
+	  return ;
+	}
       if (a.states().size() == 0)
 	return;
 
@@ -52,7 +64,8 @@ namespace vcsn {
       for (typename std::set<hedge_t>::const_iterator e = succ.begin();
 	   e != succ.end();
 	   ++e)
-	  out << *initial << "\t" << a.aim_of(*e) << "\t" << a.serie_of(*e) << "\t 0" 
+	  out << *initial << "\t" << a.aim_of(*e) << "\t" 
+	      << a.serie_of(*e) << "\t 0" 
 	      << std::endl;
       for (typename auto_t::state_iterator s = a.states().begin();
 	   s != a.states().end();
@@ -64,7 +77,8 @@ namespace vcsn {
 	  for (typename std::set<hedge_t>::const_iterator e = succ.begin();
 	       e != succ.end();
 	       ++e)
-	    out << *s << "\t" << a.aim_of(*e) << "\t" << a.serie_of(*e) << "\t 0" 
+	    out << *s << "\t" << a.aim_of(*e) << "\t" 
+		<< a.serie_of(*e) << "\t 0" 
 	       << std::endl;
 	}
       for (typename auto_t::final_iterator f = a.final().begin();
@@ -96,7 +110,8 @@ namespace vcsn {
     {
       std::string token;
       std::string::iterator i = line.begin();
-      while ((i != line.end()) && ((*i == '\t') || (*i == ' ') || (*i == '\0')))
+      while ((i != line.end()) && ((*i == '\t') 
+				   || (*i == ' ') || (*i == '\0')))
 	++i;
       for (;i != line.end();++i)
 	{
@@ -109,9 +124,10 @@ namespace vcsn {
       if (i != line.end())
 	{
 	  ++i;
-	  return std::make_pair(token, std::string(line, 
-						   (unsigned)(i - line.begin()), 
-						   (unsigned)(line.end() - i + 1)));
+	  return std::make_pair(token, 
+				std::string(line, 
+					    (unsigned)(i - line.begin()), 
+					    (unsigned)(line.end() - i + 1)));
 	}
       else
 	return std::make_pair(token, std::string());
@@ -127,7 +143,7 @@ namespace vcsn {
       unsigned			nb = 0;
       std::vector<line_data>	stock;
       std::string		line;
-      std::pair<std::string, std::string> tmp;
+      std::pair<std::string,    std::string> tmp;
       std::vector<std::string>	tokens;
 
       while (!in.eof())

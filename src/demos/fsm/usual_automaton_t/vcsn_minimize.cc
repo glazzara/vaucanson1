@@ -8,7 +8,6 @@
 
    int main(int argc, char **argv)
    {
-     srand(time(0));
      automaton_t automaton;
      misc::fsm_load(std::cin, automaton);
      if (!is_deterministic(automaton))

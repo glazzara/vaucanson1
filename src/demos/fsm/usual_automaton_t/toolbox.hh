@@ -9,5 +9,5 @@
 
 typedef vcsn::tools::usual_automaton_t	automaton_t;
 
-
 #endif // FSM_TOOLBOX_HH
+

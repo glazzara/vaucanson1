@@ -58,49 +58,57 @@ namespace vcsn {
   }
 
   template<typename Label, typename StateTag, typename EdgeTag>
-  states_t& ManyLinks<Label, StateTag, EdgeTag>::states() 
+  typename ManyLinks<Label, StateTag, EdgeTag>::states_t& 
+  ManyLinks<Label, StateTag, EdgeTag>::states() 
   { 
     return final_.states(); 
   }
 
   template<typename Label, typename StateTag, typename EdgeTag>
-  const states_t& ManyLinks<Label, StateTag, EdgeTag>::states() const 
+  const typename ManyLinks<Label, StateTag, EdgeTag>::states_t& 
+  ManyLinks<Label, StateTag, EdgeTag>::states() const 
   { 
     return final_.states(); 
   }
     
   template<typename Label, typename StateTag, typename EdgeTag>
-  edges_t& ManyLinks<Label, StateTag, EdgeTag>::edges() 
+  typename ManyLinks<Label, StateTag, EdgeTag>::edges_t& 
+  ManyLinks<Label, StateTag, EdgeTag>::edges() 
   { 
     return edges_; 
   }
 
   template<typename Label, typename StateTag, typename EdgeTag>
-  const edges_t& ManyLinks<Label, StateTag, EdgeTag>::edges() const 
+  const typename ManyLinks<Label, StateTag, EdgeTag>::edges_t& 
+  ManyLinks<Label, StateTag, EdgeTag>::edges() const 
   { 
     return edges_; 
   }
 
   template<typename Label, typename StateTag, typename EdgeTag>
-  final_t& ManyLinks<Label, StateTag, EdgeTag>::final() 
+  typename ManyLinks<Label, StateTag, EdgeTag>::final_t& 
+  ManyLinks<Label, StateTag, EdgeTag>::final() 
   { 
     return final_; 
   }
 
   template<typename Label, typename StateTag, typename EdgeTag>
-  const final_t& ManyLinks<Label, StateTag, EdgeTag>::final() const 
+  const typename ManyLinks<Label, StateTag, EdgeTag>::final_t& 
+  ManyLinks<Label, StateTag, EdgeTag>::final() const 
   { 
     return final_; 
   }
 
   template<typename Label, typename StateTag, typename EdgeTag>
-  initial_t& ManyLinks<Label, StateTag, EdgeTag>::initial() 
+  typename ManyLinks<Label, StateTag, EdgeTag>::initial_t& 
+  ManyLinks<Label, StateTag, EdgeTag>::initial() 
   { 
     return final_.initial(); 
   }
 
   template<typename Label, typename StateTag, typename EdgeTag>
-  const initial_t& ManyLinks<Label, StateTag, EdgeTag>::initial() const 
+  const typename ManyLinks<Label, StateTag, EdgeTag>::initial_t& 
+  ManyLinks<Label, StateTag, EdgeTag>::initial() const 
   { 
     return final_.initial(); 
   }

@@ -227,4 +227,6 @@ namespace vcsn {
   
 } // vcsn
 
+# include <vaucanson/automata/concrete/manylinks.hxx>
+
 #endif // AUTOMATA_CONCRETE_MANYLINKS_HH

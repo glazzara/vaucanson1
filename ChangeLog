@@ -1,4 +1,25 @@
 2002-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.118)
+	* include/vaucanson/automata/concrete/manylinks.hh: minor.
+	* include/vaucanson/misc/fsm_dump.hh: 
+		dumping an automaton with multiple initial states is
+	  dumping an automaton with one initial state linked to them.
+	* src/demos/fsm/generate_toolbox.sh: add
+		vcsn_closure.cc
+		vcsn_reverse.cc
+		vcsn_prune.cc
+		vcsn_union.cc
+	* src/demos/fsm/usual_automaton_t/vcsn_minimize.cc: minor.
+	* src/demos/fsm/usual_automaton_t/vcsn_determinize.cc: minor.
+	* src/demos/fsm/usual_automaton_t/toolbox.hh: minor.
+	* src/demos/fsm/usual_automaton_t/Makefile.am: minor.
+	* include/vaucanson/automata/concrete/manylinks.hxx: minor.
+	* src/demos/fsm/usual_automaton_t/vcsn_reverse.cc: added.
+	* src/demos/fsm/usual_automaton_t/vcsn_prune.cc: added.
+	* src/demos/fsm/usual_automaton_t/vcsn_intersect.cc: added.
+	* src/demos/fsm/usual_automaton_t/vcsn_closure.cc: added.
+
+2002-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.117)
 	* **/* : added "Lombardy" to copyright.
 
