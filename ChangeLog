@@ -1,3 +1,22 @@
+2003-02-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.158)
+
+	* src/demos/samples/algebra/decorated_alphabet.cc: New.
+	* include/vaucanson/algebra/concept/letter.hh: New.
+	* include/vaucanson/algebra/concrete/letter/char_letter.hh: New.
+	* include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh: New.
+	* include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx: New.
+	* include/vaucanson/algebra/concept/alphabets_base.hh:
+		(letter_equality): New.
+		(op_letter_equality_modulo): New.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx: 
+		Implement them.
+	* include/vaucanson/algebra/concrete/alphabets/predefs.hh:
+		Add decorated alphabets typedefs.
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx:
+		(op_xeq): Use alphabet's letter_equality.
+	* include/vaucanson/algebra/concrete/letter/range.hh: Add a 'FIXME'.
+	
 2003-02-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.157)
 	* doc/tutorial.tex: Update

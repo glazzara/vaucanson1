@@ -62,13 +62,13 @@ namespace vcsn {
   
   //! @}
 
-  template<typename L>
+  template <typename L>
   bool op_contains(const AlphabetSet<L>& s, const std::set<L>& a);
   
-  template<typename L>
+  template <typename L>
   bool op_is_finite(const AlphabetSet<L>& s, const std::set<L>& a);
   
-  template<typename L>
+  template <typename L>
   bool op_contains_e(const AlphabetSet<L>& s, const std::set<L>& a, 
 		     const L& v);
     

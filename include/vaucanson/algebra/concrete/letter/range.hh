@@ -33,9 +33,11 @@ namespace vcsn {
       static_ranged(const T& v);
       static_ranged(const static_ranged& r);
       operator T() const;
-      static_ranged  randomized();
-      T& value();
-      const T& value() const;
+      static_ranged	randomized();
+      T&		value();
+      const T&		value() const;
+
+      // FIXME: add operator++ !!! It should loop from 'begin' to 'to' !
 
     private:
       T	       value_;

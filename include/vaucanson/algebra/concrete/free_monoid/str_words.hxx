@@ -43,6 +43,24 @@ namespace vcsn {
     return a + b; 
   }
 
+  template <typename A>
+  bool
+  op_xeq(const SetWords<A>& s, 
+	 const std::basic_string<typename A::letter_t>& a, 
+	 const std::basic_string<typename A::letter_t>& b)
+  {
+    typename std::basic_string<typename A::letter_t>::const_iterator 
+      m = b.begin();
+    for (typename std::basic_string<typename A::letter_t>::const_iterator
+	   l = a.begin(); m != b.end() && l != a.end(); ++l)
+      {
+	if (! s.alphabet().letter_equality(*l, *m))
+	  return false;
+	++m;
+      }
+    return (m == b.end() && l == a.end());
+  }
+
   template<typename A>
   const std::basic_string<typename A::letter_t>&
   identity_value(SELECTOR(SetWords<A>),

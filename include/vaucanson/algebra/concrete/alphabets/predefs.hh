@@ -20,8 +20,10 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_ALPHABETS_PREDEFS_HH
 # define VCSN_ALGEBRA_CONCRETE_ALPHABETS_PREDEFS_HH
 
+# include <vaucanson/algebra/concrete/letter/char_letter.hh>
 # include <vaucanson/algebra/concrete/letter/range.hh>
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
+# include <vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh>
 
 namespace vcsn {
 
@@ -30,22 +32,30 @@ namespace vcsn {
     namespace small_alpha_letter {
       
       typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
-      typedef AlphabetSet<Letter>				   Alphabets;
-      typedef Element<Alphabets, std::set<Letter> >		   Alphabet;
+      typedef AlphabetSet<Letter>				 Alphabets;
+      typedef Element<Alphabets, std::set<Letter> >		 Alphabet;
+      typedef AlphabetDecorator<Letter, std::set<Letter> >	 DAlphabetImpl;
+      typedef Element<Alphabets, DAlphabetImpl>			 DAlphabet;
 
     } // small_alpha_letter
 
     namespace char_letter {
 
-      typedef AlphabetSet<char>				   Alphabets;
-      typedef Element<Alphabets, std::set<char> >		   Alphabet;
+      typedef char						 Letter;
+      typedef AlphabetSet<Letter>			         Alphabets;
+      typedef Element<Alphabets, std::set<Letter> >		  Alphabet;
+      typedef AlphabetDecorator<Letter, std::set<Letter> >	 DAlphabetImpl;
+      typedef Element<Alphabets, DAlphabetImpl>			 DAlphabet;
 
     } // char_letter
 
     namespace int_letter {
 
-      typedef AlphabetSet<int>					   Alphabets;
-      typedef Element<Alphabets, std::set<int> >		   Alphabet;
+      typedef int						 Letter;
+      typedef AlphabetSet<Letter>				 Alphabets;
+      typedef Element<Alphabets, std::set<Letter> >		 Alphabet;
+      typedef AlphabetDecorator<Letter, std::set<Letter> >	 DAlphabetImpl;
+      typedef Element<Alphabets, DAlphabetImpl>			 DAlphabet;
 
     } // int_letter
 

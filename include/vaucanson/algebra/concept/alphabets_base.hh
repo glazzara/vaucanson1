@@ -108,6 +108,9 @@ namespace vcsn {
       /*! Cardinal of the alphabet. */
       size_t		size()                      const;
 
+      /*! Equality modulo the alphabet meta-symbols. */
+      bool		letter_equality(letter_t, letter_t) const;
+
       /*! Return true if l is in the alphabet. */
       bool		contains(const letter_t& l) const;
 
@@ -141,6 +144,12 @@ namespace vcsn {
   // FIXME: is it a good place for this ?
   template<typename Self, typename St, typename T>
   St& op_rout(const AlphabetSetBase<Self>& s, St& st, const T& a);
+
+  template <typename Self, typename T, typename L>
+  bool op_letter_equality_modulo(const AlphabetSetBase<Self>& s, 
+				 const T& a, 
+				 L lhs,
+				 L rhs);
   
   // FIXME: add equality between two alphabets !
 
