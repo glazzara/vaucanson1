@@ -1,5 +1,13 @@
 2004-10-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	Apply the patch proposed by Sylvain Lombardy in vaucanson-patches:
+	Message-ID: <mailman.67.1087560101.7154.vaucanson-patches@lrde.epita.fr>
+
+	* include/vaucanson/automata/implementation/graph.hxx (del_state): Fix
+	invalid assertions.
+
+2004-10-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* NEWS: Update.
 
 2004-10-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>

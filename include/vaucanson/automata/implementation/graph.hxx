@@ -241,8 +241,7 @@ namespace vcsn {
 	  }
 	edges_.resize(s + 1);
       }
-    assertion(int(edges_.size()) == first_edge_ 
-	      || has_edge(edges_.size() - 1));
+    assertion(int(edges_.size()) == 0 || has_edge(edges_.size() - 1));
 
     // first_edge_ must be used.
     if (e == first_edge_)
@@ -256,7 +255,7 @@ namespace vcsn {
 	  }
 	first_edge_ = s;
       }
-    assertion(int(edges_.size()) == first_edge_ || has_edge(first_edge_));
+    assertion(int(edges_.size()) == 0 || has_edge(first_edge_));
 
     postcondition(! has_edge(e));
   }
