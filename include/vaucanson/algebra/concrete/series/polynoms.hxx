@@ -34,6 +34,7 @@
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <vaucanson/misc/contract.hh>
 # include <sstream>
+# include <set>
 
 namespace vcsn {
 
@@ -750,7 +751,8 @@ namespace vcsn {
     `----------*/
   template <typename W, typename M, typename Tm, typename Tw>
   inline
-  void  op_in_transpose(const algebra::Series<W, M>& s, algebra::polynom<Tm, Tw>& t)
+  void  op_in_transpose(const algebra::Series<W, M>& s, 
+			algebra::polynom<Tm, Tw>& t)
   {
     typedef typename algebra::polynom<Tm, Tw>::const_iterator const_iterator;
     algebra::polynom<Tm, Tw>	new_t(t);
@@ -767,10 +769,11 @@ namespace vcsn {
 
 namespace std {
 
-  // FIXME: Must this operator exists ?
+  // FIXME: Must this operator exist ?
   template <class Tm, class Tw>
   inline
-  std::ostream& operator<<(std::ostream& out, const vcsn::algebra::polynom<Tm, Tw>& p)
+  std::ostream& operator<<(std::ostream& out, 
+			   const vcsn::algebra::polynom<Tm, Tw>& p)
   {
     typename vcsn::algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
     std::set<char> escape_set;
