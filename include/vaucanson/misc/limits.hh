@@ -80,8 +80,8 @@ namespace utility
     static const int digits = sizeof(signed char)*8 - 1;
     static const int digits10 = 3;
     static const bool is_specialized = true;
-    static char min() throw()   { return SCHAR_MIN; }
-    static char max() throw() { return SCHAR_MAX; }
+    static signed char min() throw()   { return SCHAR_MIN; }
+    static signed char max() throw() { return SCHAR_MAX; }
     static const bool is_signed = true;
     static const bool is_integer = true;
     static const bool is_exact = true;
@@ -103,8 +103,8 @@ namespace utility
     static const int digits = sizeof(unsigned char)*8;
     static const int digits10 = 3;
     static const bool is_specialized = true;
-    static char min() throw()   { return 0; }
-    static char max() throw() { return UCHAR_MAX; }
+    static unsigned char min() throw()   { return 0; }
+    static unsigned char max() throw() { return UCHAR_MAX; }
     static const bool is_signed = false;
     static const bool is_integer = true;
     static const bool is_exact = true;

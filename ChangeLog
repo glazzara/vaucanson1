@@ -1,5 +1,9 @@
 2003-07-01  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/misc/limits.hh: Fix some method return types.
+
+2003-07-01  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/misc/limits.hh: Use correct C macros.
 	* config/vcsn.m4: Check more for availability of infinity.
 

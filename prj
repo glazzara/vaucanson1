@@ -1,17 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 307)
-(Parent-Version vaucanson 0 304)
+(Project-Version vaucanson 0 308)
+(Parent-Version vaucanson 0 307)
 (Version-Log "Index: ChangeLog
 from  Raphaël Poss  <raph@lrde.epita.fr>
-
-   * include/vaucanson/misc/limits.hh: Use correct C macros.
-   * config/vcsn.m4: Check more for availability of infinity.
+        * include/vaucanson/misc/limits.hh: Fix some method return types.
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 01 Jul 2003 09:33:34 +0200")
+(Checkin-Time "Tue, 01 Jul 2003 09:37:25 +0200")
 (Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -94,7 +92,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.110 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.111 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 664))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -784,23 +782,12 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Mon, 30 Jun 2003 16:10:04 +0200,
 ;; to version 0.289(w), by raph:
 
-  (include/vaucanson/misc/limits.hh (vaucanson/q/32_limits.hh 1.2 664))
+  (include/vaucanson/misc/limits.hh (vaucanson/q/32_limits.hh 1.3 664))
 
 ;; Files added by populate at Mon, 30 Jun 2003 16:10:13 +0200,
 ;; to version 0.289(w), by raph:
 
   (src/tests/misc/limits.cc (vaucanson/q/33_limits.cc 1.1 664))
 )
-(Merge-Parents
-  (0.306 complete
-    (ChangeLog ChangeLog ChangeLog m) (configure.ac configure.ac configure.ac r)
-    (include/vaucanson/algebra/concept/semiring_base.hxx include/vaucanson/algebra/concept/semiring_base.hxx include/vaucanson/algebra/concept/semiring_base.hxx r) (include/vaucanson/algebra/concrete/free_monoid/words.hh include/vaucanson/algebra/concrete/free_monoid/words.hh include/vaucanson/algebra/concrete/free_monoid/words.hh r)
-    (include/vaucanson/algebra/concrete/free_monoid/words.hxx include/vaucanson/algebra/concrete/free_monoid/words.hxx include/vaucanson/algebra/concrete/free_monoid/words.hxx r) (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx r)
-    (include/vaucanson/algebra/concrete/series/krat.hxx include/vaucanson/algebra/concrete/series/krat.hxx include/vaucanson/algebra/concrete/series/krat.hxx r) (include/vaucanson/algebra/concrete/series/series.hh include/vaucanson/algebra/concrete/series/series.hh include/vaucanson/algebra/concrete/series/series.hh r)
-    (include/vaucanson/algebra/concrete/series/series.hxx include/vaucanson/algebra/concrete/series/series.hxx include/vaucanson/algebra/concrete/series/series.hxx r) (src/tests/algebra/series/krat/main/krat_exp_parse_test.hh src/tests/algebra/series/krat/main/krat_exp_parse_test.hh src/tests/algebra/series/krat/main/krat_exp_parse_test.hh r)
-    (include/vaucanson/algorithms/krat_exp_constant_term.hxx include/vaucanson/algorithms/krat_exp_constant_term.hxx include/vaucanson/algorithms/krat_exp_constant_term.hxx r) (include/vaucanson/algorithms/krat_exp_derivation.hxx include/vaucanson/algorithms/krat_exp_derivation.hxx include/vaucanson/algorithms/krat_exp_derivation.hxx r)
-    (include/vaucanson/algorithms/krat_exp_cderivation.hxx include/vaucanson/algorithms/krat_exp_cderivation.hxx include/vaucanson/algorithms/krat_exp_cderivation.hxx r) (include/vaucanson/algorithms/krat_exp_realtime.hxx include/vaucanson/algorithms/krat_exp_realtime.hxx include/vaucanson/algorithms/krat_exp_realtime.hxx r)
-    (src/tests/tests-suites/algebra_series_krat.defs src/tests/tests-suites/algebra_series_krat.defs src/tests/tests-suites/algebra_series_krat.defs r) 
-  )
-)
+(Merge-Parents)
 (New-Merge-Parents)
