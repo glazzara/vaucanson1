@@ -7,48 +7,53 @@
 
 namespace tests {
 
-  Tester::Tester(int verbose_level) : 
-    passed(0),
-    non_passed(0),
-    verbose(verbose_level)
+  Tester::Tester(verbose_level_e verbose_level) : 
+    passed_ (0),
+    non_passed_(0),
+    verbose_(verbose_level)
   {}
 
   bool 
   Tester::all_passed() 
   {
-    return (non_passed == 0);
+    return (non_passed_ == 0);
   }
 
   void 
   Tester::ok(std::string test_label)
   {
-    if (verbose == 1)
+    if (verbose_ != none)
       {
-	std::cerr << "TEST: ";
-	std::cerr.fill(' ') ;
-	int last = std::cerr.width(40);
-	std::cerr << test_label;
-	std::cerr << " : OK" << std::endl;
-	std::cerr.width(last);
+	std::cout << "TEST: ";
+	std::cout.fill(' ') ;
+	int last = std::cout.width(40);
+	std::cout << test_label;
+	std::cout << " : OK" << std::endl;
+	std::cout.width(last);
       }
-    passed++;
+    passed_++;
   }
 
   void 
   Tester::ko(std::string test_label)
   {
-    if (verbose == 1)
+    if (verbose_ != none)
       {
-	std::cerr << "TEST: ";
-	std::cerr.fill(' ') ;
-	int last = std::cerr.width(40);
-	std::cerr << test_label;
-	std::cerr << " : KO" << std::endl;
-	std::cerr.width(last);
+	std::cout << "TEST: ";
+	std::cout.fill(' ') ;
+	int last = std::cout.width(40);
+	std::cout << test_label;
+	std::cout << " : KO" << std::endl;
+	std::cout.width(last);
       }
-    non_passed++;
+    non_passed_++;
   }
   
+  verbose_level_e Tester::verbose() const
+  {
+    return verbose_;
+  }
+
   // FIXME: Add statistics stuff.
 
 } // tests

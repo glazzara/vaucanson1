@@ -1,4 +1,13 @@
 2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.82)
+	* src/tests/check/tests_stuff.hh : 
+		add verbose method, verbose_level_e enum and SUCCESS_RATE macro.
+	* src/tests/check/tests_stuff.cc : idem.
+	* include/vaucanson/tools/usual.hh : add SAVE_AUTOMATON_DOT macro.
+	* include/vaucanson/algorithms/compute.hxx : minor change.
+	* src/tests/automata/algos/elimination_test.hh : use series::choose_from_supp.
+
+2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.81)
 	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx : added.
 	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hh : added.

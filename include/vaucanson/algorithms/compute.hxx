@@ -8,8 +8,7 @@
 # include <algorithm>
 
 # include <vaucanson/algorithms/compute.hh>
-# include <vaucanson/automata/automata_base.hh>
-# include <vaucanson/algebra/concepts.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 
 namespace vcsn {

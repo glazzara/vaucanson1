@@ -6,6 +6,7 @@
 #ifndef MISC_USUAL_HH
 # define MISC_USUAL_HH
 
+# include <fstream>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
@@ -17,7 +18,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/concrete/manylinks.hh>
 # include <vaucanson/misc/ref.hh>
-
+# include <vaucanson/misc/dot_dump.hh>
 
 namespace vcsn {
 
@@ -32,8 +33,8 @@ namespace vcsn {
       utility::ref< 
       AutomatonImpl<labels_are_series,
 		    Series<NumericalSemiring, Words>,
-		    polynom<std::string, int>,
-		    ManyLinks<polynom<std::string, int>, NoTag, NoTag>,
+		    polynom<std::string, bool>,
+		    ManyLinks<polynom<std::string, bool>, NoTag, NoTag>,
 		    NoTag,
 		    std::map> >
     >
@@ -67,6 +68,14 @@ namespace vcsn {
 
 #define zero_	zero(SELECT(typename series_elt_t::value_t))
 #define one_	identity(SELECT(typename series_elt_t::value_t))
+
+#define SAVE_AUTOMATON_DOT(Name, Auto, Index)		\
+    {							\
+      char buf[128];					\
+      snprintf(buf, 128, "%s_%d.dot", Name, Index);	\
+      std::ofstream f(buf);				\
+      misc::dot_dump(f, Auto, buf);				\
+    }
 
   } // tools
 
