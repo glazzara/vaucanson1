@@ -1,7 +1,7 @@
 // free_monoid_product_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,8 @@
 #ifndef VCSN_TESTS_ALGEBRA_FREE_MONOID_PRODUCT_FREE_MONOID_PRODUCT_TEST_HH
 # define VCSN_TESTS_ALGEBRA_FREE_MONOID_PRODUCT_FREE_MONOID_PRODUCT_TEST_HH
 
+#include <vaucanson/misc/functors.hh>
+
 template <typename S, typename T>
 bool free_monoid_product_test(tests::Tester& t)
 {
@@ -51,7 +53,6 @@ bool free_monoid_product_test(tests::Tester& t)
   second_alphabet_t	second_base;
   size_t		test_sizes[] =
     {
-      0,
       1,
       first_base.max_size() >= 2 ? 2 : 1,
       first_base.max_size() <= 256 ? first_base.max_size() / 2 : 128,
@@ -61,6 +62,7 @@ bool free_monoid_product_test(tests::Tester& t)
   bool monoid_error = false;
   bool neutral_error = false;
   bool mirror_error = false;
+  bool length_error = false;
 
   for (size_t i = 0; i < sizeof (test_sizes) / sizeof (size_t); ++i)
     {
@@ -98,16 +100,45 @@ bool free_monoid_product_test(tests::Tester& t)
 
       element_t e = freemonoid_product.identity(SELECT(T));
 
+
       if (((ab * e) != ab) or ((e * ba) != ba))
 	neutral_error = true;
 
       if (mirror(mirror(ab)) != ab)
 	mirror_error = true;
+
+      std::string first_word;
+      std::string second_word;
+
+      for (int i = 1; i <= 10; ++i)
+	{
+	  char t =  first_alpha.choose();
+	  first_word += t;
+	}
+
+      for (int j = 1; j <= 15; ++j)
+	second_word += second_alpha.choose();
+
+      std::pair<std::string, std::string> p = make_pair(first_word,
+							second_word);
+
+      element_t w(freemonoid_product, p);
+
+      std::pair<int, int> pair_len = w.length(utility::pair<int>());
+      int add_len = w.length(std::plus<int>());
+
+      std::pair<int, int> len (10, 15);
+
+      if ((pair_len != len) or (add_len != 25))
+	length_error = true;
+
     }
+
 
   TEST(t, "Monoid accessors are correct.", not monoid_error);
   TEST(t, "Neutral element is correct.", not neutral_error);
   TEST(t, "Mirror is idempotent.", not mirror_error);
+  TEST(t, "Length is correct.", not length_error)
 
   return t.all_passed();
 }

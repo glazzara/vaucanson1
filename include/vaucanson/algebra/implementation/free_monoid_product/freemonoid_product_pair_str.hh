@@ -89,6 +89,10 @@ namespace vcsn {
   template<typename Self, typename T>
   void op_in_mirror (const algebra::FreeMonoidProductBase<Self>& s, T& v);
 
+  template<typename T, typename Ftor>
+  typename Ftor::result_type op_length(T& v, Ftor f);
+
+
 } // vcsn
 
 # ifndef VCSN_USE_INTERFACE_ONLY

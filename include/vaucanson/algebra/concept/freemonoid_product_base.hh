@@ -1,7 +1,7 @@
 // freemonoid_product_base.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -147,6 +147,10 @@ namespace vcsn {
 
     /// In-place mirror transformation.
     void mirror();
+
+    /// Length
+    template <class Ftor>
+    typename Ftor::result_type	length(Ftor f);
 
   protected:
     /// Default constructor is protected since it is an abstract class.

@@ -1,3 +1,22 @@
+2005-01-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	Add MetaElement<FreeMonoidProduct<S>, T>::length(), that takes a
+	functor as an argument.
+
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh,
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx: Add
+	the length() method.
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: Add the op_length() function.
+
+	* include/vaucanson/misc/functors.hh,
+	* include/vaucanson/misc/functors.hxx: New. Enable creation of new
+	functors.
+	* include/Makefile.am: Update accordingly.
+
+	* src/tests/algebra/free_monoid_product/free_monoid_product_test.hh:
+	Update test.
+
 2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx:

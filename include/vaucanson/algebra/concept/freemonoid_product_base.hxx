@@ -137,6 +137,14 @@ namespace vcsn {
     op_in_mirror(this->structure(), this->value());
   }
 
+  template <class Self, typename T>
+  template <class Ftor>
+  typename Ftor::result_type
+  MetaElement<algebra::FreeMonoidProductBase<Self>, T>::length(Ftor f)
+  {
+    return op_length(value(), f);
+  }
+
 } // vcsn
 
 #endif // VCSN_ALGEBRA_CONCEPT_FREEMONOID_PRODUCT_BASE

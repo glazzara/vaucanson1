@@ -52,6 +52,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/misc/special_char_traits.hh				   \
 	vaucanson/misc/deferrer.hxx					   \
 	vaucanson/misc/deferrer.hh					   \
+	vaucanson/misc/functors.hh					   \
+	vaucanson/misc/functors.hxx					   \
 	vaucanson/tools/container_ops.hxx				   \
 	vaucanson/tools/container_ops.hh				   \
 	vaucanson/tools/automaton_tools.hh				   \

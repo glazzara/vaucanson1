@@ -104,8 +104,8 @@ namespace vcsn {
     typedef std::basic_string<typename F::letter_t> T1;
     typedef std::basic_string<typename S::letter_t> T2;
 
-    std::pair< T1, T2 >		res(s.first_monoid().choose(SELECT(T1)).value(),
-				    s.second_monoid().choose(SELECT(T2)).value());
+    std::pair< T1, T2 >	   res(s.first_monoid().choose(SELECT(T1)).value(),
+			       s.second_monoid().choose(SELECT(T2)).value());
 
     return Element<algebra::FreeMonoidProduct<F, S>,
 		   std::pair< T1, T2 > >		(s, res);
@@ -117,6 +117,13 @@ namespace vcsn {
   {
     op_in_mirror(s.first_monoid(), v.first);
     op_in_mirror(s.second_monoid(), v.second);
+  }
+
+  template<typename T, typename Ftor>
+  typename Ftor::result_type
+  op_length(T& v, Ftor f)
+  {
+    return f(v.first.length(), v.second.length());
   }
 
 
