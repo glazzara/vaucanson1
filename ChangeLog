@@ -24,7 +24,7 @@
 	* include/vaucanson/algebra/
 		concept/series_base.hh: minor changes.
 		concrete/series/krat_exp_pattern.hh: idem.
-	* include/vaucanson/algorithms/krat_exp_linearize.hxx: 
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx:
 		monoid_value_t typedef missed.
 	* include/vaucanson/misc/random.hh: include <cstdlib>
 
@@ -68,7 +68,7 @@
 		   rename match_node in MATCH* to match_node##Node##
 		     (because of non inherited overloaded methods)
 		   add KRatExpIdentity.
-		rat/exp.hxx: use match_node##Node## in the dispatcher 
+		rat/exp.hxx: use match_node##Node## in the dispatcher
 		   specialization.
 
 2002-11-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -115,8 +115,8 @@
 2002-10-31  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.128)
 	* include/vaucanson/algebra/concept:
-		- semiring_base.hxx: 
-		   add a "parse" external function.	
+		- semiring_base.hxx:
+		   add a "parse" external function.
 		   minor changes.
 		- semiring_base.hh: idem
 		- freemonoid_base.hxx: idem.
@@ -126,21 +126,21 @@
 	* include/vaucanson/algebra/concrete/series/:
 		- krat_exp_pattern.hh: add INHERIT_CONSTRUCTORS macros.
 		(to be iso compliant)
-	
+
 	 	- krat_exp_parser.hh: added.
 		- krat_exp_parser.hxx: idem.
 	* src/tests/algebra/series/:
 	 	- krat_exp_parse-test.cc: idem.
- 		- krat_exp_parse_test.hh: idem. 
+ 		- krat_exp_parse_test.hh: idem.
 		- Makefile.am: added here.
 
 2002-10-23  Raphaël Poss  <raph@lrde.epita.fr>
 (0.127)
-	
+
 	* include/vaucanson/misc/numerical_constraints.hh,
 	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx,
 	include/vaucanson/config/system.hh,
-	include/vaucanson/config/extrconf.sh, tools/scandefs.pl: 
+	include/vaucanson/config/extrconf.sh, tools/scandefs.pl:
 		change the configuration system to import package version
 		and name while preventing name clashes.
 	* include/vaucanson/tools/automaton_tools.hh: minor.
@@ -148,26 +148,26 @@
 	* include/vaucanson/algorithms/glushkov.hxx: minor.
 
 	make check works again.
-	
+
 2002-10-23  Raphaël Poss  <raph@lrde.epita.fr>
 (0.126)
-	
+
 	* configure.ac: use AM_MAINTAINER_MODE
 
 2002-10-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.125)
 	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx: minor.
-	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: 
-		rename ExpDispatch to DispatchFunction 
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx:
+		rename ExpDispatch to DispatchFunction
 		(global object function).
 	* include/vaucanson/algebra/concrete/series/rat/exp.hh: minor.
- 
+
 	* include/vaucanson/tools/usual.hh: minor.
 	* include/vaucanson/misc/random.hxx: add specialization for int.
 	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx:
 		de-constify krat pattern.
 
-	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: 
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh:
 		idem.
 
 2002-10-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -175,17 +175,17 @@
 	* include/vaucanson/algebra/concrete/series/rat/exp.hxx:
 		add a constructor from const node_t*.
 		fixed some bug in DispatchVisitor.
-	* include/vaucanson/algebra/concrete/series/rat/exp.hh: 
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh:
 		modified in consequence.
 	* include/vaucanson/algorithms/glushkov.hxx:
 		now Glushkov is generic over the k-expr implementation.
-	* include/vaucanson/algorithms/glushkov.hh: 
+	* include/vaucanson/algorithms/glushkov.hh:
 		a more souple signature now.
- 
+
 	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx:
 		add UnaryOp class
 		rename BinOp to BinaryOp
-     
+
 	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh:
 		modified in consequence
 		add DecFinalLeaf macro
@@ -196,7 +196,7 @@
 	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx
 		added
 	* include/vaucanson/algebra/concrete/series/krat.hh: minor change.
-	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: 
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx:
 		add DispatchExp and DispatchVisitor.
 	* include/vaucanson/algebra/concrete/series/rat/exp.hh: idem.
 
@@ -213,7 +213,7 @@
 	* include/vaucanson/algorithms/standard.hxx: fix prototypes.
 	* include/vaucanson/algorithms/standard.hh: minor.
 	* src/tests/automata/algos/minimization_test.hh: minor.
-	* src/tests/tests-suites/usual_automaton_t/Makefile.am: 
+	* src/tests/tests-suites/usual_automaton_t/Makefile.am:
 		add concat_test.
 	* src/tests/automata/implementation_check/global_consistency_test.hh:
 		remove debug garbage.
@@ -226,10 +226,10 @@
 (0.120)
 
 	* src/README: added to document src/* content.
-	
+
 	Local development files must _keep_ local. Do not add files that
 	will not be integrated in the project:
-	
+
 	* src/dev/isomorph-test.cc: removed.
 	* src/dev/Makefile.am: removed.
 
@@ -252,7 +252,7 @@
 2002-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.118)
 	* include/vaucanson/automata/concrete/manylinks.hh: minor.
-	* include/vaucanson/misc/fsm_dump.hh: 
+	* include/vaucanson/misc/fsm_dump.hh:
 		dumping an automaton with multiple initial states is
 	  dumping an automaton with one initial state linked to them.
 	* src/demos/fsm/generate_toolbox.sh: add
@@ -276,7 +276,7 @@
 
 2002-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.116)
-	* include/vaucanson/automata/concrete/manylinks.hh: 
+	* include/vaucanson/automata/concrete/manylinks.hh:
 		redesigned and documented.
 	* include/vaucanson/automata/concrete/manylinks.hxx: added.
 	* include/vaucanson/automata/concept/transpose_impl.hh: documented.
@@ -288,7 +288,7 @@
 
 2002-10-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.115)
-	* include/vaucanson/automata/concept/kinds.hh: 
+	* include/vaucanson/automata/concept/kinds.hh:
 		redesigned to be documented.
 	* include/vaucanson/automata/concept/handlers.hh: idem.
 	* include/vaucanson/automata/concept/concepts.hh: minor change.
@@ -303,7 +303,7 @@
 	* configure: removed. no configure on the prcs please.
 	* aclocal.m4: removed. no aclocal on the prcs please.
 	* include/vaucanson/misc/ref.hxx: minor.
-	* include/vaucanson/automata/concept/automata_base.hxx: 
+	* include/vaucanson/automata/concept/automata_base.hxx:
 		remove 'select_state' method.
 		replaced by 'choose_state'.
 	* include/vaucanson/automata/concept/automata_base.hh:
@@ -320,7 +320,7 @@
 2002-09-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.113)
 	Please, do not add Makefile.in into the project repository !
-	
+
 	* ./**/Makefile.in: 11 files removed.
 
 2002-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -334,8 +334,8 @@
 
 2002-09-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.111)
-	Documented files: (now use modules) 
-	
+	Documented files: (now use modules)
+
 	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh
 	* include/vaucanson/algebra/concrete/alphabets/alphabets.hh
 	* include/vaucanson/algebra/concept/alphabets_base.hh
@@ -353,7 +353,7 @@
 (0.110)
 
 	Documented files :
-	
+
 	* include/vaucanson/algebra/concrete/predefs.hh:
 	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
 	* include/vaucanson/algebra/concrete/alphabets/predefs.hh:
@@ -376,20 +376,20 @@
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx: mirror fixed.
 	* include/vaucanson/algebra/concept/freemonoid_base.hh: idem.
  	* include/vaucanson/config/extrconf.sh: now catches HAVE_* macros.
- 
+
 2002-09-04  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.108)
 	Documented files:
-	
+
 	* include/vaucanson/algebra/concept/alphabets_base.hh
-	* include/vaucanson/algebra/concept/semigroup_base.hh	
+	* include/vaucanson/algebra/concept/semigroup_base.hh
 	* include/vaucanson/algebra/concept/monoid_base.hh
 	* include/vaucanson/algebra/concept/semiring_base.hh
 	* include/vaucanson/algebra/concept/numerical_semiring.hh
 	* include/vaucanson/algebra/concept/tropical_semiring.hh
 	* include/vaucanson/algebra/concept/freemonoid_base.hh
 	* include/vaucanson/algebra/concept/series_base.hh
-	
+
 2002-08-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.107)
 	* include/vaucanson/fundamental/op_traits.hh: documented.
@@ -420,10 +420,10 @@
 	* include/vaucanson/fundamental/default_ops.hxx: idem.
 	* include/vaucanson/fundamental/default_ops.hh: idem.
 	* doc/css/vaucanson.css: cleaned. to be augmented.
-	
+
 	* include/vaucanson/algorithms/compute.hxx: include fixed.
 	* include/vaucanson/config/rel_ops_work_around_g++2.hh : idem.
-	
+
 2002-08-12  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.103)
 	* src/tests/automata/implementation_check/init_final_test.hh: fixed.
@@ -443,7 +443,7 @@
 	* src/demos/fsm/arg.hh: added.
 	* include/Makefile.am: pconf is no well integrated.
 	* include/vaucanson/algebra/concept/alphabets_base.hxx: fixed a bug in choose.
-	* configure.ac 
+	* configure.ac
 	* include/Makefile.in
 	* include/vaucanson/tools/gen_random.hxx: minor.
 	* include/vaucanson/misc/fsm_dump.hh: load is fixed.
@@ -484,14 +484,14 @@
 2002-07-31  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.98)
 	These files hide some package variables not to overlap user's one.
-	* tools/scandefs.pl : added. 
+	* tools/scandefs.pl : added.
 	* include/vaucanson/config/pconf.hh : added.
-	* include/vaucanson/config/extrconf.sh : added.	
+	* include/vaucanson/config/extrconf.sh : added.
 	* include/vaucanson/config/system.hh
 	-# include <vaucanson/config/config.hh>
 	+# include <vaucanson/config/pconf.hh>
 	* include/Makefile.am : use pconf.hh from now.
-	
+
 	* include/vaucanson/misc/fsm_dump.hh : added.
 	* src/demos/fsm/generate_toolbox.sh : added.
 	* src/demos/fsm/usual_automaton_t/toolbox.hh : added.
@@ -505,7 +505,7 @@
 	* src/demos/fsm/usual_automaton_t/configure.ac : added.
 	* src/demos/fsm/usual_automaton_t/random_generator.cc : added.
 	* src/demos/fsm/README : added.
-	
+
 	* include/vaucanson/algebra/concrete/series/series.hh : add Id.
 	* include/vaucanson/tools/usual.hh : include fix.
 
@@ -531,7 +531,7 @@
 	+./configure enables some workarounds and, consequently, users must
 	+compile with the same compiler to avoid compatibility problems.
 	+
- 
+
 
 2002-07-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.96)
@@ -564,7 +564,7 @@
 2002-07-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.95)
 	Changes to be g++-2.95.4 compliant :
-	
+
 	* include/vaucanson/fundamental/element_ops.hh : change operator namespace std.
 	* include/vaucanson/fundamental/element.hh : use system.hh.
 	* include/vaucanson/algebra/concept/alphabets_base.hxx : use system.hh, set() => this->set().
@@ -573,7 +573,7 @@
 	+AC_CHECK_HEADERS([limits])
 	+AC_CHECK_HEADERS([stl_config.h])
 	* src/tests/check/tests_stuff.cc : add iomanip. redesign msg.
-	* include/vaucanson/misc/numerical_constraints.hh : 
+	* include/vaucanson/misc/numerical_constraints.hh :
 		use limits.hh if limit std header does not exists.
 	* src/tests/algebra/semiring/semiring-test.hh : minor.
 	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx : use
@@ -582,7 +582,7 @@
 	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx : use rand() not random().
 	* src/tests/algebra/series/series-test.cc : use system.hh
 	* src/tests/algebra/series/series-test.hh : idem.
-	* include/vaucanson/automata/concrete/manylinks_states.hh : 	
+	* include/vaucanson/automata/concrete/manylinks_states.hh :
 		does not use std::iterator for the moment since g++-2 does not implement it.
 	* include/vaucanson/automata/concrete/manylinks_edges.hh : use system.hh
 	* include/vaucanson/automata/concept/automata_base.hxx : remove default arg for deltac.
@@ -596,7 +596,7 @@
 	* include/vaucanson/algorithms/normalized.hxx : idem.
 	* include/vaucanson/tools/usual.hh : use system.hh
 	* include/vaucanson/tools/gen_random.hxx : use rand() not random() !
-	* include/vaucanson/tools/gen_random.hh : use system.hh 
+	* include/vaucanson/tools/gen_random.hh : use system.hh
 	* include/vaucanson/misc/random.hxx : use rand() not random().
 	* include/vaucanson/algorithms/moore.hxx : trim the result.
 	* include/vaucanson/algorithms/hopcroft.hxx : idem.
@@ -611,12 +611,12 @@
 2002-07-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.94)
 	Changes to be g++-3.1 compliant :
-		
+
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx: add some typename.
 	* include/vaucanson/algorithms/determinize.hxx : suppress hash_map for ever.
-	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx : 
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx :
 		suppress default values for arguments in implementation.
-	* include/vaucanson/algebra/concrete/series/rat/nodes.hxx : 
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hxx :
 		idem + some typename were forgotten.
 	* include/vaucanson/algebra/concrete/series/rat/exp.hxx : idem.
 	* include/vaucanson/algebra/concrete/series/rat/nodes.hh : idem.
@@ -638,15 +638,15 @@
 	+	src/tests/bin/Makefile
 	 	src/tests/tests-suites/usual_automaton_t/Makefile
 	 	include/Makefile])
- 
-	* Makefile.am : 
+
+	* Makefile.am :
 	+EXTRA_DIST=THANKS README LICENCE ChangeLog
 	* src/Makefile.am : minor change.
 	* src/tests/Makefile.am : add bin to SUBDIRS.
 	* src/tests/check/Makefile.flags : -O2.
-	* src/tests/check/Makefile.am : minor. 
+	* src/tests/check/Makefile.am : minor.
 	* src/tests/algebra/series/Makefile.am
-	+EXTRA_DIST = series-test.hh 
+	+EXTRA_DIST = series-test.hh
 	* src/tests/algebra/series/krat-test.cc : deactivated for the release.
 	* include/vaucanson/algorithms/union.hxx : bug due to history fixed.
 	* include/vaucanson/algorithms/product.hxx : idem.
@@ -655,7 +655,7 @@
 2002-07-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.92)
 	* *.hh, *.cc, *.hxx : replace VCSN_HEADER by LGPL.
-	
+
 
 2002-07-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.91)
@@ -744,23 +744,23 @@
 	* src/tests/tests-suites/usual_automaton_t.includes : added.
 	* src/tests/tests-suites/usual_automaton_t/Makefile.am : added.
 	* src/tests/tests-suites/usual_automaton_t/minimization-test.cc : added.
-	* src/tests/tests-suites/usual_automaton_t/product-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/product-test.cc: added.
 	* src/tests/tests-suites/usual_automaton_t/generalized-test.cc : added.
-	* src/tests/tests-suites/usual_automaton_t/extract-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/extract-test.cc: added.
 	* src/tests/tests-suites/usual_automaton_t/elimination-test.cc : added.
 	* src/tests/tests-suites/usual_automaton_t/reachable-test.cc : added
 	* src/tests/tests-suites/usual_automaton_t/glushkov-test.cc: added.
 	* src/tests/tests-suites/usual_automaton_t/normalize-test.cc: added.
-	* src/tests/tests-suites/usual_automaton_t/union-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/union-test.cc: added.
 	* src/tests/tests-suites/usual_automaton_t/realtime-test.cc: added.
 	* src/tests/tests-suites/usual_automaton_t/determinist-test.cc : added.
 	* src/tests/tests-suites/usual_automaton_t/thompson-test.cc: added.
-	* src/tests/tests-suites/usual_automaton_t/closure-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/closure-test.cc: added.
 	* src/tests/tests-suites/usual_automaton_t/complete-test.cc: added.
-	* src/tests/tests-suites/usual_automaton_t/compute-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/compute-test.cc: added.
 	* src/tests/bin/automata-test-suite.sh : added.
 
-	
+
 2002-07-22  Maxime Rey  <max@lrde.epita.fr>
 (0.89)
 	* Added `src/tests/automata/implementation_check/global_consistance_test.hh'
@@ -775,17 +775,17 @@
 
 2002-07-22  Maxime Rey  <max@lrde.epita.fr>
 (0.88)
-	* Added `include/vaucanson/algorithms/trim.hxx' 
-	* Added `include/vaucanson/algorithms/complete.hxx' 
-	* Added `include/vaucanson/algorithms/complete.hh' 
-	* Added `include/vaucanson/algorithms/complementary.hxx' 
-	* Added `include/vaucanson/algorithms/complementary.hh' 
-	* Added `include/vaucanson/algorithms/trim.hh' 
-	* Added `include/vaucanson/automata/concept/generalized.hxx' 
-	* Added `include/vaucanson/automata/concept/generalized.hh' 
-	* Added `src/tests/automata/algos/complete_test.hh' 
-	* Added `src/tests/automata/algos/product_test.hh' 
-	* Added `src/tests/automata/algos/minimization_test.hh' 
+	* Added `include/vaucanson/algorithms/trim.hxx'
+	* Added `include/vaucanson/algorithms/complete.hxx'
+	* Added `include/vaucanson/algorithms/complete.hh'
+	* Added `include/vaucanson/algorithms/complementary.hxx'
+	* Added `include/vaucanson/algorithms/complementary.hh'
+	* Added `include/vaucanson/algorithms/trim.hh'
+	* Added `include/vaucanson/automata/concept/generalized.hxx'
+	* Added `include/vaucanson/automata/concept/generalized.hh'
+	* Added `src/tests/automata/algos/complete_test.hh'
+	* Added `src/tests/automata/algos/product_test.hh'
+	* Added `src/tests/automata/algos/minimization_test.hh'
 	* Index: 0.87/include/vaucanson/algebra/concrete/series/polynoms.hxx
 	> } // vcsn
 	>
@@ -878,8 +878,8 @@
 	* include/vaucanson/algorithms/thompson.hxx:
 		bug due to non-one-letter words fixed.
 	* src/tests/automata/algos/thompson_test.hh: now, use exp.choose().
-	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx:	
-		bug fixed (one must generate an empty word) 
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx:
+		bug fixed (one must generate an empty word)
 
 
 2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -897,14 +897,14 @@
 	* include/vaucanson/fundamental/structure.hh
 	+      template <class T>
 	+      Element<Self, T> choose(SELECTOR(T)) const;
- 
+
 	* include/vaucanson/fundamental/default_ops.hh
 	+  template <typename S, typename T>
 	+  Element<S, T> op_choose(const Structure<S>& set, SELECTOR(T));
 	* include/vaucanson/algebra/concept/monoid_base.hh : minor.
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx : op_choose.
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh : op_choose.
-	
+
 	* src/tests/check/Makefile.flags : -ggdb removed.
 	* src/tests/algebra/semiring/semiring-numerical-test.cc : uses verbose_level_e.
 	* src/tests/algebra/semiring/semiring-tropical-test.cc : idem.
@@ -934,7 +934,7 @@
 	* include/vaucanson/tools/usual.hh : add one argument to SAVE_AUTOMATON_DOT.
 	* include/vaucanson/misc/random.hxx : spec for bool.
 	* include/vaucanson/misc/random.hh : idem.
-	
+
 	* include/vaucanson/algorithms/glushkov.hxx : minor.
 	* src/tests/automata/algos/glushkov_test.hh : use choose.
 	* include/vaucanson/algorithms/realtime.hxx : bug fixed in in_realtime.
@@ -944,12 +944,12 @@
 	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx :
 		zero krat cannot generate words.
 	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hh : idem.
- 
+
 	(Sorry for this too big change).
 
 2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.82)
-	* src/tests/check/tests_stuff.hh : 
+	* src/tests/check/tests_stuff.hh :
 		add verbose method, verbose_level_e enum and SUCCESS_RATE macro.
 	* src/tests/check/tests_stuff.cc : idem.
 	* include/vaucanson/tools/usual.hh : add SAVE_AUTOMATON_DOT macro.
@@ -973,17 +973,17 @@
 	* include/vaucanson/algorithms/realtime.hxx : added.
 	* include/vaucanson/algorithms/realtime.hh : added.
 	* src/tests/automata/algos/realtime_test.hh : added.
-	* include/vaucanson/tools/gen_random.hxx : 
+	* include/vaucanson/tools/gen_random.hxx :
 		added range selection to generate_with_epsilon.
 	* include/vaucanson/tools/gen_random.hh : idem.
 	* src/tests/automata/algos/closure_test.hh : modified in consequence.
-	
+
 2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.79)
 	* include/vaucanson/algorithms/thompson.hxx : added.
 	* include/vaucanson/algorithms/thompson.hh : added.
 	* src/tests/automata/algos/thompson_test.hh : added.
-	
+
 
 2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.78)
@@ -995,9 +995,9 @@
 	* include/vaucanson/algebra/concept/alphabets_base.hxx :
 	-  MetaElement<AlphabetsBase<Self>, T>::choose()
 	+  MetaElement<AlphabetsBase<Self>, T>::choose() const
-	   { 
+	   {
 	+    assert (this->size() > 0);
-	 
+
 	-  MetaElement<AlphabetsBase<Self>, T>::random_letter()
 	+  MetaElement<AlphabetsBase<Self>, T>::random_letter() const
 	* include/vaucanson/algebra/concept/alphabets_base.hh :
@@ -1009,9 +1009,9 @@
 	* include/vaucanson/algebra/concrete/series/krat.hh: misplaced namespace algebra.
 	* include/vaucanson/automata/concept/kinds.hxx : minor change.
 	* include/vaucanson/tools/usual.hh
-	+ typedef typename Prefix##monoid_elt_t::value_t Prefix##monoid_elt_value_t;   
+	+ typedef typename Prefix##monoid_elt_t::value_t Prefix##monoid_elt_value_t;
 	+ typedef typename Prefix##series_elt_t::weight_t    Prefix##weight_t;         \
-	+ typedef typename Prefix##weight_t::value_t         Prefix##weight_value_t;   \ 
+	+ typedef typename Prefix##weight_t::value_t         Prefix##weight_value_t;   \
 	* include/vaucanson/tools/gen_random.hxx : re-add empty() method.
 	* include/vaucanson/tools/gen_random.hh : re-add empty() method.
 
@@ -1022,16 +1022,16 @@
 	* include/vaucanson/automata/concept/kinds.hxx :
 	@@ -111,7 +111,7 @@
 	   AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
-	   add_spontaneous(hstate_t from, hstate_t to)			   
+	   add_spontaneous(hstate_t from, hstate_t to)
 	     {
 	- return auto_self().add_edge(from, to,
 	algebra::identity_value(SELECT(Series), SELECT(SeriesT)));
-	
+
 	+ return auto_self().add_edge(from, to,
 	identity_value(SELECT(Series), SELECT(SeriesT)));
 	}
 
-	
+
 	* include/vaucanson/tools/usual.hh
 	 #define AUTOMATON_TYPES_(AutoType,Prefix)				      \
 	- typedef typename AutoType::series_t                Prefix##series_t;         \
@@ -1040,37 +1040,37 @@
 	+ typedef typename AutoType::series_t                Prefix##series_t;	      \
 	+ typedef typename AutoType::series_elt_t            Prefix##series_elt_t;     \
 	  typedef typename AutoType::label_t		    Prefix##label_t;	      \
-	  typedef typename AutoType::tag_t		    Prefix##tag_t; 
+	  typedef typename AutoType::tag_t		    Prefix##tag_t;
 	 #define AUTOMATON_TYPES(AutoType)                   AUTOMATON_TYPES_(AutoType,)
 	+#define zero_	zero(SELECT(typename series_elt_t::value_t))
 	+#define one_	identity(SELECT(typename series_elt_t::value_t))
- 
+
 	* include/vaucanson/tools/gen_random.hxx
 	+  template <class TAutomata>
 	+  TAutomata GenRandomAutomata<TAutomata>::
-	+  generate_with_epsilon(unsigned nb_state, 
+	+  generate_with_epsilon(unsigned nb_state,
 	+			unsigned nb_edge,
 	+			unsigned nb_spontaneous)
-   
+
 	* include/vaucanson/tools/gen_random.hh
-	+    TAutomata generate_with_epsilon(unsigned nb_state, unsigned nb_edge, 
+	+    TAutomata generate_with_epsilon(unsigned nb_state, unsigned nb_edge,
 	+				    unsigned nb_epsilon);
 	+
 	* src/tests/automata/algos/algo_test.cc : minor.
 
-	* include/vaucanson/algorithms/closure.hh : 
+	* include/vaucanson/algorithms/closure.hh :
 	-# include <vaucanson/automata/automata_base.hh>
 	+# include <vaucanson/automata/concept/automata_base.hh>
- 
+
 	* src/tests/automata/algos/closure_test.hh :
 	-unsigned closure_test(tests::Tester& t)
 	+bool closure_test(tests::Tester& t)
 	-  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50);
 	+  automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 15);
    	+  automaton_t cauto = closure(auto_epsilon);
-	+  TEST(t, "Increase of edges number.",  
+	+  TEST(t, "Increase of edges number.",
 	+       cauto.edges().size() >= auto_epsilon.edges().size());
-	+  TEST(t, "Idempotence.", 
+	+  TEST(t, "Idempotence.",
 	+       closure(cauto).edges().size() == cauto.edges().size());
 
 	-  return EXIT_SUCCESS;
@@ -1084,7 +1084,7 @@
 	   {
 	-    algebra::Element<A, T> ret(a);
 	+    Element<A, T> ret(a);
-	
+
 	-  typename algebra::Element<A, T>::series_elt_t
 	-  elimination(const algebra::Element<A, T>& a)
 	+  typename Element<A, T>::series_elt_t
@@ -1098,13 +1098,13 @@
 	-  elimination(const algebra::Element<A, T>& a);
 	+  typename Element<A, T>::series_elt_t
 	+  elimination(const Element<A, T>& a);
- 
+
 	   template<typename A, typename T, typename Chooser_>
 	-  typename algebra::Element<A, T>::series_elt_t
 	-  elimination(const algebra::Element<A, T>& a, const Chooser_& c);
 	+  typename Element<A, T>::series_elt_t
 	+  elimination(const Element<A, T>& a, const Chooser_& c);
-   
+
 
 2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
@@ -1127,7 +1127,7 @@
 	* include/vaucanson/algebra/concrete/series/generalized.hh : added.
 	* src/tests/automata/algos/generalized_test.hh : added.
 
-	
+
 2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.75)
 	* src/tests/automata/algos/compute_test.hh : added.
@@ -1139,25 +1139,25 @@
 	>  typedef typename AutoType::series_t                Prefix##series_t;
 	* gen_random.hxx : it's ok
 	* Index: 0.73/src/tests/automata/algos/union_test.hh : minor
-	
+
 2002-07-19  Maxime Rey  <max@lrde.epita.fr>
 
-	* Added `include/vaucanson/algorithms/closure.hxx' 
-	* Added `include/vaucanson/algorithms/closure.hh' 
-	* Added `include/vaucanson/algorithms/moore.hxx' 
-	* Added `include/vaucanson/algorithms/moore.hh' 
-	* Added `include/vaucanson/algorithms/hopcroft.hxx' 
-	* Added `include/vaucanson/algorithms/hopcroft.hh' 
-	* Added `src/tests/automata/algos/closure_test.hh' 
-	* Added `src/tests/automata/algos/reachable_test.hh' 
-	* Added `src/tests/automata/algos/extract_test.hh' 
+	* Added `include/vaucanson/algorithms/closure.hxx'
+	* Added `include/vaucanson/algorithms/closure.hh'
+	* Added `include/vaucanson/algorithms/moore.hxx'
+	* Added `include/vaucanson/algorithms/moore.hh'
+	* Added `include/vaucanson/algorithms/hopcroft.hxx'
+	* Added `include/vaucanson/algorithms/hopcroft.hh'
+	* Added `src/tests/automata/algos/closure_test.hh'
+	* Added `src/tests/automata/algos/reachable_test.hh'
+	* Added `src/tests/automata/algos/extract_test.hh'
 	* Index: 0.72/include/vaucanson/algorithms/extract.hxx
 	> # include <queue>
 	25a27,40
 	> //     for (typename auto_t::state_iterator i = a.states().begin();
 	> //     i != a.states().end();
 	> //     ++i)
-	> //       if (selected.find(*i) == selected.end()) 
+	> //       if (selected.find(*i) == selected.end())
 	> //    {
 	> //      if (check_states)
 	> //        {
@@ -1230,22 +1230,22 @@
 2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.72)
 	* src/tests/automata/algos/minimisation_test.hh : added.
-	
+
 	* include/vaucanson/fundamental/element.hxx :
-	   Element<S,T>& 
+	   Element<S,T>&
 	   Element<S,T>::operator=(const Element<S, U>& other)
 	   {
 	-    set_.assign(other.set_);
 	+    set_.assign(other.set());
 	     op_assign(set(), other.set(), value(), other.value());
-	     return *this; 
+	     return *this;
 	   }
 	* include/vaucanson/fundamental/default_ops.hxx :
 	-      assert(s1.self() == s2.self());
 	+      // FIXME: we want to be able to write :
 	+      // assert(s1.self() == s2.self());
-	       op_assign(s1.self(), dst, src); 
-	
+	       op_assign(s1.self(), dst, src);
+
 	* include/vaucanson/algebra/concept/alphabets_base.hxx : minor.
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx
 	+# include <vaucanson/algebra/concept/freemonoid_base.hh>
@@ -1254,7 +1254,7 @@
 	     polynom<Tm, Tw>::as_map() const
 
 	-    template <class Tm, class Tw>
-	-    polynom<Tm,Tw> 
+	-    polynom<Tm,Tw>
 	-    DefaultTransposeFun<polynom<Tm,Tw> >::operator()(const polynom<Tm,Tw>& l)
 	+    template <class Series, class Tm, class Tw>
 	+    polynom<Tm,Tw>
@@ -1264,7 +1264,7 @@
 	       typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
 	+      typedef typename Series::monoid_elt_t	       monoid_elt_t;
 	       polynom<Tm, Tw>	new_t;
-	-      
+	-
 	-      std::swap(new_t, t);
 	-      for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
 	-	t[mirror((*i).first)] = (*i).second;
@@ -1278,7 +1278,7 @@
 	     typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
 	-    polynom<Tm, Tw>	new_t;
 	+    polynom<Tm, Tw>	new_t(t);
-	 
+
 	-    std::swap(new_t, t);
 	+    t.clear();
 	     for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
@@ -1289,19 +1289,19 @@
 	-      const std::map<Tm, Tw>
 	+      const std::map<Tm, Tw>&
 	       as_map() const;
- 
+
 	-    template <class Tm, class Tw>
 	-    struct DefaultTransposeFun< polynom<Tm,Tw> >
 	+    template <class Series, class Tm, class Tw>
 	+    struct DefaultTransposeFun<Series, polynom<Tm,Tw> >
 	     {
-	-      polynom<Tm,Tw> 
+	-      polynom<Tm,Tw>
 	-      operator()(const polynom<Tm,Tw>& l);
 	+      polynom<Tm,Tw>
 	+      operator()(const Series& s, const polynom<Tm,Tw>& l) const;
-	     };	
-     
- 
+	     };
+
+
 	* include/vaucanson/misc/ref.hh :
 	-    long ref_count() const;
 	+    long& ref_count() const;
@@ -1314,48 +1314,48 @@
 	-  template<typename T> long ref<T>::ref_count() const
 	+  template<typename T> long& ref<T>::ref_count() const
 	   { return *count_; }
-   
+
 	* include/vaucanson/automata/concrete/manylinks.hh :
 	-    typedef const L& label_ret_t;
 	+    typedef L label_ret_t;
 
-	
-	* include/vaucanson/automata/concept/transpose_impl.hxx : warning. 
+
+	* include/vaucanson/automata/concept/transpose_impl.hxx : warning.
 		We do this temporarily because it is a modelisation pb that will
 		be resolve globally soon.
-	-      return impl().add_edge(to, from, transpose_label_fun_(label)); 
-	+      return impl().add_edge(to, from, label); 
+	-      return impl().add_edge(to, from, transpose_label_fun_(label));
+	+      return impl().add_edge(to, from, label);
 
 	@@ -346,7 +346,8 @@
 	     label_of(unsigned e) const
-	     { 
+	     {
 	       // FIXME : transpose label
-	-      return transpose_label_fun_(impl().label_of(e)); 
+	-      return transpose_label_fun_(impl().label_of(e));
 	+      return impl().label_of(e);
-	+	// transpose_label_fun_(impl().label_of(e)); 
+	+	// transpose_label_fun_(impl().label_of(e));
 	     }
- 
+
 	* include/vaucanson/automata/concept/transpose_impl.hh :
 	@@ -195,7 +195,9 @@
 	     <
-	       original_impl_t, 
+	       original_impl_t,
 	       // FIXME: this is broken. We need to be more intelligent.
 	-      DefaultTransposeFun<typename original_impl_t::label_t>
 	+      DefaultTransposeFun<
-	+      typename Auto::series_t, 
+	+      typename Auto::series_t,
 	+      typename original_impl_t::label_t>
 	     > transpose_impl_t;
 	     typedef utility::ref<transpose_impl_t>		   transpose_ref_t;
-     
+
 	* include/vaucanson/automata/concept/automata_base.hh :
 
 	* include/vaucanson/automata/concept/automata.hh : minor
- 
-	* include/vaucanson/algorithms/transpose.hxx : bug fixed. 
+
+	* include/vaucanson/algorithms/transpose.hxx : bug fixed.
 
 	* include/vaucanson/algebra/concrete/series/rat/exp.hxx
-     
-	* include/vaucanson/algebra/concrete/series/rat/exp.hh : 
+
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh :
 	-  template <typename M, typename W>
 	-  struct DefaultTransposeFun<rat::exp<M, W> >
 	+  template <typename S, typename M, typename W>
@@ -1365,10 +1365,10 @@
 	-    operator()(const rat::exp<M, W>& exp);
 	+    operator()(const S&, const rat::exp<M, W>& exp);
 	   };
- 
+
 	* include/vaucanson/tools/usual.hh
 	+ typedef typename Prefix##alphabet_t::letter_t      Prefix##letter_t;	      \
- 
+
 	* include/vaucanson/tools/gen_random.hxx : minor change.
 	@@ -34,6 +34,7 @@
  	   unsigned istate = 1, unsigned fstate = 1,
@@ -1379,9 +1379,9 @@
 	     if (nb_edge < nb_state - 1)
 	       nb_edge = nb_state - 1;
 		@@ -51,8 +52,16 @@
-	     // alphabet construction 
+	     // alphabet construction
 	     alphabets_elt_t& alpha = work.series().monoid().alphabet();
- 
+
 	-    for (unsigned i = 0; i < alea(nb_letter); ++i)
 	-      alpha.insert(alpha.random_letter());
 	+    unsigned nb = alea(nb_letter);
@@ -1394,7 +1394,7 @@
 	+	++i;
 	+      }
 	+
- 
+
 	     // minimal construction
 	     state_iterator prev = work.states().begin();
 
@@ -1402,7 +1402,7 @@
 
 	* include/vaucanson/algebra/concrete/series/transpose.hxx : minor change.
 
-	* include/vaucanson/algebra/concrete/series/transpose.hh : 
+	* include/vaucanson/algebra/concrete/series/transpose.hh :
 	-    template <class T>
 	+    template <class S, class T>
 	     struct DefaultTransposeFun
@@ -1432,7 +1432,7 @@
 2002-07-18  Maxime Rey  <max@lrde.epita.fr>
 
 	* Index: 0.68/include/vaucanson/automata/concept/transpose_impl.hxx
-	
+
 	<     template <typename OtherImpl, class TransposeLabelFun>
 	<     OtherImpl::series_t&
 	---
@@ -1452,16 +1452,16 @@
 2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.68)
 	* include/vaucanson/automata/concept/transpose_impl.hxx
--    typename OtherImpl:tag_t& 
-+    typename OtherImpl::tag_t& 
--    const typename OtherImpl:tag_t& 
-+    const typename OtherImpl::tag_t& 
+-    typename OtherImpl:tag_t&
++    typename OtherImpl::tag_t&
+-    const typename OtherImpl:tag_t&
++    const typename OtherImpl::tag_t&
 -    Element<OtherImpl::series_t, OtherImpl::series_value_t>
 +    Element<typename OtherImpl::series_t, typename OtherImpl::series_value_t>
 -    Element<OtherImpl::series_t, OtherImpl::series_value_t>
 +    Element<typename OtherImpl::series_t, typename OtherImpl::series_value_t>
--    const OtherImpl::series_t& 
-+    const typename OtherImpl::series_t& 
+-    const OtherImpl::series_t&
++    const typename OtherImpl::series_t&
 
 	* include/vaucanson/automata/concept/transpose_impl.hh
 -# include <vaucanson/algebra/concrete/series/exp.hh>
@@ -1471,7 +1471,7 @@
 
 2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.67)
-	* include/vaucanson/algebra/concept/series_base.hxx 
+	* include/vaucanson/algebra/concept/series_base.hxx
 	* include/vaucanson/algebra/concrete/series/krat.hxx
 	* include/vaucanson/algebra/concrete/series/krat.hh0
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx
@@ -1496,7 +1496,7 @@
 
 2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.66)
-	* include/vaucanson/automata/concept/automata_base.hh : minor.       
+	* include/vaucanson/automata/concept/automata_base.hh : minor.
 	* include/vaucanson/tools/usual.hh : added.
 
 	* include/vaucanson/tools/gen_random.hxx : moved here.
@@ -1505,7 +1505,7 @@
 	* include/vaucanson/algorithms/compute.hxx : added.
 	* include/vaucanson/algorithms/compute.hh : added.
 	* src/tests/automata/algos/compute-test.hh : added.
-	
+
 	* include/vaucanson/misc/random.hxx : added.
 	* include/vaucanson/misc/random.hh : added.
 
@@ -1515,11 +1515,11 @@
 
 2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.65)
-	* include/vaucanson/algebra/concept/alphabets_base.hxx : 
+	* include/vaucanson/algebra/concept/alphabets_base.hxx :
 	* include/vaucanson/algebra/concept/alphabets_base.hh :
 		add random_letter.
 
-	* src/tests/automata/implementation_check/gen_random.hh : 
+	* src/tests/automata/implementation_check/gen_random.hh :
 	* src/tests/automata/implementation_check/gen_random.hxx
 		use it.
 
@@ -1553,27 +1553,27 @@
 	* src/tests/algebra/semiring/semiring-test.hh : minor.
 	* src/tests/algebra/alphabets/alphabets-basic-test.cc : minor.
 
-	* include/vaucanson/algebra/concept/freemonoid_base.hxx : 
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx :
 		mirror method return void because it generate side-effects.
-	* include/vaucanson/algebra/concept/freemonoid_base.hh : 
+	* include/vaucanson/algebra/concept/freemonoid_base.hh :
 		modified in consequence.
 
 	* include/vaucanson/algebra/concrete/free_monoid/words.hh : minor.
 
 	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh : minor.
 	* src/tests/algebra/free_monoid/free_monoid-test.cc : add mirror test.
-	* include/vaucanson/algebra/concrete/series/krat.hxx 
-	* include/vaucanson/algebra/concrete/series/krat.hh 
-	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx: 
+	* include/vaucanson/algebra/concrete/series/krat.hxx
+	* include/vaucanson/algebra/concrete/series/krat.hh
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx:
 		added.
-	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx: 
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx:
 		added.
 	* include/vaucanson/algebra/concrete/series/rat/nodes.hxx: added.
 	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: added.
 	* include/vaucanson/algebra/concrete/series/rat/nodes.hh: added.
 	* include/vaucanson/algebra/concrete/series/rat/exp.hh: added.
 	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh: added.
-	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh: 
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh:
 		added.
 
 
@@ -1582,11 +1582,11 @@
 	* include/vaucanson/algebra/concept/alphabets_base.hxx :
 	-  /* sugar */
 	-  // add-on
-	-  MetaElement<AlphabetsBase<Self>, T>::select_letter(unsigned n) 
-	+  MetaElement<AlphabetsBase<Self>, T>::choose() 
-     
+	-  MetaElement<AlphabetsBase<Self>, T>::select_letter(unsigned n)
+	+  MetaElement<AlphabetsBase<Self>, T>::choose()
+
 	* include/vaucanson/algebra/concept/alphabets_base.hh : Add doc.
-	
+
 	* doc/vaucanson.doxywizard : Adjusted.
 
 	* src/tests/check/tests_stuff.hh : Add macro TEST_MSG.
@@ -1618,7 +1618,7 @@
 	* src/tests/automata/implementation_check/gen_random.hh : modified
 	src/tests/automata/implementation_check/gen_random.hxx : modified
 	in order to add generation of determinist automata.
-	* src/tests/automata/algos/check_determinist.cc : modified 
+	* src/tests/automata/algos/check_determinist.cc : modified
 	Check of is_deterministic routine
 
 2002-07-11  Maxime Rey  <max@lrde.epita.fr>
@@ -1639,7 +1639,7 @@
 	Test himself in progress ...
 	* Algorithms added :
 	`include/vaucanson/algorithms/extract.hxx' : added
-	`include/vaucanson/algorithms/extract.hh' : added 
+	`include/vaucanson/algorithms/extract.hh' : added
 	`include/vaucanson/algorithms/reachable.hxx' : added
 	`include/vaucanson/algorithms/reachable.hh' : added
 	`include/vaucanson/algorithms/determinize.hxx' : added
@@ -1650,7 +1650,7 @@
 2002-07-11  Raphaël Poss  <raph@lrde.epita.fr>
 
         * configure.ac: simplified.
-	
+
 2002-07-09  Maxime Rey  <max@lrde.epita.fr>
 
 	* src/tests/automata/implementation_check/check_global_consistance.cc
@@ -1674,12 +1674,12 @@
 	>       // add-on
 	>       letter_t          select_letter(unsigned n);
 	>
-	* /include/vaucanson/algebra/concept/alphabets_base.hxx implement 
+	* /include/vaucanson/algebra/concept/alphabets_base.hxx implement
 	in consequence the method select_letter
 	* Index: /include/vaucanson/algebra/concrete/free_monoid/words.hh
 	23a24,25
 	>       typedef A alphabets_elt_t;
-	
+
 	* Index:/include/vaucanson/automata/concrete/manylinks_states.hh
 	59c59
 	<       assert((*counters_)[st_global] != 0);
@@ -1693,7 +1693,7 @@
 	restored ("value()->" restored instead of "value()." )
 	* Index: 0.53/include/vaucanson/automata/concept/automata_base.hh
 	143c143
-	< #define DELTA_DECL(Name, Type, Kind_type, Init)    
+	< #define DELTA_DECL(Name, Type, Kind_type, Init)
         \---
 	> #define DELTA_DECL(Name, Kind_type, Init)
 	(automata_base.hh cleaned - Type unused)
@@ -1711,7 +1711,7 @@
 
 	* check_global_consistance.cc & gen_random_automata.cc not finished
 
-	
+
 
 2002-07-01  Maxime Rey  <max@lrde.epita.fr>
 
@@ -1726,7 +1726,7 @@
 
 2002-07-01  Maxime Rey  <max@lrde.epita.fr>
 
-	* check_add_state extended  
+	* check_add_state extended
 	* Test to check edges appear with :
 	  src/tests/automata/implementation_check/check_coherence_state_edge.cc
 	* Test to check zombie edge appear with :
@@ -1743,7 +1743,7 @@
 	* Added `src/tests/automata/Makefile.am'
 	* Fonctionnal tests for automata began with :
 	* Added `src/tests/automata/implementation_check/check_add_state.cc'
-	
+
 2002-07-01  Maxime Rey  <max@lrde.epita.fr>
 
 	* include/vaucanson/automata/concrete/ created
@@ -1783,7 +1783,7 @@
 2002-06-27  Maxime Rey  <max@lrde.epita.fr>
 
 	* include/vaucanson/misc/functors.hxx added (split)
-	* include/vaucanson/misc/type_constraints.hh added 
+	* include/vaucanson/misc/type_constraints.hh added
 	  needed by functors.hh
 	* include/vaucanson/misc/type_constraints.hh : header modified
 
@@ -1792,14 +1792,14 @@
 	* `include/vaucanson/misc/converter.hxx' added (split)
 	* `include/vaucanson/misc/ref.hxx' added (split)
 	* misc_constraints.hh header modified
-	
+
 
 2002-06-27  Maxime Rey  <max@lrde.epita.fr>
 
 	* Add for futures automata files which need them
 	* Added `include/vaucanson/misc/converter.hh'
-	* Added `include/vaucanson/misc/functors.hh' 
-	* Added `include/vaucanson/misc/ref.hh' 
+	* Added `include/vaucanson/misc/functors.hh'
+	* Added `include/vaucanson/misc/ref.hh'
 
 2002-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
@@ -1834,7 +1834,7 @@
 
 2002-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/series/exp.hh: 
+	* include/vaucanson/algebra/concrete/series/exp.hh:
 
 	* src/tests/fundamental/template_element-test.hh : header modified.
 	* include/vaucanson/algebra/concrete/series/krat.hxx : idem.
@@ -1850,7 +1850,7 @@
 	* include/vaucanson/algebra/concrete/series/dump_visitor.hh : new file.
 	* include/vaucanson/algebra/concrete/series/depth_visitor.hh : new file.
 
-	
+
 2002-06-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/polynoms.hxx : modified.
@@ -1870,15 +1870,15 @@
 	* Added `include/vaucanson/algebra/concept/series_base.hxx'
 	* Added `include/vaucanson/algebra/concept/series_base.hh'
 	* Added `include/vaucanson/algebra/concrete/series/krat_conversion.hxx'
-	* Added `include/vaucanson/algebra/concrete/series/krat_conversion.hh' 
-	* Added `include/vaucanson/algebra/concrete/series/krat.hxx' 
+	* Added `include/vaucanson/algebra/concrete/series/krat_conversion.hh'
+	* Added `include/vaucanson/algebra/concrete/series/krat.hxx'
 	* Added `include/vaucanson/algebra/concrete/series/krat.hh'
 	* Added `include/vaucanson/algebra/concrete/series/polynoms.hxx'
 	* Added `include/vaucanson/algebra/concrete/series/polynoms.hh'
 	* Added `include/vaucanson/algebra/concrete/series/series.hxx'
 	* Added `include/vaucanson/algebra/concrete/series/series.hh'
-	* Added `src/tests/algebra/series/series-test.cc' 
-	
+	* Added `src/tests/algebra/series/series-test.cc'
+
 2002-06-18  Maxime Rey  <max@lrde.epita.fr>
 
 	* src/tests/algebra/alphabets/alphabets-basic-test.cc extend
@@ -1901,12 +1901,12 @@
 2002-06-18  Maxime Rey  <max@lrde.epita.fr>
 
 	* Added `include/vaucanson/algebra/concept/freemonoid_base.hxx'
-	* Added `include/vaucanson/algebra/concept/freemonoid_base.hh' 
+	* Added `include/vaucanson/algebra/concept/freemonoid_base.hh'
 	* Added `include/vaucanson/algebra/concrete/free_monoid/words.hxx'
-	* Added `include/vaucanson/algebra/concrete/free_monoid/words.hh' 
+	* Added `include/vaucanson/algebra/concrete/free_monoid/words.hh'
 	* Added `include/vaucanson/algebra/concrete/free_monoid/str_words.hxx'
-	* Added `include/vaucanson/algebra/concrete/free_monoid/str_words.hh' 
-	* Added `src/tests/algebra/free_monoid/free-monoid-test' 
+	* Added `include/vaucanson/algebra/concrete/free_monoid/str_words.hh'
+	* Added `src/tests/algebra/free_monoid/free-monoid-test'
 	* Added `src/tests/algebra/free_monoid/free_monoid-test.cc'
 
 2002-06-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -1917,7 +1917,7 @@
 2002-06-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* src/tests/algebra/semiring/semiring-tropical-test.cc : added.
-	* src/tests/algebra/semiring/semiring-test.hh : added. 
+	* src/tests/algebra/semiring/semiring-test.hh : added.
 
 	* src/tests/algebra/semiring/semiring-numerical-test.cc : now, use semiring-test.hh.
 
@@ -1940,11 +1940,11 @@
 	* include/vaucanson/fundamental/element_ops.hh : modified.
 		> # include <vaucanson/misc/selectors.hh>
 
-	* include/vaucanson/fundamental/element_base.hxx : modified. 
+	* include/vaucanson/fundamental/element_base.hxx : modified.
 		Fix minor bugs.
-	
+
 	* configure.ac : modified. Add Makefiles.
-	* include/vaucanson/algebra/concept/semigroup_base.hxx : modified. 
+	* include/vaucanson/algebra/concept/semigroup_base.hxx : modified.
 		Fix includes.
 	* include/vaucanson/algebra/concept/numerical_semiring.hh : idem.
 
@@ -2006,30 +2006,30 @@
 
 2002-06-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	Packaging files: 
+	Packaging files:
 	(do not forget to update these in the future)
-	* Added `configure' 
-	* Added `depcomp' 
-	* Added `Makefile.in' 
-	* Added `missing' 
-	* Added `mkinstalldirs' 
-	* Added `aclocal.m4' 
-	* Added `install-sh' 
-	* Added `configure.ac' 
-	* Added `Makefile.am' 
-	* Added `include/Makefile.in' 
-	* Added `src/Makefile.in' 
-	* Added `src/Makefile.am' 
-	* Added `src/tests/Makefile.in' 
-	* Added `src/tests/Makefile.am' 
-	* Added `src/tests/check/tests_stuff.hh' 
-	* Added `src/tests/check/tests_stuff.cc' 
-	* Added `src/tests/check/Makefile.in' 
-	* Added `src/tests/check/Makefile.flags' 
-	* Added `src/tests/check/Makefile.check' 
-	* Added `src/tests/check/Makefile.am' 
-	* Added `src/tests/fundamental/Makefile.in' 
-	* Added `src/tests/fundamental/Makefile.am' 
+	* Added `configure'
+	* Added `depcomp'
+	* Added `Makefile.in'
+	* Added `missing'
+	* Added `mkinstalldirs'
+	* Added `aclocal.m4'
+	* Added `install-sh'
+	* Added `configure.ac'
+	* Added `Makefile.am'
+	* Added `include/Makefile.in'
+	* Added `src/Makefile.in'
+	* Added `src/Makefile.am'
+	* Added `src/tests/Makefile.in'
+	* Added `src/tests/Makefile.am'
+	* Added `src/tests/check/tests_stuff.hh'
+	* Added `src/tests/check/tests_stuff.cc'
+	* Added `src/tests/check/Makefile.in'
+	* Added `src/tests/check/Makefile.flags'
+	* Added `src/tests/check/Makefile.check'
+	* Added `src/tests/check/Makefile.am'
+	* Added `src/tests/fundamental/Makefile.in'
+	* Added `src/tests/fundamental/Makefile.am'
 
 	* Modified : include/Makefile.am
 	5a6,36
@@ -2072,26 +2072,26 @@
 	--- src/tests/fundamental/element-full-test.cc
 	> #include <check/tests_stuff.hh>
 
-	
+
 2002-06-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	Doxygen files:
-	* Added `doc/vaucanson.doxywizard' 
-	* Added `doc/src/main.dox' 
-	* Added `doc/css/vaucanson.css' 
-	
+	* Added `doc/vaucanson.doxywizard'
+	* Added `doc/src/main.dox'
+	* Added `doc/css/vaucanson.css'
+
 
 2002-06-07  Maxime Rey  <max@lrde.epita.fr>
 
 	* Added `include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx'
 	* Added `include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh'
 	* Added `include/vaucanson/algebra/concrete/alphabets/alphabets.hh'
-	* Added `include/vaucanson/algebra/concept/concepts.hxx' 
-	* Added `include/vaucanson/algebra/concept/concepts.hh' 
+	* Added `include/vaucanson/algebra/concept/concepts.hxx'
+	* Added `include/vaucanson/algebra/concept/concepts.hh'
 	* Added `include/vaucanson/algebra/concept/alphabets_base.hxx'
- 	* Added `include/vaucanson/algebra/concept/alphabets_base.hh' 
-	* Added `include/vaucanson/misc/container_ops.hxx' 
-	* Added `include/vaucanson/misc/container_ops.hh' 
+ 	* Added `include/vaucanson/algebra/concept/alphabets_base.hh'
+	* Added `include/vaucanson/misc/container_ops.hxx'
+	* Added `include/vaucanson/misc/container_ops.hh'
 	* Test Alphabets Algebraic Structure
 
 2002-06-07  Maxime Rey  <max@lrde.epita.fr>
@@ -2103,11 +2103,11 @@
 
 	*  Added `include/vaucanson/internal/traits.hh'
 	*  Added `include/vaucanson/fundamental/meta_element.hxx'
-	*  Added `include/vaucanson/fundamental/meta_element.hh' 
-	*  Added `include/vaucanson/fundamental/structure.hxx' 
-	*  Added `include/vaucanson/fundamental/structure.hh' 
-	*  Added `include/vaucanson/fundamental/default_ops.hxx' 
-	*  Added `include/vaucanson/fundamental/default_ops.hh' 
+	*  Added `include/vaucanson/fundamental/meta_element.hh'
+	*  Added `include/vaucanson/fundamental/structure.hxx'
+	*  Added `include/vaucanson/fundamental/structure.hh'
+	*  Added `include/vaucanson/fundamental/default_ops.hxx'
+	*  Added `include/vaucanson/fundamental/default_ops.hh'
 	*  Added `src/tests/fundamental/basic_type.hh'
 
 2002-06-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
@@ -2139,25 +2139,22 @@
 	* include/vaucanson/misc/static.hh: Added.
 
 	* include/vaucanson/misc/static.hxx: Added.
-	
-	* include/fundamental : added. 
-	 Added `include/vaucanson/fundamental/predefs.hh' 
-	 Added `include/vaucanson/fundamental/slots.hxx' 
-	 Added `include/vaucanson/fundamental/slots.hh' 
-	 Added `include/vaucanson/fundamental/op_traits.hh' 
-	 Added `include/vaucanson/fundamental/fundamental.hh' 
-	 Added `include/vaucanson/fundamental/element_ops.hh' 
-	 Added `include/vaucanson/fundamental/element.hxx' 
-	 Added `include/vaucanson/fundamental/element.hh' 
-	 Added `include/vaucanson/fundamental/element_base.hxx' 
-	 Added `include/vaucanson/fundamental/element_base.hh' 
-	
+
+	* include/fundamental : added.
+	 Added `include/vaucanson/fundamental/predefs.hh'
+	 Added `include/vaucanson/fundamental/slots.hxx'
+	 Added `include/vaucanson/fundamental/slots.hh'
+	 Added `include/vaucanson/fundamental/op_traits.hh'
+	 Added `include/vaucanson/fundamental/fundamental.hh'
+	 Added `include/vaucanson/fundamental/element_ops.hh'
+	 Added `include/vaucanson/fundamental/element.hxx'
+	 Added `include/vaucanson/fundamental/element.hh'
+	 Added `include/vaucanson/fundamental/element_base.hxx'
+	 Added `include/vaucanson/fundamental/element_base.hh'
+
 
 2002-05-31  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* This file (ChangeLog) : added.
 	* src/ : added.
 	* include/ : added.
-
-	
-
