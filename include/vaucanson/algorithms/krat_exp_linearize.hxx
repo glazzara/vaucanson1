@@ -52,9 +52,9 @@ namespace vcsn {
     typedef typename linearize_element<Series, T>::element_t	return_type;
     typedef typename return_type::value_t			exp_impl_t;
     typedef typename return_type::monoid_value_t		l_monoid_value_t;
-    typedef typename return_type::set_t				l_serie_t;
-    typedef typename l_serie_t::monoid_t			l_monoid_t;
-    typedef typename l_serie_t::semiring_t			l_semiring_t;
+    typedef typename return_type::set_t				l_series_elt_t;
+    typedef typename l_series_elt_t::monoid_t			l_monoid_t;
+    typedef typename l_series_elt_t::semiring_t			l_semiring_t;
     typedef typename l_monoid_t::alphabet_t			l_alphabet_t;
     typedef typename l_monoid_t::letter_t			l_letter_t;
     typedef typename return_type::monoid_elt_t			l_monoid_elt_t;
@@ -77,7 +77,7 @@ namespace vcsn {
       return_type	result = match(exp_.value());
       l_monoid_t	l_monoid(l_alpha_);
       l_semiring_t	l_semiring;
-      return return_type(l_serie_t(l_semiring, l_monoid), result.value());
+      return return_type(l_series_elt_t(l_semiring, l_monoid), result.value());
     }
 
     MATCH__(Product, lhs, rhs)
@@ -142,7 +142,7 @@ namespace vcsn {
     index_t		index_;
     Element<Series, T>	exp_;
     l_alphabet_t	l_alpha_;
-    l_serie_t		l_serie_;
+    l_series_elt_t		l_serie_;
   };
 
   template <class Series, class T>

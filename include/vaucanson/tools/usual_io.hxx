@@ -41,7 +41,7 @@ namespace vcsn
   {
     template<typename ExpType>
     template<typename Auto>
-    std::string usual_converter_poly<ExpType>::operator()(const Auto& a, const typename Auto::serie_t& p) const
+    std::string usual_converter_poly<ExpType>::operator()(const Auto& a, const typename Auto::series_elt_t& p) const
     {
       ExpType e = ExpType(a.set().series());
       finite_support_convert(e, p);
@@ -52,17 +52,17 @@ namespace vcsn
 
     template<typename ExpType>
     template<typename Auto>
-    typename Auto::serie_t usual_converter_poly<ExpType>::operator()(const Auto& a, const std::string& str) const
+    typename Auto::series_elt_t usual_converter_poly<ExpType>::operator()(const Auto& a, const std::string& str) const
     {
       ExpType e = ExpType(a.set().series());
       algebra::parse(str, e);
-      typename Auto::serie_t s = typename Auto::serie_t(a.set().series());
+      typename Auto::series_elt_t s = typename Auto::serie_t(a.set().series());
       finite_support_convert(s, e);
       return s;
     }
 
     template<typename Auto>
-    std::string usual_converter_exp::operator()(const Auto& a, const typename Auto::serie_t& e) const
+    std::string usual_converter_exp::operator()(const Auto& a, const typename Auto::series_elt_t& e) const
     {
       std::ostringstream os;
       os << e;
@@ -70,9 +70,9 @@ namespace vcsn
     }
 
     template<typename Auto>
-    typename Auto::serie_t usual_converter_exp::operator()(const Auto& a, const std::string& s) const
+    typename Auto::series_elt_t usual_converter_exp::operator()(const Auto& a, const std::string& s) const
     {
-      typedef typename Auto::serie_t exp_t;
+      typedef typename Auto::series_elt_t exp_t;
       exp_t ret = exp_t(a.set().series());
       algebra::parse(s, ret);
       return ret;

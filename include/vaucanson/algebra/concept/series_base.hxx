@@ -217,7 +217,7 @@ namespace vcsn {
   Element<S, T> hadamard(const Element<S, T>& lhs,
 			 const Element<S, T>& rhs)
   {
-    typedef Element<S, T> serie_t;
+    typedef Element<S, T> series_elt_t;
     typedef typename Element<S, T>::monoid_elt_t monoid_elt_t;
     typedef typename Element<S, T>::semiring_elt_t semiring_elt_t;
     typedef typename Element<S, T>::support_t support_t;
@@ -228,7 +228,7 @@ namespace vcsn {
 	 ++supp)
       {
  	output +=  lhs.get(*supp) *
- 	  rhs.get(*supp) * serie_t(lhs.set(), monoid_elt_t(*supp));
+ 	  rhs.get(*supp) * series_elt_t(lhs.set(), monoid_elt_t(*supp));
       }
     return output;
   }

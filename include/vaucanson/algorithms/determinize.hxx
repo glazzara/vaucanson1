@@ -224,7 +224,7 @@ namespace vcsn {
 	    ++k;
 	    for (; k != delta_ret.end(); ++k)
 	      {
-		serie_t s_ = input.serie_of(*k);
+		series_elt_t s_ = input.serie_of(*k);
 		for_all_(support_t, supp, s.supp())
 		  if (s_.get(*supp) != zero_semiring)
 		    return false;

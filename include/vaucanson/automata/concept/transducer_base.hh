@@ -116,7 +116,7 @@ namespace vcsn {
     INHERIT_TYPEDEF_(automaton_t, serie_value_t);
 
     /*! type of the element of the set of series that holds the automaton. */
-    INHERIT_TYPEDEF_(automaton_t, serie_t);
+    INHERIT_TYPEDEF_(automaton_t, series_elt_t);
 
     INHERIT_TYPEDEF_(automaton_t, series_elt_t);
 
@@ -181,7 +181,7 @@ namespace vcsn {
     typedef MetaElement<AutomataBase<Self>, T>		      mother_t;
 
     /*! type of the output. */
-    typedef typename mother_t::semiring_elt_t output_serie_t;
+    typedef typename mother_t::semiring_elt_t output_series_elt_t;
 
     /*! type of the output monoid element implementation. */
     typedef typename automaton_traits<T>::semiring_elt_value_t semiring_elt_value_t;
@@ -224,7 +224,7 @@ namespace vcsn {
     input_monoid_elt_t input_of(hedge_t) const;
 
     /*! return the output of an edge */
-    output_serie_t output_of(hedge_t) const;
+    output_series_elt_t output_of(hedge_t) const;
 
     /*! add an edge specified as an input word, an output word and
       a weight linked to it. */

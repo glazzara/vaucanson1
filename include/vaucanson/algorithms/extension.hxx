@@ -49,14 +49,16 @@ namespace vcsn {
     AUTOMATON_TYPES_(ret_t, t_);
     typedef typename ret_t::set_t                 set_t;
     typedef typename set_t::series_t              o_series_t; 
-    typedef typename ret_t::serie_t               output_serie_t; 
-    typedef typename serie_t::support_t           support_t;
+    typedef typename ret_t::series_elt_t               output_series_elt_t; 
+    typedef typename series_elt_t::support_t           support_t;
 
     set_t          ts(o_series_t(a.set().series(), a.set().series().monoid()));
     ret_t          t_ret(ts);
 
     monoid_elt_t   neutre   = a.series().monoid().empty_;
-    monoid_elt_t   t_neutre = t_ret.series().monoid().identity(SELECT(typename t_monoid_elt_t::value_t));
+    monoid_elt_t   t_neutre = 
+      t_ret.series().monoid()
+      .identity(SELECT(typename t_monoid_elt_t::value_t));
     
     vector<hstate_t>    conv(a.states().size());
 
@@ -65,13 +67,13 @@ namespace vcsn {
     
     for_each_edge(e, a)
       {
-	serie_t t = a.serie_of(*e);
-	serie_t s(t);
-	output_serie_t os(t_ret.set().series());
+	series_elt_t t = a.serie_of(*e);
+	series_elt_t s(t);
+	output_series_elt_t os(t_ret.set().series());
 	support_t supp = s.supp();
 	for_each_const_(support_t, m, supp)
 	  {
-	    serie_t tmp(a.set().series());
+	    series_elt_t tmp(a.set().series());
 	    // try to associate the neutral monoid element with a weight 
 	    // to create a serie which will be a weight in the serie os
 	    tmp.assoc(neutre, s.get(*m)); 
@@ -117,9 +119,9 @@ namespace vcsn {
   {
     AUTOMATON_TYPES_(Trans_t, t_);
     AUTOMATON_TYPES_(Auto_t, a_);
-    typedef typename Trans_t::serie_t                t_output_serie_t;
-    typedef typename Auto_t::serie_t::support_t      a_support_t;
-    typedef typename Trans_t::semiring_elt_t	     t_weight_t;
+    typedef typename Trans_t::series_elt_t            t_output_series_elt_t;
+    typedef typename Auto_t::series_elt_t::support_t  a_support_t;
+    typedef typename Trans_t::semiring_elt_t	      t_weight_t;
 
     Trans_t                   tt(t.set());
     map<hstate_t, hstate_t>   conv;
@@ -135,10 +137,10 @@ namespace vcsn {
     // convert edges
     for(a_edge_iterator e = a.edges().begin(); e != a.edges().end(); ++e)
       {
-	a_serie_t s_ = a.serie_of(*e);
-	a_serie_t s(s_);
+	a_series_elt_t s_ = a.serie_of(*e);
+	a_series_elt_t s(s_);
 
-	t_output_serie_t os(t.set().series());
+	t_output_series_elt_t os(t.set().series());
 
 	a_support_t supp = s.supp();
 	for(typename a_support_t::const_iterator m = supp.begin(); 

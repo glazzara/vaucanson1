@@ -177,7 +177,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::
   set_initial(hstate_t state, 
 	      const typename MetaElement<AutomataBase<Self>, T>::
-	      serie_t& s)
+	      series_elt_t& s)
   {
     op_set_initial(this->set(), this->value(), state, s);
   }
@@ -199,7 +199,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::
   set_final(hstate_t state, 
 	    const typename MetaElement<AutomataBase<Self>, T>::
-	    serie_t& s)
+	    series_elt_t& s)
   {
     op_set_final(this->set(), this->value(), state, s);
   }
@@ -245,7 +245,7 @@ namespace vcsn {
   /*! return the initial multiplicity of the state. */
   template <typename Self, typename T>
   inline
-  typename MetaElement<AutomataBase<Self>, T>::serie_t
+  typename MetaElement<AutomataBase<Self>, T>::series_elt_t
   MetaElement<AutomataBase<Self>, T>::get_initial(hstate_t state) const
   {
     return op_get_initial(this->set(), this->value(), state);
@@ -254,7 +254,7 @@ namespace vcsn {
   /*! return the final multiplicity of the state. */
   template <typename Self, typename T>
   inline
-  typename MetaElement<AutomataBase<Self>, T>::serie_t
+  typename MetaElement<AutomataBase<Self>, T>::series_elt_t
   MetaElement<AutomataBase<Self>, T>::get_final(hstate_t what) const
   {
     return op_get_final(this->set(), this->value(), what);
@@ -299,7 +299,7 @@ namespace vcsn {
   hedge_t  
   MetaElement<AutomataBase<Self>, T>::add_serie_edge(hstate_t from, 
 						     hstate_t to, 
-						     const serie_t& e)
+						     const series_elt_t& e)
   {
     return op_add_serie_edge(this->set(), this->value(), from, to, e);
   }
@@ -423,7 +423,7 @@ namespace vcsn {
   template <typename Self, typename T>
   inline
   /*! return the label seen as a serie. */
-  typename MetaElement<AutomataBase<Self>, T>::serie_t  
+  typename MetaElement<AutomataBase<Self>, T>::series_elt_t  
   MetaElement<AutomataBase<Self>, T>::serie_of(hedge_t e) const
   {
     return op_serie_of(this->set(), this->value(), e);

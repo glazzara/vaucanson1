@@ -46,7 +46,7 @@ namespace vcsn {
     for_each_edge(e, trans)
       {
         is_normalized ^= is_letter_support(trans.serie_of(*e));
-	for_each_const_(serie_t::support_t, i, trans.serie_of(*e).supp())
+	for_each_const_(series_elt_t::support_t, i, trans.serie_of(*e).supp())
 	  {	
 	    is_normalized ^= is_letter_support(trans.serie_of(*e).get(*i)); 
 	    if (!is_normalized)

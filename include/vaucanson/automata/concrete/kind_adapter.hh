@@ -107,7 +107,7 @@ namespace vcsn {
 		    T& v,						\
 		    hstate_t from, 					\
 		    hstate_t to, 					\
-		    const typename Element<S,T >::serie_t& s)		\
+		    const typename Element<S,T >::series_elt_t& s)		\
   {									\
     assertion(s.supp().size() == 1);					\
     return op_add_letter_edge(a_set, v, from, to, *s.supp().begin());	\
@@ -133,7 +133,7 @@ namespace vcsn {
 
 #define ADAPT_SERIE_OF_TO_LETTERS_LABEL(T...)			\
   inline							\
-  typename Element<AutomataBase<S>, T >::serie_t			\
+  typename Element<AutomataBase<S>, T >::series_elt_t			\
   op_serie_of(const AutomataBase<S>& a_set,			\
 	      const T& v,					\
 	      hedge_t e)					\

@@ -139,7 +139,7 @@ namespace vcsn {
 		    TransposeView<T>& v,
 		    hstate_t from, 
 		    hstate_t to, 
-		    const typename Element<S, T>::serie_t& se)
+		    const typename Element<S, T>::series_elt_t& se)
   {
     return op_add_serie_edge(s, v.object(), from, to, se);
   }
@@ -224,7 +224,7 @@ namespace vcsn {
   }
    
   template <class S, class T>
-  const typename Element<S, T>::serie_t
+  const typename Element<S, T>::series_elt_t
   op_serie_of(const AutomataBase<S>& s,  
 	      const TransposeView<T>& v,
 	      hedge_t e)
@@ -295,13 +295,13 @@ namespace vcsn {
   void
   op_set_initial(const AutomataBase<S>& ss, TransposeView<T>& v, 
 		 hstate_t state,
-		 const AutoType(serie_t)& s)
+		 const AutoType(series_elt_t)& s)
   {
     return op_set_final(ss, v.object(), state, s);
   }
 
   template <class S, class T>
-  AutoType(serie_t)
+  AutoType(series_elt_t)
   op_get_initial(const AutomataBase<S>& s, 
 		 const TransposeView<T>& v, 
 		 hstate_t state)
@@ -313,13 +313,13 @@ namespace vcsn {
   void
   op_set_final(const AutomataBase<S>& ss, TransposeView<T>& v, 
 	       hstate_t state,
-	       const typename Element<S, T>::serie_t& s)
+	       const typename Element<S, T>::series_elt_t& s)
   {
     op_set_initial(ss, v.object(), state, s);
   }
 
   template <class S, class T>
-  typename Element<S, T>::serie_t
+  typename Element<S, T>::series_elt_t
   op_get_final(const AutomataBase<S>& s, 
 	       const TransposeView<T>& v,  
 	       hstate_t state)

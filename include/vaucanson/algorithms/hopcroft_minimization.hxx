@@ -844,8 +844,8 @@ namespace vcsn {
     /*----------------
       Form the output
       ----------------*/
-    typedef map<unsigned, series_elt_t> map_class_serie_t;
-    map_class_serie_t serie_of;
+    typedef map<unsigned, series_elt_t> map_class_series_elt_t;
+    map_class_series_elt_t serie_of;
 
     for(int i = 0; i < max_partition; i++) // Add states
       {
@@ -872,7 +872,7 @@ namespace vcsn {
 	for_each_const_(set_edges_t, e, edges_leaving)
 	    serie_of[class_of_state[input.aim_of(*e)]] += input.serie_of(*e);
 
-	for_each_const_(map_class_serie_t, it, serie_of)
+	for_each_const_(map_class_series_elt_t, it, serie_of)
 	    output.add_serie_edge(i, (*it).first, (*it).second);
       }
   }

@@ -1,5 +1,37 @@
 2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/series_base.hxx
+	 include/vaucanson/algebra/concrete/series/krat_exp_support.hxx
+	 include/vaucanson/automata/concept/automata_base.hh
+	 include/vaucanson/automata/concept/automata_base.hxx
+	 include/vaucanson/automata/concept/automata_ops.hxx
+	 include/vaucanson/automata/concept/automata_ops.hh
+	 include/vaucanson/automata/concept/transducer_ops.hh
+	 include/vaucanson/automata/concept/transducer_base.hh
+	 include/vaucanson/automata/concept/transducer.hxx
+	 include/vaucanson/automata/concept/transducer_base.hxx
+	 include/vaucanson/automata/concept/transducer_ops.hxx
+	 include/vaucanson/automata/concrete/kind_adapter.hh
+	 include/vaucanson/automata/concrete/transpose_view.hh
+	 include/vaucanson/automata/concrete/transpose_view.hxx
+	 include/vaucanson/automata/concrete/automaton_view.hh
+	 include/vaucanson/automata/concrete/automaton_view.hxx
+	 include/vaucanson/algorithms/determinize.hxx
+	 include/vaucanson/algorithms/hopcroft_minimization.hxx
+	 include/vaucanson/algorithms/krat_exp_linearize.hxx
+	 include/vaucanson/algorithms/is_normalized.hxx
+	 include/vaucanson/algorithms/is_letterized.hxx
+	 include/vaucanson/tools/usual_macros.hh
+	 include/vaucanson/tools/usual_io.hxx
+	 include/vaucanson/tools/usual_io.hh
+	 src/demos/vaucanswig/meta/context.hh
+	 src/demos/vaucanswig/meta/automaton.hh
+	 include/vaucanson/algorithms/evaluation.hxx
+	 include/vaucanson/algorithms/extension.hxx:
+	    Rename 'serie_t' to 'series_elt_t'.
+
+2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata_base.hh,
 	  include/vaucanson/automata/concept/automata_base.hh:
 	  (add_spontaneous): Provide weighted version.

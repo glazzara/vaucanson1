@@ -139,14 +139,14 @@ namespace vcsn {
     typedef typename automaton_traits<T>::serie_value_t      serie_value_t;
 
     /*! type of the element of the set of series that holds the automaton. */
-    typedef Element<series_t, serie_value_t>		      serie_t;
+    typedef Element<series_t, serie_value_t>		      series_elt_t;
     typedef Element<series_t, serie_value_t>		      series_elt_t;
 
     /*! type of the free monoid. */
     typedef typename series_t::monoid_t			      monoid_t;
 
     /*! type of the free monoid element. */
-    typedef typename serie_t::monoid_elt_t		      monoid_elt_t;
+    typedef typename series_elt_t::monoid_elt_t		      monoid_elt_t;
 
     /*! type of the implementation of a word. */
     typedef typename monoid_elt_t::value_t		   monoid_elt_value_t;
@@ -235,13 +235,13 @@ namespace vcsn {
     void set_initial(hstate_t state);
 
     /*! set an initial multiplicity to the state. */
-    void set_initial(hstate_t state, const serie_t& m);
+    void set_initial(hstate_t state, const series_elt_t& m);
    
     /*! set the state to be final. */
     void set_final(hstate_t state);
 
     /*! set a final multiplicity to the state. */
-    void set_final(hstate_t state, const serie_t& m);
+    void set_final(hstate_t state, const series_elt_t& m);
 
     /*! set the state not to be initial. */
     void unset_initial(hstate_t state);
@@ -276,7 +276,7 @@ namespace vcsn {
     /*! add an edge using a serie. */
     /*! If the underlying implementation is not sufficiently general
      *  to support this operation, you will have several edges created.*/
-    hedge_t add_serie_edge(hstate_t from, hstate_t to, const serie_t& e);
+    hedge_t add_serie_edge(hstate_t from, hstate_t to, const series_elt_t& e);
 
     /*! add a spontaneous transition between 'from' and 'to'. */
     hedge_t add_spontaneous(hstate_t from, hstate_t to, 
@@ -317,7 +317,7 @@ namespace vcsn {
     label_of(hedge_t e) const;
 
     /*! return the label seen as a serie. */
-    serie_t serie_of(hedge_t e) const;
+    series_elt_t serie_of(hedge_t e) const;
 
     /*! return the label seen as a serie implementation. */
     serie_value_t serie_value_of(hedge_t e) const;

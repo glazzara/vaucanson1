@@ -109,37 +109,37 @@ struct vcsn_automaton : vcsn::virtual_automaton
 
   const automata_set_t &set() const { return (*auto_).set(); }
 
-  serie_t serie_of(int e) const
+  series_elt_t serie_of(int e) const
   {
     CHECK_EDGE(this, e);
     return (*auto_).serie_of(e);
   }
 
-  int add_serie_edge(int from, int to, const serie_t& s)
+  int add_serie_edge(int from, int to, const series_elt_t& s)
   {
     CHECK_STATE(this, from); CHECK_STATE(this, to);
     return (*auto_).add_serie_edge(from, to, s);
   }
 
-  serie_t get_initial(int state) const
+  series_elt_t get_initial(int state) const
   {
     CHECK_STATE(this, state);
     return (*auto_).get_initial(state);
   }
 
-  serie_t get_final(int state) const
+  series_elt_t get_final(int state) const
   {
     CHECK_STATE(this, state);
     return (*auto_).get_final(state);
   }
 
-  void set_initial(int state, const serie_t& s)
+  void set_initial(int state, const series_elt_t& s)
   {
     CHECK_STATE(this, state);
     return (*auto_).set_initial(state, s);
   }
 
-  void set_final(int state, const serie_t& s)
+  void set_final(int state, const series_elt_t& s)
   {
     CHECK_STATE(this, state);
     return (*auto_).set_final(state, s);

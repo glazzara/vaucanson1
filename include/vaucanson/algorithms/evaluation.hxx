@@ -273,8 +273,8 @@ namespace vcsn {
       {
 	if (!auto_p.is_final(*u))
 	  {
-	    hstate_t p = sp_m[proj_m[*u]].first;
-	    hstate_t q = sp_m[proj_m[*u]].second;
+	    hstate_t p = sp_m[*u].first;
+	    hstate_t q = sp_m[*u].second;
 
 	    if (tmp_trans.is_final(p))
 	      auto_p.add_spontaneous(*u, final_of[q]);
