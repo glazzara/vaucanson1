@@ -55,16 +55,17 @@ namespace vcsn {
       return alph_; 
     }
 
+    template<typename A>
+    bool operator==(const FreeMonoid<A>& a,
+		    const FreeMonoid<A>& b)
+    { 
+      return a.alphabet() == b.alphabet(); 
+    }
+
   } // algebra
     
 } // vcsn
 
-template<typename A>
-bool operator==(const vcsn::algebra::FreeMonoid<A>& a,
-		const vcsn::algebra::FreeMonoid<A>& b)
-{ 
-  return a.alphabet() == b.alphabet(); 
-}
 
 #endif // VCSN_ALGEBRA_CONCRETE_WORDS_HXX
 

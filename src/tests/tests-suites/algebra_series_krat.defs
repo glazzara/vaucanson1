@@ -11,4 +11,4 @@
 	    vcsn::algebra::char_letter::Words>,		\
 	  vcsn::rat::exp<				\
 	    vcsn::algebra::char_letter::Word::value_t,	\
-	    bool> >
+	    int> >

@@ -1,3 +1,15 @@
+2003-06-30  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* configure.ac: Add the 'algebra_series_krat' test directory.
+	* src/tests/tests-suites/algebra_series_krat.defs: Make krat tests work
+	on integer numerical semirings instead of boolean ones.
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh,
+	include/vaucanson/algebra/concrete/free_monoid/words.hxx,
+	include/vaucanson/algebra/concrete/series/series.hh,
+	include/vaucanson/algebra/concrete/series/series.hxx: Move operator==
+	for FreeMonoid and Series into the correct namespace.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix includes.
+
 2003-06-30  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/misc/limits.hh: New.  

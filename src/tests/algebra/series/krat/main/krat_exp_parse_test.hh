@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -180,6 +181,7 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg)
   for (nb_test = 0; samples[nb_test].exp != 0; ++nb_test)
     {
       krat_exp_t exp(s);
+      
       std::pair<bool, std::string> r = parse(samples[nb_test].exp, exp);
       if (r.first)
 	{

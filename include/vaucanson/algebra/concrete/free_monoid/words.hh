@@ -61,6 +61,11 @@ namespace vcsn {
       A alph_;
     };
 
+    template<typename A>
+    bool operator==(const FreeMonoid<A>& a,
+		    const FreeMonoid<A>& b);
+
+
     /*! @} @} */
 
   };
@@ -101,12 +106,9 @@ namespace vcsn {
     
     typedef A		alphabet_t;
   };
+
   
 } // vcsn
-
-template<typename A>
-bool operator==(const vcsn::algebra::FreeMonoid<A>& a,
-		const vcsn::algebra::FreeMonoid<A>& b);
 
 # include <vaucanson/algebra/concrete/free_monoid/words.hxx>
 

@@ -31,6 +31,8 @@
 # include <vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx>
 # include <vaucanson/algebra/concrete/series/krat_exp_support.hxx>
 
+# include <vaucanson/tools/usual.hh>
+
 namespace vcsn {
 
   /**

@@ -72,16 +72,17 @@ namespace vcsn {
       return monoid_; 
     }
 
+    template<typename W, typename M>
+    bool operator==(const Series<W, M>& s1, 
+		    const Series<W, M>& s2)
+    {
+      return s1.monoid() == s2.monoid() &&
+	s1.weights() == s2.weights();
+    }
+
+
   } // algebra
 
 } // vcsn
-
-template<typename W, typename M>
-bool operator==(const vcsn::algebra::Series<W, M>& s1, 
-		const vcsn::algebra::Series<W, M>& s2)
-{
-  return s1.monoid() == s2.monoid() &&
-    s1.weights() == s2.weights();
-}
 
 #endif

@@ -50,6 +50,11 @@ namespace vcsn {
       Monoid		monoid_;
     };    
 
+    template<typename W, typename M>
+    bool operator==(const Series<W, M>&, 
+		    const Series<W, M>&);
+    
+
   }
 
   /*-----------------------------.
@@ -85,9 +90,6 @@ namespace vcsn {
   };
   
 } // vcsn
-
-template<typename W, typename M>
-bool operator==(const vcsn::algebra::Series<W, M>&, const vcsn::algebra::Series<W, M>&);
 
 # include <vaucanson/algebra/concrete/series/series.hxx>
 

@@ -77,6 +77,7 @@ AC_CONFIG_FILES([
 	include/Makefile])
 
 VCSN_TESTS([usual_automaton_t])
+VCSN_TESTS([algebra_series_krat])
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 
