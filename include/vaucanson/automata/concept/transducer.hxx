@@ -1,7 +1,7 @@
 // transducer.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -57,7 +57,7 @@ namespace vcsn {
     typedef typename series_elt_t::support_t support_t;
     typedef typename ret_t::set_t set_t;
     typedef typename set_t::series_t o_series_t;
-    set_t s(o_series_t(a.set().series(), a.set().series().monoid()));
+    set_t s(o_series_t(a.structure().series(), a.structure().series().monoid()));
     ret_t ret(s);
     std::vector<hstate_t> conv(a.states().size());
 
@@ -67,11 +67,11 @@ namespace vcsn {
       {
 	series_elt_t t = a.series_of(*e);
 	series_elt_t s(t);
-	output_series_elt_t os(ret.set().series());
+	output_series_elt_t os(ret.structure().series());
 	support_t supp = s.supp();
 	for_each_const_(support_t, m, supp)
 	  {
-	    series_elt_t tmp(a.set().series());
+	    series_elt_t tmp(a.structure().series());
 	    tmp.assoc(*m, s.get(*m));
 	    os.assoc(*m, tmp);
 	  }

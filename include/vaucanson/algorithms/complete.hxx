@@ -56,7 +56,7 @@ namespace vcsn {
 
     for_each_state(i, work)
       {
-	for_each_letter(j, work.set().series().monoid().alphabet())
+	for_each_letter(j, work.structure().series().monoid().alphabet())
 	  {
 	    aim.clear();
 	    work.letter_deltac(aim, *i, *j, delta_kind::states());
@@ -93,7 +93,7 @@ namespace vcsn {
     for_each_state(i, e)
       {
 	std::set<hstate_t> aim;
-	const alphabet_t& alpha = e.set().series().monoid().alphabet();
+	const alphabet_t& alpha = e.structure().series().monoid().alphabet();
 	for_each_letter(j, alpha)
 	  {
 	    aim.clear();

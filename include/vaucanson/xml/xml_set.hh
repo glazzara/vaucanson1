@@ -55,7 +55,7 @@ namespace vcsn
     /** @addtogroup xml *//** @{ */
 
     /// XML automaton set. Just for loading.
-    class XmlSet : public Structure<XmlSet>
+    class XmlStructure : public Structure<XmlStructure>
     {
     public:
       /// Type values.
@@ -69,10 +69,10 @@ namespace vcsn
        * @brief Read constructor.
        * @param elt XML automaton root node.
        */
-      XmlSet(DOMElement* elt);
+      XmlStructure(DOMElement* elt);
       /// Default constructor.
-      XmlSet();
-      XmlSet(const XmlSet&);
+      XmlStructure();
+      XmlStructure(const XmlStructure&);
 
       /**
        * Check semiring type (BOOLEAN,NUMERICAL, TROPICAL_MIN, TROPICAL_MAX,
@@ -80,13 +80,13 @@ namespace vcsn
        */
       int semiring_type() const;
       /// Check semiring set (B, Z, R, RATSERIES).
-      int semiring_set() const;
+      int semiring_structure() const;
       /// Check monoid type (LETTERS, PAIRS, WEIGHTED, INTEGERS).
       int monoid_type() const;
       /// Check monoid set (WORDS, UNIT, CPFM, FCM, FC).
-      int monoid_set() const;
+      int monoid_structure() const;
 
-      XmlSet get_subset();
+      XmlStructure get_subset();
 
       const DOMNode*	monoid_alphabet() const;
       const DOMNode*	semiring_alphabet() const;
@@ -102,12 +102,12 @@ namespace vcsn
   /** @addtogroup xml *//** @{ */
 
   template <typename T>
-  struct MetaElement<xml::XmlSet, T>
-    : public MetaElement<Structure<xml::XmlSet>, T>
+  struct MetaElement<xml::XmlStructure, T>
+    : public MetaElement<Structure<xml::XmlStructure>, T>
   { };
 
   template <>
-  struct dynamic_traits<xml::XmlSet>
+  struct dynamic_traits<xml::XmlStructure>
   {
     static const bool ret = true;
   };

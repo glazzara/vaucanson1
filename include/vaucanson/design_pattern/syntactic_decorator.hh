@@ -60,7 +60,7 @@ namespace vcsn {
     static const bool dynamic_value = true;
 
     /// Virtual accessor to the structural element.
-    const S&	set() const;
+    const S&	structure() const;
 
     //@{
     /// Virtual accessor to value data.

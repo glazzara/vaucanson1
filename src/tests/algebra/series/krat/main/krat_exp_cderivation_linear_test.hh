@@ -84,8 +84,8 @@ bool krat_exp_cderivation_linear_test(tests::Tester& tg)
       linearize_krat_exp_t exp = linearize(series.choose(SELECT(kexp_t)));
 
       for (typename linearize_alphabet_t::const_iterator
-	     it = exp.set().monoid().alphabet().value().begin();
-	   it != exp.set().monoid().alphabet().value().end();
+	     it = exp.structure().monoid().alphabet().value().begin();
+	   it != exp.structure().monoid().alphabet().value().end();
 	   ++it)
 	{
 	  std::pair<linearize_krat_exp_t, bool> dexp = derivate(exp, *it);

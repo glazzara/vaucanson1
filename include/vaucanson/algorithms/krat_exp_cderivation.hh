@@ -42,7 +42,7 @@
 
 // INTERFACE: Exp cderivate(const Exp& e, char l) { return vcsn::cderivate(e, l); }
 
-// INTERFACE: Exp cderivate(const Exp& e, const std::string& w) { return vcsn::word_cderivate(e, Series::monoid_elt_t(e.set().monoid(), w)); }
+// INTERFACE: Exp cderivate(const Exp& e, const std::string& w) { return vcsn::word_cderivate(e, Series::monoid_elt_t(e.structure().monoid(), w)); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 

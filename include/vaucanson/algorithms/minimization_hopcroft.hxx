@@ -66,7 +66,8 @@ namespace vcsn {
     // to avoid special case problem (one state initial and final ...)
     max_states = std::max(max_states, 2);
 
-    const alphabet_t&	   alphabet_(input.set().series().monoid().alphabet());
+    const alphabet_t&
+      alphabet_ (input.structure().series().monoid().alphabet());
 
     std::vector<letter_t>	alphabet(alphabet_.begin(),
 					 alphabet_.end());
@@ -322,8 +323,8 @@ namespace vcsn {
   Element<A, T>
   minimization_hopcroft(const Element<A, T>& a)
   {
-    Element<A, T> output(a.set());
-    do_hopcroft_minimization_det(a.set(), output, a);
+    Element<A, T> output(a.structure());
+    do_hopcroft_minimization_det(a.structure(), output, a);
     return output;
   }
 
@@ -885,8 +886,8 @@ namespace vcsn {
   {
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
-    Element<A, T> output(a.set());
-    do_quotient(a.set(), a.set().series().semiring(),
+    Element<A, T> output(a.structure());
+    do_quotient(a.structure(), a.structure().series().semiring(),
 		SELECT(semiring_elt_value_t), output, a);
     return output;
   }

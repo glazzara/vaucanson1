@@ -38,10 +38,10 @@
 #include <vaucanson/tools/dot_format.hh>
 
 /*** Structural element extraction ***/
-#define SERIES_OF(Self) (Self)->set().series()
-#define MONOID_OF(Self) (Self)->set().series().monoid()
-#define WEIGHTS_OF(Self) (Self)->set().series().semiring()
-#define ALPHABET_OF(Self) (Self)->set().series().monoid().alphabet()
+#define SERIES_OF(Self) (Self)->structure().series()
+#define MONOID_OF(Self) (Self)->structure().series().monoid()
+#define WEIGHTS_OF(Self) (Self)->structure().series().semiring()
+#define ALPHABET_OF(Self) (Self)->structure().series().monoid().alphabet()
 
 /*** Convenient macros ***/
 #define CHECK_STATE(Self,State) 		\
@@ -69,7 +69,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
 
 
     vcsn_automaton(const Auto& other)
-      : ctx_(new vcsn_context<Auto>(other.set())), auto_(new Auto(other)), conv_()
+      : ctx_(new vcsn_context<Auto>(other.structure())), auto_(new Auto(other)), conv_()
   {}
     vcsn_automaton(const automata_set_t& other)
       : ctx_(new vcsn_context<Auto>(other)), auto_(new Auto(other)), conv_()
@@ -79,7 +79,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {}
 
   vcsn_automaton(const vcsn_context<Auto>& ctx)
-    : ctx_(new vcsn_context<Auto>(ctx)), auto_(new Auto(ctx_->automata_set())), conv_()
+    : ctx_(new vcsn_context<Auto>(ctx)), auto_(new Auto(ctx_->automata_structure())), conv_()
   {}
 
   vcsn_automaton()
@@ -98,7 +98,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {
     delete auto_;
     delete ctx_;
-    ctx_ = new vcsn_context<Auto>(other.set());
+    ctx_ = new vcsn_context<Auto>(other.structure());
     auto_ = new Auto(other);
   }
 
@@ -107,7 +107,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   const automaton_t& operator*() const { return (*auto_); }
   automaton_t& operator*() { return (*auto_); }
 
-  const automata_set_t &set() const { return (*auto_).set(); }
+  const automata_set_t &structure() const { return (*auto_).structure(); }
 
   series_elt_t series_of(int e) const
   {

@@ -268,34 +268,34 @@ match_node##N(const N&) 			\
 
 	  MATCH__(LeftWeight, w, e)
 	  {
-	    semiring_elt_t welt (exp_.set().semiring(), w);
+	    semiring_elt_t welt (exp_.structure().semiring(), w);
 	    return  welt * match(e);
 	  }
 	  END
 
 	  MATCH__(RightWeight, e, w)
 	  {
-	    semiring_elt_t welt (exp_.set().semiring(), w);
+	    semiring_elt_t welt (exp_.structure().semiring(), w);
 	    return match(e) * welt;
 	  }
 	  END
 
 	  MATCH_(Constant, m)
 	  {
-	    monoid_elt_t melt (exp_.set().monoid(), m);
-	    return Element<Series, T> (exp_.set(), melt);
+	    monoid_elt_t melt (exp_.structure().monoid(), m);
+	    return Element<Series, T> (exp_.structure(), melt);
 	  }
 	  END
 
 	  MATCH(Zero)
 	  {
-	    return zero_as<T>::of(exp_.set());
+	    return zero_as<T>::of(exp_.structure());
 	  }
 	  END
 
 	  MATCH(One)
 	  {
-	    return identity_as<T>::of(exp_.set());
+	    return identity_as<T>::of(exp_.structure());
 	  }
 	  END
 

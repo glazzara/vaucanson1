@@ -52,7 +52,7 @@ namespace Kind ##_types
 
     void set_final(int, const Kind ##_series_elt_t&);
 
-    const Kind ##_automata_set_t& set() const;
+    const Kind ##_automata_set_t& structure() const;
 
     virtual const virtual_context &context() const;
 
@@ -164,7 +164,7 @@ namespace Kind ##_types
 
     void set_final(int, const Kind ##_exp_t&);
 
-    const Kind ##_automata_set_t& set() const;
+    const Kind ##_automata_set_t& structure() const;
 
 
     virtual const virtual_context &context() const;

@@ -132,11 +132,11 @@ void test_ops(const vcsn_test::S& s)
 
 #define TEST_OP(Op, Label) \
   tag = ""; e1 Op e2; TEST_ASSERT(tag == ss2 + #Op, "binary " Label); \
-  TEST_ASSERT(& (e1 Op e1).set() == &e1.set(), "binary " Label " preserves s.e."); \
+  TEST_ASSERT(& (e1 Op e1).structure() == &e1.structure(), "binary " Label " preserves s.e."); \
   tag = ""; v1 Op e2; TEST_ASSERT(tag == "c" + ss1 + #Op, "left " Label); \
-  TEST_ASSERT(& (v1 Op e2).set() == &e2.set(), "left " Label " preserves s.e."); \
+  TEST_ASSERT(& (v1 Op e2).structure() == &e2.structure(), "left " Label " preserves s.e."); \
   tag = ""; e1 Op v2; TEST_ASSERT(tag == "c" + ss1 + #Op, "right " Label); \
-  TEST_ASSERT(& (e1 Op v2).set() == &e1.set(), "right " Label " preserves s.e.")
+  TEST_ASSERT(& (e1 Op v2).structure() == &e1.structure(), "right " Label " preserves s.e.")
 
   TEST_OP(+, "add");
   TEST_OP(-, "sub");
@@ -157,19 +157,19 @@ void test_ops(const vcsn_test::S& s)
 #undef TEST_OP
 
   tag = ""; e1++; TEST_ASSERT(tag == ss1 + "++", "increment");
-  TEST_ASSERT(&(e1++).set() == &e1.set(), "increment preserves s.e.");
+  TEST_ASSERT(&(e1++).structure() == &e1.structure(), "increment preserves s.e.");
   tag = ""; ++e1; TEST_ASSERT(tag == ss1 + "++", "inplace increment");
   TEST_ASSERT(&(++e1) == &e1, "inplace increment returns reference to element");
-  TEST_ASSERT(&(++e1).set() == &e1.set(), "inplace increment preserves s.e.");
+  TEST_ASSERT(&(++e1).structure() == &e1.structure(), "inplace increment preserves s.e.");
 
   tag = ""; e1--; TEST_ASSERT(tag == ss1 + "--", "decrement");
-  TEST_ASSERT(&(e1--).set() == &e1.set(), "increment preserves s.e.");
+  TEST_ASSERT(&(e1--).structure() == &e1.structure(), "increment preserves s.e.");
   tag = ""; --e1; TEST_ASSERT(tag == ss1 + "--", "inplace decrement");
   TEST_ASSERT(&(--e1) == &e1, "inplace decrement returns reference to element");
-  TEST_ASSERT(&(--e1).set() == &e1.set(), "inplace increment preserves s.e.");
+  TEST_ASSERT(&(--e1).structure() == &e1.structure(), "inplace increment preserves s.e.");
 
   tag = ""; -e1; TEST_ASSERT(tag == ss1 + "neg", "negation");
-  TEST_ASSERT(&(-e1).set() == &e1.set(), "negation preserves s.e.");
+  TEST_ASSERT(&(-e1).structure() == &e1.structure(), "negation preserves s.e.");
 }
 
 namespace vcsn

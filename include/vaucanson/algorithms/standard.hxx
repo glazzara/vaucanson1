@@ -75,7 +75,7 @@ namespace vcsn {
   void
   standardize(Element<A, T>& a)
   {
-    do_in_standardize(a.set(), a);
+    do_in_standardize(a.structure(), a);
   }
 
   /*---------------.
@@ -136,8 +136,8 @@ namespace vcsn {
   void union_of_standard_here(Element<A, T>& lhs,
 			      const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
-    do_union_of_standard_here(lhs.set(), lhs, rhs);
+    // assertion(lhs.structure() == rhs.structure())
+    do_union_of_standard_here(lhs.structure(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
@@ -145,9 +145,9 @@ namespace vcsn {
   union_of_standard(const Element<A, T>& lhs,
 		    const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
+    // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
-    do_union_of_standard_here(ret.set(), ret, rhs);
+    do_union_of_standard_here(ret.structure(), ret, rhs);
     return ret;
   }
 
@@ -181,7 +181,7 @@ namespace vcsn {
   bool
   is_standard(const Element<A, T>& a)
   {
-    return do_is_standard(a.set(), a);
+    return do_is_standard(a.structure(), a);
   }
 
   /*----------------.
@@ -258,8 +258,8 @@ namespace vcsn {
   void concat_of_standard_here(Element<A, T>& lhs,
 			       const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
-    do_concat_of_standard_here(lhs.set(), lhs, rhs);
+    // assertion(lhs.structure() == rhs.structure())
+    do_concat_of_standard_here(lhs.structure(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
@@ -267,9 +267,9 @@ namespace vcsn {
   concat_of_standard(const Element<A, T>& lhs,
 		     const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
+    // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
-    do_concat_of_standard_here(ret.set(), ret, rhs);
+    do_concat_of_standard_here(ret.structure(), ret, rhs);
     return ret;
   }
 
@@ -303,16 +303,16 @@ namespace vcsn {
   template<typename A, typename T>
   void star_of_standard_here(Element<A, T>& a)
   {
-    do_star_of_standard_here(a.set(), a);
+    do_star_of_standard_here(a.structure(), a);
   }
 
   template<typename A, typename T>
   Element<A, T>
   star_of_standard(const Element<A, T>& a)
   {
-    // assertion(lhs.set() == rhs.set())
+    // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(a);
-    do_star_of_standard_here(ret.set(), ret);
+    do_star_of_standard_here(ret.structure(), ret);
     return ret;
   }
 

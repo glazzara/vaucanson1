@@ -57,11 +57,11 @@ namespace vcsn {
    * to have an orthogonal construction of object from two different
    * viewpoints:
    *
-   * - Algebraic/Theorical one, from a hierarchy of sets,
+   * - Algebraic/Theorical one, from a hierarchy of structures,
    * - Implementation and computations.
    *
    * @c  Element proposes  a lot  of different  constructors so  as to
-   * allow  the  largest set  of  type  conversions.  Calling  foreign
+   * allow  the  largest structure  of  type  conversions.  Calling  foreign
    * constructors assume  that there exist  compatible @c op_convert()
    * functions.
    *
@@ -149,17 +149,17 @@ namespace vcsn {
      * This constructor invokes the default constructor of the
      * implementation value type.
      */
-    explicit Element(const S& set);
+    explicit Element(const S& structure);
 
     /// Explicit construction from structural element and value.
-    Element(const S& set, const T& other);
+    Element(const S& structure, const T& other);
 
     /// Explicit construction from structural element and foreign value.
-    template<typename U> Element(const S& set, const U& other);
+    template<typename U> Element(const S& structure, const U& other);
 
     /// Explicit construction with foreign @c Element conversion.
     template<typename OtherS, typename U>
-    Element(const S& set, const Element<OtherS, U>& other);
+    Element(const S& structure, const Element<OtherS, U>& other);
 
     /*-----------.
     | Assignment |
@@ -185,10 +185,10 @@ namespace vcsn {
     `--------------------------*/
 
     /// Accessor to the structural element.
-    const S&	set() const;
+    const S&	structure() const;
 
     /// Post-construction link to a structural element.
-    void	attach(const S& set);
+    void	attach(const S& structure);
 
     //@{
     /// Accessor to the value data.
@@ -197,7 +197,7 @@ namespace vcsn {
     //@}
 
   private :
-    SetSlot<S>		set_;
+    SetSlot<S>		structure_;
     T			value_;
   };
 

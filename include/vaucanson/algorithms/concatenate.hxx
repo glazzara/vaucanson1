@@ -71,7 +71,7 @@ namespace vcsn {
   concatenate(const Element<A, T>& lhs, const Element<A, T>& rhs)
   {
     Element<A, T> ret(lhs);
-    do_auto_in_concat(ret.set(), ret, rhs);
+    do_auto_in_concat(ret.structure(), ret, rhs);
     return ret;
   }
 
@@ -79,7 +79,7 @@ namespace vcsn {
   void
   concatenate_here(Element<A, T>& lhs, const Element<A, T>& rhs)
   {
-    do_auto_in_concat(lhs.set(), lhs, rhs);
+    do_auto_in_concat(lhs.structure(), lhs, rhs);
   }
 
 } // vcsn

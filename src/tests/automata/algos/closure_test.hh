@@ -69,7 +69,7 @@ bool closure_test(tests::Tester& tg)
 	  error_backward_idempotence = true;
 	for_each_edge(e, cauto)
 	  if (cauto.series_of(*e) ==
-	      identity_as<series_value_t>::of(cauto.set().series()))
+	      identity_as<series_value_t>::of(cauto.structure().series()))
 	    error_backward_epsilon = true;
 	if (error_backward_idempotence or error_backward_epsilon)
 	  {
@@ -87,7 +87,7 @@ bool closure_test(tests::Tester& tg)
 	  error_forward_idempotence = true;
 	for_each_edge(e, cauto)
 	  if (cauto.series_of(*e) ==
-	      identity_as<series_value_t>::of(cauto.set().series()))
+	      identity_as<series_value_t>::of(cauto.structure().series()))
 	    error_forward_epsilon = true;
 	if (error_backward_idempotence or error_backward_epsilon)
 	  {

@@ -113,7 +113,7 @@ namespace Kind ##_types
     Kind ##_monoid_elt_t(const Kind ##_monoid_t&, const std::string&);
     Kind ##_monoid_elt_t(const Kind ##_monoid_t&, char);
     EXTEND_DESCRIBE(Kind ##_monoid_elt_t)
-    const Kind ##_monoid_t& set() const;
+    const Kind ##_monoid_t& structure() const;
     monoid_ops(Kind ##_monoid_elt_t)
   };
 
@@ -139,7 +139,7 @@ namespace Kind ##_types
     Kind ##_semiring_elt_t(const Kind ##_semiring_elt_t&);
     Kind ##_semiring_elt_t(const Kind ##_semiring_t&);
     Kind ##_semiring_elt_t(const Kind ##_semiring_t&, int);
-    const Kind ##_semiring_t& set() const;
+    const Kind ##_semiring_t& structure() const;
     EXTEND_DESCRIBE(Kind ##_semiring_elt_t)
     semiring_ops(Kind ##_semiring_elt_t)
   };
@@ -168,7 +168,7 @@ namespace Kind ##_types
     Kind ##_series_elt_t(const Kind ##_series_t&);
     Kind ##_series_elt_t(const Kind ##_series_t&, const Kind ##_semiring_elt_t&);
     Kind ##_series_elt_t(const Kind ##_series_t&, const Kind ##_monoid_elt_t&);
-    const Kind ##_series_t& set() const;
+    const Kind ##_series_t& structure() const;
     EXTEND_DESCRIBE(Kind ##_series_elt_t)
     series_ops(Kind ##_series_elt_t, Kind ##_semiring_elt_t, Kind ##_monoid_elt_t)
   };
@@ -184,7 +184,7 @@ namespace Kind ##_types
     Kind ##_exp_t star() const
       { return vcsn::star(*self); }
     }
-    const Kind ##_series_t& set() const;
+    const Kind ##_series_t& structure() const;
     EXTEND_DESCRIBE(Kind ##_exp_t)
     series_ops(Kind ##_exp_t, Kind ##_semiring_elt_t, Kind ##_monoid_elt_t)
   };
@@ -224,7 +224,7 @@ namespace Kind ##_types
     Kind ##_context(const Kind ##_automata_set_t& set);
     Kind ##_context(const Kind ##_context& other);
 
-    const Kind ##_automata_set_t& automata_set() const;
+    const Kind ##_automata_set_t& automata_structure() const;
     const Kind ##_series_t& series() const;
     const Kind ##_monoid_t& monoid() const;
     const Kind ##_alphabet_t& alphabet() const;
@@ -235,7 +235,7 @@ namespace Kind ##_types
     virtual std::string describe_semiring(bool with_cpp = false) const;
     virtual std::string describe_monoid(bool with_cpp = false) const;
     virtual std::string describe_series(bool with_cpp = false) const;
-    virtual std::string describe_automata_set(bool with_cpp = false) const;
+    virtual std::string describe_automata_structure(bool with_cpp = false) const;
     virtual ~Kind ##_context();
 
 

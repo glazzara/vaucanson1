@@ -57,9 +57,9 @@ namespace vcsn {
 		const Trans_t& t,
 		Ret_t& ret)
   {
-    Trans_t tt(t.set());
+    Trans_t tt(t.structure());
     tt = extension(a, t);
-    Trans_t pro(t.set());
+    Trans_t pro(t.structure());
     pro = product(tt, t);
     pro = trim(pro);
     output_projection(pro, ret);
@@ -71,7 +71,7 @@ namespace vcsn {
   evaluation(const Element<SA, TA>& a, const Element<ST, TT>& t,
 	     Element<SRET, TRET>& ret)
   {
-    do_evaluation(a.set(), t.set(), ret.set(), a, t, ret);
+    do_evaluation(a.structure(), t.structure(), ret.structure(), a, t, ret);
   }
 
   template<typename E, typename S, typename Trans_t, typename M>
@@ -85,8 +85,8 @@ namespace vcsn {
     typedef typename output_projection_helper<S, T>::ret Auto_t;
     typedef typename Auto_t::set_t::series_t      Auto_series_t;
     typename Auto_t::set_t
-      auto_set(Auto_series_t(t.set().series().semiring()));
-    Auto_t tmp_auto(auto_set);
+      auto_structure(Auto_series_t(t.structure().series().semiring()));
+    Auto_t tmp_auto(auto_structure);
 
     AUTOMATON_TYPES(Auto_t);
     monoid_elt_t empty = tmp_auto.series().monoid().empty_;
@@ -104,7 +104,7 @@ namespace vcsn {
 		     const Element<S2, T2>& trans,
 		     M& state_exp_pair_set)
   {
-    do_partial_evaluation(exp, trans.set(), trans, state_exp_pair_set);
+    do_partial_evaluation(exp, trans.structure(), trans, state_exp_pair_set);
   }
 
   template<typename S, typename Auto_t, typename M, typename Chooser_t>
@@ -188,7 +188,7 @@ namespace vcsn {
 	typename se_map_t::iterator i = se_m.find(aim);
 	if (i == se_m.end())
 	  se_m.insert(std::make_pair(aim,
-				     series_elt_t (b.set().series(),
+				     series_elt_t (b.structure().series(),
 						   b.label_of(*e))));
 	else
 	  i->second += b.label_of(*e);
@@ -215,7 +215,10 @@ namespace vcsn {
   partial_elimination(const Element<A, T>& a,
 		      M& state_exp_pair_set)
   {
-    do_partial_elimination(a.set(), a, DefaultChooser(), state_exp_pair_set);
+    do_partial_elimination(a.structure(),
+			   a,
+			   DefaultChooser(),
+			   state_exp_pair_set);
   }
 
   ////////////////////////////////////////////////////////////
@@ -234,7 +237,7 @@ namespace vcsn {
     typedef typename output_projection_helper<ST, T>::ret Auto_ret_t;
     typedef typename Auto_ret_t::set_t::series_t      Auto_ret_series_t;
     typename Auto_ret_t::set_t
-      auto_set(Auto_ret_series_t(t.set().series().semiring()));
+      auto_structure(Auto_ret_series_t(t.structure().series().semiring()));
 
     AUTOMATON_TYPES_(Auto_t, a_);
     AUTOMATON_TYPES_(Trans_t, t_);
@@ -245,13 +248,13 @@ namespace vcsn {
     typedef std::map<hstate_t, hstate_t> state_state_map_t;
     typedef std::pair<hstate_t, ret_series_elt_t> se_pair_t;
 
-    Trans_t tmp_trans(t.set());
+    Trans_t tmp_trans(t.structure());
     tmp_trans = extension(a, t);
 
-    Trans_t pro(t.set());
+    Trans_t pro(t.structure());
     state_pair_map_t sp_m;
     pro = product(tmp_trans, t, sp_m);
-    Auto_ret_t auto_p(auto_set);
+    Auto_ret_t auto_p(auto_structure);
     std::map<hstate_t, hstate_t> proj_m;
     auto_p = output_projection(pro, proj_m);
 
@@ -301,7 +304,7 @@ namespace vcsn {
 	    const Element<ST, TT>& t,
 	    M& state_exp_pair_set)
   {
-    do_partial_1(a.set(), t.set(), a, t, state_exp_pair_set);
+    do_partial_1(a.structure(), t.structure(), a, t, state_exp_pair_set);
   }
 
   ////////////////////////////////////////////////////////////
@@ -322,18 +325,18 @@ namespace vcsn {
     typedef typename Auto_ret_t::set_t::series_t      Auto_ret_series_t;
 
     typename Auto_ret_t::set_t
-      auto_set(Auto_ret_series_t(t.set().series().semiring()));
+      auto_structure(Auto_ret_series_t(t.structure().series().semiring()));
 
     Trans_t tt = t;
     tt.clear_initial();
     tt.set_initial(p);
 
-    Trans_t tmp_trans(tt.set());
+    Trans_t tmp_trans(tt.structure());
     tmp_trans = extension(a, tt);
 
-    Trans_t pro(t.set());
+    Trans_t pro(t.structure());
     pro = trim(product(tmp_trans, tt));
-    Auto_ret_t auto_p(auto_set);
+    Auto_ret_t auto_p(auto_structure);
     auto_p = output_projection(pro);
 
     exp = aut_to_exp(auto_p);
@@ -347,7 +350,7 @@ namespace vcsn {
 	    const Element<ST, TT>& t,
 	    const hstate_t p, Exp& exp)
   {
-    do_partial_2(a.set(), t.set(), a, t, p, exp);
+    do_partial_2(a.structure(), t.structure(), a, t, p, exp);
   }
 
   ////////////////////////////////////////////////////////////
@@ -379,7 +382,7 @@ namespace vcsn {
 	    const hstate_t p,
 	    M& state_exp_pair_set)
   {
-    do_partial_3(a.set(), t.set(), a, t, p, state_exp_pair_set);
+    do_partial_3(a.structure(), t.structure(), a, t, p, state_exp_pair_set);
   }
 
 }

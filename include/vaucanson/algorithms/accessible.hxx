@@ -99,7 +99,7 @@ namespace vcsn {
   std::set<hstate_t>
   accessible_states(const Element<A, T>& a)
   {
-    return do_accessible_states(a.set(), a);
+    return do_accessible_states(a.structure(), a);
   }
 
   template<typename A, typename T>
@@ -134,7 +134,7 @@ namespace vcsn {
   std::set<hstate_t>
   coaccessible_states(const Element<A, T>& a)
   {
-    return do_coaccessible_states(a.set(), a);
+    return do_coaccessible_states(a.structure(), a);
   }
 
   template<typename A, typename T>

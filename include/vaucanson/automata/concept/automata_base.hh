@@ -348,7 +348,7 @@ namespace vcsn {
 	       delta_kind::edges k) const;
 
     /** store the output edges of the state 'from' where
-        query(a.set(), a.value(), e)) = true using 'res'. */
+        query(a.structure(), a.value(), e)) = true using 'res'. */
     template <typename OutputIterator, typename L>
     void delta(OutputIterator res,
 	       hstate_t from,

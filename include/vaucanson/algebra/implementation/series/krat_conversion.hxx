@@ -1,7 +1,7 @@
 // krat_conversion.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -171,9 +171,9 @@ namespace vcsn {
 		const Element<Series<W, M>, rat::exp<oTm, oTw> >& arg)
     {
       return Element<Series<W, M>, rat::exp<Tm, Tw> >
-	(arg.set(),
+	(arg.structure(),
 	 convert_exp(SELECT2(rat::exp<Tm, Tw>),
-		     arg.set(),
+		     arg.structure(),
 		     arg.value()));
     }
 

@@ -92,8 +92,8 @@ bool krat_exp_linearize_test(tests::Tester& tg)
       for ( ; (i != llin.end()) and (j != lexp.end()); ++i, ++j)
 	{
 	  // Each letter should be in the alphabet.
-	  if (lin.set().monoid().alphabet().value().find(*i) ==
-	      lin.set().monoid().alphabet().value().end())
+	  if (lin.structure().monoid().alphabet().value().find(*i) ==
+	      lin.structure().monoid().alphabet().value().end())
 	    {
 	      success = false;
 	      std::cerr << "TEST: in: " << exp << std::endl;

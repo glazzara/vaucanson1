@@ -1,7 +1,7 @@
 // usual_io.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -41,9 +41,12 @@ namespace vcsn
   {
     template<typename ExpType>
     template<typename Auto>
-    std::string usual_converter_poly<ExpType>::operator()(const Auto& a, const typename Auto::series_elt_t& p) const
+    std::string
+    usual_converter_poly<ExpType>::
+    operator()(const Auto& a,
+	       const typename Auto::series_elt_t& p) const
     {
-      ExpType e = ExpType(a.set().series());
+      ExpType e = ExpType(a.structure().series());
       finite_support_convert(e, p);
       std::ostringstream os;
       os << e;
@@ -52,17 +55,22 @@ namespace vcsn
 
     template<typename ExpType>
     template<typename Auto>
-    typename Auto::series_elt_t usual_converter_poly<ExpType>::operator()(const Auto& a, const std::string& str) const
+    typename Auto::series_elt_t
+    usual_converter_poly<ExpType>::operator()(const Auto& a,
+					      const std::string& str) const
     {
-      ExpType e = ExpType(a.set().series());
+      ExpType e = ExpType(a.structure().series());
       algebra::parse(str, e);
-      typename Auto::series_elt_t s = typename Auto::series_elt_t(a.set().series());
+      typename Auto::series_elt_t s =
+	typename Auto::series_elt_t(a.structure().series());
       finite_support_convert(s, e);
       return s;
     }
 
     template<typename Auto>
-    std::string usual_converter_exp::operator()(const Auto& a, const typename Auto::series_elt_t& e) const
+    std::string
+    usual_converter_exp::operator()(const Auto& a,
+				    const typename Auto::series_elt_t& e) const
     {
       std::ostringstream os;
       os << e;
@@ -70,16 +78,16 @@ namespace vcsn
     }
 
     template<typename Auto>
-    typename Auto::series_elt_t usual_converter_exp::operator()(const Auto& a, const std::string& s) const
+    typename Auto::series_elt_t
+    usual_converter_exp::operator()(const Auto& a, const std::string& s) const
     {
       typedef typename Auto::series_elt_t exp_t;
-      exp_t ret = exp_t(a.set().series());
+      exp_t ret = exp_t(a.structure().series());
       algebra::parse(s, ret);
       return ret;
     }
 
   }
-
 
 }
 

@@ -108,7 +108,7 @@ namespace vcsn {
 
       Element<Series, T> series(const T& e)
       {
-	return Element<Series, T>(exp_.set(), e);
+	return Element<Series, T>(exp_.structure(), e);
       }
 
       MATCH__(Product, lhs, rhs)
@@ -119,7 +119,8 @@ namespace vcsn {
 	    undefined = true;
 	    return return_type();
 	  }
-	if ( ret.first != exp_.set().semiring().zero(SELECT(semiring_elt_value_t)) )
+	if (ret.first !=
+	    exp_.structure().semiring().zero(SELECT(semiring_elt_value_t)))
 	  return (match(lhs) ^ rhs) + (ret.first ^ match(rhs));
 	else
 	  return (match(lhs) ^ rhs);
@@ -162,9 +163,9 @@ namespace vcsn {
 	if (m[0] == a_)
 	  {
 	    if (m.length() == 1)
-	      res.insert(algebra::identity_as<T>::of(exp_.set()));
+	      res.insert(algebra::identity_as<T>::of(exp_.structure()));
 	    else
-	      res.insert(Element<Series, T> (exp_.set(), m.substr(1)));
+	      res.insert(Element<Series, T> (exp_.structure(), m.substr(1)));
 	  }
 	return res;
       }

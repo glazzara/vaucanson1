@@ -60,11 +60,17 @@ Ret operator Op(const T1& x1, const Element<S2, T2>& x2)
   `--------------------------*/
 
 #define DELEGATE_SYM(OpName) \
- return op_ ## OpName(x1.set(), x2.set(), x1.value(), x2.value())
+ return op_ ## OpName(x1.structure(), x2.structure(), x1.value(), x2.value())
+
 #define DELEGATE_LEFT_FOREIGN(OpName) \
- return op_ ## OpName(x1.set(), x1.value(), op_convert(x1.set(), SELECT(T1), x2))
+  return op_ ## OpName(x1.structure(),					\
+		       x1.value(),					\
+		       op_convert(x1.structure(), SELECT(T1), x2))
+
 #define DELEGATE_RIGHT_FOREIGN(OpName) \
- return op_ ## OpName(x2.set(), op_convert(x2.set(), SELECT(T2), x1), x2.value())
+  return op_ ## OpName(x2.structure(),					\
+		       op_convert(x2.structure(), SELECT(T2), x1),	\
+		       x2.value())
 
 
   /*-----------------------------.
@@ -114,31 +120,36 @@ operator Op(const Element<S1, T1>& e1, const Element<S2, T2>& e2)			\
   /* Compute return structural element from return Element type	*/			\
   const bool want_s1 = utility::static_eq<S1, typename ret_t::set_t>::value;		\
   typedef typename utility::static_if<want_s1, S1, S2>::t ret_set_t;			\
-  const ret_set_t& s = 									\
-    utility::static_if<want_s1, const S1, const S2>::choose(e1.set(), e2.set());	\
+  const ret_set_t& s = utility::static_if<want_s1, const S1, const S2>::     \
+    choose(e1.structure(), e2.structure());				     \
 											\
   /* Delegate */									\
   return Element<ret_set_t, typename ret_t::value_t>					\
-    (s, op_##HookName(e1.set(), e2.set(), e1.value(), e2.value()));		\
+    (s, op_##HookName(e1.structure(),					     \
+		      e2.structure(),					     \
+		      e1.value(),					     \
+		      e2.value()));					     \
 }											\
 											\
 template<typename S, typename T, typename U>						\
 static Element<S, T>								\
 operator Op(const Element<S, T>& e, const U& v)						\
 {											\
-  return Element<S, T> (e.set(),					\
-			op_##HookName(e.set(),						\
+  return Element<S, T> (e.structure(),					     \
+			op_##HookName(e.structure(),			     \
 				      e.value(),					\
-				      op_convert(e.set(), SELECT(T), v)));		\
+				      op_convert(e.structure(),		     \
+						 SELECT(T), v)));	     \
 }											\
 											\
 template<typename U, typename S, typename T>						\
 static Element<S, T>								\
 operator Op(const U& v, const Element<S, T>& e)						\
 {											\
-  return Element<S, T> (e.set(),					\
-			op_ ## HookName(e.set(),					\
-					op_convert(e.set(), SELECT(T), v),		\
+  return Element<S, T> (e.structure(),					     \
+			op_ ## HookName(e.structure(),			     \
+					op_convert(e.structure(),	     \
+						   SELECT(T), v),	     \
 					e.value()));					\
 }
 
@@ -158,7 +169,7 @@ template<typename St, typename S, typename T>
 static St&
 operator <<(St& s, const Element<S, T>& e)
 {
-  return op_rout(e.set(), s, e.value());
+  return op_rout(e.structure(), s, e.value());
 }
 
 template<typename St, typename S, typename T>
@@ -168,7 +179,7 @@ operator >>(St& s, Element<S, T>& e)
   S set = S();
 //FIXME: check for set
 //  if (e.bound())
-//    set = S(e.set());
+//    set = S(e.structure());
   op_rin(set, s, e.value());
   e = Element<S, T>(utility::unique::get(S(set)), e.value());
   return s;
@@ -182,7 +193,7 @@ template<typename S, typename T>
 static Element<S, T>
 operator-(const Element<S, T>& e)
 {
-  return Element<S, T>(e.set(), op_neg(e.set(), e.value()));
+  return Element<S, T>(e.structure(), op_neg(e.structure(), e.value()));
 }
 
 } // vcsn
@@ -198,20 +209,20 @@ namespace std
   void swap(vcsn::Element<S, T1>& e1,
 	    vcsn::Element<S, T2>& e2)
   {
-    assertion(&e1.set() == &e2.set());
-    vcsn::op_swap(e1.set(), e1.value(), e2.value());
+    assertion(&e1.structure() == &e2.structure());
+    vcsn::op_swap(e1.structure(), e1.value(), e2.value());
   }
 
   template<typename S, typename T>
   void swap(vcsn::Element<S, T>& e1, T& v2)
   {
-    vcsn::op_swap(e1.set(), e1.value(), v2);
+    vcsn::op_swap(e1.structure(), e1.value(), v2);
   }
 
   template<typename T, typename S>
   void swap(T& v1, vcsn::Element<S, T>& e2)
   {
-    vcsn::op_swap(e2.set(), v1, e2.value());
+    vcsn::op_swap(e2.structure(), v1, e2.value());
   }
 } // std
 

@@ -32,7 +32,7 @@
 
 namespace vcsn
 {
-  namespace algorithm_patterns 
+  namespace algorithm_patterns
   {
 
     // The ordered function called by maps
@@ -89,7 +89,7 @@ namespace vcsn
 	}
       }
     }
-    
+
     // Link current state to an other, which can be created
     template <typename Self, typename T_auto, typename Etiq>
     void
@@ -100,7 +100,7 @@ namespace vcsn
     {
       hstate_t	s;
       iterator	i = states_map.find(etiq);
-      
+
       if (i == states_map.end())
 	s = add_state(etiq);
       else
@@ -117,14 +117,14 @@ namespace vcsn
     {
       hstate_t	s;
       iterator	i = states_map.find(etiq);
-      
+
       if (i == states_map.end())
 	s = add_state(etiq);
       else
 	s = i->second.first;
       auto_p->add_series_edge(current_state->second.first, s, el);
     }
-    
+
     // A tool to add a state in the set and the automaton
     template <typename Self, typename T_auto, typename Etiq>
     hstate_t
@@ -236,7 +236,7 @@ namespace vcsn
     {
       return static_cast<const Self&>(*this).is_initial(e);
     }
-    
+
     template <typename Self, typename T_auto, typename Etiq>
     bool
     MathAutomataConstructor<Self, T_auto, Etiq>::is_final_caller
@@ -276,7 +276,7 @@ namespace vcsn
     {
       return e1 < e2;
     }
-    
+
   }
 }
 

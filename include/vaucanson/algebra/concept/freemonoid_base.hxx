@@ -71,70 +71,70 @@ namespace vcsn {
   size_t
   MetaElement<algebra::FreeMonoidBase<Self>, T>::length() const
   {
-    return op_size(this->set(), this->value());
+    return op_size(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   void
   MetaElement<algebra::FreeMonoidBase<Self>, T>::mirror()
   {
-    op_in_mirror(this->set(), this->value());
+    op_in_mirror(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::iterator
   MetaElement<algebra::FreeMonoidBase<Self>, T>::begin()
   {
-    return op_begin(this->set(), this->value());
+    return op_begin(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_iterator
   MetaElement<algebra::FreeMonoidBase<Self>, T>::begin() const
   {
-    return op_begin_const(this->set(), this->value());
+    return op_begin_const(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::reverse_iterator
   MetaElement<algebra::FreeMonoidBase<Self>, T>::rbegin()
   {
-    return op_rbegin(this->set(), this->value());
+    return op_rbegin(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_reverse_iterator
   MetaElement<algebra::FreeMonoidBase<Self>, T>::rbegin() const
   {
-    return op_rbegin_const(this->set(), this->value());
+    return op_rbegin_const(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::iterator
   MetaElement<algebra::FreeMonoidBase<Self>, T>::end()
   {
-    return op_end(this->set(), this->value());
+    return op_end(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_iterator
   MetaElement<algebra::FreeMonoidBase<Self>, T>::end() const
   {
-    return op_end_const(this->set(), this->value());
+    return op_end_const(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::reverse_iterator
   MetaElement<algebra::FreeMonoidBase<Self>, T>::rend()
   {
-    return op_rend(this->set(), this->value());
+    return op_rend(this->structure(), this->value());
   }
 
   template <class Self, typename T>
   typename MetaElement<algebra::FreeMonoidBase<Self>, T>::const_reverse_iterator
   MetaElement<algebra::FreeMonoidBase<Self>, T>::rend() const
   {
-    return op_rend_const(this->set(), this->value());
+    return op_rend_const(this->structure(), this->value());
   }
 
   template <class Self, typename T>
@@ -167,7 +167,7 @@ namespace vcsn {
 	     typename std::string::const_iterator& i,
 	     const CharContainer& escaped)
   {
-    return op_parse(dest.set(), dest.value(), s, i, escaped);
+    return op_parse(dest.structure(), dest.value(), s, i, escaped);
   }
 
   // default implementation of word parsing assumes the fact that

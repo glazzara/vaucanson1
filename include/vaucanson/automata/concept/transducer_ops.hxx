@@ -53,7 +53,7 @@ namespace vcsn {
     AutoType(series_elt_t) is = op_series_of(s, v, e);
     precondition(is.supp().size() == 1);
     return
-      is.get(AutoType(monoid_elt_t) (is.set().monoid(), *is.supp().begin()));
+      is.get(AutoType(monoid_elt_t) (is.structure().monoid(), *is.supp().begin()));
   }
 
   template <class S, class T>

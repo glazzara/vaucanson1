@@ -20,7 +20,7 @@ typedef std::map<hstate_t, state_set_t>		map_t;
 // will:
 
 // Returns the intersection of two sets.
-state_set_t intersection_set(const state_set_t& set1, const state_set_t& set2)
+state_set_t intersection_structure(const state_set_t& set1, const state_set_t& set2)
 {
   state_set_t tmp;
   std::insert_iterator<state_set_t> i(tmp, tmp.begin());
@@ -40,7 +40,7 @@ pstate_t intersection_closure(const pstate_t& s)
     std::swap(ret, tmp);
     for_all_const(pstate_t, s1, tmp)
       for_all_const(pstate_t, s2, tmp)
-      ret.insert(intersection_set(*s1, *s2));
+      ret.insert(intersection_structure(*s1, *s2));
   } while (ret.size() != tmp.size());
   return ret;
 }
@@ -55,7 +55,7 @@ pstate_t image(const map_t& m)
 }
 
 // Return the union of set1 and set2.
-state_set_t union_set(const state_set_t& set1, const state_set_t& set2)
+state_set_t union_structure(const state_set_t& set1, const state_set_t& set2)
 {
   state_set_t tmp;
   std::insert_iterator<state_set_t> i(tmp, tmp.begin());
@@ -129,7 +129,7 @@ automaton_t universal(const automaton_t& automaton)
 	      cont = true;
 	      break;
 	    }
-	  delta_ret = union_set(delta_ret, delta_tmp);
+	  delta_ret = union_structure(delta_ret, delta_tmp);
 	}
       // case 1: \exists p \in X, p.a = {}
       if (cont)

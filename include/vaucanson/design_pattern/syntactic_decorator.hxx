@@ -1,7 +1,7 @@
 // syntactic_decorator.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -52,9 +52,9 @@ namespace vcsn {
 
   template <typename S, typename T>
   const S&
-  SyntacticDecorator<S, T>::set() const
+  SyntacticDecorator<S, T>::structure() const
   {
-    return self().set();
+    return self().structure();
   }
 
   template <typename S, typename T>
@@ -77,16 +77,21 @@ namespace vcsn {
       Element<S, T>&							\
       SyntacticDecorator<S, T>::Op (const Element<OtherS, U>& other)		\
       {										\
-	op_in_ ## HookName (self().set(), other.set(), value(), other.value());	\
+    op_in_ ## HookName (self().structure(),				   \
+			other.structure(),				   \
+			value(),					   \
+			other.value());					   \
 	return self();								\
       }										\
+									   \
       template <typename S, typename T>						\
       template<typename U>							\
       Element<S, T>&							\
       SyntacticDecorator<S, T>::Op (const U& other)				\
       {										\
-	op_in_ ## HookName (self().set(), value(),				\
-			    op_convert(self().set(), SELECT(T), other));	\
+    op_in_ ## HookName (self().structure(),				   \
+			value(),					   \
+			op_convert(self().structure(), SELECT(T), other)); \
 	return self();								\
       }
 
@@ -102,7 +107,7 @@ namespace vcsn {
   Element<S, T>& 
   SyntacticDecorator<S, T>::operator++()
   { 
-    op_in_inc(self().set(), self().value()); 
+    op_in_inc(self().structure(), self().value());
     return self(); 
   }
     
@@ -111,7 +116,7 @@ namespace vcsn {
   SyntacticDecorator<S, T>::operator++(int)
   { 
     Element<S, T> ret(self()); 
-    op_in_inc(self().set(), self().value()); 
+    op_in_inc(self().structure(), self().value());
     return ret; 
   }
     
@@ -119,7 +124,7 @@ namespace vcsn {
   Element<S, T>& 
   SyntacticDecorator<S, T>::operator--()
   { 
-    op_in_dec(self().set(), self().value()); 
+    op_in_dec(self().structure(), self().value());
     return self(); 
   }
     
@@ -128,7 +133,7 @@ namespace vcsn {
   SyntacticDecorator<S, T>::operator--(int)
   { 
     Element<S, T> ret(self()); 
-    op_in_dec(self().set(), self().value()); 
+    op_in_dec(self().structure(), self().value());
     return ret; 
   }
     
@@ -137,8 +142,8 @@ namespace vcsn {
   Element<S, T>& 
   SyntacticDecorator<S, T>::swap(Element<S, U>& other)
   { 
-    precondition(&set() == &other.set());
-    op_swap(set(), value(), other.value());
+    precondition(&structure() == &other.structure());
+    op_swap(structure(), value(), other.value());
     return self(); 
   }
     

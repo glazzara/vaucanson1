@@ -61,13 +61,13 @@ namespace vcsn {
       size_t		size() const;
       bool		empty() const;
 
-      iterator		begin();      
+      iterator		begin();
       const_iterator	begin() const;
-      
-      iterator		end();     
+
+      iterator		end();
       const_iterator	end() const;
 
-      iterator		find(const Tm& m); 
+      iterator		find(const Tm& m);
       const_iterator	find(const Tm& m) const;
 
       template<typename W>
@@ -112,50 +112,50 @@ namespace vcsn {
     };
 
     template <class Tm, class Tw>
-    bool operator==(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs); 
+    bool operator==(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);
 
     template <class Tm, class Tw>
-    bool operator!=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs); 
+    bool operator!=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);
 
     template <class Tm, class Tw>
-    bool operator<(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);   
+    bool operator<(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);
 
     template <class Tm, class Tw>
-    bool operator>(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);   
+    bool operator>(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);
 
     template <class Tm, class Tw>
-    bool operator<=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);   
+    bool operator<=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);
 
     template <class Tm, class Tw>
-    bool operator>=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);   
+    bool operator>=(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs);
 
-    
+
   } // algebra
 
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
-  
+
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_is_finite_app(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
-  
+
   template<typename W, typename M, typename Tm, typename Tw>
-  const algebra::polynom<Tm, Tw>& identity_value(SELECTOR2(algebra::Series<W, M>), 
+  const algebra::polynom<Tm, Tw>& identity_value(SELECTOR2(algebra::Series<W, M>),
 						 SELECTOR2(algebra::polynom<Tm, Tw>));
-  
+
   template<typename W, typename M, typename Tm, typename Tw>
-  const algebra::polynom<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>), 
+  const algebra::polynom<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>),
 					     SELECTOR2(algebra::polynom<Tm, Tw>));
-  
+
   template<typename W, typename M, typename Tm, typename Tw>
-  void op_in_add(const algebra::Series<W, M>& s, 
+  void op_in_add(const algebra::Series<W, M>& s,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const algebra::polynom<Tm, Tw>& arg);
-  
+
   template<typename W, typename M, typename Tm, typename Tw>
   algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const algebra::polynom<Tm, Tw>& b);
-  
+
   /*-----------------.
     | cauchy's product |
     `-----------------*/
@@ -163,9 +163,9 @@ namespace vcsn {
   algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const algebra::polynom<Tm, Tw>& b);
-    
+
   template<typename W, typename M, typename Tm, typename Tw>
-  void op_in_mul(const algebra::Series<W, M>& s, 
+  void op_in_mul(const algebra::Series<W, M>& s,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const algebra::polynom<Tm, Tw>& arg);
 
@@ -189,7 +189,7 @@ namespace vcsn {
 				      SELECTOR2(algebra::polynom<Tm, Tw>),
 				      SELECTOR(algebra::SemiringBase<W>),
 				      const oTw& w_value);
-    
+
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   void op_assign(const algebra::Series<W, M>& s,
 		 const algebra::MonoidBase<M>& monoid,
@@ -224,7 +224,7 @@ namespace vcsn {
   {
     typedef Element<algebra::Series<W, M>, algebra::polynom<Tm, Tw> > ret_t;
   };
-  
+
   template<typename M, typename W, typename oTm, typename Tm, typename Tw>
   algebra::polynom<Tm, Tw> op_add(const algebra::MonoidBase<M>& monoid,
 				  const algebra::Series<W, M>& s,
@@ -252,7 +252,7 @@ namespace vcsn {
   {
     typedef Element<algebra::Series<W, M>, algebra::polynom<Tm, Tw> > ret_t;
   };
-  
+
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& semiring,
 				  const algebra::Series<W, M>& s,
@@ -314,31 +314,31 @@ namespace vcsn {
   /*------------------------------.
     | design_pattern series operations |
     `------------------------------*/
-    
+
   template <class W, class M, class Tm, class Tw>
-  Tm op_choose_from_supp(const algebra::Series<W, M>& s, 
+  Tm op_choose_from_supp(const algebra::Series<W, M>& s,
 			 const algebra::polynom<Tm, Tw>& p);
-  
+
   template<typename W, typename M, typename Tm, typename Tw>
   typename algebra::series_traits<algebra::polynom<Tm, Tw> >::support_t
   op_support(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  Tw op_series_get(const algebra::Series<W, M>& s, 
+  Tw op_series_get(const algebra::Series<W, M>& s,
 		   const algebra::polynom<Tm, Tw>& p,
 		   const oTm& m);
-  
-  template<typename W, typename M, 
-	   typename Tm, typename Tw, 
+
+  template<typename W, typename M,
+	   typename Tm, typename Tw,
 	   typename oTm, typename oTw>
   void op_series_set(const algebra::Series<W, M>& s,
 		     algebra::polynom<Tm, Tw>& p,
 		     const oTm& m,
 		     const oTw& w);
-  
+
   template <class W, class M, class Tm, class Tw>
-  Element<algebra::Series<W,M>, algebra::polynom<Tm,Tw> > 
-  op_choose(const algebra::Series<W,M>& s, 
+  Element<algebra::Series<W,M>, algebra::polynom<Tm,Tw> >
+  op_choose(const algebra::Series<W,M>& s,
 	    SELECTOR2(algebra::polynom<Tm,Tw>));
 
 } // vcsn
@@ -346,7 +346,7 @@ namespace vcsn {
 namespace std {
 
   template <class Tm, class Tw>
-  std::ostream& operator<<(std::ostream& out, 
+  std::ostream& operator<<(std::ostream& out,
 			   const vcsn::algebra::polynom<Tm, Tw>& p);
 
 } // std
@@ -356,6 +356,6 @@ namespace std {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/implementation/series/polynoms.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH

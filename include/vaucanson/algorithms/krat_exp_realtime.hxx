@@ -154,9 +154,9 @@ namespace vcsn {
 
       MATCH_(Constant, m)
       {
-	return_type	exp = identity_as<T>::of(exp_.set());
-	return_type	tmp (exp_.set());
-	monoid_elt_t	letter (exp_.set().monoid());
+	return_type	exp = identity_as<T>::of(exp_.structure());
+	return_type	tmp (exp_.structure());
+	monoid_elt_t	letter (exp_.structure().monoid());
 	for (typename monoid_elt_value_t::const_iterator i = m.begin();
 	     i != m.end(); ++i)
 	  {

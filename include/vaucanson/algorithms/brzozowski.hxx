@@ -73,7 +73,7 @@ namespace vcsn {
     {
       alphabet_t alpha = get()->series().monoid().alphabet();
       if (constant_term(e).first
-	  != e.set().semiring().zero(SELECT(semiring_elt_value_t)))
+	  != e.structure().semiring().zero(SELECT(semiring_elt_value_t)))
 	set_final();
       for (alphabet_iterator i = alpha.begin(); i != alpha.end(); ++i)
 	link_to(canonical(derivate(e, *i).first), *i);

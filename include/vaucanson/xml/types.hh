@@ -80,7 +80,7 @@ namespace vcsn
     };
 
     /// Dynamic XML automaton type.
-    typedef Element<XmlSet, XmlAutomaton> xml_automaton_t;
+    typedef Element<XmlStructure, XmlAutomaton> xml_automaton_t;
 
     /** @} */
 

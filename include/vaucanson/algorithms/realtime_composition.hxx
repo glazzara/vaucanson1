@@ -64,7 +64,8 @@ namespace vcsn {
     typedef typename Auto_t::set_t::series_t           Auto_series_t;
     typedef typename Auto_t::set_t		       o_automata_set_t;
 
-    o_automata_set_t auto_set(Auto_series_t(lhs.set().series().semiring()));
+    o_automata_set_t auto_structure
+      (Auto_series_t (lhs.structure().series().semiring()));
 
     AUTOMATON_TYPES_(Auto_t, a_);
 
@@ -92,7 +93,7 @@ namespace vcsn {
 
 	    sp_queue.push(sp);
 	    sp_map[sp] = new_state;
-	    exp_t s(exp.set());
+	    exp_t s(exp.structure());
 	    s.assoc(empty, (*mypair).second);
 	    ret.set_initial(new_state, s);
 	  }
@@ -109,7 +110,7 @@ namespace vcsn {
 	  {
 	    exp_t exp = lhs.get_final(p);
 
-	    Auto_t a(auto_set);
+	    Auto_t a(auto_structure);
 	    standard_of(a, exp.get(empty).value());
 
 	    output_exp_t exp1 (a.series());
@@ -135,10 +136,11 @@ namespace vcsn {
 	    exp_t exp = lhs.series_of(*e);
 
 	    assertion(exp.supp().size() == 1);
-	    monoid_elt_t word (exp.set().monoid(), *(exp.supp().begin()));
+	    monoid_elt_t word (exp.structure().monoid(),
+			       *(exp.supp().begin()));
 	    // This supp would have one word
 
-	    Auto_t a(auto_set);
+	    Auto_t a(auto_structure);
 	    standard_of(a, exp.get(word).value());
 	    state_exp_pair_set_t sep_set1;
 	    partial_3(a, rhs, q, sep_set1);
@@ -155,7 +157,7 @@ namespace vcsn {
  		    sp_queue.push(sp1);
 		  }
 
-		exp_t s (lhs.set().series());
+		exp_t s (lhs.structure().series());
 		s.assoc(word, (*mypair).second);
 		ret.add_series_edge( sp_map[sp], sp_map[sp1], s);
 	      }
@@ -170,7 +172,7 @@ namespace vcsn {
 		       const Element<S, T>& rhs,
 		       Element<S, T>& ret)
   {
-    do_realtime_composition(lhs.set(), lhs, rhs, ret);
+    do_realtime_composition(lhs.structure(), lhs, rhs, ret);
   }
 
 }

@@ -77,18 +77,18 @@ unsigned sum_test(tests::Tester& tg)
     {
       iter = 0;
       automaton_t auto_lhs = gen.generate_with_epsilon(5, 10, 1, 3);
-      automaton_t auto_rhs = gen.generate_with_epsilon(auto_lhs.set(),
+      automaton_t auto_rhs = gen.generate_with_epsilon(auto_lhs.structure(),
 						       5, 10, 1, 3);
       generalized_t g_auto_lhs = generalized(auto_lhs);
       generalized_t g_auto_rhs = generalized(auto_rhs);
-      g_series_elt_t exp_lhs(g_auto_lhs.set().series());
-      g_series_elt_t exp_rhs(g_auto_rhs.set().series());
+      g_series_elt_t exp_lhs(g_auto_lhs.structure().series());
+      g_series_elt_t exp_rhs(g_auto_rhs.structure().series());
       exp_lhs = aut_to_exp(g_auto_lhs);
       exp_rhs = aut_to_exp(g_auto_rhs);
 
       generalized_t g_rhs_r = realtime(g_auto_rhs);
       semiring_elt_t semiring_zero =
-	zero_as<semiring_elt_value_t>::of(g_rhs_r.set().series().semiring());
+	zero_as<semiring_elt_value_t>::of(g_rhs_r.structure().series().semiring());
 
       automaton_t s = sum(auto_lhs, auto_rhs);
 

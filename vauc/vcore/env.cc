@@ -193,7 +193,7 @@ namespace vcsn
       for (ModuleBase::constants_t::const_iterator i = b.constants().begin();
 	   i != b.constants().end();
 	   ++i)
-	c.set(i->first, i->second);
+	c.structure(i->first, i->second);
 
       // now, merge the functions
       for (ModuleBase::functions_t::const_iterator i = b.functions().begin();
@@ -204,7 +204,7 @@ namespace vcsn
 
 	  // insert the function as object
 	  if (i->first.size() > 0)
-	    c.set(i->first, Object(Callable(new PartialCall(pc))));
+	    c.structure(i->first, Object(Callable(new PartialCall(pc))));
 
 	  // and as closure...
 	  // FIXME: there is room for optimization here...
@@ -222,7 +222,7 @@ namespace vcsn
 		{
 		  Object cl = Closure();
 		  OBJECT_CAST(cl, Closure)->merge_fun(pc);
-		  c.set(f_name, cl);
+		  c.structure(f_name, cl);
 		}
 
 	      if (f_name[0] == '_')
@@ -237,7 +237,7 @@ namespace vcsn
 		    {
 		      Object cl = Closure();
 		      OBJECT_CAST(cl, Closure)->merge_fun(pc);
-		      _scopes.top().set(f_name, cl);
+		      _scopes.top().structure(f_name, cl);
 		    }
 		}
 	    }
@@ -299,10 +299,10 @@ namespace vcsn
 			}
 		    }
 		  else
-		    dst.set(l->first, what);
+		    dst.structure(l->first, what);
 		}
 	      else
-		dst.set(l->first, what);
+		dst.structure(l->first, what);
 	    }
 	}
     }
@@ -346,10 +346,10 @@ namespace vcsn
 		}
 	    }
 	  else
-	    top.set(name, what);
+	    top.structure(name, what);
 	}
       else
-	top.set(name, what);
+	top.structure(name, what);
     }
 
 //     void Env::set_front(Object& other)
@@ -457,7 +457,7 @@ namespace vcsn
 
     void Env::assign(Symbol id, Object obj)
     {
-      _scopes.top().set(id, obj);
+      _scopes.top().structure(id, obj);
     }
 
     std::list<Symbol> Env::modules() const

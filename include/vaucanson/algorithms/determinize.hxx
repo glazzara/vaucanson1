@@ -67,7 +67,7 @@ namespace vcsn {
     hstate_t		   qi_hstate = output.add_state();
     subset_t		   qi;
     subset_set_t	   subset_set;
-    const alphabet_t&	   alphabet(input.set().series().monoid().alphabet());
+    const alphabet_t&	   alphabet(input.structure().series().monoid().alphabet());
     subset_t		   q;
     subset_t		   s;
     delta_ret_t		   aim;
@@ -146,8 +146,8 @@ namespace vcsn {
   Element<A, T>
   subset_construction(const Element<A, T>& a)
   {
-    Element<A, T>    ret(a.set());
-    do_subset_construction(ret.set(), ret, a);
+    Element<A, T>    ret(a.structure());
+    do_subset_construction(ret.structure(), ret, a);
     return ret;
   }
 
@@ -182,8 +182,8 @@ namespace vcsn {
   determinize(const Element<A, T>& a,
 	      std::map<hstate_t, std::set<hstate_t> >& m)
   {
-    Element<A, T> ret(a.set());
-    do_determinize(ret.set(), ret, a, m);
+    Element<A, T> ret(a.structure());
+    do_determinize(ret.structure(), ret, a, m);
     return ret;
   }
 
@@ -202,7 +202,7 @@ namespace vcsn {
 
     delta_ret_t	delta_ret;
     semiring_elt_t		  zero_semiring
-      = input.set().series().semiring()
+      = input.structure().series().semiring()
       .zero(SELECT(typename semiring_elt_t::value_t));
 
     // Empty automaton is not deterministic
@@ -238,7 +238,7 @@ namespace vcsn {
   bool
   is_deterministic(const Element<A, T>& a)
   {
-    return do_is_deterministic(a.set(), a);
+    return do_is_deterministic(a.structure(), a);
   }
 
 } // vcsn

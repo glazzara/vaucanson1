@@ -40,7 +40,7 @@ namespace vcsn
   {
     inline
     const DOMNode*
-    XmlSet::monoid_alphabet() const
+    XmlStructure::monoid_alphabet() const
     {
       if (monoid_node_)
 	return monoid_node_->getFirstChild();
@@ -49,7 +49,7 @@ namespace vcsn
 
     inline
     const DOMNode*
-    XmlSet::semiring_alphabet() const
+    XmlStructure::semiring_alphabet() const
     {
       if (semiring_node_)
 	return semiring_node_->getFirstChild();
@@ -58,7 +58,7 @@ namespace vcsn
 
     inline
     int
-    XmlSet::semiring_type() const
+    XmlStructure::semiring_type() const
     {
       if (semiring_node_) {
 	if (semiring_node_->hasAttribute(str_operations)) {
@@ -85,7 +85,7 @@ namespace vcsn
 
     inline
     int
-    XmlSet::semiring_set() const
+    XmlStructure::semiring_structure() const
     {
       if (semiring_node_) {
 	if (semiring_node_->hasAttribute(str_set)) {
@@ -106,7 +106,7 @@ namespace vcsn
 
     inline
     int
-    XmlSet::monoid_type() const
+    XmlStructure::monoid_type() const
     {
       if (monoid_node_) {
 	if (monoid_node_->hasAttribute(str_generators)) {
@@ -127,7 +127,7 @@ namespace vcsn
 
     inline
     int
-    XmlSet::monoid_set() const
+    XmlStructure::monoid_structure() const
     {
       if (monoid_node_) {
 	if (monoid_node_->hasAttribute(str_type)) {
@@ -149,7 +149,7 @@ namespace vcsn
     }
 
     inline
-    XmlSet::XmlSet(DOMElement* elt)
+    XmlStructure::XmlStructure(DOMElement* elt)
     {
       monoid_node_ = NULL;
       semiring_node_ = NULL;
@@ -176,17 +176,17 @@ namespace vcsn
     }
 
     inline
-    XmlSet::XmlSet()
+    XmlStructure::XmlStructure()
     {
       monoid_node_ = NULL;
       semiring_node_ = NULL;
     }
 
     inline
-    XmlSet
-    XmlSet::get_subset()
+    XmlStructure
+    XmlStructure::get_subset()
     {
-      XmlSet set;
+      XmlStructure set;
 
       if (semiring_node_) {
 	DOMNode* child = semiring_node_->getFirstChild();
@@ -204,8 +204,8 @@ namespace vcsn
     }
 
     inline
-    XmlSet::XmlSet(const XmlSet& other)
-      : Structure<vcsn::xml::XmlSet>(other)
+    XmlStructure::XmlStructure(const XmlStructure& other)
+      : Structure<vcsn::xml::XmlStructure>(other)
     {
       monoid_node_ = other.monoid_node_;
       semiring_node_ = other.semiring_node_;

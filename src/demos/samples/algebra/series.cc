@@ -1,7 +1,7 @@
 // series.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -60,10 +60,10 @@ int main()
 
   Element<Series_t, polynom<Word::value_t, scalar> > p1;
   
-  p1.value_set("a", 1);
-  p1.value_set("b", 2);
-  p1.value_set("ab", 3);
-  p1.value_set("ba", 4);
+  p1.value_structure("a", 1);
+  p1.value_structure("b", 2);
+  p1.value_structure("ab", 3);
+  p1.value_structure("ba", 4);
   
   cout << p1.value().size() << endl;
 
@@ -104,8 +104,8 @@ int main()
   
   Element<Series_t, polynom<Word::value_t, scalar> > p2, p3, tmp;
 
-  p2.value_set("a", -4);
-  p2.value_set("b", -1);
+  p2.value_structure("a", -4);
+  p2.value_structure("b", -1);
 
   tmp = p2 + p1;
   
@@ -115,7 +115,7 @@ int main()
   
   cout << endl;
 
-  p3.value_set("", -1);
+  p3.value_structure("", -1);
 
   cout << p3.value().size() << endl;
 

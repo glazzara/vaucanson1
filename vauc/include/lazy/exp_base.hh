@@ -28,7 +28,7 @@ namespace vcsn
 	ExpArgs();
 
 	Exp& operator[](typename Kind::types i) const;
-	void set(typename Kind::types i, const Exp& e);
+	void structure(typename Kind::types i, const Exp& e);
 	void attach(typename Kind::types i, Exp* p);
 
 	~ExpArgs();

@@ -131,7 +131,7 @@ namespace vcsn
 	      series_elt_t ss = a.get_initial(*i);
 	      for_each_const_(series_elt_t::support_t, s, ss.supp())
 		o << *s << "|"
-		  << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
+		  << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
 		  << " ";
 	      out << "[label=\"" << o.str() << "\"];"
 		  << std::endl;
@@ -147,7 +147,7 @@ namespace vcsn
 	      series_elt_t ss = a.get_final(*i);
 	      for_each_const_(series_elt_t::support_t, s, ss.supp())
 		o << *s << "|"
-		  << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
+		  << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
 		  << " ";
 	      out << "[label=\"" << o.str() << "\"];"
 		  << std::endl;
@@ -166,7 +166,7 @@ namespace vcsn
 	  series_elt_t ss = a.series_of(*i);
 	  for_each_const_(series_elt_t::support_t, s, ss.supp())
 	    o << *s << "|"
-	      << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
+	      << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
 	      << " ";
 	  out << "[label=\"" << o.str() << "\"];"
 	      << std::endl;

@@ -89,15 +89,15 @@ namespace vcsn {
   typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_value_t
   MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_value_t& m) const
   {
-    // assertion(set().monoid().contains(m));
-    return op_series_get(this->set(), this->value(), m);
+    // assertion(structure().monoid().contains(m));
+    return op_series_get(this->structure(), this->value(), m);
   }
 
   template<typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_t
   MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_t& m) const
   {
-    return semiring_elt_t(this->set().semiring(), get(m.value()));
+    return semiring_elt_t(this->structure().semiring(), get(m.value()));
   }
 
   template<typename S, typename T>
@@ -105,9 +105,9 @@ namespace vcsn {
   MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_value_t& m,
 						const semiring_elt_value_t& w)
   {
-    // assertion(set().monoid().contains(m));
-    // assertion(set().semiring().contains(w));
-    return op_series_set(this->set(), this->value(), m, w);
+    // assertion(structure().monoid().contains(m));
+    // assertion(structure().semiring().contains(w));
+    return op_series_set(this->structure(), this->value(), m, w);
   }
 
   template<typename S, typename T>
@@ -122,7 +122,7 @@ namespace vcsn {
   bool
   MetaElement<algebra::SeriesBase<S>, T>::is_finite_app() const
   {
-    return op_is_finite_app(this->set(), this->value());
+    return op_is_finite_app(this->structure(), this->value());
   }
 
   template <typename S, typename T>
@@ -131,21 +131,21 @@ namespace vcsn {
   {
     return
       typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
-      (this->set().monoid(), op_choose_from_supp(this->set(), this->value()));
+      (this->structure().monoid(), op_choose_from_supp(this->structure(), this->value()));
   }
 
   template <typename S, typename T>
   void
   MetaElement<algebra::SeriesBase<S>, T>::transpose()
   {
-    op_in_transpose(this->set(), this->value());
+    op_in_transpose(this->structure(), this->value());
   }
 
   template <typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::support_t
   MetaElement<algebra::SeriesBase<S>, T>::supp() const
   {
-    return op_support(this->set(), this->value());
+    return op_support(this->structure(), this->value());
   }
 
   template<typename S, typename T>
@@ -164,7 +164,7 @@ namespace vcsn {
   }
 
   template<typename S, typename T, typename M, typename W>
-  void op_series_set(const algebra::SeriesBase<S>& s, const T& t, const W& w)
+  void op_series_structure(const algebra::SeriesBase<S>& s, const T& t, const W& w)
   {
     assertion(! "defined.");
   }
@@ -199,7 +199,7 @@ namespace vcsn {
     typedef typename algebra::series_traits<T>::support_t support_t;
     support_t supp = s.supp();
     for_each_const_(support_t, e, supp)
-      if (op_size(s.set().monoid(), *e) != 1)
+      if (op_size(s.structure().monoid(), *e) != 1)
 	return false;
     return true;
   }
@@ -209,9 +209,12 @@ namespace vcsn {
   extract_support(Element<S1, T1>& s1, Element<S2, T2>& s2)
   {
     typedef typename algebra::series_traits<T2>::support_t support_t;
-    typedef typename algebra::series_traits<T1>::semiring_elt_value_t semiring_elt_value_t;
+    typedef typename algebra::series_traits<T1>::semiring_elt_value_t
+      semiring_elt_value_t;
     for_each_const_(support_t, e, s2.supp())
-      s1.assoc(*e, algebra::identity_as<semiring_elt_value_t>::of(s1.set().semiring()));
+      s1.assoc(*e,
+	       algebra::identity_as<semiring_elt_value_t>::
+	       of(s1.structure().semiring()));
   }
 
   template <class S, class T>
@@ -229,7 +232,7 @@ namespace vcsn {
 	 ++supp)
       {
  	output +=  lhs.get(*supp) *
- 	  rhs.get(*supp) * series_elt_t(lhs.set(), monoid_elt_t(*supp));
+ 	  rhs.get(*supp) * series_elt_t(lhs.structure(), monoid_elt_t(*supp));
       }
     return output;
   }

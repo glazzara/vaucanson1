@@ -1,7 +1,7 @@
 // krat_coefficient.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -42,7 +42,8 @@ namespace vcsn {
     class CoefficientEval : public algebra::KRatExpMatcher<
       CoefficientEval<Series, T, Dispatch>,
       T,
-      std::pair<typename Element<Series, T>::semiring_elt_t, Element<Series, T> >,
+      std::pair<typename Element<Series, T>::semiring_elt_t,
+		Element<Series, T> >,
       Dispatch
       >
     {
@@ -58,10 +59,16 @@ namespace vcsn {
       {}
 
       semiring_elt_t	one()
-      { return exp_.set().semiring().identity(SELECT(semiring_elt_value_t)); }
+      {
+	return
+	  exp_.structure().semiring().identity(SELECT(semiring_elt_value_t));
+      }
 
       semiring_elt_t zero()
-      { return exp_.set().semiring().zero(SELECT(semiring_elt_value_t)); }
+      {
+	return
+	  exp_.structure().semiring().zero(SELECT(semiring_elt_value_t));
+      }
 
       MATCH__(Product, lhs, rhs)
       {
@@ -101,13 +108,13 @@ namespace vcsn {
 
       MATCH(Zero)
       {
-	return return_type(zero(), zero_as<T>::of(exp_.set()));
+	return return_type(zero(), zero_as<T>::of(exp_.structure()));
       }
       END
   
       MATCH(One)
       {
-	return return_type(one(), identity_as<T>::of(exp_.set()));
+	return return_type(one(), identity_as<T>::of(exp_.structure()));
       }
       END
   

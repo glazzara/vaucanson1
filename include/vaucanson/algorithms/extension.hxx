@@ -54,13 +54,13 @@ namespace vcsn {
     typedef typename ret_t::series_elt_t               output_series_elt_t;
     typedef typename series_elt_t::support_t           support_t;
 
-    set_t          ts(o_series_t(a.set().series(), a.set().series().monoid()));
+    set_t
+      ts(o_series_t (a.structure().series(), a.structure().series().monoid()));
     ret_t          t_ret(ts);
 
     monoid_elt_t   neutre   = a.series().monoid().empty_;
-    monoid_elt_t   t_neutre =
-      t_ret.series().monoid()
-      .identity(SELECT(typename t_monoid_elt_t::value_t));
+    monoid_elt_t	t_neutre = t_ret.series().monoid().
+      identity(SELECT(typename t_monoid_elt_t::value_t));
 
     vector<hstate_t>    conv(a.states().size());
 
@@ -71,11 +71,11 @@ namespace vcsn {
       {
 	series_elt_t t = a.series_of(*e);
 	series_elt_t s(t);
-	output_series_elt_t os(t_ret.set().series());
+	output_series_elt_t os(t_ret.structure().series());
 	support_t supp = s.supp();
 	for_each_const_(support_t, m, supp)
 	  {
-	    series_elt_t tmp(a.set().series());
+	    series_elt_t tmp(a.structure().series());
 	    // try to associate the neutral monoid element with a weight
 	    // to create a series which will be a weight in the series os
 	    tmp.assoc(neutre, s.get(*m));
@@ -90,7 +90,7 @@ namespace vcsn {
       {
 	series_elt_t a_series = a.get_initial(*i);
 	t_series_elt_t s;
-	s.value_set(t_neutre, a_series);
+	s.set(t_neutre, a_series);
 	t_ret.set_initial(conv[*i], s);
       }
 
@@ -108,7 +108,7 @@ namespace vcsn {
   template<typename S, typename T>
   typename identity_transducer_helper<S, T>::ret extension(const Element<S, T>& a)
   {
-    return do_extension(a.set(), a);
+    return do_extension(a.structure(), a);
   }
 
   ////////////////////////////////////////////////////////////
@@ -125,7 +125,7 @@ namespace vcsn {
     typedef typename Auto_t::series_elt_t::support_t  a_support_t;
     typedef typename Trans_t::semiring_elt_t	      t_weight_t;
 
-    Trans_t                   tt(t.set());
+    Trans_t                   tt(t.structure());
     map<hstate_t, hstate_t>   conv;
 
     a_monoid_elt_t a_neutre =
@@ -142,15 +142,15 @@ namespace vcsn {
 	a_series_elt_t s_ = a.series_of(*e);
 	a_series_elt_t s(s_);
 
-	t_output_series_elt_t os(t.set().series());
+	t_output_series_elt_t os(t.structure().series());
 
 	a_support_t supp = s.supp();
 	for(typename a_support_t::const_iterator m = supp.begin();
 	    m != supp.end(); ++m)
 	  {
-	    t_weight_t tmp(t.set().series().semiring());
+	    t_weight_t tmp(t.structure().series().semiring());
 	    tmp.assoc(a_neutre, s.get(*m));
-	    os.assoc(a_monoid_elt_t (a.set().series().monoid(), *m), tmp);
+	    os.assoc(a_monoid_elt_t (a.structure().series().monoid(), *m), tmp);
 	  }
 
 	tt.add_series_edge(conv[a.origin_of(*e)], conv[a.aim_of(*e)], os);
@@ -161,7 +161,7 @@ namespace vcsn {
 	++p)
       {
 	a_series_elt_t a_series = a.get_initial(*p);
-	t_series_elt_t s (t.set().series());
+	t_series_elt_t s (t.structure().series());
 	s.assoc(t_neutre, a_series);
 	tt.set_initial(conv[*p], s);
       }
@@ -171,7 +171,7 @@ namespace vcsn {
 	++p)
       {
 	a_series_elt_t a_series = a.get_final(*p);
-	t_series_elt_t s (t.set().series());
+	t_series_elt_t s (t.structure().series());
 	s.assoc(t_neutre, a_series);
 	tt.set_final(conv[*p], s);
       }
@@ -182,7 +182,7 @@ namespace vcsn {
   template<typename SA, typename TA, typename ST, typename TT>
   Element<ST, TT> extension(const Element<SA, TA>& a, const Element<ST, TT>& t)
   {
-    return do_extension(a.set(), t.set(), a, t);
+    return do_extension(a.structure(), t.structure(), a, t);
   }
 
 }

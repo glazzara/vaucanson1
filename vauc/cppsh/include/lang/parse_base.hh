@@ -1,7 +1,7 @@
 /*------------------------------------------------------.
 | include/lang/parse_base.hh : cppsh lang support / parser base |
 `------------------------------------------------------*/
-//     Copyright (C) 2002  LRDE.
+//     Copyright (C) 2002, 2004  LRDE.
 
 //     libcppshls is free software; you can redistribute it and/or
 //     modify it under the terms of the GNU Lesser General Public
@@ -75,7 +75,7 @@ namespace cppsh
       class ScannerBase
       {
       public:
-	virtual void reset(ScannerArg&, std::istream& i, std::ostream* o = 0) = 0;
+	virtual void restructure(ScannerArg&, std::istream& i, std::ostream* o = 0) = 0;
 	virtual int yylex() = 0;
 	virtual int get_current_token() const = 0;
 	virtual Cell* get_current_token_value() const = 0;

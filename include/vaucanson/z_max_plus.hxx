@@ -45,8 +45,8 @@ namespace vcsn {
       NumericalSemiring semiring;
       Words freemonoid(alpha);
       series_t series(semiring, freemonoid);
-      Automata<series_t> automata_set(series);
-      return automaton_t(automata_set);
+      Automata<series_t> automata_structure (series);
+      return automaton_t (automata_structure);
     }
 
     template <class T>

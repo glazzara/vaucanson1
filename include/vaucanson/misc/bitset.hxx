@@ -33,7 +33,7 @@
 /**
  * @file   bitset.hxx
  * @brief  This file contains a Bitset class implementaion.
- * 
+ *
  * @author Thomas Claveirole <thomas@lrde.epita.fr>
  */
 
@@ -71,7 +71,7 @@ namespace utility
   {
     memcpy(data_, data, data_size_ * sizeof (data_type));
   }
-  
+
   // Copy constructor.
   inline
   Bitset::Bitset(const Bitset& bs) : data_size_	(bs.data_size_),
@@ -311,7 +311,7 @@ namespace utility
 	++first;
       }
   }
-  
+
   /*------------------.
   | Misc. functions.  |
   `------------------*/
@@ -499,7 +499,7 @@ namespace utility
     const size_type	r_data_size = std::min(data_size_, rhs.data_size_);
     const size_type	r_max_size = std::min(max_size_, rhs.max_size_);
     Bitset		result (r_max_size);
-    
+
     for (size_type i = 0; i < r_data_size; ++i)
       {
 	result.data_[i] = data_[i] & rhs.data_[i];
@@ -518,7 +518,7 @@ namespace utility
     else
       {
 	Bitset	result (rhs.max_size_);
-	
+
 	for (size_type i = 0; i < data_size_; ++i)
 	  {
 	    result.data_[i] = data_[i] | rhs.data_[i];
@@ -533,8 +533,8 @@ namespace utility
 	  }
 	return result;
       }
-  }    
-  
+  }
+
   inline
   bool
   Bitset::operator [] (const key_type& x) const
@@ -587,14 +587,14 @@ namespace utility
   /*--------.
   | Casts.  |
   `--------*/
-  
+
   inline
   unsigned
   Bitset::to_unsigned() const
   {
     return cast<unsigned>();
   }
-  
+
   template <class Type>
   const Type
   Bitset::cast() const
@@ -602,7 +602,7 @@ namespace utility
     const Type* ptr = reinterpret_cast<const Type*> (data_);
     return *ptr;
   }
-  
+
   /*--------.
   | Print.  |
   `--------*/
@@ -627,7 +627,7 @@ namespace utility
   Bitset::get_data_size(size_type max)
   {
     precondition(max > 0);
-    
+
     const size_type data_bits = sizeof (data_type) * 8;
     return max / data_bits + (max % data_bits ? 1 : 0);
   }
@@ -655,7 +655,7 @@ namespace utility
   {
     return (data_[index] & (1 << bit)) != 0;
   }
-  
+
   inline
   bool
   Bitset::get_bit(const bit_iterator& it) const
@@ -673,7 +673,7 @@ namespace utility
       do_on_bit(bc, it);
     return size_ = bc.value;
   }
-  
+
   /*---------------.
   | Bit iterator.  |
   `---------------*/
@@ -753,7 +753,7 @@ namespace utility
   {
     return bitnum_;
   }
-  
+
   // bit_begin
   inline
   Bitset::bit_iterator
@@ -856,7 +856,7 @@ namespace utility
   {
     skip_zeros_forward();
   }
-  
+
   inline
   Bitset::const_iterator::const_iterator(const Bitset* bs,
 					 const bit_iterator& cbit)
@@ -865,7 +865,7 @@ namespace utility
   {
     skip_zeros_forward();
   }
-  
+
   // Copy constructors.
   inline
   Bitset::const_iterator::const_iterator(const const_iterator& it)
@@ -931,7 +931,7 @@ namespace utility
   {
     return *(*this) == *rhs;
   }
-  
+
   inline
   bool
   Bitset::const_iterator::operator != (const const_iterator& rhs) const
@@ -952,7 +952,7 @@ namespace utility
   {
     return *cbit_;
   }
-  
+
   inline
   void
   Bitset::const_iterator::skip_zeros_forward()
@@ -1052,14 +1052,14 @@ namespace utility
   {
     return *(*this) == *rhs;
   }
-  
+
   inline
   bool
   Bitset::iterator::operator == (const const_iterator& rhs) const
   {
     return *(*this) == *rhs;
   }
-  
+
   inline
   bool
   Bitset::iterator::operator != (const iterator& rhs) const
@@ -1109,7 +1109,7 @@ namespace utility
   }
 
 } // namespace bts
-  
+
 namespace std
 {
   template <>

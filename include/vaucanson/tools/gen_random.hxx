@@ -67,8 +67,8 @@ namespace vcsn {
     monoid_t monoid(alpha);
     semiring_t semi;
     series_t series(semi, monoid);
-    automata_set_t aset(series);
-    TAutomata work(aset);
+    automata_set_t astructure(series);
+    TAutomata work(astructure);
     return work;
   }
 
@@ -108,8 +108,8 @@ namespace vcsn {
     monoid_t monoid(alpha);
     semiring_t semi;
     series_t series(semi, monoid);
-    automata_set_t aset(series);
-    TAutomata work(aset);
+    automata_set_t astructure(series);
+    TAutomata work(astructure);
     
     for (unsigned i = 0; i < nb_state; i++)
       work.add_state();
@@ -437,7 +437,7 @@ namespace vcsn {
     work.set_initial(init);
     work.set_final(final);
 
-    const alphabets_elt_t& alpha = work.set().series().monoid().alphabet();
+    const alphabets_elt_t& alpha = work.structure().series().monoid().alphabet();
 
     hstate_t tmp;
 
@@ -477,7 +477,7 @@ namespace vcsn {
     work.set_initial(init);
     work.set_final(final);
 
-    const alphabets_elt_t& alpha = work.set().series().monoid().alphabet();
+    const alphabets_elt_t& alpha = work.structure().series().monoid().alphabet();
 
     hstate_t tmp;
 

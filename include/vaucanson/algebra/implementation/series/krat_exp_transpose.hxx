@@ -75,9 +75,9 @@ namespace vcsn {
 
       MATCH_(Constant, m)
       {
-	monoid_elt_t melt (exp_.set().monoid(), m);
+	monoid_elt_t melt (exp_.structure().monoid(), m);
 	melt.mirror();
-	return Element<Series, T> (exp_.set(), melt);
+	return Element<Series, T> (exp_.structure(), melt);
       }
       END
       

@@ -90,14 +90,14 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
       std::pair<bool, std::string> ret = parse(sstr.str(), out);
       if (ret.first)
 	error(sstr.str(), ret.second, sstr.str(),
-	      exp.set().monoid().alphabet());
+	      exp.structure().monoid().alphabet());
       else 
 	{
 	  std::ostringstream ostr;
 	  ostr << out;
 	  if (ostr.str() != sstr.str())
 	    error(sstr.str(), ostr.str(), sstr.str(),
-		  exp.set().monoid().alphabet());
+		  exp.structure().monoid().alphabet());
 	  else 
 	    ++nb_success;
 	}
@@ -211,7 +211,7 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 	{
 	  if (samples[nb_test].out != 0)
 	    error(samples[nb_test].exp, r.second, samples[nb_test].out,
-		  exp.set().monoid().alphabet());
+		  exp.structure().monoid().alphabet());
 	  else
 	    nb_success++;
 	}
@@ -221,10 +221,10 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 	  ostr << exp;
 	  if (samples[nb_test].out == 0)
 	    error(samples[nb_test].exp, ostr.str(), "error",
-		  exp.set().monoid().alphabet());
+		  exp.structure().monoid().alphabet());
 	  else if (samples[nb_test].out != ostr.str())
 	    error(samples[nb_test].exp, ostr.str(), samples[nb_test].out,
-		  exp.set().monoid().alphabet());
+		  exp.structure().monoid().alphabet());
 	  else
 	    nb_success++;
 	}

@@ -1,7 +1,7 @@
 // vgrep.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -202,7 +202,7 @@ int main(int argc, char **argv)
       
       automaton_t automaton = new_automaton(alpha);
       Element<series_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
-	krat_exp(automaton.set().series());
+	krat_exp(automaton.structure().series());
       parse(exp, krat_exp);
       standard_of(automaton, krat_exp.value());
       realtime_here(automaton);

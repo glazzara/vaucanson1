@@ -69,11 +69,11 @@ unsigned complete_test(tests::Tester& tg)
       automaton_t a = gen.generate_dfa(30);
       automaton_t b = a;
       complete_here(a);
-      alphabet_t alphabet = a.set().series().monoid().alphabet();
+      alphabet_t alphabet = a.structure().series().monoid().alphabet();
       result_test = true;
 
       if ((a.edges().size() == a.states().size() * 
-	   a.set().series().monoid().alphabet().size()) 
+	   a.structure().series().monoid().alphabet().size()) 
 	  && is_deterministic(a))
 	{
 	  for (alphabet_iterator l = alphabet.begin();

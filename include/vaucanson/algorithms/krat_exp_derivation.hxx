@@ -65,7 +65,7 @@ namespace vcsn {
 
     Element<Series, T> series(const T& e)
     {
-      return Element<Series, T>(exp_.set(), e);
+      return Element<Series, T>(exp_.structure(), e);
     }
 
     MATCH__(Product, lhs, rhs)
@@ -74,7 +74,7 @@ namespace vcsn {
       if (ret.second == false)
 	{
 	  undefined = true;
-	  return return_type(exp_.set());
+	  return return_type(exp_.structure());
 	}
       return (match(lhs) * rhs) + ret.first * match(rhs);
     }
@@ -92,7 +92,7 @@ namespace vcsn {
       if ((ret.second == false) || (ret.first.starable() == false))
 	{
 	  undefined = true;
-	  return return_type(exp_.set());
+	  return return_type(exp_.structure());
 	}
       return ret.first.star() * match(e) * e.clone().star();
     }
@@ -115,24 +115,24 @@ namespace vcsn {
       if (m[0] == a_)
 	{
 	  if (m.length() == 1)
-	    return algebra::identity_as<T>::of(exp_.set());
+	    return algebra::identity_as<T>::of(exp_.structure());
 	  else
- 	    return Element<Series, T> (exp_.set(), m.substr(1));
+ 	    return Element<Series, T> (exp_.structure(), m.substr(1));
 	}
       else
-	return algebra::zero_as<T>::of(exp_.set());
+	return algebra::zero_as<T>::of(exp_.structure());
     }
     END
 
     MATCH(Zero)
     {
-      return algebra::zero_as<T>::of(exp_.set());
+      return algebra::zero_as<T>::of(exp_.structure());
     }
     END
 
     MATCH(One)
     {
-      return algebra::zero_as<T>::of(exp_.set());
+      return algebra::zero_as<T>::of(exp_.structure());
     }
     END
 

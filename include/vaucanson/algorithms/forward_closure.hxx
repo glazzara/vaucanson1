@@ -150,7 +150,7 @@ namespace vcsn {
   forward_closure_here(Element<A, T>& a)
   {
     // FIXME: Hoc wrote "a.renumber_states();" here.
-    do_forward_closure_here(a.set(), a);
+    do_forward_closure_here(a.structure(), a);
   }
 
   template<typename  A, typename  T>
@@ -158,7 +158,7 @@ namespace vcsn {
   forward_closure(const Element<A, T>& a)
   {
     Element<A, T> ret(a);
-    do_forward_closure_here(ret.set(), ret);
+    do_forward_closure_here(ret.structure(), ret);
     return ret;
   }
 

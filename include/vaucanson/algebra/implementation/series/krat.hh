@@ -67,12 +67,12 @@ namespace vcsn {
     : MetaElement<algebra::SeriesBase<algebra::Series<W, M> >, rat::exp<Tm, Tw> >
   {
     static const bool dynamic_values = true;
-      
+
     void	accept(const rat::ConstNodeVisitor<Tm, Tw>& v) const;
     size_t	depth() const;
   };
 
-    
+
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const algebra::Series<W, M>& s, const rat::exp<Tm, Tw>& m);
 
@@ -83,16 +83,16 @@ namespace vcsn {
   Tm op_choose_from_supp(const algebra::Series<W, M>& s, const rat::exp<Tm, Tw>& m);
 
   template<typename W, typename M, typename Tm, typename Tw>
-  const rat::exp<Tm, Tw>& identity_value(SELECTOR2(algebra::Series<W, M>), 
+  const rat::exp<Tm, Tw>& identity_value(SELECTOR2(algebra::Series<W, M>),
 					 SELECTOR2(rat::exp<Tm, Tw>));
 
   template<typename W, typename M, typename Tm, typename Tw>
-  const rat::exp<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>), 
+  const rat::exp<Tm, Tw>& zero_value(SELECTOR2(algebra::Series<W, M>),
 				     SELECTOR2(rat::exp<Tm, Tw>));
 
 
   template<typename W, typename M, typename Tm, typename Tw>
-  void op_in_add(const algebra::Series<W, M>& s, 
+  void op_in_add(const algebra::Series<W, M>& s,
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg);
 
@@ -100,9 +100,9 @@ namespace vcsn {
   rat::exp<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
 			  const rat::exp<Tm, Tw>& a,
 			  const rat::exp<Tm, Tw>& b);
-    
+
   template<typename W, typename M, typename Tm, typename Tw>
-  void op_in_mul(const algebra::Series<W, M>& s, 
+  void op_in_mul(const algebra::Series<W, M>& s,
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg);
 
@@ -118,26 +118,26 @@ namespace vcsn {
 
   template<typename Tm, typename Tw, typename M, typename W>
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
-			      SELECTOR2(rat::exp<Tm, Tw>), 
+			      SELECTOR2(rat::exp<Tm, Tw>),
 			      const Tm& m_value);
 
   template<typename Tm, typename Tw, typename M, typename W>
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
-			      SELECTOR2(rat::exp<Tm, Tw>), 
+			      SELECTOR2(rat::exp<Tm, Tw>),
 			      char m_value);
-  
+
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
 			      SELECTOR2(rat::exp<Tm, Tw>),
 			      SELECTOR(M),
 			      const oTm& m_value);
-  
+
   template<typename Tm, typename Tw, typename W, typename M, typename oTw>
   rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
 			      SELECTOR2(rat::exp<Tm, Tw>),
 			      SELECTOR(W),
 			      const oTw& w_value);
-    
+
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   void op_assign(const algebra::Series<W, M>& s,
 		 const M& monoid,
@@ -163,7 +163,7 @@ namespace vcsn {
 		  rat::exp<Tm, Tw>& dst);
 
   template<typename W, typename M, typename Tm, typename Tw>
-  rat::exp<Tm, Tw> 
+  rat::exp<Tm, Tw>
   op_star(const algebra::Series<W, M>& s,
 	  const rat::exp<Tm, Tw>& src);
 
@@ -205,7 +205,7 @@ namespace vcsn {
   {
     typedef Element<algebra::Series<W, M>, rat::exp<Tm, Tw> > ret_t;
   };
-  
+
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_add(const algebra::Series<W, M>& s,
 		 const W& semiring,
@@ -234,7 +234,7 @@ namespace vcsn {
     typedef Element<algebra::Series<W, M>, rat::exp<Tm, Tw> > ret_t;
   };
 
-    
+
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_mul(const algebra::Series<W, M>& s,
 		 const W& semiring,
@@ -257,37 +257,37 @@ namespace vcsn {
   | Series methods |
   `---------------*/
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  Tw op_series_get(const algebra::Series<W, M>& s, 
+  Tw op_series_get(const algebra::Series<W, M>& s,
 		   const rat::exp<Tm, Tw>& p,
 		   const oTm& m);
 
-  template<typename W, typename M, typename Tm, 
+  template<typename W, typename M, typename Tm,
 	   typename Tw, typename oTm, typename oTw>
-  void op_series_set(const algebra::Series<W, M>& s, 
+  void op_series_set(const algebra::Series<W, M>& s,
 		     const rat::exp<Tm, Tw>& p,
 		     const oTm& m,
 		     const oTw& w);
 
   template <class W, class M, class Tm, class Tw>
-  Element<algebra::Series<W,M>, rat::exp<Tm,Tw> > 
-  op_choose(const algebra::Series<W,M>& s, 
+  Element<algebra::Series<W,M>, rat::exp<Tm,Tw> >
+  op_choose(const algebra::Series<W,M>& s,
 	    SELECTOR2(rat::exp<Tm,Tw>));
 
   /*----------.
   | Transpose |
   `----------*/
-  
+
   template <typename W, typename M, typename Tm, typename Tw>
-  void op_in_transpose(const algebra::Series<W, M>& s, 
+  void op_in_transpose(const algebra::Series<W, M>& s,
 		       rat::exp<Tm, Tw>& dst);
-  
-  
+
+
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/implementation/series/krat.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HH

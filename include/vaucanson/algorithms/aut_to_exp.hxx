@@ -197,7 +197,7 @@ namespace vcsn {
   aut_to_exp(const Element<A, T>& a, const Chooser_& c)
   {
     Element<A, T> ret(a);
-    return do_in_aut_to_exp(ret.set(), ret, c);
+    return do_in_aut_to_exp(ret.structure(), ret, c);
   }
 
   template<typename A, typename T>

@@ -85,7 +85,7 @@ namespace vcsn {
   Element<Self, T>&
   MetaElement<algebra::SemiringBase<Self>, T>::star()
   {
-    op_in_star(this->set(), this->value());
+    op_in_star(this->structure(), this->value());
     return this->self();
   }
 
@@ -93,7 +93,7 @@ namespace vcsn {
   bool
   MetaElement<algebra::SemiringBase<Self>, T>::starable() const
   {
-    return op_starable(this->set(), this->value());
+    return op_starable(this->structure(), this->value());
   }
 
   template <class Self, class T>
@@ -121,7 +121,7 @@ namespace vcsn {
   template <typename S, typename T>
   bool starable(const Element<S, T>& elt)
   {
-    return op_starable(elt.set(), elt.value());
+    return op_starable(elt.structure(), elt.value());
   }
 
   template <typename S, typename T>
@@ -129,7 +129,7 @@ namespace vcsn {
   parse_weight(Element<S, T>& w, const std::string&s ,
 	       typename std::string::const_iterator& i)
   {
-    return op_parse(w.set(), w.value(), s, i);
+    return op_parse(w.structure(), w.value(), s, i);
   }
 
 

@@ -98,7 +98,7 @@ namespace vcsn {
     : MetaElement<Structure<vcsn_test::eS>, T>
   {
     void foo() const
-    { op_foo(set(), value()); }
+    { op_foo(structure(), value()); }
   protected:
     MetaElement() : MetaElement<Structure<vcsn_test::eS>, T>() {}
     MetaElement(const MetaElement& other) : MetaElement<Structure<vcsn_test::eS>, T>(other) {}
@@ -134,7 +134,7 @@ namespace vcsn {
     : MetaElement<Structure<vcsn_test::S>, T>
   {
     void foo() const
-    { op_foo(set(), value()); }
+    { op_foo(structure(), value()); }
 
   protected:
     MetaElement() : MetaElement<Structure<vcsn_test::S>, T>() {}

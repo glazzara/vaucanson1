@@ -50,19 +50,19 @@ namespace vcsn
 
     typedef typename Element<Ss, Ts>::support_t support_t;
 
-    dst = algebra::zero_as<T>::of(dst.set());
+    dst = algebra::zero_as<T>::of(dst.structure());
 
     const support_t& org_supp = org.supp();
     for (typename support_t::const_iterator i = org_supp.begin();
 	 i != org_supp.end();
 	 ++i)
       {
-	const sme_t &sm = sme_t(org.set().monoid(), *i);
+	const sme_t &sm = sme_t(org.structure().monoid(), *i);
 
-	const me_t &m = me_t(dst.set().monoid(), sm);
-	const se_t &w = se_t(dst.set().semiring(), org.get(sm));
+	const me_t &m = me_t(dst.structure().monoid(), sm);
+	const se_t &w = se_t(dst.structure().semiring(), org.get(sm));
 
-	dst += w * Element<S, T>(dst.set(), m);
+	dst += w * Element<S, T>(dst.structure(), m);
       }
 
     postcondition(dst.is_finite_app());

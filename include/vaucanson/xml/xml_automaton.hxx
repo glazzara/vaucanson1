@@ -36,8 +36,8 @@
 # include <vaucanson/algebra/implementation/free_monoid/words.hh>
 # include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
-# include <include/vaucanson/algebra/implementation/alphabets/predefs.hh>
-# include <include/vaucanson/algebra/implementation/free_monoid/predefs.hh>
+# include <vaucanson/algebra/implementation/alphabets/predefs.hh>
+# include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
 # include <vaucanson/algebra/concept/numerical_semiring.hh>
 # include <vaucanson/algebra/concept/tropical_semiring.hh>
 # include <vaucanson/xml/krat_to_polynom.hh>

@@ -67,7 +67,7 @@ namespace vcsn {
   typename MetaElement<AutomataBase<Self>, T>::tag_t&
   MetaElement<AutomataBase<Self>, T>::tag()
   {
-    return op_tag(this->set(), this->value());
+    return op_tag(this->structure(), this->value());
   }
 
   /** the optional information aggregated to the automaton. */
@@ -75,7 +75,7 @@ namespace vcsn {
   const typename MetaElement<AutomataBase<Self>, T>::tag_t&
   MetaElement<AutomataBase<Self>, T>:: tag() const
   {
-    return op_tag(this->set(), this->value());
+    return op_tag(this->structure(), this->value());
   }
 
   /** return true if the automaton is consistent. */
@@ -83,7 +83,7 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::exists() const
   {
-    return op_exists(this->set(), this->value());
+    return op_exists(this->structure(), this->value());
   }
 
   /** accessor to the set of states. (const version) */
@@ -91,7 +91,7 @@ namespace vcsn {
   typename automaton_traits<T>::states_t
   MetaElement<AutomataBase<Self>, T>::states() const
   {
-    return op_states(this->set(), this->value());
+    return op_states(this->structure(), this->value());
   }
 
   /** accessor to the set of states. (const version) */
@@ -99,7 +99,7 @@ namespace vcsn {
   typename automaton_traits<T>::edges_t
   MetaElement<AutomataBase<Self>, T>::edges() const
   {
-    return op_edges(this->set(), this->value());
+    return op_edges(this->structure(), this->value());
   }
 
   /** the optional information aggregated to the automaton. */
@@ -107,7 +107,7 @@ namespace vcsn {
   const typename MetaElement<AutomataBase<Self>, T>::series_t&
   MetaElement<AutomataBase<Self>, T>::series() const
   {
-    return this->set().series();
+    return this->structure().series();
   }
 
   /** accessor to the initial application. */
@@ -115,7 +115,7 @@ namespace vcsn {
   typename automaton_traits<T>::initial_support_t
   MetaElement<AutomataBase<Self>, T>::initial() const
   {
-    return op_initial(this->set(), this->value());
+    return op_initial(this->structure(), this->value());
   }
 
   /** accessor to the final application. */
@@ -124,7 +124,7 @@ namespace vcsn {
 
   MetaElement<AutomataBase<Self>, T>::final() const
   {
-    return op_final(this->set(), this->value());
+    return op_final(this->structure(), this->value());
   }
 
   /** return true if the state is initial (ie it is in the initial
@@ -133,8 +133,8 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::is_initial(hstate_t state) const
   {
-    return (op_get_initial(this->set(), this->value(), state) !=
-	    this->set().series().zero(SELECT(series_value_t)));
+    return (op_get_initial(this->structure(), this->value(), state) !=
+	    this->structure().series().zero(SELECT(series_value_t)));
   }
 
   /** return true if the state is final (ie it is in the final support). */
@@ -142,8 +142,8 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::is_final(hstate_t state) const
   {
-    return (op_get_final(this->set(), this->value(), state) !=
-	    algebra::zero_as<series_value_t>::of(this->set().series()));
+    return (op_get_final(this->structure(), this->value(), state) !=
+	    algebra::zero_as<series_value_t>::of(this->structure().series()));
   }
 
   /** set the state to be initial. */
@@ -151,7 +151,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::set_initial(hstate_t state)
   {
-    op_set_initial(this->set(), this->value(), state, this->set().series().identity(SELECT(series_value_t)));
+    op_set_initial(this->structure(), this->value(), state, this->structure().series().identity(SELECT(series_value_t)));
   }
 
   /** set an initial multiplicity to the state. */
@@ -160,7 +160,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::
   set_initial(hstate_t state, const series_elt_t& s)
   {
-    op_set_initial(this->set(), this->value(), state, s);
+    op_set_initial(this->structure(), this->value(), state, s);
   }
 
   /** set the state to be final. */
@@ -168,8 +168,8 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::set_final(hstate_t state)
   {
-    op_set_final(this->set(), this->value(), state,
-		 this->set().series().identity(SELECT(series_value_t)));
+    op_set_final(this->structure(), this->value(), state,
+		 this->structure().series().identity(SELECT(series_value_t)));
   }
 
   /** set a final multiplicity to the state. */
@@ -178,7 +178,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::
   set_final(hstate_t state, const series_elt_t& s)
   {
-    op_set_final(this->set(), this->value(), state, s);
+    op_set_final(this->structure(), this->value(), state, s);
   }
 
   /** set the state not to be initial. */
@@ -186,8 +186,8 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::unset_initial(hstate_t state)
   {
-    op_set_initial(this->set(), this->value(), state,
-		   algebra::zero_as<series_value_t>::of(this->set().series()));
+    op_set_initial(this->structure(), this->value(), state,
+		   algebra::zero_as<series_value_t>::of(this->structure().series()));
   }
 
   /** set the set not to be final. */
@@ -195,8 +195,8 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::unset_final(hstate_t state)
   {
-    op_set_final(this->set(), this->value(), state,
-		 algebra::zero_as<series_value_t>::of(this->set().series()));
+    op_set_final(this->structure(), this->value(), state,
+		 algebra::zero_as<series_value_t>::of(this->structure().series()));
   }
 
   /** make the support of the initial application to be empty. */
@@ -204,7 +204,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::clear_initial()
   {
-    return op_clear_initial(this->set(), this->value());
+    return op_clear_initial(this->structure(), this->value());
   }
 
   /** make the support of the final application to be empty. */
@@ -212,7 +212,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::clear_final()
   {
-    return op_clear_final(this->set(), this->value());
+    return op_clear_final(this->structure(), this->value());
   }
 
   /** return the initial multiplicity of the state. */
@@ -220,7 +220,7 @@ namespace vcsn {
   typename MetaElement<AutomataBase<Self>, T>::series_elt_t
   MetaElement<AutomataBase<Self>, T>::get_initial(hstate_t state) const
   {
-    return op_get_initial(this->set(), this->value(), state);
+    return op_get_initial(this->structure(), this->value(), state);
   }
 
   /** return the final multiplicity of the state. */
@@ -228,7 +228,7 @@ namespace vcsn {
   typename MetaElement<AutomataBase<Self>, T>::series_elt_t
   MetaElement<AutomataBase<Self>, T>::get_final(hstate_t what) const
   {
-    return op_get_final(this->set(), this->value(), what);
+    return op_get_final(this->structure(), this->value(), what);
   }
 
   /** add a new state to the automaton. */
@@ -236,7 +236,7 @@ namespace vcsn {
   hstate_t
   MetaElement<AutomataBase<Self>, T>::add_state()
   {
-    return op_add_state(this->set(), this->value());
+    return op_add_state(this->structure(), this->value());
   }
 
   /** return a randomly chosen state. (valid only if the automaton
@@ -245,7 +245,7 @@ namespace vcsn {
   hstate_t
   MetaElement<AutomataBase<Self>, T>::choose_state() const
   {
-    return op_choose_state(this->set(), this->value());
+    return op_choose_state(this->structure(), this->value());
   }
 
   /** add a new edge between 'from' and 'to' labelled by 'label' */
@@ -255,7 +255,7 @@ namespace vcsn {
 					       hstate_t to,
 					       const label_t& label)
   {
-    return op_add_edge(this->set(), this->value(),
+    return op_add_edge(this->structure(), this->value(),
 		       from, to, label);
   }
 
@@ -268,7 +268,7 @@ namespace vcsn {
 						     hstate_t to,
 						     const series_elt_t& e)
   {
-    return op_add_series_edge(this->set(), this->value(), from, to, e);
+    return op_add_series_edge(this->structure(), this->value(), from, to, e);
   }
 
   /** add a spontaneous transition between 'from' and 'to'. */
@@ -277,10 +277,10 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::add_spontaneous(hstate_t from,
 						      hstate_t to)
   {
-    semiring_elt_t w(this->set().series().semiring());
+    semiring_elt_t w(this->structure().series().semiring());
     w = algebra::identity_as<semiring_elt_value_t>
-      ::of(this->set().series().semiring());
-    return op_add_spontaneous(this->set(), this->value(), from, to, w);
+      ::of(this->structure().series().semiring());
+    return op_add_spontaneous(this->structure(), this->value(), from, to, w);
   }
 
   template <typename Self, typename T>
@@ -290,7 +290,7 @@ namespace vcsn {
 		    hstate_t to,
 		    const semiring_elt_t& w)
   {
-    return op_add_spontaneous(this->set(), this->value(), from, to, w);
+    return op_add_spontaneous(this->structure(), this->value(), from, to, w);
   }
 
   /** add an transition between 'from' and 'to' labelled by a letter. */
@@ -300,7 +300,7 @@ namespace vcsn {
 						      hstate_t to,
 						      const letter_t& l)
   {
-    return op_add_letter_edge(this->set(), this->value(), from, to, l);
+    return op_add_letter_edge(this->structure(), this->value(), from, to, l);
   }
 
   /** update the label of an edge. */
@@ -308,7 +308,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::update(hedge_t e, const label_t& l)
   {
-    op_update(this->set(), this->value(), e, l);
+    op_update(this->structure(), this->value(), e, l);
   }
 
   /** delete the state 's'. */
@@ -316,7 +316,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::del_state(hstate_t s)
   {
-    return op_del_state(this->set(), this->value(), s);
+    return op_del_state(this->structure(), this->value(), s);
   }
 
   /** delete the edge 'e'. */
@@ -324,7 +324,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::del_edge(hedge_t e)
   {
-    return op_del_edge(this->set(), this->value(), e);
+    return op_del_edge(this->structure(), this->value(), e);
   }
 
   /** delete the state 's' and every references to it in the automaton. */
@@ -332,7 +332,7 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>::safe_del_state(hstate_t s)
   {
-    return op_safe_del_state(this->set(), this->value(), s);
+    return op_safe_del_state(this->structure(), this->value(), s);
   }
 
   /** check if the state 's' is in the automaton. */
@@ -340,7 +340,7 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::has_state(hstate_t s) const
   {
-    return op_has_state(this->set(), this->value(), s);
+    return op_has_state(this->structure(), this->value(), s);
   }
 
   /** check if the edge 'e' is in the automaton. */
@@ -348,7 +348,7 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::has_edge(hedge_t e) const
   {
-    return op_has_edge(this->set(), this->value(), e);
+    return op_has_edge(this->structure(), this->value(), e);
   }
 
   /** return the origin of the edge 'e'. */
@@ -356,7 +356,7 @@ namespace vcsn {
   hstate_t
   MetaElement<AutomataBase<Self>, T>::origin_of(hedge_t e) const
   {
-    return op_origin_of(this->set(), this->value(), e);
+    return op_origin_of(this->structure(), this->value(), e);
   }
 
   /** return the aim of the edge 'e'. */
@@ -364,7 +364,7 @@ namespace vcsn {
   hstate_t
   MetaElement<AutomataBase<Self>, T>::aim_of(hedge_t e) const
   {
-    return op_aim_of(this->set(), this->value(), e);
+    return op_aim_of(this->structure(), this->value(), e);
   }
 
   /** return the label of the edge 'e'. */
@@ -372,7 +372,7 @@ namespace vcsn {
   typename automaton_traits<T>::label_t
   MetaElement<AutomataBase<Self>, T>::label_of(hedge_t e) const
   {
-    return op_label_of(this->set(), this->value(), e);
+    return op_label_of(this->structure(), this->value(), e);
   }
 
   /** return the label seen as a series. */
@@ -380,7 +380,7 @@ namespace vcsn {
   typename MetaElement<AutomataBase<Self>, T>::series_elt_t
   MetaElement<AutomataBase<Self>, T>::series_of(hedge_t e) const
   {
-    return op_series_of(this->set(), this->value(), e);
+    return op_series_of(this->structure(), this->value(), e);
   }
 
   /** return the label seen as a series implementation. */
@@ -388,7 +388,7 @@ namespace vcsn {
   typename MetaElement<AutomataBase<Self>, T>::series_value_t
   MetaElement<AutomataBase<Self>, T>::series_value_of(hedge_t e) const
   {
-    return op_series_value_of(this->set(), this->value(), e);
+    return op_series_value_of(this->structure(), this->value(), e);
   }
 
   /** return true if the transition is spontaneous. */
@@ -396,7 +396,7 @@ namespace vcsn {
   bool
   MetaElement<AutomataBase<Self>, T>::is_spontaneous(hedge_t e) const
   {
-    return op_is_spontaneous(this->set(), this->value(), e);
+    return op_is_spontaneous(this->structure(), this->value(), e);
   }
 
   /** return the label seen as a word. */
@@ -404,7 +404,7 @@ namespace vcsn {
   typename MetaElement<AutomataBase<Self>, T>::monoid_elt_t
   MetaElement<AutomataBase<Self>, T>::word_of(hedge_t e) const
   {
-    return op_word_of(this->set(), this->value(), e);
+    return op_word_of(this->structure(), this->value(), e);
   }
 
   /** returns the label seen as word implementation. */
@@ -412,7 +412,7 @@ namespace vcsn {
   typename MetaElement<AutomataBase<Self>, T>::monoid_elt_value_t
   MetaElement<AutomataBase<Self>, T>::word_value_of(hedge_t e) const
   {
-    return op_word_value_of(this->set(), this->value(), e);
+    return op_word_value_of(this->structure(), this->value(), e);
   }
 
   /** return the label seen as a letter. */
@@ -422,7 +422,7 @@ namespace vcsn {
   typename MetaElement<AutomataBase<Self>, T>::letter_t
   MetaElement<AutomataBase<Self>, T>::letter_of(hedge_t e) const
   {
-    return op_letter_of(this->set(), this->value(), e);
+    return op_letter_of(this->structure(), this->value(), e);
   }
 
   // output_return_type = OutputIterator
@@ -437,7 +437,7 @@ namespace vcsn {
 					    hstate_t from,
 					    delta_kind::edges k) const
   {
-    op_delta(this->set(), this->value(), res, from, k);
+    op_delta(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output edges of the state 'from' where
@@ -450,7 +450,7 @@ namespace vcsn {
 					    const L& query,
 					    delta_kind::edges k) const
   {
-    op_delta(this->set(), this->value(), res, from, query, k);
+    op_delta(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output edges of the state 'from' where
@@ -463,7 +463,7 @@ namespace vcsn {
 						   const L& letter,
 						   delta_kind::edges k) const
   {
-    op_letter_delta(this->set(), this->value(), res, from, letter, k);
+    op_letter_delta(this->structure(), this->value(), res, from, letter, k);
   }
 
   /** store the output spontaneous transitions. */
@@ -475,7 +475,7 @@ namespace vcsn {
 		      hstate_t from,
 		      delta_kind::edges k) const
   {
-    return op_spontaneous_delta(this->set(), this->value(), res, from, k);
+    return op_spontaneous_delta(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = Container
@@ -490,7 +490,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::deltac(Container& res, hstate_t from,
 					     delta_kind::edges k) const
   {
-    op_deltac(this->set(), this->value(), res, from, k);
+    op_deltac(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output edges of the state 'from' where
@@ -503,7 +503,7 @@ namespace vcsn {
 					     const L& query,
 					     delta_kind::edges k) const
   {
-    op_deltac(this->set(), this->value(), res, from, query, k);
+    op_deltac(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output edges of the state 'from' where
@@ -516,7 +516,7 @@ namespace vcsn {
 						    const L& letter,
 						    delta_kind::edges k) const
   {
-    op_letter_deltac(this->set(), this->value(), res, from, letter, k);
+    op_letter_deltac(this->structure(), this->value(), res, from, letter, k);
   }
 
   /** store the output spontaneous transitions. */
@@ -528,7 +528,7 @@ namespace vcsn {
 		       hstate_t from,
 		       delta_kind::edges k) const
   {
-    op_spontaneous_deltac(this->set(), this->value(), res, from, k);
+    op_spontaneous_deltac(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = OutputIterator
@@ -543,7 +543,7 @@ namespace vcsn {
 					    hstate_t from,
 					    delta_kind::states k) const
   {
-    op_delta(this->set(), this->value(), res, from, k);
+    op_delta(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output states of the state 'from' where
@@ -556,7 +556,7 @@ namespace vcsn {
 					    const L& query,
 					    delta_kind::states k) const
   {
-    op_delta(this->set(), this->value(), res, from, query, k);
+    op_delta(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output states of the state 'from' where
@@ -569,7 +569,7 @@ namespace vcsn {
 						   const L& letter,
 						   delta_kind::states k) const
   {
-    op_letter_delta(this->set(), this->value(), res, from, letter, k);
+    op_letter_delta(this->structure(), this->value(), res, from, letter, k);
   }
 
   /** store the output spontaneous transitions. */
@@ -581,7 +581,7 @@ namespace vcsn {
 		      hstate_t from,
 		      delta_kind::states k) const
   {
-    return op_spontaneous_delta(this->set(), this->value(), res, from, k);
+    return op_spontaneous_delta(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = Container
@@ -596,7 +596,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::deltac(Container& res, hstate_t from,
 					     delta_kind::states k) const
   {
-    op_deltac(this->set(), this->value(), res, from, k);
+    op_deltac(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output states of the state 'from' where
@@ -609,7 +609,7 @@ namespace vcsn {
 					     const L& query,
 					     delta_kind::states k) const
   {
-    op_deltac(this->set(), this->value(), res, from, query, k);
+    op_deltac(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output states of the state 'from' where
@@ -622,7 +622,7 @@ namespace vcsn {
 						    const L& letter,
 						    delta_kind::states k) const
   {
-    op_letter_deltac(this->set(), this->value(), res, from, letter, k);
+    op_letter_deltac(this->structure(), this->value(), res, from, letter, k);
   }
 
   /** store the output spontaneous transitions. */
@@ -634,7 +634,7 @@ namespace vcsn {
 		       hstate_t from,
 		       delta_kind::states k) const
   {
-    op_spontaneous_deltac(this->set(), this->value(), res, from, k);
+    op_spontaneous_deltac(this->structure(), this->value(), res, from, k);
   }
 
 
@@ -650,7 +650,7 @@ namespace vcsn {
 					    hstate_t from,
 					    delta_kind::edges k) const
   {
-    op_rdelta(this->set(), this->value(), res, from, k);
+    op_rdelta(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output edges of the state 'from' where
@@ -663,7 +663,7 @@ namespace vcsn {
 					    const L& query,
 					    delta_kind::edges k) const
   {
-    op_rdelta(this->set(), this->value(), res, from, query, k);
+    op_rdelta(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output edges of the state 'from' where
@@ -676,7 +676,7 @@ namespace vcsn {
 						   const L& letter,
 						   delta_kind::edges k) const
   {
-    op_letter_rdelta(this->set(), this->value(), res, from, letter, k);
+    op_letter_rdelta(this->structure(), this->value(), res, from, letter, k);
   }
 
   /** store the output spontaneous transitions. */
@@ -688,7 +688,7 @@ namespace vcsn {
 		      hstate_t from,
 		      delta_kind::edges k) const
   {
-    return op_spontaneous_rdelta(this->set(), this->value(), res, from, k);
+    return op_spontaneous_rdelta(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = Container
@@ -703,7 +703,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res, hstate_t from,
 					     delta_kind::edges k) const
   {
-    op_rdeltac(this->set(), this->value(), res, from, k);
+    op_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output edges of the state 'from' where
@@ -716,7 +716,7 @@ namespace vcsn {
 					     const L& query,
 					     delta_kind::edges k) const
   {
-    op_rdeltac(this->set(), this->value(), res, from, query, k);
+    op_rdeltac(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output edges of the state 'from' where
@@ -729,7 +729,7 @@ namespace vcsn {
 						    const L& letter,
 						    delta_kind::edges k) const
   {
-    op_letter_rdeltac(this->set(), this->value(), res, from, letter, k);
+    op_letter_rdeltac(this->structure(), this->value(), res, from, letter, k);
   }
 
   /** store the output spontaneous transitions. */
@@ -741,7 +741,7 @@ namespace vcsn {
 		       hstate_t from,
 		       delta_kind::edges k) const
   {
-    op_spontaneous_rdeltac(this->set(), this->value(), res, from, k);
+    op_spontaneous_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = OutputIterator
@@ -756,7 +756,7 @@ namespace vcsn {
 					    hstate_t from,
 					    delta_kind::states k) const
   {
-    op_rdelta(this->set(), this->value(), res, from, k);
+    op_rdelta(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output states of the state 'from' where
@@ -769,7 +769,7 @@ namespace vcsn {
 					    const L& query,
 					    delta_kind::states k) const
   {
-    op_rdelta(this->set(), this->value(), res, from, query, k);
+    op_rdelta(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output states of the state 'from' where
@@ -782,7 +782,7 @@ namespace vcsn {
 						   const L& letter,
 						   delta_kind::states k) const
   {
-    op_letter_rdelta(this->set(), this->value(), res, from, letter, k);
+    op_letter_rdelta(this->structure(), this->value(), res, from, letter, k);
   }
 
   /** store the output spontaneous transitions. */
@@ -794,7 +794,7 @@ namespace vcsn {
 		       hstate_t from,
 		       delta_kind::states k) const
   {
-    return op_spontaneous_rdelta(this->set(), this->value(), res, from, k);
+    return op_spontaneous_rdelta(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = Container
@@ -809,7 +809,7 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res, hstate_t from,
 					     delta_kind::states k) const
   {
-    op_rdeltac(this->set(), this->value(), res, from, k);
+    op_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output states of the state 'from' where
@@ -822,7 +822,7 @@ namespace vcsn {
 					     const L& query,
 					     delta_kind::states k) const
   {
-    op_rdeltac(this->set(), this->value(), res, from, query, k);
+    op_rdeltac(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output states of the state 'from' where
@@ -835,7 +835,7 @@ namespace vcsn {
 						    const L& letter,
 						    delta_kind::states k) const
   {
-    op_letter_rdeltac(this->set(), this->value(), res, from, letter, k);
+    op_letter_rdeltac(this->structure(), this->value(), res, from, letter, k);
   }
 
   /** store the output spontaneous transitions. */
@@ -847,7 +847,7 @@ namespace vcsn {
 		       hstate_t from,
 		       delta_kind::states k) const
   {
-    op_spontaneous_rdeltac(this->set(), this->value(), res, from, k);
+    op_spontaneous_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
 

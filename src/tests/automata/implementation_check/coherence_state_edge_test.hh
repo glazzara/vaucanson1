@@ -1,7 +1,7 @@
 // coherence_state_edge_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -51,7 +51,7 @@ unsigned coherence_state_edge_test(tests::Tester& tg)
   typedef GenRandomAutomata<Auto> gen_auto_t;
   gen_auto_t gen(time(0x0));
   typedef Auto automaton_t;
-  automaton_t automaton(gen.generate_dfa(10).set());
+  automaton_t automaton(gen.generate_dfa(10).structure());
   
   hstate_t s1 = automaton.add_state();
   hstate_t s2 = automaton.add_state();

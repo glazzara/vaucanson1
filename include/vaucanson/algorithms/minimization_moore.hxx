@@ -253,7 +253,7 @@ namespace vcsn {
   void
   minimization_moore_here(Element<A, T>& a)
   {
-    Element<A, T> output(a.set());
+    Element<A, T> output(a.structure());
     do_minimization_moore(a, output);
     a = output;
   }
@@ -263,7 +263,7 @@ namespace vcsn {
   Element<A, T>
   minimization_moore(const Element<A, T>& a)
   {
-    Element<A, T> output(a.set());
+    Element<A, T> output(a.structure());
     do_minimization_moore(a, output);
     return output;
   }

@@ -1,7 +1,7 @@
 // context.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -48,10 +48,10 @@ struct vcsn_context : vcsn::virtual_context
   
   template<typename OtherAuto>
   vcsn_context(const vcsn_context<OtherAuto>& other)
-    : vcsn::virtual_context(), set_(& other.automata_set())
+    : vcsn::virtual_context(), set_(& other.automata_structure())
   {}
 
-  const automata_set_t& automata_set() const
+  const automata_set_t& automata_structure() const
   { return *set_; }
   
   const series_t& series() const
@@ -103,7 +103,7 @@ struct vcsn_context : vcsn::virtual_context
     return ret;
   }
 
-  virtual std::string describe_automata_set(bool cpp) const
+  virtual std::string describe_automata_structure(bool cpp) const
   {
     std::string ret = "AutomataSet (" + describe_series(cpp) + ')';
     if (cpp)
@@ -157,8 +157,8 @@ namespace FAMILY ##_types				\
     FAMILY ##_semiring_t semiring;			\
     FAMILY ##_monoid_t monoid(alpha);			\
     FAMILY ##_series_t series(semiring, monoid);	\
-    FAMILY ##_automata_set_t automata_set(series);	\
-    return FAMILY ##_context(automata_set);		\
+    FAMILY ##_automata_set_t automata_structure(series);	\
+    return FAMILY ##_context(automata_structure);		\
   }							\
 }
 

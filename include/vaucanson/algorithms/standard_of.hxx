@@ -215,7 +215,7 @@ namespace vcsn {
 	      const Exp& kexp)
   {
     algebra::Standard_OfVisitor<Exp, Output, algebra::DispatchFunction<Exp> >
-      m(output.set().series());
+      m(output.structure().series());
     output = *m.match(kexp);
   }
 
@@ -226,14 +226,14 @@ namespace vcsn {
   standard_of(Element<A, T>& out,
 	   const Exp& kexp)
   {
-    do_standard_of(out.set(), out, kexp);
+    do_standard_of(out.structure(), out, kexp);
   }
 
   template <typename A, typename T, typename Exp>
   Element<A, T>
   standard_of(const Exp& e)
   {
-    A automata_set(e.set());
+    A automata_structure(e.structure());
     Element<A, T> out(automata_set);
     standard_of(out, e);
     return out;

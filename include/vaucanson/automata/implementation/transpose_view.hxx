@@ -61,7 +61,7 @@ namespace vcsn {
   transpose_view(Element<S, T>& a)
   {
     return Element<S, TransposeView<T> >
-      (a.set(), TransposeView<T>(a.value()));
+      (a.structure(), TransposeView<T>(a.value()));
   }
 
   template <class S, class T>
@@ -69,7 +69,7 @@ namespace vcsn {
   transpose_view(const Element<S, T>& a)
   {
     return Element<S, TransposeView<T> >
-      (a.set(), TransposeView<T>(a.value()));
+      (a.structure(), TransposeView<T>(a.value()));
   }
 
   template <class S, class T>

@@ -37,11 +37,11 @@
 
 # ifdef VCSN_XML_GENRERIC_WEIGHTED
 #  define CHOOSE_SEMIRING_SET_WEIGHTED(X, Do...)             \
-  else if ( X .semiring_set() == XmlSet::Z) {                \
+  else if ( X .semiring_structure() == XmlStructure::Z) {                \
     typedef int semiring_set;                                \
     Do;                                                      \
   }                                                          \
-  else if ( X .semiring_set() == XmlSet::R) {                \
+  else if ( X .semiring_structure() == XmlStructure::R) {                \
     typedef float semiring_set;                              \
     Do;                                                      \
   }
@@ -50,8 +50,8 @@
 # endif //VCSN_XML_GENRERIC_WEIGHTED
 
 # define CHOOSE_SEMIRING_SET_NOREC_(X, Do...)                \
-  if (( X .semiring_set() == XmlSet::UNSET)                  \
-      || ( X .semiring_set() == XmlSet::B)) {                \
+  if (( X .semiring_structure() == XmlStructure::UNSET)                  \
+      || ( X .semiring_structure() == XmlStructure::B)) {                \
     typedef bool semiring_set;                               \
     Do;                                                      \
   }                                                          \
@@ -66,7 +66,7 @@
 
 #  define CHOOSE_SEMIRING_SET(X, Do...)                      \
   CHOOSE_SEMIRING_SET_NOREC_(X, Do)                          \
-  else if ( X .semiring_set() == XmlSet::RATSERIES) {        \
+  else if ( X .semiring_structure() == XmlStructure::RATSERIES) {        \
      CHOOSE_SEMIRING_TYPE_FOR_RATSERIES(X, Do);              \
   }                                                          \
   else                                                       \
@@ -80,10 +80,10 @@
 # endif //VCSN_XML_GENRERIC_TRANSDUCERS
 
 # define CHOOSE_SEMIRING_TYPE_FOR_RATSERIES(X, Do...)        \
-  if (( X .semiring_type() == XmlSet::UNSET)                 \
-      || ( X .semiring_type() == XmlSet::FUNCTION)) {        \
-    XmlSet subx = X;                                         \
-    subx = subx.get_subset();                                \
+  if (( X .semiring_type() == XmlStructure::UNSET)                 \
+      || ( X .semiring_type() == XmlStructure::FUNCTION)) {        \
+    XmlStructure subx = X;                                         \
+    subx = subx.get_substructure();                                \
     CHOOSE_SEMIRING_SET_NOREC(subx,                          \
       CHOOSE_SEMIRING_TYPE(subx,                             \
         CHOOSE_MONOID_TYPE(subx,                             \
@@ -98,17 +98,17 @@
   typedef rat::exp<monoid_set, semiring_set> semiring_set;
 
 # define CHOOSE_SEMIRING_TYPE(X, Do...)                      \
-  if (( X .semiring_type() == XmlSet::UNSET)                 \
-      || ( X .semiring_type() == XmlSet::NUMERICAL)          \
-      || ( X .semiring_type() == XmlSet::BOOLEAN)) {         \
+  if (( X .semiring_type() == XmlStructure::UNSET)                 \
+      || ( X .semiring_type() == XmlStructure::NUMERICAL)          \
+      || ( X .semiring_type() == XmlStructure::BOOLEAN)) {         \
     typedef NumericalSemiring semiring_type;                 \
     Do;                                                      \
   }                                                          \
-  else if ( X .semiring_type() == XmlSet::TROPICAL_MAX) {    \
+  else if ( X .semiring_type() == XmlStructure::TROPICAL_MAX) {    \
     typedef TropicalSemiring<TropicalMax> semiring_type;     \
     Do;                                                      \
   }                                                          \
-  else if ( X .semiring_type() == XmlSet::TROPICAL_MIN) {    \
+  else if ( X .semiring_type() == XmlStructure::TROPICAL_MIN) {    \
     typedef TropicalSemiring<TropicalMin> semiring_type;     \
     Do;                                                      \
   }                                                          \
@@ -117,7 +117,7 @@
 
 # ifdef VCSN_XML_GENRERIC_CHAR_PAIRS
 #  define CHOOSE_MONOID_TYPE_CHAR_PAIRS(X, Do...)            \
-  else if ( X .monoid_type() == XmlSet::PAIRS) {             \
+  else if ( X .monoid_type() == XmlStructure::PAIRS) {             \
     using namespace vcsn::algebra::char_pair;                \
     typedef Words monoid_type;                               \
     Do;                                                      \
@@ -128,7 +128,7 @@
 
 # ifdef VCSN_XML_GENRERIC_WEIGHTED_LETTERS
 #  define CHOOSE_MONOID_TYPE_WEIGHTED(X, Do...)              \
-  else if ( X .monoid_type() == XmlSet::WEIGHTED) {          \
+  else if ( X .monoid_type() == XmlStructure::WEIGHTED) {          \
     using namespace vcsn::algebra::weighted_letter;          \
     typedef Words monoid_type;                               \
     Do;                                                      \
@@ -139,7 +139,7 @@
 
 # ifdef VCSN_XML_GENRERIC_INT_LETTERS
 #  define CHOOSE_MONOID_TYPE_INT(X, Do...)                   \
-  else if ( X .monoid_type() == XmlSet::INTEGERS) {          \
+  else if ( X .monoid_type() == XmlStructure::INTEGERS) {          \
     using namespace vcsn::algebra::int_letter;               \
     typedef Words monoid_type;                               \
     Do;                                                      \
@@ -149,8 +149,8 @@
 # endif //VCSN_XML_GENRERIC_INT_LETTERS
 
 # define CHOOSE_MONOID_TYPE(X, Do...);                       \
-  if (( X .monoid_type() == XmlSet::UNSET)                   \
-      || ( X .monoid_type() == XmlSet::LETTERS)) {           \
+  if (( X .monoid_type() == XmlStructure::UNSET)                   \
+      || ( X .monoid_type() == XmlStructure::LETTERS)) {           \
     using namespace vcsn::algebra::char_letter;              \
     typedef Words monoid_type;                               \
     Do;                                                      \
@@ -162,12 +162,12 @@
     FAIL("Unknown monoid type.");
 
 # define CHOOSE_MONOID_SET(X, Do...)                         \
-  if (( X .monoid_set() == XmlSet::UNSET)                    \
-      || ( X .monoid_set() == XmlSet::WORDS)) {              \
+  if (( X .monoid_structure() == XmlStructure::UNSET)                    \
+      || ( X .monoid_structure() == XmlStructure::WORDS)) {              \
     typedef WordValue monoid_set;                            \
     Do;                                                      \
   }                                                          \
-  else if ( X .monoid_set() == XmlSet::UNIT) {               \
+  else if ( X .monoid_structure() == XmlStructure::UNIT) {               \
     typedef WordValue monoid_set;                            \
     Do;                                                      \
   }                                                          \
@@ -200,14 +200,14 @@ namespace vcsn
     {
       using namespace vcsn::algebra;
 
-      Element<XmlSet, XmlAutomaton> x;
+      Element<XmlStructure, XmlAutomaton> x;
 
       in >> x;
 
-      CHOOSE_SEMIRING_SET(x.set(),
-	CHOOSE_SEMIRING_TYPE(x.set(),
-	  CHOOSE_MONOID_TYPE(x.set(),
-            CHOOSE_MONOID_SET(x.set(),
+      CHOOSE_SEMIRING_SET(x.structure(),
+	CHOOSE_SEMIRING_TYPE(x.structure(),
+	  CHOOSE_MONOID_TYPE(x.structure(),
+            CHOOSE_MONOID_SET(x.structure(),
               CALL_BACK))));
      }
   }

@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2004 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -187,7 +187,7 @@ namespace vcsn {
       monoid_t	  monoid(alpha);
       semiring_t   semiring;
       series_t	  series(semiring, monoid);
-      automata_set_t aset(series);
+      automata_set_t astructure(series);
       automaton_t automaton(aset);
       std::map<int, hstate_t> to_h;
 

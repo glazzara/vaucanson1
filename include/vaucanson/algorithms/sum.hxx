@@ -99,18 +99,18 @@ namespace vcsn {
   template<typename A, typename T, typename U>
   void sum_here(Element<A, T>& lhs, const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
-    do_sum(lhs.set(), lhs, rhs);
+    // assertion(lhs.structure() == rhs.structure())
+    do_sum(lhs.structure(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
   Element<A, T>
   sum(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
+    // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
     //    ret.history().set_auto_event_about(INSUM_EVENT, lhs, rhs);
-    do_sum(ret.set(), ret, rhs);
+    do_sum(ret.structure(), ret, rhs);
     return ret;
   }
 

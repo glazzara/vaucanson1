@@ -36,21 +36,21 @@
 namespace vcsn
 {
   xml::XmlAutomaton
-  op_default(SELECTOR(xml::XmlSet), SELECTOR(xml::XmlAutomaton));
+  op_default(SELECTOR(xml::XmlStructure), SELECTOR(xml::XmlAutomaton));
 
   template <class S>
   void op_assign(const AutomataBase<S>&,
-		 const xml::XmlSet&,
+		 const xml::XmlStructure&,
 		 xml::XmlAutomaton&,
 		 const xml::XmlAutomaton&);
 
-  void op_assign(const xml::XmlSet&,
-  		 const xml::XmlSet&,
+  void op_assign(const xml::XmlStructure&,
+  		 const xml::XmlStructure&,
 		 xml::XmlAutomaton&,
 		 const xml::XmlAutomaton&);
 
   xml::XmlAutomaton
-  op_convert(const xml::XmlSet&,
+  op_convert(const xml::XmlStructure&,
 	     const xml::XmlAutomaton&,
 	     const xml::XmlAutomaton&);
 
@@ -62,7 +62,7 @@ namespace vcsn
   St& op_rout(const AutomataBase<S>&, St&, const xml::XmlAutomaton&);
   template<typename St>
 
-  St& op_rin(xml::XmlSet&, St&, xml::XmlAutomaton&);
+  St& op_rin(xml::XmlStructure&, St&, xml::XmlAutomaton&);
   template<typename S, typename St>
   St& op_rin(const AutomataBase<S>&, St&, xml::XmlAutomaton&);
 

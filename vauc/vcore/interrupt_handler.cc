@@ -24,9 +24,9 @@ extern "C" int _init_sigs()
   struct sigaction sa;
   int errs = 0;
 
-  sigemptyset(&sa.sa_mask);
-  sigaddset(&sa.sa_mask, SIGINT);
-  sigaddset(&sa.sa_mask, SIGQUIT);
+  sigemptystructure(&sa.sa_mask);
+  sigaddstructure(&sa.sa_mask, SIGINT);
+  sigaddstructure(&sa.sa_mask, SIGQUIT);
   sa.sa_flags = SA_RESTART;
   sa.sa_handler = &_sighandler;
   

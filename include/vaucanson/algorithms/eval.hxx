@@ -98,7 +98,7 @@ namespace vcsn {
 	    a.letter_deltac(delta_ret, i, *e, delta_kind::edges());
 	    for_all_const_(std::list<hedge_t>, l, delta_ret)
 	      v2[a.aim_of(*l)] += v1[i] *
-	      a.series_of(*l).get(monoid_elt_t(a.set().series().monoid(), *e));
+	      a.series_of(*l).get(monoid_elt_t(a.structure().series().monoid(), *e));
 	  }
 	std::swap(v1, v2);
       }
@@ -119,9 +119,9 @@ namespace vcsn {
   typename Element<A, T>::semiring_elt_t
   eval(const Element<A, T>& a, const W& word)
   {
-    typename Element<A, T>::semiring_elt_t ret(a.set().series().semiring());
+    typename Element<A, T>::semiring_elt_t ret(a.structure().series().semiring());
 
-    do_eval(a.set(), a, word, ret);
+    do_eval(a.structure(), a, word, ret);
     return ret;
   }
 

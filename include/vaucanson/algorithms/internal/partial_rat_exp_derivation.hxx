@@ -111,14 +111,15 @@ namespace vcsn {
   private:
     Element<Series, T> series(const T& e)
     {
-      return Element<Series, T>(exp_.set(), e);
+      return Element<Series, T>(exp_.structure(), e);
     }
 
   public:
     virtual void
     product(const node_t* lhs, const node_t* rhs)
     {
-      std::pair<semiring_elt_t, bool> ret = constant_term(series(series_impl_t(lhs)));
+      std::pair<semiring_elt_t, bool> ret =
+	constant_term(series(series_impl_t(lhs)));
       if (ret.second == false)
       {
 	undefined = true;
@@ -126,7 +127,8 @@ namespace vcsn {
       }
 
       return_type tmp;
-      if ( ret.first != exp_.set().semiring().zero(SELECT(semiring_elt_value_t)) )
+      if ( ret.first !=
+	   exp_.structure().semiring().zero(SELECT(semiring_elt_value_t)))
       {
 	match(rhs);
 	list_multiply_here(result, ret.first);
@@ -258,12 +260,13 @@ namespace vcsn {
 
     // Calculate the constant term
     std::pair<semiring_elt_t, bool> cterm =
-      constant_term(Element<Series, T>(exp.exp_set(), series_impl_t(v)));
+      constant_term(Element<Series, T>(exp.exp_structure(), series_impl_t(v)));
     if (cterm.second == false)
       return std::make_pair(exp_list_t(), false);
 
     // --------  If cterm != 0, look at the rest of the list  ---------------
-    if (cterm.first != exp.exp_set().semiring().zero(SELECT(semiring_elt_value_t)) )
+    if (cterm.first !=
+	exp.exp_structure().semiring().zero(SELECT(semiring_elt_value_t)) )
     {
       // Build an exp from the orignal, without the head
       exp_t new_exp(exp);

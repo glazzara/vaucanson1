@@ -59,7 +59,7 @@ bool elimination_test(tests::Tester& tg)
     {
       Auto	a = gen.generate(5,10, 2, 2);
       generalized_automaton_t a_ = generalized(a);
-      gseries_elt_t language (a_.set().series());
+      gseries_elt_t language (a_.structure().series());
       language = aut_to_exp(a_);
       if (t.verbose() == tests::high)
 	{
@@ -74,7 +74,7 @@ bool elimination_test(tests::Tester& tg)
 	    std::cout << "TEST: aut_to_exp " << nb << " : test "
 		      << w << std::endl;
 	  if (eval(a, w) ==
-	      zero_as<semiring_elt_value_t>::of(a.set().series().semiring()))
+	      zero_as<semiring_elt_value_t>::of(a.structure().series().semiring()))
 	    {
 	      break;
 	      if (t.verbose() == tests::high)

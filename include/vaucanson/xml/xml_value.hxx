@@ -38,7 +38,7 @@ namespace vcsn {
     inline
     XmlValue::XmlValue(const Element<T, V>& v)
     {
-      *this = op_convert(v.set(), SELECT(XmlValue), v.value());
+      *this = op_convert(v.structure(), SELECT(XmlValue), v.value());
     }
   }
 }

@@ -35,13 +35,13 @@ void test_orphanage()
 
   // default instanciation
   vcsn::Element<vcsn_test::eS, vcsn_test::T> e;
-  TEST_ASSERT(!& e.set(), "orphan has no s. e.");
+  TEST_ASSERT(!& e.structure(), "orphan has no s. e.");
 
   // default instanciation constructor check
   tag = "";
   et ee;
   TEST_ASSERT(tag.substr(0, 2) == "eT", "orphan value from default constructor");
-  TEST_ASSERT(!& ee.set(), "orphan singleton structure has no reference");
+  TEST_ASSERT(!& ee.structure(), "orphan singleton structure has no reference");
 
   // value retrieval
   vcsn_test::T & t1 = e.value();
@@ -51,13 +51,13 @@ void test_orphanage()
 
   TEST_GROUP("copy-construction of orphan to const");
   const vcsn::Element<vcsn_test::eS, vcsn_test::T> e2(e);
-  TEST_ASSERT(!& e2.set(), "const copy has no s. e.");
+  TEST_ASSERT(!& e2.structure(), "const copy has no s. e.");
 
   // copy to const
   tag = "";
   const et ee2(ee);
   TEST_ASSERT(tag == "eTc", "orphan value from copy constructor");
-  TEST_ASSERT(!& ee2.set(), "orphan singleton structure has no reference");
+  TEST_ASSERT(!& ee2.structure(), "orphan singleton structure has no reference");
 
   // const value retrieval
   const vcsn_test::T & t2 = e2.value();

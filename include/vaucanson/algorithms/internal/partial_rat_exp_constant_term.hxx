@@ -1,7 +1,7 @@
 // partial_rat_exp_constant_term.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -49,13 +49,13 @@ namespace vcsn {
     typedef
     std::pair<typename Element<Series, T>::semiring_elt_t, bool>	result_t;
     
-    semiring_elt_t 	res 	  = exp.exp_set().semiring().identity(
+    semiring_elt_t 	res 	  = exp.exp_structure().semiring().identity(
 			      SELECT(typename semiring_elt_t::value_t));;
     bool	undefined = false;
     
     for (const_iterator i = exp.begin(); i != exp.end() && !undefined; ++i)
     {
-      result_t tmp = constant_term(Element<Series, T>(exp.exp_set(),
+      result_t tmp = constant_term(Element<Series, T>(exp.exp_structure(),
 						      series_impl_t(*i)));
       undefined = !tmp.second;
       res *= tmp.first;

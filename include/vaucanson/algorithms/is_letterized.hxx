@@ -1,7 +1,7 @@
 // is_letterized.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -60,7 +60,7 @@ namespace vcsn {
   bool
   is_letterized_transducer(const Element<S, A>& a)
   {
-    return do_is_letterized_transducer(a.set(), a);
+    return do_is_letterized_transducer(a.structure(), a);
   }
 }
 

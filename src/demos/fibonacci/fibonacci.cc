@@ -46,7 +46,7 @@ AUTOMATON_TYPES_EXACT(transducer_pt);
 
 void eval_an_expression(const transducer_pt& t)
 {
-  exp_t e(t.set().series().semiring());
+  exp_t e(t.structure().series().semiring());
   std::string user_string;
 
   do {
@@ -54,7 +54,7 @@ void eval_an_expression(const transducer_pt& t)
     std::cin >> user_string;
     parse(user_string, e);
     usual_automaton_t w = new_automaton(t.series().monoid().alphabet());
-    generalized_traits<usual_automaton_t>::automaton_t result(w.set());
+    generalized_traits<usual_automaton_t>::automaton_t result(w.structure());
     standard_of(w, e.value());
     evaluation(w, t, result);
     krat_exp_print(verbalize(aut_to_exp(generalized(result))).value());

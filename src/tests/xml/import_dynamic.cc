@@ -19,7 +19,7 @@ int print_out(typename vcsn::xml::XmlOf<T>::ret x)
   a = x;
 
   std::cout << "Letters:";
-  for_each_letter(i, a.set().series().monoid().alphabet())
+  for_each_letter(i, a.structure().series().monoid().alphabet())
     std::cout << " " << *i;
   std::cout << std::endl;
 
@@ -70,11 +70,11 @@ int main()
     return -1;
   }
 
-  if ((x.set().semiring_type() == XmlSet::NUMERICAL)
-      && (x.set().semiring_set() == XmlSet::Z))
+  if ((x.structure().semiring_type() == XmlStructure::NUMERICAL)
+      && (x.structure().semiring_structure() == XmlStructure::Z))
     return print_out<numerical_automaton_t>(x);
 
-  if (x.set().semiring_set() == XmlSet::B)
+  if (x.structure().semiring_structure() == XmlStructure::B)
     return print_out<usual_automaton_t>(x);
 
   std::cerr << "Automaton type not dealt" << std::endl;

@@ -161,8 +161,8 @@ namespace vcsn {
     delta_ret_t					edge_rhs;
     visited_t					visited;
     std::queue<pair_hstate_t>			to_process;
-    series_elt_t				series_zero
-      = output.set().series().zero(SELECT(typename series_elt_t::value_t));
+    series_elt_t				series_zero =
+      output.structure().series().zero(SELECT(typename series_elt_t::value_t));
 
     tag_t lhs_tag = grphx::align<tag_t>(lhs);
     tag_t rhs_tag = grphx::align<tag_t>(rhs);
@@ -250,9 +250,9 @@ namespace vcsn {
   product(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     std::map<hstate_t, std::pair<hstate_t, hstate_t> > m;
-    // assertion(lhs.set() == rhs.set())
-    Element<A, T> ret(rhs.set());
-    product(ret.set(), ret, lhs, rhs, m);
+    // assertion(lhs.structure() == rhs.structure())
+    Element<A, T> ret(rhs.structure());
+    product(ret.structure(), ret, lhs, rhs, m);
     return ret;
   }
 
@@ -261,8 +261,8 @@ namespace vcsn {
   product(const Element<A, T>& lhs, const Element<A, U>& rhs,
 	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m)
   {
-    Element<A, T> ret(rhs.set());
-    product(ret.set(), ret, lhs, rhs, m);
+    Element<A, T> ret(rhs.structure());
+    product(ret.structure(), ret, lhs, rhs, m);
     return ret;
   }
 

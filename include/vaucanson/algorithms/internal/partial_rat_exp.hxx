@@ -1,7 +1,7 @@
 // partial_rat_exp.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -41,7 +41,7 @@ namespace vcsn
   template <typename Series, typename T>
   PartialExp<Series, T>::PartialExp(const exp_t &e):
     rat_exp_(&e),
-    weight_(rat_exp_->set().semiring().identity(
+    weight_(rat_exp_->structure().semiring().identity(
       SELECT(typename semiring_elt_t::value_t))),
     ptr_list_()
   { }
@@ -98,9 +98,9 @@ namespace vcsn
   
   template <typename Series, typename T>
   const Series&
-  PartialExp<Series, T>::exp_set() const
+  PartialExp<Series, T>::exp_structure() const
   {
-    return rat_exp_->set();
+    return rat_exp_->structure();
   }
   
   template <typename Series, typename T>

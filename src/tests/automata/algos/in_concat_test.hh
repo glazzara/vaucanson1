@@ -59,13 +59,13 @@ bool in_concat_test(tests::Tester& tg)
   for (unsigned i = 0; i < nb_test; ++i)
     {
       automaton_t auto_lhs = gen.generate_with_epsilon(5, 10, 3, 7);
-      automaton_t auto_rhs = gen.generate_with_epsilon(auto_lhs.set(),
+      automaton_t auto_rhs = gen.generate_with_epsilon(auto_lhs.structure(),
 						       5, 10, 3, 7);
       int lhs_states_num = auto_lhs.states().size();
       generalized_t g_auto_lhs = generalized(auto_lhs);
       generalized_t g_auto_rhs = generalized(auto_rhs);
-      g_series_elt_t exp_lhs(g_auto_lhs.set().series());
-      g_series_elt_t exp_rhs(g_auto_rhs.set().series());
+      g_series_elt_t exp_lhs(g_auto_lhs.structure().series());
+      g_series_elt_t exp_rhs(g_auto_rhs.structure().series());
       exp_lhs = aut_to_exp(g_auto_lhs);
       exp_rhs = aut_to_exp(g_auto_rhs);
       monoid_elt_t word = (exp_lhs * exp_rhs).choose_from_supp();
@@ -75,7 +75,7 @@ bool in_concat_test(tests::Tester& tg)
       if (auto_lhs.states().size() == 
 	    lhs_states_num + auto_rhs.states().size() &&
 	  eval(realtime(auto_lhs), word) !=
-	    zero_as<semiring_elt_value_t>::of(auto_lhs.set().series().semiring()))
+	    zero_as<semiring_elt_value_t>::of(auto_lhs.structure().series().semiring()))
 	++size;
       else
       {

@@ -309,7 +309,7 @@ namespace vcsn {
 	      }
 	    // try word parser.
 	    iterator_t mli = i;
-	    monoid_elt_t w(e.set().monoid());
+	    monoid_elt_t w(e.structure().monoid());
 	    if (parse_word(w, in, mli, escaped))
 	      {
 		if (mli - i > 1)
@@ -548,7 +548,7 @@ namespace vcsn {
 	while (lexer_.first().is_a(plus))
 	  {
 	    accept(plus);
-	    Element<S, T> rhs (exp.set());
+	    Element<S, T> rhs (exp.structure());
 	    parse_term(rhs);
 	    exp = exp + rhs;
 	  }
@@ -569,7 +569,7 @@ namespace vcsn {
 	  {
 	    if (lexer_.first().is_a(dot))
 	      accept(dot);
-	    Element<S, T> rhs (exp.set());
+	    Element<S, T> rhs (exp.structure());
 	    parse_right_weighted(rhs);
 	    exp = exp * rhs;
 	  }
@@ -586,7 +586,7 @@ namespace vcsn {
 	    accept(space);
 	    krat_exp_token_t tok = lexer_.first();
 	    accept(a_weight);
-	    exp = exp * semiring_elt_t (exp.set().semiring(), tok.as_weight());
+	    exp = exp * semiring_elt_t (exp.structure().semiring(), tok.as_weight());
 	  }
 	trace("parse_right_weighted: End", exp);
       }
@@ -603,23 +603,23 @@ namespace vcsn {
 	    // i.e. in "1 2" or "0 2".
 	    // token may even be a word!
 	    // i.e. in '2 3' when 2 is in the alphabet
-	    semiring_elt_t w (exp.set().semiring(), lexer_.first().as_weight());
+	    semiring_elt_t w (exp.structure().semiring(), lexer_.first().as_weight());
 	    bool just_a_weight = true;
-	    Element<S, T> m (exp.set());
+	    Element<S, T> m (exp.structure());
 	    if (lexer_.first().is_a(zero))
 	      {
 		just_a_weight = false;
-		m = zero_as<T>::of(exp.set());
+		m = zero_as<T>::of(exp.structure());
 	      }
 	    else if (lexer_.first().is_a(one))
 	      {
 		just_a_weight = false;
-		m = identity_as<T>::of(exp.set());
+		m = identity_as<T>::of(exp.structure());
 	      }
 	    else if (lexer_.first().is_a(a_word))
 	      {
 		just_a_weight = false;
-		m = Element<S, T> (exp.set(), lexer_.first().as_word());
+		m = Element<S, T> (exp.structure(), lexer_.first().as_word());
 	      }
 	    accept(a_weight);
 	    accept(space);
@@ -628,7 +628,7 @@ namespace vcsn {
 		lexer_.second().is_a(space))
 	      {
 		// Then it could be any weighted.
-		Element<S, T> rhs (exp.set());
+		Element<S, T> rhs (exp.structure());
 		parse_left_weighted(rhs);
 		exp = w * rhs;
 	      }
@@ -667,16 +667,16 @@ namespace vcsn {
 	if (lexer_.first().is_a(one))
 	  {
 	    accept(one);
-	    exp = identity_as<T>::of(exp.set());
+	    exp = identity_as<T>::of(exp.structure());
 	  }
 	else if (lexer_.first().is_a(zero))
 	  {
 	    accept(zero);
-	    exp = zero_as<T>::of(exp.set());
+	    exp = zero_as<T>::of(exp.structure());
 	  }
 	else if (lexer_.first().is_a(a_word))
 	  {
-	    exp = monoid_elt_t (exp.set().monoid(), lexer_.first().as_word());
+	    exp = monoid_elt_t (exp.structure().monoid(), lexer_.first().as_word());
 	    accept(a_word);
 	  }
 	else if (lexer_.first().is_a(lparen))

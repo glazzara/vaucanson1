@@ -72,7 +72,7 @@ namespace vcsn {
   normalize(const Element<A, T>& a)
   {
     Element<A, T> result(a);
-    do_normalize_here(result.set(), result);
+    do_normalize_here(result.structure(), result);
     return result;
   }
 
@@ -80,7 +80,7 @@ namespace vcsn {
   void
   normalize_here(Element<A, T>& a)
   {
-    do_normalize_here(a.set(), a);
+    do_normalize_here(a.structure(), a);
   }
 
 
@@ -127,8 +127,8 @@ namespace vcsn {
   void union_of_normalized_here(Element<A, T>& lhs,
 				const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
-    do_union_of_normalized_here(lhs.set(), lhs, rhs);
+    // assertion(lhs.structure() == rhs.structure())
+    do_union_of_normalized_here(lhs.structure(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
@@ -136,9 +136,9 @@ namespace vcsn {
   union_of_normalized(const Element<A, T>& lhs,
 		      const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
+    // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
-    do_union_of_normalized_here(ret.set(), ret, rhs);
+    do_union_of_normalized_here(ret.structure(), ret, rhs);
     return ret;
   }
 
@@ -166,7 +166,7 @@ namespace vcsn {
   bool
   is_normalized(const Element<A, T>& a)
   {
-    return do_is_normalized(a.set(), a);
+    return do_is_normalized(a.structure(), a);
   }
 
   /*--------------------------.
@@ -221,8 +221,8 @@ namespace vcsn {
   void concatenate_of_normalized_here(Element<A, T>& lhs,
 				      const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
-    do_concatenate_of_normalized_here(lhs.set(), lhs, rhs);
+    // assertion(lhs.structure() == rhs.structure())
+    do_concatenate_of_normalized_here(lhs.structure(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
@@ -230,9 +230,9 @@ namespace vcsn {
   concatenate_of_normalized(const Element<A, T>& lhs,
 			    const Element<A, U>& rhs)
   {
-    // assertion(lhs.set() == rhs.set())
+    // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
-    do_concatenate_of_normalized_here(ret.set(), ret, rhs);
+    do_concatenate_of_normalized_here(ret.structure(), ret, rhs);
     return ret;
   }
 
@@ -260,16 +260,16 @@ namespace vcsn {
   template<typename A, typename T>
   void star_of_normalized_here(Element<A, T>& a)
   {
-    do_star_of_normalized_here(a.set(), a);
+    do_star_of_normalized_here(a.structure(), a);
   }
 
   template<typename A, typename T>
   Element<A, T>
   star_of_normalized(const Element<A, T>& a)
   {
-    // assertion(lhs.set() == rhs.set())
+    // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(a);
-    do_star_of_normalized_here(ret.set(), ret);
+    do_star_of_normalized_here(ret.structure(), ret);
     return ret;
   }
 

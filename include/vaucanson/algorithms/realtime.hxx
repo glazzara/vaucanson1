@@ -49,7 +49,8 @@ namespace vcsn {
 	 e != a.edges().end();
 	 ++e)
       if (a.series_of(*e) ==
-	  a.set().series().identity(SELECT(typename Auto_::series_value_t)))
+	  a.structure().series().
+	  identity(SELECT(typename Auto_::series_value_t)))
 	return false;
     return true;
   }
@@ -76,7 +77,7 @@ namespace vcsn {
   void
   realtime_here(Element<A, T>& a, realtime_type type)
   {
-    return do_realtime_here(a.set(), a, type);
+    return do_realtime_here(a.structure(), a, type);
   }
 
   /*---------.
@@ -99,7 +100,7 @@ namespace vcsn {
   Element<A, T>
   realtime(const Element<A, T>& a, realtime_type type)
   {
-    return do_realtime(a.set(), a, type);
+    return do_realtime(a.structure(), a, type);
   }
 
 } // vcsn

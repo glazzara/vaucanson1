@@ -63,7 +63,7 @@ namespace vcsn {
 
       Element<Series, T> series(const T& e)
       {
-	return Element<Series, T>(exp_.set(), e);
+	return Element<Series, T>(exp_.structure(), e);
       }
 
       MATCH__(Product, lhs, rhs)
@@ -71,7 +71,7 @@ namespace vcsn {
 	return_type match_lhs = match(lhs);
 
 	// FIXME: Following code only valid for series over Boolean semirings.
-	if (match_lhs != zero_as<T>::of(exp_.set()))
+	if (match_lhs != zero_as<T>::of(exp_.structure()))
 	  return match_lhs * rhs;
 	else
 	  {
@@ -86,7 +86,7 @@ namespace vcsn {
 	return_type match_lhs = match(lhs);
 
 	// FIXME: Following code only valid for series over Boolean semirings.
-	if (match_lhs != zero_as<T>::of(exp_.set()))
+	if (match_lhs != zero_as<T>::of(exp_.structure()))
 	  return match_lhs;
 	else
 	  return match(rhs);
@@ -117,24 +117,24 @@ namespace vcsn {
 	if (m[0] == a_)
 	  {
 	    if (m.length() == 1)
-	      return identity_as<T>::of(exp_.set());
+	      return identity_as<T>::of(exp_.structure());
 	    else
-	      return Element<Series, T> (exp_.set(), m.substr(1));
+	      return Element<Series, T> (exp_.structure(), m.substr(1));
 	  }
 	else
-	  return zero_as<T>::of(exp_.set());
+	  return zero_as<T>::of(exp_.structure());
       }
       END
 
       MATCH(Zero)
       {
-	return zero_as<T>::of(exp_.set());
+	return zero_as<T>::of(exp_.structure());
       }
       END
 
       MATCH(One)
       {
-	return zero_as<T>::of(exp_.set());
+	return zero_as<T>::of(exp_.structure());
       }
       END
 

@@ -1,7 +1,7 @@
 /*------------------------------------------------------.
 | include/kern/ref.hh : cppsh kernel / smart references |
 `------------------------------------------------------*/
-//     Copyright (C) 2002  LRDE.
+//     Copyright (C) 2002, 2004  LRDE.
 
 //     libcppshk is free software; you can redistribute it and/or
 //     modify it under the terms of the GNU Lesser General Public
@@ -42,7 +42,7 @@ namespace cppsh
     T* operator->() const;
     T* ptr() const;
 
-    void reset(T* p = 0);
+    void restructure(T* p = 0);
     bool bound() const;
     ref& swap(ref& other);
 

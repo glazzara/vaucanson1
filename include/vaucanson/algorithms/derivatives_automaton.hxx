@@ -92,8 +92,9 @@ namespace vcsn {
       std::pair<semiring_elt_t, bool>	c_term = constant_term(e);
       if (!c_term.second)
 	undefined = true;
-      if (c_term.first != e.exp_set().semiring().zero(SELECT(semiring_elt_value_t)))
-	set_final(series_elt_t (e.exp_set(), c_term.first));
+      if (c_term.first !=
+	  e.exp_structure().semiring().zero(SELECT(semiring_elt_value_t)))
+	set_final(series_elt_t (e.exp_structure(), c_term.first));
 
       // Create links between current state and states corresponding to
       // partial derivatives of current expression
@@ -107,11 +108,11 @@ namespace vcsn {
 	for (exp_list_iterator i = s.first.begin(); i != s.first.end(); ++i)
 	{
 	  PartialExp<S, T> p_exp = *i;
-	  series_elt_t s_elt (e.exp_set(),
-			      monoid_elt_t(e.exp_set().monoid(), *a));
+	  series_elt_t s_elt (e.exp_structure(),
+			      monoid_elt_t(e.exp_structure().monoid(), *a));
 	  s_elt = p_exp.weight() * s_elt;
 	  p_exp.weight() =
-	    e.exp_set().semiring().identity(SELECT(semiring_elt_value_t));
+	    e.exp_structure().semiring().identity(SELECT(semiring_elt_value_t));
 	  link_to(p_exp, s_elt);
 	}
       }
@@ -151,7 +152,7 @@ namespace vcsn {
   Element<A, T>
   derivatives_automaton(const Exp& kexp)
   {
-    A			a_set(kexp.set());
+    A			a_structure(kexp.structure());
     Element<A, T>	out(a_set);
     Element<A, T>*	result = do_derivatives_automaton(out, kexp);
     if (result != NULL)

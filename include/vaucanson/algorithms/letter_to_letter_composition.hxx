@@ -53,7 +53,7 @@ namespace vcsn {
     semiring_t output_series(f.series().semiring().semiring(),
 			     f.series().semiring().monoid());
     series_t series(output_series, g.series().monoid());
-    automata_set_t set(series);
+    automata_set_t structure(series);
     transducer_t output(set);
     delta_ret_t f_delta_ret, g_delta_ret;
     assoc_t conv;
@@ -116,7 +116,7 @@ namespace vcsn {
   letter_to_letter_composition(const Element<S, T>& lhs,
 			       const Element<S, T>& rhs)
   {
-    return do_letter_to_letter_composition(lhs.set(), lhs, rhs);
+    return do_letter_to_letter_composition(lhs.structure(), lhs, rhs);
   }
 
 } // vcsn

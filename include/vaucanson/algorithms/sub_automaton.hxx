@@ -70,14 +70,14 @@ namespace vcsn {
   sub_automaton(const Element<A, T>& a, const StatesSet& s, bool check_states)
   {
     Element<A, T> ret(a);
-    do_sub_automaton(ret.set(), ret, s, check_states);
+    do_sub_automaton(ret.structure(), ret, s, check_states);
     return ret;
   }
 
   template<typename A, typename T, typename StatesSet>
   void sub_automaton_here(Element<A, T>& a, const StatesSet& s, bool check_states)
   {
-    do_sub_automaton(a.set(), a, s, check_states);
+    do_sub_automaton(a.structure(), a, s, check_states);
   }
 
 } // vcsn

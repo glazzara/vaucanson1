@@ -64,7 +64,7 @@ namespace vcsn {
     typedef typename linearize_element<S, T>::alphabet_t	alphabet_t;
     typedef typename linearize_element<S, T>::letter_t		letter_t;
 
-    alphabet_t result = linearize(exp).set().monoid().alphabet();
+    alphabet_t result = linearize(exp).structure().monoid().alphabet();
     result.insert(letter_t(0, 0));
     return result;
   }
@@ -90,8 +90,8 @@ namespace vcsn {
     if (l == Letter(0,0))
       return exp;
 
-    alphabet_t		alpha = exp.set().monoid().alphabet();
-    Exp			zero = exp.set().zero(SELECT(value_t));
+    alphabet_t		alpha = exp.structure().monoid().alphabet();
+    Exp			zero = exp.structure().zero(SELECT(value_t));
     std::list<Exp>	exp_list;
 
     exp_list.push_back(exp);
@@ -173,7 +173,7 @@ namespace vcsn {
       MathAutomataConstructor <BerrySethiAlgo, T_auto, etiq_t>
         (series, linearized_alphabet(exp)),
       linear_exp(linearize(exp)),
-      linear_alpha(linear_exp.set().monoid().alphabet())
+      linear_alpha(linear_exp.structure().monoid().alphabet())
     {
       linear_alpha.insert(etiq_t(0, 0));
     }
@@ -188,7 +188,7 @@ namespace vcsn {
     bool is_final(const etiq_t& e) const
     {
       return constant_term(linear_exp_continuation(linear_exp, e)).first
-	!= linear_exp.set().semiring().zero(SELECT(semiring_elt_value_t));
+	!= linear_exp.structure().semiring().zero(SELECT(semiring_elt_value_t));
     }
     /** @} */
 

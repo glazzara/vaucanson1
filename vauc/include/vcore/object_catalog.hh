@@ -41,7 +41,7 @@ namespace vcsn
 
       bool contains(Symbol id) const;
 
-      bool set(Symbol id_, Object obj);
+      bool structure(Symbol id_, Object obj);
 
       bool erase(Symbol id);
 

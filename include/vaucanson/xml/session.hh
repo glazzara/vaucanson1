@@ -78,7 +78,7 @@ namespace vcsn
       /// Pop operator.
       void operator<<(const XmlAutomaton&);
       /// Queue operator.
-      void operator>>(Element<XmlSet, XmlAutomaton>&);
+      void operator>>(Element<XmlStructure, XmlAutomaton>&);
     };
 
     /** @} */

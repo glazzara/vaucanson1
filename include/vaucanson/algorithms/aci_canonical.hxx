@@ -155,7 +155,7 @@ namespace vcsn
     MATCH_(Constant, m)
     {
       set_t	res;
-      Element<Series, T> s (exp_.set(), m);
+      Element<Series, T> s (exp_.structure(), m);
       res.insert(s);
       return res;
     }
@@ -164,7 +164,7 @@ namespace vcsn
     MATCH(Zero)
     {
       set_t	res;
-      res.insert(exp_.set().zero(SELECT(T)));
+      res.insert(exp_.structure().zero(SELECT(T)));
       return res;
     }
     END
@@ -172,7 +172,7 @@ namespace vcsn
     MATCH(One)
     {
       set_t	res;
-      res.insert(exp_.set().identity(SELECT(T)));
+      res.insert(exp_.structure().identity(SELECT(T)));
       return res;
     }
     END
@@ -196,7 +196,7 @@ namespace vcsn
   Element<Series, T>
   canonical(const Element<Series, T>& exp)
   {
-    return do_canonical(exp.set(), exp);
+    return do_canonical(exp.structure(), exp);
   }
 
 }

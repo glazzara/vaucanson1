@@ -76,7 +76,7 @@ namespace vcsn {
   output_projection(const Element<ST, TT>& t,
 		    Element<SA, TA>& a)
   {
-    return do_output_projection(t.set(), a.set(), t, a);
+    return do_output_projection(t.structure(), a.structure(), t, a);
   }
 
   ////////////////////////////////////////////////////////////
@@ -95,7 +95,7 @@ namespace vcsn {
     typedef typename Auto_t::set_t                   Auto_set_t;
     typedef typename Auto_set_t::series_t            Auto_series_t;
 
-    Auto_set_t   auto_set(Auto_series_t(t.set().series().semiring()));
+    Auto_set_t   auto_set(Auto_series_t(t.structure().series().semiring()));
     Auto_t       ret(auto_set);
 
     monoid_elt_t empty = t.series().monoid().empty_;
@@ -124,7 +124,7 @@ namespace vcsn {
   output_projection(const Element<S, T>& t,
 		    std::map<hstate_t, hstate_t>& m)
   {
-    return do_output_projection(t.set(), t, m);
+    return do_output_projection(t.structure(), t, m);
   }
 
   template <typename S, typename T>
@@ -132,7 +132,7 @@ namespace vcsn {
   output_projection(const Element<S, T>& t)
   {
     std::map<hstate_t, hstate_t> m;
-    return do_output_projection(t.set(), t, m);
+    return do_output_projection(t.structure(), t, m);
   }
 }
 

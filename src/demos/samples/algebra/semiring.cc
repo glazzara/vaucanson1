@@ -1,7 +1,7 @@
 // semiring.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -44,13 +44,13 @@ int main()
 
   
   // zero is neutral element for addition ...
-  cout << e1 + e1.set().zero(SELECT(int)) << endl;
+  cout << e1 + e1.structure().zero(SELECT(int)) << endl;
   // zero is absorbant element for multiplication
-  cout << e1 * e1.set().zero(SELECT(int)) << endl;
+  cout << e1 * e1.structure().zero(SELECT(int)) << endl;
 
-  cout << e1 + e1.set().identity(SELECT(int)) << endl;
+  cout << e1 + e1.structure().identity(SELECT(int)) << endl;
   // 1 (identity) is neutral element for multiplication
-  cout << e1 * e1.set().identity(SELECT(int)) << endl;
+  cout << e1 * e1.structure().identity(SELECT(int)) << endl;
 
 
   cout << e1 + e2 << endl;
@@ -65,11 +65,11 @@ int main()
   Element<TropicalSemiring<TropicalMax>, int> e5 = 3;
   Element<TropicalSemiring<TropicalMax>, int> e6 = 0;
  
-  cout << e4 + e4.set().zero(SELECT(int)) << endl;
-  cout << e4 * e4.set().zero(SELECT(int)) << endl;
+  cout << e4 + e4.structure().zero(SELECT(int)) << endl;
+  cout << e4 * e4.structure().zero(SELECT(int)) << endl;
   
-  cout << e4 + e4.set().identity(SELECT(int)) << endl;
-  cout << e4 * e4.set().identity(SELECT(int)) << endl;
+  cout << e4 + e4.structure().identity(SELECT(int)) << endl;
+  cout << e4 * e4.structure().identity(SELECT(int)) << endl;
 
   // big surprise !!!
   cout << e5 + e6 << endl;

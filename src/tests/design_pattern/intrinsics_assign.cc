@@ -55,7 +55,7 @@ void test_assign()
   e2 = e;
   TEST_ASSERT(tag == "assign1",
 	      "delegation of assignment of orphan uses no structural element");
-  TEST_ASSERT(!& e2.set(), "assignment preserves orphanness");
+  TEST_ASSERT(!& e2.structure(), "assignment preserves orphanness");
   TEST_ASSERT(e2.value().t_ == 42, "assignment of orphan propagates value");
 
   et ee;
@@ -73,7 +73,7 @@ void test_assign()
   e4 = e3;
   TEST_ASSERT(tag == "setassign1",
 	      "delegation of assignment with s.e. passes s.e. correctly");
-  TEST_ASSERT(& e3.set() == & e4.set(),
+  TEST_ASSERT(& e3.structure() == & e4.structure(),
 	      "assignment propagates s.e.");
   TEST_ASSERT(e4.value().t_ == 51, "assignment with s.e. propagates value");
 }
@@ -118,13 +118,13 @@ void test_foreign_assign()
   e = e2;
   TEST_ASSERT(tag == "assign2",
 	      "delegation of foreign assignment to orphan uses no s.e.");
-  TEST_ASSERT(!& e.set(), "assignment preserves orphanness");
+  TEST_ASSERT(!& e.structure(), "assignment preserves orphanness");
 
   tag = "";
   e = 42;
   TEST_ASSERT(tag == "assign3",
 	      "delegation of foreign value assignment to orphan uses no s.e.");
-  TEST_ASSERT(!& e.set(), "assignment of foreign value preserves orphanness");
+  TEST_ASSERT(!& e.structure(), "assignment of foreign value preserves orphanness");
 
   vcsn_test::S	s;
   t		e3 (s);
@@ -132,7 +132,7 @@ void test_foreign_assign()
   e3 = 51;
   TEST_ASSERT(tag == "setassign3",
 	      "delegation of foreign value assignment with s.e. passes s.e.");
-  TEST_ASSERT(e3.set() == s,
+  TEST_ASSERT(e3.structure() == s,
 	      "assignment of foreign value keeps s.e.");
 
   et ee;

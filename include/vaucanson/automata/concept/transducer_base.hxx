@@ -1,7 +1,7 @@
 // transducer_base.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -59,14 +59,14 @@ namespace vcsn {
   typename MetaElement<TransducerBase<Self>, T>::input_monoid_elt_t
   MetaElement<TransducerBase<Self>, T>::input_of(hedge_t e) const
   {
-    return op_input_of(this->set(), this->value(), e);
+    return op_input_of(this->structure(), this->value(), e);
   }
 
   template <typename Self, typename T>
   typename MetaElement<TransducerBase<Self>, T>::output_series_elt_t
   MetaElement<TransducerBase<Self>, T>::output_of(hedge_t e) const
   {
-    return op_output_of(this->set(), this->value(), e);
+    return op_output_of(this->structure(), this->value(), e);
   }
 
 
@@ -82,7 +82,7 @@ namespace vcsn {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(series().semiring().semiring());
-    return op_add_io_edge(this->set(), value(),
+    return op_add_io_edge(this->structure(), value(),
 			  from, to, i, o, w);
   }
 
@@ -97,7 +97,7 @@ namespace vcsn {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(this->series().semiring().semiring());
-    return op_add_io_edge(this->set(), this->value(),
+    return op_add_io_edge(this->structure(), this->value(),
 			  from, to, i, o, w);
   }
 
@@ -112,7 +112,7 @@ namespace vcsn {
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(this->series().semiring().semiring());
 
-    return op_add_o_edge(this->set(), this->value(),
+    return op_add_o_edge(this->structure(), this->value(),
 			  from, to, o, w);
   }
 
@@ -127,7 +127,7 @@ namespace vcsn {
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(this->series().semiring().semiring());
 
-    return op_add_i_edge(this->set(), this->value(),
+    return op_add_i_edge(this->structure(), this->value(),
 			 from, to, i, w);
   }
 

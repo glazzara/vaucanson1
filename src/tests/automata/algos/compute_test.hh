@@ -47,11 +47,11 @@ bool odd_language_test(const Auto& a, const Letter& l)
   AUTOMATON_TYPES(Auto);
   for (unsigned i = 0; i < 10; ++i)
     {
-      monoid_elt_t w (a.set().series().monoid());
+      monoid_elt_t w (a.structure().series().monoid());
       for (unsigned j = 0; j < 2 * i + 3; ++j)
 	w *= l;
       if (eval(a, w) == zero_as<semiring_elt_value_t>
-	  ::of(a.set().series().semiring()))
+	  ::of(a.structure().series().semiring()))
 	return false;
     }
   return true;
@@ -63,11 +63,11 @@ bool even_language_test(const Auto& a, const Letter& l)
   AUTOMATON_TYPES(Auto);
   for (unsigned i = 1; i < 10; ++i)
     {
-      monoid_elt_t w (a.set().series().monoid());
+      monoid_elt_t w (a.structure().series().monoid());
       for (unsigned j = 0; j < 2 * i; ++j)
 	w *= l;
       if (eval(a, w) != zero_as<semiring_elt_value_t>
-	  ::of(a.set().series().semiring()))
+	  ::of(a.structure().series().semiring()))
 	return false;
     }
   return true;
@@ -83,7 +83,7 @@ bool compute_test(tests::Tester& t)
   hstate_t h1 = a.add_state();
   hstate_t h2 = a.add_state();
   hstate_t h3 = a.add_state();
-  letter_t l  = a.set().series().monoid().alphabet().choose();
+  letter_t l  = a.structure().series().monoid().alphabet().choose();
 
   a.add_letter_edge(h1, h2, l);
   a.add_letter_edge(h2, h3, l);

@@ -24,7 +24,7 @@ struct MyCallBack
     AUTOMATON_TYPES(Auto);
 
     std::cout << "Letters:";
-      for_each_letter(i, a.set().series().monoid().alphabet())
+      for_each_letter(i, a.structure().series().monoid().alphabet())
       std::cout << " " << *i;
     std::cout << std::endl;
 

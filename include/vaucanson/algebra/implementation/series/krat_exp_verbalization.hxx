@@ -40,20 +40,20 @@ namespace vcsn {
     Element<Series, T>
     verbalize(const Element<Series, T>& exp)
     {
-      Element<Series, T> ret(exp.set());
+      Element<Series, T> ret(exp.structure());
       typedef SupportMatcher<Series, T, algebra::DispatchFunction<T> >
 	matcher_t;
-      matcher_t matcher(exp.set());
+      matcher_t matcher(exp.structure());
       matcher.match(exp.value());
       typedef typename matcher_t::ext_support_t ext_support_t;
       ext_support_t supp = matcher.ext_get();
       for_each_const_(ext_support_t, m, supp)
 	{
-	  typename Element<Series, T>::monoid_elt_t w(exp.set().monoid(),
-						      m->second);
-	  typename Element<Series, T>::semiring_elt_t wg(exp.set().semiring(),
-							 m->first);
-	  Element<Series, T> me(exp.set());
+	  typename Element<Series, T>::monoid_elt_t
+	    w (exp.structure().monoid(), m->second);
+	  typename Element<Series, T>::semiring_elt_t
+	    wg(exp.structure().semiring(), m->first);
+	  Element<Series, T> me(exp.structure());
 	  me = w;
 	  ret += wg * me;
 	}

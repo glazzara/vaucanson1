@@ -99,19 +99,19 @@ namespace vcsn {
 
     MATCH_(Constant, m)
     {
-      return exp_.set().semiring().zero(SELECT(semiring_elt_value_t));
+      return exp_.structure().semiring().zero(SELECT(semiring_elt_value_t));
     }
     END
 
     MATCH(Zero)
     {
-      return exp_.set().semiring().zero(SELECT(semiring_elt_value_t));
+      return exp_.structure().semiring().zero(SELECT(semiring_elt_value_t));
     }
     END
 
     MATCH(One)
     {
-      return exp_.set().semiring().identity(SELECT(semiring_elt_value_t));
+      return exp_.structure().semiring().identity(SELECT(semiring_elt_value_t));
     }
     END
 

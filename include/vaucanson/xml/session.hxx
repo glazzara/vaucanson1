@@ -183,13 +183,13 @@ namespace vcsn
 
     inline
     void
-    XmlSession::operator>>(Element<XmlSet, XmlAutomaton>& x)
+    XmlSession::operator>>(Element<XmlStructure, XmlAutomaton>& x)
     {
       if (roots_.begin() == roots_.end())
 	FAIL("no more automaton in this session");
       DOMElement *root = roots_.back();
       roots_.pop_back();
-      x = Element<XmlSet, XmlAutomaton>(XmlSet(root),
+      x = Element<XmlStructure, XmlAutomaton>(XmlStructure(root),
 					XmlAutomaton(root));
     }
   }

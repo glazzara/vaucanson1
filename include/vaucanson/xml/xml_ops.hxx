@@ -516,7 +516,7 @@ namespace vcsn
   }
 
   xml::XmlAutomaton
-  op_default(SELECTOR(xml::XmlSet), SELECTOR(xml::XmlAutomaton))
+  op_default(SELECTOR(xml::XmlStructure), SELECTOR(xml::XmlAutomaton))
   {
     return xml::XmlAutomaton();
   }
@@ -563,12 +563,12 @@ namespace vcsn
 
   template<typename St>
   inline
-  St& op_rin(xml::XmlSet& s, St& st, xml::XmlAutomaton& v)
+  St& op_rin(xml::XmlStructure& s, St& st, xml::XmlAutomaton& v)
   {
     using namespace xercesc;
     using namespace xml;
 
-    typedef Element<XmlSet, XmlAutomaton> auto_t;
+    typedef Element<XmlStructure, XmlAutomaton> auto_t;
 
     DOMImplementation* impl = xercesc::DOMImplementationRegistry
       ::getDOMImplementation(str_LS);
@@ -584,10 +584,10 @@ namespace vcsn
       FAIL("Cannot find any automaton root.");
     DOMNode* node = nodelist->item(0);
     XmlAutomaton x(static_cast<DOMElement*>(node));
-    auto_t xa = auto_t(XmlSet(static_cast<DOMElement*>(node)), x);
+    auto_t xa = auto_t(XmlStructure(static_cast<DOMElement*>(node)), x);
 
     v = xa.value();
-    s = xa.set();
+    s = xa.structure();
     return st;
   }
 
@@ -741,7 +741,7 @@ namespace vcsn
 	    class M>
   Automata<algebra::Series<W, M> >
   op_convert(const Automata<algebra::Series<W, M> >&,
-	     const xml::XmlSet& set)
+	     const xml::XmlStructure& set)
   {
     using namespace xml;
     using namespace xercesc;
@@ -775,7 +775,7 @@ namespace vcsn
   xml::XmlAutomaton
   op_convert(const Automata<algebra::Series<W, M> >&,
 	     const xml::XmlAutomaton&,
-	     const xml::XmlSet&,
+	     const xml::XmlStructure&,
 	     const xml::XmlAutomaton& x)
   {
     return x;
@@ -971,15 +971,15 @@ namespace vcsn
   }
 
   xml::XmlAutomaton
-  op_convert(const xml::XmlSet&,
+  op_convert(const xml::XmlStructure&,
 	     const xml::XmlAutomaton&,
 	     const xml::XmlAutomaton& src)
   {
     return src;
   }
 
-  void op_assign(const xml::XmlSet&,
-		 const xml::XmlSet&,
+  void op_assign(const xml::XmlStructure&,
+		 const xml::XmlStructure&,
 		 xml::XmlAutomaton& dst,
 		 const xml::XmlAutomaton& src)
   {
@@ -989,7 +989,7 @@ namespace vcsn
   template<class S>
   inline
   void op_assign(const AutomataBase<S>&,
-		 const xml::XmlSet&,
+		 const xml::XmlStructure&,
 		 xml::XmlAutomaton& dst,
 		 const xml::XmlAutomaton& src)
   {

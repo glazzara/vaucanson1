@@ -65,7 +65,7 @@ namespace vcsn {
   std::set<hstate_t>
   useful_states(const Element<A, T>& a)
   {
-    return do_useful_states(a.set(), a);
+    return do_useful_states(a.structure(), a);
   }
 
   template<typename A, typename T>

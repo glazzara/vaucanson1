@@ -118,7 +118,7 @@ bool series_test(tests::Tester& t)
       TEST(t, "get of series (implementation) [2].",
 	   s1.get(w2.value()) == zero.value());
 
-      TEST_GROUP("Advanced tests with set().");
+      TEST_GROUP("Advanced tests with structure().");
       std::map<monoid_elt_t, semiring_elt_t>	random_values;
       const size_t				max =
 	utility::random::generate<unsigned>(0, op_choose_max_word_length);
@@ -142,7 +142,7 @@ bool series_test(tests::Tester& t)
 	  if ((s5.get(m) != s) or (s5.get(m.value()) != s.value()))
 	    allright = false;
 	}
-      TEST(t, "assoc() and value_set().", allright);
+      TEST(t, "assoc() and value_structure().", allright);
       TEST(t, "is_finite_app().", s5.is_finite_app());
 
       allright = true;

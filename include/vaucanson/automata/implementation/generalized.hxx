@@ -1,7 +1,7 @@
 // generalized.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -38,7 +38,7 @@ namespace vcsn {
   typename generalized_traits<Auto_>::automaton_t
   generalized(const Auto_& from)
   {
-    typename generalized_traits<Auto_>::automaton_t to(from.set());
+    typename generalized_traits<Auto_>::automaton_t to(from.structure());
     auto_copy(to, from);
     return to;
   }

@@ -170,7 +170,7 @@ namespace vcsn {
 	         auto_t& output,
 	         const rat::exp<Letter, Weight>& kexp)
   {
-    ThompsonVisitor<auto_t, Letter, Weight> visitor(output.set().series());
+    ThompsonVisitor<auto_t, Letter, Weight> visitor(output.structure().series());
 
     // FIXME :
     // Static assert : Letter = monoid_elt_value_t,
@@ -185,14 +185,14 @@ namespace vcsn {
   thompson_of(Element<A, T>& out,
 	      const rat::exp<Letter, Weight>& kexp)
   {
-    do_thompson_of(out.set(), out, kexp);
+    do_thompson_of(out.structure(), out, kexp);
   }
 
   template <class AutoType, class S, class T>
   Element<Automata<S>, AutoType>
   thompson_of(const Element<S, T>& exp)
   {
-    Automata<S>				automata_set(exp.set());
+    Automata<S>				automata_set(exp.structure());
     Element<Automata<S>, AutoType>	automata(automata_set);
 
     thompson_of(automata, exp.value());

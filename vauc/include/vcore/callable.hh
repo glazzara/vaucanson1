@@ -111,7 +111,7 @@ namespace vcsn
       }
 
     protected:
-      void reset(FunctionImpl *p) 
+      void restructure(FunctionImpl *p) 
       {}
 
     };
