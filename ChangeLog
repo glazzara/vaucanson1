@@ -1,3 +1,8 @@
+2005-02-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/xml/test.src: Change standard error redirection method for 
+	the shell script.
+
 2005-02-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 

@@ -4,7 +4,7 @@ BASE=`basename $0 .test`
 XMLS="float.xml numerical.xml session.xml simple.xml transcoder.xml tropical.xml"
 
 for i in ${XMLS}; do
-  ./${BASE} <${SRCDIR}/$i &>${BASE}-${i}.out
+  ./${BASE} <${SRCDIR}/$i >${BASE}-${i}.out 2>&1
   if test ! -f ${SRCDIR}/${BASE}-${i}.ref 2>/dev/null; then
     mv ${BASE}-${i}.out ${SRCDIR}/${BASE}-${i}.ref
   elif diff ${SRCDIR}/${BASE}-${i}.ref ${BASE}-${i}.out; then
