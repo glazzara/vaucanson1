@@ -1,5 +1,10 @@
 2004-03-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Fix interval for generation of starable for float and double.
+
+2004-03-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/tests/misc/random.cc: Fix the assertion for random double,
 	regarding new generation interval for double.
 

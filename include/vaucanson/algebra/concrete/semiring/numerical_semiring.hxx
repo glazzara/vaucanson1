@@ -250,7 +250,7 @@ namespace vcsn {
   {
     return
       Element<algebra::NumericalSemiring, float>
-        (set, utility::random::generate<float>());
+        (set, utility::random::generate<float>(0, 1));
   }
 
   inline
@@ -279,7 +279,7 @@ namespace vcsn {
   {
     return
       Element<algebra::NumericalSemiring, double>
-        (set, utility::random::generate<double>());
+        (set, utility::random::generate<double>(0, 1));
   }
 
   inline
