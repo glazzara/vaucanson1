@@ -29,4 +29,5 @@ EXTRA_DIST = 					\
 	is_isomorph_test.hh			\
 	transpose_test.hh			\
 	aci_canonical_test.hh			\
-	trim_test.hh
+	trim_test.hh				\
+	accessible_test.hh
