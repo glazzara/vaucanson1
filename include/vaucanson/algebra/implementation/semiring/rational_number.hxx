@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>

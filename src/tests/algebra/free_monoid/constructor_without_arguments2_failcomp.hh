@@ -1,5 +1,4 @@
-// constructor_without_arguments2_failcomp.hh: this file is part of the
-// Vaucanson project.
+// constructor_without_arguments2_failcomp.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004 The Vaucanson Group.
@@ -18,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS2_FAILCOMP_HH
-# define VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS2_FAILCOMP_HH
+#ifndef VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS__FAILCOMP_HH
+# define VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS__FAILCOMP_HH
 
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
@@ -50,4 +51,4 @@ bool constructor_without_arguments2_failcomp(tests::Tester& t)
   return t.all_passed();
 }
 
-#endif // VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS2_FAILCOMP_HH
+#endif // ! VCSN_TESTS_ALGEBRA_FREE_MONOID_CONSTRUCTOR_WITHOUT_ARGUMENTS__FAILCOMP_HH
