@@ -1,6 +1,7 @@
 #!/bin/sh
 
-$SHELL src/tests/sanity/generate_files.sh src/tests/sanity
+(cd src/tests/tests-suite && /bin/sh ./generate-all.sh)
+(cd src/tests/sanity && /bin/sh ./generate_files.sh .)
 (cd src/demos/vaucanswig && /bin/sh ./expand.sh .)
 autoreconf -v -f -i
 

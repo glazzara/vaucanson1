@@ -1,5 +1,11 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* src/tests/tests-suites/generate-all.sh: Mention 
+	usual_automaton_t.
+	* bootstrap.sh: Initialise test suite.
+
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/tools/dot_dump.hh,
 	include/vaucanson/tools/dot_format.hxx,
 	include/vaucanson/tools/dot_format.hh,

@@ -33,6 +33,11 @@
 ../bin/generate-test-suite.sh \
    algebra_tropical_max_semiring \
    algebra_tropical_max_semiring.defs \
-   ../algebra/semiring/
+   ../algebra/semiring
 
+../bin/generate-test-suite.sh \
+   usual_automaton_t \
+   usual_automaton_t.defs \
+   ../automata/implementation_check
 
+   
