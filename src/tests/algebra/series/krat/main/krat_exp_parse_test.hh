@@ -41,15 +41,18 @@
   typedef typename monoid_t::letter_t		letter_t;	\
   typedef typename monoid_t::alphabet_t		alphabet_t;
 
+template <class Alphabet>
 void
 error(const std::string& original,
       const std::string& result,
-      const std::string& expected)
+      const std::string& expected,
+      const Alphabet& a)
 {
   std::cerr << "*** PARSER TEST ***" << std::endl
 	    << "On \"" << original << '\"' << std::endl
 	    << "Got \"" << result << '\"' << std::endl
-	    << "Instead of \"" << expected << '\"' << std::endl;
+	    << "Instead of \"" << expected << '\"' << std::endl
+	    << "(Alphabet is " << a << " )" << std::endl;
 }
 
 template <class Expr>
@@ -80,9 +83,11 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
       std::ostringstream ostr;
       ostr << out;
       if (ostr.str() != sstr.str())
-	error(sstr.str(), ostr.str(), sstr.str());
+	error(sstr.str(), ostr.str(), sstr.str(),
+	      exp.set().monoid().alphabet());
       else if (ret.first)
-	error(sstr.str(), ret.second, sstr.str());
+	error(sstr.str(), ret.second, sstr.str(),
+	      exp.set().monoid().alphabet());
       else 
 	++nb_success;
     }
@@ -186,7 +191,8 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg)
       if (r.first)
 	{
 	  if (samples[nb_test].out != 0)
-	    error(samples[nb_test].exp, r.second, samples[nb_test].out);
+	    error(samples[nb_test].exp, r.second, samples[nb_test].out,
+		  exp.set().monoid().alphabet());
 	  else
 	    nb_success++;
 	}
@@ -195,9 +201,11 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg)
 	  std::ostringstream ostr;
 	  ostr << exp;
 	  if (samples[nb_test].out == 0)
-	    error(samples[nb_test].exp, ostr.str(), "error");
+	    error(samples[nb_test].exp, ostr.str(), "error",
+		  exp.set().monoid().alphabet());
 	  else if (samples[nb_test].out != ostr.str())
-	    error(samples[nb_test].exp, ostr.str(), samples[nb_test].out);
+	    error(samples[nb_test].exp, ostr.str(), samples[nb_test].out,
+		  exp.set().monoid().alphabet());
 	  else
 	    nb_success++;
 	}

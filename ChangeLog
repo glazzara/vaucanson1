@@ -1,3 +1,11 @@
+2003-07-01  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* configure.ac: Add the algebra_series_krat_derivation test directory.
+	* include/vaucanson/misc/random.hxx (generate<char>): Fix the
+	random character generation.
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Set
+	more verbose error messages.
+
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx: Remove

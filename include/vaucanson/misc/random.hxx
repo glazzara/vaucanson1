@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,7 +34,8 @@ namespace utility {
     template<>
     char generate<char>()
     { 
-      return char(unsigned(rand()) % (1 << (sizeof(char) >> 3)));
+      // We do not want any 0, because it could generate errors in strings.
+      return char (1 + unsigned(rand()) % ((1 << (sizeof(char) * 8)) - 1));
     }
 
     template<>
