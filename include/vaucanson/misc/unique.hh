@@ -11,7 +11,7 @@ namespace utility
   /** The namespace for the instance collection tools */
   namespace unique
   {
-    /** Base class for @c uniquelist */
+    /// Base class for @c uniquelist
     struct uniquelist_base
     {
       virtual ~uniquelist_base();

@@ -1,5 +1,21 @@
 2003-06-19  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/alphabets_base.hh:
+	Simplify. Cleanup. Document more.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx:
+	Simplify. Cleanup.
+	
+	* include/vaucanson/misc/unique.hh: Fix comment.
+
+	* include/vaucanson/misc/utility.hh: Mention `random.hh'.
+
+	* include/misc/random.hh: Cleanup. Document. Simplify.
+	* include/misc/random.hxx: Update accordingly.
+	* src/tests/misc/random.cc: Add. 
+	* src/tests/misc/Makefile.am: Update accordingly.
+	
+2003-06-19  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* src/tests/fundamental/intrinsics.hh,
 	src/tests/fundamental/intrinsics_orphanage.cc,
 	src/tests/fundamental/intrinsics_link.cc

@@ -18,154 +18,142 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-#ifndef ALGEBRA_ALPHABETS_BASE_HXX
-# define ALGEBRA_ALPHABETS_BASE_HXX
+#ifndef VCSN_ALGEBRA_ALPHABETS_BASE_HXX
+# define VCSN_ALGEBRA_ALPHABETS_BASE_HXX
 
-# include <vaucanson/config/system.hh>
 # include <vaucanson/algebra/concept/alphabets_base.hh>
-# include <vaucanson/misc/container_ops.hh>
 # include <vaucanson/misc/random.hh>
+# include <cstddef>
 
 namespace vcsn {
 
   namespace algebra {
 
-    /*--------------------.
-      | AlphabetSetBase<Self> |
-      `--------------------*/
+    /*-------------------.
+    | AlphabetSetBase<S> |
+    `-------------------*/
 
-    template<class Self>
-    AlphabetSetBase<Self>::AlphabetSetBase()
+    template<typename S>
+    AlphabetSetBase<S>::AlphabetSetBase()
     {}
 
-    template<class Self>
-    AlphabetSetBase<Self>::AlphabetSetBase(const AlphabetSetBase& other) 
+    template<typename S>
+    AlphabetSetBase<S>::AlphabetSetBase(const AlphabetSetBase& other) 
     {}
 
   } // algebra
 
-  using namespace algebra;
-  
-  /*------------------------------------.
-    | MetaElement<AlphabetSetBase<Self>, T> |
-    `------------------------------------*/
+  /*-----------------------------------.
+  | MetaElement<AlphabetSetBase<S>, T> |
+  `-----------------------------------*/
   // Meta-information about element formed from an AlphabetSetBase
   // structuring element.
     
-  template<class Self, typename T>
+  template<typename S, typename T>
   size_t 
-  MetaElement<AlphabetSetBase<Self>, T>::size() const
+  MetaElement<algebra::AlphabetSetBase<S>, T>::size() const
   { 
-    return op_size(this->set(), this->value()); 
+    return op_size(set(), value()); 
   }
     
-  template<class Self, typename T>
+  template<typename S, typename T>
   bool 
-  MetaElement<AlphabetSetBase<Self>, T>::contains(const letter_t& l) const
+  MetaElement<algebra::AlphabetSetBase<S>, T>::contains(const letter_t& l) const
   { 
-    return op_contains_e(this->set(), this->value(), l); 
+    return op_contains_e(set(), value(), l); 
   }
     
-  template<class Self, typename T>
+  template<typename S, typename T>
   bool 
-  MetaElement<AlphabetSetBase<Self>, T>::is_finite() const
+  MetaElement<algebra::AlphabetSetBase<S>, T>::is_finite() const
   { 
-    return op_is_finite(this->set(), this->value()); 
+    return op_is_finite(set(), value()); 
   }
     
-  template<class Self, typename T>
-  typename MetaElement<AlphabetSetBase<Self>, T>::iterator 
-  MetaElement<AlphabetSetBase<Self>, T>::begin() 
+  template<typename S, typename T>
+  typename MetaElement<algebra::AlphabetSetBase<S>, T>::iterator 
+  MetaElement<algebra::AlphabetSetBase<S>, T>::begin() 
   { 
-    return op_begin(this->set(), this->value()); 
+    return op_begin(set(), value()); 
   }
     
-  template<class Self, typename T> 
-  typename MetaElement<AlphabetSetBase<Self>, T>::const_iterator 
-  MetaElement<AlphabetSetBase<Self>, T>::begin() const
+  template<typename S, typename T> 
+  typename MetaElement<algebra::AlphabetSetBase<S>, T>::const_iterator 
+  MetaElement<algebra::AlphabetSetBase<S>, T>::begin() const
   { 
-    return op_begin_const(this->set(), this->value()); 
+    return op_begin_const(set(), value()); 
   }
     
-  template<class Self, typename T>
-  typename MetaElement<AlphabetSetBase<Self>, T>::iterator 
-  MetaElement<AlphabetSetBase<Self>, T>::end() 
+  template<typename S, typename T>
+  typename MetaElement<algebra::AlphabetSetBase<S>, T>::iterator 
+  MetaElement<algebra::AlphabetSetBase<S>, T>::end() 
   { 
-    return op_end(this->set(), this->value()); 
+    return op_end(set(), value()); 
   }
     
-  template<class Self, typename T>
-  typename MetaElement<AlphabetSetBase<Self>, T>::const_iterator 
-  MetaElement<AlphabetSetBase<Self>, T>::end() const
+  template<typename S, typename T>
+  typename MetaElement<algebra::AlphabetSetBase<S>, T>::const_iterator 
+  MetaElement<algebra::AlphabetSetBase<S>, T>::end() const
   { 
-    return op_end(this->set(), this->value()); 
+    return op_end(set(), value()); 
   }
     
-  template<class Self, typename T>
+  template<typename S, typename T>
   void 
-  MetaElement<AlphabetSetBase<Self>, T>::insert(const letter_t& l) 
+  MetaElement<algebra::AlphabetSetBase<S>, T>::insert(const letter_t& l) 
   { 
-    op_insert(this->set(), this->value(), l); 
+    op_insert(set(), value(), l); 
   }
 
-  template<class Self, typename T>
+  template<typename S, typename T>
   bool
-  MetaElement<AlphabetSetBase<Self>, T>::letter_equality(letter_t lhs, 
-							 letter_t rhs) const
+  MetaElement<algebra::AlphabetSetBase<S>, T>::letter_equality(letter_t lhs, 
+							       letter_t rhs) const
   { 
-    return op_letter_equality_modulo(this->set(), this->value(), lhs, rhs);
+    return op_letter_equality(set(), value(), lhs, rhs);
   }
     
-  template<class Self, typename T>
-  typename alphabet_traits<Self, T>::letter_t
-  MetaElement<AlphabetSetBase<Self>, T>::choose() const
-  { 
-    assert (this->is_finite() && this->size() > 0);
-    int  n = this->size();
-    int  c = ((unsigned) floor(((float) rand() / (float) RAND_MAX) * n));
+  template<typename S, typename T>
+  typename algebra::alphabet_traits<S, T>::letter_t
+  MetaElement<algebra::AlphabetSetBase<S>, T>::choose() const
+  {
+    // FIXME: recommendation(overload this operator)
+ 
+    assert (is_finite() && size() > 0);
+    
+    int  nr = utility::random::generate<int>(0, size());
 
-    const_iterator it = this->begin();
-
+    const_iterator it = begin();
     for (int k = 0; k < c; ++k)
       ++it;
 
     return *it;
   }
 
-  template <class Self, typename T>
-  typename alphabet_traits<Self, T>::letter_t
-  MetaElement<AlphabetSetBase<Self>, T>::random_letter() const
-  {
-    return
-      misc::RandomGenerator<typename alphabet_traits<Self, T>::letter_t>
-      ::do_it();
-  }
-
-
-  template<class Self, typename T>
-  MetaElement<AlphabetSetBase<Self>, T>::MetaElement() 
+  template<typename S, typename T>
+  MetaElement<algebra::AlphabetSetBase<S>, T>::MetaElement() 
   {}
     
-  template<class Self, typename T>
-  MetaElement<AlphabetSetBase<Self>, T>::MetaElement(const MetaElement& other) :
-    MetaElement<Structure<Self>, T>(other)
+  template<typename S, typename T>
+  MetaElement<algebra::AlphabetSetBase<S>, T>::MetaElement(const MetaElement& other) :
+    MetaElement<Structure<S>, T>(other)
   {}
 
-  template <typename Self, typename T, typename L>
-  bool op_letter_equality_modulo(const AlphabetSetBase<Self>& s, 
-				 const T& a, 
-				 L lhs,
-				 L rhs)
+  template <typename S, typename T, typename L>
+  bool op_letter_equality(const algebra::AlphabetSetBase<S>& s, 
+			  const T& a, 
+			  L lhs,
+			  L rhs)
   {
     return lhs == rhs;
   }
   
-  template<typename Self, typename St, typename T>
-  St& op_rout(const AlphabetSetBase<Self>& s, St& st, const T& a)
+  template<typename S, typename St, typename T>
+  St& op_rout(const algebra::AlphabetSetBase<S>& s, St& st, const T& a)
   {
     st << "{ ";
     if (op_is_finite(s.self(), a))
-      for (typename op_begin_traits<Self, T>::const_ret_t i = op_begin(s.self(), a);
+      for (typename op_begin_traits<S, T>::const_ret_t i = op_begin(s.self(), a);
 	   i != op_end(s.self(), a);
 	   ++i)
 	{
@@ -181,4 +169,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // ALGEBRA_ALPHABETS_BASE_HXX
+#endif // VCSN_ALGEBRA_ALPHABETS_BASE_HXX

@@ -29,6 +29,12 @@ namespace utility {}
  */
 #include <vaucanson/misc/static.hh>
 
+/**
+ * @file random.hh
+ * Definition of random generators.
+ */
+#include <vaucanson/misc/random.hh>
+
 /** @} */
 
 
