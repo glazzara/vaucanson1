@@ -105,7 +105,7 @@ namespace vcsn {
     }
     END
 
-    MATCH__(RightWeight, node, w)
+    MATCH__(RightWeight, node, )
     {
       match(node);
     }

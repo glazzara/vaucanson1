@@ -443,7 +443,7 @@ AC_DEFUN([AC_WITH_VCSN],
 
 AC_DEFUN([VCSN_TESTS], [
 AC_MSG_CHECKING([for $1 in testsuite])
-if test -d $srcdir/src/tests/tests-suites/$1; then
+if test -r "$srcdir"/src/tests/tests-suites/$1/Makefile.am; then
    AC_MSG_RESULT([yes])
    VCSN_TESTS_SUBDIRS="$VCSN_TESTS_SUBDIRS $1"
    AC_CONFIG_FILES([src/tests/tests-suites/$1/Makefile])

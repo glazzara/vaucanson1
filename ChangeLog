@@ -1,9 +1,6 @@
-2003-07-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+2003-07-09  Raphaël Poss  <raph@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/series/krat.hxx
-	(op_in_mul, op_mul),
-	include/vaucanson/algebra/concrete/series/krat_exp_support.hxx
-	(match_nodeRightWeight): Add missing arguments.
+	* config/vcsn.m4 (VCSN_TESTS): Fix subdirectory existence test.
 
 2003-07-08  Raphaël Poss  <raph@lrde.epita.fr>
 
