@@ -38,223 +38,227 @@
 
 namespace vcsn {
 
-    /*---------------.
-    | Identity value |
-    `---------------*/
-    template<class TropicalKind, typename T>
-    T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>), SELECTOR(T))
-    {
-      return T(0);
-    }
+  /*---------------.
+  | Identity value |
+  `---------------*/
+  template<class TropicalKind, typename T>
+  T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>), SELECTOR(T))
+  {
+    return T(0);
+  }
 
-    template<typename T>
-    T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T))
-    {
-      return utility::limits<T>::min();
-    }
+  template<typename T>
+  T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T))
+  {
+    return utility::limits<T>::min();
+  }
 
-    template<>
-    float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(float))
-    {
-      return -utility::limits<float>::infinity();
-    }
+  template<>
+  inline
+  float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(float))
+  {
+    return -utility::limits<float>::infinity();
+  }
 
-    template<>
-    double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(double))
-    {
-      return -utility::limits<double>::infinity();
-    }
+  template<>
+  inline
+  double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(double))
+  {
+    return -utility::limits<double>::infinity();
+  }
 
-    template<typename T>
-    T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T))
-    {
-      return utility::limits<T>::max();
-    }
+  template<typename T>
+  T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T))
+  {
+    return utility::limits<T>::max();
+  }
 
-    template<>
-    float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(float))
-    {
-      return utility::limits<float>::infinity();
-    }
+  template<>
+  inline
+  float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(float))
+  {
+    return utility::limits<float>::infinity();
+  }
 
-    template<>
-    double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(double))
-    {
-      return utility::limits<double>::infinity();
-    }
+  template<>
+  inline
+  double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(double))
+  {
+    return utility::limits<double>::infinity();
+  }
 
-    /*------------.
-    | op_contains |
-    `------------*/
-    template<class TropicalKind, typename T>
-    bool op_contains(const algebra::TropicalSemiring<TropicalKind>& s, T c)
-    {
-      return true;
-    }
+  /*------------.
+  | op_contains |
+  `------------*/
+  template<class TropicalKind, typename T>
+  bool op_contains(const algebra::TropicalSemiring<TropicalKind>& s, T c)
+  {
+    return true;
+  }
 
-    /*--------------------.
-    | Multiplication is + |
-    `--------------------*/
-    template<class TropicalKind, typename T, typename U>
-    void op_in_mul(const algebra::TropicalSemiring<TropicalKind>& s1,
-		   T& dst, U arg)
-    {
-      if ((dst == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
-			     SELECT(T))) ||
-	  (arg == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
-			     SELECT(U))))
-	dst = zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), SELECT(T));
-      else
-	dst += arg;
-    }
-
-    template<class TropicalKind, typename T, typename U>
-    T op_mul(const algebra::TropicalSemiring<TropicalKind>&, T a, U b)
-    {
-      if ((a == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
+  /*--------------------.
+  | Multiplication is + |
+  `--------------------*/
+  template<class TropicalKind, typename T, typename U>
+  void op_in_mul(const algebra::TropicalSemiring<TropicalKind>& s1,
+		 T& dst, U arg)
+  {
+    if ((dst == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
 			   SELECT(T))) ||
-	  (b == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
+	(arg == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
 			   SELECT(U))))
-	return zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), SELECT(T));
-      return a + b;
-    }
+      dst = zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), SELECT(T));
+    else
+      dst += arg;
+  }
 
-    /*---------.
-    | Addition |
-    `---------*/
-    template<typename T, typename U>
-    void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s1,
-		   T& dst, U arg)
-    {
-      dst = std::max(dst, arg);
-    }
+  template<class TropicalKind, typename T, typename U>
+  T op_mul(const algebra::TropicalSemiring<TropicalKind>&, T a, U b)
+  {
+    if ((a == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
+			 SELECT(T))) ||
+	(b == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
+			 SELECT(U))))
+      return zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>), SELECT(T));
+    return a + b;
+  }
 
-    template<typename T, typename U>
-    void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMin>& s1,
-		   T& dst, U arg)
-    {
-      dst = std::min(dst, arg);
-    }
+  /*---------.
+  | Addition |
+  `---------*/
+  template<typename T, typename U>
+  void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s1,
+		 T& dst, U arg)
+  {
+    dst = std::max(dst, arg);
+  }
 
-    template<typename T, typename U>
-    T op_add(const algebra::TropicalSemiring<algebra::TropicalMax>&, T a, U b)
-    {
-      return std::max(a, b);
-    }
+  template<typename T, typename U>
+  void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMin>& s1,
+		 T& dst, U arg)
+  {
+    dst = std::min(dst, arg);
+  }
 
-    template<typename T, typename U>
-    T op_add(const algebra::TropicalSemiring<algebra::TropicalMin>&, T a, U b)
-    {
-      return std::min(a, b);
-    }
+  template<typename T, typename U>
+  T op_add(const algebra::TropicalSemiring<algebra::TropicalMax>&, T a, U b)
+  {
+    return std::max(a, b);
+  }
 
-    /*-----.
-    | Star |
-    `-----*/
-    template <typename T>
-    bool
-    op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>&, T b)
-    {
-      if (b < 0)
-	return false;
-      return true;
-    }
+  template<typename T, typename U>
+  T op_add(const algebra::TropicalSemiring<algebra::TropicalMin>&, T a, U b)
+  {
+    return std::min(a, b);
+  }
 
-    template <class T>
-    void
-    op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>&, T& b)
-    {
-      if (b >= 0)
-	{
-	  b = 0;
-	  return;
-	}
-      assertion(! "star not defined.");
-    }
+  /*-----.
+  | Star |
+  `-----*/
+  template <typename T>
+  bool
+  op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>&, T b)
+  {
+    if (b < 0)
+      return false;
+    return true;
+  }
 
-    template <typename T>
-    bool
-    op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>&, T b)
-    {
-      if (b > 0)
-	return false;
-      return true;
-    }
+  template <class T>
+  void
+  op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>&, T& b)
+  {
+    if (b >= 0)
+      {
+	b = 0;
+	return;
+      }
+    assertion(! "star not defined.");
+  }
 
-    template <class T>
-    void
-    op_in_star(const algebra::TropicalSemiring<algebra::TropicalMax>&, T& b)
-    {
-      if (b <= 0)
-	{
-	  b = 0;
-	  return;
-	}
-      assertion(! "star not defined.");
-    }
+  template <typename T>
+  bool
+  op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>&, T b)
+  {
+    if (b > 0)
+      return false;
+    return true;
+  }
 
-    template <class TropicalKind, class T>
-    Element<algebra::TropicalSemiring<TropicalKind>, T>
-    op_choose(const algebra::TropicalSemiring<TropicalKind>& set, SELECTOR(T))
-    {
-      return Element<algebra::TropicalSemiring<TropicalKind>, T>
-	(set, utility::random::generate<T>());
-    }
+  template <class T>
+  void
+  op_in_star(const algebra::TropicalSemiring<algebra::TropicalMax>&, T& b)
+  {
+    if (b <= 0)
+      {
+	b = 0;
+	return;
+      }
+    assertion(! "star not defined.");
+  }
 
-    template <class TropicalKind, typename T>
-    bool
-    op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
-				SELECTOR(T))
-    {
-      return true;
-    }
+  template <class TropicalKind, class T>
+  Element<algebra::TropicalSemiring<TropicalKind>, T>
+  op_choose(const algebra::TropicalSemiring<TropicalKind>& set, SELECTOR(T))
+  {
+    return Element<algebra::TropicalSemiring<TropicalKind>, T>
+      (set, utility::random::generate<T>());
+  }
 
-    template <class TropicalKind, class T>
-    Element<algebra::TropicalSemiring<TropicalKind>, T>
-    op_choose_starable(const algebra::TropicalSemiring<TropicalKind>& set,
-			SELECTOR(T))
-    {
-      T r;
-      do
-	r = op_choose(set, SELECT(T));
-      while (!op_starable(set, r));
-      return r;
-    }
+  template <class TropicalKind, typename T>
+  bool
+  op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
+			     SELECTOR(T))
+  {
+    return true;
+  }
 
-    template <class TropicalKind, class T>
-    Element<algebra::TropicalSemiring<TropicalKind>, T>
-    op_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
-			    SELECTOR(T))
-    {
-      T r;
-      do
-	r = op_choose(set, SELECT(T));
-      while (!op_starable(set, r));
-      return r;
-    }
+  template <class TropicalKind, class T>
+  Element<algebra::TropicalSemiring<TropicalKind>, T>
+  op_choose_starable(const algebra::TropicalSemiring<TropicalKind>& set,
+		     SELECTOR(T))
+  {
+    T r;
+    do
+      r = op_choose(set, SELECT(T));
+    while (!op_starable(set, r));
+    return r;
+  }
 
-    /*---------------.
-    | Pretty printer |
-    `---------------*/
-    template<typename St, typename T>
-    St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMax>&, St& st, const T& v)
-    {
-      if (v == zero_value(SELECT(algebra::TropicalSemiring<algebra::TropicalMax>), SELECT(T)))
-	st << "-oo";
-      else
-	st << v;
-      return st;
-    }
+  template <class TropicalKind, class T>
+  Element<algebra::TropicalSemiring<TropicalKind>, T>
+  op_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
+			 SELECTOR(T))
+  {
+    T r;
+    do
+      r = op_choose(set, SELECT(T));
+    while (!op_starable(set, r));
+    return r;
+  }
 
-    template<typename St, typename T>
-    St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>& s, St& st, const T& v)
-    {
-      if (v == zero_value(SELECT(algebra::TropicalSemiring<algebra::TropicalMin>), SELECT(T)))
-	st << "+oo";
-      else
-	st << v;
-      return st;
-    }
+  /*---------------.
+  | Pretty printer |
+  `---------------*/
+  template<typename St, typename T>
+  St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMax>&, St& st, const T& v)
+  {
+    if (v == zero_value(SELECT(algebra::TropicalSemiring<algebra::TropicalMax>), SELECT(T)))
+      st << "-oo";
+    else
+      st << v;
+    return st;
+  }
+
+  template<typename St, typename T>
+  St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>& s, St& st, const T& v)
+  {
+    if (v == zero_value(SELECT(algebra::TropicalSemiring<algebra::TropicalMin>), SELECT(T)))
+      st << "+oo";
+    else
+      st << v;
+    return st;
+  }
 
 } // vcsn
 

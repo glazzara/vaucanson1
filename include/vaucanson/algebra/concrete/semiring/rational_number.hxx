@@ -178,36 +178,42 @@ namespace vcsn
       return set_result(num_ * nb.denom(), denom_ * nb.num());
     }
 
+    inline
     bool	RationalNumber::operator<(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
       return num_ * m / denom_ < nb.num() * m / nb.denom();
     }
 
+    inline
     bool	RationalNumber::operator>(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
       return num_ * m / denom_ > nb.num() * m / nb.denom();
     }
 
+    inline
     bool	RationalNumber::operator<=(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
       return num_ * m / denom_ <= nb.num() * m / nb.denom();
     }
 
+    inline
     bool	RationalNumber::operator>=(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
       return num_ * m / denom_ >= nb.num() * m / nb.denom();
     }
 
+    inline
     bool	RationalNumber::operator==(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
       return num_ * m / denom_ == nb.num() * m / nb.denom();
     }
 
+    inline
     bool	RationalNumber::operator!=(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
