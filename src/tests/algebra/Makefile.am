@@ -5,5 +5,7 @@
 # VCSN_HEADER
 
 SUBDIRS = \
-	alphabets    \
-	semiring	
+	semiring    \
+	alphabets   \
+	free_monoid 
+

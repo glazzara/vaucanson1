@@ -82,8 +82,9 @@ am__quote = @am__quote@
 install_sh = @install_sh@
 
 SUBDIRS = \
-	alphabets    \
-	semiring	
+	semiring    \
+	alphabets   \
+	free_monoid 
 
 subdir = src/tests/algebra
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

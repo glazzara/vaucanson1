@@ -24,6 +24,7 @@ AC_CONFIG_FILES([			\
 	src/tests/algebra/Makefile		\
 	src/tests/algebra/semiring/Makefile 	\
 	src/tests/algebra/alphabets/Makefile 	\
+	src/tests/algebra/free_monoid/Makefile 	\
 	include/Makefile])
 
 AC_OUTPUT
