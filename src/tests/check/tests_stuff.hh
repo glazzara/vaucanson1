@@ -22,8 +22,8 @@ namespace tests {
 
   private:
     unsigned int	passed;
-    unsigned int  non_passed;
-    int		verbose;
+    unsigned int	non_passed;
+    int			verbose;
   };
 
 } // tests

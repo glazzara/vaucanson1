@@ -23,7 +23,14 @@ namespace tests {
   Tester::ok(const std::string& test_label)
   {
     if (verbose == 1)
-      std::cerr << "TEST: " << test_label << ": OK" << std::endl;
+      {
+	std::cerr << "TEST: ";
+	std::cerr.fill(' ') ;
+	int last = std::cerr.width(40);
+	std::cerr << test_label;
+	std::cerr << " : OK" << std::endl;
+	std::cerr.width(last);
+      }
     passed++;
   }
 
@@ -31,7 +38,14 @@ namespace tests {
   Tester::ko(const std::string& test_label)
   {
     if (verbose == 1)
-      std::cerr << "TEST: " << test_label << ": KO" << std::endl;
+      {
+	std::cerr << "TEST: ";
+	std::cerr.fill(' ') ;
+	int last = std::cerr.width(40);
+	std::cerr << test_label;
+	std::cerr << " : KO" << std::endl;
+	std::cerr.width(last);
+      }
     non_passed++;
   }
   
