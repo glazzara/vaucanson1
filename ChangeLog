@@ -1,3 +1,9 @@
+2003-07-23  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* FAQ: Minor tweak.
+	* include/vaucanson/misc/contract.hh: Add `static' to `inline' for
+	`trap'.
+
 2003-07-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/contract.hh (trap): Add inline to the
