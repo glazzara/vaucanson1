@@ -13,9 +13,7 @@ EXTRA_PROGRAMS =				\
 if XML_CHECK
   AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
   AM_CPPFLAGS = -I$(top_srcdir)/include		\
-                -I$(top_builddir)/include	\
-	        -I@XERCESC@/include
-  AM_LDFLAGS = -lxerces-c -L@XERCESC@/lib
+                -I$(top_builddir)/include
 
   noinst_PROGRAMS =				\
 	divkbaseb				\

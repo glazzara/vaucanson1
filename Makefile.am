@@ -10,7 +10,7 @@ SUBDIRS = xml include doc src
 ### Tell it where to find them.
 ###
 ACLOCAL_AMFLAGS = -I config
-CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4
+CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4 $(srcdir)/config/xml.m4
 EXTRA_DIST = config/vcsn.m4 config/xml.m4
 
 ###

@@ -1,3 +1,18 @@
+2005-01-15  Raphael Poss  <kena@Vodka-Pomme.local>
+
+        Sanitize the behaviour of Xerces-C++ configuration.
+	
+	* config/xml.m4: Change help messages. Use the autoconf variable
+	cache. Test for availability of the Xerces-C++ library beside the
+	headers. Append detected values to standard variables.
+
+	* Makefile.am: Make configure depend on config/xml.m4.
+
+	* src/tests/sanity/generate_files.sh,
+	* src/tests/xml/Makefile.am,
+	* src/demos/xml/samples/Makefile.am,
+	* src/demos/xml/Makefile.am: Update accordingly.
+
 2005-01-14  Raphael Poss  <raph@lrde.epita.fr>
 
 	Optimize according to advice given by Thomas Claveirole
