@@ -72,6 +72,8 @@ AC_ARG_VAR([DOXYGEN], [the Doxygen documentation generation program])
 AC_CHECK_PROGS([DOXYGEN], [doxygen], [$am_aux_dir/missing doxygen])
 AC_ARG_VAR([TEXI2DVI], [program to create DVI from TeX files])
 AC_CHECK_PROGS([TEXI2DVI], [texi2dvi], [$am_aux_dir/missing texi2dvi])
+AC_ARG_VAR([SGML2LATEX], [program to create TeX from LinuxDoc SGML files])
+AC_CHECK_PROGS([SGML2LATEX], [sgml2latex], [$am_aux_dir/missing sgml2latex])
 AC_ARG_VAR([TAR], [the tape archiver program])
 AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 
@@ -119,6 +121,7 @@ AC_CONFIG_FILES([
 	doc/tutorial/Makefile
 	doc/beginner/Makefile
 	doc/makefiles/Makefile
+	doc/xml/Makefile
         doc/doc.doxy
 	include/Makefile
 	xml/Makefile])

@@ -2,7 +2,7 @@
 #
 # $Id$
 
-SUBDIRS = tutorial beginner makefiles
+SUBDIRS = tutorial beginner makefiles xml
 
 docdir = $(datadir)/doc/@PACKAGE_TARNAME@
 dist_doc_DATA = ref.tar.gz

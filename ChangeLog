@@ -1,3 +1,10 @@
+2004-03-21  Valentin David  <valentin@lrde.epita.fr>
+
+	* doc/xml/format.sgml, doc/xml/dev.sgml, doc/xml/Makefile.am:
+	New. Documentation for the XML API.
+
+	* configure.ac, doc/Makefile.am: Update.
+
 2004-03-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/automata/algos/thompson_test.hh: Improve.
