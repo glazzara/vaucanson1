@@ -1,6 +1,6 @@
 # Makefile.am
 #
-# $Id$
+# $Id: $
 
 EXTRA_PROGRAMS =				\
 	c1					\
@@ -43,20 +43,26 @@ XML_SAMPLES =					\
 EXTRA_DIST = $(XML_SAMPLES)
 MAINTAINERCLEANFILES = $(XML_SAMPLES)
 
-$(srcdir)/c1.xml: c1 vaucanson.dtd
-	./c1 > $@
+$(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT) vaucanson.dtd
+	./c1$(EXEEXT) > $@
 
-$(srcdir)/div3base2.xml: divkbaseb vaucanson.dtd
-	./divkbaseb 3 2 > $@
+$(srcdir)/div3base2.xml: divkbaseb.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) divkbaseb$(EXEEXT) vaucanson.dtd
+	./divkbaseb$(EXEEXT) 3 2 > $@
 
-$(srcdir)/double_ring6.xml: double_ring vaucanson.dtd
-	./double_ring 6 1 3 4 5 > $@
+$(srcdir)/double_ring6.xml: double_ring.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) double_ring$(EXEEXT) vaucanson.dtd
+	./double_ring$(EXEEXT) 6 1 3 4 5 > $@
 
-$(srcdir)/occ_b.xml: occ_b vaucanson.dtd
-	./occ_b > $@
+$(srcdir)/occ_b.xml: occ_b.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) occ_b$(EXEEXT) vaucanson.dtd
+	./occ_b$(EXEEXT) > $@
 
-$(srcdir)/lomb1.xml: lomb1 vaucanson.dtd
-	./lomb1 > $@
+$(srcdir)/lomb1.xml: lomb1.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) lomb1$(EXEEXT) vaucanson.dtd
+	./lomb1$(EXEEXT) > $@
 
-$(srcdir)/lomb2.xml: lomb2 vaucanson.dtd
-	./lomb2 > $@
+$(srcdir)/lomb2.xml: lomb2.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) lomb2$(EXEEXT) vaucanson.dtd
+	./lomb2$(EXEEXT) > $@

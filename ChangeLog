@@ -1,3 +1,8 @@
+2004-10-26  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/samples/Makefile.am: Fix dependencies and build rules
+	for the generated XML samples.
+
 2004-10-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/automata/implementation/graph.hxx (del_edge,
