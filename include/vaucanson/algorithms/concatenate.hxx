@@ -49,8 +49,6 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto);
     std::map<hstate_t, hstate_t>	trans;
-    monoid_elt_t ident = 
-      lhs.series().monoid().identity(SELECT(monoid_elt_value_t));
     
     for_each_state(s, rhs)
       {
@@ -58,9 +56,8 @@ namespace vcsn {
 	trans[*s] = ns;
 	if (rhs.is_initial(*s))
 	  for_each_final_state(f, lhs)
-	    lhs.add_spontaneous(*f, ns,
-				lhs.get_final(*f).get(ident) *
-				rhs.get_initial(*s).get(ident));
+	    lhs.add_series_edge(*f, ns,
+				lhs.get_final(*f) * rhs.get_initial(*s));
       }
     for_each_edge(e, rhs)
       lhs.add_edge(trans[rhs.origin_of(*e)],
