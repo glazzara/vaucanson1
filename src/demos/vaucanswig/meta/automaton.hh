@@ -1,7 +1,7 @@
 // automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -66,7 +66,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
 {
   AUTOMATON_TYPES(Auto)
 
-    
+
 
     vcsn_automaton(const Auto& other)
       : ctx_(new vcsn_context<Auto>(other.set())), auto_(new Auto(other)), conv_()
@@ -148,12 +148,12 @@ struct vcsn_automaton : vcsn::virtual_automaton
 
   virtual const vcsn_context<Auto> &context() const
   { return *ctx_; }
-  
+
   virtual bool has_state(int s) const { return (*auto_).has_state(s); }
   virtual bool has_edge(int e) const { return (*auto_).has_edge(e); }
-  
+
   virtual void del_state(int s)
-  { 
+  {
     CHECK_STATE(this, s);
     return (*auto_).del_state(s);
   }
@@ -177,27 +177,27 @@ struct vcsn_automaton : vcsn::virtual_automaton
   virtual int add_state() { return (*auto_).add_state(); }
 
   // Creation of spontaneous edge between two states
-  virtual int add_spontaneous(int from, int to)  
+  virtual int add_spontaneous(int from, int to)
   {
     CHECK_STATE(this, from); CHECK_STATE(this, to);
     return (*auto_).add_spontaneous(from, to);
   }
-  
+
   // Creation of edge with single letter label
   virtual int add_letter_edge(int from, int to, char l)
-  { 
+  {
     CHECK_STATE(this, from); CHECK_STATE(this, to);
     CHECK_LETTER(this, l);
     return (*auto_).add_letter_edge(from, to, l);
   }
-  
+
   // Creation of edge with weight on the left
   virtual int add_lw_edge(int from, int to, int w, const std::string& l)
   {
     CHECK_STATE(this, from); CHECK_STATE(this, to);
     for (std::string::const_iterator c = l.begin(); c != l.end(); ++c)
       CHECK_LETTER(this, *c);
-      
+
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = WEIGHT(this, w) * s;
@@ -210,7 +210,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, from); CHECK_STATE(this, to);
     for (std::string::const_iterator c = l.begin(); c != l.end(); ++c)
       CHECK_LETTER(this, *c);
-      
+
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = s * WEIGHT(this, w);
@@ -223,7 +223,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, from); CHECK_STATE(this, to);
     for (std::string::const_iterator c = l.begin(); c != l.end(); ++c)
       CHECK_LETTER(this, *c);
-      
+
     series_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = WEIGHT(this, lw) * s * WEIGHT(this, rw);
@@ -239,13 +239,13 @@ struct vcsn_automaton : vcsn::virtual_automaton
     return s.str();
   }
 
-  virtual int origin_of(int edge) const 
+  virtual int origin_of(int edge) const
   {
     CHECK_EDGE(this, edge);
     return (*auto_).origin_of(edge);
   }
 
-  virtual int aim_of(int edge) const 
+  virtual int aim_of(int edge) const
   {
     CHECK_EDGE(this, edge);
     return (*auto_).aim_of(edge);
@@ -292,7 +292,8 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {										\
     CHECK_STATE(this, state);							\
     CHECK_LETTER(this, letter);							\
-    return (*auto_).set_## InitialFinal (state, WORD_OF_LETTER(this, letter));	\
+    series_elt_t s (SERIES_OF(this), WORD_OF_LETTER(this, letter));		\
+    return (*auto_).set_## InitialFinal (state, s);				\
   }										\
 										\
   /* Set a state initial or final with an associated weight and letter */	\
@@ -442,7 +443,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     else
       throw std::runtime_error("format not supported: " + format);
   }
-  
+
   virtual void save(std::ostream& out, const std::string& format) const
   {
     if (format.substr(0, 3) == "dot")
@@ -459,7 +460,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     else
       throw std::runtime_error("format not supported: " + format);
   }
-  
+
   virtual ~vcsn_automaton() { delete auto_; delete ctx_; }
 
 protected:

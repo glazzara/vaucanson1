@@ -42,37 +42,37 @@ namespace vcsn {
   /*--------------------.
   | subset_construction |
   `--------------------*/
-  // preconditions : 
-  //    - output has been initialized with good series set 
+  // preconditions :
+  //    - output has been initialized with good series set
   //      (alphabet is well initialized) ;
-  //    - this algorithm is intended to work with realtime automaton 
+  //    - this algorithm is intended to work with realtime automaton
   //      over |B<A*> => add concept checking.
   //
 
   template <typename A, typename input_t, typename output_t>
-  void 
+  void
   do_subset_construction(const AutomataBase<A>&	,
 			 output_t&	       	output,
 			 const input_t&		input,
 			 std::map<hstate_t, std::set<hstate_t> >& m =
 			 std::map<hstate_t, std::set<hstate_t> >())
-  {    
+  {
     AUTOMATON_TYPES(input_t);
     typedef typename input_t::series_t			    series_t;
     typedef typename std::set<hstate_t>	                    subset_t;
     typedef typename std::map<subset_t, hstate_t>           subset_set_t;
     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
     typedef std::vector<hstate_t>			    delta_ret_t;
-    
+
     hstate_t		   qi_hstate = output.add_state();
     subset_t		   qi;
-    subset_set_t	   subset_set; 
+    subset_set_t	   subset_set;
     const alphabet_t&	   alphabet(input.set().series().monoid().alphabet());
     subset_t		   q;
     subset_t		   s;
     delta_ret_t		   aim;
     hstate_t		   s_hstate;
-    typename subset_set_t::const_iterator	current;   
+    typename subset_set_t::const_iterator	current;
 
     /*---------------.
     | Initialization |
@@ -105,12 +105,12 @@ namespace vcsn {
       s        = path.front();
       s_hstate = subset_set[s];
       path.pop();
-      
+
       for_each_letter(e, alphabet)
 	{
 	  q.clear();
 	  is_final = false;
-	  for (typename subset_t::const_iterator j = s.begin(); 
+	  for (typename subset_t::const_iterator j = s.begin();
 	       j != s.end(); ++j)
 	    {
 	      aim.clear();
@@ -124,16 +124,16 @@ namespace vcsn {
 		}
 	    }
 	  current = subset_set.find(q);
-	  if (current == subset_set.end()) 
+	  if (current == subset_set.end())
 	    {
 	      hstate_t qs = output.add_state();
 	      current = (subset_set.insert
 			 (subset_set_pair_t(q, qs))).first;
 	      m[qs] = q;
-      
+
 	      // Log history ?
 
- 	      if (is_final)   
+ 	      if (is_final)
  		output.set_final(current->second);
 	      path.push(q);
 	    }
@@ -197,7 +197,7 @@ namespace vcsn {
 		      const input_t&		input)
   {
     AUTOMATON_TYPES(input_t);
-    typedef typename std::set<hedge_t>		delta_ret_t;	
+    typedef typename std::set<hedge_t>		delta_ret_t;
     typedef typename series_elt_t::support_t	support_t;
 
     delta_ret_t	delta_ret;
@@ -226,7 +226,7 @@ namespace vcsn {
 	      {
 		series_elt_t s_ = input.serie_of(*k);
 		for_all_(support_t, supp, s.supp())
-		  if (s_.get(*supp) != zero_semiring)
+		  if (s_.value_get(*supp) != zero_semiring)
 		    return false;
 	      }
 	  }

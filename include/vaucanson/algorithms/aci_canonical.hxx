@@ -1,7 +1,7 @@
 // aci_canonical.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -86,7 +86,7 @@ namespace vcsn
       }
       return expset;
     }
-    
+
     set_t&	put_in(set_t& s, exp_t e)
     {
       s.clear();
@@ -151,8 +151,7 @@ namespace vcsn
     MATCH_(Constant, m)
     {
       set_t	res;
-      Element<Series, T> s(exp_.set());
-      s = monoid_elt_t(m);
+      Element<Series, T> s (exp_.set(), m);
       res.insert(s);
       return res;
     }
@@ -182,7 +181,7 @@ namespace vcsn
   Element<Series, T>
   canonical(const Element<Series, T>& exp)
   {
-    KRatExpAciCanonical<Series, T, algebra::DispatchFunction<T> > 
+    KRatExpAciCanonical<Series, T, algebra::DispatchFunction<T> >
       matcher(exp);
     return matcher.set2exp(matcher.match(exp.value()));
   }
