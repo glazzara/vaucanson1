@@ -112,8 +112,7 @@ namespace vcsn {
       {
 	if (! m_semiring_elt[r][r].starable())
 	  {
-	    // FIXME: add error handling.
-	    std::cerr<< "Star not defined." << std::endl;
+	    result_not_computable("Star not defined.", std::logic_error);
 	    return;
 	  }
       semiring_elt_t        w_tmp   = m_semiring_elt[r][r];

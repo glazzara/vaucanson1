@@ -179,6 +179,7 @@ chmod 755 $FAILCOMP_SCRIPT
 cat > $DEST_DIR/Makefile.am << EOF
 include \$(top_srcdir)/src/tests/check/Makefile.check
 AM_CPPFLAGS += $INCLUDES
+AM_CPPFLAGS += -DEXCEPTION_TRAPS
 
 TESTS_ENVIRONMENT = /usr/bin/env CXX="\$(CXX)" CXXFLAGS="\$(AM_CPPFLAGS)"
 TESTS += failcomp.sh

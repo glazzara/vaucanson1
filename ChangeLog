@@ -1,3 +1,13 @@
+2004-04-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/misc/contract.hh: Add a macro for exception 
+	handling.
+	* include/vaucanson/algorithms/forward_closure.hxx,
+	* include/vaucanson/algorithms/backward_closure.hxx: Update error 
+	handling.
+	* src/tests/bin/generate-test-suite.sh: add a flag for exception 
+	handling.
+
 2004-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/z_max_plus.hxx,
