@@ -66,9 +66,9 @@ namespace vcsn {
       /*! Insert a letter in the alphabet. */
       void		insert(const letter_t& l);
       /*! Select a random letter in the alphabet. */
-      letter_t          choose();
+      letter_t          choose() const;
       /*! Select a random letter in all the possible letters in letter_t */
-      letter_t		random_letter();
+      letter_t		random_letter() const;
       /*! Cardinal of the alphabet. */
       size_t		size()                      const;
       /*! Return true if l is in the alphabet. */

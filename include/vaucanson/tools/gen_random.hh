@@ -1,5 +1,6 @@
 // gen_random.hh
 // 
+// $Id$
 // VCSN_HEADER
 
 #ifndef GEN_RANDOM_HH
@@ -31,6 +32,9 @@ namespace vcsn {
     
     GenRandomAutomata();
     GenRandomAutomata(unsigned init);
+
+    TAutomata empty(unsigned nb_letter = 2); 
+
     TAutomata generate(unsigned nb_state, unsigned nb_edge, 
 		       unsigned istate = 1, unsigned fstate = 1,
 		       unsigned nb_letter = 2);

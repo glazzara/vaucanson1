@@ -1,8 +1,7 @@
-/*********************************
- * <vaucanson/automata/kinds.hxx> *
- *********************************/
-
-/* this file is part of the Vaucanson project */
+// kinds.hxx
+//
+// $Id$
+// VCSN_HEADER
 #ifndef AUTOMATA_KINDS_HXX
 # define AUTOMATA_KINDS_HXX
 
@@ -14,11 +13,7 @@
 #include <vaucanson/algebra/concept/algebra_base.hh>
 #include <vaucanson/automata/concept/handlers.hh>
 
-namespace vcsn
-{
-  
-
-  
+namespace vcsn {
   
   template<typename Series, typename MonoidElt, typename Weight, typename L>  
   ls_delta_letter_query<Series, MonoidElt, Weight, L>::

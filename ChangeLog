@@ -1,3 +1,35 @@
+2002-07-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.78)
+	* include/vaucanson/algorithms/standard.hxx : added.
+	* include/vaucanson/algorithms/standard.hh : added.
+	* include/vaucanson/algorithms/glushkov.hxx : added.
+	* include/vaucanson/algorithms/glushkov.hh : added.
+	* src/tests/automata/algos/glushkov_test.hh : added.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx :
+	-  MetaElement<AlphabetsBase<Self>, T>::choose()
+	+  MetaElement<AlphabetsBase<Self>, T>::choose() const
+	   { 
+	+    assert (this->size() > 0);
+	 
+	-  MetaElement<AlphabetsBase<Self>, T>::random_letter()
+	+  MetaElement<AlphabetsBase<Self>, T>::random_letter() const
+	* include/vaucanson/algebra/concept/alphabets_base.hh :
+	-      letter_t          choose();
+	+      letter_t          choose() const;
+	-      letter_t		random_letter();
+	+      letter_t		random_letter() const;
+	* include/vaucanson/algebra/concrete/series/krat.hxx: misplaced namespace algebra.
+	* include/vaucanson/algebra/concrete/series/krat.hh: misplaced namespace algebra.
+	* include/vaucanson/automata/concept/kinds.hxx : minor change.
+	* include/vaucanson/tools/usual.hh
+	+ typedef typename Prefix##monoid_elt_t::value_t Prefix##monoid_elt_value_t;   
+	+ typedef typename Prefix##series_elt_t::weight_t    Prefix##weight_t;         \
+	+ typedef typename Prefix##weight_t::value_t         Prefix##weight_value_t;   \ 
+	* include/vaucanson/tools/gen_random.hxx : re-add empty() method.
+	* include/vaucanson/tools/gen_random.hh : re-add empty() method.
+
+
+
 2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.77)
 	* include/vaucanson/automata/concept/kinds.hxx :

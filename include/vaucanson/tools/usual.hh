@@ -50,6 +50,7 @@ namespace vcsn {
  typedef typename AutoType::final_iterator	    Prefix##final_iterator;   \
  typedef typename AutoType::monoid_t		    Prefix##monoid_t;	      \
  typedef typename AutoType::monoid_elt_t	    Prefix##monoid_elt_t;     \
+ typedef typename Prefix##monoid_elt_t::value_t	    Prefix##monoid_elt_value_t;     \
  typedef typename Prefix##monoid_t::alphabets_elt_t Prefix##alphabets_elt_t;  \
  typedef typename Prefix##monoid_t::alphabet_t      Prefix##alphabet_t;	      \
  typedef typename Prefix##alphabet_t::iterator      Prefix##alphabet_iterator;\
@@ -57,6 +58,8 @@ namespace vcsn {
  typedef typename AutoType::weights_t               Prefix##weights_t;	      \
  typedef typename AutoType::series_t                Prefix##series_t;	      \
  typedef typename AutoType::series_elt_t            Prefix##series_elt_t;     \
+ typedef typename Prefix##series_elt_t::weight_t    Prefix##weight_t;         \
+ typedef typename Prefix##weight_t::value_t         Prefix##weight_value_t;   \
  typedef typename AutoType::label_t		    Prefix##label_t;	      \
  typedef typename AutoType::tag_t		    Prefix##tag_t;
 

@@ -32,6 +32,34 @@ namespace vcsn {
   
   template <class TAutomata>
   TAutomata GenRandomAutomata<TAutomata>::
+  empty(unsigned nb_letter) 
+  {
+    AUTOMATON_TYPES(TAutomata);
+    TAutomata work;
+    work.create();
+
+    // alphabet construction 
+    alphabets_elt_t alpha;
+    
+    unsigned nb = alea(nb_letter);
+    for (unsigned i = 0; i < 2 + nb; )
+      {
+	letter_t l = alpha.random_letter();
+	if (alpha.contains(l))
+	  continue;
+	alpha.insert(alpha.random_letter());
+	++i;
+      }
+    monoid_t monoid(alpha);
+    weights_t semi;
+    series_t series(semi, monoid);
+    
+    work.series() = series;
+    return work;
+  }
+
+  template <class TAutomata>
+  TAutomata GenRandomAutomata<TAutomata>::
   generate(unsigned nb_state, unsigned nb_edge, 
 	   unsigned istate = 1, unsigned fstate = 1,
 	   unsigned nb_letter = 2)

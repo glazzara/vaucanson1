@@ -93,8 +93,9 @@ namespace vcsn {
     
   template<class Self, typename T>
   typename alphabet_traits<Self, T>::letter_t
-  MetaElement<AlphabetsBase<Self>, T>::choose()
+  MetaElement<AlphabetsBase<Self>, T>::choose() const
   { 
+    assert (this->size() > 0);
     int  n = this->size() - 1;
     int  c = ((unsigned) trunc(((float) random() / (float) RAND_MAX) * n));
 
@@ -108,9 +109,8 @@ namespace vcsn {
 
   template <class Self, typename T>
   typename alphabet_traits<Self, T>::letter_t
-  MetaElement<AlphabetsBase<Self>, T>::random_letter()
+  MetaElement<AlphabetsBase<Self>, T>::random_letter() const
   {
-    
     return
       misc::RandomGenerator<typename alphabet_traits<Self, T>::letter_t>
       ::do_it();

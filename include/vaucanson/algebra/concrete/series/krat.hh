@@ -41,8 +41,6 @@ namespace vcsn {
       size_t	depth() const;
     };
 
-  namespace algebra
-  {   
     
     template<typename W, typename M, typename Tm, typename Tw>
     bool op_contains(const Series<W, M>& s, const rat::exp<Tm, Tw>& m);
@@ -163,8 +161,6 @@ namespace vcsn {
     op_star(const Series<W, M>& s,
 	    const rat::exp<Tm, Tw>& src);
 
-  }  //algebra
-
     /*--------------------------------------.
     | foreign addition with monoid elements |
     `--------------------------------------*/
@@ -175,9 +171,6 @@ namespace vcsn {
       typedef Element<Series<W, M>, rat::exp<Tm, Tw> > ret_t;
     };
 
-  namespace algebra
-  {
-    
     template<typename W, typename M, typename Tm, typename Tw, typename oTm>
     void op_in_add(const Series<W, M>& s,
 		   const M& monoid,
@@ -200,9 +193,6 @@ namespace vcsn {
     | foreign addition with weights elements |
     `---------------------------------------*/
 
-  }  // algebra
-
-
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   struct op_add_traits<W, Series<W, M>, oTw, rat::exp<Tm, Tw> >
@@ -210,8 +200,6 @@ namespace vcsn {
     typedef Element<Series<W, M>, rat::exp<Tm, Tw> > ret_t;
   };
   
-  namespace algebra 
-  {
     template<typename W, typename M, typename Tm, typename Tw, typename oTw>
     void op_in_add(const Series<W, M>& s,
 		   const W& weights,
@@ -230,8 +218,6 @@ namespace vcsn {
 			    const oTw& a,
 			    const rat::exp<Tm, Tw>& b);
 
-  } // algebra
-
     /*-------------------------------------------.
       | foreign multiplication by weights elements |
       `-------------------------------------------*/
@@ -242,8 +228,6 @@ namespace vcsn {
       typedef Element<Series<W, M>, rat::exp<Tm, Tw> > ret_t;
     };
 
-  namespace algebra 
-  {
     
     template<typename W, typename M, typename Tm, typename Tw, typename oTw>
     void op_in_mul(const Series<W, M>& s,
@@ -277,10 +261,7 @@ namespace vcsn {
 		       const rat::exp<Tm, Tw>& p,
 		       const oTm& m,
 		       const oTw& w);
-
-
-  } // algebra
-
+  
 } // vcsn
 
 # include <vaucanson/algebra/concrete/series/krat.hxx>

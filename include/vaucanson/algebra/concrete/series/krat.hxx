@@ -13,8 +13,6 @@
 
 namespace vcsn {
 
-  namespace algebra {
-      
     template<typename W, typename M, typename Tm, typename Tw>
     inline
     bool op_contains(const Series<W, M>& s, const rat::exp<Tm, Tw>& m)
@@ -755,7 +753,6 @@ namespace vcsn {
       return value().depth();
     }
 
-  } // algebra
 } // vcsn
 
 #endif // ALGEBRA_KRAT_HH
