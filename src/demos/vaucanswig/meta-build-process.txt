@@ -1,0 +1,193 @@
+
+The file "build-process.txt" describes how to use Vaucanswig
+to create a wrapper for Vaucanson in a scripting language.
+(read it first)
+
+
+This document instead describes how Vaucanswig itself is generated,
+using the infamous "expand.sh" script.
+
+The list of MODULES
+===================
+
+The overall process to build the list of module names is
+as follows:
+
+ 1) put "core" in the MODULES list.
+
+ 2) create an auxiliary list ALGS of algorithm families.
+    (detailed below, gives "alg_sum", "alg_complete", ...)
+
+ 3) create an auxiliary list KINDS of algebra contexts
+    (contains "usual", "numerical", "tropical", ...)
+
+ 4) extend ALGS with "context", "algorithms" and "automaton".
+
+ 5) make the cross product of KINDS and ALGS putting a "_" between
+    the two parts of each generated name.
+
+ 6) add this cross product to the MODULES list.
+
+The list of algorithm families (ALGS in step 2 above)
+=====================================================
+
+In Vaucanswig, an "algorithm family" is the set of
+algorithms declared in a single Vaucanson header file.
+
+Most families declare only one algorithm, but usually
+with several forms (using overloading). 
+
+In Vaucanswig, each algorithm family is related to a
+SWIG source file: src/vaucanswig_alg_(name).i 
+where "name" is the name of the algorithm family.
+
+Each family source file contains the following items:
+
+ - a link to the C++ header
+ 
+ - the definition of a bunch of SWIG macros which are
+   able to instanciate the algorithm _declarations_ for
+   the type set given as parameters.
+
+ - the definition of a bunch of SWIG macros which are
+   ablo to instanciate algorithm _wrappers_ for 
+   the type set given as parameters.
+ 
+To create the list of algorithm families and associated
+SWIG sources, proceed as follows:
+
+   Find all files in the Vaucanson includes
+   that declare algorithms using the "// INTERFACE:" 
+   construct.
+   
+   For each such include file, proceed as follows:
+
+     2.1) Prepend the base name of the file with "alg_" to
+         make a "family name".
+
+     2.2) Create src/vaucanswig_(family_name).i
+         containing the relevant SWIG code
+ 
+     2.3) put "(family_name)" in the ALGS list.
+
+The cross-product of contexts and generic code (step 5 above)
+=============================================================
+
+This is where you find all the magic. :)
+
+This is the step where *real* code (i.e. non-template)
+is produced. 
+
+The goal of this step is to build the list of SWIG modules names
+AND the source file for each SWIG module. The basic idea
+is simple. It relies on the following two facts:
+
+  1) each algorithm family defined above defines macros that take
+     types as parameters and produce non-template declarations
+     and definitions.
+
+  2) each algebra context defines a set of types, that fit
+     as parameters in the macros for algorithm families.
+
+Of course, the rest is _very_ simple then. Since we have two lists
+KINDS (contexts) and ALGS (algorithm families):
+
+For each K of KINDS, do:
+  For each A of ALGS, do:
+
+     5.1) Instanciate macros 
+             * from src/vaucanswig_alg_(A).i
+	     * using K
+	     * into src/vaucanswig_(K)_(A).i
+
+     5.2) Add (K)_(A) to the MODULES list.
+
+The following step is not fundamental, but required for later compilation:
+  
+  (still in the K loop)
+
+  5.3) add "(K)_context" to src/(K)_automaton.deps
+
+  For each algorithm family F, do:
+
+     5.4) add "(K)_automaton" to src/(K)_(F).deps
+     
+     5.5) add "(K)_(F)" to src/(K)_algorithms.deps
+
+  This can later be used to create dynamic link dependencies between
+  object code for modules (see build-process.txt).
+     
+This creates the following dependency graph:
+
+  core -> K1_context -> K1_automaton -> K1_F1 -> K1_algorithms
+                                     -> K1_F2 ->
+				     -> K1_F3 ->
+				     
+       -> K2_context -> K2_automaton -> K2_F1 -> K2_algorithms
+                                     -> K2_F2 ->
+				     -> K2_F3 ->
+
+  (and so on)
+
+The transparency property
+=========================
+
+At every level, a property can be recognized.
+
+If an algorithm foo() is declared (C++) in bar.h, then:
+
+   1) bar is the "algorithm family" of foo
+
+   2) for each selected context K, 
+      exactly one SWIG module exists and is called called "K_bar".
+
+   3) the goal is that at the end of the compilation, in the
+      target scripting language you can write:
+
+         K_bar.foo()
+
+      (or equivalent)	 
+
+What is NOT automatic
+=====================
+
+The work of the developer is:
+
+  - keeping // INTERFACE: tags in Vaucanson headers.
+
+  - deciding a list of contexts to instanciate in Vaucanswig.
+    
+  - running the generator for Vaucanswig generic code whenever
+    Vaucanson library is updated.
+
+  - distributing the generated generic sources and building rules
+    afterwards.
+
+Things not easy to change YET
+=============================
+
+K stands here for any algebra context.
+
+The set of K-dependent types available in wrapper code in 
+the // INTERFACE: tags is not yet easily configurable, because
+it involves a huge piece of hand-written dedicated code.
+
+For the moment, the following types are available for each
+context K:
+
+   Automaton		- the automaton type labeled by series
+   GenAutomaton		- the corresponding type labeled by expressions
+   Series		- the type of series in K
+   Exp			- the type of expressions in K
+   HList		- a type for lists of unsigned integer
+                          (to be used as automaton handlers where required)
+
+Adding more of these is not difficult, but very tedious. 
+It will be documented later.
+
+But still, this makes VERY DIFFICULT to bind in Vaucanswig
+any algorithm that operates on more than one algebra context at the
+same time.
+
+(VERY DIFFICULT == major work needed to change Vaucanswig)
+
