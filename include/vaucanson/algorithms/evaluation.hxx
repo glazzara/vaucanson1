@@ -159,8 +159,8 @@ namespace vcsn {
 	    b.del_edge(*i);
 	  }
 	loop_sum.star();
-	for_each_const_(in, in_sums)
-	  for_each_const_(out, out_sums)
+	for_each_const_(sums_t, in, in_sums)
+	  for_each_const_(sums_t, out, out_sums)
 	  {
 	    series_elt_t res = in->second * loop_sum * out->second;
 	    b.add_serie_edge(in->first, out->first, res);

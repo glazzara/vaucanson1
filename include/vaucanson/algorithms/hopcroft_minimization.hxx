@@ -34,10 +34,10 @@
 # include <set>
 # include <queue>
 # include <list>
-
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
@@ -51,19 +51,11 @@ namespace vcsn {
 			       output_t&		output,
 			       const input_t&		input)
   {
-    typedef typename input_t::series_t			    series_t;
-    typedef typename series_t::monoid_t			    monoid_t;
-
-    // FIXME : here we assume monoid is a free monoid -> concept checking ?
-    typedef typename monoid_t::alphabet_t	alphabet_t;
-    typedef typename alphabet_t::letter_t	letter_t;
-    
+    AUTOMATON_TYPES(input_t);
     typedef std::set<hstate_t>			delta_ret_t;
 
     int			max_states = 0;
-    for (typename input_t::state_iterator i = input.states().begin();
-	 i != input.states().end();
-	 ++i)
+    for_each_state(i, input)
       max_states = std::max(int(*i), max_states);
     ++max_states;
 
@@ -109,8 +101,7 @@ namespace vcsn {
     `-------------------------*/
     int nb_final = 0;
 
-    for (typename input_t::state_iterator p = input.states().begin(); 
-	 p != input.states().end(); ++p)
+    for_each_state(p, input)
       {
 	unsigned c = input.is_final(*p) ? 1 : 0;
 	nb_final += c;
@@ -143,16 +134,13 @@ namespace vcsn {
 	  inverse[i][j] = 0;
       }
 	
-    for (typename input_t::state_iterator p = input.states().begin();
-	 p != input.states().end();
-	 ++p)
+    for_each_state(p, input)
       for (unsigned e = 0; e < max_letters; ++e)
 	{
 	  delta_ret.clear();
-	  input.letter_deltac(delta_ret, *p, alphabet[e], delta_kind::states());
-	  for (typename delta_ret_t::iterator i = delta_ret.begin(); 
-	       i != delta_ret.end(); 
-	       ++i)
+	  input.letter_deltac(delta_ret, *p, alphabet[e], 
+			      delta_kind::states());
+	  for_all_(delta_ret_t, i, delta_ret)
 	    {
 	      if (inverse[*i][e] == 0)
 		inverse[*i][e] = new std::set<hstate_t>();
@@ -175,18 +163,13 @@ namespace vcsn {
 	unsigned a = c.second;
 	list_mat[p][a] = false;
 
-	//	std::cerr << "Part by : " << p << "," << a << std::endl;
 	/*----.
 	| (b) |
 	`----*/
 	std::list<unsigned> met_class;
-	for (typename std::list<hstate_t>::iterator b = part[p].begin();
-	     b != part[p].end(); ++b)
+	for_all_(std::list<hstate_t>, b, part[p])
 	  if (inverse[*b][a] != 0)
-	    for (typename std::set<hstate_t>::iterator q = 
-		   inverse[*b][a]->begin();
-		 q != inverse[*b][a]->end();
-		 ++q)
+	    for_all_(std::set<hstate_t>, q, *inverse[*b][a])
 	      {
 		unsigned i = class_[*q];
 		if (split[i] == 0)
@@ -203,16 +186,11 @@ namespace vcsn {
 	`----*/
 	std::queue<typename std::list<hstate_t>::iterator> to_erase;
 
-	for (typename std::list<hstate_t>::iterator b = part[p].begin();
-	     b != part[p].end(); ++b)
+	for_all_(std::list<hstate_t>, b, part[p])
 	  {
 	    if (inverse[*b][a] != 0)
-	      for (typename std::set<hstate_t>::iterator q = inverse[*b][a]->begin();
-		   q != inverse[*b][a]->end();
-		   ++q)
+	      for_all_(std::set<hstate_t>, q, *inverse[*b][a])
 		{
-		  //		  std::cerr << "predecesseur de " << *b << " : " << *q << std::endl;
-
 		  unsigned i = class_[*q];
 		  if (split[i] < part[i].size())
 		    {
@@ -229,7 +207,8 @@ namespace vcsn {
 			  part[i].erase(place[*q]);
 			  --split[i];;
 			  
-			  place[*q] = part[twin[i]].insert(part[twin[i]].end(), *q);
+			  place[*q] = 
+			    part[twin[i]].insert(part[twin[i]].end(), *q);
 			  class_[*q] = twin[i];
 			}
 		    }
@@ -241,7 +220,8 @@ namespace vcsn {
 	      {
 		typename std::list<hstate_t>::iterator b=to_erase.front();
 		part[p].erase(b);
-		place[*b] = part[max_partitions].insert(part[max_partitions].end(), *b);
+		place[*b] = 
+		  part[max_partitions].insert(part[max_partitions].end(), *b);
 		class_[*b] = max_partitions;
 	    
 		to_erase.pop();
@@ -252,9 +232,7 @@ namespace vcsn {
 	/*----.
 	| (d) |
 	`----*/
-	for (typename std::list<unsigned>::iterator b = met_class.begin(); 
-	     b != met_class.end(); 
-	     ++b)
+	for_all_(std::list<unsigned>, b, met_class)
 	  if (twin[*b] != 0)
 	    {
 	      for (unsigned e = 0; e < max_letters; ++e)
@@ -279,9 +257,7 @@ namespace vcsn {
 		    }
 		}
 	    }
-	for (typename std::list<unsigned>::iterator i = met_class.begin(); 
-	     i != met_class.end();
-	     ++i)
+	for_all_(std::list<unsigned>, i, met_class)
 	  {
 	    split[*i] = 0;
 	    twin[*i] = 0;
@@ -309,15 +285,7 @@ namespace vcsn {
 	// Get the first state of the partition => each state has the
 	// same behaviour
 	hstate_t s = part[i].front();
-	
-// 	for (typename std::list<hstate_t>::const_iterator j = part[i].begin();
-// 	     j != part[i].end();
-// 	     ++j)
-// 	  if (input->is_initial(s))
-// 	    {
-// 	      output->set_initial(out_states[i]);
-// 	      break;
-// 	    }
+
 	if (input.is_final(s))
 	  output.set_final(out_states[i]);
 
@@ -326,24 +294,23 @@ namespace vcsn {
 	  {
 	    delta_ret.clear();
 	    std::set<unsigned> already_linked;
-	    input.letter_deltac(delta_ret, s, alphabet[e], delta_kind::states());
-	    for (typename delta_ret_t::iterator out = delta_ret.begin(); 
-		 out != delta_ret.end(); 
-		 ++out)
+	    input.letter_deltac(delta_ret, s, alphabet[e], 
+				delta_kind::states());
+	      for_all_(delta_ret_t, out, delta_ret)
 	      {
 		unsigned c = class_[*out];
 		if (already_linked.find(c) == already_linked.end())
 		  {
 		    already_linked.insert(c);
-		    output.add_letter_edge(out_states[i], out_states[c], alphabet[e]);
+		    output.add_letter_edge(out_states[i], 
+					   out_states[c], 
+					   alphabet[e]);
 		  }
 	      }
 	  }
       }
 
-    for (typename input_t::initial_iterator i = input.initial().begin();
-	 i != input.initial().end();
-	 ++i)
+    for_each_initial_state(i, input)
       output.set_initial(out_states[class_[*i]]);
   }
   
@@ -371,18 +338,12 @@ namespace vcsn {
 	      output_t&			output,
 	      const input_t&		input)
   {
+    AUTOMATON_TYPES(input_t);
     typedef std::set<hstate_t>			     	      delta_ret_t;
-    typedef typename input_t::label_t		       	      label_t;
-    typedef typename input_t::series_t			      series_t;
-    typedef typename series_t::monoid_t		       	      monoid_t;
-    typedef typename monoid_t::alphabet_t		      alphabet_t;
-    typedef typename alphabet_t::letter_t     		      letter_t;
 
     unsigned			max_states = 0;
 
-    for (typename input_t::state_iterator i = input.states().begin();
-	 i != input.states().end();
-	 ++i)
+    for_each_state(i, input)
       max_states = std::max(unsigned(*i), max_states);
     ++max_states;
     // to avoid special case problem (one state initial and final ...)

@@ -33,7 +33,7 @@
 # include <map>
 # include <set>
 # include <queue>
-
+# include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/accessible.hh>
 
@@ -55,17 +55,12 @@ namespace vcsn {
 			 output_t&	       	output,
 			 const input_t&		input)
   {    
+    AUTOMATON_TYPES(input_t);
     typedef typename input_t::series_t			    series_t;
-    typedef typename series_t::monoid_t			    monoid_t;
     typedef typename std::set<hstate_t>	                    subset_t;
-
     typedef typename std::map<subset_t, hstate_t>           subset_set_t;
     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
-   
-    typedef typename monoid_t::alphabet_t		    alphabet_t;
-    typedef typename alphabet_t::letter_t		    letter_t;
-
-    typedef std::vector<hstate_t>				    delta_ret_t;
+    typedef std::vector<hstate_t>			    delta_ret_t;
     
     hstate_t		   qi_hstate = output.add_state();
     subset_t		   qi;
@@ -83,9 +78,7 @@ namespace vcsn {
     bool is_final = false;
     aim.reserve(input.states().size());
 
-    for (typename input_t::initial_iterator i = input.initial().begin();
-	 i != input.initial().end();
-	 ++i)
+    for_each_initial_state(i, input)
       {
 	qi.insert(*i);
 	is_final |= input.is_final(*i);
@@ -110,9 +103,7 @@ namespace vcsn {
       s_hstate = subset_set[s];
       path.pop();
       
-      for (typename alphabet_t::const_iterator e = alphabet.begin();
-	   e != alphabet.end();
-	   ++e)
+      for_each_letter(e, alphabet)
 	{
 	  q.clear();
 	  is_final = false;
@@ -122,8 +113,7 @@ namespace vcsn {
 	      aim.clear();
 	      // FIXME : Use a more efficient version of delta !
 	      input.letter_deltac(aim, *j, *e, delta_kind::states());
-	      for (typename delta_ret_t::const_iterator k = aim.begin(); 
-		   k != aim.end(); ++k)
+	      for_all_const_(delta_ret_t, k, aim)
 		{
 		  hstate_t state = *k;
 		  q.insert(state);
@@ -193,13 +183,8 @@ namespace vcsn {
   do_is_deterministic(const AutomataBase<A>&	,
 		      const input_t&		input)
   {
+    AUTOMATON_TYPES(input_t);
     typedef typename std::set<hedge_t>		delta_ret_t;	
-    typedef typename input_t::series_t		series_t;
-    typedef typename input_t::serie_t		serie_t;
-    typedef typename input_t::serie_value_t	serie_value_t;
-    typedef typename series_t::semiring_t	semiring_t;
-    typedef typename input_t::series_elt_t     	series_elt_t;
-    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename series_elt_t::support_t	support_t;
 
     delta_ret_t	delta_ret;
@@ -214,16 +199,12 @@ namespace vcsn {
     if (input.initial().size() != 1)
       return false;
 
-    for (typename input_t::state_iterator i = input.states().begin();
-	 i != input.states().end();
-	 ++i)
+    for_each_state(i, input)
       {
 	delta_ret.clear();
 	input.deltac(delta_ret, *i, delta_kind::edges());
 	// FIXME : O(n^2) => O(nlog(n))
-	for (typename delta_ret_t::const_iterator j = delta_ret.begin(); 
-	     j != delta_ret.end(); 
-	     ++j)
+	for_all_const_(delta_ret_t, j, delta_ret)
 	  {
 	    series_elt_t s = input.serie_of(*j);
 	    typename delta_ret_t::const_iterator k = j;
@@ -231,9 +212,7 @@ namespace vcsn {
 	    for (; k != delta_ret.end(); ++k)
 	      {
 		serie_t s_ = input.serie_of(*k);
-		for (typename support_t::iterator supp = s.supp().begin();
-		     supp != s.supp().end();
-		     ++supp)
+		for_all_(support_t, supp, s.supp())
 		  if (s_.get(*supp) != zero_semiring)
 		    return false;
 	      }

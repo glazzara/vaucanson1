@@ -1,5 +1,15 @@
 2003-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/determinize.hxx,
+	  include/vaucanson/algorithms/hopcroft_minimization.hxx,
+	  include/vaucanson/algorithms/evaluation.hxx:
+		Use new macros.
+
+	* include/vaucanson/tools/usual_macros.hh:
+		Protect container in macro call.
+
+2003-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/eval.hxx,
 	  include/vaucanson/algorithms/backward_closure.hxx,
 	  include/vaucanson/algorithms/evaluation.hxx:
