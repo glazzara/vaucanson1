@@ -36,30 +36,6 @@ namespace vcsn {
       assert(!"No random generator for this type ");
     }
 
-    char 
-    RandomGenerator<char>::do_it()
-    {
-      float f = float(rand()) / float(RAND_MAX);
-      unsigned offs = unsigned((26 * f));
-      return ('a' + offs);
-    }
-
-    bool
-    RandomGenerator<bool>::do_it()
-    {
-      unsigned r = rand() * 2 / RAND_MAX;
-      if (r < 1) 
-	return true;
-      else
-	return false;
-    }
-
-    int
-    RandomGenerator<int>::do_it()
-    {
-      return rand();
-    }
-
     template <class Iterator, class OutputIterator>
     void random_sample_n(Iterator first, Iterator end, 
 			 OutputIterator out, unsigned n)

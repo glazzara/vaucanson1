@@ -39,19 +39,35 @@ namespace vcsn {
     template <>
     struct RandomGenerator<char>
     {
-      static char do_it();
+      static char do_it()
+      {
+	float f = float(rand()) / float(RAND_MAX);
+	unsigned offs = unsigned((26 * f));
+	return ('a' + offs);
+      }
     };
 
     template <>
     struct RandomGenerator<bool>
     {
-      static bool do_it();
+      static bool do_it()
+      {
+	unsigned r = rand() * 2 / RAND_MAX;
+	if (r < 1) 
+	  return true;
+	else
+	  return false;
+      }
     };
 
     template <>
     struct RandomGenerator<int>
     {
-      static int do_it();
+      static int do_it()
+      {
+	return rand();
+      }
+
     };
 
     template <class InputIterator, class OutputIterator>

@@ -20,6 +20,7 @@
 #ifndef VCSN_TOOLBOX_ARG_HH
 # define VCSN_TOOLBOX_ARG_HH
 
+# include <list>
 # include <map>
 # include <vector>
 # include <string>
@@ -59,10 +60,12 @@ namespace toolbox {
     OptionsValues(const std::vector<Options>& options, 
 		  unsigned argc, 
 		  const char**argv);
-  
-    const int*	      			get_int(std::string name);
-    const std::string*		       	get_string(std::string name);
-    void				usage_msg(void);
+
+    bool				get(std::string name) const;
+    const int*	      			get_int(std::string name) const;
+    const std::string*		       	get_string(std::string name) const;
+    std::list<std::string>		get_remainder() const;
+    void				usage_msg(void) const;
 
   private:
     static std::string			type_to_label(option_type_e);
@@ -70,6 +73,7 @@ namespace toolbox {
     const char**			argv_;
     unsigned				argc_;
     const std::vector<Options>		options_;
+    std::list<std::string>		remainder_;
   };
 
 

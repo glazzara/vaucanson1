@@ -41,7 +41,7 @@ namespace toolbox {
     return "[any]";
   }
 
-  void OptionsValues::usage_msg(void)
+  void OptionsValues::usage_msg(void) const
   {
     std::ostringstream	cmd;
     std::ostringstream  s;
@@ -93,7 +93,8 @@ namespace toolbox {
 		  ++i;
 		else
 		  {
-		    std::cerr << o->name << " expected an argument." << std::endl;
+		    std::cerr << o->name << " expected an argument." 
+			      << std::endl;
 		    exit(EXIT_FAILURE);
 		  }
 
@@ -103,7 +104,8 @@ namespace toolbox {
 		    int v = strtol(argv[i], &endptr, 10);
 		    if (endptr == argv[i])
 		      {
-			std::cerr << o->name << " expected an integer." << std::endl;
+			std::cerr << o->name << " expected an integer." 
+				  << std::endl;
 			exit(EXIT_FAILURE);
 		      }
 		    option_value val;
@@ -128,6 +130,8 @@ namespace toolbox {
 		values_[o->name] = val;
 	      }
 	  }
+	else
+	  remainder_.push_front(argv[i]);
     if (nb_non_optional != 0)
       {
 	for (std::vector<Options>::const_iterator o = options.begin();
@@ -138,8 +142,15 @@ namespace toolbox {
 	exit(EXIT_FAILURE);
       }
   }
+
+  bool		OptionsValues::get(std::string name) const
+  {
+    std::map<std::string, option_value>::const_iterator i =
+      values_.find(name);
+    return (i != values_.end());
+  }
   
-  const int*	OptionsValues::get_int(std::string name)
+  const int*	OptionsValues::get_int(std::string name) const
   {
     std::map<std::string, option_value>::const_iterator i =
       values_.find(name);
@@ -153,7 +164,12 @@ namespace toolbox {
     return 0;
   }
 
-  const std::string*   OptionsValues::get_string(std::string name)
+  std::list<std::string> OptionsValues::get_remainder() const
+  {
+    return remainder_;
+  }
+
+  const std::string*   OptionsValues::get_string(std::string name) const
   {
     std::map<std::string, option_value>::const_iterator i =
       values_.find(name);

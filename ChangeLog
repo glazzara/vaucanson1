@@ -1,3 +1,24 @@
+2002-11-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.129)
+	* include/vaucanson/algebra/concrete/series/:
+		series.hh, series.hxx: minor changes.
+		krat_exp_parser.hh: parse bug fixed.
+	* include/vaucanson/tools/usual.hh:
+		add AUTOMATON_TYPES_EXACT_ macro.
+	* include/vaucanson/misc/:
+		random.hh, random.hxx:
+		moved externally defined specialized methods to internally
+		defined methods since specialized methods is code not
+		meta-code.
+ 	* include/vaucanson/misc/fsm_dump.hh: fixed load.
+	* src/demos/fsm:
+	* generate_toolbox.sh: add a vcsn_krat2auto.
+	* usual_automaton_t/toolbox.hh: add a "series" function.
+	* usual_automaton_t/aclocal.m4: removed.
+	* usual_automaton_t/Makefile.am: minor.
+	* README: add some explanations.
+	* usual_automaton_t/arg.[cc,hh]: minor.
+
 2002-10-31  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.128)
 	* include/vaucanson/algebra/concept:

@@ -3,6 +3,13 @@
 #
 # $Id$
 
+# Check arguments
+if [ $# -ne 1 ]; then
+    echo "usage: ";
+    echo "  generate_toolbox.sh  destination_dir";
+    exit 1
+fi
+
 # Global variables
 DESTDIR=$1
 
@@ -37,6 +44,51 @@ cat > $FILE <<EOF
      automaton_t automaton = gen.generate(nb_states, nb_edges);
      misc::fsm_dump(std::cout, automaton);
      return EXIT_SUCCESS;
+   }
+EOF
+
+# vcsn_kratexp2auto.cc
+FILE=$DESTDIR/vcsn_kratexp2auto.cc
+cat > $FILE <<EOF
+   #include <iostream>
+   #include "toolbox.hh"
+    #include "arg.hh"
+#include <vaucanson/algebra/concrete/series/rat/exp.hh>
+#include <vaucanson/algebra/concrete/series/krat.hh>
+#include <vaucanson/algorithms/glushkov.hh>
+
+   #include <vaucanson/tools/gen_random.hh>
+   #include <vaucanson/misc/fsm_dump.hh> 
+   #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+    using namespace vcsn;
+    using namespace toolbox;
+
+   int main(int argc, const char **argv)
+   {
+  AUTOMATON_TYPES_EXACT(automaton_t);
+     Options  options[2] =
+       {
+	 { "-gluhskov", o_none, "prefer glushkov construction.", true }
+       };
+     OptionsValues values(std::vector<Options>(options, options+1),argc,argv);
+     std::list<std::string> remainder = values.get_remainder();
+     if (remainder.size() < 1)
+       {
+	 values.usage_msg();
+	 exit(EXIT_FAILURE);
+       }
+     std::string krat_exp_string = remainder.front();
+     alphabet_t alpha;
+     Element<series_t, rat::exp<monoid_elt_value_t, weight_value_t> >
+       krat_exp(series());
+     parse(krat_exp_string, krat_exp);
+     automaton_t automaton;
+     automaton.create();
+     automaton.series() = series();
+     glushkov(automaton, krat_exp.value());
+     misc::fsm_dump(std::cout, automaton);
+     return EXIT_SUCCESS;
+
    }
 EOF
 
@@ -249,20 +301,24 @@ CXXFLAGS = -Wall -O3 -DNDEBUG -Wno-unused -ftemplate-depth-99
 
 bin_PROGRAMS = \
     vcsn_random_generator    \
+    vcsn_kratexp2auto	     \
     vcsn_determinize	     \
     vcsn_minimize	     \
     vcsn_closure	     \
     vcsn_prune		     \
     vcsn_reverse	     \
+    vcsn_union		     \
     vcsn_intersect	     \
     vcsn_dotdump
-vcsn_random_generator_SOURCES   = vcsn_random_generator.cc arg.cc
-vcsn_determinize_SOURCES        = vcsn_determinize.cc arg.cc
-vcsn_dotdump_SOURCES		= vcsn_dotdump.cc arg.cc
-vcsn_minimize_SOURCES		= vcsn_minimize.cc arg.cc
-vcsn_closure_SOURCES		= vcsn_closure.cc arg.cc
-vcsn_reverse_SOURCES		= vcsn_reverse.cc arg.cc
-vcsn_intersect_SOURCES		= vcsn_intersect.cc arg.cc
-vcsn_prune_SOURCES		= vcsn_prune.cc arg.cc
+vcsn_union_SOURCES		= vcsn_union.cc arg.cc toolbox.cc
+vcsn_random_generator_SOURCES   = vcsn_random_generator.cc arg.cc toolbox.cc
+vcsn_kratexp2auto_SOURCES	= vcsn_kratexp2auto.cc arg.cc toolbox.cc
+vcsn_determinize_SOURCES        = vcsn_determinize.cc arg.cc toolbox.cc
+vcsn_dotdump_SOURCES		= vcsn_dotdump.cc arg.cc toolbox.cc
+vcsn_minimize_SOURCES		= vcsn_minimize.cc arg.cc toolbox.cc
+vcsn_closure_SOURCES		= vcsn_closure.cc arg.cc toolbox.cc
+vcsn_reverse_SOURCES		= vcsn_reverse.cc arg.cc toolbox.cc
+vcsn_intersect_SOURCES		= vcsn_intersect.cc arg.cc toolbox.cc
+vcsn_prune_SOURCES		= vcsn_prune.cc arg.cc toolbox.cc
 EXTRA_DIST = arg.hh toolbox.hh
 EOF

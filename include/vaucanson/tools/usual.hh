@@ -88,7 +88,35 @@ namespace vcsn {
  typedef typename AutoType::label_t		    Prefix##label_t;	      \
  typedef typename AutoType::tag_t		    Prefix##tag_t;
 
-// the following macros assume you have used a macro AUTOMATON_TYPES
+#define AUTOMATON_TYPES_EXACT_(AutoType,Prefix)		       	      \
+ typedef AutoType			    Prefix##automaton_t;      \
+ typedef AutoType::states_t		    Prefix##states_t;	      \
+ typedef AutoType::state_iterator	    Prefix##state_iterator;  \
+ typedef AutoType::edges_t		    Prefix##edges_t;	      \
+ typedef AutoType::edge_iterator	    Prefix##edge_iterator;    \
+ typedef AutoType::initial_t	            Prefix##initial_t;	      \
+ typedef AutoType::final_t		    Prefix##final_t;	      \
+ typedef AutoType::initial_iterator	    Prefix##initial_iterator; \
+ typedef AutoType::final_iterator	    Prefix##final_iterator;   \
+ typedef AutoType::monoid_t		    Prefix##monoid_t;	      \
+ typedef AutoType::monoid_elt_t	            Prefix##monoid_elt_t;     \
+ typedef Prefix##monoid_elt_t::value_t	    Prefix##monoid_elt_value_t; \
+ typedef Prefix##monoid_t::alphabets_elt_t  Prefix##alphabets_elt_t;  \
+ typedef Prefix##monoid_t::alphabet_t       Prefix##alphabet_t;	      \
+ typedef Prefix##alphabet_t::iterator       Prefix##alphabet_iterator;\
+ typedef Prefix##alphabet_t::letter_t       Prefix##letter_t;	      \
+ typedef AutoType::weights_t                Prefix##weights_t;	      \
+ typedef AutoType::series_t                 Prefix##series_t;	      \
+ typedef AutoType::series_elt_t             Prefix##series_elt_t;     \
+ typedef Prefix##series_elt_t::weight_t     Prefix##weight_t;         \
+ typedef Prefix##weight_t::value_t          Prefix##weight_value_t;   \
+ typedef AutoType::label_t		    Prefix##label_t;	      \
+ typedef AutoType::tag_t		    Prefix##tag_t;
+
+#define AUTOMATON_TYPES(AutoType)           AUTOMATON_TYPES_(AutoType,)
+#define AUTOMATON_TYPES_EXACT(AutoType)     AUTOMATON_TYPES_EXACT_(AutoType,)
+
+// the following macros assume you have used a macro AUTOMATON_TYPES*
 // previously.
 
 #define for_each_state(S, A) \
@@ -110,9 +138,6 @@ namespace vcsn {
     for (initial_iterator S = A.inital().begin(); 	\
 	 S != A.initial().end(); 			\
 	 ++S)
-
-
-#define AUTOMATON_TYPES(AutoType)                   AUTOMATON_TYPES_(AutoType,)
 
 #define zero_	zero(SELECT(typename series_elt_t::value_t))
 #define one_	identity(SELECT(typename series_elt_t::value_t))

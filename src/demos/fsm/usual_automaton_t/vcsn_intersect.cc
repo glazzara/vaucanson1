@@ -3,7 +3,7 @@
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
    #include <vaucanson/misc/fsm_dump.hh> 
-   #include <vaucanson/algorithms/union.hh>
+   #include <vaucanson/algorithms/product.hh>
    using namespace vcsn;
 
    int main(int argc, char **argv)
@@ -16,7 +16,7 @@
      misc::fsm_load(lhs, lhs_a);
      automaton_t rhs_a;
      misc::fsm_load(rhs, rhs_a);  
-     automaton_t auto_m = auto_union(lhs_a, rhs_a);
+     automaton_t auto_m = auto_product(lhs_a, rhs_a);
 	misc::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }

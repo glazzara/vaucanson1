@@ -11,5 +11,33 @@
 	comparison with fsm when it is instantiated with different
 	implementation.
 
+USAGE
+-----
+	1. create a directory (say "automaton_t") ;
+	
+	2. create toolbox.hh and toolbox.cc into it. These files must
+	define a type "automaton_t" which is the type of automaton and
+	a function "series" which returns the series that are
+	used in the toolbox. (for example, look at the distributed
+	"usual_automaton_t/toolbox.[hh,cc]")
+
+	3. use the "./generate_toolbox.sh" script to generate the
+	toolbox files, like this:
+	
+		./generate_toolbox.sh the_directory_of_1
+
+	4. in the directory, use the classical:
+
+		autoreconf
+		./configure
+		make
+
+NOTICE
+------
+
+	Please send any remarks or wanted features at 
+
+			vaucanson@lrde.epita.fr
+
 
 [1] http://www.research.att.com/~mohri/fsm/

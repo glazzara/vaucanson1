@@ -361,7 +361,7 @@ namespace vcsn {
 	  {
 	    Element<S, T> rhs;
 	    accept(toks, dot);
-	    parse_factor(toks, rhs);
+	    parse_exp(toks, rhs);
 	    exp = lhs * rhs;
 	    return;
 	  }
@@ -377,7 +377,7 @@ namespace vcsn {
 	  {
 	    Element<S, T> rhs;
 	    accept(toks, plus);
-	    parse_term(toks, rhs);
+	    parse_exp(toks, rhs);
 	    exp = lhs + rhs;
 	    return;
 	  }

@@ -156,9 +156,16 @@ namespace vcsn {
 	    { 
 	      tmp = next_token(line);
 	      line = tmp.second;
-	      tokens.push_back(tmp.first);
+	      if (tmp.first.length() != 0)
+		tokens.push_back(tmp.first);
 	      if (line.length() == 0)
 		break;
+	    }
+	  if (tokens.size() == 0)
+	    {
+	      nb--;
+	      stock.resize(nb);
+	      break;
 	    }
 	  if (tokens.size() == 1)
 	    {
@@ -214,9 +221,6 @@ namespace vcsn {
 	    }
 	}
       a = automaton;
-      std::cerr << a.states().size() << std::endl;
-      std::cerr << to_h.size() << std::endl;
-      SAVE_AUTOMATON_DOT("/tmp/","fsm_in", a, 0); 
     }
 
   } // misc 
