@@ -181,6 +181,12 @@ namespace vcsn
   template <typename S, typename T>
   bool operator== (const PartialExp<S, T>& e1, const PartialExp<S, T>& e2);
 
+  template <typename S, typename T>
+  bool unweighted_eq(const PartialExp<S, T>& e1, const PartialExp<S, T>& e2);
+
+  template <typename S, typename T>
+  bool unweighted_inf(const PartialExp<S, T>& e1, const PartialExp<S, T>& e2);
+
 } // vcsn
 
 

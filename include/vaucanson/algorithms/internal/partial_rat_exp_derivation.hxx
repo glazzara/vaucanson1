@@ -40,11 +40,24 @@
 namespace vcsn {
 
   template <typename T>
-  void list_fusion_here(std::list<T>& dst, const std::list<T>& src)
+  void list_fusion_here(std::list<T>& dst, std::list<T>& src)
   {
-    typedef typename std::list<T>::const_iterator	const_iterator;
-    for (const_iterator i = src.begin(); i != src.end(); ++i)
-      dst.push_back(*i);
+    typedef typename std::list<T>::iterator		iterator;
+    typedef typename T::series_set_t			series_set_t;
+    typedef typename T::series_set_elt_value_t		series_set_elt_value_t;
+
+    src.sort(unweighted_inf<series_set_t, series_set_elt_value_t>);
+    dst.sort(unweighted_inf<series_set_t, series_set_elt_value_t>);
+    dst.merge(src, unweighted_inf<series_set_t, series_set_elt_value_t>);
+    for (iterator i = dst.begin(); i != dst.end(); ++i)
+    {
+      iterator next = i;
+      if (++next != dst.end() and unweighted_eq(*next, *i))
+      {
+	i->begin().semiring_elt() += next->begin().semiring_elt();
+	dst.erase(next);
+      }
+    }
   }
 
   template <typename S, typename T>

@@ -1,4 +1,12 @@
-m2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+2004-07-16  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+	Change derivation behavior when performing union of two expression sets.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx: Add
+	functions to compare expressions without their first weight.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx,
 	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh:

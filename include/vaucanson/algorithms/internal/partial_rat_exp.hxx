@@ -384,6 +384,55 @@ namespace vcsn
     return (i1 == e1.end() && i2 == e2.end());
   }
 
+  template <typename S, typename T>
+  bool unweighted_inf(const PartialExp<S, T>& e1, const PartialExp<S, T>& e2)
+  {
+    typedef
+    typename PartialExp<S, T>::series_set_elt_value_t	series_set_elt_value_t;
+    typename PartialExp<S, T>::const_iterator i1 = e1.begin();
+    typename PartialExp<S, T>::const_iterator i2 = e2.begin();
+
+    for (i1++, i2++; i1 != e1.end() and i2 != e2.end(); )
+    {
+      if (series_set_elt_value_t(i1.node()) != series_set_elt_value_t(i2.node()))
+	break;
+      ++i1;
+      ++i2;
+      if (i1.semiring_elt() != i2.semiring_elt())
+	break;
+      ++i1;
+      ++i2;
+    }
+    if (i1 == e1.end() || i2 == e2.end())
+      return (i1 == e1.end() && i2 != e2.end());
+    else if (i1.on_node())
+      return series_set_elt_value_t(i1.node()) < series_set_elt_value_t(i2.node());
+    else
+      return i1.semiring_elt() < i2.semiring_elt();
+  }
+  
+  template <typename S, typename T>
+  bool unweighted_eq(const PartialExp<S, T>& e1, const PartialExp<S, T>& e2)
+  {
+    typedef
+    typename PartialExp<S, T>::series_set_elt_value_t	series_set_elt_value_t;
+    typename PartialExp<S, T>::const_iterator i1 = e1.begin();
+    typename PartialExp<S, T>::const_iterator i2 = e2.begin();
+
+    for (i1++, i2++; i1 != e1.end() and i2 != e2.end(); )
+    {
+      if (series_set_elt_value_t(i1.node()) != series_set_elt_value_t(i2.node()))
+	break;
+      ++i1;
+      ++i2;
+      if (i1.semiring_elt() != i2.semiring_elt())
+	break;
+      ++i1;
+      ++i2;
+    }
+    return (i1 == e1.end() && i2 == e2.end());
+  }
+
 } // vcsn
 
 #endif // ! VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_HXX
