@@ -32,11 +32,12 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_COUPLE_LETTER_HH
 
-# include <vaucanson/algebra/concept/letter.hh>
-# include <vaucanson/algebra/concept/freemonoid_base.hh>
-
+# include <climits>
 # include <string>
 # include <iostream>
+
+# include <vaucanson/algebra/concept/letter.hh>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 // Here are functions to manipulate pairs.
 
@@ -59,7 +60,7 @@ namespace vcsn
 	   *
 	   * FIXME: Maybe doing this is not a good idea?
 	   */
-	  cardinal = unsigned (-1)
+	  cardinal = INT_MAX
 	};
     };
 

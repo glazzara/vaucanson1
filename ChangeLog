@@ -1,3 +1,8 @@
+2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh: Use
+	INT_MAX instead of unsigned (-1).
+
 2004-10-11  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* NEWS: Add an entry about replacement of verbalize by expand.
