@@ -1,3 +1,8 @@
+2004-05-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/vaucanswig/meta/vaucanswig_algo_common.i: Minor fix to
+	make Vaucanswig work.
+
 2004-05-05  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/tests/transducers/realtime_test.hh: Modify the test to avoid

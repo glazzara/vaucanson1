@@ -31,7 +31,7 @@ using namespace Kind ##_types;
 
 template<typename T>
 static inline
-  std::list<int> list_of_structure(const std::set<T>& set_)
+  std::list<int> list_of_set(const std::set<T>& set_)
   { return std::list<int>(set_.begin(), set_.end()); }
 %}
 %enddef
