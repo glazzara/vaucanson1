@@ -1,3 +1,15 @@
+2003-07-04  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* README: Fix.
+	* configure.ac: Use new test-suites.
+	* include/Makefile.am: New file.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh:
+		(exp): Make typedefs public.
+	* include/vaucanson/algorithms/standard_of.hxx: Fix.
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+		Typo.
+	* src/tests/tests-suites/generate-all.sh: New.
+
 2003-07-04  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata.hh: Use

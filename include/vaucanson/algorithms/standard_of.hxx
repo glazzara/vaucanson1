@@ -118,20 +118,7 @@ namespace vcsn {
 
     MATCH__(RightWeight, node, w)
     {
-<<<<<<< 0.344(w)/include/vaucanson/algorithms/standard_of.hxx Sun, 29 Jun 2003 14:54:35 +0200 yann (vaucanson/e/41_glushkov.h 1.15 600)
       automaton_ptr_t auto_ = match(node);
-=======
-      node->accept(*this);
-      assert(!w_stack.empty());
-      weight_t k = w_stack.top();
-      if (!k.starable())
-	{
-	  std::cerr<< "Star not defined." << std::endl;
-	  return;
-	}
-      k.star();
->>>>>>> 0.345/include/vaucanson/algorithms/standard_of.hxx Thu, 03 Jul 2003 13:25:13 +0200 raph (vaucanson/e/41_glushkov.h 1.16 664)
-
       for (typename automaton_t::initial_iterator i = auto_->initial().begin();
 	   i != auto_->initial().end();
 	   ++i)

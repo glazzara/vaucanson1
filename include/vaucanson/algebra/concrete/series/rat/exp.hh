@@ -45,7 +45,7 @@ namespace vcsn {
     template<typename LetterT, typename WeightT>
     class exp
     {
-    protected:
+    public:
       typedef rat::Node<LetterT, WeightT>			node_t;
       typedef typename rat::Node<LetterT, WeightT>::type        type;
       typedef rat::Zero<LetterT, WeightT>			n_zero_t;

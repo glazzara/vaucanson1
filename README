@@ -26,7 +26,7 @@ Vaucanson.
 Please send any question or comments to <vaucanson@lrde.epita.fr>, or
 <vaucanson-bugs@lrde.epita.fr>.
 
-----------------------------------------------------------------------------
+----------------------------------------------------------------------
 INSTALL
 
 To install Vaucanson on your system, type the classical sequence :
@@ -35,14 +35,14 @@ To install Vaucanson on your system, type the classical sequence :
 	make check
 	make install (as root)
 
-Notice that an installation is done for a particular compiler since
-./configure enables some workarounds and, consequently, users must
-compile with the same compiler to avoid compatibility problems.
+Notice that an installation is  done for  a particular compiler  since
+./configure  enables  some workarounds  and,  consequently, users must
+compile   with the same compiler     to avoid compatibility problems.  
 
-----------------------------------------------------------------------------
+----------------------------------------------------------------------
 REQUIREMENTS
 
-Vaucanson was  only tested with  g++-3.0.4, g++-3.1.0, g++-2.95.4. The
+Vaucanson    was  only tested     with      g++-3.3 and ICC.     The
 code is written  in respect to  the ISO standard   to permit a  higher
 portability in the future.
 
@@ -50,7 +50,13 @@ Moreover, high  verbose mode of the testing  suites uses the  AT&T dot
 format to  save automaton  in a human  readable file.  Use Graphviz to
 visualize these .dot files.
 
-----------------------------------------------------------------------------
+----------------------------------------------------------------------
+LICENCE
+
+Vaucanson is released under the GNU LESSER GENERAL PUBLIC LICENCE.
+See the LICENCE file for details.
+
+----------------------------------------------------------------------
 CONTACTS
 
 * mail: vaucanson@lrde.epita.fr

@@ -32,14 +32,11 @@
 
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
+# include <vaucanson/algebra/concrete/series/krat.hh>
 # include <vaucanson/misc/contract.hh>
 
 namespace vcsn {
   
-/*****************************************************************************/
-/***************************** Usefull functions *****************************/
-/*****************************************************************************/
-
   template <typename T>
   void list_fusion_here(std::list<T>& dst, const std::list<T>& src)
   {
@@ -66,10 +63,6 @@ namespace vcsn {
     for (typename list_t::iterator i = l.begin(); i != l.end(); ++i)
       i->insert(elm);
   }
-
-/*****************************************************************************/
-/********************************** Matcher **********************************/
-/*****************************************************************************/
 
   // FIXME: make list be a unique container
   template <typename Series, typename T>
@@ -156,7 +149,7 @@ namespace vcsn {
 
       std::pair<weight_t, bool> ret =
 	constant_term(series(series_impl_t(node)));
-      if ((ret.second == false) || (ret.first.stareable() == false))
+      if ((ret.second == false) || (ret.first.starable() == false))
       {
 	undefined = true;
 	return;

@@ -148,6 +148,14 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/transpose.hxx			     \
 	vaucanson/algorithms/trim.hh				     \
 	vaucanson/algorithms/trim.hxx				     \
+	vaucanson/algorithms/internal/build_pattern.hh			 \
+	vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh	 \
+	vaucanson/algorithms/internal/partial_rat_exp_derivation.hh	 \
+	vaucanson/algorithms/internal/partial_rat_exp.hh		 \
+	vaucanson/algorithms/internal/build_pattern.hxx			 \
+	vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx	 \
+	vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx	 \
+	vaucanson/algorithms/internal/partial_rat_exp.hxx		 \
 	vaucanson/automata/concept/automata_base.hh		     \
 	vaucanson/automata/concept/automata_base.hxx		     \
 	vaucanson/automata/concept/automata.hh			     \
