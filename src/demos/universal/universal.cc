@@ -1,4 +1,4 @@
-#include <vaucanson/vaucanson_boolean_automaton.hh>
+#include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/algorithms/complete.hh>

@@ -25,7 +25,7 @@ headers that contain shortcuts for the basic usage of the library.
 The following listing is a valid Vaucanson program:
 
 \begin{code}
-1  #include <vaucanson/vaucanson_boolean_automaton.hh>
+1  #include <vaucanson/boolean_automaton.hh>
 2  using namespace vcsn::boolean_automaton;
 3  int main()
 4  {
@@ -54,7 +54,7 @@ alphabet we are working with. The type \verb!alphabet_t! is predefined
 into the header. We obtain an object instance called \verb!alphabet!.
 \item \textbf{line 6 and 7}: \verb!alphabet! is an object instance
 that provides services. For example, we can insert 'a' and 'b' into
-the alphabet (other services can be consulted in the file 
+the alphabet (other services can be consulted in the file
 \verb!vaucanson/algebra/concept/alphabets_base.hh!).
 \item \textbf{line 8}: The function \verb!new_automaton! defined in
 the header takes an alphabet and returns a fresh empty automaton. Here,
@@ -62,10 +62,10 @@ we store this automaton into the variable \verb!a!.
 \item \textbf{line 9 and 10}: As an object instance, \verb!a! provides
 services like the ability to create a new state. This state is
 characterized by a handler (concretely, a little integer). In Vaucanson,
-every handler for state has the \verb!hstate_t! type. 
+every handler for state has the \verb!hstate_t! type.
 \item \textbf{line 11 and 12}: \verb!a! can also change the status of
 its state. For example, the \verb!set_initial! method mark a state as
-initial. 
+initial.
 \item \textbf{line 13 and 14}: We can define a transition between two
 states labelled by a letter using the method \verb!add_letter_edge!.
 The other methods that the user can expect from an automaton are located in
@@ -104,7 +104,7 @@ the following code, the program build an automaton and compute its
 associated deterministic automaton.
 
 \begin{code}
-1  #include <vaucanson/vaucanson_boolean_automaton.hh>
+1  #include <vaucanson/boolean_automaton.hh>
 2  #include <vaucanson/standard_algorithms.hh>
 3  using namespace vcsn::boolean_automaton;
 4  int main()
