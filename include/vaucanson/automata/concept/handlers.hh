@@ -67,31 +67,31 @@ namespace vcsn {
   typedef handler<state_h> hstate_t;
   typedef handler<edge_h> hedge_t;
 
+  template<typename kind>					
+  bool operator==(const handler<kind>& h1, 
+		  const handler<kind>& h2);      
+
+  template<typename kind>					
+  bool operator!=(const handler<kind>& h1, 
+		  const handler<kind>& h2);      
+
+  template<typename kind>					
+  bool operator<(const handler<kind>& h1, 
+		 const handler<kind>& h2);      
+
+  template<typename kind>					
+  bool operator>(const handler<kind>& h1, 
+		 const handler<kind>& h2);      
+
+  template<typename kind>					
+  bool operator<=(const handler<kind>& h1, 
+		  const handler<kind>& h2);      
+
+  template<typename kind>					
+  bool operator>=(const handler<kind>& h1, 
+		  const handler<kind>& h2);      
+
 } // vcsn
-
-template<typename kind>					
-bool operator==(const vcsn::handler<kind>& h1, 
-		const vcsn::handler<kind>& h2);      
-
-template<typename kind>					
-bool operator!=(const vcsn::handler<kind>& h1, 
-		const vcsn::handler<kind>& h2);      
-
-template<typename kind>					
-bool operator<(const vcsn::handler<kind>& h1, 
-		const vcsn::handler<kind>& h2);      
-
-template<typename kind>					
-bool operator>(const vcsn::handler<kind>& h1, 
-		const vcsn::handler<kind>& h2);      
-
-template<typename kind>					
-bool operator<=(const vcsn::handler<kind>& h1, 
-		const vcsn::handler<kind>& h2);      
-
-template<typename kind>					
-bool operator>=(const vcsn::handler<kind>& h1, 
-		const vcsn::handler<kind>& h2);      
 
 namespace std {
 

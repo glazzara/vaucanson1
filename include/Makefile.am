@@ -5,6 +5,7 @@
 EXTRA_DIST = vaucanson/config/pconf-hh.in
 
 nobase_include_HEADERS =					     \
+	vaucanson/vaucanson.hh						\
 	vaucanson/algebra/concept/alphabets_base.hh		       \
 	vaucanson/algebra/concept/alphabets_base.hxx		       \
 	vaucanson/algebra/concept/freemonoid_base.hh		       \

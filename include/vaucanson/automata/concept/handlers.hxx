@@ -85,16 +85,18 @@ namespace vcsn
 #define HOPERATOR(Op)					\
 template<typename kind>					\
 inline							\
-bool operator Op (const vcsn::handler<kind>& h1,	\
-                  const vcsn::handler<kind>& h2)	\
+bool operator Op (const handler<kind>& h1,	\
+                  const handler<kind>& h2)	\
 { return h1.value() Op h2.value(); }
 
+namespace vcsn {
 HOPERATOR(==);
 HOPERATOR(!=);
 HOPERATOR(<);
 HOPERATOR(>);
 HOPERATOR(<=);
 HOPERATOR(>=);
+}
 
 namespace std {
 

@@ -1,3 +1,13 @@
+2003-07-01  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/handlers.hh: Fix namespace.
+	* include/vaucanson/automata/concept/handlers.hxx: Likewise.
+
+	* include/vaucanson/vaucanson.hh: Add for documentation purposes.
+	* include/Makefile.am: Update accordingly.
+	
+	* include/vaucanson/fundamental/fundamental.hh: Document more.
+
 2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/projection.hh: New.

@@ -30,7 +30,21 @@
 #ifndef VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 # define VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 
-/** @addtogroup fundamental Fundamental C++ : the Element design pattern. */
+/** @addtogroup fundamental Fundamental C++ : the Element design pattern. 
+ *
+ * @brief Core constructs for Vaucanson.
+ *
+ * This module contains definitions for the design pattern used in
+ * Vaucanson, so called "Element". This design pattern is more deeply
+ * described in the paper by Yann Régis-Gianas and Raphaël Poss:
+ * <em>On orthogonal specialization in C++: Dealing with efficiency
+ * and algebraic abstraction in Vaucanson</em>. In the proceedings of
+ * the Parallel/High-performance Object-Oriented Scientific Computing
+ * (POOSC'2003) Darmstadt, Germany July 2003.
+ *
+ * See http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200307-Poosc
+*/
+
 
 # include <vaucanson/fundamental/default_ops.hh>
 # include <vaucanson/fundamental/element.hh>
