@@ -34,7 +34,6 @@
 
 # include <vaucanson/xml/types.hh>
 
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
 # include <iostream>

@@ -1,3 +1,15 @@
+2004-06-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/tools/usual.hh, include/vaucanson/tools/usual.hxx:
+	Delete.
+	* include/Makefile.am, include/vaucanson/xml/xml_loader.hxx,
+	* include/vaucanson/tools/gen_book.hxx: Update accordingly.
+
+	* src/demos/vgrep/vgrep.cc,
+	* src/demos/samples/algorithms/derivatives_automaton.cc,
+	* src/demos/fibonacci/fibonacci.cc: Rewrite without usual.hh, and with
+	context headers.
+
 2004-06-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* update_config_ac.sh: Rename to...

@@ -59,9 +59,7 @@ nobase_include_HEADERS =						   \
 	vaucanson/tools/gen_book.hxx					   \
 	vaucanson/tools/gen_random.hh					   \
 	vaucanson/tools/gen_random.hxx					   \
-	vaucanson/tools/usual.hh					   \
 	vaucanson/tools/usual_macros.hh					   \
-	vaucanson/tools/usual.hxx					   \
 	vaucanson/tools/dot_dump.hh					   \
 	vaucanson/tools/dot_format.hxx					   \
 	vaucanson/tools/dot_format.hh					   \

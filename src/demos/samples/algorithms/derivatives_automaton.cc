@@ -27,64 +27,44 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#include <vaucanson/design_pattern/design_pattern.hh>
-#include <vaucanson/tools/usual.hh>
-#include <vaucanson/algebra/implementation/series/rat/exp.hh>
-#include <vaucanson/algebra/implementation/series/krat.hh>
-#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+#include <vaucanson/z_automaton.hh>
+
 #include <vaucanson/tools/dot_dump.hh>
-#include <string>
 #include <vaucanson/algorithms/derivatives_automaton.hh>
-// #include <vaucanson/misc/unique.hcc>
+#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+
+#include <string>
 
 int main(int argc, char **argv)
 {
-  using namespace vcsn;
-  using namespace vcsn::algebra;
-  using namespace vcsn::tools;
-  
-  // Tha automaton type we are working on
-  AUTOMATON_TYPES_EXACT(numerical_automaton_t);
- 
+  using namespace vcsn::z_automaton;
+
   // The first argument is the rational expression.
   if (argc != 2)
   {
-    std::cout << "Usage:" << std::endl << "deriv <expression>" << std::endl;
+    std::cerr << "Usage:" << std::endl
+	      << '\t' << argv[0] <<" <expression>" << std::endl;
     return 1;
   }
-  std::string exp = argv[1];
 
-  // Declare and initialize series
-  alphabet_t alpha;
+  alphabet_t	alpha;
   alpha.insert('a');
   alpha.insert('b');
   alpha.insert('c');
-  monoid_t freemonoid(alpha);
-  semiring_t semiring;
-  series_set_t series(semiring, freemonoid);
+  automaton_t	automaton = new_automaton(alpha);
+  krat_exp_t	krat_exp (automaton.structure().series());
 
-  // Set krat value
-  Element<series_set_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
-    krat_exp(series);
-  parse(exp, krat_exp);
-
-  // Display krat value
+  parse(argv[1], krat_exp);
   std::cout << "Expression to transform: " << krat_exp << std::endl;
-  
-  // Initialize automaton
-  automata_set_t a_structure(series);
-  automaton_t automaton(a_structure);
 
-  // Build automaton
   derivatives_automaton(automaton, krat_exp);
-  
-  // If the automaton is valid, save it !
-  if (automaton.states().end() == automaton.states().begin())
-    std::cout << "Empty automaton!" << std::endl;
-  else
-  {
-    SAVE_AUTOMATON_DOT_SIMPLE("out", automaton);
-    std::cout << "Automaton saved!" << std::endl;
-  }
-}
 
+  // If the automaton is valid, save it !
+  if (automaton.states().size())
+    {
+      SAVE_AUTOMATON_DOT_SIMPLE("out", automaton);
+      std::cout << "Automaton saved." << std::endl;
+    }
+  else
+    std::cout << "Empty automaton." << std::endl;
+}

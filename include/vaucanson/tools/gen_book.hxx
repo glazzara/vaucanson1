@@ -1,7 +1,7 @@
 // gen_book.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,8 +31,8 @@
 # define VCSN_TOOLS_GEN_BOOK_HXX
 
 # include <vaucanson/tools/gen_book.hh>
-# include <vaucanson/tools/usual.hh>
-
+# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/automata/concept/handlers.hh>
 namespace vcsn {
 
   namespace tools {
@@ -41,14 +41,14 @@ namespace vcsn {
     Auto_	lombardy(unsigned size)
     {
       AUTOMATON_TYPES(Auto_);
-      
+
       // FIXME:add assert "we want automaton on char."
       alphabets_elt_t	alpha;
       alpha.insert('a');
       alpha.insert('b');
-      monoid_t		monoid(alpha);
-      semiring_t		semiring;
-      series_set_t		series(semiring, monoid);
+      monoid_t		monoid (alpha);
+      semiring_t	semiring;
+      series_set_t	series (semiring, monoid);
       automaton_t	automaton;
       automaton.create();
       automaton.series() = series;

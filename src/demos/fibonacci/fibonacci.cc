@@ -1,154 +1,184 @@
-#include <vaucanson/tools/usual.hh>
-#include <vaucanson/automata/concept/transducer.hh>
+#include <vaucanson/boolean_automaton.hh>
+#include <vaucanson/boolean_transducer.hh>
+
+#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+#include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
+
 #include <vaucanson/tools/dot_dump.hh>
 #include <vaucanson/algorithms/standard_of.hh>
 #include <vaucanson/algorithms/evaluation.hh>
 #include <vaucanson/algorithms/aut_to_exp.hh>
-#include <vaucanson/algorithms/krat_exp_print.hh>
 #include <vaucanson/algorithms/realtime_composition.hh>
-#include <vaucanson/automata/implementation/generalized.hh>
-#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-#include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
-#include <vaucanson/algebra/implementation/series/krat.hh>
 
-using namespace vcsn;
-using namespace vcsn::algebra;
-using namespace vcsn::algebra::char_letter;
-using namespace vcsn::tools;
-
-//
-// Type definitions header
-//
-typedef Series<NumericalSemiring, Words> output_series_pt;
-typedef Element<output_series_pt, rat::exp<WordValue, bool> > exp_t;
-typedef Series<output_series_pt, Words> tr_bhv_pt;
-typedef rat::exp<WordValue, bool> output_series_set_elt_value_t;
-typedef Element<output_series_pt, output_series_set_elt_value_t>
-  output_series_set_elt_t;
-typedef polynom<WordValue, output_series_set_elt_value_t> tr_bhv_value_t;
-
-typedef Graph
-<
-  labels_are_series,
-  WordValue,
-  output_series_set_elt_value_t,
-  tr_bhv_value_t,
-  char,
-  NoTag>
-transducer_impl_t;
-
-typedef Transducer<tr_bhv_pt> tr_pt;
-
-typedef Element<tr_pt, transducer_impl_t>
-transducer_pt;
-
-AUTOMATON_TYPES_EXACT(transducer_pt);
-
-
-void eval_an_expression(const transducer_pt& t)
+void
+eval_an_expression(const vcsn::boolean_transducer::automaton_t& t)
 {
-  exp_t e(t.structure().series().semiring());
   std::string user_string;
 
-  do {
-    std::cout << "Enter your expression over {a,b}* (\"next\", otherwise): ";
-    std::cin >> user_string;
-    parse(user_string, e);
-    usual_automaton_t w = new_automaton(t.series().monoid().alphabet());
-    generalized_traits<usual_automaton_t>::automaton_t result(w.structure());
-    standard_of(w, e.value());
-    evaluation(w, t, result);
-    krat_exp_print(verbalize(aut_to_exp(generalized(result))).value());
-  } while (user_string != "next");
+  do
+    {
+      using namespace vcsn;
+      using namespace vcsn::boolean_transducer;
+
+      std::cout << "Enter your expression over {a,b}* (\"next\", otherwise): ";
+      std::cin >> user_string;
+
+      monoid_t		m = t.structure().series().monoid();
+      output_semiring_t	s = t.structure().series().semiring().semiring();
+
+      output_series_set_t	series (s, m);
+      output_series_set_elt_t	exp (series);
+
+      parse(user_string, exp);
+
+      {
+	typedef boolean_automaton::automaton_t		automaton_t;
+	typedef boolean_automaton::gen_automaton_t	gen_automaton_t;
+
+	using boolean_automaton::standard_of;
+	using boolean_automaton::new_gen_automaton;
+
+	automaton_t	w = standard_of(exp);
+	gen_automaton_t	result =
+	  new_gen_automaton(t.structure().series().semiring().monoid().
+			    alphabet());
+	evaluation(w, t, result);
+	std::cout << verbalize(aut_to_exp(generalized(result))) << std::endl;
+      }
+    }
+  while (user_string != "next");
 }
 
 int main()
 {
-  //
-  // Instanciation of the objects.
-  //
-  alphabet_t A, B;
+  using namespace vcsn;
+  using namespace vcsn::algebra;
+  using namespace vcsn::boolean_transducer;
+
+  /*-------------------------------.
+  | Instanciation of the objects.  |
+  `-------------------------------*/
+
+  alphabet_t	A;
   A.insert('a');
   A.insert('b');
-  A.insert('c');
+
+  alphabet_t	B;
   B.insert('x');
   B.insert('y');
-  B.insert('z');
-  monoid_t A_star (A), B_star (B);
 
-  NumericalSemiring Boole;
-  typedef Element<NumericalSemiring, bool> mult_t;
+  alphabet_t	C;
+  C.insert('z');
+  C.insert('t');
 
-  output_series_pt OSA(Boole, A_star);
-  tr_bhv_pt OSA_A_star(OSA, A_star);
-  tr_pt A_A_transducer(OSA_A_star);
-  transducer_pt fibg(A_A_transducer);
+  monoid_t		A_star (A);
+  monoid_t		B_star (B);
+  monoid_t		C_star (C);
+
+  monoid_elt_t		A_empty = identity_as<monoid_elt_value_t>::of(A_star);
+  monoid_elt_t		B_empty = identity_as<monoid_elt_value_t>::of(B_star);
+  monoid_elt_t		C_empty = identity_as<monoid_elt_value_t>::of(C_star);
+
+  monoid_elt_t a (A_star, "a");
+  monoid_elt_t b (A_star, "b");
+
+  monoid_elt_t x (B_star, "x");
+  monoid_elt_t y (B_star, "y");
+
+  monoid_elt_t z (C_star, "z");
+  monoid_elt_t v (C_star, "v");
+
+  /*-------------------.
+  | Creation of fibg.  |
+  `-------------------*/
+
+  automaton_t		fibg = new_automaton(A, B);
 
   hstate_t p = fibg.add_state();
   hstate_t q = fibg.add_state();
   hstate_t r = fibg.add_state();
 
-  monoid_elt_t empty = identity_as<monoid_elt_value_t>::of(A_star);
-  monoid_elt_t a_l(A_star, "a");
-  monoid_elt_t b_l(A_star, "b");
 
-  fibg.add_io_edge(p, p, b_l, b_l);
-  fibg.add_io_edge(p, q, a_l, empty);
-  fibg.add_io_edge(q, q, a_l, a_l);
-  fibg.add_io_edge(q, r, b_l, empty);
-  fibg.add_io_edge(r, q, a_l, a_l * b_l);
-  fibg.add_io_edge(r, q, b_l, b_l * a_l);
 
-  output_series_set_elt_t os_q(OSA);
-  os_q.assoc(a_l, true);
-  series_set_elt_t s_q(OSA_A_star);
-  s_q.assoc(empty, os_q);
+  fibg.add_io_edge(p, p, b, y);
+  fibg.add_io_edge(p, q, a, B_empty);
+  fibg.add_io_edge(q, q, a, x);
+  fibg.add_io_edge(q, r, b, B_empty);
+  fibg.add_io_edge(r, q, a, x * y);
+  fibg.add_io_edge(r, q, b, y * x);
 
+  output_series_set_elt_t os_q (fibg.structure().series().semiring());
+  os_q.assoc(x, true);
+  series_set_elt_t s_q (fibg.structure().series());
+  s_q.assoc(A_empty, os_q);
   fibg.set_final(q, s_q);
 
-  output_series_set_elt_t os_r(OSA);
-  os_r.assoc(a_l * b_l, true);
-  series_set_elt_t s_r(OSA_A_star);
-  s_r.assoc(empty, os_r);
+  output_series_set_elt_t os_r (fibg.structure().series().semiring());
+  os_r.assoc(x * y, true);
+  series_set_elt_t s_r (fibg.structure().series());
+  s_r.assoc(A_empty, os_r);
   fibg.set_final(r, s_r);
 
   fibg.set_final(p);
   fibg.set_initial(p);
 
-  eval_an_expression(fibg);
-  tools::dot_dump(std::cerr, fibg, "transducer");
+  /*----------------.
+  | Dump and eval.  |
+  `----------------*/
 
-  transducer_pt fibd(A_A_transducer);
+  tools::dot_dump(std::cerr, fibg, "fibg");
+  eval_an_expression(fibg);
+
+  /*-------------------.
+  | Creation of fibd.  |
+  `-------------------*/
+
+  automaton_t fibd = new_automaton(B, C);
 
   hstate_t s = fibd.add_state();
   hstate_t t = fibd.add_state();
   hstate_t u = fibd.add_state();
 
-  fibd.add_io_edge(s, s, b_l, b_l);
-  fibd.add_io_edge(s, t, b_l, empty);
-  fibd.add_io_edge(t, s, a_l, a_l * a_l);
-  fibd.add_io_edge(t, u, b_l, empty);
-  fibd.add_io_edge(u, t, a_l, a_l * b_l);
-  fibd.add_io_edge(u, u, a_l, a_l);
+  fibd.add_io_edge(s, s, y, v);
+  fibd.add_io_edge(s, t, y, C_empty);
+  fibd.add_io_edge(t, s, x, z * z);
+  fibd.add_io_edge(t, u, y, C_empty);
+  fibd.add_io_edge(u, t, x, z * v);
+  fibd.add_io_edge(u, u, x, z);
 
-  output_series_set_elt_t os_s(OSA);
-  os_s.assoc(b_l * b_l, true);
-  series_set_elt_t s_s(OSA_A_star);
-  s_s.assoc(empty, os_s);
+  output_series_set_elt_t os_s (fibd.structure().series().semiring());
+  os_s.assoc(v * v, true);
+  series_set_elt_t s_s (fibd.structure().series());
+  s_s.assoc(B_empty, os_s);
   fibd.set_initial(s, s_s);
 
-  output_series_set_elt_t os_t(OSA);
-  os_t.assoc(b_l, true);
-  series_set_elt_t s_t(OSA_A_star);
-  s_t.assoc(empty, os_t);
+  output_series_set_elt_t os_t (fibd.structure().series().semiring());
+  os_t.assoc(v, true);
+  series_set_elt_t s_t(fibd.structure().series());
+  s_t.assoc(B_empty, os_t);
   fibd.set_initial(t, s_t);
+
   fibd.set_initial(u);
   fibd.set_final(u);
+
+  /*----------------.
+  | Dump and eval.  |
+  `----------------*/
+
   tools::dot_dump(std::cerr, fibd, "fibd");
   eval_an_expression(fibd);
 
-  transducer_pt fibgd(A_A_transducer);
+  /*----------.
+  | Compose.  |
+  `----------*/
+
+  automaton_t	fibgd = new_automaton(A, C);
   realtime_composition(fibg, fibd, fibgd);
+
+  /*----------------.
+  | Dump and eval.  |
+  `----------------*/
+
   tools::dot_dump(std::cerr, fibgd, "fibgd");
   eval_an_expression(fibgd);
 }

@@ -27,20 +27,17 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#include <vaucanson/design_pattern/design_pattern.hh>
-#include <vaucanson/tools/usual.hh>
+#include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/realtime.hh>
 #include <vaucanson/algorithms/complete.hh>
-#include <vaucanson/algebra/implementation/series/rat/exp.hh>
-#include <vaucanson/algebra/implementation/series/krat.hh>
 #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 #include <vaucanson/algorithms/standard_of.hh>
 #include <vaucanson/algorithms/thompson.hh>
 #include <vaucanson/algorithms/eval.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/tools/dot_dump.hh>
-// #include <vaucanson/misc/unique.hcc>
+
 #include <iostream>
 #include <vector>
 #include <ctype.h>
@@ -50,7 +47,7 @@
 
 class window
 {
-public:  
+public:
   window(std::istream& is, unsigned before, unsigned after) :
     stream_(is),
     before_(before),
@@ -108,12 +105,13 @@ private:
   int					   after_;
 };
 
-void grep(std::ostream& out, const vcsn::tools::usual_automaton_t& automaton, 
+void grep(std::ostream& out,
+	  const vcsn::boolean_automaton::automaton_t& automaton,
 	  window w)
 {
   do
     {
-      vcsn::tools::usual_automaton_t::semiring_elt_t ret =
+      vcsn::boolean_automaton::semiring_elt_t ret =
 	eval(automaton, w.current());
       if (ret.value())
 	out << w.current() << std::endl;
@@ -137,7 +135,7 @@ const std::string error_after_context =
 
 //
 // What's the program does ...
-// 
+//
 int main(int argc, char **argv)
 {
   // Parse options.
@@ -146,14 +144,14 @@ int main(int argc, char **argv)
   int before_context = 0;
   bool invert_match = false;
   std::string filename;
-  
+
   while (true) {
     c = getopt(argc, argv, "A:B:vf:");
 
     if (c == -1)
       break;
-    
-    switch (c) 
+
+    switch (c)
       {
       case 'A':
 	{
@@ -169,7 +167,7 @@ int main(int argc, char **argv)
 	  before_context = strtol(optarg, &endptr, 10);
 	  if (optarg == endptr)
 	    exit_on_error(error_before_context);
-			  
+
 	  break;
 	}
       case 'v':
@@ -185,11 +183,9 @@ int main(int argc, char **argv)
   }
   // Determine the streams to be filtered.
   int optcount = optind;
-  if (optind < argc) 
+  if (optind < argc)
     {
-      using namespace vcsn;
-      using namespace vcsn::tools;
-      AUTOMATON_TYPES_EXACT(usual_automaton_t);
+      using namespace vcsn::boolean_automaton;
 
       // The first argument is the rational expression.
       std::string exp = argv[1];
@@ -199,12 +195,12 @@ int main(int argc, char **argv)
       alphabet_t alpha;
       for (unsigned l = 0; l <= 255; ++l)
 	alpha.insert(char(l));
-      
+
       automaton_t automaton = new_automaton(alpha);
       Element<series_set_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
 	krat_exp(automaton.structure().series());
       parse(exp, krat_exp);
-      standard_of(automaton, krat_exp.value());
+      automaton = standard_of(krat_exp);
       realtime_here(automaton);
       complete_here(automaton);
       // FIXME: tools::dot_dump(std::cout, automaton, "automaton");
@@ -215,7 +211,7 @@ int main(int argc, char **argv)
       for_each_final_state(s, automaton)
 	for (unsigned l = 0; l <= 255; ++l)
 	  automaton.add_letter_edge(*s, *s, char(l));
-      
+
       automaton = determinize(automaton);
       //      tools::dot_dump(std::cerr, automaton, "automaton");
       // No file means standard input.
@@ -228,9 +224,9 @@ int main(int argc, char **argv)
       //
       // 	if (argv[optind++] == std::string("-"))
       // 	  grep(window win(std::cin, before_context, after_context),
-	       
+
     }
   // Parse the rational expression.
-  
+
 }
 
