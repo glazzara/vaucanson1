@@ -36,15 +36,15 @@
 namespace vcsn {
 
   template <class Series>
-  Automata<Series>::Automata(const series_t& s):
-    series_(utility::unique::get(s))
+  Automata<Series>::Automata(const Series& s):
+    series_(s)
   {}
 
   template <class Series>
-  const typename Automata<Series>::series_t&
+  const Series&
   Automata<Series>::series() const
   {
-    return series_;
+    return series_.get();
   }
 
   template <class Series>

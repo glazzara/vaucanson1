@@ -31,6 +31,8 @@
 # define VCSN_ALGEBRA_CONCRETE_SERIES_SERIES_HH
 
 #include <vaucanson/algebra/concept/series_base.hh>
+#include <vaucanson/fundamental/slots.hh>
+
 
 namespace vcsn {
 
@@ -52,8 +54,8 @@ namespace vcsn {
       const Monoid&	monoid() const;
 
     protected:
-      const Weights&	weights_;
-      const Monoid&	monoid_;
+      SetSlot<Weights>  weights_;
+      SetSlot<Monoid>	monoid_;
     };    
 
     template<typename W, typename M>

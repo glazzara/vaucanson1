@@ -31,6 +31,7 @@
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/fundamental/slots.hh>
 
 namespace vcsn {
 
@@ -63,14 +64,14 @@ namespace vcsn {
   {
   public:
     typedef Automata<Series>				     self_t;
-    typedef typename virtual_types<self_t>::series_t series_t;
+    typedef Series series_t;
 
     Automata(const series_t&);
 
     const series_t&	series() const;
 
   private:
-    const series_t&	series_;
+    SetSlot<series_t> series_;
   };
 
   template <class Series>
