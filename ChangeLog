@@ -1,5 +1,10 @@
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* src/tests/automata/algos/closure_test.hh: 
+		Test backward/forward closure.
+
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/forward_closure.hh: Add file doc.
 	* include/vaucanson/algorithms/forward_closure.hxx: Typo.
 	* include/vaucanson/algorithms/backward_closure.hh: Add file doc.

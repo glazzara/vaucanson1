@@ -26,7 +26,8 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/algorithms/closure.hh>
+# include <vaucanson/algorithms/backward_closure.hh>
+# include <vaucanson/algorithms/forward_closure.hh>
 
 template <class Auto>
 bool closure_test(tests::Tester& tg)
@@ -41,12 +42,23 @@ bool closure_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
   gen_auto_t gen(time(0x0));
   automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 10, 20);
-  automaton_t cauto = closure(auto_epsilon);
+  {
+    automaton_t cauto = backward_closure(auto_epsilon);
 
-  TEST(t, "Increase of edges number.",  
-       cauto.edges().size() >= auto_epsilon.edges().size());
-  TEST(t, "Idempotence.", 
-       closure(cauto).edges().size() == cauto.edges().size());
+    TEST(t, "Backward: Increase of edges number.",  
+	 cauto.edges().size() >= auto_epsilon.edges().size());
+    TEST(t, "Backward: Idempotence.", 
+	 backward_closure(cauto).edges().size() == cauto.edges().size());
+  }
+
+  {
+    automaton_t cauto = forward_closure(auto_epsilon);
+
+    TEST(t, "Forward: Increase of edges number.",  
+	 cauto.edges().size() >= auto_epsilon.edges().size());
+    TEST(t, "Forward: Idempotence.", 
+	 forward_closure(cauto).edges().size() == cauto.edges().size());
+  }
 
   return t.all_passed();
 }
