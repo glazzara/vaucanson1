@@ -65,7 +65,7 @@ bool thompson_test(tests::Tester& tg)
     vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
     Auto	au = gen.empty();
     thompson_of(au, exp.value());
-    in_realtime(au);
+    realtime_here(au);
     unsigned i = 0;
     for (; i < nb_word_test; ++i)
       {
@@ -92,7 +92,7 @@ bool thompson_test(tests::Tester& tg)
 	vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
 	Auto	au = gen.empty();
 	thompson_of(au, exp.value());
-	in_realtime(au);
+	realtime_here(au);
 	if (t.verbose() == tests::high)
 	  {
 	    TEST_MSG("Automaton saved in /tmp.");

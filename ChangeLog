@@ -1,5 +1,18 @@
 2003-06-22  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/realtime.hh,
+	  include/vaucanson/algorithms/realtime.hxx: Rename functions using
+	  the new convention, and call new backward_ and forward_ functions.
+	* src/tests/automata/algos/glushkov_test.hh,
+	  src/tests/automata/algos/thompson_test.hh,
+	  src/demos/vgrep/vgrep.cc: Change function call.
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	  include/vaucanson/algorithms/forward_realtime.hh,
+	  include/vaucanson/algorithms/backward_realtime.hxx,
+	  include/vaucanson/algorithms/backward_realtime.hh: Add.
+
+2003-06-22  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/glushkov.hxx,
 	  include/vaucanson/algorithms/standard.hh,
 	  include/vaucanson/algorithms/standard.hxx: Rename functions using

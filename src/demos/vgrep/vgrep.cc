@@ -193,7 +193,7 @@ int main(int argc, char **argv)
 	krat_exp(automaton.set().series());
       parse(exp, krat_exp);
       glushkov(automaton, krat_exp.value());
-      in_realtime(automaton);
+      realtime_here(automaton);
       auto_in_complete(automaton);
       std::cerr << "complete ok" << std::endl;
       misc::dot_dump(std::cout, automaton, "automaton");
