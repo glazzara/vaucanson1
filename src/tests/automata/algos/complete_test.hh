@@ -26,7 +26,6 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/algorithms/complementary.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/algorithms/determinize.hh>

@@ -137,7 +137,7 @@ namespace vcsn {
   
   template<typename  A, typename  T>
   Element<A, T>
-  forward_closure_here(const Element<A, T>& a)
+  forward_closure(const Element<A, T>& a)
   {
     Element<A, T> ret(a);
     do_forward_closure_here(ret.set(), ret);

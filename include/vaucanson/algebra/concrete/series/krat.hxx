@@ -804,7 +804,7 @@ namespace vcsn {
       if (c->second == m)
 	return c->first;
 
-    // FIXME: other solution :
+    // FIXME: another solution :
     // FIXME: doing a get on a krat could be implemented by computed 
     // FIXME: a thompson/glushkov automaton and compute resulting series 
     // FIXME: of m.

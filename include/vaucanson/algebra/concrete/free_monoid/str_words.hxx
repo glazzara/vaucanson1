@@ -27,7 +27,7 @@ namespace vcsn {
 
   template<typename A>
   void 
-  op_in_mul(const algebra::FreeMonoid<A>& s, 
+  op_in_mul(const algebra::FreeMonoid<A>&, 
 	    std::basic_string<typename A::letter_t>& dst,
 	    const std::basic_string<typename A::letter_t>& src)
   { 

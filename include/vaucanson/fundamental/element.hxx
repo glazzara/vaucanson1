@@ -94,7 +94,6 @@ namespace vcsn {
     : set_(set),
       value_(op_convert(set_.get(), SELECT(T), other))
   {}
-    
   template <class S, class T>
   template<typename U>
   Element<S,T>::Element(const S& set, const U& other)

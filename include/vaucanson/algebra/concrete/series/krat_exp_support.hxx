@@ -24,7 +24,6 @@
 
 # include <utility>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
-# include <vaucanson/algebra/concept/monoid_base.hh>
 
 namespace vcsn {
 
@@ -32,18 +31,22 @@ namespace vcsn {
   class SupportMatcher : public algebra::KRatExpMatcher<
     SupportMatcher<Series, T, Dispatch>,
     T, 
-    void,
+    int,
     Dispatch
     >
   {
   public:
     typedef IsFiniteAppMatcher<Series, T, Dispatch>	self_t;
-    typedef void				        return_type;
+    typedef int					        return_type;
     typedef Series					series_t;
     typedef Element<Series, T>				serie_t;
     typedef typename serie_t::monoid_elt_t		monoid_elt_t;
     typedef typename monoid_elt_t::value_t		monoid_value_t;
+    typedef typename serie_t::weight_t			weight_t;
+    typedef typename weight_t::value_t			weight_value_t;
     typedef std::list<monoid_value_t>			support_t;
+    typedef std::list<std::pair<weight_value_t, monoid_value_t> > 
+							ext_support_t;
     INHERIT_CONSTRUCTORS(self_t, T, return_type, Dispatch);
 
     SupportMatcher(const series_t& s):
@@ -53,15 +56,19 @@ namespace vcsn {
     MATCH__(Product, lhs, rhs)
     {
       match(lhs);
-      support_t lhs_s = supp_;
+      ext_support_t lhs_s = supp_;
       match(rhs);
-      support_t ret;
-      for_each_const_(support_t, c, lhs_s)
-	for_each_const_(support_t, d, supp_)
+      ext_support_t ret;
+      for_each_const_(ext_support_t, c, lhs_s)
+	for_each_const_(ext_support_t, d, supp_)
 	{
-	  monoid_elt_t mc(*c, series_.monoid());
-	  monoid_elt_t md(*d, series_.monoid());
-	  ret.push_back((*c * *d).value());
+	  monoid_elt_t mc(series_.monoid(), c->second);
+	  monoid_elt_t md(series_.monoid(), d->second);
+	  //	  ret.push_back((mc * md).value());
+	  weight_t wc(series_.weights(), c->first);
+	  weight_t wd(series_.weights(), d->first);
+	  ret.push_back(std::make_pair((wc * wd).value(), 
+				       (mc * md).value()));
 	}
       supp_ = ret;
     }
@@ -84,6 +91,9 @@ namespace vcsn {
     MATCH__(LeftWeight, w, node)
     {
       match(node);
+      for_each_(ext_support_t, c, supp_)
+	c->first = (weight_t(series_.weights(), w) * 
+		    weight_t(series_.weights(), c->first)).value();
     }
     END
 
@@ -95,7 +105,10 @@ namespace vcsn {
 
     MATCH_(Constant, m)
     {
-      supp_.push_back(m);
+      supp_.push_back(std::make_pair
+		      (identity_as<weight_value_t>
+		       ::of(series_.weights()).value(),
+		       m));
     }
     END
 
@@ -106,19 +119,30 @@ namespace vcsn {
 
     MATCH(One)
     {
-      supp_.push_back(algebra::identity_as<monoid_value_t>
-		      ::of(series_.monoid()).value());
+      supp_.push_back(std::make_pair
+		      (identity_as<weight_value_t>
+		       ::of(series_.weights()).value(),
+		       identity_as<monoid_value_t>
+		       ::of(series_.monoid()).value()));
     }
     END
 
     support_t get() const
     {
+      support_t ret;
+      for_each_const_(ext_support_t, c, supp_)
+	ret.push_back(c->second);
+      return ret;
+    }
+      
+    const ext_support_t& ext_get() const
+    {
       return supp_;
     }
 
   private:
-    support_t	      supp_;
-    const series_t&   series_;
+    ext_support_t	        supp_;
+    const series_t&		series_;
   };
   
 } // vcsn

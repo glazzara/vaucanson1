@@ -169,7 +169,7 @@ return_type						\
 match_node##N(const N&) 			\
 {						
    
-#define END }
+#define END return return_type(); }
 
 
     template <class Self, class T, class U, class F>

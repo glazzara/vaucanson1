@@ -33,7 +33,7 @@
 using namespace vcsn;
 
 template <class Auto>
-bool generalized_test(tests::Tester& t)
+bool generalized_test(tests::Tester&)
 {
   AUTOMATON_TYPES(Auto);
   TEST_MSG("Basic test on a well-known automaton.");

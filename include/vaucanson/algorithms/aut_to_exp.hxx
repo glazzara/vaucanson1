@@ -95,7 +95,7 @@ namespace vcsn {
 
   template <class A_, typename Auto_, typename Chooser_>
   typename Auto_::series_elt_t  
-  do_in_aut_to_exp(const AutomataBase<A_>& a_set,
+  do_in_aut_to_exp(const AutomataBase<A_>&,
 		    Auto_&		    a, 
 		    Chooser_	            chooser)
   {

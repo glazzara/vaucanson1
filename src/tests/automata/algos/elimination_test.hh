@@ -29,7 +29,7 @@
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/automata/concrete/generalized.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/algorithms/compute.hh>
+# include <vaucanson/algorithms/eval.hh>
 
 using namespace vcsn;
 
@@ -64,7 +64,7 @@ bool elimination_test(tests::Tester& tg)
 	  if (t.verbose() == tests::high)
 	    std::cout << "TEST: aut_to_exp " << nb << " : test " 
 		      << w << std::endl;
-	  if (compute(a, w) ==
+	  if (eval(a, w) ==
 	      zero_as<weight_value_t>::of(a.set().series().weights()))
 	    {
 	      break;

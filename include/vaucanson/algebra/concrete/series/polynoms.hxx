@@ -382,7 +382,7 @@ namespace vcsn {
 				      const oTm& m_value)
   {
     algebra::polynom<Tm, Tw> ret;
-    ret.insert(op_convert(SELECT(Tm), SELECT(M), m_value),
+    ret.insert(op_convert(SELECT(M), SELECT(Tm), m_value),
 	       identity_value(SELECT(W), SELECT(Tw)));
     return ret;
   }
@@ -482,7 +482,7 @@ namespace vcsn {
     if (src != zero_value(SELECT(W), SELECT(oTw)))
       dst.add(s.weights(), 
 	      identity_value(SELECT(M), SELECT(Tm)),
-	      op_convert(SELECT(Tw), SELECT(W), src));
+	      op_convert(SELECT(W), SELECT(Tw), src));
   }
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
