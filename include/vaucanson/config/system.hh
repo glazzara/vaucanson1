@@ -41,6 +41,12 @@
 #  include <config.h>
 # endif 
 
+#ifdef HAVE_PRETTY_FUNCTION
+# define PRETTY_FUNCTION() __PRETTY_FUNCTION__
+#else
+# define PRETTY_FUNCTION() static_cast<const char*>(0)
+#endif
+
 # ifndef IGNORE_PCONF_HH
 #  include <vaucanson/config/pconf.hh>
 # endif

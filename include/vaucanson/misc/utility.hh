@@ -35,6 +35,12 @@ namespace utility {}
  */
 #include <vaucanson/misc/random.hh>
 
+/**
+ * @file contract.hh
+ * Definition of contract macros.
+ */
+#include <vaucanson/misc/contract.hh>
+
 /** @} */
 
 

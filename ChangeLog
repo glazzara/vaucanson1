@@ -1,3 +1,11 @@
+2003-06-20  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/config/system.hh: Define PRETTY_FUNCTION().
+
+	* include/vaucanson/misc/utility.hh: Mention `contract.hh'.
+
+	* include/vaucanson/misc/contract.hh: Provide more services.
+
 2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/reachable.hh,
