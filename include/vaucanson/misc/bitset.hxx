@@ -1079,12 +1079,42 @@ namespace utility
   
 namespace std
 {
-  using namespace utility;
-  
   template <>
-  void swap(Bitset& lhs, Bitset& rhs)
+  void swap(utility::Bitset& lhs, utility::Bitset& rhs)
   {
     lhs.swap(rhs);
+  }
+
+  insert_iterator<utility::Bitset>::insert_iterator(utility::Bitset& x,
+						    utility::Bitset::iterator)
+  {
+    container = &x;
+  }
+
+  insert_iterator<utility::Bitset>&
+  insert_iterator<utility::Bitset>::operator = (utility::Bitset::
+						const_reference value)
+  {
+    container->insert(value);
+    return *this;
+  }
+
+  insert_iterator<utility::Bitset>&
+  insert_iterator<utility::Bitset>::operator * ()
+  {
+    return *this;
+  }
+
+  insert_iterator<utility::Bitset>&
+  insert_iterator<utility::Bitset>::operator ++ ()
+  {
+    return *this;
+  }
+
+  insert_iterator<utility::Bitset>&
+  insert_iterator<utility::Bitset>::operator ++ (int)
+  {
+    return *this;
   }
 }
 

@@ -107,7 +107,10 @@ namespace utility {
     /// @}
 
     /// Move to a specific offset.
+    /// @{
     void		moveto(length_t offset);
+    void		moveto(iterator_t position);
+    /// @}
 
     /// Returns the actual window size.
     length_t		size() const;
@@ -124,6 +127,7 @@ namespace utility {
     iterator_t		stream() const;
     iterator_t		end() const;
     size_t		offset() const;
+    letter_t		eol_value() const;
     length_t		length() const;
     string_t		window() const;
     /// @}

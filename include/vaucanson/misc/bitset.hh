@@ -369,11 +369,34 @@ namespace utility
 
 namespace std
 {
-  using namespace utility;
-
-  /// Specialised swap.
+  /// Specialized swap.
   template <>
-  void swap(Bitset& lhs, Bitset& rhs);
+  void swap(utility::Bitset& lhs, utility::Bitset& rhs);
+
+  /// Specialized insert_iterator.
+  template <>
+  class insert_iterator<utility::Bitset> :
+    public iterator<output_iterator_tag, void, void, void, void>
+  {
+  public:
+    typedef utility::Bitset		container_type;
+    
+    insert_iterator(utility::Bitset& x, utility::Bitset::iterator);
+    
+    insert_iterator<utility::Bitset>&
+    operator = (utility::Bitset::const_reference value);
+
+    insert_iterator<utility::Bitset>&
+    operator * ();
+
+    insert_iterator<utility::Bitset>&
+    operator ++ ();
+
+    insert_iterator<utility::Bitset>&
+    operator ++ (int);
+  protected:
+    utility::Bitset*		container;
+  };
 }
 
 # include <vaucanson/misc/bitset.hxx>

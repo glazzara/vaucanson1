@@ -104,6 +104,14 @@ namespace utility {
   }
 
   template <class InputIterator, class Letter>
+  void
+  Window<InputIterator, Letter>::moveto(iterator_t position)
+  {
+    stream_ = position;
+    compute_size();
+  }
+
+  template <class InputIterator, class Letter>
   typename Window<InputIterator, Letter>::length_t
   Window<InputIterator, Letter>::size() const
   {
@@ -124,6 +132,13 @@ namespace utility {
   Window<InputIterator, Letter>::print(std::ostream& ostr) const
   {
     return ostr << window();
+  }
+
+  template <class InputIterator, class Letter>
+  typename Window<InputIterator, Letter>::letter_t
+  Window<InputIterator, Letter>::eol_value() const
+  {
+    return eol_;
   }
 
   template <class InputIterator, class Letter>
