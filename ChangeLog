@@ -1,3 +1,11 @@
+2004-05-05  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/tools/gen_random.hh,
+	* include/vaucanson/tools/gen_random.hxx: Make automaton generation
+	work for transducers and factor some code.
+	* src/tests/transducers/realtime_test.hh: Properly use transducer
+	generation.
+
 2004-05-04  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/tests/context_headers/transducers/global_consistency_test.hh:

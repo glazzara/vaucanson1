@@ -43,22 +43,13 @@ unsigned realtime_test(tests::Tester& tg)
 
   tests::Tester			t(tg.verbose());
   vcsn::tools::GenRandomAutomata<Transducer> gen(time(0x0));
-  alphabet_t				in_alpha;
-  alphabet_t				out_alpha;
-
-  for (int i = 'a'; i <= 'z'; ++i)
-    {
-      in_alpha.insert(i);
-      out_alpha.insert(i);
-    }
-  automaton_t transducer = new_automaton(in_alpha, out_alpha);
 
   const unsigned nb_ok_tests     = 20;
   bool error = false;
 
   for (unsigned i = 0; i < nb_ok_tests; i++)
     {
-      automaton_t t = gen.generate(transducer.structure(), 50, 60);;
+      automaton_t t = gen.generate(50, 60);;
       if (!is_realtime(t))
 	error = true;
     }

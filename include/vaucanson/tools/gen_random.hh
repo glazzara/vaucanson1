@@ -37,11 +37,45 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/tools/usual.hh>
 
+# define AUTO_SET_TYPES(AutoSet) \
+typedef  AutoSet				automata_set_t; \
+typedef typename automata_set_t::series_set_t	series_set_t;	\
+typedef typename series_set_t::monoid_t		monoid_t;	\
+typedef typename series_set_t::semiring_t	semiring_t;	\
+typedef typename monoid_t::alphabet_t		alphabet_t;
+
+
 namespace vcsn {
 
   using namespace algebra;
 
-  template <class TAutomata> 
+  /*---------------------.
+  | GenRandomAutomataSet |
+  `---------------------*/
+
+  class GenRandomAutomataSet
+  {
+  public:
+    GenRandomAutomataSet();
+
+    template <class AutoSet>
+    static AutoSet generate(SELECTOR(AutomataBase<AutoSet>),
+			    unsigned nb_letter = 0);
+
+    template <class AutoSet>
+    static AutoSet generate(SELECTOR(TransducerBase<AutoSet>),
+			    unsigned input_nb_letter = 0,
+			    unsigned output_nb_letter = 0);
+
+    static unsigned alea(unsigned max);
+  };
+
+
+  /*------------------.
+  | GenRandomAutomata |
+  `------------------*/
+
+  template <class TAutomata>
   class GenRandomAutomata
   {
   public:
@@ -51,41 +85,41 @@ namespace vcsn {
     GenRandomAutomata();
     GenRandomAutomata(unsigned init);
 
-    TAutomata empty(unsigned nb_letter = 2); 
-    TAutomata empty(const automata_set_t& set); 
+    TAutomata empty(unsigned nb_letter = 0);
+    TAutomata empty(const automata_set_t& set);
 
-    TAutomata generate(unsigned nb_state, unsigned nb_edge, 
+    TAutomata generate(unsigned nb_state, unsigned nb_edge,
 		       unsigned istate = 1, unsigned fstate = 1,
-		       unsigned nb_letter = 2);
+		       unsigned nb_letter = 0);
     TAutomata generate(const automata_set_t& set,
 		       unsigned nb_state, unsigned nb_edge,
 		       unsigned istate = 1, unsigned fstate = 1);
 
-    TAutomata generate_dfa(unsigned nb_state, 
-			   unsigned size_alphabet = 2, 
+    TAutomata generate_dfa(unsigned nb_state,
+			   unsigned size_alphabet = 0,
 			   unsigned fstate = 1);
     TAutomata generate_dfa(const automata_set_t& set,
-			   unsigned nb_state, 
+			   unsigned nb_state,
 			   unsigned fstate = 1);
 
-    TAutomata generate_with_epsilon(unsigned nb_state, unsigned nb_edge, 
-				    unsigned nb_epsilon_min, 
+    TAutomata generate_with_epsilon(unsigned nb_state, unsigned nb_edge,
+				    unsigned nb_epsilon_min,
 				    unsigned nb_epsilon_max);
     TAutomata generate_with_epsilon(const automata_set_t& set,
-				    unsigned nb_state, unsigned nb_edge, 
-				    unsigned nb_epsilon_min, 
+				    unsigned nb_state, unsigned nb_edge,
+				    unsigned nb_epsilon_min,
 				    unsigned nb_epsilon_max);
 
     TAutomata generate_normalized(unsigned nb_state, unsigned density = 3);
     TAutomata generate_normalized(const automata_set_t& set,
 				  unsigned nb_state, unsigned density = 3);
 
+
   private:
 
-    unsigned alea(unsigned max);
     unsigned nb_edge_circle(TAutomata work, hstate_t state);
     void     del_edge_circle(TAutomata& work, hstate_t state);
-   
+
   };
 
   namespace tools {
@@ -98,8 +132,8 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/tools/gen_random.hxx>
+# include <vaucanson/tools/gen_random.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_TOOLS_GEN_RANDOM_HH
