@@ -13,7 +13,7 @@ EOF
   exit 1
 fi
 
-sed -f - "$1"/*.hxx "$1"/loadgeometry.inc <<EOF | sort -u > "$2"/xmlstrings.inc
+sed -f - "$1"/*.hxx "$2"/loadgeometry.inc <<EOF | sort -u > "$2"/xmlstrings.inc
 /str_/ {
 s/^.*str_\([a-zA-Z0-9_]*\)[^a-zA-Z0-9_].*$/\1/
 s/\(.*\)/const XMLCh str_\1[] = { |\1/

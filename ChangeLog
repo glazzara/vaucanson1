@@ -1,5 +1,10 @@
 2004-03-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/xml/genutfstrings.sh: Expect to find
+	loadgeometry.inc in builddir, not srcdir.
+
+2004-03-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/Makefile.am: Regenerate list of includes.
 	* doc/xml/Makefile.am: Typo in the dependencies of format.dvi. Bring
 	back the generated .tex files into EXTRA_DIST.
