@@ -96,7 +96,7 @@ namespace vcsn
       roots_.push_back(root);
 
       /*
-       *  The vaucanson DTD defines the "name" attribute for states to
+       *  The Vaucanson DTD defines the "name" attribute for states to
        *  be of type ID.  Therefore two distinct automata cannot share
        *  states  with  the same  name.   The  following  lines are  a
        *  workaround which  perform a kind of alpha  conversion on the

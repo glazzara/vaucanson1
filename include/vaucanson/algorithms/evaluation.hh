@@ -38,7 +38,7 @@
  *
  * Undocumented stuff.
  *
- * @see evaluation()
+ * @see vcsn::evaluation()
  * @bug FIXME: Document!
  */
 /** @} */
@@ -60,9 +60,9 @@ namespace vcsn {
 	     const Element<ST, TT>&,
 	     Element<SARET, TARET>&);
 
-  /// @name Evalutation algorithm's internals
-  //@{
-  /// The following functions are absolutely not for public calls.
+  // Evalutation algorithm's internals
+  // The following functions are absolutely not for public calls.
+
   template<typename SE, typename TE,
 	   typename ST, typename TT,
 	   typename M>
@@ -99,8 +99,6 @@ namespace vcsn {
   partial_3(const Element<SA, TA>&,
 	    const Element<ST, TT>&,
 	    const hstate_t, M&);
-
-  //@}
 
   /** @} */
 

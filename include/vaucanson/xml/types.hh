@@ -55,6 +55,8 @@ namespace vcsn
 
   namespace xml
   {
+    /** @addtogroup xml *//** @{ */
+
     // Forward declarations.
     class XmlInfosTag;
     class XmlValue;
@@ -95,7 +97,6 @@ namespace vcsn
     typedef XmlAutomaton			xml_automaton_impl_t;
     /// Dynamic XML automaton type.
     typedef Element<XmlStructure, XmlAutomaton>	xml_automaton_t;
-
 
     /// Dynamic XML session type.
     typedef XmlSession				xml_session_t;

@@ -78,7 +78,7 @@ namespace vcsn
 	};
       /**
        * @brief Read constructor.
-       * @param elt XML automaton root node.
+       * @param root XML automaton root node.
        */
       XmlStructure(DOMElement* root);
       /// Default constructor.

@@ -46,7 +46,7 @@
  * the expertize we capitalized during our intensive work on high
  * performance generic programming for Olena. On the other hand, its
  * theoretical wellfoundness in the area of automata is ensured thanks
- * to a collaborative work with Jacques Skarovitch, at the
+ * to a collaborative work with Jacques Sakarovitch, at the
  * &Eacute;cole Nationale Sup&eacute;rieure des
  * T&eacute;l&eacute;communications (<A
  * HREF="http://www.enst.fr/">ENST</A>).

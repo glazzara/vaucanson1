@@ -32,7 +32,7 @@
 #ifndef VCSN_XML_DYNAMIC_HH
 # define VCSN_XML_DYNAMIC_HH
 
-/** @addtogroup xml XML tools for vaucanson *//** @{ */
+/** @addtogroup xml XML tools for Vaucanson *//** @{ */
 /**
  * @file dynamic.hh
  *

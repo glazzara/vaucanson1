@@ -43,7 +43,7 @@ namespace vcsn {
   namespace rat {
 
     /// Global indexes to the IOS internal extensible array.
-    /// @{
+    //@{
 
     /// Print mode.
     inline
@@ -81,7 +81,7 @@ namespace vcsn {
       return idx;
     }
 
-    /// @}
+    //@}
 
     /*------------.
     | DumpVisitor |

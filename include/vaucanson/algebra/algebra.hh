@@ -41,14 +41,14 @@
  * rational expressions (as implementation of series).
  *
  * @see
- *     - ::vcsn::algebra
- *     - @c AlphabetSet
- *     - @c MonoidBase
- *     - @c FreeMonoid
- *     - @c SemigroupBase
- *     - @c NumericalSemiring
- *     - @c TropicalSemiring
- *     - @c Series
+ *     - vcsn::algebra
+ *     - vcsn::algebra::AlphabetSet
+ *     - vcsn::algebra::MonoidBase
+ *     - vcsn::algebra::FreeMonoid
+ *     - vcsn::algebra::SemigroupBase
+ *     - vcsn::algebra::NumericalSemiring
+ *     - vcsn::algebra::TropicalSemiring
+ *     - vcsn::algebra::Series
  */
 /** @{ */
 /**

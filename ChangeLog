@@ -1,5 +1,20 @@
 2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/vaucanson.hh: Typo.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx,
+	* include/vaucanson/xml/types.hh:
+	Fix Doxygen grouping.
+	* include/vaucanson/xml/xml_set.hh: Fix the @param in the XmlStructure
+	constructor documentation.
+	* include/vaucanson/algebra/algebra.hh: Fix Doxygen links.
+	* include/vaucanson/xml/dynamic.hh,
+	* include/vaucanson/xml/session.hxx: s/vaucanson/Vaucanson/ in
+	comments.
+	* include/vaucanson/algorithms/evaluation.hh: Fix a Doxygen link.
+	Remove internal functions from the documentation.
+
+2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* README: Update.
 
 2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
