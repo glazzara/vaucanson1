@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -23,6 +24,7 @@
 
 # include <vaucanson/algebra/concept/tropical_semiring.hh>
 # include <vaucanson/misc/numerical_constraints.hh>
+# include <vaucanson/misc/random.hh>
 
 namespace vcsn {
 
@@ -102,6 +104,25 @@ namespace vcsn {
     template <class T>
     static inline void 
     op_in_star(const TropicalSemiring<TropicalMax>& s, T& b);
+    
+    template <class TropicalKind, class T>
+    Element<TropicalSemiring<TropicalKind>, T>
+    op_choose(const TropicalSemiring<TropicalKind>& set, SELECTOR(T));
+    
+    template <class TropicalKind, typename T>
+    bool
+    op_can_choose_non_stareable(const TropicalSemiring<TropicalKind>& set,
+			    SELECTOR(T));
+
+    template <class TropicalKind, typename T>
+    Element<TropicalSemiring<TropicalKind>, T>
+    op_choose_stareable(const TropicalSemiring<TropicalKind>& set,
+			SELECTOR(T));
+
+    template <class TropicalKind, typename T>
+    Element<TropicalSemiring<TropicalKind>, T>
+    op_choose_non_stareable(const TropicalSemiring<TropicalKind>& set,
+			    SELECTOR(T));
 
     /*---------------.
     | Pretty printer |

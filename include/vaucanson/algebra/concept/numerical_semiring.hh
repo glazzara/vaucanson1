@@ -37,7 +37,7 @@ namespace vcsn {
     //! usual operations (+, *).
     struct NumericalSemiring
       : SemiringBase<NumericalSemiring>
-    {};
+    { };
 
     /*! @} @} */
 

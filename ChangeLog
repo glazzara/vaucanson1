@@ -1,3 +1,24 @@
+2003-04-11  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/semiring_base.hh,
+	include/vaucanson/algebra/concept/semiring_base.hxx: Add
+	can_choose_non_stareable, choose_stareable and choose_non_stareable
+	to struct SemiringBase<Self>. Also add corresponding op_ default
+	implementations.
+	* include/vaucanson/algebra/concept/tropical_semiring.hh: Add
+	struct NonStareableInterval<T> to TropicalMax and TropicalMin.
+	* include/vaucanson/algebra/concept/tropical_semiring.hxx: New.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
+	include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Add specialisation to op_can_choose_non_stareable, op_choose_stareable
+	and op_choose_non_stareable for integers, booleans and floats.
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh,
+	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:
+	Add specialisation to op_can_choose_non_stareable, op_choose_stareable
+	and op_choose_non_stareable for TropicalSemiring<TropicalKind>.
+	* include/vaucanson/misc/random.hh: Fix bugs in RandomGenerator<int>
+	and RandomGenerator<bool>. Add RandomGenerator<float>.
+
 2003-04-10  Loic Fosse  <fosse_l@lrde.epita.fr>
 
         * include/vaucanson/algebra/concrete/series/krat.hxx: Fix minor bug.

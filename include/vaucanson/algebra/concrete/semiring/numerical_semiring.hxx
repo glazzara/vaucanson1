@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+//  Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -88,6 +89,39 @@ namespace vcsn {
   }
 
   /*-----------------------------.
+  | specializations for integers |
+  `-----------------------------*/
+
+  inline
+  bool
+  op_can_choose_non_stareable(const NumericalSemiring& set,
+			      SELECTOR(int))
+  {
+    return true; // Every integer excepted Zero is non-stareable
+  }
+
+  inline
+  Element<NumericalSemiring, int>
+  op_choose_stareable(const NumericalSemiring& set, SELECTOR(int))
+  {
+    // 0 is the only one integer to be stareable. So we have no choice !
+    return 0;
+  }
+  
+  inline
+  Element<NumericalSemiring, int> 
+  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(int))
+  {
+    // We want anything but 0.
+    int r;
+
+    do
+      r = op_choose(set, SELECT(int));
+    while (r == 0);
+    return r;
+  }
+
+  /*-----------------------------.
   | specializations for booleans |
   `-----------------------------*/
   template<typename T>
@@ -134,6 +168,22 @@ namespace vcsn {
     b = true; 
   }
 
+  inline
+  Element<NumericalSemiring, bool>
+  op_choose_stareable(const NumericalSemiring& set, SELECTOR(bool))
+  {
+    // Every boolean is stareable !
+    return op_choose(set, SELECT(bool));
+  }
+  
+  inline
+  Element<NumericalSemiring, bool> 
+  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(bool))
+  {
+    assert(! "Cannot choose non-stareable boolean: that does not exist");
+    return false;
+  }
+
   /*--------------------------------------------.
   | specialization for floating point numbers.  |
   `--------------------------------------------*/
@@ -170,6 +220,33 @@ namespace vcsn {
       f = (1.0 / (1.0 - f));
     else
       assert(! "star not defined.");
+  }
+
+  inline
+  bool
+  op_can_choose_non_stareable(const NumericalSemiring& set,
+			      SELECTOR(float))
+  {
+    return true; // Every float which is less than 0 or greater than 1 is
+		 // non-stareable.
+  }
+
+  inline
+  Element<NumericalSemiring, float>
+  op_choose_stareable(const NumericalSemiring& set, SELECTOR(float))
+  {
+    return misc::RandomGenerator<float>::do_it(true);
+  }
+  
+  inline
+  Element<NumericalSemiring, float> 
+  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(float))
+  {
+    float r;
+    do
+      r = misc::RandomGenerator<float>::do_it();
+    while ((0.0 <= r) && (r < 1.0));
+    return r;
   }
 
   // FIXME: add some more operators as syntactic sugar

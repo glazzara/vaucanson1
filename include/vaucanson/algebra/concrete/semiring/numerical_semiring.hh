@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -51,7 +52,20 @@ namespace vcsn {
   template <class T>
   Element<NumericalSemiring, T>
   op_choose(const NumericalSemiring& s, SELECTOR(T));
+
+  /*-----------------------------.
+  | specializations for integers |
+  `-----------------------------*/
+
+  bool
+  op_can_choose_non_stareable(const NumericalSemiring& set, SELECTOR(int));
+
+  Element<NumericalSemiring, int>
+  op_choose_stareable(const NumericalSemiring& set, SELECTOR(int));
   
+  Element<NumericalSemiring, int> 
+  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(int));
+
   /*-----------------------------.
   | specializations for booleans |
   `-----------------------------*/
@@ -75,8 +89,13 @@ namespace vcsn {
   inline bool op_stareable(const NumericalSemiring& s, bool b);
   
   inline void op_in_star(const NumericalSemiring& s, bool& b);
+
+  Element<NumericalSemiring, bool>
+  op_choose_stareable(const NumericalSemiring& set, SELECTOR(bool));
   
-      
+  Element<NumericalSemiring, bool> 
+  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(bool));
+
   /*-------------------------.
   | goodies for real numbers |
   `-------------------------*/
@@ -92,6 +111,16 @@ namespace vcsn {
    inline void op_in_star(const NumericalSemiring& s, float& f);
 
    inline void op_in_star(const NumericalSemiring& s, double& f);
+
+  bool
+  op_can_choose_non_stareable(const NumericalSemiring& set,
+			      SELECTOR(float));
+
+  Element<NumericalSemiring, float>
+  op_choose_stareable(const NumericalSemiring& set, SELECTOR(float));
+  
+  Element<NumericalSemiring, float> 
+  op_choose_non_stareable(const NumericalSemiring& set, SELECTOR(float));
 
 } // vcsn
 

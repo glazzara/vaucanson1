@@ -1,28 +1,31 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 187)
-(Parent-Version vaucanson 0 186)
-(Version-Log "2003-04-10  Loic Fosse  <fosse_l@lrde.epita.fr>
+(Project-Version vaucanson 0 188)
+(Parent-Version vaucanson 0 187)
+(Version-Log "2003-04-11  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-        * include/vaucanson/algebra/concrete/series/krat.hxx: Fix minor bug.
-        * include/vaucanson/fundamental/element.hxx: Fix a bug in a constructor,
-        which called a wrong SetSlotAttribute constructor. 
-        * include/vaucanson/fundamental/slots.hxx: Change a contructor in order
-        to copy the pointed object instead of the pointer.
-        * include/vaucanson/algorithms/brzozowski.hxx: Change algorithm to match
-        the new pattern.
-        * include/vaucanson/algorithms/algo_helper.hxx: Transfrom an old pattern
-        and add a new one.
-        * include/vaucanson/algorithms/algo_helper.hh: Transform an old pattern
-        and add a new one.
-        * include/vaucanson/algorithms/krat_exp_linearize.hxx: Correct some
-        bugs.
-        * include/vaucanson/algorithms/berry_sethi.hxx: Add.
-        * include/vaucanson/algorithms/berry_sethi.hh: Add.")
+	* include/vaucanson/algebra/concept/semiring_base.hh,
+	include/vaucanson/algebra/concept/semiring_base.hxx: Add
+	can_choose_non_stareable, choose_stareable and choose_non_stareable
+	to struct SemiringBase<Self>. Also add corresponding op_ default
+	implementations.
+	* include/vaucanson/algebra/concept/tropical_semiring.hh: Add
+	struct NonStareableInterval<T> to TropicalMax and TropicalMin.
+	* include/vaucanson/algebra/concept/tropical_semiring.hxx: New.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,
+	include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Add specialisation to op_can_choose_non_stareable, op_choose_stareable
+	and op_choose_non_stareable for integers, booleans and floats.
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh,
+	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:
+	Add specialisation to op_can_choose_non_stareable, op_choose_stareable
+	and op_choose_non_stareable for TropicalSemiring<TropicalKind>.
+	* include/vaucanson/misc/random.hh: Fix bugs in RandomGenerator<int>
+	and RandomGenerator<bool>. Add RandomGenerator<float>.")
 (New-Version-Log "")
-(Checkin-Time "Thu, 10 Apr 2003 17:57:03 +0200")
-(Checkin-Login fosse_l)
+(Checkin-Time "Fri, 11 Apr 2003 10:11:27 +0200")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -104,7 +107,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.127 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.128 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.8 600))
@@ -134,14 +137,14 @@
   (include/vaucanson/algebra/concept/letter.hh (vaucanson/i/22_letter.hh 1.2 600))
   (include/vaucanson/algebra/concept/monoid_base.hh (vaucanson/b/14_monoid_bas 1.10 600))
   (include/vaucanson/algebra/concept/monoid_base.hxx (vaucanson/b/13_monoid_bas 1.6 600))
-  (include/vaucanson/algebra/concept/numerical_semiring.hh (vaucanson/b/17_numerical_ 1.7 600))
+  (include/vaucanson/algebra/concept/numerical_semiring.hh (vaucanson/b/17_numerical_ 1.8 600))
   (include/vaucanson/algebra/concept/semigroup_base.hh (vaucanson/b/12_semigroup_ 1.7 600))
   (include/vaucanson/algebra/concept/semigroup_base.hxx (vaucanson/b/11_semigroup_ 1.5 600))
-  (include/vaucanson/algebra/concept/semiring_base.hh (vaucanson/b/16_semiring_b 1.7 600))
-  (include/vaucanson/algebra/concept/semiring_base.hxx (vaucanson/b/15_semiring_b 1.6 600))
+  (include/vaucanson/algebra/concept/semiring_base.hh (vaucanson/b/16_semiring_b 1.8 600))
+  (include/vaucanson/algebra/concept/semiring_base.hxx (vaucanson/b/15_semiring_b 1.7 600))
   (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.12 600))
   (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.11 600))
-  (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.6 600))
+  (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.7 600))
   (include/vaucanson/algebra/concrete/alphabets/alphabets.hh (vaucanson/29_alphabets. 1.10 600))
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh (vaucanson/i/24_decorated_ 1.1 600))
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx (vaucanson/i/25_decorated_ 1.2 600))
@@ -157,10 +160,10 @@
   (include/vaucanson/algebra/concrete/letter/range.hh (vaucanson/h/28_range.hh 1.3 600))
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.3 600))
   (include/vaucanson/algebra/concrete/predefs.hh (vaucanson/g/45_predefs.hh 1.3 600))
-  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.6 600))
-  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.7 600))
-  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh (vaucanson/b/32_tropical_s 1.5 600))
-  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.7 600))
+  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh (vaucanson/b/19_numerical_ 1.7 600))
+  (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (vaucanson/b/18_numerical_ 1.8 600))
+  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh (vaucanson/b/32_tropical_s 1.6 600))
+  (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.8 600))
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.15 600))
@@ -303,7 +306,7 @@
   (include/vaucanson/misc/limits.hh (vaucanson/g/3_limits.hh 1.2 600))
   (include/vaucanson/misc/misc_constraints.hh (vaucanson/b/21_misc_const 1.6 600))
   (include/vaucanson/misc/numerical_constraints.hh (vaucanson/b/20_numerical_ 1.6 600))
-  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.9 600))
+  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.10 600))
   (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.14 600))
   (include/vaucanson/misc/ref.hh (vaucanson/c/31_ref.hh 1.7 600))
   (include/vaucanson/misc/ref.hxx (vaucanson/c/33_ref.hxx 1.8 600))
@@ -423,7 +426,7 @@
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 600))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 755))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
@@ -679,6 +682,11 @@
 
   (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.1 600))
   (include/vaucanson/algorithms/berry_sethi.hh (vaucanson/l/11_berry_seth 1.1 600))
+
+;; Files added by populate at Fri, 11 Apr 2003 09:23:35 +0200,
+;; to version 0.187(w), by clavei_t:
+
+  (include/vaucanson/algebra/concept/tropical_semiring.hxx (vaucanson/l/12_tropical_s 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

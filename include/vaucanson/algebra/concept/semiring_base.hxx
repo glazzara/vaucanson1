@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+//  Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -23,6 +24,8 @@
 
 # include <vaucanson/algebra/concept/semiring_base.hh>
 
+# include <iostream>
+
 namespace vcsn {
 
   namespace algebra {
@@ -39,7 +42,32 @@ namespace vcsn {
     SemiringBase<Self>::SemiringBase(const SemiringBase& other) :
       MonoidBase<Self>(other)
     {}
+    
+    template <class Self>
+    template <class T>
+    inline
+    bool
+    SemiringBase<Self>::can_choose_non_stareable(SELECTOR(T)) const
+    {
+      return op_can_choose_non_stareable(self(), SELECT(T));
+    }
 
+    template <class Self>
+    template <class T>
+    Element<Self, T>
+    SemiringBase<Self>::choose_stareable(SELECTOR(T)) const
+    {
+      return op_choose_stareable(self(), SELECT(T));
+    }
+    
+    template <class Self>
+    template <class T>
+    Element<Self, T>
+    SemiringBase<Self>::choose_non_stareable(SELECTOR(T)) const
+    {
+      return op_choose_non_stareable(self(), SELECT(T));
+    }
+    
   } // algebra
 
 
@@ -102,6 +130,36 @@ namespace vcsn {
   // default implementations:
 
   template <typename S, typename T>
+  inline
+  bool
+  op_can_choose_non_stareable(const S& set, SELECTOR(T))
+  {
+    return false;
+  }
+
+
+  template <typename S, typename T>
+  inline
+  Element<S, T>
+  op_choose_stareable(const SemiringBase<S>& set, SELECTOR(T))
+  {
+    std::cerr << "WARNING: default implementation of op_choose_stareable "
+      "called." << std::endl;
+    std::cerr << "RESULT IS NOT RANDOM." << std::endl;
+    // Zero is always stareable.
+    return T();
+  }
+
+  template <typename S, typename T>
+  inline
+  Element<S, T> 
+  op_choose_non_stareable(const SemiringBase<S>& set, SELECTOR(T))
+  {
+    assert(! "default implementation of op_choose_non_stareable called");
+    return T();
+  }
+
+  template <typename S, typename T>
   bool 
   op_parse(const SemiringBase<S>&		 set, 
 	   T&	  				 w, 
@@ -125,7 +183,6 @@ namespace vcsn {
     w = ret;
     return true;
   }
-
 
   template <typename Self, typename T>
   bool op_stareable(const algebra::SemiringBase<Self>& s, const T& v)

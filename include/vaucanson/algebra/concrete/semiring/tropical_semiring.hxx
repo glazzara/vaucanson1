@@ -3,7 +3,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+//  Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -171,6 +172,55 @@ namespace vcsn {
       assert(! "star not defined.");
     }
 
+    template <class TropicalKind, class T>
+    inline
+    Element<TropicalSemiring<TropicalKind>, T>
+    op_choose(const TropicalSemiring<TropicalKind>& set, SELECTOR(T))
+    {
+      return Element<TropicalSemiring<TropicalKind>, T>
+	(set, misc::RandomGenerator<T>::do_it());
+    }
+
+    template <class TropicalKind, typename T>
+    inline
+    bool
+    op_can_choose_non_stareable(const TropicalSemiring<TropicalKind>& set,
+				SELECTOR(T))
+    {
+      return true;
+    }
+
+    template <class TropicalKind, class T>
+    inline
+    Element<TropicalSemiring<TropicalKind>, T>
+    op_choose_stareable(const TropicalSemiring<TropicalKind>& set,
+			SELECTOR(T))
+    {
+      const T min = TropicalKind::template NonStareableInterval<T>::inf();
+      const T max = TropicalKind::template NonStareableInterval<T>::sup();
+      
+      T r;
+      do
+	r = op_choose(set, SELECT(T));
+      while ( (min < r) && (r < max) );
+      return r;
+    }
+
+    template <class TropicalKind, class T>
+    inline
+    Element<TropicalSemiring<TropicalKind>, T>
+    op_choose_non_stareable(const TropicalSemiring<TropicalKind>& set,
+			    SELECTOR(T))
+    {
+      const T min = TropicalKind::template NonStareableInterval<T>::inf();
+      const T max = TropicalKind::template NonStareableInterval<T>::sup();
+      
+      T r;
+      do
+	r = op_choose(set, SELECT(T));
+      while ( (max <= r) || (r <= min) );
+      return r;
+    }
 
     /*---------------.
     | Pretty printer |

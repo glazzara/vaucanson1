@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,6 +40,20 @@ namespace vcsn {
     template <class Self>
     struct SemiringBase : MonoidBase<Self>
     {
+    public:
+      //! Indicate wether it is possible or not to call choose_non_stareable.
+      // There's no need for can_choose_stareable, since Zero is always
+      // stareable and therefor can be choosen.
+      template <class T>
+      bool can_choose_non_stareable(SELECTOR(T)) const;
+
+      //! Return a randomly choosed stareable weight.
+      template <class T>
+      Element<Self, T>	choose_stareable(SELECTOR(T)) const;
+
+      //! Return a randomly choosed non-stareable weight.
+      template <class T>
+      Element<Self, T> choose_non_stareable(SELECTOR(T)) const;
     protected:
       //! Default constructor is protected since it is an abstract class.
       SemiringBase();
@@ -101,6 +116,30 @@ namespace vcsn {
   /*! @} @} */
 
   // default implementations:
+
+  /*! operator over SemiringBase<S> that returns whether a non-stareable
+   *  element can be choosen from a Semiring, given a particular
+   *  implementation.
+   */
+  template <typename S, typename T>
+  bool
+  op_can_choose_non_stareable(const S& set, SELECTOR(T));
+
+  /*! operator over SemiringBase<S> that returns a random stareable element in
+   *  the set.
+   */
+  template <typename S, typename T>
+  Element<S, T>
+  op_choose_stareable(const SemiringBase<S>& set, SELECTOR(T));
+
+  /*! operator over SemiringBase<S> that returns a random non-stareable
+   *  element in the set.
+   */
+  template <typename S, typename T>
+  Element<S, T> 
+  op_choose_non_stareable(const SemiringBase<S>& set, SELECTOR(T));
+
+
   template <typename S, typename T>
   bool 
   op_parse(const SemiringBase<S>&, T& w, 
