@@ -41,6 +41,8 @@
 
 # include <vaucanson/tools/usual.hh>
 
+# include <vaucanson/misc/contract.hh>
+
 namespace vcsn {
 
   /**
@@ -444,7 +446,7 @@ namespace vcsn {
 		 rat::exp<Tm, Tw>& dst,
 		 const oTw& src)
   { 
-    // assert(s.weights() == weights);
+    precondition(& s.weights() == & weights);
     op_in_add(s, dst, op_convert(SELECT2(algebra::Series<W, M>),
 				 SELECT2(rat::exp<Tm, Tw>),
 				 SELECT(W),
@@ -486,7 +488,7 @@ namespace vcsn {
 		 rat::exp<Tm, Tw>& ret,
 		 const oTw& w)
   { 
-    // assert(s.weights() == weights);
+    precondition(& s.weights() == & weights);
 
     typedef rat::Node<Tm, Tw>				node_t;
     typedef typename rat::Node<Tm, Tw>::type		type;
@@ -578,7 +580,7 @@ namespace vcsn {
 			  const oTw& w,
 			  const rat::exp<Tm, Tw>& b)
   { 
-    // assert(s.weights() == weights);
+    precondition(& s.weights() == & weights);
 
     typedef rat::Node<Tm, Tw>				node_t;
     typedef typename rat::Node<Tm, Tw>::type		type;

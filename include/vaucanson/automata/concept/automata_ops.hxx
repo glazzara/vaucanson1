@@ -831,7 +831,7 @@ namespace vcsn {
 		 OutputIterator res, 
 		 hstate_t from, 
 		 const L& query,
-		 delta_kind::states k)
+		 delta_kind::states)
   {
     std::set<hedge_t> ret;
     std::insert_iterator<std::set<hedge_t> > ret_i(ret, ret.begin());

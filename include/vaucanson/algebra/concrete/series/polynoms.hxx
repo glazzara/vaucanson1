@@ -32,6 +32,7 @@
 
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <vaucanson/misc/contract.hh>
 
 namespace vcsn {
 
@@ -444,7 +445,7 @@ namespace vcsn {
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTm& src)
   { 
-    // assert(s.monoid() == monoid);
+    precondition(& s.monoid() == & monoid);
     dst.add(s.weights(), 
 	    op_convert(SELECT(M), SELECT(Tm), src),
 	    identity_value(SELECT(W), SELECT(Tw)));
@@ -485,7 +486,7 @@ namespace vcsn {
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src)
   { 
-    // assert(s.weights() == weights);
+    precondition(& s.weights() == & weights);
     if (src != zero_value(SELECT(W), SELECT(oTw)))
       dst.add(s.weights(), 
 	      identity_value(SELECT(M), SELECT(Tm)),
@@ -523,11 +524,11 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_in_mul(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>&,
+		 const algebra::SemiringBase<W>& weights,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src)
   { 
-    // assert(s.weights() == weights);
+    precondition(& s.weights() == & weights);
 
     typename algebra::polynom<Tm, Tw>::iterator p;
     for (typename algebra::polynom<Tm, Tw>::iterator i = dst.begin();
@@ -555,12 +556,12 @@ namespace vcsn {
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   inline
-  algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>&,
+  algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& weights,
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b)
   { 
-    // assert(s.weights() == weights);
+    precondition(& s.weights() == & weights);
 
     algebra::polynom<Tm, Tw> ret(b);
 
