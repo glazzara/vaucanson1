@@ -26,6 +26,9 @@ nobase_include_HEADERS = \
 ./vaucanson/misc/selectors.hh				     \
 ./vaucanson/misc/container_ops.hxx			     \
 ./vaucanson/misc/container_ops.hh			     \
+./vaucanson/misc/numerical_constraints.hh		     \
+./vaucanson/misc/misc_constraints.hh			     \
+./vaucanson/misc/constraints.hh				     \
 ./vaucanson/internal/traits.hh				     \
 ./vaucanson/algebra/concrete/alphabets/set_alphabet.hxx	     \
 ./vaucanson/algebra/concrete/alphabets/set_alphabet.hh	     \

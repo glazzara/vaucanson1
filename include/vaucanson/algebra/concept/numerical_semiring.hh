@@ -7,6 +7,8 @@
 #ifndef ALGEBRA_CONCEPT_NUMERICAL_SEMIRING_HH
 # define ALGEBRA_CONCEPT_NUMERICAL_SEMIRING_HH
 
+# include <vaucanson/algebra/concept/semiring_base.hh>
+
 namespace vcsn {
 
   namespace algebra {

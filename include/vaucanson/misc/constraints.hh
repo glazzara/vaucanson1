@@ -7,7 +7,9 @@
 #ifndef UTILITY_CONSTRAINTS_HH
 # define UTILITY_CONSTRAINTS_HH
 
-namespace utility {
+
+namespace utility
+{
 
   /*---------------------------.
   | Static constraint checking |
@@ -104,7 +106,6 @@ namespace utility {
 #endif
 
   } // concepts
-
 } // utility
 
-#endif // UTILITY_CONSTRAINTS_HH
+#endif

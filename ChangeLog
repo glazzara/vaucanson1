@@ -1,5 +1,25 @@
 2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* src/tests/algebra/Makefile.am : added.
+	* src/tests/algebra/Makefile.in : added.
+	* src/tests/algebra/semiring/semiring-numerical-test : added.
+	* src/tests/algebra/semiring/semiring-numerical-test.cc : added.
+	* src/tests/algebra/semiring/Makefile.in : added.
+	* src/tests/algebra/semiring/Makefile.am : added.
+
+	* include/vaucanson/fundamental/element_ops.hh : modified.
+		> # include <vaucanson/misc/selectors.hh>
+
+	* include/vaucanson/fundamental/element_base.hxx : modified. 
+		Fix minor bugs.
+	
+	* configure.ac : modified. Add Makefiles.
+	* include/vaucanson/algebra/concept/semigroup_base.hxx : modified. 
+		Fix includes.
+	* include/vaucanson/algebra/concept/numerical_semiring.hh : idem.
+
+2002-06-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/misc/numerical_constraints.hh : added.
    	* include/vaucanson/misc/misc_constraints.hh : added.
 	* include/vaucanson/misc/constraints.hh : added.

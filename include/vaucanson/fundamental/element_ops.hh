@@ -7,6 +7,7 @@
 
 # include <vaucanson/fundamental/predefs.hh>
 # include <vaucanson/fundamental/op_traits.hh>
+# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/misc/static.hh>
 
 namespace vcsn {

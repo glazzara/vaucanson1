@@ -4,5 +4,8 @@
 # $Id$
 # VCSN_HEADER
 
-SUBDIRS = check \
-	fundamental
+SUBDIRS = \
+	check 					\
+	fundamental				\
+	algebra    				
+

@@ -37,6 +37,8 @@ namespace vcsn {
 
   } // algebra
 
+  using namespace algebra;
+
     /*---------------------------------.
     | MetaElement<MonoidBase<Self>, T> |
     `---------------------------------*/

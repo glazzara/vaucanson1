@@ -1,11 +1,8 @@
-## Process this file with Automake to produce Makefile.in -*-Makefile-*-
-#**************
-#* configure.ac
-#**************
+# configure.ac
+#
+#
 # $Id$
-
-# this file is part of the Vaucanson project. 
-
+# VCSN_HEADER
 
 AC_PREREQ([2.50])
 AC_INIT([vaucanson], [0.1], [vaucanson-bugs@lrde.epita.fr])
@@ -24,6 +21,8 @@ AC_CONFIG_FILES([			\
 	src/tests/Makefile		\
 	src/tests/check/Makefile	\
 	src/tests/fundamental/Makefile  \
+	src/tests/algebra/Makefile		\
+	src/tests/algebra/semiring/Makefile 	\
 	include/Makefile])
 
 AC_OUTPUT

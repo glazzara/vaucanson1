@@ -7,7 +7,6 @@
 #ifndef ALGEBRA_SEMIGROUP_BASE_HXX
 # define ALGEBRA_SEMIGROUP_BASE_HXX
 
-# include <vaucanson/algebra/concept/algebra_base.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 
 namespace vcsn {

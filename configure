@@ -2274,7 +2274,7 @@ ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ex
 ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
 
 
-ac_config_files="$ac_config_files Makefile src/Makefile src/tests/Makefile src/tests/check/Makefile src/tests/fundamental/Makefile include/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile src/tests/Makefile src/tests/check/Makefile src/tests/fundamental/Makefile src/tests/algebra/Makefile src/tests/algebra/semiring/Makefile include/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -2796,6 +2796,8 @@ do
   "src/tests/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/Makefile" ;;
   "src/tests/check/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/check/Makefile" ;;
   "src/tests/fundamental/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/fundamental/Makefile" ;;
+  "src/tests/algebra/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/algebra/Makefile" ;;
+  "src/tests/algebra/semiring/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/algebra/semiring/Makefile" ;;
   "include/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
