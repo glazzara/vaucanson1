@@ -73,16 +73,23 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
 
   char buff[2048];
   char letters[2][2] = { {'a', 'b'}, {'\\', '.'} };
+
+  std::string typeid_name;
+  if (typeid(semiring_elt_value_t) == typeid(double) ||
+      typeid(semiring_elt_value_t) == typeid(float))
+    typeid_name = "f";
+  if (typeid(semiring_elt_value_t) == typeid(int))
+    typeid_name = "i";
+  if (typeid(semiring_elt_value_t) == typeid(bool))
+    typeid_name = "b";
   
-  std::string typeid_name = typeid(semiring_elt_value_t).name();
-  typeid_name = typeid_name == "d" ? "f" : typeid_name;
-  
-  std::string path_to_test = "../../algebra/series/krat/tests/";
+  std::string path_to_test(VCSN_SRC_DIR);
+  path_to_test += "/src/tests/algebra/series/krat/tests/";
   std::string filename =
     path_to_test + "random_krat_exp_" + typeid_name + "_ab";
   std::ifstream file(filename.c_str());
 
-  for (int j = 0; j < 2; ++j)
+  for (int j = 0; file.is_open() && j < 2; ++j)
     {
       alphabet_t alphabet;
       alphabet.insert(letters[j][0]);
@@ -92,8 +99,8 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
       series_set_t s(semiring, monoid);
       krat_exp_t exp(s);
 
-      for (file.getline(buff, 2048); !file.eof();
-	   ++nb_test, file.getline(buff, 2048))
+      file.getline(buff, 2048);
+      while (!file.eof())
 	{
 	  std::ostringstream sstr;
 	  sstr << buff;
@@ -111,6 +118,8 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
 	      else
 		++nb_success;
 	    }
+	  ++nb_test;
+	  file.getline(buff, 2048);
 	}
       
       file.close();

@@ -1,3 +1,11 @@
+2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/bin/generate-test-suite.sh: Add macro VCSN_SRC_DIR defined
+	for all tests, representing the absolute path to the top-level 
+	directory of Vaucanson archive.
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Update 
+	accordingly, and improve code portability.
+
 2004-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Minor fix
