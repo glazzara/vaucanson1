@@ -53,8 +53,8 @@ int main()
   B.insert('y');
 
   alphabet_t	C;
-  C.insert('z');
-  C.insert('t');
+  C.insert('u');
+  C.insert('v');
 
   /*-------------------.
   | Creation of fibg.  |
@@ -99,10 +99,10 @@ int main()
 
   fibd.add_io_edge(s, s, "y", "v");
   fibd.add_io_edge(s, t, "y", "");
-  fibd.add_io_edge(t, s, "x", "zz");
+  fibd.add_io_edge(t, s, "x", "uu");
   fibd.add_io_edge(t, u, "y", "");
-  fibd.add_io_edge(u, t, "x", "zv");
-  fibd.add_io_edge(u, u, "x", "z");
+  fibd.add_io_edge(u, t, "x", "uv");
+  fibd.add_io_edge(u, u, "x", "u");
 
   fibd.set_o_initial(s, "vv");
 
@@ -131,4 +131,5 @@ int main()
 
   tools::dot_display(fibgd, "fibgd", true);
   eval_an_expression(fibgd);
+
 }

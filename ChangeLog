@@ -1,3 +1,10 @@
+2004-07-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/demos/fibonacci/generalized.cc: New file. Write a generalized
+	fibonacci program.
+	* src/demos/fibonacci/Makefile.am: Update.
+	* src/demos/fibonacci/fibonacci.cc: Modify letters in an alphabet.
+
 2004-07-16  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
