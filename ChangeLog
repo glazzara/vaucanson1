@@ -1,5 +1,11 @@
 2004-03-07  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
+	* src/tests/algebra/series/krat/main/Makefile.am: Add new file.
+	* src/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh:
+	  New.
+
+2004-03-07  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
 	* update_config_ac.sh: Correct sed line.
 
 2004-03-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
