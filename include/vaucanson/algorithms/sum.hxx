@@ -1,4 +1,4 @@
-// union.hxx
+// sum.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,32 +19,32 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_UNION_HXX
-# define ALGORITHMS_UNION_HXX
+#ifndef ALGORITHMS_SUM_HXX
+# define ALGORITHMS_SUM_HXX
 
 # include <set>
 # include <map>
-# include <vaucanson/algorithms/union.hh>
+# include <vaucanson/algorithms/sum.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/history.hh>
 
 namespace vcsn {
 
   // FIXME : this should be defined differently :
-  # define INUNION_EVENT	"in place union "
+  # define INSUM_EVENT	"in place sum "
 
   /*------.
-  | union |
+  |  sum  |
   `------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void auto_do_union(const AutomataBase<A>& ,
-		     lhs_t& lhs,
-		     const rhs_t& rhs)
+  void do_sum(const AutomataBase<A>& ,
+	      lhs_t& lhs,
+	      const rhs_t& rhs)
   {
-    /*----------------.
-    | Union of states |
-    `----------------*/
+    /*--------------.
+    | Sum of states |
+    `--------------*/
     std::map<hstate_t, hstate_t> states_map;
 
     for (typename rhs_t::state_iterator i = rhs.states().begin();
@@ -54,15 +54,15 @@ namespace vcsn {
 	hstate_t new_state = lhs.add_state();
 	states_map[*i] = new_state;
 
-	//	lhs.history().set_state_event_about(INUNION_EVENT, new_state, *i);
+	//  lhs.history().set_state_event_about(INSUM_EVENT, new_state, *i);
 
 	lhs.set_final(new_state, rhs.get_final(*i));
 	lhs.set_initial(new_state, rhs.get_initial(*i));
       }
 
-    /*---------------.
-    | Union of edges |
-    `---------------*/
+    /*-------------.
+    | Sum of edges |
+    `-------------*/
 
     typedef std::set<hedge_t> aim_t;
     aim_t aim;
@@ -81,30 +81,30 @@ namespace vcsn {
 			   states_map[rhs.aim_of(*d)],
 			   rhs.label_of(*d));
 
-	    //  lhs.history().set_edge_event_about(INUNION_EVENT, new_edge, *d);
+	    //  lhs.history().set_edge_event_about(INSUM_EVENT, new_edge, *d);
 	  }
       }
   }
 
   // wrappers
   template<typename A, typename T, typename U>
-  void auto_in_union(Element<A, T>& lhs, const Element<A, U>& rhs)
+  void sum_here(Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assert (lhs.set() == rhs.set())
-    auto_do_union(lhs.set(), lhs, rhs);
+    do_sum(lhs.set(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
   Element<A, T> 
-  auto_union(const Element<A, T>& lhs, const Element<A, U>& rhs)
+  sum(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
-    //    ret.history().set_auto_event_about(INUNION_EVENT, lhs, rhs);
-    auto_do_union(ret.set(), ret, rhs);
+    //    ret.history().set_auto_event_about(INSUM_EVENT, lhs, rhs);
+    do_sum(ret.set(), ret, rhs);
     return ret;
   }
 
 } // vcsn
 
-#endif // ALGO_UNION_HXX
+#endif // ALGO_SUM_HXX

@@ -1,4 +1,4 @@
-// union_test.hh
+// sum_test.hh
 // 
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef UNION_TEST_HH
-# define UNION_TEST_HH
+#ifndef SUM_TEST_HH
+# define SUM_TEST_HH
 
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -29,7 +29,7 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/algorithms/union.hh>
+# include <vaucanson/algorithms/sum.hh>
 # include <time.h>
 
 using namespace vcsn;
@@ -37,7 +37,7 @@ using namespace vcsn::algebra;
 using namespace vcsn::tools;
 
 template <class Auto>
-unsigned union_test(tests::Tester& tg)
+unsigned sum_test(tests::Tester& tg)
 {  
   typedef Auto automaton_t;
 
@@ -51,7 +51,7 @@ unsigned union_test(tests::Tester& tg)
     {
       automaton_t a = gen.generate(20, 40);
       automaton_t b = gen.generate(10, 20);
-      automaton_t c = auto_union(a, b);
+      automaton_t c = sum(a, b);
 
       if (a.states().size() + b.states().size() == c.states().size())
 	++success_states;
@@ -66,4 +66,4 @@ unsigned union_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-#endif // UNION_TEST_HH
+#endif // SUM_TEST_HH

@@ -1,3 +1,12 @@
+2003-06-22  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/union.hh,
+	  include/vaucanson/algorithms/union.hxx: Move to...
+	* include/vaucanson/algorithms/sum.hh,
+	  include/vaucanson/algorithms/sum.hxx: ... these.
+	* src/tests/automata/algos/union_test.hh: Move to...
+	* src/tests/automata/algos/sum_test.hh: ... this.
+
 2003-06-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/automata/concrete/transpose_view.h[xx,h]: New.
@@ -175,12 +184,6 @@
 
 2003-06-20  Loïc Fosse  <loic@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/union.hh,
-	  include/vaucanson/algorithms/union.hxx: Move to...
-	* include/vaucanson/algorithms/sum.hh,
-	  include/vaucanson/algorithms/sum.hxx: ... these.
-	* src/tests/automata/algos/union_test.hh: Move to...
-	* src/tests/automata/algos/sum_test.hh: ... this.
 	* include/vaucanson/algorithms/concat.hxx: Change function call.
 	* include/vaucanson/algorithms/normalized.hxx: Change function call.
 	* include/vaucanson/algorithms/standard.hxx: Change function call.
