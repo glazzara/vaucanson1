@@ -2,7 +2,7 @@
 // 
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,7 @@
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/hopcroft.hh>
-# include <vaucanson/algorithms/moore.hh>
+# include <vaucanson/algorithms/minimization_moore.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <check/tests_stuff.hh>
 
@@ -75,7 +75,7 @@ unsigned minimization_test(tests::Tester& tg)
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_broz", temp, i);
 	}
       automaton_t hopcroft = hopcroft_minimization_det(work);
-      automaton_t moore = moore_minimization(work);
+      automaton_t moore = minimization_moore(work);
 
       if (t.verbose() == tests::high)
 	{

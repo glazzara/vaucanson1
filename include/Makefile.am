@@ -119,8 +119,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/krat_exp_constant_term.hxx		     \
 	vaucanson/algorithms/krat_exp_derivation.hh		     \
 	vaucanson/algorithms/krat_exp_derivation.hxx		     \
-	vaucanson/algorithms/moore.hh				     \
-	vaucanson/algorithms/moore.hxx				     \
+	vaucanson/algorithms/minimization_moore.hh		     \
+	vaucanson/algorithms/minimization_moore.hxx		     \
 	vaucanson/algorithms/normalized.hh			     \
 	vaucanson/algorithms/normalized.hxx			     \
 	vaucanson/algorithms/product.hh				     \

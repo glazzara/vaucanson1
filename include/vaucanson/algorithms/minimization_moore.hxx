@@ -1,4 +1,4 @@
-// moore.hxx
+// minimization_moore.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -20,8 +20,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-#ifndef ALGO_MOORE_MINIMIZE_HXX
-# define ALGO_MOORE_MINIMIZE_HXX
+#ifndef ALGO_MINIMIZE_MOORE_HXX
+# define ALGO_MINIMIZE_MOORE_HXX
 
 # include <vaucanson/config/system.hh>
 # include <map>
@@ -38,7 +38,7 @@
 namespace vcsn {
 
   /*-------------------.
-  | moore_minimization |
+  | minimization_moore |
   `-------------------*/
   // preconditions : 
   //  - the input automaton is deterministic ;
@@ -46,7 +46,7 @@ namespace vcsn {
   //
   template <typename A, typename input_t, typename output_t>
   void
-  do_moore_minimization(const AutomataBase<A>&	a_set,
+  do_minimization_moore(const AutomataBase<A>&	a_set,
 			output_t&		output,
 			const input_t&		input)
   {
@@ -241,13 +241,13 @@ namespace vcsn {
   
   template<typename A, typename T>
   Element<A, T>
-  moore_minimization(const Element<A, T>& a)
+  minimization_moore(const Element<A, T>& a)
   {
     Element<A, T> output(a.set());
-    do_moore_minimization(a.set(), output, a);
+    do_minimization_moore(a.set(), output, a);
     return trim(output);
   }
 
 } // vcsn
 
-#endif // ALGO_MOORE_MINIMIZE_HH
+#endif // ALGO_MINIMIZE_MOORE_HXX

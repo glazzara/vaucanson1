@@ -1,24 +1,22 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 237)
-(Parent-Version vaucanson 0 236)
-(Version-Log "2003-06-20  Loïc Fosse  <loic@lrde.epita.fr>
+(Project-Version vaucanson 0 238)
+(Parent-Version vaucanson 0 237)
+(Version-Log "2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/union.hh,
-	  include/vaucanson/algorithms/union.hxx: Move to...
-	* include/vaucanson/algorithms/sum.hh,
-	  include/vaucanson/algorithms/sum.hxx: ... these.
-	* src/tests/automata/algos/union_test.hh: Move to...
-	* src/tests/automata/algos/sum_test.hh: ... this.
-	* include/vaucanson/algorithms/concat.hxx: Change function call.
-	* include/vaucanson/algorithms/normalized.hxx: Change function call.
-	* include/vaucanson/algorithms/standard.hxx: Change function call.
-	* src/tests/automata/algos/Makefile.am: Change file name.
-	* src/demos/fsm/generate_toolbox.sh: Change function call.")
+	* include/vaucanson/algorithms/moore.hh,
+	include/vaucanson/algorithms/moore.hxx: Move to...
+	* include/vaucanson/algorithms/minimization_moore.hh
+	include/vaucanson/algorithms/minimization_moore.hxx: ... These. Rename
+	moore_minimization with minimization_moore.
+	* include/Makefile.am: Set accordingly.
+	* src/tests/automata/algos/minimization_test.hh (minimization_test):
+	Replace moore.hh with minimization_moore.hh and moore_minimization with
+	minimization_moore.")
 (New-Version-Log "")
-(Checkin-Time "Fri, 20 Jun 2003 16:07:03 +0200")
-(Checkin-Login fosse_l)
+(Checkin-Time "Fri, 20 Jun 2003 16:18:55 +0200")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -100,7 +98,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.42 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.43 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -126,7 +124,7 @@
   (src/tests/check/unique.cc (vaucanson/p/49_unique.cc 1.1 600))
   (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.4 600))
   (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.3 700))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 600))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 700))
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.3 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
@@ -140,7 +138,7 @@
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.19 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.20 600))
 
   (include/vaucanson/config/system.hh (vaucanson/g/1_system.hh 1.10 600))
   (include/vaucanson/config/math.hh (vaucanson/p/42_math.hh 1.1 600))
@@ -360,8 +358,8 @@
   (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.5 600))
   (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.5 600))
 
-  (include/vaucanson/algorithms/moore.hh (vaucanson/e/24_moore.hh 1.8 600))
-  (include/vaucanson/algorithms/moore.hxx (vaucanson/e/23_moore.hxx 1.8 600))
+  (include/vaucanson/algorithms/minimization_moore.hh (vaucanson/e/24_moore.hh 1.9 600))
+  (include/vaucanson/algorithms/minimization_moore.hxx (vaucanson/e/23_moore.hxx 1.9 600))
   (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.9 600))
   (include/vaucanson/algorithms/normalized.hxx (vaucanson/d/43_normalized 1.9 600))
   (include/vaucanson/algorithms/product.hh (vaucanson/e/20_product.hh 1.9 600))
@@ -418,7 +416,7 @@
   (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.6 600))
   (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.4 600))
   (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.8 600))
-  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.10 600))
+  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.11 600))
   (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.11 600))
   (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.7 600))
   (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.8 600))

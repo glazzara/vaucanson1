@@ -1,3 +1,15 @@
+2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/moore.hh,
+	include/vaucanson/algorithms/moore.hxx: Move to...
+	* include/vaucanson/algorithms/minimization_moore.hh
+	include/vaucanson/algorithms/minimization_moore.hxx: ... These. Rename
+	moore_minimization with minimization_moore.
+	* include/Makefile.am: Set accordingly.
+	* src/tests/automata/algos/minimization_test.hh (minimization_test):
+	Replace moore.hh with minimization_moore.hh and moore_minimization with
+	minimization_moore.
+
 2003-06-20  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/union.hh,

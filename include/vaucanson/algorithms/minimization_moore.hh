@@ -1,4 +1,4 @@
-// moore.hh
+// minimization_moore.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_MOORE_HH
-# define VCSN_ALGORITHMS_MOORE_HH
+#ifndef VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
+# define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
@@ -31,13 +31,13 @@ namespace vcsn {
   //! Returns the minimal deterministic automaton associated to the input one.
   template<typename A, typename T>
   Element<A, T>
-  moore_minimization(const Element<A, T>& a);
+  minimization_moore(const Element<A, T>& a);
   
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/moore.hxx>
+# include <vaucanson/algorithms/minimization_moore.hxx>
 
-#endif // VCSN_ALGORITHMS_MOORE_HH
+#endif // VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 
