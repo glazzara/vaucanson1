@@ -1,3 +1,7 @@
+2003-07-02  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hxx: Simplify generate<bool>().
+
 2003-07-01  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix unused

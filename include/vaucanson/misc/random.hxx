@@ -66,7 +66,7 @@ namespace utility {
     template<>
     bool generate<bool>()
     { 
-      return (rand() % 2) == 0 ? true : false; 
+      return static_cast<bool>(rand() & 1);
     }
 
     template<>
