@@ -34,7 +34,7 @@ AC_ARG_ENABLE(
         [AC_HELP_STRING([--enable-vaucanswig],
 			[enable building vaucanswig])],
 	[WANT_INTERPRETER=$enableval],
-        [WANT_INTERPRETER=no])
+        [WANT_INTERPRETER=yes])
 
 VCSN_VAUCANSWIG_SUBDIR=""
 if test "x$WANT_INTERPRETER" != "xno"; then

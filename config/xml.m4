@@ -44,7 +44,8 @@ AC_DEFUN([VCSN_XML],
 [
 AC_ARG_WITH(
   [xerces],
-  [  --with-xerces           specify Xerces-C++ location],
+  [AC_HELP_STRING([--with-xerces],
+  		   [specify Xerces-C++ location])],
   [XERCESC=$withval],
   [if test "x$prefix" = xNONE; then
      XERCESC=$ac_default_prefix

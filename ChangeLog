@@ -1,3 +1,8 @@
+2004-07-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* configure.ac: Re-enable Vaucanswig by default.
+	* config/xml.m4: Use AC_HELP_STRING in a macro.
+
 2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/xml/import_session-session.xml.ref: Adjust the test:
