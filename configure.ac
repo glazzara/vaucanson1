@@ -97,6 +97,7 @@ AC_CONFIG_FILES([
 	src/tests/algebra/series/krat/derivations/cderivation/Makefile
 	src/tests/algebra/series/krat/main/Makefile
 	src/tests/algebra/series/misc/Makefile
+	src/tests/algebra/series/polynom/Makefile
 	src/tests/algebra/semiring/Makefile
 	src/tests/algebra/alphabets/Makefile
 	src/tests/algebra/free_monoid/Makefile

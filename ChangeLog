@@ -1,5 +1,9 @@
 2004-03-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* configure.ac: Add a missing Makefile in AC_CONFIG_FILES.
+
+2004-03-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/misc/support.hh: Add some typedef to be compliant
 	with STL iterators.
 	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx,
