@@ -32,8 +32,6 @@
 
 # include <check/tester.hh>
 # include <vaucanson/algebra/concept/semiring_base.hh>
-// from test battery:
-# include <fundamental/design_pattern-test.hh>
 
 template <class S, class T>
 bool semiring_test(tests::Tester& t)
@@ -47,8 +45,6 @@ bool semiring_test(tests::Tester& t)
   element_t o = e1.set().identity(SELECT(T));
   element_t e2;
   element_t e3(o);
-
-  test_design_pattern<S, T>();
 
   TEST(t, "Commutativity of plus.", (e1 + e2) == (e2 + e1));
   TEST(t, "Distributivity of mult with plus.", 

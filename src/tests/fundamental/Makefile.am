@@ -49,4 +49,4 @@ intrinsics_assign_opt_CXXFLAGS = $(AM_CXXFLAGS) $(CXXFLAGS_OPTIMIZE)
 intrinsics_ops_opt_SOURCES = $(intrinsics_ops_SOURCES)
 intrinsics_ops_opt_CXXFLAGS = $(AM_CXXFLAGS) $(CXXFLAGS_OPTIMIZE)
 
-# EXTRA_DIST = design_pattern-test.hh
+EXTRA_DIST = design_pattern-test.hh

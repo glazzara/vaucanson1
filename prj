@@ -1,22 +1,21 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 435)
-(Parent-Version vaucanson 0 434)
+(Project-Version vaucanson 0 436)
+(Parent-Version vaucanson 0 435)
 (New-Version-Log "")
 
 (Version-Log "
-2003-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-10-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/determinize.hxx,
-	  include/vaucanson/algorithms/hopcroft_minimization.hxx,
-	  include/vaucanson/algorithms/evaluation.hxx:
-		Use new macros.
-
-	* include/vaucanson/tools/usual_macros.hh:
-		Protect container in macro call.
+	* configure.ac: New version (0.4).
+	* src/tests/fundamental/Makefile.am: Distribute design_pattern-test.hh.
+	* src/tests/algebra/semiring/semiring_test.hh: Update.
+	* src/tests/automata/implementation_check/Makefile.am:
+		Fix missing files.
+	* src/tests/automata/algos/Makefile.am: Likewise.
 ")
-(Checkin-Time "Fri, 03 Oct 2003 11:28:14 +0200")
+(Checkin-Time "Mon, 06 Oct 2003 10:39:18 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -99,7 +98,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.68 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.69 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -112,7 +111,7 @@
   (README (vaucanson/f/48_README 1.8 600))
   (THANKS (vaucanson/f/36_THANKS 1.7 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.10 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.38 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.39 600))
   (prj (vaucanson.prj) :symlink)
 
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 600))
@@ -194,7 +193,7 @@
   (include/vaucanson/fundamental/structure.hxx (vaucanson/22_structure. 1.10 600))
 
   (src/tests/fundamental () :directory)
-  (src/tests/fundamental/Makefile.am (vaucanson/b/9_Makefile.a 1.4 600))
+  (src/tests/fundamental/Makefile.am (vaucanson/b/9_Makefile.a 1.5 600))
   (src/tests/fundamental/design_pattern-test.hh (vaucanson/b/10_design_pat 1.10 600))
   (src/tests/fundamental/element-full-test.cc (vaucanson/17_element-fu 1.13 600))
   (src/tests/fundamental/intrinsics_orphanage.cc (vaucanson/p/50_intrinsics 1.2 600))
@@ -282,7 +281,7 @@
   (src/tests/algebra/free_monoid/Makefile.am (vaucanson/h/34_Makefile.a 1.1 600))
   (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.4 600))
   (src/tests/algebra/semiring/Makefile.am (vaucanson/h/39_Makefile.a 1.1 600))
-  (src/tests/algebra/semiring/semiring_test.hh (vaucanson/h/38_semiring_t 1.5 600))
+  (src/tests/algebra/semiring/semiring_test.hh (vaucanson/h/38_semiring_t 1.6 600))
   (src/tests/algebra/series/Makefile.am (vaucanson/c/22_Makefile.a 1.8 600))
   (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.3 600))
   (src/tests/algebra/series/krat/main/krat_exp_parse_test.hh (vaucanson/j/19_krat_exp_p 1.10 600))
@@ -344,7 +343,7 @@
   (include/vaucanson/automata/concrete/automaton_view.hxx (vaucanson/q/24_automaton_ 1.3 600))
   (include/vaucanson/automata/concrete/kind_adapter.hxx (vaucanson/q/30_kind_adapt 1.2 600))
 
-  (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.13 600))
+  (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.14 600))
   (src/tests/automata/implementation_check/add_edge_test.hh (vaucanson/f/15_add_edge_t 1.10 600))
   (src/tests/automata/implementation_check/add_state_test.hh (vaucanson/f/14_add_state_ 1.9 600))
   (src/tests/automata/implementation_check/coherence_state_edge_test.hh (vaucanson/f/13_coherence_ 1.8 600))
@@ -460,7 +459,7 @@
   (include/vaucanson/tools/usual_io.hh (vaucanson/r/33_usual_io.h 1.2 600))
 
   (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
-  (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.12 600))
+  (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.13 600))
   (src/tests/automata/algos/closure_test.hh (vaucanson/e/27_closure_te 1.11 600))
   (src/tests/automata/algos/complete_test.hh (vaucanson/f/8_complete_t 1.12 600))
   (src/tests/automata/algos/compute_test.hh (vaucanson/e/30_compute_te 1.12 600))
