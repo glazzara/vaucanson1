@@ -1,3 +1,9 @@
+2005-02-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* config/xml.m4: Rename to...
+	* config/vaucanson_xml.m4: ...this.
+	* Makefile.am: Update accordingly.
+	
 2005-02-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx: Minor

@@ -10,13 +10,13 @@ SUBDIRS = xml include doc src
 ### Tell it where to find them.
 ###
 ACLOCAL_AMFLAGS = -I config
-CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4 $(srcdir)/config/xml.m4
+CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4 $(srcdir)/config/vaucanson_xml.m4
 
 ###
 ### Autoconf macros are installable and distributable.
 ###
 m4datadir = $(datadir)/aclocal
-dist_m4data_DATA = config/vcsn.m4 config/xml.m4
+dist_m4data_DATA = config/vcsn.m4 config/vaucanson_xml.m4
 
 ###
 ### Check headers for sanity.
