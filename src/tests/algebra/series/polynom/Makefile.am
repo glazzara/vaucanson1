@@ -6,4 +6,4 @@
 include $(top_srcdir)/src/tests/check/Makefile.check
 
 EXTRA_DIST = \
-	series_test.hh
+	series_polynom_test.hh

@@ -1,3 +1,7 @@
+2004-03-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/algebra/series/polynom/Makefile.am: Minor fix.
+
 2004-03-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/realtime_decl.hxx,
