@@ -1,5 +1,15 @@
 2003-07-02  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/automata/concept/automata.hxx,
+	include/vaucanson/algebra/concrete/series/series.hxx: Ensure
+	unification of related structural elements.
+
+	* include/vaucanson/algebra/concrete/series/series.hh,
+	include/vaucanson/algebra/concrete/free_monoid/words.hh: Add
+	deprecation notice.
+
+2003-07-02  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* src/tests/tests-suites/algebra_series_krat.defs: Fix namespace
 	specification for `NumericalSemiring'.
 

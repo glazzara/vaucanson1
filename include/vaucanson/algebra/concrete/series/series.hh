@@ -44,14 +44,20 @@ namespace vcsn {
     struct Series
       : SeriesBase<Series<Weights, Monoid> >
     {
+      //! @bug FIXME: default accessor should not exist
       Series();
+
       Series(const Weights& w, const Monoid& m);
       Series(const Series& other);
 
+      //! @bug FIXME: non-const accessor should not exist
       Weights&		weights();
+
       const Weights&	weights() const;
 
+      //! @bug FIXME: non-const accessor should not exist
       Monoid&		monoid();
+
       const Monoid&	monoid() const;
 
     protected:

@@ -31,12 +31,13 @@
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX
 
 #include <vaucanson/automata/concept/automata_base.hh>
+#include <vaucanson/misc/unique.hh>
 
 namespace vcsn {
 
   template <class Series>
   Automata<Series>::Automata(const series_t& s):
-    series_(s)
+    series_(utility::unique::get(s))
   {}
 
   template <class Series>

@@ -47,7 +47,7 @@ namespace vcsn {
     
     template<typename Weights, typename Monoid>
     Series<Weights, Monoid>::Series(const Weights& w, const Monoid& m)
-      : weights_(w), monoid_(m) 
+      : weights_(utility::unique::get(w)), monoid_(utility::unique::get(m)) 
     {}
     
     template<typename Weights, typename Monoid>

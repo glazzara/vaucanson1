@@ -52,6 +52,7 @@ namespace vcsn {
       typedef A alphabets_elt_t;
 
       //! Default constructor.
+      //! @bug FIXME: this interface should not exist (freemonoid is not defined without an alphabet)
       FreeMonoid();
 
       //! Constructor based on an alphabet.
@@ -61,9 +62,10 @@ namespace vcsn {
       FreeMonoid(const FreeMonoid& w);
 
       //! Alphabet's accessor.
+      //! @bug FIXME: this interface should not exist (s.e. are const once instantiated)
       A&	alphabet();
 
-      //! Alphabet's accessor (const version).
+      //! Alphabet's accessor
       const A&	alphabet() const;
 
     protected:
