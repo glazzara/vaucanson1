@@ -1,3 +1,8 @@
+2003-09-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Add
+	a missing ';'.
+
 2003-08-29  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/Makefile.am  (nobase_include_HEADERS): Remove dangling

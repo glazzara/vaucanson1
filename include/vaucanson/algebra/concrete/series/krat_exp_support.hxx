@@ -127,7 +127,7 @@ namespace vcsn {
       supp_.push_back(std::make_pair
 		      (algebra::identity_value(series_.semiring(), 
 					       SELECT(semiring_elt_value_t)),
-		       m))
+		       m));
     }
     END
 
