@@ -1,8 +1,7 @@
-// vaucanson_z_max_plus_automaton.hxx: 
-// this file is part of the Vaucanson project.
+// z_max_plus.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,12 +27,13 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_VAUCANSON_Z_MAX_PLUS_AUTOMATON_HXX
-# define VCSN_VAUCANSON_Z_MAX_PLUS_AUTOMATON_HXX
+
+#ifndef VCSN_R_AUTOMATON_HXX
+# define VCSN_R_AUTOMATON_HXX
 
 namespace vcsn {
 
-  namespace z_max_plus_automaton {
+  namespace r_automaton {
 
     template <class InputIterator>
     automaton_t new_automaton(InputIterator begin,
@@ -42,7 +42,7 @@ namespace vcsn {
       Alphabet alpha;
       for (InputIterator e = begin; e != end; ++e)
 	alpha.insert(*e);
-      TropicalSemiring<TropicalMax> semiring;
+      NumericalSemiring semiring;
       Words freemonoid(alpha);
       series_t series(semiring, freemonoid);
       Automata<series_t> automata_set(series);
@@ -59,4 +59,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HXX
+#endif // VCSNBOOLEAN_AUTOMATON_HXX

@@ -1,7 +1,8 @@
-// vaucanson_boolean_automaton.hh: this file is part of the Vaucanson project.
+// z_max_plus_automaton.hh:
+// this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -27,8 +28,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HH
-# define VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HH
+#ifndef VCSN_Z_MAX_PLUS_AUTOMATON_HH
+# define VCSN_Z_MAX_PLUS_AUTOMATON_HH
 
 # include <vaucanson/config/system.hh>
 # include <fstream>
@@ -38,7 +39,7 @@
 # include <vaucanson/algebra/concrete/predefs.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
-# include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concrete/graph.hh>
@@ -47,21 +48,22 @@
 
 namespace vcsn {
 
-  namespace boolean_automaton {
+  namespace z_max_plus_automaton {
 
     using namespace vcsn;
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, bool> serie_value_t;
+    typedef polynom<WordValue, int> serie_value_t;
 
-    typedef Series<NumericalSemiring, Words> series_t;
-   
+    typedef TropicalSemiring<TropicalMax> semiring_t;
+    typedef Series<semiring_t, Words> series_t;
+
     typedef Graph
     <
       labels_are_series,
       WordValue,
-      bool, 
+      int,
       serie_value_t,
       char,
       NoTag>
@@ -79,14 +81,13 @@ namespace vcsn {
     automaton_t new_automaton(InputIterator begin,
 			      InputIterator end);
 
-  } // boolean_automaton
+  } // z_max_plus_automaton
 
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/vaucanson_boolean_automaton.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/z_max_plus_automaton.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HH
+#endif // VCSN_Z_MAX_PLUS_AUTOMATON_HH

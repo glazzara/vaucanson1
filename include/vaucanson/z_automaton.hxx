@@ -1,4 +1,4 @@
-// vaucanson_z_max_plus.hxx: this file is part of the Vaucanson project.
+// z_automaton.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
@@ -27,13 +27,12 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-
-#ifndef VCSN_VAUCANSON_R_AUTOMATON_HXX
-# define VCSN_VAUCANSON_R_AUTOMATON_HXX
+#ifndef VCSN_Z_AUTOMATON_HXX
+# define VCSN_Z_AUTOMATON_HXX
 
 namespace vcsn {
 
-  namespace r_automaton {
+  namespace z_automaton {
 
     template <class InputIterator>
     automaton_t new_automaton(InputIterator begin,
@@ -55,8 +54,8 @@ namespace vcsn {
       return new_automaton(alphabet.begin(), alphabet.end());
     }
 
-  } // r_automaton
+  } // z_automaton
 
 } // vcsn
 
-#endif // VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HXX
+#endif // VCSN_BOOLEAN_AUTOMATON_HXX

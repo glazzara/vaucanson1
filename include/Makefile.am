@@ -6,14 +6,14 @@ EXTRA_DIST = vaucanson/config/pconf-hh.in
 
 nobase_include_HEADERS =					     \
 	vaucanson/vaucanson.hh \
-	vaucanson/vaucanson_boolean_automaton.hh			   \
-	vaucanson/vaucanson_boolean_automaton.hxx			   \
-	vaucanson/vaucanson_z_automaton.hh			   \
-	vaucanson/vaucanson_z_automaton.hxx			   \
-	vaucanson/vaucanson_r_automaton.hh			   \
-	vaucanson/vaucanson_r_automaton.hxx			   \
-	vaucanson/vaucanson_z_max_plus_automaton.hh			   \
-	vaucanson/vaucanson_z_max_plus_automaton.hxx			   \
+	vaucanson/boolean_automaton.hh			   \
+	vaucanson/boolean_automaton.hxx			   \
+	vaucanson/z_automaton.hh			   \
+	vaucanson/z_automaton.hxx			   \
+	vaucanson/r_automaton.hh			   \
+	vaucanson/r_automaton.hxx			   \
+	vaucanson/z_max_plus_automaton.hh			   \
+	vaucanson/z_max_plus_automaton.hxx			   \
 	vaucanson/standard_algorithms.hh \
 	vaucanson/algebra/concept/alphabets_base.hh		       \
 	vaucanson/algebra/concept/alphabets_base.hxx		       \

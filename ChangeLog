@@ -1,5 +1,31 @@
 2004-03-09  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* include/vaucanson/vaucanson_boolean_automaton.hh,
+	* include/vaucanson/vaucanson_boolean_automaton.hxx,
+	* include/vaucanson/vaucanson_r_automaton.hh,
+	* include/vaucanson/vaucanson_r_automaton.hxx,
+	* include/vaucanson/vaucanson_z_automaton.hh,
+	* include/vaucanson/vaucanson_z_automaton.hxx,
+	* include/vaucanson/vaucanson_z_max_plus.hxx,
+	* include/vaucanson/vaucanson_z_max_plus_automaton.hh,
+	* include/vaucanson/vaucanson_z_max_plus_automaton.hxx: Move to...
+
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/boolean_automaton.hxx,
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/r_automaton.hxx,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_automaton.hxx,
+	* include/vaucanson/z_max_plus.hxx,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hxx:
+	...These and update accordingly.
+
+	* include/Makefile.am: Update.
+
+
+2004-03-09  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/misc/random.hh,
 	* include/vaucanson/misc/random.hxx: Add unsigned random generation.
 	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,

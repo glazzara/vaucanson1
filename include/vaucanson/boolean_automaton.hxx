@@ -1,7 +1,7 @@
-// vaucanson_boolean_automaton.hxx: this file is part of the Vaucanson project.
+// boolean_automaton.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -27,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HXX
-# define VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HXX
+#ifndef VCSN_BOOLEAN_AUTOMATON_HXX
+# define VCSN_BOOLEAN_AUTOMATON_HXX
 
 namespace vcsn {
 
@@ -58,4 +58,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HXX
+#endif // VCSN_BOOLEAN_AUTOMATON_HXX

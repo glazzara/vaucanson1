@@ -1,8 +1,7 @@
-// vaucanson_z_max_plus__automaton.hh: 
-// this file is part of the Vaucanson project.
+// r_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_VAUCANSON_Z_MAX_PLUS_AUTOMATON_HH
-# define VCSN_VAUCANSON_Z_MAX_PLUS_AUTOMATON_HH
+#ifndef VCSN_R_AUTOMATON_HH
+# define VCSN_R_AUTOMATON_HH
 
 # include <vaucanson/config/system.hh>
 # include <fstream>
@@ -39,7 +38,7 @@
 # include <vaucanson/algebra/concrete/predefs.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
-# include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
+# include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concrete/graph.hh>
@@ -48,22 +47,21 @@
 
 namespace vcsn {
 
-  namespace z_max_plus_automaton {
+  namespace r_automaton {
 
     using namespace vcsn;
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, int> serie_value_t;
+    typedef polynom<WordValue, float> serie_value_t;
 
-    typedef TropicalSemiring<TropicalMax> semiring_t;
-    typedef Series<semiring_t, Words> series_t;
-   
+    typedef Series<NumericalSemiring, Words> series_t;
+
     typedef Graph
     <
       labels_are_series,
       WordValue,
-      int, 
+      float,
       serie_value_t,
       char,
       NoTag>
@@ -81,13 +79,14 @@ namespace vcsn {
     automaton_t new_automaton(InputIterator begin,
 			      InputIterator end);
 
-  } // z_max_plus_automaton
+  } // z_automaton
 
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/vaucanson_z_max_plus_automaton.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
-#endif // VCSN_VAUCANSON_Z_MAX_PLUS_AUTOMATON_HH
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/r_automaton.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
+
+
+#endif // VCSN_R_AUTOMATON_HH
