@@ -1,3 +1,12 @@
+2003-03-24  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx,
+	include/vaucanson/algorithms/krat_exp_derivation.hxx: Add typedefs for
+	a monoid element value. Change the old zero(SELECT(...)) and
+	identity(SELECT(...)) methods with zero_as<>::of() and
+	identity_as<>::of(). Fix the derivation/c-derivation of non-linearized
+	expressions (i.e. 'ab' instead of 'a.b').
+
 2003-03-20  Loic Fosse  <fosse_l@lrde.epita.fr>
 
         * include/vaucanson/algorithms/brzozowski.hxx: Change names of variables

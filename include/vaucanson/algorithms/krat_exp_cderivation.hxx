@@ -39,6 +39,7 @@ namespace vcsn {
     typedef typename Element<Series, T>::weight_t     weight_t;
     typedef typename weight_t::value_t		      weight_value_t;
     typedef typename Element<Series, T>::monoid_elt_t monoid_elt_t;
+    typedef typename monoid_elt_t::value_t	      monoid_elt_value_t;
     typedef typename monoid_elt_t::set_t	      monoid_t;
     typedef typename monoid_t::alphabet_t	      alphabet_t;
     typedef typename alphabet_t::letter_t	      letter_t;
@@ -104,7 +105,15 @@ namespace vcsn {
     MATCH_(Constant, m)
     {
       if (m[0] == a_)
-	return identity_as<T>::of(exp_.set());
+	{
+	  if (m.length() == 1)
+	    return identity_as<T>::of(exp_.set());
+	  else
+	    return
+	      rat::exp<monoid_elt_value_t, weight_value_t> (
+	        new rat::Constant<monoid_elt_value_t, weight_value_t> (
+	          m.substr(1)));
+	}
       else
 	return zero_as<T>::of(exp_.set());
     }

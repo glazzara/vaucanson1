@@ -1,18 +1,19 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 179)
-(Parent-Version vaucanson 0 178)
-(Version-Log "2003-03-20  Loic Fosse  <fosse_l@lrde.epita.fr>
+(Project-Version vaucanson 0 180)
+(Parent-Version vaucanson 0 179)
+(Version-Log "2003-03-24  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-        * include/vaucanson/algorithms/brzozowski.hxx: Change names of variables
-        and structures, rewrite some comments.
-        * include/vaucanson/algorithms/algo_helper.hxx: Change names.
-        * include/vaucanson/algorithms/algo_helper.hh: Change names and
-        comments.")
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx,
+	include/vaucanson/algorithms/krat_exp_derivation.hxx: Add typedefs for
+	a monoid element value. Change the old zero(SELECT(...)) and
+	identity(SELECT(...)) methods with zero_as<>::of() and
+	identity_as<>::of(). Fix the derivation/c-derivation of non-linearized
+	expressions (i.e. 'ab' instead of 'a.b').")
 (New-Version-Log "")
-(Checkin-Time "Thu, 20 Mar 2003 14:20:31 +0100")
-(Checkin-Login fosse_l)
+(Checkin-Time "Mon, 24 Mar 2003 17:00:21 +0100")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -92,7 +93,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.119 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.120 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -200,7 +201,7 @@
   (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.4 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.3 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.7 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.5 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.6 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/h/23_krat_exp_l 1.4 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/h/24_krat_exp_l 1.3 600))
   (include/vaucanson/algorithms/moore.hh (vaucanson/e/24_moore.hh 1.6 600))
@@ -447,7 +448,7 @@
 ;; Files added by populate at Fri, 07 Mar 2003 16:54:26 +0100,
 ;; to version 0.170(w), by clavei_t:
 
-  (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.3 600))
+  (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.4 600))
   (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.1 600))
 
 ;; Files deleted by depopulate at Mon, 17 Mar 2003 21:14:58 +0100,

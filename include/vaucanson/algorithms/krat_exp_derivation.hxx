@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,6 +40,7 @@ namespace vcsn {
     typedef typename Element<Series, T>::weight_t     weight_t;
     typedef typename weight_t::value_t		      weight_value_t;
     typedef typename Element<Series, T>::monoid_elt_t monoid_elt_t;
+    typedef typename monoid_elt_t::value_t	      monoid_elt_value_t;
     typedef typename monoid_elt_t::set_t	      monoid_t;
     typedef typename monoid_t::alphabet_t	      alphabet_t;
     typedef typename alphabet_t::letter_t	      letter_t;
@@ -101,21 +103,29 @@ namespace vcsn {
     MATCH_(Constant, m)
     {
       if (m[0] == a_)
-	return exp_.set().weights().identity(SELECT(weight_value_t));
+	{
+	  if (m.length() == 1)
+	    return identity_as<T>::of(exp_.set());
+	  else
+	    return
+	      rat::exp<monoid_elt_value_t, weight_value_t> (
+		new rat::Constant<monoid_elt_value_t, weight_value_t> (
+		  m.substr(1)));
+	}
       else
-	return exp_.set().weights().zero(SELECT(weight_value_t));
+	return zero_as<T>::of(exp_.set());
     }
     END
 
     MATCH(Zero)
     {
-      return exp_.set().weights().zero(SELECT(weight_value_t));	  
+      return zero_as<T>::of(exp_.set());
     }
     END
 
     MATCH(One)
     {
-      return exp_.set().weights().zero(SELECT(weight_value_t));	  
+      return zero_as<T>::of(exp_.set());
     }
     END
 
