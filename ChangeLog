@@ -1,3 +1,11 @@
+2005-02-04  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/eval.hh,
+	* include/vaucanson/algorithms/eval.hxx: Add an overloaded version
+	of eval().
+	* src/tests/automata/algos/product_test.hh: Change eval() calls to
+	the new one.
+
 2005-02-04  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* Merge FMP branch into trunk (See 11 previous Changelog entries).

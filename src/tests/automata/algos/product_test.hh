@@ -1,7 +1,7 @@
 // product_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_PRODUCT_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_PRODUCT_TEST_HH
@@ -87,14 +88,12 @@ unsigned product_test(tests::Tester& tg)
 	  continue;
 	}
       monoid_elt_t word_prod = exp_p.choose_from_supp();
+      bool	   b_eval_lhs;
+      bool	   b_eval_rhs;
 
-      if (eval(auto_lhs, word_prod) ==
-	  zero_as<semiring_elt_value_t>::
-	  of(auto_lhs.structure().series().semiring())
-	  || eval(auto_rhs, word_prod) ==
-	  zero_as<semiring_elt_value_t>::
-	  of(auto_rhs.structure().series().semiring())
-	  )
+      eval(auto_lhs, word_prod, b_eval_lhs);
+      eval(auto_rhs, word_prod, b_eval_rhs);
+      if (not b_eval_lhs || not b_eval_rhs)
 	{
 	  // Print the failing expressions.
 	  generalized_t g_auto_lhs = generalized(auto_lhs);
