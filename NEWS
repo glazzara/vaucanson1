@@ -6,7 +6,7 @@
 
 The verbalize()  function does  not exist anymore.  It is  replaced by
 expand(), which was  introduced in Vaucanson 0.6.  A short description
-of expand() can be found farther.
+of expand() can be found below, in the description of Vaucanson 0.6.
 
 
 * Vaucanson 0.6 July 18, 2004
