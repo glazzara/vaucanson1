@@ -1,5 +1,10 @@
 2004-07-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* src/demos/fibonacci/generalized.cc: Fix a small detail to avoid
+	compilation warning.
+
+2004-07-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* src/demos/fibonacci/generalized.cc: New file. Write a generalized
 	fibonacci program.
 	* src/demos/fibonacci/Makefile.am: Update.

@@ -56,9 +56,10 @@ alpha_convert(const std::map<letter_t, letter_t>& conv_map,
 	      const std::string& str)
 {
   std::string r;
-  r.reserve(str.size());
+  int n = str.size();
+  r.reserve(n);
 
-  for (int i = 0; i < str.size(); ++i)
+  for (int i = 0; i < n; ++i)
     r += conv_map.find(str[i])->second;
 
   return r;
