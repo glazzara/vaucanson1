@@ -98,7 +98,7 @@ namespace vcsn {
 
     //! in-place mirror transformation.
     void		      mirror();
-    
+
     //! beginning of the word.
     iterator			begin();
 

@@ -18,24 +18,29 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_COMPLETE_HH
-# define ALGORITHMS_COMPLETE_HH
+#ifndef VCSN_ALGORITHMS_COMPLETE_HH
+# define VCSN_ALGORITHMS_COMPLETE_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
-  
+
+  /*! \addtogroup algorithms */  /* @{ */
+
+  //! Complete the automaton to have an output for every letters in each state.
   template <typename A, typename T>
   void
   auto_in_complete(Element<A, T>&);
 
+  //! Return the automaton which has an output for every letters in each state.
   template <typename A, typename T>
   Element<A, T>
   auto_complete(const Element<A, T>&);
+
+  /*! @} */
 
 } // vcsn
 
 # include <vaucanson/algorithms/complete.hxx>
 
-#endif // ALGORITHMS_COMPLETE_HH
+#endif // VCSN_ALGORITHMS_COMPLETE_HH

@@ -18,27 +18,29 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_COMPLEMENTARY_HH
-# define ALGORITHMS_COMPLEMENTARY_HH
+#ifndef VCSN_ALGORITHMS_COMPLEMENTARY_HH
+# define VCSN_ALGORITHMS_COMPLEMENTARY_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*--------------.
-  | Complementary |
-  `--------------*/
+  /*! \addtogroup algorithms */  /* @{ */
+
+  //! Inverse finality to recognize the complementary language.
   template <typename A, typename T>
   void
   auto_in_complementary(Element<A, T>&);
 
+  //! Return the automaton which recognizes the complementary language.
   template <typename A, typename T>
   Element<A, T>
   auto_complementary(const Element<A, T>&);
+
+  /*! @} */
 
 } // vcsn
 
 # include <vaucanson/algorithms/complementary.hxx>
 
-#endif // ALGO_PRODUCT_HH
+#endif // VCSN_ALGORITHMS_COMPLEMENTARY_HH

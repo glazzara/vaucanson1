@@ -18,27 +18,30 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_EXTRACT_HH
-# define ALGORITHMS_EXTRACT_HH
+#ifndef VCSN_ALGORITHMS_EXTRACT_HH
+# define VCSN_ALGORITHMS_EXTRACT_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*----------------------------------------.
-  | SubAutomaton defined by a set of states |
-  `----------------------------------------*/
+  /*! \addtogroup algorithms */  /* @{ */
  
+  //! Returns a fresh automaton that is the sub-automaton defined by a set.
   template<typename A, typename T, typename StatesSet>
   Element<A, T> 
-  auto_extract(const Element<A, T>& a, const StatesSet& s, bool check_states = true);
+  auto_extract(const Element<A, T>& a, const StatesSet& s, 
+	       bool check_states = true);
 
+  //! Modify the input to obtain the sub-automaton defined by a set of states.
   template<typename A, typename T, typename StatesSet>
-  void auto_in_extract(Element<A, T>& a, const StatesSet& s, bool check_states = true);
+  void auto_in_extract(Element<A, T>& a, const StatesSet& s, 
+		       bool check_states = true);
+
+  /*! @} */
 
 } // vcsn
 
 # include <vaucanson/algorithms/extract.hxx>
 
-#endif // ALGORITHMS_EXTRACT_HH
+#endif // VCSN_ALGORITHMS_EXTRACT_HH

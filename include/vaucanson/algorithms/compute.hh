@@ -18,25 +18,24 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_COMPUTE_HH
-# define ALGORITHMS_COMPUTE_HH
+#ifndef VCSN_ALGORITHMS_COMPUTE_HH
+# define VCSN_ALGORITHMS_COMPUTE_HH
 
 # include <vaucanson/fundamental/element.hh>
 
 namespace vcsn {
 
-  /*--------.
-  | compute |
-  `--------*/
-  // precondition : the automaton is realtime
-  //
-  //
+  /*! \addtogroup algorithms */  /* @{ */
+
+  //! Return the image of the word in the automaton.
   template<typename A, typename T, typename W>
   typename Element<A, T>::series_elt_t
   compute(const Element<A, T>& a, const W& word);
+
+  /*! @} */
 
 } // vcsn
 
 # include <vaucanson/algorithms/compute.hxx>
 
-#endif // ALGORITHMS_COMPUTE_HH
+#endif // VCSN_ALGORITHMS_COMPUTE_HH

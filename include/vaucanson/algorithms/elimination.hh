@@ -18,29 +18,37 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_ELIMINATION_HH
-# define ALGORITHMS_ELIMINATION_HH
+#ifndef VCSN_ALGORITHMS_ELIMINATION_HH
+# define VCSN_ALGORITHMS_ELIMINATION_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 
 namespace vcsn {
 
-  /*------------.
-  | elimination |
-  `------------*/
+  /*! \addtogroup algorithms */  /* @{ */
 
+  //! Returns the series which describes the language of the automaton.
+
+  /*! This algorithm works on every kind of series. However, if,
+    during the computation, it must take the star of it, it can
+    fail. By passing a "generalized" automaton, that is an automaton
+    with rational expression as label, you will be sure to have the
+    algorithm succeed since we can always take the star of a rational
+    expression. */
   template<typename A, typename T>
   typename Element<A, T>::series_elt_t
   elimination(const Element<A, T>& a);
 
+  //! 'Elimination' with a function the choose the next state to remove.
   template<typename A, typename T, typename Chooser_>
   typename Element<A, T>::series_elt_t
   elimination(const Element<A, T>& a, const Chooser_& c);
   
+  /*! @} */
 
 } // vcsn
 
 # include <vaucanson/algorithms/elimination.hxx>
 
-#endif // ALGORITHMS_ELIMINATION_HH
+#endif // VCSN_ALGORITHMS_ELIMINATION_HH

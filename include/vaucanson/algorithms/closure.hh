@@ -18,30 +18,29 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_CLOSURE_HH
-# define ALGORITHMS_CLOSURE_HH
+#ifndef VCSN_ALGORITHMS_CLOSURE_HH
+# define VCSN_ALGORITHMS_CLOSURE_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*-----------.
-  | in_closure |
-  `-----------*/
-  // preconditions :
-  //
-  // note : this a particularily dummy closure. to be optimized.
+  /*! \addtogroup algorithms */  /* @{ */
+
+  //! Complete the automaton to make it close over epsilon transition.
   template<typename A, typename T>
   void
   in_closure(const Element<A, T>& a);
 
+  //! Return the epsilon-closure of the automaton.
   template<typename A, typename T>
   Element<A, T>
   closure(const Element<A, T>& a);
+
+  /*! @} */
 
 } // vcsn
 
 # include <vaucanson/algorithms/closure.hxx>
 
-#endif // ALGORITHMS_CLOSURE_HH
+#endif // VCSN_ALGORITHMS_CLOSURE_HH

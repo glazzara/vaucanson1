@@ -1,6 +1,14 @@
 2002-11-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.133)
-	* 
+	* include/vaucanson/algorithms/:
+		 extract.hh: brief documentation.
+		 determinize.hh: idem.
+		 compute.hh: idem.
+		 closure.hh: idem.
+		 elimination.hh: idem.
+		 complete.hh: idem.
+		 complementary.hh: idem.
+		 concat.hh: idem.
 
 2002-11-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.132)

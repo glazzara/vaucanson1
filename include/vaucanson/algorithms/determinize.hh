@@ -18,28 +18,31 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_DETERMINIZE_HH
-# define ALGORITHMS_DETERMINIZE_HH
+#ifndef VCSN_ALGORITHMS_DETERMINIZE_HH
+# define VCSN_ALGORITHMS_DETERMINIZE_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 
 namespace vcsn {
 
-  /*------------.
-  | determinize |
-  `------------*/
+  /*! \addtogroup algorithms */  /* @{ */
+
+  //! Return a fresh determinist automaton associated to the input.
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a);
 
+  //! Return a fresh complete determinist automaton associated to the input.
   template<typename A, typename T>
   Element<A, T>
   subset_construction(const Element<A, T>& a);
   
+  /*! @} */
+
 } // vcsn
 
 # include <vaucanson/algorithms/determinize.hxx>
 
-#endif // ALGORITHMS_DETERMINIZE_HH
+#endif // VCSN_ALGORITHMS_DETERMINIZE_HH
 
