@@ -176,18 +176,46 @@ namespace vcsn
   template <typename S, typename T>
   bool operator< (const PartialExp<S, T>& e1, const PartialExp<S, T>& e2)
   {
-    if (e1.weight() < e2.weight())
-      return true;
-    else if (e1.weight() > e2.weight())
-      return false;
+    typedef typename PartialExp<S, T>::const_iterator	const_iterator;
+    typedef typename PartialExp<S, T>::series_impl_t	series_impl_t;
+    
+    if (e1.weight() != e2.weight())
+      return e1.weight() < e2.weight();
+
+    const_iterator i1 = e1.begin();
+    const_iterator i2 = e2.begin();
+    while (i1 != e1.end() && i2 != e2.end()
+	   && series_impl_t(*i1) == series_impl_t(*i2))
+    {
+      ++i1;
+      ++i2;
+    }
+
+    if (i1 == e1.end() || i2 == e2.end())
+      return (i1 == e1.end() && i2 != e2.end());
     else
-      return (e1.ptr_list() < e2.ptr_list());
+      return series_impl_t(*i1) < series_impl_t(*i2);
   }
 
   template <typename S, typename T>
   bool operator== (const PartialExp<S, T>& e1, const PartialExp<S, T>& e2)
   {
-    return e1.weight() == e2.weight() && e1.ptr_list() == e2.ptr_list();
+    typedef typename PartialExp<S, T>::const_iterator	const_iterator;
+    typedef typename PartialExp<S, T>::series_impl_t	series_impl_t;
+    
+    if (e1.weight() != e2.weight())
+      return false;
+ 
+    const_iterator i1 = e1.begin();
+    const_iterator i2 = e2.begin();
+    while (i1 != e1.end() && i2 != e2.end()
+	   && series_impl_t(*i1) == series_impl_t(*i2))
+    {
+      ++i1;
+      ++i2;
+    }
+
+    return (i1 == e1.end() && i2 == e2.end());
   }
   
 } // vcsn

@@ -43,6 +43,7 @@ namespace vcsn {
     typedef typename std::list<T>::const_iterator	const_iterator;
     for (const_iterator i = src.begin(); i != src.end(); ++i)
       dst.push_back(*i);
+    dst.sort();
     dst.unique();
   }
 

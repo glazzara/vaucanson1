@@ -30,6 +30,23 @@
 #ifndef VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 # define VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 
+# ifndef NDEBUG
+#  define DERIVATES_TRACE_DEBUG(undef, e, l, s)		\
+     if (!undef)					\
+     {							\
+       std::cout << "Deriv "				\
+	         << e					\
+		 << " by "				\
+		 << l					\
+		 << " ="				\
+		 << std::endl;				\
+       std::cout << s << std::endl;			\
+       std::cout << std::endl;				\
+     }
+# else
+#  define DERIVATES_TRACE_DEBUG(undef, e, l, s)
+# endif
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/algorithms/internal/build_pattern.hh>
@@ -84,6 +101,7 @@ namespace vcsn {
 	  s = prat_exp_derivate(e, *a);
 	if (!s.second)
 	  undefined = true;
+	DERIVATES_TRACE_DEBUG(undefined, e, *a, s.first);
 	for (exp_list_iterator i = s.first.begin(); i != s.first.end(); ++i)
 	{
 	  PartialExp<S, T> p_exp = *i;

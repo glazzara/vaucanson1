@@ -1,3 +1,12 @@
+2003-07-24  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Add temporary
+	  debug macro.
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+	  Fix a bug.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx: Correct
+	  operators on PartialExp.
+
 2003-07-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/automata/implementation_check/rdelta_test.hh: New.
