@@ -1,7 +1,7 @@
 // projection.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,14 +32,14 @@
 #define  VCSN_ALGORITHMS_PROJECTION_HXX
 
 #include <vaucanson/algorithms/projection.hh>
-//#include <vaucanson/algorithms/krat_exp_print.hh>
+
 #include <map>
 
 namespace vcsn {
 
   template<typename ST, typename SA,
 	   typename Trans_t, typename Auto_t>
-  void 
+  void
   do_output_projection(const TransducerBase<ST>&,
 		       const AutomataBase<SA>&,
 		       const Trans_t& t,
@@ -48,24 +48,24 @@ namespace vcsn {
     AUTOMATON_TYPES(Trans_t);
 
     std::map<hstate_t, hstate_t> m;
-    
+
     for_each_state(p, t)
       m[*p] = ret.add_state();
 
-    monoid_elt_t empty = 
+    monoid_elt_t empty =
       algebra::identity_as<monoid_elt_value_t>::of(t.series().monoid());
     for_each_initial_state(p, t)
       {
-	ret.set_initial(m[*p], t.get_initial(*p).get(empty)); 
+	ret.set_initial(m[*p], t.get_initial(*p).get(empty));
       }
-    
+
     for_each_final_state(p, t)
       ret.set_final(m[*p], t.get_final(*p).get(empty));
 
     for_each_edge(e, t)
       {
-	ret.add_series_edge(m[t.origin_of(*e)], 
-			   m[t.aim_of(*e)], 
+	ret.add_series_edge(m[t.origin_of(*e)],
+			   m[t.aim_of(*e)],
 			   t.output_of(*e));
       }
   }
@@ -73,12 +73,12 @@ namespace vcsn {
   template <class ST, class TT,
 	    class SA, class TA>
   void
-  output_projection(const Element<ST, TT>& t, 
+  output_projection(const Element<ST, TT>& t,
 		    Element<SA, TA>& a)
   {
     return do_output_projection(t.set(), a.set(), t, a);
   }
-  
+
   ////////////////////////////////////////////////////////////
 
   template <typename S, typename T>
@@ -108,14 +108,14 @@ namespace vcsn {
       }
 
     for_each_initial_state(p, t)
-      ret.set_initial(m[*p], t.get_initial(*p).get(empty));    
+      ret.set_initial(m[*p], t.get_initial(*p).get(empty));
 
     for_each_final_state(p, t)
       ret.set_final(m[*p], t.get_final(*p).get(empty));
 
     for_each_edge(e, t)
       ret.add_series_edge(m[t.origin_of(*e)], m[t.aim_of(*e)], t.output_of(*e));
-    
+
     return ret;
   }
 

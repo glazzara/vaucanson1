@@ -42,11 +42,16 @@
 
 // INTERFACE: Exp realtime(const Exp& e) { return vcsn::realtime(e); }
 
-// Include the declaration of realtime().
-# include <vaucanson/algorithms/realtime_decl.hh>
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/krat_exp_realtime.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
+
+/*
+ * Include the declaration of realtime().
+ *
+ * Must  be  included _after_  the  .hxx  file  because it  needs  the
+ * declarations of do_realtime_here() and do_realtime().
+ */
+# include <vaucanson/algorithms/realtime_decl.hh>
 
 #endif // VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH

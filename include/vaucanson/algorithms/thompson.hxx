@@ -1,7 +1,7 @@
 // thompson.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,11 +30,10 @@
 #ifndef VCSN_ALGORITHMS_THOMPSON_HXX
 # define VCSN_ALGORITHMS_THOMPSON_HXX
 
-# include <set>
 # include <vaucanson/algorithms/thompson.hh>
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/normalized.hh>
-# include <vaucanson/algebra/concrete/series/rat/exp.hh>
 
 namespace vcsn {
 
@@ -47,13 +46,13 @@ namespace vcsn {
   // FIXME : from now, it is only working over LetterAutomaton
 
   template <class Auto_, class Monoid_, class Semiring_>
-  class ThompsonVisitor : 
+  class ThompsonVisitor :
     public rat::ConstNodeVisitor<Monoid_, Semiring_>
   {
   public :
     typedef Auto_						automaton_t;
     typedef typename automaton_t::set_t				automata_set_t;
-    typedef typename automaton_t::series_t			series_t; 
+    typedef typename automaton_t::series_t			series_t;
     typedef typename automaton_t::series_elt_t			series_elt_t;
     typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
     typedef Monoid_						monoid_value_t;
@@ -69,8 +68,8 @@ namespace vcsn {
     ~ThompsonVisitor()
     {}
 
-    virtual void 
-    product(const node_t* lhs, const node_t* rhs) 
+    virtual void
+    product(const node_t* lhs, const node_t* rhs)
     {
       automaton_t	*tmp_;
       rhs->accept(*this);
@@ -80,8 +79,8 @@ namespace vcsn {
       delete(tmp_);
     }
 
-    virtual void 
-    sum(const node_t* lhs, const node_t* rhs) 
+    virtual void
+    sum(const node_t* lhs, const node_t* rhs)
     {
       automaton_t	*tmp_;
       lhs->accept(*this);
@@ -90,15 +89,15 @@ namespace vcsn {
       union_of_normalized_here(*auto_, *tmp_);
     }
 
-    virtual void 
+    virtual void
     star(const node_t* node)
     {
       node->accept(*this);
       star_of_normalized_here(*auto_);
     }
 
-    virtual void 
-    left_weight(const semiring_elt_value_t& w, const node_t* node) 
+    virtual void
+    left_weight(const semiring_elt_value_t& w, const node_t* node)
     {
       node->accept(*this);
 
@@ -107,8 +106,8 @@ namespace vcsn {
 	   ++i)
 	auto_->set_initial(*i, semiring_elt_t(w) * auto_->get_initial(*i));
     }
-    
-    virtual void 
+
+    virtual void
     right_weight(const semiring_elt_value_t& w, const node_t* node)
     {
       node->accept(*this);
@@ -119,7 +118,7 @@ namespace vcsn {
 	auto_->set_initial(*i, auto_->get_initial(*i) * semiring_elt_t(w));
     }
 
-    virtual void 
+    virtual void
     constant(const monoid_value_t& m)
     {
       auto_ = new automaton_t(automata_set_t(series_));
@@ -137,13 +136,13 @@ namespace vcsn {
       auto_->set_final(new_f);
     }
 
-    virtual void 
+    virtual void
     zero()
     {
       auto_ = new automaton_t(automata_set_t(series_));
     }
 
-    virtual void 
+    virtual void
     one()
     {
       auto_ = new automaton_t(automata_set_t(series_));
@@ -158,7 +157,7 @@ namespace vcsn {
     {
       return *auto_;
     }
-    
+
   private :
     automaton_t		*auto_;
     const series_t	&series_;
@@ -167,23 +166,23 @@ namespace vcsn {
   template <typename A, typename auto_t,
 	    typename Letter, typename Weight>
   void
-  do_thompson_of(const AutomataBase<A>&, 
-	         auto_t& output, 
+  do_thompson_of(const AutomataBase<A>&,
+	         auto_t& output,
 	         const rat::exp<Letter, Weight>& kexp)
   {
     ThompsonVisitor<auto_t, Letter, Weight> visitor(output.set().series());
-   
-    // FIXME : 
-    // Static assert : Letter = monoid_elt_value_t, 
+
+    // FIXME :
+    // Static assert : Letter = monoid_elt_value_t,
     //                 Weight = semiring_elt_value_t
     kexp.accept(visitor);
-    output = visitor.get_auto();    
+    output = visitor.get_auto();
   }
 
-  template<typename A,      typename T, 
+  template<typename A,      typename T,
 	   typename Letter, typename Weight>
   void
-  thompson_of(Element<A, T>& out, 
+  thompson_of(Element<A, T>& out,
 	      const rat::exp<Letter, Weight>& kexp)
   {
     do_thompson_of(out.set(), out, kexp);
@@ -195,7 +194,7 @@ namespace vcsn {
   {
     Automata<S>				automata_set(exp.set());
     Element<Automata<S>, AutoType>	automata(automata_set);
-    
+
     thompson_of(automata, exp.value());
     return automata;
   }

@@ -46,7 +46,7 @@
  */
 /** @} */
 
-# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 # include <list>
 

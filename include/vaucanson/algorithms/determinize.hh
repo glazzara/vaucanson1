@@ -47,8 +47,11 @@
 
 // INTERFACE: bool is_deterministic(const Automaton& a) { return vcsn::is_deterministic(*a); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/design_pattern/design_pattern.hh>
+# include <vaucanson/automata/concept/handlers.hh>
+
+# include <map>
+# include <set>
 
 namespace vcsn {
 

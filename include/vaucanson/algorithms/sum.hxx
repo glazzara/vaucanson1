@@ -1,7 +1,7 @@
 // sum.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,10 +30,12 @@
 #ifndef VCSN_ALGORITHMS_SUM_HXX
 # define VCSN_ALGORITHMS_SUM_HXX
 
+# include <vaucanson/algorithms/sum.hh>
+
+# include <vaucanson/automata/concept/automata_base.hh>
+
 # include <set>
 # include <map>
-# include <vaucanson/algorithms/sum.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
@@ -102,7 +104,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  Element<A, T> 
+  Element<A, T>
   sum(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())

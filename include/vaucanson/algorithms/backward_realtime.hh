@@ -49,7 +49,7 @@
   // INTERFACE: Automaton backward_realtime(const Automaton& a) { return vcsn::backward_realtime(*a); }
   // INTERFACE: GenAutomaton backward_realtime(const GenAutomaton& a) { return vcsn::backward_realtime(*a); }
 
-# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

@@ -45,7 +45,7 @@
 
 // INTERFACE: Automaton minimization_moore(const Automaton& a) { return vcsn::minimization_moore(*a); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

@@ -87,16 +87,20 @@ namespace vcsn {
   Element<A, T>
   realtime(const Element<A, T>& a, realtime_type type);
 
-
   /** @} */
 
 } // vcsn
 
-// Includes the declaration of realtime()
-# include <vaucanson/algorithms/realtime_decl.hh>
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/realtime.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
+
+/*
+ * Include the declaration of realtime().
+ *
+ * Must  be  included _after_  the  .hxx  file  because it  needs  the
+ * declarations of do_realtime_here() and do_realtime().
+ */
+# include <vaucanson/algorithms/realtime_decl.hh>
 
 #endif // VCSN_ALGORITHMS_REALTIME_HH

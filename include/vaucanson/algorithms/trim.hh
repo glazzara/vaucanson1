@@ -46,8 +46,10 @@
 // INTERFACE: Automaton trim(const Automaton& a) { return vcsn::trim(*a); }
 // INTERFACE: GenAutomaton trim(const GenAutomaton& a) { return vcsn::trim(*a); }
 
+# include <vaucanson/design_pattern/design_pattern.hh>
+# include <vaucanson/automata/concept/handlers.hh>
+
 # include <set>
-# include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 

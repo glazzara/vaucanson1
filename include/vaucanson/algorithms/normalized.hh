@@ -71,7 +71,7 @@
 // INTERFACE: Automaton star_of_normalized(Automaton& a) { return vcsn::star_of_normalized(*a); }
 // INTERFACE: GenAutomaton star_of_normalized(GenAutomaton& a) { return vcsn::star_of_normalized(*a); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

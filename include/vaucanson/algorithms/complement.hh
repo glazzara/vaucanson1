@@ -46,7 +46,7 @@
 // INTERFACE: Automaton complement(const Automaton& a) { return vcsn::complement(*a); }
 // INTERFACE: GenAutomaton complement(const GenAutomaton& a) { return vcsn::complement(*a); }
 
-# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

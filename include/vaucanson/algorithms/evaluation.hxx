@@ -31,18 +31,19 @@
 #ifndef VAUCANSON_ALGORITHMS_EVALUATION_HXX
 # define VAUCANSON_ALGORITHMS_EVALUATION_HXX
 
-# include <set>
 # include <vaucanson/algorithms/evaluation.hh>
+
+# include <vaucanson/automata/concept/transducer_base.hh>
+
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/trim.hh>
+# include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/automata/concept/transducer.hh>
 # include <vaucanson/algorithms/extension.hh>
 # include <vaucanson/algorithms/projection.hh>
-# include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 

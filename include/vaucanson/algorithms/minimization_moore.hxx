@@ -33,20 +33,15 @@
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX
 
+# include <vaucanson/algorithms/minimization_moore.hh>
 
-# include <vaucanson/config/system.hh>
-# include <map>
-# include <set>
-# include <queue>
-# include <vector>
-# include <list>
-# include <utility>
-# include <stack>
-# include <algorithm>
-# include <vaucanson/algorithms/trim.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/misc/contract.hh>
+
+# include <map>
+# include <set>
+# include <vector>
 
 // Useful macros for Moore's minimization algorithm.
 
@@ -138,7 +133,7 @@ namespace vcsn {
     `---------------*/
 
     precondition(input.exists());
-    
+
     for_each_edge(e, input)
       {
 	if (letter_map.find(input.label_of(*e)) == letter_map.end())
@@ -253,7 +248,7 @@ namespace vcsn {
       }
   }
 
-  
+
   template<typename A, typename T>
   void
   minimization_moore_here(Element<A, T>& a)

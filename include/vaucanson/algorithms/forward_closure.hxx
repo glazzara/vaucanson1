@@ -30,16 +30,12 @@
 #ifndef VCSN_ALGORITHMS_FORWARD_CLOSURE_HXX
 # define VCSN_ALGORITHMS_FORWARD_CLOSURE_HXX
 
-# include <set>
-# include <iostream>
-# include <vaucanson/misc/selectors.hh>
-# include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/tools/usual.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
-
 # include <vaucanson/algorithms/forward_closure.hh>
 
-using namespace std;
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
+
+# include <vector>
 
 namespace vcsn {
 

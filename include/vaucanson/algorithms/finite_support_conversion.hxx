@@ -1,7 +1,7 @@
 // finite_support_conversion.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,8 +31,8 @@
 # define VCSN_ALGORITHMS_FINITE_SUPPORT_CONVERSION_HXX
 
 # include <vaucanson/algorithms/finite_support_conversion.hh>
+# include <vaucanson/algebra/concept/monoid_base.hh> // For zero_as.
 
-# include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/misc/contract.hh>
 
 namespace vcsn
@@ -49,7 +49,7 @@ namespace vcsn
     typedef typename Element<Ss, Ts>::semiring_elt_t sse_t;
 
     typedef typename Element<Ss, Ts>::support_t support_t;
-    
+
     dst = algebra::zero_as<T>::of(dst.set());
 
     const support_t& org_supp = org.supp();
@@ -61,7 +61,7 @@ namespace vcsn
 
 	const me_t &m = me_t(dst.set().monoid(), sm);
 	const se_t &w = se_t(dst.set().semiring(), org.get(sm));
-	
+
 	dst += w * Element<S, T>(dst.set(), m);
       }
 

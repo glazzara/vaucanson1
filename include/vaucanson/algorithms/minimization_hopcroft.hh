@@ -47,7 +47,7 @@
 
 // INTERFACE: Automaton minimization_hopcroft(const Automaton& a) { return vcsn::minimization_hopcroft(*a); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

@@ -29,9 +29,11 @@
 //
 
 #ifndef VCSN_ALGORITHMS_EXTENSION_HXX
-#define VCSN_ALGORITHMS_EXTENSION_HXX
+# define VCSN_ALGORITHMS_EXTENSION_HXX
 
-#include <vaucanson/algorithms/extension.hh>
+# include <vaucanson/algorithms/extension.hh>
+
+# include <vaucanson/tools/usual_macros.hh>
 
 using namespace std;
 

@@ -30,7 +30,6 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_CONSTANT_TERM_HXX
 # define VCSN_ALGORITHMS_KRAT_EXP_CONSTANT_TERM_HXX
 
-# include <utility>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 

@@ -30,14 +30,14 @@
 #ifndef VCSN_ALGORITHMS_FORWARD_REALTIME_HXX
 # define VCSN_ALGORITHMS_FORWARD_REALTIME_HXX
 
-# include <algorithm>
-# include <set>
-# include <queue>
 # include <vaucanson/algorithms/forward_realtime.hh>
+
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/forward_closure.hh>
 # include <vaucanson/algorithms/accessible.hh>
+
+# include <deque>
+# include <set>
 
 namespace vcsn {
 

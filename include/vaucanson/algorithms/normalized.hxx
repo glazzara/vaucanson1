@@ -1,7 +1,7 @@
 // normalized.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,10 +31,12 @@
 # define VCSN_ALGORITHMS_NORMALIZED_HXX
 
 # include <vaucanson/algorithms/normalized.hh>
-# include <stack>
+
+# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/algorithms/sum.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
+
+# include <stack>
 
 namespace vcsn {
 
@@ -60,7 +62,7 @@ namespace vcsn {
 
     for_each_final_state(i, a)
       a.add_series_edge(*i, h, a.get_final(*i));
-    
+
     a.clear_final();
     a.set_final(h);
   }
@@ -122,7 +124,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  void union_of_normalized_here(Element<A, T>& lhs, 
+  void union_of_normalized_here(Element<A, T>& lhs,
 				const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())
@@ -130,8 +132,8 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  Element<A, T> 
-  union_of_normalized(const Element<A, T>& lhs, 
+  Element<A, T>
+  union_of_normalized(const Element<A, T>& lhs,
 		      const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())
@@ -209,14 +211,14 @@ namespace vcsn {
 	for (typename delta_ret_t::const_iterator d = aim.begin();
 	     d != aim.end();
 	     ++d)
-	  lhs.add_edge(map_h[rhs.origin_of(*d)], 
-		       map_h[rhs.aim_of(*d)],		       
+	  lhs.add_edge(map_h[rhs.origin_of(*d)],
+		       map_h[rhs.aim_of(*d)],
 		       rhs.label_of(*d));
       }
   }
 
   template<typename A, typename T, typename U>
-  void concatenate_of_normalized_here(Element<A, T>& lhs, 
+  void concatenate_of_normalized_here(Element<A, T>& lhs,
 				      const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())
@@ -224,8 +226,8 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  Element<A, T> 
-  concatenate_of_normalized(const Element<A, T>& lhs, 
+  Element<A, T>
+  concatenate_of_normalized(const Element<A, T>& lhs,
 			    const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())
@@ -240,7 +242,7 @@ namespace vcsn {
   template <typename A, typename auto_t>
   void do_star_of_normalized_here(const AutomataBase<A>&,
 				  auto_t& a)
-  {    
+  {
     a.add_spontaneous(*a.final().begin(), *a.initial().begin());
     hstate_t old_i = *a.initial().begin();
     hstate_t old_f = *a.final().begin();
@@ -262,7 +264,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  Element<A, T> 
+  Element<A, T>
   star_of_normalized(const Element<A, T>& a)
   {
     // assertion(lhs.set() == rhs.set())

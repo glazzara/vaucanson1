@@ -44,9 +44,6 @@
 // INTERFACE: Automaton transpose(const Automaton& a) { return vcsn::transpose(*a); }
 // INTERFACE: GenAutomaton transpose(const GenAutomaton& a) { return vcsn::transpose(*a); }
 
-# include <vaucanson/automata/concrete/transpose_view.hh>
-# include <vaucanson/automata/concept/copy.hh>
-
 namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */

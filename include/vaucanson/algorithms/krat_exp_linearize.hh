@@ -49,6 +49,8 @@
 # include <vaucanson/misc/char_traits.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
+# include <utility>
+
 namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */

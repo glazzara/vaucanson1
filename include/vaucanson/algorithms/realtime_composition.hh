@@ -41,8 +41,7 @@
  */
 /** @} */
 
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/evaluation.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

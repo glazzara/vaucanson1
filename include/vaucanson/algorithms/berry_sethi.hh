@@ -43,7 +43,7 @@
 // INTERFACE: void berry_sethi(Automaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
 // INTERFACE: void berry_sethi(GenAutomaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
 
-# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

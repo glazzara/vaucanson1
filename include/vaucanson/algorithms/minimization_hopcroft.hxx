@@ -32,23 +32,27 @@
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HXX
 # define VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HXX
 
-# include <map>
-# include <set>
+# include <vaucanson/algorithms/minimization_hopcroft.hh>
+
+# include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/algorithms/trim.hh>
+# include <vaucanson/tools/usual_macros.hh>
+
+# include <algorithm>
+# include <vector>
 # include <queue>
 # include <list>
-# include <vaucanson/algorithms/trim.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <set>
 
 namespace vcsn {
 
-  // preconditions : 
+  // preconditions :
   //  - the input automaton is deterministic ;
   //  - the output automaton is well initialized with good sets ;
   //
   template <typename A, typename input_t, typename output_t>
-  void 
+  void
   do_hopcroft_minimization_det(const AutomataBase<A>&	,
 			       output_t&		output,
 			       const input_t&		input)
@@ -66,7 +70,7 @@ namespace vcsn {
 
     const alphabet_t&	   alphabet_(input.set().series().monoid().alphabet());
 
-    std::vector<letter_t>	alphabet(alphabet_.begin(), 
+    std::vector<letter_t>	alphabet(alphabet_.begin(),
 					 alphabet_.end());
     unsigned			max_letters = alphabet.size();
 
@@ -74,7 +78,7 @@ namespace vcsn {
     | To label the subsets of Q |
     `--------------------------*/
     unsigned max_partitions = 2;
-    
+
     /*-----------------------------------------.
     | To manage efficiently the partition of Q |
     `-----------------------------------------*/
@@ -87,7 +91,7 @@ namespace vcsn {
     `------------------------*/
     std::vector<unsigned>			split(max_states);
     std::vector<unsigned>			twin(max_states);
-    
+
     /*-------------------------.
     | To have a list of (P, a) |
     `-------------------------*/
@@ -109,7 +113,7 @@ namespace vcsn {
 	nb_final += c;
 	class_[*p] = c;
 	place[*p] = part[c].insert(part[c].end(), *p);
-      } 
+      }
 
     /*------------------------------.
     | Initialize the list of (P, a) |
@@ -123,7 +127,7 @@ namespace vcsn {
       }
 
     delta_ret_t				delta_ret;
-        
+
     /*-------------------.
     | Initialize Inverse |
     `-------------------*/
@@ -135,12 +139,12 @@ namespace vcsn {
 	for (unsigned j = 0; j < max_letters; ++j)
 	  inverse[i][j] = 0;
       }
-	
+
     for_each_state(p, input)
       for (unsigned e = 0; e < max_letters; ++e)
 	{
 	  delta_ret.clear();
-	  input.letter_deltac(delta_ret, *p, alphabet[e], 
+	  input.letter_deltac(delta_ret, *p, alphabet[e],
 			      delta_kind::states());
 	  for_all_(delta_ret_t, i, delta_ret)
 	    {
@@ -153,7 +157,7 @@ namespace vcsn {
     /*----------.
     | Main loop |
     `----------*/
-    
+
     while (!list.empty())
       {
 	/*----.
@@ -208,24 +212,24 @@ namespace vcsn {
 
 			  part[i].erase(place[*q]);
 			  --split[i];;
-			  
-			  place[*q] = 
+
+			  place[*q] =
 			    part[twin[i]].insert(part[twin[i]].end(), *q);
 			  class_[*q] = twin[i];
 			}
 		    }
 		}
-	  }	  
+	  }
 	if (split[p] && split[p] < part[p].size())
 	  {
 	    while (!to_erase.empty())
 	      {
 		typename std::list<hstate_t>::iterator b=to_erase.front();
 		part[p].erase(b);
-		place[*b] = 
+		place[*b] =
 		  part[max_partitions].insert(part[max_partitions].end(), *b);
 		class_[*b] = max_partitions;
-	    
+
 		to_erase.pop();
 	      }
 	    max_partitions++;
@@ -238,17 +242,17 @@ namespace vcsn {
 	  if (twin[*b] != 0)
 	    {
 	      for (unsigned e = 0; e < max_letters; ++e)
-		{	
+		{
 		  if (list_mat[*b][e] == true)
 		    {
 		      list.push_back(pair_t(twin[*b], e));
 		      list_mat[twin[*b]][e] = true;
 		    }
-		  else 
+		  else
 		    {
 		      if (part[*b].size() <= part[twin[*b]].size())
 			{
-			  list_mat[*b][e] = true; 
+			  list_mat[*b][e] = true;
 			  list.push_back(pair_t(*b, e));
 			}
 		      else
@@ -264,7 +268,7 @@ namespace vcsn {
 	    split[*i] = 0;
 	    twin[*i] = 0;
 	  }
-	
+
       }
 
     /*------------------------------------.
@@ -296,7 +300,7 @@ namespace vcsn {
 	  {
 	    delta_ret.clear();
 	    std::set<unsigned> already_linked;
-	    input.letter_deltac(delta_ret, s, alphabet[e], 
+	    input.letter_deltac(delta_ret, s, alphabet[e],
 				delta_kind::states());
 	      for_all_(delta_ret_t, out, delta_ret)
 	      {
@@ -304,8 +308,8 @@ namespace vcsn {
 		if (already_linked.find(c) == already_linked.end())
 		  {
 		    already_linked.insert(c);
-		    output.add_letter_edge(out_states[i], 
-					   out_states[c], 
+		    output.add_letter_edge(out_states[i],
+					   out_states[c],
 					   alphabet[e]);
 		  }
 	      }
@@ -315,7 +319,7 @@ namespace vcsn {
     for_each_initial_state(i, input)
       output.set_initial(out_states[class_[*i]]);
   }
-  
+
   template<typename A, typename T>
   Element<A, T>
   minimization_hopcroft(const Element<A, T>& a)
@@ -329,11 +333,9 @@ namespace vcsn {
   /*----------------------------.
   | hopcroft_minimization_undet |
   `----------------------------*/
-  // preconditions : 
-  //
-  //
+
   template <typename A, typename input_t, typename output_t>
-  void 
+  void
   do_quotient(const AutomataBase<A>&	a_set,
 	      const algebra::NumericalSemiring&,
 	      SELECTOR(bool),
@@ -353,7 +355,7 @@ namespace vcsn {
 
     const alphabet_t&	   alphabet_(input.series().monoid().alphabet());
 
-    std::vector<letter_t>	alphabet(alphabet_.begin(), 
+    std::vector<letter_t>	alphabet(alphabet_.begin(),
 					 alphabet_.end());
     unsigned			max_letters = alphabet.size();
 
@@ -361,7 +363,7 @@ namespace vcsn {
     | To label the subsets of Q |
     `--------------------------*/
     unsigned max_partitions = 2;
-    
+
     /*-----------------------------------------.
     | To manage efficiently the partition of Q |
     `-----------------------------------------*/
@@ -391,14 +393,14 @@ namespace vcsn {
     `-------------------------*/
     unsigned nb_final = 0;
 
-    for (typename input_t::state_iterator p = input.states().begin(); 
+    for (typename input_t::state_iterator p = input.states().begin();
 	 p != input.states().end(); ++p)
       {
 	unsigned c = input.is_final(*p) ? 1 : 0;
 	nb_final += c;
 	class_[*p] = c;
 	place[*p] = part[c].insert(part[c].end(), *p);
-      } 
+      }
 
     /*------------------------------.
     | Initialize the list of (P, a) |
@@ -417,7 +419,7 @@ namespace vcsn {
       }
 
     delta_ret_t				delta_ret;
-    
+
     /*-------------------.
     | Initialize Inverse |
     `-------------------*/
@@ -429,7 +431,7 @@ namespace vcsn {
 	for (unsigned j = 0; j < max_letters; ++j)
 	  inverse[i][j] = 0;
       }
-	
+
     for (typename input_t::state_iterator p = input.states().begin();
 	 p != input.states().end();
 	 ++p)
@@ -437,8 +439,8 @@ namespace vcsn {
 	{
 	  delta_ret.clear();
 	  input.letter_deltac(delta_ret, *p, alphabet[e], delta_kind::states());
-	  for (typename delta_ret_t::iterator i = delta_ret.begin(); 
-	       i != delta_ret.end(); 
+	  for (typename delta_ret_t::iterator i = delta_ret.begin();
+	       i != delta_ret.end();
 	       ++i)
 	    {
 	      if (inverse[*i][e] == 0)
@@ -450,7 +452,7 @@ namespace vcsn {
     /*----------.
     | Main loop |
     `----------*/
-    
+
     while (!list.empty())
       {
 	/*----.
@@ -520,13 +522,13 @@ namespace vcsn {
 
 			    part[i].erase(place[*q]);
 			    --split[i];;
-			    
+
 			    place[*q] = part[twin[i]].insert(part[twin[i]].end(), *q);
 			    class_[*q] = twin[i];
 			  }
 		      }
 		  }
-	  }	  
+	  }
 	if (split[p] && split[p] < part[p].size())
 	  {
 	    while (!to_erase.empty())
@@ -535,7 +537,7 @@ namespace vcsn {
 		part[p].erase(b);
 		place[*b] = part[max_partitions].insert(part[max_partitions].end(), *b);
 		class_[*b] = max_partitions;
-	    
+
 		to_erase.pop();
 	      }
 	    max_partitions++;
@@ -544,23 +546,23 @@ namespace vcsn {
 	/*----.
 	| (d) |
 	`----*/
-	for (typename std::list<unsigned>::iterator b = met_class.begin(); 
-	     b != met_class.end(); 
+	for (typename std::list<unsigned>::iterator b = met_class.begin();
+	     b != met_class.end();
 	     ++b)
 	  if (twin[*b] != 0)
 	    {
 	      for (unsigned e = 0; e < max_letters; ++e)
-		{	
+		{
 		  if (list_mat[*b][e] == true)
 		    {
 		      list.push_back(pair_t(twin[*b], e));
 		      list_mat[twin[*b]][e] = true;
 		    }
-		  else 
+		  else
 		    {
 		      if (part[*b].size() <= part[twin[*b]].size())
 			{
-			  list_mat[*b][e] = true; 
+			  list_mat[*b][e] = true;
 			  list.push_back(pair_t(*b, e));
 			}
 		      else
@@ -571,14 +573,14 @@ namespace vcsn {
 		    }
 		}
 	    }
-	for (typename std::list<unsigned>::iterator i = met_class.begin(); 
+	for (typename std::list<unsigned>::iterator i = met_class.begin();
 	     i != met_class.end();
 	     ++i)
 	  {
 	    split[*i] = 0;
 	    twin[*i] = 0;
 	  }
-	
+
       }
 
     /*------------------------------------.
@@ -600,7 +602,7 @@ namespace vcsn {
 	// Get the first state of the partition => each state has the
 	// same behaviour
 	hstate_t s = part[i].front();
-	
+
 // 	for (typename std::list<hstate_t>::const_iterator j = part[i].begin();
 // 	     j != part[i].end();
 // 	     ++j)
@@ -618,8 +620,8 @@ namespace vcsn {
 	    delta_ret.clear();
 	    std::set<unsigned> already_linked;
 	    input.letter_deltac(delta_ret, s, alphabet[e], delta_kind::states());
-	    for (typename delta_ret_t::iterator out = delta_ret.begin(); 
-		 out != delta_ret.end(); 
+	    for (typename delta_ret_t::iterator out = delta_ret.begin();
+		 out != delta_ret.end();
 		 ++out)
 	      {
 		unsigned c = class_[*out];
@@ -638,10 +640,10 @@ namespace vcsn {
 	 ++i)
       output.set_initial(out_states[class_[*i]]);
   }
-  
+
   template <class S, class T,
 	    typename A, typename input_t, typename output_t>
-  void 
+  void
   do_quotient(const AutomataBase<A>& a_set,
 	      const S&		      ,
 	      const T&,
@@ -661,7 +663,7 @@ namespace vcsn {
     typedef pair<unsigned, letter_t>           pair_class_letter_t;
     typedef pair<hstate_t, semiring_elt_t>     pair_state_semiring_elt_t;
     typedef set<pair_state_semiring_elt_t>     set_pair_state_semiring_elt_t;
-    
+
     set<unsigned>                              met_classes;
     set_edges_t                                edges_comming, edges_leaving;
     queue<pair_class_letter_t>                 the_queue;
@@ -676,10 +678,10 @@ namespace vcsn {
     max_partition    = 0;
     max_letters      = alphabet.size();
     map<letter_t, unsigned> pos_of_letter;
-    
+
     unsigned			max_states = 0;
     for_each_state(q, input)
-      {	
+      {
 	max_states = std::max(*q, max_states);
       }
     ++max_states;
@@ -705,20 +707,20 @@ namespace vcsn {
     for_each_state(q, input)
       {
 	for_each_letter(a, alphabet)
-	  {	    
+	  {
 	    for_each_const_(set_states_t, r, states_visited)
 	      old_weight[*r] = weight_zero;
 	    states_visited.clear();
 	    edges_comming.clear();
-	
-	    input.letter_rdeltac(edges_comming, *q, *a, delta_kind::edges()); 
-	    
+
+	    input.letter_rdeltac(edges_comming, *q, *a, delta_kind::edges());
+
 	    for_each_const_(set_edges_t, e, edges_comming)
-	      {	      	      
+	      {
 		hstate_t p = input.origin_of(*e);
 		if (states_visited.find(p) != states_visited.end())
 		  inverse[*q][pos_of_letter[*a]].erase(pair_state_semiring_elt_t(p, old_weight[p]));
-		else 
+		else
 		  states_visited.insert(p);
 
 		old_weight[p] += input.series_of(*e).get(*a);
@@ -729,7 +731,7 @@ namespace vcsn {
 
     /*-------------------------------------------------------------
       Initialize the partition with 2 classes : final and non-final
-      -------------------------------------------------------------*/    
+      -------------------------------------------------------------*/
     bool         empty = true;
     unsigned     class_non_final;
 
@@ -745,26 +747,26 @@ namespace vcsn {
 	      }
 	    classes[class_non_final].insert(*q);
 	    class_of_state[*q] = class_non_final;
-	  } 
-	else 
-	  { 
+	  }
+	else
+	  {
 	    semiring_elt_t w = input.get_final(*q).get(monoid_identity);
 	    if (semiring_had_class.find(w) == semiring_had_class.end())
-	      { 
+	      {
 		semiring_had_class.insert(w);
 		classes[max_partition].insert(*q);
 		class_of_weight[w] = max_partition;
 		class_of_state[*q] = max_partition;
 		max_partition++;
-	      } 
-	    else 
-	      {	    
+	      }
+	    else
+	      {
 		classes[class_of_weight[w]].insert(*q);
 		class_of_state[*q] = class_of_weight[w];
 	      }
 	  }
       }
-    
+
     /*--------------------------------------------------
       Initialize the queue with pairs <class_id, letter>
       --------------------------------------------------*/
@@ -776,18 +778,18 @@ namespace vcsn {
       The main loop
       -------------*/
     unsigned old_max_partition = max_partition;
-        
+
     while(!the_queue.empty())
-      {	
+      {
 	pair_class_letter_t pair = the_queue.front();
-	the_queue.pop();       
+	the_queue.pop();
 	val.clear();
 	met_classes.clear();
 
 	for_each_const_(set_states_t, q, classes[pair.first])	// First, calculcate val[state] and note met_classes
-	  {	  
-	    for_each_const_(set_pair_state_semiring_elt_t, pair_, inverse[*q][pos_of_letter[pair.second]]) 
-	      {                                                                               
+	  {
+	    for_each_const_(set_pair_state_semiring_elt_t, pair_, inverse[*q][pos_of_letter[pair.second]])
+	      {
 		unsigned  state = (*pair_).first;
 		if (met_classes.find(class_of_state[state]) == met_classes.end())
 		  met_classes.insert(class_of_state[state]);
@@ -796,53 +798,53 @@ namespace vcsn {
 	  }
 
 	for_each_const_(set<unsigned>, class_id, met_classes) 	// Next,for each met class, do the partition.
-	  {	    
+	  {
 	    if (classes[*class_id].size() == 1)
 	      continue;
 
 	    queue<hstate_t>   to_erase;
-	    semiring_elt_t          first_val, next_val; 
+	    semiring_elt_t          first_val, next_val;
 	    first_val = val[*(classes[*class_id].begin())];
 	    class_of_weight.clear();
 	    semiring_had_class.clear();
-	    
+
 	    for_each_const_(set_states_t, p, classes[*class_id])
 	      {
 		next_val = val[*p];
 		if (next_val != first_val) // This state must be moved to another class !
-		  {			
+		  {
 		    if (semiring_had_class.find(next_val) == semiring_had_class.end()) // Must create a new class
-		      { 			    
+		      {
 			classes[max_partition].insert(*p);
 			class_of_state[*p] = max_partition;
 			semiring_had_class.insert(next_val);
 			class_of_weight[next_val] = max_partition;
 			max_partition++;
 		      }
-		    else 
+		    else
 		      {
 			classes[class_of_weight[next_val]].insert(*p);
 			class_of_state[*p] = class_of_weight[next_val];
 		      }
 		    to_erase.push(*p);
 		  }
-	      }	    
-       
+	      }
+
        	    while(!to_erase.empty())
 	      {
 		hstate_t state_to_erase = to_erase.front();
 		to_erase.pop();
 		classes[*class_id].erase(state_to_erase);
 	      }
-	    
+
 	    for (int i = old_max_partition; i < max_partition; i++) // Push pairs <new_class_id, letter> into the queue
 	      for_each_letter(b, alphabet)
 		the_queue.push(pair_class_letter_t(i, *b));
-	    
+
 	    old_max_partition = max_partition;
-	  } 
+	  }
       }
-    
+
     /*----------------
       Form the output
       ----------------*/
@@ -854,13 +856,13 @@ namespace vcsn {
 	hstate_t p = output.add_state();
 	hstate_t a_state = *classes[i].begin();
 	series_elt_t a_series = series_identity;
-	
+
 	for_each_const_(set_states_t, state, classes[i])
 	  if(input.is_initial(*state))
 	    a_series += input.get_initial(*state);
 
 	output.set_initial(p, a_series);
-	
+
 	if (input.is_final(a_state))
 	  output.set_final(p, input.get_final(a_state));
       }
@@ -868,7 +870,7 @@ namespace vcsn {
     for(int i = 0; i < max_partition; i++) // Add edges
       {
 	series_of.clear();
-	edges_leaving.clear();       
+	edges_leaving.clear();
 	input.deltac(edges_leaving, *classes[i].begin(), delta_kind::edges());
 
 	for_each_const_(set_edges_t, e, edges_leaving)
@@ -878,7 +880,7 @@ namespace vcsn {
 	    output.add_series_edge(i, (*it).first, (*it).second);
       }
   }
-  
+
   template<typename A, typename T>
   Element<A, T>
   quotient(const Element<A, T>& a)
@@ -886,7 +888,7 @@ namespace vcsn {
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
     Element<A, T> output(a.set());
-    do_quotient(a.set(), a.set().series().semiring(), 
+    do_quotient(a.set(), a.set().series().semiring(),
 		SELECT(semiring_elt_value_t), output, a);
     return output;
   }

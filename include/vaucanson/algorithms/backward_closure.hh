@@ -46,7 +46,7 @@
 // INTERFACE: Automaton backward_closure(const Automaton& a) { return vcsn::backward_closure(*a); }
 // INTERFACE: GenAutomaton backward_closure(const GenAutomaton& a) { return vcsn::backward_closure(*a); }
 
-# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

@@ -41,7 +41,8 @@
 /** @} */
 
 # include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/algebra/concept/series_base.hh>
+
+# include <utility>
 
 namespace vcsn {
 

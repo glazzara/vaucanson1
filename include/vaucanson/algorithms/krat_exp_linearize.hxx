@@ -1,7 +1,7 @@
 // krat_exp_linearize.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,8 +33,8 @@
 // LINEAR_INDEX_START must be != 0
 # define LINEAR_INDEX_START	1
 
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_linearize.hh>
+# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 
 namespace vcsn {
 

@@ -49,7 +49,7 @@
 // INTERFACE: bool is_complete(const Automaton& a) { return vcsn::is_complete(*a); }
 // INTERFACE: bool is_complete(const GenAutomaton& a) { return vcsn::is_complete(*a); }
 
-# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

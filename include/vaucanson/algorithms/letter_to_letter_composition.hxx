@@ -1,7 +1,7 @@
 // letter_to_letter_composition.hxx:this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,11 +30,11 @@
 #ifndef VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HXX
 # define VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HXX
 
-# include <vaucanson/automata/concept/transducer.hh>
+# include <vaucanson/automata/concept/transducer_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
+
 # include <set>
 # include <map>
-# include <utility>
 
 namespace vcsn {
 
@@ -46,11 +46,11 @@ namespace vcsn {
 				  const Element<Self, T>& g)
   {
     typedef Element<Self, T> transducer_t;
-    AUTOMATON_TYPES(transducer_t);    
+    AUTOMATON_TYPES(transducer_t);
     typedef std::map<std::pair<hstate_t, hstate_t>, hstate_t> assoc_t;
     typedef std::set<hedge_t> delta_ret_t;
 
-    semiring_t output_series(f.series().semiring().semiring(), 
+    semiring_t output_series(f.series().semiring().semiring(),
 			     f.series().semiring().monoid());
     series_t series(output_series, g.series().monoid());
     automata_set_t set(series);
@@ -76,10 +76,10 @@ namespace vcsn {
       {
 	f_delta_ret.clear();
 	g_delta_ret.clear();
-	
+
 	f.deltac(f_delta_ret, *s, delta_kind::edges());
 	g.deltac(g_delta_ret, *t, delta_kind::edges());
-	
+
 	for_all_const_(delta_ret_t, lhs_e, f_delta_ret)
 	  {
 	    series_elt_t l = f.series_of(*lhs_e);
@@ -113,7 +113,7 @@ namespace vcsn {
 
   template <class S, class T>
   Element<S, T>
-  letter_to_letter_composition(const Element<S, T>& lhs, 
+  letter_to_letter_composition(const Element<S, T>& lhs,
 			       const Element<S, T>& rhs)
   {
     return do_letter_to_letter_composition(lhs.set(), lhs, rhs);

@@ -43,7 +43,6 @@
 // INTERFACE: bool is_isomorph(const Automaton& a1, const Automaton& a2) { return vcsn::is_isomorph(*a1, *a2); }
 // INTERFACE: bool is_isomorph(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::is_isomorph(*a1, *a2); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {

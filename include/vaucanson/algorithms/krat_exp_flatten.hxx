@@ -34,8 +34,6 @@
 # include <vaucanson/algorithms/krat_exp_flatten.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 
-# include <list>
-
 namespace vcsn
 {
   /** @addtogroup algorithms */ /** @{ */

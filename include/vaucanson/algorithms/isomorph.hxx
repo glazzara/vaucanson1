@@ -1,7 +1,7 @@
 // isomorph.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,10 +30,11 @@
 #ifndef VCSN_ALGORITHMS_ISOMORPH_HXX
 # define VCSN_ALGORITHMS_ISOMORPH_HXX
 
+# include <vaucanson/algorithms/isomorph.hh>
+
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/misc/selectors.hh>
 # include <vaucanson/tools/usual_macros.hh>
+
 # include <queue>
 # include <set>
 # include <list>
@@ -45,29 +46,24 @@ namespace vcsn {
   /*---------.
   | isomorph |
   `---------*/
-  
-  using std::queue;
-  using std::set;
-  using std::pair;
-  using std::list;
-  
-  typedef set<list<pair<hstate_t, hstate_t> > > possibility_t;
-  typedef list<pair<hstate_t, hstate_t> > sub_possibility_t;
 
+  // FIXME: Such typedefs in the vcsn namespace are dangerous.
+  typedef std::set<std::list<std::pair<hstate_t, hstate_t> > > possibility_t;
+  typedef std::list<std::pair<hstate_t, hstate_t> > sub_possibility_t;
 
   template<typename A, typename T>
-  bool 
+  bool
   compatible_state(const Element<A, T>& a, const Element<A, T>& b,
-		   const sub_possibility_t& l, 
-		   const pair<hstate_t, hstate_t> & elt)
+		   const sub_possibility_t& l,
+		   const std::pair<hstate_t, hstate_t> & elt)
   {
-    set<hstate_t> out_a;
-    set<hstate_t> out_b;
-    
+    std::set<hstate_t> out_a;
+    std::set<hstate_t> out_b;
+
     a.deltac(out_a, elt.first, delta_kind::states());
     b.deltac(out_b, elt.second, delta_kind::states());
-    
-    if ((out_a.size() != out_b.size()) 
+
+    if ((out_a.size() != out_b.size())
 	|| (!arrangement(l, out_a, out_b)))
       return false;
     return true;
@@ -75,10 +71,10 @@ namespace vcsn {
 
 
   bool can_add_pair(const sub_possibility_t& l,
-		    const pair<hstate_t, hstate_t>& val)
+		    const std::pair<hstate_t, hstate_t>& val)
   {
     for (sub_possibility_t::const_iterator i = l.begin(); i != l.end(); i++)
-      if ((i->first == val.first) 
+      if ((i->first == val.first)
 	  || (i->second == val.second))
 	  return false;
     return true;
@@ -88,7 +84,7 @@ namespace vcsn {
   bool
   create_possibility(const Element<A, T>& a, const Element<A, T>& b,
 		     const possibility_t& mother,
-		     possibility_t::iterator i, 
+		     possibility_t::iterator i,
 		     sub_possibility_t sub_res)
   {
    if (i != mother.end())
@@ -106,15 +102,15 @@ namespace vcsn {
    else
      {
        bool cond = true;
-       sub_possibility_t::const_iterator j = sub_res.begin(); 
+       sub_possibility_t::const_iterator j = sub_res.begin();
        while ((j != sub_res.end()) && cond)
 	 {
 	   cond = compatible_state(a, b, sub_res, *j);
 	   j++;
 	 }
-       if (cond) 
+       if (cond)
 	 {
-// 	   for (sub_possibility_t::const_iterator j = sub_res.begin(); 
+// 	   for (sub_possibility_t::const_iterator j = sub_res.begin();
 // 		j != sub_res.end(); j++)
 // 	     {
 // 	       std::cout << "RESULT " << j->first << " " << j->second << " " ;
@@ -124,35 +120,34 @@ namespace vcsn {
      }
    return false;
   }
-  
 
-  bool exists(const sub_possibility_t& l, const pair<hstate_t, hstate_t>& p)
+
+  bool exists(const sub_possibility_t& l,
+	      const std::pair<hstate_t, hstate_t>& p)
   {
     for_all_const(sub_possibility_t, i, l)
       if (*i == p) return true;
     return false;
   }
 
-  bool arrangement(const sub_possibility_t& mother, 
-		   set<hstate_t>& out_a,
-		   set<hstate_t>& out_b)
+  bool arrangement(const sub_possibility_t& mother,
+		   std::set<hstate_t>& out_a,
+		   std::set<hstate_t>& out_b)
   {
     if (out_a.size() == 0)
       return true;
     if (out_a.size() == 1)
       {
-	if (exists(mother, 
-		   pair<hstate_t, hstate_t>(*out_a.begin(), *out_b.begin()))
-	    )
+	if (exists(mother, std::make_pair(*out_a.begin(), *out_b.begin())))
 	  return true;
 	return false;
       }
     else
       {
 	bool res = false;
-	for_all(set<hstate_t>, i, out_a)
-	  for_all(set<hstate_t>, j, out_b)
-	  if (exists(mother, pair<hstate_t, hstate_t>(*i, *j)))
+	for_all(std::set<hstate_t>, i, out_a)
+	  for_all(std::set<hstate_t>, j, out_b)
+	  if (exists(mother, std::make_pair(*i, *j)))
 	    {
 	      out_a.erase(*i);
 	      out_b.erase(*j);
@@ -170,15 +165,9 @@ namespace vcsn {
   bool
   is_isomorph(const Element<A, T>& a, const Element<A, T>& b)
   {
-    using namespace vcsn::tools;
-    using std::queue;
-    using std::set;
-    using std::pair;
-    using std::list;
-
     typedef Element<A, T> automaton_t;
-   
-    AUTOMATON_TYPES(automaton_t);        
+
+    AUTOMATON_TYPES(automaton_t);
 
     if ((a.states().size() != b.states().size())
 	|| (a.edges().size() != b.edges().size())
@@ -186,7 +175,7 @@ namespace vcsn {
 	|| (a.final().size() != b.final().size())
 	|| (a.initial().size() == 0))
       return false;
-    
+
     // we can start with good suppositions
 
      possibility_t possibility;
@@ -197,42 +186,42 @@ namespace vcsn {
 	 sub_possibility_t sub_possibility;
 	 for_each_state(j, b)
 	   {
-	     set<hedge_t> out_a;
-	     set<hedge_t> out_b;
-	    
+	     std::set<hedge_t> out_a;
+	     std::set<hedge_t> out_b;
+
 	     a.deltac(out_a, *i, delta_kind::edges());
 	     b.deltac(out_b, *j, delta_kind::edges());
-	    
+
 	     bool bool_edge = true;
-	     for_all_(set<hedge_t>, x, out_a)
+	     for_all_(std::set<hedge_t>, x, out_a)
 	       {
-		 set<hedge_t>::iterator y = out_b.begin();
-		 while ((y != out_b.end()) && 
+		 std::set<hedge_t>::iterator y = out_b.begin();
+		 while ((y != out_b.end()) &&
 			(a.series_of(*x) != b.series_of(*y)))
 		   y++;
-		 if (y == out_b.end()) 
+		 if (y == out_b.end())
 		   bool_edge = false;
 	       }
 	     if (out_a.size() != out_b.size())
 	       bool_edge = false;
 
 	     bool_state = bool_state || bool_edge;
-	     if ((bool_edge) && 
+	     if ((bool_edge) &&
 		 ((a.is_initial(*i) && b.is_initial(*j))
 		  || (a.is_final(*i) && b.is_final(*j))
-		  || ((!a.is_final(*i) && !a.is_initial(*i)) 
+		  || ((!a.is_final(*i) && !a.is_initial(*i))
 		      && (!b.is_final(*j) && !b.is_initial(*j)))
 		  )
 		 )
-	       sub_possibility.push_back(pair<hstate_t, hstate_t>(*i, *j));
+	       sub_possibility.push_back(std::make_pair(*i, *j));
 	   }
 	 if (!bool_state)
 	   return false;
 	 possibility.insert(sub_possibility);
        }
-     
-      return create_possibility(a, b, possibility, possibility.begin(), 
-				sub_possibility_t());
+
+     return create_possibility(a, b, possibility, possibility.begin(),
+			       sub_possibility_t());
   }
 
 } // vcsn

@@ -46,8 +46,7 @@
 // INTERFACE: void standard_of(Automaton& a, const Exp& e) { return vcsn::standard_of(*a, e.value()); }
 // INTERFACE: void standard_of(GenAutomaton& a, const Exp& e) { return vcsn::standard_of(*a, e.value()); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

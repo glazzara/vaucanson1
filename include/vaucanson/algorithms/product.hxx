@@ -30,18 +30,17 @@
 #ifndef VCSN_ALGORITHMS_PRODUCT_HXX
 # define VCSN_ALGORITHMS_PRODUCT_HXX
 
+# include <vaucanson/algorithms/product.hh>
+
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
+
+# include <vaucanson/xml/infos.hh>
+
 # include <set>
 # include <map>
 # include <queue>
 # include <stack>
-
-# include <vaucanson/algorithms/product.hh>
-# include <vaucanson/algorithms/sub_automaton.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algebra/concept/series_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
-
-# include <vaucanson/xml/infos.hh>
 
 namespace vcsn {
 

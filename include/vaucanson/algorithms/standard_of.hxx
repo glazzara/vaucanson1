@@ -35,7 +35,6 @@
 # include <vaucanson/algorithms/standard_of.hh>
 
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/standard.hh>
 
 namespace vcsn {
@@ -71,8 +70,6 @@ namespace vcsn {
 
     typedef typename Exp_::monoid_value_t		monoid_value_t;
     typedef typename Exp_::semiring_elt_value_t		semiring_elt_value_t;
-
-    typedef rat::Node<monoid_value_t, semiring_elt_value_t> node_t;
 
     typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>	this_class;
     typedef algebra::KRatExpMatcher<this_class, Exp_, Auto_*, Dispatch_>

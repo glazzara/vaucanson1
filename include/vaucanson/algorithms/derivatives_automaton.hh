@@ -46,7 +46,7 @@
 // INTERFACE: void derivatives_automaton(Automaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
 // INTERFACE: void derivatives_automaton(GenAutomaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
 
-# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

@@ -1,7 +1,7 @@
 // sub_automaton.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,29 +30,30 @@
 #ifndef VCSN_ALGORITHMS_SUB_AUTOMATON_HXX
 # define VCSN_ALGORITHMS_SUB_AUTOMATON_HXX
 
-# include <queue>
 # include <vaucanson/algorithms/sub_automaton.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
+
+# include <list>
 
 namespace vcsn {
 
   /*----------------------------------------.
   | SubAutomaton defined by a set of states |
   `----------------------------------------*/
- 
+
   template<typename A, typename auto_t, typename list_t>
   void do_sub_automaton(const AutomataBase<A>&,
 		       auto_t& a,
-		       const list_t& selected, 
+		       const list_t& selected,
 		       bool check_states)
   {
     std::list<hstate_t> to_be_removed;
     for (typename auto_t::state_iterator i = a.states().begin();
 	 i != a.states().end(); ++i)
       {
-	if (std::find(selected.begin(), selected.end(), *i) 
+	if (std::find(selected.begin(), selected.end(), *i)
 	    == selected.end())
 	  to_be_removed.push_back(*i);
       }
@@ -65,9 +66,9 @@ namespace vcsn {
 
   // wrapper:
   template<typename A, typename T, typename StatesSet>
-  Element<A, T> 
+  Element<A, T>
   sub_automaton(const Element<A, T>& a, const StatesSet& s, bool check_states)
-  { 
+  {
     Element<A, T> ret(a);
     do_sub_automaton(ret.set(), ret, s, check_states);
     return ret;
@@ -78,7 +79,7 @@ namespace vcsn {
   {
     do_sub_automaton(a.set(), a, s, check_states);
   }
-  
+
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_SUB_AUTOMATON_HXX

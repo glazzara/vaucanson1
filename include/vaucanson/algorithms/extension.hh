@@ -29,7 +29,7 @@
 //
 
 #ifndef VCSN_ALGORITHMS_EXTENSION_HH
-#define  VCSN_ALGORITHMS_EXTENSION_HH
+# define  VCSN_ALGORITHMS_EXTENSION_HH
 
 /** @addtogroup algorithms *//** @{ */
 /**
@@ -41,8 +41,7 @@
  */
 /** @} */
 
-#include <vaucanson/automata/concept/automata.hh>
-#include <vaucanson/automata/concept/transducer.hh>
+# include <vaucanson/automata/concept/transducer.hh>
 
 namespace vcsn {
 

@@ -30,17 +30,14 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH
 
-# include <check/tester.hh>
-
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/dot_dump.hh>
-# include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
-# include <vaucanson/design_pattern/element.hh>
-# include <vaucanson/automata/concrete/generalized.hh>
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/eval.hh>
+
+# include <vaucanson/algebra/concrete/series/krat.hh>
+
+# include <vaucanson/tools/gen_random.hh>
+# include <vaucanson/tools/usual.hh>
 
 using namespace vcsn;
 

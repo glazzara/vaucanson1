@@ -49,7 +49,7 @@
 // INTERFACE: void sub_automaton_here(Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
 // INTERFACE: void sub_automaton_here(GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
 
-# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

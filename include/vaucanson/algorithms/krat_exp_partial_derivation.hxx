@@ -1,7 +1,7 @@
 // krat_exp_partial_derivation.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,15 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_PARTIAL_DERIVATION_HXX
 # define VCSN_ALGORITHMS_KRAT_EXP_PARTIAL_DERIVATION_HXX
 
+# include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
+
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 
 namespace vcsn {
 
   namespace algebra {
-  
+
     // Some operators are defined in order to make algorithm clearer
     // and efficient
 
@@ -72,13 +74,13 @@ namespace vcsn {
 	    inserter(result, result.begin()));
       return result;
     }
- 
+
     // It is a first implementation of partial derivate.
     // It simply apply the definition of partial derivates.
     template <class Series, class T, class Dispatch>
     struct KRatExpPartialDerivation : algebra::KRatExpMatcher<
       KRatExpPartialDerivation<Series, T, Dispatch>,
-      T, 
+      T,
       std::set<Element<Series, T> >,
       Dispatch
       >
@@ -97,7 +99,7 @@ namespace vcsn {
       typedef typename alphabet_t::letter_t			letter_t;
       INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
-      KRatExpPartialDerivation(const Element<Series, T>& exp, 
+      KRatExpPartialDerivation(const Element<Series, T>& exp,
 			       letter_t                  a) :
 	undefined(false),
 	exp_(exp),
@@ -181,20 +183,20 @@ namespace vcsn {
       END
 
       bool undefined;
-    
+
     private:
       Element<Series, T>  exp_;
       letter_t		a_;
     };
 
-  } // algebra  
+  } // algebra
 
   template <class Series, class T, class Letter>
   std::pair<std::set<Element<Series, T> >, bool>
-  partial_derivate(const Element<Series, T>& exp, 
+  partial_derivate(const Element<Series, T>& exp,
 	  	   Letter a)
   {
-    algebra::KRatExpPartialDerivation<Series, T, algebra::DispatchFunction<T> > 
+    algebra::KRatExpPartialDerivation<Series, T, algebra::DispatchFunction<T> >
       matcher(exp, a);
     std::set<Element<Series, T> > ret = matcher.match(exp.value());
     if (matcher.undefined)

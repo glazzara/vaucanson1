@@ -43,7 +43,7 @@
 // INTERFACE: void brzozowski(Automaton& a, const Exp& e) { return vcsn::brzozowski(*a, e); }
 // INTERFACE: void brzozowski(GenAutomaton& a, const Exp& e) { return vcsn::brzozowski(*a, e); }
 
-# include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 

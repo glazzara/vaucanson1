@@ -30,8 +30,11 @@
 #ifndef VCSN_ALGORITHMS_REALTIME_COMPOSITION_HXX
 # define VCSN_ALGORITHMS_REALTIME_COMPOSITION_HXX
 
-# include <iostream>
 # include <vaucanson/algorithms/realtime_composition.hh>
+
+# include <vaucanson/automata/concept/transducer.hh>
+
+# include <queue>
 
 namespace vcsn {
 

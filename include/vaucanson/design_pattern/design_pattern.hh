@@ -45,7 +45,6 @@
  * @see http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200307-Poosc
 */
 
-# include <vaucanson/design_pattern/default_ops.hh>
 # include <vaucanson/design_pattern/element.hh>
 
 #endif // VCSN_FUNDAMENTAL_FUNDAMENTAL_HH

@@ -1,7 +1,7 @@
 // standard.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,14 +32,14 @@
 #ifndef VCSN_ALGORITHMS_STANDARD_HXX
 # define VCSN_ALGORITHMS_STANDARD_HXX
 
-# include <iostream>
-
 # include <vaucanson/algorithms/standard.hh>
+
 # include <vaucanson/algorithms/sum.hh>
 # include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/misc/selectors.hh>
+
+# include <set>
 
 namespace vcsn {
 
@@ -59,7 +59,7 @@ namespace vcsn {
 	series_elt_t s = a.get_initial(*oi);
 	std::set<hedge_t> edge_oi;
 	edge_oi.clear();
-	a.deltac(edge_oi, *oi, delta_kind::edges()); 
+	a.deltac(edge_oi, *oi, delta_kind::edges());
 	for_all_const_(std::set<hedge_t>, oil, edge_oi)
 	  {
 	    series_elt_t t = s*a.series_of(*oil);
@@ -102,7 +102,7 @@ namespace vcsn {
 	if (*i != new_i)
 	  {
 	    old_i = *i;
-	    lhs.set_final(new_i, 
+	    lhs.set_final(new_i,
 			  lhs.get_final(new_i) +
 			  lhs.get_final(old_i));
 	    aim.clear();
@@ -111,7 +111,7 @@ namespace vcsn {
 		 d != aim.end();
 		 ++d)
 	      {
-		lhs.add_edge(new_i, 
+		lhs.add_edge(new_i,
 			     lhs.aim_of(*d),
 			     lhs.label_of(*d));
 		lhs.del_edge(*d);
@@ -122,18 +122,18 @@ namespace vcsn {
 		   d != aim.end();
 		   ++d)
 		{
-		  lhs.add_edge(lhs.origin_of(*d), 
-				     new_i, 
+		  lhs.add_edge(lhs.origin_of(*d),
+				     new_i,
 				     lhs.label_of(*d));
 		  lhs.del_edge(*d);
 		}
 	      lhs.del_state(old_i);
 	  }
-      } 
+      }
   }
 
   template<typename A, typename T, typename U>
-  void union_of_standard_here(Element<A, T>& lhs, 
+  void union_of_standard_here(Element<A, T>& lhs,
 			      const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())
@@ -141,8 +141,8 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  Element<A, T> 
-  union_of_standard(const Element<A, T>& lhs, 
+  Element<A, T>
+  union_of_standard(const Element<A, T>& lhs,
 		    const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())
@@ -194,7 +194,7 @@ namespace vcsn {
   {
     typedef std::map<hstate_t, hstate_t>	map_t;
     typedef std::set<hedge_t>			delta_ret_t;
-    
+
     /*-----------------.
     | Concat of states |
     `-----------------*/
@@ -213,7 +213,7 @@ namespace vcsn {
 	}
 
     // Add edges
-    hstate_t rhs_i = *rhs.initial().begin();    
+    hstate_t rhs_i = *rhs.initial().begin();
     aim.clear();
     rhs.deltac(aim, rhs_i, delta_kind::edges());
     for (typename lhs_t::final_iterator f = lhs.final().begin();
@@ -223,14 +223,14 @@ namespace vcsn {
 	   d != aim.end();
 	   ++d)
 	lhs.add_edge(*f, map_h[rhs.aim_of(*d)], rhs.label_of(*d));
-    
+
     for (typename lhs_t::state_iterator s = lhs.states().begin();
 	 s != lhs.states().end();
 	 ++s)
       lhs.set_final(*s, lhs.get_final(*s) * rhs.get_final(rhs_i));
-    
-    for (typename map_t::const_iterator nf = map_h.begin(); 
-	 nf != map_h.end(); 
+
+    for (typename map_t::const_iterator nf = map_h.begin();
+	 nf != map_h.end();
 	 ++nf)
       if (rhs.is_final(nf->first))
 	lhs.set_final(nf->second);
@@ -249,22 +249,22 @@ namespace vcsn {
 	       d != aim.end();
 	       ++d)
 	    lhs.add_edge(map_h[*i],
-			 map_h[rhs.aim_of(*d)], 
-			 rhs.label_of(*d));			
+			 map_h[rhs.aim_of(*d)],
+			 rhs.label_of(*d));
 	}
   }
-  
+
   template<typename A, typename T, typename U>
-  void concat_of_standard_here(Element<A, T>& lhs, 
+  void concat_of_standard_here(Element<A, T>& lhs,
 			       const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())
     do_concat_of_standard_here(lhs.set(), lhs, rhs);
   }
-  
+
   template<typename A, typename T, typename U>
-  Element<A, T> 
-  concat_of_standard(const Element<A, T>& lhs, 
+  Element<A, T>
+  concat_of_standard(const Element<A, T>& lhs,
 		     const Element<A, U>& rhs)
   {
     // assertion(lhs.set() == rhs.set())
@@ -279,10 +279,10 @@ namespace vcsn {
   template <typename A, typename auto_t>
   void do_star_of_standard_here(const AutomataBase<A>& ,
 				auto_t& a)
-  {    
+  {
     typedef std::set<hedge_t>		edelta_ret_t;
     edelta_ret_t	aim;
-    
+
     hstate_t 	new_i = *a.initial().begin();
     a.deltac(aim, new_i, delta_kind::edges());
     for (typename auto_t::final_iterator f = a.final().begin();
@@ -297,7 +297,7 @@ namespace vcsn {
 	    // FIXME: is it a good thing ?
 	    a.add_edge(*f, a.aim_of(*d), a.label_of(*d));
     }
-    a.set_final(new_i);      
+    a.set_final(new_i);
   }
 
   template<typename A, typename T>
@@ -307,7 +307,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  Element<A, T> 
+  Element<A, T>
   star_of_standard(const Element<A, T>& a)
   {
     // assertion(lhs.set() == rhs.set())

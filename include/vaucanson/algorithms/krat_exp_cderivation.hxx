@@ -1,7 +1,7 @@
 // krat_exp_cderivation.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,6 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_CDERIVATION_HXX
 # define VCSN_ALGORITHMS_KRAT_EXP_CDERIVATION_HXX
 
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 
 namespace vcsn {
@@ -70,7 +69,7 @@ namespace vcsn {
       MATCH__(Product, lhs, rhs)
       {
 	return_type match_lhs = match(lhs);
-      
+
 	// FIXME: Following code only valid for series over Boolean semirings.
 	if (match_lhs != zero_as<T>::of(exp_.set()))
 	  return match_lhs * rhs;
@@ -85,7 +84,7 @@ namespace vcsn {
       MATCH__(Sum, lhs, rhs)
       {
 	return_type match_lhs = match(lhs);
-      
+
 	// FIXME: Following code only valid for series over Boolean semirings.
 	if (match_lhs != zero_as<T>::of(exp_.set()))
 	  return match_lhs;

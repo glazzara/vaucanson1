@@ -45,7 +45,6 @@
 // INTERFACE: Exp cderivate(const Exp& e, const std::string& w) { return vcsn::word_cderivate(e, Series::monoid_elt_t(e.set().monoid(), w)); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/algebra/concept/series_base.hh>
 
 namespace vcsn {
 
