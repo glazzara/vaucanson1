@@ -48,10 +48,10 @@
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/misc/contract.hh>
 
-// Usefull macros for Moore's minimization algorithm.
+// Useful macros for Moore's minimization algorithm.
 
-// Iterator on partitions (begin + 1 because we dont interate on final state
-// partition).
+// Iterator on partitions (begin + 1 because we don't interate on the final
+//state partition).
 # define for_each_partition(I, P) \
   PARTITIONS_END = P.end(); \
   for (partitions_t::iterator I = P.begin() + 1; I != PARTITIONS_END; ++I)
@@ -125,9 +125,9 @@ namespace vcsn {
     hstate_t				initial_state;
 
     // Used counting variables.
-    int					current_partition;
-    int					i, j;
-    int					iter;
+    unsigned				current_partition;
+    unsigned				i, j;
+    unsigned				iter;
 
     // Special state used for map initialization.
     hstate_t				NullState = -1;
