@@ -66,8 +66,9 @@ int main()
     cout << i->first << " " << i->second << endl;
 
   endl(cout);
-  
-  p1.transpose();
+
+  // FIXME: This is borken.
+  /* p1.transpose(); */
 
   for (polynom<Word::value_t, scalar>::iterator i = p1.value().begin(); 
        i != p1.value().end(); i++)

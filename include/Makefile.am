@@ -5,6 +5,7 @@
 nobase_include_HEADERS = \
 vaucanson/config/system.hh\
 vaucanson/config/pconf.hh\
+vaucanson/config/rel_ops_work_around_g++2.hh\
 vaucanson/algebra/concept/alphabets_base.hh\
 vaucanson/algebra/concept/concepts.hh\
 vaucanson/algebra/concept/freemonoid_base.hh\
@@ -85,10 +86,6 @@ vaucanson/automata/concrete/manylinks_carriers.hh\
 vaucanson/automata/concrete/manylinks_edges.hh\
 vaucanson/automata/concrete/manylinks.hh\
 vaucanson/automata/concrete/manylinks_states.hh\
-vaucanson/config/rel_ops_work_around_g++2.hh\
-vaucanson/config/system.hh\
-vaucanson/config/config.hh\
-vaucanson/config/pconf.hh\
 vaucanson/fundamental/default_ops.hh\
 vaucanson/fundamental/element_base.hh\
 vaucanson/fundamental/element.hh\

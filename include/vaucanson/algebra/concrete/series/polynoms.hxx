@@ -572,7 +572,7 @@ namespace vcsn {
   template <typename W, typename M, 
 	    typename Tm, typename Tw, 
 	    typename oTm, typename oTw>
-  void op_series_set(const Series<W, M>& s,
+  void op_series_set(const Series<W, M>&,
 		     polynom<Tm, Tw>& p,
 		     const oTm& m,
 		     const oTw& w)

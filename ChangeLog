@@ -1,6 +1,36 @@
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* src/demos/samples/Makefile.am: Distribute more examples.
+
+	* src/demos/samples/algebra/semiring.cc (main): Add missing declaration.
+
+	* src/demos/samples/algebra/decorated_alphabet.cc (main): Omit arguments.
+	* src/demos/samples/algebra/alphabet.cc (main): Likewise.
+
+	* src/demos/samples/algebra/series.cc (main): Add bug notice.
+
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx:
+	More argument name omissions.
+	
+	* include/Makefile.am (nobase_include_HEADERS): Cleanup.
+
+	* configure.ac: Add more `Makefile's to AC_CONFIG_FILES.
+
+	* src/demos/samples/Makefile.am: Add.
+
+	* src/demos/Makefile.am (SUBDIRS): Mention `samples'.
+
+	* src/demos/samples/algebra/Makefile.am: Add.
+
+	* src/demos/Makefile.am: Remove `demos' target.
+	* src/demos/vgrep/Makefile.am: Likewise.
+
+	* Makefile.am (maintainer-check): Fix cppi invocation.
+
+2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* Makefile.am: Remove `doc' target.
+
 	* doc/Makefile.am, doc/tutorial/Makefile.am: Likewise. Sanitize.
 
 	* doc/doc.doxy.in: Sanitize.

@@ -5,7 +5,7 @@
 
 AUTOMAKE_OPTIONS = foreign 1.7
 
-SUBDIRS = include src doc 
+SUBDIRS = include doc src
 
 EXTRA_DIST = THANKS README LICENCE 
 
@@ -31,7 +31,7 @@ dist_m4data_DATA = config/vcsn.m4
 # This is totally experimental. Comments are welcome.
 maintainer-check:
 	if cppi --version >/dev/null 2>&1; then \
-	  find $(srcdir) -name '*.{cc,hh,hxx}' | \
+	  find $(srcdir)/include -name '*.hh' -or -name '*.hxx' | \
 	    xargs cppi --check; \
 	else \
 	  echo "$@: GNU cppi is required" >&2; \

@@ -69,6 +69,8 @@ AC_CONFIG_FILES([
 	src/tests/bin/Makefile
 	src/demos/Makefile
 	src/demos/vgrep/Makefile
+	src/demos/samples/Makefile
+	src/demos/samples/algebra/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
         doc/doc.doxy	

@@ -8,7 +8,7 @@
 #include <vaucanson/algebra/concrete/alphabets/predefs.hh>
 
 
-int main(int argc, char** argv)
+int main()
 {
   
   using namespace vcsn;

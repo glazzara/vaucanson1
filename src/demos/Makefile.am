@@ -2,9 +2,4 @@
 #
 # $Id$
 
-SUBDIRS = vgrep
-
-.PHONY: demos
-
-demos:
-	cd vgrep && $(MAKE) demos
+SUBDIRS = vgrep samples

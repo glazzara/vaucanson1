@@ -90,7 +90,7 @@ namespace vcsn {
 
     template<class TropicalKind, typename T, typename U>
     inline
-    T op_mul(const TropicalSemiring<TropicalKind>& s, T a, U b)
+    T op_mul(const TropicalSemiring<TropicalKind>&, T a, U b)
     { 
       if ((a == zero_value(SELECT(TropicalSemiring<TropicalKind>), 
 			   SELECT(T))) ||
@@ -119,13 +119,13 @@ namespace vcsn {
     }
 
     template<typename T, typename U>
-    T op_add(const TropicalSemiring<TropicalMax>& s, T a, U b)
+    T op_add(const TropicalSemiring<TropicalMax>&, T a, U b)
     { 
       return std::max(a, b); 
     }
 
     template<typename T, typename U>
-    T op_add(const TropicalSemiring<TropicalMin>& s, T a, U b)
+    T op_add(const TropicalSemiring<TropicalMin>&, T a, U b)
     { 
       return std::min(a, b); 
     }
@@ -135,7 +135,7 @@ namespace vcsn {
     `-----*/
     template <typename T>
     static inline bool 
-    op_stareable(const TropicalSemiring<TropicalMin>& s, T b)
+    op_stareable(const TropicalSemiring<TropicalMin>&, T b)
     { 
       if (b < 0) 
 	return false;
@@ -144,7 +144,7 @@ namespace vcsn {
 
     template <class T>
     static inline void 
-    op_in_star(const TropicalSemiring<TropicalMin>& s, T& b)
+    op_in_star(const TropicalSemiring<TropicalMin>&, T& b)
     { 
       if (b >= 0)
 	{
@@ -156,7 +156,7 @@ namespace vcsn {
 
     template <typename T>
     static inline bool 
-    op_stareable(const TropicalSemiring<TropicalMax>& s, T b)
+    op_stareable(const TropicalSemiring<TropicalMax>&, T b)
     { 
       if (b > 0) 
 	return false;
@@ -165,7 +165,7 @@ namespace vcsn {
 
     template <class T>
     static inline void 
-    op_in_star(const TropicalSemiring<TropicalMax>& s, T& b)
+    op_in_star(const TropicalSemiring<TropicalMax>&, T& b)
     { 
       if (b <= 0)
 	{

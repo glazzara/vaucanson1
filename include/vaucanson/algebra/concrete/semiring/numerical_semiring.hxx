@@ -47,7 +47,7 @@ namespace vcsn {
   }
 
   template<typename T, typename U>
-  void op_in_add(const NumericalSemiring& s1,
+  void op_in_add(const NumericalSemiring&,
 		 T& dst, U arg)
   { 
     dst += arg; 
@@ -58,13 +58,13 @@ namespace vcsn {
   // type of the arguments. 
 
   template<typename T, typename U>
-  T op_mul(const NumericalSemiring& s, T a, U b)
+  T op_mul(const NumericalSemiring&, T a, U b)
   { 
     return a * b; 
   }
 
   template<typename T, typename U>
-  T op_add(const NumericalSemiring& s, T a, U b)
+  T op_add(const NumericalSemiring&, T a, U b)
   { 
     return a + b; 
   }

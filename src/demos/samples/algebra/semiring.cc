@@ -35,6 +35,7 @@ int main()
 
   Element<TropicalSemiring<TropicalMax>, int> e4 = 2;
   Element<TropicalSemiring<TropicalMax>, int> e5 = 3;
+  Element<TropicalSemiring<TropicalMax>, int> e6 = 0;
  
   cout << e4 + e4.set().zero(SELECT(int)) << endl;
   cout << e4 * e4.set().zero(SELECT(int)) << endl;
