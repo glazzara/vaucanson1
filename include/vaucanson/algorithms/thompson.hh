@@ -1,7 +1,7 @@
 // thompson.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,21 @@
 #ifndef VCSN_ALGORITHMS_THOMPSON_HH
 # define VCSN_ALGORITHMS_THOMPSON_HH
 
-/***
+/** @addtogroup algorithms *//** @{ */
+/**
  * @file thompson.hh
- * @brief The thompson automaton.
  *
- * This file contains functions to build automata from rationnal expressions,
- * using thompson algorithm.
+ * The thompson automaton.
+ *
+ * This  file  contains functions  to  build  automata from  rationnal
+ * expressions, using thompson algorithm.
+ *
+ * @see thompson_of()
  */
+/** @} */
+
+// INTERFACE: void thompson_of_here(Automaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
+// INTERFACE: void thompson_of_here(GenAutomaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -47,28 +55,26 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /**
-   * @brief The Thompson automaton associated to the krat expression.
+   * The Thompson automaton associated to the krat expression.
    *
-   * This function build the automaton associated to the rational expression
-   * implemented by a krat_exp, using Thompson algorithm.
+   * This  function build  the  automaton associated  to the  rational
+   * expression implemented by a krat_exp, using Thompson algorithm.
    *
    * @param out The resulting automaton
    * @param kexp The rational expression
    */
-  // INTERFACE: void thompson_of_here(Automaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
-  // INTERFACE: void thompson_of_here(GenAutomaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
-  template<typename A,      typename T, 
+  template<typename A,      typename T,
 	   typename Letter, typename Weight>
   void
   thompson_of(Element<A, T>& out, const rat::exp<Letter, Weight>& kexp);
-  
+
   /**
-   * @brief The Thompson automaton associated to the krat expression.
+   * The Thompson automaton associated to the krat expression.
    *
-   * This function build the automaton associated to the rational expression
-   * implemented by a krat_exp, using Thompson algorithm. The kind of returned
-   * automaton is a default one.
-   * 
+   * This  function build  the  automaton associated  to the  rational
+   * expression   implemented   by    a   krat_exp,   using   Thompson
+   * algorithm. The kind of returned automaton is a default one.
+   *
    * @param exp The rational expression
    */
   template <class AutoType, class S, class T>
@@ -79,10 +85,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/thompson.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/thompson.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_THOMPSON_HH

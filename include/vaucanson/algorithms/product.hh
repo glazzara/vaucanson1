@@ -1,7 +1,7 @@
 // product.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,33 +30,49 @@
 #ifndef VCSN_ALGORITHMS_PRODUCT_HH
 # define VCSN_ALGORITHMS_PRODUCT_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file product.hh
+ *
+ * This file contains the declarations of product().
+ *
+ * @see product()
+ */
+/** @} */
+
+// INTERFACE: Automaton product(const Automaton& a1, const Automaton& a2) { return vcsn::product(*a1, *a2); }
+// INTERFACE: GenAutomaton product(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::product(*a1, *a2); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
-namespace vcsn 
+namespace vcsn
 {
-  
-  /** @addtogroup algorithms */  /** @{ */
-  
-  /// Returns a fresh automaton that is the product of the two input ones.
-  // INTERFACE: Automaton product(const Automaton& a1, const Automaton& a2) { return vcsn::product(*a1, *a2); }
-  // INTERFACE: GenAutomaton product(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::product(*a1, *a2); }
+
+  /** @addtogroup algorithms *//** @{ */
+
+  /**
+   * @name product()
+   *
+   * Returns a fresh automaton that is the product of the two input ones.
+   */
+  /** @{ */
   template<typename A, typename T, typename U>
-  Element<A, T> 
+  Element<A, T>
   product(const Element<A, T>& lhs, const Element<A, U>& rhs);
 
   template<typename A, typename T, typename U>
-  Element<A, T> 
-  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
+  Element<A, T>
+  product(const Element<A, T>& lhs,
+	  const Element<A, U>& rhs,
 	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >&);
-  
   /** @} */
-  
+
+  /** @} */
+
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/product.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/product.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_PRODUCT_HH

@@ -1,7 +1,7 @@
 // concatenate.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,53 +30,60 @@
 #ifndef VCSN_ALGORITHMS_CONCATENATE_HH
 # define VCSN_ALGORITHMS_CONCATENATE_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file   concatenate.hh
+ *
+ * This file provides the general concatenation algorithm.
+ *
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @date   Tue Jun 24 17:42:32 2003
+ *
+ * @see concatenate(), concatenate_here()
+ */
+/** @} */
+
+// INTERFACE: Automaton concatenate(const Automaton& a1, const Automaton& a2) { return vcsn::concatenate(*a1, *a2); }
+// INTERFACE: GenAutomaton concatenate(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate(*a1, *a2); }
+
+// INTERFACE: void concatenate_here(Automaton& a1, const Automaton& a2) { return vcsn::concatenate_here(*a1, *a2); }
+// INTERFACE: void concatenate_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_here(*a1, *a2); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
+
+  /** @addtogroup algorithms *//** @{ */
+
   /**
-   * @file   concatenate.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 17:42:32 2003
-   * 
-   * @brief  This file provides the general concatenation algorithm.
-   * 
-   */
-
-  /** @addtogroup algorithms */  /** @{ */
-
-  /** 
-   * @brief Return the concatenation of two automata.
-   * 
+   * Return the concatenation of two automata.
+   *
    * This function produces a new automata that realizes L(lhs).L(rhs).
    *
-   * @param lhs the first automaton.
-   * @param rhs the second automaton.
-   * 
-   * @see concatenate_here.
+   * @param lhs The first automaton.
+   * @param rhs The second automaton.
    *
-   * @return a fresh automaton that is the concatenation of lhs and rhs.
+   * @see concatenate_here()
+   *
+   * @return A fresh automaton that is the concatenation of lhs and rhs.
    */
-  // INTERFACE: Automaton concatenate(const Automaton& a1, const Automaton& a2) { return vcsn::concatenate(*a1, *a2); }
-  // INTERFACE: GenAutomaton concatenate(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate(*a1, *a2); }
   template <class A, class T>
-  Element<A, T> 
+  Element<A, T>
   concatenate(const Element<A, T>& lhs, const Element<A, T>& rhs);
 
-  /** 
-   * @brief In place concatenation of two automata.
+  /**
+   * In place concatenation of two automata.
    *
    * This function modifies lhs to concatenate the language L(rhs) to its
    * language.
    *
-   * @param lhs the first automaton.
-   * @param rhs the second automaton.
+   * @param lhs The first automaton.
+   * @param rhs The second automaton.
    *
-   * @see concatenate.
+   * @see concatenate()
    *
    */
-  // INTERFACE: void concatenate_here(Automaton& a1, const Automaton& a2) { return vcsn::concatenate_here(*a1, *a2); }
-  // INTERFACE: void concatenate_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_here(*a1, *a2); }
   template <class A, class T>
   void
   concatenate_here(Element<A, T>& lhs, const Element<A, T>& rhs);
@@ -85,10 +92,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/concatenate.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/concatenate.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_CONCATENATE_HH

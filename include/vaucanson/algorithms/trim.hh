@@ -1,7 +1,7 @@
 // trim.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,35 +30,45 @@
 #ifndef VCSN_ALGORITHMS_TRIM_HH
 # define VCSN_ALGORITHMS_TRIM_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file trim.hh
+ *
+ * This file contains the declaration of useful_states() and trim().
+ *
+ * @see useful_states(), trim()
+ */
+/** @} */
+
+// INTERFACE: HList useful_states(const Automaton& a) { return list_of_set(vcsn::useful_states(*a)); }
+// INTERFACE: HList useful_states(const GenAutomaton& a) { return list_of_set(vcsn::useful_states(*a)); }
+
+// INTERFACE: Automaton trim(const Automaton& a) { return vcsn::trim(*a); }
+// INTERFACE: GenAutomaton trim(const GenAutomaton& a) { return vcsn::trim(*a); }
+
 # include <set>
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
-  
+  /** @addtogroup algorithms *//** @{ */
+
   /// Returns a useful states of the automaton (start reachable and final co-).
-  // INTERFACE: HList useful_states(const Automaton& a) { return list_of_set(vcsn::useful_states(*a)); }
-  // INTERFACE: HList useful_states(const GenAutomaton& a) { return list_of_set(vcsn::useful_states(*a)); }
   template<typename A, typename T>
   std::set<hstate_t>
   useful_states(const Element<A, T>& a);
 
   /// Return a fresh automaton in which non useful states are removed.
-  // INTERFACE: Automaton trim(const Automaton& a) { return vcsn::trim(*a); }
-  // INTERFACE: GenAutomaton trim(const GenAutomaton& a) { return vcsn::trim(*a); }
   template<typename A, typename T>
   Element<A, T>
   trim(const Element<A, T>& a);
-    
+
   /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/trim.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/trim.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_TRIM_HH

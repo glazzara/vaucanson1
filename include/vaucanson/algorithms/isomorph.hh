@@ -1,7 +1,7 @@
 // isomorph.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,16 +30,27 @@
 #ifndef VCSN_ALGORITHMS_ISOMORPH_HH
 # define VCSN_ALGORITHMS_ISOMORPH_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file isomorph.hh
+ *
+ * This files contains the declaration for the is_isomorph() algorithm.
+ *
+ * @see is_isomorph()
+ */
+/** @} */
+
+// INTERFACE: bool is_isomorph(const Automaton& a1, const Automaton& a2) { return vcsn::is_isomorph(*a1, *a2); }
+// INTERFACE: bool is_isomorph(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::is_isomorph(*a1, *a2); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
   /// Returns true if the two automata are isomorph.
-  // INTERFACE: bool is_isomorph(const Automaton& a1, const Automaton& a2) { return vcsn::is_isomorph(*a1, *a2); }
-  // INTERFACE: bool is_isomorph(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::is_isomorph(*a1, *a2); }
   template<typename A, typename T>
   bool
   is_isomorph(const Element<A, T>& a, const Element<A, T>& b);
@@ -48,10 +59,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/isomorph.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/isomorph.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_ISOMORPH_HH

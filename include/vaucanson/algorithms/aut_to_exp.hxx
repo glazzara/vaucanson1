@@ -1,7 +1,7 @@
 // aut_to_exp.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -48,10 +48,11 @@ namespace vcsn {
   /*---------------.
   | DefaultChooser |
   `---------------*/
-  // description : a chooser is intended to respond what is the next
-  // state to eliminate. 
-  // precondition : there must be at least one state in the automaton
+
+  // Description: a  chooser is intended  to respond what is  the next
+  // state to eliminate.
   //
+  // Precondition: there must be at least one state in the automaton.
   struct DefaultChooser
   {
     template <class Auto_>
@@ -72,9 +73,9 @@ namespace vcsn {
   /*------------.
   | ListChooser |
   `------------*/
-  // FIXME : could be extended to continue if the list is empty and there
-  //	     remain states in the automaton ;
-  //
+
+  // FIXME: Could be extended to continue if the list is empty and there
+  //	    remain states in the automaton ;
   class ListChooser
   {
   public :
@@ -82,9 +83,9 @@ namespace vcsn {
       list_(l),
       pos_(l.begin())
     {}
-    
+
     template <class Auto_>
-    hstate_t operator()(const Auto_& a) 
+    hstate_t operator()(const Auto_& a)
     {
       assertion(pos_ != list_.end());
       return *pos_++;
@@ -95,18 +96,17 @@ namespace vcsn {
     std::list<hstate_t>::const_iterator pos_;
   };
 
-  /*------------.
+  /*-----------.
   | aut_to_exp |
-  `------------*/
-  // preconditions :
-  //   - hope that automaton's labels are sufficient to support "star"
-  //     => in fact, generalized automaton are generally expected here.
-  //  
+  `-----------*/
 
+  // Preconditions:
+  //  - Automaton's labels must support "star".
+  //  => In fact, generalized automaton are generally expected here.
   template <class A_, typename Auto_, typename Chooser_>
-  typename Auto_::series_elt_t  
+  typename Auto_::series_elt_t
   do_in_aut_to_exp(const AutomataBase<A_>&  a_set,
-		    Auto_&		    a, 
+		    Auto_&		    a,
 		    Chooser_	            chooser)
   {
     AUTOMATON_TYPES(Auto_);
@@ -134,7 +134,7 @@ namespace vcsn {
 	  continue;
 
 	edges.clear();
-	// FIXME : use a new version of delta !
+	// FIXME: use a new version of delta!
 	a.deltac(edges, q, delta_kind::edges());
 	for (i = edges.begin(); i != edges.end(); i = j)
 	  {
@@ -155,18 +155,18 @@ namespace vcsn {
 	  }
 
 	edges.clear();
-	// FIXME : use a new version of delta !
+	// FIXME: use a new version of delta!
 	a.rdeltac(edges, q, delta_kind::edges());
 	for (i = edges.begin(); i != edges.end(); i = j)
 	  {
 	    j = i; ++j;
-	    // here all loops have already been removed
+	    // Here all loops have already been removed.
 	    typename sums_t::iterator f = in_sums.find(a.origin_of(*i));
 	    if (f == in_sums.end())
 	      f = in_sums.insert
 		(std::make_pair(a.origin_of(*i),
 				series_elt_t(a_set.series()))).first;
-	    
+
 	    f->second += a.series_of(*i);
 	    a.del_edge(*i);
 	  }
@@ -186,14 +186,13 @@ namespace vcsn {
     return final;
   }
 
-  /*------------.
+  /*-----------.
   | aut_to_exp |
-  `------------*/
-  // preconditions :
-  //   - hope that automaton's labels are sufficient to support "star"
-  //     => in fact, generalized automaton are generally expected here.
-  //  
- 
+  `-----------*/
+
+  // Preconditions:
+  //  - Automaton's labels must support "star".
+  //  => In fact, generalized automaton are generally expected here.
   template<typename A, typename T, typename Chooser_>
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a, const Chooser_& c)
@@ -201,7 +200,7 @@ namespace vcsn {
     Element<A, T> ret(a);
     return do_in_aut_to_exp(ret.set(), ret, c);
   }
-  
+
   template<typename A, typename T>
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a)

@@ -1,7 +1,7 @@
 // backward_realtime.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,64 +30,65 @@
 #ifndef VCSN_ALGORITHMS_BACKWARD_REALTIME_HH
 # define VCSN_ALGORITHMS_BACKWARD_REALTIME_HH
 
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file backward_realtime.hh
- * @brief Algorithms to make an automaton realtime.
+ *
+ * Algorithms to make an automaton realtime.
  *
  * This file contains algorithms to build realtime automaton. These algorithms
  * use the backward version of closure.
+ *
+ * @see backward_realtime(), backward_realtime_here()
  */
+/** @} */
+
+// INTERFACE: void backward_realtime_here(Automaton& a) { return vcsn::backward_realtime_here(*a); }
+// INTERFACE: void backward_realtime_here(GenAutomaton& a) { return vcsn::backward_realtime_here(*a); }
+
+  // INTERFACE: Automaton backward_realtime(const Automaton& a) { return vcsn::backward_realtime(*a); }
+  // INTERFACE: GenAutomaton backward_realtime(const GenAutomaton& a) { return vcsn::backward_realtime(*a); }
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
-  
+
   /**
-   * @brief In place modification of the automaton to make it realtime.
+   * In place modification of the automaton to make it realtime.
    *
-   * This function make an automaton realtime, using backward version of closure
-   * for building.
+   * This function make an  automaton realtime, using backward version
+   * of closure for building.
    *
    * @param a The automaton to make realtime.
    *
-   * @see realtime
-   * @see backward_realtime
-   * @see forward_realtime_here
+   * @see realtime(), backward_realtime(), forward_realtime_here()
    */
-  // INTERFACE: void backward_realtime_here(Automaton& a) { return vcsn::backward_realtime_here(*a); }
-  // INTERFACE: void backward_realtime_here(GenAutomaton& a) { return vcsn::backward_realtime_here(*a); }
   template<typename A, typename T>
   void
   backward_realtime_here(Element<A, T>& a);
 
   /**
-   * @brief Returns a fresh realtime automaton.
+   * Returns a fresh realtime automaton.
    *
-   * This fonction build a fresh realtime automaton from those given, using
-   * backward version of closure.
+   * This fonction build a  fresh realtime automaton from those given,
+   * using backward version of closure.
    *
    * @param a The automaton to make realtime.
    *
-   * @see realtime
-   * @see backward_realtime_here
-   * @see forward_realtime
+   * @see realtime(), backward_realtime_here(), forward_realtime()
    */
-  // INTERFACE: Automaton backward_realtime(const Automaton& a) { return vcsn::backward_realtime(*a); }
-  // INTERFACE: GenAutomaton backward_realtime(const GenAutomaton& a) { return vcsn::backward_realtime(*a); }
   template<typename A, typename T>
   Element<A, T>
   backward_realtime(const Element<A, T>& a);
 
   /** @} */
-  
+
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/backward_realtime.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/backward_realtime.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_BACKWARD_REALTIME_HH

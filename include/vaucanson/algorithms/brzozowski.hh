@@ -1,7 +1,7 @@
 // brzozowski.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,19 @@
 #ifndef VCSN_ALGORITHMS_BRZOZOWSKI_HH
 # define VCSN_ALGORITHMS_BRZOZOWSKI_HH
 
+/** @addtogroups algorithms *//** @{ */
+/**
+ * @file brzozowski.hh
+ *
+ * Contains the declaration for the Brzozowski algorithm.
+ *
+ * @see brzozowski()
+ */
+/** @} */
+
+// INTERFACE: void brzozowski(Automaton& a, const Exp& e) { return vcsn::brzozowski(*a, e); }
+// INTERFACE: void brzozowski(GenAutomaton& a, const Exp& e) { return vcsn::brzozowski(*a, e); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
@@ -37,21 +50,17 @@ namespace vcsn {
 
   /** @addtogroup algorithms */  /** @{ */
 
-  /// Convert a krat expression into an automaton using Brzozowski construction.
-  // INTERFACE: void brzozowski(Automaton& a, const Exp& e) { return vcsn::brzozowski(*a, e); }
-  // INTERFACE: void brzozowski(GenAutomaton& a, const Exp& e) { return vcsn::brzozowski(*a, e); }
+  /// Build an automaton from an expression using the Brzozowski construction.
   template <typename A, typename T, typename Exp>
   void
   brzozowski(Element<A, T>&, const Exp&);
-  
+
   /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/brzozowski.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/brzozowski.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_BRZOZOWSKI_HH

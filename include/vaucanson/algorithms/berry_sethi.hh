@@ -1,7 +1,7 @@
 // berry_sethi.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,28 +30,37 @@
 #ifndef VCSN_ALGORITHMS_BERRY_SETHI_HH
 # define VCSN_ALGORITHMS_BERRY_SETHI_HH
 
+/** @addtogroups algorithms *//** @{ */
+/**
+ * @file berry_sethi.hh
+ *
+ * Contains the declaration for the Berry-Sethi algorithm.
+ *
+ * @see berry_sethi()
+ */
+/** @} */
+
+// INTERFACE: void berry_sethi(Automaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
+// INTERFACE: void berry_sethi(GenAutomaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  /// Convert a krat expression into an automaton using Beery-Sethi construction.
-  // INTERFACE: void berry_sethi(Automaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
-  // INTERFACE: void berry_sethi(GenAutomaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
+  /// Build an automaton from an expression using the Berry-Sethi construction.
   template <typename A, typename T, typename Exp>
   void
   berry_sethi(Element<A, T>&, const Exp&);
-  
+
   /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/berry_sethi.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/berry_sethi.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_BERRY_SETHI_HH

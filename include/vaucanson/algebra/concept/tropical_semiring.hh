@@ -1,7 +1,7 @@
 // tropical_semiring.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -62,10 +62,10 @@ namespace vcsn {
     /// an arbitrary decision, it could be mul_kind too.
     typedef algebra::add_kind	semigroup_kind;
   };
-  
+
 
   /** @} @} */
-  
+
   namespace algebra {
 
     /** @addtogroup algebra */  /** @{ */
@@ -99,7 +99,7 @@ namespace vcsn {
 
   } // algebra
 
-  /// @addtogroup algebra 
+  /** @addtogroup algebra */
   /** @{ */
 
   /*---------------------------------------.

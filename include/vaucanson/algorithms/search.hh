@@ -31,13 +31,15 @@
 #ifndef VCSN_ALGORITHMS_SEARCH_HH
 # define VCSN_ALGORITHMS_SEARCH_HH
 
-/** @addtogroup algorithm *//** @{ */
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file search.hh
  *
  * @brief Rational expression search in text.
  *
  * This file contains functions to perform rational expression search.
+ *
+ * @see search()
  */
 /** @} */
 
@@ -48,7 +50,7 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /**
-   * @brief Search for a rational expression into a text.
+   * Search for a rational expression into a text.
    *
    * This function searches a rational expression into a text, given a
    * iterator on the text and an automaton which recognizes the
@@ -81,7 +83,7 @@ namespace vcsn {
 	 FoundFunctor& f);
 
   /**
-   * @brief Specific implementation for search.
+   * Specific implementation for search.
    *
    * This class owns a specific implementation of search. This implementation
    * deleguates the search to another implementation, choosing which one with
@@ -104,7 +106,7 @@ namespace vcsn {
   };
 
   /**
-   * @brief Specific implementation for search.
+   * Specific implementation for search.
    *
    * This class owns a specific implementation of search. This implementation
    * use an algorithm able to skip characters in the input stream, using a
@@ -133,10 +135,8 @@ namespace vcsn {
 
 } // vcsn
 
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/search.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-
 
 #endif // VCSN_ALGORITHMS_SEARCH_HH

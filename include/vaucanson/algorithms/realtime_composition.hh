@@ -1,7 +1,7 @@
 // realtime_composition.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,24 +30,37 @@
 #ifndef VCSN_ALGORITHMS_REALTIME_COMPOSITION_HH
 # define VCSN_ALGORITHMS_REALTIME_COMPOSITION_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file realtime_composition.hh
+ *
+ * Undocumented stuff.
+ *
+ * @see realtime_composition()
+ * @bug FIXME: Document!
+ */
+/** @} */
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/evaluation.hh>
 
 namespace vcsn {
 
-  /* Composition for realtime transducers. */
+  /** @addtogroup algorithms *//** @{ */
+
+  /// Composition for realtime transducers.
   template< typename S, typename T>
   void
   realtime_composition(const Element<S, T>&,
 		       const Element<S, T>&,
 		       Element<S, T>&);
 
+  /** @} */
+
 }
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/realtime_composition.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/realtime_composition.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif //VCSN_ALGORITHMS_REALTIME_COMPOSITION_HH

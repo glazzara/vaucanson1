@@ -30,10 +30,19 @@
 #ifndef VCSN_ALGORITHMS_TRANSPOSE_HH
 # define VCSN_ALGORITHMS_TRANSPOSE_HH
 
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file algorithms/transpose.hh
+ *
  * This file contain the function which transpose an automaton.
  */
+/** @} */
+
+// INTERFACE: void transpose(Automaton& dst, const Automaton& src) { vcsn::transpose(*dst, *src); }
+// INTERFACE: void transpose(GenAutomaton& dst, const GenAutomaton& src) { vcsn::transpose(*dst, *src); }
+
+// INTERFACE: Automaton transpose(const Automaton& a) { return vcsn::transpose(*a); }
+// INTERFACE: GenAutomaton transpose(const GenAutomaton& a) { return vcsn::transpose(*a); }
 
 # include <vaucanson/automata/concrete/transpose_view.hh>
 # include <vaucanson/automata/concept/copy.hh>
@@ -43,38 +52,34 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /**
-   * @brief Transposition of an automaton.
+   * Transposition of an automaton.
    *
    * This function copy in @c dst the transposition of the automaton @c from.
    *
    * @param from Automaton to transpose
    * @param dst Destination
    */
-  // INTERFACE: void transpose(Automaton& dst, const Automaton& src) { vcsn::transpose(*dst, *src); }
-  // INTERFACE: void transpose(GenAutomaton& dst, const GenAutomaton& src) { vcsn::transpose(*dst, *src); }
   template<typename lhs_t, typename rhs_t>
-  void transpose(lhs_t& dst, const rhs_t& from);
+  void
+  transpose(lhs_t& dst, const rhs_t& from);
 
   /**
-   * @brief Return a fresh transposed automaton.
+   * Return a fresh transposed automaton.
    *
    * This function returns the transposition of an automaton.
    *
    * @param from Automaton to transpose.
    */
-  // INTERFACE: Automaton transpose(const Automaton& a) { return vcsn::transpose(*a); }
-  // INTERFACE: GenAutomaton transpose(const GenAutomaton& a) { return vcsn::transpose(*a); }
   template<typename auto_t>
-  auto_t transpose(const auto_t& from);
+  auto_t
+  transpose(const auto_t& from);
 
   /** @} */
 
 } //vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/transpose.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/transpose.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_TRANSPOSE_HH

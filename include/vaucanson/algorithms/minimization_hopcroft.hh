@@ -32,57 +32,56 @@
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HH
 # define VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file   minimization_hopcroft.hh
+ *
+ * This file provides minimization and quotient algorithms.
+ *
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @date   Tue Jun 24 21:08:54 2003
+ *
+ * @see minimization_hopcroft(), quotient()
+ */
+/** @} */
+
+// INTERFACE: Automaton minimization_hopcroft(const Automaton& a) { return vcsn::minimization_hopcroft(*a); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
+
+  /** @addtogroup algorithms *//** @{ */
+
   /**
-   * @file   minimization_hopcroft.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 21:08:54 2003
-   * 
-   * @brief  This file provides minimization and quotient algorithms.
-   * 
+   * Return the minimal automaton using the hopcroft algorithm.
+   *
+   * @param a The deterministic boolean automaton to minimize.
+   *
+   * @return A fresh automaton that is the canonical minimal automaton of 'a'.
    */
-
-
-  /** @addtogroup algorithms */  /** @{ */
-
-  /// The canonical minimal automaton of the deterministic input automaton.
-
-  /** 
-   * @brief Return the minimal automaton using the hopcroft algorithm.
-   * 
-   * @param a the deterministic boolean automaton to minimize.
-   * 
-   * @return a fresh automaton that is the canonical minimal automaton of 'a'.
-   */
-  // INTERFACE: Automaton minimization_hopcroft(const Automaton& a) { return vcsn::minimization_hopcroft(*a); }
   template<typename A, typename T>
   Element<A, T>
   minimization_hopcroft(const Element<A, T>& a);
 
-  /// The canonical minimal automaton of the input automaton. (EXPERIMENTAL)
-  
-  /** 
-   * @brief Return the quotient of a non deterministic acceptor.
-   * 
-   * @param a the boolean automaton to minimize.
-   * 
-   * @return a fresh automaton that is the quotient of 'a'.
+  /**
+   * Return the quotient of a non deterministic acceptor.
+   *
+   * @param a The boolean automaton to minimize.
+   *
+   * @return A fresh automaton that is the quotient of 'a'.
    */
   template<typename A, typename T>
   Element<A, T>
   quotient(const Element<A, T>& a);
-  
+
   /** @} */
 
 } // vcsn
 
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/minimization_hopcroft.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-    
 
 #endif // VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HH

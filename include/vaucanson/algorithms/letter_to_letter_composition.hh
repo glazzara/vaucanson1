@@ -1,7 +1,7 @@
 // letter_to_letter_composition.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,17 +30,35 @@
 #ifndef VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HH
 # define VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file letter_to_letter_composition.hh
+ *
+ * Undocumented stuff.
+ *
+ * @see letter_to_letter_composition()
+ * @bug FIXME: Document!
+ */
+/** @} */
+
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 
+  /** @addtogroup algorithms *//** @{ */
+
+  /// Undocumented.
   template <class S, class T>
   Element<S, T>
-  letter_to_letter_composition(const Element<S, T>& lhs, 
+  letter_to_letter_composition(const Element<S, T>& lhs,
 			       const Element<S, T>& rhs);
+
+  /** @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/letter_to_letter_composition.hxx>
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/letter_to_letter_composition.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HH

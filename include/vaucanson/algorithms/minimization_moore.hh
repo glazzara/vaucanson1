@@ -33,11 +33,23 @@
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file minimization_moore.hh
+ *
+ * This file containes the declaration of minimization_moore().
+ *
+ * @see minimization_moore(), minimization_moore_here()
+ */
+/** @} */
+
+// INTERFACE: Automaton minimization_moore(const Automaton& a) { return vcsn::minimization_moore(*a); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
   /**
    * Returns the minimal deterministic automaton associated to the input one.
@@ -46,11 +58,10 @@ namespace vcsn {
    * deterministic  automaton.  The complexity  of  this algorithm  is
    * O(n2). See  minimize_hopcroft for O(nlogn).
    *
-   * @bug Put the precondition.
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+   * @bug Put the precondition.
    */
-  // INTERFACE: Automaton minimization_moore(const Automaton& a) { return vcsn::minimization_moore(*a); }
   template<typename A, typename T>
   Element<A, T>
   minimization_moore(const Element<A, T>& a);
@@ -61,24 +72,20 @@ namespace vcsn {
    * Use Moore's algorithm to minimalize (in place) the input
    * automaton. The complexity of this algorithm is O(n2). See
    * minimize_hopcroft for O(nlogn).
-   * 
+   *
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
    */
- 
   template<typename A, typename T>
   void
   minimization_moore_here(Element<A, T>& a);
 
-  
   /** @} */
 
 } // vcsn
 
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/minimization_moore.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-    
 
 #endif // VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH

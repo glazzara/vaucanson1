@@ -1,7 +1,7 @@
 // is_normalized.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,29 +30,32 @@
 #ifndef VCSN_ALGORITHMS_IS_NORMALIZED_HH
 # define VCSN_ALGORITHMS_IS_NORMALIZED_HH
 
-# include <vaucanson/design_pattern/design_pattern.hh>
-
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file   is_normalized.hh
+ *
+ * This file contains a test for transducer normalization.
+ *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Fri Jul  4 13:49:07 2003
- * 
- * @brief  This file contains a test for transducer normalization.
- * 
+ *
+ * @see is_normalized_transducer()
  */
+/** @} */
+
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  /** 
-   * @brief Test the normalization of transducer.
-   * 
-   * @param t the transducer to test.
-   * 
+  /**
+   * Test the normalization of transducer.
+   *
+   * @param t The transducer to test.
+   *
    * @return true if the transducer is normalized.
    */
-
   template<typename S, typename A>
   bool
   is_normalized_transducer(const Element<S, A>& t);
@@ -61,9 +64,8 @@ namespace vcsn {
 
 } // vcsn
 
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/is_normalized.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/is_normalized.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
 #endif // VCSN_ALGORITHMS_IS_NORMALIZED_HH

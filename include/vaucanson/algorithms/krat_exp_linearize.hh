@@ -30,6 +30,16 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HH
 # define VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file krat_exp_linearize.hh
+ *
+ * This file contains the declarations for the linearize() algorithm.
+ *
+ * @see linearize()
+ */
+/** @} */
+
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
@@ -41,14 +51,14 @@
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
   /// The types of a linearized expression
   template <typename S, typename T>
   struct linearize_element
   {
     // Get types which are useful to build the new type
-    typedef typename T::semiring_elt_value_t		orig_semiring_elt_value_t;
+    typedef typename T::semiring_elt_value_t	orig_semiring_elt_value_t;
     typedef typename S::semiring_t		orig_semiring_t;
     typedef typename S::monoid_t		orig_monoid_t;
     typedef typename orig_monoid_t::letter_t	orig_letter_t;
@@ -84,10 +94,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/krat_exp_linearize.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/krat_exp_linearize.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HH

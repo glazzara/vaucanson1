@@ -1,7 +1,7 @@
 // is_letterized.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,26 +30,30 @@
 #ifndef VCSN_ALGORITHMS_IS_LETTERIZED_HH
 # define VCSN_ALGORITHMS_IS_LETTERIZED_HH
 
-# include <vaucanson/design_pattern/design_pattern.hh>
-
-
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file   is_letterized.hh
+ *
+ * This file contains letter-to-letter feature testing.
+ *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Fri Jul  4 13:42:52 2003
- * 
- * @brief  This file contains letter-to-letter feature testing.
- * 
+ *
+ * @see is_letterized_transducer()
  */
+/** @} */
+
+# include <vaucanson/design_pattern/design_pattern.hh>
+
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  /** 
-   * @brief Test the letter to letter features.
-   * 
-   * @param t the transducer to test.
-   * 
+  /**
+   * Test the letter to letter features.
+   *
+   * @param t The transducer to test.
+   *
    * @return true if the transducer is letter to letter.
    */
   template<typename S, typename A>
@@ -60,9 +64,8 @@ namespace vcsn {
 
 } // vcsn
 
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/is_letterized.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/is_letterized.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
 #endif // VCSN_ALGORITHMS_IS_LETTERIZED_HH

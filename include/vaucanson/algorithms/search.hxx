@@ -31,17 +31,8 @@
 #ifndef VCSN_ALGORITHMS_SEARCH_HXX
 # define VCSN_ALGORITHMS_SEARCH_HXX
 
-/** @addtogroup algorithms *//** @{ */
-/**
- * @file search.hxx
- *
- * @brief Rational expression search in text.
- *
- * This file contains functions to perform rational expression search.
- */
-/** @} */
-
 # include <vaucanson/algorithms/search.hh>
+
 # include <vaucanson/misc/window.hh>
 # include <vaucanson/misc/bitset.hh>
 

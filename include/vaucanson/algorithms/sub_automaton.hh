@@ -1,7 +1,7 @@
 // sub_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,61 +30,70 @@
 #ifndef VCSN_ALGORITHMS_SUB_AUTOMATON_HH
 # define VCSN_ALGORITHMS_SUB_AUTOMATON_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file   sub_automaton.hh
+ *
+ * This file provides the extraction of sub automaton.
+ *
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @date   Tue Jun 24 20:37:59 2003
+ *
+ * @see sub_automaton(), sub_automaton_here()
+ */
+/** @} */
+
+// INTERFACE: Automaton sub_automaton(const Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton(*a, s, c); }
+// INTERFACE: GenAutomaton sub_automaton(const GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton(*a, s, c); }
+
+// INTERFACE: void sub_automaton_here(Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
+// INTERFACE: void sub_automaton_here(GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
+
+  /** @addtogroup algorithms *//** @{ */
+
   /**
-   * @file   sub_automaton.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 20:37:59 2003
-   * 
-   * @brief  This file provides the extraction of sub automaton.
-   * 
-   * 
+   *  Returns a fresh automaton that is the sub-automaton defined by a set.
+   *
+   * @param a The automaton into which we have to extract the sub-automaton.
+   * @param s The set of states of the sub-automaton included in the
+   *          state of 'a'.
+   * @param check_states A flag to enable/disable the inclusion checking.
+   * @return A fresh sub-automaton.
+   *
+   * @see sub_automaton_here()
    */
-
-
-  /** @addtogroup algorithms */  /** @{ */
- 
-  /** 
-   *  @brief Returns a fresh automaton that is the sub-automaton defined by a set.
-   * 
-   * @param a the automaton into which we have to extract the sub-automaton.
-   * @param s the set of states of the sub-automaton included in the state of 'a'.
-   * @param check_states a flag to enable/disable the inclusion checking.
-   * @see sub_automaton_here.
-   * @return a fresh sub-automaton.
-   */
-  // INTERFACE: Automaton sub_automaton(const Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton(*a, s, c); }
-  // INTERFACE: GenAutomaton sub_automaton(const GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton(*a, s, c); }
   template<typename A, typename T, typename StatesSet>
-  Element<A, T> 
-  sub_automaton(const Element<A, T>& a, const StatesSet& s, 
+  Element<A, T>
+  sub_automaton(const Element<A, T>& a, const StatesSet& s,
 		bool check_states = true);
 
-  /** 
-   *  @brief Select a sub-automaton into a given automaton.
-   * 
-   * @param a the automaton into which we have to extract the sub-automaton.
-   * @param s the set of states of the sub-automaton included in the state of 'a'.
-   * @param check_states a flag to enable/disable the inclusion checking.
-   * @see sub_automaton.
+  /**
+   * Select a sub-automaton into a given automaton.
+   *
+   * @param a The automaton into which we have to extract the sub-automaton.
+   * @param s The set of states of the sub-automaton included in the
+   *          state of 'a'.
+   * @param check_states A flag to enable/disable the inclusion checking.
+   *
+   * @see sub_automaton()
    */
-  // INTERFACE: void sub_automaton_here(Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
-  // INTERFACE: void sub_automaton_here(GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
   template<typename A, typename T, typename StatesSet>
-  void sub_automaton_here(Element<A, T>& a, const StatesSet& s, 
-			  bool check_states = true);
+  void
+  sub_automaton_here(Element<A, T>& a,
+		     const StatesSet& s,
+		     bool check_states = true);
 
   /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/sub_automaton.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/sub_automaton.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_SUB_AUTOMATON_HH

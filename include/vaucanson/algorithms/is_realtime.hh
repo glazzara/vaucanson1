@@ -30,29 +30,32 @@
 #ifndef VCSN_ALGORITHMS_IS_REALTIME_HH
 # define VCSN_ALGORITHMS_IS_REALTIME_HH
 
-# include <vaucanson/design_pattern/design_pattern.hh>
-
+/** @addtogroup algorithms */  /** @{ */
 /**
  * @file   is_realtime.hh
+ *
+ * This file contains a test for realtime transducers.
+ *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Fri Jul  4 13:49:07 2003
  *
- * @brief  This file contains a test for realtime transducers.
- *
+ * @see is_realtime()
  */
+/** @} */
+
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 
   /** @addtogroup algorithms */  /** @{ */
 
   /**
-   * @brief Test to detect realtime transducers.
+   * Test to detect realtime transducers.
    *
-   * @param t the transducer to test.
+   * @param t The transducer to test.
    *
    * @return true if the transducer is realtime.
    */
-
   template<typename S, typename A>
   bool
   is_realtime(const Element<S, A>& t);
@@ -61,8 +64,8 @@ namespace vcsn {
 
 } // vcsn
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/algorithms/is_realtime.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/is_realtime.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_IS_REALTIME_HH

@@ -1,7 +1,7 @@
 // extension.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,36 +31,56 @@
 #ifndef VCSN_ALGORITHMS_EXTENSION_HH
 #define  VCSN_ALGORITHMS_EXTENSION_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file extension.hh
+ *
+ * This file contains declarations for extension().
+ *
+ * @see extension()
+ */
+/** @} */
+
 #include <vaucanson/automata/concept/automata.hh>
 #include <vaucanson/automata/concept/transducer.hh>
 
 namespace vcsn {
 
-  /* Extend an automaton to a transducer whose multiplicity is the
-    series of the automaton.*/
+  /** @addtogroup algorithms *//** @{ */
 
-  template <typename S, 
+  /**
+   * Extend an automaton to a transducer.
+   *
+   * Extend  an automaton to  a transducer  whose multiplicity  is the
+   * series of the automaton.
+   */
+  template <typename S,
 	    typename T>
-  typename identity_transducer_helper<S, T>::ret 
+  typename identity_transducer_helper<S, T>::ret
   extension(const Element<S, T>&);
 
-  
-  /* Extend an automaton to a transducer whose set is the one of
-    another transducer passed in the second argument. This extension
-    is required if we want to make a product of an automaton with a
-    transducer. If this is not the case, we need simply call
-    extension(automaton_t) above.*/
-  
-  template <typename SA, typename TA, 
+
+  /**
+   * Extend an automaton to a transducer.
+   *
+   * Extend  an automaton  to a  transducer whose  set is  the  one of
+   * another transducer passed in  the second argument. This extension
+   * is required if  we want to make a product of  an automaton with a
+   * transducer.  If  this  is  not  the case,  we  need  simply  call
+   * extension(automaton_t) above.
+   */
+  template <typename SA, typename TA,
 	    typename ST, typename TT>
-  Element<ST, TT> extension(const Element<SA, TA>&, 
-			    const Element<ST, TT>&);
-  
+  Element<ST, TT>
+  extension(const Element<SA, TA>&,
+	    const Element<ST, TT>&);
+
+  /** @} */
+
 }
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    #include <vaucanson/algorithms/extension.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/extension.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif  // VCSN_ALGORITHMS_EXTENSION_HH

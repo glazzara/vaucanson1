@@ -32,10 +32,24 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
+/** @addtogroup algorithms */  /** @{ */
 /**
  * @file   complete.hh
- * @brief  Completion algorithm for deterministic and boolean automaton.
+ *
+ * Completion algorithm for deterministic and boolean automaton.
+ *
+ * @see complete(), complete_here(), is_complete()
  */
+/** @} */
+
+// INTERFACE: void complete_here(Automaton& a) { return vcsn::complete_here(*a); }
+// INTERFACE: void complete_here(GenAutomaton& a) { return vcsn::complete_here(*a); }
+
+// INTERFACE: Automaton complete(const Automaton& a) { return vcsn::complete(*a); }
+// INTERFACE: GenAutomaton complete(const GenAutomaton& a) { return vcsn::complete(*a); }
+
+// INTERFACE: bool is_complete(const Automaton& a) { return vcsn::is_complete(*a); }
+// INTERFACE: bool is_complete(const GenAutomaton& a) { return vcsn::is_complete(*a); }
 
 namespace vcsn {
 
@@ -43,29 +57,26 @@ namespace vcsn {
 
   /**
    * Make the transition function of an automaton total w.r.t alphabet.
-   * Work in place.
+   *
+   * @note This algorithm works in place.
    *
    * @param a the deterministic and boolean automaton to complete.
-   * @see complete.
-   * @see is_complete.
+   *
+   * @see complete(), is_complete()
    */
-  // INTERFACE: void complete_here(Automaton& a) { return vcsn::complete_here(*a); }
-  // INTERFACE: void complete_here(GenAutomaton& a) { return vcsn::complete_here(*a); }
   template <typename A, typename T>
   void
   complete_here(Element<A, T>& a);
 
   /**
    * Make the transition function of an automaton total w.r.t alphabet.
-   * Return a fresh automaton.
+   *
+   * @note This algorithm returns a fresh automaton.
    *
    * @param a the deterministic and boolean automaton to complete.
    *
-   * @see complete_here.
-   * @see is_complete.
+   * @see complete_here(), is_complete()
    */
-  // INTERFACE: Automaton complete(const Automaton& a) { return vcsn::complete(*a); }
-  // INTERFACE: GenAutomaton complete(const GenAutomaton& a) { return vcsn::complete(*a); }
   template <typename A, typename T>
   Element<A, T>
   complete(const Element<A, T>& a);
@@ -73,15 +84,12 @@ namespace vcsn {
   /**
    * Test if the transition function is complete for each state.
    *
-   * @param a the boolean automaton to test.
+   * @param a The boolean automaton to test.
    *
-   * @return true is the transition function of e is complete w.r.t alphabet.
+   * @return true if the transition function of e is complete w.r.t alphabet.
    *
-   * @see complete.
-   * @see complete_here.
+   * @see complete(), complete_here()
    */
-  // INTERFACE: bool is_complete(const Automaton& a) { return vcsn::is_complete(*a); }
-  // INTERFACE: bool is_complete(const GenAutomaton& a) { return vcsn::is_complete(*a); }
   template <class A, class T>
   bool
   is_complete(const Element<A, T>& a);
@@ -90,10 +98,8 @@ namespace vcsn {
 
 } // vcsn
 
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/complete.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-
 
 #endif // VCSN_ALGORITHMS_COMPLETE_HH

@@ -1,7 +1,7 @@
 // forward_closure.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,45 +30,52 @@
 #ifndef VCSN_ALGORITHMS_FORWARD_CLOSURE_HH
 # define VCSN_ALGORITHMS_FORWARD_CLOSURE_HH
 
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file   forward_closure.hh
- * @brief  Forward closure algorithm.
+ *
+ * Forward closure algorithm.
+ *
+ * @see forward_closure(), forward_closure_here()
  */
+/** @} */
+
+// INTERFACE: void forward_closure_here(Automaton& a) { return vcsn::forward_closure_here(*a); }
+// INTERFACE: void forward_closure_here(GenAutomaton& a) { return vcsn::forward_closure_here(*a); }
+
+// INTERFACE: Automaton forward_closure(const Automaton& a) { return vcsn::forward_closure(*a); }
+// INTERFACE: GenAutomaton forward_closure(const GenAutomaton& a) { return vcsn::forward_closure(*a); }
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  /** 
-   * Complete the given automaton into a copy to make it close over
-   * epsilon transition. 
+  /**
+   * In-place forward closure algorithm.
    *
-   * @param a the weighted automaton to close.
+   * Complete the  given automaton into a  copy to make  it close over
+   * epsilon transition.
    *
-   * @see forward_closure
-   * @see backward_closure
-   * @see backward_closure_here
+   * @param a The weighted automaton to close.
+   *
+   * @see forward_closure(), backward_closure(), backward_closure_here()
    */
-  // INTERFACE: void forward_closure_here(Automaton& a) { return vcsn::forward_closure_here(*a); }
-  // INTERFACE: void forward_closure_here(GenAutomaton& a) { return vcsn::forward_closure_here(*a); }
   template<typename A, typename T>
   void
   forward_closure_here(Element<A, T>& a);
 
-  /** 
-   * Complete the given automaton into a copy to make it close over
-   * epsilon transition. 
+  /**
+   * Forward closure algorithm.
    *
-   * @param a the weighted automaton to close.
+   * Complete the  given automaton into a  copy to make  it close over
+   * epsilon transition.
    *
-   * @see forward_closure
-   * @see backward_closure
-   * @see backward_closure_here
+   * @param a The weighted automaton to close.
+   *
+   * @see forward_closure(), backward_closure(), backward_closure_here()
    */
-  // INTERFACE: Automaton forward_closure(const Automaton& a) { return vcsn::forward_closure(*a); }
-  // INTERFACE: GenAutomaton forward_closure(const GenAutomaton& a) { return vcsn::forward_closure(*a); }
   template<typename A, typename T>
   Element<A, T>
   forward_closure(const Element<A, T>& a);
@@ -77,10 +84,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/forward_closure.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/forward_closure.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_FORWARD_CLOSURE_HH

@@ -1,7 +1,7 @@
 // determinize.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,31 +30,40 @@
 #ifndef VCSN_ALGORITHMS_DETERMINIZE_HH
 # define VCSN_ALGORITHMS_DETERMINIZE_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file   determinize.hh
+ *
+ * This file provides the determinization algorithm for boolean automata.
+ *
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @date   Tue Jun 24 19:13:10 2003
+ *
+ * @see determinize(), is_deterministic()
+ */
+/** @} */
+
+// INTERFACE: Automaton determinize(const Automaton& a) { return vcsn::determinize(*a); }
+
+// INTERFACE: bool is_deterministic(const Automaton& a) { return vcsn::is_deterministic(*a); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 
+  /** @addtogroup algorithms *//** @{ */
+
   /**
-   * @file   determinize.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 19:13:10 2003
-   * 
-   * @brief  This file provides the determinization algorithm for boolean automata.
-   * 
+   * @name determinize()
+   *
+   * Returns the determinized of a boolean automaton.
+   *
+   * @param a The boolean automaton to determinize.
+   *
+   * @return A fresh boolean automaton that is the determinization of 'a'.
    */
-
-
-  /** @addtogroup algorithms */  /** @{ */
-
-  /** 
-   * @brief Returns the determinized of a boolean automaton.
-   * 
-   * @param a the boolean automaton to determinize.
-   * 
-   * @return a fresh boolean automaton that is the determinization of 'a'.
-   */
-  // INTERFACE: Automaton determinize(const Automaton& a) { return vcsn::determinize(*a); }
+  /** @{ */
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a);
@@ -62,28 +71,26 @@ namespace vcsn {
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a,
-	      std::map<hstate_t, std::set<hstate_t> >& m);
+	      std::map<hstate_t, std::set<hstate_t> >&);
+  /** @} */
 
-  /** 
-   * @brief Test if an automaton is deterministic.
-   * 
-   * @param a a boolean automaton.
-   * 
+  /**
+   * Test if an automaton is deterministic.
+   *
+   * @param a A boolean automaton.
+   *
    * @return true if 'a' is deterministic.
    */
-  // INTERFACE: bool is_deterministic(const Automaton& a) { return vcsn::is_deterministic(*a); }
   template<typename A, typename T>
   bool
   is_deterministic(const Element<A, T>& a);
-  
+
   /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/determinize.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/determinize.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_DETERMINIZE_HH

@@ -30,6 +30,7 @@
 #ifndef VCSN_ALGORITHMS_NORMALIZED_HH
 # define VCSN_ALGORITHMS_NORMALIZED_HH
 
+/** @addtogroup algorithms *//* @{ */
 /**
  * @file normalized.hh
  *
@@ -41,15 +42,43 @@
  * @see normalize(), is_normalized(), union_of_normalized(),
  *      concatenate_of_normalized(), star_of_normalized()
  */
+/** @} */
+
+// INTERFACE: Automaton normalize(const Automaton& a) { return vcsn::normalize(*a); }
+// INTERFACE: GenAutomaton normalize(const GenAutomaton& a) { return vcsn::normalize(*a); }
+
+// INTERFACE: void normalize_here(Automaton& a) { return vcsn::normalize_here(*a); }
+// INTERFACE: void normalize_here(GenAutomaton& a) { return vcsn::normalize_here(*a); }
+
+// INTERFACE: bool is_normalized(const Automaton& a) { return vcsn::is_normalized(*a); }
+// INTERFACE: bool is_normalized(const GenAutomaton& a) { return vcsn::is_normalized(*a); }
+
+// INTERFACE: void union_of_normalized_here(Automaton& a1, const Automaton& a2) { return vcsn::union_of_normalized_here(*a1, *a2); }
+// INTERFACE: void union_of_normalized_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_normalized_here(*a1, *a2); }
+
+// INTERFACE: Automaton union_of_normalized(const Automaton& a1, const Automaton& a2) { return vcsn::union_of_normalized(*a1, *a2); }
+// INTERFACE: GenAutomaton union_of_normalized(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_normalized(*a1, *a2); }
+
+// INTERFACE: void concatenate_of_normalized_here(Automaton& a1, const Automaton& a2) { return vcsn::concatenate_of_normalized_here(*a1, *a2); }
+// INTERFACE: void concatenate_of_normalized_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_of_normalized_here(*a1, *a2); }
+
+// INTERFACE: Automaton concatenate_of_normalized(const Automaton& a1, const Automaton& a2) { return vcsn::concatenate_of_normalized(*a1, *a2); }
+// INTERFACE: GenAutomaton concatenate_of_normalized(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_of_normalized(*a1, *a2); }
+
+// INTERFACE: void star_of_normalized_here(Automaton& a) { return vcsn::star_of_normalized_here(*a); }
+// INTERFACE: void star_of_normalized_here(GenAutomaton& a) { return vcsn::star_of_normalized_here(*a); }
+
+// INTERFACE: Automaton star_of_normalized(Automaton& a) { return vcsn::star_of_normalized(*a); }
+// INTERFACE: GenAutomaton star_of_normalized(GenAutomaton& a) { return vcsn::star_of_normalized(*a); }
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms *//* @{ */
 
   /**
-   * @brief Return the fresh thompson-normalized automaton.
+   * Return the fresh thompson-normalized automaton.
    *
    * This function returns the thompson-normalized automaton corresponding
    * to its input.
@@ -59,14 +88,12 @@ namespace vcsn {
    * @see normalize_here(), is_normalized(), union_of_normalized(),
    *      concatenate_of_normalized(), star_of_normalized().
    */
-  // INTERFACE: Automaton normalize(const Automaton& a) { return vcsn::normalize(*a); }
-  // INTERFACE: GenAutomaton normalize(const GenAutomaton& a) { return vcsn::normalize(*a); }
   template <typename A, typename T>
   Element<A, T>
   normalize(const Element<A, T>& a);
 
   /**
-   * @brief In-place normalize to the thompson form.
+   * In-place normalize to the thompson form.
    *
    * This function performs the in-place thompson-normalization of its input.
    *
@@ -76,14 +103,12 @@ namespace vcsn {
    * @see normalize, is_normalized(), union_of_normalized(),
    *      concatenate_of_normalized(), star_of_normalized().
    */
-  // INTERFACE: void normalize_here(Automaton& a) { return vcsn::normalize_here(*a); }
-  // INTERFACE: void normalize_here(GenAutomaton& a) { return vcsn::normalize_here(*a); }
   template<typename A, typename T>
   void
   normalize_here(Element<A, T>& a);
 
   /**
-   * @brief Return true if the input automaton is thompson-normalized.
+   * Return true if the input automaton is thompson-normalized.
    *
    * This function indicates whether its input automaton is
    * thompson-normalized or not.
@@ -93,14 +118,12 @@ namespace vcsn {
    * @see normalize(), union_of_normalized(), concatenate_of_normalized(),
    *      star_of_normalized().
    */
-  // INTERFACE: bool is_normalized(const Automaton& a) { return vcsn::is_normalized(*a); }
-  // INTERFACE: bool is_normalized(const GenAutomaton& a) { return vcsn::is_normalized(*a); }
   template<typename A, typename T>
   bool
   is_normalized(const Element<A, T>& a);
 
   /**
-   * @brief Do the in-place union of two thompson-normalized automata.
+   * Do the in-place union of two thompson-normalized automata.
    *
    * This function performs the in-place union of two
    * thompson-normalized automata. The result is thompson-normalized.
@@ -112,15 +135,13 @@ namespace vcsn {
    * @see union_of_normalized(), concatenate_of_normalized(),
    *      star_of_normalized(), normalize(), is_normalized().
    */
-  // INTERFACE: void union_of_normalized_here(Automaton& a1, const Automaton& a2) { return vcsn::union_of_normalized_here(*a1, *a2); }
-  // INTERFACE: void union_of_normalized_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_normalized_here(*a1, *a2); }
   template<typename A, typename T, typename U>
   void
   union_of_normalized_here(Element<A, T>& lhs,
 			   const Element<A, U>& rhs);
 
   /**
-   * @brief Return the fresh union of two thompson-normalized automata.
+   * Return the fresh union of two thompson-normalized automata.
    *
    * This function returns a fresh automaton which is the union of
    * input automata. It is thompson-normalized.
@@ -131,15 +152,13 @@ namespace vcsn {
    * @see union_of_normalized_here(), concatenate_of_normalized(),
    *      star_of_normalized(), normalize(), is_normalized().
    */
-  // INTERFACE: Automaton union_of_normalized(const Automaton& a1, const Automaton& a2) { return vcsn::union_of_normalized(*a1, *a2); }
-  // INTERFACE: GenAutomaton union_of_normalized(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_normalized(*a1, *a2); }
   template<typename A, typename T, typename U>
   Element<A, T>
   union_of_normalized(const Element<A, T>& lhs,
 		      const Element<A, U>& rhs);
 
   /**
-   * @brief Do the in-place concatenation of two thompson-normalized automata.
+   * Do the in-place concatenation of two thompson-normalized automata.
    *
    * This function performs the in-place concatenation of two
    * thompson-normalized automata. The result is thompson-normalized.
@@ -151,15 +170,13 @@ namespace vcsn {
    * @see concatenate_of_normalized(), union_of_normalized(),
    *      star_of_normalized(), normalize(), is_normalized().
    */
-  // INTERFACE: void concatenate_of_normalized_here(Automaton& a1, const Automaton& a2) { return vcsn::concatenate_of_normalized_here(*a1, *a2); }
-  // INTERFACE: void concatenate_of_normalized_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_of_normalized_here(*a1, *a2); }
   template<typename A, typename T, typename U>
   void
   concatenate_of_normalized_here(Element<A, T>& lhs,
 				 const Element<A, U>& rhs);
 
   /**
-   * @brief Return the fresh concatenation of two thompson-normalized automata.
+   * Return the fresh concatenation of two thompson-normalized automata.
    *
    * This function returns a fresh automaton which is the concatenation of
    * input automata. It is thompson-normalized.
@@ -170,15 +187,13 @@ namespace vcsn {
    * @see concatenate_of_normalized_here(), union_of_normalized(),
    *      star_of_normalized(), normalize, is_normalized().
    */
-  // INTERFACE: Automaton concatenate_of_normalized(const Automaton& a1, const Automaton& a2) { return vcsn::concatenate_of_normalized(*a1, *a2); }
-  // INTERFACE: GenAutomaton concatenate_of_normalized(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concatenate_of_normalized(*a1, *a2); }
   template<typename A, typename T, typename U>
   Element<A, T>
   concatenate_of_normalized(const Element<A, T>& lhs,
 			    const Element<A, U>& rhs);
 
   /**
-   * @brief Do in-place star transformation on the thompson-normalized input.
+   * Do in-place star transformation on the thompson-normalized input.
    *
    * This function performs the in-place star transformation of a
    * thompson-normalized automaton. The result is thompson-normalized.
@@ -189,14 +204,12 @@ namespace vcsn {
    * @see star_of_normalized(), concatenate_of_normalized(),
    *      union_of_normalized(), normalize(), is_normalized().
    */
-  // INTERFACE: void star_of_normalized_here(Automaton& a) { return vcsn::star_of_normalized_here(*a); }
-  // INTERFACE: void star_of_normalized_here(GenAutomaton& a) { return vcsn::star_of_normalized_here(*a); }
   template<typename A, typename T>
   void
   star_of_normalized_here(Element<A, T>& a);
 
   /**
-   * @brief Return the fresh star transformation of its normalized input.
+   * Return the fresh star transformation of its normalized input.
    *
    * This function performs a star transformation on its input, and returns
    * it as a fresh automaton. The input must be thompson-normalized, and
@@ -207,8 +220,6 @@ namespace vcsn {
    * @see star_of_normalized_here(), concatenate_of_normalized(),
    *      union_of_normalized(), normalize(), is_normalized().
    */
-  // INTERFACE: Automaton star_of_normalized(Automaton& a) { return vcsn::star_of_normalized(*a); }
-  // INTERFACE: GenAutomaton star_of_normalized(GenAutomaton& a) { return vcsn::star_of_normalized(*a); }
   template<typename A, typename T>
   Element<A, T>
   star_of_normalized(const Element<A, T>& a);
@@ -217,10 +228,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/normalized.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/normalized.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_NORMALIZED_HH

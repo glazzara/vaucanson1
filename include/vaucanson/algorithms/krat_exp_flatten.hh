@@ -31,25 +31,28 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_FLATTEN_HH
 # define VCSN_ALGORITHMS_KRAT_EXP_FLATTEN_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file krat_exp_flatten.hh
+ *
+ * This file holds the declaration of the flatten algorithm.
+ *
+ * This is the  header file for the flatten  algorithm. This algorithm
+ * extracts the letters from a rational expression and store them in a
+ * list.
+ *
+ * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+ * @see flatten()
+ */
+/** @} */
+
 # include <vaucanson/design_pattern/element.hh>
 
 # include <list>
 
 namespace vcsn
 {
-
-  /** @addtogroup algorithms */ /** @{ */
-
-  /**
-   * @brief This file holds the declaration of the flatten algorithm.
-   *
-   * This is the  header file for the flatten  algorithm. This algorithm
-   * extracts the letters from a rational expression and store them in a
-   * list.
-   *
-   * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
-   * @see flatten()
-   */
+  /** @addtogroup algorithms *//** @{ */
 
   /**
    * @brief This algorithm extracts the letters from a rational expression.

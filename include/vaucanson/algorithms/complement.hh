@@ -1,7 +1,7 @@
 // complement.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,39 +30,50 @@
 #ifndef VCSN_ALGORITHMS_COMPLEMENT_HH
 # define VCSN_ALGORITHMS_COMPLEMENT_HH
 
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file   complement.hh
- * @brief  Complementation algorithm for boolean automaton.
+ *
+ * Complementation algorithm for boolean automata.
+ *
+ * @see complement(), complement_here()
  */
+/** @} */
+
+// INTERFACE: void complement_here(Automaton& a) { return vcsn::complement_here(*a); }
+// INTERFACE: void complement_here(GenAutomaton& a) { return vcsn::complement_here(*a); }
+
+// INTERFACE: Automaton complement(const Automaton& a) { return vcsn::complement(*a); }
+// INTERFACE: GenAutomaton complement(const GenAutomaton& a) { return vcsn::complement(*a); }
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  /** 
+  /**
    * Complement in place the set of final states.
-   * 
-   * @param a the deterministic boolean automaton to complement.
-   * @note the input automaton must be complete and deterministic.
-   * @see complement.
+   *
+   * @param a The deterministic boolean automaton to complement.
+   *
+   * @note The input automaton must be complete and deterministic.
+   *
+   * @see complement()
    */
-  // INTERFACE: void complement_here(Automaton& a) { return vcsn::complement_here(*a); }
-  // INTERFACE: void complement_here(GenAutomaton& a) { return vcsn::complement_here(*a); }
   template <typename A, typename T>
   void
   complement_here(Element<A, T>& a);
 
-  /** 
-   * Complement in place the set of final states.
-   * 
+  /**
+   * Complement the set of final states.
+   *
    * @param a the deterministic boolean automaton to complement.
+   *
    * @note the input automaton must be complete and deterministic.
-   * @see complement_here.
-   */  
-  // INTERFACE: Automaton complement(const Automaton& a) { return vcsn::complement(*a); }
-  // INTERFACE: GenAutomaton complement(const GenAutomaton& a) { return vcsn::complement(*a); }
+   *
+   * @see complement_here()
+   */
   template <typename A, typename T>
   Element<A, T>
   complement(const Element<A, T>& a);
@@ -71,10 +82,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/complement.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/complement.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_COMPLEMENT_HH

@@ -1,7 +1,7 @@
 // evaluation.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,58 +30,82 @@
 #ifndef VAUCANSON_ALGORITHMS_EVALUATION_HH
 # define VAUCANSON_ALGORITHMS_EVALUATION_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file evaluation.hh
+ *
+ * Undocumented stuff.
+ *
+ * @bug FIXME: Document!
+ */
+/** @} */
+
 #include<vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /* Evaluate for a "letterized" automaton and a realtime transducer. */
-  template<typename SA, typename TA, 
-	   typename ST, typename TT, 
+  /** @addtogroup algorithms *//** @{ */
+
+  /// Evaluate for a "letterized" automaton and a realtime transducer.
+  template<typename SA, typename TA,
+	   typename ST, typename TT,
 	   typename SARET, typename TARET>
   void
-  evaluation(const Element<SA, TA>&, 
-	     const Element<ST, TT>&, 
+  evaluation(const Element<SA, TA>&,
+	     const Element<ST, TT>&,
 	     Element<SARET, TARET>&);
- 
-  /* The following functions are absolutely not for public calls.*/
-  template<typename SE, typename TE, 
-	   typename ST, typename TT, 
+
+  /**
+   * @name evaluation.hh internals
+   *
+   * The following functions are absolutely not for public calls.
+   */
+  /** @{ */
+  template<typename SE, typename TE,
+	   typename ST, typename TT,
 	   typename M>
   void
-  partial_evaluation(const Element<SE, TE>& exp, 
-		     const Element<ST, TT>& trans, 
+  partial_evaluation(const Element<SE, TE>& exp,
+		     const Element<ST, TT>& trans,
 		     M& state_exp_pair);
 
-  template<typename SA, typename TA, 
+  template<typename SA, typename TA,
 	   typename M>
   void
-  partial_elimination(const Element<SA, TA>& a, 
+  partial_elimination(const Element<SA, TA>& a,
 		      M& state_exp_pair);
 
-  template<typename SA, typename TA, 
-	   typename ST, typename TT, 
+  template<typename SA, typename TA,
+	   typename ST, typename TT,
 	   typename M>
   void
-  partial_1(const Element<SA, TA>&, 
+  partial_1(const Element<SA, TA>&,
 	    const Element<ST, TT>&, M&);
 
-  template<typename SA, typename TA, 
-	   typename ST, typename TT, 
+  template<typename SA, typename TA,
+	   typename ST, typename TT,
 	   typename Exp>
   void
-  partial_2(const Element<SA, TA>&, 
-	    const Element<ST, TT>&, 
+  partial_2(const Element<SA, TA>&,
+	    const Element<ST, TT>&,
 	    const hstate_t, Exp&);
 
-  template<typename SA, typename TA, 
-	   typename ST, typename TT, 
+  template<typename SA, typename TA,
+	   typename ST, typename TT,
 	   typename M>
   void
-  partial_3(const Element<SA, TA>&, 
-	    const Element<ST, TT>&, 
+  partial_3(const Element<SA, TA>&,
+	    const Element<ST, TT>&,
 	    const hstate_t, M&);
+
+  /** @} */
+
+  /** @} */
+
 }
 
-#include<vaucanson/algorithms/evaluation.hxx>
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include<vaucanson/algorithms/evaluation.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VAUCANSON_ALGORITHMS_EVALUATION_HH

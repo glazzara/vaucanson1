@@ -1,7 +1,7 @@
 // derivatives_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,47 +30,53 @@
 #ifndef VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HH
 # define VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HH
 
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file   derivatives_automaton.hh
+ *
+ * Provides a converter from expression to automaton based on derivatives.
+ *
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+ * @date   Tue Jun 24 17:58:19 2003
+ *
+ * @see derivatives_automaton()
+ */
+/** @} */
+
+// INTERFACE: void derivatives_automaton(Automaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
+// INTERFACE: void derivatives_automaton(GenAutomaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
 namespace vcsn {
 
+  /** @addtogroup algorithms *//** @{ */
+
   /**
-   * @file   derivatives_automaton.hh
-   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
-   * @date   Tue Jun 24 17:58:19 2003
-   * 
-   * @brief  This file provides a converter from expression to automaton based on derivatives.
-   * 
-   */
-
-
-  /** @addtogroup algorithms */  /** @{ */
-
-  /// Convert a krat expression into an automaton using Brzozowski construction.
-
-  /** 
-   * @brief Convert a krat expression into an automaton using derivatives.
-   * 
-   * @param a an automaton to store the results.
-   * @param e the expression to convert.
+   * Convert a krat expression into an automaton using derivatives.
    *
-   * @note 'a' is generally an empty automaton. It enables the choice
-   * of the series to work with. Thus, the series can be different
+   * This algorithm produces an automaton from an expression using the
+   * Brzozowski  construction.   This  construction involves  multiple
+   * derivations on the initial expression.
+   *
+   * @param a An automaton to store the results.
+   * @param e The expression to convert.
+   *
+   * @note 'a' is generally an  empty automaton. It enables the choice
+   * of the  series to  work with. Thus,  the series can  be different
    * from the expresion ones.
    */
-  // INTERFACE: void derivatives_automaton(Automaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
-  // INTERFACE: void derivatives_automaton(GenAutomaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
   template <typename A, typename T, typename Exp>
   void
   derivatives_automaton(Element<A, T>& a, const Exp& e);
-  
-  /** 
-   * @brief Convert a krat expression into an automaton using derivatives.
-   * 
-   * @param e the expression to convert.
-   * 
-   * @return a fresh automaton which recognizes the language denoted by 'e'.
+
+  /**
+   * Convert a krat expression into an automaton using derivatives.
+   *
+   * @param e The expression to convert.
+   *
+   * @return A fresh automaton which recognizes the language denoted by 'e'.
    *
    * @note The series of the expression are used to define the automaton.
    */
@@ -82,10 +88,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/derivatives_automaton.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/derivatives_automaton.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HH

@@ -1,7 +1,7 @@
 // sum.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,23 @@
 #ifndef VCSN_ALGORITHMS_SUM_HH
 # define VCSN_ALGORITHMS_SUM_HH
 
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file sum.hh
- * 
+ *
  * @brief Summing of automata.
- * 
+ *
  * This file contains functions to sum two automata.
+ *
+ * @see sum(), sum_here()
  */
+/** @} */
+
+// INTERFACE: void sum_here(Automaton& a1, const Automaton& a2) { return vcsn::sum_here(*a1, *a2); }
+// INTERFACE: void sum_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::sum_here(*a1, *a2); }
+
+// INTERFACE: Automaton sum(const Automaton& a1, const Automaton& a2) { return vcsn::sum(*a1, *a2); }
+// INTERFACE: GenAutomaton sum(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::sum(*a1, *a2); }
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
@@ -45,48 +55,42 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /**
-   * @brief In place summing of two automata.
-   * 
+   * In place summing of two automata.
+   *
    * This function adds states and edges of an automaton to states and edges
    * of a second automaton.
    *
    * @param lhs Destination of the summing
    * @param rhs Source of summing
    *
-   * @see sum
+   * @see sum()
    */
-  // INTERFACE: void sum_here(Automaton& a1, const Automaton& a2) { return vcsn::sum_here(*a1, *a2); }
-  // INTERFACE: void sum_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::sum_here(*a1, *a2); }
   template<typename A, typename T, typename U>
-  void 
+  void
   sum_here(Element<A, T>& lhs, const Element<A, U>& rhs);
 
   /**
-   * @brief Summing of two automata.
+   * Summing of two automata.
    *
-   * This function returns the fresh union of two automata. It put edges and
-   * states of the two automata together, and create a news one with the
-   * result.
+   * This function  returns the  fresh union of  two automata.  It put
+   * edges and states of the  two automata together, and create a news
+   * one with the result.
    *
    * @param lhs First automaton to sum
    * @param rhs Second automaton to sum
    *
-   * @see sum_here
+   * @see sum_here()
    */
-  // INTERFACE: Automaton sum(const Automaton& a1, const Automaton& a2) { return vcsn::sum(*a1, *a2); }
-  // INTERFACE: GenAutomaton sum(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::sum(*a1, *a2); }
   template<typename A, typename T, typename U>
-  Element<A, T> 
+  Element<A, T>
   sum(const Element<A, T>& lhs, const Element<A, U>& rhs);
 
   /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/sum.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/sum.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_SUM_HH
