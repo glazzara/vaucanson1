@@ -2,5 +2,5 @@
 
 autoreconf -v -f -i
 cd vauc
-./boostrap.sh
+./bootstrap.sh
 echo "Reconfiguration done."

@@ -1,3 +1,7 @@
+2003-05-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* bootstrap.sh: Fix typo.
+
 2003-05-18  Loïc Fosse  <fosse_l@lrde.epita.fr>
 
         * include/vaucanson/algorithms/algo_helper.hxx: Add new function.
