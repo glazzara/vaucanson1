@@ -10,7 +10,7 @@ CLEANFILES = vaucanson/xml/xmlstrings.inc \
 	     vaucanson/xml/loadgeometry.inc
 
 mkdir_vaucanson_xml:
-	$(top_srcdir)/config/mkinstalldirs ./vaucanson/xml
+	$(mkinstalldirs) ./vaucanson/xml
 
 vaucanson/xml/xmlstrings.inc: mkdir_vaucanson_xml $(top_srcdir)/xml/vaucanson-g.style $(XMLSOURCES) $(srcdir)/vaucanson/xml/genutfstrings.sh vaucanson/xml/loadgeometry.inc
 	$(SHELL) $(srcdir)/vaucanson/xml/genutfstrings.sh \
