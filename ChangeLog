@@ -1,3 +1,8 @@
+2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/bin/generate-test-suite.sh: Use $(top_srcdir) instead of
+	@abs_top_srcdir@.
+
 2004-07-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/Makefile.am: Add k_automata to SUBDIRS.
