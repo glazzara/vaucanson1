@@ -875,8 +875,8 @@ namespace vcsn {
 	    // plus
 	  case 1 :
 	    {
-	      Element<algebra::Series<W,M>, rat::exp<Tm,Tw> > ep = 
-		s.monoid().choose(SELECT(Tm));
+	      Element<algebra::Series<W,M>, rat::exp<Tm,Tw> > 
+		ep(s, s.monoid().choose(SELECT(Tm)));
 	      ep = ep * s.weights().choose(SELECT(Tw));
 	      unsigned t = RAND___(2);
 	      if (t < 1)
@@ -888,8 +888,8 @@ namespace vcsn {
 	    // mult
 	  case 2 :
 	    {
-	      Element<algebra::Series<W,M>, rat::exp<Tm,Tw> > ep = 
-		s.monoid().choose(SELECT(Tm));
+	      Element<algebra::Series<W,M>, rat::exp<Tm,Tw> > 
+		ep(s, s.monoid().choose(SELECT(Tm)));
 	      ep = ep * s.weights().choose(SELECT(Tw));
 	      unsigned t = RAND___(2);
 	      if (t < 1)

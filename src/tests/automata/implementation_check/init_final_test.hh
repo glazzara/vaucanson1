@@ -27,7 +27,6 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <check/tester.hh>
-# include <vaucanson/misc/ref.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
 template <class Auto>

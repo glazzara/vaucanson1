@@ -51,10 +51,11 @@ namespace vcsn {
     {
       assert(a.states().size() > 0);
       typename Auto_::state_iterator s = a.states().begin();
-      while ((s != a.states().end()) &&
-	     ((a.is_initial(*s)) || (a.is_final(*s))))
-	++s;
-     
+      typename Auto_::state_iterator k = s;
+      while ((k != a.states().end()) &&
+	     ((a.is_initial(*k)) || (a.is_final(*k))))
+	++k;
+      s = k;
       return *s;
     }
   };
@@ -95,15 +96,14 @@ namespace vcsn {
 
   template <class A_, typename Auto_, typename Chooser_>
   typename Auto_::series_elt_t  
-  do_in_aut_to_exp(const AutomataBase<A_>&,
+  do_in_aut_to_exp(const AutomataBase<A_>&  a_set,
 		    Auto_&		    a, 
 		    Chooser_	            chooser)
   {
+    AUTOMATON_TYPES(Auto_);
     typedef Auto_				automaton_t;
     typedef typename automaton_t::series_t      series_t;
     typedef typename automaton_t::series_elt_t  series_elt_t;
-    typedef typename series_elt_t::monoid_elt_t	monoid_elt_t;
-    typedef typename series_t::monoid_t		monoid_t;
 
     typedef typename std::set<hedge_t>			hedge_set_t;
     typedef std::map<hstate_t, series_elt_t>	      	sums_t;
@@ -111,18 +111,19 @@ namespace vcsn {
     typename hedge_set_t::const_iterator		i, j;
     hstate_t					        q;
     hedge_set_t						edges;
-
-    normalize(a);
+    std::list<hedge_t> edges_to_remove;
+    normalize_here(a);
+    precondition(is_normalized(a));
 
     while (a.states().size() != 2)
       {
-	series_elt_t loop_sum;
+	series_elt_t loop_sum(a_set.series());
 	sums_t       in_sums, out_sums;
 
 	q = chooser(a);
 	if (a.is_initial(q) || a.is_final(q))
 	  continue;
-	
+
 	edges.clear();
 	// FIXME : use a new version of delta !
 	a.deltac(edges, q, delta_kind::edges());
@@ -133,9 +134,17 @@ namespace vcsn {
 	    if (a.aim_of(*i) == q)
 		loop_sum += a.serie_of(*i);
 	    else
-	        out_sums[a.aim_of(*i)] += a.serie_of(*i);
+	      {
+		typename sums_t::iterator f = out_sums.find(a.aim_of(*i));
+		if (f == out_sums.end())
+		  f = out_sums.insert
+		    (std::make_pair(a.aim_of(*i),
+				    series_elt_t(a_set.series()))).first;
+	        f->second += a.serie_of(*i);
+	      }
 	    a.del_edge(*i);
 	  }
+
 	edges.clear();
 	// FIXME : use a new version of delta !
 	a.rdeltac(edges, q, delta_kind::edges());
@@ -143,9 +152,16 @@ namespace vcsn {
 	  {
 	    j = i; ++j;
 	    // here all loops have already been removed
-	    in_sums[a.origin_of(*i)] += a.serie_of(*i);
+	    typename sums_t::iterator f = in_sums.find(a.origin_of(*i));
+	    if (f == in_sums.end())
+	      f = in_sums.insert
+		(std::make_pair(a.origin_of(*i),
+				series_elt_t(a_set.series()))).first;
+	    
+	    f->second += a.serie_of(*i);
 	    a.del_edge(*i);
 	  }
+
 	loop_sum.star();
 	for (typename sums_t::const_iterator in = in_sums.begin();
 	     in != in_sums.end();

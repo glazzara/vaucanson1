@@ -1,15 +1,33 @@
+2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hxx (generate<float>): Fix.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: 
+		Fix bad element init.
+	* src/tests/automata/algos/glushkov_test.hh: Likewise.
+	* src/tests/automata/algos/thompson_test.hh: Likewise.	
+	* include/vaucanson/algorithms/minimization_moore.hxx: Likewise.
+	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.	
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Fix.
+	* include/vaucanson/algorithms/aut_to_exp.hxx: 
+		Use normalize_here.
+		Fix bad element init.
+	* src/tests/automata/implementation_check/add_edge_test.hh: Fix.
+	* src/tests/automata/implementation_check/global_consistency_test.hh: 
+		Fix include.
+	* src/tests/automata/implementation_check/init_final_test.hh: Likewise.
+
 2003-06-30  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Fix
 	  namespace.
 	* include/vaucanson/misc/dot_dump.hh: Add.
-
+	
 2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/fundamental/element.hxx: Add inline.
 	* include/vaucanson/automata/concept/automata_base.hxx: Typo.
 
-2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
+x2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/series_base.hh: 
 		op_convert between same implementations.

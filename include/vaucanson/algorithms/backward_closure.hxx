@@ -58,12 +58,11 @@ namespace vcsn {
     matrix_weight_final_t m_wfinal(size), m_wfinal_tmp(size);
     
     for (i = 0; i < size; i++){
-      m_weight[i].resize(size);
-      m_weight_tmp[i].resize(size);
-      m_series[i].resize(size);
-      m_series_ret[i].resize(size);
+      m_weight[i].resize(size, weight_t(a.series().weights()));
+      m_weight_tmp[i].resize(size, weight_t(a.series().weights()));
+      m_series[i].resize(size, series_elt_t(a.series()));
+      m_series_ret[i].resize(size, series_elt_t(a.series()));
     }
-    
     // Initialize the matrix m_weight, m_series and m_series_ret with
     // the original automaton
     std::list<hedge_t> to_remove;

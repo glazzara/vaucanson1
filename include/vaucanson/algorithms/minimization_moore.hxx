@@ -46,7 +46,7 @@ namespace vcsn {
   //
   template <typename A, typename input_t, typename output_t>
   void
-  do_minimization_moore(const AutomataBase<A>&	,
+  do_minimization_moore(const AutomataBase<A>&	a_set,
 			output_t&		output,
 			const input_t&		input)
   {
@@ -132,7 +132,7 @@ namespace vcsn {
 	    {
 	      std::fill(csucc[*s][*a].begin(), 
 			csucc[*s][*a].end(), 
-			series_elt_t());
+			series_elt_t(a_set.series()));
 	      delta_ret.clear();
 	      // FIXME : use another version of delta !
 	      input.letter_deltac(delta_ret, *s, *a, delta_kind::edges());

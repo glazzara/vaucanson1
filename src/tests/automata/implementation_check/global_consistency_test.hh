@@ -28,7 +28,6 @@
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tester.hh>
-# include <vaucanson/misc/ref.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/automaton_tools.hh>
 

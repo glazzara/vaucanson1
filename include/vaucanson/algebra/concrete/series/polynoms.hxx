@@ -559,8 +559,7 @@ namespace vcsn {
 
     typename algebra::polynom<Tm, Tw>::iterator p;
     for (typename algebra::polynom<Tm, Tw>::iterator i = ret.begin();
-	 i != ret.end();
-	 i = p)
+	 i != ret.end();)
       {
 	p = i++;
 	p->second = op_mul(s.weights(), a, p->second);

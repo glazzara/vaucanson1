@@ -58,7 +58,7 @@ bool glushkov_test(tests::Tester& tg)
   {
     TEST_MSG("Basic test on a well known expression.");
     krat_t exp(s);
-    krat_t a_e = monoid_elt_t(b);
+    krat_t a_e(s, monoid_elt_t(b));
     exp = monoid_elt_t(a);
     exp = (a_e + exp).star();
     exp = exp * a_e * exp;

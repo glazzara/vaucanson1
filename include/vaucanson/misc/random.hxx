@@ -99,7 +99,7 @@ namespace utility {
 
       while ((from.size () > 0) && (n > 0))
 	{
-	  int  c = RANDOM_INT(from.size());
+	  int  c = generate<int>(0, from.size() - 1);
 	  *out = from[c];
 	  ++out;
 	  from.erase(from.begin() + c);
