@@ -1,3 +1,8 @@
+2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/tools/usual_macros.hh (SAVE_AUTOMATON_DOT_SIMPLE):
+	Fix namespace for dot_dump().
+
 2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/boolean_automata/brzozowski_test.hh,

@@ -167,7 +167,7 @@ typedef typename monoid_t::alphabet_t		alphabet_t;
       std::ostringstream s;					\
       s << Name << ".dot";					\
       std::ofstream f(s.str().c_str());				\
-      tools::dot_dump(f, Auto, Name);				\
+      vcsn::tools::dot_dump(f, Auto, Name);				\
     }
 
 #define RAND___(Max)						\
