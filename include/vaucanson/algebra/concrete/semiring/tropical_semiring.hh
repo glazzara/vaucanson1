@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGEBRA_CONCRETE_SEMIRING_TROPICAL_SEMIRING_HH
 # define VCSN_ALGEBRA_CONCRETE_SEMIRING_TROPICAL_SEMIRING_HH
@@ -42,41 +44,34 @@ namespace vcsn {
     | Identity value |
     `---------------*/
     template<class TropicalKind, typename T>
-    inline
     T identity_value(SELECTOR(algebra::TropicalSemiring<TropicalKind>), SELECTOR(T));
 
     template<typename T>
-    inline
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T));
 
     template<typename T>
-    inline
     T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T));
 
     /*------------.
     | op_contains |
     `------------*/
     template<class TropicalKind, typename T>
-    inline
     bool op_contains(const algebra::TropicalSemiring<TropicalKind>& s, T c);
 
     /*--------------------.
     | Multiplication is + |
     `--------------------*/
     template<class TropicalKind, typename T, typename U>
-    inline
     void op_in_mul(const algebra::TropicalSemiring<TropicalKind>& s1,
 		   T& dst, U arg);
 
     template<class TropicalKind, typename T, typename U>
-    inline
     T op_mul(const algebra::TropicalSemiring<TropicalKind>& s, T a, U b);
 
     /*---------.
     | Addition |
     `---------*/
     template<typename T, typename U>
-    inline
     void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s1,
 		   T& dst, U arg);
 
@@ -142,9 +137,9 @@ namespace vcsn {
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concrete/semiring/tropical_semiring.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concrete/semiring/tropical_semiring.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // VCSN_ALGEBRA_CONCRETE_SEMIRING_TROPICAL_SEMIRING_HH
