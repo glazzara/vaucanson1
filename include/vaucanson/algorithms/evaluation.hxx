@@ -159,16 +159,12 @@ namespace vcsn {
 	    b.del_edge(*i);
 	  }
 	loop_sum.star();
-	for (typename sums_t::const_iterator in = in_sums.begin();
-	     in != in_sums.end();
-	     ++in)
-	  for (typename sums_t::const_iterator out = out_sums.begin();
-	       out != out_sums.end();
-	       ++out)
-	    {
-	      series_elt_t res = in->second * loop_sum * out->second;
-	      b.add_serie_edge(in->first, out->first, res);
-	    }
+	for_each_const_(in, in_sums)
+	  for_each_const_(out, out_sums)
+	  {
+	    series_elt_t res = in->second * loop_sum * out->second;
+	    b.add_serie_edge(in->first, out->first, res);
+	  }
 	b.del_state(q);
       }
     
@@ -230,13 +226,15 @@ namespace vcsn {
     typedef typename Trans_t::value_t T;
     typedef typename output_projection_helper<ST, T>::ret Auto_ret_t;
     typedef typename Auto_ret_t::set_t::series_t      Auto_ret_series_t;
-    typename Auto_ret_t::set_t auto_set(Auto_ret_series_t(t.set().series().weights()));
+    typename Auto_ret_t::set_t 
+      auto_set(Auto_ret_series_t(t.set().series().weights()));
 
     AUTOMATON_TYPES_(Auto_t, a_);
     AUTOMATON_TYPES_(Trans_t, t_);
     AUTOMATON_TYPES_(Auto_ret_t, ret_);
 
-    typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> > state_pair_map_t;
+    typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> > 
+      state_pair_map_t;
     typedef std::map<hstate_t, hstate_t> state_state_map_t;
     typedef std::pair<hstate_t, ret_series_elt_t> se_pair_t;
 
@@ -314,7 +312,8 @@ namespace vcsn {
     typedef typename output_projection_helper<ST, T>::ret    Auto_ret_t;
     typedef typename Auto_ret_t::set_t::series_t      Auto_ret_series_t;
 
-    typename Auto_ret_t::set_t auto_set(Auto_ret_series_t(t.set().series().weights()));
+    typename Auto_ret_t::set_t 
+      auto_set(Auto_ret_series_t(t.set().series().weights()));
 
     Trans_t tt = t;
     tt.clear_initial();

@@ -35,7 +35,6 @@
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-
 # include <vaucanson/algorithms/backward_closure.hh> 
 
 namespace vcsn {
@@ -51,13 +50,13 @@ namespace vcsn {
 			   Auto&			   a)
   {
     AUTOMATON_TYPES(Auto);
-    typedef std::vector<std::vector<semiring_elt_t> >         matrix_semiring_elt_t;
-    typedef std::vector<std::vector<series_elt_t> >     matrix_series_t;
-    typedef std::vector<semiring_elt_t>                       matrix_semiring_elt_final_t;
+    typedef std::vector<std::vector<semiring_elt_t> >  matrix_semiring_elt_t;
+    typedef std::vector<std::vector<series_elt_t> >    matrix_series_t;
+    typedef std::vector<semiring_elt_t>            matrix_semiring_elt_final_t;
 
-    series_elt_t          serie_identity  = a.series().zero_; 
-    semiring_elt_t	          semiring_elt_zero     = a.series().semiring().wzero_; 
-    monoid_elt_t          monoid_identity = a.series().monoid().empty_; 
+    series_elt_t        serie_identity  = a.series().zero_; 
+    semiring_elt_t	semiring_elt_zero     = a.series().semiring().wzero_; 
+    monoid_elt_t        monoid_identity = a.series().monoid().empty_; 
     
     int                   i, j, k, size = a.states().size();
 
@@ -65,12 +64,13 @@ namespace vcsn {
     matrix_semiring_elt_t       m_semiring_elt(size), m_semiring_elt_tmp(size);
     matrix_semiring_elt_final_t m_wfinal(size), m_wfinal_tmp(size);
     
-    for (i = 0; i < size; i++){
-      m_semiring_elt[i].resize(size, semiring_elt_t(a.series().semiring()));
-      m_semiring_elt_tmp[i].resize(size, semiring_elt_t(a.series().semiring()));
-      m_series[i].resize(size, series_elt_t(a.series()));
-      m_series_ret[i].resize(size, series_elt_t(a.series()));
-    }
+    for (i = 0; i < size; i++)
+      {
+	m_semiring_elt[i].resize(size, semiring_elt_zero);
+	m_semiring_elt_tmp[i].resize(size,semiring_elt_zero);
+	m_series[i].resize(size, series_elt_t(a.series()));
+	m_series_ret[i].resize(size, series_elt_t(a.series()));
+      }
 
     /// @bug FIXME: This converters should be removed
     // Initialize converters between matrix index and states.
@@ -122,12 +122,13 @@ namespace vcsn {
 	for (i = 0; i < size; i++)
 	  for (j = 0; j < size; j++)
 	    m_semiring_elt_tmp[i][j] = 
-	      m_semiring_elt[i][j] + m_semiring_elt[i][r] * w * m_semiring_elt[r][j]; 
+	      m_semiring_elt[i][j] + m_semiring_elt[i][r] 
+	      * w * m_semiring_elt[r][j]; 
 	m_semiring_elt = m_semiring_elt_tmp;
     }
 
-    // Compute star(m_semiring_elt)*m_series, star(m_semiring_elt)*m_wfinal and
-    // delete all spontaneous edges.
+    // Compute star(m_semiring_elt) * m_series,
+    // star(m_semiring_elt) * m_wfinal and delete all spontaneous edges.
     for (i = 0; i < size; i++){
       for (j = 0; j < size; j++){
 	for (k = 0; k < size; k++)

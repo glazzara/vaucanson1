@@ -33,34 +33,33 @@
 # include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
+# include <vaucanson/tools/usual_macros.hh>
 # include <algorithm>
 # include <vector>
 
 namespace vcsn {
 
-  /*--------.
+  /*-----.
   | Eval |
-  `--------*/
+  `-----*/
   // precondition : the automaton is realtime
   //
   // author: Yann Regis-Gianas.
   template <typename A, typename auto_t, 
-	    typename semiring_elt_t, typename input_t>
+	    typename Selt, typename input_t>
   void 
   do_eval(const AutomataBase<A>&,
-	     const auto_t&	    a,
-	     const input_t&	    word, 
-	     semiring_elt_t&		    result)
+	  const auto_t&	    a,
+	  const input_t&    word, 
+	  Selt&		    result)
   {
+    AUTOMATON_TYPES(auto_t);
     // FIXME: for the moment, we use large vectors because the set of hstate_t
     // FIXME: can be sparsed. We wanted to be as general as possible.
     // FIXME: Variants of eval will be available soon of course.
-    typedef typename auto_t::monoid_elt_t monoid_elt_t;
 
     hstate_t max_hstate_t = 0;
-    for (typename auto_t::state_iterator i = a.states().begin();
-	 i != a.states().end();
-	 ++i)
+    for_each_state(i, a)
       max_hstate_t = std::max(*i, max_hstate_t);
 
     std::vector<semiring_elt_t>	v1(max_hstate_t + 1,
@@ -71,7 +70,7 @@ namespace vcsn {
     const typename semiring_elt_t::set_t &semiring = a.series().semiring();
     semiring_elt_t zero =
       semiring.zero(SELECT(typename semiring_elt_t::value_t));
-    typename auto_t::monoid_elt_t empty(a.series().monoid());
+    monoid_elt_t empty(a.series().monoid());
 
     /*-------------------.
     | Initialize the set |
@@ -82,18 +81,14 @@ namespace vcsn {
     | Initial |
     `--------*/
     // FIXME: here we assume that there is only weight in the initial app.
-    for (typename auto_t::initial_iterator i = a.initial().begin();
-	 i != a.initial().end();
-	 ++i)
+    for_each_initial_state(i, a)
       v1[*i] = a.get_initial(*i).get(empty);
 
     /*------------.
     | Computation |
     `------------*/
 
-    for (typename input_t::const_iterator e = word.begin();
-	 e != word.end();
-	 ++e)
+    for_all_const_(input_t, e, word)
       {
  	std::fill(v2.begin(), v2.end(), zero);
 	for (unsigned i = 0; i < v1.size(); ++i)
@@ -102,10 +97,7 @@ namespace vcsn {
 	    // FIXME : use the other version of delta to be more efficient !
 	    delta_ret.clear();
 	    a.letter_deltac(delta_ret, i, *e, delta_kind::edges());
-	    for (typename std::list<hedge_t>::const_iterator l = 
-		   delta_ret.begin();
-		 l != delta_ret.end();
-		 ++l)
+	    for_all_const_(std::list<hedge_t>, l, delta_ret)
 	      v2[a.aim_of(*l)] += v1[i] * a.serie_of(*l).get(monoid_elt_t(*e));
 	  }
 	std::swap(v1, v2);

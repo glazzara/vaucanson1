@@ -1,18 +1,19 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 433)
-(Parent-Version vaucanson 0 432)
+(Project-Version vaucanson 0 434)
+(Parent-Version vaucanson 0 433)
 (New-Version-Log "")
 
 (Version-Log "
 2003-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/aut_to_exp.hxx,
-	  include/vaucanson/algorithms/accessible.hxx:
+	* include/vaucanson/algorithms/eval.hxx,
+	  include/vaucanson/algorithms/backward_closure.hxx,
+	  include/vaucanson/algorithms/evaluation.hxx:
 		Use new macros.
 ")
-(Checkin-Time "Fri, 03 Oct 2003 10:36:47 +0200")
+(Checkin-Time "Fri, 03 Oct 2003 11:03:39 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -95,7 +96,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.66 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.67 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -352,7 +353,7 @@
   (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.11 600))
   (include/vaucanson/algorithms/complete.hxx (vaucanson/f/1_complete.h 1.10 600))
   (include/vaucanson/algorithms/eval.hh (vaucanson/e/6_compute.hh 1.13 600))
-  (include/vaucanson/algorithms/eval.hxx (vaucanson/e/5_compute.hx 1.18 600))
+  (include/vaucanson/algorithms/eval.hxx (vaucanson/e/5_compute.hx 1.19 600))
   (include/vaucanson/algorithms/concatenate.hh (vaucanson/h/5_concat.hh 1.9 600))
   (include/vaucanson/algorithms/concatenate.hxx (vaucanson/h/4_concat.hxx 1.9 600))
   (include/vaucanson/algorithms/determinize.hh (vaucanson/d/35_determiniz 1.13 600))
@@ -416,7 +417,7 @@
   (include/vaucanson/algorithms/forward_closure.hh (vaucanson/q/8_forward_cl 1.5 600))
   (include/vaucanson/algorithms/forward_closure.hxx (vaucanson/q/9_forward_cl 1.12 600))
   (include/vaucanson/algorithms/backward_closure.hh (vaucanson/q/10_backward_c 1.4 600))
-  (include/vaucanson/algorithms/backward_closure.hxx (vaucanson/q/11_backward_c 1.13 600))
+  (include/vaucanson/algorithms/backward_closure.hxx (vaucanson/q/11_backward_c 1.14 600))
   (include/vaucanson/algorithms/forward_realtime.hxx (vaucanson/q/25_forward_re 1.9 600))
   (include/vaucanson/algorithms/forward_realtime.hh (vaucanson/q/26_forward_re 1.5 600))
   (include/vaucanson/algorithms/backward_realtime.hxx (vaucanson/q/27_backward_r 1.7 600))
@@ -800,7 +801,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:50 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.2 600))
+  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.3 600))
 
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:05 +0200,
 ;; to version 0.424(w), by yann:
