@@ -2,4 +2,4 @@
 #
 # $Id$
 
-SUBDIRS = vgrep samples vaucanswig
+SUBDIRS = vgrep samples $(VCSN_VAUCANSWIG_SUBDIR)

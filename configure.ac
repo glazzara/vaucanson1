@@ -29,6 +29,28 @@ AC_PROG_AWK
 AC_CHECK_SWIG13
 AM_PATH_PYTHON([2.2])
 
+WANT_INTERPRETER=no
+AC_ARG_WITH([vaucanswig],
+            [AC_HELP_STRING([--without-vaucanswig], 
+			    [disable building vaucanswig])],
+            [WANT_INTERPRETER=$withval],
+            [WANT_INTERPRETER=yes])
+
+VCSN_VAUCANSWIG_SUBDIR=""
+if test "x$WANT_INTERPRETER" != "xno"; then
+if test "x$ac_cv_recent_swig" != "xyes"; then
+    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig. 
+	  	  You can disable vaucanswig by specifying 
+		  --without-vaucanswig to configure.])
+else
+  AC_CONFIG_FILES([src/demos/vaucanswig/Makefile
+	           src/demos/vaucanswig/meta/Makefile
+                   src/demos/vaucanswig/src/Makefile
+                   src/demos/vaucanswig/python/Makefile])
+  VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
+fi
+fi
+
 # Libtool used
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
@@ -86,10 +108,6 @@ AC_CONFIG_FILES([
 	src/demos/samples/Makefile
 	src/demos/samples/algebra/Makefile
 	src/demos/samples/algorithms/Makefile
-        src/demos/vaucanswig/Makefile
-        src/demos/vaucanswig/meta/Makefile
-        src/demos/vaucanswig/src/Makefile
-        src/demos/vaucanswig/python/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
         doc/doc.doxy
@@ -105,5 +123,6 @@ VCSN_TESTS([algebra_string_free_monoid])
 VCSN_TESTS([algebra_tropical_max_semiring])
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
+AC_SUBST([VCSN_VAUCANSWIG_SUBDIR])
 
 AC_OUTPUT
