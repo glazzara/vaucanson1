@@ -1,5 +1,14 @@
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/forward_closure.hh: New.
+	* include/vaucanson/algorithms/forward_closure.hxx: Likewise.
+	* include/vaucanson/algorithms/backward_closure.hh: Likewise.
+	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.
+	* include/vaucanson/algorithms/closure.hh: Remove.
+	* include/vaucanson/algorithms/closure.hxx: Likewise
+
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* Makefile.am (SUBDIRS): Remove mical.
 	* configure.ac: Likewise.
 

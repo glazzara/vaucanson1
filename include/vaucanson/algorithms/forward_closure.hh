@@ -1,4 +1,4 @@
-// closure.hh
+// backward_closure.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_CLOSURE_HH
-# define VCSN_ALGORITHMS_CLOSURE_HH
+#ifndef VCSN_ALGORITHMS_FORWARD_CLOSURE_HH
+# define VCSN_ALGORITHMS_FORWARD_CLOSURE_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
@@ -28,20 +28,38 @@ namespace vcsn {
 
   /*! \addtogroup algorithms */  /* @{ */
 
-  //! Complete the automaton to make it close over epsilon transition.
+  /** 
+   * Complete the given automaton into a copy to make it close over
+   * epsilon transition. 
+   *
+   * @param a the weighted automaton to close.
+   *
+   * @see forward_closure
+   * @see backward_closure
+   * @see backward_closure_here
+   */
   template<typename A, typename T>
   void
-  in_closure(Element<A, T>& a);
+  forward_closure_here(Element<A, T>& a);
 
-  //! Return the epsilon-closure of the automaton.
+  /** 
+   * Complete the given automaton into a copy to make it close over
+   * epsilon transition. 
+   *
+   * @param a the weighted automaton to close.
+   *
+   * @see forward_closure
+   * @see backward_closure
+   * @see backward_closure_here
+   */
   template<typename A, typename T>
   Element<A, T>
-  closure(const Element<A, T>& a);
+  forward_closure_here(const Element<A, T>& a);
 
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/closure.hxx>
+# include <vaucanson/algorithms/forward_closure.hxx>
 
-#endif // VCSN_ALGORITHMS_CLOSURE_HH
+#endif // VCSN_ALGORITHMS_FORWARD_CLOSURE_HH
