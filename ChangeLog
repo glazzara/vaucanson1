@@ -1,5 +1,12 @@
 2004-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh:
+	Remove useless inclusion to check/tester.hh. Clean comments. Use
+	const references instead of values for operator <<. Simplify the
+	test loop.
+
+2004-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
 	Use enum constants from Node<Word, Weight> to identify node types,
 	instead of duplicating the enumeration.
