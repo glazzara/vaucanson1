@@ -1,3 +1,25 @@
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	It is not possible to  take a ``classical'' automaton as input for
+	aut_to_exp  and  then  generalize  it  at  the  beginning  of  the
+	algorithm,  because it  would  means  to put  the  return type  of
+	aut_to_exp()  as  template  parameter.   That  would  imply  heavy
+	notations. Actually  aut_to_exp uses the  same series_set_elt_t as
+	the automaton for its return type...
+
+	... But  here is some  specialized versions of aut_to_exp  for the
+	context  headers, which  use krat_exp_t  and automaton_t  from the
+	context and call generalized before running aut_to_exp on it.
+
+	* include/vaucanson/contextual_headers.hh: Include aut_to_exp.hh.
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx: Add an
+	aut_to_exp() function which takes an automaton_t, generalizes it
+	and runs the real vcsn::aut_to_exp() on it.
+
+	* src/demos/fibonacci/fibonacci.cc, src/demos/ciaa/ex2.cc,
+	* src/demos/ciaa/ex3.cc: Use this contextual aut_to_exp().
+
 2004-06-30  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	This fix was suggested by Sylvain Lombardy.

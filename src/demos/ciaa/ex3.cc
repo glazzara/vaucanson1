@@ -43,7 +43,6 @@
 
 #include <vaucanson/algorithms/product.hh>
 #include <vaucanson/algorithms/eval.hh>
-#include <vaucanson/algorithms/aut_to_exp.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/algorithms/backward_closure.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
@@ -117,7 +116,7 @@ main(int argc, char** argv)
       | Work on the automaton C_n |
       `--------------------------*/
 
-     krat_exp_t e = aut_to_exp(generalized(cn));
+     krat_exp_t e = aut_to_exp(cn);
      std::cout << e << std::endl;
 
      automaton_t sn = standard_of(e);

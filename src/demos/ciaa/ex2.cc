@@ -45,7 +45,6 @@
 
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/complement.hh>
-#include <vaucanson/algorithms/aut_to_exp.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/algorithms/complete.hh>
 #include <vaucanson/algorithms/trim.hh>
@@ -190,7 +189,7 @@ main(int argc, char** argv)
       std::cout << q << std::endl;
 
       const std::list<hstate_t> l (q.begin(), q.end());
-      krat_exp_t e = aut_to_exp(generalized(an), ListChooser (l));
+      krat_exp_t e = aut_to_exp(an, ListChooser (l));
       std::cout << e << std::endl;
 
       automaton_t sn = standard_of(e);

@@ -1,5 +1,5 @@
 //								-*- c++ -*-
-// contextual_automaton_functions.thh: this file is part of the 
+// contextual_automaton_functions.thh: this file is part of the
 // Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
@@ -55,6 +55,12 @@ template <class SeriesSet, class SeriesImpl>
 automaton_t
 thompson_of(const Element<SeriesSet, SeriesImpl>& e);
 
+krat_exp_t
+aut_to_exp(const automaton_t& a);
+
+template <class Chooser>
+krat_exp_t
+aut_to_exp(const automaton_t& a, const Chooser& c);
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/contextual_automaton_functions.thxx>

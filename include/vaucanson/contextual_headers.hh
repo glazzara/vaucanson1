@@ -46,5 +46,6 @@
 
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/thompson.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
 
 #endif // ! VCSN_CONTEXTUAL_HEADERS_HH

@@ -7,7 +7,6 @@
 #include <vaucanson/tools/dot_dump.hh>
 #include <vaucanson/algorithms/standard_of.hh>
 #include <vaucanson/algorithms/evaluation.hh>
-#include <vaucanson/algorithms/aut_to_exp.hh>
 #include <vaucanson/algorithms/realtime_composition.hh>
 
 void
@@ -32,18 +31,17 @@ eval_an_expression(const vcsn::boolean_transducer::automaton_t& t)
       parse(user_string, exp);
 
       {
-	typedef boolean_automaton::automaton_t		automaton_t;
-	typedef boolean_automaton::gen_automaton_t	gen_automaton_t;
+	using boolean_automaton::automaton_t;
 
+	using boolean_automaton::aut_to_exp;
 	using boolean_automaton::standard_of;
-	using boolean_automaton::new_gen_automaton;
+	using boolean_automaton::new_automaton;
 
 	automaton_t	w = standard_of(exp);
-	gen_automaton_t	result =
-	  new_gen_automaton(t.structure().series().semiring().monoid().
-			    alphabet());
+	automaton_t	result =
+	  new_automaton(t.structure().series().semiring().monoid().alphabet());
 	evaluation(w, t, result);
-	std::cout << verbalize(aut_to_exp(generalized(result))) << std::endl;
+	std::cout << verbalize(aut_to_exp(result)) << std::endl;
       }
     }
   while (user_string != "next");

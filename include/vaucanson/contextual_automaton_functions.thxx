@@ -114,3 +114,21 @@ thompson_of(const Element<SeriesSet, SeriesImpl>& e)
 {
   return do_thompson_of(e.structure(), e.value());
 }
+
+/*-------------.
+| aut_to_exp() |
+`-------------*/
+
+inline
+krat_exp_t
+aut_to_exp(const automaton_t& a)
+{
+  return aut_to_exp(generalized(a));
+}
+
+template <class Chooser>
+krat_exp_t
+aut_to_exp(const automaton_t& a, const Chooser& c)
+{
+  return aut_to_exp(generalized(a), c);
+}
