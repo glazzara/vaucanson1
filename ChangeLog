@@ -1,5 +1,9 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/thompson.hh: Typo. Fix include.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/product.hxx: Fix include.
 	* include/vaucanson/algorithms/realtime.hh: 
 		(forward_realtime): Rename to "forward" because of conflict.

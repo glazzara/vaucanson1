@@ -31,6 +31,7 @@
  */
 
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 
 namespace vcsn {
@@ -40,11 +41,11 @@ namespace vcsn {
   /**
    * @brief The Thompson automaton associated to the krat expression.
    *
-   * This function build the automaton associated to the rationnal expression
+   * This function build the automaton associated to the rational expression
    * implemented by a krat_exp, using Thompson algorithm.
    *
    * @param out The resulting automaton
-   * @param kexp The rationnal expression
+   * @param kexp The rational expression
    */
   template<typename A,      typename T, 
 	   typename Letter, typename Weight>
@@ -54,15 +55,15 @@ namespace vcsn {
   /**
    * @brief The Thompson automaton associated to the krat expression.
    *
-   * This function build the automaton associated to the rationnal expression
+   * This function build the automaton associated to the rational expression
    * implemented by a krat_exp, using Thompson algorithm. The kind of returned
    * automaton is a default one.
    * 
-   * @param exp The rationnal expression
+   * @param exp The rational expression
    */
   template <class AutoType, class S, class T>
   Element<Automata<S>, AutoType>
-  thompson_of(const Element<S, T>& exp)
+  thompson_of(const Element<S, T>& exp);
 
   /** @} */
 
