@@ -15,17 +15,20 @@ AC_PROG_RANLIB
 
 AC_LANG(C++)
 
-AC_CONFIG_FILES([			\
-	Makefile			\
-	src/Makefile			\
-	src/tests/Makefile		\
-	src/tests/check/Makefile	\
-	src/tests/fundamental/Makefile  \
-	src/tests/algebra/Makefile		\
-	src/tests/algebra/semiring/Makefile 	\
-	src/tests/algebra/alphabets/Makefile 	\
-	src/tests/algebra/free_monoid/Makefile 	\
-	src/tests/algebra/series/Makefile 	\
+AC_CONFIG_FILES([						\
+	Makefile						\
+	src/Makefile						\
+	src/tests/Makefile					\
+	src/tests/check/Makefile				\
+	src/tests/fundamental/Makefile  			\
+	src/tests/algebra/Makefile				\
+	src/tests/algebra/semiring/Makefile 			\
+	src/tests/algebra/alphabets/Makefile 			\
+	src/tests/algebra/free_monoid/Makefile 			\
+	src/tests/algebra/series/Makefile 			\
+	src/tests/automata/Makefile				\
+	src/tests/automata/algos/Makefile			\
+	src/tests/automata/implementation_check/Makefile	\
 	include/Makefile])
 
 AC_OUTPUT

@@ -1956,7 +1956,7 @@ ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
 
-ac_config_files="$ac_config_files Makefile src/Makefile src/tests/Makefile src/tests/check/Makefile src/tests/fundamental/Makefile src/tests/algebra/Makefile src/tests/algebra/semiring/Makefile src/tests/algebra/alphabets/Makefile src/tests/algebra/free_monoid/Makefile src/tests/algebra/series/Makefile include/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile src/tests/Makefile src/tests/check/Makefile src/tests/fundamental/Makefile src/tests/algebra/Makefile src/tests/algebra/semiring/Makefile src/tests/algebra/alphabets/Makefile src/tests/algebra/free_monoid/Makefile src/tests/algebra/series/Makefile src/tests/automata/Makefile src/tests/automata/algos/Makefile src/tests/automata/implementation_check/Makefile include/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -2319,9 +2319,12 @@ do
   "src/tests/algebra/alphabets/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/algebra/alphabets/Makefile" ;;
   "src/tests/algebra/free_monoid/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/algebra/free_monoid/Makefile" ;;
   "src/tests/algebra/series/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/algebra/series/Makefile" ;;
+  "src/tests/automata/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/automata/Makefile" ;;
+  "src/tests/automata/algos/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/automata/algos/Makefile" ;;
+  "src/tests/automata/implementation_check/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/automata/implementation_check/Makefile" ;;
   "include/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
-  *) { { echo "$as_me:2324: error: invalid argument: $ac_config_target" >&5
+  *) { { echo "$as_me:2327: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
   esac
@@ -2549,7 +2552,7 @@ done; }
   esac
 
   if test x"$ac_file" != x-; then
-    { echo "$as_me:2552: creating $ac_file" >&5
+    { echo "$as_me:2555: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
     rm -f "$ac_file"
   fi
@@ -2567,7 +2570,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:2570: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:2573: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -2580,7 +2583,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:2583: error: cannot find input file: $f" >&5
+           { { echo "$as_me:2586: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;

@@ -28,7 +28,7 @@ namespace utility
 
     template<typename T>
     template<typename Y>
-    ref& ref<T>::operator=(const ref<Y>& r)
+    ref<T>& ref<T>::operator=(const ref<Y>& r)
     {
       share(r.data_, r.count_);
       return *this;
@@ -42,14 +42,14 @@ namespace utility
 //     }
 
     template<typename T>
-     ref& ref<T>::operator=(const ref& r)
+     ref<T>& ref<T>::operator=(const ref& r)
      {
        share(r.data_, r.count_);
        return *this;
      }
 
     template<typename T>
-    void ref<T>::reset(T* p = 0) 
+    void ref<T>::reset(T* p) 
     {
       if (data_ == p)
 	return ;
@@ -79,7 +79,7 @@ namespace utility
   template<typename T> bool ref<T>::bound() const
   { return data_; }
 
-  template<typename T> ref& ref<T>::swap(ref& other)
+  template<typename T> ref<T>& ref<T>::swap(ref& other)
   {
     std::swap(data_, other.data_);
     std::swap(count_, other.count_);

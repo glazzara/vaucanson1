@@ -1,5 +1,17 @@
 2002-07-01  Maxime Rey  <max@lrde.epita.fr>
 
+	* Added `include/vaucanson/automata/concept/kinds.hxx' (forget)
+	* Added `include/vaucanson/automata/concept/kinds.hh' (forget)
+	* Added `include/vaucanson/algebra/concept/algebra_base.hh'
+	 ( for declaration of namespace algebra )
+	* Added `src/tests/automata/algos/Makefile.am'
+	* Added `src/tests/automata/implementation_check/Makefile.am'
+	* Added `src/tests/automata/Makefile.am'
+	* Fonctionnal tests for automata began with :
+	* Added `src/tests/automata/implementation_check/check_add_state.cc'
+	
+2002-07-01  Maxime Rey  <max@lrde.epita.fr>
+
 	* include/vaucanson/automata/concrete/ created
 	* include/vaucanson/automata/concept/ created
 	* Added `include/vaucanson/automata/concrete/manylinks_states.hh'

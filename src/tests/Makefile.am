@@ -7,5 +7,7 @@
 SUBDIRS = \
 	check 					\
 	fundamental				\
-	algebra    				
+	algebra    				\
+	automata
+
 

@@ -8,7 +8,6 @@
 # define AUTOMATA_AUTOMATA_BASE_HH
 
 
-# include <vaucanson/algebra/concept/algebra_base.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/history.hh>
