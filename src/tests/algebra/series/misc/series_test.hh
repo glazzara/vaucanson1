@@ -140,7 +140,7 @@ bool series_test(tests::Tester& t)
 	  if (j % 2)
 	    s5.assoc(m, s);
 	  else
-	    s5.value_set(m.value(), s.value());
+	    s5.assoc(m.value(), s.value());
 	  if ((s5.get(m) != s) or (s5.get(m.value()) != s.value()))
 	    allright = false;
 	}

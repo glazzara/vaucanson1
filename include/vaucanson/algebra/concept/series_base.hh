@@ -151,8 +151,8 @@ namespace vcsn {
     semiring_elt_t		get(const monoid_elt_t& m) const;
 
     /// associates a semiring_elt to a word.
-    void		value_set(const monoid_value_t& m,
-				  const semiring_elt_value_t& w);
+    void		assoc(const monoid_value_t& m,
+			      const semiring_elt_value_t& w);
 
     /// associates a weight to a word.
     void		assoc(const monoid_elt_t& m, const semiring_elt_t& w);

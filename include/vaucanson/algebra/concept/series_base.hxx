@@ -102,8 +102,8 @@ namespace vcsn {
 
   template<typename S, typename T>
   void
-  MetaElement<algebra::SeriesBase<S>, T>::value_set(const monoid_value_t& m,
-						    const semiring_elt_value_t& w)
+  MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_value_t& m,
+						const semiring_elt_value_t& w)
   {
     // assertion(set().monoid().contains(m));
     // assertion(set().semiring().contains(w));
@@ -115,7 +115,7 @@ namespace vcsn {
   MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_t& m,
 						const semiring_elt_t& w)
   {
-    value_set(m.value(), w.value());
+    assoc(m.value(), w.value());
   }
 
   template<typename S, typename T>

@@ -1,5 +1,15 @@
 2004-03-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* src/tests/algebra/series/misc/series_test.hh,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/forward_closure.hxx,
+	* include/vaucanson/algorithms/backward_closure.hxx: Rename value_set()
+	to assoc().
+
+2004-03-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/algebra/free_monoid/free_monoid_test.hh,
 	* src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh:
 	Remove outputs which may have non-printable characters.

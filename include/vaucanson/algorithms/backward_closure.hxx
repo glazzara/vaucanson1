@@ -1,7 +1,7 @@
 // backward_closure.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,7 @@
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/backward_closure.hh> 
+# include <vaucanson/algorithms/backward_closure.hh>
 
 namespace vcsn {
 
@@ -54,16 +54,16 @@ namespace vcsn {
     typedef std::vector<std::vector<series_elt_t> >    matrix_series_t;
     typedef std::vector<semiring_elt_t>            matrix_semiring_elt_final_t;
 
-    series_elt_t        series_identity  = a.series().zero_; 
-    semiring_elt_t	semiring_elt_zero     = a.series().semiring().wzero_; 
-    monoid_elt_t        monoid_identity = a.series().monoid().empty_; 
-    
+    series_elt_t        series_identity  = a.series().zero_;
+    semiring_elt_t	semiring_elt_zero     = a.series().semiring().wzero_;
+    monoid_elt_t        monoid_identity = a.series().monoid().empty_;
+
     int                   i, j, k, size = a.states().size();
 
     matrix_series_t       m_series(size), m_series_ret(size);
     matrix_semiring_elt_t       m_semiring_elt(size), m_semiring_elt_tmp(size);
     matrix_semiring_elt_final_t m_wfinal(size), m_wfinal_tmp(size);
-    
+
     for (i = 0; i < size; i++)
       {
 	m_semiring_elt[i].resize(size, semiring_elt_zero);
@@ -82,7 +82,7 @@ namespace vcsn {
       index_to_state[i] = *s;
       state_to_index[*s] = i++;
     }
-    
+
     // Initialize the matrix m_semiring_elt, m_series and m_series_ret with
     // the original automaton
     std::list<hedge_t> to_remove;
@@ -92,8 +92,8 @@ namespace vcsn {
 	int origin = state_to_index[a.origin_of(*e)];
 	m_semiring_elt[origin][aim] += a.series_of(*e).get(monoid_identity);
 	m_series[origin][aim] += a.series_of(*e);
-	m_series[origin][aim].value_set(monoid_identity.value(),
-					semiring_elt_zero.value());
+	m_series[origin][aim].assoc(monoid_identity.value(),
+				    semiring_elt_zero.value());
 	m_series_ret[origin][aim] = m_series[origin][aim];
 	to_remove.push_back(*e);
       }
@@ -107,23 +107,23 @@ namespace vcsn {
 	m_wfinal[pos] = a.get_final(*p).get(monoid_identity);
 	m_wfinal_tmp[pos] = m_wfinal[pos];
       }
-        
+
     // Compute star(m_semiring_elt)
     for (int r = 0; r < size; r++)
       {
 	if (!m_semiring_elt[r][r].starable())
-	  { 
+	  {
 	    // FIXME: add error handling.
 	    std::cerr<< "Star not defined." << std::endl;
 	    return;
-	  }	
+	  }
 	semiring_elt_t        w_tmp   = m_semiring_elt[r][r];
 	semiring_elt_t        w       = w_tmp.star();
 	for (i = 0; i < size; i++)
 	  for (j = 0; j < size; j++)
-	    m_semiring_elt_tmp[i][j] = 
-	      m_semiring_elt[i][j] + m_semiring_elt[i][r] 
-	      * w * m_semiring_elt[r][j]; 
+	    m_semiring_elt_tmp[i][j] =
+	      m_semiring_elt[i][j] + m_semiring_elt[i][r]
+	      * w * m_semiring_elt[r][j];
 	m_semiring_elt = m_semiring_elt_tmp;
     }
 
@@ -132,22 +132,22 @@ namespace vcsn {
     for (i = 0; i < size; i++){
       for (j = 0; j < size; j++){
 	for (k = 0; k < size; k++)
-	  m_series_ret[i][j] += m_semiring_elt[i][k]*m_series[k][j]; 
-	
+	  m_series_ret[i][j] += m_semiring_elt[i][k]*m_series[k][j];
+
 	if (m_series_ret[i][j] != series_identity)
 	  a.add_series_edge(index_to_state[i],
 			   index_to_state[j],
-			   m_series_ret[i][j]); 
+			   m_series_ret[i][j]);
 
 	m_wfinal[i] += m_semiring_elt[i][j] * m_wfinal_tmp[j];
-      } 
-      
+      }
+
       if (m_wfinal[i] != semiring_elt_zero)
 	a.set_final(index_to_state[i],
 		    series_elt_t(a.series(), m_wfinal[i]));
-    } 
+    }
   }
-  
+
   template<typename  A, typename  T>
   void
   backward_closure_here(Element<A, T>& a)
@@ -155,7 +155,7 @@ namespace vcsn {
     // FIXME: here, Hoc wrote : "a.renumber_states();"
     do_backward_closure_here(a.set(), a);
   }
-  
+
   template<typename  A, typename  T>
   Element<A, T>
   backward_closure(const Element<A, T>& a)

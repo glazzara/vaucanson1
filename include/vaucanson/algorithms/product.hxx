@@ -116,7 +116,7 @@ namespace vcsn {
 		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
 
 		for_all_(support_t, supp, s.supp())
-		  s__.value_set(*supp, s_.get(*supp) * s.get(*supp));
+		  s__.assoc(*supp, s_.get(*supp) * s.get(*supp));
 
 		if (s__ != series_zero)
 		  {
