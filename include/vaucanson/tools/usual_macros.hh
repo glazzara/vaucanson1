@@ -107,6 +107,14 @@
 #define AUTOMATON_TYPES(AutoType)           AUTOMATON_TYPES_(AutoType,)
 #define AUTOMATON_TYPES_EXACT(AutoType)     AUTOMATON_TYPES_EXACT_(AutoType,)
 
+# define AUTOMATA_SET_TYPES(AutoSet) \
+typedef AutoSet					automata_set_t; \
+typedef typename automata_set_t::series_set_t	series_set_t;	\
+typedef typename series_set_t::monoid_t		monoid_t;	\
+typedef typename series_set_t::semiring_t	semiring_t;	\
+typedef typename monoid_t::alphabet_t		alphabet_t;
+
+
 // the following macros assume you have used a macro AUTOMATON_TYPES*
 // previously.
 

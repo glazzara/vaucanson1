@@ -58,7 +58,7 @@ bool in_concat_test(tests::Tester& tg)
   unsigned int size    = 0;
   tests::Tester t(tg.verbose());
 
-  vcsn::tools::GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen(time(0x0));
   for (unsigned i = 0; i < nb_test; ++i)
     {
       automaton_t auto_lhs = gen.generate_with_epsilon(5, 10, 3, 7);

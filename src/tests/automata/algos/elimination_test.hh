@@ -50,7 +50,7 @@ bool elimination_test(tests::Tester& tg)
   typedef typename generalized_traits<Auto>::automaton_t generalized_automaton_t;
   AUTOMATON_TYPES_(generalized_automaton_t, g);
 
-  vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
+  GenRandomAutomata<Auto> gen(time(0));
   unsigned success      = 0;
   unsigned nb_test      = 50;
   unsigned nb_word_test = 100;

@@ -43,7 +43,7 @@ unsigned realtime_test(tests::Tester& tg)
   AUTOMATON_TYPES(Transducer);
 
   tests::Tester			t(tg.verbose());
-  vcsn::tools::GenRandomAutomata<Transducer> gen(time(0x0));
+  GenRandomAutomata<Transducer> gen(time(0x0));
 
   const unsigned nb_ok_tests     = 20;
   bool error = false;

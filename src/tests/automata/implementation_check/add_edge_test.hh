@@ -38,7 +38,7 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 
-template <class Auto> 
+template <class Auto>
 unsigned add_edge_test(tests::Tester& tg)
 {
   tests::Tester t(tg.verbose());
@@ -50,7 +50,7 @@ unsigned add_edge_test(tests::Tester& tg)
   using namespace vcsn::tools;
 
   typedef Auto automaton_t;
-  tools::GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen(time(0x0));
 
   automaton_t automaton = gen.empty();
 
@@ -61,12 +61,12 @@ unsigned add_edge_test(tests::Tester& tg)
 
   hedge_t h1 = automaton.add_series_edge(s1, s2, series_set_elt_t(automaton.structure().series()));
 
-  TEST(t, "Number of edge after one add_edge = 1.", 
+  TEST(t, "Number of edge after one add_edge = 1.",
        automaton.edges().size() == 1);
 
   automaton.del_edge(h1);
 
-  TEST(t, "Number of edge after one deletion = 0.", 
+  TEST(t, "Number of edge after one deletion = 0.",
        automaton.edges().size() == 0);
 
   std::set<hedge_t> s;
@@ -75,48 +75,48 @@ unsigned add_edge_test(tests::Tester& tg)
     {
       hstate_t p1 = automaton.add_state();
       hstate_t p2 = automaton.add_state();
-      s.insert(automaton.add_series_edge(p1, p2, 
+      s.insert(automaton.add_series_edge(p1, p2,
 					series_set_elt_t(automaton.structure().series())));
     }
-  EQTEST(t, "Number of edge after three edge additions = 3.", 
+  EQTEST(t, "Number of edge after three edge additions = 3.",
 	 automaton.edges().size(), 3);
   for (std::set<hedge_t>::const_iterator i = sc.begin();
        i != sc.end(); ++i)
     automaton.del_edge(*i);
   EQTEST(t, "Number of edge after total deletion in growing order = 0.",
-	 automaton.edges().size(), 0);  
+	 automaton.edges().size(), 0);
 
   for (unsigned i = 0; i < 3; ++i)
     {
       hstate_t p1 = automaton.add_state();
       hstate_t p2 = automaton.add_state();
-      s.insert(automaton.add_series_edge(p1, p2, 
+      s.insert(automaton.add_series_edge(p1, p2,
 					series_set_elt_t(automaton.structure().series())));
     }
-  EQTEST(t, "Number of edge after three edge additions = 3.", 
+  EQTEST(t, "Number of edge after three edge additions = 3.",
 	 automaton.edges().size(), 3);
   for (std::set<hedge_t>::const_reverse_iterator i = sc.rbegin();
        i != sc.rend(); ++i)
     automaton.del_edge(*i);
   EQTEST(t, "Number of edge after total deletion in decreasing order = 0.",
-	 automaton.edges().size(), 0);  
+	 automaton.edges().size(), 0);
 
   std::vector<hedge_t> vs;
   for (unsigned i = 0; i < 100; ++i)
     {
       hstate_t p1 = automaton.add_state();
       hstate_t p2 = automaton.add_state();
-      vs.push_back(automaton.add_series_edge(p1, p2, 
+      vs.push_back(automaton.add_series_edge(p1, p2,
 					    series_set_elt_t(automaton.structure().series())));
     }
   std::random_shuffle(vs.begin(), vs.end());
-  EQTEST(t, "Number of edge after 100 edge additions = 100.", 
+  EQTEST(t, "Number of edge after 100 edge additions = 100.",
 	 automaton.edges().size(), 100);
-  for (std::vector<hedge_t>::const_iterator i = vs.begin(); 
+  for (std::vector<hedge_t>::const_iterator i = vs.begin();
        i != vs.end(); ++i)
     automaton.del_edge(*i);
   EQTEST(t, "Number of edge after total deletion in random order = 0.",
-	 automaton.edges().size(), 0);  
+	 automaton.edges().size(), 0);
 
 
   return t.all_passed();

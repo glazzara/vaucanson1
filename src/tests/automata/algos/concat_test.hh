@@ -52,13 +52,13 @@ bool concat_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
   typedef typename generalized_traits<Auto>::automaton_t generalized_t;
   AUTOMATON_TYPES_(generalized_t, g_);
-  
+
   unsigned int nb_test = 20;
   unsigned int nb_test_done = 0;
   unsigned int size    = 0;
   tests::Tester t(tg.verbose());
 
-  vcsn::tools::GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen(time(0x0));
   for (unsigned i = 0; i < nb_test; ++i)
     {
       automaton_t auto_lhs = gen.generate_with_epsilon(5, 10, 3, 7);
@@ -76,7 +76,7 @@ bool concat_test(tests::Tester& tg)
 	{
 	  automaton_t ret = concatenate(auto_lhs, auto_rhs);
 
-	  if (ret.states().size() == 
+	  if (ret.states().size() ==
 	      auto_lhs.states().size() + auto_rhs.states().size() &&
 	      eval(realtime(ret), word) !=
 	      zero_as<semiring_elt_value_t>::of(ret.structure().series().semiring()))

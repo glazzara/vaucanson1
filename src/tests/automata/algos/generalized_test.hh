@@ -1,7 +1,7 @@
 // generalized_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -46,9 +46,9 @@ bool generalized_test(tests::Tester&)
 {
   AUTOMATON_TYPES(Auto);
   TEST_MSG("Basic test on a well-known automaton.");
-  vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
+  GenRandomAutomata<Auto> gen(time(0));
   Auto	a = gen.generate(10,20);
-  typename generalized_traits<Auto>::automaton_t a_ = 
+  typename generalized_traits<Auto>::automaton_t a_ =
     generalized(a);
   return true;
 }

@@ -33,13 +33,10 @@
 #ifndef VCSN_TOOLS_GEN_RANDOM_HXX
 # define VCSN_TOOLS_GEN_RANDOM_HXX
 
-# include <vaucanson/config/system.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <map>
-# include <cstdlib>
-# include <iostream>
-# include <fstream>
 # include <vaucanson/tools/usual_macros.hh>
+
+# include <cstdlib>
 
 namespace vcsn {
 
@@ -49,8 +46,10 @@ namespace vcsn {
   | GenRandomAutomataSet |
   `---------------------*/
 
-  GenRandomAutomataSet::GenRandomAutomataSet()
-  {}
+  GenRandomAutomataSet::GenRandomAutomataSet(unsigned init)
+  {
+    srand(init);
+  }
 
   template <class AutoSet>
   AutoSet
@@ -58,12 +57,12 @@ namespace vcsn {
 				 unsigned nb_letter)
   {
 
-    AUTO_SET_TYPES(AutoSet);
+    AUTOMATA_SET_TYPES(AutoSet);
 
     alphabet_t		alpha;
-    unsigned		nb = alea(nb_letter ?
-				  nb_letter - 1 : alpha.max_size() - 1);
-    for (unsigned i = 0; i < 2 + nb; ++i)
+    unsigned		nb = alea(nb_letter ? nb_letter :
+					      alpha.max_size());
+    for (unsigned i = 0; i < nb; ++i)
       alpha.insert(alpha.random_letter());
 
     monoid_t		monoid(alpha);
@@ -79,20 +78,19 @@ namespace vcsn {
 				 unsigned input_nb_letter,
 				 unsigned output_nb_letter)
   {
-    AUTO_SET_TYPES(AutoSet);
+    AUTOMATA_SET_TYPES(AutoSet);
 
     alphabet_t			input_alpha;
     alphabet_t			output_alpha;
 
-    unsigned			nb = alea(input_nb_letter ?
-					  input_nb_letter - 1 :
-					  input_alpha.max_size() - 1);
-    for (unsigned i = 0; i < 1 + nb; ++i)
+    unsigned			nb = alea(input_nb_letter ? input_nb_letter :
+					  input_alpha.max_size());
+    for (unsigned i = 0; i < nb; ++i)
       input_alpha.insert(input_alpha.random_letter());
 
-    nb = alea(output_nb_letter ?
-	      output_nb_letter - 1 : output_alpha.max_size() - 1);
-    for (unsigned i = 0; i < 2 + nb; ++i)
+    nb = alea(output_nb_letter ? output_nb_letter :
+	      output_alpha.max_size());
+    for (unsigned i = 0; i < nb; ++i)
       output_alpha.insert(output_alpha.random_letter());
 
     monoid_t			input_monoid(input_alpha);
@@ -107,31 +105,29 @@ namespace vcsn {
     return auto_set;
   }
 
-  unsigned GenRandomAutomataSet::alea(unsigned max)
+  unsigned alea(unsigned max)
   {
-    return ((unsigned) floor(((float) rand() / (float) RAND_MAX) * (max-1)));
+    return int (1 + float (max) * rand() / (RAND_MAX + 1.0));
   }
 
   /*------------------.
   | GenRandomAutomata |
   `------------------*/
 
-  template <class TAutomata>
-  GenRandomAutomata<TAutomata>::GenRandomAutomata()
+  template <class TAutomata, class AutomataSetGenerator>
+  GenRandomAutomata<TAutomata, AutomataSetGenerator>::GenRandomAutomata()
   {}
 
-  template <class TAutomata>
-  GenRandomAutomata<TAutomata>::GenRandomAutomata(unsigned init)
-  {
-    srand(init);
-  }
+  template <class TAutomata, class AutomataSetGenerator>
+  GenRandomAutomata<TAutomata, AutomataSetGenerator>::GenRandomAutomata(unsigned init)
+  {}
 
 	/*------.
 	| empty |
 	`------*/
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   empty(unsigned nb_letter)
   {
     automata_set_t aset =
@@ -140,8 +136,8 @@ namespace vcsn {
     return work;
   }
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   empty(const automata_set_t& set)
   {
     TAutomata work(set);
@@ -152,19 +148,19 @@ namespace vcsn {
 	| generate |
 	`---------*/
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate(unsigned nb_state, unsigned nb_edge_,
 	   unsigned istate, unsigned fstate,
 	   unsigned nb_letter)
   {
     automata_set_t aset =
       GenRandomAutomataSet::generate(SELECT(automata_set_t), nb_letter);
-    return this->generate(aset, nb_state, nb_edge_, istate, fstate);
+    return generate(aset, nb_state, nb_edge_, istate, fstate);
   }
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate(const automata_set_t& set,
 	   unsigned nb_state, unsigned nb_edge_,
 	   unsigned istate, unsigned fstate)
@@ -237,8 +233,8 @@ namespace vcsn {
 	| useful methods |
 	`---------------*/
 
-  template <class TAutomata>
-  unsigned GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  unsigned GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   nb_edge_circle(TAutomata work, hstate_t state)
   {
     AUTOMATON_TYPES(TAutomata);
@@ -251,8 +247,8 @@ namespace vcsn {
     return res;
   }
 
-  template <class TAutomata>
-  void GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  void GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   del_edge_circle(TAutomata& work, hstate_t state)
   {
     AUTOMATON_TYPES(TAutomata);
@@ -272,8 +268,8 @@ namespace vcsn {
 	| generate with epsilon |
 	`----------------------*/
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate_with_epsilon(unsigned nb_state,
 			unsigned nb_edge,
 			unsigned nb_epsilon_min,
@@ -281,24 +277,23 @@ namespace vcsn {
   {
     automata_set_t aset =
       GenRandomAutomataSet::generate(SELECT(automata_set_t));
-    TAutomata a = this->generate_with_epsilon(aset, nb_state, nb_edge,
+    TAutomata a = generate_with_epsilon(aset, nb_state, nb_edge,
 					      nb_epsilon_min, nb_epsilon_max);
     return a;
   }
 
 
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate_with_epsilon(const automata_set_t& set,
 			unsigned nb_state,
 			unsigned nb_edge,
 			unsigned nb_epsilon_min,
 			unsigned nb_epsilon_max)
   {
-    TAutomata a = this->generate(set, nb_state, nb_edge);
-    unsigned nb_eps = nb_epsilon_min +
-      GenRandomAutomataSet::alea(nb_epsilon_max - nb_epsilon_min);
+    TAutomata a = generate(set, nb_state, nb_edge);
+    unsigned nb_eps = nb_epsilon_min + alea(nb_epsilon_max - nb_epsilon_min);
 
     for (unsigned i = 0; i < nb_eps; ++i)
       {
@@ -314,8 +309,8 @@ namespace vcsn {
 	| generate dfa |
 	`-------------*/
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate_dfa(unsigned nb_state,
 	       unsigned size_alphabet,
 	       unsigned fstate)
@@ -326,14 +321,14 @@ namespace vcsn {
 
     automata_set_t aset =
       GenRandomAutomataSet::generate(SELECT(automata_set_t), size_alphabet);
-    TAutomata a = this->generate_dfa(aset, nb_state, fstate);
+    TAutomata a = generate_dfa(aset, nb_state, fstate);
     return a;
   }
 
 
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate_dfa(const automata_set_t& set,
 	       unsigned nb_state,
 	       unsigned fstate)
@@ -385,18 +380,18 @@ namespace vcsn {
 	| generate normalized |
 	`--------------------*/
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate_normalized(unsigned nb_state, unsigned density)
   {
     automata_set_t aset =
-      GenRandomAutomataSet::generate(SELECT(automata_set_t));
-    TAutomata a = this->generate_normalized(aset, nb_state, density);
+      AutomataSetGenerator::generate(SELECT(automata_set_t));
+    TAutomata a = generate_normalized(aset, nb_state, density);
     return a;
   }
 
-  template <class TAutomata>
-  TAutomata GenRandomAutomata<TAutomata>::
+  template <class TAutomata, class AutomataSetGenerator>
+  TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate_normalized(const automata_set_t& set,
 		      unsigned nb_state,
 		      unsigned density)
@@ -408,8 +403,7 @@ namespace vcsn {
       density = 1;
 
     TAutomata work = generate(set, nb_state,
-			      nb_state +
-			      GenRandomAutomataSet::alea(nb_state * density));
+			      nb_state + alea(nb_state * density));
 
     for (state_iterator i = work.states().begin(); i != work.states().end();
 	 i++)

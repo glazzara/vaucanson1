@@ -64,7 +64,7 @@ unsigned krat_exp_realtime_conflict_test(tests::Tester& tg)
   TEST(t, "realtime(automaton) does not conflict with realtime(exp) [1].",
        e1 == e2);
 
-  vcsn::tools::GenRandomAutomata<Auto> generator;
+  vcsn::GenRandomAutomata<Auto> generator;
 
   automaton_t	a = realtime(generator.generate(50, 60));
   TEST(t, "realtime(automaton) does not conflict with realtime(exp) [2].",

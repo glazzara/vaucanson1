@@ -1,9 +1,31 @@
+2004-05-12  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/tools/gen_random.hh,
+	* include/vaucanson/tools/gen_random.hxx: Template GenRandomAutomata
+	with GenRandomAutomataSet and other small fixes.
+
+	* include/vaucanson/tools/usual_macros.hh: Define typedefs for automata
+	set.
+
+	* src/tests/automata/implementation_check/add_state_test.hh,
+	* src/tests/automata/implementation_check/add_edge_test.hh,
+	* src/tests/automata/implementation_check/init_final_test.hh,
+	* src/tests/automata/implementation_check/global_consistency_test.hh,
+	* src/tests/automata/algos/generalized_test.hh,
+	* src/tests/automata/algos/in_concat_test.hh,
+	* src/tests/automata/algos/realtime_test.hh,
+	* src/tests/automata/algos/concat_test.hh,
+	* src/tests/automata/algos/elimination_test.hh,
+	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh,
+	* src/tests/transducers/realtime_test.hh: Remove wrong tools:: for
+	GenRandomAutomata call.
+
 2004-05-12  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/contextual_automaton_functions.hh,
 	* include/vaucanson/contextual_transducer_functions.hh,
 	* include/vaucanson/contextual_automaton_functions.hxx,
-	* include/vaucanson/contextual_transducer_functions.hxx: Remove 
+	* include/vaucanson/contextual_transducer_functions.hxx: Remove
 	header protection.
 
 2004-05-12  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
@@ -19,16 +41,16 @@
 2004-05-10  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/contextual_transducer_functions.hh,
-	* include/vaucanson/contextual_transducer_functions.hxx: Add an 
+	* include/vaucanson/contextual_transducer_functions.hxx: Add an
 	overloaded version of evaluation algorithm.
 
 2004-05-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/tools/gen_random.hxx: Minor fix.
-	
+
 2004-05-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* src/tests/automata/algos/brzozowski_test.hh: 
+	* src/tests/automata/algos/brzozowski_test.hh:
 	Rename to...
 	* src/tests/boolean_automata/brzozowski_test.hh: This.
 	* src/tests/boolean_automata/Makefile.am: New file. Source Makefile for

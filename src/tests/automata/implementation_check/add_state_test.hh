@@ -1,7 +1,7 @@
 // add_state_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -38,7 +38,7 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <check/tester.hh>
 
-template <class Auto> 
+template <class Auto>
 unsigned add_state_test(tests::Tester& tg)
 {
   tests::Tester t(tg.verbose());
@@ -52,7 +52,7 @@ unsigned add_state_test(tests::Tester& tg)
   using namespace vcsn::tools;
 
   typedef Auto automaton_t;
-  tools::GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen(time(0x0));
 
   automaton_t automaton = gen.empty();
 
@@ -66,42 +66,42 @@ unsigned add_state_test(tests::Tester& tg)
   automaton.del_state(s1);
 
   EQTEST(t, "Number of state after one state deletion = 0.",
-	 automaton.states().size(), 0);  
+	 automaton.states().size(), 0);
 
   std::set<hstate_t> s;
   const std::set<hstate_t>& sc = s;
   for (unsigned i = 0; i < 3; ++i)
     s.insert(automaton.add_state());
-  EQTEST(t, "Number of state after three state additions = 3.", 
+  EQTEST(t, "Number of state after three state additions = 3.",
 	 automaton.states().size(), 3);
   for (std::set<hstate_t>::const_iterator i = sc.begin();
        i != sc.end(); ++i)
     automaton.del_state(*i);
   EQTEST(t, "Number of state after total deletion in growing order = 0.",
-	 automaton.states().size(), 0);  
+	 automaton.states().size(), 0);
 
   for (unsigned i = 0; i < 3; ++i)
     s.insert(automaton.add_state());
-  EQTEST(t, "Number of state after three state additions = 3.", 
+  EQTEST(t, "Number of state after three state additions = 3.",
 	 automaton.states().size(), 3);
   for (std::set<hstate_t>::const_reverse_iterator i = sc.rbegin();
        i != sc.rend(); ++i)
     automaton.del_state(*i);
   EQTEST(t, "Number of state after total deletion in decreasing order = 0.",
-	 automaton.states().size(), 0);  
+	 automaton.states().size(), 0);
 
   std::vector<hstate_t> vs;
   for (unsigned i = 0; i < 100; ++i)
     vs.push_back(automaton.add_state());
   std::random_shuffle(vs.begin(), vs.end());
-  EQTEST(t, "Number of state after 100 state additions = 100.", 
+  EQTEST(t, "Number of state after 100 state additions = 100.",
 	 automaton.states().size(), 100);
-  for (std::vector<hstate_t>::const_iterator i = vs.begin(); 
+  for (std::vector<hstate_t>::const_iterator i = vs.begin();
        i != vs.end(); ++i)
     automaton.del_state(*i);
   EQTEST(t, "Number of state after total deletion in random order = 0.",
-	 automaton.states().size(), 0);  
-  
+	 automaton.states().size(), 0);
+
   return t.all_passed();
 }
 

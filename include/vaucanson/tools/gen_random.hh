@@ -30,24 +30,10 @@
 #ifndef VCSN_TOOLS_GEN_RANDOM_HH
 # define VCSN_TOOLS_GEN_RANDOM_HH
 
-# include <vaucanson/config/system.hh>
-# include <vaucanson/design_pattern/design_pattern.hh>
-
-# include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/tags.hh>
-# include <vaucanson/tools/usual.hh>
-
-# define AUTO_SET_TYPES(AutoSet) \
-typedef  AutoSet				automata_set_t; \
-typedef typename automata_set_t::series_set_t	series_set_t;	\
-typedef typename series_set_t::monoid_t		monoid_t;	\
-typedef typename series_set_t::semiring_t	semiring_t;	\
-typedef typename monoid_t::alphabet_t		alphabet_t;
-
+#include <vaucanson/misc/selectors.hh>
+#include <vaucanson/automata/concept/transducer.hh>
 
 namespace vcsn {
-
-  using namespace algebra;
 
   /*---------------------.
   | GenRandomAutomataSet |
@@ -56,7 +42,7 @@ namespace vcsn {
   class GenRandomAutomataSet
   {
   public:
-    GenRandomAutomataSet();
+    GenRandomAutomataSet(unsigned init);
 
     template <class AutoSet>
     static AutoSet generate(SELECTOR(AutomataBase<AutoSet>),
@@ -67,7 +53,7 @@ namespace vcsn {
 			    unsigned input_nb_letter = 0,
 			    unsigned output_nb_letter = 0);
 
-    static unsigned alea(unsigned max);
+
   };
 
 
@@ -75,7 +61,7 @@ namespace vcsn {
   | GenRandomAutomata |
   `------------------*/
 
-  template <class TAutomata>
+  template <class TAutomata, class AutomataSetGenerator = GenRandomAutomataSet>
   class GenRandomAutomata
   {
   public:
@@ -122,18 +108,14 @@ namespace vcsn {
 
   };
 
-  namespace tools {
-
-    typedef GenRandomAutomata<usual_automaton_t> gen_auto_t;
-
-  } // tools
+  static unsigned alea(unsigned max);
 
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/tools/gen_random.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/tools/gen_random.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // VCSN_TOOLS_GEN_RANDOM_HH

@@ -1,7 +1,7 @@
 // global_consistency_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,15 +30,15 @@
 #ifndef VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_GLOBAL_CONSISTENCY_TEST_HH
 # define VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_GLOBAL_CONSISTENCY_TEST_HH
 
-# include <map>
-# include <stack>
-# include <time.h>
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
-# include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/automaton_tools.hh>
+
+# include <map>
+# include <stack>
+# include <time.h>
 
 template <class Auto>
 unsigned global_consistency_test(tests::Tester& tg)
@@ -49,11 +49,8 @@ unsigned global_consistency_test(tests::Tester& tg)
 
   using namespace vcsn;
   using namespace vcsn::algebra;
-  //  using namespace vcsn::tools;
 
-  typedef Auto automaton_t;
- 
-  tools::GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen(time(0x0));
 
   automaton_t automaton = gen.generate(12, 20);
 
@@ -64,7 +61,7 @@ unsigned global_consistency_test(tests::Tester& tg)
   sc.pop_front();
   hstate_t s3 = sc.front();
   sc.pop_front();
-  
+
   automaton.del_state(s1);
   automaton.del_state(s2);
   automaton.del_state(s3);
@@ -72,7 +69,7 @@ unsigned global_consistency_test(tests::Tester& tg)
   // call our function to check consistency of the automaton.
 
   bool final = true;
-  for (tools::usual_automaton_t::edge_iterator i = automaton.edges().begin(); 
+  for (typename automaton_t::edge_iterator i = automaton.edges().begin();
        i != automaton.edges().end();
        i++)
     {
@@ -81,7 +78,7 @@ unsigned global_consistency_test(tests::Tester& tg)
       bool res  = false;
       bool res2 = false;
 
-      for (tools::usual_automaton_t::state_iterator j = 
+      for (typename automaton_t::state_iterator j =
 	     automaton.states().begin();
 	   j != automaton.states().end();
 	   j++)
@@ -95,7 +92,7 @@ unsigned global_consistency_test(tests::Tester& tg)
     }
 
   TEST(t, "All edges are well defined.", final);
-  
+
   return t.all_passed();
 }
 
