@@ -66,13 +66,31 @@ namespace tests {
     return EXIT_FAILURE;
 
 
-#define TEST(Tester, Label, Code) \
+#define TEST(Tester, Label, Code)		\
 {						\
   bool result = (Code);				\
-  if (result) 					\
+  if (result)					\
     Tester.ok(Label);				\
   else						\
-    Tester.ko(Label);				\
+   {						\
+     std::cout << "(" << #Code << " is false)"	\
+               << std::endl;			\
+     Tester.ko(Label);				\
+   }						\
+}
+
+#define EQTEST(Tester, Label, Code, V)		\
+{						\
+  bool result = ((Code) == (V));		\
+  if (result)					\
+    Tester.ok(Label);				\
+  else						\
+   {						\
+     std::cout << "(" << (Code) << " != " << #V \
+               << ")"				\
+               << std::endl;			\
+     Tester.ko(Label);				\
+   }						\
 }
 
 #define SUCCESS_RATE(OutStr, success, over)	\

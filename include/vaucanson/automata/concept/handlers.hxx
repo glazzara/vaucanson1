@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -18,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef AUTOMATA_HANDLERS_HXX
-# define AUTOMATA_HANDLERS_HXX
+#ifndef VCSN_AUTOMATA_CONCEPT_HANDLERS_HXX
+# define VCSN_AUTOMATA_CONCEPT_HANDLERS_HXX
 
 # include <iostream>
 
@@ -27,18 +28,22 @@ namespace vcsn
 {
   
   template<typename Tag>
+  inline
   handler<Tag>::handler() : v_(0) 
   {}
 
   template<typename Tag>
-  handler<Tag>::handler(unsigned h) : v_(h) 
+  inline
+  handler<Tag>::handler(int h) : v_(h) 
   {}
 
   template<typename Tag>
+  inline
   handler<Tag>::handler(const handler& h) : v_(h.v_) 
   {}
     
   template<typename Tag>
+  inline
   handler<Tag>& handler<Tag>::operator=(const handler<Tag>& h)
   { 
     v_ = h.v_; 
@@ -46,30 +51,34 @@ namespace vcsn
   }
 
   template<typename Tag>
-  handler<Tag>& handler<Tag>::operator=(unsigned h)
+  inline
+  handler<Tag>& handler<Tag>::operator=(int h)
   { 
     v_ = h; 
     return *this; 
   }
     
   template<typename Tag>
-  unsigned handler<Tag>::value() const 
+  inline
+  int handler<Tag>::value() const 
   { 
     return v_; 
   }
     
   template<typename Tag>
-  handler<Tag>::operator unsigned int () const 
+  inline
+  handler<Tag>::operator int () const 
   { 
     return v_; 
   }
 
-
 } // vcsn
 
-#define HOPERATOR(Op)								\
-template<typename kind>								\
-bool operator Op (const vcsn::handler<kind>& h1, const vcsn::handler<kind>& h2)	\
+#define HOPERATOR(Op)					\
+template<typename kind>					\
+inline							\
+bool operator Op (const vcsn::handler<kind>& h1,	\
+                  const vcsn::handler<kind>& h2)	\
 { return h1.value() Op h2.value(); }
 
 HOPERATOR(==);
@@ -92,4 +101,4 @@ namespace std {
 } // std
 
 #undef HOPERATOR
-#endif
+#endif // VCSN_AUTOMATA_CONCEPT_HANDLERS_HXX

@@ -1,29 +1,46 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 225)
-(Parent-Version vaucanson 0 224)
+(Project-Version vaucanson 0 226)
+(Parent-Version vaucanson 0 225)
 (Version-Log "
-Index: ChangeLog
-from  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-06-05  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/series_base.hh:
-	(mute_serie_impl): New traits.
-	(mute_series_traits): New traits.
-	(extract_support),(hadamard): New functions.
-	* include/vaucanson/algebra/concept/series_base.hxx:
-	(is_letter_support): Fix supp() use.
-	(extract_support), (hadamard): Implement them.
-	* include/vaucanson/algebra/concrete/series/krat.hh: 
-	(mute_serie_impl): Specialize for rat::exp.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: 
-	Enable 'get' for polynomial expressions.
-	* include/vaucanson/algebra/concrete/series/polynoms.hh:
-	(mute_serie_impl): Specialize for polynom.
-	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Fix.
+	* include/vaucanson/algebra/concept/freemonoid_base.hh: Typo.
+	* include/vaucanson/algebra/concept/series_base.hh: Typo.
+	* include/vaucanson/algebra/concrete/free_monoid/words.hxx,
+	  include/vaucanson/algebra/concrete/series/series.hxx	
+		(hash): Remove because it is obsolete.
+
+	* src/tests/check/tests_stuff.hh (EQTEST): New.
+	* include/vaucanson/automata/concept/handlers.hh: Use int.
+	* include/vaucanson/automata/concept/handlers.hxx: Likewise.
+	* include/vaucanson/tools/usual_macros.hh,
+	  include/vaucanson/tools/gen_random.hh,
+	  include/vaucanson/tools/gen_random.hxx,
+	  src/tests/automata/algos/closure_test.hh,
+	  src/tests/automata/algos/complete_test.hh,
+	  src/tests/automata/algos/compute_test.hh,
+	  src/tests/automata/algos/concat_test.hh,
+	  src/tests/automata/algos/determinist_test.hh,
+	  src/tests/automata/algos/elimination_test.hh,
+	  src/tests/automata/algos/extract_test.hh,
+	  src/tests/automata/algos/minimization_test.hh,
+	  src/tests/automata/algos/normalize_test.hh,
+	  src/tests/automata/algos/product_test.hh,
+	  src/tests/automata/algos/reachable_test.hh,
+	  src/tests/automata/algos/realtime_test.hh,
+	  src/tests/automata/algos/union_test.hh,
+	  src/tests/automata/implementation_check/add_edge_test.hh,
+	  src/tests/automata/implementation_check/add_state_test.hh,
+	  src/tests/automata/implementation_check/coherence_state_edge_test.hh,
+	  src/tests/automata/implementation_check/global_consistency_test.hh,
+	  src/tests/automata/implementation_check/init_final_test.hh,
+	  src/tests/automata/algos/in_concat_test.hh:
+		Adjust to new automata interface.
 ")
 (New-Version-Log "")
-(Checkin-Time "Thu, 05 Jun 2003 15:05:07 +0200")
+(Checkin-Time "Thu, 05 Jun 2003 15:46:01 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -106,7 +123,7 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.30 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.31 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -133,7 +150,7 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
   (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.17 600))
   (include/vaucanson/algebra/concept/concepts.hh (vaucanson/31_concepts.h 1.7 600))
   (include/vaucanson/algebra/concept/concepts.hxx (vaucanson/30_concepts.h 1.7 600))
-  (include/vaucanson/algebra/concept/freemonoid_base.hh (vaucanson/c/1_freemonoid 1.12 600))
+  (include/vaucanson/algebra/concept/freemonoid_base.hh (vaucanson/c/1_freemonoid 1.13 600))
   (include/vaucanson/algebra/concept/freemonoid_base.hxx (vaucanson/c/0_freemonoid 1.11 600))
   (include/vaucanson/algebra/concept/letter.hh (vaucanson/i/22_letter.hh 1.3 600))
   (include/vaucanson/algebra/concept/monoid_base.hh (vaucanson/b/14_monoid_bas 1.11 600))
@@ -143,7 +160,7 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
   (include/vaucanson/algebra/concept/semigroup_base.hxx (vaucanson/b/11_semigroup_ 1.6 600))
   (include/vaucanson/algebra/concept/semiring_base.hh (vaucanson/b/16_semiring_b 1.9 600))
   (include/vaucanson/algebra/concept/semiring_base.hxx (vaucanson/b/15_semiring_b 1.8 600))
-  (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.16 600))
+  (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.17 600))
   (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.14 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.8 600))
   (include/vaucanson/algebra/concrete/alphabets/alphabets.hh (vaucanson/29_alphabets. 1.12 600))
@@ -156,7 +173,7 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.13 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.12 600))
   (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.16 600))
-  (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.9 600))
+  (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.10 600))
   (include/vaucanson/algebra/concrete/letter/char_letter.hh (vaucanson/i/23_char_lette 1.3 600))
   (include/vaucanson/algebra/concrete/letter/range.hh (vaucanson/h/28_range.hh 1.4 600))
   (include/vaucanson/algebra/concrete/letter/range.hxx (vaucanson/h/27_range.hxx 1.4 600))
@@ -188,7 +205,7 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hh (vaucanson/e/51_random_vis 1.6 600))
   (include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx (vaucanson/e/50_random_vis 1.7 600))
   (include/vaucanson/algebra/concrete/series/series.hh (vaucanson/c/19_series.hh 1.9 600))
-  (include/vaucanson/algebra/concrete/series/series.hxx (vaucanson/c/18_series.hxx 1.6 600))
+  (include/vaucanson/algebra/concrete/series/series.hxx (vaucanson/c/18_series.hxx 1.7 600))
   (include/vaucanson/algebra/concrete/series/transpose.hh (vaucanson/e/11_transpose. 1.6 600))
   (include/vaucanson/algebra/concrete/series/transpose.hxx (vaucanson/e/10_transpose. 1.6 600))
   (include/vaucanson/algorithms/closure.hh (vaucanson/e/22_closure.hh 1.9 600))
@@ -249,8 +266,8 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
   (include/vaucanson/automata/concept/concepts.hxx (vaucanson/d/7_concepts.h 1.6 600))
   (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.6 600))
   (include/vaucanson/automata/concept/copy.hxx (vaucanson/d/5_copy.hxx 1.6 600))
-  (include/vaucanson/automata/concept/handlers.hh (vaucanson/d/2_handlers.h 1.7 600))
-  (include/vaucanson/automata/concept/handlers.hxx (vaucanson/d/1_handlers.h 1.6 600))
+  (include/vaucanson/automata/concept/handlers.hh (vaucanson/d/2_handlers.h 1.8 600))
+  (include/vaucanson/automata/concept/handlers.hxx (vaucanson/d/1_handlers.h 1.7 600))
   (include/vaucanson/automata/concept/history.hh (vaucanson/d/0_history.hh 1.6 600))
   (include/vaucanson/automata/concept/history.hxx (vaucanson/c/51_history.hx 1.6 600))
   (include/vaucanson/automata/concept/kinds.hh (vaucanson/d/16_kinds.hh 1.12 600))
@@ -318,10 +335,10 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
   (include/vaucanson/tools/automaton_tools.hh (vaucanson/h/8_automaton_ 1.4 600))
   (include/vaucanson/tools/gen_book.hh (vaucanson/g/34_gen_book.h 1.4 600))
   (include/vaucanson/tools/gen_book.hxx (vaucanson/g/33_gen_book.h 1.4 600))
-  (include/vaucanson/tools/gen_random.hh (vaucanson/e/4_gen_random 1.13 600))
-  (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.17 600))
+  (include/vaucanson/tools/gen_random.hh (vaucanson/e/4_gen_random 1.14 600))
+  (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.18 600))
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.26 600))
-  (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.5 600))
+  (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.6 600))
   (prj (vaucanson.prj) :symlink)
   (src () :directory)
   (src/Makefile.am (vaucanson/51_Makefile.a 1.4 600))
@@ -404,35 +421,35 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
   
   (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
   (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.7 600))
-  (src/tests/automata/algos/closure_test.hh (vaucanson/e/27_closure_te 1.7 600))
-  (src/tests/automata/algos/complete_test.hh (vaucanson/f/8_complete_t 1.5 600))
-  (src/tests/automata/algos/compute_test.hh (vaucanson/e/30_compute_te 1.5 600))
-  (src/tests/automata/algos/concat_test.hh (vaucanson/h/6_concat_tes 1.2 600))
-  (src/tests/automata/algos/determinist_test.hh (vaucanson/e/16_determinis 1.8 600))
-  (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.7 600))
-  (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.5 600))
+  (src/tests/automata/algos/closure_test.hh (vaucanson/e/27_closure_te 1.8 600))
+  (src/tests/automata/algos/complete_test.hh (vaucanson/f/8_complete_t 1.6 600))
+  (src/tests/automata/algos/compute_test.hh (vaucanson/e/30_compute_te 1.6 600))
+  (src/tests/automata/algos/concat_test.hh (vaucanson/h/6_concat_tes 1.3 600))
+  (src/tests/automata/algos/determinist_test.hh (vaucanson/e/16_determinis 1.9 600))
+  (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.8 600))
+  (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.6 600))
   (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.4 600))
   (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.8 600))
-  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.9 600))
-  (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.10 600))
-  (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.6 600))
-  (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.7 600))
-  (src/tests/automata/algos/realtime_test.hh (vaucanson/e/49_realtime_t 1.6 600))
+  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.10 600))
+  (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.11 600))
+  (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.7 600))
+  (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.8 600))
+  (src/tests/automata/algos/realtime_test.hh (vaucanson/e/49_realtime_t 1.7 600))
   (src/tests/automata/algos/thompson_test.hh (vaucanson/e/46_thompson_t 1.7 600))
-  (src/tests/automata/algos/union_test.hh (vaucanson/e/15_union_test 1.8 600))
+  (src/tests/automata/algos/union_test.hh (vaucanson/e/15_union_test 1.9 600))
   (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.13 600))
-  (src/tests/automata/implementation_check/add_edge_test.hh (vaucanson/f/15_add_edge_t 1.5 600))
-  (src/tests/automata/implementation_check/add_state_test.hh (vaucanson/f/14_add_state_ 1.5 600))
-  (src/tests/automata/implementation_check/coherence_state_edge_test.hh (vaucanson/f/13_coherence_ 1.5 600))
-  (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
-  (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
+  (src/tests/automata/implementation_check/add_edge_test.hh (vaucanson/f/15_add_edge_t 1.6 600))
+  (src/tests/automata/implementation_check/add_state_test.hh (vaucanson/f/14_add_state_ 1.6 600))
+  (src/tests/automata/implementation_check/coherence_state_edge_test.hh (vaucanson/f/13_coherence_ 1.6 600))
+  (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.6 600))
+  (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.6 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
   (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 755))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
   (src/tests/check/tests_stuff.cc (vaucanson/b/3_tests_stuf 1.10 600))
-  (src/tests/check/tests_stuff.hh (vaucanson/b/2_tests_stuf 1.11 600))
+  (src/tests/check/tests_stuff.hh (vaucanson/b/2_tests_stuf 1.12 600))
   (src/tests/defs.in (vaucanson/g/25_defs.in 1.3 600))
   (src/tests/fundamental () :directory)
   (src/tests/fundamental/Makefile.am (vaucanson/b/9_Makefile.a 1.3 600))
@@ -458,7 +475,7 @@ from  Yann Régis-Gianas  <yann@lrde.epita.fr>
 ;; Files added by populate at Thu, 27 Feb 2003 19:25:55 +0100,
 ;; to version 0.167(w), by clavei_t:
 
-  (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.2 600))
+  (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.3 600))
 
 ;; Files added by populate at Fri, 07 Mar 2003 16:54:26 +0100,
 ;; to version 0.170(w), by clavei_t:

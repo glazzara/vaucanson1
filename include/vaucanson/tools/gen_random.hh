@@ -2,7 +2,7 @@
 // 
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -25,8 +25,6 @@
 # include <vaucanson/fundamental/fundamental.hh>
 
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/misc/ref.hh>
@@ -39,12 +37,6 @@ namespace vcsn {
   class GenRandomAutomata
   {
   public:
-    typedef typename TAutomata::states_t		  states_t;
-    typedef typename TAutomata::state_iterator		  state_iterator;
-    typedef typename TAutomata::monoid_t::alphabet_t	  alphabet_t;
-    typedef typename alphabet_t::iterator		  alphabet_iterator;
-    typedef typename TAutomata::monoid_t::alphabets_elt_t alphabets_elt_t;
-    
     GenRandomAutomata();
     GenRandomAutomata(unsigned init);
 
@@ -66,7 +58,7 @@ namespace vcsn {
 
     unsigned alea(unsigned max);
     unsigned nb_edge_circle(TAutomata work, hstate_t state);
-    void     del_edge_circle(TAutomata work, hstate_t state);
+    void     del_edge_circle(TAutomata& work, hstate_t state);
    
   };
 

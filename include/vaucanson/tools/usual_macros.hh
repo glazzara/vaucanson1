@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,7 @@
 
 #define AUTOMATON_TYPES_(AutoType,Prefix)				      \
  typedef AutoType			Prefix##automaton_t;		      \
+ typedef typename AutoType::set_t	Prefix##automata_set_t;		      \
  typedef typename AutoType::states_t	Prefix##states_t;		      \
  typedef typename AutoType::state_iterator  Prefix##state_iterator;	      \
  typedef typename AutoType::edges_t	    Prefix##edges_t;		      \
@@ -39,6 +40,8 @@
  typedef typename Prefix##alphabet_t::letter_t       Prefix##letter_t;	      \
  typedef typename AutoType::weights_t                Prefix##weights_t;	      \
  typedef typename AutoType::series_t                 Prefix##series_t;	      \
+ typedef typename AutoType::serie_t             Prefix##serie_t;    \
+ typedef typename AutoType::serie_value_t	Prefix##serie_value_t; \
  typedef typename AutoType::series_elt_t             Prefix##series_elt_t;    \
  typedef typename Prefix##series_elt_t::weight_t     Prefix##weight_t;	      \
  typedef typename Prefix##weight_t::value_t          Prefix##weight_value_t;  \
@@ -47,6 +50,7 @@
 
 #define AUTOMATON_TYPES_EXACT_(AutoType,Prefix)				  \
  typedef AutoType				Prefix##automaton_t;	  \
+ typedef AutoType::set_t			Prefix##automata_set_t;   \
  typedef AutoType::states_t			Prefix##states_t;	  \
  typedef AutoType::state_iterator		Prefix##state_iterator;	  \
  typedef AutoType::edges_t			Prefix##edges_t;	  \
@@ -64,6 +68,8 @@
  typedef Prefix##alphabet_t::letter_t	Prefix##letter_t;		  \
  typedef AutoType::weights_t			Prefix##weights_t;	  \
  typedef AutoType::series_t			Prefix##series_t;	  \
+ typedef AutoType::serie_t		Prefix##serie_t;		  \
+ typedef AutoType::serie_value_t	Prefix##serie_value_t;		  \
  typedef AutoType::series_elt_t		Prefix##series_elt_t;		  \
  typedef Prefix##series_elt_t::weight_t	Prefix##weight_t;		  \
  typedef Prefix##weight_t::value_t		Prefix##weight_value_t;	  \
@@ -102,6 +108,11 @@
 #define for_each_const_(T, S, C) \
     for (typename T::const_iterator S = C.begin();	\
 	 S != C.end();					\
+         ++S)
+
+#define for_each_(T, S, C)			\
+    for (typename T::iterator S = C.begin();	\
+	 S != C.end();				\
          ++S)
 
 // These macros can be use instead of some method calls.

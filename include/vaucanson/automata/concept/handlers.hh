@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,8 +18,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#ifndef AUTOMATA_CONCEPT_HANDLERS_HH
-# define AUTOMATA_CONCEPT_HANDLERS_HH
+#ifndef VCSN_AUTOMATA_CONCEPT_HANDLERS_HH
+# define VCSN_AUTOMATA_CONCEPT_HANDLERS_HH
 
 # include <iostream>
 
@@ -38,20 +39,20 @@ namespace vcsn {
     
     handler();
 
-    handler(unsigned h);
+    handler(int h);
 
     handler(const handler& h);
     
     handler& operator=(const handler& h);
 
-    handler& operator=(unsigned h);
+    handler& operator=(int h);
     
-    unsigned value() const;
+    int value() const;
 
-    operator unsigned int () const;
+    operator int () const;
 
   protected:
-    unsigned v_;
+    int v_;
   };
 
   typedef handler<state_h> hstate_t;

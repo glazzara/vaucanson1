@@ -2,7 +2,7 @@
 // 
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,29 +26,30 @@
 # include <cstdlib>
 # include <iostream>
 # include <fstream>
-# include <vaucanson/tools/usual.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
   using namespace algebra;
 
   template <class TAutomata>
+  inline
   GenRandomAutomata<TAutomata>::GenRandomAutomata() 
   {}
 
   template <class TAutomata>
+  inline
   GenRandomAutomata<TAutomata>::GenRandomAutomata(unsigned init) 
   { 
     srand(init); 
   }
   
   template <class TAutomata>
+  inline
   TAutomata GenRandomAutomata<TAutomata>::
   empty(unsigned nb_letter) 
   {
     AUTOMATON_TYPES(TAutomata);
-    TAutomata work;
-    work.create();
 
     // alphabet construction 
     alphabets_elt_t alpha;
@@ -62,29 +63,28 @@ namespace vcsn {
     monoid_t monoid(alpha);
     weights_t semi;
     series_t series(semi, monoid);
-    
-    work.series() = series;
+    automata_set_t aset(series);
+    TAutomata work(aset);
     return work;
   }
 
   template <class TAutomata>
+  inline
   TAutomata GenRandomAutomata<TAutomata>::
-  generate(unsigned nb_state, unsigned nb_edge, 
+  generate(unsigned nb_state, unsigned nb_edge_, 
 	   unsigned istate, unsigned fstate,
 	   unsigned nb_letter)
   {
+    int nb_edge = nb_edge_;
     AUTOMATON_TYPES(TAutomata);
     // check consistency of automaton
-    if (nb_edge < nb_state - 1)
+    if (nb_edge_ < nb_state - 1)
       nb_edge = nb_state - 1;
     if (fstate > nb_state) fstate = nb_state;
     if (fstate <= 0) fstate = 1;
     if (istate > nb_state) istate = nb_state;
     if (istate <= 0) istate = 1;
     
-    TAutomata work;
-    work.create();
-
     // alphabet construction 
     alphabets_elt_t alpha;
         
@@ -97,30 +97,38 @@ namespace vcsn {
     monoid_t monoid(alpha);
     weights_t semi;
     series_t series(semi, monoid);
+    automata_set_t aset(series);
+    TAutomata work(aset);
     
-    work.series() = series;
-
     for (unsigned i = 0; i < nb_state; i++)
       work.add_state();
 
     // minimal construction
     state_iterator prev = work.states().begin();
-
-    for (state_iterator i = ++work.states().begin();
-	 i != work.states().end(); i++)
+    state_iterator i = prev;
+    ++i;
+    for (; i != work.states().end(); ++i)
       {
 	nb_edge--;
-	work.add_letter_edge(*prev, *i, alpha.choose());
+	std::set<hedge_t> aim;
+	letter_t e = alpha.choose();
+	work.letter_deltac(aim, *prev, e, delta_kind::edges());
+	if (aim.size() == 0)
+	  work.add_letter_edge(*prev, *i, e);
 	prev = i;
       }
 
-    for (unsigned i = 0; i < nb_edge; i++)
+    for (int i = 0; i < nb_edge; i++)
       {
 	unsigned from = alea(work.states().size());
 	unsigned to = alea(work.states().size());
-	work.add_letter_edge(work.choose_state(),
-			     work.choose_state(), 
-			     alpha.choose());
+	std::set<hstate_t> aim;
+	letter_t e = alpha.choose();
+	hstate_t s = work.choose_state();
+	hstate_t a = work.choose_state();
+	work.letter_deltac(aim, s, e, delta_kind::states());
+	if (aim.find(a) == aim.end())
+	  work.add_letter_edge(s, a, e);
       }
 	
     work.set_initial(*work.states().begin());
@@ -146,18 +154,15 @@ namespace vcsn {
     return work;
   }
   
-  
-
-
   template <class TAutomata>
+  inline
   unsigned GenRandomAutomata<TAutomata>::
   nb_edge_circle(TAutomata work, hstate_t state)
   {    
-    typedef typename TAutomata::edges_t edges_t;
-    typedef typename TAutomata::edge_iterator edge_iterator;
+    AUTOMATON_TYPES(TAutomata);
     unsigned res = 0;
     
-    for (edge_iterator i = work.edges().begin(); i != work.edges().end(); i++)
+    for_each_edge(i, work)
       if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
 	res++;
 
@@ -165,18 +170,24 @@ namespace vcsn {
   }
   
   template <class TAutomata>
+  inline
   void GenRandomAutomata<TAutomata>::
-  del_edge_circle(TAutomata work, hstate_t state)
+  del_edge_circle(TAutomata& work, hstate_t state)
   {    
-    typedef typename TAutomata::edges_t edges_t;
-    typedef typename TAutomata::edge_iterator edge_iterator;
-    
-    for (edge_iterator i = work.edges().begin(); i != work.edges().end(); i++)
-      if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
-	work.del_edge(*i);
+    AUTOMATON_TYPES(TAutomata);
+
+    std::list<hedge_t> to_remove;
+    for_each_edge(i, work)
+      {
+	if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
+	  to_remove.push_back(*i);
+      }
+    for_each_const_(std::list<hedge_t>, e, to_remove)
+      work.del_edge(*e);
   }
 
   template <class TAutomata>
+  inline
   TAutomata GenRandomAutomata<TAutomata>::
   generate_with_epsilon(unsigned nb_state, 
 			unsigned nb_edge,
@@ -196,46 +207,56 @@ namespace vcsn {
   }
   
   template <class TAutomata>
+  inline
   TAutomata GenRandomAutomata<TAutomata>::
   generate_dfa(unsigned nb_state, 
 	       unsigned size_alphabet, 
 	       unsigned fstate)
   {
+    AUTOMATON_TYPES(TAutomata);
+
     // check for coherence 
     if (size_alphabet > 26) size_alphabet = 26;
     if (nb_state < 1) size_alphabet = 1;
     
 
-    // file for output format (graphviz)
-    TAutomata work;
-    work.create();
-
-    for (unsigned i = 0; i < nb_state; i++)
-      work.add_state();
-
     // alphabet construction 
-    alphabet_t& alpha = work.series().monoid().alphabet();
+    alphabet_t alpha;
 
     for (unsigned i = 0; i < size_alphabet; i++)
       alpha.insert(alpha.random_letter());
+
+    // file for output format (graphviz)
+    monoid_t m(alpha);
+    weights_t s;
+    series_t series(s, m);
+    automata_set_t as(series);
+    automaton_t work(as);
+
+    for (unsigned i = 0; i < nb_state; i++)
+      work.add_state();
     
-    for (state_iterator i = work.states().begin();
-	 i != work.states().end(); i++)
+    for_each_state(i, work)
       {
-	for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
-	  work.add_letter_edge(*i, 
-			       work.choose_state(),
-			       *j);
+	for_each_letter(j, alpha)
+	  work.add_letter_edge(*i,work.choose_state(),*j);
 	while (nb_edge_circle(work, *i) == alpha.size())
 	  {
 	    del_edge_circle(work, *i);
-	    for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
-	      work.add_letter_edge(*i, 
-				   work.choose_state(), 
-				   *j);
+	    for_each_letter(j, alpha)
+	      {
+		std::set<hstate_t> ret;
+		work.letter_deltac(ret, *i, *j, delta_kind::states());
+		if (ret.size() == 0)
+		  {
+		    hstate_t s;
+		    while ((s = work.choose_state()) == *i);
+		    work.add_letter_edge(*i, s, *j);
+		  }
+	      }
 	  }
       }
-
+    
     // set initial states
     work.set_initial(work.choose_state());
     
@@ -253,6 +274,7 @@ namespace vcsn {
 
 
   template <class TAutomata>
+  inline
   TAutomata GenRandomAutomata<TAutomata>::
   generate_normalized(unsigned nb_state, unsigned density)
   {
@@ -275,7 +297,7 @@ namespace vcsn {
     work.set_initial(init);
     work.set_final(final);
 
-    alphabets_elt_t& alpha = work.series().monoid().alphabet();
+    const alphabets_elt_t& alpha = work.set().series().monoid().alphabet();
 
     hstate_t tmp;
 
@@ -293,6 +315,7 @@ namespace vcsn {
   }
 
   template <class TAutomata>
+  inline
   unsigned GenRandomAutomata<TAutomata>::alea(unsigned max)
   {
     return ((unsigned) floor(((float) rand() / (float) RAND_MAX) * (max-1)));

@@ -26,8 +26,6 @@
 # include <time.h>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/misc/ref.hh>
@@ -43,11 +41,11 @@ unsigned global_consistency_test(tests::Tester& tg)
 
   using namespace vcsn;
   using namespace vcsn::algebra;
-  using namespace vcsn::tools;
+  //  using namespace vcsn::tools;
 
   typedef Auto automaton_t;
  
-  gen_auto_t gen(time(0x0));
+  tools::GenRandomAutomata<Auto> gen(time(0x0));
 
   automaton_t automaton = gen.generate(12, 20);
 

@@ -25,8 +25,6 @@
 # include <time.h>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/misc/ref.hh>
@@ -75,7 +73,7 @@ unsigned realtime_test(tests::Tester& tg)
   success = 0;
   for (unsigned i = 0; i < nb_tests; i++)
     {     
-      automaton_t automata = gen.generate_with_epsilon(40, 80, 1, 40);
+      automaton_t automata = gen.generate_with_epsilon(4, 8, 1, 2);
       automaton_t non_epsilon = realtime(automata);
       if (is_realtime(non_epsilon))
 	++success;

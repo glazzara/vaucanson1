@@ -98,8 +98,8 @@ namespace vcsn {
   `---------------------------*/
   template<typename Self>
   struct MetaSet<algebra::SeriesBase<Self> >
-    : MetaSet<algebra::SemiringBase<Self>
-  { };
+    : MetaSet<algebra::SemiringBase<Self> >
+  {};
 
   /*---------------------------------.
   | MetaElement<SeriesBase<Self>, T> |

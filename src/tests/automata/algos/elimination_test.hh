@@ -62,13 +62,15 @@ bool elimination_test(tests::Tester& tg)
 	{
 	  monoid_elt_t w = language.choose_from_supp();
 	  if (t.verbose() == tests::high)
-	    std::cout << "TEST: elimination " << nb << " : test " << w << std::endl;
+	    std::cout << "TEST: elimination " << nb << " : test " 
+		      << w << std::endl;
 	  if (compute(a, w) ==
-	      zero_as<weight_value_t>::of(a.series().weights()))
+	      zero_as<weight_value_t>::of(a.set().series().weights()))
 	    {
 	      break;
 	      if (t.verbose() == tests::high)
-		std::cout << "TEST: elimination " << nb << " failed." << std::endl;
+		std::cout << "TEST: elimination " << nb 
+			  << " failed." << std::endl;
 	    }
 	}
       if (i == nb_word_test)

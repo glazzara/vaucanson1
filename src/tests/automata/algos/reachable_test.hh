@@ -25,8 +25,6 @@
 # include <map>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/tools/gen_random.hh>
@@ -51,8 +49,7 @@ unsigned reachable_test(tests::Tester& t)
   for (unsigned i = 0; i < nb_tests; i++)
     {
       automaton_t auto_connex;
-      auto_connex.create();
-      auto_connex = gen.generate(3, 1);
+      auto_connex = gen.generate(10, 20);
       
       unsigned nb_state = auto_connex.states().size();
 
@@ -60,23 +57,28 @@ unsigned reachable_test(tests::Tester& t)
 	auto_connex.add_state();
 
       if (nb_state == 
-	  auto_final_reachable(auto_start_reachable(auto_connex)).states().size())
+	  auto_final_reachable
+	  (auto_start_reachable(auto_connex)).states().size())
 	++success_trim;
       if (auto_final_reachable(auto_connex).states().size() == 
-	  auto_final_reachable(auto_final_reachable(auto_connex)).states().size())
+	  auto_final_reachable(auto_final_reachable(auto_connex))
+	  .states().size())
 	++success_final_reachable_idempotence;
       if (auto_start_reachable(auto_connex).states().size() == 
-	  auto_start_reachable(auto_start_reachable(auto_connex)).states().size())
+	  auto_start_reachable(auto_start_reachable(auto_connex))
+	  .states().size())
 	++success_start_reachable_idempotence;
     } 
   std::string rate_trim;
   std::string rate_f_idempotence;
   std::string rate_s_idempotence;
   SUCCESS_RATE(rate_trim, success_trim, nb_tests);
-  SUCCESS_RATE(rate_f_idempotence, success_final_reachable_idempotence, nb_tests);
-  SUCCESS_RATE(rate_s_idempotence, success_start_reachable_idempotence, nb_tests);
+  SUCCESS_RATE(rate_f_idempotence, success_final_reachable_idempotence, 
+	       nb_tests);
+  SUCCESS_RATE(rate_s_idempotence, success_start_reachable_idempotence, 
+	       nb_tests);
   TEST(t, "composition of final/start reachable is trim. "+rate_trim, 
-       success_trim = nb_tests);
+       success_trim == nb_tests);
   TEST(t, "final reachable is idempotent. "+rate_f_idempotence, 
        success_final_reachable_idempotence == nb_tests);
   TEST(t, "start reachable is idempotent. "+rate_s_idempotence, 

@@ -23,9 +23,8 @@
 
 # include <map>
 # include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 
@@ -40,20 +39,21 @@ unsigned coherence_state_edge_test(tests::Tester& tg)
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
 
+  typedef GenRandomAutomata<Auto> gen_auto_t;
+  gen_auto_t gen(time(0x0));
   typedef Auto automaton_t;
-  automaton_t automaton;
-  
-  automaton.create();
+  automaton_t automaton(gen.generate_dfa(10).set());
   
   hstate_t s1 = automaton.add_state();
   hstate_t s2 = automaton.add_state();
 
-  hedge_t h1 = automaton.add_edge(s1, s2, series_elt_t() );
+  hedge_t h1 = automaton.add_letter_edge(s1, s2, 'a');
 
-  TEST(t, "Check number of state.", automaton.states().size() == 2);
-  TEST(t, "Check number of edge.", automaton.edges().size() == 1);
+  EQTEST(t, "Check number of state.", automaton.states().size(), 2);
+  EQTEST(t, "Check number of edge.", automaton.edges().size(), 1);
 
   automaton.del_state(s1);
+  automaton.del_state(s2);
 
   TEST(t, "Check for zombies edge.", automaton.edges().size() == 0);
 

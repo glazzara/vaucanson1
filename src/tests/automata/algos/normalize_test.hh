@@ -24,15 +24,12 @@
 # include <time.h>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/misc/dot_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/algorithms/normalized.hh>
 
 template <class Auto>

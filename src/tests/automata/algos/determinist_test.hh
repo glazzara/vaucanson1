@@ -25,8 +25,6 @@
 # include <map>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/tools/gen_random.hh>
@@ -44,7 +42,7 @@ unsigned determinist_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
   gen_auto_t gen(time(0x0));
   
-  const unsigned nb_tests = 20;
+  const unsigned nb_tests = 1;
   unsigned success = 0;
   for (unsigned i = 0; i < nb_tests; i++)
     {
@@ -59,7 +57,7 @@ unsigned determinist_test(tests::Tester& tg)
   success = 0;
   for (unsigned i = 0; i < nb_tests; i++)
     {     
-      automaton_t automata = gen.generate(40, 80);
+      automaton_t automata = gen.generate(4, 8);
       automaton_t dfa      = determinize(automata);
       if (is_deterministic(dfa))
 	++success;

@@ -24,12 +24,11 @@
 # include <map>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
+# include <vaucanson/tools/gen_random.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/misc/ref.hh>
-# include <vaucanson/tools/usual.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 template <class Auto>
 unsigned init_final_test(tests::Tester& tg)
@@ -43,10 +42,10 @@ unsigned init_final_test(tests::Tester& tg)
   using namespace vcsn::tools;
 
   typedef Auto automaton_t;
-  automaton_t automaton;
-  
-  automaton.create();
+  tools::GenRandomAutomata<Auto> gen(time(0x0));
 
+  automaton_t automaton = gen.empty();
+  
   hstate_t s1 = automaton.add_state();
   automaton.set_initial(s1);
 

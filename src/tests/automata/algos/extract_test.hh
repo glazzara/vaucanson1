@@ -25,8 +25,6 @@
 # include <map>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/tools/gen_random.hh>
@@ -53,11 +51,9 @@ unsigned extract_test(tests::Tester& tg)
       unsigned nb_state = 5;
       unsigned nb_edge = 10;
       automaton_t a = gen.generate(nb_state, nb_edge);
-      
-      a = auto_extract(a, a.states());
-      
-      if ((a.states().size() == nb_state) &&
-	  (a.edges().size() == nb_edge))
+      automaton_t b = auto_extract(a, a.states());
+      if ((a.states().size() == b.states().size()) &&
+	  (a.edges().size() == b.edges().size()))
 	++success;
     }
   std::string rate;
