@@ -52,8 +52,8 @@ namespace vcsn {
 		const T&,
 		const Element<S, T>& a,
 		const std::string& name,
-		const std::string& prog,
-		const bool bg)
+		const bool bg,
+		char *const argv[])
     {
       int filedes[2];
       if (pipe(filedes))
@@ -64,20 +64,27 @@ namespace vcsn {
 	{
 	  close(filedes[0]);
 	  if (child_pid == -1)
-	    return false;
+	    {
+	      close(filedes[1]);
+	      return false;
+	    }
 	  else
 	    {
 	      // FIXME: That trick is dirty!
 	      {
 		std::cout.flush();
 		int old = dup(STDOUT_FILENO);
-		dup2(filedes[1], STDOUT_FILENO);
+		if (old != -1)
+		  dup2(filedes[1], STDOUT_FILENO);
 		close(filedes[1]);
 
 		dot_dump(std::cout, a, name);
 
-		dup2(old, STDOUT_FILENO);
-		close(old);
+		if (old != -1)
+		  {
+		    dup2(old, STDOUT_FILENO);
+		    close(old);
+		  }
 	      }
 	      return bg or waitpid(child_pid, NULL, 0) == child_pid;
 	    }
@@ -87,7 +94,7 @@ namespace vcsn {
 	  close(filedes[1]);
 	  dup2(filedes[0], STDIN_FILENO);
 	  close(filedes[0]);
-	  execlp(prog.c_str(), prog.c_str(), "-", 0);
+	  execvp(argv[0], argv);
 	  return false;
 	}
     }
@@ -96,10 +103,10 @@ namespace vcsn {
     bool
     dot_display(const Element<S, T>& a,
 		const std::string& name,
-		const std::string& prog,
-		const bool bg)
+		const bool bg,
+		char *const argv[])
     {
-      return dot_display(a.structure(), a.value(), a, name, prog, bg);
+      return dot_display(a.structure(), a.value(), a, name, bg, argv);
     }
 
   } // End of namespace tools.

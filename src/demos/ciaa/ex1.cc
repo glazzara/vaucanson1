@@ -77,7 +77,7 @@ int main(int argc, char** argv)
     }
   an.add_letter_edge(x, p, 'a');
   an.set_initial(p); an.set_final(p);
-  vcsn::tools::dot_display(an, "A", "dotty", true);
+  vcsn::tools::dot_display(an, "A", true);
 
   automaton_t dn = determinize(an);
   if (n and dn.states().size() != unsigned (1 <<  n))

@@ -1,3 +1,12 @@
+2004-06-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/tools/dot_display.hh,
+	* include/vaucanson/tools/dot_display.hxx: Allow the user to specify
+	arguments for execvp(). Completely close the pipe when fork() fails.
+	Handle dup() failures. bg become the third argument and argv the
+	fourth.
+	* src/demos/ciaa/ex1.cc: Update.
+
 2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	Proposed by Sylvain Lombardy.

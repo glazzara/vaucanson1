@@ -38,12 +38,14 @@ namespace vcsn
 {
   namespace tools
   {
+    static char *const dotty_argv[] = { "dotty", "-", 0 };
+
     template <class S, class T>
     bool
     dot_display(const Element<S, T>& a,
 		const std::string& name,
-		const std::string& prog = "dotty",
-		const bool bg = false);
+		const bool bg = false,
+		char *const argv[] = dotty_argv);
 
   }
 }
