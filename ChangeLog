@@ -1,4 +1,24 @@
 2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.68)
+	* include/vaucanson/automata/concept/transpose_impl.hxx
+-    typename OtherImpl:tag_t& 
++    typename OtherImpl::tag_t& 
+-    const typename OtherImpl:tag_t& 
++    const typename OtherImpl::tag_t& 
+-    Element<OtherImpl::series_t, OtherImpl::series_value_t>
++    Element<typename OtherImpl::series_t, typename OtherImpl::series_value_t>
+-    Element<OtherImpl::series_t, OtherImpl::series_value_t>
++    Element<typename OtherImpl::series_t, typename OtherImpl::series_value_t>
+-    const OtherImpl::series_t& 
++    const typename OtherImpl::series_t& 
+
+	* include/vaucanson/automata/concept/transpose_impl.hh
+-# include <vaucanson/algebra/concrete/series/exp.hh>
++# include <vaucanson/algebra/concrete/series/transpose.hh>
++# include <vaucanson/algebra/concrete/series/rat/exp.hh>
+
+
+2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.67)
 	* include/vaucanson/algebra/concept/series_base.hxx 
 	* include/vaucanson/algebra/concrete/series/krat.hxx

@@ -7,10 +7,10 @@
 
 # include <functional>
 
+# include <vaucanson/automata/concept/transpose_impl.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/fundamental/slots.hh>
 # include <vaucanson/misc/ref.hh>
-# include <vaucanson/automata/concept/transpose.hh>
 
 namespace vcsn
 {
@@ -101,14 +101,14 @@ namespace vcsn
     }
 
     template <typename OtherImpl, class TransposeLabelFun>
-    typename OtherImpl:tag_t& 
+    typename OtherImpl::tag_t& 
     TransposeImpl<OtherImpl, TransposeLabelFun>::tag() 
     { 
       return impl().tag(); 
     }
 
     template <typename OtherImpl, class TransposeLabelFun>
-    const typename OtherImpl:tag_t& 
+    const typename OtherImpl::tag_t& 
     TransposeImpl<OtherImpl, TransposeLabelFun>::tag() const 
     { 
       return impl().tag(); 
@@ -309,7 +309,7 @@ namespace vcsn
     }
 
     template <typename OtherImpl, class TransposeLabelFun>
-    Element<OtherImpl::series_t, OtherImpl::series_value_t>
+    Element<typename OtherImpl::series_t, typename OtherImpl::series_value_t>
     TransposeImpl<OtherImpl, TransposeLabelFun>::
     get_initial(unsigned s) const
     { 
@@ -317,7 +317,7 @@ namespace vcsn
     }
 
     template <typename OtherImpl, class TransposeLabelFun>
-    Element<OtherImpl::series_t, OtherImpl::series_value_t>
+    Element<typename OtherImpl::series_t, typename OtherImpl::series_value_t>
     TransposeImpl<OtherImpl, TransposeLabelFun>::
     get_final(unsigned s) const
     { 
@@ -358,7 +358,7 @@ namespace vcsn
     }
     
     template <typename OtherImpl, class TransposeLabelFun>
-    const OtherImpl::series_t& 
+    const typename OtherImpl::series_t& 
     TransposeImpl<OtherImpl, TransposeLabelFun>::
     series() const 
     { 
@@ -400,11 +400,6 @@ namespace vcsn
       return impl_ref_; 
     }
 
-
- 
-
-
-  
   template<typename Auto>
   typename transpose_traits<Auto>::transpose_t
   transpose_view(const Auto& a)

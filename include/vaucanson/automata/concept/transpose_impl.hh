@@ -1,5 +1,6 @@
 // transpose_impl.hh
 //
+// $Id$
 // VCSN_HEADER
 
 #ifndef AUTOMATA_TRANSPOSE_IMPL_HH
@@ -12,7 +13,8 @@
 # include <vaucanson/misc/ref.hh>
 # include <vaucanson/algorithms/transpose.hh>
 
-# include <vaucanson/algebra/concrete/series/exp.hh>
+# include <vaucanson/algebra/concrete/series/transpose.hh>
+# include <vaucanson/algebra/concrete/series/rat/exp.hh>
 
 namespace vcsn
 {
