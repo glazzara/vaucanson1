@@ -78,24 +78,20 @@ namespace vcsn {
 
   template <typename Self, typename T>
   inline
-  hedge_t 
-  MetaElement<TransducerBase<Self>, T>
-  ::add_io_edge(hstate_t from, 
-		hstate_t to, 
-		input_monoid_elt_t i, 
-		output_monoid_elt_t o, 
-		output_semiring_elt_t w)
+  hedge_t  
+  MetaElement<TransducerBase<Self>, T>::
+  add_io_edge(hstate_t from, 
+	      hstate_t to, 
+	      input_monoid_elt_t i,
+	      output_monoid_elt_t o,
+	      output_semiring_elt_t w)
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
-	::of(this->series().semiring().semiring());
-    // FIXME: !!
-    return op_add_io_edge(this->set(), this->value(),
-			  from, to, 
-			  i.value()[0], 
-			  o.value()[0], w);
+	::of(series().semiring().semiring());
+    return op_add_io_edge(this->set(), value(),
+			  from, to, i, o, w);
   }
-
 
   template <typename Self, typename T>
   inline

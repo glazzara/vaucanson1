@@ -1,4 +1,4 @@
-// dot_dump.hh: this file is part of the Vaucanson project.
+// dot_dump.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,19 +27,43 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_TOOLS_DOT_DUMP_HH
-# define VCSN_TOOLS_DOT_DUMP_HH
+#ifndef VCSN_TOOLS_DOT_DUMP_HXX
+# define VCSN_TOOLS_DOT_DUMP_HXX
 
-namespace vcsn
-{
-  namespace tools
-  {
+# include <string>
+# include <vaucanson/tools/io.hh>
+# include <vaucanson/tools/dot_format.hh>
+
+namespace vcsn {
+
+  namespace tools {
+
+    template <class S, class Auto>
+    void dot_dump(const AutomataBase<S>& s,
+		  std::ostream& o, 
+		  const Auto& a,
+		  const std::string& name)
+    {
+      o << automaton_saver(a, io::string_out(), io::dot(name));
+    }
+
+    template <class S, class Auto>
+    void dot_dump(const TransducerBase<S>& s,
+		  std::ostream& o, 
+		  const Auto& a,
+		  const std::string& name)
+    {
+      o << automaton_saver(a, io::string_out(), io::transducer_dot(name));
+    }
+
     template <typename Auto>
-    void dot_dump(std::ostream& o, const Auto& a, const std::string& name);
+    void dot_dump(std::ostream& o, const Auto& a, const std::string& name)
+    {
+      dot_dump(a.set(), o, a, name);
+    }
 
-  }
-}
+  } // tools
 
-# include <vaucanson/tools/dot_dump.hxx>
+} // vcsn
 
-#endif // VCSN_TOOLS_DOT_DUMP_HH
+#endif // VCSN_TOOLS_GEN_RANDOM_HXX

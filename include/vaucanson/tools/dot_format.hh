@@ -32,24 +32,39 @@
 
 #include <string>
 
-namespace vcsn 
-{
+namespace vcsn {
   
-  namespace io 
-  {
+  namespace io {
 
     struct dot
     {
       inline dot(const std::string& auto_name = "automaton");
 
       template <typename Saver, typename Conv>
-      void operator()(std::ostream& out, const Saver& s, const Conv& conv) const;
+      void operator()(std::ostream& out, 
+		      const Saver& s, 
+		      const Conv& conv) const;
 
     protected:
       std::string name_;
     };
-  }
-}
+
+    struct transducer_dot
+    {
+      inline transducer_dot(const std::string& auto_name = "transducer");
+
+      template <typename Saver, typename Conv>
+      void operator()(std::ostream& out, 
+		      const Saver& s, 
+		      const Conv& conv) const;
+
+    protected:
+      std::string name_;
+    };
+
+  } // io
+
+} // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY

@@ -1,5 +1,28 @@
 2003-10-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx:
+		Fix typo.
+	* include/vaucanson/algebra/concrete/series/krat.hxx:
+		Return symbolic series identity instead of polynom.
+	* include/vaucanson/automata/concept/automata_ops.hxx:
+		Fix missing set.
+	* include/vaucanson/automata/concept/transducer_ops.hh:
+		(op_add_io_edge): New version with two words.
+	* include/vaucanson/automata/concept/transducer_base.hxx:
+	  include/vaucanson/automata/concept/transducer_ops.hxx:
+		Implement and use it.
+	* include/vaucanson/algorithms/product.hxx: Fix a major bug.
+	* include/vaucanson/algorithms/standard.hxx: 
+		Disable initial weight since krat::get is broken.
+	* include/vaucanson/tools/dot_dump.hh: Move implementation ...
+	* include/vaucanson/tools/dot_dump.hxx: New. ... here.
+	* include/vaucanson/tools/dot_format.hh,
+	  include/vaucanson/tools/dot_format.hxx (transducer_dot): New.
+	* include/vaucanson/tools/io.h[xx,h]: Fix many typo.
+	* include/vaucanson/algorithms/projection.hxx: Minor change.
+
+2003-10-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/misc/bitset.hxx: Fix type error.
 	* include/vaucanson/misc/bitset.hh: Likewise.
 	* include/vaucanson/algorithms/evaluation.hxx: Fix.

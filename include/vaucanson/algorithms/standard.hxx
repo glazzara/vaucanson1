@@ -54,7 +54,7 @@ namespace vcsn {
     for_each_initial_state(oi, a)
       {
 	series_elt_t s = a.get_initial(*oi);
-	a.add_spontaneous(i, *oi, s.get(e));
+	a.add_spontaneous(i, *oi); // , s.get(e));
       }
     a.clear_initial();
     a.set_initial(i);

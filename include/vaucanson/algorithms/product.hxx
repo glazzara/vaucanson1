@@ -73,9 +73,13 @@ namespace vcsn {
     /*----------------------------------.
     | Get initial states of the product |
     `----------------------------------*/
+    tools::dot_dump(std::cout, lhs, "lhs");
+    tools::dot_dump(std::cout, rhs, "rhs");
+
     for_each_initial_state(lhs_s, lhs)
       for_each_initial_state(rhs_s, rhs)
 	{
+	  cout << "produit etat initial :" << *lhs_s << ";" << *rhs_s << endl;
 	  hstate_t  new_state = output.add_state();
 	  pair_hstate_t new_pair(*lhs_s, *rhs_s);	
 	  m[new_state] = new_pair;
@@ -117,7 +121,7 @@ namespace vcsn {
 		
 		for_all_(support_t, supp, s.supp())
 		  s__.value_set(monoid_elt_t(*supp).value(), 
-		       (s_.get(*supp) * s_.get(*supp)).value());
+		       (s_.get(*supp) * s.get(*supp)).value());
 
 		if (s__ != series_zero)
 		  {

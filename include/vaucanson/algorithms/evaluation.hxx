@@ -90,7 +90,6 @@ namespace vcsn {
     AUTOMATON_TYPES(Auto_t);
     monoid_elt_t empty = tmp_auto.series().monoid().empty_;
     standard_of(tmp_auto, exp.get(empty).value()); 
-
     partial_1(tmp_auto, t, state_exp_pair_set);
   }
   
@@ -132,7 +131,6 @@ namespace vcsn {
 	series_elt_t loop_sum(b.series());
 	sums_t       in_sums, out_sums;
 	typename sums_t::iterator f;
-
 	q = chooser(b);
 	if (b.is_initial(q) || b.is_final(q))
 	  continue;
@@ -249,12 +247,14 @@ namespace vcsn {
 
     Trans_t tmp_trans(t.set());
     tmp_trans = extension(a, t);
+
     Trans_t pro(t.set());
     state_pair_map_t sp_m; 
     pro = product(tmp_trans, t, sp_m);
     Auto_ret_t auto_p(auto_set);
     std::map<hstate_t, hstate_t> proj_m;
     auto_p = output_projection(pro, proj_m);
+
     /* unset final all the final states of auto_p */
     auto_p.clear_final();
     
@@ -267,7 +267,7 @@ namespace vcsn {
 	is_final_of[new_state] = *u;
 	auto_p.set_final(new_state);
       }
-    
+
     for(a_state_iterator u = auto_p.states().begin(); 
 	u != auto_p.states().end(); ++u)
       {
@@ -283,6 +283,7 @@ namespace vcsn {
 
     M se;
     partial_elimination(auto_p, se);
+
     state_exp_pair_set.clear();
     for_each_(M, p, se)
       {
@@ -333,7 +334,6 @@ namespace vcsn {
         
     Trans_t pro(t.set());
     pro = trim(product(tmp_trans, tt));
-    
     Auto_ret_t auto_p(auto_set);
     auto_p = output_projection(pro);
 

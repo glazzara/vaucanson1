@@ -63,12 +63,15 @@ namespace vcsn
       format_t format_;
 
       template<typename A, typename E, typename F>
-      friend std::ostream& operator<<(std::ostream&, const automaton_saver_<A, E, F>&);
+      friend std::ostream& 
+      operator<<(std::ostream&, const automaton_saver_<A, E, F>&);
     };
 
 
     template<typename Auto, typename EdgeConverter, typename Format>
-    std::ostream& operator<<(std::ostream&, const automaton_saver_<Auto, EdgeConverter, Format>&);
+    std::ostream& 
+    operator<<(std::ostream&, 
+	       const automaton_saver_<Auto, EdgeConverter, Format>&);
 
     struct string_out
     {
@@ -79,9 +82,10 @@ namespace vcsn
   }
 
   template<typename Auto, typename EdgeConverter, typename Format>
-  io::automaton_saver_<Auto, EdgeConverter, Format> automaton_saver(const Auto&,
-								    const EdgeConverter& e = EdgeConverter(),
-								    const Format& f = Format());
+  io::automaton_saver_<Auto, EdgeConverter, Format> 
+  automaton_saver(const Auto&,
+		  const EdgeConverter& e = EdgeConverter(),
+		  const Format& f = Format());
     
 
   namespace io 
@@ -120,27 +124,26 @@ namespace vcsn
       bool merge_states_;
 
       template<typename A, typename E, typename F>
-      friend std::istream& operator>>(std::istream&, automaton_loader_<A, E, F>&);
+      friend std::istream& 
+      operator>>(std::istream&, automaton_loader_<A, E, F>&);
     };
 
     template<typename Auto, typename EdgeConverter, typename Format>
-    std::istream& operator>>(std::istream&, automaton_loader_<Auto, EdgeConverter, Format>);
+    std::istream& 
+    operator>>(std::istream&, automaton_loader_<Auto, EdgeConverter, Format>);
 
 
   }
   
   
   template<typename Auto, typename EdgeConverter, typename Format>
-  io::automaton_loader_<Auto, EdgeConverter, Format> automaton_loader(Auto& a, 
-								      const EdgeConverter& e = EdgeConverter(),
-								      const Format& f = Format(),
-								      bool merge_states = false);
+  io::automaton_loader_<Auto, EdgeConverter, Format> 
+  automaton_loader(Auto& a, 
+		   const EdgeConverter& e = EdgeConverter(),
+		   const Format& f = Format(),
+		   bool merge_states = false);
   
-
-
-  
-
-}
+} // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY

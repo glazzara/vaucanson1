@@ -71,7 +71,27 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_elt_t) is(s.series());
     is.assoc(input_w, os);
+    std::cout << "add io edge :" << o << " " 
+	      << output_w << " " << w << " "
+	      << os << std::endl;
     return op_add_serie_edge(s, v, from, to, is);
+  }
+
+  template <class S, class T>
+  hedge_t
+  op_add_io_edge(const TransducerBase<S>& s,
+		 T& v, 
+		 hstate_t from, 
+		 hstate_t to,
+		 AutoType(input_monoid_elt_t) input_w,
+		 AutoType(output_monoid_elt_t) output_w,
+		 AutoType(output_semiring_elt_t) w)
+  {
+    AutoType(output_series_elt_t) os(s.series().semiring());
+    os.assoc(output_w, w);
+    AutoType(series_elt_t) is(s.series());
+    is.assoc(input_w, os);
+    return op_add_serie_edge(s, v, from, to, is);    
   }
 
   template <class S, class T>

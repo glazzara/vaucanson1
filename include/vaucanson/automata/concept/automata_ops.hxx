@@ -222,7 +222,7 @@ namespace vcsn {
 		     hstate_t to,
 		     const typename Element<S, T>::semiring_elt_t& w)
   {    
-    AutoType(series_elt_t) ss;
+    AutoType(series_elt_t) ss(s.series());
     ss.assoc(algebra::identity_as<AutoType(monoid_elt_value_t)>::
 	    of(s.series().monoid()), w);
     return op_add_serie_edge(s, v, from, to, ss);

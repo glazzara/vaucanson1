@@ -113,7 +113,7 @@ namespace vcsn {
   template<typename S, typename T>
   void 
   MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_t& m, 
-				       const semiring_elt_t& w) 
+						const semiring_elt_t& w) 
   { 
     value_set(m.value(), w.value()); 
   }

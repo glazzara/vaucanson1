@@ -1,18 +1,35 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 448)
-(Parent-Version vaucanson 0 447)
+(Project-Version vaucanson 0 449)
+(Parent-Version vaucanson 0 448)
 (New-Version-Log "")
 
 (Version-Log "
 2003-10-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/misc/bitset.hxx: Fix type error.
-	* include/vaucanson/misc/bitset.hh: Likewise.
-	* include/vaucanson/algorithms/evaluation.hxx: Fix.
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx:
+		Fix typo.
+	* include/vaucanson/algebra/concrete/series/krat.hxx:
+		Return symbolic series identity instead of polynom.
+	* include/vaucanson/automata/concept/automata_ops.hxx:
+		Fix missing set.
+	* include/vaucanson/automata/concept/transducer_ops.hh:
+		(op_add_io_edge): New version with two words.
+	* include/vaucanson/automata/concept/transducer_base.hxx:
+	  include/vaucanson/automata/concept/transducer_ops.hxx:
+		Implement and use it.
+	* include/vaucanson/algorithms/product.hxx: Fix a major bug.
+	* include/vaucanson/algorithms/standard.hxx: 
+		Disable initial weight since krat::get is broken.
+	* include/vaucanson/tools/dot_dump.hh: Move implementation ...
+	* include/vaucanson/tools/dot_dump.hxx: New. ... here.
+	* include/vaucanson/tools/dot_format.hh,
+	  include/vaucanson/tools/dot_format.hxx (transducer_dot): New.
+	* include/vaucanson/tools/io.h[xx,h]: Fix many typo.
+	* include/vaucanson/algorithms/projection.hxx: Minor change.
 ")
-(Checkin-Time "Wed, 29 Oct 2003 09:09:41 +0100")
+(Checkin-Time "Wed, 29 Oct 2003 14:44:41 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -95,7 +112,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.81 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.82 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -216,7 +233,7 @@
   (include/vaucanson/algebra/concept/semiring_base.hh (vaucanson/b/16_semiring_b 1.15 600))
   (include/vaucanson/algebra/concept/semiring_base.hxx (vaucanson/b/15_semiring_b 1.14 600))
   (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.26 600))
-  (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.24 600))
+  (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.25 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.11 600))
   
 
@@ -230,7 +247,7 @@
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.12 600))
   (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.8 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.17 600))
-  (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.17 600))
+  (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.18 600))
   (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.21 600))
   (include/vaucanson/algebra/concrete/free_monoid/words.hxx (vaucanson/c/2_words.hxx 1.12 600))
   (include/vaucanson/algebra/concrete/letter/char_letter.hh (vaucanson/i/23_char_lette 1.4 600))
@@ -244,7 +261,7 @@
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.9 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.28 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.38.1.6 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.38.1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.9 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.11 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.7 600))
@@ -315,19 +332,19 @@
   (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.7 600))
   (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.8 600))
   (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.7 600))
-  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.18 600))
+  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.19 600))
   (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.6 600))
   (include/vaucanson/automata/concept/delta_kind.hh (vaucanson/q/14_delta_kind 1.2 600))
   (include/vaucanson/automata/concept/automata_kind.hh (vaucanson/q/18_automata_k 1.2 600))
   (include/vaucanson/automata/concept/history.hh (vaucanson/q/19_history.hh 1.3 600))
   (include/vaucanson/automata/concept/history.hxx (vaucanson/q/20_history.hx 1.3 600))
 
-  (include/vaucanson/automata/concept/transducer_ops.hh (vaucanson/q/34_transducer 1.6 600))
+  (include/vaucanson/automata/concept/transducer_ops.hh (vaucanson/q/34_transducer 1.7 600))
   (include/vaucanson/automata/concept/transducer.hh (vaucanson/q/35_transducer 1.6 600))
   (include/vaucanson/automata/concept/transducer_base.hh (vaucanson/q/36_transducer 1.10 600))
   (include/vaucanson/automata/concept/transducer.hxx (vaucanson/q/37_transducer 1.4 600))
-  (include/vaucanson/automata/concept/transducer_base.hxx (vaucanson/q/38_transducer 1.8 600))
-  (include/vaucanson/automata/concept/transducer_ops.hxx (vaucanson/q/39_transducer 1.5 600))
+  (include/vaucanson/automata/concept/transducer_base.hxx (vaucanson/q/38_transducer 1.9 600))
+  (include/vaucanson/automata/concept/transducer_ops.hxx (vaucanson/q/39_transducer 1.6 600))
 
   (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.8 600))
   (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.14 600))
@@ -379,13 +396,13 @@
   (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.14 600))
   (include/vaucanson/algorithms/normalized.hxx (vaucanson/d/43_normalized 1.18 600))
   (include/vaucanson/algorithms/product.hh (vaucanson/e/20_product.hh 1.16 600))
-  (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.21 600))
+  (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.22 600))
   (include/vaucanson/algorithms/accessible.hh (vaucanson/d/33_reachable. 1.15 600))
   (include/vaucanson/algorithms/accessible.hxx (vaucanson/d/32_reachable. 1.15 600))
   (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.15 600))
   (include/vaucanson/algorithms/realtime.hxx (vaucanson/e/47_realtime.h 1.14 600))
   (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.14 600))
-  (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.14 600))
+  (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.15 600))
   (include/vaucanson/algorithms/thompson.hh (vaucanson/e/45_thompson.h 1.14 600))
   (include/vaucanson/algorithms/thompson.hxx (vaucanson/e/44_thompson.h 1.12 600))
   (include/vaucanson/algorithms/transpose.hh (vaucanson/d/37_transpose. 1.15 600))
@@ -445,11 +462,11 @@
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.33 600))
   (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.16 600))
   (include/vaucanson/tools/usual.hxx (vaucanson/q/29_usual.hxx 1.4 600))
-  (include/vaucanson/tools/dot_dump.hh (vaucanson/q/31_dot_dump.h 1.5 600))
-  (include/vaucanson/tools/dot_format.hxx (vaucanson/r/25_dot_format 1.3 600))
-  (include/vaucanson/tools/dot_format.hh (vaucanson/r/26_dot_format 1.4 600))
-  (include/vaucanson/tools/io.hxx (vaucanson/r/27_io.hxx 1.4 600))
-  (include/vaucanson/tools/io.hh (vaucanson/r/28_io.hh 1.4 600))
+  (include/vaucanson/tools/dot_dump.hh (vaucanson/q/31_dot_dump.h 1.6 600))
+  (include/vaucanson/tools/dot_format.hxx (vaucanson/r/25_dot_format 1.4 600))
+  (include/vaucanson/tools/dot_format.hh (vaucanson/r/26_dot_format 1.5 600))
+  (include/vaucanson/tools/io.hxx (vaucanson/r/27_io.hxx 1.5 600))
+  (include/vaucanson/tools/io.hh (vaucanson/r/28_io.hh 1.5 600))
   (include/vaucanson/tools/simple_format.hxx (vaucanson/r/30_simple_for 1.3 600))
   (include/vaucanson/tools/simple_format.hh (vaucanson/r/31_simple_for 1.3 600))
   (include/vaucanson/tools/usual_io.hxx (vaucanson/r/32_usual_io.h 1.4 600))
@@ -790,7 +807,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:41 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/realtime_composition.hxx (vaucanson/r/46_realtime_c 1.4 600))
+  (include/vaucanson/algorithms/realtime_composition.hxx (vaucanson/r/46_realtime_c 1.5 600))
 
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:48 +0200,
 ;; to version 0.422(w), by yann:
@@ -800,7 +817,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:50 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.8 600))
+  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.9 600))
 
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:05 +0200,
 ;; to version 0.424(w), by yann:
@@ -820,7 +837,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:13 +0200,
 ;; to version 0.424(w), by yann:
 
-  (include/vaucanson/algorithms/projection.hxx (vaucanson/s/0_projection 1.4 600))
+  (include/vaucanson/algorithms/projection.hxx (vaucanson/s/0_projection 1.5 600))
 
 ;; Files added by populate at Thu, 02 Oct 2003 09:38:47 +0200,
 ;; to version 0.427(w), by yann:
@@ -871,6 +888,11 @@
 ;; to version 0.445(w), by yann:
 
   (doc/beginner/packages.tex (vaucanson/s/14_packages.t 1.1 600))
+
+;; Files added by populate at Wed, 29 Oct 2003 14:38:02 +0100,
+;; to version 0.448(w), by yann:
+
+  (include/vaucanson/tools/dot_dump.hxx (vaucanson/s/15_dot_dump.h 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

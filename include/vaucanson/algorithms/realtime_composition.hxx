@@ -93,8 +93,8 @@ namespace vcsn {
 	    s.assoc(empty, (*mypair).second);
 	    ret.set_initial(new_state, s);
 	  }
-      }
 
+      }
     while(!sp_queue.empty())
       {
 	state_pair_t sp = sp_queue.front();
@@ -158,6 +158,7 @@ namespace vcsn {
 	      }
 	  }
       }
+
   } 
   
   template< typename S, typename T>

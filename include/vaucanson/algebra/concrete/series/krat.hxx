@@ -678,6 +678,14 @@ namespace vcsn {
 		     const oTm& m,
 		     const oTw& w)
   { 
+    if ((m == algebra::identity_as<oTm>::of(s.monoid())) &&
+	(w == algebra::identity_as<oTw>::of(s.semiring())) &&
+	(p == algebra::zero_as<rat::exp<Tm, Tw> >::of(s)))
+      {
+	p = algebra::identity_as<rat::exp<Tm, Tw> >::of(s).value();
+	return ;
+      }
+      
     rat::exp<Tm, Tw> ret = 
       rat::exp<Tm, Tw>::constant(op_convert(SELECT(M),
 					    SELECT(Tm), 

@@ -62,6 +62,16 @@ namespace vcsn {
 
   template <class S, class T>
   hedge_t
+  op_add_io_edge(const TransducerBase<S>& s,
+		 T& v, 
+		 hstate_t from, 
+		 hstate_t to,
+		 AutoType(input_monoid_elt_t) input_w,
+		 AutoType(output_monoid_elt_t) output_w,
+		 AutoType(output_semiring_elt_t) w);
+
+  template <class S, class T>
+  hedge_t
   op_add_i_edge(const TransducerBase<S>& s,
 		T& v, 
 		hstate_t from, 

@@ -44,7 +44,6 @@ namespace vcsn {
 		       const Trans_t& t,
 		       Auto_t& ret)
   {
-    using namespace std;
     AUTOMATON_TYPES(Trans_t);
 
     map<hstate_t, hstate_t> m;
