@@ -1,3 +1,7 @@
+2003-08-17  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/finite_support_conversion.hh: Document.
+
 2003-07-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/tropical_semiring.hh: Remove
