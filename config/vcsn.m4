@@ -223,18 +223,20 @@ AC_DEFUN([AC_CXX_NUMERIC_LIMITS],
   # Some old (and faulty) <limits> implementations define unusable 
   # std::numeric_limits. Check it.
 
-  AC_CACHE_CHECK([for std::numeric_limits::infinity in <limits>],
+  AC_CACHE_CHECK([for proper std::numeric_limits in <limits>],
                  [cxx_cv_have_numeric_limits], 
 	         [if test x$ac_cv_header_limits != xno; then
-                     AC_TRY_LINK([@%:@include <limits>],
+                     AC_TRY_LINK([@%:@include <limits>
+                                  template<bool b> struct sif {};
+                                  template<> struct sif<true> { int a; };],
 	        		 [float f1 = 
 				     std::numeric_limits<float>::infinity();
 		                  double f2 = 
 				     std::numeric_limits<double>::infinity();
-				  int min = 
-				     std::numeric_limits<int>::min();
-				  int max =
-				     std::numeric_limits<int>::max();],
+                                  sif<std::numeric_limits<float>::has_infinity> i1;
+                                  sif<std::numeric_limits<double>::has_infinity> i2;
+                                  i1.a = std::numeric_limits<int>::min();
+				  i2.a = std::numeric_limits<int>::max();],
                 		 [cxx_cv_have_numeric_limits=yes],
                 		 [cxx_cv_have_numeric_limits=no])
                   else
