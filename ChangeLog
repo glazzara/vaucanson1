@@ -1,5 +1,9 @@
 2003-05-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* doc/doc.doxy: Remove this generated file.
+
+2003-05-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* src/demos/vgrep/Makefile.am(vgrep): Replace 'check' by 'noinst'.
 	* src/demos/samples/Makefile.am: New.
 	* src/demos/samples/algebra/Makefile.am: New.
