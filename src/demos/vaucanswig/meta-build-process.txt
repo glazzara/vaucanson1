@@ -19,7 +19,7 @@ as follows:
     (detailed below, gives "alg_sum", "alg_complete", ...)
 
  3) create an auxiliary list KINDS of algebra contexts
-    (contains "usual", "numerical", "tropical", ...)
+    (contains "boolean", "z", "z_max_plus", ...)
 
  4) extend ALGS with "context", "algorithms" and "automaton".
 

@@ -1,3 +1,14 @@
+2004-07-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/vaucanswig/meta/vaucanswig_context.i,
+	* src/demos/vaucanswig/meta/vaucanswig_automaton.i,
+	* src/demos/vaucanswig/meta/vaucanswig_algo_common.i,
+	* src/demos/vaucanswig/expand.sh,
+	* src/demos/vaucanswig/meta/context.hh: Use contextual headers
+	instead of usual.hh in Vaucanswig.
+	* src/demos/vaucanswig/meta-build-process.txt: Update the 
+	documentation.
+
 2004-07-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/contract.hh: Add a missing macro to define

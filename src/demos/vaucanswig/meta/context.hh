@@ -120,7 +120,7 @@ protected:
 #define MAKE_AUTO_TYPES(FAMILY)					\
 namespace FAMILY ##_types					\
 {								\
-  typedef vcsn::tools::FAMILY ##_automaton_t automaton_t;	\
+  typedef vcsn::FAMILY::automaton_t automaton_t;	\
   AUTOMATON_TYPES_EXACT_(automaton_t, FAMILY ##_)		\
 }
 
