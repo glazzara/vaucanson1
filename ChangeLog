@@ -1,5 +1,11 @@
 2004-07-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/demos/fibonacci/generalized.cc: Rename as...
+	* src/demos/fibonacci/one_rewriting_rule.cc: ...This.
+	* src/demos/fibonacci/Makefile.am: Update.
+
+2004-07-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* xml/gendtd.sh: <edge> and <edges> tag are now <transition> and
 	<transitions>.
 	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/session.hxx,
