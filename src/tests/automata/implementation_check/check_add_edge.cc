@@ -1,5 +1,6 @@
 // check_add_edge.cc
 //
+// $Id$
 // VCSN_HEADER
 
 #include <vaucanson/fundamental/fundamental.hh>

@@ -31,6 +31,13 @@ namespace tests {
 #define TEST_MSG(Label) \
   std::cerr << "TEST: " << Label << std::endl;
 
+#define TEST_RETURN(Tester) \
+  if (Tester.all_passed())			\
+    return EXIT_SUCCESS;			\
+  else						\
+    return EXIT_FAILURE;
+
+
 #define TEST(Tester, Label, Code) \
 {						\
   bool result = (Code);				\

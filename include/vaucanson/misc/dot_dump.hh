@@ -1,9 +1,7 @@
-/********************************
- * <vaucanson/misc/dot_dump.hh> *
- ********************************/
+// dot_dump.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef MISC_DOT_DUMP_HH
 # define MISC_DOT_DUMP_HH
 

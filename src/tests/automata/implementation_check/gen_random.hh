@@ -1,5 +1,6 @@
 // gen_random.hh
 // 
+// $Id$
 // VCSN_HEADER
 
 #ifndef GEN_RANDOM_HH

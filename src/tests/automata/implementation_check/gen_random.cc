@@ -1,5 +1,6 @@
 // gen_random.cc
 //
+// $Id$
 // VCSN_HEADER
 
 #include <vaucanson/fundamental/fundamental.hh>

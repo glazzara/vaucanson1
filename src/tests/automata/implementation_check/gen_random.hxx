@@ -58,7 +58,7 @@ namespace vcsn
     if (istate > nb_state) istate = nb_state;
     if (istate <= 0) istate = 1;
     
-    // file for output format (graphwiz)
+    // file for output format (graphviz)
     std::filebuf fb;
     fb.open ("automaton.dot", std::ios::out);
     std::ostream os(&fb);

@@ -51,7 +51,7 @@ int main(int argc, char **argv)
   automaton.del_state(s2);
   automaton.del_state(s3);
 
-  // call our function for make consistance on your automata
+  // call our function to check consistency of the automaton.
 
   bool final = true;
   for (usual_automaton_t::edge_iterator i = automaton.edges().begin(); 
@@ -66,11 +66,10 @@ int main(int argc, char **argv)
 	   j++)
 	if (*j == tmp)
 	  res = true;
-      TEST(t, "Label passed", res);
       final = final && res;
     }
 
-  TEST(t, "All Labels are passed !", final);
+  TEST(t, "All edges are well defined.", final);
   
-  return 0;
+  TEST_RETURN(t);
 }

@@ -1,5 +1,18 @@
 2002-07-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* src/tests/check/tests_stuff.hh : add TEST_RETURN macro.
+
+	* src/tests/automata/implementation_check/check_add_state.cc : minor.
+	* src/tests/automata/implementation_check/check_add_edge.cc : minor.
+	* include/vaucanson/misc/dot_dump.hh : minor.
+	* src/tests/automata/implementation_check/check_global_consistance.cc :
+		minor.
+	* src/tests/automata/implementation_check/gen_random.hh : minor.
+	* src/tests/automata/implementation_check/gen_random.hxx : minor.
+	* src/tests/automata/implementation_check/gen_random.cc : minor.
+
+2002-07-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh : minor.
 	* include/vaucanson/algebra/concrete/alphabets/alphabets.hh : minor.
 	* include/vaucanson/algebra/concept/alphabets_base.hh : minor.
