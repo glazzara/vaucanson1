@@ -1,5 +1,25 @@
 2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* configure.ac (doc/beginner): New Makefile.
+	* src/tests/sanity/generate_files.sh: Minor fix.
+	* doc/Makefile.am (beginner): New subdir.
+	* include/Makefile.am: Distribute new files.
+	* include/vaucanson/tools/usual_io.hxx: Fix typo.
+	* include/vaucanson/vaucanson_z_max_plus.hxx: New.
+	* include/vaucanson/vaucanson_z_max_plus_automaton.hxx: Likewise.
+	* include/vaucanson/vaucanson_z_max_plus_automaton.hh: Likewise.
+	* include/vaucanson/vaucanson_z_automaton.hxx: Likewise.
+	* include/vaucanson/vaucanson_z_automaton.hh: Likewise.
+	* include/vaucanson/vaucanson_r_automaton.hxx: Likewise.
+	* include/vaucanson/vaucanson_r_automaton.hh: Likewise.
+	* include/vaucanson/standard_algorithms.hh: Likewise.
+	* doc/beginner/help.tex: Likewise.
+	* doc/beginner/Makefile.am: Likewise.
+	* doc/beginner/macros.tex: Likewise.
+	* doc/beginner/packages.tex: Likewise.
+
+2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/series_base.hxx
 	 include/vaucanson/algebra/concrete/series/krat_exp_support.hxx
 	 include/vaucanson/automata/concept/automata_base.hh

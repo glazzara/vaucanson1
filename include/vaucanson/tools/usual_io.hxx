@@ -56,7 +56,7 @@ namespace vcsn
     {
       ExpType e = ExpType(a.set().series());
       algebra::parse(str, e);
-      typename Auto::series_elt_t s = typename Auto::serie_t(a.set().series());
+      typename Auto::series_elt_t s = typename Auto::series_elt_t(a.set().series());
       finite_support_convert(s, e);
       return s;
     }

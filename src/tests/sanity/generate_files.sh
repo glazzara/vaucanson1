@@ -5,7 +5,7 @@
 cd "$1"
 
 # Compute files to test.
-(cd ../../../include && find vaucanson -name \*.hh) | \
+(cd ../../../include && find vaucanson -type f -name \*.hh) | \
   grep -v '/old/\|/obsolete/' > files.tmp
 
 # Set check_PROGRAMS.

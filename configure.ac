@@ -111,6 +111,7 @@ AC_CONFIG_FILES([
 	src/demos/samples/algorithms/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
+	doc/beginner/Makefile
         doc/doc.doxy
 	include/Makefile])
 

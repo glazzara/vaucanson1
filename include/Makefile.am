@@ -5,8 +5,16 @@
 EXTRA_DIST = vaucanson/config/pconf-hh.in
 
 nobase_include_HEADERS =					     \
+	vaucanson/vaucanson.hh \
 	vaucanson/vaucanson_boolean_automaton.hh			   \
 	vaucanson/vaucanson_boolean_automaton.hxx			   \
+	vaucanson/vaucanson_z_automaton.hh			   \
+	vaucanson/vaucanson_z_automaton.hxx			   \
+	vaucanson/vaucanson_r_automaton.hh			   \
+	vaucanson/vaucanson_r_automaton.hxx			   \
+	vaucanson/vaucanson_z_max_plus_automaton.hh			   \
+	vaucanson/vaucanson_z_max_plus_automaton.hxx			   \
+	vaucanson/standard_algorithms.hh \
 	vaucanson/algebra/concept/alphabets_base.hh		       \
 	vaucanson/algebra/concept/alphabets_base.hxx		       \
 	vaucanson/algebra/concept/freemonoid_base.hh		       \
@@ -131,6 +139,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/krat_exp_linearize.hxx		     \
 	vaucanson/algorithms/krat_exp_partial_derivation.hh	     \
 	vaucanson/algorithms/krat_exp_partial_derivation.hxx	     \
+	vaucanson/algorithms/krat_exp_print.hh	     \
+	vaucanson/algorithms/krat_exp_print.hxx	     \
 	vaucanson/algorithms/krat_exp_realtime.hh		     \
 	vaucanson/algorithms/krat_exp_realtime.hxx		     \
 	vaucanson/algorithms/minimization_moore.hh		     \

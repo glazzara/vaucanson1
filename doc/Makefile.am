@@ -2,7 +2,7 @@
 #
 # $Id$
 
-SUBDIRS = tutorial
+SUBDIRS = tutorial beginner
 
 docdir = $(datadir)/doc/@PACKAGE_TARNAME@
 dist_doc_DATA = ref.tar.gz
