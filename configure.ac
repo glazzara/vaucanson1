@@ -111,7 +111,7 @@ AC_CONFIG_FILES([
 	src/tests/automata/implementation_check/Makefile
 	src/tests/context_headers/Makefile
 	src/tests/context_headers/automata/Makefile
-	src/tests/tests-suites/Makefile
+	src/tests/test-suites/Makefile
 	src/tests/xml/Makefile
 	src/demos/Makefile
 	src/demos/vgrep/Makefile

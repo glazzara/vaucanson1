@@ -8,7 +8,7 @@ SUBDIRS =					\
 	sanity					\
 	misc					\
 	design_pattern				\
-	tests-suites				\
+	test-suites				\
 	algebra					\
 	automata				\
 	xml					\

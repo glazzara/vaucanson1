@@ -1,5 +1,10 @@
 2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* update_config_ac.sh, bootstrap.sh, src/tests/Makefile.am,
+	* configure.ac, config/vcsn.m4: s/tests-suites/test-suites.
+
+2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/tests-suites/context_headers_r.defs,
 	* src/tests/tests-suites/algebra_series_polynom_double_string.defs,
 	* src/tests/tests-suites/algebra_alphabet_set_char.defs,

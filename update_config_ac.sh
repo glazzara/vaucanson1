@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tests=`ls -d src/tests/tests-suites/*/ | \
+tests=`ls -d src/tests/test-suites/*/ | \
        sed 's,.*/\(.*\)/$,VCSN_TESTS([\1])\\\\,'`
 
 mv configure.ac configure.ac.bak
