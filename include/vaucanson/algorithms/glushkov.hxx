@@ -2,8 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
-// Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -47,6 +47,7 @@ namespace vcsn {
   {
   public :
     typedef Auto_					automaton_t;
+    typedef typename automaton_t::set_t			automata_set_t;
     typedef Auto_*					automaton_ptr_t;
     typedef typename automaton_t::series_t		series_t; 
     typedef typename automaton_t::series_elt_t		series_elt_t;
@@ -71,7 +72,7 @@ namespace vcsn {
   public :
 
     GlushkovVisitor(const series_t& series) :
-      series_(series)
+      automata_set_(series)
     {}
 
     MATCH__(Product, lhs, rhs)
@@ -128,9 +129,7 @@ namespace vcsn {
 
     MATCH_(Constant, m)
     {
-      automaton_ptr_t auto_ = new automaton_t();
-      auto_->create();
-      auto_->series() = series_;
+      automaton_ptr_t auto_ = new automaton_t(automata_set_);
       hstate_t new_i = auto_->add_state();
       hstate_t last = new_i;
       hstate_t new_f;
@@ -149,18 +148,14 @@ namespace vcsn {
 
     MATCH(Zero)
     {
-      automaton_ptr_t auto_ = new automaton_t();
-      auto_->create();
-      auto_->series() = series_;
+      automaton_ptr_t auto_ = new automaton_t(automata_set_);
       return auto_;
     }
     END
 
     MATCH(One)
     {
-      automaton_ptr_t auto_ = new automaton_t();
-      auto_->create();
-      auto_->series() = series_;
+      automaton_ptr_t auto_ = new automaton_t(automata_set_);
       hstate_t new_i = auto_->add_state();
       auto_->set_initial(new_i);
       auto_->set_final(new_i);
@@ -169,18 +164,19 @@ namespace vcsn {
     END
 
   private:
-    series_t series_;
+    automata_set_t automata_set_;
   };
 
   template <typename A, 
 	    typename Output,
 	    typename Exp>
   void
-  do_glushkov(const AutomataBase<A>&, 
+  do_glushkov(const AutomataBase<A>& a_set, 
 	      Output& output, 
 	      const Exp& kexp)
   {
-    GlushkovVisitor<Exp, Output, DispatchFunction<Exp> > m(output.series()); 
+    GlushkovVisitor<Exp, Output, DispatchFunction<Exp> > 
+      m(output.set().series()); 
     output = *m.match(kexp);
   }
 

@@ -2,7 +2,8 @@
 // 
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -43,6 +44,7 @@ namespace vcsn {
   {
   public :
     typedef Auto_						automaton_t;
+    typedef typename automaton_t::set_t				automata_set_t;
     typedef typename automaton_t::series_t			series_t; 
     typedef typename automaton_t::series_elt_t			series_elt_t;
     typedef typename series_elt_t::weight_t			weight_t;
@@ -112,9 +114,7 @@ namespace vcsn {
     virtual void 
     constant(const monoid_value_t& m)
     {
-      auto_ = new automaton_t();
-      auto_->create();
-      auto_->series() = series_;
+      auto_ = new automaton_t(automata_set_t(series_));
       hstate_t new_i = auto_->add_state();
       hstate_t last = new_i;
       hstate_t new_f;
@@ -132,17 +132,13 @@ namespace vcsn {
     virtual void 
     zero()
     {
-      auto_ = new automaton_t();
-      auto_->create();
-      auto_->series() = series_;
+      auto_ = new automaton_t(automata_set_t(series_));
     }
 
     virtual void 
     one()
     {
-      auto_ = new automaton_t();
-      auto_->create();
-      auto_->series() = series_;
+      auto_ = new automaton_t(automata_set_t(series_));
       hstate_t new_i = auto_->add_state();
       hstate_t new_f = auto_->add_state();
       auto_->set_initial(new_i);
@@ -167,7 +163,7 @@ namespace vcsn {
 	      auto_t& output, 
 	      const rat::exp<Letter, Weight>& kexp)
   {
-    ThompsonVisitor<auto_t, Letter, Weight>	visitor(output.series());
+    ThompsonVisitor<auto_t, Letter, Weight> visitor(output.set().series());
    
     // FIXME : 
     // Static assert : Letter = monoid_elt_value_t, 

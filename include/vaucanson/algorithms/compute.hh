@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,8 +33,7 @@ namespace vcsn {
   /*! compute(a, w) returns a serie that is the image of the word 'w'
     in the automaton. This version of computation is the most general
     one : it works on every types of automaton, deterministic or not. 
-    Yet, the automaton must be realtime since epsilon transition could
-    imply non termination.
+    Yet, the automaton must be realtime.
   */
 
   template<typename A, typename T, typename W>

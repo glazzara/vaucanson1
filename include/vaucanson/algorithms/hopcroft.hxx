@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -18,9 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGO_HOPCROFT_MINIMIZE_HXX
-# define ALGO_HOPCROFT_MINIMIZE_HXX
+#ifndef VCSN_ALGORITHMS_HOPCROFT_MINIMIZE_HXX
+# define VCSN_ALGORITHMS_HOPCROFT_MINIMIZE_HXX
 
 # include <map>
 # include <set>
@@ -55,17 +55,17 @@ namespace vcsn {
     
     typedef std::set<hstate_t>			delta_ret_t;
 
-    unsigned			max_states = 0;
+    int			max_states = 0;
     for (typename input_t::state_iterator i = input.states().begin();
 	 i != input.states().end();
 	 ++i)
-      max_states = std::max(*i, max_states);
+      max_states = std::max(int(*i), max_states);
     ++max_states;
 
     // to avoid special case problem (one state initial and final ...)
-    max_states = std::max(max_states, 2u);
+    max_states = std::max(max_states, 2);
 
-    const alphabet_t&	   alphabet_(input.series().monoid().alphabet());
+    const alphabet_t&	   alphabet_(input.set().series().monoid().alphabet());
 
     std::vector<letter_t>	alphabet(alphabet_.begin(), 
 					 alphabet_.end());
@@ -96,13 +96,13 @@ namespace vcsn {
     std::list<pair_t>   list;
     bool		**list_mat = new bool*[max_states];
 
-    for (unsigned p = 0; p < max_states; ++p)
+    for (int p = 0; p < max_states; ++p)
       list_mat[p] = new bool[max_letters];
 
     /*-------------------------.
     | Initialize the partition |
     `-------------------------*/
-    unsigned nb_final = 0;
+    int nb_final = 0;
 
     for (typename input_t::state_iterator p = input.states().begin(); 
 	 p != input.states().end(); ++p)
@@ -116,7 +116,7 @@ namespace vcsn {
     /*------------------------------.
     | Initialize the list of (P, a) |
     `------------------------------*/
-    unsigned source_subset =  (nb_final < max_states / 2) ? 1 : 0;
+    int source_subset =  (nb_final < max_states / 2) ? 1 : 0;
 
     for (unsigned e = 0; e < max_letters; ++e)
       {
@@ -131,7 +131,7 @@ namespace vcsn {
     `-------------------*/
     typedef std::set<hstate_t>**	mat_element_t;
     std::set<hstate_t>	***inverse = new mat_element_t[max_states];
-    for (unsigned i = 0; i < max_states; ++i)
+    for (int i = 0; i < max_states; ++i)
       {
 	inverse[i] = new std::set<hstate_t>*[max_letters];
 	for (unsigned j = 0; j < max_letters; ++j)
@@ -178,7 +178,8 @@ namespace vcsn {
 	for (typename std::list<hstate_t>::iterator b = part[p].begin();
 	     b != part[p].end(); ++b)
 	  if (inverse[*b][a] != 0)
-	    for (typename std::set<hstate_t>::iterator q = inverse[*b][a]->begin();
+	    for (typename std::set<hstate_t>::iterator q = 
+		   inverse[*b][a]->begin();
 		 q != inverse[*b][a]->end();
 		 ++q)
 	      {
@@ -345,9 +346,7 @@ namespace vcsn {
   Element<A, T>
   hopcroft_minimization_det(const Element<A, T>& a)
   {
-    Element<A, T> output;
-    output.create();
-    output.series() = a.series();
+    Element<A, T> output(a.set());
     do_hopcroft_minimization_det(a.set(), output, a);
     return trim(output);
   }

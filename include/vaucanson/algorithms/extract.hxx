@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,6 +27,7 @@
 # include <vaucanson/algorithms/extract.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
@@ -34,22 +36,22 @@ namespace vcsn {
   `----------------------------------------*/
  
   template<typename A, typename auto_t, typename list_t>
-  void auto_do_extract(const AutomataBase<A>&, 
+  void auto_do_extract(const AutomataBase<A>& a_set, 
 		       auto_t& a,
 		       const list_t& selected, 
-		       bool /* FIXME: useless argument */)
+		       bool check_states)
   {
-    std::deque<hstate_t> to_be_removed;
+    std::list<hstate_t> to_be_removed;
     for (typename auto_t::state_iterator i = a.states().begin();
 	 i != a.states().end(); ++i)
-      if (selected.find(*i) == selected.end())
-	to_be_removed.push_back(*i);
-
-    while (!to_be_removed.empty())
       {
-	a.del_state(to_be_removed.front());
-	to_be_removed.pop_front();
+	if (std::find(selected.begin(), selected.end(), *i) 
+	    == selected.end())
+	  to_be_removed.push_back(*i);
       }
+
+    for_each_const_(std::list<hstate_t>, i, to_be_removed)
+      a.del_state(*i);
   }
 
 
@@ -59,7 +61,6 @@ namespace vcsn {
   auto_extract(const Element<A, T>& a, const StatesSet& s, bool check_states)
   { 
     Element<A, T> ret(a);
-    ret.emancipate();
     auto_do_extract(ret.set(), ret, s, check_states);
     return ret;
   }

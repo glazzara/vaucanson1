@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -71,7 +72,6 @@ namespace vcsn {
   auto_concat(const Element<A, T>& lhs, const Element<A, T>& rhs)
   {
     Element<A, T> ret(lhs);
-    ret.emancipate();
     do_auto_in_concat(ret.set(), ret, rhs);
     return ret;
   }

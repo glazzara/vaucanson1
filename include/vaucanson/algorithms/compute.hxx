@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+//  and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -52,12 +53,12 @@ namespace vcsn {
     for (typename auto_t::state_iterator i = a.states().begin();
 	 i != a.states().end();
 	 ++i)
-      max_hstate_t = std::max(*i, unsigned(max_hstate_t));
+      max_hstate_t = std::max(*i, max_hstate_t);
 
     std::vector<weight_t>		v1(max_hstate_t + 1);
     std::vector<weight_t>		v2(max_hstate_t + 1);
     std::list<hedge_t>			delta_ret;
-    const typename weight_t::set_t	&semiring = a.series().weights();
+    const typename weight_t::set_t	&semiring = a.set().series().weights();
     weight_t zero = semiring.zero(SELECT(typename weight_t::value_t));
     typename auto_t::monoid_elt_t empty;
 

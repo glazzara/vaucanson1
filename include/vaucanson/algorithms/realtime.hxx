@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -40,14 +41,14 @@ namespace vcsn {
   //
   template <class A_, typename Auto_>
   bool
-  do_is_realtime(const AutomataBase<A_>&,
+  do_is_realtime(const AutomataBase<A_>& a_set,
 		 const Auto_&		   a)
   {
     for (typename Auto_::edge_iterator e = a.edges().begin();
 	 e != a.edges().end();
 	 ++e)
       if (a.serie_of(*e) == 
-	  a.series().identity(SELECT(typename Auto_::series_value_t)))
+	  a.set().series().identity(SELECT(typename Auto_::serie_value_t)))
 	return false;
     return true;
   }
@@ -64,27 +65,22 @@ namespace vcsn {
   `------------*/
   template <class A_, typename Auto_>
   void
-  do_in_realtime(const AutomataBase<A_>&,
+  do_in_realtime(const AutomataBase<A_>& a_set,
 		 Auto_&			 a)
   {
     typedef Auto_				automaton_t;
-    typedef typename automaton_t::series_t      series_t;
-    typedef typename automaton_t::series_elt_t  series_elt_t;
-    typedef typename series_elt_t::weight_t	weight_t;
-    typedef typename series_t::weights_t	weights_t;
-    typedef typename series_elt_t::monoid_elt_t	monoid_elt_t;
-    typedef typename series_t::monoid_t		monoid_t;
+    AUTOMATON_TYPES(automaton_t);
     typedef std::set<hedge_t>		    	delta_ret_t;
     typedef std::deque<hedge_t>	     		queue_t;
 
     queue_t		  to_del, origin_d;
     delta_ret_t		  aim_d;
-    monoid_elt_t	  monoid_identity 
-      = a.series().monoid().identity(SELECT(typename monoid_elt_t::value_t));
-    weight_t		  semiring_zero
-      = a.series().weights().zero(SELECT(typename weight_t::value_t));
-    series_elt_t          series_identity 
-      = a.series().identity(SELECT(typename series_elt_t::value_t));
+    monoid_elt_t	  monoid_identity =
+      identity_as<monoid_elt_value_t>::of(a.set().series().monoid());
+    weight_t		  semiring_zero =
+      zero_as<weight_value_t>::of(a.set().series().weights());
+    series_elt_t          series_identity =
+      identity_as<serie_value_t>::of(a.set().series());
 
     in_closure(a);
 
@@ -163,7 +159,6 @@ namespace vcsn {
   realtime(const Element<A, T>& a)
   {
     Element<A, T> ret(a);
-    ret.emancipate();
     do_in_realtime(ret.set(), ret);
     return ret;
   }

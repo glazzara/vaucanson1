@@ -1,5 +1,50 @@
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/closure.hh,
+	  include/vaucanson/algorithms/closure.hxx,
+	  include/vaucanson/algorithms/complementary.hh,
+	  include/vaucanson/algorithms/complementary.hxx,
+	  include/vaucanson/algorithms/complete.hh,
+	  include/vaucanson/algorithms/complete.hxx,
+	  include/vaucanson/algorithms/compute.hh,
+	  include/vaucanson/algorithms/compute.hxx,
+	  include/vaucanson/algorithms/concat.hh,
+	  include/vaucanson/algorithms/concat.hxx
+	  include/vaucanson/algorithms/determinize.hh
+          include/vaucanson/algorithms/determinize.hxx
+	  include/vaucanson/algorithms/elimination.hh
+	  include/vaucanson/algorithms/elimination.hxx
+	  include/vaucanson/algorithms/extract.hh
+	  include/vaucanson/algorithms/extract.hxx
+	  include/vaucanson/algorithms/glushkov.hh
+	  include/vaucanson/algorithms/glushkov.hxx
+	  include/vaucanson/algorithms/hopcroft.hh
+	  include/vaucanson/algorithms/hopcroft.hxx
+	  include/vaucanson/algorithms/isomorph.hh
+	  include/vaucanson/algorithms/moore.hh
+	  include/vaucanson/algorithms/moore.hxx
+	  include/vaucanson/algorithms/normalized.hh
+	  include/vaucanson/algorithms/normalized.hxx
+	  include/vaucanson/algorithms/product.hh
+	  include/vaucanson/algorithms/product.hxx
+	  include/vaucanson/algorithms/reachable.hh
+	  include/vaucanson/algorithms/reachable.hxx
+	  include/vaucanson/algorithms/realtime.hh
+	  include/vaucanson/algorithms/realtime.hxx
+	  include/vaucanson/algorithms/standard.hh
+	  include/vaucanson/algorithms/standard.hxx
+	  include/vaucanson/algorithms/thompson.hh
+	  include/vaucanson/algorithms/thompson.hxx
+	  include/vaucanson/algorithms/transpose.hh
+	  include/vaucanson/algorithms/transpose.hxx
+	  include/vaucanson/algorithms/trim.hh
+	  include/vaucanson/algorithms/trim.hxx
+	  include/vaucanson/algorithms/union.hh
+	  include/vaucanson/algorithms/union.hxx:
+		Adjust to new automaton services.
+
+2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/Makefile.am: Adjust.
 	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
 		(WordValue): New.

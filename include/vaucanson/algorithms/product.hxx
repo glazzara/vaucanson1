@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -61,7 +62,7 @@ namespace vcsn {
     visited_t					visited;
     std::queue<pair_hstate_t>			to_process;
     series_elt_t				series_zero
-      = output.series().zero(SELECT(typename series_elt_t::value_t));
+      = output.set().series().zero(SELECT(typename series_elt_t::value_t));
 
     // FIXME : log history : it should be optional
     // output.history().set_auto_event_about(PRODUCT_EVENT, lhs, rhs);
@@ -173,8 +174,6 @@ namespace vcsn {
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(rhs.set());
-    ret.create();
-    ret.series() = lhs.series();
     auto_do_product(ret.set(), ret, lhs, rhs);
     return ret;
   }

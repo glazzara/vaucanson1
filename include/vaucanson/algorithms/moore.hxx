@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -53,7 +54,7 @@ namespace vcsn {
     typedef typename series_t::monoid_t			monoid_t;
     typedef typename input_t::series_elt_t		series_elt_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
-    typedef typename input_t::series_value_t		series_value_t;
+    typedef typename input_t::serie_value_t		serie_value_t;
     typedef typename series_elt_t::weight_t		weight_t;
     // FIXME : here we assume monoid is a free monoid -> concept checking ?
     typedef typename monoid_t::alphabet_t		alphabet_t;
@@ -62,7 +63,7 @@ namespace vcsn {
     typedef std::set<hedge_t>				delta_ret_t;
     typedef std::set<hstate_t>				subset_t;
     typedef std::map<letter_t, std::pair<weight_t, unsigned> >		map_t;
-    typedef std::map<series_value_t, unsigned>		final_map_t;
+    typedef std::map<serie_value_t, unsigned>		final_map_t;
     typedef std::list<hstate_t>				hstate_list_t;
     typedef std::vector<hstate_list_t>  	       	partitions_t;;
     typedef std::pair<unsigned, hstate_list_t::iterator> class_pair_t;
@@ -72,7 +73,7 @@ namespace vcsn {
     typedef std::map<letter_t, current_succ_t>		letter_succ_t;
     typedef std::map<unsigned, hstate_t>		conv_map_t;
 
-    const alphabet_t	&alphabet = input.series().monoid().alphabet();
+    const alphabet_t	&alphabet = input.set().series().monoid().alphabet();
     unsigned		max_partitions = 0;
     class_t		classes(input.states().size());
     current_succ_t	csucc(input.states().size());
@@ -242,9 +243,7 @@ namespace vcsn {
   Element<A, T>
   moore_minimization(const Element<A, T>& a)
   {
-    Element<A, T> output;
-    output.create();
-    output.series() = a.series();
+    Element<A, T> output(a.set());
     do_moore_minimization(a.set(), output, a);
     return trim(output);
   }

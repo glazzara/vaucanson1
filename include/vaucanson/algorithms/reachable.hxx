@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,7 +31,7 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/extract.hh>
-# include <vaucanson/automata/concept/transpose_impl.hh>
+# include <vaucanson/automata/concrete/transpose_view.hh>
 
 namespace vcsn {
 
@@ -42,7 +43,7 @@ namespace vcsn {
   //
   template <class A_, typename Auto_>
   std::set<hstate_t>
-  do_start_reachable_states(const AutomataBase<A_>&,
+  do_start_reachable_states(const AutomataBase<A_>& a_set,
 			    const Auto_&		   a)
   {
     typedef Auto_				automaton_t;

@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+//  and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -18,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGO_DETERMINIZE_HXX
-# define ALGO_DETERMINIZE_HXX
+#ifndef VCSN_ALGORITHMS_DETERMINIZE_HXX
+# define VCSN_ALGORITHMS_DETERMINIZE_HXX
 
 # include <map>
 # include <set>
@@ -54,7 +55,6 @@ namespace vcsn {
     typedef typename std::map<subset_t, hstate_t>           subset_set_t;
     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
    
-    // FIXME : here we assume monoid is a free monoid -> concept checking ?
     typedef typename monoid_t::alphabet_t		    alphabet_t;
     typedef typename alphabet_t::letter_t		    letter_t;
 
@@ -63,7 +63,7 @@ namespace vcsn {
     hstate_t		   qi_hstate = output.add_state();
     subset_t		   qi;
     subset_set_t	   subset_set; 
-    const alphabet_t&	   alphabet(input.series().monoid().alphabet());
+    const alphabet_t&	   alphabet(input.set().series().monoid().alphabet());
     subset_t		   q;
     subset_t		   s;
     delta_ret_t		   aim;
@@ -130,8 +130,8 @@ namespace vcsn {
 
 	      // Log history ?
 
-	      if (is_final)   
-		output.set_final(current->second);
+ 	      if (is_final)   
+ 		output.set_final(current->second);
 	      path.push(q);
 	    }
 	  output.add_letter_edge(s_hstate, (*current).second, *e);
@@ -143,10 +143,7 @@ namespace vcsn {
   Element<A, T>
   subset_construction(const Element<A, T>& a)
   {
-    Element<A, T>    ret;
-
-    ret.create();
-    ret.series() = a.series();
+    Element<A, T>    ret(a.set());
     do_subset_construction(ret.set(), ret, a);
     return ret;
   }
@@ -171,10 +168,7 @@ namespace vcsn {
   Element<A, T>
   determinize(const Element<A, T>& a)
   {
-    Element<A, T>    ret;
-
-    ret.create();
-    ret.series() = a.series();
+    Element<A, T>    ret(a.set());
     do_determinize(ret.set(), ret, a);
     return ret;
   }
@@ -191,14 +185,16 @@ namespace vcsn {
   {
     typedef typename std::set<hedge_t>		delta_ret_t;	
     typedef typename input_t::series_t		series_t;
-    typedef typename input_t::series_value_t	series_value_t;
+    typedef typename input_t::serie_t		serie_t;
+    typedef typename input_t::serie_value_t	serie_value_t;
     typedef typename series_t::weights_t	weights_t;
     typedef typename input_t::series_elt_t     	series_elt_t;
     typedef typename series_elt_t::weight_t	weight_t;
 
     delta_ret_t	delta_ret;
     weight_t		  zero_semiring
-      = input.series().weights().zero(SELECT(typename weight_t::value_t));
+      = input.set().series().weights()
+      .zero(SELECT(typename weight_t::value_t));
 
     // Empty automaton is not deterministic
     if (input.states().size() == 0)
@@ -223,8 +219,8 @@ namespace vcsn {
 	    ++k;
 	    for (; k != delta_ret.end(); ++k)
 	      {
-		series_elt_t s_ = input.serie_of(*k);
-		for (typename series_value_t::iterator supp = s.supp().begin();
+		serie_t s_ = input.serie_of(*k);
+		for (typename serie_value_t::iterator supp = s.supp().begin();
 		     supp != s.supp().end();
 		     ++supp)
 		  if (s_.get(supp->first) != zero_semiring)

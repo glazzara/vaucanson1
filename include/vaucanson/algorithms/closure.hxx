@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,7 +40,7 @@ namespace vcsn {
   `-----------*/
   template <class A_, typename Auto_>
   void
-  do_in_closure(const AutomataBase<A_>&,
+  do_in_closure(const AutomataBase<A_>& a_set,
 		Auto_&			   a)
   {
     AUTOMATON_TYPES(Auto_);
@@ -51,8 +52,8 @@ namespace vcsn {
     sdelta_ret_t	  known_succ;
     edelta_ret_t	  new_succ, succ, aim;
     queue_t		  queue;
-    monoid_elt_t	  monoid_identity = a.series().monoid().empty_;
-    weight_t		  weight_zero = a.series().weights().wzero_;
+    monoid_elt_t	  monoid_identity = a.set().series().monoid().empty_;
+    weight_t		  weight_zero = a.set().series().weights().wzero_;
 
     for_each_state(i, a)
       {
@@ -112,7 +113,6 @@ namespace vcsn {
   {
     Element<A, T> ret(a);
 
-    ret.emancipate();
     do_in_closure(ret.set(), ret);
     return ret;
   }

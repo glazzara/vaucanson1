@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -37,7 +38,7 @@ namespace vcsn {
   `------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void auto_do_union(const AutomataBase<A>&,
+  void auto_do_union(const AutomataBase<A>& ,
 		     lhs_t& lhs,
 		     const rhs_t& rhs)
   {
@@ -99,7 +100,6 @@ namespace vcsn {
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
-    ret.emancipate();
     //    ret.history().set_auto_event_about(INUNION_EVENT, lhs, rhs);
     auto_do_union(ret.set(), ret, rhs);
     return ret;

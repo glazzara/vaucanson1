@@ -2,7 +2,8 @@
 // 
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -38,13 +39,11 @@ namespace vcsn {
     for_each_state(i, work)
       {
 	std::set<hstate_t> aim;
-	alphabet_t& alpha = work.series().monoid().alphabet();
-	for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
+	for_each_letter(j, work.set().series().monoid().alphabet())
 	  {
 	    aim.clear();
 	    work.letter_deltac(aim, *i, *j, delta_kind::states());
-	  
-	    if (!aim.size())
+	    if (aim.size() == 0)
 	      work.add_letter_edge(*i, puits, *j);
 	  }
       }
@@ -55,7 +54,6 @@ namespace vcsn {
   auto_complete(const Element<A, T>& e)
   {
     Element<A, T> res(e);
-    res.emancipate();
     auto_in_complete(res);
     return res;
   }
@@ -70,13 +68,13 @@ namespace vcsn {
     for_each_state(i, e)
       {
 	std::set<hstate_t> aim;
-	const alphabet_t& alpha = e.series().monoid().alphabet();
-	for (alphabet_iterator j = alpha.begin(); j != alpha.end(); j++)
+	const alphabet_t& alpha = e.set().series().monoid().alphabet();
+	for_each_letter(j, alpha)
 	  {
 	    aim.clear();
 	    e.letter_deltac(aim, *i, *j, delta_kind::states());
 	  
-	    if (!aim.size())
+	    if (aim.size() == 0)
 	      return false;
 	  }
       }
