@@ -1,3 +1,8 @@
+2005-02-16  Raphael Poss  <raph@lrde.epita.fr>
+
+	* reheader.pl: Do not add copyright information for another year
+	than the current year.
+
 2005-02-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* config/xml.m4: Rename to...

@@ -86,7 +86,6 @@ while (<FILE>)
     if (/Copyright \(C\) (.*) The Vaucanson Group\./)
     {
 	$copyright = $1;
-	$copyright .= ", 2004" unless /2004/;
 	$copyright .= ", 2005" unless /2005/;
 	$copyright =~ s/,([^ ])/, $1/g;
 	if ($default_copyright)
