@@ -143,7 +143,8 @@ namespace vcsn {
 
     bool is_final(const etiq_t& e) const
     {
-      return constant_term(linear_exp_continuation(linear_exp, e)).first;
+      return constant_term(linear_exp_continuation(linear_exp, e)).first
+	!= linear_exp.set().weights().zero(SELECT(weight_value_t));
     }
 
     // Delta function

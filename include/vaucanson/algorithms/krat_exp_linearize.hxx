@@ -146,7 +146,7 @@ namespace vcsn {
   {
     KRatExpLinearize<Series, T, algebra::DispatchFunction<T> >
       matcher(exp);
-    return matcher.match(exp);
+    return matcher.match(exp.value());
   }
 
 } // vcsn
