@@ -119,7 +119,7 @@ namespace vcsn {
     AUTOMATON_TYPES_(Auto_t, a_);
     typedef typename Trans_t::serie_t                t_output_serie_t;
     typedef typename Auto_t::serie_t::support_t      a_support_t;
-    typedef typename Trans_t::weight_t		     t_weight_t;
+    typedef typename Trans_t::semiring_elt_t	     t_weight_t;
 
     Trans_t                   tt(t.set());
     map<hstate_t, hstate_t>   conv;
@@ -144,7 +144,7 @@ namespace vcsn {
 	for(typename a_support_t::const_iterator m = supp.begin(); 
 	    m != supp.end(); ++m)
 	  {
-	    t_weight_t tmp(t.set().series().weights());
+	    t_weight_t tmp(t.set().series().semiring());
 	    tmp.assoc(a_neutre, s.get(*m));
 	    os.assoc(*m, tmp);
 	  }

@@ -326,6 +326,43 @@ namespace vcsn {
     ret;
   };
 
+  template <class Kind,
+	    class WordValue,
+	    class WeightValue,
+	    class SerieValue,
+	    class Letter,
+	    class Tag>
+  struct output_projection_traits<Graph<Kind,
+					   WordValue,
+					   WeightValue,
+					   SerieValue,
+					   Letter,
+					   Tag>  >
+  {
+    typedef Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
+    self_t;
+
+    typedef typename automaton_traits<self_t>::semiring_elt_value_t
+    series_elt_value_t;
+
+    typedef typename 
+    algebra::series_traits<series_elt_value_t>::monoid_value_t
+    monoid_value_t;
+
+    typedef typename 
+    algebra::series_traits<series_elt_value_t>::semiring_elt_value_t
+    semiring_elt_value_t;
+
+    typedef
+    Graph<Kind,
+	  monoid_value_t,
+	  semiring_elt_value_t,
+	  series_elt_value_t,
+	  Letter,
+	  Tag>
+    ret;
+  };
+
   // Explain how to extend an input automaton into a transducer.
   template <class Kind,
 	    class WordValue,

@@ -59,6 +59,11 @@ namespace vcsn {
   Element<A, T>
   determinize(const Element<A, T>& a);
 
+  template<typename A, typename T>
+  Element<A, T>
+  determinize(const Element<A, T>& a,
+	      std::map<hstate_t, std::set<hstate_t> >& m);
+
   /** 
    * @brief Test if an automaton is deterministic.
    * 

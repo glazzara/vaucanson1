@@ -49,7 +49,7 @@ namespace vcsn {
     using namespace std;
     
     typedef series_elt_t exp_t;
-    typedef typename series_elt_t::weight_t            output_exp_t;
+    typedef typename series_elt_t::semiring_elt_t      output_exp_t;
     typedef set<std::pair<hstate_t, output_exp_t> >    state_exp_pair_set_t;
     typedef pair<hstate_t, hstate_t>                   state_pair_t;
     typedef map<state_pair_t, hstate_t>                state_pair_map_t;
@@ -59,8 +59,9 @@ namespace vcsn {
     typedef typename Trans_t::value_t                  T;
     typedef typename output_projection_helper<S, T>::ret      Auto_t;
     typedef typename Auto_t::set_t::series_t           Auto_series_t;
+    typedef typename Auto_t::set_t		       o_automata_set_t;
 
-    automata_set_t auto_set(Auto_series_t(lhs.set().series().weights()));
+    o_automata_set_t auto_set(Auto_series_t(lhs.set().series().semiring()));
 
     AUTOMATON_TYPES_(Auto_t, a_);
 

@@ -78,8 +78,8 @@ namespace vcsn {
     template<typename T>
     struct series_traits
     {
-       typedef undefined_type	monoid_value_t;
-       typedef undefined_type	semiring_elt_value_t;
+      typedef undefined_type	monoid_value_t;
+      typedef undefined_type	semiring_elt_value_t;
     };
 
     template <typename T, typename W, typename M>
@@ -113,8 +113,8 @@ namespace vcsn {
   struct virtual_types<algebra::SeriesBase<S> >
     : virtual_types<algebra::SemiringBase<S> >
   {
-     typedef undefined_type monoid_t;
-     typedef undefined_type semiring_t;
+    typedef undefined_type monoid_t;
+    typedef undefined_type semiring_t;
   };
   
   /*---------------------------------.

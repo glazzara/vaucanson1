@@ -54,7 +54,8 @@ namespace vcsn {
   product(const AutomataBase<A>&	,
 	  output_t&			output,
 	  const lhs_t&			lhs,
-	  const rhs_t&			rhs)
+	  const rhs_t&			rhs,
+	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m)
   {
     typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
     typedef std::set<hedge_t>				delta_ret_t;
@@ -77,6 +78,7 @@ namespace vcsn {
 	{
 	  hstate_t  new_state = output.add_state();
 	  pair_hstate_t new_pair(*lhs_s, *rhs_s);	
+	  m[new_state] = new_pair;
 	  visited[new_pair] = new_state;
 	  to_process.push(new_pair);
 	}
@@ -127,6 +129,7 @@ namespace vcsn {
 		      {
 			aim = output.add_state();		      
 			visited[new_pair] = aim;
+			m[aim] = new_pair;
 			to_process.push(new_pair);
 		      }
 		    else
@@ -144,10 +147,20 @@ namespace vcsn {
   Element<A, T> 
   product(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
+    std::map<hstate_t, std::pair<hstate_t, hstate_t> > m;
     // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(rhs.set());
-    product(ret.set(), ret, lhs, rhs);
+    product(ret.set(), ret, lhs, rhs, m);
     return ret;
+  }
+
+  template<typename A, typename T, typename U>
+  Element<A, T> 
+  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
+	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m)
+  {
+    Element<A, T> ret(rhs.set());
+    product(ret.set(), ret, lhs, rhs, m);
   }
   
 } // vcsn

@@ -95,7 +95,7 @@ namespace vcsn {
     typedef typename Auto_t::set_t                   Auto_set_t;
     typedef typename Auto_set_t::series_t            Auto_series_t;
 
-    Auto_set_t   auto_set(Auto_series_t(t.set().series().weights()));
+    Auto_set_t   auto_set(Auto_series_t(t.set().series().semiring()));
     Auto_t       ret(auto_set);
 
     monoid_elt_t empty = t.series().monoid().empty_;

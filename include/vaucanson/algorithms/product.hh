@@ -43,6 +43,11 @@ namespace vcsn
   template<typename A, typename T, typename U>
   Element<A, T> 
   product(const Element<A, T>& lhs, const Element<A, U>& rhs);
+
+  template<typename A, typename T, typename U>
+  Element<A, T> 
+  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
+	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >&);
   
   /** @} */
   

@@ -70,8 +70,8 @@ namespace vcsn {
   template <typename T>
   struct transducer_traits
   {
-     typedef undefined_type input_monoid_elt_value_t;
-     typedef undefined_type output_monoid_elt_value_t;
+    typedef undefined_type input_monoid_elt_value_t;
+    typedef undefined_type output_monoid_elt_value_t;
   };
 
   template <typename T>

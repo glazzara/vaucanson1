@@ -1,3 +1,24 @@
+2003-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* configure.ac: Add Makefile for fibonacci.
+	* include/vaucanson/misc/unique.hh: Use template class
+		UniqueListBase instead of uniquelist_base.
+	* include/vaucanson/automata/concept/transducer_base.hxx:
+		Fix missing method.
+	* include/vaucanson/automata/concrete/graph.hh:
+		Fix missing traits.
+	* include/vaucanson/algorithms/determinize.hh:
+		Add a algorithm version to store states origin.
+	* include/vaucanson/algorithms/determinize.hxx:
+		Implement it.
+	* include/vaucanson/algorithms/product.h[h,xx]: Likewise.
+	* src/demos/Makefile.am: Add fibonacci SUBDIRS.
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	  include/vaucanson/algorithms/extension.hxx,
+	  include/vaucanson/algorithms/projection.hxx,
+	  include/vaucanson/algorithms/evaluation.hxx: 
+			Fix typedef use.
+
 2003-10-07  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
    * include/vaucanson/misc/random.hh

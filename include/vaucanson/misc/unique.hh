@@ -41,10 +41,13 @@ namespace utility
   namespace unique
   {
     /// Base class for @c uniquelist
-    struct uniquelist_base
+    template <class T>
+    struct UniqueListBase
     {
-      virtual ~uniquelist_base();
+      virtual ~UniqueListBase();
     };
+    
+#define uniquelist_base UniqueListBase<int>
     
     /** Simple unique list structure
      *
@@ -76,9 +79,12 @@ namespace utility
     {
       /** Helper to make @c std::type_info into a valid key type for
 	  @c std::map */
-      struct ti_slot
+#define ti_slot TiSlot<int>
+
+      template <class U>
+      struct TiSlot
       {
-	inline ti_slot(const std::type_info& );
+	inline TiSlot(const std::type_info& );
 	const std::type_info &id;
 	inline bool operator==(const ti_slot& other) const;
 	inline bool operator<(const ti_slot& other) const;
@@ -137,9 +143,9 @@ namespace utility
 }
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
+#ifndef INTERFACE_ONLY
     #include <vaucanson/misc/unique.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+#endif // INTERFACE_ONLY
     
 
 #endif // VCSN_MISC_UNIQUE_HH

@@ -83,7 +83,8 @@ namespace vcsn {
     typedef typename Trans_t::value_t T;
     typedef typename output_projection_helper<S, T>::ret Auto_t;
     typedef typename Auto_t::set_t::series_t      Auto_series_t;
-    typename Auto_t::set_t auto_set(Auto_series_t(t.set().series().weights()));
+    typename Auto_t::set_t 
+      auto_set(Auto_series_t(t.set().series().semiring()));
     Auto_t tmp_auto(auto_set);
 
     AUTOMATON_TYPES(Auto_t);
@@ -227,7 +228,7 @@ namespace vcsn {
     typedef typename output_projection_helper<ST, T>::ret Auto_ret_t;
     typedef typename Auto_ret_t::set_t::series_t      Auto_ret_series_t;
     typename Auto_ret_t::set_t 
-      auto_set(Auto_ret_series_t(t.set().series().weights()));
+      auto_set(Auto_ret_series_t(t.set().series().semiring()));
 
     AUTOMATON_TYPES_(Auto_t, a_);
     AUTOMATON_TYPES_(Trans_t, t_);
@@ -313,7 +314,7 @@ namespace vcsn {
     typedef typename Auto_ret_t::set_t::series_t      Auto_ret_series_t;
 
     typename Auto_ret_t::set_t 
-      auto_set(Auto_ret_series_t(t.set().series().weights()));
+      auto_set(Auto_ret_series_t(t.set().series().semiring()));
 
     Trans_t tt = t;
     tt.clear_initial();

@@ -53,7 +53,9 @@ namespace vcsn {
   void 
   do_subset_construction(const AutomataBase<A>&	,
 			 output_t&	       	output,
-			 const input_t&		input)
+			 const input_t&		input,
+			 std::map<hstate_t, std::set<hstate_t> >& m =
+			 std::map<hstate_t, std::set<hstate_t> >())
   {    
     AUTOMATON_TYPES(input_t);
     typedef typename input_t::series_t			    series_t;
@@ -89,6 +91,7 @@ namespace vcsn {
       output.set_final(qi_hstate);
 
     subset_set[qi] = qi_hstate;
+    m[qi_hstate] = qi;
 
     // FIXME : log history ?
 
@@ -123,9 +126,11 @@ namespace vcsn {
 	  current = subset_set.find(q);
 	  if (current == subset_set.end()) 
 	    {
+	      hstate_t qs = output.add_state();
 	      current = (subset_set.insert
-			 (subset_set_pair_t(q, output.add_state()))).first;
-
+			 (subset_set_pair_t(q, qs))).first;
+	      m[qs] = q;
+      
 	      // Log history ?
 
  	      if (is_final)   
@@ -146,7 +151,6 @@ namespace vcsn {
     return ret;
   }
 
-
   /*------------.
   | determinize |
   `------------*/
@@ -154,13 +158,14 @@ namespace vcsn {
   void
   do_determinize(const AutomataBase<A>&	a_set,
 		 output_t&			output,
-		 const input_t&		input)
+		 const input_t&		input,
+		 std::map<hstate_t, std::set<hstate_t> >& m)
   {
     /** \bug
      * FIXME: for the moment, it uses subset_construction and trim but
      * it must be rewritten to do the twice at the same time more efficiently.
      */
-    do_subset_construction(a_set, output, input);
+    do_subset_construction(a_set, output, input, m);
     //    accessible_here(output);
   }
 
@@ -168,11 +173,19 @@ namespace vcsn {
   Element<A, T>
   determinize(const Element<A, T>& a)
   {
-    Element<A, T>    ret(a.set());
-    do_determinize(ret.set(), ret, a);
-    return ret;
+    std::map<hstate_t, std::set<hstate_t> > m;
+    return determinize(a, m);
   }
 
+  template<typename A, typename T>
+  Element<A, T>
+  determinize(const Element<A, T>& a,
+	      std::map<hstate_t, std::set<hstate_t> >& m)
+  {
+    Element<A, T> ret(a.set());
+    do_determinize(ret.set(), ret, a, m);
+    return ret;
+  }
 
   /*-----------------.
   | is_deterministic |
