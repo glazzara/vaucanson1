@@ -99,6 +99,7 @@ AC_CONFIG_FILES([
 	src/tests/algebra/series/krat/derivations/Makefile
 	src/tests/algebra/series/krat/derivations/derivation/Makefile
 	src/tests/algebra/series/krat/derivations/cderivation/Makefile
+	src/tests/algebra/series/krat/derivations/partial_derivation/Makefile
 	src/tests/algebra/series/krat/main/Makefile
 	src/tests/algebra/series/misc/Makefile
 	src/tests/algebra/series/polynom/Makefile
