@@ -36,6 +36,7 @@
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/limits.hh>
 # include <cmath>
+# include <stdexcept>
 
 /**
  * @file   rational_number.hxx
@@ -263,8 +264,7 @@ namespace vcsn
     inline
     int	gcd(int a, unsigned int b)
     {
-      int n = b;
-
+      unsigned n = b;
       while (n != 0)
 	{
 	  int t = a % n;
@@ -278,11 +278,15 @@ namespace vcsn
     int	lcm(int a, unsigned int b)
     {
       int d;
-      if (!a || !b || !(d = gcd(a, b)))
+      if (!a || !b || !(d = gcd(abs(a), b)))
 	return 0;
-      return a * b / d;
+      int r = a * b / d;
+# ifndef NDEBUG
+      if (not r)
+	throw std::overflow_error ("");
+# endif // NDEBUG
+      return r;
     }
-
   }
 }
 

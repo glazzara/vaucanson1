@@ -35,6 +35,7 @@
 
 # include <check/tester.hh>
 # include <vaucanson/algebra/concept/semiring_base.hh>
+# include <stdexcept>
 
 template <class S, class T>
 bool numerical_semiring_test(tests::Tester& t)
@@ -47,24 +48,45 @@ bool numerical_semiring_test(tests::Tester& t)
 
   numerical_semiring_t semiring;
   int timeout = 0;
+  bool result_test = true;
   element_t nb = semiring.choose_starable(SELECT(T));
-  do
+  T average_value;
+
+  try
     {
-      TEST(t, "starable works. (2)", -T(1) < nb.value() and nb.value() < T(1));
-      ++timeout;
-      nb = semiring.choose_starable(SELECT(T));
+      do
+	{
+	  result_test = result_test &&
+	    (-T(1) < nb.value() and nb.value() < T(1));
+	  ++timeout;
+	  nb = semiring.choose_starable(SELECT(T));
+	  average_value += nb.value();
+	}
+      while (timeout < 2000);
+      average_value = average_value < T(0) ? -average_value : average_value;
+      TEST(t,
+	   "starable distribution is correct",
+	   (average_value / T(2000)) < (T(1) / T(10)) 
+	   );
+
     }
-  while (timeout < 100);
+  catch(std::overflow_error&)
+    {
+      std::cerr << "Integer overflow in rational calculus."
+		<< std::endl;
+    }
+  TEST(t, "starable works. (2)", result_test);  
   nb = semiring.choose_non_starable(SELECT(T));
   timeout = 0;
+  result_test = true;
   do
     {
-      TEST(t, "starable works. (3)", -T(1) > nb.value() or nb.value() > T(1));
+      result_test = result_test && (-T(1) > nb.value() or nb.value() > T(1));
       ++timeout;
       nb = semiring.choose_non_starable(SELECT(T));
     }
   while (timeout < 100);
-
+  TEST(t, "starable works. (3)", result_test);
   // FIXME: add some other tests.
   return t.all_passed();
 }

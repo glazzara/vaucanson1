@@ -1,3 +1,12 @@
+2004-03-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Fix interval for choose_starable.
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx:
+	Handle exception caused by potential integer overflow.
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
+	Fix and improve the test.
+
 2004-03-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/automata/algos/glushkov_test.hh: Test that standard_of

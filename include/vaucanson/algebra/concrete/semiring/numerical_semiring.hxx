@@ -248,9 +248,13 @@ namespace vcsn {
   op_choose_starable(const algebra::NumericalSemiring& set,
 		     SELECTOR(float))
   {
+    float res = utility::random::generate<float>(-1, 1);
+
+    while (res == -1)
+      res = utility::random::generate<float>(-1, 1);
     return
       Element<algebra::NumericalSemiring, float>
-        (set, utility::random::generate<float>(0, 1));
+        (set, res);
   }
 
   inline
@@ -277,9 +281,13 @@ namespace vcsn {
   op_choose_starable(const algebra::NumericalSemiring& set,
 		     SELECTOR(double))
   {
+    double res = utility::random::generate<double>(-1, 1);
+
+    while (res == -1)
+      res = utility::random::generate<double>(-1, 1);
     return
       Element<algebra::NumericalSemiring, double>
-        (set, utility::random::generate<double>(0, 1));
+        (set, res);
   }
 
   inline
