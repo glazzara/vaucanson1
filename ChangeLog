@@ -1,5 +1,18 @@
 2002-06-07  Maxime Rey  <max@lrde.epita.fr>
 
+	* Added `include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx'
+	* Added `include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh'
+	* Added `include/vaucanson/algebra/concrete/alphabets/alphabets.hh'
+	* Added `include/vaucanson/algebra/concept/concepts.hxx' 
+	* Added `include/vaucanson/algebra/concept/concepts.hh' 
+	* Added `include/vaucanson/algebra/concept/alphabets_base.hxx'
+ 	* Added `include/vaucanson/algebra/concept/alphabets_base.hh' 
+	* Added `include/vaucanson/misc/container_ops.hxx' 
+	* Added `include/vaucanson/misc/container_ops.hh' 
+	* Test Alphabets Algebraic Structure
+
+2002-06-07  Maxime Rey  <max@lrde.epita.fr>
+
 	* src/tests/fundamental/element-full-test.cc modified
 	* fundamental : [ OK ]
 
