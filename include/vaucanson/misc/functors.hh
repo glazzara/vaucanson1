@@ -44,6 +44,13 @@ namespace utility
     std::pair<T, T>	operator()(T x, T y) const;
   };
 
+
+  template <typename T>
+  struct discrepancy : public std::binary_function<T, T, std::pair<T, T> >
+  {
+    std::pair<T, T>	operator()(T x, T y) const;
+  };
+
 } // End of namespace utility.
 
 

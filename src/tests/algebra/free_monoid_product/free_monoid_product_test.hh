@@ -53,6 +53,7 @@ bool free_monoid_product_test(tests::Tester& t)
   second_alphabet_t	second_base;
   size_t		test_sizes[] =
     {
+      0,
       1,
       first_base.max_size() >= 2 ? 2 : 1,
       first_base.max_size() <= 256 ? first_base.max_size() / 2 : 128,
@@ -107,30 +108,112 @@ bool free_monoid_product_test(tests::Tester& t)
       if (mirror(mirror(ab)) != ab)
 	mirror_error = true;
 
-      std::string first_word;
-      std::string second_word;
-
-      for (int i = 1; i <= 10; ++i)
+      if (test_sizes[i])
 	{
-	  char t =  first_alpha.choose();
-	  first_word += t;
+	  std::pair<int, int>			pair_len;
+	  std::pair<int, int>			discr_len;
+	  std::pair<int, int>			len;
+	  std::pair<int, int>			len2;
+	  int					add_len;
+	  int					n = test_sizes[i];
+
+	  // Size 0.
+	  std::string				first_word_0;
+	  std::string				second_word_0;
+
+	  // Size 1.
+	  std::string				first_word_1;
+	  std::string				second_word_1;
+
+	  first_word_1 += first_alpha.choose();
+	  second_word_1 += second_alpha.choose();
+
+	  // Size n.
+	  std::string				first_word_n;
+	  std::string				second_word_n;
+
+	  for (int j = 1; j <= n; ++j)
+	    {
+	      first_word_n += first_alpha.choose();
+	      second_word_n += second_alpha.choose();
+	    }
+
+	  // Test 0,0.
+
+	  std::pair<std::string, std::string>	p0;
+	  p0 = std::make_pair(first_word_0, second_word_0);
+	  element_t w0(freemonoid_product, p0);
+
+	  pair_len = w0.length(utility::pair<int>());
+	  discr_len = w0.length(utility::discrepancy<int>());
+	  add_len = w0.length(std::plus<int>());
+	  len = std::make_pair(0, 0);
+
+	  if ((pair_len != len) or (discr_len != len) or (add_len != 0))
+	    length_error = true;
+
+	  // Test 0,n.
+
+	  std::pair<std::string, std::string>	p0n;
+	  p0n = std::make_pair(first_word_0, second_word_n);
+	  element_t w0n(freemonoid_product, p0n);
+
+	  pair_len = w0n.length(utility::pair<int>());
+	  discr_len = w0n.length(utility::discrepancy<int>());
+	  add_len = w0n.length(std::plus<int>());
+
+	  len = std::make_pair(0, n);
+
+	  if ((pair_len != len) or (discr_len != len) or (add_len != n))
+	    length_error = true;
+
+	  // Test n,0.
+
+	  std::pair<std::string, std::string>	pn0;
+	  pn0 = std::make_pair(first_word_n, second_word_0);
+	  element_t wn0(freemonoid_product, pn0);
+
+	  pair_len = wn0.length(utility::pair<int>());
+	  discr_len = wn0.length(utility::discrepancy<int>());
+	  add_len = wn0.length(std::plus<int>());
+
+	  len = std::make_pair(n, 0);
+
+	  if ((pair_len != len) or (discr_len != len) or (add_len != n))
+	    length_error = true;
+
+	  // Test n,1.
+
+	  std::pair<std::string, std::string>	pn1;
+	  pn1 = std::make_pair(first_word_n, second_word_1);
+	  element_t wn1(freemonoid_product, pn1);
+
+	  pair_len = wn1.length(utility::pair<int>());
+	  discr_len = wn1.length(utility::discrepancy<int>());
+	  add_len = wn1.length(std::plus<int>());
+
+	  len = std::make_pair(n, 1);
+	  len2 = std::make_pair(n - 1, 0);
+
+	  if ((pair_len != len) or (discr_len != len2) or (add_len != n + 1))
+	    length_error = true;
+
+	  // Test 1,n.
+
+	  std::pair<std::string, std::string>	p1n;
+	  p1n = std::make_pair(first_word_1, second_word_n);
+	  element_t w1n(freemonoid_product, p1n);
+
+	  pair_len = w1n.length(utility::pair<int>());
+	  discr_len = w1n.length(utility::discrepancy<int>());
+	  add_len = w1n.length(std::plus<int>());
+
+	  len = std::make_pair(1, n);
+	  len2 = std::make_pair(0, n - 1);
+
+	  if ((pair_len != len) or (discr_len != len2) or (add_len != n + 1))
+	    length_error = true;
 	}
-
-      for (int j = 1; j <= 15; ++j)
-	second_word += second_alpha.choose();
-
-      std::pair<std::string, std::string> p = make_pair(first_word,
-							second_word);
-
-      element_t w(freemonoid_product, p);
-
-      std::pair<int, int> pair_len = w.length(utility::pair<int>());
-      int add_len = w.length(std::plus<int>());
-
-      std::pair<int, int> len (10, 15);
-
-      if ((pair_len != len) or (add_len != 25))
-	length_error = true;
 
     }
 

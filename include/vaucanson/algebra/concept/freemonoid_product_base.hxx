@@ -142,7 +142,7 @@ namespace vcsn {
   typename Ftor::result_type
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::length(Ftor f)
   {
-    return op_length(value(), f);
+    return op_length(structure(), value(), f);
   }
 
 } // vcsn

@@ -119,9 +119,9 @@ namespace vcsn {
     op_in_mirror(s.second_monoid(), v.second);
   }
 
-  template<typename T, typename Ftor>
+  template<typename Self, typename T, typename Ftor>
   typename Ftor::result_type
-  op_length(T& v, Ftor f)
+  op_length(const algebra::FreeMonoidProductBase<Self>&, const T& v, Ftor f)
   {
     return f(v.first.length(), v.second.length());
   }

@@ -44,6 +44,16 @@ namespace utility
     return std::pair<T, T> (x, y);
   }
 
+
+  template <typename T>
+  std::pair<T, T> discrepancy<T>::operator() (T x, T y) const
+  {
+    T	left = std::max<T>(0, x - y);
+    T	right = std::max<T>(0, y - x);
+
+    return std::pair<T, T> (left, right);
+  }
+
 } // End of namespace utility.
 
 #endif // VCSN_MISC_FUNCTORS_HXX

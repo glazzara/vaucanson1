@@ -1,3 +1,18 @@
+2005-01-28  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: Modify the prototype of op_length in order to be able
+	to specialize the concept.
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx: Update
+	accordingly.
+
+	* include/vaucanson/misc/functors.hh,
+	* include/vaucanson/misc/functors.hxx: Add a new functor, the "length
+	discrepancy".
+
+	* src/tests/algebra/free_monoid_product/free_monoid_product_test.hh:
+	Update accordingly.
+
 2005-01-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	Add MetaElement<FreeMonoidProduct<S>, T>::length(), that takes a
