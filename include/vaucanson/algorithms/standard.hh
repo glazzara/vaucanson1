@@ -25,63 +25,49 @@
 
 namespace vcsn {
 
-  /*-------------.
-  | standardize  |
-  `-------------*/
+  //! Returns a standard automaton associated to the input.
   template<typename A, typename T>
   void
   standardize(Element<A, T>& a);
 
+  //! Returns true if the input automaton is standard.
   template<typename A, typename T>
   bool
   is_standard(const Element<A, T>& a);
 
-  /*------.
-  | Union |
-  `------*/
-  // precondition : lhs and rhs must be standard automaton.
-  //
-  //
+  //! In-place union of two standard automata.
   template<typename A, typename T, typename U>
   void 
   standard_auto_in_union(Element<A, T>& lhs, 
-			   const Element<A, U>& rhs);
+			 const Element<A, U>& rhs);
 
+  //! Return a fresh union of two standard automata.
   template<typename A, typename T, typename U>
   Element<A, T> 
   standard_auto_union(const Element<A, T>& lhs, 
-			const Element<A, U>& rhs);
+		      const Element<A, U>& rhs);
 
-  /*--------.
-  | Concat  |
-  `--------*/
-  // precondition : lhs and rhs must be standard automaton
-  //
-  //
+  //! In-place concatenation of two standard automata.
   template<typename A, typename T, typename U>
   void 
   standard_auto_in_concat(Element<A, T>& lhs, 
 			  const Element<A, U>& rhs);
 
+  //! Return a fresh concatenation of two standard automata.
   template<typename A, typename T, typename U>
   Element<A, T> 
   standard_auto_concat(const Element<A, T>& lhs, 
 		       const Element<A, U>& rhs);
 
-  /*-----.
-  | Star |
-  `-----*/
-  // precondition : a must be a standard automaton
-  //
-  //
+  //! In-place star transformation of a standard automata.
   template<typename A, typename T>
   void 
   standard_auto_in_star(Element<A, T>& a);
 
+  //! Return the fresh star transformation of a standard automata.
   template<typename A, typename T>
   Element<A, T> 
   standard_auto_star(const Element<A, T>& a);
-
   
 } // vcsn
 

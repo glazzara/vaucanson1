@@ -18,21 +18,19 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_HOPCROFT_HH
-# define ALGORITHMS_HOPCROFT_HH
+#ifndef VCSN_ALGORITHMS_HOPCROFT_HH
+# define VCSN_ALGORITHMS_HOPCROFT_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*---------.
-  | hopcroft |
-  `---------*/
+  //! The canonical minimal automaton of the deterministic input automaton.
   template<typename A, typename T>
   Element<A, T>
   hopcroft_minimization_det(const Element<A, T>& a);
 
+  //! The canonical minimal automaton of the input automaton. (EXPERIMENTAL)
   template<typename A, typename T>
   Element<A, T>
   hopcroft_minimization_undet(const Element<A, T>& a);
@@ -41,5 +39,5 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/hopcroft.hxx>
 
-#endif // ALGORITHMS_HOPCROFT_HH
+#endif // VCSN_ALGORITHMS_HOPCROFT_HH
 

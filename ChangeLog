@@ -1,4 +1,25 @@
 2002-11-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.136)
+	* include/vaucanson/algorithms/
+		reachable.hh
+		transpose.hh
+		union.hh
+		normalized.hh
+		product.hh
+		moore.hh
+		hopcroft.hh
+		standard.hh
+		glushkov.hh
+		thompson.hh
+		realtime.hh
+		trim.hh
+		isomorph.hh
+		krat_exp_constant_term.hh
+		krat_exp_derivation.hh
+		krat_exp_linearize.hh: brief documentation.
+
+
+2002-11-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.135)
 	* include/vaucanson/algebra/
 		concept/series_base.hh: minor changes.

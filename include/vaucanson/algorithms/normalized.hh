@@ -18,73 +18,59 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_NORMALIZED_HH
-# define ALGORITHMS_NORMALIZED_HH
+#ifndef VCSN_ALGORITHMS_NORMALIZED_HH
+# define VCSN_ALGORITHMS_NORMALIZED_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*-----------.
-  | normalized |
-  `-----------*/
+  //! In-place Thompson normalization of the automaton.
   template<typename A, typename T>
   void
   normalize(Element<A, T>& a);
 
+  //! Returns true if the input automaton is normalized.
   template<typename A, typename T>
   bool
   is_normalized(const Element<A, T>& a);
 
-  /*------.
-  | Union |
-  `------*/
-  // precondition : lhs and rhs must be normalized automaton.
-  //
-  //
+  //! In-place union of two normalized automata.
   template<typename A, typename T, typename U>
   void 
   normalized_auto_in_union(Element<A, T>& lhs, 
 			   const Element<A, U>& rhs);
 
+  //! Returns the fresh union of two normalized automata.
   template<typename A, typename T, typename U>
   Element<A, T> 
   normalized_auto_union(const Element<A, T>& lhs, 
 			const Element<A, U>& rhs);
 
-  /*--------.
-  | Concat |
-  `--------*/
-  // precondition : lhs and rhs must be normalized automaton
-  //
-  //
+  //! In-place concatenation of two normalized automata.
   template<typename A, typename T, typename U>
   void 
   normalized_auto_in_concat(Element<A, T>& lhs, 
 			     const Element<A, U>& rhs);
 
+  //! Returns the fresh concatenation of two normalized automata.
   template<typename A, typename T, typename U>
   Element<A, T> 
   normalized_auto_concat(const Element<A, T>& lhs, 
 			  const Element<A, U>& rhs);
 
-  /*-----.
-  | Star |
-  `-----*/
-  // precondition : a must be a normalized automaton
-  //
-  //
+  //! In-place star transformation of the input normalized automaton.
   template<typename A, typename T>
   void 
   normalized_auto_in_star(Element<A, T>& a);
 
+  //! Returns the fresh star transformation of the input normalized automaton.
   template<typename A, typename T>
   Element<A, T> 
   normalized_auto_star(const Element<A, T>& a);
-
   
 } // vcsn
 
 # include <vaucanson/algorithms/normalized.hxx>
 
-#endif // ALGORITHMS_NORMALIZED_HH
+#endif // VCSN_ALGORITHMS_NORMALIZED_HH

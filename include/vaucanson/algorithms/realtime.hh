@@ -18,30 +18,24 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_REALTIME_HH
-# define ALGORITHMS_REALTIME_HH
+#ifndef VCSN_ALGORITHMS_REALTIME_HH
+# define VCSN_ALGORITHMS_REALTIME_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*------------.
-  | is_realtime |
-  `------------*/
+  //! Returns true if the input automaton is realtime (no epsilon transition).
   template<typename A, typename T>
   bool
   is_realtime(const Element<A, T>& a);
 
-  /*------------.
-  | in_realtime |
-  `------------*/
+  //! In place modification of the automaton to make it realtime.
   template<typename A, typename T>
   void
   in_realtime(Element<A, T>& a);
 
-  /*---------.
-  | realtime |
-  `---------*/
+  //! Returns a fresh associated automaton that has no epsilon transitions.
   template<typename A, typename T>
   Element<A, T>
   realtime(const Element<A, T>& a);
@@ -50,5 +44,5 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/realtime.hxx>
 
-#endif // ALGORITHMS_REALTIME_HH
+#endif // VCSN_ALGORITHMS_REALTIME_HH
 

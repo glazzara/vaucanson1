@@ -18,17 +18,14 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_MOORE_HH
-# define ALGORITHMS_MOORE_HH
+#ifndef VCSN_ALGORITHMS_MOORE_HH
+# define VCSN_ALGORITHMS_MOORE_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*------.
-  | moore |
-  `------*/
+  //! Returns the minimal deterministic automaton associated to the input one.
   template<typename A, typename T>
   Element<A, T>
   moore_minimization(const Element<A, T>& a);
@@ -37,5 +34,5 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/moore.hxx>
 
-#endif // ALGORITHMS_MOORE_HH
+#endif // VCSN_ALGORITHMS_MOORE_HH
 

@@ -17,19 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef AUTOMATA_TRANSPOSE_HH
-#define AUTOMATA_TRANSPOSE_HH
+#ifndef VCSN_ALGORITHMS_TRANSPOSE_HH
+# define VCSN_ALGORITHMS_TRANSPOSE_HH
 
 # include <vaucanson/automata/concept/transpose_impl.hh>
 # include <vaucanson/automata/concept/copy.hh>
 
 namespace vcsn
 {
+  //! Copy in 'dst' the transposition of 'from'.
   template<typename lhs_t, typename rhs_t>
-  void auto_transpose(lhs_t& dst_,
+  void auto_transpose(lhs_t& dst,
 		      const rhs_t& from);
 
+  //! Return a fresh automaton which is the transposition of 'from'.
   template<typename auto_t>
   auto_t auto_transpose(const auto_t& from);
 
@@ -37,4 +38,4 @@ namespace vcsn
 
 # include <vaucanson/algorithms/transpose.hxx>
 
-#endif
+#endif // VCSN_AUTOMATA_TRANSPOSE_HH

@@ -18,17 +18,15 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_THOMPSON_HH
-# define ALGORITHMS_THOMPSON_HH
+#ifndef VCSN_ALGORITHMS_THOMPSON_HH
+# define VCSN_ALGORITHMS_THOMPSON_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 
 namespace vcsn {
 
-  /*---------.
-  | thompson |
-  `---------*/
+  //! The automaton associated to the krat expression using Thompson algorithm.
   template<typename A,      typename T, 
 	   typename Letter, typename Weight>
   void
@@ -38,4 +36,4 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/thompson.hxx>
 
-#endif // ALGORITHMS_THOMPSON_HH
+#endif // VCSN_ALGORITHMS_THOMPSON_HH

@@ -18,20 +18,16 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_GLUSHKOV_HH
-# define ALGORITHMS_GLUSHKOV_HH
+#ifndef VCSN_ALGORITHMS_GLUSHKOV_HH
+# define VCSN_ALGORITHMS_GLUSHKOV_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
 namespace vcsn {
 
-  /*---------.
-  | glushkov |
-  `---------*/
-  template<typename A,      
-	   typename T, 
-	   typename Exp>
+  //! Convert a krat expression into an automaton using Glushkov construction.
+  template <typename A, typename T, typename Exp>
   void
   glushkov(Element<A, T>&, const Exp&);
   
@@ -39,4 +35,4 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/glushkov.hxx>
 
-#endif // ALGORITHMS_GLUSHKOV_HH
+#endif // VCSN_ALGORITHMS_GLUSHKOV_HH

@@ -18,28 +18,24 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_PRODUCT_HH
-# define ALGORITHMS_PRODUCT_HH
+#ifndef VCSN_ALGORITHMS_PRODUCT_HH
+# define VCSN_ALGORITHMS_PRODUCT_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*--------.
-  | product |
-  `--------*/ 
+  //! Returns a fresh automaton that is the product of the two input ones.
   template<typename A, typename T, typename U>
   Element<A, T> 
   auto_product(const Element<A, T>& lhs, const Element<A, U>& rhs);
 
-  /*---------.
-  | diagonal |
-  `---------*/
+  //! In-place diagonal extraction.
   template <typename A, typename T>
   void
   auto_in_diagonal(Element<A, T>&);
 
+  //! Return a fresh automaton that is the diagonal of the input one.
   template <typename A, typename T>
   Element<A, T>
   auto_diagonal(const Element<A, T>&);
@@ -48,4 +44,4 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/product.hxx>
 
-#endif // ALGO_PRODUCT_HH
+#endif // VCSN_ALGORITHMS_PRODUCT_HH

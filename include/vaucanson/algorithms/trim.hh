@@ -18,20 +18,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGORITHMS_TRIM_HH
-# define ALGORITHMS_TRIM_HH
+#ifndef VCSN_ALGORITHMS_TRIM_HH
+# define VCSN_ALGORITHMS_TRIM_HH
 
 # include <set>
-
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
-
+  
+  //! Returns a useful states of the automaton (start reachable and final co-).
   template<typename A, typename T>
   std::set<hstate_t>
   useful_states(const Element<A, T>& a);
 
+  //! Return a fresh automaton in which non useful states are removed.
   template<typename A, typename T>
   Element<A, T>
   trim(const Element<A, T>& a);
@@ -40,4 +40,4 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/trim.hxx>
 
-#endif // ALGORITHMS_TRIM_HH
+#endif // VCSN_ALGORITHMS_TRIM_HH
