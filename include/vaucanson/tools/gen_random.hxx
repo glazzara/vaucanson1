@@ -231,7 +231,6 @@ namespace vcsn {
     for (unsigned i = 0; i < size_alphabet; i++)
       alpha.insert(alpha.random_letter());
 
-    // file for output format (graphviz)
     monoid_t m(alpha);
     weights_t s;
     series_t series(s, m);
@@ -273,7 +272,6 @@ namespace vcsn {
 	  tmp = work.choose_state();
 	work.set_final(tmp);
       }
-
     return work;
   }
 

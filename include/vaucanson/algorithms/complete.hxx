@@ -48,9 +48,10 @@ namespace vcsn {
     AUTOMATON_TYPES(automaton_t);
 
     hstate_t puits = work.add_state();
+    std::list<hstate_t> aim;
+
     for_each_state(i, work)
       {
-	std::set<hstate_t> aim;
 	for_each_letter(j, work.set().series().monoid().alphabet())
 	  {
 	    aim.clear();

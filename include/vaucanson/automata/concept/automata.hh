@@ -73,6 +73,10 @@ namespace vcsn {
     series_t	series_;
   };
 
+  template <class Series>
+  bool
+  operator==(const Automata<Series>&, const Automata<Series>&);
+
 } // vcsn
 
 # include <vaucanson/automata/concept/automata.hxx>

@@ -46,6 +46,14 @@ namespace vcsn {
     return series_;
   }
 
+  template <class Series>
+  bool
+  operator==(const Automata<Series>& lhs, 
+	     const Automata<Series>& rhs)
+  {
+    return lhs.series() == rhs.series();
+  }
+
 } // vcsn
 
 #endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX

@@ -53,12 +53,12 @@ unsigned complete_test(tests::Tester& tg)
   
   gen_auto_t gen(time(0x0));
 
-  const unsigned nb_test = 100;
+  const unsigned nb_test = 50;
   unsigned nb_success    = 0;
 
   for (unsigned i = 0 ; i < nb_test; i++) 
     {
-      automaton_t a = gen.generate_dfa(20);
+      automaton_t a = gen.generate_dfa(30);
       automaton_t b = a;
       complete_here(a);
       
@@ -66,7 +66,7 @@ unsigned complete_test(tests::Tester& tg)
 	   a.set().series().monoid().alphabet().size()) 
 	  && is_deterministic(a))
 	++nb_success;
-      else
+      else if (tg.verbose() == tests::high)
 	{
 	  misc::dot_dump(std::cout, b, "input");
 	  misc::dot_dump(std::cout, a, "automaton");
