@@ -2,13 +2,13 @@
 /* include/vaucanson/config/config.hh.in.  Generated from configure.ac by autoheader.  */
 
 /* The C++ compiler */
-#define CXX "g++"
+#define CXX "g++-3.2"
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
 /* Define to 1 if you have the <limits> header file. */
-/* #undef HAVE_LIMITS */
+#define HAVE_LIMITS 1
 
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
@@ -20,7 +20,7 @@
 #define HAVE_STDLIB_H 1
 
 /* Define to 1 if you have the <stl_config.h> header file. */
-#define HAVE_STL_CONFIG_H 1
+/* #undef HAVE_STL_CONFIG_H */
 
 /* Define to 1 if you have the <strings.h> header file. */
 #define HAVE_STRINGS_H 1

@@ -22,7 +22,7 @@
 # define ALGORITHMS_COMPUTE_HXX
 
 # include <algorithm>
-
+# include <vector>
 # include <vaucanson/algorithms/compute.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>

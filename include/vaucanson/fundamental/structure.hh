@@ -28,41 +28,55 @@
 
 namespace vcsn {
 
+  /*! \addtogroup fundamental
+   *  \@{
+   */
+
     /*----------------.
     | Structure<Self> |
     `----------------*/
+  //! Structure is on the top of the hierarchy of structural elements.
+  /*! Structure provides static inheritance facilities and the concept
+    of compatibility between element and structural element (through
+    the contains method).
+  */
 
     template<typename Self>
     struct Structure
     {
-      typedef Self		self_t;
+    /*! Exact type of the concrete class. */
+    typedef Self		self_t;
 
-      template<typename T>
-      bool 
-      contains(const Element<Self, T>& elt) const;
+    /*! Check if a given element is compatible with the structural element. */
+    template<typename T>
+    bool  contains(const Element<Self, T>& elt) const;
 
-      template<typename S, typename T>
-      bool 
-      contains(const Element<S, T>& other) const;
+    /*! If S <> Self, contains allways returns false. */
+    template<typename S, typename T>
+    bool  contains(const Element<S, T>& other) const;
 
-      template<typename T>
-      bool 
-      contains(const T& elt_value) const;
+    /*! Test the compatibility between an implementation an a
+      structural element. */
+    template<typename T>
+    bool  contains(const T& elt_value) const;
 
-      template <class T>
-      Element<Self, T> choose(SELECTOR(T)) const;
+    /*! Return the instance viewed as its exact type. */
+    self_t&        self();
 
-      // static inheritance stuff below
-      self_t&        
-      self();
+    /*! Return the instance viewed as its exact type (const). */
+    const self_t&  self() const;
 
-      const self_t&  
-      self() const;
+  protected:
+    /*! Default constructor is protected since Structure is an
+      abstract class. */
+    Structure();
 
-    protected:
-      Structure();
-      Structure(const Structure& other);
+    /*! Copy constructor is protected because Structure is an abstract class. 
+     */
+    Structure(const Structure& other);
     };
+
+  /*! @} */
 
 } // vcsn
 

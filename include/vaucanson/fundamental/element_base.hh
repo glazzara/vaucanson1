@@ -33,13 +33,11 @@ namespace vcsn
     `-------------------*/
     //! SyntacticDecorator provides the standard operator to Element.
     //
-
     /*! SyntacticDecorator defines all the self-application operators
       of C++. In fact, this decorator is essential because it is
       the wrapper of standard operators to Vaucanson op_*. 
 
     */
-
     template<typename S, typename T> 
     struct SyntacticDecorator
     {
