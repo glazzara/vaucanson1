@@ -311,7 +311,21 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::add_spontaneous(hstate_t from, 
 						      hstate_t to)
   {
-    return op_add_spontaneous(this->set(), this->value(), from, to);
+    semiring_elt_t w(this->set().series().semiring());
+    w = algebra::identity_as<semiring_elt_value_t>
+      ::of(this->set().series().semiring());
+    return op_add_spontaneous(this->set(), this->value(), from, to, w);
+  }
+
+  template <typename Self, typename T>
+  inline
+  hedge_t  
+  MetaElement<AutomataBase<Self>, T>
+  ::add_spontaneous(hstate_t from, 
+		    hstate_t to,
+		    const semiring_elt_t& w)
+  {
+    return op_add_spontaneous(this->set(), this->value(), from, to, w);
   }
 
   /*! add an transition between 'from' and 'to' labelled by a letter. */

@@ -279,6 +279,9 @@ namespace vcsn {
     hedge_t add_serie_edge(hstate_t from, hstate_t to, const serie_t& e);
 
     /*! add a spontaneous transition between 'from' and 'to'. */
+    hedge_t add_spontaneous(hstate_t from, hstate_t to, 
+			    const semiring_elt_t& w);
+
     hedge_t add_spontaneous(hstate_t from, hstate_t to);
 
     /*! add a transition between 'from' and 'to' labelled by a letter. */

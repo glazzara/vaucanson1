@@ -123,7 +123,8 @@ namespace vcsn {
   hedge_t 
   op_add_spontaneous(const AutomataBase<S>&, T&,
 		     hstate_t from, 
-		     hstate_t to);
+		     hstate_t to,
+		     const typename Element<S, T>::semiring_elt_t&);
   
   template <class S, class T>
   hedge_t 

@@ -49,12 +49,12 @@ namespace vcsn {
   template <typename SA, typename ST, typename SRET,
 	    typename Auto_t, typename Trans_t, typename Ret_t>
   void
-  do_evaluation(const AutomataBase<SA>& as,
-	      const TransducerBase<ST>& ts,
-	      const AutomataBase<SRET>& rets,
-	      const Auto_t& a,
-	      const Trans_t& t,
-	      Ret_t& ret)
+  do_evaluation(const AutomataBase<SA>&,
+		const TransducerBase<ST>&,
+		const AutomataBase<SRET>&,
+		const Auto_t& a,
+		const Trans_t& t,
+		Ret_t& ret)
   {
     Trans_t tt(t.set());
     tt = extension(a, t);
@@ -76,7 +76,7 @@ namespace vcsn {
   template<typename E, typename S, typename Trans_t, typename M>
   void
   do_partial_evaluation(const E& exp,
-			const TransducerBase<S>& ts,
+			const TransducerBase<S>&,
 			const Trans_t& t,
 			M& state_exp_pair_set)
   {
@@ -109,7 +109,7 @@ namespace vcsn {
   
   template<typename S, typename Auto_t, typename M, typename Chooser_t>
   void
-  do_partial_elimination(const AutomataBase<S>& as,
+  do_partial_elimination(const AutomataBase<S>&,
 			 const Auto_t& a,
 			 Chooser_t chooser,
 			 M& state_exp_pair_set)
@@ -127,11 +127,12 @@ namespace vcsn {
 
     int num = b.final().size() + 1; // all final states and the initial state.
     
-    while (b.states().size() != num)
+    while (int(b.states().size()) != num)
       {
-	series_elt_t loop_sum;
+	series_elt_t loop_sum(b.series());
 	sums_t       in_sums, out_sums;
-	
+	typename sums_t::iterator f;
+
 	q = chooser(b);
 	if (b.is_initial(q) || b.is_final(q))
 	  continue;
@@ -145,8 +146,11 @@ namespace vcsn {
 	    
 	    if (b.aim_of(*i) == q)
 	      loop_sum += b.serie_of(*i);
+	    else if ((f = out_sums.find(b.aim_of(*i))) !=
+		     out_sums.end())
+	      f->second += b.serie_of(*i);
 	    else
-	      out_sums[b.aim_of(*i)] += b.serie_of(*i);
+	      out_sums[b.aim_of(*i)] = b.serie_of(*i);
 	    b.del_edge(*i);
 	  }
 	edges.clear();
@@ -156,7 +160,11 @@ namespace vcsn {
 	  {
 	    j = i; ++j;
 	    // here all loops have already been removed
-	    in_sums[b.origin_of(*i)] += b.serie_of(*i);
+	    if ((f = in_sums.find(b.origin_of(*i))) !=
+		     in_sums.end())
+	      f->second += b.serie_of(*i);
+	    else
+	      in_sums[b.origin_of(*i)] = b.serie_of(*i);
 	    b.del_edge(*i);
 	  }
 	loop_sum.star();
@@ -218,8 +226,8 @@ namespace vcsn {
 	   typename Auto_t, typename Trans_t,
 	   typename M>
   void
-  do_partial_1(const AutomataBase<SA>& sa,
-	       const TransducerBase<ST>& st,
+  do_partial_1(const AutomataBase<SA>&,
+	       const TransducerBase<ST>&,
 	       const Auto_t& a,
 	       const Trans_t& t,
 	       M& state_exp_pair_set)
@@ -302,8 +310,8 @@ namespace vcsn {
 	   typename Auto_t, typename Trans_t,
 	   typename Exp>
   void
-  do_partial_2(const AutomataBase<SA>& sa,
-	       const TransducerBase<ST>& st,
+  do_partial_2(const AutomataBase<SA>&,
+	       const TransducerBase<ST>&,
 	       const Auto_t& a,
 	       const Trans_t& t,
 	       const hstate_t p,
@@ -349,8 +357,8 @@ namespace vcsn {
 	   typename Auto_t, typename Trans_t,
 	   typename M>
   void
-  do_partial_3(const AutomataBase<SA>& sa,
-	       const TransducerBase<ST>& st,
+  do_partial_3(const AutomataBase<SA>&,
+	       const TransducerBase<ST>&,
 	       const Auto_t& a,
 	       const Trans_t& t,
 	       const hstate_t p,

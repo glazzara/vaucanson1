@@ -89,7 +89,7 @@ namespace vcsn {
     {
       /// The type of letters in any alphabet.
 typedef undefined_type	letter_t;
-
+      
       /// Whether an alphabet contains dynamic data.
 static const bool dynamic_data = false;
     };

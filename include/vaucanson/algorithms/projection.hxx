@@ -39,8 +39,8 @@ namespace vcsn {
   template<typename ST, typename SA,
 	   typename Trans_t, typename Auto_t>
   void 
-  do_output_projection(const TransducerBase<ST>& st,
-		       const AutomataBase<SA>& sa,
+  do_output_projection(const TransducerBase<ST>&,
+		       const AutomataBase<SA>&,
 		       const Trans_t& t,
 		       Auto_t& ret)
   {
@@ -83,7 +83,7 @@ namespace vcsn {
 
   template <typename S, typename T>
   typename output_projection_helper<S, T>::ret
-  do_output_projection(const TransducerBase<S>& ts,
+  do_output_projection(const TransducerBase<S>&,
 		       const Element<S, T>& t,
 		       std::map<hstate_t, hstate_t>& m_)
   {

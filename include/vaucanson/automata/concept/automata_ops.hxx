@@ -219,11 +219,13 @@ namespace vcsn {
   hedge_t 
   op_add_spontaneous(const AutomataBase<S>& s, T& v,
 		     hstate_t from, 
-		     hstate_t to)
+		     hstate_t to,
+		     const typename Element<S, T>::semiring_elt_t& w)
   {    
-    return op_add_serie_edge(s, v, from, to,
-			     algebra::identity_as<AutoType(serie_value_t)>::
-			     of(s.series()));
+    AutoType(serie_t) ss;
+    ss.assoc(algebra::identity_as<AutoType(monoid_elt_value_t)>::
+	    of(s.series().monoid()), w);
+    return op_add_serie_edge(s, v, from, to, ss);
   }
 
   template <class S, class T>

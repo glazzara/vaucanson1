@@ -35,6 +35,7 @@
 # include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algorithms/sum.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
@@ -46,7 +47,17 @@ namespace vcsn {
   do_in_standardize(const AutomataBase<A_>& ,
 		    Auto_&		    a)
   {
-    std::cerr << "not implemented yed." << std::endl;
+    AUTOMATON_TYPES(Auto_);
+    hstate_t i = a.add_state();
+    monoid_elt_t e = algebra::identity_as<monoid_elt_value_t>
+      ::of(a.set().series().monoid());
+    for_each_initial_state(oi, a)
+      {
+	series_elt_t s = a.get_initial(*oi);
+	a.add_spontaneous(i, *oi, s.get(e));
+      }
+    a.clear_initial();
+    a.set_initial(i);
   }
 
   template<typename A, typename T>

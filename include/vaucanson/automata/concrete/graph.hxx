@@ -466,6 +466,7 @@ namespace vcsn {
 		const Query& q,
 		delta_kind::edges) const
   {
+    assertion(from < int(states_.size()));
     const std::list<hedge_t>& edges = states_[from].output_edges;
     for_each_const_(std::list<hedge_t>, e, edges)
       if (q(*e))

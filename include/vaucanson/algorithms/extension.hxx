@@ -110,8 +110,8 @@ namespace vcsn {
   ////////////////////////////////////////////////////////////
   
   template<typename SA, typename ST, typename Auto_t, typename Trans_t>
-  Trans_t do_extension(const AutomataBase<SA>& sa,
-		       const TransducerBase<ST>& st,
+  Trans_t do_extension(const AutomataBase<SA>&,
+		       const TransducerBase<ST>&,
 		       const Auto_t& a,
 		       const Trans_t& t)
   {

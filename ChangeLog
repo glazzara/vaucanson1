@@ -1,3 +1,22 @@
+2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_base.hh,
+	  include/vaucanson/automata/concept/automata_base.hh:
+	  (add_spontaneous): Provide weighted version.
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	  include/vaucanson/automata/concept/automata_ops.hh:
+	  (op_add_spontaneous):  Use a new paramater.
+	* include/vaucanson/automata/concrete/graph.hxx: Minor change.
+	* include/vaucanson/algorithms/product.hxx: Fix.
+	* include/vaucanson/algorithms/standard.hxx: 
+	  (do_in_standardize): Implement.
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	  include/vaucanson/algorithms/projection.hxx,
+	  include/vaucanson/algorithms/extension.hxx:
+	  Fix unused parameters.
+	* include/vaucanson/algorithms/evaluation.hxx:
+	  Fix unused parameters and inconsistent sets.
+
 2003-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/misc/limits.hh: 

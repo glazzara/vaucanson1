@@ -161,6 +161,7 @@ namespace vcsn {
   {
     Element<A, T> ret(rhs.set());
     product(ret.set(), ret, lhs, rhs, m);
+    return ret;
   }
   
 } // vcsn

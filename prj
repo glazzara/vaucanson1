@@ -1,18 +1,31 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 443)
-(Parent-Version vaucanson 0 442)
+(Project-Version vaucanson 0 444)
+(Parent-Version vaucanson 0 443)
 (New-Version-Log "")
 
 (Version-Log "
-2003-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/misc/limits.hh: 
-		Fix missing type specialization.
-
+	* include/vaucanson/automata/concept/automata_base.hh,
+	  include/vaucanson/automata/concept/automata_base.hh:
+	  (add_spontaneous): Provide weighted version.
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	  include/vaucanson/automata/concept/automata_ops.hh:
+	  (op_add_spontaneous):  Use a new paramater.
+	* include/vaucanson/automata/concrete/graph.hxx: Minor change.
+	* include/vaucanson/algorithms/product.hxx: Fix.
+	* include/vaucanson/algorithms/standard.hxx: 
+	  (do_in_standardize): Implement.
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	  include/vaucanson/algorithms/projection.hxx,
+	  include/vaucanson/algorithms/extension.hxx:
+	  Fix unused parameters.
+	* include/vaucanson/algorithms/evaluation.hxx:
+	  Fix unused parameters and inconsistent sets.
 ")
-(Checkin-Time "Tue, 14 Oct 2003 15:44:02 +0200")
+(Checkin-Time "Fri, 17 Oct 2003 17:52:36 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -95,7 +108,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.76 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.77 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -203,7 +216,7 @@
   (src/tests/fundamental/intrinsics_assign.cc (vaucanson/q/5_intrinsics 1.2 600))
   (src/tests/fundamental/intrinsics.hh (vaucanson/q/6_intrinsics 1.2 600))
 
-  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.24 600))
+  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.25 600))
   (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.25 600))  
   (include/vaucanson/algebra/concept/freemonoid_base.hh (vaucanson/c/1_freemonoid 1.17 600))
   (include/vaucanson/algebra/concept/freemonoid_base.hxx (vaucanson/c/0_freemonoid 1.17 600))
@@ -303,8 +316,8 @@
 
   (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.14 600))
   (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.13 600))
-  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.23 600))
-  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.20 600))
+  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.24 600))
+  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.21 600))
   (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.8 600))
   (include/vaucanson/automata/concept/copy.hxx (vaucanson/d/5_copy.hxx 1.8 600))
   (include/vaucanson/automata/concept/handlers.hh (vaucanson/d/2_handlers.h 1.11 600))
@@ -315,8 +328,8 @@
   (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.7 600))
   (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.8 600))
   (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.7 600))
-  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.16 600))
-  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.4 600))
+  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.17 600))
+  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.5 600))
   (include/vaucanson/automata/concept/delta_kind.hh (vaucanson/q/14_delta_kind 1.2 600))
   (include/vaucanson/automata/concept/automata_kind.hh (vaucanson/q/18_automata_k 1.2 600))
   (include/vaucanson/automata/concept/history.hh (vaucanson/q/19_history.hh 1.3 600))
@@ -329,7 +342,7 @@
   (include/vaucanson/automata/concept/transducer_base.hxx (vaucanson/q/38_transducer 1.7 600))
   (include/vaucanson/automata/concept/transducer_ops.hxx (vaucanson/q/39_transducer 1.4 600))
 
-  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.7 600))
+  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.8 600))
   (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.14 600))
   (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.9 600))
   (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.11 600))
@@ -379,13 +392,13 @@
   (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.14 600))
   (include/vaucanson/algorithms/normalized.hxx (vaucanson/d/43_normalized 1.18 600))
   (include/vaucanson/algorithms/product.hh (vaucanson/e/20_product.hh 1.16 600))
-  (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.20 600))
+  (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.21 600))
   (include/vaucanson/algorithms/accessible.hh (vaucanson/d/33_reachable. 1.15 600))
   (include/vaucanson/algorithms/accessible.hxx (vaucanson/d/32_reachable. 1.15 600))
   (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.15 600))
   (include/vaucanson/algorithms/realtime.hxx (vaucanson/e/47_realtime.h 1.14 600))
   (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.14 600))
-  (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.13 600))
+  (include/vaucanson/algorithms/standard.hxx (vaucanson/e/39_standard.h 1.14 600))
   (include/vaucanson/algorithms/thompson.hh (vaucanson/e/45_thompson.h 1.14 600))
   (include/vaucanson/algorithms/thompson.hxx (vaucanson/e/44_thompson.h 1.12 600))
   (include/vaucanson/algorithms/transpose.hh (vaucanson/d/37_transpose. 1.15 600))
@@ -790,7 +803,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:41 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/realtime_composition.hxx (vaucanson/r/46_realtime_c 1.2 600))
+  (include/vaucanson/algorithms/realtime_composition.hxx (vaucanson/r/46_realtime_c 1.3 600))
 
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:48 +0200,
 ;; to version 0.422(w), by yann:
@@ -800,7 +813,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:50 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.5 600))
+  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.6 600))
 
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:05 +0200,
 ;; to version 0.424(w), by yann:
@@ -810,7 +823,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:06 +0200,
 ;; to version 0.424(w), by yann:
 
-  (include/vaucanson/algorithms/extension.hxx (vaucanson/r/50_extension. 1.2 600))
+  (include/vaucanson/algorithms/extension.hxx (vaucanson/r/50_extension. 1.3 600))
 
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:11 +0200,
 ;; to version 0.424(w), by yann:
@@ -820,7 +833,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:13 +0200,
 ;; to version 0.424(w), by yann:
 
-  (include/vaucanson/algorithms/projection.hxx (vaucanson/s/0_projection 1.3 600))
+  (include/vaucanson/algorithms/projection.hxx (vaucanson/s/0_projection 1.4 600))
 
 ;; Files added by populate at Thu, 02 Oct 2003 09:38:47 +0200,
 ;; to version 0.427(w), by yann:

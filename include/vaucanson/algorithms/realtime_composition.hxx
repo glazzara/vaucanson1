@@ -39,7 +39,7 @@ namespace vcsn {
   template< typename S,
 	    typename Trans_t>
   void
-  do_realtime_composition(const TransducerBase<S>& st,
+  do_realtime_composition(const TransducerBase<S>&,
 			  const Trans_t& lhs,
 			  const Trans_t& rhs,
 			  Trans_t& ret)
