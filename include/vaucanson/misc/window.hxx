@@ -180,7 +180,7 @@ namespace utility {
   typename Window<InputIterator, Letter>::string_t
   Window<InputIterator, Letter>::window() const
   {
-    return string_t (stream_, stream + size_);
+    return string_t (stream_, stream_ + size_);
   }
 
   template <class InputIterator, class Letter>

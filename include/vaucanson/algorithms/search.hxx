@@ -40,8 +40,6 @@
  */
 
 # include <vaucanson/algorithms/search.hh>
-# include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/misc/window.hh>
 # include <vaucanson/misc/bitset.hh>
 
@@ -93,12 +91,12 @@ namespace vcsn {
     precondition(distances.size() == 0);
 
     // Typedefs.
-    typedef typename vcsn::Element<Automata<Series>, T> automaton_t;
+    typedef typename vcsn::Element<Automata<Series>, T>	automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
     // Code.
-    StatesSet		s_new (a.states().size());
-    StatesSet		s_old (a.states().size());
+    StatesSet		s_new (a.states().max() + 1);
+    StatesSet		s_old (a.states().max() + 1);
     unsigned int	i = 0;
 
     s_old.insert(a.initial().begin(), a.initial().end());
@@ -126,40 +124,16 @@ namespace vcsn {
     return i - 1;
   }
   
-  /// Build an automaton to recognize reverse factors of L(a).
-  template <class Series, class T>
-  static
-  void
-  build_reverse_factor_automaton(Element<Automata<Series>, T>& a)
-  {
-    // Typedefs.
-    typedef typename vcsn::Element<Automata<Series>, T> automaton_t;
-    AUTOMATON_TYPES(automaton_t);
-
-    // Code.
-    automaton_t tmp (a);
-    transpose(a, tmp);
-    // All states are initial...
-    for_each_state(s, tmp)
-      a.set_initial(*s);
-    // Forget about final states.
-    for_each_final_state(f, tmp)
-      a.unset_final(*f);
-    // Each initial state is now final.
-    for_each_initial_state(i, tmp)
-      a.set_final(*i);
-  }
-
   /**
    * @brief Back search inside a window.
    *
    * Returns whether the window is a potential match for the given
-   * reverse factor automaton or not as the first element of the
-   * pair. The second element is the maximal value we can use to shift
-   * the window without skipping matches.
+   * automaton or not as the first element of the pair. The second
+   * element is the maximal value we can use to shift the window
+   * without skipping matches.
    *
    * @param w The window.
-   * @param rfa The reverse factor automaton to use.
+   * @param a The automaton to use.
    * @param distances Distances get from compute_distances().
    *
    * @see search(), build_reverse_factor_automaton(), compute_distances()
@@ -169,11 +143,10 @@ namespace vcsn {
   std::pair<bool, unsigned int>
   window_backsearch(const utility::Window<InputIterator,
 		    typename Element<Automata<Series>, T>::letter_t>& w,
-		    const Element<Automata<Series>, T>& rfa,
+		    const Element<Automata<Series>, T>& a,
 		    const std::vector<StatesSet>& distances)
   {
     precondition(w.size() > 0);
-    precondition(rfa.initial().size() > 0);
 
     // Typedefs.
     typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
@@ -183,27 +156,27 @@ namespace vcsn {
     typedef utility::Bitset					bitset_t;
 
     // Code.
-    bitset_t	s_new (rfa.states().size());
-    bitset_t	s_old (rfa.states().size());
-    length_t	critpos = w.size();
-    int		pos;
+    bitset_t	s_new (a.states().max() + 1);
+    bitset_t	s_old (a.states().max() + 1);
+    int		pos = w.size();
+    length_t	critpos = pos;
 
-    s_old.insert(rfa.initial().begin(), rfa.initial().end());
-    for (pos = critpos - 1; (pos >= 0) && !s_old.empty(); --pos)
+    s_old.insert(distances[pos].begin(), distances[pos].end());
+    while ((--pos >= 0) && !s_old.empty())
       {
 	s_new.clear();
 	for (bitset_t::const_iterator s = s_old.begin(); s != s_old.end(); ++s)
-	  if (distances[pos + 1].count(*s))
+	  if (distances[pos + 1].find(*s) != distances[pos + 1].end())
 	    {
-	      if (rfa.is_final(*s))
+	      if (a.is_initial(*s))
 		critpos = pos + 1;
-	      rfa.letter_deltac(s_new, *s, w[pos], delta_kind::states());
+	      a.letter_rdeltac(s_new, *s, w[pos], delta_kind::states());
 	    }
 	std::swap(s_new, s_old);
       }
     if (pos < 0)
       for (bitset_t::const_iterator s = s_old.begin(); s != s_old.end(); ++s)
-	if (rfa.is_final(*s))
+	if (a.is_initial(*s))
 	  return std::make_pair(true, critpos);
     return std::make_pair(false, critpos);
   }
@@ -227,8 +200,8 @@ namespace vcsn {
     typedef utility::Bitset					bitset_t;
 
     // Code.
-    bitset_t	s_old (a.states().size());
-    bitset_t	s_new (a.states().size());
+    bitset_t	s_old (a.states().max() + 1);
+    bitset_t	s_new (a.states().max() + 1);
     iterator_t  pos = w.stream();
     iterator_t	last = pos;
 
@@ -271,34 +244,31 @@ namespace vcsn {
     typedef utility::Bitset					bitset_t;
 
     // Code.
-    std::vector<bitset_t> distances;
-    length_t wl = compute_distances(a, distances);
+    std::vector<bitset_t>	distances;
+    length_t			wl = compute_distances(a, distances);
+
     if (wl == 0)
+      warning("Search match every position in the stream, ignored.");
+    else
       {
-	warning("Search match every position in the stream, ignored.");
-	return ;
-      }
-    automaton_t	rfa = sub_automaton(a, distances[wl]);
-    build_reverse_factor_automaton(rfa);
-    window_t	w (begin, end, eol, wl);
-    while (! w.eof())
-      {
-	if (w.size() == wl)
+	window_t		w (begin, end, eol, wl);
+	InputIterator		it;
+
+	while (!w.eof())
 	  {
-	    std::pair<bool, length_t> p = window_backsearch(w, rfa, distances);
-	    if (p.first)
+	    if (w.size() != wl)
+	      w.shift();
+	    else
 	      {
-		InputIterator it = confirm_and_report_match(w, a, f);
-		if (it != w.stream())
-		    w.moveto(it);
+		std::pair<bool, length_t> p =
+		  window_backsearch(w, a, distances);
+		if (p.first &&
+		    (it = confirm_and_report_match(w, a, f)) != w.stream())
+		  w.moveto(it);
 		else
 		  w.shift(p.second);
 	      }
-	    else
-	      w.shift(p.second);
 	  }
-	else
-	  w.shift();
       }
   }
 

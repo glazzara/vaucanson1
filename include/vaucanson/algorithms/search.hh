@@ -107,6 +107,9 @@ namespace vcsn {
    * This class owns a specific implementation of search. This implementation
    * use an algorithm able to skip characters in the input stream, using a
    * backward search inside windows in the stream.
+   * 
+   * One important precondition for using this algorithm is that there *must*
+   * be no spontaneous transition inside the given automaton.
    *
    * @see search(), FindBestSearch
    *

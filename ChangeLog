@@ -1,3 +1,12 @@
+2003-09-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/misc/window.hxx: Typo.
+	* include/vaucanson/algorithms/search.hh: Document.
+	* include/vaucanson/algorithms/search.hxx: Fix and clean. Do not use
+	transpose and sub_automaton anymore.
+	* include/vaucanson/misc/bitset.hh: Effectively do the last change,
+	which has been forgoten (bugfix).
+
 2003-09-10  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/misc/bitset.cc: New. Add tests for misc::Bitset.

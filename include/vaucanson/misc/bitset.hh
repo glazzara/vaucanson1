@@ -59,8 +59,10 @@ namespace utility
     typedef std::less<key_type>				key_compare;
     typedef key_compare					value_compare;
     // FIXME: Missing to be std::set compliant: allocator_type.
-    typedef value_type&					reference;
-    typedef const value_type&				const_reference;
+    // FIXME: reference and const_reference are not real references, because
+    // it would prevents a code using a reverse_iterator to compile.
+    typedef value_type					reference;
+    typedef const value_type				const_reference;
     struct						iterator;
     struct						const_iterator;
     typedef unsigned int				size_type;
