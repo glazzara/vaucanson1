@@ -146,14 +146,14 @@ cat > $FILE <<EOF
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
    #include <vaucanson/misc/fsm_dump.hh> 
-   #include <vaucanson/algorithms/closure.hh>
+   #include <vaucanson/algorithms/forward_closure.hh>
    using namespace vcsn;
 
    int main(int argc, char **argv)
    {
      automaton_t automaton;
      misc::fsm_load(std::cin, automaton);
-     automaton_t auto_m = closure(automaton);
+     automaton_t auto_m = forward_closure(automaton);
      misc::fsm_dump(std::cout, auto_m);
      return EXIT_SUCCESS;
    }

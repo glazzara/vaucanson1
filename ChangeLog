@@ -1,3 +1,11 @@
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/complete.hh: Document.
+		(auto_in_complete): Rename to complete_here.
+	* include/vaucanson/algorithms/complete.hxx: Likewise.
+	* src/tests/automata/algos/complete_test.hh: Likewise.
+	* src/demos/fsm/generate_toolbox.sh: Use forward_closure.
+
 2003-06-20  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/transpose.hh,

@@ -28,9 +28,13 @@
 
 namespace vcsn {
 
+  /*--------------.
+  | complete_here |
+  `--------------*/
+  // author: Yann Régis-Gianas
   template <typename A, typename T>
   void
-  auto_in_complete(Element<A, T>& work)
+  complete_here(Element<A, T>& work)
   {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
@@ -49,15 +53,23 @@ namespace vcsn {
       }
   }
 
+  /*---------.
+  | complete |
+  `---------*/
+  // author: Yann Régis-Gianas.
   template <typename A, typename T>
   Element<A, T>
-  auto_complete(const Element<A, T>& e)
+  complete(const Element<A, T>& e)
   {
     Element<A, T> res(e);
-    auto_in_complete(res);
+    complete_here(res);
     return res;
   }
 
+  /*------------.
+  | is_complete |
+  `------------*/
+  // author: Yann Régis-Gianas.
   template <class A, class T>
   bool
   is_complete(const Element<A, T>& e)

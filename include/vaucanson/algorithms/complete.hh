@@ -24,21 +24,47 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
+/**
+ * @file   complete.hh
+ * @brief  Completion algorithm for deterministic and boolean automaton.
+ */
+
 namespace vcsn {
 
   /*! \addtogroup algorithms */  /* @{ */
 
-  //! Complete the automaton to have an output for every letters in each state.
+  /** 
+   * Make the transition function of an automaton total w.r.t alphabet.
+   * Work in place.
+   *
+   * @param a the deterministic and boolean automaton to complete.
+   * @see complete.
+   * @see is_complete.
+   */ 
   template <typename A, typename T>
   void
-  auto_in_complete(Element<A, T>&);
+  complete_here(Element<A, T>& a);
 
-  //! Return the automaton which has an output for every letters in each state.
+  /** 
+   * Make the transition function of an automaton total w.r.t alphabet.
+   * Return a fresh automaton.
+   *
+   * @param a the deterministic and boolean automaton to complete.
+   * @see complete_here.
+   * @see is_complete.
+   */ 
   template <typename A, typename T>
   Element<A, T>
-  auto_complete(const Element<A, T>&);
+  complete(const Element<A, T>&);
 
-  //! Return true if the automaton is complete.
+  /** 
+   * Test if the transition function is complete for each state.
+   * 
+   * @param a the boolean automaton to test.
+   * @return true is the transition function of e is complete w.r.t alphabet.
+   * @see complete.
+   * @see complete_here.
+   */
   template <class A, class T>
   bool
   is_complete(const Element<A, T>& e);

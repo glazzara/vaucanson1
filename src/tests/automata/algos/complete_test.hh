@@ -52,7 +52,7 @@ unsigned complete_test(tests::Tester& tg)
     {
       automaton_t a = gen.generate_dfa(20);
       automaton_t b = a;
-      auto_in_complete(a);
+      complete_here(a);
       
       if ((a.edges().size() == a.states().size() * 
 	   a.set().series().monoid().alphabet().size()) 
