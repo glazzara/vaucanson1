@@ -1,6 +1,4 @@
 #!/bin/sh
 
-aclocal -I .
-autoconf -f
-automake -a
+autoreconf -v -f -i
 echo "Reconfiguration done."

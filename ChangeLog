@@ -1,3 +1,8 @@
+2003-04-07  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* bootstrap.sh: Simplify.
+	* Makefile.am (ACLOCAL_AMFLAGS, CONFIGURE_DEPENDENCIES): Add.
+
 2003-04-03  Maxime Rey  <max@lrde.epita.fr>
 
 	* src/demos/grammar_inference: Removed

@@ -1,12 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 185)
-(Parent-Version vaucanson 0 184)
-(Version-Log "")
+(Project-Version vaucanson 0 186)
+(Parent-Version vaucanson 0 185)
+(Version-Log "Index: ChangeLog
+from  Raphaël Poss  <raph@lrde.epita.fr>
+
+        * bootstrap.sh: Simplify.
+        * Makefile.am (ACLOCAL_AMFLAGS, CONFIGURE_DEPENDENCIES): Add.
+
+")
 (New-Version-Log "")
-(Checkin-Time "Thu, 03 Apr 2003 18:13:27 +0200")
-(Checkin-Login max)
+(Checkin-Time "Mon, 07 Apr 2003 11:05:24 +0200")
+(Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -88,13 +94,13 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.125 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.126 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
-  (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
+  (Makefile.am (vaucanson/48_Makefile.a 1.8 600))
   (README (vaucanson/f/48_README 1.7 600))
   (THANKS (vaucanson/f/36_THANKS 1.5 600))
-  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.2 700))
+  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.3 700))
   (configure.ac (vaucanson/47_configure. 1.6.1.17 600))
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.2 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
