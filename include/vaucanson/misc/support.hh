@@ -31,9 +31,9 @@
 # include <iterator>
 # include <map>
 
-namespace vcsn {
+namespace utility {
 
-   /** @addtogroup utility *//** @{ */
+  /** @addtogroup utility *//** @{ */
 
   template <class T>
   class Support;
@@ -104,12 +104,14 @@ namespace vcsn {
 
   /*! @} */
 
-} // vcsn
+} // utility
+
 
 namespace std {
 
   template <class Integer, class ExcludedContainer>
-  struct iterator_traits<vcsn::SparseIterator<Integer, ExcludedContainer> >
+  struct iterator_traits<utility::SparseIterator
+  <Integer, ExcludedContainer> >
   {
     typedef input_iterator_tag  iterator_category;
     typedef Integer		value_type;
@@ -120,7 +122,7 @@ namespace std {
 
 } // std
 
-namespace vcsn {
+namespace utility {
 
    /** @addtogroup utility *//** @{ */
 
@@ -223,8 +225,9 @@ namespace vcsn {
   };
 
    /** @} */
+
+} // utility
   
-} // vcsn
 
 # include <vaucanson/misc/support.hxx>
 

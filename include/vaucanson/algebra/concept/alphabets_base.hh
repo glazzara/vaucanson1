@@ -21,6 +21,11 @@
 #ifndef VCSN_ALGEBRA_ALPHABETS_BASE_HH
 # define VCSN_ALGEBRA_ALPHABETS_BASE_HH
 
+/**
+ * @file   alphabets_base.hh
+ * @brief  Definition of the alphabet concept.
+ */
+
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/misc/container_ops.hh>
 

@@ -1,3 +1,16 @@
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/alphabets_base.hh: Document.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx: Typo.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix namespace.
+	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: 
+		Likewise.
+	* include/vaucanson/misc/support.hh: Rename vcsn to utility.
+	* include/vaucanson/misc/support.hxx: Likewise.
+	* include/vaucanson/misc/constraint.hh: New.
+	* include/vaucanson/misc/container_ops.h[h,xx]: New.
+
+
 2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/product.hh,

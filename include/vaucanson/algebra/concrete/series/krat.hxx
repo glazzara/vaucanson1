@@ -26,7 +26,7 @@
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concrete/series/rat/random_visitor.hh>
-# include <vaucanson/tools/usual.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 # include <vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx>
 # include <vaucanson/algebra/concrete/series/krat_exp_support.hxx>
@@ -59,10 +59,12 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool op_is_finite_app(const algebra::Series<W, M>&, const rat::exp<Tm, Tw>& m)
+  bool op_is_finite_app(const algebra::Series<W, M>&, 
+			const rat::exp<Tm, Tw>& m)
   { 
-    vcsn::IsFiniteAppMatcher<algebra::Series<W, M>, rat::exp<Tm, Tw>, 
-      DispatchFunction<rat::exp<Tm, Tw> > > matcher;
+    vcsn::IsFiniteAppMatcher<algebra::Series<W, M>, 
+      vcsn::rat::exp<Tm, Tw>, 
+      algebra::DispatchFunction<vcsn::rat::exp<Tm, Tw> > > matcher;
     return matcher.match(m);
   }
 
@@ -72,7 +74,7 @@ namespace vcsn {
   op_support(const algebra::Series<W, M>& s, const rat::exp<Tm, Tw>& m)
   {
     vcsn::SupportMatcher<algebra::Series<W, M>, rat::exp<Tm, Tw>,
-      DispatchFunction<rat::exp<Tm, Tw> > > matcher(s);
+      algebra::DispatchFunction<rat::exp<Tm, Tw> > > matcher(s);
     matcher.match(m);
     return matcher.get();
   }
@@ -790,7 +792,7 @@ namespace vcsn {
 		   const oTm& m)
   { 
     typedef vcsn::SupportMatcher<algebra::Series<W, M>, rat::exp<Tm, Tw>,
-      DispatchFunction<rat::exp<Tm, Tw> > > matcher_t;
+      algebra::DispatchFunction<rat::exp<Tm, Tw> > > matcher_t;
     typedef typename matcher_t::ext_support_t ext_support_t;
     // we can do it only on polynomial expresssion.
    matcher_t matcher(s);

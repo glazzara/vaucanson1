@@ -25,8 +25,8 @@
 # include <vaucanson/misc/support.hh>
 # include <vaucanson/misc/contract.hh>
 # include <sstream>
-namespace vcsn {
 
+namespace utility {
 
   template <class C>
   inline
@@ -257,7 +257,7 @@ namespace vcsn {
     return iterator(to_ + 1, excluded_);
   }
 
-} // vcsn
+} // utility 
 
 # include <vaucanson/misc/support.hxx>
 

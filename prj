@@ -1,21 +1,24 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 246)
-(Parent-Version vaucanson 0 245)
-(Version-Log "2003-06-20  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 247)
+(Parent-Version vaucanson 0 246)
+(Version-Log "
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/product.hh,
-	include/vaucanson/algorithms/product.hxx: Rename auto_product to
-	product. Remove auto_in_diagonal and auto_diagonal from the interface
-	file and rename them diagonal_here and diagonal.
-	* src/tests/automata/algos/product_test.hh,
-	src/demos/fsm/generate_toolbox.sh,
-	src/demos/fsm/usual_automaton_t/vcsn_intersect.cc: Rename auto_product
-	into product.")
+	* include/vaucanson/algebra/concept/alphabets_base.hh: Document.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx: Typo.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix namespace.
+	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: 
+		Likewise.
+	* include/vaucanson/misc/support.hh: Rename vcsn to utility.
+	* include/vaucanson/misc/support.hxx: Likewise.
+	* include/vaucanson/misc/constraint.hh: New.
+	* include/vaucanson/misc/container_ops.h[h,xx]: New.
+")
 (New-Version-Log "")
-(Checkin-Time "Fri, 20 Jun 2003 18:08:20 +0200")
-(Checkin-Login clavei_t)
+(Checkin-Time "Fri, 20 Jun 2003 18:27:40 +0200")
+(Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -97,7 +100,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.51 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.52 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -197,8 +200,8 @@
   (src/tests/fundamental/intrinsics_assign.cc (vaucanson/q/5_intrinsics 1.1 600))
   (src/tests/fundamental/intrinsics.hh (vaucanson/q/6_intrinsics 1.1 600))
 
-  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.20 600))
-  (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.18 600))
+  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.21 600))
+  (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.19 600))
   
   
   (include/vaucanson/algebra/concept/freemonoid_base.hh (vaucanson/c/1_freemonoid 1.14 600))
@@ -240,7 +243,7 @@
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.19 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.21 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.22 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.3 600))
@@ -249,7 +252,7 @@
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_coefficient.hxx (vaucanson/p/23_krat_coeff 1.1 600))
   (include/vaucanson/algebra/concrete/series/krat_coefficient.hh (vaucanson/p/24_krat_coeff 1.1 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.1 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.2 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx (vaucanson/p/32_krat_exp_i 1.1 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.17 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.19 600))
@@ -761,8 +764,23 @@
   (include/vaucanson/algorithms/forward_closure.hxx (vaucanson/q/9_forward_cl 1.2 600))
   (include/vaucanson/algorithms/backward_closure.hh (vaucanson/q/10_backward_c 1.2 600))
   (include/vaucanson/algorithms/backward_closure.hxx (vaucanson/q/11_backward_c 1.2 600))
-  (include/vaucanson/misc/support.hh (vaucanson/q/12_support.hh 1.2 600))
-  (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.1 600))
-  (include/vaucanson/automata/concept/delta_kind.hh (vaucanson/q/14_delta_kind 1.1 600)))
+  (include/vaucanson/misc/support.hh (vaucanson/q/12_support.hh 1.3 600))
+  (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.2 600))
+  (include/vaucanson/automata/concept/delta_kind.hh (vaucanson/q/14_delta_kind 1.1 600))
+;; Files added by populate at Fri, 20 Jun 2003 18:27:10 +0200,
+;; to version 0.246(w), by yann:
+
+  (include/vaucanson/misc/container_ops.hxx (vaucanson/q/15_container_ 1.1 600))
+
+;; Files added by populate at Fri, 20 Jun 2003 18:27:18 +0200,
+;; to version 0.246(w), by yann:
+
+  (include/vaucanson/misc/container_ops.hh (vaucanson/q/16_container_ 1.1 600))
+
+;; Files added by populate at Fri, 20 Jun 2003 18:27:24 +0200,
+;; to version 0.246(w), by yann:
+
+  (include/vaucanson/misc/constraints.hh (vaucanson/q/17_constraint 1.1 600))
+)
 (Merge-Parents)
 (New-Merge-Parents)

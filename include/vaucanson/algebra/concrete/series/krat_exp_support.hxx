@@ -24,6 +24,7 @@
 
 # include <utility>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
+# include <vaucanson/algebra/concept/monoid_base.hh>
 
 namespace vcsn {
 
@@ -105,7 +106,7 @@ namespace vcsn {
 
     MATCH(One)
     {
-      supp_.push_back(identity_as<monoid_value_t>
+      supp_.push_back(algebra::identity_as<monoid_value_t>
 		      ::of(series_.monoid()).value());
     }
     END
