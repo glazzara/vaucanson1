@@ -234,7 +234,7 @@ namespace vcsn {
   standard_of(const Exp& e)
   {
     A automata_structure(e.structure());
-    Element<A, T> out(automata_set);
+    Element<A, T> out(automata_structure);
     standard_of(out, e);
     return out;
   }
