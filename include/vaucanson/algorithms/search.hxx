@@ -1,7 +1,7 @@
 // search.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -145,6 +145,7 @@ namespace vcsn {
     // Typedefs.
     typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
+    AUTOMATON_FREEMONOID_TYPES(automaton_t);
     typedef typename utility::Window<InputIterator, letter_t>	window_t;
     typedef typename window_t::length_t				length_t;
     typedef utility::Bitset					bitset_t;
@@ -187,6 +188,7 @@ namespace vcsn {
     // Typedefs.
     typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
+    AUTOMATON_FREEMONOID_TYPES(automaton_t);
     typedef typename utility::Window<InputIterator, letter_t>	window_t;
     typedef typename window_t::length_t				length_t;
     typedef typename window_t::iterator_t			iterator_t;
@@ -234,6 +236,7 @@ namespace vcsn {
     // Typedefs.
     typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
+    AUTOMATON_FREEMONOID_TYPES(automaton_t);
     typedef typename utility::Window<InputIterator, letter_t>	window_t;
     typedef typename window_t::length_t				length_t;
     typedef utility::Bitset					bitset_t;

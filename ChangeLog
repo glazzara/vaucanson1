@@ -1,3 +1,78 @@
+2005-02-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+
+	This patch includes a context header to be able to manipulate
+	transducers seen as automata over a free monoid product.
+
+	In order to make everything work, some commonly used macros (such
+	as AUTOMATON_TYPES) have been modified, and some typedefs
+	(letter_t, alphabet_t as undefined_type) have been added in the
+	FreeMonoidProductBase class.
+
+	* include/vaucanson/fmp_transducer.hh: New. Add a context header for
+	transducers seen as automata over a free monoid product.
+	* include/Makefile.am: Update.
+
+	* src/tests/fmp_transducers/instantiation_test.hh,
+	* src/tests/fmp_transducers/Makefile.am: New. Test the instantiation of
+	transducers using fmp_transducer context header.
+	* src/tests/Makefile.am,
+	* configure.ac: Update.
+
+	* src/tests/test-suites/fmp_transducer.defs: New. Instantiate a test
+	on transducers seen as automata over a free monoid product.
+	* src/tests/test-suites/generate-all.sh: Update.
+
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh: Add
+	typedefs to define letter_t and alphabet_t as undefined_type, in order
+	to avoid problems due to the fact that we too often suppose that we are
+	working on a free monoid.
+
+	* include/vaucanson/tools/usual_macros.hh: Modify AUTOMATON_TYPES*
+	macros to stop supposing we are working on a free monoid. Add
+	AUTOMATON_FREEMONOID_TYPES* macros to do the typedefs removed in the
+	previous macros.
+
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/internal/build_pattern.hh,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/berry_sethi.hxx,
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/tools/gen_random.hxx,
+	* include/vaucanson/tools/fsm_dump.hxx,
+	* include/vaucanson/tools/gen_book.hxx,
+	* src/tests/k_automata/standard_of_regression_test.hh,
+	* src/tests/xml/export_static.cc,
+	* src/tests/xml/import_generic.cc,
+	* src/tests/xml/import_session.cc,
+	* src/tests/xml/import_dynamic.cc,
+	* src/tests/xml/import_static.cc,
+	* src/tests/boolean_automata/brzozowski_test.hh,
+	* src/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/automata/algos/is_isomorph_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/aci_canonical_test.hh,
+	* src/tests/automata/algos/thompson_test.hh,
+	* src/tests/automata/algos/complete_test.hh,
+	* src/tests/automata/algos/trim_test.hh,
+	* src/tests/automata/algos/compute_test.hh,
+	* src/tests/automata/algos/derivatives_automaton_test.hh,
+	* src/tests/automata/algos/transpose_test.hh,
+	* src/tests/automata/algos/berry_sethi_test.hh,
+	* src/tests/automata/algos/sub_automaton_test.hh,
+	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh,
+	* src/tests/automata/algos/product_regression_test.hh: Update according
+	to changes made in usual_macros.hh.
+
 2005-02-16  Raphael Poss  <raph@lrde.epita.fr>
 
 	* reheader.pl: Do not add copyright information for another year
@@ -8,7 +83,7 @@
 	* config/xml.m4: Rename to...
 	* config/vaucanson_xml.m4: ...this.
 	* Makefile.am: Update accordingly.
-	
+
 2005-02-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx: Minor

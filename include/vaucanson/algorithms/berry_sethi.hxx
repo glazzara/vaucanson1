@@ -1,7 +1,7 @@
 // berry_sethi.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -97,7 +97,7 @@ namespace vcsn {
     std::list<Exp>	exp_list;
 
     exp_list.push_back(exp);
-    
+
     while (!exp_list.empty())
     {
       Exp	exp = exp_list.front();
@@ -158,6 +158,7 @@ namespace vcsn {
     /** @} */
     // Common types.
     AUTOMATON_TYPES(T_auto);
+    AUTOMATON_FREEMONOID_TYPES(T_auto);
 
     /**
      * @brief Default constructor.

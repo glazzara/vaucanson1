@@ -1,7 +1,7 @@
 // derivatives_automaton.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -97,6 +97,7 @@ namespace vcsn {
     typedef std::list<exp_t>				exp_list_t;
     typedef typename exp_list_t::iterator		exp_list_iterator;
     AUTOMATON_TYPES(T_auto);
+    AUTOMATON_FREEMONOID_TYPES(T_auto);
 
     // Contructor -> initialize mother class and undefined attribute,
     // which indicate if the resulting automaton is valide

@@ -1,7 +1,7 @@
 // z_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -63,6 +63,7 @@ namespace vcsn {
     typedef generalized_traits<automaton_t>::automaton_t gen_automaton_t;
 
     AUTOMATON_TYPES_EXACT(automaton_t);
+    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
 
     typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	rat_exp_impl_t;
     typedef Element<series_set_t, rat_exp_impl_t>			rat_exp_t;

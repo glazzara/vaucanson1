@@ -1,7 +1,7 @@
 // rdelta_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -44,8 +44,9 @@ unsigned rdelta_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
 
   AUTOMATON_TYPES(Auto);
-  
-  // Algebraic structures.
+  AUTOMATON_FREEMONOID_TYPES(Auto);
+
+ // Algebraic structures.
   alphabet_t		alphabet;
   letter_t		a (alphabet.random_letter());
   letter_t		b (alphabet.random_letter());

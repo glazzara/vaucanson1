@@ -1,7 +1,7 @@
 // gen_random.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -163,6 +163,7 @@ namespace vcsn {
 	   unsigned istate, unsigned fstate)
   {
     AUTOMATON_TYPES(TAutomata);
+    AUTOMATON_FREEMONOID_TYPES(TAutomata);
     int nb_edge = nb_edge_;
     // check consistency of automaton
     if (nb_edge_ < nb_state - 1)
@@ -327,7 +328,7 @@ namespace vcsn {
 	       unsigned fstate)
   {
     AUTOMATON_TYPES(TAutomata);
-
+    AUTOMATON_FREEMONOID_TYPES(TAutomata);
     automaton_t work(set);
 
     for (unsigned i = 0; i < nb_state; i++)

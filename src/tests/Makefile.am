@@ -15,6 +15,7 @@ SUBDIRS =					\
 	k_automata				\
 	transducers				\
 	xml					\
-	context_headers
+	context_headers				\
+	fmp_transducers
 
 EXTRA_DIST = bin/generate-test-suite.sh

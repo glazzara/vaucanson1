@@ -1,7 +1,7 @@
 // import_session.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -44,6 +44,7 @@ int main()
 
   typedef ATTACH_XML_INFOS(vcsn::boolean_automaton::automaton_t) automaton_t;
   AUTOMATON_TYPES_EXACT(automaton_t);
+  AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
 
   alphabet_t		at;
   monoid_t		md (at);

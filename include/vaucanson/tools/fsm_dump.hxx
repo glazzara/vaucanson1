@@ -1,7 +1,7 @@
 // fsm_dump.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -142,7 +142,7 @@ namespace vcsn {
     void fsm_load(St& in, AutoType_& a)
     {
       AUTOMATON_TYPES(AutoType_);
-
+      AUTOMATON_FREEMONOID_TYPES(AutoType_);
       // read everything and build the alphabet.
       alphabet_t		alpha;
       unsigned			nb = 0;

@@ -1,7 +1,7 @@
 // build_pattern.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -67,6 +67,7 @@ namespace vcsn {
       // Useful types :))
       typedef T_auto*						T_auto_p;
       AUTOMATON_TYPES(T_auto);
+      AUTOMATON_FREEMONOID_TYPES(T_auto);
       // Types for the list
       // It uses a map with an ordered function which can be
       // redefined in Self
@@ -107,7 +108,7 @@ namespace vcsn {
     /*------------------------.
     | MathAutomataConstructor |
     `------------------------*/
- 
+
     // This  Algorithm builder takes a struture
     // which contains different functions (like IncAutomataConstructor)
     // but the functions needed are mathematical definitions
@@ -121,6 +122,7 @@ namespace vcsn {
     public:
       // Types used. The map make link between Etiq and hstate_t.
       AUTOMATON_TYPES(T_auto);
+      AUTOMATON_FREEMONOID_TYPES(T_auto);
       typedef T_auto*						T_auto_p;
       typedef std::map<Etiq, hstate_t, Comparator<Self, Etiq> >	StateMap;
       typedef typename StateMap::iterator			iterator;
@@ -158,6 +160,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     #include <vaucanson/algorithms/internal/build_pattern.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_ALGORITHMS_INTERNAL_BUILD_PATTERN_HH

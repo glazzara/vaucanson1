@@ -118,3 +118,7 @@ done;
    boolean_transducer.defs \
    ../transducers
 
+../bin/generate-test-suite.sh \
+   fmp_transducer \
+   fmp_transducer.defs \
+   ../fmp_transducers

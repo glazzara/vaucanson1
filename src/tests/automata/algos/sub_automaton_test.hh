@@ -1,7 +1,7 @@
 // sub_automaton_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -43,7 +43,8 @@ unsigned sub_automaton_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
 
   AUTOMATON_TYPES(Auto);
-  
+  AUTOMATON_FREEMONOID_TYPES(Auto);
+
   // Algebraic structures.
   alphabet_t		alphabet;
   letter_t		a (alphabet.random_letter());
@@ -82,12 +83,12 @@ unsigned sub_automaton_test(tests::Tester& tg)
 
   TEST(t, "r has the right number of initial states. ",
        r.initial().size() == 1);
-  
+
   TEST(t, "r has the right number of final states. ", r.final().size() == 1);
 
   TEST(t, "r has consistant initial states. ",
        r.initial().max() <= r.states().max());
-  
+
   TEST(t, "r has consistant final states. ",
        r.final().max() <= r.states().max());
 

@@ -1,7 +1,7 @@
 // trim_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -38,6 +38,7 @@ template <class Auto>
 bool	trim_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
+  AUTOMATON_FREEMONOID_TYPES(Auto);
 
   tests::Tester		t(tg.verbose());
 

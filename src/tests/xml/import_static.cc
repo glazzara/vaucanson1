@@ -14,6 +14,7 @@ main()
 
   typedef ATTACH_XML_INFOS(vcsn::boolean_automaton::automaton_t) automaton_t;
   AUTOMATON_TYPES_EXACT(automaton_t);
+  AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
 
   alphabet_t		at;
   monoid_t		md (at);

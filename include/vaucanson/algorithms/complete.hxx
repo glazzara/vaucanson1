@@ -1,7 +1,7 @@
 // complete.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -52,7 +52,7 @@ namespace vcsn {
   {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
-
+    AUTOMATON_FREEMONOID_TYPES(automaton_t);
     hstate_t puits = work.add_state();
     std::list<hstate_t> aim;
 
@@ -91,7 +91,7 @@ namespace vcsn {
   {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
-
+    AUTOMATON_FREEMONOID_TYPES(automaton_t);
     for_each_state(i, e)
       {
 	std::set<hstate_t> aim;

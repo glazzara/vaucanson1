@@ -1,7 +1,7 @@
 // krat_exp_realtime_conflict_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -48,6 +48,7 @@ unsigned krat_exp_realtime_conflict_test(tests::Tester& tg)
   // realtime()   in   krat_exp_realtime.hh.   The  following   is   a
   // corresponding regression test.
   AUTOMATON_TYPES(Auto);
+  AUTOMATON_FREEMONOID_TYPES(Auto);
   typedef
     vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef vcsn::Element<series_set_t, exp_t>			krat_exp_t;

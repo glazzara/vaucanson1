@@ -1,7 +1,7 @@
 // usual_macros.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -64,10 +64,6 @@
  typedef typename AutoType::monoid_t				Prefix##monoid_t;		\
  typedef typename AutoType::monoid_elt_t			Prefix##monoid_elt_t;		\
  typedef typename Prefix##monoid_elt_t::value_t			Prefix##monoid_elt_value_t;	\
- typedef typename Prefix##monoid_t::alphabets_elt_t		Prefix##alphabets_elt_t;	\
- typedef typename Prefix##monoid_t::alphabet_t			Prefix##alphabet_t;		\
- typedef typename Prefix##alphabet_t::const_iterator		Prefix##alphabet_iterator;	\
- typedef typename Prefix##alphabet_t::letter_t			Prefix##letter_t;		\
  typedef typename AutoType::semiring_t				Prefix##semiring_t;		\
  typedef typename AutoType::series_set_t			Prefix##series_set_t;		\
  typedef typename AutoType::series_set_elt_value_t		Prefix##series_set_elt_value_t;	\
@@ -91,10 +87,6 @@
  typedef AutoType::monoid_t				Prefix##monoid_t;		\
  typedef AutoType::monoid_elt_t				Prefix##monoid_elt_t;		\
  typedef Prefix##monoid_elt_t::value_t			Prefix##monoid_elt_value_t;	\
- typedef Prefix##monoid_t::alphabets_elt_t		Prefix##alphabets_elt_t;	\
- typedef Prefix##monoid_t::alphabet_t			Prefix##alphabet_t;		\
- typedef Prefix##alphabet_t::const_iterator		Prefix##alphabet_iterator;	\
- typedef Prefix##alphabet_t::letter_t			Prefix##letter_t;		\
  typedef AutoType::semiring_t				Prefix##semiring_t;		\
  typedef AutoType::series_set_t				Prefix##series_set_t;		\
  typedef AutoType::series_set_elt_value_t		Prefix##series_set_elt_value_t;	\
@@ -105,7 +97,31 @@
  typedef AutoType::tag_t				Prefix##tag_t;
 
 #define AUTOMATON_TYPES(AutoType)           AUTOMATON_TYPES_(AutoType,)
-#define AUTOMATON_TYPES_EXACT(AutoType)     AUTOMATON_TYPES_EXACT_(AutoType,)
+#define AUTOMATON_TYPES_EXACT(AutoType)	    AUTOMATON_TYPES_EXACT_(AutoType,)
+
+
+// The following macros assume you have used a macro AUTOMATON_TYPES*
+// previously.
+
+#define AUTOMATON_FREEMONOID_TYPES_(Autotype, Prefix)						\
+ typedef typename Prefix##monoid_t::alphabets_elt_t		Prefix##alphabets_elt_t;	\
+ typedef typename Prefix##monoid_t::alphabet_t			Prefix##alphabet_t;		\
+ typedef typename Prefix##alphabet_t::const_iterator		Prefix##alphabet_iterator;	\
+ typedef typename Prefix##alphabet_t::letter_t			Prefix##letter_t;
+
+#define AUTOMATON_FREEMONOID_TYPES_EXACT_(Autotype, Prefix)				\
+ typedef Prefix##monoid_t::alphabets_elt_t		Prefix##alphabets_elt_t;	\
+ typedef Prefix##monoid_t::alphabet_t			Prefix##alphabet_t;		\
+ typedef Prefix##alphabet_t::const_iterator		Prefix##alphabet_iterator;	\
+ typedef Prefix##alphabet_t::letter_t			Prefix##letter_t;
+
+
+#define AUTOMATON_FREEMONOID_TYPES(Autotype)		\
+				AUTOMATON_FREEMONOID_TYPES_(Autotype,)
+#define AUTOMATON_FREEMONOID_TYPES_EXACT(Autotype)	\
+				AUTOMATON_FREEMONOID_TYPES_EXACT_(Autotype,)
+
+
 
 # define AUTOMATA_SET_TYPES(AutoSet)				\
 typedef AutoSet					automata_set_t;	\

@@ -1,7 +1,7 @@
 // complete_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -49,12 +49,13 @@ using namespace vcsn::tools;
 
 template <class Auto>
 unsigned complete_test(tests::Tester& tg)
-{  
+{
   tests::Tester t(tg.verbose());
   typedef Auto				automaton_t;
   typedef GenRandomAutomata<Auto>	gen_auto_t;
   AUTOMATON_TYPES(automaton_t);
-  
+  AUTOMATON_FREEMONOID_TYPES(automaton_t);
+
   gen_auto_t				gen(time(0x0));
 
   const unsigned			nb_test = 50;
@@ -63,8 +64,8 @@ unsigned complete_test(tests::Tester& tg)
   typedef std::set<hstate_t>		delta_ret_t;
   delta_ret_t				delta_ret;
   bool					result_test;
-  
-  for (unsigned i = 0 ; i < nb_test; i++) 
+
+  for (unsigned i = 0 ; i < nb_test; i++)
     {
       automaton_t a = gen.generate_dfa(30);
       automaton_t b = a;
@@ -72,8 +73,8 @@ unsigned complete_test(tests::Tester& tg)
       alphabet_t alphabet = a.structure().series().monoid().alphabet();
       result_test = true;
 
-      if ((a.edges().size() == a.states().size() * 
-	   a.structure().series().monoid().alphabet().size()) 
+      if ((a.edges().size() == a.states().size() *
+	   a.structure().series().monoid().alphabet().size())
 	  && is_deterministic(a))
 	{
 	  for (alphabet_iterator l = alphabet.begin();

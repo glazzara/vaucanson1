@@ -1,7 +1,7 @@
 // determinize.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -60,6 +60,7 @@ namespace vcsn {
 			 std::map<hstate_t, std::set<hstate_t> >())
   {
     AUTOMATON_TYPES(input_t);
+    AUTOMATON_FREEMONOID_TYPES(input_t);
     typedef typename input_t::series_set_t			    series_set_t;
     typedef typename std::set<hstate_t>	                    subset_t;
     typedef typename std::map<subset_t, hstate_t>           subset_set_t;

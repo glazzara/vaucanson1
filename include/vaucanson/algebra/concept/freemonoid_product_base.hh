@@ -67,6 +67,10 @@ namespace vcsn {
       /// The type of free monoid B*.
       typedef typename virtual_types<Self>::second_monoid_t second_monoid_t;
 
+      // FIXME
+      typedef undefined_type alphabet_t;
+      typedef undefined_type letter_t;
+
       /// First monoid's accessor.
       first_monoid_t&	first_monoid();
 

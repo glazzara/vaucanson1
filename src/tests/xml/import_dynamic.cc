@@ -1,7 +1,7 @@
 // import_dynamic.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -43,6 +43,7 @@ void
 print_out(T a)
 {
   AUTOMATON_TYPES(T);
+  AUTOMATON_FREEMONOID_TYPES(T);
 
   std::cout << "Letters:";
   for_each_letter(i, a.structure().series().monoid().alphabet())
