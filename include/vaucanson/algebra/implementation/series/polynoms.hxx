@@ -175,18 +175,63 @@ namespace vcsn {
       return map_;
     }
 
+    template<typename Tm, typename Tw>
+    const Tw&
+    polynom<Tm, Tw>::operator [] (const Tm& m) const
+    {
+      const_iterator i = map_.find(m);
+
+      if (i == map_.end())
+	throw std::invalid_argument ("word not in the support");
+      else
+	return i->second;
+    }
+
+    template<typename Tm, typename Tw>
+    Tw&
+    polynom<Tm, Tw>::operator [] (const Tm& m)
+    {
+      return map_[m];
+    }
+
     template <class Series, class Tm, class Tw>
     polynom<Tm,Tw>
     DefaultTransposeFun<Series, polynom<Tm,Tw> >::
     operator()(const Series& s,const polynom<Tm,Tw>& t) const
     {
-      typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
-      typedef typename Series::monoid_elt_t	       monoid_elt_t;
-      polynom<Tm, Tw>	new_t;
+      typedef typename polynom<Tm, Tw>::const_iterator	const_iterator;
+      typedef typename Series::monoid_t			monoid_t;
+      typedef Element<monoid_t, Tm>			monoid_elt_t;
+
+      polynom<Tm, Tw> p;
 
       for (const_iterator i = t.begin(); i != t.end(); ++i)
-	new_t[mirror(monoid_elt_t((*i).first))] = (*i).second;
-      return new_t;
+	{
+	  monoid_elt_t m (s.monoid(), i->first);
+	  m.mirror();
+	  p[m.value()] = transpose(s.semiring(), i->second);
+	}
+      return p;
+    }
+
+    template <class Series, class Tm, class Tw>
+    template <class S>
+    Tw
+    DefaultTransposeFun<Series, polynom<Tm,Tw> >::
+    transpose(const SeriesBase<S>& s, const Tw& t)
+    {
+      Element<S, Tw> e (s.self(), t);
+      e.transpose();
+      return e.value();
+    }
+
+    template <class Series, class Tm, class Tw>
+    template <class S>
+    Tw
+    DefaultTransposeFun<Series, polynom<Tm,Tw> >::
+    transpose(const SemiringBase<S>&, const Tw& t)
+    {
+      return t;
     }
 
 
@@ -689,15 +734,9 @@ namespace vcsn {
   void  op_in_transpose(const algebra::Series<W, M>& s,
 			algebra::polynom<Tm, Tw>& t)
   {
-    typedef typename algebra::polynom<Tm, Tw>::const_iterator const_iterator;
-    algebra::polynom<Tm, Tw>	new_t(t);
-
-    t.clear();
-    for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
-      {
-	Element<M, Tm> w(s.monoid(), i->first);
-	t.insert(mirror(w).value(), (*i).second);
-      }
+    algebra::DefaultTransposeFun<algebra::Series<W, M>,
+				 algebra::polynom<Tm, Tw> > f;
+    t = f(s, t);
   }
 
 } // vcsn

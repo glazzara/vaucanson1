@@ -88,6 +88,12 @@ namespace vcsn {
       const std::map<Tm, Tw>&
       as_map() const;
 
+      const Tw&
+      operator [] (const Tm& m) const;
+
+      Tw&
+      operator [] (const Tm& m);
+
     protected:
       std::map<Tm, Tw> map_;
     };
@@ -111,6 +117,14 @@ namespace vcsn {
     {
       polynom<Tm,Tw>
       operator()(const Series& s, const polynom<Tm,Tw>& l) const;
+    protected:
+      template <class S>
+      static
+      Tw transpose(const SeriesBase<S>& s, const Tw& w);
+
+      template <class S>
+      static
+      Tw transpose(const SemiringBase<S>& s, const Tw& w);
     };
 
     template <class Tm, class Tw>

@@ -40,14 +40,60 @@ namespace vcsn
   namespace rat
   {
 
-    template <class Word, class Weight>
+    template <class Semiring, class Word, class Weight>
+    ReverseVisitor<Semiring, Word, Weight>::
+    ReverseVisitor(const SemiringBase<Semiring>& s) : s_ (s)
+    {}
+
+    template <class Semiring, class Word, class Weight>
     void
-    ReverseVisitor<Word, Weight>::product(rat::Node<Word, Weight>* lhs,
-					  rat::Node<Word, Weight>* rhs)
+    ReverseVisitor<Semiring, Word, Weight>::
+    product(rat::Node<Word, Weight>* lhs, rat::Node<Word, Weight>* rhs)
     {
       lhs->accept(*this);
       rhs->accept(*this);
       swap(lhs, rhs);
+    }
+
+    template <class Semiring, class Word, class Weight>
+    void
+    ReverseVisitor<Semiring, Word, Weight>::left_weight(Weight& w)
+    {
+      w = transpose(w);
+    }
+
+    template <class Semiring, class Word, class Weight>
+    void
+    ReverseVisitor<Semiring, Word, Weight>::right_weight(Weight& w)
+    {
+      w = transpose(s_, w);
+    }
+
+    template <class Semiring, class Word, class Weight>
+    void
+    ReverseVisitor<Semiring, Word, Weight>::constant(Word& w)
+    {
+      w = mirror(w);
+    }
+
+    template <class Semiring, class Word, class Weight>
+    template <class S>
+    Weight
+    ReverseVisitor<Semiring, Word, Weight>::
+    transpose(const SeriesBase<S>& s, Weight& w)
+    {
+      Element<S, Weight> e (s, w);
+      e.transpose();
+      return e.value();
+    }
+
+    template <class Semiring, class Word, class Weight>
+    template <class S>
+    Weight
+    ReverseVisitor<Semiring, Word, Weight>::
+    transpose(const SemiringBase<S>&, Weight& w)
+    {
+      return w;
     }
 
   } // End of namespace rat.
@@ -58,10 +104,10 @@ namespace vcsn
     template <typename S, typename Word, typename Weight>
     rat::exp<Word, Weight>&
     DefaultTransposeFun< S, rat::exp<Word, Weight> >::
-    operator () (const S&, const rat::exp<Word, Weight>& exp)
+    operator () (const S& s, const rat::exp<Word, Weight>& exp)
     {
-      rat::exp<Word, Weight>*	   rexp = new rat::exp<Word, Weight> (exp);
-      rat::ReverseVisitor<Word, Weight> rv;
+      rat::exp<Word, Weight>* rexp = new rat::exp<Word, Weight> (exp);
+      rat::ReverseVisitor<S::semiring_t, Word, Weight> rv (s.semiring());
 
       rexp.accept(rv);
       return *rexp;

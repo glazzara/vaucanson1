@@ -40,18 +40,42 @@ namespace vcsn
   namespace rat
   {
 
-    template <class Word, class Weight>
+    template <class Semiring, class Word, class Weight>
     class ReverseVisitor :
       public rat::DefaultMutableNodeVisitor<Word, Weight>
     {
     public:
+      ReverseVisitor(const SemiringBase<Semiring>& s);
+
       virtual
       void
       product(rat::Node<Word, Weight>* lhs,
 	      rat::Node<Word, Weight>* rhs);
 
-      // FIXME: The constants should be reversed, too.
+      virtual
+      void
+      ReverseVisitor<Word, Weight>::constant(Word& w);
 
+      virtual
+      void
+      ReverseVisitor<Word, Weight>::left_weight(Weight& w);
+
+      virtual
+      void
+      ReverseVisitor<Word, Weight>::right_weight(Weight& w);
+
+    protected:
+      template <class S>
+      static
+      Weight
+      transpose(const SeriesBase<S>&, Weight);
+
+      template <class S>
+      static
+      Weight
+      transpose(const SemiringBase<S>&, Weight);
+
+      const Semiring& s_;
     };
 
   } // End of namespace rat.

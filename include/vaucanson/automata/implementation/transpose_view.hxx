@@ -221,6 +221,7 @@ namespace vcsn {
 	      hedge_t e)
   {
     return op_label_of(s, v.object(), e);
+    // FIXME: The label should be transposed.
   }
 
   template <class S, class T>
@@ -229,7 +230,10 @@ namespace vcsn {
 	      const TransposeView<T>& v,
 	      hedge_t e)
   {
-    return op_series_of(s, v.object(), e);
+    typename Element<S, T>::series_set_elt_t r =
+				op_series_of(s, v.object(), e);
+    r.transpose();
+    return r;
   }
 
   template <class S, class T>

@@ -1,3 +1,17 @@
+2004-07-15  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Rewrite
+	DefaultTransposeFun. Use DefaultTransposeFun in op_in_transpose. While
+	transposing, when the semiring of a polynom is a series, transpose the
+	weight as well.
+
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx:
+	Modify ReverseVisitor. Add transpose methods.
+	* include/vaucanson/automata/implementation/transpose_view.hxx
+	(op_series_of):	Transpose labels.
+
 2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/contextual_transducer_functions.thxx: Clean. Do
