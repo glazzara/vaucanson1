@@ -1,4 +1,4 @@
-// check_add_state.cc
+// check_init_final.cc
 //
 // VCSN_HEADER
 

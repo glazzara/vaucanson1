@@ -1,4 +1,4 @@
-// check_add_state.cc
+// check_add_edge.cc
 //
 // VCSN_HEADER
 

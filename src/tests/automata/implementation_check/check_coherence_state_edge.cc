@@ -1,4 +1,4 @@
-// check_add_state.cc
+// check_coherence_state_edge.cc
 //
 // VCSN_HEADER
 

@@ -1,5 +1,11 @@
 2002-07-01  Maxime Rey  <max@lrde.epita.fr>
 
+	* header of implementation_check/check_init_final.cc modified
+	* header of implementation_check/check_add_edge.cc modified
+	* header of implementation_check/check_coherence_state_edge.cc modified
+
+2002-07-01  Maxime Rey  <max@lrde.epita.fr>
+
 	* Tests Initial / Final states added with :
 	  src/tests/automata/implementation_check/check_init_final.cc
 
