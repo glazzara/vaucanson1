@@ -1,3 +1,17 @@
+2003-03-26  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/Makefile.am: Update source list.
+	* src/tests/algebra/series/misc/series_test.hh: Fix a small bug in
+	the test, when two random letters are equals.
+	* src/tests/algebra/series/krat/krat_exp_linearize_test.hh
+	include/vaucanson/algorithms/krat_exp_linearize.hxx,
+	include/vaucanson/algorithms/krat_exp_linearize.hh: Move from ...
+	* src/tests/algebra/series/krat/krat_exp_realtime_test.hh,
+	include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	include/vaucanson/algorithms/krat_exp_realtime.hh: ... These.
+	* src/tests/algebra/series/krat/Makefile.am: Move
+	'krat_exp_linearize_test.hh' to 'krat_exp_realtime_test.hh'.
+
 2003-03-24  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_cderivation.hxx,

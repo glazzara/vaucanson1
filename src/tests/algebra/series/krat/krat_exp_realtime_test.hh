@@ -18,18 +18,18 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef KRAT_EXP_LINEARIZE_TEST_HH
-# define KRAT_EXP_LINEARIZE_TEST_HH
+#ifndef KRAT_EXP_REALTIME_TEST_HH
+# define KRAT_EXP_REALTIME_TEST_HH
 
 # include <check/tests_stuff.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/fundamental/element.hh>
-# include <vaucanson/algorithms/krat_exp_linearize.hh>
+# include <vaucanson/algorithms/krat_exp_realtime.hh>
 # include <vaucanson/misc/selectors.hh>
 
 template <class Expr>
-bool krat_exp_linearize_test(tests::Tester& tg)
+bool krat_exp_realtime_test(tests::Tester& tg)
 {
   typedef Expr				      krat_exp_t;
   typedef typename krat_exp_t::value_t	      kexp_t;
@@ -56,9 +56,9 @@ bool krat_exp_linearize_test(tests::Tester& tg)
   w = a;
   w = w * w * w;
   krat_exp_t exp(w);
-  krat_exp_t lin = linearize(exp);
+  krat_exp_t lin = realtime(exp);
   return t.all_passed();
 
 }
 
-#endif // KRAT_EXP_LINEARIZE_TEST_HH
+#endif // KRAT_EXP_REALTIME_TEST_HH

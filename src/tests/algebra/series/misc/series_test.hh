@@ -49,7 +49,10 @@ bool series_test(tests::Tester& t)
 
   alphabet_t	alphabet;
   letter_t	a = alphabet.random_letter();
-  letter_t	b = alphabet.random_letter();
+  letter_t	b;
+  do
+    b = alphabet.random_letter();
+  while (a == b);
   alphabet.insert(a);
   alphabet.insert(b);
 

@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+//  Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -18,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HH
-# define VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HH
+#ifndef VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH
+# define VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH
 
 # include <vaucanson/fundamental/fundamental.hh>
 
@@ -30,12 +31,12 @@ namespace vcsn {
   //! Expand words in the expression as a product of letters.
   template <class Series, class T>
   Element<Series, T>
-  linearize(const Element<Series, T>& exp);
+  realtime(const Element<Series, T>& exp);
 
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/krat_exp_linearize.hxx>
+# include <vaucanson/algorithms/krat_exp_realtime.hxx>
 
-#endif // VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HH
+#endif // VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH

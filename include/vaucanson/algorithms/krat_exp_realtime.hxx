@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and 
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -18,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HXX
-# define VCSN_ALGORITHMS_KRAT_EXP_LINEARIZE_HXX
+#ifndef VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX
+# define VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX
 
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
@@ -27,14 +28,14 @@
 namespace vcsn {
 
   template <class Series, class T, class Dispatch>
-  struct KRatExpLinearize : algebra::KRatExpIdentity<
-    KRatExpLinearize<Series, T, Dispatch>,
+  struct KRatExpRealtime : algebra::KRatExpIdentity<
+    KRatExpRealtime<Series, T, Dispatch>,
     Series, 
     T,
     Dispatch
     >
   {
-    typedef KRatExpLinearize<Series, T, Dispatch>     self_t;
+    typedef KRatExpRealtime<Series, T, Dispatch>      self_t;
     typedef Element<Series, T>                        return_type;
     typedef typename Element<Series, T>::weight_t     weight_t;
     typedef typename weight_t::value_t		      weight_value_t;
@@ -45,8 +46,8 @@ namespace vcsn {
     typedef typename alphabet_t::letter_t	      letter_t;
     INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
 
-    KRatExpLinearize(const Element<Series, T>& exp) :
-      KRatExpIdentity<KRatExpLinearize<Series, T, Dispatch>,
+    KRatExpRealtime(const Element<Series, T>& exp) :
+      KRatExpIdentity<KRatExpRealtime<Series, T, Dispatch>,
 		      Series, 
 		      T,
 		      Dispatch
@@ -73,13 +74,13 @@ namespace vcsn {
   
   template <class Series, class T>
   Element<Series, T>
-  linearize(const Element<Series, T>& exp) 
+  realtime(const Element<Series, T>& exp) 
   {
-    KRatExpLinearize<Series, T, algebra::DispatchFunction<T> > 
+    KRatExpRealtime<Series, T, algebra::DispatchFunction<T> > 
       matcher(exp);
     return matcher.match(exp);
   }
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_KRAT_EXP_DERIVATION_HXX
+#endif // VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX

@@ -1,18 +1,23 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 180)
-(Parent-Version vaucanson 0 179)
-(Version-Log "2003-03-24  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 181)
+(Parent-Version vaucanson 0 180)
+(Version-Log "2003-03-26  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/krat_exp_cderivation.hxx,
-	include/vaucanson/algorithms/krat_exp_derivation.hxx: Add typedefs for
-	a monoid element value. Change the old zero(SELECT(...)) and
-	identity(SELECT(...)) methods with zero_as<>::of() and
-	identity_as<>::of(). Fix the derivation/c-derivation of non-linearized
-	expressions (i.e. 'ab' instead of 'a.b').")
+	* include/Makefile.am: Update source list.
+	* src/tests/algebra/series/misc/series_test.hh: Fix a small bug in
+	the test, when two random letters are equals.
+	* src/tests/algebra/series/krat/krat_exp_linearize_test.hh
+	include/vaucanson/algorithms/krat_exp_linearize.hxx,
+	include/vaucanson/algorithms/krat_exp_linearize.hh: Move from ...
+	* src/tests/algebra/series/krat/krat_exp_realtime_test.hh,
+	include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	include/vaucanson/algorithms/krat_exp_realtime.hh: ... These.
+	* src/tests/algebra/series/krat/Makefile.am: Move
+	'krat_exp_linearize_test.hh' to 'krat_exp_realtime_test.hh'.")
 (New-Version-Log "")
-(Checkin-Time "Mon, 24 Mar 2003 17:00:21 +0100")
+(Checkin-Time "Wed, 26 Mar 2003 11:23:51 +0100")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -93,7 +98,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.120 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.121 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -113,7 +118,7 @@
   (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.7 600))
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.14 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.15 600))
   (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.16 600))
   (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.15 600))
   (include/vaucanson/algebra/concept/concepts.hh (vaucanson/31_concepts.h 1.6 600))
@@ -202,8 +207,8 @@
   (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.3 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.7 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.6 600))
-  (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/h/23_krat_exp_l 1.4 600))
-  (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/h/24_krat_exp_l 1.3 600))
+  
+  
   (include/vaucanson/algorithms/moore.hh (vaucanson/e/24_moore.hh 1.6 600))
   (include/vaucanson/algorithms/moore.hxx (vaucanson/e/23_moore.hxx 1.6 600))
   (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.7 600))
@@ -467,16 +472,16 @@
 ;; Files added by populate at Mon, 17 Mar 2003 21:16:21 +0100,
 ;; to version 0.174(w), by clavei_t:
 
-  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.1 600))
+  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.2 600))
   (src/tests/algebra/series/krat/krat_exp_parse_test.hh (vaucanson/j/19_krat_exp_p 1.1 600))
-  (src/tests/algebra/series/krat/krat_exp_linearize_test.hh (vaucanson/j/20_krat_exp_l 1.1 600))
+  
   (src/tests/algebra/series/krat/krat_exp_derivation_test.hh (vaucanson/j/21_krat_exp_d 1.1 600))
   (src/tests/algebra/series/krat/krat_exp_constant_term_test.hh (vaucanson/j/22_krat_exp_c 1.1 600))
 
 ;; Files added by populate at Mon, 17 Mar 2003 21:16:52 +0100,
 ;; to version 0.174(w), by clavei_t:
 
-  (src/tests/algebra/series/misc/series_test.hh (vaucanson/j/23_series_tes 1.2 600))
+  (src/tests/algebra/series/misc/series_test.hh (vaucanson/j/23_series_tes 1.3 600))
   (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 600))
 
 ;; Files added by populate at Mon, 17 Mar 2003 21:21:14 +0100,
@@ -503,6 +508,28 @@
   (include/vaucanson/algorithms/aci_canonical.hh (vaucanson/j/31_aci_canoni 1.1 600))
   (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.2 600))
   (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.2 600))
+
+;; Files deleted by depopulate at Tue, 25 Mar 2003 13:17:35 +0100,
+;; from version 0.180(w), by clavei_t:
+
+  ; (include/vaucanson/algorithms/krat_exp_linearize.hh ())
+
+;; Files deleted by depopulate at Tue, 25 Mar 2003 13:17:39 +0100,
+;; from version 0.180(w), by clavei_t:
+
+  ; (include/vaucanson/algorithms/krat_exp_linearize.hxx ())
+
+;; Files deleted by depopulate at Tue, 25 Mar 2003 13:18:10 +0100,
+;; from version 0.180(w), by clavei_t:
+
+  ; (src/tests/algebra/series/krat/krat_exp_linearize_test.hh ())
+
+;; Files added by populate at Tue, 25 Mar 2003 13:19:06 +0100,
+;; to version 0.180(w), by clavei_t:
+
+  (src/tests/algebra/series/krat/krat_exp_realtime_test.hh (vaucanson/j/34_krat_exp_r 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_realtime.hh (vaucanson/j/36_krat_exp_r 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)
