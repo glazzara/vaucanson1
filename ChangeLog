@@ -1,3 +1,7 @@
+2004-06-04  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/Makefile.am: Change .hxx to .thxx for two files.
+
 2004-06-03  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/contextual_automaton_functions.hxx,
