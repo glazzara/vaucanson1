@@ -18,11 +18,12 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGEBRA_FREEMONOID_BASE_HH
-# define ALGEBRA_FREEMONOID_BASE_HH
+#ifndef VCSN_ALGEBRA_CONCEPT_FREEMONOID_BASE_HH
+# define VCSN_ALGEBRA_CONCEPT_FREEMONOID_BASE_HH
 
 # include <vaucanson/algebra/concept/alphabets_base.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh>
+# include <string>
 
 namespace vcsn {
 
@@ -130,12 +131,24 @@ namespace vcsn {
     MetaElement(const MetaElement& other);
   };
 
-  //! Returns a fresh word that is the mirror 
+  //! Return a fresh word that is the mirror 
   template<typename S, typename T>
   Element<S, T>
   mirror(const Element<S, T>& e);
 
+  //! Parse the beginning of the string looking for a word.
+  template <typename S, typename T>
+  bool
+  parse_word(Element<S, T>& dest, 
+	     const std::string& s, 
+	     typename std::string::const_iterator& i);
+
   /*! @} @} */
+
+  template <typename S, typename T>
+  bool op_parse(const FreeMonoidBase<S>& s, T& v, 
+		const std::string&, 
+		typename std::string::const_iterator&);
 
   template<typename Self, typename T>
   void op_in_mirror(const FreeMonoidBase<Self>& s, T& v);
@@ -150,4 +163,4 @@ namespace vcsn {
 
 # include <vaucanson/algebra/concept/freemonoid_base.hxx>
 
-#endif // ALGEBRA_FREEMONOID_BASE_HH
+#endif // VCSN_ALGEBRA_CONCEPT_FREEMONOID_BASE_HH

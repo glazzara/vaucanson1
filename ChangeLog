@@ -1,3 +1,25 @@
+2002-10-31  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.128)
+	* include/vaucanson/algebra/concept:
+		- semiring_base.hxx: 
+		   add a "parse" external function.	
+		   minor changes.
+		- semiring_base.hh: idem
+		- freemonoid_base.hxx: idem.
+		- freemonoid_base.hh: idem.
+	* include/vaucanson/misc/: random.h[h,xx]: minor changes.
+	* THANKS: a sed garbage fixed.
+	* include/vaucanson/algebra/concrete/series/:
+		- krat_exp_pattern.hh: add INHERIT_CONSTRUCTORS macros.
+		(to be iso compliant)
+	
+	 	- krat_exp_parser.hh: added.
+		- krat_exp_parser.hxx: idem.
+	* src/tests/algebra/series/:
+	 	- krat_exp_parse-test.cc: idem.
+ 		- krat_exp_parse_test.hh: idem. 
+		- Makefile.am: added here.
+
 2002-10-23  Raphaël Poss  <raph@lrde.epita.fr>
 (0.127)
 	

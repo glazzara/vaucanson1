@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef MISC_RANDOM_HXX
-# define MISC_RANDOM_HXX
+#ifndef VCSN_MISC_RANDOM_HXX
+# define VCSN_MISC_RANDOM_HXX
 
 # include <vaucanson/misc/random.hh>
 # include <vector>
@@ -44,7 +44,6 @@ namespace vcsn {
       return ('a' + offs);
     }
 
-    
     bool
     RandomGenerator<bool>::do_it()
     {
@@ -55,7 +54,6 @@ namespace vcsn {
 	return false;
     }
 
-    
     int
     RandomGenerator<int>::do_it()
     {
@@ -84,4 +82,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // MISC_RANDOM_HH
+#endif // VCSN_MISC_RANDOM_HH

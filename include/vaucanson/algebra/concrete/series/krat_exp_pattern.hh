@@ -29,9 +29,9 @@ namespace vcsn {
 
   namespace algebra {
     
-    /*------.
+    /*---------.
     | BinaryOp |
-    `------*/
+    `---------*/
     //! BinaryOp is a generic class which symbolised binary operator.
     /*! BinaryOp is integrated in the pattern matching system to permit
       a factorization of the accessors.
@@ -148,7 +148,6 @@ struct N     : public UnaryOp<T>		\
     {}						\
   };
 
-
 #define MATCH__(N, Lhs, Rhs)			\
 return_type					\
 match_node(const N& p____) 		\
@@ -166,8 +165,7 @@ match_node(const N& p____) 		\
 return_type						\
 match_node(const N& p____) 			\
 {						
-
-  
+   
 #define END }
 
 
@@ -191,9 +189,19 @@ match_node(const N& p____) 			\
       KRatExpMatcher() {}
     };
 
+#define INHERIT_CONSTRUCTORS(Self, T, U, F) \
+   typedef vcsn::algebra::KRatExpMatcher<Self, T, U, F> krat_exp_matcher_t; \
+   typedef typename krat_exp_matcher_t::Product		Product;             \
+   typedef typename krat_exp_matcher_t::Sum		Sum;                \
+   typedef typename krat_exp_matcher_t::Star		Star;                \
+   typedef typename krat_exp_matcher_t::LeftWeight     	LeftWeight;          \
+   typedef typename krat_exp_matcher_t::RightWeight     RightWeight;         \
+   typedef typename krat_exp_matcher_t::Constant       	Constant;            \
+   typedef typename krat_exp_matcher_t::One       	One;                 \
+   typedef typename krat_exp_matcher_t::Zero       	Zero;           
+
     template <class T>
       struct DispatchFunction;
-    
 
     } // algebra
 

@@ -1,4 +1,4 @@
-// random.hh
+// krat_exp_parser.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,50 +18,25 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef MISC_RANDOM_HH
-# define MISC_RANDOM_HH
+#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HH
+# define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HH
 
-# include <typeinfo>
+# include <vaucanson/fundamental/fundamental.hh>
+# include <utility>
+# include <string>
 
 namespace vcsn {
 
-  namespace misc {
+  namespace algebra {
 
-    #define RANDOM_INT(N) \
-       ((unsigned) floor(((float) rand() / (float) RAND_MAX) * N));
+    template <class S, class T>
+    std::pair<bool, std::string>
+    parse(const std::string& from, Element<S, T>& exp);
 
-    template <class T>
-    struct RandomGenerator
-    {
-      static T do_it();
-    };
-
-    template <>
-    struct RandomGenerator<char>
-    {
-      static char do_it();
-    };
-
-    template <>
-    struct RandomGenerator<bool>
-    {
-      static bool do_it();
-    };
-
-    template <>
-    struct RandomGenerator<int>
-    {
-      static int do_it();
-    };
-
-    template <class InputIterator, class OutputIterator>
-    void random_sample_n(InputIterator first, InputIterator end, 
-			 OutputIterator out, unsigned n);
-
-  } // misc
+  } // algebra
 
 } // vcsn
 
-# include <vaucanson/misc/random.hxx>
+# include <vaucanson/algebra/concrete/series/krat_exp_parser.hxx>
 
-#endif // MISC_RANDOM_HH
+#endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HH
