@@ -47,6 +47,9 @@
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/trim.hh>
 
+# include <vaucanson/algorithms/aut_to_exp.hh>
+# include <vaucanson/automata/implementation/generalized.hh>
+
 using namespace vcsn;
 using namespace vcsn::algebra;
 using namespace vcsn::tools;
@@ -58,6 +61,64 @@ unsigned product_test(tests::Tester& tg)
   GenRandomAutomata<automaton_t> gen(time(0x0));
   tests::Tester t(tg.verbose());
 
+  // Battery 1.
+  AUTOMATON_TYPES(Auto);
+  typedef typename generalized_traits<Auto>::automaton_t generalized_t;
+  AUTOMATON_TYPES_(generalized_t, g_);
+
+  unsigned nb_test_product = 20;
+  unsigned nb_test_product_done = 0;
+  unsigned success_product = 0;
+
+  for (unsigned cpt = 0; cpt < nb_test_product; ++cpt)
+    {
+      automaton_t auto_lhs = gen.generate(3, 6, 1, 2, 2);
+      automaton_t auto_rhs = gen.generate(auto_lhs.structure(),
+					  3, 6, 1, 2);
+      automaton_t p = product(auto_lhs, auto_rhs);
+      generalized_t g_p = generalized(p);
+      g_series_elt_t exp_p(g_p.structure().series());
+      exp_p = aut_to_exp(g_p);
+
+      if (p.final().size() == 0)
+	{
+	  // Intersection is empty. Redo the test.
+	  ++nb_test_product;
+	  continue;
+	}
+      monoid_elt_t word_prod = exp_p.choose_from_supp();
+
+      if (eval(auto_lhs, word_prod) ==
+  zero_as<semiring_elt_value_t>::of(auto_lhs.structure().series().semiring())
+	  || eval(auto_rhs, word_prod) ==
+  zero_as<semiring_elt_value_t>::of(auto_rhs.structure().series().semiring())
+	  )
+	{
+	  // Print the failing expressions.
+	  generalized_t g_auto_lhs = generalized(auto_lhs);
+	  generalized_t g_auto_rhs = generalized(auto_rhs);
+	  g_series_elt_t exp_lhs(g_auto_lhs.structure().series());
+	  g_series_elt_t exp_rhs(g_auto_rhs.structure().series());
+	  exp_lhs = aut_to_exp(g_auto_lhs);
+	  exp_rhs = aut_to_exp(g_auto_rhs);
+	  std::cerr << "TEST: product of automata corresponding"
+		    << " to following expressions failed."
+		    << std::endl;
+	  std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs
+		    << std::endl;
+	}
+      else
+	++success_product;
+      ++nb_test_product_done;
+    }
+
+  std::string rate_product;
+  SUCCESS_RATE(rate_product, success_product, nb_test_product_done);
+  TEST(t,"Product of automata." + rate_product,
+       success_product == nb_test_product_done);
+
+  
+  // Battery 2.
   const unsigned nb_test    = 30;
   unsigned success_identity = 0;
   unsigned success_null     = 0;

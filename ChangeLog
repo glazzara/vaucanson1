@@ -1,5 +1,9 @@
 2004-04-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/automata/algos/product_test.hh: Improve the test.
+	
+2004-04-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hh,
 	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx:
 	Remove unused variable.
