@@ -32,6 +32,8 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_REVERSE_VISITOR_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_REVERSE_VISITOR_HH
 
+# include <vaucanson/algebra/concept/series_base.hh>
+# include <vaucanson/algebra/concept/semiring_base.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 
 namespace vcsn
@@ -45,7 +47,7 @@ namespace vcsn
       public rat::DefaultMutableNodeVisitor<Word, Weight>
     {
     public:
-      ReverseVisitor(const SemiringBase<Semiring>& s);
+      ReverseVisitor(const algebra::SemiringBase<Semiring>& s);
 
       virtual
       void
@@ -54,26 +56,26 @@ namespace vcsn
 
       virtual
       void
-      ReverseVisitor<Word, Weight>::constant(Word& w);
+      constant(Word& w);
 
       virtual
       void
-      ReverseVisitor<Word, Weight>::left_weight(Weight& w);
+      left_weight(Weight& w);
 
       virtual
       void
-      ReverseVisitor<Word, Weight>::right_weight(Weight& w);
+      right_weight(Weight& w);
 
     protected:
       template <class S>
       static
       Weight
-      transpose(const SeriesBase<S>&, Weight);
+      transpose(const algebra::SeriesBase<S>&, const Weight&);
 
       template <class S>
       static
       Weight
-      transpose(const SemiringBase<S>&, Weight);
+      transpose(const algebra::SemiringBase<S>&, const Weight&);
 
       const Semiring& s_;
     };

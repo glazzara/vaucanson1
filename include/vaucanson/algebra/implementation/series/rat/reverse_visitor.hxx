@@ -42,7 +42,7 @@ namespace vcsn
 
     template <class Semiring, class Word, class Weight>
     ReverseVisitor<Semiring, Word, Weight>::
-    ReverseVisitor(const SemiringBase<Semiring>& s) : s_ (s)
+    ReverseVisitor(const algebra::SemiringBase<Semiring>& s) : s_ (s)
     {}
 
     template <class Semiring, class Word, class Weight>
@@ -80,7 +80,7 @@ namespace vcsn
     template <class S>
     Weight
     ReverseVisitor<Semiring, Word, Weight>::
-    transpose(const SeriesBase<S>& s, Weight& w)
+    transpose(const algebra::SeriesBase<S>& s, const Weight& w)
     {
       Element<S, Weight> e (s, w);
       e.transpose();
@@ -91,7 +91,7 @@ namespace vcsn
     template <class S>
     Weight
     ReverseVisitor<Semiring, Word, Weight>::
-    transpose(const SemiringBase<S>&, Weight& w)
+    transpose(const algebra::SemiringBase<S>&, const Weight& w)
     {
       return w;
     }
@@ -107,7 +107,8 @@ namespace vcsn
     operator () (const S& s, const rat::exp<Word, Weight>& exp)
     {
       rat::exp<Word, Weight>* rexp = new rat::exp<Word, Weight> (exp);
-      rat::ReverseVisitor<S::semiring_t, Word, Weight> rv (s.semiring());
+      rat::ReverseVisitor<typename S::semiring_t, Word, Weight>
+	rv (s.semiring());
 
       rexp.accept(rv);
       return *rexp;

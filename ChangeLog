@@ -1,3 +1,12 @@
+m2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh:
+	Add missing algebra:: before SemiringBase and SeriesBase. Fix syntax
+	of some declarations. Add a missing typename.
+	* include/vaucanson/algorithms/krat_exp_expand.hxx: Include
+	krat_exp_pattern.hh.
+
 2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* NEWS: Add an entry about expand. Add some stuff about contexts and
