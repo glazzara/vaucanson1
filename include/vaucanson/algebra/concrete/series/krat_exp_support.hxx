@@ -64,6 +64,8 @@ namespace vcsn {
 
     MATCH__(Product, lhs, rhs)
     {
+      ext_support_t old_supp_ = supp_;
+      supp_.clear();
       match(lhs);
       ext_support_t lhs_s = supp_;
       supp_.clear();
@@ -80,6 +82,7 @@ namespace vcsn {
 				       (mc * md).value()));
 	}
       supp_ = ret;
+      supp_.insert(supp_.begin(), old_supp_.begin(), old_supp_.end());
     }
     END
 
