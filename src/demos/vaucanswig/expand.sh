@@ -7,6 +7,7 @@ VAUCANSWIG=`cd $1 && pwd`
 
 mkdir -p "$VAUCANSWIG/src"
 mkdir -p "$VAUCANSWIG/python"
+cp -f "$VAUCANSWIG"/meta/vauto.cc "$VAUCANSWIG"/meta/vcontext.cc "$VAUCANSWIG/python"
 
 MODULES="core $MODULES"
 
@@ -37,22 +38,22 @@ cat <<EOF
 
 INCLUDES = -I/usr/include/python2.2 -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
     -I\$(top_srcdir)/include -I\$(top_builddir)/include
-AM_CPPFLAGS = -DEXCEPTION_TRAPS
+AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -DEXCEPTION_TRAPS
 # AM_CXXFLAGS = \$(CXXFLAGS_OPTIMIZE) 
-AM_LDFLAGS = -shared -lswigpy -L../meta -lvv
+AM_LDFLAGS = -module -avoid-version
 
 EOF
 }
 
 dump_python()
 {
-    echo -n "pyexec_PROGRAMS ="
+    echo -n "pyexec_LTLIBRARIES ="
     ilist=0
     for mod in $MODULES; do
       if [ `expr $ilist % 4` = 0 ]; then
          echo " \\"; echo -ne "\t"
       fi
-      echo -n " _vaucanswig_$mod.so" 
+      echo -n " libvs_$mod.la" 
       ilist=`expr $ilist + 1`
     done
     echo; echo
@@ -67,7 +68,17 @@ dump_python()
     done
     echo; echo
     for mod in $MODULES; do
-      echo "_vaucanswig_${mod}_so_SOURCES = vaucanswig_${mod}_wrap.cxx"
+      echo "libvs_${mod}_la_SOURCES = vaucanswig_${mod}_wrap.cxx"
+      if [ "$mod" = "core" ]; then
+        echo "libvs_core_la_LIBADD = ../meta/libvv.la -lswigpy"
+      else
+        if echo "$mod" | grep "_automaton" >/dev/null 2>&1; then
+           ctx=`echo "$mod" | sed -e 's,_automaton,,g'`
+           echo "libvs_${mod}_la_LIBADD = libvs_${ctx}_context.la"
+        else
+           echo "libvs_${mod}_la_LIBADD = libvs_core.la"
+        fi
+      fi
     done
     echo
     ilist=0
@@ -81,6 +92,17 @@ dump_python()
       echo -e "\t\$(SWIG) -c -c++ -python -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i"
       echo
     done
+
+    echo "install-exec-hook:"
+    for mod in $MODULES; do
+      echo -e "\tcd \$(pyexecdir) && rm -f _vaucanswig_$mod.so && \$(LN_S) libvs_$mod.so _vaucanswig_$mod.so"
+    done
+    echo
+    echo "uninstall-hook:"
+    for mod in $MODULES; do
+      echo -e "\trm -f \$(pyexecdir)/_vaucanswig_$mod.so"
+    done
+    echo  
 }
 
 ############ Generic stuff ###########

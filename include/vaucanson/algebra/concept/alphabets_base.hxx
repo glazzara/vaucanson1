@@ -32,6 +32,7 @@
 
 # include <vaucanson/algebra/concept/alphabets_base.hh>
 # include <vaucanson/misc/random.hh>
+# include <vaucanson/misc/contract.hh>
 # include <cstddef>
 
 namespace vcsn {
@@ -128,7 +129,7 @@ namespace vcsn {
   {
     // FIXME: recommendation(overload this operator)
  
-    assert (is_finite() && size() > 0);
+    precondition (is_finite() && size() > 0);
     
     int  nr = ::utility::random::generate<int>(0, size() - 1);
 

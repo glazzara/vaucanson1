@@ -168,7 +168,7 @@ namespace vcsn {
     }
     
     virtual void 
-    right_weight(const weight_value_t& w, const node_t* node)
+    right_weight(const weight_value_t& , const node_t* node)
     {
       match(node);
     }

@@ -11,17 +11,23 @@ AC_CONFIG_SRCDIR([config/vcsn.m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER([config.h:config.hin])
 
+# Some C and C++ code used.
+# Using $CXX as the C compiler is a hack to allow building shared
+# modules from C++ source with libtool.
+AC_PROG_CXX
+AC_PROG_CC([$CXX])
+
 # Use included Vaucanson version.
 VCSN_PATH_LOCAL([.])
 AC_WITH_VCSN
 
-# Some library archives are used. Some C code used.
-AC_PROG_RANLIB
-AC_PROG_CC
-
 # SWIG and Python used.
 AC_CHECK_SWIG13
 AM_PATH_PYTHON([2.2])
+
+# Libtool used
+AC_DISABLE_STATIC
+AC_PROG_LIBTOOL
 
 # Attempt to use strict language conformance checking.
 AC_CXX_FLAGS

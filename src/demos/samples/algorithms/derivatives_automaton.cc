@@ -35,6 +35,7 @@
 #include <vaucanson/misc/dot_dump.hh>
 #include <string>
 #include <vaucanson/algorithms/derivatives_automaton.hh>
+#include <vaucanson/misc/unique.hcc>
 
 int main(int argc, char **argv)
 {

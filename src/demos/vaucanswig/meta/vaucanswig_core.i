@@ -4,7 +4,6 @@
 %include std_list.i
 
 %{
-#include <vaucanson/misc/unique.hcc>
 #include "vcontext.hh"
 %}
 %include vcontext.hh

@@ -2,6 +2,10 @@
 # define VAUTO_HH
 
 #include "vcontext.hh"
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <stdexcept>
 
 namespace vcsn
 {
@@ -68,7 +72,6 @@ namespace vcsn
     virtual std::string describe() const = 0;
     virtual std::string as_dot(const char *name = "automaton") const = 0;
     void dot_run(const char *fname, const char *cmd = "gv", const char *name = "automaton") const;
-
     virtual ~virtual_automaton();
   };
 }

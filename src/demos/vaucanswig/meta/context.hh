@@ -17,6 +17,11 @@ struct vcsn_context : vcsn::virtual_context
     : set_(other.set_)
   {}
   
+  template<typename OtherAuto>
+  vcsn_context(const vcsn_context<OtherAuto>& other)
+    : set_(& other.automata_set())
+  {}
+
   const automata_set_t& automata_set() const
   { return *set_; }
   

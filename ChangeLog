@@ -1,5 +1,18 @@
 2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/fundamental/syntactic_decorator.hxx,
+	include/vaucanson/algebra/concept/alphabets_base.hxx,
+	include/vaucanson/fundamental/slots.hxx: Fix contract.
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+	Remove unused argument name.
+
+	* src/demos/vgrep/vgrep.cc: Include `unique.hcc'.
+	* src/demos/samples/algorithms/derivatives_automaton.cc: Likewise.
+
+	* configure.ac: Add AC_PROG_LIBTOOL (shared only). Remove
+	AC_PROG_RANLIB. Reorder.
+
 	* include/vaucanson/misc/unique.hh: Remove stupid and erroneous
 	inclusion of `unique.hcc'.
 

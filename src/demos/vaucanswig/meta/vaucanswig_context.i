@@ -179,6 +179,10 @@ namespace Kind ##_types
     Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_serie_t&);
     Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_weight_t&);
     Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_monoid_elt_t&);
+    %extend {
+    Kind ##_exp_t star() const
+      { return vcsn::star(*self); }
+    }  
     const Kind ##_series_t& set() const;
     EXTEND_DESCRIBE(Kind ##_exp_t)
     series_ops(Kind ##_exp_t, Kind ##_weight_t, Kind ##_monoid_elt_t)

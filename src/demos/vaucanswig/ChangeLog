@@ -1,5 +1,18 @@
 2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* meta/vaucanswig_context.i: Add missing method to `exp'.
+	* meta/context.hh (virtual_context): Add missing constructor.
+	* meta/vauto.hh: Add missing includes.
+	* meta/vauto.cc: Likewise.
+	* meta/automaton.hh: Add new constructor. Fix existing one. Add
+	missing methods.
+	* meta/vaucanswig_automaton.i: Add missing declarations.
+	* meta/vaucanswig_core.i: Remove redundant include of `unique.hcc'.
+	* meta/Makefile.am: Update.
+	* expand.sh: Fix link to `libvv.a'. Use libtool.
+
+2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* meta/vaucanswig_exception.i: Remove superfluous declaration of
 	`std::exception'.
 

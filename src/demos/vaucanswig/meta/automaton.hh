@@ -36,14 +36,18 @@ struct vcsn_automaton : vcsn::virtual_automaton
     vcsn_automaton(const Auto& other)
       : ctx_(other.set()), auto_(other)
   {}
+    vcsn_automaton(const automata_set_t& other)
+      : ctx_(other), auto_(other)
+  {}
     vcsn_automaton(const vcsn_automaton& other)
       : ctx_(other.ctx_), auto_(other.auto_)
   {}
 
   vcsn_automaton(const vcsn_context<Auto>& ctx)
-    : ctx_(ctx), auto_(ctx.automaton_set())
+    : ctx_(ctx), auto_(ctx.automata_set())
   {}
 
+  const automaton_t& the_automaton() const { return auto_; }
   const automata_set_t &set() const { return auto_.set(); }
 
   serie_t serie_of(int e) const
@@ -83,7 +87,8 @@ struct vcsn_automaton : vcsn::virtual_automaton
   }
 
 
-  virtual const vcsn_context<Auto> &context() const;
+  virtual const vcsn_context<Auto> &context() const
+  { return ctx_; }
   
   virtual bool has_state(int s) const { return auto_.has_state(s); }
   virtual bool has_edge(int e) const { return auto_.has_edge(e); }
@@ -98,6 +103,16 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {
     CHECK_EDGE(this, e);
     return auto_.del_edge(e);
+  }
+
+  virtual std::list<int> states() const
+  {
+    std::list<int> ret(auto_.states().begin(), auto_.states().end());
+  }
+
+  virtual std::list<int> edges() const
+  {
+    std::list<int> ret(auto_.edges().begin(), auto_.edges().end());
   }
 
   virtual int add_state() { return auto_.add_state(); }

@@ -1,7 +1,10 @@
 
-noinst_LIBRARIES = libvv.a
+INCLUDES = -I$(srcdir) -I$(top_srcdir)/include -I$(top_builddir)/include
 
-libvv_a_SOURCES = vcontext.hh vcontext.cc vauto.hh vauto.cc
+EXTRA_DIST = context.hh vaucanswig_describe.i vaucanswig_exception.i vaucanswig_context.i \
+	vcontext.hh vauto.hh vaucanswig_core.i vaucanswig_automaton.i
 
-EXTRA_DIST = context.hh vaucanswig_describe.i vaucanswig_exception.i vaucanswig_context.i
+lib_LTLIBRARIES = libvv.la
+
+libvv_la_SOURCES = vcontext.cc vauto.cc
 

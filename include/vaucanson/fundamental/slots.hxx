@@ -33,6 +33,7 @@
 # include <vaucanson/fundamental/slots.hh>
 # include <cstdlib>
 # include <vaucanson/misc/unique.hh>
+# include <vaucanson/misc/contract.hh>
 
 namespace vcsn {
 
@@ -106,7 +107,7 @@ namespace vcsn {
   template <class S>
   void SetSlotAttribute<S, true>::attach(const S& s)
   { 
-    assert(&s != NULL);
+    precondition(&s != NULL);
     s_ = & utility::unique::get(s); 
   }
 

@@ -32,6 +32,7 @@
 
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/fundamental/syntactic_decorator.hh>
+# include <vaucanson/misc/contract.hh>
 
 namespace vcsn {
   template <typename S, typename T>
@@ -136,7 +137,7 @@ namespace vcsn {
   inline Element<S, T>& 
   SyntacticDecorator<S, T>::swap(Element<S, U>& other)
   { 
-    assert(&set() == &other.set());
+    precondition(&set() == &other.set());
     op_swap(set(), value(), other.value());
     return self(); 
   }

@@ -40,6 +40,7 @@
 #include <vaucanson/algorithms/eval.hh>
 #include <vaucanson/algorithms/hopcroft_minimization.hh>
 #include <vaucanson/misc/dot_dump.hh>
+#include <vaucanson/misc/unique.hcc>
 #include <iostream>
 #include <vector>
 #include <ctype.h>

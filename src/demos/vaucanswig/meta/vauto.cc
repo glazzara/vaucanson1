@@ -1,6 +1,8 @@
 #include "vauto.hh"
+#include <vaucanson/misc/unique.hcc>
 #include <fstream>
 #include <stdexcept>
+#include <cstdlib>
 
 namespace vcsn
 {
