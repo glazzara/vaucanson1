@@ -7,7 +7,7 @@
 
 ../bin/generate-test-suite.sh \
    algebra_series_krat \
-   algebra_series_krat \
+   algebra_series_krat.defs \
    ../algebra/series/krat/main
 
 ../bin/generate-test-suite.sh \

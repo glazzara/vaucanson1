@@ -1,5 +1,9 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* src/tests/tests-suites/generate-all.sh: Typo fix.
+
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* bootstrap.sh: Typo fix.
 
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
