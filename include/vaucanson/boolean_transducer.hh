@@ -40,7 +40,6 @@
 # include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/algorithms/standard_of.hh>
-# include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
 
 namespace vcsn {
   namespace boolean_transducer {

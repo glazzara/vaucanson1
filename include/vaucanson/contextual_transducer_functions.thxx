@@ -1,5 +1,5 @@
 //								-*- c++ -*-
-// contextual_transducer_functions.thxx: this file is part of the 
+// contextual_transducer_functions.thxx: this file is part of the
 // Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
@@ -37,26 +37,31 @@
 `----------------*/
 
 template <class InputIterator>
-automaton_t new_automaton(InputIterator input_alphabet_begin,
-			  InputIterator input_alphabet_end,
-			  InputIterator output_alphabet_begin,
-			  InputIterator output_alphabet_end)
+automaton_t
+new_automaton(InputIterator input_alphabet_begin,
+	      InputIterator input_alphabet_end,
+	      InputIterator output_alphabet_begin,
+	      InputIterator output_alphabet_end)
 {
-  alphabet_t input_alpha;
-  alphabet_t output_alpha;
+  alphabet_t		input_alpha;
+  alphabet_t		output_alpha;
+
   for (InputIterator e = input_alphabet_begin;
        e != input_alphabet_end; ++e)
     input_alpha.insert(*e);
+
   for (InputIterator e = output_alphabet_begin;
        e != output_alphabet_end; ++e)
     output_alpha.insert(*e);
-  monoid_t output_freemonoid(output_alpha);
-  typename output_series_set_t::semiring_t semiring;
-  output_series_set_t output_series(semiring, output_freemonoid);
-  monoid_t freemonoid(input_alpha);
-  series_set_t series(output_series, freemonoid);
-  automata_set_t automata_set(series);
-  return automaton_t(automata_set);
+
+  monoid_t		output_freemonoid (output_alpha);
+  typename output_series_set_t::semiring_t	semiring;
+  output_series_set_t	output_series (semiring, output_freemonoid);
+  monoid_t		freemonoid (input_alpha);
+  series_set_t		series (output_series, freemonoid);
+  automata_set_t	automata_set (series);
+
+  return automaton_t (automata_set);
 }
 
 
@@ -83,7 +88,7 @@ do_evaluation(const vcsn::TransducerBase<TransStruct>&,
 	      const Element<TransStruct, TransImpl>& t,
 	      const Element<MonoidStruct, MonoidImpl>&)
 {
-  return verbalize(eval(t, input));
+  return eval(t, input);
 }
 
 
@@ -106,7 +111,7 @@ do_evaluation(const vcsn::TransducerBase<TransStruct>&,
   boolean_automaton::gen_automaton_t result (w.structure());
   standard_of(w, input);
   evaluation(w, t, result);
-  return verbalize(aut_to_exp(result));
+  return aut_to_exp(result);
 }
 
 

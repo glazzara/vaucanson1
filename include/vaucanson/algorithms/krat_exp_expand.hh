@@ -37,7 +37,7 @@
 namespace vcsn {
 
   namespace algebra {
-    
+
     template <class Series, class T>
     Element<Series, T>
     expand(const Element<Series, T>& exp);
@@ -48,7 +48,7 @@ namespace vcsn {
 
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/algebra/implementation/series/krat_exp_expand.hxx>
+#  include <vaucanson/algorithms/krat_exp_expand.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_EXPAND_HH

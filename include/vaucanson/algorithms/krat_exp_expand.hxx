@@ -34,7 +34,8 @@
 
 # include <list>
 # include <map>
-# include <vaucanson/algebra/implementation/series/krat_exp_expand.hh>
+
+# include <vaucanson/algorithms/krat_exp_expand.hh>
 
 namespace vcsn
 {
@@ -50,7 +51,7 @@ namespace vcsn
       typedef typename exp_t::semiring_elt_t		semiring_elt_t;
       typedef std::map<exp_list_t, semiring_elt_t>	ret_t;
     };
-    
+
     // The Expander class. It break up the expression to build a map
     // and then rebuild it.
     template <class Series, class T, class Dispatch>
@@ -88,7 +89,7 @@ namespace vcsn
 	typedef typename exp_list_t::const_iterator	sub_iterator;
 
 	exp_t result = exp_.structure().zero(SELECT(T));
-	
+
 	for (iterator i = l.begin(); i != l.end(); ++i)
 	{
 	  exp_list_t	l = i->first;
@@ -106,7 +107,7 @@ namespace vcsn
       {
 	exp_list_t	exp_list;
 	exp_list.push_front(e);
-	
+
 	return_type	result;
 	result[exp_list] =
 	  exp_.structure().semiring().identity(SELECT(semiring_elt_value_t));
@@ -126,13 +127,13 @@ namespace vcsn
 	for (const_iterator i = right.begin(); i != right.end(); ++i)
 	{
 	  iterator j = result.find(i->first);
-	  
+
 	  if (j != result.end())
 	    j->second += i->second;
 	  else
 	    result.insert(*i);
 	}
-	
+
 	return result;
       }
 
@@ -174,7 +175,7 @@ namespace vcsn
       MATCH__(Product, lhs, rhs)
       {
 	typedef typename return_type::iterator		iterator;
-	
+
 	return_type llist = match(lhs);
 	return_type rlist = match(rhs);
 	return_type result;
@@ -202,10 +203,10 @@ namespace vcsn
       MATCH__(LeftWeight, w, e)
       {
 	typedef typename return_type::iterator		iterator;
-	
+
 	return_type	l = match(e);
 	return_type	result;
-	
+
 	for (iterator i = l.begin(); i != l.end(); ++i)
 	  result[i->first] = semiring_elt_t(w) * i->second;
 	return result;
@@ -215,10 +216,10 @@ namespace vcsn
       MATCH__(RightWeight, e, w)
       {
 	typedef typename return_type::iterator		iterator;
-	
+
 	return_type	l = match(e);
 	return_type	result;
-	
+
 	for (iterator i = l.begin(); i != l.end(); ++i)
 	  result[i->first] = i->second * semiring_elt_t(w);
 	return result;

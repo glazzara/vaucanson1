@@ -1,13 +1,11 @@
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/boolean_transducer.hh>
 
-#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-#include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
+#include <vaucanson/algorithms/evaluation.hh>
+#include <vaucanson/algorithms/krat_exp_expand.hh>
+#include <vaucanson/algorithms/realtime_composition.hh>
 
 #include <vaucanson/tools/dot_display.hh>
-#include <vaucanson/algorithms/standard_of.hh>
-#include <vaucanson/algorithms/evaluation.hh>
-#include <vaucanson/algorithms/realtime_composition.hh>
 
 void
 eval_an_expression(const vcsn::boolean_transducer::automaton_t& t)
@@ -21,15 +19,15 @@ eval_an_expression(const vcsn::boolean_transducer::automaton_t& t)
     {
       std::cout << "Enter your expression over " << alphabet
 		<<" (\"next\", otherwise): ";
-      std::cin >> user_string;
-
+      std::getline(std::cin, user_string);
       if (user_string != "next")
 	{
 	  using namespace vcsn::boolean_automaton;
+	  using namespace vcsn::rat; // For setpm and MODE_STAR.
 
-	  rat_exp_t exp = new_rat_exp(alphabet);
-	  parse(user_string, exp);
-	  std::cout << evaluation(t, exp) << std::endl;
+	  rat_exp_t exp = new_rat_exp(alphabet, user_string);
+	  std::cout << setpm (MODE_STAR) << expand(evaluation(t, exp))
+		    << std::endl;
 	}
 
     }

@@ -1,5 +1,18 @@
 2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/contextual_transducer_functions.thxx: Clean. Do
+	not use verbalize.
+	* include/vaucanson/boolean_transducer.hh: Do not include
+	krat_exp_verbalization.hh.
+	* include/vaucanson/algorithms/krat_exp_expand.hxx,
+	* include/vaucanson/algorithms/krat_exp_expand.hh: Set the right
+	directory when including the corresponding hh/hxx file.
+	* src/demos/fibonacci/fibonacci.cc: Clean includes. Use std::getline
+	instead of std::cin's operator >>. Use a different printing mode to
+	display the evaluation output. Use expand to ``nicify'' the expression.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	The expansion of a rational expression is an algorithm, and has nothing
 	to do with an implementation of series.
 
