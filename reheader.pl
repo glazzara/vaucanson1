@@ -33,8 +33,8 @@ my $header = "// %BASENAME%: this file is part of the Vaucanson project.
 //    * Raphael Poss <raphael.poss\@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas\@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey\@lrde.epita.fr>
-//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
-//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor\@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet\@lrde.epita.fr>
 //
 ";
 

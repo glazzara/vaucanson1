@@ -1,5 +1,9 @@
 2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* reheader.pl: Typo. Replace @ in mail addresses with \@.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* reheader.pl: Footer is now "#endif // ! FILE" instead of
 	"#endif // FILE". Keep the copyright and add the current year
 	when updating the header, and do not rewrite with a default value.
