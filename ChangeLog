@@ -1,3 +1,10 @@
+2003-07-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat.hxx
+	(op_in_mul, op_mul),
+	include/vaucanson/algebra/concrete/series/krat_exp_support.hxx
+	(match_nodeRightWeight): Add missing arguments.
+
 2003-07-08  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* reheader.pl: Fix generation of preprocessor names.

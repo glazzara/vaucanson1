@@ -483,8 +483,8 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
-  void op_in_mul(const algebra::Series<W, M>&,
-		 const W&,
+  void op_in_mul(const algebra::Series<W, M>& s,
+		 const W& weights,
 		 rat::exp<Tm, Tw>& ret,
 		 const oTw& w)
   { 
@@ -575,8 +575,8 @@ namespace vcsn {
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   inline
-  rat::exp<Tm, Tw> op_mul(const W&,
-			  const algebra::Series<W, M>&,
+  rat::exp<Tm, Tw> op_mul(const W& weights,
+			  const algebra::Series<W, M>& s,
 			  const oTw& w,
 			  const rat::exp<Tm, Tw>& b)
   { 
