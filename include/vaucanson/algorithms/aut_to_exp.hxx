@@ -92,7 +92,7 @@ namespace vcsn {
     {}
 
     template <class Auto_>
-    hstate_t operator()(const Auto_& a)
+    hstate_t operator() (const Auto_&)
     {
       assertion(pos_ != list_.end());
       return *pos_++;

@@ -53,6 +53,43 @@ namespace vcsn {
   typedef std::set<std::list<std::pair<hstate_t, hstate_t> > > possibility_t;
   typedef std::list<std::pair<hstate_t, hstate_t> > sub_possibility_t;
 
+  bool exists(const sub_possibility_t& l,
+	      const std::pair<hstate_t, hstate_t>& p)
+  {
+    for_all_const(sub_possibility_t, i, l)
+      if (*i == p) return true;
+    return false;
+  }
+
+  bool arrangement(const sub_possibility_t& mother,
+		   std::set<hstate_t>& out_a,
+		   std::set<hstate_t>& out_b)
+  {
+    if (out_a.size() == 0)
+      return true;
+    if (out_a.size() == 1)
+      {
+	if (exists(mother, std::make_pair(*out_a.begin(), *out_b.begin())))
+	  return true;
+	return false;
+      }
+    else
+      {
+	bool res = false;
+	for_all(std::set<hstate_t>, i, out_a)
+	  for_all(std::set<hstate_t>, j, out_b)
+	  if (exists(mother, std::make_pair(*i, *j)))
+	    {
+	      out_a.erase(*i);
+	      out_b.erase(*j);
+	      res = res || arrangement(mother, out_a, out_b);
+	      out_a.insert(*i);
+	      out_b.insert(*j);
+	    }
+	return res;
+      }
+  }
+
   template<typename A, typename T>
   bool
   compatible_state(const Element<A, T>& a, const Element<A, T>& b,
@@ -122,46 +159,6 @@ namespace vcsn {
      }
    return false;
   }
-
-
-  bool exists(const sub_possibility_t& l,
-	      const std::pair<hstate_t, hstate_t>& p)
-  {
-    for_all_const(sub_possibility_t, i, l)
-      if (*i == p) return true;
-    return false;
-  }
-
-  bool arrangement(const sub_possibility_t& mother,
-		   std::set<hstate_t>& out_a,
-		   std::set<hstate_t>& out_b)
-  {
-    if (out_a.size() == 0)
-      return true;
-    if (out_a.size() == 1)
-      {
-	if (exists(mother, std::make_pair(*out_a.begin(), *out_b.begin())))
-	  return true;
-	return false;
-      }
-    else
-      {
-	bool res = false;
-	for_all(std::set<hstate_t>, i, out_a)
-	  for_all(std::set<hstate_t>, j, out_b)
-	  if (exists(mother, std::make_pair(*i, *j)))
-	    {
-	      out_a.erase(*i);
-	      out_b.erase(*j);
-	      res = res || arrangement(mother, out_a, out_b);
-	      out_a.insert(*i);
-	      out_b.insert(*j);
-	    }
-	return res;
-      }
-  }
-
-
 
   template<typename A, typename T>
   bool

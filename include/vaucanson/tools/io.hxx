@@ -40,35 +40,35 @@ namespace vcsn
 
   namespace io
   {
-    
+
     /*-------.
     | Output |
     `-------*/
 
-    template<typename Auto, typename EdgeConverter, typename Format> 
+    template<typename Auto, typename EdgeConverter, typename Format>
     Auto& automaton_saver_<Auto, EdgeConverter, Format>::automaton()
     {
-      return a_; 
+      return a_;
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format> 
+    template<typename Auto, typename EdgeConverter, typename Format>
     const Auto& automaton_saver_<Auto, EdgeConverter, Format>::
     automaton() const
     {
-      return a_; 
+      return a_;
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>  
+    template<typename Auto, typename EdgeConverter, typename Format>
     automaton_saver_<Auto, EdgeConverter, Format>::
-    automaton_saver_(const Auto& a, 
-		       const EdgeConverter& c, 
+    automaton_saver_(const Auto& a,
+		       const EdgeConverter& c,
 		       const Format& f)
-      : a_(a), conv_(c), format_(f) 
+      : a_(a), conv_(c), format_(f)
     {}
 
-    template<typename Auto, typename EdgeConverter, typename Format> 
-    std::ostream& 
-    operator<<(std::ostream& o, 
+    template<typename Auto, typename EdgeConverter, typename Format>
+    std::ostream&
+    operator<<(std::ostream& o,
 	       const automaton_saver_<Auto, EdgeConverter, Format>& s)
     {
       s.format_(o, s, s.conv_);
@@ -82,12 +82,12 @@ namespace vcsn
       os << t;
       return os.str();
     }
-      
+
   } // io
-  
-  template<typename Auto, typename EdgeConverter, typename Format> 
-  io::automaton_saver_<Auto, EdgeConverter, Format> 
-  automaton_saver(const Auto& a, 
+
+  template<typename Auto, typename EdgeConverter, typename Format>
+  io::automaton_saver_<Auto, EdgeConverter, Format>
+  automaton_saver(const Auto& a,
 		  const EdgeConverter& e = EdgeConverter(),
 		  const Format& f = Format())
   {
@@ -102,17 +102,17 @@ namespace vcsn
     `------*/
 
 
-    template<typename Auto, typename EdgeConverter, typename Format> 
+    template<typename Auto, typename EdgeConverter, typename Format>
     Auto& automaton_loader_<Auto, EdgeConverter, Format>::automaton()
     {
-      return a_; 
+      return a_;
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format> 
-    const Auto& 
+    template<typename Auto, typename EdgeConverter, typename Format>
+    const Auto&
     automaton_loader_<Auto, EdgeConverter, Format>::automaton() const
     {
-      return a_; 
+      return a_;
     }
 
     template<typename Auto, typename EdgeConverter, typename Format>
@@ -121,11 +121,11 @@ namespace vcsn
 		      const EdgeConverter& conv,
 		      const Format& format,
 		      bool merge_states)
-      : a_(a), 
-	conv_(conv), 
-	format_(format), 
-	scount_(0), 
-	smap_(), 
+      : a_(a),
+	conv_(conv),
+	format_(format),
+	scount_(0),
+	smap_(),
 	merge_states_(merge_states)
     {}
 
@@ -163,7 +163,7 @@ namespace vcsn
     {
       a_.add_spontaneous(add_state(from), add_state(to));
     }
-    
+
     template<typename Auto, typename EdgeConverter, typename Format>
     void automaton_loader_<Auto, EdgeConverter, Format>::
     add_edge(unsigned from, unsigned to, const std::string& lbl)
@@ -171,9 +171,9 @@ namespace vcsn
       a_.add_series_edge(add_state(from), add_state(to), conv_(a_, lbl));
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format> 
-    std::istream& 
-    operator>>(std::istream& in, 
+    template<typename Auto, typename EdgeConverter, typename Format>
+    std::istream&
+    operator>>(std::istream& in,
 	       automaton_loader_<Auto, EdgeConverter, Format> l)
     {
       l.format_(in, l);
@@ -183,10 +183,10 @@ namespace vcsn
 
   }
 
-  template<typename Auto, typename EdgeConverter, typename Format> 
-  io::automaton_loader_<Auto, EdgeConverter, Format> 
-  automaton_loader(Auto& a,  
-		   const EdgeConverter& e = EdgeConverter(), 
+  template<typename Auto, typename EdgeConverter, typename Format>
+  io::automaton_loader_<Auto, EdgeConverter, Format>
+  automaton_loader(Auto& a,
+		   const EdgeConverter& e = EdgeConverter(),
 		   const Format& f = Format(),
 		   bool merge_states = false)
   {

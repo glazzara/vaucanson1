@@ -209,19 +209,19 @@ namespace std
 	    vcsn::Element<S, T2>& e2)
   {
     assertion(&e1.structure() == &e2.structure());
-    vcsn::op_swap(e1.structure(), e1.value(), e2.value());
+    op_swap(e1.structure(), e1.value(), e2.value());
   }
 
   template<typename S, typename T>
   void swap(vcsn::Element<S, T>& e1, T& v2)
   {
-    vcsn::op_swap(e1.structure(), e1.value(), v2);
+    op_swap(e1.structure(), e1.value(), v2);
   }
 
   template<typename T, typename S>
   void swap(T& v1, vcsn::Element<S, T>& e2)
   {
-    vcsn::op_swap(e2.structure(), v1, e2.value());
+    op_swap(e2.structure(), v1, e2.value());
   }
 } // std
 

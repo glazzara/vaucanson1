@@ -73,12 +73,12 @@ namespace vcsn {
     /// @bug FIXME: Optimize!
     void on_state(const Exp& e)
     {
-      alphabet_t alpha = get()->series().monoid().alphabet();
+      alphabet_t alpha = this->get()->series().monoid().alphabet();
       if (constant_term(e).first
 	  != e.structure().semiring().zero(SELECT(semiring_elt_value_t)))
-	set_final();
+	this->set_final();
       for (alphabet_iterator i = alpha.begin(); i != alpha.end(); ++i)
-	link_to(canonical(derivate(e, *i).first), *i);
+	this->link_to(canonical(derivate(e, *i).first), *i);
     }
   };
 

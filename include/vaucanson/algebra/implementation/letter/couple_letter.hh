@@ -59,7 +59,7 @@ namespace vcsn
 	   *
 	   * FIXME: Maybe doing this is not a good idea?
 	   */
-	  cardinal = std::numeric_limits<unsigned>::max()
+	  cardinal = unsigned (-1)
 	};
     };
 
@@ -70,7 +70,7 @@ namespace vcsn {
   // Specialization for pairs.
   template <typename S, typename U, typename V>
   bool op_parse(const algebra::FreeMonoidBase<S>& set,
-		std::string<std::pair<U,V> >& v,
+		std::basic_string< std::pair<U, V> >& v,
 		const std::string& s,
 		typename std::string::const_iterator& i,
 		const std::list<char>& escaped);

@@ -285,7 +285,8 @@ namespace vcsn {
 		    const semiring_elt_t& w,
 		    const monoid_elt_value_t& m)
   {
-    return op_add_weighted_edge(structure(), value(), from, to, w, m);
+    return op_add_weighted_edge(this->structure(), this->value(),
+				from, to, w, m);
   }
 
   /** add an edge using a series. */

@@ -332,7 +332,7 @@ namespace vcsn {
 
   template <typename A, typename input_t, typename output_t>
   void
-  do_quotient(const AutomataBase<A>&	a_set,
+  do_quotient(const AutomataBase<A>&,
 	      const algebra::NumericalSemiring&,
 	      SELECTOR(bool),
 	      output_t&			output,

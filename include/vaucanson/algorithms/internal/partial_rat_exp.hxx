@@ -63,7 +63,7 @@ namespace vcsn
     semiring_elt_list_(),
     node_list_()
   {
-    semiring_elt_list_.push_back(w);  
+    semiring_elt_list_.push_back(w);
   }
 
   template <typename Series, typename T>
@@ -119,7 +119,7 @@ namespace vcsn
     semiring_elt_list_.front() = w * semiring_elt_list_.front();
     return *this;
   }
-  
+
   template <typename Series, typename T>
   const Series&
   PartialExp<Series, T>::exp_structure() const
@@ -156,7 +156,7 @@ namespace vcsn
 
   template <typename Series, typename T>
   template <bool IsConst>
-  typename PartialExp<Series, T>::internal_iterator<IsConst>&
+  PartialExp<Series, T>::internal_iterator<IsConst>&
   PartialExp<Series, T>::internal_iterator<IsConst>::operator++()
   {
     if (on_node_)
@@ -169,11 +169,11 @@ namespace vcsn
 
   template <typename Series, typename T>
   template <bool IsConst>
-  typename PartialExp<Series, T>::internal_iterator<IsConst>
+  PartialExp<Series, T>::internal_iterator<IsConst>
   PartialExp<Series, T>::internal_iterator<IsConst>::operator++(int)
   {
     internal_iterator old = *this;
-    
+
     if (on_node_)
       ++nodes_iterator_;
     else
@@ -184,7 +184,8 @@ namespace vcsn
 
   template <typename Series, typename T>
   template <bool IsConst>
-  typename PartialExp<Series, T>::internal_iterator<IsConst>::semiring_elt_ref_t
+  typename PartialExp<Series, T>::template internal_iterator<IsConst>::
+  semiring_elt_ref_t
   PartialExp<Series, T>::internal_iterator<IsConst>::semiring_elt() const
   {
     assertion(!on_node_);
@@ -193,7 +194,8 @@ namespace vcsn
 
   template <typename Series, typename T>
   template <bool IsConst>
-  typename PartialExp<Series, T>::internal_iterator<IsConst>::node_ref_t
+  typename PartialExp<Series, T>::template internal_iterator<IsConst>::
+  node_ref_t
   PartialExp<Series, T>::internal_iterator<IsConst>::node() const
   {
     assertion(on_node_);
@@ -207,7 +209,7 @@ namespace vcsn
   {
     return on_node_;
   }
- 
+
   template <typename Series, typename T>
   template <bool IsConst>
   bool
@@ -225,35 +227,35 @@ namespace vcsn
     return nodes_iterator_ == other.nodes_iterator_ and
       semiring_elts_iterator_ == other.semiring_elts_iterator_;
   }
-  
+
   template <typename Series, typename T>
   typename PartialExp<Series, T>::iterator
   PartialExp<Series, T>::begin()
   {
     return iterator(semiring_elt_list_.begin(), node_list_.begin());
   }
-  
+
   template <typename Series, typename T>
   typename PartialExp<Series, T>::const_iterator
   PartialExp<Series, T>::begin() const
   {
     return const_iterator(semiring_elt_list_.begin(), node_list_.begin());
   }
-  
+
   template <typename Series, typename T>
   typename PartialExp<Series, T>::iterator
   PartialExp<Series, T>::end()
   {
     return iterator(semiring_elt_list_.end(), node_list_.end());
   }
-  
+
   template <typename Series, typename T>
   typename PartialExp<Series, T>::const_iterator
   PartialExp<Series, T>::end() const
   {
     return const_iterator(semiring_elt_list_.end(), node_list_.end());
   }
-  
+
   /*---------------------.
   | PartialExp functions |
   `---------------------*/
@@ -264,7 +266,7 @@ namespace vcsn
     typename PartialExp<S, T>::const_iterator i = e.begin();
 
     o << '[' << i.semiring_elt();
-    
+
     for (i++; i != e.end(); ++i)
     {
       if (i.on_node())
@@ -339,7 +341,7 @@ namespace vcsn
 
     if (i1.semiring_elt() != i2.semiring_elt())
       return (i1.semiring_elt() < i2.semiring_elt());
-    
+
     for (i1++, i2++; i1 != e1.end() and i2 != e2.end(); )
     {
       if (series_set_elt_value_t(i1.node()) != series_set_elt_value_t(i2.node()))
@@ -369,7 +371,7 @@ namespace vcsn
 
     if (i1.semiring_elt() != i2.semiring_elt())
       return false;
-    
+
     for (i1++, i2++; i1 != e1.end() and i2 != e2.end(); )
     {
       if (series_set_elt_value_t(i1.node()) != series_set_elt_value_t(i2.node()))
@@ -410,7 +412,7 @@ namespace vcsn
     else
       return i1.semiring_elt() < i2.semiring_elt();
   }
-  
+
   template <typename S, typename T>
   bool unweighted_eq(const PartialExp<S, T>& e1, const PartialExp<S, T>& e2)
   {

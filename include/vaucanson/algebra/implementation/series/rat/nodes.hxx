@@ -134,8 +134,8 @@ namespace vcsn {
     Zero<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Zero<M_, W_>;
-      if (constant_term_)
-	p->constant_term_ = new W_(*constant_term_);
+      if (this->constant_term_)
+	p->constant_term_ = new W_ (*(this->constant_term_));
       return p;
     }
 
@@ -185,8 +185,8 @@ namespace vcsn {
     One<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new One<M_, W_>;
-      if (constant_term_)
-	p->constant_term_ = new W_(*constant_term_);
+      if (this->constant_term_)
+	p->constant_term_ = new W_ (*(this->constant_term_));
       return p;
     }
 
@@ -236,8 +236,8 @@ namespace vcsn {
     Constant<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Constant<M_, W_>(value_);
-      if (constant_term_)
-	p->constant_term_ = new W_(*constant_term_);
+      if (this->constant_term_)
+	p->constant_term_ = new W_ (*(this->constant_term_));
       return p;
     }
 
@@ -307,8 +307,8 @@ namespace vcsn {
     LeftWeighted<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new LeftWeighted<M_, W_>(weight_, *child_);
-      if (constant_term_)
-	p->constant_term_ = new W_(*constant_term_);
+      if (this->constant_term_)
+	p->constant_term_ = new W_ (*(this->constant_term_));
       return p;
     }
 
@@ -385,8 +385,8 @@ namespace vcsn {
     RightWeighted<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new RightWeighted<M_, W_>(weight_, *child_);
-      if (constant_term_)
-	p->constant_term_ = new W_(*constant_term_);
+      if (this->constant_term_)
+	p->constant_term_ = new W_(*(this->constant_term_));
       return p;
     }
 
@@ -457,8 +457,8 @@ namespace vcsn {
     Star<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Star<M_, W_>(*child_);
-      if (constant_term_)
-	p->constant_term_ = new W_(*constant_term_);
+      if (this->constant_term_)
+	p->constant_term_ = new W_(*(this->constant_term_));
       return p;
     }
 
@@ -525,8 +525,8 @@ namespace vcsn {
     Product<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Product<M_, W_>(*left_, *right_);
-      if (constant_term_)
-	p->constant_term_ = new W_(*constant_term_);
+      if (this->constant_term_)
+	p->constant_term_ = new W_(*(this->constant_term_));
       return p;
     }
 
@@ -605,8 +605,8 @@ namespace vcsn {
     Sum<M_,W_>::clone() const
     {
       Node<M_, W_>* p = new Sum<M_, W_>(*left_, *right_);
-      if (constant_term_)
-	p->constant_term_ = new W_(*constant_term_);
+      if (this->constant_term_)
+	p->constant_term_ = new W_(*(this->constant_term_));
       return p;
     }
 

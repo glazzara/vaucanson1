@@ -283,6 +283,6 @@ namespace vcsn {
     return ret;
   }
 
-} // vcsn
+} // End of namespace vcsn.
 
 #endif // ! VCSN_ALGORITHMS_PRODUCT_HXX

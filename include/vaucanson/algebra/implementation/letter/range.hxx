@@ -32,9 +32,14 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_RANGE_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_RANGE_HXX
 
-namespace vcsn {
+# include <cstdlib>
+# include <cmath>
 
-  namespace algebra {
+namespace vcsn
+{
+
+  namespace algebra
+  {
 
     template <class T, class Interval>
     static_ranged<T, Interval>::static_ranged()
@@ -61,14 +66,14 @@ namespace vcsn {
     }
 
     template <class T, class Interval>
-    bool operator<(const static_ranged<T, Interval>& lhs, 
+    bool operator<(const static_ranged<T, Interval>& lhs,
 		   const static_ranged<T, Interval>& rhs)
     {
       return lhs.value() < rhs.value();
     }
 
     template <class T, class Interval>
-    bool operator==(const static_ranged<T, Interval>& lhs, 
+    bool operator==(const static_ranged<T, Interval>& lhs,
 		   const static_ranged<T, Interval>& rhs)
     {
       return lhs.value() == rhs.value();
@@ -116,8 +121,7 @@ namespace vcsn {
     template <char From, char To>
     char static_char_interval<From, To>::random()
     {
-      unsigned r = 
-      (unsigned) floor(((float) rand() / (float) RAND_MAX) * (To - From + 1));
+      unsigned r = floor((float (rand()) / RAND_MAX) * (To - From + 1));
       return (char)(From + r);
     }
 

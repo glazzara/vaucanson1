@@ -161,15 +161,15 @@ namespace utility {
 			     std::string(Message1) + ": " + Message2)
 
 
-// Definition of macro needed where result can't be computed. 
-#  ifdef EXCEPTION_TRAPS 
+// Definition of macro needed where result can't be computed.
+#  ifdef EXCEPTION_TRAPS
 #   define _result_not_computable(file, line, location, Message, Exception) \
       std::ostringstream os; \
       os << file << ':' << line << ':' \
 	 << (location ? location : "") \
 	 << (location ? ": " : " ") \
 	 << Message; \
-      throw Exception(os.str()); 
+      throw Exception(os.str());
 #  else // !EXCEPTION_TRAPS
 #   define _result_not_computable(file, line, location, Message, Exception) \
       std::cerr << file << ':' << line << ':' \
@@ -194,7 +194,11 @@ namespace utility {
 #  define static_assertion_(Cond, Message) \
   { typename utility::static_if<Cond, int, utility::contract::fail<void> >::t Message; Message = 0; }
 
-#  define static_error(Message) utility::contract::fail<Message> Message
+#  define static_error(Message)			\
+{						\
+  struct Message;				\
+  utility::contract::fail<Message> Message;	\
+}
 
 #  ifndef INTERNAL_CHECKS
 

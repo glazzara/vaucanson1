@@ -58,7 +58,7 @@ namespace vcsn {
       typedef typename monoid_t::alphabet_t		alphabet_t;
       typedef typename alphabet_t::letter_t		letter_t;
       INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
-      
+
       KRatExpTranspose(const Element<Series, T>& exp) :
 	KRatExpIdentity<KRatExpTranspose<Series, T, Dispatch>,
       			Series,
@@ -75,14 +75,14 @@ namespace vcsn {
 
       MATCH_(Constant, m)
       {
-	monoid_elt_t melt (exp_.structure().monoid(), m);
+	monoid_elt_t melt (this->exp_.structure().monoid(), m);
 	melt.mirror();
-	return Element<Series, T> (exp_.structure(), melt);
+	return Element<Series, T> (this->exp_.structure(), melt);
       }
       END
-      
+
     };
-      
+
 
   } // algebra
 

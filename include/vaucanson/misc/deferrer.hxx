@@ -133,7 +133,7 @@ namespace utility
   Deferrer<T, rt_checks>::operator = (const deferred_type& rhs)
   {
     new (data) deferred_type (rhs);
-    set_valid(true);
+    this->set_valid(true);
     return *this;
   }
 

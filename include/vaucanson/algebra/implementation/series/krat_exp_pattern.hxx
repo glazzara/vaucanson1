@@ -44,13 +44,13 @@ namespace vcsn {
 
     template <class T, class U>
     BinaryOp<T, U>::BinaryOp(const BinaryOp& b) :
-      lhs_(b.lhs_), 
+      lhs_(b.lhs_),
       rhs_(b.rhs_)
     {}
 
     template <class T, class U>
-    BinaryOp<T, U>::BinaryOp(const T& lhs, const U& rhs) : 
-      lhs_(lhs), 
+    BinaryOp<T, U>::BinaryOp(const T& lhs, const U& rhs) :
+      lhs_(lhs),
       rhs_(rhs)
     {}
 
@@ -113,12 +113,12 @@ namespace vcsn {
     template <class T>
     Value<T>::Value()
     {}
-    
+
     template <class T>
     Value<T>::Value(const Value& v) :
-      v_(v)
+      v_ (v.v_)
     {}
-    
+
     template <class T>
     Value<T>::Value(const T& v) :
       v_(v)
@@ -137,10 +137,10 @@ namespace vcsn {
     {
       return v_;
     }
-    
+
     template <class Self, class T, class U, class F>
     U
-    GenericMatcher<Self, T, U, F>::match(const T& ast) 
+    GenericMatcher<Self, T, U, F>::match(const T& ast)
     {
       return F::d(*static_cast<Self*>(this), ast);
     }
@@ -148,9 +148,9 @@ namespace vcsn {
     template <class Self, class T, class U, class F>
     GenericMatcher<Self, T, U, F>::GenericMatcher()
     {}
-    
+
   } // algebra
-  
+
 } // vcsn
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PATTERN_HXX

@@ -84,10 +84,11 @@ namespace vcsn {
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(this->series().semiring().semiring());
     Element<input_monoid_t, input_monoid_elt_value_t>
-      i_elt (structure().series().monoid(), i);
+      i_elt (this->structure().series().monoid(), i);
     Element<output_monoid_t, output_monoid_elt_value_t>
-      o_elt (structure().series().semiring().monoid(), o);
-    return op_add_io_edge(structure(), value(), from, to, i_elt, o_elt, w);
+      o_elt (this->structure().series().semiring().monoid(), o);
+    return op_add_io_edge(this->structure(), this->value(),
+			  from, to, i_elt, o_elt, w);
   }
 
 
@@ -142,7 +143,7 @@ namespace vcsn {
   set_o_final(hstate_t final,
 	      output_monoid_elt_value_t o)
   {
-    op_set_o_final(structure(), value(), final, o);
+    op_set_o_final(this->structure(), this->value(), final, o);
   }
 
   template <typename Self, typename T>
@@ -151,7 +152,7 @@ namespace vcsn {
   set_o_initial(hstate_t initial,
 		output_monoid_elt_value_t o)
   {
-    op_set_o_initial(structure(), value(), initial, o);
+    op_set_o_initial(this->structure(), this->value(), initial, o);
   }
 
 } // vcsn

@@ -109,7 +109,7 @@ namespace vcsn {
     // Function applied on each state
     void on_state(const PartialExp<S, T>& e)
     {
-      alphabet_t alpha = get()->series().monoid().alphabet();
+      alphabet_t alpha = this->get()->series().monoid().alphabet();
 
       // Test the constant term of current expression
       // If it is not zero, it is a final state
@@ -176,7 +176,7 @@ namespace vcsn {
   derivatives_automaton(const Exp& kexp)
   {
     A			a_structure(kexp.structure());
-    Element<A, T>	out(a_set);
+    Element<A, T>	out (a_structure);
     Element<A, T>*	result = do_derivatives_automaton(out, kexp);
     if (result != NULL)
       out = *result;

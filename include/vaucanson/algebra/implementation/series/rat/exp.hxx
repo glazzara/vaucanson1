@@ -103,7 +103,7 @@ namespace vcsn {
 
     template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT>&
-    exp<LetterT, WeightT>::swap(exp& otether)
+    exp<LetterT, WeightT>::swap(exp& other)
     {
       std::swap(base_, other.base_);
       return *this;

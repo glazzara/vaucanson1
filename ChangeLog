@@ -1,3 +1,46 @@
+2004-08-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Make Vaucanson compile correctly with g++ version 3.4.
+
+	* include/vaucanson/misc/deferrer.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/automata/concept/transducer_base.hxx,
+	* include/vaucanson/automata/concept/automata_base.hxx: Add missing
+	this->.
+	* include/vaucanson/misc/contract.hh (static_error): Forward declare
+	the error message (which should be a class).
+	* include/vaucanson/algebra/implementation/letter/range.hxx: Use
+	correct headers (cmath and cstdlib).
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx: Do
+	not use dynamic computed values for enums. Use basic_string<...>, not
+	string<...> (which anyway is wrong).
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hxx:
+	Fix constructor of Value<T>::Value(const Value& v): the v_ attribute is
+	initialized with v.v_, not v.
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx: Typo.
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Include sstream,
+	not iostream.
+	* include/vaucanson/tools/io.hh, include/vaucanson/tools/io.hxx: Typo.
+	* include/vaucanson/design_pattern/element_ops.hxx: Fix namespace in
+	the calls of op_swap.
+	* include/vaucanson/design_pattern/default_ops.hxx: Use static_error,
+	not static_error_.
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix an unused
+	argument warning.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx: Remove
+	superfluous typenames. Add missing template keywords.
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Typo. Add
+	a missing this->.
+	* include/vaucanson/algorithms/product.hxx: Minor fix in a comment.
+	* include/vaucanson/algorithms/isomorph.hxx: Set the right declaration
+	order for internal functions.
+
 2004-07-28  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/demos/fibonacci/one_rewriting_rule.cc: Rename as...

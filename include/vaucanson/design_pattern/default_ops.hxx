@@ -115,7 +115,8 @@ namespace vcsn {
   template<typename S, typename T>
   const S& op_convert(const Structure<S>&, const Structure<T>&)
   {
-    static_error_(no_convertion_operator_available);
+    static_error(no_convertion_operator_available);
+    return S ();
   }
 
   /*---------------------.

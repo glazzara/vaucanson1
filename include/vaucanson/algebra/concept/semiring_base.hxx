@@ -34,7 +34,7 @@
 
 # include <vaucanson/algebra/concept/semiring_base.hh>
 
-# include <iostream>
+# include <sstream>
 # include <string>
 
 namespace vcsn {

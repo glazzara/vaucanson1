@@ -682,14 +682,14 @@ namespace vcsn {
   MetaElement<algebra::Series<W, M>, rat::exp<Tm, Tw> >::accept
   (const rat::ConstNodeVisitor<Tm, Tw>& v) const
   {
-    value().accept(v);
+    this->value().accept(v);
   }
 
   template <typename W, typename M, typename Tm, typename Tw>
   size_t
   MetaElement<algebra::Series<W, M>, rat::exp<Tm, Tw> >::depth() const
   {
-    return value().depth();
+    return this->value().depth();
   }
 
   template <class W, class M, class Tm, class Tw>
