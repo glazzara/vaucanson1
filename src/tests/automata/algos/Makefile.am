@@ -30,4 +30,5 @@ EXTRA_DIST = 					\
 	transpose_test.hh			\
 	aci_canonical_test.hh			\
 	trim_test.hh				\
-	accessible_test.hh
+	accessible_test.hh			\
+	extension_test.hh

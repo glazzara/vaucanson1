@@ -1,6 +1,12 @@
 2004-03-23  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* src/tests/automata/algos/Makefile.am: Update.
+	* src/tests/automata/algos/extension_test.hh: New. It is only a template
+	  for a real test.
+
+2004-03-23  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/tests/automata/algos/Makefile.am: Update.
 	* src/tests/automata/algos/accessible_test.hh: New.
 
 2004-03-22  Loïc Fosse  <loic.fosse@lrde.epita.fr>
