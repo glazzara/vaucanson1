@@ -2,9 +2,26 @@
 * Vaucanson 0.6
 * -------------
 
+** krat_exp_print() does not exist anymore.
+
+The file  vaucanson/algorithms/krat_exp_print.hh has been  removed. To
+print a rational expression with  no extra parenthesis, just use the <<
+operator onto a C++ stream:
+
+std::cout << exp << std::endl;
+
+To make this operator behave as in previous versions, just send the right
+format onto the stream:
+
+std::cout << setpm (MODE_ALL) << exp << std::endl;
+
+(setpm  and MODE_ALL  are  in  the vcsn::rat  namespace).  To have  an
+exhaustive list of the different manipulators and print modes, you may
+look in vaucanson/algebra/implementation/series/rat/dump_visitor.hh.
+
 ** tools/usual.hh has been removed.
 
-A  system of  context headers  is present  since vaucanson  0.4.2, and
+A system of  context headers is being used  since vaucanson 0.4.2, and
 therefore usual.hh has  become useless. Furthermore it was  a bad idea
 to use it since it has many includes and may slow a lot a compilation.
 

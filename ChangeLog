@@ -1,5 +1,9 @@
 2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* NEWS: Update. Mention krat_exp_print().
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/demos/fibonacci/fibonacci.cc: Remove useless includes. Use
 	dot_display instead of dot_dump.
 
