@@ -26,7 +26,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tests_stuff.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/algorithms/concat.hh>
+# include <vaucanson/algorithms/concatenate.hh>
 
 template <class Auto>
 bool in_concat_test(tests::Tester& tg)
@@ -47,7 +47,7 @@ bool in_concat_test(tests::Tester& tg)
       automaton_t	auto_rhs = gen.generate_with_epsilon(30, 50, 10, 20);
       int		lhs_states_num = auto_lhs.states().size();
       
-      auto_in_concat(auto_lhs, auto_rhs);
+      concatenate_here(auto_lhs, auto_rhs);
       if (auto_lhs.states().size() ==
 	      lhs_states_num + auto_rhs.states().size())
 	++size;

@@ -19,21 +19,19 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_CONCAT_HXX
-# define VCSN_ALGORITHMS_CONCAT_HXX
+#ifndef VCSN_ALGORITHMS_CONCATENATE_HXX
+# define VCSN_ALGORITHMS_CONCATENATE_HXX
 
 # include <map>
-# include <vaucanson/algorithms/concat.hh>
+# include <vaucanson/algorithms/concatenate.hh>
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*------------------.
-  | do_auto_in_concat |
-  `------------------*/
-  /*! Return the concatenation of two automata using epsilon
-    transitions. */
+  // author: Yann Regis-Gianas.
+  // Return the concatenation of two automata using epsilon
+  // transitions. 
   template <class Self, class Auto>
   void
   do_auto_in_concat(const AutomataBase<Self>&   s, 
@@ -61,32 +59,26 @@ namespace vcsn {
   }
   
 
-  /*------------.
-  | auto_concat |
-  `-------------*/
-  /*! Return the concatenation of two automata using epsilon
-    transitions. */
+  // Return the concatenation of two automata using epsilon
+  // transitions. 
   template <class A, class T>
   Element<A, T> 
-  auto_concat(const Element<A, T>& lhs, const Element<A, T>& rhs)
+  concatenate(const Element<A, T>& lhs, const Element<A, T>& rhs)
   {
     Element<A, T> ret(lhs);
     do_auto_in_concat(ret.set(), ret, rhs);
     return ret;
   }
 
-  /*---------------.
-  | auto_in_concat |
-  `----------------*/
-  /*! Return the concatenation of two automata using epsilon
-    transitions. */
+  // Return the concatenation of two automata using epsilon
+  // transitions. 
   template <class A, class T>
   void
-  auto_in_concat(Element<A, T>& lhs, const Element<A, T>& rhs)
+  concatenate_here(Element<A, T>& lhs, const Element<A, T>& rhs)
   {
     do_auto_in_concat(lhs.set(), lhs, rhs);
   }
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_CONCAT_HXX
+#endif // VCSN_ALGORITHMS_CONCATENATE_HXX

@@ -1,5 +1,13 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/concatenate.hh: Replace ...
+	* include/vaucanson/algorithms/concat.hh: it.
+	* include/vaucanson/algorithms/concatenate.hxx: Replace ...
+	* include/vaucanson/algorithms/concat.hxx: it.
+	* src/tests/automata/algos/in_concat_test.hh: Use concatenate.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/concepts.h[h,xx]: Remove.
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
