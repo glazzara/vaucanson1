@@ -44,6 +44,10 @@ AC_CONFIG_FILES([
 	src/tests/algebra/Makefile
 	src/tests/algebra/series/Makefile
 	src/tests/algebra/series/krat/Makefile
+	src/tests/algebra/series/krat/derivations/Makefile
+	src/tests/algebra/series/krat/derivations/derivation/Makefile
+	src/tests/algebra/series/krat/derivations/cderivation/Makefile
+	src/tests/algebra/series/krat/main/Makefile
 	src/tests/algebra/series/misc/Makefile
 	src/tests/algebra/semiring/Makefile
 	src/tests/algebra/alphabets/Makefile
@@ -68,6 +72,8 @@ VCSN_TESTS([algebra_tropical_max_semiring])
 VCSN_TESTS([usual_automaton_t])
 VCSN_TESTS([algebra_series_krat])
 VCSN_TESTS([algebra_series_misc])
+VCSN_TESTS([algebra_series_krat_derivation])
+VCSN_TESTS([algebra_series_krat_cderivation])
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 
 AC_OUTPUT

@@ -1,22 +1,37 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 182)
-(Parent-Version vaucanson 0 181)
-(Version-Log "2003-03-31  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 183)
+(Parent-Version vaucanson 0 182)
+(Version-Log "2003-04-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/krat_exp_cderivation.hxx
-	(match_nodeConstant),
-	include/vaucanson/algorithms/krat_exp_cderivation.hxx
-	(match_nodeConstant): Remove the link to vcsn::rat, so 
-	derivation/cderivation are implementation independant (so now pass the
-	sanity check).
-	* include/vaucanson/algebra/concrete/series/krat.hxx: Add an
-	op_convert function to convert std::string to rat::exp
-	(as a constant). So permit the Element constructor for rat::exp to
-	have a string as value argument.")
+	* src/tests/algebra/series/krat/krat_exp_constant_term_test.hh,
+	src/tests/algebra/series/krat/krat_exp_derivation_test.hh,
+	src/tests/algebra/series/krat/krat_exp_parse_test.hh,
+	src/tests/algebra/series/krat/krat_exp_realtime_test.hh: Move to ...
+	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
+	src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh:
+	... These.
+	* src/tests/algebra/series/krat/Makefile.am: Update.
+	* src/tests/algebra/series/krat/derivations/Makefile.am: Add.
+	* src/tests/algebra/series/krat/derivations/derivation/Makefile.am:
+	Add.
+	* src/tests/algebra/series/krat/derivations/cderivation/Makefile.am:
+	Add.
+	* src/tests/algebra/series/krat/main/Makefile.am: Add.
+	* configure.ac: Update.
+	* src/tests/tests-suites/algebra_series_krat_derivation.defs: Add.
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh:
+	Add.
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh: Add.
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh:
+	Add.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Add a new
+	template specialiciazion to op_convert().")
 (New-Version-Log "")
-(Checkin-Time "Mon, 31 Mar 2003 13:44:22 +0200")
+(Checkin-Time "Wed, 02 Apr 2003 17:11:53 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -97,14 +112,14 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.122 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.123 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
   (README (vaucanson/f/48_README 1.7 600))
   (THANKS (vaucanson/f/36_THANKS 1.5 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.2 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.16 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.17 600))
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.2 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy (vaucanson/j/14_doc.doxy 1.1 600))
@@ -157,7 +172,7 @@
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.5 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.15 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.13 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.14 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.2 600))
@@ -416,7 +431,7 @@
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 600))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.3 755))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
@@ -471,11 +486,11 @@
 ;; Files added by populate at Mon, 17 Mar 2003 21:16:21 +0100,
 ;; to version 0.174(w), by clavei_t:
 
-  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.2 600))
-  (src/tests/algebra/series/krat/krat_exp_parse_test.hh (vaucanson/j/19_krat_exp_p 1.1 600))
+  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.3 600))
+  (src/tests/algebra/series/krat/main/krat_exp_parse_test.hh (vaucanson/j/19_krat_exp_p 1.1 600))
   
-  (src/tests/algebra/series/krat/krat_exp_derivation_test.hh (vaucanson/j/21_krat_exp_d 1.1 600))
-  (src/tests/algebra/series/krat/krat_exp_constant_term_test.hh (vaucanson/j/22_krat_exp_c 1.1 600))
+  (src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh (vaucanson/j/21_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh (vaucanson/j/22_krat_exp_c 1.1 600))
 
 ;; Files added by populate at Mon, 17 Mar 2003 21:16:52 +0100,
 ;; to version 0.174(w), by clavei_t:
@@ -526,9 +541,33 @@
 ;; Files added by populate at Tue, 25 Mar 2003 13:19:06 +0100,
 ;; to version 0.180(w), by clavei_t:
 
-  (src/tests/algebra/series/krat/krat_exp_realtime_test.hh (vaucanson/j/34_krat_exp_r 1.1 600))
+  (src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh (vaucanson/j/34_krat_exp_r 1.1 600))
   (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.1 600))
   (include/vaucanson/algorithms/krat_exp_realtime.hh (vaucanson/j/36_krat_exp_r 1.1 600))
+
+;; Files added by populate at Wed, 02 Apr 2003 14:58:12 +0200,
+;; to version 0.182(w), by clavei_t:
+
+  (src/tests/tests-suites/algebra_series_krat_derivation.defs (vaucanson/j/37_algebra_se 1.1 600))
+
+;; Files added by populate at Wed, 02 Apr 2003 15:00:32 +0200,
+;; to version 0.182(w), by clavei_t:
+
+  (src/tests/algebra/series/krat/derivations/derivation/Makefile.am (vaucanson/j/38_Makefile.a 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh (vaucanson/j/39_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/Makefile.am (vaucanson/j/40_Makefile.a 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivations_common.hh (vaucanson/j/41_derivation 1.1 600))
+
+;; Files added by populate at Wed, 02 Apr 2003 15:07:16 +0200,
+;; to version 0.182(w), by clavei_t:
+
+  (src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh (vaucanson/j/42_krat_exp_c 1.1 600))
+  (src/tests/algebra/series/krat/main/Makefile.am (vaucanson/j/43_Makefile.a 1.1 600))
+
+;; Files added by populate at Wed, 02 Apr 2003 15:10:30 +0200,
+;; to version 0.182(w), by clavei_t:
+
+  (src/tests/algebra/series/krat/derivations/cderivation/Makefile.am (vaucanson/j/44_Makefile.a 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

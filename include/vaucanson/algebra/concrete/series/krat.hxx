@@ -399,15 +399,25 @@ namespace vcsn {
     | foreign constructors |
     `---------------------*/
 
-    template<typename Tm, typename Tw, typename M, typename W>
-    inline
-    rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>), 
-				SELECTOR2(Series<M, W>),
-				const std::string& m_value)
-    { 
-      return new rat::Constant<Tm, Tw>(m_value); 
-    }
-
+  template<typename Tm, typename Tw, typename M, typename W>
+  inline
+  rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>), 
+			      SELECTOR2(Series<M, W>),
+			      const std::string& m_value)
+  { 
+    return new rat::Constant<Tm, Tw>(m_value); 
+  }
+  
+  template<typename Tm, typename Tw, typename M, typename W>
+  inline
+  rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>), 
+			      SELECTOR2(Series<M, W>),
+			      char m_value)
+  { 
+    const char str[] = {m_value, '\0'};
+    return new rat::Constant<Tm, Tw>(str); 
+  }
+  
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
   inline
   rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>),

@@ -1,3 +1,31 @@
+2003-04-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/krat_exp_constant_term_test.hh,
+	src/tests/algebra/series/krat/krat_exp_derivation_test.hh,
+	src/tests/algebra/series/krat/krat_exp_parse_test.hh,
+	src/tests/algebra/series/krat/krat_exp_realtime_test.hh: Move to ...
+	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
+	src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh:
+	... These.
+	* src/tests/algebra/series/krat/Makefile.am: Update.
+	* src/tests/algebra/series/krat/derivations/Makefile.am: Add.
+	* src/tests/algebra/series/krat/derivations/derivation/Makefile.am:
+	Add.
+	* src/tests/algebra/series/krat/derivations/cderivation/Makefile.am:
+	Add.
+	* src/tests/algebra/series/krat/main/Makefile.am: Add.
+	* configure.ac: Update.
+	* src/tests/tests-suites/algebra_series_krat_derivation.defs: Add.
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh:
+	Add.
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh: Add.
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh:
+	Add.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Add a new
+	template specialiciazion to op_convert().
+	
 2003-03-31  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/krat_exp_cderivation.hxx

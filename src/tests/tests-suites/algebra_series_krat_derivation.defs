@@ -1,0 +1,50 @@
+#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
+#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+#include <vaucanson/algebra/concrete/series/series.hh>
+#include <vaucanson/algebra/concrete/series/krat.hh>
+#include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+
+#include <algebra/series/krat/derivations/derivations_common.hh>
+
+template <class Expr>
+class Derivation
+{
+public:
+  typedef typename Expr					krat_exp_t;
+  typedef typename Expr::monoid_elt_t::set_t::letter_t	letter_t;
+  
+  Derivation(const krat_exp_t& expr, const letter_t& l) :
+    result (derivate(expr, l))
+  {
+  }
+  
+  bool is_defined()
+  {
+    return result.second;
+  }
+  
+  const krat_exp_t& get_result()
+  {
+    assert(result.second);
+    return result.first;
+  }
+  
+protected:
+  std::pair<krat_exp_t, bool> result;
+};
+
+#define TEST_STATIC_ARG1				\
+	vcsn::Element<					\
+	  vcsn::algebra::Series<			\
+	    vcsn::NumericalSemiring,			\
+	    vcsn::algebra::char_letter::Words>,		\
+	  vcsn::rat::exp<				\
+	    vcsn::algebra::char_letter::Word::value_t,	\
+	    bool> >
+
+#define TEST_STATIC_ARG2				\
+	Derivation<TEST_STATIC_ARG1>
+
+#define TEST_STATIC_ARGS				\
+	TEST_STATIC_ARG1, TEST_STATIC_ARG2
+
