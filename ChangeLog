@@ -1,3 +1,10 @@
+2004-03-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/misc/char_traits.cc: New test.
+	* include/vaucanson/misc/char_traits.hxx: Fix the bugs revealed by the
+	previous test.
+	* src/tests/misc/Makefile.am: Update.
+
 2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/tests/tests-suites/algebra_series_polynom_bool.defs,

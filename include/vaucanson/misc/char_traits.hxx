@@ -84,7 +84,7 @@ namespace utility
     if (rhs.eof_)
       return eof_;
     else
-      return rhs.val_ = val_;
+      return not eof_ and (rhs.val_ == val_);
   }
 
   template <class CharT>
@@ -155,7 +155,7 @@ namespace utility
 
     for (i = 0; (i < n) and not eq(p[i], c); ++i)
       ;
-    return i < n ? p : 0;
+    return i < n ? p + i: 0;
   }
 
   template <typename CharT>
