@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -27,11 +28,14 @@
 # include <vaucanson/algebra/concrete/series/rat/random_visitor.hh>
 # include <vaucanson/tools/usual.hh>
 
+# include <vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx>
+# include <vaucanson/algebra/concrete/series/krat_exp_support.hxx>
+
 namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool op_contains(const Series<W, M>& s, const rat::exp<Tm, Tw>& m)
+  bool op_contains(const Series<W, M>& , const rat::exp<Tm, Tw>&)
   { 
     assert(! "op_contains for Element<Series<W,M>, exp<Tm,Tw> > not defined.");
     return true; 
@@ -39,13 +43,26 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool op_is_finite_app(const Series<W, M>& s, const rat::exp<Tm, Tw>& m)
+  bool op_is_finite_app(const Series<W, M>&, const rat::exp<Tm, Tw>& m)
   { 
-    return false; 
+    vcsn::IsFiniteAppMatcher<Series<W, M>, rat::exp<Tm, Tw>, 
+      DispatchFunction<rat::exp<Tm, Tw> > > matcher;
+    return matcher.match(m);
+  }
+
+  template<typename W, typename M, typename Tm, typename Tw>
+  inline
+  typename series_traits<rat::exp<Tm, Tw> >::support_t
+  op_support(const Series<W, M>&, const rat::exp<Tm, Tw>& m)
+  {
+    vcsn::SupportMatcher<Series<W, M>, rat::exp<Tm, Tw>,
+      DispatchFunction<rat::exp<Tm, Tw> > > matcher;
+    matcher.match(m);
+    return matcher.get();
   }
 
   template <typename W, typename M, typename Tm, typename Tw>
-  Tm op_choose_from_supp(const Series<W, M>& s, const rat::exp<Tm, Tw>& m)
+  Tm op_choose_from_supp(const Series<W, M>&, const rat::exp<Tm, Tw>& m)
   {
     rat::RandomVisitor<Tm, Tw> v;
     m.accept(v);
@@ -70,7 +87,7 @@ namespace vcsn {
 
   template <typename W, typename M, typename Tm, typename Tw>
   inline
-  void op_in_tranpose(const Series<W, M>& s, 
+  void op_in_tranpose(const Series<W, M>&, 
 		      rat::exp<Tm, Tw>& dst)
   {
     typedef rat::Product<Tm, Tw>	n_prod_t;
@@ -119,7 +136,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_k(const Series<W, M>& s,
+  bool krat_simplify_left_is_k(const Series<W, M>&,
 			       rat::exp<Tm, Tw>& dst,
 			       const rat::exp<Tm, Tw>& other, 
 			       rat::LeftWeighted<Tm, Tw>* left, 
@@ -155,9 +172,7 @@ namespace vcsn {
 	    
 	  return true;
 	}
-	 
-      // FIXME: reduce (k 1) * Const -> (k Const)
- 
+	  
       default: break;
 	  
       }
@@ -167,8 +182,8 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_ka(const Series<W, M>& s,
-				rat::exp<Tm, Tw>&,
+  bool krat_simplify_left_is_ka(const Series<W, M>&,
+				rat::exp<Tm, Tw>& dst,
 				const rat::exp<Tm, Tw>& other, 
 				rat::LeftWeighted<Tm, Tw>* left, 
 				typename rat::Node<Tm, Tw>::type other_type)
@@ -191,8 +206,8 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_kany(const Series<W, M>& s,
-				  rat::exp<Tm, Tw>&,
+  bool krat_simplify_left_is_kany(const Series<W, M>&,
+				  rat::exp<Tm, Tw>& dst,
 				  const rat::exp<Tm, Tw>& other, 
 				  rat::LeftWeighted<Tm, Tw>* left, 
 				  typename 
@@ -215,7 +230,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_lweight(const Series<W, M>& s,
+  bool krat_simplify_left_is_lweight(const Series<W, M>&,
 				     rat::exp<Tm, Tw>& dst,
 				     const rat::exp<Tm, Tw>& other, 
 				     rat::LeftWeighted<Tm, Tw>* left, 
@@ -237,7 +252,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_anyk(const Series<W, M>& s,
+  bool krat_simplify_left_is_anyk(const Series<W, M>&,
 				  rat::exp<Tm, Tw>& dst,
 				  const rat::exp<Tm, Tw>& other, 
 				  rat::RightWeighted<Tm, Tw>* left, 
@@ -305,7 +320,7 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  void op_in_mul(const Series<W, M>& s, 
+  void op_in_mul(const Series<W, M>&, 
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg)
   {
@@ -455,7 +470,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
   void op_assign(const Series<W, M>&,
-		 const M&,
+		 const M& monoid,
 		 rat::exp<Tm, Tw>& dst,
 		 const oTm& src)
   {
@@ -469,7 +484,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
-  void op_assign(const Series<W, M>& s,
+  void op_assign(const Series<W, M>&,
 		 const W& weights,
 		 rat::exp<Tm, Tw>& dst,
 		 const oTw& src)
@@ -484,8 +499,8 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool op_stareable(const Series<W, M>& s,
-		    const rat::exp<Tm, Tw>& dst)
+  bool op_stareable(const Series<W, M>&,
+		    const rat::exp<Tm, Tw>&)
   { 
     return true; 
   }
@@ -504,7 +519,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   rat::exp<Tm, Tw> 
-  op_star(const Series<W, M>& s,
+  op_star(const Series<W, M>&,
 	  const rat::exp<Tm, Tw>& src)
   {
     if (src.base()->what() == rat::Node<Tm, Tw>::zero)
@@ -604,8 +619,8 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
-  void op_in_mul(const Series<W, M>& s,
-		 const W&,
+  void op_in_mul(const Series<W, M>&,
+		 const W& weights,
 		 rat::exp<Tm, Tw>& ret,
 		 const oTw& w)
   { 
@@ -754,9 +769,9 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
-  Tw op_series_get(const Series<W, M>& s, 
-		   const rat::exp<Tm, Tw>& p,
-		   const oTm& m)
+  Tw op_series_get(const Series<W, M>&, 
+		   const rat::exp<Tm, Tw>&,
+		   const oTm&)
   { 
     // FIXME : doing a get on a krat could be implemented by computed 
     //         a thompson/glushkov automaton and compute resulting series 
@@ -765,17 +780,21 @@ namespace vcsn {
     return zero_value(SELECT(W), SELECT(Tw));
   }
 
-  template<typename W, typename M, typename Tm, typename Tw, typename oTm, typename oTw>
+  template<typename W, typename M, typename Tm, typename Tw, 
+	   typename oTm, typename oTw>
   inline
   void op_series_set(const Series<W, M>& s, 
-		     const rat::exp<Tm, Tw>& p,
+		     rat::exp<Tm, Tw>& p,
 		     const oTm& m,
 		     const oTw& w)
   { 
-    // FIXME : doing a get on a krat could be implemented by computed 
-    //         a thompson/glushkov automaton and compute resulting series 
-    //         of m.
-    FIXME("not implemented yet.");
+    rat::exp<Tm, Tw> ret = 
+      rat::exp<Tm, Tw>::constant(op_convert(SELECT(Tm), SELECT(M), 
+					    m));
+    ret.base() = new rat::LeftWeighted<Tm, Tw>
+      (op_convert(SELECT(Tw), SELECT(W), 
+		  w), ret.base());
+    op_in_add(s, p, ret);
   }
 
   /*----------------------------------------------------------.

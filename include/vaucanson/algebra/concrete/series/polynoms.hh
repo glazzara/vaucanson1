@@ -3,7 +3,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -81,12 +82,13 @@ namespace vcsn {
       std::map<Tm, Tw> map_;
     };
 
-  template<typename W, typename M, typename Tm, typename Tw>
-  struct series_traits<Series<W, M>, polynom<Tm, Tw> >
-  {
-    typedef Tm monoid_value_t;
-    typedef Tw weight_value_t;
-  };
+    template<typename Tm, typename Tw>
+    struct series_traits<polynom<Tm, Tw> >
+    {
+      typedef Tm monoid_value_t;
+      typedef Tw weight_value_t;
+      typedef polynom<Tm, Tw> support_t;
+    };
 
     template <class Series, class Tm, class Tw>
     struct DefaultTransposeFun<Series, polynom<Tm,Tw> >
@@ -95,11 +97,7 @@ namespace vcsn {
       operator()(const Series& s, const polynom<Tm,Tw>& l) const;
     };
     
-
   } // algebra
-  
-
-  using namespace algebra;
 
 } // vcsn
 
@@ -310,26 +308,39 @@ namespace vcsn {
   template <class W, class M, class Tm, class Tw>
   Tm op_choose_from_supp(const Series<W, M>& s, 
 			 const polynom<Tm, Tw>& p);
+  
+  template<typename W, typename M, typename Tm, typename Tw>
+  typename series_traits<polynom<Tm, Tw> >::support_t
+  op_support(const Series<W, M>& s, const polynom<Tm, Tw>& m);
 
-    template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-    Tw op_series_get(const Series<W, M>& s, 
-		     const polynom<Tm, Tw>& p,
-		     const oTm& m);
-
-    template<typename W, typename M, 
-	     typename Tm, typename Tw, 
-	     typename oTm, typename oTw>
-    void op_series_set(const Series<W, M>& s,
-		       polynom<Tm, Tw>& p,
-		       const oTm& m,
-		       const oTw& w);
-
+  template<typename W, typename M, typename Tm, typename Tw, typename oTm>
+  Tw op_series_get(const Series<W, M>& s, 
+		   const polynom<Tm, Tw>& p,
+		   const oTm& m);
+  
+  template<typename W, typename M, 
+	   typename Tm, typename Tw, 
+	   typename oTm, typename oTw>
+  void op_series_set(const Series<W, M>& s,
+		     polynom<Tm, Tw>& p,
+		     const oTm& m,
+		     const oTw& w);
+  
   template <class W, class M, class Tm, class Tw>
   Element<Series<W,M>, polynom<Tm,Tw> > 
   op_choose(const Series<W,M>& s, 
 	    SELECTOR2(polynom<Tm,Tw>));
 
 } // vcsn
+
+namespace std {
+
+  template <class Tm, class Tw>
+  std::ostream& operator<<(std::ostream& out, 
+			   const vcsn::algebra::polynom<Tm, Tw>& p);
+
+} // std
+
 
 # include <vaucanson/algebra/concrete/series/polynoms.hxx>
 

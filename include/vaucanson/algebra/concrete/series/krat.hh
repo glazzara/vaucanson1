@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -22,6 +23,7 @@
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HH
 
 # include <utility>
+# include <list>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 
@@ -33,11 +35,12 @@ namespace vcsn {
     | Series compliance |
     `------------------*/
 
-    template<typename W, typename M, typename Tm, typename Tw>
-    struct series_traits<Series<W, M>, rat::exp<Tm, Tw> >
+    template<typename Tm, typename Tw>
+    struct series_traits<rat::exp<Tm, Tw> >
     {
       typedef Tm	monoid_value_t;
       typedef Tw	weight_value_t;
+      typedef std::list<monoid_value_t> support_t;
     };
 
   } // algebra

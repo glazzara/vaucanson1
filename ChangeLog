@@ -1,3 +1,25 @@
+2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat.hh(series_traits):
+		Add support_t.
+	
+	* include/vaucanson/algebra/concrete/series/krat.hxx:
+		Implement op_support, op_is_finite_app.
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: 
+		Minor changes.
+
+	* include/vaucanson/algebra/concrete/series/polynoms.hh:
+		Add support_t, 
+		Add output facilities.
+
+	* include/vaucnson/algebra/concrete/series/polynoms.hxx:
+		Implement op_support and output facilities.
+	
+	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx,
+	  include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx:
+		New.
+
 2003-05-19  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/misc/limits.hh: Revert conditional for using

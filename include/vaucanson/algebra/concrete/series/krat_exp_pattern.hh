@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -165,7 +166,7 @@ match_node##N(const N& p____) 		\
 
 #define MATCH(N)					\
 return_type						\
-match_node##N(const N&)					\
+match_node##N(const N&) 			\
 {						
    
 #define END }
@@ -192,7 +193,7 @@ match_node##N(const N&)					\
     };
 
 #define INHERIT_CONSTRUCTORS(Self, T, U, F) \
-   typedef vcsn::algebra::KRatExpMatcher<Self, T, U, F> krat_exp_matcher_t; \
+   typedef ::vcsn::algebra::KRatExpMatcher<Self, T, U, F> krat_exp_matcher_t; \
    typedef typename krat_exp_matcher_t::Product		Product;             \
    typedef typename krat_exp_matcher_t::Sum		Sum;                \
    typedef typename krat_exp_matcher_t::Star		Star;                \
@@ -206,7 +207,7 @@ match_node##N(const N&)					\
       struct DispatchFunction;
 
       template <class Self, class Series, class T, class Dispatch>
-	struct KRatExpIdentity : algebra::KRatExpMatcher<
+	struct KRatExpIdentity : vcsn::algebra::KRatExpMatcher<
 	Self,
 	T, 
 	Element<Series, T>,
