@@ -1,3 +1,8 @@
+2003-06-24  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/accessible.hh,
+	include/vaucanson/algorithms/normalized.hh: Document.
+
 2003-06-23  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/standard.hh,

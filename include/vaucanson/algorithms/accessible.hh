@@ -22,39 +22,109 @@
 #ifndef VCSN_ALGORITHMS_ACCESSIBLE_HH
 # define VCSN_ALGORITHMS_ACCESSIBLE_HH
 
+/**
+ * @file accessible.hh
+ *
+ * @brief Algorithms for accessible/coaccessible states computation.
+ *
+ * This file contains a few algorithms to get accessible or coaccessible
+ * states from an automaton.
+ *
+ * @see accessible_states(), accessible(), accessible_here(),
+ *      coaccessible_states(), coaccessible(), coaccessible_here()
+ */
+
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <set>
 
 namespace vcsn {
 
-  /** \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /* @{ */
 
-  /// Returns reachables states from the input states.
+  /**
+   * @brief Return accessible states.
+   *
+   * This functions returns the accessible states set of its input automaton.
+   *
+   * @param a The input automaton.
+   *
+   * @see accessible(), coaccessible(), coaccessible_states()
+   */
   template<typename A, typename T>
   std::set<hstate_t>
   accessible_states(const Element<A, T>& a);
 
-  /// Extracts the sub-automaton composed of the start reachable states.
+  /**
+   * @brief Extract the sub-automaton composed of accessible states.
+   *
+   * This function returns a fresh sub-automaton of its input
+   * containing only accessible states.
+   *
+   * @param a The input automaton.
+   *
+   * @see accessible_here(), accessible_states(), coaccessible(),
+   *      coaccessible_states()
+   */
   template<typename A, typename T>
   Element<A, T>
   accessible(const Element<A, T>& a);
 
-  /// In-place extract the sub-automaton of start reachable states.
+  /**
+   * @brief In-place extract the sub-automaton of accessible states.
+   *
+   * This function computes the sub-autmaton of accessible states from
+   * its input automaton. The operation is performed in-place.
+   *
+   * @param a An in/out parameter which contains the automaton to work on as
+   *          input and the result as output.
+   *
+   * @see accessible(), accessible_states(), coaccessible(), coaccessible_states()
+   */
   template<typename A, typename T>
   void
   accessible_here(Element<A, T>& a);
   
-  /// Returns co-accessible states from the final states.
+  /**
+   * @brief Return co-accessible states.
+   *
+   * This functions returns the co-accessible states set of its input automaton,
+   * i.e. states which are accessible from final states.
+   *
+   * @param a The input automaton.
+   *
+   * @see coaccessible(), accessible(), accessible_states()
+   */
   template<typename A, typename T>
   std::set<hstate_t>
   coaccessible_states(const Element<A, T>& a);
   
-  /// Extracts the sub-automaton composed of the final co-accessible states. 
+  /**
+   * @brief Extract the sub-automaton composed of co-accessible states.
+   *
+   * This function returns a fresh sub-automaton of its input
+   * containing only co-accessible states, i.e. states which are accessible
+   * from final states.
+   *
+   * @param a The input automaton.
+   *
+   * @see coaccessible_here(), coaccessible_states(), accessible(),
+   *      accessible_states()
+   */
   template<typename A, typename T>
   Element<A, T>
   coaccessible(const Element<A, T>& a);
   
-  /// In-place extract the sub-automaton of final co-reachable states.
+  /**
+   * @brief In-place extract the sub-automaton of co-accessible states.
+   *
+   * This function computes the sub-autmaton of co-accessible states from
+   * its input automaton. The operation is performed in-place.
+   *
+   * @param a An in/out parameter which contains the automaton to work on as
+   *          input and the result as output.
+   *
+   * @see coaccessible(), coaccessible_states(), accessible(), accessible_states()
+   */
   template<typename A, typename T>
   void
   coaccessible_here(Element<A, T>& a);
