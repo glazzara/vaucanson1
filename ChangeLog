@@ -1,5 +1,20 @@
 2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
 
+	Document some more.
+	
+	* doc/FAQ.txt: Document a hidden misfeature of the expression
+	parser (a 2*).
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh:
+	Fix minor typo.
+	
+	* src/demos/vaucanswig/doc/build-process.txt: Rewrite in
+	reStructured Text format. Clarify documentation.
+	* src/demos/vaucanswig/doc/meta-build-process.txt: Likewise.
+	* src/demos/vaucanswig/doc/Makefile.am: Generate HTML and PDF
+	output for build-process.txt and meta-build-process.txt.
+	
+2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
+
 	Allow for distribution of the whole test suite. Before this patch,
 	tar choked on filenames longer than 99 characters, and source
 	names in the test suites are longer than that. Note that this

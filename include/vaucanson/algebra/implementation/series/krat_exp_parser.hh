@@ -37,7 +37,7 @@
 /**
  * @file krat_exp_parser.hh
  *
- * This file declare the parse() function.
+ * This file declares the parse() function.
  *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
  *         Thomas Claveirole <thomas@lrde.epita.fr>
