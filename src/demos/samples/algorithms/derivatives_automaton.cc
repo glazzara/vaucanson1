@@ -29,7 +29,7 @@
 //
 #include <vaucanson/z_automaton.hh>
 
-#include <vaucanson/tools/dot_dump.hh>
+#include <vaucanson/tools/dot_display.hh>
 #include <vaucanson/algorithms/derivatives_automaton.hh>
 #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 
@@ -59,12 +59,9 @@ int main(int argc, char **argv)
 
   derivatives_automaton(automaton, rat_exp);
 
-  // If the automaton is valid, save it !
+  // If the automaton is valid, display it !
   if (automaton.states().size())
-    {
-      SAVE_AUTOMATON_DOT_SIMPLE("out", automaton);
-      std::cout << "Automaton saved." << std::endl;
-    }
+    tools::dot_display(automaton, "derivatives_automaton");
   else
     std::cout << "Empty automaton." << std::endl;
 }

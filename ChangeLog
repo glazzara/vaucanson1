@@ -1,3 +1,8 @@
+2004-07-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/demos/samples/algorithms/derivatives_automaton.cc: Use dot_display
+	instead of dot_dump.
+
 2004-07-18  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* configure.ac: Bump to Vaucanson 0.6.
