@@ -127,6 +127,7 @@ AC_CONFIG_FILES([
 	src/demos/samples/Makefile
 	src/demos/samples/algebra/Makefile
 	src/demos/samples/algorithms/Makefile
+	src/demos/xml/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
 	doc/beginner/Makefile
