@@ -85,8 +85,8 @@ namespace vcsn {
     bool operator==(const Series<W, M>& s1, 
 		    const Series<W, M>& s2)
     {
-      return s1.monoid() == s2.monoid() &&
-	s1.weights() == s2.weights();
+      return & s1.monoid() == & s2.monoid() &&
+	& s1.weights() == & s2.weights();
     }
 
     template <class W, class M, class NewW, class NewM>

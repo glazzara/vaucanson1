@@ -1,3 +1,10 @@
+2003-07-02  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata.hxx,
+	include/vaucanson/algebra/concrete/series/series.hxx: Compare by
+	reference instead of by value since structural elements are now
+	unified.
+	
 2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh

@@ -52,7 +52,7 @@ namespace vcsn {
   operator==(const Automata<Series>& lhs, 
 	     const Automata<Series>& rhs)
   {
-    return lhs.series() == rhs.series();
+    return & lhs.series() == & rhs.series();
   }
 
 } // vcsn
