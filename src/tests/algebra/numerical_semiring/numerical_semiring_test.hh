@@ -50,7 +50,7 @@ bool numerical_semiring_test(tests::Tester& t)
   int timeout = 0;
   bool result_test = true;
   element_t nb = semiring.choose_starable(SELECT(T));
-  T average_value;
+  T average_value(0);
 
   try
     {
@@ -66,7 +66,7 @@ bool numerical_semiring_test(tests::Tester& t)
       average_value = average_value < T(0) ? -average_value : average_value;
       TEST(t,
 	   "starable distribution is correct",
-	   (average_value / T(2000)) < (T(1) / T(10)) 
+	   (average_value / T(2000)) <= (T(1) / T(10)) 
 	   );
 
     }

@@ -1,3 +1,8 @@
+2004-04-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
+	Minor fix to avoid compilation warning.
+
 2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* update_config_ac.sh, bootstrap.sh, src/tests/Makefile.am,
