@@ -151,6 +151,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/fundamental/structure.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/fundamental/structure.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_FUNDAMENTAL_STRUCTURE_HH

@@ -66,6 +66,10 @@ namespace vcsn {
   
 } // vcsn
 
-# include <vaucanson/algebra/concrete/free_monoid/str_words.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/free_monoid/str_words.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCRETE_FREE_MONOID_STR_WORDS_HH

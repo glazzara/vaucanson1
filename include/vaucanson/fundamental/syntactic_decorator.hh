@@ -147,6 +147,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/fundamental/syntactic_decorator.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/fundamental/syntactic_decorator.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HH

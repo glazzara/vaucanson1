@@ -102,6 +102,10 @@ namespace vcsn {
   
 } // vcsn
 
-# include <vaucanson/algorithms/realtime.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/realtime.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_REALTIME_HH

@@ -83,6 +83,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/sum.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/sum.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_SUM_HH

@@ -81,6 +81,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/sub_automaton.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/sub_automaton.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_SUB_AUTOMATON_HH

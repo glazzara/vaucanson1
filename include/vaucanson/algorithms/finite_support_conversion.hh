@@ -63,6 +63,10 @@ namespace vcsn
 
 }
 
-#include <vaucanson/algorithms/finite_support_conversion.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    #include <vaucanson/algorithms/finite_support_conversion.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_FINITE_SUPPORT_CONVERSION_HH

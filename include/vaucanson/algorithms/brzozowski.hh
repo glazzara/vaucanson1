@@ -48,6 +48,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/brzozowski.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/brzozowski.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_BRZOZOWSKI_HH

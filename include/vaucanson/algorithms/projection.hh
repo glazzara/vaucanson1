@@ -53,6 +53,10 @@ namespace vcsn {
 
 }
 
-#include <vaucanson/algorithms/projection.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    #include <vaucanson/algorithms/projection.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif  //VCSN_ALGORITHMS_PROJECTION_HH

@@ -83,6 +83,10 @@ namespace vcsn {
     
 } // vcsn
 
-# include <vaucanson/algebra/concrete/alphabets/set_alphabet.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
  
 #endif // VCSN_ALGEBRA_CONCRETE_ALPHABETS_SET_ALPHABET_HH

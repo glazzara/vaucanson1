@@ -77,6 +77,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/forward_closure.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/forward_closure.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_FORWARD_CLOSURE_HH

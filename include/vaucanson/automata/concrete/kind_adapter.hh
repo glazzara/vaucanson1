@@ -158,6 +158,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/automata/concrete/kind_adapter.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/automata/concrete/kind_adapter.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_AUTOMATA_CONCRETE_KIND_ADAPTER_HH

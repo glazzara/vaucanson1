@@ -93,6 +93,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/aut_to_exp.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/aut_to_exp.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_AUT_TO_EXP_HH

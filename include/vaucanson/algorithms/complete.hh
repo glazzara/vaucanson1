@@ -87,6 +87,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/complete.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/complete.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_COMPLETE_HH

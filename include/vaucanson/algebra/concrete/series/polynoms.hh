@@ -353,6 +353,10 @@ namespace std {
 } // std
 
 
-# include <vaucanson/algebra/concrete/series/polynoms.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/series/polynoms.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH

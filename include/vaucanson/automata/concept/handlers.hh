@@ -101,6 +101,10 @@ namespace std {
 
 } // std
 
-# include <vaucanson/automata/concept/handlers.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/automata/concept/handlers.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_AUTOMATA_CONCEPT_HANDLERS_HH

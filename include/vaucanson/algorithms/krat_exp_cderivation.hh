@@ -55,6 +55,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/krat_exp_cderivation.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/krat_exp_cderivation.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_KRAT_EXP_CDERIVATION_HH

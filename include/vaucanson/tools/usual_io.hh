@@ -55,6 +55,10 @@ namespace vcsn
   }
 }
 
-# include <vaucanson/tools/usual_io.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/tools/usual_io.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_TOOLS_USUAL_IO_HH

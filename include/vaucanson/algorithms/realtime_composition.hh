@@ -44,6 +44,10 @@ namespace vcsn {
 
 }
 
-# include <vaucanson/algorithms/realtime_composition.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/realtime_composition.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif //VCSN_ALGORITHMS_REALTIME_COMPOSITION_HH

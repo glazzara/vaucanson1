@@ -188,6 +188,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algebra/concept/freemonoid_base.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concept/freemonoid_base.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCEPT_FREEMONOID_BASE_HH

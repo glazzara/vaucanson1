@@ -47,6 +47,10 @@ namespace vcsn {
 
 }
 
-# include <vaucanson/algorithms/aci_canonical.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/aci_canonical.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_ACI_CANONICAL_HH

@@ -128,6 +128,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/tools/usual.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/tools/usual.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_TOOLS_USUAL_HH

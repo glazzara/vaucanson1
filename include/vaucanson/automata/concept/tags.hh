@@ -41,6 +41,10 @@ namespace vcsn
 static inline bool operator==(const vcsn::NoTag& a, const vcsn::NoTag& b);
 static inline bool operator!=(const vcsn::NoTag& a, const vcsn::NoTag& b);
 
-# include <vaucanson/automata/concept/tags.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/automata/concept/tags.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_AUTOMATA_CONCEPT_TAGS_HH

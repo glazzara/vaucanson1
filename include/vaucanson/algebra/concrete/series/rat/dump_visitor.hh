@@ -80,6 +80,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algebra/concrete/series/rat/dump_visitor.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/series/rat/dump_visitor.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DUMP_VISITOR_HH

@@ -85,6 +85,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/concatenate.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/concatenate.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_CONCATENATE_HH

@@ -79,6 +79,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/thompson.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/thompson.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_THOMPSON_HH

@@ -435,6 +435,10 @@ namespace vcsn {
 
 # undef AutoType
 
-# include <vaucanson/automata/concrete/transpose_view.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/automata/concrete/transpose_view.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_AUTOMATA_CONCRETE_TRANSPOSE_VIEW_HH

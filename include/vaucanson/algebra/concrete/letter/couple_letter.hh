@@ -72,6 +72,10 @@ namespace std {
 
 } // std
 
-# include <vaucanson/algebra/concrete/letter/couple_letter.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/letter/couple_letter.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH

@@ -61,5 +61,9 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/is_normalized.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/is_normalized.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 #endif // VCSN_ALGORITHMS_IS_NORMALIZED_HH

@@ -359,6 +359,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/automata/concrete/graph.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/automata/concrete/graph.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_AUTOMATA_CONCRETE_GRAPH_HH

@@ -48,6 +48,10 @@ namespace vcsn
 
 }
 
-# include <vaucanson/tools/simple_format.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/tools/simple_format.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_TOOLS_SIMPLE_FORMAT_HH

@@ -100,6 +100,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algebra/concrete/series/krat_conversion.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/series/krat_conversion.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_CONVERSION_HH

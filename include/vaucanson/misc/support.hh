@@ -241,6 +241,10 @@ namespace utility {
 } // utility
   
 
-# include <vaucanson/misc/support.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/misc/support.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_MISC_SUPPORT_HH

@@ -77,6 +77,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/standard_of.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/standard_of.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_STANDARD_OF_HH

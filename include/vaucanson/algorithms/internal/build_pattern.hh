@@ -152,6 +152,10 @@ namespace vcsn {
   }
 }
 
-#include <vaucanson/algorithms/internal/build_pattern.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    #include <vaucanson/algorithms/internal/build_pattern.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_INTERNAL_BUILD_PATTERN_HH

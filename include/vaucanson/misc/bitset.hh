@@ -401,6 +401,10 @@ namespace std
   };
 }
 
-# include <vaucanson/misc/bitset.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/misc/bitset.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // BITSET_HH

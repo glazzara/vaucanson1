@@ -51,6 +51,10 @@ namespace vcsn
   }
 }
 
-# include <vaucanson/tools/dot_format.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/tools/dot_format.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_TOOLS_DOT_FORMAT_HH

@@ -531,6 +531,10 @@ namespace vcsn {
 
 # undef AutoType
 
-# include <vaucanson/automata/concrete/automaton_view.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/automata/concrete/automaton_view.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_AUTOMATA_CONCRETE_AUTOMATON_VIEW_HH

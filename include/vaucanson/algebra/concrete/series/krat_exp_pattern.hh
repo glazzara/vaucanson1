@@ -295,6 +295,10 @@ match_node##N(const N&) 			\
 
 } // vcsn
 
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HH

@@ -153,6 +153,10 @@ namespace vcsn {
   
 } // vcsn
 
-# include <vaucanson/algorithms/accessible.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/accessible.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_ACCESSIBLE_HH

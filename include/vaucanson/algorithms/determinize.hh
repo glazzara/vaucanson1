@@ -75,6 +75,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/determinize.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/determinize.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_DETERMINIZE_HH

@@ -83,6 +83,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/vaucanson_boolean_automaton.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/vaucanson_boolean_automaton.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_VAUCANSON_BOOLEAN_AUTOMATON_HH

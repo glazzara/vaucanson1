@@ -62,6 +62,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_DERIVATION_HH

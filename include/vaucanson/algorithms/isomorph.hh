@@ -48,6 +48,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/isomorph.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/isomorph.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_ISOMORPH_HH

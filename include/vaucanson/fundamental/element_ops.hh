@@ -344,6 +344,10 @@ namespace std {
 
 } // std
 
-# include <vaucanson/fundamental/element_ops.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/fundamental/element_ops.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_FUNDAMENTAL_ELEMENT_OPS_HH

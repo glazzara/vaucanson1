@@ -46,6 +46,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/minimization_moore.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/minimization_moore.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH

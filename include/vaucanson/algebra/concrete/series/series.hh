@@ -109,6 +109,10 @@ namespace vcsn {
   
 } // vcsn
 
-# include <vaucanson/algebra/concrete/series/series.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/series/series.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_SERIES_HH

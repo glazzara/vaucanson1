@@ -106,6 +106,10 @@ namespace vcsn
       
 } // vcsn
 
-# include <vaucanson/misc/container_ops.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/misc/container_ops.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_MISC_CONTAINER_OPS_HH

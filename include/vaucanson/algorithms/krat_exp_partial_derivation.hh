@@ -49,6 +49,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/krat_exp_partial_derivation.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/krat_exp_partial_derivation.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_KRAT_EXP_PARTIAL_DERIVATION_HH

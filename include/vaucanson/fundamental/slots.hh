@@ -197,6 +197,10 @@ namespace vcsn {
 
 }
 
-# include <vaucanson/fundamental/slots.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/fundamental/slots.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_FUNDAMENTAL_SLOTS_HH

@@ -150,6 +150,10 @@ namespace utility {
 
 } // utility
 
-# include <vaucanson/misc/window.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/misc/window.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_MISC_WINDOW_HH

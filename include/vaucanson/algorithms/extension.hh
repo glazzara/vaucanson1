@@ -57,6 +57,10 @@ namespace vcsn {
 			    const Element<ST, TT>&);
   
 }
-#include <vaucanson/algorithms/extension.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    #include <vaucanson/algorithms/extension.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif  // VCSN_ALGORITHMS_EXTENSION_HH

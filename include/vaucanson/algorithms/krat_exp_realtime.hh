@@ -46,6 +46,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/krat_exp_realtime.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/krat_exp_realtime.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH

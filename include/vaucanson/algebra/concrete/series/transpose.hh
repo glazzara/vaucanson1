@@ -44,6 +44,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algebra/concrete/series/transpose.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algebra/concrete/series/transpose.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_TRANSPOSE_HH

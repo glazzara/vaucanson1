@@ -77,6 +77,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/fundamental/meta_element_root.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/fundamental/meta_element_root.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HH

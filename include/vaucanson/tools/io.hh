@@ -142,6 +142,10 @@ namespace vcsn
 
 }
 
-# include <vaucanson/tools/io.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/tools/io.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_TOOLS_IO_HH

@@ -75,6 +75,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/eval.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/eval.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_EVAL_HH

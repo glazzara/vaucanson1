@@ -41,6 +41,10 @@ namespace vcsn {
  
 } // vcsn
 
-# include <vaucanson/tools/gen_book.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/tools/gen_book.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_TOOLS_GEN_BOOK_HH

@@ -136,6 +136,10 @@ namespace utility
 
 }
 
-#include <vaucanson/misc/unique.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    #include <vaucanson/misc/unique.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_MISC_UNIQUE_HH

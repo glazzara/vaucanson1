@@ -77,6 +77,10 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algorithms/hopcroft_minimization.hxx>
+
+#ifndef VCSN_USE_INTERFACE_ONLY
+    # include <vaucanson/algorithms/hopcroft_minimization.hxx>
+#endif // VCSN_USE_INTERFACE_ONLY
+    
 
 #endif // VCSN_ALGORITHMS_HOPCROFT_MINIMIZATION_HH
