@@ -36,16 +36,17 @@ namespace vcsn {
   //
   //
   template <typename A, typename auto_t, 
-	    typename serie_t, typename input_t>
+	    typename weight_t, typename input_t>
   void 
   do_compute(const AutomataBase<A>& a_set,
 	     const auto_t&	    a,
 	     const input_t&	    word, 
-	     serie_t&		    result)
+	     weight_t&		    result)
   {
     // FIXME: for the moment, we use large vectors because the set of hstate_t
     // FIXME: can be sparsed. We wanted to be as general as possible.
     // FIXME: Variants of compute will be available soon of course.
+    typedef typename auto_t::monoid_elt_t monoid_elt_t;
 
     hstate_t max_hstate_t = 0;
     for (typename auto_t::state_iterator i = a.states().begin();
@@ -53,25 +54,26 @@ namespace vcsn {
 	 ++i)
       max_hstate_t = std::max(*i, unsigned(max_hstate_t));
 
-    std::vector<serie_t>		v1(max_hstate_t + 1);
-    std::vector<serie_t>		v2(max_hstate_t + 1);
+    std::vector<weight_t>		v1(max_hstate_t + 1);
+    std::vector<weight_t>		v2(max_hstate_t + 1);
     std::list<hedge_t>			delta_ret;
-    const typename serie_t::set_t	&serie_set = result.set();
+    const typename weight_t::set_t	&semiring = a.series().weights();
+    weight_t zero = semiring.zero(SELECT(typename weight_t::value_t));
+    typename auto_t::monoid_elt_t empty;
 
-    
     /*-------------------.
     | Initialize the set |
     `-------------------*/
-     std::fill(v1.begin(), v1.end(), 
-	       serie_set.zero(SELECT(typename serie_t::value_t)));
+    std::fill(v1.begin(), v1.end(), zero);
 
     /*--------.
     | Initial |
     `--------*/
+    // FIXME: here we assume that there is only weight in the initial app.
     for (typename auto_t::initial_iterator i = a.initial().begin();
 	 i != a.initial().end();
 	 ++i)
-      v1[*i] = a.get_initial(*i);
+      v1[*i] = a.get_initial(*i).get(empty);
 
     /*------------.
     | Computation |
@@ -80,10 +82,10 @@ namespace vcsn {
 	 e != word.end();
 	 ++e)
       {
- 	std::fill(v2.begin(), v2.end(), 
- 		  serie_set.zero(SELECT(typename serie_t::value_t)));
+	//	std::cout << "l : " << *e << std::endl;
+ 	std::fill(v2.begin(), v2.end(), zero);
 	for (unsigned i = 0; i < v1.size(); ++i)
-	  if (v1[i] != serie_set.zero(SELECT(typename serie_t::value_t)))
+	  if (v1[i] != zero)
 	  {
 	    // FIXME : use the other version of delta to be more efficient !
 	    delta_ret.clear();
@@ -92,7 +94,7 @@ namespace vcsn {
 		   delta_ret.begin();
 		 l != delta_ret.end();
 		 ++l)
-	      v2[a.aim_of(*l)] += v1[i] * a.label_of(*l) ;
+	      v2[a.aim_of(*l)] += v1[i] * a.serie_of(*l).get(monoid_elt_t(*e));
 	  }
 	std::swap(v1, v2);
       }
@@ -101,18 +103,18 @@ namespace vcsn {
     | Final and Result |
     `-----------------*/
     for (unsigned i = 0; i < v1.size(); ++i)
-      if (v1[i] != serie_set.zero(SELECT(typename serie_t::value_t)))
-	result += v1[i] * a.get_final(i);    
+      if (v1[i] != zero)
+	result += v1[i] * a.get_final(i).get(empty);    
   }
 
   /*--------.
   | Wrapper |
   `--------*/
   template<typename A, typename T, typename W>
-  typename Element<A, T>::series_elt_t
+  typename Element<A, T>::weight_t
   compute(const Element<A, T>& a, const W& word)
   {
-    typename Element<A, T>::series_elt_t ret;
+    typename Element<A, T>::weight_t ret;
 
     do_compute(a.set(), a, word, ret);
     return ret;

@@ -52,6 +52,8 @@ AC_CONFIG_FILES([
 	src/tests/sanity/Makefile
 	src/tests/tests-suites/Makefile
 	src/tests/bin/Makefile
+	src/demos/Makefile
+	src/demos/vgrep/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
         doc/doc.doxy	

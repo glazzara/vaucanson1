@@ -76,7 +76,6 @@ namespace vcsn {
 	     d != aim.end();
 	     ++d)
 	  {
-	    hedge_t new_edge = 
 	      lhs.add_edge(states_map[rhs.origin_of(*d)],
 			   states_map[rhs.aim_of(*d)],
 			   rhs.label_of(*d));

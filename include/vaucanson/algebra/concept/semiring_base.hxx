@@ -108,8 +108,6 @@ namespace vcsn {
 	   const std::string&			 s, 
 	   typename std::string::const_iterator& i)
   {
-    typename std::string::const_iterator j = i;
-    
     std::string buf;
     if ((i != s.end()) && (*i == '-'))
       {

@@ -404,29 +404,320 @@ Some others services and external functions are proposed:
 To obtain all the services of a word, please look at
 algebra/free\_monoid/concept/freemonoid\_base.hh.
 
+How to get the neutral element of the semiring (the empty word) ? It
+is not the role of an element to provide it, the set is the only owner
+of this information. Yet, the set is not aware of the implementation
+to choose to instantiate the neutral element ! 
+
+The solution is to precise to the set the implementation we want. To
+do that, we use a tricky typed null pointer:
+
+\begin{code}[Get the empty string]
+free_monoid.identity((std::string*)(0));   // horrible but it works.
+free_monoid.identity(SELECT(std::string)); // macro to hide it.
+identity_as<std::string>::of(free_monoid); // solution using a template function.
+\end{code}
+
 \subsection{Semiring}
 
-To characterize some words of the language, we can 
+\begin{tabular}%
+{ll}
+\hline \\
+concept: & \textbf{Semiring}  \\
+concerned files: & algebra/concept/semiring\_base.h[h, xx] \\
+                 & algebra/concrete/semiring/* \\
+\hline 
+\end{tabular}
+
+To characterize some words of the language, we usually use element
+from a semiring. A semiring is a set which provides a multiplication,
+an addition and neutral elements for each of these operations.
+Consequently, we can compute the ``score'' of every words in function of
+these primitive operations.
+
+The unweighted finite state machines are also called ``acceptors''. In
+fact, there are just weighted with boolean. Consequently, we can
+instantiate the Boolean semiring:
+
+\begin{code}[The Boolean semiring]
+BooleanSemiring semiring;
+\end{code}
+
+If you look at algebra/concept/boolean\_semiring.hh, you will see that
+the BooleanSemiring is an empty class. Indeed, there is no dynamic
+data associated to it: it is only present for static purpose.
+
+A straightforward implementation of a boolean weight is the builtin
+``bool''. Vaucanson provides such an implementation:
+
+\begin{code}[A boolean in action !]
+Element<BooleanSemiring, bool> t = true;
+Element<BooleanSemiring, bool> f = false;
+std::cout << t * f << std::endl;
+std::cout << t + f << std::endl;
+\end{code}
+
+As with free monoid, particular elements can be retrieved using the set:
+
+\begin{code}[Get the identity and the zero of the semiring]
+semiring.identity(SELECT(bool));
+semiring.identity((bool*)(0));
+zero_as<bool>::of(semiring);
+\end{code}
+
+Some other semirings are useful for weighted automaton. For example,
+Vaucanson provides the MaxTropical semiring. An element of such a
+semiring can be an integer encoded as an 'int' builtin:
+
+\begin{code}[(Z, Max, +) tropical semiring]
+MaxTropical semiring;
+Element<MaxTropical, int> a = 1;
+Element<MaxTropical, int> b = zero_as<int>::of(semiring);
+Element<MaxTropical, int> c = identity_as<int>::of(semiring);
+
+cout << a << endl;
+cout << b << endl;
+cout << c << endl;
+
+\end{code}
+
+A really important operation is the ``star'' of a semiring element x
+that is defined by:
+
+\begin{center}
+\begin{math}
+x^{\star} = \sum_{k=0}^{\infty}{x^k}
+\end{math}
+\end{center}
+The star is useful when you want to symbolize a non bounded computing
+of weight (for example, when you want to associate a weight to a star
+regular expression). Yet, the star operation is not defined everywhere.
+Consequently, Vaucanson provides two services star() and is\_stareable():
+
+\begin{code}[The star of a semiring element]
+Element<MaxTropical, int> a = 1;
+Element<MaxTropical, int> b = -1;
+Element<MaxTropical, int> z = zero_as<int>::of(semiring);
+Element<MaxTropical, int> i = identity_as<int>::of(semiring);
+cout << a.is_stareable() << std::endl;
+cout << b.is_stareable() << std::endl;
+cout << z.is_stareable() << std::endl;
+cout << i.is_stareable() << std::endl;
+cout << z.star() << std::endl;
+\end{code}
 
 \subsection{Series}
 
+\begin{tabular}%
+{ll}
+\hline \\
+concept: & \textbf{Series}  \\
+concerned files: & algebra/concept/series\_base.h[h, xx] \\
+                 & algebra/concrete/series/* \\
+\hline 
+\end{tabular}
+
+We want to manipulate the mapping between words and weights as object.
+This kind of object is called formal series. Vaucanson enables the
+construction of series element. 
+
+The set of series is constructed from a free monoid and a semiring:
+
+\begin{code}[The set of series]
+Series<BooleanSemiring, FreeMonoid<Alphabet> > series; 
+\end{code}
+
+Then, we can implement a finite serie using a finite support map.
+Vaucanson provides such an implementation through the polynoms class:
+
+\begin{code}[A serie]
+Element<BooleanSeries, polynom<std::string, bool> > serie(series);
+\end{code}
+
+FIXME: the constructor is necessary !
+
+As a map, a serie can associate a weight to a word:
+
+\begin{code}[Serie's services]
+serie.assoc(``foo'') = true;
+cout << serie.get(``foo'') << endl;
+cout << serie.get(``baz'') << endl;
+\end{code}
+
+The set of series can be seen as a semiring, then a serie inherits all
+the services of a semiring element:
+
+\begin{code}[A serie as a semiring]
+serie.star();
+Element<BooleanSeries, polynom<std::string, bool> > serie2(series);
+serie2.assoc(``a'') = true;
+Element<BooleanSeries, polynom<std::string, bool> > serie3(series);
+serie3.assoc(``a'') = true;
+cout << serie1 + serie2 << endl;
+cout << serie1 + serie3 << endl;
+cout << serie2 * serie1 << endl;
+cout << serie1.is_stareable() << endl;
+\end{code}
+
 \subsection{Rational expression}
+
+The polynom implementation does not manage infinite series. Indeed, we
+can't denote such serie in an extensional way. Yet, a particular class
+of infinite series can be expressed using a finite formalism: the
+rationale expressions. The Kleene theorem says that this class of
+series is exactly what can be recognized with a finite state machine.
+
+Vaucanson enables us to define such series:
+
+\begin{code}[A rational expression]
+Element<BooleanSeries, polynom<std::string, bool> > serie(series);
+series = "a";
+Element<BooleanSeries, polynom<std::string, bool> > serie2(series);
+series2 = "ab";
+Element<BooleanSeries, polynom<std::string, bool> > serie3(series);
+series3 = "b";
+cout << serie1 + serie2 << endl;
+cout << serie1 + serie3 << endl;
+cout << serie2 * serie1 << endl;
+cout << serie1.is_stareable() << endl;
+cout << (serie1.star() + serie2) * serie3 << endl; 
+\end{code}
+
+FIXME: Parler du pattern matching !
 
 \section{Automaton}
 
-\subsection{Simple usage}
+FIXME: definition automate.
+
+An automaton is both a theorical and a computational object.
+Therefore, the services must be both general and atomic as possible. 
+
+However, the underlying data structure can be more or less adapted to each of these trends. For example, a graph with letter as label is a great structure for computation but to be seen as series the label must be enriched. At the contrary, a graph with series as label will be a great theorical object but will be heavy in memory and at computation.
+
+A basic data structure must be enough to define the primitive services but some sugar is necessary to help the user. FIXME: exemple !
+
+Finally, automaton are big structures, they must be reference-counted.
+
+\subsection{Instantiating an automaton}
+
+\begin{tabular}%
+{ll}
+\hline \\
+concept: & \textbf{Automaton}  \\
+concerned files: & automata/concept/automata\_base.h[h, xx] \\
+\hline 
+\end{tabular}
+
+A set of automaton is characterized by a series set. So, first, we have to define it:
+
+\begin{code}[The set of automata]
+Automata automata_set(series);
+cout << automata_set.series().monoid().alphabet() << endl;
+\end{code}
+
+The implementation of an automaton is the composition of 3 three things:
+
+\begin{itemize}
+\item a kind
+\item an implementation adapter
+\item a reference counter
+\end{itemize}
+
+The kind is parameterized by the type of the automaton label and adapt final services consequently. The implementation adapter is responsible of sugar. The reference counter suppress unuseful copy.
+
+\subsubsection{Structure operations}
+
+As a graph, an automaton is composed of states and edges. Usually, handlers are used to represent nodes and edges. In fact, handlers are comparable to unsigned integer. 
+
+The automaton is able to create and remove nodes and edges :
+
+\begin{code}[Structural operations]
+hstate_t s1 = a.add_state();
+hstate_t s2 = a.add_state();
+hedge_t e1 = a.add_letter_edge(s1, s2, 'a');
+hedge_t e2 = a.add_letter_edge(s1, s2, 'b');
+hstate_t s3 = a.add_state();
+hedge_t e3 = a.add_edge(s1, s3, 'a');
+hedge_t e3 = a.add_spontaneous(s1, s3);
+a.del_state(s3);
+a.del_edge(s3);
+\end{code}
+
+When you remove a state/edge, the other handlers are not updated.
+
+\subsubsection{Delta function}
+
+The delta function represents the outer transitions associated to a state. However, there are many ways of viewing this set. 
+
+\paragraph{what kind of information to retrieve ?}
+
+The last argument of delta is the type of the retrieve information. It can be hstate\_t or hedge\_t.
+
+\paragraph{where to store the information ?}
+
+Their are two kinds of return storing: you can use a standard container or an output iterator. FIXME: other kind of DELTA with two iterators !
+
+\paragraph{what criteria to filter transition ?}
+
+The simplest way to select transitions is to get them all. Another way is quite natural: you can specify a letter that must matches with the label. The last one is to use an object function that represents the criteria as an operator() with a label as argument.
+
+\subsection{Standard services}
+
+The set of states and the set of edges are provided to permit to iterate over the states and the edges. 
+
+The initial and the final applications are modelised using mapping. 
+
+Additional information can be attached to  the nodes or to the edges: this is what is called Tag in Vaucanson.
+
+\subsection{Standard macros}
+
+To help the user when writing automaton algorithms, a set of macros is provided.
+
+\subsection{Usage example}
+
+FIXME: fusion max !
 
 \section{Algorithms}
 
+\subsection{General form}
+
+\subsection{Manipulation}
+
+\subsection{Determinisation}
+
+\subsection{Minimisation}
+
+\section{Grammar inference}
+
+MAX !
+
 \section{Your 'grep'}
+
+'grep' is a well known unix tools used to look for pattern in a text. The pattern is described as a rationale expression: if a substring of the line is in the language denoted by the expression, the line is print in the output.
+
+A naive implementation of grep uses an automaton of the form:
 
 \subsection{From a regular expression to an automaton}
 
-\subsection{Speed}
+There exists many algorithms to construct an automaton that recognizes the language denoted by an expression. The most popular is the Thompson's one.
+
+\begin{code}[A naive grep]
+
+\end{code}
+
+\subsection{Speed consideration}
+
+Do not be pessimistic, we can improve our naive implementation of grep.
+
+\paragraph{What implementation ?}
+
+\paragraph{Algorithm's refinement ...}
 
 \subsection{Multiplicity in action}
 
 \section{Play with multiplicity}
+
+Imagine now that we want to determine the shortest length of the pattern that has been matched.
 
 \section{Advanced use}
 

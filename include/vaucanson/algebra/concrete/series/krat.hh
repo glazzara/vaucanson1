@@ -37,7 +37,7 @@ namespace vcsn {
     struct series_traits<Series<W, M>, rat::exp<Tm, Tw> >
     {
       typedef Tm	monoid_value_t;
-      typedef Tw	weights_value_t;
+      typedef Tw	weight_value_t;
     };
 
   } // algebra

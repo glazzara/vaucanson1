@@ -19,9 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGEBRA_POLYNOMS_HH
-# define ALGEBRA_POLYNOMS_HH
+#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
+# define VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
 
 # include <map>
 # include <utility>
@@ -86,7 +85,7 @@ namespace vcsn {
   struct series_traits<Series<W, M>, polynom<Tm, Tw> >
   {
     typedef Tm monoid_value_t;
-    typedef Tw weights_value_t;
+    typedef Tw weight_value_t;
   };
 
     template <class Series, class Tm, class Tw>
@@ -334,5 +333,5 @@ namespace vcsn {
 
 # include <vaucanson/algebra/concrete/series/polynoms.hxx>
 
-#endif // ALGEBRA_POLYNOMS_HH
+#endif // VCSN_ALGEBRA_POLYNOMS_HH
 

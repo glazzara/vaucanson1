@@ -207,8 +207,8 @@ namespace vcsn {
       typedef typename Element
 	<Monoid, typename Label::second_type>::const_iterator letter_iterator;
       
-      letter_iterator b = op_begin(m_.get(), label.second);
-      letter_iterator e = op_end(m_.get(), label.second);
+      letter_iterator b = op_begin_const(m_.get(), label.second);
+      letter_iterator e = op_end_const(m_.get(), label.second);
       
       return std::find(b, e, l_) != e;
     }
@@ -226,7 +226,7 @@ namespace vcsn {
     const Series& s = auto_self().series();
     
     series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
-    return see *= weight_t(s.weights(), label.first);
+    return se *= weight_t(s.weights(), label.first);
   }
   
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
@@ -318,12 +318,15 @@ namespace vcsn {
     template<typename L>
     hedge_t 
     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
-    add_letter_edge(hstate_t from, hstate_t to,
+    add_letter_edge(hstate_t from, 
+		    hstate_t to,
 		    const L& l)
     { 
       return auto_self().add_edge
-	(from, to, 
-	 std::make_pair(identity_value(SELECT(weights_t), SELECT(typename weight_t::value_t)),
+	(from, 
+	 to, 
+	 std::make_pair(identity_value(SELECT(weights_t), 
+				       SELECT(typename weight_t::value_t)),
 			monoid_elt_t(auto_self().series().monoid(), l).value()));
     }
 
@@ -343,7 +346,7 @@ namespace vcsn {
     template<typename Container, typename L>								\
     void                                                                                         \
     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::                                 \
-    letter_ ## Name (Container &dst, hstate_t from, const L& l, Kind_type k) const		\
+    letter_ ## Name ##c(Container &dst, hstate_t from, const L& l, Kind_type k) const		\
     {													\
       std::insert_iterator<Container> i(dst, dst.begin());						\
       return auto_self().value()-> Name ## _ ## Type							\
@@ -368,7 +371,7 @@ namespace vcsn {
     template<typename Self, typename Series, typename SeriesT, typename LabelT>
     const Self& 
     AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>::
-    auto_self() const { return static_cast<Self&>(*this); }
+    auto_self() const { return static_cast<const Self&>(*this); }
 
 }
 

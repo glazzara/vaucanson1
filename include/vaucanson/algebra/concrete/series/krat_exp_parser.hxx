@@ -221,7 +221,7 @@ namespace vcsn {
 	      std::list<KRatExpToken
     <
       typename Element<S, T>::monoid_value_t,
-      typename Element<S, T>::weights_value_t
+      typename Element<S, T>::weight_value_t
     > 
     > >
     lex(const std::string& in, 
@@ -232,12 +232,12 @@ namespace vcsn {
       typedef typename monoid_elt_t::set_t	      monoid_t;
       typedef typename Element<S, T>::weight_t	      weight_t;
       typedef typename weight_t::set_t		      weights_t;
-      typedef typename Element<S, T>::weights_value_t weight_value_t;
+      typedef typename Element<S, T>::weight_value_t  weight_value_t;
       typedef typename std::string::const_iterator    iterator_t;
       typedef KRatExpToken
 	<
 	typename Element<S, T>::monoid_value_t,
-	typename Element<S, T>::weights_value_t
+	typename Element<S, T>::weight_value_t
 	> 
 	krat_exp_token_t;
 
@@ -302,14 +302,14 @@ namespace vcsn {
       typedef KRatExpToken
       <
 	typename Element<S, T>::monoid_value_t,
-	typename Element<S, T>::weights_value_t
+	typename Element<S, T>::weight_value_t
       >						      krat_exp_token_t; 
       typedef typename Element<S, T>::monoid_elt_t    monoid_elt_t;
       typedef typename Element<S, T>::monoid_value_t  monoid_value_t;
       typedef typename monoid_elt_t::set_t	      monoid_t;
       typedef typename Element<S, T>::weight_t	      weight_t;
       typedef typename weight_t::set_t		      weights_t;
-      typedef typename Element<S, T>::weights_value_t weight_value_t;
+      typedef typename Element<S, T>::weight_value_t  weight_value_t;
       typedef krat_exp_token_t			      token_t;
       typedef std::list<krat_exp_token_t>	      token_stream_t;
       
@@ -479,7 +479,7 @@ namespace vcsn {
       typedef KRatExpToken
       <
 	typename Element<S, T>::monoid_value_t,
-	typename Element<S, T>::weights_value_t
+	typename Element<S, T>::weight_value_t
       > krat_exp_token_t; 
 
       std::pair<bool, 

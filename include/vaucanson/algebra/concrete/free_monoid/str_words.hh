@@ -53,10 +53,6 @@ namespace vcsn {
   op_convert(SELECTOR(std::basic_string<typename A::letter_t>),
 	     SELECTOR(FreeMonoid<A>), const typename A::letter_t& c);
 
-  template <class A>
-  Element<FreeMonoid<A>, std::basic_string<typename A::letter_t> >
-  op_choose(const FreeMonoid<A>& s, 
-	    SELECTOR(std::basic_string<typename A::letter_t>));
   
 } // vcsn
 

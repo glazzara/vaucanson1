@@ -5,7 +5,7 @@
 
 AUTOMAKE_OPTIONS= foreign 1.6
 SUBDIRS= include src doc
-EXTRA_DIST=THANKS README LICENCE ChangeLog tools/scandefs.pl
+EXTRA_DIST=THANKS README LICENCE ChangeLog tools/scandefs.pl vcsn.m4
 
 .PHONY: doc
 

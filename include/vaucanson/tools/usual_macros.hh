@@ -92,7 +92,7 @@
 	 ++S)
 
 #define for_each_initial_state(S, A) \
-    for (initial_iterator S = A.inital().begin(); 	\
+    for (initial_iterator S = A.initial().begin(); 	\
 	 S != A.initial().end(); 			\
 	 ++S)
 

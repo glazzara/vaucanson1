@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
-# define AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+#ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+# define VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
 
 # include <iterator>
 # include <vaucanson/automata/concept/handlers.hh>
@@ -100,10 +100,16 @@ namespace vcsn {
     /*! type of the free monoid. */
     typedef typename series_t::monoid_t			      monoid_t;
 
+    /*! type of the free monoid element. */
+    typedef typename series_elt_t::monoid_elt_t		      monoid_elt_t;
+
     /*! type of the weights set. */
     typedef typename series_t::weights_t		      weights_t;
 
-    /*! type of additional information that is aggregate to the automaton. */
+    /*! type of the free monoid element. */
+    typedef typename series_elt_t::weight_t		      weight_t;
+
+    /*! type of additional information that is aggregated to the automaton. */
     typedef typename automaton_traits<T>::tag_t		      tag_t;
 
     /*! type of the label of the automaton. can be different from
@@ -391,4 +397,4 @@ namespace vcsn {
 
 # include <vaucanson/automata/concept/automata_base.hxx>
 
-#endif // AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
+#endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH

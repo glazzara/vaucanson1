@@ -228,7 +228,6 @@ namespace vcsn {
     hedge_t add_letter_edge(hstate_t from, hstate_t to,
 			    const L& l);
 
-
     template <typename OutputIterator, typename L>   
     void letter_delta(OutputIterator	res, 
 		      hstate_t		from, 
@@ -236,7 +235,7 @@ namespace vcsn {
 		      delta_kind::edges k = delta_kind::edges()) const;
 
     template <typename Container, typename L>
-    void letter_delta(Container&	 dst, 
+    void letter_deltac(Container&	 dst, 
 		       hstate_t		 from, 
 		       const L&		 l, 
 		       delta_kind::edges k = delta_kind::edges()) const;
@@ -248,10 +247,10 @@ namespace vcsn {
 		      delta_kind::edges k = delta_kind::edges()) const;
 
     template <typename Container, typename L>
-    void letter_rdelta(Container&	 dst, 
-		       hstate_t		 from, 
-		       const L&		 l, 
-		       delta_kind::edges k = delta_kind::edges()) const;
+    void letter_rdeltac(Container&	 dst, 
+			hstate_t		 from, 
+			const L&		 l, 
+			delta_kind::edges k = delta_kind::edges()) const;
 
     template <typename OutputIterator, typename L>   
     void letter_delta(OutputIterator 	 res, 
@@ -260,7 +259,7 @@ namespace vcsn {
 		      delta_kind::states k) const;
 
     template <typename Container, typename L>
-    void letter_delta(Container&	  dst, 
+    void letter_deltac(Container&	  dst, 
 		       hstate_t		  from, 
 		       const L&		  l, 
 		       delta_kind::states k) const;
@@ -272,7 +271,7 @@ namespace vcsn {
 		       delta_kind::states k) const;
     
     template <typename Container, typename L>
-    void letter_rdelta(Container&	   dst, 
+    void letter_rdeltac(Container&	   dst, 
 			hstate_t	   from, 
 			const L&	   l, 
 			delta_kind::states k) const;

@@ -87,13 +87,13 @@ namespace vcsn {
   {
   public:
     //! type of the implementation of weight (element of semiring).
-    typedef typename series_traits<Self, T>::weights_value_t   weights_value_t;
+    typedef typename series_traits<Self, T>::weight_value_t   weight_value_t;
 
     //! type of the implementation of free monoid element.
     typedef typename series_traits<Self, T>::monoid_value_t    monoid_value_t;
 
-    //! type of the element of the semiring (element).
-    typedef Element<typename Self::weights_t, weights_value_t> weight_t;
+    //! type of the element of the semiring element.
+    typedef Element<typename Self::weights_t, weight_value_t> weight_t;
 
     //! type of the element of the monoid.
     typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
@@ -102,14 +102,14 @@ namespace vcsn {
     typedef Element<Self, T>					 element_t;
 
     //! returns the weight associated to a word. 
-    weights_value_t	value_get(const monoid_value_t& m) const;
+    weight_value_t	value_get(const monoid_value_t& m) const;
 
     //! returns the weight associated to a word. 
     weight_t		get(const monoid_elt_t& m) const;
 
     //! associates a weight to a word. 
     void		value_set(const monoid_value_t& m, 
-				  const weights_value_t& w);
+				  const weight_value_t& w);
 
     //! associates a weight to a word. 
     void		assoc(const monoid_elt_t& m, const weight_t& w);

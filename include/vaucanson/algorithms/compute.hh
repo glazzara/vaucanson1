@@ -37,7 +37,7 @@ namespace vcsn {
   */
 
   template<typename A, typename T, typename W>
-  typename Element<A, T>::series_elt_t
+  typename Element<A, T>::weight_t
   compute(const Element<A, T>& a, const W& word);
 
   /*! @} */

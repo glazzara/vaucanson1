@@ -1,3 +1,31 @@
+2003-02-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.160)
+	* src/demos/vgrep/vgrep.cc: New.
+	* src/demos/Makefile.am: New.
+	* src/demos/vgrep/Makefile.am: New.
+	* configure.ac: Generate them.
+	* include/vaucanson/algebra/concept/semiring_base.hxx:
+		Remove unused variable.
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx	
+	* include/vaucanson/algebra/concrete/series/krat.hh,	
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hh,	
+	* include/vaucanson/algebra/concrete/series/polynoms.hh:
+		Rename "weights_value_t" to "weight_value_t".
+	* include/vaucanson/algorithms/compute.hh: Return weight_t.
+	* include/vaucanson/algorithms/compute.hxx: Implement this change.
+	* include/vaucanson/algorithms/union.hxx: Remove unused variable.
+
+	* include/vaucanson/automata/concept/kinds.hh: Fix minor bug.
+	* include/vaucanson/automata/concept/kinds.hxx: Idem.
+	* include/vaucanson/misc/container_ops.hxx: Fix op_begin const version.
+	* Makefile.am: distribute vcsn.m4
+	* include/vaucanson/tools/usual_macros.hh (for_each_initial_state):
+		Fix a typing error.
+	* doc/tutorial/tutorial.tex: Update.
+
 2003-02-18  Yann Régis-Gianas  <yann@sandrock>
 (0.159)
 	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh,

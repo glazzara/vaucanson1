@@ -77,7 +77,7 @@ namespace vcsn {
     `---------------------------------*/
     
     template<typename S, typename T>
-    typename MetaElement<SeriesBase<S>, T>::weights_value_t 
+    typename MetaElement<SeriesBase<S>, T>::weight_value_t 
     MetaElement<SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
     { 
       // assert(set().monoid().contains(m));
@@ -94,7 +94,7 @@ namespace vcsn {
     template<typename S, typename T>
     void 
     MetaElement<SeriesBase<S>, T>::value_set(const monoid_value_t& m, 
-						const weights_value_t& w) 
+					     const weight_value_t& w) 
     { 
       // assert(set().monoid().contains(m));
       // assert(set().weights().contains(w));
