@@ -21,17 +21,53 @@
 #ifndef VCSN_ALGORITHMS_BACKWARD_REALTIME_HH
 # define VCSN_ALGORITHMS_BACKWARD_REALTIME_HH
 
+/**
+ * @file backward_realtime.hh
+ * @brief Algorithms to make an automaton realtime.
+ *
+ * This file contains algorithms to build realtime automaton. These algorithms
+ * use the backward version of closure.
+ */
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
+  /** @addtogroup algorithms *//** @{ */
+  
+  /**
+   * @brief In place modification of the automaton to make it realtime.
+   *
+   * This function make an automaton realtime, using backward version of closure
+   * for building.
+   *
+   * @param a The automaton to make realtime.
+   *
+   * @see realtime
+   * @see backward_realtime
+   * @see forward_realtime_here
+   */
   template<typename A, typename T>
   void
   backward_realtime_here(Element<A, T>& a);
 
+  /**
+   * @brief Returns a fresh realtime automaton.
+   *
+   * This fonction build a fresh realtime automaton from those given, using
+   * backward version of closure.
+   *
+   * @param a The automaton to make realtime.
+   *
+   * @see realtime
+   * @see backward_realtime_here
+   * @see forward_realtime
+   */
   template<typename A, typename T>
   Element<A, T>
   backward_realtime(const Element<A, T>& a);
+
+  /** @} */
   
 } // vcsn
 

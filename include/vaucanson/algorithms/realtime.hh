@@ -22,28 +22,73 @@
 #ifndef VCSN_ALGORITHMS_REALTIME_HH
 # define VCSN_ALGORITHMS_REALTIME_HH
 
+/**
+ * @file  realtime.hh
+ * @brief General algorithms concerning realtime aspect of automata.
+ *
+ * This file contains algorithms concerning realtime aspect of automata, i.e.
+ * presence or absence of epsilon transitions in the automaton.
+ */
+
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms *//** @{ */
 
-  //! Returns true if the input automaton is realtime (no epsilon transition).
+  /// Enum to indicate which kind of realtime algorithms must be used.
+  enum realtime_type { forward_realtime, backward_realtime };
+  
+  /**
+   * @brief Test whether an automaton is realtime.
+   *
+   * This function returns true if the input automaton is realtime.
+   *
+   * @param a The automaton to test.
+   *
+   * @see realtime
+   */
   template<typename A, typename T>
   bool
   is_realtime(const Element<A, T>& a);
 
-  //! In place modification of the automaton to make it realtime.
+  /**
+   * @brief In place modification of the automaton to make it realtime.
+   *
+   * This algorithm makes an automaton realtime. It calls
+   * @c forward_realtime or @c backward_realtime according to type given.
+   * The type may not be precised, it is the @c forward_realtime which is
+   * used by default.
+   *
+   * @param a The automaton to make realtime.
+   * @param type The type of algorithm used.
+   *
+   * @see realtime
+   * @see forward_realtime_here
+   * @see backward_realtime_here
+   */
   template<typename A, typename T>
   void
-  realtime_here(Element<A, T>& a, bool type = true);
+  realtime_here(Element<A, T>& a, realtime_type type = forward_realtime);
 
-  //! Returns a fresh associated automaton that has no epsilon transitions.
+  /**
+   * @brief Returns a fresh realtime automaton.
+   *
+   * As @c realtime_here, it build a realtime automaton, but it returns a new one
+   * instead of changing those given.
+   *
+   * @param a The automaton to make realtime.
+   * @param type The type of algorithm used.
+   * 
+   * @see realtime_here
+   * @see forward_realtime
+   * @see backward_realtime
+   */
   template<typename A, typename T>
   Element<A, T>
-  realtime(const Element<A, T>& a, bool type = true);
+  realtime(const Element<A, T>& a, realtime_type type = forward_realtime);
 
-  /*! @} */
+  /** @} */
   
 } // vcsn
 

@@ -38,9 +38,6 @@ namespace vcsn {
   /*------------.
   | is_realtime |
   `------------*/
-  // preconditions :
-  //
-  //
   template <class A_, typename Auto_>
   bool
   do_is_realtime(const AutomataBase<A_>& a_set,
@@ -67,9 +64,9 @@ namespace vcsn {
   `--------------*/
   template<typename A, typename T>
   void
-  realtime_here(Element<A, T>& a, bool type = true)
+  realtime_here(Element<A, T>& a, realtime_type type = forward_realtime)
   {
-    if (type)
+    if (type == forward_realtime)
       forward_realtime_here(a);
     else
       backward_realtime_here(a);
@@ -80,9 +77,9 @@ namespace vcsn {
   `---------*/
   template<typename A, typename T>
   Element<A, T>
-  realtime(const Element<A, T>& a, bool type = true)
+  realtime(const Element<A, T>& a, realtime_type type = forward_realtime)
   {
-    if (type)
+    if (type== forward_realtime)
       return forward_realtime_here(a);
     else
       return backward_realtime_here(a);

@@ -1,3 +1,11 @@
+2003-06-23  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime.hxx,
+	  include/vaucanson/algorithms/realtime.hh: Change function prototype
+	  and document.
+	* include/vaucanson/algorithms/forward_realtime.hh,
+	  include/vaucanson/algorithms/backward_realtime.hh: Document.
+
 2003-06-22  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/realtime.hh,
