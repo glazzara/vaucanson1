@@ -1,0 +1,4 @@
+#include <vaucanson/z_max_plus_automaton.hh>
+
+#define TEST_STATIC_ARGS \
+   vcsn::z_max_plus_automaton::automaton_t

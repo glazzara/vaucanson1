@@ -1,3 +1,17 @@
+2004-04-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/tests-suites/r_automaton_t.defs,
+	* src/tests/tests-suites/z_automaton_t.defs,
+	* src/tests/tests-suites/z_max_plus_automaton_t.defs: New files. 
+	Instanciation files for tests on automata corresponding to automata 
+	context.
+	* src/tests/tests-suites/generate-all.sh: Clean and update accordingly.
+	* src/tests/tests-suites/usual_automaton_t.defs,
+	* src/tests/tests-suites/numerical_automaton_t.defs,
+	* src/tests/tests-suites/tropical_max_automaton_t.defs,
+	* src/tests/tests-suites/tropical_min_automaton_t.defs: Remove.
+	* include/vaucanson/tools/usual_macros.hh: Add missing include.
+
 2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/contextual_headers.hh: New. Factor include

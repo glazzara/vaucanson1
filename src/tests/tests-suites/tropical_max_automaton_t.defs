@@ -1,4 +1,0 @@
-#include <vaucanson/tools/usual.hh>
-
-#define TEST_STATIC_ARGS \
-   vcsn::tools::tropical_max_automaton_t

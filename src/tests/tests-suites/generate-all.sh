@@ -1,50 +1,19 @@
 #!/bin/sh
 
+for ns_impl in int bool double float rational; do
 ../bin/generate-test-suite.sh \
-   algebra_numerical_semiring_int \
-   algebra_numerical_semiring_int.defs \
+   algebra_numerical_semiring_${ns_impl} \
+   algebra_numerical_semiring_${ns_impl}.defs \
    ../algebra/semiring
+done;
 
+for k_impl in bool double int; do
 ../bin/generate-test-suite.sh \
-   algebra_numerical_semiring_bool \
-   algebra_numerical_semiring_bool.defs \
-   ../algebra/semiring
-
-../bin/generate-test-suite.sh \
-  algebra_numerical_semiring_double \
-  algebra_numerical_semiring_double.defs \
-  ../algebra/semiring \
-  ../algebra/numerical_semiring
-
-../bin/generate-test-suite.sh \
-   algebra_numerical_semiring_float \
-   algebra_numerical_semiring_float.defs \
-   ../algebra/semiring \
-   ../algebra/numerical_semiring
-
-../bin/generate-test-suite.sh \
-   algebra_numerical_semiring_rational \
-   algebra_numerical_semiring_rational.defs \
-   ../algebra/semiring \
-   ../algebra/numerical_semiring
-
-../bin/generate-test-suite.sh \
-   algebra_series_krat_bool_string \
-   algebra_series_krat_bool_string.defs \
+   algebra_series_krat_${k_impl}_string \
+   algebra_series_krat_${k_impl}_string.defs \
    ../algebra/series/misc \
    ../algebra/series/krat/main
-
-../bin/generate-test-suite.sh \
-   algebra_series_krat_double_string \
-   algebra_series_krat_double_string.defs \
-   ../algebra/series/misc \
-   ../algebra/series/krat/main
-
-../bin/generate-test-suite.sh \
-   algebra_series_krat_int_string \
-   algebra_series_krat_int_string.defs \
-   ../algebra/series/misc \
-   ../algebra/series/krat/main
+done;
 
 ../bin/generate-test-suite.sh \
    algebra_series_krat_derivation \
@@ -61,25 +30,12 @@
    algebra_series_krat_partial_derivation.defs \
    ../algebra/series/krat/derivations/partial_derivation
 
+for a_impl in alpha char int pair_char_int; do
 ../bin/generate-test-suite.sh \
-   algebra_alphabet_set_alpha \
-   algebra_alphabet_set_alpha.defs \
+   algebra_alphabet_set_${a_impl} \
+   algebra_alphabet_set_${a_impl}.defs \
    ../algebra/alphabets
-
-../bin/generate-test-suite.sh \
-   algebra_alphabet_set_char \
-   algebra_alphabet_set_char.defs \
-   ../algebra/alphabets
-
-../bin/generate-test-suite.sh \
-   algebra_alphabet_set_int \
-   algebra_alphabet_set_int.defs \
-   ../algebra/alphabets
-
-../bin/generate-test-suite.sh \
-   algebra_alphabet_set_pair_char_int \
-   algebra_alphabet_set_pair_char_int.defs \
-   ../algebra/alphabets
+done;
 
 ../bin/generate-test-suite.sh \
    algebra_free_monoid_string \
@@ -91,60 +47,22 @@
    algebra_tropical_semiring_max.defs \
    ../algebra/semiring
 
+for p_impl in int double bool; do
 ../bin/generate-test-suite.sh \
-   usual_automaton_t \
-   usual_automaton_t.defs \
-   ../automata
-
-../bin/generate-test-suite.sh \
-   algebra_series_polynom_int_string \
-   algebra_series_polynom_int_string.defs \
+   algebra_series_polynom_${p_impl}_string \
+   algebra_series_polynom_${p_impl}_string.defs \
    ../algebra/series/misc \
    ../algebra/series/polynom
+done;
+
+for a_kind in boolean r z z_max_plus; do
+../bin/generate-test-suite.sh \
+   context_headers_${a_kind} \
+   context_headers_${a_kind}.defs \
+   ../context_headers/automata
 
 ../bin/generate-test-suite.sh \
-   algebra_series_polynom_double_string \
-   algebra_series_polynom_double_string.defs \
-   ../algebra/series/misc \
-   ../algebra/series/polynom
-
-../bin/generate-test-suite.sh \
-   algebra_series_polynom_bool_string \
-   algebra_series_polynom_bool_string.defs \
-   ../algebra/series/misc \
-   ../algebra/series/polynom
-
-../bin/generate-test-suite.sh \
-   numerical_automaton_t \
-   numerical_automaton_t.defs \
+   ${a_kind}_automaton_t \
+   ${a_kind}_automaton_t.defs \
    ../automata
-
-../bin/generate-test-suite.sh \
-   tropical_max_automaton_t \
-   tropical_max_automaton_t.defs \
-   ../automata
-
-../bin/generate-test-suite.sh \
-   tropical_min_automaton_t \
-   tropical_min_automaton_t.defs \
-   ../automata
-
-../bin/generate-test-suite.sh \
-   context_headers_boolean \
-   context_headers_boolean.defs \
-   ../context_headers/automata
-
-../bin/generate-test-suite.sh \
-   context_headers_r \
-   context_headers_r.defs \
-   ../context_headers/automata
-
-../bin/generate-test-suite.sh \
-   context_headers_z \
-   context_headers_z.defs \
-   ../context_headers/automata
-
-../bin/generate-test-suite.sh \
-   context_headers_z_max_plus \
-   context_headers_z_max_plus.defs \
-   ../context_headers/automata
+done;

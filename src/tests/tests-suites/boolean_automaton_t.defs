@@ -1,0 +1,4 @@
+#include <vaucanson/boolean_automaton.hh>
+
+#define TEST_STATIC_ARGS \
+   vcsn::boolean_automaton::automaton_t
