@@ -31,7 +31,7 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
-# include <vaucanson/algorithms/extract.hh>
+# include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/algorithms/accessible.hh>
 
 namespace vcsn {
@@ -67,7 +67,7 @@ namespace vcsn {
   Element<A, T>
   trim(const Element<A, T>& a)
   {
-    return auto_extract(a, useful_states(a));
+    return sub_automaton(a, useful_states(a));
   }
 
 } // vcsn

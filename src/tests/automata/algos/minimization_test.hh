@@ -34,7 +34,7 @@
 # include <vaucanson/misc/dot_dump.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/algorithms/hopcroft.hh>
+# include <vaucanson/algorithms/hopcroft_minimization.hh>
 # include <vaucanson/algorithms/minimization_moore.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <check/tests_stuff.hh>
@@ -74,7 +74,7 @@ unsigned minimization_test(tests::Tester& tg)
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_broz", temp, i);
 	}
-      automaton_t hopcroft = hopcroft_minimization_det(work);
+      automaton_t hopcroft = minimization_hopcroft(work);
       automaton_t moore = minimization_moore(work);
 
       if (t.verbose() == tests::high)

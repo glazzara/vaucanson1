@@ -1,4 +1,4 @@
-// hopcroft.hh
+// hopcroft_minimization.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_HOPCROFT_MINIMIZE_HXX
-# define VCSN_ALGORITHMS_HOPCROFT_MINIMIZE_HXX
+#ifndef VCSN_ALGORITHMS_HOPCROFT_MINIMIZATION_HXX
+# define VCSN_ALGORITHMS_HOPCROFT_MINIMIZATION_HXX
 
 # include <map>
 # include <set>
@@ -33,9 +33,6 @@
 
 namespace vcsn {
 
-  /*--------------------------.
-  | hopcroft_minimization_det |
-  `--------------------------*/
   // preconditions : 
   //  - the input automaton is deterministic ;
   //  - the output automaton is well initialized with good sets ;
@@ -344,7 +341,7 @@ namespace vcsn {
   
   template<typename A, typename T>
   Element<A, T>
-  hopcroft_minimization_det(const Element<A, T>& a)
+  minimization_hopcroft(const Element<A, T>& a)
   {
     Element<A, T> output(a.set());
     do_hopcroft_minimization_det(a.set(), output, a);
@@ -672,7 +669,7 @@ namespace vcsn {
   
   template<typename A, typename T>
   Element<A, T>
-  hopcroft_minimization_undet(const Element<A, T>& a)
+  quotient(const Element<A, T>& a)
   {
     Element<A, T> output;
     output.create();
@@ -681,7 +678,6 @@ namespace vcsn {
     return output;
   }
 
+} // vcsn
 
-}
-
-#endif // ALGO_MINIMIZE_HH
+#endif // VCSN_ALGORITHMS_HOPCROFT_MINIMIZATION_HXX

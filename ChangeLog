@@ -1,5 +1,13 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/hopcroft_minimization.hh: Document and replace ...
+	* include/vaucanson/algorithms/hopcroft.hh: Document and replace ...
+	* include/vaucanson/algorithms/hopcroft_minimization.hxx: Document and replace ...
+	* include/vaucanson/algorithms/hopcroft.hxx: Document and replace ...
+	* src/tests/automata/algos/minimization_test.hh: Use minimization_hopcroft.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/accessible.hxx: Use sub_automaton. Typo.
 	* src/tests/automata/algos/extract_test.hh: Use sub_automaton.
 
