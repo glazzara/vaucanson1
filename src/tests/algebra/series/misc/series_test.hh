@@ -44,38 +44,178 @@ bool series_test(tests::Tester& t)
   using namespace vcsn;
 
   typedef S					series_t;
-  typedef typename S::monoid_t			monoid_t;
+  typedef T					series_value_t;
+  typedef Element<S, T>				series_elt_t;
+
+  typedef typename series_t::monoid_t		monoid_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
   typedef typename alphabet_t::letter_t		letter_t;
-  typedef typename S::semiring_t			semiring_t;
-  typedef Element<S, T>				series_elt_t;
-  typedef typename series_elt_t::monoid_elt_t   monoid_elt_t;
+  typedef typename series_t::semiring_t		semiring_t;
+
   typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_value_t;
 
-  alphabet_t	alphabet;
-  letter_t	a = alphabet.random_letter();
-  letter_t	b;
-  do
-    b = alphabet.random_letter();
-  while (a == b);
-  alphabet.insert(a);
-  alphabet.insert(b);
+  typedef typename series_elt_t::monoid_elt_t	monoid_elt_t;
+  typedef typename monoid_elt_t::value_t	monoid_value_t;
 
-  monoid_t	monoid(alphabet);
-  semiring_t	semiring;
-  series_t	series(semiring, monoid);
-  monoid_elt_t  w1(monoid, a);
-  monoid_elt_t  w2(monoid, b);
-  series_elt_t     s1(series, w1);
-  series_elt_t     s2(series, w2);
-  series_elt_t     s3(series, series.identity(SELECT(T)));
-  series_elt_t     s4(series, series.zero(SELECT(T)));
-  semiring_elt_t   zero = semiring.zero(SELECT(semiring_value_t));
+  typedef typename series_elt_t::support_t	support_t;
 
-  TEST(t, "get of series.", s1.get(w1) != zero);
-  TEST(t, "set of series.", s1.get(w2) == zero);
-  TEST(t, "choose from the support.", s1.choose_from_supp() == w1);
+  alphabet_t		base;
+  size_t		test_sizes[] =
+    {
+      1,
+      base.max_size() >= 2 ? 2 : 1,
+      base.max_size() <= 256 ? base.max_size() / 2 : 128,
+      base.max_size() <= 256 ? base.max_size() : 256
+    };
+
+  for (size_t i = 0; i < sizeof (test_sizes) / sizeof (size_t); ++i)
+    {
+      alphabet_t alphabet (base);
+      for (size_t j = 0; j < test_sizes[i]; ++j)
+	{
+	  letter_t l;
+	  do
+	    l = alphabet.random_letter();
+	  while (alphabet.contains(l));
+	  alphabet.insert(l);
+	}
+      std::ostringstream os;
+      os << alphabet.size();
+      TEST_MSG("Alphabet is " + os.str() + " characters.");
+
+      monoid_t		monoid(alphabet);
+      semiring_t	semiring;
+      series_t		series(semiring, monoid);
+
+      monoid_elt_t	w1 = monoid.choose(SELECT(monoid_value_t));
+      monoid_elt_t	w2 (monoid);
+      do
+	w2 = monoid.choose(SELECT(monoid_value_t));
+      while (w2 == w1);
+
+      series_elt_t	s1(series, w1);
+      series_elt_t	s2(series, w2);
+      series_elt_t	s3 = identity_as<T>::of(series);
+      series_elt_t	s4 = zero_as<T>::of(series);
+
+      semiring_elt_t	zero = zero_as<semiring_value_t>::of(semiring);
+
+      TEST(t, "series_t::monoid() (const).",
+	   const_cast<const series_t&>(series).monoid() == monoid);
+      TEST(t, "series_t::monoid() (non-const).", series.monoid() == monoid);
+
+      TEST(t, "series_t::semiring() (const).",
+	   const_cast<const series_t&>(series).semiring() == semiring);
+      TEST(t, "series_t::semiring() (non-const).",
+	   series.semiring() == semiring);
+
+
+      TEST_GROUP("Basic tests.");
+      TEST(t, "get of series (element) [1].", s1.get(w1) != zero);
+      TEST(t, "get of series (element) [2].", s1.get(w2) == zero);
+      TEST(t, "get of series (implementation) [1].",
+	   s1.get(w1.value()) != zero.value());
+      TEST(t, "get of series (implementation) [2].",
+	   s1.get(w2.value()) == zero.value());
+
+      TEST_GROUP("Advanced tests with set().");
+      std::map<monoid_elt_t, semiring_elt_t>	random_values;
+      const size_t				max =
+	utility::random::generate<unsigned>(0, op_choose_max_word_length *
+					    test_sizes[i]);
+      series_elt_t				s5 (series);
+      bool					allright = true;
+      for (size_t j = 0; j < max; ++j)
+	{
+	  monoid_elt_t		m (monoid);
+	  do
+	    m = monoid.choose(SELECT(monoid_value_t));
+	  while (s5.get(m) != zero);
+	  semiring_elt_t	s (semiring);
+	  do
+	    s = semiring.choose(SELECT(semiring_value_t));
+	  while (s == zero);
+	  random_values.insert(std::make_pair(m, s));
+	  if (j % 2)
+	    s5.assoc(m, s);
+	  else
+	    s5.value_set(m.value(), s.value());
+	  if ((s5.get(m) != s) or (s5.get(m.value()) != s.value()))
+	    allright = false;
+	}
+      TEST(t, "assoc() and value_set().", allright);
+      TEST(t, "is_finite_app().", s5.is_finite_app());
+
+      allright = true;
+      for (size_t j = 0; j < 2 * max; ++j)
+	{
+	  monoid_elt_t m = s5.choose_from_supp();
+	  typename std::map<monoid_elt_t, semiring_elt_t>::const_iterator i =
+	    random_values.find(m);
+	  if (i == random_values.end())
+	    {
+
+	      std::cerr << "m is " << m
+			<< " and has not been found in random_values."
+			<< std::endl;
+	      allright = false;
+	    }
+	  else if (i->second != s5.get(m))
+	    {
+	      std::cerr << "get(" << m << ") is " << s5.get(m)
+			<< " instead of " << i->second << '.' << std::endl;
+	      allright = false;
+	    }
+	}
+      TEST(t, "choose_from_supp().", allright);
+
+      support_t		supp = s5.supp();
+      allright = true;
+      for (typename support_t::const_iterator j = supp.begin();
+	   j != supp.end();
+	   ++j)
+	{
+	  if (random_values.find(monoid_elt_t(monoid, *j)) ==
+	      random_values.end())
+	    allright = false;
+	}
+      TEST(t, "supp() does not give extra values.", allright);
+      allright = true;
+      for (typename std::map<monoid_elt_t, semiring_elt_t>::const_iterator j =
+	     random_values.begin();
+	   j != random_values.end();
+	   ++j)
+	{
+	  if (std::find(supp.begin(), supp.end(), j->first) == supp.end())
+	    allright = false;
+	}
+      TEST(t, "supp() does not forget values.", allright);
+
+      s5.transpose();
+      allright = true;
+      for (size_t j = 0; j < 2 * max; ++j)
+	{
+	  monoid_elt_t m = s5.choose_from_supp();
+	  semiring_elt_t s = s5.get(m);
+	  typename std::map<monoid_elt_t, semiring_elt_t>::const_iterator i =
+	    random_values.find(mirror(m));
+	  if (i == random_values.end())
+	    {
+	      std::cerr << "m is " << m
+			<< " and has not been found in random_values."
+			<< std::endl;
+	      allright = false;
+	    }
+	  else if (i->second != s5.get(m))
+	    {
+	      std::cerr << "get(" << m << ") is " << s5.get(m)
+			<< " instead of " << i->second << '.' << std::endl;
+	      allright = false;
+	    }
+	}
+      TEST(t, "transpose().", allright);
+    }
   return t.all_passed();
 }
 

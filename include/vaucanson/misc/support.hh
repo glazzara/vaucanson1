@@ -1,7 +1,7 @@
 // support.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,7 +33,7 @@
 /**
  * @file   support.hh
  * @brief  Stuff to adapt containers.
- * 
+ *
  */
 
 # include <iterator>
@@ -56,9 +56,15 @@ namespace utility {
     typedef typename C::key_type	key_type;
     typedef typename C::const_iterator	map_iterator;
     typedef SupportIterator<C>		self_t;
-    
+
+    typedef typename map_iterator::iterator_category	iterator_category;
+    typedef typename map_iterator::difference_type	difference_type;
+    typedef key_type					value_type;
+    typedef key_type*					pointer;
+    typedef key_type&					reference;
+
     SupportIterator(map_iterator);
-    
+
     key_type	operator*() const;
     self_t&	operator++();
     self_t	operator++(int);
@@ -74,12 +80,12 @@ namespace utility {
   class Support<std::map<U, T> >
   {
   public:
-    typedef SupportIterator<std::map<U, T> > iterator; 
-    typedef SupportIterator<std::map<U, T> > const_iterator; 
+    typedef SupportIterator<std::map<U, T> > iterator;
+    typedef SupportIterator<std::map<U, T> > const_iterator;
 
     Support(const std::map<U, T>&);
     Support(const Support&);
-    
+
     iterator begin() const;
     iterator end() const;
     unsigned size() const;
@@ -137,7 +143,7 @@ namespace utility {
 
    /** @addtogroup utility *//** @{ */
 
-  /** 
+  /**
    *
    * @brief Container over a sparse integer range.
    *
@@ -154,7 +160,7 @@ namespace utility {
     typedef SparseIterator<integer_t, excluded_container_t> iterator;
 
     SparseInterval(integer_t, integer_t, const excluded_container_t&);
-    
+
     iterator begin() const;
     iterator end() const;
     unsigned size() const;
@@ -169,19 +175,19 @@ namespace utility {
 
   /// SelfIterator is an iterator which is also a container.
   template <template <class> class C, class T>
-  class SelfIterator 
+  class SelfIterator
   {
   public:
     SelfIterator(const C<T>& c):
       c_(&c),
       pos_(c.begin())
     {}
-    
+
     SelfIterator():
       c_(0),
       pos_()
     {}
-    
+
     SelfIterator(const SelfIterator& s):
       c_(s.c_),
       pos_(s.pos_)
@@ -192,13 +198,13 @@ namespace utility {
       return *pos_;
     }
 
-    const SelfIterator& operator++() 
+    const SelfIterator& operator++()
     {
       pos_++;
       return *this;
     }
 
-    SelfIterator operator++(int) 
+    SelfIterator operator++(int)
     {
       SelfIterator tmp(*this);
       ++pos_;
@@ -239,12 +245,12 @@ namespace utility {
    /** @} */
 
 } // utility
-  
+
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/misc/support.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_MISC_SUPPORT_HH

@@ -245,7 +245,7 @@ namespace vcsn {
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
-  bool op_is_finite_app(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m)
+  bool op_is_finite_app(const algebra::Series<W, M>&, const algebra::polynom<Tm, Tw>&)
   {
     return true;
   }

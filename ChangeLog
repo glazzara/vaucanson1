@@ -1,3 +1,14 @@
+2004-03-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/misc/support.hh: Add some typedef to be compliant
+	with STL iterators.
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx,
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh: Use a global
+	constant for the random generated words's length.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Fix an
+	unused argument warning.
+	* src/tests/algebra/series/misc/series_test.hh: Improve.
+
 2004-03-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/algebra/series/polynom/Makefile.am,

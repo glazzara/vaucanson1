@@ -1,7 +1,7 @@
 // str_words.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -35,12 +35,12 @@
 namespace vcsn {
 
   template<typename A>
-  void 
-  op_in_mul(const algebra::FreeMonoid<A>&, 
+  void
+  op_in_mul(const algebra::FreeMonoid<A>&,
 	    std::basic_string<typename A::letter_t>& dst,
 	    const std::basic_string<typename A::letter_t>& src)
-  { 
-    dst += src; 
+  {
+    dst += src;
   }
 
   template<typename A>
@@ -48,17 +48,17 @@ namespace vcsn {
   op_mul(const algebra::FreeMonoid<A>&,
 	 const std::basic_string<typename A::letter_t>& a,
 	 const std::basic_string<typename A::letter_t>& b)
-  { 
-    return a + b; 
+  {
+    return a + b;
   }
 
   template <typename A>
   bool
-  op_xeq(const algebra::FreeMonoid<A>& s, 
-	 const std::basic_string<typename A::letter_t>& a, 
+  op_xeq(const algebra::FreeMonoid<A>& s,
+	 const std::basic_string<typename A::letter_t>& a,
 	 const std::basic_string<typename A::letter_t>& b)
   {
-    typename std::basic_string<typename A::letter_t>::const_iterator 
+    typename std::basic_string<typename A::letter_t>::const_iterator
       m = b.begin();
     typename std::basic_string<typename A::letter_t>::const_iterator l;
     for (l = a.begin(); m != b.end() && l != a.end(); ++l)
@@ -82,25 +82,26 @@ namespace vcsn {
   template<typename A>
   std::basic_string<typename A::letter_t>
   op_convert(SELECTOR(algebra::FreeMonoid<A>),
-	     SELECTOR(std::basic_string<typename A::letter_t>), 
+	     SELECTOR(std::basic_string<typename A::letter_t>),
 	     const typename A::letter_t& c)
-  { 
-    std::basic_string<typename A::letter_t> str; 
-    str = c; 
-    return str; 
+  {
+    std::basic_string<typename A::letter_t> str;
+    str = c;
+    return str;
   }
 
   template <class A>
   Element<algebra::FreeMonoid<A>, std::basic_string<typename A::letter_t> >
-  op_choose(const algebra::FreeMonoid<A>& s, 
+  op_choose(const algebra::FreeMonoid<A>& s,
 	    SELECTOR(std::basic_string<typename A::letter_t>))
   {
-    // FIXME : use global constants to define this !
-    unsigned length = rand() % 10;
+    unsigned length =
+      utility::random::generate<unsigned>(0, op_choose_max_word_length);
     std::basic_string<typename A::letter_t> r;
     for (unsigned i = 0; i < length; ++i)
       r = r + s.alphabet().choose();
-    return Element<algebra::FreeMonoid<A>, std::basic_string<typename A::letter_t> >(s, r);
+    return Element<algebra::FreeMonoid<A>,
+      std::basic_string<typename A::letter_t> >(s, r);
   }
 
 } // vcsn
