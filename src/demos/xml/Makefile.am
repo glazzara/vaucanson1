@@ -2,6 +2,8 @@
 #
 # $Id: Makefile.am 462 2004-03-31 21:55:16Z yann $
 
+SUBDIRS = samples
+
 if XML_CHECK
   AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
   AM_CPPFLAGS = -I$(top_srcdir)/include		\
@@ -19,6 +21,9 @@ if XML_CHECK
 	z_max_plus				\
 	z_min_plus
 endif
+
+vaucanson.dtd:
+	ln -sf $(top_builddir)/xml/vaucanson.dtd
 
 static_boolean_SOURCES = static_boolean.cc
 make_session_SOURCES = make_session.cc

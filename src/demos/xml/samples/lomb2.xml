@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO8859-1" standalone="no" ?>
+<!DOCTYPE automaton SYSTEM "vaucanson.dtd">
+<automaton xmlns="http://www.lrde.epita.fr/vaucanson">
+
+  <type>
+    <monoid generators="letters" type="free">
+      <generator value="a"/>
+      <generator value="b"/>
+    </monoid>
+    <semiring operations="numerical" set="B"/>
+  </type>
+
+  <content>
+    <states>
+      <state name="s0"/>
+      <state name="s1"/>
+      <state name="s2"/>
+    </states>
+    <transitions>
+      <transition dst="s1" label="a" src="s0"/>
+      <transition dst="s2" label="b" src="s0"/>
+      <transition dst="s1" label="a" src="s1"/>
+      <transition dst="s1" label="b" src="s1"/>
+      <transition dst="s2" label="a" src="s2"/>
+      <transition dst="s2" label="b" src="s2"/>
+    </transitions>
+    <initials>
+      <initial label="1" state="s0"/>
+    </initials>
+    <finals>
+      <final label="1" state="s1"/>
+    </finals>
+  </content>
+
+</automaton>

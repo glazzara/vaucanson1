@@ -1,3 +1,21 @@
+2004-09-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	This  change creates a  src/demos/xml/samples directory,  in which
+	sample XML files may be found. Programs that generate XML automata
+	are also included.  Those samples  have been designed for the CIAA
+	2004 conference.
+
+	* src/demos/xml/samples/lomb2.cc, src/demos/xml/samples/c1.cc,
+	* src/demos/xml/samples/occ_b.cc, src/demos/xml/samples/double_ring.cc,
+	* src/demos/xml/samples/divkbaseb.cc, src/demos/xml/samples/lomb1.cc:
+	New. Sources to generate XML sample files.
+	* src/demos/xml/samples/div3base2.xml, src/demos/xml/samples/c1.xml,
+	* src/demos/xml/samples/occ_b.xml, src/demos/xml/samples/lomb1.xml,
+	* src/demos/xml/samples/lomb2.xml,
+	* src/demos/xml/samples/double_ring6.xml: New. Sample automata.
+	* src/demos/xml/samples/Makefile.am: New.
+	* src/demos/xml/Makefile.am, configure.ac: Update.
+
 2004-09-06  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	This change  updates algorithms.cc according  to the modifications
