@@ -1,4 +1,14 @@
 2002-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.123)
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx
+		Added
+	* include/vaucanson/algebra/concrete/series/krat.hh: minor change.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: 
+		add DispatchExp and DispatchVisitor.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh: idem.
+
+2002-10-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.122)
 	* include/vaucanson/misc/automaton_tools.hh: added.
 

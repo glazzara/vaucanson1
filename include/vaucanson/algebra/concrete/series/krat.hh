@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGEBRA_KRAT_HH
-# define ALGEBRA_KRAT_HH
+#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HH
+# define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HH
 
 # include <utility>
 # include <vaucanson/algebra/concrete/series/series.hh>
@@ -135,8 +135,8 @@ namespace vcsn {
 
 
   /*---------------------.
-    | foreign constructors |
-    `---------------------*/
+  | foreign constructors |
+  `---------------------*/
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
   rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>),
 			      SELECTOR2(Series<W, M>),
@@ -162,8 +162,8 @@ namespace vcsn {
 		 const oTw& src);
 
   /*-----.
-    | star |
-    `-----*/
+  | star |
+  `-----*/
 
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_stareable(const Series<W, M>& s,
@@ -179,8 +179,8 @@ namespace vcsn {
 	  const rat::exp<Tm, Tw>& src);
 
   /*--------------------------------------.
-    | foreign addition with monoid elements |
-    `--------------------------------------*/
+  | foreign addition with monoid elements |
+  `--------------------------------------*/
 
   template<typename M, typename W, typename oTm, typename Tm, typename Tw>
   struct op_add_traits<M, Series<W, M>, oTm, rat::exp<Tm, Tw> >
@@ -207,8 +207,8 @@ namespace vcsn {
 			  const rat::exp<Tm, Tw>& b);
 
   /*---------------------------------------.
-    | foreign addition with weights elements |
-    `---------------------------------------*/
+  | foreign addition with weights elements |
+  `---------------------------------------*/
 
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
@@ -236,8 +236,8 @@ namespace vcsn {
 			  const rat::exp<Tm, Tw>& b);
 
   /*-------------------------------------------.
-    | foreign multiplication by weights elements |
-    `-------------------------------------------*/
+  | foreign multiplication by weights elements |
+  `-------------------------------------------*/
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   struct op_mul_traits<W, Series<W, M>, oTw, rat::exp<Tm, Tw> >
@@ -265,8 +265,8 @@ namespace vcsn {
 			  const rat::exp<Tm, Tw>& b);
 
   /*---------------.
-    | Series methods |
-    `---------------*/
+  | Series methods |
+  `---------------*/
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   Tw op_series_get(const Series<W, M>& s, 
 		   const rat::exp<Tm, Tw>& p,
@@ -289,5 +289,4 @@ namespace vcsn {
 
 # include <vaucanson/algebra/concrete/series/krat.hxx>
 
-#endif // ALGEBRA_KRAT_HH
-
+#endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HH

@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGEBRA_CONCRETE_SERIES_EXP_HXX
-# define ALGEBRA_CONCRETE_SERIES_EXP_HXX
+#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_EXP_HXX
+# define VCSN_ALGEBRA_CONCRETE_SERIES_EXP_HXX
 
 # include <algorithm>
 # include <iostream>
@@ -237,6 +237,104 @@ namespace vcsn {
 
   } // rat
 
+  namespace algebra {
+  
+    template <class Matcher, class Monoid, class Semiring>
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    DispatchVisitor(Matcher& m) :
+      matcher_(m)
+    {}
+    
+    template <class Matcher, class Monoid, class Semiring>
+    
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    ~DispatchVisitor()
+    {}
+    
+    template <class Matcher, class Monoid, class Semiring>
+     void
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    product(const node_t* lhs, const node_t* rhs) 
+    {
+      ret_ = matcher_.match_node(typename Matcher::Product(lhs, rhs));
+    }
+
+    template <class Matcher, class Monoid, class Semiring>
+     void 
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    sum(const node_t* lhs, const node_t* rhs) 
+    {
+      ret_ = matcher_.match_node(typename Matcher::Sum(lhs, rhs));
+    }
+    template <class Matcher, class Monoid, class Semiring>
+     void 
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    star(const node_t* node)
+    {
+      ret_ = matcher_.match_node(typename Matcher::Star(node));
+    }
+
+    template <class Matcher, class Monoid, class Semiring>   
+     void 
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    left_weight(const weight_value_t& w, const node_t* node) 
+    {
+      ret_ = matcher_.match_node(typename Matcher::LeftWeight(w, node));
+    }
+
+    template <class Matcher, class Monoid, class Semiring>  
+     void 
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    right_weight(const weight_value_t& w, const node_t* node)
+    {
+      ret_ = matcher_.match_node(typename Matcher::RightWeight(w, node));
+    }
+
+    template <class Matcher, class Monoid, class Semiring>
+     void 
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    constant(const monoid_value_t& m)
+    {
+      ret_ = matcher_.match_node(typename Matcher::Constant(m));
+    }
+
+    template <class Matcher, class Monoid, class Semiring>
+     void 
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    zero()
+    {
+      ret_ = matcher_.match_node(typename Matcher::Zero());
+    }
+
+    template <class Matcher, class Monoid, class Semiring>
+     void 
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    one()
+    {
+      ret_ = matcher_.match_node(typename Matcher::One());
+    }
+
+    template <class Matcher, class Monoid, class Semiring>
+     typename Matcher::return_type 
+    DispatchVisitor<Matcher, Monoid, Semiring>::
+    get_ret()
+    {
+      return ret_;
+    }
+    
+    template <class Matcher, class M, class W>
+    inline typename Matcher::return_type
+    ExpDispatch::d(const Matcher& matcher, 
+		   const rat::exp<M, W>& exp)
+    {
+      DispatchVisitor<Matcher, M, W> v(matcher);
+      exp.accept(v);
+      return v.get_ret ();
+    }
+
+
+  } // algebra
+
 } // vcsn
 
 namespace vcsn {
@@ -251,7 +349,6 @@ namespace vcsn {
     rhs->accept(*this);
     std::swap(lhs, rhs);
   }
-
 
   template <typename S, typename M, typename W>
   rat::exp<M, W>&
@@ -270,8 +367,8 @@ namespace vcsn {
 
 #include <vaucanson/algebra/concrete/series/rat/dump_visitor.hh>
 
-namespace std
-{
+namespace std {
+
   template<typename M_, typename W_>
   std::ostream& operator<<(std::ostream& o, const vcsn::rat::exp<M_, W_>& exp)
   { 
@@ -289,6 +386,6 @@ namespace std
 
 }
 
-#endif // ALGEBRA_CONCRETE_SERIES_EXP_HXX
+#endif // VCSN_ALGEBRA_CONCRETE_SERIES_EXP_HXX
 
 

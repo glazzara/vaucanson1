@@ -111,12 +111,66 @@ namespace vcsn {
 
   namespace algebra {
 
-  template <typename S, typename M, typename W>
-  struct DefaultTransposeFun<S, rat::exp<M, W> >
-  {
-    rat::exp<M, W>&
-    operator()(const S&, const rat::exp<M, W>& exp);
-  };
+    template <typename S, typename M, typename W>
+    struct DefaultTransposeFun<S, rat::exp<M, W> >
+    {
+      rat::exp<M, W>&
+      operator()(const S&, const rat::exp<M, W>& exp);
+    };
+    
+    template <class Matcher, class Monoid, class Semiring>
+    class DispatchVisitor : 
+      public rat::ConstNodeVisitor<Monoid, Semiring>
+    {
+    public:
+      typedef Matcher					 matcher_t;
+      typedef Monoid					 monoid_value_t;
+      typedef Semiring					 weight_value_t;
+      typedef rat::Node<monoid_value_t, weight_value_t>  node_t;
+      
+      DispatchVisitor(Matcher& m);
+      
+      virtual
+      ~DispatchVisitor();
+      
+      virtual void
+      product(const node_t* lhs, const node_t* rhs);
+
+      virtual void 
+      sum(const node_t* lhs, const node_t* rhs);
+
+      virtual void 
+      star(const node_t* node);
+      
+      virtual void 
+      left_weight(const weight_value_t& w, const node_t* node);
+    
+      virtual void 
+      right_weight(const weight_value_t& w, const node_t* node);
+
+      virtual void 
+      constant(const monoid_value_t& m);
+
+      virtual void 
+      zero();
+
+      virtual void 
+      one();
+
+      typename Matcher::return_type get_ret();
+
+    private:
+      matcher_t				matcher_;
+      typename Matcher::return_type	ret_;
+    };    
+    
+    struct ExpDispatch 
+    {
+      template <class Matcher, class M, class W>
+      static inline typename Matcher::return_type
+      d(const Matcher& matcher, 
+	const rat::exp<M, W>& exp);
+    };
 
   } // algebra
 
@@ -134,6 +188,7 @@ namespace vcsn {
     product(rat::Node<Monoid_, Semiring_>* lhs,  
 	    rat::Node<Monoid_, Semiring_>* rhs);
   };
+
 } // vcsn
 
 
