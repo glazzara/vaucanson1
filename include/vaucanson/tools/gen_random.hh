@@ -42,7 +42,6 @@ namespace vcsn {
   class GenRandomAutomataSet
   {
   public:
-    GenRandomAutomataSet(unsigned init);
 
     template <class AutoSet>
     static AutoSet generate(SELECTOR(AutomataBase<AutoSet>),
@@ -52,8 +51,6 @@ namespace vcsn {
     static AutoSet generate(SELECTOR(TransducerBase<AutoSet>),
 			    unsigned input_nb_letter = 0,
 			    unsigned output_nb_letter = 0);
-
-
   };
 
 

@@ -46,11 +46,6 @@ namespace vcsn {
   | GenRandomAutomataSet |
   `---------------------*/
 
-  GenRandomAutomataSet::GenRandomAutomataSet(unsigned init)
-  {
-    srand(init);
-  }
-
   template <class AutoSet>
   AutoSet
   GenRandomAutomataSet::generate(SELECTOR(AutomataBase<AutoSet>),
@@ -119,8 +114,11 @@ namespace vcsn {
   {}
 
   template <class TAutomata, class AutomataSetGenerator>
-  GenRandomAutomata<TAutomata, AutomataSetGenerator>::GenRandomAutomata(unsigned init)
-  {}
+  GenRandomAutomata<TAutomata, AutomataSetGenerator>::
+  GenRandomAutomata(unsigned init)
+  {
+    srand(init);
+  }
 
 	/*------.
 	| empty |
