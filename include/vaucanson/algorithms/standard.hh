@@ -41,36 +41,36 @@ namespace vcsn {
   //! In-place union of two standard automata.
   template<typename A, typename T, typename U>
   void 
-  standard_auto_in_union(Element<A, T>& lhs, 
+  union_of_standard_here(Element<A, T>& lhs, 
 			 const Element<A, U>& rhs);
 
   //! Return a fresh union of two standard automata.
   template<typename A, typename T, typename U>
   Element<A, T> 
-  standard_auto_union(const Element<A, T>& lhs, 
-		      const Element<A, U>& rhs);
+  union_of_standard(const Element<A, T>& lhs, 
+		    const Element<A, U>& rhs);
 
   //! In-place concatenation of two standard automata.
   template<typename A, typename T, typename U>
   void 
-  standard_auto_in_concat(Element<A, T>& lhs, 
+  concat_of_standard_here(Element<A, T>& lhs, 
 			  const Element<A, U>& rhs);
 
   //! Return a fresh concatenation of two standard automata.
   template<typename A, typename T, typename U>
   Element<A, T> 
-  standard_auto_concat(const Element<A, T>& lhs, 
-		       const Element<A, U>& rhs);
+  concat_of_standard(const Element<A, T>& lhs, 
+		     const Element<A, U>& rhs);
 
   //! In-place star transformation of a standard automata.
   template<typename A, typename T>
   void 
-  standard_auto_in_star(Element<A, T>& a);
+  star_of_standard_here(Element<A, T>& a);
 
   //! Return the fresh star transformation of a standard automata.
   template<typename A, typename T>
   Element<A, T> 
-  standard_auto_star(const Element<A, T>& a);
+  star_of_standard(const Element<A, T>& a);
 
   /*! @} */
   

@@ -53,7 +53,7 @@ namespace vcsn {
   `---------------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_standard_auto_in_union(const AutomataBase<A>& ,
+  void do_union_of_standard_here(const AutomataBase<A>& ,
 				 lhs_t& lhs,
 				 const rhs_t& rhs)
   {
@@ -103,22 +103,22 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  void standard_auto_in_union(Element<A, T>& lhs, 
+  void union_of_standard_here(Element<A, T>& lhs, 
 			      const Element<A, U>& rhs)
   {
     // assert (lhs.set() == rhs.set())
-    do_standard_auto_in_union(lhs.set(), lhs, rhs);
+    do_union_of_standard_here(lhs.set(), lhs, rhs);
   }
 
   template<typename A, typename T, typename U>
   Element<A, T> 
-  standard_auto_union(const Element<A, T>& lhs, 
-		      const Element<A, U>& rhs)
+  union_of_standard(const Element<A, T>& lhs, 
+		    const Element<A, U>& rhs)
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
-    do_standard_auto_in_union(ret.set(), ret, rhs);
+    do_union_of_standard_here(ret.set(), ret, rhs);
     return ret;
   }
 
@@ -128,7 +128,7 @@ namespace vcsn {
   template <typename A, typename auto_t>
   bool
   do_is_standard(const AutomataBase<A>& ,
-		   const auto_t& a)
+		 const auto_t& a)
   {
     if (a.initial().size() != 1)
       return false;
@@ -150,7 +150,7 @@ namespace vcsn {
   | standard_concat |
   `----------------*/
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_standard_auto_in_concat(const AutomataBase<A>& ,
+  void do_concat_of_standard_here(const AutomataBase<A>& ,
 				     lhs_t& lhs,
 				  const rhs_t& rhs)
   {
@@ -217,22 +217,22 @@ namespace vcsn {
   }
   
   template<typename A, typename T, typename U>
-  void standard_auto_in_concat(Element<A, T>& lhs, 
+  void concat_of_standard_here(Element<A, T>& lhs, 
 			       const Element<A, U>& rhs)
   {
     // assert (lhs.set() == rhs.set())
-    do_standard_auto_in_concat(lhs.set(), lhs, rhs);
+    do_concat_of_standard_here(lhs.set(), lhs, rhs);
   }
   
   template<typename A, typename T, typename U>
   Element<A, T> 
-  standard_auto_concat(const Element<A, T>& lhs, 
-		       const Element<A, U>& rhs)
+  concat_of_standard(const Element<A, T>& lhs, 
+		     const Element<A, U>& rhs)
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
-    do_standard_auto_in_concat(ret.set(), ret, rhs);
+    do_concat_of_standard_here(ret.set(), ret, rhs);
     return ret;
   }
 
@@ -240,7 +240,7 @@ namespace vcsn {
   | standard_star |
   `--------------*/
   template <typename A, typename auto_t>
-  void do_standard_auto_in_star(const AutomataBase<A>& ,
+  void do_star_of_standard_here(const AutomataBase<A>& ,
 				auto_t& a)
   {    
     typedef std::set<hedge_t>		edelta_ret_t;
@@ -264,19 +264,19 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  void standard_auto_in_star(Element<A, T>& a)
+  void star_of_standard_here(Element<A, T>& a)
   {
-    do_standard_auto_in_star(a.set(), a);
+    do_star_of_standard_here(a.set(), a);
   }
 
   template<typename A, typename T>
   Element<A, T> 
-  standard_auto_star(const Element<A, T>& a)
+  star_of_standard(const Element<A, T>& a)
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(a);
     ret.emancipate();
-    do_standard_auto_in_star(ret.set(), ret);
+    do_star_of_standard_here(ret.set(), ret);
     return ret;
   }
 

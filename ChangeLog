@@ -1,5 +1,12 @@
 2003-06-22  Loïc Fosse  <loic@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/glushkov.hxx,
+	  include/vaucanson/algorithms/standard.hh,
+	  include/vaucanson/algorithms/standard.hxx: Rename functions using
+	  the new convention.
+
+2003-06-22  Loïc Fosse  <loic@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/union.hh,
 	  include/vaucanson/algorithms/union.hxx: Move to...
 	* include/vaucanson/algorithms/sum.hh,

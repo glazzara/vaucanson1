@@ -79,7 +79,7 @@ namespace vcsn {
     {
       automaton_ptr_t tmp_  = match(rhs);
       automaton_ptr_t auto_ = match(lhs);
-      standard_auto_in_concat(*auto_, *tmp_);
+      concat_of_standard_here(*auto_, *tmp_);
       delete (tmp_);
       return auto_;
     }
@@ -89,7 +89,7 @@ namespace vcsn {
     {
       automaton_ptr_t tmp_  = match(rhs);
       automaton_ptr_t auto_ = match(lhs);
-      standard_auto_in_union(*auto_, *tmp_);
+      union_of_standard_here(*auto_, *tmp_);
       delete (tmp_);
       return auto_;
     }
@@ -98,7 +98,7 @@ namespace vcsn {
     MATCH_(Star, node)
     {
       automaton_ptr_t stared = match(node);
-      standard_auto_in_star(*stared); 
+      star_of_standard_here(*stared); 
       return stared;
     }
     END
