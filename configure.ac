@@ -21,12 +21,19 @@ AC_LANG(C++)
 AC_CHECK_HEADERS([limits])
 AC_CHECK_HEADERS([stl_config.h])
 
+##
+## for documentation purpose.
+##
 AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, no)
 if test x"$DOXYGEN" = x"no"; then
   echo "Cannot find doxygen. Disabling auto-generation of the documentation" 2>&1
   DOXYGEN=/bin/true
 fi
+AC_CHECK_PROGS([LATEX], [latex], [$am_aux_dir/missing latex])
 
+##
+## generate files.
+##
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
@@ -46,6 +53,7 @@ AC_CONFIG_FILES([
 	src/tests/tests-suites/Makefile
 	src/tests/bin/Makefile
 	doc/Makefile
+	doc/tutorial/Makefile
         doc/doc.doxy	
 	include/Makefile])
 

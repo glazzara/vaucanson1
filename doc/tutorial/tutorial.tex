@@ -1,0 +1,247 @@
+\documentclass{article}
+
+\usepackage{listings}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{palatino}
+\usepackage{a4wide}
+\usepackage{xspace}
+\usepackage{listings}
+
+\include{macros}
+
+% TODO: écrire les macros pour les exemples de code.
+% TODO: vérifier que l'HTML est ok.
+% TODO: établir un code de lecture (remarque de lecture, exemple, ...)
+
+\begin{document}
+
+\title{Vaucanson -- a tutorial}
+
+\maketitle
+
+\tableofcontents
+
+\section{Overview}
+
+\subsection{Presentation}
+
+Vaucanson is a C++ library for finite state machine manipulation. 
+
+Vaucanson is:
+
+\begin{itemize}
+  
+\item \textbf{generic}: a general algorithm is written once and is
+  instantiated for the good parameters at use ;
+  
+\item \textbf{algorithm oriented}: the system is meant to provide
+  primitive services to write algorithms ;
+
+\item \textbf{meta}: the C++ is enriched to obtain a flexible framework.
+
+\end{itemize}
+
+\subsection{Distribution, installation, basic usage}
+
+The tarball can be found at \url{http://www.lrde.epita.fr/twiki/VaucansonLib}.
+
+The installation is the classical:
+
+\begin{verbatim}
+./configure
+make
+make install (as root)
+\end{verbatim}
+
+If you are not root on your system, you can install Vaucanson by typing:
+
+\begin{verbatim}
+./configure --with-prefix=$HOME/include/ 
+make
+make install
+\end{verbatim} % $
+
+The only difference is that you must specify a -I \$(HOME)/include in
+your compilation flags.
+
+\subsection{Directory tree}
+
+The Vaucanson library is organized as follows: 
+
+\begin{verbatim}
+`-- vaucanson
+    |-- algebra
+    |   |-- concept
+    |   `-- concrete
+    |       |-- alphabets
+    |       |-- free_monoid
+    |       |-- letter
+    |       |-- semiring
+    |       `-- series
+    |           `-- rat
+    |-- algorithms
+    |-- automata
+    |   |-- concept
+    |   `-- concrete
+    |-- config
+    |-- fundamental
+    |-- internal
+    |-- misc
+    `-- tools
+\end{verbatim}
+
+\begin{itemize}
+\item \textbf{fundamental}: the core of the library, its goal is to
+  enriched C++. (see section \ref{sec:fundamental}) ;
+
+\item \textbf{config}: the internal configuration system ;
+\item \textbf{internal}: the internal C++ headers ;
+\item \textbf{algebra}: the algebra module ;
+\item \textbf{automata}: the automata module ;
+\item \textbf{algorithms}: the algorithms set ;
+\item \textbf{misc}: some tools to interact with external tools ;
+\item \textbf{tools}: some useful tools for daily work.
+\end{itemize}
+
+\subsection{A simple example}
+
+% FIXME: choose a good example.
+
+\subsection{Plan}
+
+The goal of this document is to present the philosophy of the library
+and to demonstrate some features of the system in a practical manner.
+
+\section{Preliminaries}
+
+%FIXME: vcsn namespace, template C++ references, articles, STL ... etc etc
+
+\section{Fundamental: enriched c++}
+
+The fundamental module provides some sugar to build the system
+genericity. It can be seen as the core of the system and, then,
+non-expert users do not have to understand it. Yet, a so-called
+'Element' design pattern is used in every line of Vaucanson to enable
+orthogonal specialization and genericity: one must be aware of it
+before coding with the Vaucanson library.
+
+\subsection{Element/Set design pattern}
+
+As mentionned in (FIXME), Vaucanson is designed in an algebraic
+manner. To reinforce this view and to provide a simple way to separate
+implementation and theoritical behaviour, we use a unified way to
+structure all the object used in the library: the Element pattern. The
+'Basics' section is essential whereas the other can be skipped for a
+first reading.
+
+\subsubsection{Basics}
+
+First, in Vaucanson, everything is an instance of
+\textbf{vcsn::Element$<$S, T$>$} where the 'S' parameter is
+interpreted as the set of the element and 'T' as its implementation.
+For example, Element$<$Series, polynom$>$ is an element of the series
+implemented with the polynom class. What is important is that every
+Element$<$S, T$>$ provides the same interface. You can access the
+implementation by the 'value()' method and the set by the 'set()' one.
+As a consequence, objects are build incrementally from their set. 
+
+% FIXME: Write valid Vaucanson code please !
+% FIXME: add all the code into the src/demos.
+\begin{verbatim}
+Alphabet a;
+FreeMonoid f(a);
+Semiring s;
+Series s(f, s);
+Element<Series, polynom> s;
+Element<FreeMonoid, std::string> m(f);
+Element<Semiring, int>   w;
+s.set();          // the series set.
+s.set().monoid(); // the monoid.
+s.value();        // the polynom.
+m.set().alphabet() == s.set().monoid().alphabet();
+s[m] = w;
+\end{verbatim}
+
+Second, the particular behaviour of an implementation 'T' viewed as an
+element of a set 'S' is defined by specialization of the class
+\textbf{vcsn::MetaElement$<$S, T$>$}. For instance, the
+MetaElement$<$Series, polynom$>$ provides a 'is\_stareable()' method
+that returns true if we can take the star of the current serie. The
+MetaElement class is not a user class, it is just a way to define the
+interpretation of the implementation as a particular concept.
+
+% FIXME:Add example.
+
+% FIXME: consequence => separation in the library between concrete/concept.
+
+\subsubsection{A short example}
+
+\subsubsection{Inheritance between Element}
+
+\subsubsection{Orthogonal specialization}
+
+\subsubsection{Dynamic/Static properties}
+
+
+\section{Dealing with algebraic structures}
+
+Even if classical context are provided (like letter acceptor),
+Vaucanson enables the user to precisely define the algebraic context
+to work with. 
+
+The next sections show how it can be done for the main algebraic
+components: alphabet, free monoid, semiring, serie and rational
+expression.
+
+\subsection{Alphabet}
+
+An alphabet is collection of letters. 
+
+% FIXME: add a glossary
+In Vaucanson, we have the set of all alphabet over a particular type
+of letter denoted by the AlphabetsBase abstract class. A final class
+SetAlphabet implements this class in a trivial manner: it is an empty
+class for static typing purpose. 
+
+% We also have a DecoratedAlphabets class which represents the set of alphabet 
+% decorated with particular symbol like '?' or '~(.)' \ldots 
+% A creuser \ldots
+
+An element of the alphabet set can be implemented in a lot of
+different ways. For example, we can use std::set or std::list for
+dynamic alphabets but there are also static alphabets.
+
+% FIXME: example.
+
+\subsection{Free monoid}
+
+\subsection{Semiring}
+
+\subsection{Series}
+
+\subsection{Rational expression}
+
+\section{Automaton}
+
+\subsection{Simple usage}
+
+\section{Algorithms}
+
+\section{Your 'grep'}
+
+\subsection{From a regular expression to an automaton}
+
+\subsection{Speed}
+
+\subsection{Multiplicity in action}
+
+\section{Play with multiplicity}
+
+\section{Advanced use}
+
+\subsection{Extending Vaucanson}
+
+\end{document}

@@ -7,7 +7,7 @@
 #---------------------------------------------------------------------------
 PROJECT_NAME           = Vaucanson
 PROJECT_NUMBER         = @PACKAGE_VERSION@
-OUTPUT_DIRECTORY       = @top_srcdir@/doc/generated/
+OUTPUT_DIRECTORY       = @top_srcdir@/doc/ref/
 OUTPUT_LANGUAGE        = English
 EXTRACT_ALL            = NO
 EXTRACT_PRIVATE        = NO

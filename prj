@@ -1,20 +1,20 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 149)
-(Parent-Version vaucanson 0 148)
+(Project-Version vaucanson 0 150)
+(Parent-Version vaucanson 0 149)
 (Version-Log "
 2003-02-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
-(0.149)
-	* configure.ac (VCSN_TESTS): Remove.
-	* src/tests/automata/implementation_check/Makefile.am:
-		Rename 'consistancy' to 'consistency'.
-	* vcsn.m4: New.	
-	* src/tests/bin/generate-test-suite.sh: New.	
-	* src/tests/bin/Makefile.am: Now, use generate-test-suite.sh.
+(0.150)
+	* doc/tutorial/tutorial.tex: New.
+	* doc/tutorial/Makefile.am: New.	
+	* configure.ac: Check LaTeX, Generate doc/tutorial/Makefile.
+	* doc/doc.doxy.in: Generate in 'ref' not in 'generated'.
+	* doc/Makefile.am: Enter in 'tutorial'.
+	* Makefile.am: Replace 'doxydoc' by 'doc'.
 ")
 (New-Version-Log "")
-(Checkin-Time "Thu, 13 Feb 2003 08:33:36 +0100")
+(Checkin-Time "Thu, 13 Feb 2003 09:23:29 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -26,7 +26,6 @@
                   "\\.a$"
                   "\\.s$"
                   "\\.so$"
-                  "\\.tex$"
                   "\\.eps$"
                   "\\.gz$"
                   "\\.out$"
@@ -98,11 +97,11 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.90 600))
-  (configure.ac (vaucanson/47_configure. 1.6.1.13 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.91 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.14 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
-  (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
-  (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.1 600))
+  (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.3 600))
+  (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.2 600))
   (doc/src/main.dox (vaucanson/38_main.dox 1.2 600))
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
   (HEADER (vaucanson/f/35_HEADER 1.3 600))
@@ -306,7 +305,7 @@
   (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.15 600))
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.22 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
-  (Makefile.am (vaucanson/48_Makefile.a 1.5 600))
+  (Makefile.am (vaucanson/48_Makefile.a 1.6 600))
   (README (vaucanson/f/48_README 1.7 600))
   (src/demos/fsm/arg.cc (vaucanson/g/39_arg.cc 1.4 600))
   (src/demos/fsm/arg.hh (vaucanson/g/40_arg.hh 1.3 600))
@@ -580,6 +579,16 @@
 
   (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.1 700))
   (vcsn.m4 (vaucanson/h/42_vcsn.m4 1.1 600))
+
+;; Files added by populate at Thu, 13 Feb 2003 08:41:20 +0100,
+;; to version 0.149(w), by yann:
+
+  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.1 600))
+
+;; Files added by populate at Thu, 13 Feb 2003 09:20:10 +0100,
+;; to version 0.149(w), by yann:
+
+  (doc/tutorial/Makefile.am (vaucanson/h/44_Makefile.a 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

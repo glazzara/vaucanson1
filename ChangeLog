@@ -1,4 +1,13 @@
 2003-02-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.150)
+	* doc/tutorial/tutorial.tex: New.
+	* doc/tutorial/Makefile.am: New.	
+	* configure.ac: Check LaTeX, Generate doc/tutorial/Makefile.
+	* doc/doc.doxy.in: Generate in 'ref' not in 'generated'.
+	* doc/Makefile.am: Enter in 'tutorial'.
+	* Makefile.am: Replace 'doxydoc' by 'doc'.
+
+2003-02-13  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.149)
 	* configure.ac (VCSN_TESTS): Remove.
 	* src/tests/automata/implementation_check/Makefile.am:

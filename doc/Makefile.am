@@ -2,6 +2,11 @@
 #
 # $Id$
 
+SUBDIRS= tutorial
 
-doxydoc:
+doc: doc.doxy	
+	cd tutorial && $(MAKE) doc
 	@DOXYGEN@ doc.doxy
+
+clean-local:
+	rm -fr ref
