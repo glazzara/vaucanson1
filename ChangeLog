@@ -1,5 +1,12 @@
 2002-06-27  Maxime Rey  <max@lrde.epita.fr>
 
+	* include/vaucanson/misc/functors.hxx added (split)
+	* include/vaucanson/misc/type_constraints.hh added 
+	  needed by functors.hh
+	* include/vaucanson/misc/type_constraints.hh : header modified
+
+2002-06-27  Maxime Rey  <max@lrde.epita.fr>
+
 	* `include/vaucanson/misc/converter.hxx' added (split)
 	* `include/vaucanson/misc/ref.hxx' added (split)
 	* misc_constraints.hh header modified
