@@ -18,8 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_BACKWARD_REALTIME_HH
-# define VCSN_ALGORITHMS_BACKWARD_REALTIME_HH
+#ifndef VCSN_ALGORITHMS_FORWARD_REALTIME_HH
+# define VCSN_ALGORITHMS_FORWARD_REALTIME_HH
 
 /**
  * @file forward_realtime.hh
@@ -74,5 +74,5 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/forward_realtime.hxx>
 
-#endif // VCSN_ALGORITHMS_BACKWARD_REALTIME_HH
+#endif // VCSN_ALGORITHMS_FORWARD_REALTIME_HH
 

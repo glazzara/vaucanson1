@@ -10,11 +10,11 @@
 #include <vaucanson/algebra/concrete/series/rat/exp.hh>
 #include <vaucanson/algebra/concrete/series/krat.hh>
 #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
-#include <vaucanson/algorithms/glushkov.hh>
+#include <vaucanson/algorithms/standard_of.hh>
 #include <vaucanson/algorithms/thompson.hh>
-#include <vaucanson/algorithms/compute.hh>
-#include <vaucanson/algorithms/hopcroft.hh>
-#include <vaucanson/misc/dot_dump.hh>
+#include <vaucanson/algorithms/eval.hh>
+#include <vaucanson/algorithms/hopcroft_minimization.hh>
+// FIXME: when dot_dump is re-integrated : #include <vaucanson/misc/dot_dump.hh>
 #include <iostream>
 #include <vector>
 #include <ctype.h>
@@ -88,9 +88,9 @@ void grep(std::ostream& out, const vcsn::tools::usual_automaton_t& automaton,
 {
   do
     {
-      bool ret = false;
-      ret = compute(automaton, w.current());
-      if (ret)
+      vcsn::tools::usual_automaton_t::weight_t ret =
+	eval(automaton, w.current());
+      if (ret.value())
 	out << w.current() << std::endl;
     }
   while (w.discard_line());
@@ -192,11 +192,11 @@ int main(int argc, char **argv)
       Element<series_t, rat::exp<monoid_elt_value_t, weight_value_t> >
 	krat_exp(automaton.set().series());
       parse(exp, krat_exp);
-      glushkov(automaton, krat_exp.value());
+      standard_of(automaton, krat_exp.value());
       realtime_here(automaton);
-      auto_in_complete(automaton);
+      complete_here(automaton);
       std::cerr << "complete ok" << std::endl;
-      misc::dot_dump(std::cout, automaton, "automaton");
+      // FIXME: misc::dot_dump(std::cout, automaton, "automaton");
       // STATE FINAL => sigma * on it.
       for_each_initial_state(s, automaton)
 	for (unsigned l = 0; l <= 255; ++l)
@@ -211,7 +211,7 @@ int main(int argc, char **argv)
 
       automaton = determinize(automaton);
       std::cerr << "determinize ok" << std::endl;
-      misc::dot_dump(std::cout, automaton, "automaton");
+      // FIXME: misc::dot_dump(std::cout, automaton, "automaton");
       // No file means standard input.
       if (optcount == argc)
 	{

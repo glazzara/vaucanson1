@@ -79,9 +79,9 @@ namespace vcsn {
   realtime(const Element<A, T>& a, realtime_type type)
   {
     if (type== forward)
-      return forward_realtime_here(a);
+      return forward_realtime(a);
     else
-      return backward_realtime_here(a);
+      return backward_realtime(a);
   }
   
 } // vcsn
