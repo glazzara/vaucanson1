@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# algebra/semiring.hh
+# algebra/semiring/Makefile.am
 #
 #
 # $Id$
@@ -96,20 +96,29 @@ LDADD = $(top_builddir)/src/tests/check/libcheck.a
 TESTS = $(check_PROGRAMS)
 
 check_PROGRAMS = \
-	semiring-numerical-test
+	semiring-numerical-test			\
+	semiring-tropical-test
 
 
 semiring_numerical_test_SOURCES = semiring-numerical-test.cc
+semiring_tropical_test_SOURCES = semiring-tropical-test.cc
 subdir = src/tests/algebra/semiring
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES =
-check_PROGRAMS = semiring-numerical-test$(EXEEXT)
+check_PROGRAMS = semiring-numerical-test$(EXEEXT) \
+	semiring-tropical-test$(EXEEXT)
 am_semiring_numerical_test_OBJECTS = semiring-numerical-test.$(OBJEXT)
 semiring_numerical_test_OBJECTS = $(am_semiring_numerical_test_OBJECTS)
 semiring_numerical_test_LDADD = $(LDADD)
 semiring_numerical_test_DEPENDENCIES = \
 	$(top_builddir)/src/tests/check/libcheck.a
 semiring_numerical_test_LDFLAGS =
+am_semiring_tropical_test_OBJECTS = semiring-tropical-test.$(OBJEXT)
+semiring_tropical_test_OBJECTS = $(am_semiring_tropical_test_OBJECTS)
+semiring_tropical_test_LDADD = $(LDADD)
+semiring_tropical_test_DEPENDENCIES = \
+	$(top_builddir)/src/tests/check/libcheck.a
+semiring_tropical_test_LDFLAGS =
 
 DEFS = @DEFS@
 DEFAULT_INCLUDES =  -I. -I$(srcdir)
@@ -118,16 +127,18 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/semiring-numerical-test.Po
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/semiring-numerical-test.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/semiring-tropical-test.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 CXXFLAGS = @CXXFLAGS@
-DIST_SOURCES = $(semiring_numerical_test_SOURCES)
+DIST_SOURCES = $(semiring_numerical_test_SOURCES) \
+	$(semiring_tropical_test_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(semiring_numerical_test_SOURCES)
+SOURCES = $(semiring_numerical_test_SOURCES) $(semiring_tropical_test_SOURCES)
 
 all: all-am
 
@@ -144,6 +155,9 @@ clean-checkPROGRAMS:
 semiring-numerical-test$(EXEEXT): $(semiring_numerical_test_OBJECTS) $(semiring_numerical_test_DEPENDENCIES) 
 	@rm -f semiring-numerical-test$(EXEEXT)
 	$(CXXLINK) $(semiring_numerical_test_LDFLAGS) $(semiring_numerical_test_OBJECTS) $(semiring_numerical_test_LDADD) $(LIBS)
+semiring-tropical-test$(EXEEXT): $(semiring_tropical_test_OBJECTS) $(semiring_tropical_test_DEPENDENCIES) 
+	@rm -f semiring-tropical-test$(EXEEXT)
+	$(CXXLINK) $(semiring_tropical_test_LDFLAGS) $(semiring_tropical_test_OBJECTS) $(semiring_tropical_test_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -152,6 +166,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/semiring-numerical-test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/semiring-tropical-test.Po@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
