@@ -41,13 +41,13 @@ namespace vcsn {
 
   } // algebra
 
-  /*! \addtogroup algebra */  /* @{ */
-  /*! \addtogroup semiring */ /* @{ */
+  /** @addtogroup algebra */  /** @{ */
+  /** @addtogroup semiring */ /** @{ */
 
   /*----------------------------------------------------.
   | dynamic_traits : traits about the set of tropical semiring |
   `----------------------------------------------------*/
-  //! Meta information about the tropical semirings.
+  /// Meta information about the tropical semirings.
   template<class TropicalKind>
   struct dynamic_traits<algebra::TropicalSemiring<TropicalKind> >
     : dynamic_traits<algebra::SemiringBase<algebra::TropicalSemiring<TropicalKind> > >
@@ -58,30 +58,30 @@ namespace vcsn {
   struct virtual_types<algebra::TropicalSemiring<TropicalKind> >
     : virtual_types<algebra::SemiringBase<algebra::TropicalSemiring<TropicalKind> > >
   {
-    //! We can see a NumericalSemiring as a semigroup with +. It is
-    //! an arbitrary decision, it could be mul_kind too.
+    /// We can see a NumericalSemiring as a semigroup with +. It is
+    /// an arbitrary decision, it could be mul_kind too.
     typedef algebra::add_kind	semigroup_kind;
   };
   
 
-  /*! @} @} */
+  /** @} @} */
   
   namespace algebra {
 
-    /*! \addtogroup algebra */  /* @{ */
-    /*! \addtogroup semiring */ /* @{ */
+    /** @addtogroup algebra */  /** @{ */
+    /** @addtogroup semiring */ /** @{ */
 
     /*-----------------.
     | Kind of tropical |
     `-----------------*/
-    //! Static information about the kind of tropical we are
-    //! confronted with.
+    /// Static information about the kind of tropical we are
+    /// confronted with.
     struct TropicalMin
     {
     };
 
-    //! Static information about the kind of tropical we are
-    //! confronted with.
+    /// Static information about the kind of tropical we are
+    /// confronted with.
     struct TropicalMax
     {
     };
@@ -89,29 +89,29 @@ namespace vcsn {
     /*-----------------.
     | TropicalSemiring |
     `-----------------*/
-    //! Structural element that denotes tropical semiring.
+    /// Structural element that denotes tropical semiring.
     template <class TropicalKind>
     struct TropicalSemiring
       : SemiringBase<TropicalSemiring<TropicalKind> >
     {};
 
-    /*! @} @} */
+    /** @} @} */
 
   } // algebra
 
-  //! \addtogroup algebra 
-  //! \@{
+  /// @addtogroup algebra 
+  /** @{ */
 
   /*---------------------------------------.
   | MetaElement<TropicalSemiring<Kind>, T> |
   `---------------------------------------*/
-  //! Services of element of a tropical semiring.
+  /// Services of element of a tropical semiring.
   template<class TropicalKind, typename T>
   struct MetaElement<algebra::TropicalSemiring<TropicalKind> , T>
     : MetaElement<algebra::SemiringBase<algebra::TropicalSemiring<TropicalKind> >, T>
   {};
 
-  //! @}
+  /** @} */
 
 } // vcsn
 

@@ -39,7 +39,7 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /** 
    * Complement in place the set of final states.
@@ -67,7 +67,7 @@ namespace vcsn {
   Element<A, T>
   complement(const Element<A, T>& a);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

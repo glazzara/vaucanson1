@@ -41,9 +41,9 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! The types of a linearized expression
+  /// The types of a linearized expression
   template <typename S, typename T>
   struct linearize_element
   {
@@ -75,12 +75,12 @@ namespace vcsn {
     typedef Element<series_t, serie_impl_t>			element_t;
   };
 
-  //! The linearization of the krat expression.
+  /// The linearization of the krat expression.
   template <class Series, class T>
   typename linearize_element<Series, T>::element_t
   linearize(const Element<Series, T>& exp);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -36,22 +36,22 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*! @ingroup alphabet */ /*! @{ */
+    /** @ingroup alphabet */ /** @{ */
 
     /*---------------------.
     | AlphabetDecorator<T> |
     `---------------------*/
-    //! Decorate a given alphabet implementation with meta-symbols.
-    //! The meta-symbols are:
-    //! - a 'joker' which symbolizes every letter of the alphabet.
-    //! - a 'discard' which symbolizes every letter that is not in the 
-    //!   alphabet but of the same letter type.
-    //! The meta-symbols are encoded using the type of the letter with a 
-    //! default value that has to be specified with the traits 'meta_symbol'.
-    //! For instance, '?' and '#' for char. Yet, if these characters are 
-    //! already present in the alphabet, we look for another character in a
-    //! incremental way. If, unfortunately, there is not enough place, the 
-    //! program is stopped.
+    /// Decorate a given alphabet implementation with meta-symbols.
+    /// The meta-symbols are:
+    /// - a 'joker' which symbolizes every letter of the alphabet.
+    /// - a 'discard' which symbolizes every letter that is not in the 
+    ///   alphabet but of the same letter type.
+    /// The meta-symbols are encoded using the type of the letter with a 
+    /// default value that has to be specified with the traits 'meta_symbol'.
+    /// For instance, '?' and '#' for char. Yet, if these characters are 
+    /// already present in the alphabet, we look for another character in a
+    /// incremental way. If, unfortunately, there is not enough place, the 
+    /// program is stopped.
     template <class L, class T>
     class AlphabetDecorator
     {
@@ -87,42 +87,42 @@ namespace vcsn {
     /*---------------------------------------------.
     | alphabet_traits<AlphabetSet<L>,std::set<L>> |
     `---------------------------------------------*/
-    //! meta information about the mixing of AlphabetSet with
-    //! std::set.
+    /// meta information about the mixing of AlphabetSet with
+    /// std::set.
     template<typename L, typename T>
     struct alphabet_traits<AlphabetSet<L>, AlphabetDecorator<L, T> >
     {
-      //! The type of letter hold by the alphabet.
+      /// The type of letter hold by the alphabet.
       typedef L			letter_t;
     };
 
-    //! @}
+    /// @}
 
   } // algebra
   
-  /*! @ingroup alphabet */ /*! @{ */
+  /** @ingroup alphabet */ /** @{ */
 
   /*------------------------------------------.
   | MetaElement<AlphabetSet<L>, std::set<L>> |
   `------------------------------------------*/
-  //! Services of every alphabet implemented with AlphabetDecorator<T>.
-  //! See MetaElement<AlphabetSetBase<Self>, T>.
+  /// Services of every alphabet implemented with AlphabetDecorator<T>.
+  /// See MetaElement<AlphabetSetBase<Self>, T>.
   template<typename L, typename T>
   struct MetaElement<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> >
     : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, algebra::AlphabetDecorator<L, T> >
   {
-    //! The dynamic properties depends on the implementation one.
+    /// The dynamic properties depends on the implementation one.
     static const bool dynamic_values = 
     MetaElement<algebra::AlphabetSet<L>,T >::dynamic_values;
 
-    //! The meta-symbol that symbolizes all the alphabet's symbols.
+    /// The meta-symbol that symbolizes all the alphabet's symbols.
     L	joker() const;
 
-    //! The meta-symbol that symbolizes the symbol not in the alphabet.
+    /// The meta-symbol that symbolizes the symbol not in the alphabet.
     L	other() const;
   };
   
-  //! @}
+  /// @}
 
   template<typename L, typename T>
   bool op_contains(const algebra::AlphabetSet<L>& s, 

@@ -38,14 +38,14 @@
 
 namespace vcsn {
 
-  /*! \addtogroup automata */  /* @{ */
-  /*! \addtogroup concept  */  /* @{ */
+  /** @addtogroup automata */  /** @{ */
+  /** @addtogroup concept  */  /** @{ */
 
   /*---------------------.
   | TransducerBase<Self> |
   `----------------------*/
-  //! The most general concept of transducer. 
-  /*! It denotes the set of transducer with multiplicity over a fixed
+  /// The most general concept of transducer. 
+  /** It denotes the set of transducer with multiplicity over a fixed
     semiring and a fixed free couple of monoid. 
     Note that this class is abstract
     in the hierarchy.
@@ -55,14 +55,14 @@ namespace vcsn {
     : AutomataBase<Self>
   {
   public:
-    //! The type of the series set associated with the automaton.
+    /// The type of the series set associated with the automaton.
     typedef typename virtual_types<Self>::series_t  series_t;
 
   protected:
-    //! The default constructor is protected since it is an abstract class.
+    /// The default constructor is protected since it is an abstract class.
     TransducerBase();
 
-    //! The copy constructor is protected since it is an abstract class.
+    /// The copy constructor is protected since it is an abstract class.
     TransducerBase(const TransducerBase& other);
   };
 
@@ -95,8 +95,8 @@ namespace vcsn {
   /*-------------------------------------.
   | MetaElement<TransducerBase<Self>, T> |
   `-------------------------------------*/
-  //! Services of every element of the transducer set. 
-  /*! MetaElement<TransducerBase<Self>, T> defines the interface of
+  /// Services of every element of the transducer set. 
+  /** MetaElement<TransducerBase<Self>, T> defines the interface of
     every transducer that is the result of the interaction of a
     structural element (TransducerBase<Self>) and an implementation T.
     
@@ -106,101 +106,101 @@ namespace vcsn {
   struct MetaElement<TransducerBase<Self>, T>
     : MetaElement<AutomataBase<Self>, T>
   {
-    /*! type of the interface of an automaton. */
+    /** type of the interface of an automaton. */
     typedef MetaElement<AutomataBase<Self>, T>		      automaton_t;
 
-    /*! type the series set from which is build the automaton. */
+    /** type the series set from which is build the automaton. */
     INHERIT_TYPEDEF_(automaton_t, series_t);
 
-    /*! type of the implementation of series that holds the automaton. */
+    /** type of the implementation of series that holds the automaton. */
     INHERIT_TYPEDEF_(automaton_t, serie_value_t);
 
-    /*! type of the element of the set of series that holds the automaton. */
+    /** type of the element of the set of series that holds the automaton. */
     INHERIT_TYPEDEF_(automaton_t, series_elt_t);
 
     INHERIT_TYPEDEF_(automaton_t, series_elt_t);
 
-    /*! type of the free monoid. */
+    /** type of the free monoid. */
     INHERIT_TYPEDEF_(automaton_t, monoid_t);
 
-    /*! type of the free monoid element. */
+    /** type of the free monoid element. */
     INHERIT_TYPEDEF_(automaton_t, monoid_elt_t);
 
-    /*! type of the implementation of a word. */
+    /** type of the implementation of a word. */
     INHERIT_TYPEDEF_(automaton_t, monoid_elt_value_t);
 
-    /*! type of the letter. */
+    /** type of the letter. */
     INHERIT_TYPEDEF_(automaton_t, letter_t);
 
-    /*! type of the semiring set. */
+    /** type of the semiring set. */
     INHERIT_TYPEDEF_(automaton_t, semiring_t);
 
-    /*! type of the free monoid element. */
+    /** type of the free monoid element. */
     INHERIT_TYPEDEF_(automaton_t, semiring_elt_t);
 
-    /*! type of the implementation of a semiring_elt. */
+    /** type of the implementation of a semiring_elt. */
     INHERIT_TYPEDEF_(automaton_t, semiring_elt_value_t);
 
-    /*! type of additional information that is aggregated to the automaton. */
+    /** type of additional information that is aggregated to the automaton. */
     INHERIT_TYPEDEF_(automaton_t, tag_t);
 
-    /*! type of the label of the automaton implementation. */
+    /** type of the label of the automaton implementation. */
     INHERIT_TYPEDEF_(automaton_t, label_t);
 
-    /*! type of the states container. */
+    /** type of the states container. */
     INHERIT_TYPEDEF_(automaton_t, states_t);
 
-    /*! type of the iterator over the states set. */
+    /** type of the iterator over the states set. */
     INHERIT_TYPEDEF_(automaton_t, state_iterator);
 
-    /*! type of the edges set. */
+    /** type of the edges set. */
     INHERIT_TYPEDEF_(automaton_t, edges_t);
 
-    /*! type of the iterator over the edges. */
+    /** type of the iterator over the edges. */
     INHERIT_TYPEDEF_(automaton_t, edge_iterator);
 
-    /*! type of the initial application. */
+    /** type of the initial application. */
     INHERIT_TYPEDEF_(automaton_t, initial_t);
 
-    /*! type of the initial application support. */
+    /** type of the initial application support. */
     INHERIT_TYPEDEF_(automaton_t, initial_support_t);
 
-    /*! type of the iterator of the initial application support. */
+    /** type of the iterator of the initial application support. */
     INHERIT_TYPEDEF_(automaton_t, initial_iterator);
 
-    /*! type of the final application. */
+    /** type of the final application. */
     INHERIT_TYPEDEF_(automaton_t, final_t);
 
-    /*! type of the iterator of the final application support. */
+    /** type of the iterator of the final application support. */
     INHERIT_TYPEDEF_(automaton_t, final_iterator);
 
-    /*! type of the interface of an automaton. */
+    /** type of the interface of an automaton. */
     typedef MetaElement<TransducerBase<Self>, T>	      self_t;
 
-    /*! type of the mother class. */
+    /** type of the mother class. */
     typedef MetaElement<AutomataBase<Self>, T>		      mother_t;
 
-    /*! type of the output. */
+    /** type of the output. */
     typedef typename mother_t::semiring_elt_t output_series_elt_t;
 
-    /*! type of the output monoid element implementation. */
+    /** type of the output monoid element implementation. */
     typedef typename automaton_traits<T>::semiring_elt_value_t semiring_elt_value_t;
     typedef typename algebra::series_traits<semiring_elt_value_t>::monoid_value_t 
 						output_monoid_elt_value_t;
 
-    /*! type of the output monoid. */
+    /** type of the output monoid. */
     typedef typename semiring_t::monoid_t	output_monoid_t;
 
-    /*! type of the output monoid element. */
+    /** type of the output monoid element. */
     typedef Element<output_monoid_t, output_monoid_elt_value_t>
 						output_monoid_elt_t;
 
     typedef typename output_monoid_t::letter_t output_letter_t;
 
-    /*! type of the input monoid element implementation. */
+    /** type of the input monoid element implementation. */
     typedef typename mother_t::monoid_elt_value_t input_monoid_elt_value_t;
 
-    /*! type of the input monoid. */
+    /** type of the input monoid. */
     typedef typename mother_t::monoid_t		input_monoid_t;
 
     /* type of the input monoid element. */
@@ -209,39 +209,39 @@ namespace vcsn {
 
     typedef typename input_monoid_t::letter_t input_letter_t;
 
-    /*! type of the output weight implementation. */
+    /** type of the output weight implementation. */
     typedef typename algebra::series_traits<semiring_elt_value_t>::semiring_elt_value_t
     output_semiring_elt_value_t;
     
-    /*! type of the output semiring. */
+    /** type of the output semiring. */
     typedef typename semiring_t::semiring_t	output_semiring_t;
 
-    /*! type of the output weight. */
+    /** type of the output weight. */
     typedef Element<output_semiring_t, output_semiring_elt_value_t>
     output_semiring_elt_t;
 
-    /*! return the input of an edge */
+    /** return the input of an edge */
     input_monoid_elt_t input_of(hedge_t) const;
 
-    /*! return the output of an edge */
+    /** return the output of an edge */
     output_series_elt_t output_of(hedge_t) const;
 
-    /*! add an edge specified as an input word, an output word and
+    /** add an edge specified as an input word, an output word and
       a weight linked to it. */
     hedge_t add_io_edge(hstate_t, hstate_t, input_monoid_elt_t, 
 			output_monoid_elt_t, 
 			output_semiring_elt_t = output_semiring_elt_t());
 
-    /*! add an edge specified using an input letter, an output letter and
+    /** add an edge specified using an input letter, an output letter and
       a weight linked to it. */
     hedge_t add_io_edge(hstate_t, hstate_t, input_letter_t, output_letter_t,
 			output_semiring_elt_t = output_semiring_elt_t());
 
-    /*! add an only-output edge (epsilon as input). */
+    /** add an only-output edge (epsilon as input). */
     hedge_t add_o_edge(hstate_t, hstate_t, output_letter_t, 
 		       output_semiring_elt_t = output_semiring_elt_t());
 
-    /*! add an only-input edge (epsilon as output). */
+    /** add an only-input edge (epsilon as output). */
     hedge_t add_i_edge(hstate_t, hstate_t, input_letter_t, 
 		       output_semiring_elt_t = output_semiring_elt_t());
 
@@ -251,7 +251,7 @@ namespace vcsn {
   };
 
 
-  /*! @} @} */
+  /** @} @} */
 
 } // vcsn
 

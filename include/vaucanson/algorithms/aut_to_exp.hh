@@ -45,7 +45,7 @@ namespace vcsn {
    */
 
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /**
    *  @brief Returns a serie which describes the language of the automaton.
@@ -90,7 +90,7 @@ namespace vcsn {
   typename Element<A, T>::series_elt_t
   aut_to_exp(const Element<A, T>& a, const Chooser_& c);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -97,7 +97,7 @@ namespace vcsn {
     MetaElement<algebra::SemigroupBase<Self>, T>(other)
   {}
 
-  //! By default, an element of a monoid is the identity.
+  /// By default, an element of a monoid is the identity.
   template<typename T, typename Self>
   T op_default(SELECTOR(algebra::MonoidBase<Self>), SELECTOR(T))
   { 

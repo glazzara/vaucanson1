@@ -37,13 +37,13 @@
 
 namespace std {
 
-  //! To display a single pair
-  //! It assumes that each element of the pair is printable
-  //! (i.e. the operator << is defined on it)
+  /// To display a single pair
+  /// It assumes that each element of the pair is printable
+  /// (i.e. the operator << is defined on it)
   template <typename U, typename V>
   ostream& operator<<(ostream& o, pair<U, V> p);
 
-  //! To display a basic_string of pair (idem)
+  /// To display a basic_string of pair (idem)
   template <typename U, typename V, class Traits, class Allocator>
   ostream& operator<<(ostream& o,
 		      basic_string<pair<U, V>, Traits, Allocator> s);

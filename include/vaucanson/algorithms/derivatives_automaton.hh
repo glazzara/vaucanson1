@@ -45,9 +45,9 @@ namespace vcsn {
    */
 
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! Convert a krat expression into an automaton using Brzozowski construction.
+  /// Convert a krat expression into an automaton using Brzozowski construction.
 
   /** 
    * @brief Convert a krat expression into an automaton using derivatives.
@@ -78,7 +78,7 @@ namespace vcsn {
   Element<A, T>
   derivatives_automaton(const Exp& e);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

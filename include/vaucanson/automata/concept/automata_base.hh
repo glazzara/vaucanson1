@@ -38,14 +38,14 @@
 
 namespace vcsn {
 
-  /*! \addtogroup automata */  /* @{ */
-  /*! \addtogroup concept  */  /* @{ */
+  /** @addtogroup automata */  /** @{ */
+  /** @addtogroup concept  */  /** @{ */
 
   /*-------------------.
   | AutomataBase<Self> |
   `-------------------*/
-  //! The most general concept of automaton. 
-  /*! It symbolises the set of automata with multiplicity over a fixed
+  /// The most general concept of automaton. 
+  /** It symbolises the set of automata with multiplicity over a fixed
     semiring and a fixed free monoid. Note that this class is abstract
     in the hierarchy.
   */
@@ -54,18 +54,18 @@ namespace vcsn {
     : Structure<Self>
   {
   public:
-    //! The type of the series set associated with the automaton.
+    /// The type of the series set associated with the automaton.
     typedef typename virtual_types<Self>::series_t  series_t;
 
   protected:
-    //! The default constructor is protected since it is an abstract class.
+    /// The default constructor is protected since it is an abstract class.
     AutomataBase();
 
-    //! The copy constructor is protected since it is an abstract class.
+    /// The copy constructor is protected since it is an abstract class.
     AutomataBase(const AutomataBase& other);
 
   public:
-    //! Accessor to the set of series of the automaton.
+    /// Accessor to the set of series of the automaton.
     const series_t& series() const;
   };
 
@@ -111,8 +111,8 @@ namespace vcsn {
   /*-----------------------------------.
   | MetaElement<AutomataBase<Self>, T> |
   `-----------------------------------*/
-  //! Services of every element of the automata set. 
-  /*! MetaElement<AutomataBase<Self>, T> defines the interface of
+  /// Services of every element of the automata set. 
+  /** MetaElement<AutomataBase<Self>, T> defines the interface of
     every automaton that is the result of the interaction of a
     structural element (AutomataBase<Self>) and an implementation T.
     
@@ -129,210 +129,210 @@ namespace vcsn {
   struct MetaElement<AutomataBase<Self>, T>
     : MetaElement<Structure<Self>, T>
   {
-    /*! type of the interface of an automaton. */
+    /** type of the interface of an automaton. */
     typedef MetaElement<AutomataBase<Self>, T>		      self_t;
 
-    /*! type the series set from which is build the automaton. */
+    /** type the series set from which is build the automaton. */
     typedef typename AutomataBase<Self>::series_t	      series_t;
 
-    /*! type of the implementation of series that holds the automaton. */
+    /** type of the implementation of series that holds the automaton. */
     typedef typename automaton_traits<T>::serie_value_t      serie_value_t;
 
-    /*! type of the element of the set of series that holds the automaton. */
+    /** type of the element of the set of series that holds the automaton. */
     typedef Element<series_t, serie_value_t>		      series_elt_t;
     typedef Element<series_t, serie_value_t>		      series_elt_t;
 
-    /*! type of the free monoid. */
+    /** type of the free monoid. */
     typedef typename series_t::monoid_t			      monoid_t;
 
-    /*! type of the free monoid element. */
+    /** type of the free monoid element. */
     typedef typename series_elt_t::monoid_elt_t		      monoid_elt_t;
 
-    /*! type of the implementation of a word. */
+    /** type of the implementation of a word. */
     typedef typename monoid_elt_t::value_t		   monoid_elt_value_t;
 
-    /*! type of the letter. */
+    /** type of the letter. */
     typedef typename monoid_t::letter_t			      letter_t;
 
-    /*! type of the semiring set. */
+    /** type of the semiring set. */
     typedef typename series_t::semiring_t		      semiring_t;
 
-    /*! type of the free monoid element. */
+    /** type of the free monoid element. */
     typedef typename series_elt_t::semiring_elt_t	      semiring_elt_t;
 
-    /*! type of the implementation of a semiring_elt. */
+    /** type of the implementation of a semiring_elt. */
     typedef typename series_elt_t::semiring_elt_value_t	     semiring_elt_value_t;
 
-    /*! type of additional information that is aggregated to the automaton. */
+    /** type of additional information that is aggregated to the automaton. */
     typedef typename automaton_traits<T>::tag_t		      tag_t;
 
-    /*! type of the label of the automaton implementation. */
+    /** type of the label of the automaton implementation. */
     typedef typename automaton_traits<T>::label_t	      label_t;
 
-    /*! type of the states container. */
+    /** type of the states container. */
     typedef typename automaton_traits<T>::states_t	      states_t;
 
-    /*! type of the iterator over the states set. */
+    /** type of the iterator over the states set. */
     typedef typename automaton_traits<T>::state_iterator     state_iterator;
 
-    /*! type of the edges set. */
+    /** type of the edges set. */
     typedef typename automaton_traits<T>::edges_t	      edges_t;
 
-    /*! type of the iterator over the edges. */
+    /** type of the iterator over the edges. */
     typedef typename automaton_traits<T>::edge_iterator      edge_iterator;
 
-    /*! type of the initial application. */
+    /** type of the initial application. */
     typedef typename automaton_traits<T>::initial_t	      initial_t;
 
-    /*! type of the initial application support. */
+    /** type of the initial application support. */
     typedef typename automaton_traits<T>::initial_support_t  initial_support_t;
 
-    /*! type of the iterator of the initial application support. */
+    /** type of the iterator of the initial application support. */
     typedef typename automaton_traits<T>::initial_iterator    initial_iterator;
 
-    /*! type of the final application. */
+    /** type of the final application. */
     typedef typename automaton_traits<T>::final_t	      final_t;
 
-    /*! type of the iterator of the final application support. */
+    /** type of the iterator of the final application support. */
     typedef typename automaton_traits<T>::final_iterator      final_iterator;
 
-    /*! the set of series from which is build the automaton (const version). */
+    /** the set of series from which is build the automaton (const version). */
     const series_t& series() const;
 
-    /*! the optional information aggregated to the automaton. */
+    /** the optional information aggregated to the automaton. */
     tag_t& tag();
 
-    /*! the optional information aggregated to the automaton. */
+    /** the optional information aggregated to the automaton. */
     const tag_t& tag() const;
 
-    /*! return true if the automaton is consistent. */
+    /** return true if the automaton is consistent. */
     bool exists() const;
 
-    /*! accessor to the set of states. (const version) */
+    /** accessor to the set of states. (const version) */
     typename automaton_traits<T>::states_t
     states() const;
 
-    /*! accessor to the set of states. (const version) */
+    /** accessor to the set of states. (const version) */
     typename automaton_traits<T>::edges_t
     edges() const;
 
-    /*! accessor to the initial application. */
+    /** accessor to the initial application. */
     typename automaton_traits<T>::initial_support_t
     initial() const;
 
-    /*! accessor to the final application. */
+    /** accessor to the final application. */
     typename automaton_traits<T>::final_support_t
     final() const;
     
-    /*! return true if the state is initial (ie it is in the initial
+    /** return true if the state is initial (ie it is in the initial
       support) . */
     bool is_initial(hstate_t state) const;
 
-    /*! return true if the state is final (ie it is in the final support). */
+    /** return true if the state is final (ie it is in the final support). */
     bool is_final(hstate_t state) const;
 
-    /*! set the state to be initial. */
+    /** set the state to be initial. */
     void set_initial(hstate_t state);
 
-    /*! set an initial multiplicity to the state. */
+    /** set an initial multiplicity to the state. */
     void set_initial(hstate_t state, const series_elt_t& m);
    
-    /*! set the state to be final. */
+    /** set the state to be final. */
     void set_final(hstate_t state);
 
-    /*! set a final multiplicity to the state. */
+    /** set a final multiplicity to the state. */
     void set_final(hstate_t state, const series_elt_t& m);
 
-    /*! set the state not to be initial. */
+    /** set the state not to be initial. */
     void unset_initial(hstate_t state);
 
-    /*! set the set not to be final. */
+    /** set the set not to be final. */
     void unset_final(hstate_t state);
 
-    /*! make the support of the initial application to be empty. */
+    /** make the support of the initial application to be empty. */
     void clear_initial();
 
-    /*! make the support of the final application to be empty. */
+    /** make the support of the final application to be empty. */
     void clear_final();
 
-    /*! return the initial multiplicity of the state. */
+    /** return the initial multiplicity of the state. */
     Element<series_t, serie_value_t>
     get_initial(hstate_t state) const;
 
-    /*! return the final multiplicity of the state. */
+    /** return the final multiplicity of the state. */
     Element<series_t, serie_value_t>
     get_final(hstate_t what) const;
 
-    /*! add a new state to the automaton. */
+    /** add a new state to the automaton. */
     hstate_t add_state();
 
-    /*! return a randomly chosen state. (valid only if the automaton
+    /** return a randomly chosen state. (valid only if the automaton
       is not empty) */
     hstate_t choose_state() const;
 
-    /*! add a new edge between 'from' and 'to' labelled by 'label' */
+    /** add a new edge between 'from' and 'to' labelled by 'label' */
     hedge_t add_edge(hstate_t from, hstate_t to, const label_t& label);
 
-    /*! add an edge using a serie. */
-    /*! If the underlying implementation is not sufficiently general
+    /** add an edge using a serie. */
+    /** If the underlying implementation is not sufficiently general
      *  to support this operation, you will have several edges created.*/
     hedge_t add_serie_edge(hstate_t from, hstate_t to, const series_elt_t& e);
 
-    /*! add a spontaneous transition between 'from' and 'to'. */
+    /** add a spontaneous transition between 'from' and 'to'. */
     hedge_t add_spontaneous(hstate_t from, hstate_t to, 
 			    const semiring_elt_t& w);
 
     hedge_t add_spontaneous(hstate_t from, hstate_t to);
 
-    /*! add a transition between 'from' and 'to' labelled by a letter. */
+    /** add a transition between 'from' and 'to' labelled by a letter. */
     hedge_t add_letter_edge(hstate_t from, hstate_t to,
 			    const letter_t& l);
 
-    /*! update the label of an edge. */
+    /** update the label of an edge. */
     void update(hedge_t e, const label_t& l);
 
-    /*! delete the state 's'. */
+    /** delete the state 's'. */
     void del_state(hstate_t s);
 
-    /*! delete the edge 'e'. */
+    /** delete the edge 'e'. */
     void del_edge(hedge_t e);
 
-    /*! delete the state 's' and every references to it in the automaton. */
+    /** delete the state 's' and every references to it in the automaton. */
     void safe_del_state(hstate_t s);
 
-    /*! check if the state 's' is in the automaton. */
+    /** check if the state 's' is in the automaton. */
     bool has_state(hstate_t s) const;
 
-    /*! check if the edge 'e' is in the automaton. */
+    /** check if the edge 'e' is in the automaton. */
     bool has_edge(hedge_t e) const;
 
-    /*! return the origin of the edge 'e'. */
+    /** return the origin of the edge 'e'. */
     hstate_t origin_of(hedge_t e) const;
 
-    /*! return the aim of the edge 'e'. */
+    /** return the aim of the edge 'e'. */
     hstate_t aim_of(hedge_t e) const;
 
-    /*! return the label of the edge 'e'. */
+    /** return the label of the edge 'e'. */
     typename automaton_traits<T>::label_t
     label_of(hedge_t e) const;
 
-    /*! return the label seen as a serie. */
+    /** return the label seen as a serie. */
     series_elt_t serie_of(hedge_t e) const;
 
-    /*! return the label seen as a serie implementation. */
+    /** return the label seen as a serie implementation. */
     serie_value_t serie_value_of(hedge_t e) const;
 
-    /*! return true if the transition is spontaneous. */
+    /** return true if the transition is spontaneous. */
     bool is_spontaneous(hedge_t e) const;
 
-    /*! return the label seen as a word. */
+    /** return the label seen as a word. */
     monoid_elt_t word_of(hedge_t e) const;
 
-    /*! returns the label seen as word implementation. */
+    /** returns the label seen as word implementation. */
     monoid_elt_value_t word_value_of(hedge_t e) const;
 
-    /*! return the label seen as a letter. */
-    /*! Becareful, when you have more general label this method is
+    /** return the label seen as a letter. */
+    /** Becareful, when you have more general label this method is
      *! probably invalidated (in that case, an exception should be
      *! raised.) */
     letter_t letter_of(hedge_t e) const;
@@ -341,13 +341,13 @@ namespace vcsn {
     // output_type        = hedge_t
     // direction	  = output
 
-    /*! store the output edges of the state 'from' using 'res'. */
+    /** store the output edges of the state 'from' using 'res'. */
     template <typename OutputIterator>					
     void delta(OutputIterator res, 
 	       hstate_t from, 
 	       delta_kind::edges k) const;
 
-    /*! store the output edges of the state 'from' where
+    /** store the output edges of the state 'from' where
         query(a.set(), a.value(), e)) = true using 'res'. */
     template <typename OutputIterator, typename L>	
     void delta(OutputIterator res, 
@@ -355,7 +355,7 @@ namespace vcsn {
 	       const L& query,
 	       delta_kind::edges k) const;
 
-    /*! store the output edges of the state 'from' where
+    /** store the output edges of the state 'from' where
       the label matches the letter. */
     template <typename OutputIterator, typename L>	
     void letter_delta(OutputIterator res, 
@@ -363,7 +363,7 @@ namespace vcsn {
 		      const L& letter,
 		      delta_kind::edges k) const;
 
-    /*! store the output spontaneous transitions. */
+    /** store the output spontaneous transitions. */
     template <typename OutputIterator>
     void spontaneous_delta(OutputIterator res, 
 			   hstate_t from, 
@@ -373,12 +373,12 @@ namespace vcsn {
     // output_type        = hedge_t
     // direction	  = output
 
-    /*! store the output edges of the state 'from' in the container
+    /** store the output edges of the state 'from' in the container
       'res' */
     template <typename Container>
     void deltac(Container& res, hstate_t from, delta_kind::edges k) const;
 
-    /*! store the output edges of the state 'from' where
+    /** store the output edges of the state 'from' where
       query(label(e)) = true in the container 'res' */
     template <typename Container, typename L>	
     void deltac(Container& res, 
@@ -386,7 +386,7 @@ namespace vcsn {
 	       const L& query,
 	       delta_kind::edges k) const;
 
-    /*! store the output edges of the state 'from' where
+    /** store the output edges of the state 'from' where
       query(label(e)) = true in the container 'res' */
     template <typename Container, typename L>	
     void letter_deltac(Container& res, 
@@ -394,7 +394,7 @@ namespace vcsn {
 		       const L& letter,
 		       delta_kind::edges k) const;
 
-    /*! store the output spontaneous transitions. */
+    /** store the output spontaneous transitions. */
     template <typename Container>
     void spontaneous_deltac(Container& res, 
 			    hstate_t from, 
@@ -404,13 +404,13 @@ namespace vcsn {
     // output_type        = hstate_t
     // direction	  = output
 
-    /*! store the output states of the state 'from' using 'res'. */
+    /** store the output states of the state 'from' using 'res'. */
     template <typename OutputIterator>					
     void delta(OutputIterator res, 
 	       hstate_t from, 
 	       delta_kind::states k) const;
 
-    /*! store the output states of the state 'from' where
+    /** store the output states of the state 'from' where
         query(label(e)) = true using 'res'. */
     template <typename OutputIterator, typename L>	
     void delta(OutputIterator res, 
@@ -418,7 +418,7 @@ namespace vcsn {
 	       const L& query,
 	       delta_kind::states k) const;
 
-    /*! store the output states of the state 'from' where
+    /** store the output states of the state 'from' where
       the label matches the letter. */
     template <typename OutputIterator, typename L>	
     void letter_delta(OutputIterator res, 
@@ -426,7 +426,7 @@ namespace vcsn {
 		      const L& letter,
 		      delta_kind::states k) const;
 
-    /*! store the output spontaneous transitions. */
+    /** store the output spontaneous transitions. */
     template <typename OutputIterator>
     void spontaneous_delta(OutputIterator res, 
 			   hstate_t from, 
@@ -436,12 +436,12 @@ namespace vcsn {
     // output_type        = hstate_t
     // direction	  = output
 
-    /*! store the output states of the state 'from' in the container
+    /** store the output states of the state 'from' in the container
       'res' */
     template <typename Container>
     void deltac(Container& res, hstate_t from, delta_kind::states k) const;
 
-    /*! store the output states of the state 'from' where
+    /** store the output states of the state 'from' where
       query(label(e)) = true in the container 'res' */
     template <typename Container, typename L>	
     void deltac(Container& res, 
@@ -449,7 +449,7 @@ namespace vcsn {
 	       const L& query,
 	       delta_kind::states k) const;
 
-    /*! store the output states of the state 'from' where
+    /** store the output states of the state 'from' where
       query(label(e)) = true in the container 'res' */
     template <typename Container, typename L>	
     void letter_deltac(Container& res, 
@@ -457,7 +457,7 @@ namespace vcsn {
 		       const L& letter,
 		       delta_kind::states k) const;
 
-    /*! store the output spontaneous transitions. */
+    /** store the output spontaneous transitions. */
     template <typename Container>
     void spontaneous_deltac(Container& res, 
 			    hstate_t from, 
@@ -467,13 +467,13 @@ namespace vcsn {
     // output_type        = hedge_t
     // direction	  = input
 
-    /*! store the output edges of the state 'from' using 'res'. */
+    /** store the output edges of the state 'from' using 'res'. */
     template <typename OutputIterator>					
     void rdelta(OutputIterator res, 
 		hstate_t from, 
 		delta_kind::edges k) const;
 
-    /*! store the output edges of the state 'from' where
+    /** store the output edges of the state 'from' where
         query(label(e)) = true using 'res'. */
     template <typename OutputIterator, typename L>	
     void rdelta(OutputIterator res, 
@@ -481,7 +481,7 @@ namespace vcsn {
 	       const L& query,
 	       delta_kind::edges k) const;
 
-    /*! store the output edges of the state 'from' where
+    /** store the output edges of the state 'from' where
       the label matches the letter. */
     template <typename OutputIterator, typename L>	
     void letter_rdelta(OutputIterator res, 
@@ -489,7 +489,7 @@ namespace vcsn {
 		      const L& letter,
 		      delta_kind::edges k) const;
 
-    /*! store the output spontaneous transitions. */
+    /** store the output spontaneous transitions. */
     template <typename OutputIterator>
     void spontaneous_rdelta(OutputIterator res, 
 			   hstate_t from, 
@@ -499,12 +499,12 @@ namespace vcsn {
     // output_type        = hedge_t
     // direction	  = input
 
-    /*! store the output edges of the state 'from' in the container
+    /** store the output edges of the state 'from' in the container
       'res' */
     template <typename Container>
     void rdeltac(Container& res, hstate_t from, delta_kind::edges k) const;
 
-    /*! store the output edges of the state 'from' where
+    /** store the output edges of the state 'from' where
       query(label(e)) = true in the container 'res' */
     template <typename Container, typename L>	
     void rdeltac(Container& res, 
@@ -512,7 +512,7 @@ namespace vcsn {
 	       const L& query,
 	       delta_kind::edges k) const;
 
-    /*! store the output edges of the state 'from' where
+    /** store the output edges of the state 'from' where
       query(label(e)) = true in the container 'res' */
     template <typename Container, typename L>	
     void letter_rdeltac(Container& res, 
@@ -520,7 +520,7 @@ namespace vcsn {
 		       const L& letter,
 		       delta_kind::edges k) const;
 
-    /*! store the output spontaneous transitions. */
+    /** store the output spontaneous transitions. */
     template <typename Container>
     void spontaneous_rdeltac(Container& res, 
 			    hstate_t from, 
@@ -531,13 +531,13 @@ namespace vcsn {
     // output_type        = hstate_t
     // direction	  = input
 
-    /*! store the output states of the state 'from' using 'res'. */
+    /** store the output states of the state 'from' using 'res'. */
     template <typename OutputIterator>					
     void rdelta(OutputIterator res, 
 	       hstate_t from, 
 	       delta_kind::states k) const;
 
-    /*! store the output states of the state 'from' where
+    /** store the output states of the state 'from' where
         query(label(e)) = true using 'res'. */
     template <typename OutputIterator, typename L>	
     void rdelta(OutputIterator res, 
@@ -545,7 +545,7 @@ namespace vcsn {
 	       const L& query,
 	       delta_kind::states k) const;
 
-    /*! store the output states of the state 'from' where
+    /** store the output states of the state 'from' where
       the label matches the letter. */
     template <typename OutputIterator, typename L>	
     void letter_rdelta(OutputIterator res, 
@@ -553,7 +553,7 @@ namespace vcsn {
 		      const L& letter,
 		      delta_kind::states k) const;
 
-    /*! store the output spontaneous transitions. */
+    /** store the output spontaneous transitions. */
     template <typename OutputIterator>
     void spontaneous_rdelta(OutputIterator res, 
 			   hstate_t from, 
@@ -563,12 +563,12 @@ namespace vcsn {
     // output_type        = hstate_t
     // direction	  = input
 
-    /*! store the output states of the state 'from' in the container
+    /** store the output states of the state 'from' in the container
       'res' */
     template <typename Container>
     void rdeltac(Container& res, hstate_t from, delta_kind::states k) const;
 
-    /*! store the output states of the state 'from' where
+    /** store the output states of the state 'from' where
       query(label(e)) = true in the container 'res' */
     template <typename Container, typename L>	
     void rdeltac(Container& res, 
@@ -576,7 +576,7 @@ namespace vcsn {
 	       const L& query,
 	       delta_kind::states k) const;
 
-    /*! store the output states of the state 'from' where
+    /** store the output states of the state 'from' where
       query(label(e)) = true in the container 'res' */
     template <typename Container, typename L>	
     void letter_rdeltac(Container& res, 
@@ -584,7 +584,7 @@ namespace vcsn {
 		       const L& letter,
 		       delta_kind::states k) const;
 
-    /*! store the output spontaneous transitions. */
+    /** store the output spontaneous transitions. */
     template <typename Container>
     void spontaneous_rdeltac(Container& res, 
 			    hstate_t from, 
@@ -595,7 +595,7 @@ namespace vcsn {
     MetaElement(const MetaElement& other);
   };
 
-  /*! @} @} */
+  /** @} @} */
 
   template <typename S, typename St, typename T>
   St& op_rout(const AutomataBase<S>& s, St& st, const T& r);

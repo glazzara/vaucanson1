@@ -41,7 +41,7 @@
 
 namespace vcsn {
 
-/*! @addtogroup design_pattern *//*!@{*/
+/** @addtogroup design_pattern *//**@{*/
 
   /*------------------------------.
   | Basic class for SetSlot below |
@@ -70,12 +70,12 @@ namespace vcsn {
   template<typename S, bool dynamic /* default: false */>
   struct SetSlotAttribute
   {
-    //! @{
-    //! Trivial constructor. 
+    /// @{
+    /// Trivial constructor. 
     SetSlotAttribute();
     SetSlotAttribute(const SetSlotAttribute& other);
     SetSlotAttribute(const S& other);
-    //! @}
+    /// @}
 
     /** Access to the instance of the structural element. 
      *
@@ -87,19 +87,19 @@ namespace vcsn {
      */
     const S&	get() const;
 
-    //! @{
+    /// @{
     /**
      * Because this version of the class pertains to static S.E.'s,
      * this method actually does nothing and calls to it should be
      * optimized away.
      */
 
-    //! Link a set slot to another.
+    /// Link a set slot to another.
     void	assign(const SetSlotAttribute& other);
 
-    //! Link a set slot to a structural element.
+    /// Link a set slot to a structural element.
     void	attach(const S& other);
-    //! @}
+    /// @}
 
     /** Tell whether the current set slot is linked to a structural element or not.
      *
@@ -120,7 +120,7 @@ namespace vcsn {
   template<typename S>
   struct SetSlotAttribute<S, true>
   {
-    //! Default constructor. Initialize with a NULL reference.
+    /// Default constructor. Initialize with a NULL reference.
     SetSlotAttribute();
 
     /** Copy constructor.
@@ -141,10 +141,10 @@ namespace vcsn {
      */
     SetSlotAttribute(const S& other);
 
-    //! Retrieve the structural element reference from the attribute.
+    /// Retrieve the structural element reference from the attribute.
     const S&	get() const;
 
-    //! @{
+    /// @{
     /** Update the reference in the slot.
      *
      * This method updates the S.E. reference in the attribute with
@@ -152,13 +152,13 @@ namespace vcsn {
      */
     void	assign(const SetSlotAttribute& other);
     void	attach(const S& s);
-    //! @}
+    /// @}
 
-    //! Tell whether the reference to the structural element is valid or not (NULL).
+    /// Tell whether the reference to the structural element is valid or not (NULL).
     bool	bound() const;
     
   protected:
-    const S*	s_; //!< The actual reference to a structural element.
+    const S*	s_; ///< The actual reference to a structural element.
   };
 
 
@@ -184,16 +184,16 @@ namespace vcsn {
   template<typename S>
   struct SetSlot : SetSlotAttribute<S, dynamic_traits<S>::ret>
   {
-    //! @{
-    //! Trivial constructor. Calls the inherited constructor from 
-    //! @c SetSlotAttribute.
+    /// @{
+    /// Trivial constructor. Calls the inherited constructor from 
+    /// @c SetSlotAttribute.
     SetSlot();
     SetSlot(const SetSlot& other);
     SetSlot(const S& other);
-    //! @}
+    /// @}
   };
 
-  //! @}
+  /// @}
 
 }
 

@@ -35,23 +35,23 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! The c-derivative of the krat expression w.r.t to a letter.
+  /// The c-derivative of the krat expression w.r.t to a letter.
   // INTERFACE: Exp cderivate(const Exp& e, char l) { return vcsn::cderivate(e, l); }
   template <class Series, class T, class Letter>
   Element<Series, T>
   cderivate(const Element<Series, T>& exp, 
 	   Letter a);
 
-  //! The c-derivative of the krat expression w.r.t to a word.
+  /// The c-derivative of the krat expression w.r.t to a word.
   // INTERFACE: Exp cderivate(const Exp& e, const std::string& w) { return vcsn::word_cderivate(e, Serie::monoid_elt_t(e.set().monoid(), w)); }
   template <class Series, class T, class Word>
   Element<Series, T>
   word_cderivate(const Element<Series, T>& exp, 
 		Word a);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -43,11 +43,11 @@ namespace vcsn {
    * 
    */
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! Return the image of the word in the automaton.
+  /// Return the image of the word in the automaton.
 
-  /*! eval(a, w) returns a serie that is the image of the word 'w'
+  /** eval(a, w) returns a serie that is the image of the word 'w'
     in the automaton. This version of computation is the most general
     one : it works on every types of automaton, deterministic or not. 
     Yet, the automaton must be realtime.
@@ -71,7 +71,7 @@ namespace vcsn {
   typename Element<A, T>::semiring_elt_t
   eval(const Element<A, T>& a, const W& word);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

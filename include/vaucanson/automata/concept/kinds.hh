@@ -85,8 +85,8 @@ namespace vcsn {
   /*--------------------------------.
   | AutoKind<labels_are_series ...> |
   `--------------------------------*/
-  //! Add adapted accessors in function of the automaton kind.
-  /*! AutoKind adds methods to automaton adapted to the kind of label
+  /// Add adapted accessors in function of the automaton kind.
+  /** AutoKind adds methods to automaton adapted to the kind of label
     that are held by the internal data structure. Indeed, label can be
     either series element or things from which series elements can be
     build. In the latter case, we have to insert a series construction

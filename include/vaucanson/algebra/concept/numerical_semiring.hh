@@ -36,30 +36,30 @@ namespace vcsn {
 
   namespace algebra {
     
-    /*! \addtogroup algebra */  /* @{ */
-    /*! \addtogroup semiring */ /* @{ */
+    /** @addtogroup algebra */  /** @{ */
+    /** @addtogroup semiring */ /** @{ */
     
     /*------------------.
     | NumericalSemiring |
     `------------------*/
-    //! NumericalSemiring is the set of semirings implemented with 
-    //! usual operations (+, *).
+    /// NumericalSemiring is the set of semirings implemented with 
+    /// usual operations (+, *).
     struct NumericalSemiring
       : SemiringBase<NumericalSemiring>
     { };
 
-    /*! @} @} */
+    /** @} @} */
 
   } // algebra
   
-  /*! \addtogroup algebra */  /* @{ */
-  /*! \addtogroup semiring */ /* @{ */
+  /** @addtogroup algebra */  /** @{ */
+  /** @addtogroup semiring */ /** @{ */
   
   /*---------------------------.
   | dynamic_traits<NumericalSemiring> |
   `---------------------------*/
-  //! dynamic_traits<NumericalSemiring> defines meta information about then
-  //! NumericalSemiring structural element. 
+  /// dynamic_traits<NumericalSemiring> defines meta information about then
+  /// NumericalSemiring structural element. 
   template<>
   struct dynamic_traits<algebra::NumericalSemiring>
     : dynamic_traits<algebra::SemiringBase<algebra::NumericalSemiring> >
@@ -71,19 +71,19 @@ namespace vcsn {
   struct virtual_types<algebra::NumericalSemiring>
     : virtual_types<algebra::SemiringBase<algebra::NumericalSemiring> >
   {
-    //! We can see a NumericalSemiring as a semigroup with +. It is
-    //! an arbitrary decision, it could be mul_kind too.
+    /// We can see a NumericalSemiring as a semigroup with +. It is
+    /// an arbitrary decision, it could be mul_kind too.
     typedef           algebra::add_kind    semigroup_kind;
   };
 
-  //! MetaElement<NumericalSemiring, T> defines the services of
-  //! element of numerical semirings. 
+  /// MetaElement<NumericalSemiring, T> defines the services of
+  /// element of numerical semirings. 
   template<typename T>
   struct MetaElement<algebra::NumericalSemiring, T>
     : MetaElement<algebra::SemiringBase<algebra::NumericalSemiring>, T>
   {};
 
-  /*! @} @} */
+  /** @} @} */
 
 } // vcsn
 

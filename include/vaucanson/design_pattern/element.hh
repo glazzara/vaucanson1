@@ -205,7 +205,7 @@ namespace vcsn {
     T			value_;
   };
 
-  //! @}
+  /// @}
 
 } // vcsn
 

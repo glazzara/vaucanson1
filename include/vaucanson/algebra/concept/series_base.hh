@@ -36,45 +36,45 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*! \addtogroup algebra */  /* @{ */
-    /*! \addtogroup series */ /* @{ */
+    /** @addtogroup algebra */  /** @{ */
+    /** @addtogroup series */ /** @{ */
 
     /*-----------------.
     | SeriesBase<Self> |
     `-----------------*/
-    //! Structural element of series K<A*> from a free monoid A* to a
-    //! semiring K.
+    /// Structural element of series K<A*> from a free monoid A* to a
+    /// semiring K.
     template<class Self>
     struct SeriesBase 
       : SemiringBase<Self>
     {
-      //! The type of the free monoid A*.
+      /// The type of the free monoid A*.
       typedef typename virtual_types<Self>::monoid_t  monoid_t;
 
-      //! The type of the semiring K.
+      /// The type of the semiring K.
       typedef typename virtual_types<Self>::semiring_t semiring_t;
 
-      //! Accessor to the monoid (const version).
+      /// Accessor to the monoid (const version).
       const monoid_t&	monoid() const;      
 
-      //! Accessor to the semiring (const version).
+      /// Accessor to the semiring (const version).
       const semiring_t&  semiring() const;
 
-      //! Accessor to the monoid.
+      /// Accessor to the monoid.
       monoid_t&		monoid();
 
-      //! Accessor to the semiring.      
+      /// Accessor to the semiring.      
       semiring_t&	semiring(); 
 
     protected:
-      //! Default constructor is protected since it is an abstract class.
+      /// Default constructor is protected since it is an abstract class.
       SeriesBase();
 
-      //! Copy constructor is protected since it is an abstract class.
+      /// Copy constructor is protected since it is an abstract class.
       SeriesBase(const SeriesBase& other);
     };
 
-    //! Meta information about series.
+    /// Meta information about series.
     template<typename T>
     struct series_traits
     {
@@ -94,12 +94,12 @@ namespace vcsn {
       typedef undefined_type    ret;
     };
 
-    /*! @} @} */
+    /** @} @} */
 
   } // algebra
 
-  /*! \addtogroup algebra */  /* @{ */
-  /*! \addtogroup series */ /* @{ */
+  /** @addtogroup algebra */  /** @{ */
+  /** @addtogroup series */ /** @{ */
 
   /*----------------------------------.
   | dynamic_traits<SeriesBase<Self> > |
@@ -120,88 +120,88 @@ namespace vcsn {
   /*---------------------------------.
   | MetaElement<SeriesBase<Self>, T> |
   `---------------------------------*/
-  //! Services of every serie.
+  /// Services of every serie.
   template<class Self, typename T>
   class MetaElement<algebra::SeriesBase<Self>, T> 
     : public MetaElement<algebra::SemiringBase<Self>, T>
   {
   public:
-    //! type of the implementation of semiring_elt (element of semiring).
+    /// type of the implementation of semiring_elt (element of semiring).
     typedef typename algebra::series_traits<T>::semiring_elt_value_t   semiring_elt_value_t;
 
-    //! type of the implementation of free monoid element.
+    /// type of the implementation of free monoid element.
     typedef typename algebra::series_traits<T>::monoid_value_t    monoid_value_t;
 
-    //! type of the element of the semiring element.
+    /// type of the element of the semiring element.
     typedef Element<typename Self::semiring_t, semiring_elt_value_t> semiring_elt_t;
 
-    //! type of the element of the monoid.
+    /// type of the element of the monoid.
     typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
 
-    //! type of the serie.
+    /// type of the serie.
     typedef Element<Self, T>				 element_t;
 
-    //! type of the iterator over the series when finite.
+    /// type of the iterator over the series when finite.
     typedef typename algebra::series_traits<T>::support_t	support_t;
 
-    //! returns the weight associated to a word. 
+    /// returns the weight associated to a word. 
     semiring_elt_value_t	value_get(const monoid_value_t& m) const;
 
-    //! returns the weight associated to a word. 
+    /// returns the weight associated to a word. 
     semiring_elt_t		get(const monoid_elt_t& m) const;
 
-    //! associates a semiring_elt to a word. 
+    /// associates a semiring_elt to a word. 
     void		value_set(const monoid_value_t& m, 
 				  const semiring_elt_value_t& w);
 
-    //! associates a weight to a word. 
+    /// associates a weight to a word. 
     void		assoc(const monoid_elt_t& m, const semiring_elt_t& w);
 
-    //! returns true if the serie support is finite.
+    /// returns true if the serie support is finite.
     bool		is_finite_app() const;
 
-    //! returns a word that is in the support of the serie.
+    /// returns a word that is in the support of the serie.
     monoid_elt_t	choose_from_supp() const;
 
-    //! in-place transpose transformation of the serie.
+    /// in-place transpose transformation of the serie.
     void       	        transpose();
 
-    //! returns a container which is the support of the serie.
-    //! The container elements are couples (m, k) where m is in
-    //! the support and k is the image of m by the serie.
-    //! The support is accessible only if is_finite_app is true.
+    /// returns a container which is the support of the serie.
+    /// The container elements are couples (m, k) where m is in
+    /// the support and k is the image of m by the serie.
+    /// The support is accessible only if is_finite_app is true.
     support_t		supp() const;
 
   protected:
-    //! Default constructor is protected since it is an abstract class.
+    /// Default constructor is protected since it is an abstract class.
     MetaElement();
 
-    //! Copy constructor is protected since it is an abstract class.
+    /// Copy constructor is protected since it is an abstract class.
     MetaElement(const MetaElement& other);
   };
 
-  //! returns a fresh serie that is the transposed of the argument.
+  /// returns a fresh serie that is the transposed of the argument.
   template <typename S, typename T>
   Element<S, T>
   transpose(const algebra::SeriesBase<S>& s, const T& t);
 
-  //! returns true if the support of the serie is only composed of
-  //! letters.
+  /// returns true if the support of the serie is only composed of
+  /// letters.
   template <typename S, typename T>
   bool
   is_letter_support(const Element<S, T>& s);
 
-  //! make the first serie be the support of the second. 
+  /// make the first serie be the support of the second. 
   template <typename S1, typename S2, typename T1, typename T2>
   void
   extract_support(Element<S1, T1>&, Element<S2, T2>&);
 
-  //! return the hadamard product of lhs and rhs.
+  /// return the hadamard product of lhs and rhs.
   template <class S, class T>
   Element<S, T> hadamard(const Element<S, T>& lhs,
 			 const Element<S, T>& rhs);
   
-  /*! @} @} */
+  /** @} @} */
 
   template <typename S, typename T>
   bool	

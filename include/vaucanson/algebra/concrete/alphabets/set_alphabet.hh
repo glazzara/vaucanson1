@@ -36,40 +36,40 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*! @ingroup alphabet */ /*! @{ */
+    /** @ingroup alphabet */ /** @{ */
 
     /*---------------------------------------------.
     | alphabet_traits<AlphabetSet<L>,std::set<L>> |
     `---------------------------------------------*/
-    //! meta information about the mixing of AlphabetSet with
-    //! std::set.
+    /// meta information about the mixing of AlphabetSet with
+    /// std::set.
     template<typename L>
     struct alphabet_traits<AlphabetSet<L>, std::set<L> >
     {
-      //! The type of letter hold by the alphabet.
+      /// The type of letter hold by the alphabet.
       typedef L			letter_t;
     };
 
-    //! @}
+    /// @}
 
   } // algebra
   
-  /*! @ingroup alphabet */ /*! @{ */
+  /** @ingroup alphabet */ /** @{ */
 
   /*------------------------------------------.
   | MetaElement<AlphabetSet<L>, std::set<L>> |
   `------------------------------------------*/
-  //! Services of every alphabet implemented with std::set.
-  //! See MetaElement<AlphabetSetBase<Self>, T>.
+  /// Services of every alphabet implemented with std::set.
+  /// See MetaElement<AlphabetSetBase<Self>, T>.
   template<typename L>
   struct MetaElement<algebra::AlphabetSet<L>, std::set<L> >
     : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, std::set<L> >
   {
-    //! An alphabet implemented with std::set is a dynamic value.
+    /// An alphabet implemented with std::set is a dynamic value.
     static const bool dynamic_values = true;
   };
   
-  //! @}
+  /// @}
 
   template <typename L>
   bool op_contains(const algebra::AlphabetSet<L>& s, const std::set<L>& a);

@@ -44,12 +44,12 @@ namespace vcsn {
     AutomataBase<Self>(other)
   {}
 
-  /*! */
+  /** */
   template <typename Self, typename T>
   MetaElement<TransducerBase<Self>, T>::MetaElement()
   {}
   
-  /*! copy constructor */
+  /** copy constructor */
   template <typename Self, typename T>
   MetaElement<TransducerBase<Self>, T>::MetaElement(const MetaElement& a):
     MetaElement<AutomataBase<Self>, T>::MetaElement(a)

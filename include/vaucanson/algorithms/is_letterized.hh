@@ -43,7 +43,7 @@
  */
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /** 
    * @brief Test the letter to letter features.
@@ -56,7 +56,7 @@ namespace vcsn {
   bool
   is_letterized_transducer(const Element<S, A>& t);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -45,7 +45,7 @@ namespace vcsn {
    */
 
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /** 
    * @brief Convert a rational expression into a standard automaton.
@@ -73,7 +73,7 @@ namespace vcsn {
   Element<A, T>
   standard_of(const Exp& e);
   
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

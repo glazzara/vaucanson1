@@ -45,7 +45,7 @@ namespace vcsn {
    */
 
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /** 
    * @brief Returns the determinized of a boolean automaton.
@@ -76,7 +76,7 @@ namespace vcsn {
   bool
   is_deterministic(const Element<A, T>& a);
   
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

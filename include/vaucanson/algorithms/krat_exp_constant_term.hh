@@ -35,14 +35,14 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! Return the constant term of the krat expression.
+  /// Return the constant term of the krat expression.
   template <class Series, class T>
   std::pair<typename Element<Series, T>::semiring_elt_t, bool>
   constant_term(const Element<Series, T>& exp);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

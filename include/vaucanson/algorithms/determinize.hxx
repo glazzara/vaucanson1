@@ -161,7 +161,7 @@ namespace vcsn {
 		 const input_t&		input,
 		 std::map<hstate_t, std::set<hstate_t> >& m)
   {
-    /** \bug
+    /** @bug
      * FIXME: for the moment, it uses subset_construction and trim but
      * it must be rewritten to do the twice at the same time more efficiently.
      */

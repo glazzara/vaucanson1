@@ -42,7 +42,7 @@
 
 namespace vcsn {
 
-  /// \bug FIXME: This should be defined differently.
+  /// @bug FIXME: This should be defined differently.
   # define PRODUCT_EVENT	"product"
 
   /*--------.

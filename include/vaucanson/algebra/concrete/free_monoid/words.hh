@@ -38,30 +38,30 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*! @addtogroup algebra    */ /*! @{ */
-    /*! @addtogroup freemonoid */ /*! @{ */
+    /** @addtogroup algebra    */ /** @{ */
+    /** @addtogroup freemonoid */ /** @{ */
 
     /*------------.
     | FreeMonoid<A> |
     `------------*/
-    //! Implementation of a free monoid which aggregates its alphabet.
+    /// Implementation of a free monoid which aggregates its alphabet.
     template<typename A>
     struct FreeMonoid
       : FreeMonoidBase<FreeMonoid<A> >
     {
       typedef A alphabets_elt_t;
 
-      //! Constructor based on an alphabet.
+      /// Constructor based on an alphabet.
       FreeMonoid(const A& a);
 
-      //! Copy constructor.
+      /// Copy constructor.
       FreeMonoid(const FreeMonoid& w);
 
-      //! Alphabet's accessor.
-      //! @bug FIXME: this interface should not exist (s.e. are const once instantiated)
+      /// Alphabet's accessor.
+      /// @bug FIXME: this interface should not exist (s.e. are const once instantiated)
       A&	alphabet();
 
-      //! Alphabet's accessor
+      /// Alphabet's accessor
       const A&	alphabet() const;
 
     protected:
@@ -73,42 +73,42 @@ namespace vcsn {
 		    const FreeMonoid<A>& b);
 
 
-    /*! @} @} */
+    /** @} @} */
 
   };
 
-  /*! @addtogroup algebra    */ /*! @{ */
-  /*! @addtogroup freemonoid */ /*! @{ */
+  /** @addtogroup algebra    */ /** @{ */
+  /** @addtogroup freemonoid */ /** @{ */
 
   /*----------------------.
   | dynamic_traits<FreeMonoid<A> > |
   `----------------------*/
-  //! Meta information about FreeMonoid.
+  /// Meta information about FreeMonoid.
   template<typename A>
   struct dynamic_traits<algebra::FreeMonoid<A> >
     : dynamic_traits<algebra::FreeMonoidBase<algebra::FreeMonoid<A> > >
   {
-    //! SetWord is dynamic iff its alphabet is.
+    /// SetWord is dynamic iff its alphabet is.
     static const bool		ret = A::dynamic;
   };
 
   /*----------------------------.
   | MetaElement<FreeMonoid<A>, T> |
   `----------------------------*/
-  //! Services of an element of a free monoid implemented with
-  //! FreeMonoid.
+  /// Services of an element of a free monoid implemented with
+  /// FreeMonoid.
   template<typename A, typename T>
   struct MetaElement<algebra::FreeMonoid<A>, T>
     : MetaElement<algebra::FreeMonoidBase<algebra::FreeMonoid<A> >, T>
   {};
 
-  /*! @} @} */
+  /** @} @} */
 
   template <class A>
   struct virtual_types<algebra::FreeMonoid<A> >
     : virtual_types<algebra::FreeMonoidBase<algebra::FreeMonoid<A> > >
   {
-    //! Commonly a free monoid use the multiplication symbol as operation.
+    /// Commonly a free monoid use the multiplication symbol as operation.
     typedef algebra::mul_kind semigroup_kind;
 
     typedef A		alphabet_t;

@@ -8,13 +8,13 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! Print a krat expression under several formats.
+  /// Print a krat expression under several formats.
   template<typename Letter, typename Weight>
   void krat_exp_print(const rat::exp<Letter, Weight>& kexp, const unsigned& mode = 0);
   
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

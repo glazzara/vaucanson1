@@ -39,7 +39,7 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /** 
    * Complete the given automaton into a copy to make it close over
@@ -73,7 +73,7 @@ namespace vcsn {
   Element<A, T>
   forward_closure(const Element<A, T>& a);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -36,39 +36,39 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*! \addtogroup algebra */  /* @{ */
-    /*! \addtogroup semigroup */ /* @{ */
+    /** @addtogroup algebra */  /** @{ */
+    /** @addtogroup semigroup */ /** @{ */
 
-    //! Empty class that is used as static information to denotes the
-    //! kind of internal operation of a semigroup. Here:operator*
+    /// Empty class that is used as static information to denotes the
+    /// kind of internal operation of a semigroup. Here:operator*
     struct mul_kind 
     {};
 
-    //! Empty class that is used as static information to denotes the
-    //! kind of internal operation of a semigroup. Here:operator+
+    /// Empty class that is used as static information to denotes the
+    /// kind of internal operation of a semigroup. Here:operator+
     struct add_kind 
     {};
 
-    //! SemigroupBase is the base class of all structures that are semigroups.
-    /*! All derived classes must define type virtual_types<S>::semigroup_kind.
+    /// SemigroupBase is the base class of all structures that are semigroups.
+    /** All derived classes must define type virtual_types<S>::semigroup_kind.
      */
     template<class Self>
     struct SemigroupBase : Structure<Self>
     {
     protected:
-      //! Default constructor is protected since it is an abstract class.
+      /// Default constructor is protected since it is an abstract class.
       SemigroupBase();
 
-      //! Copy constructor is protected since it is an abstract class.
+      /// Copy constructor is protected since it is an abstract class.
       SemigroupBase(const SemigroupBase& other);
     };
 
-    /*! @} @} */
+    /** @} @} */
 
   } // algebra
 
-  /*! \addtogroup algebra */  /* @{ */
-  /*! \addtogroup semigroup */ /* @{ */
+  /** @addtogroup algebra */  /** @{ */
+  /** @addtogroup semigroup */ /** @{ */
 
   /*------------------------------.
   | dynamic_traits<SemigroupBase<Self> > |
@@ -89,20 +89,20 @@ namespace vcsn {
   /*-----------------------------------.
   | MetaElement<SemigroupBase<Self>,T> |
   `-----------------------------------*/
-  //! Services of every element of a semigroup.
+  /// Services of every element of a semigroup.
   template<class Self, typename T>
   struct MetaElement<algebra::SemigroupBase<Self>, T>
     : MetaElement<Structure<Self>, T>
   {
   protected:
-    //! Default constructor is protected since it is an abstract class.
+    /// Default constructor is protected since it is an abstract class.
     MetaElement();
 
-    //! Copy constructor is protected since it is an abstract class.
+    /// Copy constructor is protected since it is an abstract class.
     MetaElement(const MetaElement& other);
   };
 
-  /*! @} @} */
+  /** @} @} */
   
 } // vcsn
 

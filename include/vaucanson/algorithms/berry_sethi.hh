@@ -35,16 +35,16 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! Convert a krat expression into an automaton using Beery-Sethi construction.
+  /// Convert a krat expression into an automaton using Beery-Sethi construction.
   // INTERFACE: void berry_sethi(Automaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
   // INTERFACE: void berry_sethi(GenAutomaton& a, const Exp& e) { return vcsn::berry_sethi(*a, e); }
   template <typename A, typename T, typename Exp>
   void
   berry_sethi(Element<A, T>&, const Exp&);
   
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -43,7 +43,7 @@ namespace vcsn {
    * 
    */
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /** 
    * @brief Return the concatenation of two automata.
@@ -81,7 +81,7 @@ namespace vcsn {
   void
   concatenate_here(Element<A, T>& lhs, const Element<A, T>& rhs);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -43,7 +43,7 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /** 
    * @brief Test the normalization of transducer.
@@ -57,7 +57,7 @@ namespace vcsn {
   bool
   is_normalized_transducer(const Element<S, A>& t);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

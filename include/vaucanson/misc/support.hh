@@ -113,7 +113,7 @@ namespace utility {
     integer_t			integer_;
   };
 
-  /*! @} */
+  /** @} */
 
 } // utility
 

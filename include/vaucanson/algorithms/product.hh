@@ -35,9 +35,9 @@
 namespace vcsn 
 {
   
-  /** \addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms */  /** @{ */
   
-  //! Returns a fresh automaton that is the product of the two input ones.
+  /// Returns a fresh automaton that is the product of the two input ones.
   // INTERFACE: Automaton product(const Automaton& a1, const Automaton& a2) { return vcsn::product(*a1, *a2); }
   // INTERFACE: GenAutomaton product(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::product(*a1, *a2); }
   template<typename A, typename T, typename U>

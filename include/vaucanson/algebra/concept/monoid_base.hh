@@ -36,32 +36,32 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*! \addtogroup algebra */  /* @{ */
-    /*! \addtogroup monoid */ /* @{ */
+    /** @addtogroup algebra */  /** @{ */
+    /** @addtogroup monoid */ /** @{ */
 
     /*-----------------.
     | MonoidBase<Self> |
     `-----------------*/
-    //! MonoidBase is the base class of all structures that are monoids.
-    /*! Monoid defines identity for semigroups of mul_kind and zero for
+    /// MonoidBase is the base class of all structures that are monoids.
+    /** Monoid defines identity for semigroups of mul_kind and zero for
       semigroup of add_kind.
     */
     template<class Self>
     struct MonoidBase : SemigroupBase<Self>
     {
-      //! returns the identity of the monoid (if mul_kind).
+      /// returns the identity of the monoid (if mul_kind).
       template<typename T>
       Element<Self, T> identity(SELECTOR(T)) const;
 
-      //! returns the zero of the monoid (if add_kind).
+      /// returns the zero of the monoid (if add_kind).
       template<typename T>
       Element<Self, T> zero(SELECTOR(T)) const;
 
     protected:
-      //! Default constructor is protected since it is an abstract class.
+      /// Default constructor is protected since it is an abstract class.
       MonoidBase();
 
-      //! Copy constructor is protected since it is an abstract class.
+      /// Copy constructor is protected since it is an abstract class.
       MonoidBase(const MonoidBase& other);
     };
 
@@ -81,12 +81,12 @@ namespace vcsn {
       Element<S, T> of(const S& s);
     };
 
-    /*! @} @} */
+    /** @} @} */
 
   } // algebra
   
-  /*! \addtogroup algebra */  /* @{ */
-  /*! \addtogroup monoid */ /* @{ */
+  /** @addtogroup algebra */  /** @{ */
+  /** @addtogroup monoid */ /** @{ */
 
   /*---------------------------.
   | dynamic_traits<MonoidBase<Self> > |
@@ -104,20 +104,20 @@ namespace vcsn {
   /*---------------------------------.
   | MetaElement<MonoidBase<Self>, T> |
   `---------------------------------*/
-  //! Defines services of element of every monoid.
+  /// Defines services of element of every monoid.
   template<class Self, typename T>
   struct MetaElement<algebra::MonoidBase<Self>, T> 
     : MetaElement<algebra::SemigroupBase<Self>, T>
   { 
   protected:
-    //! Default constructor is protected since it is an abstract class.
+    /// Default constructor is protected since it is an abstract class.
     MetaElement();
 
-    //! Copy constructor is protected since it is an abstract class.
+    /// Copy constructor is protected since it is an abstract class.
     MetaElement(const MetaElement& other);
   };
   
-  /*! @} @} */
+  /** @} @} */
 
   template<typename T, typename Self>
   T op_default(SELECTOR(algebra::MonoidBase<Self>), SELECTOR(T));

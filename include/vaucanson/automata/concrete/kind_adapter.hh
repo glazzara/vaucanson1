@@ -34,8 +34,8 @@
 
 namespace vcsn {
 
-  //! we define a series of macros to make the data structure for
-  //! automaton simpler.
+  /// we define a series of macros to make the data structure for
+  /// automaton simpler.
 
 #define ADAPT_ADD_LETTER_EDGE_TO_SERIES_LABEL(T...)			\
   hedge_t								\

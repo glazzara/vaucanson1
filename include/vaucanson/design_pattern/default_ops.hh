@@ -126,14 +126,14 @@ namespace vcsn {
   `-----------*/
 
 
-  /*! assignement operator between two implementations of a Structure<S>.
+  /** assignement operator between two implementations of a Structure<S>.
    *
    */
   template<typename S, typename T, typename U>
   void op_assign(const Structure<S>& s, 
 		 T& dst, const U& src);
 
-  /*! assignement operator between two implementations of two differents structures.
+  /** assignement operator between two implementations of two differents structures.
    *
    */
   template<typename S, typename T, typename U>
@@ -142,7 +142,7 @@ namespace vcsn {
 		 T& dst, 
 		 const U& src);
 
-  /*! addition in place operator between two different elements.
+  /** addition in place operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -151,7 +151,7 @@ namespace vcsn {
 		 T& dst,				
 		 const U& arg);			        
 
-  /*! substraction in place operator between two different elements.
+  /** substraction in place operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -160,7 +160,7 @@ namespace vcsn {
 		 T& dst,				
 		 const U& arg);			        
 
-  /*! multiplication in place operator between two different elements.
+  /** multiplication in place operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -169,7 +169,7 @@ namespace vcsn {
 		 T& dst,				
 		 const U& arg);			        
 
-  /*! division in place operator between two different elements.
+  /** division in place operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -178,7 +178,7 @@ namespace vcsn {
 		 T& dst,				
 		 const U& arg);			        
 
-  /*! modulo in place operator between two different elements.
+  /** modulo in place operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -187,7 +187,7 @@ namespace vcsn {
 		 T& dst,				
 		 const U& arg);			        
 
-  /*! addition operator between two different elements.
+  /** addition operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -196,7 +196,7 @@ namespace vcsn {
 	   const T& v1,				
 	   const U& v2);			
 
-  /*! substraction operator between two different elements.
+  /** substraction operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -205,7 +205,7 @@ namespace vcsn {
 	   const T& v1,				
 	   const U& v2);			
 
-  /*! multiplication operator between two different elements.
+  /** multiplication operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -214,7 +214,7 @@ namespace vcsn {
 	   const T& v1,				
 	   const U& v2);			
 
-  /*! division operator between two different elements.
+  /** division operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -223,7 +223,7 @@ namespace vcsn {
 	   const T& v1,				
 	   const U& v2);			
 
-  /*! modulo operator between two different elements.
+  /** modulo operator between two different elements.
    *
    */
   template<typename S, typename T, typename U>		
@@ -232,19 +232,19 @@ namespace vcsn {
 	   const T& v1,				
 	   const U& v2);			
   
-  /*! input stream operator.
+  /** input stream operator.
    * 
    */
   template<typename S, typename St, typename T>
   St& op_rin(const Structure<S>& s, St& st, const T& v);
 
-  /*! output stream operator.
+  /** output stream operator.
    *
    */
   template<typename S, typename St, typename T>
   St& op_rout(const Structure<S>& s, St& st, const T& v);
 
-  /*! @} @} */ 
+  /** @} @} */ 
 
 } // vcsn
 

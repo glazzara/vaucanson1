@@ -37,38 +37,38 @@ namespace vcsn {
 
   namespace algebra {
 
-    /*! @ingroup alphabet */ /*! @{ */
+    /** @ingroup alphabet */ /** @{ */
 
     /*----------------.
     | AlphabetSet<L> |
     `----------------*/
-    //! Static implementation of alphabet structural element.
+    /// Static implementation of alphabet structural element.
     template<typename L>
     struct AlphabetSet
       : AlphabetSetBase<AlphabetSet<L> >
     {
-      //! The type of letter hold by the alphabets.
+      /// The type of letter hold by the alphabets.
       typedef L		letter_t;
     };
     
-    //! @}
+    /// @}
 
   } // algebra
 
-  //! @{
+  /// @{
   
-  /*! @ingroup alphabet */ /*! @{ */
+  /** @ingroup alphabet */ /** @{ */
 
   /*------------------------.
   | dynamic_traits<AlphabetSet<L> |
   `------------------------*/
-  //! meta information about AlphabetSet.
+  /// meta information about AlphabetSet.
   template<typename L>
   struct dynamic_traits<algebra::AlphabetSet<L> >
     : dynamic_traits<algebra::AlphabetSetBase<L> >
   { };     
 
-  //! @}
+  /// @}
 
 } // vcsn 
 

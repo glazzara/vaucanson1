@@ -240,7 +240,7 @@ namespace vcsn {
   // output_type        = hedge_t
   // direction		= output
 
-  /*! store the output edges of the state 'from' using 'res'. */
+  /** store the output edges of the state 'from' using 'res'. */
   template <class S, class T, 
 	    typename OutputIterator>					
   void op_delta(const AutomataBase<S>&, const IdentityView<T>&,
@@ -248,7 +248,7 @@ namespace vcsn {
 		hstate_t from, 
 		delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
+  /** store the output edges of the state 'from' where
     query(label(e)) = true using 'res'. */
   template <class S, class T,
 	    typename OutputIterator, typename L>	
@@ -258,7 +258,7 @@ namespace vcsn {
 		const L& query,
 		delta_kind::edges k);
     
-  /*! store the output edges of the state 'from' where
+  /** store the output edges of the state 'from' where
     the label matches the letter. */
   template <class S, class T,
 	    typename OutputIterator, typename L>	
@@ -268,7 +268,7 @@ namespace vcsn {
 		       const L& letter,
 		       delta_kind::edges k);
 
-  /*! store the output spontaneous transitions. */
+  /** store the output spontaneous transitions. */
   template <class S, class T,
 	    typename OutputIterator>
   void op_spontaneous_delta(const AutomataBase<S>&, const IdentityView<T>&,
@@ -280,14 +280,14 @@ namespace vcsn {
   // output_type        = hedge_t
   // direction		= output
 
-  /*! store the output edges of the state 'from' in the container
+  /** store the output edges of the state 'from' in the container
     'res' */
   template <class S, class T,
 	    typename Container>
   void op_deltac(const AutomataBase<S>&, const IdentityView<T>&,
 		 Container& res, hstate_t from, delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
+  /** store the output edges of the state 'from' where
     query(label(e)) = true in the container 'res' */
   template <class S, class T,
 	    typename Container, typename L>	
@@ -297,7 +297,7 @@ namespace vcsn {
 		 const L& query,
 		 delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
+  /** store the output edges of the state 'from' where
     query(label(e)) = true in the container 'res' */
   template <class S, class T,
 	    typename Container, typename L>	
@@ -307,7 +307,7 @@ namespace vcsn {
 			const L& letter,
 			delta_kind::edges k);
 
-  /*! store the output op_spontaneous transitions. */
+  /** store the output op_spontaneous transitions. */
   template <class S, class T, class Container>
   void op_spontaneous_deltac(const AutomataBase<S>&, const IdentityView<T>&,
 			     Container& res, 
@@ -318,14 +318,14 @@ namespace vcsn {
   // output_type        = hstate_t
   // direction	  = output
 
-  /*! store the output states of the state 'from' using 'res'. */
+  /** store the output states of the state 'from' using 'res'. */
   template<class S, class T, typename OutputIterator> 
   void op_delta(const AutomataBase<S>&, const IdentityView<T>&,
 		OutputIterator res, 
 		hstate_t from, 
 		delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
+  /** store the output states of the state 'from' where
     query(label(e)) = true using 'res'. */
   template<class S, class T, typename OutputIterator, typename L>	
   void op_delta(const AutomataBase<S>&, const IdentityView<T>&,
@@ -334,7 +334,7 @@ namespace vcsn {
 		const L& query,
 		delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
+  /** store the output states of the state 'from' where
     the label matches the letter. */
   template<class S, class T, typename OutputIterator, typename L>	
   void op_letter_delta(const AutomataBase<S>&, const IdentityView<T>&,
@@ -343,7 +343,7 @@ namespace vcsn {
 		       const L& letter,
 		       delta_kind::states k);
 
-  /*! store the output op_spontaneous transitions. */
+  /** store the output op_spontaneous transitions. */
   template<class S, class T, typename OutputIterator>	
   void op_spontaneous_delta(const AutomataBase<S>&, const IdentityView<T>&,
 			    OutputIterator res, 
@@ -354,13 +354,13 @@ namespace vcsn {
   // output_type        = hstate_t
   // direction	  = output
 
-  /*! store the output states of the state 'from' in the container
+  /** store the output states of the state 'from' in the container
     'res' */
   template<class S, class T, typename Container>
   void op_deltac(const AutomataBase<S>&, const IdentityView<T>&,
 		 Container& res, hstate_t from, delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
+  /** store the output states of the state 'from' where
     query(label(e)) = true in the container 'res' */
   template<class S, class T, typename Container, typename L>	
   void op_deltac(const AutomataBase<S>&, const IdentityView<T>&,
@@ -369,7 +369,7 @@ namespace vcsn {
 		 const L& query,
 		 delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
+  /** store the output states of the state 'from' where
     query(label(e)) = true in the container 'res' */
   template<class S, class T, typename Container, typename L>	
   void op_letter_deltac(const AutomataBase<S>&, const IdentityView<T>&,
@@ -378,7 +378,7 @@ namespace vcsn {
 			const L& letter,
 			delta_kind::states k);
 
-  /*! store the output op_spontaneous transitions. */
+  /** store the output op_spontaneous transitions. */
   template<class S, class T, typename Container>
   void op_spontaneous_deltac(const AutomataBase<S>&, const IdentityView<T>&,
 			     Container& res, 
@@ -389,14 +389,14 @@ namespace vcsn {
   // output_type        = hedge_t
   // direction	  = input
 
-  /*! store the output edges of the state 'from' using 'res'. */
+  /** store the output edges of the state 'from' using 'res'. */
   template<class S, class T, typename OutputIterator>		
   void op_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
 		 OutputIterator res, 
 		 hstate_t from, 
 		 delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
+  /** store the output edges of the state 'from' where
     query(label(e)) = true using 'res'. */
   template<class S, class T, typename OutputIterator, typename L>	
   void op_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
@@ -405,7 +405,7 @@ namespace vcsn {
 		 const L& query,
 		 delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
+  /** store the output edges of the state 'from' where
     the label matches the letter. */
   template<class S, class T, typename OutputIterator, typename L>	
   void op_letter_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
@@ -414,7 +414,7 @@ namespace vcsn {
 			const L& letter,
 			delta_kind::edges k);
 
-  /*! store the output op_spontaneous transitions. */
+  /** store the output op_spontaneous transitions. */
   template<class S, class T, typename OutputIterator>
   void op_spontaneous_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
 			     OutputIterator res, 
@@ -425,13 +425,13 @@ namespace vcsn {
   // output_type        = hedge_t
   // direction	  = input
 
-  /*! store the output edges of the state 'from' in the container
+  /** store the output edges of the state 'from' in the container
     'res' */
   template<class S, class T, typename Container>
   void op_rdeltac(const AutomataBase<S>&, const IdentityView<T>&,
 		  Container& res, hstate_t from, delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
+  /** store the output edges of the state 'from' where
     query(label(e)) = true in the container 'res' */
   template<class S, class T, typename Container, typename L>	
   void op_rdeltac(const AutomataBase<S>&, const IdentityView<T>&,
@@ -440,7 +440,7 @@ namespace vcsn {
 		  const L& query,
 		  delta_kind::edges k);
 
-  /*! store the output edges of the state 'from' where
+  /** store the output edges of the state 'from' where
     query(label(e)) = true in the container 'res' */
   template<class S, class T, typename Container, typename L>	
   void op_letter_rdeltac(const AutomataBase<S>&, const IdentityView<T>&,
@@ -449,7 +449,7 @@ namespace vcsn {
 			 const L& letter,
 			 delta_kind::edges k);
 
-  /*! store the output op_spontaneous transitions. */
+  /** store the output op_spontaneous transitions. */
   template<class S, class T, typename Container>
   void op_spontaneous_rdeltac(const AutomataBase<S>&, const IdentityView<T>&,
 			      Container& res, 
@@ -460,14 +460,14 @@ namespace vcsn {
   // output_type        = hstate_t
   // direction	  = input
 
-  /*! store the output states of the state 'from' using 'res'. */
+  /** store the output states of the state 'from' using 'res'. */
   template<class S, class T, typename OutputIterator>		
   void op_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
 		 OutputIterator res, 
 		 hstate_t from, 
 		 delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
+  /** store the output states of the state 'from' where
     query(label(e)) = true using 'res'. */
   template<class S, class T, typename OutputIterator, typename L>	
   void op_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
@@ -476,7 +476,7 @@ namespace vcsn {
 		 const L& query,
 		 delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
+  /** store the output states of the state 'from' where
     the label matches the letter. */
   template<class S, class T, typename OutputIterator, typename L>	
   void op_letter_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
@@ -485,7 +485,7 @@ namespace vcsn {
 			const L& letter,
 			delta_kind::states k);
 
-  /*! store the output op_spontaneous transitions. */
+  /** store the output op_spontaneous transitions. */
   template<class S, class T, typename OutputIterator>
   void op_spontaneous_rdelta(const AutomataBase<S>&, const IdentityView<T>&,
 			     OutputIterator res, 
@@ -496,13 +496,13 @@ namespace vcsn {
   // output_type        = hstate_t
   // direction	  = input
 
-  /*! store the output states of the state 'from' in the container
+  /** store the output states of the state 'from' in the container
     'res' */
   template<class S, class T, typename Container>
   void op_rdeltac(const AutomataBase<S>&, const IdentityView<T>&,
 		  Container& res, hstate_t from, delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
+  /** store the output states of the state 'from' where
     query(label(e)) = true in the container 'res' */
   template<class S, class T, typename Container, typename L>	
   void op_rdeltac(const AutomataBase<S>&, const IdentityView<T>&,
@@ -511,7 +511,7 @@ namespace vcsn {
 		  const L& query,
 		  delta_kind::states k);
 
-  /*! store the output states of the state 'from' where
+  /** store the output states of the state 'from' where
     query(label(e)) = true in the container 'res' */
   template<class S, class T, typename Container, typename L>	
   void op_letter_rdeltac(const AutomataBase<S>&, const IdentityView<T>&,
@@ -520,7 +520,7 @@ namespace vcsn {
 			 const L& letter,
 			 delta_kind::states k);
 
-  /*! store the output op_spontaneous transitions. */
+  /** store the output op_spontaneous transitions. */
   template<class S, class T, typename Container>
   void op_spontaneous_rdeltac(const AutomataBase<S>&, const IdentityView<T>&,
 			      Container& res, 

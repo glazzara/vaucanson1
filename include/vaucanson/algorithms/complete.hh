@@ -39,7 +39,7 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /**
    * Make the transition function of an automaton total w.r.t alphabet.
@@ -86,7 +86,7 @@ namespace vcsn {
   bool
   is_complete(const Element<A, T>& a);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -77,7 +77,7 @@ namespace utility {
     return !(*this != o);
   }
 
-  //! support<map<U, T> > is a const adapter of std::map to container.
+  /// support<map<U, T> > is a const adapter of std::map to container.
   template <class U, class T>
   Support<std::map<U, T> >::Support(const Support& s):
     m_(s.m_)
@@ -118,7 +118,7 @@ namespace utility {
     return *max_element(begin(), end());
   }
 
-  //! SparseIterator
+  /// SparseIterator
 
   template <class Integer, class ExcludedContainer>
   SparseIterator<Integer, ExcludedContainer>::
@@ -206,9 +206,9 @@ namespace utility {
     return *this;
   }
 
-  //! SparseInterval is a const adapter of a 3-uple :
-  //! (from, begin, excluded).
-  //! SparseInterval verifies the container concept.
+  /// SparseInterval is a const adapter of a 3-uple :
+  /// (from, begin, excluded).
+  /// SparseInterval verifies the container concept.
   template <class Integer, class ExcludedContainer>
   SparseInterval<Integer, ExcludedContainer>
   ::SparseInterval(integer_t f, integer_t t, const excluded_container_t& c):

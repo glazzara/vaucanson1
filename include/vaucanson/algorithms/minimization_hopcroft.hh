@@ -46,9 +46,9 @@ namespace vcsn {
    */
 
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! The canonical minimal automaton of the deterministic input automaton.
+  /// The canonical minimal automaton of the deterministic input automaton.
 
   /** 
    * @brief Return the minimal automaton using the hopcroft algorithm.
@@ -62,7 +62,7 @@ namespace vcsn {
   Element<A, T>
   minimization_hopcroft(const Element<A, T>& a);
 
-  //! The canonical minimal automaton of the input automaton. (EXPERIMENTAL)
+  /// The canonical minimal automaton of the input automaton. (EXPERIMENTAL)
   
   /** 
    * @brief Return the quotient of a non deterministic acceptor.
@@ -75,7 +75,7 @@ namespace vcsn {
   Element<A, T>
   quotient(const Element<A, T>& a);
   
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

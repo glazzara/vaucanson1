@@ -45,7 +45,7 @@ namespace vcsn {
    */
 
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
  
   /** 
    *  @brief Returns a fresh automaton that is the sub-automaton defined by a set.
@@ -77,7 +77,7 @@ namespace vcsn {
   void sub_automaton_here(Element<A, T>& a, const StatesSet& s, 
 			  bool check_states = true);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

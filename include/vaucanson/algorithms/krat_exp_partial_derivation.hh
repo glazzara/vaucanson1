@@ -37,15 +37,15 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! The partial derivative of the krat expression w.r.t to a letter.
+  /// The partial derivative of the krat expression w.r.t to a letter.
   template <class Series, class T, class Letter>
   std::pair<std::set<Element<Series, T> >, bool>
   partial_derivate(const Element<Series, T>& exp, 
 	   	   Letter a);
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 

@@ -43,8 +43,8 @@ namespace vcsn {
     /*---------.
     | BinaryOp |
     `---------*/
-    //! BinaryOp is a generic class which symbolised binary operator.
-    /*! BinaryOp is integrated in the pattern matching system to permit
+    /// BinaryOp is a generic class which symbolised binary operator.
+    /** BinaryOp is integrated in the pattern matching system to permit
       a factorization of the accessors.
     */
     template <class T, class U>
@@ -69,8 +69,8 @@ namespace vcsn {
     /*--------.
     | UnaryOp |
     `--------*/
-    //! UnaryOp is a generic class which symbolised binary operator.
-    /*! UnaryOp is integrated in the pattern matching system to permit
+    /// UnaryOp is a generic class which symbolised binary operator.
+    /** UnaryOp is integrated in the pattern matching system to permit
       a factorization of the accessors.
     */
     template <class T>
@@ -91,8 +91,8 @@ namespace vcsn {
     /*------.
     | Value |
     `------*/
-    //! Value is a generic class which symbolised leaf of AST.
-    /*! Value is integrated into the pattern matching system to permit
+    /// Value is a generic class which symbolised leaf of AST.
+    /** Value is integrated into the pattern matching system to permit
       a factorization of the accessors.
     */
     template <class T>
