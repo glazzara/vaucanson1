@@ -81,6 +81,12 @@ namespace vcsn
       void operator << (const xml_automaton_t&);
       /// Queue operator.
       void operator >> (xml_automaton_t&);
+    protected:
+      // States must be unique in each session.
+      // Keep tracks of the session states.
+      std::set<std::string>			states;
+      // Keep track of the renamings.
+      std::map<std::string, std::string>	states_map;
     };
 
     /// Read operator.

@@ -151,7 +151,7 @@ namespace vcsn
     bool
     XmlStructure::operator == (const XmlStructure& rhs)
     {
-      return rhs.doc_ == doc_;
+      return rhs.root_ == root_;
     }
 
     inline

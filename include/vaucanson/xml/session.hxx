@@ -92,7 +92,95 @@ namespace vcsn
 
       root->appendChild(type);
       root->appendChild(structure);
+
       roots_.push_back(root);
+
+      /*
+       *  The vaucanson DTD defines the "name" attribute for states to
+       *  be of type ID.  Therefore two distinct automata cannot share
+       *  states  with  the same  name.   The  following  lines are  a
+       *  workaround which  perform a kind of alpha  conversion on the
+       *  new automaton's states.
+       */
+
+      // Convert states.
+      DOMNode* n = structure->getFirstChild();
+      while (n and XMLString::compareIString(n->getNodeName(), str_states))
+	n = n->getNextSibling();
+      if (n)
+	{
+	  n = n->getFirstChild();
+	  while (n)
+	    {
+	      if (not XMLString::compareIString(n->getNodeName(), str_state))
+		{
+		  DOMElement*	e = static_cast<DOMElement*> (n);
+		  std::string	oldname = xml2str(e->getAttribute(str_name));
+		  std::string	newname (oldname);
+
+		  while (states.find(newname) != states.end())
+		    {
+		      unsigned last (newname.size() - 1);
+		      while (isdigit(newname[last]))
+			if (newname[last] < '9')
+			  {
+			    ++newname[last];
+			    break ;
+			  }
+			else
+			  {
+			    newname[last] = '0';
+			    --last;
+			  }
+		      if (not isdigit(newname[last]))
+			newname.insert(last + 1,
+				       last + 1 == newname.size() ? "0" : "1");
+		    }
+
+		  states_map[oldname] = newname;
+		  states.insert(newname);
+		  e->setAttribute(str_name,
+				  XMLString::transcode(newname.c_str()));
+		}
+	      n = n->getNextSibling();
+	    }
+	}
+
+      // Update edges, initials and finals.
+      n = structure->getFirstChild();
+      while (n)
+	{
+	  const XMLCh* node_name = n->getNodeName();
+	  if (not XMLString::compareIString(node_name, str_edges) or
+	      not XMLString::compareIString(node_name, str_initials) or
+	      not XMLString::compareIString(node_name, str_finals))
+	    {
+	      DOMNode* c = n->getFirstChild();
+	      while (c)
+		{
+		  const XMLCh* node_name = c->getNodeName();
+		  if (not XMLString::compareIString(node_name, str_edge) or
+		      not XMLString::compareIString(node_name, str_initial) or
+		      not XMLString::compareIString(node_name, str_final))
+		    {
+		      DOMElement*	e = static_cast<DOMElement*> (c);
+		      const XMLCh*	attr[] = {str_src, str_dst, str_state};
+		      for (unsigned i = 0; i < 3; ++i)
+			if (e->hasAttribute(attr[i]))
+			  {
+			    const std::string oldname =
+			      xml2str(e->getAttribute(attr[i]));
+			    e->setAttribute(attr[i],
+					    XMLString
+					    ::transcode(states_map[oldname]
+							.c_str()));
+			  }
+		    }
+		  c = c->getNextSibling();
+		}
+	    }
+	  n = n->getNextSibling();
+	}
     }
 
     inline
@@ -101,8 +189,8 @@ namespace vcsn
     {
       if (roots_.begin() == roots_.end())
 	FAIL("no more automaton in this session");
-      DOMElement *root = roots_.back();
-      roots_.pop_back();
+      DOMElement *root = roots_.front();
+      roots_.pop_front();
 
       xml_automata_set_t	xs (root);
       xml_automaton_impl_t	xv (root);

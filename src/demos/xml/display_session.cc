@@ -104,7 +104,6 @@ main(int argc, char** argv)
 	}
       catch (const vcsn::xml::LoaderException& e)
 	{
-	  std::cerr << e.get_msg() << std::endl;
 	  break ;
 	}
 

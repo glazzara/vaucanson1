@@ -1,5 +1,21 @@
 2004-07-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	Three bugs were preventing the XML session demos from working. This
+	is the fix.
+
+	* include/vaucanson/xml/xml_set.hxx: Equality is done comparing the
+	<automaton> tags, not the documents: a session may have many
+	automata (and therefore many XmlStructure) in one unique document.
+	* include/vaucanson/xml/session.hh, include/vaucanson/xml/session.hxx:
+	Perform a kind of alpha conversion on an automaton's states before
+	inserting it in a session. When retrieving an automaton from
+	a session, take the first one (using pop_front), not the last one
+	(using pop_back).
+	* src/demos/xml/display_session.cc: Do not display the exception's
+	message, since it not an error.
+
+2004-07-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/demos/xml/make_session.cc: New. Assemble XML automata to build
 	an XML session.
 	* src/demos/xml/display_session.cc: New. Display the automata which
