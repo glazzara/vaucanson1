@@ -6,7 +6,7 @@
 # define RAT_DUMP_VISITOR_HH
 
 # include <iostream>
-# include <vaucanson/rat/nodes.hh>
+# include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 
 namespace vcsn {
 

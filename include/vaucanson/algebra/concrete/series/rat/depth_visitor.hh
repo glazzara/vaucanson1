@@ -6,7 +6,7 @@
 # define RAT_DEPTH_VISITOR_HH
 
 # include <algorithm>
-# include <vaucanson/rat/nodes.hh>
+# include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 
 namespace vcsn {
 

@@ -52,6 +52,11 @@ namespace vcsn {
       SemiringBase<Self>(other)
     {}
 
+    /*--------------------.
+    | DefaultTransposeFun |
+    `--------------------*/
+
+
     /*---------------------------------.
     | MetaElement<SeriesBase<Self>, T> |
     `---------------------------------*/

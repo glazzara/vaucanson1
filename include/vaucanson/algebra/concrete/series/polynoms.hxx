@@ -10,133 +10,149 @@
 
 namespace vcsn {
 
-  /*----------------.
-  | polynom<Tm, Tw> |
-  `----------------*/
+  namespace algebra {
 
-  template<typename Tm, typename Tw>
-  template<typename M, typename W>
-  polynom<Tm, Tw>::polynom(SELECTOR(M), SELECTOR(W))
-  {
-    map_.insert(std::make_pair(identity_value(SELECT(M), SELECT(Tm)),
-			       identity_value(SELECT(W), SELECT(Tw))));
-  }
-    
-  template<typename Tm, typename Tw>
-  polynom<Tm, Tw>::polynom(const polynom& other) : map_(other.map_) 
-  {}
-    
-  template<typename Tm, typename Tw>
-  polynom<Tm, Tw>::polynom() : map_() 
-  {}
-    
-  template<typename Tm, typename Tw>
-  size_t 
-  polynom<Tm, Tw>::size() const
-  { 
-    return map_.size(); 
-  }
-    
-  template<typename Tm, typename Tw>
-  bool polynom<Tm, Tw>::empty() const
-  { 
-    return map_.empty(); 
-  }
-    
-  template<typename Tm, typename Tw>
-  polynom<Tm, Tw>::iterator polynom<Tm, Tw>::begin() 
-  { 
-    return map_.begin(); 
-  }
-    
-  template<typename Tm, typename Tw>    
-  polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::begin() const 
-  { 
-    return map_.begin(); 
-  }
-    
-  template<typename Tm, typename Tw>
-  polynom<Tm, Tw>::iterator polynom<Tm, Tw>::end() 
-  { 
-    return map_.end(); 
-  }
-    
-  template<typename Tm, typename Tw>    
-  polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::end() const 
-  { 
-    return map_.end(); 
-  }
-    
-  template<typename Tm, typename Tw>
-  polynom<Tm, Tw>::iterator polynom<Tm, Tw>::find(const Tm& m) 
-  { 
-    return map_.find(m); 
-  }
-    
-  template<typename Tm, typename Tw>
-  polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::find(const Tm& m) const
-  { 
-    return map_.find(m); 
-  }
+    /*----------------.
+      | polynom<Tm, Tw> |
+      `----------------*/
 
-  template<typename Tm, typename Tw>    
-  template<typename W>
-  Tw& polynom<Tm, Tw>::make_get(SELECTOR(W), const Tm& m)
-  {
-    std::pair<iterator, bool> i = 
-      map_.insert(std::make_pair(m, zero_value(SELECT(W), SELECT(Tw))));
-    return i.first->second;
-  }
+    template<typename Tm, typename Tw>
+    template<typename M, typename W>
+    polynom<Tm, Tw>::polynom(SELECTOR(M), SELECTOR(W))
+    {
+      map_.insert(std::make_pair(identity_value(SELECT(M), SELECT(Tm)),
+				 identity_value(SELECT(W), SELECT(Tw))));
+    }
     
-  template<typename Tm, typename Tw>    
-  template<typename W>
-  Tw polynom<Tm, Tw>::get(SELECTOR(W), const Tm& m) const
-  {
-    const_iterator i;
+    template<typename Tm, typename Tw>
+    polynom<Tm, Tw>::polynom(const polynom& other) : map_(other.map_) 
+    {}
+    
+    template<typename Tm, typename Tw>
+    polynom<Tm, Tw>::polynom() : map_() 
+    {}
+    
+    template<typename Tm, typename Tw>
+    size_t 
+    polynom<Tm, Tw>::size() const
+    { 
+      return map_.size(); 
+    }
+    
+    template<typename Tm, typename Tw>
+    bool polynom<Tm, Tw>::empty() const
+    { 
+      return map_.empty(); 
+    }
+    
+    template<typename Tm, typename Tw>
+    polynom<Tm, Tw>::iterator polynom<Tm, Tw>::begin() 
+    { 
+      return map_.begin(); 
+    }
+    
+    template<typename Tm, typename Tw>    
+    polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::begin() const 
+    { 
+      return map_.begin(); 
+    }
+    
+    template<typename Tm, typename Tw>
+    polynom<Tm, Tw>::iterator polynom<Tm, Tw>::end() 
+    { 
+      return map_.end(); 
+    }
+    
+    template<typename Tm, typename Tw>    
+    polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::end() const 
+    { 
+      return map_.end(); 
+    }
+    
+    template<typename Tm, typename Tw>
+    polynom<Tm, Tw>::iterator polynom<Tm, Tw>::find(const Tm& m) 
+    { 
+      return map_.find(m); 
+    }
+    
+    template<typename Tm, typename Tw>
+    polynom<Tm, Tw>::const_iterator polynom<Tm, Tw>::find(const Tm& m) const
+    { 
+      return map_.find(m); 
+    }
+
+    template<typename Tm, typename Tw>    
+    template<typename W>
+    Tw& polynom<Tm, Tw>::make_get(SELECTOR(W), const Tm& m)
+    {
+      std::pair<iterator, bool> i = 
+	map_.insert(std::make_pair(m, zero_value(SELECT(W), SELECT(Tw))));
+      return i.first->second;
+    }
+    
+    template<typename Tm, typename Tw>    
+    template<typename W>
+    Tw polynom<Tm, Tw>::get(SELECTOR(W), const Tm& m) const
+    {
+      const_iterator i;
             
-    if ((i = map_.find(m)) == map_.end())
-      return zero_value(SELECT(W), SELECT(Tw));
-    return i->second;
-  }
+      if ((i = map_.find(m)) == map_.end())
+	return zero_value(SELECT(W), SELECT(Tw));
+      return i->second;
+    }
     
-  template<typename Tm, typename Tw>    
-  void polynom<Tm, Tw>::insert(const Tm& m, const Tw& w)
-  { 
-    map_.insert(std::make_pair(m, w)); 
-  }
+    template<typename Tm, typename Tw>    
+    void polynom<Tm, Tw>::insert(const Tm& m, const Tw& w)
+    { 
+      map_.insert(std::make_pair(m, w)); 
+    }
     
-  template<typename Tm, typename Tw>    
-  template<typename W>
-  void polynom<Tm, Tw>::add(const W& weights, const Tm& m, const Tw& w)
-  {
-    Tw& o = make_get(SELECT(W), m);
-    op_in_add(weights, o, w);
-  }
+    template<typename Tm, typename Tw>    
+    template<typename W>
+    void polynom<Tm, Tw>::add(const W& weights, const Tm& m, const Tw& w)
+    {
+      Tw& o = make_get(SELECT(W), m);
+      op_in_add(weights, o, w);
+    }
     
-  template<typename Tm, typename Tw>        
-  void polynom<Tm, Tw>::erase(iterator i)
-  { 
-    map_.erase(i); 
-  }
+    template<typename Tm, typename Tw>        
+    void polynom<Tm, Tw>::erase(iterator i)
+    { 
+      map_.erase(i); 
+    }
     
-  template<typename Tm, typename Tw>    
-  void polynom<Tm, Tw>::clear() 
-  { 
-    map_.clear(); 
-  }
+    template<typename Tm, typename Tw>    
+    void polynom<Tm, Tw>::clear() 
+    { 
+      map_.clear(); 
+    }
     
-  template<typename Tm, typename Tw>        
-  void polynom<Tm, Tw>::swap(polynom<Tm, Tw>& other)
-  { 
-    map_.swap(other.map_); 
-  }
+    template<typename Tm, typename Tw>        
+    void polynom<Tm, Tw>::swap(polynom<Tm, Tw>& other)
+    { 
+      map_.swap(other.map_); 
+    }
 
-  template<typename Tm, typename Tw>        
-  const std::map<Tm, Tw>
-  polynom<Tm, Tw>::as_map() const
-  { 
-    return map_;
-  }
+    template<typename Tm, typename Tw>        
+    const std::map<Tm, Tw>
+    polynom<Tm, Tw>::as_map() const
+    { 
+      return map_;
+    }
+
+    template <class Tm, class Tw>
+    polynom<Tm,Tw> 
+    DefaultTransposeFun<polynom<Tm,Tw> >::operator()(const polynom<Tm,Tw>& l)
+    {
+      typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
+      polynom<Tm, Tw>	new_t;
+      
+      std::swap(new_t, t);
+      for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
+	t[mirror((*i).first)] = (*i).second;
+    }
+
+  } // algebra
 
   template <class Tm, class Tw>
   bool operator==(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
@@ -176,8 +192,8 @@ namespace vcsn {
   }
  
   /*-------------------.
-  | External functions |
-  `-------------------*/
+    | External functions |
+    `-------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const Series<W, M>& s, const polynom<Tm, Tw>& m)

@@ -8,11 +8,11 @@
 # include <algorithm>
 # include <iostream>
 
-# include <vaucanson/algebra/concrete/series/exp.hh>
+# include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concept/algebra_base.hh>
-# include <vaucanson/algebra/transpose.hh>
-# include <vaucanson/rat/nodes.hh>
-# include <vaucanson/rat/depth_visitor.hh>
+# include <vaucanson/algebra/concrete/series/transpose.hh>
+# include <vaucanson/algebra/concrete/series/rat/nodes.hh>
+# include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>
 # include <vaucanson/fundamental/element.hh>
 
 namespace vcsn {
@@ -35,7 +35,7 @@ namespace vcsn {
     {}
     
     template<typename LetterT, typename WeightT>
-    exp& 
+    exp<LetterT, WeightT>& 
     exp<LetterT, WeightT>::operator=(const exp& other)
     {
       if (other.base_ != base_)
@@ -47,7 +47,7 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    exp& 
+    exp<LetterT, WeightT>& 
     exp<LetterT, WeightT>::swap(exp& otether)
     {
       std::swap(base_, other.base_);
@@ -55,7 +55,7 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>  
-    exp& 
+    exp<LetterT, WeightT>& 
     exp<LetterT, WeightT>::operator+=(const exp& other)
     {
       base_ = new n_sum_t(base_, other.base_->clone());
@@ -63,7 +63,7 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    exp& 
+    exp<LetterT, WeightT>& 
     exp<LetterT, WeightT>::operator*=(const exp& other)
     {
       base_ = new n_prod_t(base_, other.base_->clone());
@@ -71,7 +71,7 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    exp& exp<LetterT, WeightT>::star()
+    exp<LetterT, WeightT>& exp<LetterT, WeightT>::star()
     {
       base_ = new n_star_t(base_);
       return *this;
@@ -97,14 +97,14 @@ namespace vcsn {
     }
     
     template<typename LetterT, typename WeightT>
-    node_t* &
+    exp<LetterT, WeightT>::node_t* &
     exp<LetterT, WeightT>::base() 
     { 
       return base_; 
     }
 
     template<typename LetterT, typename WeightT>
-    node_t* const &
+    exp<LetterT, WeightT>::node_t* const &
     exp<LetterT, WeightT>::base() const { return base_; }
 
     template<typename LetterT, typename WeightT>
@@ -126,32 +126,34 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    exp exp<LetterT, WeightT>::clone() const
+    exp<LetterT, WeightT>
+    exp<LetterT, WeightT>::clone() const
     {
       return exp(base_->clone());
     }
 
     template<typename LetterT, typename WeightT>
-    static exp exp<LetterT, WeightT>::one()
+    exp<LetterT, WeightT>
+    exp<LetterT, WeightT>::one()
     {
       return exp(new n_one_t);
     }
     
     template<typename LetterT, typename WeightT>
-    static exp exp<LetterT, WeightT>::zero()
+    exp<LetterT, WeightT> exp<LetterT, WeightT>::zero()
     {
       return exp(new n_zero_t);
     }
 
     template<typename LetterT, typename WeightT>
-    static exp exp<LetterT, WeightT>::constant(const letter_t& l)
+    exp<LetterT, WeightT> exp<LetterT, WeightT>::constant(const letter_t& l)
     {
       return exp(new n_const_t(l));
     }
     
     // compatibility
     template<typename LetterT, typename WeightT>
-    static bool exp<LetterT, WeightT>::stareable() 
+    bool exp<LetterT, WeightT>::stareable() 
     {
       return true;
     }
@@ -223,8 +225,8 @@ namespace vcsn {
 
 namespace vcsn {
 
-  template <class Monoid_, class Semring_>
-  virtual void 
+  template <class Monoid_, class Semiring_>
+  void 
   ReverseVisitor<Monoid_,Semiring_>::
   product(rat::Node<Monoid_, Semiring_>* lhs,  
 	  rat::Node<Monoid_, Semiring_>* rhs)
@@ -249,7 +251,7 @@ namespace vcsn {
 } // vcsn
 
 
-#include <vaucanson/rat/dump_visitor.hh>
+#include <vaucanson/algebra/concrete/series/rat/dump_visitor.hh>
 
 namespace std
 {

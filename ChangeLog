@@ -1,4 +1,29 @@
 2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.67)
+	* include/vaucanson/algebra/concept/series_base.hxx 
+	* include/vaucanson/algebra/concrete/series/krat.hxx
+	* include/vaucanson/algebra/concrete/series/krat.hh0
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx
+	* include/vaucanson/algebra/concrete/series/polynoms.hh
+
+	* src/tests/algebra/series/series-test.hh
+	* src/tests/automata/implementation_check/Makefile.am
+	* src/tests/automata/implementation_check/check_global_consistance.cc
+	* src/tests/automata/algos/check_determinist.cc
+	* src/tests/automata/algos/check_normalized.cc
+
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hxx
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx
+	* include/vaucanson/algebra/concrete/series/rat/nodes.hh
+
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh
+	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh
+	* include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh
+	* include/vaucanson/tools/gen_random.hxx
+	* include/vaucanson/tools/gen_random.hh
+
+
+2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.66)
 	* include/vaucanson/automata/concept/automata_base.hh : minor.       
 	* include/vaucanson/tools/usual.hh : added.

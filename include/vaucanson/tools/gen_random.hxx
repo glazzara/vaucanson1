@@ -6,7 +6,7 @@
 #ifndef GEN_RANDOM_HXX
 # define GEN_RANDOM_HXX
 
-# include <vaucanson/misc/gen_random.hh>
+# include <vaucanson/tools/gen_random.hh>
 
 # include <map>
 # include <stdlib.h>

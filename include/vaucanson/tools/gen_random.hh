@@ -12,8 +12,8 @@
 # include <vaucanson/automata/concept/automaton_impl.hh>
 # include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/tags.hh>
+# include <vaucanson/tools/usual.hh>
 # include <vaucanson/misc/ref.hh>
-
 
 namespace vcsn {
 
@@ -47,6 +47,12 @@ namespace vcsn {
     void     del_edge_circle(TAutomata work, hstate_t state);
    
   };
+
+  namespace tools {
+
+    typedef GenRandomAutomata<usual_automaton_t> gen_auto_t;
+
+  } // algebra
 
 } // vcsn
 

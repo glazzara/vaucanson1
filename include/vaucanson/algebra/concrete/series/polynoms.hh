@@ -12,6 +12,7 @@
 
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
+# include <vaucanson/algebra/concrete/series/transpose.hh>
 
 namespace vcsn {
 
@@ -71,6 +72,14 @@ namespace vcsn {
     typedef Tm monoid_value_t;
     typedef Tw weights_value_t;
   };
+
+    template <class Tm, class Tw>
+    struct DefaultTransposeFun< polynom<Tm,Tw> >
+    {
+      polynom<Tm,Tw> 
+      operator()(const polynom<Tm,Tw>& l);
+    };
+    
 
   } // algebra
   

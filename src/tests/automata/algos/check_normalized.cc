@@ -23,7 +23,7 @@
 
 # include <vaucanson/misc/ref.hh>
 
-# include <automata/implementation_check/gen_random.hh>
+# include <vaucanson/tools/gen_random.hh>
 
 # include <vaucanson/algorithms/normalized.hh>
 
@@ -40,21 +40,21 @@ int main(int argc, char **argv)
     verbose = 1;
   tests::Tester t(verbose);
 
-  gen_auto_t gen(42);
+  tools::gen_auto_t gen(42);
   
  
   const unsigned nb_tests = 10;
 
   for (unsigned i = 0; i < nb_tests; i++)
     {
-      usual_automaton_t normalized = gen.generate_normalized(30);;
+      tools::usual_automaton_t normalized = gen.generate_normalized(30);;
       
       TEST(t, "Check routine is_normalized", is_normalized(normalized));
     } 
 
   for (unsigned i = 0; i < nb_tests; i++)
     {
-      usual_automaton_t normalized = gen.generate(30, 60);
+      tools::usual_automaton_t normalized = gen.generate(30, 60);
       normalize(normalized);
       
       TEST(t, "Is normalized automaton", is_normalized(normalized));

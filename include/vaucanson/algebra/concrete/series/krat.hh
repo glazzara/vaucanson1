@@ -8,7 +8,7 @@
 # include <utility>
 
 # include <vaucanson/algebra/concrete/series/series.hh>
-# include <vaucanson/algebra/concrete/series/exp.hh>
+# include <vaucanson/algebra/concrete/series/rat/exp.hh>
 
 namespace vcsn {
 

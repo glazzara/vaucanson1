@@ -24,7 +24,7 @@
 
 # include <vaucanson/misc/ref.hh>
 
-# include <automata/implementation_check/gen_random.hh>
+# include <vaucanson/tools/gen_random.hh>
 
 # include <vaucanson/algorithms/determinize.hh>
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     verbose = 1;
   tests::Tester t(verbose);
 
-  gen_auto_t gen(42);
+  tools::gen_auto_t gen(42);
   
  
 //   typedef std::set<hstate_t>    output_delta_t;
@@ -62,14 +62,14 @@ int main(int argc, char **argv)
 
   for (unsigned i = 0; i < nb_tests; i++)
     {
-      usual_automaton_t afd = gen.generate_afd(50);;
+      tools::usual_automaton_t afd = gen.generate_afd(50);;
       
       TEST(t, "Check routine is_determinist", is_deterministic(afd));
     } 
 
   for (unsigned i = 0; i < nb_tests; i++)
     {
-      usual_automaton_t afd = determinize(gen.generate(30, 60));
+      tools::usual_automaton_t afd = determinize(gen.generate(30, 60));
       
       TEST(t, "Is determinist Automaton", is_deterministic(afd));
     } 

@@ -8,7 +8,7 @@
 # define ALGEBRA_KRAT_HXX
 
 # include <vaucanson/algebra/concrete/series/series.hh>
-# include <vaucanson/algebra/concrete/series/exp.hh>
+# include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <utility>
 
 namespace vcsn {

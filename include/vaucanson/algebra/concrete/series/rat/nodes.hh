@@ -105,7 +105,6 @@ namespace vcsn {
       operator<(const Node<M_, W_>& other) const;
       virtual 
       ~Zero();
-      {}
     };
 
     /*----.
@@ -302,5 +301,7 @@ namespace vcsn {
   } // rat
 
 } // vcsn
+
+# include <vaucanson/algebra/concrete/series/rat/nodes.hxx>
 
 #endif // ALGEBRA_SERIES_CONCRETE_RAT_NODES_HH

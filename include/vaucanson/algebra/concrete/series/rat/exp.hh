@@ -9,9 +9,9 @@
 # include <iostream>
 
 # include <vaucanson/algebra/concept/algebra_base.hh>
-# include <vaucanson/algebra/transpose.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 # include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>
+# include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/fundamental/element.hh>
 
 namespace vcsn {
@@ -94,6 +94,17 @@ namespace vcsn {
 
   } // rat
 
+  namespace algebra {
+
+  template <typename M, typename W>
+  struct DefaultTransposeFun<rat::exp<M, W> >
+  {
+    rat::exp<M, W>&
+    operator()(const rat::exp<M, W>& exp);
+  };
+
+  } // algebra
+
 } // vcsn
 
 
@@ -108,18 +119,10 @@ namespace vcsn {
     product(rat::Node<Monoid_, Semiring_>* lhs,  
 	    rat::Node<Monoid_, Semiring_>* rhs);
   };
-
-  template <typename M, typename W>
-  struct DefaultTransposeFun<rat::exp<M, W> >
-  {
-    rat::exp<M, W>&
-    operator()(const rat::exp<M, W>& exp);
-  };
-
 } // vcsn
 
 
-#include <vaucanson/rat/dump_visitor.hh>
+#include <vaucanson/algebra/concrete/series/rat/dump_visitor.hh>
 
 namespace std
 {
@@ -132,7 +135,7 @@ namespace std
 
 } // std
 
-# include <vaucanson/algebra/series/concrete/rat/exp.hxx>
+# include <vaucanson/algebra/concrete/series/rat/exp.hxx>
 
 #endif // ALGEBRA_CONCRETE_SERIES_EXP_HH
 

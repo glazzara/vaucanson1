@@ -23,7 +23,7 @@
 
 # include <vaucanson/misc/ref.hh>
 
-# include <automata/implementation_check/gen_random.hh>
+# include <vaucanson/tools/gen_random.hh>
 
 int main(int argc, char **argv)
 {
@@ -38,9 +38,9 @@ int main(int argc, char **argv)
     verbose = 1;
   tests::Tester t(verbose);
 
-  gen_auto_t gen(42);
+  tools::gen_auto_t gen(42);
 
-  usual_automaton_t automaton = gen.generate(12, 20);
+  tools::usual_automaton_t automaton = gen.generate(12, 20);
 
   hstate_t 
     s1 = automaton.select_state(2), 
@@ -54,14 +54,15 @@ int main(int argc, char **argv)
   // call our function to check consistency of the automaton.
 
   bool final = true;
-  for (usual_automaton_t::edge_iterator i = automaton.edges().begin(); 
+  for (tools::usual_automaton_t::edge_iterator i = automaton.edges().begin(); 
        i != automaton.edges().end();
        i++)
     {
       hstate_t tmp = automaton.aim_of(*i);
       bool res = false;
 
-      for (usual_automaton_t::state_iterator j = automaton.states().begin();
+      for (tools::usual_automaton_t::state_iterator j = 
+	     automaton.states().begin();
 	   j != automaton.states().end();
 	   j++)
 	if (*j == tmp)
