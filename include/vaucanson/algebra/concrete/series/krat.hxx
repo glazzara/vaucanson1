@@ -38,8 +38,10 @@
 
 # include <vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx>
 # include <vaucanson/algebra/concrete/series/krat_exp_support.hxx>
+# include <vaucanson/algebra/concrete/series/krat_exp_transpose.hh>
 
 # include <vaucanson/misc/contract.hh>
+
 
 namespace vcsn {
 
@@ -112,21 +114,23 @@ namespace vcsn {
   }
 
   template <typename W, typename M, typename Tm, typename Tw>
-  void op_in_tranpose(const algebra::Series<W, M>&, 
-		      rat::exp<Tm, Tw>& dst)
+  void op_in_transpose(const algebra::Series<W, M>& s, 
+		       rat::exp<Tm, Tw>& exp)
   {
-    typedef rat::Product<Tm, Tw>	n_prod_t;
-    typedef rat::Node<Tm, Tw>		node_t;
-
-    n_prod_t* node = dynamic_cast<n_prod_t*>(arg.base());
-    if (node != 0)
-      {
-	node_t* tmp = node->right_;
-	node->right_ = node->left_;
-	node->left_ = tmp;
-      }
+    Element<algebra::Series<W, M>, 
+      rat::exp<Tm, Tw> > elt(s, exp); 
+    
+    vcsn::algebra::KRatExpTranspose<
+      algebra::Series<W, M>, 
+      rat::exp<Tm, Tw>, 
+      algebra::DispatchFunction<vcsn::rat::exp<Tm, Tw> >
+      > matcher(elt);
+    
+    elt = matcher.match(exp);
+    exp = elt.value();
   }
 
+  
   template<typename W, typename M, typename Tm, typename Tw>
   void op_in_add(const algebra::Series<W, M>&, 
 		 rat::exp<Tm, Tw>& dst,
@@ -738,5 +742,7 @@ namespace vcsn {
   }
 
 } // vcsn
+
+#undef echo
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HXX
