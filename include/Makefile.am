@@ -1,0 +1,5 @@
+# Makefile.am
+#
+# $Id$
+# VCSN
+
