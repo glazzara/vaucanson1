@@ -1,5 +1,9 @@
 2004-02-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/algebra/alphabets/alphabet_test.hh: Fix.
+
+2004-02-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Remove useless
 	include directive.
 

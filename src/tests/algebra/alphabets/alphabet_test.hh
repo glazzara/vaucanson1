@@ -1,7 +1,7 @@
 // alphabet_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -37,7 +37,7 @@
 
 using namespace vcsn;
 
-template <typename S, typename T> 
+template <typename S, typename T>
 bool alphabet_test(tests::Tester& t)
 {
   using namespace vcsn::algebra;
@@ -46,15 +46,19 @@ bool alphabet_test(tests::Tester& t)
 
   TEST_MSG("Instantiate an alphabet A.");
   element_t A;
-  TEST_MSG("Insert a random letter a in A.");  
+  TEST_MSG("Insert a random letter a in A.");
   letter_t a = A.random_letter();
-  letter_t b = A.random_letter();
+  do
+    {
+      letter_t b = A.random_letter();
+    }
+  while (b == a);
   A.insert(a);
   TEST(t, "a is in A.", A.contains(a));
   TEST(t, "b is not in A.", !A.contains(b));
   TEST(t, "A is finite and its cardinal is one.",
        (A.is_finite()) && (A.size() == 1));
-  return t.all_passed(); 
+  return t.all_passed();
 }
 
 #endif // VCSN_TESTS_ALGEBRA_ALPHABETS_ALPHABET_TEST_HH
