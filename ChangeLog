@@ -1,5 +1,10 @@
 2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* NEWS: Adjust the entry about context headers. Mention
+	new_rat_exp(alphabet_t, std::string).
+
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	It is now possible to build a rational expression using a std::string
 	that represent it.
 

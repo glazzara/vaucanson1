@@ -64,6 +64,8 @@ functions:
 
 automaton_t new_automaton(alphabet_t); // Create an empty automaton.
 rat_exp_t   new_rat_exp(alphabet_t); // Create an empty rational expression.
+rat_exp_t   new_rat_exp(alphabet_t, std::string); // Create a rational
+                   // expression and initialize it. Ex: new_rat_exp(a, "a+b*");
 automaton_t standard_of(rat_exp_t); // Build the standard automaton of an exp.
 automaton_t thompson_of(rat_exp_t); // Build the thompson automaton of an exp.
 rat_exp_t   aut_to_exp(automaton_t); // Build an exp from an automaton.
