@@ -33,7 +33,7 @@
 # include <vaucanson/algorithms/krat_exp_realtime.hh>
 
 # include <vaucanson/algebra/concept/series_base.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
 
 namespace vcsn {
 

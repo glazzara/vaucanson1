@@ -32,7 +32,7 @@
 
 # include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
 
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 
 namespace vcsn {

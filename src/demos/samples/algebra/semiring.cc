@@ -28,8 +28,8 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
 #include <iostream>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-#include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
+#include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+#include <vaucanson/algebra/implementation/semiring/tropical_semiring.hh>
 
 int main()
 {

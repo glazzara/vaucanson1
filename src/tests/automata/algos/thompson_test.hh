@@ -35,7 +35,7 @@
 # include <vaucanson/algorithms/normalized.hh>
 # include <vaucanson/algorithms/eval.hh>
 
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/algebra/implementation/series/krat.hh>
 
 # include <vaucanson/tools/usual_macros.hh>
 

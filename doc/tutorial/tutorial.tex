@@ -66,7 +66,7 @@ The Vaucanson library is organized as follows:
 `-- vaucanson
     |-- algebra
     |   |-- concept
-    |   `-- concrete
+    |   `-- implementation
     |       |-- alphabets
     |       |-- free_monoid
     |       |-- letter
@@ -76,7 +76,7 @@ The Vaucanson library is organized as follows:
     |-- algorithms
     |-- automata
     |   |-- concept
-    |   `-- concrete
+    |   `-- implementation
     |-- config
     |-- design_pattern
     |-- internal
@@ -189,7 +189,7 @@ interpretation of the implementation as a particular concept.
 
 % FIXME:Add example.
 
-% FIXME: consequence => separation in the library between concrete/concept.
+% FIXME: consequence => separation in the library between implementation/concept.
 
 \subsubsection{A short example}
 
@@ -220,7 +220,7 @@ instance(s) of it.
 \hline 
 concept: & \textbf{alphabet, letter} \\
 concerned files: & algebra/concept/alphabets\_base.h[h, xx] \\
-                 & algebra/concrete/alphabet/* \\
+                 & algebra/implementation/alphabet/* \\
 \hline 
 \end{tabular}
 
@@ -273,7 +273,7 @@ typedef Element<Alphabets, std::set<Letter> >  Alphabet;
 This previous type should be understood like: ``an element of the set
 of alphabets holding 'Letter' letter and implemented by a std::set of
 'Letter' ''.  Actually, this code is already present inside Vaucanson,
-more exactly inside the file ``\verb!algebra/concrete/alphabet/predefs.hh!''.
+more exactly inside the file ``\verb!algebra/implementation/alphabet/predefs.hh!''.
 
 \begin{code}[The pre-existing alphabet definitions in Vaucanson]
  namespace small_alpha_letter {
@@ -344,7 +344,7 @@ To finish, here is a short example of alphabet manipulation :
 \hline 
 concept: & \textbf{Free monoid}  \\
 concerned files: & algebra/concept/freemonoid\_base.h[h, xx] \\
-                 & algebra/concrete/freemonoid/* \\
+                 & algebra/implementation/freemonoid/* \\
 \hline 
 \end{tabular}
 
@@ -387,7 +387,7 @@ class which aggregates an instance of the alphabet:
 \end{code}
 
 A predefinition of this class exists in
-\verb!algebra/concrete/free_monoid/predefs.hh!. It is called 'Words'.
+\verb!algebra/implementation/free_monoid/predefs.hh!. It is called 'Words'.
 
 Now, let's work with element of this set. Naturally, a word can be
 implemented with a \verb!std::basic_string<Letter>!.
@@ -401,7 +401,7 @@ Then, its type using the Element class is:
 \end{code}
 
 A predefinition of this class exists in
-algebra/concrete/free\_monoid/predefs.hh, it is called 'Word'.
+algebra/implementation/free\_monoid/predefs.hh, it is called 'Word'.
 
 As a sequence, a word provides iterators and reverse iterators. 
 
@@ -453,7 +453,7 @@ identity_as<std::string>::of(free_monoid); // solution using a template function
 \hline 
 concept: & \textbf{Semiring}  \\
 concerned files: & algebra/concept/semiring\_base.h[h, xx] \\
-                 & algebra/concrete/semiring/* \\
+                 & algebra/implementation/semiring/* \\
 \hline 
 \end{tabular}
 
@@ -542,7 +542,7 @@ cout << z.star() << std::endl;
 \hline 
 concept: & \textbf{Series}  \\
 concerned files: & algebra/concept/series\_base.h[h, xx] \\
-                 & algebra/concrete/series/* \\
+                 & algebra/implementation/series/* \\
 \hline 
 \end{tabular}
 

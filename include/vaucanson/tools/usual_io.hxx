@@ -31,7 +31,7 @@
 # define VCSN_TOOLS_USUAL_IO_HXX
 
 # include <vaucanson/tools/usual_io.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 # include <vaucanson/algorithms/finite_support_conversion.hh>
 # include <sstream>
 

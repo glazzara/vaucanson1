@@ -30,9 +30,9 @@
 #ifndef VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_DERIVATION_HXX
 # define VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_DERIVATION_HXX
 
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/algebra/implementation/series/krat.hh>
 # include <vaucanson/misc/contract.hh>
 
 namespace vcsn {

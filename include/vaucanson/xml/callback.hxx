@@ -31,9 +31,9 @@
 # define VCSN_XML_CALLBACK_HXX
 
 # include <vaucanson/xml/callback.hh>
-# include <vaucanson/algebra/concrete/free_monoid/tools.hh>
-# include <vaucanson/algebra/concrete/letter/couple_letter.hh>
-# include <vaucanson/algebra/concrete/letter/int_letter.hh>
+# include <vaucanson/algebra/implementation/free_monoid/tools.hh>
+# include <vaucanson/algebra/implementation/letter/couple_letter.hh>
+# include <vaucanson/algebra/implementation/letter/int_letter.hh>
 
 # ifdef VCSN_XML_GENRERIC_WEIGHTED
 #  define CHOOSE_SEMIRING_SET_WEIGHTED(X, Do...)             \

@@ -35,7 +35,7 @@
 
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/aci_canonical.hh>
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/algebra/implementation/series/krat.hh>
 
 template <class Auto>
 bool   aci_canonical_test(tests::Tester& tg)

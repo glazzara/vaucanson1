@@ -1,5 +1,5 @@
-#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
+#include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
+#include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
 #include <string>
 
 #define TEST_STATIC_ARGS \

@@ -1,5 +1,5 @@
-# include <vaucanson/algebra/concrete/semiring/rational_number.hh>
-# include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/algebra/implementation/semiring/rational_number.hh>
+# include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 
 #define TEST_STATIC_ARGS \
 	vcsn::algebra::NumericalSemiring, vcsn::algebra::RationalNumber

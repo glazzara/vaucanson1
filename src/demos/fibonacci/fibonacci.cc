@@ -6,10 +6,10 @@
 #include <vaucanson/algorithms/aut_to_exp.hh>
 #include <vaucanson/algorithms/krat_exp_print.hh>
 #include <vaucanson/algorithms/realtime_composition.hh>
-#include <vaucanson/automata/concrete/generalized.hh>
-#include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
-#include <vaucanson/algebra/concrete/series/krat_exp_verbalization.hh>
-#include <vaucanson/algebra/concrete/series/krat.hh>
+#include <vaucanson/automata/implementation/generalized.hh>
+#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+#include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
+#include <vaucanson/algebra/implementation/series/krat.hh>
 
 using namespace vcsn;
 using namespace vcsn::algebra;

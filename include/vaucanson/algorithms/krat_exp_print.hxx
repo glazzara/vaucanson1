@@ -4,7 +4,7 @@
 # define VCSN_ALGORITHMS_KRAT_EXP_PRINT_HXX
 
 # include <vaucanson/algorithms/krat_exp_print.hh>
-# include <vaucanson/algebra/concrete/series/rat/exp.hh>
+# include <vaucanson/algebra/implementation/series/rat/exp.hh>
 
 namespace vcsn {
   

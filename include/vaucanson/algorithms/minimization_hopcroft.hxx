@@ -34,7 +34,7 @@
 
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
 
-# include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/tools/usual_macros.hh>

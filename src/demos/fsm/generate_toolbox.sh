@@ -53,13 +53,13 @@ cat > $FILE <<EOF
    #include <iostream>
    #include "toolbox.hh"
     #include "arg.hh"
-#include <vaucanson/algebra/concrete/series/rat/exp.hh>
-#include <vaucanson/algebra/concrete/series/krat.hh>
+#include <vaucanson/algebra/implementation/series/rat/exp.hh>
+#include <vaucanson/algebra/implementation/series/krat.hh>
 #include <vaucanson/algorithms/glushkov.hh>
 #include <vaucanson/algorithms/thompson.hh>
    #include <vaucanson/tools/gen_random.hh>
    #include <vaucanson/tools/fsm_dump.hh> 
-   #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+   #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
     using namespace vcsn;
     using namespace toolbox;
 

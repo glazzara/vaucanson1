@@ -14,7 +14,7 @@
  */
 /** @} */
 
-#include <vaucanson/algebra/concrete/series/rat/exp.hh>
+#include <vaucanson/algebra/implementation/series/rat/exp.hh>
 
 namespace vcsn {
 

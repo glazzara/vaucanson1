@@ -7,8 +7,8 @@
 
 %{
 #include <vaucanson/tools/usual.hh>
-#include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
-#include <vaucanson/automata/concrete/generalized.hh>
+#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+#include <vaucanson/automata/implementation/generalized.hh>
 #include <stdexcept>
 #include <sstream>
 #include <iterator>

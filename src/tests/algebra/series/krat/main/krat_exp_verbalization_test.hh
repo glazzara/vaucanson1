@@ -34,8 +34,8 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/design_pattern/element.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_verbalization.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <sstream>
 # include <string>

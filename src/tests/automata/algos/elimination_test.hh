@@ -36,7 +36,7 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/design_pattern/element.hh>
-# include <vaucanson/automata/concrete/generalized.hh>
+# include <vaucanson/automata/implementation/generalized.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/algorithms/eval.hh>
 

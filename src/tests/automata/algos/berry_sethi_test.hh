@@ -35,7 +35,7 @@
 
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/berry_sethi.hh>
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/algebra/implementation/series/krat.hh>
 
 template <class Auto>
 bool	berry_sethi_test(tests::Tester& tg)

@@ -30,7 +30,7 @@
 #include <iostream>
 
 // #include <vaucanson/design_pattern/design_pattern.hh>
-#include <vaucanson/algebra/concrete/alphabets/predefs.hh>
+#include <vaucanson/algebra/implementation/alphabets/predefs.hh>
 
 
 int main()

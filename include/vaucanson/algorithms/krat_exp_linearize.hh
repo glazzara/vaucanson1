@@ -42,12 +42,12 @@
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
-# include <vaucanson/algebra/concrete/series/series.hh>
-# include <vaucanson/algebra/concrete/alphabets/alphabets.hh>
-# include <vaucanson/algebra/concrete/free_monoid/words.hh>
-# include <vaucanson/algebra/concrete/letter/couple_letter.hh>
+# include <vaucanson/algebra/implementation/series/series.hh>
+# include <vaucanson/algebra/implementation/alphabets/alphabets.hh>
+# include <vaucanson/algebra/implementation/free_monoid/words.hh>
+# include <vaucanson/algebra/implementation/letter/couple_letter.hh>
 # include <vaucanson/misc/char_traits.hh>
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/algebra/implementation/series/krat.hh>
 
 # include <utility>
 

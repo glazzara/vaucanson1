@@ -1,6 +1,6 @@
-#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-#include <vaucanson/algebra/concrete/series/series.hh>
+#include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
+#include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+#include <vaucanson/algebra/implementation/series/series.hh>
 
 #define TEST_STATIC_ARGS				\
 	vcsn::Element<					\

@@ -38,7 +38,7 @@
 # include <vaucanson/algorithms/concatenate.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/algorithms/realtime.hh>
-# include <vaucanson/automata/concrete/generalized.hh>
+# include <vaucanson/automata/implementation/generalized.hh>
 
 template <class Auto>
 bool concat_test(tests::Tester& tg)

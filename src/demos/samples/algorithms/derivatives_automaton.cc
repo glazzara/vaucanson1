@@ -29,9 +29,9 @@
 //
 #include <vaucanson/design_pattern/design_pattern.hh>
 #include <vaucanson/tools/usual.hh>
-#include <vaucanson/algebra/concrete/series/rat/exp.hh>
-#include <vaucanson/algebra/concrete/series/krat.hh>
-#include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+#include <vaucanson/algebra/implementation/series/rat/exp.hh>
+#include <vaucanson/algebra/implementation/series/krat.hh>
+#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 #include <vaucanson/tools/dot_dump.hh>
 #include <string>
 #include <vaucanson/algorithms/derivatives_automaton.hh>

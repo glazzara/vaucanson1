@@ -34,7 +34,7 @@
 # define LINEAR_INDEX_START	1
 
 # include <vaucanson/algorithms/krat_exp_linearize.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
 
 namespace vcsn {
 

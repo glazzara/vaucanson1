@@ -1,4 +1,4 @@
-# include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
+# include <vaucanson/algebra/implementation/semiring/tropical_semiring.hh>
 
 #define TEST_STATIC_ARGS \
 	vcsn::algebra::TropicalSemiring<vcsn::algebra::TropicalMax>, int

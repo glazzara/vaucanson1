@@ -32,9 +32,9 @@
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/realtime.hh>
 #include <vaucanson/algorithms/complete.hh>
-#include <vaucanson/algebra/concrete/series/rat/exp.hh>
-#include <vaucanson/algebra/concrete/series/krat.hh>
-#include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
+#include <vaucanson/algebra/implementation/series/rat/exp.hh>
+#include <vaucanson/algebra/implementation/series/krat.hh>
+#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 #include <vaucanson/algorithms/standard_of.hh>
 #include <vaucanson/algorithms/thompson.hh>
 #include <vaucanson/algorithms/eval.hh>

@@ -30,9 +30,9 @@
 #ifndef VCSN_XML_KRAT_TO_POLYNOM_HH
 # define VCSN_XML_KRAT_TO_POLYNOM_HH
 
-# include <vaucanson/algebra/concrete/series/krat.hh>
-# include <vaucanson/algebra/concrete/series/rat/nodes.hh>
-# include <vaucanson/algebra/concrete/series/polynoms.hh>
+# include <vaucanson/algebra/implementation/series/krat.hh>
+# include <vaucanson/algebra/implementation/series/rat/nodes.hh>
+# include <vaucanson/algebra/implementation/series/polynoms.hh>
 
 // At this moment, it does not convert everything, the expression must be in
 // disjonctive form.

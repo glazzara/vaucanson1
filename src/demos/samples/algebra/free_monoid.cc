@@ -29,7 +29,7 @@
 //
 #include <iostream>
 #include <string>
-#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
+#include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
 
 using namespace vcsn;
 using namespace vcsn::algebra;

@@ -27,10 +27,10 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#include <vaucanson/algebra/concrete/free_monoid/predefs.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-#include <vaucanson/algebra/concrete/series/series.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
+#include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
+#include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+#include <vaucanson/algebra/implementation/series/series.hh>
+#include <vaucanson/algebra/implementation/series/polynoms.hh>
 
 
 int main()

@@ -35,13 +35,13 @@
 # include <sstream>
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/misc/selectors.hh>
-# include <vaucanson/algebra/concrete/predefs.hh>
-# include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-# include <vaucanson/algebra/concrete/series/polynoms.hh>
-# include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-# include <vaucanson/algebra/concrete/series/series.hh>
+# include <vaucanson/algebra/implementation/predefs.hh>
+# include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
+# include <vaucanson/algebra/implementation/series/polynoms.hh>
+# include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+# include <vaucanson/algebra/implementation/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concrete/graph.hh>
+# include <vaucanson/automata/implementation/graph.hh>
 # include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/tools/usual_macros.hh>
 

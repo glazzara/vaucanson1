@@ -34,7 +34,7 @@
 # include <vaucanson/xml/krat_to_polynom.hh>
 # include <vaucanson/xml/infos.hh>
 
-# include <vaucanson/algebra/concrete/letter/couple_letter.hh>
+# include <vaucanson/algebra/implementation/letter/couple_letter.hh>
 # include <vaucanson/xml/errors.hh>
 
 # include <string>

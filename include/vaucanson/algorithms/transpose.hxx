@@ -31,7 +31,7 @@
 # define VCSN_ALGORITHMS_TRANSPOSE_HXX
 
 #include <vaucanson/algorithms/transpose.hh>
-#include <vaucanson/automata/concrete/transpose_view.hh>
+#include <vaucanson/automata/implementation/transpose_view.hh>
 #include <vaucanson/automata/concept/copy.hh>
 
 namespace vcsn

@@ -32,8 +32,8 @@
 #ifndef VCSN_MISC_RANDOM_HH
 # define VCSN_MISC_RANDOM_HH
 
-# include <vaucanson/algebra/concrete/letter/range.hh>
-# include <vaucanson/algebra/concrete/semiring/rational_number.hh>
+# include <vaucanson/algebra/implementation/letter/range.hh>
+# include <vaucanson/algebra/implementation/semiring/rational_number.hh>
 
 namespace utility {
 

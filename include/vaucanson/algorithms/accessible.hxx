@@ -33,7 +33,7 @@
 # include <vaucanson/algorithms/accessible.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/automata/concrete/transpose_view.hh>
+# include <vaucanson/automata/implementation/transpose_view.hh>
 # include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/tools/usual_macros.hh>
 

@@ -1,4 +1,4 @@
-#include <vaucanson/algebra/concrete/alphabets/predefs.hh>
+#include <vaucanson/algebra/implementation/alphabets/predefs.hh>
 
 #define TEST_STATIC_ARGS \
    vcsn::algebra::char_letter::Alphabets, \

@@ -32,7 +32,7 @@
 
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concrete/graph.hh>
+# include <vaucanson/automata/implementation/graph.hh>
 
 # include <vaucanson/xml/xml_automaton.hh>
 # include <vaucanson/xml/xml_set.hh>

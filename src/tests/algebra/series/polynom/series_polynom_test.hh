@@ -36,7 +36,7 @@
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/tools/usual.hh>
 
-# include <vaucanson/algebra/concrete/series/polynoms.hh>
+# include <vaucanson/algebra/implementation/series/polynoms.hh>
 
 
 using namespace vcsn;

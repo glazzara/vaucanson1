@@ -35,7 +35,7 @@
 
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/derivatives_automaton.hh>
-# include <vaucanson/algebra/concrete/series/krat.hh>
+# include <vaucanson/algebra/implementation/series/krat.hh>
 
 template <class Auto>
 bool	derivatives_automaton_test(tests::Tester& tg)
