@@ -17,182 +17,256 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#ifndef AUTOMATA_CONCEPT_AUTOMATON_IMPL_HH
+# define AUTOMATA_CONCEPT_AUTOMATON_IMPL_HH
 
-#ifndef AUTOMATA_AUTOMATON_IMPL_HH
-#define AUTOMATA_AUTOMATON_IMPL_HH
+# include <vaucanson/fundamental/slots.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 
-#include <vaucanson/fundamental/slots.hh>
-#include <vaucanson/automata/concept/automata_base.hh>
+namespace vcsn {
 
-namespace vcsn
-{
-  template<typename Kind,
-	   typename Series /* the Series algebraic structure type */,
-	   typename SeriesT /* the data type for series values in initial/final */,
-	   class Backend /* the class doing all the dirty work */, 
-	   typename Tag /* the tag type for the automaton */,
-	   template <class, class> class Container /* the container used for storing initial/final */>
+  /*! \addtogroup automata */  /* @{ */
+  /*! \addtogroup concept */  /* @{ */
+
+  /*--------------.
+  | AutomatonImpl |
+  `--------------*/
+  //! AutomatonImpl is an data structure adapter to automaton
+  //! implementation concept.
+  /*! AutomatonImpl is a parameterized class whose role is to equipped
+   *  a data structure with automaton implementation compatible
+   *  methods.  The data structure must provides a way of storing
+   *  states, edges and some basic delta functions.  An instance of
+   *  AutomatonImpl holds the implementation, the series set, initial
+   *  and final applications and, optionally the tags associated with
+   *  the automaton.  
+   * 
+   *  Proxy delegation is not done as usual. We use external operators
+   *  to permit a finer specialization power and to avoid binary
+   *  methods problems.
+   */
+  template <
+    typename			  Kind,
+    typename			  Series,
+    typename		  	  SeriesT, 
+    class			  Backend, 
+    typename			  Tag, 
+    template <class, class> class Container 
+  >
   class AutomatonImpl
-  {
-  protected:
-    typedef Container<unsigned, SeriesT> map_t;
-  public:
+    {
+    protected:
+      /*! type of initial and final application. */
+      typedef Container<unsigned, SeriesT>      map_t;
 
-    typedef Kind adapter_kind_t;
-    typedef Tag tag_t;
-    typedef Series series_t;
-    typedef SeriesT series_value_t;
+    public:
+      /*! the kind of label that the data structure hold. 
+       *  can be : 
+       *  - label_are_series
+       *  - label_are_couples
+       */
+      typedef Kind				adapter_kind_t;
 
-    typedef typename Backend::label_t label_t;
+      /*! the type of tag held by the automaton. (can be empty) */
+      typedef Tag				tag_t;
 
-    typedef typename Backend::states_t states_t;
-    typedef typename Backend::edges_t edges_t;
+      /*! the type of the set of series. */
+      typedef Series				series_t;
 
-    AutomatonImpl();
-    AutomatonImpl(const AutomatonImpl& other);
+      /*! the type of implementation of series element. */
+      typedef SeriesT				series_value_t;
 
-//     template<typename K_, typename T_, typename B_, typename Tg_, template<class,class> class C_>
-//     AutomatonImpl(const AutomatonImpl<K_, Series, T_, B_, Tg_, C_>& other)
-//       : series_(other.series())
-//     {
-//       // FIXME: insert copy code here 
-//     }
-    
-    // there is no operator= in this class, because copy is handled
-    // through utility::ref<>.
+      /*! the type of the data structure label. */
+      typedef typename Backend::label_t		label_t;
 
-    typename automaton_traits<Backend>::states_ret_t
-    states() const;
+      /*! the type of the states container. */
+      typedef typename Backend::states_t	states_t;
 
-    typename automaton_traits<Backend>::edges_ret_t
-    edges() const;
+      /*! the type of the edges container. */
+      typedef typename Backend::edges_t		edges_t;
+      
+      /*! default constructor. */
+      AutomatonImpl();
 
-    typename automaton_traits<Backend>::initial_ret_t
-    initial() const;
+      /*! copy constructor. */
+      AutomatonImpl(const AutomatonImpl& other);
 
-    typename automaton_traits<Backend>::final_ret_t
-    final() const;
+      /*! states container accessor. */
+      typename automaton_traits<Backend>::states_ret_t
+      states() const;
 
+      /*! edges container accessor. */
+      typename automaton_traits<Backend>::edges_ret_t
+      edges() const;
+      
+      /*! initial application accessor. */
+      typename automaton_traits<Backend>::initial_ret_t
+      initial() const;
+      
+      /*! final application accessor. */
+      typename automaton_traits<Backend>::final_ret_t
+      final() const;
 
-    Tag& tag();
-    const Tag& tag() const;
+      /*! series set accessor. */
+      Series& series();
 
-    
-    unsigned add_state();
+      /*! series set accessor. (const version) */
+      const Series& series() const;
 
-    unsigned add_edge(unsigned from, unsigned to, const label_t& label);
+      /*! tag accessor. */
+      Tag&	 tag();
+      
+      /*! tag accessor. (const version) */
+      const Tag& tag() const;
 
-    void del_state(unsigned s);
+      /*! return a fresh state. */
+      hstate_t add_state();
+      
+      /*! return a fresh edge. */
+      hedge_t add_edge(hstate_t from, hstate_t to, const label_t& label);
 
-    void del_edge(unsigned e);
+      /*! remove a state. */
+      void del_state(hstate_t s);
+      
+      /*! remove an edge. */
+      void del_edge(hedge_t e);
 
-    void safe_del_state(unsigned s);
+      /*! remove a state and every references to it. */
+      void safe_del_state(hstate_t s);
+      
+      /*! check if a given state is in the automaton. */
+      bool has_state(hstate_t s) const;
+      
+      /*! check if an edge is in the automaton. */
+      bool has_edge(hedge_t e) const;
+      
+      /*! store the output states of 'from' using 'out'. */
+      template<typename Iter>
+      void delta_states(Iter out, hstate_t from) const;
+      
+      /*! store the output edges of 'from' using 'out'. */
+      template<typename Iter>
+      void delta_edges(Iter out, hstate_t from) const;
+      
+      /*! store the output states of 'from' which matches 'q' query
+	using 'out' */
+      template<typename Iter, typename T>
+      void delta_states(Iter out, hstate_t from, const T& q) const;
 
-    bool has_state(unsigned s) const;
+      /*! store the output edges of 'from' which matches 'q' query
+	using 'out' */      
+      template<typename Iter, typename T>
+      void delta_edges(Iter out, hstate_t from, const T& q) const;
+      
+      /*! store the input states of 'from' using 'out'. */
+      template<typename Iter>
+      void rdelta_states(Iter out, hstate_t from) const;
+      
+      /*! store the input edges of 'from' using 'out'. */
+      template<typename Iter>
+      void rdelta_edges(Iter out, hstate_t from) const;
 
-    bool has_edge(unsigned e) const;
+      /*! store the input states of 'from' which matches 'q' query
+	using 'out' */      
+      template<typename Iter, typename T>
+      void rdelta_states(Iter out, hstate_t from, const T& q) const;
+      
+      /*! store the input edges of 'from' which matches 'q' query
+	using 'out' */
+      template<typename Iter, typename T>
+      void rdelta_edges(Iter out, hstate_t from, const T& q) const;
 
-    template<typename Iter>
-    void delta_states(Iter out, unsigned from) const;
+      /*! return true if the state 's' is initial. */
+      bool is_initial(hstate_t s) const;
+      
+      /*! return true if the state 's' is final. */
+      bool is_final(hstate_t s) const;
+      
+      /*! set the state 's' to be initial. */
+      void set_initial(hstate_t s);
+      
+      /*! unset the state 's' to be initial. */
+      void unset_initial(hstate_t s);
+      
+      /*! make the support of the initital application to be empty. */
+      void clear_initial();
 
-    template<typename Iter>
-    void delta_edges(Iter out, unsigned from) const;
-    
-    template<typename Iter, typename T>
-    void delta_states(Iter out, unsigned from, const T& q) const;
+      /*! associate an initial multiplicity to 's'. */
+      template<typename T>
+      void set_initial(hstate_t s, const Element<series_t, T>& v);
 
-    template<typename Iter, typename T>
-    void delta_edges(Iter out, unsigned from, const T& q) const;
+      /*! set the state 's' to be final. */
+      void set_final(hstate_t s);
 
-    template<typename Iter>
-    void rdelta_states(Iter out, unsigned from) const;
+      /*! unset the state 's' to be final. */
+      void unset_final(hstate_t s);
 
-    template<typename Iter>
-    void rdelta_edges(Iter out, unsigned from) const;
-    
-    template<typename Iter, typename T>
-    void rdelta_states(Iter out, unsigned from, const T& q) const;
+      /*! make the support of the final application to be empty. */
+      void clear_final();
+      
+      /*! associate a final multiplicity to 's'. */
+      template<typename T>
+      void set_final(hstate_t s, const Element<series_t, T>& v);
 
-    template<typename Iter, typename T>
-    void rdelta_edges(Iter out, unsigned from, const T& q) const;
+      /*! return the initial multiplicity of 's'. */
+      Element<series_t, series_value_t>
+      get_initial(hstate_t s) const;
 
-    bool is_initial(unsigned s) const;
+      /*! return the final multiplicity of 's'. */
+      Element<series_t, series_value_t>
+      get_final(hstate_t s) const;
 
-    bool is_final(unsigned s) const;
+      /*! return the origin of the edge 'e'. */
+      hstate_t origin_of(hedge_t e) const;
 
-    void set_initial(unsigned s);
+      /*! return the aim of the edge 'e'. */
+      hstate_t aim_of(hedge_t e) const;
 
-    void unset_initial(unsigned s);
+      /*! return the label of the edge 'e'. */
+      typename automaton_traits<Backend>::label_ret_t
+      label_of(hedge_t e) const;
+     
+      // this is not for public use: (Raph)
+      // FIXME: so why is it public ? (Yann)
+      Backend& impl();
+      const Backend& impl() const;
 
-    void clear_initial();
+    protected:
+      Backend		impl_;
+      Tag		tag_;
+      Series		series_;
+      map_t		initial_;
+      map_t		final_;
+    };
 
-    template<typename T>
-    void set_initial(unsigned s, const Element<series_t, T>& v);
-
-    void set_final(unsigned s);
-
-
-    void unset_final(unsigned s);
-
-    void clear_final();
-
-    template<typename T>
-    void set_final(unsigned s, const Element<series_t, T>& v);
-
-    Element<series_t, series_value_t>
-    get_initial(unsigned s) const;
-
-    Element<series_t, series_value_t>
-    get_final(unsigned s) const;
-
-    unsigned origin_of(unsigned e) const;
-
-    unsigned aim_of(unsigned e) const;
-
-    typename automaton_traits<Backend>::label_ret_t
-    label_of(unsigned e) const;
-
-    Series& series();
-    const Series& series() const;
-
-    // this is not for public use:
-    Backend& impl();
-    const Backend& impl() const;
-
-  protected:
-    Backend impl_;
-    Tag tag_;
-    Series series_;
-    map_t initial_;
-    map_t final_;
-  };
-
-  template<typename K, typename S, typename T, typename B, typename Tg, template<class,class>class C>
+  template<typename K, typename S, typename T, typename B, typename Tg, 
+	   template<class,class> class C>
   struct automaton_traits<AutomatonImpl<K, S, T, B, Tg, C> >
   {
-    typedef K adapter_kind_t;
-    typedef S series_t;
-    typedef T series_value_t;
-    typedef Tg tag_t;
-    typedef typename B::label_t label_t;
-    typedef typename B::states_t states_t;
-    typedef typename B::edges_t edges_t;
-    typedef typename B::initial_t initial_t;
-    typedef typename B::final_t final_t;
+    typedef K					adapter_kind_t;
+    typedef S					series_t;
+    typedef T					series_value_t;
+    typedef Tg					tag_t;
+    typedef typename B::label_t			label_t;
+    typedef typename B::states_t		states_t;
+    typedef typename B::edges_t			edges_t;
+    typedef typename B::initial_t		initial_t;
+    typedef typename B::final_t			final_t;
 
-    typedef typename states_t::const_iterator state_iterator;
-    typedef typename edges_t::const_iterator edge_iterator;
+    typedef typename states_t::const_iterator   state_iterator;
+    typedef typename edges_t::const_iterator    edge_iterator;
 
-    typedef typename automaton_traits<B>::states_ret_t states_ret_t;
-    typedef typename automaton_traits<B>::edges_ret_t edges_ret_t;
+    typedef typename automaton_traits<B>::states_ret_t	states_ret_t;
+    typedef typename automaton_traits<B>::edges_ret_t	edges_ret_t;
     typedef typename automaton_traits<B>::initial_ret_t initial_ret_t;
-    typedef typename automaton_traits<B>::final_ret_t final_ret_t;
-    typedef typename automaton_traits<B>::label_ret_t label_ret_t;
+    typedef typename automaton_traits<B>::final_ret_t	final_ret_t;
+    typedef typename automaton_traits<B>::label_ret_t	label_ret_t;
   };
 
+  /*! @} @} */
 
-}
+} // vcsn
 
 # include <vaucanson/automata/concept/automaton_impl.hxx>
 
-#endif
+#endif // AUTOMATA_CONCEPT_AUTOMATON_IMPL_HH

@@ -29,6 +29,7 @@
 namespace vcsn {
 
   /*! \addtogroup automata */  /* @{ */
+  /*! \addtogroup concept */  /* @{ */
 
   /*-------------------.
   | AutomataBase<Self> |
@@ -54,6 +55,27 @@ namespace vcsn {
   | MetaElement<AutomataBase<Self>, T> |
   `-----------------------------------*/
   //! Services of every element of the automata set. 
+  /*! MetaElement<AutomataBase<Self>, T> defines the interface of
+    every automaton that is the result of the interaction of a
+    structural element (AutomataBase<Self>) and an implementation T.
+    
+    The implementation must be compatible with the automaton
+    implementation concept. For this purpose, you can either use
+    directly your implementation of automaton or use for example the
+    class automaton_impl which is an adapter that enrich basic data
+    structures to make them compatible with automaton implementation
+    concept.
+    
+    This class is derivated from AutoKind which is paramaterized by the
+    kind of label that are hold by the data structure. Indeed, you
+    have the choice to use series element or implementation that can
+    be converted easily to series element (as letter or series
+    implementation). AutoKind will adapt accessors to label so as to
+    enrich them where they are not series element or to extract their
+    implementations when we want a low-level access.
+
+   */
+
   template<typename Self, typename T>
   struct MetaElement<AutomataBase<Self>, T>
     : MetaElement<Structure<Self>, T>, 
@@ -349,9 +371,9 @@ namespace vcsn {
       query(label(e)) = true in the container 'res' */
     template<typename Container, typename L>	
     void rdeltac(Container& res, 
-	       hstate_t from, 
-	       const L& query,
-	       delta_kind::states k) const;
+		 hstate_t from, 
+		 const L& query,
+		 delta_kind::states k) const;
 
 
   protected:

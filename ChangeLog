@@ -1,3 +1,14 @@
+2002-10-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.115)
+	* include/vaucanson/automata/concept/kinds.hh: 
+		redesigned to be documented.
+	* include/vaucanson/automata/concept/handlers.hh: idem.
+	* include/vaucanson/automata/concept/concepts.hh: minor change.
+	* include/vaucanson/automata/concept/automaton_impl.hxx: idem.
+	* include/vaucanson/automata/concept/automaton_impl.hh: documented.
+	* include/vaucanson/automata/concept/automata_base.hh: idem.
+	* include/vaucanson/automata/concept/kinds.hh: idem.
+
 2002-09-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.114)
 	* include/vaucanson/algebra/concept/alphabets_base.hh: minor

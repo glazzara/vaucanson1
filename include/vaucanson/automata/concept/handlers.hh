@@ -17,23 +17,25 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-#ifndef AUTOMATA_HANDLERS_HH
-#define AUTOMATA_HANDLERS_HH
+#ifndef AUTOMATA_CONCEPT_HANDLERS_HH
+# define AUTOMATA_CONCEPT_HANDLERS_HH
 
 # include <iostream>
 
-namespace vcsn
-{
-  struct state_h { };
-  struct edge_h { };
+namespace vcsn {
+
+  struct state_h 
+  {};
+
+  struct edge_h 
+  {};
 
   template<typename Tag>
   class handler
   {
   public:
     typedef Tag kind;
-
+    
     handler();
 
     handler(unsigned h);
@@ -57,17 +59,29 @@ namespace vcsn
 
 } // vcsn
 
-#define HOPERATOR(Op)								\
-template<typename kind>								\
-bool operator Op (const vcsn::handler<kind>& h1, const vcsn::handler<kind>& h2);	\
+template<typename kind>					
+bool operator==(const vcsn::handler<kind>& h1, 
+		const vcsn::handler<kind>& h2);      
 
+template<typename kind>					
+bool operator!=(const vcsn::handler<kind>& h1, 
+		const vcsn::handler<kind>& h2);      
 
-HOPERATOR(==);
-HOPERATOR(!=);
-HOPERATOR(<);
-HOPERATOR(>);
-HOPERATOR(<=);
-HOPERATOR(>=);
+template<typename kind>					
+bool operator<(const vcsn::handler<kind>& h1, 
+		const vcsn::handler<kind>& h2);      
+
+template<typename kind>					
+bool operator>(const vcsn::handler<kind>& h1, 
+		const vcsn::handler<kind>& h2);      
+
+template<typename kind>					
+bool operator<=(const vcsn::handler<kind>& h1, 
+		const vcsn::handler<kind>& h2);      
+
+template<typename kind>					
+bool operator>=(const vcsn::handler<kind>& h1, 
+		const vcsn::handler<kind>& h2);      
 
 namespace std {
 
@@ -77,8 +91,6 @@ namespace std {
 
 } // std
 
-#undef HOPERATOR
-
 # include <vaucanson/automata/concept/handlers.hxx>
 
-#endif
+#endif // AUTOMATA_CONCEPT_HANDLERS_HH

@@ -17,23 +17,20 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#ifndef AUTOMATA_CONCEPT_AUTOMATON_IMPL_HXX
+# define AUTOMATA_CONCEPT_AUTOMATON_IMPL_HXX
 
-#ifndef AUTOMATA_AUTOMATON_IMPL_HXX
-#define AUTOMATA_AUTOMATON_IMPL_HXX
+# include <vaucanson/fundamental/slots.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 
-#include <vaucanson/fundamental/slots.hh>
-#include <vaucanson/automata/concept/automata_base.hh>
-
-namespace vcsn
-{
+namespace vcsn {
  
-
-
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  AutomatonImpl() {}
+  AutomatonImpl() 
+  {}
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
@@ -47,14 +44,15 @@ namespace vcsn
       final_(other.final_)
   {}
 
-
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
   typename automaton_traits<Backend>::states_ret_t
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
   states() const
-  { return auto_op_states(series(), impl_); }
+  { 
+    return auto_op_states(series(), impl_); 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
@@ -62,7 +60,9 @@ namespace vcsn
   typename automaton_traits<Backend>::edges_ret_t
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
   edges() const
-  { return auto_op_edges(series(), impl_); }
+  { 
+    return auto_op_edges(series(), impl_); 
+  }
     
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
@@ -70,7 +70,9 @@ namespace vcsn
   typename automaton_traits<Backend>::initial_ret_t
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
   initial() const
-  { return auto_op_initial(series(), impl_); }
+  { 
+    return auto_op_initial(series(), impl_); 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
@@ -78,7 +80,9 @@ namespace vcsn
   typename automaton_traits<Backend>::final_ret_t
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
   final() const
-  { return auto_op_final(series(), impl_); }
+  { 
+    return auto_op_final(series(), impl_); 
+  }
 
     
   template<typename Kind, typename Series, typename SeriesT,
@@ -86,37 +90,47 @@ namespace vcsn
 	   template <class, class> class Container>
   Tag&
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  tag() { return tag_; }
+  tag() 
+  { 
+    return tag_; 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
   const Tag& 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  tag() const { return tag_; }
+  tag() const 
+  { 
+    return tag_; 
+  }
    
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
-  unsigned 
+  hstate_t 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
   add_state()
-  { return auto_op_add_state(series(), impl_); }
+  { 
+    return auto_op_add_state(series(), impl_); 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
-  unsigned 
+  hedge_t 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  add_edge(unsigned from, unsigned to, const label_t& label)
-  { return auto_op_add_edge(series(), impl_, from, to, label); }
+  add_edge(hstate_t from, hstate_t to, const label_t& label)
+  { 
+    return auto_op_add_edge(series(), impl_, from, to, label); 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  del_state(unsigned s)
+  del_state(hstate_t s)
   { 
     initial_.erase(s);
     final_.erase(s);
@@ -128,7 +142,7 @@ namespace vcsn
 	   template <class, class> class Container>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  del_edge(unsigned e)
+  del_edge(hedge_t e)
   { 
     auto_op_del_edge(series(), impl_, e); 
   }
@@ -138,7 +152,7 @@ namespace vcsn
 	   template <class, class> class Container>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  safe_del_state(unsigned s)
+  safe_del_state(hstate_t s)
   { 
     initial_.erase(s);
     final_.erase(s);
@@ -150,7 +164,7 @@ namespace vcsn
 	   template <class, class> class Container>
   bool 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  has_state(unsigned s) const
+  has_state(hstate_t s) const
   { 
     return auto_op_has_state(series(), impl_, s); 
   }
@@ -160,7 +174,7 @@ namespace vcsn
 	   template <class, class> class Container>
   bool 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  has_edge(unsigned e) const
+  has_edge(hedge_t e) const
   { 
     return auto_op_has_edge(series(), impl_, e); 
   }
@@ -171,7 +185,7 @@ namespace vcsn
   template<typename Iter>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  delta_states(Iter out, unsigned from) const
+  delta_states(Iter out, hstate_t from) const
   { 
     auto_op_delta_states(series(), impl_, out, from); 
   }
@@ -182,7 +196,7 @@ namespace vcsn
   template<typename Iter>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  delta_edges(Iter out, unsigned from) const
+  delta_edges(Iter out, hstate_t from) const
   { 
     auto_op_delta_edges(series(), impl_, out, from); 
   }
@@ -193,7 +207,7 @@ namespace vcsn
   template<typename Iter, typename T>
   void
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  delta_states(Iter out, unsigned from, const T& q) const
+  delta_states(Iter out, hstate_t from, const T& q) const
   { 
     auto_op_delta_states(series(), impl_, out, from, q); 
   }
@@ -204,7 +218,7 @@ namespace vcsn
   template<typename Iter, typename T>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  delta_edges(Iter out, unsigned from, const T& q) const
+  delta_edges(Iter out, hstate_t from, const T& q) const
   { 
     auto_op_delta_edges(series(), impl_, out, from, q); 
   }
@@ -215,7 +229,7 @@ namespace vcsn
   template<typename Iter>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  rdelta_states(Iter out, unsigned from) const
+  rdelta_states(Iter out, hstate_t from) const
   { 
     auto_op_rdelta_states(series(), impl_, out, from); 
   }
@@ -226,7 +240,7 @@ namespace vcsn
   template<typename Iter>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  rdelta_edges(Iter out, unsigned from) const
+  rdelta_edges(Iter out, hstate_t from) const
   { 
     auto_op_rdelta_edges(series(), impl_, out, from); 
   }
@@ -237,7 +251,7 @@ namespace vcsn
   template<typename Iter, typename T>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  rdelta_states(Iter out, unsigned from, const T& q) const
+  rdelta_states(Iter out, hstate_t from, const T& q) const
   { 
     auto_op_rdelta_states(series(), impl_, out, from, q); 
   }
@@ -248,7 +262,7 @@ namespace vcsn
   template<typename Iter, typename T>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  rdelta_edges(Iter out, unsigned from, const T& q) const
+  rdelta_edges(Iter out, hstate_t from, const T& q) const
   { 
     auto_op_rdelta_edges(series(), impl_, out, from, q); 
   }
@@ -258,7 +272,7 @@ namespace vcsn
 	   template <class, class> class Container>
   bool
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  is_initial(unsigned s) const
+  is_initial(hstate_t s) const
   { 
     return initial().find(s) != initial().end(); 
   }
@@ -268,7 +282,7 @@ namespace vcsn
 	   template <class, class> class Container>
   bool 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  is_final(unsigned s) const
+  is_final(hstate_t s) const
   { 
     return final().find(s) != final().end(); 
   }
@@ -278,7 +292,7 @@ namespace vcsn
 	   template <class, class> class Container>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  set_initial(unsigned s)
+  set_initial(hstate_t s)
   {
     auto_op_set_initial(series(), impl_, s);
     initial_[s] = identity_value(SELECT(series_t), SELECT(series_value_t));
@@ -289,7 +303,7 @@ namespace vcsn
 	   template <class, class> class Container>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  unset_initial(unsigned s)
+  unset_initial(hstate_t s)
   {
     auto_op_clear_initial(series(), impl_, s);
     initial_.erase(s);
@@ -315,7 +329,7 @@ namespace vcsn
   template<typename T>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  set_initial(unsigned s, const Element<series_t, T>& v)
+  set_initial(hstate_t s, const Element<series_t, T>& v)
   {
     if (v == zero_value(SELECT(series_t), SELECT(series_value_t)))
       {
@@ -334,7 +348,7 @@ namespace vcsn
 	   template <class, class> class Container>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  set_final(unsigned s)
+  set_final(hstate_t s)
   {
     auto_op_set_final(series(), impl_, s);
     final_[s] = identity_value(SELECT(series_t), SELECT(series_value_t));
@@ -345,7 +359,7 @@ namespace vcsn
 	   template <class, class> class Container>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  unset_final(unsigned s)
+  unset_final(hstate_t s)
   {
     auto_op_clear_final(series(), impl_, s);
     final_.erase(s);
@@ -371,7 +385,7 @@ namespace vcsn
   template<typename T>
   void 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  set_final(unsigned s, const Element<series_t, T>& v)
+  set_final(hstate_t s, const Element<series_t, T>& v)
   {
     if (v == zero_value(SELECT(series_t), SELECT(series_value_t)))
       {
@@ -390,7 +404,7 @@ namespace vcsn
 	   template <class, class> class Container>
   Element<Series, SeriesT>
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::    
-  get_initial(unsigned s) const
+  get_initial(hstate_t s) const
   {
     typename map_t::const_iterator i;
     if ((i = initial_.find(s)) == initial_.end())
@@ -405,7 +419,7 @@ namespace vcsn
 	   template <class, class> class Container>
   Element<Series, SeriesT>
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  get_final(unsigned s) const
+  get_final(hstate_t s) const
   {
     typename map_t::const_iterator i;
     if ((i = final_.find(s)) == final_.end())
@@ -418,26 +432,32 @@ namespace vcsn
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
-  unsigned 
+  hstate_t 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  origin_of(unsigned e) const
-  { return edges().find(e).origin(); }
+  origin_of(hedge_t e) const
+  { 
+    return edges().find(e).origin(); 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
-  unsigned 
+  hstate_t 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  aim_of(unsigned e) const
-  { return edges().find(e).aim(); }
+  aim_of(hedge_t e) const
+  { 
+    return edges().find(e).aim(); 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
   typename automaton_traits<Backend>::label_ret_t
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::    
-  label_of(unsigned e) const
-  { return edges().find(e).label(); }
+  label_of(hedge_t e) const
+  { 
+    return edges().find(e).label(); 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
@@ -445,14 +465,19 @@ namespace vcsn
   Series& 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
   series()
-  { return series_; }
+  { 
+    return series_; 
+  }
 
   template<typename Kind, typename Series, typename SeriesT,
 	   class Backend, typename Tag,
 	   template <class, class> class Container>
   const Series& 
   AutomatonImpl<Kind, Series, SeriesT, Backend, Tag, Container>::
-  series() const { return series_; }
+  series() const 
+  { 
+    return series_; 
+  }
 
   // this is not for public use:
   template<typename Kind, typename Series, typename SeriesT,
@@ -471,6 +496,6 @@ namespace vcsn
   { return impl_; }
 
 
-}  //vcsn
+} // vcsn
 
-#endif
+#endif // AUTOMATA_CONCEPT_AUTOMATON_IMPL_HXX

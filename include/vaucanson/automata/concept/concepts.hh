@@ -17,12 +17,11 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
 #ifndef AUTOMATA_CONCEPTS_HH
-#define AUTOMATA_CONCEPTS_HH
+# define AUTOMATA_CONCEPTS_HH
 
-#include <vaucanson/algebra/concept/concepts.hh>
-#include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/algebra/concept/concepts.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn
 {
