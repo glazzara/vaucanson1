@@ -1,7 +1,7 @@
 // usual.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -54,12 +54,14 @@ namespace vcsn {
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, bool> usual_series_value_t;
-    typedef polynom<WordValue, int> weighted_series_value_t;
+    typedef polynom<WordValue, bool>		usual_series_value_t;
+    typedef polynom<WordValue, int>		weighted_series_value_t;
 
-    typedef Series<NumericalSemiring, Words> usual_series_t;
-    typedef Series<TropicalSemiring<TropicalMax>, Words> tropical_max_series_t;
-    typedef Series<TropicalSemiring<TropicalMin>, Words> tropical_min_series_t;
+    typedef Series<NumericalSemiring, Words>	usual_series_set_t;
+    typedef Series<TropicalSemiring<TropicalMax>, Words>
+						tropical_max_series_set_t;
+    typedef Series<TropicalSemiring<TropicalMin>, Words>
+						tropical_min_series_set_t;
 
     typedef Graph
     <
@@ -81,16 +83,18 @@ namespace vcsn {
       NoTag>
     weighted_automaton_impl_t;
 
-    typedef Element<Automata<usual_series_t>, usual_automaton_impl_t>
+    typedef Element<Automata<usual_series_set_t>, usual_automaton_impl_t>
     usual_automaton_t;
 
-    typedef Element<Automata<usual_series_t>, weighted_automaton_impl_t>
+    typedef Element<Automata<usual_series_set_t>, weighted_automaton_impl_t>
     numerical_automaton_t;
 
-    typedef Element<Automata<tropical_max_series_t>, weighted_automaton_impl_t>
+    typedef Element<Automata<tropical_max_series_set_t>,
+		    weighted_automaton_impl_t>
     tropical_max_automaton_t;
 
-    typedef Element<Automata<tropical_min_series_t>, weighted_automaton_impl_t>
+    typedef Element<Automata<tropical_min_series_set_t>,
+		    weighted_automaton_impl_t>
     tropical_min_automaton_t;
 
     template <class T>
@@ -109,10 +113,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/tools/usual.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/tools/usual.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_TOOLS_USUAL_HH

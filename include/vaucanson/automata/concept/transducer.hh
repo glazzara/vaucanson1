@@ -57,7 +57,7 @@ namespace vcsn {
   template <class Series>
   struct virtual_types<Transducer<Series> >
   {
-    typedef Series		series_t;
+    typedef Series		series_set_t;
   };
 
   /// This is the final class for the set of transducers.
@@ -67,43 +67,43 @@ namespace vcsn {
   {
   public:
     typedef Transducer<Series>				     self_t;
-    typedef typename virtual_types<self_t>::series_t	     series_t;
+    typedef typename virtual_types<self_t>::series_set_t	     series_set_t;
 
-    Transducer(const series_t&);
+    Transducer(const series_set_t&);
 
-    const series_t&	series() const;
+    const series_set_t&	series() const;
 
   private:
-    series_t	series_;
+    series_set_t	series_;
   };
 
   template <class S, class T>
   struct output_projection_helper
   {
-    typedef typename S::series_t::semiring_t
-    typeof_auto_series_t;
-    typedef typename S::series_t::monoid_t              auto_monoid_t;
-    typedef typename typeof_auto_series_t::semiring_t           auto_semiring_t;
-    typedef typename algebra::mute_series_traits<typeof_auto_series_t,
+    typedef typename S::series_set_t::semiring_t
+    typeof_auto_series_set_t;
+    typedef typename S::series_set_t::monoid_t              auto_monoid_t;
+    typedef typename typeof_auto_series_set_t::semiring_t           auto_semiring_t;
+    typedef typename algebra::mute_series_traits<typeof_auto_series_set_t,
 						 auto_semiring_t,
 						 auto_monoid_t>::ret
-    auto_series_t;
+    auto_series_set_t;
 
     typedef typename output_projection_traits<T>::ret          auto_impl_t;
-    typedef Element<Automata<auto_series_t>,
+    typedef Element<Automata<auto_series_set_t>,
 		    auto_impl_t>      ret;
   };
 
   template <class S, class T>
   struct identity_transducer_helper
   {
-    typedef typename S::series_t	 series_t;
-    typedef typename series_t::monoid_t  monoid_t;
-    typedef typename series_t::semiring_t semiring_t;
-    typedef typename algebra::mute_series_traits<series_t, series_t, monoid_t>
-    ::ret    tseries_t;
+    typedef typename S::series_set_t	 series_set_t;
+    typedef typename series_set_t::monoid_t  monoid_t;
+    typedef typename series_set_t::semiring_t semiring_t;
+    typedef typename algebra::mute_series_traits<series_set_t, series_set_t, monoid_t>
+    ::ret    tseries_set_t;
     typedef typename extension_traits<T>::ret impl_t;
-    typedef Element<Transducer<tseries_t>, impl_t> ret;
+    typedef Element<Transducer<tseries_set_t>, impl_t> ret;
   };
 
   template <class S, class T>

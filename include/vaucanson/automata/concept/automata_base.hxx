@@ -45,7 +45,7 @@ namespace vcsn {
   {}
 
   template <typename Self>
-  const typename AutomataBase<Self>::series_t&
+  const typename AutomataBase<Self>::series_set_t&
   AutomataBase<Self>::series() const
   {
     return this->self().series();
@@ -104,7 +104,7 @@ namespace vcsn {
 
   /** the optional information aggregated to the automaton. */
   template <typename Self, typename T>
-  const typename MetaElement<AutomataBase<Self>, T>::series_t&
+  const typename MetaElement<AutomataBase<Self>, T>::series_set_t&
   MetaElement<AutomataBase<Self>, T>::series() const
   {
     return this->structure().series();

@@ -186,7 +186,7 @@ namespace vcsn {
       // construct the automaton.
       monoid_t	  monoid(alpha);
       semiring_t   semiring;
-      series_t	  series(semiring, monoid);
+      series_set_t	  series(semiring, monoid);
       automata_set_t astructure(series);
       automaton_t automaton(aset);
       std::map<int, hstate_t> to_h;

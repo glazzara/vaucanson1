@@ -50,8 +50,8 @@ namespace vcsn {
   struct generalized_traits
   {
     // FIXME: static check on the concept of automaton
-    typedef typename Auto_::series_t		series_t;
-    typedef typename series_t::monoid_t		monoid_t;
+    typedef typename Auto_::series_set_t		series_set_t;
+    typedef typename series_set_t::monoid_t		monoid_t;
     typedef typename Auto_::series_elt_t	series_elt_t;
     typedef typename series_elt_t::monoid_elt_t monoid_elt_t;
     typedef typename monoid_elt_t::value_t	monoid_elt_value_t;
@@ -59,7 +59,7 @@ namespace vcsn {
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
 
     typedef vcsn::Element
-    <vcsn::Automata<series_t>,
+    <vcsn::Automata<series_set_t>,
      Graph<labels_are_series,
 	   monoid_elt_value_t,
 	   semiring_elt_value_t,

@@ -49,7 +49,7 @@ bool   is_isomorph_test(tests::Tester& tg)
       letter_t		lb = at.random_letter(); at.insert(lb);
       monoid_t		md (at);
       semiring_t	sg;
-      series_t		ss (sg, md);
+      series_set_t		ss (sg, md);
       automata_set_t	aa (ss);
 
       automaton_t	au1 (aa);

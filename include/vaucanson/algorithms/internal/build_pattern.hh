@@ -83,7 +83,7 @@ namespace vcsn {
       static bool compare(const Etiq& e1, const Etiq& e2);
     protected:
       // The constructor (protected in order to not instance the class)
-      IncAutomataConstructor(const series_t& series, const Etiq& etiq);
+      IncAutomataConstructor(const series_set_t& series, const Etiq& etiq);
       // Add a link from current state to indicated state
       void	link_to(const Etiq& etiq, const letter_t& l);
       void	link_to(const Etiq& etiq, const series_elt_t& el);
@@ -133,7 +133,7 @@ namespace vcsn {
     protected:
       // The constructor
       template <typename Container>
-      MathAutomataConstructor(const series_t& series,
+      MathAutomataConstructor(const series_set_t& series,
 			      const Container container);
     private:
       // Function which will call those which are defined by user

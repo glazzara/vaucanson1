@@ -57,7 +57,7 @@ namespace vcsn {
   struct virtual_types<Automata<Series> >
     : virtual_types<AutomataBase<Automata<Series> > >
   {
-    typedef Series		series_t;
+    typedef Series		series_set_t;
   };
 
 
@@ -67,14 +67,14 @@ namespace vcsn {
   {
   public:
     typedef Automata<Series>				     self_t;
-    typedef Series series_t;
+    typedef Series series_set_t;
 
-    Automata(const series_t&);
+    Automata(const series_set_t&);
 
-    const series_t&	series() const;
+    const series_set_t&	series() const;
 
   private:
-    SetSlot<series_t> series_;
+    SetSlot<series_set_t> series_;
   };
 
   template <class Series>

@@ -45,7 +45,7 @@ automaton_t new_automaton(InputIterator begin,
     alpha.insert(*e);
   semiring_t		semiring;
   monoid_t		freemonoid (alpha);
-  series_t		series (semiring, freemonoid);
+  series_set_t		series (semiring, freemonoid);
   automata_set_t	automata_set(series);
   return automaton_t (automata_set);
 }
@@ -62,7 +62,7 @@ automaton_t new_automaton(const T& alphabet)
 
 template <class SeriesImpl>
 automaton_t
-do_standard_of(const series_t& structure, const SeriesImpl& impl)
+do_standard_of(const series_set_t& structure, const SeriesImpl& impl)
 {
   automaton_t r = new_automaton(structure.monoid().alphabet());
   standard_of(r, impl);
@@ -82,7 +82,7 @@ standard_of(const Element<SeriesSet, SeriesImpl>& e)
 
 template <class SeriesImpl>
 automaton_t
-do_thompson_of(const series_t& structure, const SeriesImpl& impl)
+do_thompson_of(const series_set_t& structure, const SeriesImpl& impl)
 {
   automaton_t r = new_automaton(structure.monoid().alphabet());
   thompson_of(r, impl);

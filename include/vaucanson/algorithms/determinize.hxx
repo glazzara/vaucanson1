@@ -58,7 +58,7 @@ namespace vcsn {
 			 std::map<hstate_t, std::set<hstate_t> >())
   {
     AUTOMATON_TYPES(input_t);
-    typedef typename input_t::series_t			    series_t;
+    typedef typename input_t::series_set_t			    series_set_t;
     typedef typename std::set<hstate_t>	                    subset_t;
     typedef typename std::map<subset_t, hstate_t>           subset_set_t;
     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;

@@ -47,9 +47,9 @@ namespace vcsn {
   do_backward_closure_here(const AutomataBase<A_>&, Auto& a)
   {
     AUTOMATON_TYPES(Auto);
-    typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
-    typedef std::vector<std::vector<series_elt_t> >	matrix_series_t;
-    typedef std::vector<semiring_elt_t>		matrix_semiring_elt_final_t;
+    typedef std::vector<std::vector<semiring_elt_t> > matrix_semiring_elt_t;
+    typedef std::vector<std::vector<series_elt_t> > matrix_series_set_elt_t;
+    typedef std::vector<semiring_elt_t>	matrix_semiring_elt_final_t;
 
     series_elt_t        series_identity = a.series().zero_;
     semiring_elt_t	semiring_elt_zero = a.series().semiring().wzero_;
@@ -57,7 +57,7 @@ namespace vcsn {
 
     int                   i, j, k, size = a.states().size();
 
-    matrix_series_t		m_series(size), m_series_ret(size);
+    matrix_series_set_elt_t	m_series(size), m_series_ret(size);
     matrix_semiring_elt_t	m_semiring_elt(size), m_semiring_elt_tmp(size);
     matrix_semiring_elt_final_t	m_wfinal(size), m_wfinal_tmp(size);
 

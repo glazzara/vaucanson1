@@ -112,7 +112,7 @@ bool test_derivate(const Expr& specimen,
   typedef typename monoid_elt_t::set_t		monoid_t;		\
   typedef typename krat_exp_t::semiring_elt_t		semiring_elt_t;		\
   typedef typename semiring_elt_t::set_t		semiring_t;		\
-  typedef typename krat_exp_t::set_t		series_t;		\
+  typedef typename krat_exp_t::set_t		series_set_t;		\
   typedef typename monoid_t::letter_t		letter_t;		\
   typedef typename monoid_t::alphabet_t		alphabet_t;		\
   typedef Derivation				derivation_t;
@@ -128,6 +128,6 @@ bool test_derivate(const Expr& specimen,
   Alphabet.insert(B);				\
   monoid_t Monoid(Alphabet);			\
   semiring_t Semiring;				\
-  series_t Series(Semiring, Monoid);
+  series_set_t Series(Semiring, Monoid);
 
 #endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_DERIVATIONS_COMMON_HH

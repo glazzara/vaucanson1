@@ -169,7 +169,7 @@ namespace vcsn {
      *
      * @bug FIXME: Is it necessary to give the series as a separate argument?
      */
-    BerrySethiAlgo(const series_t& series, const exp_t& exp):
+    BerrySethiAlgo(const series_set_t& series, const exp_t& exp):
       MathAutomataConstructor <BerrySethiAlgo, T_auto, etiq_t>
         (series, linearized_alphabet(exp)),
       linear_exp(linearize(exp)),

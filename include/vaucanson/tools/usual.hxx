@@ -43,8 +43,8 @@ namespace vcsn {
 	alpha.insert(*e);
       NumericalSemiring semiring;
       Words freemonoid(alpha);
-      usual_series_t series(semiring, freemonoid);
-      Automata<usual_series_t> automata_set(series);
+      usual_series_set_t series(semiring, freemonoid);
+      Automata<usual_series_set_t> automata_set(series);
       return usual_automaton_t(automata_set);
     }
 
@@ -52,7 +52,7 @@ namespace vcsn {
     R new_automaton(InputIterator begin, InputIterator end)
     {
       typedef typename R::set_t Automata;
-      typedef typename Automata::series_t Series;
+      typedef typename Automata::series_set_t Series;
       typedef typename Series::monoid_t Monoid;
       typedef typename Series::semiring_t Semiring;
       typedef typename Monoid::alphabet_t Alphabet;

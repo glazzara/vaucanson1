@@ -61,11 +61,11 @@ namespace vcsn {
 
     typedef typename Trans_t::value_t                  T;
     typedef typename output_projection_helper<S, T>::ret      Auto_t;
-    typedef typename Auto_t::set_t::series_t           Auto_series_t;
+    typedef typename Auto_t::set_t::series_set_t           Auto_series_set_t;
     typedef typename Auto_t::set_t		       o_automata_set_t;
 
     o_automata_set_t auto_structure
-      (Auto_series_t (lhs.structure().series().semiring()));
+      (Auto_series_set_t (lhs.structure().series().semiring()));
 
     AUTOMATON_TYPES_(Auto_t, a_);
 

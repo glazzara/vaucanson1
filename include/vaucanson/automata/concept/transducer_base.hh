@@ -56,7 +56,7 @@ namespace vcsn {
   {
   public:
     /// The type of the series set associated with the automaton.
-    typedef typename virtual_types<Self>::series_t  series_t;
+    typedef typename virtual_types<Self>::series_set_t  series_set_t;
 
   protected:
     /// The default constructor is protected since it is an abstract class.
@@ -110,7 +110,7 @@ namespace vcsn {
     typedef MetaElement<AutomataBase<Self>, T>		      automaton_t;
 
     /** type the series set from which is build the automaton. */
-    INHERIT_TYPEDEF_(automaton_t, series_t);
+    INHERIT_TYPEDEF_(automaton_t, series_set_t);
 
     /** type of the implementation of series that holds the automaton. */
     INHERIT_TYPEDEF_(automaton_t, series_value_t);

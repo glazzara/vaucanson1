@@ -44,8 +44,8 @@ namespace vcsn {
 	alpha.insert(*e);
       NumericalSemiring semiring;
       Words freemonoid(alpha);
-      series_t series(semiring, freemonoid);
-      Automata<series_t> automata_structure (series);
+      series_set_t series(semiring, freemonoid);
+      Automata<series_set_t> automata_structure (series);
       return automaton_t (automata_structure);
     }
 

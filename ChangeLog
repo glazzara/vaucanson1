@@ -1,3 +1,82 @@
+2004-04-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/contextual_functions.hxx,
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_max_plus.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/tools/gen_random.hxx,
+	* include/vaucanson/tools/fsm_dump.hxx,
+	* include/vaucanson/tools/usual.hh,
+	* include/vaucanson/tools/gen_book.hxx,
+	* include/vaucanson/tools/usual_macros.hh,
+	* include/vaucanson/tools/usual.hxx,
+	* include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/standard_of.hxx,
+	* include/vaucanson/algorithms/forward_closure.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/internal/build_pattern.hxx,
+	* include/vaucanson/algorithms/internal/build_pattern.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx,
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	* include/vaucanson/algorithms/evaluation.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/thompson.hxx,
+	* include/vaucanson/algorithms/krat_exp_linearize.hh,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/berry_sethi.hxx,
+	* include/vaucanson/algorithms/backward_closure.hxx,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/automata/implementation/kind_adapter.hh,
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/automata/concept/transducer.hxx,
+	* include/vaucanson/automata/concept/automata.hxx,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/transducer.hh,
+	* include/vaucanson/automata/concept/automata.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* src/tests/context_headers/automata/global_consistency_test.hh,
+	* src/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/automata/algos/brzozowski_test.hh,
+	* src/tests/automata/algos/is_isomorph_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/aci_canonical_test.hh,
+	* src/tests/automata/algos/thompson_test.hh,
+	* src/tests/automata/algos/trim_test.hh,
+	* src/tests/automata/algos/derivatives_automaton_test.hh,
+	* src/tests/automata/algos/transpose_test.hh,
+	* src/tests/automata/algos/berry_sethi_test.hh,
+	* src/tests/automata/algos/sub_automaton_test.hh,
+	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh,
+	* src/tests/algebra/series/misc/series_test.hh,
+	* src/tests/algebra/series/polynom/series_polynom_test.hh,
+	* src/demos/vgrep/vgrep.cc,
+	* src/demos/samples/algorithms/derivatives_automaton.cc,
+	* src/demos/fsm/usual_automaton_t/toolbox.hh,
+	* src/demos/fsm/generate_toolbox.sh,
+	* src/demos/vaucanswig/meta/vaucanswig_context.i,
+	* src/demos/vaucanswig/meta/context.hh,
+	* src/demos/vaucanswig/README: Rename all typedefs to series_t to
+	series_set_t.
+
 2004-04-23  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
@@ -15,11 +94,11 @@
 	* src/tests/test-suites/algebra_tropical_semiring_max_bool.defs,
 	* src/tests/test-suites/algebra_tropical_semiring_max_rational.defs:
 	New files. Instanciate tests on various tropical semirings.
-	* src/tests/test-suites/algebra_tropical_semiring_max.defs: 
+	* src/tests/test-suites/algebra_tropical_semiring_max.defs:
 	Rename to ...
 	* src/tests/test-suites/algebra_tropical_semiring_max_int.defs: This.
 	* src/tests/test-suites/generate-all.sh: Update accordingly.
-	
+
 2004-04-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
@@ -28,17 +107,17 @@
 2004-04-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/test-suites/generate-all.sh: Minor fixes.
-	* src/tests/test-suites/tropical_min_automaton.defs: New file. 
+	* src/tests/test-suites/tropical_min_automaton.defs: New file.
 	Instanciate tests on tropical_min automaton.
 	* src/tests/test-suites/r_automaton_t.defs,
 	* src/tests/test-suites/z_automaton_t.defs,
 	* src/tests/test-suites/z_max_plus_automaton_t.defs,
-	* src/tests/test-suites/booolean_automaton_t.defs: 
+	* src/tests/test-suites/booolean_automaton_t.defs:
 	Renamed to
 	* src/tests/test-suites/r_automaton.defs,
 	* src/tests/test-suites/z_automaton.defs,
 	* src/tests/test-suites/z_max_plus_automaton.defs,
-	* src/tests/test-suites/booolean_automaton.defs: These. 
+	* src/tests/test-suites/booolean_automaton.defs: These.
 
 2004-04-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 

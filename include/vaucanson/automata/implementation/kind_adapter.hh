@@ -45,14 +45,14 @@ namespace vcsn {
 		     hstate_t to,					\
 		     const typename Element<S, T >::letter_t & l)	\
   {									\
-    typedef typename S::series_t series_t;				\
-    typedef typename series_t::monoid_t monoid_t;			\
+    typedef typename S::series_set_t series_set_t;				\
+    typedef typename series_set_t::monoid_t monoid_t;			\
     typedef typename Element<S, T >::monoid_elt_value_t			\
     word_value_t;							\
     typedef typename Element<S, T >::series_value_t			\
     series_value_t;							\
     Element<monoid_t, word_value_t> w(s.series().monoid());		\
-    Element<series_t, series_value_t> s1(s.series());			\
+    Element<series_set_t, series_value_t> s1(s.series());			\
     w = l;								\
     s1 = w;								\
     return op_add_edge(s, v, from, to, s1.value());			\
@@ -64,14 +64,14 @@ namespace vcsn {
 	       const T& v,					\
                hedge_t e)						\
   {									\
-    typedef typename S::series_t series_t;				\
-    typedef typename series_t::monoid_t monoid_t;			\
+    typedef typename S::series_set_t series_set_t;				\
+    typedef typename series_set_t::monoid_t monoid_t;			\
     typedef typename Element<S, T >::monoid_elt_value_t 	\
     word_value_t;							\
     typedef typename Element<S, T >::series_value_t 		\
     series_value_t;							\
 									\
-    Element<series_t, series_value_t> sl = op_series_of(s, v, e);		\
+    Element<series_set_t, series_value_t> sl = op_series_of(s, v, e);		\
     precondition(sl.supp().size() == 1);				\
     Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
     precondition(w.length() == 1);					\
@@ -84,14 +84,14 @@ namespace vcsn {
 	     const T& v,					\
              hedge_t e)							\
   {									\
-    typedef typename S::series_t series_t;				\
-    typedef typename series_t::monoid_t monoid_t;			\
+    typedef typename S::series_set_t series_set_t;				\
+    typedef typename series_set_t::monoid_t monoid_t;			\
     typedef typename Element<S, T >::monoid_elt_value_t	\
     word_value_t;							\
     typedef typename Element<S, T >::series_value_t		\
     series_value_t;							\
 									\
-    Element<series_t, series_value_t> sl = op_series_of(s, v, e);		\
+    Element<series_set_t, series_value_t> sl = op_series_of(s, v, e);		\
     precondition(sl.supp().size() == 1);				\
     Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
     return w;								\
@@ -116,8 +116,8 @@ namespace vcsn {
              hedge_t e)						\
   {								\
     typedef T value_t;						\
-    typedef typename S::series_t series_t;			\
-    typedef typename series_t::monoid_t monoid_t;		\
+    typedef typename S::series_set_t series_set_t;			\
+    typedef typename series_set_t::monoid_t monoid_t;		\
     typedef typename Element<S, value_t>::monoid_elt_value_t	\
     word_value_t;						\
     Element<monoid_t, word_value_t>				\
@@ -134,8 +134,8 @@ namespace vcsn {
   {								\
     typedef T value_t;						\
 								\
-    typedef typename S::series_t series_t;			\
-    typedef typename series_t::monoid_t monoid_t;		\
+    typedef typename S::series_set_t series_set_t;			\
+    typedef typename series_set_t::monoid_t monoid_t;		\
     typedef typename Element<S, value_t>::monoid_elt_value_t	\
     word_value_t;						\
     typedef typename Element<S, value_t>::semiring_elt_value_t	\
@@ -144,7 +144,7 @@ namespace vcsn {
     series_value_t;						\
     Element<monoid_t, word_value_t> w(a_set.series().monoid());	\
     w = op_letter_of(a_set, v, e);				\
-    Element<series_t, series_value_t> s(a_set.series());		\
+    Element<series_set_t, series_value_t> s(a_set.series());		\
     s.assoc(w, algebra::identity_as<semiring_elt_value_t>		\
 	    ::of(a_set.series().semiring()));			\
     return s;							\

@@ -160,15 +160,15 @@ namespace Kind ##_types
 
   /*** Series ***/
 
-  struct Kind ##_series_t;
+  struct Kind ##_series_set_t;
 
   struct Kind ##_series_elt_t
   {
     Kind ##_series_elt_t(const Kind ##_series_elt_t&);
-    Kind ##_series_elt_t(const Kind ##_series_t&);
-    Kind ##_series_elt_t(const Kind ##_series_t&, const Kind ##_semiring_elt_t&);
-    Kind ##_series_elt_t(const Kind ##_series_t&, const Kind ##_monoid_elt_t&);
-    const Kind ##_series_t& structure() const;
+    Kind ##_series_elt_t(const Kind ##_series_set_t&);
+    Kind ##_series_elt_t(const Kind ##_series_set_t&, const Kind ##_semiring_elt_t&);
+    Kind ##_series_elt_t(const Kind ##_series_set_t&, const Kind ##_monoid_elt_t&);
+    const Kind ##_series_set_t& structure() const;
     EXTEND_DESCRIBE(Kind ##_series_elt_t)
     series_ops(Kind ##_series_elt_t, Kind ##_semiring_elt_t, Kind ##_monoid_elt_t)
   };
@@ -176,24 +176,24 @@ namespace Kind ##_types
   struct Kind ##_exp_t
   {
     Kind ##_exp_t(const Kind ##_exp_t&);
-    Kind ##_exp_t(const Kind ##_series_t&);
-    Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_series_elt_t&);
-    Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_semiring_elt_t&);
-    Kind ##_exp_t(const Kind ##_series_t&, const Kind ##_monoid_elt_t&);
+    Kind ##_exp_t(const Kind ##_series_set_t&);
+    Kind ##_exp_t(const Kind ##_series_set_t&, const Kind ##_series_elt_t&);
+    Kind ##_exp_t(const Kind ##_series_set_t&, const Kind ##_semiring_elt_t&);
+    Kind ##_exp_t(const Kind ##_series_set_t&, const Kind ##_monoid_elt_t&);
     %extend {
     Kind ##_exp_t star() const
       { return vcsn::star(*self); }
     }
-    const Kind ##_series_t& structure() const;
+    const Kind ##_series_set_t& structure() const;
     EXTEND_DESCRIBE(Kind ##_exp_t)
     series_ops(Kind ##_exp_t, Kind ##_semiring_elt_t, Kind ##_monoid_elt_t)
   };
 
-  struct Kind ##_series_t {
-    Kind ##_series_t(const Kind ##_semiring_t&, const Kind ##_monoid_t&);
+  struct Kind ##_series_set_t {
+    Kind ##_series_set_t(const Kind ##_semiring_t&, const Kind ##_monoid_t&);
     const Kind ##_monoid_t& monoid() const;
     const Kind ##_semiring_t& semiring() const;
-    EXTEND_DESCRIBE(Kind ##_series_t)
+    EXTEND_DESCRIBE(Kind ##_series_set_t)
     %extend {
     Kind ##_series_elt_t make(int i) const
     { return Kind ##_series_elt_t(*self, Kind ##_semiring_elt_t(self->semiring(), i)); }
@@ -214,8 +214,8 @@ namespace Kind ##_types
   /*** Automata set ***/
 
   struct Kind ##_automata_set_t {
-    Kind ##_automata_set_t(const Kind ##_series_t&);
-    const Kind ##_series_t& series() const;
+    Kind ##_automata_set_t(const Kind ##_series_set_t&);
+    const Kind ##_series_set_t& series() const;
     EXTEND_DESCRIBE(Kind ##_automata_set_t)
   };
 
@@ -225,7 +225,7 @@ namespace Kind ##_types
     Kind ##_context(const Kind ##_context& other);
 
     const Kind ##_automata_set_t& automata_structure() const;
-    const Kind ##_series_t& series() const;
+    const Kind ##_series_set_t& series() const;
     const Kind ##_monoid_t& monoid() const;
     const Kind ##_alphabet_t& alphabet() const;
     const Kind ##_semiring_t& semiring() const;

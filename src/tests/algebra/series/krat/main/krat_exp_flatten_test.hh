@@ -43,7 +43,7 @@ bool krat_exp_flatten_test(tests::Tester& tg)
   typedef typename krat_exp_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_elt_value_t;
   typedef typename semiring_elt_t::set_t	semiring_t;
-  typedef typename krat_exp_t::set_t		series_t;
+  typedef typename krat_exp_t::set_t		series_set_t;
   typedef typename monoid_t::letter_t		letter_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
 
@@ -56,7 +56,7 @@ bool krat_exp_flatten_test(tests::Tester& tg)
   al.insert(b);
   monoid_t	md(al);
   semiring_t	sg;
-  series_t	ss(sg, md);
+  series_set_t	ss(sg, md);
 
   // Equivalent to semiring_elt_t w = 2 (but we have no << 2 >>).
   //

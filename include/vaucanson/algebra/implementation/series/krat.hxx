@@ -628,7 +628,7 @@ namespace vcsn {
 		   const rat::exp<Tm, Tw>& p,
 		   const oTm& m)
   { 
-    typedef typename algebra::Series<W,M>			series_t;
+    typedef typename algebra::Series<W,M>			series_set_t;
     typedef typename algebra::polynom<Tm, Tw>			series_value_t;
     typedef typename rat::exp<Tm, Tw>				exp_t;
     typedef Graph
@@ -641,7 +641,7 @@ namespace vcsn {
       NoTag
       >
       automaton_impl_t;
-    typedef Element<Automata<series_t>, automaton_impl_t>	automaton_t;
+    typedef Element<Automata<series_set_t>, automaton_impl_t>	automaton_t;
     
     typename automaton_t::set_t	automata (s);
     automaton_t			a (automata);

@@ -54,7 +54,7 @@ struct vcsn_context : vcsn::virtual_context
   const automata_set_t& automata_structure() const
   { return *set_; }
   
-  const series_t& series() const
+  const series_set_t& series() const
   { return set_->series(); }
   
   const monoid_t& monoid() const
@@ -99,7 +99,7 @@ struct vcsn_context : vcsn::virtual_context
     std::string ret = "Series (" + describe_semiring(cpp) 
       + ", " + describe_monoid(cpp) + ')';
     if (cpp)
-      ret = ret + " <" + typeid(series_t).name() + '>';
+      ret = ret + " <" + typeid(series_set_t).name() + '>';
     return ret;
   }
 
@@ -156,7 +156,7 @@ namespace FAMILY ##_types				\
   {							\
     FAMILY ##_semiring_t semiring;			\
     FAMILY ##_monoid_t monoid(alpha);			\
-    FAMILY ##_series_t series(semiring, monoid);	\
+    FAMILY ##_series_set_t series(semiring, monoid);	\
     FAMILY ##_automata_set_t automata_structure(series);	\
     return FAMILY ##_context(automata_structure);		\
   }							\
@@ -171,7 +171,7 @@ namespace FAMILY ##_types										\
   inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_semiring_t& w)			\
   { return o << '<' << typeid(w).name() << "> Semiring"; }						\
 													\
-  inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_series_t& s)				\
+  inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_series_set_t& s)				\
   { return o << '<' << typeid(s).name() << "> Series (" << s.semiring() << ", " << s.monoid() << ')'; }	\
     													\
   inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_automata_set_t& a)			\

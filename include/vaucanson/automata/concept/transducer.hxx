@@ -35,12 +35,12 @@
 namespace vcsn {
 
   template <class Series>
-  Transducer<Series>::Transducer(const series_t& s):
+  Transducer<Series>::Transducer(const series_set_t& s):
     series_(s)
   {}
 
   template <class Series>
-  const typename Transducer<Series>::series_t&
+  const typename Transducer<Series>::series_set_t&
   Transducer<Series>::series() const
   {
     return series_;
@@ -56,8 +56,9 @@ namespace vcsn {
     typedef typename ret_t::series_elt_t output_series_elt_t;
     typedef typename series_elt_t::support_t support_t;
     typedef typename ret_t::set_t set_t;
-    typedef typename set_t::series_t o_series_t;
-    set_t s(o_series_t(a.structure().series(), a.structure().series().monoid()));
+    typedef typename set_t::series_set_t o_series_set_t;
+    set_t s (o_series_set_t (a.structure().series(),
+			     a.structure().series().monoid()));
     ret_t ret(s);
     std::vector<hstate_t> conv(a.states().size());
 

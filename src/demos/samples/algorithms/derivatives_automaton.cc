@@ -61,10 +61,10 @@ int main(int argc, char **argv)
   alpha.insert('c');
   monoid_t freemonoid(alpha);
   semiring_t semiring;
-  series_t series(semiring, freemonoid);
+  series_set_t series(semiring, freemonoid);
 
   // Set krat value
-  Element<series_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
+  Element<series_set_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
     krat_exp(series);
   parse(exp, krat_exp);
 

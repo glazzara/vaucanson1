@@ -51,13 +51,13 @@ unsigned krat_exp_realtime_conflict_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
   typedef
     vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
-  typedef vcsn::Element<series_t, exp_t>			krat_exp_t;
+  typedef vcsn::Element<series_set_t, exp_t>			krat_exp_t;
 
   alphabet_t	at;
   at.insert(at.random_letter());
   monoid_t	md (at);
   semiring_t	sg;
-  series_t	ss(sg, md);
+  series_set_t	ss(sg, md);
   krat_exp_t	e1 = ss.choose(SELECT(exp_t));
   krat_exp_t	e2 = realtime(e1);
   realtime_here(e1);

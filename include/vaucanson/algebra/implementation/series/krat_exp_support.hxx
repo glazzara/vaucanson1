@@ -47,7 +47,7 @@ namespace vcsn {
   public:
     typedef IsFiniteAppMatcher<Series, T, Dispatch>	self_t;
     typedef int					        return_type;
-    typedef Series					series_t;
+    typedef Series					series_set_t;
     typedef Element<Series, T>				series_elt_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
     typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
@@ -58,7 +58,7 @@ namespace vcsn {
 							ext_support_t;
     INHERIT_CONSTRUCTORS(self_t, T, return_type, Dispatch);
 
-    SupportMatcher(const series_t& s):
+    SupportMatcher(const series_set_t& s):
       series_(s)
     {}
 
@@ -184,7 +184,7 @@ namespace vcsn {
 
   private:
     ext_support_t	        supp_;
-    const series_t&		series_;
+    const series_set_t&		series_;
   };
 
 } // vcsn

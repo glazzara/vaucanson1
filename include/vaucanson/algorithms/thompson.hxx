@@ -52,7 +52,7 @@ namespace vcsn {
   public :
     typedef Auto_						automaton_t;
     typedef typename automaton_t::set_t				automata_set_t;
-    typedef typename automaton_t::series_t			series_t;
+    typedef typename automaton_t::series_set_t			series_set_t;
     typedef typename automaton_t::series_elt_t			series_elt_t;
     typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
     typedef Monoid_						monoid_elt_value_t;
@@ -61,7 +61,7 @@ namespace vcsn {
 
   public :
 
-    ThompsonVisitor(const series_t& s) : series_(s)
+    ThompsonVisitor(const series_set_t& s) : series_(s)
     {}
 
     virtual
@@ -160,7 +160,7 @@ namespace vcsn {
 
   private :
     automaton_t		*auto_;
-    const series_t	&series_;
+    const series_set_t	&series_;
   };
 
   template <typename A, typename auto_t,

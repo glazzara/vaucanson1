@@ -36,7 +36,7 @@
 namespace vcsn {
 
   template <class Series>
-  Automata<Series>::Automata(const series_t& s):
+  Automata<Series>::Automata(const series_set_t& s):
     series_(s)
   {}
 

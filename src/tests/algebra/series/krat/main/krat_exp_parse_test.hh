@@ -45,7 +45,7 @@
   typedef typename monoid_elt_t::set_t		monoid_t;	\
   typedef typename krat_exp_t::semiring_elt_t		semiring_elt_t;	\
   typedef typename semiring_elt_t::set_t		semiring_t;	\
-  typedef typename krat_exp_t::set_t		series_t;	\
+  typedef typename krat_exp_t::set_t		series_set_t;	\
   typedef typename monoid_t::letter_t		letter_t;	\
   typedef typename monoid_t::alphabet_t		alphabet_t;
 
@@ -82,7 +82,7 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
       alphabet.insert('a');
       monoid_t monoid(alphabet);
       semiring_t semiring;
-      series_t s(semiring, monoid);
+      series_set_t s(semiring, monoid);
       krat_exp_t exp = s.choose(SELECT(kexp_t));
       std::ostringstream sstr;
       sstr << exp;
@@ -198,7 +198,7 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
   alphabet.insert('c');
   monoid_t monoid(alphabet);
   semiring_t semiring;
-  series_t s(semiring, monoid);
+  series_set_t s(semiring, monoid);
   
   unsigned int nb_success = 0;
   unsigned int nb_test;

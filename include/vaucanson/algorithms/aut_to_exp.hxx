@@ -113,7 +113,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto_);
     typedef Auto_				automaton_t;
-    typedef typename automaton_t::series_t      series_t;
+    typedef typename automaton_t::series_set_t      series_set_t;
     typedef typename automaton_t::series_elt_t  series_elt_t;
 
     typedef typename std::set<hedge_t>			hedge_set_t;

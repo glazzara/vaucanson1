@@ -79,7 +79,7 @@ cat > $FILE <<EOF
        }
      std::string krat_exp_string = remainder.front();
      alphabet_t alpha;
-     Element<series_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
+     Element<series_set_t, rat::exp<monoid_elt_value_t, semiring_elt_value_t> >
        krat_exp(series());
      parse(krat_exp_string, krat_exp);
      automaton_t automaton;

@@ -41,7 +41,7 @@ The module vaucanswig_D_context contains:
       make(int);
       D_semiring_elt_t identity();
       D_semiring_elt_t zero();
-* D_series_t:
+* D_series_set_t:
       standard vaucanson constructors and operators
       D_serie_t make(int);
       D_serie_t make(const std::string&);

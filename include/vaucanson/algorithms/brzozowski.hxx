@@ -64,7 +64,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(T_auto);
 
-    BrzozowskiAlgo(const series_t& series, const Exp& exp):
+    BrzozowskiAlgo(const series_set_t& series, const Exp& exp):
       IncAutomataConstructor<BrzozowskiAlgo, T_auto, Exp>(series, exp)
     {}
 

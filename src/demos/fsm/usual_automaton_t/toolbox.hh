@@ -35,6 +35,6 @@
 
 typedef vcsn::tools::usual_automaton_t	automaton_t;
 
-const automaton_t::series_t&  series();
+const automaton_t::series_set_t&  series();
 
 #endif // VCSN_DEMOS_FSM_USUAL_AUTOMATON_T_TOOLBOX_HH

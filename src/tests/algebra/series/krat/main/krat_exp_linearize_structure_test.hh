@@ -70,13 +70,13 @@ bool krat_exp_linearize_structure_test(tests::Tester& tg)
   typedef typename monoid_elt_t::set_t			monoid_t;
   typedef typename krat_exp_t::semiring_elt_t		semiring_elt_t;
   typedef typename semiring_elt_t::set_t		semiring_t;
-  typedef typename krat_exp_t::set_t			series_t;
+  typedef typename krat_exp_t::set_t			series_set_t;
   typedef typename monoid_t::letter_t			letter_t;
   typedef typename monoid_t::alphabet_t			alphabet_t;
 
   // Output types (for the linearized expression).
   typedef
-  typename vcsn::linearize_element<series_t, kexp_t>	linearize_element_t;
+  typename vcsn::linearize_element<series_set_t, kexp_t>	linearize_element_t;
   typedef
   typename linearize_element_t::element_t		out_krat_exp_t;
 
@@ -90,7 +90,7 @@ bool krat_exp_linearize_structure_test(tests::Tester& tg)
   alphabet.insert(b);
   monoid_t monoid(alphabet);
   semiring_t semiring;
-  series_t s(semiring, monoid);
+  series_set_t s(semiring, monoid);
 
   const unsigned int nb_tests_final = 200;
   unsigned int nb_tests = 0;

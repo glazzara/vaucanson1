@@ -50,12 +50,13 @@ namespace vcsn {
 
     AUTOMATON_TYPES_(ret_t, t_);
     typedef typename ret_t::set_t                 set_t;
-    typedef typename set_t::series_t              o_series_t;
+    typedef typename set_t::series_set_t              o_series_set_t;
     typedef typename ret_t::series_elt_t               output_series_elt_t;
     typedef typename series_elt_t::support_t           support_t;
 
     set_t
-      ts(o_series_t (a.structure().series(), a.structure().series().monoid()));
+      ts(o_series_set_t (a.structure().series(),
+			 a.structure().series().monoid()));
     ret_t          t_ret(ts);
 
     monoid_elt_t   neutre   = a.series().monoid().empty_;

@@ -103,7 +103,7 @@ bool thompson_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
   typedef vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
-  typedef vcsn::Element<series_t, exp_t>				krat_t;
+  typedef vcsn::Element<series_set_t, exp_t>				krat_t;
 
   tests::Tester t (tg.verbose());
 
@@ -116,7 +116,7 @@ bool thompson_test(tests::Tester& tg)
   at.insert(lb);
   monoid_t		md (at);
   semiring_t		sg;
-  series_t		ss (sg, md);
+  series_set_t		ss (sg, md);
   automata_set_t	aa (ss);
 
   unsigned nb_word_test = 100;

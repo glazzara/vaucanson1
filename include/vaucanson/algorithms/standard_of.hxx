@@ -60,7 +60,7 @@ namespace vcsn {
     typedef Auto_					automaton_t;
     typedef typename automaton_t::set_t			automata_set_t;
 
-    typedef typename automaton_t::series_t		series_t;
+    typedef typename automaton_t::series_set_t		series_set_t;
     typedef typename automaton_t::monoid_t		monoid_t;
     typedef typename automaton_t::semiring_t		semiring_t;
 
@@ -78,7 +78,7 @@ namespace vcsn {
 
   public :
 
-    Standard_OfVisitor(const series_t& series) :
+    Standard_OfVisitor(const series_set_t& series) :
       automata_set_(series)
     {}
 
@@ -136,7 +136,7 @@ namespace vcsn {
 	      // FIXME: of this matcher is valid on Boolean automata with
 	      // FIXME: label as letter.
 	      typedef typename automaton_t::label_t	label_t;
-	      typedef Element<series_t, label_t>	label_elt_t;
+	      typedef Element<series_set_t, label_t>	label_elt_t;
 
 	      label_elt_t label (automata_set_.series(), auto_->label_of(*j));
 	      label  = weight * label;

@@ -44,14 +44,14 @@ bool series_test(tests::Tester& t)
   using namespace vcsn;
 
   typedef SeriesElt				series_elt_t;
-  typedef typename series_elt_t::set_t		series_t;
+  typedef typename series_elt_t::set_t		series_set_t;
   typedef typename series_elt_t::value_t	series_value_t;
 
-  typedef typename series_t::monoid_t		monoid_t;
+  typedef typename series_set_t::monoid_t		monoid_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
   typedef typename alphabet_t::letter_t		letter_t;
 
-  typedef typename series_t::semiring_t		semiring_t;
+  typedef typename series_set_t::semiring_t		semiring_t;
   typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_value_t;
 
@@ -85,7 +85,7 @@ bool series_test(tests::Tester& t)
 
       monoid_t		monoid(alphabet);
       semiring_t	semiring;
-      series_t		series(semiring, monoid);
+      series_set_t		series(semiring, monoid);
 
       monoid_elt_t	w1 = monoid.choose(SELECT(monoid_elt_value_t));
       monoid_elt_t	w2 (monoid);
@@ -100,13 +100,13 @@ bool series_test(tests::Tester& t)
 
       semiring_elt_t	zero = zero_as<semiring_value_t>::of(semiring);
 
-      TEST(t, "series_t::monoid() (const).",
-	   const_cast<const series_t&>(series).monoid() == monoid);
-      TEST(t, "series_t::monoid() (non-const).", series.monoid() == monoid);
+      TEST(t, "series_set_t::monoid() (const).",
+	   const_cast<const series_set_t&>(series).monoid() == monoid);
+      TEST(t, "series_set_t::monoid() (non-const).", series.monoid() == monoid);
 
-      TEST(t, "series_t::semiring() (const).",
-	   const_cast<const series_t&>(series).semiring() == semiring);
-      TEST(t, "series_t::semiring() (non-const).",
+      TEST(t, "series_set_t::semiring() (const).",
+	   const_cast<const series_set_t&>(series).semiring() == semiring);
+      TEST(t, "series_set_t::semiring() (non-const).",
 	   series.semiring() == semiring);
 
 

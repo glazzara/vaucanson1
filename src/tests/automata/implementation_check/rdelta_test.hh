@@ -54,7 +54,7 @@ unsigned rdelta_test(tests::Tester& tg)
   alphabet.insert(b);
   monoid_t		monoid(alphabet);
   semiring_t 		semiring;
-  series_t		series(semiring, monoid);
+  series_set_t		series(semiring, monoid);
   automata_set_t	automata(series);
   automaton_t		automaton(automata);
 

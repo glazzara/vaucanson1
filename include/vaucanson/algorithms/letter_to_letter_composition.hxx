@@ -52,7 +52,7 @@ namespace vcsn {
 
     semiring_t output_series(f.series().semiring().semiring(),
 			     f.series().semiring().monoid());
-    series_t series(output_series, g.series().monoid());
+    series_set_t series(output_series, g.series().monoid());
     automata_set_t structure(series);
     transducer_t output(set);
     delta_ret_t f_delta_ret, g_delta_ret;
@@ -87,13 +87,13 @@ namespace vcsn {
 	      {
 		series_elt_t l_ = g.series_of(*rhs_e);
 		series_elt_t l__(series);
-		typedef typename series_t::support_t support_t;
+		typedef typename series_set_t::support_t support_t;
 		for_all_const_(support_t, supp, l.supp())
 		  {
 		    semiring_elt_t ol = l.get(*supp);
 		    typedef typename semiring_elt_t::support_t wsupport_t;
 		    wsupport_t wsupp = ol.supp();
-		    series_t ts(series, monoid_elt_t(*supp));
+		    series_set_t ts(series, monoid_elt_t(*supp));
 		    for_all_const_(wsupport_t, ss, wsupp)
 		      l__ += ts * l_.get(*ss);
 		  }

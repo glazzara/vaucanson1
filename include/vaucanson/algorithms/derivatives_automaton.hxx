@@ -76,7 +76,7 @@ namespace vcsn {
 
     // Contructor -> initialize mother class and undefined attribute,
     // which indicate if the resulting automaton is valide
-    DerivativesAlgo(const series_t& series, const Element<S, T>& exp):
+    DerivativesAlgo(const series_set_t& series, const Element<S, T>& exp):
       IncAutomataConstructor<DerivativesAlgo, T_auto, PartialExp<S, T> >
         (series, prat_exp_convert(exp)),
       undefined(false)

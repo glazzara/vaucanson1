@@ -51,7 +51,7 @@ namespace vcsn
     template <typename Self, typename T_auto, typename Etiq>
     IncAutomataConstructor<Self, T_auto, Etiq>::IncAutomataConstructor
     (
-      const series_t& series, const Etiq& etiq
+      const series_set_t& series, const Etiq& etiq
     )
     {
       automata_set_t a_set(series);
@@ -185,7 +185,7 @@ namespace vcsn
     template <typename Container>
     MathAutomataConstructor<Self, T_auto, Etiq>::MathAutomataConstructor
     (
-      const series_t& series, const Container container
+      const series_set_t& series, const Container container
     )
     {
       typedef typename Container::iterator	c_iterator;

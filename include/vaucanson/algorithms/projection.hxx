@@ -93,9 +93,9 @@ namespace vcsn {
 
     typedef typename output_projection_helper<S, T>::ret    Auto_t;
     typedef typename Auto_t::set_t                   Auto_set_t;
-    typedef typename Auto_set_t::series_t            Auto_series_t;
+    typedef typename Auto_set_t::series_set_t            Auto_series_set_t;
 
-    Auto_set_t   auto_set(Auto_series_t(t.structure().series().semiring()));
+    Auto_set_t   auto_set(Auto_series_set_t(t.structure().series().semiring()));
     Auto_t       ret(auto_set);
 
     monoid_elt_t empty = t.series().monoid().empty_;

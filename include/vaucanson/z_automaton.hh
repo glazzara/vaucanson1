@@ -43,7 +43,7 @@ namespace vcsn {
 
     typedef polynom<WordValue, int> series_value_t;
 
-    typedef Series<NumericalSemiring, Words> series_t;
+    typedef Series<NumericalSemiring, Words> series_set_t;
 
     typedef Graph
     <
@@ -55,13 +55,13 @@ namespace vcsn {
       NoTag>
     automaton_impl_t;
 
-    typedef Element<Automata<series_t>, automaton_impl_t>
+    typedef Element<Automata<series_set_t>, automaton_impl_t>
     automaton_t;
 
     AUTOMATON_TYPES_EXACT(automaton_t);
 
     typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;
-    typedef Element<series_t, krat_exp_impl_t>			krat_exp_t;
+    typedef Element<series_set_t, krat_exp_impl_t>			krat_exp_t;
 
 # include <vaucanson/contextual_functions.hh>
 

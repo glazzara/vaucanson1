@@ -54,7 +54,7 @@ global_consistency_test(tests::Tester& t)
   TEST_TYPE(alphabet_t, monoid_t::alphabet_t);
   TEST_TYPE(monoid_t, monoid_t);
   TEST_TYPE(semiring_t, semiring_t);
-  TEST_TYPE(series_t, series_t);
+  TEST_TYPE(series_set_t, series_set_t);
   TEST_TYPE(automata_set_t, set_t);
 
   alphabet_t		at;
@@ -62,7 +62,7 @@ global_consistency_test(tests::Tester& t)
   at.insert('b');
   monoid_t		md (at);
   semiring_t		sg;
-  series_t		ss (sg, md);
+  series_set_t		ss (sg, md);
   automata_set_t	aa (ss);
 
   krat_exp_t		e (ss);

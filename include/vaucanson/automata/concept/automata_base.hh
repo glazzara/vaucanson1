@@ -55,7 +55,7 @@ namespace vcsn {
   {
   public:
     /// The type of the series set associated with the automaton.
-    typedef typename virtual_types<Self>::series_t  series_t;
+    typedef typename virtual_types<Self>::series_set_t  series_set_t;
 
   protected:
     /// The default constructor is protected since it is an abstract class.
@@ -66,7 +66,7 @@ namespace vcsn {
 
   public:
     /// Accessor to the set of series of the automaton.
-    const series_t& series() const;
+    const series_set_t& series() const;
   };
 
   // traits for automaton implementation.
@@ -133,17 +133,17 @@ namespace vcsn {
     typedef MetaElement<AutomataBase<Self>, T>		      self_t;
 
     /** type the series set from which is build the automaton. */
-    typedef typename AutomataBase<Self>::series_t	      series_t;
+    typedef typename AutomataBase<Self>::series_set_t	      series_set_t;
 
     /** type of the implementation of series that holds the automaton. */
     typedef typename automaton_traits<T>::series_value_t      series_value_t;
 
     /** type of the element of the set of series that holds the automaton. */
-    typedef Element<series_t, series_value_t>		      series_elt_t;
-    typedef Element<series_t, series_value_t>		      series_elt_t;
+    typedef Element<series_set_t, series_value_t>		      series_elt_t;
+    typedef Element<series_set_t, series_value_t>		      series_elt_t;
 
     /** type of the free monoid. */
-    typedef typename series_t::monoid_t			      monoid_t;
+    typedef typename series_set_t::monoid_t			      monoid_t;
 
     /** type of the free monoid element. */
     typedef typename series_elt_t::monoid_elt_t		      monoid_elt_t;
@@ -155,7 +155,7 @@ namespace vcsn {
     typedef typename monoid_t::letter_t			      letter_t;
 
     /** type of the semiring set. */
-    typedef typename series_t::semiring_t		      semiring_t;
+    typedef typename series_set_t::semiring_t		      semiring_t;
 
     /** type of the free monoid element. */
     typedef typename series_elt_t::semiring_elt_t	      semiring_elt_t;
@@ -197,7 +197,7 @@ namespace vcsn {
     typedef typename automaton_traits<T>::final_iterator      final_iterator;
 
     /** the set of series from which is build the automaton (const version). */
-    const series_t& series() const;
+    const series_set_t& series() const;
 
     /** the optional information aggregated to the automaton. */
     tag_t& tag();
@@ -256,11 +256,11 @@ namespace vcsn {
     void clear_final();
 
     /** return the initial multiplicity of the state. */
-    Element<series_t, series_value_t>
+    Element<series_set_t, series_value_t>
     get_initial(hstate_t state) const;
 
     /** return the final multiplicity of the state. */
-    Element<series_t, series_value_t>
+    Element<series_set_t, series_value_t>
     get_final(hstate_t what) const;
 
     /** add a new state to the automaton. */
