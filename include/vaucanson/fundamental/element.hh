@@ -165,8 +165,8 @@ namespace vcsn {
     operator const T& () const;
 
   private : 
-    SetSlot<S>		set_;
-    ValueSlot<S, T>	value_;
+    SetSlot<S>		set_; //!< The reference to the structural element. \see @c SetSlot
+    ValueSlot<S, T>	value_; //!< The reference to the value. \see @c ValueSlot
   };
 
   //! @}
