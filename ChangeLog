@@ -1,3 +1,8 @@
+2004-04-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
+	Provide generic operators on rational.
+
 2004-04-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/test-suites/generate-all.sh: Minor fixes.
