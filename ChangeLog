@@ -1,3 +1,8 @@
+2003-09-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/misc/bitset.hxx: Make the comparisons use
+	the content of the set, not just pointers to the content.
+
 2003-09-10  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat.hh: Add op_convert

@@ -1,20 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 419)
-(Parent-Version vaucanson 0 418)
-(Version-Log "2003-09-10  Loïc Fosse  <loic@lrde.epita.fr>
+(Project-Version vaucanson 0 420)
+(Parent-Version vaucanson 0 419)
+(Version-Log "2003-09-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/series/krat.hh: Add op_convert
-	  declarations.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: Change an 
-	  op_convert argument.
-	* include/vaucanson/algebra/concrete/series/polynoms.hh: Add op_convert
-	  declarations.
-	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Add op_convert
-	  functions and make op_rout compatible with parser.")
-(Checkin-Time "Wed, 10 Sep 2003 14:32:12 +0200")
-(Checkin-Login fosse_l)
+	* include/vaucanson/misc/bitset.hxx: Make the comparisons use
+	the content of the set, not just pointers to the content.
+
+")
+(Checkin-Time "Wed, 10 Sep 2003 16:36:06 +0200")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -96,7 +92,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.52 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.53 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -764,7 +760,7 @@
 ;; Files added by populate at Thu, 04 Sep 2003 13:57:03 +0200,
 ;; to version 0.405(w), by clavei_t:
 
-  (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.4 600))
+  (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.5 600))
   (include/vaucanson/misc/bitset.hh (vaucanson/r/40_bitset.hh 1.4 600))
 
 ;; Files added by populate at Fri, 05 Sep 2003 17:36:32 +0200,

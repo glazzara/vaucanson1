@@ -448,7 +448,20 @@ namespace utility
   bool
   Bitset::operator < (const Bitset& rhs) const
   {
-    return data_ < rhs.data_;
+    // Case 1: rhs is longer than *this.
+    for (size_type i = rhs.data_size_ - 1; i >= data_size_; ++i)
+      if (rhs.data_[i])
+	return true;
+    // Case 2: *this is longer than rhs.
+    for (size_type i = data_size_ - 1; i >= rhs.data_size_; ++i)
+      if (data_[i])
+	return false;
+    // Common case: compare the bits rhs and *this have in common.
+    for (int i = std::min(data_size_, rhs.data_size_) - 1; i >= 0; ++i)
+      if (rhs.data_[i] != data_[i])
+	return rhs.data_[i] > data_[i];
+    // If we get out from the previous loop, then the bitsets are equals.
+    return false;
   }
 
   inline
@@ -462,21 +475,21 @@ namespace utility
   bool
   Bitset::operator > (const Bitset& rhs) const
   {
-    return data_ > rhs.data_;
+    return rhs < *this;
   }
 
   inline
   bool
   Bitset::operator <= (const Bitset& rhs) const
   {
-    return data_ <= rhs.data_;
+    return !(*this > rhs);
   }
 
   inline
   bool
   Bitset::operator >= (const Bitset& rhs) const
   {
-    return data_ >= rhs.data_;
+    return !(*this < rhs);
   }
 
   inline
