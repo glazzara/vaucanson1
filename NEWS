@@ -2,6 +2,35 @@
 * Vaucanson 0.6.1
 * ---------------
 
+** Vaucanson works with g++ 3.2, 3.3, 3.4 and ICC 8.1.
+
+** Vaucanswig is no more enabled by default.
+
+If you want to enable the compilation of Vaucanswig, run:
+
+./configure --enable-vaucanswig
+
+Be warned: this compilation takes several hours on a modern computer.
+
+** The demos in src/demos/xml were updated.
+
+The  demo formerly named  ``algorithms'' is  now compiled  for various
+semirings under the following names:
+
+b: Boolean semiring.
+z: usual semiring on Z.
+r: usual semiring on R.
+z_max_plus: tropical semiring with (max, +) on Z.
+z_min_plus: tropical semiring with (min, +) on Z.
+
+Furthermore,  additional  algorithms may  be  called  from this  demo:
+transpose and eval. A list of  state may be provided to the aut_to_exp
+algorithm, thus allowing the elimination  of states to be performed in
+a specified order.
+
+An  additional src/demo/xml/samples directory  was created,  with some
+XML samples, and some programs that can generate XML samples.
+
 ** expand() definitively replaces verbalize().
 
 The verbalize()  function does  not exist anymore.  It is  replaced by
