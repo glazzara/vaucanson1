@@ -4,6 +4,6 @@
 
 #define TEST_STATIC_ARGS			\
 	vcsn::algebra::Series<			\
-	  vcsn::NumericalSemiring,		\
+	  vcsn::algebra::NumericalSemiring,		\
 	  vcsn::algebra::char_letter::Words>,	\
 	vcsn::algebra::polynom<vcsn::algebra::char_letter::Word::value_t, int>

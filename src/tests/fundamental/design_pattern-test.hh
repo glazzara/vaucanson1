@@ -27,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN-TEST_HH
-# define VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN-TEST_HH
+#ifndef VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN_TEST_HH
+# define VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN_TEST_HH
 
 # include <vaucanson/fundamental/element.hh>
 
@@ -64,4 +64,4 @@ void test_design_pattern()
   //FIXME: swap(a,a) is ambiguous.
 }
 
-#endif // VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN-TEST_HH
+#endif // VCSN_TESTS_FUNDAMENTAL_DESIGN_PATTERN_TEST_HH

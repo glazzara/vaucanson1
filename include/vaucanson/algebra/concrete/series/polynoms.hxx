@@ -656,7 +656,7 @@ namespace vcsn {
 
   template <class W, class M, class Tm, class Tw>
   inline
-  Tm op_choose_from_supp(const algebra::Series<W, M>& s, 
+  Tm op_choose_from_supp(const algebra::Series<W, M>&, 
 			 const algebra::polynom<Tm, Tw>& p)
   {
     typedef typename algebra::polynom<Tm, Tw>::const_iterator const_iterator;

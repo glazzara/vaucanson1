@@ -1,5 +1,14 @@
 2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
+	* configure.ac: Add the algebra_series_misc test directory.
+	* src/tests/fundamental/design_pattern-test.hh: Fix macros.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Fix an
+	unused argument warning.
+	* src/tests/tests-suites/algebra_series_misc.defs: Fix a namespace
+	bug.
+
+2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx,
 	include/vaucanson/algebra/concrete/series/rat/dump_visitor.hxx,
 	include/vaucanson/algebra/concrete/series/rat/exp.hxx: Fix escaping 

@@ -79,6 +79,7 @@ AC_CONFIG_FILES([
 VCSN_TESTS([usual_automaton_t])
 VCSN_TESTS([algebra_series_krat])
 VCSN_TESTS([algebra_series_krat_derivation])
+VCSN_TESTS([algebra_series_misc])
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 
