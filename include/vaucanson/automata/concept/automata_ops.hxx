@@ -375,34 +375,37 @@ namespace vcsn {
   class letter_query
   {
   public:
-    letter_query(const S& s, const T& v, const Letter& l):
-      s_(s),
-      v_(v),
-      l_(l)
-    {}
+    letter_query()
+    {
+      w_ *= Letter();
+    }
 
     bool operator()(hedge_t e) const
     {
-      return (op_series_get(s_.series(), 
-			    op_label_of(s_, v_, e),
-			    l_)
-	      != algebra::zero_as<AutoType(weight_value_t)>
-	      ::of(s_.series().weights()));
+      return (op_series_get(s_->series(), 
+ 			    op_serie_of(*s_, *v_, e).value(),
+ 			    w_.value())
+ 	      != algebra::zero_as<AutoType(weight_value_t)>
+ 	      ::of(s_->series().weights()));
     }
 
-  private:
-    const S& s_;
-    const T& v_;
-    const Letter& l_;
+    //  private:
+    const S* s_;
+    const T* v_;
+    AutoType(monoid_elt_t) w_;
   };
 
   template <class S, class T, class Letter>
   inline
-  letter_query<S, T, Letter> make_letter_query(const S& s,
-					       const T& t,
-					       const Letter& l)
+  const letter_query<S, T, Letter>& make_letter_query(const S& s,
+						      const T& t,
+						      const Letter& l)
   {
-    return letter_query<S, T, Letter>(s.self(), t, l);
+    static letter_query<S, T, Letter> lq;
+    lq.s_ = &s;
+    lq.v_ = &t;
+    *lq.w_.begin() = l;
+    return lq;
   }
 
   template <class S, class T>
@@ -657,7 +660,7 @@ namespace vcsn {
 			const L& letter,
 			delta_kind::states k)
   {
-    op_letter_delta(s, v,
+    op_letter_delta(s.self(), v,
 		    std::insert_iterator<Container>(res, res.begin()),
 		    from, letter, k);
   }

@@ -58,7 +58,7 @@ namespace vcsn {
     typedef typename monoid_t::alphabet_t		    alphabet_t;
     typedef typename alphabet_t::letter_t		    letter_t;
 
-    typedef subset_t					    delta_ret_t;
+    typedef std::vector<hstate_t>				    delta_ret_t;
     
     hstate_t		   qi_hstate = output.add_state();
     subset_t		   qi;
@@ -74,6 +74,7 @@ namespace vcsn {
     | Initialization |
     `---------------*/
     bool is_final = false;
+    aim.reserve(input.states().size());
 
     for (typename input_t::initial_iterator i = input.initial().begin();
 	 i != input.initial().end();
@@ -155,15 +156,15 @@ namespace vcsn {
   template <typename A, typename input_t, typename output_t>
   void
   do_determinize(const AutomataBase<A>&	a_set,
-	      output_t&			output,
-	      const input_t&		input)
+		 output_t&			output,
+		 const input_t&		input)
   {
     /** \bug
      * FIXME: for the moment, it uses subset_construction and trim but
      * it must be rewritten to do the twice at the same time more efficiently.
      */
     do_subset_construction(a_set, output, input);
-    accessible_here(output);
+    //    accessible_here(output);
   }
 
   template<typename A, typename T>

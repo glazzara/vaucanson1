@@ -26,9 +26,10 @@
 namespace vcsn {
 
   //! we define a series of macros to make the data structure for
-  //! automaton easier.
+  //! automaton simpler.
 
 #define ADAPT_ADD_LETTER_EDGE_TO_SERIES_LABEL(T...)			\
+  inline \
   hedge_t								\
   op_add_letter_edge(const AutomataBase<S>& s,				\
 		     T& v,						\
@@ -50,6 +51,7 @@ namespace vcsn {
   }
 
 #define ADAPT_LETTER_OF_TO_SERIES_LABEL(T...)				\
+  inline \
   typename Element<AutomataBase<S>, T>::letter_t		\
   op_letter_of(const AutomataBase<S>& s,				\
 	       const T& v,					\
@@ -70,6 +72,7 @@ namespace vcsn {
   }
 
 #define ADAPT_WORD_OF_TO_SERIES_LABEL(T...)				\
+  inline \
   typename Element<AutomataBase<S>, T>::monoid_elt_t		\
   op_word_of(const AutomataBase<S>& s,					\
 	     const T& v,					\
@@ -87,6 +90,62 @@ namespace vcsn {
     Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
     return w;								\
   }
+
+#define ADAPT_ADD_SERIE_EDGE_TO_LETTERS_LABEL(T...)			\
+  inline								\
+  hedge_t 								\
+  op_add_serie_edge(const AutomataBase<S>& a_set,			\
+		    T& v,						\
+		    hstate_t from, 					\
+		    hstate_t to, 					\
+		    const typename Element<S,T>::serie_t& s)		\
+  {									\
+    assertion(s.supp().size() == 1);					\
+    return op_add_letter_edge(a_set, v, from, to, *s.supp().begin());	\
+  }
+
+#define ADAPT_WORD_OF_TO_LETTERS_LABEL(T...)			\
+  inline							\
+  typename Element<AutomataBase<S>, T>::monoid_elt_t		\
+  op_word_of(const AutomataBase<S>& a_set,			\
+	     const T& v,					\
+             hedge_t e)						\
+  {								\
+    typedef T value_t;						\
+    typedef typename S::series_t series_t;			\
+    typedef typename series_t::monoid_t monoid_t;		\
+    typedef typename Element<S, value_t>::monoid_elt_value_t	\
+    word_value_t;						\
+    Element<monoid_t, word_value_t>				\
+         w(a_set.series().monoid());				\
+    w += op_letter_of(a_set, v, e);				\
+    return w;							\
+  }		
+
+#define ADAPT_SERIE_OF_TO_LETTERS_LABEL(T...)			\
+  inline							\
+  typename Element<AutomataBase<S>, T>::serie_t			\
+  op_serie_of(const AutomataBase<S>& a_set,			\
+	      const T& v,					\
+	      hedge_t e)					\
+  {								\
+    typedef T value_t;						\
+								\
+    typedef typename S::series_t series_t;			\
+    typedef typename series_t::monoid_t monoid_t;		\
+    typedef typename Element<S, value_t>::monoid_elt_value_t	\
+    word_value_t;						\
+    typedef typename Element<S, value_t>::weight_value_t	\
+        weight_value_t;						\
+    typedef typename Element<S, value_t>::serie_value_t		\
+    serie_value_t;						\
+    Element<monoid_t, word_value_t> w(a_set.series().monoid());	\
+    w = op_letter_of(a_set, v, e);				\
+    Element<series_t, serie_value_t> s(a_set.series());		\
+    s.assoc(w, algebra::identity_as<weight_value_t>		\
+	    ::of(a_set.series().weights()));			\
+    return s;							\
+  }		
 
 } // vcsn
 

@@ -28,6 +28,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/concrete/kind_adapter.hh>
 # include <vaucanson/misc/support.hh>
+# include <vaucanson/tools/usual_macros.hh>
 # include <set>
 # include <map>
 # include <vector>
@@ -51,10 +52,10 @@ namespace vcsn {
   // The only precondition is that StateLabel must be a class.
   struct state_value 
   {
-    std::set<hedge_t>  input_edges;
-    std::set<hedge_t>  output_edges;
-    std::set<hstate_t> successors;
-    std::set<hstate_t> predecessors;
+    std::list<hedge_t>  input_edges;
+    std::list<hedge_t>  output_edges;
+    std::list<hstate_t> successors;
+    std::list<hstate_t> predecessors;
   };
 
   typedef utility::SparseInterval<hstate_t, std::set<hstate_t> > 
@@ -149,7 +150,7 @@ namespace vcsn {
 				       const Query& q,
 				       delta_kind::states) const;
 
-  protected:
+  public:
     state_data_t		states_;
     edge_data_t			edges_;
     std::set<hstate_t>		removed_states_;
@@ -179,6 +180,41 @@ namespace vcsn {
   ADAPT_WORD_OF_TO_SERIES_LABEL(Graph<labels_are_series,
 				WordValue, WeightValue,
 				SerieValue, Letter, Tag>);
+
+  TParam
+  ADAPT_WORD_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
+				WordValue, WeightValue,
+				SerieValue, Letter, Tag>);
+
+  TParam
+  ADAPT_SERIE_OF_TO_LETTERS_LABEL(Graph<labels_are_letters,
+				  WordValue, WeightValue,
+				  SerieValue, Letter, Tag>);
+
+  TParam
+  ADAPT_ADD_SERIE_EDGE_TO_LETTERS_LABEL(Graph<labels_are_letters,
+					WordValue, WeightValue,
+					SerieValue, Letter, Tag>);
+
+  template <class S, class WordValue, class WeightValue, class SerieValue, 
+	    class Letter, class Tag,
+	    typename OutputIterator, typename L>	
+  inline
+  void op_letter_delta(const Automata<S>& s, 
+		       const Graph<labels_are_letters,
+		       WordValue, WeightValue,
+		       SerieValue, Letter, Tag>& v,					
+		       OutputIterator res, 
+		       hstate_t from, 
+		       const L& letter,
+		       delta_kind::states k)
+  {
+    const std::list<hedge_t>& edges = v.states_[from].output_edges;
+    for_each_const_(std::list<hedge_t>, e, edges)
+      if (v.edges_[*e].label == letter)
+	*res++ = v.edges_[*e].to;
+  }
+
 #undef TParam
 
   // This implementation can be used as an implementation of automaton.

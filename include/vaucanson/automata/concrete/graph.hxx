@@ -79,7 +79,7 @@ namespace vcsn {
 	    return first_state_;
 	  }
 	// case 1b: after the last used index.
-	states_.resize(states_.size() + 1);
+	states_.push_back(state_value_t());
 	return states_.size() - 1;
       }
 
@@ -108,11 +108,11 @@ namespace vcsn {
       return;
 
     // remove linked edges.
-    std::set<hedge_t> edges = states_[n].input_edges;
+    std::list<hedge_t> edges = states_[n].input_edges;
     for_each_const_(std::set<hedge_t>, e, edges)
       this->del_edge(*e);
     edges = states_[n].output_edges;
-    for_each_const_(std::set<hedge_t>, e, edges)
+    for_each_const_(std::list<hedge_t>, e, edges)
       this->del_edge(*e);
 
     // remove in the initial and final applications.
@@ -168,10 +168,10 @@ namespace vcsn {
     const edge_value_t& ev = edges_[e];
 
     // remove reference to this edge in linked states.
-    states_[ev.from].successors.erase(ev.to);
-    states_[ev.from].output_edges.erase(e);
-    states_[ev.to].predecessors.erase(ev.from);
-    states_[ev.to].input_edges.erase(e);
+    states_[ev.from].successors.remove(ev.to);
+    states_[ev.from].output_edges.remove(e);
+    states_[ev.to].predecessors.remove(ev.from);
+    states_[ev.to].input_edges.remove(e);
     removed_edges_.insert(e);
 
     // edges_.size() - 1 must be used.
@@ -265,10 +265,22 @@ namespace vcsn {
     edges_[e].from = n1;
     edges_[e].to   = n2;
     edges_[e].label = l;
-    states_[n1].output_edges.insert(e);
-    states_[n2].input_edges.insert(e);
-    states_[n2].predecessors.insert(n1);
-    states_[n1].successors.insert(n2);
+    if (std::find(states_[n1].output_edges.begin(),
+		  states_[n1].output_edges.end(),
+		  e) == states_[n1].output_edges.end())
+      states_[n1].output_edges.push_back(e);
+    if (std::find(states_[n2].input_edges.begin(),
+		  states_[n2].input_edges.end(),
+		  e) == states_[n2].input_edges.end())
+      states_[n2].input_edges.push_back(e);
+    if (std::find(states_[n2].predecessors.begin(),
+		  states_[n2].predecessors.end(),
+		  e) == states_[n2].predecessors.end())
+      states_[n2].predecessors.push_back(n1);
+    if (std::find(states_[n1].successors.begin(),
+		  states_[n1].successors.end(),
+		  e) == states_[n1].successors.end())
+      states_[n1].successors.push_back(n2);
 
     postcondition(has_edge(e));
     return e;
@@ -446,15 +458,10 @@ namespace vcsn {
 		const Query& q,
 		delta_kind::edges) const
   {
-    const std::set<hedge_t>& edges = states_[from].output_edges;
-    for (typename std::set<hedge_t>::const_iterator e = edges.begin();
-	 e != edges.end();
-	 ++e)
+    const std::list<hedge_t>& edges = states_[from].output_edges;
+    for_each_const_(std::list<hedge_t>, e, edges)
       if (q(*e))
-	{
-	  *res = *e;
-	  ++res;
-	}
+	*res++ = *e;
   }
 
   TParam
@@ -466,15 +473,10 @@ namespace vcsn {
 		const Query& query,
 		delta_kind::states) const
   {
-    const std::set<hedge_t>& edges = states_[from].output_edges;
-    for (typename std::set<hedge_t>::const_iterator e = edges.begin();
-	 e != edges.end();
-	 ++e)
+    const std::list<hedge_t>& edges = states_[from].output_edges;
+    for_each_const_(std::list<hedge_t>, e, edges)
       if (query(*e))
-      {
-	*res = edges_[*e].to;
-	++res;
-      }
+	*res++ = edges_[*e].to;
   }
 
   TParam

@@ -1,3 +1,15 @@
+2003-07-01  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_ops.hxx: Improve letter_query.
+	* include/vaucanson/automata/concrete/graph.hxx: 
+		Use std::list<hedge_t> instead of std::set<hedge_t>
+	* include/vaucanson/automata/concrete/graph.hh: Likewise.
+	* include/vaucanson/automata/concrete/kind_adapter.hh:
+		Add label_are_letters case.
+	* include/vaucanson/algorithms/determinize.hxx: 
+		Use std::vector instead of std::set.
+	* src/tests/automata/algos/Makefile.am: Fix missing files.
+
 2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/forward_closure.hxx,
