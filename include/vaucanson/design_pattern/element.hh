@@ -1,7 +1,7 @@
 // element.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -85,16 +85,16 @@ namespace vcsn {
     typedef T	      value_t;
 
     /// Attribute indicating whether Element instances have run-time data.
-    static const bool dynamic    = dynamic_traits<S>::ret 
+    static const bool dynamic    = dynamic_traits<S>::ret
                                    || MetaElement<S, T>::dynamic_value;
-      
+
     /*--------------------.
     | Default constructor |
     `--------------------*/
 
     /** Default constructor.
      * Note that using this constructor when the structural element is dynamic,
-     * leaves the constructed @c Element instance in an incomplete state, 
+     * leaves the constructed @c Element instance in an incomplete state,
      * i.e. not linked to any structural element.
      */
     Element();
@@ -112,7 +112,7 @@ namespace vcsn {
 
     /** Copy constructor from foreign @c Element instances.
      * Note that using this constructor when the structural element is dynamic,
-     * leaves the constructed @c Element instance in an incomplete state, 
+     * leaves the constructed @c Element instance in an incomplete state,
      * i.e. not linked to any structural element.
      */
     template<typename OtherS, typename U>
@@ -125,7 +125,7 @@ namespace vcsn {
     /** @{ */
     /** Copy constructor from anonymous values.
      * Note that using this constructor when the structural element is dynamic,
-     * leaves the constructed @c Element instance in an incomplete state, 
+     * leaves the constructed @c Element instance in an incomplete state,
      * i.e. not linked to any structural element.
      */
     Element(const T& other);
@@ -145,7 +145,7 @@ namespace vcsn {
     explicit Element(const S& set);
 
     /// Explicit construction from structural element and value.
-    Element(const S& set, const T& other); 
+    Element(const S& set, const T& other);
 
     /// Explicit construction from structural element and foreign value.
     template<typename U> Element(const S& set, const U& other);
@@ -186,15 +186,15 @@ namespace vcsn {
     /// Tell whether the @c Element instance is linked or not.
     bool	bound() const;
 
-    /** @{ */
     /// Accessor to the value data.
+    /** @{ */
     T&		value();
     const T&	value() const;
     /** @} */
 
-  private : 
+  private :
     SetSlot<S>		set_;
-    T	value_;
+    T			value_;
   };
 
   //! @}
@@ -205,6 +205,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     #include <vaucanson/design_pattern/element.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_FUNDAMENTAL_ELEMENT_HH

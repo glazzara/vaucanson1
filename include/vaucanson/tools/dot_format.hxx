@@ -1,7 +1,7 @@
 // dot_format.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@ namespace vcsn
     {}
 
     template<typename Saver, typename Conv>
-    void dot::operator()(std::ostream& out, const Saver& s, 
+    void dot::operator()(std::ostream& out, const Saver& s,
 			 const Conv& conv) const
     {
       typedef typename Saver::automaton_t auto_t;
@@ -64,21 +64,21 @@ namespace vcsn
 	  unsigned c = state_map[*i] = count++;
 	  if (a.is_initial(*i))
 	    {
-	      out << name_ << count 
-		  << " [style=invis,label=\"\",width=.01,height=.01];" 
+	      out << name_ << count
+		  << " [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
-		  << name_ << count << " -> " << name_ << c 
-		  << " [label=\"" << conv(a, a.get_initial(*i)) << "\"];" 
+		  << name_ << count << " -> " << name_ << c
+		  << " [label=\"" << conv(a, a.get_initial(*i)) << "\"];"
 		  << std::endl;
 	      ++count;
 	    }
 	  if (a.is_final(*i))
 	    {
-	      out << name_ << count 
-		  << " [style=invis,label=\"\",width=.01,height=.01];" 
-		  << std::endl 
-		  << name_ << c << " -> "  << name_ << count 
-		  << " [label=\""<< conv(a, a.get_final(*i)) <<"\"];" 
+	      out << name_ << count
+		  << " [style=invis,label=\"\",width=.01,height=.01];"
+		  << std::endl
+		  << name_ << c << " -> "  << name_ << count
+		  << " [label=\""<< conv(a, a.get_final(*i)) <<"\"];"
 		  << std::endl;
 	      ++count;
 	    }
@@ -88,10 +88,10 @@ namespace vcsn
 	   i != a.edges().end();
 	   ++i)
 	{
-	  out << name_ << state_map[a.origin_of(*i)] 
-	      << " -> " 
+	  out << name_ << state_map[a.origin_of(*i)]
+	      << " -> "
 	      << name_ << state_map[a.aim_of(*i)];
-	  out << " [label=\"" << conv(a, a.serie_of(*i)) << "\"];" 
+	  out << " [label=\"" << conv(a, a.serie_of(*i)) << "\"];"
 	      << std::endl;
 	}
       out << "}" << std::endl;
@@ -102,7 +102,7 @@ namespace vcsn
     {}
 
     template<typename Saver, typename Conv>
-    void transducer_dot::operator()(std::ostream& out, const Saver& s, 
+    void transducer_dot::operator()(std::ostream& out, const Saver& s,
 				    const Conv&) const
     {
       typedef typename Saver::automaton_t auto_t;
@@ -123,28 +123,32 @@ namespace vcsn
 	  unsigned c = state_map[*i] = count++;
 	  if (a.is_initial(*i))
 	    {
-	      out << name_ << count 
-		  << " [style=invis,label=\"\",width=.01,height=.01];" 
+	      out << name_ << count
+		  << " [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
 		  << name_ << count << " -> " << name_ << c ;
 	      std::ostringstream o;
 	      series_elt_t ss = a.get_initial(*i);
 	      for_each_const_(serie_t::support_t, s, ss.supp())
-		o << *s << "|" << ss.get(*s) << " ";
+		o << *s << "|"
+		  << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
+		  << " ";
 	      out << "[label=\"" << o.str() << "\"];"
 		  << std::endl;
 	      ++count;
 	    }
 	  if (a.is_final(*i))
 	    {
-	      out << name_ << count 
-		  << " [style=invis,label=\"\",width=.01,height=.01];" 
-		  << std::endl 
+	      out << name_ << count
+		  << " [style=invis,label=\"\",width=.01,height=.01];"
+		  << std::endl
 		  << name_ << c << " -> "  << name_ << count;
 	      std::ostringstream o;
 	      series_elt_t ss = a.get_final(*i);
 	      for_each_const_(serie_t::support_t, s, ss.supp())
-		o << *s << "|" << ss.get(*s) << " ";
+		o << *s << "|"
+		  << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
+		  << " ";
 	      out << "[label=\"" << o.str() << "\"];"
 		  << std::endl;
 	      ++count;
@@ -155,13 +159,15 @@ namespace vcsn
 	   i != a.edges().end();
 	   ++i)
 	{
-	  out << name_ << state_map[a.origin_of(*i)] 
-	      << " -> " 
+	  out << name_ << state_map[a.origin_of(*i)]
+	      << " -> "
 	      << name_ << state_map[a.aim_of(*i)];
 	  std::ostringstream o;
 	  series_elt_t ss = a.serie_of(*i);
 	  for_each_const_(serie_t::support_t, s, ss.supp())
-	    o << *s << "|" << ss.get(*s) << " ";
+	    o << *s << "|"
+	      << ss.get(monoid_elt_t (a.set().series().monoid(), *s))
+	      << " ";
 	  out << "[label=\"" << o.str() << "\"];"
 	      << std::endl;
 	}

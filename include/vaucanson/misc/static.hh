@@ -85,7 +85,12 @@ namespace utility {
   | static_if |
   `----------*/
 
-  /// Choose between two types or values depending on a constant boolean.
+  /**
+   * Choose between two types or values depending on a constant boolean.
+   *
+   * @author Raphael Poss <raph@lrde.epita.fr>
+   * @see static_if_simple
+   */
   /** @{ */
   template<bool b, typename T, typename U>
   struct static_if
@@ -121,6 +126,35 @@ namespace utility {
     choose(const bare_t1& ,
 	   const bare_t2& p2)
     { return p2; }
+  };
+  /** @} */
+
+  /*-----------------.
+  | static_if_simple |
+  `-----------------*/
+
+  /**
+   * Choose between two types or values depending on a constant boolean.
+   *
+   * The classical static_if  cannot choose between a type  T and void
+   * because of  its choose() methods which take  references. This one
+   * is much simpler  and require no conditions on  types. However, it
+   * has no choose method.
+   *
+   * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+   * @see static_if
+   */
+  /** @{ */
+  template<bool b, typename T, typename U>
+  struct static_if_simple
+  {
+    typedef T t;
+  };
+
+  template<typename T, typename U>
+  struct static_if_simple<false, T, U>
+  {
+    typedef U t;
   };
   /** @} */
 

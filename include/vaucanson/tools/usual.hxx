@@ -68,7 +68,7 @@ namespace vcsn {
       Automata automata_set(series);
       return R(automata_set);
     }
-      
+
 
     template <class T>
     inline

@@ -1,7 +1,7 @@
 // realtime_composition.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -47,7 +47,7 @@ namespace vcsn {
     AUTOMATON_TYPES(Trans_t);
 
     using namespace std;
-    
+
     typedef series_elt_t exp_t;
     typedef typename series_elt_t::semiring_elt_t      output_exp_t;
     typedef set<std::pair<hstate_t, output_exp_t> >    state_exp_pair_set_t;
@@ -72,7 +72,7 @@ namespace vcsn {
 
     exp_t         null_exp = lhs.series().zero_;
     monoid_elt_t  empty    = lhs.series().monoid().empty_;
- 
+
     for_each_initial_state(p, lhs)
       {
 	exp_t exp = lhs.get_initial(*p);
@@ -108,16 +108,16 @@ namespace vcsn {
 
 	    Auto_t a(auto_set);
 	    standard_of(a, exp.get(empty).value());
-	    
-	    output_exp_t exp1;
+
+	    output_exp_t exp1 (a.series());
 	    partial_2(a, rhs, q, exp1);
 
-	    output_exp_t null_serie = 
+	    output_exp_t null_serie =
 	      a.series().zero(SELECT(typename a_series_elt_t::value_t));
-	    
+
 	    if (exp1 != null_serie)
 	      {
-		exp_t s;
+		exp_t s (lhs.series());
 		s.assoc(empty, exp1);
 		ret.set_final(sp_map[sp], s);
 	      }
@@ -125,21 +125,21 @@ namespace vcsn {
 
 	set_of_edges_t edges;
 	lhs.deltac(edges, p, delta_kind::edges());
-	
+
 	for_each_const_(set_of_edges_t, e, edges)
 	  {
 	    hstate_t p_ = lhs.aim_of(*e);
 	    exp_t exp = lhs.serie_of(*e);
 
 	    assertion(exp.supp().size() == 1);
-	    monoid_elt_t word = *(exp.supp().begin()); 
+	    monoid_elt_t word (exp.set().monoid(), *(exp.supp().begin()));
 	    // This supp would have one word
-	    
+
 	    Auto_t a(auto_set);
 	    standard_of(a, exp.get(word).value());
 	    state_exp_pair_set_t sep_set1;
 	    partial_3(a, rhs, q, sep_set1);
-	    
+
 	    for_each_const_(state_exp_pair_set_t, mypair, sep_set1)
 	      {
 		state_pair_t sp1;
@@ -151,16 +151,16 @@ namespace vcsn {
 		    sp_map[sp1] = new_state;
  		    sp_queue.push(sp1);
 		  }
-    
-		exp_t s;
+
+		exp_t s (lhs.set().series());
 		s.assoc(word, (*mypair).second);
 		ret.add_serie_edge( sp_map[sp], sp_map[sp1], s);
 	      }
 	  }
       }
 
-  } 
-  
+  }
+
   template< typename S, typename T>
   void
   realtime_composition(const Element<S, T>& lhs,
@@ -168,8 +168,8 @@ namespace vcsn {
 		       Element<S, T>& ret)
   {
     do_realtime_composition(lhs.set(), lhs, rhs, ret);
-  }  
-  
+  }
+
 }
 
 #endif //VCSN_ALGORITHMS_REALTIME_COMPOSITION_HXX

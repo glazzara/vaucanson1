@@ -91,6 +91,17 @@ namespace utility {
      * intended to inform the user of misbehaviors, undocumented
      * properties, deprecated features and so on.
      *
+     * <h2> Recommendations </h2>
+     *
+     * Recommendations are  a kind of assertions which  does not cause
+     * the  program to  stop.  So  a failed  recommendation  will only
+     * display  a warning  onto the  error output.  It means  that not
+     * respecting  the  condition  might  be dangerous  under  certain
+     * circumstances, but may work if you know what you are doing.
+     *
+     * Breach  of  a  recommendation  means you  are  doing  something
+     * potentially dangerous.
+     *
      * <h2>Deprecated features</h2>
      *
      * Deprecated features are features that have been superceded by
@@ -144,6 +155,9 @@ namespace utility {
 #  define __trap(Message, Cond) \
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
 			     std::string(Message) + ": " #Cond)
+#  define __trap2(Message1, Message2) \
+   utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
+			     std::string(Message1) + ": " + Message2)
 
 #  define assertion(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Assertion failed", Cond))
 #  define precondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Precondition failed", Cond))
@@ -153,11 +167,14 @@ namespace utility {
 
 #  define static_assertion(Cond, Message) \
   { utility::static_if<Cond, int, utility::contract::fail<void> >::t Message; Message = 0; }
+#  define static_assertion_(Cond, Message) \
+  { typename utility::static_if<Cond, int, utility::contract::fail<void> >::t Message; Message = 0; }
 
 #  define static_error(Message) utility::contract::fail<Message> Message
 
 #  ifndef INTERNAL_CHECKS
 
+#   define recommendation(Cond) static_cast<void>(0)
 #   define deprecation(Feature) static_cast<void>(0)
 #   define weakness(Feature) static_cast<void>(0)
 #   define incompletion(Feature) static_cast<void>(0)
@@ -167,13 +184,17 @@ namespace utility {
 #  else // ! INTERNAL_CHECKS
 
 #   ifdef STRICT
-#    define __inconsistency(Message1, Message2) __trap(Message1, Message2)
+#    define __inconsistency(Message1, Message2) __trap2(Message1, Message2)
 #   else // ! STRICT
 #    define __inconsistency(Message1, Message2) \
-  (std::cerr << __FILE__ << ':' << __LINE__ << ": " \
+  static_cast<void>(std::cerr << __FILE__ << ':' << __LINE__ << ": " \
    << Message1 << ": " << Message2 << std::endl)
 #   endif // STRICT
 
+#   define recommendation(Cond) \
+      static_cast<void>((Cond) ? \
+        static_cast<void>(0) : \
+        __inconsistency("Recommendation", #Cond " Failed."))
 #   define deprecation(Feature) __inconsistency("Deprecated feature", Feature)
 #   define weakness(Feature) __inconsistency("Weak feature", Feature)
 #   define incompletion(Feature) __inconsistency("Incomplete implementation", Feature)
@@ -192,6 +213,7 @@ namespace utility {
 
 #  define pure_service_call(Service) static_cast<void>(0)
 
+#  define recommendation(Cond) static_cast<void>(0)
 #  define deprecation(Feature) static_cast<void>(0)
 #  define weakness(Feature) static_cast<void>(0)
 #  define incompletion(Feature) static_cast<void>(0)

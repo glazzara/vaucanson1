@@ -1,7 +1,7 @@
 // extension.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,8 +28,8 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
 
-#ifndef VCSN_ALGORITHMS_EXTENSION_HXX 
-#define VCSN_ALGORITHMS_EXTENSION_HXX 
+#ifndef VCSN_ALGORITHMS_EXTENSION_HXX
+#define VCSN_ALGORITHMS_EXTENSION_HXX
 
 #include <vaucanson/algorithms/extension.hh>
 
@@ -44,27 +44,27 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto_t);
     // ret_t is the type of the transducer returned.
-    typedef typename identity_transducer_helper<S, T>::ret    ret_t; 
-    
+    typedef typename identity_transducer_helper<S, T>::ret    ret_t;
+
     AUTOMATON_TYPES_(ret_t, t_);
     typedef typename ret_t::set_t                 set_t;
-    typedef typename set_t::series_t              o_series_t; 
-    typedef typename ret_t::series_elt_t               output_series_elt_t; 
+    typedef typename set_t::series_t              o_series_t;
+    typedef typename ret_t::series_elt_t               output_series_elt_t;
     typedef typename series_elt_t::support_t           support_t;
 
     set_t          ts(o_series_t(a.set().series(), a.set().series().monoid()));
     ret_t          t_ret(ts);
 
     monoid_elt_t   neutre   = a.series().monoid().empty_;
-    monoid_elt_t   t_neutre = 
+    monoid_elt_t   t_neutre =
       t_ret.series().monoid()
       .identity(SELECT(typename t_monoid_elt_t::value_t));
-    
+
     vector<hstate_t>    conv(a.states().size());
 
     for_each_state(s, a)
       conv[t_ret.add_state()] = *s;
-    
+
     for_each_edge(e, a)
       {
 	series_elt_t t = a.serie_of(*e);
@@ -74,14 +74,14 @@ namespace vcsn {
 	for_each_const_(support_t, m, supp)
 	  {
 	    series_elt_t tmp(a.set().series());
-	    // try to associate the neutral monoid element with a weight 
+	    // try to associate the neutral monoid element with a weight
 	    // to create a serie which will be a weight in the serie os
-	    tmp.assoc(neutre, s.get(*m)); 
+	    tmp.assoc(neutre, s.get(*m));
 	    os.assoc(*m, tmp);
 	  }
 	hedge_t f = t_ret.add_serie_edge(conv[a.origin_of(*e)],
 					 conv[a.aim_of(*e)],
-					 os);   
+					 os);
       }
 
     for_each_initial_state(i, a)
@@ -89,7 +89,7 @@ namespace vcsn {
 	series_elt_t a_serie = a.get_initial(*i);
 	t_series_elt_t s;
 	s.value_set(t_neutre, a_serie);
-	t_ret.set_initial(conv[*i], s);	
+	t_ret.set_initial(conv[*i], s);
       }
 
     for_each_final_state(f, a)
@@ -99,10 +99,10 @@ namespace vcsn {
 	s.value_set(t_neutre, a_serie);
 	t_ret.set_final(conv[*f], s);
       }
-    
+
     return t_ret;
   }
-  
+
   template<typename S, typename T>
   typename identity_transducer_helper<S, T>::ret extension(const Element<S, T>& a)
   {
@@ -110,7 +110,7 @@ namespace vcsn {
   }
 
   ////////////////////////////////////////////////////////////
-  
+
   template<typename SA, typename ST, typename Auto_t, typename Trans_t>
   Trans_t do_extension(const AutomataBase<SA>&,
 		       const TransducerBase<ST>&,
@@ -125,15 +125,15 @@ namespace vcsn {
 
     Trans_t                   tt(t.set());
     map<hstate_t, hstate_t>   conv;
-    
-    a_monoid_elt_t a_neutre = 
+
+    a_monoid_elt_t a_neutre =
       a.series().monoid().identity(SELECT(typename a_monoid_elt_t::value_t));
-    t_monoid_elt_t t_neutre = 
+    t_monoid_elt_t t_neutre =
       t.series().monoid().identity(SELECT(typename t_monoid_elt_t::value_t));
-    
+
     for(a_state_iterator p = a.states().begin(); p != a.states().end(); ++p)
       conv[*p] = tt.add_state();
-    
+
     // convert edges
     for(a_edge_iterator e = a.edges().begin(); e != a.edges().end(); ++e)
       {
@@ -143,40 +143,41 @@ namespace vcsn {
 	t_output_series_elt_t os(t.set().series());
 
 	a_support_t supp = s.supp();
-	for(typename a_support_t::const_iterator m = supp.begin(); 
+	for(typename a_support_t::const_iterator m = supp.begin();
 	    m != supp.end(); ++m)
 	  {
 	    t_weight_t tmp(t.set().series().semiring());
-	    tmp.assoc(a_neutre, s.get(*m));
-	    os.assoc(*m, tmp);
+	    tmp.assoc(a_neutre,
+		      s.get(a_monoid_elt_t(a.set().series().monoid(), *m)));
+	    os.assoc(a_monoid_elt_t (a.set().series().monoid(), *m), tmp);
 	  }
-	
+
 	tt.add_serie_edge(conv[a.origin_of(*e)], conv[a.aim_of(*e)], os);
       }
-    
+
     for(a_initial_iterator p = a.initial().begin();
 	p != a.initial().end();
 	++p)
       {
 	a_series_elt_t a_serie = a.get_initial(*p);
-	t_series_elt_t s;
+	t_series_elt_t s (t.set().series());
 	s.assoc(t_neutre, a_serie);
 	tt.set_initial(conv[*p], s);
       }
-    
+
     for(a_final_iterator p = a.final().begin();
 	p != a.final().end();
 	++p)
       {
 	a_series_elt_t a_serie = a.get_final(*p);
-	t_series_elt_t s;
+	t_series_elt_t s (t.set().series());
 	s.assoc(t_neutre, a_serie);
 	tt.set_final(conv[*p], s);
-      } 
+      }
 
     return tt;
   }
-  
+
   template<typename SA, typename TA, typename ST, typename TT>
   Element<ST, TT> extension(const Element<SA, TA>& a, const Element<ST, TT>& t)
   {
@@ -185,4 +186,4 @@ namespace vcsn {
 
 }
 
-#endif //VCSN_ALGORITHMS_EXTENSION_HXX 
+#endif //VCSN_ALGORITHMS_EXTENSION_HXX

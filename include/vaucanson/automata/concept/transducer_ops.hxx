@@ -1,7 +1,7 @@
 // transducer_ops.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ namespace vcsn {
   typename Element<S, T>::Type
 
   template <class S, class T>
-  typename Element<S, T>::input_monoid_elt_t 
+  typename Element<S, T>::input_monoid_elt_t
   op_input_of(const TransducerBase<S>& s,
 	      const T& v,
 	      hedge_t e)
@@ -52,14 +52,15 @@ namespace vcsn {
   {
     AutoType(series_elt_t) is = op_serie_of(s, v, e);
     precondition(is.supp().size() == 1);
-    return is.get(*is.supp().begin());
+    return
+      is.get(AutoType(monoid_elt_t) (is.set().monoid(), *is.supp().begin()));
   }
 
   template <class S, class T>
   hedge_t
   op_add_io_edge(const TransducerBase<S>& s,
-		 T& v, 
-		 hstate_t from, 
+		 T& v,
+		 hstate_t from,
 		 hstate_t to,
 		 AutoType(input_letter_t) i,
 		 AutoType(output_letter_t) o,
@@ -71,7 +72,7 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_elt_t) is(s.series());
     is.assoc(input_w, os);
-    std::cout << "add io edge :" << o << " " 
+    std::cout << "add io edge :" << o << " "
 	      << output_w << " " << w << " "
 	      << os << std::endl;
     return op_add_serie_edge(s, v, from, to, is);
@@ -80,8 +81,8 @@ namespace vcsn {
   template <class S, class T>
   hedge_t
   op_add_io_edge(const TransducerBase<S>& s,
-		 T& v, 
-		 hstate_t from, 
+		 T& v,
+		 hstate_t from,
 		 hstate_t to,
 		 AutoType(input_monoid_elt_t) input_w,
 		 AutoType(output_monoid_elt_t) output_w,
@@ -91,14 +92,14 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_elt_t) is(s.series());
     is.assoc(input_w, os);
-    return op_add_serie_edge(s, v, from, to, is);    
+    return op_add_serie_edge(s, v, from, to, is);
   }
 
   template <class S, class T>
   hedge_t
   op_add_i_edge(const TransducerBase<S>& s,
-		 T& v, 
-		 hstate_t from, 
+		 T& v,
+		 hstate_t from,
 		 hstate_t to,
 		 AutoType(input_letter_t) i,
 		 AutoType(output_semiring_elt_t) w)
@@ -115,8 +116,8 @@ namespace vcsn {
   template <class S, class T>
   hedge_t
   op_add_o_edge(const TransducerBase<S>& s,
-		 T& v, 
-		 hstate_t from, 
+		 T& v,
+		 hstate_t from,
 		 hstate_t to,
 		 AutoType(input_letter_t) o,
 		 AutoType(output_semiring_elt_t) w)

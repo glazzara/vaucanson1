@@ -1,7 +1,7 @@
 // exp.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,13 +30,15 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_RAT_EXP_HH
 # define VCSN_ALGEBRA_CONCRETE_SERIES_RAT_EXP_HH
 
-# include <algorithm>
-# include <iostream>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 # include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/design_pattern/element.hh>
+# include <vaucanson/misc/deferrer.hh>
+
+# include <algorithm>
+# include <iostream>
 
 namespace vcsn {
 
@@ -56,7 +58,7 @@ namespace vcsn {
       typedef rat::Constant<LetterT, WeightT>			n_const_t;
 
     public:
-      typedef LetterT monoid_value_t; 
+      typedef LetterT monoid_value_t;
       typedef WeightT semiring_elt_value_t;
 
       exp();
@@ -107,12 +109,12 @@ namespace vcsn {
     // FIXME: high level fixme !
 
     template<typename M, typename S, typename T>
-    exp<M, Element<S, T> > 
+    exp<M, Element<S, T> >
     operator*(const Element<S, T>& lhs,
 	      const exp<M, Element<S, T> >& rhs);
 
     template<typename M, typename S, typename T>
-    exp<M, Element<S, T> > 
+    exp<M, Element<S, T> >
     operator*(const exp<M, Element<S, T> >& lhs,
 	      const Element<S, T>& rhs);
 
@@ -126,61 +128,67 @@ namespace vcsn {
       rat::exp<M, W>&
       operator()(const S&, const rat::exp<M, W>& exp);
     };
-    
+
     template <class Matcher, class Monoid, class Semiring>
-    class DispatchVisitor : 
-      public rat::DefaultMutableNodeVisitor<Monoid, Semiring> 
+    class DispatchVisitor :
+      public rat::DefaultMutableNodeVisitor<Monoid, Semiring>
     {
     public:
-      typedef Matcher					 matcher_t;
-      typedef Monoid					 monoid_value_t;
-      typedef Semiring					 semiring_elt_value_t;
-      typedef rat::Node<monoid_value_t, semiring_elt_value_t>  node_t;
-      
+      typedef Matcher					matcher_t;
+      typedef typename Matcher::return_type		return_type;
+      typedef Monoid					monoid_value_t;
+      typedef Semiring					semiring_elt_value_t;
+      typedef rat::Node<monoid_value_t, semiring_elt_value_t>	node_t;
+
       DispatchVisitor(Matcher& m);
-      
+
       virtual
       ~DispatchVisitor();
-      
+
       virtual void
       product(const node_t* lhs, const node_t* rhs);
 
-      virtual void 
+      virtual void
       sum(const node_t* lhs, const node_t* rhs);
 
-      virtual void 
+      virtual void
       star(const node_t* node);
-      
-      virtual void 
+
+      virtual void
       left_weight(const semiring_elt_value_t& w, const node_t* node);
-    
-      virtual void 
+
+      virtual void
       right_weight(const semiring_elt_value_t& w, const node_t* node);
 
-      virtual void 
+      virtual void
       constant(const monoid_value_t& m);
 
-      virtual void 
+      virtual void
       zero();
 
-      virtual void 
+      virtual void
       one();
 
-      typename Matcher::return_type get_ret();
+      return_type get_ret();
 
     private:
       matcher_t&			matcher_;
-      typename Matcher::return_type	ret_;
-    };    
-    
+      utility::Deferrer<return_type>	ret_;
+    };
+
+    /**
+     * Classical dispatch function for rat::exp.
+     *
+     * @param matcher The matcher to use for the dispatching.
+     * @param exp The exp to dispatch the matcher on.
+     */
     template <class M, class W>
     struct DispatchFunction<rat::exp<M, W> >
     {
       template <class Matcher>
-      static inline 
+      static inline
       typename Matcher::return_type
-      d(Matcher&		matcher, 
-	const rat::exp<M, W>&	exp);
+      d(Matcher& matcher, const rat::exp<M, W>& exp);
     };
 
   } // algebra
@@ -191,12 +199,12 @@ namespace vcsn {
 namespace vcsn {
 
   template <class Monoid_, class Semiring_>
-  class ReverseVisitor : 
+  class ReverseVisitor :
     public rat::DefaultMutableNodeVisitor<Monoid_, Semiring_>
   {
   public:
-    virtual void 
-    product(rat::Node<Monoid_, Semiring_>* lhs,  
+    virtual void
+    product(rat::Node<Monoid_, Semiring_>* lhs,
 	    rat::Node<Monoid_, Semiring_>* rhs);
   };
 
@@ -209,9 +217,9 @@ namespace std
 {
   template<typename M_, typename W_>
   std::ostream& operator<<(std::ostream& o, const vcsn::rat::exp<M_, W_>& exp);
-  
+
   template<typename M, typename W>
-  void swap(vcsn::rat::exp<M, W>& lhs, 
+  void swap(vcsn::rat::exp<M, W>& lhs,
 	    vcsn::rat::exp<M, W>& rhs);
 
 } // std
@@ -220,6 +228,6 @@ namespace std
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concrete/series/rat/exp.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_RAT_EXP_HH

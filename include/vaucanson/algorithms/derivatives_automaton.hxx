@@ -1,7 +1,7 @@
 // derivatives_automaton.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -58,20 +58,20 @@
 namespace vcsn {
 
   using namespace algorithm_patterns;
-  
+
   // In order to avoid re-calculation, the algorithm building
   // derivatives automaton is implemented in a incremental way
   template <typename T_auto, typename S, typename T>
   struct DerivativesAlgo : public IncAutomataConstructor <
     DerivativesAlgo<T_auto, S, T>,
     T_auto,
-    PartialExp<S, T> >  
+    PartialExp<S, T> >
   {
     typedef PartialExp<S, T>				exp_t;
     typedef std::list<exp_t>				exp_list_t;
     typedef typename exp_list_t::iterator		exp_list_iterator;
     AUTOMATON_TYPES(T_auto);
-    
+
     // Contructor -> initialize mother class and undefined attribute,
     // which indicate if the resulting automaton is valide
     DerivativesAlgo(const series_t& series, const Element<S, T>& exp):
@@ -91,13 +91,13 @@ namespace vcsn {
       if (!c_term.second)
 	undefined = true;
       if (c_term.first != e.exp_set().semiring().zero(SELECT(semiring_elt_value_t)))
-	set_final(c_term.first);
+	set_final(series_elt_t (e.exp_set(), c_term.first));
 
       // Create links between current state and states corresponding to
       // partial derivatives of current expression
       for (alphabet_iterator a = alpha.begin(); a != alpha.end(); ++a)
       {
-	std::pair<std::list<PartialExp<S, T> >, bool> 
+	std::pair<std::list<PartialExp<S, T> >, bool>
 	  s = prat_exp_derivate(e, *a);
 	if (!s.second)
 	  undefined = true;
@@ -105,7 +105,8 @@ namespace vcsn {
 	for (exp_list_iterator i = s.first.begin(); i != s.first.end(); ++i)
 	{
 	  PartialExp<S, T> p_exp = *i;
-	  series_elt_t s_elt(e.exp_set(), monoid_elt_t(*a));
+	  series_elt_t s_elt (e.exp_set(),
+			      monoid_elt_t(e.exp_set().monoid(), *a));
 	  s_elt = p_exp.weight() * s_elt;
 	  p_exp.weight() =
 	    e.exp_set().semiring().identity(SELECT(semiring_elt_value_t));

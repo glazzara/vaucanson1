@@ -1,7 +1,7 @@
 // series_base.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -42,38 +42,38 @@ namespace vcsn {
       `-----------------*/
 
     template<class Self>
-    const typename SeriesBase<Self>::monoid_t& 
+    const typename SeriesBase<Self>::monoid_t&
     SeriesBase<Self>::monoid() const
-    { 
-      return this->self().monoid(); 
+    {
+      return this->self().monoid();
     }
-    
+
     template<class Self>
-    const typename SeriesBase<Self>::semiring_t& 
+    const typename SeriesBase<Self>::semiring_t&
     SeriesBase<Self>::semiring() const
-    { 
-      return this->self().semiring(); 
+    {
+      return this->self().semiring();
     }
 
     template<class Self>
-    typename SeriesBase<Self>::monoid_t& 
-    SeriesBase<Self>::monoid() 
-    { 
-      return this->self().monoid(); 
+    typename SeriesBase<Self>::monoid_t&
+    SeriesBase<Self>::monoid()
+    {
+      return this->self().monoid();
     }
 
-    template<class Self>     
-    typename SeriesBase<Self>::semiring_t& 
-    SeriesBase<Self>::semiring() 
-    { 
-      return this->self().semiring(); 
+    template<class Self>
+    typename SeriesBase<Self>::semiring_t&
+    SeriesBase<Self>::semiring()
+    {
+      return this->self().semiring();
     }
 
-    template<class Self>     
-    SeriesBase<Self>::SeriesBase() 
+    template<class Self>
+    SeriesBase<Self>::SeriesBase()
     {}
 
-    template<class Self>     
+    template<class Self>
     SeriesBase<Self>::SeriesBase(const SeriesBase& other) :
       SemiringBase<Self>(other)
     {}
@@ -84,45 +84,45 @@ namespace vcsn {
     /*---------------------------------.
       | MetaElement<SeriesBase<Self>, T> |
       `---------------------------------*/
-    
+
   template<typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_value_t 
+  typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_value_t
   MetaElement<algebra::SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
-  { 
+  {
     // assertion(set().monoid().contains(m));
     return op_series_get(this->set(), this->value(), m);
   }
 
   template<typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_t 
+  typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_t
   MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_t& m) const
-  { 
-    return semiring_elt_t(this->set().semiring(), value_get(m.value())); 
+  {
+    return semiring_elt_t(this->set().semiring(), value_get(m.value()));
   }
 
   template<typename S, typename T>
-  void 
-  MetaElement<algebra::SeriesBase<S>, T>::value_set(const monoid_value_t& m, 
-					   const semiring_elt_value_t& w) 
-  { 
+  void
+  MetaElement<algebra::SeriesBase<S>, T>::value_set(const monoid_value_t& m,
+					   const semiring_elt_value_t& w)
+  {
     // assertion(set().monoid().contains(m));
     // assertion(set().semiring().contains(w));
     return op_series_set(this->set(), this->value(), m, w);
   }
 
   template<typename S, typename T>
-  void 
-  MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_t& m, 
-						const semiring_elt_t& w) 
-  { 
-    value_set(m.value(), w.value()); 
+  void
+  MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_t& m,
+						const semiring_elt_t& w)
+  {
+    value_set(m.value(), w.value());
   }
 
   template<typename S, typename T>
-  bool 
+  bool
   MetaElement<algebra::SeriesBase<S>, T>::is_finite_app() const
-  { 
-    return op_is_finite_app(this->set(), this->value()); 
+  {
+    return op_is_finite_app(this->set(), this->value());
   }
 
   template <typename S, typename T>
@@ -141,26 +141,26 @@ namespace vcsn {
 
   template <typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::support_t
-  MetaElement<algebra::SeriesBase<S>, T>::supp() const  
+  MetaElement<algebra::SeriesBase<S>, T>::supp() const
   {
     return op_support(this->set(), this->value());
   }
 
   template<typename S, typename T>
-  MetaElement<algebra::SeriesBase<S>, T>::MetaElement() 
+  MetaElement<algebra::SeriesBase<S>, T>::MetaElement()
   {}
-    
+
   template<typename S, typename T>
   MetaElement<algebra::SeriesBase<S>, T>::MetaElement(const MetaElement& other) :
     MetaElement<algebra::SemiringBase<S>, T>(other)
   {}
-    
+
   template<typename S, typename T>
   bool op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t)
-  { 
-    return false; 
+  {
+    return false;
   }
-    
+
   template<typename S, typename T, typename M, typename W>
   void op_series_set(const algebra::SeriesBase<S>& s, const T& t, const W& w)
   {
@@ -168,7 +168,7 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T)) 
+  Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T))
   {
     assertion(! "defined.");
     return Element<S, T>();
@@ -202,7 +202,7 @@ namespace vcsn {
 	return false;
     return true;
   }
-  
+
   template <typename S1, typename S2, typename T1, typename T2>
   inline
   void
@@ -250,10 +250,11 @@ namespace vcsn {
     Element<S, T> dst(ts);
     support_t support = src.supp();
     for_each_const_(support_t, ss, support)
-      dst += src.get(*ss) * Element<S, T>(s.self(), monoid_elt_t(s.monoid(), *ss));
+      dst += src.get(monoid_elt_t(s.monoid(), *ss)) *
+        Element<S, T>(s.self(), monoid_elt_t(s.monoid(), *ss));
     return dst.value();
   }
-  
+
 } // vcsn
 
 #endif // VCSN_ALGEBRA_CONCEPT_SERIES_BASE_HXX

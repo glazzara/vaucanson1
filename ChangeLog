@@ -1,17 +1,50 @@
+2004-03-06  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/design_pattern/element.hh,
+	* include/vaucanson/design_pattern/element.hxx: Forbid instanciation
+	of Element without initializing the set if it has dynamic data.
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh,
+	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/transducer_ops.hxx,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx,
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	* include/vaucanson/tools/dot_format.hxx,
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	* include/vaucanson/algorithms/evaluation.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algebra/concrete/series/krat_exp_verbalization.hxx:
+	Update accordingly.
+
+	* include/vaucanson/misc/deferrer.hh,
+	* include/vaucanson/misc/deferrer.hxx: New.
+	* include/Makefile.am: Update.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh,
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: Make
+	DispatchVisitor use Deferrer to delay instanciation of return values.
+
+	* include/vaucanson/misc/static.hh: Add static_if_simple.
+	* include/vaucanson/misc/contract.hh: Add recommendation, and fix
+	warning.
+
 2004-03-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/hopcroft_minimization.hh,
-	* include/vaucanson/algorithms/hopcroft_minimization.hh: 
+	* include/vaucanson/algorithms/hopcroft_minimization.hh:
 	Rename
 	* include/vaucanson/algorithms/minimization_hopcroft.hh,
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx:
-	To these, and update. 
+	To these, and update.
 	* include/Makefile.am: Update.
 	* src/tests/automata/algos/minimization_test.hh: Update.
 	* src/demos/vgrep/vgrep.cc: Update.
 	* include/vaucanson/standard_algorithms.hh: Update.
 	* src/demos/universal/universal.cc: Update.
-	
+
 2004-03-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_moore.hxx: Put the
@@ -23,7 +56,7 @@
 	* include/vaucanson/automata/concrete/graph.hxx: Implements exists()
 	and safe_del_state().
 	* include/vaucanson/automata/concept/automata_ops.hh,
-	* include/vaucanson/automata/concept/automata_ops.hxx:Modify 
+	* include/vaucanson/automata/concept/automata_ops.hxx:Modify
 	op_exists() prototype.
 
 2004-03-05  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>

@@ -45,12 +45,12 @@ namespace vcsn {
   // precondition : the automaton is realtime
   //
   // author: Yann Regis-Gianas.
-  template <typename A, typename auto_t, 
+  template <typename A, typename auto_t,
 	    typename Selt, typename input_t>
-  void 
+  void
   do_eval(const AutomataBase<A>&,
 	  const auto_t&	    a,
-	  const input_t&    word, 
+	  const input_t&    word,
 	  Selt&		    result)
   {
     AUTOMATON_TYPES(auto_t);
@@ -87,7 +87,6 @@ namespace vcsn {
     /*------------.
     | Computation |
     `------------*/
-
     for_all_const_(input_t, e, word)
       {
  	std::fill(v2.begin(), v2.end(), zero);
@@ -98,7 +97,9 @@ namespace vcsn {
 	    delta_ret.clear();
 	    a.letter_deltac(delta_ret, i, *e, delta_kind::edges());
 	    for_all_const_(std::list<hedge_t>, l, delta_ret)
-	      v2[a.aim_of(*l)] += v1[i] * a.serie_of(*l).get(monoid_elt_t(*e));
+	      v2[a.aim_of(*l)] +=
+	      v1[i] * a.serie_of(*l).get(monoid_elt_t(a.series().monoid(),
+						      *e));
 	  }
 	std::swap(v1, v2);
       }

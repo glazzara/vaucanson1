@@ -1,7 +1,7 @@
 // krat_verbalization.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -41,7 +41,7 @@ namespace vcsn {
     verbalize(const Element<Series, T>& exp)
     {
       Element<Series, T> ret(exp.set());
-      typedef SupportMatcher<Series, T, algebra::DispatchFunction<T> > 
+      typedef SupportMatcher<Series, T, algebra::DispatchFunction<T> >
 	matcher_t;
       matcher_t matcher(exp.set());
       matcher.match(exp.value());
@@ -49,8 +49,10 @@ namespace vcsn {
       ext_support_t supp = matcher.ext_get();
       for_each_const_(ext_support_t, m, supp)
 	{
-	  typename Element<Series, T>::monoid_elt_t w(m->second);
-	  typename Element<Series, T>::semiring_elt_t wg(m->first);
+	  typename Element<Series, T>::monoid_elt_t w(exp.set().monoid(),
+						      m->second);
+	  typename Element<Series, T>::semiring_elt_t wg(exp.set().semiring(),
+							 m->first);
 	  Element<Series, T> me(exp.set());
 	  me = w;
 	  ret += wg * me;

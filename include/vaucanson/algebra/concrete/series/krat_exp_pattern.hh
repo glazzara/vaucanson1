@@ -1,7 +1,7 @@
 // krat_exp_pattern.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,7 +39,7 @@
 namespace vcsn {
 
   namespace algebra {
-    
+
     /*---------.
     | BinaryOp |
     `---------*/
@@ -60,7 +60,7 @@ namespace vcsn {
       const T&		lhs() const;
       U&		rhs();
       const U&		rhs() const;
-      
+
     private:
       T lhs_;
       U rhs_;
@@ -77,13 +77,13 @@ namespace vcsn {
     struct UnaryOp
     {
       typedef T value_type;
-      
+
       UnaryOp();
       UnaryOp(const UnaryOp& b);
       UnaryOp(const T& node);
       T&		value();
       const T&		value() const;
-      
+
     private:
       T node_;
     };
@@ -92,20 +92,20 @@ namespace vcsn {
     | Value |
     `------*/
     //! Value is a generic class which symbolised leaf of AST.
-    /*! Value is integrated into the pattern matching system to permit 
+    /*! Value is integrated into the pattern matching system to permit
       a factorization of the accessors.
     */
     template <class T>
     struct Value
     {
       typedef T value_type;
-      
+
       Value();
       Value(const Value& v);
       Value(const T& v);
       const T&	value() const;
       T&	value();
-      
+
     private:
       T v_;
     };
@@ -113,19 +113,29 @@ namespace vcsn {
     /*---------------.
     | GenericMatcher |
     `---------------*/
-    //! GenericMatcher manages the dispatch of pattern matching.
-    /*! GenericMatcher delegates the dispatch of pattern matching to a
-      function-object: if you want to write an algorithm based on
-      pattern matching, inherit from this class.
-    */
+
+    /**
+     * GenericMatcher manages the dispatch of pattern matching.
+     *
+     * GenericMatcher delegates the dispatch of pattern matching to a
+     * function-object: if you want to write an algorithm based on
+     * pattern matching, inherit from this class.
+     */
     template <class Self, class T, class U, class F>
     struct GenericMatcher
     {
       typedef U return_type;
 
+      /**
+       * Effectively performs the match.
+       *
+       * @param ast The object to perform the match on.
+       *
+       * @see DispatchVisitor::DispatchVisitor
+       */
       U
       match(const T& ast);
-      
+
     protected:
       GenericMatcher();
     };
@@ -165,7 +175,7 @@ match_node##N(const N& p____) 		\
 {						\
   typename N::lhs_node_type Lhs = p____.lhs();	\
   typename N::rhs_node_type Rhs = p____.rhs();
-  
+
 #define MATCH_(N, Val)				\
 return_type					\
 match_node##N(const N& p____) 		\
@@ -175,9 +185,9 @@ match_node##N(const N& p____) 		\
 #define MATCH(N)					\
 return_type						\
 match_node##N(const N&) 			\
-{						
-   
-#define END return return_type(); }
+{
+
+#define END }
 
 
     template <class Self, class T, class U, class F>
@@ -195,7 +205,7 @@ match_node##N(const N&) 			\
       DecLeaf(Constant, monoid_value_t);
       DecFinalLeaf(One);
       DecFinalLeaf(Zero);
-      
+
     protected:
       KRatExpMatcher() {}
     };
@@ -209,7 +219,7 @@ match_node##N(const N&) 			\
    typedef typename krat_exp_matcher_t::RightWeight     RightWeight;         \
    typedef typename krat_exp_matcher_t::Constant       	Constant;            \
    typedef typename krat_exp_matcher_t::One       	One;                 \
-   typedef typename krat_exp_matcher_t::Zero       	Zero;           
+   typedef typename krat_exp_matcher_t::Zero       	Zero;
 
     template <class T>
       struct DispatchFunction;
@@ -217,7 +227,7 @@ match_node##N(const N&) 			\
       template <class Self, class Series, class T, class Dispatch>
 	struct KRatExpIdentity : vcsn::algebra::KRatExpMatcher<
 	Self,
-	T, 
+	T,
 	Element<Series, T>,
 	Dispatch
 	>
@@ -250,39 +260,42 @@ match_node##N(const N&) 			\
 
 	  MATCH_(Star, e)
 	  {
-	    return match(e).star();
+	    return_type r (match(e));
+	    r.star();
+	    return r;
 	  }
 	  END
 
 	  MATCH__(LeftWeight, w, e)
 	  {
-	    return  semiring_elt_t(w) * match(e);
+	    semiring_elt_t welt (exp_.set().semiring(), w);
+	    return  welt * match(e);
 	  }
 	  END
 
 	  MATCH__(RightWeight, e, w)
 	  {
-	    return match(e) * semiring_elt_t(w);
+	    semiring_elt_t welt (exp_.set().semiring(), w);
+	    return match(e) * welt;
 	  }
 	  END
 
 	  MATCH_(Constant, m)
 	  {
-	    Element<Series, T> s(exp_.set());
-	    s = monoid_elt_t(m);
-	    return s;
+	    monoid_elt_t melt (exp_.set().monoid(), m);
+	    return Element<Series, T> (exp_.set(), melt);
 	  }
 	  END
 
 	  MATCH(Zero)
 	  {
-	    return exp_.set().zero(SELECT(T));	  
+	    return zero_as<T>::of(exp_.set());
 	  }
 	  END
 
 	  MATCH(One)
 	  {
-	    return exp_.set().identity(SELECT(T));	  
+	    return identity_as<T>::of(exp_.set());
 	  }
 	  END
 
@@ -290,15 +303,15 @@ match_node##N(const N&) 			\
 	  Element<Series, T>  exp_;
 	};
 
-      
+
     } // algebra
 
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concrete/series/krat_exp_pattern.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
+
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HH

@@ -1,7 +1,7 @@
 // product.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -50,7 +50,7 @@ namespace vcsn {
   `--------*/
 
   template <typename A, typename lhs_t, typename rhs_t, typename output_t>
-  void 
+  void
   product(const AutomataBase<A>&	,
 	  output_t&			output,
 	  const lhs_t&			lhs,
@@ -63,7 +63,7 @@ namespace vcsn {
     AUTOMATON_TYPES(output_t);
     typedef typename series_elt_t::support_t		support_t;
 
-    delta_ret_t					edge_lhs; 
+    delta_ret_t					edge_lhs;
     delta_ret_t					edge_rhs;
     visited_t					visited;
     std::queue<pair_hstate_t>			to_process;
@@ -77,7 +77,7 @@ namespace vcsn {
       for_each_initial_state(rhs_s, rhs)
 	{
 	  hstate_t  new_state = output.add_state();
-	  pair_hstate_t new_pair(*lhs_s, *rhs_s);	
+	  pair_hstate_t new_pair(*lhs_s, *rhs_s);
 	  m[new_state] = new_pair;
 	  visited[new_pair] = new_state;
 	  to_process.push(new_pair);
@@ -95,15 +95,15 @@ namespace vcsn {
 	hstate_t rhs_s	        = current_pair.second;
 	hstate_t current_state  = visited[current_pair];
 
-	output.set_initial(current_state, 
+	output.set_initial(current_state,
 			   lhs.get_initial(lhs_s) * rhs.get_initial(rhs_s));
-	output.set_final(current_state, 
+	output.set_final(current_state,
 			 lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
-	
+
 	edge_lhs.clear();
-	lhs.deltac(edge_lhs, lhs_s, delta_kind::edges()); 
+	lhs.deltac(edge_lhs, lhs_s, delta_kind::edges());
 	edge_rhs.clear();
-	rhs.deltac(edge_rhs, rhs_s, delta_kind::edges()); 
+	rhs.deltac(edge_rhs, rhs_s, delta_kind::edges());
 
 	for_all_const_(delta_ret_t, iel, edge_lhs)
 	  {
@@ -114,10 +114,12 @@ namespace vcsn {
 		series_elt_t s_  = rhs.serie_of(*ier);
 		series_elt_t s__ = s;
 		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
-		
+
 		for_all_(support_t, supp, s.supp())
-		  s__.value_set(monoid_elt_t(*supp).value(), 
-		       (s_.get(*supp) * s.get(*supp)).value());
+		  s__.value_set(*supp,
+				(s_.get(monoid_elt_t(s.set().monoid(), *supp)) *
+				 s.get(monoid_elt_t(s.set().monoid(), *supp)))
+				.value());
 
 		if (s__ != series_zero)
 		  {
@@ -127,7 +129,7 @@ namespace vcsn {
 
 		    if (found == visited.end())
 		      {
-			aim = output.add_state();		      
+			aim = output.add_state();
 			visited[new_pair] = aim;
 			m[aim] = new_pair;
 			to_process.push(new_pair);
@@ -144,7 +146,7 @@ namespace vcsn {
 
   // wrappers
   template<typename A, typename T, typename U>
-  Element<A, T> 
+  Element<A, T>
   product(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     std::map<hstate_t, std::pair<hstate_t, hstate_t> > m;
@@ -155,7 +157,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename U>
-  Element<A, T> 
+  Element<A, T>
   product(const Element<A, T>& lhs, const Element<A, U>& rhs,
 	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m)
   {
@@ -163,7 +165,7 @@ namespace vcsn {
     product(ret.set(), ret, lhs, rhs, m);
     return ret;
   }
-  
+
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_PRODUCT_HXX

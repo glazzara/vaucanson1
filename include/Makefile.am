@@ -247,6 +247,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/misc/bitset.hxx				     \
 	vaucanson/misc/char_traits.hh				     \
 	vaucanson/misc/char_traits.hxx				     \
+	vaucanson/misc/deferrer.hh				     \
+	vaucanson/misc/deferrer.hxx				     \
 	vaucanson/misc/special_char_traits.hh			     \
 	vaucanson/misc/constraints.hh				     \
 	vaucanson/misc/container_ops.hh				     \

@@ -518,7 +518,7 @@ namespace vcsn {
       void parse_error(const std::string& msg = "parse_error.")
 	throw (const std::string&)
       {
-	trace("Stop on error", msg);
+	trace("Stop on error.", msg);
 	throw msg;
       }
 
@@ -590,7 +590,7 @@ namespace vcsn {
 	    accept(space);
 	    krat_exp_token_t tok = lexer_.first();
 	    accept(a_weight);
-	    exp = exp * semiring_elt_t (tok.as_weight());
+	    exp = exp * semiring_elt_t (exp.set().semiring(), tok.as_weight());
 	  }
 	trace("parse_right_weighted: End", exp);
       }
@@ -680,7 +680,7 @@ namespace vcsn {
 	  }
 	else if (lexer_.first().is_a(a_word))
 	  {
-	    exp = monoid_elt_t (lexer_.first().as_word());
+	    exp = monoid_elt_t (exp.set().monoid(), lexer_.first().as_word());
 	    accept(a_word);
 	  }
 	else if (lexer_.first().is_a(lparen))

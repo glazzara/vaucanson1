@@ -333,7 +333,7 @@ namespace vcsn {
     }
 
     template <class Matcher, class Monoid, class Semiring>
-    typename Matcher::return_type
+    typename DispatchVisitor<Matcher, Monoid, Semiring>::return_type
     DispatchVisitor<Matcher, Monoid, Semiring>::
     get_ret()
     {

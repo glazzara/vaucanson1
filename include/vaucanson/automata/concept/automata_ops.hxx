@@ -395,9 +395,11 @@ namespace vcsn {
   class letter_query
   {
   public:
-    letter_query()
+    letter_query(const S* s, const T* v, const Letter& l) :
+      s_ (s),
+      v_ (v),
+      w_ (s->series().monoid(), l)
     {
-      w_ *= Letter();
     }
 
     bool operator()(hedge_t e) const
@@ -409,23 +411,17 @@ namespace vcsn {
  	      ::of(s_->series().semiring()));
     }
 
-    //  private:
-    const S* s_;
-    const T* v_;
-    AutoType(monoid_elt_t) w_;
+  private:
+    const S*			s_;
+    const T*			v_;
+    AutoType(monoid_elt_t)	w_;
   };
 
   template <class S, class T, class Letter>
-  inline
-  const letter_query<S, T, Letter>& make_letter_query(const S& s,
-						      const T& t,
-						      const Letter& l)
+  letter_query<S, T, Letter>
+  make_letter_query(const S& s, const T& t, const Letter& l)
   {
-    static letter_query<S, T, Letter> lq;
-    lq.s_ = &s;
-    lq.v_ = &t;
-    *lq.w_.begin() = l;
-    return lq;
+    return letter_query<S, T, Letter> (&s, &t, l);
   }
 
   template <class S, class T>

@@ -1,7 +1,7 @@
 // krat_exp_realtime.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -40,7 +40,7 @@ namespace vcsn {
     template <class Series, class T, class Dispatch>
     struct KRatExpRealtime : algebra::KRatExpIdentity<
       KRatExpRealtime<Series, T, Dispatch>,
-      Series, 
+      Series,
       T,
       Dispatch
       >
@@ -58,7 +58,7 @@ namespace vcsn {
 
       KRatExpRealtime(const Element<Series, T>& exp) :
 	KRatExpIdentity<KRatExpRealtime<Series, T, Dispatch>,
-			Series, 
+			Series,
 			T,
 			Dispatch
 			>(exp)
@@ -66,29 +66,28 @@ namespace vcsn {
 
       MATCH_(Constant, m)
       {
-	Element<Series, T> acu(exp_.set());
-	monoid_elt_t w(exp_.set().monoid());
-	acu = exp_.set().identity(SELECT(T));
-	Element<Series, T> s(exp_.set());
+	Element<Series, T>	exp = identity_as<T>::of(exp_.set());
+	Element<Series, T>	tmp (exp_.set());
+	monoid_elt_t		letter (exp_.set().monoid());
 	for (typename monoid_value_t::const_iterator i = m.begin();
 	     i != m.end(); ++i)
 	  {
-	    w = *i;
-	    s = w;
-	    acu = acu * s;
+	    letter = *i;
+	    tmp = letter;
+	    exp *= tmp;
 	  }
-	return acu;
+	return exp;
       }
       END
     };
 
   } // algebra
-  
+
   template <class Series, class T>
   Element<Series, T>
-  realtime(const Element<Series, T>& exp) 
+  realtime(const Element<Series, T>& exp)
   {
-    algebra::KRatExpRealtime<Series, T, algebra::DispatchFunction<T> > 
+    algebra::KRatExpRealtime<Series, T, algebra::DispatchFunction<T> >
       matcher(exp);
     return matcher.match(exp.value());
   }
