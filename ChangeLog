@@ -1,4 +1,8 @@
 2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/Makefile.am: Add missing files.
+
+2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	The structure comparison failed when only alphabets were differents,
 	this patch solves this problem.
 	

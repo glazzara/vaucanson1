@@ -101,6 +101,7 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/concept/monoid_base.hh			   \
 	vaucanson/algebra/concept/monoid_base.hxx			   \
 	vaucanson/algebra/concept/numerical_semiring.hh			   \
+	vaucanson/algebra/concept/numerical_semiring.hxx		   \
 	vaucanson/algebra/concept/semigroup_base.hh			   \
 	vaucanson/algebra/concept/semigroup_base.hxx			   \
 	vaucanson/algebra/concept/semiring_base.hh			   \
@@ -108,6 +109,7 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/concept/series_base.hh			   \
 	vaucanson/algebra/concept/series_base.hxx			   \
 	vaucanson/algebra/concept/tropical_semiring.hh			   \
+	vaucanson/algebra/concept/tropical_semiring.hxx			   \
 	vaucanson/algebra/implementation/letter/couple_letter.hxx	   \
 	vaucanson/algebra/implementation/letter/couple_letter.hh	   \
 	vaucanson/algebra/implementation/letter/char_letter.hh		   \
