@@ -100,6 +100,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/determinize.hxx			     \
 	vaucanson/algorithms/eval.hh				     \
 	vaucanson/algorithms/eval.hxx				     \
+	vaucanson/algorithms/finite_support_conversion.hh	     \
+	vaucanson/algorithms/finite_support_conversion.hxx	     \
 	vaucanson/algorithms/forward_closure.hh			     \
 	vaucanson/algorithms/forward_closure.hxx		     \
 	vaucanson/algorithms/forward_realtime.hh		     \

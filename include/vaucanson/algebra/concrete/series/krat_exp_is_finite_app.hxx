@@ -53,7 +53,7 @@ namespace vcsn {
 
     MATCH__(Product, lhs, rhs)
     {
-      return match_(lhs) && match(rhs);
+      return match(lhs) && match(rhs);
     }
     END
 

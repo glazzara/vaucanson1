@@ -95,6 +95,11 @@ namespace vcsn {
   void op_in_add(const algebra::Series<W, M>& s, 
 		 rat::exp<Tm, Tw>& dst,
 		 const rat::exp<Tm, Tw>& arg);
+
+  template<typename W, typename M, typename Tm, typename Tw>
+  rat::exp<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
+			  const rat::exp<Tm, Tw>& a,
+			  const rat::exp<Tm, Tw>& b);
     
   template<typename W, typename M, typename Tm, typename Tw>
   void op_in_mul(const algebra::Series<W, M>& s, 

@@ -176,7 +176,7 @@ cat <<EOF
 INCLUDES = -I/usr/include/python2.2 -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
     -I\$(top_srcdir)/include -I\$(top_builddir)/include
 AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -DEXCEPTION_TRAPS
-# AM_CXXFLAGS = \$(CXXFLAGS_OPTIMIZE) 
+AM_CXXFLAGS = \$(CXXFLAGS_DEBUG) 
 AM_LDFLAGS = -module -avoid-version
 
 EOF

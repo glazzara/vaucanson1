@@ -1,3 +1,14 @@
+2003-07-10  Raphaël Poss  <raph@lrde.epita.fr> 
+                                   
+        * include/vaucanson/algebra/concrete/series/krat.hh: Add missing 
+        prototype.              
+        * include/Makefile.am (nobase_include_HEADERS): Mention  
+        `finite_support_convert'.      
+        * include/algorithms/finite_support_convert.hh: New. 
+        * include/algorithms/finite_support_convert.hxx; New. 
+        * include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx: 
+        remove extraneous `_'. 
+
 2003-07-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/demos/vaucanswig/expand.sh: Add missing $(DESTDIR).

@@ -71,6 +71,7 @@
 #include <vaucanson/tools/usual.hh>
 #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 #include <vaucanson/automata/concrete/generalized.hh>
+#include <vaucanson/algorithms/finite_support_conversion.hh>
 #include <vaucanson/misc/dot_dump.hh>
 #include <stdexcept>
 #include <sstream>
@@ -257,9 +258,19 @@ namespace Kind ##_types
 	      throw std::runtime_error("letter not in alphabet");
 	  return Kind ##_serie_t(self->series(), Kind ##_monoid_elt_t(self->monoid(), l)); 
 	}
+      Kind ##_serie_t serie(const Kind ##_exp_t& e) const
+	{
+	  Kind ##_serie_t ret(self->series());
+	  vcsn::finite_support_convert(ret, e);
+	  return ret;
+	}
       
       Kind ##_exp_t exp(const Kind ##_serie_t& s) const
-	{ return Kind ##_exp_t(self->series(), s); }
+	{ 
+	  Kind ##_exp_t ret(self->series());
+	  vcsn::finite_support_convert(ret, s);
+	  return ret;
+	}
 
       Kind ##_exp_t exp(const std::string& l) const
 	{ 
