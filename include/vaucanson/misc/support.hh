@@ -22,16 +22,24 @@
 #ifndef VCSN_MISC_SUPPORT_HH
 # define VCSN_MISC_SUPPORT_HH
 
+/**
+ * @file   support.hh
+ * @brief  Stuff to adapt containers.
+ * 
+ */
+
 # include <iterator>
 # include <map>
 
 namespace vcsn {
 
+   /** @addtogroup utility *//** @{ */
+
   template <class T>
   class Support;
 
-  //! support_iterator iterates over the support of an associative
-  //! container.
+  /// Iterator over the Support generic class.
+  /// @bug is not STL compliant yet.
   template <class C>
   class SupportIterator
   {
@@ -51,7 +59,7 @@ namespace vcsn {
     map_iterator	i;
   };
 
-  //! support<map<U, T> > is a const adapter of std::map to container.
+  /// Support<map<U, T> > is a const adapter of std::map to container.
   template <class U, class T>
   class Support<std::map<U, T> >
   {
@@ -70,7 +78,7 @@ namespace vcsn {
     const std::map<U, T>&	m_;
   };
 
-  //! SparseIterator
+  /// SparseIterator is an iterator over range except some points.
   template <class Integer, class ExcludedContainer>
   class SparseIterator
   {
@@ -94,7 +102,9 @@ namespace vcsn {
     integer_t			integer_;
   };
 
-}
+  /*! @} */
+
+} // vcsn
 
 namespace std {
 
@@ -112,9 +122,16 @@ namespace std {
 
 namespace vcsn {
 
-  //! SparseInterval is a const adapter of a 3-uple :
-  //! (from, begin, excluded).
-  //! SparseInterval verifies the container concept.
+   /** @addtogroup utility *//** @{ */
+
+  /** 
+   *
+   * @brief Container over a sparse integer range.
+   *
+   * SparseInterval is a const adapter of a 3-uple :
+   *  (from, begin, excluded).
+   *  SparseInterval verifies the container concept.
+   */
   template <class Integer, class ExcludedContainer>
   class SparseInterval
   {
@@ -136,7 +153,7 @@ namespace vcsn {
     integer_t			to_;
   };
 
-  //! SelfIterator is an iterator which is also a container.
+  /// SelfIterator is an iterator which is also a container.
   template <template <class> class C, class T>
   class SelfIterator 
   {
@@ -205,6 +222,8 @@ namespace vcsn {
     typename C<T>::const_iterator pos_;
   };
 
+   /** @} */
+  
 } // vcsn
 
 # include <vaucanson/misc/support.hxx>

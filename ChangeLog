@@ -1,5 +1,10 @@
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/misc/support.hh: Document.
+	* include/vaucanson/automata/concept/delta_kind.hh: New.
+
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/misc/support.hh: New.
 	* include/vaucanson/misc/support.hxx: Likewise.
 
