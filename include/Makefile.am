@@ -158,7 +158,6 @@ nobase_include_HEADERS =					     \
 	vaucanson/automata/concept/history.hxx			     \
 	vaucanson/automata/concept/kinds.hh			     \
 	vaucanson/automata/concept/kinds.hxx			     \
-	vaucanson/automata/concept/projection.hh		     \
 	vaucanson/automata/concept/tags.hh			     \
 	vaucanson/automata/concept/tags.hxx			     \
 	vaucanson/automata/concept/transducer_base.hh		     \

@@ -30,6 +30,9 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH
 # define VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH
 
+# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/automata/concept/automata.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 
 namespace vcsn {
@@ -68,6 +71,23 @@ namespace vcsn {
 
   private:
     series_t	series_;
+  };
+
+  template <class S, class T>
+  struct output_projection_helper
+  {
+    typedef typename S::series_t::weights_t                    
+    typeof_auto_series_t;
+    typedef typename S::series_t::monoid_t              auto_monoid_t;
+    typedef typename typeof_auto_series_t::weights_t           auto_semiring_t;
+    typedef typename algebra::mute_series_traits<typeof_auto_series_t,
+						 auto_semiring_t,
+						 auto_monoid_t>::ret    
+    auto_series_t;
+    
+    typedef typename output_projection_traits<T>::ret          auto_impl_t;
+    typedef Element<Automata<auto_series_t>, 
+		    auto_impl_t>      ret;
   };
 
   template <class S, class T>

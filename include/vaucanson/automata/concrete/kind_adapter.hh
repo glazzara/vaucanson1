@@ -44,7 +44,7 @@ namespace vcsn {
 		     T& v,						\
 		     hstate_t from,					\
 		     hstate_t to,					\
-		     const typename Element<S, T>::letter_t & l)	\
+		     const typename Element<S, T >::letter_t & l)	\
   {									\
     typedef typename S::series_t series_t;				\
     typedef typename series_t::monoid_t monoid_t;			\
@@ -61,7 +61,7 @@ namespace vcsn {
 
 #define ADAPT_LETTER_OF_TO_SERIES_LABEL(T...)				\
   inline \
-  typename Element<AutomataBase<S>, T>::letter_t		\
+  typename Element<AutomataBase<S>, T >::letter_t		\
   op_letter_of(const AutomataBase<S>& s,				\
 	       const T& v,					\
                hedge_t e)						\

@@ -82,9 +82,9 @@ namespace vcsn {
       }
     // FIXME: set initial/final weights.
     for_each_initial_state(i, a)
-      ret.set_initial(conv[*i]);
+      ret.set_initial(conv[*i], a.get_initial(*i));
     for_each_final_state(f, a)
-      ret.set_final(conv[*f]);
+      ret.set_final(conv[*f], a.get_final(*f));
     return ret;
   }
 

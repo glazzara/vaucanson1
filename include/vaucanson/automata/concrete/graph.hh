@@ -33,7 +33,6 @@
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
-# include <vaucanson/automata/concept/projection.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/concrete/kind_adapter.hh>
@@ -288,18 +287,19 @@ namespace vcsn {
   };
 
   // Explain how to project type of transducer into input automaton type.
-  template <class Kind,
+  template <class S,
+	    class Kind,
 	    class WordValue,
 	    class WeightValue,
 	    class SerieValue,
 	    class Letter,
 	    class Tag>
-  struct projection_traits<Graph<Kind,
-				 WordValue,
-				 WeightValue,
-				 SerieValue,
-				 Letter,
-				 Tag>  >
+  struct projection_traits<S, Graph<Kind,
+				    WordValue,
+				    WeightValue,
+				    SerieValue,
+				    Letter,
+				    Tag>  >
   {
     typedef Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
     self_t;

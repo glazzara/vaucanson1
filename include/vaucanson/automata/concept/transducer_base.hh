@@ -80,6 +80,18 @@ namespace vcsn {
     typedef undefined_type ret;
   };
 
+  template <class S, class T>
+  struct projection_traits
+  {
+    typedef undefined_type	ret;
+  };
+
+  template <class T>
+  struct output_projection_traits
+  {
+    typedef undefined_type	ret;
+  };
+
   /*-------------------------------------.
   | MetaElement<TransducerBase<Self>, T> |
   `-------------------------------------*/
