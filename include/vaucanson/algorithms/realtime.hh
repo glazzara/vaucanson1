@@ -83,13 +83,13 @@ namespace vcsn {
    */
   template<typename A, typename T>
   void
-  realtime_here(Element<A, T>& a, realtime_type type = forward);
+  realtime_here(Element<A, T>& a, realtime_type type);
 
   /**
    * Returns a fresh realtime automaton.
    *
    * As  @c  realtime_here, it  build  a  realtime  automaton, but  it
-   * returns a new one instead of changing those given.
+   * returns a new one instead of changing the given one.
    *
    * @param a The automaton to make realtime.
    * @param type The type of algorithm used.
@@ -98,11 +98,15 @@ namespace vcsn {
    */
   template<typename A, typename T>
   Element<A, T>
-  realtime(const Element<A, T>& a, realtime_type type = forward);
+  realtime(const Element<A, T>& a, realtime_type type);
+
 
   /** @} */
 
 } // vcsn
+
+// Includes the declaration of realtime()
+# include <vaucanson/algorithms/realtime_decl.hh>
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/realtime.hxx>

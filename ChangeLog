@@ -1,5 +1,21 @@
 2004-03-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/realtime_decl.hxx,
+	* include/vaucanson/algorithms/realtime_decl.hh: New. Declare a
+	generic realtime().
+	* include/vaucanson/algorithms/realtime.hh,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	* include/vaucanson/algorithms/krat_exp_realtime.hh: Use the realtime
+	provided in realtime_decl.hh and provide do_realtime().
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Simplify the
+	call to realtime().
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* include/Makefile.am: Update.
+
+2004-03-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/tropical_semiring.hh,
 	* include/vaucanson/algorithms/complement.hh,
 	* include/vaucanson/algorithms/complete.hh,

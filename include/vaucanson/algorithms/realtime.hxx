@@ -1,7 +1,7 @@
 // realtime.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -53,7 +53,7 @@ namespace vcsn {
     for (typename Auto_::edge_iterator e = a.edges().begin();
 	 e != a.edges().end();
 	 ++e)
-      if (a.series_of(*e) == 
+      if (a.series_of(*e) ==
 	  a.set().series().identity(SELECT(typename Auto_::series_value_t)))
 	return false;
     return true;
@@ -65,33 +65,54 @@ namespace vcsn {
   {
     return do_is_realtime(a.set(), a);
   }
-  
+
   /*--------------.
   | realtime_here |
   `--------------*/
+
+  template<typename Auto_, typename A_>
+  void
+  do_realtime_here(const AutomataBase<A_>&,
+		   Auto_& a,
+		   realtime_type type = forward)
+  {
+    if (type == forward)
+      return forward_realtime_here(a);
+    else
+      return backward_realtime_here(a);
+  }
+
+
   template<typename A, typename T>
   void
   realtime_here(Element<A, T>& a, realtime_type type)
   {
-    if (type == forward)
-      forward_realtime_here(a);
-    else
-      backward_realtime_here(a);
+    return do_realtime_here(a.set(), a, type);
   }
 
   /*---------.
   | realtime |
   `---------*/
-  template<typename A, typename T>
-  Element<A, T>
-  realtime(const Element<A, T>& a, realtime_type type)
+
+  template<typename Auto_, typename A_>
+  Auto_
+  do_realtime(const AutomataBase<A_>&,
+	      const Auto_& a,
+	      realtime_type type = forward)
   {
-    if (type== forward)
+    if (type == forward)
       return forward_realtime(a);
     else
       return backward_realtime(a);
   }
-  
+
+  template<typename A, typename T>
+  Element<A, T>
+  realtime(const Element<A, T>& a, realtime_type type)
+  {
+    return do_realtime(a.set(), a, type);
+  }
+
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_REALTIME_HXX

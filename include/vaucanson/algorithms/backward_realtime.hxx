@@ -1,7 +1,7 @@
 // backward_realtime.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -43,8 +43,7 @@ namespace vcsn {
 
   template <class A_, typename Auto_>
   void
-  do_backward_realtime_here(const AutomataBase<A_>&,
-		 Auto_&			 a)
+  do_backward_realtime_here(const AutomataBase<A_>&, Auto_& a)
   {
     typedef Auto_				automaton_t;
     AUTOMATON_TYPES(automaton_t);
@@ -75,7 +74,7 @@ namespace vcsn {
 	    origin_d.pop_front();
 	    if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
 	      {
-		aim_d.clear();	 
+		aim_d.clear();
 		a.deltac(aim_d, a.aim_of(d_o), delta_kind::edges());
 		for (typename delta_ret_t::const_iterator d = aim_d.begin();
 		     d != aim_d.end();
@@ -83,17 +82,17 @@ namespace vcsn {
 		  if (a.series_of(*d).get(monoid_identity) == semiring_zero)
 		    {
 		      bool new_edge = true;
-		      for (typename queue_t::const_iterator d__o = 
+		      for (typename queue_t::const_iterator d__o =
 			     origin_d.begin();
 			   d__o != origin_d.end();
 			   ++d__o)
-			if ((a.aim_of(*d__o) == a.aim_of(*d) && 
+			if ((a.aim_of(*d__o) == a.aim_of(*d) &&
 			     (a.label_of(*d__o) == a.label_of(*d))))
 			  {
 			    new_edge = false;
 			    break;
 			  }
-		      
+
 		      if (new_edge)
 			{
 			  hedge_t new_hedge = a.add_series_edge
@@ -132,14 +131,21 @@ namespace vcsn {
     do_backward_realtime_here(a.set(), a);
   }
 
+  template <class A_, typename Auto_>
+  Auto_
+  do_backward_realtime(const AutomataBase<A_>&, const Auto_& a)
+  {
+    Auto_ ret(a);
+    do_backward_realtime_here(ret.set(), ret);
+    return ret;
+  }
+
   template<typename A, typename T>
   Element<A, T>
   backward_realtime(const Element<A, T>& a)
   {
-    Element<A, T> ret(a);
-    do_backward_realtime_here(ret.set(), ret);
-    return ret;
-  }  
+    return do_backward_realtime(a.set(), a);
+  }
 
 } // vcsn
 

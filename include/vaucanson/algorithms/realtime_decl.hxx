@@ -1,7 +1,7 @@
-// krat_exp_realtime.hh: this file is part of the Vaucanson project.
+// realtime_decl.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -27,26 +27,27 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH
-# define VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH
+#ifndef VCSN_ALGORITHMS_REALTIME_DECL_HXX
+# define VCSN_ALGORITHMS_REALTIME_DECL_HXX
 
-/** @addtogroup algorithms *//** @{ */
-/**
- * @file krat_exp_realtime.hh
- *
- * Declarations of the realtime() algorithm for rational expressions.
- *
- * @see realtime()
- */
-/** @} */
-
-// INTERFACE: Exp realtime(const Exp& e) { return vcsn::realtime(e); }
-
-// Include the declaration of realtime().
 # include <vaucanson/algorithms/realtime_decl.hh>
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/algorithms/krat_exp_realtime.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+namespace vcsn {
 
-#endif // VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH
+  template<typename S, typename T>
+  Element<S, T>
+  realtime(const Element<S, T>& e)
+  {
+    return do_realtime(e.set(), e);
+  }
+
+  template <typename S, typename T>
+  void
+  realtime_here(Element<S, T>& e)
+  {
+    return do_realtime_here(e.set(), e);
+  }
+
+} // vcsn
+
+#endif // VCSN_ALGORITHMS_REALTIME_DECL_HXX

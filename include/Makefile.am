@@ -163,6 +163,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algorithms/realtime.hxx			     \
 	vaucanson/algorithms/realtime_composition.hh		     \
 	vaucanson/algorithms/realtime_composition.hxx		     \
+	vaucanson/algorithms/realtime_decl.hh			     \
+	vaucanson/algorithms/realtime_decl.hxx			     \
 	vaucanson/algorithms/search.hh				     \
 	vaucanson/algorithms/search.hxx				     \
 	vaucanson/algorithms/standard.hh			     \

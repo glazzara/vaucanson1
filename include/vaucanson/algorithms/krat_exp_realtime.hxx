@@ -32,6 +32,7 @@
 
 # include <vaucanson/algorithms/krat_exp_realtime.hh>
 
+# include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 
@@ -85,13 +86,28 @@ namespace vcsn {
 
   } // algebra
 
-  template <class S, class T>
-  Element<S, T>
-  realtime(const Element<algebra::SeriesBase<S>, T>& exp)
+  template <class Exp_, class S_>
+  Exp_
+  do_realtime(const algebra::SeriesBase<S_>&, const Exp_& exp)
   {
+    typedef S_				S;
+    typedef typename Exp_::value_t	T;
+
     algebra::KRatExpRealtime< S, T, algebra::DispatchFunction<T> >
-      matcher(Element<S, T> (exp.set().self()));
+      matcher(exp);
     return matcher.match(exp.value());
+  }
+
+  template <class Exp_, class S_>
+  void
+  do_realtime_here(const algebra::SeriesBase<S_>&, Exp_& exp)
+  {
+    typedef S_				S;
+    typedef typename Exp_::value_t	T;
+
+    algebra::KRatExpRealtime< S, T, algebra::DispatchFunction<T> >
+      matcher(exp);
+    exp = matcher.match(exp.value());
   }
 
 } // vcsn
