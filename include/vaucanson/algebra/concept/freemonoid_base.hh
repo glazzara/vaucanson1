@@ -132,9 +132,9 @@ namespace vcsn {
   };
 
   //! Returns a fresh word that is the mirror 
-  template<typename Self, typename T>
-  Element<FreeMonoidBase<Self>, T>
-  mirror(const Element<FreeMonoidBase<Self>, T>& e);
+  template<typename S, typename T>
+  Element<S, T>
+  mirror(const Element<S, T>& e);
 
   //! @}
 

@@ -19,6 +19,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 # include <vaucanson/fundamental/element.hh>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 
 # include <check/tests_stuff.hh>

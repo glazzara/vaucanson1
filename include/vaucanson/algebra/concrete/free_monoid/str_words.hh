@@ -24,9 +24,7 @@
 # include <string>
 
 # include <vaucanson/algebra/concrete/free_monoid/words.hh>
-// Using this implementation of alphabet :
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
-
 
 namespace vcsn {
 

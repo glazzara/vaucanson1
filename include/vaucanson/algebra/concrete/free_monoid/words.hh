@@ -22,7 +22,6 @@
 # define ALGEBRA_WORDS_HH
 
 # include <string>
-
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 namespace vcsn {
