@@ -62,6 +62,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algebra/concrete/series/krat_exp_parser.hxx	     \
 	vaucanson/algebra/concrete/series/krat_exp_pattern.hh	     \
 	vaucanson/algebra/concrete/series/krat_exp_pattern.hxx	     \
+	vaucanson/algebra/concrete/series/krat_exp_verbalization.hh  \
+	vaucanson/algebra/concrete/series/krat_exp_verbalization.hxx \
 	vaucanson/algebra/concrete/series/krat_exp_support.hxx	     \
 	vaucanson/algebra/concrete/series/krat.hh		     \
 	vaucanson/algebra/concrete/series/krat.hxx		     \
