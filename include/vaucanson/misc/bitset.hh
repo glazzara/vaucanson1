@@ -207,7 +207,7 @@ namespace utility
     bool	get_bit(size_type index, size_type bit) const;
 
     /// Recalculate the set's size when invalid.
-    size_t	compute_size() const;
+    size_type	compute_size() const;
 
     /*-------------------.
     | Iterator on bits.  |

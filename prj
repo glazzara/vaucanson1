@@ -1,16 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 447)
-(Parent-Version vaucanson 0 446)
+(Project-Version vaucanson 0 448)
+(Parent-Version vaucanson 0 447)
 (New-Version-Log "")
 
 (Version-Log "
-2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-10-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* doc/beginner/Makefile.am: Distribute .tex.
+	* include/vaucanson/misc/bitset.hxx: Fix type error.
+	* include/vaucanson/misc/bitset.hh: Likewise.
+	* include/vaucanson/algorithms/evaluation.hxx: Fix.
 ")
-(Checkin-Time "Fri, 17 Oct 2003 22:16:27 +0200")
+(Checkin-Time "Wed, 29 Oct 2003 09:09:41 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -93,7 +95,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.80 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.81 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -761,8 +763,8 @@
 ;; Files added by populate at Thu, 04 Sep 2003 13:57:03 +0200,
 ;; to version 0.405(w), by clavei_t:
 
-  (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.5 600))
-  (include/vaucanson/misc/bitset.hh (vaucanson/r/40_bitset.hh 1.5 600))
+  (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.6 600))
+  (include/vaucanson/misc/bitset.hh (vaucanson/r/40_bitset.hh 1.6 600))
 
 ;; Files added by populate at Fri, 05 Sep 2003 17:36:32 +0200,
 ;; to version 0.412(w), by clavei_t:
@@ -788,7 +790,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:41 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/realtime_composition.hxx (vaucanson/r/46_realtime_c 1.3 600))
+  (include/vaucanson/algorithms/realtime_composition.hxx (vaucanson/r/46_realtime_c 1.4 600))
 
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:48 +0200,
 ;; to version 0.422(w), by yann:
@@ -798,7 +800,7 @@
 ;; Files added by populate at Thu, 25 Sep 2003 12:39:50 +0200,
 ;; to version 0.422(w), by yann:
 
-  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.7 600))
+  (include/vaucanson/algorithms/evaluation.hxx (vaucanson/r/48_evaluation 1.8 600))
 
 ;; Files added by populate at Thu, 25 Sep 2003 13:03:05 +0200,
 ;; to version 0.424(w), by yann:

@@ -108,7 +108,7 @@ namespace vcsn {
 
 	    Auto_t a(auto_set);
 	    standard_of(a, exp.get(empty).value());
-
+	    
 	    output_exp_t exp1;
 	    partial_2(a, rhs, q, exp1);
 

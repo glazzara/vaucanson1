@@ -787,8 +787,8 @@ namespace utility
   bool
   Bitset::
   BitActionCount<CountType, Start, Step>::operator () (const Bitset&,
-						       size_t,
-						       size_t,
+						       size_type,
+						       size_type,
 						       bool val)
   {
     if (val)
