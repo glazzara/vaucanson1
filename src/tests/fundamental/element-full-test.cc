@@ -31,9 +31,30 @@ template<typename T>
     MetaElement(const MetaElement& other) {};
   };
 
-}
+
+  int op_add(const vcsn::Natural& set, int v1, int v2)
+  { return v1 + v2; }
+
+  int op_sub(const vcsn::Natural& set, int v1, int v2)
+  { return v1 - v2; }
+
+  int op_mul(const vcsn::Natural& set, int v1, int v2)
+  { return v1 * v2; }
+
+  int op_div(const vcsn::Natural& set, int v1, int v2)
+  { return v1 / v2; }
+
+  int op_mod(const vcsn::Natural& set, int v1, int v2)
+  { return v1 % v2; }
+
+  vcsn::Element<Natural, int> op_neg(const vcsn::Natural& set, int v)
+  { return Element<Natural, int>(-v); } 
+
+} // vcsn
 
 using namespace vcsn;
+
+
 
 
 int main(int argc, char **argv)
@@ -44,32 +65,36 @@ int main(int argc, char **argv)
   // vcsn::Element<int, int> *tmp = new vcsn::Element<int, int>();
 
 
-  Element<Natural, int> a2;
+  Element<Natural, int> a;
+  Element<Natural, int> b;
 
+  int entier = 42;
 
-
-
- 
-
-  // constructors tests
-  vcsn::Element<Natural, int > *a1 = 
-    new vcsn::Element<Natural, int >();  
-
-  Element<Natural, float> a4(a2);
-
-  vcsn::Element<Natural, int > *a3 = 
-    new vcsn::Element<Natural, int >(*a1);  
-
-  //*a3 = *a1;
-
-  a4 = a2;
-  
-
-
-  //a1 = *tmp;
- 
-
-
+  a == b;
+  a != b;
+  a < b;
+  a > b;
+  a <= b;
+  a >= b;
+  a + b;
+  a - b;
+  a * b;
+  a / b;
+  a % b;
+  -a;
+  a == entier;
+  entier == a;
+  a != entier;
+  entier != a;
+  a < entier;
+  entier < a;
+  a > entier;
+  entier > a;
+  a <= entier;
+  entier <= a;
+  a >= entier;
+  entier >= a;
+  std::swap(a,b);
 
 //   TEST(t, "Method A::foo()", 
 //   { 

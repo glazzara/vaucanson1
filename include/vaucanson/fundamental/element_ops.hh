@@ -208,6 +208,8 @@ operator-(const vcsn::Element<S, T>& e)
 
 } // vcsn
 
+
+//ambigu
 namespace std
 {
   template<typename S1, typename T1, typename S2, typename T2>

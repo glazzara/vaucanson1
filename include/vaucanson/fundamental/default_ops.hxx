@@ -165,6 +165,9 @@ namespace vcsn
       op_assign(s1.self(), dst, src); 
     }
 
+
+
+
     /*------------.
     | arithmetics |
     `------------*/

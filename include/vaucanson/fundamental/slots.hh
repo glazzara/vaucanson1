@@ -221,7 +221,8 @@ namespace vcsn {
 template<typename S1, typename T1, typename S2, typename T2>	\
 static inline							\
 bool operator Op(const vcsn::ValueSlot<S1, T1>& v1,	\
-		 const vcsn::ValueSlot<S2, T2>& v2);	\
+		 const vcsn::ValueSlot<S2, T2>& v2)	\
+{ return v1.get() == v2.get(); }                         \
 
 CALL_OP(==, vcsn::internal::eq, true);
 CALL_OP(!=, vcsn::internal::neq, false);
