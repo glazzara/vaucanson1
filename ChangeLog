@@ -1,3 +1,7 @@
+2004-10-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* config/vcsn.m4: Set decent warning flags when ICC is used.
+
 2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/sanity/generate_files.sh: Generate a test_base.cc which is
