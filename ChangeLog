@@ -1,3 +1,21 @@
+2004-04-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/tests-suites/generate-all.sh: Instanciate tests on more
+	automaton types.
+	* src/tests/tests-suites/numerical_automaton_t.defs,
+	* src/tests/tests-suites/tropical_min_automaton_t.defs,
+	* src/tests/tests-suites/tropical_max_automaton_t.defs: New files. 
+	Files for instanciation of new tests.
+	* src/tests/automata/algos/determinist_test.hh,
+	* src/tests/automata/algos/normalize_test.hh,
+	* src/tests/automata/algos/realtime_test.hh,
+	* src/tests/automata/algos/reachable_test.hh,
+	* src/tests/automata/algos/extract_test.hh,
+	* src/tests/automata/algos/closure_test.hh,
+	* src/tests/automata/algos/product_test.hh,
+	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh: update
+	these files so they can be used with various automaton types.
+
 2004-03-30  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/xml/genutfstrings.sh: Rename temporary file for

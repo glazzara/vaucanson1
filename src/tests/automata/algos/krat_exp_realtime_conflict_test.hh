@@ -27,6 +27,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_KRAT_EXP_REALTIME_CONFLICT_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_KRAT_EXP_REALTIME_CONFLICT_TEST_HH
@@ -62,7 +64,7 @@ unsigned krat_exp_realtime_conflict_test(tests::Tester& tg)
   TEST(t, "realtime(automaton) does not conflict with realtime(exp) [1].",
        e1 == e2);
 
-  vcsn::tools::gen_auto_t	generator;
+  vcsn::tools::GenRandomAutomata<Auto> generator;
 
   automaton_t	a = realtime(generator.generate(50, 60));
   TEST(t, "realtime(automaton) does not conflict with realtime(exp) [2].",

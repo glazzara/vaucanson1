@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_REACHABLE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_REACHABLE_TEST_HH
@@ -49,7 +51,7 @@ unsigned reachable_test(tests::Tester& t)
   using namespace vcsn::tools;
 
 
-  gen_auto_t	 gen(time(0x0));
+  GenRandomAutomata<automaton_t> gen(time(0x0));
   const unsigned nb_tests			     = 10;
   unsigned	 success_trim			     = 0;
   unsigned	 success_final_reachable_idempotence = 0;

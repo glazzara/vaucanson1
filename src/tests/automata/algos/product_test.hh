@@ -1,7 +1,7 @@
 // product_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_PRODUCT_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_PRODUCT_TEST_HH
@@ -53,7 +55,7 @@ template <class Auto>
 unsigned product_test(tests::Tester& tg)
 {  
   typedef Auto automaton_t;
-  gen_auto_t gen(time(0x0));
+  GenRandomAutomata<automaton_t> gen(time(0x0));
   tests::Tester t(tg.verbose());
 
   const unsigned nb_test    = 30;

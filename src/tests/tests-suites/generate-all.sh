@@ -116,3 +116,18 @@
    algebra_series_polynom_bool_string.defs \
    ../algebra/series/misc \
    ../algebra/series/polynom
+
+../bin/generate-test-suite.sh \
+   numerical_automaton_t \
+   numerical_automaton_t.defs \
+   ../automata
+
+../bin/generate-test-suite.sh \
+   tropical_max_automaton_t \
+   tropical_max_automaton_t.defs \
+   ../automata
+
+../bin/generate-test-suite.sh \
+   tropical_min_automaton_t \
+   tropical_min_automaton_t.defs \
+   ../automata

@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_REALTIME_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_REALTIME_TEST_HH
@@ -42,7 +44,7 @@ unsigned realtime_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
 
   tests::Tester			t(tg.verbose());
-  vcsn::tools::gen_auto_t	gen(time(0x0));
+  vcsn::tools::GenRandomAutomata<Auto> gen(time(0x0));
 
   const unsigned nb_ok_tests     = 20;
   const unsigned nb_non_ok_tests = 20;

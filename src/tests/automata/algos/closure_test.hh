@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_CLOSURE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_CLOSURE_TEST_HH
@@ -50,7 +52,7 @@ bool closure_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
 
   tests::Tester t(tg.verbose());
-  gen_auto_t gen(time(0x0));
+  GenRandomAutomata<automaton_t> gen(time(0x0));
 
   bool error_forward_idempotence = false;
   bool error_forward_epsilon = false;
