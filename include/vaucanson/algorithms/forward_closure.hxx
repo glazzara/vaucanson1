@@ -42,7 +42,7 @@ namespace vcsn {
   // author: Thanh-Hoc NGUYEN
   template <class A_, typename Auto>
   void
-  do_forward_closure_here(const AutomataBase<A_>& a_set,
+  do_forward_closure_here(const AutomataBase<A_>&,
 			  Auto&			   a)
   {
     AUTOMATON_TYPES(Auto);
@@ -61,20 +61,30 @@ namespace vcsn {
     matrix_weight_initial_t m_winitial(size), m_winitial_tmp(size);
     
     for (i = 0; i < size; i++){
-      m_weight[i].resize(size);
-      m_weight_tmp[i].resize(size);
-      m_series[i].resize(size, series_elt_t(a_set.series()));
-      m_series_ret[i].resize(size, series_elt_t(a_set.series()));
+      m_weight[i].resize(size, weight_t(a.series().weights()));
+      m_weight_tmp[i].resize(size, weight_t(a.series().weights()));
+      m_series[i].resize(size, series_elt_t(a.series()));
+      m_series_ret[i].resize(size, series_elt_t(a.series()));
+    }
+
+    /// @bug FIXME: This converters should be removed
+    // Initialize converters between matrix index and states.
+    std::vector<hstate_t>	index_to_state(size);
+    std::map<hstate_t, int>	state_to_index;
+    i = 0;
+    for_each_state(s, a)
+    {
+      index_to_state[i] = *s;
+      state_to_index[*s] = i++;
     }
     
     // Initialize the matrix m_weight, m_series, m_winitial and
     // m_series_ret with the original automaton
-
     std::list<hedge_t> to_remove;
     for_each_edge(e, a)
       {
-	hstate_t origin = a.origin_of(*e);
-	hstate_t aim = a.aim_of(*e);
+	int origin = state_to_index[a.origin_of(*e)];
+	int aim = state_to_index[a.aim_of(*e)];
 	m_weight[origin][aim] += a.serie_of(*e).get(monoid_identity);
 	m_series[origin][aim] += a.serie_of(*e);
 	m_series[origin][aim].value_set(monoid_identity.value(),
@@ -88,8 +98,9 @@ namespace vcsn {
     // Initialize the matrix m_winitial and m_winitial_tmp
     for_each_initial_state(p, a)
       {
-	m_winitial[*p] = a.get_initial(*p).get(monoid_identity);
-	m_winitial_tmp[*p] = m_winitial[*p];
+	int pos = state_to_index[*p];
+	m_winitial[pos] = a.get_initial(*p).get(monoid_identity);
+	m_winitial_tmp[pos] = m_winitial[pos];
       }
     
     // Compute star(m_weight)
@@ -118,12 +129,15 @@ namespace vcsn {
 	  m_series_ret[j][i] += m_series[j][k]*m_weight[k][i];
 	  
 	if (m_series_ret[j][i] != serie_identity)
-	  a.add_serie_edge(j, i, m_series_ret[j][i]);
-	  
+	  a.add_serie_edge(index_to_state[j],
+			   index_to_state[i],
+			   m_series_ret[j][i]);
+
 	m_winitial[i] += m_winitial_tmp[j]*m_weight[j][i];
       } 
       if (m_winitial[i] != weight_zero)
-	a.set_initial(i, series_elt_t(a_set.series(), m_winitial[i]));
+	a.set_initial(index_to_state[i],
+		      series_elt_t(a.series(), m_winitial[i]));
     }    
   }
   

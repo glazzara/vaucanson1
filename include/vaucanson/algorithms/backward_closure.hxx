@@ -63,13 +63,25 @@ namespace vcsn {
       m_series[i].resize(size, series_elt_t(a.series()));
       m_series_ret[i].resize(size, series_elt_t(a.series()));
     }
+
+    /// @bug FIXME: This converters should be removed
+    // Initialize converters between matrix index and states.
+    std::vector<hstate_t>	index_to_state(size);
+    std::map<hstate_t, int>	state_to_index;
+    i = 0;
+    for_each_state(s, a)
+    {
+      index_to_state[i] = *s;
+      state_to_index[*s] = i++;
+    }
+    
     // Initialize the matrix m_weight, m_series and m_series_ret with
     // the original automaton
     std::list<hedge_t> to_remove;
     for_each_edge(e, a)
       {
-	hstate_t aim = a.aim_of(*e);
-	hstate_t origin = a.origin_of(*e);
+	int aim = state_to_index[a.aim_of(*e)];
+	int origin = state_to_index[a.origin_of(*e)];
 	m_weight[origin][aim] += a.serie_of(*e).get(monoid_identity);
 	m_series[origin][aim] += a.serie_of(*e);
 	m_series[origin][aim].value_set(monoid_identity.value(),
@@ -83,8 +95,9 @@ namespace vcsn {
     // Initialize the m_wfinal, m_wfinal_tmp
     for_each_final_state(p, a)
       {
-	m_wfinal[*p] = a.get_final(*p).get(monoid_identity);
-	m_wfinal_tmp[*p] = m_wfinal[*p];
+	int pos = state_to_index[*p];
+	m_wfinal[pos] = a.get_final(*p).get(monoid_identity);
+	m_wfinal_tmp[pos] = m_wfinal[pos];
       }
         
     // Compute star(m_weight)
@@ -113,13 +126,16 @@ namespace vcsn {
 	  m_series_ret[i][j] += m_weight[i][k]*m_series[k][j]; 
 	
 	if (m_series_ret[i][j] != serie_identity)
-	  a.add_serie_edge(i, j, m_series_ret[i][j]); 
+	  a.add_serie_edge(index_to_state[i],
+			   index_to_state[j],
+			   m_series_ret[i][j]); 
 
 	m_wfinal[i] += m_weight[i][j] * m_wfinal_tmp[j];
       } 
       
       if (m_wfinal[i] != weight_zero)
-	a.set_final(i, series_elt_t(m_wfinal[i]));
+	a.set_final(index_to_state[i],
+		    series_elt_t(a.series(), m_wfinal[i]));
     } 
   }
   

@@ -1,3 +1,9 @@
+2003-07-01  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/forward_closure.hxx,
+	  include/vaucanson/algorithms/backward_closure.hxx: Correct use of
+	  states.
+
 2003-07-01  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/misc/limits.hh: Fix some method return types.
