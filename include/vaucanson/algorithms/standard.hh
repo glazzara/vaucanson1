@@ -39,7 +39,8 @@
  * This  file contains different  operations which  can be  applied on
  * standard automata.
  *
- * @see
+ * @see standardize(), is_standard(), concat_of_standard(),
+ *      union_of_standard(), star_of_standard()
  */
 /** @} */
 

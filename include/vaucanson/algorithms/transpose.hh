@@ -35,6 +35,8 @@
  * @file algorithms/transpose.hh
  *
  * This file contain the function which transpose an automaton.
+ *
+ * @see transpose()
  */
 /** @} */
 
