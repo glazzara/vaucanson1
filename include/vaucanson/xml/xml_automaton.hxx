@@ -108,7 +108,7 @@ namespace vcsn
       root_		= doc_->getDocumentElement();
       structure_	= doc_->createElement(str_content);
       states_		= doc_->createElement(str_states);
-      edges_		= doc_->createElement(str_edges);
+      edges_		= doc_->createElement(str_transitions);
       initials_		= doc_->createElement(str_initials);
       finals_		= doc_->createElement(str_finals);
 
@@ -146,7 +146,7 @@ namespace vcsn
 		    {
 		      DOMElement* elt = static_cast<DOMElement*>(child);
 		      if (not XMLString::compareIString(elt->getNodeName(),
-							str_edges))
+							str_transitions))
 			edges_ = elt;
 		      else if (not XMLString::
 			       compareIString(elt->getNodeName(), str_states))
@@ -177,7 +177,7 @@ namespace vcsn
 	}
       if (not edges_)
 	{
-	  edges_ = doc_->createElement(str_edges);
+	  edges_ = doc_->createElement(str_transitions);
 	  structure_->insertBefore(edges_, finals_);
 	}
       if (not initials_)
@@ -215,7 +215,7 @@ namespace vcsn
       while (child)
 	{
 	  if (child->getNodeType() == DOMNode::ELEMENT_NODE and
-	      not XMLString::compareIString(child->getNodeName(), str_edge))
+	      not XMLString::compareIString(child->getNodeName(), str_transition))
 	    {
 	      DOMElement* elt = static_cast<DOMElement*> (child);
 	      hedge_t edge (j++);
@@ -344,7 +344,7 @@ namespace vcsn
     {
       precondition(has_state(source) and has_state(destination));
 
-      DOMElement* edge = doc_->createElement(str_edge);
+      DOMElement* edge = doc_->createElement(str_transition);
       edges_->appendChild(edge);
       XMLCh* lbl = XMLString::transcode(label.value().c_str());
       edge->setAttribute(str_label, lbl);

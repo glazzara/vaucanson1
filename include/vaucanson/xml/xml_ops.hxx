@@ -419,7 +419,7 @@ namespace vcsn
 	  if (child->getNodeType() == DOMNode::ELEMENT_NODE)
 	    {
 	      DOMElement* elt = static_cast<DOMElement*> (child);
-	      if (not XMLString::compareIString(elt->getNodeName(), str_edge)
+	      if (not XMLString::compareIString(elt->getNodeName(), str_transition)
 		  and elt->hasAttribute(str_src)
 		  and elt->hasAttribute(str_dst)
 		  and elt->hasAttribute(str_label))

@@ -25,13 +25,13 @@
     <state name="three"/>
   </states>
 
-  <edges>
-    <edge dst="one" label="(D C)" src="zero"/>
-    <edge dst="one" label="(E B)" src="two"/>
-    <edge dst="one" label="(F A)" src="one"/>
-    <edge dst="three" label="(D 1)" src="two"/>
-    <edge dst="three" label="(E C)" src="three"/>
-  </edges>
+  <transitions>
+    <transition dst="one" label="(D C)" src="zero"/>
+    <transition dst="one" label="(E B)" src="two"/>
+    <transition dst="one" label="(F A)" src="one"/>
+    <transition dst="three" label="(D 1)" src="two"/>
+    <transition dst="three" label="(E C)" src="three"/>
+  </transitions>
 
   <initials>
     <initial label="(D C)" state="zero"/>

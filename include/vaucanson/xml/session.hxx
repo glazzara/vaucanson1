@@ -151,7 +151,7 @@ namespace vcsn
       while (n)
 	{
 	  const XMLCh* node_name = n->getNodeName();
-	  if (not XMLString::compareIString(node_name, str_edges) or
+	  if (not XMLString::compareIString(node_name, str_transitions) or
 	      not XMLString::compareIString(node_name, str_initials) or
 	      not XMLString::compareIString(node_name, str_finals))
 	    {
@@ -159,7 +159,7 @@ namespace vcsn
 	      while (c)
 		{
 		  const XMLCh* node_name = c->getNodeName();
-		  if (not XMLString::compareIString(node_name, str_edge) or
+		  if (not XMLString::compareIString(node_name, str_transition) or
 		      not XMLString::compareIString(node_name, str_initial) or
 		      not XMLString::compareIString(node_name, str_final))
 		    {

@@ -17,13 +17,13 @@ cat >vaucanson.dtd <<EOF
 <!ELEMENT session (geometry?, automaton*)>
 <!ELEMENT automaton (geometry?, type, content)>
 <!ELEMENT type (monoid, semiring?)>
-<!ELEMENT content (geometry?, states, edges, initials, finals)>
+<!ELEMENT content (geometry?, states, transitions, initials, finals)>
 <!ELEMENT monoid (generator*|monoid*)>
 <!ELEMENT semiring (monoid?, semiring?)>
 <!ELEMENT states (geometry?, state*)>
-<!ELEMENT edges (geometry?, edge*)>
+<!ELEMENT transitions (geometry?, transition*)>
 <!ELEMENT state (geometry?)>
-<!ELEMENT edge (geometry?)>
+<!ELEMENT transition (geometry?)>
 <!ELEMENT initials (geometry?, initial*)>
 <!ELEMENT finals (geometry?, final*)>
 <!ELEMENT generator EMPTY>
@@ -48,7 +48,7 @@ cat >>vaucanson.dtd <<EOF
     Here are some properties of that can determinize the possible
     implementation.
   labels:
-    Pure means here "without any spontaneous edge"
+    Pure means here "without any spontaneous transition"
   -->
 <!ATTLIST automaton
 	xmlns	CDATA	#FIXED "http://www.lrde.epita.fr/vaucanson"
@@ -103,7 +103,7 @@ constructed from a free monoid.
         label   CDATA   #IMPLIED
 >
 
-<!ATTLIST edge
+<!ATTLIST transition
 	name	ID	#IMPLIED
 	src	IDREF	#REQUIRED
 	dst	IDREF	#REQUIRED
