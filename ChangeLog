@@ -1,5 +1,10 @@
 2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/product.hxx (product): Minor fix.
+	Avoid constructing a semiring element with no structure.
+
+2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/product.hxx (product): Fix and clean.
 	The resulting series when computing a transition was badly initialized.
 

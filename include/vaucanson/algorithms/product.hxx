@@ -158,9 +158,12 @@ namespace vcsn {
     typedef std::map<pair_hstate_t, hstate_t>		visited_t;
     typedef typename series_set_elt_t::support_t	support_t;
 
-    const semiring_elt_t semiring_zero =
-      output.structure().series().semiring().
-      zero(SELECT(semiring_elt_value_t));
+    const series_set_t&	series   = output.structure().series();
+    const monoid_t&	monoid   = series.monoid();
+    const semiring_t&	semiring = series.semiring();
+
+    const semiring_elt_t  semiring_zero =
+      semiring.zero(SELECT(semiring_elt_value_t));
 
     visited_t			visited;
     std::queue<pair_hstate_t>	to_process;
@@ -213,13 +216,14 @@ namespace vcsn {
 	  {
 	    const series_set_elt_t  left_series  = lhs.series_of(*l);
 	    const series_set_elt_t  right_series = rhs.series_of(*r);
-	    series_set_elt_t	    prod_series (output.structure().series());
+	    series_set_elt_t	    prod_series (series);
 
 	    bool		    prod_is_null (true);
 	    for_all_(support_t, supp, left_series.supp())
 	      {
-		const semiring_elt_t l = left_series.get(*supp);
-		const semiring_elt_t r = right_series.get(*supp);
+		const monoid_elt_t   supp_elt (monoid, *supp);
+		const semiring_elt_t l = left_series.get(supp_elt);
+		const semiring_elt_t r = right_series.get(supp_elt);
 		const semiring_elt_t p = l * r;
 		if (p != semiring_zero)
 		  {
