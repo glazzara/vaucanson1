@@ -1,3 +1,11 @@
+2004-03-03  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx:
+	Change the copyright years.
+	* src/tests/tests-suites/algebra_numerical_semiring_rational.defs:
+	New file. Define a test for semirings with rational numbers.
+
 2004-03-03  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/algebra/free_monoid/Makefile.am: Typo.

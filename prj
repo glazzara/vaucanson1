@@ -1,17 +1,20 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 496)
-(Parent-Version vaucanson 0 495)
+(Project-Version vaucanson 0 497)
+(Parent-Version vaucanson 0 496)
 (New-Version-Log "")
 
-(Version-Log "2004-03-03  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+(Version-Log "2004-03-03  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
-	* src/tests/algebra/free_monoid/Makefile.am: Typo.
-
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx:
+	Change the copyright years.
+	* src/tests/tests-suites/algebra_numerical_semiring_rational.defs:
+	New file. Define a test for semirings with rational numbers.
 ")
-(Checkin-Time "Wed, 03 Mar 2004 01:28:02 +0100")
-(Checkin-Login clavei_t)
+(Checkin-Time "Wed, 03 Mar 2004 10:31:50 +0100")
+(Checkin-Login o-conn_s)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -93,7 +96,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.33 644))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.34 644))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -1031,8 +1034,15 @@
 ;; Files added by populate at Tue, 02 Mar 2004 19:17:24 +0100,
 ;; to version 0.493(w), by o-conn_s:
 
-  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.2 644))
-  (include/vaucanson/algebra/concrete/semiring/rational_number.hh (vaucanson/v/5_rational_n 1.1 644))
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hxx (vaucanson/v/4_rational_n 1.3 644))
+  (include/vaucanson/algebra/concrete/semiring/rational_number.hh (vaucanson/v/5_rational_n 1.2 644))
+
+;; Files added by populate at Wed, 03 Mar 2004 10:25:32 +0100,
+;; to version 0.496(w), by o-conn_s:
+
+  (src/tests/tests-suites/algebra_numerical_semiring_rational.defs (vaucanson/v/6_algebra_nu 1.1 600))
 )
-(Merge-Parents)
+(Merge-Parents
+  (0.496 complete)
+)
 (New-Merge-Parents)
