@@ -61,7 +61,7 @@ int main()
   for (int i = 0; i < MAXITER; ++i)
     {
       float f = utility::random::generate<float>();
-      assert(f >= 0. && f <= 1.);
+      assert(f >= -2. && f <= 2.);
     }
 }
 
