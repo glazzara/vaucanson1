@@ -1,3 +1,12 @@
+2005-01-19  Raphael Poss  <raph@lrde.epita.fr>
+
+	* README: Refer to the doc/ subdirectory.
+
+	* NEWS: Rewrite to...
+	* doc/NEWS.txt: ...this. Prepare section for next release.
+
+	* doc/Makefile.am: Generate HTML and PDF for NEWS.
+
 2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
 
 	Fix a compiler warning introducted on 2005-01-14 (SetSlot
