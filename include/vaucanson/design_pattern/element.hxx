@@ -45,7 +45,10 @@ namespace vcsn {
     set_(),
     value_(op_default(SELECT(S), SELECT(T)))
   {
+//FIXME: Find another way to have empty elements.
+#ifndef VCSN_XML_EMPTY_ELEMENTS
     static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
+#endif //VCSN_XML_EMPTY_ELEMENTS
   }
 
   /*--------------------------.
@@ -70,10 +73,10 @@ namespace vcsn {
   template<typename OtherS, typename U>
   Element<S,T>::Element(const Element<OtherS, U>& other)
     : set_(op_convert(SELECT(S), other.set())),
-      value_(op_convert(SELECT(S), SELECT(T),
+      value_(op_convert(SELECT(S), SELECT(T), 
 			other.set(), other.value()))
   {
-    static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
+    //static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
   }
 
   /*-------------------------.
@@ -135,6 +138,8 @@ namespace vcsn {
   Element<S,T>&
   Element<S,T>::operator=(const Element& other)
   {
+    if (!set_.bound())
+      set_.assign(other.set());
     op_assign(set(), other.set(), value_, other.value());
     return *this;
   }
@@ -144,6 +149,8 @@ namespace vcsn {
   Element<S,T>&
   Element<S,T>::operator=(const Element<S, U>& other)
   {
+    if (!set_.bound())
+      set_.assign(other.set());
     op_assign(set(), other.set(), value_, other.value());
     return *this;
   }
@@ -152,7 +159,6 @@ namespace vcsn {
   template<typename OtherS, typename U>
   Element<S,T>& Element<S,T>::operator=(const Element<OtherS, U>& other)
   {
-    // or convert it
     if (!set_.bound())
       set_.assign(op_convert(set(), other.set()));
     op_assign(set(), other.set(), value_, other.value());

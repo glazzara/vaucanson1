@@ -7,6 +7,10 @@
 # include <vaucanson/algebra/concrete/free_monoid/words.hh>
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
+# include <include/vaucanson/algebra/concrete/alphabets/predefs.hh>
+# include <include/vaucanson/algebra/concrete/free_monoid/predefs.hh>
+# include <vaucanson/algebra/concept/numerical_semiring.hh>
+# include <vaucanson/algebra/concept/tropical_semiring.hh>
 # include <vaucanson/xml/krat_to_polynom.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 

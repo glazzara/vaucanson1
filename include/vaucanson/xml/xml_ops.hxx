@@ -890,7 +890,7 @@ namespace vcsn
 	    hstate_t s = x.sname2num_.find(xml2str(state))->second;
 	    a.set_initial(s, lelt.value(),
 			  zero_value(SELECT(series_t),
-				     SELECT(serie_value_t)));
+				     SELECT(series_value_t)));
 	    if_tag<Tag>::get_initial(elt, s, a.tag());
 	  }
 	}
@@ -919,7 +919,7 @@ namespace vcsn
 	    lelt = xml::XmlValue(l);
 	    hstate_t s = x.sname2num_.find(xml2str(state))->second;
 	    a.set_final(s, lelt.value(), zero_value(SELECT(series_t),
-						    SELECT(serie_value_t)));
+						    SELECT(series_value_t)));
 	    if_tag<Tag>::get_final(elt, s, a.tag());
 	  }
 	}

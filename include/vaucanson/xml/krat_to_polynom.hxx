@@ -204,7 +204,10 @@ namespace vcsn {
       exp.value().accept(visitor);
       if (visitor.has_error())
 	throw Unconvertible();
-      return visitor.get_polynom();
+
+      Element<Series<Ss, Sm>, polynom<Tm, Ts> > ret(exp.set());
+      ret = visitor.get_polynom();
+      return ret;
     }
   }
 }

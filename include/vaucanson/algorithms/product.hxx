@@ -175,14 +175,10 @@ namespace vcsn {
       for_each_initial_state(rhs_s, rhs)
 	{
 	  hstate_t  new_state = output.add_state();
-<<<<<<< .working
-	  pair_hstate_t new_pair(*lhs_s, *rhs_s);
-=======
 	  grphx::setcoordfrom(output, new_state,
                               lhs_tag, *lhs_s,
                               rhs_tag, *rhs_s);
 	  pair_hstate_t new_pair(*lhs_s, *rhs_s);
->>>>>>> .merge-right.r558
 	  m[new_state] = new_pair;
 	  visited[new_pair] = new_state;
 	  to_process.push(new_pair);
@@ -231,14 +227,10 @@ namespace vcsn {
 
 		    if (found == visited.end())
 		      {
-<<<<<<< .working
-			aim = output.add_state();
-=======
 			aim = output.add_state();
 			grphx::setcoordfrom(output, aim,
                                             lhs_tag, new_pair.first,
                                             rhs_tag, new_pair.second);
->>>>>>> .merge-right.r558
 			visited[new_pair] = aim;
 			m[aim] = new_pair;
 			to_process.push(new_pair);

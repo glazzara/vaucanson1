@@ -78,8 +78,6 @@ namespace std {
       o << "(" << i->first << "," << i->second << ")";
     return o;
   }
-<<<<<<< .working
-=======
 
   template <typename U, typename V>
   istream& operator>>(istream& i, pair<U, V>& p)
@@ -144,7 +142,6 @@ namespace std {
     return __s;
   }
   
->>>>>>> .merge-right.r558
 } // std
 
 #endif // VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HXX

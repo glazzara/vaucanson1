@@ -30,12 +30,9 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH
 # define VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH
 
-<<<<<<< .working
 # include <vaucanson/algebra/concept/letter.hh>
-
-=======
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
->>>>>>> .merge-right.r558
+
 # include <string>
 # include <iostream>
 
@@ -44,7 +41,6 @@
 namespace vcsn
 {
 
-<<<<<<< .working
   namespace algebra
   {
 
@@ -68,7 +64,6 @@ namespace vcsn
   } // End of namespace algebra.
 } // End of namespace vcsn.
 
-=======
 namespace vcsn {
   // Specialization for pairs.
   template <typename S, typename U, typename V>
@@ -79,7 +74,6 @@ namespace vcsn {
 		const std::list<char>& escaped);
 }
 
->>>>>>> .merge-right.r558
 namespace std {
 
   /// To display a single pair
@@ -93,9 +87,6 @@ namespace std {
   ostream& operator<<(ostream& o,
 		      basic_string<pair<U, V>, Traits, Allocator> s);
 
-<<<<<<< .working
-} // std
-=======
   //! To read a single pair.
   template <typename U, typename V>
   istream& operator>>(istream& i, pair<U, V>& p);
@@ -105,12 +96,25 @@ namespace std {
   struct char_traits<pair<U, V> >
   {
     typedef pair<U, V> 	char_type;
->>>>>>> .merge-right.r558
 
+    static int 
+    compare(const char_type* __s1, const char_type* __s2, size_t __n);
+
+    static char_type* 
+    move(char_type* __s1, const char_type* __s2, size_t __n);
+
+    typename char_traits<std::pair<U, V> >::char_type*
+    copy(char_type* __s1, const char_type* __s2, size_t __n);
+
+    typename char_traits<std::pair<U, V> >::char_type*
+    assign(char_type* __s, size_t __n, char_type __a);
+
+  };
+
+} //std
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/concrete/letter/couple_letter.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-
 
 #endif // VCSN_ALGEBRA_CONCRETE_LETTER_COUPLE_LETTER_HH

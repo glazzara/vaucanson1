@@ -106,7 +106,7 @@ namespace vcsn
   template <>
   struct automaton_traits<xml::XmlAutomaton>
   {
-    typedef xml::XmlValue      			     serie_value_t;
+    typedef xml::XmlValue      			     series_value_t;
     typedef xml::XmlValue	       		     word_value_t;
     typedef xml::XmlValue      			     monoid_elt_value_t;
     typedef xml::XmlValue      			     semiring_elt_value_t;

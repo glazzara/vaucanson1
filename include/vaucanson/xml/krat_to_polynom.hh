@@ -3,6 +3,7 @@
 
 # include <vaucanson/algebra/concrete/series/krat.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
+# include <vaucanson/algebra/concrete/series/polynoms.hh>
 
 // At this moment, it does not convert everything, the expression must be in
 // disjonctive form.

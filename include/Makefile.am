@@ -313,10 +313,6 @@ nobase_include_HEADERS =					     \
 	vaucanson/tools/dot_format.hh		\
 	vaucanson/tools/dot_format.hxx		\
 	vaucanson/tools/simple_format.hh	\
-<<<<<<< .working
-	vaucanson/tools/simple_format.hxx
-
-=======
 	vaucanson/tools/simple_format.hxx	\
 	vaucanson/xml/callback.hh		\
 	vaucanson/xml/callback.hxx		\
@@ -350,4 +346,3 @@ nobase_include_HEADERS =					     \
 	vaucanson/xml/xmlstrings.inc		\
 	vaucanson/xml/geometry.inc		\
 	vaucanson/xml/loadgeometry.inc
->>>>>>> .merge-right.r558

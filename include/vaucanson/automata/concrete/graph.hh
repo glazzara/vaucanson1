@@ -182,10 +182,6 @@ namespace vcsn {
 				       const Query& q,
 				       delta_kind::states) const;
 
-    typedef Tag tag_t;
-    tag_t& tag();
-    const tag_t& tag() const;
-
   public:
     state_data_t		states_;
     edge_data_t			edges_;
@@ -195,7 +191,6 @@ namespace vcsn {
     int				first_edge_;
     final_t		        final_;
     initial_t		        initial_;
-    tag_t			tag_;
   };
 
 #define TParam \
@@ -252,18 +247,6 @@ namespace vcsn {
       if (v.edges_[*e].label == letter)
 	*res++ = v.edges_[*e].to;
   }
-
-  template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class I>
-  Tag& op_tag(const AutomataBase<I>&,
-	      Graph<Kind, WordValue, WeightValue,
-		    SerieValue, Letter, Tag>&);
-  
-  template <class Kind, class WordValue, class WeightValue, class SerieValue,
-            class Letter, class Tag, class I>
-  const Tag& op_tag(const AutomataBase<I>&,
-                    const Graph<Kind, WordValue, WeightValue,
-                                SerieValue, Letter, Tag>&);
 
 #undef TParam
 
