@@ -1,5 +1,9 @@
 2002-06-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* Removed `src/tests/tests_stuff.hh' : moved to src/tests/check.
+
+2002-06-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	Packaging files: 
 	(do not forget to update these in the future)
 	* Added `configure' 
