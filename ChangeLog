@@ -1,5 +1,10 @@
 2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx (do_quotient):
+	Fix a non-initialized variable warning.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	It is not possible to  take a ``classical'' automaton as input for
 	aut_to_exp  and  then  generalize  it  at  the  beginning  of  the
 	algorithm,  because it  would  means  to put  the  return type  of

@@ -676,14 +676,14 @@ namespace vcsn {
     | final values.                                              |
     `-----------------------------------------------------------*/
 
-    bool         empty = true;
-    unsigned     class_non_final;
+    bool         empty (true);
+    unsigned     class_non_final (0);
 
     for_each_state(q, input)
       {
 	if (not input.is_final(*q))
 	  {
-	    if (empty == true)
+	    if (empty)
 	      {
 		empty = false;
 		class_non_final = max_partition;
