@@ -1,7 +1,12 @@
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* xml/gendtd.sh: Allow a monoid to be a product a therefore contain
+	other monoids.
+
 2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* configure.ac,
-	* config/xml.m4: Change --with-vaucanswig to --enable-vaucanswig, and 
+	* config/xml.m4: Change --with-vaucanswig to --enable-vaucanswig, and
 	make it disabled by default. Also make xml enabled by default.
 	* README: Update accordingly.
 

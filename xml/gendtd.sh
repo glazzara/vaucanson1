@@ -18,7 +18,7 @@ cat >vaucanson.dtd <<EOF
 <!ELEMENT automaton (geometry?, type, content)>
 <!ELEMENT type (monoid, semiring?)>
 <!ELEMENT content (geometry?, states, edges, initials, finals)>
-<!ELEMENT monoid (generator*)>
+<!ELEMENT monoid (generator*|monoid*)>
 <!ELEMENT semiring (monoid?, semiring?)>
 <!ELEMENT states (geometry?, state*)>
 <!ELEMENT edges (geometry?, edge*)>
@@ -60,7 +60,7 @@ cat >>vaucanson.dtd <<EOF
 Monoid node.
   -->
 <!ATTLIST monoid
-	type	(unit|free|CPFM|FCM|FC)
+	type	(unit|free|product|CPFM|FCM|FC)
 			"free"
 	generators
 		(letters|pairs|weigthed|integers)
