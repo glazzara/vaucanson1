@@ -516,7 +516,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_in_mul(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const W&,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src)
   { 

@@ -201,7 +201,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   bool krat_simplify_left_is_ka(const algebra::Series<W, M>& s,
-				rat::exp<Tm, Tw>& dst,
+				rat::exp<Tm, Tw>&,
 				const rat::exp<Tm, Tw>& other, 
 				rat::LeftWeighted<Tm, Tw>* left, 
 				typename rat::Node<Tm, Tw>::type other_type)
@@ -225,7 +225,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   bool krat_simplify_left_is_kany(const algebra::Series<W, M>& s,
-				  rat::exp<Tm, Tw>& dst,
+				  rat::exp<Tm, Tw>&,
 				  const rat::exp<Tm, Tw>& other, 
 				  rat::LeftWeighted<Tm, Tw>* left, 
 				  typename 
@@ -488,7 +488,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
   void op_assign(const algebra::Series<W, M>&,
-		 const M& monoid,
+		 const M&,
 		 rat::exp<Tm, Tw>& dst,
 		 const oTm& src)
   {
@@ -638,7 +638,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_in_mul(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const W&,
 		 rat::exp<Tm, Tw>& ret,
 		 const oTw& w)
   { 

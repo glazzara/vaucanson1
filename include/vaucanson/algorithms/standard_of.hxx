@@ -174,7 +174,7 @@ namespace vcsn {
 	    typename Output,
 	    typename Exp>
   void
-  do_standard_of(const AutomataBase<A>& a_set, 
+  do_standard_of(const AutomataBase<A>&, 
 	      Output& output, 
 	      const Exp& kexp)
   {

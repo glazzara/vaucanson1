@@ -457,7 +457,7 @@ namespace vcsn {
   template <class S, class T,
 	    typename OutputIterator, typename L>	
   inline
-  void op_delta(const AutomataBase<S>& s, const T& v,
+  void op_delta(const AutomataBase<S>&, const T& v,
 		OutputIterator res, 
 		hstate_t from, 
 		const L& query,
@@ -577,7 +577,7 @@ namespace vcsn {
   template <class S, class T,
 	    typename OutputIterator, typename L>	
   inline
-  void op_delta(const AutomataBase<S>& s, const T& v,
+  void op_delta(const AutomataBase<S>&, const T& v,
 		OutputIterator res, 
 		hstate_t from, 
 		const L& query,

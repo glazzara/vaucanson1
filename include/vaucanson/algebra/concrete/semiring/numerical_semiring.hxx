@@ -135,7 +135,7 @@ namespace vcsn {
     dst = dst || src; 
   }
 
-  inline bool op_add(const algebra::NumericalSemiring& s, bool a, bool b)
+  inline bool op_add(const algebra::NumericalSemiring&, bool a, bool b)
   { 
     return a || b; 
   }
@@ -151,12 +151,12 @@ namespace vcsn {
     return false; 
   }
 
-  inline bool op_stareable(const algebra::NumericalSemiring& s, bool b)
+  inline bool op_stareable(const algebra::NumericalSemiring&, bool b)
   { 
     return true; 
   }
 
-  inline void op_in_star(const algebra::NumericalSemiring& s, bool& b)
+  inline void op_in_star(const algebra::NumericalSemiring&, bool& b)
   { 
     b = true; 
   }

@@ -39,7 +39,7 @@ namespace vcsn {
   // author: Thanh-Hoc NGUYEN
   template <class A_, typename Auto>
   void
-  do_backward_closure_here(const AutomataBase<A_>& a_set,
+  do_backward_closure_here(const AutomataBase<A_>&,
 			   Auto&			   a)
   {
     AUTOMATON_TYPES(Auto);

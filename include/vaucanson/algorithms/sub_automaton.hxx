@@ -35,7 +35,7 @@ namespace vcsn {
   `----------------------------------------*/
  
   template<typename A, typename auto_t, typename list_t>
-  void do_sub_automaton(const AutomataBase<A>& a_set, 
+  void do_sub_automaton(const AutomataBase<A>& 
 		       auto_t& a,
 		       const list_t& selected, 
 		       bool check_states)

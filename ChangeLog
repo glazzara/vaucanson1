@@ -1,3 +1,19 @@
+2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx
+	* include/vaucanson/algebra/concrete/series/krat.hxx
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx
+	* include/vaucanson/automata/concept/automata_ops.hxx
+	* include/vaucanson/algorithms/sub_automaton.hxx
+	* include/vaucanson/algorithms/standard_of.hxx
+	* include/vaucanson/algorithms/accessible.hxx
+	* include/vaucanson/algorithms/backward_closure.hxx
+	* include/vaucanson/misc/container_ops.hxx
+	* include/vaucanson/algorithms/forward_realtime.hxx
+	* include/vaucanson/algorithms/backward_realtime.hxx: Fix unused argument warnings.
+	* src/demos/vgrep/Makefile.am: Enable 'vgrep' build.
+
+
 2003-06-07  Loïc Fosse  <loic@lrde.epita.fr>
 
 	* include/vaucanson/misc/contract.hh: Correct message in
@@ -2911,7 +2927,7 @@
 
 2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.87)
-	*  src/tests/automata/algos/union_test.hh : redesigned.
+	* src/tests/automata/algos/union_test.hh : redesigned.
 	* src/tests/automata/algos/determinist_test.hh : minor change.
 	* src/tests/automata/algos/normalize_test.hh : redesigned.
 	* src/tests/automata/algos/reachable_test.hh : redesigned.
@@ -4166,14 +4182,14 @@
 
 2002-06-05  Maxime Rey  <max@lrde.epita.fr>
 
-	*  Added `include/vaucanson/internal/traits.hh'
-	*  Added `include/vaucanson/fundamental/meta_element.hxx'
-	*  Added `include/vaucanson/fundamental/meta_element.hh'
-	*  Added `include/vaucanson/fundamental/structure.hxx'
-	*  Added `include/vaucanson/fundamental/structure.hh'
-	*  Added `include/vaucanson/fundamental/default_ops.hxx'
-	*  Added `include/vaucanson/fundamental/default_ops.hh'
-	*  Added `src/tests/fundamental/basic_type.hh'
+	* Added `include/vaucanson/internal/traits.hh'
+	* Added `include/vaucanson/fundamental/meta_element.hxx'
+	* Added `include/vaucanson/fundamental/meta_element.hh'
+	* Added `include/vaucanson/fundamental/structure.hxx'
+	* Added `include/vaucanson/fundamental/structure.hh'
+	* Added `include/vaucanson/fundamental/default_ops.hxx'
+	* Added `include/vaucanson/fundamental/default_ops.hh'
+	* Added `src/tests/fundamental/basic_type.hh'
 
 2002-06-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
