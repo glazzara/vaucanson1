@@ -1,7 +1,33 @@
+2002-07-11  Maxime Rey  <max@lrde.epita.fr>
+
+	* little changes in kinds.hxx :
+	l_(algebra::op_convert(SELECT(typename MonoidElt::value_t),
+	---
+	>       l_(op_convert(SELECT(typename MonoidElt::value_t),
+	37,38c37,38
+	<     return (algebra::op_series_get(s_.get(), label, l_)
+	<           != algebra::zero_value(SELECT(typename Weight::set_t),
+	---
+	>     return (op_series_get(s_.get(), label, l_)
+	>           != zero_value(SELECT(typename Weight::set_t),
+	* in order to run check_determinize, realize with :
+	Added `src/tests/automata/algos/check_determinist.cc'
+	* Added `src/tests/automata/algos/check_transpose.cc' : added
+	Test himself in progress ...
+	* Algorithms added :
+	`include/vaucanson/algorithms/extract.hxx' : added
+	`include/vaucanson/algorithms/extract.hh' : added 
+	`include/vaucanson/algorithms/reachable.hxx' : added
+	`include/vaucanson/algorithms/reachable.hh' : added
+	`include/vaucanson/algorithms/determinize.hxx' : added
+	`include/vaucanson/algorithms/determinize.hh' : added
+	`include/vaucanson/algorithms/transpose.hxx' : added
+	`include/vaucanson/algorithms/transpose.hh' : added
+
 2002-07-11  Raphaël Poss  <raph@lrde.epita.fr>
 
-	* configure.ac: simplified.
-
+        * configure.ac: simplified.
+	
 2002-07-09  Maxime Rey  <max@lrde.epita.fr>
 
 	* src/tests/automata/implementation_check/check_global_consistance.cc

@@ -24,7 +24,7 @@ namespace vcsn
   ls_delta_letter_query<Series, MonoidElt, Weight, L>::
   ls_delta_letter_query(const Series& s, const L& l)
     : s_(s), 
-      l_(algebra::op_convert(SELECT(typename MonoidElt::value_t),
+      l_(op_convert(SELECT(typename MonoidElt::value_t),
 			     SELECT(typename MonoidElt::set_t),
 			     l))
   {}
@@ -34,8 +34,8 @@ namespace vcsn
   bool ls_delta_letter_query<Series, MonoidElt, Weight, L>::
   operator()(const Label& label) const
   {
-    return (algebra::op_series_get(s_.get(), label, l_)
-	    != algebra::zero_value(SELECT(typename Weight::set_t), 
+    return (op_series_get(s_.get(), label, l_)
+	    != zero_value(SELECT(typename Weight::set_t), 
 				   SELECT(typename Weight::value_t)));
   }
 

@@ -20,7 +20,7 @@ namespace tests {
   }
 
   void 
-  Tester::ok(const std::string& test_label)
+  Tester::ok(std::string test_label)
   {
     if (verbose == 1)
       {
@@ -35,7 +35,7 @@ namespace tests {
   }
 
   void 
-  Tester::ko(const std::string& test_label)
+  Tester::ko(std::string test_label)
   {
     if (verbose == 1)
       {

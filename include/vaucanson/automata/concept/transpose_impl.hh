@@ -10,7 +10,9 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/fundamental/slots.hh>
 # include <vaucanson/misc/ref.hh>
-# include <vaucanson/algebra/transpose.hh>
+# include <vaucanson/algorithms/transpose.hh>
+
+# include <vaucanson/algebra/concrete/series/exp.hh>
 
 namespace vcsn
 {

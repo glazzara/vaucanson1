@@ -15,8 +15,8 @@ namespace tests {
     Tester(int verbose_level);
 
     bool all_passed();
-    void ok(const std::string& test_label);
-    void ko(const std::string& test_label);
+    void ok(std::string test_label);
+    void ko(std::string test_label);
   
     // FIXME: Add statistics stuff.
 

@@ -261,7 +261,8 @@ namespace vcsn {
     }    
   };
 
-//   template <typename M, typename W>
+  // was commented
+  // template <typename M, typename W>
 //   struct DefaultTransposeFun<rat::exp<M, W> >
 //   {
 //     rat::exp<M, W>&
