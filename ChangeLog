@@ -1,5 +1,9 @@
 2004-03-15  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
+	* include/vaucanson/tools/fsm_dump.hxx: Add missing file inclusions.
+
+2004-03-15  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
 	* include/vaucanson/misc/container_ops.hxx: Move to...
 	* include/vaucanson/tools/container_ops.hxx: ...this.
 	* include/vaucanson/misc/container_ops.hh: Move to...

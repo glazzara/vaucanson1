@@ -1,32 +1,14 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 541)
-(Parent-Version vaucanson 0 540)
+(Project-Version vaucanson 0 542)
+(Parent-Version vaucanson 0 541)
 (New-Version-Log "")
 
 (Version-Log "2004-03-15  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
-	* include/vaucanson/misc/container_ops.hxx: Move to...
-	* include/vaucanson/tools/container_ops.hxx: ...this.
-	* include/vaucanson/misc/container_ops.hh: Move to...
-	* include/vaucanson/tools/container_ops.hh: ...this.
-	* include/vaucanson/misc/fsm_dump.hh: Move to...
-	* include/vaucanson/tools/fsm_dump.hh: ...this.
-	* include/vaucanson/misc/fsm_dump.hxx: Move to...
-	* include/vaucanson/tools/fsm_dump.hxx: ...this.
-	* include/Makefile.am,
-	  include/vaucanson/algebra/concept/alphabets_base.hh,
-	  src/demos/fsm/generate_toolbox.sh,
-	  src/demos/fsm/usual_automaton_t/vcsn_determinize.cc,
-	  src/demos/fsm/usual_automaton_t/vcsn_dotdump.cc,
-	  src/demos/fsm/usual_automaton_t/vcsn_intersect.cc,
-	  src/demos/fsm/usual_automaton_t/vcsn_minimize.cc,
-	  src/demos/fsm/usual_automaton_t/vcsn_prune.cc,
-	  src/demos/fsm/usual_automaton_t/vcsn_random_generator.cc,
-	  src/demos/fsm/usual_automaton_t/vcsn_reverse.cc: Change inclusions and
-	  namespaces for fsm_dump and container_ops.")
-(Checkin-Time "Mon, 15 Mar 2004 15:50:17 +0100")
+	* include/vaucanson/tools/fsm_dump.hxx: Add missing file inclusions.")
+(Checkin-Time "Mon, 15 Mar 2004 16:39:32 +0100")
 (Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -109,7 +91,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.78 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.79 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -165,8 +147,8 @@
   (include/vaucanson/misc/limits.hh (vaucanson/q/32_limits.hh 1.5 600))
   (include/vaucanson/misc/support.hh (vaucanson/q/12_support.hh 1.9 600))
   (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.6 600))
-  (include/vaucanson/tools/container_ops.hxx (vaucanson/q/15_container_ 1.8 644))
-  (include/vaucanson/tools/container_ops.hh (vaucanson/q/16_container_ 1.7 644))
+  (include/vaucanson/tools/container_ops.hxx (vaucanson/q/15_container_ 1.8 600))
+  (include/vaucanson/tools/container_ops.hh (vaucanson/q/16_container_ 1.7 600))
   (include/vaucanson/misc/constraints.hh (vaucanson/q/17_constraint 1.3 600))
   (include/vaucanson/misc/selectors.hh (vaucanson/14_selectors. 1.8 600))
   (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.11 600))
@@ -909,7 +891,7 @@
 ;; Files added by populate at Wed, 05 Nov 2003 16:35:31 +0100,
 ;; to version 0.452(w), by yann:
 
-  (include/vaucanson/tools/fsm_dump.hxx (vaucanson/s/17_fsm_dump.h 1.3 600))
+  (include/vaucanson/tools/fsm_dump.hxx (vaucanson/s/17_fsm_dump.h 1.4 600))
 
 ;; Files added by populate at Fri, 14 Nov 2003 23:46:24 +0100,
 ;; to version 0.454(w), by yann:
