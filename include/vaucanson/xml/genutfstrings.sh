@@ -3,7 +3,17 @@
 # Do not be afraid ! Sed is pretty more developer-friendly than Perl.
 #
 
-sed -f - *.hxx loadgeometry.inc <<EOF | sort -u >xmlstrings.inc
+if test $# -ne 2; then
+  cat 1>&2 <<EOF
+Invocation is not valid!
+
+Usage:
+	$0 <srcdir> <builddir>
+EOF
+  exit 1
+fi
+
+sed -f - "$1"/*.hxx "$1"/loadgeometry.inc <<EOF | sort -u > "$2"/xmlstrings.inc
 /str_/ {
 s/^.*str_\([a-zA-Z0-9_]*\)[^a-zA-Z0-9_].*$/\1/
 s/\(.*\)/const XMLCh str_\1[] = { |\1/

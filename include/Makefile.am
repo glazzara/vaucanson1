@@ -9,15 +9,20 @@ CLEANFILES = vaucanson/xml/xmlstrings.inc \
 	     vaucanson/xml/geometry.inc   \
 	     vaucanson/xml/loadgeometry.inc
 
-vaucanson/xml/xmlstrings.inc: $(top_srcdir)/xml/vaucanson-g.style $(XMLSOURCES) $(srcdir)/vaucanson/xml/genutfstrings.sh vaucanson/xml/loadgeometry.inc
-	cd vaucanson/xml && $(SHELL) $(srcdir)/genutfstrings.sh
+mkdir_vaucanson_xml:
+	$(top_srcdir)/config/mkinstalldirs ./vaucanson/xml
 
-vaucanson/xml/geometry.inc: $(top_srcdir)/xml/style-to-geometryvalue.awk $(top_srcdir)/xml/vaucanson-g.style
+vaucanson/xml/xmlstrings.inc: mkdir_vaucanson_xml $(top_srcdir)/xml/vaucanson-g.style $(XMLSOURCES) $(srcdir)/vaucanson/xml/genutfstrings.sh vaucanson/xml/loadgeometry.inc
+	$(SHELL) $(srcdir)/vaucanson/xml/genutfstrings.sh \
+	  $(srcdir)/vaucanson/xml \
+	  ./vaucanson/xml
+
+vaucanson/xml/geometry.inc: mkdir_vaucanson_xml $(top_srcdir)/xml/style-to-geometryvalue.awk $(top_srcdir)/xml/vaucanson-g.style
 	awk -f  $(top_srcdir)/xml/style-to-geometryvalue.awk \
 		$(top_srcdir)/xml/vaucanson-g.style \
 		>$@
 
-vaucanson/xml/loadgeometry.inc: $(top_srcdir)/xml/style-to-code.awk $(top_srcdir)/xml/vaucanson-g.style
+vaucanson/xml/loadgeometry.inc: mkdir_vaucanson_xml $(top_srcdir)/xml/style-to-code.awk $(top_srcdir)/xml/vaucanson-g.style
 	awk -f  $(top_srcdir)/xml/style-to-code.awk \
 		$(top_srcdir)/xml/vaucanson-g.style \
 		>$@
