@@ -38,6 +38,7 @@
 # include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn {
 
@@ -58,12 +59,7 @@ namespace vcsn {
     typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
     typedef std::set<hedge_t>				delta_ret_t;
     typedef std::map<pair_hstate_t, hstate_t>		visited_t;
-    typedef typename output_t::series_t			series_t;
-    typedef typename output_t::series_elt_t		series_elt_t;
-    typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
-    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
-    typedef typename series_elt_t::value_t		series_value_t;
-    typedef typename series_elt_t::support_t		support_t;
+    AUTOMATON_TYPES_(output_t);
 
     delta_ret_t					edge_lhs; 
     delta_ret_t					edge_rhs;
@@ -72,29 +68,14 @@ namespace vcsn {
     series_elt_t				series_zero
       = output.set().series().zero(SELECT(typename series_elt_t::value_t));
 
-    /// \bug FIXME: Log history: It should be optional.
-//     output.history().set_auto_event_about(PRODUCT_EVENT, lhs, rhs);
-    
     /*----------------------------------.
     | Get initial states of the product |
     `----------------------------------*/
-    for (typename lhs_t::initial_iterator lhs_s = lhs.initial().begin();
-	 lhs_s != lhs.initial().end();
-	 ++lhs_s)
-      for (typename rhs_t::initial_iterator rhs_s = rhs.initial().begin();
-	   rhs_s != rhs.initial().end();
-	   ++rhs_s)
+    for_each_initial_state(lhs_s, lhs)
+      for_each_initial_state(rhs_s, rhs)
 	{
 	  hstate_t  new_state = output.add_state();
-	  pair_hstate_t new_pair(*lhs_s, *rhs_s);
-				 
-	  /// \bug FIXME: Log history: It should be optional.
-	  // What about adding static information in the automaton type ?
-// 	  log_history(history::product_kind(), output, new_state,
-// 		      *lhs_s, *rhs_s);
-// 	  output.history().set_state_event_about(PRODUCT_EVENT, new_state,
-// 						 *lhs_s, *rhs_s);
-
+	  pair_hstate_t new_pair(*lhs_s, *rhs_s);	
 	  visited[new_pair] = new_state;
 	  to_process.push(new_pair);
 	}
@@ -116,29 +97,22 @@ namespace vcsn {
 	output.set_final(current_state, 
 			 lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
 	
-	/// \bug FIXME: Use a new version of delta.
 	edge_lhs.clear();
 	lhs.deltac(edge_lhs, lhs_s, delta_kind::edges()); 
 	edge_rhs.clear();
 	rhs.deltac(edge_rhs, rhs_s, delta_kind::edges()); 
 
-	for (typename delta_ret_t::const_iterator iel = edge_lhs.begin();
-	     iel != edge_lhs.end();
-	     ++iel)
+	for_all_const_(delta_ret_t, iel, edge_lhs)
 	  {
 	    series_elt_t s     = lhs.serie_of(*iel);
 
-	    for (typename delta_ret_t::const_iterator ier = edge_rhs.begin();
-		 ier != edge_rhs.end();
-		 ++ier)
+	    for_all_const_(delta_ret_t, ier, edge_rhs)
 	      {
 		series_elt_t s_  = rhs.serie_of(*ier);
 		series_elt_t s__ = s;
 		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
 
-		for (typename support_t::iterator supp = s.supp().begin();
-		     supp != s.supp().end();
-		     ++supp)
+		for_all_(support_t, supp, s.supp())
 		  s__.value_set(monoid_elt_t(*supp).value(), 
 		       (s_.get(*supp) * s_.get(*supp)).value());
 
@@ -151,15 +125,6 @@ namespace vcsn {
 		    if (found == visited.end())
 		      {
 			aim = output.add_state();		      
-			
-			/// \bug FIXME: Log history: It should be optional.
-// 			log_history(history::product_kind(), 
-// 				    output, aim, lhs_s, rhs_s);
-// 			output.history().set_state_event_about(PRODUCT_EVENT, 
-// 							       aim, 
-// 							       lhs_s, 
-// 							       rhs_s);
-			
 			visited[new_pair] = aim;
 			to_process.push(new_pair);
 		      }
@@ -167,13 +132,6 @@ namespace vcsn {
 		      aim = found->second;
 		    hedge_t new_edge = output.add_serie_edge(current_state,
 							     aim, s__);
-		    /// \bug FIXME: Log history: It should be optional.
-// 		    log_history(history::product_kind(), output, new_e,
-// 				*iel, *ier);
-// 		    output.history().set_edge_event_about(PRODUCT_EVENT, 
-// 							  new_edge, 
-// 							  *iel, 
-// 							  *ier);
 		  }
 	      }
 	  }
@@ -190,8 +148,7 @@ namespace vcsn {
     product(ret.set(), ret, lhs, rhs);
     return ret;
   }
-
-
+  
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_PRODUCT_HXX

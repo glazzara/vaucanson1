@@ -1,5 +1,11 @@
 2003-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/product.hxx:
+		- Clean
+		- Use new macros.
+
+2003-10-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* src/tests/check/unique.cc: Do not use unique.hcc.
 	* include/vaucanson/algorithms/product.hh: Remove 'diagonal' stuff.
 	* include/vaucanson/algorithms/product.hxx: Likewise.
