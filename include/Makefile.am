@@ -179,7 +179,7 @@ vaucanson/config/pconf.hh: $(top_srcdir)/include/vaucanson/config/extrconf.sh $(
 ## we bother with is failure caused by an unexisting $(CONFIG_HEADER).
 ## The test -f above take care of this.
 	$(SHELL) $(top_srcdir)/include/vaucanson/config/extrconf.sh $(CONFIG_HEADER) \
-	>$(top_srcdir)/include/vaucanson/config/pconf.hh; :
+	> vaucanson/config/pconf.hh; :
 
 DISTCLEANFILES = vaucanson/config/pconf.hh vaucanson/config/stamp-h1
 

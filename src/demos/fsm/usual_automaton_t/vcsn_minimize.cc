@@ -4,6 +4,7 @@
    #include <vaucanson/misc/fsm_dump.hh> 
    #include <vaucanson/algorithms/hopcroft.hh>
    #include <vaucanson/algorithms/determinize.hh>
+    using namespace vcsn;
 
    int main(int argc, char **argv)
    {

@@ -3,6 +3,7 @@
    #include <vaucanson/tools/gen_random.hh>
    #include <vaucanson/misc/fsm_dump.hh> 
    #include <vaucanson/algorithms/determinize.hh>
+    using namespace vcsn;
 
    int main(int argc, char **argv)
    {

@@ -100,10 +100,10 @@ namespace vcsn {
       misc::dot_dump(f, Auto, Name);				\
     }
 
-#define SAVE_AUTOMATON_DOT2(Name, Auto)		\
+#define SAVE_AUTOMATON_DOT_SIMPLE(Name, Auto)			\
     {								\
       std::ostringstream s;					\
-      s << Name << ".dot";	\
+      s << Name << ".dot";					\
       std::ofstream f(s.str().c_str());				\
       misc::dot_dump(f, Auto, Name);				\
     }

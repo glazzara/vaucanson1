@@ -41,7 +41,10 @@ namespace vcsn {
     template <typename St, typename auto_t>
     void fsm_dump(St& out, const auto_t& a)
     {
-      assert(a.initial().size() == 1);
+      assert(a.initial().size() <= 1);
+      if (a.states().size() == 0)
+	return;
+
       typename auto_t::initial_iterator initial = a.initial().begin();
       std::set<hedge_t> succ;
 
@@ -67,6 +70,7 @@ namespace vcsn {
       for (typename auto_t::final_iterator f = a.final().begin();
 	   f != a.final().end(); ++f)
 	out << *f << "\t 0" << std::endl;
+      SAVE_AUTOMATON_DOT("/tmp/","fsm_out", a, 0); 
     }
 	 
     /*---------.
@@ -91,17 +95,24 @@ namespace vcsn {
     next_token(std::string line)
     {
       std::string token;
-      std::string::const_iterator i = line.begin();
-      while ((i != line.end()) && ((*i == '\t') || (*i == ' ')))
+      std::string::iterator i = line.begin();
+      while ((i != line.end()) && ((*i == '\t') || (*i == ' ') || (*i == '\0')))
 	++i;
-
       for (;i != line.end();++i)
-	if ((*i == '\t') || (*i == ' '))
-	  break;
-	else
-	  token += *i;
+	{
+	  if ((*i == '\t') || (*i == ' ') 
+	      || (*i == '\n') || (*i == '\0'))
+	    break;
+	  else
+	    token.push_back(*i);
+	}
       if (i != line.end())
-	return std::make_pair(token, std::string(++i, line.end() - i + 1));
+	{
+	  ++i;
+	  return std::make_pair(token, std::string(line, 
+						   (unsigned)(i - line.begin()), 
+						   (unsigned)(line.end() - i + 1)));
+	}
       else
 	return std::make_pair(token, std::string());
     }
@@ -122,19 +133,17 @@ namespace vcsn {
       while (!in.eof())
 	{
 	  tokens.clear();
-	  char buf[128];
 	  ++nb;
 	  stock.resize(nb);
-	  in.getline(buf, 128);
-	  line = buf;
-	  do
+	  getline(in, line);
+	  while (true)
 	    { 
 	      tmp = next_token(line);
 	      line = tmp.second;
 	      tokens.push_back(tmp.first);
+	      if (line.length() == 0)
+		break;
 	    }
-	  while (tmp.second.length() != 0);
-
 	  if (tokens.size() == 1)
 	    {
 	      stock[nb-1].type = final;
@@ -159,7 +168,7 @@ namespace vcsn {
 	}
       // construct the automaton.
       monoid_t	  monoid(alpha);
-      weights_t  semiring;
+      weights_t   semiring;
       series_t	  series(semiring, monoid);
       automaton_t automaton;
       automaton.create();
@@ -189,10 +198,12 @@ namespace vcsn {
 	    }
 	}
       a = automaton;
-      SAVE_AUTOMATON_DOT("/tmp/","fsm", a, 0); 
+      std::cerr << a.states().size() << std::endl;
+      std::cerr << to_h.size() << std::endl;
+      SAVE_AUTOMATON_DOT("/tmp/","fsm_in", a, 0); 
     }
 
-  } // misc
+  } // misc 
   
 } // vcsn
 

@@ -1,5 +1,5 @@
 AC_PREREQ([2.50])
-AC_INIT([vcsn-fsm-generated], [1.0], [])
+AC_INIT([vcsn-generated], [1.0], [])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
 AC_PROG_CXX

@@ -37,7 +37,6 @@ AC_CONFIG_FILES([
 	src/tests/sanity/Makefile
 	src/tests/tests-suites/Makefile
 	src/tests/bin/Makefile
-	src/tests/dev/Makefile
 	src/tests/tests-suites/usual_automaton_t/Makefile
 	include/Makefile])
 

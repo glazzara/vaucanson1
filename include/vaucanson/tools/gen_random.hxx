@@ -17,8 +17,6 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
 #ifndef GEN_RANDOM_HXX
 # define GEN_RANDOM_HXX
 
@@ -56,13 +54,10 @@ namespace vcsn {
     alphabets_elt_t alpha;
     
     unsigned nb = alea(nb_letter);
-    for (unsigned i = 0; i < 2 + nb; )
+    for (unsigned i = 0; i < 2 + nb; ++i)
       {
 	letter_t l = alpha.random_letter();
-	if (alpha.contains(l))
-	  continue;
 	alpha.insert(alpha.random_letter());
-	++i;
       }
     monoid_t monoid(alpha);
     weights_t semi;
@@ -92,16 +87,12 @@ namespace vcsn {
 
     // alphabet construction 
     alphabets_elt_t alpha;
-    
-    
+        
     unsigned nb = alea(nb_letter);
-    for (unsigned i = 0; i < 2 + nb; )
+    for (unsigned i = 0; i < 2 + nb; ++i)
       {
 	letter_t l = alpha.random_letter();
-	if (alpha.contains(l))
-	  continue;
-	alpha.insert(alpha.random_letter());
-	++i;
+	alpha.insert(l);
       }
     monoid_t monoid(alpha);
     weights_t semi;

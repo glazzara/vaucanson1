@@ -113,7 +113,7 @@ namespace vcsn {
   MetaElement<AlphabetsBase<Self>, T>::choose() const
   { 
     assert (this->size() > 0);
-    int  n = this->size() - 1;
+    int  n = this->size();
     int  c = ((unsigned) floor(((float) rand() / (float) RAND_MAX) * n));
 
     const_iterator it = this->begin();

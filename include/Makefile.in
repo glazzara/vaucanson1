@@ -453,7 +453,7 @@ $(top_srcdir)/include/vaucanson/config/extrconf.sh: $(SCANDEFS_PL) $(PCONF_OCCUR
 vaucanson/config/pconf.hh: $(top_srcdir)/include/vaucanson/config/extrconf.sh $(CONFIG_HEADER)
 	test -f $(CONFIG_HEADER)
 	$(SHELL) $(top_srcdir)/include/vaucanson/config/extrconf.sh $(CONFIG_HEADER) \
-	>$(top_srcdir)/include/vaucanson/config/pconf.hh; :
+	> vaucanson/config/pconf.hh; :
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

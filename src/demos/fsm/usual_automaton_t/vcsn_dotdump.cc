@@ -4,6 +4,8 @@
    #include <vaucanson/misc/fsm_dump.hh> 
    #include <vaucanson/misc/dot_dump.hh> 
 
+    using namespace vcsn;
+
    int main(int argc, char **argv)
    {
      srand(time(0));

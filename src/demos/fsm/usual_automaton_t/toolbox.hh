@@ -9,9 +9,5 @@
 
 typedef vcsn::tools::usual_automaton_t	automaton_t;
 
-automaton_t gen_empty()
-{
-  return automaton_t();
-}
 
 #endif // FSM_TOOLBOX_HH

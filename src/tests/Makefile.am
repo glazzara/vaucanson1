@@ -10,6 +10,4 @@ SUBDIRS = \
 	algebra    				\
 	bin                                     \
 	sanity                                  \
-	automata				\
-	dev
-
+	automata				
