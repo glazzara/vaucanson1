@@ -1,5 +1,14 @@
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/automata/concrete/manylinks.hh,
+  	  include/vaucanson/automata/concrete/manylinks.hxx,	
+	  include/vaucanson/automata/concrete/manylinks_carriers.hh,	
+	  include/vaucanson/automata/concrete/manylinks_states.hh	
+          include/vaucanson/automata/concrete/manylinks_edges.hh:
+		Remove.
+
+2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/series_base.hh(series_traits):
 		(series_traits): Update number of parameters.
 		(MetaElement): Add support_t and supp().
