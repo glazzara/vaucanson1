@@ -1,13 +1,10 @@
-/************************************
- * <vaucanson/fundamental/op_traits.hh> *
- ************************************/
-// $Id$
-
-/* this file is part of the Vaucanson project */
+// fundamental/op_traits.hh
+//
+// VCSN_HEADER
 #ifndef FUNDAMENTAL_OP_TRAITS_HH
 # define FUNDAMENTAL_OP_TRAITS_HH
 
-# include <vaucanson/fundamental/predefs.hh>
+#include <vaucanson/fundamental/predefs.hh>
 
 namespace vcsn {
 

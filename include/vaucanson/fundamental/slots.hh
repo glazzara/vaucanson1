@@ -1,13 +1,11 @@
-/********************************
- * <vaucanson/algebra/slots.hh> *
- ********************************/
-// $id$
-
-/* this file is part of the Vaucanson project */
+// fundamental/slots.hh
+//
+// VCSN_HEADER
 #ifndef FUNDAMENTAL_SLOTS_HH
 # define FUNDAMENTAL_SLOTS_HH
 
-# include <vaucanson/fundamental/struct_decl.hh>
+# include <vaucanson/misc/selectors.hh>
+# include <vaucanson/fundamental/predefs.hh>
 
 namespace vcsn {
 
@@ -186,13 +184,16 @@ namespace vcsn
       { return Op(SELECT(S), Rel1, Rel2); }			\
     };
     
-    INTER_OP(eq, op_eq, v1, v2);
-    INTER_OP(neq, !op_eq, v1, v2);
-    INTER_OP(lt, op_lt, v1, v2);
-    INTER_OP(gt, op_lt, v2, v1);
-    INTER_OP(ge, !op_lt, v1, v2);
-    INTER_OP(le, !op_lt, v2, v1);
+    INTER_OP(eq, op_eq, v1, v2)
+    INTER_OP(neq, !op_eq, v1, v2)
+    INTER_OP(lt, op_lt, v1, v2)
+    INTER_OP(gt, op_lt, v2, v1)
+    INTER_OP(ge, !op_lt, v1, v2)
+    INTER_OP(le, !op_lt, v2, v1)
 #undef INTER_OP
+
+    struct toto {};
+
 #define FOREIGN_OP(Name, Op, X1, X2, Rel1, Rel2)			\
     template<typename S1, typename S2, typename T, typename U, bool b>	\
     struct op<S1, S2, T, U, Name, true, b>				\
@@ -233,6 +234,6 @@ CALL_OP(>=, vcsn::internal::ge, true);
 
 } // vcsn
 
-# include <vaucanson/fundamental/slots.hxx>
+//# include <vaucanson/fundamental/slots.hxx>
 
 #endif // FUNDAMENTAL_SLOTS_HH

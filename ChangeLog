@@ -1,3 +1,15 @@
+2002-06-03  Maxime Rey  <max@lrde.epita.fr>
+
+	* include/vaucanson/fundamental/meta_set.hh : Added
+
+	* include/vaucanson/fundamental/fundamental.hh : Modified
+
+	* include/vaucanson/fundamental/slots.hh : Modified
+
+	* include/vaucanson/fundamental/slots.hxx : Modified
+
+	* include/vaucanson/fundamental/op_traits.hh : Modified
+
 2002-06-03  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/misc/selectors.hh: Added.

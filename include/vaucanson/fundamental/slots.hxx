@@ -1,15 +1,13 @@
-/*------------------------------.
-| <vaucanson/algebra/slots.hxx> |
-`------------------------------*/
-// $id$
+// fundamental/slots.hxx
+//
+// VCSN_HEADER
 
-/* this file is part of the Vaucanson project */
 #ifndef FUNDAMENTAL_SLOTS_HXX
 # define FUNDAMENTAL_SLOTS_HXX
 
 # include <cstdlib>
 
-# include <vaucanson/fundamental/struct_decl.hh>
+# include <vaucanson/fundamental/predefs.hh>
 
 namespace vcsn {
 
