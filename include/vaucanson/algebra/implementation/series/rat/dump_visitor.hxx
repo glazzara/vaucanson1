@@ -132,16 +132,13 @@ namespace vcsn {
 	  node->accept(*this);
       }
 
-      enum node_types {
-	NODE_CONSTANT,
-	NODE_LWEIGHT,
-	NODE_RWEIGHT,
-	NODE_ONE,
-	NODE_PROD,
-	NODE_STAR,
-	NODE_SUM,
-	NODE_ZERO
-      };
+      enum
+	{
+	  NODE_LWEIGHT	= Node<Word, Weight>::lweight,
+	  NODE_RWEIGHT	= Node<Word, Weight>::rweight,
+	  NODE_PROD	= Node<Word, Weight>::prod,
+	  NODE_SUM	= Node<Word, Weight>::sum,
+	};
 
       void
       product_print_child(const node_t* child)
