@@ -14,18 +14,18 @@ namespace vcsn {
   namespace algebra {
 
     /*---------.
-    | TWords<A> |
+    | SetWords<A> |
     `---------*/
 
     template<typename A>
-    struct TWords 
-      : FreeMonoidBase<TWords<A> >
+    struct SetWords 
+      : FreeMonoidBase<SetWords<A> >
     {
       // in case of default constructor, do not forget to attach an
       // alphabet, otherwise the alphabet is empty.
-      TWords();
-      TWords(const A& a);
-      TWords(const TWords& w);
+      SetWords();
+      SetWords(const A& a);
+      SetWords(const SetWords& w);
 
       A&	alphabet();
       const A&	alphabet() const;
@@ -37,10 +37,10 @@ namespace vcsn {
   }
 
     /*-------------------.
-    | MetaSet<TWords<A> > |
+    | MetaSet<SetWords<A> > |
     `-------------------*/
     template<typename A>
-    struct MetaSet<TWords<A> >
+    struct MetaSet<SetWords<A> >
     {
       static const bool		dynamic_set = A::dynamic;
       typedef algebra::mul_kind semigroup_kind;
@@ -48,17 +48,17 @@ namespace vcsn {
     };
 
     /*-------------------------.
-    | MetaElement<TWords<A>, T> |
+    | MetaElement<SetWords<A>, T> |
     `-------------------------*/
     template<typename A, typename T>
-    struct MetaElement<TWords<A>, T>
-      : MetaElement<FreeMonoidBase<TWords<A> >, T>
+    struct MetaElement<SetWords<A>, T>
+      : MetaElement<FreeMonoidBase<SetWords<A> >, T>
     {};
 
   namespace traits {
     
     template<typename A>
-    struct virtual_types<algebra::TWords<A> >
+    struct virtual_types<algebra::SetWords<A> >
     {
       typedef A alphabet_t;
     };
@@ -68,8 +68,8 @@ namespace vcsn {
 } // vcsn
 
 template<typename A>
-bool operator==(const vcsn::algebra::TWords<A>& a,
-		const vcsn::algebra::TWords<A>& b);
+bool operator==(const vcsn::algebra::SetWords<A>& a,
+		const vcsn::algebra::SetWords<A>& b);
 
 # include <vaucanson/algebra/concrete/free_monoid/words.hxx>
 

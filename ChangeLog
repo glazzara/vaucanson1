@@ -1,5 +1,11 @@
 2002-06-18  Maxime Rey  <max@lrde.epita.fr>
 
+	* TWords renamed ;) in SetWords in files :
+	* include/vaucanson/algebra/concrete/free_monoid/words.h{h, xx}
+	* include/vaucanson/algebra/concrete/free_monoid/str_words.h{h, xx}
+
+2002-06-18  Maxime Rey  <max@lrde.epita.fr>
+
 	* namespace sugar for alphabets deleted :
 	* include/vaucanson/algebra/concrete/alphabets/alphabets.hh modified
 	* include/vaucanson/algebra/concrete/alphabets/set_alphabets.hh modified

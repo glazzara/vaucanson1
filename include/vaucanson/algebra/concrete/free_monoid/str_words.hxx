@@ -11,7 +11,7 @@ namespace vcsn {
 
     template<typename A>
     void 
-    op_in_mul(const TWords<A>& s, 
+    op_in_mul(const SetWords<A>& s, 
 	      std::basic_string<typename A::letter_t>& dst,
 	      const std::basic_string<typename A::letter_t>& src)
     { 
@@ -20,7 +20,7 @@ namespace vcsn {
 
     template<typename A>
     std::basic_string<typename A::letter_t>
-    op_mul(const TWords<A>& s,
+    op_mul(const SetWords<A>& s,
 	   const std::basic_string<typename A::letter_t>& a,
 	   const std::basic_string<typename A::letter_t>& b)
     { 
@@ -29,7 +29,7 @@ namespace vcsn {
 
     template<typename A>
     const std::basic_string<typename A::letter_t>&
-    identity_value(SELECTOR(TWords<A>),
+    identity_value(SELECTOR(SetWords<A>),
 		   SELECTOR(std::basic_string<typename A::letter_t>))
     {
       static const std::basic_string<typename A::letter_t> instance;
@@ -41,7 +41,7 @@ namespace vcsn {
     template<typename A>
     std::basic_string<typename A::letter_t>
     op_convert(SELECTOR(std::basic_string<typename A::letter_t>),
-	       SELECTOR(TWords<A>), const typename A::letter_t& c)
+	       SELECTOR(SetWords<A>), const typename A::letter_t& c)
     { 
       std::basic_string<typename A::letter_t> str; 
       str = c; 
