@@ -1,5 +1,10 @@
 2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* config/vcsn.m4: Remove "-pedantic" option.
+	* include/vaucanson/misc/dot_dump.hh: Fix.
+
+2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/misc/random.hxx (generate<float>): Fix.
 	* include/vaucanson/algebra/concrete/series/krat.hxx: 
 		Fix bad element init.

@@ -77,9 +77,9 @@ namespace vcsn {
 	   i != a.edges().end();
 	   ++i)
 	{
-	  out << name << state_map[i.origin()] 
+	  out << name << state_map[a.origin_of(*i)] 
 	      << " -> " 
-	      << name << state_map[i.aim()]
+	      << name << state_map[a.aim_of(*i)]
 	      << " [";
 
 	  // fixme: read as series instead

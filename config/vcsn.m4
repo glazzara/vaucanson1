@@ -344,14 +344,14 @@ AC_DEFUN([AC_CXX_FLAGS],
      GNU)
       _CXXFLAGS_DEBUG="-g"
       _CXXFLAGS_OPTIMIZE="-O3 -finline-limit-1500"
-      _CXXFLAGS_STRICT="-W -Wall -pedantic"
-      _CXXFLAGS_STRICT_ERRORS="-W -Wall -pedantic -Werror"
+      _CXXFLAGS_STRICT="-W -Wall"
+      _CXXFLAGS_STRICT_ERRORS="-W -Wall -Werror"
       ;;
      weakGNU)
       _CXXFLAGS_DEBUG="-g"
       _CXXFLAGS_OPTIMIZE="-O2 -felide-constructors -funroll-loops"
-      _CXXFLAGS_STRICT="-W -Wall -pedantic"
-      _CXXFLAGS_STRICT_ERRORS="-W -Wall -pedantic -Werror"
+      _CXXFLAGS_STRICT="-W -Wall"
+      _CXXFLAGS_STRICT_ERRORS="-W -Wall -Werror"
       ;;
      Sun)
       _CXXFLAGS_DEBUG="-g"
