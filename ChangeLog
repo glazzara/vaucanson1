@@ -1,5 +1,10 @@
 2003-06-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/automata/concrete/transpose_view.h[xx,h]: New.
+	* include/vaucanson/automata/concrete/automaton_view.h[xx,h]: New.
+	
+2003-06-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/history.h[h,xx]: New.
 
 2003-06-20  Raphaël Poss  <raph@lrde.epita.fr>

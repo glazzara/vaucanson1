@@ -1,16 +1,17 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 251)
-(Parent-Version vaucanson 0 250)
+(Project-Version vaucanson 0 252)
+(Parent-Version vaucanson 0 251)
 (Version-Log "
 2003-06-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-   * include/vaucanson/automata/concept/history.h[h,xx]: New.
+	* include/vaucanson/automata/concrete/transpose_view.h[xx,h]: New.
+	* include/vaucanson/automata/concrete/automaton_view.h[xx,h]: New.
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Sat, 21 Jun 2003 09:57:08 +0200")
+(Checkin-Time "Sat, 21 Jun 2003 10:07:16 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -93,7 +94,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.56 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.57 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -774,6 +775,26 @@
 ;; to version 0.250(w), by yann:
 
   (include/vaucanson/automata/concept/history.hxx (vaucanson/q/20_history.hx 1.1 600))
+
+;; Files added by populate at Sat, 21 Jun 2003 09:58:19 +0200,
+;; to version 0.251(w), by yann:
+
+  (include/vaucanson/automata/concrete/transpose_view.hh (vaucanson/q/21_transpose_ 1.1 600))
+
+;; Files added by populate at Sat, 21 Jun 2003 09:58:21 +0200,
+;; to version 0.251(w), by yann:
+
+  (include/vaucanson/automata/concrete/transpose_view.hxx (vaucanson/q/22_transpose_ 1.1 600))
+
+;; Files added by populate at Sat, 21 Jun 2003 09:59:55 +0200,
+;; to version 0.251(w), by yann:
+
+  (include/vaucanson/automata/concrete/automaton_view.hh (vaucanson/q/23_automaton_ 1.1 600))
+
+;; Files added by populate at Sat, 21 Jun 2003 09:59:56 +0200,
+;; to version 0.251(w), by yann:
+
+  (include/vaucanson/automata/concrete/automaton_view.hxx (vaucanson/q/24_automaton_ 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)
