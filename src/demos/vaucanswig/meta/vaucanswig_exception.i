@@ -6,7 +6,7 @@
 #include <stdexcept>
 %}
 
-%define START_PROTECT()
+%define START_PROTECT
 %exception {
   try {
     $action
@@ -23,8 +23,8 @@
 }
 %enddef
 
-%define END_PROTECT()
+%define END_PROTECT
 %exception;
 %enddef
 
-START_PROTECT()
+START_PROTECT
