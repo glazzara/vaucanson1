@@ -1,3 +1,7 @@
+2004-10-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* configure.ac: Disable Vaucanswig by default.
+
 2004-09-30  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* reheader.pl: s/represents/consists of/, s/@iafa/@liafa/.
