@@ -1,3 +1,12 @@
+2003-02-20  Maxime Rey  <max@lrde.epita.fr>
+
+        *
+        src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx
+        : minor
+        * include/vaucanson/algorithms/trim.hh : minor
+        * include/vaucanson/algorithms/trim.hxx : minor
+        * src/demos/grammar_inference/src/algebra/alphabet.cc : minor
+
 2003-02-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx:

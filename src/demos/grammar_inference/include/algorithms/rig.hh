@@ -56,6 +56,11 @@ namespace gi {
 
     automaton_t next()
     {
+      // next
+    }
+
+    automaton_t course_depth()
+    {
       using std::cout;
       using std::endl;
       
@@ -92,7 +97,7 @@ namespace gi {
 		    param.emancipate();
 		    
 		    pstack.push(container_t(param, get_first_states(param), true));
-		    return next();
+		    return course_depth();
 		  }
 	    }
 	  pstack.pop();	   
@@ -103,7 +108,7 @@ namespace gi {
 	      cout << " WINNER !! " << endl;
 	      return act.first;
 	    }
-	  return next();
+	  return course_depth();
 	}
       if (pstack.size())
 	return pstack.top().first;

@@ -1,143 +1,318 @@
-Index: 0.151/ChangeLog
-0a1,6
-> 2003-02-13  Maxime Rey  <max@lrde.epita.fr>
+Index: 0.162/ChangeLog
+0a1,9
+> 2003-02-20  Maxime Rey  <max@lrde.epita.fr>
 > 
-> 	* /include/vaucanson/algebra/concrete/letter/range.hxx :
-> 	static_ranged work now
-> 	* doc/tutorial/tutorial.tex: upgrade
+>         *
+>         src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx
+>         : minor
+>         * include/vaucanson/algorithms/trim.hh : minor
+>         * include/vaucanson/algorithms/trim.hxx : minor
+>         * src/demos/grammar_inference/src/algebra/alphabet.cc : minor
 > 
-Index: 0.151/include/vaucanson/algebra/concrete/letter/range.hxx
-35,36c35,38
-<       Interval::check(v);
-<       value_ = v;
+Index: 0.162/include/vaucanson/algorithms/trim.hh
+34c34
+<   usefull_states(const Element<A, T>& a);
 ---
->       if (Interval::check(v))
-> 	value_ = v;
->       else
-> 	value_ = Interval::from();
-Index: 0.151/doc/tutorial/tutorial.tex
-213c213
-< An element of the alphabet set can be implemented in a lot of
+>   useful_states(const Element<A, T>& a);
+Index: 0.162/include/vaucanson/algorithms/trim.hxx
+47c47
+<   do_usefull_states(const AutomataBase<A_>& a_set,
 ---
-> An element of the alphabet set (so an alphabet) can be implemented in a lot of
-217c217,329
-< % FIXME: example.
+>   do_useful_states(const AutomataBase<A_>& a_set,
+61c61
+<   usefull_states(const Element<A, T>& a)
 ---
-> \paragraph{Example 1 (dynamical alphabet)}
-> 
-> \paragraph{Type Creation} 
-> First we have to precise wich kind of letter we wish manipulate inside our 
-> futur alphabet. You can use the builtins types of C/C++ (like char, int, ...)
-> or use more specific types proposed in Vaucanson. To do that, one trivial
-> typedef be enough :
-> 
-> \begin{verbatim}
-> typedef char Letter;
-> \end{verbatim}
-> 
-> in order to have an alphabet of char, or we can type : 
-> 
-> \begin{verbatim}
-> typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
-> \end{verbatim}
-> 
-> in order to have a more specific kind of symbols inside your alphabet. 
-> If you choose this last option, symbols can only be letters between 'a'
-> and 'z', nothing more.
-> 
-> Then we have to create the type of set of alphabets inside which we will 
-> manipulate one of them. We can do this very naturally :
-> 
-> \begin{verbatim}
-> typedef SetAlphabets<Letter>  Alphabets;
-> \end{verbatim}
-> 
-> Lastly, we can create the type of the alphabet we will effectively use,
-> with the Element pattern :
-> 
-> \begin{verbatim}
-> typedef Element<Alphabets, std::set<Letter> >  Alphabet;
-> \end{verbatim}
-> 
-> This previous should be understand like : ``an element of the set of all
-> alphabets, implemented by a set of Letter''.
-> In fact this code is already present inside Vaucanson, more exactly inside
-> a file named ``predefs.hh'' :
-> 
-> \begin{verbatim}
-> ==============================================================================
-> 
->  namespace small_alpha_letter {
->       
->       typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
->       typedef SetAlphabets<Letter>				   Alphabets;
->       typedef Element<Alphabets, std::set<Letter> >		   Alphabet;
-> 
->     } // small_alpha_letter
-> 
->     namespace char_letter {
-> 
->       typedef SetAlphabets<char>				   Alphabets;
->       typedef Element<Alphabets, std::set<char> >		   Alphabet;
-> 
->     } // char_letter
-> 
->     namespace int_letter {
-> 
->       typedef SetAlphabets<int>					   Alphabets;
->       typedef Element<Alphabets, std::set<int> >		   Alphabet;
-> 
->     } // int_letter
-> 
-> ==============================================================================
-> \end{verbatim}
-> 
-> You have only to choose the right namespace for your work, or create a new.
-> Next a short example of alphabet manipulation :
-> 
-> \begin{verbatim}
-> ==============================================================================
-> 
->   using namespace vcsn;
->   using namespace algebra;
+>   useful_states(const Element<A, T>& a)
+63c63
+<     return do_usefull_states(a.set(), a);
+---
+>     return do_useful_states(a.set(), a);
+70c70
+<     return auto_extract(a, usefull_states(a));
+---
+>     return auto_extract(a, useful_states(a));
+Index: 0.162/log
+1,143d0
+< Index: 0.151/ChangeLog
+< 0a1,6
+< > 2003-02-13  Maxime Rey  <max@lrde.epita.fr>
+< > 
+< > 	* /include/vaucanson/algebra/concrete/letter/range.hxx :
+< > 	static_ranged work now
+< > 	* doc/tutorial/tutorial.tex: upgrade
+< > 
+< Index: 0.151/include/vaucanson/algebra/concrete/letter/range.hxx
+< 35,36c35,38
+< <       Interval::check(v);
+< <       value_ = v;
+< ---
+< >       if (Interval::check(v))
+< > 	value_ = v;
+< >       else
+< > 	value_ = Interval::from();
+< Index: 0.151/doc/tutorial/tutorial.tex
+< 213c213
+< < An element of the alphabet set can be implemented in a lot of
+< ---
+< > An element of the alphabet set (so an alphabet) can be implemented in a lot of
+< 217c217,329
+< < % FIXME: example.
+< ---
+< > \paragraph{Example 1 (dynamical alphabet)}
+< > 
+< > \paragraph{Type Creation} 
+< > First we have to precise wich kind of letter we wish manipulate inside our 
+< > futur alphabet. You can use the builtins types of C/C++ (like char, int, ...)
+< > or use more specific types proposed in Vaucanson. To do that, one trivial
+< > typedef be enough :
+< > 
+< > \begin{verbatim}
+< > typedef char Letter;
+< > \end{verbatim}
+< > 
+< > in order to have an alphabet of char, or we can type : 
+< > 
+< > \begin{verbatim}
+< > typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
+< > \end{verbatim}
+< > 
+< > in order to have a more specific kind of symbols inside your alphabet. 
+< > If you choose this last option, symbols can only be letters between 'a'
+< > and 'z', nothing more.
+< > 
+< > Then we have to create the type of set of alphabets inside which we will 
+< > manipulate one of them. We can do this very naturally :
+< > 
+< > \begin{verbatim}
+< > typedef SetAlphabets<Letter>  Alphabets;
+< > \end{verbatim}
+< > 
+< > Lastly, we can create the type of the alphabet we will effectively use,
+< > with the Element pattern :
+< > 
+< > \begin{verbatim}
+< > typedef Element<Alphabets, std::set<Letter> >  Alphabet;
+< > \end{verbatim}
+< > 
+< > This previous should be understand like : ``an element of the set of all
+< > alphabets, implemented by a set of Letter''.
+< > In fact this code is already present inside Vaucanson, more exactly inside
+< > a file named ``predefs.hh'' :
+< > 
+< > \begin{verbatim}
+< > ==============================================================================
+< > 
+< >  namespace small_alpha_letter {
+< >       
+< >       typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
+< >       typedef SetAlphabets<Letter>				   Alphabets;
+< >       typedef Element<Alphabets, std::set<Letter> >		   Alphabet;
+< > 
+< >     } // small_alpha_letter
+< > 
+< >     namespace char_letter {
+< > 
+< >       typedef SetAlphabets<char>				   Alphabets;
+< >       typedef Element<Alphabets, std::set<char> >		   Alphabet;
+< > 
+< >     } // char_letter
+< > 
+< >     namespace int_letter {
+< > 
+< >       typedef SetAlphabets<int>					   Alphabets;
+< >       typedef Element<Alphabets, std::set<int> >		   Alphabet;
+< > 
+< >     } // int_letter
+< > 
+< > ==============================================================================
+< > \end{verbatim}
+< > 
+< > You have only to choose the right namespace for your work, or create a new.
+< > Next a short example of alphabet manipulation :
+< > 
+< > \begin{verbatim}
+< > ==============================================================================
+< > 
+< >   using namespace vcsn;
+< >   using namespace algebra;
+< >   using namespace small_alpha_letter;
+< >   
+< >   using std::cout;
+< >   using std::endl;
+< >   
+< >   Alphabet A;
+< >   
+< >   Letter a('a');
+< >   
+< >   A.insert(a);
+< >   A.insert(Letter('b'));
+< >   
+< >   cout << "Size of alphabet : "
+< >        << A.size() << endl;                // return 2
+< >   
+< >   
+< >   cout << "Is \'a\' inside alphabet ? (0 or 1) : "
+< >        << A.contains('a') << endl;         //return true
+< > 
+< >   cout << "Is \'1\' inside alphabet ? (0 or 1) : "
+< >        << A.contains('1') << endl;         //return false
+< >   
+< >   
+< >   cout << "element of alphabet are : ";
+< >   for (Alphabet::iterator i = A.begin(); i != A.end(); i++)
+< >     cout << *i << " ";
+< >   cout << endl;
+< >   
+< >   cout << "random sequence of 10 symbols of alphabet : ";
+< >   for (unsigned i = 0; i < 10; i++)
+< >     cout << A.choose() << " ";
+< >   cout << endl;
+< >        
+< > ==============================================================================
+< > \end{verbatim}
+< > 
+< 220a333,336
+< > Now we use an algebraic structure called a free moinoid. It is the set of
+< > words we can represent with an alphabet (a collection of symbols) and
+< > a specific operation. 
+< > 
+Index: 0.162/src/demos/samples/algebra/alphabet.cc
+7,35d6
+< struct basic_alphabet
+< {
+<   typedef char letter_t;
+<   typedef char* iterator;
+<   typedef const char* const_iterator;
+< 
+<   static const char first = 'a';
+<   static const char second = 'b';
+< 
+<   size_t size() const
+<   { 
+<     return 2; 
+<   }
+< 
+<   const_iterator begin() const
+<   {
+<     static const char tmp = first;
+<     return &tmp;
+<   }
+< 
+<   const_iterator end() const
+<   {
+<     static const char tmp = second;
+<     return &tmp;
+<   }
+< 
+< };
+< 
+< 
+45c16
+< //   using namespace small_alpha_letter;
+---
 >   using namespace small_alpha_letter;
->   
->   using std::cout;
->   using std::endl;
->   
+50c21
+< //   Alphabet A;
+---
 >   Alphabet A;
->   
+52c23
+< //   Letter a('a');
+---
 >   Letter a('a');
->   
+54,55c25,26
+< //   A.insert(a);
+< //   A.insert(Letter('b'));
+---
 >   A.insert(a);
 >   A.insert(Letter('b'));
->   
+57,58c28,29
+< //   cout << "Size of alphabet : "
+< //        << A.size() << endl;                // return 2
+---
 >   cout << "Size of alphabet : "
 >        << A.size() << endl;                // return 2
->   
->   
+61,62c32,33
+< //   cout << "Is \'a\' inside alphabet ? (0 or 1) : "
+< //        << A.contains('a') << endl;         //return true
+---
 >   cout << "Is \'a\' inside alphabet ? (0 or 1) : "
 >        << A.contains('a') << endl;         //return true
-> 
+64,65c35,36
+< //   cout << "Is \'1\' inside alphabet ? (0 or 1) : "
+< //        << A.contains('1') << endl;         //return false
+---
 >   cout << "Is \'1\' inside alphabet ? (0 or 1) : "
 >        << A.contains('1') << endl;         //return false
->   
->   
+68,71c39,42
+< //   cout << "element of alphabet are : ";
+< //   for (Alphabet::iterator i = A.begin(); i != A.end(); i++)
+< //     cout << *i << " ";
+< //   cout << endl;
+---
 >   cout << "element of alphabet are : ";
 >   for (Alphabet::iterator i = A.begin(); i != A.end(); i++)
 >     cout << *i << " ";
 >   cout << endl;
->   
+73,95c44
+< //   cout << "random sequence of 10 symbols of alphabet : ";
+< //   for (unsigned i = 0; i < 10; i++)
+< //     cout << A.choose() << " ";
+< //   cout << endl;
+<     
+<    
+< 
+< 
+<   typedef const Element<AlphabetSet<char>, basic_alphabet> Alphabet;
+< 
+<   Alphabet a;
+< 
+< 
+<   cout << a.size() << endl;
+< 
+<   cout << *a.end() << endl;
+<   cout << *a.begin() << endl;
+< 
+<   cout << a.is_finite() << endl;
+<   cout << a.contains('a') << endl;
+<   cout << a.contains('b') << endl;
+<   cout << a.contains('d') << endl;
+< 
+---
 >   cout << "random sequence of 10 symbols of alphabet : ";
->   for (unsigned i = 0; i < 10; i++)
+97c46,47
+<     cout << a.choose() << endl;
+---
 >     cout << A.choose() << " ";
 >   cout << endl;
->        
-> ==============================================================================
-> \end{verbatim}
+Index: 0.162/src/demos/grammar_inference/src/bs.cc
+87c87
+< 
+---
+>   
+91c91,92
+<       factory.next();
+---
+>       //      factory.next();      // <--- it is at you to code it
+>       factory.course_depth();
+Index: 0.162/src/demos/grammar_inference/include/algorithms/rig.hh
+58a59,63
+>       // next
+>     }
 > 
-220a333,336
-> Now we use an algebraic structure called a free moinoid. It is the set of
-> words we can represent with an alphabet (a collection of symbols) and
-> a specific operation. 
-> 
+>     automaton_t course_depth()
+>     {
+95c100
+< 		    return next();
+---
+> 		    return course_depth();
+106c111
+< 	  return next();
+---
+> 	  return course_depth();
+Index: 0.162/
+src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx
+34,35c34
+<     return (usefull_states((auto_product(a, pta))).size() == 0);
+<     
+---
+>     return (useful_states((auto_product(a, pta))).size() == 0);

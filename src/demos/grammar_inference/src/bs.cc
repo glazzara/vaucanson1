@@ -84,11 +84,12 @@ int main()
 
   cout << dsample.first.size() << " "
        << dsample.second.size() << endl;
-
+  
   while (factory.depth())
     {
       cout << "[ NEW : " << factory.depth() << "]" << endl;
-      factory.next();
+      //      factory.next();      // <--- it is at you to code it
+      factory.course_depth();
     }
   
   //  SAVE_AUTOMATON_DOT_SIMPLE("vtrain_rig", B = factory.course_depth());

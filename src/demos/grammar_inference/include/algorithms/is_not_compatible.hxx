@@ -31,8 +31,7 @@ namespace vcsn {
   is_not_compatible(const Element<A, T>& a,
 		    const Element<A, T>& pta)
   {
-    return (usefull_states((auto_product(a, pta))).size() == 0);
-    
+    return (useful_states((auto_product(a, pta))).size() == 0);
   }
 
 //   bool

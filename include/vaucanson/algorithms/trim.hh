@@ -31,7 +31,7 @@ namespace vcsn {
   //! Returns a useful states of the automaton (start reachable and final co-).
   template<typename A, typename T>
   std::set<hstate_t>
-  usefull_states(const Element<A, T>& a);
+  useful_states(const Element<A, T>& a);
 
   //! Return a fresh automaton in which non useful states are removed.
   template<typename A, typename T>
