@@ -1,3 +1,7 @@
+2003-07-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/automata/implementation_check/rdelta_test.hh: New.
+
 2003-07-23  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* FAQ: Minor tweak.
