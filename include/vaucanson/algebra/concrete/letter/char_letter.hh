@@ -41,8 +41,10 @@ namespace vcsn {
     {
       enum
 	{
-	  // Here we use 255 and not 256 since random::generate<char> does
-	  // not generates 0s.
+	  // Here we use 255  and not 256 since random::generate<char>
+	  // does not generates 0 to avoid conflicts with 0 terminated
+	  // C strings. Therefore char  alphabets will never hold more
+	  // than 255 different letters.
 	  cardinal = 255
 	};
 

@@ -1,3 +1,8 @@
+2004-03-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/letter/char_letter.hh: Minor
+	change in a comment.
+
 2004-03-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/demos/vaucanswig/expand.sh,
