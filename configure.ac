@@ -5,7 +5,7 @@
 # VCSN_HEADER
 
 AC_PREREQ([2.54])
-AC_INIT([vaucanson], [0.5], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [0.6], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config/vcsn.m4])
 AM_INIT_AUTOMAKE([1.7 no-define foreign dist-bzip2])
