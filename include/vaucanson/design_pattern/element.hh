@@ -73,7 +73,7 @@ namespace vcsn {
    *     - @c SetSlot
    */
   template<typename S, typename T>
-  class Element : public MetaElement<S, T>
+  class Element : public MetaElement<S, T>, private SetSlot<S>
   {
   public:
     /// %Structure type for structural elements.
@@ -199,7 +199,6 @@ namespace vcsn {
     //@}
 
   private :
-    SetSlot<S>		structure_;
     T			value_;
   };
 

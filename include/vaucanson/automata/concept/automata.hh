@@ -65,7 +65,8 @@ namespace vcsn {
 
   template <class Series>
   class Automata
-    : public AutomataBase<Automata<Series> >
+    : public AutomataBase<Automata<Series> >,
+      private SetSlot<Series>
   {
   public:
     typedef Automata<Series>				     self_t;
@@ -75,8 +76,6 @@ namespace vcsn {
 
     const series_set_t&	series() const;
 
-  private:
-    SetSlot<series_set_t> series_;
   };
 
   template <class Series>

@@ -1,3 +1,46 @@
+2005-01-14  Raphael Poss  <raph@lrde.epita.fr>
+
+	Optimize according to advice given by Thomas Claveirole
+	<thomas.claveirole@lrde.epita.fr> in
+	<b5866f93050114064454fb67b9@mail.gmail.com>: Use SetSlot<> by
+	derivation instead of composition. Inherit SetSlot<> as a private
+	base class so that it does not interfere with the selection of
+	template specializations of operators.
+
+	* include/vaucanson/design_pattern/slots.hh: Prefix methods with
+	_structure_ so that they do not collide with MetaElement methods
+	when inherited by Element. Allow tagging SetSlot<S> classes for
+	unambiguous multiple inheritance.	
+	* include/vaucanson/design_pattern/slots.hxx: Modify accordingly.
+	
+	* include/vaucanson/design_pattern/predecls.hh: Use a default
+	type for the SetSlot tag argument.
+
+	* include/vaucanson/design_pattern/element.hh: Remove the
+	structure_ attribute. Inherit from SetSlot<S> instead.
+	* include/vaucanson/design_pattern/element.hxx: Modify
+	accordingly.
+	
+	* include/vaucanson/algebra/implementation/series/series.hh:
+	Remove the semiring_ and monoid_ attributes. Inherit from
+	SetSlot<Semiring,semiring_slot_tag> and
+	SetSlot<Monoid,monoid_slot_tag> instead.
+	
+	* include/vaucanson/algebra/implementation/series/series.hxx:
+	Modify accordingly.
+	
+	* include/vaucanson/automata/concept/automata.hh,
+	* include/Vaucanson/automata/concept/tranducer.hh: Remove the
+	series_ attribute. Inherit from SetSlot<Series> instead.
+	
+	* include/vaucanson/automata/concept/automata.hxx,
+	* include/vaucanson/automata/concept/transducer.hxx: Modify
+	accordingly.
+
+	* src/tests/design_pattern/intrinsics_size.cc,
+	* src/tests/design_pattern/Makefile.am: Add new test for this
+	optimisation.
+
 2004-12-03  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh,

@@ -44,7 +44,7 @@ namespace vcsn {
   template <class S, class T>
   Element<S,T>::Element() :
     MetaElement<S, T>(),
-    structure_(),
+    SetSlot<S>(),
     value_(op_default(SELECT(S), SELECT(T)))
   {
     static_assertion_(not dynamic_traits<S>::ret,
@@ -58,22 +58,22 @@ namespace vcsn {
   template <class S, class T>
   Element<S,T>::Element(const Element& other) :
     MetaElement<S, T>(other),
-    structure_(other.structure_),
+    SetSlot<S>(static_cast<const SetSlot<S>& >(other)),
     value_(other.value_)
   {}
 
   template <class S, class T>
   template<typename U>
   Element<S,T>::Element(const Element<S, U>& other) :
-    structure_(other.structure()),
+    SetSlot<S>(other.structure()),
     value_(op_convert(other.structure(), SELECT(T), other.value()))
   {}
 
   template <class S, class T>
   template<typename OtherS, typename U>
   Element<S,T>::Element(const Element<OtherS, U>& other)
-    : structure_ (op_convert(SELECT(S), other.structure())),
-      value_ (op_convert(structure_.get(), value_,
+    : SetSlot<S>(op_convert(SELECT(S), other.structure())),
+      value_ (op_convert(this->_structure_get(), value_,
 			 other.structure(), other.value()))
   {
   }
@@ -84,7 +84,7 @@ namespace vcsn {
 
   template <class S, class T>
   Element<S,T>::Element(const T& other)
-    : structure_(),
+    : SetSlot<S> (),
       value_(op_convert(SELECT(S), SELECT(T), other))
   {
     static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
@@ -93,7 +93,7 @@ namespace vcsn {
   template <class S, class T>
   template<typename U>
   Element<S,T>::Element(const U& other)
-    : structure_(),
+    : SetSlot<S> (),
       value_(op_convert(SELECT(S), SELECT(T), other))
   {
     static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
@@ -105,27 +105,27 @@ namespace vcsn {
 
   template <class S, class T>
   Element<S,T>::Element(const S& structure)
-    : structure_(structure),
-      value_(op_default(structure_.get(), SELECT(T)))
+    : SetSlot<S>(structure),
+      value_(op_default(this->_structure_get(), SELECT(T)))
   {}
 
   template <class S, class T>
   Element<S,T>::Element(const S& structure, const T& other)
-    : structure_(structure),
-      value_(op_convert(structure_.get(), SELECT(T), other))
+    : SetSlot<S>(structure),
+      value_(op_convert(this->_structure_get(), SELECT(T), other))
   {}
   template <class S, class T>
   template<typename U>
   Element<S,T>::Element(const S& structure, const U& other)
-    : structure_(structure),
-      value_(op_convert(structure_.get(), SELECT(T), other))
+    : SetSlot<S>(structure),
+      value_(op_convert(this->_structure_get(), SELECT(T), other))
   {}
 
   template <class S, class T>
   template<typename OtherS, typename U>
   Element<S,T>::Element(const S& structure, const Element<OtherS, U>& other)
-    : structure_(structure),
-      value_(op_convert(structure_.get(), SELECT(T),
+    : SetSlot<S> (structure),
+      value_(op_convert(this->_structure_get(), SELECT(T),
 		        other.structure(), other.value()))
   {}
 
@@ -137,7 +137,7 @@ namespace vcsn {
   Element<S,T>&
   Element<S,T>::operator = (const Element& other)
   {
-    structure_.assign(other.structure());
+    _structure_assign(other.structure());
     op_assign(structure(), other.structure(), value_, other.value());
     return *this;
   }
@@ -147,7 +147,7 @@ namespace vcsn {
   Element<S,T>&
   Element<S,T>::operator = (const Element<S, U>& other)
   {
-    structure_.assign(other.structure());
+    _structure_assign(other.structure());
     op_assign(structure(), other.structure(), value_, other.value());
     return *this;
   }
@@ -156,7 +156,7 @@ namespace vcsn {
   template<typename OtherS, typename U>
   Element<S,T>& Element<S,T>::operator = (const Element<OtherS, U>& other)
   {
-    structure_.assign(op_convert(SELECT(S), other.structure()));
+    _structure_assign(op_convert(SELECT(S), other.structure()));
     op_assign(structure(), other.structure(), value_, other.value());
     return *this;
   }
@@ -177,14 +177,14 @@ namespace vcsn {
   void
   Element<S,T>::attach(const S& structure)
   {
-    structure_.attach(structure);
+    _structure_attach(structure);
   }
 
   template <class S, class T>
   const S&
   Element<S,T>::structure() const
   {
-    return structure_.get();
+    return _structure_get();
   }
 
   template <class S, class T>

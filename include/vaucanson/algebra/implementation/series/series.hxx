@@ -45,26 +45,27 @@ namespace vcsn {
     
     template<typename Semiring, typename Monoid>
     Series<Semiring, Monoid>::Series(const Semiring& w, const Monoid& m)
-      : semiring_(w), monoid_(m) 
+      : SetSlot<Semiring,semiring_slot_tag>(w), 
+	SetSlot<Monoid,monoid_slot_tag>(m) 
     {}
     
     template<typename Semiring, typename Monoid>
     Series<Semiring, Monoid>::Series(const Series& other) : 
       SeriesBase<Series<Semiring,Monoid> >(other),
-      semiring_(other.semiring_), 
-      monoid_(other.monoid_)
+      SetSlot<Semiring,semiring_slot_tag>(static_cast<const SetSlot<Semiring,semiring_slot_tag> &>(other)), 
+      SetSlot<Monoid,monoid_slot_tag>(static_cast<const SetSlot<Monoid,monoid_slot_tag> &>(other))
     {}
     
     template<typename Semiring, typename Monoid>
     const Semiring& Series<Semiring, Monoid>::semiring() const
     { 
-      return semiring_.get(); 
+      return static_cast<const SetSlot<Semiring,semiring_slot_tag>* >(this)->_structure_get(); 
     }
     
     template<typename Semiring, typename Monoid>
     const Monoid& Series<Semiring, Monoid>::monoid() const
     { 
-      return monoid_.get(); 
+      return static_cast<const SetSlot<Monoid,monoid_slot_tag>* >(this)->_structure_get(); 
     }
 
     template<typename W, typename M>

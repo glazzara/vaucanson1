@@ -90,7 +90,7 @@ namespace vcsn {
      * accessing methods of the S.E. (which do not use the reference
      * anyway).
      */
-    const S&	get() const;
+    const S&	_structure_get() const;
 
     /**
      * @name Methods to link the Slot
@@ -102,10 +102,10 @@ namespace vcsn {
     //@{
 
     /// Link a @c SetSlot to another.
-    void	assign(const SetSlotAttribute& other);
+    void	_structure_assign(const SetSlotAttribute& other);
 
     /// Link a @c SetSlot to a structural element.
-    void	attach(const S& other);
+    void	_structure_attach(const S& other);
     //@}
 
     /**
@@ -114,7 +114,7 @@ namespace vcsn {
      *
      * In this version this method always returns @c true.
      */
-    bool	bound() const;
+    bool	_structure_bound() const;
   };
 
   /**
@@ -154,7 +154,7 @@ namespace vcsn {
     SetSlotAttribute(const S& other);
 
     /// Retrieve the structural element reference from the attribute.
-    const S&	get() const;
+    const S&	_structure_get() const;
 
     //@{
     /**
@@ -163,15 +163,15 @@ namespace vcsn {
      * This method updates the S.E. reference in the attribute with
      * the reference given as argument.
      */
-    void	assign(const SetSlotAttribute& other);
-    void	attach(const S& s);
+    void	_structure_assign(const SetSlotAttribute& other);
+    void	_structure_attach(const S& s);
     //@}
 
     /**
      * @brief Tell whether the reference to the structural element is
      *        valid or not (NULL).
      */
-    bool	bound() const;
+    bool	_structure_bound() const;
 
   protected:
     const S*	s_; ///< The actual reference to a structural element.
@@ -192,14 +192,21 @@ namespace vcsn {
    * dynamic_traits\<S\>::ret, which chooses which version of @c
    * SetSlotAttribute to inherit from.
    *
+   * Additionnally, the class can be meta-tagged when multiple
+   * inheritance for the same structural element @c S is needed.
+   * This meta-tag (second template argument) makes the type
+   * unique w.r.t. the tag type.
+   *
    * @see
    *  - @c SetSlotAttribute
    *  - @c dynamic_traits
    *  - @c Element
    */
-  template<typename S>
+  template<typename S, typename Tag>
   struct SetSlot : SetSlotAttribute<S, dynamic_traits<S>::ret>
   {
+    typedef Tag tag_type;
+ 
     //@{
     /**
      * @brief Trivial constructor. Calls the inherited constructor from

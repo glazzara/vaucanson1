@@ -59,7 +59,9 @@ namespace vcsn {
   template<typename S, typename T>
   struct Element;
 
-  template<typename S>
+  struct default_slot_tag {};
+
+  template<typename S, typename Tag = default_slot_tag>
   struct SetSlot;
 
   template<typename Self>
@@ -69,6 +71,7 @@ namespace vcsn {
   struct virtual_types;
 
   struct undefined_type {};
+
 
   /** @} */
 

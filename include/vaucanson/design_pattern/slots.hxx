@@ -56,21 +56,21 @@ namespace vcsn {
   {}
 
   template<typename S, bool dynamic /* default: false */>
-  const S& SetSlotAttribute<S, dynamic>::get() const
+  const S& SetSlotAttribute<S, dynamic>::_structure_get() const
   {
     return *static_cast<const S*>(NULL);
   }
 
   template<typename S, bool dynamic /* default: false */>
-  void SetSlotAttribute<S, dynamic>::assign(const SetSlotAttribute&)
+  void SetSlotAttribute<S, dynamic>::_structure_assign(const SetSlotAttribute&)
   {}
 
   template<typename S, bool dynamic /* default: false */>
-  void SetSlotAttribute<S, dynamic>::attach(const S& )
+  void SetSlotAttribute<S, dynamic>::_structure_attach(const S& )
   {}
 
   template<typename S, bool dynamic /* default: false */>
-  bool SetSlotAttribute<S, dynamic>::bound() const
+  bool SetSlotAttribute<S, dynamic>::_structure_bound() const
   {
     return true;
   }
@@ -95,26 +95,26 @@ namespace vcsn {
   {}
 
   template <class S>
-  const S& SetSlotAttribute<S, true>::get() const
+  const S& SetSlotAttribute<S, true>::_structure_get() const
   {
     return *s_;
   }
 
   template <class S>
-  void SetSlotAttribute<S, true>::assign(const SetSlotAttribute& other)
+  void SetSlotAttribute<S, true>::_structure_assign(const SetSlotAttribute& other)
   {
     s_ = other.s_;
   }
 
   template <class S>
-  void SetSlotAttribute<S, true>::attach(const S& s)
+  void SetSlotAttribute<S, true>::_structure_attach(const S& s)
   {
     precondition(&s != NULL);
     s_ = & utility::unique::get(s);
   }
 
   template <class S>
-  bool SetSlotAttribute<S, true>::bound() const
+  bool SetSlotAttribute<S, true>::_structure_bound() const
   {
     return s_;
   }
@@ -124,18 +124,18 @@ namespace vcsn {
   `---------------------*/
 
 
-  template <class S>
-  SetSlot<S>::SetSlot()
+  template <class S, class Tag>
+  SetSlot<S,Tag>::SetSlot()
     : SetSlotAttribute<S, dynamic_traits<S>::ret>()
   {}
 
-  template <class S>
-  SetSlot<S>::SetSlot(const SetSlot& other)
+  template <class S, class Tag>
+  SetSlot<S,Tag>::SetSlot(const SetSlot& other)
     : SetSlotAttribute<S, dynamic_traits<S>::ret>(other)
   {}
 
-  template <class S>
-  SetSlot<S>::SetSlot(const S& other)
+  template <class S, class Tag>
+  SetSlot<S,Tag>::SetSlot(const S& other)
     : SetSlotAttribute<S, dynamic_traits<S>::ret>(other)
   {}
 

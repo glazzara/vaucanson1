@@ -65,7 +65,8 @@ namespace vcsn {
   /// This is the final class for the set of transducers.
   template <class Series>
   class Transducer
-    : public TransducerBase<Transducer<Series> >
+    : public TransducerBase<Transducer<Series> >,
+      private SetSlot<Series>
   {
   public:
     typedef Transducer<Series>				     self_t;
@@ -75,8 +76,6 @@ namespace vcsn {
 
     const series_set_t&	series() const;
 
-  private:
-    SetSlot<series_set_t>	series_;
   };
 
   template <class S, class T>

@@ -1,7 +1,7 @@
-// automata.hxx: this file is part of the Vaucanson project.
+// intrinsics_default.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004,2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,46 +17,43 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group consists of the following contributors:
+// The Vaucanson Group represents the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
-//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
-//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX
-# define VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX
+#include "intrinsics.hh"
 
-#include <vaucanson/automata/concept/automata_base.hh>
-#include <vaucanson/misc/unique.hh>
+void test_sizes()
+{
+  TEST_GROUP("sizes of Element instances w.r.t. S.E. and value type");
 
-namespace vcsn {
+  vcsn_test::S S;
+  vcsn::Element<vcsn_test::S, vcsn_test::T> e(S);
+  TEST_MSG("sizeof(S) == " << sizeof(vcsn_test::S));
+  TEST_MSG("sizeof(Sna) == " << sizeof(vcsn_test::Sna));
+  TEST_MSG("sizeof(T) == " << sizeof(vcsn_test::T));
+  TEST_MSG("sizeof(Element<S,T>) == " << sizeof(e));
 
-  template <class Series>
-  Automata<Series>::Automata(const series_set_t& s):
-    SetSlot<Series>(s)
-  {}
 
-  template <class Series>
-  const Series&
-  Automata<Series>::series() const
-  {
-    return _structure_get();
-  }
+  vcsn_test::Sna Sna;
+  vcsn::Element<vcsn_test::Sna, vcsn_test::T> e2(Sna);
+  TEST_MSG("sizeof(Element<Sna,T>) == " << sizeof(vcsn::Element<vcsn_test::Sna, vcsn_test::T>));
+  static const size_t size_of_element = sizeof(e2);
+  static const size_t size_of_value = sizeof(vcsn_test::T);
+  TEST_ASSERT(size_of_element == size_of_value,
+	      "empty base-class eliminisation");
 
-  template <class Series>
-  bool
-  operator==(const Automata<Series>& lhs,
-	     const Automata<Series>& rhs)
-  {
-    return & lhs.series() == & rhs.series();
-  }
+}
 
-} // vcsn
 
-#endif // ! VCSN_AUTOMATA_CONCEPT_AUTOMATA_HXX
+int main()
+{
+  test_sizes();
+}
+

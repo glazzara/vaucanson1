@@ -38,14 +38,14 @@ namespace vcsn {
 
   template <class Series>
   Transducer<Series>::Transducer(const series_set_t& s):
-    series_(s)
+    SetSlot<Series>(s)
   {}
 
   template <class Series>
   const typename Transducer<Series>::series_set_t&
   Transducer<Series>::series() const
   {
-    return series_.get();
+    return _structure_get();
   }
 
   template <class Series>
