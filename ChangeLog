@@ -1,4 +1,8 @@
 2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/vaucanswig/expand.sh: Minor fix to make Vaucanswig compile.
+	
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	* src/tests/automata/algos/standard_of_regression_test.hh: Move to...
 	* src/tests/k_automata/standard_of_regression_test.hh: ... This.
 	* src/tests/k_automata/Makefile.am: New. Makefile for test directory 
