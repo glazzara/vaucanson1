@@ -1,5 +1,10 @@
 2004-10-11  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
+	* src/tests/algebra/series/krat/main/krat_exp_expand_test.hh: Complete
+	with tests on stared expressions.
+
+2004-10-11  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
 	* include/Makefile.am: Remove krat_exp_verbalization entries.
 	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hh: Delete.
 	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hxx: Delete.

@@ -84,6 +84,11 @@ struct specialized_tests
     test(t, e, "b 3.(a+b 2)", "((3 ba)+(6 bb))");
     test(t, e, "(a+b 2).(a 4)", "((4 aa)+(8 ba))");
     test(t, e, "a 2.(a+b).b 3", "((6 aab)+(6 abb))");
+    test(t, e, "a*+(a*+a*)", "(3 (a)*)");
+    test(t, e, "3 a*+4 a*", "(7 (a)*)");
+    test(t, e, "((a+b).a)*+((a+b).a)*", "(2 (aa+ba)*)");
+    test(t, e, "(((a+b).a)*+(aa+ba)*)*", "(2 (aa+ba)*)*");
+    test(t, e, "(a*+b*).a*", "(((a)*.(a)*)+((b)*.(a)*))");
   }
 };
 
@@ -104,6 +109,10 @@ struct specialized_tests<bool, Expr>
     test(t, e, "a.(a+b).b", "(aab+abb)");
     test(t, e, "a+(a+(a+(a+a))+a)", "a");
     test(t, e, "(a+b).(a+b)", "(((aa+ab)+ba)+bb)");
+    test(t, e, "a*+(a*+a*)", "(a)*");
+    test(t, e, "((a+b).a)*+((a+b).a)*", "(aa+ba)*");
+    test(t, e, "(((a+b).a)*+(aa+ba)*)*", "((aa+ba)*)*");
+    test(t, e, "(a*+b*).a*", "(((a)*.(a)*)+((b)*.(a)*))");
   }
 };
 
