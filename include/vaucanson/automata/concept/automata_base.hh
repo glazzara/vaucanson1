@@ -85,6 +85,22 @@ namespace vcsn {
  };
 
   /*-----------------------------------.
+  | virtual_types<AutomataBase<Self> > |
+  `-----------------------------------*/
+  template <class S>
+  struct virtual_types<AutomataBase<S> >
+    : virtual_types<Structure<S> >
+  { };
+
+  /*------------------------------------.
+  | dynamic_traits<AutomataBase<Self> > |
+  `------------------------------------*/
+  template <class S>
+  struct dynamic_traits<AutomataBase<S> >
+    : dynamic_traits<Structure<S> >
+  { };
+  
+  /*-----------------------------------.
   | MetaElement<AutomataBase<Self>, T> |
   `-----------------------------------*/
   //! Services of every element of the automata set. 

@@ -1,17 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 282)
-(Parent-Version vaucanson 0 281)
-(Version-Log "
-2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(Project-Version vaucanson 0 283)
+(Parent-Version vaucanson 0 282)
+(Version-Log "2003-06-25  Loïc Fosse  <loic@lrde.epita.fr>
 
-	* include/Makefile.am: Fix.
-	* include/vaucanson/automata/concrete/kind_adapter.hxx: New.
-")
+	* include/vaucanson/automata/concept/automata_base.hh: Add traits for
+	  AutomataBase.")
 (New-Version-Log "")
-(Checkin-Time "Tue, 24 Jun 2003 22:43:17 +0200")
-(Checkin-Login yann)
+(Checkin-Time "Wed, 25 Jun 2003 12:55:04 +0200")
+(Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -119,7 +117,7 @@
   (src/tests/check/unique.cc (vaucanson/p/49_unique.cc 1.1 600))
   (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.4 600))
   (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.3 700))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 700))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 600))
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.3 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
@@ -295,7 +293,7 @@
 
   (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.9 600))
   (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.8 600))
-  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.17 600))
+  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.18 600))
   (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.13 600))
   
   
