@@ -52,7 +52,7 @@ namespace vcsn {
     public :
       typedef KRatExpIsRealtime<Exp_, Dispatch_>	this_class;
       typedef bool					return_type;
-      typedef typename Exp_::monoid_value_t		monoid_value_t;
+      typedef typename Exp_::monoid_elt_value_t		monoid_elt_value_t;
       typedef typename Exp_::semiring_elt_value_t	semiring_elt_value_t;
       INHERIT_CONSTRUCTORS(this_class, Exp_, bool, Dispatch_);
 
@@ -90,7 +90,7 @@ namespace vcsn {
 
       MATCH_(Constant, m)
       {
-	typename monoid_value_t::const_iterator i = m.begin();
+	typename monoid_elt_value_t::const_iterator i = m.begin();
 	return ++i == m.end();
       }
       END
@@ -138,7 +138,7 @@ namespace vcsn {
       typedef typename Element<Series, T>::semiring_elt_t semiring_elt_t;
       typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
       typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
-      typedef typename monoid_elt_t::value_t		monoid_value_t;
+      typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
       typedef typename monoid_elt_t::set_t		monoid_t;
       typedef typename monoid_t::alphabet_t		alphabet_t;
       typedef typename alphabet_t::letter_t		letter_t;
@@ -157,7 +157,7 @@ namespace vcsn {
 	return_type	exp = identity_as<T>::of(exp_.set());
 	return_type	tmp (exp_.set());
 	monoid_elt_t	letter (exp_.set().monoid());
-	for (typename monoid_value_t::const_iterator i = m.begin();
+	for (typename monoid_elt_value_t::const_iterator i = m.begin();
 	     i != m.end(); ++i)
 	  {
 	    letter = *i;

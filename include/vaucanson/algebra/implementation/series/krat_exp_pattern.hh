@@ -195,14 +195,14 @@ match_node##N(const N&) 			\
     {
       typedef U                          return_type;
       typedef typename T::semiring_elt_value_t semiring_elt_value_t;
-      typedef typename T::monoid_value_t monoid_value_t;
+      typedef typename T::monoid_elt_value_t monoid_elt_value_t;
 
       DecBinaryOp(Product, T, T);
       DecBinaryOp(Sum, T, T);
       DecUnaryOp(Star, T);
       DecBinaryOp(LeftWeight, semiring_elt_value_t, T);
       DecBinaryOp(RightWeight, T, semiring_elt_value_t);
-      DecLeaf(Constant, monoid_value_t);
+      DecLeaf(Constant, monoid_elt_value_t);
       DecFinalLeaf(One);
       DecFinalLeaf(Zero);
 

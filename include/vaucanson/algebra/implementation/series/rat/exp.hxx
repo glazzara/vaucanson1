@@ -109,7 +109,7 @@ namespace vcsn {
 
     template<typename LetterT, typename WeightT>
     void exp<LetterT, WeightT>::
-    accept(ConstNodeVisitor<monoid_value_t, semiring_elt_value_t>& v) const
+    accept(ConstNodeVisitor<monoid_elt_value_t, semiring_elt_value_t>& v) const
     {
       base_->accept(v);
     }
@@ -117,7 +117,7 @@ namespace vcsn {
     template<typename LetterT, typename WeightT>
     size_t exp<LetterT, WeightT>::depth() const
     {
-      DepthVisitor<monoid_value_t, semiring_elt_value_t> v;
+      DepthVisitor<monoid_elt_value_t, semiring_elt_value_t> v;
       accept(v);
       return v.get();
     }
@@ -179,7 +179,7 @@ namespace vcsn {
 
     template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT> exp<LetterT, WeightT>::
-    constant(const monoid_value_t& l)
+    constant(const monoid_elt_value_t& l)
     {
       return exp(new n_const_t(l));
     }
@@ -311,7 +311,7 @@ namespace vcsn {
     template <class Matcher, class Monoid, class Semiring>
     void
     DispatchVisitor<Matcher, Monoid, Semiring>::
-    constant(const monoid_value_t& m)
+    constant(const monoid_elt_value_t& m)
     {
       ret_ = matcher_.match_nodeConstant(typename Matcher::Constant(m));
     }

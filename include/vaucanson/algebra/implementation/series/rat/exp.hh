@@ -58,7 +58,7 @@ namespace vcsn {
       typedef rat::Constant<LetterT, WeightT>			n_const_t;
 
     public:
-      typedef LetterT monoid_value_t;
+      typedef LetterT monoid_elt_value_t;
       typedef WeightT semiring_elt_value_t;
 
       exp();
@@ -70,7 +70,7 @@ namespace vcsn {
       exp& operator+=(const exp& other);
       exp& operator*=(const exp& other);
       exp& star();
-      void accept(ConstNodeVisitor<monoid_value_t, semiring_elt_value_t>& v) const;
+      void accept(ConstNodeVisitor<monoid_elt_value_t, semiring_elt_value_t>& v) const;
       size_t depth() const;
       ~exp();
       node_t* &base();
@@ -81,7 +81,7 @@ namespace vcsn {
       exp clone() const;
       static exp one();
       static exp zero();
-      static exp constant(const monoid_value_t& l);
+      static exp constant(const monoid_elt_value_t& l);
       static bool starable();
 
     protected:
@@ -136,9 +136,9 @@ namespace vcsn {
     public:
       typedef Matcher					matcher_t;
       typedef typename Matcher::return_type		return_type;
-      typedef Monoid					monoid_value_t;
+      typedef Monoid					monoid_elt_value_t;
       typedef Semiring					semiring_elt_value_t;
-      typedef rat::Node<monoid_value_t, semiring_elt_value_t>	node_t;
+      typedef rat::Node<monoid_elt_value_t, semiring_elt_value_t>	node_t;
 
       DispatchVisitor(Matcher& m);
 
@@ -161,7 +161,7 @@ namespace vcsn {
       right_weight(const semiring_elt_value_t& w, const node_t* node);
 
       virtual void
-      constant(const monoid_value_t& m);
+      constant(const monoid_elt_value_t& m);
 
       virtual void
       zero();

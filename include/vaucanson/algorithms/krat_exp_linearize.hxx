@@ -51,7 +51,7 @@ namespace vcsn {
     typedef typename linearize_element<Series, T>::index_t	index_t;
     typedef typename linearize_element<Series, T>::element_t	return_type;
     typedef typename return_type::value_t			exp_impl_t;
-    typedef typename return_type::monoid_value_t		l_monoid_value_t;
+    typedef typename return_type::monoid_elt_value_t		l_monoid_elt_value_t;
     typedef typename return_type::set_t				l_series_elt_t;
     typedef typename l_series_elt_t::monoid_t			l_monoid_t;
     typedef typename l_series_elt_t::semiring_t			l_semiring_t;
@@ -63,7 +63,7 @@ namespace vcsn {
     typedef KRatExpLinearize<Series, T, Dispatch>		self_t;
     typedef typename Element<Series, T>::semiring_elt_t		semiring_elt_t;
     typedef typename Element<Series, T>::monoid_elt_t		monoid_elt_t;
-    typedef typename monoid_elt_t::value_t	      		monoid_value_t;
+    typedef typename monoid_elt_t::value_t	      		monoid_elt_value_t;
     INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
     KRatExpLinearize(const Element<Series, T>& exp) :
@@ -113,8 +113,8 @@ namespace vcsn {
     MATCH_(Constant, m)
     {
       // Build new constant and update alphabet
-      l_monoid_value_t	res;
-      typedef typename monoid_value_t::const_iterator	const_iterator;
+      l_monoid_elt_value_t	res;
+      typedef typename monoid_elt_value_t::const_iterator	const_iterator;
       for (const_iterator i = m.begin(); i != m.end(); ++i)
       {
 	l_alpha_.insert(l_letter_t(*i, index_));

@@ -138,7 +138,7 @@ namespace vcsn
     template <>
     struct series_traits<vcsn::xml::XmlValue>
     {
-      typedef xml::XmlValue monoid_value_t;
+      typedef xml::XmlValue monoid_elt_value_t;
       typedef xml::XmlValue semiring_elt_value_t;
       typedef utility::Support<xml::XmlValue> support_t;
     };

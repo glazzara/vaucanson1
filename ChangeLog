@@ -1,3 +1,30 @@
+2004-04-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hh,
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx,
+	* include/vaucanson/algorithms/standard_of.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	* include/vaucanson/algorithms/krat_exp_linearize.hh,
+	* include/vaucanson/algorithms/thompson.hxx,
+	* include/vaucanson/algorithms/krat_exp_print.hxx,
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh,
+	* src/tests/algebra/series/misc/series_test.hh: Rename monoid_value_t
+	to monoid_elt_value_t.
+
 2004-04-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* update_config_ac.sh: Do not use the .defs files to generate
@@ -9,7 +36,7 @@
 	automaton types.
 	* src/tests/tests-suites/numerical_automaton_t.defs,
 	* src/tests/tests-suites/tropical_min_automaton_t.defs,
-	* src/tests/tests-suites/tropical_max_automaton_t.defs: New files. 
+	* src/tests/tests-suites/tropical_max_automaton_t.defs: New files.
 	Files for instanciation of new tests.
 	* src/tests/automata/algos/determinist_test.hh,
 	* src/tests/automata/algos/normalize_test.hh,

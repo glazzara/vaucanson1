@@ -50,11 +50,11 @@ namespace vcsn {
     typedef Series					series_t;
     typedef Element<Series, T>				series_elt_t;
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
-    typedef typename monoid_elt_t::value_t		monoid_value_t;
+    typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
     typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
-    typedef std::list<monoid_value_t>			support_t;
-    typedef std::list<std::pair<semiring_elt_value_t, monoid_value_t> >
+    typedef std::list<monoid_elt_value_t>			support_t;
+    typedef std::list<std::pair<semiring_elt_value_t, monoid_elt_value_t> >
 							ext_support_t;
     INHERIT_CONSTRUCTORS(self_t, T, return_type, Dispatch);
 
@@ -149,7 +149,7 @@ namespace vcsn {
 		      (identity_value(series_.semiring(),
 				      SELECT(semiring_elt_value_t)),
 		       identity_value(series_.monoid(),
-				      SELECT(monoid_value_t))));
+				      SELECT(monoid_elt_value_t))));
       return 0;
     }
     END
@@ -166,7 +166,7 @@ namespace vcsn {
     ext_support_t& ext_get()
     {
       // Now join same words.
-      typedef std::map<monoid_value_t, semiring_elt_value_t> tmap_t;
+      typedef std::map<monoid_elt_value_t, semiring_elt_value_t> tmap_t;
       tmap_t v;
       typename tmap_t::iterator f;
       for_each_const_(ext_support_t, c, supp_)

@@ -80,7 +80,7 @@ namespace vcsn {
     template<typename T>
     struct series_traits
     {
-      typedef undefined_type	monoid_value_t;
+      typedef undefined_type	monoid_elt_value_t;
       typedef undefined_type	semiring_elt_value_t;
     };
 
@@ -135,13 +135,13 @@ namespace vcsn {
     typedef typename algebra::series_traits<T>::semiring_elt_value_t   semiring_elt_value_t;
 
     /// type of the implementation of free monoid element.
-    typedef typename algebra::series_traits<T>::monoid_value_t    monoid_value_t;
+    typedef typename algebra::series_traits<T>::monoid_elt_value_t    monoid_elt_value_t;
 
     /// type of the element of the semiring element.
     typedef Element<typename Self::semiring_t, semiring_elt_value_t> semiring_elt_t;
 
     /// type of the element of the monoid.
-    typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;
+    typedef Element<typename Self::monoid_t, monoid_elt_value_t>	 monoid_elt_t;
 
     /// type of the series.
     typedef Element<Self, T>				 element_t;
@@ -150,13 +150,13 @@ namespace vcsn {
     typedef typename algebra::series_traits<T>::support_t	support_t;
 
     /// returns the weight associated to a word.
-    semiring_elt_value_t	get(const monoid_value_t& m) const;
+    semiring_elt_value_t	get(const monoid_elt_value_t& m) const;
 
     /// returns the weight associated to a word.
     semiring_elt_t		get(const monoid_elt_t& m) const;
 
     /// associates a semiring_elt to a word.
-    void		assoc(const monoid_value_t& m,
+    void		assoc(const monoid_elt_value_t& m,
 			      const semiring_elt_value_t& w);
 
     /// associates a weight to a word.

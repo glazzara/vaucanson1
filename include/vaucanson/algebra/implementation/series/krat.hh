@@ -46,9 +46,9 @@ namespace vcsn {
     template<typename Tm, typename Tw>
     struct series_traits<rat::exp<Tm, Tw> >
     {
-      typedef Tm	monoid_value_t;
+      typedef Tm	monoid_elt_value_t;
       typedef Tw	semiring_elt_value_t;
-      typedef std::list<monoid_value_t> support_t;
+      typedef std::list<monoid_elt_value_t> support_t;
     };
 
     template <class Tm, class Tw, class W, class M>

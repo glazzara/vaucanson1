@@ -107,7 +107,7 @@ bool test_derivate(const Expr& specimen,
   typedef Expr					krat_exp_t;		\
   typedef typename krat_exp_t::value_t		kexp_t;			\
   typedef typename kexp_t::semiring_elt_value_t	kexp_semiring_elt_value_t;	\
-  typedef typename kexp_t::monoid_value_t	kexp_monoid_value_t;	\
+  typedef typename kexp_t::monoid_elt_value_t	kexp_monoid_elt_value_t;	\
   typedef typename krat_exp_t::monoid_elt_t	monoid_elt_t;		\
   typedef typename monoid_elt_t::set_t		monoid_t;		\
   typedef typename krat_exp_t::semiring_elt_t		semiring_elt_t;		\

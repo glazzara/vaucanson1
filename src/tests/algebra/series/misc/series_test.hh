@@ -56,7 +56,7 @@ bool series_test(tests::Tester& t)
   typedef typename semiring_elt_t::value_t	semiring_value_t;
 
   typedef typename series_elt_t::monoid_elt_t	monoid_elt_t;
-  typedef typename monoid_elt_t::value_t	monoid_value_t;
+  typedef typename monoid_elt_t::value_t	monoid_elt_value_t;
   typedef typename series_elt_t::support_t	support_t;
 
   alphabet_t		base;
@@ -87,10 +87,10 @@ bool series_test(tests::Tester& t)
       semiring_t	semiring;
       series_t		series(semiring, monoid);
 
-      monoid_elt_t	w1 = monoid.choose(SELECT(monoid_value_t));
+      monoid_elt_t	w1 = monoid.choose(SELECT(monoid_elt_value_t));
       monoid_elt_t	w2 (monoid);
       do
-	w2 = monoid.choose(SELECT(monoid_value_t));
+	w2 = monoid.choose(SELECT(monoid_elt_value_t));
       while (w2 == w1);
 
       series_elt_t	s1(series, w1);
@@ -128,7 +128,7 @@ bool series_test(tests::Tester& t)
 	{
 	  monoid_elt_t		m (monoid);
 	  do
-	    m = monoid.choose(SELECT(monoid_value_t));
+	    m = monoid.choose(SELECT(monoid_elt_value_t));
 	  while (s5.get(m) != zero);
 	  semiring_elt_t	s (semiring);
 	  do

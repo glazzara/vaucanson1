@@ -55,9 +55,9 @@ namespace vcsn {
     typedef typename automaton_t::series_t			series_t;
     typedef typename automaton_t::series_elt_t			series_elt_t;
     typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
-    typedef Monoid_						monoid_value_t;
+    typedef Monoid_						monoid_elt_value_t;
     typedef Semiring_						semiring_elt_value_t;
-    typedef rat::Node<monoid_value_t, semiring_elt_value_t>           node_t;
+    typedef rat::Node<monoid_elt_value_t, semiring_elt_value_t>           node_t;
 
   public :
 
@@ -119,13 +119,13 @@ namespace vcsn {
     }
 
     virtual void
-    constant(const monoid_value_t& m)
+    constant(const monoid_elt_value_t& m)
     {
       auto_ = new automaton_t(automata_set_t(series_));
       hstate_t new_i = auto_->add_state();
       hstate_t last = new_i;
       hstate_t new_f;
-      for (typename monoid_value_t::const_iterator i = m.begin();
+      for (typename monoid_elt_value_t::const_iterator i = m.begin();
 	   i != m.end(); ++i)
 	{
 	  new_f = auto_->add_state();

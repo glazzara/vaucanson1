@@ -68,7 +68,7 @@ namespace vcsn {
     typedef typename automaton_t::monoid_elt_t		monoid_elt_t;
     typedef typename automaton_t::semiring_elt_t	semiring_elt_t;
 
-    typedef typename Exp_::monoid_value_t		monoid_value_t;
+    typedef typename Exp_::monoid_elt_value_t		monoid_elt_value_t;
     typedef typename Exp_::semiring_elt_value_t		semiring_elt_value_t;
 
     typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>	this_class;
@@ -170,7 +170,7 @@ namespace vcsn {
       hstate_t new_i = auto_->add_state();
       hstate_t last = new_i;
       hstate_t new_f;
-      for (typename monoid_value_t::const_iterator i = m.begin();
+      for (typename monoid_elt_value_t::const_iterator i = m.begin();
 	   i != m.end(); ++i)
 	{
 	  new_f = auto_->add_state();

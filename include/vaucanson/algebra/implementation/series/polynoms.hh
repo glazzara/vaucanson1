@@ -93,7 +93,7 @@ namespace vcsn {
     template<typename Tm, typename Tw>
     struct series_traits<polynom<Tm, Tw> >
     {
-      typedef Tm monoid_value_t;
+      typedef Tm monoid_elt_value_t;
       typedef Tw semiring_elt_value_t;
       typedef utility::Support<std::map<Tm, Tw> > support_t;
     };

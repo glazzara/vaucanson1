@@ -251,7 +251,7 @@ namespace vcsn {
     {
       typedef KRatExpToken
       <
-	typename Element<S, T>::monoid_value_t,
+	typename Element<S, T>::monoid_elt_value_t,
 	typename Element<S, T>::semiring_elt_value_t
       >						      krat_exp_token_t;
       typedef std::list<krat_exp_token_t>	      token_stream_t;
@@ -283,7 +283,7 @@ namespace vcsn {
       lex(const std::string& in, const Element<S, T>& e)
       {
 	typedef typename Element<S, T>::monoid_elt_t	monoid_elt_t;
-	typedef typename Element<S, T>::monoid_value_t	monoid_value_t;
+	typedef typename Element<S, T>::monoid_elt_value_t	monoid_elt_value_t;
 	typedef typename Element<S, T>::semiring_elt_t	semiring_elt_t;
 	typedef std::string::const_iterator		iterator_t;
 
@@ -434,11 +434,11 @@ namespace vcsn {
     {
       typedef KRatExpToken
       <
-	typename Element<S, T>::monoid_value_t,
+	typename Element<S, T>::monoid_elt_value_t,
 	typename Element<S, T>::semiring_elt_value_t
       >						      krat_exp_token_t;
       typedef typename Element<S, T>::monoid_elt_t    monoid_elt_t;
-      typedef typename Element<S, T>::monoid_value_t  monoid_value_t;
+      typedef typename Element<S, T>::monoid_elt_value_t  monoid_elt_value_t;
       typedef typename monoid_elt_t::set_t	      monoid_t;
       typedef typename Element<S, T>::semiring_elt_t	      semiring_elt_t;
       typedef typename semiring_elt_t::set_t		      semiring_t;

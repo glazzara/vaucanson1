@@ -35,9 +35,9 @@ namespace vcsn {
   {
   public :
 
-    typedef Monoid_						monoid_value_t;
+    typedef Monoid_						monoid_elt_value_t;
     typedef Semiring_						weight_value_t;
-    typedef rat::Node<monoid_value_t, weight_value_t>           node_t;
+    typedef rat::Node<monoid_elt_value_t, weight_value_t>           node_t;
     typedef unsigned print_mode_t;
 
   public :
@@ -160,7 +160,7 @@ namespace vcsn {
     }
 
     virtual void 
-    constant(const monoid_value_t& m)
+    constant(const monoid_elt_value_t& m)
     {
       cout << m;
     }

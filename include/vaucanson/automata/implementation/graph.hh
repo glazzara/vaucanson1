@@ -321,7 +321,7 @@ namespace vcsn {
 				 Tag>  >
   {
     typedef WordValue			input_monoid_elt_value_t;
-    typedef typename algebra::series_traits<WeightValue>::monoid_value_t
+    typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t
     output_monoid_elt_value_t;
     typedef typename algebra::series_traits<WeightValue>::semiring_elt_value_t
     output_semiring_elt_value_t;
@@ -347,15 +347,15 @@ namespace vcsn {
     typedef typename transducer_traits<self_t>::output_semiring_elt_value_t
     semiring_elt_value_t;
     typedef typename transducer_traits<self_t>::input_monoid_elt_value_t
-    monoid_value_t;
+    monoid_elt_value_t;
     typedef typename algebra::mute_series_impl<SeriesValue,
 					      semiring_elt_value_t,
-					      monoid_value_t>
+					      monoid_elt_value_t>
     ::ret series_value_t;
 
     typedef
     Graph<Kind,
-	  monoid_value_t,
+	  monoid_elt_value_t,
 	  semiring_elt_value_t,
 	  series_value_t,
 	  Letter,
@@ -383,8 +383,8 @@ namespace vcsn {
     series_elt_value_t;
 
     typedef typename
-    algebra::series_traits<series_elt_value_t>::monoid_value_t
-    monoid_value_t;
+    algebra::series_traits<series_elt_value_t>::monoid_elt_value_t
+    monoid_elt_value_t;
 
     typedef typename
     algebra::series_traits<series_elt_value_t>::semiring_elt_value_t
@@ -392,7 +392,7 @@ namespace vcsn {
 
     typedef
     Graph<Kind,
-	  monoid_value_t,
+	  monoid_elt_value_t,
 	  semiring_elt_value_t,
 	  series_elt_value_t,
 	  Letter,
@@ -417,13 +417,13 @@ namespace vcsn {
     typedef Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
     self_t;
     typedef typename automaton_traits<self_t>::monoid_elt_value_t
-    monoid_value_t;
-    typedef typename algebra::mute_series_impl<SeriesValue, SeriesValue, monoid_value_t>
+    monoid_elt_value_t;
+    typedef typename algebra::mute_series_impl<SeriesValue, SeriesValue, monoid_elt_value_t>
     ::ret series_value_t;
 
     typedef
     Graph<Kind,
-	  monoid_value_t,
+	  monoid_elt_value_t,
 	  SeriesValue,
 	  series_value_t,
 	  Letter,

@@ -185,7 +185,7 @@ namespace vcsn {
 
     /** type of the output monoid element implementation. */
     typedef typename automaton_traits<T>::semiring_elt_value_t semiring_elt_value_t;
-    typedef typename algebra::series_traits<semiring_elt_value_t>::monoid_value_t 
+    typedef typename algebra::series_traits<semiring_elt_value_t>::monoid_elt_value_t 
 						output_monoid_elt_value_t;
 
     /** type of the output monoid. */

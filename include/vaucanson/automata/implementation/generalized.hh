@@ -54,16 +54,16 @@ namespace vcsn {
     typedef typename series_t::monoid_t		monoid_t;
     typedef typename Auto_::series_elt_t	series_elt_t;
     typedef typename series_elt_t::monoid_elt_t monoid_elt_t;
-    typedef typename monoid_elt_t::value_t	monoid_value_t;
+    typedef typename monoid_elt_t::value_t	monoid_elt_value_t;
     typedef typename series_elt_t::semiring_elt_t     semiring_elt_t;
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
 
     typedef vcsn::Element
     <vcsn::Automata<series_t>,
      Graph<labels_are_series,
-	   monoid_value_t,
+	   monoid_elt_value_t,
 	   semiring_elt_value_t,
-	   rat::exp<monoid_value_t, semiring_elt_value_t>,
+	   rat::exp<monoid_elt_value_t, semiring_elt_value_t>,
 	   typename monoid_t::letter_t,
 	   NoTag>
     > automaton_t;
