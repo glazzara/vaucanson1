@@ -1,5 +1,19 @@
 2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/z_min_plus_automaton.hh: New. Context for tropical
+	semirings with min and plus operators.
+	* include/Makefile.am: Update.
+
+	* src/tests/test-suites/tropical_min_automaton.defs: Move to...
+	* src/tests/test-suites/z_min_plus_automaton.defs: ... This. Use
+	z_min_plus_automaton.hh instead of usual.hh.
+
+	* src/tests/test-suites/context_headers_z_min_plus.defs: New.
+	Corresponding test.
+	* src/tests/test-suites/generate-all.sh: Update.
+
+2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/z_max_plus.hxx, include/vaucanson/r_automaton.hxx,
 	* include/vaucanson/z_automaton.hxx,
 	* include/vaucanson/boolean_automaton.hxx,

@@ -314,6 +314,7 @@ nobase_include_HEADERS =						   \
 	vaucanson/contextual_transducer_functions.thxx			   \
 	vaucanson/contextual_headers.hh					   \
 	vaucanson/z_max_plus_automaton.hh				   \
+	vaucanson/z_min_plus_automaton.hh				   \
 	vaucanson/z_automaton.hh					   \
 	vaucanson/r_automaton.hh					   \
 	vaucanson/standard_algorithms.hh				   \

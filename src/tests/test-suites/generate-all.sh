@@ -72,7 +72,7 @@ done;
 #    | Automaton |
 #    `----------*/
 
-for automata_kind in boolean r z z_max_plus; do
+for automata_kind in boolean r z z_max_plus z_min_plus; do
     ../bin/generate-test-suite.sh \
     context_headers_${automata_kind} \
     context_headers_${automata_kind}.defs \
@@ -87,11 +87,6 @@ for automata_kind in boolean r z z_max_plus; do
 	${automata_kind}_automaton.defs \
 	${TEST}
 done;
-
-../bin/generate-test-suite.sh \
-   tropical_min_automaton \
-   tropical_min_automaton.defs \
-   ../automata
 
 #    /*-----------.
 #    | Transducer |
