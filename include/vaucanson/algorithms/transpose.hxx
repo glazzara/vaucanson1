@@ -5,7 +5,7 @@
 #ifndef AUTOMATA_TRANSPOSE_HXX
 #define AUTOMATA_TRANSPOSE_HXX
 
-#include <vaucanson/automata/concept/transpose.hh>
+#include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/automata/concept/transpose_impl.hh>
 #include <vaucanson/automata/concept/copy.hh>
 

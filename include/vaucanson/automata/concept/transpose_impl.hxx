@@ -349,15 +349,15 @@ namespace vcsn
       return transpose_label_fun_(impl().label_of(e)); 
     }
 
-    template <typename OtherImpl, class TransposeLabelFun>
-    OtherImpl::series_t& 
+    template <class OtherImpl, class TransposeLabelFun>
+    typename OtherImpl::series_t& 
     TransposeImpl<OtherImpl, TransposeLabelFun>::
     series() 
     { 
       return impl().series(); 
     }
     
-    template <typename OtherImpl, class TransposeLabelFun>
+    template <class OtherImpl, class TransposeLabelFun>
     const typename OtherImpl::series_t& 
     TransposeImpl<OtherImpl, TransposeLabelFun>::
     series() const 

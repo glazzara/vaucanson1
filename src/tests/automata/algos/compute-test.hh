@@ -10,17 +10,17 @@
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/algorithms/compute.hh>
 
-template <class S, class T>
+template <class Auto>
 void test_compute(tests::Tester& t)
 {
-  typedef	Element<S,T>				automaton_t;
-  typedef typename TAutomata::states_t		        states_t;
-  typedef typename TAutomata::state_iterator		state_iterator;
-  typedef typename TAutomata::monoid_t::alphabet_t	alphabet_t;
+  typedef Auto  				        automaton_t;
+  typedef typename Auto::states_t		        states_t;
+  typedef typename Auto::state_iterator		        state_iterator;
+  typedef typename Auto::monoid_t::alphabet_t	        alphabet_t;
   typedef typename alphabet_t::iterator		        alphabet_iterator;
-  typedef typename TAutomata::states_t		        states_t;
-  typedef typename TAutomata::state_iterator		state_iterator;
-  typedef typename TAutomata::monoid_t::alphabets_elt_t alphabets_elt_t;
+  typedef typename Auto::states_t		        states_t;
+  typedef typename Auto::state_iterator		        state_iterator;
+  typedef typename Auto::monoid_t::alphabets_elt_t      alphabets_elt_t;
 
   TEST_MSG("Basic test on a well-known automaton.");
   
