@@ -314,10 +314,11 @@ namespace utility
       value_type		operator * () const;
       
     protected:
+      void			skip_zeros_forward();
+      void			skip_zeros_backward();
+
       const Bitset* bs_;
-      // FIXME: Putting cbit_ as mutable is completely dirty. However, that is
-      // is the only way to have both ``lazy iterators'' and const operator *.
-      mutable bit_iterator cbit_;
+      bit_iterator cbit_;
     };
 
     /*-----------.
@@ -351,10 +352,11 @@ namespace utility
       value_type	operator * () const;
       
     protected:
+      void		skip_zeros_forward();
+      void		skip_zeros_backward();
+
       const Bitset* bs_;
-      // FIXME: Putting cbit_ as mutable is completely dirty. However, that is
-      // is the only way to have both ``lazy iterators'' and const operator *.
-      mutable bit_iterator cbit_;
+      bit_iterator cbit_;
     };
   };
   

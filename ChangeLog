@@ -1,5 +1,10 @@
 2003-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/misc/bitset.hxx, include/vaucanson/misc/bitset.hh:
+	Fix Bitset::iterator and Bitset::const_iterator.
+
+2003-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/misc/window.hxx, include/vaucanson/misc/window.hh:
 	Add begin(), stream() and end() accessors to the Window class.
 

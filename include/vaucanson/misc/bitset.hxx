@@ -821,6 +821,7 @@ namespace utility
   Bitset::const_iterator::const_iterator(const Bitset* bs) : bs_(bs),
 							     cbit_()
   {
+    skip_zeros_forward();
   }
   
   inline
@@ -829,6 +830,7 @@ namespace utility
     : bs_(bs),
       cbit_(cbit)
   {
+    skip_zeros_forward();
   }
   
   // Copy constructors.
@@ -850,6 +852,7 @@ namespace utility
   Bitset::const_iterator::operator ++ ()
   {
     ++cbit_;
+    skip_zeros_forward();
     return *this;
   }
 
@@ -867,11 +870,8 @@ namespace utility
   const Bitset::const_iterator&
   Bitset::const_iterator::operator -- ()
   {
-    precondition(bs_ != 0);
-
     --cbit_;
-    while ((cbit_ != bs_->bit_begin()) && !bs_->get_bit(cbit_))
-      --cbit_;
+    skip_zeros_backward();
     return *this;
   }
 
@@ -917,13 +917,29 @@ namespace utility
   Bitset::value_type
   Bitset::const_iterator::operator * () const
   {
-    precondition (bs_ != 0);
-
-    while ((cbit_ != bs_->bit_end()) && !bs_->get_bit(cbit_))
-      ++cbit_;
     return *cbit_;
   }
   
+  inline
+  void
+  Bitset::const_iterator::skip_zeros_forward()
+  {
+    precondition(bs_ != 0);
+
+    while ((cbit_ != bs_->bit_end()) && !bs_->get_bit(cbit_))
+      ++cbit_;
+  }
+
+  inline
+  void
+  Bitset::const_iterator::skip_zeros_backward()
+  {
+    precondition(bs_ != 0);
+
+    while ((cbit_ != bs_->bit_begin()) && !bs_->get_bit(cbit_))
+      --cbit_;
+  }
+
   /*---------.
   | iterator |
   `---------*/
@@ -941,6 +957,7 @@ namespace utility
     : bs_(bs),
       cbit_()
   {
+    skip_zeros_forward();
   }
 
   inline
@@ -948,6 +965,7 @@ namespace utility
     : bs_(bs),
       cbit_(cbit)
   {
+    skip_zeros_forward();
   }
 
   // Copy constructor.
@@ -962,6 +980,7 @@ namespace utility
   Bitset::iterator::operator ++ ()
   {
     ++cbit_;
+    skip_zeros_forward();
     return *this;
   }
 
@@ -980,8 +999,7 @@ namespace utility
   Bitset::iterator::operator -- ()
   {
     --cbit_;
-    while ((cbit_ != bs_->bit_begin()) && !bs_->get_bit(cbit_))
-      --cbit_;
+    skip_zeros_backward();
     return *this;
   }
 
@@ -989,13 +1007,9 @@ namespace utility
   Bitset::iterator
   Bitset::iterator::operator -- (int)
   {
-    precondition(bs_ != 0);
-
     iterator res (*this);
 
-    --cbit_;
-    while ((cbit_ != bs_->bit_begin()) && !bs_->get_bit(cbit_))
-      --cbit_;
+    operator -- ();
     return res;
   }
 
@@ -1031,13 +1045,29 @@ namespace utility
   Bitset::value_type
   Bitset::iterator::operator * () const
   {
+    return *cbit_;
+  }
+
+  inline
+  void
+  Bitset::iterator::skip_zeros_forward()
+  {
     precondition(bs_ != 0);
 
     while ((cbit_ != bs_->bit_end()) && !bs_->get_bit(cbit_))
       ++cbit_;
-    return *cbit_;
   }
-  
+
+  inline
+  void
+  Bitset::iterator::skip_zeros_backward()
+  {
+    precondition(bs_ != 0);
+
+    while ((cbit_ != bs_->bit_begin()) && !bs_->get_bit(cbit_))
+      --cbit_;
+  }
+
   inline
   std::ostream&
   operator << (std::ostream& ostr, const Bitset& set)
