@@ -1,3 +1,10 @@
+2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/krat_exp_print.hh,
+	* include/vaucanson/algorithms/krat_exp_print.hxx: Change prototype
+	to take an Element instead of an implementation. Adapt to print on
+	any stream, not just std::cout. Clean.
+
 2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/tools/dot_display.hh,

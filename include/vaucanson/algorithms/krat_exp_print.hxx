@@ -1,200 +1,250 @@
-// krat_exp_print.hxx
+// krat_exp_print.hxx: this file is part of the Vaucanson project.
+//
+// Vaucanson, a generic library for finite state machines.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+// The Vaucanson Group represents the following contributors:
+//    * Jacques Sakarovitch <sakarovitch@enst.fr>
+//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+//    * Loic Fosse <loic.fosse@lrde.epita.fr>
+//    * Thanh-Hoc Nguyen <nguyen@enst.fr>
+//    * Raphael Poss <raphael.poss@lrde.epita.fr>
+//    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
+//    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//
 
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_PRINT_HXX
 # define VCSN_ALGORITHMS_KRAT_EXP_PRINT_HXX
 
 # include <vaucanson/algorithms/krat_exp_print.hh>
+
+# include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 
+# include <string>
+
 namespace vcsn {
-  
-  enum node_types{
-    NODE_CONSTANT, 
-    NODE_LWEIGHT, 
+
+  enum node_types {
+    NODE_CONSTANT,
+    NODE_LWEIGHT,
     NODE_RWEIGHT,
-    NODE_ONE,  
-    NODE_PROD, 
+    NODE_ONE,
+    NODE_PROD,
     NODE_STAR,
-    NODE_SUM, 
+    NODE_SUM,
     NODE_ZERO
   };
 
-  enum print_modes{ 
-    MODE_NONE, //  a+b+c, a.b.c 
-    MODE_ADD,  //  (a+b)+c
-    MODE_MUL,  //  (a.b).c
-    MODE_ALL   //  (a+b)+c, (a.b).c
-  };
+  /*-------------.
+  | PrintVisitor |
+  `-------------*/
 
-  /*---------------.
-  | PrintVisitor   |
-  `----------------*/
-  template <class Monoid_, class Semiring_>
-  class PrintVisitor : 
-    public rat::ConstNodeVisitor<Monoid_, Semiring_>
+  template <class Word, class Weight>
+  class PrintVisitor :
+    public rat::ConstNodeVisitor<Word, Weight>
   {
-  public :
+  public:
+    typedef Word			monoid_elt_value_t;
+    typedef Weight			semiring_elt_value_t;
+    typedef rat::Node<Word, Weight>	node_t;
+    typedef print_modes			print_mode_t;
 
-    typedef Monoid_						monoid_elt_value_t;
-    typedef Semiring_						weight_value_t;
-    typedef rat::Node<monoid_elt_value_t, weight_value_t>           node_t;
-    typedef unsigned print_mode_t;
+  public:
 
-  public :
-
-    PrintVisitor(const print_mode_t& pm = 0, const char* zero = "0", const char* one = "1") 
-      : print_mode_(pm), z_(zero), i_(one)
+    PrintVisitor(std::ostream&		ostr = std::cout,
+		 const print_mode_t	pm = MODE_NONE,
+		 const std::string&	zero = "0",
+		 const std::string&	one = "1")
+      : ostr_ (ostr),
+	print_mode_ (pm),
+	z_ (zero),
+	i_ (one)
     {
     }
 
     virtual
     ~PrintVisitor()
     {
-      cout << endl; // flush
+      ostr_.flush();
     }
 
     // PRODUCT
-    virtual void 
-    product(const node_t* lhs, const node_t* rhs) 
-    {      
+    virtual
+    void
+    product(const node_t* lhs, const node_t* rhs)
+    {
       unsigned node_type_lhs = lhs->what();
       unsigned node_type_rhs = rhs->what();
       switch(node_type_lhs)
 	{
 	case NODE_SUM:
-	  cout << "(";
+	  ostr_ << "(";
 	  lhs->accept(*this);
-	  cout << ")";
+	  ostr_ << ")";
 	  break;
 	case NODE_PROD:
-	  if ((print_mode_ == MODE_NONE)||(print_mode_ == MODE_ADD))
+	  if (print_mode_ == MODE_NONE or print_mode_ == MODE_ADD)
 	    lhs->accept(*this);
 	  else
 	    {
-	      cout << "(";
+	      ostr_ << "(";
 	      lhs->accept(*this);
-	      cout << ")";
+	      ostr_ << ")";
 	    }
 	  break;
-	default: 
+	default:
 	  lhs->accept(*this);
 	  break;
 	}
 
-      cout << ".";
+      ostr_ << ".";
 
       switch(node_type_rhs)
 	{
 	case NODE_SUM:
-	  cout << "(";
+	  ostr_ << "(";
 	  rhs->accept(*this);
-	  cout << ")";
+	  ostr_ << ")";
 	  break;
 	case NODE_PROD:
-	  if ((print_mode_ == MODE_NONE)||(print_mode_ == MODE_ADD))
+	  if (print_mode_ == MODE_NONE or print_mode_ == MODE_ADD)
 	    rhs->accept(*this);
 	  else
 	    {
-	      cout << "(";
+	      ostr_ << "(";
 	      rhs->accept(*this);
-	      cout << ")";
+	      ostr_ << ")";
 	    }
 	  break;
-	default: 
+	default:
 	  rhs->accept(*this);
 	  break;
 	}
     }
 
     // SUM
-    virtual void 
-    sum(const node_t* lhs, const node_t* rhs) 
+    virtual
+    void
+    sum(const node_t* lhs, const node_t* rhs)
     {
       unsigned node_type_lhs = lhs->what();
       unsigned node_type_rhs = rhs->what();
-      if ((node_type_lhs != NODE_SUM) || (print_mode_ == MODE_NONE) || (print_mode_ == MODE_MUL))
-	{
-	  lhs->accept(*this);
-	}
+      if (node_type_lhs != NODE_SUM or
+	  print_mode_ == MODE_NONE or
+	  print_mode_ == MODE_MUL)
+	lhs->accept(*this);
       else
 	{
-	  cout << "(";
+	  ostr_ << "(";
 	  lhs->accept(*this);
-	  cout << ")";
-	}      
-    
-      cout << " + ";
-      
-      if ((node_type_rhs != NODE_SUM) || (print_mode_ == MODE_NONE) || (print_mode_ == MODE_MUL))
-	{
-	  rhs->accept(*this);
+	  ostr_ << ")";
 	}
+
+      ostr_ << " + ";
+
+      if (node_type_rhs != NODE_SUM or
+	  print_mode_ == MODE_NONE or
+	  print_mode_ == MODE_MUL)
+	rhs->accept(*this);
       else
 	{
-	  cout << "(";
+	  ostr_ << "(";
 	  rhs->accept(*this);
-	  cout << ")";
+	  ostr_ << ")";
 	}
     }
-    
-    virtual void 
+
+    virtual
+    void
     star(const node_t* node)
     {
-      cout << "(";
+      ostr_ << "(";
       node->accept(*this);
-      cout << ")*";
+      ostr_ << ")*";
     }
 
-    virtual void 
-    left_weight(const weight_value_t& w, const node_t* node) 
+    virtual
+    void
+    left_weight(const semiring_elt_value_t& w, const node_t* node)
     {
-      cout << w;
+      ostr_ << w;
       node->accept(*this);
-    }
-    
-    virtual void 
-    right_weight(const weight_value_t& w, const node_t* node)
-    {
-      node->accept(*this);
-      cout << w;
     }
 
-    virtual void 
+    virtual
+    void
+    right_weight(const semiring_elt_value_t& w, const node_t* node)
+    {
+      node->accept(*this);
+      ostr_ << w;
+    }
+
+    virtual
+    void
     constant(const monoid_elt_value_t& m)
     {
-      cout << m;
+      ostr_ << m;
     }
-      
-    virtual void 
+
+    virtual
+    void
     zero()
     {
-      cout << z_;
+      ostr_ << z_;
     }
-    
-    virtual void 
+
+    virtual
+    void
     one()
     {
-      cout << i_;
+      ostr_ << i_;
     }
-    
-  private :
-    print_mode_t print_mode_;
 
-    const char* z_;
-    const char* i_;
+  private :
+    std::ostream&	ostr_;
+    const print_mode_t	print_mode_;
+    const std::string	z_;
+    const std::string	i_;
   };
-  
-  /************************************************************/
-  
-  template<typename Letter, typename Weight>
-  void
-  krat_exp_print(const rat::exp<Letter, Weight>& kexp, const unsigned& mode = 0)
+
+  template <class S, class T, class Word, class Weight>
+  std::ostream&
+  do_krat_exp_print(const algebra::SeriesBase<S>&,
+		    const rat::exp<Word, Weight>& value,
+		    const Element<S, T>&,
+		    std::ostream& ostr,
+		    const print_modes mode = MODE_NONE)
   {
-    PrintVisitor<Letter, Weight> p(mode); 
-    kexp.accept(p);                       
-    return;
+    PrintVisitor<Word, Weight> v (ostr, mode);
+    value.accept(v);
+    return ostr;
   }
-} // vcsn
-  
+
+  template<class S, class T>
+  std::ostream&
+  krat_exp_print(const Element<S, T>& kexp,
+		 std::ostream& ostr,
+		 const print_modes mode)
+  {
+    return do_krat_exp_print(kexp.structure(), kexp.value(), kexp, ostr, mode);
+  }
+
+} // End of namespace vcsn.
+
 #endif // VCSN_ALGORITHMS_KRAT_EXP_PRINT_HXX
-  
