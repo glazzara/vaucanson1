@@ -5,15 +5,13 @@
 
 SUBDIRS = include doc src
 
-EXTRA_DIST = THANKS README LICENCE 
-
 ###
 ### Autoconf needs additional macros. 
 ### Tell it where to find them.
 ###
 ACLOCAL_AMFLAGS = -I config
 CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4
-EXTRA_DIST += config/vcsn.m4
+EXTRA_DIST = config/vcsn.m4
 
 ###
 ### Autoconf macros are installable.

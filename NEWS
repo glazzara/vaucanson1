@@ -1,0 +1,27 @@
+Vaucanson 0.4
+
+	* Addition of automata I/O subsystem.
+	* Nearly-complete SWIG bindings for algorithms in Vaucanswig.
+	* Preliminary documentation for Vaucanswig.
+
+Vaucanson 0.3	July 11, 2003
+
+	* More documentation efforts.
+	* Addition of SWIG modules (Vaucanswig).
+	* Noticeable performance boost thanks to a working unification
+	of references to structural elements.
+
+Vaucanson 0.2	July 02, 2003
+
+	* First public release.
+	* Rewrite of the 'fundamental' module.
+	* New graph structure to replace the old, legacy 'ManyLinks'
+	implementation.
+	* Rewrite of most algorithms.
+	* Implementation of algorithms on rational expressions.
+	* Initial Doxygen documentation efforts.
+
+Vaucanson 0.1	January, 2002
+
+	* Initial release.
+
