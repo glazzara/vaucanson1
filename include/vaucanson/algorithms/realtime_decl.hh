@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_REALTIME_DECL_HH
 # define VCSN_ALGORITHMS_REALTIME_DECL_HH
@@ -114,4 +116,4 @@ namespace vcsn {
 #  include <vaucanson/algorithms/realtime_decl.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_ALGORITHMS_REALTIME_DECL_HH
+#endif // ! VCSN_ALGORITHMS_REALTIME_DECL_HH

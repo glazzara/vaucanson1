@@ -29,9 +29,8 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
-#ifndef VCSN_ALGEBRA_CONCRETE_RATIONAL_NUMBER_HH
-# define VCSN_ALGEBRA_CONCRETE_RATIONAL_NUMBER_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HH
 
 # include <iostream>
 
@@ -215,4 +214,4 @@ RationalNumber& operator op(RationalNumber& nb, const T nb2)	\
 #  include <vaucanson/algebra/implementation/semiring/rational_number.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // RATIONAL_NUMBER_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HH

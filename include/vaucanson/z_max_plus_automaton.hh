@@ -1,8 +1,7 @@
-// z_max_plus_automaton.hh:
-// this file is part of the Vaucanson project.
+// z_max_plus_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -75,4 +74,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_Z_MAX_PLUS_AUTOMATON_HH
+#endif // ! VCSN_Z_MAX_PLUS_AUTOMATON_HH

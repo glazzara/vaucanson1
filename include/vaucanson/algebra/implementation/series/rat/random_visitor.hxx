@@ -1,7 +1,7 @@
 // random_visitor.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,9 +26,11 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_RAT_RANDOM_VISITOR_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_RAT_RANDOM_VISITOR_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_RANDOM_VISITOR_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_RANDOM_VISITOR_HXX
 
 # include <algorithm>
 # include <vaucanson/algebra/implementation/series/rat/random_visitor.hh>
@@ -144,4 +146,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_RAT_RANDOM_VISITOR_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_RANDOM_VISITOR_HXX

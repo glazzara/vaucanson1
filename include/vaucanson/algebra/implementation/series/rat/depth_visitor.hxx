@@ -1,7 +1,7 @@
 // depth_visitor.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -123,4 +123,4 @@ namespace vcsn {
 
 } // End of namespace vcsn.
 
-#endif // VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HXX

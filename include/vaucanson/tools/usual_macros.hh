@@ -1,7 +1,7 @@
 // usual_macros.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -182,4 +182,4 @@ typedef typename monoid_t::alphabet_t		alphabet_t;
 #define empty_	identity(SELECT(typename monoid_elt_t::value_t))
 #define wzero_  zero(SELECT(typename semiring_elt_t::value_t))
 
-#endif // VCSN_TOOLS_USUAL_MACROS_HH
+#endif // ! VCSN_TOOLS_USUAL_MACROS_HH

@@ -1,5 +1,4 @@
-// z_min_plus_automaton.hh:
-// this file is part of the Vaucanson project.
+// z_min_plus_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004 The Vaucanson Group.
@@ -75,4 +74,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_Z_MIN_PLUS_AUTOMATON_HH
+#endif // ! VCSN_Z_MIN_PLUS_AUTOMATON_HH

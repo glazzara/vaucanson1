@@ -1,7 +1,7 @@
 // minimization_moore.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,6 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 
@@ -88,4 +87,4 @@ namespace vcsn {
 #  include <vaucanson/algorithms/minimization_moore.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
+#endif // ! VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH

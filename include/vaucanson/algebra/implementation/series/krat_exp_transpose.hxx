@@ -29,8 +29,8 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_TRANSPOSE_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_TRANSPOSE_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_TRANSPOSE_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_TRANSPOSE_HXX
 
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
@@ -88,4 +88,4 @@ namespace vcsn {
 
 }
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_TRANSPOSE_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_TRANSPOSE_HXX

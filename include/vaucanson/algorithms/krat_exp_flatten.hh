@@ -26,8 +26,9 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_FLATTEN_HH
 # define VCSN_ALGORITHMS_KRAT_EXP_FLATTEN_HH
 
@@ -80,4 +81,4 @@ namespace vcsn
 #  include <vaucanson/algorithms/krat_exp_flatten.hxx>
 # endif
 
-#endif // VCSN_ALGORITHMS_KRAT_EXP_FLATTEN_HH
+#endif // ! VCSN_ALGORITHMS_KRAT_EXP_FLATTEN_HH

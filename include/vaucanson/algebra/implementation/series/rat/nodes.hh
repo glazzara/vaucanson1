@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_NODES_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_NODES_HH
@@ -330,4 +332,4 @@ namespace vcsn {
 #  include <vaucanson/algebra/implementation/series/rat/nodes.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_NODES_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_NODES_HH

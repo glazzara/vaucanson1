@@ -26,9 +26,11 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_LETTER_INT_LETTER_HXX
-# define VCSN_ALGEBRA_CONCRETE_LETTER_INT_LETTER_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX
 
 # include <vaucanson/algebra/implementation/letter/int_letter.hh>
 
@@ -97,4 +99,4 @@ namespace std {
 
 } // std
 
-#endif // VCSN_ALGEBRA_CONCRETE_LETTER_INT_LETTER_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX

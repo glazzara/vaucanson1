@@ -26,9 +26,11 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_FREE_MONOID_TOOLS_HXX
-# define VCSN_ALGEBRA_CONCRETE_FREE_MONOID_TOOLS_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_TOOLS_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_TOOLS_HXX
 
 # include <vaucanson/algebra/implementation/free_monoid/tools.hh>
 
@@ -82,4 +84,4 @@ namespace vcsn
 
 } // vcsn
 
-#endif // VCSN_ALGEBRA_CONCRETE_FREE_MONOID_TOOLS_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_TOOLS_HXX

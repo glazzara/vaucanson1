@@ -1,7 +1,7 @@
 // gen_random.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,6 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
 #ifndef VCSN_TOOLS_GEN_RANDOM_HXX
 # define VCSN_TOOLS_GEN_RANDOM_HXX
 
@@ -434,4 +433,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_TOOLS_GEN_RANDOM_HXX
+#endif // ! VCSN_TOOLS_GEN_RANDOM_HXX

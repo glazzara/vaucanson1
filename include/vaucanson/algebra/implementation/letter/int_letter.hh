@@ -26,9 +26,11 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_LETTER_INT_LETTER_HH
-# define VCSN_ALGEBRA_CONCRETE_LETTER_INT_LETTER_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HH
 
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
 # include <string>
@@ -55,4 +57,4 @@ namespace std {
     # include <vaucanson/algebra/implementation/letter/int_letter.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_ALGEBRA_CONCRETE_LETTER_INT_LETTER_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HH

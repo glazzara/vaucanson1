@@ -1,7 +1,7 @@
 // tropical_semiring.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -29,8 +29,8 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SEMIRING_TROPICAL_SEMIRING_HH
-# define VCSN_ALGEBRA_CONCRETE_SEMIRING_TROPICAL_SEMIRING_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_TROPICAL_SEMIRING_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_TROPICAL_SEMIRING_HH
 
 # include <vaucanson/algebra/concept/tropical_semiring.hh>
 
@@ -142,4 +142,4 @@ namespace vcsn {
 # endif // VCSN_USE_INTERFACE_ONLY
 
 
-#endif // VCSN_ALGEBRA_CONCRETE_SEMIRING_TROPICAL_SEMIRING_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_TROPICAL_SEMIRING_HH

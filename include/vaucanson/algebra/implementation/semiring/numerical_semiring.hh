@@ -1,7 +1,7 @@
 // numerical_semiring.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,9 +26,11 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HH
-# define VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_NUMERICAL_SEMIRING_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_NUMERICAL_SEMIRING_HH
 
 # include <vaucanson/algebra/concept/numerical_semiring.hh>
 # include <vaucanson/algebra/implementation/semiring/rational_number.hh>
@@ -184,4 +186,4 @@ namespace vcsn {
 #endif // VCSN_USE_INTERFACE_ONLY
 
 
-#endif // VCSN_ALGEBRA_CONCRETE_SEMIRING_NUMERICAL_SEMIRING_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_NUMERICAL_SEMIRING_HH

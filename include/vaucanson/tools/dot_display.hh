@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TOOLS_DOT_DISPLAY_HH
 # define VCSN_TOOLS_DOT_DISPLAY_HH
@@ -52,4 +54,4 @@ namespace vcsn
 
 # include <vaucanson/tools/dot_display.hxx>
 
-#endif // VCSN_TOOLS_DOT_DISPLAY_HH
+#endif // ! VCSN_TOOLS_DOT_DISPLAY_HH

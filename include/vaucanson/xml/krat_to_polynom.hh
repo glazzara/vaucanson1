@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_KRAT_TO_POLYNOM_HH
 # define VCSN_XML_KRAT_TO_POLYNOM_HH
@@ -97,4 +99,4 @@ namespace vcsn {
 
 # include <vaucanson/xml/krat_to_polynom.hxx>
 
-#endif // VCSN_XML_KRAT_TO_POLYNOM_HH
+#endif // ! VCSN_XML_KRAT_TO_POLYNOM_HH

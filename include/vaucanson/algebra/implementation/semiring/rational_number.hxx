@@ -29,9 +29,8 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
-#ifndef VCSN_ALGEBRA_CONCRETE_SEMIRING_RATIONAL_NUMBER_HXX
-# define VCSN_ALGEBRA_CONCRETE_SEMIRING_RATIONAL_NUMBER_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX
 
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/limits.hh>
@@ -290,4 +289,4 @@ namespace vcsn
   }
 }
 
-#endif //VCSN_ALGEBRA_CONCRETE_RATIONAL_NUMBER_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX

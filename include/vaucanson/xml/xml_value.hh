@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_XML_VALUE_HH
 # define VCSN_XML_XML_VALUE_HH
@@ -85,4 +87,4 @@ namespace vcsn
 
 # include <vaucanson/xml/xml_value.hxx>
 
-#endif // VCSN_XML_XML_VALUE_HH
+#endif // ! VCSN_XML_XML_VALUE_HH

@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_XML_SET_HXX
 # define VCSN_XML_XML_SET_HXX
@@ -213,4 +215,4 @@ namespace vcsn
   }
 }
 
-#endif // VCSN_XML_XML_SET_HXX
+#endif // ! VCSN_XML_XML_SET_HXX

@@ -26,8 +26,9 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
 #ifndef VCSN_MISC_CHAR_TRAITS_HXX
 # define VCSN_MISC_CHAR_TRAITS_HXX
 
@@ -215,4 +216,4 @@ namespace utility
 
 } // end of namespace utility
 
-#endif // VCSN_MISC_CHAR_TRAITS_HXX
+#endif // ! VCSN_MISC_CHAR_TRAITS_HXX

@@ -29,7 +29,6 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
 #ifndef VCSN_BOOLEAN_TRANSDUCER_HH
 # define VCSN_BOOLEAN_TRANSDUCER_HH
 
@@ -100,4 +99,4 @@ namespace vcsn {
   } // boolean_transducer
 } // vcsn
 
-#endif // VCSN_BOOLEAN_TRANSDUCER_HH
+#endif // ! VCSN_BOOLEAN_TRANSDUCER_HH

@@ -26,7 +26,11 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
+#ifndef VCSN_MISC_CHAR_TRAITS_HH
+# define VCSN_MISC_CHAR_TRAITS_HH
 
 /** @addtogroup utility *//** @{ */
 /**
@@ -55,9 +59,6 @@
  * @see utility::char_traits, vaucanson/misc/special_char_traits.hh
  */
 /** @} */
-
-#ifndef VCSN_MISC_CHAR_TRAITS_HH
-# define VCSN_MISC_CHAR_TRAITS_HH
 
 # include <string>
 
@@ -133,4 +134,4 @@ namespace utility
 #  include <vaucanson/misc/char_traits.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_MISC_CHAR_TRAITS_HH
+#endif // ! VCSN_MISC_CHAR_TRAITS_HH

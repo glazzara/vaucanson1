@@ -1,7 +1,7 @@
 // element_ops.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,9 +26,11 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
-# define VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
+#ifndef VCSN_DESIGN_PATTERN_ELEMENT_OPS_HXX
+# define VCSN_DESIGN_PATTERN_ELEMENT_OPS_HXX
 
 # include <vaucanson/design_pattern/element_ops.hh>
 
@@ -226,4 +228,4 @@ namespace std
   }
 } // std
 
-#endif // VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
+#endif // ! VCSN_DESIGN_PATTERN_ELEMENT_OPS_HXX

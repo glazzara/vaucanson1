@@ -28,7 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
-
+//
 #ifndef VCSN_CONTEXTUAL_HEADERS_HH
 # define VCSN_CONTEXTUAL_HEADERS_HH
 
