@@ -7,6 +7,7 @@
 #ifndef ALGORITHMS_EXTRACT_HXX
 # define ALGORITHMS_EXTRACT_HXX
 
+# include <queue>
 # include <vaucanson/algorithms/extract.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -23,19 +24,30 @@ namespace vcsn {
 		       const list_t& selected, 
 		       bool check_states)
   {
+//     for (typename auto_t::state_iterator i = a.states().begin();
+// 	 i != a.states().end();
+// 	 ++i)
+//       if (selected.find(*i) == selected.end()) // this state has to be removed
+// 	{
+// 	  if (check_states)
+// 	    {
+// 	      if (a.has_state(*i)) 
+// 		a.safe_del_state(*i);
+// 	    }
+// 	  else
+// 	    a.safe_del_state(*i);
+// 	}
+    std::deque<hstate_t> to_be_removed;
     for (typename auto_t::state_iterator i = a.states().begin();
-	 i != a.states().end();
-	 ++i)
-      if (selected.find(*i) == selected.end()) // this state has to be removed
-	{
-	  if (check_states)
-	    {
-	      if (a.has_state(*i))
-		a.safe_del_state(*i);
-	    }
-	  else
-	    a.safe_del_state(*i);
-	}
+	 i != a.states().end(); ++i)
+      if (selected.find(*i) == selected.end())
+	to_be_removed.push_back(*i);
+
+    while (!to_be_removed.empty())
+      {
+	a.del_state(to_be_removed.front());
+	to_be_removed.pop_front();
+      }
   }
 
 

@@ -129,7 +129,7 @@ namespace vcsn {
 
   template<typename A, typename T>
   void
-  auto_in_final_reachable(const Element<A, T>& a)
+  auto_in_final_reachable(Element<A, T>& a)
   {
     auto_in_extract(a, final_reachable_states(a));
   }

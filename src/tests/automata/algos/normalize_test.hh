@@ -1,6 +1,5 @@
 // normalize_test.hh
 // 
-// $Id$
 // VCSN_HEADER
 
 
@@ -37,7 +36,7 @@ unsigned normalize_test(tests::Tester& t)
  
   typedef Auto automaton_t;
   
-  gen_auto_t gen(time(0x0));
+  gen_auto_t gen(42);
   const unsigned nb_tests = 10;
   
   for (unsigned i = 0; i < nb_tests; i++)

@@ -14,6 +14,8 @@
 # include <iostream>
 # include <fstream>
 
+# include <vaucanson/tools/usual.hh>
+
 namespace vcsn {
 
   using namespace algebra;
@@ -46,12 +48,10 @@ namespace vcsn {
     TAutomata work;
     work.create();
 
-    for (unsigned i = 0; i < nb_state; i++)
-      work.add_state();
-
     // alphabet construction 
-    alphabets_elt_t& alpha = work.series().monoid().alphabet();
-
+    alphabets_elt_t alpha;
+    
+    
     unsigned nb = alea(nb_letter);
     for (unsigned i = 0; i < 2 + nb; )
       {
@@ -61,7 +61,14 @@ namespace vcsn {
 	alpha.insert(alpha.random_letter());
 	++i;
       }
+    monoid_t monoid(alpha);
+    weights_t semi;
+    series_t series(semi, monoid);
+    
+    work.series() = series;
 
+    for (unsigned i = 0; i < nb_state; i++)
+      work.add_state();
 
     // minimal construction
     state_iterator prev = work.states().begin();
@@ -70,7 +77,7 @@ namespace vcsn {
 	 i != work.states().end(); i++)
       {
 	nb_edge--;
-	work.add_letter_edge(*i, *prev, alpha.choose());
+	work.add_letter_edge(*prev, *i, alpha.choose());
 	prev = i;
       }
 
@@ -79,8 +86,10 @@ namespace vcsn {
 			   work.select_state(alea(work.states().size())), 
 			   alpha.choose());
 
+    
+    work.set_initial(*work.states().begin());
     // set initial states
-    for (unsigned i = 0; i < istate; i++)
+    for (unsigned i = 1; i < istate; i++)
       {
 	hstate_t tmp = work.select_state(alea(work.states().size()));
 	while (work.is_initial(tmp))
@@ -88,8 +97,9 @@ namespace vcsn {
 	work.set_initial(tmp);
       }
 
+    work.set_final(*--work.states().end());
     // set final states
-    for (unsigned i = 0; i < fstate; i++)
+    for (unsigned i = 1; i < fstate; i++)
       {
 	hstate_t tmp = work.select_state(alea(work.states().size()));
 	while (work.is_final(tmp))

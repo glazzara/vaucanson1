@@ -23,7 +23,7 @@ namespace vcsn {
 
   template<typename A, typename T>
   void
-  auto_in_start_reachable(const Element<A, T>& a);
+  auto_in_start_reachable(Element<A, T>& a);
   
   template<typename A, typename T>
   std::set<hstate_t>
@@ -35,7 +35,7 @@ namespace vcsn {
 
   template<typename A, typename T>
   void
-  auto_in_final_reachable(const Element<A, T>& a);
+  auto_in_final_reachable(Element<A, T>& a);
   
 } // vcsn
 

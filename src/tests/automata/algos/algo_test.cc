@@ -9,7 +9,9 @@
 # include <automata/algos/union_test.hh>
 # include <automata/algos/determinist_test.hh>
 # include <automata/algos/normalize_test.hh>
-# include <automata/algos/minimisation_test.hh>
+# include <automata/algos/reachable_test.hh>
+# include <automata/algos/extract_test.hh>
+
 
 int main(int argc, char** argv)
 {
@@ -24,9 +26,9 @@ int main(int argc, char** argv)
     verbose = 1;
   tests::Tester t(verbose);
 
-//   TEST(t, "CHECK UNION : ", !union_test<usual_automaton_t>(t));
-//   TEST(t, "CHECK DETERMINIST : ", !determinist_test<usual_automaton_t>(t));
-//   TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
-  TEST(t, "CHECK MINIMIZE : ", !minimization_test());
-  
+  TEST(t, "CHECK UNION : ", !union_test<usual_automaton_t>(t));
+  TEST(t, "CHECK DETERMINIST : ", !determinist_test<usual_automaton_t>(t));
+  TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
+  TEST(t, "CHECK REACHABLE : ", !reachable_test<usual_automaton_t>(t));
+  TEST(t, "CHECK EXTRACT : ", !extract_test<usual_automaton_t>(t));
 }

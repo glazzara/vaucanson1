@@ -1,3 +1,90 @@
+2002-07-19  Maxime Rey  <max@lrde.epita.fr>
+
+	* Added `include/vaucanson/algorithms/closure.hxx' 
+	* Added `include/vaucanson/algorithms/closure.hh' 
+	* Added `include/vaucanson/algorithms/moore.hxx' 
+	* Added `include/vaucanson/algorithms/moore.hh' 
+	* Added `include/vaucanson/algorithms/hopcroft.hxx' 
+	* Added `include/vaucanson/algorithms/hopcroft.hh' 
+	* Added `src/tests/automata/algos/closure_test.hh' 
+	* Added `src/tests/automata/algos/reachable_test.hh' 
+	* Added `src/tests/automata/algos/extract_test.hh' 
+	* Index: 0.72/include/vaucanson/algorithms/extract.hxx
+	> # include <queue>
+	25a27,40
+	> //     for (typename auto_t::state_iterator i = a.states().begin();
+	> //     i != a.states().end();
+	> //     ++i)
+	> //       if (selected.find(*i) == selected.end()) 
+	> //    {
+	> //      if (check_states)
+	> //        {
+	> //          if (a.has_state(*i))
+	> //            a.safe_del_state(*i);
+	> //        }
+	> //      else
+	> //        a.safe_del_state(*i);
+	> //    }
+	>     std::deque<hstate_t> to_be_removed;
+	---
+	>        i != a.states().end(); ++i)
+	>       if (selected.find(*i) == selected.end())
+	>       to_be_removed.push_back(*i);
+	>
+	>     while (!to_be_removed.empty())
+	>       {
+	>       a.del_state(to_be_removed.front());
+	>       to_be_removed.pop_front();
+	>       }
+	* Index: 0.72/include/vaucanson/algorithms/reachable.hxx
+	<   auto_in_final_reachable(const Element<A, T>& a)
+	---
+	>   auto_in_final_reachable(Element<A, T>& a)
+	Index: 0.72/include/vaucanson/algorithms/reachable.hh
+	<   auto_in_start_reachable(const Element<A, T>& a);
+	---
+	>   auto_in_start_reachable(Element<A, T>& a);
+	<   auto_in_final_reachable(const Element<A, T>& a);
+	---
+	>   auto_in_final_reachable(Element<A, T>& a);
+	Index: 0.72/include/vaucanson/tools/gen_random.hxx
+	> # include <vaucanson/tools/usual.hh>
+	>
+	<     for (unsigned i = 0; i < nb_state; i++)
+	<       work.add_state();
+	<
+	<     alphabets_elt_t& alpha = work.series().monoid().alphabet();
+	<
+	---
+	>     alphabets_elt_t alpha;
+
+	>     monoid_t monoid(alpha);
+	>     weights_t semi;
+	>     series_t series(semi, monoid);
+	>
+	>     work.series() = series;
+	64a70,71
+	>     for (unsigned i = 0; i < nb_state; i++)
+	>       work.add_state();
+	73c80
+	<       work.add_letter_edge(*i, *prev, alpha.choose());
+	---
+	>       work.add_letter_edge(*prev, *i, alpha.choose());
+	81a89,90
+	>
+	>     work.set_initial(*work.states().begin());
+	83c92
+	<     for (unsigned i = 0; i < istate; i++)
+	---
+	>     for (unsigned i = 1; i < istate; i++)
+	90a100
+	>     work.set_final(*--work.states().end());
+	92c102
+	<     for (unsigned i = 0; i < fstate; i++)
+	---
+	>     for (unsigned i = 1; i < fstate; i++)
+	*Index: 0.72/src/tests/automata/algos/normalize_test.hh : minor changes
+
 2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.72)
 	* src/tests/automata/algos/minimisation_test.hh : added.
