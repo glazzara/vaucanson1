@@ -1,7 +1,7 @@
 // random.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -102,7 +102,8 @@ namespace utility {
     template<>
     inline float generate<float>()
     {
-      // This formula comes from the caml stdlib.
+      // This formula comes from the caml stdlib. It generates numbers
+      // between -2 and 2 (values that can be starable or not).
       return (((static_cast<float> (rand()) / RAND_MAX +
 		static_cast<float> (rand())) / RAND_MAX +
 	       static_cast<float> (rand())) / RAND_MAX) * 4 - 2;
@@ -122,6 +123,8 @@ namespace utility {
     template<>
     inline double generate<double>()
     {
+      // This formula comes from the caml stdlib. It generates numbers
+      // between -2 and 2 (values that can be starable or not).
       return (((static_cast<double> (rand()) / RAND_MAX +
 	       static_cast<double> (rand())) / RAND_MAX +
 	      static_cast<double> (rand())) / RAND_MAX) * 4 - 2;
@@ -204,4 +207,4 @@ namespace utility {
 
 } // vcsn
 
-#endif // VCSN_MISC_RANDOM_HXX
+#endif // ! VCSN_MISC_RANDOM_HXX

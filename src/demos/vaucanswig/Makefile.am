@@ -1,3 +1,3 @@
-SUBDIRS = meta src python
-EXTRA_DIST = build-process.txt meta-build-process.txt
+SUBDIRS = doc meta src python
+EXTRA_DIRST = expand.sh
 

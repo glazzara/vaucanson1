@@ -17,21 +17,22 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_PRODUCT_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_PRODUCT_TEST_HH
 
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
 # include <krat_exp_partial_derivation_common.hh>
 
@@ -66,7 +67,7 @@ bool krat_exp_partial_derivation_product_test(tests::Tester& tg)
       std::set<krat_exp_t> deriv_b =
 	(rhs_b.first == zero_as<typename Expr::value_t>::of(series)) ?
 	std::set<krat_exp_t>() : lhs_b.second ^ rhs_b.first;
-      
+
       std::pair<typename krat_exp_t::semiring_elt_t, bool> c =
         constant_term(lhs_a.first);
       if (c.second && c.first != semiring.zero(SELECT(kexp_semiring_elt_value_t)))
@@ -74,15 +75,15 @@ bool krat_exp_partial_derivation_product_test(tests::Tester& tg)
       c = constant_term(lhs_b.first);
       if (c.second && c.first != semiring.zero(SELECT(kexp_semiring_elt_value_t)))
 	deriv_b = deriv_b + rhs_b.second;
- 
+
       TEST_DERIVATE(tsts, sucs, lhs_a.first * rhs_a.first, a, deriv_a);
       TEST_DERIVATE(tsts, sucs, lhs_b.first * rhs_b.first, b, deriv_b);
     }
-  
+
   std::string rate;
   SUCCESS_RATE(rate, sucs, tsts);
   TEST(t, "Various derivation tests on a product. " + rate, sucs == tsts);
   return t.all_passed();
 }
 
-#endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_PRODUCT_TEST_HH
+#endif // ! VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_PRODUCT_TEST_HH

@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -29,8 +29,8 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_TRANSPOSE_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_TRANSPOSE_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_TRANSPOSE_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_TRANSPOSE_HXX
 
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
@@ -58,7 +58,7 @@ namespace vcsn {
       typedef typename monoid_t::alphabet_t		alphabet_t;
       typedef typename alphabet_t::letter_t		letter_t;
       INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
-      
+
       KRatExpTranspose(const Element<Series, T>& exp) :
 	KRatExpIdentity<KRatExpTranspose<Series, T, Dispatch>,
       			Series,
@@ -75,17 +75,17 @@ namespace vcsn {
 
       MATCH_(Constant, m)
       {
-	monoid_elt_t melt (exp_.structure().monoid(), m);
+	monoid_elt_t melt (this->exp_.structure().monoid(), m);
 	melt.mirror();
-	return Element<Series, T> (exp_.structure(), melt);
+	return Element<Series, T> (this->exp_.structure(), melt);
       }
       END
-      
+
     };
-      
+
 
   } // algebra
 
 }
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_TRANSPOSE_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_TRANSPOSE_HXX

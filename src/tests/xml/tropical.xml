@@ -19,13 +19,13 @@
     <state name="three"/>
   </states>
 
-  <edges>
-    <edge label="(2 C)" src="zero" dst="one"/>
-    <edge label="(3 B)" src="two" dst="one"/>
-    <edge label="(1 A)" src="one" dst="one"/>
-    <edge label="(8 1)" src="two" dst="three"/>
-    <edge label="(2 C)" src="three" dst="three"/>
-  </edges>
+  <transitions>
+    <transition label="(2 C)" src="zero" dst="one"/>
+    <transition label="(3 B)" src="two" dst="one"/>
+    <transition label="(1 A)" src="one" dst="one"/>
+    <transition label="(8 1)" src="two" dst="three"/>
+    <transition label="(2 C)" src="three" dst="three"/>
+  </transitions>
 
   <initials>
     <initial state="zero"/>

@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_XML_LOADER_HXX
 # define VCSN_XML_XML_LOADER_HXX
@@ -33,57 +35,38 @@
 # include <vaucanson/xml/xml_loader.hh>
 
 # include <vaucanson/xml/types.hh>
+# include <vaucanson/xml/xml_set.hh>
+# include <vaucanson/xml/xml_value.hh>
+# include <vaucanson/xml/xml_automaton.hh>
 
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
 # include <iostream>
+# include <sstream>
 
 namespace vcsn
 {
   namespace xml
   {
     template <typename Saver, typename Conv>
-    inline
     void
-    xml_loader::operator()(std::ostream& out,
-			   const Saver& s,
-			   const Conv&) const
+    xml_loader::operator () (std::ostream& out,
+			     const Saver& s,
+			     const Conv&) const
     {
-      typedef typename Saver::automaton_t auto_t;
-      typedef typename XmlOf<auto_t>::ret xml_auto_t;
-      AUTOMATON_TYPES(auto_t);
-
-      const automaton_t& a = s.automaton();
-
-      xml_auto_t xml_a;
-
-      xml_a = a;
-
-      out << xml_a;
+      out << xml_automaton_t (s.automaton());
     }
 
     template <typename Loader>
-    inline
     void
-    xml_loader::operator()(std::istream& in, Loader& l)
+    xml_loader::operator () (std::istream& in, Loader& l)
     {
-      typedef typename Loader::automaton_t auto_t;
-      typedef typename XmlOf<auto_t>::ret xml_auto_t;
-      AUTOMATON_TYPES(auto_t);
-
-      xml_automaton_t dyn_xml_a;
-      xml_auto_t xml_a;
-
-      automaton_t& a = l.automaton();
-
-      in >> dyn_xml_a;
-
-      xml_a = dyn_xml_a;
-
-      a = xml_a;
+      xml_automata_set_t	s;
+      xml_automaton_t		a (s);
+      in >> a;
+      l.automaton() = a;
     }
   }
 }
 
-#endif // VCSN_XML_XML_LOADER_HXX
+#endif // ! VCSN_XML_XML_LOADER_HXX

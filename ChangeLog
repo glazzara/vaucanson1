@@ -1,3 +1,7 @@
+2005-02-01  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* Merge trunk into FMP branch
+
 2005-01-28  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
@@ -81,6 +85,2198 @@
 
 	* fmp: Apply changes done in trunk to the fmp branch. See the two
 	previous Changelog entries.
+
+2004-05-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/concat_test.hh: Fix the test so it checks
+	multiplicity correctness.
+
+2004-05-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/contextual_automaton_functions.hh,
+	* include/vaucanson/contextual_transducer_functions.hh:
+	Rename to...
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_transducer_functions.thh: These.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh: Update accordingly.
+
+2005-01-19  Raphael Poss  <raph@lrde.epita.fr>
+
+	* FAQ: Remove in favor of doc/FAQ.txt.
+
+2005-01-19  Raphael Poss  <raph@lrde.epita.fr>
+
+	* README: Refer to the doc/ subdirectory.
+
+	* NEWS: Rewrite to...
+	* doc/NEWS.txt: ...this. Prepare section for next release.
+
+	* doc/Makefile.am: Generate HTML and PDF for NEWS.
+
+2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
+
+	Fix a compiler warning introducted on 2005-01-14 (SetSlot
+	optimisation). Simplify.
+
+	* include/vaucanson/design_pattern/element.hxx: Simplify call to
+	base constructor.
+	* include/vaucanson/algebra/implementation/series/series.hxx:
+	Likewise.
+
+	* include/vaucanson/design_pattern/element.hxx: Prepend call to
+	member of base class with "this->" since G++ 3.4 whines about it.
+	* include/vaucanson/automata/concept/automata.hxx,
+	* include/vaucanson/automata/concept/transducer.hxx: Likewise.
+
+2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
+
+	* reheader.pl: Add 2005 to copyright appends.
+
+	* Makefile.am: Mention forgotten xml.m4 in the installable m4
+	extensions. Remove EXTRA_DIST since the dist_m4data_DATA already
+	mentions the files.
+
+2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
+
+	Document some more.
+
+	* doc/FAQ.txt: Document a hidden misfeature of the expression
+	parser (a 2*).
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh:
+	Fix minor typo.
+
+	* src/demos/vaucanswig/doc/build-process.txt: Rewrite in
+	reStructured Text format. Clarify documentation.
+	* src/demos/vaucanswig/doc/meta-build-process.txt: Likewise.
+	* src/demos/vaucanswig/doc/Makefile.am: Generate HTML and PDF
+	output for build-process.txt and meta-build-process.txt.
+
+2005-01-18  Raphael Poss  <raph@lrde.epita.fr>
+
+	Allow for distribution of the whole test suite. Before this patch,
+	tar choked on filenames longer than 99 characters, and source
+	names in the test suites are longer than that. Note that this
+	patch requires GNU Automake >=1.9.
+
+	* configure.ac: Use Automake option 'tar-ustar' for more potent
+	use of tar during distribution.
+
+2005-01-16  Raphael Poss  <raph@lrde.epita.fr>
+
+	Update documentation.
+
+	* doc/README.txt: Fix some mistakes. Add a "See Also" section.
+
+	* src/demos/fsm/README: Rewrite to...
+	* src/demos/fsm/README.txt: ...this.
+
+	* src/demos/vaucanswig/doc,
+	* src/demos/vaucanswig/doc/Makefile.am: New directory.
+	* src/demos/vaucanswig/Makefile.am: Update accordingly.
+
+	* src/demos/vaucanswig/README: Rewrite to...
+	* src/demos/vaucanswig/doc/README.txt: ...this. Fix some
+	mistakes. Add more information. Change the layout for easier
+	reading.
+
+	* src/demos/vaucanswig/build-process.txt,
+	* src/demos/vaucanswig/meta-build-process.txt: Rename to...
+	* src/demos/vaucanswig/doc/build-process.txt,
+	* src/demos/vaucanswig/doc/meta-build-process.txt: ...these.
+
+	* src/demos/vaucanswig/doc/Makefile.am: Build documentation.
+
+	* src/demos/vaucanswig/Makefile.am: Distribute expand.sh, since it
+	is mentioned in the documentation.
+
+2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
+
+	Cleanup documentation subsystem. Use reStructuredText more.
+
+	* doc/xml/Makefile.am,
+	* doc/beginner/Makefile.am,
+	* doc/Makefile.am: Factor common code to...
+	* doc/Makefile.doc: ...this file.
+
+	* configure.ac: Also configure for RST2HTML.
+
+	* README,
+	* FAQ,
+	* INSTALL: Rewrite to...
+	* doc/README.txt,
+	* doc/FAQ.txt,
+	* doc/INSTALL.txt: ...these. Do not remove the originals yet.
+
+	* doc/Makefile.am: Also generate HTML output.
+	* doc/xml/Makefile.am: Likewise. Drop DVI output.
+
+	* doc/beginner/Makefile.am: Simplify.
+
+	* HEADER: Get rid of obsolete file.
+
+2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
+
+	Get rid of the dependency on sgml2latex, which comes from
+	a huge, obsolete, non-portable and broken package.
+
+	Use reStructuredText from Docutils instead.
+	See: http://docutils.sourceforge.net/rst.html
+
+	* doc/xml/dev.sgml: Rewrite to...
+	* doc/xml/dev.txt: ...this. Fix (some) mistakes.
+	* doc/xml/format.sgml: Rewrite to...
+	* doc/xml/format.txt: ...this. Fix (some) mistakes.
+
+	* doc/xml/Makefile.am: Update accordingly. Cleanup.
+
+	* configure.ac: Configure for RST2TEX. Remove configuration for
+	SGML2TEX.
+
+	* doc/beginner/Makefile.am,
+	* doc/tutorial/Makefile.am: Use properly autoconf expansions.
+
+2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
+
+	* src/tests/bin/generate-test-suite.sh: Take care of stripping
+	extraneous '/' before header names to test.
+
+2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
+
+        Sanitize the behaviour of Xerces-C++ configuration.
+
+	* config/xml.m4: Change help messages. Use the autoconf variable
+	cache. Test for availability of the Xerces-C++ library beside the
+	headers. Append detected values to standard variables.
+
+	* Makefile.am: Make configure depend on config/xml.m4.
+
+	* src/tests/sanity/generate_files.sh,
+	* src/tests/xml/Makefile.am,
+	* src/demos/xml/samples/Makefile.am,
+	* src/demos/xml/Makefile.am: Update accordingly.
+
+2005-01-14  Raphael Poss  <raph@lrde.epita.fr>
+
+	Optimize according to advice given by Thomas Claveirole
+	<thomas.claveirole@lrde.epita.fr> in
+	<b5866f93050114064454fb67b9@mail.gmail.com>: Use SetSlot<> by
+	derivation instead of composition. Inherit SetSlot<> as a private
+	base class so that it does not interfere with the selection of
+	template specializations of operators.
+
+	* include/vaucanson/design_pattern/slots.hh: Prefix methods with
+	_structure_ so that they do not collide with MetaElement methods
+	when inherited by Element. Allow tagging SetSlot<S> classes for
+	unambiguous multiple inheritance.
+	* include/vaucanson/design_pattern/slots.hxx: Modify accordingly.
+
+	* include/vaucanson/design_pattern/predecls.hh: Use a default
+	type for the SetSlot tag argument.
+
+	* include/vaucanson/design_pattern/element.hh: Remove the
+	structure_ attribute. Inherit from SetSlot<S> instead.
+	* include/vaucanson/design_pattern/element.hxx: Modify
+	accordingly.
+
+	* include/vaucanson/algebra/implementation/series/series.hh:
+	Remove the semiring_ and monoid_ attributes. Inherit from
+	SetSlot<Semiring,semiring_slot_tag> and
+	SetSlot<Monoid,monoid_slot_tag> instead.
+
+	* include/vaucanson/algebra/implementation/series/series.hxx:
+	Modify accordingly.
+
+	* include/vaucanson/automata/concept/automata.hh,
+	* include/Vaucanson/automata/concept/tranducer.hh: Remove the
+	series_ attribute. Inherit from SetSlot<Series> instead.
+
+	* include/vaucanson/automata/concept/automata.hxx,
+	* include/vaucanson/automata/concept/transducer.hxx: Modify
+	accordingly.
+
+	* src/tests/design_pattern/intrinsics_size.cc,
+	* src/tests/design_pattern/Makefile.am: Add new test for this
+	optimisation.
+
+2004-12-03  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	Do not handle character escaping directly. Remove memory leaks by
+	registering callback in streams. Move iomanip and escaped characters
+	handling in the following files.
+	* include/vaucanson/misc/iomanip.hh,
+	* include/vaucanson/misc/iomanip.hxx: New. Base class for
+	IO manipulators and related functions. Mostly comes from
+	dump_visitor.hh and dump_visitor.hxx.
+	* include/vaucanson/misc/escaper.hh,
+	* include/vaucanson/misc/escaper.hxx: New. Stuff related with caracter
+	escaping. Mostly comes from dump_visitor.hh and dump_visitor.hxx.
+	* include/Makefile.am: Update.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Use
+	utility::escaper.
+	* include/vaucanson/tools/usual_escaped_characters.hh: Add comments.
+
+2004-12-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Another bug from Petr Ambroz. See below for more information.
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	Do not get iterators on strings returned by the str() method of
+	std::ostringstream, that is not safe.
+
+2004-12-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Fix the bug reported by Petr Ambroz <ampy@liafa.jussieu.fr> in
+	<mailman.103.1101739592.787.vaucanson-bugs@lrde.epita.fr>. It was
+	due to a loop which used iterators on strings constructed by an
+	std::ostringstream. In fact, nothing guarantees that two
+	consecutive calls to the str() method will return a string with
+	the same storage. Although correct with many versions of GCC, it
+	does not work with GCC 3.4.2.
+
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	Do not get iterators on strings returned by the str() method of
+	std::ostringstream, that is not safe.
+
+2004-11-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_transducer_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx,
+	* include/vaucanson/contextual_transducer_functions.thxx: Manually fix
+	typo for Sylvain's email.
+
+2004-10-26  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* configure.ac: Bump to Vaucanson 0.6.1.
+	* NEWS: Set the date for 0.6.1.
+
+2004-10-26  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/samples/Makefile.am: Fix dependencies and build rules
+	for the generated XML samples.
+
+2004-10-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/automata/implementation/graph.hxx (del_edge,
+	del_state): Remove useless tests when shrinking the states/edges
+	vector. Fix assertions. Uniformize assertions.
+
+2004-10-18  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Minor fixes.
+
+2004-10-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/vaucanswig/expand.sh: Swig use -noruntime instead of -c.
+
+2004-10-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Apply the patch proposed by  Nicolas Stroppa in vaucanson-patches:
+	Message-ID: <mailman.48.1097855753.6231.vaucanson@lrde.epita.fr>
+
+	* include/vaucanson/automata/implementation/graph.hxx (del_state): Fix
+	invalid assertions.
+
+2004-10-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Update.
+
+2004-10-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* README: Typo.
+
+2004-10-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* config/vcsn.m4: Add documentation about ICC flags.
+
+2004-10-13  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* NEWS: Typo.
+
+2004-10-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* config/vcsn.m4: Set decent warning flags when ICC is used.
+
+2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/sanity/generate_files.sh: Generate a test_base.cc which is
+	valid both for g++ and ICC.
+
+2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/vaucanson.hh: Typo.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx,
+	* include/vaucanson/xml/types.hh:
+	Fix Doxygen grouping.
+	* include/vaucanson/xml/xml_set.hh: Fix the @param in the XmlStructure
+	constructor documentation.
+	* include/vaucanson/algebra/algebra.hh: Fix Doxygen links.
+	* include/vaucanson/xml/dynamic.hh,
+	* include/vaucanson/xml/session.hxx: s/vaucanson/Vaucanson/ in
+	comments.
+	* include/vaucanson/algorithms/evaluation.hh: Fix a Doxygen link.
+	Remove internal functions from the documentation.
+
+2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* README: Update.
+
+2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh: Use
+	INT_MAX instead of unsigned (-1).
+
+2004-10-11  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* NEWS: Add an entry about replacement of verbalize by expand.
+
+2004-10-11  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_expand_test.hh: Complete
+	with tests on stared expressions.
+
+2004-10-11  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/Makefile.am: Remove krat_exp_verbalization entries.
+	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hh: Delete.
+	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hxx: Delete.
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh:
+	Move to...
+	* src/tests/algebra/series/krat/main/krat_exp_expand_test.hh: ...this.
+	* src/tests/algebra/series/krat/main/Makefile.am: Replace
+	krat_exp_verbalization_test by krat_exp_expand_test.
+	* ChangeLog: Complete old comments.
+
+2004-10-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Be compatible with g++ 3.2, 3.3, 3.4 and ICC 8.1.
+
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx:
+	Include sstream.
+	* include/vaucanson/algebra/implementation/series/transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hxx:
+	Include vaucanson/misc/contract.hh.
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx:
+	Include algorithm.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	Fix an ambiguity with krat_exp_lexing::dot.
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh,
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx:
+	Specialize std::numeric_limits and utility::limits for
+	RationalNumber.
+	* include/vaucanson/xml/xml_loader.hxx: Do not include
+	design_pattern/element.hh. Include vaucanson/xml_set.hh,
+	vaucanson/xml_value.hh, vaucanson/xml_automaton.hh and sstream.
+	* include/vaucanson/tools/dot_format.hh: Include iostream.
+	* include/vaucanson/tools/dot_format.hxx: Include sstream.
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx: Fix
+	a constructor call.
+	* include/vaucanson/automata/concept/history.hxx: Fix the invalid
+	use of iterators.
+	* include/vaucanson/automata/concept/kinds.hxx: Include
+	vaucanson/tools/container_ops.hh. Use identity_as instead of
+	identity_value. Change invalid calls to algebra::op_begin into
+	calls to op_begin.
+	* src/tests/design_pattern/intrinsics.hh: Specify this-> for
+	attributes.
+
+2004-10-06  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* configure.ac: Minor update.
+
+2004-10-06  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* README: Update.
+
+2004-10-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* configure.ac: Disable Vaucanswig by default.
+
+2004-09-30  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* reheader.pl: s/represents/consists of/, s/@iafa/@liafa/.
+	* include/vaucanson/contextual_headers.hh,
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/standard_algorithms.hh,
+	* include/vaucanson/misc/support.hxx,
+	* include/vaucanson/misc/static.hh,
+	* include/vaucanson/misc/random.hxx,
+	* include/vaucanson/misc/bitset.hh,
+	* include/vaucanson/misc/deferrer.hh,
+	* include/vaucanson/misc/limits.hh,
+	* include/vaucanson/misc/bitset.hxx,
+	* include/vaucanson/misc/utility.hh,
+	* include/vaucanson/misc/special_char_traits.hh,
+	* include/vaucanson/misc/selectors.hh,
+	* include/vaucanson/misc/char_traits.hh,
+	* include/vaucanson/misc/deferrer.hxx,
+	* include/vaucanson/misc/unique.hh,
+	* include/vaucanson/misc/constraints.hh,
+	* include/vaucanson/misc/window.hh,
+	* include/vaucanson/misc/char_traits.hxx,
+	* include/vaucanson/misc/support.hh,
+	* include/vaucanson/misc/contract.hh,
+	* include/vaucanson/misc/unique.hxx,
+	* include/vaucanson/misc/window.hxx,
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/vaucanson.hh,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/range.hxx,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/char_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/range.hh,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hxx,
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hxx,
+	* include/vaucanson/algebra/implementation/alphabets/alphabets.hh,
+	* include/vaucanson/algebra/implementation/alphabets/predefs.hh,
+	* include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh,
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/words.hxx,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/tools.hxx,
+	* include/vaucanson/algebra/implementation/free_monoid/predefs.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hxx,
+	* include/vaucanson/algebra/implementation/free_monoid/words.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/tools.hh,
+	* include/vaucanson/algebra/implementation/predefs.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dispatch_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hh,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dispatch_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hxx,
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/implementation/series/generalized.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh,
+	* include/vaucanson/algebra/implementation/series/series.hh,
+	* include/vaucanson/algebra/implementation/series/krat_coefficient.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hh,
+	* include/vaucanson/algebra/implementation/series/generalized.hxx,
+	* include/vaucanson/algebra/implementation/series/series.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_conversion.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hh,
+	* include/vaucanson/algebra/implementation/series/krat_coefficient.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hh,
+	* include/vaucanson/algebra/implementation/series/krat_conversion.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_is_finite_app.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hxx,
+	* include/vaucanson/algebra/implementation/series/transpose.hh,
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh,
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx,
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hh,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/concept/freemonoid_base.hh,
+	* include/vaucanson/algebra/concept/tropical_semiring.hxx,
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/numerical_semiring.hxx,
+	* include/vaucanson/algebra/concept/monoid_base.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx,
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	* include/vaucanson/algebra/concept/letter.hh,
+	* include/vaucanson/algebra/concept/semigroup_base.hh,
+	* include/vaucanson/algebra/concept/alphabets_base.hxx,
+	* include/vaucanson/algebra/concept/semiring_base.hh,
+	* include/vaucanson/algebra/concept/tropical_semiring.hh,
+	* include/vaucanson/algebra/concept/semigroup_base.hxx,
+	* include/vaucanson/algebra/concept/numerical_semiring.hh,
+	* include/vaucanson/algebra/concept/monoid_base.hh,
+	* include/vaucanson/algebra/concept/semiring_base.hxx,
+	* include/vaucanson/algebra/algebra.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/xml/xml_ops.hh,
+	* include/vaucanson/xml/xml_set.hxx,
+	* include/vaucanson/xml/session.hh,
+	* include/vaucanson/xml/dynamic.hh,
+	* include/vaucanson/xml/error_handler.hh,
+	* include/vaucanson/xml/xml_loader.hh,
+	* include/vaucanson/xml/static.hh,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/if_tag.hh,
+	* include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/strings.hh,
+	* include/vaucanson/xml/ios.hh,
+	* include/vaucanson/xml/session.hxx,
+	* include/vaucanson/xml/xml_value.hh,
+	* include/vaucanson/xml/callback.hh,
+	* include/vaucanson/xml/error_handler.hxx,
+	* include/vaucanson/xml/xml_loader.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx,
+	* include/vaucanson/xml/strings.hxx,
+	* include/vaucanson/xml/if_tag.hxx,
+	* include/vaucanson/xml/ios.hxx,
+	* include/vaucanson/xml/callback.hxx,
+	* include/vaucanson/xml/types.hh,
+	* include/vaucanson/xml/xml_value.hxx,
+	* include/vaucanson/xml/defaults.hh,
+	* include/vaucanson/xml/xml_set.hh,
+	* include/vaucanson/xml/errors.hh,
+	* include/vaucanson/xml/generic.hh,
+	* include/vaucanson/xml/infos.hh,
+	* include/vaucanson/tools/gen_random.hxx,
+	* include/vaucanson/tools/fsm_dump.hxx,
+	* include/vaucanson/tools/dot_dump.hxx,
+	* include/vaucanson/tools/gen_book.hh,
+	* include/vaucanson/tools/dot_display.hxx,
+	* include/vaucanson/tools/usual_escaped_characters.hxx,
+	* include/vaucanson/tools/automaton_tools.hh,
+	* include/vaucanson/tools/usual_io.hxx,
+	* include/vaucanson/tools/gen_book.hxx,
+	* include/vaucanson/tools/usual_macros.hh,
+	* include/vaucanson/tools/dot_format.hh,
+	* include/vaucanson/tools/simple_format.hh,
+	* include/vaucanson/tools/container_ops.hh,
+	* include/vaucanson/tools/dot_format.hxx,
+	* include/vaucanson/tools/io.hh,
+	* include/vaucanson/tools/gen_random.hh,
+	* include/vaucanson/tools/simple_format.hxx,
+	* include/vaucanson/tools/fsm_dump.hh,
+	* include/vaucanson/tools/dot_dump.hh,
+	* include/vaucanson/tools/container_ops.hxx,
+	* include/vaucanson/tools/dot_display.hh,
+	* include/vaucanson/tools/usual_escaped_characters.hh,
+	* include/vaucanson/tools/io.hxx,
+	* include/vaucanson/tools/usual_io.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/config/system.hh,
+	* include/vaucanson/config/math.hh,
+	* include/vaucanson/design_pattern/element_ops.hxx,
+	* include/vaucanson/design_pattern/element.hh,
+	* include/vaucanson/design_pattern/structure.hh,
+	* include/vaucanson/design_pattern/predecls.hh,
+	* include/vaucanson/design_pattern/element.hxx,
+	* include/vaucanson/design_pattern/meta_element_root.hh,
+	* include/vaucanson/design_pattern/syntactic_decorator.hh,
+	* include/vaucanson/design_pattern/slots.hh,
+	* include/vaucanson/design_pattern/default_ops.hh,
+	* include/vaucanson/design_pattern/design_pattern.hh,
+	* include/vaucanson/design_pattern/structure.hxx,
+	* include/vaucanson/design_pattern/element_ops.hh,
+	* include/vaucanson/design_pattern/meta_element_root.hxx,
+	* include/vaucanson/design_pattern/syntactic_decorator.hxx,
+	* include/vaucanson/design_pattern/slots.hxx,
+	* include/vaucanson/design_pattern/element_op_traits.hh,
+	* include/vaucanson/design_pattern/default_ops.hxx,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/transpose.hxx,
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx,
+	* include/vaucanson/algorithms/finite_support_conversion.hxx,
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/realtime_decl.hh,
+	* include/vaucanson/algorithms/standard_of.hxx,
+	* include/vaucanson/algorithms/accessible.hh,
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/realtime_decl.hxx,
+	* include/vaucanson/algorithms/krat_exp_cderivation.hh,
+	* include/vaucanson/algorithms/sum.hh,
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/is_letterized.hh,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/complement.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/extension.hh,
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hh,
+	* include/vaucanson/algorithms/internal/build_pattern.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/internal/build_pattern.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/sub_automaton.hh,
+	* include/vaucanson/algorithms/brzozowski.hh,
+	* include/vaucanson/algorithms/trim.hxx,
+	* include/vaucanson/algorithms/closure.hxx,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx,
+	* include/vaucanson/algorithms/standard_of.hh,
+	* include/vaucanson/algorithms/realtime_composition.hh,
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx,
+	* include/vaucanson/algorithms/eval.hh,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/krat_exp_flatten.hh,
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	* include/vaucanson/algorithms/is_normalized.hh,
+	* include/vaucanson/algorithms/backward_realtime.hh,
+	* include/vaucanson/algorithms/krat_exp_derivation.hh,
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	* include/vaucanson/algorithms/krat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hh,
+	* include/vaucanson/algorithms/aci_canonical.hxx,
+	* include/vaucanson/algorithms/closure.hh,
+	* include/vaucanson/algorithms/derivatives_automaton.hh,
+	* include/vaucanson/algorithms/is_letterized.hxx,
+	* include/vaucanson/algorithms/evaluation.hxx,
+	* include/vaucanson/algorithms/finite_support_conversion.hh,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/krat_exp_linearize.hh,
+	* include/vaucanson/algorithms/thompson.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/algorithms/product.hh,
+	* include/vaucanson/algorithms/krat_exp_expand.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/berry_sethi.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/krat_exp_flatten.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hh,
+	* include/vaucanson/algorithms/complement.hh,
+	* include/vaucanson/algorithms/search.hh,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/isomorph.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hh,
+	* include/vaucanson/algorithms/trim.hh,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/krat_exp_expand.hh,
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/krat_exp_constant_term.hh,
+	* include/vaucanson/algorithms/transpose.hh,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/concatenate.hh,
+	* include/vaucanson/algorithms/krat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/forward_realtime.hh,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/algorithms/is_realtime.hh,
+	* include/vaucanson/algorithms/krat_exp_realtime.hh,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/standard.hh,
+	* include/vaucanson/algorithms/isomorph.hh,
+	* include/vaucanson/algorithms/realtime.hh,
+	* include/vaucanson/algorithms/aci_canonical.hh,
+	* include/vaucanson/algorithms/normalized.hh,
+	* include/vaucanson/algorithms/is_realtime.hxx,
+	* include/vaucanson/algorithms/thompson.hh,
+	* include/vaucanson/algorithms/aut_to_exp.hh,
+	* include/vaucanson/algorithms/is_normalized.hxx,
+	* include/vaucanson/algorithms/evaluation.hh,
+	* include/vaucanson/algorithms/complete.hh,
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx,
+	* include/vaucanson/algorithms/sum.hxx,
+	* include/vaucanson/algorithms/projection.hh,
+	* include/vaucanson/algorithms/determinize.hh,
+	* include/vaucanson/algorithms/berry_sethi.hh,
+	* include/vaucanson/automata/implementation/generalized.hxx,
+	* include/vaucanson/automata/implementation/automaton_view.hh,
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/kind_adapter.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/automata/implementation/graph.hxx,
+	* include/vaucanson/automata/implementation/automaton_view.hxx,
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/automata/implementation/kind_adapter.hxx,
+	* include/vaucanson/automata/implementation/transpose_view.hxx,
+	* include/vaucanson/automata/concept/copy.hxx,
+	* include/vaucanson/automata/concept/transducer.hxx,
+	* include/vaucanson/automata/concept/automata.hxx,
+	* include/vaucanson/automata/concept/transducer_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/translate.hh,
+	* include/vaucanson/automata/concept/tags.hh,
+	* include/vaucanson/automata/concept/delta_kind.hh,
+	* include/vaucanson/automata/concept/handlers.hh,
+	* include/vaucanson/automata/concept/history.hh,
+	* include/vaucanson/automata/concept/transducer_ops.hxx,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/translate.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/tags.hxx,
+	* include/vaucanson/automata/concept/handlers.hxx,
+	* include/vaucanson/automata/concept/kinds.hh,
+	* include/vaucanson/automata/concept/history.hxx,
+	* include/vaucanson/automata/concept/copy.hh,
+	* include/vaucanson/automata/concept/transducer.hh,
+	* include/vaucanson/automata/concept/automata.hh,
+	* include/vaucanson/automata/concept/transducer_base.hxx,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/kinds.hxx,
+	* include/vaucanson/automata/concept/automata_kind.hh,
+	* src/tests/context_headers/automata/global_consistency_test.hh,
+	* src/tests/context_headers/transducers/global_consistency_test.hh,
+	* src/tests/k_automata/standard_of_regression_test.hh,
+	* src/tests/design_pattern/design_pattern-test.hh,
+	* src/tests/design_pattern/intrinsics.hh,
+	* src/tests/boolean_automata/brzozowski_test.hh,
+	* src/tests/automata/implementation_check/add_state_test.hh,
+	* src/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/automata/implementation_check/add_edge_test.hh,
+	* src/tests/automata/implementation_check/init_final_test.hh,
+	* src/tests/automata/implementation_check/coherence_state_edge_test.hh,
+	* src/tests/automata/implementation_check/global_consistency_test.hh,
+	* src/tests/automata/algos/determinist_test.hh,
+	* src/tests/automata/algos/generalized_test.hh,
+	* src/tests/automata/algos/is_isomorph_test.hh,
+	* src/tests/automata/algos/accessible_test.hh,
+	* src/tests/automata/algos/in_concat_test.hh,
+	* src/tests/automata/algos/normalize_test.hh,
+	* src/tests/automata/algos/realtime_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/aci_canonical_test.hh,
+	* src/tests/automata/algos/sum_test.hh,
+	* src/tests/automata/algos/reachable_test.hh,
+	* src/tests/automata/algos/thompson_test.hh,
+	* src/tests/automata/algos/concat_test.hh,
+	* src/tests/automata/algos/minimization_test.hh,
+	* src/tests/automata/algos/complete_test.hh,
+	* src/tests/automata/algos/elimination_test.hh,
+	* src/tests/automata/algos/extract_test.hh,
+	* src/tests/automata/algos/trim_test.hh,
+	* src/tests/automata/algos/closure_test.hh,
+	* src/tests/automata/algos/compute_test.hh,
+	* src/tests/automata/algos/derivatives_automaton_test.hh,
+	* src/tests/automata/algos/extension_test.hh,
+	* src/tests/automata/algos/transpose_test.hh,
+	* src/tests/automata/algos/berry_sethi_test.hh,
+	* src/tests/automata/algos/product_test.hh,
+	* src/tests/automata/algos/sub_automaton_test.hh,
+	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh,
+	* src/tests/automata/algos/product_regression_test.hh,
+	* src/tests/transducers/realtime_test.hh,
+	* src/tests/algebra/alphabets/alphabet_torture_test.hh,
+	* src/tests/algebra/alphabets/alphabet_test.hh,
+	* src/tests/algebra/free_monoid/free_monoid_test.hh,
+	* src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh,
+	* src/tests/algebra/free_monoid/constructor_without_arguments2_failcomp.hh,
+	* src/tests/algebra/series/krat/boolean/krat_exp_cderivation_linear_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_common.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh,
+	* src/tests/algebra/series/misc/series_test.hh,
+	* src/tests/algebra/series/polynom/series_polynom_test.hh,
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh,
+	* src/tests/algebra/semiring/semiring_test.hh,
+	* src/tests/check/tester.hh,
+	* src/demos/fsm/usual_automaton_t/toolbox.hh,
+	* src/demos/fsm/usual_automaton_t/arg.hh,
+	* src/demos/fsm/arg.hh,
+	* src/demos/vaucanswig/meta/context.hh,
+	* src/demos/vaucanswig/meta/automaton.hh,
+	* src/demos/vaucanswig/meta/vcontext.hh,
+	* src/demos/vaucanswig/meta/vauto.hh: Update headers.
+
+2004-09-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/algorithms.cc: Improve. Minor fix in comments. Factor.
+	Use an array of pointer to functions for command handling. Allow the
+	user to specify a state list for the state elimination algorithm.
+
+2004-09-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	This  change creates a  src/demos/xml/samples directory,  in which
+	sample XML files may be found. Programs that generate XML automata
+	are also included.  Those samples  have been designed for the CIAA
+	2004 conference.
+
+	* src/demos/xml/samples/lomb2.cc, src/demos/xml/samples/c1.cc,
+	* src/demos/xml/samples/occ_b.cc, src/demos/xml/samples/double_ring.cc,
+	* src/demos/xml/samples/divkbaseb.cc, src/demos/xml/samples/lomb1.cc:
+	New. Sources to generate XML sample files.
+	* src/demos/xml/samples/div3base2.xml, src/demos/xml/samples/c1.xml,
+	* src/demos/xml/samples/occ_b.xml, src/demos/xml/samples/lomb1.xml,
+	* src/demos/xml/samples/lomb2.xml,
+	* src/demos/xml/samples/double_ring6.xml: New. Sample automata.
+	* src/demos/xml/samples/Makefile.am: New.
+	* src/demos/xml/Makefile.am, configure.ac: Update.
+
+2004-09-06  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	This change  updates algorithms.cc according  to the modifications
+	that have been done at CIAA 2004 for demonstrations. The universal
+	automaton  computation  algorithm, however,  has  not been  added,
+	since  no generic  algorithm  exists  in Vaucanson  to  do such  a
+	computation.
+
+	* src/demos/xml/Makefile.am: Compile algorithms.cc for various
+	contexts.
+	* src/demos/xml/algorithms.cc: Update. Add transpose and eval to
+	the list of algorithms.
+
+2004-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh:
+	Remove useless inclusion to check/tester.hh. Clean comments. Use
+	const references instead of values for operator <<. Simplify the
+	test loop.
+
+2004-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	Use enum constants from Node<Word, Weight> to identify node types,
+	instead of duplicating the enumeration.
+
+2004-08-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Fix  some  compilation  errors   with  ICC.   The  compilation  of
+	Vaucanswig has  not been tested,  neither has the test  suite. But
+	`make' works correctly.
+
+	* include/vaucanson/misc/unique.hh, include/vaucanson/misc/unique.hxx:
+	Do not use the preprocessor to declare ti_slot, unique_map and
+	uniquelist_base. Use typedef instead.
+	* include/vaucanson/misc/deferrer.hxx: Use memset() instead of bzero().
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	Fix ambiguous references to plus.
+	* include/vaucanson/automata/concept/transducer_base.hh: Remove a
+	superfluous typedef.
+
+2004-08-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Make Vaucanson compile correctly with g++ version 3.4.
+
+	* include/vaucanson/misc/deferrer.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/automata/concept/transducer_base.hxx,
+	* include/vaucanson/automata/concept/automata_base.hxx: Add missing
+	this->.
+	* include/vaucanson/misc/contract.hh (static_error): Forward declare
+	the error message (which should be a class).
+	* include/vaucanson/algebra/implementation/letter/range.hxx: Use
+	correct headers (cmath and cstdlib).
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx: Do
+	not use dynamic computed values for enums. Use basic_string<...>, not
+	string<...> (which anyway is wrong).
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hxx:
+	Fix constructor of Value<T>::Value(const Value& v): the v_ attribute is
+	initialized with v.v_, not v.
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx: Typo.
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Include sstream,
+	not iostream.
+	* include/vaucanson/tools/io.hh, include/vaucanson/tools/io.hxx: Typo.
+	* include/vaucanson/design_pattern/element_ops.hxx: Fix namespace in
+	the calls of op_swap.
+	* include/vaucanson/design_pattern/default_ops.hxx: Use static_error,
+	not static_error_.
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix an unused
+	argument warning.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx: Remove
+	superfluous typenames. Add missing template keywords.
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Typo. Add
+	a missing this->.
+	* include/vaucanson/algorithms/product.hxx: Minor fix in a comment.
+	* include/vaucanson/algorithms/isomorph.hxx: Set the right declaration
+	order for internal functions.
+
+2004-07-28  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/fibonacci/one_rewriting_rule.cc: Rename as...
+	* src/demos/fibonacci/one_rule_rewriting.cc: ... This.
+	* src/demos/fibonacci/Makefile.am: Update.
+
+2004-07-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+	Remove expressions with a weight of zero.
+
+2004-07-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/demos/samples/algorithms/derivatives_automaton.cc: Use dot_display
+	instead of dot_dump.
+
+2004-07-18  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* configure.ac: Bump to Vaucanson 0.6.
+	* NEWS: Set the date for 0.6.
+
+2004-07-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Fix standard_of algorithm problem with star.
+
+	* include/vaucanson/algorithms/standard.hxx: Fix the star of standard
+	automaton.
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/implementation/series/polynoms.hh: Add
+	op_in_star for polynoms. Needed in standard_of.
+
+	* src/tests/context_headers/automata/global_consistency_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh: Update accordingly.
+
+2004-07-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/fibonacci/generalized.cc: Rename as...
+	* src/demos/fibonacci/one_rewriting_rule.cc: ...This.
+	* src/demos/fibonacci/Makefile.am: Update.
+
+2004-07-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* xml/gendtd.sh: <edge> and <edges> tag are now <transition> and
+	<transitions>.
+	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/session.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx: s/str_edge/str_transition/.
+	* src/tests/xml/session.xml, src/tests/xml/transcoder.xml,
+	* src/tests/xml/numerical.xml,
+	* src/tests/xml/export_session-simple.xml.ref,
+	* src/tests/xml/export_dynamic-simple.xml.ref,
+	* src/tests/xml/simple.xml,
+	* src/tests/xml/export_session-session.xml.ref,
+	* src/tests/xml/export_static-simple.xml.ref,
+	* src/tests/xml/nodata-session.xml.ref, src/tests/xml/float.xml,
+	* src/tests/xml/tropical.xml,
+	* src/tests/xml/export_dynamic-session.xml.ref,
+	* src/tests/xml/export_static-session.xml.ref,
+	* src/tests/xml/nodata-simple.xml.ref: Adjust.
+
+2004-07-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/tools/fsm_dump.hxx: Minor fix in variable names.
+
+2004-07-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/static_boolean.cc: Build a simpler automaton as
+	example. Fix the filename in comments.
+
+2004-07-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/demos/fibonacci/generalized.cc: Fix a small detail to avoid
+	compilation warning.
+
+2004-07-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/demos/fibonacci/generalized.cc: New file. Write a generalized
+	fibonacci program.
+	* src/demos/fibonacci/Makefile.am: Update.
+	* src/demos/fibonacci/fibonacci.cc: Modify letters in an alphabet.
+
+2004-07-16  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+	Change derivation behavior when performing union of two expression sets:
+	if the same expression is present in the two sets, the union does not
+	contain the expression twice any more. It contains the expression
+	weighted by the sum of the two weights, as expected.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx: Add
+	functions to compare expressions without their first weight.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh:
+	Add missing algebra:: before SemiringBase and SeriesBase. Fix syntax
+	of some declarations. Add a missing typename.
+	* include/vaucanson/algorithms/krat_exp_expand.hxx: Include
+	krat_exp_pattern.hh.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Add an entry about expand. Add some stuff about contexts and
+	transducers. Do some minor fixes elsewhere.
+
+2004-07-15  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Rewrite
+	DefaultTransposeFun. Use DefaultTransposeFun in op_in_transpose. While
+	transposing, when the semiring of a polynom is a series, transpose the
+	weight as well.
+
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx:
+	Modify ReverseVisitor. Add transpose methods.
+	* include/vaucanson/automata/implementation/transpose_view.hxx
+	(op_series_of):	Transpose labels.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/contextual_transducer_functions.thxx: Clean. Do
+	not use verbalize.
+	* include/vaucanson/boolean_transducer.hh: Do not include
+	krat_exp_verbalization.hh.
+	* include/vaucanson/algorithms/krat_exp_expand.hxx,
+	* include/vaucanson/algorithms/krat_exp_expand.hh: Set the right
+	directory when including the corresponding hh/hxx file.
+	* src/demos/fibonacci/fibonacci.cc: Clean includes. Use std::getline
+	instead of std::cin's operator >>. Use a different printing mode to
+	display the evaluation output. Use expand to ``nicify'' the expression.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	The expansion of a rational expression is an algorithm, and has nothing
+	to do with an implementation of series.
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hh:
+	Move...
+	* include/vaucanson/algorithms/krat_exp_expand.hxx,
+	* include/vaucanson/algorithms/series/krat_exp_expand.hh: ... Here.
+	* include/Makefile.am: Add krat_exp_expand.hh and krat_exp_expand.hxx.
+
+2004-07-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* configure.ac: Re-enable Vaucanswig by default.
+	* config/xml.m4: Use AC_HELP_STRING in a macro.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/xml/import_session-session.xml.ref: Adjust the test:
+	the sessions now load automata in the order they were entered.
+	See my last entry on 2004-07-13 about bug fixes in sessions.
+
+2004-07-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* xml/gendtd.sh: Allow a monoid to be a product a therefore contain
+	other monoids.
+
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* configure.ac,
+	* config/xml.m4: Change --with-vaucanswig to --enable-vaucanswig, and
+	make it disabled by default. Also make xml enabled by default.
+	* README: Update accordingly.
+
+2004-07-14  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+	  Remove unicity check, which is wrong.
+
+2004-07-14  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hh:
+	  New. This is an improved version of verbalization. It is able to
+	  handle stared expressions by recursively performing the same
+	  operations as verbalize into the stars.
+
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Adjust the entry about context headers. Mention
+	new_rat_exp(alphabet_t, std::string).
+
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	It is now possible to build a rational expression using a std::string
+	that represent it.
+
+	* include/vaucanson/contextual_headers.hh: Include the rational
+	expression parser.
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx (new_rat_exp):
+	Add a new_rat_exp() function that works with iterators instead of an
+	alphabet. As the last argument, new_rat_exp() can optionally take a
+	string representing the expression to build.
+	* src/tests/context_headers/automata/global_consistency_test.hh: Add
+	tests for new_rat_exp().
+
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/fsm/generate_toolbox.sh,
+	* src/demos/ciaa/ex3.cc: Fix bad include for closure.
+
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Update.
+
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/free_monoid/predefs.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hxx:
+	Fix small_alpha_letter by using utility::char_traits with basic_string.
+
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix an
+	uninitialized variable warning.
+
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/algorithms.cc: New. Allow the user to call various
+	classical algorithms on R automata stored in XML files.
+	* src/demos/xml/Makefile.am: Update.
+
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Include Sylvain Lombardy's patch about quotient algorithm.
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix quotient
+	algorithm.
+
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime_composition.hh,
+	* include/vaucanson/algorithms/realtime_composition.hxx: Add overloaded
+	version of realtime_composition, that returns the composition of the
+	two given automaton.
+
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Include Sylvain Lombardy's modified closure. The algorithm is now
+	really faster.
+
+	* include/vaucanson/algorithms/forward_closure.hh,
+	* include/vaucanson/algorithms/forward_closure.hxx,
+	* include/vaucanson/algorithms/backward_closure.hh,
+	* include/vaucanson/algorithms/backward_closure.hxx: Delete.
+
+	* include/vaucanson/algorithms/closure.hh,
+	* include/vaucanson/algorithms/closure.hxx: New files. Closure
+	algorithms (backward and forward).
+
+	* include/Makefile.am,
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* src/tests/automata/algos/closure_test.hh: Update accordingly.
+
+	* src/tests/context_headers/automata/global_consistency_test.hh: Change
+	krat_exp_t to rat_exp_t.
+
+2004-07-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Three bugs were preventing the XML session demos from working. This
+	is the fix.
+
+	* include/vaucanson/xml/xml_set.hxx: Equality is done comparing the
+	<automaton> tags, not the documents: a session may have many
+	automata (and therefore many XmlStructure) in one unique document.
+	* include/vaucanson/xml/session.hh, include/vaucanson/xml/session.hxx:
+	Perform a kind of alpha conversion on an automaton's states before
+	inserting it in a session. When retrieving an automaton from
+	a session, take the first one (using pop_front), not the last one
+	(using pop_back).
+	* src/demos/xml/display_session.cc: Do not display the exception's
+	message, since it not an error.
+
+2004-07-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/make_session.cc: New. Assemble XML automata to build
+	an XML session.
+	* src/demos/xml/display_session.cc: New. Display the automata which
+	are part of a session.
+	* src/demos/xml/Makefile.am: Update.
+
+2004-07-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	Add a new service for the automata context headers: new_rat_exp().
+	For a matter of coherence, the type krat_exp_t has been changed to
+	rat_exp_t.
+
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh: Rename krat_exp_t as
+	rat_exp_t.
+
+	* src/demos/samples/algorithms/derivatives_automaton.cc,
+	* src/demos/samples/algorithms/determinize_standard.cc,
+	* src/demos/ciaa/ex2.cc,
+	* src/demos/ciaa/ex3.cc: Update.
+
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx: Add the
+	new_rat_exp() function.
+
+	* src/demos/fibonacci/fibonacci.cc: Update.
+
+
+2004-07-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	This is the first of a series of demos for Vaucanson XML.
+
+	* src/demos/xml/Makefile.am: New.
+	* src/demos/xml/static_boolean.cc: New. Basic demo with boolean
+	automata for the XML IO system.
+	* src/demos/Makefile.am: Add xml to SUBDIRS.
+	* configure.ac: Generate srd/demos/xml/Makefile.
+
+2004-07-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh: Minor
+	fix. Make the test work even where realtime of expressions can't be
+	computed.
+
+2004-07-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/Makefile.am: Add missing file.
+
+2004-07-12  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx: Modify
+	op_add_weighted_edge to take a monoid element value.
+	* include/vaucanson/automata/concept/automata_base.hxx: Update.
+
+2004-07-12  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx: Modify
+	add_weighted_edge to take a monoid element value.
+
+2004-07-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	In order to have Vaucanson  XML work properly and be maintainable,
+	I rewrote quite a lot of things. There is no more needs for hybrid
+	static/xml automata:  only usual static automata  and XML automata
+	are used. Huge parts of the code have been cleaned, and everything
+	should be much  more safe now. The hacks  that were in element.hxx
+	have also been removed.
+
+	* include/vaucanson/xml/xml_ops.hh, include/vaucanson/xml/xml_ops.hxx:
+	Rewrite. Move if_tag<T>...
+	* include/vaucanson/xml/if_tag.hh, include/vaucanson/xml/if_tag.hxx:
+	... Here. New.
+	* include/Makefile.am: Update.
+	* include/vaucanson/xml/xml_set.hh, include/vaucanson/xml/xml_set.hxx:
+	Rewrite. Rename semiring_type() to semiring_structure() and
+	semiring_structure() to semiring_value().
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/xml_automaton.hxx: Rewrite.
+	* include/vaucanson/xml/session.hh, include/vaucanson/xml/session.hxx:
+	Adjust stream operators: >>, <<, op_rin and op_rout.
+	* include/vaucanson/xml/xml_loader.hxx: Rewrite operator () for the
+	xml_loader.
+
+	To have  the previous  modifications work fine,  I had to  do some
+	changes on the rest of Vaucanson XML:
+
+	* include/vaucanson/xml/callback.hxx: Adjust accordingly.
+	* include/vaucanson/xml/krat_to_polynom.hh,
+	* include/vaucanson/xml/krat_to_polynom.hxx: Delete.
+	* include/vaucanson/xml/strings.hh, include/vaucanson/xml/strings.hxx,
+	* include/vaucanson/xml/dynamic.hh: Clean.
+	* include/vaucanson/xml/static.hh: Include tools/io.hh.
+	* include/vaucanson/xml/types.hh: Remove the XmlOf traits and its
+	corresponding XML_OF macro. Add forward declarations and typedefs.
+	* include/vaucanson/xml/errors.hh: Minor fix in the WITH_EXIT macro.
+	* include/vaucanson/xml/infos.hh: Adjust includes.
+	* include/vaucanson/xml/defaults.hh: Remove the ugly definition of
+	the macro VCSN_XML_EMPTY_ELEMENTS.
+
+	I also  had to  do some cleaning  and small  fixes in the  core of
+	Vaucanson:
+
+	* include/vaucanson/algebra/implementation/free_monoid/predefs.hh: Use
+	std::basic_string<Letter> instead of std::string.
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx:
+	Remove an unused argument warning.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	Avoid building a semiring element without its structure.
+	* include/vaucanson/tools/usual_macros.hh: Add a typedef to letter_t
+	in AUTOMATA_SET_TYPES.
+	* include/vaucanson/design_pattern/element_ops.hxx: Adjust.
+	* include/vaucanson/design_pattern/element.hxx: Remove the hacks that
+	were needed to have Vaucanson XML works properly ; they are no longer
+	needed.
+	* src/tests/design_pattern/intrinsics.hh: Adjust accordingly.
+	* include/vaucanson/design_pattern/slots.hxx,
+	* include/vaucanson/design_pattern/default_ops.hxx: Clean.
+
+	And of course, the test suite has been updated:
+
+	* src/tests/xml/export_session.cc,
+	* src/tests/xml/export_dynamic.cc,
+	* src/tests/xml/export_static.cc,
+	* src/tests/xml/nodata.cc,
+	* src/tests/xml/import_generic.cc,
+	* src/tests/xml/import_session.cc,
+	* src/tests/xml/import_dynamic.cc,
+	* src/tests/xml/import_static.cc: Adjust.
+	* src/tests/xml/export_dynamic-session.xml.ref,
+	* src/tests/xml/export_dynamic-simple.xml.ref: Adjust: remove the
+	extra trailing \n at end of file.
+
+2004-07-09  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime_composition.hxx: Fix a wrong
+	construction that raised an assertion in fibonacci.
+
+2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/Makefile.am: Add missing files.
+
+2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	The structure comparison failed when only alphabets were differents,
+	this patch solves this problem.
+
+	* include/vaucanson/design_pattern/structure.hh,
+	* include/vaucanson/design_pattern/structure.hxx: Remove the default
+	structure equality operator.
+
+	* include/vaucanson/algebra/concept/numerical_semiring.hxx,
+	* include/vaucanson/algebra/concept/tropical_semiring.hxx: New files.
+	* include/vaucanson/algebra/concept/tropical_semiring.hh,
+	* include/vaucanson/algebra/concept/numerical_semiring.hh: Add
+	comparison operator for semirings.
+
+	* include/vaucanson/automata/concept/transducer.hxx,
+	* include/vaucanson/automata/concept/transducer.hh: Slot the series_
+	attribute, like for automata.
+
+	* src/tests/context_headers/automata/global_consistency_test.hh,
+	* src/tests/context_headers/transducers/global_consistency_test.hh:
+	Enforce the tests.
+	* src/tests/design_pattern/intrinsics.hh: Update the test.
+
+2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/bin/generate-test-suite.sh: Use $(top_srcdir) instead of
+	@abs_top_srcdir@.
+
+2004-07-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/Makefile.am: Add k_automata to SUBDIRS.
+
+2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/bin/generate-test-suite.sh: Add macro VCSN_SRC_DIR defined
+	for all tests, representing the absolute path to the top-level
+	directory of Vaucanson archive.
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Update
+	accordingly, and improve code portability.
+
+2004-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Minor fix
+	in the test. Now you can directly modify randomly generated test files,
+	the test automatically deals with it.
+
+2004-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Since we used random expressions, random results may occur...
+	This patch fix this problem for KRat exp, using a randomly
+	generated test battery and use always the same for each future test.
+
+	* include/vaucanson/misc/random.hxx: Fix typo in comments.
+
+	* src/tests/algebra/series/krat/tests/generate_random_krat.cc: New
+	file. Used to generate random KRat expressions.
+
+	* src/tests/algebra/series/krat/tests/random_krat_exp_b_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_i_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_f_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_i_weird,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_f_weird,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_b_weird: New
+	files. Randomly generated KRat expressions.
+
+	* src/tests/algebra/series/krat/tests/Makefile.am: New file.
+	Corresponding Makefile for the new tests directory for KRat.
+	* configure.ac,
+	* src/tests/algebra/series/krat/Makefile.am: Update accordingly.
+
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Update
+	the KRat exp test with the new test system.
+
+2004-07-07  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	Fix a huge bug in fibonacci:
+	All transducers ended up with the same alphabet, whatever alphabet was
+	used to create it.
+	There was no == operator for transducers, so it used the == operator
+	for Structure, which returns true all the time.
+
+	* include/vaucanson/automata/concept/transducer.hh,
+	* include/vaucanson/automata/concept/transducer.hxx: Add the ==
+	operator for transducers.
+
+2004-07-07  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx: Add a new
+	method: add_weighted_edge. Give the possibility for the user to create
+	an edge with a weight seen as a semiring_elt_t.
+
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/transducer_base.hxx: Add two new
+	methods: set_o_initial, set_o_final. Give the user the possibility to
+	put a weight on the initial and final edges, with a weight seen as an
+	output_monoid_elt_value_t, that is for instance a std::string.
+	Modify the add_io_edge method to take values.
+
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/transducer_ops.hh,
+	* include/vaucanson/automata/concept/transducer_ops.hxx: Write the
+	corresponding op functions.
+
+	* src/demos/fibonacci/fibonacci.cc: Update accordingly.
+
+2004-07-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hxx: Add comment on real number
+	generation.
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
+	Fix op_choose_non_starable for real numbers.
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
+	Minor fix in the test.
+
+2004-07-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/vaucanswig/meta/vaucanswig_context.i,
+	* src/demos/vaucanswig/meta/vaucanswig_automaton.i,
+	* src/demos/vaucanswig/meta/vaucanswig_algo_common.i,
+	* src/demos/vaucanswig/expand.sh,
+	* src/demos/vaucanswig/meta/context.hh: Use contextual headers
+	instead of usual.hh in Vaucanswig.
+	* src/demos/vaucanswig/meta-build-process.txt: Update the
+	documentation.
+
+2004-07-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/misc/contract.hh: Add a missing macro to define
+	static_assertion_ when -DNDEBUG is used.
+
+2004-07-02  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Change the
+	PartialExp internal type in order to fix derivatives_automaton algorithm
+	with right weights.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Update. Mention krat_exp_print().
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/fibonacci/fibonacci.cc: Remove useless includes. Use
+	dot_display instead of dot_dump.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/contextual_headers.hh,
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/standard_algorithms.hh,
+	* include/vaucanson/misc/support.hxx, include/vaucanson/misc/static.hh,
+	* include/vaucanson/misc/random.hxx, include/vaucanson/misc/bitset.hh,
+	* include/vaucanson/misc/deferrer.hh, include/vaucanson/misc/limits.hh,
+	* include/vaucanson/misc/bitset.hxx, include/vaucanson/misc/utility.hh,
+	* include/vaucanson/misc/char_traits.hh,
+	* include/vaucanson/misc/special_char_traits.hh,
+	* include/vaucanson/misc/selectors.hh,
+	* include/vaucanson/misc/deferrer.hxx,
+	* include/vaucanson/misc/unique.hh,
+	* include/vaucanson/misc/constraints.hh,
+	* include/vaucanson/misc/window.hh,
+	* include/vaucanson/misc/char_traits.hxx,
+	* include/vaucanson/misc/support.hh,
+	* include/vaucanson/misc/contract.hh,
+	* include/vaucanson/misc/unique.hxx, include/vaucanson/misc/window.hxx,
+	* include/vaucanson/misc/random.hh, include/vaucanson/vaucanson.hh,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/range.hxx,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/char_letter.hh,
+	* include/vaucanson/algebra/implementation/letter/range.hh,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hxx,
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hxx,
+	* include/vaucanson/algebra/implementation/alphabets/alphabets.hh,
+	* include/vaucanson/algebra/implementation/alphabets/predefs.hh,
+	* include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh,
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hh,
+	* include/vaucanson/algebra/implementation/predefs.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/words.hxx,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/tools.hxx,
+	* include/vaucanson/algebra/implementation/free_monoid/predefs.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hxx,
+	* include/vaucanson/algebra/implementation/free_monoid/words.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/tools.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dispatch_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hh,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dispatch_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hxx,
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/implementation/series/generalized.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh,
+	* include/vaucanson/algebra/implementation/series/series.hh,
+	* include/vaucanson/algebra/implementation/series/krat_coefficient.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hh,
+	* include/vaucanson/algebra/implementation/series/generalized.hxx,
+	* include/vaucanson/algebra/implementation/series/series.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_conversion.hh,
+	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hh,
+	* include/vaucanson/algebra/implementation/series/krat_coefficient.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hh,
+	* include/vaucanson/algebra/implementation/series/krat_conversion.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_is_finite_app.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_verbalization.hxx,
+	* include/vaucanson/algebra/implementation/series/transpose.hh,
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh,
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx,
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx,
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hh,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	* include/vaucanson/algebra/concept/freemonoid_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/monoid_base.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx,
+	* include/vaucanson/algebra/concept/series_base.hxx,
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	* include/vaucanson/algebra/concept/letter.hh,
+	* include/vaucanson/algebra/concept/semigroup_base.hh,
+	* include/vaucanson/algebra/concept/alphabets_base.hxx,
+	* include/vaucanson/algebra/concept/semiring_base.hh,
+	* include/vaucanson/algebra/concept/tropical_semiring.hh,
+	* include/vaucanson/algebra/concept/numerical_semiring.hh,
+	* include/vaucanson/algebra/concept/semigroup_base.hxx,
+	* include/vaucanson/algebra/concept/monoid_base.hh,
+	* include/vaucanson/algebra/concept/semiring_base.hxx,
+	* include/vaucanson/algebra/algebra.hh,
+	* include/vaucanson/z_automaton.hh, include/vaucanson/xml/xml_ops.hh,
+	* include/vaucanson/xml/session.hh, include/vaucanson/xml/xml_set.hxx,
+	* include/vaucanson/xml/dynamic.hh,
+	* include/vaucanson/xml/xml_loader.hh,
+	* include/vaucanson/xml/error_handler.hh,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/static.hh,
+	* include/vaucanson/xml/krat_to_polynom.hxx,
+	* include/vaucanson/xml/strings.hh, include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/ios.hh, include/vaucanson/xml/session.hxx,
+	* include/vaucanson/xml/callback.hh,
+	* include/vaucanson/xml/xml_value.hh,
+	* include/vaucanson/xml/error_handler.hxx,
+	* include/vaucanson/xml/xml_loader.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx,
+	* include/vaucanson/xml/strings.hxx, include/vaucanson/xml/ios.hxx,
+	* include/vaucanson/xml/callback.hxx, include/vaucanson/xml/types.hh,
+	* include/vaucanson/xml/xml_value.hxx,
+	* include/vaucanson/xml/defaults.hh, include/vaucanson/xml/xml_set.hh,
+	* include/vaucanson/xml/generic.hh, include/vaucanson/xml/errors.hh,
+	* include/vaucanson/xml/infos.hh,
+	* include/vaucanson/xml/krat_to_polynom.hh,
+	* include/vaucanson/tools/gen_random.hxx,
+	* include/vaucanson/tools/fsm_dump.hxx,
+	* include/vaucanson/tools/dot_display.hxx,
+	* include/vaucanson/tools/gen_book.hh,
+	* include/vaucanson/tools/dot_dump.hxx,
+	* include/vaucanson/tools/usual_escaped_characters.hxx,
+	* include/vaucanson/tools/automaton_tools.hh,
+	* include/vaucanson/tools/usual_io.hxx,
+	* include/vaucanson/tools/gen_book.hxx,
+	* include/vaucanson/tools/usual_macros.hh,
+	* include/vaucanson/tools/dot_format.hh,
+	* include/vaucanson/tools/simple_format.hh,
+	* include/vaucanson/tools/container_ops.hh,
+	* include/vaucanson/tools/dot_format.hxx,
+	* include/vaucanson/tools/io.hh,
+	* include/vaucanson/tools/gen_random.hh,
+	* include/vaucanson/tools/simple_format.hxx,
+	* include/vaucanson/tools/fsm_dump.hh,
+	* include/vaucanson/tools/dot_dump.hh,
+	* include/vaucanson/tools/container_ops.hxx,
+	* include/vaucanson/tools/dot_display.hh,
+	* include/vaucanson/tools/usual_escaped_characters.hh,
+	* include/vaucanson/tools/io.hxx, include/vaucanson/tools/usual_io.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/config/system.hh, include/vaucanson/config/math.hh,
+	* include/vaucanson/design_pattern/element_ops.hxx,
+	* include/vaucanson/design_pattern/element.hh,
+	* include/vaucanson/design_pattern/structure.hh,
+	* include/vaucanson/design_pattern/predecls.hh,
+	* include/vaucanson/design_pattern/element.hxx,
+	* include/vaucanson/design_pattern/meta_element_root.hh,
+	* include/vaucanson/design_pattern/syntactic_decorator.hh,
+	* include/vaucanson/design_pattern/slots.hh,
+	* include/vaucanson/design_pattern/default_ops.hh,
+	* include/vaucanson/design_pattern/design_pattern.hh,
+	* include/vaucanson/design_pattern/structure.hxx,
+	* include/vaucanson/design_pattern/element_ops.hh,
+	* include/vaucanson/design_pattern/meta_element_root.hxx,
+	* include/vaucanson/design_pattern/syntactic_decorator.hxx,
+	* include/vaucanson/design_pattern/slots.hxx,
+	* include/vaucanson/design_pattern/element_op_traits.hh,
+	* include/vaucanson/design_pattern/default_ops.hxx,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/transpose.hxx,
+	* include/vaucanson/algorithms/finite_support_conversion.hxx,
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx,
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/realtime_decl.hh,
+	* include/vaucanson/algorithms/standard_of.hxx,
+	* include/vaucanson/algorithms/accessible.hh,
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/realtime_decl.hxx,
+	* include/vaucanson/algorithms/sum.hh,
+	* include/vaucanson/algorithms/krat_exp_cderivation.hh,
+	* include/vaucanson/algorithms/accessible.hxx,
+	* include/vaucanson/algorithms/is_letterized.hh,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* include/vaucanson/algorithms/forward_closure.hxx,
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/complement.hxx,
+	* include/vaucanson/algorithms/extension.hh,
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hh,
+	* include/vaucanson/algorithms/internal/build_pattern.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/internal/build_pattern.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/sub_automaton.hh,
+	* include/vaucanson/algorithms/trim.hxx,
+	* include/vaucanson/algorithms/brzozowski.hh,
+	* include/vaucanson/algorithms/standard_of.hh,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx,
+	* include/vaucanson/algorithms/krat_exp_partial_derivation.hxx,
+	* include/vaucanson/algorithms/realtime_composition.hh,
+	* include/vaucanson/algorithms/eval.hh,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/krat_exp_flatten.hh,
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	* include/vaucanson/algorithms/is_normalized.hh,
+	* include/vaucanson/algorithms/backward_realtime.hh,
+	* include/vaucanson/algorithms/forward_closure.hh,
+	* include/vaucanson/algorithms/krat_exp_derivation.hh,
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx,
+	* include/vaucanson/algorithms/krat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/backward_closure.hh,
+	* include/vaucanson/algorithms/minimization_hopcroft.hh,
+	* include/vaucanson/algorithms/aci_canonical.hxx,
+	* include/vaucanson/algorithms/derivatives_automaton.hh,
+	* include/vaucanson/algorithms/is_letterized.hxx,
+	* include/vaucanson/algorithms/evaluation.hxx,
+	* include/vaucanson/algorithms/finite_support_conversion.hh,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/thompson.hxx,
+	* include/vaucanson/algorithms/krat_exp_linearize.hh,
+	* include/vaucanson/algorithms/minimization_moore.hxx,
+	* include/vaucanson/algorithms/product.hh,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/berry_sethi.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/krat_exp_flatten.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hh,
+	* include/vaucanson/algorithms/complement.hh,
+	* include/vaucanson/algorithms/search.hh,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/isomorph.hxx,
+	* include/vaucanson/algorithms/minimization_moore.hh,
+	* include/vaucanson/algorithms/trim.hh,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/krat_exp_constant_term.hh,
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/transpose.hh,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/backward_closure.hxx,
+	* include/vaucanson/algorithms/concatenate.hh,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/krat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/forward_realtime.hh,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/algorithms/is_realtime.hh,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/krat_exp_realtime.hh,
+	* include/vaucanson/algorithms/standard.hh,
+	* include/vaucanson/algorithms/isomorph.hh,
+	* include/vaucanson/algorithms/realtime.hh,
+	* include/vaucanson/algorithms/aci_canonical.hh,
+	* include/vaucanson/algorithms/normalized.hh,
+	* include/vaucanson/algorithms/is_realtime.hxx,
+	* include/vaucanson/algorithms/thompson.hh,
+	* include/vaucanson/algorithms/aut_to_exp.hh,
+	* include/vaucanson/algorithms/is_normalized.hxx,
+	* include/vaucanson/algorithms/evaluation.hh,
+	* include/vaucanson/algorithms/complete.hh,
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx,
+	* include/vaucanson/algorithms/sum.hxx,
+	* include/vaucanson/algorithms/projection.hh,
+	* include/vaucanson/algorithms/determinize.hh,
+	* include/vaucanson/algorithms/berry_sethi.hh,
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/automaton_view.hh,
+	* include/vaucanson/automata/implementation/generalized.hxx,
+	* include/vaucanson/automata/implementation/kind_adapter.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/automata/implementation/automaton_view.hxx,
+	* include/vaucanson/automata/implementation/graph.hxx,
+	* include/vaucanson/automata/implementation/kind_adapter.hxx,
+	* include/vaucanson/automata/implementation/transpose_view.hxx,
+	* include/vaucanson/automata/concept/copy.hxx,
+	* include/vaucanson/automata/concept/transducer.hxx,
+	* include/vaucanson/automata/concept/automata.hxx,
+	* include/vaucanson/automata/concept/transducer_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/translate.hh,
+	* include/vaucanson/automata/concept/delta_kind.hh,
+	* include/vaucanson/automata/concept/tags.hh,
+	* include/vaucanson/automata/concept/handlers.hh,
+	* include/vaucanson/automata/concept/history.hh,
+	* include/vaucanson/automata/concept/transducer_ops.hxx,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/translate.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/tags.hxx,
+	* include/vaucanson/automata/concept/handlers.hxx,
+	* include/vaucanson/automata/concept/kinds.hh,
+	* include/vaucanson/automata/concept/history.hxx,
+	* include/vaucanson/automata/concept/copy.hh,
+	* include/vaucanson/automata/concept/transducer.hh,
+	* include/vaucanson/automata/concept/automata.hh,
+	* include/vaucanson/automata/concept/transducer_base.hxx,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/kinds.hxx,
+	* include/vaucanson/automata/concept/automata_kind.hh: Update
+	licenses and header guards using reheader.pl.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* reheader.pl: Typo. Replace @ in mail addresses with \@.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* reheader.pl: Footer is now "#endif // ! FILE" instead of
+	"#endif // FILE". Keep the copyright and add the current year
+	when updating the header, and do not rewrite with a default value.
+	Add Sarah and Louis-Noel to the Vaucanson group.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx (do_quotient):
+	Fix an unused argument warning.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx (do_quotient):
+	Fix a non-initialized variable warning.
+
+2004-07-01  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	It is not possible to  take a ``classical'' automaton as input for
+	aut_to_exp  and  then  generalize  it  at  the  beginning  of  the
+	algorithm,  because it  would  means  to put  the  return type  of
+	aut_to_exp()  as  template  parameter.   That  would  imply  heavy
+	notations. Actually  aut_to_exp uses the  same series_set_elt_t as
+	the automaton for its return type...
+
+	... But  here is some  specialized versions of aut_to_exp  for the
+	context  headers, which  use krat_exp_t  and automaton_t  from the
+	context and call generalized before running aut_to_exp on it.
+
+	* include/vaucanson/contextual_headers.hh: Include aut_to_exp.hh.
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx: Add an
+	aut_to_exp() function which takes an automaton_t, generalizes it
+	and runs the real vcsn::aut_to_exp() on it.
+
+	* src/demos/fibonacci/fibonacci.cc, src/demos/ciaa/ex2.cc,
+	* src/demos/ciaa/ex3.cc: Use this contextual aut_to_exp().
+
+2004-06-30  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	This fix was suggested by Sylvain Lombardy.
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix.
+	* include/vaucanson/algorithms/product.hxx: Fix an unused argument
+	warning.
+	* src/demos/ciaa/ex3.cc: Use quotient() instead of minimize_hopcroft()
+	(which makes no sense). Launch dotty in background and do not wait for
+	its termination.
+
+2004-06-30  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/tests/transducers/realtime_test.hh: Complete the test to test the
+	realtime algorithm on transducers.
+	* include/vaucanson/algorithms/forward_closure.hxx,
+	* include/vaucanson/algorithms/backward_closure.hxx: Add an
+	initialization to make the realtime algorithm work for transducers.
+
+2004-06-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx: Clean.
+	Document. Remove inclusion of dump_visitor.hh. Move the code for
+	the ReverseVisitor and the DispatchVisitor in reverse_visitor.hh,
+	reverse_visitor.hxx, dispatch_visitor.hh and dispatch_visitor.hxx.
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/dispatch_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dispatch_visitor.hxx:
+	New. This code comes from exp.hh and exp.hxx.
+	* include/vaucanson/algorithms/krat_exp_print.hh,
+	* include/vaucanson/algorithms/krat_exp_print.hxx: Delete. Re-use a
+	part of the code for the DumpVisitor.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	Rewrite. Use code from krat_exp_print. Use ios::xalloc() and stream
+	manipulators to change the print_mode.
+	* include/Makefile.am: Update.
+
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hh,
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx:
+	Clean.
+
+	* include/vaucanson/algebra/implementation/series/krat.hh: Include
+	dump_visitor.hh.
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hh:
+	Include dispatch_visitor.hh.
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh:
+	Update.
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Update.
+	Add two tests.
+
+	* src/demos/ciaa/ex2.cc, src/demos/ciaa/ex3.cc: Update.
+
+2004-06-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/algebra/series/polynom/series_polynom_test.hh: Remove
+	inclusion of usual.hh.
+
+2004-06-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_sum_test.hh: Remove inclusion of usual.hh.
+
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/vaucanswig/expand.sh: Minor fix to make Vaucanswig compile.
+
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	* src/tests/automata/algos/standard_of_regression_test.hh: Move to...
+	* src/tests/k_automata/standard_of_regression_test.hh: ... This.
+	* src/tests/k_automata/Makefile.am: New. Makefile for test directory
+	k_automata.
+	* src/tests/test-suites/generate-all.sh,
+	* src/tests/automata/algos/Makefile.am,
+	* configure.ac: Update accordingly.
+
+2004-06-26  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Fix
+	op_series_set in order to simplify produced rationnal expressions.
+
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	* src/tests/automata/algos/standard_of_regression_test.hh: Move to...
+	* src/tests/k_automata/standard_of_regression_test.hh: ... This.
+	* src/tests/k_automata/Makefile.am: New. Makefile for test directory
+	k_automata.
+	* src/tests/test-suites/generate-all.sh,
+	* src/tests/automata/algos/Makefile.am,
+	* configure.ac: Update accordingly.
+
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh:
+	Move to...
+	* src/tests/algebra/series/krat/boolean/krat_exp_cderivation_linear_test.hh:
+	... This.
+	* src/tests/algebra/series/krat/boolean/Makefile.am: New.
+	* src/tests/algebra/series/krat/Makefile.am,
+	* configure.ac,
+	* src/tests/algebra/series/krat/main/Makefile.am,
+	* src/tests/test-suites/generate-all.sh: Update accordingly.
+
+2004-06-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/test-suites/algebra_series_polynom_double_string.defs,
+	* src/tests/test-suites/algebra_series_polynom_int_string.defs,
+	* src/tests/test-suites/algebra_series_polynom_bool_string.defs: Add
+	missing include.
+
+2004-06-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/Makefile.am: Add boolean_automata to SUBDIRS.
+
+2004-06-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/standard.hxx
+	(do_concat_of_standard_here): Fix. Mind the final series of lhs.
+	* src/tests/automata/algos/standard_of_regression_test.hh: New.
+	Corresponding test for this fix.
+
+2004-06-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	standard_of() was broken for  right weights because it changed the
+	weight  of the  initial  transition, which  should  always be  the
+	identity on a standard automaton.
+
+	* include/vaucanson/algorithms/standard_of.hxx (match_RightWeight):
+	Fix. Report weights of an expression onto the final states, not
+	the initial one.
+	* src/tests/automata/algos/standard_of_regression_test.hh: New. Test
+	for this fix.
+	* src/tests/automata/algos/Makefile.am: Update.
+
+2004-06-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/tools/dot_display.hh,
+	* include/vaucanson/tools/dot_display.hxx: Allow the user to specify
+	arguments for execvp(). Completely close the pipe when fork() fails.
+	Handle dup() failures. bg become the third argument and argv the
+	fourth.
+	* src/demos/ciaa/ex1.cc: Update.
+
+2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Proposed by Sylvain Lombardy.
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx (do_quotient):
+	Fix.
+
+2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/ciaa/ex1.cc, src/demos/ciaa/ex2.cc, src/demos/ciaa/ex3.cc:
+	New. Sample files from J. Sakarovitch.
+	* src/demos/ciaa/Makefile.am: New.
+	* src/demos/Makefile.am, configure.ac: Update.
+
+2004-06-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/krat_exp_print.hh,
+	* include/vaucanson/algorithms/krat_exp_print.hxx: Change prototype
+	to take an Element instead of an implementation. Adapt to print on
+	any stream, not just std::cout. Clean.
+
+2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/tools/dot_display.hh,
+	* include/vaucanson/tools/dot_display.hxx: New. Add a function to
+	launch dotty from Vaucanson, without any intermediate file.
+	* include/Makefile.am: Update.
+
+2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/product.hxx (product): Minor fix.
+	Avoid constructing a semiring element with no structure.
+
+2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/product.hxx (product): Fix and clean.
+	The resulting series when computing a transition was badly initialized.
+
+2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/automata/algos/product_regression_test.hh: New. Basic
+	test for product().
+
+2004-06-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/tools/usual_macros.hh (SAVE_AUTOMATON_DOT_SIMPLE):
+	Fix namespace for dot_dump().
+
+2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/boolean_automata/brzozowski_test.hh,
+	* src/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/automata/algos/generalized_test.hh,
+	* src/tests/automata/algos/is_isomorph_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/aci_canonical_test.hh,
+	* src/tests/automata/algos/elimination_test.hh,
+	* src/tests/automata/algos/trim_test.hh,
+	* src/tests/automata/algos/compute_test.hh,
+	* src/tests/automata/algos/derivatives_automaton_test.hh,
+	* src/tests/automata/algos/transpose_test.hh,
+	* src/tests/automata/algos/berry_sethi_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_identity_test.hh,
+	* src/tests/algebra/series/misc/series_test.hh: Remove inclusions of
+	usual.hh. Clean include directives.
+
+2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/z_min_plus_automaton.hh: New. Context for tropical
+	semirings with min and plus operators.
+	* include/Makefile.am: Update.
+
+	* src/tests/test-suites/tropical_min_automaton.defs: Move to...
+	* src/tests/test-suites/z_min_plus_automaton.defs: ... This. Use
+	z_min_plus_automaton.hh instead of usual.hh.
+
+	* src/tests/test-suites/context_headers_z_min_plus.defs: New.
+	Corresponding test.
+	* src/tests/test-suites/generate-all.sh: Update.
+
+2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/z_max_plus.hxx, include/vaucanson/r_automaton.hxx,
+	* include/vaucanson/z_automaton.hxx,
+	* include/vaucanson/boolean_automaton.hxx,
+	* include/vaucanson/z_max_plus_automaton.hxx: Delete.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh: Update accordingly
+	* include/Makefile.am: Update.
+
+2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Fix parsing of
+	weights.
+
+2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/realtime_test.hh: Fix missing namespace
+	specification.
+
+2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx: Remove unused variables.
+
+2004-06-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Add an entry about the removal of usual.hh.
+
+2004-06-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/samples/algorithms/determinize_standard.cc: New. Sample
+	file to compute the standard of an expression and determinize it.
+	* src/demos/samples/algorithms/classics.cc: New. Sample file for
+	various classical algorithms.
+	* src/demos/samples/algorithms/Makefile.am: Update.
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix an
+	unused argument warning.
+
+2004-06-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/tools/usual.hh, include/vaucanson/tools/usual.hxx:
+	Delete.
+	* include/Makefile.am, include/vaucanson/xml/xml_loader.hxx,
+	* include/vaucanson/tools/gen_book.hxx: Update accordingly.
+
+	* src/demos/vgrep/vgrep.cc,
+	* src/demos/samples/algorithms/derivatives_automaton.cc,
+	* src/demos/fibonacci/fibonacci.cc: Rewrite without usual.hh, and with
+	context headers.
+
+2004-06-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* update_config_ac.sh: Rename to...
+	* find_tests.sh: ... This. Generate m4 macros in tests.m4.
+	* configure.ac: Include tests.m4.
+	* bootstrap.sh: Update.
+
+2004-06-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/boolean_automata/Makefile.am: Add brzozowski_test.hh in
+	EXTRA_DIST.
+	* src/tests/automata/algos/Makefile.am: Remove brzozowski_test.hh from
+	EXTRA_DIST.
+	* configure.ac: Generate
+	src/tests/context_headers/transducers/Makefile.
+
+2004-06-09  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/standard_of.hxx: Typo.
+
+2004-06-04  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/Makefile.am: Change .hxx to .thxx for two files.
+
+2004-06-03  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/contextual_automaton_functions.hxx,
+	* include/vaucanson/contextual_transducer_functions.hxx:
+	Rename to...
+	* include/vaucanson/contextual_automaton_functions.thxx,
+	* include/vaucanson/contextual_transducer_functions.thxx: These.
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_transducer_functions.thh: Update
+	accordingly.
 
 2004-05-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 

@@ -1,7 +1,7 @@
 // standard_of.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -155,11 +155,14 @@ namespace vcsn {
 
     MATCH__(RightWeight, node, w)
     {
-      automaton_ptr_t auto_ = match(node);
-      for (typename automaton_t::initial_iterator i = auto_->initial().begin();
-	   i != auto_->initial().end();
+      const semiring_t&		semiring = automata_set_.series().semiring();
+      const semiring_elt_t	weight (semiring, w);
+      automaton_ptr_t		auto_ = match(node);
+
+      for (typename automaton_t::final_iterator i = auto_->final().begin();
+	   i != auto_->final().end();
 	   ++i)
-	auto_->set_initial(*i, auto_->get_initial(*i) * semiring_elt_t(w));
+	auto_->set_final(*i, auto_->get_final(*i) * weight);
       return auto_;
     }
     END
@@ -234,11 +237,11 @@ namespace vcsn {
   standard_of(const Exp& e)
   {
     A automata_structure(e.structure());
-    Element<A, T> out(automata_set);
+    Element<A, T> out(automata_structure);
     standard_of(out, e);
     return out;
   }
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_STANDARD_OF_HXX
+#endif // ! VCSN_ALGORITHMS_STANDARD_OF_HXX

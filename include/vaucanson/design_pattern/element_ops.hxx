@@ -1,7 +1,7 @@
 // element_ops.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
-# define VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
+#ifndef VCSN_DESIGN_PATTERN_ELEMENT_OPS_HXX
+# define VCSN_DESIGN_PATTERN_ELEMENT_OPS_HXX
 
 # include <vaucanson/design_pattern/element_ops.hh>
 
@@ -167,21 +169,18 @@ ELEMENT_OPERATOR(%, mod)
 
 template<typename St, typename S, typename T>
 static St&
-operator <<(St& s, const Element<S, T>& e)
+operator << (St& s, const Element<S, T>& e)
 {
   return op_rout(e.structure(), s, e.value());
 }
 
 template<typename St, typename S, typename T>
 static St&
-operator >>(St& s, Element<S, T>& e)
+operator >> (St& s, Element<S, T>& e)
 {
-  S set = S();
-//FIXME: check for set
-//  if (e.bound())
-//    set = S(e.structure());
-  op_rin(set, s, e.value());
-  e = Element<S, T>(utility::unique::get(S(set)), e.value());
+  S structure = e.structure();
+  op_rin(structure, s, e.value());
+  e.attach(structure);
   return s;
 }
 
@@ -210,20 +209,20 @@ namespace std
 	    vcsn::Element<S, T2>& e2)
   {
     assertion(&e1.structure() == &e2.structure());
-    vcsn::op_swap(e1.structure(), e1.value(), e2.value());
+    op_swap(e1.structure(), e1.value(), e2.value());
   }
 
   template<typename S, typename T>
   void swap(vcsn::Element<S, T>& e1, T& v2)
   {
-    vcsn::op_swap(e1.structure(), e1.value(), v2);
+    op_swap(e1.structure(), e1.value(), v2);
   }
 
   template<typename T, typename S>
   void swap(T& v1, vcsn::Element<S, T>& e2)
   {
-    vcsn::op_swap(e2.structure(), v1, e2.value());
+    op_swap(e2.structure(), v1, e2.value());
   }
 } // std
 
-#endif // VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
+#endif // ! VCSN_DESIGN_PATTERN_ELEMENT_OPS_HXX

@@ -138,14 +138,15 @@ fi
 end_algorithms
 #### #####
 
+
 if [ "x$2" = "xshort" ]; then
-  kinds="usual"
+  kinds="boolean_automaton"
 else
-  kinds="usual numerical tropical_max tropical_min"
+  kinds="boolean_automaton z_automaton z_max_plus_automaton z_min_plus_automaton"
 fi
 
 for cat in $kinds; do
-  for mod in context automaton $ALGS algorithms; do
+  for mod in context $ALGS algorithms; do
      cat >"$VAUCANSWIG/src/vaucanswig_${cat}_${mod}.i" <<EOF
 %include vaucanswig_${mod}.i
 %module vaucanswig_${cat}_${mod}
@@ -153,13 +154,20 @@ decl_${mod}(${cat})
 EOF
      MODULES="$MODULES ${cat}_${mod}"
   done
-  echo "${cat}_context" >"$VAUCANSWIG/src/${cat}_automaton.deps"
+  cat >"$VAUCANSWIG/src/vaucanswig_${cat}.i" <<EOF
+%include vaucanswig_automaton.i
+%module vaucanswig_${cat}
+decl_automaton(${cat})
+EOF
+      MODULES="$MODULES ${cat}"
+  echo "${cat}_context" >"$VAUCANSWIG/src/${cat}.deps"
   echo >"$VAUCANSWIG/src/${cat}_algorithms.deps"
   for alg in $ALGS; do
-    echo "${cat}_automaton" >"$VAUCANSWIG/src/${cat}_${alg}.deps"
+    echo "${cat}" >"$VAUCANSWIG/src/${cat}_${alg}.deps"
     echo "${cat}_${alg}" >>"$VAUCANSWIG/src/${cat}_algorithms.deps"
   done
 done
+
 
 #################### Python stuff #######################
 
@@ -175,7 +183,7 @@ cat <<EOF
 ## NOTE: this file was generated automatically by expand.sh
 ##
 
-INCLUDES = -I/usr/include/python2.2 -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
+INCLUDES = -I/usr/include/python\$(PYTHON_VERSION) -I\$(srcdir)/../src -I\$(srcdir)/../meta \\
     -I\$(top_srcdir)/include -I\$(top_builddir)/include
 AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -DEXCEPTION_TRAPS
 AM_CXXFLAGS = \$(CXXFLAGS_DEBUG)
@@ -231,7 +239,7 @@ dump_python()
          sdir=meta
       fi
       echo "vaucanswig_${mod}_wrap.cxx vaucanswig_${mod}.py: \$(srcdir)/../$sdir/vaucanswig_${mod}.i"
-      printf "\t\$(SWIG) -c -c++ -python -I../src -I../meta -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
+      printf "\t\$(SWIG) -noruntime -c++ -python -I../src -I../meta -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
       echo
     done
 

@@ -1,7 +1,7 @@
 // transducer_base.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_CONCEPT_TRANSDUCER_BASE_HH
 # define VCSN_AUTOMATA_CONCEPT_TRANSDUCER_BASE_HH
@@ -44,9 +46,9 @@ namespace vcsn {
   /*---------------------.
   | TransducerBase<Self> |
   `----------------------*/
-  /// The most general concept of transducer. 
+  /// The most general concept of transducer.
   /** It denotes the set of transducer with multiplicity over a fixed
-    semiring and a fixed free couple of monoid. 
+    semiring and a fixed free couple of monoid.
     Note that this class is abstract
     in the hierarchy.
   */
@@ -95,11 +97,11 @@ namespace vcsn {
   /*-------------------------------------.
   | MetaElement<TransducerBase<Self>, T> |
   `-------------------------------------*/
-  /// Services of every element of the transducer set. 
+  /// Services of every element of the transducer set.
   /** MetaElement<TransducerBase<Self>, T> defines the interface of
     every transducer that is the result of the interaction of a
     structural element (TransducerBase<Self>) and an implementation T.
-    
+
    */
 
   template <typename Self, typename T>
@@ -183,9 +185,7 @@ namespace vcsn {
     /** type of the output. */
     typedef typename mother_t::semiring_elt_t output_series_set_elt_t;
 
-    /** type of the output monoid element implementation. */
-    typedef typename automaton_traits<T>::semiring_elt_value_t semiring_elt_value_t;
-    typedef typename algebra::series_traits<semiring_elt_value_t>::monoid_elt_value_t 
+    typedef typename algebra::series_traits<semiring_elt_value_t>::monoid_elt_value_t
 						output_monoid_elt_value_t;
 
     /** type of the output monoid. */
@@ -204,7 +204,7 @@ namespace vcsn {
     typedef typename mother_t::monoid_t		input_monoid_t;
 
     /* type of the input monoid element. */
-    typedef Element<input_monoid_t, input_monoid_elt_value_t> 
+    typedef Element<input_monoid_t, input_monoid_elt_value_t>
 						input_monoid_elt_t;
 
     typedef typename input_monoid_t::letter_t input_letter_t;
@@ -212,7 +212,7 @@ namespace vcsn {
     /** type of the output weight implementation. */
     typedef typename algebra::series_traits<semiring_elt_value_t>::semiring_elt_value_t
     output_semiring_elt_value_t;
-    
+
     /** type of the output semiring. */
     typedef typename semiring_t::semiring_t	output_semiring_t;
 
@@ -226,10 +226,9 @@ namespace vcsn {
     /** return the output of an edge */
     output_series_set_elt_t output_of(hedge_t) const;
 
-    /** add an edge specified as an input word, an output word and
-      a weight linked to it. */
-    hedge_t add_io_edge(hstate_t, hstate_t, input_monoid_elt_t, 
-			output_monoid_elt_t, 
+    /** add an edge specified as an input word value and output word value. */
+    hedge_t add_io_edge(hstate_t, hstate_t, input_monoid_elt_value_t,
+			output_monoid_elt_value_t,
 			output_semiring_elt_t = output_semiring_elt_t());
 
     /** add an edge specified using an input letter, an output letter and
@@ -238,12 +237,19 @@ namespace vcsn {
 			output_semiring_elt_t = output_semiring_elt_t());
 
     /** add an only-output edge (epsilon as input). */
-    hedge_t add_o_edge(hstate_t, hstate_t, output_letter_t, 
+    hedge_t add_o_edge(hstate_t, hstate_t, output_letter_t,
 		       output_semiring_elt_t = output_semiring_elt_t());
 
     /** add an only-input edge (epsilon as output). */
-    hedge_t add_i_edge(hstate_t, hstate_t, input_letter_t, 
+    hedge_t add_i_edge(hstate_t, hstate_t, input_letter_t,
 		       output_semiring_elt_t = output_semiring_elt_t());
+
+    /** set a weight on the final edge, specifying an output_monoid value. */
+    void set_o_final(hstate_t, output_monoid_elt_value_t);
+
+    /** set a weight on the initial edge, specifying an output_monoid
+	value. */
+    void set_o_initial(hstate_t, output_monoid_elt_value_t);
 
   protected:
     MetaElement();
@@ -259,6 +265,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/automata/concept/transducer_base.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
 
-#endif // VCSN_AUTOMATA_CONCEPT_TRANSDUCER_BASE_HH
+
+#endif // ! VCSN_AUTOMATA_CONCEPT_TRANSDUCER_BASE_HH

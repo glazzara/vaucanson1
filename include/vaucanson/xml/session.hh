@@ -17,29 +17,30 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_SESSION_HH
 # define VCSN_XML_SESSION_HH
-
-# include <vaucanson/xml/dynamic.hh>
-# include <vaucanson/xml/error_handler.hh>
-# include <vaucanson/xml/xml_automaton.hh>
-# include <vaucanson/xml/xml_set.hh>
-# include <vaucanson/automata/concept/automata_base.hh>
 
 # include <xercesc/util/PlatformUtils.hpp>
 # include <xercesc/dom/DOM.hpp>
 
 # include <list>
+
+# include <vaucanson/xml/dynamic.hh>
+# include <vaucanson/xml/error_handler.hh>
+
+# include <vaucanson/automata/concept/automata_base.hh>
 
 /** @addtogroup xml *//** @{ */
 /**
@@ -57,7 +58,8 @@ namespace vcsn
   namespace xml
   {
 
-    using namespace xercesc;
+    using xercesc::DOMDocument;
+    using xercesc::DOMBuilder;
 
     /** @addtogroup xml *//** @{ */
 
@@ -65,10 +67,10 @@ namespace vcsn
     class XmlSession
     {
     public:
-      DOMDocument* doc_;
-      myDOMErrorHandler* err_;
-      DOMBuilder* parser_;
-      std::list<DOMElement*> roots_;
+      DOMDocument*		doc_;
+      myDOMErrorHandler*	err_;
+      DOMBuilder*		parser_;
+      std::list<DOMElement*>	roots_;
     public:
       /// Default constructor.
       XmlSession();
@@ -76,30 +78,41 @@ namespace vcsn
 
       //      template <typename T>
       /// Pop operator.
-      void operator<<(const XmlAutomaton&);
+      void operator << (const xml_automaton_t&);
       /// Queue operator.
-      void operator>>(Element<XmlStructure, XmlAutomaton>&);
+      void operator >> (xml_automaton_t&);
+    protected:
+      // States must be unique in each session.
+      // Keep tracks of the session states.
+      std::set<std::string>			states;
+      // Keep track of the renamings.
+      std::map<std::string, std::string>	states_map;
     };
+
+    /// Read operator.
+    std::ostream&
+    operator << (std::ostream&, const XmlSession&);
+
+    /// Write operator.
+    std::istream&
+    operator >> (std::istream&, XmlSession&);
+
+    template<typename S, typename T>
+    XmlSession&
+    op_rout(const AutomataBase<S>&,
+	    XmlSession&,
+	    const T&);
+
+
+    template <class S, class T>
+    XmlSession&
+    op_rin(AutomataBase<S>& structure,
+	   XmlSession& st,
+	   T& v);
 
     /** @} */
 
   } // End of namespace xml.
-
-  /** @addtogroup xml *//** @{ */
-
-  template<typename S>
-  xml::XmlSession& op_rout(const AutomataBase<S>&,
-			   xml::XmlSession&,
-			   const xml::XmlAutomaton&);
-
-  /// Read operator.
-  std::ostream&
-  operator<<(std::ostream&, const xml::XmlSession&);
-  /// Write operator.
-  std::istream&
-  operator>>(std::istream&, xml::XmlSession&);
-
-  /** @} */
 
 } // End of namespace vcsn.
 
@@ -107,4 +120,4 @@ namespace vcsn
 #  include <vaucanson/xml/session.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_XML_SESSION_HH
+#endif // ! VCSN_XML_SESSION_HH

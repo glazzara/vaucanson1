@@ -1,7 +1,7 @@
 // krat_exp_parse_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,31 +17,31 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_PARSE_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_PARSE_TEST_HH
 
-# include <check/tester.hh>
-# include <sstream>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
-# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-# include <vaucanson/misc/selectors.hh>
+
+# include <sstream>
 
 # define KRAT_EXP_PARSE_TEST_USUAL_DECS(Expr)			\
   typedef Expr					krat_exp_t;	\
   typedef typename krat_exp_t::value_t		kexp_t;		\
   typedef typename krat_exp_t::monoid_elt_t	monoid_elt_t;	\
+  typedef typename krat_exp_t::semiring_elt_value_t semiring_elt_value_t;\
   typedef typename monoid_elt_t::set_t		monoid_t;	\
   typedef typename krat_exp_t::semiring_elt_t		semiring_elt_t;	\
   typedef typename semiring_elt_t::set_t		semiring_t;	\
@@ -70,41 +70,70 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
   tests::Tester t(tg.verbose());
   srand(time(0));
 
-  const unsigned nb_test = 1000;
+  unsigned nb_test	 = 0;
   unsigned nb_success    = 0;
-  for (unsigned i = 0; i < nb_test; ++i)
+
+  char buff[2048];
+  char letters[2][2] = { {'a', 'b'}, {'\\', '.'} };
+
+  std::string typeid_name;
+  if (typeid(semiring_elt_value_t) == typeid(double) ||
+      typeid(semiring_elt_value_t) == typeid(float))
+    typeid_name = "f";
+  if (typeid(semiring_elt_value_t) == typeid(int))
+    typeid_name = "i";
+  if (typeid(semiring_elt_value_t) == typeid(bool))
+    typeid_name = "b";
+  
+  std::string path_to_test(VCSN_SRC_DIR);
+  path_to_test += "/src/tests/algebra/series/krat/tests/";
+  std::string filename =
+    path_to_test + "random_krat_exp_" + typeid_name + "_ab";
+  std::ifstream file(filename.c_str());
+
+  for (int j = 0; file.is_open() && j < 2; ++j)
     {
       alphabet_t alphabet;
-      letter_t a = alphabet.random_letter();
-      letter_t b = alphabet.random_letter();
-      alphabet.insert(a);
-      alphabet.insert(b);
-      alphabet.insert('a');
+      alphabet.insert(letters[j][0]);
+      alphabet.insert(letters[j][1]);
       monoid_t monoid(alphabet);
       semiring_t semiring;
       series_set_t s(semiring, monoid);
-      krat_exp_t exp = s.choose(SELECT(kexp_t));
-      std::ostringstream sstr;
-      sstr << exp;
-      krat_exp_t out(s);
-      std::pair<bool, std::string> ret = parse(sstr.str(), out);
-      if (ret.first)
-	error(sstr.str(), ret.second, sstr.str(),
-	      exp.structure().monoid().alphabet());
-      else 
+      krat_exp_t exp(s);
+
+      file.getline(buff, 2048);
+      while (!file.eof())
 	{
-	  std::ostringstream ostr;
-	  ostr << out;
-	  if (ostr.str() != sstr.str())
-	    error(sstr.str(), ostr.str(), sstr.str(),
+	  std::ostringstream sstr;
+	  sstr << buff;
+	  std::pair<bool, std::string> ret = parse(sstr.str(), exp);
+	  if (ret.first)
+	    error(sstr.str(), ret.second, sstr.str(),
 		  exp.structure().monoid().alphabet());
-	  else 
-	    ++nb_success;
+	  else
+	    {
+	      std::ostringstream ostr;
+	      ostr << exp;
+	      if (ostr.str() != sstr.str())
+		error(sstr.str(), ostr.str(), sstr.str(),
+		      exp.structure().monoid().alphabet());
+	      else
+		++nb_success;
+	    }
+	  ++nb_test;
+	  file.getline(buff, 2048);
 	}
+      
+      file.close();
+      file.clear();
+      filename = path_to_test + "random_krat_exp_" + typeid_name + "_weird";
+      file.open(filename.c_str());
     }
+
   std::string rate;
   SUCCESS_RATE(rate, nb_success, nb_test);
-  TEST(t, "parsing random rational expression " + rate, nb_success == nb_test);
+  TEST(t, "parsing random rational expression " + rate,
+       nb_success == nb_test);
   return t.all_passed();
 }
 
@@ -139,6 +168,8 @@ static sample_t bool_samples[] =
     { "0a", "0" },
     { "1.a", "a" },
     { "1a", "a" },
+    { "(a+b)*", "(a+b)*" },
+    { "a+b*", "(a+b*)" },
     // Bad ones
     { "2", 0 },
     { "2.2", 0 },
@@ -170,20 +201,20 @@ static sample_t mul_samples[] =
     { "1 (a.b)", "(a.b)" },
     { "(a.b) 1", "(a.b)" },
     { "(a+b) 1", "(a+b)" },
-    { "2 (a+b)", "(2 (a+b))" },
-    { "2 (a.b)", "(2 (a.b))" },
-    { "(a.b) 2", "((a.b) 2)" },
-    { "(a+b) 2", "((a+b) 2)" },
+    { "2 (a+b)", "2 (a+b)" },
+    { "2 (a.b)", "2 (a.b)" },
+    { "(a.b) 2", "(a.b) 2" },
+    { "(a+b) 2", "(a+b) 2" },
     { "0 (a.b)", "0" },
     { "0 (a+b)", "0" },
     { "(a.b) 0", "0" },
     { "(a+b) 0", "0" },
     { "1 a.1 b", "(a.b)" },
     { "1 a1 b", "(a.b)" },
-    { "2 a.2 b", "((2 a).(2 b))" },
-    { "2 a2 b", "((2 a).(2 b))" },
-    { "2 1", "(2 1)"},
-    { "1 2", "(2 1)"},
+    { "2 a.2 b", "(2 a.2 b)" },
+    { "2 a2 b", "(2 a.2 b)" },
+    { "2 1", "2 1"},
+    { "1 2", "2 1"},
     {0, 0}
   };
 
@@ -199,13 +230,13 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
   monoid_t monoid(alphabet);
   semiring_t semiring;
   series_set_t s(semiring, monoid);
-  
+
   unsigned int nb_success = 0;
   unsigned int nb_test;
   for (nb_test = 0; samples[nb_test].exp != 0; ++nb_test)
     {
       krat_exp_t exp(s);
-      
+
       std::pair<bool, std::string> r = parse(samples[nb_test].exp, exp);
       if (r.first)
 	{
@@ -217,8 +248,15 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 	}
       else
 	{
+	  using vcsn::rat::print_mode_t;
+	  using vcsn::rat::MODE_ALL;
+	  using vcsn::rat::MODE_STAR;
+	  using vcsn::rat::MODE_WEIGHT;
+	  using vcsn::rat::setpm;
+
 	  std::ostringstream ostr;
-	  ostr << exp;
+	  ostr << setpm (print_mode_t (MODE_ALL & ~MODE_STAR & ~MODE_WEIGHT))
+	       << exp;
 	  if (samples[nb_test].out == 0)
 	    error(samples[nb_test].exp, ostr.str(), "error",
 		  exp.structure().monoid().alphabet());
@@ -229,7 +267,7 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 	    nb_success++;
 	}
     }
-  
+
   std::string rate;
   SUCCESS_RATE(rate, nb_success, nb_test);
   TEST(t, "parsing hardcoded rational expressions " + rate,
@@ -260,10 +298,10 @@ template <class Expr>
 bool krat_exp_parse_test(tests::Tester& tg)
 {
   KRAT_EXP_PARSE_TEST_USUAL_DECS(Expr);
-  
+
   return
     krat_exp_parse_random_test<Expr>(tg) &&
     exhaustive_test_dispatch<typename semiring_elt_t::value_t, Expr>::run(tg);
 }
 
-#endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_PARSE_TEST_HH
+#endif // ! VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_PARSE_TEST_HH

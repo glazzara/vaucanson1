@@ -1,7 +1,7 @@
 // transpose_view.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_AUTOMATA_CONCRETE_TRANSPOSE_VIEW_HXX
-# define VCSN_AUTOMATA_CONCRETE_TRANSPOSE_VIEW_HXX
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_TRANSPOSE_VIEW_HXX
+# define VCSN_AUTOMATA_IMPLEMENTATION_TRANSPOSE_VIEW_HXX
 
 # include <vaucanson/automata/implementation/transpose_view.hh>
 
@@ -219,6 +221,7 @@ namespace vcsn {
 	      hedge_t e)
   {
     return op_label_of(s, v.object(), e);
+    // FIXME: The label should be transposed.
   }
 
   template <class S, class T>
@@ -227,7 +230,10 @@ namespace vcsn {
 	      const TransposeView<T>& v,
 	      hedge_t e)
   {
-    return op_series_of(s, v.object(), e);
+    typename Element<S, T>::series_set_elt_t r =
+				op_series_of(s, v.object(), e);
+    r.transpose();
+    return r;
   }
 
   template <class S, class T>
@@ -716,4 +722,4 @@ namespace vcsn {
 
 # undef AutoType
 
-#endif // VCSN_AUTOMATA_CONCRETE_TRANSPOSE_VIEW_HXX
+#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_TRANSPOSE_VIEW_HXX

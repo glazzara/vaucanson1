@@ -1,7 +1,7 @@
 // io.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TOOLS_IO_HH
 # define VCSN_TOOLS_IO_HH
@@ -63,14 +65,14 @@ namespace vcsn
       format_t format_;
 
       template<typename A, typename E, typename F>
-      friend std::ostream& 
+      friend std::ostream&
       operator<<(std::ostream&, const automaton_saver_<A, E, F>&);
     };
 
 
     template<typename Auto, typename EdgeConverter, typename Format>
-    std::ostream& 
-    operator<<(std::ostream&, 
+    std::ostream&
+    operator<<(std::ostream&,
 	       const automaton_saver_<Auto, EdgeConverter, Format>&);
 
     struct string_out
@@ -82,13 +84,13 @@ namespace vcsn
   }
 
   template<typename Auto, typename EdgeConverter, typename Format>
-  io::automaton_saver_<Auto, EdgeConverter, Format> 
+  io::automaton_saver_<Auto, EdgeConverter, Format>
   automaton_saver(const Auto&,
 		  const EdgeConverter& e = EdgeConverter(),
 		  const Format& f = Format());
-    
 
-  namespace io 
+
+  namespace io
   {
     /*------.
     | Input |
@@ -124,31 +126,31 @@ namespace vcsn
       bool merge_states_;
 
       template<typename A, typename E, typename F>
-      friend std::istream& 
-      operator>>(std::istream&, automaton_loader_<A, E, F>&);
+      friend std::istream&
+      operator>>(std::istream&, automaton_loader_<A, E, F>);
     };
 
     template<typename Auto, typename EdgeConverter, typename Format>
-    std::istream& 
+    std::istream&
     operator>>(std::istream&, automaton_loader_<Auto, EdgeConverter, Format>);
 
 
   }
-  
-  
+
+
   template<typename Auto, typename EdgeConverter, typename Format>
-  io::automaton_loader_<Auto, EdgeConverter, Format> 
-  automaton_loader(Auto& a, 
+  io::automaton_loader_<Auto, EdgeConverter, Format>
+  automaton_loader(Auto& a,
 		   const EdgeConverter& e = EdgeConverter(),
 		   const Format& f = Format(),
 		   bool merge_states = false);
-  
+
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/tools/io.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
 
-#endif // VCSN_TOOLS_IO_HH
+
+#endif // ! VCSN_TOOLS_IO_HH

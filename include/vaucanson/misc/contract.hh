@@ -1,7 +1,7 @@
 // contract.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,17 +17,18 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
 #ifndef VCSN_MISC_CONTRACT_HH
 # define VCSN_MISC_CONTRACT_HH
 
@@ -160,15 +161,15 @@ namespace utility {
 			     std::string(Message1) + ": " + Message2)
 
 
-// Definition of macro needed where result can't be computed. 
-#  ifdef EXCEPTION_TRAPS 
+// Definition of macro needed where result can't be computed.
+#  ifdef EXCEPTION_TRAPS
 #   define _result_not_computable(file, line, location, Message, Exception) \
       std::ostringstream os; \
       os << file << ':' << line << ':' \
 	 << (location ? location : "") \
 	 << (location ? ": " : " ") \
 	 << Message; \
-      throw Exception(os.str()); 
+      throw Exception(os.str());
 #  else // !EXCEPTION_TRAPS
 #   define _result_not_computable(file, line, location, Message, Exception) \
       std::cerr << file << ':' << line << ':' \
@@ -193,7 +194,11 @@ namespace utility {
 #  define static_assertion_(Cond, Message) \
   { typename utility::static_if<Cond, int, utility::contract::fail<void> >::t Message; Message = 0; }
 
-#  define static_error(Message) utility::contract::fail<Message> Message
+#  define static_error(Message)			\
+{						\
+  struct Message;				\
+  utility::contract::fail<Message> Message;	\
+}
 
 #  ifndef INTERNAL_CHECKS
 
@@ -228,6 +233,7 @@ namespace utility {
 # else // NDEBUG
 
 #  define static_assertion(Cond, Message) typedef void Message
+#  define static_assertion_(Cond, Message) typedef void Message
 #  define static_error(Message) typedef void Message
 
 #  define assertion(Cond) static_cast<void>(0)
@@ -244,4 +250,4 @@ namespace utility {
 #  define warning(Message) static_cast<void>(0)
 
 # endif // ! NDEBUG
-#endif // VCSN_MISC_CONTRACT_HH
+#endif // ! VCSN_MISC_CONTRACT_HH

@@ -1,7 +1,7 @@
 // polynoms.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,24 +17,28 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HXX
+
+# include <sstream>
 
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
+
 # include <vaucanson/misc/contract.hh>
-# include <sstream>
-# include <vaucanson/tools/usual_escaped_characters.hh>
+# include <vaucanson/misc/escaper.hh>
 
 namespace vcsn {
 
@@ -173,18 +177,63 @@ namespace vcsn {
       return map_;
     }
 
+    template<typename Tm, typename Tw>
+    const Tw&
+    polynom<Tm, Tw>::operator [] (const Tm& m) const
+    {
+      const_iterator i = map_.find(m);
+
+      if (i == map_.end())
+	throw std::invalid_argument ("word not in the support");
+      else
+	return i->second;
+    }
+
+    template<typename Tm, typename Tw>
+    Tw&
+    polynom<Tm, Tw>::operator [] (const Tm& m)
+    {
+      return map_[m];
+    }
+
     template <class Series, class Tm, class Tw>
     polynom<Tm,Tw>
     DefaultTransposeFun<Series, polynom<Tm,Tw> >::
     operator()(const Series& s,const polynom<Tm,Tw>& t) const
     {
-      typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
-      typedef typename Series::monoid_elt_t	       monoid_elt_t;
-      polynom<Tm, Tw>	new_t;
+      typedef typename polynom<Tm, Tw>::const_iterator	const_iterator;
+      typedef typename Series::monoid_t			monoid_t;
+      typedef Element<monoid_t, Tm>			monoid_elt_t;
+
+      polynom<Tm, Tw> p;
 
       for (const_iterator i = t.begin(); i != t.end(); ++i)
-	new_t[mirror(monoid_elt_t((*i).first))] = (*i).second;
-      return new_t;
+	{
+	  monoid_elt_t m (s.monoid(), i->first);
+	  m.mirror();
+	  p[m.value()] = transpose(s.semiring(), i->second);
+	}
+      return p;
+    }
+
+    template <class Series, class Tm, class Tw>
+    template <class S>
+    Tw
+    DefaultTransposeFun<Series, polynom<Tm,Tw> >::
+    transpose(const SeriesBase<S>& s, const Tw& t)
+    {
+      Element<S, Tw> e (s.self(), t);
+      e.transpose();
+      return e.value();
+    }
+
+    template <class Series, class Tm, class Tw>
+    template <class S>
+    Tw
+    DefaultTransposeFun<Series, polynom<Tm,Tw> >::
+    transpose(const SemiringBase<S>&, const Tw& t)
+    {
+      return t;
     }
 
 
@@ -242,6 +291,33 @@ namespace vcsn {
       if (!s.monoid().contains(i->first) || !s.semiring().contains(i->second))
 	return false;
     return true;
+  }
+
+  template<typename Self, typename Tm, typename Tw>
+  void op_in_star(const algebra::SeriesBase<Self>&,
+		  algebra::polynom<Tm, Tw>& m)
+  {
+    if (m.size() == 0)
+      {
+	Tw val (0);
+	op_in_star(SELECT(typename Self::semiring_t), val);
+	m.insert(identity_value(SELECT(typename Self::monoid_t), SELECT(Tm)),
+		 val);
+      }
+    else
+      {
+	typename std::pair<Tm, Tw> elt = *m.as_map().begin();
+	if (m.size() > 1 ||
+	    elt.first != identity_value(SELECT(typename Self::monoid_t),
+					SELECT(Tm)))
+	  assertion(! "Support is not empty, start can not be computed.");
+	else
+	  {
+	    op_in_star(SELECT(typename Self::semiring_t), elt.second);
+	    m.clear();
+	    m.insert(elt.first, elt.second);
+	  }
+      }
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
@@ -546,29 +622,12 @@ namespace vcsn {
     | input-output |
     `-------------*/
 
-  // FIXME: use it in rat::DumpVisitor
-  template <typename Ost, typename T>
-  Ost& escaped_output(Ost& ost, const std::set<char>& escaped, const T& t)
-  {
-    std::ostringstream o_str;
-    o_str << t;
-
-    for (typename std::string::const_iterator i = o_str.str().begin();
-	 i != o_str.str().end();
-	 ++i)
-    {
-      if (escaped.find(*i) != escaped.end())
-	ost << "\\";
-      ost << *i;
-    }
-    return ost;
-  }
-
   template<typename W, typename M, typename St, typename Tm, typename Tw>
-  St& op_rout(const algebra::Series<W, M>& s, St& st, const algebra::polynom<Tm, Tw>& p)
+  St& op_rout(const algebra::Series<W, M>& s,
+	      St& st,
+	      const algebra::polynom<Tm, Tw>& p)
   {
     typename algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    std::set<char> escape_set = tools::usual_escaped_characters();
 
     while(i != p.end())
       {
@@ -583,11 +642,7 @@ namespace vcsn {
 	}
 
 	if (i->first != identity_value(SELECT(M), SELECT(Tm)))
-	{
-	  std::ostringstream o_str;
-	  op_rout(s.monoid(), o_str, i->first);
-	  escaped_output(st, escape_set, o_str.str());
-	}
+	  op_rout(s.monoid(), st, i->first);
 	else
 	  st << "1";
 
@@ -687,15 +742,9 @@ namespace vcsn {
   void  op_in_transpose(const algebra::Series<W, M>& s,
 			algebra::polynom<Tm, Tw>& t)
   {
-    typedef typename algebra::polynom<Tm, Tw>::const_iterator const_iterator;
-    algebra::polynom<Tm, Tw>	new_t(t);
-
-    t.clear();
-    for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
-      {
-	Element<M, Tm> w(s.monoid(), i->first);
-	t.insert(mirror(w).value(), (*i).second);
-      }
+    algebra::DefaultTransposeFun<algebra::Series<W, M>,
+				 algebra::polynom<Tm, Tw> > f;
+    t = f(s, t);
   }
 
 } // vcsn
@@ -708,15 +757,13 @@ namespace std {
 			   const vcsn::algebra::polynom<Tm, Tw>& p)
   {
     typename vcsn::algebra::polynom<Tm, Tw>::const_iterator i = p.begin();
-    std::set<char> escape_set = vcsn::tools::usual_escaped_characters();
 
     while (i != p.end())
       {
 	if (i != p.begin())
 	  out << "+";
-	out << "(" << i->second << " ";
-	vcsn::escaped_output(out, escape_set, i->first) ;
-	out << ")";
+	out << "(" << i->second << " "
+	    << utility::make_escaper(i->first) << ")";
 	++i;
       }
 
@@ -728,5 +775,4 @@ namespace std {
 
 } // std
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HXX
-
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HXX

@@ -21,13 +21,13 @@
     <state name="three"/>
   </states>
 
-  <edges>
-    <edge dst="one" label="C" src="zero"/>
-    <edge dst="one" label="B" src="two"/>
-    <edge dst="one" label="A" src="one"/>
-    <edge dst="three" label="A" src="two"/>
-    <edge dst="three" label="C" src="three"/>
-  </edges>
+  <transitions>
+    <transition dst="one" label="C" src="zero"/>
+    <transition dst="one" label="B" src="two"/>
+    <transition dst="one" label="A" src="one"/>
+    <transition dst="three" label="A" src="two"/>
+    <transition dst="three" label="C" src="three"/>
+  </transitions>
 
   <initials>
     <initial label="1" state="zero"/>
@@ -58,13 +58,13 @@
     <state name="three2"/>
   </states>
 
-  <edges>
-    <edge dst="one2" label="A" src="zero2"/>
-    <edge dst="one2" label="C" src="two2"/>
-    <edge dst="one2" label="B" src="one2"/>
-    <edge dst="three2" label="A" src="two2"/>
-    <edge dst="three2" label="C" src="three2"/>
-  </edges>
+  <transitions>
+    <transition dst="one2" label="A" src="zero2"/>
+    <transition dst="one2" label="C" src="two2"/>
+    <transition dst="one2" label="B" src="one2"/>
+    <transition dst="three2" label="A" src="two2"/>
+    <transition dst="three2" label="C" src="three2"/>
+  </transitions>
 
   <initials>
     <initial label="1" state="zero2"/>

@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_SESSION_HXX
 # define VCSN_XML_SESSION_HXX
@@ -38,111 +40,15 @@
 
 namespace vcsn
 {
-  inline
-  std::ostream&
-  operator<<(std::ostream& o, const xml::XmlSession& session)
-  {
-    using namespace xml;
-    using namespace xercesc;
-
-    DOMElement* root = session.doc_->getDocumentElement();
-
-    for (std::list<DOMElement*>::const_iterator i = session.roots_.begin();
-	 i != session.roots_.end();
-	 i++) {
-	root->appendChild(*i);
-    }
-
-    MemBufFormatTarget buf;
-
-    DOMImplementation* impl = xercesc::DOMImplementationRegistry
-      ::getDOMImplementation(str_LS);
-
-    DOMWriter* serializer
-      = ((DOMImplementationLS*)impl)->createDOMWriter();
-    serializer->setEncoding(str_ISO8859_d1);
-
-    if (serializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent,
-				  true))
-      serializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, true);
-
-    if (serializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
-       serializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
-
-    serializer->writeNode(&buf, *(session.doc_));
-    o << buf.getRawBuffer();
-    serializer->release();
-
-    DOMNode* child = root->getFirstChild();
-
-    while (child) {
-      root->removeChild(child);
-      DOMNode* next = child->getNextSibling();
-      child->release();
-      child = next;
-    }
-    return o;
-  }
-
-  inline
-  std::istream&
-  operator>>(std::istream& in, xml::XmlSession& session)
-  {
-    using namespace xml;
-    using namespace xercesc;
-
-    DOMDocument* doc;
-    try {
-      CxxInputSource input(&in);
-      Wrapper4InputSource w(&input, false);
-      doc = session.parser_->parse(w);
-    }
-    catch (const XMLException& e) {
-      FAIL(std::string("XML exception: ") + xml2str(e.getMessage()));
-    }
-    catch (const DOMException& e) {
-      FAIL(std::string("DOM exception: ") + xml2str(e.msg));
-    }
-    catch (...) {
-      FAIL("Unknown caught exception.");
-    }
-
-    if (session.err_->has_error())
-      FAIL(session.err_->get_msg());
-
-    DOMNodeList* nodelist = doc->
-      getElementsByTagNameNS(str_http_c_s_swww_plrde_pepita_pfr_svaucanson,
-			     str_automaton);
-    unsigned n = nodelist->getLength();
-    if (!n)
-      FAIL("Cannot find any automaton root.");
-
-    for (unsigned i = 0; i < n; i++) {
-      session.roots_.push_back(static_cast<DOMElement*>
-			       (session.doc_->importNode(nodelist->item(i),
-							 true)));
-    }
-
-    return in;
-  }
-
-  template<typename S>
-  inline
-  xml::XmlSession& op_rout(const AutomataBase<S>&,
-			   xml::XmlSession& session,
-			   const xml::XmlAutomaton& x)
-  {
-    session << x;
-    return session;
-  }
 
   namespace xml
   {
+
     inline
     XmlSession::XmlSession() : roots_()
     {
-      DOMImplementation* impl = xercesc::DOMImplementationRegistry
-	::getDOMImplementation(str_LS);
+      DOMImplementation* impl =
+	xercesc::DOMImplementationRegistry::getDOMImplementation(str_LS);
 
       parser_ = ((DOMImplementationLS*)impl)
 	->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
@@ -157,8 +63,7 @@ namespace vcsn
       parser_->setErrorHandler(err_);
 
       DOMDocumentType* doctype =
-	impl->createDocumentType(str_session, NULL,
-				 str_vaucanson_pdtd);
+	impl->createDocumentType(str_session, 0, str_vaucanson_pdtd);
 
       doc_ =
 	impl->createDocument(str_http_c_s_swww_plrde_pepita_pfr_svaucanson,
@@ -175,24 +80,251 @@ namespace vcsn
 
     inline
     void
-    XmlSession::operator<<(const XmlAutomaton& x)
+    XmlSession::operator << (const xml_automaton_t& x)
     {
-      roots_.push_back(static_cast<DOMElement*>(doc_->importNode(x.root_,
-								 true)));
+      DOMNode* structure =
+	doc_->importNode(const_cast<DOMElement*> (x.value().structure()),
+			 true);
+      DOMNode* type =
+	doc_->importNode(const_cast<DOMElement*> (x.structure().type()), true);
+
+      DOMElement* root = doc_->createElement(str_automaton);
+
+      root->appendChild(type);
+      root->appendChild(structure);
+
+      roots_.push_back(root);
+
+      /*
+       *  The Vaucanson DTD defines the "name" attribute for states to
+       *  be of type ID.  Therefore two distinct automata cannot share
+       *  states  with  the same  name.   The  following  lines are  a
+       *  workaround which  perform a kind of alpha  conversion on the
+       *  new automaton's states.
+       */
+
+      // Convert states.
+      DOMNode* n = structure->getFirstChild();
+      while (n and XMLString::compareIString(n->getNodeName(), str_states))
+	n = n->getNextSibling();
+      if (n)
+	{
+	  n = n->getFirstChild();
+	  while (n)
+	    {
+	      if (not XMLString::compareIString(n->getNodeName(), str_state))
+		{
+		  DOMElement*	e = static_cast<DOMElement*> (n);
+		  std::string	oldname = xml2str(e->getAttribute(str_name));
+		  std::string	newname (oldname);
+
+		  while (states.find(newname) != states.end())
+		    {
+		      unsigned last (newname.size() - 1);
+		      while (isdigit(newname[last]))
+			if (newname[last] < '9')
+			  {
+			    ++newname[last];
+			    break ;
+			  }
+			else
+			  {
+			    newname[last] = '0';
+			    --last;
+			  }
+		      if (not isdigit(newname[last]))
+			newname.insert(last + 1,
+				       last + 1 == newname.size() ? "0" : "1");
+		    }
+
+		  states_map[oldname] = newname;
+		  states.insert(newname);
+		  e->setAttribute(str_name,
+				  XMLString::transcode(newname.c_str()));
+		}
+	      n = n->getNextSibling();
+	    }
+	}
+
+      // Update edges, initials and finals.
+      n = structure->getFirstChild();
+      while (n)
+	{
+	  const XMLCh* node_name = n->getNodeName();
+	  if (not XMLString::compareIString(node_name, str_transitions) or
+	      not XMLString::compareIString(node_name, str_initials) or
+	      not XMLString::compareIString(node_name, str_finals))
+	    {
+	      DOMNode* c = n->getFirstChild();
+	      while (c)
+		{
+		  const XMLCh* node_name = c->getNodeName();
+		  if (not XMLString::compareIString(node_name, str_transition) or
+		      not XMLString::compareIString(node_name, str_initial) or
+		      not XMLString::compareIString(node_name, str_final))
+		    {
+		      DOMElement*	e = static_cast<DOMElement*> (c);
+		      const XMLCh*	attr[] = {str_src, str_dst, str_state};
+		      for (unsigned i = 0; i < 3; ++i)
+			if (e->hasAttribute(attr[i]))
+			  {
+			    const std::string oldname =
+			      xml2str(e->getAttribute(attr[i]));
+			    e->setAttribute(attr[i],
+					    XMLString
+					    ::transcode(states_map[oldname]
+							.c_str()));
+			  }
+		    }
+		  c = c->getNextSibling();
+		}
+	    }
+	  n = n->getNextSibling();
+	}
     }
 
     inline
     void
-    XmlSession::operator>>(Element<XmlStructure, XmlAutomaton>& x)
+    XmlSession::operator >> (xml_automaton_t& x)
     {
       if (roots_.begin() == roots_.end())
 	FAIL("no more automaton in this session");
-      DOMElement *root = roots_.back();
-      roots_.pop_back();
-      x = Element<XmlStructure, XmlAutomaton>(XmlStructure(root),
-					XmlAutomaton(root));
-    }
-  }
-}
+      DOMElement *root = roots_.front();
+      roots_.pop_front();
 
-#endif // VCSN_XML_SESSION_HXX
+      xml_automata_set_t	xs (root);
+      xml_automaton_impl_t	xv (root);
+
+      x.attach(xs);
+      x.value() = xv;
+    }
+
+    inline
+    std::ostream&
+    operator << (std::ostream& o, const XmlSession& session)
+    {
+      using namespace xercesc;
+
+      DOMElement* root = session.doc_->getDocumentElement();
+
+      for (std::list<DOMElement*>::const_iterator i = session.roots_.begin();
+	   i != session.roots_.end();
+	   i++)
+	{
+	  root->appendChild(*i);
+	}
+
+      MemBufFormatTarget buf;
+
+      DOMImplementation* impl =
+	DOMImplementationRegistry::getDOMImplementation(str_LS);
+
+      DOMWriter* serializer =
+	static_cast<DOMImplementationLS*> (impl)->createDOMWriter();
+      serializer->setEncoding(str_ISO8859_d1);
+
+      if (serializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent,
+				    true))
+	serializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, true);
+
+      if (serializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
+	serializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
+
+      serializer->writeNode(&buf, *(session.doc_));
+      o << buf.getRawBuffer();
+      serializer->release();
+
+      DOMNode* child = root->getFirstChild();
+
+      while (child)
+	{
+	  root->removeChild(child);
+	  DOMNode* next = child->getNextSibling();
+	  child->release();
+	  child = next;
+	}
+      return o;
+    }
+
+    inline
+    std::istream&
+    operator >> (std::istream& in, XmlSession& session)
+    {
+      using namespace xercesc;
+
+      DOMDocument* doc;
+      try
+	{
+	  CxxInputSource input(&in);
+	  Wrapper4InputSource w(&input, false);
+	  doc = session.parser_->parse(w);
+	}
+      catch (const XMLException& e)
+	{
+	  FAIL(std::string("XML exception: ") + xml2str(e.getMessage()));
+	}
+      catch (const DOMException& e)
+	{
+	  FAIL(std::string("DOM exception: ") + xml2str(e.msg));
+	}
+      catch (...)
+	{
+	  FAIL("Unknown caught exception.");
+	}
+
+      if (session.err_->has_error())
+	FAIL(session.err_->get_msg());
+
+      DOMNodeList* nodelist = doc->
+	getElementsByTagNameNS(str_http_c_s_swww_plrde_pepita_pfr_svaucanson,
+			       str_automaton);
+      unsigned n = nodelist->getLength();
+      if (not n)
+	FAIL("Cannot find any automaton root.");
+
+      for (unsigned i = 0; i < n; i++)
+	{
+	  session.roots_.push_back(static_cast<DOMElement*>
+				   (session.doc_->importNode(nodelist->item(i),
+							     true)));
+	}
+
+      return in;
+    }
+
+    template<typename S, typename T>
+    XmlSession&
+    op_rout(const AutomataBase<S>& s,
+	    XmlSession& session,
+	    const T& a)
+    {
+      xml_automata_set_t	xs = op_convert(SELECT(xml_automata_set_t), s);
+      xml_automaton_t		x (xs, op_convert(xs,
+						  SELECT(xml_automaton_impl_t),
+						  s,
+						  a));
+      session << x;
+      return session;
+    }
+
+    template <class S, class T>
+    XmlSession&
+    op_rin(AutomataBase<S>&	structure,
+	   XmlSession&		session,
+	   T&			value)
+    {
+      XmlStructure	xs;
+      xml_automaton_t	x (xs);
+
+      session >> x;
+
+      op_assign(structure, x.structure());
+      op_assign(structure, x.structure(), value, x.value());
+      return session;
+    }
+
+  } // End of namespace xml.
+
+} // End of namespace vcsn.
+
+#endif // ! VCSN_XML_SESSION_HXX

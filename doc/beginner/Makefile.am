@@ -2,18 +2,13 @@
 #
 # $Id$
 
-TEXI2PDF = $(TEXI2DVI) --pdf
+include $(srcdir)/../Makefile.doc
 
-tex_TEX = help.tex
+dist_doc_DATA = help.tex macros.tex packages.tex 
 
-help_tex_TEX =  macros.tex packages.tex 
+help.dvi: $(dist_tex_TEX) $(dist_help_tex_TEX)
+help.pdf: $(dist_tex_TEX) $(dist_help_tex_TEX)
 
-help.dvi: $(tex_TEX) $(help_tex_TEX)
-	$(TEXI2DVI) `test -f '$(tex_TEX)' || echo '$(srcdir)/'`$(tex_TEX)
-help.pdf: $(tex_TEX) $(help_tex_TEX)
-	$(TEXI2PDF) `test -f '$(tex_TEX)' || echo '$(srcdir)/'`$(tex_TEX)
+dist_doc_DATA += help.dvi help.pdf 
 
-docdir = $(datadir)/doc/@PACKAGE_TARNAME@
-dist_doc_DATA = help.dvi help.pdf help.tex macros.tex packages.tex
-
-CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp
+MAINTAINERCLEAN = $(dist_doc_DATA)

@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -29,9 +29,8 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
-#ifndef VCSN_ALGEBRA_CONCRETE_SEMIRING_RATIONAL_NUMBER_HXX
-# define VCSN_ALGEBRA_CONCRETE_SEMIRING_RATIONAL_NUMBER_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX
 
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/limits.hh>
@@ -261,7 +260,7 @@ namespace vcsn
       return nb.print(ostr);
     }
 
-    inline
+   inline
     int	gcd(int a, unsigned int b)
     {
       unsigned n = b;
@@ -290,4 +289,23 @@ namespace vcsn
   }
 }
 
-#endif //VCSN_ALGEBRA_CONCRETE_RATIONAL_NUMBER_HXX
+namespace std
+{
+  inline
+  ::vcsn::algebra::RationalNumber
+  numeric_limits< ::vcsn::algebra::RationalNumber >::min()
+  {
+    return
+      ::vcsn::algebra::RationalNumber (std::numeric_limits<int>::min(), 1);
+  }
+
+  inline
+  ::vcsn::algebra::RationalNumber
+  numeric_limits< ::vcsn::algebra::RationalNumber >::max()
+  {
+    return
+      ::vcsn::algebra::RationalNumber (std::numeric_limits<int>::max(), 1);
+  }
+} // End of namespace std.
+
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX

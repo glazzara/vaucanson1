@@ -17,21 +17,22 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_SUM_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_SUM_TEST_HH
 
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
 # include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
 # include <krat_exp_partial_derivation_common.hh>
 
@@ -60,7 +61,7 @@ bool krat_exp_partial_derivation_sum_test(tests::Tester& tg)
 	choose_exp_and_derivate<derivation_t, krat_exp_t>(series, a);
       std::pair<krat_exp_t, std::set<krat_exp_t> > rhs_b =
 	choose_exp_and_derivate<derivation_t, krat_exp_t>(series, b);
-      
+
       TEST_DERIVATE(tsts, sucs,
 		    lhs_a.first + rhs_a.first, a,
 		    lhs_a.second + rhs_a.second);
@@ -68,11 +69,11 @@ bool krat_exp_partial_derivation_sum_test(tests::Tester& tg)
 		    lhs_b.first + rhs_b.first, b,
   		    lhs_b.second + rhs_b.second);
     }
-  
+
   std::string rate;
   SUCCESS_RATE(rate, sucs, tsts);
   TEST(t, "Various derivation tests on a sum. " + rate, sucs == tsts);
   return t.all_passed();
 }
 
-#endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_SUM_TEST_HH
+#endif // ! VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_PARTIAL_DERIVATION_KRAT_EXP_PARTIAL_DERIVATION_SUM_TEST_HH

@@ -1,7 +1,7 @@
 // derivatives_automaton.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,16 +17,18 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
-
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//
 #ifndef VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 # define VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 
@@ -41,6 +43,25 @@
 # include <vaucanson/tools/usual_macros.hh>
 
 # ifdef DEBUG
+
+namespace std
+{
+  template <typename T>
+  std::ostream& operator << (std::ostream& o, const std::list<T>& l)
+  {
+    typename std::list<T>::const_iterator	i = l.begin();
+
+    o << '{';
+    if (i != l.end())
+    {
+      o << *i;
+      for (i++; i != l.end(); ++i)
+	o << ", " << *i;
+    }
+    return o << '}';
+  }
+}
+
 #  define DERIVATES_TRACE_DEBUG(undef, e, l, s)		\
      if (!undef)					\
      {							\
@@ -53,8 +74,11 @@
        std::cout << s << std::endl;			\
        std::cout << std::endl;				\
      }
+
 # else
+
 #  define DERIVATES_TRACE_DEBUG(undef, e, l, s)
+
 # endif
 
 namespace vcsn {
@@ -85,7 +109,7 @@ namespace vcsn {
     // Function applied on each state
     void on_state(const PartialExp<S, T>& e)
     {
-      alphabet_t alpha = get()->series().monoid().alphabet();
+      alphabet_t alpha = this->get()->series().monoid().alphabet();
 
       // Test the constant term of current expression
       // If it is not zero, it is a final state
@@ -110,8 +134,8 @@ namespace vcsn {
 	  PartialExp<S, T> p_exp = *i;
 	  series_set_elt_t s_elt (e.exp_structure(),
 			      monoid_elt_t(e.exp_structure().monoid(), *a));
-	  s_elt = p_exp.weight() * s_elt;
-	  p_exp.weight() =
+	  s_elt = p_exp.begin().semiring_elt() * s_elt;
+	  p_exp.begin().semiring_elt() =
 	    e.exp_structure().semiring().identity(SELECT(semiring_elt_value_t));
 	  link_to(p_exp, s_elt);
 	}
@@ -131,8 +155,7 @@ namespace vcsn {
     derivatives_algo.run();
     if (derivatives_algo.undefined)
     {
-      /// @bug FIXME: WHAT IS THAT free() DOING HERE?
-      free(derivatives_algo.get());
+      delete derivatives_algo.get();
       return NULL;
     }
     else
@@ -153,7 +176,7 @@ namespace vcsn {
   derivatives_automaton(const Exp& kexp)
   {
     A			a_structure(kexp.structure());
-    Element<A, T>	out(a_set);
+    Element<A, T>	out (a_structure);
     Element<A, T>*	result = do_derivatives_automaton(out, kexp);
     if (result != NULL)
       out = *result;
@@ -162,4 +185,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
+#endif // ! VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX

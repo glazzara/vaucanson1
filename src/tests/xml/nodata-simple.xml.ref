@@ -18,13 +18,13 @@
       <state name="s2"/>
       <state name="s3"/>
     </states>
-    <edges>
-      <edge dst="s1" label="C" src="s0"/>
-      <edge dst="s1" label="B" src="s2"/>
-      <edge dst="s1" label="A" src="s1"/>
-      <edge dst="s3" label="A" src="s2"/>
-      <edge dst="s3" label="C" src="s3"/>
-    </edges>
+    <transitions>
+      <transition dst="s1" label="C" src="s0"/>
+      <transition dst="s1" label="B" src="s2"/>
+      <transition dst="s1" label="A" src="s1"/>
+      <transition dst="s3" label="A" src="s2"/>
+      <transition dst="s3" label="C" src="s3"/>
+    </transitions>
     <initials>
       <initial label="1" state="s0"/>
     </initials>

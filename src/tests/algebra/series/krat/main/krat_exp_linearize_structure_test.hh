@@ -17,40 +17,50 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_STRUCTURE_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_STRUCTURE_TEST_HH
 
-# include <check/tester.hh>
-# include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/krat_exp_linearize.hh>
 # include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/tools/gen_random.hh>
 
-// This must check the structure of a linearized expression.
-// It redefines the << operator of utility namespace, in order to print
-// linearized expressions without their numeration.
-// So linearized expressions and normal expressionas must be printed in the
-// same way.
-namespace utility {
+/**
+ * @file  krat_exp_linearize_structure_test.hh
+ *
+ * Checks the structure of a linearized expression.
+ *
+ * This test  redefines the <<  operator in the utility  namespace, in
+ * order to print linearized expressions without their numeration.  So
+ * linearized and original expressions should be printed the same way.
+ */
+
+namespace utility
+{
 
   template <typename U>
-  std::ostream& operator<<(std::ostream& o, std::pair<U, int> p)
+  std::ostream&
+  operator << (std::ostream& o, const std::pair<U, int>& p)
   {
     return o << p.first;
   }
 
   template <typename U, class Traits, class Allocator>
   std::ostream& operator<<(std::ostream& o,
-    std::basic_string<std::pair<U, int>, Traits, Allocator> s)
+			   const std::basic_string<std::pair<U, int>,
+			                           Traits,
+			                           Allocator>& s)
   {
     typename
     std::basic_string<std::pair<U, int>, Traits, Allocator>::const_iterator i;
@@ -58,10 +68,12 @@ namespace utility {
       o << i->first;
     return o;
   }
+
 }
 
 template <class Expr>
-bool krat_exp_linearize_structure_test(tests::Tester& tg)
+bool
+krat_exp_linearize_structure_test(tests::Tester& tg)
 {
   // Original types (for the input expression).
   typedef Expr						krat_exp_t;
@@ -76,47 +88,47 @@ bool krat_exp_linearize_structure_test(tests::Tester& tg)
 
   // Output types (for the linearized expression).
   typedef
-  typename vcsn::linearize_element<series_set_t, kexp_t>	linearize_element_t;
+    typename vcsn::linearize_element<series_set_t, kexp_t> linearize_element_t;
   typedef
-  typename linearize_element_t::element_t		out_krat_exp_t;
+    typename linearize_element_t::element_t		out_krat_exp_t;
 
   tests::Tester t(tg.verbose());
   srand(time(0));
 
-  alphabet_t alphabet;
-  letter_t a = alphabet.random_letter();
-  letter_t b = alphabet.random_letter();
+  alphabet_t	alphabet;
+  letter_t	a = alphabet.random_letter();
+  letter_t	b = alphabet.random_letter();
   alphabet.insert(a);
   alphabet.insert(b);
-  monoid_t monoid(alphabet);
-  semiring_t semiring;
-  series_set_t s(semiring, monoid);
+  monoid_t	monoid (alphabet);
+  semiring_t	semiring;
+  series_set_t	s (semiring, monoid);
 
-  const unsigned int nb_tests_final = 200;
-  unsigned int nb_tests = 0;
-  unsigned int nb_succs = 0;
-  for (unsigned int n = 0; n < nb_tests_final; ++n)
-  {
-    krat_exp_t		exp = s.choose(SELECT(kexp_t));
-    out_krat_exp_t	lin = linearize(exp);
-    std::stringstream	exp_str;
-    std::stringstream	lin_str;
+  const int	nb_tests = 200;
+  int		nb_succs = 0;
 
-    exp_str << exp;
-    lin_str << lin;
-    if (exp_str.str() != lin_str.str())
-      std::cerr << "TEST:" << exp << "!=" << lin << std::endl;
-    else
-      ++nb_succs;
-    ++nb_tests;
-  }
+  for (int n = 0; n < nb_tests; ++n)
+    {
+      krat_exp_t	exp = s.choose(SELECT(kexp_t));
+      out_krat_exp_t	lin = linearize(exp);
+      std::stringstream	exp_str;
+      std::stringstream	lin_str;
+
+      exp_str << exp;
+      lin_str << lin;
+
+      if (exp_str.str() != lin_str.str())
+	std::cerr << "TEST:" << exp << "!=" << lin << std::endl;
+      else
+	++nb_succs;
+    }
 
   std::string rate;
   SUCCESS_RATE(rate, nb_succs, nb_tests);
-  TEST(t, "Structure of linearization on lots of random expressions " + rate,
+  TEST(t, "Structure of linearize(exp) is the same as exp. " + rate,
        nb_tests == nb_succs);
 
   return t.all_passed();
 }
 
-#endif // VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_STRUCTURE_TEST_HH
+#endif // ! VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_STRUCTURE_TEST_HH

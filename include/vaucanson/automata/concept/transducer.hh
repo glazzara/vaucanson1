@@ -1,7 +1,7 @@
 // transducer.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH
 # define VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH
@@ -63,18 +65,17 @@ namespace vcsn {
   /// This is the final class for the set of transducers.
   template <class Series>
   class Transducer
-    : public TransducerBase<Transducer<Series> >
+    : public TransducerBase<Transducer<Series> >,
+      private SetSlot<Series>
   {
   public:
     typedef Transducer<Series>				     self_t;
-    typedef typename virtual_types<self_t>::series_set_t	     series_set_t;
+    typedef typename virtual_types<self_t>::series_set_t     series_set_t;
 
     Transducer(const series_set_t&);
 
     const series_set_t&	series() const;
 
-  private:
-    series_set_t	series_;
   };
 
   template <class S, class T>
@@ -110,6 +111,10 @@ namespace vcsn {
   typename identity_transducer_helper<S, T>::ret
   partial_identity(const Element<S, T>&);
 
+  template <class Series>
+  bool
+  operator==(const Transducer<Series>&, const Transducer<Series>&);
+
 } // vcsn
 
 
@@ -118,4 +123,4 @@ namespace vcsn {
 #endif // VCSN_USE_INTERFACE_ONLY
 
 
-#endif // VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH
+#endif // ! VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HH

@@ -1,7 +1,7 @@
 // glushkov_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH
@@ -36,8 +38,6 @@
 # include <vaucanson/algorithms/eval.hh>
 
 # include <vaucanson/algebra/implementation/series/krat.hh>
-
-# include <vaucanson/tools/usual.hh>
 
 # define TEST_ON(ExpStr, Exp, St, TrA, TrB)				\
   {									\
@@ -117,6 +117,7 @@ bool glushkov_test(tests::Tester& tg)
 
   unsigned nb_word_test = 100;
   unsigned nb_test = 40;
+  unsigned nb_test_done = 0;
 
   letter_t	lalb[] = { la, lb, letter_t () };
 
@@ -150,50 +151,58 @@ bool glushkov_test(tests::Tester& tg)
 	krat_t		exp = ss.choose(SELECT(exp_t));
 	automaton_t	au (aa);
 
-	if (t.verbose() == tests::high)
-	  std::cerr << "Expression : " << exp << std::endl;
-
-	standard_of(au, exp.value());
-	bool standard = is_standard(au) or exp == zero_as<exp_t>::of(ss);
-	realtime_here(au);
-
-	if (t.verbose() == tests::high)
+	try
 	  {
-	    TEST_MSG("Automaton saved in /tmp.");
-	    SAVE_AUTOMATON_DOT("/tmp", "glushkov", au, nb);
-	  }
+	    if (t.verbose() == tests::high)
+	      std::cerr << "Expression : " << exp << std::endl;
+	    standard_of(au, exp.value());
+	    bool standard = is_standard(au) or exp == zero_as<exp_t>::of(ss);
+	    realtime_here(au);
 
-	if (exp != ss.zero(SELECT(exp_t)))
-	  {
-	    unsigned i;
-	    for (i = 0; i < nb_word_test; ++i)
+	    if (t.verbose() == tests::high)
 	      {
-		monoid_elt_t w = exp.choose_from_supp();
-		if (t.verbose() == tests::high)
-		  std::cout << "TEST: glushkov " << i << " : test " << w
-			    << std::endl;
-		if (eval(au, w) ==
-		    zero_as<semiring_elt_value_t>::of(ss.semiring()))
-		  {
-		    if (t.verbose() == tests::high)
-		      std::cout << "TEST: glushkov " << i << " failed."
-				<< std::endl;
-		    break;
-		  }
+		TEST_MSG("Automaton saved in /tmp.");
+		SAVE_AUTOMATON_DOT("/tmp", "glushkov", au, nb);
 	      }
-	    if (standard and
-		((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
+
+	    if (exp != ss.zero(SELECT(exp_t)))
+	      {
+		unsigned i;
+		for (i = 0; i < nb_word_test; ++i)
+		  {
+		    monoid_elt_t w = exp.choose_from_supp();
+		    if (t.verbose() == tests::high)
+		      std::cout << "TEST: glushkov " << i << " : test " << w
+				<< std::endl;
+		    if (eval(au, w) ==
+			zero_as<semiring_elt_value_t>::of(ss.semiring()))
+		      {
+			if (t.verbose() == tests::high)
+			  std::cout << "TEST: glushkov " << i << " failed."
+				    << std::endl;
+			break;
+		      }
+		  }
+		if (standard and
+		    ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
+		  ++success;
+	      }
+	    else if (standard)
 	      ++success;
+	    ++nb_test_done;
 	  }
-	else if (standard)
-	  ++success;
+	catch (...)
+	  {
+	    ++nb_test;
+	    //	    std::cout << exp << std::endl;
+	  }
       }
     std::string rate;
-    SUCCESS_RATE(rate, success, nb_test);
-    TEST(t, "Random test " + rate, success == nb_test);
+    SUCCESS_RATE(rate, success, nb_test_done);
+    TEST(t, "Random test " + rate, success == nb_test_done);
   }
 
   return t.all_passed();
 }
 
-#endif // VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH
+#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH

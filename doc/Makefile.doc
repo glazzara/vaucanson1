@@ -1,0 +1,18 @@
+# -*- Makefile -*-
+
+TEXI2PDF = $(TEXI2DVI) --pdf
+
+.txt.tex:
+	$(RST2TEX) --input-encoding=iso-8859-1 $< >$@
+
+.txt.html:
+	$(RST2HTML) --input-encoding=iso-8859-1 $< >$@
+
+.tex.pdf:
+	$(TEXI2PDF) -o $@ $<
+
+.tex.dvi:
+	$(TEXI2DVI) -o $@ $<
+
+docdir = $(datadir)/doc/$(PACKAGE_TARNAME)
+CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp *.log

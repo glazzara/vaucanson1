@@ -1,8 +1,5 @@
-AM_LDFLAGS = -lxerces-c -L@XERCESC@/lib
-AM_CPPFLAGS = -I$(top_srcdir)/include \
-              -I$(top_builddir)/include \
-	      -I@XERCESC@/include
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
+AM_CPPFLAGS = -I$(top_builddir)/include -I$(top_srcdir)/include
 
 TESTS_ENVIRONMENT= SRCDIR=$(srcdir)
 

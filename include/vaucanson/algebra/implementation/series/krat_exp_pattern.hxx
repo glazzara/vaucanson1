@@ -1,7 +1,7 @@
 // krat_exp_pattern.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PATTERN_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PATTERN_HXX
 
 # include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
 
@@ -42,13 +44,13 @@ namespace vcsn {
 
     template <class T, class U>
     BinaryOp<T, U>::BinaryOp(const BinaryOp& b) :
-      lhs_(b.lhs_), 
+      lhs_(b.lhs_),
       rhs_(b.rhs_)
     {}
 
     template <class T, class U>
-    BinaryOp<T, U>::BinaryOp(const T& lhs, const U& rhs) : 
-      lhs_(lhs), 
+    BinaryOp<T, U>::BinaryOp(const T& lhs, const U& rhs) :
+      lhs_(lhs),
       rhs_(rhs)
     {}
 
@@ -111,12 +113,12 @@ namespace vcsn {
     template <class T>
     Value<T>::Value()
     {}
-    
+
     template <class T>
     Value<T>::Value(const Value& v) :
-      v_(v)
+      v_ (v.v_)
     {}
-    
+
     template <class T>
     Value<T>::Value(const T& v) :
       v_(v)
@@ -135,10 +137,10 @@ namespace vcsn {
     {
       return v_;
     }
-    
+
     template <class Self, class T, class U, class F>
     U
-    GenericMatcher<Self, T, U, F>::match(const T& ast) 
+    GenericMatcher<Self, T, U, F>::match(const T& ast)
     {
       return F::d(*static_cast<Self*>(this), ast);
     }
@@ -146,9 +148,9 @@ namespace vcsn {
     template <class Self, class T, class U, class F>
     GenericMatcher<Self, T, U, F>::GenericMatcher()
     {}
-    
+
   } // algebra
-  
+
 } // vcsn
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PATTERN_HXX

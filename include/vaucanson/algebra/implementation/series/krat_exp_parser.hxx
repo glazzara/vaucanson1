@@ -1,7 +1,7 @@
 // krat_exp_parser.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_HXX
 
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 
@@ -121,17 +123,17 @@ namespace vcsn {
 	{
 	  switch (type)
 	    {
-	    case a_word   : return "word";
-	    case a_weight : return "weight";
-	    case lparen   : return "(";
-	    case rparen   : return ")";
-	    case one      : return "one";
-	    case zero     : return "zero";
-	    case dot      : return ".";
-	    case e_star   : return "*";
-	    case plus     : return "+";
-	    case space    : return " ";
-	    case eof      : return "EOF";
+	    case a_word			: return "word";
+	    case a_weight		: return "weight";
+	    case lparen			: return "(";
+	    case rparen			: return ")";
+	    case one			: return "one";
+	    case zero			: return "zero";
+	    case krat_exp_lexing::dot	: return ".";
+	    case e_star			: return "*";
+	    case krat_exp_lexing::plus	: return "+";
+	    case space			: return " ";
+	    case eof			: return "EOF";
 	    }
 	  return "";
 	}
@@ -282,10 +284,10 @@ namespace vcsn {
       void
       lex(const std::string& in, const Element<S, T>& e)
       {
-	typedef typename Element<S, T>::monoid_elt_t	monoid_elt_t;
-	typedef typename Element<S, T>::monoid_elt_value_t	monoid_elt_value_t;
-	typedef typename Element<S, T>::semiring_elt_t	semiring_elt_t;
-	typedef std::string::const_iterator		iterator_t;
+	typedef typename Element<S, T>::monoid_elt_t	   monoid_elt_t;
+	typedef typename Element<S, T>::monoid_elt_value_t monoid_elt_value_t;
+	typedef typename Element<S, T>::semiring_elt_t	   semiring_elt_t;
+	typedef std::string::const_iterator		   iterator_t;
 
 	iterator_t i = in.begin();
 	std::set<char> escaped = tools::usual_escaped_characters();
@@ -298,18 +300,18 @@ namespace vcsn {
 	    switch (*i)
 	      {
 		// operator case.
-	      case '(' : tok = lparen; len = 1; break;
-	      case ')' : tok = rparen; len = 1; break;
-	      case '+' : tok = plus;   len = 1; break;
-	      case '*' : tok = e_star; len = 1; break;
-	      case '.' : tok = dot;    len = 1; break;
-	      case ' ' : tok = space;  len = 1; break;
-	      case '0' : tok = zero;   len = 1; break;
-	      case '1' : tok = one;    len = 1; break;
+	      case '(' : tok = lparen;			len = 1; break;
+	      case ')' : tok = rparen;			len = 1; break;
+	      case '+' : tok = krat_exp_lexing::plus;	len = 1; break;
+	      case '*' : tok = e_star;			len = 1; break;
+	      case '.' : tok = krat_exp_lexing::dot;	len = 1; break;
+	      case ' ' : tok = space;			len = 1; break;
+	      case '0' : tok = zero;			len = 1; break;
+	      case '1' : tok = one;			len = 1; break;
 	      }
 	    // try word parser.
 	    iterator_t mli = i;
-	    monoid_elt_t w(e.structure().monoid());
+	    monoid_elt_t w (e.structure().monoid());
 	    if (parse_word(w, in, mli, escaped))
 	      {
 		if (mli - i > 1)
@@ -319,7 +321,7 @@ namespace vcsn {
 	      }
 	    // try weight lexer.
 	    iterator_t wli = i;
-	    semiring_elt_t ww;
+	    semiring_elt_t ww (e.structure().semiring());
 	    if (parse_weight(ww, in, wli))
 	      {
 		if (wli - i > len)
@@ -545,9 +547,9 @@ namespace vcsn {
       {
 	trace("parse_exp: Start");
 	parse_term (exp);
-	while (lexer_.first().is_a(plus))
+	while (lexer_.first().is_a(krat_exp_lexing::plus))
 	  {
-	    accept(plus);
+	    accept(krat_exp_lexing::plus);
 	    Element<S, T> rhs (exp.structure());
 	    parse_term(rhs);
 	    exp = exp + rhs;
@@ -560,15 +562,15 @@ namespace vcsn {
       {
 	trace("parse_term: Start");
 	parse_right_weighted (exp);
-	while (lexer_.first().is_a(dot)		||
-	       lexer_.first().is_a(a_weight)	||
-	       lexer_.first().is_a(lparen)	||
-	       lexer_.first().is_a(one)		||
-	       lexer_.first().is_a(zero)	||
+	while (lexer_.first().is_a(krat_exp_lexing::dot)	||
+	       lexer_.first().is_a(a_weight)			||
+	       lexer_.first().is_a(lparen)			||
+	       lexer_.first().is_a(one)				||
+	       lexer_.first().is_a(zero)			||
 	       lexer_.first().is_a(a_word))
 	  {
-	    if (lexer_.first().is_a(dot))
-	      accept(dot);
+	    if (lexer_.first().is_a(krat_exp_lexing::dot))
+	      accept(krat_exp_lexing::dot);
 	    Element<S, T> rhs (exp.structure());
 	    parse_right_weighted(rhs);
 	    exp = exp * rhs;
@@ -718,4 +720,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_PARSER_HXX

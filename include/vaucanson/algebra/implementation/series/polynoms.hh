@@ -1,7 +1,7 @@
 // polynoms.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
-# define VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HH
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
@@ -86,6 +88,12 @@ namespace vcsn {
       const std::map<Tm, Tw>&
       as_map() const;
 
+      const Tw&
+      operator [] (const Tm& m) const;
+
+      Tw&
+      operator [] (const Tm& m);
+
     protected:
       std::map<Tm, Tw> map_;
     };
@@ -109,6 +117,14 @@ namespace vcsn {
     {
       polynom<Tm,Tw>
       operator()(const Series& s, const polynom<Tm,Tw>& l) const;
+    protected:
+      template <class S>
+      static
+      Tw transpose(const SeriesBase<S>& s, const Tw& w);
+
+      template <class S>
+      static
+      Tw transpose(const SemiringBase<S>& s, const Tw& w);
     };
 
     template <class Tm, class Tw>
@@ -134,6 +150,10 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
+
+  template<typename Self, typename Tm, typename Tw>
+  void op_in_star(const algebra::SeriesBase<Self>& s,
+		  algebra::polynom<Tm, Tw>& m);
 
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_is_finite_app(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m);
@@ -358,4 +378,4 @@ namespace std {
 #endif // VCSN_USE_INTERFACE_ONLY
 
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_POLYNOMS_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_POLYNOMS_HH

@@ -1,7 +1,7 @@
 // history.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_CONCEPT_HISTORY_HXX
 # define VCSN_AUTOMATA_CONCEPT_HISTORY_HXX
@@ -116,7 +118,7 @@ namespace vcsn {
 	     = states_events_[s].begin();
 	   ev != states_events_[s].end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       states_events_[s].push_front(new UnaryEvent<hstate_t>(e, first));
       return true;
@@ -133,7 +135,7 @@ namespace vcsn {
 	     states_events_[s].begin();
 	   ev != states_events_[s].end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       states_events_[s].push_front(new BinaryEvent<hstate_t>
 				   (e, first, second));
@@ -151,7 +153,7 @@ namespace vcsn {
       for (typename state_events_t::const_iterator ev = se->second.begin();
 	   ev != se->second.end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return *ev;
       return 0;      
     }
@@ -165,7 +167,7 @@ namespace vcsn {
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
-	if (ev->second->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       edges_events_[edge].push_front(new Event<hedge_t>(e));
       return true;
@@ -181,7 +183,7 @@ namespace vcsn {
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       edges_events_[edge].push_front(new UnaryEvent<hedge_t>(e, first));
       return true;
@@ -198,7 +200,7 @@ namespace vcsn {
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       edges_events_[edge].push_front
 	(new BinaryEvent<hedge_t>(e, first, second));
@@ -217,7 +219,7 @@ namespace vcsn {
       for (typename edge_events_t::const_iterator ev = ee->second.begin();
 	   ev != ee->second.end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return (*ev);
       return 0;
     }
@@ -258,7 +260,7 @@ namespace vcsn {
       for (typename auto_events_t::const_iterator ev = auto_events_.begin();
 	   ev != auto_events_.end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       auto_events_.push_front(new BinaryEvent<AutoType_>(e, first, second));
       return true;
@@ -271,7 +273,7 @@ namespace vcsn {
       for (typename auto_events_t::const_iterator ev = auto_events_.begin();
 	   ev != auto_events_.end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return (*ev);      
       return 0;
     }
@@ -289,4 +291,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_AUTOMATA_CONCEPT_HISTORY_HXX
+#endif // ! VCSN_AUTOMATA_CONCEPT_HISTORY_HXX

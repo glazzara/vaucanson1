@@ -10,6 +10,7 @@ EXTRA_DIST = 					\
 	closure_test.hh				\
 	thompson_test.hh			\
 	product_test.hh				\
+	product_regression_test.hh		\
 	glushkov_test.hh			\
 	in_concat_test.hh			\
 	determinist_test.hh			\
@@ -23,7 +24,6 @@ EXTRA_DIST = 					\
 	minimization_test.hh			\
 	extract_test.hh				\
 	generalized_test.hh			\
-	brzozowski_test.hh			\
 	berry_sethi_test.hh			\
 	derivatives_automaton_test.hh		\
 	is_isomorph_test.hh			\

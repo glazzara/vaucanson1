@@ -1,7 +1,7 @@
-// standard_algorithms: this file is part of the Vaucanson project.
+// standard_algorithms.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_VAUCANSON_STANDARD_ALGORITHMS_HH
-# define VCSN_VAUCANSON_STANDARD_ALGORITHMS_HH
+#ifndef VCSN_STANDARD_ALGORITHMS_HH
+# define VCSN_STANDARD_ALGORITHMS_HH
 
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
@@ -39,4 +41,4 @@
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/realtime.hh>
 
-#endif // VCSN_VAUCANSON_STANDARD_ALGORITHMS
+#endif // ! VCSN_STANDARD_ALGORITHMS_HH

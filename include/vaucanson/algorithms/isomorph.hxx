@@ -1,7 +1,7 @@
 // isomorph.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_ISOMORPH_HXX
 # define VCSN_ALGORITHMS_ISOMORPH_HXX
@@ -50,6 +52,43 @@ namespace vcsn {
   // FIXME: Such typedefs in the vcsn namespace are dangerous.
   typedef std::set<std::list<std::pair<hstate_t, hstate_t> > > possibility_t;
   typedef std::list<std::pair<hstate_t, hstate_t> > sub_possibility_t;
+
+  bool exists(const sub_possibility_t& l,
+	      const std::pair<hstate_t, hstate_t>& p)
+  {
+    for_all_const(sub_possibility_t, i, l)
+      if (*i == p) return true;
+    return false;
+  }
+
+  bool arrangement(const sub_possibility_t& mother,
+		   std::set<hstate_t>& out_a,
+		   std::set<hstate_t>& out_b)
+  {
+    if (out_a.size() == 0)
+      return true;
+    if (out_a.size() == 1)
+      {
+	if (exists(mother, std::make_pair(*out_a.begin(), *out_b.begin())))
+	  return true;
+	return false;
+      }
+    else
+      {
+	bool res = false;
+	for_all(std::set<hstate_t>, i, out_a)
+	  for_all(std::set<hstate_t>, j, out_b)
+	  if (exists(mother, std::make_pair(*i, *j)))
+	    {
+	      out_a.erase(*i);
+	      out_b.erase(*j);
+	      res = res || arrangement(mother, out_a, out_b);
+	      out_a.insert(*i);
+	      out_b.insert(*j);
+	    }
+	return res;
+      }
+  }
 
   template<typename A, typename T>
   bool
@@ -121,46 +160,6 @@ namespace vcsn {
    return false;
   }
 
-
-  bool exists(const sub_possibility_t& l,
-	      const std::pair<hstate_t, hstate_t>& p)
-  {
-    for_all_const(sub_possibility_t, i, l)
-      if (*i == p) return true;
-    return false;
-  }
-
-  bool arrangement(const sub_possibility_t& mother,
-		   std::set<hstate_t>& out_a,
-		   std::set<hstate_t>& out_b)
-  {
-    if (out_a.size() == 0)
-      return true;
-    if (out_a.size() == 1)
-      {
-	if (exists(mother, std::make_pair(*out_a.begin(), *out_b.begin())))
-	  return true;
-	return false;
-      }
-    else
-      {
-	bool res = false;
-	for_all(std::set<hstate_t>, i, out_a)
-	  for_all(std::set<hstate_t>, j, out_b)
-	  if (exists(mother, std::make_pair(*i, *j)))
-	    {
-	      out_a.erase(*i);
-	      out_b.erase(*j);
-	      res = res || arrangement(mother, out_a, out_b);
-	      out_a.insert(*i);
-	      out_b.insert(*j);
-	    }
-	return res;
-      }
-  }
-
-
-
   template<typename A, typename T>
   bool
   is_isomorph(const Element<A, T>& a, const Element<A, T>& b)
@@ -227,4 +226,4 @@ namespace vcsn {
 } // vcsn
 
 
-#endif // VCSN_ALGORITHMS_ISOMORPH_HXX
+#endif // ! VCSN_ALGORITHMS_ISOMORPH_HXX

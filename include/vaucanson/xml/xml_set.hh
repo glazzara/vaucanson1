@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_XML_SET_HH
 # define VCSN_XML_XML_SET_HH
@@ -50,7 +52,9 @@ namespace vcsn
   namespace xml
   {
 
-    using namespace xercesc;
+    using xercesc::DOMDocument;
+    using xercesc::DOMElement;
+    using xercesc::DOMNode;
 
     /** @addtogroup xml *//** @{ */
 
@@ -59,40 +63,76 @@ namespace vcsn
     {
     public:
       /// Type values.
-      enum { UNSET, UNKNOWN,
-	     BOOLEAN, NUMERICAL, TROPICAL_MIN, TROPICAL_MAX,
-	     FUNCTION, HADAMARD, SHUFFLE,
-	     LETTERS, PAIRS, WEIGHTED, INTEGERS,
-	     WORDS, UNIT, CPFM, FCM, FC,
-	     B, Z, R, RATSERIES };
+      enum
+	{
+	  UNSET, UNKNOWN,
+	  // Semiring structures.
+	  BOOLEAN, NUMERICAL, TROPICAL_MIN, TROPICAL_MAX,
+	  FUNCTION, HADAMARD, SHUFFLE,
+	  // Semiring values.
+	  B, Z, R, RATSERIES,
+	  // Monoid structures.
+	  CPFM, FCM, FC,
+	  // Monoid values.
+	  LETTERS, PAIRS, WEIGHTED, INTEGERS, WORDS, UNIT
+	};
       /**
        * @brief Read constructor.
-       * @param elt XML automaton root node.
+       * @param root XML automaton root node.
        */
-      XmlStructure(DOMElement* elt);
+      XmlStructure(DOMElement* root);
       /// Default constructor.
       XmlStructure();
       XmlStructure(const XmlStructure&);
 
+      XmlStructure&
+      operator = (const XmlStructure& rhs);
+
+      bool
+      operator == (const XmlStructure& rhs);
+
       /**
-       * Check semiring type (BOOLEAN,NUMERICAL, TROPICAL_MIN, TROPICAL_MAX,
-       * FUNCTION, HADAMARD, SHUFFLE).
+       * Get the semiring structure type.
+       *
+       * The  result may  be one  of  BOOLEAN,NUMERICAL, TROPICAL_MIN,
+       * TROPICAL_MAX, FUNCTION, HADAMARD, SHUFFLE).
        */
-      int semiring_type() const;
-      /// Check semiring set (B, Z, R, RATSERIES).
       int semiring_structure() const;
-      /// Check monoid type (LETTERS, PAIRS, WEIGHTED, INTEGERS).
-      int monoid_type() const;
-      /// Check monoid set (WORDS, UNIT, CPFM, FCM, FC).
+      /// Get the semiring value implementation type (B, Z, R, RATSERIES).
+      int semiring_value() const;
+      /**
+       * Get monoid structure type.
+       *
+       * The result is one of LETTERS, PAIRS, WEIGHTED, INTEGERS.
+       */
       int monoid_structure() const;
+      /// Check monoid value implementation type (WORDS, UNIT, CPFM, FCM, FC).
+      int monoid_value() const;
 
       XmlStructure get_subset();
 
-      const DOMNode*	monoid_alphabet() const;
-      const DOMNode*	semiring_alphabet() const;
+      const DOMDocument*	doc() const;
+      DOMDocument*		doc();
+
+      DOMElement*	root();
+      const DOMElement*	root() const;
+
+      DOMElement*	type();
+      const DOMElement*	type() const;
+
+      DOMElement*	monoid();
+      const DOMElement*	monoid() const;
+
+      DOMElement*	semiring();
+      const DOMElement*	semiring() const;
+
     private:
-      DOMElement*	monoid_node_;
-      DOMElement*	semiring_node_;
+      DOMDocument*	doc_;
+
+      DOMElement*	root_;
+      DOMElement*	type_;
+      DOMElement*	monoid_;
+      DOMElement*	semiring_;
     };
 
     /** @} */
@@ -104,7 +144,8 @@ namespace vcsn
   template <typename T>
   struct MetaElement<xml::XmlStructure, T>
     : public MetaElement<Structure<xml::XmlStructure>, T>
-  { };
+  {
+  };
 
   template <>
   struct dynamic_traits<xml::XmlStructure>
@@ -119,4 +160,4 @@ namespace vcsn
 #  include <vaucanson/xml/xml_set.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_XML_XML_SET_HH
+#endif // ! VCSN_XML_XML_SET_HH

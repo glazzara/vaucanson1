@@ -1,7 +1,7 @@
 // structure.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,49 +17,51 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_FUNDAMENTAL_STRUCTURE_HXX
-# define VCSN_FUNDAMENTAL_STRUCTURE_HXX
+#ifndef VCSN_DESIGN_PATTERN_STRUCTURE_HXX
+# define VCSN_DESIGN_PATTERN_STRUCTURE_HXX
 
 # include <vaucanson/design_pattern/structure.hh>
 
 namespace vcsn {
-    
+
   /*-----------------------------------.
   | Delegations for Structure::contain |
   `-----------------------------------*/
 
   template <typename S>
   template <typename T>
-  bool 
+  bool
   Structure<S>::contains(const Element<S, T>& elt) const
-  { 
-    return op_contains(self(), elt.value()); 
+  {
+    return op_contains(self(), elt.value());
   }
 
   template <typename S>
   template <typename T>
-  bool 
+  bool
   Structure<S>::contains(const T& elt_value) const
-  { 
-    return op_contains(self(), elt_value); 
+  {
+    return op_contains(self(), elt_value);
   }
-    
+
   template <typename S>
   template <typename OtherS, typename T>
-  bool 
+  bool
   Structure<S>::contains(const Element<OtherS, T>& other) const
-  { 
-    return false; 
+  {
+    return false;
   }
 
   /*---------------------------------.
@@ -73,25 +75,25 @@ namespace vcsn {
   {
     return op_choose(self(), SELECT(T));
   }
-    
+
   /*-------------------------.
   | Static inheritance stuff |
   `-------------------------*/
 
   template <typename S>
-  S&        
+  S&
   Structure<S>::self()
-  { 
-    return static_cast<self_t&>(*this); 
+  {
+    return static_cast<self_t&>(*this);
   }
-    
+
   template <typename S>
-  const S&  
-  Structure<S>::self() const 
-  { 
-    return static_cast<const self_t&>(*this); 
+  const S&
+  Structure<S>::self() const
+  {
+    return static_cast<const self_t&>(*this);
   }
-    
+
 
   /*-----------------------.
   | Protected constructors |
@@ -111,18 +113,12 @@ namespace vcsn {
   /*--------------------.
   | Default Comparison  |
   `--------------------*/
-  template<typename S>
-  bool operator==(const vcsn::Structure<S>& ,
-		  const vcsn::Structure<S>& )
-  { 
-    return true; 
-  }
 
   template<typename S>
-  bool operator!=(const vcsn::Structure<S>& a,
-		  const vcsn::Structure<S>& b)
-  { return !(a == b); }
+  bool operator != (const vcsn::Structure<S>& a,
+		    const vcsn::Structure<S>& b)
+  { return not (a.self() == b.self()); }
 
 } // vcsn
 
-#endif // VCSN_FUNDAMENTAL_STRUCTURE_HXX
+#endif // ! VCSN_DESIGN_PATTERN_STRUCTURE_HXX

@@ -14,16 +14,9 @@ EXTRA_DIST = generate_files.sh
 test_base.cc: generate_files.sh \$(top_srcdir)/include/Makefile.am
 	\$(SHELL) "\$(srcdir)"/generate_files.sh "\$(srcdir)"
 
-if XML_CHECK
-  AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -I\$(top_srcdir)/include -I\$(top_builddir)/include -I\$(XERCESC)/include
-else
-AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -I\$(top_srcdir)/include -I\$(top_builddir)/include
-endif
+AM_CPPFLAGS = -I\$(top_srcdir)/include -I\$(top_builddir)/include
 AM_CXXFLAGS = \$(CXXFLAGS_STRICT)
 
-if XML_CHECK
-  AM_LDFLAGS = -L\$(XERCESC)/lib -lxerces-c
-endif
 check_PROGRAMS= \\
 EOF
 awk '/xml/ { next }; { gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' \
@@ -70,7 +63,7 @@ rm files.tmp
 
 # Build base test.
 cat > test_base.cc << EOF
-#define INC_(I) < I >
+#define INC_(I) <I >
 #define INC(I) INC_(I)
 #include INC(INCLUDE)
 

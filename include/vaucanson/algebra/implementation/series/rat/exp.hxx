@@ -1,7 +1,7 @@
 // exp.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,28 +17,24 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_RAT_EXP_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_RAT_EXP_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_EXP_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_EXP_HXX
 
-# include <algorithm>
-# include <iostream>
-
-# include <vaucanson/design_pattern/element.hh>
-# include <vaucanson/algebra/implementation/series/transpose.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
-# include <vaucanson/algebra/implementation/series/rat/nodes.hh>
+
 # include <vaucanson/algebra/implementation/series/rat/depth_visitor.hh>
-# include <vaucanson/tools/usual_escaped_characters.hh>
 
 namespace vcsn {
 
@@ -65,8 +61,14 @@ namespace vcsn {
     {}
 
     template<typename LetterT, typename WeightT>
+    exp<LetterT, WeightT>::~exp()
+    {
+      delete base_;
+    }
+
+    template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT>&
-    exp<LetterT, WeightT>::operator=(const exp& other)
+    exp<LetterT, WeightT>::operator = (const exp& other)
     {
       if (other.base_ != base_)
 	{
@@ -78,15 +80,7 @@ namespace vcsn {
 
     template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT>&
-    exp<LetterT, WeightT>::swap(exp& otether)
-    {
-      std::swap(base_, other.base_);
-      return *this;
-    }
-
-    template<typename LetterT, typename WeightT>
-    exp<LetterT, WeightT>&
-    exp<LetterT, WeightT>::operator+=(const exp& other)
+    exp<LetterT, WeightT>::operator += (const exp& other)
     {
       base_ = new n_sum_t(base_, other.base_->clone());
       return *this;
@@ -94,7 +88,7 @@ namespace vcsn {
 
     template<typename LetterT, typename WeightT>
     exp<LetterT, WeightT>&
-    exp<LetterT, WeightT>::operator*=(const exp& other)
+    exp<LetterT, WeightT>::operator *= (const exp& other)
     {
       base_ = new n_prod_t(base_, other.base_->clone());
       return *this;
@@ -104,6 +98,14 @@ namespace vcsn {
     exp<LetterT, WeightT>& exp<LetterT, WeightT>::star()
     {
       base_ = new n_star_t(base_);
+      return *this;
+    }
+
+    template<typename LetterT, typename WeightT>
+    exp<LetterT, WeightT>&
+    exp<LetterT, WeightT>::swap(exp& other)
+    {
+      std::swap(base_, other.base_);
       return *this;
     }
 
@@ -123,12 +125,6 @@ namespace vcsn {
     }
 
     template<typename LetterT, typename WeightT>
-    exp<LetterT, WeightT>::~exp()
-    {
-      delete base_;
-    }
-
-    template<typename LetterT, typename WeightT>
     typename exp<LetterT, WeightT>::node_t* &
     exp<LetterT, WeightT>::base()
     {
@@ -137,22 +133,25 @@ namespace vcsn {
 
     template<typename LetterT, typename WeightT>
     typename exp<LetterT, WeightT>::node_t* const &
-    exp<LetterT, WeightT>::base() const { return base_; }
+    exp<LetterT, WeightT>::base() const
+    {
+      return base_;
+    }
 
     template<typename LetterT, typename WeightT>
-    bool exp<LetterT, WeightT>::operator==(const exp& other) const
+    bool exp<LetterT, WeightT>::operator == (const exp& other) const
     {
       return !(*base_ != *other.base_);
     }
 
     template<typename LetterT, typename WeightT>
-    bool exp<LetterT, WeightT>::operator!=(const exp& other) const
+    bool exp<LetterT, WeightT>::operator != (const exp& other) const
     {
       return *base_ != *other.base_;
     }
 
     template<typename LetterT, typename WeightT>
-    bool exp<LetterT, WeightT>::operator<(const exp& other) const
+    bool exp<LetterT, WeightT>::operator < (const exp& other) const
     {
       return *base_ < *other.base_;
     }
@@ -191,8 +190,8 @@ namespace vcsn {
     }
 
     template<typename M, typename W>
-    const exp<M, W> operator*(const exp<M, W>& lhs,
-			      const exp<M, W>& rhs)
+    const exp<M, W> operator * (const exp<M, W>& lhs,
+				const exp<M, W>& rhs)
     {
       exp<M, W> ret(lhs);
       ret *= rhs;
@@ -200,8 +199,8 @@ namespace vcsn {
     }
 
     template<typename M, typename W>
-    exp<M, W> operator+(const exp<M, W>& lhs,
-			const exp<M, W>& rhs)
+    exp<M, W> operator + (const exp<M, W>& lhs,
+			  const exp<M, W>& rhs)
     {
       exp<M, W> ret(lhs);
       ret += rhs;
@@ -209,8 +208,8 @@ namespace vcsn {
     }
 
     template<typename M, typename W>
-    exp<M, W> operator*(const W& lhs,
-			const exp<M, W>& rhs)
+    exp<M, W> operator * (const W& lhs,
+			  const exp<M, W>& rhs)
     {
       exp<M, W> ret(rhs);
       ret.base() = new LeftWeighted<M, W>(lhs, ret.base());
@@ -218,8 +217,8 @@ namespace vcsn {
     }
 
     template<typename M, typename W>
-    exp<M, W> operator*(const exp<M, W>& lhs,
-			const W& rhs)
+    exp<M, W> operator * (const exp<M, W>& lhs,
+			  const W& rhs)
     {
       exp<M, W> ret(lhs);
       ret.base() = new RightWeighted<M, W>(rhs, ret.base());
@@ -227,7 +226,7 @@ namespace vcsn {
     }
 
     // FIXME: this is an evil hack, but without it there is an ambiguity
-    // in calls to exp * number or num * exp
+    // FIXME: in calls to exp * number or number * exp.
 
     template<typename M, typename S, typename T>
     exp<M, Element<S, T> >
@@ -251,159 +250,15 @@ namespace vcsn {
       return ret;
     }
 
-  } // rat
-
-  namespace algebra {
-
-    template <class Matcher, class Monoid, class Semiring>
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    DispatchVisitor(Matcher& m) :
-      matcher_(m)
-    {}
-
-    template <class Matcher, class Monoid, class Semiring>
-
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    ~DispatchVisitor()
-    {}
-
-    template <class Matcher, class Monoid, class Semiring>
-    void
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    product(const node_t* lhs, const node_t* rhs)
+    template<typename M, typename W>
+    void swap(vcsn::rat::exp<M, W>& lhs,
+	      vcsn::rat::exp<M, W>& rhs)
     {
-      ret_ = matcher_.match_nodeProduct(typename Matcher::Product(lhs, rhs));
+      lhs.swap(rhs);
     }
 
-    template <class Matcher, class Monoid, class Semiring>
-    void
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    sum(const node_t* lhs, const node_t* rhs)
-    {
-      ret_ = matcher_.match_nodeSum(typename Matcher::Sum(lhs, rhs));
-    }
-    template <class Matcher, class Monoid, class Semiring>
-    void
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    star(const node_t* node)
-    {
-      ret_ = matcher_.match_nodeStar(typename Matcher::Star(node));
-    }
+  } // End of namespace rat.
 
-    template <class Matcher, class Monoid, class Semiring>
-    void
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    left_weight(const semiring_elt_value_t& w, const node_t* node)
-    {
-      ret_ = matcher_.match_nodeLeftWeight(typename Matcher::LeftWeight(w,
-									node));
-    }
+} // End of namespace vcsn.
 
-    template <class Matcher, class Monoid, class Semiring>
-    void
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    right_weight(const semiring_elt_value_t& w, const node_t* node)
-    {
-      ret_ = matcher_.match_nodeRightWeight
-	(typename Matcher::RightWeight(node, w));
-    }
-
-    template <class Matcher, class Monoid, class Semiring>
-    void
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    constant(const monoid_elt_value_t& m)
-    {
-      ret_ = matcher_.match_nodeConstant(typename Matcher::Constant(m));
-    }
-
-    template <class Matcher, class Monoid, class Semiring>
-    void
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    zero()
-    {
-      ret_ = matcher_.match_nodeZero(typename Matcher::Zero());
-    }
-
-    template <class Matcher, class Monoid, class Semiring>
-    void
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    one()
-    {
-      ret_ = matcher_.match_nodeOne(typename Matcher::One());
-    }
-
-    template <class Matcher, class Monoid, class Semiring>
-    typename DispatchVisitor<Matcher, Monoid, Semiring>::return_type
-    DispatchVisitor<Matcher, Monoid, Semiring>::
-    get_ret()
-    {
-      return ret_;
-    }
-
-    template <class M, class W>
-    template <class Matcher>
-    typename Matcher::return_type
-    DispatchFunction<rat::exp<M, W> >::d(Matcher& matcher,
-					 const rat::exp<M, W>& exp)
-    {
-      DispatchVisitor<Matcher, M, W> v(matcher);
-      exp.accept(v);
-      return v.get_ret ();
-    }
-
-  } // algebra
-
-} // vcsn
-
-namespace vcsn {
-
-  template <class Monoid_, class Semiring_>
-  void
-  ReverseVisitor<Monoid_,Semiring_>::
-  product(rat::Node<Monoid_, Semiring_>* lhs,
-	  rat::Node<Monoid_, Semiring_>* rhs)
-  {
-    lhs->accept(*this);
-    rhs->accept(*this);
-    std::swap(lhs, rhs);
-  }
-
-  template <typename S, typename M, typename W>
-  rat::exp<M, W>&
-  algebra::DefaultTransposeFun<S, rat::exp<M,W> >::
-  operator()(const S&, const rat::exp<M, W>& exp)
-  {
-    rat::exp<M, W>*  rexp = new rat::exp<M, W>(exp);
-
-    ReverseVisitor<M,W>  rv;
-    rexp.accept(*this);
-    return *rexp;
-  }
-
-} // vcsn
-
-
-#include <vaucanson/algebra/implementation/series/rat/dump_visitor.hh>
-
-namespace std {
-
-  template<typename M_, typename W_>
-  std::ostream& operator<<(std::ostream& o,
-			   const vcsn::rat::exp<M_, W_>& exp)
-  {
-    std::set<char> escape_set = vcsn::tools::usual_escaped_characters();
-    vcsn::rat::DumpVisitor<M_, W_> v(o, escape_set, "0", "1");
-    exp.accept(v);
-    return o;
-  }
-
-  template<typename M, typename W>
-  void swap(vcsn::rat::exp<M, W>& lhs,
-	    vcsn::rat::exp<M, W>& rhs)
-  {
-    lhs.swap(rhs);
-  }
-
-}
-
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_RAT_EXP_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_EXP_HXX

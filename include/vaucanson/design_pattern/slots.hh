@@ -1,7 +1,7 @@
 // slots.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_FUNDAMENTAL_SLOTS_HH
-# define VCSN_FUNDAMENTAL_SLOTS_HH
+#ifndef VCSN_DESIGN_PATTERN_SLOTS_HH
+# define VCSN_DESIGN_PATTERN_SLOTS_HH
 
 /** @addtogroup design_pattern *//** @{ */
 /**
@@ -88,7 +90,7 @@ namespace vcsn {
      * accessing methods of the S.E. (which do not use the reference
      * anyway).
      */
-    const S&	get() const;
+    const S&	_structure_get() const;
 
     /**
      * @name Methods to link the Slot
@@ -100,10 +102,10 @@ namespace vcsn {
     //@{
 
     /// Link a @c SetSlot to another.
-    void	assign(const SetSlotAttribute& other);
+    void	_structure_assign(const SetSlotAttribute& other);
 
     /// Link a @c SetSlot to a structural element.
-    void	attach(const S& other);
+    void	_structure_attach(const S& other);
     //@}
 
     /**
@@ -112,7 +114,7 @@ namespace vcsn {
      *
      * In this version this method always returns @c true.
      */
-    bool	bound() const;
+    bool	_structure_bound() const;
   };
 
   /**
@@ -152,7 +154,7 @@ namespace vcsn {
     SetSlotAttribute(const S& other);
 
     /// Retrieve the structural element reference from the attribute.
-    const S&	get() const;
+    const S&	_structure_get() const;
 
     //@{
     /**
@@ -161,15 +163,15 @@ namespace vcsn {
      * This method updates the S.E. reference in the attribute with
      * the reference given as argument.
      */
-    void	assign(const SetSlotAttribute& other);
-    void	attach(const S& s);
+    void	_structure_assign(const SetSlotAttribute& other);
+    void	_structure_attach(const S& s);
     //@}
 
     /**
      * @brief Tell whether the reference to the structural element is
      *        valid or not (NULL).
      */
-    bool	bound() const;
+    bool	_structure_bound() const;
 
   protected:
     const S*	s_; ///< The actual reference to a structural element.
@@ -190,14 +192,21 @@ namespace vcsn {
    * dynamic_traits\<S\>::ret, which chooses which version of @c
    * SetSlotAttribute to inherit from.
    *
+   * Additionnally, the class can be meta-tagged when multiple
+   * inheritance for the same structural element @c S is needed.
+   * This meta-tag (second template argument) makes the type
+   * unique w.r.t. the tag type.
+   *
    * @see
    *  - @c SetSlotAttribute
    *  - @c dynamic_traits
    *  - @c Element
    */
-  template<typename S>
+  template<typename S, typename Tag>
   struct SetSlot : SetSlotAttribute<S, dynamic_traits<S>::ret>
   {
+    typedef Tag tag_type;
+ 
     //@{
     /**
      * @brief Trivial constructor. Calls the inherited constructor from
@@ -217,4 +226,4 @@ namespace vcsn {
 #  include <vaucanson/design_pattern/slots.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_FUNDAMENTAL_SLOTS_HH
+#endif // ! VCSN_DESIGN_PATTERN_SLOTS_HH

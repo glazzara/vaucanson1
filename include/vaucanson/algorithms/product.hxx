@@ -1,7 +1,7 @@
 // product.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_PRODUCT_HXX
 # define VCSN_ALGORITHMS_PRODUCT_HXX
@@ -63,7 +65,7 @@ namespace vcsn {
       }
       template <typename Auto>
       static
-      void setcoordfrom(const Auto& a, hstate_t,
+      void setcoordfrom(const Auto&, hstate_t,
                         Tag, hstate_t,
                         Tag, hstate_t)
       {
@@ -145,24 +147,28 @@ namespace vcsn {
 
   template <typename A, typename lhs_t, typename rhs_t, typename output_t>
   void
-  product(const AutomataBase<A>&	,
+  product(const AutomataBase<A>&,
 	  output_t&			output,
 	  const lhs_t&			lhs,
 	  const rhs_t&			rhs,
-	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m)
+	  std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m)
   {
+    AUTOMATON_TYPES(output_t);
+
     typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
     typedef std::set<hedge_t>				delta_ret_t;
     typedef std::map<pair_hstate_t, hstate_t>		visited_t;
-    AUTOMATON_TYPES(output_t);
-    typedef typename series_set_elt_t::support_t		support_t;
+    typedef typename series_set_elt_t::support_t	support_t;
 
-    delta_ret_t					edge_lhs;
-    delta_ret_t					edge_rhs;
-    visited_t					visited;
-    std::queue<pair_hstate_t>			to_process;
-    series_set_elt_t				series_zero =
-      output.structure().series().zero(SELECT(typename series_set_elt_t::value_t));
+    const series_set_t&	series   = output.structure().series();
+    const monoid_t&	monoid   = series.monoid();
+    const semiring_t&	semiring = series.semiring();
+
+    const semiring_elt_t  semiring_zero =
+      semiring.zero(SELECT(semiring_elt_value_t));
+
+    visited_t			visited;
+    std::queue<pair_hstate_t>	to_process;
 
     tag_t lhs_tag = grphx::align<tag_t>(lhs);
     tag_t rhs_tag = grphx::align<tag_t>(rhs);
@@ -172,73 +178,84 @@ namespace vcsn {
     `----------------------------------*/
     for_each_initial_state(lhs_s, lhs)
       for_each_initial_state(rhs_s, rhs)
-	{
-	  hstate_t  new_state = output.add_state();
-	  grphx::setcoordfrom(output, new_state,
-                              lhs_tag, *lhs_s,
-                              rhs_tag, *rhs_s);
-	  pair_hstate_t new_pair(*lhs_s, *rhs_s);
-	  m[new_state] = new_pair;
-	  visited[new_pair] = new_state;
-	  to_process.push(new_pair);
-	}
+      {
+	const hstate_t		new_state = output.add_state();
+	const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
+
+	m[new_state] = new_pair;
+	visited[new_pair] = new_state;
+	to_process.push(new_pair);
+
+	grphx::setcoordfrom(output, new_state,
+			    lhs_tag, *lhs_s,
+			    rhs_tag, *rhs_s);
+      }
 
     /*-----------.
     | Processing |
     `-----------*/
-    while (!to_process.empty())
+    while (not to_process.empty())
       {
-	pair_hstate_t current_pair  = to_process.front();
+	const pair_hstate_t current_pair  = to_process.front();
 	to_process.pop();
 
-	hstate_t lhs_s	        = current_pair.first;
-	hstate_t rhs_s	        = current_pair.second;
-	hstate_t current_state  = visited[current_pair];
+	const hstate_t lhs_s	     = current_pair.first;
+	const hstate_t rhs_s	     = current_pair.second;
+	const hstate_t current_state = visited[current_pair];
 
 	output.set_initial(current_state,
 			   lhs.get_initial(lhs_s) * rhs.get_initial(rhs_s));
 	output.set_final(current_state,
 			 lhs.get_final(lhs_s) * rhs.get_final(rhs_s));
 
-	edge_lhs.clear();
+	delta_ret_t edge_lhs;
+	delta_ret_t edge_rhs;
 	lhs.deltac(edge_lhs, lhs_s, delta_kind::edges());
-	edge_rhs.clear();
 	rhs.deltac(edge_rhs, rhs_s, delta_kind::edges());
 
-	for_all_const_(delta_ret_t, iel, edge_lhs)
+	for_all_const_(delta_ret_t, l, edge_lhs)
+	  for_all_const_(delta_ret_t, r, edge_rhs)
 	  {
-	    series_set_elt_t s     = lhs.series_of(*iel);
+	    const series_set_elt_t  left_series  = lhs.series_of(*l);
+	    const series_set_elt_t  right_series = rhs.series_of(*r);
+	    series_set_elt_t	    prod_series (series);
 
-	    for_all_const_(delta_ret_t, ier, edge_rhs)
+	    bool		    prod_is_null (true);
+	    for_all_(support_t, supp, left_series.supp())
 	      {
-		series_set_elt_t s_  = rhs.series_of(*ier);
-		series_set_elt_t s__ = s;
-		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
-
-		for_all_(support_t, supp, s.supp())
-		  s__.assoc(*supp, s_.get(*supp) * s.get(*supp));
-
-		if (s__ != series_zero)
+		const monoid_elt_t   supp_elt (monoid, *supp);
+		const semiring_elt_t l = left_series.get(supp_elt);
+		const semiring_elt_t r = right_series.get(supp_elt);
+		const semiring_elt_t p = l * r;
+		if (p != semiring_zero)
 		  {
-		    typename visited_t::const_iterator found =
-		      visited.find(new_pair);
-		    hstate_t aim;
-
-		    if (found == visited.end())
-		      {
-			aim = output.add_state();
-			grphx::setcoordfrom(output, aim,
-                                            lhs_tag, new_pair.first,
-                                            rhs_tag, new_pair.second);
-			visited[new_pair] = aim;
-			m[aim] = new_pair;
-			to_process.push(new_pair);
-		      }
-		    else
-		      aim = found->second;
-		    output.add_series_edge(current_state,
-					  aim, s__);
+		    prod_series.assoc(*supp, p.value());
+		    prod_is_null = false;
 		  }
+	      }
+
+	    if (not prod_is_null)
+	      {
+		const pair_hstate_t new_pair (lhs.aim_of(*l), rhs.aim_of(*r));
+
+		typename visited_t::const_iterator found =
+		  visited.find(new_pair);
+
+		hstate_t aim;
+		if (found == visited.end())
+		  {
+		    aim = output.add_state();
+		    visited[new_pair] = aim;
+		    m[aim] = new_pair;
+		    to_process.push(new_pair);
+
+		    grphx::setcoordfrom(output, aim,
+					lhs_tag, new_pair.first,
+					rhs_tag, new_pair.second);
+		  }
+		else
+		  aim = found->second;
+		output.add_series_edge(current_state, aim, prod_series);
 	      }
 	  }
       }
@@ -266,6 +283,6 @@ namespace vcsn {
     return ret;
   }
 
-} // vcsn
+} // End of namespace vcsn.
 
-#endif // VCSN_ALGORITHMS_PRODUCT_HXX
+#endif // ! VCSN_ALGORITHMS_PRODUCT_HXX

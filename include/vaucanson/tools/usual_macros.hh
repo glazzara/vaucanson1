@@ -1,7 +1,7 @@
 // usual_macros.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -107,12 +107,13 @@
 #define AUTOMATON_TYPES(AutoType)           AUTOMATON_TYPES_(AutoType,)
 #define AUTOMATON_TYPES_EXACT(AutoType)     AUTOMATON_TYPES_EXACT_(AutoType,)
 
-# define AUTOMATA_SET_TYPES(AutoSet) \
-typedef AutoSet					automata_set_t; \
+# define AUTOMATA_SET_TYPES(AutoSet)				\
+typedef AutoSet					automata_set_t;	\
 typedef typename automata_set_t::series_set_t	series_set_t;	\
 typedef typename series_set_t::monoid_t		monoid_t;	\
 typedef typename series_set_t::semiring_t	semiring_t;	\
-typedef typename monoid_t::alphabet_t		alphabet_t;
+typedef typename monoid_t::alphabet_t		alphabet_t;	\
+typedef typename alphabet_t::letter_t		letter_t;
 
 
 // the following macros assume you have used a macro AUTOMATON_TYPES*
@@ -167,7 +168,7 @@ typedef typename monoid_t::alphabet_t		alphabet_t;
       std::ostringstream s;					\
       s << Name << ".dot";					\
       std::ofstream f(s.str().c_str());				\
-      tools::dot_dump(f, Auto, Name);				\
+      vcsn::tools::dot_dump(f, Auto, Name);				\
     }
 
 #define RAND___(Max)						\
@@ -182,4 +183,4 @@ typedef typename monoid_t::alphabet_t		alphabet_t;
 #define empty_	identity(SELECT(typename monoid_elt_t::value_t))
 #define wzero_  zero(SELECT(typename semiring_elt_t::value_t))
 
-#endif // VCSN_TOOLS_USUAL_MACROS_HH
+#endif // ! VCSN_TOOLS_USUAL_MACROS_HH

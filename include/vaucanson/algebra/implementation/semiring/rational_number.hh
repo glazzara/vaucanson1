@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -29,11 +29,12 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
-#ifndef VCSN_ALGEBRA_CONCRETE_RATIONAL_NUMBER_HH
-# define VCSN_ALGEBRA_CONCRETE_RATIONAL_NUMBER_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HH
 
 # include <iostream>
+
+# include <vaucanson/misc/limits.hh>
 
 /** @addtogroup algebra *//* @{ */
 /** @addtogroup semiring *//* @{ */
@@ -201,7 +202,7 @@ RationalNumber& operator op(RationalNumber& nb, const T nb2)	\
     // FIXME: Add other goodies for standard library.
     std::ostream& operator<<(std::ostream& ostr, const RationalNumber& nb);
 
-    // FIXME: We might prefer to define gcd and lcm somewhere else.
+   // FIXME: We might prefer to define gcd and lcm somewhere else.
     int		gcd(int a, unsigned int b);
     int		lcm(int a, unsigned int b);
 
@@ -211,8 +212,30 @@ RationalNumber& operator op(RationalNumber& nb, const T nb2)	\
   } // End of namespace algebra.
 } // End of namespace vcsn.
 
+namespace std
+{
+  template <>
+  struct numeric_limits< ::vcsn::algebra::RationalNumber >
+  {
+    static ::vcsn::algebra::RationalNumber min();
+    static ::vcsn::algebra::RationalNumber max();
+  };
+
+} // End of namespace std.
+
+// FIXME: utility::limits should be removed, or std::numeric_limits should
+// FIXME: not be used/specialized.
+namespace utility
+{
+  template <>
+  struct limits< ::vcsn::algebra::RationalNumber > :
+    public std::numeric_limits< ::vcsn::algebra::RationalNumber >
+  {
+  };
+}
+
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/semiring/rational_number.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // RATIONAL_NUMBER_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HH

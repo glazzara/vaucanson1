@@ -17,169 +17,109 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_XML_OPS_HH
 # define VCSN_XML_XML_OPS_HH
 
-# include <vaucanson/xml/xml_automaton.hh>
 # include <vaucanson/xml/xml_set.hh>
+# include <vaucanson/xml/xml_automaton.hh>
 
 namespace vcsn
 {
-  xml::XmlAutomaton
-  op_default(SELECTOR(xml::XmlStructure), SELECTOR(xml::XmlAutomaton));
 
-  template <class S>
-  void op_assign(const AutomataBase<S>&,
-		 const xml::XmlStructure&,
-		 xml::XmlAutomaton&,
-		 const xml::XmlAutomaton&);
+  namespace xml
+  {
+    /*--------------.
+    | I/O Functions |
+    `--------------*/
 
-  void op_assign(const xml::XmlStructure&,
-  		 const xml::XmlStructure&,
-		 xml::XmlAutomaton&,
-		 const xml::XmlAutomaton&);
+    template <class Ostream>
+    Ostream&
+    op_rout(const XmlStructure& xs, Ostream& os, const XmlAutomaton& xv);
 
-  xml::XmlAutomaton
-  op_convert(const xml::XmlStructure&,
-	     const xml::XmlAutomaton&,
-	     const xml::XmlAutomaton&);
+    template <class Istream>
+    Istream&
+    op_rin(XmlStructure& s, Istream& is, XmlAutomaton& v);
 
-  namespace xml {
-    xercesc::DOMDocument* loaddocument(xercesc::DOMBuilder*, std::istream&);
-  }
+    /*----------------------.
+    | Structure conversions |
+    `----------------------*/
 
-  template<typename S, typename St>
-  St& op_rout(const AutomataBase<S>&, St&, const xml::XmlAutomaton&);
-  template<typename St>
+    template <class Auto>
+    XmlStructure
+    op_convert(const XmlStructure&, const AutomataBase<Auto>& s);
 
-  St& op_rin(xml::XmlStructure&, St&, xml::XmlAutomaton&);
-  template<typename S, typename St>
-  St& op_rin(const AutomataBase<S>&, St&, xml::XmlAutomaton&);
+    template <class Auto>
+    Auto
+    op_convert(const AutomataBase<Auto>&, const XmlStructure& s);
 
-  template <typename Tm, typename Tw, typename S>
-  algebra::polynom<Tm,Tw> op_convert(const algebra::SeriesBase<S>&,
-				     SELECTOR2(algebra::polynom<Tm, Tw>),
-				     const xml::XmlValue&);
+    /*------------------.
+    | Value conversions |
+    `------------------*/
 
-  template <typename Tm, typename Tw, typename S>
-  rat::exp<Tw,Tm> op_convert(const algebra::SeriesBase<S>&,
-			     SELECTOR2(rat::exp<Tw, Tm>),
-			     const xml::XmlValue&);
+    template <class S, class T>
+    XmlAutomaton
+    op_convert(const XmlStructure&	xs,	const XmlAutomaton&	,
+	       const AutomataBase<S>&	s,	const T&		v);
 
-  template <typename Tm, typename Tw, typename S>
-  xml::XmlValue op_convert(const algebra::SeriesBase<S>&,
-			   SELECTOR(xml::XmlValue),
-			   const algebra::polynom<Tm, Tw>&);
+    template <class S, class T>
+    T
+    op_convert(const AutomataBase<S>&	s,	const T&		,
+	       const XmlStructure&	xs,	const XmlAutomaton&	xv);
+    /*-----------.
+    | Assignment |
+    `-----------*/
 
-  template <typename Tm, typename Tw, typename S>
-  xml::XmlValue op_convert(const algebra::SeriesBase<S>&,
-			   SELECTOR(xml::XmlValue),
-			   const rat::exp<Tm, Tw>&);
+    template <typename S>
+    void
+    op_assign(AutomataBase<S>&		lhs,
+	      const XmlStructure&	rhs);
+
+    template <typename S, typename T>
+    void
+    op_assign(const AutomataBase<S>&	lhs_s,
+	      const XmlStructure&	rhs_s,
+	      T&			lhs_v,
+	      const XmlAutomaton&	rhs_v);
+
+    /*---------------------.
+    | Conversion of series |
+    `---------------------*/
+
+    template <typename S, typename T>
+    T
+    op_convert(const algebra::SeriesBase<S>& s,
+	       const T&,
+	       const xml_value_t& v);
+
+    // FIXME: Since op_convert with three arguments should take the structure
+    // FIXME: and the value of a series as the two first arguments, that
+    // FIXME: prototype does not follow the usual semantic: xml_value_t is
+    // FIXME: never considered as an implementation of series.
+    template<typename S, typename T>
+    xml_value_t
+    op_convert(const algebra::SeriesBase<S>& s,
+	       SELECTOR(xml_value_t),
+	       const T& p);
 
 
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag,
-	    typename W,
-	    typename M>
-  xml::XmlAutomaton op_convert(SELECTOR2(Automata<algebra::Series<W, M> >),
-			       SELECTOR(xml::XmlAutomaton),
-			       const Graph<Kind,
-			       WordValue,
-			       WeightValue,
-			       SerieValue,
-			       Letter,
-			       Tag>&);
+  } // End of namespace xml.
 
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag,
-	    typename W,
-	    typename M>
-  Graph<Kind, WordValue, WeightValue, SerieValue, Letter, Tag>
-  op_convert(SELECTOR2(Automata<algebra::Series<W, M> >),
-	     const Graph<Kind,
-	     WordValue,
-	     WeightValue,
-	     SerieValue,
-	     Letter,
-	     Tag>&,
-	     const xml::XmlAutomaton&);
+} // End of namespace vcsn.
 
-  template <typename Tm, typename Tw, typename W, typename M>
-  void op_assign(SELECTOR2(algebra::Series<W, M>),
-		 algebra::polynom<Tm, Tw>&,
-		 const xml::XmlValue&);
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/xml/xml_ops.hxx>
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
-  template <typename Tm, typename Tw, typename W, typename M>
-  void op_assign(SELECTOR2(algebra::Series<W, M>),
-		 rat::exp<Tm, Tw>&,
-		 const xml::XmlValue&);
-
-  template <typename Tm, typename Tw, typename W, typename M>
-  void op_assign(const algebra::Series<W, M>& s,
-		 xml::XmlValue&,
-		 const rat::exp<Tm, Tw>&);
-
-  template <typename Tm, typename Tw, typename W, typename M>
-  void op_assign(const algebra::Series<W, M>& s,
-		 xml::XmlValue&,
-		 const algebra::polynom<Tm, Tw>&);
-
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag,
-	    typename W,
-	    typename M>
-  void
-  op_assign(SELECTOR2(Automata<algebra::Series<W, M> >),
-	    Graph<Kind,
-	    WordValue,
-	    WeightValue,
-	    SerieValue,
-	    Letter,
-	    Tag>& dst,
-	    const xml::XmlAutomaton&);
-
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag,
-	    typename W,
-	    typename M>
-  void
-  op_assign(SELECTOR2(Automata<algebra::Series<W, M> >),
-	    xml::XmlAutomaton&,
-	    const Graph<Kind,
-	    WordValue,
-	    WeightValue,
-	    SerieValue,
-	    Letter,
-	    Tag>&);
-
-}
-
-# include <vaucanson/xml/xml_ops.hxx>
-
-#endif // VCSN_XML_XML_OPS_HH
+#endif // ! VCSN_XML_XML_OPS_HH

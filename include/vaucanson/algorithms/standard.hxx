@@ -1,7 +1,7 @@
 // standard.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -219,10 +219,15 @@ namespace vcsn {
     for (typename lhs_t::final_iterator f = lhs.final().begin();
 	 f != lhs.final().end();
 	 ++f)
-      for (typename delta_ret_t::const_iterator d = aim.begin();
-	   d != aim.end();
-	   ++d)
-	lhs.add_edge(*f, map_h[rhs.aim_of(*d)], rhs.label_of(*d));
+      {
+	typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
+	for (typename delta_ret_t::const_iterator d = aim.begin();
+	     d != aim.end();
+	     ++d)
+	  lhs.add_series_edge(*f,
+			      map_h[rhs.aim_of(*d)],
+			      weight * rhs.label_of(*d));
+      }
 
     for (typename lhs_t::state_iterator s = lhs.states().begin();
 	 s != lhs.states().end();
@@ -280,11 +285,17 @@ namespace vcsn {
   void do_star_of_standard_here(const AutomataBase<A>& ,
 				auto_t& a)
   {
-    typedef std::set<hedge_t>		edelta_ret_t;
-    edelta_ret_t	aim;
+    AUTOMATON_TYPES(auto_t);
 
-    hstate_t 	new_i = *a.initial().begin();
+    typedef std::set<hedge_t>		edelta_ret_t;
+    edelta_ret_t			aim;
+
+    hstate_t				new_i = *a.initial().begin();
+    series_set_elt_t			out_mult = a.get_final(new_i);
+    out_mult.star();
+
     a.deltac(aim, new_i, delta_kind::edges());
+
     for (typename auto_t::final_iterator f = a.final().begin();
 	 f != a.final().end();
 	 ++f)
@@ -296,8 +307,20 @@ namespace vcsn {
 	    // FIXME: it is wanted that we can create two similar edges.
 	    // FIXME: is it a good thing ?
 	    a.add_edge(*f, a.aim_of(*d), a.label_of(*d));
-    }
-    a.set_final(new_i);
+
+      }
+
+    for (typename edelta_ret_t::iterator d = aim.begin();
+	 d != aim.end();
+	 ++d)
+      {
+	series_set_elt_t st = out_mult * a.series_of(*d);
+	hstate_t to = a.aim_of(*d);
+	a.del_edge(*d);
+	a.add_series_edge(new_i, to, st);
+      }
+
+    a.set_final(new_i, out_mult);
   }
 
   template<typename A, typename T>
@@ -318,4 +341,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_STANDARD_HXX
+#endif // ! VCSN_ALGORITHMS_STANDARD_HXX

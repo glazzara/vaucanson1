@@ -34,6 +34,7 @@
 # define VCSN_MISC_FUNCTORS_HH
 
 # include <functional>
+# include <utility>
 
 namespace utility
 {

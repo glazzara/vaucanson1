@@ -1,2 +1,5 @@
 # Makefile.am
-SUBDIRS = 
+#
+# $Id$
+
+EXTRA_DIST = brzozowski_test.hh

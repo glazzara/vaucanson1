@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_CALLBACK_HXX
 # define VCSN_XML_CALLBACK_HXX
@@ -36,40 +38,40 @@
 # include <vaucanson/algebra/implementation/letter/int_letter.hh>
 
 # ifdef VCSN_XML_GENRERIC_WEIGHTED
-#  define CHOOSE_SEMIRING_SET_WEIGHTED(X, Do...)             \
-  else if ( X .semiring_structure() == XmlStructure::Z) {                \
-    typedef int semiring_set;                                \
-    Do;                                                      \
-  }                                                          \
-  else if ( X .semiring_structure() == XmlStructure::R) {                \
-    typedef float semiring_set;                              \
-    Do;                                                      \
+#  define CHOOSE_SEMIRING_SET_WEIGHTED(X, Do...)	\
+  else if ( X .semiring_value() == XmlStructure::Z) {	\
+    typedef int semiring_set;				\
+    Do;							\
+  }							\
+  else if ( X .semiring_value() == XmlStructure::R) {	\
+    typedef float semiring_set;				\
+    Do;							\
   }
 # else //!VCSN_XML_GENRERIC_WEIGHTED
 #  define CHOOSE_SEMIRING_SET_WEIGHTED(X, Do...)
 # endif //VCSN_XML_GENRERIC_WEIGHTED
 
-# define CHOOSE_SEMIRING_SET_NOREC_(X, Do...)                \
-  if (( X .semiring_structure() == XmlStructure::UNSET)                  \
-      || ( X .semiring_structure() == XmlStructure::B)) {                \
-    typedef bool semiring_set;                               \
-    Do;                                                      \
-  }                                                          \
+# define CHOOSE_SEMIRING_SET_NOREC_(X, Do...)		\
+  if (( X .semiring_value() == XmlStructure::UNSET)	\
+      || ( X .semiring_value() == XmlStructure::B)) {	\
+    typedef bool semiring_set;				\
+    Do;							\
+  }							\
   CHOOSE_SEMIRING_SET_WEIGHTED(X, Do)
 
-# define CHOOSE_SEMIRING_SET_NOREC(X, Do...)                 \
-  CHOOSE_SEMIRING_SET_NOREC_(X, Do)                          \
-  else                                                       \
+# define CHOOSE_SEMIRING_SET_NOREC(X, Do...)	\
+  CHOOSE_SEMIRING_SET_NOREC_(X, Do)		\
+  else						\
     FAIL("Unknown semiring set.");
 
 # ifdef VCSN_XML_GENRERIC_TRANSDUCERS
 
-#  define CHOOSE_SEMIRING_SET(X, Do...)                      \
-  CHOOSE_SEMIRING_SET_NOREC_(X, Do)                          \
-  else if ( X .semiring_structure() == XmlStructure::RATSERIES) {        \
-     CHOOSE_SEMIRING_TYPE_FOR_RATSERIES(X, Do);              \
-  }                                                          \
-  else                                                       \
+#  define CHOOSE_SEMIRING_SET(X, Do...)				\
+  CHOOSE_SEMIRING_SET_NOREC_(X, Do)				\
+  else if ( X .semiring_value() == XmlStructure::RATSERIES) {	\
+     CHOOSE_SEMIRING_TYPE_FOR_RATSERIES(X, Do);			\
+  }								\
+  else								\
     FAIL("Unknown semiring set.");
 
 # else //!VCSN_XML_GENRERIC_TRANSDUCERS
@@ -79,114 +81,112 @@
 
 # endif //VCSN_XML_GENRERIC_TRANSDUCERS
 
-# define CHOOSE_SEMIRING_TYPE_FOR_RATSERIES(X, Do...)        \
-  if (( X .semiring_type() == XmlStructure::UNSET)                 \
-      || ( X .semiring_type() == XmlStructure::FUNCTION)) {        \
-    XmlStructure subx = X;                                         \
-    subx = subx.get_substructure();                                \
-    CHOOSE_SEMIRING_SET_NOREC(subx,                          \
-      CHOOSE_SEMIRING_TYPE(subx,                             \
-        CHOOSE_MONOID_TYPE(subx,                             \
-	  CHOOSE_MONOID_SET(subx,                            \
-            { DEFINE_SEM_SERIES;                             \
-     	      Do;                                            \
-	    }))));                                           \
+# define CHOOSE_SEMIRING_TYPE_FOR_RATSERIES(X, Do...)			\
+  if (( X .semiring_structure() == XmlStructure::UNSET)			\
+      || ( X .semiring_structure() == XmlStructure::FUNCTION)) {	\
+    XmlStructure subx = X;						\
+    subx = subx.get_substructure();					\
+    CHOOSE_SEMIRING_SET_NOREC(subx,					\
+      CHOOSE_SEMIRING_TYPE(subx,					\
+        CHOOSE_MONOID_TYPE(subx,					\
+	  CHOOSE_MONOID_SET(subx,					\
+            { DEFINE_SEM_SERIES;					\
+     	      Do;							\
+	    }))));							\
   }
 
-# define DEFINE_SEM_SERIES \
-  typedef Series<semiring_type, monoid_type> semiring_type;  \
+# define DEFINE_SEM_SERIES					\
+  typedef Series<semiring_type, monoid_type> semiring_type;	\
   typedef rat::exp<monoid_set, semiring_set> semiring_set;
 
-# define CHOOSE_SEMIRING_TYPE(X, Do...)                      \
-  if (( X .semiring_type() == XmlStructure::UNSET)                 \
-      || ( X .semiring_type() == XmlStructure::NUMERICAL)          \
-      || ( X .semiring_type() == XmlStructure::BOOLEAN)) {         \
-    typedef NumericalSemiring semiring_type;                 \
-    Do;                                                      \
-  }                                                          \
-  else if ( X .semiring_type() == XmlStructure::TROPICAL_MAX) {    \
-    typedef TropicalSemiring<TropicalMax> semiring_type;     \
-    Do;                                                      \
-  }                                                          \
-  else if ( X .semiring_type() == XmlStructure::TROPICAL_MIN) {    \
-    typedef TropicalSemiring<TropicalMin> semiring_type;     \
-    Do;                                                      \
-  }                                                          \
-  else                                                       \
+# define CHOOSE_SEMIRING_TYPE(X, Do...)					\
+  if (( X .semiring_structure() == XmlStructure::UNSET)			\
+      || ( X .semiring_structure() == XmlStructure::NUMERICAL)		\
+      || ( X .semiring_structure() == XmlStructure::BOOLEAN)) {		\
+    typedef NumericalSemiring semiring_type;				\
+    Do;									\
+  }									\
+  else if ( X .semiring_structure() == XmlStructure::TROPICAL_MAX) {	\
+    typedef TropicalSemiring<TropicalMax> semiring_type;		\
+    Do;									\
+  }									\
+  else if ( X .semiring_structure() == XmlStructure::TROPICAL_MIN) {	\
+    typedef TropicalSemiring<TropicalMin> semiring_type;		\
+    Do;									\
+  }									\
+  else									\
     FAIL("Unknown semiring type.");
 
 # ifdef VCSN_XML_GENRERIC_CHAR_PAIRS
-#  define CHOOSE_MONOID_TYPE_CHAR_PAIRS(X, Do...)            \
-  else if ( X .monoid_type() == XmlStructure::PAIRS) {             \
-    using namespace vcsn::algebra::char_pair;                \
-    typedef Words monoid_type;                               \
-    Do;                                                      \
+#  define CHOOSE_MONOID_TYPE_CHAR_PAIRS(X, Do...)		\
+  else if ( X .monoid_structure() == XmlStructure::PAIRS) {	\
+    using namespace vcsn::algebra::char_pair;			\
+    typedef Words monoid_type;					\
+    Do;								\
   }
 # else //!VCSN_XML_GENRERIC_CHAR_PAIRS
 #  define CHOOSE_MONOID_TYPE_CHAR_PAIRS(X, Do...)
 # endif //VCSN_XML_GENRERIC_CHAR_PAIRS
 
 # ifdef VCSN_XML_GENRERIC_WEIGHTED_LETTERS
-#  define CHOOSE_MONOID_TYPE_WEIGHTED(X, Do...)              \
-  else if ( X .monoid_type() == XmlStructure::WEIGHTED) {          \
-    using namespace vcsn::algebra::weighted_letter;          \
-    typedef Words monoid_type;                               \
-    Do;                                                      \
+#  define CHOOSE_MONOID_TYPE_WEIGHTED(X, Do...)			\
+  else if ( X .monoid_structure() == XmlStructure::WEIGHTED) {	\
+    using namespace vcsn::algebra::weighted_letter;		\
+    typedef Words monoid_type;					\
+    Do;								\
   }
 # else //!VCSN_XML_GENRERIC_WEIGHTED_LETTERS
 #  define CHOOSE_MONOID_TYPE_WEIGHTED(X, Do...)
 # endif //VCSN_XML_GENRERIC_WEIGHTED_LETTERS
 
 # ifdef VCSN_XML_GENRERIC_INT_LETTERS
-#  define CHOOSE_MONOID_TYPE_INT(X, Do...)                   \
-  else if ( X .monoid_type() == XmlStructure::INTEGERS) {          \
-    using namespace vcsn::algebra::int_letter;               \
-    typedef Words monoid_type;                               \
-    Do;                                                      \
+#  define CHOOSE_MONOID_TYPE_INT(X, Do...)			\
+  else if ( X .monoid_structure() == XmlStructure::INTEGERS) {	\
+    using namespace vcsn::algebra::int_letter;			\
+    typedef Words monoid_type;					\
+    Do;								\
   }
 # else //!VCSN_XML_GENRERIC_INT_LETTERS
 #  define CHOOSE_MONOID_TYPE_INT(X, Do...)
 # endif //VCSN_XML_GENRERIC_INT_LETTERS
 
-# define CHOOSE_MONOID_TYPE(X, Do...);                       \
-  if (( X .monoid_type() == XmlStructure::UNSET)                   \
-      || ( X .monoid_type() == XmlStructure::LETTERS)) {           \
-    using namespace vcsn::algebra::char_letter;              \
-    typedef Words monoid_type;                               \
-    Do;                                                      \
-  }                                                          \
-  CHOOSE_MONOID_TYPE_CHAR_PAIRS(X, Do)                       \
-  CHOOSE_MONOID_TYPE_WEIGHTED(X, Do)                         \
-  CHOOSE_MONOID_TYPE_INT(X, Do)                              \
-  else                                                       \
+# define CHOOSE_MONOID_TYPE(X, Do...);				\
+  if (( X .monoid_structure() == XmlStructure::UNSET)		\
+      || ( X .monoid_structure() == XmlStructure::LETTERS)) {	\
+    using namespace vcsn::algebra::char_letter;			\
+    typedef Words monoid_type;					\
+    Do;								\
+  }								\
+  CHOOSE_MONOID_TYPE_CHAR_PAIRS(X, Do)				\
+  CHOOSE_MONOID_TYPE_WEIGHTED(X, Do)				\
+  CHOOSE_MONOID_TYPE_INT(X, Do)					\
+  else								\
     FAIL("Unknown monoid type.");
 
-# define CHOOSE_MONOID_SET(X, Do...)                         \
-  if (( X .monoid_structure() == XmlStructure::UNSET)                    \
-      || ( X .monoid_structure() == XmlStructure::WORDS)) {              \
-    typedef WordValue monoid_set;                            \
-    Do;                                                      \
-  }                                                          \
-  else if ( X .monoid_structure() == XmlStructure::UNIT) {               \
-    typedef WordValue monoid_set;                            \
-    Do;                                                      \
-  }                                                          \
-  else                                                       \
+# define CHOOSE_MONOID_SET(X, Do...)			\
+  if (( X .monoid_value() == XmlStructure::UNSET)	\
+      || ( X .monoid_value() == XmlStructure::WORDS)) {	\
+    typedef WordValue monoid_set;			\
+    Do;							\
+  }							\
+  else if ( X .monoid_value() == XmlStructure::UNIT) {	\
+    typedef WordValue monoid_set;			\
+    Do;							\
+  }							\
+  else							\
     FAIL("Unknown monoid type.");
 
-# define CALL_BACK                                           \
-  typedef                                                    \
-  Element<Automata<Series<semiring_type, monoid_type> >,     \
-    Graph<labels_are_series, monoid_set, semiring_set,       \
-      rat::exp<monoid_set, semiring_set>, Letter,            \
-      XmlInfosTag> > auto_t;	       			     \
-  typedef XmlOf<auto_t>::ret xml_auto_t;                     \
-  xml_auto_t x2;                                             \
-  auto_t a;                                                  \
-  x2 = x;                                                    \
-  a = x2;						     \
-  Callback<auto_t> cb;                                       \
-  return cb(a, user);
+# define CALL_BACK						\
+typedef Series<semiring_type, monoid_type>	series_set_t;	\
+typedef Automata<series_set_t>			automata_set_t;	\
+typedef								\
+  Element<automata_set_t,					\
+	  Graph<labels_are_series, monoid_set, semiring_set,	\
+		rat::exp<monoid_set, semiring_set>, Letter,	\
+		XmlInfosTag> >			automaton_t;	\
+automaton_t a = x;						\
+Callback<automaton_t> cb;					\
+return cb(a, user);
 
 namespace vcsn
 {
@@ -200,7 +200,8 @@ namespace vcsn
     {
       using namespace vcsn::algebra;
 
-      Element<XmlStructure, XmlAutomaton> x;
+      xml_automata_set_t	xs;
+      xml_automaton_t		x (xs);
 
       in >> x;
 
@@ -213,4 +214,4 @@ namespace vcsn
   }
 }
 
-#endif // VCSN_XML_CALLBACK_HXX
+#endif // ! VCSN_XML_CALLBACK_HXX

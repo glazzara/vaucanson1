@@ -1,7 +1,7 @@
 // krat.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,18 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_HXX
 
 # include <utility>
 # include <vaucanson/algebra/implementation/series/series.hh>
@@ -668,11 +670,7 @@ namespace vcsn {
       rat::exp<Tm, Tw>::constant(op_convert(SELECT(M),
 					    SELECT(Tm),
 					    m));
-    ret.base() = new rat::LeftWeighted<Tm, Tw>
-      (op_convert(SELECT(W),
-		  SELECT(Tw),
-		  w), ret.base());
-    op_in_add(s, p, ret);
+    op_in_add(s, p, op_mul(s.semiring(), s, w, ret));
   }
 
   /*----------------------------------------------------------.
@@ -684,14 +682,14 @@ namespace vcsn {
   MetaElement<algebra::Series<W, M>, rat::exp<Tm, Tw> >::accept
   (const rat::ConstNodeVisitor<Tm, Tw>& v) const
   {
-    value().accept(v);
+    this->value().accept(v);
   }
 
   template <typename W, typename M, typename Tm, typename Tw>
   size_t
   MetaElement<algebra::Series<W, M>, rat::exp<Tm, Tw> >::depth() const
   {
-    return value().depth();
+    return this->value().depth();
   }
 
   template <class W, class M, class Tm, class Tw>
@@ -749,4 +747,4 @@ namespace vcsn {
 
 #undef echo
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_HXX
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_HXX

@@ -1,7 +1,7 @@
 // krat_exp_realtime.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX
 # define VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX
@@ -154,9 +156,9 @@ namespace vcsn {
 
       MATCH_(Constant, m)
       {
-	return_type	exp = identity_as<T>::of(exp_.structure());
-	return_type	tmp (exp_.structure());
-	monoid_elt_t	letter (exp_.structure().monoid());
+	return_type	exp = identity_as<T>::of(this->exp_.structure());
+	return_type	tmp (this->exp_.structure());
+	monoid_elt_t	letter (this->exp_.structure().monoid());
 	for (typename monoid_elt_value_t::const_iterator i = m.begin();
 	     i != m.end(); ++i)
 	  {
@@ -199,4 +201,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX
+#endif // ! VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX

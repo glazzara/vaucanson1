@@ -1,7 +1,7 @@
 // unique.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_MISC_UNIQUE_HH
 # define VCSN_MISC_UNIQUE_HH
@@ -46,9 +48,9 @@ namespace utility
     {
       virtual ~UniqueListBase();
     };
-    
-#define uniquelist_base UniqueListBase<int>
-    
+
+    typedef UniqueListBase<int> uniquelist_base;
+
     /** Simple unique list structure
      *
      * @arg @c T the type of stored values
@@ -79,16 +81,16 @@ namespace utility
     {
       /** Helper to make @c std::type_info into a valid key type for
 	  @c std::map */
-#define ti_slot TiSlot<int>
-
       template <class U>
       struct TiSlot
       {
 	TiSlot(const std::type_info& );
 	const std::type_info &id;
-	bool operator==(const ti_slot& other) const;
-	bool operator<(const ti_slot& other) const;
+	bool operator==(const TiSlot& other) const;
+	bool operator<(const TiSlot& other) const;
       };
+
+      typedef TiSlot<int> ti_slot;
 
       /** The map type used */
       typedef std::map<ti_slot, uniquelist_base*> map_t;
@@ -97,10 +99,10 @@ namespace utility
       static map_t& instance();
     protected:
       map_t map_;
-      /** Constructor for the class. 
-       *  It is protected so that no secondary instances may be created. 
+      /** Constructor for the class.
+       *  It is protected so that no secondary instances may be created.
        */
-      UniqueMap(); 
+      UniqueMap();
       /** Destructor for the class.
        *
        * This destructor actually destroys all stored canonical
@@ -110,7 +112,7 @@ namespace utility
       ~UniqueMap();
     };
 
-#define unique_map UniqueMap<int>
+    typedef UniqueMap<int> unique_map;
 
     struct unifiable
     {
@@ -142,10 +144,8 @@ namespace utility
 
 }
 
+# ifndef INTERFACE_ONLY
+#  include <vaucanson/misc/unique.hxx>
+# endif // INTERFACE_ONLY
 
-#ifndef INTERFACE_ONLY
-    #include <vaucanson/misc/unique.hxx>
-#endif // INTERFACE_ONLY
-    
-
-#endif // VCSN_MISC_UNIQUE_HH
+#endif // ! VCSN_MISC_UNIQUE_HH

@@ -34,6 +34,7 @@
 # define VCSN_MISC_FUNCTORS_HXX
 
 # include <vaucanson/misc/functors.hh>
+# include <algorithm>
 
 namespace utility
 {

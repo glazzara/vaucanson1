@@ -1,7 +1,7 @@
 // nodes.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,24 +17,26 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_RAT_NODES_HH
-# define VCSN_ALGEBRA_CONCRETE_SERIES_RAT_NODES_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_NODES_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_NODES_HH
 
 namespace vcsn {
 
   namespace rat {
 
-    
+
     template<typename M_, typename W_>
     class Node;
 
@@ -78,15 +80,15 @@ namespace vcsn {
     class Node
     {
     public:
-      enum type 
-	{ 	  	    
-	  constant, 
-	  lweight, 
+      enum type
+	{
+	  constant,
+	  lweight,
 	  rweight,
-	  one,  
-	  prod, 
+	  one,
+	  prod,
 	  star,
-	  sum, 
+	  sum,
 	  zero
 	};
 
@@ -118,14 +120,17 @@ namespace vcsn {
     public:
       Zero();
 
-      virtual 
-      typename Node<M_, W_>::type	what() const;
-      virtual 
-      Node<M_, W_>*			clone() const;
-      virtual void			accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual bool		        operator!=(const Node<M_, W_>& other) const;
-      virtual bool		        operator<(const Node<M_, W_>& other) const;
-      virtual				~Zero();
+      virtual
+      typename Node<M_, W_>::type
+      what() const;
+
+      virtual
+      Node<M_, W_>*	clone() const;
+      virtual void	accept(ConstNodeVisitor<M_, W_>& v) const;
+      virtual bool	operator!=(const Node<M_, W_>& other) const;
+      virtual bool	operator<(const Node<M_, W_>& other) const;
+
+      virtual		~Zero();
     };
 
     /*----.
@@ -136,21 +141,21 @@ namespace vcsn {
     {
     public:
       One();
-      virtual typename Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type
       what() const;
-      virtual Node<M_, W_>* 
+      virtual Node<M_, W_>*
       clone() const;
-      virtual void 
+      virtual void
       accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual bool 
+      virtual bool
       operator!=(const Node<M_, W_>& other) const;
-      virtual bool 
+      virtual bool
       operator<(const Node<M_, W_>& other) const;
-      virtual 
+      virtual
       ~One();
     };
 
-    
+
     /*---------.
     | Constant |
     `---------*/
@@ -159,15 +164,15 @@ namespace vcsn {
     {
     public:
       Constant(const M_ &v);
-      virtual typename Node<M_, W_>::type     what() const; 
+      virtual typename Node<M_, W_>::type     what() const;
       virtual Node<M_, W_>*          clone() const;
-      virtual void 
+      virtual void
       accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual bool 
+      virtual bool
       operator!=(const Node<M_, W_>& other) const;
-      virtual bool 
+      virtual bool
       operator<(const Node<M_, W_>& other) const;
-      virtual 
+      virtual
       ~Constant();
 
     /* protected */ public:
@@ -182,21 +187,21 @@ namespace vcsn {
     {
 
     public:
-	
+
       LeftWeighted(const W_& w, const Node<M_, W_>& c);
       LeftWeighted(const W_& w, Node<M_, W_>* c);
       LeftWeighted(const W_& w);
-      virtual typename Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type
       what() const;
-      virtual Node<M_, W_>* 
+      virtual Node<M_, W_>*
       clone() const;
-      virtual void 
+      virtual void
       accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual bool 
+      virtual bool
       operator!=(const Node<M_, W_>& other) const;
-      virtual bool 
+      virtual bool
       operator<(const Node<M_, W_>& other) const;
-      virtual 
+      virtual
       ~LeftWeighted();
 
     /* protected */ public:
@@ -211,21 +216,21 @@ namespace vcsn {
     class RightWeighted : public Node<M_, W_>
     {
     public:
-	
+
       RightWeighted(const W_& w, const Node<M_, W_>& c);
       RightWeighted(const W_& w, Node<M_, W_>* c);
       RightWeighted(const W_& w);
-      virtual typename Node<M_, W_>::type 
-      what() const; 
-      virtual Node<M_, W_>* 
+      virtual typename Node<M_, W_>::type
+      what() const;
+      virtual Node<M_, W_>*
       clone() const;
-      virtual void 
+      virtual void
       accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual bool 
+      virtual bool
       operator!=(const Node<M_, W_>& other) const;
-      virtual bool 
+      virtual bool
       operator<(const Node<M_, W_>& other) const;
-      virtual 
+      virtual
       ~RightWeighted();
     /* protected */ public:
 
@@ -244,21 +249,21 @@ namespace vcsn {
 
       Star(const Node<M_, W_>& other);
       Star(Node<M_, W_>* other);
-      virtual typename Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type
       what() const;
-      virtual Node<M_, W_>* 
+      virtual Node<M_, W_>*
       clone() const;
-      virtual void 
+      virtual void
       accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual bool 
+      virtual bool
       operator!=(const Node<M_, W_>& other) const;
-      virtual bool 
+      virtual bool
       operator<(const Node<M_, W_>& other) const;
-      virtual 
+      virtual
       ~Star();
 
     /* protected */ public:
-	
+
       Node<M_, W_>*		child_;
     };
 
@@ -267,27 +272,27 @@ namespace vcsn {
     `--------*/
     template<typename M_, typename W_>
     class Product : public Node<M_, W_>
-    { 
+    {
 
     public:
 
       Product(const Node<M_, W_>& left, const Node<M_, W_>& right);
       Product(Node<M_, W_>* left, Node<M_, W_>* right);
-      virtual typename Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type
       what() const;
-      virtual Node<M_, W_>* 
+      virtual Node<M_, W_>*
       clone() const;
-      virtual void 
+      virtual void
       accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual bool 
+      virtual bool
       operator!=(const Node<M_, W_>& other) const;
-      virtual bool 
+      virtual bool
       operator<(const Node<M_, W_>& other) const;
-      virtual 
+      virtual
       ~Product();
 
     /* protected */ public:
-	
+
       Node<M_, W_>*		left_;
       Node<M_, W_>*		right_;
     };
@@ -297,21 +302,21 @@ namespace vcsn {
     `----*/
     template<typename M_, typename W_>
     class Sum : public Node<M_, W_>
-    { 
+    {
     public:
       Sum(const Node<M_, W_>& left, const Node<M_, W_>& right);
       Sum(Node<M_, W_>* left, Node<M_, W_>* right);
-      virtual void 
+      virtual void
       accept(ConstNodeVisitor<M_, W_>& v) const;
-      virtual typename Node<M_, W_>::type 
+      virtual typename Node<M_, W_>::type
       what() const;
-      virtual Node<M_, W_>* 
+      virtual Node<M_, W_>*
       clone() const;
-      virtual bool 
+      virtual bool
       operator!=(const Node<M_, W_>& other) const;
-      virtual bool 
+      virtual bool
       operator<(const Node<M_, W_>& other) const;
-      virtual 
+      virtual
       ~Sum();
     /* protected */ public:
 
@@ -319,14 +324,12 @@ namespace vcsn {
       Node<M_, W_>		*right_;
     };
 
-  } // rat
+  } // End of namespace rat.
 
-} // vcsn
+} // End of namespace vcsn.
 
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/implementation/series/rat/nodes.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/series/rat/nodes.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
-
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_RAT_NODES_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_NODES_HH

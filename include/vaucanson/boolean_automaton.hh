@@ -1,7 +1,7 @@
 // boolean_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -63,8 +63,8 @@ namespace vcsn {
 
     AUTOMATON_TYPES_EXACT(automaton_t);
 
-    typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;
-    typedef Element<series_set_t, krat_exp_impl_t>		krat_exp_t;
+    typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	rat_exp_impl_t;
+    typedef Element<series_set_t, rat_exp_impl_t>		rat_exp_t;
 
 # include <vaucanson/contextual_automaton_functions.thh>
 
@@ -72,8 +72,4 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/boolean_automaton.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
-
-#endif // VCSN_BOOLEAN_AUTOMATON_HH
+#endif // ! VCSN_BOOLEAN_AUTOMATON_HH

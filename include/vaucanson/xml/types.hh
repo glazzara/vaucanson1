@@ -17,25 +17,20 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_XML_TYPES_HH
 # define VCSN_XML_TYPES_HH
-
-# include <vaucanson/design_pattern/element.hh>
-# include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/implementation/graph.hh>
-
-# include <vaucanson/xml/xml_automaton.hh>
-# include <vaucanson/xml/xml_set.hh>
 
 /** @addtogroup xml *//** @{ */
 /**
@@ -45,42 +40,66 @@
  *
  * @author Valentin David <valentin@lrde.epita.fr>
  */
-
-/// Get the corresponding Xml implementation.
-# define XML_OF(X...) ::vcsn::xml::XmlOf< X >::ret
-
-/// Attach XML infos on Vaucanson graph.
-# define ATTACH_XML_INFOS(X...) ::vcsn::xml::AttachXmlInfos< X >::ret
-
 /** @} */
 
 namespace vcsn
 {
 
+  // Forward declarations.
+  template <class S, class T>
+  struct Element;
+
+  template <class Kind, class Word, class Weight,
+	    class Series, class Letter, class Tag>
+  struct Graph;
+
   namespace xml
   {
-
     /** @addtogroup xml *//** @{ */
-    template <class I>
-    struct XmlOf;
 
-    template <typename I, typename J>
-    struct XmlOf<Element<I, J> > {
-      typedef Element<I, XmlAutomaton> ret;
-    };
+    // Forward declarations.
+    class XmlInfosTag;
+    class XmlValue;
+    class XmlStructure;
+    class XmlAutomaton;
+    class XmlSession;
 
     template <class I>
     struct AttachXmlInfos;
 
-    template <typename I, typename J, typename K,
-	      typename L, typename M, typename N,
-	      typename O>
-    struct AttachXmlInfos<Element<I, Graph<J, K, L, M, N, O> > > {
-      typedef Element<I, Graph<J, K, L, M, N, XmlInfosTag> > ret;
+    template <typename S,
+	      typename Kind,
+	      typename Word,
+	      typename Weight,
+	      typename Series,
+	      typename Letter,
+	      typename Tag>
+    struct AttachXmlInfos< Element<S, Graph< Kind,
+					     Word,
+					     Weight,
+					     Series,
+					     Letter,
+					     Tag > > >
+    {
+      typedef
+        Element<S, Graph< Kind, Word, Weight, Series, Letter, XmlInfosTag > >
+        ret;
     };
 
+/// Attach XML infos on Vaucanson graph.
+# define ATTACH_XML_INFOS(X...) ::vcsn::xml::AttachXmlInfos< X >::ret
+
+    /// Dynamic XML value type.
+    typedef XmlValue				xml_value_t;
+    /// Dynamic XML structure type.
+    typedef XmlStructure			xml_automata_set_t;
+    /// Dynamic XML automaton implementation type.
+    typedef XmlAutomaton			xml_automaton_impl_t;
     /// Dynamic XML automaton type.
-    typedef Element<XmlStructure, XmlAutomaton> xml_automaton_t;
+    typedef Element<XmlStructure, XmlAutomaton>	xml_automaton_t;
+
+    /// Dynamic XML session type.
+    typedef XmlSession				xml_session_t;
 
     /** @} */
 
@@ -88,4 +107,4 @@ namespace vcsn
 
 } // End of namespace vcsn.
 
-#endif // VCSN_XML_TYPES_HH
+#endif // ! VCSN_XML_TYPES_HH

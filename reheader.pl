@@ -3,12 +3,12 @@ use strict;
 
 my $boundupper = "#ifndef %CPPNAME%
 # define %CPPNAME%";
-my $boundlower = "#endif // %CPPNAME%";
+my $boundlower = "#endif // ! %CPPNAME%";
 
 my $header = "// %BASENAME%: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) %COPYRIGHT% The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -24,15 +24,17 @@ my $header = "// %BASENAME%: this file is part of the Vaucanson project.
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch\@enst.fr>
-//    * Sylvain Lombardy <lombardy\@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy\@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole\@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse\@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen\@enst.fr>
 //    * Raphael Poss <raphael.poss\@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas\@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey\@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor\@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet\@lrde.epita.fr>
 //
 ";
 
@@ -73,12 +75,34 @@ print STDERR "Processing for $fname...\n";
 
 open(FILE, "<", $fname) or die "cannot open $fname: $!\n";
 
+my $year = `date +%Y`;
+my $default_copyright = 1;
+my $copyright = $year;
+
 my $content;
 while (<FILE>)
 {
-   $content .= $_;
+    $content .= $_;
+    if (/Copyright \(C\) (.*) The Vaucanson Group\./)
+    {
+	$copyright = $1;
+	$copyright .= ", 2004" unless /2004/;
+	$copyright .= ", 2005" unless /2005/;
+	$copyright =~ s/,([^ ])/, $1/g;
+	if ($default_copyright)
+	{
+	    $default_copyright = 0;
+	}
+	else
+	{
+	    warn "Multiple copyright lines found!\n";
+	}
+	print "Copyright is $copyright\n";
+    }
 }
 close FILE;
+
+$xheader =~ s,%COPYRIGHT%,$copyright,g;
 
 $_ = $content;
 s,^((/\*.*?\*/)|(//[^\n]*\n)|[ \t\n])*,,sg;

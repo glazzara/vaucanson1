@@ -5,10 +5,10 @@
 # VCSN_HEADER
 
 AC_PREREQ([2.54])
-AC_INIT([vaucanson], [0.5], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [0.6.1], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config/vcsn.m4])
-AM_INIT_AUTOMAKE([1.7 no-define foreign dist-bzip2])
+AM_INIT_AUTOMAKE([1.9 tar-ustar no-define foreign dist-bzip2])
 AM_CONFIG_HEADER([config.h:config.hin])
 
 # Some C and C++ code used.
@@ -29,27 +29,44 @@ AC_PROG_AWK
 AC_CHECK_SWIG13
 AM_PATH_PYTHON([2.2])
 
-WANT_INTERPRETER=no
-AC_ARG_WITH([vaucanswig],
-            [AC_HELP_STRING([--without-vaucanswig],
-			    [disable building vaucanswig])],
-            [WANT_INTERPRETER=$withval],
-            [WANT_INTERPRETER=yes])
+AC_ARG_ENABLE(
+	[vaucanswig],
+        [AC_HELP_STRING([--enable-vaucanswig],
+			[enable building vaucanswig])],
+	[WANT_INTERPRETER=$enableval],
+        [WANT_INTERPRETER=no
+cat << \EOF
+
+WARNING:  Vaucanswig  WILL NOT  be  built.   Vaucanswig  is a  set  of
+bindings for the Python language  to use Vaucanson from an interpreter
+or within a scripting language.
+
+To enable Vaucanswig, invoke this script with --enable-vaucanswig.
+To disable this warning, invoke this script with --disable-vaucanswig.
+
+BE WARNED: the  compilation of Vaucanswig may take  several hours on a
+modern computer.
+
+Instructions about Vaucanswig are provided in
+src/demos/vaucanswig/README.
+
+EOF
+sleep 5])
 
 VCSN_VAUCANSWIG_SUBDIR=""
 if test "x$WANT_INTERPRETER" != "xno"; then
 if test "x$ac_cv_recent_swig" != "xyes"; then
-    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.
-	  	  You can disable vaucanswig by specifying
-		  --without-vaucanswig to configure.])
+    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
 else
   AC_CONFIG_FILES([src/demos/vaucanswig/Makefile
-	           src/demos/vaucanswig/meta/Makefile
+ 	           src/demos/vaucanswig/doc/Makefile
+ 	           src/demos/vaucanswig/meta/Makefile
                    src/demos/vaucanswig/src/Makefile
                    src/demos/vaucanswig/python/Makefile])
   VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
 fi
 fi
+
 
 # Libtool used
 AC_DISABLE_STATIC
@@ -72,8 +89,10 @@ AC_ARG_VAR([DOXYGEN], [the Doxygen documentation generation program])
 AC_CHECK_PROGS([DOXYGEN], [doxygen], [$am_aux_dir/missing doxygen])
 AC_ARG_VAR([TEXI2DVI], [program to create DVI from TeX files])
 AC_CHECK_PROGS([TEXI2DVI], [texi2dvi], [$am_aux_dir/missing texi2dvi])
-AC_ARG_VAR([SGML2LATEX], [program to create TeX from LinuxDoc SGML files])
-AC_CHECK_PROGS([SGML2LATEX], [sgml2latex], [$am_aux_dir/missing sgml2latex])
+AC_ARG_VAR([RST2TEX], [program to create TeX from reStructuredText documents])
+AC_CHECK_PROGS([RST2TEX], [rst2latex rst2latex.py], [$am_aux_dir/missing rst2latex])
+AC_ARG_VAR([RST2HTML], [program to create HTML from reStructuredText documents])
+AC_CHECK_PROGS([RST2HTML], [rst2html rst2html.py], [$am_aux_dir/missing rst2html])
 AC_ARG_VAR([TAR], [the tape archiver program])
 AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 
@@ -101,6 +120,8 @@ AC_CONFIG_FILES([
 	src/tests/algebra/series/krat/derivations/cderivation/Makefile
 	src/tests/algebra/series/krat/derivations/partial_derivation/Makefile
 	src/tests/algebra/series/krat/main/Makefile
+	src/tests/algebra/series/krat/boolean/Makefile
+	src/tests/algebra/series/krat/tests/Makefile
 	src/tests/algebra/series/misc/Makefile
 	src/tests/algebra/series/polynom/Makefile
 	src/tests/algebra/semiring/Makefile
@@ -111,6 +132,7 @@ AC_CONFIG_FILES([
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile
 	src/tests/boolean_automata/Makefile
+	src/tests/k_automata/Makefile
 	src/tests/transducers/Makefile
 	src/tests/context_headers/Makefile
 	src/tests/context_headers/automata/Makefile
@@ -118,12 +140,15 @@ AC_CONFIG_FILES([
 	src/tests/test-suites/Makefile
 	src/tests/xml/Makefile
 	src/demos/Makefile
+	src/demos/ciaa/Makefile
 	src/demos/vgrep/Makefile
 	src/demos/fibonacci/Makefile
 	src/demos/universal/Makefile
 	src/demos/samples/Makefile
 	src/demos/samples/algebra/Makefile
 	src/demos/samples/algorithms/Makefile
+	src/demos/xml/Makefile
+	src/demos/xml/samples/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
 	doc/beginner/Makefile
@@ -133,8 +158,7 @@ AC_CONFIG_FILES([
 	include/Makefile
 	xml/Makefile])
 
-dnl GENERATED LINES FOR TESTS - DO NOT EDIT
-dnl END OF GENERATED LINES FOR TESTS - DO NOT EDIT
+m4_include([tests.m4])
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 AC_SUBST([VCSN_VAUCANSWIG_SUBDIR])

@@ -1,7 +1,7 @@
-// letter_to_letter_composition.hxx:this file is part of the Vaucanson project.
+// letter_to_letter_composition.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,17 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HXX
 # define VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HXX
@@ -54,7 +56,7 @@ namespace vcsn {
 			     f.series().semiring().monoid());
     series_set_t series(output_series, g.series().monoid());
     automata_set_t structure(series);
-    transducer_t output(set);
+    transducer_t output(s);
     delta_ret_t f_delta_ret, g_delta_ret;
     assoc_t conv;
     series_set_elt_t zero =
@@ -122,4 +124,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HH
+#endif // ! VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HXX

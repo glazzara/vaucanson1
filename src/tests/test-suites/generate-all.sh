@@ -57,17 +57,21 @@ done;
 #    `-------*/
 
 for semiring_elt_value_t in bool double int; do
-../bin/generate-test-suite.sh \
-   algebra_series_krat_${semiring_elt_value_t}_string \
-   algebra_series_krat_${semiring_elt_value_t}_string.defs \
-   ../algebra/series/misc \
-   ../algebra/series/krat/main
+    TEST="../algebra/series/misc ../algebra/series/krat/main"
+    if [ $semiring_elt_value_t = "bool" ]; then
+	TEST="$TEST ../algebra/series/krat/boolean"
+    fi
 
-../bin/generate-test-suite.sh \
-   algebra_series_polynom_${semiring_elt_value_t}_string \
-   algebra_series_polynom_${semiring_elt_value_t}_string.defs \
-   ../algebra/series/misc \
-   ../algebra/series/polynom
+    ../bin/generate-test-suite.sh \
+	algebra_series_krat_${semiring_elt_value_t}_string \
+	algebra_series_krat_${semiring_elt_value_t}_string.defs \
+	${TEST}
+
+    ../bin/generate-test-suite.sh \
+	algebra_series_polynom_${semiring_elt_value_t}_string \
+	algebra_series_polynom_${semiring_elt_value_t}_string.defs \
+	../algebra/series/misc \
+	../algebra/series/polynom
 done;
 
 for derivation_type in derivation cderivation partial_derivation; do
@@ -82,7 +86,7 @@ done;
 #    | Automaton |
 #    `----------*/
 
-for automata_kind in boolean r z z_max_plus; do
+for automata_kind in boolean r z z_max_plus z_min_plus; do
     ../bin/generate-test-suite.sh \
     context_headers_${automata_kind} \
     context_headers_${automata_kind}.defs \
@@ -91,17 +95,14 @@ for automata_kind in boolean r z z_max_plus; do
     TEST="../automata";
     if [ $automata_kind = "boolean" ]; then
 	TEST="$TEST ../boolean_automata"
+    else
+	TEST="$TEST ../k_automata"
     fi
     ../bin/generate-test-suite.sh \
 	${automata_kind}_automaton \
 	${automata_kind}_automaton.defs \
 	${TEST}
 done;
-
-../bin/generate-test-suite.sh \
-   tropical_min_automaton \
-   tropical_min_automaton.defs \
-   ../automata
 
 #    /*-----------.
 #    | Transducer |

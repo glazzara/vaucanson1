@@ -62,7 +62,7 @@ generate_CCs()
     FUN_SNAME=`echo $FUN_NAME | sed s/"_$SUFFIX"/''/`
     NAME_TEST_FILE=$NAME
     for TEST_DIR in $TEST_DIRS; do
-      NAME_TEST_FILE=`echo $NAME_TEST_FILE | sed s,$TEST_DIR/,,`
+      NAME_TEST_FILE=`echo $NAME_TEST_FILE | sed s,$TEST_DIR//\*,,`
     done
 
     # Include licence.
@@ -180,6 +180,7 @@ cat > $DEST_DIR/Makefile.am << EOF
 include \$(top_srcdir)/src/tests/check/Makefile.check
 AM_CPPFLAGS += $INCLUDES
 AM_CPPFLAGS += -DEXCEPTION_TRAPS
+AM_CPPFLAGS += -DVCSN_SRC_DIR=\"'\$(top_srcdir)'\"
 
 TESTS_ENVIRONMENT = /usr/bin/env CXX="\$(CXX)" CXXFLAGS="\$(AM_CPPFLAGS)"
 TESTS += failcomp.sh

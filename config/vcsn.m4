@@ -7,9 +7,9 @@
 # This macro is noticeably used in the Vaucanson distribution itself
 # to instruct "configure" to use the bundled Vaucanson sources.
 
-# User projects can use this macro to point their "configure" to a 
+# User projects can use this macro to point their "configure" to a
 # nonstandard Vaucanson sources location, by invoking it _before_ using
-# AC_WITH_VCSN. 
+# AC_WITH_VCSN.
 
 AC_DEFUN([VCSN_PATH_LOCAL],
 [ifelse([$1], [], [vcsn_cv_local_src=no], [dnl
@@ -26,13 +26,13 @@ AC_DEFUN([VCSN_PATH_LOCAL],
 # Checks for the location of Vaucanson sources specified with the user
 # with the flag --with-vcsn.
 
-AC_DEFUN([VCSN_PATH_USER], 
+AC_DEFUN([VCSN_PATH_USER],
 [dnl
   AC_CACHE_CHECK([for Vaucanson in user-specified directory],
-		 [vcsn_cv_user_hint], 
+		 [vcsn_cv_user_hint],
                  [vcsn_cv_user_hint=no
                   AC_ARG_WITH([vcsn],
-                     [AC_HELP_STRING([--with-vcsn=DIR], 
+                     [AC_HELP_STRING([--with-vcsn=DIR],
                      [Include directory where Vaucanson is installed (optional)])],
                      [if test -r "$withval/vaucanson/config/system.hh"; then
 		        vcsn_cv_user_hint=$withval
@@ -45,7 +45,7 @@ AC_DEFUN([VCSN_PATH_USER],
 # This macro checks the actual availability of Vaucanson headers after
 # the other heuristics have tried setting VCSN_INCLUDE_DIR and CPPFLAGS.
 
-AC_DEFUN([_VCSN_CHECK_HEADERS], 
+AC_DEFUN([_VCSN_CHECK_HEADERS],
 [dnl
  AC_REQUIRE([AC_PROG_CXX])
  AC_LANG_PUSH([C++])
@@ -55,7 +55,7 @@ AC_DEFUN([_VCSN_CHECK_HEADERS],
  CPPFLAGS="$VCSN_EXTRA_CPPFLAGS $CPPFLAGS"
  # At this point, we can be in a situation where pconf.hh does not
  # exist _yet_. In that particular case, we need a workaround.
- AC_CHECK_HEADER([vaucanson/config/pconf.hh], [], 
+ AC_CHECK_HEADER([vaucanson/config/pconf.hh], [],
           [CPPFLAGS="$CPPFLAGS -DIGNORE_PCONF_HH"])
  AC_CHECK_HEADER([vaucanson/config/system.hh], [], [have_vaucanson=no])
  CPPFLAGS=$vcsn_save_CPPFLAGS
@@ -73,7 +73,7 @@ AC_DEFUN([_VCSN_CHECK_HEADERS],
 # _VCSN_CHECK_HEADERS.
 
 AC_DEFUN([VCSN_PATH_HEADERS],
-[dnl 
+[dnl
   AC_REQUIRE([VCSN_PATH_LOCAL])
   AC_REQUIRE([VCSN_PATH_USER])
 
@@ -102,7 +102,7 @@ AC_DEFUN([VCSN_PATH_HEADERS],
     fi
   fi
 
-  AC_ARG_VAR([VCSN_INCLUDE_DIR], 
+  AC_ARG_VAR([VCSN_INCLUDE_DIR],
 	     [location of Vaucanson (<include dir>, should be autodetected)])
   if test "x$VCSN_INCLUDE_DIR" != x ; then
      CPPFLAGS="-I$VCSN_INCLUDE_DIR $CPPFLAGS"
@@ -118,7 +118,7 @@ AC_DEFUN([VCSN_PATH_HEADERS],
 
 # Automatically adds the flag `-ftemplate-depth' to VCSN_CXXFLAGS when :
 # - deep template recursion is not available when it is not present
-# - the compiler supports it 
+# - the compiler supports it
 # - it provides the right effect when present
 
 AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
@@ -133,25 +133,25 @@ AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
                   vcsn_save_CPPFLAGS=$CPPFLAGS
                   vcsn_save_CXXFLAGS=$CXXFLAGS
                   CPPFLAGS="$CPPFLAGS -DTDEPTH=$cxx_tdepth"
-                  AC_LINK_IFELSE([template<unsigned n> 
-				  struct rec { 
-			             typedef typename rec<n-1>::ret ret; 
+                  AC_LINK_IFELSE([template<unsigned n>
+				  struct rec {
+			             typedef typename rec<n-1>::ret ret;
                                   };
-                                  template<> struct rec<0> 
+                                  template<> struct rec<0>
                                   { typedef int ret; };
-                                  int main(void) 
-                                  { rec<TDEPTH>::ret i = 0; return i; }], 
-                      [], 
+                                  int main(void)
+                                  { rec<TDEPTH>::ret i = 0; return i; }],
+                      [],
                       [CXXFLAGS="$CXXFLAGS -ftemplate-depth-$cxx_tdepth"
-                       AC_LINK_IFELSE([template<unsigned n> 
-                                       struct rec { 
+                       AC_LINK_IFELSE([template<unsigned n>
+                                       struct rec {
                                            typedef typename rec<n-1>::ret ret;
                                        };
-                                      template<> struct rec<0> 
+                                      template<> struct rec<0>
                                       { typedef int ret; };
-                                      int main(void) 
+                                      int main(void)
                                       { rec<TDEPTH>::ret i = 0; return i; }],
-                       [cxx_cv_cxx_template_flags="-ftemplate-depth-$cxx_tdepth"], 
+                       [cxx_cv_cxx_template_flags="-ftemplate-depth-$cxx_tdepth"],
                        [cxx_cv_cxx_template_flags=unsupported])])
                   CPPFLAGS=$vcsn_save_CPPFLAGS
                   CXXFLAGS=$vcsn_save_CXXFLAGS])
@@ -187,13 +187,13 @@ AC_DEFUN([AC_CXX_EXCEPTIONS],
                  [cxx_cv_cxx_exceptions],
                  [AC_REQUIRE([AC_PROG_CXX])
                   AC_LANG_PUSH([C++])
-                  AC_COMPILE_IFELSE([try { throw 1; } 
+                  AC_COMPILE_IFELSE([try { throw 1; }
                                      catch (int i) { return i; }],
 			            [cxx_cv_cxx_exceptions=yes],
 				    [cxx_cv_cxx_exceptions=no])
 		  AC_LANG_POP([C++])])
   if test "$cxx_cv_cxx_exceptions" = yes; then
-     AC_DEFINE([HAVE_EXCEPTIONS], 1, 
+     AC_DEFINE([HAVE_EXCEPTIONS], 1,
                [define if the compiler supports exceptions])
   fi
 ])
@@ -213,25 +213,25 @@ AC_DEFUN([AC_CXX_NUMERIC_LIMITS],
   AC_LANG_PUSH([C++])
 
   ### Vaucanson needs definitions for infinity values for the `float' and
-  ### `double' data types, and max and min for integer data types. 
+  ### `double' data types, and max and min for integer data types.
 
   # In ISO C++98, these are provided by std::numeric_limits, declared
-  # in header <limits>. 
+  # in header <limits>.
 
   AC_CHECK_HEADERS([limits])
 
-  # Some old (and faulty) <limits> implementations define unusable 
+  # Some old (and faulty) <limits> implementations define unusable
   # std::numeric_limits. Check it.
 
   AC_CACHE_CHECK([for proper std::numeric_limits in <limits>],
-                 [cxx_cv_have_numeric_limits], 
+                 [cxx_cv_have_numeric_limits],
 	         [if test x$ac_cv_header_limits != xno; then
                      AC_TRY_LINK([@%:@include <limits>
                                   template<bool b> struct sif {};
                                   template<> struct sif<true> { int a; };],
-	        		 [float f1 = 
+	        		 [float f1 =
 				     std::numeric_limits<float>::infinity();
-		                  double f2 = 
+		                  double f2 =
 				     std::numeric_limits<double>::infinity();
                                   sif<std::numeric_limits<float>::has_infinity> i1;
                                   sif<std::numeric_limits<double>::has_infinity> i2;
@@ -287,7 +287,7 @@ AC_DEFUN([AC_CXX_CHECK_MATH],
      CPPFLAGS="$CPPFLAGS -D_ISOC99_SOURCE=1"
   fi
   AC_LANG_POP([C++])
-])  
+])
 
 AC_DEFUN([AC_CXX_FLOAT_MATH],
 [dnl
@@ -321,21 +321,21 @@ AC_DEFUN([AC_CXX_FLAGS],
    AC_CACHE_CHECK([for C++ compiler-specific extra flags],
                   [ac_cv_cxx_style],
                   [ac_cv_cxx_style=unknown
-                   if test "x$ac_compiler_gnu" != xno; then
+		   if $CXX -V 2>&1 | grep -i "Intel(R) C++">/dev/null 2>&1;
+		   then
+                      ac_cv_cxx_style=Intel
+                   elif test "x$ac_compiler_gnu" != xno; then
 		      if $CXX --version | grep '^2\.' >/dev/null ; then
 			ac_cv_cxx_style=weakGNU
                       else
                         ac_cv_cxx_style=GNU
                       fi
-                   elif $CXX -V 2>&1 | grep -i "WorkShop">/dev/null 2>&1; then 
+                   elif $CXX -V 2>&1 | grep -i "WorkShop">/dev/null 2>&1; then
 		      ac_cv_cxx_style=Sun
-                   elif $CXX -V 2>&1 | grep -i "Intel(R) C++">/dev/null 2>&1;
-                   then
-                      ac_cv_cxx_style=Intel
                    else
                       echo "int main() {}" >conftest.cc
                       if $CXX --version conftest.cc 2>&1 \
-		         | grep -i "Comeau C/C++" >/dev/null 2>&1; then       
+		         | grep -i "Comeau C/C++" >/dev/null 2>&1; then
                          ac_cv_cxx_style=Comeau
 		      fi
                       rm -f conftest.*
@@ -369,8 +369,59 @@ AC_DEFUN([AC_CXX_FLAGS],
      Intel)
       _CXXFLAGS_OPTIMIZE="-O3"
       _CXXFLAGS_DEBUG="-g"
-      _CXXFLAGS_STRICT="-w1"
-      _CXXFLAGS_STRICT_ERRORS="-w1"
+      _CXXFLAGS_STRICT="-wd111,193,279,383,444,654,810,981,1418,327"
+      _CXXFLAGS_STRICT_ERRORS="-wd111,193,279,383,444,654,810,981,1418,327"
+# This is so that ICC no longer complain that
+#
+#  scantiger.ll(177): remark #111: statement is unreachable
+#          break;
+#          ^
+#
+#   ./../ast/seqexp.hh(36): remark #193:
+#      zero used for undefined preprocessing identifier
+#   #if STUDENT
+#       ^
+#
+#    scantiger.cc(924): remark #279: controlling expression is constant
+#          while ( 1 )             /* loops until end-of-file is reached */
+#                  ^
+#
+#   ../../src/task/task.hh(38): remark #383:
+#     value copied to temporary, reference to
+#    temporary used
+#           int key = 0, const std::string& deps = "");
+#                                                  ^
+#   /intel/compiler70/ia32/include/xstring(41): remark #444:
+#      destructor for base class "std::_String_val<_Elem, _Ax>" is not virtual
+#                   : public _String_val<_Elem, _Ax>
+#                            ^
+#
+#  ./../ast/print-visitor.hh(21): warning #654:
+#  overloaded virtual function "ast::GenVisitor<K>::visit
+#                               [with K=ast::const_kind]"
+#   is only partially overridden in class "ast::PrintVisitor"
+#      class PrintVisitor : public DefaultVisitor<const_kind>
+#            ^
+#
+#  /intel/compiler70/ia32/include/xlocale(1381): remark #810:
+#     conversion from "int" to "char" may lose significant bits
+#                  return (widen((char)_Tolower((unsigned char)narrow(_Ch),
+#                                ^
+#
+#
+#   ./../ast/print-visitor.hh(331): remark #981:
+#      operands are evaluated in unspecified order
+#           _ostr << "type " << e.name_get () << " = ";
+#                               ^
+#
+#  scantiger.cc(324): remark #1418:
+#     external definition with no prior declaration
+#    static char yy_hold_char;
+#
+#                ^
+#  foo.cc(4): warning #327: NULL reference is not allowed
+#      int& foo = *static_cast<int*> (0);
+#
       ;;
    esac
 
@@ -447,7 +498,7 @@ if test -r "$srcdir"/src/tests/test-suites/$1/Makefile.am; then
    AC_MSG_RESULT([yes])
    VCSN_TESTS_SUBDIRS="$VCSN_TESTS_SUBDIRS $1"
    AC_CONFIG_FILES([src/tests/test-suites/$1/Makefile])
-else 
+else
    AC_MSG_RESULT([no])
 fi
 ])
