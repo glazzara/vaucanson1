@@ -39,7 +39,8 @@
 template <class Transducer>
 unsigned realtime_test(tests::Tester& tg)
 {
-  using namespace vcsn::boolean_transducer;
+  using namespace vcsn;
+  AUTOMATON_TYPES(Transducer);
 
   tests::Tester			t(tg.verbose());
   vcsn::tools::GenRandomAutomata<Transducer> gen(time(0x0));
