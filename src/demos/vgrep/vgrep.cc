@@ -188,20 +188,15 @@ int main(int argc, char **argv)
 	    && (l != '(') && (l != ')'))
 	  alpha.insert(char(l));
       
-      monoid_t freemonoid(alpha);
-      weights_t semiring;
-      series_t series(semiring, freemonoid);
+      automaton_t automaton = new_automaton(alpha);
       Element<series_t, rat::exp<monoid_elt_value_t, weight_value_t> >
-	krat_exp(series);
+	krat_exp(automaton.set().series());
       parse(exp, krat_exp);
-      automaton_t automaton;
-      automaton.create();
-      automaton.series() = series;
       glushkov(automaton, krat_exp.value());
       in_realtime(automaton);
       auto_in_complete(automaton);
-      // misc::dot_dump(std::cerr, automaton, "automaton");
-
+      std::cerr << "complete ok" << std::endl;
+      misc::dot_dump(std::cout, automaton, "automaton");
       // STATE FINAL => sigma * on it.
       for_each_initial_state(s, automaton)
 	for (unsigned l = 0; l <= 255; ++l)
@@ -213,8 +208,10 @@ int main(int argc, char **argv)
 	  if (isprint(l) && (l != '*') && (l != '.') && (l != '+')
 	      && (l != '(') && (l != ')'))
 	    automaton.add_letter_edge(*s, *s, char(l));
-      automaton = determinize(automaton);
 
+      automaton = determinize(automaton);
+      std::cerr << "determinize ok" << std::endl;
+      misc::dot_dump(std::cout, automaton, "automaton");
       // No file means standard input.
       if (optcount == argc)
 	{

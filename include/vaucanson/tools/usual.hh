@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -17,8 +18,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-#ifndef TOOLS_USUAL_HH
-# define TOOLS_USUAL_HH
+#ifndef VCSN_TOOLS_USUAL_HH
+# define VCSN_TOOLS_USUAL_HH
 
 # include <vaucanson/config/system.hh>
 # include <fstream>
@@ -29,13 +30,9 @@
 # include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-# include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-# include <vaucanson/automata/concept/kinds.hh>
-# include <vaucanson/automata/concept/tags.hh>
-# include <vaucanson/automata/concrete/manylinks.hh>
+# include <vaucanson/automata/concrete/graph.hh>
 # include <vaucanson/misc/ref.hh>
 # include <vaucanson/misc/dot_dump.hh>
 # include <vaucanson/tools/usual_macros.hh>
@@ -48,35 +45,28 @@ namespace vcsn {
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    template <class F, class T>
-    struct map : std::map<F,T>
-    {};
-    
-    typedef Element
+    typedef polynom<WordValue, bool> usual_serie_value;
+
+    typedef Series<NumericalSemiring, Words> usual_series_t;
+   
+    typedef Graph
     <
-      Automata, 
-      utility::ref< 
-      AutomatonImpl<labels_are_series,
-		    Series<NumericalSemiring, Words>,
-		    polynom<Word::value_t, bool>,
-		    ManyLinks<polynom<Word::value_t, bool>, NoTag, NoTag>,
-		    NoTag,
-		    map> >
-    >
+      labels_are_series,
+      WordValue,
+      bool, 
+      polynom<WordValue, bool>,
+      char,
+      NoTag>
+    usual_automaton_impl_t;
+
+    typedef Element<Automata<usual_series_t>, usual_automaton_impl_t>
     usual_automaton_t;
 
-    typedef Element
-    <
-      Automata, 
-      utility::ref< 
-      AutomatonImpl<labels_are_series,
-	  	    Series<TropicalSemiring<TropicalMax>, Words>,
-	  	    polynom<Word::value_t, int>,
-	  	    ManyLinks<polynom<Word::value_t, int>, NoTag, NoTag>,
-	  	    NoTag,
-	  	    map> >
-    >
-    tropical_automaton_t;
+    template <class T>
+    usual_automaton_t new_automaton(const T& alphabet);
+
+    template <class InputIterator>
+    usual_automaton_t new_automaton(InputIterator, InputIterator);
 
 #define SAVE_AUTOMATON_DOT(Dir, Name, Auto, Index)		\
     {								\
@@ -101,4 +91,6 @@ namespace vcsn {
 
 } // vcsn
 
-# endif // TOOLS_USUAL_HH
+# include <vaucanson/tools/usual.hxx>
+
+# endif // VCSN_TOOLS_USUAL_HH

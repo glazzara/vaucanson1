@@ -23,7 +23,7 @@
 
 # include <vaucanson/misc/functors.hh>
 # include <vaucanson/misc/constraints.hh>
-# include <vaucanson/misc/type_constraints.hh>
+// # include <vaucanson/misc/type_constraints.hh>
 # include <vaucanson/misc/numerical_constraints.hh>
 
 namespace utility

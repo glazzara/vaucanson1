@@ -218,25 +218,25 @@ namespace vcsn {
   };
 
   // This implementation can be used as a transducer one.
-  template <class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SerieValue,
-	    class Letter,
-	    class Tag>
-  struct transducer_traits<Graph<Kind, 
-				 WordValue, 
-				 WeightValue, 
-				 SerieValue, 
-				 Letter,
-				 Tag>  > 
-  {
-    typedef WordValue			input_monoid_elt_value_t;
-    typedef typename series_traits<WeightValue>::monoid_elt_value_t 
-    output_monoid_elt_value_t;
-    typedef typename series_traits<WeightValue>::weight_value_t
-    output_weight_value_t;
-  };
+//   template <class Kind,
+// 	    class WordValue,
+// 	    class WeightValue,
+// 	    class SerieValue,
+// 	    class Letter,
+// 	    class Tag>
+//   struct transducer_traits<Graph<Kind, 
+// 				 WordValue, 
+// 				 WeightValue, 
+// 				 SerieValue, 
+// 				 Letter,
+// 				 Tag>  > 
+//   {
+//     typedef WordValue			input_monoid_elt_value_t;
+//     typedef typename series_traits<WeightValue>::monoid_elt_value_t 
+//     output_monoid_elt_value_t;
+//     typedef typename series_traits<WeightValue>::weight_value_t
+//     output_weight_value_t;
+//   };
 
 } // vcsn
 

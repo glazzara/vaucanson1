@@ -1,5 +1,20 @@
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/Makefile.am: Adjust.
+	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
+		(WordValue): New.
+	* include/vaucanson/misc/functors.h[h,xx]: Comment defect include.
+	* include/vaucanson/tools/usual.hh: 
+		Adjust to new automaton type definition.
+		(new_automaton): New.		
+	* include/vaucanson/tools/usual.hxx(new_automaton): Implement.
+	* src/demos/vgrep/vgrep.cc: Adjust.
+
+	* include/vaucanson/automata/concrete/graph.hh: 
+		(transducer_traits): Disable.
+
+2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/automata/concrete/graph.hh,
 	  include/vaucanson/automata/concrete/graph.hxx,
 	  include/vaucanson/automata/concrete/kind_adapter.hh: New.

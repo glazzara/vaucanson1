@@ -1,17 +1,26 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 219)
-(Parent-Version vaucanson 0 218)
+(Project-Version vaucanson 0 220)
+(Parent-Version vaucanson 0 219)
 (Version-Log "
 2003-05-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/automata/concrete/graph.hh,
-	  include/vaucanson/automata/concrete/graph.hxx,
-	  include/vaucanson/automata/concrete/kind_adapter.hh: New.
+	* include/Makefile.am: Adjust.
+	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
+		(WordValue): New.
+	* include/vaucanson/misc/functors.h[h,xx]: Comment defect include.
+	* include/vaucanson/tools/usual.hh: 
+		Adjust to new automaton type definition.
+		(new_automaton): New.		
+	* include/vaucanson/tools/usual.hxx(new_automaton): Implement.
+	* src/demos/vgrep/vgrep.cc: Adjust.
+
+	* include/vaucanson/automata/concrete/graph.hh: 
+		(transducer_traits): Disable.
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 20 May 2003 15:55:28 +0200")
+(Checkin-Time "Tue, 20 May 2003 16:29:25 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -94,7 +103,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.24 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.25 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -116,7 +125,7 @@
   (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.7 600))
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.17 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.18 600))
   (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.17 600))
   (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.16 600))
   (include/vaucanson/algebra/concept/concepts.hh (vaucanson/31_concepts.h 1.7 600))
@@ -140,7 +149,7 @@
   (include/vaucanson/algebra/concrete/alphabets/predefs.hh (vaucanson/g/47_predefs.hh 1.7 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh (vaucanson/28_set_alphab 1.12 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.9 600))
-  (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.6 600))
+  (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.7 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.13 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.12 600))
   (include/vaucanson/algebra/concrete/free_monoid/words.hh (vaucanson/c/3_words.hh 1.15 600))
@@ -290,8 +299,8 @@
   (include/vaucanson/misc/converter.hxx (vaucanson/c/32_converter. 1.5 600))
   (include/vaucanson/misc/dot_dump.hh (vaucanson/d/25_dot_dump.h 1.6 600))
   (include/vaucanson/misc/fsm_dump.hh (vaucanson/g/8_fsm_dump.h 1.9 600))
-  (include/vaucanson/misc/functors.hh (vaucanson/c/30_functors.h 1.7 600))
-  (include/vaucanson/misc/functors.hxx (vaucanson/c/35_functors.h 1.5 600))
+  (include/vaucanson/misc/functors.hh (vaucanson/c/30_functors.h 1.8 600))
+  (include/vaucanson/misc/functors.hxx (vaucanson/c/35_functors.h 1.6 600))
   (include/vaucanson/misc/limits.hh (vaucanson/g/3_limits.hh 1.4 600))
   (include/vaucanson/misc/misc_constraints.hh (vaucanson/b/21_misc_const 1.7 600))
   (include/vaucanson/misc/numerical_constraints.hh (vaucanson/b/20_numerical_ 1.8 600))
@@ -308,7 +317,7 @@
   (include/vaucanson/tools/gen_book.hxx (vaucanson/g/33_gen_book.h 1.4 600))
   (include/vaucanson/tools/gen_random.hh (vaucanson/e/4_gen_random 1.13 600))
   (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.17 600))
-  (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.25 600))
+  (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.26 600))
   (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.5 600))
   (prj (vaucanson.prj) :symlink)
   (src () :directory)
@@ -375,7 +384,7 @@
   
   
   (src/demos/vgrep/Makefile.am (vaucanson/i/27_Makefile.a 1.4 600))
-  (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.2 600))
+  (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.3 600))
   (src/tests/Makefile.am (vaucanson/b/1_Makefile.a 1.8 600))
   (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.6 600))
   (src/tests/algebra/alphabets/Makefile.am (vaucanson/h/36_Makefile.a 1.1 600))
@@ -415,7 +424,7 @@
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 600))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 755))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
@@ -1064,12 +1073,32 @@
 ;; to version 0.218(w), by yann:
 
   (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.1 600))
-  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.1 600))
+  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.2 600))
 
 ;; Files added by populate at Tue, 20 May 2003 15:50:23 +0200,
 ;; to version 0.218(w), by yann:
 
   (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.1 600))
+
+;; Files added by populate at Tue, 20 May 2003 16:20:15 +0200,
+;; to version 0.219(w), by yann:
+
+  
+
+;; Files added by populate at Tue, 20 May 2003 16:20:17 +0200,
+;; to version 0.219(w), by yann:
+
+  
+
+;; Files deleted by depopulate at Tue, 20 May 2003 16:21:00 +0200,
+;; from version 0.219(w), by yann:
+
+  ; (include/vaucanson/misc/support.hxx ())
+
+;; Files deleted by depopulate at Tue, 20 May 2003 16:28:42 +0200,
+;; from version 0.219(w), by yann:
+
+  ; (include/vaucanson/misc/support.hh ())
 )
 (Merge-Parents)
 (New-Merge-Parents)

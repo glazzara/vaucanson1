@@ -22,7 +22,7 @@
 # define UTILITY_FUNCTORS_HH
 
 # include <vaucanson/misc/constraints.hh>
-# include <vaucanson/misc/type_constraints.hh>
+// # include <vaucanson/misc/type_constraints.hh>
 # include <vaucanson/misc/numerical_constraints.hh>
 
 namespace utility
