@@ -30,15 +30,6 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-# include <vaucanson/contextual_transducer_functions.hh>
-# include <vaucanson/algorithms/evaluation.hh>
-# include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/algorithms/standard_of.hh>
-# include <vaucanson/automata/implementation/generalized.hh>
-# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-# include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
-
-
 /*----------------.
 | new automaton() |
 `----------------*/
@@ -76,36 +67,36 @@ automaton_t new_automaton(const T& input_alphabet,
 		       output_alphabet.end());
 }
 
-template<typename TS, typename TT>
+template <typename SeriesSet,
+	  typename TransImpl,
+	  typename Alpha,
+	  typename MonoidImpl>
 output_series_set_elt_t
-evaluation(const monoid_elt_t& input_word, const Element<TS, TT>& t)
+do_evaluation(const Element<vcsn::Transducer<SeriesSet>, TransImpl>& t,
+	      const Element<vcsn::algebra::FreeMonoid<Alpha>, MonoidImpl>&
+	      input)
 {
-  typedef polynom<WordValue, bool> bool_series_set_elt_value_t;
-  typedef Series<NumericalSemiring, Words> bool_series_set_t;
-  typedef Graph
-    <
-      labels_are_series,
-      WordValue,
-      bool,
-      bool_series_set_elt_value_t,
-      char,
-      NoTag>
-    bool_automaton_impl_t;
-
-    typedef Element<Automata<bool_series_set_t>, bool_automaton_impl_t>
-    bool_automaton_t;
-  AUTOMATON_TYPES_EXACT_(bool_automaton_t, b_);
-    
+  typedef typename boolean_automaton::automaton_t bool_automaton_t;
+  
   output_series_set_elt_t e(t.structure().series().semiring());
-  parse(input_word.value(), e);
-  b_monoid_t b_monoid(t.series().monoid().alphabet());
-  b_semiring_t b_semiring;
-  b_series_set_t b_series(b_semiring, b_monoid);
-  b_automata_set_t b_automata_set(b_series);
-  bool_automaton_t w(b_automata_set);
+  parse(input.value(), e);
+  bool_automaton_t w = boolean_automaton::
+    new_automaton(t.structure().series().monoid().alphabet());
   generalized_traits<bool_automaton_t>::automaton_t
     result(w.structure());
   standard_of(w, e.value());
   evaluation(w, t, result);
   return verbalize(aut_to_exp(generalized(result)));
+}
+
+
+template <typename TransStruct,
+	  typename TransImpl,
+	  typename MonoidStruct,
+	  typename MonoidImpl>
+output_series_set_elt_t
+evaluation(const Element<TransStruct, TransImpl>& t,
+	   const Element<MonoidStruct, MonoidImpl>& input_word)
+{
+  return do_evaluation(t, input_word);
 }

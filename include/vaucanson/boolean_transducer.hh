@@ -36,6 +36,13 @@
 # include <vaucanson/contextual_headers.hh>
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 # include <vaucanson/automata/concept/transducer.hh>
+# include <vaucanson/boolean_automaton.hh>
+# include <vaucanson/algorithms/evaluation.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
+# include <vaucanson/algorithms/standard_of.hh>
+# include <vaucanson/automata/implementation/generalized.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
 
 namespace vcsn {
   namespace boolean_transducer {
