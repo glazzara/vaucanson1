@@ -22,6 +22,19 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX
 
+/**
+ * @file krat_exp_parser.hxx
+ *
+ * @brief Implement the parse() function.
+ *
+ * This files implements parse() and contains a lot of
+ * tools used by this function.
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
+ *         Thomas Claveirole <thomas@lrde.epita.fr>
+ * @see parse()
+ */
+
+# include <vaucanson/algebra/concept/monoid_base.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 # include <list>
 
@@ -29,8 +42,19 @@ namespace vcsn {
 
   namespace algebra {
 
+    /** @addtogroup algebra */ /** @{ */
+    /** @addtogroup series */ /** @{ */
+
+    /// Misc. declarations used for rational expression lexing.
     namespace krat_exp_lexing {
 
+      /**
+       * @brief Token types enumeration.
+       *
+       * Those are the different token types the lexer could encounter.
+       * 
+       * @see KRatExpToken, KRatExpToken::token
+       */
       enum token_e 
 	{
 	  lparen,
@@ -46,22 +70,34 @@ namespace vcsn {
 	  eof
 	};
 
-      enum lexing_status 
-	{
-	  success,
-	  invalid_character,
-	  invalid_token
-	};
-
     } // krat_exp_lexing
 
     using namespace krat_exp_lexing;
 
-    // Schrödinger's token.
+    /**
+     * @brief Schrödinger's token for rational expression lexing.
+     *
+     * Tokens are ambiguous. For example, '1' could be interpreted
+     * both as a weight and as the empty word. So we assume that each
+     * possible token is in fact part of the *same* token. This
+     * is the Schrödinger's token this class represents.
+     *
+     * @see KRatExpToken::token, token_e
+     */
     template <class MonoidValue, class WeightValue>
     class KRatExpToken
     {
     public:      
+      /**
+       * @brief Simple token.
+       *
+       * This classes represents a simple unambiguous token. Its type
+       * is one of token_e. When a_word or a_weight, an extra information
+       * is carried, which is (of course) the corresponding weight or
+       * word. A Schrödinger's token contains a list of such tokens.
+       *
+       * @see KRatExpToken, token_e
+       */
       struct token 
       {
 	token(const token_e& tok_type) :
@@ -82,19 +118,20 @@ namespace vcsn {
 
 	std::string to_string() const
 	{
-	  switch (type) {
-	  case a_word   : return "word";
-	  case a_weight : return "weight";
-	  case lparen   : return "(";
-	  case rparen   : return ")";
-	  case one      : return "one";
-	  case zero     : return "zero";
-	  case dot      : return ".";
-	  case e_star     : return "*";
-	  case plus     : return "+";
-	  case space    : return " ";
-	  case eof      : return "EOF";
-	  }
+	  switch (type) 
+	    {
+	    case a_word   : return "word";
+	    case a_weight : return "weight";
+	    case lparen   : return "(";
+	    case rparen   : return ")";
+	    case one      : return "one";
+	    case zero     : return "zero";
+	    case dot      : return ".";
+	    case e_star   : return "*";
+	    case plus     : return "+";
+	    case space    : return " ";
+	    case eof      : return "EOF";
+	    }
 	  return "";
 	}
 
@@ -121,14 +158,12 @@ namespace vcsn {
 	else 
 	  {
 	    std::string s("schrod(");
-	    for (typename std::list<token>::const_iterator i = tok_.begin();
-		 i != tok_.end();
-		 )
-	      s += (*i).to_string() + (i++ != tok_.end() ? " ": "");
+	    typename std::list<token>::const_iterator i = tok_.begin();
+	    while (i != tok_.end())
+	      s += i->to_string() + (++i != tok_.end() ? " ": "");
 	    s += ")";
 	    return s;
 	  }
-	return "?";
       }
 
       bool is_just_a(const token_e tok)
@@ -146,7 +181,7 @@ namespace vcsn {
 	for (typename std::list<token>::const_iterator i = tok_.begin();
 	     i != tok_.end();
 	     ++i)
-	  if ((*i).type == tok)
+	  if (i->type == tok)
 	    return true;
 	return false;
       }
@@ -156,9 +191,9 @@ namespace vcsn {
 	for (typename std::list<token>::const_iterator i = tok_.begin();
 	     i != tok_.end();
 	     ++i)
-	  if ((*i).type == a_word)
-	    return (*i).m;
-	assert(! ("internal error in krat_exp parser."));
+	  if (i->type == a_word)
+	    return i->m;
+	assert(! "internal error in krat_exp parser.");
 	return MonoidValue();
       }
 
@@ -167,9 +202,9 @@ namespace vcsn {
 	for (typename std::list<token>::const_iterator i = tok_.begin();
 	     i != tok_.end();
 	     ++i)
-	  if ((*i).type == a_weight)
-	    return (*i).w;
-	assert(! ("internal error in krat_exp parser."));
+	  if (i->type == a_weight)
+	    return i->w;
+	assert(! "internal error in krat_exp parser.");
 	return WeightValue();
       }
 
@@ -200,104 +235,176 @@ namespace vcsn {
       std::list<token> tok_;
     };
 
-    // FIXME: space is used as an operator ! it could imply several pbs.
-    // FIXME: for the moment, no layout is permit
-    // grammar:
-    //
-    // exp ::= '(' exp ')'
-    //     |   exp '+' exp
-    //     |   exp '.' exp
-    //     |   exp '*'
-    //	   |   weight ' ' exp
-    //     |   exp ' ' weight
-    //     |   0
-    //     |   1
-    //     |   word
-    // weight lexer is a parameter.
-    // word lexer is a parameter.
-    // it is assumed that these lexer will not interfere with global lexer.
+    /// Lexer class for the rational expression parser.
     template <class S, class T>
-    inline
-    std::pair<lexing_status, 
-	      std::list<KRatExpToken
-    <
-      typename Element<S, T>::monoid_value_t,
-      typename Element<S, T>::weight_value_t
-    > 
-    > >
-    lex(const std::string& in, 
-	Element<S, T>& e)
+    struct Lexer
     {
-      typedef typename Element<S, T>::monoid_elt_t    monoid_elt_t;
-      typedef typename Element<S, T>::monoid_value_t  monoid_value_t;
-      typedef typename monoid_elt_t::set_t	      monoid_t;
-      typedef typename Element<S, T>::weight_t	      weight_t;
-      typedef typename weight_t::set_t		      weights_t;
-      typedef typename Element<S, T>::weight_value_t  weight_value_t;
-      typedef typename std::string::const_iterator    iterator_t;
       typedef KRatExpToken
-	<
+      <
 	typename Element<S, T>::monoid_value_t,
 	typename Element<S, T>::weight_value_t
-	> 
-	krat_exp_token_t;
+      >						      krat_exp_token_t; 
+      typedef std::list<krat_exp_token_t>	      token_stream_t;
 
-      iterator_t i = in.begin();
-      std::list<krat_exp_token_t> tokens;
-      int len = 0;
+      Lexer() :
+	tokens_ (),
+	error_msg_ ("No error."),
+	error_ (false)
+      {
+      }
 
-      while (i != in.end())
-	{
-	  len = 0;
-	  krat_exp_token_t tok;
-	  switch (*i) 
-	    {
-	    case '(' : tok = lparen; len = 1; break;
-	    case ')' : tok = rparen; len = 1; break;
-	    case '+' : tok = plus;   len = 1; break;
-	    case '*' : tok = e_star;   len = 1; break;
-	    case '.' : tok = dot;    len = 1; break;
-	    case ' ' : tok = space;  len = 1; break;
-	    case '0' : tok = zero;   len = 1; break;
-	    case '1' : tok = one;    len = 1; break;
-	    }
-	  // try word parser.
-	  iterator_t mli = i;
-	  monoid_elt_t w(e.set().monoid());
-	  if (parse_word(w, in, mli))
-	    {
-	      if (mli - i > 1)
-		tok.reset();
-	      tok = w.value();
-	      len = mli - i;
-	    }
-	  // try weight lexer.
-	  iterator_t wli = i;
-	  weight_t ww;
-	  if (parse_weight(ww, in, wli))
-	    {
-	      if (wli - i > len)
-		tok.reset();
-	      if (wli - i >= len)
-		{
-		  tok = ww.value();
-		  len = wli - i;
-		}
-	    }
-	  // we assume that this is in fact the _same_ token 
-	  // which can be interpreted differently in function
-	  // of the context.
-	  // std::cout << tok.to_string() << std::endl;
-	  // std::cout << "len :" << len << std::endl;
-	  if (len == 0)
-	    return std::make_pair(invalid_token, 
-				  std::list<krat_exp_token_t>());
-	  tokens.push_back(tok);
-	  i += len;
-	}
-      return std::make_pair(success, tokens);
-    }
+      /// Put the lexer into an error state.
+      void
+      lex_error(const std::string& msg = "Lex error.")
+      {
+	error_ = true;
+	error_msg_ = msg;
+      }
 
+      /**
+       * @brief Perform lexing.
+       *
+       * @param in The rational expression to lex, as a string.
+       * @param e The element which will be used later for parsing.
+       *          It used to guess words and weights types.
+       */
+      void
+      lex(const std::string& in, const Element<S, T>& e)
+      {
+	typedef typename Element<S, T>::monoid_elt_t	monoid_elt_t;
+	typedef typename Element<S, T>::monoid_value_t	monoid_value_t;
+	typedef typename Element<S, T>::weight_t	weight_t;
+	typedef std::string::const_iterator		iterator_t;
+	
+	iterator_t i = in.begin();
+	int len = 0;
+	
+	while (!error_ & (i != in.end()))
+	  {
+	    len = 0;
+	    krat_exp_token_t tok;
+	    switch (*i) 
+	      {
+	      case '(' : tok = lparen; len = 1; break;
+	      case ')' : tok = rparen; len = 1; break;
+	      case '+' : tok = plus;   len = 1; break;
+	      case '*' : tok = e_star; len = 1; break;
+	      case '.' : tok = dot;    len = 1; break;
+	      case ' ' : tok = space;  len = 1; break;
+	      case '0' : tok = zero;   len = 1; break;
+	      case '1' : tok = one;    len = 1; break;
+	      }
+	    // try word parser.
+	    iterator_t mli = i;
+	    monoid_elt_t w(e.set().monoid());
+	    if (parse_word(w, in, mli))
+	      {
+		if (mli - i > 1)
+		  tok.reset();
+		tok = w.value();
+		len = mli - i;
+	      }
+	    // try weight lexer.
+	    iterator_t wli = i;
+	    weight_t ww;
+	    if (parse_weight(ww, in, wli))
+	      {
+		if (wli - i > len)
+		  tok.reset();
+		if (wli - i >= len)
+		  {
+		    tok = ww.value();
+		    len = wli - i;
+		  }
+	      }
+	    // std::cout << tok.to_string() << std::endl;
+	    // std::cout << "len :" << len << std::endl;
+	    if (len == 0)
+	      lex_error(std::string("Invalid token '") + *i + "'.");
+	    else
+	      tokens_.push_back(tok);
+	    i += len;
+	  }
+      }
+
+      /// Return true when an error occured.
+      bool
+      error() const
+      {
+	return error_;
+      }
+      
+      /// Return the error message.
+      const std::string&
+      error_msg() const
+      {
+	return error_msg_;
+      }
+
+      /// Return the first token.
+      krat_exp_token_t first() const
+      {
+	return (tokens_.size() > 0) ? tokens_.front() :
+	  krat_exp_token_t (eof);
+      }
+      
+      /// Return the second token.
+      krat_exp_token_t second() const
+      {
+	return (tokens_.size() >= 2) ?
+	  *++tokens_.begin() : krat_exp_token_t (eof);
+      }
+
+      /**
+       * @brief Shift tokens.
+       *
+       * Remove the first token from the token stream. So second
+       * becames first, third becames second, and so on...
+       */
+      void eat()
+      {
+	if (tokens_.size() > 0)
+	  tokens_.pop_front();
+      }
+
+    protected:
+      token_stream_t tokens_;
+      std::string error_msg_;
+      bool error_;
+    };
+
+    /**
+     * @brief Parser class used in the ::parse() function.
+     *
+     * <p>This class handles rational expression parsing, once a Lexer has
+     * been created.</p>
+     *
+     * <p>Ideally, we would like to parse:</p>
+     * <pre>
+     * exp ::= '(' exp ')'
+     *     |   exp '+' exp
+     *     |   exp '.' exp
+     *     |   exp exp
+     *     |   exp '*'
+     *     |   weight ' ' exp
+     *     |   exp ' ' weight
+     *     |   0
+     *     |   1
+     *     |   word
+     * </pre>
+     *
+     * <p>But this grammar has to be changed to allow a classical LL(2)
+     * parsing:</p>
+     * <pre>
+     * exp		::= term ('+' term)*
+     * term		::= right_weighted ('.'? right_weighted)*
+     * right_weighted	::= left_weighted (' ' weight)*
+     * left_weighted	::= weight ' ' left_weighted
+     *                  |   stared
+     * stared		::= factor '*'*
+     * factor		::= '(' exp ')' | word | 0 | 1
+     * </pre>
+     */
     template <class S, class T>
     struct Parser
     {
@@ -312,199 +419,229 @@ namespace vcsn {
       typedef typename Element<S, T>::weight_t	      weight_t;
       typedef typename weight_t::set_t		      weights_t;
       typedef typename Element<S, T>::weight_value_t  weight_value_t;
-      typedef krat_exp_token_t			      token_t;
       typedef std::list<krat_exp_token_t>	      token_stream_t;
       
-      Parser() :
-	error_(false),
-	error_msg_("")
-      {}
-
-      void parse_error(const std::string msg = "parse_error.")
+      Parser(Lexer<S, T>& lexer) :
+	lexer_		(lexer),
+	error_		(lexer.error()),
+	error_msg_	(lexer.error_msg())
       {
-	error_     = true;
-	error_msg_ = msg;
       }
 
-      void accept(token_stream_t& toks, token_e tok)
+      /// Do the parsing.
+      void parse(Element<S, T>& exp)
       {
-	//	std::cout << "accept a " << tok << std::endl;
-	token_t        get_token = toks.front();
-	typename token_t::token expected(tok);
-	if (!(get_token.is_a(tok) && (toks.size() > 0)))
-	  parse_error("waiting for a '"+expected.to_string()
-		      +"' get a '"+get_token.to_string()+"'");
-	toks.pop_front();
+	if (!error_)
+	  try
+	    {
+	      parse_exp(exp);
+	      accept(eof);
+	    }
+	  catch (const std::string& s)
+	    {
+	      error_ = true;
+	      error_msg_ = s;
+	    }
       }
 
-      token_t first(token_stream_t& toks)
-      {
-	if (toks.size() > 0)
-	  return toks.front();
-	return token_t(eof);
-      }
-
-      token_t second(token_stream_t& toks)
-      {
-	if (toks.size() >= 2)
-	  {
-	    typename token_stream_t::const_iterator i = toks.begin();
-	    ++i;
-	    return *i;
-	  }
-	return token_t(eof);
-      }
-
-      void parse_exp(token_stream_t& toks, Element<S, T>& exp)
-      {
-	//	std::cout << "get " << first(toks).to_string() << std::endl;
-	if (error_) return;
-	parse_term (toks, exp);
-	while (first(toks).is_a(plus))
-	  {
-	    Element<S, T> rhs;
-	    accept(toks, plus);
-	    parse_term(toks, rhs);
-	    exp = exp + rhs;
-	  }
-      }
-
-      void parse_term(token_stream_t& toks, Element<S, T>& exp)
-      {
-	// std::cout << "get " << first(toks).to_string() << std::endl;
-	if (error_) return;
-	parse_factor (toks, exp);
-	while (first(toks).is_a(dot)
-	       || first (toks).is_a (lparen))
-	  {
-	    Element<S, T> rhs;
-	    if (first(toks).is_a(dot))
-	      accept(toks, dot);
-	    parse_factor(toks, rhs);
-	    exp = exp * rhs;
-	  }
-      }
-
-      void parse_factor(token_stream_t& toks, Element<S, T>& exp)
-      {
-	//std::cout << "get " << first(toks).to_string() << std::endl;
-	if (error_) return;
-	parse_factor_without_star(toks, exp);
-	while (first(toks).is_a(e_star))
-	  {
-	    accept(toks, e_star);
-	    exp = exp.star();
-	  }
-      }
-
-      void parse_factor_without_star(token_stream_t& toks, Element<S, T>& exp)
-      {
-	// std::cout << "get " << first(toks).to_string() << std::endl;
-
-	if (error_) return;
-	// a 2-lookahead will be sufficient to disambiguate.
-	if ((first(toks).is_a(a_weight)) && 
-	    (((first(toks).is_schrod()) && (second(toks).is_a(space))) ||
-	     (!(first(toks).is_schrod()))))
-	  {
-	    // token must be a weight.
-	    weight_t w = first(toks).as_weight();
-	    accept(toks, a_weight);
-	    accept(toks, space);
-	    // FIXME: check if this correction do not create new errors.
-	    //
-	    // // then it could be a word or 1.
-	    // if (first(toks).is_a(one))
-	    //  {
-	    //	  monoid_elt_t word;
-	    //	  accept(toks, one);
-	    //	  exp = word;
-	    //	  exp = w * exp;
-	    //	  return;
-	    //  }
-	    //  else if (first(toks).is_a(a_word))
-	    //  {
-	    //	  monoid_elt_t word = first(toks).as_word();
-	    //	  accept(toks, a_word);
-	    //	  exp = word;
-	    //	  exp = w * exp;
-	    //	  return;
-	    //  }
-	    parse_exp(toks, exp);
-	    exp = w * exp;
-	    return;
-	  }
-	else if (first(toks).is_a(one))
-	  {
-	    monoid_elt_t empty;
-	    exp = empty;
-	    accept(toks, one);
-	    return;
-	  }
-	else if (first(toks).is_a(zero))
-	  {
-	    Element<S, T> z;
-	    exp = z;
-	    accept(toks, zero);
-	    return;
-	  }
-	else if (first(toks).is_a(a_word))
-	  {
-	    monoid_elt_t word = first(toks).as_word();
-	    accept(toks, a_word);
-	    exp = word;
-	    return;
-	  }
-	else if (first(toks).is_a(lparen))
-	  {
-	    accept(toks, lparen);
-	    parse_exp(toks, exp);
-	    accept(toks, rparen);
-	    return;
-	  }
-	std::cout << "bad exit on " << first(toks).to_string() << std::endl;
-      }
-
+      /// Return true when an error occured.
       bool error() const
       {
 	return error_;
       }
 
+      /// Return the error message.
       const std::string& error_msg() const
       {
 	return error_msg_;
       }
+      
+    protected:
+      /// Generate a parse error.
+      void parse_error(const std::string& msg = "parse_error.") 
+	throw (const std::string&)
+      {
+	throw msg;
+      }
+      
+      /**
+       * @brief Accept token, or generate an error.
+       *
+       * This function asks the lexer whether the first input token
+       * matches the argument or not. When matching is successfull,
+       * the first input token is eaten, an error is risen else.
+       *
+       * @param tok The token to match.
+       */
+      void accept(token_e tok)
+      {
+	// std::cout << "accept a " << tok << std::endl;
+	krat_exp_token_t			get_token = lexer_.first();
+	typename krat_exp_token_t::token	expected (tok);
+	if (!get_token.is_a(tok))
+	  parse_error("waiting for a '" + expected.to_string() +
+		      "' get a '" + get_token.to_string() + "'.");
+	else
+	  lexer_.eat();
+      }
 
-    private:
+      /// exp ::= term ('+' term)*
+      void parse_exp(Element<S, T>& exp)
+      {
+	// std::cout << "get " << lexer_.first().to_string() << std::endl;
+	parse_term (exp);
+	while (lexer_.first().is_a(plus))
+	  {
+	    accept(plus);
+	    Element<S, T> rhs (exp.set());
+	    parse_term(rhs);
+	    exp = exp + rhs;
+	  }
+      }
+      
+      /// term ::= right_weighted ('.'? right_weighted)*
+      void parse_term(Element<S, T>& exp)
+      {
+	// std::cout << "get " << lexer_.first().to_string() << std::endl;
+	parse_right_weighted (exp);
+	while (lexer_.first().is_a(dot)		||
+	       lexer_.first().is_a(a_weight)	||
+	       lexer_.first().is_a(lparen)	||
+	       lexer_.first().is_a(one)		||
+	       lexer_.first().is_a(zero)	||
+	       lexer_.first().is_a(a_word))
+	  {
+	    if (lexer_.first().is_a(dot))
+	      accept(dot);
+	    Element<S, T> rhs (exp.set());
+	    parse_right_weighted(rhs);
+	    exp = exp * rhs;
+	  }
+      }
+      
+      /// right_weighted ::= left_weighted (' ' weight)*
+      void parse_right_weighted(Element<S, T>& exp)
+      {
+	parse_left_weighted(exp);
+	while (lexer_.first().is_a(space))
+	  {
+	    accept(space);
+	    krat_exp_token_t tok = lexer_.first();
+	    accept(a_weight);
+	    exp = exp * weight_t (tok.as_weight());
+	  }
+      }
+      
+      /// left_weighted ::= weight ' ' left_weighted | stared
+      void parse_left_weighted(Element<S, T>& exp)
+      {
+	// a 2-lookahead will be sufficient to disambiguate.
+	if (lexer_.first().is_a(a_weight) &&
+	    (!lexer_.first().is_schrod() || lexer_.second().is_a(space)))
+	  {
+	    // token must be a weight, but may be a monoid '1' or '0'.
+	    // i.e. in "1 2" or "0 2".
+	    weight_t w (exp.set().weights(), lexer_.first().as_weight());
+	    bool just_a_weight = true;
+	    Element<S, T> m (exp.set());
+	    if (lexer_.first().is_a(zero))
+	      {
+		just_a_weight = false;
+		m = zero_as<T>::of(exp.set());
+	      }
+	    else if (lexer_.first().is_a(one))
+	      {
+		just_a_weight = false;
+		m = identity_as<T>::of(exp.set());
+	      }
+	    accept(a_weight);
+	    accept(space);
+	    if (!lexer_.first().is_a(a_weight) ||
+		just_a_weight ||
+		lexer_.second().is_a(space))
+	      {
+		// Then it could be any weighted.
+		Element<S, T> rhs (exp.set());
+		parse_left_weighted(rhs);
+		exp = w * rhs;
+	      }
+	    else
+	      {
+		// Arg ! First was not a weight, but a monoid value !
+		w = lexer_.first().as_weight();
+		accept(a_weight);
+		exp = m * w;
+	      }
+	  }
+	else 
+	  /* !lexer_.first().is_a(a_weight)  || 
+	     (lexer_.first.is_schrod() && !lexer_.second().is_a(space)) */
+	  parse_stared(exp);
+      }
+      
+      /// stared ::= factor '*'*
+      void parse_stared(Element<S, T>& exp)
+      {
+	// std::cout << "get " << lexer_.first().to_string() << std::endl;
+	parse_factor(exp);
+	while (lexer_.first().is_a(e_star))
+	  {
+	    accept(e_star);
+	    exp.star();
+	  }
+      }
+      
+      /// factor ::= 1 | 0 | word | '(' exp ')'
+      void parse_factor(Element<S, T>& exp)
+      {
+	// std::cout << "get " << lexer_.first().to_string() << std::endl;
+	if (lexer_.first().is_a(one))
+	  {
+	    accept(one);
+	    exp = identity_as<T>::of(exp.set());
+	  }
+	else if (lexer_.first().is_a(zero))
+	  {
+	    accept(zero);
+	    exp = zero_as<T>::of(exp.set());
+	  }
+	else if (lexer_.first().is_a(a_word))
+	  {
+	    exp = monoid_elt_t (lexer_.first().as_word());
+	    accept(a_word);
+	  }
+	else if (lexer_.first().is_a(lparen))
+	  {
+	    accept(lparen);
+	    parse_exp(exp);
+	    accept(rparen);
+	  }
+	else
+	  parse_error("waiting for a factor get a " +
+		      lexer_.first().to_string());
+      }
+      
+      Lexer<S, T>&	lexer_;
       bool		error_;
       std::string	error_msg_;
     };
-
-    // FIXME: bad parsing on:
-    //        "a 2"
-    // FIXME: segfault on:
-    //        "2"
+    
     template <class S, class T>
     std::pair<bool, std::string>
     parse(const std::string& from, Element<S, T>& exp)
     {
-      typedef KRatExpToken
-      <
-	typename Element<S, T>::monoid_value_t,
-	typename Element<S, T>::weight_value_t
-      > krat_exp_token_t; 
-
-      std::pair<bool, 
-	std::list<krat_exp_token_t>
-	> tokens = lex(from, exp);
-      Parser<S, T> parser;
-      parser.parse_exp(tokens.second, exp);
+      Lexer<S, T> lexer;
+      lexer.lex(from, exp);
+      Parser<S, T> parser(lexer);
+      parser.parse(exp);
       return std::make_pair(parser.error(), parser.error_msg());
     }
+  
+    /** @} */
+    /** @} */
     
-
-} // algebra
-
+  } // algebra
+  
 } // vcsn
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX

@@ -2,7 +2,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and
+// Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -21,6 +22,16 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HH
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HH
 
+/**
+ * @file krat_exp_parser.hh
+ *
+ * @brief This file declare the parse() function.
+ *
+ * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
+ *         Thomas Claveirole <thomas@lrde.epita.fr>
+ * @see parse()
+ */
+
 # include <vaucanson/fundamental/fundamental.hh>
 # include <utility>
 # include <string>
@@ -29,9 +40,46 @@ namespace vcsn {
 
   namespace algebra {
 
+    /** @addtogroup algebra */ /** @{ */
+    /** @addtogroup series */ /** @{ */
+    
+    /**
+     * @brief Parse a rational expression.
+     *
+     * <p>This functions parses any numerical rational expression.</p>
+     * <p>The grammar is:</p>
+     *
+     * <pre>
+     * exp ::= '(' exp ')'
+     *     |   exp '+' exp
+     *     |   exp '.' exp
+     *     |   exp exp
+     *     |   exp '*'
+     *     |   weight ' ' exp
+     *     |   exp ' ' weight
+     *     |   0
+     *     |   1
+     *     |   word
+     * </pre>
+     * <p>Priority for operators is: '*' > ' ' > '.' > '+'.</p>
+     *
+     * <p>This function returns a pair which first element is a boolean
+     * indicating whether an error occured or not. The second element
+     * is an error message when a parse error have been ecountered.</p>
+     *
+     * @param from The rational expression, as a string.
+     * @param exp The element to store the result in. Be sure its set
+     *            is correct before calling parse.
+     *
+     * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
+     *         Thomas Claveirole <thomas@lrde.epita.fr>
+     */
     template <class S, class T>
     std::pair<bool, std::string>
     parse(const std::string& from, Element<S, T>& exp);
+
+    /** @} */
+    /** @} */
 
   } // algebra
 

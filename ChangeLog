@@ -1,3 +1,10 @@
+2003-06-26  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hh,
+	include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Fix
+	parser and document.
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Add tests.
+
 2003-06-26  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/fundamental/element.hh: Fix bug in definition
