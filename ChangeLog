@@ -1,3 +1,9 @@
+2004-07-28  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/fibonacci/one_rewriting_rule.cc: Rename as...
+	* src/demos/fibonacci/one_rule_rewriting.cc: ... This.
+	* src/demos/fibonacci/Makefile.am: Update.
+
 2004-07-21  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
