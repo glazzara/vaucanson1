@@ -1,5 +1,12 @@
 2003-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/extension.hh,
+	  include/vaucanson/algorithms/extension.hxx,
+          include/vaucanson/algorithms/projection.hh,
+          include/vaucanson/algorithms/projection.hxx: New.
+
+2003-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* configure.ac: Configure awk.
 	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
 	  include/vaucanson/algorithms/evaluation.hxx: Fix include.
