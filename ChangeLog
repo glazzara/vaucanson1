@@ -1,5 +1,9 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/automata/concept/concepts.h[h,xx]: Remove.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/tools/usual.hh: Fix invalid includes.
 	* include/vaucanson/algorithms/forward_closure.hxx: Typo.
 	* include/vaucanson/algorithms/backward_closure.hxx: Likewise.
