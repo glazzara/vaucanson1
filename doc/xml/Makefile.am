@@ -24,6 +24,6 @@ SUFFIXES = .tex .sgml
 
 docdir = $(datadir)/doc/@PACKAGE_TARNAME@
 dist_doc_DATA = dev.dvi format.dvi dev.pdf format.pdf dev.sgml format.sgml
-EXTRA_DIST = dev.sgml format.sgml
+EXTRA_DIST = dev.sgml format.sgml $(dev_tex_TEX) $(format_tex_TEX)
 
-CLEANFILES = *.aux *blg *.out *.toc *.lot *.tmp *.tex *.log
+CLEANFILES = *.aux *blg *.out *.toc *.lot *.tmp *.log

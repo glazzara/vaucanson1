@@ -6,12 +6,12 @@
 SUBDIRS = xml include doc src
 
 ###
-### Autoconf needs additional macros. 
+### Autoconf needs additional macros.
 ### Tell it where to find them.
 ###
 ACLOCAL_AMFLAGS = -I config
 CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4
-EXTRA_DIST = config/vcsn.m4
+EXTRA_DIST = config/vcsn.m4 config/xml.m4
 
 ###
 ### Autoconf macros are installable.

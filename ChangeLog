@@ -1,5 +1,13 @@
 2004-03-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* Makefile.am: Add config/xml.m4 to EXTRA_DIST.
+	* include/Makefile.am: Add missing vaucanson/algebra/algebra.hh to the
+	source list.
+	* xml/Makefile.am: Add missing awk scripts to EXTRA_DIST.
+	* doc/xml/Makefile.am: Add .tex files to EXTRA_DIST.
+
+2004-03-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* NEWS: Update with the recent changes.
 
 2004-03-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>

@@ -16,5 +16,8 @@ EXTRA_DIST = automaton-to-dot.xsl \
 	     automaton-to-vcsng.xsl.sh \
 	     gendtd.sh \
 	     vaucanson-g.style \
+	     style-to-code.awk \
 	     style-to-dtd.awk \
+	     style-to-geometryvalue.awk \
+	     style-to-tex.awk \
 	     style-to-xsl-vcsng.awk
