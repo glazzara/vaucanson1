@@ -2,4 +2,4 @@
 #
 # $Id$
 
-SUBDIRS = vgrep fibonacci samples $(VCSN_VAUCANSWIG_SUBDIR)
+SUBDIRS = universal vgrep fibonacci samples $(VCSN_VAUCANSWIG_SUBDIR)
