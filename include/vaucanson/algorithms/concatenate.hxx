@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_CONCATENATE_HXX
 # define VCSN_ALGORITHMS_CONCATENATE_HXX
@@ -47,14 +49,18 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto);
     std::map<hstate_t, hstate_t>	trans;
-
+    monoid_elt_t ident = 
+      lhs.series().monoid().identity(SELECT(monoid_elt_value_t));
+    
     for_each_state(s, rhs)
       {
 	hstate_t ns = lhs.add_state();
 	trans[*s] = ns;
 	if (rhs.is_initial(*s))
 	  for_each_final_state(f, lhs)
-	    lhs.add_spontaneous(*f, ns);
+	    lhs.add_spontaneous(*f, ns,
+				lhs.get_final(*f).get(ident) *
+				rhs.get_initial(*s).get(ident));
       }
     for_each_edge(e, rhs)
       lhs.add_edge(trans[rhs.origin_of(*e)],
