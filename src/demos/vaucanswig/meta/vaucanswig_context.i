@@ -72,6 +72,7 @@
 #include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 #include <vaucanson/automata/concrete/generalized.hh>
 #include <vaucanson/algorithms/finite_support_conversion.hh>
+#include <vaucanson/algorithms/aci_canonical.hh>
 #include <vaucanson/misc/dot_dump.hh>
 #include <stdexcept>
 #include <sstream>
@@ -269,7 +270,7 @@ namespace Kind ##_types
 	{ 
 	  Kind ##_exp_t ret(self->series());
 	  vcsn::finite_support_convert(ret, s);
-	  return ret;
+	  return vcsn::canonical(ret);
 	}
 
       Kind ##_exp_t exp(const std::string& l) const

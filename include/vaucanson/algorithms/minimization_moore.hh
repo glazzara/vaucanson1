@@ -37,6 +37,7 @@ namespace vcsn {
   /*! \addtogroup algorithms */  /* @{ */
 
   //! Returns the minimal deterministic automaton associated to the input one.
+  // INTERFACE: Automaton minimization_moore(const Automaton& a) { return vcsn::minimization_moore(*a); }
   template<typename A, typename T>
   Element<A, T>
   minimization_moore(const Element<A, T>& a);

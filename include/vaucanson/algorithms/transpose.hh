@@ -50,6 +50,8 @@ namespace vcsn {
    * @param from Automaton to transpose
    * @param dst Destination
    */
+  // INTERFACE: void transpose(Automaton& dst, const Automaton& src) { vcsn::transpose(*dst, *src); }
+  // INTERFACE: void transpose(GenAutomaton& dst, const GenAutomaton& src) { vcsn::transpose(*dst, *src); }
   template<typename lhs_t, typename rhs_t>
   void transpose(lhs_t& dst, const rhs_t& from);
 
@@ -60,6 +62,8 @@ namespace vcsn {
    *
    * @param from Automaton to transpose.
    */
+  // INTERFACE: Automaton transpose(const Automaton& a) { return vcsn::transpose(*a); }
+  // INTERFACE: GenAutomaton transpose(const GenAutomaton& a) { return vcsn::transpose(*a); }
   template<typename auto_t>
   auto_t transpose(const auto_t& from);
 

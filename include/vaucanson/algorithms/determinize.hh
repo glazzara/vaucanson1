@@ -54,6 +54,7 @@ namespace vcsn {
    * 
    * @return a fresh boolean automaton that is the determinization of 'a'.
    */
+  // INTERFACE: Automaton determinize(const Automaton& a) { return vcsn::determinize(*a); }
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a);
@@ -65,6 +66,7 @@ namespace vcsn {
    * 
    * @return true if 'a' is deterministic.
    */
+  // INTERFACE: bool is_deterministic(const Automaton& a) { return vcsn::is_deterministic(*a); }
   template<typename A, typename T>
   bool
   is_deterministic(const Element<A, T>& a);

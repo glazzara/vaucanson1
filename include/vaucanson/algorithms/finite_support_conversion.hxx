@@ -30,7 +30,10 @@
 #ifndef VCSN_ALGORITHMS_FINITE_SUPPORT_CONVERSION_HXX
 # define VCSN_ALGORITHMS_FINITE_SUPPORT_CONVERSION_HXX
 
-#include <vaucanson/algorithms/finite_support_conversion.hh>
+# include <vaucanson/algorithms/finite_support_conversion.hh>
+
+# include <vaucanson/algebra/concept/series_base.hh>
+# include <vaucanson/misc/contract.hh>
 
 namespace vcsn
 {

@@ -1,3 +1,15 @@
+2003-07-11  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/finite_support_conversion.hh: Add 
+	missing includes.
+	* include/vaucanson/algorithms/finite_support_conversion.hxx:
+	Likewise.
+	* include/vaucanson/algorithms/determinize.hh: Equip for vaucanswig.
+	* include/vaucanson/algorithms/hopcroft_minimization.hh: Likewise.
+	* include/vaucanson/algorithms/hopcroft_minimization.hxx: Fix.
+	* include/vaucanson/algorithms/minimization_moore.hh: Likewise.
+	* include/vaucanson/algorithms/transpose.hh: Likewise.
+
 2003-07-10  Raphaël Poss  <raph@lrde.epita.fr> 
                                    
         * include/vaucanson/algebra/concrete/series/krat.hh: Add missing 

@@ -384,7 +384,7 @@ namespace vcsn {
     for (typename input_t::state_iterator i = input.states().begin();
 	 i != input.states().end();
 	 ++i)
-      max_states = std::max(*i, max_states);
+      max_states = std::max(unsigned(*i), max_states);
     ++max_states;
     // to avoid special case problem (one state initial and final ...)
     max_states = std::max(max_states, 2u);
@@ -923,9 +923,7 @@ namespace vcsn {
   {
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
-    Element<A, T> output;
-    output.create();
-    output.series() = a.series();
+    Element<A, T> output(a.set());
     do_quotient(a.set(), a.set().series().weights(), 
 		SELECT(weight_value_t), output, a);
     return output;

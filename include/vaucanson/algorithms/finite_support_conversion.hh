@@ -30,6 +30,8 @@
 #ifndef VCSN_ALGORITHMS_FINITE_SUPPORT_CONVERSION_HH
 # define VCSN_ALGORITHMS_FINITE_SUPPORT_CONVERSION_HH
 
+# include <vaucanson/fundamental/fundamental.hh>
+
 namespace vcsn
 {
 

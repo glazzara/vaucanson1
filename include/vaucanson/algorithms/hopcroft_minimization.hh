@@ -55,6 +55,7 @@ namespace vcsn {
    * 
    * @return a fresh automaton that is the canonical minimal automaton of 'a'.
    */
+  // INTERFACE: Automaton minimization_hopcroft(const Automaton& a) { return vcsn::minimization_hopcroft(*a); }
   template<typename A, typename T>
   Element<A, T>
   minimization_hopcroft(const Element<A, T>& a);
