@@ -1,29 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 298)
-(Parent-Version vaucanson 0 297)
+(Project-Version vaucanson 0 299)
+(Parent-Version vaucanson 0 298)
 (Version-Log "
-2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-06-30  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/fundamental/element.hxx: Minor.
-	* include/vaucanson/algebra/concept/series_base.hh: Add general op_convert for series.
+	* include/vaucanson/algebra/concept/series_base.hh: 
+		op_convert between same implementations.
 	* include/vaucanson/algebra/concept/series_base.hxx: Implement it.
-	* include/vaucanson/algebra/concrete/free_monoid/str_words.hxx: Fix unused arg.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: Minor.
-	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh: Add default return.
-	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: New support kind.
-	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Fix op_convert call.
-	* include/vaucanson/algorithms/aut_to_exp.hxx: Fix unused argt.
-	* src/tests/automata/algos/complete_test.hh: Fix include, use 'eval'.
-	* src/tests/automata/algos/concat_test.hh: Fix include.
-	* src/tests/automata/algos/elimination_test.hh: Use 'eval'.
-	* src/tests/automata/algos/generalized_test.hh: Fix unused arg.
-	* include/vaucanson/algorithms/forward_closure.hh: Typo.
-	* include/vaucanson/algorithms/forward_closure.hxx: Typo.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix arg order.
 ")
 (New-Version-Log "")
-(Checkin-Time "Sun, 29 Jun 2003 22:58:01 +0200")
+(Checkin-Time "Mon, 30 Jun 2003 10:50:47 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -106,7 +95,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.101 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.102 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -220,8 +209,8 @@
   (include/vaucanson/algebra/concept/semigroup_base.hxx (vaucanson/b/11_semigroup_ 1.6 600))
   (include/vaucanson/algebra/concept/semiring_base.hh (vaucanson/b/16_semiring_b 1.10 600))
   (include/vaucanson/algebra/concept/semiring_base.hxx (vaucanson/b/15_semiring_b 1.9 600))
-  (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.19 600))
-  (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.16 600))
+  (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.20 600))
+  (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.17 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.9 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hxx (vaucanson/l/12_tropical_s 1.1 600))
 
@@ -249,7 +238,7 @@
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.20 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.27 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.28 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.4 600))
@@ -309,7 +298,7 @@
   (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.9 600))
   (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.8 600))
   (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.18 600))
-  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.14 600))
+  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.15 600))
   
   
   (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.6 600))

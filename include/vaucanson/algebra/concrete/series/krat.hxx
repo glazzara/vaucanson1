@@ -436,8 +436,8 @@ namespace vcsn {
 
   template<typename Tm, typename Tw, typename M, typename W, typename S>
   inline
-  rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>), 
-			      SELECTOR2(algebra::Series<M, W>),
+  rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
+			      SELECTOR2(rat::exp<Tm, Tw>), 
 			      const std::basic_string<S>& m_value)
   { 
     return new rat::Constant<Tm, Tw>(m_value); 
@@ -445,8 +445,8 @@ namespace vcsn {
   
   template<typename Tm, typename Tw, typename M, typename W>
   inline
-  rat::exp<Tm, Tw> op_convert(SELECTOR2(rat::exp<Tm, Tw>), 
-			      SELECTOR2(algebra::Series<M, W>),
+  rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<M, W>),
+			      SELECTOR2(rat::exp<Tm, Tw>), 
 			      char m_value)
   { 
     const char str[] = {m_value, '\0'};

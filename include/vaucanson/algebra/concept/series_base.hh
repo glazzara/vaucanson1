@@ -215,6 +215,9 @@ namespace vcsn {
   typename algebra::series_traits<T>::support_t
   op_support(const algebra::SeriesBase<S>&, const T& v);
 
+  template <class S, class T>
+  T op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const T& src_);
+  
   template <class S, class T, class U>
   T op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), U& src_);
 

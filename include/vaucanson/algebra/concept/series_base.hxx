@@ -225,6 +225,12 @@ namespace vcsn {
     return output;
   }
 
+  template <class S, class T>
+  T op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), const T& src_)
+  {
+    return src_;
+  }
+
   template <class S, class T, class U>
   T op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const U& src_)
   {
@@ -232,7 +238,7 @@ namespace vcsn {
     typedef typename Element<S, T>::monoid_elt_t		monoid_elt_t;
     S ts = s.self();
     Element<S, U> src(ts, src_);
-    Element<S, T> dst;
+    Element<S, T> dst(ts);
     support_t support = src.supp();
     for_each_const_(support_t, ss, support)
       dst += src.get(*ss) * Element<S, T>(s.self(), monoid_elt_t(s.monoid(), *ss));
