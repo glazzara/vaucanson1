@@ -1,4 +1,8 @@
 2003-03-05  Thomas Claveirole <clavei_t@lrde.epita.fr>
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (op_stareable, op_in_star): Fix a bug.
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (op_in_star): Fix a bug.
+
+2003-03-05  Thomas Claveirole <clavei_t@lrde.epita.fr>
 	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx: Fix
 	  a bug, which occur only with g++ 3.2.
 	* src/tests/automata/algos/in_concat_test.hh: Set a correct copyright.

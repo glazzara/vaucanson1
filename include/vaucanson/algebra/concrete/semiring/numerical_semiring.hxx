@@ -147,13 +147,13 @@ namespace vcsn {
   inline bool op_stareable(const NumericalSemiring& s, 
 			   const float& f)
   { 
-    return (f >= 0.0); 
+    return (f >= 0.0) && (f < 1.0); 
   }
 
   inline bool op_stareable(const NumericalSemiring& s, 
 			   const double& f)
   { 
-    return (f >= 0.0); 
+    return (f >= 0.0) && (f < 1.0); 
   }
 
   inline void op_in_star(const NumericalSemiring& s, float& f)
@@ -169,7 +169,7 @@ namespace vcsn {
     if (f < 1.0)
       f = (1.0 / (1.0 - f));
     else
-      f = std::numeric_limits<double>::infinity();
+      assert(! "star not defined.");
   }
 
   // FIXME: add some more operators as syntactic sugar

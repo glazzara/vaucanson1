@@ -146,7 +146,10 @@ namespace vcsn {
     op_in_star(const TropicalSemiring<TropicalMin>& s, T& b)
     { 
       if (b >= 0)
-	b = 0;
+	{
+	  b = 0;
+	  return;
+	}
       assert(! "star not defined.");
     }
 
