@@ -1,7 +1,7 @@
 // minimization_hopcroft.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -332,11 +332,11 @@ namespace vcsn {
 
   template <typename A, typename input_t, typename output_t>
   void
-  do_quotient(const AutomataBase<A>&		,
-	      const algebra::NumericalSemiring&	,
-	      SELECTOR(bool)			,
-	      output_t&				output,
-	      const input_t&			input)
+  do_quotient(const AutomataBase<A>&	a_set,
+	      const algebra::NumericalSemiring&,
+	      SELECTOR(bool),
+	      output_t&			output,
+	      const input_t&		input)
   {
     AUTOMATON_TYPES(input_t);
     typedef std::set<hstate_t>			     	      delta_ret_t;
@@ -372,7 +372,6 @@ namespace vcsn {
     `------------------------*/
     std::vector<bool>			        split(max_states);
     std::vector<unsigned>			twin(max_states);
-    std::vector<bool>                           met_set(max_states);
 
     /*-------------------------.
     | To have a list of (P, a) |
@@ -455,7 +454,7 @@ namespace vcsn {
 	unsigned p = c.first;
 	unsigned a = c.second;
 	list_mat[p][a] = false;
-	met_set.clear();
+	std::vector<bool>   met_set(max_states);
 
 	//	std::cerr << "Part by : " << p << "," << a << std::endl;
 	/*----.
@@ -481,6 +480,8 @@ namespace vcsn {
 	/*----.
 	| (c) |
 	`----*/
+	std::queue<typename std::list<hstate_t>::iterator> to_erase;
+
 	for_all_(std::list<unsigned>, b, met_class)
 	  {
 	    bool t=met_set[part[*b].front()];
@@ -493,12 +494,19 @@ namespace vcsn {
 			twin[*b] = max_partitions;
 			max_partitions++;
 		      }
-		    part[*b].erase(place[*q]);
-		    place[*q] =
-		      part[twin[*b]].insert(part[twin[*b]].end(), *q);
-		    class_[*q] = twin[*b];
+		    to_erase.push(place[*q]);
 		  }
-	      }
+	      }		
+	  }    
+	while (!to_erase.empty())
+	  {
+	    typename std::list<hstate_t>::iterator b=to_erase.front();
+	    part[p].erase(b);
+	    unsigned i=twin[class_[*b]];
+	    place[*b] =
+	      part[i].insert(part[i].end(), *b);
+	    class_[*b] = i;
+	    to_erase.pop();
 	  }
 
 	/*----.
@@ -637,7 +645,7 @@ namespace vcsn {
     set_semiring_elt_t		semiring_had_class;
     vector<set_states_t>	classes (max_states);
     vector<unsigned>		class_of_state (max_states);
-    vector_semiring_elt_t	old_weight (max_states), val (max_states);
+    vector_semiring_elt_t	old_weight (max_states);
     map_semiring_elt_t		class_of_weight;
 
     for(unsigned i = 0; i < max_states; ++i)
@@ -676,14 +684,14 @@ namespace vcsn {
     | final values.                                              |
     `-----------------------------------------------------------*/
 
-    bool         empty (true);
-    unsigned     class_non_final (0);
+    bool         empty = true;
+    unsigned     class_non_final;
 
     for_each_state(q, input)
       {
 	if (not input.is_final(*q))
 	  {
-	    if (empty)
+	    if (empty == true)
 	      {
 		empty = false;
 		class_non_final = max_partition;
@@ -729,8 +737,9 @@ namespace vcsn {
       {
 	pair_class_letter_t pair = the_queue.front();
 	the_queue.pop();
-	val.clear(); // FIXME: Is this line necessary?
+	//val.clear(); // FIXME: Is this line necessary?
 	met_classes.clear();
+	vector_semiring_elt_t val (max_states);
 
 	for_each_state(q, input)
 	  val[*q] = 0;
@@ -871,4 +880,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // ! VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HXX
+#endif // VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HXX

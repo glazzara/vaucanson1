@@ -1,4 +1,10 @@
 2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Include Sylvain Lombardy's patch about quotient algorithm.
+	
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix quotient
+	algorithm.
+
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/realtime_composition.hh,
 	* include/vaucanson/algorithms/realtime_composition.hxx: Add overloaded
