@@ -1,15 +1,18 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 629)
-(Parent-Version vaucanson 0 628)
+(Project-Version vaucanson 0 630)
+(Parent-Version vaucanson 0 629)
 (New-Version-Log "")
 
 (Version-Log "2004-03-30  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* configure.ac: Bump to version 0.5.
+	* include/vaucanson/xml/genutfstrings.sh: Rename temporary file for
+	sed commands, to allow multiple execution of the script within the
+	same time.
+
 ")
-(Checkin-Time "Tue, 30 Mar 2004 15:12:02 +0200")
+(Checkin-Time "Tue, 30 Mar 2004 16:00:28 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -92,7 +95,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.161 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.162 644))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -1217,7 +1220,7 @@
   (include/vaucanson/xml/dynamic.hh (vaucanson/t/9_dynamic.hh 1.4 600))
   (include/vaucanson/xml/generic.hh (vaucanson/t/10_generic.hh 1.4 600))
   (include/vaucanson/xml/callback.hh (vaucanson/t/11_callback.h 1.4 600))
-  (include/vaucanson/xml/genutfstrings.sh (vaucanson/t/12_genutfstri 1.4 700))
+  (include/vaucanson/xml/genutfstrings.sh (vaucanson/t/12_genutfstri 1.5 700))
   (src/tests/xml/import_generic-session.xml.ref (vaucanson/t/14_import_gen 1.1 600))
   (src/tests/xml/nodata-tropical.xml.ref (vaucanson/t/15_nodata-tro 1.1 600))
   (src/tests/xml/nodata-transcoder.xml.ref (vaucanson/t/16_nodata-tra 1.1 600))

@@ -13,7 +13,7 @@ EOF
   exit 1
 fi
 
-CMD=/tmp/cmds
+CMD=/tmp/vaucanson-gentufstrings-"$USER"-"$$"
 
 cat > $CMD <<EOF
 /str_/ {
