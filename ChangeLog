@@ -1,3 +1,8 @@
+2005-02-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* vcs,
+	* vcs/vaucanson.rb: New. Add VCS configuration file.
+
 2005-02-04  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/eval.hh,
