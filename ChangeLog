@@ -1,5 +1,10 @@
 2004-03-18  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
+	* src/tests/tests-suites/generate-all.sh: Correct conflict created by
+	  last checkin.
+
+2004-03-18  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
 	* src/tests/algebra/series/krat/derivations/derivations_common.hh: Make
 	  result type more generic.
 	* src/tests/tests-suites/generate-all.sh: Add generation of new tests.

@@ -1,28 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 563)
-(Parent-Version vaucanson 0 562)
+(Project-Version vaucanson 0 564)
+(Parent-Version vaucanson 0 563)
 (New-Version-Log "")
 
 (Version-Log "2004-03-18  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
-	* src/tests/algebra/series/krat/derivations/derivations_common.hh: Make
-	  result type more generic.
-	* src/tests/tests-suites/generate-all.sh: Add generation of new tests.
-	* src/tests/tests-suites/algebra_series_krat_derivation.defs,
-	* src/tests/tests-suites/algebra_series_krat_cderivation.defs: Add
-	  typedef for result type.
-	* src/tests/tests-suites/algebra_series_krat_partial_derivation.defs,
-	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_common.hh,
-	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_sum_test.hh,
-	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh,
-	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh,
-	* src/tests/algebra/series/krat/derivations/partial_derivation/Makefile.am,
-	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh,
-	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh,
-	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh: New.")
-(Checkin-Time "Thu, 18 Mar 2004 16:25:15 +0100")
+	* src/tests/tests-suites/generate-all.sh: Correct conflict created by
+	  last checkin.")
+(Checkin-Time "Thu, 18 Mar 2004 19:51:26 +0100")
 (Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -105,7 +92,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.98 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.99 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -486,7 +473,7 @@
   (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.7 600))
 
   (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 600))
-  (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.11 700))
+  (src/tests/tests-suites/generate-all.sh (vaucanson/r/5_generate-a 1.12 700))
   (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 600))
   (src/tests/tests-suites/algebra_numerical_semiring_int.defs (vaucanson/h/33_algebra_nu 1.1 600))
   (src/tests/tests-suites/algebra_alphabet_set_char.defs (vaucanson/h/32_algebra_se 1.3 600))

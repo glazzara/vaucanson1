@@ -57,27 +57,15 @@
    ../algebra/series/krat/derivations/cderivation
 
 ../bin/generate-test-suite.sh \
-<<<<<<< 0.552(w)/src/tests/tests-suites/generate-all.sh Wed, 17 Mar 2004 16:29:17 +0100 fosse_l (vaucanson/r/5_generate-a 1.9 700)
    algebra_series_krat_partial_derivation \
    algebra_series_krat_partial_derivation.defs \
    ../algebra/series/krat/derivations/partial_derivation
-=======
+
+../bin/generate-test-suite.sh \
    algebra_alphabet_set_alpha \
    algebra_alphabet_set_alpha.defs \
    ../algebra/alphabets
->>>>>>> 0.562/src/tests/tests-suites/generate-all.sh Wed, 17 Mar 2004 15:29:13 +0100 o-conn_s (vaucanson/r/5_generate-a 1.10 755)
 
-<<<<<<< 0.552(w)/src/tests/tests-suites/generate-all.sh Wed, 17 Mar 2004 16:29:17 +0100 fosse_l (vaucanson/r/5_generate-a 1.9 700)
-
-../bin/generate-test-suite.sh \
-   algebra_series_misc \
-   algebra_series_misc.defs \
-   ../algebra/series/misc
-
-../bin/generate-test-suite.sh \
-   algebra_set_alphabet \
-   algebra_set_alphabet.defs \
-=======
 ../bin/generate-test-suite.sh \
    algebra_alphabet_set_char \
    algebra_alphabet_set_char.defs \
@@ -91,7 +79,6 @@
 ../bin/generate-test-suite.sh \
    algebra_alphabet_set_pair_char_int \
    algebra_alphabet_set_pair_char_int.defs \
->>>>>>> 0.562/src/tests/tests-suites/generate-all.sh Wed, 17 Mar 2004 15:29:13 +0100 o-conn_s (vaucanson/r/5_generate-a 1.10 755)
    ../algebra/alphabets
 
 ../bin/generate-test-suite.sh \
