@@ -1,3 +1,10 @@
+2003-01-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.145)
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh:
+		Fix a macro bug.
+	* include/vaucanson/algorithms/krat_exp_derivation.hh:
+		Fix a forgotten include.
+
 2003-01-14  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.144)
 	* configure.ac: Tests-suites Makefile are configured only if present.

@@ -22,6 +22,7 @@
 # define VCSN_ALGORITHMS_KRAT_EXP_DERIVATION_HH
 
 # include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/algebra/concept/series_base.hh>
 
 namespace vcsn {
 

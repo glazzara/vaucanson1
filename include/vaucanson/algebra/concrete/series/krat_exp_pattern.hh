@@ -152,20 +152,20 @@ struct N     : public UnaryOp<T>		\
 
 #define MATCH__(N, Lhs, Rhs)			\
 return_type					\
-match_node##N##(const N& p____) 		\
+match_node##N(const N& p____) 		\
 {						\
   typename N::lhs_node_type Lhs = p____.lhs();	\
   typename N::rhs_node_type Rhs = p____.rhs();
   
 #define MATCH_(N, Val)				\
 return_type					\
-match_node##N##(const N& p____) 		\
+match_node##N(const N& p____) 		\
 {						\
   typename N::value_type Val(p____.value());
 
 #define MATCH(N)					\
 return_type						\
-match_node##N##(const N& p____) 			\
+match_node##N(const N& p____) 			\
 {						
    
 #define END }
