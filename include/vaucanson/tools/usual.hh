@@ -100,6 +100,14 @@ namespace vcsn {
       misc::dot_dump(f, Auto, Name);				\
     }
 
+#define SAVE_AUTOMATON_DOT2(Name, Auto)		\
+    {								\
+      std::ostringstream s;					\
+      s << Name << ".dot";	\
+      std::ofstream f(s.str().c_str());				\
+      misc::dot_dump(f, Auto, Name);				\
+    }
+
 #define RAND___(Max)						\
 ((unsigned) round(((float) rand() / (float) RAND_MAX) * Max));
 

@@ -1,3 +1,10 @@
+2002-08-06  Maxime Rey  <max@lrde.epita.fr>
+
+	* src/tests/dev : created (work directory)
+	* include/vaucanson/algorithms/isomorph.hh :: added
+	* include/vaucanson/algorithms/isomorph.hxx :: added
+	* include/vaucanson/tools/usual.hh : minor
+
 2002-08-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.99)
 	* "src/tests/defs"    : added.

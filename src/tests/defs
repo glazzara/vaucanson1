@@ -3,11 +3,11 @@ test -z "$VERBOSE" && {
    exec > /dev/null 2>&1
 }
 
-CXX=g++
-abs_top_builddir=/home/lrde/stud/yann/work/vaucanson/vaucanson
-abs_top_srcdir=/home/lrde/stud/yann/work/vaucanson/vaucanson
+CXX=g++-3.0
+abs_top_builddir=@abs_top_builddir@
+abs_top_srcdir=@abs_top_builddir@
 
-CXXFLAGS="-Wno-unused -Wall -W -ftemplate-depth-50 -pedantic -I$abs_top_builddir -I$abs_top_srcdir"
+CXXFLAGS="-Wno-unused -Wall -W -ftemplate-depth-50 -pedantic -I$abs_top_builddir -I$abs_top_srcdir -I$abs_top_srcdir/include"
 
 # Turn on shell traces when VERBOSE=x.
 if test "x$VERBOSE" = xx; then
