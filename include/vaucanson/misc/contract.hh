@@ -129,6 +129,7 @@
 namespace utility {
   namespace contract {
 
+    inline
     void trap(const char *file, int line,
 	      const char *location,
 	      const std::string& message)
