@@ -1,5 +1,11 @@
 2003-12-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* src/demos/samples/algorithms/derivatives_automaton.cc:
+	  Typo.
+	* doc/beginner/help.tex: Update.
+
+2003-12-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/letter_to_letter_composition.hxx:
 	  Minor fix.
 

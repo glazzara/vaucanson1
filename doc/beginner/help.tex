@@ -45,10 +45,10 @@ The following listing is a valid Vaucanson program:
 
 \begin{list}{$\triangleright$}{}
 \item \textbf{line 1 and 2}: To program standard boolean automata (the
-so-called acceptors), the user can include this shortcuts' header. The
-\verb!using namespace! command makes all shorcuts directly
-available. Otherwise, the user has to prefix every types and functions
-by \verb!vcsn::boolean_automaton::!.
+  so-called acceptors), the user can include this shortcuts' header.
+  The \verb!using namespace! command makes all shorcuts directly
+  available. Otherwise, the user has to prefix
+  \verb!vcsn::boolean_automaton::! to every types and functions.
 \item \textbf{line 5}: The first thing to do is to declare the
 alphabet we are working with. The type \verb!alphabet_t! is predefined
 into the header. We obtain an object instance called \verb!alphabet!.
@@ -99,7 +99,7 @@ To execute the program and to display the resulting automaton:
 \section{How to use standard algorithms}
 
 The second step is to test the algorithms of Vaucanson. For this
-purpose, the user can include also shortcut header. For example, in
+purpose, the user can also include shortcut header. For example, in
 the following code, the program build an automaton and compute its
 associated deterministic automaton.
 
@@ -133,6 +133,7 @@ associated deterministic automaton.
 \item \textbf{line 2}: This header is including several headers present
 in the \verb!vaucanson/algorithms! directory.
 \item \textbf{line 21}: Algorithms are functions not object instance.
+  So, they are called as functions.
 \end{list}
 
 \end{document}

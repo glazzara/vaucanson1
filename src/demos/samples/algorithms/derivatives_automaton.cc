@@ -78,7 +78,7 @@ int main(int argc, char **argv)
   // Build automaton
   derivatives_automaton(automaton, krat_exp);
   
-  // If the automaton is valide, save it !
+  // If the automaton is valid, save it !
   if (automaton.states().end() == automaton.states().begin())
     std::cout << "Empty automaton!" << std::endl;
   else
