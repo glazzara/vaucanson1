@@ -1,3 +1,12 @@
+2002-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.112)
+
+	* Makefile.am: new rule doxydoc.
+	* configure.ac: doxygen integration.
+	* doc/doc.doxy.in: new file.
+	* doc/Makefile.am: new file.
+	* THANKS: add Pollux and PI.
+
 2002-09-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.111)
 	Documented files: (now use modules) 

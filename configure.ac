@@ -19,6 +19,12 @@ AC_CHECK_HEADERS([stl_config.h])
 
 AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
 
+AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, no)
+if test x"$DOXYGEN" = x"no"; then
+  echo "Cannot found doxygen. Documentation will be disabled" 2>&1
+  DOXYGEN=true
+fi
+
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
@@ -38,6 +44,8 @@ AC_CONFIG_FILES([
 	src/tests/tests-suites/Makefile
 	src/tests/bin/Makefile
 	src/tests/tests-suites/usual_automaton_t/Makefile
+	doc/Makefile
+        doc/doc.doxy	
 	include/Makefile])
 
 AC_OUTPUT

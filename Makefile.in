@@ -71,6 +71,7 @@ AMTAR = @AMTAR@
 AWK = @AWK@
 CXX = @CXX@
 DEPDIR = @DEPDIR@
+DOXYGEN = @DOXYGEN@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 PACKAGE = @PACKAGE@
 RANLIB = @RANLIB@
@@ -81,7 +82,7 @@ am__quote = @am__quote@
 install_sh = @install_sh@
 
 AUTOMAKE_OPTIONS = foreign 1.6
-SUBDIRS = include src
+SUBDIRS = include src doc
 EXTRA_DIST = THANKS README LICENCE ChangeLog tools/scandefs.pl
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -245,7 +246,7 @@ distcleancheck_listfiles = find . -type f -print
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkinstalldirs) $(distdir)/./include/vaucanson/config $(distdir)/src/tests $(distdir)/tools
+	$(mkinstalldirs) $(distdir)/./include/vaucanson/config $(distdir)/doc $(distdir)/src/tests $(distdir)/tools
 	@for file in $(DISTFILES); do \
 	  if test -f $$file || test -d $$file; then d=.; else d=$(srcdir); fi; \
 	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
@@ -415,6 +416,9 @@ uninstall-info: uninstall-info-recursive
 	uninstall-am uninstall-info-am uninstall-info-recursive \
 	uninstall-recursive
 
+
+doxydoc:
+	cd doc && make doxydoc
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

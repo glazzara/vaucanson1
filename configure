@@ -2959,7 +2959,48 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-ac_config_files="$ac_config_files Makefile src/Makefile src/tests/defs src/tests/Makefile src/tests/check/Makefile src/tests/fundamental/Makefile src/tests/algebra/Makefile src/tests/algebra/semiring/Makefile src/tests/algebra/alphabets/Makefile src/tests/algebra/free_monoid/Makefile src/tests/algebra/series/Makefile src/tests/automata/Makefile src/tests/automata/algos/Makefile src/tests/automata/implementation_check/Makefile src/tests/sanity/Makefile src/tests/tests-suites/Makefile src/tests/bin/Makefile src/tests/tests-suites/usual_automaton_t/Makefile include/Makefile"
+# Extract the first word of "doxygen", so it can be a program name with args.
+set dummy doxygen; ac_word=$2
+echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
+if test "${ac_cv_prog_DOXYGEN+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  if test -n "$DOXYGEN"; then
+  ac_cv_prog_DOXYGEN="$DOXYGEN" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_prog_DOXYGEN="doxygen"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+
+  test -z "$ac_cv_prog_DOXYGEN" && ac_cv_prog_DOXYGEN="no"
+fi
+fi
+DOXYGEN=$ac_cv_prog_DOXYGEN
+if test -n "$DOXYGEN"; then
+  echo "$as_me:$LINENO: result: $DOXYGEN" >&5
+echo "${ECHO_T}$DOXYGEN" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
+if test x"$DOXYGEN" = x"no"; then
+  echo "Cannot found doxygen. Documentation will be disabled" 2>&1
+  DOXYGEN=true
+fi
+
+ac_config_files="$ac_config_files Makefile src/Makefile src/tests/defs src/tests/Makefile src/tests/check/Makefile src/tests/fundamental/Makefile src/tests/algebra/Makefile src/tests/algebra/semiring/Makefile src/tests/algebra/alphabets/Makefile src/tests/algebra/free_monoid/Makefile src/tests/algebra/series/Makefile src/tests/automata/Makefile src/tests/automata/algos/Makefile src/tests/automata/implementation_check/Makefile src/tests/sanity/Makefile src/tests/tests-suites/Makefile src/tests/bin/Makefile src/tests/tests-suites/usual_automaton_t/Makefile doc/Makefile doc/doc.doxy include/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -3468,6 +3509,8 @@ do
   "src/tests/tests-suites/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/tests-suites/Makefile" ;;
   "src/tests/bin/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/bin/Makefile" ;;
   "src/tests/tests-suites/usual_automaton_t/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/tests/tests-suites/usual_automaton_t/Makefile" ;;
+  "doc/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
+  "doc/doc.doxy" ) CONFIG_FILES="$CONFIG_FILES doc/doc.doxy" ;;
   "include/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
   "include/vaucanson/config/config.hh" ) CONFIG_HEADERS="$CONFIG_HEADERS include/vaucanson/config/config.hh" ;;
@@ -3587,6 +3630,7 @@ s,@CXXDEPMODE@,$CXXDEPMODE,;t t
 s,@RANLIB@,$RANLIB,;t t
 s,@ac_ct_RANLIB@,$ac_ct_RANLIB,;t t
 s,@CXXCPP@,$CXXCPP,;t t
+s,@DOXYGEN@,$DOXYGEN,;t t
 CEOF
 
 _ACEOF
