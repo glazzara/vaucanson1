@@ -89,10 +89,7 @@ void grep(std::ostream& out, const vcsn::tools::usual_automaton_t& automaton,
   do
     {
       bool ret = false;
-      //      for (unsigned i = 0; i != w.current().size() && !ret; ++i)
       ret = compute(automaton, w.current());
-      //      ret |= (accept(automaton, w.current().substr(i, 
-      //						   w.current().size() - i + 1)));
       if (ret)
 	out << w.current() << std::endl;
     }
@@ -187,9 +184,10 @@ int main(int argc, char **argv)
       // Construct the associated automaton.
       alphabet_t alpha;
       for (unsigned l = 0; l <= 255; ++l)
-	if (isprint(l))
+	if (isprint(l) && (l != '*') && (l != '.') && (l != '+')
+	    && (l != '(') && (l != ')'))
 	  alpha.insert(char(l));
-
+      
       monoid_t freemonoid(alpha);
       weights_t semiring;
       series_t series(semiring, freemonoid);
@@ -207,11 +205,13 @@ int main(int argc, char **argv)
       // STATE FINAL => sigma * on it.
       for_each_initial_state(s, automaton)
 	for (unsigned l = 0; l <= 255; ++l)
-	  if (isprint(l))
+	  if (isprint(l) && (l != '*') && (l != '.') && (l != '+')
+	      && (l != '(') && (l != ')'))
 	    automaton.add_letter_edge(*s, *s, char(l));
       for_each_final_state(s, automaton)
 	for (unsigned l = 0; l <= 255; ++l)
-	  if (isprint(l))
+	  if (isprint(l) && (l != '*') && (l != '.') && (l != '+')
+	      && (l != '(') && (l != ')'))
 	    automaton.add_letter_edge(*s, *s, char(l));
       automaton = determinize(automaton);
 

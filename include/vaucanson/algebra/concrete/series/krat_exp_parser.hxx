@@ -286,7 +286,8 @@ namespace vcsn {
 	  // we assume that this is in fact the _same_ token 
 	  // which can be interpreted differently in function
 	  // of the context.
-	  //	  std::cout << "len :" << len << std::endl;
+	  // std::cout << tok.to_string() << std::endl;
+	  // std::cout << "len :" << len << std::endl;
 	  if (len == 0)
 	    return std::make_pair(invalid_token, 
 				  std::list<krat_exp_token_t>());
@@ -326,6 +327,7 @@ namespace vcsn {
 
       void accept(token_stream_t& toks, token_e tok)
       {
+	//	std::cout << "accept a " << tok << std::endl;
 	token_t        get_token = toks.front();
 	typename token_t::token expected(tok);
 	if (!(get_token.is_a(tok) && (toks.size() > 0)))
@@ -354,6 +356,7 @@ namespace vcsn {
 
       void parse_exp(token_stream_t& toks, Element<S, T>& exp)
       {
+	//	std::cout << "get " << first(toks).to_string() << std::endl;
 	if (error_) return;
 	Element<S, T> lhs;
 	parse_factor(toks, lhs);
@@ -370,6 +373,7 @@ namespace vcsn {
 
       void parse_factor(token_stream_t& toks, Element<S, T>& exp)
       {
+	// std::cout << "get " << first(toks).to_string() << std::endl;
 	if (error_) return;
 	Element<S, T> lhs;
 	parse_term(toks, lhs);
@@ -386,6 +390,7 @@ namespace vcsn {
 
       void parse_term(token_stream_t& toks, Element<S, T>& exp)
       {
+	//std::cout << "get " << first(toks).to_string() << std::endl;
 	if (error_) return;
 	parse_term_without_star(toks, exp);
 	while (first(toks).is_a(star))
@@ -398,6 +403,8 @@ namespace vcsn {
 
       void parse_term_without_star(token_stream_t& toks, Element<S, T>& exp)
       {
+	// std::cout << "get " << first(toks).to_string() << std::endl;
+
 	if (error_) return;
 	// a 2-lookahead will be sufficient to disambiguate.
 	if ((first(toks).is_a(a_weight)) && 
@@ -454,7 +461,7 @@ namespace vcsn {
 	    accept(toks, rparen);
 	    return;
 	  }
-	std::cout << "bad exit !" << std::endl;
+	std::cout << "bad exit on " << first(toks).to_string() << std::endl;
       }
 
       bool error() const

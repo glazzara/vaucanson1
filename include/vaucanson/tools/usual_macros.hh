@@ -76,6 +76,9 @@
 // the following macros assume you have used a macro AUTOMATON_TYPES*
 // previously.
 
+#define for_each_letter(E, A) \
+    for (alphabet_iterator E = A.begin(); E != A.end(); ++E)
+
 #define for_each_state(S, A) \
     for (state_iterator S = A.states().begin(); 	\
 	 S != A.states().end(); 			\

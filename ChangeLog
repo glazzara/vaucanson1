@@ -1,3 +1,14 @@
+2003-02-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx:
+	    Minor Change.
+	* include/vaucanson/tools/usual_macros.hh:
+		(for_each_letter): New.
+	* doc/tutorial/tutorial.tex:
+		Update.
+	* src/demos/samples/algebra/series.cc: Update.
+	* src/demos/vgrep/vgrep.cc: Escape '+', '*' and '.'
+	
 2003-02-20  Maxime Rey  <max@lrde.epita.fr>
 
 	* `src/demos/grammar_inference/src/make_mca.cc' : New

@@ -2,7 +2,7 @@
 /* include/vaucanson/config/config.hh.in.  Generated from configure.ac by autoheader.  */
 
 /* The C++ compiler */
-#define CXX "g++-3.0"
+#define CXX ""
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1

@@ -97,14 +97,37 @@ The Vaucanson library is organized as follows:
 \item \textbf{tools}: some useful tools for daily work.
 \end{itemize}
 
-\subsection{A simple example}
-
-% FIXME: choose a good example.
-
-\subsection{Plan}
+\subsection{Aim of this document}
 
 The goal of this document is to present the philosophy of the library
 and to demonstrate some features of the system in a practical manner.
+
+\subsection{A simple example}
+
+At the end of this tutorial, you will probably be able to write a generic
+algorithm that complete a finite state machine like this one:
+
+\begin{code}[A simple example]
+template <class T>
+void complete(Element<Automata, T>& auto)
+{
+  typedef Element<Automata, T> automaton_t;
+  AUTOMATON_TYPES(automaton_t);
+
+  const alphabet_t& alphabet = auto.series().monoid().alphabet();
+  std::set<hedge_t> delta_ret;
+  hstate_t          hole_state = auto.add_state();
+
+  for_each_state(s, auto)
+    for_each_letter(e, alphabet)
+    {
+      delta_ret.clear();
+      a.letter_deltac(delta_ret, *s, *e);
+      if (delta_ret.size() == 0)
+        auto.add_letter_edge(*s, hole_state, *e);
+    }
+}
+\end{code}
 
 \section{Preliminaries}
 
@@ -115,16 +138,16 @@ and to demonstrate some features of the system in a practical manner.
 The fundamental module provides some sugar to build the system
 genericity. It can be seen as the core of the system and, then,
 non-expert users do not have to understand it. Yet, a so-called
-'Element' design pattern is used in every line of Vaucanson to enable
-orthogonal specialization and genericity: one must be aware of it
-before coding with the Vaucanson library.
+'Element' design pattern is used in every lines of Vaucanson to enable
+genericity: one must be aware of it before coding with the Vaucanson
+library.
 
 \subsection{Element/Set design pattern}
 
-As mentionned in (FIXME), Vaucanson is designed in an algebraic
+Vaucanson is designed in an algebraic
 manner. To reinforce this view and to provide a simple way to separate
 implementation and theoritical behaviour, we use a unified way to
-structure all the object used in the library: the Element pattern. The
+structure all the objects used in the library: the Element pattern. The
 'Basics' section is essential whereas the other can be skipped for a
 first reading.
 
@@ -146,14 +169,14 @@ Alphabet a;
 FreeMonoid f(a);
 Semiring s;
 Series s(f, s);
-Element<Series, polynom> s;
+Element<Series, polynom<std::string, int> > s;
 Element<FreeMonoid, std::string> m(f);
 Element<Semiring, int>   w;
 s.set();          // the series set.
 s.set().monoid(); // the monoid.
 s.value();        // the polynom.
 m.set().alphabet() == s.set().monoid().alphabet();
-s[m] = w;
+s.assoc(m, w);
 \end{code}
 
 Second, the particular behaviour of an implementation 'T' viewed as an
@@ -162,7 +185,7 @@ element of a set 'S' is defined by specialization of the class
 MetaElement$<$Series, polynom$>$ provides a 'is\_stareable()' method
 that returns true if we can take the star of the current serie. The
 MetaElement class is not a user class, it is just a way to define the
-interpretation of the implementation as a particular concept.
+interpretation of the implementation as a particular concept. 
 
 % FIXME:Add example.
 
@@ -178,20 +201,24 @@ interpretation of the implementation as a particular concept.
 
 \section{Dealing with algebraic structures}
 
-Even if classical context are provided (like letter acceptor),
+Even if classical context are provided (like letter acceptors),
 Vaucanson enables the user to precisely define the algebraic context
 to work with. 
 
-The next sections show how it can be done for the main algebraic
+Next sections show how it can be done for the main algebraic
 components: alphabet, free monoid, semiring, serie and rational
 expression.
+
+Thanks to the Element design pattern, these constructions are unified:
+you first define the set of your element and then one (or several)
+instance(s) of it.
 
 \subsection{Alphabet}
 
 \begin{tabular}%
 {ll}
-\hline \\
-concept: & \MyDefAlphabet  \\
+\hline 
+concept: & \textbf{alphabet, letter} \\
 concerned files: & algebra/concept/alphabets\_base.h[h, xx] \\
                  & algebra/concrete/alphabet/* \\
 \hline 
@@ -207,10 +234,10 @@ algebra/concept/alphabets\_base.hh)
 
 A final class AlphabetSet implements this class in a trivial manner:
 it is an empty class only for static typing purpose. This class is
-just parameterized by the type of letter. So, we have to provide the
-kind of letter we wish to manipulate inside our future alphabet. You
-can use the C++-\textit{builtins} types (like char, int, ...)  or use
-more specific types proposed in Vaucanson.
+just parameterized by the type of letters. So, we just have to provide
+the kind of letter we wish to manipulate inside our future alphabet.
+You can use the C++-\textit{builtins} types (like char, int, ...)  or
+use more specific types proposed in Vaucanson.
 
 For example, let us define a type alias declaring that we want to work
 with letter implemented with 'char':
@@ -241,14 +268,14 @@ the alphabet we will effectively use, with the Element pattern:
 
 \begin{code}[Type of an alphabet implemented with std::set structure]
 typedef Element<Alphabets, std::set<Letter> >  Alphabet;
-\end{verbatim}
+\end{code}
 
-This previous should be understand like: ``an element of the set of
-alphabets holding 'Letter' letter and implemented by a std::set of
-'Letter' ''.  Actually, this code is already present inside Vaucanson, more
-exactly inside the file ``algebra/concrete/alphabet/predefs.hh''.
+This previous type should be understood like: ``an element of the set
+of alphabets holding 'Letter' letter and implemented by a std::set of
+'Letter' ''.  Actually, this code is already present inside Vaucanson,
+more exactly inside the file ``\verb!algebra/concrete/alphabet/predefs.hh!''.
 
-\begin{code}{The pre-existing alphabet definitions in Vaucanson]
+\begin{code}[The pre-existing alphabet definitions in Vaucanson]
  namespace small_alpha_letter {
       
       typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
@@ -314,7 +341,7 @@ To finish, here is a short example of alphabet manipulation :
 
 \begin{tabular}%
 {ll}
-\hline \\
+\hline 
 concept: & \textbf{Free monoid}  \\
 concerned files: & algebra/concept/freemonoid\_base.h[h, xx] \\
                  & algebra/concrete/freemonoid/* \\
@@ -324,7 +351,7 @@ concerned files: & algebra/concept/freemonoid\_base.h[h, xx] \\
 \hspace{1cm}
 
 Alphabet and letter are not enough to express language manipulation,
-we need the word concept. A word is a sequence of letter. 
+we need the word concept. A word is a sequence of letters. 
 
 The algebraic structure denoting the set of words is called a
 \textbf{free monoid}. Such a set needs an alphabet to be
@@ -350,6 +377,7 @@ class which aggregates an instance of the alphabet:
 \begin{code}[An instance of a free monoid over the alphabet $\{a, b\}$]
 {
   using small_alpha_letter;
+  typedef FreeMonoid<Alphabet>  Words;
   Alphabet     alphabet;
   alphabet.insert('a');
   alphabet.insert('b');
@@ -359,10 +387,10 @@ class which aggregates an instance of the alphabet:
 \end{code}
 
 A predefinition of this class exists in
-algebra/concrete/free\_monoid/predefs.hh. It is called 'Words'.
+\verb!algebra/concrete/free_monoid/predefs.hh!. It is called 'Words'.
 
 Now, let's work with element of this set. Naturally, a word can be
-implemented with a std::basic\_string<Letter>.
+implemented with a \verb!std::basic_string<Letter>!.
 
 Then, its type using the Element class is:
 
@@ -402,7 +430,7 @@ Some others services and external functions are proposed:
 \end{code}
 
 To obtain all the services of a word, please look at
-algebra/free\_monoid/concept/freemonoid\_base.hh.
+``\verb!algebra/free_monoid/concept/freemonoid_base.hh!.
 
 How to get the neutral element of the semiring (the empty word) ? It
 is not the role of an element to provide it, the set is the only owner
@@ -422,7 +450,7 @@ identity_as<std::string>::of(free_monoid); // solution using a template function
 
 \begin{tabular}%
 {ll}
-\hline \\
+\hline 
 concept: & \textbf{Semiring}  \\
 concerned files: & algebra/concept/semiring\_base.h[h, xx] \\
                  & algebra/concrete/semiring/* \\
@@ -466,8 +494,8 @@ zero_as<bool>::of(semiring);
 \end{code}
 
 Some other semirings are useful for weighted automaton. For example,
-Vaucanson provides the MaxTropical semiring. An element of such a
-semiring can be an integer encoded as an 'int' builtin:
+Vaucanson provides the famous MaxTropical semiring. An element of such
+a semiring can be an integer encoded as an 'int' builtin:
 
 \begin{code}[(Z, Max, +) tropical semiring]
 MaxTropical semiring;
@@ -491,8 +519,9 @@ x^{\star} = \sum_{k=0}^{\infty}{x^k}
 \end{center}
 The star is useful when you want to symbolize a non bounded computing
 of weight (for example, when you want to associate a weight to a star
-regular expression). Yet, the star operation is not defined everywhere.
-Consequently, Vaucanson provides two services star() and is\_stareable():
+regular expression). Yet, the star operation is not defined
+everywhere.  Consequently, Vaucanson provides two services star() and
+is\_stareable():
 
 \begin{code}[The star of a semiring element]
 Element<MaxTropical, int> a = 1;
@@ -510,7 +539,7 @@ cout << z.star() << std::endl;
 
 \begin{tabular}%
 {ll}
-\hline \\
+\hline 
 concept: & \textbf{Series}  \\
 concerned files: & algebra/concept/series\_base.h[h, xx] \\
                  & algebra/concrete/series/* \\
@@ -524,7 +553,7 @@ construction of series element.
 The set of series is constructed from a free monoid and a semiring:
 
 \begin{code}[The set of series]
-Series<BooleanSemiring, FreeMonoid<Alphabet> > series; 
+Series<BooleanSemiring, FreeMonoid<Alphabet> > series(freemonoid, semiring); 
 \end{code}
 
 Then, we can implement a finite serie using a finite support map.
@@ -533,8 +562,6 @@ Vaucanson provides such an implementation through the polynoms class:
 \begin{code}[A serie]
 Element<BooleanSeries, polynom<std::string, bool> > serie(series);
 \end{code}
-
-FIXME: the constructor is necessary !
 
 As a map, a serie can associate a weight to a word:
 
@@ -564,8 +591,8 @@ cout << serie1.is_stareable() << endl;
 The polynom implementation does not manage infinite series. Indeed, we
 can't denote such serie in an extensional way. Yet, a particular class
 of infinite series can be expressed using a finite formalism: the
-rationale expressions. The Kleene theorem says that this class of
-series is exactly what can be recognized with a finite state machine.
+rational expressions. The Kleene theorem says that this class of
+series is exactly what can be recognized by a finite state machine.
 
 Vaucanson enables us to define such series:
 
@@ -583,7 +610,12 @@ cout << serie1.is_stareable() << endl;
 cout << (serie1.star() + serie2) * serie3 << endl; 
 \end{code}
 
-FIXME: Parler du pattern matching !
+As syntactic expression, rational expresssion can be parsed:
+
+\begin{code}
+parse("(a+b*).ab", exp);
+std::cout << exp << std::endl;
+\end{code}
 
 \section{Automaton}
 
@@ -702,7 +734,7 @@ A naive implementation of grep uses an automaton of the form:
 There exists many algorithms to construct an automaton that recognizes the language denoted by an expression. The most popular is the Thompson's one.
 
 \begin{code}[A naive grep]
-
+Ok
 \end{code}
 
 \subsection{Speed consideration}

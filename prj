@@ -1,12 +1,23 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 161)
-(Parent-Version vaucanson 0 159)
-(Version-Log "")
+(Project-Version vaucanson 0 162)
+(Parent-Version vaucanson 0 161)
+(Version-Log "
+2003-02-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx:
+	    Minor Change.
+	* include/vaucanson/tools/usual_macros.hh:
+		(for_each_letter): New.
+	* doc/tutorial/tutorial.tex:
+		Update.
+	* src/demos/samples/algebra/series.cc: Update.
+	* src/demos/vgrep/vgrep.cc: Escape '+', '*' and '.'
+")
 (New-Version-Log "")
-(Checkin-Time "Thu, 20 Feb 2003 17:31:43 +0100")
-(Checkin-Login max)
+(Checkin-Time "Thu, 20 Feb 2003 20:22:16 +0100")
+(Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -88,7 +99,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.102 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.103 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.15 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.3 600))
@@ -138,7 +149,7 @@
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.5 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.5 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.1 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.3 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.4 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.3 600))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.13 600))
@@ -563,7 +574,7 @@
 ;; Files added by populate at Mon, 27 Jan 2003 11:29:03 +0100,
 ;; to version 0.145(w), by yann:
 
-  (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.2 600))
+  (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.3 600))
 
 ;; Files added by populate at Thu, 13 Feb 2003 08:30:13 +0100,
 ;; to version 0.148(w), by yann:
@@ -574,7 +585,7 @@
 ;; Files added by populate at Thu, 13 Feb 2003 08:41:20 +0100,
 ;; to version 0.149(w), by yann:
 
-  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.6 600))
+  (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.7 600))
 
 ;; Files added by populate at Thu, 13 Feb 2003 09:20:10 +0100,
 ;; to version 0.149(w), by yann:
@@ -590,7 +601,7 @@
 ;; to version 0.152(w), by max:
 
   (log (vaucanson/h/46_log 1.1 600))
-  (src/demos/samples/algebra/series.cc (vaucanson/h/47_series.cc 1.1 600))
+  (src/demos/samples/algebra/series.cc (vaucanson/h/47_series.cc 1.2 600))
   (src/demos/samples/algebra/semiring.cc (vaucanson/h/48_semiring.c 1.1 600))
   (src/demos/samples/algebra/free_monoid.cc (vaucanson/h/49_free_monoi 1.2 600))
   (src/demos/samples/algebra/alphabet.cc (vaucanson/h/50_alphabet.c 1.2 600))
@@ -668,23 +679,23 @@
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx (vaucanson/i/25_decorated_ 1.1 600))
 
 
-  (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.1 600))
+  (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.2 600))
   (src/demos/vgrep/Makefile.am (vaucanson/i/27_Makefile.a 1.1 600))
-  (src/demos/Makefile.am (vaucanson/i/28_Makefile.a 1.2 600))
+  (src/demos/Makefile.am (vaucanson/i/28_Makefile.a 1.3 600))
 ;; Files added by populate at Thu, 20 Feb 2003 17:26:53 +0100,
 ;; to version 0.159(w), by max:
 
-  (diffs.patch (vaucanson/i/29_diffs.patc 1.1 644))
-  (configure (vaucanson/i/30_configure 1.1 755))
-  (aclocal.m4 (vaucanson/i/31_aclocal.m4 1.1 644))
-  (src/tests/defs (vaucanson/i/32_defs 1.1 644))
-  (src/demos/grammar_inference/src/make_mca.cc (vaucanson/i/33_make_mca.c 1.1 644))
-  (src/demos/grammar_inference/src/is_not_compatible.cc (vaucanson/i/34_is_not_com 1.1 644))
-  (src/demos/grammar_inference/src/bs.cc (vaucanson/i/35_bs.cc 1.1 644))
-  (src/demos/grammar_inference/src/fusion.cc (vaucanson/i/36_fusion.cc 1.1 644))
-  (src/demos/grammar_inference/src/training/vtrain.toy (vaucanson/i/37_vtrain.toy 1.1 644))
-  (src/demos/grammar_inference/include/tools/load_sample.hh (vaucanson/i/38_load_sampl 1.1 644))
-  (src/demos/grammar_inference/include/tools/load_sample.hxx (vaucanson/i/39_load_sampl 1.1 644))
+  
+  
+  
+  
+  (src/demos/grammar_inference/src/make_mca.cc (vaucanson/i/33_make_mca.c 1.1 600))
+  (src/demos/grammar_inference/src/is_not_compatible.cc (vaucanson/i/34_is_not_com 1.1 600))
+  (src/demos/grammar_inference/src/bs.cc (vaucanson/i/35_bs.cc 1.1 600))
+  (src/demos/grammar_inference/src/fusion.cc (vaucanson/i/36_fusion.cc 1.1 600))
+  (src/demos/grammar_inference/src/training/vtrain.toy (vaucanson/i/37_vtrain.toy 1.1 600))
+  (src/demos/grammar_inference/include/tools/load_sample.hh (vaucanson/i/38_load_sampl 1.1 600))
+  (src/demos/grammar_inference/include/tools/load_sample.hxx (vaucanson/i/39_load_sampl 1.1 600))
   (src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hxx (vaucanson/i/40_complement 1.1 600))
   (src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hh (vaucanson/i/41_complement 1.1 600))
   (src/demos/grammar_inference/include/algebra/concrete/lattice.hxx (vaucanson/i/42_lattice.hx 1.1 600))
@@ -697,21 +708,21 @@
   (src/demos/grammar_inference/include/algebra/concept/lattice_base.hh (vaucanson/i/49_lattice_ba 1.1 600))
   (src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hxx (vaucanson/i/50_ordered_se 1.1 600))
   (src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hh (vaucanson/i/51_ordered_se 1.1 600))
-  (src/demos/grammar_inference/include/algorithms/rig.hh (vaucanson/j/0_rig.hh 1.1 644))
-  (src/demos/grammar_inference/include/algorithms/rig.hxx (vaucanson/j/1_rig.hxx 1.1 644))
-  (src/demos/grammar_inference/include/algorithms/make_pta.hxx (vaucanson/j/2_make_pta.h 1.1 644))
-  (src/demos/grammar_inference/include/algorithms/make_mca.hxx (vaucanson/j/3_make_mca.h 1.1 644))
-  (src/demos/grammar_inference/include/algorithms/make_pta.hh (vaucanson/j/4_make_pta.h 1.1 644))
-  (src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx (vaucanson/j/5_is_not_com 1.1 644))
-  (src/demos/grammar_inference/include/algorithms/is_not_compatible.hh (vaucanson/j/6_is_not_com 1.1 644))
-  (src/demos/grammar_inference/include/algorithms/make_mca.hh (vaucanson/j/7_make_mca.h 1.1 644))
+  (src/demos/grammar_inference/include/algorithms/rig.hh (vaucanson/j/0_rig.hh 1.1 600))
+  (src/demos/grammar_inference/include/algorithms/rig.hxx (vaucanson/j/1_rig.hxx 1.1 600))
+  (src/demos/grammar_inference/include/algorithms/make_pta.hxx (vaucanson/j/2_make_pta.h 1.1 600))
+  (src/demos/grammar_inference/include/algorithms/make_mca.hxx (vaucanson/j/3_make_mca.h 1.1 600))
+  (src/demos/grammar_inference/include/algorithms/make_pta.hh (vaucanson/j/4_make_pta.h 1.1 600))
+  (src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx (vaucanson/j/5_is_not_com 1.1 600))
+  (src/demos/grammar_inference/include/algorithms/is_not_compatible.hh (vaucanson/j/6_is_not_com 1.1 600))
+  (src/demos/grammar_inference/include/algorithms/make_mca.hh (vaucanson/j/7_make_mca.h 1.1 600))
   (src/demos/grammar_inference/include/algorithms/is_structurally_complete.hh (vaucanson/j/8_is_structu 1.1 600))
   (src/demos/grammar_inference/include/algorithms/fusion.hh (vaucanson/j/9_fusion.hh 1.1 600))
   (src/demos/grammar_inference/include/algorithms/is_structurally_complete.hxx (vaucanson/j/10_is_structu 1.1 600))
   (src/demos/grammar_inference/include/algorithms/fusion.hxx (vaucanson/j/11_fusion.hxx 1.1 600))
-  (include/vaucanson/config/pconf.hh (vaucanson/j/12_pconf.hh 1.1 644))
-  (include/vaucanson/config/config.hh (vaucanson/j/13_config.hh 1.1 644))
-  (doc/doc.doxy (vaucanson/j/14_doc.doxy 1.1 644))
+  (include/vaucanson/config/pconf.hh (vaucanson/j/12_pconf.hh 1.1 600))
+  (include/vaucanson/config/config.hh (vaucanson/j/13_config.hh 1.2 600))
+  (doc/doc.doxy (vaucanson/j/14_doc.doxy 1.1 600))
 
 ;; Files deleted by depopulate at Thu, 20 Feb 2003 17:31:18 +0100,
 ;; from version 0.159(w), by max:
@@ -723,19 +734,26 @@
   ; (src/demos/grammar_inference/lattice.hh ())
   ; (src/demos/grammar_inference/lattice_base.hxx ())
   ; (src/demos/grammar_inference/lattice_base.hh ())
+
+;; Files deleted by depopulate at Thu, 20 Feb 2003 20:12:33 +0100,
+;; from version 0.161(w), by yann:
+
+  ; (diffs.patch ())
+
+;; Files deleted by depopulate at Thu, 20 Feb 2003 20:12:41 +0100,
+;; from version 0.161(w), by yann:
+
+  ; (configure ())
+
+;; Files deleted by depopulate at Thu, 20 Feb 2003 20:13:32 +0100,
+;; from version 0.161(w), by yann:
+
+  ; (aclocal.m4 ())
+
+;; Files deleted by depopulate at Thu, 20 Feb 2003 20:17:41 +0100,
+;; from version 0.161(w), by yann:
+
+  ; (src/tests/defs ())
 )
-(Merge-Parents
-  (0.160 complete
-    (ChangeLog ChangeLog ChangeLog r) (configure.ac configure.ac configure.ac r)
-    (include/vaucanson/algebra/concept/semiring_base.hxx include/vaucanson/algebra/concept/semiring_base.hxx include/vaucanson/algebra/concept/semiring_base.hxx r) (include/vaucanson/algebra/concept/series_base.hh include/vaucanson/algebra/concept/series_base.hh include/vaucanson/algebra/concept/series_base.hh r)
-    (include/vaucanson/algebra/concept/series_base.hxx include/vaucanson/algebra/concept/series_base.hxx include/vaucanson/algebra/concept/series_base.hxx r) (include/vaucanson/algebra/concrete/free_monoid/str_words.hh include/vaucanson/algebra/concrete/free_monoid/str_words.hh include/vaucanson/algebra/concrete/free_monoid/str_words.hh r)
-    (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx r) (include/vaucanson/algebra/concrete/series/krat.hh include/vaucanson/algebra/concrete/series/krat.hh include/vaucanson/algebra/concrete/series/krat.hh r)
-    (include/vaucanson/algebra/concrete/series/polynoms.hh include/vaucanson/algebra/concrete/series/polynoms.hh include/vaucanson/algebra/concrete/series/polynoms.hh r) (include/vaucanson/algorithms/compute.hh include/vaucanson/algorithms/compute.hh include/vaucanson/algorithms/compute.hh r)
-    (include/vaucanson/algorithms/compute.hxx include/vaucanson/algorithms/compute.hxx include/vaucanson/algorithms/compute.hxx r) (include/vaucanson/algorithms/union.hxx include/vaucanson/algorithms/union.hxx include/vaucanson/algorithms/union.hxx r)
-    (include/vaucanson/automata/concept/automata_base.hh include/vaucanson/automata/concept/automata_base.hh include/vaucanson/automata/concept/automata_base.hh r) (include/vaucanson/automata/concept/kinds.hh include/vaucanson/automata/concept/kinds.hh include/vaucanson/automata/concept/kinds.hh r)
-    (include/vaucanson/automata/concept/kinds.hxx include/vaucanson/automata/concept/kinds.hxx include/vaucanson/automata/concept/kinds.hxx r) (include/vaucanson/misc/container_ops.hxx include/vaucanson/misc/container_ops.hxx include/vaucanson/misc/container_ops.hxx r)
-    (Makefile.am Makefile.am Makefile.am r) (include/vaucanson/tools/usual_macros.hh include/vaucanson/tools/usual_macros.hh include/vaucanson/tools/usual_macros.hh r)
-    (doc/tutorial/tutorial.tex doc/tutorial/tutorial.tex doc/tutorial/tutorial.tex r) (() () src/demos/vgrep/vgrep.cc a)
-    (() () src/demos/vgrep/Makefile.am a) (() () src/demos/Makefile.am a))
-)
+(Merge-Parents)
 (New-Merge-Parents)

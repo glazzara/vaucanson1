@@ -34,7 +34,6 @@ int main()
   Series_t s(ring, free_monoid);
 
   Element<Series_t, polynom<Word::value_t, scalar> > p1;
-
   
   p1.value_set("a", 1);
   p1.value_set("b", 2);

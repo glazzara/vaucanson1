@@ -2,16 +2,9 @@
 #
 # $Id$
 
-SUBDIRS = vgrep grammar_inference samples
+SUBDIRS = vgrep
 
 .PHONY: demos
 
-vgrep:
+demos:
 	cd vgrep && $(MAKE) demos
-
-gi:
-	cd grammar_inference && $(MAKE) demos
-
-samples:
-	cd samples && $(MAKE) demos
-
