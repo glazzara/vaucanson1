@@ -39,22 +39,22 @@ namespace vcsn {
   namespace algebra {
 
     /*------------------------.
-    | Series<Weights, Monoid> |
+    | Series<Semiring, Monoid> |
     `------------------------*/
 
-    template<typename Weights, typename Monoid>
+    template<typename Semiring, typename Monoid>
     struct Series
-      : SeriesBase<Series<Weights, Monoid> >
+      : SeriesBase<Series<Semiring, Monoid> >
     {
-      Series(const Weights& w, const Monoid& m);
+      Series(const Semiring& w, const Monoid& m);
       Series(const Series& other);
 
-      const Weights&	weights() const;
+      const Semiring&	semiring() const;
 
       const Monoid&	monoid() const;
 
     protected:
-      SetSlot<Weights>  weights_;
+      SetSlot<Semiring>  semiring_;
       SetSlot<Monoid>	monoid_;
     };    
 
@@ -103,7 +103,7 @@ namespace vcsn {
   {
     typedef algebra::mul_kind semigroup_kind;
     
-    typedef W weights_t;
+    typedef W semiring_t;
     typedef M monoid_t;
   };
   

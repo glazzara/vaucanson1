@@ -60,7 +60,7 @@ namespace vcsn
 	const sme_t &sm = sme_t(org.set().monoid(), *i);
 
 	const me_t &m = me_t(dst.set().monoid(), sm);
-	const se_t &w = se_t(dst.set().weights(), org.get(sm));
+	const se_t &w = se_t(dst.set().semiring(), org.get(sm));
 	
 	dst += w * Element<S, T>(dst.set(), m);
       }

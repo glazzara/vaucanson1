@@ -92,19 +92,19 @@ namespace vcsn {
 
     MATCH_(Constant, m)
     {
-      return exp_.set().weights().zero(SELECT(weight_value_t));
+      return exp_.set().semiring().zero(SELECT(weight_value_t));
     }
     END
 
     MATCH(Zero)
     {
-      return exp_.set().weights().zero(SELECT(weight_value_t));
+      return exp_.set().semiring().zero(SELECT(weight_value_t));
     }
     END
 
     MATCH(One)
     {
-      return exp_.set().weights().identity(SELECT(weight_value_t));
+      return exp_.set().semiring().identity(SELECT(weight_value_t));
     }
     END
 

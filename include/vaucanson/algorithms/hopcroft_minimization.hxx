@@ -705,7 +705,7 @@ namespace vcsn {
     queue<pair_class_letter_t>                 the_queue;
     vector<vector<set_pair_state_weight_t> >   inverse;
     series_elt_t                               serie_identity    = input.series().zero_;
-    weight_t                                   weight_zero       = input.series().weights().wzero_;
+    weight_t                                   weight_zero       = input.series().semiring().wzero_;
     monoid_elt_t                               monoid_identity   = input.series().monoid().empty_;
     const alphabet_t&	                       alphabet(input.series().monoid().alphabet());
     unsigned                                   max_partition, max_letters, pos;
@@ -732,7 +732,7 @@ namespace vcsn {
     inverse.resize(max_states);
 
     set_states_t           states_visited;
-    set_weight_t           weights_had_class;
+    set_weight_t           semiring_had_class;
     vector<set_states_t>   classes(max_states);
     vector<unsigned>       class_of_state(max_states);
     vector_weight_t        old_weight(max_states), class_of_weight(max_states), val(max_states);
@@ -787,9 +787,9 @@ namespace vcsn {
 	else 
 	  { 
 	    weight_t w = input.get_final(*q).get(monoid_identity);
-	    if (weights_had_class.find(w) == weights_had_class.end())
+	    if (semiring_had_class.find(w) == semiring_had_class.end())
 	      { 
-		weights_had_class.insert(w);
+		semiring_had_class.insert(w);
 		classes[max_partition].insert(*q);
 		class_of_weight[w] = max_partition;
 		class_of_state[*q] = max_partition;
@@ -842,18 +842,18 @@ namespace vcsn {
 	    weight_t          first_val, next_val; 
 	    first_val = val[*(classes[*class_id].begin())];
 	    class_of_weight.clear();
-	    weights_had_class.clear();
+	    semiring_had_class.clear();
 	    
 	    for_each_const_(set_states_t, p, classes[*class_id])
 	      {
 		next_val = val[*p];
 		if (next_val != first_val) // This state must be moved to another class !
 		  {			
-		    if (weights_had_class.find(next_val) == weights_had_class.end()) // Must create a new class
+		    if (semiring_had_class.find(next_val) == semiring_had_class.end()) // Must create a new class
 		      { 			    
 			classes[max_partition].insert(*p);
 			class_of_state[*p] = max_partition;
-			weights_had_class.insert(next_val);
+			semiring_had_class.insert(next_val);
 			class_of_weight[next_val] = max_partition;
 			max_partition++;
 		      }
@@ -924,7 +924,7 @@ namespace vcsn {
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
     Element<A, T> output(a.set());
-    do_quotient(a.set(), a.set().series().weights(), 
+    do_quotient(a.set(), a.set().series().semiring(), 
 		SELECT(weight_value_t), output, a);
     return output;
   }

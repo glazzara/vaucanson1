@@ -73,8 +73,8 @@ namespace vcsn {
 	  monoid_elt_t mc(series_.monoid(), c->second);
 	  monoid_elt_t md(series_.monoid(), d->second);
 	  //	  ret.push_back((mc * md).value());
-	  weight_t wc(series_.weights(), c->first);
-	  weight_t wd(series_.weights(), d->first);
+	  weight_t wc(series_.semiring(), c->first);
+	  weight_t wd(series_.semiring(), d->first);
 	  ret.push_back(std::make_pair((wc * wd).value(), 
 				       (mc * md).value()));
 	}
@@ -100,8 +100,8 @@ namespace vcsn {
     {
       match(node);
       for_each_(ext_support_t, c, supp_)
-	c->first = (weight_t(series_.weights(), w) * 
-		    weight_t(series_.weights(), c->first)).value();
+	c->first = (weight_t(series_.semiring(), w) * 
+		    weight_t(series_.semiring(), c->first)).value();
     }
     END
 
@@ -115,7 +115,7 @@ namespace vcsn {
     {
       supp_.push_back(std::make_pair
 		      (algebra::identity_as<weight_value_t>
-		       ::of(series_.weights()).value(),
+		       ::of(series_.semiring()).value(),
 		       m));
     }
     END
@@ -129,7 +129,7 @@ namespace vcsn {
     {
       supp_.push_back(std::make_pair
 		      (algebra::identity_as<weight_value_t>
-		       ::of(series_.weights()).value(),
+		       ::of(series_.semiring()).value(),
 		       algebra::identity_as<monoid_value_t>
 		       ::of(series_.monoid()).value()));
     }

@@ -155,10 +155,10 @@ namespace vcsn {
     template<typename Tm, typename Tw>    
     template<typename W>
     inline
-    void polynom<Tm, Tw>::add(const W& weights, const Tm& m, const Tw& w)
+    void polynom<Tm, Tw>::add(const W& semiring, const Tm& m, const Tw& w)
     {
       Tw& o = make_get(SELECT(W), m);
-      op_in_add(weights, o, w);
+      op_in_add(semiring, o, w);
     }
     
     template<typename Tm, typename Tw>        
@@ -264,7 +264,7 @@ namespace vcsn {
     for (typename algebra::polynom<Tm, Tw>::const_iterator i = m.begin();
 	 i != m.end();
 	 ++i)
-      if (!s.monoid().contains(i->first) || !s.weights().contains(i->second))
+      if (!s.monoid().contains(i->first) || !s.semiring().contains(i->second))
 	return false;
     return true; 
   }
@@ -322,7 +322,7 @@ namespace vcsn {
 	  if (p != dst.end())
 	    {
 	      w = i->second;
-	      op_in_add(s.weights(), w, p->second);
+	      op_in_add(s.semiring(), w, p->second);
 	      if (w == zero_value(SELECT(W), SELECT(Tw)))
 		dst.erase(p);
 	      else
@@ -361,9 +361,9 @@ namespace vcsn {
 	   j != b.end();
 	   ++j)
 	{
-	  Tw w = op_mul(s.weights(), i->second, j->second);
+	  Tw w = op_mul(s.semiring(), i->second, j->second);
 	  if (w != zero_value(SELECT(W), SELECT(Tw)))
-	    ret.add(s.weights(),
+	    ret.add(s.semiring(),
 		    op_mul(s.monoid(), i->first, j->first),
 		    w);
 	}
@@ -446,7 +446,7 @@ namespace vcsn {
 		 const oTm& src)
   { 
     precondition(& s.monoid() == & monoid);
-    dst.add(s.weights(), 
+    dst.add(s.semiring(), 
 	    op_convert(SELECT(M), SELECT(Tm), src),
 	    identity_value(SELECT(W), SELECT(Tw)));
   }
@@ -476,19 +476,19 @@ namespace vcsn {
   }
 
   /*---------------------------------------.
-    | foreign addition with weights elements |
+    | foreign addition with semiring elements |
     `---------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_in_add(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>& weights,
+		 const algebra::SemiringBase<W>& semiring,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src)
   { 
-    precondition(& s.weights() == & weights);
+    precondition(& s.semiring() == & semiring);
     if (src != zero_value(SELECT(W), SELECT(oTw)))
-      dst.add(s.weights(), 
+      dst.add(s.semiring(), 
 	      identity_value(SELECT(M), SELECT(Tm)),
 	      op_convert(SELECT(W), SELECT(Tw), src));
   }
@@ -496,39 +496,39 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-				  const algebra::SemiringBase<W>& weights,
+				  const algebra::SemiringBase<W>& semiring,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTw& b)
   { 
     algebra::polynom<Tm, Tw> ret(a);
-    op_in_add(s, weights, ret, b);
+    op_in_add(s, semiring, ret, b);
     return ret;
   }
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   inline
-  algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& weights,
+  algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& semiring,
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b)
   { 
     algebra::polynom<Tm, Tw> ret(b);
-    op_in_add(s, weights, ret, a);
+    op_in_add(s, semiring, ret, a);
     return ret;
   }
 
   /*-------------------------------------------.
-    | foreign multiplication by weights elements |
+    | foreign multiplication by semiring elements |
     `-------------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_in_mul(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>& weights,
+		 const algebra::SemiringBase<W>& semiring,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src)
   { 
-    precondition(& s.weights() == & weights);
+    precondition(& s.semiring() == & semiring);
 
     typename algebra::polynom<Tm, Tw>::iterator p;
     for (typename algebra::polynom<Tm, Tw>::iterator i = dst.begin();
@@ -536,7 +536,7 @@ namespace vcsn {
 	 )
       {
 	p = i++;
-	op_in_mul(s.weights(), p->second, src);
+	op_in_mul(s.semiring(), p->second, src);
 	if (p->second == zero_value(SELECT(W), SELECT(Tw)))
 	  dst.erase(p);
       }
@@ -545,23 +545,23 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-				  const algebra::SemiringBase<W>& weights,
+				  const algebra::SemiringBase<W>& semiring,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTw& b)
   { 
     algebra::polynom<Tm, Tw> ret(a);
-    op_in_mul(s, weights, ret, b);
+    op_in_mul(s, semiring, ret, b);
     return ret;
   }
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   inline
-  algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& weights,
+  algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& semiring,
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b)
   { 
-    precondition(& s.weights() == & weights);
+    precondition(& s.semiring() == & semiring);
 
     algebra::polynom<Tm, Tw> ret(b);
 
@@ -570,7 +570,7 @@ namespace vcsn {
 	 i != ret.end();)
       {
 	p = i++;
-	p->second = op_mul(s.weights(), a, p->second);
+	p->second = op_mul(s.semiring(), a, p->second);
 	if (p->second == zero_value(SELECT(W), SELECT(Tw)))
 	  ret.erase(p);
       }
@@ -593,7 +593,7 @@ namespace vcsn {
 	  st << "+";
 	if (i->second != identity_value(SELECT(W), SELECT(Tw)) ||
 	    i->first == identity_value(SELECT(M), SELECT(Tm)))
-	  op_rout(s.weights(), st, i->second);
+	  op_rout(s.semiring(), st, i->second);
 	if (i->first != identity_value(SELECT(M), SELECT(Tm)))
 	  {
 	    if (i->second != identity_value(SELECT(W), SELECT(Tw)))
@@ -603,7 +603,7 @@ namespace vcsn {
 	++i;
       }
     if (i == p.begin()) /* case zero */
-      op_rout(s.weights(), st, zero_value(SELECT(W), SELECT(Tw)));
+      op_rout(s.semiring(), st, zero_value(SELECT(W), SELECT(Tw)));
     return st;
   }
 
@@ -686,7 +686,7 @@ namespace vcsn {
     // FIXME: add global constants to define this !
     unsigned nb_monome = rand() * 10 / RAND_MAX;
     for (unsigned i = 0; i < nb_monome; ++i)
-      p[s.monoid().choose()] = s.weights().choose();
+      p[s.monoid().choose()] = s.semiring().choose();
     return Element<algebra::Series<W,M>, algebra::polynom<Tm,Tw> >(s, p);
   }
 

@@ -120,7 +120,7 @@ namespace vcsn {
       }
       
       return_type tmp;
-      if ( ret.first != exp_.set().weights().zero(SELECT(weight_value_t)) )
+      if ( ret.first != exp_.set().semiring().zero(SELECT(weight_value_t)) )
       {
 	match(rhs);
 	list_multiply_here(result, ret.first);
@@ -257,7 +257,7 @@ namespace vcsn {
       return std::make_pair(exp_list_t(), false);
 
     // --------  If cterm != 0, look at the rest of the list  ---------------
-    if (cterm.first != exp.exp_set().weights().zero(SELECT(weight_value_t)) )
+    if (cterm.first != exp.exp_set().semiring().zero(SELECT(weight_value_t)) )
     {
       // Build an exp from the orignal, without the head
       exp_t new_exp(exp);

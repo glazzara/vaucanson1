@@ -86,7 +86,7 @@ namespace vcsn {
   {
     if (w == output_weight_t())
       w = algebra::identity_as<output_weight_value_t>
-	::of(series().weights().weights());
+	::of(series().semiring().semiring());
     return op_add_io_edge(this->set(), value(),
 			  from, to, i, o, w);
   }
@@ -101,7 +101,7 @@ namespace vcsn {
   {
     if (w == output_weight_t())
       w = algebra::identity_as<output_weight_value_t>
-	::of(series().weights().weights());
+	::of(series().semiring().semiring());
 
     return op_add_o_edge(this->set(), value(),
 			  from, to, o, w);
@@ -117,7 +117,7 @@ namespace vcsn {
   {
     if (w == output_weight_t())
       w = algebra::identity_as<output_weight_value_t>
-	::of(series().weights().weights());
+	::of(series().semiring().semiring());
 
     return op_add_i_edge(this->set(), value(),
 			 from, to, i, w);

@@ -41,7 +41,7 @@ namespace vcsn
   template <typename Series, typename T>
   PartialExp<Series, T>::PartialExp(const exp_t &e):
     rat_exp_(&e),
-    weight_(rat_exp_->set().weights().identity(
+    weight_(rat_exp_->set().semiring().identity(
       SELECT(typename weight_t::value_t))),
     ptr_list_()
   { }

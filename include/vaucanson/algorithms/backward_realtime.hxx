@@ -56,7 +56,7 @@ namespace vcsn {
     monoid_elt_t	  monoid_identity =
       algebra::identity_as<monoid_elt_value_t>::of(a.set().series().monoid());
     weight_t		  semiring_zero =
-      algebra::zero_as<weight_value_t>::of(a.set().series().weights());
+      algebra::zero_as<weight_value_t>::of(a.set().series().semiring());
     series_elt_t          series_identity =
       algebra::identity_as<serie_value_t>::of(a.set().series());
 

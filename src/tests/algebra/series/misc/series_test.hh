@@ -47,7 +47,7 @@ bool series_test(tests::Tester& t)
   typedef typename S::monoid_t			monoid_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
   typedef typename alphabet_t::letter_t		letter_t;
-  typedef typename S::weights_t			weights_t;
+  typedef typename S::semiring_t			semiring_t;
   typedef Element<S, T>				series_elt_t;
   typedef typename series_elt_t::monoid_elt_t   monoid_elt_t;
   typedef typename series_elt_t::weight_t	semiring_elt_t;
@@ -63,15 +63,15 @@ bool series_test(tests::Tester& t)
   alphabet.insert(b);
 
   monoid_t	monoid(alphabet);
-  weights_t	weights;
-  series_t	series(weights, monoid);
+  semiring_t	semiring;
+  series_t	series(semiring, monoid);
   monoid_elt_t  w1(a);
   monoid_elt_t  w2(b);
   series_elt_t     s1(series, w1);
   series_elt_t     s2(series, w2);
   series_elt_t     s3(series, series.identity(SELECT(T)));
   series_elt_t     s4(series, series.zero(SELECT(T)));
-  semiring_elt_t   zero = weights.zero(SELECT(semiring_value_t));
+  semiring_elt_t   zero = semiring.zero(SELECT(semiring_value_t));
 
   TEST(t, "get of series.", s1.get(w1) != zero);
   TEST(t, "set of series.", s1.get(w2) == zero);

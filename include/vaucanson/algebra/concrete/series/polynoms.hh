@@ -78,7 +78,7 @@ namespace vcsn {
       void		insert(const Tm& m, const Tw& w);
 
       template<typename W>
-      void		add(const W& weights, const Tm& m, const Tw& w);
+      void		add(const W& semiring, const Tm& m, const Tw& w);
       void		erase(iterator i);
       void		clear();
       void		swap(polynom<Tm, Tw>& other);
@@ -192,7 +192,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_assign(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>& weights,
+		 const algebra::SemiringBase<W>& semiring,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src);
 
@@ -226,18 +226,18 @@ namespace vcsn {
 				  const algebra::polynom<Tm, Tw>& b);
 
   /*---------------------------------------.
-    | foreign addition with weights elements |
+    | foreign addition with semiring elements |
     `---------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_add(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>& weights,
+		 const algebra::SemiringBase<W>& semiring,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   algebra::polynom<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-				  const algebra::SemiringBase<W>& weights,
+				  const algebra::SemiringBase<W>& semiring,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTw& b);
 
@@ -248,24 +248,24 @@ namespace vcsn {
   };
   
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& weights,
+  algebra::polynom<Tm, Tw> op_add(const algebra::SemiringBase<W>& semiring,
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b);
 
   /*-------------------------------------------.
-    | foreign multiplication by weights elements |
+    | foreign multiplication by semiring elements |
     `-------------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_mul(const algebra::Series<W, M>& s,
-		 const algebra::SemiringBase<W>& weights,
+		 const algebra::SemiringBase<W>& semiring,
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-				  const algebra::SemiringBase<W>& weights,
+				  const algebra::SemiringBase<W>& semiring,
 				  const algebra::polynom<Tm, Tw>& a,
 				  const oTw& b);
 
@@ -276,7 +276,7 @@ namespace vcsn {
   };
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& weights,
+  algebra::polynom<Tm, Tw> op_mul(const algebra::SemiringBase<W>& semiring,
 				  const algebra::Series<W, M>& s,
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b);

@@ -56,13 +56,13 @@ namespace vcsn {
       typedef typename R::set_t Automata;
       typedef typename Automata::series_t Series;
       typedef typename Series::monoid_t Monoid;
-      typedef typename Series::weights_t Weights;
+      typedef typename Series::semiring_t Semiring;
       typedef typename Monoid::alphabet_t Alphabet;
 
       Alphabet alpha;
       for (InputIterator e = begin; e != end; ++e)
 	alpha.insert(*e);
-      Weights semiring;
+      Semiring semiring;
       Monoid freemonoid(alpha);
       Series series(semiring, freemonoid);
       Automata automata_set(series);

@@ -402,7 +402,7 @@ namespace vcsn {
  			    op_serie_of(*s_, *v_, e).value(),
  			    w_.value())
  	      != algebra::zero_as<AutoType(weight_value_t)>
- 	      ::of(s_->series().weights()));
+ 	      ::of(s_->series().semiring()));
     }
 
     //  private:
@@ -439,7 +439,7 @@ namespace vcsn {
 	      .get(algebra::identity_as<AutoType(monoid_elt_value_t)>::of
 		   (s_.series().monoid()))
 	      != algebra::zero_as<AutoType(weight_value_t)>
-	      ::of(s_.series().weights()));
+	      ::of(s_.series().semiring()));
     }
 
   private:

@@ -154,8 +154,8 @@ namespace vcsn {
     /*! type of the letter. */
     typedef typename monoid_t::letter_t			      letter_t;
 
-    /*! type of the weights set. */
-    typedef typename series_t::weights_t		      weights_t;
+    /*! type of the semiring set. */
+    typedef typename series_t::semiring_t		      semiring_t;
 
     /*! type of the free monoid element. */
     typedef typename series_elt_t::weight_t		      weight_t;

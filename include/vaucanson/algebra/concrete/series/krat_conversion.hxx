@@ -92,8 +92,8 @@ namespace vcsn {
 						     const node_t* node_)
     {
       node_->accept(*this);
-      exp_ = op_mul(series_.weights(), series_, 
-		    op_convert(SELECT(typename Series_::weights_t),
+      exp_ = op_mul(series_.semiring(), series_, 
+		    op_convert(SELECT(typename Series_::semiring_t),
 			       SELECT(Tw),
 			       w),
 		    exp_);
@@ -106,8 +106,8 @@ namespace vcsn {
 						      const node_t* node_)
     {
       node_->accept(*this);
-      op_in_mul(series_, series_.weights(), exp_, 
-		op_convert(SELECT(typename Series_::weights_t),
+      op_in_mul(series_, series_.semiring(), exp_, 
+		op_convert(SELECT(typename Series_::semiring_t),
 			   SELECT(Tw),
 			   w));
     }

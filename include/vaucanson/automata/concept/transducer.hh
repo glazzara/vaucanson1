@@ -76,10 +76,10 @@ namespace vcsn {
   template <class S, class T>
   struct output_projection_helper
   {
-    typedef typename S::series_t::weights_t                    
+    typedef typename S::series_t::semiring_t                    
     typeof_auto_series_t;
     typedef typename S::series_t::monoid_t              auto_monoid_t;
-    typedef typename typeof_auto_series_t::weights_t           auto_semiring_t;
+    typedef typename typeof_auto_series_t::semiring_t           auto_semiring_t;
     typedef typename algebra::mute_series_traits<typeof_auto_series_t,
 						 auto_semiring_t,
 						 auto_monoid_t>::ret    
@@ -95,7 +95,7 @@ namespace vcsn {
   {
     typedef typename S::series_t	 series_t;
     typedef typename series_t::monoid_t  monoid_t;
-    typedef typename series_t::weights_t weights_t;
+    typedef typename series_t::semiring_t semiring_t;
     typedef typename algebra::mute_series_traits<series_t, series_t, monoid_t>
     ::ret    tseries_t;
     typedef typename extension_traits<T>::ret impl_t;

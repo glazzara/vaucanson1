@@ -135,7 +135,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_assign(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const W& semiring,
 		 rat::exp<Tm, Tw>& dst,
 		 const oTw& src);
 
@@ -185,7 +185,7 @@ namespace vcsn {
 			  const rat::exp<Tm, Tw>& b);
 
   /*---------------------------------------.
-  | foreign addition with weights elements |
+  | foreign addition with semiring elements |
   `---------------------------------------*/
 
 
@@ -197,24 +197,24 @@ namespace vcsn {
   
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_add(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const W& semiring,
 		 rat::exp<Tm, Tw>& dst,
 		 const oTw& src);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   rat::exp<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-			  const W& weights,
+			  const W& semiring,
 			  const rat::exp<Tm, Tw>& a,
 			  const oTw& b);
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  rat::exp<Tm, Tw> op_add(const W& weights,
+  rat::exp<Tm, Tw> op_add(const W& semiring,
 			  const algebra::Series<W, M>& s,
 			  const oTw& a,
 			  const rat::exp<Tm, Tw>& b);
 
   /*-------------------------------------------.
-  | foreign multiplication by weights elements |
+  | foreign multiplication by semiring elements |
   `-------------------------------------------*/
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
@@ -226,18 +226,18 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_mul(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const W& semiring,
 		 rat::exp<Tm, Tw>& ret,
 		 const oTw& w);
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   rat::exp<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-			  const W& weights,
+			  const W& semiring,
 			  const rat::exp<Tm, Tw>& a,
 			  const oTw& w);
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
-  rat::exp<Tm, Tw> op_mul(const W& weights,
+  rat::exp<Tm, Tw> op_mul(const W& semiring,
 			  const algebra::Series<W, M>& s,
 			  const oTw& w,
 			  const rat::exp<Tm, Tw>& b);

@@ -48,7 +48,7 @@ namespace vcsn {
   {
     // Get types which are useful to build the new type 
     typedef typename T::weight_value_t		orig_weight_value_t;
-    typedef typename S::weights_t		orig_semiring_t;
+    typedef typename S::semiring_t		orig_semiring_t;
     typedef typename S::monoid_t		orig_monoid_t;
     typedef typename orig_monoid_t::letter_t	orig_letter_t;
 

@@ -63,8 +63,8 @@ struct vcsn_context : vcsn::virtual_context
   const alphabet_t& alphabet() const
   { return set_->series().monoid().alphabet(); }
   
-  const weights_t& weights() const
-  { return set_->series().weights(); }
+  const semiring_t& semiring() const
+  { return set_->series().semiring(); }
   
   virtual std::list<char> alphabet_letters() const
   { return std::list<char>(alphabet().begin(), alphabet().end()); }
@@ -78,11 +78,11 @@ struct vcsn_context : vcsn::virtual_context
     return ret.str();
   }
 
-  virtual std::string describe_weights(bool cpp) const
+  virtual std::string describe_semiring(bool cpp) const
   { 
     std::string ret = "Semiring";
     if (cpp)
-      ret = ret + " <" + typeid(weights_t).name() + '>';
+      ret = ret + " <" + typeid(semiring_t).name() + '>';
     return ret;
   }
 
@@ -96,7 +96,7 @@ struct vcsn_context : vcsn::virtual_context
 
   virtual std::string describe_series(bool cpp) const
   { 
-    std::string ret = "Series (" + describe_weights(cpp) 
+    std::string ret = "Series (" + describe_semiring(cpp) 
       + ", " + describe_monoid(cpp) + ')';
     if (cpp)
       ret = ret + " <" + typeid(series_t).name() + '>';
@@ -154,7 +154,7 @@ namespace FAMILY ##_types				\
   FAMILY ##_context					\
   make_context(const FAMILY ##_alphabet_t& alpha)	\
   {							\
-    FAMILY ##_weights_t semiring;			\
+    FAMILY ##_semiring_t semiring;			\
     FAMILY ##_monoid_t monoid(alpha);			\
     FAMILY ##_series_t series(semiring, monoid);	\
     FAMILY ##_automata_set_t automata_set(series);	\
@@ -168,11 +168,11 @@ namespace FAMILY ##_types										\
   inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_monoid_t& m)				\
   { return o << '<' << typeid(m).name() << "> FreeMonoid (" << m.alphabet() << ')'; }			\
 													\
-  inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_weights_t& w)			\
+  inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_semiring_t& w)			\
   { return o << '<' << typeid(w).name() << "> Semiring"; }						\
 													\
   inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_series_t& s)				\
-  { return o << '<' << typeid(s).name() << "> Series (" << s.weights() << ", " << s.monoid() << ')'; }	\
+  { return o << '<' << typeid(s).name() << "> Series (" << s.semiring() << ", " << s.monoid() << ')'; }	\
     													\
   inline std::ostream& operator<<(std::ostream& o, const FAMILY ##_automata_set_t& a)			\
   { return o << '<' << typeid(a).name() << "> AutomataSet (" << a.series() << ')'; }			\

@@ -6,9 +6,9 @@ related to a particular algebraic configuration.
 
 The following categories are predefined:
 
-* usual: bool weights, string words, polynom as serie_t, exp as exp_t
-* numerical: int weights, string words, polynom as serie_t, exp as exp_t
-* tropical_min: int weights / tmin, string words, polynom as serie_t, exp as exp_t
+* usual: bool semiring, string words, polynom as serie_t, exp as exp_t
+* numerical: int semiring, string words, polynom as serie_t, exp as exp_t
+* tropical_min: int semiring / tmin, string words, polynom as serie_t, exp as exp_t
 * tropical_max: int weights / tmin, string words, polynom as serie_t, exp as exp_t
 
 They are those defined in usual.hh. Adding more categories is done by
@@ -36,7 +36,7 @@ The module vaucanswig_D_context contains:
       standard vaucanson constructors and operators
       make(const std::string&);
       D_monoid_elt_t identity();
-* D_weights_t:
+* D_semiring_t:
       standard vaucanson constructors and operators
       make(int);
       D_weight_t identity();
@@ -57,7 +57,7 @@ The module vaucanswig_D_context contains:
       D_context(const D_context&);
       accessors:
          automata_set(), series(), 
-         monoid(), alphabet(), weights()
+         monoid(), alphabet(), semiring()
       shortcut constructors:
          D_weight_t(int);
          D_monoid_elt_t(const std::string&);

@@ -66,7 +66,7 @@ namespace vcsn {
     std::vector<weight_t>		v1(max_hstate_t + 1);
     std::vector<weight_t>		v2(max_hstate_t + 1);
     std::list<hedge_t>			delta_ret;
-    const typename weight_t::set_t	&semiring = a.set().series().weights();
+    const typename weight_t::set_t	&semiring = a.set().series().semiring();
     weight_t zero = semiring.zero(SELECT(typename weight_t::value_t));
     typename auto_t::monoid_elt_t empty;
 

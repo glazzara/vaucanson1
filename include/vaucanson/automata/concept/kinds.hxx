@@ -235,7 +235,7 @@ namespace vcsn {
     const Series& s = auto_self().series();
     
     series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
-    return se *= weight_t(s.weights(), label.first);
+    return se *= weight_t(s.semiring(), label.first);
   }
   
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
@@ -247,7 +247,7 @@ namespace vcsn {
     const Series& s = auto_self().series();
     
     series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
-    return (se *= weight_t(s.weights(), label.first)).value();
+    return (se *= weight_t(s.semiring(), label.first)).value();
   }
 
     template<typename Self, typename Series, typename SeriesT, typename LabelT>
@@ -317,7 +317,7 @@ namespace vcsn {
 	.add_edge(from, to, 
 		  std::make_pair(identity_value(SELECT(monoid_t), 
 						SELECT(typename monoid_elt_t::value_t)), 
-				 identity_value(SELECT(weights_t), 
+				 identity_value(SELECT(semiring_t), 
 						SELECT(typename weight_t::value_t)))
 		  );
     }
@@ -334,7 +334,7 @@ namespace vcsn {
       return auto_self().add_edge
 	(from, 
 	 to, 
-	 std::make_pair(identity_value(SELECT(weights_t), 
+	 std::make_pair(identity_value(SELECT(semiring_t), 
 				       SELECT(typename weight_t::value_t)),
 			monoid_elt_t(auto_self().series().monoid(), l).value()));
     }

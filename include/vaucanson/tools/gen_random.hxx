@@ -68,7 +68,7 @@ namespace vcsn {
     for (unsigned i = 0; i < 2 + nb; ++i)
       alpha.insert(alpha.random_letter());
     monoid_t monoid(alpha);
-    weights_t semi;
+    semiring_t semi;
     series_t series(semi, monoid);
     automata_set_t aset(series);
     TAutomata work(aset);
@@ -102,7 +102,7 @@ namespace vcsn {
 	alpha.insert(l);
       }
     monoid_t monoid(alpha);
-    weights_t semi;
+    semiring_t semi;
     series_t series(semi, monoid);
     automata_set_t aset(series);
     TAutomata work(aset);
@@ -232,7 +232,7 @@ namespace vcsn {
       alpha.insert(alpha.random_letter());
 
     monoid_t m(alpha);
-    weights_t s;
+    semiring_t s;
     series_t series(s, m);
     automata_set_t as(series);
     automaton_t work(as);

@@ -60,7 +60,7 @@ int main(int argc, char **argv)
   alpha.insert('b');
   alpha.insert('c');
   monoid_t freemonoid(alpha);
-  weights_t semiring;
+  semiring_t semiring;
   series_t series(semiring, freemonoid);
 
   // Set krat value

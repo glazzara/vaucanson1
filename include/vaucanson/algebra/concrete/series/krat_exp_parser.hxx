@@ -280,7 +280,7 @@ namespace vcsn {
        *
        * @param in The rational expression to lex, as a string.
        * @param e The element which will be used later for parsing.
-       *          It used to guess words and weights types.
+       *          It used to guess words and semiring types.
        */
       void
       lex(const std::string& in, const Element<S, T>& e)
@@ -450,7 +450,7 @@ namespace vcsn {
       typedef typename Element<S, T>::monoid_value_t  monoid_value_t;
       typedef typename monoid_elt_t::set_t	      monoid_t;
       typedef typename Element<S, T>::weight_t	      weight_t;
-      typedef typename weight_t::set_t		      weights_t;
+      typedef typename weight_t::set_t		      semiring_t;
       typedef typename Element<S, T>::weight_value_t  weight_value_t;
       typedef std::list<krat_exp_token_t>	      token_stream_t;
       
@@ -612,7 +612,7 @@ namespace vcsn {
 	    // i.e. in "1 2" or "0 2".
 	    // token may even be a word!
 	    // i.e. in '2 3' when 2 is in the alphabet
-	    weight_t w (exp.set().weights(), lexer_.first().as_weight());
+	    weight_t w (exp.set().semiring(), lexer_.first().as_weight());
 	    bool just_a_weight = true;
 	    Element<S, T> m (exp.set());
 	    if (lexer_.first().is_a(zero))

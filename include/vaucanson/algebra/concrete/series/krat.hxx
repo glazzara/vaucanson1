@@ -217,7 +217,7 @@ namespace vcsn {
       n_lweight_t *p = dynamic_cast<n_lweight_t*>(arg.base());
       if (p->child_->what() == node_t::one)
       {
-	op_in_mul(s, s.weights(), dst, p->weight_);
+	op_in_mul(s, s.semiring(), dst, p->weight_);
         return;
       }
     }
@@ -231,7 +231,7 @@ namespace vcsn {
       n_lweight_t *p = dynamic_cast<n_lweight_t*>(dst.base());
       if (p->child_->what() == node_t::one)
 	// case (k 1) * E' -> k E'
-	dst = op_mul(s.weights(), s, p->weight_, arg);
+	dst = op_mul(s.semiring(), s, p->weight_, arg);
       else
 	// case (k E) * E' -> k (E * E')
 	p->child_ = new n_prod_t(p->child_, arg.base()->clone());
@@ -254,7 +254,7 @@ namespace vcsn {
       n_lweight_t *p = dynamic_cast<n_lweight_t*>(dst.base());
       if (p->child_->what() == node_t::one)
       {
-	dst = op_mul(s.weights(), s, p->weight_, arg);
+	dst = op_mul(s.semiring(), s, p->weight_, arg);
         return;
       }
     }
@@ -349,7 +349,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_assign(const algebra::Series<W, M>&,
-		 const W& weights,
+		 const W& semiring,
 		 rat::exp<Tm, Tw>& dst,
 		 const oTw& src)
   {
@@ -436,17 +436,17 @@ namespace vcsn {
   }
 
   /*---------------------------------------.
-    | foreign addition with weights elements |
+    | foreign addition with semiring elements |
     `---------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_in_add(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const W& semiring,
 		 rat::exp<Tm, Tw>& dst,
 		 const oTw& src)
   { 
-    precondition(& s.weights() == & weights);
+    precondition(& s.semiring() == & semiring);
     op_in_add(s, dst, op_convert(SELECT2(algebra::Series<W, M>),
 				 SELECT2(rat::exp<Tm, Tw>),
 				 SELECT(W),
@@ -456,39 +456,39 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   rat::exp<Tm, Tw> op_add(const algebra::Series<W, M>& s,
-			  const W& weights,
+			  const W& semiring,
 			  const rat::exp<Tm, Tw>& a,
 			  const oTw& b)
   { 
     rat::exp<Tm, Tw> ret(a);
-    op_in_add(s, weights, ret, b);
+    op_in_add(s, semiring, ret, b);
     return ret;
   }
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   inline
-  rat::exp<Tm, Tw> op_add(const W& weights,
+  rat::exp<Tm, Tw> op_add(const W& semiring,
 			  const algebra::Series<W, M>& s,
 			  const oTw& a,
 			  const rat::exp<Tm, Tw>& b)
   { 
     rat::exp<Tm, Tw> ret(b);
-    op_in_add(s, weights, ret, a);
+    op_in_add(s, semiring, ret, a);
     return ret;
   }
 
   /*-------------------------------------------.
-    | foreign multiplication by weights elements |
+    | foreign multiplication by semiring elements |
     `-------------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   void op_in_mul(const algebra::Series<W, M>& s,
-		 const W& weights,
+		 const W& semiring,
 		 rat::exp<Tm, Tw>& ret,
 		 const oTw& w)
   { 
-    precondition(& s.weights() == & weights);
+    precondition(& s.semiring() == & semiring);
 
     typedef rat::Node<Tm, Tw>				node_t;
     typedef typename rat::Node<Tm, Tw>::type		type;
@@ -538,7 +538,7 @@ namespace vcsn {
 	if (child_type == node_t::one)
 	  { 
 	    op_in_mul
-	      (s.weights(), p->weight_, op_convert(SELECT(W), SELECT(Tw), w)); 
+	      (s.semiring(), p->weight_, op_convert(SELECT(W), SELECT(Tw), w)); 
 	    return; 
 	  }
       }
@@ -548,7 +548,7 @@ namespace vcsn {
     // case (E k') * k -> E [k' k]
     if (this_type == node_t::rweight)
       {
-	op_in_mul(s.weights(),
+	op_in_mul(s.semiring(),
 		  dynamic_cast<n_rweight_t* >(ret.base())
 		  ->weight_, op_convert(SELECT(W), SELECT(Tw), w));
 	return;
@@ -564,23 +564,23 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
   rat::exp<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
-			  const W& weights,
+			  const W& semiring,
 			  const rat::exp<Tm, Tw>& a,
 			  const oTw& w)
   { 
     rat::exp<Tm, Tw> ret(a);
-    op_in_mul(s, weights, ret, w);
+    op_in_mul(s, semiring, ret, w);
     return ret;
   }
 
   template<typename W, typename M, typename oTw, typename Tm, typename Tw>
   inline
-  rat::exp<Tm, Tw> op_mul(const W& weights,
+  rat::exp<Tm, Tw> op_mul(const W& semiring,
 			  const algebra::Series<W, M>& s,
 			  const oTw& w,
 			  const rat::exp<Tm, Tw>& b)
   { 
-    precondition(& s.weights() == & weights);
+    precondition(& s.semiring() == & semiring);
 
     typedef rat::Node<Tm, Tw>				node_t;
     typedef typename rat::Node<Tm, Tw>::type		type;
@@ -618,7 +618,7 @@ namespace vcsn {
       {
 	n_lweight_t* p = dynamic_cast<n_lweight_t*>(ret.base());
 	p->weight_ = op_mul
-	  (s.weights(), op_convert(SELECT(W), SELECT(Tw), w), p->weight_);
+	  (s.semiring(), op_convert(SELECT(W), SELECT(Tw), w), p->weight_);
 	return ret;
       }
 
@@ -733,7 +733,7 @@ namespace vcsn {
 	    {
 	      Element<algebra::Series<W,M>, rat::exp<Tm,Tw> > 
 		ep(s, s.monoid().choose(SELECT(Tm)));
-	      ep = ep * s.weights().choose(SELECT(Tw));
+	      ep = ep * s.semiring().choose(SELECT(Tw));
 	      unsigned t = RAND___(2);
 	      if (t < 1)
 		e = e + ep;
@@ -746,7 +746,7 @@ namespace vcsn {
 	    {
 	      Element<algebra::Series<W,M>, rat::exp<Tm,Tw> > 
 		ep(s, s.monoid().choose(SELECT(Tm)));
-	      ep = ep * s.weights().choose(SELECT(Tw));
+	      ep = ep * s.semiring().choose(SELECT(Tw));
 	      unsigned t = RAND___(2);
 	      if (t < 1)
 		e = e * ep;

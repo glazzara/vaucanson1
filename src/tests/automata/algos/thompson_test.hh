@@ -58,7 +58,7 @@ bool thompson_test(tests::Tester& tg)
   alphabet.insert(a);
   alphabet.insert(b);
   monoid_t monoid(alphabet);
-  weights_t semiring;
+  semiring_t semiring;
   series_t s(semiring, monoid);
 
   unsigned nb_word_test = 100;
@@ -81,7 +81,7 @@ bool thompson_test(tests::Tester& tg)
 	monoid_elt_t w = exp.choose_from_supp();
 	if (t.verbose() == tests::high)
 	  std::cout << "TEST: thompson " << i << " : test " << w << std::endl;
-	if (eval(au, w) == zero_as<weight_value_t>::of(s.weights()))
+	if (eval(au, w) == zero_as<weight_value_t>::of(s.semiring()))
 	  {
 	    break;
 	    if (t.verbose() == tests::high)
@@ -115,7 +115,7 @@ bool thompson_test(tests::Tester& tg)
 	      if (t.verbose() == tests::high)
 		std::cout << "TEST: thompson (" << nb << ")" 
 			  << i << " : test " << w << std::endl;
-	      if (eval(au, w) == zero_as<weight_value_t>::of(s.weights()))
+	      if (eval(au, w) == zero_as<weight_value_t>::of(s.semiring()))
 		{
 		  if (t.verbose() == tests::high)
 		    std::cout << "TEST: thompson " << i << " failed." << std::endl;

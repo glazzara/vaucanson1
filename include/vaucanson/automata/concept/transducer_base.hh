@@ -121,7 +121,7 @@ namespace vcsn {
 						output_monoid_elt_value_t;
 
     /*! type of the output monoid. */
-    typedef typename weights_t::monoid_t	output_monoid_t;
+    typedef typename semiring_t::monoid_t	output_monoid_t;
 
     /*! type of the output monoid element. */
     typedef Element<output_monoid_t, output_monoid_elt_value_t>
@@ -145,11 +145,11 @@ namespace vcsn {
     typedef typename algebra::series_traits<weight_value_t>::weight_value_t
     output_weight_value_t;
     
-    /*! type of the output weights. */
-    typedef typename weights_t::weights_t	output_weights_t;
+    /*! type of the output semiring. */
+    typedef typename semiring_t::semiring_t	output_semiring_t;
 
     /*! type of the output weight. */
-    typedef Element<output_weights_t, output_weight_value_t>
+    typedef Element<output_semiring_t, output_weight_value_t>
     output_weight_t;
 
     /*! return the input of an edge */

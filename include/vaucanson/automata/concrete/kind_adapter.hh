@@ -152,7 +152,7 @@ namespace vcsn {
     w = op_letter_of(a_set, v, e);				\
     Element<series_t, serie_value_t> s(a_set.series());		\
     s.assoc(w, algebra::identity_as<weight_value_t>		\
-	    ::of(a_set.series().weights()));			\
+	    ::of(a_set.series().semiring()));			\
     return s;							\
   }		
 

@@ -117,7 +117,7 @@ namespace vcsn {
 	    undefined = true;
 	    return return_type();
 	  }
-	if ( ret.first != exp_.set().weights().zero(SELECT(weight_value_t)) )
+	if ( ret.first != exp_.set().semiring().zero(SELECT(weight_value_t)) )
 	  return (match(lhs) ^ rhs) + (ret.first ^ match(rhs));
 	else
 	  return (match(lhs) ^ rhs);

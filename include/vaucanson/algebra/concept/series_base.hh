@@ -52,19 +52,19 @@ namespace vcsn {
       typedef typename virtual_types<Self>::monoid_t  monoid_t;
 
       //! The type of the semiring K.
-      typedef typename virtual_types<Self>::weights_t weights_t;
+      typedef typename virtual_types<Self>::semiring_t semiring_t;
 
       //! Accessor to the monoid (const version).
       const monoid_t&	monoid() const;      
 
       //! Accessor to the semiring (const version).
-      const weights_t&  weights() const;
+      const semiring_t&  semiring() const;
 
       //! Accessor to the monoid.
       monoid_t&		monoid();
 
       //! Accessor to the semiring.      
-      weights_t&	weights(); 
+      semiring_t&	semiring(); 
 
     protected:
       //! Default constructor is protected since it is an abstract class.
@@ -114,7 +114,7 @@ namespace vcsn {
     : virtual_types<algebra::SemiringBase<S> >
   {
      typedef undefined_type monoid_t;
-     typedef undefined_type weights_t;
+     typedef undefined_type semiring_t;
   };
   
   /*---------------------------------.
@@ -133,7 +133,7 @@ namespace vcsn {
     typedef typename algebra::series_traits<T>::monoid_value_t    monoid_value_t;
 
     //! type of the element of the semiring element.
-    typedef Element<typename Self::weights_t, weight_value_t> weight_t;
+    typedef Element<typename Self::semiring_t, weight_value_t> weight_t;
 
     //! type of the element of the monoid.
     typedef Element<typename Self::monoid_t, monoid_value_t>	 monoid_elt_t;

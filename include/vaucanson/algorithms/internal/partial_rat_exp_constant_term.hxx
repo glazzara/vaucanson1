@@ -49,7 +49,7 @@ namespace vcsn {
     typedef
     std::pair<typename Element<Series, T>::weight_t, bool>	result_t;
     
-    weight_t 	res 	  = exp.exp_set().weights().identity(
+    weight_t 	res 	  = exp.exp_set().semiring().identity(
 			      SELECT(typename weight_t::value_t));;
     bool	undefined = false;
     

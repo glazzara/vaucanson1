@@ -59,7 +59,7 @@ namespace vcsn {
     typedef std::vector<weight_t>                      matrix_weight_initial_t;
 
     series_elt_t            serie_identity  = a.series().zero_; 
-    weight_t	            weight_zero     = a.series().weights().wzero_; 
+    weight_t	            weight_zero     = a.series().semiring().wzero_; 
     monoid_elt_t            monoid_identity = a.series().monoid().empty_; 
     
     int                     i, j, k, size = a.states().size();
@@ -69,8 +69,8 @@ namespace vcsn {
     matrix_weight_initial_t m_winitial(size), m_winitial_tmp(size);
     
     for (i = 0; i < size; i++){
-      m_weight[i].resize(size, weight_t(a.series().weights()));
-      m_weight_tmp[i].resize(size, weight_t(a.series().weights()));
+      m_weight[i].resize(size, weight_t(a.series().semiring()));
+      m_weight_tmp[i].resize(size, weight_t(a.series().semiring()));
       m_series[i].resize(size, series_elt_t(a.series()));
       m_series_ret[i].resize(size, series_elt_t(a.series()));
     }

@@ -73,7 +73,7 @@ namespace vcsn {
       std::pair<weight_t, bool>	c_term = constant_term(e);
       if (!c_term.second)
 	undefined = true;
-      if (c_term.first != e.exp_set().weights().zero(SELECT(weight_value_t)))
+      if (c_term.first != e.exp_set().semiring().zero(SELECT(weight_value_t)))
 	set_final(c_term.first);
 
       // Create links between current state and states corresponding to
@@ -90,7 +90,7 @@ namespace vcsn {
 	  series_elt_t s_elt(e.exp_set(), monoid_elt_t(*a));
 	  s_elt = p_exp.weight() * s_elt;
 	  p_exp.weight() =
-	    e.exp_set().weights().identity(SELECT(weight_value_t));
+	    e.exp_set().semiring().identity(SELECT(weight_value_t));
 	  link_to(p_exp, s_elt);
 	}
       }

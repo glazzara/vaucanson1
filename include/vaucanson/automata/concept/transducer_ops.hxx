@@ -66,8 +66,8 @@ namespace vcsn {
 		 AutoType(output_weight_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
-    AutoType(output_monoid_elt_t) output_w(s.series().weights().monoid(), o);
-    AutoType(output_serie_t) os(s.series().weights());
+    AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);
+    AutoType(output_serie_t) os(s.series().semiring());
     os.assoc(output_w, w);
     AutoType(serie_t) is(s.series());
     is.assoc(input_w, os);
@@ -84,8 +84,8 @@ namespace vcsn {
 		 AutoType(output_weight_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
-    AutoType(output_monoid_elt_t) output_w(s.series().weights().monoid());
-    AutoType(output_serie_t) os(s.series().weights());
+    AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid());
+    AutoType(output_serie_t) os(s.series().semiring());
     os.assoc(output_w, w);
     AutoType(serie_t) is(s.series());
     is.assoc(input_w, os);
@@ -102,8 +102,8 @@ namespace vcsn {
 		 AutoType(output_weight_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid());
-    AutoType(output_monoid_elt_t) output_w(s.series().weights().monoid(), o);
-    AutoType(output_serie_t) os(s.series().weights());
+    AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);
+    AutoType(output_serie_t) os(s.series().semiring());
     os.assoc(output_w, w);
     AutoType(serie_t) is(s.series());
     is.assoc(input_w, os);

@@ -47,8 +47,8 @@ namespace vcsn {
       alpha.insert('a');
       alpha.insert('b');
       monoid_t		monoid(alpha);
-      weights_t		weights;
-      series_t		series(weights, monoid);
+      semiring_t		semiring;
+      series_t		series(semiring, monoid);
       automaton_t	automaton;
       automaton.create();
       automaton.series() = series;

@@ -38,29 +38,29 @@ namespace vcsn {
   namespace algebra {
 
     /*------------------------.
-    | Series<Weights, Monoid> |
+    | Series<Semiring, Monoid> |
     `------------------------*/
     
-    template<typename Weights, typename Monoid>
-    Series<Weights, Monoid>::Series(const Weights& w, const Monoid& m)
-      : weights_(w), monoid_(m) 
+    template<typename Semiring, typename Monoid>
+    Series<Semiring, Monoid>::Series(const Semiring& w, const Monoid& m)
+      : semiring_(w), monoid_(m) 
     {}
     
-    template<typename Weights, typename Monoid>
-    Series<Weights, Monoid>::Series(const Series& other) : 
-      SeriesBase<Series<Weights,Monoid> >(other),
-      weights_(other.weights_), 
+    template<typename Semiring, typename Monoid>
+    Series<Semiring, Monoid>::Series(const Series& other) : 
+      SeriesBase<Series<Semiring,Monoid> >(other),
+      semiring_(other.semiring_), 
       monoid_(other.monoid_)
     {}
     
-    template<typename Weights, typename Monoid>
-    const Weights& Series<Weights, Monoid>::weights() const
+    template<typename Semiring, typename Monoid>
+    const Semiring& Series<Semiring, Monoid>::semiring() const
     { 
-      return weights_.get(); 
+      return semiring_.get(); 
     }
     
-    template<typename Weights, typename Monoid>
-    const Monoid& Series<Weights, Monoid>::monoid() const
+    template<typename Semiring, typename Monoid>
+    const Monoid& Series<Semiring, Monoid>::monoid() const
     { 
       return monoid_.get(); 
     }
@@ -70,7 +70,7 @@ namespace vcsn {
 		    const Series<W, M>& s2)
     {
       return & s1.monoid() == & s2.monoid() &&
-	& s1.weights() == & s2.weights();
+	& s1.semiring() == & s2.semiring();
     }
 
     template <class W, class M, class NewW, class NewM>

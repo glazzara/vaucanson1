@@ -40,7 +40,7 @@
 /*** Structural element extraction ***/
 #define SERIES_OF(Self) (Self)->set().series()
 #define MONOID_OF(Self) (Self)->set().series().monoid()
-#define WEIGHTS_OF(Self) (Self)->set().series().weights()
+#define WEIGHTS_OF(Self) (Self)->set().series().semiring()
 #define ALPHABET_OF(Self) (Self)->set().series().monoid().alphabet()
 
 /*** Convenient macros ***/

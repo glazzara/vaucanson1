@@ -49,10 +49,10 @@ namespace vcsn {
     }
     
     template<class Self>
-    const typename SeriesBase<Self>::weights_t& 
-    SeriesBase<Self>::weights() const
+    const typename SeriesBase<Self>::semiring_t& 
+    SeriesBase<Self>::semiring() const
     { 
-      return self().weights(); 
+      return self().semiring(); 
     }
 
     template<class Self>
@@ -63,10 +63,10 @@ namespace vcsn {
     }
 
     template<class Self>     
-    typename SeriesBase<Self>::weights_t& 
-    SeriesBase<Self>::weights() 
+    typename SeriesBase<Self>::semiring_t& 
+    SeriesBase<Self>::semiring() 
     { 
-      return self().weights(); 
+      return self().semiring(); 
     }
 
     template<class Self>     
@@ -97,7 +97,7 @@ namespace vcsn {
   typename MetaElement<algebra::SeriesBase<S>, T>::weight_t 
   MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_t& m) const
   { 
-    return weight_t(this->set().weights(), value_get(m.value())); 
+    return weight_t(this->set().semiring(), value_get(m.value())); 
   }
 
   template<typename S, typename T>
@@ -106,7 +106,7 @@ namespace vcsn {
 					   const weight_value_t& w) 
   { 
     // assertion(set().monoid().contains(m));
-    // assertion(set().weights().contains(w));
+    // assertion(set().semiring().contains(w));
     return op_series_set(this->set(), value(), m, w);
   }
 
@@ -210,7 +210,7 @@ namespace vcsn {
     typedef typename algebra::series_traits<T2>::support_t support_t;
     typedef typename algebra::series_traits<T1>::weight_value_t weight_value_t;
     for_each_const_(support_t, e, s2.supp())
-      s1.assoc(*e, algebra::identity_as<weight_value_t>::of(s1.set().weights()));
+      s1.assoc(*e, algebra::identity_as<weight_value_t>::of(s1.set().semiring()));
   }
 
   template <class S, class T>

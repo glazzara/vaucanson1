@@ -58,10 +58,10 @@ namespace vcsn {
       {}
 
       weight_t	one()
-      { return exp_.set().weights().identity(SELECT(weight_value_t)); }
+      { return exp_.set().semiring().identity(SELECT(weight_value_t)); }
 
       weight_t zero()
-      { return exp_.set().weights().zero(SELECT(weight_value_t)); }
+      { return exp_.set().semiring().zero(SELECT(weight_value_t)); }
 
       MATCH__(Product, lhs, rhs)
       {

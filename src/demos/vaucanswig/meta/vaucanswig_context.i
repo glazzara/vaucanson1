@@ -132,22 +132,22 @@ namespace Kind ##_types
 
   /*** Semirings ***/
 
-  struct Kind ##_weights_t;
+  struct Kind ##_semiring_t;
 
   struct Kind ##_weight_t
   {
     Kind ##_weight_t(const Kind ##_weight_t&);
-    Kind ##_weight_t(const Kind ##_weights_t&);
-    Kind ##_weight_t(const Kind ##_weights_t&, int);
-    const Kind ##_weights_t& set() const;
+    Kind ##_weight_t(const Kind ##_semiring_t&);
+    Kind ##_weight_t(const Kind ##_semiring_t&, int);
+    const Kind ##_semiring_t& set() const;
     EXTEND_DESCRIBE(Kind ##_weight_t)
     semiring_ops(Kind ##_weight_t)
   };
 
-  struct Kind ##_weights_t 
+  struct Kind ##_semiring_t 
   {
-    Kind ##_weights_t();
-    EXTEND_DESCRIBE(Kind ##_weights_t)
+    Kind ##_semiring_t();
+    EXTEND_DESCRIBE(Kind ##_semiring_t)
     %extend {
       Kind ##_weight_t make(int i)
 	{ return Kind ##_weight_t(*self, i); }
@@ -190,13 +190,13 @@ namespace Kind ##_types
   };
 
   struct Kind ##_series_t {
-    Kind ##_series_t(const Kind ##_weights_t&, const Kind ##_monoid_t&);
+    Kind ##_series_t(const Kind ##_semiring_t&, const Kind ##_monoid_t&);
     const Kind ##_monoid_t& monoid() const;
-    const Kind ##_weights_t& weights() const;
+    const Kind ##_semiring_t& semiring() const;
     EXTEND_DESCRIBE(Kind ##_series_t)
     %extend {
     Kind ##_serie_t make(int i) const
-    { return Kind ##_serie_t(*self, Kind ##_weight_t(self->weights(), i)); }
+    { return Kind ##_serie_t(*self, Kind ##_weight_t(self->semiring(), i)); }
     Kind ##_serie_t make(const std::string& l) const
     { return Kind ##_serie_t(*self, Kind ##_monoid_elt_t(self->monoid(), l)); }
 
@@ -228,11 +228,11 @@ namespace Kind ##_types
     const Kind ##_series_t& series() const;
     const Kind ##_monoid_t& monoid() const;
     const Kind ##_alphabet_t& alphabet() const;
-    const Kind ##_weights_t& weights() const;
+    const Kind ##_semiring_t& semiring() const;
 
     virtual std::list<char> alphabet_letters() const;
     virtual std::string describe_alphabet(bool with_cpp = false) const;
-    virtual std::string describe_weights(bool with_cpp = false) const;
+    virtual std::string describe_semiring(bool with_cpp = false) const;
     virtual std::string describe_monoid(bool with_cpp = false) const;
     virtual std::string describe_series(bool with_cpp = false) const;
     virtual std::string describe_automata_set(bool with_cpp = false) const;
@@ -241,7 +241,7 @@ namespace Kind ##_types
 
     %extend {
       Kind ##_weight_t weight(int i) const
-	{ return Kind ##_weight_t(self->weights(), i); }
+	{ return Kind ##_weight_t(self->semiring(), i); }
       Kind ##_monoid_elt_t word(const std::string& l) const
 	{ 
 	  for (unsigned i = 0; i < l.size(); ++i)
@@ -250,7 +250,7 @@ namespace Kind ##_types
 	  return Kind ##_monoid_elt_t(self->monoid(), l); 
 	}
       Kind ##_serie_t serie(int i) const
-	{ return Kind ##_serie_t(self->series(), Kind ##_weight_t(self->weights(), i)); }
+	{ return Kind ##_serie_t(self->series(), Kind ##_weight_t(self->semiring(), i)); }
       Kind ##_serie_t serie(const std::string& l) const
 	{ 
 	  for (unsigned i = 0; i < l.size(); ++i)
