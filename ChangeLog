@@ -1,3 +1,8 @@
+2004-07-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/static_boolean.cc: Build a simpler automaton as
+	example. Fix the filename in comments.
+
 2004-07-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/demos/fibonacci/generalized.cc: Fix a small detail to avoid

@@ -1,4 +1,4 @@
-// boolean.cc: this file is part of the Vaucanson project.
+// static_boolean.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004 The Vaucanson Group.
@@ -31,7 +31,7 @@
 //
 
 /*
- * @file boolean.cc
+ * @file static_boolean.cc
  *
  * Takes two arguments: either "load" or "save" and then a file name.
  *
@@ -87,7 +87,7 @@ main(int argc, char** argv)
     }
   else if (std::string(argv[1]) == "save")
     {
-      const int div = 7;
+      const int div = 3;
 
       for (int i = 0; i < div; ++i)
 	a.add_state();
