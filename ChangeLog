@@ -1,3 +1,8 @@
+2003-12-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx:
+	  Minor fix.
+
 2003-12-10  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/Makefile.am: Update.

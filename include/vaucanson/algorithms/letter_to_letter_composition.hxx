@@ -1,4 +1,4 @@
-// letter_to_letter_composition.hxx: this file is part of the Vaucanson project.
+// letter_to_letter_composition.hxx:this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -46,19 +46,19 @@ namespace vcsn {
 				  const Element<Self, T>& g)
   {
     typedef Element<Self, T> transducer_t;
-    AUTOMATON_TYPES(transducer_t);
-    
+    AUTOMATON_TYPES(transducer_t);    
     typedef std::map<std::pair<hstate_t, hstate_t>, hstate_t> assoc_t;
     typedef std::set<hedge_t> delta_ret_t;
 
     semiring_t output_series(f.series().semiring().semiring(), 
-			    f.series().semiring().monoid());
+			     f.series().semiring().monoid());
     series_t series(output_series, g.series().monoid());
     automata_set_t set(series);
     transducer_t output(set);
-
     delta_ret_t f_delta_ret, g_delta_ret;
     assoc_t conv;
+    series_elt_t zero = algebra::zero_as<serie_value_t>::of(output.series());
+
     for_each_state(s, f)
       for_each_state(t, g)
       {
@@ -93,16 +93,17 @@ namespace vcsn {
 		    semiring_elt_t ol = l.get(*supp);
 		    typedef typename semiring_elt_t::support_t wsupport_t;
 		    wsupport_t wsupp = ol.supp();
+		    serie_t ts(series, monoid_elt_t(*supp));
 		    for_all_const_(wsupport_t, ss, wsupp)
-		      l__ += serie_t(monoid_elt_t(*supp)) * l_.get(*ss);
+		      l__ += ts * l_.get(*ss);
 		  }
-		if (l__ != 
-		    output.series().zero(SELECT(serie_value_t)))
+		if (l__ != zero)
 		  {
-		    output.add_edge(conv[std::make_pair(*s, *t)],
-				    conv[std::make_pair(f.aim_of(*lhs_e),
-							g.aim_of(*rhs_e))],
-				    l__);
+		    output.add_serie_edge(conv[std::make_pair(*s, *t)],
+					  conv[std::make_pair(f.aim_of(*lhs_e),
+							      g.aim_of(*rhs_e))
+					  ],
+					  l__);
 		  }
 	      }
 	  }
