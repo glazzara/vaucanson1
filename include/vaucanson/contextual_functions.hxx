@@ -33,6 +33,11 @@
 # include <vaucanson/contextual_functions.hh>
 
 # include <vaucanson/algorithms/standard_of.hh>
+# include <vaucanson/algorithms/thompson.hh>
+
+/*----------------.
+| new_automaton() |
+`----------------*/
 
 template <class InputIterator>
 automaton_t new_automaton(InputIterator begin,
@@ -54,6 +59,10 @@ automaton_t new_automaton(const T& alphabet)
   return new_automaton(alphabet.begin(), alphabet.end());
 }
 
+/*--------------.
+| standard_of() |
+`--------------*/
+
 template <class SeriesImpl>
 automaton_t
 do_standard_of(const series_t& structure, const SeriesImpl& impl)
@@ -68,6 +77,26 @@ automaton_t
 standard_of(const Element<SeriesSet, SeriesImpl>& e)
 {
   return do_standard_of(e.structure(), e.value());
+}
+
+/*--------------.
+| thompson_of() |
+`--------------*/
+
+template <class SeriesImpl>
+automaton_t
+do_thompson_of(const series_t& structure, const SeriesImpl& impl)
+{
+  automaton_t r = new_automaton(structure.monoid().alphabet());
+  thompson_of(r, impl);
+  return r;
+}
+
+template <class SeriesSet, class SeriesImpl>
+automaton_t
+thompson_of(const Element<SeriesSet, SeriesImpl>& e)
+{
+  return do_thompson_of(e.structure(), e.value());
 }
 
 #endif // ! VCSN_CONTEXTUAL_FUNCTIONS_HXX

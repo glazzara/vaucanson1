@@ -1,5 +1,13 @@
 2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/contextual_functions.hxx,
+	* include/vaucanson/contextual_functions.hh: Add a version of
+	thompson_of with a unique rational expression as argument.
+	* src/tests/context_headers/automata/global_consistency_test.hh: Update
+	to check thompson_of.
+
+2004-04-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/tests-suites/context_headers_r.defs,
 	* src/tests/tests-suites/context_headers_z.defs,
 	* src/tests/tests-suites/context_headers_boolean.defs,

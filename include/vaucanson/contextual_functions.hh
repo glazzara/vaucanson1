@@ -42,6 +42,12 @@ template <class SeriesSet, class SeriesImpl>
 automaton_t
 standard_of(const Element<SeriesSet, SeriesImpl>& e);
 
+
+template <class SeriesSet, class SeriesImpl>
+automaton_t
+thompson_of(const Element<SeriesSet, SeriesImpl>& e);
+
+
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/contextual_functions.hxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY

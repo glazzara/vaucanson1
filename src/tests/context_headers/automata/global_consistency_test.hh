@@ -72,10 +72,9 @@ global_consistency_test(tests::Tester& t)
 
   automaton_t		a1 = new_automaton(at);
   automaton_t		a2 = new_automaton(at.begin(), at.end());
-  automaton_t		a3 = standard_of(e);
-  automaton_t		a4 (aa);
-
-  standard_of(a4, e.value());
+  automaton_t		a3 (aa);
+  automaton_t		a4 = standard_of(e);
+  automaton_t		a5 = thompson_of(e);
 
   TEST(t, "new_automaton is consistent.", a1 == a2);
   TEST(t, "new_automaton gives a correct alphabet.",
@@ -85,7 +84,12 @@ global_consistency_test(tests::Tester& t)
   TEST(t, "new_automaton gives a correct semiring.",
        a1.structure().series().semiring() == sg);
   TEST(t, "new_automaton gives a correct automata set.", a1.structure() == aa);
+
+  standard_of(a3, e.value());
   TEST(t, "standard_of is consistent.", a3 == a4);
+
+  thompson_of(a3, e.value());
+  TEST(t, "thompson_of is consistent.", a3 == a5);
 
   return t.all_passed();
 }
