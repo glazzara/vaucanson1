@@ -33,39 +33,42 @@
 /*
  * @file algorithms.cc
  *
- * ./algorithms <algorithm> (<exp> | <file>)
+ * Run  various algorithms.  Results are  dumped  in a  XML format  on
+ * stdout.
  *
- * Run various algorithms on R automata with numerical semiring. Results are
- * dumped in a XML format on stdout.
+ * Valid invocations are:
  *
- * Valid algorithms are:
- *
- * standard_of
- * thompson_of
- * derivatives_automaton
- * aut_to_exp
- * quotient
- * product
- * closure
- * determinize
- * trim
- * display - not really an algorithm. Display the automaton using dotty.
+ * standard_of <exp>
+ * thompson_of <exp>
+ * derivatives_automaton <exp>
+ * aut_to_exp <file>
+ * quotient <file>
+ * product <file1> <file2>
+ * closure <file>
+ * determinize <file>
+ * trim <file>
+ * transpose <file>
+ * eval <file> <string>
+ * display <file>
  */
 
 #include <fstream>
 #include <cstdlib>
 
-#include <vaucanson/r_automaton.hh>
+#include CONTEXT_HEADER
 #include <vaucanson/xml/static.hh>
 
 #include <vaucanson/algorithms/derivatives_automaton.hh>
 #include <vaucanson/algorithms/product.hh>
+#include <vaucanson/algorithms/transpose.hh>
+#include <vaucanson/algorithms/eval.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/closure.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/algorithms/trim.hh>
-#include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 #include <vaucanson/tools/dot_display.hh>
+
+using namespace CONTEXT_NAMESPACE;
 
 void
 usage(int, char** argv)
@@ -75,40 +78,27 @@ usage(int, char** argv)
   exit(1);
 }
 
-vcsn::r_automaton::alphabet_t
+alphabet_t
 alphabet()
 {
-  vcsn::r_automaton::alphabet_t	a;
+  alphabet_t	a;
   a.insert('a');
   a.insert('b');
-  a.insert('c');
   return a;
 }
 
-vcsn::r_automaton::rat_exp_t
+rat_exp_t
 get_exp(std::string s)
 {
-  using namespace vcsn::r_automaton;
-
-  rat_exp_t r = new_rat_exp(alphabet());
-  std::pair<bool, std::string> p = parse(s, r);
-  if (p.first)
-    {
-      std::cerr << "FATAL: Invalid expression: " << p.second << "."
-		<< std::endl;
-      exit(1);
-    }
-  else
-    return r;
+  return new_rat_exp(alphabet(), s);
 }
 
-vcsn::r_automaton::automaton_t
+automaton_t
 get_aut(std::string s)
 {
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
     {
-      using namespace vcsn::r_automaton;
       using namespace vcsn::io;
       using namespace vcsn::xml;
 
@@ -129,14 +119,13 @@ get_aut(std::string s)
 int
 main(int argc, char** argv)
 {
-  using namespace vcsn::r_automaton;
   using namespace vcsn::io;
   using namespace vcsn::xml;
 
   std::string cmd;
   if (argc > 1)
     cmd = argv[1];
-  if (argc != 3 and (argc != 4 or cmd != "product"))
+  if (argc != 3 and (argc != 4 or (cmd != "product" and cmd != "eval")))
     usage(argc, argv);
 
   XML_BEGIN;
@@ -178,6 +167,12 @@ main(int argc, char** argv)
     std::cout << automaton_saver(trim(get_aut(argv[2])),
 				 string_out (),
 				 xml_loader ());
+  else if (cmd == "transpose")
+    std::cout << automaton_saver(transpose(get_aut(argv[2])),
+				 string_out (),
+				 xml_loader ());
+  else if (cmd == "eval")
+    std::cout << eval(get_aut(argv[2]), std::string (argv[3])) << std::endl;
   else if (cmd == "display")
     vcsn::tools::dot_display(get_aut(argv[2]), "A", true);
   else

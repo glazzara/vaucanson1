@@ -1,3 +1,16 @@
+2004-09-06  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	This change  updates algorithms.cc according  to the modifications
+	that have been done at CIAA 2004 for demonstrations. The universal
+	automaton  computation  algorithm, however,  has  not been  added,
+	since  no generic  algorithm  exists  in Vaucanson  to  do such  a
+	computation.
+
+	* src/demos/xml/Makefile.am: Compile algorithms.cc for various
+	contexts.
+	* src/demos/xml/algorithms.cc: Update. Add transpose and eval to
+	the list of algorithms.
+
 2004-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh:
