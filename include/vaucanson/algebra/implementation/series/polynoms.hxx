@@ -624,17 +624,16 @@ namespace vcsn {
   template <typename Ost, typename T>
   Ost& escaped_output(Ost& ost, const std::set<char>& escaped, const T& t)
   {
-    std::ostringstream o_str;
+    std::ostringstream	o_str;
     o_str << t;
+    std::string		w = o_str.str();
 
-    for (typename std::string::const_iterator i = o_str.str().begin();
-	 i != o_str.str().end();
-	 ++i)
-    {
-      if (escaped.find(*i) != escaped.end())
-	ost << "\\";
-      ost << *i;
-    }
+    for (std::string::const_iterator i = w.begin(); i != w.end(); ++i)
+      {
+	if (escaped.find(*i) != escaped.end())
+	  ost << "\\";
+	ost << *i;
+      }
     return ost;
   }
 
