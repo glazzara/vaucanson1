@@ -1,4 +1,6 @@
-// contextual_transducer_functions.hxx: this file is part of the Vaucanson project.
+//								-*- c++ -*-
+// contextual_transducer_functions.thxx: this file is part of the 
+// Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004 The Vaucanson Group.
