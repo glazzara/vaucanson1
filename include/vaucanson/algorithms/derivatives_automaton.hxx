@@ -31,13 +31,12 @@
 # define VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/standard.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
-# include <vaucanson/algorithms/krat_exp_partial_derivation.hh>
-# include <vaucanson/algorithms/krat_exp_constant_term.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/algorithms/internal/build_pattern.hh>
-# include <vaucanson/algebra/concrete/series/krat_coefficient.hh>
+# include <vaucanson/algorithms/internal/partial_rat_exp.hh>
+# include <vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh>
+# include <vaucanson/algorithms/internal/partial_rat_exp_derivation.hh>
+# include <vaucanson/algorithms/krat_exp_realtime.hh>
 
 namespace vcsn {
 
@@ -45,27 +44,28 @@ namespace vcsn {
   
   // In order to avoid re-calculation, the algorithm building
   // derivatives automaton is implemented in a incremental way
-  template <typename T_auto, typename Exp>
+  template <typename T_auto, typename S, typename T>
   struct DerivativesAlgo : public IncAutomataConstructor <
-    DerivativesAlgo<T_auto, Exp>,
+    DerivativesAlgo<T_auto, S, T>,
     T_auto,
-    Exp >  
+    PartialExp<S, T> >  
   {
-    typedef typename std::set<Exp>::iterator	set_iterator;
+    typedef PartialExp<S, T>				exp_t;
+    typedef std::list<exp_t>				exp_list_t;
+    typedef typename exp_list_t::iterator		exp_list_iterator;
     AUTOMATON_TYPES(T_auto);
     
     // Contructor -> initialize mother class and undefined attribute,
     // which indicate if the resulting automaton is valide
-    DerivativesAlgo(const series_t& series, const Exp& exp):
-      IncAutomataConstructor<DerivativesAlgo, T_auto, Exp>(series, exp),
+    DerivativesAlgo(const series_t& series, const Element<S, T>& exp):
+      IncAutomataConstructor<DerivativesAlgo, T_auto, PartialExp<S, T> >
+        (series, prat_exp_convert(exp)),
       undefined(false)
     {}
 
     // Function applied on each state
-    void on_state(const Exp& e)
+    void on_state(const PartialExp<S, T>& e)
     {
-      AUTOMATON_TYPES(T_auto);
-      
       alphabet_t alpha = get()->series().monoid().alphabet();
 
       // Test the constant term of current expression
@@ -73,22 +73,25 @@ namespace vcsn {
       std::pair<weight_t, bool>	c_term = constant_term(e);
       if (!c_term.second)
 	undefined = true;
-      if (c_term.first != e.set().weights().zero(SELECT(weight_value_t)))
+      if (c_term.first != e.exp_set().weights().zero(SELECT(weight_value_t)))
 	set_final(c_term.first);
 
       // Create links between current state and states corresponding to
       // partial derivatives of current expression
       for (alphabet_iterator a = alpha.begin(); a != alpha.end(); ++a)
       {
-	std::pair<std::set<Exp>, bool>	s = partial_derivate(e, *a);
+	std::pair<std::list<PartialExp<S, T> >, bool> 
+	  s = prat_exp_derivate(e, *a);
 	if (!s.second)
 	  undefined = true;
-	for (set_iterator i = s.first.begin(); i != s.first.end(); ++i)
+	for (exp_list_iterator i = s.first.begin(); i != s.first.end(); ++i)
 	{
-	  std::pair<weight_t, Exp> coef = coefficient(*i);
-	  series_elt_t s_elt;
-	  s_elt.value_set(monoid_elt_t(*a), coef.first);
-	  link_to(coef.second, s_elt);
+	  PartialExp<S, T> p_exp = *i;
+	  series_elt_t s_elt(e.exp_set(), monoid_elt_t(*a));
+	  s_elt = p_exp.weight() * s_elt;
+	  p_exp.weight() =
+	    e.exp_set().weights().identity(SELECT(weight_value_t));
+	  link_to(p_exp, s_elt);
 	}
       }
     }
@@ -96,10 +99,12 @@ namespace vcsn {
     bool undefined;
   };
 
-  template<typename T_auto, typename Exp>
-  T_auto*	do_derivatives_automaton(const T_auto& out, const Exp &kexp)
+  template<typename T_auto, typename S, typename T>
+  T_auto*	do_derivatives_automaton(const T_auto& out,
+					 const Element<S, T>& kexp)
   {
-    DerivativesAlgo<T_auto, Exp> derivatives_algo(out.series(), kexp);
+    Element<S, T> exp = realtime(kexp);
+    DerivativesAlgo<T_auto, S, T> derivatives_algo(out.series(), exp);
     derivatives_algo.run();
     if (derivatives_algo.undefined)
     {
@@ -119,7 +124,7 @@ namespace vcsn {
       out = *result;
   }
 
-  // The function called by <<user>>
+  // The function called by <<user>> returning a fresh automaton
   template<typename A, typename T, typename Exp>
   Element<A, T>	derivatives_automaton(const Exp& kexp)
   {

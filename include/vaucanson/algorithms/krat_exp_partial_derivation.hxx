@@ -196,7 +196,7 @@ namespace vcsn {
   {
     algebra::KRatExpPartialDerivation<Series, T, algebra::DispatchFunction<T> > 
       matcher(exp, a);
-    std::set<Element<Series, T> > ret = matcher.match(exp);
+    std::set<Element<Series, T> > ret = matcher.match(exp.value());
     if (matcher.undefined)
       return std::make_pair(ret, false);
     return std::make_pair(ret, true);

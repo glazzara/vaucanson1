@@ -2,6 +2,6 @@
 #
 # $Id$
 
-SUBDIRS = algebra
+SUBDIRS = algebra algorithms
 
 
