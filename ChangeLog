@@ -1,3 +1,16 @@
+2004-03-17  Loïc Fosse  <loic.fosse@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/derivations/cderivation/Makefile.am: Add
+	  new test files.
+	* src/tests/tests-suites/generate-all.sh: Change derivation tests
+	  generation.
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_zero_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_sum_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_star_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_product_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_letter_test.hh,
+	  src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_identity_test.hh: New.
+
 2004-03-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat_exp_transpose.hxx:

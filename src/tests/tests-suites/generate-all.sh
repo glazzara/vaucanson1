@@ -36,7 +36,12 @@
 ../bin/generate-test-suite.sh \
    algebra_series_krat_derivation \
    algebra_series_krat_derivation.defs \
-   ../algebra/series/krat/derivations
+   ../algebra/series/krat/derivations/derivation
+
+../bin/generate-test-suite.sh \
+   algebra_series_krat_cderivation \
+   algebra_series_krat_cderivation.defs \
+   ../algebra/series/krat/derivations/cderivation
 
 ../bin/generate-test-suite.sh \
    algebra_series_misc \
