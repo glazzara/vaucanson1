@@ -1,5 +1,16 @@
 2004-03-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx: Rename
+	MetaElement<SeriesBase<S>, T>::value_get() to get().
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/determinize.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/extension.hxx: Use previous renaming
+	to simplify the code.
+
+2004-03-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concept/alphabets_base.hh,
 	* include/vaucanson/algebra/concept/alphabets_base.hxx: Add a
 	max_size() method to Element<AlphabetSet<S>, T>.

@@ -1,7 +1,7 @@
 // eval.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -97,9 +97,8 @@ namespace vcsn {
 	    delta_ret.clear();
 	    a.letter_deltac(delta_ret, i, *e, delta_kind::edges());
 	    for_all_const_(std::list<hedge_t>, l, delta_ret)
-	      v2[a.aim_of(*l)] +=
-	      v1[i] * a.serie_of(*l).get(monoid_elt_t(a.series().monoid(),
-						      *e));
+	      v2[a.aim_of(*l)] += v1[i] *
+	      a.serie_of(*l).get(monoid_elt_t(a.set().series().monoid(), *e));
 	  }
 	std::swap(v1, v2);
       }

@@ -147,8 +147,7 @@ namespace vcsn {
 	    m != supp.end(); ++m)
 	  {
 	    t_weight_t tmp(t.set().series().semiring());
-	    tmp.assoc(a_neutre,
-		      s.get(a_monoid_elt_t(a.set().series().monoid(), *m)));
+	    tmp.assoc(a_neutre, s.get(*m));
 	    os.assoc(a_monoid_elt_t (a.set().series().monoid(), *m), tmp);
 	  }
 

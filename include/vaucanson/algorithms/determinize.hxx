@@ -1,7 +1,7 @@
 // determinize.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -226,7 +226,7 @@ namespace vcsn {
 	      {
 		series_elt_t s_ = input.serie_of(*k);
 		for_all_(support_t, supp, s.supp())
-		  if (s_.value_get(*supp) != zero_semiring)
+		  if (s_.get(*supp) != zero_semiring)
 		    return false;
 	      }
 	  }

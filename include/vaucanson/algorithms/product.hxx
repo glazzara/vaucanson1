@@ -116,10 +116,7 @@ namespace vcsn {
 		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
 
 		for_all_(support_t, supp, s.supp())
-		  s__.value_set(*supp,
-				(s_.get(monoid_elt_t(s.set().monoid(), *supp)) *
-				 s.get(monoid_elt_t(s.set().monoid(), *supp)))
-				.value());
+		  s__.value_set(*supp, s_.get(*supp) * s.get(*supp));
 
 		if (s__ != series_zero)
 		  {

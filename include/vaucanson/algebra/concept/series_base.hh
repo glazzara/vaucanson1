@@ -1,7 +1,7 @@
 // series_base.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -45,7 +45,7 @@ namespace vcsn {
     /// Structural element of series K<A*> from a free monoid A* to a
     /// semiring K.
     template<class Self>
-    struct SeriesBase 
+    struct SeriesBase
       : SemiringBase<Self>
     {
       /// The type of the free monoid A*.
@@ -55,7 +55,7 @@ namespace vcsn {
       typedef typename virtual_types<Self>::semiring_t semiring_t;
 
       /// Accessor to the monoid (const version).
-      const monoid_t&	monoid() const;      
+      const monoid_t&	monoid() const;
 
       /// Accessor to the semiring (const version).
       const semiring_t&  semiring() const;
@@ -63,8 +63,8 @@ namespace vcsn {
       /// Accessor to the monoid.
       monoid_t&		monoid();
 
-      /// Accessor to the semiring.      
-      semiring_t&	semiring(); 
+      /// Accessor to the semiring.
+      semiring_t&	semiring();
 
     protected:
       /// Default constructor is protected since it is an abstract class.
@@ -116,13 +116,13 @@ namespace vcsn {
     typedef undefined_type monoid_t;
     typedef undefined_type semiring_t;
   };
-  
+
   /*---------------------------------.
   | MetaElement<SeriesBase<Self>, T> |
   `---------------------------------*/
   /// Services of every serie.
   template<class Self, typename T>
-  class MetaElement<algebra::SeriesBase<Self>, T> 
+  class MetaElement<algebra::SeriesBase<Self>, T>
     : public MetaElement<algebra::SemiringBase<Self>, T>
   {
   public:
@@ -144,17 +144,17 @@ namespace vcsn {
     /// type of the iterator over the series when finite.
     typedef typename algebra::series_traits<T>::support_t	support_t;
 
-    /// returns the weight associated to a word. 
-    semiring_elt_value_t	value_get(const monoid_value_t& m) const;
+    /// returns the weight associated to a word.
+    semiring_elt_value_t	get(const monoid_value_t& m) const;
 
-    /// returns the weight associated to a word. 
+    /// returns the weight associated to a word.
     semiring_elt_t		get(const monoid_elt_t& m) const;
 
-    /// associates a semiring_elt to a word. 
-    void		value_set(const monoid_value_t& m, 
+    /// associates a semiring_elt to a word.
+    void		value_set(const monoid_value_t& m,
 				  const semiring_elt_value_t& w);
 
-    /// associates a weight to a word. 
+    /// associates a weight to a word.
     void		assoc(const monoid_elt_t& m, const semiring_elt_t& w);
 
     /// returns true if the serie support is finite.
@@ -191,7 +191,7 @@ namespace vcsn {
   bool
   is_letter_support(const Element<S, T>& s);
 
-  /// make the first serie be the support of the second. 
+  /// make the first serie be the support of the second.
   template <typename S1, typename S2, typename T1, typename T2>
   void
   extract_support(Element<S1, T1>&, Element<S2, T2>&);
@@ -200,23 +200,23 @@ namespace vcsn {
   template <class S, class T>
   Element<S, T> hadamard(const Element<S, T>& lhs,
 			 const Element<S, T>& rhs);
-  
+
   /** @} @} */
 
   template <typename S, typename T>
-  bool	
+  bool
   op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t);
 
   template <typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t 
+  typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
 
   op_choose_from_supp(const algebra::SeriesBase<S>& s, const T& t);
 
   template <class S, class T>
   Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T));
-  
+
   template <typename S, typename T, typename M, typename W>
-  void	
+  void
   op_series_set(const algebra::SeriesBase<S>& s, const T& t, const W& w);
 
   template <class S, class T>
@@ -225,7 +225,7 @@ namespace vcsn {
 
   template <class S, class T>
   T op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const T& src_);
-  
+
   template <class S, class T, class U>
   T op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), U& src_);
 
@@ -235,6 +235,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/concept/series_base.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGEBRA_CONCEPT_SERIES_BASE_HH

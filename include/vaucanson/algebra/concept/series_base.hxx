@@ -38,8 +38,8 @@ namespace vcsn {
   namespace algebra {
 
     /*-----------------.
-      | SeriesBase<Self> |
-      `-----------------*/
+    | SeriesBase<Self> |
+    `-----------------*/
 
     template<class Self>
     const typename SeriesBase<Self>::monoid_t&
@@ -82,12 +82,12 @@ namespace vcsn {
 
 
     /*---------------------------------.
-      | MetaElement<SeriesBase<Self>, T> |
-      `---------------------------------*/
+    | MetaElement<SeriesBase<Self>, T> |
+    `---------------------------------*/
 
   template<typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_value_t
-  MetaElement<algebra::SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
+  MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_value_t& m) const
   {
     // assertion(set().monoid().contains(m));
     return op_series_get(this->set(), this->value(), m);
@@ -97,13 +97,13 @@ namespace vcsn {
   typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_t
   MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_t& m) const
   {
-    return semiring_elt_t(this->set().semiring(), value_get(m.value()));
+    return semiring_elt_t(this->set().semiring(), get(m.value()));
   }
 
   template<typename S, typename T>
   void
   MetaElement<algebra::SeriesBase<S>, T>::value_set(const monoid_value_t& m,
-					   const semiring_elt_value_t& w)
+						    const semiring_elt_value_t& w)
   {
     // assertion(set().monoid().contains(m));
     // assertion(set().semiring().contains(w));
@@ -251,7 +251,7 @@ namespace vcsn {
     support_t support = src.supp();
     for_each_const_(support_t, ss, support)
       dst += src.get(monoid_elt_t(s.monoid(), *ss)) *
-        Element<S, T>(s.self(), monoid_elt_t(s.monoid(), *ss));
+      Element<S, T>(s.self(), monoid_elt_t(s.monoid(), *ss));
     return dst.value();
   }
 
