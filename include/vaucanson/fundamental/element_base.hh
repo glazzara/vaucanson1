@@ -1,14 +1,11 @@
-/***************************************
- * <vaucanson/fundamental/element_base.hh> *
- ***************************************/
+// fundamental/element_base.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project. */
+// VCSN_HEADER
 #ifndef FUNDAMENTAL_ELEMENT_BASE_HH
 # define FUNDAMENTAL_ELEMENT_BASE_HH
 
-# include <vaucanson/fundamental/struct_decl.hh>
-# include <vaucanson/misc/static.hh>
+# include <vaucanson/fundamental/predefs.hh>
 
 namespace vcsn
 {

@@ -1,13 +1,11 @@
-/**************************************
- * <vaucanson/algebra/element_ops.hh> *
- **************************************/
+// fundamental/elements_ops.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef FUNDAMENTAL_ELEMENTS_OPS_HH
 # define FUNDAMENTAL_ELEMENTS_OPS_HH
 
-# include <vaucanson/fundamental/struct_decl.hh>
+# include <vaucanson/fundamental/predefs.hh>
 # include <vaucanson/fundamental/op_traits.hh>
 # include <vaucanson/misc/static.hh>
 

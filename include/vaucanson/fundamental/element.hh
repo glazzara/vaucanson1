@@ -1,13 +1,11 @@
-/*********************************************************
- * <vaucanson/algebra/element.hh>: the wizard's workshop *
- *********************************************************/
+// fundamental/element.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project. */
+// VCSN_HEADER
 #ifndef FUNDAMENTAL_ELEMENT_HH
 # define FUNDAMENTAL_ELEMENT_HH
 
-#include <vaucanson/fundamental/struct_decl.hh>
+#include <vaucanson/fundamental/predefs.hh>
 
 namespace vcsn
 {

@@ -1,9 +1,8 @@
-/****************************************
- * <vaucanson/algebra/element_base.hxx> *
- ****************************************/
+// fundamental/element_base.hxx
+//
 // $Id$
+// VCSN_HEADER
 
-/* this file is part of the Vaucanson project. */
 #ifndef ALGEBRA_ELEMENT_BASE_HXX
 # define ALGEBRA_ELEMENT_BASE_HXX
 
@@ -35,9 +34,6 @@ namespace vcsn
       return self().value(); 
     }
     
-    // it can happen that we want different behaviours depending
-    // on the set the value comes from. Hence the third argument.
-
 #define ELEMENT_IN_OPERATOR(Op, HookName)				 \
       template <typename S, typename T>					 \
       template<typename OtherS, typename U>				 \
