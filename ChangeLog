@@ -1,5 +1,18 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/tools/dot_dump.hh,
+	include/vaucanson/tools/dot_format.hxx,
+	include/vaucanson/tools/dot_format.hh,
+	include/vaucanson/tools/io.hxx,
+	include/vaucanson/tools/io.hh,
+	include/vaucanson/tools/simple_format.hxx,
+	include/vaucanson/tools/simple_format.hh,
+	include/vaucanson/tools/usual_io.hxx,
+	include/vaucanson/tools/usual_io.hh: Update header.
+	* reheader.pl: Strip leading `./' in filenames.
+
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/tools/dot_format.hxx,
 	* include/vaucanson/tools/dot_format.hh,
 	* include/vaucanson/tools/io.hxx,

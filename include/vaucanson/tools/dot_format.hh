@@ -1,4 +1,4 @@
-// dot_dump.hh: this file is part of the Vaucanson project.
+// dot_format.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003 The Vaucanson Group.
@@ -27,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_MISC_DOT_DUMP_HH
-# define VCSN_MISC_DOT_DUMP_HH
+#ifndef VCSN_TOOLS_DOT_FORMAT_HH
+# define VCSN_TOOLS_DOT_FORMAT_HH
 
 #include <string>
 
@@ -53,4 +53,4 @@ namespace vcsn
 
 # include <vaucanson/tools/dot_format.hxx>
 
-#endif
+#endif // VCSN_TOOLS_DOT_FORMAT_HH

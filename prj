@@ -1,45 +1,28 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 373)
-(Parent-Version vaucanson 0 372)
+(Project-Version vaucanson 0 374)
+(Parent-Version vaucanson 0 373)
 (Version-Log "
 ChangeLog addition:
 
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
-	* include/vaucanson/tools/dot_format.hxx,
-	* include/vaucanson/tools/dot_format.hh,
-	* include/vaucanson/tools/io.hxx,
-	* include/vaucanson/tools/io.hh: Update. Fix bugs.
-
-	* include/vaucanson/tools/usual_io.hh,
-	include/vaucanson/tools/usual_io.hxx,
+	* include/vaucanson/tools/dot_dump.hh,
+	include/vaucanson/tools/dot_format.hxx,
+	include/vaucanson/tools/dot_format.hh,
+	include/vaucanson/tools/io.hxx,
+	include/vaucanson/tools/io.hh,
+	include/vaucanson/tools/simple_format.hxx,
 	include/vaucanson/tools/simple_format.hh,
-	include/vaucanson/tools/simple_format.hxx: New.
-	* include/Makefile.am: Update accordingly.
-
-	* src/tests/sanity/generate_files.sh (AM_CPPFLAGS): Mention
-	'/include'.
-	* configure.ac: Re-activate testsuites.
-
-
-src/demos/vaucanswig/ChangeLog addition:
-
-2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
-
-	* meta/vaucanswig_context.i: Dot not include 'dot_dump.hh'.
-	* meta/vauto.hh: Fix includes. Update I/O method prototypes.
-	* meta/automaton.hh: Update accordingly. Add new I/O.
-	* meta/automaton.hh (MAKE_VAUTO_TYPES): Mention converter.
-	* meta/vaucanswig_automaton.i: Update declarations. Add new I/O.
-	* meta/vaucanswig_core.i: Reorder to recognise std::string.
-	* meta/vauto.cc: Add new I/O.
+	include/vaucanson/tools/usual_io.hxx,
+	include/vaucanson/tools/usual_io.hh: Update header.
+	* reheader.pl: Strip leading './' in filenames.
 
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Mon, 14 Jul 2003 00:28:33 +0200")
+(Checkin-Time "Mon, 14 Jul 2003 00:35:30 +0200")
 (Checkin-Login elrond)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -122,13 +105,13 @@ src/demos/vaucanswig/ChangeLog addition:
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.9 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.10 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 664))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.14 664))
 
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
-  (reheader.pl (vaucanson/q/40_reheader.p 1.3 775))
+  (reheader.pl (vaucanson/q/40_reheader.p 1.4 775))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.15 600))
   (README (vaucanson/f/48_README 1.8 600))
@@ -270,7 +253,7 @@ src/demos/vaucanswig/ChangeLog addition:
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.8 664))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.8 664))
   (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.24 664))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.38.1.1 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.38.1.1 664))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.8 664))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.9 664))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.6 664))
@@ -279,7 +262,7 @@ src/demos/vaucanswig/ChangeLog addition:
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.8 664))
   (include/vaucanson/algebra/concrete/series/krat_coefficient.hxx (vaucanson/p/23_krat_coeff 1.2.1.1 664))
   (include/vaucanson/algebra/concrete/series/krat_coefficient.hh (vaucanson/p/24_krat_coeff 1.2 664))
-  (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.6.1.1 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.6.1.1 664))
   (include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx (vaucanson/p/32_krat_exp_i 1.3 664))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.20 664))
   (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.29 664))
@@ -471,15 +454,15 @@ src/demos/vaucanswig/ChangeLog addition:
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.32 664))
   (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.10 664))
   (include/vaucanson/tools/usual.hxx (vaucanson/q/29_usual.hxx 1.3 664))
-  (include/vaucanson/tools/dot_dump.hh (vaucanson/q/31_dot_dump.h 1.4 664))
-  (include/vaucanson/tools/dot_format.hxx (vaucanson/r/25_dot_format 1.2 664))
-  (include/vaucanson/tools/dot_format.hh (vaucanson/r/26_dot_format 1.2 664))
-  (include/vaucanson/tools/io.hxx (vaucanson/r/27_io.hxx 1.2 664))
-  (include/vaucanson/tools/io.hh (vaucanson/r/28_io.hh 1.2 664))
-  (include/vaucanson/tools/simple_format.hxx (vaucanson/r/30_simple_for 1.1 664))
-  (include/vaucanson/tools/simple_format.hh (vaucanson/r/31_simple_for 1.1 664))
-  (include/vaucanson/tools/usual_io.hxx (vaucanson/r/32_usual_io.h 1.1 664))
-  (include/vaucanson/tools/usual_io.hh (vaucanson/r/33_usual_io.h 1.1 664))
+  (include/vaucanson/tools/dot_dump.hh (vaucanson/q/31_dot_dump.h 1.5 664))
+  (include/vaucanson/tools/dot_format.hxx (vaucanson/r/25_dot_format 1.3 664))
+  (include/vaucanson/tools/dot_format.hh (vaucanson/r/26_dot_format 1.3 664))
+  (include/vaucanson/tools/io.hxx (vaucanson/r/27_io.hxx 1.3 664))
+  (include/vaucanson/tools/io.hh (vaucanson/r/28_io.hh 1.3 664))
+  (include/vaucanson/tools/simple_format.hxx (vaucanson/r/30_simple_for 1.2 664))
+  (include/vaucanson/tools/simple_format.hh (vaucanson/r/31_simple_for 1.2 664))
+  (include/vaucanson/tools/usual_io.hxx (vaucanson/r/32_usual_io.h 1.2 664))
+  (include/vaucanson/tools/usual_io.hh (vaucanson/r/33_usual_io.h 1.2 664))
 
   (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
   (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.12 600))

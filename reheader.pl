@@ -39,6 +39,7 @@ my $header = "// %BASENAME%: this file is part of the Vaucanson project.
 my $fname = $ARGV[0];
 
 $_ = $fname;
+s,^./,,g;
 s,^src/,,g;
 s,^include/vaucanson/,,g;
 my $shortname = $_;
