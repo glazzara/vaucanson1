@@ -33,6 +33,7 @@
 # define VCSN_TESTS_TRANSDUCERS_REALTIME_TEST_HH
 
 # include <vaucanson/algorithms/is_realtime.hh>
+# include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/tools/gen_random.hh>
 
 
@@ -45,16 +46,41 @@ unsigned realtime_test(tests::Tester& tg)
   tests::Tester			t(tg.verbose());
   GenRandomAutomata<Transducer> gen(time(0x0));
 
-  const unsigned nb_ok_tests     = 20;
+  const unsigned nb_tests     = 20;
   bool error = false;
 
-  for (unsigned i = 0; i < nb_ok_tests; i++)
+  for (unsigned i = 0; i < nb_tests; i++)
     {
       automaton_t t = gen.generate(50, 60);;
       if (!is_realtime(t))
 	error = true;
     }
   TEST(t, "is_realtime on realtime ", not error);
+  error = false;
+
+  for (unsigned i = 0; i < nb_tests; i++)
+    {
+      automaton_t t = gen.generate_with_epsilon(50, 60, 1, 15);;
+      if (is_realtime(t))
+	error = true;
+    }
+  TEST(t, "is_realtime on non-realtime ", not error);
+
+  error = false;
+  for (unsigned i = 0; i < nb_tests; i++)
+    {
+      automaton_t automata = gen.generate_with_epsilon(4, 8, 1, 2);
+      try
+      	{
+	  automaton_t non_epsilon = realtime(automata);
+ 	  if (!is_realtime(non_epsilon))
+ 	    error = true;
+	}
+      catch (std::logic_error&)
+	{
+	}
+    }
+  TEST(t, "realtime on non-realtime ", not error);
   return t.all_passed();
 }
 

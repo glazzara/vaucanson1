@@ -59,7 +59,10 @@ namespace vcsn {
 
     matrix_series_set_elt_t	m_series(size), m_series_ret(size);
     matrix_semiring_elt_t	m_semiring_elt(size), m_semiring_elt_tmp(size);
-    matrix_semiring_elt_final_t	m_wfinal(size), m_wfinal_tmp(size);
+    semiring_elt_t init(a.structure().series().semiring());
+
+    matrix_semiring_elt_final_t	m_wfinal(size, init),
+			        m_wfinal_tmp(size, init);
 
     for (i = 0; i < size; i++)
       {
