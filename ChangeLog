@@ -1,3 +1,7 @@
+2004-10-18  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* NEWS: Minor fixes.
+
 2004-10-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/demos/vaucanswig/expand.sh: Swig use -noruntime instead of -c.

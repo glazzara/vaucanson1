@@ -4,9 +4,9 @@
 
 ** Vaucanson works with g++ 3.2, 3.3, 3.4 and ICC 8.1.
 
-** Vaucanswig is no more enabled by default.
+** Vaucanswig is no longer enabled by default.
 
-If you want to enable the compilation of Vaucanswig, run:
+To enable the compilation of Vaucanswig, run:
 
 ./configure --enable-vaucanswig
 
@@ -24,7 +24,7 @@ z_max_plus: tropical semiring with (max, +) on Z.
 z_min_plus: tropical semiring with (min, +) on Z.
 
 Furthermore,  additional  algorithms may  be  called  from this  demo:
-transpose and eval. A list of  state may be provided to the aut_to_exp
+transpose and eval. A list of states may be provided to the aut_to_exp
 algorithm, thus allowing the elimination  of states to be performed in
 a specified order.
 
