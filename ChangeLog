@@ -1,5 +1,17 @@
 2004-07-07  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	Fix a huge bug in fibonacci:
+	All transducers ended up with the same alphabet, whatever alphabet was
+	used to create it.
+	There was no == operator for transducers, so it used the == operator
+	for Structure, which returns true all the time.
+
+	* include/vaucanson/automata/concept/transducer.hh,
+	* include/vaucanson/automata/concept/transducer.hxx: Add the ==
+	operator for transducers.
+
+2004-07-07  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata_base.hh,
 	* include/vaucanson/automata/concept/automata_base.hxx: Add a new
 	method: add_weighted_edge. Give the possibility for the user to create

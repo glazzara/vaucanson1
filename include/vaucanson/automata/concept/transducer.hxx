@@ -48,6 +48,14 @@ namespace vcsn {
     return series_;
   }
 
+  template <class Series>
+  bool
+  operator==(const Transducer<Series>& lhs,
+	     const Transducer<Series>& rhs)
+  {
+    return & lhs.series() == & rhs.series();
+  }
+
   template <class S, class T>
   typename identity_transducer_helper<S, T>::ret
   partial_identity(const Element<S, T>& a)
