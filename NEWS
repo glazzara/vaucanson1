@@ -1,7 +1,59 @@
-* Vaucanson 0.5
+								-*- outline -*-
 
-** New implementation for numerical semiring.
-** -----------------------------------------
+* Vaucanson 0.5
+* -------------
+
+** New XML Input/Output system.
+
+** Better documentation.
+
+An effort has been made to make the Doxygen documentation look better.
+The  documentation  is  still  incomplete, and  some  errors  probably
+remain, but it should be far more usable now.
+
+Especially, the "Algorithm" section of the documentation should now be
+exhaustive.
+
+** Instantiation of Element which set is dynamic may fail when you do
+** not specify the set.
+
+  To  get more  safety at  runtime, trying  to instantiate  an Element
+which set is dynamic without initializing the set will fail at compile
+time.   This  ensures  every  Element  you  will  manipulate  has  its
+corresponding set associated. This has two consequences:
+
+  - Using Element::set() should provoke no more segmentation faults or
+    similar undesired behavior.
+
+  - The bound()  method has  no sense anymore  and therefore  has been
+    removed.  If you make calls  to this method in your programs, just
+    consider it returns true every time now and remove the call.
+
+** Many renamings.
+
+  To   get  a   more  consistent   interface,  a   few   methods  have
+changed. Consequently,  your old code  designed for Vaucanson  0.4 may
+not work  properly with Vaucanson  0.5. However, converting it  to the
+new nomenclature should be straightforward:
+
+  - All  names  containing  the  word  "serie" are  now  written  with
+    "series" instead.  For example, serie_get() is now series_get().
+
+  - All serie_t typedefs are now series_elt_t.
+
+  - The method  value_get() for the  elements of series is  now called
+    get().
+
+  - The method  value_set() for the  elements of series is  now called
+    assoc().
+
+  - The  convenience  files  vaucanson_*.hh in  the  include/vaucanson
+    directory have been stripped from their leading "vaucanson_".
+
+  - hopcroft_minimization.hh is  now named minimization_hopcroft.hh to
+    be consistent with minimization_moore.hh.
+
+** New implementation for numerical semirings.
 
    It is now possible to use rational numbers as an implementation in
 numerical semirings. In order to do so, the header
@@ -16,7 +68,32 @@ The usual operators have been  overloaded, and you can get the integer
 or double value of the  fraction by using to_int() or to_double(). You
 can also access the numerator with num() and denominator with denom().
 
+** Many more tests.
+
+  The test suite has been extended and improved. Generic tests are now
+instantiated  on many  more  types.  Also,  existing  tests have  been
+enriched with  extra checks and non-existing tests  have been written.
+Some   bugs  have  been   discovered,  fixed,   and  now   have  their
+corresponding regression test.
+
+  As a result, running "make check" should take more time than before,
+but now trusting  a successful check sequence is  less hazardous. Note
+that it is  still possible to disable some tests  by removing the test
+directory and running the configure script again.
+
+  Tests have  shown that using some rational  expressions which weight
+are  implemented  with  double  can  be  potentially  dangerous.  This
+requires more  checks before  we can  fix it.  For  the moment  try to
+avoid doing that.
+
+** Rewriting of the minimization_moore() algorithm.
+
+  The  minimization  algorithm  named  minimization_moore()  has  been
+rewritten. It should be more readable and more reliable now.
+
+
 * Vaucanson 0.4
+* -------------
 
 	* Addition of automata I/O subsystem.
 	* Nearly-complete SWIG bindings for algorithms in Vaucanswig.
@@ -27,6 +104,7 @@ can also access the numerator with num() and denominator with denom().
 	  the input stream.
 
 * Vaucanson 0.3	July 11, 2003
+* ---------------------------
 
 	* More documentation efforts.
 	* Addition of SWIG modules (Vaucanswig).
@@ -34,6 +112,7 @@ can also access the numerator with num() and denominator with denom().
 	of references to structural elements.
 
 * Vaucanson 0.2	July 02, 2003
+* ---------------------------
 
 	* First public release.
 	* Rewrite of the 'fundamental' module.
@@ -44,6 +123,7 @@ can also access the numerator with num() and denominator with denom().
 	* Initial Doxygen documentation efforts.
 
 * Vaucanson 0.1	January, 2002
+* ---------------------------
 
 	* Initial release.
 

@@ -1,5 +1,9 @@
 2004-03-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* NEWS: Update with the recent changes.
+
+2004-03-22  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/tests-suites/generate-all.sh: Re-enable tests for numerical
 	semiring with double (which was disabled by mistake). Effectively
 	disable tests for rational expressions with double.
