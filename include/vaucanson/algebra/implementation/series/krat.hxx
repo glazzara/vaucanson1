@@ -668,11 +668,7 @@ namespace vcsn {
       rat::exp<Tm, Tw>::constant(op_convert(SELECT(M),
 					    SELECT(Tm),
 					    m));
-    ret.base() = new rat::LeftWeighted<Tm, Tw>
-      (op_convert(SELECT(W),
-		  SELECT(Tw),
-		  w), ret.base());
-    op_in_add(s, p, ret);
+    op_in_add(s, p, op_mul(s.semiring(), s, w, ret));
   }
 
   /*----------------------------------------------------------.
