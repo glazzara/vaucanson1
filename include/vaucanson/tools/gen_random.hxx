@@ -1,39 +1,20 @@
 // gen_random.hxx
 // 
+// $Id$
 // VCSN_HEADER
 
 #ifndef GEN_RANDOM_HXX
 # define GEN_RANDOM_HXX
 
-# include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
+# include <vaucanson/misc/gen_random.hh>
 
-
-# include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-
-# include <vaucanson/automata/concept/kinds.hh>
-
-# include <vaucanson/automata/concept/tags.hh>
-
-# include <vaucanson/automata/concrete/manylinks.hh>
-
-# include <check/tests_stuff.hh>
 # include <map>
-
 # include <stdlib.h>
 # include <math.h>
 # include <iostream>
 # include <fstream>
 
-# include <vaucanson/misc/ref.hh>
-# include <vaucanson/misc/dot_dump.hh>
-
-
-namespace vcsn 
-{
+namespace vcsn {
 
   using namespace algebra;
 
@@ -50,7 +31,8 @@ namespace vcsn
   template <class TAutomata>
   TAutomata GenRandomAutomata<TAutomata>::
   generate(unsigned nb_state, unsigned nb_edge, 
-	   unsigned istate = 1, unsigned fstate = 1)
+	   unsigned istate = 1, unsigned fstate = 1,
+	   unsigned nb_letter = 2)
   {
     // check consistency of automaton
     if (nb_edge < nb_state - 1)
@@ -68,14 +50,13 @@ namespace vcsn
 
     // alphabet construction 
     alphabets_elt_t& alpha = work.series().monoid().alphabet();
-    alpha.insert(alpha.random_letter());
-    alpha.insert(alpha.random_letter());
+
+    for (unsigned i = 0; i < alea(nb_letter); ++i)
+      alpha.insert(alpha.random_letter());
 
     // minimal construction
     state_iterator prev = work.states().begin();
 
-    //    std::cout << nb_state << std::endl;
-    //    std::cout << work.states().size() << std::endl;
     for (state_iterator i = ++work.states().begin();
 	 i != work.states().end(); i++)
       {
@@ -107,9 +88,6 @@ namespace vcsn
 	work.set_final(tmp);
       }
 
-    // generation of output file
-    // misc::dot_dump(os, work, "test");
-    
     return work;
   }
   
@@ -151,11 +129,7 @@ namespace vcsn
     if (nb_state < 1) size_alphabet = 1;
     
 
-    // file for output format (graphwiz)
-    std::filebuf fb;
-    fb.open ("automaton.dot", std::ios::out);
-    std::ostream os(&fb);
-
+    // file for output format (graphviz)
     TAutomata work;
     work.create();
 
@@ -166,8 +140,7 @@ namespace vcsn
     alphabet_t& alpha = work.series().monoid().alphabet();
 
     for (unsigned i = 0; i < size_alphabet; i++)
-      alpha.insert('a' + i);
-     
+      alpha.insert(alpha.random_letter());
     
     for (state_iterator i = work.states().begin();
 	 i != work.states().end(); i++)
@@ -198,9 +171,6 @@ namespace vcsn
 	work.set_final(tmp);
       }
 
-    // generation of output file
-    misc::dot_dump(os, work, "test");
-    
     return work;
   }
 
@@ -216,12 +186,8 @@ namespace vcsn
 
     TAutomata work = generate(nb_state, nb_state + alea(nb_state * density));
     
-    // file for output format (graphwiz)
-    std::filebuf fb;
-    fb.open ("automaton.dot", std::ios::out);
-    std::ostream os(&fb);
-
-    for (state_iterator i = work.states().begin(); i != work.states().end(); i++)
+    for (state_iterator i = work.states().begin(); i != work.states().end(); 
+	 i++)
       {
 	if (work.is_initial(*i)) work.unset_initial(*i);
 	if (work.is_final(*i)) work.unset_final(*i);
@@ -249,15 +215,12 @@ namespace vcsn
     return work;
   }
 
-
   template <class TAutomata>
   unsigned GenRandomAutomata<TAutomata>::alea(unsigned max)
   {
     return ((unsigned) trunc(((float) random() / (float) RAND_MAX) * max));
   }
 
-
 } // vcsn
 
-
-#endif
+#endif // GEN_RANDOM_HXX

@@ -43,24 +43,24 @@ namespace vcsn
 	       typename automaton_traits<T>::series_value_t,
 	       typename automaton_traits<T>::label_t>
   {
-    typedef MetaElement<AutomataBase<Self>, T>		self_t;
+    typedef MetaElement<AutomataBase<Self>, T>		        self_t;
     typedef typename automaton_traits<T>::series_t		series_t;
     typedef typename automaton_traits<T>::series_value_t	series_value_t;
     typedef Element<series_t, series_value_t>			series_elt_t;
     
-    typedef typename series_t::monoid_t			monoid_t;
+    typedef typename series_t::monoid_t				monoid_t;
     typedef typename series_t::weights_t			weights_t;
-    typedef typename automaton_traits<T>::tag_t		tag_t;
+    typedef typename automaton_traits<T>::tag_t			tag_t;
     typedef typename automaton_traits<T>::label_t		label_t;
 
     typedef typename automaton_traits<T>::states_t		states_t;
     typedef typename automaton_traits<T>::state_iterator	state_iterator;
 
     typedef typename automaton_traits<T>::edges_t		edges_t;
-    typedef typename automaton_traits<T>::edge_iterator	edge_iterator;
+    typedef typename automaton_traits<T>::edge_iterator		edge_iterator;
       
     typedef typename automaton_traits<T>::initial_t		initial_t;
-    typedef typename initial_t::const_iterator		initial_iterator;
+    typedef typename initial_t::const_iterator		      initial_iterator;
     typedef typename automaton_traits<T>::final_t		final_t;
     typedef typename final_t::const_iterator			final_iterator;
       

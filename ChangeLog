@@ -1,4 +1,23 @@
 2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.66)
+	* include/vaucanson/automata/concept/automata_base.hh : minor.       
+	* include/vaucanson/tools/usual.hh : added.
+
+	* include/vaucanson/tools/gen_random.hxx : moved here.
+	* include/vaucanson/tools/gen_random.hh : idem.
+
+	* include/vaucanson/algorithms/compute.hxx : added.
+	* include/vaucanson/algorithms/compute.hh : added.
+	* src/tests/automata/algos/compute-test.hh : added.
+	
+	* include/vaucanson/misc/random.hxx : added.
+	* include/vaucanson/misc/random.hh : added.
+
+	* src/tests/automata/implementation_check/gen_random.hh : removed.
+	* src/tests/automata/implementation_check/gen_random.hxx : removed.
+	* src/tests/automata/implementation_check/gen_random.cc : removed.
+
+2002-07-18  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.65)
 	* include/vaucanson/algebra/concept/alphabets_base.hxx : 
 	* include/vaucanson/algebra/concept/alphabets_base.hh :
