@@ -52,10 +52,8 @@ bool krat_exp_realtime_test(tests::Tester& tg)
   monoid_t monoid(alphabet);
   weights_t semiring;
   series_t s(semiring, monoid);
-  monoid_elt_t w(monoid);
-  w = a;
-  w = w * w * w;
-  krat_exp_t exp(w);
+  // FIXME: Do a better test (the function may not be really tested)
+  krat_exp_t exp = s.choose(SELECT(kexp_t));
   krat_exp_t lin = realtime(exp);
   return t.all_passed();
 

@@ -1,3 +1,8 @@
+2003-05-06  Loic Fosse  <fosse_l@lrde.epita.fr>
+
+        * src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh: Fix a
+        bug.
+
 2003-05-05  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/tests-suites/algebra_series_krat_derivation.defs: Remove
