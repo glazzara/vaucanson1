@@ -1,6 +1,12 @@
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/demos/xml/algorithms.cc: New. Allow the user to call various
+	classical algorithms on R automata stored in XML files.
+	* src/demos/xml/Makefile.am: Update.
+
 2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	Include Sylvain Lombardy's patch about quotient algorithm.
-	
+
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix quotient
 	algorithm.
 
@@ -12,16 +18,16 @@
 	two given automaton.
 
 2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
-	Include Sylvain Lombardy's modified closure. The algorithm is now 
-	really faster. 
-	
+	Include Sylvain Lombardy's modified closure. The algorithm is now
+	really faster.
+
 	* include/vaucanson/algorithms/forward_closure.hh,
 	* include/vaucanson/algorithms/forward_closure.hxx,
 	* include/vaucanson/algorithms/backward_closure.hh,
 	* include/vaucanson/algorithms/backward_closure.hxx: Delete.
 
 	* include/vaucanson/algorithms/closure.hh,
-	* include/vaucanson/algorithms/closure.hxx: New files. Closure 
+	* include/vaucanson/algorithms/closure.hxx: New files. Closure
 	algorithms (backward and forward).
 
 	* include/Makefile.am,
@@ -31,7 +37,7 @@
 
 	* src/tests/context_headers/automata/global_consistency_test.hh: Change
 	krat_exp_t to rat_exp_t.
-	
+
 2004-07-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	Three bugs were preventing the XML session demos from working. This
