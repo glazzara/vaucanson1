@@ -89,9 +89,11 @@ unsigned product_test(tests::Tester& tg)
       monoid_elt_t word_prod = exp_p.choose_from_supp();
 
       if (eval(auto_lhs, word_prod) ==
-  zero_as<semiring_elt_value_t>::of(auto_lhs.structure().series().semiring())
+	  zero_as<semiring_elt_value_t>::
+	  of(auto_lhs.structure().series().semiring())
 	  || eval(auto_rhs, word_prod) ==
-  zero_as<semiring_elt_value_t>::of(auto_rhs.structure().series().semiring())
+	  zero_as<semiring_elt_value_t>::
+	  of(auto_rhs.structure().series().semiring())
 	  )
 	{
 	  // Print the failing expressions.
@@ -101,6 +103,10 @@ unsigned product_test(tests::Tester& tg)
 	  g_series_elt_t exp_rhs(g_auto_rhs.structure().series());
 	  exp_lhs = aut_to_exp(g_auto_lhs);
 	  exp_rhs = aut_to_exp(g_auto_rhs);
+	  std::cerr << "Error, automata saved in /tmp." << std::endl;
+	  SAVE_AUTOMATON_DOT("/tmp", "rhs", auto_rhs, cpt);
+	  SAVE_AUTOMATON_DOT("/tmp", "lhs", auto_lhs, cpt);
+	  SAVE_AUTOMATON_DOT("/tmp", "prod", p, cpt);
 	  std::cerr << "TEST: product of automata corresponding"
 		    << " to following expressions failed."
 		    << std::endl;

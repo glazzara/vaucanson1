@@ -1,3 +1,8 @@
+2004-04-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/product_test.hh: Add backup of failing
+	automata.
+
 2004-04-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/contextual_functions.hh,
