@@ -1,7 +1,7 @@
 // minimization_moore.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,10 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
+
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 
@@ -34,22 +37,48 @@
 
 namespace vcsn {
 
-  /*! \addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
-  //! Returns the minimal deterministic automaton associated to the input one.
+  /**
+   * Returns the minimal deterministic automaton associated to the input one.
+   *
+   * Use   Moore's  algorithm  to   compute  the   minimal  equivalent
+   * deterministic  automaton.  The complexity  of  this algorithm  is
+   * O(n2). See  minimize_hopcroft for O(nlogn).
+   *
+   * @bug Put the precondition.
+   * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
+   * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+   */
   // INTERFACE: Automaton minimization_moore(const Automaton& a) { return vcsn::minimization_moore(*a); }
   template<typename A, typename T>
   Element<A, T>
   minimization_moore(const Element<A, T>& a);
+
+  /**
+   * Minimalize the deterministic input automaton.
+   *
+   * Use Moore's algorithm to minimalize (in place) the input
+   * automaton. The complexity of this algorithm is O(n2). See
+   * minimize_hopcroft for O(nlogn).
+   * 
+   * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
+   * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+   */
+ 
+  template<typename A, typename T>
+  void
+  minimization_moore_here(Element<A, T>& a);
+
   
-  /*! @} */
+  /** @} */
 
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/minimization_moore.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/minimization_moore.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
     
 
 #endif // VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
