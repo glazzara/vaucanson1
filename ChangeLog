@@ -1,3 +1,9 @@
+2004-10-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/automata/implementation/graph.hxx (del_edge,
+	del_state): Remove useless tests when shrinking the states/edges
+	vector. Fix assertions. Uniformize assertions.
+
 2004-10-18  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* NEWS: Minor fixes.

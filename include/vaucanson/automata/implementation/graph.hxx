@@ -46,8 +46,8 @@ namespace vcsn {
   {}
 
   template <class EdgeLabel>
-  edge_value<EdgeLabel>::edge_value(const EdgeLabel& label, 
-				    hstate_t from, 
+  edge_value<EdgeLabel>::edge_value(const EdgeLabel& label,
+				    hstate_t from,
 				    hstate_t to):
     label(label),
     from(from),
@@ -63,7 +63,7 @@ namespace vcsn {
     class WeightValue,				\
     class SeriesValue,				\
     class Letter,				\
-    class Tag> 
+    class Tag>
 
 #define GClass \
     Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
@@ -75,7 +75,7 @@ namespace vcsn {
     first_edge_ = 0;
   }
 
-  
+
   TParam
   template <class S>
   bool
@@ -85,7 +85,7 @@ namespace vcsn {
     typename label_t::const_iterator				r;
     label_t							l;
     WordValue							w;
-								  
+
     for (int i = first_edge_; i < int(edges_.size()); ++i)
       {
 	// Make sure that origin and aim of edge are part of the automaton
@@ -114,7 +114,7 @@ namespace vcsn {
 
     // Call standard del_state.
     del_state(n);
-    
+
     // Perform a check with all edges to see if no ones are related,
     // and delete them if so.
     for (int i = first_edge_; i < int(edges_.size()); ++i)
@@ -150,7 +150,7 @@ namespace vcsn {
     states_[n].output_edges.clear();
     states_[n].successors.clear();
     states_[n].predecessors.clear();
-    
+
     postcondition(has_state(n));
     return n;
   }
@@ -183,36 +183,35 @@ namespace vcsn {
     if (n == int(states_.size() - 1))
       {
 	int s = states_.size() - 1;
-	while ((removed_states_.find(s) != removed_states_.end()) &&
-	       s >= first_state_)
+	while (removed_states_.find(s) != removed_states_.end())
 	  {
 	    removed_states_.erase(s);
 	    --s;
 	  }
 	states_.resize(s + 1);
       }
-    assertion(states().size() == 0 || has_state(states_.size() - 1));
+    assertion(int (states_.size()) == first_state_ or
+	      has_state(states_.size() - 1));
 
     // first_state_ must always be used.
     // (invariant)
     if (n == first_state_)
       {
 	int s = first_state_;
-	while ((removed_states_.find(s) != removed_states_.end()) &&
-	       s < int(states_.size()))
+	while (removed_states_.find(s) != removed_states_.end())
 	  {
 	    removed_states_.erase(s);
 	    ++s;
 	  }
 	first_state_ = s;
       }
-    assertion(states().size() == 0 || has_state(first_state_)); 
+    assertion(first_state_ == int (states_.size()) or has_state(first_state_));
 
-    postcondition(! has_state(n));
+    postcondition(not has_state(n));
   }
 
   TParam
-  void 
+  void
   GClass::del_edge(hedge_t e)
   {
     assertion(has_edge(e));
@@ -233,38 +232,37 @@ namespace vcsn {
     if (e == int(edges_.size() - 1))
       {
 	int s = edges_.size() - 1;
-	while ((removed_edges_.find(s) != removed_edges_.end()) &&
-	       s >= 0)
+	while (removed_edges_.find(s) != removed_edges_.end())
 	  {
 	    removed_edges_.erase(s);
 	    --s;
 	  }
 	edges_.resize(s + 1);
       }
-    assertion(int(edges_.size()) == 0 || has_edge(edges_.size() - 1));
+    assertion(int (edges_.size()) == first_edge_ or
+	      has_edge(edges_.size() - 1));
 
     // first_edge_ must be used.
     if (e == first_edge_)
       {
 	int s = first_edge_;
-	while ((removed_edges_.find(s) != removed_edges_.end()) &&
-	       s < int(edges_.size()))
+	while (removed_edges_.find(s) != removed_edges_.end())
 	  {
 	    removed_edges_.erase(s);
 	    ++s;
 	  }
 	first_edge_ = s;
       }
-    assertion(int(edges_.size()) == 0 || has_edge(first_edge_));
+    assertion(first_edge_ == int (edges_.size()) or has_edge(first_edge_));
 
-    postcondition(! has_edge(e));
+    postcondition(not has_edge(e));
   }
 
   TParam
   bool
   GClass::has_state(hstate_t n) const
   {
-    bool ret = 
+    bool ret =
       (n >= first_state_ &&
        removed_states_.find(n) == removed_states_.end())
       && (n >= 0) && (n < int(states_.size()));
@@ -395,7 +393,7 @@ namespace vcsn {
   typename GClass::states_t
   GClass::states() const
   {
-    return states_t(hstate_t(first_state_), 
+    return states_t(hstate_t(first_state_),
 		    hstate_t(states_.size()) - 1,
 		    removed_states_);
   }
@@ -404,8 +402,8 @@ namespace vcsn {
   typename GClass::edges_t
   GClass::edges() const
   {
-    return edges_t(hedge_t(first_edge_), 
-		   hedge_t(edges_.size()) - 1, 
+    return edges_t(hedge_t(first_edge_),
+		   hedge_t(edges_.size()) - 1,
 		   removed_edges_);
   }
 
@@ -421,7 +419,7 @@ namespace vcsn {
 
   TParam
   void
-  GClass::set_initial(hstate_t n, const series_set_elt_value_t& v, 
+  GClass::set_initial(hstate_t n, const series_set_elt_value_t& v,
 		      const series_set_elt_value_t& z)
   {
     if (z == v)
@@ -442,7 +440,7 @@ namespace vcsn {
 
   TParam
   void
-  GClass::set_final(hstate_t n, const series_set_elt_value_t& v, 
+  GClass::set_final(hstate_t n, const series_set_elt_value_t& v,
 		    const series_set_elt_value_t& z)
   {
     if (v == z)
@@ -489,7 +487,7 @@ namespace vcsn {
   TParam
   template <class OutputIterator, class Query>
   void
-  GClass::delta(OutputIterator res, 
+  GClass::delta(OutputIterator res,
 		hstate_t from,
 		const Query& q,
 		delta_kind::edges) const
@@ -504,7 +502,7 @@ namespace vcsn {
   TParam
   template <class OutputIterator, class Query>
   void
-  GClass::delta(OutputIterator res, 
+  GClass::delta(OutputIterator res,
 		hstate_t from,
 		const Query& query,
 		delta_kind::states) const
@@ -518,12 +516,12 @@ namespace vcsn {
   TParam
   template <class OutputIterator, class Query>
   void
-  GClass::rdelta(OutputIterator res, 
+  GClass::rdelta(OutputIterator res,
 		 hstate_t from,
 		 const Query& q,
 		 delta_kind::edges) const
   {
-    const typename state_value_t::edges_t& edges = 
+    const typename state_value_t::edges_t& edges =
       states_[from].input_edges;
     for_each_const_(std::list<hedge_t>, e, edges)
       if (q(*e))
@@ -536,12 +534,12 @@ namespace vcsn {
   TParam
   template <class OutputIterator, class Query>
   void
-  GClass::rdelta(OutputIterator res, 
+  GClass::rdelta(OutputIterator res,
 		 hstate_t from,
 		 const Query& q,
 		 delta_kind::states) const
   {
-    const state_value_t::edges_t& edges = 
+    const state_value_t::edges_t& edges =
       states_[from].input_edges;
     for_each_const_(std::list<hedge_t>, e, edges)
       if (q(*e))
