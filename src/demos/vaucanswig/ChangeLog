@@ -1,5 +1,9 @@
 2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* README: Add.
+
+2003-07-07  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* meta/algo_common.i: Add.
 	* meta/vaucanswig_exception.i: Add missing include.
 	* meta/vaucanswig_context.i: Add missing method to `exp'.
