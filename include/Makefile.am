@@ -30,6 +30,7 @@ vaucanson/xml/loadgeometry.inc: mkdir_vaucanson_xml $(top_srcdir)/xml/style-to-c
 nobase_include_HEADERS =						   \
 	vaucanson/config/system.hh					   \
 	vaucanson/config/math.hh					   \
+	vaucanson/config/pconf.hh					   \
 	vaucanson/misc/random.hh					   \
 	vaucanson/misc/random.hxx					   \
 	vaucanson/misc/limits.hh					   \
