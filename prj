@@ -1,15 +1,14 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 385)
-(Parent-Version vaucanson 0 384)
+(Project-Version vaucanson 0 386)
+(Parent-Version vaucanson 0 385)
 (Version-Log "2003-07-14  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh
-	(DecBinaryOp, DecUnaryOp, DecLeaf): Use full namespaces when
-	referencing types.")
+	* include/vaucanson/automata/concept/automata_ops.hxx: Move
+	zero_as<T>::of(S).value() to zero_value(S, T).")
 (New-Version-Log "")
-(Checkin-Time "Mon, 14 Jul 2003 17:56:37 +0200")
+(Checkin-Time "Mon, 14 Jul 2003 19:36:58 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -92,7 +91,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.20 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.21 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.15 600))
@@ -311,7 +310,7 @@
   (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.6 600))
   (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.7 600))
   (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.7 600))
-  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.11 600))
+  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.12 600))
   (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.3 600))
   (include/vaucanson/automata/concept/delta_kind.hh (vaucanson/q/14_delta_kind 1.2 600))
   (include/vaucanson/automata/concept/automata_kind.hh (vaucanson/q/18_automata_k 1.2 600))

@@ -1,5 +1,10 @@
 2003-07-14  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
+	* include/vaucanson/automata/concept/automata_ops.hxx: Move
+	zero_as<T>::of(S).value() to zero_value(S, T).
+
+2003-07-14  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh
 	(DecBinaryOp, DecUnaryOp, DecLeaf): Use full namespaces when
 	referencing types.

@@ -105,8 +105,10 @@ namespace vcsn {
 		 const AutoType(serie_t)& s)
   {
     typedef typename Element<S, T>::serie_value_t serie_value_t;
-    v.set_initial(state, s.value(), 
-      (algebra::zero_as<serie_value_t>::of(ss.series())).value());
+    v.set_initial(state,
+		  s.value(),
+		  zero_value(ss.series(),
+			     SELECT(serie_value_t)));
   }
 
   template <class S, class T>
@@ -118,9 +120,10 @@ namespace vcsn {
   {
     return typename Element<S, T>::series_elt_t
       (s.series(),
-       v.get_initial(state, 
-         (algebra::zero_as<AutoType(serie_value_t)>::of(s.series())).value()));
-  }
+       v.get_initial(state,
+		     zero_value(s.series(),
+				SELECT(AutoType(serie_value_t)))));
+       }
   
   template <class S, class T>
   inline
@@ -129,8 +132,10 @@ namespace vcsn {
 	       hstate_t state,
 	       const typename Element<S, T>::serie_t& s)
   {
-    v.set_final(state, s.value(),
-      (algebra::zero_as<AutoType(serie_value_t)>::of(ss.series())).value());
+    v.set_final(state,
+		s.value(),
+		zero_value(ss.series(),
+			   SELECT(AutoType(serie_value_t))));
   }
 
   template <class S, class T>
@@ -143,7 +148,8 @@ namespace vcsn {
     return typename Element<S, T>::series_elt_t
       (s.series(),
        v.get_final(state,
-	 (algebra::zero_as<AutoType(serie_value_t)>::of(s.series())).value()));
+		   zero_value(s.series(),
+			      SELECT(AutoType(serie_value_t)))));
   }
   
   template <class S, class T>
