@@ -1,5 +1,9 @@
 2004-07-14  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:
+	  Remove unicity check, which is wrong.
+
+2004-07-14  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hxx,
 	* include/vaucanson/algebra/implementation/series/krat_exp_expand.hh:
