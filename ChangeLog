@@ -1,5 +1,9 @@
 2004-10-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/demos/vaucanswig/expand.sh: Swig use -noruntime instead of -c.
+
+2004-10-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	Apply the patch proposed by  Nicolas Stroppa in vaucanson-patches:
 	Message-ID: <mailman.48.1097855753.6231.vaucanson@lrde.epita.fr>
 

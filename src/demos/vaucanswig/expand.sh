@@ -239,7 +239,7 @@ dump_python()
          sdir=meta
       fi
       echo "vaucanswig_${mod}_wrap.cxx vaucanswig_${mod}.py: \$(srcdir)/../$sdir/vaucanswig_${mod}.i"
-      printf "\t\$(SWIG) -c -c++ -python -I../src -I../meta -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
+      printf "\t\$(SWIG) -noruntime -c++ -python -I../src -I../meta -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
       echo
     done
 
