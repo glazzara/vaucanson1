@@ -57,12 +57,16 @@ namespace vcsn {
 
     MATCH__(Product, lhs, rhs)
     {
-      std::pair<weight_t, bool> ret = constant_term(series(lhs));
+      return_type match_lhs = match(lhs);
+      
       // FIXME: Following code only valid for series over boolean semirings.
-      if (ret.second)
-	return match(lhs) * rhs;
+      if (match_lhs != Element<Series, T>())
+      	return match(lhs) * rhs;
       else
-	return ret.first * match(rhs);
+	{
+	  std::pair<weight_t, bool> ret = constant_term(series(lhs));
+	  return ret.first * match(rhs);
+	}
     }
     END
 

@@ -1,5 +1,10 @@
 2003-03-07  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx (match_nodeProduct):
+	  Fix a dummy bug, due to a misreading in the c-derivation definition.
+	
+2003-03-07  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/krat_exp_cderivation.hxx:  Add.
 	* include/vaucanson/algorithms/krat_exp_cderivation.hh: Add.
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx (op_stareable): Remove >= to put <=.
