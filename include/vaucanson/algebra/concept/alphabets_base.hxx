@@ -110,6 +110,7 @@ namespace vcsn {
   typename alphabet_traits<Self, T>::letter_t
   MetaElement<AlphabetsBase<Self>, T>::random_letter()
   {
+    
     return
       misc::RandomGenerator<typename alphabet_traits<Self, T>::letter_t>
       ::do_it();

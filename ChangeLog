@@ -1,3 +1,189 @@
+2002-07-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.72)
+	* src/tests/automata/algos/minimisation_test.hh : added.
+	
+	* include/vaucanson/fundamental/element.hxx :
+	   Element<S,T>& 
+	   Element<S,T>::operator=(const Element<S, U>& other)
+	   {
+	-    set_.assign(other.set_);
+	+    set_.assign(other.set());
+	     op_assign(set(), other.set(), value(), other.value());
+	     return *this; 
+	   }
+	* include/vaucanson/fundamental/default_ops.hxx :
+	-      assert(s1.self() == s2.self());
+	+      // FIXME: we want to be able to write :
+	+      // assert(s1.self() == s2.self());
+	       op_assign(s1.self(), dst, src); 
+	
+	* include/vaucanson/algebra/concept/alphabets_base.hxx : minor.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx
+	+# include <vaucanson/algebra/concept/freemonoid_base.hh>
+	-    const std::map<Tm, Tw>
+	+    const std::map<Tm, Tw>&
+	     polynom<Tm, Tw>::as_map() const
+
+	-    template <class Tm, class Tw>
+	-    polynom<Tm,Tw> 
+	-    DefaultTransposeFun<polynom<Tm,Tw> >::operator()(const polynom<Tm,Tw>& l)
+	+    template <class Series, class Tm, class Tw>
+	+    polynom<Tm,Tw>
+	+    DefaultTransposeFun<Series, polynom<Tm,Tw> >::
+	+    operator()(const Series& s,const polynom<Tm,Tw>& t) const
+	     {
+	       typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
+	+      typedef typename Series::monoid_elt_t	       monoid_elt_t;
+	       polynom<Tm, Tw>	new_t;
+	-      
+	-      std::swap(new_t, t);
+	-      for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
+	-	t[mirror((*i).first)] = (*i).second;
+	+
+	+      for (const_iterator i = t.begin(); i != t.end(); ++i)
+	+	new_t[mirror(monoid_elt_t((*i).first))] = (*i).second;
+	+      return new_t;
+	@@ -568,9 +571,9 @@
+	   void  op_in_transpose(Series<W, M>& s, polynom<Tm, Tw>& t)
+	   {
+	     typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
+	-    polynom<Tm, Tw>	new_t;
+	+    polynom<Tm, Tw>	new_t(t);
+	 
+	-    std::swap(new_t, t);
+	+    t.clear();
+	     for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
+	       t[mirror((*i).first)] = (*i).second;
+	   }
+
+	* include/vaucanson/algebra/concrete/series/polynoms.hh
+	-      const std::map<Tm, Tw>
+	+      const std::map<Tm, Tw>&
+	       as_map() const;
+ 
+	-    template <class Tm, class Tw>
+	-    struct DefaultTransposeFun< polynom<Tm,Tw> >
+	+    template <class Series, class Tm, class Tw>
+	+    struct DefaultTransposeFun<Series, polynom<Tm,Tw> >
+	     {
+	-      polynom<Tm,Tw> 
+	-      operator()(const polynom<Tm,Tw>& l);
+	+      polynom<Tm,Tw>
+	+      operator()(const Series& s, const polynom<Tm,Tw>& l) const;
+	     };	
+     
+ 
+	* include/vaucanson/misc/ref.hh :
+	-    long ref_count() const;
+	+    long& ref_count() const;
+	* include/vaucanson/misc/ref.hxx : deactivate this.
+	-    template<typename T>
+	-    template<typename Y>
+	-    ref<T>& ref<T>::operator=(const ref<Y>& r)
+
+	@@ -70,7 +70,7 @@
+	-  template<typename T> long ref<T>::ref_count() const
+	+  template<typename T> long& ref<T>::ref_count() const
+	   { return *count_; }
+   
+	* include/vaucanson/automata/concrete/manylinks.hh :
+	-    typedef const L& label_ret_t;
+	+    typedef L label_ret_t;
+
+	
+	* include/vaucanson/automata/concept/transpose_impl.hxx : warning. 
+		We do this temporarily because it is a modelisation pb that will
+		be resolve globally soon.
+	-      return impl().add_edge(to, from, transpose_label_fun_(label)); 
+	+      return impl().add_edge(to, from, label); 
+
+	@@ -346,7 +346,8 @@
+	     label_of(unsigned e) const
+	     { 
+	       // FIXME : transpose label
+	-      return transpose_label_fun_(impl().label_of(e)); 
+	+      return impl().label_of(e);
+	+	// transpose_label_fun_(impl().label_of(e)); 
+	     }
+ 
+	* include/vaucanson/automata/concept/transpose_impl.hh :
+	@@ -195,7 +195,9 @@
+	     <
+	       original_impl_t, 
+	       // FIXME: this is broken. We need to be more intelligent.
+	-      DefaultTransposeFun<typename original_impl_t::label_t>
+	+      DefaultTransposeFun<
+	+      typename Auto::series_t, 
+	+      typename original_impl_t::label_t>
+	     > transpose_impl_t;
+	     typedef utility::ref<transpose_impl_t>		   transpose_ref_t;
+     
+	* include/vaucanson/automata/concept/automata_base.hh :
+
+	* include/vaucanson/automata/concept/automata.hh : minor
+ 
+	* include/vaucanson/algorithms/transpose.hxx : bug fixed. 
+
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx
+     
+	* include/vaucanson/algebra/concrete/series/rat/exp.hh : 
+	-  template <typename M, typename W>
+	-  struct DefaultTransposeFun<rat::exp<M, W> >
+	+  template <typename S, typename M, typename W>
+	+  struct DefaultTransposeFun<S, rat::exp<M, W> >
+	   {
+	     rat::exp<M, W>&
+	-    operator()(const rat::exp<M, W>& exp);
+	+    operator()(const S&, const rat::exp<M, W>& exp);
+	   };
+ 
+	* include/vaucanson/tools/usual.hh
+	+ typedef typename Prefix##alphabet_t::letter_t      Prefix##letter_t;	      \
+ 
+	* include/vaucanson/tools/gen_random.hxx : minor change.
+	@@ -34,6 +34,7 @@
+ 	   unsigned istate = 1, unsigned fstate = 1,
+ 	   unsigned nb_letter = 2)
+	   {
+	+    AUTOMATON_TYPES(TAutomata);
+	     // check consistency of automaton
+	     if (nb_edge < nb_state - 1)
+	       nb_edge = nb_state - 1;
+		@@ -51,8 +52,16 @@
+	     // alphabet construction 
+	     alphabets_elt_t& alpha = work.series().monoid().alphabet();
+ 
+	-    for (unsigned i = 0; i < alea(nb_letter); ++i)
+	-      alpha.insert(alpha.random_letter());
+	+    unsigned nb = alea(nb_letter);
+	+    for (unsigned i = 0; i < 2 + nb; )
+	+      {
+	+	letter_t l = alpha.random_letter();
+	+	if (alpha.contains(l))
+	+	  continue;
+	+	alpha.insert(alpha.random_letter());
+	+	++i;
+	+      }
+	+
+ 
+	     // minimal construction
+	     state_iterator prev = work.states().begin();
+
+	* include/vaucanson/misc/random.hxx : minor change.
+
+	* include/vaucanson/algebra/concrete/series/transpose.hxx : minor change.
+
+	* include/vaucanson/algebra/concrete/series/transpose.hh : 
+	-    template <class T>
+	+    template <class S, class T>
+	     struct DefaultTransposeFun
+	     {
+	-      T operator()(const T& T);
+	+      T operator()(const S&, const T& T) const;
+	     };
+
+	* src/tests/automata/algos/normalize_test.hh : minor change.
+
 2002-07-18  Maxime Rey  <max@lrde.epita.fr>
 
 	* `src/tests/automata/algos/check_normalized.cc' Deleted

@@ -96,11 +96,11 @@ namespace vcsn {
 
   namespace algebra {
 
-  template <typename M, typename W>
-  struct DefaultTransposeFun<rat::exp<M, W> >
+  template <typename S, typename M, typename W>
+  struct DefaultTransposeFun<S, rat::exp<M, W> >
   {
     rat::exp<M, W>&
-    operator()(const rat::exp<M, W>& exp);
+    operator()(const S&, const rat::exp<M, W>& exp);
   };
 
   } // algebra

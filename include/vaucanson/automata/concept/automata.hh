@@ -1,17 +1,14 @@
-/************************************
- * <vaucanson/automata/automata.hh> *
- ************************************/
+// automata.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_AUTOMATA_HH
-#define AUTOMATA_AUTOMATA_HH
+# define AUTOMATA_AUTOMATA_HH
 
-#include <vaucanson/automata/concept/automata_base.hh>
-#include <vaucanson/misc/ref.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/misc/ref.hh>
 
-namespace vcsn
-{
+namespace vcsn {
 
   struct Automata;
   
@@ -41,7 +38,6 @@ namespace vcsn
    : automaton_traits<T>
   { };
   
-
 }
 
 

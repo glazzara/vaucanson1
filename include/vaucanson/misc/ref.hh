@@ -33,7 +33,7 @@ namespace utility
     T* operator->() const;
     T* get() const;
     
-    long ref_count() const;
+    long& ref_count() const;
     bool unique() const;
 
     bool bound() const;

@@ -105,7 +105,7 @@ namespace vcsn {
   Element<S,T>& 
   Element<S,T>::operator=(const Element<S, U>& other)
   {
-    set_.assign(other.set_);
+    set_.assign(other.set());
     op_assign(set(), other.set(), value(), other.value());
     return *this; 
   }

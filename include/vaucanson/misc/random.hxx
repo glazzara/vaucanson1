@@ -21,7 +21,9 @@ namespace vcsn {
     char 
     RandomGenerator<char>::do_it()
     {
-      return (char)((random() * 255 / RAND_MAX));
+      float f = float(random()) / float(RAND_MAX);
+      unsigned offs = unsigned((26 * f));
+      return ('a' + offs);
     }
 
   } // misc

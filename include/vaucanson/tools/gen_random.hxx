@@ -34,6 +34,7 @@ namespace vcsn {
 	   unsigned istate = 1, unsigned fstate = 1,
 	   unsigned nb_letter = 2)
   {
+    AUTOMATON_TYPES(TAutomata);
     // check consistency of automaton
     if (nb_edge < nb_state - 1)
       nb_edge = nb_state - 1;
@@ -51,8 +52,16 @@ namespace vcsn {
     // alphabet construction 
     alphabets_elt_t& alpha = work.series().monoid().alphabet();
 
-    for (unsigned i = 0; i < alea(nb_letter); ++i)
-      alpha.insert(alpha.random_letter());
+    unsigned nb = alea(nb_letter);
+    for (unsigned i = 0; i < 2 + nb; )
+      {
+	letter_t l = alpha.random_letter();
+	if (alpha.contains(l))
+	  continue;
+	alpha.insert(alpha.random_letter());
+	++i;
+      }
+
 
     // minimal construction
     state_iterator prev = work.states().begin();

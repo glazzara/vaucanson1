@@ -161,7 +161,8 @@ namespace vcsn
 		   T& dst, 
 		   const U& src)
     { 
-      assert(s1.self() == s2.self());
+      // FIXME: we want to be able to write :
+      // assert(s1.self() == s2.self());
       op_assign(s1.self(), dst, src); 
     }
 

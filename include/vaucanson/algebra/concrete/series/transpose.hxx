@@ -9,9 +9,9 @@ namespace vcsn {
 
   namespace algebra {
 
-    template <class T>
+    template <class S, class T>
     T 
-    DefaultTransposeFun<T>::operator()(const T& label)
+    DefaultTransposeFun<S, T>::operator()(const S&, const T& label) const
     {
       assert(!"Default transposition is not defined.");
     }

@@ -59,7 +59,7 @@ namespace vcsn {
       void		clear();
       void		swap(polynom<Tm, Tw>& other);
 
-      const std::map<Tm, Tw>
+      const std::map<Tm, Tw>&
       as_map() const;
 
     protected:
@@ -73,11 +73,11 @@ namespace vcsn {
     typedef Tw weights_value_t;
   };
 
-    template <class Tm, class Tw>
-    struct DefaultTransposeFun< polynom<Tm,Tw> >
+    template <class Series, class Tm, class Tw>
+    struct DefaultTransposeFun<Series, polynom<Tm,Tw> >
     {
-      polynom<Tm,Tw> 
-      operator()(const polynom<Tm,Tw>& l);
+      polynom<Tm,Tw>
+      operator()(const Series& s, const polynom<Tm,Tw>& l) const;
     };
     
 

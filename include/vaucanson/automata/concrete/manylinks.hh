@@ -1,14 +1,11 @@
-/**************************************
- * <vaucanson/automaton/manylinks.hh> *
- **************************************/
+// manylinks.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_MANYLINKS_HH
 # define AUTOMATA_MANYLINKS_HH
 
 # include <vaucanson/fundamental/fundamental.hh>
-
 # include <vaucanson/automata/concrete/manylinks_carriers.hh>
 
 namespace vcsn
@@ -79,7 +76,7 @@ namespace vcsn
     typedef const ManyLinksFinalCarrier<S, E, L>& final_ret_t;
     typedef const ManyLinksEdgesCarrier<ManyLinksState<S, E, L>,
 					E, L>& edges_ret_t;
-    typedef const L& label_ret_t;
+    typedef L label_ret_t;
   };
 
   template<typename S, typename Label, typename StateTag, typename EdgeTag>

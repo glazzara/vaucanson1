@@ -26,13 +26,13 @@ namespace utility
       ++*(count_ = r.count_); 
     }
 
-    template<typename T>
-    template<typename Y>
-    ref<T>& ref<T>::operator=(const ref<Y>& r)
-    {
-      share(r.data_, r.count_);
-      return *this;
-    }
+//     template<typename T>
+//     template<typename Y>
+//     ref<T>& ref<T>::operator=(const ref<Y>& r)
+//     {
+//       share(r.get(), &r.ref_count());
+//       return *this;
+//     }
     
 //     template<typename T>
 //     ref<T>::ref(const ref& r)
@@ -70,7 +70,7 @@ namespace utility
   template<typename T> T* ref<T>::get() const
   { return data_; }
     
-  template<typename T> long ref<T>::ref_count() const
+  template<typename T> long& ref<T>::ref_count() const
   { return *count_; }
   
   template<typename T> bool ref<T>::unique() const

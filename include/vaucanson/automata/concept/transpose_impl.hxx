@@ -127,7 +127,7 @@ namespace vcsn
     add_edge(unsigned from, unsigned to, const label_t& label)
     { 
       // FIXME : transpose label.
-      return impl().add_edge(to, from, transpose_label_fun_(label)); 
+      return impl().add_edge(to, from, label); 
     }
 
     template <typename OtherImpl, class TransposeLabelFun>
@@ -346,7 +346,8 @@ namespace vcsn
     label_of(unsigned e) const
     { 
       // FIXME : transpose label
-      return transpose_label_fun_(impl().label_of(e)); 
+      return impl().label_of(e);
+	// transpose_label_fun_(impl().label_of(e)); 
     }
 
     template <class OtherImpl, class TransposeLabelFun>

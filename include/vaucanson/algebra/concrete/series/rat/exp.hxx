@@ -237,9 +237,10 @@ namespace vcsn {
   }
 
 
-  template <typename M, typename W>
+  template <typename S, typename M, typename W>
   rat::exp<M, W>&
-  DefaultTransposeFun<rat::exp<M,W> >::operator()(const rat::exp<M, W>& exp)
+  DefaultTransposeFun<S, rat::exp<M,W> >::
+  operator()(const S&, const rat::exp<M, W>& exp)
   {
     rat::exp<M, W>*  rexp = new rat::exp<M, W>(exp);
     

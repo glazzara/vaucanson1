@@ -1,20 +1,16 @@
-/*****************************************
- * <vaucanson/automata/automata_base.hh> *
- *****************************************/
+// automata_base.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_AUTOMATA_BASE_HH
 # define AUTOMATA_AUTOMATA_BASE_HH
 
-
+# include <iterator>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/kinds.hh>
 # include <vaucanson/automata/concept/history.hh>
-# include <iterator>
 
-namespace vcsn
-{
+namespace vcsn {
 
   template<typename Self>
   struct AutomataBase

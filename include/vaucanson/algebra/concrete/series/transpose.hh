@@ -9,10 +9,10 @@ namespace vcsn {
 
   namespace algebra {
 
-    template <class T>
+    template <class S, class T>
     struct DefaultTransposeFun
     {
-      T operator()(const T& T);
+      T operator()(const S&, const T& T) const;
     };
 
   } // algebra

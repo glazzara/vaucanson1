@@ -195,7 +195,9 @@ namespace vcsn
     <
       original_impl_t, 
       // FIXME: this is broken. We need to be more intelligent.
-      DefaultTransposeFun<typename original_impl_t::label_t>
+      DefaultTransposeFun<
+      typename Auto::series_t, 
+      typename original_impl_t::label_t>
     > transpose_impl_t;
     typedef utility::ref<transpose_impl_t>		   transpose_ref_t;
     

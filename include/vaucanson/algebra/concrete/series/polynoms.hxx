@@ -7,6 +7,7 @@
 # define ALGEBRA_POLYNOMS_HXX
 
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 namespace vcsn {
 
@@ -134,22 +135,24 @@ namespace vcsn {
     }
 
     template<typename Tm, typename Tw>        
-    const std::map<Tm, Tw>
+    const std::map<Tm, Tw>&
     polynom<Tm, Tw>::as_map() const
     { 
       return map_;
     }
 
-    template <class Tm, class Tw>
-    polynom<Tm,Tw> 
-    DefaultTransposeFun<polynom<Tm,Tw> >::operator()(const polynom<Tm,Tw>& l)
+    template <class Series, class Tm, class Tw>
+    polynom<Tm,Tw>
+    DefaultTransposeFun<Series, polynom<Tm,Tw> >::
+    operator()(const Series& s,const polynom<Tm,Tw>& t) const
     {
       typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
+      typedef typename Series::monoid_elt_t	       monoid_elt_t;
       polynom<Tm, Tw>	new_t;
-      
-      std::swap(new_t, t);
-      for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
-	t[mirror((*i).first)] = (*i).second;
+
+      for (const_iterator i = t.begin(); i != t.end(); ++i)
+	new_t[mirror(monoid_elt_t((*i).first))] = (*i).second;
+      return new_t;
     }
 
   } // algebra
@@ -488,8 +491,8 @@ namespace vcsn {
   }
 
   /*-------------.
-    | input-output |
-    `-------------*/
+  | input-output |
+  `-------------*/
 
   template<typename W, typename M, typename St, typename Tm, typename Tw>
   St& op_rout(const Series<W, M>& s, St& st, const polynom<Tm, Tw>& p)
@@ -568,9 +571,9 @@ namespace vcsn {
   void  op_in_transpose(Series<W, M>& s, polynom<Tm, Tw>& t)
   {
     typedef typename polynom<Tm, Tw>::const_iterator const_iterator;
-    polynom<Tm, Tw>	new_t;
+    polynom<Tm, Tw>	new_t(t);
 
-    std::swap(new_t, t);
+    t.clear();
     for (const_iterator i = new_t.begin(); i != new_t.end(); ++i)
       t[mirror((*i).first)] = (*i).second;
   }
