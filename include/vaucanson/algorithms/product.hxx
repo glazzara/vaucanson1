@@ -238,8 +238,6 @@ namespace vcsn {
   diagonal(const Element<A, T>& a)
   {
     Element<A, T>    ret(a);
-    
-    ret.emancipate();
     do_diagonal_here(ret.set(), ret);
     return ret;
   }

@@ -1,5 +1,10 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/product.hxx: Get rid of calls to
+	`emancipate'. 
+
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/sub_automaton.hh: Equip for vaucanswig.
 	* include/vaucanson/algorithms/standard_of.hh,
 	include/vaucanson/algorithms/normalized.hh,
