@@ -55,21 +55,11 @@ template<typename T>
 using namespace vcsn;
 
 
-
-
-int main(int argc, char **argv)
+template <class Tset, class Tvalue> void test_design_pattern(const Tvalue& sample)
 {
-  tests::Tester t(1);
-
-
-  // vcsn::Element<int, int> *tmp = new vcsn::Element<int, int>();
-
-
-  Element<Natural, int> a;
-  Element<Natural, int> b;
-
-  int entier = 42;
-
+  vcsn::Element<Tset, Tvalue> a;
+  vcsn::Element<Tset, Tvalue> b;
+  
   a == b;
   a != b;
   a < b;
@@ -82,20 +72,28 @@ int main(int argc, char **argv)
   a / b;
   a % b;
   -a;
-  a == entier;
-  entier == a;
-  a != entier;
-  entier != a;
-  a < entier;
-  entier < a;
-  a > entier;
-  entier > a;
-  a <= entier;
-  entier <= a;
-  a >= entier;
-  entier >= a;
-  std::swap(a,b);
+  a == sample;
+  sample == a;
+  a != sample;
+  sample != a;
+  a < sample;
+  sample < a;
+  a > sample;
+  sample > a;
+  a <= sample;
+  sample <= a;
+  a >= sample;
+  sample >= a;
+  swap(a,a);
+}
 
+int main(int argc, char **argv)
+{
+  tests::Tester t(1);
+  
+  test_design_pattern<Natural, int>(42);
+  
+  
 //   TEST(t, "Method A::foo()", 
 //   { 
 //     A::foo(); true; 

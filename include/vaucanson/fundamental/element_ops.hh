@@ -209,8 +209,8 @@ operator-(const vcsn::Element<S, T>& e)
 } // vcsn
 
 
-//ambigu
-namespace std
+
+namespace vcsn
 {
   template<typename S1, typename T1, typename S2, typename T2>
   void swap(vcsn::Element<S1, T1>& e1, 
@@ -237,7 +237,7 @@ namespace std
   { 
     vcsn::op_xswap(SELECT(S), e.value(), v); 
   }
-} // std
+} // vcsn
 
 #endif // FUNDAMENTAL_ELEMENTS_OPS_HH
 
