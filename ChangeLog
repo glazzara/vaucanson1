@@ -1,5 +1,26 @@
 2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
 
+	Get rid of the dependency on sgml2latex, which comes from
+	a huge, obsolete, non-portable and broken package.
+
+	Use reStructuredText from Docutils instead. 
+	See: http://docutils.sourceforge.net/rst.html
+	
+	* doc/xml/dev.sgml: Rewrite to...
+	* doc/xml/dev.txt: ...this. Fix (some) mistakes.
+	* doc/xml/format.sgml: Rewrite to...
+	* doc/xml/format.txt: ...this. Fix (some) mistakes.
+
+	* doc/xml/Makefile.am: Update accordingly. Cleanup.
+
+	* configure.ac: Configure for RST2TEX. Remove configuration for
+	SGML2TEX.
+
+	* doc/beginner/Makefile.am,
+	* doc/tutorial/Makefile.am: Use properly autoconf expansions.
+	
+2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
+
 	* src/tests/bin/generate-test-suite.sh: Take care of stripping
 	extraneous '/' before header names to test. 
 
