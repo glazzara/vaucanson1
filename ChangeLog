@@ -1,5 +1,10 @@
 2004-10-26  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* configure.ac: Bump to Vaucanson 0.6.1.
+	* NEWS: Set the date for 0.6.1.
+
+2004-10-26  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/demos/xml/samples/Makefile.am: Fix dependencies and build rules
 	for the generated XML samples.
 
