@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO8859-1" standalone="no" ?>
+<!DOCTYPE session SYSTEM "vaucanson.dtd">
+<session xmlns="http://www.lrde.epita.fr/vaucanson">
+
+  <automaton>
+    <type>
+      <monoid generators="letters" type="free">
+        <generator value="A"/>
+        <generator value="B"/>
+        <generator value="C"/>
+      </monoid>
+      <semiring operations="numerical" set="B"/>
+    </type>
+    <content>
+      <states>
+        <state name="zero"/>
+        <state name="one"/>
+        <state name="two"/>
+        <state name="three"/>
+      </states>
+      <edges>
+        <edge dst="one" label="C" src="zero"/>
+        <edge dst="one" label="B" src="two"/>
+        <edge dst="one" label="A" src="one"/>
+        <edge dst="three" label="A" src="two"/>
+        <edge dst="three" label="C" src="three"/>
+      </edges>
+      <initials>
+        <initial label="1" state="zero"/>
+      </initials>
+      <finals>
+        <final label="1" state="two"/>
+      </finals>
+    </content>
+  </automaton>
+
+</session>

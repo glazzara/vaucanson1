@@ -61,6 +61,42 @@ namespace vcsn {
     
     } // char_letter
 
+    namespace char_pair {
+
+      typedef 
+      FreeMonoid<Alphabet>					Words;
+      
+      typedef std::basic_string<Letter>			        WordValue;
+
+      typedef
+      Element<Words, WordValue>			                Word;
+    
+    } // char_pair
+
+    namespace weighted_letter {
+
+      typedef 
+      FreeMonoid<Alphabet>					Words;
+      
+      typedef std::basic_string<Letter>			        WordValue;
+
+      typedef
+      Element<Words, WordValue>			                Word;
+    
+    } // weighted_letter
+
+    namespace int_letter {
+
+      typedef 
+      FreeMonoid<Alphabet>					Words;
+      
+      typedef std::list<Letter>			                WordValue;
+
+      typedef
+      Element<Words, WordValue>			                Word;
+    
+    } // int_letter
+
   } // algebra
 
 } // vcsn

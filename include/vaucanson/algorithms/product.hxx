@@ -33,6 +33,7 @@
 # include <set>
 # include <map>
 # include <queue>
+# include <stack>
 
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/sub_automaton.hh>
@@ -40,10 +41,104 @@
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
+# include <vaucanson/xml/infos.hh>
+
 namespace vcsn {
 
   /// @bug FIXME: This should be defined differently.
   # define PRODUCT_EVENT	"product"
+
+
+  // Some little graphic tools
+  namespace grphx {
+
+    // Default routines, no Xml tag.
+    template <typename Tag>
+    struct if_tag
+    {
+      template<typename I>
+      static
+      Tag align(const I& a)
+      {
+        return a.tag();
+      }
+      template <typename Auto>
+      static
+      void setcoordfrom(const Auto& a, hstate_t,
+                        Tag, hstate_t,
+                        Tag, hstate_t)
+      {
+      }
+    };
+
+    // Specialisation for Xml tag.
+    template <>
+    struct if_tag<xml::XmlInfosTag>
+    {
+      // Diagonal alignement with a depth-first traversal
+      template<typename I>
+      static
+      xml::XmlInfosTag align(const I& a)
+      {
+        AUTOMATON_TYPES(I);
+	xml::XmlInfosTag tag;
+        int x = 0;
+	std::map<hstate_t,bool> visited;
+	std::stack<hstate_t> stack;
+
+        for_each_state(i, a) {
+          visited[*i] = false;
+          // ensure inaccessible states will be visited
+          stack.push(*i);
+        }
+
+        for_each_initial_state(i, a)
+          stack.push(*i);
+
+        while (!stack.empty()) {
+          hstate_t i = stack.top();
+          stack.pop();
+
+          if (!visited[i]) {
+            visited[i] = true;
+
+            tag.states[i]().x = tag.states[i]().y = x++;
+
+	    std::list<hedge_t> aim;
+            a.deltac(aim, i, delta_kind::edges());
+            for_all_const_(std::list<hedge_t>, j, aim)
+              stack.push(a.aim_of(*j));
+          }
+        }
+        return tag;
+      }
+
+      template <typename Auto>
+      static
+      void setcoordfrom(Auto& a, hstate_t state,
+                        xml::XmlInfosTag x_tag, hstate_t x_state,
+                        xml::XmlInfosTag y_tag, hstate_t y_state)
+      {
+        a.tag().states[state]().x = x_tag.states[x_state]().x;
+        a.tag().states[state]().y = y_tag.states[y_state]().y;
+      }
+    };
+
+    template <typename Tag, typename I>
+    Tag align(const I& a)
+    {
+      return if_tag<Tag>::align(a);
+    }
+
+    template <typename Auto, typename Tag>
+    void setcoordfrom(Auto& a, hstate_t state,
+                      Tag x_tag, hstate_t x_state,
+                      Tag y_tag, hstate_t y_state)
+    {
+      if_tag<Tag>::setcoordfrom(a, state, x_tag, x_state, y_tag, y_state);
+    }
+  }
+
 
   /*--------.
   | product |
@@ -70,6 +165,9 @@ namespace vcsn {
     series_elt_t				series_zero
       = output.set().series().zero(SELECT(typename series_elt_t::value_t));
 
+    tag_t lhs_tag = grphx::align<tag_t>(lhs);
+    tag_t rhs_tag = grphx::align<tag_t>(rhs);
+
     /*----------------------------------.
     | Get initial states of the product |
     `----------------------------------*/
@@ -77,7 +175,14 @@ namespace vcsn {
       for_each_initial_state(rhs_s, rhs)
 	{
 	  hstate_t  new_state = output.add_state();
+<<<<<<< .working
 	  pair_hstate_t new_pair(*lhs_s, *rhs_s);
+=======
+	  grphx::setcoordfrom(output, new_state,
+                              lhs_tag, *lhs_s,
+                              rhs_tag, *rhs_s);
+	  pair_hstate_t new_pair(*lhs_s, *rhs_s);
+>>>>>>> .merge-right.r558
 	  m[new_state] = new_pair;
 	  visited[new_pair] = new_state;
 	  to_process.push(new_pair);
@@ -126,7 +231,14 @@ namespace vcsn {
 
 		    if (found == visited.end())
 		      {
+<<<<<<< .working
 			aim = output.add_state();
+=======
+			aim = output.add_state();
+			grphx::setcoordfrom(output, aim,
+                                            lhs_tag, new_pair.first,
+                                            rhs_tag, new_pair.second);
+>>>>>>> .merge-right.r558
 			visited[new_pair] = aim;
 			m[aim] = new_pair;
 			to_process.push(new_pair);

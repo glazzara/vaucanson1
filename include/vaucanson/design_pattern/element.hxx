@@ -69,7 +69,7 @@ namespace vcsn {
   template <class S, class T>
   template<typename OtherS, typename U>
   Element<S,T>::Element(const Element<OtherS, U>& other)
-    : set_(),
+    : set_(op_convert(SELECT(S), other.set())),
       value_(op_convert(SELECT(S), SELECT(T),
 			other.set(), other.value()))
   {
@@ -152,6 +152,9 @@ namespace vcsn {
   template<typename OtherS, typename U>
   Element<S,T>& Element<S,T>::operator=(const Element<OtherS, U>& other)
   {
+    // or convert it
+    if (!set_.bound())
+      set_.assign(op_convert(set(), other.set()));
     op_assign(set(), other.set(), value_, other.value());
     return *this;
   }

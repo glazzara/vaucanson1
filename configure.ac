@@ -63,6 +63,8 @@ AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
 
 # AC_CHECK_HEADERS([stl_config.h])
 
+VCSN_XML
+
 ##
 ## for documentation purpose.
 ##
@@ -105,6 +107,7 @@ AC_CONFIG_FILES([
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile
 	src/tests/tests-suites/Makefile
+	src/tests/xml/Makefile
 	src/demos/Makefile
 	src/demos/vgrep/Makefile
 	src/demos/fibonacci/Makefile
@@ -117,7 +120,8 @@ AC_CONFIG_FILES([
 	doc/beginner/Makefile
 	doc/makefiles/Makefile
         doc/doc.doxy
-	include/Makefile])
+	include/Makefile
+	xml/Makefile])
 
 
 dnl GENERATED LINES FOR TESTS - DO NOT EDIT

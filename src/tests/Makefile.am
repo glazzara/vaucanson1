@@ -10,6 +10,7 @@ SUBDIRS = \
 	design_pattern				\
 	tests-suites 				\
 	algebra    				\
-	automata				
+	automata				\
+	xml
 
 EXTRA_DIST = bin/generate-test-suite.sh

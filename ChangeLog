@@ -1,3 +1,4 @@
+<<<<<<< .working
 2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/misc/random.hh,
@@ -1087,6 +1088,219 @@
 	* src/tests/algebra/series/krat/main/Makefile.am:
 	  Add krat_exp_verbalization_test.hh
 
+=======
+2004-03-16  Valentin David  <valentin@lrde.epita.fr>
+
+	* xml/style-to-code.awk, xml/style-to-dtd.awk,
+	* xml/style-to-geometryvalue.awk, include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/infos.hh: Add accessors to the geometry.
+
+	* src/tests/xml/import_static.cc, src/tests/xml/import_dynamic.cc,
+	* src/tests/xml/import_generic.cc, src/tests/xml/import_session.cc:
+	Update.
+
+	* include/Makefile.am (EXTRA_DISTS): Fix.
+
+2003-12-22  Valentin David  <valentin@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/couple_letter.hh:
+	Make able to read.
+
+	* include/vaucanson/algebra/concrete/alphabets/predefs.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
+	Add some extra types.
+
+	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/xml_set.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx,
+	* include/vaucanson/xml/callback.hxx, include/vaucanson/xml/xml_set.hh,
+	* include/vaucanson/xml/xml_ops.hh,
+	* include/vaucanson/xml/xml_value.hxx, xml/gendtd.sh,
+	* src/tests/xml/nodata-simple.xml.ref, src/tests/xml/import_generic.cc,
+	* src/tests/xml/simple.xml, src/tests/xml/tropical.xml,
+	* src/tests/xml/numerical.xml, src/tests/xml/float.xml,
+	* src/tests/xml/transcoder.xml, src/tests/xml/session.xml,
+	* src/tests/xml/import_generic-tropical.xml.ref,
+	* src/tests/xml/nodata-session.xml.ref,
+	* src/tests/xml/export_static-session.xml.ref,
+	* src/tests/xml/import_dynamic-numerical.xml.ref,
+	* src/tests/xml/export_static-simple.xml.ref,
+	* src/tests/xml/export_session-simple.xml.ref,
+	* src/tests/xml/export_session-session.xml.ref,
+	* src/tests/xml/export_dynamic-simple.xml.ref,
+	* src/tests/xml/export_dynamic-session.xml.ref:
+	Update to new format.
+
+	* include/vaucanson/algebra/concrete/letter/int_letter.hxx,
+	* include/vaucanson/algebra/concrete/letter/int_letter.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/tools.hh,
+	* include/vaucanson/algebra/concrete/free_monoid/tools.hxx: New.
+
+	* include/Makefile.am: Update.
+
+2003-12-18  Valentin David  <valentin@lrde.epita.fr>
+
+	* include/vaucanson/xml/infos.hh, include/vaucanson/xml/session.hh,
+	* include/vaucanson/xml/xml_loader.hh,
+	* include/vaucanson/xml/xml_set.hh, include/vaucanson/xml/errors.hh,
+	* include/vaucanson/xml/static.hh, include/vaucanson/xml/types.hh,
+	* include/vaucanson/xml/dynamic.hh, include/vaucanson/xml/generic.hh,
+	* include/vaucanson/xml/callback.hh:
+	Add comments for doxygen.
+
+	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/session.hxx,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/xml_automaton.hxx:
+	Delete useless 'doc' parameter.
+
+	* include/vaucanson/xml/callback.hxx: Fix.
+
+2003-12-17  Valentin David  <valentin@lrde.epita.fr>
+
+	* config/xml.m4: New.
+	* configure.ac: Update.
+
+	* include/vaucanson/algorithms/product.hxx: Modify the geometry.
+
+	* include/vaucanson/design_pattern/element_ops.hxx,
+	* include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/infos.hh: Fix.
+
+	* src/tests/xml/import_session.cc,
+	* src/tests/xml/import_session-session.xml.ref: Fix.
+
+	* xml/vaucanson-g.style, xml/automaton-to-neato.xsl: New.
+	* xml/Makefile.am: Update.
+
+2003-12-05  Valentin David  <valentin@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/Makefile.am: Fix.
+
+	* Makefile.am, configure.ac, src/tests/Makefile.am,
+	* src/tests/sanity/generate_files.sh, include/Makefile.am:
+	Update.
+
+	* xml/automaton-to-dot.xsl,
+	* xml/style-to-code.awk,
+	* xml/style-to-dtd.awk,
+	* xml/style-to-geometryvalue.awk,
+	* xml/style-to-tex.awk,
+	* xml/style-to-xsl-vcsng.awk,
+	* xml/gendtd.sh,
+	* xml/Makefile.am,
+	* xml/automaton-to-vcsng.xsl.sh,
+	* include/vaucanson/xml/xml_value.hh,
+	* include/vaucanson/xml/krat_to_polynom.hh,
+	* include/vaucanson/xml/ios.hxx,
+	* include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/krat_to_polynom.hxx,
+	* include/vaucanson/xml/error_handler.hxx,
+	* include/vaucanson/xml/defaults.hh,
+	* include/vaucanson/xml/ios.hh,
+	* include/vaucanson/xml/error_handler.hh,
+	* include/vaucanson/xml/strings.hh,
+	* include/vaucanson/xml/infos.hh,
+	* include/vaucanson/xml/session.hh,
+	* include/vaucanson/xml/xml_set.hxx,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/strings.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx,
+	* include/vaucanson/xml/xml_loader.hh,
+	* include/vaucanson/xml/callback.hxx,
+	* include/vaucanson/xml/xml_set.hh,
+	* include/vaucanson/xml/xml_loader.hxx,
+	* include/vaucanson/xml/xml_ops.hh,
+	* include/vaucanson/xml/xml_value.hxx,
+	* include/vaucanson/xml/session.hxx,
+	* include/vaucanson/xml/errors.hh,
+	* include/vaucanson/xml/static.hh,
+	* include/vaucanson/xml/types.hh,
+	* include/vaucanson/xml/dynamic.hh,
+	* include/vaucanson/xml/generic.hh,
+	* include/vaucanson/xml/callback.hh,
+	* include/vaucanson/xml/genutfstrings.sh,
+	* include/vaucanson/config/pconf.hh,
+	* src/tests/xml/import_generic-session.xml.ref,
+	* src/tests/xml/nodata-tropical.xml.ref,
+	* src/tests/xml/nodata-transcoder.xml.ref,
+	* src/tests/xml/nodata-simple.xml.ref,
+	* src/tests/xml/test.src,
+	* src/tests/xml/Makefile.am,
+	* src/tests/xml/import_static.cc,
+	* src/tests/xml/export_static.cc,
+	* src/tests/xml/import_dynamic.cc,
+	* src/tests/xml/export_dynamic.cc,
+	* src/tests/xml/import_generic.cc,
+	* src/tests/xml/import_session.cc,
+	* src/tests/xml/export_session.cc,
+	* src/tests/xml/simple.xml,
+	* src/tests/xml/tropical.xml,
+	* src/tests/xml/numerical.xml,
+	* src/tests/xml/float.xml,
+	* src/tests/xml/transcoder.xml,
+	* src/tests/xml/nodata.cc,
+	* src/tests/xml/session.xml,
+	* src/tests/xml/nodata-numerical.xml.ref,
+	* src/tests/xml/import_generic-transcoder.xml.ref,
+	* src/tests/xml/import_generic-tropical.xml.ref,
+	* src/tests/xml/import_generic-simple.xml.ref,
+	* src/tests/xml/nodata-float.xml.ref,
+	* src/tests/xml/import_generic-numerical.xml.ref,
+	* src/tests/xml/import_static-session.xml.ref,
+	* src/tests/xml/import_static-tropical.xml.ref,
+	* src/tests/xml/import_static-transcoder.xml.ref,
+	* src/tests/xml/import_generic-float.xml.ref,
+	* src/tests/xml/import_static-simple.xml.ref,
+	* src/tests/xml/import_static-numerical.xml.ref,
+	* src/tests/xml/import_session-transcoder.xml.ref,
+	* src/tests/xml/import_session-tropical.xml.ref,
+	* src/tests/xml/import_session-simple.xml.ref,
+	* src/tests/xml/import_session-session.xml.ref,
+	* src/tests/xml/import_static-float.xml.ref,
+	* src/tests/xml/import_session-numerical.xml.ref,
+	* src/tests/xml/nodata-session.xml.ref,
+	* src/tests/xml/import_dynamic-transcoder.xml.ref,
+	* src/tests/xml/import_dynamic-tropical.xml.ref,
+	* src/tests/xml/import_dynamic-simple.xml.ref,
+	* src/tests/xml/import_dynamic-session.xml.ref,
+	* src/tests/xml/export_static-session.xml.ref,
+	* src/tests/xml/import_dynamic-numerical.xml.ref,
+	* src/tests/xml/export_static-tropical.xml.ref,
+	* src/tests/xml/export_static-transcoder.xml.ref,
+	* src/tests/xml/import_dynamic-float.xml.ref,
+	* src/tests/xml/export_static-simple.xml.ref,
+	* src/tests/xml/export_static-numerical.xml.ref,
+	* src/tests/xml/export_session-transcoder.xml.ref,
+	* src/tests/xml/export_session-tropical.xml.ref,
+	* src/tests/xml/export_session-simple.xml.ref,
+	* src/tests/xml/export_session-session.xml.ref,
+	* src/tests/xml/export_static-float.xml.ref,
+	* src/tests/xml/export_session-numerical.xml.ref,
+	* src/tests/xml/import_session-float.xml.ref,
+	* src/tests/xml/export_dynamic-transcoder.xml.ref,
+	* src/tests/xml/export_dynamic-tropical.xml.ref,
+	* src/tests/xml/export_dynamic-simple.xml.ref,
+	* src/tests/xml/export_dynamic-session.xml.ref,
+	* src/tests/xml/export_dynamic-numerical.xml.ref,
+	* src/tests/xml/export_session-float.xml.ref,
+	* src/tests/xml/export_dynamic-float.xml.ref: New.
+
+2003-12-04  Valentin David  <valentin@lrde.epita.fr>
+
+	* src/tests/sanity/generate_files.sh: Fix.
+
+	* include/vaucanson/design_pattern/default_ops.hxx:
+	Add default set conversion.
+	* include/vaucanson/design_pattern/element.hxx: Convert sets.
+
+	* include/vaucanson/design_pattern/element_ops.hxx: Able op_rin to
+	write on set.
+
+	* include/vaucanson/automata/concrete/graph.hxx,
+	* include/vaucanson/automata/concrete/graph.hh: Add some missing
+	operations for tags.
+
+>>>>>>> .merge-right.r558
 2003-11-27  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/standard.hxx (do_in_standardize):

@@ -14,17 +14,46 @@ EXTRA_DIST = generate_files.sh
 test_base.cc: generate_files.sh \$(top_srcdir)/include/Makefile.am
 	\$(SHELL) "\$(srcdir)"/generate_files.sh "\$(srcdir)"
 
+if XML_CHECK
+  AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -I\$(top_srcdir)/include -I\$(top_builddir)/include -I\$(XERCESC)/include
+else
 AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -I\$(top_srcdir)/include -I\$(top_builddir)/include
+endif
 AM_CXXFLAGS = \$(CXXFLAGS_STRICT)
+
+if XML_CHECK
+  AM_LDFLAGS = -L\$(XERCESC)/lib -lxerces-c
+endif
 check_PROGRAMS= \\
 EOF
-awk '{ gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' files.tmp | \
+awk '/xml/ { next }; { gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' \
+  files.tmp | sed '$s/\(.*\) \\/\1/' >> Makefile.am
+
+cat >> Makefile.am <<EOF
+if XML_CHECK
+check_PROGRAMS+= \\
+EOF
+
+awk '/xml/ { gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' files.tmp | \
   sed '$s/\(.*\) \\/\1/' >> Makefile.am
+
+echo "endif" >> Makefile.am
 
 echo >> Makefile.am
 echo "TESTS= \\" >> Makefile.am
-awk '{ gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' files.tmp | \
+
+awk '/xml/ { next }; { gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' \
+  files.tmp | sed '$s/\(.*\) \\/\1/' >> Makefile.am
+
+cat >> Makefile.am <<EOF
+if XML_CHECK
+TESTS+= \\
+EOF
+
+awk '/xml/ { gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' files.tmp | \
   sed '$s/\(.*\) \\/\1/' >> Makefile.am
+
+echo "endif" >> Makefile.am
 
 # Set test sources and CPPFLAGS.
 awk '

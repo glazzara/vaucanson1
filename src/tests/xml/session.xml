@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO8859-1" standalone="no" ?>
+<!DOCTYPE session SYSTEM "vaucanson.dtd">
+<session xmlns="http://www.lrde.epita.fr/vaucanson">
+
+<automaton>
+ <type>
+  <monoid>
+    <generator value="A"/>
+    <generator value="B"/>
+    <generator value="C"/>
+  </monoid>
+
+  <semiring set="B"/>
+ </type>
+
+ <content>
+  <states>
+    <state name="zero"/>
+    <state name="one"/>
+    <state name="two"/>
+    <state name="three"/>
+  </states>
+
+  <edges>
+    <edge dst="one" label="C" src="zero"/>
+    <edge dst="one" label="B" src="two"/>
+    <edge dst="one" label="A" src="one"/>
+    <edge dst="three" label="A" src="two"/>
+    <edge dst="three" label="C" src="three"/>
+  </edges>
+
+  <initials>
+    <initial label="1" state="zero"/>
+  </initials>
+
+  <finals>
+    <final label="1" state="two"/>
+  </finals>
+ </content>
+</automaton>
+
+<automaton>
+ <type>
+  <monoid>
+    <generator value="A"/>
+    <generator value="B"/>
+    <generator value="C"/>
+  </monoid>
+
+  <semiring set="B"/>
+ </type>
+
+ <content>
+  <states>
+    <state name="zero2"/>
+    <state name="one2"/>
+    <state name="two2"/>
+    <state name="three2"/>
+  </states>
+
+  <edges>
+    <edge dst="one2" label="A" src="zero2"/>
+    <edge dst="one2" label="C" src="two2"/>
+    <edge dst="one2" label="B" src="one2"/>
+    <edge dst="three2" label="A" src="two2"/>
+    <edge dst="three2" label="C" src="three2"/>
+  </edges>
+
+  <initials>
+    <initial label="1" state="zero2"/>
+  </initials>
+
+  <finals>
+    <final label="1" state="two2"/>
+  </finals>
+ </content>
+</automaton>
+
+</session>

@@ -59,6 +59,26 @@ namespace vcsn {
 
     } // char_letter
 
+    namespace char_pair {
+
+      typedef std::pair<char, char>    				 Letter;
+      typedef AlphabetSet<Letter>			         Alphabets;
+      typedef Element<Alphabets, std::set<Letter> >		  Alphabet;
+      typedef AlphabetDecorator<Letter, std::set<Letter> >	 DAlphabetImpl;
+      typedef Element<Alphabets, DAlphabetImpl>			 DAlphabet;
+
+    } // char_pair
+
+    namespace weighted_letter {
+
+      typedef std::pair<int, char>	      			 Letter;
+      typedef AlphabetSet<Letter>			         Alphabets;
+      typedef Element<Alphabets, std::set<Letter> >		  Alphabet;
+      typedef AlphabetDecorator<Letter, std::set<Letter> >	 DAlphabetImpl;
+      typedef Element<Alphabets, DAlphabetImpl>			 DAlphabet;
+
+    } // weighted_letter
+
     namespace int_letter {
 
       typedef int						 Letter;

@@ -2,7 +2,25 @@
 #
 # $Id$
 
-EXTRA_DIST = vaucanson/config/pconf-hh.in
+EXTRA_DIST = vaucanson/config/pconf-hh.in \
+             vaucanson/xml/genutfstrings.sh
+
+CLEANFILES = vaucanson/xml/xmlstrings.inc \
+	     vaucanson/xml/geometry.inc   \
+	     vaucanson/xml/loadgeometry.inc
+
+vaucanson/xml/xmlstrings.inc: $(top_srcdir)/xml/vaucanson-g.style $(srcdir)/vaucanson/xml/*.hxx $(srcdir)/vaucanson/xml/genutfstrings.sh vaucanson/xml/loadgeometry.inc
+	cd vaucanson/xml && $(SHELL) $(srcdir)/genutfstrings.sh
+
+vaucanson/xml/geometry.inc: $(top_srcdir)/xml/style-to-geometryvalue.awk $(top_srcdir)/xml/vaucanson-g.style
+	awk -f  $(top_srcdir)/xml/style-to-geometryvalue.awk \
+		$(top_srcdir)/xml/vaucanson-g.style \
+		>$@
+
+vaucanson/xml/loadgeometry.inc: $(top_srcdir)/xml/style-to-code.awk $(top_srcdir)/xml/vaucanson-g.style
+	awk -f  $(top_srcdir)/xml/style-to-code.awk \
+		$(top_srcdir)/xml/vaucanson-g.style \
+		>$@
 
 nobase_include_HEADERS =					     \
 	vaucanson/vaucanson.hh \
@@ -44,6 +62,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algebra/concrete/letter/char_letter.hh	     \
 	vaucanson/algebra/concrete/letter/couple_letter.hh	     \
 	vaucanson/algebra/concrete/letter/couple_letter.hxx	     \
+	vaucanson/algebra/concrete/letter/int_letter.hh	             \
+	vaucanson/algebra/concrete/letter/int_letter.hxx	     \
 	vaucanson/algebra/concrete/letter/range.hh		     \
 	vaucanson/algebra/concrete/letter/range.hxx		     \
 	vaucanson/algebra/concrete/predefs.hh			     \
@@ -70,6 +90,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/algebra/concrete/series/krat_exp_transpose.hxx     \
 	vaucanson/algebra/concrete/series/krat.hh		     \
 	vaucanson/algebra/concrete/series/krat.hxx		     \
+	vaucanson/algebra/concrete/series/krat_exp_verbalization.hh  \
+	vaucanson/algebra/concrete/series/krat_exp_verbalization.hxx \
 	vaucanson/algebra/concrete/series/polynoms.hh		     \
 	vaucanson/algebra/concrete/series/polynoms.hxx		     \
 	vaucanson/algebra/concrete/series/rat/depth_visitor.hh	     \
@@ -291,5 +313,41 @@ nobase_include_HEADERS =					     \
 	vaucanson/tools/dot_format.hh		\
 	vaucanson/tools/dot_format.hxx		\
 	vaucanson/tools/simple_format.hh	\
+<<<<<<< .working
 	vaucanson/tools/simple_format.hxx
 
+=======
+	vaucanson/tools/simple_format.hxx	\
+	vaucanson/xml/callback.hh		\
+	vaucanson/xml/callback.hxx		\
+	vaucanson/xml/defaults.hh		\
+	vaucanson/xml/dynamic.hh		\
+	vaucanson/xml/error_handler.hh		\
+	vaucanson/xml/error_handler.hxx		\
+	vaucanson/xml/errors.hh			\
+	vaucanson/xml/generic.hh		\
+	vaucanson/xml/infos.hh			\
+	vaucanson/xml/ios.hh			\
+	vaucanson/xml/ios.hxx			\
+	vaucanson/xml/krat_to_polynom.hh	\
+	vaucanson/xml/krat_to_polynom.hxx	\
+	vaucanson/xml/session.hh		\
+	vaucanson/xml/session.hxx		\
+	vaucanson/xml/static.hh			\
+	vaucanson/xml/strings.hh		\
+	vaucanson/xml/strings.hxx		\
+	vaucanson/xml/types.hh			\
+	vaucanson/xml/xml_automaton.hh		\
+	vaucanson/xml/xml_automaton.hxx		\
+	vaucanson/xml/xml_loader.hh		\
+	vaucanson/xml/xml_loader.hxx		\
+	vaucanson/xml/xml_ops.hh		\
+	vaucanson/xml/xml_ops.hxx		\
+	vaucanson/xml/xml_set.hh		\
+	vaucanson/xml/xml_set.hxx		\
+	vaucanson/xml/xml_value.hh		\
+	vaucanson/xml/xml_value.hxx		\
+	vaucanson/xml/xmlstrings.inc		\
+	vaucanson/xml/geometry.inc		\
+	vaucanson/xml/loadgeometry.inc
+>>>>>>> .merge-right.r558
