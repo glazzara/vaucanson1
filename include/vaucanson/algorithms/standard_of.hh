@@ -1,4 +1,4 @@
-// glushkov.hh
+// standard_of.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,25 +19,54 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_GLUSHKOV_HH
-# define VCSN_ALGORITHMS_GLUSHKOV_HH
+#ifndef VCSN_ALGORITHMS_STANDARD_OF_HH
+# define VCSN_ALGORITHMS_STANDARD_OF_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concrete/series/krat.hh>
 
 namespace vcsn {
 
+  /**
+   * @file   standard_of.hh
+   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+   * @date   Tue Jun 24 20:46:53 2003
+   * 
+   * @brief  This file provides a converter from expression to standard automaton.
+   * 
+   */
+
+
   /*! \addtogroup algorithms */  /* @{ */
 
-  //! Convert a krat expression into an automaton using Glushkov construction.
+  /** 
+   * @brief Convert a rational expression into a standard automaton.
+   * 
+   * @param  e the expression to convert.
+   * @param  a the automaton to store the result.
+   *
+   * @note the automaton is used to enable the use of different series
+   * from the expression.
+   */
   template <typename A, typename T, typename Exp>
   void
-  glushkov(Element<A, T>&, const Exp&);
+  standard_of(Element<A, T>& a, const Exp& e);
+
+  /** 
+   * @brief Convert a rational expression into a standard automaton.
+   * 
+   * @param  e the expression to convert.
+   * @return a standard automaton.
+   * @note the automaton is defined using the series of the expression.
+   */
+  template <typename A, typename T, typename Exp>
+  Element<A, T>
+  standard_of(const Exp& e);
   
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/glushkov.hxx>
+# include <vaucanson/algorithms/standard_of.hxx>
 
-#endif // VCSN_ALGORITHMS_GLUSHKOV_HH
+#endif // VCSN_ALGORITHMS_STANDARD_OF_HH

@@ -29,7 +29,7 @@
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/automata/concrete/generalized.hh>
-# include <vaucanson/algorithms/glushkov.hh>
+# include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/compute.hh>
 
@@ -64,7 +64,7 @@ bool glushkov_test(tests::Tester& tg)
     exp = exp * a_e * exp;
     vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
     Auto	au = gen.empty();
-    glushkov(au, exp.value());
+    standard_of(au, exp.value());
     realtime_here(au);
     unsigned i = 0;
     for (; i < nb_word_test; ++i)
@@ -91,7 +91,7 @@ bool glushkov_test(tests::Tester& tg)
 	krat_t exp = s.choose(SELECT(exp_t));
 	vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
 	Auto	au = gen.empty();
-	glushkov(au, exp.value());
+	standard_of(au, exp.value());
 	realtime_here(au);
 	if (t.verbose() == tests::high)
 	  {

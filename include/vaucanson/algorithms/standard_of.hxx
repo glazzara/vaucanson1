@@ -1,4 +1,4 @@
-// glushkov.hxx
+// standard_of.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,27 +19,28 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_GLUSHKOV_HXX
-# define VCSN_ALGORITHMS_GLUSHKOV_HXX
+#ifndef VCSN_ALGORITHMS_STANDARD_OF_HXX
+# define VCSN_ALGORITHMS_STANDARD_OF_HXX
 
 # include <set>
-# include <vaucanson/algorithms/glushkov.hh>
+# include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 
 namespace vcsn {
 
-  /*----------------.
-  | GlushkovVisitor |
-  `----------------*/
+  namespace algebra {
+
+  /*-------------------.
+  | Standard_OfVisitor |
+  `-------------------*/
   template <class Exp_, 
 	    class Auto_,
 	    class Dispatch_>
-  class GlushkovVisitor : 
-    public GenericMatcher
-  <
-    GlushkovVisitor<Exp_, Auto_, Dispatch_>,
+  class Standard_OfVisitor : 
+    public algebra::GenericMatcher<
+    Standard_OfVisitor<Exp_, Auto_, Dispatch_>,
     Exp_,
     Auto_*,
     Dispatch_
@@ -56,8 +57,8 @@ namespace vcsn {
     typedef typename Exp_::weight_value_t		weight_value_t;
     typedef rat::Node<monoid_value_t, weight_value_t>   node_t;
 
-    typedef GlushkovVisitor<Exp_, Auto_, Dispatch_>     this_class;
-    typedef GenericMatcher<this_class, Exp_, Auto_*, Dispatch_> parent_class;
+    typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>     this_class;
+    typedef algebra::GenericMatcher<this_class, Exp_, Auto_*, Dispatch_> parent_class;
     typedef typename parent_class::return_type          return_type;
 
     DecBinaryOp(Product, Exp_, Exp_);
@@ -71,7 +72,7 @@ namespace vcsn {
 
   public :
 
-    GlushkovVisitor(const series_t& series) :
+    Standard_OfVisitor(const series_t& series) :
       automata_set_(series)
     {}
 
@@ -167,15 +168,17 @@ namespace vcsn {
     automata_set_t automata_set_;
   };
 
+  }
+
   template <typename A, 
 	    typename Output,
 	    typename Exp>
   void
-  do_glushkov(const AutomataBase<A>& a_set, 
+  do_standard_of(const AutomataBase<A>& a_set, 
 	      Output& output, 
 	      const Exp& kexp)
   {
-    GlushkovVisitor<Exp, Output, DispatchFunction<Exp> > 
+    algebra::Standard_OfVisitor<Exp, Output, algebra::DispatchFunction<Exp> > 
       m(output.set().series()); 
     output = *m.match(kexp);
   }
@@ -184,12 +187,22 @@ namespace vcsn {
 	   typename T, 
 	   typename Exp>
   void
-  glushkov(Element<A, T>& out, 
+  standard_of(Element<A, T>& out, 
 	   const Exp& kexp)
   {
-    do_glushkov(out.set(), out, kexp);
+    do_standard_of(out.set(), out, kexp);
   }
   
+  template <typename A, typename T, typename Exp>
+  Element<A, T>
+  standard_of(const Exp& e)
+  {
+    A automata_set(e.set());
+    Element<A, T> out(automata_set);
+    standard_of(out, e);
+    return out;
+  }
+
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_GLUSHKOV_HXX
+#endif // VCSN_ALGORITHMS_STANDARD_OF_HXX

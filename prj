@@ -1,18 +1,19 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 268)
-(Parent-Version vaucanson 0 267)
+(Project-Version vaucanson 0 269)
+(Parent-Version vaucanson 0 268)
 (Version-Log "
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/sub_automaton.hh: Document and replace ...
-	* include/vaucanson/algorithms/extract.hh: it.
-	* include/vaucanson/algorithms/sub_automaton.hxx: Document and replace ...
-	* include/vaucanson/algorithms/extract.hxx: it.
+	* include/vaucanson/algorithms/standard_of.hh: Document and replace ...
+	* include/vaucanson/algorithms/glushkov.hh: it.
+	* include/vaucanson/algorithms/standard_of.hxx: Document and replace ...
+	* include/vaucanson/algorithms/glushkov.hxx: it.
+	* src/test/automata/algos/glushkov_test.hh: Use standard_of.
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 24 Jun 2003 20:44:17 +0200")
+(Checkin-Time "Tue, 24 Jun 2003 21:00:27 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -95,7 +96,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.73 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.74 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -342,8 +343,8 @@
   (include/vaucanson/algorithms/aut_to_exp.hxx (vaucanson/e/31_eliminatio 1.10 600))
   (include/vaucanson/algorithms/sub_automaton.hh (vaucanson/d/31_extract.hh 1.10 600))
   (include/vaucanson/algorithms/sub_automaton.hxx (vaucanson/d/30_extract.hx 1.12 600))
-  (include/vaucanson/algorithms/glushkov.hh (vaucanson/e/42_glushkov.h 1.9 600))
-  (include/vaucanson/algorithms/glushkov.hxx (vaucanson/e/41_glushkov.h 1.11 600))
+  (include/vaucanson/algorithms/standard_of.hh (vaucanson/e/42_glushkov.h 1.10 600))
+  (include/vaucanson/algorithms/standard_of.hxx (vaucanson/e/41_glushkov.h 1.12 600))
   (include/vaucanson/algorithms/hopcroft.hh (vaucanson/e/26_hopcroft.h 1.9 600))
   (include/vaucanson/algorithms/hopcroft.hxx (vaucanson/e/25_hopcroft.h 1.8 600))
   (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.6 600))
@@ -412,7 +413,7 @@
   (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.9 600))
   (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.7 600))
   (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.4 600))
-  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.9 600))
+  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.10 600))
   (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.12 600))
   (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.12 600))
   (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.8 600))
