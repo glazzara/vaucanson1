@@ -1,4 +1,4 @@
-// complementary.hh
+// complement.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,8 +19,13 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_COMPLEMENTARY_HH
-# define VCSN_ALGORITHMS_COMPLEMENTARY_HH
+#ifndef VCSN_ALGORITHMS_COMPLEMENT_HH
+# define VCSN_ALGORITHMS_COMPLEMENT_HH
+
+/**
+ * @file   complement.hh
+ * @brief  Complementation algorithm for boolean automaton.
+ */
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
@@ -28,20 +33,32 @@ namespace vcsn {
 
   /*! \addtogroup algorithms */  /* @{ */
 
-  //! Inverse finality to recognize the complementary language.
+  /** 
+   * Complement in place the set of final states.
+   * 
+   * @param a the deterministic boolean automaton to complement.
+   * @note the input automaton must be complete and deterministic.
+   * @see complement.
+   */
   template <typename A, typename T>
   void
-  auto_in_complementary(Element<A, T>&);
+  complement_here(Element<A, T>& a);
 
-  //! Return the automaton which recognizes the complementary language.
+  /** 
+   * Complement in place the set of final states.
+   * 
+   * @param a the deterministic boolean automaton to complement.
+   * @note the input automaton must be complete and deterministic.
+   * @see complement_here.
+   */  
   template <typename A, typename T>
   Element<A, T>
-  auto_complementary(const Element<A, T>&);
+  complement(const Element<A, T>& a);
 
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/complementary.hxx>
+# include <vaucanson/algorithms/complement.hxx>
 
-#endif // VCSN_ALGORITHMS_COMPLEMENTARY_HH
+#endif // VCSN_ALGORITHMS_COMPLEMENT_HH

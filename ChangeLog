@@ -1,5 +1,13 @@
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/complement.hh:
+		(auto_in_complementary): Rename to complement_here.
+		(auto_complementary): Rename to complement.
+		Document.
+	* include/vaucanson/algorithms/complement.hxx: Likewise.
+
+2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* src/tests/automata/algos/closure_test.hh: 
 		Test backward/forward closure.
 

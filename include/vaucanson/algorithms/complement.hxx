@@ -1,4 +1,4 @@
-// complementary.hxx
+// complement.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_COMPLEMENTARY_HXX
-# define VCSN_ALGORITHMS_COMPLEMENTARY_HXX 
+#ifndef VCSN_ALGORITHMS_COMPLEMENT_HXX
+# define VCSN_ALGORITHMS_COMPLEMENT_HXX 
 
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -28,10 +28,14 @@
 # include <vaucanson/tools/usual.hh>
 
 namespace vcsn {
-
+  
+  /*----------------.
+  | Complement_here |
+  `----------------*/
+  // author: Yann Régis-Gianas
   template <typename A, typename T>
   void
-  auto_in_complementary(Element<A, T>& e)
+  complement_here(Element<A, T>& e)
   {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
@@ -44,18 +48,19 @@ namespace vcsn {
 	e.set_final(*i);
   }
 
+  /*----------------.
+  | Complement_here |
+  `----------------*/
+  // author: Yann Régis-Gianas
   template <typename A, typename T>
   Element<A, T>
-  auto_complementary(const Element<A, T>& e)
+  complement(const Element<A, T>& e)
   {
-    typedef Element<A, T> automaton_t;
-    AUTOMATON_TYPES(automaton_t);
-  
-    automaton_t work(e);
-    auto_in_complementary(work);
+    Element<A, T> work(e);
+    complement_here(work);
     return work;
   }
 
 } // vcsn
 
-#endif // VCSN_ALGORITHMS_COMPLEMENTARY_HXX 
+#endif // VCSN_ALGORITHMS_COMPLEMENT_HXX 

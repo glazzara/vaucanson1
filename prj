@@ -1,17 +1,19 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 235)
-(Parent-Version vaucanson 0 234)
+(Project-Version vaucanson 0 236)
+(Parent-Version vaucanson 0 235)
 (Version-Log "
 2003-06-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* src/tests/automata/algos/closure_test.hh: 
-		Test backward/forward closure.
-
+	* include/vaucanson/algorithms/complement.hh:
+		(auto_in_complementary): Rename to complement_here.
+		(auto_complementary): Rename to complement.
+		Document.
+	* include/vaucanson/algorithms/complement.hxx: Likewise.
 ")
 (New-Version-Log "")
-(Checkin-Time "Fri, 20 Jun 2003 15:35:08 +0200")
+(Checkin-Time "Fri, 20 Jun 2003 15:57:42 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -94,7 +96,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.40 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.41 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -327,8 +329,8 @@
 
   
   
-  (include/vaucanson/algorithms/complementary.hh (vaucanson/f/4_complement 1.7 600))
-  (include/vaucanson/algorithms/complementary.hxx (vaucanson/f/3_complement 1.7 600))
+  (include/vaucanson/algorithms/complement.hh (vaucanson/f/4_complement 1.8 600))
+  (include/vaucanson/algorithms/complement.hxx (vaucanson/f/3_complement 1.8 600))
   (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.8 600))
   (include/vaucanson/algorithms/complete.hxx (vaucanson/f/1_complete.h 1.7 600))
   (include/vaucanson/algorithms/compute.hh (vaucanson/e/6_compute.hh 1.9 600))
@@ -845,5 +847,7 @@
 
   ; (include/vaucanson/algorithms/closure.hxx ())
 )
-(Merge-Parents)
+(Merge-Parents
+  (0.235 complete)
+)
 (New-Merge-Parents)
