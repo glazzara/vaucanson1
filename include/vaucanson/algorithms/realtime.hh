@@ -37,7 +37,7 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
 
   /// Enum to indicate which kind of realtime algorithms must be used.
-  enum realtime_type { forward_realtime, backward_realtime };
+  enum realtime_type { forward, backward };
   
   /**
    * @brief Test whether an automaton is realtime.
@@ -69,7 +69,7 @@ namespace vcsn {
    */
   template<typename A, typename T>
   void
-  realtime_here(Element<A, T>& a, realtime_type type = forward_realtime);
+  realtime_here(Element<A, T>& a, realtime_type type = forward);
 
   /**
    * @brief Returns a fresh realtime automaton.
@@ -86,7 +86,7 @@ namespace vcsn {
    */
   template<typename A, typename T>
   Element<A, T>
-  realtime(const Element<A, T>& a, realtime_type type = forward_realtime);
+  realtime(const Element<A, T>& a, realtime_type type = forward);
 
   /** @} */
   

@@ -28,7 +28,7 @@
 # include <queue>
 
 # include <vaucanson/algorithms/product.hh>
-# include <vaucanson/algorithms/extract.hh>
+# include <vaucanson/algorithms/sub_automaton.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/automata/concept/history.hh>
@@ -214,7 +214,7 @@ namespace vcsn {
 	if (b_event->get_first() == b_event->get_second())
 	  diagonal_states.insert(*s);
       }
-    auto_in_extract(a, diagonal_states);
+    sub_automaton_here(a, diagonal_states);
   }
 
   template <typename A, typename T>

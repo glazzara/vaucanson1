@@ -30,8 +30,7 @@
 # include <vaucanson/algorithms/backward_realtime.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
-# include <vaucanson/algorithms/closure.hh>
-# include <vaucanson/algorithms/reachable.hh>
+# include <vaucanson/algorithms/accessible.hh>
 
 namespace vcsn {
 
@@ -64,9 +63,9 @@ namespace vcsn {
   `--------------*/
   template<typename A, typename T>
   void
-  realtime_here(Element<A, T>& a, realtime_type type = forward_realtime)
+  realtime_here(Element<A, T>& a, realtime_type type)
   {
-    if (type == forward_realtime)
+    if (type == forward)
       forward_realtime_here(a);
     else
       backward_realtime_here(a);
@@ -77,9 +76,9 @@ namespace vcsn {
   `---------*/
   template<typename A, typename T>
   Element<A, T>
-  realtime(const Element<A, T>& a, realtime_type type = forward_realtime)
+  realtime(const Element<A, T>& a, realtime_type type)
   {
-    if (type== forward_realtime)
+    if (type== forward)
       return forward_realtime_here(a);
     else
       return backward_realtime_here(a);

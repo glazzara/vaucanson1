@@ -1,5 +1,14 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/product.hxx: Fix include.
+	* include/vaucanson/algorithms/realtime.hh: 
+		(forward_realtime): Rename to "forward" because of conflict.
+		(backward_realtime): Rename to "backward" because of conflict.
+	* include/vaucanson/algorithms/realtime.hxx: Likewise.
+	* include/vaucanson/algorithms/forward_realtime.hxx: Likewise.
+
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/hopcroft_minimization.hh: Document and replace ...
 	* include/vaucanson/algorithms/hopcroft.hh: Document and replace ...
 	* include/vaucanson/algorithms/hopcroft_minimization.hxx: Document and replace ...
