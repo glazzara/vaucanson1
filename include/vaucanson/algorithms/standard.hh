@@ -53,6 +53,8 @@ namespace vcsn {
    * 
    * @bug Not implemented yed
    */
+  // INTERFACE: void standardize(Automaton& a) { return vcsn::standardize(*a); }
+  // INTERFACE: void standardize(GenAutomaton& a) { return vcsn::standardize(*a); }
   template<typename A, typename T>
   void
   standardize(Element<A, T>& a);
@@ -64,6 +66,8 @@ namespace vcsn {
    *
    * @see standardize
    */
+  // INTERFACE: bool is_standard(Automaton& a) { return vcsn::is_standard(*a); }
+  // INTERFACE: bool is_standard(GenAutomaton& a) { return vcsn::is_standard(*a); }
   template<typename A, typename T>
   bool
   is_standard(const Element<A, T>& a);
@@ -80,7 +84,9 @@ namespace vcsn {
    * @see standardize
    * @see is_standard
    * @see union_of_standard
-   */
+   */ 
+  // INTERFACE: void union_of_standard_here(Automaton& a1, const Automaton& a2) { return vcsn::union_of_standard_here(*a1, *a2); }
+  // INTERFACE: void union_of_standard_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_standard_here(*a1, *a2); }
   template<typename A, typename T, typename U>
   void 
   union_of_standard_here(Element<A, T>& lhs, 
@@ -99,6 +105,8 @@ namespace vcsn {
    * @see is_standard
    * @see union_of_standard_here
    */
+  // INTERFACE: Automaton union_of_standard(const Automaton& a1, const Automaton& a2) { return vcsn::union_of_standard(*a1, *a2); }
+  // INTERFACE: GenAutomaton union_of_standard(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::union_of_standard(*a1, *a2); }
   template<typename A, typename T, typename U>
   Element<A, T> 
   union_of_standard(const Element<A, T>& lhs, 
@@ -117,6 +125,8 @@ namespace vcsn {
    * @see is_standard
    * @see concat_of_standard
    */
+  // INTERFACE: void concat_of_standard_here(Automaton& a1, const Automaton& a2) { return vcsn::concat_of_standard_here(*a1, *a2); }
+  // INTERFACE: void concat_of_standard_here(GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concat_of_standard_here(*a1, *a2); }
   template<typename A, typename T, typename U>
   void 
   concat_of_standard_here(Element<A, T>& lhs, 
@@ -135,6 +145,8 @@ namespace vcsn {
    * @see is_standard
    * @see concat_of_standard_here
    */
+  // INTERFACE: Automaton concat_of_standard(const Automaton& a1, const Automaton& a2) { return vcsn::concat_of_standard(*a1, *a2); }
+  // INTERFACE: GenAutomaton concat_of_standard(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::concat_of_standard(*a1, *a2); }
   template<typename A, typename T, typename U>
   Element<A, T> 
   concat_of_standard(const Element<A, T>& lhs, 
@@ -152,6 +164,8 @@ namespace vcsn {
    * @see is_standard
    * @see star_of_standard
    */
+  // INTERFACE: void star_of_standard_here(Automaton& a) { return vcsn::star_of_standard_here(*a); }
+  // INTERFACE: void star_of_standard_here(GenAutomaton& a) { return vcsn::star_of_standard_here(*a); }
   template<typename A, typename T>
   void 
   star_of_standard_here(Element<A, T>& a);
@@ -168,6 +182,8 @@ namespace vcsn {
    * @see is_standard
    * @see star_of_standard_here
    */
+  // INTERFACE: Automaton star_of_standard(const Automaton& a) { return vcsn::star_of_standard(*a); }
+  // INTERFACE: GenAutomaton star_of_standard(const GenAutomaton& a) { return vcsn::star_of_standard(*a); }
   template<typename A, typename T>
   Element<A, T> 
   star_of_standard(const Element<A, T>& a);

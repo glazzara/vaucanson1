@@ -56,6 +56,8 @@ namespace vcsn {
    *
    * @see realtime
    */
+  // INTERFACE: bool is_realtime(Automaton& a) { return vcsn::is_realtime(*a); }
+  // INTERFACE: bool is_realtime(GenAutomaton& a) { return vcsn::is_realtime(*a); }
   template<typename A, typename T>
   bool
   is_realtime(const Element<A, T>& a);

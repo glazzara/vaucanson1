@@ -55,6 +55,8 @@ namespace vcsn {
    * @param out The resulting automaton
    * @param kexp The rational expression
    */
+  // INTERFACE: void thompson_of_here(Automaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
+  // INTERFACE: void thompson_of_here(GenAutomaton& a, const Exp& e) { return vcsn::thompson_of(*a, e.value()); }
   template<typename A,      typename T, 
 	   typename Letter, typename Weight>
   void

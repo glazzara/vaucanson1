@@ -38,11 +38,15 @@ namespace vcsn {
   /*! \addtogroup algorithms */  /* @{ */
   
   //! Returns a useful states of the automaton (start reachable and final co-).
+  // INTERFACE: HList useful_states(const Automaton& a) { return list_of_set(vcsn::useful_states(*a)); }
+  // INTERFACE: HList useful_states(const GenAutomaton& a) { return list_of_set(vcsn::useful_states(*a)); }
   template<typename A, typename T>
   std::set<hstate_t>
   useful_states(const Element<A, T>& a);
 
   //! Return a fresh automaton in which non useful states are removed.
+  // INTERFACE: Automaton trim(const Automaton& a) { return vcsn::trim(*a); }
+  // INTERFACE: GenAutomaton trim(const GenAutomaton& a) { return vcsn::trim(*a); }
   template<typename A, typename T>
   Element<A, T>
   trim(const Element<A, T>& a);

@@ -30,6 +30,8 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HXX
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HXX
 
+# include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
+
 namespace vcsn {
 
   namespace algebra {
@@ -138,7 +140,7 @@ namespace vcsn {
     U
     GenericMatcher<Self, T, U, F>::match(const T& ast) 
     {
-      return F::d(static_cast<Self&>(*this), ast);
+      return F::d(*static_cast<Self*>(this), ast);
     }
 
     template <class Self, class T, class U, class F>

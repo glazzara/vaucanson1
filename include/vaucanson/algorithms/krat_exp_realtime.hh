@@ -37,6 +37,7 @@ namespace vcsn {
   /*! \addtogroup algorithms */  /* @{ */
 
   //! Expand words in the expression as a product of letters.
+  // INTERFACE: Exp realtime(const Exp& e) { return vcsn::realtime(e); }
   template <class Series, class T>
   Element<Series, T>
   realtime(const Element<Series, T>& exp);

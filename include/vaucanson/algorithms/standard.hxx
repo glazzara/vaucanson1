@@ -125,7 +125,6 @@ namespace vcsn {
   {
     // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
-    ret.emancipate();
     do_union_of_standard_here(ret.set(), ret, rhs);
     return ret;
   }
@@ -141,7 +140,7 @@ namespace vcsn {
     if (a.initial().size() != 1)
       return false;
     std::set<hstate_t> delta_ret;
-    a.rdeltac(delta_ret, *a.initial().begin());
+    a.rdeltac(delta_ret, *a.initial().begin(), vcsn::delta_kind::states());
     if (delta_ret.size() != 0)
       return false;
     return true;
@@ -239,7 +238,6 @@ namespace vcsn {
   {
     // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
-    ret.emancipate();
     do_concat_of_standard_here(ret.set(), ret, rhs);
     return ret;
   }
@@ -283,7 +281,6 @@ namespace vcsn {
   {
     // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(a);
-    ret.emancipate();
     do_star_of_standard_here(ret.set(), ret);
     return ret;
   }

@@ -1,5 +1,25 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/sub_automaton.hh: Equip for vaucanswig.
+	* include/vaucanson/algorithms/standard_of.hh,
+	include/vaucanson/algorithms/normalized.hh,
+	include/vaucanson/algorithms/product.hh,
+	include/vaucanson/algorithms/realtime.hh,
+	include/vaucanson/algorithms/standard.hh,
+	include/vaucanson/algorithms/thompson.hh,
+	include/vaucanson/algorithms/trim.hh,
+	include/vaucanson/algorithms/sum.hh,
+	include/vaucanson/algorithms/krat_exp_realtime.hh: Likewise.
+
+	* include/vaucanson/algorithms/normalized.hxx: Get rid of calls to
+	`emancipate'.
+	* include/vaucanson/algorithms/standard.hxx: Likewise.
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx:
+	Fix include.
+
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/complement.hh: Equip for vaucanswig.
 	* include/vaucanson/algorithms/complete.hh,
 	include/vaucanson/algorithms/eval.hh,

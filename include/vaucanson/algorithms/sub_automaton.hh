@@ -56,6 +56,8 @@ namespace vcsn {
    * @see sub_automaton_here.
    * @return a fresh sub-automaton.
    */
+  // INTERFACE: Automaton sub_automaton(const Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton(*a, s, c); }
+  // INTERFACE: GenAutomaton sub_automaton(const GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton(*a, s, c); }
   template<typename A, typename T, typename StatesSet>
   Element<A, T> 
   sub_automaton(const Element<A, T>& a, const StatesSet& s, 
@@ -69,6 +71,8 @@ namespace vcsn {
    * @param check_states a flag to enable/disable the inclusion checking.
    * @see sub_automaton.
    */
+  // INTERFACE: void sub_automaton_here(Automaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
+  // INTERFACE: void sub_automaton_here(GenAutomaton& a, const HList& s, bool c = true) { return vcsn::sub_automaton_here(*a, s, c); }
   template<typename A, typename T, typename StatesSet>
   void sub_automaton_here(Element<A, T>& a, const StatesSet& s, 
 			  bool check_states = true);

@@ -32,17 +32,26 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 
-namespace vcsn {
-
-  /** \addtogroup algorithms */  /* @{ */
-
-  /// Returns a fresh automaton that is the product of the two input ones.
+namespace vcsn 
+{
+  
+  /** \addtogroup algorithms */  /** @{ */
+  
+  //! Returns a fresh automaton that is the product of the two input ones.
+  // INTERFACE: Automaton product(const Automaton& a1, const Automaton& a2) { return vcsn::product(*a1, *a2); }
+  // INTERFACE: GenAutomaton product(const GenAutomaton& a1, const GenAutomaton& a2) { return vcsn::product(*a1, *a2); }
   template<typename A, typename T, typename U>
   Element<A, T> 
   product(const Element<A, T>& lhs, const Element<A, U>& rhs);
 
-  /** @} */
+  // INTERFACE: void diagonal_here(Automaton& a) { return vcsn::diagonal_here(*a); }
+  // INTERFACE: void diagonal_here(GenAutomaton& a) { return vcsn::diagonal_here(*a); }
 
+  // INTERFACE: Automaton diagonal(const Automaton& a) { return vcsn::diagonal(*a); }
+  // INTERFACE: GenAutomaton diagonal(const GenAutomaton& a) { return vcsn::diagonal(*a); }
+  
+  /** @} */
+  
 } // vcsn
 
 # include <vaucanson/algorithms/product.hxx>

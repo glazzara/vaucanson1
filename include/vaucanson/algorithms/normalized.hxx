@@ -150,7 +150,6 @@ namespace vcsn {
   {
     // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
-    ret.emancipate();
     do_union_of_normalized_here(ret.set(), ret, rhs);
     return ret;
   }
@@ -249,7 +248,6 @@ namespace vcsn {
   {
     // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
-    ret.emancipate();
     do_concatenate_of_normalized_here(ret.set(), ret, rhs);
     return ret;
   }
@@ -287,7 +285,6 @@ namespace vcsn {
   {
     // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(a);
-    ret.emancipate();
     do_star_of_normalized_here(ret.set(), ret);
     return ret;
   }

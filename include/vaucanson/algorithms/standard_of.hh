@@ -56,6 +56,8 @@ namespace vcsn {
    * @note the automaton is used to enable the use of different series
    * from the expression.
    */
+  // INTERFACE: void standard_of(Automaton& a, const Exp& e) { return vcsn::standard_of(*a, e.value()); }
+  // INTERFACE: void standard_of(GenAutomaton& a, const Exp& e) { return vcsn::standard_of(*a, e.value()); }
   template <typename A, typename T, typename Exp>
   void
   standard_of(Element<A, T>& a, const Exp& e);
