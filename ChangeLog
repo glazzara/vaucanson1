@@ -1,5 +1,20 @@
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* vcsn.m4: Rename to...
+	* config/vcsn.m4: this.
+
+	* config/vcsn.m4 (AC_WITH_VCSN): Add more macros.
+	* configure.ac: Sanitize. Adapt to new configuration system.
+	* Makefile.am: Sanitize. Comment more.
+	* src/Makefile.am (SUBDIRS): Mention `demos'.
+
+	* include/vaucanson/config/system.hh: Adapt to new configuration
+	system.
+
+	* src/tests/bin/generate-test-suite.sh: Sanitize.
+
+2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/algebra/concrete/series/krat.hxx: Add reminder
 	for future bugfix.
 

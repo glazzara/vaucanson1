@@ -1,18 +1,125 @@
 # vcsn.m4
 # $Id$
 
-AC_DEFUN([VCSN_TESTS], [
-if test -d src/tests/tests-suites/$1; then
-   VCSN_TESTS_SUBDIRS="$VCSN_TESTS_SUBDIRS $1"
-   AC_CONFIG_FILES([src/tests/tests-suites/$1/Makefile])
-fi
+# VCSN_PATH_LOCAL([RELATIVE-PATH-TO-VAUCANSON-SOURCES])
+
+# Tries to detect Vaucanson sources "near" the current source directory.
+# This macro is noticeably used in the Vaucanson distribution itself
+# to instruct "configure" to use the bundled Vaucanson sources.
+
+# User projects can use this macro to point their "configure" to a 
+# nonstandard Vaucanson sources location, by invoking it _before_ using
+# AC_WITH_VCSN. 
+
+AC_DEFUN([VCSN_PATH_LOCAL],
+[ifelse([$1], [], [vcsn_cv_local_src=no], [dnl
+    AC_CACHE_CHECK([for Vaucanson sources in local distribution],
+                   [vcsn_cv_local_src],
+	           [vcsn_cv_local_src=no
+                    if test -r "$srcdir/$1/include/vaucanson/config/system.hh"; then
+                       vcsn_cv_local_src="$1"
+                    fi])
+])])
+
+# VCSN_PATH_USER
+
+# Checks for the location of Vaucanson sources specified with the user
+# with the flag --with-vcsn.
+
+AC_DEFUN([VCSN_PATH_USER], 
+[dnl
+  AC_CACHE_CHECK([for Vaucanson in user-specified directory],
+		 [vcsn_cv_user_hint], 
+                 [vcsn_cv_user_hint=no
+                  AC_ARG_WITH([vcsn],
+                     [AC_HELP_STRING([--with-vcsn=DIR], 
+                     [Include directory where Vaucanson is installed (optional)])],
+                     [if test -r "$withval/vaucanson/config/system.hh"; then
+		        vcsn_cv_user_hint=$withval
+		      fi])])
+])
+
+# _VCSN_CHECK_HEADERS
+
+# Internal macro used by VCSN_PATH_HEADERS.
+# This macro checks the actual availability of Vaucanson headers after
+# the other heuristics have tried setting VCSN_INCLUDE_DIR and CPPFLAGS.
+
+AC_DEFUN([_VCSN_CHECK_HEADERS], 
+[dnl
+ AC_REQUIRE([AC_PROG_CXX])
+ AC_LANG_PUSH([C++])
+
+ have_vaucanson=yes
+ vcsn_save_CPPFLAGS=$CPPFLAGS
+ CPPFLAGS="$VCSN_EXTRA_CPPFLAGS $CPPFLAGS"
+ # At this point, we can be in a situation where pconf.hh does not
+ # exist _yet_. In that particular case, we need a workaround.
+ AC_CHECK_HEADER([vaucanson/config/pconf.hh], [], 
+          [CPPFLAGS="$CPPFLAGS -DIGNORE_PCONF_HH"])
+ AC_CHECK_HEADER([vaucanson/config/system.hh], [], [have_vaucanson=no])
+ CPPFLAGS=$vcsn_save_CPPFLAGS
+
+ AC_LANG_POP([C++])
+])
+
+# VCSN_PATH_HEADERS
+
+# Find an Vaucanson location from various informations: availability of
+# Vaucanson sources around the current source directory, user flags, environment
+# variable.
+
+# This macro sets, if needed, VCSN_CPPFLAGS before proceeding with
+# _VCSN_CHECK_HEADERS.
+
+AC_DEFUN([VCSN_PATH_HEADERS],
+[dnl 
+  AC_REQUIRE([VCSN_PATH_LOCAL])
+  AC_REQUIRE([VCSN_PATH_USER])
+
+  # User-specified directory overrides any other definition
+  if test "x$vcsn_cv_user_hint" != xno; then
+     if test "x$VCSN_INCLUDE_DIR" != x ; then
+       AC_MSG_WARN([using $vcsn_cv_user_hint instead of $VCSN_INCLUDE_DIR])
+     fi
+     VCSN_INCLUDE_DIR="$vcsn_cv_user_hint"
+  else
+    if test "x$vcsn_cv_local_src" != xno; then
+      if test "x$VCSN_INCLUDE_DIR" != x ; then
+        AC_MSG_WARN([using $vcsn_cv_user_src instead of $VCSN_INCLUDE_DIR])
+      fi
+      VCSN_INCLUDE_DIR=''
+
+      # This is useful for sanity checks.
+      VCSN_LOCAL_SRC='$(top_srcdir)/'$vcsn_cv_local_src
+      VCSN_LOCAL_BUILD='$(top_builddir)/'$vcsn_cv_local_src
+
+      #
+      VCSN_EXTRA_CPPFLAGS="-I$vcsn_cv_local_src/include -I$srcdir/$vcsn_cv_local_src/include"
+      VCSN_LOCAL_CPPFLAGS="-I\$(top_srcdir)/$vcsn_cv_local_src/include -I\$(top_builddir)/$vcsn_cv_local_src/include"
+
+      # CPPFLAGS will need local paths.
+      CPPFLAGS="$VCSN_LOCAL_CPPFLAGS $CPPFLAGS"
+      AC_SUBST([VCSN_LOCAL_SRC])
+      AC_SUBST([VCSN_LOCAL_BUILD])
+    fi
+  fi
+
+  AC_ARG_VAR([VCSN_INCLUDE_DIR], 
+	     [location of Vaucanson (<include dir>, should be autodetected)])
+  if test "x$VCSN_INCLUDE_DIR" != x ; then
+     CPPFLAGS="-I$VCSN_INCLUDE_DIR $CPPFLAGS"
+  fi
+  AC_SUBST([VCSN_INCLUDE_DIR])
+
+  _VCSN_CHECK_HEADERS
 ])
 
 # AC_CXX_TEMPLATE_DEPTH
 
 # Check for deep template recursion upto MINIMUM-DEPTH.
 
-# Automatically adds the flag `-ftemplate-depth' to OLN_CXXFLAGS when :
+# Automatically adds the flag `-ftemplate-depth' to VCSN_CXXFLAGS when :
 # - deep template recursion is not available when it is not present
 # - the compiler supports it 
 # - it provides the right effect when present
@@ -26,8 +133,8 @@ AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
   AC_CACHE_CHECK([for C++ template recursion upto $cxx_tdepth levels],
                  [cxx_cv_cxx_template_flags],
                  [cxx_cv_cxx_template_flags=direct
-                  oln_save_CPPFLAGS=$CPPFLAGS
-                  oln_save_CXXFLAGS=$CXXFLAGS
+                  vcsn_save_CPPFLAGS=$CPPFLAGS
+                  vcsn_save_CXXFLAGS=$CXXFLAGS
                   CPPFLAGS="$CPPFLAGS -DTDEPTH=$cxx_tdepth"
                   AC_LINK_IFELSE([template<unsigned n> 
 				  struct rec { 
@@ -49,8 +156,8 @@ AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
                                       { rec<TDEPTH>::ret i = 0; return i; }],
                        [cxx_cv_cxx_template_flags="-ftemplate-depth-$cxx_tdepth"], 
                        [cxx_cv_cxx_template_flags=unsupported])])
-                  CPPFLAGS=$oln_save_CPPFLAGS
-                  CXXFLAGS=$oln_save_CXXFLAGS])
+                  CPPFLAGS=$vcsn_save_CPPFLAGS
+                  CXXFLAGS=$vcsn_save_CXXFLAGS])
 
 
   AC_LANG_POP([C++])
@@ -101,7 +208,7 @@ AC_DEFUN([AC_CXX_EXCEPTIONS],
 
 # This tests adds -DUSE_C_LIMITS to CPPFLAGS if the numeric
 # limits are unavailable, in which case HUGE_VAL and HUGE_VALF are
-# used instead by Olena.
+# used instead by Vaucanson.
 
 AC_DEFUN([AC_CXX_NUMERIC_LIMITS],
 [dnl
@@ -286,3 +393,65 @@ AC_DEFUN([AC_CXX_FLAGS],
    AC_SUBST([CXXFLAGS_STRICT])
    AC_SUBST([CXXFLAGS_STRICT_ERRORS])
 ])
+
+# VCSN_WARN_CXXFLAGS
+
+# Check that the variable CXXFLAGS does not contain debug or
+# optimization flags
+
+AC_DEFUN([VCSN_WARN_CXXFLAGS],
+[dnl
+  vcsn_cxxflags_clean=yes
+
+  AC_REQUIRE([AC_PROG_CXX])
+  AC_LANG_PUSH([C++])dnl force initialization of default CXXFLAGS
+  AC_MSG_CHECKING([for debbuging options in CXXFLAGS ($CXXFLAGS)])
+  if echo "$CXXFLAGS" | grep -- "-g" >/dev/null 2>&1; then
+     AC_MSG_RESULT([yes])
+     AC_MSG_WARN([CXXFLAGS seems to contain debugging options, which is known to conflict with Vaucanson optimizations.])
+     AC_MSG_NOTICE([please cleanup CXXFLAGS and use CXXFLAGS_DEBUG instead for your own options.])
+     vcsn_cxxflags_clean=no
+  else
+     AC_MSG_RESULT([no, good])
+  fi
+  AC_MSG_CHECKING([for optimization options in CXXFLAGS ($CXXFLAGS)])
+  if echo "$CXXFLAGS" | grep -- "-O" >/dev/null 2>&1; then
+     AC_MSG_RESULT([yes])
+     AC_MSG_WARN([CXXFLAGS seems to contain optimization options, while Vaucanson provides its own optimization flags.])
+     AC_MSG_NOTICE([please cleanup CXXFLAGS and use CXXFLAGS_OPTIMIZE instead for your own options.])
+     vcsn_cxxflags_clean=no
+  else
+     AC_MSG_RESULT([no, good])
+  fi
+  AC_LANG_POP([C++])
+])
+
+# AC_WITH_VCSN
+
+# Invoke configuration code to test for Vaucanson and set a collection
+# of appropriate flags.
+
+AC_DEFUN([AC_WITH_VCSN],
+[dnl
+  AC_REQUIRE([AC_CXX_TEMPLATE_DEPTH])
+  AC_REQUIRE([AC_CXX_NUMERIC_LIMITS])
+  AC_REQUIRE([AC_CXX_FLOAT_MATH])
+  AC_REQUIRE([VCSN_PATH_HEADERS])
+  AC_REQUIRE([VCSN_WARN_CXXFLAGS])
+])
+
+# Test invocation macro
+
+AC_DEFUN([VCSN_TESTS], [
+AC_MSG_CHECKING([for $1 in testsuite])
+if test -d $srcdir/src/tests/tests-suites/$1; then
+   AC_MSG_RESULT([yes])
+   VCSN_TESTS_SUBDIRS="$VCSN_TESTS_SUBDIRS $1"
+   AC_CONFIG_FILES([src/tests/tests-suites/$1/Makefile])
+else 
+   AC_MSG_RESULT([no])
+fi
+])
+
+
+

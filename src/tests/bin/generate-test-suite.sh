@@ -111,7 +111,7 @@ for TEST_DIR in $TEST_DIRS; do
 # FIXME: We must find a way to define the path from 
 # FIXME: DEST_DIR to TEST_DIR or to force people to define an absolute TEST_DIR.
 # FIXME: for the distributed tests suites, it works
-    INCLUDES="-I ../$TEST_DIR $INCLUDES"
+    INCLUDES="-I\$(srcdir)/../$TEST_DIR $INCLUDES"
 done
 
 # Generate a Makefile.am

@@ -3,6 +3,4 @@
 #
 # $Id$
 
-
-
-SUBDIRS= tests
+SUBDIRS = tests demos

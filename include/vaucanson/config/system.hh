@@ -21,14 +21,15 @@
 #ifndef VCSN_CONFIG_SYSTEM_HH
 # define VCSN_CONFIG_SYSTEM_HH
 
-# define _ISOC99_SOURCE 1
-# include <vaucanson/config/pconf.hh>
-#ifdef HAVE_LIMITS
-#define USE_CXX_LIMITS
-#undef HAVE_LIMITS
-#endif
+# ifdef HAVE_CONFIG_H
+#  include <config.h>
+# endif 
 
-# include <cmath>
+# ifndef IGNORE_PCONF_HH
+#  include <vaucanson/config/pconf.hh>
+# endif
+
+# include <vaucanson/config/math.hh>
 
 #if (defined __GNUC__) && (__GNUC__ < 3) 
 # include <stl_config.h>

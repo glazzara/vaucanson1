@@ -156,7 +156,7 @@ namespace vcsn {
 	  return true;
 	}
 	 
-      // FIXME: reduce (k 1) * E -> (k E)
+      // FIXME: reduce (k 1) * Const -> (k Const)
  
       default: break;
 	  

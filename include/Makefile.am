@@ -2,9 +2,9 @@
 #
 # $Id$
 
-nobase_nodist_include_HEADERS = vaucanson/config/pconf.hh
-
 nobase_include_HEADERS = \
+vaucanson/config/system.hh\
+vaucanson/config/pconf.hh\
 vaucanson/algebra/concept/alphabets_base.hh\
 vaucanson/algebra/concept/concepts.hh\
 vaucanson/algebra/concept/freemonoid_base.hh\
@@ -122,21 +122,5 @@ vaucanson/tools/gen_random.hh\
 vaucanson/tools/usual.hh\
 vaucanson/tools/usual_macros.hh
 
-EXTRA_DIST = vaucanson/config/extrconf.sh
-PERL = perl
-SCANDEFS_PL = $(top_srcdir)/tools/scandefs.pl
-PCONF_OCCURS = $(srcdir)/vaucanson/config/system.hh 
-$(srcdir)/vaucanson/config/extrconf.sh: $(SCANDEFS_PL) $(PCONF_OCCURS)
-	$(PERL) $(SCANDEFS_PL) $(PCONF_OCCURS) >$@
-
-vaucanson/config/pconf.hh: $(srcdir)/vaucanson/config/extrconf.sh $(CONFIG_HEADER)
-	test -f $(CONFIG_HEADER)
-## Ignore the result of config/extrconf.sh.  It might be non 0 if
-## grep matched nothing, but that's ok for us.  The sole case
-## we bother with is failure caused by an unexisting $(CONFIG_HEADER).
-## The test -f above take care of this.
-	$(SHELL) $(srcdir)/vaucanson/config/extrconf.sh $(CONFIG_HEADER) \
-	> vaucanson/config/pconf.hh; :
-
-DISTCLEANFILES = vaucanson/config/pconf.hh vaucanson/config/stamp-h1
+EXTRA_DIST = vaucanson/config/pconf-hh.in
 

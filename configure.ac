@@ -4,40 +4,45 @@
 # $Id$
 # VCSN_HEADER
 
-AC_PREREQ([2.50])
+AC_PREREQ([2.54])
 AC_INIT([vaucanson], [0.1.0], [vaucanson-bugs@lrde.epita.fr])
-AC_CONFIG_SRCDIR([ChangeLog])
-AM_CONFIG_HEADER(include/vaucanson/config/config.hh)
+AC_CONFIG_AUX_DIR([config])
+AC_CONFIG_SRCDIR([config/vcsn.m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AM_CONFIG_HEADER([config.h:config.hin])
 
-AM_MAINTAINER_MODE
+# Use included Vaucanson version.
+VCSN_PATH_LOCAL([.])
+AC_WITH_VCSN
 
-AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
-AC_PROG_CXX
-
+# Some library archives are used. Some C code used.
 AC_PROG_RANLIB
-AC_LANG(C++)
+AC_PROG_CC
 
-AC_CHECK_HEADERS([limits])
-AC_CHECK_HEADERS([stl_config.h])
+# Attempt to use strict language conformance checking.
+AC_CXX_FLAGS
+
+# Some reflexivity wanted.
+AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
+
+# AC_CHECK_HEADERS([stl_config.h])
 
 ##
 ## for documentation purpose.
 ##
-AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, no)
-if test x"$DOXYGEN" = x"no"; then
-  echo "Cannot find doxygen. Disabling auto-generation of the documentation" 2>&1
-  DOXYGEN=/bin/true
-fi
+AC_ARG_VAR([DOXYGEN], [the Doxygen documentation generation program])
+AC_CHECK_PROGS([DOXYGEN], [doxygen], [$am_aux_dir/missing doxygen])
+AC_ARG_VAR([LATEX], [the LaTeX binary])
 AC_CHECK_PROGS([LATEX], [latex], [$am_aux_dir/missing latex])
 
 ##
 ## generate files.
 ##
-AC_CONFIG_SUBDIRS([vauc])
+#AC_CONFIG_SUBDIRS([vauc])
 
 AC_CONFIG_FILES([
 	Makefile
+	include/vaucanson/config/pconf.hh:include/vaucanson/config/pconf-hh.in
 	src/Makefile
 	src/tests/defs
 	src/tests/Makefile
