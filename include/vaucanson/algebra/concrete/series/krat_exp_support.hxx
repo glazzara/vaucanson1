@@ -107,8 +107,7 @@ namespace vcsn {
       // (it does not save the current support before recurring)
       match(node);
       for_each_(ext_support_t, c, supp_)
-	c->first = algebra::op_mul(series_.semiring(), w,
-				   series_.semiring(), c->first);
+	c->first = op_mul(series_.semiring(), w, c->first);
     }
     END
 
@@ -117,16 +116,15 @@ namespace vcsn {
       // FIXME: this is bogus. See before.
       match(node);
       for_each_(ext_support_t, c, supp_)
-	c->first = algebra::op_mul(series_.semiring(), c->first,
-				   series_.semiring(), w);
+	c->first = op_mul(series_.semiring(), c->first, w);
     }
     END
 
     MATCH_(Constant, m)
     {
       supp_.push_back(std::make_pair
-		      (algebra::identity_value(series_.semiring(), 
-					       SELECT(semiring_elt_value_t)),
+		      (identity_value(series_.semiring(), 
+				      SELECT(semiring_elt_value_t)),
 		       m));
     }
     END
@@ -139,10 +137,10 @@ namespace vcsn {
     MATCH(One)
     {
       supp_.push_back(std::make_pair
-		      (algebra::identity_value(series_.semiring(), 
-					       SELECT(semiring_elt_value_t)),
-		       algebra::identity_value(series_.monoid(), 
-					       SELECT(monoid_value_t))));
+		      (identity_value(series_.semiring(), 
+				      SELECT(semiring_elt_value_t)),
+		       identity_value(series_.monoid(), 
+				      SELECT(monoid_value_t))));
     }
     END
 

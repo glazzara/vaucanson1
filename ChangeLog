@@ -1,3 +1,8 @@
+2003-09-05  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_support.hxx:
+	  Correct namespaces and op_mul calls.
+
 2003-09-05  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/bitset.hxx, include/vaucanson/misc/bitset.hh:
