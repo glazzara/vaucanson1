@@ -28,7 +28,7 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/backward_closure.hh>
-# include <vaucanson/algorithms/reachable.hh>
+# include <vaucanson/algorithms/accessible.hh>
 
 namespace vcsn {
 
@@ -113,7 +113,7 @@ namespace vcsn {
 	a.del_edge(e);
       }
 
-    auto_in_start_reachable(a);
+    accessible_here(a);
   }
 
   template<typename A, typename T>
