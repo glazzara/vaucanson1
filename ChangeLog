@@ -1,34 +1,40 @@
-
-2003-02-14  Maxime Rey  <max@nirgal>
-
-	* A new static hierarchy branch !! in order to show a more simple
-	algebraic for VaucansonDay. Otherwise this code will be use in
-	soon futur for GRAMMATICAL INFERENCE.
-	* Added `include/vaucanson/algebra/concrete/order/lattice.hxx'
-	* Added `include/vaucanson/algebra/concrete/order/orderset.hxx' 
-	* Added `include/vaucanson/algebra/concrete/order/lattice.hh'
-	* Added `include/vaucanson/algebra/concrete/order/orderset.hh'
-	* Added `include/vaucanson/algebra/concept/lattice_base.hxx' 
-	* Added `include/vaucanson/algebra/concept/lattice_base.hh' 
-	* Added `include/vaucanson/algebra/concept/orderset_base.hxx'
-	* Added `include/vaucanson/algebra/concept/orderset_base.hh'
-
+2003-02-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.155)
+	* include/vaucanson/algebra/concrete/order/lattice.hxx,
+	  include/vaucanson/algebra/concrete/order/orderset.hxx, 
+	  include/vaucanson/algebra/concrete/order/lattice.hh,
+	  include/vaucanson/algebra/concrete/order/orderset.hh,
+	  include/vaucanson/algebra/concept/lattice_base.hxx,
+	  include/vaucanson/algebra/concept/lattice_base.hh,
+	  include/vaucanson/algebra/concept/orderset_base.hxx,
+	  include/vaucanson/algebra/concept/orderset_base.hh: Moved to ...
 	
+	* src/demos/grammar_inference: Here.
+
+2003-02-14  Maxime Rey  <max@lrde.epita.fr>
+(0.154)
+	* include/vaucanson/algebra/concrete/order/lattice.hxx,
+	  include/vaucanson/algebra/concrete/order/orderset.hxx, 
+	  include/vaucanson/algebra/concrete/order/lattice.hh,
+	  include/vaucanson/algebra/concrete/order/orderset.hh,
+	  include/vaucanson/algebra/concept/lattice_base.hxx,
+	  include/vaucanson/algebra/concept/lattice_base.hh,
+	  include/vaucanson/algebra/concept/orderset_base.hxx,
+	  include/vaucanson/algebra/concept/orderset_base.hh: New.
 
 2003-02-13  Maxime Rey  <max@lrde.epita.fr>
-
-	* Added `src/demos/samples/algebra/series.cc'
-	* Added `src/demos/samples/algebra/semiring.cc'
-	* Added `src/demos/samples/algebra/free_monoid.cc'
-	* Added `src/demos/samples/algebra/alphabet.cc' 
-	* Added `src/demos/samples/pattern/fundamental/structure.hxx'
-	* Added `src/demos/samples/pattern/fundamental/structure.hh' 
-	* Added `src/demos/samples/pattern/concrete' 
-	* Added `src/demos/samples/pattern/concept/element.hh'
-	* => differents tutorials samples codes to show Vaucanson's possibility
+(0.153)
+	* src/demos/samples/algebra/series.cc,
+	  src/demos/samples/algebra/semiring.cc,
+	  src/demos/samples/algebra/free_monoid.cc,
+	  src/demos/samples/algebra/alphabet.cc,
+	  src/demos/samples/pattern/fundamental/structure.hxx,
+	  src/demos/samples/pattern/fundamental/structure.hh,
+	  src/demos/samples/pattern/concrete,
+	  src/demos/samples/pattern/concept/element.hh: New.
 
 2003-02-13  Maxime Rey  <max@lrde.epita.fr>
-
+(0.152)
 	* /include/vaucanson/algebra/concrete/letter/range.hxx :
 	static_ranged work now
 	* doc/tutorial/tutorial.tex: upgrade

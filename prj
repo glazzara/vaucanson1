@@ -1,12 +1,25 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 154)
-(Parent-Version vaucanson 0 153)
-(Version-Log "")
+(Project-Version vaucanson 0 155)
+(Parent-Version vaucanson 0 154)
+(Version-Log "
+2003-02-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.155)
+	* include/vaucanson/algebra/concrete/order/lattice.hxx,
+	  include/vaucanson/algebra/concrete/order/orderset.hxx, 
+	  include/vaucanson/algebra/concrete/order/lattice.hh,
+	  include/vaucanson/algebra/concrete/order/orderset.hh,
+	  include/vaucanson/algebra/concept/lattice_base.hxx,
+	  include/vaucanson/algebra/concept/lattice_base.hh,
+	  include/vaucanson/algebra/concept/orderset_base.hxx,
+	  include/vaucanson/algebra/concept/orderset_base.hh: Moved to ...
+	
+	* src/demos/grammar_inference: Here.
+")
 (New-Version-Log "")
-(Checkin-Time "Fri, 14 Feb 2003 19:22:25 +0100")
-(Checkin-Login max)
+(Checkin-Time "Mon, 17 Feb 2003 13:42:15 +0100")
+(Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -88,7 +101,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.95 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.96 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.14 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.3 600))
@@ -602,14 +615,38 @@
 ;; Files added by populate at Fri, 14 Feb 2003 19:07:25 +0100,
 ;; to version 0.153(w), by max:
 
-  (include/vaucanson/algebra/concrete/order/lattice.hxx (vaucanson/i/2_lattice.hx 1.1 600))
-  (include/vaucanson/algebra/concrete/order/orderset.hxx (vaucanson/i/3_orderset.h 1.1 600))
-  (include/vaucanson/algebra/concrete/order/lattice.hh (vaucanson/i/4_lattice.hh 1.1 600))
-  (include/vaucanson/algebra/concrete/order/orderset.hh (vaucanson/i/5_orderset.h 1.1 600))
-  (include/vaucanson/algebra/concept/lattice_base.hxx (vaucanson/i/6_lattice_ba 1.1 600))
-  (include/vaucanson/algebra/concept/lattice_base.hh (vaucanson/i/7_lattice_ba 1.1 600))
-  (include/vaucanson/algebra/concept/orderset_base.hxx (vaucanson/i/8_orderset_b 1.1 600))
-  (include/vaucanson/algebra/concept/orderset_base.hh (vaucanson/i/9_orderset_b 1.1 600))
+  
+  
+  
+  
+  
+  
+  
+  
+
+;; Files added by populate at Mon, 17 Feb 2003 13:38:40 +0100,
+;; to version 0.154(w), by yann:
+
+  (src/demos/grammar_inference/ordered_set.hxx (vaucanson/i/10_ordered_se 1.1 600))
+  (src/demos/grammar_inference/ordered_set.hh (vaucanson/i/11_ordered_se 1.1 600))
+  (src/demos/grammar_inference/ordered_set_base.hxx (vaucanson/i/12_ordered_se 1.1 600))
+  (src/demos/grammar_inference/ordered_set_base.hh (vaucanson/i/13_ordered_se 1.1 600))
+  (src/demos/grammar_inference/lattice.hxx (vaucanson/i/14_lattice.hx 1.1 600))
+  (src/demos/grammar_inference/lattice.hh (vaucanson/i/15_lattice.hh 1.1 600))
+  (src/demos/grammar_inference/lattice_base.hxx (vaucanson/i/16_lattice_ba 1.1 600))
+  (src/demos/grammar_inference/lattice_base.hh (vaucanson/i/17_lattice_ba 1.1 600))
+
+;; Files deleted by populate at Mon, 17 Feb 2003 13:39:15 +0100,
+;; from version 0.154(w), by yann:
+
+  ; (include/vaucanson/algebra/concept/orderset_base.hh ())
+  ; (include/vaucanson/algebra/concept/orderset_base.hxx ())
+  ; (include/vaucanson/algebra/concept/lattice_base.hh ())
+  ; (include/vaucanson/algebra/concept/lattice_base.hxx ())
+  ; (include/vaucanson/algebra/concrete/order/orderset.hh ())
+  ; (include/vaucanson/algebra/concrete/order/lattice.hh ())
+  ; (include/vaucanson/algebra/concrete/order/orderset.hxx ())
+  ; (include/vaucanson/algebra/concrete/order/lattice.hxx ())
 )
 (Merge-Parents)
 (New-Merge-Parents)
