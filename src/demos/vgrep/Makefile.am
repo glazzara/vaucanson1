@@ -2,7 +2,8 @@
 #
 # $Id$
 
-AM_CPPFLAGS = $(CXXFLAGS_STRICT) -I $(top_srcdir)/include/
+AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
+AM_CPPFLAGS = -I$(top_srcdir)/include/
 
 noinst_PROGRAMS = vgrep
 
