@@ -191,7 +191,7 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  void op_in_star(const algebra::SemiringBase<Self>& s, T& v)
+  void op_in_star(const algebra::SemiringBase<Self>&, T& v)
   {
     assert(op_eq(SELECT(Self), v, zero_value(SELECT(Self), SELECT(T))));
     v = identity_value(SELECT(Self), SELECT(T));

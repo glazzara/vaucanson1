@@ -1,5 +1,17 @@
 2003-06-30  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Fix an 
+	'unused argument' warning.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Fix an 'unused argument' warning and a wrong typed static assertion.
+	* include/vaucanson/algorithms/krat_exp_constant_term.hxx,
+	include/vaucanson/algorithms/krat_exp_derivation.hxx,
+	include/vaucanson/algorithms/krat_exp_cderivation.hxx,
+	include/vaucanson/algorithms/krat_exp_realtime.hxx: Add an explicit
+	call to value() when calling match methods of matchers.
+
+2003-06-30  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
 	* configure.ac: Add the 'algebra_series_krat' test directory.
 	* src/tests/tests-suites/algebra_series_krat.defs: Make krat tests work
 	on integer numerical semirings instead of boolean ones.

@@ -140,7 +140,7 @@ namespace vcsn {
   {
     KRatExpDerivation<Series, T, algebra::DispatchFunction<T> > 
       matcher(exp, a);
-    Element<Series, T> ret = matcher.match(exp);
+    Element<Series, T> ret = matcher.match(exp.value());
     if (matcher.undefined)
       return std::make_pair(ret, false);
     return std::make_pair(ret, true);
@@ -157,7 +157,7 @@ namespace vcsn {
       {
 	KRatExpDerivation<Series, T, algebra::DispatchFunction<T> > 
 	  matcher(exp, *a);
-	ret = matcher.match(ret);
+	ret = matcher.match(ret.value());
 	if (matcher.undefined)
 	  return std::make_pair(ret, false);
       }

@@ -184,7 +184,7 @@ namespace vcsn {
   `--------------------------------------------*/
 
   template<typename T>
-  bool op_stareable(const algebra::NumericalSemiring& s, T v)
+  bool op_stareable(const algebra::NumericalSemiring&, T v)
   { 
     return v == 0; 
   }
@@ -203,7 +203,7 @@ namespace vcsn {
 
   inline void op_in_star(const algebra::NumericalSemiring& s, float& f)
   { 
-    static_assertion(utility::limits<float>::has_infinity, "");
+    static_assertion(utility::limits<float>::has_infinity, float_has_infinity);
     if (f < 1.0)
       f = (1.0 / (1.0 - f));
     else

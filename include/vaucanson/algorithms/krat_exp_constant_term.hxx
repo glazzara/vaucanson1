@@ -111,7 +111,7 @@ namespace vcsn {
   {
     typedef typename Element<Series, T>::weight_t     weight_t;
     ConstantTermEval<Series, T, algebra::DispatchFunction<T> > matcher(exp);
-    weight_t v = matcher.match(exp);
+    weight_t v = matcher.match(exp.value());
     if (matcher.undefined)
       return std::make_pair(v, false);
     return std::make_pair(v, true);

@@ -144,7 +144,7 @@ namespace vcsn {
   {
     algebra::KRatExpCDerivation<Series, T, algebra::DispatchFunction<T> >
       matcher(exp, a);
-    return matcher.match(exp);
+    return matcher.match(exp.value());
   }
 
   template <class Series, class T, class Word>
