@@ -32,13 +32,11 @@ namespace vcsn
   void auto_copy(lhs_t& dst_,
 		 const rhs_t& from)
   {
-    lhs_t dst;
+    lhs_t dst(dst_.set());
     typedef typename lhs_t::series_elt_t dst_series_elt_t;
 
     std::map<hstate_t, hstate_t> stmap;
 
-    dst.create();
-    dst.series() = from.series();
     for (typename rhs_t::state_iterator i = from.states().begin();
 	 i != from.states().end();
 	 ++i)
@@ -56,7 +54,7 @@ namespace vcsn
 	 ++i)
       {
 	dst_series_elt_t s(from.serie_of(*i));
-	dst.add_serie_edge(stmap[i.origin()], stmap[i.aim()], s);
+	dst.add_serie_edge(stmap[from.origin_of(*i)], stmap[from.aim_of(*i)], s);
       }
     dst_.swap(dst);
   }

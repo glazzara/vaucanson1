@@ -44,7 +44,7 @@ namespace vcsn {
 
   template <typename A, typename lhs_t, typename rhs_t, typename output_t>
   void 
-  product(const AutomataBase<A>&	a_set,
+  product(const AutomataBase<A>&	,
 	  output_t&			output,
 	  const lhs_t&			lhs,
 	  const rhs_t&			rhs)
@@ -57,6 +57,7 @@ namespace vcsn {
     typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
     typedef typename series_elt_t::weight_t		weight_t;
     typedef typename series_elt_t::value_t		series_value_t;
+    typedef typename series_elt_t::support_t		support_t;
 
     delta_ret_t					edge_lhs; 
     delta_ret_t					edge_rhs;
@@ -129,11 +130,11 @@ namespace vcsn {
 		series_elt_t s__ = s;
 		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
 
-		for (typename series_value_t::iterator supp = s.supp().begin();
+		for (typename support_t::iterator supp = s.supp().begin();
 		     supp != s.supp().end();
 		     ++supp)
-		  s__.value_set(monoid_elt_t(supp->first).value(), 
-		       (weight_t(supp->second) * s_.get(supp->first)).value());
+		  s__.value_set(monoid_elt_t(*supp).value(), 
+		       (s_.get(*supp) * s_.get(*supp)).value());
 
 		if (s__ != series_zero)
 		  {
@@ -180,7 +181,7 @@ namespace vcsn {
   {
     // assert(lhs.set() == rhs.set())
     Element<A, T> ret(rhs.set());
-    auto_do_product(ret.set(), ret, lhs, rhs);
+    product(ret.set(), ret, lhs, rhs);
     return ret;
   }
 

@@ -46,7 +46,7 @@ namespace vcsn {
   //
   template <typename A, typename input_t, typename output_t>
   void
-  do_minimization_moore(const AutomataBase<A>&	a_set,
+  do_minimization_moore(const AutomataBase<A>&	,
 			output_t&		output,
 			const input_t&		input)
   {
@@ -97,10 +97,10 @@ namespace vcsn {
 	 ++s)
       {
 	typename final_map_t::const_iterator fm = 
-	  fmap_.find(input.get_final(*s));
+	  fmap_.find(input.get_final(*s).value());
 	if (fm == fmap_.end())
 	  {
-	    fmap_[input.get_final(*s)] = max_partitions;
+	    fmap_[input.get_final(*s).value()] = max_partitions;
 	    part.push_back(std::list<hstate_t>());
 	    part[max_partitions].push_front(*s);
 	    classes[*s] = std::make_pair(max_partitions, 

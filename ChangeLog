@@ -1,5 +1,21 @@
 2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx,
+	  include/vaucanson/algorithms/minimization_moore.hxx,
+	  include/vaucanson/algorithms/hopcroft_minimization.hxx,
+	  include/vaucanson/algorithms/normalized.hxx,
+  	  include/vaucanson/algorithms/accessible.hxx,
+	  include/vaucanson/misc/container_ops.hxx: Fix unused arg.
+
+	* include/vaucanson/automata/concept/copy.hxx: Fix.
+	* include/vaucanson/algorithms/determinize.hxx: Fix serie support use.
+	* include/vaucanson/algorithms/product.hxx: Fix wrapper.
+	* src/tests/automata/algos/glushkov_test.hh: Use 'eval'.
+	* src/tests/automata/algos/product_test.hh: Fix name.
+	* src/tests/automata/algos/reachable_test.hh: Likewise.
+
+2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* src/tests/bin/generate-test-suite.sh: Replace verbose_level instead of verbose_level_e.
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx: Fix unused arg.
 	* include/vaucanson/algebra/concrete/series/krat.hh: Fix op_convert arg order.

@@ -271,7 +271,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   typename algebra::series_traits<algebra::polynom<Tm, Tw> >::support_t
-  op_support(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m)
+  op_support(const algebra::Series<W, M>&, const algebra::polynom<Tm, Tw>& m)
   { 
     return typename algebra::series_traits<algebra::polynom<Tm, Tw> >::support_t(m.as_map());
   }

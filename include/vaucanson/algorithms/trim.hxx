@@ -44,7 +44,7 @@ namespace vcsn {
   //
   template <class A_, typename Auto_>
   std::set<hstate_t>
-  do_useful_states(const AutomataBase<A_>& a_set,
+  do_useful_states(const AutomataBase<A_>&,
 		   const Auto_&		   a)
   {
     std::set<hstate_t> start = accessible_states(a);

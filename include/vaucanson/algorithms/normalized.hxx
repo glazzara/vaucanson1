@@ -36,7 +36,7 @@ namespace vcsn {
   `-----------*/
   template <class A_, typename Auto_>
   void
-  do_normalize_here(const AutomataBase<A_>& a_set,
+  do_normalize_here(const AutomataBase<A_>&,
 		    Auto_& a)
   {
     typedef Auto_				automaton_t;
@@ -152,7 +152,7 @@ namespace vcsn {
   `--------------*/
   template <typename A, typename auto_t>
   bool
-  do_is_normalized(const AutomataBase<A>& a_set,
+  do_is_normalized(const AutomataBase<A>&,
 		   const auto_t& a)
   {
     if (a.initial().size() != 1)

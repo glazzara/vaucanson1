@@ -29,7 +29,7 @@
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/misc/dot_dump.hh>
-# include <vaucanson/algorithms/reachable.hh>
+# include <vaucanson/algorithms/accessible.hh>
 
 template <class Auto>
 unsigned reachable_test(tests::Tester& t)
@@ -57,15 +57,15 @@ unsigned reachable_test(tests::Tester& t)
 	auto_connex.add_state();
 
       if (nb_state == 
-	  auto_final_reachable
-	  (auto_start_reachable(auto_connex)).states().size())
+	  accessible
+	  (coaccessible(auto_connex)).states().size())
 	++success_trim;
-      if (auto_final_reachable(auto_connex).states().size() == 
-	  auto_final_reachable(auto_final_reachable(auto_connex))
+      if (coaccessible(auto_connex).states().size() == 
+	  coaccessible(coaccessible(auto_connex))
 	  .states().size())
 	++success_final_reachable_idempotence;
-      if (auto_start_reachable(auto_connex).states().size() == 
-	  auto_start_reachable(auto_start_reachable(auto_connex))
+      if (accessible(auto_connex).states().size() == 
+	  accessible(accessible(auto_connex))
 	  .states().size())
 	++success_start_reachable_idempotence;
     } 

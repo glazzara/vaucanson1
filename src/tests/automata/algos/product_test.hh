@@ -32,7 +32,7 @@
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/misc/dot_dump.hh>
-# include <vaucanson/algorithms/complementary.hh>
+# include <vaucanson/algorithms/complement.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/trim.hh>
 
@@ -55,9 +55,9 @@ unsigned product_test(tests::Tester& tg)
     {
       automaton_t a = gen.generate(10, 20);
       
-      auto_in_complete(a);
+      complete_here(a);
       a = determinize(a);  
-      automaton_t ac = auto_complementary(a);
+      automaton_t ac = complement(a);
       automaton_t squared = product(a,a);
 
       if ((squared.states().size() == a.states().size()) &&

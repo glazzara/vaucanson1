@@ -43,7 +43,7 @@ namespace vcsn
   }
   
   template<typename S, typename T>
-  typename T::iterator op_end(const Structure<S>& s, 
+  typename T::iterator op_end(const Structure<S>&, 
 			      T& v)
   { 
     return v.end(); 

@@ -39,8 +39,8 @@ namespace vcsn {
   //
   template <typename A, typename input_t, typename output_t>
   void 
-  do_hopcroft_minimization_det(const AutomataBase<A>&	a_set,
-			       output_t&			output,
+  do_hopcroft_minimization_det(const AutomataBase<A>&	,
+			       output_t&		output,
 			       const input_t&		input)
   {
     typedef typename input_t::series_t			    series_t;

@@ -1,60 +1,29 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 296)
-(Parent-Version vaucanson 0 295)
+(Project-Version vaucanson 0 297)
+(Parent-Version vaucanson 0 296)
 (Version-Log "
+
 2003-06-29  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* src/tests/bin/generate-test-suite.sh: Replace verbose_level instead of verbose_level_e.
-	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx: Fix unused arg.
-	* include/vaucanson/algebra/concrete/series/krat.hh: Fix op_convert arg order.
-	* include/vaucanson/algebra/concrete/series/krat.hxx: Likewise.
-	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx: Fix unused arg.
-	* src/tests/algebra/alphabets/alphabet_test.hh
-	  src/tests/algebra/free_monoid/free_monoid_test.hh,
-	  src/tests/algebra/semiring/semiring_test.hh,
-	  src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
-	  src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
-	  src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
-	  src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh,
-	  src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh,
-	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh,
-	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
-	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh,
-	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
-	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
-	  src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh,
-	  src/tests/algebra/series/misc/series_test.hh,	
-	  src/tests/automata/algos/closure_test.hh,
-	  src/tests/automata/algos/complete_test.hh,
- 	  src/tests/automata/algos/compute_test.hh,
-	  src/tests/automata/algos/concat_test.hh,
-	  src/tests/automata/algos/determinist_test.hh,
-	  src/tests/automata/algos/elimination_test.hh,
-	  src/tests/automata/algos/extract_test.hh,
-	  src/tests/automata/algos/generalized_test.hh,
-	  src/tests/automata/algos/glushkov_test.hh,
-	  src/tests/automata/algos/minimization_test.hh,
-	  src/tests/automata/algos/normalize_test.hh,
-	  src/tests/automata/algos/product_test.hh,
-	  src/tests/automata/algos/reachable_test.hh,
-	  src/tests/automata/algos/realtime_test.hh,
-	  src/tests/automata/algos/thompson_test.hh,
-	  src/tests/automata/implementation_check/add_edge_test.hh,
-	  src/tests/automata/implementation_check/add_state_test.hh,
- 	  src/tests/automata/implementation_check/coherence_state_edge_test.hh,
-	  src/tests/automata/implementation_check/global_consistency_test.hh,
-	  src/tests/automata/implementation_check/init_final_test.hh: Fix include.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx,
+	  include/vaucanson/algorithms/minimization_moore.hxx,
+	  include/vaucanson/algorithms/hopcroft_minimization.hxx,
+	  include/vaucanson/algorithms/normalized.hxx,
+  	  include/vaucanson/algorithms/accessible.hxx,
+	  include/vaucanson/misc/container_ops.hxx: Fix unused arg.
 
-	* include/vaucanson/algorithms/concatenate.hxx
-	  include/vaucanson/algorithms/normalized.hxx
-	  include/vaucanson/algorithms/realtime.hxx
-	  include/vaucanson/algorithms/thompson.hxx
-	  include/vaucanson/tools/gen_random.hxx: Fix unused args.
+	* include/vaucanson/automata/concept/copy.hxx: Fix.
+	* include/vaucanson/algorithms/determinize.hxx: Fix serie support use.
+	* include/vaucanson/algorithms/product.hxx: Fix wrapper.
+	* src/tests/automata/algos/glushkov_test.hh: Use 'eval'.
+	* src/tests/automata/algos/product_test.hh: Fix name.
+	* src/tests/automata/algos/reachable_test.hh: Likewise.
+
 ")
 (New-Version-Log "")
-(Checkin-Time "Sun, 29 Jun 2003 18:43:23 +0200")
+(Checkin-Time "Sun, 29 Jun 2003 19:09:49 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -137,7 +106,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.99 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.100 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -292,7 +261,7 @@
   (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.2 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx (vaucanson/p/32_krat_exp_i 1.1 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.18 600))
-  (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.21 600))
+  (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.22 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh (vaucanson/e/1_depth_visi 1.7 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx (vaucanson/d/46_depth_visi 1.6 600))
   (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh (vaucanson/e/0_dump_visit 1.7 600))
@@ -344,7 +313,7 @@
   
   
   (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.6 600))
-  (include/vaucanson/automata/concept/copy.hxx (vaucanson/d/5_copy.hxx 1.6 600))
+  (include/vaucanson/automata/concept/copy.hxx (vaucanson/d/5_copy.hxx 1.7 600))
   (include/vaucanson/automata/concept/handlers.hh (vaucanson/d/2_handlers.h 1.8 600))
   (include/vaucanson/automata/concept/handlers.hxx (vaucanson/d/1_handlers.h 1.7 600))
   
@@ -379,7 +348,7 @@
   (include/vaucanson/algorithms/concatenate.hh (vaucanson/h/5_concat.hh 1.7 600))
   (include/vaucanson/algorithms/concatenate.hxx (vaucanson/h/4_concat.hxx 1.8 600))
   (include/vaucanson/algorithms/determinize.hh (vaucanson/d/35_determiniz 1.10 600))
-  (include/vaucanson/algorithms/determinize.hxx (vaucanson/d/34_determiniz 1.10 600))
+  (include/vaucanson/algorithms/determinize.hxx (vaucanson/d/34_determiniz 1.11 600))
   (include/vaucanson/algorithms/aut_to_exp.hh (vaucanson/e/32_eliminatio 1.10 600))
   (include/vaucanson/algorithms/aut_to_exp.hxx (vaucanson/e/31_eliminatio 1.10 600))
   (include/vaucanson/algorithms/sub_automaton.hh (vaucanson/d/31_extract.hh 1.10 600))
@@ -387,7 +356,7 @@
   (include/vaucanson/algorithms/standard_of.hh (vaucanson/e/42_glushkov.h 1.10 600))
   (include/vaucanson/algorithms/standard_of.hxx (vaucanson/e/41_glushkov.h 1.13 600))
   (include/vaucanson/algorithms/hopcroft_minimization.hh (vaucanson/e/26_hopcroft.h 1.10 600))
-  (include/vaucanson/algorithms/hopcroft_minimization.hxx (vaucanson/e/25_hopcroft.h 1.9 600))
+  (include/vaucanson/algorithms/hopcroft_minimization.hxx (vaucanson/e/25_hopcroft.h 1.10 600))
   (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.6 600))
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.1 600))
   (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.3 600))
@@ -398,13 +367,13 @@
   (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.5 600))
 
   (include/vaucanson/algorithms/minimization_moore.hh (vaucanson/e/24_moore.hh 1.9 600))
-  (include/vaucanson/algorithms/minimization_moore.hxx (vaucanson/e/23_moore.hxx 1.9 600))
+  (include/vaucanson/algorithms/minimization_moore.hxx (vaucanson/e/23_moore.hxx 1.10 600))
   (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.11 600))
-  (include/vaucanson/algorithms/normalized.hxx (vaucanson/d/43_normalized 1.11 600))
+  (include/vaucanson/algorithms/normalized.hxx (vaucanson/d/43_normalized 1.12 600))
   (include/vaucanson/algorithms/product.hh (vaucanson/e/20_product.hh 1.10 600))
-  (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.10 600))
+  (include/vaucanson/algorithms/product.hxx (vaucanson/e/19_product.hx 1.11 600))
   (include/vaucanson/algorithms/accessible.hh (vaucanson/d/33_reachable. 1.12 600))
-  (include/vaucanson/algorithms/accessible.hxx (vaucanson/d/32_reachable. 1.12 600))
+  (include/vaucanson/algorithms/accessible.hxx (vaucanson/d/32_reachable. 1.13 600))
   (include/vaucanson/algorithms/realtime.hh (vaucanson/e/48_realtime.h 1.12 600))
   (include/vaucanson/algorithms/realtime.hxx (vaucanson/e/47_realtime.h 1.13 600))
   (include/vaucanson/algorithms/standard.hh (vaucanson/e/40_standard.h 1.11 600))
@@ -414,7 +383,7 @@
   (include/vaucanson/algorithms/transpose.hh (vaucanson/d/37_transpose. 1.12 600))
   (include/vaucanson/algorithms/transpose.hxx (vaucanson/d/36_transpose. 1.10 600))
   (include/vaucanson/algorithms/trim.hh (vaucanson/f/5_trim.hh 1.10 600))
-  (include/vaucanson/algorithms/trim.hxx (vaucanson/f/0_trim.hxx 1.10 600))
+  (include/vaucanson/algorithms/trim.hxx (vaucanson/f/0_trim.hxx 1.11 600))
   (include/vaucanson/algorithms/sum.hh (vaucanson/d/42_union.hh 1.11 600))
   (include/vaucanson/algorithms/sum.hxx (vaucanson/d/41_union.hxx 1.11 600))
   (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.1 600))
@@ -454,11 +423,11 @@
   (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.10 600))
   (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.9 600))
   (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.5 600))
-  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.11 600))
+  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.12 600))
   (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.14 600))
   (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.13 600))
-  (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.9 600))
-  (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.9 600))
+  (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.10 600))
+  (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.10 600))
   (src/tests/automata/algos/realtime_test.hh (vaucanson/e/49_realtime_t 1.8 600))
   (src/tests/automata/algos/thompson_test.hh (vaucanson/e/46_thompson_t 1.10 600))
   (src/tests/automata/algos/sum_test.hh (vaucanson/e/15_union_test 1.11 600))
@@ -805,7 +774,7 @@
   (include/vaucanson/misc/support.hxx (vaucanson/q/13_support.hx 1.2 600))
   (include/vaucanson/automata/concept/delta_kind.hh (vaucanson/q/14_delta_kind 1.1 600))
 
-  (include/vaucanson/misc/container_ops.hxx (vaucanson/q/15_container_ 1.2 600))
+  (include/vaucanson/misc/container_ops.hxx (vaucanson/q/15_container_ 1.3 600))
   (include/vaucanson/misc/container_ops.hh (vaucanson/q/16_container_ 1.1 600))
   (include/vaucanson/misc/constraints.hh (vaucanson/q/17_constraint 1.1 600))
   (include/vaucanson/automata/concept/automata_kind.hh (vaucanson/q/18_automata_k 1.1 600))

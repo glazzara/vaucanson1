@@ -122,8 +122,8 @@ namespace vcsn {
   //
   template <class A_, typename Auto_>
   std::set<hstate_t>
-  do_coaccessible_states(const AutomataBase<A_>& a_set,
-			 const Auto_&		   a)
+  do_coaccessible_states(const AutomataBase<A_>&,
+			 const Auto_&	       a)
   {
     return accessible_states(transpose_view(a));
   }

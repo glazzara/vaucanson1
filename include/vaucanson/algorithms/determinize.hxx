@@ -182,7 +182,7 @@ namespace vcsn {
   // FIXME : verbose mode will be modified for being clearer.
   template <typename A, typename input_t>
   bool
-  do_is_deterministic(const AutomataBase<A>&	a_set,
+  do_is_deterministic(const AutomataBase<A>&	,
 		      const input_t&		input)
   {
     typedef typename std::set<hedge_t>		delta_ret_t;	
@@ -192,6 +192,7 @@ namespace vcsn {
     typedef typename series_t::weights_t	weights_t;
     typedef typename input_t::series_elt_t     	series_elt_t;
     typedef typename series_elt_t::weight_t	weight_t;
+    typedef typename series_elt_t::support_t	support_t;
 
     delta_ret_t	delta_ret;
     weight_t		  zero_semiring
@@ -222,10 +223,10 @@ namespace vcsn {
 	    for (; k != delta_ret.end(); ++k)
 	      {
 		serie_t s_ = input.serie_of(*k);
-		for (typename serie_value_t::iterator supp = s.supp().begin();
+		for (typename support_t::iterator supp = s.supp().begin();
 		     supp != s.supp().end();
 		     ++supp)
-		  if (s_.get(supp->first) != zero_semiring)
+		  if (s_.get(*supp) != zero_semiring)
 		    return false;
 	      }
 	  }

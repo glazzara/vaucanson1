@@ -31,7 +31,7 @@
 # include <vaucanson/automata/concrete/generalized.hh>
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/realtime.hh>
-# include <vaucanson/algorithms/compute.hh>
+# include <vaucanson/algorithms/eval.hh>
 
 using namespace vcsn;
 
@@ -72,7 +72,7 @@ bool glushkov_test(tests::Tester& tg)
 	monoid_elt_t w = exp.choose_from_supp();
 	if (t.verbose() == tests::high)
 	  std::cout << "TEST: glushkov " << i << " : test " << w << std::endl;
-	if (compute(au, w) == zero_as<weight_value_t>::of(s.weights()))
+	if (eval(au, w) == zero_as<weight_value_t>::of(s.weights()))
 	  {
 	    break;
 	    if (t.verbose() == tests::high)
@@ -105,7 +105,7 @@ bool glushkov_test(tests::Tester& tg)
 	      monoid_elt_t w = exp.choose_from_supp();
 	      if (t.verbose() == tests::high)
 		std::cout << "TEST: glushkov " << i << " : test " << w << std::endl;
-	      if (compute(au, w) == zero_as<weight_value_t>::of(s.weights()))
+	      if (eval(au, w) == zero_as<weight_value_t>::of(s.weights()))
 		{
 		  if (t.verbose() == tests::high)
 		    std::cout << "TEST: glushkov " << i << " failed." << std::endl;
