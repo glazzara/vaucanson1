@@ -3,4 +3,5 @@
 # $Id$
 
 
-EXTRA_DIST = alphabet_test.hh 
+EXTRA_DIST = alphabet_test.hh \
+	     alphabet_torture_test.hh
