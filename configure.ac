@@ -34,6 +34,8 @@ AC_CHECK_PROGS([LATEX], [latex], [$am_aux_dir/missing latex])
 ##
 ## generate files.
 ##
+AC_CONFIG_SUBDIRS([vauc])
+
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile

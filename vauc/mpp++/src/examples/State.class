@@ -1,0 +1,10 @@
+// State.class
+//
+//
+
+name State
+
+static type
+{
+  unsigned
+}

@@ -1,0 +1,10 @@
+// Edge.class
+//
+//
+
+name Edge
+
+static type
+{
+  unsigned
+}

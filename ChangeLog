@@ -1,3 +1,8 @@
+2003-05-12  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* Makefile.am, boostrap.sh, configure.ac: Mention subdirectory
+	'vauc'.
+
 2003-05-07  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/semiring_base.hxx,

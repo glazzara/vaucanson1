@@ -4,7 +4,7 @@
 # $Id$
 
 AUTOMAKE_OPTIONS = foreign 1.6
-SUBDIRS = include src doc
+SUBDIRS = include src doc vauc
 EXTRA_DIST = THANKS README LICENCE ChangeLog tools/scandefs.pl vcsn.m4
 
 .PHONY: doc
