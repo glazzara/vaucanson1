@@ -1,3 +1,15 @@
+2004-03-09  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hh,
+	* include/vaucanson/misc/random.hxx: Add unsigned random generation.
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hh,
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hxx:
+	Add unary operator -.
+	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx:
+	Correct starable bounds for float and double.
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
+	Complete the test on numerical semirings.
+
 2004-03-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/determinize.hxx,

@@ -205,13 +205,13 @@ namespace vcsn {
   inline bool op_starable(const algebra::NumericalSemiring&,
 			   const float& f)
   {
-    return (0.0 <= f) && (f < 1.0);
+    return (-1.0 < f) && (f < 1.0);
   }
 
   inline bool op_starable(const algebra::NumericalSemiring&,
 			   const double& f)
   {
-    return (0.0 <= f) && (f < 1.0);
+    return (-1.0 < f) && (f < 1.0);
   }
 
   inline void op_in_star(const algebra::NumericalSemiring&, float& f)
@@ -237,7 +237,7 @@ namespace vcsn {
   op_can_choose_non_starable(const algebra::NumericalSemiring&,
 			      SELECTOR(float))
   {
-    return true; // Every float which is less than 0 or greater than 1 is
+    return true; // Every float which is less than -1 or greater than 1 is
 		 // non-starable.
   }
 
@@ -266,7 +266,7 @@ namespace vcsn {
   op_can_choose_non_starable(const algebra::NumericalSemiring&,
 			      SELECTOR(double))
   {
-    return true; // Every float which is less than 0 or greater than 1 is
+    return true; // Every float which is less than -1 or greater than 1 is
 		 // non-starable.
   }
 

@@ -91,6 +91,7 @@ namespace vcsn
       /** @{ */
       RationalNumber	operator+(const RationalNumber& nb) const;
       RationalNumber	operator-(const RationalNumber& nb) const;
+      RationalNumber	operator-() const;
       RationalNumber	operator*(const RationalNumber& nb) const;
       RationalNumber	operator/(const RationalNumber& nb) const;
       RationalNumber&	operator+=(const RationalNumber& nb);

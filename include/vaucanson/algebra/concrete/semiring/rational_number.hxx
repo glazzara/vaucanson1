@@ -136,6 +136,13 @@ namespace vcsn
 
     inline
     RationalNumber
+    RationalNumber::operator-() const
+    {
+      return RationalNumber(-num_, denom_);
+    }
+
+    inline
+    RationalNumber
     RationalNumber::operator*(const RationalNumber& nb) const
     {
       return RationalNumber(num_ * nb.num(), denom_ * nb.denom());
@@ -182,42 +189,54 @@ namespace vcsn
     bool	RationalNumber::operator<(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
-      return num_ * m / denom_ < nb.num() * m / nb.denom();
+      int num1 = num_ * (m / denom_);
+      int num2 = nb.num() * (m / nb.denom());
+      return num1 < num2;
     }
 
     inline
     bool	RationalNumber::operator>(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
-      return num_ * m / denom_ > nb.num() * m / nb.denom();
+      int num1 = num_ * (m / denom_);
+      int num2 = nb.num() * (m / nb.denom());
+      return num1 > num2;
     }
 
     inline
     bool	RationalNumber::operator<=(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
-      return num_ * m / denom_ <= nb.num() * m / nb.denom();
+      int num1 = num_ * (m / denom_);
+      int num2 = nb.num() * (m / nb.denom());
+      return num1 <= num2;
     }
 
     inline
     bool	RationalNumber::operator>=(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
-      return num_ * m / denom_ >= nb.num() * m / nb.denom();
+      int num1 = num_ * (m / denom_);
+      int num2 = nb.num() * (m / nb.denom());
+      return num1 >= num2;
     }
 
     inline
     bool	RationalNumber::operator==(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
-      return num_ * m / denom_ == nb.num() * m / nb.denom();
+      int num1 = num_ * (m / denom_);
+      int num2 = nb.num() * (m / nb.denom());
+      return num1 == num2;
     }
 
     inline
     bool	RationalNumber::operator!=(const RationalNumber& nb) const
     {
       const int m = lcm(denom_, nb.denom());
-      return num_ * m / denom_ != nb.num() * m / nb.denom();
+      int num1 = num_ * (m / denom_);
+      int num2 = nb.num() * (m / nb.denom());
+      return num1 != num2;
     }
 
     // Goodies.

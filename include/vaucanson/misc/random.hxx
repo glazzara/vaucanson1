@@ -84,6 +84,19 @@ namespace utility {
     }
 
     template<>
+    inline unsigned generate<unsigned>()
+    {
+      return rand() % utility::limits<unsigned>::max();
+    }
+
+    template<>
+    inline unsigned generate<unsigned>(unsigned min, unsigned max)
+    {
+      unsigned range = unsigned(max - min) + 1;
+      return min + rand() % range;
+    }
+
+    template<>
     inline float generate<float>()
     {
       // This formula comes from the caml stdlib.

@@ -77,6 +77,14 @@ namespace utility {
     template<>
     int generate<int>(int min, int max);
 
+    /// Generate a random unsigned integer
+    template<>
+    unsigned generate<unsigned>();
+
+    /// Generate a random unsigned between two bounds
+    template<>
+    unsigned generate<unsigned>(unsigned min, unsigned max);
+
     /// Generate a random float between 0 and 1
     template<>
     float generate<float>();
