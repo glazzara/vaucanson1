@@ -160,27 +160,43 @@ namespace vcsn
 
     // Provides generic operators on rational (calls the explicit generic
     // constructor for rational).
-# define RATIONAL_NUMBER_OPERATOR(type, op, is_const) 		\
+# define RATIONAL_NUMBER_OPERATOR(type, op)	 		\
 template <class T> 						\
-type operator op(is_const RationalNumber& nb, const T nb2) 	\
+type operator op(const RationalNumber& nb, const T nb2) 	\
 { 								\
   return nb op RationalNumber(nb2); 				\
-} 
-    
-    RATIONAL_NUMBER_OPERATOR(RationalNumber, +, const);
-    RATIONAL_NUMBER_OPERATOR(RationalNumber, -, const);
-    RATIONAL_NUMBER_OPERATOR(RationalNumber, *, const);
-    RATIONAL_NUMBER_OPERATOR(RationalNumber, /, const);
-    RATIONAL_NUMBER_OPERATOR(RationalNumber&, +=, );
-    RATIONAL_NUMBER_OPERATOR(RationalNumber&, -=, );
-    RATIONAL_NUMBER_OPERATOR(RationalNumber&, *=, );
-    RATIONAL_NUMBER_OPERATOR(RationalNumber&, /=, );
-    RATIONAL_NUMBER_OPERATOR(bool, <, const);
-    RATIONAL_NUMBER_OPERATOR(bool, <=, const);
-    RATIONAL_NUMBER_OPERATOR(bool, >, const);
-    RATIONAL_NUMBER_OPERATOR(bool, >=, const);
-    RATIONAL_NUMBER_OPERATOR(bool, ==, const);
-    RATIONAL_NUMBER_OPERATOR(bool, !=, const);
+}								\
+								\
+template <class T> 						\
+type operator op(const T nb2, const RationalNumber& nb) 	\
+{ 								\
+  return RationalNumber(nb2) op nb; 				\
+}
+
+# define RATIONAL_NUMBER_IN_PLACE_OPERATOR(op)			\
+template <class T> 						\
+RationalNumber& operator op(RationalNumber& nb, const T nb2)	\
+{ 								\
+  return nb op RationalNumber(nb2); 				\
+}
+
+    RATIONAL_NUMBER_OPERATOR(bool, <);
+    RATIONAL_NUMBER_OPERATOR(bool, <=);
+    RATIONAL_NUMBER_OPERATOR(bool, >);
+    RATIONAL_NUMBER_OPERATOR(bool, >=);
+    RATIONAL_NUMBER_OPERATOR(bool, ==);
+    RATIONAL_NUMBER_OPERATOR(bool, !=);
+    RATIONAL_NUMBER_OPERATOR(RationalNumber, +);
+    RATIONAL_NUMBER_OPERATOR(RationalNumber, -);
+    RATIONAL_NUMBER_OPERATOR(RationalNumber, *);
+    RATIONAL_NUMBER_OPERATOR(RationalNumber, /);
+    RATIONAL_NUMBER_IN_PLACE_OPERATOR(+=);
+    RATIONAL_NUMBER_IN_PLACE_OPERATOR(-=);
+    RATIONAL_NUMBER_IN_PLACE_OPERATOR(*=);
+    RATIONAL_NUMBER_IN_PLACE_OPERATOR(/=);
+
+# undef RATIONAL_NUMBER_OPERATOR
+# undef RATIONAL_NUMBER_IN_PLACE_OPERATOR
 
     // FIXME: Add other goodies for standard library.
     std::ostream& operator<<(std::ostream& ostr, const RationalNumber& nb);

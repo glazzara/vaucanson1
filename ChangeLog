@@ -1,3 +1,8 @@
+2004-04-23  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
+	Fix generic operators.
+
 2004-04-23  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/contextual_functions.hxx,
