@@ -1,8 +1,6 @@
-#include <set>
-#include <vaucanson/design_pattern/design_pattern.hh>
 #include <vaucanson/algebra/concrete/alphabets/predefs.hh>
-#include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
 #define TEST_STATIC_ARGS \
-   vcsn::algebra::char_letter::Alphabets, std::set<char>
+   vcsn::algebra::char_letter::Alphabets, \
+   std::set<vcsn::algebra::char_letter::Letter>
 

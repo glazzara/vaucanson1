@@ -30,7 +30,8 @@
 #ifndef VCSN_ALGEBRA_CONCEPT_LETTER_HH
 # define VCSN_ALGEBRA_CONCEPT_LETTER_HH
 
-# include <limits>
+# include <vaucanson/misc/static.hh>
+# include <climits>
 
 namespace vcsn {
 
@@ -41,8 +42,7 @@ namespace vcsn {
     {
       enum
 	{
-	  cardinal =
-	    std::numeric_limits<L>::max() - std::numeric_limits<L>::min() + 1
+	  cardinal = utility::static_pow<2, sizeof(L) * 8>::value
 	};
     };
 

@@ -1,6 +1,19 @@
+2004-03-17  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/letter.hh,
+	* include/vaucanson/algebra/concrete/letter/range.hh:
+	Use static value instead of dynamic function calls.
+	* include/vaucanson/algebra/concrete/semiring/rational_number.hh:
+	Make the generic constructor explicit.
+	* src/tests/tests-suites/algebra_alphabet_set_char.defs,
+	* src/tests/tests-suites/algebra_alphabet_set_alpha.defs,
+	* src/tests/tests-suites/algebra_alphabet_set_int.defs,
+	* src/tests/tests-suites/algebra_alphabet_set_pair_char_int.defs:
+	Slightly modify definitions to make them work.
+
 2004-03-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix 
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Fix
 	op_series_get.
 	* src/tests/algebra/series/misc/series_test.hh: Fix the test.
 

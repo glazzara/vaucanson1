@@ -76,7 +76,7 @@ namespace vcsn
       RationalNumber();
       RationalNumber(const RationalNumber& nb);
       template <typename T>
-      RationalNumber(const T num);
+      explicit RationalNumber(const T num);
       /** @} */
 
       /// Accessors.

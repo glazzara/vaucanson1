@@ -61,6 +61,11 @@ namespace vcsn {
       static char from();
       static char to();
       static char random();
+      enum
+	{
+	  from_value = From,
+	  to_value = To
+	};
     };
 
     template <class T, class Interval>
@@ -68,7 +73,7 @@ namespace vcsn {
     {
       enum
 	{
-	  cardinal = Interval::from() - Interval::to() + 1
+	  cardinal = Interval::from_value - Interval::to_value + 1
 	};
     };
 
