@@ -24,12 +24,25 @@
 
 namespace vcsn {
 
-  // the following template MUST be specialized.
+  /*! \addtogroup fundamental
+   *  \@{
+   */
+
+  /*--------.
+  | MetaSet |
+  `--------*/
+  //! MetaSet is a trait that propagates static information about set.
+  /*!  MetaSet is aimed to propagate information about set such as
+    their dynamic/static status.
+  */
+
   template<typename S>
   struct MetaSet
   {
     static const bool dynamic_set = true;
   };
+
+  /*! \@} */
 
 } // vcsn
 

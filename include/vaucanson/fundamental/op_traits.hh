@@ -24,35 +24,72 @@
 
 namespace vcsn {
 
-    template<typename S1, typename S2, typename T1, typename T2>
-    struct op_add_traits
-    {
-      typedef Element<S1, T1> ret_t;
-    };
+  /*! \addtogroup fundamental
+   *  \@{
+   */
 
-    template<typename S1, typename S2, typename T1, typename T2>
-    struct op_sub_traits
-    {
-      typedef Element<S1, T1> ret_t;
-    };
+  /*--------------.
+  | op_add_traits |
+  `--------------*/
+  //! The type of the result of addition between 2 Elements.
+  /*! This is a trait to determine the result of addition between 2 Elements.
+   */
+  template<typename S1, typename S2, typename T1, typename T2>
+  struct op_add_traits
+  {
+    typedef Element<S1, T1> ret_t;
+  };
+  
+  /*--------------.
+  | op_sub_traits |
+  `--------------*/
+  //! The type of the result of substraction between 2 Elements.
+  /*! This is a trait to determine the result of substraction between
+    2 Elements.
+   */
+  template<typename S1, typename S2, typename T1, typename T2>
+  struct op_sub_traits
+  {
+    typedef Element<S1, T1> ret_t;
+  };
 
-    template<typename S1, typename S2, typename T1, typename T2>
-    struct op_mul_traits
-    {
-      typedef Element<S1, T1> ret_t;
-    };
+  /*--------------.
+  | op_mul_traits |
+  `--------------*/
+  //! The type of the result of multiplication between 2 Elements.
+  /*! This is a trait to determine the result of multiplication
+    between 2 Elements.
+   */
+  template<typename S1, typename S2, typename T1, typename T2>
+  struct op_mul_traits
+  {
+    typedef Element<S1, T1> ret_t;
+  };
 
-    template<typename S1, typename S2, typename T1, typename T2>
-    struct op_div_traits
-    {
-      typedef Element<S1, T1> ret_t;
-    };
+  /*--------------.
+  | op_div_traits |
+  `--------------*/
+  //! The type of the result of division between 2 Elements.
+  /*! This is a trait to determine the result of division between 2 Elements.
+   */
+  template<typename S1, typename S2, typename T1, typename T2>
+  struct op_div_traits
+  {
+    typedef Element<S1, T1> ret_t;
+  };
+  
 
-    template<typename S1, typename S2, typename T1, typename T2>
-    struct op_mod_traits
-    {
-      typedef Element<S1, T1> ret_t;
-    };
+  /*--------------.
+  | op_mod_traits |
+  `--------------*/
+  //! The type of the result of modulo between 2 Elements.
+  /*! This is a trait to determine the result of modulo between 2 Elements.
+   */
+  template<typename S1, typename S2, typename T1, typename T2>
+  struct op_mod_traits
+  {
+    typedef Element<S1, T1> ret_t;
+  };
 
 } // vcsn
 

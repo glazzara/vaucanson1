@@ -21,6 +21,8 @@
 #ifndef FUNDAMENTAL_FUNDAMENTAL_HH
 # define FUNDAMENTAL_FUNDAMENTAL_HH
 
+/*! \defgroup fundamental Enriching C++ with the Element design pattern. */
+
 # include <vaucanson/fundamental/predefs.hh>
 # include <vaucanson/fundamental/slots.hh>
 # include <vaucanson/fundamental/meta_set.hh>

@@ -28,7 +28,6 @@ namespace vcsn {
   /*-----------------------------------.
   | Base class for SetSlot class below |
   `-----------------------------------*/
-
   template<typename S, bool dynamic /* default: false */>
   struct SetSlotAttribute
   {

@@ -26,7 +26,7 @@
 namespace vcsn
 {
 
-  // general remark : this file should be called syntactic_decorator.hh
+  // FIXME: general remark : this file should be called syntactic_decorator.hh
 
     /*-------------------.
     | SyntacticDecorator |
