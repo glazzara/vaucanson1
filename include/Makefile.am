@@ -213,6 +213,8 @@ nobase_include_HEADERS =					     \
 	vaucanson/fundamental/structure.hxx			     \
 	vaucanson/fundamental/syntactic_decorator.hh		     \
 	vaucanson/fundamental/syntactic_decorator.hxx		     \
+	vaucanson/misc/bitset.hh				     \
+	vaucanson/misc/bitset.hxx				     \
 	vaucanson/misc/constraints.hh				     \
 	vaucanson/misc/container_ops.hh				     \
 	vaucanson/misc/container_ops.hxx			     \

@@ -1,5 +1,11 @@
 2003-09-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/misc/bitset.hxx: New.
+	* include/vaucanson/misc/bitset.hh: New.
+	* include/Makefile.am: Update.
+
+2003-09-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/misc/window.hxx: New.
 	* include/vaucanson/misc/window.hh: New.
 	* include/Makefile.am: Update.

@@ -1,16 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 405)
-(Parent-Version vaucanson 0 404)
+(Project-Version vaucanson 0 406)
+(Parent-Version vaucanson 0 405)
 (Version-Log "2003-09-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	* include/vaucanson/misc/window.hxx: New.
-	* include/vaucanson/misc/window.hh: New.
+	* include/vaucanson/misc/bitset.hxx: New.
+	* include/vaucanson/misc/bitset.hh: New.
 	* include/Makefile.am: Update.
 
 ")
-(Checkin-Time "Thu, 04 Sep 2003 13:45:39 +0200")
+(Checkin-Time "Thu, 04 Sep 2003 13:58:01 +0200")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -93,7 +93,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.39 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.40 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -136,7 +136,7 @@
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.38 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.39 600))
 
   (include/vaucanson/vaucanson.hh (vaucanson/q/42_vaucanson. 1.1 600))
 
@@ -757,6 +757,12 @@
 
   (include/vaucanson/misc/window.hxx (vaucanson/r/37_window.hxx 1.1 600))
   (include/vaucanson/misc/window.hh (vaucanson/r/38_window.hh 1.1 600))
+
+;; Files added by populate at Thu, 04 Sep 2003 13:57:03 +0200,
+;; to version 0.405(w), by clavei_t:
+
+  (include/vaucanson/misc/bitset.hxx (vaucanson/r/39_bitset.hxx 1.1 600))
+  (include/vaucanson/misc/bitset.hh (vaucanson/r/40_bitset.hh 1.1 600))
 )
 (New-Version-Log "")
 (Merge-Parents)
