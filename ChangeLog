@@ -1,3 +1,31 @@
+2005-01-16  Raphael Poss  <raph@lrde.epita.fr>
+
+	Update documentation.
+
+	* doc/README.txt: Fix some mistakes. Add a "See Also" section.
+	
+	* src/demos/fsm/README: Rewrite to...
+	* src/demos/fsm/README.txt: ...this.
+
+	* src/demos/vaucanswig/doc,
+	* src/demos/vaucanswig/doc/Makefile.am: New directory.
+	* src/demos/vaucanswig/Makefile.am: Update accordingly.
+	
+	* src/demos/vaucanswig/README: Rewrite to...	
+	* src/demos/vaucanswig/doc/README.txt: ...this. Fix some
+	mistakes. Add more information. Change the layout for easier
+	reading.
+
+	* src/demos/vaucanswig/build-process.txt,
+	* src/demos/vaucanswig/meta-build-process.txt: Rename to...
+	* src/demos/vaucanswig/doc/build-process.txt,
+	* src/demos/vaucanswig/doc/meta-build-process.txt: ...these.
+
+	* src/demos/vaucanswig/doc/Makefile.am: Build documentation.
+
+	* src/demos/vaucanswig/Makefile.am: Distribute expand.sh, since it
+	is mentioned in the documentation.
+	
 2005-01-15  Raphael Poss  <raph@lrde.epita.fr>
 
 	Cleanup documentation subsystem. Use reStructuredText more.

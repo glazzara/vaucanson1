@@ -59,7 +59,8 @@ if test "x$ac_cv_recent_swig" != "xyes"; then
     AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
 else
   AC_CONFIG_FILES([src/demos/vaucanswig/Makefile
-	           src/demos/vaucanswig/meta/Makefile
+ 	           src/demos/vaucanswig/doc/Makefile
+ 	           src/demos/vaucanswig/meta/Makefile
                    src/demos/vaucanswig/src/Makefile
                    src/demos/vaucanswig/python/Makefile])
   VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
