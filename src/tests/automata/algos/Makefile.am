@@ -13,6 +13,7 @@ EXTRA_DIST = 					\
 	glushkov_test.hh			\
 	in_concat_test.hh			\
 	determinist_test.hh			\
+	krat_exp_realtime_conflict_test.hh	\
 	realtime_test.hh			\
 	reachable_test.hh			\
 	sub_automaton_test.hh			\

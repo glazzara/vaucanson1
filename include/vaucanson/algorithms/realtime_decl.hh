@@ -66,7 +66,7 @@ namespace vcsn {
    *
    * When called  upon an automaton, this function  uses the functions
    * declared in realtime.hh to make this automaton realtime using the
-   * forward_realtime algorithm.
+   * forward_realtime() algorithm.
    *
    * When  called   with  a  rational  expression,   a  function  from
    * krat_exp_realtime.hh   is  selected  to   expand  words   in  the

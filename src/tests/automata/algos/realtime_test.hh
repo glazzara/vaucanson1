@@ -1,7 +1,7 @@
 // realtime_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,39 +30,30 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_REALTIME_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_REALTIME_TEST_HH
 
-# include <map>
-# include <time.h>
-# include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/tags.hh>
-# include <check/tester.hh>
-# include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/realtime.hh>
-# include <vaucanson/tools/dot_dump.hh>
+
+# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/tools/gen_random.hh>
 
 
 template <class Auto>
 unsigned realtime_test(tests::Tester& tg)
 {
-  using namespace vcsn;
-  using namespace vcsn::algebra;
-  using namespace vcsn::tools;
+  AUTOMATON_TYPES(Auto);
 
-  typedef Auto automaton_t;
-  tests::Tester t(tg.verbose());
+  tests::Tester			t(tg.verbose());
+  vcsn::tools::gen_auto_t	gen(time(0x0));
 
-  gen_auto_t gen(time(0x0));
-  
   const unsigned nb_ok_tests     = 20;
   const unsigned nb_non_ok_tests = 20;
   unsigned success               = 0;
 
   for (unsigned i = 0; i < nb_ok_tests; i++)
     {
-      automaton_t a = gen.generate(50, 60);;      
+      automaton_t a = gen.generate(50, 60);;
       if (is_realtime(a))
 	++success;
-    } 
+    }
   std::string rate;
   SUCCESS_RATE(rate, success, nb_ok_tests);
   TEST(t, "is_realtime on realtime "+rate, success == nb_ok_tests);
@@ -70,22 +61,22 @@ unsigned realtime_test(tests::Tester& tg)
   success = 0;
   for (unsigned i = 0; i < nb_non_ok_tests; i++)
     {
-      automaton_t a = gen.generate_with_epsilon(50, 60, 1, 15);;      
+      automaton_t a = gen.generate_with_epsilon(50, 60, 1, 15);;
       if (!is_realtime(a))
 	++success;
-    } 
+    }
   SUCCESS_RATE(rate, success, nb_non_ok_tests);
   TEST(t, "is_realtime on non-realtime "+rate, success == nb_non_ok_tests);
 
   unsigned nb_tests = 20;
   success = 0;
   for (unsigned i = 0; i < nb_tests; i++)
-    {     
+    {
       automaton_t automata = gen.generate_with_epsilon(4, 8, 1, 2);
       automaton_t non_epsilon = realtime(automata);
       if (is_realtime(non_epsilon))
 	++success;
-    } 
+    }
   SUCCESS_RATE(rate, success, nb_tests);
   TEST(t, "realtime on non-realtime "+rate, success == nb_tests);
 

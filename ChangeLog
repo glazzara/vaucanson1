@@ -1,3 +1,13 @@
+2004-03-15  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx: Remove a useless
+	include.
+	* src/tests/automata/algos/realtime_test.hh: Remove useless includes.
+	* include/vaucanson/algorithms/realtime_decl.hh: Fix a Doxygen link.
+	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh: New
+	test.
+	* src/tests/automata/algos/Makefile.am: Update.
+
 2004-03-15  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/tools/fsm_dump.hxx: Add missing file inclusions.

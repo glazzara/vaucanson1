@@ -34,7 +34,6 @@
 
 # include <vaucanson/algebra/concept/series_base.hh>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
-# include <vaucanson/algorithms/krat_exp_constant_term.hh>
 
 namespace vcsn {
 
