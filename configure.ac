@@ -29,19 +29,17 @@ AC_PROG_AWK
 AC_CHECK_SWIG13
 AM_PATH_PYTHON([2.2])
 
-WANT_INTERPRETER=no
-AC_ARG_WITH([vaucanswig],
-            [AC_HELP_STRING([--without-vaucanswig],
-			    [disable building vaucanswig])],
-            [WANT_INTERPRETER=$withval],
-            [WANT_INTERPRETER=yes])
+AC_ARG_ENABLE(
+	[vaucanswig],
+        [AC_HELP_STRING([--enable-vaucanswig],
+			[enable building vaucanswig])],
+	[WANT_INTERPRETER=$enableval],
+        [WANT_INTERPRETER=no])
 
 VCSN_VAUCANSWIG_SUBDIR=""
 if test "x$WANT_INTERPRETER" != "xno"; then
 if test "x$ac_cv_recent_swig" != "xyes"; then
-    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.
-	  	  You can disable vaucanswig by specifying
-		  --without-vaucanswig to configure.])
+    AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
 else
   AC_CONFIG_FILES([src/demos/vaucanswig/Makefile
 	           src/demos/vaucanswig/meta/Makefile
@@ -50,6 +48,7 @@ else
   VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
 fi
 fi
+
 
 # Libtool used
 AC_DISABLE_STATIC

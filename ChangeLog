@@ -1,3 +1,10 @@
+2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* configure.ac,
+	* config/xml.m4: Change --with-vaucanswig to --enable-vaucanswig, and 
+	make it disabled by default. Also make xml enabled by default.
+	* README: Update accordingly.
+
 2004-07-14  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx:

@@ -1,21 +1,7 @@
 # xml.m4
 
-# Xerces C++
-AC_DEFUN([VCSN_XML],
-[
-AC_ARG_WITH(
-  [xerces],
-  [  --with-xerces           specify Xerces-C++ location],
-  [XERCESC=$withval],
-  [if test "x$prefix" = xNONE; then
-     XERCESC=$ac_default_prefix
-   else
-     XERCESC=$prefix
-   fi])
-AC_ARG_ENABLE(
-  [xml],
-  [AC_HELP_STRING([--enable-xml],
-		   [Enable XML tests (need Xerces-C++ library >= 2.3)])],
+# Macro used in ARC_ARG_ENABLE([xml], ...)
+AC_DEFUN([ENABLE_VCSN_XML], 
   [
     xml_check=true
     ac_compile_xerces_check_save=$ac_compile
@@ -50,8 +36,31 @@ AC_ARG_ENABLE(
 	ac_compile=$ac_compile_xerces_check_save
 	ac_cpp=$ac_cpp_xerces_check_save
       ])
-  ],
-  [xml_check=false]
+  ])
+
+
+# Xerces C++
+AC_DEFUN([VCSN_XML],
+[
+AC_ARG_WITH(
+  [xerces],
+  [  --with-xerces           specify Xerces-C++ location],
+  [XERCESC=$withval],
+  [if test "x$prefix" = xNONE; then
+     XERCESC=$ac_default_prefix
+   else
+     XERCESC=$prefix
+   fi])
+AC_ARG_ENABLE(
+  [xml],
+  [AC_HELP_STRING([--enable-xml],
+		   [Enable XML tests (need Xerces-C++ library >= 2.3)])],
+  [if test "x$enableval" = xno; then
+	xml_check=false
+  else
+	ENABLE_VCSN_XML
+  fi],
+  [ ENABLE_VCSN_XML ]
 )
 AM_CONDITIONAL(XML_CHECK, test x$xml_check = xtrue)
 ])

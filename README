@@ -40,10 +40,10 @@ Notice that an installation is  done for  a particular compiler  since
 ./configure  enables  some workarounds  and,  consequently, users must
 compile   with the same compiler     to avoid compatibility problems.  
 
-If you do not want to use the interpreter whose compilation takes
+If you want to use the interpreter whose compilation takes
 a couple of hours, use instead:
 
-	./configure --without-vaucanswig
+	./configure --enable-vaucanswig
 
 ----------------------------------------------------------------------
 REQUIREMENTS
