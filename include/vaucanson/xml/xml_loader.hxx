@@ -34,12 +34,15 @@
 
 # include <vaucanson/xml/xml_loader.hh>
 
-# include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/xml/types.hh>
+# include <vaucanson/xml/xml_set.hh>
+# include <vaucanson/xml/xml_value.hh>
+# include <vaucanson/xml/xml_automaton.hh>
 
 # include <vaucanson/tools/usual_macros.hh>
 
 # include <iostream>
+# include <sstream>
 
 namespace vcsn
 {

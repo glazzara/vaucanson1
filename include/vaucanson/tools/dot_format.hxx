@@ -32,9 +32,11 @@
 #ifndef VCSN_TOOLS_DOT_FORMAT_HXX
 # define VCSN_TOOLS_DOT_FORMAT_HXX
 
+# include <sstream>
+# include <map>
+
 # include <vaucanson/tools/dot_format.hh>
 # include <vaucanson/automata/concept/handlers.hh>
-# include <map>
 # include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn

@@ -32,6 +32,7 @@
 #ifndef VCSN_TOOLS_DOT_FORMAT_HH
 # define VCSN_TOOLS_DOT_FORMAT_HH
 
+#include <iostream>
 #include <string>
 
 namespace vcsn {

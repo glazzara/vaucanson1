@@ -32,6 +32,8 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_TRANSPOSE_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_TRANSPOSE_HXX
 
+# include <vaucanson/misc/contract.hh>
+
 namespace vcsn {
 
   namespace algebra {

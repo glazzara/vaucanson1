@@ -56,7 +56,7 @@ namespace vcsn {
 			     f.series().semiring().monoid());
     series_set_t series(output_series, g.series().monoid());
     automata_set_t structure(series);
-    transducer_t output(set);
+    transducer_t output(s);
     delta_ret_t f_delta_ret, g_delta_ret;
     assoc_t conv;
     series_set_elt_t zero =

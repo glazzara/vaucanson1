@@ -129,7 +129,7 @@ namespace vcsn {
 	    case rparen			: return ")";
 	    case one			: return "one";
 	    case zero			: return "zero";
-	    case dot			: return ".";
+	    case krat_exp_lexing::dot	: return ".";
 	    case e_star			: return "*";
 	    case krat_exp_lexing::plus	: return "+";
 	    case space			: return " ";
@@ -304,7 +304,7 @@ namespace vcsn {
 	      case ')' : tok = rparen;			len = 1; break;
 	      case '+' : tok = krat_exp_lexing::plus;	len = 1; break;
 	      case '*' : tok = e_star;			len = 1; break;
-	      case '.' : tok = dot;			len = 1; break;
+	      case '.' : tok = krat_exp_lexing::dot;	len = 1; break;
 	      case ' ' : tok = space;			len = 1; break;
 	      case '0' : tok = zero;			len = 1; break;
 	      case '1' : tok = one;			len = 1; break;
@@ -562,15 +562,15 @@ namespace vcsn {
       {
 	trace("parse_term: Start");
 	parse_right_weighted (exp);
-	while (lexer_.first().is_a(dot)		||
-	       lexer_.first().is_a(a_weight)	||
-	       lexer_.first().is_a(lparen)	||
-	       lexer_.first().is_a(one)		||
-	       lexer_.first().is_a(zero)	||
+	while (lexer_.first().is_a(krat_exp_lexing::dot)	||
+	       lexer_.first().is_a(a_weight)			||
+	       lexer_.first().is_a(lparen)			||
+	       lexer_.first().is_a(one)				||
+	       lexer_.first().is_a(zero)			||
 	       lexer_.first().is_a(a_word))
 	  {
-	    if (lexer_.first().is_a(dot))
-	      accept(dot);
+	    if (lexer_.first().is_a(krat_exp_lexing::dot))
+	      accept(krat_exp_lexing::dot);
 	    Element<S, T> rhs (exp.structure());
 	    parse_right_weighted(rhs);
 	    exp = exp * rhs;

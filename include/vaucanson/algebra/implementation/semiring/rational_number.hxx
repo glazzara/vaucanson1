@@ -260,7 +260,7 @@ namespace vcsn
       return nb.print(ostr);
     }
 
-    inline
+   inline
     int	gcd(int a, unsigned int b)
     {
       unsigned n = b;
@@ -288,5 +288,24 @@ namespace vcsn
     }
   }
 }
+
+namespace std
+{
+  inline
+  ::vcsn::algebra::RationalNumber
+  numeric_limits< ::vcsn::algebra::RationalNumber >::min()
+  {
+    return
+      ::vcsn::algebra::RationalNumber (std::numeric_limits<int>::min(), 1);
+  }
+
+  inline
+  ::vcsn::algebra::RationalNumber
+  numeric_limits< ::vcsn::algebra::RationalNumber >::max()
+  {
+    return
+      ::vcsn::algebra::RationalNumber (std::numeric_limits<int>::max(), 1);
+  }
+} // End of namespace std.
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX

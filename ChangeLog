@@ -1,3 +1,38 @@
+2004-10-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Those modifications make Vaucanson compatible with g++ 3.2, 3.3,
+	3.4 and ICC 8.1.
+
+	* include/vaucanson/algebra/implementation/letter/int_letter.hxx,
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx:
+	Include sstream.
+	* include/vaucanson/algebra/implementation/series/transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hxx:
+	Include vaucanson/misc/contract.hh.
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx:
+	Include algorithm.
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	Fix an ambiguity with krat_exp_lexing::dot.
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh,
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx:
+	Specialize std::numeric_limits and utility::limits for
+	RationalNumber.
+	* include/vaucanson/xml/xml_loader.hxx: Do not include
+	design_pattern/element.hh. Include vaucanson/xml_set.hh,
+	vaucanson/xml_value.hh, vaucanson/xml_automaton.hh and sstream.
+	* include/vaucanson/tools/dot_format.hh: Include iostream.
+	* include/vaucanson/tools/dot_format.hxx: Include sstream.
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx: Fix
+	a constructor call.
+	* include/vaucanson/automata/concept/history.hxx: Fix the invalid
+	use of iterators.
+	* include/vaucanson/automata/concept/kinds.hxx: Include
+	vaucanson/tools/container_ops.hh. Use identity_as instead of
+	identity_value. Change invalid calls to algebra::op_begin into
+	calls to op_begin.
+	* src/tests/design_pattern/intrinsics.hh: Specify this-> for
+	attributes.
+
 2004-10-06  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* configure.ac: Minor update.

@@ -118,7 +118,7 @@ namespace vcsn {
 	     = states_events_[s].begin();
 	   ev != states_events_[s].end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       states_events_[s].push_front(new UnaryEvent<hstate_t>(e, first));
       return true;
@@ -135,7 +135,7 @@ namespace vcsn {
 	     states_events_[s].begin();
 	   ev != states_events_[s].end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       states_events_[s].push_front(new BinaryEvent<hstate_t>
 				   (e, first, second));
@@ -153,7 +153,7 @@ namespace vcsn {
       for (typename state_events_t::const_iterator ev = se->second.begin();
 	   ev != se->second.end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return *ev;
       return 0;      
     }
@@ -167,7 +167,7 @@ namespace vcsn {
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
-	if (ev->second->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       edges_events_[edge].push_front(new Event<hedge_t>(e));
       return true;
@@ -183,7 +183,7 @@ namespace vcsn {
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       edges_events_[edge].push_front(new UnaryEvent<hedge_t>(e, first));
       return true;
@@ -200,7 +200,7 @@ namespace vcsn {
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       edges_events_[edge].push_front
 	(new BinaryEvent<hedge_t>(e, first, second));
@@ -219,7 +219,7 @@ namespace vcsn {
       for (typename edge_events_t::const_iterator ev = ee->second.begin();
 	   ev != ee->second.end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return (*ev);
       return 0;
     }
@@ -260,7 +260,7 @@ namespace vcsn {
       for (typename auto_events_t::const_iterator ev = auto_events_.begin();
 	   ev != auto_events_.end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return false;
       auto_events_.push_front(new BinaryEvent<AutoType_>(e, first, second));
       return true;
@@ -273,7 +273,7 @@ namespace vcsn {
       for (typename auto_events_t::const_iterator ev = auto_events_.begin();
 	   ev != auto_events_.end();
 	   ++ev)
-	if ((*ev)->get_event_kind() == e)
+	if (ev->get_event_kind() == e)
 	  return (*ev);      
       return 0;
     }

@@ -33,6 +33,8 @@
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_RANDOM_VISITOR_HXX
 
 # include <algorithm>
+
+# include <vaucanson/misc/contract.hh>
 # include <vaucanson/algebra/implementation/series/rat/random_visitor.hh>
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 

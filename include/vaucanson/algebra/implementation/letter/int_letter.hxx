@@ -32,6 +32,8 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HXX
 
+# include <sstream>
+
 # include <vaucanson/algebra/implementation/letter/int_letter.hh>
 
 namespace vcsn {

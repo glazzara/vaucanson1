@@ -32,6 +32,8 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HXX
 
+# include <algorithm>
+
 # include <vaucanson/algebra/implementation/series/rat/depth_visitor.hh>
 
 namespace vcsn {

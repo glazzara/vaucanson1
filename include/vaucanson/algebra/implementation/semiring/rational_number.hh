@@ -34,6 +34,8 @@
 
 # include <iostream>
 
+# include <vaucanson/misc/limits.hh>
+
 /** @addtogroup algebra *//* @{ */
 /** @addtogroup semiring *//* @{ */
 /**
@@ -200,7 +202,7 @@ RationalNumber& operator op(RationalNumber& nb, const T nb2)	\
     // FIXME: Add other goodies for standard library.
     std::ostream& operator<<(std::ostream& ostr, const RationalNumber& nb);
 
-    // FIXME: We might prefer to define gcd and lcm somewhere else.
+   // FIXME: We might prefer to define gcd and lcm somewhere else.
     int		gcd(int a, unsigned int b);
     int		lcm(int a, unsigned int b);
 
@@ -209,6 +211,28 @@ RationalNumber& operator op(RationalNumber& nb, const T nb2)	\
 
   } // End of namespace algebra.
 } // End of namespace vcsn.
+
+namespace std
+{
+  template <>
+  struct numeric_limits< ::vcsn::algebra::RationalNumber >
+  {
+    static ::vcsn::algebra::RationalNumber min();
+    static ::vcsn::algebra::RationalNumber max();
+  };
+
+} // End of namespace std.
+
+// FIXME: utility::limits should be removed, or std::numeric_limits should
+// FIXME: not be used/specialized.
+namespace utility
+{
+  template <>
+  struct limits< ::vcsn::algebra::RationalNumber > :
+    public std::numeric_limits< ::vcsn::algebra::RationalNumber >
+  {
+  };
+}
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/semiring/rational_number.hxx>
