@@ -1,3 +1,18 @@
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	It is now possible to build a rational expression using a std::string
+	that represent it.
+
+	* include/vaucanson/contextual_headers.hh: Include the rational
+	expression parser.
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx (new_rat_exp):
+	Add a new_rat_exp() function that works with iterators instead of an
+	alphabet. As the last argument, new_rat_exp() can optionally take a
+	string representing the expression to build.
+	* src/tests/context_headers/automata/global_consistency_test.hh: Add
+	tests for new_rat_exp().
+
 2004-07-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/demos/fsm/generate_toolbox.sh,

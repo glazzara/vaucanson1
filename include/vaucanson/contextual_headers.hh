@@ -36,6 +36,7 @@
 # include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
+# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/implementation/graph.hh>

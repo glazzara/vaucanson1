@@ -71,6 +71,16 @@ global_consistency_test(tests::Tester& t)
   automata_set_t	aa (ss);
 
   rat_exp_t		e (ss);
+  rat_exp_t		f = new_rat_exp(at);
+  rat_exp_t		g = new_rat_exp(at, "a+b");
+  TEST(t, "new_rat_exp works. [1/3]", e == f);
+  TEST(t, "new_rat_exp works. [2/3]", g != f);
+
+  rat_exp_t::support_t			s = g.supp();
+  rat_exp_t::support_t::const_iterator	i = s.begin();
+  TEST(t, "new_rat_exp works. [3/3]",
+       s.size() == 2 and *i == "a" and *(++i) == "b");
+
   do
     e = ss.choose(SELECT(rat_exp_impl_t));
   while (e == zero_as<rat_exp_impl_t>::of(ss));

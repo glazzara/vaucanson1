@@ -80,15 +80,30 @@ gen_automaton_t new_gen_automaton(const T& alphabet)
 | new_rat_exp() |
 `--------------*/
 
-template <class T>
-rat_exp_t new_rat_exp(const T& alphabet)
+template <class Iterator>
+rat_exp_t new_rat_exp(const Iterator& begin,
+		      const Iterator& end,
+		      const std::string& exp)
 {
-  monoid_t monoid(alphabet);
-  semiring_t semiring;
-  series_set_t series(semiring, monoid);
-  return rat_exp_t (series);
+  alphabet_t	alphabet;
+  for (Iterator i = begin; i != end; ++i)
+    alphabet.insert(*i);
+  monoid_t	monoid (alphabet);
+  semiring_t	semiring;
+  series_set_t	series (semiring, monoid);
+
+  rat_exp_t	r (series);
+  std::pair<bool, std::string> p = parse(exp, r);
+  if (p.first)
+    throw std::invalid_argument (p.second);
+  return r;
 }
 
+template <class T>
+rat_exp_t new_rat_exp(const T& alphabet, const std::string& exp)
+{
+  return new_rat_exp(alphabet.begin(), alphabet.end(), exp);
+}
 
 /*--------------.
 | standard_of() |
