@@ -7,6 +7,8 @@
 SUBDIRS = \
 	semiring    \
 	alphabets   \
-	free_monoid 
+	free_monoid \
+	series
+
 
 

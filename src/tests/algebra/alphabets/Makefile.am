@@ -1,7 +1,6 @@
-# fundamental/Makefile.am
+# algebra/alphabets/Makefile.am
 #
 #
-# $Id$
 # VCSN_HEADER
 
 

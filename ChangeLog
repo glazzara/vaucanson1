@@ -1,3 +1,17 @@
+2002-06-18  Maxime Rey  <robert@lrde.epita.fr>
+
+	* Added `include/vaucanson/algebra/concept/series_base.hxx'
+	* Added `include/vaucanson/algebra/concept/series_base.hh'
+	* Added `include/vaucanson/algebra/concrete/series/krat_conversion.hxx'
+	* Added `include/vaucanson/algebra/concrete/series/krat_conversion.hh' 
+	* Added `include/vaucanson/algebra/concrete/series/krat.hxx' 
+	* Added `include/vaucanson/algebra/concrete/series/krat.hh'
+	* Added `include/vaucanson/algebra/concrete/series/polynoms.hxx'
+	* Added `include/vaucanson/algebra/concrete/series/polynoms.hh'
+	* Added `include/vaucanson/algebra/concrete/series/series.hxx'
+	* Added `include/vaucanson/algebra/concrete/series/series.hh'
+	* Added `src/tests/algebra/series/series-test.cc' 
+	
 2002-06-18  Maxime Rey  <max@lrde.epita.fr>
 
 	* src/tests/algebra/alphabets/alphabets-basic-test.cc extend
