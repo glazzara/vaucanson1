@@ -34,14 +34,11 @@
    ../algebra/series/misc \
    ../algebra/series/krat/main
 
-#
-# Disabled for the moment, since we know this implementation is buggy.
-#
-# ../bin/generate-test-suite.sh \
-#    algebra_series_krat_double_string \
-#    algebra_series_krat_double_string.defs \
-#    ../algebra/series/misc \
-#    ../algebra/series/krat/main
+../bin/generate-test-suite.sh \
+   algebra_series_krat_double_string \
+   algebra_series_krat_double_string.defs \
+   ../algebra/series/misc \
+   ../algebra/series/krat/main
 
 ../bin/generate-test-suite.sh \
    algebra_series_krat_int_string \

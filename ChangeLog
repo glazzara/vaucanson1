@@ -1,3 +1,8 @@
+2004-04-19  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/tests-suites/generate-all.sh: Re-enable tests on rational
+	expressions which weights are double.
+
 2004-04-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/automata/algos/in_concat_test.hh,
@@ -7,15 +12,15 @@
 	* src/tests/automata/algos/concat_test.hh,
 	* src/tests/automata/algos/closure_test.hh: Update these tests in order
 	to handle computation exceptions.
-	
+
 2004-04-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/misc/contract.hh: Add a macro for exception 
+	* include/vaucanson/misc/contract.hh: Add a macro for exception
 	handling.
 	* include/vaucanson/algorithms/forward_closure.hxx,
-	* include/vaucanson/algorithms/backward_closure.hxx: Update error 
+	* include/vaucanson/algorithms/backward_closure.hxx: Update error
 	handling.
-	* src/tests/bin/generate-test-suite.sh: add a flag for exception 
+	* src/tests/bin/generate-test-suite.sh: add a flag for exception
 	handling.
 
 2004-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
