@@ -5,9 +5,11 @@
 
 SUBDIRS = \
 	check 					\
-	tests-suites 				\
-	fundamental				\
-	algebra    				\
-	bin                                     \
 	sanity                                  \
+	misc					\
+	fundamental				\
+	tests-suites 				\
+	algebra    				\
 	automata				
+
+EXTRA_DIST = bin/generate-test-suite.sh

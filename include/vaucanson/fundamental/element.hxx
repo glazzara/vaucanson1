@@ -18,20 +18,15 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef FUNDAMENTAL_ELEMENT_HXX
-# define FUNDAMENTAL_ELEMENT_HXX
+#ifndef VCSN_FUNDAMENTAL_ELEMENT_HXX
+# define VCSN_FUNDAMENTAL_ELEMENT_HXX
 
-# include <vaucanson/fundamental/element_ops.hh>
-# include <vaucanson/fundamental/predefs.hh>
-# include <vaucanson/fundamental/meta_set.hh>
-# include <vaucanson/fundamental/meta_element.hh>
-# include <vaucanson/fundamental/default_ops.hh>
 # include <vaucanson/fundamental/element.hh>
 
 namespace vcsn {
 
   /*-------------.
-  | constructors |
+  | Constructors |
   `-------------*/
 
   template <class S, class T>
@@ -40,14 +35,15 @@ namespace vcsn {
     set_(), 
     value_(op_default(SELECT(S), SELECT(T)))
   {}
+
+  /*--------------------------.
+  | Constructors from Element |
+  `--------------------------*/
     
-  // For the two next constructors, the constructor of the SetSlotAttribute
-  // used is SetSlotAttribute(const SetSlotAttribute& other)
-  // because only the pointer must be copied !
   template <class S, class T>
   Element<S,T>::Element(const Element& other) :
     MetaElement<S, T>(other),
-    set_(other.set_),
+    set_(other.set_), 
     value_(other.value_)
   {}
     
@@ -55,16 +51,20 @@ namespace vcsn {
   template<typename U>
   Element<S,T>::Element(const Element<S, U>& other)
     : set_(other.set_),
-      value_(op_convert(SELECT(T), SELECT(S), other.value()))
+      value_(op_convert(other.set(), SELECT(T), other.value()))
   {}
     
   template <class S, class T>
   template<typename OtherS, typename U>
   Element<S,T>::Element(const Element<OtherS, U>& other)
     : set_(),
-      value_(op_convert(SELECT(T), SELECT(S), 
-			SELECT(OtherS), other.value()))
+      value_(op_convert(SELECT(S), SELECT(T), 
+			other.set(), other.value()))
   {}
+
+  /*-------------------------.
+  | Constructors from values |
+  `-------------------------*/
     
   template <class S, class T>
   Element<S,T>::Element(const T& other)
@@ -76,18 +76,17 @@ namespace vcsn {
   template<typename U>
   Element<S,T>::Element(const U& other)
     : set_(),
-      value_(op_convert(SELECT(T), SELECT(S), other))
+      value_(op_convert(SELECT(S), SELECT(T), other))
   {}
     
-  // For the following calls of constructor of SetSlotAttribute,
-  // entire object must be copied (not only pointer).
-  // So the construcor called is :
-  // template <class S>  
-  // SetSlotAttribute<S, true>::SetSlotAttribute(const S& other)
+  /*--------------------------------------.
+  | Constructors from structural elements |
+  `--------------------------------------*/
+
   template <class S, class T>
   Element<S,T>::Element(const S& set)
     : set_(set),
-      value_(op_default(SELECT(S), SELECT(T)))
+      value_(op_default(set, SELECT(T)))
   {}
     
   template <class S, class T>
@@ -100,15 +99,15 @@ namespace vcsn {
   template<typename U>
   Element<S,T>::Element(const S& set, const U& other)
     : set_(set),
-      value_(op_convert(SELECT(T), SELECT(S), other))
+      value_(op_convert(set, SELECT(T), other))
   {}
     
   template <class S, class T>
   template<typename OtherS, typename U>
   Element<S,T>::Element(const S& set, const Element<OtherS, U>& other)
     : set_(set),
-      value_(op_convert(SELECT(T), SELECT(S), 
-			SELECT(OtherS), other.value()))
+      value_(op_convert(set, SELECT(T), 
+		        other.set(), other.value()))
   {}
     
   /*-----------.
@@ -119,8 +118,11 @@ namespace vcsn {
   Element<S,T>& 
   Element<S,T>::operator=(const Element& other)
   {
-    set_.assign(other.set_);
-    value_.assign(other.value_);
+    if (!set_.bound())
+      set_.assign(other.set_);
+    else
+      assert(&set() == &other.set());
+    op_assign(set(), set(), value_, other.value());
     return *this;
   }
     
@@ -129,8 +131,11 @@ namespace vcsn {
   Element<S,T>& 
   Element<S,T>::operator=(const Element<S, U>& other)
   {
-    set_.assign(other.set());
-    op_assign(set(), other.set(), value(), other.value());
+    if (!set_.bound())
+      set_.assign(other.set());
+    else
+      assert(&set() == &other.set());
+    op_assign(set(), set(), value_, other.value());
     return *this; 
   }
 
@@ -138,7 +143,8 @@ namespace vcsn {
   template<typename OtherS, typename U>
   Element<S,T>& Element<S,T>::operator=(const Element<OtherS, U>& other)
   { 
-    op_assign(set(), other.set(), value(), other.value());
+    assert(set_.bound());
+    op_assign(set(), other.set(), value_, other.value());
     return *this; 
   }
 
@@ -146,13 +152,10 @@ namespace vcsn {
   template<typename U>
   Element<S,T>& Element<S,T>::operator=(const U& other)
   {
+    assert(set_.bound());
     op_assign(set(), value(), other);
     return *this;
   }
-
-  //       ~Element()
-  //       { /*/ no way to call a destructor here /*/ }
-
 
   /*------.
   | Sugar |
@@ -181,35 +184,16 @@ namespace vcsn {
   template <class S, class T>
   T&	Element<S,T>::value()       
   { 
-    return value_.get(); 
+    return value_; 
   }
 
   template <class S, class T>
   const T&	Element<S,T>::value() const 
   { 
-    return value_.get(); 
+    return value_; 
   }
-
-  template <class S, class T>
-  T&	Element<S,T>::operator()()	   
-  { 
-    return value_.get(); 
-  }
-      
-  template <class S, class T>
-  const T&	Element<S,T>::operator()() const 
-  { 
-    return value_.get(); 
-  }
-
-  template <class S, class T>
-  Element<S,T>::operator const T& () const 
-  { 
-    return value_.get(); 
-  }
-
 
 } // vcsn
 
 
-#endif // FUNDAMENTAL_ELEMENT_HXX
+#endif // VCSN_FUNDAMENTAL_ELEMENT_HXX

@@ -21,152 +21,169 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENT_HH
 # define VCSN_FUNDAMENTAL_ELEMENT_HH
 
-# include <vaucanson/config/system.hh>
-# include <vaucanson/fundamental/predefs.hh>
-# include <vaucanson/fundamental/meta_set.hh>
-# include <vaucanson/fundamental/meta_element.hh>
-# include <vaucanson/fundamental/default_ops.hh>
+/** @addtogroup fundamental *//** @{ */
+/**
+ * @file element.hh
+ * @brief Declaration of @c Element
+ */
+/** @} */
+
+# include <vaucanson/fundamental/predecls.hh>
+# include <vaucanson/fundamental/meta_element_root.hh>
 # include <vaucanson/fundamental/element_ops.hh>
+# include <vaucanson/fundamental/default_ops.hh>
 
 namespace vcsn {
 
-  /*! @addtogroup fundamental */ /*! @{ */
+  /** @addtogroup fundamental *//** @{ */
 
   /*--------.
   | Element |
   `--------*/
-  //! Element of the set S implemented by T. 
-  /*! Element is the center of the design pattern used in Vaucanson to
-    have an orthogonal construction of object from two different
-    points of view :
 
-    - Algebraic/Theorical one from the hierarchies of sets ;
-    - Implementation one ;
-
-    Element proposes a lot of different constructors so as to permit
-    the largest set of type conversions. Calling foreign constructors
-    assume that there exist compatible "op_convert" functions.
-
-    See: MetaElement
-  */
-
+  /** Glue class between structural elements and implementation values.
+   *
+   * @c Element is the center of the design pattern used in Vaucanson
+   * to have an orthogonal construction of object from two different
+   * viewpoints:
+   *
+   * <ul>
+   * <li> Algebraic/Theorical one, from a hierarchy of sets,
+   * <li> Implementation and computations.
+   * </ul>
+   *
+   * @c Element proposes a lot of different constructors so as to
+   * allow the largest set of type conversions. Calling foreign
+   * constructors assume that there exist compatible "op_convert"
+   * functions.
+   *
+   * @see
+   * <ul>
+   * <li>@c MetaElement
+   * <li>@c Structure
+   * <li>@c SetSlot
+   * </ul>
+   */
   template<typename S, typename T>
   class Element : public MetaElement<S, T>
   {
   public:
-    /*! set_t is the structural element type of the Element. */
+    /// Structure type for structural elements.
     typedef S	      set_t;
 
-    /*! value_t is the implementation type of the Element. */
+    /// Implementation type for values.
     typedef T	      value_t;
 
-    /*! dynamic_set determines if the structural element needs dynamic data. */
-    static const bool dynamic_set    = MetaSet<S>::dynamic_set;
-
-    /*! dynamic_value determines if the implementation needs dynamic data. */
-    static const bool dynamic_values = MetaElement<S, T>::dynamic_values;
-
-    /*! an element is dynamic iff its structural element or its implementation
-    is. */
-    static const bool dynamic        = dynamic_set || dynamic_values;
+    /// Attribute indicating whether the structural element has dynamic data.
+    static const bool dynamic    = dynamic_traits<S>::ret;
       
-    /*-------------.
-    | constructors |
-    `-------------*/
+    /*--------------------.
+    | Default constructor |
+    `--------------------*/
 
-    /*! Default constructor.  */
+    /** Default constructor.
+     * Note that using this constructor when the structural element is dynamic,
+     * leaves the constructed @c Element instance in an incomplete state, 
+     * i.e. not linked to any structural element.
+     */
     Element();
 
-    /*! Copy constructor from element of exactly the same type. */
+    /*--------------------------.
+    | Constructors from Element |
+    `--------------------------*/
+
+    /// Copy constructor from @c Element instances of exactly the same type.
     Element(const Element& other);
 
-    /*! Copy constructor from element of the same structural element but
-    different implementation. */
+    /// Copy constructor from @c Element instances with different value type.
     template<typename U>
     Element(const Element<S, U>& other);
 
-    /*! Copy constructor from completly different element. */
+    /** Copy constructor from foreign @c Element instances.
+     * Note that using this constructor when the structural element is dynamic,
+     * leaves the constructed @c Element instance in an incomplete state, 
+     * i.e. not linked to any structural element.
+     */
     template<typename OtherS, typename U>
     Element(const Element<OtherS, U>& other);
 
-    /*! Copy constructor from the implementation. Warning : if the
-      structural element is dynamic, the client must handle the
-      initialization of it. */
+    /*-------------------------.
+    | Constructors from values |
+    `-------------------------*/
+
+    /** @{ */
+    /** Copy constructor from anonymous values.
+     * Note that using this constructor when the structural element is dynamic,
+     * leaves the constructed @c Element instance in an incomplete state, 
+     * i.e. not linked to any structural element.
+     */
     Element(const T& other);
 
-    /*! Copy constructor from another implementation. Warning : if the
-      structural element is dynamic, the client must handle the
-      initialization of it. */
     template<typename U>
     Element(const U& other);
+    /** @} */
 
-    /*! Constructor from the structural element. Warning : the default
-      constructor of the implementation is called. */
+    /*-------------------------------------------------.
+    | Constructors from structural elements and values |
+    `-------------------------------------------------*/
+
+    /** Default constructor with the structural element specified.
+     * This constructor invokes the default constructor of the
+     * implementation value type.
+     */
     explicit Element(const S& set);
 
-    /*! Constructor from the structural element and the implementation. */
+    /// Explicit construction from structural element and value.
     Element(const S& set, const T& other); 
 
-    /*! Constructor from the structural element and another
-    implementation type. */
-    template<typename U> Element(const S& set,
-    const U& other);
+    /// Explicit construction from structural element and foreign value.
+    template<typename U> Element(const S& set, const U& other);
 
-    /*! Constructor from other structural element and another
-    implementation type. */
+    /// Explicit construction with foreign @c Element conversion.
     template<typename OtherS, typename U>
     Element(const S& set, const Element<OtherS, U>& other);
 
     /*-----------.
     | Assignment |
     `-----------*/
-    /*! Assignement operator from the same type of Element. */
+
+    /// Assignment from the same @c Element type.
     Element& operator=(const Element& other);
 
-    /*! Assignement operator from another element type with different
-      implementation.   */
+    /// Assignment from other implementation value types.
     template<typename U>
     Element& operator=(const Element<S, U>& other);
 
-    /*! Assignement operator from another structural element and
-      another implementation. */
+    /// Assignment from foreign @c Element types.
     template<typename OtherS, typename U>
     Element& operator=(const Element<OtherS, U>& other);
 
-    /*! Assignement operator from another implementation. */
+    /// Assignment from foreign implementation types.
     template<typename U>
     Element& operator=(const U& other);
 
     /*--------------------------.
     | Design pattern facilities |
     `--------------------------*/
-    /*! Structural element accessor. (const) */
+
+    /// Accessor to the structural element.
     const S&	set() const;
 
-    /*! Post-construction structural element initialization. */
+    /// Post-construction link to a structural element.
     void	attach(const S& set);
 
-    /*! Consistency check. */
+    /// Tell whether the @c Element instance is linked or not.
     bool	bound() const;
 
-    /*! Implementation accessor. */
+    /** @{ */
+    /// Accessor to the value data.
     T&		value();
-
-    /*! Implementation accessor. (const version) */
     const T&	value() const;
-
-    /*! Implementation accessor. */
-    T&		operator()();
-
-    /*! Implementation accessor. (const version) */
-    const T&	operator()() const;
-
-    /*! Automatic conversion of element to its implementation. */
-    operator const T& () const;
+    /** @} */
 
   private : 
-    SetSlot<S>		set_; //!< The reference to the structural element. \see @c SetSlot
-    ValueSlot<S, T>	value_; //!< The reference to the value. \see @c ValueSlot
+    SetSlot<S>		set_;
+    T	value_;
   };
 
   //! @}

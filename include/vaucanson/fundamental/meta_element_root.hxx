@@ -1,4 +1,4 @@
-// converter.hh
+// meta_element_root.hxx
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
@@ -18,22 +18,22 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-#ifndef AUTOMATA_MISC_CONVERTER_HH
-#define AUTOMATA_MISC_CONVERTER_HH
+#ifndef VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HXX
+# define VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HXX
 
-# include <functional>
+# include <vaucanson/fundamental/meta_element_root.hh>
 
-namespace utility
-{
+namespace vcsn {
 
-  template<typename From, typename To>
-  struct converter : std::unary_function<From, To>
-  {
-    To operator()(const From& f) const;
-  };
+  template <class S, class T>
+  MetaElement<Structure<S>, T>::MetaElement()
+  {}
+  
+  template <class S, class T>
+  MetaElement<Structure<S>, T>::MetaElement(const MetaElement& o) :
+    SyntacticDecorator<S, T>(o)
+  {}
+  
+} // vcsn
 
-} // utility
-
-# include <vaucanson/misc/converter.hxx>
-
-#endif
+#endif // VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HXX

@@ -1,4 +1,4 @@
-// meta_element.hh
+// fundamental/meta_element_root.hh
 //
 //
 // $Id$
@@ -19,52 +19,56 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+#ifndef VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HH
+# define VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HH
 
-#ifndef FUNDAMENTAL_META_ELEMENT_HH
-# define FUNDAMENTAL_META_ELEMENT_HH
+/** @addtogroup fundamental *//** @{ */
+/**
+ * @file meta_element_root.hh
+ * @brief Definition of the specialization of @c MetaElement for the root @c Structure
+ */
+/** @} */
 
 # include <vaucanson/fundamental/structure.hh>
-# include <vaucanson/fundamental/element_base.hh>
+# include <vaucanson/fundamental/syntactic_decorator.hh>
 
 namespace vcsn {
 
-  /*! \addtogroup fundamental */ /*! @{ */
+  /** @addtogroup fundamental *//** @{ */
 
   /*--------------------------------.
   | MetaElement<Structure<Self>, T> |
   `--------------------------------*/
-  //! MetaElement is the way of defining interactions between a set
-  //! and an implementation.
-  
-  /*! MetaElement<Structure<Self>, T> is the specialization that is at
-    the top of all the hierarchy of Vaucanson.
 
-    MetaElement<Structure<Self>, T> is decorated with a
-    SyntacticDecorator<Self, T>.
-  */
+  /** 
+   * @brief The base class that glues structural elements to implementation values.
+   *
+   * MetaElement<Structure<Self>, T> is the specialization that is at
+   * the top of all the hierarchy of Vaucanson. It inherits, and thus
+   * is decorated with, SyntacticDecorator<Self, T>.
+   *
+   * @see
+   *   * @c SyntacticDecorator
+   *   * @c Element
+   *   * @c Structure
+   */
 
-  template<class Self, typename T>
-  struct MetaElement<Structure<Self>, T>
-    : SyntacticDecorator<Self, T>
+  template<class S, typename T>
+  struct MetaElement<Structure<S>, T>
+    : SyntacticDecorator<S, T>
   {
-  public:
-    /*! Default value of dynamic_values is true. */
-    static const bool dynamic_values = true;
-
   protected:
-    /*! Every constructor is protected since MetaElement is an
-      abstract class in the static hierarchy. */
+    /** @{ */
+    /// Protected constructor for class abstraction
     MetaElement(); 
-
-    /*! Every constructor is protected since MetaElement is an
-      abstract class in the static hierarchy. */
     MetaElement(const MetaElement& other); 
+    /** @} */
   };
 
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/fundamental/meta_element.hxx>
+# include <vaucanson/fundamental/meta_element_root.hxx>
 
-#endif //  FUNDAMENTAL_META_ELEMENT_HH
+#endif // VCSN_FUNDAMENTAL_META_ELEMENT_ROOT_HH

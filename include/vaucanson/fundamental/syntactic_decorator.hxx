@@ -1,4 +1,4 @@
-// fundamental/element_base.hxx
+// fundamental/syntactic_decorator.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,13 +19,27 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-#ifndef ALGEBRA_ELEMENT_BASE_HXX
-# define ALGEBRA_ELEMENT_BASE_HXX
+#ifndef VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HXX
+# define VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HXX
 
-# include <vaucanson/fundamental/element_ops.hh>
-# include <vaucanson/fundamental/element_base.hh>
+# include <vaucanson/misc/selectors.hh>
+# include <vaucanson/fundamental/syntactic_decorator.hh>
 
 namespace vcsn {
+  template <typename S, typename T>
+  inline Element<S, T>&
+  SyntacticDecorator<S, T>::self() 
+  { 
+    return static_cast<Element<S, T>&>(*this); 
+  }
+    
+  template <typename S, typename T>
+  inline const Element<S, T>& 
+  SyntacticDecorator<S, T>::self() const
+  { 
+    return static_cast<const Element<S, T>&>(*this); 
+  }
+    
 
   template <typename S, typename T>
   inline const S&
@@ -48,23 +62,23 @@ namespace vcsn {
     return self().value();
   }
     
-#define ELEMENT_IN_OPERATOR(Op, HookName)				 \
-      template <typename S, typename T>					 \
-      template<typename OtherS, typename U>				 \
-      inline Element<S, T>&						 \
-      SyntacticDecorator<S, T>::Op (const Element<OtherS, U>& other)	 \
-      {									 \
-	op_in_ ## HookName (this->set(), other.set(), value(), other.value()); \
-	return self();							 \
-      }									 \
-      template <typename S, typename T>					 \
-      template<typename U>						 \
-      inline Element<S, T>&						 \
-      SyntacticDecorator<S, T>::Op (const U& other)			 \
-      {									 \
-	op_in_ ## HookName (this->set(), value(),			 \
-			    op_convert(SELECT(T), SELECT(S), other));	 \
-	return self();							 \
+#define ELEMENT_IN_OPERATOR(Op, HookName)					\
+      template <typename S, typename T>						\
+      template<typename OtherS, typename U>					\
+      inline Element<S, T>&							\
+      SyntacticDecorator<S, T>::Op (const Element<OtherS, U>& other)		\
+      {										\
+	op_in_ ## HookName (self().set(), other.set(), value(), other.value());	\
+	return self();								\
+      }										\
+      template <typename S, typename T>						\
+      template<typename U>							\
+      inline Element<S, T>&							\
+      SyntacticDecorator<S, T>::Op (const U& other)				\
+      {										\
+	op_in_ ## HookName (self().set(), value(),				\
+			    op_convert(self().set(), SELECT(T), other));	\
+	return self();								\
       }
 
   ELEMENT_IN_OPERATOR(operator +=, add);
@@ -79,7 +93,7 @@ namespace vcsn {
   inline Element<S, T>& 
   SyntacticDecorator<S, T>::operator++()
   { 
-    op_in_inc(this->set(), value()); 
+    op_in_inc(self().set(), value()); 
     return self(); 
   }
     
@@ -88,7 +102,7 @@ namespace vcsn {
   SyntacticDecorator<S, T>::operator++(int)
   { 
     Element<S, T> ret(*this); 
-    op_in_inc(this->set(), value()); 
+    op_in_inc(self().set(), value()); 
     return ret; 
   }
     
@@ -96,7 +110,7 @@ namespace vcsn {
   inline Element<S, T>& 
   SyntacticDecorator<S, T>::operator--()
   { 
-    op_in_dec(this->set(), value()); 
+    op_in_dec(self().set(), value()); 
     return self(); 
   }
     
@@ -105,7 +119,7 @@ namespace vcsn {
   SyntacticDecorator<S, T>::operator--(int)
   { 
     Element<S, T> ret(*this); 
-    op_in_dec(this->set(), value()); 
+    op_in_dec(self().set(), value()); 
     return ret; 
   }
     
@@ -114,33 +128,9 @@ namespace vcsn {
   inline Element<S, T>& 
   SyntacticDecorator<S, T>::swap(Element<S, U>& other)
   { 
-    op_swap(SELECT(S), value(), other.value());
+    assert(&set() == &other.set());
+    op_swap(set(), value(), other.value());
     return self(); 
-  }
-    
-  template <typename S, typename T>
-  template <typename OtherS, typename U>
-  inline Element<S, T>&
-  SyntacticDecorator<S, T>::swap(Element<OtherS, U>& other)
-  { 
-    op_swap(SELECT(S), SELECT(OtherS), value(), other.value());
-    return self(); 
-  }
-    
-  // static inheritance stuff. what's good is that we know
-  // at this point the derived type.
-  template <typename S, typename T>
-  inline Element<S, T>&
-  SyntacticDecorator<S, T>::self() 
-  { 
-    return static_cast<Element<S, T>&>(*this); 
-  }
-    
-  template <typename S, typename T>
-  inline const Element<S, T>& 
-  SyntacticDecorator<S, T>::self() const
-  { 
-    return static_cast<const Element<S, T>&>(*this); 
   }
     
   template <typename S, typename T>
@@ -154,4 +144,4 @@ namespace vcsn {
 
 } // vcsn
 
-#endif // ALGEBRA_ELEMENT_BASE_HXX
+#endif // VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HXX

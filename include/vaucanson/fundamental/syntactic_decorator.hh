@@ -1,4 +1,4 @@
-// fundamental/element_base.hh
+// fundamental/syntactic_decorator.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,119 +18,123 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_FUNDAMENTAL_ELEMENT_BASE_HH
-# define VCSN_FUNDAMENTAL_ELEMENT_BASE_HH
+#ifndef VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HH
+# define VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HH
 
-# include <vaucanson/fundamental/predefs.hh>
+# include <vaucanson/fundamental/predecls.hh>
+
+/**
+ * @file syntactic_decorator.hh
+ * @brief Declaration of the very base class of @c Element
+ */
 
 namespace vcsn {
 
-  // FIXME: general remark : this file should be called syntactic_decorator.hh
-
-  /*! @addtogroup fundamental */ /*! @{ */
+  /** @addtogroup fundamental *//** @{ */
 
   /*-------------------.
   | SyntacticDecorator |
   `-------------------*/
-  //! SyntacticDecorator provides the standard operator to Element.
-  //
-  /*! SyntacticDecorator defines all the self-application operators
-    of C++. In fact, this decorator is essential because it is
-    the wrapper of standard operators to Vaucanson op_*. 
-  */
+
+  /**
+   * @brief This class provides the standard operator delegations to Element.
+   *
+   * It defines all the self-application operators
+   * of C++, and delegates them to corresponding @c op_* functions.
+   */
   template<typename S, typename T> 
   struct SyntacticDecorator
   {
-    /*! Structural element virtual accessor. (const) */
+    /// Virtual accessor to the structural element
     const S&	set() const;
       
-    /*! Virtual accessor to implementation. */
+    /** @{ */
+    /// Virtual accessor to value data
     T&		value();
-      
-    /*! Virtual accessor to implementation. (const version) */
     const T&	value() const;
+    /** @} */
 
-    /*! self addition between two a priori different elements. */
+    /// self addition between Element instances. Maps to @c op_in_add.
     template<typename OtherS, typename U>				 
     Element<S, T>& operator+=(const Element<OtherS, U>& other);	 
 
-    /*! self addition between an element and something else. */
+    /// self addition between Element and foreign values. Maps to @c op_in_add.
     template<typename U>						 
     Element<S, T>& operator+=(const U& other);    
 
-    /*! self substraction between two a priori different elements. */
+    /// self substraction between Element instances. Maps to @c op_in_sub.
     template<typename OtherS, typename U>				 
     Element<S, T>& operator-=(const Element<OtherS, U>& other);	 
 
-    /*! self substraction between an element and something else. */
+    /// self substraction between Element and foreign values. Maps to @c op_in_sub.
     template<typename U>						 
     Element<S, T>& operator-=(const U& other);    
 
-    /*! self substraction between two a priori different elements. */
+    /// self division between Element instances. Maps to @c op_in_div.
     template<typename OtherS, typename U>				 
     Element<S, T>& operator/=(const Element<OtherS, U>& other);	
  
+    /// self division between Element and foreign values. Maps to @c op_in_div.
     template<typename U>						 
     Element<S, T>& operator/=(const U& other);    
 
-    /*! self substraction between two a priori different elements. */
+    /// self multiplication between Element instances. Maps to @c op_in_mul.
     template<typename OtherS, typename U>				 
     Element<S, T>& operator*=(const Element<OtherS, U>& other);	
  
+    /// self multiplication between Element and foreign values. Maps to @c op_in_mul.
     template<typename U>						 
     Element<S, T>& operator*=(const U& other);    
 
-    /*! self substraction between two a priori different elements. */
+    /// self modulus between Element instances. Maps to @c op_in_mod.
     template<typename OtherS, typename U>				 
     Element<S, T>& operator%=(const Element<OtherS, U>& other);	
  
+    /// self modulus between Element and foreign values. Maps to @c op_in_mod.
     template<typename U>						 
     Element<S, T>& operator%=(const U& other);    
 
-    /*! pre-incrementation. */
+    /// In-place, prefix incrementation. Maps to @c op_in_inc.
     Element<S, T>& operator++();
 
-    /*! post-incrementation. */
+    /// Postfix incrementation. Maps to @c op_in_dec, with Element copy.
     Element<S, T> operator++(int);
       
-    /*! pre-decrementation.  */
+    /// In-place, prefix decrementation. Maps to @c op_in_dec.
     Element<S, T>& operator--();
 
-    /*! post-decrementation. */
+    /// Postfix decrementation. Maps to @c op_in_dec, with Element copy.
     Element<S, T> operator--(int);
 
-    /*! standard swap between two a priori different
-      implementations. */
+    /// Standard constant-time swap between Element instances. Maps to @c op_swap.
     template<typename U>
     Element<S, T>& swap(Element<S, U>& other);
 
-    /*! standard swap between two a priori different elements. */
-    template<typename OtherS, typename U>
-    Element<S, T>& swap(Element<OtherS, U>& other);
-
-    /*! static inheritance method. */
-    // FIXME: is it really the good place ?
+    /** @{ */
+    /** 
+     * Accessor to the real type.
+     *
+     * This accessor is intended to be used by implementations in this class
+     * and derivated MetaElement specializations to obtain a reference to the
+     * Element instance with its most derivated type.
+     */
     Element<S, T>& self();
-
-    /*! static inheritance method. (const version) */
-    // FIXME: is it really the good place ?
     const Element<S, T>& self() const;
+    /** @} */
 
   protected:
 
-    /*! Constructors are protected since SyntaticDecorator can be
-      instantiated alone. */
+    /** @{ */
+    /// Protected constructor for class abstraction 
     SyntacticDecorator();
-
-    /*! Constructors are protected since SyntaticDecorator can be
-      instantiated alone. */
     SyntacticDecorator(const SyntacticDecorator& other);
+    /** @} */
   };
 
-  /*! @} */
+  /** @} */
 
 } // vcsn
 
-# include <vaucanson/fundamental/element_base.hxx>
+# include <vaucanson/fundamental/syntactic_decorator.hxx>
 
-#endif // VCSN_FUNDAMENTAL_ELEMENT_BASE_HH
+#endif // VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HH

@@ -21,98 +21,112 @@
 #ifndef VCSN_FUNDAMENTAL_STRUCTURE_HH
 # define VCSN_FUNDAMENTAL_STRUCTURE_HH
 
+/** @addtogroup fundamental *//** @{ */
+/**
+ * @file structure.hh
+ * @brief Definition of class @c Structure, the root of all structural element types
+ */
+/** @} */
+
 # include <vaucanson/misc/selectors.hh>
-# include <vaucanson/fundamental/predefs.hh>
-# include <vaucanson/fundamental/element.hh>
-# include <vaucanson/internal/traits.hh>
+# include <vaucanson/fundamental/predecls.hh>
 
 namespace vcsn {
 
-  /*! @addtogroup fundamental */ /*!  @{ */
+  /** @addtogroup fundamental *//** @{ */
 
-  /*----------------.
-  | Structure<Self> |
-  `----------------*/
-  //! Structure is on the top of the hierarchy of structural elements.
-  /*! Structure provides static inheritance facilities and the concept
-    of compatibility between element and structural element (through
-    the contains method).
-  */
+  /*-------------.
+  | Structure<S> |
+  `-------------*/
 
-  template<typename Self>
+  /** Base class for the hierarchy of structural element types.
+   * It provides:
+   * <ul>
+   *   <li> static inheritance facilities,
+   *   <li> the concept of compatibility between elements and a 
+   *     structural element considered as a set (through the 
+   *     @c contains method),
+   *   <li> a @c choose method to pick randomly @c Element instances.
+   * </ul>
+   */
+  template<typename S>
   struct Structure
   {
-    /*! Exact type of the concrete class. */
-    typedef Self		self_t;
-
-    /*! Check if a given element is compatible with the structural element. */
+    /// Check if a given element is compatible with the structural element
     template<typename T>
-    bool  contains(const Element<Self, T>& elt) const;
+    bool  contains(const Element<S, T>& elt) const;
 
-    /*! If S <> Self, contains allways returns false. */
-    template<typename S, typename T>
-    bool  contains(const Element<S, T>& other) const;
+    /** Specialization of @c containts that always return false.
+     * Indeed, elements structured by a particular type are always
+     * incompatible with structural elements of another type.
+     */
+    template<typename OtherS, typename T>
+    bool  contains(const Element<OtherS, T>& other) const;
 
-    /*! Test the compatibility between an implementation an a
-      structural element. */
+    /// Check if an anonymous value is compatible with a structural element. 
     template<typename T>
     bool  contains(const T& elt_value) const;
 
-    /*! Choose randomly an element in the structure. */
+    /// Choose randomly an element in the structure.
     template <class T>
-    Element<Self, T>
+    Element<S, T>
     choose(SELECTOR(T)) const;
 
-    /*! Return the instance viewed as its exact type. */
-    self_t&        self();
 
-    /*! Return the instance viewed as its exact type (const). */
+    /// Exact type of the most derivated type in the hierarchy
+    typedef S		self_t;
+
+    /** @{ */
+    /** 
+     * Accessor to the real type.
+     *
+     * This accessor is intended to be used by implementations in this
+     * class and derivated structures to obtain a reference to the
+     * structural element with its most derivated type.
+     */
+    self_t&        self();
     const self_t&  self() const;
+    /** @} */
 
   protected:
-    /*! Default constructor is protected since Structure is an
-      abstract class. */
+
+    /** @{ */
+    /// Protected constructor for class abstraction
     Structure();
-
-    /*! Copy constructor is protected because Structure is an abstract class. 
-     */
     Structure(const Structure& other);
+    /** @} */
   };
 
+  /*--------------------.
+  | default comparisons |
+  `--------------------*/
 
-  /*--------------------------.
-  | MetaSet<Structure<Self> > |
-  `--------------------------*/
-  template<typename Self>
-  struct MetaSet<Structure<Self> >
+  /** The deep equality operator between @c Structure instances.
+   * The implementation for @c Structure always return true since
+   * there is no dynamic type information attached to @c Structure itself.
+   */
+  template<typename S>
+  bool operator==(const vcsn::Structure<S>& a,
+		  const vcsn::Structure<S>& b);
+
+
+  /*------------------------------.
+  | dynamic_traits<Structure<S> > |
+  `------------------------------*/
+
+  /**
+   * Specialization of @c dynamic_traits for @c Structure.
+   * By default, all structural elements have no dynamic type information.
+   */
+  template<typename S>
+  struct dynamic_traits<Structure<S> >
   {
-    // By default all structural elements have no dynamic type information.
-    static const bool dynamic_set = false;
+    static const bool ret = false;
   };
 
-
-  /*! @} */
-
-       
+  /** @} */   
 
 } // vcsn
-
-/** @addtogroup fundamental *//** @{ */
-
-/*--------------------.
-| default comparisons |
-`--------------------*/
-
-/** The deep equality operator
- * The implementation for @c Structure always return true since
- * there is no dynamic type information attached to Structure itself.
- */
-template<typename S>
-bool operator==(const vcsn::Structure<S>& a,
-		const vcsn::Structure<S>& b);
-
-
-/** @} */
 
 # include <vaucanson/fundamental/structure.hxx>
 

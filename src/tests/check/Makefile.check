@@ -4,6 +4,6 @@
 # $Id$
 # VCSN_HEADER
 
-include $(top_srcdir)/src/tests/check/Makefile.flags
-LDADD = $(top_builddir)/src/tests/check/libcheck.a
+include ../check/Makefile.flags
+LDADD = ../tests/check/libcheck.a
 TESTS = $(check_PROGRAMS)

@@ -1,0 +1,20 @@
+# -*- shell-script -*-
+
+CXX=@CXX@
+CXXFLAGS=@CXXFLAGS@
+CPPFLAGS=@CPPFLAGS@
+LIBS=@LIBS@
+CXXFLAGS_STRICT=@CXXFLAGS_STRICT@
+CXXFLAGS_OPTIMIZE=@CXXFLAGS_STRICT@
+CXXFLAGS_DEBUG=@CXXFLAGS_DEBUG@
+
+if test "x$VERBOSE" = x; then
+   exec >/dev/null 2>&1
+else
+   # Turn on shell traces when VERBOSE=x.
+   if test "x$VERBOSE" = xx; then
+     set -x
+   else
+     :
+   fi
+fi

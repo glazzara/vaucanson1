@@ -1,18 +1,107 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 227)
-(Parent-Version vaucanson 0 224)
+(Project-Version vaucanson 0 228)
+(Parent-Version vaucanson 0 227)
 (Version-Log "Index: ChangeLog
 from  Raphaël Poss  <raph@lrde.epita.fr>
 
-        * src/tests/check/assert_test.cc: Add.
+   * include/vaucanson/misc/utility.hh: Add. Document.
 
-        * src/tests/check/Makefile.am: Mention assert_test.
+   * include/vaucanson/misc/constraints.hh,
+   include/vaucanson/misc/container_ops.hh,
+   include/vaucanson/misc/container_ops.hxx,
+   include/vaucanson/misc/converter.hh,
+   include/vaucanson/misc/converter.hxx,
+   include/vaucanson/misc/functors.hh,
+   include/vaucanson/misc/functors.hxx,
+   include/vaucanson/misc/limits.hh,
+   include/vaucanson/misc/misc_constraints.hh,
+   include/vaucanson/misc/numerical_constraints.hh,
+   include/vaucanson/misc/type_constraints.hh,
+   include/vaucanson/misc/static.hxx: Remove.
+
+   * include/vaucanson/config/rel_ops_work_around_g++2.hh: Remove.
+   * include/vaucanson/fundamental/meta_set.hh: Remove.
+
+   * src/tests/misc/Makefile.am, src/tests/misc/unique.cc,
+   src/tests/misc/static.cc, src/tests/misc/selectors.cc,
+   src/tests/misc/koenig.cc: Add.
+   * src/tests/check/assert_test.cc: Rename to...
+   * src/tests/misc/assert_test.cc: this.
+
+   * include/vaucanson/config/math.hh: Add. Document.
+
+   * include/vaucanson/fundamental/structure.hh: Document
+   more. Cleanup. Simplify.
+   * include/vaucanson/fundamental/structure.hxx: Cleanup. Simplify.
+
+   * include/vaucanson/fundamental/slots.hh: Eradicate
+   ValueSlots's. Use dynamic_traits instead of MetaSet.
+   * include/vaucanson/fundamental/slots.hxx: Update accordingly.
+
+   * include/vaucanson/fundamental/predefs.hh: Rename to...
+   * include/vaucanson/fundamental/predecls.hh: this. Document
+   more. Cleanup. Import undefined_type from traits.hh.
+   * include/vaucanson/internal/traits.hh: Remove.
+
+   * include/vaucanson/fundamental/op_traits.hh: Rename to...
+   * include/vaucanson/fundamental/element_op_traits.hh:
+   this. Document. Cleanup. Simplify.
+   * include/vaucanson/fundamental/op_traits.hxx: Rename to...
+   * include/vaucanson/fundamental/element_op_traits.hxx:
+   this. Cleanup. Simplify.
+
+   * include/vaucanson/fundamental/meta_element.hh: Rename to...
+   * include/vaucanson/fundamental/syntactic_decorator.hh:
+   this. Document. Cleanup. Simplify.
+   * include/vaucanson/fundamental/meta_element.hxx: Rename to...
+   * include/vaucanson/fundamental/syntactic_decorator.hxx:
+   this. Cleanup. Simplify.
+
+   * include/vaucanson/fundamental/fundamental.hh: Simplify.
+
+   * include/vaucanson/fundamental/element_ops.hh: Document more. Cleanup. Simplify.
+   * include/vaucanson/fundamental/element_ops.hxx: Cleanup. Simplify. More sanity checks.
+
+   * include/vaucanson/fundamental/element_base.hh: Rename to...
+   * include/vaucanson/fundamental/meta_element_root.hh:
+   this. Document. Cleanup. Simplify.
+   * include/vaucanson/fundamental/element_base.hxx: Rename to...
+   * include/vaucanson/fundamental/meta_element_root.hxx:
+   this. Cleanup. Simplify.
+   * include/vaucanson/fundamental/element.hh: Document more
+   accurately. Cleanup. Simplify.
+   * include/vaucanson/fundamental/element.hxx:
+   Cleanup. Simplify. More sanity checks.
+   * include/vaucanson/fundamental/default_ops.hh:
+   Document. Cleanup. Simplify.
+   * include/vaucanson/fundamental/default_ops.hxx:
+   Cleanup. Simplify.
+   * src/tests/misc/assert_test.cc: Include system.hh.
+   * include/vaucanson/misc/unique.hh,
+   include/vaucanson/misc/unique.hcc,
+   include/vaucanson/misc/unique.hxx: Document. Simplify.
+   * include/vaucanson/misc/selectors.hh: Document.
+   * include/vaucanson/misc/static.hh: Document. Complete
+   remove_reference.
+   * include/vaucanson/config/system.hh: Document. Cleanup. Simplify.
+   * include/Makefile.am: Beautify.
+   * doc/doc.doxy.in: Cleanup eye candies.
+   * src/tests/sanity/Makefile.am, src/tests/sanity/includes.test:
+   Cleanup.
+   * src/tests/defs.in: Rename to...
+   * src/tests/check/defs.in: this. Cleanup. Use flags computed by
+   configure.
+   * src/tests/check/Makefile.flags: Use flags computed by configure.
+   * src/tests/check/Makefile.check: Simplify.
+   * src/tests/check/Makefile.am: Remove mention of `assert_test'.
+   * src/tests/Makefile.am (SUBDIRS): Re-order. Mention `misc'.
+   * configure.ac: Arrange directory order in AC_CONFIG_FILES.
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Fri, 06 Jun 2003 10:22:12 +0200")
+(Checkin-Time "Tue, 10 Jun 2003 15:56:42 +0200")
 (Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -95,7 +184,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.32 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.33 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 664))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -104,11 +193,27 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (README (vaucanson/f/48_README 1.7 600))
   (THANKS (vaucanson/f/36_THANKS 1.5 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.5 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.22 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.23 600))
+  (prj (vaucanson.prj) :symlink)
+
+  (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.3 600))
+
+  (src/Makefile.am (vaucanson/51_Makefile.a 1.4 600))
+  (src/README (vaucanson/h/3_README 1.1 600))
+  (src/tests/Makefile.am (vaucanson/b/1_Makefile.a 1.9 600))
+  (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.5 600))
+  (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.2 600))
+  (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.11 600))
+  (src/tests/check/tests_stuff.cc (vaucanson/b/3_tests_stuf 1.10 600))
+  (src/tests/check/tests_stuff.hh (vaucanson/b/2_tests_stuf 1.12 600))
+  (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.4 664))
+  (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.3 600))
+  (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.2 700))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 711))
+
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.3 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
-  
-  (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.5 600))
+  (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.6 600))
   (doc/src/main.dox (vaucanson/38_main.dox 1.2 600))
   (doc/tutorial/Makefile.am (vaucanson/h/44_Makefile.a 1.3 600))
   (doc/tutorial/definitions.tex (vaucanson/i/20_definition 1.1 600))
@@ -116,8 +221,58 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (doc/tutorial/packages.tex (vaucanson/i/18_packages.t 1.2 600))
   (doc/tutorial/tutorial.tex (vaucanson/h/43_tutorial.t 1.7 600))
   (doc/vaucanson.doxywizard (vaucanson/37_vaucanson. 1.8 600))
+
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.18 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.19 664))
+
+  (include/vaucanson/config/system.hh (vaucanson/g/1_system.hh 1.10 600))
+  (include/vaucanson/config/math.hh (vaucanson/p/42_math.hh 1.1 664))
+  (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 664))
+
+  (include/vaucanson/misc/unchecked/dot_dump.hh (vaucanson/d/25_dot_dump.h 1.6 600))
+  (include/vaucanson/misc/unchecked/fsm_dump.hh (vaucanson/g/8_fsm_dump.h 1.9 600))
+  (include/vaucanson/misc/unchecked/random.hh (vaucanson/e/8_random.hh 1.11 600))
+  (include/vaucanson/misc/unchecked/random.hxx (vaucanson/e/7_random.hxx 1.15 600))
+  (include/vaucanson/misc/unchecked/ref.hh (vaucanson/c/31_ref.hh 1.8 600))
+  (include/vaucanson/misc/unchecked/ref.hxx (vaucanson/c/33_ref.hxx 1.9 600))
+  (include/vaucanson/misc/selectors.hh (vaucanson/14_selectors. 1.7 644))
+  (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.6 664))
+  (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.2 664))
+  (include/vaucanson/misc/unique.hcc (vaucanson/p/39_unique.hcc 1.2 664))
+  (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.2 664))
+  (include/vaucanson/misc/utility.hh (vaucanson/p/43_utility.hh 1.1 644))
+  (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.1 600))
+
+  (src/tests/misc/Makefile.am (vaucanson/p/44_Makefile.a 1.1 664))
+  (src/tests/misc/unique.cc (vaucanson/p/45_unique.cc 1.1 644))
+  (src/tests/misc/static.cc (vaucanson/p/46_static.cc 1.1 664))
+  (src/tests/misc/selectors.cc (vaucanson/p/47_selectors. 1.1 644))
+  (src/tests/misc/koenig.cc (vaucanson/p/48_koenig.cc 1.1 644))
+  (src/tests/misc/assert_test.cc (vaucanson/p/41_assert_tes 1.2 664))
+
+  (include/vaucanson/fundamental/default_ops.hh (vaucanson/25_default_op 1.11 664))
+  (include/vaucanson/fundamental/default_ops.hxx (vaucanson/24_default_op 1.11 664))
+  (include/vaucanson/fundamental/element.hh (vaucanson/7_element.hh 1.14 664))
+  (include/vaucanson/fundamental/element.hxx (vaucanson/6_element.hx 1.12 664))
+  (include/vaucanson/fundamental/meta_element_root.hh (vaucanson/9_element_ba 1.13 664))
+  (include/vaucanson/fundamental/meta_element_root.hxx (vaucanson/8_element_ba 1.10 664))
+  (include/vaucanson/fundamental/element_ops.hh (vaucanson/5_element_op 1.14 664))
+  (include/vaucanson/fundamental/element_ops.hxx (vaucanson/g/44_element_op 1.5 664))
+  (include/vaucanson/fundamental/fundamental.hh (vaucanson/4_fundamenta 1.11 664))
+  (include/vaucanson/fundamental/syntactic_decorator.hh (vaucanson/21_meta_eleme 1.10 664))
+  (include/vaucanson/fundamental/syntactic_decorator.hxx (vaucanson/20_meta_eleme 1.9 664))
+  (include/vaucanson/fundamental/element_op_traits.hh (vaucanson/3_op_traits. 1.10 664))
+  (include/vaucanson/fundamental/predecls.hh (vaucanson/10_predefs.hh 1.7 664))
+  (include/vaucanson/fundamental/slots.hh (vaucanson/2_slots.hh 1.11 664))
+  (include/vaucanson/fundamental/slots.hxx (vaucanson/1_slots.hxx 1.9 664))
+  (include/vaucanson/fundamental/structure.hh (vaucanson/23_structure. 1.12 664))
+  (include/vaucanson/fundamental/structure.hxx (vaucanson/22_structure. 1.8 664))
+
+  (src/tests/fundamental () :directory)
+  (src/tests/fundamental/Makefile.am (vaucanson/b/9_Makefile.a 1.3 600))
+  (src/tests/fundamental/design_pattern-test.hh (vaucanson/b/10_design_pat 1.6 600))
+  (src/tests/fundamental/element-full-test.cc (vaucanson/17_element-fu 1.11 600))
+
   (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.18 600))
   (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.17 600))
   (include/vaucanson/algebra/concept/concepts.hh (vaucanson/31_concepts.h 1.7 600))
@@ -135,6 +290,10 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.17 600))
   (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.14 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.8 600))
+  (include/vaucanson/algebra/concept/tropical_semiring.hxx (vaucanson/l/12_tropical_s 1.1 600))
+
+  (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.2 600))
+  (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.2 600))
   (include/vaucanson/algebra/concrete/alphabets/alphabets.hh (vaucanson/29_alphabets. 1.12 600))
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh (vaucanson/i/24_decorated_ 1.1 600))
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx (vaucanson/i/25_decorated_ 1.3 600))
@@ -164,6 +323,10 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.12 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.7 600))
+  (include/vaucanson/algebra/concrete/series/krat_coefficient.hxx (vaucanson/p/23_krat_coeff 1.1 600))
+  (include/vaucanson/algebra/concrete/series/krat_coefficient.hh (vaucanson/p/24_krat_coeff 1.1 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.1 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx (vaucanson/p/32_krat_exp_i 1.1 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.16 600))
   (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.18 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh (vaucanson/e/1_depth_visi 1.7 600))
@@ -180,6 +343,67 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algebra/concrete/series/series.hxx (vaucanson/c/18_series.hxx 1.7 600))
   (include/vaucanson/algebra/concrete/series/transpose.hh (vaucanson/e/11_transpose. 1.6 600))
   (include/vaucanson/algebra/concrete/series/transpose.hxx (vaucanson/e/10_transpose. 1.6 600))
+
+  (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.6 600))
+  (src/tests/algebra/alphabets/Makefile.am (vaucanson/h/36_Makefile.a 1.1 600))
+  (src/tests/algebra/alphabets/alphabet_test.hh (vaucanson/h/37_alphabet_t 1.2 600))
+  (src/tests/algebra/free_monoid/Makefile.am (vaucanson/h/34_Makefile.a 1.1 600))
+  (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.2 600))
+  (src/tests/algebra/semiring/Makefile.am (vaucanson/h/39_Makefile.a 1.1 600))
+  (src/tests/algebra/semiring/semiring_test.hh (vaucanson/h/38_semiring_t 1.2 600))
+  (src/tests/algebra/series/Makefile.am (vaucanson/c/22_Makefile.a 1.8 600))
+  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.3 600))
+  (src/tests/algebra/series/krat/main/krat_exp_parse_test.hh (vaucanson/j/19_krat_exp_p 1.1 600))
+  (src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh (vaucanson/j/21_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh (vaucanson/j/22_krat_exp_c 1.1 600))
+  (src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh (vaucanson/j/34_krat_exp_r 1.2 600))
+  (src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh (vaucanson/j/42_krat_exp_c 1.1 600))
+  (src/tests/algebra/series/krat/main/Makefile.am (vaucanson/j/43_Makefile.a 1.1 600))
+  (src/tests/algebra/series/krat/derivations/Makefile.am (vaucanson/j/40_Makefile.a 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivations_common.hh (vaucanson/j/41_derivation 1.1.1.1 600))
+  (src/tests/algebra/series/krat/derivations/cderivation/Makefile.am (vaucanson/j/44_Makefile.a 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/Makefile.am (vaucanson/j/38_Makefile.a 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh (vaucanson/j/39_krat_exp_d 1.1.1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh (vaucanson/l/18_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh (vaucanson/l/19_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh (vaucanson/l/20_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh (vaucanson/l/21_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh (vaucanson/l/22_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/misc/series_test.hh (vaucanson/j/23_series_tes 1.3 600))
+  (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 600))
+
+
+  (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.8 600))
+  (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.7 600))
+  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.15 600))
+  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.12 600))
+  (include/vaucanson/automata/concept/concepts.hh (vaucanson/d/8_concepts.h 1.7 600))
+  (include/vaucanson/automata/concept/concepts.hxx (vaucanson/d/7_concepts.h 1.6 600))
+  (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.6 600))
+  (include/vaucanson/automata/concept/copy.hxx (vaucanson/d/5_copy.hxx 1.6 600))
+  (include/vaucanson/automata/concept/handlers.hh (vaucanson/d/2_handlers.h 1.8 600))
+  (include/vaucanson/automata/concept/handlers.hxx (vaucanson/d/1_handlers.h 1.7 600))
+  (include/vaucanson/automata/concept/history.hh (vaucanson/d/0_history.hh 1.6 600))
+  (include/vaucanson/automata/concept/history.hxx (vaucanson/c/51_history.hx 1.6 600))
+  (include/vaucanson/automata/concept/kinds.hh (vaucanson/d/16_kinds.hh 1.12 600))
+  (include/vaucanson/automata/concept/kinds.hxx (vaucanson/d/15_kinds.hxx 1.12 600))
+  (include/vaucanson/automata/concept/relabel_impl.hh (vaucanson/c/50_relabel_im 1.7 600))
+  (include/vaucanson/automata/concept/relabel_impl.hxx (vaucanson/c/49_relabel_im 1.6 600))
+  (include/vaucanson/automata/concept/tags.hh (vaucanson/c/48_tags.hh 1.6 600))
+  (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.5 600))
+  (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.6 600))
+  (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.6 600))
+  (include/vaucanson/automata/concept/transpose_impl.hh (vaucanson/c/42_transpose_ 1.9 600))
+  (include/vaucanson/automata/concept/transpose_impl.hxx (vaucanson/c/41_transpose_ 1.8 600))
+  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.1 600))
+  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.1 600))
+
+  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.1 600))
+  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.2 600))
+  (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.1 600))
+  (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.7 600))
+  (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.5 600)) 
+
   (include/vaucanson/algorithms/closure.hh (vaucanson/e/22_closure.hh 1.9 600))
   (include/vaucanson/algorithms/closure.hxx (vaucanson/e/21_closure.hx 1.9 600))
   (include/vaucanson/algorithms/complementary.hh (vaucanson/f/4_complement 1.7 600))
@@ -202,12 +426,13 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algorithms/hopcroft.hxx (vaucanson/e/25_hopcroft.h 1.8 600))
   (include/vaucanson/algorithms/isomorph.hh (vaucanson/g/30_isomorph.h 1.6 600))
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.5 600))
-  (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.4 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.8 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.7 600))
-  
-  
+  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.3 600))
+  (include/vaucanson/algorithms/brzozowski.hh (vaucanson/j/29_brzozowski 1.1 600))
+  (include/vaucanson/algorithms/aci_canonical.hxx (vaucanson/j/30_aci_canoni 1.2 600))
+  (include/vaucanson/algorithms/aci_canonical.hh (vaucanson/j/31_aci_canoni 1.1 600))
+  (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.5 600))
+  (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.5 600))
+
   (include/vaucanson/algorithms/moore.hh (vaucanson/e/24_moore.hh 1.8 600))
   (include/vaucanson/algorithms/moore.hxx (vaucanson/e/23_moore.hxx 1.8 600))
   (include/vaucanson/algorithms/normalized.hh (vaucanson/d/44_normalized 1.9 600))
@@ -228,82 +453,25 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algorithms/trim.hxx (vaucanson/f/0_trim.hxx 1.8 600))
   (include/vaucanson/algorithms/union.hh (vaucanson/d/42_union.hh 1.9 600))
   (include/vaucanson/algorithms/union.hxx (vaucanson/d/41_union.hxx 1.10 600))
-  (include/vaucanson/automata/concept/automata.hh (vaucanson/d/14_automata.h 1.8 600))
-  (include/vaucanson/automata/concept/automata.hxx (vaucanson/d/13_automata.h 1.7 600))
-  (include/vaucanson/automata/concept/automata_base.hh (vaucanson/d/12_automata_b 1.15 600))
-  (include/vaucanson/automata/concept/automata_base.hxx (vaucanson/d/11_automata_b 1.12 600))
-  
-  
-  (include/vaucanson/automata/concept/concepts.hh (vaucanson/d/8_concepts.h 1.7 600))
-  (include/vaucanson/automata/concept/concepts.hxx (vaucanson/d/7_concepts.h 1.6 600))
-  (include/vaucanson/automata/concept/copy.hh (vaucanson/d/6_copy.hh 1.6 600))
-  (include/vaucanson/automata/concept/copy.hxx (vaucanson/d/5_copy.hxx 1.6 600))
-  (include/vaucanson/automata/concept/handlers.hh (vaucanson/d/2_handlers.h 1.8 600))
-  (include/vaucanson/automata/concept/handlers.hxx (vaucanson/d/1_handlers.h 1.7 600))
-  (include/vaucanson/automata/concept/history.hh (vaucanson/d/0_history.hh 1.6 600))
-  (include/vaucanson/automata/concept/history.hxx (vaucanson/c/51_history.hx 1.6 600))
-  (include/vaucanson/automata/concept/kinds.hh (vaucanson/d/16_kinds.hh 1.12 600))
-  (include/vaucanson/automata/concept/kinds.hxx (vaucanson/d/15_kinds.hxx 1.12 600))
-  (include/vaucanson/automata/concept/relabel_impl.hh (vaucanson/c/50_relabel_im 1.7 600))
-  (include/vaucanson/automata/concept/relabel_impl.hxx (vaucanson/c/49_relabel_im 1.6 600))
-  (include/vaucanson/automata/concept/tags.hh (vaucanson/c/48_tags.hh 1.6 600))
-  (include/vaucanson/automata/concept/tags.hxx (vaucanson/c/47_tags.hxx 1.5 600))
-  (include/vaucanson/automata/concept/translate.hh (vaucanson/c/46_translate. 1.6 600))
-  (include/vaucanson/automata/concept/translate.hxx (vaucanson/c/45_translate. 1.6 600))
-  (include/vaucanson/automata/concept/transpose_impl.hh (vaucanson/c/42_transpose_ 1.9 600))
-  (include/vaucanson/automata/concept/transpose_impl.hxx (vaucanson/c/41_transpose_ 1.8 600))
-  (include/vaucanson/automata/concrete/generalized.hh (vaucanson/e/34_generalize 1.7 600))
-  (include/vaucanson/automata/concrete/generalized.hxx (vaucanson/e/33_generalize 1.5 600))
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  (include/vaucanson/config/rel_ops_work_around_g++2.hh (vaucanson/f/51_rel_ops_wo 1.5 600))
-  (include/vaucanson/config/system.hh (vaucanson/g/1_system.hh 1.9 600))
-  (include/vaucanson/fundamental/default_ops.hh (vaucanson/25_default_op 1.10 600))
-  (include/vaucanson/fundamental/default_ops.hxx (vaucanson/24_default_op 1.10 600))
-  (include/vaucanson/fundamental/element.hh (vaucanson/7_element.hh 1.13 600))
-  (include/vaucanson/fundamental/element.hxx (vaucanson/6_element.hx 1.11 600))
-  (include/vaucanson/fundamental/element_base.hh (vaucanson/9_element_ba 1.12 600))
-  (include/vaucanson/fundamental/element_base.hxx (vaucanson/8_element_ba 1.9 600))
-  (include/vaucanson/fundamental/element_ops.hh (vaucanson/5_element_op 1.13 600))
-  (include/vaucanson/fundamental/element_ops.hxx (vaucanson/g/44_element_op 1.4 600))
-  (include/vaucanson/fundamental/fundamental.hh (vaucanson/4_fundamenta 1.10 600))
-  (include/vaucanson/fundamental/meta_element.hh (vaucanson/21_meta_eleme 1.9 600))
-  (include/vaucanson/fundamental/meta_element.hxx (vaucanson/20_meta_eleme 1.8 600))
-  (include/vaucanson/fundamental/meta_set.hh (vaucanson/15_meta_set.h 1.8 600))
-  (include/vaucanson/fundamental/op_traits.hh (vaucanson/3_op_traits. 1.9 600))
-  (include/vaucanson/fundamental/predefs.hh (vaucanson/10_predefs.hh 1.6 600))
-  (include/vaucanson/fundamental/slots.hh (vaucanson/2_slots.hh 1.10 600))
-  (include/vaucanson/fundamental/slots.hxx (vaucanson/1_slots.hxx 1.8 600))
-  (include/vaucanson/fundamental/structure.hh (vaucanson/23_structure. 1.11 600))
-  (include/vaucanson/fundamental/structure.hxx (vaucanson/22_structure. 1.7 600))
-  (include/vaucanson/internal/traits.hh (vaucanson/19_traits.hh 1.7 600))
-  (include/vaucanson/misc/constraints.hh (vaucanson/b/22_constraint 1.7 600))
-  (include/vaucanson/misc/container_ops.hh (vaucanson/35_container_ 1.7 600))
-  (include/vaucanson/misc/container_ops.hxx (vaucanson/34_container_ 1.9 600))
-  (include/vaucanson/misc/converter.hh (vaucanson/c/29_converter. 1.6 600))
-  (include/vaucanson/misc/converter.hxx (vaucanson/c/32_converter. 1.5 600))
-  (include/vaucanson/misc/dot_dump.hh (vaucanson/d/25_dot_dump.h 1.6 600))
-  (include/vaucanson/misc/fsm_dump.hh (vaucanson/g/8_fsm_dump.h 1.9 600))
-  (include/vaucanson/misc/functors.hh (vaucanson/c/30_functors.h 1.8 600))
-  (include/vaucanson/misc/functors.hxx (vaucanson/c/35_functors.h 1.6 600))
-  (include/vaucanson/misc/limits.hh (vaucanson/g/3_limits.hh 1.4 600))
-  (include/vaucanson/misc/misc_constraints.hh (vaucanson/b/21_misc_const 1.7 600))
-  (include/vaucanson/misc/numerical_constraints.hh (vaucanson/b/20_numerical_ 1.8 600))
-  (include/vaucanson/misc/random.hh (vaucanson/e/8_random.hh 1.11 600))
-  (include/vaucanson/misc/random.hxx (vaucanson/e/7_random.hxx 1.15 600))
-  (include/vaucanson/misc/ref.hh (vaucanson/c/31_ref.hh 1.8 600))
-  (include/vaucanson/misc/ref.hxx (vaucanson/c/33_ref.hxx 1.9 600))
-  (include/vaucanson/misc/selectors.hh (vaucanson/14_selectors. 1.6 600))
-  (include/vaucanson/misc/static.hh (vaucanson/13_static.hh 1.5 600))
-  (include/vaucanson/misc/static.hxx (vaucanson/12_static.hxx 1.6 600))
-  (include/vaucanson/misc/type_constraints.hh (vaucanson/c/34_type_const 1.5 600))
+  (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.1 600))
+  (include/vaucanson/algorithms/berry_sethi.hh (vaucanson/l/11_berry_seth 1.1 600))
+
+  (include/vaucanson/algorithms/derivates_automaton.hxx (vaucanson/p/25_derivates_ 1.2 600))
+  (include/vaucanson/algorithms/derivates_automaton.hh (vaucanson/p/26_derivates_ 1.1 600))
+
+  (include/vaucanson/algorithms/krat_exp_partial_derivation.hxx (vaucanson/p/27_krat_exp_p 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_partial_derivation.hh (vaucanson/p/28_krat_exp_p 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.5 600))
+  (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.4 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.8 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.7 600))
+  (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.5 600))
+  (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_realtime.hh (vaucanson/j/36_krat_exp_r 1.1 600))
+  (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.2 600))
+  (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.2 600))
+
   (include/vaucanson/tools/automaton_tools.hh (vaucanson/h/8_automaton_ 1.4 600))
   (include/vaucanson/tools/gen_book.hh (vaucanson/g/34_gen_book.h 1.4 600))
   (include/vaucanson/tools/gen_book.hxx (vaucanson/g/33_gen_book.h 1.4 600))
@@ -311,10 +479,44 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/tools/gen_random.hxx (vaucanson/e/3_gen_random 1.18 600))
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.26 600))
   (include/vaucanson/tools/usual_macros.hh (vaucanson/h/40_usual_macr 1.6 600))
-  (prj (vaucanson.prj) :symlink)
-  (src () :directory)
-  (src/Makefile.am (vaucanson/51_Makefile.a 1.4 600))
-  (src/README (vaucanson/h/3_README 1.1 600))
+
+  (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
+  (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.7 600))
+  (src/tests/automata/algos/closure_test.hh (vaucanson/e/27_closure_te 1.8 600))
+  (src/tests/automata/algos/complete_test.hh (vaucanson/f/8_complete_t 1.6 600))
+  (src/tests/automata/algos/compute_test.hh (vaucanson/e/30_compute_te 1.6 600))
+  (src/tests/automata/algos/concat_test.hh (vaucanson/h/6_concat_tes 1.3 600))
+  (src/tests/automata/algos/determinist_test.hh (vaucanson/e/16_determinis 1.9 600))
+  (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.8 600))
+  (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.6 600))
+  (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.4 600))
+  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.8 600))
+  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.10 600))
+  (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.11 600))
+  (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.7 600))
+  (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.8 600))
+  (src/tests/automata/algos/realtime_test.hh (vaucanson/e/49_realtime_t 1.7 600))
+  (src/tests/automata/algos/thompson_test.hh (vaucanson/e/46_thompson_t 1.7 600))
+  (src/tests/automata/algos/union_test.hh (vaucanson/e/15_union_test 1.9 600))
+  (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.3 600))
+  (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.13 600))
+  (src/tests/automata/implementation_check/add_edge_test.hh (vaucanson/f/15_add_edge_t 1.6 600))
+  (src/tests/automata/implementation_check/add_state_test.hh (vaucanson/f/14_add_state_ 1.6 600))
+  (src/tests/automata/implementation_check/coherence_state_edge_test.hh (vaucanson/f/13_coherence_ 1.6 600))
+  (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.6 600))
+  (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.6 600))
+
+  (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 600))
+  (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 600))
+  (src/tests/tests-suites/algebra_numerical_semiring.defs (vaucanson/h/33_algebra_nu 1.1 600))
+  (src/tests/tests-suites/algebra_set_alphabet.defs (vaucanson/h/32_algebra_se 1.1 600))
+  (src/tests/tests-suites/algebra_string_free_monoid.defs (vaucanson/h/31_algebra_st 1.1 600))
+  (src/tests/tests-suites/algebra_tropical_max_semiring.defs (vaucanson/h/30_algebra_tr 1.1 600))
+  (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 600))
+  (src/tests/tests-suites/algebra_series_krat.defs (vaucanson/j/25_algebra_se 1.1 600))
+  (src/tests/tests-suites/algebra_series_misc.defs (vaucanson/j/26_algebra_se 1.1 600))
+  (src/tests/tests-suites/algebra_series_krat_derivation.defs (vaucanson/j/37_algebra_se 1.1.1.1 600))
+  
   (src/demos/Makefile.am (vaucanson/i/28_Makefile.a 1.4 600))
   (src/demos/fsm/README (vaucanson/g/23_README 1.3 600))
   (src/demos/fsm/arg.cc (vaucanson/g/39_arg.cc 1.5 600))
@@ -334,272 +536,16 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (src/demos/fsm/usual_automaton_t/vcsn_prune.cc (vaucanson/h/0_vcsn_prune 1.1 600))
   (src/demos/fsm/usual_automaton_t/vcsn_random_generator.cc (vaucanson/g/13_vcsn_rando 1.2 600))
   (src/demos/fsm/usual_automaton_t/vcsn_reverse.cc (vaucanson/g/51_vcsn_rever 1.1 600))
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  (src/demos/samples/Makefile.am (vaucanson/p/29_Makefile.a 1.1 600))
+  (src/demos/samples/algebra/Makefile.am (vaucanson/p/30_Makefile.a 1.1 600))
   (src/demos/samples/algebra/alphabet.cc (vaucanson/h/50_alphabet.c 1.4 600))
   (src/demos/samples/algebra/decorated_alphabet.cc (vaucanson/i/21_decorated_ 1.2 600))
   (src/demos/samples/algebra/free_monoid.cc (vaucanson/h/49_free_monoi 1.2 600))
   (src/demos/samples/algebra/semiring.cc (vaucanson/h/48_semiring.c 1.2 600))
   (src/demos/samples/algebra/series.cc (vaucanson/h/47_series.cc 1.3 600))
-  
-  
-  
-  
   (src/demos/vgrep/Makefile.am (vaucanson/i/27_Makefile.a 1.4 600))
   (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.3 600))
-  (src/tests/Makefile.am (vaucanson/b/1_Makefile.a 1.8 600))
-  (src/tests/algebra/Makefile.am (vaucanson/b/23_Makefile.a 1.6 600))
-  (src/tests/algebra/alphabets/Makefile.am (vaucanson/h/36_Makefile.a 1.1 600))
-  (src/tests/algebra/alphabets/alphabet_test.hh (vaucanson/h/37_alphabet_t 1.2 600))
-  (src/tests/algebra/free_monoid/Makefile.am (vaucanson/h/34_Makefile.a 1.1 600))
-  (src/tests/algebra/free_monoid/free_monoid_test.hh (vaucanson/h/35_free_monoi 1.2 600))
-  (src/tests/algebra/semiring/Makefile.am (vaucanson/h/39_Makefile.a 1.1 600))
-  (src/tests/algebra/semiring/semiring_test.hh (vaucanson/h/38_semiring_t 1.2 600))
-  (src/tests/algebra/series/Makefile.am (vaucanson/c/22_Makefile.a 1.8 600))
-  
-  
-  
-  
-  
-  (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
-  (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.7 600))
-  (src/tests/automata/algos/closure_test.hh (vaucanson/e/27_closure_te 1.8 600))
-  (src/tests/automata/algos/complete_test.hh (vaucanson/f/8_complete_t 1.6 600))
-  (src/tests/automata/algos/compute_test.hh (vaucanson/e/30_compute_te 1.6 600))
-  (src/tests/automata/algos/concat_test.hh (vaucanson/h/6_concat_tes 1.3 600))
-  (src/tests/automata/algos/determinist_test.hh (vaucanson/e/16_determinis 1.9 600))
-  (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.8 600))
-  (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.6 600))
-  (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.4 600))
-  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.8 600))
-  (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.10 600))
-  (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.11 600))
-  (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.7 600))
-  (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.8 600))
-  (src/tests/automata/algos/realtime_test.hh (vaucanson/e/49_realtime_t 1.7 600))
-  (src/tests/automata/algos/thompson_test.hh (vaucanson/e/46_thompson_t 1.7 600))
-  (src/tests/automata/algos/union_test.hh (vaucanson/e/15_union_test 1.9 600))
-  (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.13 600))
-  (src/tests/automata/implementation_check/add_edge_test.hh (vaucanson/f/15_add_edge_t 1.6 600))
-  (src/tests/automata/implementation_check/add_state_test.hh (vaucanson/f/14_add_state_ 1.6 600))
-  (src/tests/automata/implementation_check/coherence_state_edge_test.hh (vaucanson/f/13_coherence_ 1.6 600))
-  (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.6 600))
-  (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.6 600))
-  (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 711))
-  (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.4 600))
-  (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
-  (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
-  (src/tests/check/tests_stuff.cc (vaucanson/b/3_tests_stuf 1.10 600))
-  (src/tests/check/tests_stuff.hh (vaucanson/b/2_tests_stuf 1.12 600))
-  (src/tests/defs.in (vaucanson/g/25_defs.in 1.3 600))
-  (src/tests/fundamental () :directory)
-  (src/tests/fundamental/Makefile.am (vaucanson/b/9_Makefile.a 1.3 600))
-  (src/tests/fundamental/design_pattern-test.hh (vaucanson/b/10_design_pat 1.6 600))
-  (src/tests/fundamental/element-full-test.cc (vaucanson/17_element-fu 1.11 600))
-  (src/tests/sanity/Makefile.am (vaucanson/g/27_Makefile.a 1.2 600))
-  (src/tests/sanity/includes.test (vaucanson/g/28_includes.t 1.1 700))
-  (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.5 600))
-  (src/tests/tests-suites/README (vaucanson/g/42_README 1.2 600))
-  (src/tests/tests-suites/algebra_numerical_semiring.defs (vaucanson/h/33_algebra_nu 1.1 600))
-  (src/tests/tests-suites/algebra_set_alphabet.defs (vaucanson/h/32_algebra_se 1.1 600))
-  (src/tests/tests-suites/algebra_string_free_monoid.defs (vaucanson/h/31_algebra_st 1.1 600))
-  (src/tests/tests-suites/algebra_tropical_max_semiring.defs (vaucanson/h/30_algebra_tr 1.1 600))
-  (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.2 600))
-  
-  (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.3 600))
 
-;; Files deleted by depopulate at Wed, 26 Feb 2003 15:17:32 +0100,
-;; from version 0.165(w), by clavei_t:
-
-  ; (include/vaucanson/config/config.hh ())
-
-;; Files added by populate at Thu, 27 Feb 2003 19:25:55 +0100,
-;; to version 0.167(w), by clavei_t:
-
-  (src/tests/automata/algos/in_concat_test.hh (vaucanson/j/15_in_concat_ 1.3 600))
-
-;; Files added by populate at Fri, 07 Mar 2003 16:54:26 +0100,
-;; to version 0.170(w), by clavei_t:
-
-  (include/vaucanson/algorithms/krat_exp_cderivation.hxx (vaucanson/j/16_krat_exp_c 1.5 600))
-  (include/vaucanson/algorithms/krat_exp_cderivation.hh (vaucanson/j/17_krat_exp_c 1.1 600))
-
-;; Files deleted by depopulate at Mon, 17 Mar 2003 21:14:58 +0100,
-;; from version 0.174(w), by clavei_t:
-
-  ; (src/tests/algebra/series/krat_exp_constant_term_test.hh ())
-  ; (src/tests/algebra/series/krat_exp_derivation_test.hh ())
-  ; (src/tests/algebra/series/krat_exp_linearize_test.hh ())
-  ; (src/tests/algebra/series/krat_exp_parse_test.hh ())
-
-;; Files deleted by depopulate at Mon, 17 Mar 2003 21:15:31 +0100,
-;; from version 0.174(w), by clavei_t:
-
-  ; (src/tests/algebra/series/series-test.hh ())
-
-;; Files added by populate at Mon, 17 Mar 2003 21:16:21 +0100,
-;; to version 0.174(w), by clavei_t:
-
-  (src/tests/algebra/series/krat/Makefile.am (vaucanson/j/18_Makefile.a 1.3 600))
-  (src/tests/algebra/series/krat/main/krat_exp_parse_test.hh (vaucanson/j/19_krat_exp_p 1.1 600))
-  
-  (src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh (vaucanson/j/21_krat_exp_d 1.1 600))
-  (src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh (vaucanson/j/22_krat_exp_c 1.1 600))
-
-;; Files added by populate at Mon, 17 Mar 2003 21:16:52 +0100,
-;; to version 0.174(w), by clavei_t:
-
-  (src/tests/algebra/series/misc/series_test.hh (vaucanson/j/23_series_tes 1.3 600))
-  (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 600))
-
-;; Files added by populate at Mon, 17 Mar 2003 21:21:14 +0100,
-;; to version 0.174(w), by clavei_t:
-
-  (src/tests/tests-suites/algebra_series_krat.defs (vaucanson/j/25_algebra_se 1.1 600))
-
-;; Files added by populate at Tue, 18 Mar 2003 18:56:54 +0100,
-;; to version 0.175(w), by clavei_t:
-
-  (src/tests/tests-suites/algebra_series_misc.defs (vaucanson/j/26_algebra_se 1.1 600))
-
-;; Files added by populate at Wed, 19 Mar 2003 17:13:03 +0100,
-;; to version 0.176(w), by clavei_t:
-
-  (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.1 600))
-
-;; Files added by populate at Wed, 19 Mar 2003 17:37:42 +0100,
-;; to version 0.177(w), by fosse_l:
-
-  (include/vaucanson/algorithms/brzozowski.hxx (vaucanson/j/28_brzozowski 1.3 600))
-  (include/vaucanson/algorithms/brzozowski.hh (vaucanson/j/29_brzozowski 1.1 600))
-  (include/vaucanson/algorithms/aci_canonical.hxx (vaucanson/j/30_aci_canoni 1.2 600))
-  (include/vaucanson/algorithms/aci_canonical.hh (vaucanson/j/31_aci_canoni 1.1 600))
-  (include/vaucanson/algorithms/algo_helper.hxx (vaucanson/j/32_algo_helpe 1.5 600))
-  (include/vaucanson/algorithms/algo_helper.hh (vaucanson/j/33_algo_helpe 1.5 600))
-
-;; Files deleted by depopulate at Tue, 25 Mar 2003 13:17:35 +0100,
-;; from version 0.180(w), by clavei_t:
-
-  ; (include/vaucanson/algorithms/krat_exp_linearize.hh ())
-
-;; Files deleted by depopulate at Tue, 25 Mar 2003 13:17:39 +0100,
-;; from version 0.180(w), by clavei_t:
-
-  ; (include/vaucanson/algorithms/krat_exp_linearize.hxx ())
-
-;; Files deleted by depopulate at Tue, 25 Mar 2003 13:18:10 +0100,
-;; from version 0.180(w), by clavei_t:
-
-  ; (src/tests/algebra/series/krat/krat_exp_linearize_test.hh ())
-
-;; Files added by populate at Tue, 25 Mar 2003 13:19:06 +0100,
-;; to version 0.180(w), by clavei_t:
-
-  (src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh (vaucanson/j/34_krat_exp_r 1.2 600))
-  (include/vaucanson/algorithms/krat_exp_realtime.hxx (vaucanson/j/35_krat_exp_r 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_realtime.hh (vaucanson/j/36_krat_exp_r 1.1 600))
-
-;; Files added by populate at Wed, 02 Apr 2003 14:58:12 +0200,
-;; to version 0.182(w), by clavei_t:
-
-  (src/tests/tests-suites/algebra_series_krat_derivation.defs (vaucanson/j/37_algebra_se 1.1.1.1 600))
-
-;; Files added by populate at Wed, 02 Apr 2003 15:00:32 +0200,
-;; to version 0.182(w), by clavei_t:
-
-  (src/tests/algebra/series/krat/derivations/derivation/Makefile.am (vaucanson/j/38_Makefile.a 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh (vaucanson/j/39_krat_exp_d 1.1.1.1 600))
-  (src/tests/algebra/series/krat/derivations/Makefile.am (vaucanson/j/40_Makefile.a 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivations_common.hh (vaucanson/j/41_derivation 1.1.1.1 600))
-
-;; Files added by populate at Wed, 02 Apr 2003 15:07:16 +0200,
-;; to version 0.182(w), by clavei_t:
-
-  (src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh (vaucanson/j/42_krat_exp_c 1.1 600))
-  (src/tests/algebra/series/krat/main/Makefile.am (vaucanson/j/43_Makefile.a 1.1 600))
-
-;; Files added by populate at Wed, 02 Apr 2003 15:10:30 +0200,
-;; to version 0.182(w), by clavei_t:
-
-  (src/tests/algebra/series/krat/derivations/cderivation/Makefile.am (vaucanson/j/44_Makefile.a 1.1 600))
-
-;; Files added by populate at Wed, 02 Apr 2003 17:31:47 +0200,
-;; to version 0.183(w), by fosse_l:
-
-  (include/vaucanson/algebra/concrete/letter/couple_letter.hxx (vaucanson/j/45_couple_let 1.2 600))
-  (include/vaucanson/algebra/concrete/letter/couple_letter.hh (vaucanson/j/46_couple_let 1.2 600))
-  (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/j/47_krat_exp_l 1.2 600))
-  (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/j/48_krat_exp_l 1.2 600))
-
-;; Files deleted by populate at Thu, 03 Apr 2003 18:12:09 +0200,
-;; from version 0.184(w), by max:
-
-  ; (src/demos/grammar_inference/src/training/vtrain.toy ())
-  ; (src/demos/grammar_inference/src/make_mca.cc ())
-  ; (src/demos/grammar_inference/src/is_not_compatible.cc ())
-  ; (src/demos/grammar_inference/src/fusion.cc ())
-  ; (src/demos/grammar_inference/src/bs.cc ())
-  ; (src/demos/grammar_inference/ordered_set_base.hxx ())
-  ; (src/demos/grammar_inference/include/tools/load_sample.hxx ())
-  ; (src/demos/grammar_inference/include/tools/load_sample.hh ())
-  ; (src/demos/grammar_inference/include/algorithms/rig.hxx ())
-  ; (src/demos/grammar_inference/include/algorithms/rig.hh ())
-  ; (src/demos/grammar_inference/include/algorithms/make_pta.hxx ())
-  ; (src/demos/grammar_inference/include/algorithms/make_pta.hh ())
-  ; (src/demos/grammar_inference/include/algorithms/make_mca.hxx ())
-  ; (src/demos/grammar_inference/include/algorithms/make_mca.hh ())
-  ; (src/demos/grammar_inference/include/algorithms/is_structurally_complete.hxx ())
-  ; (src/demos/grammar_inference/include/algorithms/is_structurally_complete.hh ())
-  ; (src/demos/grammar_inference/include/algorithms/is_not_compatible.hxx ())
-  ; (src/demos/grammar_inference/include/algorithms/is_not_compatible.hh ())
-  ; (src/demos/grammar_inference/include/algorithms/fusion.hxx ())
-  ; (src/demos/grammar_inference/include/algorithms/fusion.hh ())
-  ; (src/demos/grammar_inference/include/algebra/concrete/ordered_set.hxx ())
-  ; (src/demos/grammar_inference/include/algebra/concrete/ordered_set.hh ())
-  ; (src/demos/grammar_inference/include/algebra/concrete/lattice.hxx ())
-  ; (src/demos/grammar_inference/include/algebra/concrete/lattice.hh ())
-  ; (src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hxx ())
-  ; (src/demos/grammar_inference/include/algebra/concrete/complemented_lattice.hh ())
-  ; (src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hxx ())
-  ; (src/demos/grammar_inference/include/algebra/concept/ordered_set_base.hh ())
-  ; (src/demos/grammar_inference/include/algebra/concept/lattice_base.hxx ())
-  ; (src/demos/grammar_inference/include/algebra/concept/lattice_base.hh ())
-  ; (src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hxx ())
-  ; (src/demos/grammar_inference/include/algebra/concept/complemented_lattice_base.hh ())
-
-;; Files added by populate at Thu, 03 Apr 2003 18:13:09 +0200,
-;; to version 0.184(w), by max:
 
   (mical/src/k_ri.cc (vaucanson/j/49_k_ri.cc 1.1 644))
   (mical/src/k_tssi.cc (vaucanson/j/50_k_tssi.cc 1.1 644))
@@ -666,18 +612,9 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (mical/include/algebra/concept/lattice_base.hh (vaucanson/l/7_lattice_ba 1.1 600))
   (mical/include/algebra/concept/complemented_lattice_base.hxx (vaucanson/l/8_complement 1.1 600))
   (mical/include/algebra/concept/complemented_lattice_base.hh (vaucanson/l/9_complement 1.1 600))
-
-
-  (include/vaucanson/algorithms/berry_sethi.hxx (vaucanson/l/10_berry_seth 1.1 600))
-  (include/vaucanson/algorithms/berry_sethi.hh (vaucanson/l/11_berry_seth 1.1 600))
-  (include/vaucanson/algebra/concept/tropical_semiring.hxx (vaucanson/l/12_tropical_s 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh (vaucanson/l/18_krat_exp_d 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh (vaucanson/l/19_krat_exp_d 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh (vaucanson/l/20_krat_exp_d 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh (vaucanson/l/21_krat_exp_d 1.1 600))
-  (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh (vaucanson/l/22_krat_exp_d 1.1 600))
-;; Files added by populate at Mon, 12 May 2003 21:58:37 +0200,
-;; to version 0.186(w), by raph:
+  (mical/src/Makefile.am (vaucanson/p/20_Makefile.a 1.1 664))
+  (mical/include/Makefile.am (vaucanson/p/21_Makefile.a 1.1 664))
+  (mical/Makefile.am (vaucanson/p/22_Makefile.a 1.1 664))
 
   (vauc/bootstrap.sh (vaucanson/l/25_bootstrap. 1.2 775))
   (vauc/mpp++/TODO (vaucanson/l/26_TODO 1.1 644))
@@ -760,12 +697,6 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/mpp++/src/examples/Alphabet.class (vaucanson/n/0_Alphabet.c 1.1 644))
   (vauc/mpp++/src/examples/AddState.fun (vaucanson/n/1_AddState.f 1.1 644))
   (vauc/mpp++/lib/Makefile.am (vaucanson/n/2_Makefile.a 1.1 644))
-
-;; Files added by populate at Tue, 13 May 2003 00:41:10 +0200,
-;; to version 0.195(w), by raph:
-
-  
-  
   (vauc/include/lazy/vauc_constructs.hxx (vaucanson/n/5_vauc_const 1.1 644))
   (vauc/include/lazy/exp_base.hxx (vaucanson/n/6_exp_base.h 1.1 644))
   (vauc/include/lazy/exp.hxx (vaucanson/n/7_exp.hxx 1.1 644))
@@ -796,18 +727,8 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/include/constants/one.hh (vaucanson/n/32_one.hh 1.1 644))
   (vauc/include/constants/inf.hh (vaucanson/n/33_inf.hh 1.1 644))
   (vauc/include/Makefile.am (vaucanson/n/34_Makefile.a 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 00:41:19 +0200,
-;; to version 0.195(w), by raph:
-
   (vauc/vcore/Makefile.am (vaucanson/n/35_Makefile.a 1.2 644))
-
-;; Files added by populate at Tue, 13 May 2003 00:41:23 +0200,
-;; to version 0.195(w), by raph:
-
   (vauc/vcore/unwind_init.cc (vaucanson/n/36_unwind_ini 1.2 644))
-  
-  
   (vauc/vcore/partial_call.cc (vaucanson/n/39_partial_ca 1.1 644))
   (vauc/vcore/object_catalog.cc (vaucanson/n/40_object_cat 1.2 644))
   (vauc/vcore/module_loader.cc (vaucanson/n/41_module_loa 1.1 644))
@@ -817,45 +738,18 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/vcore/find_path.cc (vaucanson/n/45_find_path. 1.1 644))
   (vauc/vcore/find_cost.cc (vaucanson/n/46_find_cost. 1.1 644))
   (vauc/vcore/explode.cc (vaucanson/n/47_explode.cc 1.1 644))
-  
   (vauc/vcore/eval.cc (vaucanson/n/49_eval.cc 1.2 644))
   (vauc/vcore/env.cc (vaucanson/n/50_env.cc 1.2 644))
   (vauc/vcore/closure.cc (vaucanson/n/51_closure.cc 1.1 644))
   (vauc/vcore/callable.cc (vaucanson/o/0_callable.c 1.1 644))
-
-;; Files added by populate at Tue, 13 May 2003 00:41:24 +0200,
-;; to version 0.195(w), by raph:
-
   (vauc/vcore/unwind_init.hh (vaucanson/o/1_unwind_ini 1.1 644))
-
-;; Files added by populate at Tue, 13 May 2003 00:57:16 +0200,
-;; to version 0.196(w), by raph:
-
-  
   (vauc/lemon/lemon.c (vaucanson/o/2_lemon.c 1.1 660))
   (vauc/lemon/Makefile.am (vaucanson/o/3_Makefile.a 1.1 664))
   (vauc/lib/readlinebuf.cc (vaucanson/o/4_readlinebu 1.1 644))
-
-;; Files deleted by depopulate at Tue, 13 May 2003 00:59:04 +0200,
-;; from version 0.196(w), by raph:
-
-  ; (vauc/src/vutil/lemon/lempar.c ())
-
-;; Files added by populate at Tue, 13 May 2003 00:59:17 +0200,
-;; to version 0.196(w), by raph:
-
   (vauc/lemon/rules.am (vaucanson/o/6_rules.am 1.2 644))
   (vauc/lemon/lempar.in (vaucanson/o/7_lempar.in 1.1 660))
-
-;; Files added by populate at Tue, 13 May 2003 03:54:16 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/include/bits/module_defs.hh (vaucanson/o/8_module_def 1.1 664))
   (vauc/cppsh/include/bits/def_visitor.hh (vaucanson/o/9_def_visito 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 03:54:23 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/include/kern/symbol.hxx (vaucanson/o/10_symbol.hxx 1.1 644))
   (vauc/cppsh/include/kern/symbol.hh (vaucanson/o/11_symbol.hh 1.1 644))
   (vauc/cppsh/include/kern/streams.hh (vaucanson/o/12_streams.hh 1.1 644))
@@ -870,26 +764,10 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/cppsh/include/kern/exnprint.hh (vaucanson/o/21_exnprint.h 1.1 644))
   (vauc/cppsh/include/kern/exception.hh (vaucanson/o/22_exception. 1.1 644))
   (vauc/cppsh/include/kern/debug.hh (vaucanson/o/23_debug.hh 1.1 644))
-
-;; Files added by populate at Tue, 13 May 2003 03:54:33 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/include/FlexLexer.h (vaucanson/o/24_FlexLexer. 1.1 664))
   (vauc/cppsh/include/Makefile.am (vaucanson/o/25_Makefile.a 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 03:56:40 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/include/lang/parse_base.hh (vaucanson/o/26_parse_base 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 04:08:24 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/lang/Makefile.am (vaucanson/o/27_Makefile.a 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 04:08:40 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/lang/parser_header.lemon (vaucanson/o/28_parser_hea 1.1 664))
   (vauc/cppsh/lang/parse_base.cc (vaucanson/o/29_parse_base 1.1 664))
   (vauc/cppsh/lang/lemon_parser.cc (vaucanson/o/30_lemon_pars 1.1 664))
@@ -897,35 +775,15 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/cppsh/lang/gen_parser.sh (vaucanson/o/32_gen_parser 1.1 664))
   (vauc/cppsh/lang/parser_header.yy (vaucanson/o/33_parser_hea 1.1 664))
   (vauc/cppsh/lang/lemon_parser.hh (vaucanson/o/34_lemon_pars 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 04:08:52 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/tests/Makefile.am (vaucanson/o/35_Makefile.a 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 04:08:58 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/tests/kern/Makefile.am (vaucanson/o/36_Makefile.a 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 04:09:07 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/tests/kern/symbol.cc (vaucanson/o/37_symbol.cc 1.1 644))
   (vauc/cppsh/tests/kern/streams.cc (vaucanson/o/38_streams.cc 1.1 644))
   (vauc/cppsh/tests/kern/objref_a.cc (vaucanson/o/39_objref_a.c 1.1 644))
   (vauc/cppsh/tests/kern/objref.cc (vaucanson/o/40_objref.cc 1.1 644))
   (vauc/cppsh/tests/kern/object.cc (vaucanson/o/41_object.cc 1.1 664))
   (vauc/cppsh/tests/kern/exception.cc (vaucanson/o/42_exception. 1.1 644))
-
-;; Files added by populate at Tue, 13 May 2003 04:09:14 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/tests/ltdlpp/Makefile.am (vaucanson/o/43_Makefile.a 1.1 664))
-
-;; Files added by populate at Tue, 13 May 2003 04:09:29 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/tests/ltdlpp/dlbug32.cc (vaucanson/o/44_dlbug32.cc 1.1 664))
   (vauc/cppsh/tests/ltdlpp/dlbug22.cc (vaucanson/o/45_dlbug22.cc 1.1 664))
   (vauc/cppsh/tests/ltdlpp/dlbug12.cc (vaucanson/o/46_dlbug12.cc 1.1 664))
@@ -938,23 +796,6 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/cppsh/tests/ltdlpp/abug2.cc (vaucanson/p/1_abug2.cc 1.1 664))
   (vauc/cppsh/tests/ltdlpp/abug1.cc (vaucanson/p/2_abug1.cc 1.1 664))
   (vauc/cppsh/tests/ltdlpp/s.hh (vaucanson/p/3_s.hh 1.1 664))
-
-;; Files deleted by depopulate at Tue, 13 May 2003 04:11:16 +0200,
-;; from version 0.197(w), by raph:
-
-  ; (vauc/vcore/streams.cc ())
-  ; (vauc/vcore/persistant.cc ())
-  ; (vauc/vcore/exception.cc ())
-
-;; Files deleted by depopulate at Tue, 13 May 2003 04:12:37 +0200,
-;; from version 0.197(w), by raph:
-
-  ; (vauc/include/types/symbol.hxx ())
-  ; (vauc/include/types/object.hxx ())
-
-;; Files added by populate at Tue, 13 May 2003 04:18:36 +0200,
-;; to version 0.197(w), by raph:
-
   (vauc/cppsh/kern/stdstreams_cout.hh (vaucanson/p/4_stdstreams 1.1 664))
   (vauc/cppsh/kern/stdstreams_cin.hh (vaucanson/p/5_stdstreams 1.1 664))
   (vauc/cppsh/kern/stdstreams_cerr.hh (vaucanson/p/6_stdstreams 1.1 664))
@@ -971,75 +812,10 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/cppsh/kern/debug.cc (vaucanson/p/17_debug.cc 1.1 664))
   (vauc/cppsh/kern/Makefile.am (vaucanson/p/18_Makefile.a 1.1 664))
 
-;; Files added by populate at Thu, 15 May 2003 13:04:20 +0200,
-;; to version 0.200(w), by raph:
-
-  (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 664))
-
-;; Files deleted by depopulate at Thu, 15 May 2003 15:02:07 +0200,
-;; from version 0.202(w), by raph:
-
-  ; (include/vaucanson/config/config.hh.in ())
-  ; (include/vaucanson/config/extrconf.sh ())
-  ; (include/vaucanson/config/pconf.hh ())
-  ; (tools/scandefs.pl ())
-
-;; Files added by populate at Sun, 18 May 2003 03:59:40 +0200,
-;; to version 0.205(w), by raph:
-
-  (mical/src/Makefile.am (vaucanson/p/20_Makefile.a 1.1 664))
-  (mical/include/Makefile.am (vaucanson/p/21_Makefile.a 1.1 664))
-  (mical/Makefile.am (vaucanson/p/22_Makefile.a 1.1 664))
 
 
-  (include/vaucanson/algebra/concrete/series/krat_coefficient.hxx (vaucanson/p/23_krat_coeff 1.1 600))
-  (include/vaucanson/algebra/concrete/series/krat_coefficient.hh (vaucanson/p/24_krat_coeff 1.1 600))
-  (include/vaucanson/algorithms/derivates_automaton.hxx (vaucanson/p/25_derivates_ 1.2 600))
-  (include/vaucanson/algorithms/derivates_automaton.hh (vaucanson/p/26_derivates_ 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_partial_derivation.hxx (vaucanson/p/27_krat_exp_p 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_partial_derivation.hh (vaucanson/p/28_krat_exp_p 1.1 600))
-  (src/demos/samples/Makefile.am (vaucanson/p/29_Makefile.a 1.1 600))
-  (src/demos/samples/algebra/Makefile.am (vaucanson/p/30_Makefile.a 1.1 600))
-
-  (include/vaucanson/algebra/concrete/series/krat_exp_support.hxx (vaucanson/p/31_krat_exp_s 1.1 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx (vaucanson/p/32_krat_exp_i 1.1 600))
-  (include/vaucanson/automata/concept/automata_ops.hxx (vaucanson/p/33_automata_o 1.1 600))
-  (include/vaucanson/automata/concept/automata_ops.hh (vaucanson/p/34_automata_o 1.1 600))
-  (include/vaucanson/automata/concrete/graph.hxx (vaucanson/p/35_graph.hxx 1.1 600))
-  (include/vaucanson/automata/concrete/graph.hh (vaucanson/p/36_graph.hh 1.2 600))
-  (include/vaucanson/automata/concrete/kind_adapter.hh (vaucanson/p/37_kind_adapt 1.1 600))
-;; Files added by populate at Fri, 30 May 2003 15:16:38 +0200,
-;; to version 0.222(w), by raph:
-
-  (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.1 664))
-  (include/vaucanson/misc/unique.hcc (vaucanson/p/39_unique.hcc 1.1 664))
-  (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.1 664))
-
-;; Files added by populate at Fri, 06 Jun 2003 10:22:02 +0200,
-;; to version 0.224(w), by raph:
-
-  (src/tests/check/assert_test.cc (vaucanson/p/41_assert_tes 1.1 664))
 )
 (Merge-Parents
-  (0.226 complete
-    (ChangeLog ChangeLog ChangeLog m) (include/vaucanson/algebra/concept/freemonoid_base.hh include/vaucanson/algebra/concept/freemonoid_base.hh include/vaucanson/algebra/concept/freemonoid_base.hh r)
-    (include/vaucanson/algebra/concept/series_base.hh include/vaucanson/algebra/concept/series_base.hh include/vaucanson/algebra/concept/series_base.hh r) (include/vaucanson/algebra/concept/series_base.hxx include/vaucanson/algebra/concept/series_base.hxx include/vaucanson/algebra/concept/series_base.hxx r)
-    (include/vaucanson/algebra/concrete/free_monoid/words.hxx include/vaucanson/algebra/concrete/free_monoid/words.hxx include/vaucanson/algebra/concrete/free_monoid/words.hxx r) (include/vaucanson/algebra/concrete/series/krat.hh include/vaucanson/algebra/concrete/series/krat.hh include/vaucanson/algebra/concrete/series/krat.hh r)
-    (include/vaucanson/algebra/concrete/series/krat.hxx include/vaucanson/algebra/concrete/series/krat.hxx include/vaucanson/algebra/concrete/series/krat.hxx r) (include/vaucanson/algebra/concrete/series/polynoms.hh include/vaucanson/algebra/concrete/series/polynoms.hh include/vaucanson/algebra/concrete/series/polynoms.hh r)
-    (include/vaucanson/algebra/concrete/series/polynoms.hxx include/vaucanson/algebra/concrete/series/polynoms.hxx include/vaucanson/algebra/concrete/series/polynoms.hxx r) (include/vaucanson/algebra/concrete/series/series.hxx include/vaucanson/algebra/concrete/series/series.hxx include/vaucanson/algebra/concrete/series/series.hxx r)
-    (include/vaucanson/automata/concept/handlers.hh include/vaucanson/automata/concept/handlers.hh include/vaucanson/automata/concept/handlers.hh r) (include/vaucanson/automata/concept/handlers.hxx include/vaucanson/automata/concept/handlers.hxx include/vaucanson/automata/concept/handlers.hxx r)
-    (include/vaucanson/tools/gen_random.hh include/vaucanson/tools/gen_random.hh include/vaucanson/tools/gen_random.hh r) (include/vaucanson/tools/gen_random.hxx include/vaucanson/tools/gen_random.hxx include/vaucanson/tools/gen_random.hxx r)
-    (include/vaucanson/tools/usual_macros.hh include/vaucanson/tools/usual_macros.hh include/vaucanson/tools/usual_macros.hh r) (src/tests/automata/algos/closure_test.hh src/tests/automata/algos/closure_test.hh src/tests/automata/algos/closure_test.hh r)
-    (src/tests/automata/algos/complete_test.hh src/tests/automata/algos/complete_test.hh src/tests/automata/algos/complete_test.hh r) (src/tests/automata/algos/compute_test.hh src/tests/automata/algos/compute_test.hh src/tests/automata/algos/compute_test.hh r)
-    (src/tests/automata/algos/concat_test.hh src/tests/automata/algos/concat_test.hh src/tests/automata/algos/concat_test.hh r) (src/tests/automata/algos/determinist_test.hh src/tests/automata/algos/determinist_test.hh src/tests/automata/algos/determinist_test.hh r)
-    (src/tests/automata/algos/elimination_test.hh src/tests/automata/algos/elimination_test.hh src/tests/automata/algos/elimination_test.hh r) (src/tests/automata/algos/extract_test.hh src/tests/automata/algos/extract_test.hh src/tests/automata/algos/extract_test.hh r)
-    (src/tests/automata/algos/minimization_test.hh src/tests/automata/algos/minimization_test.hh src/tests/automata/algos/minimization_test.hh r) (src/tests/automata/algos/normalize_test.hh src/tests/automata/algos/normalize_test.hh src/tests/automata/algos/normalize_test.hh r)
-    (src/tests/automata/algos/product_test.hh src/tests/automata/algos/product_test.hh src/tests/automata/algos/product_test.hh r) (src/tests/automata/algos/reachable_test.hh src/tests/automata/algos/reachable_test.hh src/tests/automata/algos/reachable_test.hh r)
-    (src/tests/automata/algos/realtime_test.hh src/tests/automata/algos/realtime_test.hh src/tests/automata/algos/realtime_test.hh r) (src/tests/automata/algos/union_test.hh src/tests/automata/algos/union_test.hh src/tests/automata/algos/union_test.hh r)
-    (src/tests/automata/implementation_check/add_edge_test.hh src/tests/automata/implementation_check/add_edge_test.hh src/tests/automata/implementation_check/add_edge_test.hh r) (src/tests/automata/implementation_check/add_state_test.hh src/tests/automata/implementation_check/add_state_test.hh src/tests/automata/implementation_check/add_state_test.hh r)
-    (src/tests/automata/implementation_check/coherence_state_edge_test.hh src/tests/automata/implementation_check/coherence_state_edge_test.hh src/tests/automata/implementation_check/coherence_state_edge_test.hh r) (src/tests/automata/implementation_check/global_consistency_test.hh src/tests/automata/implementation_check/global_consistency_test.hh src/tests/automata/implementation_check/global_consistency_test.hh r)
-    (src/tests/automata/implementation_check/init_final_test.hh src/tests/automata/implementation_check/init_final_test.hh src/tests/automata/implementation_check/init_final_test.hh r) (src/tests/check/tests_stuff.hh src/tests/check/tests_stuff.hh src/tests/check/tests_stuff.hh r)
-    (src/tests/automata/algos/in_concat_test.hh src/tests/automata/algos/in_concat_test.hh src/tests/automata/algos/in_concat_test.hh r) 
-  )
+  (0.227 complete)
 )
 (New-Merge-Parents)

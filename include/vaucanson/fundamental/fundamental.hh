@@ -20,16 +20,9 @@
 #ifndef VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 # define VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 
-/*! @addtogroup fundamental Fundamental : Enriching C++ with the Element design pattern. 
-*/ /*! @{ @} */
+/** @addtogroup fundamental Fundamental C++ : the Element design pattern. */
 
-# include <vaucanson/fundamental/predefs.hh>
-# include <vaucanson/fundamental/slots.hh>
-# include <vaucanson/fundamental/meta_set.hh>
-# include <vaucanson/fundamental/element_base.hh>
-# include <vaucanson/fundamental/element_ops.hh>
-# include <vaucanson/fundamental/default_ops.hh>
 # include <vaucanson/fundamental/element.hh>
-# include <vaucanson/fundamental/structure.hh>
+# include <vaucanson/fundamental/default_ops.hh>
 
 #endif // VCSN_FUNDAMENTAL_FUNDAMENTAL_HH

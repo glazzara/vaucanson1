@@ -2,68 +2,32 @@
 # define UTILITY_UNIQUE_HH
 
 #include <list>
+#include <algorithm>
 #include <typeinfo>
 #include <map>
 
-/* @file unique.hh
- * Declarations for the type canonicalization tools.
- */
-
-/** @addtogroup Utility *//** @{ */
-
-/**
- * @brief The namespace for utility constructs.
- *
- * This namespace holds all constructs that are not
- * Vaucanson-specific.
- */
 namespace utility
 {
-
-  /** The namespace for the instance collection tools. */
+  /** The namespace for the instance collection tools */
   namespace unique
   {
-    /** Generic hash operator.
-     *
-     * This trait must be specialized for any type that has dynamic
-     * information in addition to its static type information
-     */
-    template<typename T>
-    struct hash
+    /** Base class for @c uniquelist */
+    struct uniquelist_base
     {
-      unsigned operator()(const T&) const;
-    };
-
-    /** Base class for @c hashmap */
-    struct hashmap_base
-    {
-      virtual ~hashmap_base();
+      virtual ~uniquelist_base();
     };
     
-    /** Simple hash map structure
+    /** Simple unique list structure
      *
      * @arg @c T the type of stored values
-     * @arg @c hash_size the size of the hash table
      *
-     * This structure implements a simple hash map structure
+     * This structure implements a simple list structure
      * for use by the @c unique_map structure.
      */
-    template<typename T, unsigned hash_size>
-    struct hashmap : public hashmap_base
+    template<typename T>
+    struct uniquelist : public std::list<T>, public uniquelist_base
     {
-      /** The main access operator.
-       *
-       * This operator retrieves the canonical instance of a value,
-       * creating one if necessary.
-       *
-       * It uses the @c hash trait and the standard equality operator
-       * (==) for the value type.
-       */
-      const T& get_or_insert(const T&);
-
-      ~hashmap();
-    protected:
-      std::list<T> vec_[hash_size];
+      ~uniquelist();
     };
 
     /** Canonical type map
@@ -90,7 +54,7 @@ namespace utility
       };
 
       /** The map type used */
-      typedef std::map<ti_slot, hashmap_base*> map_t;
+      typedef std::map<ti_slot, uniquelist_base*> map_t;
 
       /** Access to the unique instance of this structure */
       static map_t& instance();
@@ -108,8 +72,9 @@ namespace utility
        */
       ~unique_map();
     };
-    
-    /** The canonicalization operator
+
+    /** @addtogroup utility *//** @{ */
+    /** @brief The canonicalization operator
      *
      * This operator uses the @c unique_map structure to retrieve the
      * unique instance equal to the given value.
@@ -118,16 +83,30 @@ namespace utility
      */
     template<typename T>
     const T& get(const T&);
-    
 
+    /// Version of the canonicalization operator for pointers
+    template<typename T>
+    const T* get(const T*);
+
+    template<typename T>
+    struct uniquified
+    { 
+      uniquified(const T&);
+      uniquified(const uniquified&);
+      operator const T& () const;
+    protected:
+      const T& r_;
+    };
+
+    template<typename T>
+    uniquified<S> avoid_uniquify(const T&);
+    template<typename T>
+    uniquified<S> avoid_uniquify(const T*);
+
+    /** @} */
   }
 
-
-
-
 }
-
-/** @} */
 
 #include <vaucanson/misc/unique.hxx>
 

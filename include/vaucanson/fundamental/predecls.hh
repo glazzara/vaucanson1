@@ -1,4 +1,4 @@
-// converter.hxx
+// fundamental/predecls.hh
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
@@ -17,23 +17,43 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+#ifndef VCSN_FUNDAMENTAL_PREDECLS_HH
+# define VCSN_FUNDAMENTAL_PREDECLS_HH
 
-#ifndef AUTOMATA_MISC_CONVERTER_HXX
-#define AUTOMATA_MISC_CONVERTER_HXX
+/** @addtogroup fundamental *//** @{ */
+/** 
+ * @file predecls.hh
+ * @brief Forward declarations of the fundamental template classes of Vaucanson
+ */
+/** @} */
 
-# include <vaucanson/misc/converter.hh>
-# include <functional>
+# include <vaucanson/config/system.hh>
 
-namespace utility
-{
+/** @addtogroup fundamental *//** @{ */
+/// The main namespace of the Vaucanson library
+namespace vcsn {
+
+  template<typename S>
+  struct dynamic_traits;
   
-  template<typename From, typename To>
-  To converter<From, To>::operator()(const From& f) const
-  { 
-    return To(f); 
-  }
+  template<typename S, typename T>
+  struct SyntacticDecorator;
   
-} // utility
+  template<typename S, typename T>
+  struct MetaElement;
 
+  template<typename S, typename T>
+  struct Element;
+  
+  template<typename S>
+  struct SetSlot;
+  
+  template<typename Self>
+  struct Structure;
 
-#endif
+  struct undefined_type {};
+
+} // vcsn
+/** @} */
+
+#endif // VCSN_FUNDAMENTAL_PREDECLS_HH

@@ -25,6 +25,14 @@
 
 namespace utility {
 
+  /** @addtogroup utility *//** @{ */
+
+
+  /*-----------------.
+  | remove_reference |
+  `-----------------*/
+
+  /** Turn a reference type into its corresponding plain type */
   template<typename T>
   struct remove_reference
   {
@@ -37,6 +45,17 @@ namespace utility {
     typedef T t;
   };
 
+  template<typename T>
+  struct remove_reference<const T&>
+  {
+    typedef const T t;
+  };
+
+  /*----------.
+  | static_if |
+  `----------*/
+
+  /** Choose between two types or values depending on a constant boolean */
   template<bool b, typename T, typename U>
   struct static_if
   { 
@@ -44,7 +63,12 @@ namespace utility {
 
     static typename remove_reference<T>::t& 
     choose(typename remove_reference<T>::t& p1, 
-	   typename remove_reference<U>::t& p2);
+	   typename remove_reference<U>::t& p2)
+    { return p1; }
+    static const typename remove_reference<T>::t& 
+    choose(const typename remove_reference<T>::t& p1, 
+	   const typename remove_reference<U>::t& p2)
+    { return p1; }
   };
 
   template<typename T, typename U>
@@ -54,10 +78,19 @@ namespace utility {
 
     static typename remove_reference<U>::t& 
     choose(typename remove_reference<T>::t& p1, 
-	   typename remove_reference<U>::t& p2);
-
+	   typename remove_reference<U>::t& p2)
+    { return p2; }
+    static const typename remove_reference<U>::t& 
+    choose(const typename remove_reference<T>::t& p1, 
+	   const typename remove_reference<U>::t& p2)
+    { return p2; }
   };
 
+  /*----------.
+  | static_eq |
+  `----------*/
+
+  /** Test for equality between two types */
   template<typename T, typename U>
   struct static_eq
   { 
@@ -69,6 +102,10 @@ namespace utility {
   { 
     static const bool value = true; 
   };
+
+  /*-----------.
+  | static_pow |
+  `-----------*/
 
   template<size_t N, size_t P, bool pair_p = false>
   struct static_pow_compute
@@ -91,6 +128,10 @@ namespace utility {
     static const size_t value = 1; 
   };
 
+  /** Static exponentiation. 
+   * It uses the fast exponentiation algorithm to save
+   * template recursion depth.
+   */
   template<size_t N, size_t P>
   struct static_pow
   {
@@ -98,6 +139,11 @@ namespace utility {
     static_pow_compute<N, P, ((P % 2) == 0)>::value ;
   };
 
+  /*---------------------.
+  | static_pow_minus_one |
+  `---------------------*/
+
+  /** Static exponentiation, result minus one. @see @c static_pow */
   template<size_t N, size_t P>
   struct static_pow_minus_one
   {
@@ -105,8 +151,8 @@ namespace utility {
     static_pow_compute<N, P, ((P % 2) == 0)>::value - 1;
   };
 
-} // utility
+  /** @} */
 
-# include <vaucanson/misc/static.hxx>
+} // utility
 
 #endif // MISC_STATIC_HH

@@ -46,10 +46,12 @@ AC_CONFIG_FILES([
 	Makefile
 	include/vaucanson/config/pconf.hh:include/vaucanson/config/pconf-hh.in
 	src/Makefile
-	src/tests/defs
 	src/tests/Makefile
 	src/tests/check/Makefile
+	src/tests/check/defs
+	src/tests/sanity/Makefile
 	src/tests/fundamental/Makefile
+	src/tests/misc/Makefile
 	src/tests/algebra/Makefile
 	src/tests/algebra/series/Makefile
 	src/tests/algebra/series/krat/Makefile

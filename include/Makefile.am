@@ -2,116 +2,194 @@
 #
 # $Id$
 
-nobase_include_HEADERS = \
-vaucanson/config/system.hh\
-vaucanson/config/pconf.hh\
-vaucanson/config/rel_ops_work_around_g++2.hh\
-vaucanson/algebra/concept/alphabets_base.hh\
-vaucanson/algebra/concept/concepts.hh\
-vaucanson/algebra/concept/freemonoid_base.hh\
-vaucanson/algebra/concept/monoid_base.hh\
-vaucanson/algebra/concept/numerical_semiring.hh\
-vaucanson/algebra/concept/semigroup_base.hh\
-vaucanson/algebra/concept/semiring_base.hh\
-vaucanson/algebra/concept/series_base.hh\
-vaucanson/algebra/concept/tropical_semiring.hh\
-vaucanson/algebra/concept/letter.hh\
-vaucanson/algebra/concrete/alphabets/alphabets.hh\
-vaucanson/algebra/concrete/alphabets/predefs.hh\
-vaucanson/algebra/concrete/alphabets/set_alphabet.hh\
-vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh\
-vaucanson/algebra/concrete/free_monoid/predefs.hh\
-vaucanson/algebra/concrete/free_monoid/str_words.hh\
-vaucanson/algebra/concrete/free_monoid/words.hh\
-vaucanson/algebra/concrete/letter/range.hh\
-vaucanson/algebra/concrete/letter/char_letter.hh\
-vaucanson/algebra/concrete/semiring/numerical_semiring.hh\
-vaucanson/algebra/concrete/semiring/tropical_semiring.hh\
-vaucanson/algebra/concrete/series/rat/depth_visitor.hh\
-vaucanson/algebra/concrete/series/rat/dump_visitor.hh\
-vaucanson/algebra/concrete/series/rat/exp.hh\
-vaucanson/algebra/concrete/series/rat/nodes.hh\
-vaucanson/algebra/concrete/series/rat/random_visitor.hh\
-vaucanson/algebra/concrete/series/generalized.hh\
-vaucanson/algebra/concrete/series/krat_conversion.hh\
-vaucanson/algebra/concrete/series/krat_exp_parser.hh\
-vaucanson/algebra/concrete/series/krat_exp_pattern.hh\
-vaucanson/algebra/concrete/series/krat.hh\
-vaucanson/algebra/concrete/series/polynoms.hh\
-vaucanson/algebra/concrete/series/series.hh\
-vaucanson/algebra/concrete/series/transpose.hh\
-vaucanson/algebra/concrete/predefs.hh\
-vaucanson/algorithms/closure.hh\
-vaucanson/algorithms/complementary.hh\
-vaucanson/algorithms/complete.hh\
-vaucanson/algorithms/compute.hh\
-vaucanson/algorithms/concat.hh\
-vaucanson/algorithms/determinize.hh\
-vaucanson/algorithms/elimination.hh\
-vaucanson/algorithms/extract.hh\
-vaucanson/algorithms/glushkov.hh\
-vaucanson/algorithms/hopcroft.hh\
-vaucanson/algorithms/isomorph.hh\
-vaucanson/algorithms/krat_exp_constant_term.hh\
-vaucanson/algorithms/krat_exp_derivation.hh\
-vaucanson/algorithms/moore.hh\
-vaucanson/algorithms/normalized.hh\
-vaucanson/algorithms/product.hh\
-vaucanson/algorithms/reachable.hh\
-vaucanson/algorithms/realtime.hh\
-vaucanson/algorithms/standard.hh\
-vaucanson/algorithms/thompson.hh\
-vaucanson/algorithms/transpose.hh\
-vaucanson/algorithms/trim.hh\
-vaucanson/algorithms/union.hh\
-vaucanson/algorithms/krat_exp_cderivation.hh\
-vaucanson/algorithms/brzozowski.hh\
-vaucanson/algorithms/aci_canonical.hh\
-vaucanson/algorithms/algo_helper.hh\
-vaucanson/algorithms/krat_exp_realtime.hh\
-vaucanson/automata/concept/automata_base.hh\
-vaucanson/automata/concept/automata.hh\
-vaucanson/automata/concept/concepts.hh\
-vaucanson/automata/concept/copy.hh\
-vaucanson/automata/concept/handlers.hh\
-vaucanson/automata/concept/history.hh\
-vaucanson/automata/concept/relabel_impl.hh\
-vaucanson/automata/concept/tags.hh\
-vaucanson/automata/concept/translate.hh\
-vaucanson/automata/concept/transpose_impl.hh\
-vaucanson/automata/concrete/generalized.hh\
-vaucanson/fundamental/default_ops.hh\
-vaucanson/fundamental/element_base.hh\
-vaucanson/fundamental/element.hh\
-vaucanson/fundamental/element_ops.hh\
-vaucanson/fundamental/fundamental.hh\
-vaucanson/fundamental/meta_element.hh\
-vaucanson/fundamental/meta_set.hh\
-vaucanson/fundamental/op_traits.hh\
-vaucanson/fundamental/predefs.hh\
-vaucanson/fundamental/slots.hh\
-vaucanson/fundamental/structure.hh\
-vaucanson/internal/traits.hh\
-vaucanson/misc/constraints.hh\
-vaucanson/misc/container_ops.hh\
-vaucanson/misc/converter.hh\
-vaucanson/misc/dot_dump.hh\
-vaucanson/misc/fsm_dump.hh\
-vaucanson/misc/functors.hh\
-vaucanson/misc/limits.hh\
-vaucanson/misc/misc_constraints.hh\
-vaucanson/misc/numerical_constraints.hh\
-vaucanson/misc/random.hh\
-vaucanson/misc/ref.hh\
-vaucanson/misc/selectors.hh\
-vaucanson/misc/static.hh\
-vaucanson/misc/type_constraints.hh\
-vaucanson/misc/contract.hh\
-vaucanson/tools/automaton_tools.hh\
-vaucanson/tools/gen_book.hh\
-vaucanson/tools/gen_random.hh\
-vaucanson/tools/usual.hh\
-vaucanson/tools/usual_macros.hh
-
 EXTRA_DIST = vaucanson/config/pconf-hh.in
 
+nobase_include_HEADERS =					     \
+	vaucanson/config/system.hh				     \
+	vaucanson/config/pconf.hh				     \
+	vaucanson/config/math.hh				     \
+	vaucanson/misc/unique.hh				     \
+	vaucanson/misc/selectors.hh				     \
+	vaucanson/misc/utility.hh				     \
+	vaucanson/misc/static.hh				     \
+	vaucanson/misc/unique.hxx				     \
+	vaucanson/misc/unique.hcc				     \
+	vaucanson/fundamental/predecls.hh			     \
+	vaucanson/fundamental/syntactic_decorator.hh		     \
+	vaucanson/fundamental/syntactic_decorator.hxx		     \
+								     \
+	vaucanson/misc/unchecked/dot_dump.hh			     \
+	vaucanson/misc/unchecked/fsm_dump.hh			     \
+	vaucanson/misc/unchecked/random.hh			     \
+	vaucanson/misc/unchecked/random.hxx			     \
+	vaucanson/misc/unchecked/ref.hh				     \
+	vaucanson/misc/unchecked/ref.hxx			     \
+	vaucanson/algebra/concept/alphabets_base.hh		     \
+	vaucanson/algebra/concept/alphabets_base.hxx		     \
+	vaucanson/algebra/concept/concepts.hh			     \
+	vaucanson/algebra/concept/concepts.hxx			     \
+	vaucanson/algebra/concept/freemonoid_base.hh		     \
+	vaucanson/algebra/concept/freemonoid_base.hxx		     \
+	vaucanson/algebra/concept/letter.hh			     \
+	vaucanson/algebra/concept/monoid_base.hh		     \
+	vaucanson/algebra/concept/monoid_base.hxx		     \
+	vaucanson/algebra/concept/numerical_semiring.hh		     \
+	vaucanson/algebra/concept/semigroup_base.hh		     \
+	vaucanson/algebra/concept/semigroup_base.hxx		     \
+	vaucanson/algebra/concept/semiring_base.hh		     \
+	vaucanson/algebra/concept/semiring_base.hxx		     \
+	vaucanson/algebra/concept/series_base.hh		     \
+	vaucanson/algebra/concept/series_base.hxx		     \
+	vaucanson/algebra/concept/tropical_semiring.hh		     \
+	vaucanson/algebra/concept/tropical_semiring.hxx		     \
+	vaucanson/algebra/concrete/alphabets/alphabets.hh	     \
+	vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh   \
+	vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx  \
+	vaucanson/algebra/concrete/alphabets/predefs.hh		     \
+	vaucanson/algebra/concrete/alphabets/set_alphabet.hh	     \
+	vaucanson/algebra/concrete/alphabets/set_alphabet.hxx	     \
+	vaucanson/algebra/concrete/free_monoid/predefs.hh	     \
+	vaucanson/algebra/concrete/free_monoid/str_words.hh	     \
+	vaucanson/algebra/concrete/free_monoid/str_words.hxx	     \
+	vaucanson/algebra/concrete/free_monoid/words.hh		     \
+	vaucanson/algebra/concrete/free_monoid/words.hxx	     \
+	vaucanson/algebra/concrete/letter/char_letter.hh	     \
+	vaucanson/algebra/concrete/letter/range.hh		     \
+	vaucanson/algebra/concrete/letter/range.hxx		     \
+	vaucanson/algebra/concrete/letter/couple_letter.hxx	     \
+	vaucanson/algebra/concrete/letter/couple_letter.hh	     \
+	vaucanson/algebra/concrete/semiring/numerical_semiring.hh    \
+	vaucanson/algebra/concrete/semiring/numerical_semiring.hxx   \
+	vaucanson/algebra/concrete/semiring/tropical_semiring.hh     \
+	vaucanson/algebra/concrete/semiring/tropical_semiring.hxx    \
+	vaucanson/algebra/concrete/series/rat/depth_visitor.hh	     \
+	vaucanson/algebra/concrete/series/rat/depth_visitor.hxx	     \
+	vaucanson/algebra/concrete/series/rat/dump_visitor.hh	     \
+	vaucanson/algebra/concrete/series/rat/dump_visitor.hxx	     \
+	vaucanson/algebra/concrete/series/rat/exp.hh		     \
+	vaucanson/algebra/concrete/series/rat/exp.hxx		     \
+	vaucanson/algebra/concrete/series/rat/nodes.hh		     \
+	vaucanson/algebra/concrete/series/rat/nodes.hxx		     \
+	vaucanson/algebra/concrete/series/rat/random_visitor.hh	     \
+	vaucanson/algebra/concrete/series/rat/random_visitor.hxx     \
+	vaucanson/algebra/concrete/series/generalized.hh	     \
+	vaucanson/algebra/concrete/series/generalized.hxx	     \
+	vaucanson/algebra/concrete/series/krat.hh		     \
+	vaucanson/algebra/concrete/series/krat.hxx		     \
+	vaucanson/algebra/concrete/series/krat_conversion.hh	     \
+	vaucanson/algebra/concrete/series/krat_conversion.hxx	     \
+	vaucanson/algebra/concrete/series/krat_exp_parser.hh	     \
+	vaucanson/algebra/concrete/series/krat_exp_parser.hxx	     \
+	vaucanson/algebra/concrete/series/krat_exp_pattern.hh	     \
+	vaucanson/algebra/concrete/series/krat_exp_pattern.hxx	     \
+	vaucanson/algebra/concrete/series/polynoms.hh		     \
+	vaucanson/algebra/concrete/series/polynoms.hxx		     \
+	vaucanson/algebra/concrete/series/series.hh		     \
+	vaucanson/algebra/concrete/series/series.hxx		     \
+	vaucanson/algebra/concrete/series/transpose.hh		     \
+	vaucanson/algebra/concrete/series/transpose.hxx		     \
+	vaucanson/algebra/concrete/series/krat_coefficient.hxx	     \
+	vaucanson/algebra/concrete/series/krat_coefficient.hh	     \
+	vaucanson/algebra/concrete/series/krat_exp_support.hxx	     \
+	vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx \
+	vaucanson/algebra/concrete/predefs.hh			     \
+	vaucanson/algorithms/closure.hh				     \
+	vaucanson/algorithms/closure.hxx			     \
+	vaucanson/algorithms/complementary.hh			     \
+	vaucanson/algorithms/complementary.hxx			     \
+	vaucanson/algorithms/complete.hh			     \
+	vaucanson/algorithms/complete.hxx			     \
+	vaucanson/algorithms/compute.hh				     \
+	vaucanson/algorithms/compute.hxx			     \
+	vaucanson/algorithms/concat.hh				     \
+	vaucanson/algorithms/concat.hxx				     \
+	vaucanson/algorithms/determinize.hh			     \
+	vaucanson/algorithms/determinize.hxx			     \
+	vaucanson/algorithms/elimination.hh			     \
+	vaucanson/algorithms/elimination.hxx			     \
+	vaucanson/algorithms/extract.hh				     \
+	vaucanson/algorithms/extract.hxx			     \
+	vaucanson/algorithms/glushkov.hh			     \
+	vaucanson/algorithms/glushkov.hxx			     \
+	vaucanson/algorithms/hopcroft.hh			     \
+	vaucanson/algorithms/hopcroft.hxx			     \
+	vaucanson/algorithms/isomorph.hh			     \
+	vaucanson/algorithms/isomorph.hxx			     \
+	vaucanson/algorithms/krat_exp_constant_term.hh		     \
+	vaucanson/algorithms/krat_exp_constant_term.hxx		     \
+	vaucanson/algorithms/krat_exp_derivation.hh		     \
+	vaucanson/algorithms/krat_exp_derivation.hxx		     \
+	vaucanson/algorithms/moore.hh				     \
+	vaucanson/algorithms/moore.hxx				     \
+	vaucanson/algorithms/normalized.hh			     \
+	vaucanson/algorithms/normalized.hxx			     \
+	vaucanson/algorithms/product.hh				     \
+	vaucanson/algorithms/product.hxx			     \
+	vaucanson/algorithms/reachable.hh			     \
+	vaucanson/algorithms/reachable.hxx			     \
+	vaucanson/algorithms/realtime.hh			     \
+	vaucanson/algorithms/realtime.hxx			     \
+	vaucanson/algorithms/standard.hh			     \
+	vaucanson/algorithms/standard.hxx			     \
+	vaucanson/algorithms/thompson.hh			     \
+	vaucanson/algorithms/thompson.hxx			     \
+	vaucanson/algorithms/transpose.hh			     \
+	vaucanson/algorithms/transpose.hxx			     \
+	vaucanson/algorithms/trim.hh				     \
+	vaucanson/algorithms/trim.hxx				     \
+	vaucanson/algorithms/union.hh				     \
+	vaucanson/algorithms/union.hxx				     \
+	vaucanson/algorithms/krat_exp_cderivation.hxx		     \
+	vaucanson/algorithms/krat_exp_cderivation.hh		     \
+	vaucanson/algorithms/brzozowski.hxx			     \
+	vaucanson/algorithms/brzozowski.hh			     \
+	vaucanson/algorithms/aci_canonical.hxx			     \
+	vaucanson/algorithms/aci_canonical.hh			     \
+	vaucanson/algorithms/algo_helper.hxx			     \
+	vaucanson/algorithms/algo_helper.hh			     \
+	vaucanson/algorithms/krat_exp_realtime.hxx		     \
+	vaucanson/algorithms/krat_exp_realtime.hh		     \
+	vaucanson/algorithms/krat_exp_linearize.hxx		     \
+	vaucanson/algorithms/krat_exp_linearize.hh		     \
+	vaucanson/algorithms/berry_sethi.hxx			     \
+	vaucanson/algorithms/berry_sethi.hh			     \
+	vaucanson/algorithms/derivates_automaton.hxx		     \
+	vaucanson/algorithms/derivates_automaton.hh		     \
+	vaucanson/algorithms/krat_exp_partial_derivation.hxx	     \
+	vaucanson/algorithms/krat_exp_partial_derivation.hh	     \
+	vaucanson/automata/concept/automata.hh			     \
+	vaucanson/automata/concept/automata.hxx			     \
+	vaucanson/automata/concept/automata_base.hh		     \
+	vaucanson/automata/concept/automata_base.hxx		     \
+	vaucanson/automata/concept/automata_ops.hxx		     \
+	vaucanson/automata/concept/automata_ops.hh		     \
+	vaucanson/automata/concept/concepts.hh			     \
+	vaucanson/automata/concept/concepts.hxx			     \
+	vaucanson/automata/concept/copy.hh			     \
+	vaucanson/automata/concept/copy.hxx			     \
+	vaucanson/automata/concept/handlers.hh			     \
+	vaucanson/automata/concept/handlers.hxx			     \
+	vaucanson/automata/concept/history.hh			     \
+	vaucanson/automata/concept/history.hxx			     \
+	vaucanson/automata/concept/kinds.hh			     \
+	vaucanson/automata/concept/kinds.hxx			     \
+	vaucanson/automata/concept/relabel_impl.hh		     \
+	vaucanson/automata/concept/relabel_impl.hxx		     \
+	vaucanson/automata/concept/tags.hh			     \
+	vaucanson/automata/concept/tags.hxx			     \
+	vaucanson/automata/concept/translate.hh			     \
+	vaucanson/automata/concept/translate.hxx		     \
+	vaucanson/automata/concept/transpose_impl.hh		     \
+	vaucanson/automata/concept/transpose_impl.hxx		     \
+	vaucanson/automata/concrete/generalized.hh		     \
+	vaucanson/automata/concrete/generalized.hxx		     \
+	vaucanson/automata/concrete/graph.hxx			     \
+	vaucanson/automata/concrete/graph.hh			     \
+	vaucanson/automata/concrete/kind_adapter.hh		     \
+	vaucanson/tools/automaton_tools.hh			     \
+	vaucanson/tools/gen_book.hh				     \
+	vaucanson/tools/gen_book.hxx				     \
+	vaucanson/tools/gen_random.hh				     \
+	vaucanson/tools/gen_random.hxx				     \
+	vaucanson/tools/usual.hh				     \
+	vaucanson/tools/usual_macros.hh

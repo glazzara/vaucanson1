@@ -1,4 +1,4 @@
-// default_ops.hh
+// fundamental/default_ops.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,112 +18,88 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef FUNDAMENTAL_DEFAULT_OPS_HH
-# define FUNDAMENTAL_DEFAULT_OPS_HH
+#ifndef VCSN_FUNDAMENTAL_DEFAULT_OPS_HH
+# define VCSN_FUNDAMENTAL_DEFAULT_OPS_HH
 
-# include <vaucanson/config/system.hh>
-# include <cassert>
+/** @addtogroup fundamental *//** @{ */
+/** @addtogroup operators   *//** @{ */
+/**
+ * @file default_ops.hh
+ * @brief Default implementations for standard @c Element operations.
+ */
+/** @} */
+
+# include <vaucanson/fundamental/predecls.hh>
 # include <vaucanson/misc/selectors.hh>
-# include <vaucanson/fundamental/predefs.hh>
 
 namespace vcsn {
 
-  /*! @addtogroup fundamental */ /*! @{ */
-  /*! @addtogroup operators   */ /*! @{ */
+  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup operators   *//** @{ */
 
-  /** operator over Structure<S> that checks if a value is in a set.
-   *  op_contains is an operator appliable on every structure which
+  /*--------------------.
+  | Structure::contains |
+  `--------------------*/
+
+  /** Check whether a value is contained in a set.
+   *  @c op_contains is an operator appliable on every structure; this
    *  is the "is in" relation.
    */
   template<typename S, typename T>
   bool op_contains(const Structure<S>& set, const T& value);
 
-  /*! operator over Structure<S> that returns a random element in the set.
-   *  
-   */
-  template <typename S, typename T>
-  Element<S, T> op_choose(const Structure<S>& set, SELECTOR(T));
+  /*---------------------.
+  | Standard comparisons |
+  `---------------------*/
 
-  /*! equality operator on two elements of a Structure<S>.
-   *
-   */
+  /// Equality between two structured values.
   template<typename S, typename T, typename U>
-  bool op_eq(SELECTOR(Structure<S>),
-	     const T& v1, 
-	     const U& v2);
+  bool op_eq(const Structure<S> &se, const T& v1, const U& v2);
 
-  /*! difference operator on two elements of a Structure<S>.
-   *
-   */
+  /// Ordered comparison between two structured values.
   template<typename S, typename T, typename U>
-  bool op_xeq(SELECTOR(Structure<S>),
-	      const T& v1,
-	      const U& x2);
+  bool op_lt(const Structure<S> &se, const T& v1, const U& v2);
 
-  /*! comparison operator that is true if v1 is less than v2.
-   *
-   */
-  template<typename S, typename T, typename U>
-  bool op_lt(SELECTOR(Structure<S>),
-	     const T& v1, 
-	     const U& v2);
+  /*------------.
+  | Conversions |
+  `------------*/
 
-  /*! comparison operator that is true if v1 is less thant v2.
-   *  
-   */
-  // FIXME: < is "typely" symmetrical. Why have we two versions ?
-  template<typename S, typename T, typename U>
-  bool op_llt(SELECTOR(Structure<S>),
-	      const T& v1,
-	      const U& x2);
-
-  /*! comparison operator that is true if v1 is less thant v2.
-   *  
-   */
-  // FIXME: < is "typely" symmetrical. Why have we two versions ?
-  template<typename S, typename T, typename U>
-  bool op_rlt(SELECTOR(Structure<S>),
-	      const T& x1,
-	      const U& v2);
-
-
-  /*! conversion operator from T to R.
-   *
-   */
-  template<typename R, typename S, typename T>
-  R op_convert(SELECTOR(R), 
-	       SELECTOR(Structure<S>), const T& data);
+  /// Default conversion between value types with computation
+  template<typename S, typename R, typename T>
+  R op_convert(const Structure<S> &se, 
+	       SELECTOR(R), const T& data);
       
+  /// Pass-through conversion
   template<typename S, typename T>
-  const T& op_convert(SELECTOR(T),
-		      SELECTOR(Structure<S>), const T& data);
+  const T& op_convert(const Structure<S>& se,
+		      SELECTOR(T), const T& from_data);
 
+  /// Pass-through conversion between compatible structures
   template<typename S, typename T>
-  const T& op_convert(SELECTOR(T), SELECTOR(Structure<S>), 
-		      SELECTOR(Structure<S>), const T& data);
+  const T& op_convert(const Structure<S>& se, SELECTOR(T), 
+		      const Structure<S>& from_se, const T& from_data);
 
-  /*! default constructor of T using Structure<S>.
-   *
-   */
+  /*---------------------.
+  | Default construction |
+  `---------------------*/
+
+  /// Default construction of values using @c Structure.
   template<typename S, typename T>
-  T op_default(SELECTOR(Structure<S>), SELECTOR(T));
+  T op_default(const Structure<S>& se, SELECTOR(T));
 
 
-  /*! swap operator between two implementations of a Structure<S>.
-   *
-   */
+  /*-----.
+  | Swap |
+  `-----*/
+
+  /// Default swap operator.
   template<typename S, typename T>
-  void op_swap(SELECTOR(Structure<S>),
-	       T& v1, 
-	       T& v2);
+  void op_swap(const Structure<S>& se, T& v1, T& v2);
 
-  /*! swap operator between two implementations of a Structure<S>.
-   *
-   */
-  template<typename S, typename T, typename U>
-  void op_xswap(SELECTOR(Structure<S>),
-		const T& v1,
-		const U& x2);
+  /*-----------.
+  | Assignment |
+  `-----------*/
+
 
   /*! assignement operator between two implementations of a Structure<S>.
    *

@@ -22,82 +22,91 @@
 # define FUNDAMENTAL_STRUCTURE_HXX
 
 # include <vaucanson/fundamental/structure.hh>
-# include <vaucanson/fundamental/element.hh>
-# include <vaucanson/internal/traits.hh>
 
 namespace vcsn {
     
-  /*----------.
-  | Structure |
-  `----------*/
+  /*-----------------------------------.
+  | Delegations for Structure::contain |
+  `-----------------------------------*/
 
-  template <typename Self>
+  template <typename S>
   template <typename T>
   bool 
-  Structure<Self>::contains(const Element<Self, T>& elt) const
+  Structure<S>::contains(const Element<S, T>& elt) const
   { 
     return op_contains(self(), elt.value()); 
   }
 
-  template <class Self>
-  template <class T>
-  Element<Self, T>
-  Structure<Self>::choose(SELECTOR(T)) const
-  {
-    return op_choose(self(), SELECT(T));
-  }
-
-  template <typename Self>
+  template <typename S>
   template <typename T>
   bool 
-  Structure<Self>::contains(const T& elt_value) const
+  Structure<S>::contains(const T& elt_value) const
   { 
     return op_contains(self(), elt_value); 
   }
     
-  template <typename Self>
-  template <typename S, typename T>
+  template <typename S>
+  template <typename OtherS, typename T>
   bool 
-  Structure<Self>::contains(const Element<S, T>& other) const
+  Structure<S>::contains(const Element<OtherS, T>& other) const
   { 
     return false; 
   }
+
+  /*---------------------------------.
+  | Delegation for Structure::choose |
+  `---------------------------------*/
+
+  template <class S>
+  template <class T>
+  Element<S, T>
+  Structure<S>::choose(SELECTOR(T)) const
+  {
+    return op_choose(self(), SELECT(T));
+  }
     
-  // static inheritance stuff below
-  template <typename Self>
-  Self&        
-  Structure<Self>::self()
+  /*-------------------------.
+  | Static inheritance stuff |
+  `-------------------------*/
+
+  template <typename S>
+  S&        
+  Structure<S>::self()
   { 
     return static_cast<self_t&>(*this); 
   }
     
-  template <typename Self>
-  const Self&  
-  Structure<Self>::self() const 
+  template <typename S>
+  const S&  
+  Structure<S>::self() const 
   { 
     return static_cast<const self_t&>(*this); 
   }
     
-  template <typename Self>
-  Structure<Self>::Structure()
+
+  /*-----------------------.
+  | Protected constructors |
+  `-----------------------*/
+
+  template <typename S>
+  Structure<S>::Structure()
   {}
 
-  template <typename Self>
-  Structure<Self>::Structure(const Structure&)
+  template <typename S>
+  Structure<S>::Structure(const Structure&)
   {}
 
+
+  /*--------------------.
+  | Default Comparison  |
+  `--------------------*/
+  template<typename S>
+  bool operator==(const vcsn::Structure<S>& a,
+		  const vcsn::Structure<S>& b)
+  { 
+    return true; 
+  }
 
 } // vcsn
 
-
-/*--------------------.
-| default comparisons |
-`--------------------*/
-template<typename S>
-bool operator==(const vcsn::Structure<S>& a,
-		const vcsn::Structure<S>& b)
-{ 
-  return true; 
-}
-
-#endif // FUNDAMENTAL_STRUCTURE_HXX
+#endif // VCSN_FUNDAMENTAL_STRUCTURE_HXX

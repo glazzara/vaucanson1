@@ -10,7 +10,7 @@ namespace utility
 {
   namespace unique
   {
-    hashmap_base::~hashmap_base() {}
+    uniquelist_base::~uniquelist_base() {}
 
     unique_map::map_t& unique_map::instance()
     { 

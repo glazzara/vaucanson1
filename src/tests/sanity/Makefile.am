@@ -1,6 +1,6 @@
-# -include $(top_srcdir)/src/check/Makefile.check
 
-TESTS = includes.test
+check-local:
+	TOP_SRCDIR=$(top_srcdir) $(SHELL) $(srcdir)/includes.test
+
 EXTRA_DIST = includes.test
-
-CLEANFILES = failures incltest.cc
+CLEANFILES = incltest.*

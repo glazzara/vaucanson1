@@ -1,3 +1,4 @@
+#include <vaucanson/config/system.hh>
 #include <iostream>
 #include <cassert>
 

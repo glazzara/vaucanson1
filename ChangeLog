@@ -1,3 +1,98 @@
+2003-06-10  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/misc/utility.hh: Add. Document.
+
+	* include/vaucanson/misc/constraints.hh,
+	include/vaucanson/misc/container_ops.hh,
+	include/vaucanson/misc/container_ops.hxx,
+	include/vaucanson/misc/converter.hh,
+	include/vaucanson/misc/converter.hxx,
+	include/vaucanson/misc/functors.hh,
+	include/vaucanson/misc/functors.hxx,
+	include/vaucanson/misc/limits.hh,
+	include/vaucanson/misc/misc_constraints.hh,
+	include/vaucanson/misc/numerical_constraints.hh,
+	include/vaucanson/misc/type_constraints.hh,
+	include/vaucanson/misc/static.hxx: Remove.
+	
+	* include/vaucanson/config/rel_ops_work_around_g++2.hh: Remove.
+	* include/vaucanson/fundamental/meta_set.hh: Remove.
+	
+	* src/tests/misc/Makefile.am, src/tests/misc/unique.cc,
+	src/tests/misc/static.cc, src/tests/misc/selectors.cc,
+	src/tests/misc/koenig.cc: Add.
+	* src/tests/check/assert_test.cc: Rename to...
+	* src/tests/misc/assert_test.cc: this.
+	
+	* include/vaucanson/config/math.hh: Add. Document.
+	
+	* include/vaucanson/fundamental/structure.hh: Document
+	more. Cleanup. Simplify.
+	* include/vaucanson/fundamental/structure.hxx: Cleanup. Simplify.
+
+	* include/vaucanson/fundamental/slots.hh: Eradicate
+	ValueSlots's. Use dynamic_traits instead of MetaSet.
+	* include/vaucanson/fundamental/slots.hxx: Update accordingly.
+	
+	* include/vaucanson/fundamental/predefs.hh: Rename to...
+	* include/vaucanson/fundamental/predecls.hh: this. Document
+	more. Cleanup. Import undefined_type from traits.hh.
+	* include/vaucanson/internal/traits.hh: Remove.
+	
+	* include/vaucanson/fundamental/op_traits.hh: Rename to...
+	* include/vaucanson/fundamental/element_op_traits.hh:
+	this. Document. Cleanup. Simplify.
+	* include/vaucanson/fundamental/op_traits.hxx: Rename to...
+	* include/vaucanson/fundamental/element_op_traits.hxx:
+	this. Cleanup. Simplify.
+
+	* include/vaucanson/fundamental/meta_element.hh: Rename to...
+	* include/vaucanson/fundamental/syntactic_decorator.hh:
+	this. Document. Cleanup. Simplify.
+	* include/vaucanson/fundamental/meta_element.hxx: Rename to...
+	* include/vaucanson/fundamental/syntactic_decorator.hxx:
+	this. Cleanup. Simplify.
+
+	* include/vaucanson/fundamental/fundamental.hh: Simplify.
+
+	* include/vaucanson/fundamental/element_ops.hh: Document more. Cleanup. Simplify.
+	* include/vaucanson/fundamental/element_ops.hxx: Cleanup. Simplify. More sanity checks.
+	
+	* include/vaucanson/fundamental/element_base.hh: Rename to...
+	* include/vaucanson/fundamental/meta_element_root.hh:
+	this. Document. Cleanup. Simplify.
+	* include/vaucanson/fundamental/element_base.hxx: Rename to...
+	* include/vaucanson/fundamental/meta_element_root.hxx:
+	this. Cleanup. Simplify.
+	* include/vaucanson/fundamental/element.hh: Document more
+	accurately. Cleanup. Simplify.
+	* include/vaucanson/fundamental/element.hxx:
+	Cleanup. Simplify. More sanity checks.
+	* include/vaucanson/fundamental/default_ops.hh:
+	Document. Cleanup. Simplify.
+	* include/vaucanson/fundamental/default_ops.hxx:
+	Cleanup. Simplify.
+	* src/tests/misc/assert_test.cc: Include system.hh.
+	* include/vaucanson/misc/unique.hh,
+	include/vaucanson/misc/unique.hcc,
+	include/vaucanson/misc/unique.hxx: Document. Simplify.
+	* include/vaucanson/misc/selectors.hh: Document.
+	* include/vaucanson/misc/static.hh: Document. Complete
+	remove_reference.
+	* include/vaucanson/config/system.hh: Document. Cleanup. Simplify.
+	* include/Makefile.am: Beautify.
+	* doc/doc.doxy.in: Cleanup eye candies.
+	* src/tests/sanity/Makefile.am, src/tests/sanity/includes.test:
+	Cleanup.
+	* src/tests/defs.in: Rename to...
+	* src/tests/check/defs.in: this. Cleanup. Use flags computed by
+	configure.
+	* src/tests/check/Makefile.flags: Use flags computed by configure.
+	* src/tests/check/Makefile.check: Simplify.
+	* src/tests/check/Makefile.am: Remove mention of `assert_test'.
+	* src/tests/Makefile.am (SUBDIRS): Re-order. Mention `misc'.
+	* configure.ac: Arrange directory order in AC_CONFIG_FILES.
+
 2003-06-06  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* src/tests/check/assert_test.cc: Add.

@@ -8,25 +8,29 @@
 
 set -e
 
-rm -f failures
+rm -f incltest.*
 
-find $abs_top_srcdir/include/vaucanson -name "${1-*}.hh" \
-                    -a ! -path '*/old/*' \
-                    -a ! -path '*/obsolete/*' -type f -print |
+( cd $TOP_SRCDIR/include; find vaucanson -name \*.hh | grep -v '/old/\|/obsolete/' ) | \
 while read file; do
-   name=`expr $file : "$abs_top_srcdir/\(.*\)"`
-   echo "#include <$name>" > incltest.cc
-   if $CXX $CPPFLAGS $CXXFLAGS -Wno-unused incltest.cc -c -O0 -o /dev/null; then
-      echo "TEST: [OK]   $name"
+   echo "#include <$file>" > incltest.cc
+   if $CXXCOMPILE -c incltest.cc -o incltest.o >/dev/null 2>incltest.err; then
+      if [ $VERBOSE -ne 0 ]; then
+        echo "TEST: [OK]   $name"
+      fi
    else
-      echo "TEST: [FAIL] $name"
-      echo "  $name" >> failures
+      if [ $VERBOSE -ne 0 ]; then
+        echo "TEST: [FAIL] $name"
+      fi
+      echo ">>> $name:" >> incltest.fail
+      cat incltest.err >> incltest.fail
+      rm -f incltest.err
    fi
 done
 
-if test -f failures; then
+if test -f incltest.fail; then
    echo "Failed files:"
-   cat failures
-   rm failures
-   exit 1;
+   cat incltest.fail
+   rm -f incltest.fail
+   exit 1
 fi
+exit 0

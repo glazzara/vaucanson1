@@ -11,7 +11,7 @@ OUTPUT_DIRECTORY       = ref
 OUTPUT_LANGUAGE        = English
 EXTRACT_ALL            = NO
 EXTRACT_PRIVATE        = NO
-EXTRACT_STATIC         = NO
+EXTRACT_STATIC         = YES 
 EXTRACT_LOCAL_CLASSES  = NO
 HIDE_UNDOC_MEMBERS     = YES
 HIDE_UNDOC_CLASSES     = YES
@@ -26,8 +26,8 @@ STRIP_CODE_COMMENTS    = YES
 CASE_SENSE_NAMES       = YES
 SHORT_NAMES            = YES
 HIDE_SCOPE_NAMES       = YES
-VERBATIM_HEADERS       = YES
-SHOW_INCLUDE_FILES     = YES
+VERBATIM_HEADERS       = NO
+SHOW_INCLUDE_FILES     = NO
 JAVADOC_AUTOBRIEF      = YES
 DETAILS_AT_TOP         = NO
 INHERIT_DOCS           = YES
@@ -73,7 +73,7 @@ FILTER_SOURCE_FILES    = NO
 #---------------------------------------------------------------------------
 # configuration options related to source browsing
 #---------------------------------------------------------------------------
-SOURCE_BROWSER         = YES
+SOURCE_BROWSER         = NO
 INLINE_SOURCES         = NO
 REFERENCED_BY_RELATION = YES
 REFERENCES_RELATION    = YES

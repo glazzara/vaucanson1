@@ -1,4 +1,4 @@
-// fundamental/op_traits.hh
+// fundamental/element_op_traits.hh
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
@@ -17,20 +17,30 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef FUNDAMENTAL_OP_TRAITS_HH
-# define FUNDAMENTAL_OP_TRAITS_HH
+#ifndef VCSN_FUNDAMENTAL_ELEMENT_OP_TRAITS_HH
+# define VCSN_FUNDAMENTAL_ELEMENT_OP_TRAITS_HH
 
-#include <vaucanson/fundamental/predefs.hh>
+/** @addtogroup fundamental *//** @{ */
+/** @addtogroup operators *//** @{ */
+/** 
+ * @file element_op_traits.hh
+ * @brief Declaration of default arithmetical operator traits for @c Element
+ */
+/** @} @} */
+
+#include <vaucanson/fundamental/predecls.hh>
 
 namespace vcsn {
 
-  /*! @addtogroup fundamental */ /*! @{ */
+  /** @addtogroup fundamental *//** @{ */
+  /** @addtogroup operators *//** @{ */
 
   /*--------------.
   | op_add_traits |
   `--------------*/
-  //! The type of the result of addition between 2 Elements.
-  /*! This is a trait to determine the result of addition between 2 Elements.
+
+  /** The type of the result of addition between two Element instances.
+   * By default, the result type is the type of the first argument.
    */
   template<typename S1, typename S2, typename T1, typename T2>
   struct op_add_traits
@@ -41,9 +51,9 @@ namespace vcsn {
   /*--------------.
   | op_sub_traits |
   `--------------*/
-  //! The type of the result of substraction between 2 Elements.
-  /*! This is a trait to determine the result of substraction between
-    2 Elements.
+
+  /** The type of the result of substraction between two Element instances.
+   * By default, the result type is the type of the first argument.
    */
   template<typename S1, typename S2, typename T1, typename T2>
   struct op_sub_traits
@@ -54,9 +64,9 @@ namespace vcsn {
   /*--------------.
   | op_mul_traits |
   `--------------*/
-  //! The type of the result of multiplication between 2 Elements.
-  /*! This is a trait to determine the result of multiplication
-    between 2 Elements.
+
+  /** The type of the result of multiplication between two Element instances.
+   * By default, the result type is the type of the first argument.
    */
   template<typename S1, typename S2, typename T1, typename T2>
   struct op_mul_traits
@@ -67,8 +77,9 @@ namespace vcsn {
   /*--------------.
   | op_div_traits |
   `--------------*/
-  //! The type of the result of division between 2 Elements.
-  /*! This is a trait to determine the result of division between 2 Elements.
+
+  /** The type of the result of division between two Element instances.
+   * By default, the result type is the type of the first argument.
    */
   template<typename S1, typename S2, typename T1, typename T2>
   struct op_div_traits
@@ -80,8 +91,9 @@ namespace vcsn {
   /*--------------.
   | op_mod_traits |
   `--------------*/
-  //! The type of the result of modulo between 2 Elements.
-  /*! This is a trait to determine the result of modulo between 2 Elements.
+
+  /** The type of the result of modulus between two Element instances.
+   * By default, the result type is the type of the first argument.
    */
   template<typename S1, typename S2, typename T1, typename T2>
   struct op_mod_traits
@@ -89,8 +101,8 @@ namespace vcsn {
     typedef Element<S1, T1> ret_t;
   };
 
-  /*! @} */
+  /** @} @} */
 
 } // vcsn
 
-#endif // FUNDAMENTAL_OP_TRAITS_HH
+#endif // VCSN_FUNDAMENTAL_ELEMENT_OP_TRAITS_HH
