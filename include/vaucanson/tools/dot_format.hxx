@@ -103,7 +103,7 @@ namespace vcsn
 
     template<typename Saver, typename Conv>
     void transducer_dot::operator()(std::ostream& out, const Saver& s, 
-				    const Conv& conv) const
+				    const Conv&) const
     {
       typedef typename Saver::automaton_t auto_t;
       AUTOMATON_TYPES(auto_t);

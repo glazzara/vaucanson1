@@ -50,7 +50,7 @@ namespace vcsn {
     }
 
     template <class S, class Auto>
-    void dot_dump(const TransducerBase<S>& s,
+    void dot_dump(const TransducerBase<S>&,
 		  std::ostream& o,
 		  const Auto& a,
 		  const std::string& name)

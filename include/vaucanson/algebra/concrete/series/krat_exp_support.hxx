@@ -32,6 +32,7 @@
 
 # include <utility>
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
+# include <vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx>
 
 namespace vcsn {
 
@@ -146,7 +147,7 @@ namespace vcsn {
     }
     END
 
-    support_t get() const
+    support_t get()
     {
       support_t ret;
       ext_support_t s = ext_get();
