@@ -3,7 +3,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
 // and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
@@ -29,6 +29,7 @@
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
+# include <vaucanson/misc/support.hh>
 
 namespace vcsn {
 
@@ -87,7 +88,13 @@ namespace vcsn {
     {
       typedef Tm monoid_value_t;
       typedef Tw weight_value_t;
-      typedef polynom<Tm, Tw> support_t;
+      typedef Support<std::map<Tm, Tw> > support_t;
+    };
+
+    template <class Tm, class Tw, class W, class M>
+    struct mute_serie_impl<polynom<Tm, Tw>, W, M>
+    {
+      typedef polynom<M, W>	ret;
     };
 
     template <class Series, class Tm, class Tw>

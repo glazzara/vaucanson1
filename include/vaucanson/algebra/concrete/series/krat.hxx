@@ -35,7 +35,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw>
   inline
-  bool op_contains(const Series<W, M>& , const rat::exp<Tm, Tw>&)
+  bool op_contains(const Series<W, M>&, const rat::exp<Tm, Tw>&)
   { 
     assert(! "op_contains for Element<Series<W,M>, exp<Tm,Tw> > not defined.");
     return true; 
@@ -53,10 +53,10 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   inline
   typename series_traits<rat::exp<Tm, Tw> >::support_t
-  op_support(const Series<W, M>&, const rat::exp<Tm, Tw>& m)
+  op_support(const Series<W, M>& s, const rat::exp<Tm, Tw>& m)
   {
     vcsn::SupportMatcher<Series<W, M>, rat::exp<Tm, Tw>,
-      DispatchFunction<rat::exp<Tm, Tw> > > matcher;
+      DispatchFunction<rat::exp<Tm, Tw> > > matcher(s);
     matcher.match(m);
     return matcher.get();
   }
@@ -295,10 +295,10 @@ namespace vcsn {
 
   template<typename Tm, typename Tw>
   inline
-  bool krat_simplify_left_is_const( rat::exp<Tm, Tw>& dst,
-				    const rat::exp<Tm, Tw>& other, 
-				    typename 
-				    rat::Node<Tm, Tw>::type other_type)
+  bool krat_simplify_left_is_const(rat::exp<Tm, Tw>& dst,
+				   const rat::exp<Tm, Tw>& other, 
+				   typename 
+				   rat::Node<Tm, Tw>::type other_type)
   {
     typedef rat::Node<Tm, Tw>			node_t;
     typedef rat::LeftWeighted<Tm, Tw>		n_lweight_t;
@@ -769,14 +769,30 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
-  Tw op_series_get(const Series<W, M>&, 
-		   const rat::exp<Tm, Tw>&,
-		   const oTm&)
+  Tw op_series_get(const Series<W, M>& s, 
+		   const rat::exp<Tm, Tw>& p,
+		   const oTm& m)
   { 
-    // FIXME : doing a get on a krat could be implemented by computed 
-    //         a thompson/glushkov automaton and compute resulting series 
-    //         of m.
-    FIXME("not implemented yet.");
+    typedef vcsn::SupportMatcher<Series<W, M>, rat::exp<Tm, Tw>,
+      DispatchFunction<rat::exp<Tm, Tw> > > matcher_t;
+    typedef typename matcher_t::ext_support_t ext_support_t;
+    // we can do it only on polynomial expresssion.
+   matcher_t matcher(s);
+    
+    matcher.match(p);
+    ext_support_t supp = matcher.ext_get();
+    
+    for_each_const_(ext_support_t, c, supp)
+      if (c->second == m)
+	return c->first;
+
+    // FIXME: other solution :
+    // FIXME: doing a get on a krat could be implemented by computed 
+    // FIXME: a thompson/glushkov automaton and compute resulting series 
+    // FIXME: of m.
+    //    FIXME("not implemented yet.");
+    
+
     return zero_value(SELECT(W), SELECT(Tw));
   }
 

@@ -43,6 +43,12 @@ namespace vcsn {
       typedef std::list<monoid_value_t> support_t;
     };
 
+    template <class Tm, class Tw, class W, class M>
+    struct mute_serie_impl<rat::exp<Tm, Tw>, W, M>
+    {
+      typedef rat::exp<M, W>	ret;
+    };
+
   } // algebra
 
  /*---------------------------------------------.

@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
 // and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
@@ -70,8 +70,20 @@ namespace vcsn {
     template<typename T>
     struct series_traits
     {
-//       typedef traits::undefined_type	monoid_value_t;
-//       typedef traits::undefined_type	weight_value_t;
+      typedef traits::undefined_type	monoid_value_t;
+      typedef traits::undefined_type	weight_value_t;
+    };
+
+    template <typename T, typename W, typename M>
+    struct mute_serie_impl
+    {
+      typedef traits::undefined_type	ret;
+    };
+
+    template <typename T, typename W, typename M>
+    struct mute_series_traits
+    {
+      typedef traits::undefined_type    ret;
     };
 
     /*! @} @} */
@@ -163,6 +175,16 @@ namespace vcsn {
   bool
   is_letter_support(const Element<S, T>& s);
 
+  //! make the first serie be the support of the second. 
+  template <typename S1, typename S2, typename T1, typename T2>
+  void
+  extract_support(Element<S1, T1>&, Element<S2, T2>&);
+
+  //! return the hadamard product of lhs and rhs.
+  template <class S, class T>
+  Element<S, T> hadamard(const Element<S, T>& lhs,
+			 const Element<S, T>& rhs);
+  
   /*! @} @} */
 
   template <typename S, typename T>

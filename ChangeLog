@@ -1,3 +1,20 @@
+2003-06-05  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concept/series_base.hh:
+		(mute_serie_impl): New traits.
+		(mute_series_traits): New traits.
+		(extract_support),(hadamard): New functions.
+	* include/vaucanson/algebra/concept/series_base.hxx:
+		(is_letter_support): Fix supp() use.
+		(extract_support), (hadamard): Implement them.
+	* include/vaucanson/algebra/concrete/series/krat.hh: 
+		(mute_serie_impl): Specialize for rat::exp.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: 
+		Enable 'get' for polynomial expressions.
+	* include/vaucanson/algebra/concrete/series/polynoms.hh:
+		(mute_serie_impl): Specialize for polynom.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Fix.
+
 2003-05-30  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/fundamental/structure.hxx: Remove unused

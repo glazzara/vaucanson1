@@ -2,7 +2,7 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey 
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
 // and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
@@ -187,10 +187,42 @@ namespace vcsn {
   is_letter_support(const Element<S, T>& s)
   {
     typedef typename series_traits<T>::support_t support_t;
-    for_each_const_(support_t, e, s.supp())
-      if (op_size(s.set().monoid(), e->first ) != 1)
+    support_t supp = s.supp();
+    for_each_const_(support_t, e, supp)
+      if (op_size(s.set().monoid(), *e) != 1)
 	return false;
     return true;
+  }
+  
+  template <typename S1, typename S2, typename T1, typename T2>
+  inline
+  void
+  extract_support(Element<S1, T1>& s1, Element<S2, T2>& s2)
+  {
+    typedef typename series_traits<T2>::support_t support_t;
+    typedef typename series_traits<T1>::weight_value_t weight_value_t;
+    for_each_const_(support_t, e, s2.supp())
+      s1.assoc(*e, identity_as<weight_value_t>::of(s1.set().weights()));
+  }
+
+  template <class S, class T>
+  Element<S, T> hadamard(const Element<S, T>& lhs,
+			 const Element<S, T>& rhs)
+  {
+    typedef Element<S, T> serie_t;
+    typedef typename Element<S, T>::monoid_elt_t monoid_elt_t;
+    typedef typename Element<S, T>::weight_t weight_t;
+    typedef typename Element<S, T>::support_t support_t;
+    Element<S, T> output;
+    support_t support = lhs.supp();
+    for (typename support_t::iterator supp = support.begin();
+	 supp != support.end();
+	 ++supp)
+      {
+ 	output +=  lhs.get(*supp) *
+ 	  rhs.get(*supp) * serie_t(lhs.set(), monoid_elt_t(*supp));
+      }
+    return output;
   }
   
 } // vcsn

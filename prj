@@ -1,44 +1,30 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 224)
-(Parent-Version vaucanson 0 223)
-(Version-Log "Index: ChangeLog
-from  Raphaël Poss  <raph@lrde.epita.fr>
-   * include/vaucanson/fundamental/structure.hxx: Remove unused
-   operator!=().
+(Project-Version vaucanson 0 225)
+(Parent-Version vaucanson 0 224)
+(Version-Log "
+Index: ChangeLog
+from  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-   * include/vaucanson/algebra/concept/alphabets_base.hxx: Minor fix.
-
-   * include/vaucanson/algebra/concrete/free_monoid/words.hxx
-   (utility): Add hash specialization.
-
-   * include/vaucanson/algebra/concrete/series/series.hxx (utility):
-   Likewise. Implement operator==().
-
-   * include/vaucanson/algebra/concrete/free_monoid/words.hh: Inherit
-   MetaSet from parent.
-   * include/vaucanson/algebra/concrete/series/series.hh: Likewise. Mention operator==().
-
-
-   * include/vaucanson/algebra/concept/tropical_semiring.hh: Inherit
-   MetaSet from parent, so that defining dynamic_set is no longer
-   necessary.
-   * include/vaucanson/algebra/concept/numerical_semiring.hh: Likewise.
-   * include/vaucanson/algebra/concrete/alphabets/alphabets.hh: Likewise.
-
-   * include/vaucanson/algebra/concept/monoid_base.hh: Add missing
-   MetaSet specialization.
-   * include/vaucanson/algebra/concept/semigroup_base.hh: Likewise.
-   * include/vaucanson/algebra/concept/alphabets_base.hh: Likewise.
-   * include/vaucanson/algebra/concept/series_base.hh: Likewise.
-   * include/vaucanson/algebra/concept/semiring_base.hh: Likewise.
-   * include/vaucanson/algebra/concept/freemonoid_base.hh: Likewise.
-
+	* include/vaucanson/algebra/concept/series_base.hh:
+	(mute_serie_impl): New traits.
+	(mute_series_traits): New traits.
+	(extract_support),(hadamard): New functions.
+	* include/vaucanson/algebra/concept/series_base.hxx:
+	(is_letter_support): Fix supp() use.
+	(extract_support), (hadamard): Implement them.
+	* include/vaucanson/algebra/concrete/series/krat.hh: 
+	(mute_serie_impl): Specialize for rat::exp.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: 
+	Enable 'get' for polynomial expressions.
+	* include/vaucanson/algebra/concrete/series/polynoms.hh:
+	(mute_serie_impl): Specialize for polynom.
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Fix.
 ")
 (New-Version-Log "")
-(Checkin-Time "Fri, 30 May 2003 16:30:19 +0200")
-(Checkin-Login raph)
+(Checkin-Time "Thu, 05 Jun 2003 15:05:07 +0200")
+(Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -120,9 +106,9 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.29 600))
-  (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 664))
-  (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 664))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.30 600))
+  (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
+  (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.13 600))
@@ -157,8 +143,8 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algebra/concept/semigroup_base.hxx (vaucanson/b/11_semigroup_ 1.6 600))
   (include/vaucanson/algebra/concept/semiring_base.hh (vaucanson/b/16_semiring_b 1.9 600))
   (include/vaucanson/algebra/concept/semiring_base.hxx (vaucanson/b/15_semiring_b 1.8 600))
-  (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.15 600))
-  (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.13 600))
+  (include/vaucanson/algebra/concept/series_base.hh (vaucanson/c/11_series_bas 1.16 600))
+  (include/vaucanson/algebra/concept/series_base.hxx (vaucanson/c/10_series_bas 1.14 600))
   (include/vaucanson/algebra/concept/tropical_semiring.hh (vaucanson/b/30_tropical_s 1.8 600))
   (include/vaucanson/algebra/concrete/alphabets/alphabets.hh (vaucanson/29_alphabets. 1.12 600))
   (include/vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh (vaucanson/i/24_decorated_ 1.1 600))
@@ -181,16 +167,16 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx (vaucanson/b/31_tropical_s 1.12 600))
   (include/vaucanson/algebra/concrete/series/generalized.hh (vaucanson/e/36_generalize 1.6 600))
   (include/vaucanson/algebra/concrete/series/generalized.hxx (vaucanson/e/35_generalize 1.6 600))
-  (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.17 600))
-  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.19 600))
+  (include/vaucanson/algebra/concrete/series/krat.hh (vaucanson/c/15_krat.hh 1.18 600))
+  (include/vaucanson/algebra/concrete/series/krat.hxx (vaucanson/c/14_krat.hxx 1.20 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.7 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.3 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.12 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.7 600))
-  (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.15 600))
-  (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.17 600))
+  (include/vaucanson/algebra/concrete/series/polynoms.hh (vaucanson/c/17_polynoms.h 1.16 600))
+  (include/vaucanson/algebra/concrete/series/polynoms.hxx (vaucanson/c/16_polynoms.h 1.18 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hh (vaucanson/e/1_depth_visi 1.7 600))
   (include/vaucanson/algebra/concrete/series/rat/depth_visitor.hxx (vaucanson/d/46_depth_visi 1.6 600))
   (include/vaucanson/algebra/concrete/series/rat/dump_visitor.hh (vaucanson/e/0_dump_visit 1.7 600))
@@ -441,7 +427,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (src/tests/automata/implementation_check/global_consistency_test.hh (vaucanson/g/41_global_con 1.5 600))
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.5 600))
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.2 600))
-  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 711))
+  (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.4 755))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
   (src/tests/check/Makefile.flags (vaucanson/b/5_Makefile.f 1.10 600))
@@ -626,38 +612,38 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Thu, 03 Apr 2003 18:13:09 +0200,
 ;; to version 0.184(w), by max:
 
-  (mical/src/k_ri.cc (vaucanson/j/49_k_ri.cc 1.1 644))
-  (mical/src/k_tssi.cc (vaucanson/j/50_k_tssi.cc 1.1 644))
-  (mical/src/k_deterministic.cc (vaucanson/j/51_k_determin 1.1 644))
-  (mical/src/is_structurally_complete.cc (vaucanson/k/0_is_structu 1.1 644))
-  (mical/src/get_structcomp_sample.cc (vaucanson/k/1_get_struct 1.1 644))
+  (mical/src/k_ri.cc (vaucanson/j/49_k_ri.cc 1.1 600))
+  (mical/src/k_tssi.cc (vaucanson/j/50_k_tssi.cc 1.1 600))
+  (mical/src/k_deterministic.cc (vaucanson/j/51_k_determin 1.1 600))
+  (mical/src/is_structurally_complete.cc (vaucanson/k/0_is_structu 1.1 600))
+  (mical/src/get_structcomp_sample.cc (vaucanson/k/1_get_struct 1.1 600))
   (mical/src/make_mca.cc (vaucanson/k/2_make_mca.c 1.2 600))
   (mical/src/is_not_compatible.cc (vaucanson/k/3_is_not_com 1.1 600))
   (mical/src/fusion.cc (vaucanson/k/4_fusion.cc 1.1 600))
   (mical/src/bs.cc (vaucanson/k/5_bs.cc 1.1 600))
   (mical/src/training/vtrain.toy (vaucanson/k/6_vtrain.toy 1.1 600))
-  (mical/include/internal/k_window.hxx (vaucanson/k/7_k_window.h 1.1 644))
-  (mical/include/internal/k_window.hh (vaucanson/k/8_k_window.h 1.1 644))
-  (mical/include/misc/traits.hh (vaucanson/k/9_traits.hh 1.1 644))
-  (mical/include/fundamental/default_ops.hh (vaucanson/k/10_default_op 1.1 644))
-  (mical/include/fundamental/meta_set.hh (vaucanson/k/11_meta_set.h 1.1 644))
-  (mical/include/fundamental/mix.hh (vaucanson/k/12_mix.hh 1.1 644))
-  (mical/include/tools/predefs.hh (vaucanson/k/13_predefs.hh 1.1 644))
+  (mical/include/internal/k_window.hxx (vaucanson/k/7_k_window.h 1.1 600))
+  (mical/include/internal/k_window.hh (vaucanson/k/8_k_window.h 1.1 600))
+  (mical/include/misc/traits.hh (vaucanson/k/9_traits.hh 1.1 600))
+  (mical/include/fundamental/default_ops.hh (vaucanson/k/10_default_op 1.1 600))
+  (mical/include/fundamental/meta_set.hh (vaucanson/k/11_meta_set.h 1.1 600))
+  (mical/include/fundamental/mix.hh (vaucanson/k/12_mix.hh 1.1 600))
+  (mical/include/tools/predefs.hh (vaucanson/k/13_predefs.hh 1.1 600))
   (mical/include/tools/load_sample.hxx (vaucanson/k/14_load_sampl 1.1 600))
   (mical/include/tools/load_sample.hh (vaucanson/k/15_load_sampl 1.1 600))
-  (mical/include/algorithms/is_kreversible.hxx (vaucanson/k/16_is_krevers 1.1 644))
-  (mical/include/algorithms/is_kreversible.hh (vaucanson/k/17_is_krevers 1.1 644))
-  (mical/include/algorithms/is_kdeterministic.hxx (vaucanson/k/18_is_kdeterm 1.1 644))
-  (mical/include/algorithms/is_kdeterministic.hh (vaucanson/k/19_is_kdeterm 1.1 644))
-  (mical/include/algorithms/k_ri.hxx (vaucanson/k/20_k_ri.hxx 1.1 644))
-  (mical/include/algorithms/k_ri.hh (vaucanson/k/21_k_ri.hh 1.1 644))
-  (mical/include/algorithms/k_tssi.hxx (vaucanson/k/22_k_tssi.hxx 1.1 644))
-  (mical/include/algorithms/get_structcomp_sample.hxx (vaucanson/k/23_get_struct 1.1 644))
-  (mical/include/algorithms/get_structcomp_sample.hh (vaucanson/k/24_get_struct 1.1 644))
-  (mical/include/algorithms/mggi.hxx (vaucanson/k/25_mggi.hxx 1.1 644))
-  (mical/include/algorithms/rig2.hh (vaucanson/k/26_rig2.hh 1.1 644))
-  (mical/include/algorithms/mggi.hh (vaucanson/k/27_mggi.hh 1.1 644))
-  (mical/include/algorithms/k_tssi.hh (vaucanson/k/28_k_tssi.hh 1.1 644))
+  (mical/include/algorithms/is_kreversible.hxx (vaucanson/k/16_is_krevers 1.1 600))
+  (mical/include/algorithms/is_kreversible.hh (vaucanson/k/17_is_krevers 1.1 600))
+  (mical/include/algorithms/is_kdeterministic.hxx (vaucanson/k/18_is_kdeterm 1.1 600))
+  (mical/include/algorithms/is_kdeterministic.hh (vaucanson/k/19_is_kdeterm 1.1 600))
+  (mical/include/algorithms/k_ri.hxx (vaucanson/k/20_k_ri.hxx 1.1 600))
+  (mical/include/algorithms/k_ri.hh (vaucanson/k/21_k_ri.hh 1.1 600))
+  (mical/include/algorithms/k_tssi.hxx (vaucanson/k/22_k_tssi.hxx 1.1 600))
+  (mical/include/algorithms/get_structcomp_sample.hxx (vaucanson/k/23_get_struct 1.1 600))
+  (mical/include/algorithms/get_structcomp_sample.hh (vaucanson/k/24_get_struct 1.1 600))
+  (mical/include/algorithms/mggi.hxx (vaucanson/k/25_mggi.hxx 1.1 600))
+  (mical/include/algorithms/rig2.hh (vaucanson/k/26_rig2.hh 1.1 600))
+  (mical/include/algorithms/mggi.hh (vaucanson/k/27_mggi.hh 1.1 600))
+  (mical/include/algorithms/k_tssi.hh (vaucanson/k/28_k_tssi.hh 1.1 600))
   (mical/include/algorithms/rig.hxx (vaucanson/k/29_rig.hxx 1.1 600))
   (mical/include/algorithms/rig.hh (vaucanson/k/30_rig.hh 1.2 600))
   (mical/include/algorithms/make_pta.hxx (vaucanson/k/31_make_pta.h 1.1 600))
@@ -670,21 +656,21 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (mical/include/algorithms/is_not_compatible.hh (vaucanson/k/38_is_not_com 1.1 600))
   (mical/include/algorithms/fusion.hxx (vaucanson/k/39_fusion.hxx 1.1 600))
   (mical/include/algorithms/fusion.hh (vaucanson/k/40_fusion.hh 1.1 600))
-  (mical/include/algebra/concrete/k_words.hxx (vaucanson/k/41_k_words.hx 1.1 644))
-  (mical/include/algebra/concrete/k_words.hh (vaucanson/k/42_k_words.hh 1.1 644))
-  (mical/include/algebra/concrete/complete_lattice.hxx (vaucanson/k/43_complete_l 1.1 644))
-  (mical/include/algebra/concrete/complete_lattice.hh (vaucanson/k/44_complete_l 1.1 644))
+  (mical/include/algebra/concrete/k_words.hxx (vaucanson/k/41_k_words.hx 1.1 600))
+  (mical/include/algebra/concrete/k_words.hh (vaucanson/k/42_k_words.hh 1.1 600))
+  (mical/include/algebra/concrete/complete_lattice.hxx (vaucanson/k/43_complete_l 1.1 600))
+  (mical/include/algebra/concrete/complete_lattice.hh (vaucanson/k/44_complete_l 1.1 600))
   (mical/include/algebra/concrete/ordered_set.hxx (vaucanson/k/45_ordered_se 1.1 600))
   (mical/include/algebra/concrete/ordered_set.hh (vaucanson/k/46_ordered_se 1.1 600))
   (mical/include/algebra/concrete/lattice.hxx (vaucanson/k/47_lattice.hx 1.1 600))
   (mical/include/algebra/concrete/lattice.hh (vaucanson/k/48_lattice.hh 1.1 600))
   (mical/include/algebra/concrete/complemented_lattice.hxx (vaucanson/k/49_complement 1.1 600))
   (mical/include/algebra/concrete/complemented_lattice.hh (vaucanson/k/50_complement 1.1 600))
-  (mical/include/algebra/concept/k_monoid_base.hxx (vaucanson/k/51_k_monoid_b 1.1 644))
-  (mical/include/algebra/concept/k_monoid_base.hh (vaucanson/l/0_k_monoid_b 1.1 644))
-  (mical/include/algebra/concept/mix_base.hh (vaucanson/l/1_mix_base.h 1.1 644))
-  (mical/include/algebra/concept/complete_lattice_base.hh (vaucanson/l/2_complete_l 1.1 644))
-  (mical/include/algebra/concept/complete_lattice_base.hxx (vaucanson/l/3_complete_l 1.1 644))
+  (mical/include/algebra/concept/k_monoid_base.hxx (vaucanson/k/51_k_monoid_b 1.1 600))
+  (mical/include/algebra/concept/k_monoid_base.hh (vaucanson/l/0_k_monoid_b 1.1 600))
+  (mical/include/algebra/concept/mix_base.hh (vaucanson/l/1_mix_base.h 1.1 600))
+  (mical/include/algebra/concept/complete_lattice_base.hh (vaucanson/l/2_complete_l 1.1 600))
+  (mical/include/algebra/concept/complete_lattice_base.hxx (vaucanson/l/3_complete_l 1.1 600))
   (mical/include/algebra/concept/ordered_set_base.hxx (vaucanson/l/4_ordered_se 1.1 600))
   (mical/include/algebra/concept/ordered_set_base.hh (vaucanson/l/5_ordered_se 1.1 600))
   (mical/include/algebra/concept/lattice_base.hxx (vaucanson/l/6_lattice_ba 1.1 600))
@@ -704,162 +690,162 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Mon, 12 May 2003 21:58:37 +0200,
 ;; to version 0.186(w), by raph:
 
-  (vauc/bootstrap.sh (vaucanson/l/25_bootstrap. 1.2 775))
-  (vauc/mpp++/TODO (vaucanson/l/26_TODO 1.1 644))
-  (vauc/toplevel/Makefile.am (vaucanson/l/27_Makefile.a 1.1 664))
-  (vauc/modules/Makefile.am (vaucanson/l/28_Makefile.a 1.2 664))
-  (vauc/config/ltwrap-sh.in (vaucanson/l/29_ltwrap-sh. 1.1 664))
-  (vauc/config/cxxwrap-sh.in (vaucanson/l/30_cxxwrap-sh 1.1 664))
-  (vauc/config/libtool-fix.m4 (vaucanson/l/31_libtool-fi 1.1 664))
-  (vauc/config/libz.m4 (vaucanson/l/32_libz.m4 1.1 664))
-  (vauc/config/readline.m4 (vaucanson/l/33_readline.m 1.2 664))
-  (vauc/cleanup.sh (vaucanson/l/34_cleanup.sh 1.1 775))
-  (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.4 664))
-  (vauc/lib/getopt.h (vaucanson/l/37_getopt.h 1.1 644))
-  (vauc/lib/getopt1.c (vaucanson/l/38_getopt1.c 1.1 644))
-  (vauc/lib/Makefile.am (vaucanson/l/39_Makefile.a 1.2 664))
-  (vauc/lib/getopt.c (vaucanson/l/40_getopt.c 1.1 644))
-  (vauc/mpp++/Makefile.am (vaucanson/l/41_Makefile.a 1.1 644))
-  (vauc/mpp++/src/ty_trans.cc (vaucanson/l/42_ty_trans.c 1.1 644))
-  (vauc/mpp++/src/fun_trans.cc (vaucanson/l/43_fun_trans. 1.1 644))
-  (vauc/mpp++/src/transformer/ty_transformer.hh (vaucanson/l/44_ty_transfo 1.1 644))
-  (vauc/mpp++/src/transformer/funs.hh (vaucanson/l/45_funs.hh 1.1 644))
-  (vauc/mpp++/src/transformer/fun_transformer.hh (vaucanson/l/46_fun_transf 1.1 644))
-  (vauc/mpp++/src/transformer/ty_transformer.cc (vaucanson/l/47_ty_transfo 1.1 644))
-  (vauc/mpp++/src/transformer/Makefile.am (vaucanson/l/48_Makefile.a 1.1 644))
-  (vauc/mpp++/src/transformer/fun_transformer.cc (vaucanson/l/49_fun_transf 1.1 644))
-  (vauc/mpp++/src/spec/module_spec.hh (vaucanson/l/50_module_spe 1.1 644))
-  (vauc/mpp++/src/spec/module_spec.cc (vaucanson/l/51_module_spe 1.1 644))
-  (vauc/mpp++/src/spec/fun_spec.hh (vaucanson/m/0_fun_spec.h 1.1 644))
-  (vauc/mpp++/src/spec/fun_spec.cc (vaucanson/m/1_fun_spec.c 1.1 644))
-  (vauc/mpp++/src/spec/cpp_code.hh (vaucanson/m/2_cpp_code.h 1.1 644))
-  (vauc/mpp++/src/spec/cpp_code.cc (vaucanson/m/3_cpp_code.c 1.1 644))
-  (vauc/mpp++/src/spec/class_spec.hh (vaucanson/m/4_class_spec 1.1 644))
-  (vauc/mpp++/src/spec/class_spec.cc (vaucanson/m/5_class_spec 1.1 644))
-  (vauc/mpp++/src/spec/Makefile.am (vaucanson/m/6_Makefile.a 1.1 644))
-  (vauc/mpp++/src/parse/module_spec_scan.cc (vaucanson/m/7_module_spe 1.1 644))
-  (vauc/mpp++/src/parse/module_spec.h (vaucanson/m/8_module_spe 1.1 644))
-  (vauc/mpp++/src/parse/module_spec.cc (vaucanson/m/9_module_spe 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec_scan.cc (vaucanson/m/10_fun_spec_s 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec.h (vaucanson/m/11_fun_spec.h 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec.cc (vaucanson/m/12_fun_spec.c 1.1 644))
-  (vauc/mpp++/src/parse/class_spec_scan.d (vaucanson/m/13_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/class_spec_scan.cc (vaucanson/m/14_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/class_spec.h (vaucanson/m/15_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/class_spec.cc (vaucanson/m/16_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/module_spec_scan.ll (vaucanson/m/17_module_spe 1.1 644))
-  (vauc/mpp++/src/parse/module_spec_parse.hh (vaucanson/m/18_module_spe 1.1 644))
-  (vauc/mpp++/src/parse/module_spec.yy (vaucanson/m/19_module_spe 1.1 644))
-  (vauc/mpp++/src/parse/location.hh (vaucanson/m/20_location.h 1.1 644))
-  (vauc/mpp++/src/parse/location.cc (vaucanson/m/21_location.c 1.1 644))
-  (vauc/mpp++/src/parse/libparse.hh (vaucanson/m/22_libparse.h 1.1 644))
-  (vauc/mpp++/src/parse/libparse.cc (vaucanson/m/23_libparse.c 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec_scan.ll (vaucanson/m/24_fun_spec_s 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec_parse.hh (vaucanson/m/25_fun_spec_p 1.1 644))
-  (vauc/mpp++/src/parse/fun_spec.yy (vaucanson/m/26_fun_spec.y 1.1 644))
-  (vauc/mpp++/src/parse/class_spec_scan.ll (vaucanson/m/27_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/class_spec_parse.hh (vaucanson/m/28_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/class_spec.yy (vaucanson/m/29_class_spec 1.1 644))
-  (vauc/mpp++/src/parse/Makefile.am (vaucanson/m/30_Makefile.a 1.1 644))
-  (vauc/mpp++/src/modules/make_tool.hh (vaucanson/m/31_make_tool. 1.1 644))
-  (vauc/mpp++/src/modules/make_tool.cc (vaucanson/m/32_make_tool. 1.1 644))
-  (vauc/mpp++/src/modules/make_module_desc.hh (vaucanson/m/33_make_modul 1.1 644))
-  (vauc/mpp++/src/modules/make_module_desc.cc (vaucanson/m/34_make_modul 1.1 644))
-  (vauc/mpp++/src/modules/make_fun_desc.hh (vaucanson/m/35_make_fun_d 1.1 644))
-  (vauc/mpp++/src/modules/make_fun_desc.cc (vaucanson/m/36_make_fun_d 1.1 644))
-  (vauc/mpp++/src/modules/make_class_desc.hh (vaucanson/m/37_make_class 1.1 644))
-  (vauc/mpp++/src/modules/make_class_desc.cc (vaucanson/m/38_make_class 1.1 644))
-  (vauc/mpp++/src/modules/libmodules.hh (vaucanson/m/39_libmodules 1.1 644))
-  (vauc/mpp++/src/modules/class_spec_template.hh (vaucanson/m/40_class_spec 1.1 644))
-  (vauc/mpp++/src/modules/Makefile.am (vaucanson/m/41_Makefile.a 1.1 644))
-  (vauc/mpp++/src/internal/mangling.hh (vaucanson/m/42_mangling.h 1.1 644))
-  (vauc/mpp++/src/internal/mangling.cc (vaucanson/m/43_mangling.c 1.1 644))
-  (vauc/mpp++/src/internal/Makefile.am (vaucanson/m/44_Makefile.a 1.1 644))
-  (vauc/mpp++/src/common.hh (vaucanson/m/45_common.hh 1.1 644))
-  (vauc/mpp++/src/Makefile.am (vaucanson/m/46_Makefile.a 1.2 644))
-  (vauc/mpp++/src/examples/letter_automaton.modules.spec (vaucanson/m/47_letter_aut 1.1 644))
-  (vauc/mpp++/src/examples/State.class (vaucanson/m/48_State.clas 1.1 644))
-  (vauc/mpp++/src/examples/LetterAutomaton.class (vaucanson/m/49_LetterAuto 1.1 644))
-  (vauc/mpp++/src/examples/Edge.class (vaucanson/m/50_Edge.class 1.1 644))
-  (vauc/mpp++/src/examples/Automaton.class (vaucanson/m/51_Automaton. 1.1 644))
-  (vauc/mpp++/src/examples/Alphabet.class (vaucanson/n/0_Alphabet.c 1.1 644))
-  (vauc/mpp++/src/examples/AddState.fun (vaucanson/n/1_AddState.f 1.1 644))
-  (vauc/mpp++/lib/Makefile.am (vaucanson/n/2_Makefile.a 1.1 644))
+  (vauc/bootstrap.sh (vaucanson/l/25_bootstrap. 1.2 700))
+  (vauc/mpp++/TODO (vaucanson/l/26_TODO 1.1 600))
+  (vauc/toplevel/Makefile.am (vaucanson/l/27_Makefile.a 1.1 600))
+  (vauc/modules/Makefile.am (vaucanson/l/28_Makefile.a 1.2 600))
+  (vauc/config/ltwrap-sh.in (vaucanson/l/29_ltwrap-sh. 1.1 600))
+  (vauc/config/cxxwrap-sh.in (vaucanson/l/30_cxxwrap-sh 1.1 600))
+  (vauc/config/libtool-fix.m4 (vaucanson/l/31_libtool-fi 1.1 600))
+  (vauc/config/libz.m4 (vaucanson/l/32_libz.m4 1.1 600))
+  (vauc/config/readline.m4 (vaucanson/l/33_readline.m 1.2 600))
+  (vauc/cleanup.sh (vaucanson/l/34_cleanup.sh 1.1 700))
+  (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.4 600))
+  (vauc/lib/getopt.h (vaucanson/l/37_getopt.h 1.1 600))
+  (vauc/lib/getopt1.c (vaucanson/l/38_getopt1.c 1.1 600))
+  (vauc/lib/Makefile.am (vaucanson/l/39_Makefile.a 1.2 600))
+  (vauc/lib/getopt.c (vaucanson/l/40_getopt.c 1.1 600))
+  (vauc/mpp++/Makefile.am (vaucanson/l/41_Makefile.a 1.1 600))
+  (vauc/mpp++/src/ty_trans.cc (vaucanson/l/42_ty_trans.c 1.1 600))
+  (vauc/mpp++/src/fun_trans.cc (vaucanson/l/43_fun_trans. 1.1 600))
+  (vauc/mpp++/src/transformer/ty_transformer.hh (vaucanson/l/44_ty_transfo 1.1 600))
+  (vauc/mpp++/src/transformer/funs.hh (vaucanson/l/45_funs.hh 1.1 600))
+  (vauc/mpp++/src/transformer/fun_transformer.hh (vaucanson/l/46_fun_transf 1.1 600))
+  (vauc/mpp++/src/transformer/ty_transformer.cc (vaucanson/l/47_ty_transfo 1.1 600))
+  (vauc/mpp++/src/transformer/Makefile.am (vaucanson/l/48_Makefile.a 1.1 600))
+  (vauc/mpp++/src/transformer/fun_transformer.cc (vaucanson/l/49_fun_transf 1.1 600))
+  (vauc/mpp++/src/spec/module_spec.hh (vaucanson/l/50_module_spe 1.1 600))
+  (vauc/mpp++/src/spec/module_spec.cc (vaucanson/l/51_module_spe 1.1 600))
+  (vauc/mpp++/src/spec/fun_spec.hh (vaucanson/m/0_fun_spec.h 1.1 600))
+  (vauc/mpp++/src/spec/fun_spec.cc (vaucanson/m/1_fun_spec.c 1.1 600))
+  (vauc/mpp++/src/spec/cpp_code.hh (vaucanson/m/2_cpp_code.h 1.1 600))
+  (vauc/mpp++/src/spec/cpp_code.cc (vaucanson/m/3_cpp_code.c 1.1 600))
+  (vauc/mpp++/src/spec/class_spec.hh (vaucanson/m/4_class_spec 1.1 600))
+  (vauc/mpp++/src/spec/class_spec.cc (vaucanson/m/5_class_spec 1.1 600))
+  (vauc/mpp++/src/spec/Makefile.am (vaucanson/m/6_Makefile.a 1.1 600))
+  (vauc/mpp++/src/parse/module_spec_scan.cc (vaucanson/m/7_module_spe 1.1 600))
+  (vauc/mpp++/src/parse/module_spec.h (vaucanson/m/8_module_spe 1.1 600))
+  (vauc/mpp++/src/parse/module_spec.cc (vaucanson/m/9_module_spe 1.1 600))
+  (vauc/mpp++/src/parse/fun_spec_scan.cc (vaucanson/m/10_fun_spec_s 1.1 600))
+  (vauc/mpp++/src/parse/fun_spec.h (vaucanson/m/11_fun_spec.h 1.1 600))
+  (vauc/mpp++/src/parse/fun_spec.cc (vaucanson/m/12_fun_spec.c 1.1 600))
+  (vauc/mpp++/src/parse/class_spec_scan.d (vaucanson/m/13_class_spec 1.1 600))
+  (vauc/mpp++/src/parse/class_spec_scan.cc (vaucanson/m/14_class_spec 1.1 600))
+  (vauc/mpp++/src/parse/class_spec.h (vaucanson/m/15_class_spec 1.1 600))
+  (vauc/mpp++/src/parse/class_spec.cc (vaucanson/m/16_class_spec 1.1 600))
+  (vauc/mpp++/src/parse/module_spec_scan.ll (vaucanson/m/17_module_spe 1.1 600))
+  (vauc/mpp++/src/parse/module_spec_parse.hh (vaucanson/m/18_module_spe 1.1 600))
+  (vauc/mpp++/src/parse/module_spec.yy (vaucanson/m/19_module_spe 1.1 600))
+  (vauc/mpp++/src/parse/location.hh (vaucanson/m/20_location.h 1.1 600))
+  (vauc/mpp++/src/parse/location.cc (vaucanson/m/21_location.c 1.1 600))
+  (vauc/mpp++/src/parse/libparse.hh (vaucanson/m/22_libparse.h 1.1 600))
+  (vauc/mpp++/src/parse/libparse.cc (vaucanson/m/23_libparse.c 1.1 600))
+  (vauc/mpp++/src/parse/fun_spec_scan.ll (vaucanson/m/24_fun_spec_s 1.1 600))
+  (vauc/mpp++/src/parse/fun_spec_parse.hh (vaucanson/m/25_fun_spec_p 1.1 600))
+  (vauc/mpp++/src/parse/fun_spec.yy (vaucanson/m/26_fun_spec.y 1.1 600))
+  (vauc/mpp++/src/parse/class_spec_scan.ll (vaucanson/m/27_class_spec 1.1 600))
+  (vauc/mpp++/src/parse/class_spec_parse.hh (vaucanson/m/28_class_spec 1.1 600))
+  (vauc/mpp++/src/parse/class_spec.yy (vaucanson/m/29_class_spec 1.1 600))
+  (vauc/mpp++/src/parse/Makefile.am (vaucanson/m/30_Makefile.a 1.1 600))
+  (vauc/mpp++/src/modules/make_tool.hh (vaucanson/m/31_make_tool. 1.1 600))
+  (vauc/mpp++/src/modules/make_tool.cc (vaucanson/m/32_make_tool. 1.1 600))
+  (vauc/mpp++/src/modules/make_module_desc.hh (vaucanson/m/33_make_modul 1.1 600))
+  (vauc/mpp++/src/modules/make_module_desc.cc (vaucanson/m/34_make_modul 1.1 600))
+  (vauc/mpp++/src/modules/make_fun_desc.hh (vaucanson/m/35_make_fun_d 1.1 600))
+  (vauc/mpp++/src/modules/make_fun_desc.cc (vaucanson/m/36_make_fun_d 1.1 600))
+  (vauc/mpp++/src/modules/make_class_desc.hh (vaucanson/m/37_make_class 1.1 600))
+  (vauc/mpp++/src/modules/make_class_desc.cc (vaucanson/m/38_make_class 1.1 600))
+  (vauc/mpp++/src/modules/libmodules.hh (vaucanson/m/39_libmodules 1.1 600))
+  (vauc/mpp++/src/modules/class_spec_template.hh (vaucanson/m/40_class_spec 1.1 600))
+  (vauc/mpp++/src/modules/Makefile.am (vaucanson/m/41_Makefile.a 1.1 600))
+  (vauc/mpp++/src/internal/mangling.hh (vaucanson/m/42_mangling.h 1.1 600))
+  (vauc/mpp++/src/internal/mangling.cc (vaucanson/m/43_mangling.c 1.1 600))
+  (vauc/mpp++/src/internal/Makefile.am (vaucanson/m/44_Makefile.a 1.1 600))
+  (vauc/mpp++/src/common.hh (vaucanson/m/45_common.hh 1.1 600))
+  (vauc/mpp++/src/Makefile.am (vaucanson/m/46_Makefile.a 1.2 600))
+  (vauc/mpp++/src/examples/letter_automaton.modules.spec (vaucanson/m/47_letter_aut 1.1 600))
+  (vauc/mpp++/src/examples/State.class (vaucanson/m/48_State.clas 1.1 600))
+  (vauc/mpp++/src/examples/LetterAutomaton.class (vaucanson/m/49_LetterAuto 1.1 600))
+  (vauc/mpp++/src/examples/Edge.class (vaucanson/m/50_Edge.class 1.1 600))
+  (vauc/mpp++/src/examples/Automaton.class (vaucanson/m/51_Automaton. 1.1 600))
+  (vauc/mpp++/src/examples/Alphabet.class (vaucanson/n/0_Alphabet.c 1.1 600))
+  (vauc/mpp++/src/examples/AddState.fun (vaucanson/n/1_AddState.f 1.1 600))
+  (vauc/mpp++/lib/Makefile.am (vaucanson/n/2_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 00:41:10 +0200,
 ;; to version 0.195(w), by raph:
 
   
   
-  (vauc/include/lazy/vauc_constructs.hxx (vaucanson/n/5_vauc_const 1.1 644))
-  (vauc/include/lazy/exp_base.hxx (vaucanson/n/6_exp_base.h 1.1 644))
-  (vauc/include/lazy/exp.hxx (vaucanson/n/7_exp.hxx 1.1 644))
-  (vauc/include/types/type.hh (vaucanson/n/8_type.hh 1.1 644))
-  (vauc/include/types/symbol.hh (vaucanson/n/9_symbol.hh 1.2 644))
-  (vauc/include/types/object.hh (vaucanson/n/10_object.hh 1.2 644))
-  (vauc/include/triplet.hh (vaucanson/n/11_triplet.hh 1.1 644))
-  (vauc/include/toplevel/wrappers.hh (vaucanson/n/12_wrappers.h 1.1 644))
-  (vauc/include/toplevel/parse.hh (vaucanson/n/13_parse.hh 1.1 644))
-  (vauc/include/readlinebuf.hh (vaucanson/n/14_readlinebu 1.2 644))
-  (vauc/include/lazy/visitor_base.hh (vaucanson/n/15_visitor_ba 1.1 644))
-  (vauc/include/lazy/vauc_constructs.hh (vaucanson/n/16_vauc_const 1.1 644))
-  (vauc/include/lazy/print_visitor.hh (vaucanson/n/17_print_visi 1.1 644))
-  (vauc/include/lazy/exp_base.hh (vaucanson/n/18_exp_base.h 1.1 644))
-  (vauc/include/lazy/exp.hh (vaucanson/n/19_exp.hh 1.1 644))
-  (vauc/include/lazy/eval_visitor.hh (vaucanson/n/20_eval_visit 1.1 644))
-  (vauc/include/vcore/streams.hh (vaucanson/n/21_streams.hh 1.2 644))
-  (vauc/include/vcore/partial_call.hh (vaucanson/n/22_partial_ca 1.1 644))
-  (vauc/include/vcore/object_catalog.hh (vaucanson/n/23_object_cat 1.1 644))
-  (vauc/include/vcore/module_loader.hh (vaucanson/n/24_module_loa 1.1 644))
-  (vauc/include/vcore/module_base.hh (vaucanson/n/25_module_bas 1.1 644))
-  (vauc/include/vcore/interrupt_handler.hh (vaucanson/n/26_interrupt_ 1.1 644))
-  (vauc/include/vcore/exception.hh (vaucanson/n/27_exception. 1.2 644))
-  (vauc/include/vcore/env.hh (vaucanson/n/28_env.hh 1.1 644))
-  (vauc/include/vcore/closure.hh (vaucanson/n/29_closure.hh 1.1 644))
-  (vauc/include/vcore/callable.hh (vaucanson/n/30_callable.h 1.1 644))
-  (vauc/include/constants/zero.hh (vaucanson/n/31_zero.hh 1.1 644))
-  (vauc/include/constants/one.hh (vaucanson/n/32_one.hh 1.1 644))
-  (vauc/include/constants/inf.hh (vaucanson/n/33_inf.hh 1.1 644))
-  (vauc/include/Makefile.am (vaucanson/n/34_Makefile.a 1.1 664))
+  (vauc/include/lazy/vauc_constructs.hxx (vaucanson/n/5_vauc_const 1.1 600))
+  (vauc/include/lazy/exp_base.hxx (vaucanson/n/6_exp_base.h 1.1 600))
+  (vauc/include/lazy/exp.hxx (vaucanson/n/7_exp.hxx 1.1 600))
+  (vauc/include/types/type.hh (vaucanson/n/8_type.hh 1.1 600))
+  (vauc/include/types/symbol.hh (vaucanson/n/9_symbol.hh 1.2 600))
+  (vauc/include/types/object.hh (vaucanson/n/10_object.hh 1.2 600))
+  (vauc/include/triplet.hh (vaucanson/n/11_triplet.hh 1.1 600))
+  (vauc/include/toplevel/wrappers.hh (vaucanson/n/12_wrappers.h 1.1 600))
+  (vauc/include/toplevel/parse.hh (vaucanson/n/13_parse.hh 1.1 600))
+  (vauc/include/readlinebuf.hh (vaucanson/n/14_readlinebu 1.2 600))
+  (vauc/include/lazy/visitor_base.hh (vaucanson/n/15_visitor_ba 1.1 600))
+  (vauc/include/lazy/vauc_constructs.hh (vaucanson/n/16_vauc_const 1.1 600))
+  (vauc/include/lazy/print_visitor.hh (vaucanson/n/17_print_visi 1.1 600))
+  (vauc/include/lazy/exp_base.hh (vaucanson/n/18_exp_base.h 1.1 600))
+  (vauc/include/lazy/exp.hh (vaucanson/n/19_exp.hh 1.1 600))
+  (vauc/include/lazy/eval_visitor.hh (vaucanson/n/20_eval_visit 1.1 600))
+  (vauc/include/vcore/streams.hh (vaucanson/n/21_streams.hh 1.2 600))
+  (vauc/include/vcore/partial_call.hh (vaucanson/n/22_partial_ca 1.1 600))
+  (vauc/include/vcore/object_catalog.hh (vaucanson/n/23_object_cat 1.1 600))
+  (vauc/include/vcore/module_loader.hh (vaucanson/n/24_module_loa 1.1 600))
+  (vauc/include/vcore/module_base.hh (vaucanson/n/25_module_bas 1.1 600))
+  (vauc/include/vcore/interrupt_handler.hh (vaucanson/n/26_interrupt_ 1.1 600))
+  (vauc/include/vcore/exception.hh (vaucanson/n/27_exception. 1.2 600))
+  (vauc/include/vcore/env.hh (vaucanson/n/28_env.hh 1.1 600))
+  (vauc/include/vcore/closure.hh (vaucanson/n/29_closure.hh 1.1 600))
+  (vauc/include/vcore/callable.hh (vaucanson/n/30_callable.h 1.1 600))
+  (vauc/include/constants/zero.hh (vaucanson/n/31_zero.hh 1.1 600))
+  (vauc/include/constants/one.hh (vaucanson/n/32_one.hh 1.1 600))
+  (vauc/include/constants/inf.hh (vaucanson/n/33_inf.hh 1.1 600))
+  (vauc/include/Makefile.am (vaucanson/n/34_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 00:41:19 +0200,
 ;; to version 0.195(w), by raph:
 
-  (vauc/vcore/Makefile.am (vaucanson/n/35_Makefile.a 1.2 644))
+  (vauc/vcore/Makefile.am (vaucanson/n/35_Makefile.a 1.2 600))
 
 ;; Files added by populate at Tue, 13 May 2003 00:41:23 +0200,
 ;; to version 0.195(w), by raph:
 
-  (vauc/vcore/unwind_init.cc (vaucanson/n/36_unwind_ini 1.2 644))
+  (vauc/vcore/unwind_init.cc (vaucanson/n/36_unwind_ini 1.2 600))
   
   
-  (vauc/vcore/partial_call.cc (vaucanson/n/39_partial_ca 1.1 644))
-  (vauc/vcore/object_catalog.cc (vaucanson/n/40_object_cat 1.2 644))
-  (vauc/vcore/module_loader.cc (vaucanson/n/41_module_loa 1.1 644))
-  (vauc/vcore/lazy_print_visitor.cc (vaucanson/n/42_lazy_print 1.2 644))
-  (vauc/vcore/interrupt_handler.cc (vaucanson/n/43_interrupt_ 1.1 644))
-  (vauc/vcore/functionimpl.cc (vaucanson/n/44_functionim 1.1 644))
-  (vauc/vcore/find_path.cc (vaucanson/n/45_find_path. 1.1 644))
-  (vauc/vcore/find_cost.cc (vaucanson/n/46_find_cost. 1.1 644))
-  (vauc/vcore/explode.cc (vaucanson/n/47_explode.cc 1.1 644))
+  (vauc/vcore/partial_call.cc (vaucanson/n/39_partial_ca 1.1 600))
+  (vauc/vcore/object_catalog.cc (vaucanson/n/40_object_cat 1.2 600))
+  (vauc/vcore/module_loader.cc (vaucanson/n/41_module_loa 1.1 600))
+  (vauc/vcore/lazy_print_visitor.cc (vaucanson/n/42_lazy_print 1.2 600))
+  (vauc/vcore/interrupt_handler.cc (vaucanson/n/43_interrupt_ 1.1 600))
+  (vauc/vcore/functionimpl.cc (vaucanson/n/44_functionim 1.1 600))
+  (vauc/vcore/find_path.cc (vaucanson/n/45_find_path. 1.1 600))
+  (vauc/vcore/find_cost.cc (vaucanson/n/46_find_cost. 1.1 600))
+  (vauc/vcore/explode.cc (vaucanson/n/47_explode.cc 1.1 600))
   
-  (vauc/vcore/eval.cc (vaucanson/n/49_eval.cc 1.2 644))
-  (vauc/vcore/env.cc (vaucanson/n/50_env.cc 1.2 644))
-  (vauc/vcore/closure.cc (vaucanson/n/51_closure.cc 1.1 644))
-  (vauc/vcore/callable.cc (vaucanson/o/0_callable.c 1.1 644))
+  (vauc/vcore/eval.cc (vaucanson/n/49_eval.cc 1.2 600))
+  (vauc/vcore/env.cc (vaucanson/n/50_env.cc 1.2 600))
+  (vauc/vcore/closure.cc (vaucanson/n/51_closure.cc 1.1 600))
+  (vauc/vcore/callable.cc (vaucanson/o/0_callable.c 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 00:41:24 +0200,
 ;; to version 0.195(w), by raph:
 
-  (vauc/vcore/unwind_init.hh (vaucanson/o/1_unwind_ini 1.1 644))
+  (vauc/vcore/unwind_init.hh (vaucanson/o/1_unwind_ini 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 00:57:16 +0200,
 ;; to version 0.196(w), by raph:
 
   
-  (vauc/lemon/lemon.c (vaucanson/o/2_lemon.c 1.1 660))
-  (vauc/lemon/Makefile.am (vaucanson/o/3_Makefile.a 1.1 664))
-  (vauc/lib/readlinebuf.cc (vaucanson/o/4_readlinebu 1.1 644))
+  (vauc/lemon/lemon.c (vaucanson/o/2_lemon.c 1.1 600))
+  (vauc/lemon/Makefile.am (vaucanson/o/3_Makefile.a 1.1 600))
+  (vauc/lib/readlinebuf.cc (vaucanson/o/4_readlinebu 1.1 600))
 
 ;; Files deleted by depopulate at Tue, 13 May 2003 00:59:04 +0200,
 ;; from version 0.196(w), by raph:
@@ -869,100 +855,100 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Tue, 13 May 2003 00:59:17 +0200,
 ;; to version 0.196(w), by raph:
 
-  (vauc/lemon/rules.am (vaucanson/o/6_rules.am 1.2 644))
-  (vauc/lemon/lempar.in (vaucanson/o/7_lempar.in 1.1 660))
+  (vauc/lemon/rules.am (vaucanson/o/6_rules.am 1.2 600))
+  (vauc/lemon/lempar.in (vaucanson/o/7_lempar.in 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 03:54:16 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/include/bits/module_defs.hh (vaucanson/o/8_module_def 1.1 664))
-  (vauc/cppsh/include/bits/def_visitor.hh (vaucanson/o/9_def_visito 1.1 664))
+  (vauc/cppsh/include/bits/module_defs.hh (vaucanson/o/8_module_def 1.1 600))
+  (vauc/cppsh/include/bits/def_visitor.hh (vaucanson/o/9_def_visito 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 03:54:23 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/include/kern/symbol.hxx (vaucanson/o/10_symbol.hxx 1.1 644))
-  (vauc/cppsh/include/kern/symbol.hh (vaucanson/o/11_symbol.hh 1.1 644))
-  (vauc/cppsh/include/kern/streams.hh (vaucanson/o/12_streams.hh 1.1 644))
-  (vauc/cppsh/include/kern/stdstreams.hh (vaucanson/o/13_stdstreams 1.1 644))
-  (vauc/cppsh/include/kern/ref.hxx (vaucanson/o/14_ref.hxx 1.1 644))
-  (vauc/cppsh/include/kern/ref.hh (vaucanson/o/15_ref.hh 1.1 664))
-  (vauc/cppsh/include/kern/objvect.hxx (vaucanson/o/16_objvect.hx 1.1 644))
-  (vauc/cppsh/include/kern/objvect.hh (vaucanson/o/17_objvect.hh 1.1 644))
-  (vauc/cppsh/include/kern/object.hxx (vaucanson/o/18_object.hxx 1.1 664))
-  (vauc/cppsh/include/kern/object.hh (vaucanson/o/19_object.hh 1.1 664))
-  (vauc/cppsh/include/kern/fstreams.hh (vaucanson/o/20_fstreams.h 1.1 644))
-  (vauc/cppsh/include/kern/exnprint.hh (vaucanson/o/21_exnprint.h 1.1 644))
-  (vauc/cppsh/include/kern/exception.hh (vaucanson/o/22_exception. 1.1 644))
-  (vauc/cppsh/include/kern/debug.hh (vaucanson/o/23_debug.hh 1.1 644))
+  (vauc/cppsh/include/kern/symbol.hxx (vaucanson/o/10_symbol.hxx 1.1 600))
+  (vauc/cppsh/include/kern/symbol.hh (vaucanson/o/11_symbol.hh 1.1 600))
+  (vauc/cppsh/include/kern/streams.hh (vaucanson/o/12_streams.hh 1.1 600))
+  (vauc/cppsh/include/kern/stdstreams.hh (vaucanson/o/13_stdstreams 1.1 600))
+  (vauc/cppsh/include/kern/ref.hxx (vaucanson/o/14_ref.hxx 1.1 600))
+  (vauc/cppsh/include/kern/ref.hh (vaucanson/o/15_ref.hh 1.1 600))
+  (vauc/cppsh/include/kern/objvect.hxx (vaucanson/o/16_objvect.hx 1.1 600))
+  (vauc/cppsh/include/kern/objvect.hh (vaucanson/o/17_objvect.hh 1.1 600))
+  (vauc/cppsh/include/kern/object.hxx (vaucanson/o/18_object.hxx 1.1 600))
+  (vauc/cppsh/include/kern/object.hh (vaucanson/o/19_object.hh 1.1 600))
+  (vauc/cppsh/include/kern/fstreams.hh (vaucanson/o/20_fstreams.h 1.1 600))
+  (vauc/cppsh/include/kern/exnprint.hh (vaucanson/o/21_exnprint.h 1.1 600))
+  (vauc/cppsh/include/kern/exception.hh (vaucanson/o/22_exception. 1.1 600))
+  (vauc/cppsh/include/kern/debug.hh (vaucanson/o/23_debug.hh 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 03:54:33 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/include/FlexLexer.h (vaucanson/o/24_FlexLexer. 1.1 664))
-  (vauc/cppsh/include/Makefile.am (vaucanson/o/25_Makefile.a 1.1 664))
+  (vauc/cppsh/include/FlexLexer.h (vaucanson/o/24_FlexLexer. 1.1 600))
+  (vauc/cppsh/include/Makefile.am (vaucanson/o/25_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 03:56:40 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/include/lang/parse_base.hh (vaucanson/o/26_parse_base 1.1 664))
+  (vauc/cppsh/include/lang/parse_base.hh (vaucanson/o/26_parse_base 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 04:08:24 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/lang/Makefile.am (vaucanson/o/27_Makefile.a 1.1 664))
+  (vauc/cppsh/lang/Makefile.am (vaucanson/o/27_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 04:08:40 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/lang/parser_header.lemon (vaucanson/o/28_parser_hea 1.1 664))
-  (vauc/cppsh/lang/parse_base.cc (vaucanson/o/29_parse_base 1.1 664))
-  (vauc/cppsh/lang/lemon_parser.cc (vaucanson/o/30_lemon_pars 1.1 664))
-  (vauc/cppsh/lang/in2grammar.sh (vaucanson/o/31_in2grammar 1.2 664))
-  (vauc/cppsh/lang/gen_parser.sh (vaucanson/o/32_gen_parser 1.1 664))
-  (vauc/cppsh/lang/parser_header.yy (vaucanson/o/33_parser_hea 1.1 664))
-  (vauc/cppsh/lang/lemon_parser.hh (vaucanson/o/34_lemon_pars 1.1 664))
+  (vauc/cppsh/lang/parser_header.lemon (vaucanson/o/28_parser_hea 1.1 600))
+  (vauc/cppsh/lang/parse_base.cc (vaucanson/o/29_parse_base 1.1 600))
+  (vauc/cppsh/lang/lemon_parser.cc (vaucanson/o/30_lemon_pars 1.1 600))
+  (vauc/cppsh/lang/in2grammar.sh (vaucanson/o/31_in2grammar 1.2 600))
+  (vauc/cppsh/lang/gen_parser.sh (vaucanson/o/32_gen_parser 1.1 600))
+  (vauc/cppsh/lang/parser_header.yy (vaucanson/o/33_parser_hea 1.1 600))
+  (vauc/cppsh/lang/lemon_parser.hh (vaucanson/o/34_lemon_pars 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 04:08:52 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/tests/Makefile.am (vaucanson/o/35_Makefile.a 1.1 664))
+  (vauc/cppsh/tests/Makefile.am (vaucanson/o/35_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 04:08:58 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/tests/kern/Makefile.am (vaucanson/o/36_Makefile.a 1.1 664))
+  (vauc/cppsh/tests/kern/Makefile.am (vaucanson/o/36_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 04:09:07 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/tests/kern/symbol.cc (vaucanson/o/37_symbol.cc 1.1 644))
-  (vauc/cppsh/tests/kern/streams.cc (vaucanson/o/38_streams.cc 1.1 644))
-  (vauc/cppsh/tests/kern/objref_a.cc (vaucanson/o/39_objref_a.c 1.1 644))
-  (vauc/cppsh/tests/kern/objref.cc (vaucanson/o/40_objref.cc 1.1 644))
-  (vauc/cppsh/tests/kern/object.cc (vaucanson/o/41_object.cc 1.1 664))
-  (vauc/cppsh/tests/kern/exception.cc (vaucanson/o/42_exception. 1.1 644))
+  (vauc/cppsh/tests/kern/symbol.cc (vaucanson/o/37_symbol.cc 1.1 600))
+  (vauc/cppsh/tests/kern/streams.cc (vaucanson/o/38_streams.cc 1.1 600))
+  (vauc/cppsh/tests/kern/objref_a.cc (vaucanson/o/39_objref_a.c 1.1 600))
+  (vauc/cppsh/tests/kern/objref.cc (vaucanson/o/40_objref.cc 1.1 600))
+  (vauc/cppsh/tests/kern/object.cc (vaucanson/o/41_object.cc 1.1 600))
+  (vauc/cppsh/tests/kern/exception.cc (vaucanson/o/42_exception. 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 04:09:14 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/tests/ltdlpp/Makefile.am (vaucanson/o/43_Makefile.a 1.1 664))
+  (vauc/cppsh/tests/ltdlpp/Makefile.am (vaucanson/o/43_Makefile.a 1.1 600))
 
 ;; Files added by populate at Tue, 13 May 2003 04:09:29 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/tests/ltdlpp/dlbug32.cc (vaucanson/o/44_dlbug32.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/dlbug22.cc (vaucanson/o/45_dlbug22.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/dlbug12.cc (vaucanson/o/46_dlbug12.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/dlbug3.cc (vaucanson/o/47_dlbug3.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/dlbug2.cc (vaucanson/o/48_dlbug2.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/dlbug1.cc (vaucanson/o/49_dlbug1.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/dl.cc (vaucanson/o/50_dl.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/bbug2.cc (vaucanson/o/51_bbug2.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/bbug1.cc (vaucanson/p/0_bbug1.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/abug2.cc (vaucanson/p/1_abug2.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/abug1.cc (vaucanson/p/2_abug1.cc 1.1 664))
-  (vauc/cppsh/tests/ltdlpp/s.hh (vaucanson/p/3_s.hh 1.1 664))
+  (vauc/cppsh/tests/ltdlpp/dlbug32.cc (vaucanson/o/44_dlbug32.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/dlbug22.cc (vaucanson/o/45_dlbug22.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/dlbug12.cc (vaucanson/o/46_dlbug12.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/dlbug3.cc (vaucanson/o/47_dlbug3.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/dlbug2.cc (vaucanson/o/48_dlbug2.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/dlbug1.cc (vaucanson/o/49_dlbug1.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/dl.cc (vaucanson/o/50_dl.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/bbug2.cc (vaucanson/o/51_bbug2.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/bbug1.cc (vaucanson/p/0_bbug1.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/abug2.cc (vaucanson/p/1_abug2.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/abug1.cc (vaucanson/p/2_abug1.cc 1.1 600))
+  (vauc/cppsh/tests/ltdlpp/s.hh (vaucanson/p/3_s.hh 1.1 600))
 
 ;; Files deleted by depopulate at Tue, 13 May 2003 04:11:16 +0200,
 ;; from version 0.197(w), by raph:
@@ -980,26 +966,26 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Tue, 13 May 2003 04:18:36 +0200,
 ;; to version 0.197(w), by raph:
 
-  (vauc/cppsh/kern/stdstreams_cout.hh (vaucanson/p/4_stdstreams 1.1 664))
-  (vauc/cppsh/kern/stdstreams_cin.hh (vaucanson/p/5_stdstreams 1.1 664))
-  (vauc/cppsh/kern/stdstreams_cerr.hh (vaucanson/p/6_stdstreams 1.1 664))
-  (vauc/cppsh/kern/symbol.cc (vaucanson/p/7_symbol.cc 1.1 664))
-  (vauc/cppsh/kern/streams.cc (vaucanson/p/8_streams.cc 1.1 664))
-  (vauc/cppsh/kern/stdstreams_cout.cc (vaucanson/p/9_stdstreams 1.1 664))
-  (vauc/cppsh/kern/stdstreams_cin.cc (vaucanson/p/10_stdstreams 1.1 664))
-  (vauc/cppsh/kern/stdstreams_cerr.cc (vaucanson/p/11_stdstreams 1.1 664))
-  (vauc/cppsh/kern/objvect.cc (vaucanson/p/12_objvect.cc 1.1 664))
-  (vauc/cppsh/kern/object.cc (vaucanson/p/13_object.cc 1.1 664))
-  (vauc/cppsh/kern/fstreams.cc (vaucanson/p/14_fstreams.c 1.1 664))
-  (vauc/cppsh/kern/exnprint.cc (vaucanson/p/15_exnprint.c 1.1 664))
-  (vauc/cppsh/kern/exception.cc (vaucanson/p/16_exception. 1.1 664))
-  (vauc/cppsh/kern/debug.cc (vaucanson/p/17_debug.cc 1.1 664))
-  (vauc/cppsh/kern/Makefile.am (vaucanson/p/18_Makefile.a 1.1 664))
+  (vauc/cppsh/kern/stdstreams_cout.hh (vaucanson/p/4_stdstreams 1.1 600))
+  (vauc/cppsh/kern/stdstreams_cin.hh (vaucanson/p/5_stdstreams 1.1 600))
+  (vauc/cppsh/kern/stdstreams_cerr.hh (vaucanson/p/6_stdstreams 1.1 600))
+  (vauc/cppsh/kern/symbol.cc (vaucanson/p/7_symbol.cc 1.1 600))
+  (vauc/cppsh/kern/streams.cc (vaucanson/p/8_streams.cc 1.1 600))
+  (vauc/cppsh/kern/stdstreams_cout.cc (vaucanson/p/9_stdstreams 1.1 600))
+  (vauc/cppsh/kern/stdstreams_cin.cc (vaucanson/p/10_stdstreams 1.1 600))
+  (vauc/cppsh/kern/stdstreams_cerr.cc (vaucanson/p/11_stdstreams 1.1 600))
+  (vauc/cppsh/kern/objvect.cc (vaucanson/p/12_objvect.cc 1.1 600))
+  (vauc/cppsh/kern/object.cc (vaucanson/p/13_object.cc 1.1 600))
+  (vauc/cppsh/kern/fstreams.cc (vaucanson/p/14_fstreams.c 1.1 600))
+  (vauc/cppsh/kern/exnprint.cc (vaucanson/p/15_exnprint.c 1.1 600))
+  (vauc/cppsh/kern/exception.cc (vaucanson/p/16_exception. 1.1 600))
+  (vauc/cppsh/kern/debug.cc (vaucanson/p/17_debug.cc 1.1 600))
+  (vauc/cppsh/kern/Makefile.am (vaucanson/p/18_Makefile.a 1.1 600))
 
 ;; Files added by populate at Thu, 15 May 2003 13:04:20 +0200,
 ;; to version 0.200(w), by raph:
 
-  (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 664))
+  (include/vaucanson/config/pconf-hh.in (vaucanson/p/19_pconf-hh.i 1.1 600))
 
 ;; Files deleted by depopulate at Thu, 15 May 2003 15:02:07 +0200,
 ;; from version 0.202(w), by raph:
@@ -1012,9 +998,9 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Sun, 18 May 2003 03:59:40 +0200,
 ;; to version 0.205(w), by raph:
 
-  (mical/src/Makefile.am (vaucanson/p/20_Makefile.a 1.1 664))
-  (mical/include/Makefile.am (vaucanson/p/21_Makefile.a 1.1 664))
-  (mical/Makefile.am (vaucanson/p/22_Makefile.a 1.1 664))
+  (mical/src/Makefile.am (vaucanson/p/20_Makefile.a 1.1 600))
+  (mical/include/Makefile.am (vaucanson/p/21_Makefile.a 1.1 600))
+  (mical/Makefile.am (vaucanson/p/22_Makefile.a 1.1 600))
 
 
   (include/vaucanson/algebra/concrete/series/krat_coefficient.hxx (vaucanson/p/23_krat_coeff 1.1 600))
@@ -1036,9 +1022,9 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Fri, 30 May 2003 15:16:38 +0200,
 ;; to version 0.222(w), by raph:
 
-  (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.1 664))
-  (include/vaucanson/misc/unique.hcc (vaucanson/p/39_unique.hcc 1.1 664))
-  (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.1 664))
+  (include/vaucanson/misc/unique.hh (vaucanson/p/38_unique.hh 1.1 600))
+  (include/vaucanson/misc/unique.hcc (vaucanson/p/39_unique.hcc 1.1 600))
+  (include/vaucanson/misc/unique.hxx (vaucanson/p/40_unique.hxx 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

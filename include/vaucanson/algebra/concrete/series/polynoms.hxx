@@ -3,7 +3,8 @@
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002 Sakarovitch, Lombardy, Poss, Rey and Regis-Gianas.
+// Copyright (C) 2001, 2002, 2003 Sakarovitch, Lombardy, Poss, Rey
+// and Regis-Gianas.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -19,8 +20,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGEBRA_POLYNOMS_HXX
-# define ALGEBRA_POLYNOMS_HXX
+#ifndef VCSN_ALGEBRA_CONCRETE_POLYNOMS_HXX
+# define VCSN_ALGEBRA_CONCRETE_POLYNOMS_HXX
 
 # include <vaucanson/algebra/concrete/series/polynoms.hh>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
@@ -280,7 +281,7 @@ namespace vcsn {
   typename series_traits<polynom<Tm, Tw> >::support_t
   op_support(const Series<W, M>& s, const polynom<Tm, Tw>& m)
   { 
-    return m.as_map();
+    return typename series_traits<polynom<Tm, Tw> >::support_t(m.as_map());
   }
 
   template<typename W, typename M, typename Tm, typename Tw>
@@ -410,8 +411,8 @@ namespace vcsn {
     
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
-  void op_assign(const Series<W, M>& s,
-		 const M& monoid,
+  void op_assign(const Series<W, M>&,
+		 const M&,
 		 polynom<Tm, Tw>& dst,
 		 const oTm& src)
   {
@@ -619,7 +620,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   inline
   Tw op_series_get(const Series<W, M>&, 
-		   const polynom<Tm, Tw>&,
+		   const polynom<Tm, Tw>& p,
 		   const oTm& m)
   { 
     return p.get(SELECT(W), op_convert(SELECT(Tm), SELECT(M), m)); 
