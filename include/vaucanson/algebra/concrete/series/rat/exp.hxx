@@ -400,6 +400,8 @@ namespace std {
     escape_set.insert(' ');
     escape_set.insert('1');
     escape_set.insert('0');
+    escape_set.insert('[');
+    escape_set.insert(']');
     vcsn::rat::DumpVisitor<M_, W_> v(o, escape_set, "0", "1");
     exp.accept(v);
     return o;

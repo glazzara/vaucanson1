@@ -628,6 +628,8 @@ namespace vcsn {
     escape_set.insert(' ');
     escape_set.insert('1');
     escape_set.insert('0');
+    escape_set.insert('[');
+    escape_set.insert(']');
 
     while(i != p.end())
       {
@@ -781,6 +783,8 @@ namespace std {
     escape_set.insert(' ');
     escape_set.insert('1');
     escape_set.insert('0');
+    escape_set.insert('[');
+    escape_set.insert(']');
 
     while (i != p.end())
       {

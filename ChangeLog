@@ -1,3 +1,10 @@
+2003-09-16  Loïc Fosse  <loic@lrde.pita.fr>
+
+	* include/vaucanson/algebra/concrete/series/polynoms.hxx: Add square
+	  brackets in espaced charaters set.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: Likewise.
+	* include/vaucanson/tools/simple_format.hxx: Change simple format.
+
 2003-09-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/misc/bitset.hxx: Make the comparisons use

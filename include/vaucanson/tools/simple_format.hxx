@@ -44,18 +44,21 @@ namespace vcsn
       const auto_t& a = s.automaton();
       unsigned count = 1;
 
+      o << "# States list" << std::endl;
       for (typename auto_t::state_iterator i = a.states().begin();
 	   i != a.states().end();
 	   ++i, ++count)
 	{
 	  o << 's' << *i << ' ';
 	  if (a.is_initial(*i))
-	    o << 'i' << conv(a, a.get_initial(*i)) << std::endl; 
+	    o << "i[" << conv(a, a.get_initial(*i)) << "] "; 
 	  if (a.is_final(*i))
-	    o << 'f' << conv(a, a.get_final(*i)) << std::endl;
-	  if (!(count % 8))
-	    o << std::endl;
+	    o << "f[" << conv(a, a.get_final(*i)) << "]";
+	  o << std::endl;
 	}
+
+      o << std::endl;
+      o << "# Transitions list" << std::endl;
       for (typename auto_t::edge_iterator i = a.edges().begin();
 	   i != a.edges().end();
 	   ++i)
@@ -65,9 +68,33 @@ namespace vcsn
 	  if (a.is_spontaneous(*i))
 	    o << 'S';
 	  else
-	    o << 'l' << conv(a, a.serie_of(*i)) << std::endl;
+	    o << "l[" << conv(a, a.serie_of(*i)) << "]" << std::endl;
 	}
       o << '.' << std::endl;
+    }
+
+    void get_delimited_exp(std::istream& in, std::string& s)
+    {
+      std::string::size_type	i = 1;
+      
+      // Ignore the first '['
+      in.ignore();
+      // Readline
+      std::getline(in, s, ']');
+      for (i = 0; i < s.size() && s[s.size() - i - 1] == '\\' ; ++i)
+	;
+
+      // While the final ']' is escaped, read again and concat
+      while (i % 2 == 1)
+      {
+        std::string	tmp;
+
+	s = s + "]";
+        std::getline(in, tmp, ']');
+	s = s + tmp;
+	for (i = 0; i < tmp.size() && tmp[tmp.size() - i - 1] == '\\' ; ++i)
+	  ;
+      }
     }
 
     template<typename Loader>
@@ -82,31 +109,33 @@ namespace vcsn
 	  in >> cmd;
 	  switch(cmd)
 	    {
-	    case 's':
+	    case 's': // Definition of a state
 	      from = to;
 	      in >> to;
 	      l.add_state(to);
 	      break;
-	    case 'i':
-	      std::getline(in, str);
+	    case 'i': // The previous state is an initial one
+	      get_delimited_exp(in, str);
 	      l.set_initial(to, str);
 	      break;
-	    case 'f':
-	      std::getline(in, str);
+	    case 'f': // The previous state is a final one
+	      get_delimited_exp(in, str);
 	      l.set_final(to, str);
 	      break;
-	    case 'l':
-	      std::getline(in, str);
+	    case 'l': // The label of transition between the 2 previous states
+	      get_delimited_exp(in, str);
 	      l.add_edge(from, to, str);
 	      break;
-	    case 'S':
+	    case 'S': // A spontaneous transions between the 2 previous states
 	      l.add_spontaneous(from, to);
 	      break;
 	    case '.':
 	      done = true;
 	      break;
-	    default: // skip until EOL or EOF
+	    case '#': // The start of a comment
 	      std::getline(in, str);
+	      break;
+	    default: // Ignore other caracters
 	      break;
 	    }
 	}
