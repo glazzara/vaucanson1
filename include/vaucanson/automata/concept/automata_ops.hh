@@ -34,11 +34,13 @@
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_OPS_HH
 
 /** @addtogroup automata *//** @{ */
+/** @addtogroup automata_ops Operators on automata *//** @{ */
 /**
  * @file automata_ops.hh
  *
  * This file holds the default operations for the elements of the automata set.
  */
+/** @} */
 /** @} */
 
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -49,9 +51,10 @@ namespace vcsn {
   typename Element<S, T>::Type
 
   /** @addtogroup automata *//** @{ */
+  /** @addtogroup automata_ops *//** @{ */
 
-  /// Default operations on automata.
-  /** @{ */
+  /// @name Default operation on automata.
+  //@{
 
   template <class S, class T>
   const typename automaton_traits<T>::tag_t&
@@ -61,8 +64,6 @@ namespace vcsn {
   typename automaton_traits<T>::tag_t&
   op_get_tag(const AutomataBase<S>&, T&);
 
-
-  // Interface modified for exists()
   template <class S, class T>
   bool
   op_exists(const AutomataBase<S>& s, const T&);
@@ -228,7 +229,7 @@ namespace vcsn {
   op_is_spontaneous(const AutomataBase<S>&, const T&,
 		    hedge_t);
 
-  /** @} */
+  //@}
 
   // output_return_type = OutputIterator
   // output_type        = hedge_t
@@ -580,6 +581,9 @@ namespace vcsn {
 			      Container& res,
 			      hstate_t from,
 			      delta_kind::states k);
+
+  /** @} */
+  /** @} */
 
 } // vcsn
 

@@ -49,7 +49,7 @@ namespace vcsn {
   /**
    * Default chooser for aut_to_exp().
    *
-   * @precondition There must be at least one state in the automaton.
+   * @pre There must be at least one state in the automaton.
    * @see aut_to_exp()
    */
   struct DefaultChooser

@@ -142,14 +142,6 @@ namespace utility {
       return vcsn::algebra::RationalNumber(num, denom);
     }
 
-    /**
-     * Generates a bounded random rational number.
-     *
-     * Both fractions are first brought to the same denominator. Then,
-     * the  maximum   of  the  denominator  and   both  numerators  is
-     * taken. With this number, we work  out a ratio, which is used to
-     * have a larger range of choice for our new fraction.
-     */
     template<>
     inline
     vcsn::algebra::RationalNumber

@@ -1,7 +1,7 @@
 // slots.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,9 +31,10 @@
 # define VCSN_FUNDAMENTAL_SLOTS_HH
 
 /** @addtogroup design_pattern *//** @{ */
-/** 
+/**
  * @file slots.hh
- * @brief Declaration of set attribute slot for @c Element
+ *
+ * Declaration of set attribute slot for @c Element.
  */
 /** @} */
 
@@ -41,13 +42,14 @@
 
 namespace vcsn {
 
-/** @addtogroup design_pattern *//**@{*/
+  /** @addtogroup design_pattern *//**@{*/
 
   /*------------------------------.
   | Basic class for SetSlot below |
   `------------------------------*/
 
-  /** @brief Base class for @c SetSlot
+  /**
+   * Base class for @c SetSlot
    *
    * This class is responsible for holding a reference to the
    * structural element in each @c Element instance, by means of its
@@ -57,12 +59,12 @@ namespace vcsn {
    * structural element is static, i.e. does not require a
    * S.E. instance reference in all related @c Element instance
    * objects : all its properties are carried by its type.
-   * 
+   *
    * Because this version has actually no attribute, it should take no
    * memory space in each @c SetSlot (then @c Element) instance to
    * which it is linked.
-   * 
-   * @see 
+   *
+   * @see
    *   - @ref dyn_set_slot_attribute "SetSlotAttribute\<S,true\>"
    *   - @c SetSlot
    *   - @c Element
@@ -70,14 +72,15 @@ namespace vcsn {
   template<typename S, bool dynamic /* default: false */>
   struct SetSlotAttribute
   {
-    /// @{
-    /// Trivial constructor. 
+    //@{
+    /// Trivial constructor.
     SetSlotAttribute();
     SetSlotAttribute(const SetSlotAttribute& other);
     SetSlotAttribute(const S& other);
-    /// @}
+    //@}
 
-    /** Access to the instance of the structural element. 
+    /**
+     * Access to the instance of the structural element.
      *
      * Because this version of the class pertains to static S.E.'s,
      * this accessor returns a NULL reference, most likely
@@ -87,28 +90,33 @@ namespace vcsn {
      */
     const S&	get() const;
 
-    /// @{
     /**
-     * Because this version of the class pertains to static S.E.'s,
-     * this method actually does nothing and calls to it should be
+     * @name Methods to link the Slot
+     *
+     * Because this  version of the  class pertains to  static S.E.'s,
+     * those methods  actually do  nothing and calls  to it  should be
      * optimized away.
      */
+    //@{
 
-    /// Link a set slot to another.
+    /// Link a @c SetSlot to another.
     void	assign(const SetSlotAttribute& other);
 
-    /// Link a set slot to a structural element.
+    /// Link a @c SetSlot to a structural element.
     void	attach(const S& other);
-    /// @}
+    //@}
 
-    /** Tell whether the current set slot is linked to a structural element or not.
+    /**
+     * @brief Tell whether the current set slot is linked to a
+     *        structural element or not.
      *
      * In this version this method always returns @c true.
      */
     bool	bound() const;
   };
 
-  /** @brief Base class for @c SetSlot, specializing @c SetSlotAttribute
+  /**
+   * Base class for @c SetSlot, specializing @c SetSlotAttribute
    *
    * @anchor dyn_set_slot_attribute
    * This class is a specialization of @c SetSlotAttribute used when
@@ -123,14 +131,16 @@ namespace vcsn {
     /// Default constructor. Initialize with a NULL reference.
     SetSlotAttribute();
 
-    /** Copy constructor.
+    /**
+     * Copy constructor.
      *
      * This copy constructor creates an structural element reference
-     * by copying from the @c other attribute. 
+     * by copying from the @c other attribute.
      */
     SetSlotAttribute(const SetSlotAttribute& other);
 
-    /** Foreign copy constructor.
+    /**
+     * Foreign copy constructor.
      *
      * This copy constructor creates an structural element reference
      * by copying from a reference to a S.E. instance defined elsewhere.
@@ -144,19 +154,23 @@ namespace vcsn {
     /// Retrieve the structural element reference from the attribute.
     const S&	get() const;
 
-    /// @{
-    /** Update the reference in the slot.
+    //@{
+    /**
+     * Update the reference in the @c Slot.
      *
      * This method updates the S.E. reference in the attribute with
      * the reference given as argument.
      */
     void	assign(const SetSlotAttribute& other);
     void	attach(const S& s);
-    /// @}
+    //@}
 
-    /// Tell whether the reference to the structural element is valid or not (NULL).
+    /**
+     * @brief Tell whether the reference to the structural element is
+     *        valid or not (NULL).
+     */
     bool	bound() const;
-    
+
   protected:
     const S*	s_; ///< The actual reference to a structural element.
   };
@@ -184,23 +198,23 @@ namespace vcsn {
   template<typename S>
   struct SetSlot : SetSlotAttribute<S, dynamic_traits<S>::ret>
   {
-    /// @{
-    /// Trivial constructor. Calls the inherited constructor from 
-    /// @c SetSlotAttribute.
+    //@{
+    /**
+     * @brief Trivial constructor. Calls the inherited constructor from
+     *        @c SetSlotAttribute.
+     */
     SetSlot();
     SetSlot(const SetSlot& other);
     SetSlot(const S& other);
-    /// @}
+    //@}
   };
 
-  /// @}
+  /** @} */
 
 }
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/design_pattern/slots.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/design_pattern/slots.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_FUNDAMENTAL_SLOTS_HH

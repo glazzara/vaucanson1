@@ -1,17 +1,21 @@
 #ifndef VCSN_XML_DYNAMIC_HH
 # define VCSN_XML_DYNAMIC_HH
 
-/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/** @addtogroup xml XML tools for vaucanson *//** @{ */
 /**
  * @file dynamic.hh
- * @brief Main header for XML dynamic loading.
+ *
+ * Main header for XML dynamic loading.
+ *
  * @author Valentin David <valentin@lrde.epita.fr>
  */
 /** @} */
 
 namespace vcsn {
+
   /// XML tools for Vaucason.
   namespace xml {}
+
 }
 
 # include <vaucanson/xml/defaults.hh>

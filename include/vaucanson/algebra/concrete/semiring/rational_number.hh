@@ -35,25 +35,29 @@
 
 # include <iostream>
 
+/** @addtogroup algebra *//* @{ */
+/** @addtogroup semiring *//* @{ */
 /**
  * @file   rational_number.hh
- * @brief  This file contains a Rational class declaration.
+ *
+ * This file contains a RationalNumber class declaration.
  *
  * @author Sarah O'Connor <sarah@lrde.epita.fr>
  * @see RationalNumber
  */
+/** @} */
+/** @} */
 
 namespace vcsn
 {
   namespace algebra
   {
 
-    /** @addtogroup algebra */  /* @{ */
-    /** @addtogroup semiring */ /* @{ */
-
+    /** @addtogroup algebra *//* @{ */
+    /** @addtogroup semiring *//* @{ */
 
     /**
-     * @brief Rational numbers class.
+     * Rational numbers class.
      *
      * This is a rational numbers implementation.
      *
@@ -70,25 +74,41 @@ namespace vcsn
     {
     public:
 
-      /// Standard constructors.
-      /** @{ */
+      /// @name Standard constructors.
+      //@{
+      /// Constructor from numerator and denominator.
       RationalNumber(int num, unsigned int denom);
+      /// Default constructor. Initialize to zero.
       RationalNumber();
+      /// Copy constructor.
       RationalNumber(const RationalNumber& nb);
+      /**
+       * Generic constructor.
+       *
+       * @pre
+       * - T should be implicitly convertible into an integer representation.
+       * - T should be implicitly constructible from an integer.
+       * - T should conform the following prerequisite:
+       *      int(T(n)) / int(T(1)) == n
+       */
       template <typename T>
       explicit RationalNumber(const T num);
-      /** @} */
+      //@}
 
-      /// Accessors.
-      /** @{ */
+      /// @name Accessors
+      //@{
+      /// Get the numerator.
       const int&	num() const;
+      /// Get the denominator.
       const unsigned&	denom() const;
+      //@}
 
-      /** @} */
       std::ostream&	print(std::ostream& ostr) const;
 
-      /// Operators.
-      /** @{ */
+      /// @name Usual Operators.
+      //@{
+      /// Usual numerical operator.
+
       RationalNumber	operator+(const RationalNumber& nb) const;
       RationalNumber	operator-(const RationalNumber& nb) const;
       RationalNumber	operator-() const;
@@ -104,51 +124,56 @@ namespace vcsn
       bool	operator>=(const RationalNumber& nb) const;
       bool	operator==(const RationalNumber& nb) const;
       bool	operator!=(const RationalNumber& nb) const;
-      /** @} */
+      //@}
 
+      /// @name Type conversion methods.
+      //@{
       /**
-       * Provide explicit cast operator.
+       * Provide Explicit cast operator.
        *
-       * To_int and to_double allow us to get respectively an integer and
-       * a double from the rational number. These numbers are obtained by
-       * dividing the fraction's numerator and denominator.
+       * @c to_int()  and @c to_double() allow us  to get respectively
+       * an  integer and  a  double from  the  rational number.  These
+       * numbers are obtained by dividing the fraction's numerator and
+       * denominator.
        */
-      /** @{ */
       int		to_int() const;
       double		to_double() const;
-      /** @} */
+      //@}
 
     protected:
       int		num_;
       unsigned int	denom_;
 
+      /// @name Fraction simplification
+      //@{
       /**
        * Simplifies the fraction.
        *
-       * Set_result is used to simplify the fraction. We use the GCD
-       * (Greatest Common Divisor) algorithm. When there are no arguments,
-       * it simply checks the numerator and denominator and modifies them
-       * if needed.
+       * @c set_result() is used to  simplify the fraction. We use the
+       * GCD (Greatest  Common Divisor)  algorithm. When there  are no
+       * arguments, it simply checks the numerator and denominator and
+       * modifies them if needed.
        */
-      /** @{ */
       RationalNumber&	set_result();
       RationalNumber&	set_result(int num, unsigned int denom);
-      /** @} */
+      //@}
     };
 
+    // FIXME: Add other goodies for standard library.
     std::ostream& operator<<(std::ostream& ostr, const RationalNumber& nb);
+
+    // FIXME: We might prefer to define gcd and lcm somewhere else.
     int		gcd(int a, unsigned int b);
     int		lcm(int a, unsigned int b);
-    // FIXME: Other goodies for standard library.
-    // FIXME: We might prefer to define gcd and lcm somewhere else.
-    /** @} @} */
 
-  } // end of namespace algebra
-} // end of namespace vcsn
+    /** @} */
+    /** @} */
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/algebra/concrete/semiring/rational_number.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+  } // End of namespace algebra.
+} // End of namespace vcsn.
 
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concrete/semiring/rational_number.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // RATIONAL_NUMBER_HH

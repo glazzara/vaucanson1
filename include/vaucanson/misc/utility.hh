@@ -1,7 +1,7 @@
 // utility.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,7 +33,7 @@
 /** @addtogroup utility Utility constructs for Vaucanson *//** @{ */
 
 /**
- * @brief The namespace for utility constructs.
+ * The namespace for utility constructs.
  *
  * This namespace holds all C++ constructs that are used by Vaucanson
  * but are not Vaucanson-specific.
@@ -53,7 +53,7 @@ namespace utility {}
 #include <vaucanson/misc/unique.hh>
 
 /**
- * @file static.hh
+ * @file misc/static.hh
  * Definition of metaprogrammation helpers.
  */
 #include <vaucanson/misc/static.hh>
@@ -72,7 +72,8 @@ namespace utility {}
 
 /**
  * @file limits.hh
- * @brief Wrapper about the numeric limits for Vaucanson
+ *
+ * Wrapper about the numeric limits for Vaucanson
  *
  * This file defines the utility trait @c vcsn::limits, by using
  * standard C++ @c std::numeric_limits if available, or the
@@ -81,7 +82,5 @@ namespace utility {}
 #include <vaucanson/misc/limits.hh>
 
 /** @} */
-
-
 
 #endif // VCSN_MISC_UTILITY_HH

@@ -1,7 +1,7 @@
 // semigroup_base.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,21 +36,24 @@ namespace vcsn {
 
   namespace algebra {
 
-    /** @addtogroup algebra */  /** @{ */
-    /** @addtogroup semigroup */ /** @{ */
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup semigroup *//** @{ */
 
-    /// Empty class that is used as static information to denotes the
-    /// kind of internal operation of a semigroup. Here:operator*
-    struct mul_kind 
+    /// @brief Empty class used as static information to denotes the
+    ///        kind of internal operation of a semigroup. Here: operator*
+    struct mul_kind
     {};
 
-    /// Empty class that is used as static information to denotes the
-    /// kind of internal operation of a semigroup. Here:operator+
-    struct add_kind 
+    /// @brief Empty class used as static information to denotes the
+    ///        kind of internal operation of a semigroup. Here: operator+
+    struct add_kind
     {};
 
-    /// SemigroupBase is the base class of all structures that are semigroups.
-    /** All derived classes must define type virtual_types<S>::semigroup_kind.
+    /**
+     * @brief @c SemigroupBase is the base class of all structures that
+     *        are semigroups.
+     *
+     * All derived classes must define type virtual_types<S>::semigroup_kind.
      */
     template<class Self>
     struct SemigroupBase : Structure<Self>
@@ -63,16 +66,18 @@ namespace vcsn {
       SemigroupBase(const SemigroupBase& other);
     };
 
-    /** @} @} */
+    /** @} */
+    /** @} */
 
   } // algebra
 
-  /** @addtogroup algebra */  /** @{ */
-  /** @addtogroup semigroup */ /** @{ */
+  /** @addtogroup algebra *//** @{ */
+  /** @addtogroup semigroup *//** @{ */
 
-  /*------------------------------.
+  /*-------------------------------------.
   | dynamic_traits<SemigroupBase<Self> > |
-  `------------------------------*/
+  `-------------------------------------*/
+
   template<class Self>
   struct dynamic_traits<algebra::SemigroupBase<Self> >
     : dynamic_traits<Structure<Self> >
@@ -89,6 +94,7 @@ namespace vcsn {
   /*-----------------------------------.
   | MetaElement<SemigroupBase<Self>,T> |
   `-----------------------------------*/
+
   /// Services of every element of a semigroup.
   template<class Self, typename T>
   struct MetaElement<algebra::SemigroupBase<Self>, T>
@@ -102,14 +108,13 @@ namespace vcsn {
     MetaElement(const MetaElement& other);
   };
 
-  /** @} @} */
-  
+  /** @} */
+  /** @} */
+
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concept/semigroup_base.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concept/semigroup_base.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGEBRA_CONCEPT_SEMIGROUP_BASE_HH

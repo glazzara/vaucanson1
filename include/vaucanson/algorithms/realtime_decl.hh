@@ -98,7 +98,7 @@ namespace vcsn {
    *
    * This function returns true if the input is realtime.
    *
-   * @param a The automaton or regular expression to test.
+   * @param e The automaton or regular expression to test.
    *
    * @see realtime()
    */

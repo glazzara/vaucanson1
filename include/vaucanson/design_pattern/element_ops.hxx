@@ -30,15 +30,8 @@
 #ifndef VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
 # define VCSN_FUNDAMENTAL_ELEMENT_OPS_HXX
 
-/** @addtogroup design_pattern *//** @{ */
-/** @addtogroup operators   *//** @{ */
-/**
- * @file element_ops.hxx
- * @brief Implementations of external operators standard delegations for @c Element
- */
-/** @} @} */
-
 # include <vaucanson/design_pattern/element_ops.hh>
+
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/misc/static.hh>
 # include <vaucanson/misc/unique.hh>
@@ -171,7 +164,7 @@ operator <<(St& s, const Element<S, T>& e)
 template<typename St, typename S, typename T>
 static St&
 operator >>(St& s, Element<S, T>& e)
-{ 
+{
   S set = S();
 //FIXME: check for set
 //  if (e.bound())

@@ -1,7 +1,7 @@
 // syntactic_decorator.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,10 +32,12 @@
 
 # include <vaucanson/design_pattern/predecls.hh>
 
+/** @addtogroup design_pattern *//** @{ */
 /**
  * @file syntactic_decorator.hh
  * @brief Declaration of the very base class of @c Element
  */
+/** @} */
 
 namespace vcsn {
 
@@ -51,79 +53,85 @@ namespace vcsn {
    * It defines all the self-application operators
    * of C++, and delegates them to corresponding @c op_* functions.
    */
-  template<typename S, typename T> 
+  template<typename S, typename T>
   struct SyntacticDecorator
   {
     /// Attribute indicating whether the implementation type has run-time data.
     static const bool dynamic_value = true;
 
-    /// Virtual accessor to the structural element
+    /// Virtual accessor to the structural element.
     const S&	set() const;
-      
-    /** @{ */
-    /// Virtual accessor to value data
+
+    //@{
+    /// Virtual accessor to value data.
     T&		value();
     const T&	value() const;
-    /** @} */
+    //@}
 
-    /// self addition between Element instances. Maps to @c op_in_add.
-    template<typename OtherS, typename U>				 
-    Element<S, T>& operator+=(const Element<OtherS, U>& other);	 
+    /// Self addition between Element instances. Maps to @c op_in_add().
+    template<typename OtherS, typename U>
+    Element<S, T>& operator+=(const Element<OtherS, U>& other);
 
-    /// self addition between Element and foreign values. Maps to @c op_in_add.
-    template<typename U>						 
-    Element<S, T>& operator+=(const U& other);    
+    /// @brief Self addition between Element and foreign values.
+    ///        Maps to @c op_in_add().
+    template<typename U>
+    Element<S, T>& operator+=(const U& other);
 
-    /// self substraction between Element instances. Maps to @c op_in_sub.
-    template<typename OtherS, typename U>				 
-    Element<S, T>& operator-=(const Element<OtherS, U>& other);	 
+    /// Self substraction between Element instances. Maps to @c op_in_sub().
+    template<typename OtherS, typename U>
+    Element<S, T>& operator-=(const Element<OtherS, U>& other);
 
-    /// self substraction between Element and foreign values. Maps to @c op_in_sub.
-    template<typename U>						 
-    Element<S, T>& operator-=(const U& other);    
+    /// @brief Self substraction between Element and foreign values.
+    ///        Maps to @c op_in_sub().
+    template<typename U>
+    Element<S, T>& operator-=(const U& other);
 
-    /// self division between Element instances. Maps to @c op_in_div.
-    template<typename OtherS, typename U>				 
-    Element<S, T>& operator/=(const Element<OtherS, U>& other);	
- 
-    /// self division between Element and foreign values. Maps to @c op_in_div.
-    template<typename U>						 
-    Element<S, T>& operator/=(const U& other);    
+    /// Self division between Element instances. Maps to @c op_in_div().
+    template<typename OtherS, typename U>
+    Element<S, T>& operator/=(const Element<OtherS, U>& other);
 
-    /// self multiplication between Element instances. Maps to @c op_in_mul.
-    template<typename OtherS, typename U>				 
-    Element<S, T>& operator*=(const Element<OtherS, U>& other);	
- 
-    /// self multiplication between Element and foreign values. Maps to @c op_in_mul.
-    template<typename U>						 
-    Element<S, T>& operator*=(const U& other);    
+    /// @brief Self division between Element and foreign values.
+    ///        Maps to @c op_in_div().
+    template<typename U>
+    Element<S, T>& operator/=(const U& other);
 
-    /// self modulus between Element instances. Maps to @c op_in_mod.
-    template<typename OtherS, typename U>				 
-    Element<S, T>& operator%=(const Element<OtherS, U>& other);	
- 
-    /// self modulus between Element and foreign values. Maps to @c op_in_mod.
-    template<typename U>						 
-    Element<S, T>& operator%=(const U& other);    
+    /// Self multiplication between Element instances. Maps to @c op_in_mul().
+    template<typename OtherS, typename U>
+    Element<S, T>& operator*=(const Element<OtherS, U>& other);
 
-    /// In-place, prefix incrementation. Maps to @c op_in_inc.
+    /// @brief Self multiplication between Element and foreign values.
+    ///        Maps to @c op_in_mul().
+    template<typename U>
+    Element<S, T>& operator*=(const U& other);
+
+    /// Self modulus between Element instances. Maps to @c op_in_mod().
+    template<typename OtherS, typename U>
+    Element<S, T>& operator%=(const Element<OtherS, U>& other);
+
+    /// @brief Self modulus between Element and foreign values.
+    ///        Maps to @c op_in_mod().
+    template<typename U>
+    Element<S, T>& operator%=(const U& other);
+
+    /// In-place, prefix incrementation. Maps to @c op_in_inc().
     Element<S, T>& operator++();
 
-    /// Postfix incrementation. Maps to @c op_in_dec, with Element copy.
+    /// Postfix incrementation. Maps to @c op_in_dec(), with Element copy.
     Element<S, T> operator++(int);
-      
-    /// In-place, prefix decrementation. Maps to @c op_in_dec.
+
+    /// In-place, prefix decrementation. Maps to @c op_in_dec().
     Element<S, T>& operator--();
 
-    /// Postfix decrementation. Maps to @c op_in_dec, with Element copy.
+    /// Postfix decrementation. Maps to @c op_in_dec(), with Element copy().
     Element<S, T> operator--(int);
 
-    /// Standard constant-time swap between Element instances. Maps to @c op_swap.
+    /// @brief Standard constant-time swap between Element instances.
+    ///        Maps to @c op_swap().
     template<typename U>
     Element<S, T>& swap(Element<S, U>& other);
 
-    /** @{ */
-    /** 
+    //@{
+    /**
      * Accessor to the real type.
      *
      * This accessor is intended to be used by implementations in this class
@@ -132,25 +140,23 @@ namespace vcsn {
      */
     Element<S, T>& self();
     const Element<S, T>& self() const;
-    /** @} */
+    //@}
 
   protected:
 
-    /** @{ */
-    /// Protected constructor for class abstraction 
+    //@{
+    /// @name Protected constructor for class abstraction
     SyntacticDecorator();
     SyntacticDecorator(const SyntacticDecorator& other);
-    /** @} */
+    //@}
   };
 
   /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/design_pattern/syntactic_decorator.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/design_pattern/syntactic_decorator.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_FUNDAMENTAL_SYNTACTIC_DECORATOR_HH

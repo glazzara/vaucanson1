@@ -1,7 +1,7 @@
 // design_pattern.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,9 +30,9 @@
 #ifndef VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 # define VCSN_FUNDAMENTAL_FUNDAMENTAL_HH
 
-/** @addtogroup design_pattern Fundamental C++ : the Element design pattern. 
+/** @addtogroup design_pattern Fundamental C++: the Element design pattern.
  *
- * @brief Core constructs for Vaucanson.
+ * Core constructs for Vaucanson.
  *
  * This module contains definitions for the design pattern used in
  * Vaucanson, so called "Element". This design pattern is more deeply
@@ -42,9 +42,8 @@
  * the Parallel/High-performance Object-Oriented Scientific Computing
  * (POOSC'2003) Darmstadt, Germany July 2003.
  *
- * See http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200307-Poosc
+ * @see http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200307-Poosc
 */
-
 
 # include <vaucanson/design_pattern/default_ops.hh>
 # include <vaucanson/design_pattern/element.hh>

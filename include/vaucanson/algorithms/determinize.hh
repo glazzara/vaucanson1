@@ -54,16 +54,15 @@ namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
 
+  /// @name Determinization algorithms
+  //@{
   /**
-   * @name determinize()
-   *
    * Returns the determinized of a Boolean automaton.
    *
    * @param a The Boolean automaton to determinize.
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
-  /** @{ */
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a);
@@ -72,7 +71,7 @@ namespace vcsn {
   Element<A, T>
   determinize(const Element<A, T>& a,
 	      std::map<hstate_t, std::set<hstate_t> >&);
-  /** @} */
+  //@}
 
   /**
    * Test if an automaton is deterministic.

@@ -1,10 +1,12 @@
 #ifndef VCSN_XML_STATIC_HH
 # define VCSN_XML_STATIC_HH
 
-/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/** @addtogroup xml *//** @{ */
 /**
- * @file static.hh
- * @brief Main header for XML static loading.
+ * @file xml/static.hh
+ *
+ * Main header for XML static loading.
+ *
  * @author Valentin David <valentin@lrde.epita.fr>
  */
 /** @} */

@@ -35,7 +35,7 @@
 /**
  * @file krat_exp_flatten.hh
  *
- * This file holds the declaration of the flatten algorithm.
+ * This file holds the declaration of the flatten() algorithm.
  *
  * This is the  header file for the flatten  algorithm. This algorithm
  * extracts the letters from a rational expression and store them in a

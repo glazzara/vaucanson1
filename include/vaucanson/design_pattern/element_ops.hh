@@ -1,7 +1,7 @@
 // element_ops.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,8 @@
  * @file element_ops.hh
  * @brief Declarations of standard external operator delegations for @c Element
  */
-/** @} @} */
+/** @} */
+/** @} */
 
 # include <vaucanson/design_pattern/element_op_traits.hh>
 
@@ -50,28 +51,28 @@ namespace vcsn {
   `-------------------*/
 
   /// Comparison between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  bool operator<(const vcsn::Element<S1, T1>& e1,	
-		 const vcsn::Element<S2, T2>& e2);	
+  bool operator<(const vcsn::Element<S1, T1>& e1,
+		 const vcsn::Element<S2, T2>& e2);
 
   /// Comparison between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  bool operator>(const vcsn::Element<S1, T1>& e1,	
-		 const vcsn::Element<S2, T2>& e2);	
+  bool operator>(const vcsn::Element<S1, T1>& e1,
+		 const vcsn::Element<S2, T2>& e2);
 
   /// Comparison between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  bool operator<=(const vcsn::Element<S1, T1>& e1,	
-		  const vcsn::Element<S2, T2>& e2);	
+  bool operator<=(const vcsn::Element<S1, T1>& e1,
+		  const vcsn::Element<S2, T2>& e2);
 
   /// Comparison between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  bool operator>=(const vcsn::Element<S1, T1>& e1,	
-		  const vcsn::Element<S2, T2>& e2);	
+  bool operator>=(const vcsn::Element<S1, T1>& e1,
+		  const vcsn::Element<S2, T2>& e2);
 
   /// Comparison between Element and foreign values (left version)
   template<typename S, typename T, typename U>
@@ -126,10 +127,10 @@ namespace vcsn {
   `---------*/
 
   /// Equality between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  bool operator ==(const vcsn::Element<S1, T1>& e1,	
-		  const vcsn::Element<S2, T2>& e2);	
+  bool operator ==(const vcsn::Element<S1, T1>& e1,
+		  const vcsn::Element<S2, T2>& e2);
 
   /// Equality between Element and foreign values (left version)
   template<typename S, typename T, typename U>
@@ -148,10 +149,10 @@ namespace vcsn {
   `-----------*/
 
   /// Difference between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  bool operator !=(const vcsn::Element<S1, T1>& e1,	
-		  const vcsn::Element<S2, T2>& e2);	
+  bool operator !=(const vcsn::Element<S1, T1>& e1,
+		  const vcsn::Element<S2, T2>& e2);
 
   /// Difference between Element and foreign values (left version)
   template<typename S, typename T, typename U>
@@ -170,22 +171,22 @@ namespace vcsn {
   `---------*/
 
   /// Addition between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	      	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  typename vcsn::op_add_traits<S1, S2, T1, T2>::ret_t	
-  operator+(const vcsn::Element<S1, T1>& e1,			
-	    const vcsn::Element<S2, T2>& e2);				
+  typename vcsn::op_add_traits<S1, S2, T1, T2>::ret_t
+  operator+(const vcsn::Element<S1, T1>& e1,
+	    const vcsn::Element<S2, T2>& e2);
 
   /// Addition between Element and foreign values (left)
-  template<typename S, typename T, typename U>	       			
-  static vcsn::Element<S, T>					
-  operator +(const vcsn::Element<S, T>& e,				
-	     const U& v);			       			
+  template<typename S, typename T, typename U>
+  static vcsn::Element<S, T>
+  operator +(const vcsn::Element<S, T>& e,
+	     const U& v);
 
   /// Addition between Element and foreign values (right)
-  template<typename U, typename S, typename T>				       
-  static vcsn::Element<S, T>					
-  operator +(const U& v,			          		
+  template<typename U, typename S, typename T>
+  static vcsn::Element<S, T>
+  operator +(const U& v,
 	     const vcsn::Element<S, T>& e);
 
   /*-------------.
@@ -193,22 +194,22 @@ namespace vcsn {
   `-------------*/
 
   /// Substraction between Element instances
-  template<typename S1, typename T1, typename S2, typename T2> 		
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  typename vcsn::op_sub_traits<S1, S2, T1, T2>::ret_t	
-  operator-(const vcsn::Element<S1, T1>& e1,			
-	    const vcsn::Element<S2, T2>& e2);				
+  typename vcsn::op_sub_traits<S1, S2, T1, T2>::ret_t
+  operator-(const vcsn::Element<S1, T1>& e1,
+	    const vcsn::Element<S2, T2>& e2);
 
   /// Substraction between Element and foreign values (left)
-  template<typename S, typename T, typename U>		       		
-  static vcsn::Element<S, T>					
-  operator-(const vcsn::Element<S, T>& e,				
-	    const U& v);				       		
+  template<typename S, typename T, typename U>
+  static vcsn::Element<S, T>
+  operator-(const vcsn::Element<S, T>& e,
+	    const U& v);
 
   /// Substraction between Element and foreign values (right)
-  template<typename U, typename S, typename T>				       
-  static vcsn::Element<S, T>					
-  operator-(const U& v,					     		
+  template<typename U, typename S, typename T>
+  static vcsn::Element<S, T>
+  operator-(const U& v,
 	    const vcsn::Element<S, T>& e);
 
   /*---------------.
@@ -216,22 +217,22 @@ namespace vcsn {
   `---------------*/
 
   /// Multiplication between Element instances
-  template<typename S1, typename T1, typename S2, typename T2> 		
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  typename vcsn::op_mul_traits<S1, S2, T1, T2>::ret_t	
-  operator*(const vcsn::Element<S1, T1>& e1,			
-	    const vcsn::Element<S2, T2>& e2);				
+  typename vcsn::op_mul_traits<S1, S2, T1, T2>::ret_t
+  operator*(const vcsn::Element<S1, T1>& e1,
+	    const vcsn::Element<S2, T2>& e2);
 
   /// Multiplication between Element and foreign values (left)
-  template<typename S, typename T, typename U>			       	
-  static vcsn::Element<S, T>					
-  operator*(const vcsn::Element<S, T>& e,			       
-	    const U& v);					     	
+  template<typename S, typename T, typename U>
+  static vcsn::Element<S, T>
+  operator*(const vcsn::Element<S, T>& e,
+	    const U& v);
 
   /// Multiplication between Element and foreign values (right)
-  template<typename U, typename S, typename T>				       
-  static vcsn::Element<S, T>					
-  operator*(const U& v,					     		
+  template<typename U, typename S, typename T>
+  static vcsn::Element<S, T>
+  operator*(const U& v,
 	    const vcsn::Element<S, T>& e);
 
   /*---------.
@@ -239,22 +240,22 @@ namespace vcsn {
   `---------*/
 
   /// Division between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	       	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  typename vcsn::op_div_traits<S1, S2, T1, T2>::ret_t	
-  operator/(const vcsn::Element<S1, T1>& e1,			
-	    const vcsn::Element<S2, T2>& e2);				
+  typename vcsn::op_div_traits<S1, S2, T1, T2>::ret_t
+  operator/(const vcsn::Element<S1, T1>& e1,
+	    const vcsn::Element<S2, T2>& e2);
 
   /// Division between Element and foreign values (left)
-  template<typename S, typename T, typename U>			       	
-  static vcsn::Element<S, T>					
-  operator/(const vcsn::Element<S, T>& e,			       
-	    const U& v);					       	
+  template<typename S, typename T, typename U>
+  static vcsn::Element<S, T>
+  operator/(const vcsn::Element<S, T>& e,
+	    const U& v);
 
   /// Division between Element and foreign values (right)
-  template<typename U, typename S, typename T>				       
-  static vcsn::Element<S, T>					
-  operator/(const U& v,					     		
+  template<typename U, typename S, typename T>
+  static vcsn::Element<S, T>
+  operator/(const U& v,
 	    const vcsn::Element<S, T>& e);
 
   /*--------.
@@ -262,31 +263,31 @@ namespace vcsn {
   `--------*/
 
   /// Modulus between Element instances
-  template<typename S1, typename T1, typename S2, typename T2>	       	
+  template<typename S1, typename T1, typename S2, typename T2>
   static
-  typename vcsn::op_mod_traits<S1, S2, T1, T2>::ret_t	
-  operator%(const vcsn::Element<S1, T1>& e1,			
-	    const vcsn::Element<S2, T2>& e2);				
+  typename vcsn::op_mod_traits<S1, S2, T1, T2>::ret_t
+  operator%(const vcsn::Element<S1, T1>& e1,
+	    const vcsn::Element<S2, T2>& e2);
 
   /// Modulus between Element and foreign values (left)
-  template<typename S, typename T, typename U>		       		
-  static vcsn::Element<S, T>					
-  operator%(const vcsn::Element<S, T>& e,				
-	    const U& v);				       		
+  template<typename S, typename T, typename U>
+  static vcsn::Element<S, T>
+  operator%(const vcsn::Element<S, T>& e,
+	    const U& v);
 
   /// Modulus between Element and foreign values (right
-  template<typename U, typename S, typename T>				       
-  static vcsn::Element<S, T>					
-  operator%(const U& v,					     		
+  template<typename U, typename S, typename T>
+  static vcsn::Element<S, T>
+  operator%(const U& v,
 	    const vcsn::Element<S, T>& e);
 
   /*---------------.
   | Unary negation |
   `---------------*/
- 
+
   /// Unary negation of Element instances
   template<typename S, typename T>
-  static vcsn::Element<S, T> 
+  static vcsn::Element<S, T>
   operator -(const vcsn::Element<S, T>&);
 
   /*-----------------.
@@ -295,12 +296,12 @@ namespace vcsn {
 
   /// Output to stream
   template<typename St, typename S, typename T>
-  static St& 
+  static St&
   operator <<(St& s, const vcsn::Element<S, T>& e);
 
   /// Input from stream
   template<typename St, typename S, typename T>
-  static St& 
+  static St&
   operator >>(St& s, const vcsn::Element<S, T>& e);
 
   // This operator does not exist.
@@ -309,9 +310,10 @@ namespace vcsn {
 //   static void /* do not use or specialize */
 //   operator <<(const vcsn::Element<S1, T1>& e1,
 // 	      const vcsn::Element<S2, T2>& e2);
-  
 
-  /** @} @} */
+
+  /** @} */
+  /** @} */
 
 } // vcsn
 
@@ -329,25 +331,24 @@ namespace std {
    * of the two Element instances are equal.
    */
   template<typename S, typename T1, typename T2>
-  void swap(vcsn::Element<S, T1>& e1, 
+  void swap(vcsn::Element<S, T1>& e1,
 	    vcsn::Element<S, T2>& e2);
 
-  /// Swap between Element and foreign values (left) 
+  /// Swap between Element and foreign values (left)
   template<typename S, typename T>
   void swap(vcsn::Element<S, T>& e1, T& v2);
 
-  /// Swap between Element and foreign values (right) 
+  /// Swap between Element and foreign values (right)
   template<typename T, typename S>
   void swap(T& v1, vcsn::Element<S, T>& e2);
 
-  /** @} @} */
+  /** @} */
+  /** @} */
 
 } // std
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/design_pattern/element_ops.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/design_pattern/element_ops.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_FUNDAMENTAL_ELEMENT_OPS_HH

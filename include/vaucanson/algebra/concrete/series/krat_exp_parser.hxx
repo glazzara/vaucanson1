@@ -30,20 +30,9 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HXX
 
-/**
- * @file krat_exp_parser.hxx
- *
- * @brief Implement the parse() function.
- *
- * This files implements parse() and contains a lot of
- * tools used by this function.
- * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
- *         Thomas Claveirole <thomas@lrde.epita.fr>
- * @see parse()
- */
+# include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 
 # include <vaucanson/algebra/concept/monoid_base.hh>
-# include <vaucanson/algebra/concrete/series/krat_exp_parser.hh>
 # include <vaucanson/tools/usual_escaped_characters.hh>
 
 # include <list>
@@ -53,18 +42,19 @@ namespace vcsn {
 
   namespace algebra {
 
-    /** @addtogroup algebra */ /** @{ */
-    /** @addtogroup series */ /** @{ */
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup series *//** @{ */
 
     /// Misc. declarations used for rational expression lexing.
     namespace krat_exp_lexing {
 
       /**
-       * @brief Token types enumeration.
+       * Token types enumeration.
        *
        * Those are the different token types the lexer could encounter.
        *
-       * @see KRatExpToken, KRatExpToken::token
+       * @see @c KRatExpToken, @c KRatExpToken::token
+       * @anchor token_e
        */
       enum token_e
 	{
@@ -86,28 +76,28 @@ namespace vcsn {
     using namespace krat_exp_lexing;
 
     /**
-     * @brief Schrödinger's token for rational expression lexing.
+     * Schrödinger's token for rational expression lexing.
      *
      * Tokens are ambiguous. For example, '1' could be interpreted
      * both as a weight and as the empty word. So we assume that each
      * possible token is in fact part of the *same* token. This
      * is the Schrödinger's token this class represents.
      *
-     * @see KRatExpToken::token, token_e
+     * @see @c KRatExpToken::token, @ref token_e "token_e"
      */
     template <class MonoidValue, class SemiringEltValue>
     class KRatExpToken
     {
     public:
       /**
-       * @brief Simple token.
+       * Simple token.
        *
        * This classes represents a simple unambiguous token. Its type
        * is one of token_e. When a_word or a_weight, an extra information
        * is carried, which is (of course) the corresponding weight or
        * word. A Schrödinger's token contains a list of such tokens.
        *
-       * @see KRatExpToken, token_e
+       * @see @c KRatExpToken, @ref token_e "token_e"
        */
       struct token
       {
@@ -251,7 +241,11 @@ namespace vcsn {
       std::list<token> tok_;
     };
 
-    /// Lexer class for the rational expression parser.
+    /**
+     * Lexer class for the rational expression parser.
+     *
+     * @see @c Parser
+     */
     template <class S, class T>
     struct Lexer
     {
@@ -279,7 +273,7 @@ namespace vcsn {
       }
 
       /**
-       * @brief Perform lexing.
+       * Perform lexing.
        *
        * @param in The rational expression to lex, as a string.
        * @param e The element which will be used later for parsing.
@@ -373,7 +367,7 @@ namespace vcsn {
       }
 
       /**
-       * @brief Shift tokens.
+       * Shift tokens.
        *
        * Remove the first token from the token stream. So second
        * becames first, third becames second, and so on...
@@ -402,36 +396,38 @@ namespace vcsn {
     };
 
     /**
-     * @brief Parser class used in the ::parse() function.
+     * Parser class used in the ::parse() function.
      *
-     * <p>This class handles rational expression parsing, once a Lexer has
-     * been created.</p>
+     * This class handles rational expression parsing, once a Lexer has
+     * been created.
      *
-     * <p>Ideally, we would like to parse:</p>
-     * <pre>
-     * exp ::= '(' exp ')'
-     *     |   exp '+' exp
-     *     |   exp '.' exp
-     *     |   exp exp
-     *     |   exp '*'
-     *     |   weight ' ' exp
-     *     |   exp ' ' weight
-     *     |   0
-     *     |   1
-     *     |   word
-     * </pre>
+     * Ideally, we would like to parse:
      *
-     * <p>But this grammar has to be changed to allow a classical LL(2)
-     * parsing:</p>
-     * <pre>
-     * exp		::= term ('+' term)*
-     * term		::= right_weighted ('.'? right_weighted)*
-     * right_weighted	::= left_weighted (' ' weight)*
-     * left_weighted	::= weight ' ' left_weighted
-     *                  |   stared
-     * stared		::= factor '*'*
-     * factor		::= '(' exp ')' | word | 0 | 1
-     * </pre>
+     @verbatim
+     exp ::= '(' exp ')'
+         |   exp '+' exp
+         |   exp '.' exp
+         |   exp exp
+         |   exp '*'
+         |   weight ' ' exp
+         |   exp ' ' weight
+         |   0
+         |   1
+         |   word
+     @endverbatim
+     *
+     * But this grammar has to be changed to allow a classical LL(2)
+     * parsing:
+     *
+     @verbatim
+     exp		::= term ('+' term)*
+     term		::= right_weighted ('.'? right_weighted)*
+     right_weighted	::= left_weighted (' ' weight)*
+     left_weighted	::= weight ' ' left_weighted
+                        |   stared
+     stared		::= factor '*'*
+     factor		::= '(' exp ')' | word | 0 | 1
+     @endverbatim
      */
     template <class S, class T>
     struct Parser
@@ -496,8 +492,8 @@ namespace vcsn {
 
     protected:
 
+      //@{
       /// Trace parsing.
-      /** @{ */
       void
       trace(const std::string& msg)
       {
@@ -512,7 +508,7 @@ namespace vcsn {
 	if (trace_)
 	  std::cerr << "PARSER: " << msg << " (" << v << ")." << std::endl;
       }
-      /** @} */
+      //@}
 
       /// Generate a parse error.
       void parse_error(const std::string& msg = "parse_error.")
@@ -523,7 +519,7 @@ namespace vcsn {
       }
 
       /**
-       * @brief Accept token, or generate an error.
+       * Accept token, or generate an error.
        *
        * This function asks the lexer whether the first input token
        * matches the argument or not. When matching is successfull,

@@ -28,19 +28,6 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
 
-/**
- * @file char_traits.hxx
- *
- * @brief Generic char_traits definitions.
- *
- * This  file  contains  the  utility::char_traits  definition.  This
- * structure should allow  a programmer to specialize std::char_traits
- * for some types with little efforts.
- *
- * @authors Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
- * @see utility::char_traits
- */
-
 #ifndef VCSN_MISC_CHAR_TRAITS_HXX
 # define VCSN_MISC_CHAR_TRAITS_HXX
 
@@ -49,8 +36,6 @@
 
 namespace utility
 {
-
-  /** @addtogroup misc */ /** @{ */
 
   /*-----------------.
   | generic_int_type |
@@ -227,8 +212,6 @@ namespace utility
   {
     return int_type();
   }
-
-  /** @} */
 
 } // end of namespace utility
 

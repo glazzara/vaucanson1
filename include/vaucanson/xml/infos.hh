@@ -5,37 +5,42 @@
 
 # include <string>
 
-/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/** @addtogroup xml *//** @{ */
 /**
  * @file infos.hh
- * @brief Attached XML data for Graphs.
+ *
+ * Attached XML data for Graphs.
+ *
  * @author Valentin David <valentin@lrde.epita.fr>
  */
+/** @} */
 
 namespace vcsn
 {
+
   namespace xml
   {
+
+    /** @addtogroup xml *//** @{ */
+
     /// Optionnal fields.
     template <typename I>
     struct Optionnal
     {
-    private:
-      /// Value
-      I value;
-      /// Is set ?
-      bool set;
     public:
       Optionnal<I>() : set(false) {}
+
       Optionnal<I>(const I& i) : set(true)
       {
 	value = i;
       }
+
       Optionnal<I>(const Optionnal<I>& o)
       {
 	value = o.value;
 	set = o.set;
       }
+
       /// Return reference to the value and tell it is set.
       I& operator()()
       {
@@ -50,6 +55,12 @@ namespace vcsn
 
       bool& is_set() { return set; }
       const bool& is_set() const { return set; }
+
+    private:
+      /// Value
+      I value;
+      /// Is set ?
+      bool set;
     };
 
 # include <vaucanson/xml/geometry.inc>
@@ -69,10 +80,6 @@ namespace vcsn
     struct StateList
       : public ListGeometry<hstate_t>
     {
-    private:
-      std::map<hstate_t, std::string> name;
-      std::map<hstate_t, Optionnal<std::string> > label;
-
     public:
       std::map<hstate_t,
 	       std::string>&			get_name()
@@ -89,27 +96,14 @@ namespace vcsn
 
       StateList() : ListGeometry<hstate_t>(), name(), label()
       { }
+    private:
+      std::map<hstate_t, std::string> name;
+      std::map<hstate_t, Optionnal<std::string> > label;
     };
 
     /// XML Infos for graph's tag.
     struct XmlInfosTag {
       typedef Optionnal<GeometryValue> Geometry;
-
-    private:
-
-      /// Geometry of content.
-      Geometry structure;
-      /// Geometry of the whole automaton.
-      Geometry root;
-      /// States geometry.
-      StateList states;
-      /// Transitions geometry.
-      ListGeometry<hedge_t> edges;
-      /// Initial states geometry.
-      ListGeometry<hstate_t> initials;
-      /// Final states geometry.
-      ListGeometry<hstate_t> finals;
-
     public:
       Geometry&				get_structure()
 					{ return structure; }
@@ -139,10 +133,27 @@ namespace vcsn
       XmlInfosTag()
 	: structure(), root(), states(), edges(), initials(), finals()
       { }
-    };
-  }
-}
 
-/** @} */
+    private:
+      /// Geometry of content.
+      Geometry structure;
+      /// Geometry of the whole automaton.
+      Geometry root;
+      /// States geometry.
+      StateList states;
+      /// Transitions geometry.
+      ListGeometry<hedge_t> edges;
+      /// Initial states geometry.
+      ListGeometry<hstate_t> initials;
+      /// Final states geometry.
+      ListGeometry<hstate_t> finals;
+
+    };
+
+    /** @} */
+
+  } // End of namespace xml.
+
+} // End of namespace vcsn.
 
 #endif // VCSN_XML_INFOS_HH

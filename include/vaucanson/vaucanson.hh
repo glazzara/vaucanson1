@@ -1,7 +1,7 @@
 // vaucanson.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,7 @@
 # include <vaucanson/config/system.hh>
 # include <vaucanson/misc/utility.hh>
 # include <vaucanson/design_pattern/design_pattern.hh>
+# include <vaucanson/algebra/algebra.hh>
 
 /** @mainpage Vaucanson Documentation
  *
@@ -86,8 +87,8 @@
  * <li><A HREF="modules.html">Modules</A> are the different categories
  * used to classify the features of the library.</li>
  *
- * <li>The class <A HREF="annotated.html">list</A>, 
- *  <A HREF="classes.html">index</A> and 
+ * <li>The class <A HREF="annotated.html">list</A>,
+ *  <A HREF="classes.html">index</A> and
  *  <A HREF="hierarchy.html">hierarchy</A> describe the different data
  * structures.</li>
  *

@@ -25,6 +25,8 @@ namespace vcsn
   }
 }
 
-# include <vaucanson/xml/error_handler.hxx>
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/xml/error_handler.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_XML_ERROR_HANDLER_HH

@@ -36,13 +36,14 @@ namespace vcsn {
 
   namespace algebra {
 
-    /** @ingroup alphabet */ /** @{ */
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup alphabet *//** @{ */
 
-    /*---------------------------------------------.
+    /*--------------------------------------------.
     | alphabet_traits<AlphabetSet<L>,std::set<L>> |
-    `---------------------------------------------*/
-    /// meta information about the mixing of AlphabetSet with
-    /// std::set.
+    `--------------------------------------------*/
+
+    /// Meta information about the mixing of AlphabetSet with std::set.
     template<typename L>
     struct alphabet_traits<AlphabetSet<L>, std::set<L> >
     {
@@ -50,17 +51,23 @@ namespace vcsn {
       typedef L			letter_t;
     };
 
-    /// @}
+    /** @} */
+    /** @} */
 
   } // algebra
 
-  /** @ingroup alphabet */ /** @{ */
+  /** @addtogroup algebra *//** @{ */
+  /** @addtogroup alphabet *//** @{ */
 
-  /*------------------------------------------.
+  /*-----------------------------------------.
   | MetaElement<AlphabetSet<L>, std::set<L>> |
-  `------------------------------------------*/
-  /// Services of every alphabet implemented with std::set.
-  /// See MetaElement<AlphabetSetBase<Self>, T>.
+  `-----------------------------------------*/
+
+  /**
+   *  Services of every alphabet implemented with std::set.
+   *
+   * @see MetaElement<AlphabetSetBase<Self>, T>
+   */
   template<typename L>
   struct MetaElement<algebra::AlphabetSet<L>, std::set<L> >
     : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, std::set<L> >
@@ -69,7 +76,8 @@ namespace vcsn {
     static const bool dynamic_values = true;
   };
 
-  /// @}
+  /** @} */
+  /** @} */
 
   template <typename L>
   size_t
@@ -87,10 +95,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concrete/alphabets/set_alphabet.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGEBRA_CONCRETE_ALPHABETS_SET_ALPHABET_HH

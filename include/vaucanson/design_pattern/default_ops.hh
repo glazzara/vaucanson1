@@ -1,7 +1,7 @@
 // default_ops.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -37,6 +37,7 @@
  * @brief Default implementations for standard @c Element operations.
  */
 /** @} */
+/** @} */
 
 # include <vaucanson/design_pattern/predecls.hh>
 # include <vaucanson/misc/selectors.hh>
@@ -50,9 +51,11 @@ namespace vcsn {
   | Structure::contains |
   `--------------------*/
 
-  /** Check whether a value is contained in a set.
-   *  @c op_contains is an operator appliable on every structure; this
-   *  is the "is in" relation.
+  /**
+   * Check whether a value is contained in a set.
+   *
+   * @c op_contains is an  operator appliable on every structure; this
+   * is the "is in" relation.
    */
   template<typename S, typename T>
   bool op_contains(const Structure<S>& set, const T& value);
@@ -64,25 +67,27 @@ namespace vcsn {
   /// Equality between two structured values.
   template<typename S, typename T, typename U>
   bool op_eq(const Structure<S>&,
-	     const T& v1, 
+	     const T& v1,
 	     const U& v2);
 
+  /// Equality between two structured values.
   template<typename S, typename V, typename T, typename U>
   bool op_eq(const Structure<S>&,
 	     const Structure<V>&,
-	     const T& v1, 
+	     const T& v1,
 	     const U& v2);
 
   /// Ordered comparison between two structured values.
   template<typename S, typename T, typename U>
   bool op_lt(const Structure<S>&,
-	     const T& v1, 
+	     const T& v1,
 	     const U& v2);
 
+  /// Ordered comparison between two structured values.
   template<typename S, typename V, typename T, typename U>
   bool op_lt(const Structure<S>&,
 	     const Structure<V>&,
-	     const T& v1, 
+	     const T& v1,
 	     const U& v2);
 
   /*------------.
@@ -91,9 +96,9 @@ namespace vcsn {
 
   /// Default conversion between value types with computation
   template<typename S, typename R, typename T>
-  R op_convert(const Structure<S> &se, 
+  R op_convert(const Structure<S> &se,
 	       SELECTOR(R), const T& data);
-      
+
   /// Pass-through conversion
   template<typename S, typename T>
   const T& op_convert(const Structure<S>& se,
@@ -101,7 +106,7 @@ namespace vcsn {
 
   /// Pass-through conversion between compatible structures
   template<typename S, typename T>
-  const T& op_convert(const Structure<S>& se, SELECTOR(T), 
+  const T& op_convert(const Structure<S>& se, SELECTOR(T),
 		      const Structure<S>& from_se, const T& from_data);
 
   /*---------------------.
@@ -125,133 +130,106 @@ namespace vcsn {
   | Assignment |
   `-----------*/
 
-
-  /** assignement operator between two implementations of a Structure<S>.
-   *
-   */
+  /// Assignement operator between two implementations of a Structure<S>.
   template<typename S, typename T, typename U>
-  void op_assign(const Structure<S>& s, 
+  void op_assign(const Structure<S>& s,
 		 T& dst, const U& src);
 
-  /** assignement operator between two implementations of two differents structures.
-   *
+  /**
+   * @brief Assignement operator between two implementations of two
+   *        differents structures.
    */
   template<typename S, typename T, typename U>
   void op_assign(const Structure<S>& s1,
 		 const Structure<S>& s2,
-		 T& dst, 
+		 T& dst,
 		 const U& src);
 
-  /** addition in place operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  void op_in_add(const Structure<S>& s1, 	
-		 const Structure<S>& s2,	
-		 T& dst,				
-		 const U& arg);			        
+  /// Addition in place operator between two different elements.
+  template<typename S, typename T, typename U>
+  void op_in_add(const Structure<S>& s1,
+		 const Structure<S>& s2,
+		 T& dst,
+		 const U& arg);
 
-  /** substraction in place operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  void op_in_sub(const Structure<S>& s1, 	
-		 const Structure<S>& s2,	
-		 T& dst,				
-		 const U& arg);			        
+  /// Substraction in place operator between two different elements.
+  template<typename S, typename T, typename U>
+  void op_in_sub(const Structure<S>& s1,
+		 const Structure<S>& s2,
+		 T& dst,
+		 const U& arg);
 
-  /** multiplication in place operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  void op_in_mul(const Structure<S>& s1, 	
-		 const Structure<S>& s2,	
-		 T& dst,				
-		 const U& arg);			        
+  /// Multiplication in place operator between two different elements.
+  template<typename S, typename T, typename U>
+  void op_in_mul(const Structure<S>& s1,
+		 const Structure<S>& s2,
+		 T& dst,
+		 const U& arg);
 
-  /** division in place operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  void op_in_div(const Structure<S>& s1, 	
-		 const Structure<S>& s2,	
-		 T& dst,				
-		 const U& arg);			        
+  /// Division in place operator between two different elements.
+  template<typename S, typename T, typename U>
+  void op_in_div(const Structure<S>& s1,
+		 const Structure<S>& s2,
+		 T& dst,
+		 const U& arg);
 
-  /** modulo in place operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  void op_in_mod(const Structure<S>& s1, 	
-		 const Structure<S>& s2,	
-		 T& dst,				
-		 const U& arg);			        
+  /// Modulo in place operator between two different elements.
+  template<typename S, typename T, typename U>
+  void op_in_mod(const Structure<S>& s1,
+		 const Structure<S>& s2,
+		 T& dst,
+		 const U& arg);
 
-  /** addition operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  T op_add(const Structure<S>& s1, 		
-	   const Structure<S>& s2,		
-	   const T& v1,				
-	   const U& v2);			
+  /// Addition operator between two different elements.
+  template<typename S, typename T, typename U>
+  T op_add(const Structure<S>& s1,
+	   const Structure<S>& s2,
+	   const T& v1,
+	   const U& v2);
 
-  /** substraction operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  T op_sub(const Structure<S>& s1, 		
-	   const Structure<S>& s2,		
-	   const T& v1,				
-	   const U& v2);			
+  /// Substraction operator between two different elements.
+  template<typename S, typename T, typename U>
+  T op_sub(const Structure<S>& s1,
+	   const Structure<S>& s2,
+	   const T& v1,
+	   const U& v2);
 
-  /** multiplication operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  T op_mul(const Structure<S>& s1, 		
-	   const Structure<S>& s2,		
-	   const T& v1,				
-	   const U& v2);			
+  /// Multiplication operator between two different elements.
+  template<typename S, typename T, typename U>
+  T op_mul(const Structure<S>& s1,
+	   const Structure<S>& s2,
+	   const T& v1,
+	   const U& v2);
 
-  /** division operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  T op_div(const Structure<S>& s1, 		
-	   const Structure<S>& s2,		
-	   const T& v1,				
-	   const U& v2);			
+  /// Division operator between two different elements.
+  template<typename S, typename T, typename U>
+  T op_div(const Structure<S>& s1,
+	   const Structure<S>& s2,
+	   const T& v1,
+	   const U& v2);
 
-  /** modulo operator between two different elements.
-   *
-   */
-  template<typename S, typename T, typename U>		
-  T op_mod(const Structure<S>& s1, 		
-	   const Structure<S>& s2,		
-	   const T& v1,				
-	   const U& v2);			
-  
-  /** input stream operator.
-   * 
-   */
+  /// Modulo operator between two different elements.
+  template<typename S, typename T, typename U>
+  T op_mod(const Structure<S>& s1,
+	   const Structure<S>& s2,
+	   const T& v1,
+	   const U& v2);
+
+  /// Input stream operator.
   template<typename S, typename St, typename T>
   St& op_rin(const Structure<S>& s, St& st, const T& v);
 
-  /** output stream operator.
-   *
-   */
+  /// Output stream operator.
   template<typename S, typename St, typename T>
   St& op_rout(const Structure<S>& s, St& st, const T& v);
 
-  /** @} @} */ 
+  /** @} */
+  /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/design_pattern/default_ops.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/design_pattern/default_ops.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_FUNDAMENTAL_DEFAULT_OPS_HH

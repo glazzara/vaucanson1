@@ -1,7 +1,7 @@
 // semiring_base.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,18 +39,18 @@ namespace vcsn {
   namespace algebra {
 
     /*-------------.
-      | SemiringBase |
-      `-------------*/
+    | SemiringBase |
+    `-------------*/
 
     template <class Self>
     SemiringBase<Self>::SemiringBase()
     {}
-    
+
     template <class Self>
     SemiringBase<Self>::SemiringBase(const SemiringBase& other) :
       MonoidBase<Self>(other)
     {}
-    
+
     template <class Self>
     template <class T>
     bool
@@ -66,7 +66,7 @@ namespace vcsn {
     {
       return op_choose_starable(this->self(), SELECT(T));
     }
-    
+
     template <class Self>
     template <class T>
     Element<Self, T>
@@ -74,31 +74,30 @@ namespace vcsn {
     {
       return op_choose_non_starable(this->self(), SELECT(T));
     }
-    
+
   } // algebra
 
-
-    /*---------------------.
-      | MetaElement<Self, T> |
-      `---------------------*/
+  /*---------------------.
+  | MetaElement<Self, T> |
+  `---------------------*/
 
   template <class Self, class T>
-  Element<Self, T>& 
+  Element<Self, T>&
   MetaElement<algebra::SemiringBase<Self>, T>::star()
-  { 
+  {
     op_in_star(this->set(), this->value());
     return this->self();
   }
 
   template <class Self, class T>
-  bool 
+  bool
   MetaElement<algebra::SemiringBase<Self>, T>::starable() const
-  { 
-    return op_starable(this->set(), this->value()); 
+  {
+    return op_starable(this->set(), this->value());
   }
-    
+
   template <class Self, class T>
-  MetaElement<algebra::SemiringBase<Self>, T>::MetaElement() 
+  MetaElement<algebra::SemiringBase<Self>, T>::MetaElement()
   {}
 
   template <class Self, class T>
@@ -108,26 +107,26 @@ namespace vcsn {
   {}
 
   /*-----.
-    | star |
-    `-----*/
+  | star |
+  `-----*/
 
   template <typename S, typename T>
   typename op_star_traits<S, T>::ret_t
   star(const Element<S, T>& e)
-  { 
+  {
     typename op_star_traits<S, T>::ret_t res(e);
     return res.star();
   }
-    
+
   template <typename S, typename T>
   bool starable(const Element<S, T>& elt)
-  { 
-    return op_starable(elt.set(), elt.value()); 
+  {
+    return op_starable(elt.set(), elt.value());
   }
 
   template <typename S, typename T>
-  bool 
-  parse_weight(Element<S, T>& w, const std::string&s , 
+  bool
+  parse_weight(Element<S, T>& w, const std::string&s ,
 	       typename std::string::const_iterator& i)
   {
     return op_parse(w.set(), w.value(), s, i);
@@ -138,7 +137,7 @@ namespace vcsn {
 
   template <typename S, typename T>
   bool
-  op_can_choose_non_starable(const S& set, SELECTOR(T))
+  op_can_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
     return false;
   }
@@ -156,7 +155,7 @@ namespace vcsn {
   }
 
   template <typename S, typename T>
-  Element<S, T> 
+  Element<S, T>
   op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
     assertion(! "default implementation of op_choose_non_starable called");
@@ -164,10 +163,10 @@ namespace vcsn {
   }
 
   template <typename S, typename T>
-  bool 
-  op_parse(const algebra::SemiringBase<S>&, 
-	   T&	  				 w, 
-	   const std::string&			 s, 
+  bool
+  op_parse(const algebra::SemiringBase<S>&,
+	   T&	  				 w,
+	   const std::string&			 s,
 	   typename std::string::const_iterator& i)
   {
     std::string buf;
@@ -190,7 +189,7 @@ namespace vcsn {
 
   template <typename Self, typename T>
   bool op_starable(const algebra::SemiringBase<Self>& s, const T& v)
-  { 
+  {
     return op_eq(SELECT(Self), v, zero_value(SELECT(Self), SELECT(T)));
   }
 
@@ -199,12 +198,12 @@ namespace vcsn {
   {
     assertion(op_eq(SELECT(Self), v, zero_value(SELECT(Self), SELECT(T))));
     v = identity_value(SELECT(Self), SELECT(T));
-  } 
+  }
 
   template <typename Self, typename T>
   T op_default(SELECTOR(algebra::SemiringBase<Self>), SELECTOR(T))
   {
-    return zero_value(SELECT(Self), SELECT(T)); 
+    return zero_value(SELECT(Self), SELECT(T));
   }
 
 } // vcsn

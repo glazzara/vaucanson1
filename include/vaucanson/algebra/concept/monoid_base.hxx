@@ -1,7 +1,7 @@
 // monoid_base.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -42,25 +42,25 @@ namespace vcsn {
     `-----------------*/
     template<class Self>
     template<typename T>
-    Element<Self, T> 
+    Element<Self, T>
     MonoidBase<Self>::identity(SELECTOR(T)) const
     {
-      return Element<Self, T>(this->self(), 
+      return Element<Self, T>(this->self(),
 			      identity_value(SELECT(Self), SELECT(T)));
     }
-    
+
     template<class Self>
     template<typename T>
     Element<Self, T>  MonoidBase<Self>::zero(SELECTOR(T)) const
     {
-      return Element<Self, T>(this->self(), 
+      return Element<Self, T>(this->self(),
 			      zero_value(SELECT(Self), SELECT(T)));
     }
-    
+
     template <class Self>
-    MonoidBase<Self>::MonoidBase() 
+    MonoidBase<Self>::MonoidBase()
     {}
-    
+
     template <class Self>
     MonoidBase<Self>::MonoidBase(const MonoidBase& other) :
       SemigroupBase<Self>(other)
@@ -83,25 +83,26 @@ namespace vcsn {
     }
 
   } // algebra
-  
+
     /*---------------------------------.
     | MetaElement<MonoidBase<Self>, T> |
     `---------------------------------*/
-    
+
   template<class Self, typename T>
-  MetaElement<algebra::MonoidBase<Self>, T>::MetaElement() 
+  MetaElement<algebra::MonoidBase<Self>, T>::MetaElement()
   {}
-    
+
   template<class Self, typename T>
   MetaElement<algebra::MonoidBase<Self>, T>::MetaElement(const MetaElement& other) :
     MetaElement<algebra::SemigroupBase<Self>, T>(other)
   {}
 
-  /// By default, an element of a monoid is the identity.
   template<typename T, typename Self>
-  T op_default(SELECTOR(algebra::MonoidBase<Self>), SELECTOR(T))
-  { 
-    return identity_value(SELECT(Self), SELECT(T)); 
+  T
+  op_default(SELECTOR(algebra::MonoidBase<Self>), SELECTOR(T))
+  {
+    // By default, an element of a monoid is the identity.
+    return identity_value(SELECT(Self), SELECT(T));
   }
 
 } // vcsn

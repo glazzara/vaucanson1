@@ -50,12 +50,9 @@ namespace vcsn
 
   /** @addtogroup algorithms *//** @{ */
 
-  /**
-   * @name product()
-   *
-   * Returns a fresh automaton that is the product of the two input ones.
-   */
-  /** @{ */
+  /// @name Product algorithm
+  //@{
+  /// Returns a fresh automaton that is the product of the two input ones.
   template<typename A, typename T, typename U>
   Element<A, T>
   product(const Element<A, T>& lhs, const Element<A, U>& rhs);
@@ -65,7 +62,7 @@ namespace vcsn
   product(const Element<A, T>& lhs,
 	  const Element<A, U>& rhs,
 	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >&);
-  /** @} */
+  //@}
 
   /** @} */
 

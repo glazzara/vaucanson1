@@ -50,15 +50,15 @@ namespace vcsn {
     `----------------------*/
 
     /**
-     * @brief Base class for structural elements of alphabets.
+     * Base class for structural elements of alphabets.
      *
      * This class is empty and should be used for typing purposes only.
      *
      * Note that implementation types for alphabets should provide:
-     * <ul>
-     * <li> @c op_choose(AlphabetSet, T), which creates a random alphabet.
-     * <li> @c op_eq(AlphabetSet, T), which tests for equality between alphabets.
-     * </ul>
+     *
+     * - @c op_choose(AlphabetSet, T), which creates a random alphabet.
+     * - @c op_eq(AlphabetSet, T), which tests for equality between alphabets.
+     *
      */
     template<class S>
     struct AlphabetSetBase
@@ -66,11 +66,11 @@ namespace vcsn {
     {
     protected:
 
-      /** @{ */
+      //@{
       /// Protected constructor.
       AlphabetSetBase();
       AlphabetSetBase(const AlphabetSetBase& other);
-      /** @} */
+      //@}
     };
 
     /*----------------.
@@ -78,7 +78,7 @@ namespace vcsn {
     `----------------*/
 
     /**
-     * @brief Trait for virtual types of structural elements for alphabets.
+     * Trait for virtual types of structural elements for alphabets.
      *
      * This trait contains a definition of @c letter_t, the type of
      * any letter in an alphabet. It should be specialized for all
@@ -88,10 +88,10 @@ namespace vcsn {
     struct alphabet_traits
     {
       /// The type of letters in any alphabet.
-typedef undefined_type	letter_t;
+      typedef undefined_type	letter_t;
 
       /// Whether an alphabet contains dynamic data.
-static const bool dynamic_data = false;
+      static const bool dynamic_data = false;
     };
 
     /** @} */
@@ -101,7 +101,6 @@ static const bool dynamic_data = false;
 
   /** @addtogroup algebra *//** @{ */
   /** @addtogroup alphabet *//** @{ */
-
 
   /*---------------.
   | dynamic_traits |
@@ -124,13 +123,12 @@ static const bool dynamic_data = false;
   { };
 
 
-
   /*--------------------------------------.
   | MetaElement<AlphabetSetBase<Self>, T> |
   `--------------------------------------*/
 
   /**
-   * @brief Specialization of @c MetaElement for @c AlphabetSetBase.
+   * Specialization of @c MetaElement for @c AlphabetSetBase.
    *
    * This class defines services shared by all alphabets.
    */
@@ -173,22 +171,23 @@ static const bool dynamic_data = false;
     bool is_finite() const;
 
     /// Retrieve a begin iterator.
-    /** @{ */
+    //@{
     iterator begin();
     const_iterator begin() const;
-    /** @} */
+    //@}
 
     /// Retrieve an end iterator.
-    /** @{ */
+    //@{
     iterator end();
     const_iterator end() const;
-    /** @} */
+    //@}
 
   protected:
-    /// Protected constructors.
-    /** @{ */
+    /// Protected constructor.
+    //@{
     MetaElement();
     MetaElement(const MetaElement& other);
+    //@}
   };
 
   /// Implementation of generic stream output operator for alphabets.
@@ -207,10 +206,8 @@ static const bool dynamic_data = false;
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concept/alphabets_base.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concept/alphabets_base.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGEBRA_CONCEPT_ALPHABETS_BASE_HH

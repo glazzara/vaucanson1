@@ -36,6 +36,7 @@
  *
  * Undocumented stuff.
  *
+ * @see evaluation()
  * @bug FIXME: Document!
  */
 /** @} */
@@ -55,12 +56,9 @@ namespace vcsn {
 	     const Element<ST, TT>&,
 	     Element<SARET, TARET>&);
 
-  /**
-   * @name evaluation.hh internals
-   *
-   * The following functions are absolutely not for public calls.
-   */
-  /** @{ */
+  /// @name Evalutation algorithm's internals
+  //@{
+  /// The following functions are absolutely not for public calls.
   template<typename SE, typename TE,
 	   typename ST, typename TT,
 	   typename M>
@@ -98,7 +96,7 @@ namespace vcsn {
 	    const Element<ST, TT>&,
 	    const hstate_t, M&);
 
-  /** @} */
+  //@}
 
   /** @} */
 

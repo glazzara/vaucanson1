@@ -1,7 +1,7 @@
 // decorated_alphabet.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,22 +36,29 @@ namespace vcsn {
 
   namespace algebra {
 
-    /** @ingroup alphabet */ /** @{ */
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup alphabet *//** @{ */
 
     /*---------------------.
     | AlphabetDecorator<T> |
     `---------------------*/
-    /// Decorate a given alphabet implementation with meta-symbols.
-    /// The meta-symbols are:
-    /// - a 'joker' which symbolizes every letter of the alphabet.
-    /// - a 'discard' which symbolizes every letter that is not in the 
-    ///   alphabet but of the same letter type.
-    /// The meta-symbols are encoded using the type of the letter with a 
-    /// default value that has to be specified with the traits 'meta_symbol'.
-    /// For instance, '?' and '#' for char. Yet, if these characters are 
-    /// already present in the alphabet, we look for another character in a
-    /// incremental way. If, unfortunately, there is not enough place, the 
-    /// program is stopped.
+
+    /**
+     * Decorate a given alphabet implementation with meta-symbols.
+     *
+     * The meta-symbols are:
+     *
+     * - a 'joker' which symbolizes every letter of the alphabet,
+     * - a 'discard' which symbolizes every letter that is not in the
+     *   alphabet but of the same letter type.
+     *
+     * The meta-symbols are encoded using  the type of the letter with
+     * a default  value that  has to be  specified with the  traits @c
+     * meta_symbol.  For instance, '?' and '#' for char. Yet, if these
+     * characters  are already present  in the  alphabet, we  look for
+     * another  character  in a  incremental  way. If,  unfortunately,
+     * there is not enough place, the program is stopped.
+     */
     template <class L, class T>
     class AlphabetDecorator
     {
@@ -81,14 +88,14 @@ namespace vcsn {
       letter_t	       joker_;
       letter_t	       other_;
       bool	       alphabet_owner_;
-    }; 
+    };
 
 
-    /*---------------------------------------------.
+    /*--------------------------------------------.
     | alphabet_traits<AlphabetSet<L>,std::set<L>> |
-    `---------------------------------------------*/
-    /// meta information about the mixing of AlphabetSet with
-    /// std::set.
+    `--------------------------------------------*/
+
+    /// Meta information about the mixing of AlphabetSet with std::set.
     template<typename L, typename T>
     struct alphabet_traits<AlphabetSet<L>, AlphabetDecorator<L, T> >
     {
@@ -96,23 +103,29 @@ namespace vcsn {
       typedef L			letter_t;
     };
 
-    /// @}
+    /** @} */
+    /** @} */
 
   } // algebra
-  
-  /** @ingroup alphabet */ /** @{ */
 
-  /*------------------------------------------.
+  /** @addtogroup algebra *//** @{ */
+  /** @addtogroup alphabet *//** @{ */
+
+  /*-----------------------------------------.
   | MetaElement<AlphabetSet<L>, std::set<L>> |
-  `------------------------------------------*/
-  /// Services of every alphabet implemented with AlphabetDecorator<T>.
-  /// See MetaElement<AlphabetSetBase<Self>, T>.
+  `-----------------------------------------*/
+
+  /**
+   * Services of every alphabet implemented with AlphabetDecorator<T>.
+   *
+   * @see MetaElement<AlphabetSetBase<Self>, T>
+   */
   template<typename L, typename T>
   struct MetaElement<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> >
     : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, algebra::AlphabetDecorator<L, T> >
   {
     /// The dynamic properties depends on the implementation one.
-    static const bool dynamic_values = 
+    static const bool dynamic_values =
     MetaElement<algebra::AlphabetSet<L>,T >::dynamic_values;
 
     /// The meta-symbol that symbolizes all the alphabet's symbols.
@@ -121,35 +134,34 @@ namespace vcsn {
     /// The meta-symbol that symbolizes the symbol not in the alphabet.
     L	other() const;
   };
-  
-  /// @}
+
+  /** @} */
+  /** @} */
 
   template<typename L, typename T>
-  bool op_contains(const algebra::AlphabetSet<L>& s, 
+  bool op_contains(const algebra::AlphabetSet<L>& s,
 		   const algebra::AlphabetDecorator<L, T>& a);
-  
+
   template<typename L, typename T>
-  bool op_is_finite(const algebra::AlphabetSet<L>& s, 
+  bool op_is_finite(const algebra::AlphabetSet<L>& s,
 		    const algebra::AlphabetDecorator<L, T>& a);
-  
+
   template<typename L, typename T>
-  bool op_contains_e(const algebra::AlphabetSet<L>& s, 
-		     const algebra::AlphabetDecorator<L, T>& a, 
+  bool op_contains_e(const algebra::AlphabetSet<L>& s,
+		     const algebra::AlphabetDecorator<L, T>& a,
 		     const L& v);
-    
+
   template <typename T, typename L>
-  bool op_letter_equality(const algebra::AlphabetSet<L>& s, 
-				 const algebra::AlphabetDecorator<L, T>& a, 
+  bool op_letter_equality(const algebra::AlphabetSet<L>& s,
+				 const algebra::AlphabetDecorator<L, T>& a,
 				 L lhs,
 				 L rhs);
 
 
 } // vcsn
 
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
- 
 #endif // VCSN_ALGEBRA_CONCRETE_ALPHABETS_DECORATED_ALPHABET_HH

@@ -1,7 +1,7 @@
 // structure.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -51,13 +51,12 @@ namespace vcsn {
 
   /** Base class for the hierarchy of structural element types.
    * It provides:
-   * <ul>
-   *   <li> static inheritance facilities,
-   *   <li> the concept of compatibility between elements and a 
-   *     structural element considered as a set (through the 
-   *     @c contains method),
-   *   <li> a @c choose method to pick randomly @c Element instances.
-   * </ul>
+   *
+   *   - static inheritance facilities,
+   *   - the concept of compatibility between elements and a
+   *     structural element considered as a set (through the
+   *     @c contains() method),
+   *   - a @c choose() method to pick randomly @c Element instances.
    */
   template<typename S>
   struct Structure : utility::unique::unifiable
@@ -66,14 +65,16 @@ namespace vcsn {
     template<typename T>
     bool  contains(const Element<S, T>& elt) const;
 
-    /** Specialization of @c containts that always return false.
+    /**
+     * Specialization of @c containts that always return false.
+     *
      * Indeed, elements structured by a particular type are always
      * incompatible with structural elements of another type.
      */
     template<typename OtherS, typename T>
     bool  contains(const Element<OtherS, T>& other) const;
 
-    /// Check if an anonymous value is compatible with a structural element. 
+    /// Check if an anonymous value is compatible with a structural element.
     template<typename T>
     bool  contains(const T& elt_value) const;
 
@@ -86,8 +87,8 @@ namespace vcsn {
     /// Exact type of the most derivated type in the hierarchy
     typedef S		self_t;
 
-    /** @{ */
-    /** 
+    //@{
+    /**
      * Accessor to the real type.
      *
      * This accessor is intended to be used by implementations in this
@@ -96,12 +97,12 @@ namespace vcsn {
      */
     self_t&        self();
     const self_t&  self() const;
-    /** @} */
+    //@}
 
   protected:
 
+    /// @name Protected constructor for class abstraction
     /** @{ */
-    /// Protected constructor for class abstraction
     Structure();
     Structure(const Structure& other);
     /** @} */
@@ -111,10 +112,16 @@ namespace vcsn {
   | default comparisons |
   `--------------------*/
 
-  /** The deep equality operator between @c Structure instances.
+  /** @addtogroup operators *//** @{ */
+  /**
+   * @name Equality operators for Structures
+   *
+   * The deep equality operator between @c Structure instances.
+   *
    * The implementation for @c Structure always return true since
    * there is no dynamic type information attached to @c Structure itself.
    */
+  /** @{ */
   template<typename S>
   bool operator==(const vcsn::Structure<S>& a,
 		  const vcsn::Structure<S>& b);
@@ -123,6 +130,8 @@ namespace vcsn {
   template<typename S>
   bool operator!=(const vcsn::Structure<S>& a,
 		  const vcsn::Structure<S>& b);
+  /** @} */
+  /** @} */
 
   /*------------------------------.
   | dynamic_traits<Structure<S> > |
@@ -130,6 +139,7 @@ namespace vcsn {
 
   /**
    * Specialization of @c dynamic_traits for @c Structure.
+   *
    * By default, all structural elements have no dynamic type information.
    */
   template<typename S>
@@ -147,14 +157,12 @@ namespace vcsn {
   struct virtual_types<Structure<S> >
   { };
 
-  /** @} */   
+  /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/design_pattern/structure.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/design_pattern/structure.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_FUNDAMENTAL_STRUCTURE_HH

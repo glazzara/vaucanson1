@@ -30,13 +30,16 @@
 #ifndef VCSN_MISC_WINDOW_HH
 # define VCSN_MISC_WINDOW_HH
 
+/** @addtogroup utility *//** @{ */
 /**
  * @file   window.hh
- * @brief  Window class for regular expression search on streams.
+ *
+ * Window class for regular expression search on streams.
  *
  * @author Thomas Claveirole <thomas@lrde.epita.fr>
- * @see Window
+ * @see @ref window "@c Window"
  */
+/** @} */
 
 # include <iostream>
 # include <string>
@@ -46,15 +49,15 @@ namespace utility {
   /** @addtogroup utility *//** @{ */
 
   /**
-   * @brief Handle windows in streams for performing regular expression search.
+   * Handle windows in streams for performing regular expression search.
    *
    * A window is a portion of a stream, viewable as a string, on which
    * several operations can be performed:
-   * <ul>
-   *  <li> Read the window's characters. </li>
-   *  <li> Shift the window forward. </li>
-   * </ul>
-   * A window has a constant size, unless an end of line ('\n') or an
+   *
+   *  - Read the window's characters.
+   *  - Shift the window forward.
+   *
+   * A window has a constant size, unless an end of line ('\\n') or an
    * end of file occurs, in which case a window is shorter than its
    * supposed size.
    *
@@ -63,6 +66,7 @@ namespace utility {
    * @param Letter The type  used for letters.
    *
    * @author Thomas Claveirole <thomas@lrde.epita.fr>
+   * @anchor window
    */
   template <class InputIterator, class Letter>
   struct Window
@@ -73,7 +77,7 @@ namespace utility {
     typedef unsigned int				length_t;
 
     /**
-     * @ brief Standard constructor for the Window class.
+     * Standard constructor for the Window class.
      *
      * Build a window from a couple of begin/end iterator, a newline
      * character and a window length.
@@ -96,21 +100,19 @@ namespace utility {
     bool		eol() const;
 
     /**
-     * @brief Shift the window.
+     * Shift the window.
      *
-     * @param n The number of character the window must be shifted. When
-     *           not specified, the window length is taken.
+     * @param n The number of character the window must be shifted.
      */
-    /** @{ */
     void		shift(unsigned int n);
+    /// Shift the window completely (equivalent to shift(size())).
     void		shift();
-    /** @} */
 
+    //@{
     /// Move to a specific offset.
-    /** @{ */
     void		moveto(length_t offset);
     void		moveto(iterator_t position);
-    /** @} */
+    //@}
 
     /// Returns the actual window size.
     length_t		size() const;
@@ -121,16 +123,23 @@ namespace utility {
     /// Print the window.
     std::ostream&	print(std::ostream& ostr) const;
 
-    /// Accessor to class members.
-    /** @{ */
+    /// @name Accessors
+    //@{
+    /// Get an iterator to the beginning of the stream.
     iterator_t		begin() const;
+    /// Get an iterator to the current position in the stream.
     iterator_t		stream() const;
+    /// Get an iterator to the end of the stream.
     iterator_t		end() const;
+    /// Get the actual offset in the stream.
     size_t		offset() const;
+    /// Get the letter value used for ending lines.
     letter_t		eol_value() const;
+    /// Get the maximum length of the window.
     length_t		length() const;
+    /// Get the window as a @c basic_string<letter_t>.
     string_t		window() const;
-    /** @} */
+    //@}
   protected:
     void		compute_size();
 
@@ -150,10 +159,8 @@ namespace utility {
 
 } // utility
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/misc/window.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/misc/window.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_MISC_WINDOW_HH

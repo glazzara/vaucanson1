@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
 
+/** @addtogroup utility *//** @{ */
 /**
  * @file char_traits.hh
  *
@@ -53,6 +54,7 @@
  * @authors Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
  * @see utility::char_traits, vaucanson/misc/special_char_traits.hh
  */
+/** @} */
 
 #ifndef VCSN_MISC_CHAR_TRAITS_HH
 # define VCSN_MISC_CHAR_TRAITS_HH
@@ -62,11 +64,10 @@
 namespace utility
 {
 
-  /** @addtogroup misc */ /** @{ */
+  /** @addtogroup utility */ /** @{ */
 
   /**
-   * @brief  Generic and  under-efficient int_type  implementation for
-   *         char_traits.
+   * Generic and under-efficient int_type implementation for char_traits.
    *
    * This class  provides a generic implementation  of int_type inside
    * char_traits.   generic_int_type<T>  should  provide  a  type  big
@@ -90,7 +91,7 @@ namespace utility
   };
 
   /**
-   * @brief Generic char_traits.
+   * Generic char_traits.
    *
    * Provides generic char_traits  to specialize std::char_traits with
    * minimal   efforts.   So   it    should   be   possible   to   use

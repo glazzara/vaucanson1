@@ -3,17 +3,24 @@
 
 # include <iostream>
 
-/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/** @addtogroup xml *//** @{ */
 /**
  * @file xml_loader.hh
- * @brief Static load tools for @c automaton_loader .
+ *
+ * Static load tools for @c automaton_loader .
+ *
  * @author Valentin David <valentin@lrde.epita.fr>
  */
+/** @} */
 
 namespace vcsn
 {
+
   namespace xml
   {
+
+    /** @addtogroup xml *//** @{ */
+
     /// XML Loader.
     class xml_loader {
     public:
@@ -23,11 +30,15 @@ namespace vcsn
       template<typename Loader>
       void operator()(std::istream& in, Loader& l);
     };
-  }
-}
 
-/** @} */
+    /** @} */
 
-# include <vaucanson/xml/xml_loader.hxx>
+  } // End of namespace xml.
+
+} // End of namespace vcsn.
+
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/xml/xml_loader.hxx>
+# endif
 
 #endif // VCSN_XML_XML_LOAD_HH

@@ -103,7 +103,14 @@ namespace utility {
     template<>
     vcsn::algebra::RationalNumber generate<vcsn::algebra::RationalNumber>();
 
-    /// Generate a random rational number between bounds.
+    /**
+     * Generates a bounded random rational number.
+     *
+     * Both fractions are first brought to the same denominator. Then,
+     * the  maximum   of  the  denominator  and   both  numerators  is
+     * taken. With this number, we work  out a ratio, which is used to
+     * have a larger range of choice for our new fraction.
+     */
     template<>
     vcsn::algebra::RationalNumber
     generate<vcsn::algebra::RationalNumber>
@@ -114,7 +121,7 @@ namespace utility {
     template <>
     std::pair<char, int> generate<std::pair<char, int> >();
 
-    /// @title Small alphabetic letters random generation tools.
+    /// @name Small alphabetic letters random generation tools.
     /** @{ */
     typedef
     vcsn::algebra::static_char_interval<'a', 'z'>

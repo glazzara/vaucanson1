@@ -83,7 +83,7 @@ namespace vcsn {
 	 FoundFunctor& f);
 
   /**
-   * Specific implementation for search.
+   * Specific implementation for search().
    *
    * This class owns a specific implementation of search. This implementation
    * deleguates the search to another implementation, choosing which one with
@@ -106,7 +106,7 @@ namespace vcsn {
   };
 
   /**
-   * Specific implementation for search.
+   * Specific implementation for search().
    *
    * This class owns a specific implementation of search. This implementation
    * use an algorithm able to skip characters in the input stream, using a

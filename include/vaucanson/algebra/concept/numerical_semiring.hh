@@ -1,7 +1,7 @@
 // numerical_semiring.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -35,55 +35,57 @@
 namespace vcsn {
 
   namespace algebra {
-    
-    /** @addtogroup algebra */  /** @{ */
-    /** @addtogroup semiring */ /** @{ */
-    
+
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup semiring *//** @{ */
+
     /*------------------.
     | NumericalSemiring |
     `------------------*/
-    /// NumericalSemiring is the set of semirings implemented with 
+    /// NumericalSemiring is the set of semirings implemented with
     /// usual operations (+, *).
     struct NumericalSemiring
       : SemiringBase<NumericalSemiring>
     { };
 
-    /** @} @} */
+    /** @} */
+    /** @} */
 
   } // algebra
-  
-  /** @addtogroup algebra */  /** @{ */
-  /** @addtogroup semiring */ /** @{ */
-  
-  /*---------------------------.
+
+  /** @addtogroup algebra *//** @{ */
+  /** @addtogroup semiring *//** @{ */
+
+  /*----------------------------------.
   | dynamic_traits<NumericalSemiring> |
-  `---------------------------*/
-  /// dynamic_traits<NumericalSemiring> defines meta information about then
-  /// NumericalSemiring structural element. 
+  `----------------------------------*/
+  /// Meta information about then NumericalSemiring structural element.
   template<>
   struct dynamic_traits<algebra::NumericalSemiring>
     : dynamic_traits<algebra::SemiringBase<algebra::NumericalSemiring> >
   {
   };
 
-
   template<>
   struct virtual_types<algebra::NumericalSemiring>
     : virtual_types<algebra::SemiringBase<algebra::NumericalSemiring> >
   {
-    /// We can see a NumericalSemiring as a semigroup with +. It is
-    /// an arbitrary decision, it could be mul_kind too.
+    /**
+     * It is possible to consider a NumericalSemiring as a semigroup with +.
+     *
+     * It is an arbitrary decision, it could be mul_kind too.
+     */
     typedef           algebra::add_kind    semigroup_kind;
   };
 
-  /// MetaElement<NumericalSemiring, T> defines the services of
-  /// element of numerical semirings. 
+  /// Services of @c Element for numerical semirings.
   template<typename T>
   struct MetaElement<algebra::NumericalSemiring, T>
     : MetaElement<algebra::SemiringBase<algebra::NumericalSemiring>, T>
   {};
 
-  /** @} @} */
+  /** @} */
+  /** @} */
 
 } // vcsn
 

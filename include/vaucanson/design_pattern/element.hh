@@ -57,28 +57,24 @@ namespace vcsn {
    * to have an orthogonal construction of object from two different
    * viewpoints:
    *
-   * <ul>
-   * <li> Algebraic/Theorical one, from a hierarchy of sets,
-   * <li> Implementation and computations.
-   * </ul>
+   * - Algebraic/Theorical one, from a hierarchy of sets,
+   * - Implementation and computations.
    *
-   * @c Element proposes a lot of different constructors so as to
-   * allow the largest set of type conversions. Calling foreign
-   * constructors assume that there exist compatible "op_convert"
+   * @c  Element proposes  a lot  of different  constructors so  as to
+   * allow  the  largest set  of  type  conversions.  Calling  foreign
+   * constructors assume  that there exist  compatible @c op_convert()
    * functions.
    *
    * @see
-   * <ul>
-   * <li>@c MetaElement
-   * <li>@c Structure
-   * <li>@c SetSlot
-   * </ul>
+   *     - @c MetaElement
+   *     - @c Structure
+   *     - @c SetSlot
    */
   template<typename S, typename T>
   class Element : public MetaElement<S, T>
   {
   public:
-    /// Structure type for structural elements.
+    /// %Structure type for structural elements.
     typedef S	      set_t;
 
     /// Implementation type for values.
@@ -129,6 +125,7 @@ namespace vcsn {
     | Constructors from values |
     `-------------------------*/
 
+    //@{
     /**
      * Copy constructor from anonymous values.
      *
@@ -136,12 +133,11 @@ namespace vcsn {
      * structural  element  has  dynamic   data  since  it  leaves  it
      * uninitialized.
      */
-    /** @{ */
     Element(const T& other);
 
     template<typename U>
     Element(const U& other);
-    /** @} */
+    //@}
 
     /*-------------------------------------------------.
     | Constructors from structural elements and values |
@@ -194,18 +190,18 @@ namespace vcsn {
     /// Post-construction link to a structural element.
     void	attach(const S& set);
 
+    //@{
     /// Accessor to the value data.
-    /** @{ */
     T&		value();
     const T&	value() const;
-    /** @} */
+    //@}
 
   private :
     SetSlot<S>		set_;
     T			value_;
   };
 
-  /// @}
+  /** @} */
 
 } // vcsn
 

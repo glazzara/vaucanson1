@@ -7,18 +7,25 @@
 
 # include <xercesc/dom/DOM.hpp>
 
-/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/** @addtogroup xml *//** @{ */
 /**
  * @file xml_automaton.hh
- * @brief XML automaton implementation.
+ *
+ * XML automaton implementation.
+ *
  * @author Valentin David <valentin@lrde.epita.fr>
  */
+/** @} */
 
 namespace vcsn
 {
+
   namespace xml
   {
+
     using namespace xercesc;
+
+    /** @addtogroup xml *//** @{ */
 
     /// Xml automaton implementation
     class XmlAutomaton
@@ -91,9 +98,14 @@ namespace vcsn
       void			    update(hedge_t, label_t);
     };
 
-  }
+    /** @} */
+
+  } // End of namespace xml.
 
   namespace algebra {
+
+    /** @addtogroup xml *//** @{ */
+
     template <>
     struct series_traits<vcsn::xml::XmlValue>
     {
@@ -101,7 +113,12 @@ namespace vcsn
       typedef xml::XmlValue semiring_elt_value_t;
       typedef utility::Support<xml::XmlValue> support_t;
     };
-  }
+
+    /** @} */
+
+  } // End of namespace algebra.
+
+  /** @addtogroup xml *//** @{ */
 
   template <>
   struct automaton_traits<xml::XmlAutomaton>
@@ -131,10 +148,12 @@ namespace vcsn
     typedef std::vector<xml::XmlValue> 		     edge_data_t;
   };
 
-}
+  /** @} */
 
-/** @} */
+} // End of namespace vcsn.
 
-# include <vaucanson/xml/xml_automaton.hxx>
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/xml/xml_automaton.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_AUTOMATA_CONCRETE_XML_AUTOMATON_HH

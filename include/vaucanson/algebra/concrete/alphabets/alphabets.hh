@@ -1,7 +1,7 @@
 // alphabets.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -37,11 +37,13 @@ namespace vcsn {
 
   namespace algebra {
 
-    /** @ingroup alphabet */ /** @{ */
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup alphabet *//** @{ */
 
-    /*----------------.
+    /*---------------.
     | AlphabetSet<L> |
-    `----------------*/
+    `---------------*/
+
     /// Static implementation of alphabet structural element.
     template<typename L>
     struct AlphabetSet
@@ -50,26 +52,28 @@ namespace vcsn {
       /// The type of letter hold by the alphabets.
       typedef L		letter_t;
     };
-    
-    /// @}
+
+    /** @} */
+    /** @} */
 
   } // algebra
 
-  /// @{
-  
-  /** @ingroup alphabet */ /** @{ */
+  /** @addtogroup algebra *//** @{ */
+  /** @addtogroup alphabet *//** @{ */
 
-  /*------------------------.
+  /*------------------------------.
   | dynamic_traits<AlphabetSet<L> |
-  `------------------------*/
+  `------------------------------*/
+
   /// meta information about AlphabetSet.
   template<typename L>
   struct dynamic_traits<algebra::AlphabetSet<L> >
     : dynamic_traits<algebra::AlphabetSetBase<L> >
-  { };     
+  { };
 
-  /// @}
+  /** @} */
+  /** @} */
 
-} // vcsn 
+} // vcsn
 
 #endif // VCSN_ALGEBRA_CONCRETE_ALPHABETS_ALPHABETS_HH

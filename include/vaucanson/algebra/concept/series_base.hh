@@ -37,14 +37,15 @@ namespace vcsn {
 
   namespace algebra {
 
-    /** @addtogroup algebra */  /** @{ */
-    /** @addtogroup series */ /** @{ */
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup series *//** @{ */
 
     /*-----------------.
     | SeriesBase<Self> |
     `-----------------*/
-    /// Structural element of series K<A*> from a free monoid A* to a
-    /// semiring K.
+
+    /// @brief Structural element of series K<A*> from a free monoid A*
+    ///        to a semiring K.
     template<class Self>
     struct SeriesBase
       : SemiringBase<Self>
@@ -95,16 +96,18 @@ namespace vcsn {
       typedef undefined_type    ret;
     };
 
-    /** @} @} */
+    /** @} */
+    /** @} */
 
   } // algebra
 
-  /** @addtogroup algebra */  /** @{ */
-  /** @addtogroup series */ /** @{ */
+  /** @addtogroup algebra *//** @{ */
+  /** @addtogroup series *//** @{ */
 
   /*----------------------------------.
   | dynamic_traits<SeriesBase<Self> > |
   `----------------------------------*/
+
   template<typename Self>
   struct dynamic_traits<algebra::SeriesBase<Self> >
     : dynamic_traits<algebra::SemiringBase<Self> >
@@ -121,6 +124,7 @@ namespace vcsn {
   /*---------------------------------.
   | MetaElement<SeriesBase<Self>, T> |
   `---------------------------------*/
+
   /// Services of every series.
   template<class Self, typename T>
   class MetaElement<algebra::SeriesBase<Self>, T>
@@ -167,10 +171,13 @@ namespace vcsn {
     /// in-place transpose transformation of the series.
     void       	        transpose();
 
-    /// returns a container which is the support of the series.
-    /// The container elements are couples (m, k) where m is in
-    /// the support and k is the image of m by the series.
-    /// The support is accessible only if is_finite_app is true.
+    /**
+     * Returns a container which is the support of the series.
+     *
+     * The container elements are couples (m, k) where m is in
+     * the support and k is the image of m by the series.
+     * The support is accessible only if is_finite_app is true.
+     */
     support_t		supp() const;
 
   protected:
@@ -186,23 +193,23 @@ namespace vcsn {
   Element<S, T>
   transpose(const algebra::SeriesBase<S>& s, const T& t);
 
-  /// returns true if the support of the series is only composed of
-  /// letters.
+  /// Returns true if the support of the series is only composed of letters.
   template <typename S, typename T>
   bool
   is_letter_support(const Element<S, T>& s);
 
-  /// make the first series be the support of the second.
+  /// Make the first series be the support of the second.
   template <typename S1, typename S2, typename T1, typename T2>
   void
   extract_support(Element<S1, T1>&, Element<S2, T2>&);
 
-  /// return the hadamard product of lhs and rhs.
+  /// Return the hadamard product of lhs and rhs.
   template <class S, class T>
   Element<S, T> hadamard(const Element<S, T>& lhs,
 			 const Element<S, T>& rhs);
 
-  /** @} @} */
+  /** @} */
+  /** @} */
 
   template <typename S, typename T>
   bool
@@ -238,10 +245,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concept/series_base.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concept/series_base.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGEBRA_CONCEPT_SERIES_BASE_HH

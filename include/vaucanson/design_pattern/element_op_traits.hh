@@ -1,7 +1,7 @@
 // element_op_traits.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,11 +32,12 @@
 
 /** @addtogroup design_pattern *//** @{ */
 /** @addtogroup operators *//** @{ */
-/** 
+/**
  * @file element_op_traits.hh
  * @brief Declaration of default arithmetical operator traits for @c Element
  */
-/** @} @} */
+/** @} */
+/** @} */
 
 #include <vaucanson/design_pattern/predecls.hh>
 
@@ -57,7 +58,7 @@ namespace vcsn {
   {
     typedef Element<S1, T1> ret_t;
   };
-  
+
   /*--------------.
   | op_sub_traits |
   `--------------*/
@@ -96,7 +97,7 @@ namespace vcsn {
   {
     typedef Element<S1, T1> ret_t;
   };
-  
+
 
   /*--------------.
   | op_mod_traits |
@@ -111,7 +112,8 @@ namespace vcsn {
     typedef Element<S1, T1> ret_t;
   };
 
-  /** @} @} */
+  /** @} */
+  /** @} */
 
 } // vcsn
 

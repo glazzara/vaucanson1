@@ -1,7 +1,7 @@
 // krat_exp_parser.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,15 +30,19 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HH
 # define VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HH
 
+/** @addtogroup algebra *//** @{ */
+/** @addtogroup series *//** @{ */
 /**
  * @file krat_exp_parser.hh
  *
- * @brief This file declare the parse() function.
+ * This file declare the parse() function.
  *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>,
  *         Thomas Claveirole <thomas@lrde.epita.fr>
  * @see parse()
  */
+/** @} */
+/** @} */
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <utility>
@@ -48,32 +52,39 @@ namespace vcsn {
 
   namespace algebra {
 
-    /** @addtogroup algebra */ /** @{ */
-    /** @addtogroup series */ /** @{ */
-    
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup series *//** @{ */
+
     /**
-     * @brief Parse a rational expression.
+     * Parse a rational expression.
      *
-     * <p>This functions parses any numerical rational expression.</p>
-     * <p>The grammar is:</p>
+     * This functions parses any numerical rational expression.
+     * The grammar is:
      *
-     * <pre>
-     * exp ::= '(' exp ')'
-     *     |   exp '+' exp
-     *     |   exp '.' exp
-     *     |   exp exp
-     *     |   exp '*'
-     *     |   weight ' ' exp
-     *     |   exp ' ' weight
-     *     |   0
-     *     |   1
-     *     |   word
-     * </pre>
-     * <p>Priority for operators is: '*' > ' ' > '.' > '+'.</p>
+     @verbatim
+     exp ::= '(' exp ')'
+         |   exp '+' exp
+         |   exp '.' exp
+         |   exp exp
+         |   exp '*'
+         |   weight ' ' exp
+         |   exp ' ' weight
+         |   0
+         |   1
+         |   word
+     @endverbatim
      *
-     * <p>This function returns a pair which first element is a Boolean
-     * indicating whether an error occured or not. The second element
-     * is an error message when a parse error have been ecountered.</p>
+     * Priority for operators is, from the most important to the least
+     * important:
+     *
+     *  - * (star), to star a series.
+     *  - ' ' (space), to weight a series either on the right or on the left.
+     *  - . (dot), to concatenate two series.
+     *  - + (plus), to do the union of two series.
+     *
+     * This function returns  a pair which first element  is a Boolean
+     * indicating whether an error  occured or not. The second element
+     * is an error message when a parse error have been ecountered.
      *
      * @param from The rational expression, as a string.
      * @param exp The element to store the result in. Be sure its set
@@ -98,10 +109,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concrete/series/krat_exp_parser.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concrete/series/krat_exp_parser.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PARSER_HH

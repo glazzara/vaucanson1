@@ -1,7 +1,7 @@
 // monoid_base.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,24 +36,27 @@ namespace vcsn {
 
   namespace algebra {
 
-    /** @addtogroup algebra */  /** @{ */
-    /** @addtogroup monoid */ /** @{ */
+    /** @addtogroup algebra *//** @{ */
+    /** @addtogroup monoid *//** @{ */
 
     /*-----------------.
     | MonoidBase<Self> |
     `-----------------*/
-    /// MonoidBase is the base class of all structures that are monoids.
-    /** Monoid defines identity for semigroups of mul_kind and zero for
-      semigroup of add_kind.
-    */
+
+    /**
+     * @c MonoidBase is the base class of all structures that are monoids.
+     *
+     * Monoid defines identity for semigroups of mul_kind and zero for
+     * semigroup of add_kind.
+     */
     template<class Self>
     struct MonoidBase : SemigroupBase<Self>
     {
-      /// returns the identity of the monoid (if mul_kind).
+      /// Returns the identity of the monoid (if mul_kind).
       template<typename T>
       Element<Self, T> identity(SELECTOR(T)) const;
 
-      /// returns the zero of the monoid (if add_kind).
+      /// Returns the zero of the monoid (if add_kind).
       template<typename T>
       Element<Self, T> zero(SELECTOR(T)) const;
 
@@ -81,16 +84,18 @@ namespace vcsn {
       Element<S, T> of(const S& s);
     };
 
-    /** @} @} */
+    /** @} */
+    /** @} */
 
   } // algebra
-  
+
   /** @addtogroup algebra */  /** @{ */
   /** @addtogroup monoid */ /** @{ */
 
-  /*---------------------------.
+  /*----------------------------------.
   | dynamic_traits<MonoidBase<Self> > |
-  `---------------------------*/
+  `----------------------------------*/
+
   template<class Self>
   struct dynamic_traits<algebra::MonoidBase<Self> >
     : dynamic_traits<algebra::SemigroupBase<Self> >
@@ -104,11 +109,12 @@ namespace vcsn {
   /*---------------------------------.
   | MetaElement<MonoidBase<Self>, T> |
   `---------------------------------*/
+
   /// Defines services of element of every monoid.
   template<class Self, typename T>
-  struct MetaElement<algebra::MonoidBase<Self>, T> 
+  struct MetaElement<algebra::MonoidBase<Self>, T>
     : MetaElement<algebra::SemigroupBase<Self>, T>
-  { 
+  {
   protected:
     /// Default constructor is protected since it is an abstract class.
     MetaElement();
@@ -116,18 +122,17 @@ namespace vcsn {
     /// Copy constructor is protected since it is an abstract class.
     MetaElement(const MetaElement& other);
   };
-  
-  /** @} @} */
+
+  /** @} */
+  /** @} */
 
   template<typename T, typename Self>
   T op_default(SELECTOR(algebra::MonoidBase<Self>), SELECTOR(T));
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/concept/monoid_base.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/concept/monoid_base.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGEBRA_CONCEPT_MONOID_BASE_HH

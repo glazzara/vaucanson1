@@ -1,7 +1,7 @@
 #ifndef VCSN_XML_GENERIC_HH
 # define VCSN_XML_GENERIC_HH
 
-/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/** @addtogroup xml *//** @{ */
 /**
  * @file generic.hh
  * @brief Main header for XML generic loading.

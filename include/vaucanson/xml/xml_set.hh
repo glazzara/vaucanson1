@@ -5,18 +5,25 @@
 
 # include <xercesc/dom/DOM.hpp>
 
-/** @addtogroup xml XML tools for Vaucanson *//** @{ */
+/** @addtogroup xml *//** @{ */
 /**
  * @file xml_set.hh
- * @brief XML automaton set tools.
+ *
+ * XML automaton set tools.
+ *
  * @author Valentin David <valentin@lrde.epita.fr>
  */
+/** @} */
 
 namespace vcsn
 {
+
   namespace xml
   {
+
     using namespace xercesc;
+
+    /** @addtogroup xml *//** @{ */
 
     /// XML automaton set. Just for loading.
     class XmlSet : public Structure<XmlSet>
@@ -58,7 +65,12 @@ namespace vcsn
       DOMElement*	monoid_node_;
       DOMElement*	semiring_node_;
     };
-  }
+
+    /** @} */
+
+  } // End of namespace xml.
+
+  /** @addtogroup xml *//** @{ */
 
   template <typename T>
   struct MetaElement<xml::XmlSet, T>
@@ -66,13 +78,16 @@ namespace vcsn
   { };
 
   template <>
-  struct dynamic_traits<xml::XmlSet> {
+  struct dynamic_traits<xml::XmlSet>
+  {
     static const bool ret = true;
   };
+
+  /** @} */
 }
 
-/** @} */
-
-# include <vaucanson/xml/xml_set.hxx>
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/xml/xml_set.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_XML_XML_SET_HH

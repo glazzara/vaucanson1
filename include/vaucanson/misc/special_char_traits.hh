@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
 
+/** @addtogroup utility *//** @{ */
 /**
  * @brief This file holds specialized versions of std::char_traits for
  *        a few common types.
@@ -42,6 +43,7 @@
  * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
  * @see vaucanson/misc/char_traits.hh
  */
+/** @} */
 
 #ifndef VCSN_MISC_SPECIAL_CHAR_TRAITS_HH
 # define VCSN_MISC_SPECIAL_CHAR_TRAITS_HH
