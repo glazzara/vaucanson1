@@ -40,23 +40,24 @@ namespace vcsn {
   std::pair<typename Element<Series, T>::semiring_elt_t, bool>
   constant_term(const PartialExp<Series, T>& exp)
   {
+    typedef typename PartialExp<Series, T>::const_iterator	const_iterator;
+    typedef typename PartialExp<Series, T>::semiring_elt_t	semiring_elt_t;
     typedef
-    typename PartialExp<Series, T>::const_iterator		const_iterator;
+      typename PartialExp<Series, T>::series_set_elt_value_t
+      series_set_elt_value_t;
     typedef
-    typename PartialExp<Series, T>::semiring_elt_t			semiring_elt_t;
-    typedef
-    typename PartialExp<Series, T>::series_impl_t		series_impl_t;
-    typedef
-    std::pair<typename Element<Series, T>::semiring_elt_t, bool>	result_t;
-    
+      std::pair<typename Element<Series, T>::semiring_elt_t, bool>
+      result_t;
+
     semiring_elt_t 	res 	  = exp.exp_structure().semiring().identity(
 			      SELECT(typename semiring_elt_t::value_t));;
     bool	undefined = false;
-    
+
     for (const_iterator i = exp.begin(); i != exp.end() && !undefined; ++i)
     {
-      result_t tmp = constant_term(Element<Series, T>(exp.exp_structure(),
-						      series_impl_t(*i)));
+      result_t tmp = constant_term(Element<Series, T>
+				   (exp.exp_structure(),
+				    series_set_elt_value_t (*i)));
       undefined = !tmp.second;
       res *= tmp.first;
     }

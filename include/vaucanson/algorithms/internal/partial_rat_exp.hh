@@ -60,7 +60,7 @@ namespace vcsn
     // Common types
     typedef Element<Series, T>			exp_t;
     typedef Series				series_set_t;
-    typedef T					series_impl_t;
+    typedef T					series_set_elt_value_t;
     typedef typename T::node_t			value_t;
     typedef typename exp_t::semiring_elt_t	semiring_elt_t;
 

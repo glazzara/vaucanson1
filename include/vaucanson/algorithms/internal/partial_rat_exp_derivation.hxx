@@ -77,17 +77,17 @@ namespace vcsn {
   				 typename T::semiring_elt_value_t>
   {
   public:
-    typedef Element<Series, T>					exp_t;
-    typedef T							series_impl_t;
-    typedef typename T::node_t					node_t;
-    typedef typename std::list<PartialExp<Series, T> >		return_type;
-    typedef typename Element<Series, T>::semiring_elt_t		semiring_elt_t;
-    typedef typename semiring_elt_t::value_t			semiring_elt_value_t;
-    typedef typename Element<Series, T>::monoid_elt_t		monoid_elt_t;
-    typedef typename monoid_elt_t::value_t			monoid_elt_value_t;
-    typedef typename monoid_elt_t::set_t			monoid_t;
-    typedef typename monoid_t::alphabet_t			alphabet_t;
-    typedef typename alphabet_t::letter_t			letter_t;
+    typedef Element<Series, T>				exp_t;
+    typedef T						series_set_elt_value_t;
+    typedef typename T::node_t				node_t;
+    typedef typename std::list<PartialExp<Series, T> >	return_type;
+    typedef typename Element<Series, T>::semiring_elt_t	semiring_elt_t;
+    typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
+    typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
+    typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
+    typedef typename monoid_elt_t::set_t		monoid_t;
+    typedef typename monoid_t::alphabet_t		alphabet_t;
+    typedef typename alphabet_t::letter_t		letter_t;
 
   public:
     PRatExpDerivationVisitor(const exp_t&	exp,
@@ -119,7 +119,7 @@ namespace vcsn {
     product(const node_t* lhs, const node_t* rhs)
     {
       std::pair<semiring_elt_t, bool> ret =
-	constant_term(series(series_impl_t(lhs)));
+	constant_term(series(series_set_elt_value_t(lhs)));
       if (ret.second == false)
       {
 	undefined = true;
@@ -156,7 +156,7 @@ namespace vcsn {
       const typename T::node_t* father = father_;
 
       std::pair<semiring_elt_t, bool> ret =
-	constant_term(series(series_impl_t(node)));
+	constant_term(series(series_set_elt_value_t(node)));
       if ((ret.second == false) || (ret.first.starable() == false))
       {
 	undefined = true;
@@ -242,8 +242,8 @@ namespace vcsn {
     typedef std::pair<exp_list_t, bool>			return_type;
     typedef typename exp_t::const_iterator		const_iterator;
     typedef typename Element<Series, T>::semiring_elt_t	semiring_elt_t;
-    typedef typename semiring_elt_t::value_t			semiring_elt_value_t;
-    typedef T						series_impl_t;
+    typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
+    typedef T						series_set_elt_value_t;
 
     // Check if the exp is not empty
     if (exp.begin() == exp.end())
@@ -260,7 +260,7 @@ namespace vcsn {
 
     // Calculate the constant term
     std::pair<semiring_elt_t, bool> cterm =
-      constant_term(Element<Series, T>(exp.exp_structure(), series_impl_t(v)));
+      constant_term(Element<Series, T>(exp.exp_structure(), series_set_elt_value_t(v)));
     if (cterm.second == false)
       return std::make_pair(exp_list_t(), false);
 

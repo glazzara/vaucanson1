@@ -52,14 +52,14 @@ namespace vcsn
     weight_(other.weight_),
     ptr_list_(other.ptr_list_)
   { }
-    
+
   template <typename Series, typename T>
   PartialExp<Series, T>& PartialExp<Series, T>::operator^=(semiring_elt_t w)
   {
     weight_ = w * weight_;
     return *this;
   }
-    
+
   template <typename Series, typename T>
   PartialExp<Series, T>&
   PartialExp<Series, T>::insert(const value_t *v)
@@ -95,14 +95,14 @@ namespace vcsn
   {
     return ptr_list_;
   }
-  
+
   template <typename Series, typename T>
   const Series&
   PartialExp<Series, T>::exp_structure() const
   {
     return rat_exp_->structure();
   }
-  
+
   template <typename Series, typename T>
   const T&
   PartialExp<Series, T>::exp_value() const
@@ -116,7 +116,7 @@ namespace vcsn
   {
     return *rat_exp_;
   }
-  
+
   template <typename Series, typename T>
   typename PartialExp<Series, T>::iterator
   PartialExp<Series, T>::begin()
@@ -144,7 +144,7 @@ namespace vcsn
   {
     return ptr_list_.end();
   }
- 
+
   /*---------------------.
   | PartialExp functions |
   `---------------------*/
@@ -158,9 +158,9 @@ namespace vcsn
     i = e.begin();
     if (i != e.end())
     {
-      o << PartialExp<S, T>::series_impl_t(*i);
+      o << PartialExp<S, T>::series_set_elt_value_t(*i);
       for (++i; i != e.end(); ++i)
-	o << "," << PartialExp<S, T>::series_impl_t(*i);
+	o << "," << PartialExp<S, T>::series_set_elt_value_t(*i);
     }
     return o << "}]";
   }
@@ -172,7 +172,7 @@ namespace vcsn
   {
     if (node->what() == rat::Node<M, W>::prod)
     {
-      const rat::Product<M, W>* p = 
+      const rat::Product<M, W>* p =
 	dynamic_cast<const rat::Product<M, W>*>(node);
       prat_exp_list(pexp, p->left_);
       prat_exp_list(pexp, p->right_);
@@ -198,7 +198,7 @@ namespace vcsn
       prat_exp_list(res, node);
     return res;
   }
-  
+
   template <typename S, typename T>
   PartialExp<S, T> prat_exp_convert(const Element<S, T>& exp)
   {
@@ -209,15 +209,16 @@ namespace vcsn
   bool operator< (const PartialExp<S, T>& e1, const PartialExp<S, T>& e2)
   {
     typedef typename PartialExp<S, T>::const_iterator	const_iterator;
-    typedef typename PartialExp<S, T>::series_impl_t	series_impl_t;
-    
+    typedef typename PartialExp<S, T>::series_set_elt_value_t
+							series_set_elt_value_t;
+
     if (e1.weight() != e2.weight())
       return e1.weight() < e2.weight();
 
     const_iterator i1 = e1.begin();
     const_iterator i2 = e2.begin();
     while (i1 != e1.end() && i2 != e2.end()
-	   && series_impl_t(*i1) == series_impl_t(*i2))
+	   && series_set_elt_value_t (*i1) == series_set_elt_value_t (*i2))
     {
       ++i1;
       ++i2;
@@ -226,22 +227,23 @@ namespace vcsn
     if (i1 == e1.end() || i2 == e2.end())
       return (i1 == e1.end() && i2 != e2.end());
     else
-      return series_impl_t(*i1) < series_impl_t(*i2);
+      return series_set_elt_value_t (*i1) < series_set_elt_value_t (*i2);
   }
 
   template <typename S, typename T>
   bool operator== (const PartialExp<S, T>& e1, const PartialExp<S, T>& e2)
   {
     typedef typename PartialExp<S, T>::const_iterator	const_iterator;
-    typedef typename PartialExp<S, T>::series_impl_t	series_impl_t;
-    
+    typedef typename PartialExp<S, T>::series_set_elt_value_t
+							series_set_elt_value_t;
+
     if (e1.weight() != e2.weight())
       return false;
- 
+
     const_iterator i1 = e1.begin();
     const_iterator i2 = e2.begin();
     while (i1 != e1.end() && i2 != e2.end()
-	   && series_impl_t(*i1) == series_impl_t(*i2))
+	   && series_set_elt_value_t (*i1) == series_set_elt_value_t (*i2))
     {
       ++i1;
       ++i2;
@@ -249,7 +251,7 @@ namespace vcsn
 
     return (i1 == e1.end() && i2 == e2.end());
   }
-  
+
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_HXX

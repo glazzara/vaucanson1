@@ -1,5 +1,14 @@
 2004-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/krat_exp_linearize.hh: Rename all
+	typedefs to series_impl_t to series_set_elt_value_t.
+
+2004-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/automata/implementation/graph.hh: Rename the
 	typedef to series_elt_value_t to series_set_elt_value_t.
 

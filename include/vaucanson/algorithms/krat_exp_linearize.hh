@@ -66,25 +66,27 @@ namespace vcsn {
     typedef typename orig_monoid_t::letter_t	orig_letter_t;
 
     // Build it !
-    typedef int							index_t;
-    typedef std::pair<orig_letter_t, index_t>			letter_t;
+    typedef int					index_t;
+    typedef std::pair<orig_letter_t, index_t>	letter_t;
     // FIXME: Here, we want X<letter_t> where X is the type of the alphabet
     // FIXME: concept. See next FIXME.
-    typedef algebra::AlphabetSet<letter_t>			alphabets_t;
-    typedef std::set<letter_t>				       alphabet_impl_t;
-    typedef Element<alphabets_t, alphabet_impl_t>		alphabet_t;
+    typedef algebra::AlphabetSet<letter_t>		alphabets_t;
+    typedef std::set<letter_t>				alphabet_impl_t;
+    typedef Element<alphabets_t, alphabet_impl_t>	alphabet_t;
     // FIXME: in fact, here we want X<alphabet_t> where X is the type of
     // FIXME: the monoid concept. For the moment, we just have FreeMonoid, so
     // FIXME: it is not important but in the future, we will have to introduce
     // FIXME: a convenient way of substituting types parameters ...
-    typedef algebra::FreeMonoid<alphabet_t>			monoid_t;
+    typedef algebra::FreeMonoid<alphabet_t>		monoid_t;
     // FIXME: same remark here.
-    typedef algebra::Series<orig_semiring_t, monoid_t>		series_set_t;
+    typedef algebra::Series<orig_semiring_t, monoid_t>	series_set_t;
     typedef std::basic_string<letter_t, utility::char_traits<letter_t> >
-								monoid_elt_value_t;
-    typedef rat::exp<monoid_elt_value_t, orig_semiring_elt_value_t>	series_impl_t;
+							monoid_elt_value_t;
+    typedef rat::exp<monoid_elt_value_t, orig_semiring_elt_value_t>
+							series_set_elt_value_t;
     // And the resulting type:
-    typedef Element<series_set_t, series_impl_t>			element_t;
+    typedef Element<series_set_t, series_set_elt_value_t>
+							element_t;
   };
 
   /// The linearization of the krat expression.
