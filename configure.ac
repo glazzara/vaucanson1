@@ -29,6 +29,8 @@ AC_CONFIG_FILES([
 	src/tests/automata/Makefile
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile
+	src/tests/tests-suites/Makefile
+	src/tests/tests-suites/usual_automaton_t/Makefile
 	include/Makefile])
 
 AC_OUTPUT

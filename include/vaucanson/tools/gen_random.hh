@@ -19,7 +19,8 @@ namespace vcsn {
 
   using namespace algebra;
 
-  template <class TAutomata> class GenRandomAutomata
+  template <class TAutomata> 
+  class GenRandomAutomata
   {
   public:
     typedef typename TAutomata::states_t		  states_t;

@@ -41,7 +41,7 @@ namespace tests {
 } // tests
 
 #define TEST_MSG(Label) \
-  std::cout << "TEST: " << Label << std::endl;
+  std::cout << "TEST: * " << Label << std::endl;
 
 #define TEST_RETURN(Tester) \
   if (Tester.all_passed())			\

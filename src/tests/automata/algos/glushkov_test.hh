@@ -15,6 +15,7 @@
 # include <vaucanson/automata/concrete/generalized.hh>
 # include <vaucanson/algorithms/glushkov.hh>
 # include <vaucanson/algorithms/realtime.hh>
+# include <vaucanson/algorithms/compute.hh>
 
 using namespace vcsn;
 

@@ -1,7 +1,7 @@
 // tests_stuff.cc
 //
-//
-//
+// $Id$
+// VCSN_HEADER
 
 #include "tests_stuff.hh"
 

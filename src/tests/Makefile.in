@@ -83,6 +83,7 @@ install_sh = @install_sh@
 
 SUBDIRS = \
 	check 					\
+	tests-suites 				\
 	fundamental				\
 	algebra    				\
 	automata

@@ -2,45 +2,24 @@
 //
 // $Id$
 // VCSN_HEADER
-
-
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-
-# include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-
-# include <vaucanson/automata/concept/kinds.hh>
-
-# include <vaucanson/automata/concept/tags.hh>
-
-# include <vaucanson/automata/concrete/manylinks.hh>
-
-# include <check/tests_stuff.hh>
-
-# include <vaucanson/misc/ref.hh>
-# include <vaucanson/misc/dot_dump.hh>
-
-# include <vaucanson/tools/gen_random.hh>
-
-# include <vaucanson/algorithms/determinize.hh>
-# include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/automata/concept/kinds.hh>
-
-# include <vaucanson/automata/concept/transpose_impl.hh>
-
-# include <vaucanson/algorithms/product.hh>
+#ifndef PRODUCT_TEST_HH
+# define PRODUCT_TEST_HH
 
 # include <time.h>
-
+# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/automata/concept/automata.hh>
+# include <vaucanson/automata/concept/automaton_impl.hh>
+# include <vaucanson/automata/concept/kinds.hh>
+# include <vaucanson/automata/concept/tags.hh>
+# include <check/tests_stuff.hh>
 # include <vaucanson/misc/dot_dump.hh>
-
+# include <vaucanson/tools/gen_random.hh>
+# include <vaucanson/algorithms/determinize.hh>
+# include <vaucanson/algorithms/transpose.hh>
+# include <vaucanson/algorithms/product.hh>
+# include <vaucanson/misc/dot_dump.hh>
 # include <vaucanson/algorithms/complementary.hh>
 # include <vaucanson/algorithms/complete.hh>
-
 # include <vaucanson/algorithms/trim.hh>
 
 using namespace vcsn;
@@ -50,15 +29,13 @@ using namespace vcsn::tools;
 template <class Auto>
 unsigned product_test(tests::Tester& tg)
 {  
-//   std::filebuf fb;
-//   std::ostream os(&fb);
-//   fb.open ("automaton.dot", std::ios::out);
-  tests::Tester t(tg.verbose());
   typedef Auto automaton_t;
-
   gen_auto_t gen(time(0x0));
+  tests::Tester t(tg.verbose());
 
-  const unsigned nb_test = 10;
+  const unsigned nb_test    = 30;
+  unsigned success_identity = 0;
+  unsigned success_null     = 0;
 
   for (unsigned i = 0 ; i < nb_test; i++) 
     {
@@ -67,18 +44,26 @@ unsigned product_test(tests::Tester& tg)
       auto_in_complete(a);
       a = determinize(a);  
       automaton_t ac = auto_complementary(a);
+      automaton_t squared = auto_product(a,a);
+
+      if ((squared.states().size() == a.states().size()) &&
+	  (squared.edges().size() == a.edges().size()))
+	success_identity++;
       
-      TEST(t, "Check Identity for square product", 
-	   (auto_product(a, a).states().size() == a.states().size()) &&
-	   (auto_product(a, a).edges().size() == a.edges().size())
-	   );
-      
-      TEST(t, "Check Nullity for product of A and his complementar", 
-	   !trim(auto_product(a, ac)).states().size()
-	   );   
+      if (trim(auto_product(a, ac)).states().size() == 0)
+	success_null++;
     }
-
-  //  misc::dot_dump(os, trim(d), "Product"); 
-
+  
+  std::string rate_identity;
+  std::string rate_null;
+  SUCCESS_RATE(rate_identity, success_identity, nb_test);
+  TEST(t,"Square of a complete deterministic automaton." + rate_identity,
+       success_identity == nb_test);
+  SUCCESS_RATE(rate_null, success_null, nb_test);
+  TEST(t, "Product of complete automaton and its complementary." +
+       rate_null,
+       success_null == nb_test);
   return t.all_passed();
 }
+
+#endif // PRODUCT_TEST_HH

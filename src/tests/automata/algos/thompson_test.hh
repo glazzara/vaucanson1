@@ -14,6 +14,8 @@
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/automata/concrete/generalized.hh>
 # include <vaucanson/algorithms/thompson.hh>
+# include <vaucanson/algorithms/compute.hh>
+# include <vaucanson/algorithms/realtime.hh>
 
 using namespace vcsn;
 
@@ -46,7 +48,7 @@ bool thompson_test(tests::Tester& tg)
     exp = exp * a_e * exp;
     vcsn::tools::GenRandomAutomata<Auto> gen(time(0));
     Auto	au = gen.empty();
-    glushkov(au, exp.value());
+    thompson(au, exp.value());
     in_realtime(au);
     unsigned i = 0;
     for (; i < nb_word_test; ++i)

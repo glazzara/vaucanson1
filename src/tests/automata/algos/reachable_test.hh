@@ -18,14 +18,14 @@
 # include <vaucanson/algorithms/reachable.hh>
 
 template <class Auto>
-unsigned reachable_test(tests::Tester& tg)
+unsigned reachable_test(tests::Tester& t)
 {
   typedef Auto automaton_t;
   using namespace vcsn;
   using namespace vcsn::algebra;
   using namespace vcsn::tools;
   
-  tests::Tester t(tg.verbose());
+
   gen_auto_t	 gen(time(0x0));
   const unsigned nb_tests			     = 10;
   unsigned	 success_trim			     = 0;

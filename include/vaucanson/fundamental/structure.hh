@@ -1,9 +1,7 @@
-/*********************************************************************
- * <vaucanson/algebra/algebraic_structure.hh>: companion to meta_set *
- *********************************************************************/
+// structure.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project. */
+// VCSN_HEADER
 #ifndef FUNDAMENTAL_STRUCTURE_HH
 # define FUNDAMENTAL_STRUCTURE_HH
 

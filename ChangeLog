@@ -1,4 +1,43 @@
+2002-07-23  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.90)
+	* include/vaucanson/fundamental/structure.hh : minor.
+	* src/tests/Makefile.am : add tests-suites subdir.
+	* src/tests/check/tests_stuff.hh : minor change.
+	* src/tests/check/tests_stuff.cc : idem.
+	* src/tests/automata/algos/Makefile.am : remove algo-test.
+	* include/vaucanson/algorithms/reachable.hxx : minor change.
+	* include/vaucanson/tools/gen_random.hh : minor change.
+	* src/tests/automata/algos/closure_test.hh : redesigned.
+	* src/tests/automata/algos/glushkov_test.hh : minor.
+	* src/tests/automata/algos/thompson_test.hh : minor.
+	* src/tests/automata/algos/complete_test.hh : redesigned.
+	* src/tests/automata/algos/product_test.hh : idem.
+	* src/tests/automata/algos/minimization_test.hh : redesigned.
+
+	Adding tests-suites stuff.
+	* src/tests/tests-suites/Makefile.am : added.
+	* src/tests/tests-suites/usual_automaton_t.includes : added.
+	* src/tests/tests-suites/usual_automaton_t/Makefile.am : added.
+	* src/tests/tests-suites/usual_automaton_t/minimization-test.cc : added.
+	* src/tests/tests-suites/usual_automaton_t/product-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/generalized-test.cc : added.
+	* src/tests/tests-suites/usual_automaton_t/extract-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/elimination-test.cc : added.
+	* src/tests/tests-suites/usual_automaton_t/reachable-test.cc : added
+	* src/tests/tests-suites/usual_automaton_t/glushkov-test.cc: added.
+	* src/tests/tests-suites/usual_automaton_t/normalize-test.cc: added.
+	* src/tests/tests-suites/usual_automaton_t/union-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/realtime-test.cc: added.
+	* src/tests/tests-suites/usual_automaton_t/determinist-test.cc : added.
+	* src/tests/tests-suites/usual_automaton_t/thompson-test.cc: added.
+	* src/tests/tests-suites/usual_automaton_t/closure-test.cc: added. 
+	* src/tests/tests-suites/usual_automaton_t/complete-test.cc: added.
+	* src/tests/tests-suites/usual_automaton_t/compute-test.cc: added. 
+	* src/tests/bin/automata-test-suite.sh : added.
+
+	
 2002-07-22  Maxime Rey  <max@lrde.epita.fr>
+(0.89)
 	* Added `src/tests/automata/implementation_check/global_consistance_test.hh'
 	* Added `src/tests/automata/implementation_check/init_final_test.hh'
 	* Added `src/tests/automata/implementation_check/coherence_state_edge_test.hh'
@@ -10,7 +49,7 @@
 
 
 2002-07-22  Maxime Rey  <max@lrde.epita.fr>
-
+(0.88)
 	* Added `include/vaucanson/algorithms/trim.hxx' 
 	* Added `include/vaucanson/algorithms/complete.hxx' 
 	* Added `include/vaucanson/algorithms/complete.hh' 

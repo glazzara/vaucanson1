@@ -1,9 +1,7 @@
-/****************************************
- * <vaucanson/algorithms/reachable.hxx> *
- ****************************************/
+// reachable.hxx
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGORITHMS_REACHABLE_HXX
 # define ALGORITHMS_REACHABLE_HXX
 
@@ -16,7 +14,7 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/extract.hh>
-//# include <vaucanson/automata/concept/transpose_impl.hh>
+# include <vaucanson/automata/concept/transpose_impl.hh>
 
 namespace vcsn {
 

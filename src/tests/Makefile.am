@@ -6,8 +6,7 @@
 
 SUBDIRS = \
 	check 					\
+	tests-suites 				\
 	fundamental				\
 	algebra    				\
 	automata
-
-

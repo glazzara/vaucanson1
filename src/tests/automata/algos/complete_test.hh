@@ -2,46 +2,20 @@
 //
 // $Id$
 // VCSN_HEADER
+#ifndef COMPLETE_TEST_HH
+# define COMPLETE_TEST_HH
 
-
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-
+# include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automaton_impl.hh>
-
 # include <vaucanson/automata/concept/kinds.hh>
-
 # include <vaucanson/automata/concept/tags.hh>
-
-# include <vaucanson/automata/concrete/manylinks.hh>
-
 # include <check/tests_stuff.hh>
-
-# include <vaucanson/misc/ref.hh>
-# include <vaucanson/misc/dot_dump.hh>
-
 # include <vaucanson/tools/gen_random.hh>
-
-# include <vaucanson/algorithms/determinize.hh>
-# include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/automata/concept/kinds.hh>
-
-# include <vaucanson/automata/concept/transpose_impl.hh>
-
-# include <vaucanson/algorithms/product.hh>
-
-# include <time.h>
-
-# include <vaucanson/misc/dot_dump.hh>
-
 # include <vaucanson/algorithms/complementary.hh>
 # include <vaucanson/algorithms/complete.hh>
-
 # include <vaucanson/algorithms/trim.hh>
+# include <vaucanson/algorithms/determinize.hh>
 
 using namespace vcsn;
 using namespace vcsn::algebra;
@@ -50,30 +24,29 @@ using namespace vcsn::tools;
 template <class Auto>
 unsigned complete_test(tests::Tester& tg)
 {  
-//   std::filebuf fb;
-//   std::ostream os(&fb);
-//   fb.open ("automaton.dot", std::ios::out);
   tests::Tester t(tg.verbose());
-  typedef Auto automaton_t;
-
+  typedef Auto			  automaton_t;
+  typedef GenRandomAutomata<Auto> gen_auto_t;
+  
   gen_auto_t gen(time(0x0));
 
   const unsigned nb_test = 10;
+  unsigned nb_success    = 0;
 
   for (unsigned i = 0 ; i < nb_test; i++) 
     {
-      automaton_t a = gen.generate_afd(20);
+      automaton_t a = gen.generate_dfa(20);
       
       auto_in_complete(a);
-
-      TEST(t, "Check Identity for square product", 
-	   (a.edges().size() == a.states().size() * 
-	    a.series().monoid().alphabet().size()) && is_deterministic(a)
-	   );
       
+      if ((a.edges().size() == a.states().size() * 
+	   a.series().monoid().alphabet().size()) && is_deterministic(a))
+	++nb_success;
      }
-  
-  //  misc::dot_dump(os, trim(d), "Product"); 
-
+  std::string rate;
+  SUCCESS_RATE(rate, nb_success, nb_test);
+  TEST(t, "complete on DFA." + rate, nb_success == nb_test);
   return t.all_passed();
 }
+
+#endif // COMPLETE_TEST_HH
