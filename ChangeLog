@@ -1,3 +1,8 @@
+2004-07-09  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime_composition.hxx: Fix a wrong
+	construction that raised an assertion in fibonacci.
+
 2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/Makefile.am: Add missing files.
@@ -5,7 +10,7 @@
 2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	The structure comparison failed when only alphabets were differents,
 	this patch solves this problem.
-	
+
 	* include/vaucanson/design_pattern/structure.hh,
 	* include/vaucanson/design_pattern/structure.hxx: Remove the default
 	structure equality operator.
@@ -13,7 +18,7 @@
 	* include/vaucanson/algebra/concept/numerical_semiring.hxx,
 	* include/vaucanson/algebra/concept/tropical_semiring.hxx: New files.
 	* include/vaucanson/algebra/concept/tropical_semiring.hh,
-	* include/vaucanson/algebra/concept/numerical_semiring.hh: Add 
+	* include/vaucanson/algebra/concept/numerical_semiring.hh: Add
 	comparison operator for semirings.
 
 	* include/vaucanson/automata/concept/transducer.hxx,
@@ -24,7 +29,7 @@
 	* src/tests/context_headers/transducers/global_consistency_test.hh:
 	Enforce the tests.
 	* src/tests/design_pattern/intrinsics.hh: Update the test.
-	
+
 2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/bin/generate-test-suite.sh: Use $(top_srcdir) instead of

@@ -67,7 +67,7 @@ namespace vcsn {
     typedef typename Auto_t::set_t		       o_automata_set_t;
 
     o_automata_set_t auto_structure
-      (Auto_series_set_t (lhs.structure().series().semiring()));
+      (Auto_series_set_t (rhs.structure().series().semiring()));
 
     AUTOMATON_TYPES_(Auto_t, a_);
 
