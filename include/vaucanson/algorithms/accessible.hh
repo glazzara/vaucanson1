@@ -1,7 +1,7 @@
 // accessible.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -47,7 +47,7 @@
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /* @{ */
+  /** @addtogroup algorithms */  /** @{ */
 
   /**
    * @brief Return accessible states.
@@ -97,7 +97,7 @@ namespace vcsn {
   template<typename A, typename T>
   void
   accessible_here(Element<A, T>& a);
-  
+
   /**
    * @brief Return co-accessible states.
    *
@@ -113,7 +113,7 @@ namespace vcsn {
   template<typename A, typename T>
   std::set<hstate_t>
   coaccessible_states(const Element<A, T>& a);
-  
+
   /**
    * @brief Extract the sub-automaton composed of co-accessible states.
    *
@@ -131,7 +131,7 @@ namespace vcsn {
   template<typename A, typename T>
   Element<A, T>
   coaccessible(const Element<A, T>& a);
-  
+
   /**
    * @brief In-place extract the sub-automaton of co-accessible states.
    *
@@ -150,13 +150,13 @@ namespace vcsn {
   coaccessible_here(Element<A, T>& a);
 
   /** @} */
-  
+
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algorithms/accessible.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_ALGORITHMS_ACCESSIBLE_HH

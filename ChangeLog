@@ -1,3 +1,7 @@
+2004-02-04  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/accessible.hh: Typo.
+
 2004-02-02  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
@@ -87,7 +91,7 @@
 
 	* include/vaucanson/algorithms/aut_to_exp.hxx:
 	    Fix uninitialized set in var.
-	* include/vaucanson/algorithms/product.hxx: 
+	* include/vaucanson/algorithms/product.hxx:
 	    Fix unused var.
 	* include/vaucanson/algorithms/extension.hxx: Likewise.
 	* src/demos/fibonacci/fibonacci.cc: Use verbalize.
@@ -121,10 +125,10 @@
 
 2003-11-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-      * src/tests/check/tester.hh (EQTEST): 
+      * src/tests/check/tester.hh (EQTEST):
 	   Display more information when verbose is high.
       * include/vaucanson/algebra/concrete/series/krat.hxx: Remove FIXME.
-      * include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Fix. 
+      * include/vaucanson/algebra/concrete/series/krat_exp_support.hxx: Fix.
       * include/vaucanson/algebra/concrete/series/krat_exp_verbalization.h{h,xx}: New.
       * src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh: New.
 
@@ -236,7 +240,7 @@
 	  include/vaucanson/vaucanson_boolean_automaton.hh
 	  include/vaucanson/vaucanson_z_max_plus_automaton.hh
 	  include/vaucanson/vaucanson_z_automaton.hh
-	  include/vaucanson/vaucanson_r_automaton.hh: 
+	  include/vaucanson/vaucanson_r_automaton.hh:
 	    Update reference to design_pattern.
 
 2003-11-25  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
