@@ -63,7 +63,7 @@ namespace vcsn {
       }
       template <typename Auto>
       static
-      void setcoordfrom(const Auto& a, hstate_t,
+      void setcoordfrom(const Auto&, hstate_t,
                         Tag, hstate_t,
                         Tag, hstate_t)
       {

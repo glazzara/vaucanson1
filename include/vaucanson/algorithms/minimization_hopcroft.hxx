@@ -96,7 +96,7 @@ namespace vcsn {
     `-------------------------*/
     typedef std::pair<unsigned, unsigned> pair_t;
     std::list<pair_t>   list;
-    bool		**list_mat = new bool*[max_states];
+    bool **list_mat = new bool*[max_states];
 
     for (int p = 0; p < max_states; ++p)
       list_mat[p] = new bool[max_letters];
@@ -295,15 +295,15 @@ namespace vcsn {
 	for (unsigned e = 0; e < max_letters; ++e)
 	  {
 	    delta_ret.clear();
-	    std::set<unsigned> already_linked;
+	    std::vector<bool> already_linked(max_partitions);
 	    input.letter_deltac(delta_ret, s, alphabet[e],
 				delta_kind::states());
 	      for_all_(delta_ret_t, out, delta_ret)
 	      {
 		unsigned c = class_[*out];
-		if (already_linked.find(c) == already_linked.end())
+		if (!already_linked[c])
 		  {
-		    already_linked.insert(c);
+		    already_linked[c]=true;
 		    output.add_letter_edge(out_states[i],
 					   out_states[c],
 					   alphabet[e]);
@@ -332,11 +332,11 @@ namespace vcsn {
 
   template <typename A, typename input_t, typename output_t>
   void
-  do_quotient(const AutomataBase<A>&		,
-	      const algebra::NumericalSemiring&	,
-	      SELECTOR(bool)			,
-	      output_t&				output,
-	      const input_t&			input)
+  do_quotient(const AutomataBase<A>&	a_set,
+	      const algebra::NumericalSemiring&,
+	      SELECTOR(bool),
+	      output_t&			output,
+	      const input_t&		input)
   {
     AUTOMATON_TYPES(input_t);
     typedef std::set<hstate_t>			     	      delta_ret_t;
@@ -370,7 +370,7 @@ namespace vcsn {
     /*------------------------.
     | To manage the splitting |
     `------------------------*/
-    std::vector<unsigned>			split(max_states);
+    std::vector<bool>			        split(max_states);
     std::vector<unsigned>			twin(max_states);
     std::vector<bool>                           met_set(max_states);
 
@@ -401,17 +401,15 @@ namespace vcsn {
     /*------------------------------.
     | Initialize the list of (P, a) |
     `------------------------------*/
-    unsigned source_subset =  (nb_final < max_states / 2) ? 1 : 0;
-
     for (unsigned e = 0; e < max_letters; ++e)
       {
-	list.push_back(pair_t(source_subset, e));
-	list_mat[source_subset][e] = true;
+	list.push_back(pair_t(0, e));
+	list_mat[0][e] = true;
       }
     for (unsigned e = 0; e < max_letters; ++e)
       {
-	list.push_back(pair_t(1-source_subset, 1));
-	list_mat[1 - source_subset][e] = true;
+	list.push_back(pair_t(1, e));
+	list_mat[1][e] = true;
       }
 
     delta_ret_t				delta_ret;
@@ -435,9 +433,7 @@ namespace vcsn {
 	{
 	  delta_ret.clear();
 	  input.letter_deltac(delta_ret, *p, alphabet[e], delta_kind::states());
-	  for (typename delta_ret_t::iterator i = delta_ret.begin();
-	       i != delta_ret.end();
-	       ++i)
+	  for_all_(delta_ret_t, i, delta_ret)
 	    {
 	      if (inverse[*i][e] == 0)
 		inverse[*i][e] = new std::set<hstate_t>();
@@ -466,117 +462,67 @@ namespace vcsn {
 	| (b) |
 	`----*/
 	std::list<unsigned> met_class;
-	for (typename std::list<hstate_t>::iterator b = part[p].begin();
-	     b != part[p].end(); ++b)
+	for_all_(std::list<hstate_t>, b, part[p])
 	  if (inverse[*b][a] != 0)
-	    for (typename std::set<hstate_t>::iterator q = inverse[*b][a]->begin();
-		 q != inverse[*b][a]->end();
-		 ++q)
+	    for_all_(std::set<hstate_t>, q, *inverse[*b][a])
 	      {
 		if(!met_set[*q])
 		  {
 		    met_set[*q]=true;
 		    unsigned i = class_[*q];
-		    if (split[i] == 0)
+		    if (!split[i])
 		      {
-			split[i] = 1;
+			split[i] = true;
 			met_class.push_back(i);
 		      }
-		    else
-		      split[i]++;
 		  }
 	      }
 
 	/*----.
 	| (c) |
 	`----*/
-	std::queue<typename std::list<hstate_t>::iterator> to_erase;
-
-	for (typename std::list<hstate_t>::iterator b = part[p].begin();
-	     b != part[p].end(); ++b)
+	for_all_(std::list<unsigned>, b, met_class)
 	  {
-	    if (inverse[*b][a] != 0)
-	      for (typename std::set<hstate_t>::iterator q = inverse[*b][a]->begin();
-		   q != inverse[*b][a]->end();
-		   ++q)
-		if (met_set[*q])
-		  {
-		    //		  std::cerr << "predecesseur de " << *b << " : " << *q << std::endl;
-		    met_set[*q]=false;
-		    unsigned i = class_[*q];
-		    if (split[i] < part[i].size())
-		      {
-			if (place[*q] == b)
-			  to_erase.push(b);
-			else
-			  {
-			    if (twin[i] == 0)
-			      {
-				twin[i] = max_partitions;
-				max_partitions++;
-			      }
-
-			    part[i].erase(place[*q]);
-			    --split[i];;
-
-			    place[*q] = part[twin[i]].insert(part[twin[i]].end(), *q);
-			    class_[*q] = twin[i];
-			  }
-		      }
-		  }
-	  }
-	if (split[p] && split[p] < part[p].size())
-	  {
-	    while (!to_erase.empty())
+	    bool t=met_set[part[*b].front()];
+	    for_all_(std::list<hstate_t>, q, part[*b])
 	      {
-		typename std::list<hstate_t>::iterator b=to_erase.front();
-		part[p].erase(b);
-		place[*b] = part[max_partitions].insert(part[max_partitions].end(), *b);
-		class_[*b] = max_partitions;
-
-		to_erase.pop();
+		if (t!=met_set[*q])
+		  {
+		    if (twin[*b] == 0)
+		      {
+			twin[*b] = max_partitions;
+			max_partitions++;
+		      }
+		    part[*b].erase(place[*q]);
+		    place[*q] =
+		      part[twin[*b]].insert(part[twin[*b]].end(), *q);
+		    class_[*q] = twin[*b];
+		  }
 	      }
-	    max_partitions++;
 	  }
 
 	/*----.
 	| (d) |
 	`----*/
-	for (typename std::list<unsigned>::iterator b = met_class.begin();
-	     b != met_class.end();
-	     ++b)
+	for_all_(std::list<unsigned>, b, met_class)
 	  if (twin[*b] != 0)
 	    {
 	      for (unsigned e = 0; e < max_letters; ++e)
 		{
-		  if (list_mat[*b][e] == true)
+		  if (list_mat[*b][e] == false)
 		    {
-		      list.push_back(pair_t(twin[*b], e));
-		      list_mat[twin[*b]][e] = true;
+		      list_mat[*b][e] = true;
+		      list.push_back(pair_t(*b, e));
 		    }
-		  else
-		    {
-		      if (part[*b].size() <= part[twin[*b]].size())
-			{
-			  list_mat[*b][e] = true;
-			  list.push_back(pair_t(*b, e));
-			}
-		      else
-			{
-			  list_mat[twin[*b]][e] = true;
-			  list.push_back(pair_t(twin[*b], e));
-			}
-		    }
+		  list_mat[twin[*b]][e] = true;
+		  list.push_back(pair_t(twin[*b], e));
 		}
 	    }
-	for (typename std::list<unsigned>::iterator i = met_class.begin();
-	     i != met_class.end();
-	     ++i)
+	for_all_(std::list<unsigned>, b, met_class)
 	  {
-	    split[*i] = 0;
-	    twin[*i] = 0;
+	    split[*b] = false;
+	    twin[*b] = 0;
 	  }
-
       }
 
     /*------------------------------------.
@@ -599,14 +545,6 @@ namespace vcsn {
 	// same behaviour
 	hstate_t s = part[i].front();
 
-// 	for (typename std::list<hstate_t>::const_iterator j = part[i].begin();
-// 	     j != part[i].end();
-// 	     ++j)
-// 	  if (input.is_initial(s))
-// 	    {
-// 	      output.set_initial(out_states[i]);
-// 	      break;
-// 	    }
 	if (input.is_final(s))
 	  output.set_final(out_states[i]);
 
@@ -615,27 +553,30 @@ namespace vcsn {
 	  {
 	    delta_ret.clear();
 	    std::set<unsigned> already_linked;
-	    input.letter_deltac(delta_ret, s, alphabet[e], delta_kind::states());
-	    for (typename delta_ret_t::iterator out = delta_ret.begin();
-		 out != delta_ret.end();
-		 ++out)
+	    input.letter_deltac(delta_ret, s, alphabet[e],
+				delta_kind::states());
+	      for_all_(delta_ret_t, out, delta_ret)
 	      {
 		unsigned c = class_[*out];
 		if (already_linked.find(c) == already_linked.end())
 		  {
 		    already_linked.insert(c);
-		    output.add_letter_edge(out_states[i], out_states[c], alphabet[e]);
+		    output.add_letter_edge(out_states[i],
+					   out_states[c],
+					   alphabet[e]);
 		  }
 	      }
 	  }
       }
     //set initial states
 
-    for (typename input_t::initial_iterator i = input.initial().begin();
-	 i != input.initial().end();
-	 ++i)
+    for_each_initial_state(i, input)
       output.set_initial(out_states[class_[*i]]);
   }
+
+  /*----------------------------------------.
+  | Quotient with multiplicities (covering) |
+  `----------------------------------------*/
 
   template <class S, class T,
 	    typename A, typename input_t, typename output_t>
@@ -649,9 +590,10 @@ namespace vcsn {
     AUTOMATON_TYPES(input_t);
     using namespace std;
 
-    /*-------------------------------------
-      Declare data structures and variables
-      -------------------------------------*/
+    /*----------------------------------------.
+    | Declare data structures and variables.  |
+    `----------------------------------------*/
+
     typedef set<hedge_t>                       set_edges_t;
     typedef set<hstate_t>                      set_states_t;
     typedef set<semiring_elt_t>                set_semiring_elt_t;
@@ -659,81 +601,87 @@ namespace vcsn {
     typedef pair<unsigned, letter_t>           pair_class_letter_t;
     typedef pair<hstate_t, semiring_elt_t>     pair_state_semiring_elt_t;
     typedef set<pair_state_semiring_elt_t>     set_pair_state_semiring_elt_t;
+    typedef map<semiring_elt_t, unsigned>      map_semiring_elt_t;
 
-    set<unsigned>                              met_classes;
-    set_edges_t                                edges_comming, edges_leaving;
-    queue<pair_class_letter_t>                 the_queue;
-    vector<vector<set_pair_state_semiring_elt_t> >   inverse;
-    series_set_elt_t                               series_identity    = input.series().zero_;
-    semiring_elt_t                             weight_zero       = input.series().semiring().wzero_;
-    monoid_elt_t                               monoid_identity   = input.series().monoid().empty_;
-    const alphabet_t&	                       alphabet(input.series().monoid().alphabet());
-    unsigned                                   max_partition, max_letters, pos;
+    series_set_elt_t	series_identity	= input.series().zero_;
+    semiring_elt_t	weight_zero	= input.series().semiring().wzero_;
+    monoid_elt_t	monoid_identity	= input.series().monoid().empty_;
+    const alphabet_t&	alphabet (input.series().monoid().alphabet());
 
-    pos              = 0;
-    max_partition    = 0;
-    max_letters      = alphabet.size();
-    map<letter_t, unsigned> pos_of_letter;
+    queue<pair_class_letter_t>				the_queue;
 
-    unsigned			max_states = 0;
+    set<unsigned>	met_classes;
+    set_edges_t		edges_leaving;
+
+    unsigned	max_partition	= 0;
+//     unsigned	max_letters	= alphabet.size();
+    unsigned	max_states	= 0;
+
     for_each_state(q, input)
-      {
-	max_states = std::max(*q, max_states);
-      }
+      max_states = std::max(unsigned (*q), max_states);
     ++max_states;
-    // to avoid special case problem (one state initial and final ...)
+    // Avoid special case problem (one initial and final state...)
     max_states = std::max(max_states, 2u);
 
-    for_each_letter(a, alphabet){
-      pos_of_letter[*a] = pos;
-      pos++;
+    vector< vector<set_pair_state_semiring_elt_t> > inverse (max_states);
+
+    map<letter_t, unsigned> pos_of_letter;
+    {
+      unsigned pos (0);
+
+      for_each_letter(a, alphabet)
+	pos_of_letter[*a] = pos++;
     }
 
-    inverse.resize(max_states);
+    set_states_t		states_visited;
+    set_semiring_elt_t		semiring_had_class;
+    vector<set_states_t>	classes (max_states);
+    vector<unsigned>		class_of_state (max_states);
+    vector_semiring_elt_t	old_weight (max_states), val (max_states);
+    map_semiring_elt_t		class_of_weight;
 
-    set_states_t           states_visited;
-    set_semiring_elt_t           semiring_had_class;
-    vector<set_states_t>   classes(max_states);
-    vector<unsigned>       class_of_state(max_states);
-    vector_semiring_elt_t        old_weight(max_states), class_of_weight(max_states), val(max_states);
-
-    for(int i = 0; i < max_states; i++)
+    for(unsigned i = 0; i < max_states; ++i)
       inverse[i].resize(max_states);
 
     for_each_state(q, input)
+      for_each_letter(a, alphabet)
       {
-	for_each_letter(a, alphabet)
+
+	for_each_const_(set_states_t, r, states_visited)
+	  old_weight[*r] = weight_zero;
+	states_visited.clear();
+
+	set_edges_t edges_comming;
+	input.letter_rdeltac(edges_comming, *q, *a, delta_kind::edges());
+
+	for_each_const_(set_edges_t, e, edges_comming)
 	  {
-	    for_each_const_(set_states_t, r, states_visited)
-	      old_weight[*r] = weight_zero;
-	    states_visited.clear();
-	    edges_comming.clear();
-
-	    input.letter_rdeltac(edges_comming, *q, *a, delta_kind::edges());
-
-	    for_each_const_(set_edges_t, e, edges_comming)
-	      {
-		hstate_t p = input.origin_of(*e);
-		if (states_visited.find(p) != states_visited.end())
-		  inverse[*q][pos_of_letter[*a]].erase(pair_state_semiring_elt_t(p, old_weight[p]));
-		else
-		  states_visited.insert(p);
-
-		old_weight[p] += input.series_of(*e).get(*a);
-		inverse[*q][pos_of_letter[*a]].insert(pair_state_semiring_elt_t(p, old_weight[p]));
-	      }
+	    hstate_t		p = input.origin_of(*e);
+	    if (states_visited.find(p) != states_visited.end())
+	      inverse[*q][pos_of_letter[*a]].
+		erase(pair_state_semiring_elt_t (p, old_weight[p]));
+	    else
+	      states_visited.insert(p);
+	    series_set_elt_t	sd = input.series_of(*e);
+	    monoid_elt_t	md (input.structure().series().monoid(), *a);
+	    semiring_elt_t	wsd = sd.get(md);
+	    old_weight[p] += wsd;
+	    inverse[*q][pos_of_letter[*a]].
+	      insert(pair_state_semiring_elt_t (p, old_weight[p]));
 	  }
       }
 
-    /*-------------------------------------------------------------
-      Initialize the partition with 2 classes : final and non-final
-      -------------------------------------------------------------*/
+    /*-----------------------------------------------------------.
+    | Initialize the partition with as many classes as there are |
+    | final values.                                              |
+    `-----------------------------------------------------------*/
+
     bool         empty = true;
     unsigned     class_non_final;
 
     for_each_state(q, input)
       {
-	if (!input.is_final(*q))
+	if (not input.is_final(*q))
 	  {
 	    if (empty == true)
 	      {
@@ -763,53 +711,62 @@ namespace vcsn {
 	  }
       }
 
-    /*--------------------------------------------------
-      Initialize the queue with pairs <class_id, letter>
-      --------------------------------------------------*/
-    for (int i = 0; i < max_partition; i++)
-	for_each_letter(a, alphabet)
-	  the_queue.push(pair_class_letter_t(i, *a));
+    /*-----------------------------------------------------.
+    | Initialize the queue with pairs <class_id, letter>.  |
+    `-----------------------------------------------------*/
 
-    /*-------------
-      The main loop
-      -------------*/
+    for (unsigned i = 0; i < max_partition; i++)
+      for_each_letter(a, alphabet)
+	the_queue.push(pair_class_letter_t (i, *a));
+
+    /*----------------.
+    | The main loop.  |
+    `----------------*/
+
     unsigned old_max_partition = max_partition;
 
-    while(!the_queue.empty())
+    while(not the_queue.empty())
       {
 	pair_class_letter_t pair = the_queue.front();
 	the_queue.pop();
-	val.clear();
+	val.clear(); // FIXME: Is this line necessary?
 	met_classes.clear();
 
-	for_each_const_(set_states_t, q, classes[pair.first])	// First, calculcate val[state] and note met_classes
+	for_each_state(q, input)
+	  val[*q] = 0;
+
+	// First, calculcate val[state] and note met_classes.
+	for_each_const_(set_states_t, q, classes[pair.first])
+	  for_each_const_(set_pair_state_semiring_elt_t, pair_,
+			  inverse[*q][pos_of_letter[pair.second]])
 	  {
-	    for_each_const_(set_pair_state_semiring_elt_t, pair_, inverse[*q][pos_of_letter[pair.second]])
-	      {
-		unsigned  state = (*pair_).first;
-		if (met_classes.find(class_of_state[state]) == met_classes.end())
-		  met_classes.insert(class_of_state[state]);
-		val[state] += (*pair_).second;
-	      }
+	    unsigned  state = pair_->first;
+	    if (met_classes.find(class_of_state[state]) ==
+		met_classes.end())
+	      met_classes.insert(class_of_state[state]);
+	    val[state] += pair_->second;
 	  }
 
-	for_each_const_(set<unsigned>, class_id, met_classes) 	// Next,for each met class, do the partition.
+	// Next, for each met class, do the partition.
+	for_each_const_(set<unsigned>, class_id, met_classes)
 	  {
 	    if (classes[*class_id].size() == 1)
-	      continue;
+	      continue ;
 
-	    queue<hstate_t>   to_erase;
-	    semiring_elt_t          first_val, next_val;
-	    first_val = val[*(classes[*class_id].begin())];
+	    queue<hstate_t>	to_erase;
+	    semiring_elt_t	next_val;
+	    semiring_elt_t	first_val = val[*(classes[*class_id].begin())];
 	    class_of_weight.clear();
 	    semiring_had_class.clear();
 
 	    for_each_const_(set_states_t, p, classes[*class_id])
 	      {
 		next_val = val[*p];
-		if (next_val != first_val) // This state must be moved to another class !
+		// This state must be moved to another class!
+		if (next_val != first_val)
 		  {
-		    if (semiring_had_class.find(next_val) == semiring_had_class.end()) // Must create a new class
+		    if (semiring_had_class.find(next_val) ==
+			semiring_had_class.end()) // Must create a new class
 		      {
 			classes[max_partition].insert(*p);
 			class_of_state[*p] = max_partition;
@@ -826,54 +783,77 @@ namespace vcsn {
 		  }
 	      }
 
-       	    while(!to_erase.empty())
+       	    while(not to_erase.empty())
 	      {
 		hstate_t state_to_erase = to_erase.front();
 		to_erase.pop();
 		classes[*class_id].erase(state_to_erase);
 	      }
 
-	    for (int i = old_max_partition; i < max_partition; i++) // Push pairs <new_class_id, letter> into the queue
+	    // Push pairs <new_class_id, letter> into the queue.
+	    for (unsigned i = old_max_partition; i < max_partition; i++)
 	      for_each_letter(b, alphabet)
 		the_queue.push(pair_class_letter_t(i, *b));
-
 	    old_max_partition = max_partition;
 	  }
-      }
+       }
 
-    /*----------------
-      Form the output
-      ----------------*/
-    typedef map<unsigned, series_set_elt_t> map_class_series_set_elt_t;
-    map_class_series_set_elt_t series_of;
+    /*------------------.
+    | Form the output.  |
+    `------------------*/
 
-    for(int i = 0; i < max_partition; i++) // Add states
+    typedef vector<series_set_elt_t> vector_series_set_elt_t;
+
+    std::vector<hstate_t>	out_states (max_partition);
+
+    // typedef map<unsigned, series_set_elt_t> map_class_series_elt_t;
+    // map_class_series_elt_t	seriesof;
+
+    // Add states.
+    for(unsigned i = 0; i < max_partition; i++)
       {
-	hstate_t p = output.add_state();
+	out_states[i]  = output.add_state();
 	hstate_t a_state = *classes[i].begin();
-	series_set_elt_t a_series = series_identity;
+	series_set_elt_t a_serie = series_identity;
 
 	for_each_const_(set_states_t, state, classes[i])
 	  if(input.is_initial(*state))
-	    a_series += input.get_initial(*state);
+	    a_serie += input.get_initial(*state);
 
-	output.set_initial(p, a_series);
+	output.set_initial(out_states[i] , a_serie);
 
 	if (input.is_final(a_state))
-	  output.set_final(p, input.get_final(a_state));
+	    output.set_final(out_states[i] , input.get_final(a_state));
       }
 
-    for(int i = 0; i < max_partition; i++) // Add edges
+    // Add edges.
+    vector_series_set_elt_t seriesof (max_partition, series_identity);
+
+    for(unsigned i = 0; i < max_partition; i++)
       {
-	series_of.clear();
+	met_classes.clear();
+
 	edges_leaving.clear();
 	input.deltac(edges_leaving, *classes[i].begin(), delta_kind::edges());
 
 	for_each_const_(set_edges_t, e, edges_leaving)
-	    series_of[class_of_state[input.aim_of(*e)]] += input.series_of(*e);
+	  {
+	    series_set_elt_t	se = input.series_of(*e);
+	    unsigned		cs = class_of_state[input.aim_of(*e)];
 
-	for_each_const_(map_class_series_set_elt_t, it, series_of)
-	    output.add_series_edge(i, (*it).first, (*it).second);
+	    if (met_classes.find(cs) == met_classes.end())
+	      {
+		met_classes.insert(cs);
+		seriesof[cs] = se;
+	      }
+	    else
+	      seriesof[cs] += se;
+	  }
+
+	for_each_const_(set<unsigned>, cs, met_classes)
+	  output.add_series_edge(out_states[i],
+				 out_states[*cs],
+				 seriesof[*cs]);
       }
   }
 

@@ -34,8 +34,7 @@
  * "binary value".
  *
  * Build  the   n-th  power  "C_n"  of  "C_1"   and  test  aut_to_exp,
- * standard_of,        thompson_of,        backward_closure        and
- * minimization_hopcroft on it.
+ * standard_of, thompson_of, backward_closure and quotient on it.
  *
  * Reference: ETA exer. III.2.17, III.3.12
  */
@@ -112,7 +111,7 @@ main(int argc, char** argv)
       std::cout << "n = "<< n << std::endl
 		<< "evaluation on baba: "
 		<< eval(cn, monoid_elt_t (Astar, "baba")) << std::endl;
-      tools::dot_display(cn, "C_n");
+      tools::dot_display(cn, "C_n", true);
 
       /*--------------------------.
       | Work on the automaton C_n |
@@ -123,17 +122,17 @@ main(int argc, char** argv)
 
      automaton_t sn = standard_of(e);
      std::cout << "S_n = " << sn << std::endl;
-     tools::dot_display(sn, "S_n");
+     tools::dot_display(sn, "S_n", true);
 
      automaton_t tn = thompson_of(e);
      std::cout << "T_n = " << tn << std::endl;
-     tools::dot_display(tn, "T_n");
+     tools::dot_display(tn, "T_n", true);
 
      automaton_t un = backward_closure(tn);
      std::cout << "U_n = " << un << std::endl;
-     tools::dot_display(un, "U_n");
+     tools::dot_display(un, "U_n", true);
 
-     automaton_t vn = minimization_hopcroft(cn);
+     automaton_t vn = quotient(cn);
      std::cout << "V_n = " << vn << std::endl;
      tools::dot_display(vn, "V_n");
     }

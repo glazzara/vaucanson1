@@ -1,3 +1,14 @@
+2004-06-30  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	This fix was suggested by Sylvain Lombardy.
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix.
+	* include/vaucanson/algorithms/product.hxx: Fix an unused argument
+	warning.
+	* src/demos/ciaa/ex3.cc: Use quotient() instead of minimize_hopcroft()
+	(which makes no sense). Launch dotty in background and do not wait for
+	its termination.
+
 2004-06-30  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/tests/transducers/realtime_test.hh: Complete the test to test the
