@@ -2,6 +2,7 @@
 //
 // $Id$
 // VCSN_HEADER
+
 #ifndef ALGORITHMS_EXTRACT_HH
 # define ALGORITHMS_EXTRACT_HH
 
@@ -24,4 +25,4 @@ namespace vcsn {
 
 # include <vaucanson/algorithms/extract.hxx>
 
-#endif // ALGO_EXTRACT_HH
+#endif // ALGORITHMS_EXTRACT_HH

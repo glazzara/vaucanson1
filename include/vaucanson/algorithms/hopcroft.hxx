@@ -11,8 +11,8 @@
 # include <queue>
 # include <list>
 
-# include <vaucanson/automata/automata_base.hh>
-# include <vaucanson/automata/history.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/history.hh>
 
 namespace vcsn {
 
@@ -325,10 +325,10 @@ namespace vcsn {
   }
   
   template<typename A, typename T>
-  algebra::Element<A, T>
-  hopcroft_minimization_det(const algebra::Element<A, T>& a)
+  Element<A, T>
+  hopcroft_minimization_det(const Element<A, T>& a)
   {
-    algebra::Element<A, T> output;
+    Element<A, T> output;
     output.create();
     output.series() = a.series();
     do_hopcroft_minimization_det(a.set(), output, a);
@@ -655,10 +655,10 @@ namespace vcsn {
   
   
   template<typename A, typename T>
-  algebra::Element<A, T>
-  hopcroft_minimization_undet(const algebra::Element<A, T>& a)
+  Element<A, T>
+  hopcroft_minimization_undet(const Element<A, T>& a)
   {
-    algebra::Element<A, T> output;
+    Element<A, T> output;
     output.create();
     output.series() = a.series();
     do_hopcroft_minimization_undet(a.set(), output, a);

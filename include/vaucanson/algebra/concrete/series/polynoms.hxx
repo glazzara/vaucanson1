@@ -14,8 +14,8 @@ namespace vcsn {
   namespace algebra {
 
     /*----------------.
-    | polynom<Tm, Tw> |
-    `----------------*/
+      | polynom<Tm, Tw> |
+      `----------------*/
 
     template<typename Tm, typename Tw>
     template<typename M, typename W>
@@ -157,6 +157,13 @@ namespace vcsn {
 
   } // algebra
 
+} // vcsn
+
+namespace std {
+
+  using namespace vcsn;
+  using namespace algebra;
+
   template <class Tm, class Tw>
   bool operator==(const polynom<Tm, Tw>& lhs, const polynom<Tm, Tw>& rhs)
   {
@@ -193,6 +200,10 @@ namespace vcsn {
   {
     return lhs.as_map() >= rhs.as_map();
   }
+
+} // std
+
+namespace vcsn {
  
   /*-------------------.
     | External functions |
@@ -520,13 +531,14 @@ namespace vcsn {
   }
 
   /*---------------.
-  | specialization |
-  `---------------*/
+    | specialization |
+    `---------------*/
 
   /*------------------------------.
-  | fundamental series operations |
-  `------------------------------*/
+    | fundamental series operations |
+    `------------------------------*/
 
+    
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   Tw op_series_get(const Series<W, M>& s, 
 		   const polynom<Tm, Tw>& p,
@@ -563,6 +575,7 @@ namespace vcsn {
 	i->second = new_w;
   }
 
+
   template <class W, class M, class Tm, class Tw>
   Tm op_choose_from_supp(const Series<W, M>& s, 
 			 const polynom<Tm, Tw>& p)
@@ -597,8 +610,8 @@ namespace vcsn {
   }
 
   /*----------.
-  | transpose |
-  `----------*/
+    | transpose |
+    `----------*/
   template <typename W, typename M, typename Tm, typename Tw>
   void  op_in_transpose(Series<W, M>& s, polynom<Tm, Tw>& t)
   {

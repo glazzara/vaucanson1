@@ -1,3 +1,74 @@
+2002-07-22  Maxime Rey  <max@lrde.epita.fr>
+
+	* Added `include/vaucanson/algorithms/trim.hxx' 
+	* Added `include/vaucanson/algorithms/complete.hxx' 
+	* Added `include/vaucanson/algorithms/complete.hh' 
+	* Added `include/vaucanson/algorithms/complementary.hxx' 
+	* Added `include/vaucanson/algorithms/complementary.hh' 
+	* Added `include/vaucanson/algorithms/trim.hh' 
+	* Added `include/vaucanson/automata/concept/generalized.hxx' 
+	* Added `include/vaucanson/automata/concept/generalized.hh' 
+	* Added `src/tests/automata/algos/complete_test.hh' 
+	* Added `src/tests/automata/algos/product_test.hh' 
+	* Added `src/tests/automata/algos/minimization_test.hh' 
+	* Index: 0.87/include/vaucanson/algebra/concrete/series/polynoms.hxx
+	> } // vcsn
+	>
+	> namespace std {
+	>
+	>   using namespace vcsn;
+	>   using namespace algebra;
+	>
+	195a203,206
+	>
+	> } // std
+	>
+	> namespace vcsn {
+	* Index: 0.87/include/vaucanson/algebra/concrete/series/polynoms.hh : it's ok now
+	* Index: 0.87/include/vaucanson/algorithms/extract.hxx : cleaning
+	* Index: 0.87/include/vaucanson/algorithms/extract.hh : minor changes
+	* Index: 0.87/src/tests/automata/algos/algo_test.cc : add some tests...
+	15,17c15,17
+	< # include <vaucanson/automata/automata_base.hh>
+	< # include <vaucanson/algebra/series_base.hh>
+	< # include <vaucanson/automata/history.hh>
+	---
+	> # include <vaucanson/automata/concept/automata_base.hh>
+	> # include <vaucanson/algebra/concept/series_base.hh>
+	> # include <vaucanson/automata/concept/history.hh>
+	155,156c155,156
+	<   algebra::Element<A, T>
+	<   auto_product(const algebra::Element<A, T>& lhs, const algebra::Element<A, U>& rhs)
+	---
+	>   Element<A, T>
+	>   auto_product(const Element<A, T>& lhs, const Element<A, U>& rhs)
+	159c159
+	<     algebra::Element<A, T> ret(rhs.set());
+	---
+	>     Element<A, T> ret(rhs.set());
+	200c200
+	<   auto_in_diagonal(algebra::Element<A, T>& a)
+	---
+	>   auto_in_diagonal(Element<A, T>& a)
+	207,208c207,208
+	<   algebra::Element<A, T>
+	<   auto_diagonal(const algebra::Element<A, T>& a)
+	---
+	>   Element<A, T>
+	>   auto_diagonal(const Element<A, T>& a)
+	210c210
+	<     algebra::Element<A, T>    ret(a);
+	---
+	>     Element<A, T>    ret(a);
+	* Index: 0.87/include/vaucanson/algorithms/product.hh : it's ok now
+	* Index: 0.87/include/vaucanson/algorithms/moore.hxx
+	192d191
+	<             std::cerr << *h << " ";
+	199d197
+	<         std::cerr << std::endl;
+	* Index: 0.87/include/vaucanson/algorithms/hopcroft.hxx : it's ok now
+	* Index: 0.87/include/vaucanson/algorithms/hopcroft.hh : same thing
+
 2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.87)
 	*  src/tests/automata/algos/union_test.hh : redesigned.

@@ -189,14 +189,12 @@ namespace vcsn {
 	  for (typename hstate_list_t::const_iterator h = part[c].begin();
 	       h != part[c].end(); ++h)
 	    {
-	      std::cerr << *h << " ";
 	      if (input.is_initial(*h))
 		{
 		  output.set_initial(q);
 		  break;
 		}
 	    }
-	  std::cerr << std::endl;
 	  if (input.is_final(s))
 	    output.set_final(q);	
 	  conv[c] = q;

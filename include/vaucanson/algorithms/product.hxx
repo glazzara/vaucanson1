@@ -12,9 +12,9 @@
 
 # include <vaucanson/algorithms/product.hh>
 # include <vaucanson/algorithms/extract.hh>
-# include <vaucanson/automata/automata_base.hh>
-# include <vaucanson/algebra/series_base.hh>
-# include <vaucanson/automata/history.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/algebra/concept/series_base.hh>
+# include <vaucanson/automata/concept/history.hh>
 
 namespace vcsn {
 
@@ -152,11 +152,11 @@ namespace vcsn {
 
   // wrappers
   template<typename A, typename T, typename U>
-  algebra::Element<A, T> 
-  auto_product(const algebra::Element<A, T>& lhs, const algebra::Element<A, U>& rhs)
+  Element<A, T> 
+  auto_product(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
     // assert(lhs.set() == rhs.set())
-    algebra::Element<A, T> ret(rhs.set());
+    Element<A, T> ret(rhs.set());
     ret.create();
     ret.series() = lhs.series();
     auto_do_product(ret.set(), ret, lhs, rhs);
@@ -197,17 +197,17 @@ namespace vcsn {
 
   template <typename A, typename T>
   void
-  auto_in_diagonal(algebra::Element<A, T>& a)
+  auto_in_diagonal(Element<A, T>& a)
   {
     do_auto_diagonal(a.set(), a);
   }
 
 
   template<typename A, typename T>
-  algebra::Element<A, T> 
-  auto_diagonal(const algebra::Element<A, T>& a)
+  Element<A, T> 
+  auto_diagonal(const Element<A, T>& a)
   {
-    algebra::Element<A, T>    ret(a);
+    Element<A, T>    ret(a);
     
     ret.emancipate();
     auto_in_diagonal(ret.set(), ret);
