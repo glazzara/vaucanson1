@@ -70,7 +70,7 @@ rm files.tmp
 
 # Build base test.
 cat > test_base.cc << EOF
-#define INC_(I) < I >
+#define INC_(I) <I >
 #define INC(I) INC_(I)
 #include INC(INCLUDE)
 

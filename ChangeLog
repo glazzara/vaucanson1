@@ -1,5 +1,10 @@
 2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/sanity/generate_files.sh: Generate a test_base.cc which is
+	valid both for g++ and ICC.
+
+2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/vaucanson.hh: Typo.
 	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx,
 	* include/vaucanson/xml/types.hh:
