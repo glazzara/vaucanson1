@@ -1,7 +1,7 @@
-SUBDIRS = lib libltdl mpp++ 
+SUBDIRS = lib libltdl mpp++ include src
 
-EXTRA_DIST = boostrap.sh cleanup.sh \
-	     ltwrap-sh.in cxxwrap-sh.in \
+EXTRA_DIST = bootstrap.sh cleanup.sh \
+	     config/ltwrap-sh.in config/cxxwrap-sh.in \
 	     config/readline.m4 config/libz.m4 config/libtool-fix.m4
 
 ACLOCAL_AMFLAGS = -I config

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Cleaning up..."
-sh ./cleanup.sh
+sh ./cleanup.sh all
 
 echo "Running aclocal..."
 aclocal --verbose >aclocal.log 2>&1

@@ -1,3 +1,36 @@
+2003-05-13  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* Makefile.am (EXTRA_DIST): Fix.
+
+	* include/constants/inf.hh, include/constants/one.hh,
+	include/constants/zero.hh, include/vcore/callable.hh,
+	include/vcore/closure.hh, include/vcore/env.hh,
+	include/vcore/exception.hh, include/vcore/interrupt_handler.hh,
+	include/vcore/module_base.hh, include/vcore/module_loader.hh,
+	include/vcore/object_catalog.hh, include/vcore/partial_call.hh,
+	include/vcore/streams.hh, include/lazy/eval_visitor.hh,
+	include/lazy/exp.hh, include/lazy/exp.hxx,
+	include/lazy/exp_base.hh, include/lazy/exp_base.hxx,
+	include/lazy/print_visitor.hh, include/lazy/vauc_constructs.hh,
+	include/lazy/vauc_constructs.hxx, include/lazy/visitor_base.hh,
+	include/readlinebuf.hh, include/toplevel/parse.hh,
+	include/toplevel/wrappers.hh, include/triplet.hh,
+	include/types/object.hh, include/types/object.hxx,
+	include/types/symbol.hh, include/types/symbol.hxx,
+	include/types/type.hh, src/vcore/Makefile.am,
+	src/vcore/callable.cc, src/vcore/closure.cc, src/vcore/env.cc,
+	src/vcore/eval.cc, src/vcore/exception.cc, src/vcore/explode.cc,
+	src/vcore/find_cost.cc, src/vcore/find_path.cc,
+	src/vcore/functionimpl.cc, src/vcore/interrupt_handler.cc,
+	src/vcore/lazy_print_visitor.cc, src/vcore/module_loader.cc,
+	src/vcore/object_catalog.cc, src/vcore/partial_call.cc,
+	src/vcore/persistant.cc, src/vcore/streams.cc,
+	src/vcore/unwind_init.cc, src/vcore/unwind_init.hh: Add files.
+	
+	* src/Makefile.am (SUBDIRS): Mention 'vcore'.
+
+	* bootstrap.sh: More cleanup.
+
 2003-05-12  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* Add files.

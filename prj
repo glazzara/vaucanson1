@@ -1,29 +1,45 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 195)
-(Parent-Version vaucanson 0 186)
-(Version-Log "Index: ChangeLog
+(Project-Version vaucanson 0 196)
+(Parent-Version vaucanson 0 195)
+(Version-Log "Index: vauc/ChangeLog
 from  Raphaël Poss  <raph@lrde.epita.fr>
 
-        * Makefile.am, boostrap.sh, configure.ac: Mention subdirectory
-        'vauc'.
+   * Makefile.am (EXTRA_DIST): Fix.
 
-Index: vauc/ChangeLog
-from  Raphaël Poss  <raph@lrde.epita.fr>
+   * include/constants/inf.hh, include/constants/one.hh,
+   include/constants/zero.hh, include/vcore/callable.hh,
+   include/vcore/closure.hh, include/vcore/env.hh,
+   include/vcore/exception.hh, include/vcore/interrupt_handler.hh,
+   include/vcore/module_base.hh, include/vcore/module_loader.hh,
+   include/vcore/object_catalog.hh, include/vcore/partial_call.hh,
+   include/vcore/streams.hh, include/lazy/eval_visitor.hh,
+   include/lazy/exp.hh, include/lazy/exp.hxx,
+   include/lazy/exp_base.hh, include/lazy/exp_base.hxx,
+   include/lazy/print_visitor.hh, include/lazy/vauc_constructs.hh,
+   include/lazy/vauc_constructs.hxx, include/lazy/visitor_base.hh,
+   include/readlinebuf.hh, include/toplevel/parse.hh,
+   include/toplevel/wrappers.hh, include/triplet.hh,
+   include/types/object.hh, include/types/object.hxx,
+   include/types/symbol.hh, include/types/symbol.hxx,
+   include/types/type.hh, src/vcore/Makefile.am,
+   src/vcore/callable.cc, src/vcore/closure.cc, src/vcore/env.cc,
+   src/vcore/eval.cc, src/vcore/exception.cc, src/vcore/explode.cc,
+   src/vcore/find_cost.cc, src/vcore/find_path.cc,
+   src/vcore/functionimpl.cc, src/vcore/interrupt_handler.cc,
+   src/vcore/lazy_print_visitor.cc, src/vcore/module_loader.cc,
+   src/vcore/object_catalog.cc, src/vcore/partial_call.cc,
+   src/vcore/persistant.cc, src/vcore/streams.cc,
+   src/vcore/unwind_init.cc, src/vcore/unwind_init.hh: Add files.
 
-        * Add files.
+   * src/Makefile.am (SUBDIRS): Mention 'vcore'.
 
-
-Index: vauc/mpp++/ChangeLog
-from  Raphaël Poss  <raph@lrde.epita.fr>
-
-        * Initial checkin.
-
+   * bootstrap.sh: More cleanup.
 
 ")
 (New-Version-Log "")
-(Checkin-Time "Mon, 12 May 2003 22:05:23 +0200")
+(Checkin-Time "Tue, 13 May 2003 00:51:17 +0200")
 (Checkin-Login raph)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -107,7 +123,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 (Project-Keywords)
 (Files
   (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.4 600))
-  (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.1 664))
+  (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.2 664))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.1 664))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
@@ -690,7 +706,7 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
 ;; Files added by populate at Mon, 12 May 2003 21:58:37 +0200,
 ;; to version 0.186(w), by raph:
 
-  (vauc/bootstrap.sh (vaucanson/l/25_bootstrap. 1.1 775))
+  (vauc/bootstrap.sh (vaucanson/l/25_bootstrap. 1.2 775))
   (vauc/mpp++/TODO (vaucanson/l/26_TODO 1.1 644))
   (vauc/toplevel/Makefile.am (vaucanson/l/27_Makefile.a 1.1 664))
   (vauc/modules/Makefile.am (vaucanson/l/28_Makefile.a 1.1 664))
@@ -700,8 +716,8 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/config/libz.m4 (vaucanson/l/32_libz.m4 1.1 664))
   (vauc/config/readline.m4 (vaucanson/l/33_readline.m 1.1 664))
   (vauc/cleanup.sh (vaucanson/l/34_cleanup.sh 1.1 775))
-  (vauc/src/Makefile.am (vaucanson/l/35_Makefile.a 1.1 664))
-  (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.1 664))
+  (vauc/src/Makefile.am (vaucanson/l/35_Makefile.a 1.2 664))
+  (vauc/Makefile.am (vaucanson/l/36_Makefile.a 1.2 664))
   (vauc/lib/getopt.h (vaucanson/l/37_getopt.h 1.1 644))
   (vauc/lib/getopt1.c (vaucanson/l/38_getopt1.c 1.1 644))
   (vauc/lib/Makefile.am (vaucanson/l/39_Makefile.a 1.1 664))
@@ -772,32 +788,73 @@ from  Raphaël Poss  <raph@lrde.epita.fr>
   (vauc/mpp++/src/examples/Alphabet.class (vaucanson/n/0_Alphabet.c 1.1 644))
   (vauc/mpp++/src/examples/AddState.fun (vaucanson/n/1_AddState.f 1.1 644))
   (vauc/mpp++/lib/Makefile.am (vaucanson/n/2_Makefile.a 1.1 644))
+
+;; Files added by populate at Tue, 13 May 2003 00:41:10 +0200,
+;; to version 0.195(w), by raph:
+
+  (vauc/include/types/symbol.hxx (vaucanson/n/3_symbol.hxx 1.1 644))
+  (vauc/include/types/object.hxx (vaucanson/n/4_object.hxx 1.1 644))
+  (vauc/include/lazy/vauc_constructs.hxx (vaucanson/n/5_vauc_const 1.1 644))
+  (vauc/include/lazy/exp_base.hxx (vaucanson/n/6_exp_base.h 1.1 644))
+  (vauc/include/lazy/exp.hxx (vaucanson/n/7_exp.hxx 1.1 644))
+  (vauc/include/types/type.hh (vaucanson/n/8_type.hh 1.1 644))
+  (vauc/include/types/symbol.hh (vaucanson/n/9_symbol.hh 1.1 644))
+  (vauc/include/types/object.hh (vaucanson/n/10_object.hh 1.1 644))
+  (vauc/include/triplet.hh (vaucanson/n/11_triplet.hh 1.1 644))
+  (vauc/include/toplevel/wrappers.hh (vaucanson/n/12_wrappers.h 1.1 644))
+  (vauc/include/toplevel/parse.hh (vaucanson/n/13_parse.hh 1.1 644))
+  (vauc/include/readlinebuf.hh (vaucanson/n/14_readlinebu 1.1 644))
+  (vauc/include/lazy/visitor_base.hh (vaucanson/n/15_visitor_ba 1.1 644))
+  (vauc/include/lazy/vauc_constructs.hh (vaucanson/n/16_vauc_const 1.1 644))
+  (vauc/include/lazy/print_visitor.hh (vaucanson/n/17_print_visi 1.1 644))
+  (vauc/include/lazy/exp_base.hh (vaucanson/n/18_exp_base.h 1.1 644))
+  (vauc/include/lazy/exp.hh (vaucanson/n/19_exp.hh 1.1 644))
+  (vauc/include/lazy/eval_visitor.hh (vaucanson/n/20_eval_visit 1.1 644))
+  (vauc/include/vcore/streams.hh (vaucanson/n/21_streams.hh 1.1 644))
+  (vauc/include/vcore/partial_call.hh (vaucanson/n/22_partial_ca 1.1 644))
+  (vauc/include/vcore/object_catalog.hh (vaucanson/n/23_object_cat 1.1 644))
+  (vauc/include/vcore/module_loader.hh (vaucanson/n/24_module_loa 1.1 644))
+  (vauc/include/vcore/module_base.hh (vaucanson/n/25_module_bas 1.1 644))
+  (vauc/include/vcore/interrupt_handler.hh (vaucanson/n/26_interrupt_ 1.1 644))
+  (vauc/include/vcore/exception.hh (vaucanson/n/27_exception. 1.1 644))
+  (vauc/include/vcore/env.hh (vaucanson/n/28_env.hh 1.1 644))
+  (vauc/include/vcore/closure.hh (vaucanson/n/29_closure.hh 1.1 644))
+  (vauc/include/vcore/callable.hh (vaucanson/n/30_callable.h 1.1 644))
+  (vauc/include/constants/zero.hh (vaucanson/n/31_zero.hh 1.1 644))
+  (vauc/include/constants/one.hh (vaucanson/n/32_one.hh 1.1 644))
+  (vauc/include/constants/inf.hh (vaucanson/n/33_inf.hh 1.1 644))
+  (vauc/include/Makefile.am (vaucanson/n/34_Makefile.a 1.1 664))
+
+;; Files added by populate at Tue, 13 May 2003 00:41:19 +0200,
+;; to version 0.195(w), by raph:
+
+  (vauc/src/vcore/Makefile.am (vaucanson/n/35_Makefile.a 1.1 644))
+
+;; Files added by populate at Tue, 13 May 2003 00:41:23 +0200,
+;; to version 0.195(w), by raph:
+
+  (vauc/src/vcore/unwind_init.cc (vaucanson/n/36_unwind_ini 1.1 644))
+  (vauc/src/vcore/streams.cc (vaucanson/n/37_streams.cc 1.1 644))
+  (vauc/src/vcore/persistant.cc (vaucanson/n/38_persistant 1.1 644))
+  (vauc/src/vcore/partial_call.cc (vaucanson/n/39_partial_ca 1.1 644))
+  (vauc/src/vcore/object_catalog.cc (vaucanson/n/40_object_cat 1.1 644))
+  (vauc/src/vcore/module_loader.cc (vaucanson/n/41_module_loa 1.1 644))
+  (vauc/src/vcore/lazy_print_visitor.cc (vaucanson/n/42_lazy_print 1.1 644))
+  (vauc/src/vcore/interrupt_handler.cc (vaucanson/n/43_interrupt_ 1.1 644))
+  (vauc/src/vcore/functionimpl.cc (vaucanson/n/44_functionim 1.1 644))
+  (vauc/src/vcore/find_path.cc (vaucanson/n/45_find_path. 1.1 644))
+  (vauc/src/vcore/find_cost.cc (vaucanson/n/46_find_cost. 1.1 644))
+  (vauc/src/vcore/explode.cc (vaucanson/n/47_explode.cc 1.1 644))
+  (vauc/src/vcore/exception.cc (vaucanson/n/48_exception. 1.1 644))
+  (vauc/src/vcore/eval.cc (vaucanson/n/49_eval.cc 1.1 644))
+  (vauc/src/vcore/env.cc (vaucanson/n/50_env.cc 1.1 644))
+  (vauc/src/vcore/closure.cc (vaucanson/n/51_closure.cc 1.1 644))
+  (vauc/src/vcore/callable.cc (vaucanson/o/0_callable.c 1.1 644))
+
+;; Files added by populate at Tue, 13 May 2003 00:41:24 +0200,
+;; to version 0.195(w), by raph:
+
+  (vauc/src/vcore/unwind_init.hh (vaucanson/o/1_unwind_ini 1.1 644))
 )
-(Merge-Parents
-  (0.194 complete
-    (ChangeLog ChangeLog ChangeLog r) (include/vaucanson/algebra/concept/numerical_semiring.hh include/vaucanson/algebra/concept/numerical_semiring.hh include/vaucanson/algebra/concept/numerical_semiring.hh r)
-    (include/vaucanson/algebra/concept/semiring_base.hh include/vaucanson/algebra/concept/semiring_base.hh include/vaucanson/algebra/concept/semiring_base.hh r) (include/vaucanson/algebra/concept/semiring_base.hxx include/vaucanson/algebra/concept/semiring_base.hxx include/vaucanson/algebra/concept/semiring_base.hxx r)
-    (include/vaucanson/algebra/concept/tropical_semiring.hh include/vaucanson/algebra/concept/tropical_semiring.hh include/vaucanson/algebra/concept/tropical_semiring.hh r) (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx r)
-    (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx include/vaucanson/algebra/concrete/free_monoid/str_words.hxx include/vaucanson/algebra/concrete/free_monoid/str_words.hxx r) (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh r)
-    (include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx r) (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh include/vaucanson/algebra/concrete/semiring/tropical_semiring.hh r)
-    (include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx r) (include/vaucanson/algebra/concrete/series/krat.hxx include/vaucanson/algebra/concrete/series/krat.hxx include/vaucanson/algebra/concrete/series/krat.hxx r)
-    (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh r) (include/vaucanson/algebra/concrete/series/polynoms.hxx include/vaucanson/algebra/concrete/series/polynoms.hxx include/vaucanson/algebra/concrete/series/polynoms.hxx r)
-    (include/vaucanson/algorithms/glushkov.hxx include/vaucanson/algorithms/glushkov.hxx include/vaucanson/algorithms/glushkov.hxx r) (include/vaucanson/algorithms/standard.hxx include/vaucanson/algorithms/standard.hxx include/vaucanson/algorithms/standard.hxx r)
-    (include/vaucanson/algorithms/union.hxx include/vaucanson/algorithms/union.hxx include/vaucanson/algorithms/union.hxx r) (include/vaucanson/automata/concept/automata_base.hxx include/vaucanson/automata/concept/automata_base.hxx include/vaucanson/automata/concept/automata_base.hxx r)
-    (include/vaucanson/automata/concrete/manylinks.hxx include/vaucanson/automata/concrete/manylinks.hxx include/vaucanson/automata/concrete/manylinks.hxx r) (include/vaucanson/fundamental/default_ops.hxx include/vaucanson/fundamental/default_ops.hxx include/vaucanson/fundamental/default_ops.hxx r)
-    (include/vaucanson/fundamental/element.hxx include/vaucanson/fundamental/element.hxx include/vaucanson/fundamental/element.hxx r) (include/vaucanson/fundamental/element_base.hxx include/vaucanson/fundamental/element_base.hxx include/vaucanson/fundamental/element_base.hxx r)
-    (include/vaucanson/fundamental/slots.hxx include/vaucanson/fundamental/slots.hxx include/vaucanson/fundamental/slots.hxx r) (include/vaucanson/misc/container_ops.hxx include/vaucanson/misc/container_ops.hxx include/vaucanson/misc/container_ops.hxx r)
-    (include/vaucanson/misc/random.hh include/vaucanson/misc/random.hh include/vaucanson/misc/random.hh r) (include/vaucanson/misc/static.hxx include/vaucanson/misc/static.hxx include/vaucanson/misc/static.hxx r)
-    (include/vaucanson/algorithms/brzozowski.hxx include/vaucanson/algorithms/brzozowski.hxx include/vaucanson/algorithms/brzozowski.hxx r) (include/vaucanson/algorithms/algo_helper.hxx include/vaucanson/algorithms/algo_helper.hxx include/vaucanson/algorithms/algo_helper.hxx r)
-    (include/vaucanson/algorithms/algo_helper.hh include/vaucanson/algorithms/algo_helper.hh include/vaucanson/algorithms/algo_helper.hh r) (src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh r)
-    (src/tests/tests-suites/algebra_series_krat_derivation.defs src/tests/tests-suites/algebra_series_krat_derivation.defs src/tests/tests-suites/algebra_series_krat_derivation.defs r) (src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh r)
-    (src/tests/algebra/series/krat/derivations/derivations_common.hh src/tests/algebra/series/krat/derivations/derivations_common.hh src/tests/algebra/series/krat/derivations/derivations_common.hh r) (include/vaucanson/algebra/concrete/letter/couple_letter.hxx include/vaucanson/algebra/concrete/letter/couple_letter.hxx include/vaucanson/algebra/concrete/letter/couple_letter.hxx r)
-    (include/vaucanson/algebra/concrete/letter/couple_letter.hh include/vaucanson/algebra/concrete/letter/couple_letter.hh include/vaucanson/algebra/concrete/letter/couple_letter.hh r) (include/vaucanson/algorithms/krat_exp_linearize.hxx include/vaucanson/algorithms/krat_exp_linearize.hxx include/vaucanson/algorithms/krat_exp_linearize.hxx r)
-    (include/vaucanson/algorithms/krat_exp_linearize.hh include/vaucanson/algorithms/krat_exp_linearize.hh include/vaucanson/algorithms/krat_exp_linearize.hh r) (() () include/vaucanson/algorithms/berry_sethi.hxx a)
-    (() () include/vaucanson/algorithms/berry_sethi.hh a) (() () include/vaucanson/algebra/concept/tropical_semiring.hxx a)
-    (() () src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh a) (() () src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh a)
-    (() () src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh a) (() () src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh a)
-    (() () src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh a) 
-  )
-)
+(Merge-Parents)
 (New-Merge-Parents)
