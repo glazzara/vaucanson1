@@ -4,8 +4,7 @@
 #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 #include <vaucanson/algebra/implementation/series/krat_exp_verbalization.hh>
 
-#include <vaucanson/tools/dot_dump.hh>
-#include <vaucanson/algorithms/standard_of.hh>
+#include <vaucanson/tools/dot_display.hh>
 #include <vaucanson/algorithms/evaluation.hh>
 #include <vaucanson/algorithms/realtime_composition.hh>
 
@@ -124,7 +123,7 @@ int main()
   | Dump and eval.  |
   `----------------*/
 
-  tools::dot_dump(std::cerr, fibg, "fibg");
+  tools::dot_display(fibg, "fibg", true);
   eval_an_expression(fibg);
 
   /*-------------------.
@@ -163,7 +162,7 @@ int main()
   | Dump and eval.  |
   `----------------*/
 
-  tools::dot_dump(std::cerr, fibd, "fibd");
+  tools::dot_display(fibd, "fibd", true);
   eval_an_expression(fibd);
 
   /*----------.
@@ -177,6 +176,6 @@ int main()
   | Dump and eval.  |
   `----------------*/
 
-  tools::dot_dump(std::cerr, fibgd, "fibgd");
+  tools::dot_display(fibgd, "fibgd", true);
   eval_an_expression(fibgd);
 }
