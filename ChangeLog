@@ -1,3 +1,9 @@
+2003-08-29  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/Makefile.am  (nobase_include_HEADERS): Remove dangling
+	reference to tropical_semiring.hxx.
+	* configure.ac: Change mechanism to force the C compiler.
+
 2003-08-17  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/finite_support_conversion.hh: Add 

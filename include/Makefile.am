@@ -20,7 +20,6 @@ nobase_include_HEADERS =					     \
 	vaucanson/algebra/concept/series_base.hh		       \
 	vaucanson/algebra/concept/series_base.hxx		       \
 	vaucanson/algebra/concept/tropical_semiring.hh		       \
-	vaucanson/algebra/concept/tropical_semiring.hxx		       \
 	vaucanson/algebra/concrete/alphabets/alphabets.hh	       \
 	vaucanson/algebra/concrete/alphabets/decorated_alphabet.hh     \
 	vaucanson/algebra/concrete/alphabets/decorated_alphabet.hxx    \

@@ -15,7 +15,8 @@ AM_CONFIG_HEADER([config.h:config.hin])
 # Using $CXX as the C compiler is a hack to allow building shared
 # modules from C++ source with libtool.
 AC_PROG_CXX
-AC_PROG_CC([$CXX])
+CC=$CXX
+AC_PROG_CC
 
 # Use included Vaucanson version.
 VCSN_PATH_LOCAL([.])
