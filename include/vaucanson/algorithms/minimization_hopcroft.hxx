@@ -33,10 +33,8 @@
 # define VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HXX
 
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
-
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
 # include <algorithm>
@@ -326,7 +324,7 @@ namespace vcsn {
   {
     Element<A, T> output(a.set());
     do_hopcroft_minimization_det(a.set(), output, a);
-    return trim(output);
+    return output;
   }
 
 

@@ -1,3 +1,9 @@
+2004-03-28  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Remove trim
+	call at the end of the algorithm.
+	* src/tests/automata/algos/minimization_test.hh: Update accordingly.
+
 2004-03-27  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* configure.ac: Generate

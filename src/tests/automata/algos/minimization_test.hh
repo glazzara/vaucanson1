@@ -1,7 +1,7 @@
 // minimization_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,8 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_MINIMIZATION_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_MINIMIZATION_TEST_HH
@@ -47,6 +49,7 @@
 # include <vaucanson/algorithms/minimization_moore.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <check/tester.hh>
+
 
 template <class Auto>
 unsigned minimization_test(tests::Tester& tg)
@@ -73,18 +76,20 @@ unsigned minimization_test(tests::Tester& tg)
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_initial", work, i);
 	}
-      
+
       automaton_t temp = trim(determinize(transpose(work)));
       //      temp = trim(determinize(temp));
-      automaton_t minimize = 
+
+      automaton_t minimize =
 	trim(determinize(transpose(temp)));
       if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_broz", temp, i);
 	}
-      automaton_t hopcroft = minimization_hopcroft(work);
-      automaton_t moore = minimization_moore(work);
+
+      automaton_t hopcroft = trim(minimization_hopcroft(work));
+      automaton_t moore = trim(minimization_moore(work));
 
       if (t.verbose() == tests::high)
 	{
@@ -97,26 +102,26 @@ unsigned minimization_test(tests::Tester& tg)
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_moore", moore, i);
 	}
-      
+
       if ((minimize.states().size() == hopcroft.states().size()) &&
 	  (minimize.edges().size() ==  hopcroft.edges().size()))
 	++success_hopcroft;
       else if (t.verbose() == tests::high)
 	{
-	  std::ostringstream s;					
+	  std::ostringstream s;
 	  s << "Hopcroft failed on " << i << std::ends;
 	  TEST_MSG(s.str());
 	}
-	  
-//       if ((minimize.states().size() == moore.states().size()) &&
-// 	  (minimize.edges().size() ==  moore.edges().size()))
-// 	++success_moore;
-//       else if (t.verbose() == tests::high)
-// 	{
-// 	  std::ostringstream s;					
-// 	  s << "Moore failed on " << i << std::ends;
-// 	  TEST_MSG(s.str());
-// 	}
+
+      if ((minimize.states().size() == moore.states().size()) &&
+	  (minimize.edges().size() ==  moore.edges().size()))
+	++success_moore;
+      else if (t.verbose() == tests::high)
+	{
+	  std::ostringstream s;
+	  s << "Moore failed on " << i << std::ends;
+	  TEST_MSG(s.str());
+	}
 
     }
 
@@ -125,7 +130,7 @@ unsigned minimization_test(tests::Tester& tg)
   std::string rate_moore;
   SUCCESS_RATE(rate_moore, success_moore, nb_test);
   TEST(t, "Hopcroft minimization "+rate_hopcroft, success_hopcroft == nb_test);
-  //  TEST(t, "Moore minimization    "+rate_moore,    success_moore    == nb_test);
+  TEST(t, "Moore minimization    "+rate_moore,    success_moore    == nb_test);
 
   return t.all_passed();
 }
