@@ -1,0 +1,5 @@
+#include <vaucanson/z_automaton.hh>
+
+using namespace vcsn::z_automaton;
+
+#define TEST_STATIC_ARGS automaton_t
