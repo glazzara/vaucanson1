@@ -2,15 +2,18 @@
 #
 # $Id$
 
-.PHONY: doc
+TEXI2PDF = $(TEXI2DVI) --pdf
 
 tex_TEX = tutorial.tex
 
-CLEANFILES= *.dvi *.aux *blg *.out *.toc *.lot *.tmp
+tutorial_tex_TEX =  macros.tex packages.tex definitions.tex
 
-doc: tutorial.dvi
+tutorial.dvi: $(tex_TEX) $(tutorial_tex_TEX)
+	$(TEXI2DVI) `test -f '$(tex_TEX)' || echo '$(srcdir)/'`$(tex_TEX)
+tutorial.pdf: $(tex_TEX) $(tutorial_tex_TEX)
+	$(TEXI2PDF) `test -f '$(tex_TEX)' || echo '$(srcdir)/'`$(tex_TEX)
 
-tutorial.dvi: $(tex_TEX) macros.tex packages.tex definition.tex
-	$(LATEX) `test -f '$(tex_TEX)' || echo '$(srcdir)/'`$(tex_TEX)
+docdir = $(datadir)/doc/@PACKAGE_TARNAME@
+dist_doc_DATA = tutorial.dvi tutorial.pdf
 
-
+CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp

@@ -1,5 +1,12 @@
 2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* Makefile.am: Remove `doc' target.
+	* doc/Makefile.am, doc/tutorial/Makefile.am: Likewise. Sanitize.
+
+	* doc/doc.doxy.in: Sanitize.
+	
+2003-05-15  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/config/config.hh.in: Remove obsolete file.
 
 	* include/vaucanson/config/extrconf.sh,

@@ -2,11 +2,14 @@
 #
 # $Id$
 
-SUBDIRS= tutorial
+SUBDIRS = tutorial
 
-doc: doc.doxy	
-	cd tutorial && $(MAKE) doc
-	@DOXYGEN@ doc.doxy
+docdir = $(datadir)/doc/@PACKAGE_TARNAME@
+dist_doc_DATA = ref.tar.gz
 
-clean-local:
-	rm -fr ref
+ref.tar.gz: doc.doxy.in
+	mkdir -p ref
+	$(DOXYGEN) doc.doxy
+	$(TAR) -czf $@ `test -d ref || echo '$(srcdir)/'`ref
+
+MAINTAINERCLEANFILES = ref

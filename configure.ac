@@ -32,8 +32,10 @@ AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
 ##
 AC_ARG_VAR([DOXYGEN], [the Doxygen documentation generation program])
 AC_CHECK_PROGS([DOXYGEN], [doxygen], [$am_aux_dir/missing doxygen])
-AC_ARG_VAR([LATEX], [the LaTeX binary])
-AC_CHECK_PROGS([LATEX], [latex], [$am_aux_dir/missing latex])
+AC_ARG_VAR([TEXI2DVI], [program to create DVI from TeX files])
+AC_CHECK_PROGS([TEXI2DVI], [texi2dvi], [$am_aux_dir/missing texi2dvi])
+AC_ARG_VAR([TAR], [the tape archiver program])
+AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 
 ##
 ## generate files.

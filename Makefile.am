@@ -36,13 +36,3 @@ maintainer-check:
 	else \
 	  echo "$@: GNU cppi is required" >&2; \
 	fi
-
-###
-### Documentation generation: add `doc' target for convenience.
-###
-
-.PHONY: doc
-
-doc:
-	cd doc && $(MAKE) doc
-
