@@ -496,8 +496,8 @@ namespace vcsn {
 		      }
 		    to_erase.push(place[*q]);
 		  }
-	      }		
-	  }    
+	      }
+	  }
 	while (!to_erase.empty())
 	  {
 	    typename std::list<hstate_t>::iterator b=to_erase.front();
@@ -685,7 +685,7 @@ namespace vcsn {
     `-----------------------------------------------------------*/
 
     bool         empty = true;
-    unsigned     class_non_final;
+    unsigned     class_non_final (0);
 
     for_each_state(q, input)
       {

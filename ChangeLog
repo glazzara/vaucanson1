@@ -1,5 +1,10 @@
 2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Fix an
+	uninitialized variable warning.
+
+2004-07-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/demos/xml/algorithms.cc: New. Allow the user to call various
 	classical algorithms on R automata stored in XML files.
 	* src/demos/xml/Makefile.am: Update.
