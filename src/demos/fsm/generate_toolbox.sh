@@ -146,7 +146,7 @@ cat > $FILE <<EOF
    #include "toolbox.hh"
    #include <vaucanson/tools/gen_random.hh>
    #include <vaucanson/tools/fsm_dump.hh> 
-   #include <vaucanson/algorithms/forward_closure.hh>
+   #include <vaucanson/algorithms/closure.hh>
    using namespace vcsn;
 
    int main(int argc, char **argv)

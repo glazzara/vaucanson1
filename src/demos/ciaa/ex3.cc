@@ -44,7 +44,7 @@
 #include <vaucanson/algorithms/product.hh>
 #include <vaucanson/algorithms/eval.hh>
 #include <vaucanson/algorithms/transpose.hh>
-#include <vaucanson/algorithms/backward_closure.hh>
+#include <vaucanson/algorithms/closure.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/tools/dot_display.hh>
 
