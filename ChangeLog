@@ -1,3 +1,15 @@
+2004-03-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/tests/automata/algos/brzozowski_test.hh,
+	* src/tests/automata/algos/berry_sethi_test.hh,
+	* src/tests/automata/algos/derivatives_automaton_test.hh,
+	* src/tests/automata/algos/is_isomorph_test.hh,
+	* src/tests/automata/algos/transpose_test.hh,
+	* src/tests/automata/algos/aci_canonical_test.hh,
+	* src/tests/automata/algos/trim_test.hh: New files.
+	Write a minimal test for untested algorithms.
+	* src/tests/automata/algos/Makefile.am: Update.
+
 2004-03-22  Loïc Fosse  <loic.fosse@lrde.epita.fr>
 
 	* include/vaucanson/tools/gen_random.hh,
