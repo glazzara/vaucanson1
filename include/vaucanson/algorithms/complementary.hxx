@@ -21,7 +21,7 @@
 #ifndef VCSN_ALGORITHMS_COMPLEMENTARY_HXX
 # define VCSN_ALGORITHMS_COMPLEMENTARY_HXX 
 
-//# include <vaucanson/misc/contract.hh>
+# include <vaucanson/misc/contract.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/tools/usual.hh>

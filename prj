@@ -1,15 +1,19 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 176)
-(Parent-Version vaucanson 0 175)
-(Version-Log "2003-03-18  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 177)
+(Parent-Version vaucanson 0 176)
+(Version-Log "2003-03-19  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* src/tests/algebra/series/misc/series_test.hh (test_series): Rename
-	function to 'series_test', inorder to work with the test generator.
-	* src/tests/tests-suites/algebra_series_misc.defs: Add.")
+	* include/vaucanson/misc/contract.hh: Add.
+	* include/vaucanson/algorithms/complementary.hxx: Include 
+	vaucanson/misc/contract.hh, so it compile.
+	* src/tests/automata/algos/compute_test.hh,
+	src/tests/automata/algos/elimination_test.hh
+	src/tests/automata/algos/thompson_test.hh: Correct the tests to compile
+	with the actual version of compute.")
 (New-Version-Log "")
-(Checkin-Time "Tue, 18 Mar 2003 19:01:10 +0100")
+(Checkin-Time "Wed, 19 Mar 2003 17:17:14 +0100")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -90,7 +94,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.116 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.117 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -176,7 +180,7 @@
   (include/vaucanson/algorithms/closure.hh (vaucanson/e/22_closure.hh 1.7 600))
   (include/vaucanson/algorithms/closure.hxx (vaucanson/e/21_closure.hx 1.6 600))
   (include/vaucanson/algorithms/complementary.hh (vaucanson/f/4_complement 1.5 600))
-  (include/vaucanson/algorithms/complementary.hxx (vaucanson/f/3_complement 1.5 600))
+  (include/vaucanson/algorithms/complementary.hxx (vaucanson/f/3_complement 1.6 600))
   (include/vaucanson/algorithms/complete.hh (vaucanson/f/2_complete.h 1.6 600))
   (include/vaucanson/algorithms/complete.hxx (vaucanson/f/1_complete.h 1.5 600))
   (include/vaucanson/algorithms/compute.hh (vaucanson/e/6_compute.hh 1.7 600))
@@ -388,19 +392,19 @@
   (src/tests/automata/algos/Makefile.am (vaucanson/d/18_Makefile.a 1.7 600))
   (src/tests/automata/algos/closure_test.hh (vaucanson/e/27_closure_te 1.7 600))
   (src/tests/automata/algos/complete_test.hh (vaucanson/f/8_complete_t 1.5 600))
-  (src/tests/automata/algos/compute_test.hh (vaucanson/e/30_compute_te 1.4 600))
+  (src/tests/automata/algos/compute_test.hh (vaucanson/e/30_compute_te 1.5 600))
   (src/tests/automata/algos/concat_test.hh (vaucanson/h/6_concat_tes 1.2 600))
   (src/tests/automata/algos/determinist_test.hh (vaucanson/e/16_determinis 1.8 600))
-  (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.6 600))
+  (src/tests/automata/algos/elimination_test.hh (vaucanson/e/38_eliminatio 1.7 600))
   (src/tests/automata/algos/extract_test.hh (vaucanson/e/29_extract_te 1.5 600))
   (src/tests/automata/algos/generalized_test.hh (vaucanson/e/37_generalize 1.4 600))
-  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.7 600))
+  (src/tests/automata/algos/glushkov_test.hh (vaucanson/e/43_glushkov_t 1.8 600))
   (src/tests/automata/algos/minimization_test.hh (vaucanson/f/10_minimizati 1.9 600))
   (src/tests/automata/algos/normalize_test.hh (vaucanson/e/17_normalize_ 1.10 600))
   (src/tests/automata/algos/product_test.hh (vaucanson/f/9_product_te 1.6 600))
   (src/tests/automata/algos/reachable_test.hh (vaucanson/e/28_reachable_ 1.7 600))
   (src/tests/automata/algos/realtime_test.hh (vaucanson/e/49_realtime_t 1.6 600))
-  (src/tests/automata/algos/thompson_test.hh (vaucanson/e/46_thompson_t 1.6 600))
+  (src/tests/automata/algos/thompson_test.hh (vaucanson/e/46_thompson_t 1.7 600))
   (src/tests/automata/algos/union_test.hh (vaucanson/e/15_union_test 1.8 600))
   (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.13 600))
   (src/tests/automata/implementation_check/add_edge_test.hh (vaucanson/f/15_add_edge_t 1.5 600))
@@ -485,6 +489,11 @@
 ;; to version 0.175(w), by clavei_t:
 
   (src/tests/tests-suites/algebra_series_misc.defs (vaucanson/j/26_algebra_se 1.1 600))
+
+;; Files added by populate at Wed, 19 Mar 2003 17:13:03 +0100,
+;; to version 0.176(w), by clavei_t:
+
+  (include/vaucanson/misc/contract.hh (vaucanson/j/27_contract.h 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

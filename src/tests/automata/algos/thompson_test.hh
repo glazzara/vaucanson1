@@ -72,7 +72,7 @@ bool thompson_test(tests::Tester& tg)
 	monoid_elt_t w = exp.choose_from_supp();
 	if (t.verbose() == tests::high)
 	  std::cout << "TEST: thompson " << i << " : test " << w << std::endl;
-	if (compute(au, w) == s.zero_)
+	if (compute(au, w) == zero_as<weight_value_t>::of(s.weights()))
 	  {
 	    break;
 	    if (t.verbose() == tests::high)
@@ -106,7 +106,7 @@ bool thompson_test(tests::Tester& tg)
 	      if (t.verbose() == tests::high)
 		std::cout << "TEST: thompson (" << nb << ")" 
 			  << i << " : test " << w << std::endl;
-	      if (compute(au, w) == s.zero_)
+	      if (compute(au, w) == zero_as<weight_value_t>::of(s.weights()))
 		{
 		  if (t.verbose() == tests::high)
 		    std::cout << "TEST: thompson " << i << " failed." << std::endl;

@@ -1,3 +1,13 @@
+2003-03-19  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/misc/contract.hh: Add.
+	* include/vaucanson/algorithms/complementary.hxx: Include 
+	vaucanson/misc/contract.hh, so it compile.
+	* src/tests/automata/algos/compute_test.hh,
+	src/tests/automata/algos/elimination_test.hh
+	src/tests/automata/algos/thompson_test.hh: Correct the tests to compile
+	with the actual version of compute.
+
 2003-03-18  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/algebra/series/misc/series_test.hh (test_series): Rename
