@@ -1,7 +1,7 @@
 // krat_exp_constant_term_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2204 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -45,20 +45,18 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
 {
   tests::Tester t(tg.verbose());
 
-  typedef Expr				      krat_exp_t;
-  typedef typename krat_exp_t::value_t	      kexp_t;
-  typedef typename krat_exp_t::monoid_elt_t   monoid_elt_t;
-  typedef typename monoid_elt_t::set_t        monoid_t;
+  typedef Expr					krat_exp_t;
+  typedef typename krat_exp_t::value_t		kexp_t;
+  typedef typename krat_exp_t::monoid_elt_t	monoid_elt_t;
+  typedef typename monoid_elt_t::set_t		monoid_t;
   
-  typedef typename krat_exp_t::semiring_elt_t   semiring_elt_t;
+  typedef typename krat_exp_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_elt_value_t;
-  typedef typename semiring_elt_t::set_t	  semiring_t;
-  typedef typename krat_exp_t::set_t 	  series_t;
-  typedef typename monoid_t::letter_t     letter_t;
-  typedef typename monoid_t::alphabet_t   alphabet_t;
+  typedef typename semiring_elt_t::set_t	semiring_t;
+  typedef typename krat_exp_t::set_t		series_t;
+  typedef typename monoid_t::letter_t		letter_t;
+  typedef typename monoid_t::alphabet_t		alphabet_t;
 
-  typedef typename kexp_t::semiring_elt_value_t	impl_t;
-  
   srand(time(0));
   alphabet_t alphabet;
   letter_t a = alphabet.random_letter();
@@ -79,58 +77,110 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
   unsigned int nb_tests = 0;
   unsigned int nb_succs = 0;
   
-  for (int cpt = 0; cpt < 5; ++cpt)
+  for (int cpt = 0; cpt < 100; ++cpt)
   {
     semiring_elt_t w = semiring.choose(SELECT(semiring_elt_value_t));
 
     struct
     {
-      krat_exp_t		exp;
+      krat_exp_t	exp;
       semiring_elt_t	res;
+      bool		computable;
     }
     exps[] =
       {
-	{ s.zero(SELECT(kexp_t)), s_zero },
-	{ s.identity(SELECT(kexp_t)), s_identity },
-	{ krat_exp_t (s), s_zero },
-	{ krat_exp_t (s, a), s_zero },
-	{ krat_exp_t (s, a) + krat_exp_t (s, b), s_zero },
-	{ krat_exp_t (s, a) * krat_exp_t (s, b), s_zero },
-	{ krat_exp_t (s, std::basic_string<letter_t> (larray)), s_zero },
-	{ krat_exp_t (s, a).star(), s_identity },
-	{ (s.identity(SELECT(kexp_t))).star(), s_identity },
-	{ (s_2identity * krat_exp_t (s, a)).star(), s_identity },
-	{ w * krat_exp_t (s, a), s_zero },
-	{ krat_exp_t (s, a) * w, s_zero },
-	{ krat_exp_t (s, a) * w + krat_exp_t (s, a), s_zero },
-	{ krat_exp_t (s, a) * w + krat_exp_t (s, a).star(), s_identity }
+	{
+	  s.zero(SELECT(kexp_t)),
+	  s_zero,
+	  true
+	},
+	{
+	  s.identity(SELECT(kexp_t)),
+	  s_identity,
+	  true
+	},
+	{
+	  krat_exp_t (s),
+	  s_zero,
+	  true
+	},
+	{
+	  krat_exp_t (s, a),
+	  s_zero,
+	  true
+	},
+	{
+	  krat_exp_t (s, a) + krat_exp_t (s, b),
+	  s_zero,
+	  true
+	},
+	{
+	  krat_exp_t (s, a) * krat_exp_t (s, b),
+	  s_zero,
+	  true
+	},
+	{
+	  krat_exp_t (s, std::basic_string<letter_t>(larray)),
+	  s_zero,
+	  true
+	},
+	{
+	  krat_exp_t (s, a).star(),
+	  s_identity,
+	  true
+	},
+	{
+	  (s.identity(SELECT(kexp_t))).star(),
+	  s_identity,
+	  false
+	},
+	{
+	  (s_2identity * krat_exp_t (s, a)).star(),
+	  s_identity,
+	  true
+	},
+	{
+	  w * krat_exp_t (s, a),
+	  s_zero,
+	  w.starable()
+	},
+	{
+	  krat_exp_t (s, a) * w,
+	  s_zero,
+	  w.starable()
+	},
+	{
+	  krat_exp_t (s, a) * w + krat_exp_t (s, a),
+	  s_zero,
+	  w.starable()
+	},
+	{
+	  krat_exp_t (s, a) * w + krat_exp_t (s, a).star(),
+	  s_identity,
+	  w.starable()
+	}
       };
 
     for (unsigned int i = 0; i < 14; ++i)
       {
 	std::pair<semiring_elt_t, bool> ret = constant_term(exps[i].exp);
 
-	// Tests with w are after test #9
-	if (i > 9)
-	  if (w.starable())
-	    {
-	      if (ret.second)
-		std::cerr << "Fail: Constant term shouldn't be computed"
-			  << std::endl;
-	      else
-		++nb_succs;
-	      continue;
-	    }
-	if (ret.first.value() == exps[i].res.value())
-	  ++nb_succs;
+	if (exps[i].computable != ret.second)
+	  {
+	    std::cerr << "FAIL: Constant term shouldn't be computed"
+		      << std::endl;
+	  }
 	else
-	  std::cerr << "FAIL: Expression "
-		    << exps[i].exp
-		    << " returned "
-		    << ret.first
-		    << " as constant term, instead of "
-		    << exps[i].res
-		    << std::endl;
+	  if (ret.first == exps[i].res)
+	    ++nb_succs;
+	  else
+	    std::cerr << "FAIL: Expression "
+		      << exps[i].exp
+		      << " returned "
+		      << ret.first
+		      << " as constant term, instead of "
+		      << exps[i].res
+		      << std::endl;
 	++nb_tests;
       }
   }
