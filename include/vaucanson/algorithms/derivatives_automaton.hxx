@@ -122,7 +122,7 @@ namespace vcsn {
   T_auto*	do_derivatives_automaton(const T_auto& out,
 					 const Element<S, T>& kexp)
   {
-    Element<S, T> exp = realtime(kexp);
+    Element<S, T> exp = realtime<S, T>(kexp);
     DerivativesAlgo<T_auto, S, T> derivatives_algo(out.series(), exp);
     derivatives_algo.run();
     if (derivatives_algo.undefined)

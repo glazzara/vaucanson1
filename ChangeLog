@@ -1,3 +1,12 @@
+2004-03-14  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/krat_exp_realtime.hh,
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx: Improve
+	documentation. Change prototype and enforce typing to avoid
+	clashes with realtime() in realtime.hh.
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Update
+	accordingly.
+
 2004-03-13  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/series_base.hh,

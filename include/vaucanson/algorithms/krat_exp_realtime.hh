@@ -1,7 +1,7 @@
 // krat_exp_realtime.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -30,26 +30,35 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH
 # define VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH
 
-# include <vaucanson/design_pattern/design_pattern.hh>
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file krat_exp_realtime.hh
+ *
+ * Declarations of the realtime() algorithm for rational expressions.
+ *
+ * @see realtime()
+ */
+/** @} */
+
+// INTERFACE: Exp realtime(const Exp& e) { return vcsn::realtime(e); }
+
+# include <vaucanson/algebra/concept/series_base.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms */  /** @{ */
+  /** @addtogroup algorithms *//** @{ */
 
   /// Expand words in the expression as a product of letters.
-  // INTERFACE: Exp realtime(const Exp& e) { return vcsn::realtime(e); }
-  template <class Series, class T>
-  Element<Series, T>
-  realtime(const Element<Series, T>& exp);
+  template <class S, class T>
+  Element<S, T>
+  realtime(const Element<algebra::SeriesBase<S>, T>& exp);
 
   /** @} */
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/krat_exp_realtime.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/krat_exp_realtime.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HH

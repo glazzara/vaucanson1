@@ -30,6 +30,8 @@
 #ifndef VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX
 # define VCSN_ALGORITHMS_KRAT_EXP_REALTIME_HXX
 
+# include <vaucanson/algorithms/krat_exp_realtime.hh>
+
 # include <vaucanson/algebra/concrete/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 
@@ -45,15 +47,15 @@ namespace vcsn {
       Dispatch
       >
     {
-      typedef KRatExpRealtime<Series, T, Dispatch>      self_t;
-      typedef Element<Series, T>                        return_type;
-      typedef typename Element<Series, T>::semiring_elt_t     semiring_elt_t;
-      typedef typename semiring_elt_t::value_t		      semiring_elt_value_t;
-      typedef typename Element<Series, T>::monoid_elt_t monoid_elt_t;
-      typedef typename monoid_elt_t::value_t	      monoid_value_t;
-      typedef typename monoid_elt_t::set_t	      monoid_t;
-      typedef typename monoid_t::alphabet_t	      alphabet_t;
-      typedef typename alphabet_t::letter_t	      letter_t;
+      typedef KRatExpRealtime<Series, T, Dispatch>	self_t;
+      typedef Element<Series, T>			return_type;
+      typedef typename Element<Series, T>::semiring_elt_t semiring_elt_t;
+      typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
+      typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
+      typedef typename monoid_elt_t::value_t		monoid_value_t;
+      typedef typename monoid_elt_t::set_t		monoid_t;
+      typedef typename monoid_t::alphabet_t		alphabet_t;
+      typedef typename alphabet_t::letter_t		letter_t;
       INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
       KRatExpRealtime(const Element<Series, T>& exp) :
@@ -66,9 +68,9 @@ namespace vcsn {
 
       MATCH_(Constant, m)
       {
-	Element<Series, T>	exp = identity_as<T>::of(exp_.set());
-	Element<Series, T>	tmp (exp_.set());
-	monoid_elt_t		letter (exp_.set().monoid());
+	return_type	exp = identity_as<T>::of(exp_.set());
+	return_type	tmp (exp_.set());
+	monoid_elt_t	letter (exp_.set().monoid());
 	for (typename monoid_value_t::const_iterator i = m.begin();
 	     i != m.end(); ++i)
 	  {
@@ -83,12 +85,12 @@ namespace vcsn {
 
   } // algebra
 
-  template <class Series, class T>
-  Element<Series, T>
-  realtime(const Element<Series, T>& exp)
+  template <class S, class T>
+  Element<S, T>
+  realtime(const Element<algebra::SeriesBase<S>, T>& exp)
   {
-    algebra::KRatExpRealtime<Series, T, algebra::DispatchFunction<T> >
-      matcher(exp);
+    algebra::KRatExpRealtime< S, T, algebra::DispatchFunction<T> >
+      matcher(Element<S, T> (exp.set().self()));
     return matcher.match(exp.value());
   }
 
