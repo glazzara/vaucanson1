@@ -310,8 +310,12 @@ nobase_include_HEADERS =						   \
 	vaucanson/vaucanson.hh						   \
 	vaucanson/boolean_automaton.hh					   \
 	vaucanson/boolean_automaton.hxx					   \
-	vaucanson/contextual_functions.hh				   \
-	vaucanson/contextual_functions.hxx				   \
+	vaucanson/boolean_transducer.hh					   \
+	vaucanson/boolean_transducer.hxx				   \
+	vaucanson/contextual_automaton_functions.hh			   \
+	vaucanson/contextual_automaton_functions.hxx			   \
+	vaucanson/contextual_transducer_functions.hh			   \
+	vaucanson/contextual_transducer_functions.hxx			   \
 	vaucanson/contextual_headers.hh					   \
 	vaucanson/z_max_plus.hxx					   \
 	vaucanson/z_max_plus_automaton.hxx				   \

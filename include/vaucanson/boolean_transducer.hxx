@@ -1,4 +1,4 @@
-// contextual_functions.hh: this file is part of the Vaucanson project.
+// boolean_transducer.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004 The Vaucanson Group.
@@ -26,30 +26,23 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_CONTEXTUAL_FUNCTIONS_HH
-# define VCSN_CONTEXTUAL_FUNCTIONS_HH
 
-template <class T>
-automaton_t new_automaton(const T& alphabet);
+#ifndef VCSN_BOOLEAN_TRANSDUCER_HXX
+# define VCSN_BOOLEAN_TRANSDUCER_HXX
 
-template <class InputIterator>
-automaton_t new_automaton(InputIterator begin,
-			  InputIterator end);
+namespace vcsn {
 
+  namespace boolean_transducer {
 
-template <class SeriesSet, class SeriesImpl>
-automaton_t
-standard_of(const Element<SeriesSet, SeriesImpl>& e);
+    // FIXME: Is there any interest to keep that empty file?
+    // FIXME: I guess the real question is: is there any chance for
+    // FIXME: this file to be filled with C++ code in the future?
 
+  } // boolean_transducer
 
-template <class SeriesSet, class SeriesImpl>
-automaton_t
-thompson_of(const Element<SeriesSet, SeriesImpl>& e);
+} // vcsn
 
-
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/contextual_functions.hxx>
-# endif // ! VCSN_USE_INTERFACE_ONLY
-
-#endif // ! VCSN_CONTEXTUAL_FUNCTIONS_HH
+#endif // VCSN_BOOLEAN_TRANSDUCER_HXX

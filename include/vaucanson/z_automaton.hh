@@ -63,7 +63,7 @@ namespace vcsn {
     typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;
     typedef Element<series_set_t, krat_exp_impl_t>			krat_exp_t;
 
-# include <vaucanson/contextual_functions.hh>
+# include <vaucanson/contextual_automaton_functions.hh>
 
   } // z_automaton
 

@@ -1,7 +1,7 @@
-// is_realtime.hxx: this file is part of the Vaucanson project.
+// contextual_transducer_functions.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,31 +26,24 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGORITHMS_IS_REALTIME_HXX
-# define VCSN_ALGORITHMS_IS_REALTIME_HXX
+#ifndef VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS
+# define VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS
 
-# include <vaucanson/algorithms/is_realtime.hh>
+template <class T>
+automaton_t new_automaton(const T& input_alphabet,
+			  const T& output_alphabet);
 
-# include <vaucanson/automata/concept/transducer_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+template <class InputIterator>
+automaton_t new_automaton(InputIterator input_alphabet_begin,
+			  InputIterator input_alphabet_end,
+			  InputIterator output_alphabet_begin,
+			  InputIterator output_alphabet_end);
 
-namespace vcsn {
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/contextual_transducer_functions.hxx>
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
-  template<typename S, typename A>
-  bool
-  do_is_realtime(const TransducerBase<S>&,
-		 const A& trans)
-  {
-    AUTOMATON_TYPES(A);
-    for_each_edge(e, trans)
-      {
-        if (!is_letter_support(trans.series_of(*e)))
-	  return false;
-      }
-    return true;
-  }
-
-} // vcsn
-
-#endif // VCSN_ALGORITHMS_IS_REALTIME_HXX
+#endif // ! VCSN_CONTEXTUAL_TRANSDUCER_FUNCTIONS_HH

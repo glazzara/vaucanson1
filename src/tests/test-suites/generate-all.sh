@@ -98,3 +98,12 @@ done;
    tropical_min_automaton \
    tropical_min_automaton.defs \
    ../automata
+
+#    /*-----------.
+#    | Transducer |
+#    `-----------*/
+
+../bin/generate-test-suite.sh \
+   boolean_transducer \
+   boolean_transducer.defs \
+   ../transducers

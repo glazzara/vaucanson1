@@ -1,4 +1,4 @@
-// contextual_functions.hxx: this file is part of the Vaucanson project.
+// contextual_automaton_functions.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004 The Vaucanson Group.
@@ -27,8 +27,8 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
-#ifndef VCSN_CONTEXTUAL_FUNCTIONS_HXX
-# define VCSN_CONTEXTUAL_FUNCTIONS_HXX
+#ifndef VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HXX
+# define VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HXX
 
 # include <vaucanson/contextual_functions.hh>
 
@@ -96,4 +96,4 @@ thompson_of(const Element<SeriesSet, SeriesImpl>& e)
   return do_thompson_of(e.structure(), e.value());
 }
 
-#endif // ! VCSN_CONTEXTUAL_FUNCTIONS_HXX
+#endif // ! VCSN_CONTEXTUAL_AUTOMATON_FUNCTIONS_HXX

@@ -1,7 +1,7 @@
 // kind_adapter.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -37,25 +37,29 @@ namespace vcsn {
   /// we define a series of macros to make the data structure for
   /// automaton simpler.
 
-#define ADAPT_ADD_LETTER_EDGE_TO_SERIES_LABEL(T...)			\
-  hedge_t								\
-  op_add_letter_edge(const AutomataBase<S>& s,				\
-		     T& v,						\
-		     hstate_t from,					\
-		     hstate_t to,					\
-		     const typename Element<S, T >::letter_t & l)	\
-  {									\
-    typedef typename S::series_set_t series_set_t;				\
-    typedef typename series_set_t::monoid_t monoid_t;			\
-    typedef typename Element<S, T >::monoid_elt_value_t			\
-    word_value_t;							\
-    typedef typename Element<S, T >::series_value_t			\
-    series_value_t;							\
-    Element<monoid_t, word_value_t> w(s.series().monoid());		\
-    Element<series_set_t, series_value_t> s1(s.series());			\
-    w = l;								\
-    s1 = w;								\
-    return op_add_edge(s, v, from, to, s1.value());			\
+#define ADAPT_ADD_LETTER_EDGE_TO_SERIES_LABEL(T...)			      \
+  hedge_t								      \
+  op_add_letter_edge(const AutomataBase<S>& s,				      \
+		     T& v,						      \
+		     hstate_t from,					      \
+		     hstate_t to,					      \
+		     const typename Element<S, T >::letter_t & l)	      \
+  {									      \
+    typedef typename S::series_set_t		series_set_t;		      \
+    typedef typename series_set_t::monoid_t	monoid_t;		      \
+    typedef typename series_set_t::semiring_t	semiring_t;		      \
+    typedef typename Element<S, T >::monoid_elt_value_t   monoid_elt_value_t; \
+    typedef typename Element<S, T >::semiring_elt_value_t		      \
+							semiring_elt_value_t; \
+    typedef typename Element<S, T >::series_value_t	 series_value_t;      \
+									      \
+    Element<series_set_t, series_value_t>	label (s.series());	      \
+									      \
+    Element<monoid_t, monoid_elt_value_t>	word (s.series().monoid(), l);\
+    label.assoc(word,							      \
+		s.series().semiring().identity(SELECT(semiring_elt_value_t)));\
+									      \
+    return op_add_edge(s, v, from, to, label.value());			      \
   }
 
 #define ADAPT_LETTER_OF_TO_SERIES_LABEL(T...)				\
@@ -124,7 +128,7 @@ namespace vcsn {
          w(a_set.series().monoid());				\
     w += op_letter_of(a_set, v, e);				\
     return w;							\
-  }		
+  }
 
 #define ADAPT_SERIE_OF_TO_LETTERS_LABEL(T...)			\
   typename Element<AutomataBase<S>, T >::series_elt_t			\
@@ -148,14 +152,14 @@ namespace vcsn {
     s.assoc(w, algebra::identity_as<semiring_elt_value_t>		\
 	    ::of(a_set.series().semiring()));			\
     return s;							\
-  }		
+  }
 
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/implementation/kind_adapter.hxx>
+# include <vaucanson/automata/implementation/kind_adapter.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_AUTOMATA_CONCRETE_KIND_ADAPTER_HH

@@ -1,7 +1,7 @@
-// r_automaton.hh: this file is part of the Vaucanson project.
+// boolean_transducer.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,51 +26,53 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_R_AUTOMATON_HH
-# define VCSN_R_AUTOMATON_HH
+
+#ifndef VCSN_BOOLEAN_TRANSDUCER_HH
+# define VCSN_BOOLEAN_TRANSDUCER_HH
 
 # include <vaucanson/contextual_headers.hh>
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+# include <vaucanson/automata/concept/transducer.hh>
 
 namespace vcsn {
-
-  namespace r_automaton {
+  namespace boolean_transducer {
 
     using namespace vcsn;
     using namespace vcsn::algebra;
     using namespace vcsn::algebra::char_letter;
 
-    typedef polynom<WordValue, float> series_value_t;
-
-    typedef Series<NumericalSemiring, Words> series_set_t;
+    typedef polynom<WordValue, polynom<WordValue, bool> > series_value_t;
+    typedef Series<NumericalSemiring, Words>		  output_series_t;
+    typedef Series<output_series_t, Words>		  series_t;
 
     typedef Graph
     <
       labels_are_series,
       WordValue,
-      float,
+      polynom<WordValue, bool>,
       series_value_t,
       char,
       NoTag>
     automaton_impl_t;
 
-    typedef Element<Automata<series_set_t>, automaton_impl_t>
+    typedef Element<Transducer<series_t>, automaton_impl_t>
     automaton_t;
 
     AUTOMATON_TYPES_EXACT(automaton_t);
 
     typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	krat_exp_impl_t;
-    typedef Element<series_set_t, krat_exp_impl_t>		krat_exp_t;
+    typedef Element<series_t, krat_exp_impl_t>			krat_exp_t;
 
-# include <vaucanson/contextual_automaton_functions.hh>
+# include <vaucanson/contextual_transducer_functions.hh>
 
-  } // r_automaton
-
+  } // boolean_transducer
 } // vcsn
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/r_automaton.hxx>
+#  include <vaucanson/boolean_transducer.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_R_AUTOMATON_HH
+#endif // VCSN_BOOLEAN_TRANSDUCER_HH

@@ -109,6 +109,7 @@ AC_CONFIG_FILES([
 	src/tests/automata/Makefile
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile
+	src/tests/transducers/Makefile
 	src/tests/context_headers/Makefile
 	src/tests/context_headers/automata/Makefile
 	src/tests/test-suites/Makefile

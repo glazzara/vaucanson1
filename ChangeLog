@@ -1,3 +1,36 @@
+2004-04-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/boolean_transducer.hh,
+	* include/vaucanson/boolean_transducer.hxx: New files. Add a context
+	for boolean transducers.
+	* include/vaucanson/contextual_transducer_functions.hh,
+	* include/vaucanson/contextual_transducer_functions.hxx: New files.
+	Factor functions common to all transducers.
+	* include/vaucanson/contextual_functions.hh,
+	* include/vaucanson/contextual_functions.hxx: Rename to ...
+	* include/vaucanson/contextual_automaton_functions.hh,
+	* include/vaucanson/contextual_automaton_functions.hxx: ... These
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh: Update accordingly.
+
+	* src/tests/transducers/realtime_test.hh: New file. Test is_realtime
+	algorithm for transducers.
+	* src/tests/test-suites/boolean_transducer.defs: New file. Instanciate
+	test on boolean transducers.
+
+	* include/Makefile.am: Update.
+	* src/tests/test-suites/generate-all.sh: Update.
+	* src/tests/Makefile.am: Update.
+	* src/tests/transducers/Makefile.am: Update.
+	* configure.ac: Update.
+
+	* include/vaucanson/algorithms/is_realtime.hxx: Correct a small
+	compilation warning.
+	* include/vaucanson/automata/implementation/kind_adapter.hh: Correct to
+	succeed compilation.
+
 2004-04-23  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
