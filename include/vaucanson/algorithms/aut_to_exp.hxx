@@ -1,4 +1,4 @@
-// elimination.hxx
+// aut_to_exp.hxx
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,10 +19,10 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef ALGORITHMS_ELIMINATION_HXX
-# define ALGORITHMS_ELIMINATION_HXX
+#ifndef ALGORITHMS_AUT_TO_EXP_HXX
+# define ALGORITHMS_AUT_TO_EXP_HXX
 
-# include <vaucanson/algorithms/elimination.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
 
 # include <algorithm>
 # include <set>
@@ -87,7 +87,7 @@ namespace vcsn {
   };
 
   /*------------.
-  | elimination |
+  | aut_to_exp |
   `------------*/
   // preconditions :
   //   - hope that automaton's labels are sufficient to support "star"
@@ -96,7 +96,7 @@ namespace vcsn {
 
   template <class A_, typename Auto_, typename Chooser_>
   typename Auto_::series_elt_t  
-  do_in_elimination(const AutomataBase<A_>& a_set,
+  do_in_aut_to_exp(const AutomataBase<A_>& a_set,
 		    Auto_&		    a, 
 		    Chooser_	            chooser)
   {
@@ -168,7 +168,7 @@ namespace vcsn {
   }
 
   /*------------.
-  | elimination |
+  | aut_to_exp |
   `------------*/
   // preconditions :
   //   - hope that automaton's labels are sufficient to support "star"
@@ -178,20 +178,20 @@ namespace vcsn {
   template<typename A, typename T, typename Chooser_>
   inline
   typename Element<A, T>::series_elt_t
-  elimination(const Element<A, T>& a, const Chooser_& c)
+  aut_to_exp(const Element<A, T>& a, const Chooser_& c)
   {
     Element<A, T> ret(a);
-    return do_in_elimination(ret.set(), ret, c);
+    return do_in_aut_to_exp(ret.set(), ret, c);
   }
   
   template<typename A, typename T>
   inline
   typename Element<A, T>::series_elt_t
-  elimination(const Element<A, T>& a)
+  aut_to_exp(const Element<A, T>& a)
   {
-    return elimination(a, DefaultChooser());
+    return aut_to_exp(a, DefaultChooser());
   }
 
 } // vcsn
 
-#endif // ALGORITHMS_ELIMINATION_HXX
+#endif // ALGORITHMS_AUT_TO_EXP_HXX

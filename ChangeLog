@@ -1,5 +1,13 @@
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/aut_to_exp.hh: Document and replace ...
+	* include/vaucanson/algorithms/elimination.hh: it.
+	* include/vaucanson/algorithms/aut_to_exp.hxx: Document and replace ...
+	* include/vaucanson/algorithms/elimination.hxx: it.
+	* src/tests/automata/algos/elimination_test.hh: Use aut_to_exp.
+	
+2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/elimination.hh: Document.
 
 2003-06-24  Yann Régis-Gianas  <yann@lrde.epita.fr>

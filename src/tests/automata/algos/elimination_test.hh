@@ -28,7 +28,7 @@
 # include <vaucanson/tools/usual.hh>
 # include <vaucanson/fundamental/element.hh>
 # include <vaucanson/automata/concrete/generalized.hh>
-# include <vaucanson/algorithms/elimination.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/algorithms/compute.hh>
 
 using namespace vcsn;
@@ -51,25 +51,25 @@ bool elimination_test(tests::Tester& tg)
       Auto	a = gen.generate(5,10, 2, 2);
       generalized_automaton_t a_ = generalized(a);
       gseries_elt_t language;
-      language = elimination(a_);
+      language = aut_to_exp(a_);
       if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("/tmp", "elimination", a, nb);
+	  SAVE_AUTOMATON_DOT("/tmp", "aut_to_exp", a, nb);
 	}
       unsigned i = 0;
       for (; i < nb_word_test; ++i)
 	{
 	  monoid_elt_t w = language.choose_from_supp();
 	  if (t.verbose() == tests::high)
-	    std::cout << "TEST: elimination " << nb << " : test " 
+	    std::cout << "TEST: aut_to_exp " << nb << " : test " 
 		      << w << std::endl;
 	  if (compute(a, w) ==
 	      zero_as<weight_value_t>::of(a.set().series().weights()))
 	    {
 	      break;
 	      if (t.verbose() == tests::high)
-		std::cout << "TEST: elimination " << nb 
+		std::cout << "TEST: aut_to_exp " << nb 
 			  << " failed." << std::endl;
 	    }
 	}
@@ -78,7 +78,7 @@ bool elimination_test(tests::Tester& tg)
     }
   std::string rate;
   SUCCESS_RATE(rate, success, nb_test);
-  TEST(t, "elimination basic test " + rate, success == nb_test);
+  TEST(t, "aut_to_exp basic test " + rate, success == nb_test);
   return t.all_passed();
 }
 

@@ -1,4 +1,4 @@
-// elimination.hh
+// aut_to_exp.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -19,8 +19,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-#ifndef VCSN_ALGORITHMS_ELIMINATION_HH
-# define VCSN_ALGORITHMS_ELIMINATION_HH
+#ifndef VCSN_ALGORITHMS_AUT_TO_EXP_HH
+# define VCSN_ALGORITHMS_AUT_TO_EXP_HH
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
@@ -28,7 +28,7 @@
 namespace vcsn {
 
   /**
-   * @file   elimination.hh
+   * @file   aut_to_exp.hh
    * @author Yann Régis-Gianas <yann@lrde.epita.fr>
    * @date   Tue Jun 24 19:21:17 2003
    * 
@@ -57,7 +57,7 @@ namespace vcsn {
    */
   template<typename A, typename T>
   typename Element<A, T>::series_elt_t
-  elimination(const Element<A, T>& a);
+  aut_to_exp(const Element<A, T>& a);
 
   /** 
    *  @brief Returns a serie which describes the language of the automaton.
@@ -78,12 +78,12 @@ namespace vcsn {
    */
   template<typename A, typename T, typename Chooser_>
   typename Element<A, T>::series_elt_t
-  elimination(const Element<A, T>& a, const Chooser_& c);
+  aut_to_exp(const Element<A, T>& a, const Chooser_& c);
   
   /*! @} */
 
 } // vcsn
 
-# include <vaucanson/algorithms/elimination.hxx>
+# include <vaucanson/algorithms/aut_to_exp.hxx>
 
-#endif // VCSN_ALGORITHMS_ELIMINATION_HH
+#endif // VCSN_ALGORITHMS_AUT_TO_EXP_HH
