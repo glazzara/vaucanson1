@@ -1,3 +1,8 @@
+2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx
+	(parse_left_weighted): Fix a bug when having ambiguous alphabet.
+
 2003-07-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/projection.hh: Remove.

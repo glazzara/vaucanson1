@@ -622,6 +622,8 @@ namespace vcsn {
 	  {
 	    // token must be a weight, but may be a monoid '1' or '0'.
 	    // i.e. in "1 2" or "0 2".
+	    // token may even be a word!
+	    // i.e. in '2 3' when 2 is in the alphabet
 	    weight_t w (exp.set().weights(), lexer_.first().as_weight());
 	    bool just_a_weight = true;
 	    Element<S, T> m (exp.set());
@@ -635,10 +637,15 @@ namespace vcsn {
 		just_a_weight = false;
 		m = identity_as<T>::of(exp.set());
 	      }
+	    else if (lexer_.first().is_a(a_word))
+	      {
+		just_a_weight = false;
+		m = Element<S, T> (exp.set(), lexer_.first().as_word());
+	      }
 	    accept(a_weight);
 	    accept(space);
-	    if (!lexer_.first().is_a(a_weight) ||
-		just_a_weight ||
+	    if (just_a_weight ||
+		!lexer_.first().is_a(a_weight) ||
 		lexer_.second().is_a(space))
 	      {
 		// Then it could be any weighted.

@@ -1,26 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 334)
-(Parent-Version vaucanson 0 333)
+(Project-Version vaucanson 0 335)
+(Parent-Version vaucanson 0 334)
 (Version-Log "
-2003-07-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2003-07-02  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* include/vaucanson/automata/concept/projection.hh: Remove.
-	* include/Makefile.am: Remove it.
-	* include/vaucanson/automata/concrete/graph.hh: Fix traits.
-	* include/vaucanson/automata/concept/transducer.hh: 
-		Fix includes.
-		(output_projection_helper): New.
-	* include/vaucanson/automata/concept/transducer_base.hh:
-		(projection_traits): New.
-		(output_projection_traits): New.
-	* include/vaucanson/automata/concept/transducer.hxx: 
-		(partial_identity): Fix.
-")
+	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx
+	(parse_left_weighted): Fix a bug when having ambiguous alphabet.")
 (New-Version-Log "")
-(Checkin-Time "Wed, 02 Jul 2003 14:21:36 +0200")
-(Checkin-Login yann)
+(Checkin-Time "Wed, 02 Jul 2003 14:24:30 +0200")
+(Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -102,7 +92,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.8 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.9 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
@@ -249,7 +239,7 @@
   (include/vaucanson/algebra/concrete/series/krat_conversion.hh (vaucanson/c/13_krat_conve 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat_conversion.hxx (vaucanson/c/12_krat_conve 1.9 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_parser.hh (vaucanson/h/11_krat_exp_p 1.6 600))
-  (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.13 600))
+  (include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx (vaucanson/h/12_krat_exp_p 1.14 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh (vaucanson/h/10_krat_exp_p 1.14 600))
   (include/vaucanson/algebra/concrete/series/krat_exp_pattern.hxx (vaucanson/h/9_krat_exp_p 1.8 600))
   (include/vaucanson/algebra/concrete/series/krat_coefficient.hxx (vaucanson/p/23_krat_coeff 1.2.1.1 600))
