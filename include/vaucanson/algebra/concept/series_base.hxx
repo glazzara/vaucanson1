@@ -234,6 +234,19 @@ namespace vcsn {
     return output;
   }
 
+  template <class S, class M>
+  S
+  op_convert(const algebra::SeriesBase<S>&,
+	     const algebra::FreeMonoidBase<M>& monoid)
+  {
+    // Ensures the monoid is compatible with the series.
+    enum { compatible = utility::static_eq<typename S::monoid_t, M>::value };
+    static_assertion_(compatible, invalid_conversion_from_monoid_to_series);
+
+    typename S::semiring_t semiring;
+    return S (semiring, monoid.self());
+  }
+
   template <class S, class T>
   T op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), const T& src_)
   {

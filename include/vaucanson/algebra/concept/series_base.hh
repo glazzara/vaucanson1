@@ -31,6 +31,7 @@
 # define VCSN_ALGEBRA_CONCEPT_SERIES_BASE_HH
 
 # include <vaucanson/algebra/concept/semiring_base.hh>
+# include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 namespace vcsn {
 
@@ -222,6 +223,12 @@ namespace vcsn {
   template <class S, class T>
   typename algebra::series_traits<T>::support_t
   op_support(const algebra::SeriesBase<S>&, const T& v);
+
+  // This conversion is needed when assigning a monoid element to a series.
+  template <class S, class M>
+  S
+  op_convert(const algebra::SeriesBase<S>&,
+	     const algebra::FreeMonoidBase<M>&);
 
   template <class S, class T>
   T op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const T& src_);
