@@ -33,7 +33,7 @@ int main()
   std::cout << "States:" << std::endl;
   for_each_state(i, a) {
     std::cout << *i << " ";
-    std::cout << a.tag().states.name[*i] << std::endl;
+    std::cout << a.tag().get_states().get_name()[*i] << std::endl;
   }
 
   std::cout << "Edges:" << std::endl;

@@ -1,3 +1,15 @@
+2004-03-16  Valentin David  <valentin@lrde.epita.fr>
+
+	* xml/style-to-code.awk, xml/style-to-dtd.awk,
+	* xml/style-to-geometryvalue.awk, include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/infos.hh: Add accessors to the geometry.
+
+	* src/tests/xml/import_static.cc, src/tests/xml/import_dynamic.cc,
+	* src/tests/xml/import_generic.cc, src/tests/xml/import_session.cc:
+	Update.
+
+	* include/Makefile.am (EXTRA_DISTS): Fix.
+
 2003-12-22  Valentin David  <valentin@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,

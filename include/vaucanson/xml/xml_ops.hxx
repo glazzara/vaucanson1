@@ -3,6 +3,7 @@
 
 # include <vaucanson/xml/xml_ops.hh>
 # include <vaucanson/xml/krat_to_polynom.hh>
+# include <vaucanson/xml/infos.hh>
 
 # include <vaucanson/algebra/concrete/letter/couple_letter.hh>
 # include <vaucanson/xml/errors.hh>
@@ -160,9 +161,9 @@ namespace vcsn
     {
 
 # define SET_ATTR(Section, Attr)                                      \
-         if ( Section . Attr .set) {                                  \
+         if ( Section (). get_##Attr ().is_set()) {                   \
 	   std::ostringstream strs;                                   \
-	   strs << Section . Attr .value;                             \
+	   strs << (Section (). get_##Attr() ());                     \
            node->removeAttribute(str_##Attr);                         \
            XMLCh* value = XMLString::transcode(strs.str().c_str());   \
            if (node->hasAttribute(str_##Attr)) {                      \
@@ -177,12 +178,12 @@ namespace vcsn
          }
 
 # define OPTION_ATTR(Field, Attr, Do)                                 \
-         if ( Field . Attr .set) {                                    \
+         if ( Field() . get_##Attr() .is_set()) {                       \
            Do                                                         \
          }
 
 # define OPTION(Section, Attr, Value, Str)                            \
-         if ( Section . Attr .value == Value )                        \
+         if ( Section (). get_##Attr ()() == Value )                  \
            node->setAttribute(str_##Attr, str_##Str);
 
       static
@@ -201,7 +202,7 @@ namespace vcsn
 	}
 
 	if (!node) {
-	  if (g.set) {
+	  if (g.is_set()) {
 	    node = n->getOwnerDocument()->createElement(str_geometry);
 	    if (n->hasChildNodes())
 	      n->insertBefore(node, n->getFirstChild());
@@ -213,7 +214,7 @@ namespace vcsn
 	  }
 	}
 
-	if (!g.set) {
+	if (!g.is_set()) {
 	  n->removeChild(node);
 	}
 
@@ -229,77 +230,77 @@ namespace vcsn
       inline
       void set_root(DOMElement* node, const XmlInfosTag& tag)
       {
-	set_default(node, tag.root);
+	set_default(node, tag.get_root());
       }
 
       static
       inline
       void set_structure(DOMElement* node, const XmlInfosTag& tag)
       {
-	set_default(node, tag.structure);
+	set_default(node, tag.get_structure());
       }
 
       static
       inline
       void set_states(DOMElement* node, const XmlInfosTag& tag)
       {
-	set_default(node, tag.states);
+	set_default(node, tag.get_states());
       }
 
       static
       inline
       void set_edges(DOMElement* node, const XmlInfosTag& tag)
       {
-	set_default(node, tag.edges);
+	set_default(node, tag.get_edges());
       }
 
       static
       inline
       void set_initials(DOMElement* node, const XmlInfosTag& tag)
       {
-	set_default(node, tag.initials);
+	set_default(node, tag.get_initials());
       }
 
       static
       inline
       void set_finals(DOMElement* node, const XmlInfosTag& tag)
       {
-	set_default(node, tag.finals);
+	set_default(node, tag.get_finals());
       }
 
       static
       inline
       void set_state(DOMElement* n, hstate_t s, XmlInfosTag tag)
       {
-	if (tag.states.label[s].set) {
-	  XMLCh* label = XMLString::transcode(tag.states
-					     .label[s].value.c_str());
+	if (tag.get_states().get_label()[s].is_set()) {
+	  XMLCh* label = XMLString::transcode(tag.get_states()
+					     .get_label()[s]().c_str());
 	  n->setAttribute(str_label, label);
 	  XMLString::release(&label);
 	}
 
-	set_default(n, tag.states[s]);
+	set_default(n, tag.get_states()[s]);
       }
 
       static
       inline
       void set_edge(DOMElement* node, hedge_t s, XmlInfosTag tag)
       {
-	set_default(node, tag.edges[s]);
+	set_default(node, tag.get_edges()[s]);
       }
 
       static
       inline
       void set_initial(DOMElement* node, hstate_t s, XmlInfosTag tag)
       {
-	set_default(node, tag.initials[s]);
+	set_default(node, tag.get_initials()[s]);
       }
 
       static
       inline
       void set_final(DOMElement* node, hstate_t s, XmlInfosTag tag)
       {
-	set_default(node, tag.initials[s]);
+	set_default(node, tag.get_initials()[s]);
       }
 
       static
@@ -307,14 +308,16 @@ namespace vcsn
       xercesc::DOMElement*
       add_state(XmlAutomaton& x, hstate_t s, const XmlInfosTag& tag)
       {
-	if (tag.states.name.find(s) == tag.states.name.end()) {
+	if (tag.get_states().get_name().find(s)
+	    == tag.get_states().get_name().end()) {
 	  return x.add_state_elt(s);
 	}
-	else if (tag.states.name.find(s)->second == "") {
+	else if (tag.get_states().get_name().find(s)->second == "") {
 	  return x.add_state_elt(s);
 	}
 	else {
-	  return x.add_state_elt(s, tag.states.name.find(s)->second);
+	  return x.add_state_elt(s,
+				 tag.get_states().get_name().find(s)->second);
 	}
       }
 
@@ -322,11 +325,10 @@ namespace vcsn
         if (node->hasAttribute(str_##Attr )) {                       \
           std::istringstream strs(xml2str(node                       \
 		->getAttribute(str_##Attr )));                       \
-          strs >> Section . Attr .value;                             \
-          Section . Attr .set = true;                                \
+          strs >> Section() . get_##Attr ()();                       \
         }                                                            \
         else                                                         \
-          Section . Attr .set = false;
+          Section (). get_##Attr() .is_set() = false;
 
 # define OPTION_ATTR(Field, Attr, Do)                                \
          if (node->hasAttribute(str_##Attr )) {                      \
@@ -336,8 +338,7 @@ namespace vcsn
 # define OPTION(Section, Attr, Value, Str)                           \
          if (!XMLString::compareIString(str_##Str,                   \
               node->getAttribute(str_##Attr ))) {                    \
-           Section . Attr .set = true;                               \
-           Section . Attr .value = Value;                            \
+           Section (). get_##Attr ()() = Value;                      \
          }
 
       static
@@ -351,7 +352,7 @@ namespace vcsn
 					     str_geometry))) {
 	    const DOMElement* node = static_cast<const DOMElement*>(child);
 
-	    g.set = true;
+	    g.is_set() = true;
 
 # include <vaucanson/xml/loadgeometry.inc>
 
@@ -360,7 +361,7 @@ namespace vcsn
 	  child = child->getNextSibling();
 	}
 
-	g.set = false;
+	g.is_set() = false;
       }
 
 # undef SET_ATTR
@@ -371,79 +372,79 @@ namespace vcsn
       inline
       void get_root(const DOMElement* node, XmlInfosTag& tag)
       {
-	get_default(node, tag.root);
+	get_default(node, tag.get_root());
       }
 
       static
       inline
       void get_structure(const DOMElement* node, XmlInfosTag& tag)
       {
-	get_default(node, tag.structure);
+	get_default(node, tag.get_structure());
       }
 
       static
       inline
       void get_states(const DOMElement* node, XmlInfosTag& tag)
       {
-	get_default(node, tag.states);
+	get_default(node, tag.get_states());
       }
 
       static
       inline
       void get_edges(const DOMElement* node, XmlInfosTag& tag)
       {
-	get_default(node, tag.edges);
+	get_default(node, tag.get_edges());
       }
 
       static
       inline
       void get_initials(const DOMElement* node, XmlInfosTag& tag)
       {
-	get_default(node, tag.initials);
+	get_default(node, tag.get_initials());
       }
 
       static
       inline
       void get_finals(const DOMElement* node, XmlInfosTag& tag)
       {
-	get_default(node, tag.finals);
+	get_default(node, tag.get_finals());
       }
 
       static
       inline
       void get_state(const DOMElement* n, hstate_t s, XmlInfosTag& tag)
       {
-	tag.states.name[s]
+	tag.get_states().get_name()[s]
 	  = xml2str(n->getAttribute(str_name));
 	if (n->hasAttribute(str_label)) {
-	  tag.states.label[s].set = true;
-	  tag.states.label[s].value = xml2str(n->getAttribute(str_label));
+	  tag.get_states().get_label()[s]()
+	    = xml2str(n->getAttribute(str_label));
 	}
 	else
-	  tag.states.label[s].set = false;
+	  tag.get_states().get_label()[s].is_set() = false;
 
-	get_default(n, tag.states[s]);
+	get_default(n, tag.get_states()[s]);
       }
 
       static
       inline
       void get_edge(const DOMElement* node, hedge_t s, XmlInfosTag& tag)
       {
-	get_default(node, tag.edges[s]);
+	get_default(node, tag.get_edges()[s]);
       }
 
       static
       inline
       void get_initial(const DOMElement* node, hstate_t s, XmlInfosTag& tag)
       {
-	get_default(node, tag.initials[s]);
+	get_default(node, tag.get_initials()[s]);
       }
 
       static
       inline
       void get_final(const DOMElement* node, hstate_t s, XmlInfosTag& tag)
       {
-	get_default(node, tag.finals[s]);
+	get_default(node, tag.get_finals()[s]);
       }
     };
   }

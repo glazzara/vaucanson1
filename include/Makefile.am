@@ -12,7 +12,7 @@ CLEANFILES = vaucanson/xml/xmlstrings.inc \
 vaucanson/xml/xmlstrings.inc: $(top_srcdir)/xml/vaucanson-g.style $(srcdir)/vaucanson/xml/*.hxx $(srcdir)/vaucanson/xml/genutfstrings.sh vaucanson/xml/loadgeometry.inc
 	cd vaucanson/xml && $(SHELL) $(srcdir)/genutfstrings.sh
 
-vaucanson/xml/geometry.inc: $(top_srcdir)/xml/style-to-code.awk $(top_srcdir)/xml/vaucanson-g.style
+vaucanson/xml/geometry.inc: $(top_srcdir)/xml/style-to-geometryvalue.awk $(top_srcdir)/xml/vaucanson-g.style
 	awk -f  $(top_srcdir)/xml/style-to-geometryvalue.awk \
 		$(top_srcdir)/xml/vaucanson-g.style \
 		>$@
@@ -57,9 +57,6 @@ nobase_include_HEADERS =					     \
 	vaucanson/algebra/concrete/free_monoid/predefs.hh	       \
 	vaucanson/algebra/concrete/free_monoid/str_words.hh	     \
 	vaucanson/algebra/concrete/free_monoid/str_words.hxx	     \
-	vaucanson/algebra/concrete/free_monoid/lst_words.hh          \
-	vaucanson/algebra/concrete/free_monoid/lst_words.hxx         \
-	vaucanson/algebra/concrete/free_monoid/tools.hh		     \
 	vaucanson/algebra/concrete/free_monoid/words.hh		     \
 	vaucanson/algebra/concrete/free_monoid/words.hxx	     \
 	vaucanson/algebra/concrete/letter/char_letter.hh	     \

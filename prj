@@ -1,49 +1,22 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson XML 5)
-(Parent-Version vaucanson XML 4)
+(Project-Version vaucanson XML 6)
+(Parent-Version vaucanson XML 5)
 (New-Version-Log "")
 
-(Version-Log "2003-12-22  Valentin David  <valentin@lrde.epita.fr>
+(Version-Log "2004-03-16  Valentin David  <valentin@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concrete/letter/couple_letter.hxx,
-	* include/vaucanson/algebra/concrete/letter/couple_letter.hh:
-	Make able to read.
+	* xml/style-to-code.awk, xml/style-to-dtd.awk,
+	* xml/style-to-geometryvalue.awk, include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/infos.hh: Add accessors to the geometry.
 
-	* include/vaucanson/algebra/concrete/alphabets/predefs.hh,
-	* include/vaucanson/algebra/concrete/free_monoid/predefs.hh:
-	Add some extra types.
+	* src/tests/xml/import_static.cc, src/tests/xml/import_dynamic.cc,
+	* src/tests/xml/import_generic.cc, src/tests/xml/import_session.cc:
+	Update.
 
-	* include/vaucanson/xml/xml_ops.hxx, include/vaucanson/xml/xml_set.hxx,
-	* include/vaucanson/xml/xml_automaton.hxx,
-	* include/vaucanson/xml/callback.hxx, include/vaucanson/xml/xml_set.hh,
-	* include/vaucanson/xml/xml_ops.hh,
-	* include/vaucanson/xml/xml_value.hxx, xml/gendtd.sh,
-	* src/tests/xml/nodata-simple.xml.ref, src/tests/xml/import_generic.cc,
-	* src/tests/xml/simple.xml, src/tests/xml/tropical.xml,
-	* src/tests/xml/numerical.xml, src/tests/xml/float.xml,
-	* src/tests/xml/transcoder.xml, src/tests/xml/session.xml,
-	* src/tests/xml/import_generic-tropical.xml.ref,
-	* src/tests/xml/nodata-session.xml.ref,
-	* src/tests/xml/export_static-session.xml.ref,
-	* src/tests/xml/import_dynamic-numerical.xml.ref,
-	* src/tests/xml/export_static-simple.xml.ref,
-	* src/tests/xml/export_session-simple.xml.ref,
-	* src/tests/xml/export_session-session.xml.ref,
-	* src/tests/xml/export_dynamic-simple.xml.ref,
-	* src/tests/xml/export_dynamic-session.xml.ref:
-	Update to new format.
-
-	* include/vaucanson/algebra/concrete/letter/int_letter.hxx,
-	* include/vaucanson/algebra/concrete/letter/int_letter.hh,
-	* include/vaucanson/algebra/concrete/free_monoid/tools.hh,
-	* include/vaucanson/algebra/concrete/free_monoid/tools.hxx: New.
-
-	* include/Makefile.am: Update.
-
-")
-(Checkin-Time "Mon, 22 Dec 2003 18:04:18 +0100")
+	* include/Makefile.am (EXTRA_DISTS): Fix.")
+(Checkin-Time "Tue, 16 Mar 2004 11:51:19 +0100")
 (Checkin-Login david_v)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -126,7 +99,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.100 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.101 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -169,7 +142,7 @@
   
 
   (include () :directory)
-  (include/Makefile.am (vaucanson/11_Makefile.a 1.48 600))
+  (include/Makefile.am (vaucanson/11_Makefile.a 1.49 600))
 
   (include/vaucanson/vaucanson.hh (vaucanson/q/42_vaucanson. 1.2 600))
 
@@ -972,9 +945,9 @@
 ;; to version XML.1(w), by david_v:
 
   (xml/automaton-to-dot.xsl (vaucanson/s/26_automaton- 1.1 644))
-  (xml/style-to-code.awk (vaucanson/s/27_style-to-c 1.1 644))
-  (xml/style-to-dtd.awk (vaucanson/s/28_style-to-d 1.1 644))
-  (xml/style-to-geometryvalue.awk (vaucanson/s/29_style-to-g 1.1 644))
+  (xml/style-to-code.awk (vaucanson/s/27_style-to-c 1.2 644))
+  (xml/style-to-dtd.awk (vaucanson/s/28_style-to-d 1.2 644))
+  (xml/style-to-geometryvalue.awk (vaucanson/s/29_style-to-g 1.2 644))
   (xml/style-to-tex.awk (vaucanson/s/30_style-to-t 1.1 644))
   (xml/style-to-xsl-vcsng.awk (vaucanson/s/31_style-to-x 1.1 644))
   (xml/gendtd.sh (vaucanson/s/32_gendtd.sh 1.2 644))
@@ -983,14 +956,14 @@
   (include/vaucanson/xml/xml_value.hh (vaucanson/s/35_xml_value. 1.1 644))
   (include/vaucanson/xml/krat_to_polynom.hh (vaucanson/s/36_krat_to_po 1.1 644))
   (include/vaucanson/xml/ios.hxx (vaucanson/s/37_ios.hxx 1.1 644))
-  (include/vaucanson/xml/xml_ops.hxx (vaucanson/s/38_xml_ops.hx 1.4 644))
+  (include/vaucanson/xml/xml_ops.hxx (vaucanson/s/38_xml_ops.hx 1.5 644))
   (include/vaucanson/xml/krat_to_polynom.hxx (vaucanson/s/39_krat_to_po 1.1 644))
   (include/vaucanson/xml/error_handler.hxx (vaucanson/s/40_error_hand 1.1 644))
   (include/vaucanson/xml/defaults.hh (vaucanson/s/41_defaults.h 1.1 644))
   (include/vaucanson/xml/ios.hh (vaucanson/s/42_ios.hh 1.1 644))
   (include/vaucanson/xml/error_handler.hh (vaucanson/s/43_error_hand 1.2 644))
   (include/vaucanson/xml/strings.hh (vaucanson/s/44_strings.hh 1.1 644))
-  (include/vaucanson/xml/infos.hh (vaucanson/s/45_infos.hh 1.3 644))
+  (include/vaucanson/xml/infos.hh (vaucanson/s/45_infos.hh 1.4 644))
   (include/vaucanson/xml/session.hh (vaucanson/s/46_session.hh 1.2 644))
   (include/vaucanson/xml/xml_set.hxx (vaucanson/s/47_xml_set.hx 1.2 644))
   (include/vaucanson/xml/xml_automaton.hh (vaucanson/s/48_xml_automa 1.2 644))
@@ -1017,12 +990,12 @@
   (src/tests/xml/nodata-simple.xml.ref (vaucanson/t/17_nodata-sim 1.2 644))
   (src/tests/xml/test.src (vaucanson/t/18_test.src 1.1 755))
   (src/tests/xml/Makefile.am (vaucanson/t/19_Makefile.a 1.1 644))
-  (src/tests/xml/import_static.cc (vaucanson/t/20_import_sta 1.1 644))
+  (src/tests/xml/import_static.cc (vaucanson/t/20_import_sta 1.2 644))
   (src/tests/xml/export_static.cc (vaucanson/t/21_export_sta 1.1 644))
-  (src/tests/xml/import_dynamic.cc (vaucanson/t/22_import_dyn 1.1 644))
+  (src/tests/xml/import_dynamic.cc (vaucanson/t/22_import_dyn 1.2 644))
   (src/tests/xml/export_dynamic.cc (vaucanson/t/23_export_dyn 1.1 644))
-  (src/tests/xml/import_generic.cc (vaucanson/t/24_import_gen 1.2 644))
-  (src/tests/xml/import_session.cc (vaucanson/t/25_import_ses 1.2 644))
+  (src/tests/xml/import_generic.cc (vaucanson/t/24_import_gen 1.3 644))
+  (src/tests/xml/import_session.cc (vaucanson/t/25_import_ses 1.3 644))
   (src/tests/xml/export_session.cc (vaucanson/t/26_export_ses 1.1 644))
   (src/tests/xml/simple.xml (vaucanson/t/27_simple.xml 1.2 644))
   (src/tests/xml/tropical.xml (vaucanson/t/28_tropical.x 1.2 644))
