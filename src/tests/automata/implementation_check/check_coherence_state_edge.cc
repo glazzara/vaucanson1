@@ -44,17 +44,18 @@ int main(int argc, char **argv)
     std::map> 
     > automaton;
   
-  TEST(t, "Initial Number of States (0)", automaton.states().size() == 0);
-
   hstate_t s1 = automaton.add_state();
+  hstate_t s2 = automaton.add_state();
 
-  TEST(t, "Number of States after 1 state added", 
-       automaton.states().size() == 1);
+  hedge_t h1 = automaton.add_edge(s1, s2, polynom<std::string, int>());
+
+  TEST(t, "Check Number of States", automaton.states().size() == 2);
+
+  TEST(t, "Check Number of Edges", automaton.edges().size() == 1);
 
   automaton.del_state(s1);
- 
- TEST(t, "Number of States after state deleted", 
-       automaton.states().size() == 0);  
+
+  TEST(t, "Check for zombies edges", automaton.edges().size() == 0);
 
   return 0;
 }

@@ -1,5 +1,13 @@
 2002-07-01  Maxime Rey  <max@lrde.epita.fr>
 
+	* check_add_state extended  
+	* Test to check edges appear with :
+	  src/tests/automata/implementation_check/check_coherence_state_edge.cc
+	* Test to check zombie edge appear with :
+	  src/tests/automata/implementation_check/check_add_edge.cc
+
+2002-07-01  Maxime Rey  <max@lrde.epita.fr>
+
 	* Added `include/vaucanson/automata/concept/kinds.hxx' (forget)
 	* Added `include/vaucanson/automata/concept/kinds.hh' (forget)
 	* Added `include/vaucanson/algebra/concept/algebra_base.hh'
