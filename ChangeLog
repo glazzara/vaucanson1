@@ -1,5 +1,9 @@
 2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* README: Update.
+
+2004-10-12  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/letter/couple_letter.hh: Use
 	INT_MAX instead of unsigned (-1).
 
@@ -26,8 +30,7 @@
 
 2004-10-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
-	Those modifications make Vaucanson compatible with g++ 3.2, 3.3,
-	3.4 and ICC 8.1.
+	Be compatible with g++ 3.2, 3.3, 3.4 and ICC 8.1.
 
 	* include/vaucanson/algebra/implementation/letter/int_letter.hxx,
 	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx:

@@ -45,18 +45,15 @@ a couple of hours, use instead:
 
 	./configure --enable-vaucanswig
 
-If you do not want to use  the XML I/O system you may invoke configure
-with the following option:
+If you do not want to use  the XML I/O system, run:
 
 	./configure --disable-xml
 
-If you want to use some debug or optimization flags, please do not use
-CXXFLAGS.  Use  CXXFLAGS_DEBUG or CXXFLAGS_OPTIMIZE  instead.  This is
-needed because Vaucanson tries to use some particular flags by default
-when it encounters  some specific compilers such as  GCC or ICC. Thus,
-using CXXFLAGS may conflict with  those specific flags. If you provide
-CXXFLAGS_DEBUG and CXXFLAGS_OPTIMIZE, your values will be used instead
-of the default ones.
+Use CXXFLAGS_DEBUG or CXXFLAGS_OPTIMIZE  to pass debug or optimization
+flags,  not CXXFLAGS.   This is  because Vaucanson  tries to  use some
+particular default flags  with some specific compilers such  as GCC or
+ICC.    Using   CXXFLAGS   conflicts   with  those   specific   flags;
+CXXFLAGS_DEBUG and CXXFLAGS_OPTIMIZE override these default flags.
 
 ----------------------------------------------------------------------
 REQUIREMENTS
