@@ -1,4 +1,18 @@
 2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.84)
+	* include/vaucanson/automata/concept/handlers.hh : minor change.
+	* include/vaucanson/algorithms/extract.hxx : minor change.
+	* include/vaucanson/algorithms/compute.hxx : bug due to sparsed hstate_t fixed.
+	* src/tests/automata/algos/algo_test.cc : minor.
+	* src/tests/automata/algos/glushkov_test.hh : minor change.
+	* include/vaucanson/algorithms/thompson.hxx:
+		bug due to non-one-letter words fixed.
+	* src/tests/automata/algos/thompson_test.hh: now, use exp.choose().
+	* include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx:	
+		bug fixed (one must generate an empty word) 
+
+
+2002-07-22  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.83)
 
 	* include/vaucanson/fundamental/structure.hxx:

@@ -90,9 +90,9 @@ bool glushkov_test(tests::Tester& tg)
 		std::cout << "TEST: glushkov " << i << " : test " << w << std::endl;
 	      if (compute(au, w) == s.zero_)
 		{
-		  break;
 		  if (t.verbose() == tests::high)
 		    std::cout << "TEST: glushkov " << i << " failed." << std::endl;
+		  break;
 		}
 	    }
 	if ((nb_word_test == i) || (exp == s.zero(SELECT(exp_t))))
@@ -100,7 +100,7 @@ bool glushkov_test(tests::Tester& tg)
       }
     std::string rate;
     SUCCESS_RATE(rate, success, nb_test);
-    TEST(t, "Random test " + rate, success = nb_test);
+    TEST(t, "Random test " + rate, success == nb_test);
   }
   return t.all_passed();
 }

@@ -1,15 +1,12 @@
-/**************************************
- * <vaucanson/algorithms/extract.hxx> *
- **************************************/
+// extract.hxx
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGORITHMS_EXTRACT_HXX
 # define ALGORITHMS_EXTRACT_HXX
 
 # include <queue>
 # include <vaucanson/algorithms/extract.hh>
-
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {

@@ -98,6 +98,7 @@ namespace vcsn {
     void 
     RandomVisitor<M_,W_>::one()
     {
+      w_ = M_();
       not_empty = true;
     }
 

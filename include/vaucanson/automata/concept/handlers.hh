@@ -1,9 +1,7 @@
-/************************************
- * <vaucanson/automata/handlers.hh> *
- ************************************/
+// handlers.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef AUTOMATA_HANDLERS_HH
 #define AUTOMATA_HANDLERS_HH
 

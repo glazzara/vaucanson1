@@ -1,9 +1,7 @@
-/*************************************
- * <vaucanson/algorithms/extract.hh> *
- *************************************/
+// extract.hh
+//
 // $Id$
-
-/* this file is part of the Vaucanson project */
+// VCSN_HEADER
 #ifndef ALGORITHMS_EXTRACT_HH
 # define ALGORITHMS_EXTRACT_HH
 

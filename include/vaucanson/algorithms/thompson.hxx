@@ -100,10 +100,17 @@ namespace vcsn {
       auto_->create();
       auto_->series() = series_;
       hstate_t new_i = auto_->add_state();
-      hstate_t new_f = auto_->add_state();
+      hstate_t last = new_i;
+      hstate_t new_f;
+      for (typename monoid_value_t::const_iterator i = m.begin();
+	   i != m.end(); ++i)
+	{
+	  new_f = auto_->add_state();
+	  auto_->add_letter_edge(last, new_f, *i);
+	  last = new_f;
+	}
       auto_->set_initial(new_i);
       auto_->set_final(new_f);
-      auto_->add_letter_edge(new_i, new_f, m);
     }
 
     virtual void 

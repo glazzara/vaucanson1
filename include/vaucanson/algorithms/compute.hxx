@@ -27,18 +27,27 @@ namespace vcsn {
 	     const input_t&	    word, 
 	     serie_t&		    result)
   {
-    std::vector<serie_t>		v1(a.states().size());
-    std::vector<serie_t>		v2(a.states().size());
+    // FIXME: for the moment, we use large vectors because the set of hstate_t
+    // FIXME: can be sparsed. We wanted to be as general as possible.
+    // FIXME: Variants of compute will be available soon of course.
+
+    hstate_t max_hstate_t = 0;
+    for (typename auto_t::state_iterator i = a.states().begin();
+	 i != a.states().end();
+	 ++i)
+      max_hstate_t = std::max(*i, unsigned(max_hstate_t));
+
+    std::vector<serie_t>		v1(max_hstate_t + 1);
+    std::vector<serie_t>		v2(max_hstate_t + 1);
     std::list<hedge_t>			delta_ret;
     const typename serie_t::set_t	&serie_set = result.set();
 
-    // FIXME: add an assert.
     
     /*-------------------.
     | Initialize the set |
     `-------------------*/
-    std::fill(v1.begin(), v1.end(), 
-	      serie_set.zero(SELECT(typename serie_t::value_t)));
+     std::fill(v1.begin(), v1.end(), 
+	       serie_set.zero(SELECT(typename serie_t::value_t)));
 
     /*--------.
     | Initial |
@@ -55,8 +64,8 @@ namespace vcsn {
 	 e != word.end();
 	 ++e)
       {
-	std::fill(v2.begin(), v2.end(), 
-		  serie_set.zero(SELECT(typename serie_t::value_t)));
+ 	std::fill(v2.begin(), v2.end(), 
+ 		  serie_set.zero(SELECT(typename serie_t::value_t)));
 	for (unsigned i = 0; i < v1.size(); ++i)
 	  if (v1[i] != serie_set.zero(SELECT(typename serie_t::value_t)))
 	  {

@@ -38,17 +38,17 @@ int main(int argc, char** argv)
     }
   tests::Tester t(verbose);
 
-   TEST(t, "CHECK UNION : ", !union_test<usual_automaton_t>(t));
-   TEST(t, "CHECK DETERMINIST : ", !determinist_test<usual_automaton_t>(t));
-   TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
-   TEST(t, "CHECK REACHABLE : ", !reachable_test<usual_automaton_t>(t));
-   TEST(t, "CHECK EXTRACT : ", !extract_test<usual_automaton_t>(t));
-   TEST(t, "CHECK GENERALIZED : ", generalized_test<usual_automaton_t>(t));
-   TEST(t, "CHECK ELIMINATION ", elimination_test<usual_automaton_t>(t));
-   TEST(t, "CHECK CLOSURE : ", closure_test<usual_automaton_t>(t));
-   TEST(t, "CHECK GLUSHKOV : ", glushkov_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK UNION : ", !union_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK DETERMINIST : ", !determinist_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK NORMALIZE : ", !normalize_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK REACHABLE : ", !reachable_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK EXTRACT : ", !extract_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK GENERALIZED : ", generalized_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK ELIMINATION ", elimination_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK CLOSURE : ", closure_test<usual_automaton_t>(t));
+//    TEST(t, "CHECK GLUSHKOV : ", glushkov_test<usual_automaton_t>(t));
   TEST(t, "CHECK THOMPSON : ", thompson_test<usual_automaton_t>(t));
-  TEST(t, "CHECK REALTIME : ", realtime_test<usual_automaton_t>(t));
+  //  TEST(t, "CHECK REALTIME : ", realtime_test<usual_automaton_t>(t));
 
   return EXIT_SUCCESS;
 }
