@@ -91,7 +91,7 @@ namespace vcsn {
   | op_contains |
   `------------*/
   template<class TropicalKind, typename T>
-  bool op_contains(const algebra::TropicalSemiring<TropicalKind>& s, T c)
+  bool op_contains(const algebra::TropicalSemiring<TropicalKind>&, T c)
   {
     return true;
   }
@@ -100,7 +100,7 @@ namespace vcsn {
   | Multiplication is + |
   `--------------------*/
   template<class TropicalKind, typename T, typename U>
-  void op_in_mul(const algebra::TropicalSemiring<TropicalKind>& s1,
+  void op_in_mul(const algebra::TropicalSemiring<TropicalKind>&,
 		 T& dst, U arg)
   {
     if ((dst == zero_value(SELECT(algebra::TropicalSemiring<TropicalKind>),
@@ -127,14 +127,14 @@ namespace vcsn {
   | Addition |
   `---------*/
   template<typename T, typename U>
-  void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMax>& s1,
+  void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMax>&,
 		 T& dst, U arg)
   {
     dst = std::max(dst, arg);
   }
 
   template<typename T, typename U>
-  void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMin>& s1,
+  void op_in_add(const algebra::TropicalSemiring<algebra::TropicalMin>&,
 		 T& dst, U arg)
   {
     dst = std::min(dst, arg);
@@ -207,7 +207,7 @@ namespace vcsn {
 
   template <class TropicalKind, typename T>
   bool
-  op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>& set,
+  op_can_choose_non_starable(const algebra::TropicalSemiring<TropicalKind>&,
 			     SELECTOR(T))
   {
     return true;
@@ -251,7 +251,7 @@ namespace vcsn {
   }
 
   template<typename St, typename T>
-  St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>& s, St& st, const T& v)
+  St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>&, St& st, const T& v)
   {
     if (v == zero_value(SELECT(algebra::TropicalSemiring<algebra::TropicalMin>), SELECT(T)))
       st << "+oo";
@@ -259,7 +259,6 @@ namespace vcsn {
       st << v;
     return st;
   }
-
 } // vcsn
 
 #endif // VCSN_ALGEBRA_CONCRETE_SEMIRING_TROPICAL_SEMIRING_HXX
