@@ -1,5 +1,10 @@
 2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* configure.ac: Generate src/tests/algebra/free_monoid_product/Makefile
+	and src/tests/context_headers/transducers/Makefile.
+
+2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/algebra/algebra.hh: Add reference to
 	FreeMonoidProduct in Doxygen documentation.
 
