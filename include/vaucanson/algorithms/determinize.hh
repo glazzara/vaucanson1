@@ -27,19 +27,38 @@
 
 namespace vcsn {
 
+  /**
+   * @file   determinize.hh
+   * @author Yann Régis-Gianas <yann@lrde.epita.fr>
+   * @date   Tue Jun 24 19:13:10 2003
+   * 
+   * @brief  This file provides the determinization algorithm for boolean automata.
+   * 
+   */
+
+
   /*! \addtogroup algorithms */  /* @{ */
 
   //! Return a fresh determinist automaton associated to the input.
+
+  /** 
+   * @brief Returns the determinized of a boolean automaton.
+   * 
+   * @param a the boolean automaton to determinize.
+   * 
+   * @return a fresh boolean automaton that is the determinization of 'a'.
+   */
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a);
 
-  //! Return a fresh complete determinist automaton associated to the input.
-  template<typename A, typename T>
-  Element<A, T>
-  subset_construction(const Element<A, T>& a);
-
-  //! Return true if the automaton is deterministic. */
+  /** 
+   * @brief Test if an automaton is deterministic.
+   * 
+   * @param a a boolean automaton.
+   * 
+   * @return true if 'a' is deterministic.
+   */
   template<typename A, typename T>
   bool
   is_deterministic(const Element<A, T>& a);
