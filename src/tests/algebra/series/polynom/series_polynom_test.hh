@@ -34,7 +34,6 @@
 # include <vaucanson/config/system.hh>
 # include <check/tester.hh>
 # include <vaucanson/design_pattern/design_pattern.hh>
-# include <vaucanson/tools/usual.hh>
 
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 

@@ -1,5 +1,10 @@
 2004-06-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/algebra/series/polynom/series_polynom_test.hh: Remove
+	inclusion of usual.hh.
+
+2004-06-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh,
 	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh,
 	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh,
