@@ -34,8 +34,6 @@
 #include <vaucanson/algorithms/projection.hh>
 //#include <vaucanson/algorithms/krat_exp_print.hh>
 
-using namespace std;
-
 namespace vcsn {
 
   template<typename ST, typename SA,
@@ -46,6 +44,7 @@ namespace vcsn {
 		       const Trans_t& t,
 		       Auto_t& ret)
   {
+    using namespace std;
     AUTOMATON_TYPES(Trans_t);
 
     map<hstate_t, hstate_t> m;
@@ -88,6 +87,7 @@ namespace vcsn {
 		       const Element<S, T>& t,
 		       std::map<hstate_t, hstate_t>& m_)
   {
+    using namespace std;
     typedef Element<S, T>  Trans_t;
     AUTOMATON_TYPES(Trans_t);
 

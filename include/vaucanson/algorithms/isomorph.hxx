@@ -33,8 +33,7 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/misc/selectors.hh>
-
-# include <vaucanson/tools/usual.hh>
+# include <vaucanson/tools/usual_macros.hh>
 # include <queue>
 # include <set>
 # include <list>
@@ -93,8 +92,7 @@ namespace vcsn {
 		     sub_possibility_t sub_res)
   {
    if (i != mother.end())
-     for (sub_possibility_t::const_iterator j = i->begin();
-	  j != i->end(); j++)
+     for_all_const_(sub_possibility_t, j, *i)
        {
 	 if (can_add_pair(sub_res, *j))
 	   {
@@ -130,7 +128,7 @@ namespace vcsn {
 
   bool exists(const sub_possibility_t& l, const pair<hstate_t, hstate_t>& p)
   {
-    for (sub_possibility_t::const_iterator i = l.begin(); i != l.end(); i++)
+    for_all_const_(sub_possilibity_t, i, l)
       if (*i == p) return true;
     return false;
   }
@@ -152,19 +150,15 @@ namespace vcsn {
     else
       {
 	bool res = false;
-	for (set<hstate_t>::iterator i = out_a.begin(); 
-	     i != out_a.end(); i++)
-	  for (set<hstate_t>::iterator j = out_b.begin(); 
-	       j != out_b.end(); j++)
+	for_all_(set<hstate_t>, i, out_a)
+	  for_all_(set<hstate_t>, j, out_b)
+	  if (exists(mother, pair<hstate_t, hstate_t>(*i, *j)))
 	    {
-	      if (exists(mother, pair<hstate_t, hstate_t>(*i, *j)))
-		{
-		  out_a.erase(*i);
-		  out_b.erase(*j);
-		  res = res || arrangement(mother, out_a, out_b);
-		  out_a.insert(*i);
-		  out_b.insert(*j);
-		}
+	      out_a.erase(*i);
+	      out_b.erase(*j);
+	      res = res || arrangement(mother, out_a, out_b);
+	      out_a.insert(*i);
+	      out_b.insert(*j);
 	    }
 	return res;
       }
@@ -197,13 +191,11 @@ namespace vcsn {
 
      possibility_t possibility;
 
-     for (state_iterator i = a.states().begin(); 
-	  i != a.states().end(); i++)
+     for_each_state(i, a)
        {
 	 bool bool_state = false;
 	 sub_possibility_t sub_possibility;
-	 for (state_iterator j = b.states().begin(); 
-	      j != b.states().end(); j++)
+	 for_each_state(j, b)
 	   {
 	     set<hedge_t> out_a;
 	     set<hedge_t> out_b;
@@ -212,11 +204,11 @@ namespace vcsn {
 	     b.deltac(out_b, *j, delta_kind::edges());
 	    
 	     bool bool_edge = true;
-	     for (set<hedge_t>::iterator x = out_a.begin(); 
-		  x != out_a.end(); x++)
+	     for_all_(set<hedge_t>, x, out_a)
 	       {
 		 set<hedge_t>::iterator y = out_b.begin();
-		 while ((y != out_b.end()) && (a.serie_of(*x) != b.serie_of(*y)))
+		 while ((y != out_b.end()) && 
+			(a.serie_of(*x) != b.serie_of(*y)))
 		   y++;
 		 if (y == out_b.end()) 
 		   bool_edge = false;
@@ -242,11 +234,6 @@ namespace vcsn {
       return create_possibility(a, b, possibility, possibility.begin(), 
 				sub_possibility_t());
   }
-
-
-  
-
-  
 
 } // vcsn
 

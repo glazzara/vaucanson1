@@ -31,9 +31,8 @@
 # define VCSN_ALGORITHMS_NORMALIZED_HXX
 
 # include <vaucanson/algorithms/normalized.hh>
-
 # include <stack>
-
+# include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/algorithms/sum.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 
@@ -47,17 +46,11 @@ namespace vcsn {
   do_normalize_here(const AutomataBase<A_>&,
 		    Auto_& a)
   {
-    typedef Auto_				automaton_t;
-    typedef typename automaton_t::series_t      series_t;
-    typedef typename automaton_t::series_elt_t  series_elt_t;
-    typedef typename series_elt_t::monoid_elt_t	monoid_elt_t;
-    typedef typename series_t::monoid_t		monoid_t;
+    AUTOMATON_TYPES(Auto_);
 
     hstate_t h = a.add_state();
 
-    for (typename automaton_t::initial_iterator i = a.initial().begin();
-	 i != a.initial().end();
-	 ++i)
+    for_each_initial_state(i, a)
       a.add_serie_edge(h, *i, a.get_initial(*i));
 
     a.clear_initial();
@@ -65,11 +58,9 @@ namespace vcsn {
 
     h = a.add_state();
 
-    for (typename automaton_t::final_iterator i = a.final().begin();
-	 i != a.final().end();
-	 ++i)
+    for_each_final_state(i, a)
       a.add_serie_edge(*i, h, a.get_final(*i));
-
+    
     a.clear_final();
     a.set_final(h);
   }
@@ -100,15 +91,12 @@ namespace vcsn {
 				   lhs_t& lhs,
 				   const rhs_t& rhs)
   {
+    std::stack<hstate_t> init;
+
     sum_here(lhs, rhs);
     hstate_t new_i = lhs.add_state();
     hstate_t new_f = lhs.add_state();
-
-    std::stack<hstate_t> init;
-
-    for (typename lhs_t::initial_iterator i = lhs.initial().begin();
-	 i != lhs.initial().end();
-	 ++i)
+    for_each_initial_state(i, lhs.initial())
       {
 	lhs.add_spontaneous(new_i, *i);
 	init.push(*i);
@@ -118,10 +106,7 @@ namespace vcsn {
 	lhs.unset_initial(init.top());
 	init.pop();
       }
-
-    for (typename lhs_t::final_iterator f = lhs.final().begin();
-	 f != lhs.final().end();
-	 ++f)
+    for_each_final_state(f, lhs.final())
       {
 	lhs.add_spontaneous(*f, new_f);
 	init.push(*f);
@@ -189,6 +174,7 @@ namespace vcsn {
 					 lhs_t& lhs,
 					 const rhs_t& rhs)
   {
+    AUTOMATON_TYPES(rhs_t);
     typedef std::map<hstate_t, hstate_t>	       map_lhs_rhs_t;
     typedef std::set<hedge_t>			       delta_ret_t;
 
@@ -198,9 +184,7 @@ namespace vcsn {
     | Concat of states |
     `-----------------*/
     map_lhs_rhs_t	map_h;
-    for (typename rhs_t::state_iterator s = rhs.states().begin();
-	 s != rhs.states().end();
-	 ++s)
+    for_each_state(s, rhs)
       {
 	hstate_t new_state;
 
@@ -217,9 +201,7 @@ namespace vcsn {
     | Concat of edges |
     `----------------*/
     delta_ret_t	aim;
-    for (typename rhs_t::state_iterator i = rhs.states().begin();
-	 i != rhs.states().end();
-	 ++i)
+    for_each_state(i, rhs)
       {
 	aim.clear();
 	rhs.deltac(aim, *i, delta_kind::edges());
@@ -229,7 +211,6 @@ namespace vcsn {
 	  lhs.add_edge(map_h[rhs.origin_of(*d)], 
 		       map_h[rhs.aim_of(*d)],		       
 		       rhs.label_of(*d));
-		       
       }
   }
 
@@ -288,7 +269,6 @@ namespace vcsn {
     do_star_of_normalized_here(ret.set(), ret);
     return ret;
   }
-
 
 } // vcsn
 
