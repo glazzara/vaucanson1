@@ -1,7 +1,7 @@
-// krat_exp_print.hh: this file is part of the Vaucanson project.
+// reverse_visitor.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,47 +28,52 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
 
-#ifndef VCSN_ALGORITHMS_KRAT_EXP_PRINT_HH
-# define VCSN_ALGORITHMS_KRAT_EXP_PRINT_HH
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_REVERSE_VISITOR_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_REVERSE_VISITOR_HH
 
-/** @addtogroup algorithms *//** @{ */
-/**
- * @file krat_exp_print.hh
- *
- * This file contains the declarations for the krat_exp_print() algorithm.
- *
- * @see krat_exp_print()
- */
-/** @} */
+# include <vaucanson/algebra/implementation/series/rat/exp.hh>
 
-# include <vaucanson/design_pattern/element.hh>
+namespace vcsn
+{
 
-# include <ostream>
+  namespace rat
+  {
 
-namespace vcsn {
+    template <class Word, class Weight>
+    class ReverseVisitor :
+      public rat::DefaultMutableNodeVisitor<Word, Weight>
+    {
+    public:
+      virtual
+      void
+      product(rat::Node<Word, Weight>* lhs,
+	      rat::Node<Word, Weight>* rhs);
 
-  /** @addtogroup algorithms *//** @{ */
+      // FIXME: The constants should be reversed, too.
 
-  enum print_modes {
-    MODE_NONE, ///<<  a+b+c, a.b.c
-    MODE_ADD,  ///<<  (a+b)+c
-    MODE_MUL,  ///<<  (a.b).c
-    MODE_ALL   ///<<  (a+b)+c, (a.b).c
-  };
+    };
 
-  /// Print a rational expression under several formats.
-  template<class S, class T>
-  std::ostream&
-  krat_exp_print(const Element<S, T>& kexp,
-		 std::ostream& ostr = std::cout,
-		 const print_modes mode = MODE_NONE);
+  } // End of namespace rat.
 
-  /** @} */
+  namespace algebra
+  {
 
-} // vcsn
+    template <typename S, typename T>
+    struct DefaultTransposeFun;
+
+    template <typename S, typename Word, typename Weight>
+    struct DefaultTransposeFun< S, rat::exp<Word, Weight> >
+    {
+      rat::exp<Word, Weight>&
+      operator () (const S&, const rat::exp<Word, Weight>& exp);
+    };
+
+  } // End of namespace algebra.
+
+} // End of namespace vcsn.
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/algorithms/krat_exp_print.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx>
+# endif // ! VCSN_USE_INTERFACE_ONLY
 
-#endif // VCSN_ALGORITHMS_KRAT_EXP_PRINT_HH
+#endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_REVERSE_VISITOR_HH

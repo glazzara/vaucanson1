@@ -46,7 +46,6 @@
 #include <vaucanson/algorithms/eval.hh>
 #include <vaucanson/algorithms/aut_to_exp.hh>
 #include <vaucanson/algorithms/transpose.hh>
-#include <vaucanson/algorithms/krat_exp_print.hh>
 #include <vaucanson/algorithms/backward_closure.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/tools/dot_display.hh>
@@ -120,7 +119,7 @@ main(int argc, char** argv)
       `--------------------------*/
 
      krat_exp_t e = aut_to_exp(generalized(cn));
-     krat_exp_print(e) << std::endl;
+     std::cout << e << std::endl;
 
      automaton_t sn = standard_of(e);
      std::cout << "S_n = " << sn << std::endl;

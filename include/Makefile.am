@@ -136,6 +136,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/implementation/semiring/rational_number.hh	   \
 	vaucanson/algebra/implementation/series/rat/depth_visitor.hh	   \
 	vaucanson/algebra/implementation/series/rat/depth_visitor.hxx	   \
+	vaucanson/algebra/implementation/series/rat/dispatch_visitor.hh	   \
+	vaucanson/algebra/implementation/series/rat/dispatch_visitor.hxx   \
 	vaucanson/algebra/implementation/series/rat/dump_visitor.hh	   \
 	vaucanson/algebra/implementation/series/rat/dump_visitor.hxx	   \
 	vaucanson/algebra/implementation/series/rat/exp.hh		   \
@@ -144,6 +146,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/implementation/series/rat/nodes.hxx		   \
 	vaucanson/algebra/implementation/series/rat/random_visitor.hh	   \
 	vaucanson/algebra/implementation/series/rat/random_visitor.hxx	   \
+	vaucanson/algebra/implementation/series/rat/reverse_visitor.hh	   \
+	vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx	   \
 	vaucanson/algebra/implementation/series/generalized.hh		   \
 	vaucanson/algebra/implementation/series/generalized.hxx		   \
 	vaucanson/algebra/implementation/series/krat.hh			   \
@@ -299,8 +303,6 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/extension.hxx				   \
 	vaucanson/algorithms/projection.hh				   \
 	vaucanson/algorithms/projection.hxx				   \
-	vaucanson/algorithms/krat_exp_print.hh				   \
-	vaucanson/algorithms/krat_exp_print.hxx				   \
 	vaucanson/algorithms/letter_to_letter_composition.hh		   \
 	vaucanson/algorithms/letter_to_letter_composition.hxx		   \
 	vaucanson/algorithms/krat_exp_flatten.hxx			   \

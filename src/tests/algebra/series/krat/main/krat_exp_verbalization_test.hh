@@ -1,7 +1,7 @@
 // krat_exp_verbalization_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -39,13 +39,13 @@
 
 template <class Expr>
 std::string test(tests::Tester& t,
-		 Expr& e, 
+		 Expr& e,
 		 const std::string& input,
 		 const std::string& expected)
 {
   parse(input, e);
   std::stringstream s;
-  s << verbalize(e);
+  s << vcsn::rat::setpm (vcsn::rat::MODE_ALL) << verbalize(e);
   EQTEST(t, input, s.str(), expected);
   return s.str();
 }
@@ -63,7 +63,7 @@ struct specialized_tests
     test(t, e, "(a+b)", "(a+b)");
     test(t, e, "a.(a+b)", "(aa+ab)");
     test(t, e, "(a+b).a", "(aa+ba)");
-    test(t, e, "a+a", "(2 a)");  
+    test(t, e, "a+a", "(2 a)");
     test(t, e, "(2 a)+a", "(3 a)");
     test(t, e, "a+(2 a)", "(3 a)");
     test(t, e, "(a+(2 a+b))", "((3 a)+b)");
@@ -96,7 +96,7 @@ struct specialized_tests<bool, Expr>
     test(t, e, "(a+b)", "(a+b)");
     test(t, e, "a.(a+b)", "(aa+ab)");
     test(t, e, "(a+b).a", "(aa+ba)");
-    test(t, e, "a+a", "a");  
+    test(t, e, "a+a", "a");
     test(t, e, "(a+(a+b))", "(a+b)");
     test(t, e, "((a+b)+a))", "(a+b)");
     test(t, e, "a.(a+b).b", "(aab+abb)");
@@ -112,7 +112,7 @@ bool krat_exp_verbalization_test(tests::Tester& tg)
   typedef typename krat_exp_t::value_t	      kexp_t;
   typedef typename krat_exp_t::monoid_elt_t   monoid_elt_t;
   typedef typename monoid_elt_t::set_t        monoid_t;
-  
+
   typedef typename krat_exp_t::semiring_elt_t   semiring_elt_t;
   typedef typename semiring_elt_t::set_t	  semiring_t;
   typedef typename krat_exp_t::set_t 	  series_set_t;

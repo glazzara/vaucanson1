@@ -1,7 +1,7 @@
 // depth_visitor.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -29,10 +29,12 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DEPTH_VISITOR_HH
-# define VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DEPTH_VISITOR_HH
 
-# include <algorithm>
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HH
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HH
+
+# include <cstddef>
+
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 
 namespace vcsn {
@@ -43,27 +45,28 @@ namespace vcsn {
     class DepthVisitor : public ConstNodeVisitor<M_, W_>
     {
     protected:
-      void 
+      void
       sum_or_product(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
-      void 
+      void
       weight_or_star(const Node<M_, W_>* node);
 
     public:
-      virtual void 
+      virtual void
       product(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
-      virtual void 
+
+      virtual void
       sum(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
 
-      virtual void 
+      virtual void
       star(const Node<M_, W_>* node);
 
-      virtual void 
+      virtual void
       left_weight(const W_&, const Node<M_, W_>* node);
 
-      virtual void 
+      virtual void
       right_weight(const W_&, const Node<M_, W_>* node);
 
-      virtual void 
+      virtual void
       constant(const M_& m);
 
       virtual void zero();
@@ -80,10 +83,8 @@ namespace vcsn {
 
 } // vcsn
 
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algebra/implementation/series/rat/depth_visitor.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/series/rat/depth_visitor.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-    
-
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DEPTH_VISITOR_HH
+#endif // VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HH

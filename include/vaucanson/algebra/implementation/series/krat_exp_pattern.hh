@@ -32,9 +32,7 @@
 
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
-# include <iostream>
-# include <utility>
-# include <vaucanson/misc/contract.hh>
+# include <vaucanson/algebra/implementation/series/rat/dispatch_visitor.hh>
 
 namespace vcsn {
 
@@ -221,9 +219,6 @@ match_node##N(const N&) 			\
    typedef typename krat_exp_matcher_t::One       	One;                 \
    typedef typename krat_exp_matcher_t::Zero       	Zero;
 
-    template <class T>
-      struct DispatchFunction;
-
       template <class Self, class Series, class T, class Dispatch>
 	struct KRatExpIdentity : vcsn::algebra::KRatExpMatcher<
 	Self,
@@ -308,10 +303,8 @@ match_node##N(const N&) 			\
 
 } // vcsn
 
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/series/krat_exp_pattern.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-
 
 #endif // VCSN_ALGEBRA_CONCRETE_SERIES_KRAT_EXP_PATTERN_HH

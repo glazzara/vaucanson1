@@ -50,7 +50,6 @@
 #include <vaucanson/algorithms/complete.hh>
 #include <vaucanson/algorithms/trim.hh>
 #include <vaucanson/algorithms/product.hh>
-#include <vaucanson/algorithms/krat_exp_print.hh>
 
 #include <ostream>
 #include <sstream>
@@ -192,7 +191,7 @@ main(int argc, char** argv)
 
       const std::list<hstate_t> l (q.begin(), q.end());
       krat_exp_t e = aut_to_exp(generalized(an), ListChooser (l));
-      krat_exp_print(e, std::cout) << std::endl;
+      std::cout << e << std::endl;
 
       automaton_t sn = standard_of(e);
       std::cout << "S_n  =  " << sn << std::endl;

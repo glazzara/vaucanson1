@@ -88,14 +88,14 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
       if (ret.first)
 	error(sstr.str(), ret.second, sstr.str(),
 	      exp.structure().monoid().alphabet());
-      else 
+      else
 	{
 	  std::ostringstream ostr;
 	  ostr << out;
 	  if (ostr.str() != sstr.str())
 	    error(sstr.str(), ostr.str(), sstr.str(),
 		  exp.structure().monoid().alphabet());
-	  else 
+	  else
 	    ++nb_success;
 	}
     }
@@ -136,6 +136,8 @@ static sample_t bool_samples[] =
     { "0a", "0" },
     { "1.a", "a" },
     { "1a", "a" },
+    { "(a+b)*", "(a+b)*" },
+    { "a+b*", "(a+b*)" },
     // Bad ones
     { "2", 0 },
     { "2.2", 0 },
@@ -167,20 +169,20 @@ static sample_t mul_samples[] =
     { "1 (a.b)", "(a.b)" },
     { "(a.b) 1", "(a.b)" },
     { "(a+b) 1", "(a+b)" },
-    { "2 (a+b)", "(2 (a+b))" },
-    { "2 (a.b)", "(2 (a.b))" },
-    { "(a.b) 2", "((a.b) 2)" },
-    { "(a+b) 2", "((a+b) 2)" },
+    { "2 (a+b)", "2 (a+b)" },
+    { "2 (a.b)", "2 (a.b)" },
+    { "(a.b) 2", "(a.b) 2" },
+    { "(a+b) 2", "(a+b) 2" },
     { "0 (a.b)", "0" },
     { "0 (a+b)", "0" },
     { "(a.b) 0", "0" },
     { "(a+b) 0", "0" },
     { "1 a.1 b", "(a.b)" },
     { "1 a1 b", "(a.b)" },
-    { "2 a.2 b", "((2 a).(2 b))" },
-    { "2 a2 b", "((2 a).(2 b))" },
-    { "2 1", "(2 1)"},
-    { "1 2", "(2 1)"},
+    { "2 a.2 b", "(2 a.2 b)" },
+    { "2 a2 b", "(2 a.2 b)" },
+    { "2 1", "2 1"},
+    { "1 2", "2 1"},
     {0, 0}
   };
 
@@ -196,13 +198,13 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
   monoid_t monoid(alphabet);
   semiring_t semiring;
   series_set_t s(semiring, monoid);
-  
+
   unsigned int nb_success = 0;
   unsigned int nb_test;
   for (nb_test = 0; samples[nb_test].exp != 0; ++nb_test)
     {
       krat_exp_t exp(s);
-      
+
       std::pair<bool, std::string> r = parse(samples[nb_test].exp, exp);
       if (r.first)
 	{
@@ -214,8 +216,15 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 	}
       else
 	{
+	  using vcsn::rat::print_mode_t;
+	  using vcsn::rat::MODE_ALL;
+	  using vcsn::rat::MODE_STAR;
+	  using vcsn::rat::MODE_WEIGHT;
+	  using vcsn::rat::setpm;
+
 	  std::ostringstream ostr;
-	  ostr << exp;
+	  ostr << setpm (print_mode_t (MODE_ALL & ~MODE_STAR & ~MODE_WEIGHT))
+	       << exp;
 	  if (samples[nb_test].out == 0)
 	    error(samples[nb_test].exp, ostr.str(), "error",
 		  exp.structure().monoid().alphabet());
@@ -226,7 +235,7 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 	    nb_success++;
 	}
     }
-  
+
   std::string rate;
   SUCCESS_RATE(rate, nb_success, nb_test);
   TEST(t, "parsing hardcoded rational expressions " + rate,
@@ -257,7 +266,7 @@ template <class Expr>
 bool krat_exp_parse_test(tests::Tester& tg)
 {
   KRAT_EXP_PARSE_TEST_USUAL_DECS(Expr);
-  
+
   return
     krat_exp_parse_random_test<Expr>(tg) &&
     exhaustive_test_dispatch<typename semiring_elt_t::value_t, Expr>::run(tg);

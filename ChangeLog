@@ -1,5 +1,43 @@
 2004-06-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx: Clean.
+	Document. Remove inclusion of dump_visitor.hh. Move the code for
+	the ReverseVisitor and the DispatchVisitor in reverse_visitor.hh,
+	reverse_visitor.hxx, dispatch_visitor.hh and dispatch_visitor.hxx.
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/dispatch_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dispatch_visitor.hxx:
+	New. This code comes from exp.hh and exp.hxx.
+	* include/vaucanson/algorithms/krat_exp_print.hh,
+	* include/vaucanson/algorithms/krat_exp_print.hxx: Delete. Re-use a
+	part of the code for the DumpVisitor.
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/dump_visitor.hxx:
+	Rewrite. Use code from krat_exp_print. Use ios::xalloc() and stream
+	manipulators to change the print_mode.
+	* include/Makefile.am: Update.
+
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hh,
+	* include/vaucanson/algebra/implementation/series/rat/nodes.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/depth_visitor.hxx:
+	Clean.
+
+	* include/vaucanson/algebra/implementation/series/krat.hh: Include
+	dump_visitor.hh.
+	* include/vaucanson/algebra/implementation/series/krat_exp_pattern.hh:
+	Include dispatch_visitor.hh.
+	* src/tests/algebra/series/krat/main/krat_exp_verbalization_test.hh:
+	Update.
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Update.
+	Add two tests.
+
+	* src/demos/ciaa/ex2.cc, src/demos/ciaa/ex3.cc: Update.
+
+2004-06-29  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/tests/algebra/series/polynom/series_polynom_test.hh: Remove
 	inclusion of usual.hh.
 

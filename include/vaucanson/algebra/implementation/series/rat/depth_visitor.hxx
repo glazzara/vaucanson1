@@ -29,22 +29,20 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DEPTH_VISITOR_HXX
-# define VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DEPTH_VISITOR_HXX
+#ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HXX
+# define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HXX
 
-# include <algorithm>
 # include <vaucanson/algebra/implementation/series/rat/depth_visitor.hh>
-# include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 
 namespace vcsn {
-  
+
   namespace rat {
-    
+
     template<typename M_, typename W_>
-    void 
-    DepthVisitor<M_,W_>::sum_or_product(const Node<M_, W_>* left_, 
+    void
+    DepthVisitor<M_,W_>::sum_or_product(const Node<M_, W_>* left_,
 					const Node<M_, W_>* right_)
-    { 
+    {
       left_->accept(*this);
       size_t left_depth = d;
       right_->accept(*this);
@@ -52,77 +50,77 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-    void 
-    DepthVisitor<M_,W_>::weight_or_star(const Node<M_, W_>* node)
+    void
+    DepthVisitor<M_, W_>::weight_or_star(const Node<M_, W_>* node)
     {
       node->accept(*this);
       ++d;
     }
-    
-    template<typename M_, typename W_>
-    void 
-    DepthVisitor<M_,W_>::product(const Node<M_, W_>* left_, 
-				 const Node<M_, W_>* right_)
-    { 
-      sum_or_product(left_, right_); 
-    }
 
     template<typename M_, typename W_>
-    void 
-    DepthVisitor<M_,W_>::sum(const Node<M_, W_>* left_, 
-			     const Node<M_, W_>* right_)
-    { 
-      sum_or_product(left_, right_); 
-    }
-
-    template<typename M_, typename W_>
-    void 
-    DepthVisitor<M_,W_>::star(const Node<M_, W_>* node)
-    { 
-      weight_or_star(node); 
-    }
-
-    template<typename M_, typename W_>
-    void 
-    DepthVisitor<M_,W_>::left_weight(const W_&, const Node<M_, W_>* node)
+    void
+    DepthVisitor<M_, W_>::product(const Node<M_, W_>* left_,
+				  const Node<M_, W_>* right_)
     {
-      weight_or_star(node); 	
+      sum_or_product(left_, right_);
     }
 
     template<typename M_, typename W_>
-    void 
-    DepthVisitor<M_,W_>::right_weight(const W_&, const Node<M_, W_>* node)
-    { 
-      weight_or_star(node); 
+    void
+    DepthVisitor<M_, W_>::sum(const Node<M_, W_>* left_,
+			      const Node<M_, W_>* right_)
+    {
+      sum_or_product(left_, right_);
     }
 
     template<typename M_, typename W_>
-    void 
-    DepthVisitor<M_,W_>::constant(const M_& m)
-    { 
-      d = 0; 
+    void
+    DepthVisitor<M_, W_>::star(const Node<M_, W_>* node)
+    {
+      weight_or_star(node);
     }
 
     template<typename M_, typename W_>
-    void DepthVisitor<M_,W_>::zero()
-    { 
-      d = 0; 
+    void
+    DepthVisitor<M_, W_>::left_weight(const W_&, const Node<M_, W_>* node)
+    {
+      weight_or_star(node);
     }
 
     template<typename M_, typename W_>
-    void DepthVisitor<M_,W_>::one()
-    { 
-      d = 0; 
+    void
+    DepthVisitor<M_, W_>::right_weight(const W_&, const Node<M_, W_>* node)
+    {
+      weight_or_star(node);
     }
 
     template<typename M_, typename W_>
-    size_t DepthVisitor<M_,W_>::get() const 
-    { 
-      return d; 
-    } 
+    void
+    DepthVisitor<M_, W_>::constant(const M_& m)
+    {
+      d = 0;
+    }
 
-  } // rat
+    template<typename M_, typename W_>
+    void DepthVisitor<M_, W_>::zero()
+    {
+      d = 0;
+    }
 
-} // vcsn
+    template<typename M_, typename W_>
+    void DepthVisitor<M_, W_>::one()
+    {
+      d = 0;
+    }
 
-#endif // VCSN_ALGEBRA_CONCRETE_SERIES_RAT_DEPTH_VISITOR_HXX
+    template<typename M_, typename W_>
+    size_t DepthVisitor<M_, W_>::get() const
+    {
+      return d;
+    }
+
+  } // End of namespace rat.
+
+} // End of namespace vcsn.
+
+#endif // VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DEPTH_VISITOR_HXX
