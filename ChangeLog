@@ -1,3 +1,9 @@
+2003-07-22  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* bootstrap.sh: Add ability to specify autoreconf command.
+	* src/tests/sanity/generate_files.sh: Correct a sed command.
+	* src/demos/vaucanswig/expand.sh: Replace some echo commands.
+
 2003-07-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/semiring_base.hh,

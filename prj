@@ -1,90 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 392)
-(Parent-Version vaucanson 0 391)
-(Version-Log "2003-07-21  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+(Project-Version vaucanson 0 393)
+(Parent-Version vaucanson 0 392)
+(Version-Log "2003-07-22  Loïc Fosse  <loic@lrde.epita.fr>
 
-	* include/vaucanson/algebra/concept/semiring_base.hh,
-	include/vaucanson/algebra/concept/series_base.hh,
-	include/vaucanson/algebra/concept/series_base.hxx,
-	include/vaucanson/algebra/concrete/series/krat.hh,
-	include/vaucanson/algebra/concrete/series/krat.hxx,
-	include/vaucanson/algebra/concrete/series/krat_conversion.hxx,
-	include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx,
-	include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh,
-	include/vaucanson/algebra/concrete/series/krat_coefficient.hxx,
-	include/vaucanson/algebra/concrete/series/krat_coefficient.hh,
-	include/vaucanson/algebra/concrete/series/krat_exp_support.hxx,
-	include/vaucanson/algebra/concrete/series/polynoms.hh,
-	include/vaucanson/algebra/concrete/series/rat/exp.hh,
-	include/vaucanson/algebra/concrete/series/rat/exp.hxx,
-	src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
-	src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh,
-	src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
-	src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh,
-	src/tests/algebra/series/krat/main/krat_exp_cderivation_linear_test.hh,
-	src/tests/algebra/series/krat/derivations/derivations_common.hh,
-	src/tests/algebra/series/misc/series_test.hh,
-	include/vaucanson/automata/concept/automata_base.hh,
-	include/vaucanson/automata/concept/kinds.hh,
-	include/vaucanson/automata/concept/kinds.hxx,
-	include/vaucanson/automata/concept/automata_ops.hxx,
-	include/vaucanson/automata/concept/transducer_ops.hh,
-	include/vaucanson/automata/concept/transducer_base.hh,
-	include/vaucanson/automata/concept/transducer_base.hxx,
-	include/vaucanson/automata/concept/transducer_ops.hxx,
-	include/vaucanson/automata/concrete/graph.hh,
-	include/vaucanson/automata/concrete/kind_adapter.hh,
-	include/vaucanson/automata/concrete/generalized.hh,
-	include/vaucanson/automata/concrete/transpose_view.hh,
-	include/vaucanson/algorithms/eval.hh,
-	include/vaucanson/algorithms/eval.hxx,
-	include/vaucanson/algorithms/determinize.hxx,
-	include/vaucanson/algorithms/standard_of.hxx,
-	include/vaucanson/algorithms/hopcroft_minimization.hxx,
-	include/vaucanson/algorithms/brzozowski.hxx,
-	include/vaucanson/algorithms/aci_canonical.hxx,
-	include/vaucanson/algorithms/minimization_moore.hxx,
-	include/vaucanson/algorithms/product.hxx,
-	include/vaucanson/algorithms/thompson.hxx,
-	include/vaucanson/algorithms/berry_sethi.hxx,
-	include/vaucanson/algorithms/derivatives_automaton.hxx,
-	include/vaucanson/algorithms/krat_exp_partial_derivation.hxx,
-	include/vaucanson/algorithms/krat_exp_constant_term.hh,
-	include/vaucanson/algorithms/krat_exp_constant_term.hxx,
-	include/vaucanson/algorithms/krat_exp_derivation.hxx,
-	include/vaucanson/algorithms/krat_exp_cderivation.hxx,
-	include/vaucanson/algorithms/krat_exp_realtime.hxx,
-	include/vaucanson/algorithms/krat_exp_linearize.hxx,
-	include/vaucanson/algorithms/krat_exp_linearize.hh,
-	include/vaucanson/algorithms/forward_closure.hxx,
-	include/vaucanson/algorithms/backward_closure.hxx,
-	include/vaucanson/algorithms/forward_realtime.hxx,
-	include/vaucanson/algorithms/backward_realtime.hxx,
-	include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
-	include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx,
-	include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh,
-	include/vaucanson/algorithms/internal/partial_rat_exp.hxx,
-	include/vaucanson/algorithms/internal/partial_rat_exp.hh,
-	include/vaucanson/algorithms/finite_support_conversion.hxx,
-	include/vaucanson/tools/usual_macros.hh,
-	src/tests/automata/algos/compute_test.hh,
-	src/tests/automata/algos/elimination_test.hh,
-	src/tests/automata/algos/glushkov_test.hh,
-	src/tests/automata/algos/thompson_test.hh,
-	src/demos/fsm/generate_toolbox.sh,
-	src/demos/samples/algorithms/derivatives_automaton.cc,
-	src/demos/vgrep/vgrep.cc,
-	src/demos/vaucanswig/README,
-	src/demos/vaucanswig/meta/vaucanswig_context.i,
-	src/demos/vaucanswig/meta/automaton.hh,
-	vauc/vcore/find_path.cc,
-	vauc/vcore/find_cost.cc: Rename weight to semiring_elt.
-
-")
-(Checkin-Time "Mon, 21 Jul 2003 19:04:32 +0200")
-(Checkin-Login clavei_t)
+	* bootstrap.sh: Add ability to specify autoreconf command.
+	* src/tests/sanity/generate_files.sh: Correct a sed command.
+	* src/demos/vaucanswig/expand.sh: Replace some echo commands.")
+(Checkin-Time "Tue, 22 Jul 2003 16:23:55 +0200")
+(Checkin-Login fosse_l)
 (Populate-Ignore ("~$"
 		  ".#"
 		  "\\.#"
@@ -166,7 +91,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.26 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.27 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -178,7 +103,7 @@
   (Makefile.am (vaucanson/48_Makefile.a 1.16 600))
   (README (vaucanson/f/48_README 1.8 600))
   (THANKS (vaucanson/f/36_THANKS 1.7 600))
-  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.9 700))
+  (bootstrap.sh (vaucanson/h/45_bootstrap. 1.10 700))
   (configure.ac (vaucanson/47_configure. 1.6.1.36 600))
   (prj (vaucanson.prj) :symlink)
 
@@ -194,7 +119,7 @@
   (src/tests/check/tester.hh (vaucanson/b/2_tests_stuf 1.14 600))
   (src/tests/check/defs.in (vaucanson/g/25_defs.in 1.5 600))
   (src/tests/check/unique.cc (vaucanson/p/49_unique.cc 1.2 600))
-  (src/tests/sanity/generate_files.sh (vaucanson/r/29_generate_f 1.4 700))
+  (src/tests/sanity/generate_files.sh (vaucanson/r/29_generate_f 1.5 700))
   (src/tests/bin/generate-test-suite.sh (vaucanson/h/41_generate-t 1.7 700))
 
   (doc/Makefile.am (vaucanson/g/49_Makefile.a 1.3 600))
@@ -594,7 +519,7 @@
   (src/demos/vgrep/vgrep.cc (vaucanson/i/26_vgrep.cc 1.10 600))
 
   (src/demos/vaucanswig/README (vaucanson/r/22_README 1.4 600))
-  (src/demos/vaucanswig/expand.sh (vaucanson/r/7_expand.sh 1.7 700))
+  (src/demos/vaucanswig/expand.sh (vaucanson/r/7_expand.sh 1.8 700))
   (src/demos/vaucanswig/Makefile.am (vaucanson/r/8_Makefile.a 1.1 600))
   (src/demos/vaucanswig/meta/context.hh (vaucanson/r/9_context.hh 1.6 600))
   (src/demos/vaucanswig/meta/Makefile.am (vaucanson/r/10_Makefile.a 1.4 600))

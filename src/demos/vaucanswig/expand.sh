@@ -186,23 +186,23 @@ EOF
 
 dump_python()
 {
-    echo -n "pyexec_LTLIBRARIES ="
+    printf "pyexec_LTLIBRARIES ="
     ilist=0
     for mod in $MODULES; do
       if [ `expr $ilist % 4` = 0 ]; then
-         echo " \\"; echo -ne "\t"
+         echo " \\"; printf "\t"
       fi
-      echo -n " libvs_$mod.la" 
+      printf " libvs_$mod.la" 
       ilist=`expr $ilist + 1`
     done
     echo; echo
-    echo -n "python_PYTHON ="
+    printf "python_PYTHON ="
     ilist=0
     for mod in $MODULES; do
       if [ `expr $ilist % 4` = 0 ]; then 
-         echo " \\"; echo -ne "\t" 
+         echo " \\"; printf "\t" 
       fi 
-      echo -n " vaucanswig_${mod}.py"
+      printf " vaucanswig_${mod}.py"
       ilist=`expr $ilist + 1` 
     done
     echo; echo
@@ -212,9 +212,9 @@ dump_python()
         echo "libvs_core_la_LIBADD = ../meta/libvv.la -lswigpy"
       else
         if test -r "$VAUCANSWIG/src/$mod.deps"; then
-           echo -n "libvs_${mod}_la_LIBADD ="
+           printf "libvs_${mod}_la_LIBADD ="
            for dep in `cat "$VAUCANSWIG/src/$mod.deps"`; do
-              echo -n " libvs_${dep}.la" 
+              printf " libvs_${dep}.la" 
            done
            echo
         else
@@ -231,18 +231,18 @@ dump_python()
          sdir=meta
       fi
       echo "vaucanswig_${mod}_wrap.cxx vaucanswig_${mod}.py: \$(srcdir)/../$sdir/vaucanswig_${mod}.i"
-      echo -e "\t\$(SWIG) -c -c++ -python -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i"
+      printf "\t\$(SWIG) -c -c++ -python -I\$(srcdir)/../src -I\$(srcdir)/../meta \$(CPPFLAGS) -o vaucanswig_${mod}_wrap.cxx \$(srcdir)/../$sdir/vaucanswig_${mod}.i\n"
       echo
     done
 
     echo "install-exec-hook:"
     for mod in $MODULES; do
-      echo -e "\tcd \$(DESTDIR)\$(pyexecdir) && rm -f _vaucanswig_$mod.so && \$(LN_S) libvs_$mod.so _vaucanswig_$mod.so"
+      printf "\tcd \$(DESTDIR)\$(pyexecdir) && rm -f _vaucanswig_$mod.so && \$(LN_S) libvs_$mod.so _vaucanswig_$mod.so\n"
     done
     echo
     echo "uninstall-hook:"
     for mod in $MODULES; do
-      echo -e "\trm -f \$(DESTDIR)\$(pyexecdir)/_vaucanswig_$mod.so"
+      printf "\trm -f \$(DESTDIR)\$(pyexecdir)/_vaucanswig_$mod.so\n"
     done
     echo  
 }
@@ -260,15 +260,15 @@ EOF
 }
 
 dump_src() {
-    echo -n "EXTRA_DIST ="
+    printf "EXTRA_DIST ="
     ilist=0
     for mod in $MODULES; do
       if [ -r "$VAUCANSWIG/src/vaucanswig_${mod}.i" ]; then 
          if [ `expr $ilist % 4` = 0 ]; then
 	    echo " \\"
-            echo -ne "\t"
+            printf "\t"
 	 fi
-	 echo -n " vaucanswig_${mod}.i"
+	 printf " vaucanswig_${mod}.i"
 	 ilist=`expr $ilist + 1`
       fi
     done

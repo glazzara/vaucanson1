@@ -19,7 +19,9 @@ AM_CXXFLAGS = \$(CXXFLAGS_STRICT)
 check_PROGRAMS = \\
 EOF
 awk '{ gsub(/[.\/]/, "_"); print "\t"$0" \\" }' files.tmp | \
-  sed '$s/\(.*\) \\/\1\n/' >> Makefile.am
+  sed '$s/\(.*\) \\/\1/' >> Makefile.am
+
+echo >> Makefile.am
 
 # Set test sources and CPPFLAGS.
 awk '
