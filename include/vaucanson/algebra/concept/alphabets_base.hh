@@ -142,7 +142,10 @@ namespace vcsn {
   template<typename Self, typename St, typename T>
   St& op_rout(const AlphabetsBase<Self>& s, St& st, const T& a);
   
-  // FIXME : add equality between two alphabets !
+  // FIXME: add equality between two alphabets !
+
+  // FIXME: add the op_choose for Element<AlphabetsBase, T>
+  // FIXME: it means that you can generate a random alphabet.
 
 } // vcsn
 

@@ -1,20 +1,23 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 141)
-(Parent-Version vaucanson 0 140)
-(Version-Log "2002-11-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
-(0.141)
-	* include/vaucanson/algorithms/krat_exp_derivation.hh:
-		(word_derivate): New.
-	* include/vaucanson/algorithms/krat_exp_derivation.hxx:
-		(word_derivate): New.
-	* README: Aesthetic adjustment.
-	* src/tests/algebra/series/krat_exp_derivation_test.hh:
-		(krat_exp_derivation_test): Test word_derivate.
+(Project-Version vaucanson 0 142)
+(Parent-Version vaucanson 0 141)
+(Version-Log "
+2002-12-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.142)
+	* include/vaucanson/algebra/concept/alphabets_base.hh: Minor.
+	* include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx: idem.
+	* include/vaucanson/algorithms/krat_exp_derivation.hh: Minor.
+	* src/tests/defs.in: Adjust CXXFLAGS.
+	* src/tests/bin/automata-test-suite.sh: Removed.
+	* src/tests/tests-suites/usual_automaton_t.includes: Remove.
+	* src/tests/tests-suites/usual_automaton_t.defs: New.	
+	* src/tests/bin/generate-test-suite.sh: New.
+	* src/tests/tests-suites/usual_automaton_t/*: Remove.
 ")
 (New-Version-Log "")
-(Checkin-Time "Tue, 26 Nov 2002 10:25:01 +0100")
+(Checkin-Time "Fri, 06 Dec 2002 16:40:22 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -98,7 +101,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.82 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.83 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.9 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
@@ -108,7 +111,7 @@
   (HEADER (vaucanson/f/35_HEADER 1.3 600))
   (include () :directory)
   (include/Makefile.am (vaucanson/11_Makefile.a 1.14 600))
-  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.12 600))
+  (include/vaucanson/algebra/concept/alphabets_base.hh (vaucanson/33_alphabets_ 1.13 600))
   (include/vaucanson/algebra/concept/alphabets_base.hxx (vaucanson/32_alphabets_ 1.12 600))
   (include/vaucanson/algebra/concept/concepts.hh (vaucanson/31_concepts.h 1.4 600))
   (include/vaucanson/algebra/concept/concepts.hxx (vaucanson/30_concepts.h 1.4 600))
@@ -127,7 +130,7 @@
   (include/vaucanson/algebra/concrete/alphabets/alphabets.hh (vaucanson/29_alphabets. 1.8 600))
   (include/vaucanson/algebra/concrete/alphabets/predefs.hh (vaucanson/g/47_predefs.hh 1.3 600))
   (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hh (vaucanson/28_set_alphab 1.8 600))
-  (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.5 600))
+  (include/vaucanson/algebra/concrete/alphabets/set_alphabet.hxx (vaucanson/27_set_alphab 1.6 600))
   (include/vaucanson/algebra/concrete/free_monoid/predefs.hh (vaucanson/g/46_predefs.hh 1.3 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hh (vaucanson/c/5_str_words. 1.9 600))
   (include/vaucanson/algebra/concrete/free_monoid/str_words.hxx (vaucanson/c/4_str_words. 1.7 600))
@@ -193,7 +196,7 @@
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.1 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.3 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.4 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.5 600))
   (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.3 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/h/23_krat_exp_l 1.3 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/h/24_krat_exp_l 1.2 600))
@@ -398,7 +401,7 @@
   (src/tests/automata/implementation_check/init_final_test.hh (vaucanson/f/12_init_final 1.4 600))
   (src/tests/automata/implementation_check/Makefile.am (vaucanson/d/20_Makefile.a 1.12 600))
   (src/tests/automata/Makefile.am (vaucanson/d/21_Makefile.a 1.2 600))
-  (src/tests/bin/automata-test-suite.sh (vaucanson/f/34_automata-t 1.6 700))
+  
   (src/tests/bin/Makefile.am (vaucanson/f/49_Makefile.a 1.1 600))
   (src/tests/check/Makefile.am (vaucanson/b/7_Makefile.a 1.3 600))
   (src/tests/check/Makefile.check (vaucanson/b/6_Makefile.c 1.1 600))
@@ -407,7 +410,7 @@
   (src/tests/check/tests_stuff.cc (vaucanson/b/3_tests_stuf 1.9 600))
   (src/tests/check/tests_stuff.hh (vaucanson/b/2_tests_stuf 1.10 600))
   ; (src/tests/defs ())
-  (src/tests/defs.in (vaucanson/g/25_defs.in 1.1 600))
+  (src/tests/defs.in (vaucanson/g/25_defs.in 1.2 600))
   (src/tests/dev/isomorph-test.cc (vaucanson/g/31_isomorph-t 1.1 600))
   (src/tests/dev/Makefile.am (vaucanson/g/32_Makefile.a 1.1 600))
   ; (src/tests/fundamental/basic_type.hh ())
@@ -424,38 +427,78 @@
   ; (src/tests/tests_stuff.hh ())
   (src/tests/tests-suites/Makefile.am (vaucanson/f/16_Makefile.a 1.3 600))
   (src/tests/tests-suites/README (vaucanson/g/42_README 1.1 600))
-  (src/tests/tests-suites/usual_automaton_t/add_edge-test.cc (vaucanson/f/45_add_edge-t 1.6 600))
+  
   ; (src/tests/tests-suites/usual_automaton_t/add_edge-test () :no-keywords)
-  (src/tests/tests-suites/usual_automaton_t/add_state-test.cc (vaucanson/f/43_add_state- 1.6 600))
+  
   ; (src/tests/tests-suites/usual_automaton_t/add_state-test () :no-keywords)
-  (src/tests/tests-suites/usual_automaton_t/closure-test.cc (vaucanson/f/31_closure-te 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/coherence_state_edge-test.cc (vaucanson/f/44_coherence_ 1.7 600))
+  
+  
   ; (src/tests/tests-suites/usual_automaton_t/coherence_state_edge-test () :no-keywords)
-  (src/tests/tests-suites/usual_automaton_t/complete-test.cc (vaucanson/f/32_complete-t 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/compute-test.cc (vaucanson/f/33_compute-te 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/concat-test.cc (vaucanson/h/7_concat-tes 1.1 600))
-  (src/tests/tests-suites/usual_automaton_t/determinist-test.cc (vaucanson/f/29_determinis 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/elimination-test.cc (vaucanson/f/23_eliminatio 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/extract-test.cc (vaucanson/f/22_extract-te 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/generalized-test.cc (vaucanson/f/21_generalize 1.7 600))
+  
+  
+  
+  
+  
+  
+  
   ; (src/tests/tests-suites/usual_automaton_t/global_consistance-test.cc ())
   ; (src/tests/tests-suites/usual_automaton_t/global_consistance-test () :no-keywords)
-  (src/tests/tests-suites/usual_automaton_t/global_consistency-test.cc (vaucanson/g/43_global_con 1.4 600))
-  (src/tests/tests-suites/usual_automaton_t/glushkov-test.cc (vaucanson/f/25_glushkov-t 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t.includes (vaucanson/f/17_usual_auto 1.1 600))
-  (src/tests/tests-suites/usual_automaton_t/init_final-test.cc (vaucanson/f/46_init_final 1.6 600))
+  
+  
+  
+  
   ; (src/tests/tests-suites/usual_automaton_t/init_final-test () :no-keywords)
   (src/tests/tests-suites/usual_automaton_t/Makefile.am (vaucanson/f/18_Makefile.a 1.5 600))
-  (src/tests/tests-suites/usual_automaton_t/minimization-test.cc (vaucanson/f/19_minimizati 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/normalize-test.cc (vaucanson/f/26_normalize- 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/product-test.cc (vaucanson/f/20_product-te 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/reachable-test.cc (vaucanson/f/24_reachable- 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/realtime-test.cc (vaucanson/f/28_realtime-t 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/thompson-test.cc (vaucanson/f/30_thompson-t 1.7 600))
-  (src/tests/tests-suites/usual_automaton_t/union-test.cc (vaucanson/f/27_union-test 1.7 600))
+  
+  
+  
+  
+  
+  
+  
   (THANKS (vaucanson/f/36_THANKS 1.4 600))
   (tools/scandefs.pl (vaucanson/g/5_scandefs.p 1.2 700))
   (prj (vaucanson.prj) :symlink)
+
+;; Files deleted by depopulate at Fri, 06 Dec 2002 16:01:01 +0100,
+;; from version 0.141(w), by yann:
+
+  ; (src/tests/bin/automata-test-suite.sh ())
+
+;; Files deleted by depopulate at Fri, 06 Dec 2002 16:14:24 +0100,
+;; from version 0.141(w), by yann:
+
+  ; (src/tests/tests-suites/usual_automaton_t.includes ())
+
+;; Files added by populate at Fri, 06 Dec 2002 16:14:35 +0100,
+;; to version 0.141(w), by yann:
+
+  (src/tests/tests-suites/usual_automaton_t.defs (vaucanson/h/29_usual_auto 1.1 600))
+
+;; Files deleted by depopulate at Fri, 06 Dec 2002 16:37:43 +0100,
+;; from version 0.141(w), by yann:
+
+  ; (src/tests/tests-suites/usual_automaton_t/add_edge-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/add_state-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/closure-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/coherence_state_edge-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/complete-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/compute-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/concat-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/determinist-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/elimination-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/extract-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/generalized-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/global_consistency-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/glushkov-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/init_final-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/minimization-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/normalize-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/product-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/reachable-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/realtime-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/thompson-test.cc ())
+  ; (src/tests/tests-suites/usual_automaton_t/union-test.cc ())
 )
 (Merge-Parents)
 (New-Merge-Parents)

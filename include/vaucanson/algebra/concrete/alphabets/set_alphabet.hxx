@@ -18,8 +18,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-#ifndef ALGEBRA_SET_ALPHABET_HXX
-# define ALGEBRA_SET_ALPHABET_HXX
+#ifndef VCSN_ALGEBRA_SET_ALPHABET_HXX
+# define VCSN_ALGEBRA_SET_ALPHABET_HXX
 
 # include <vaucanson/algebra/concrete/alphabets/set_alphabet.hh>
 
@@ -51,4 +51,4 @@ namespace vcsn
 
 } // vcsn
 
-#endif // ALGEBRA_SET_ALPHABET_HXX
+#endif // VCSN_ALGEBRA_SET_ALPHABET_HXX

@@ -27,13 +27,13 @@ namespace vcsn {
 
   /*! \addtogroup algorithms */  /* @{ */
 
-  //! Returns the derivation of the krat expression w.r.t to a letter.
+  //! The antimirov derivative of the krat expression w.r.t to a letter.
   template <class Series, class T, class Letter>
   std::pair<Element<Series, T>, bool>
   derivate(const Element<Series, T>& exp, 
 	   Letter a);
 
-  //! Returns the derivation of the krat expression w.r.t to a letter.
+  //! The antimirov derivative of the krat expression w.r.t to a word.
   template <class Series, class T, class Word>
   std::pair<Element<Series, T>, bool>
   word_derivate(const Element<Series, T>& exp, 

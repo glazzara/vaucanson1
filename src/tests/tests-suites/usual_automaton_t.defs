@@ -1,0 +1,2 @@
+#include <vaucanson/tools/usual.hh>
+typedef vcsn::tools::usual_automaton_t automaton_t;
