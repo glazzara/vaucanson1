@@ -1,7 +1,7 @@
 // intrinsics_convert.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -31,8 +31,11 @@
 
 
 namespace vcsn {
-  vcsn_test::T op_convert(const vcsn_test::S& s, SELECTOR(vcsn_test::T), 
-			  const int& other)
+  template <class S>
+  vcsn_test::T
+  op_convert(const S& s,
+	     SELECTOR(vcsn_test::T),
+	     const int& other)
   {
     if (&s)
       tag += "set";
@@ -46,12 +49,12 @@ namespace vcsn {
 void test_convert1()
 {
   TEST_GROUP("simple conversions");
-  
-  vcsn::Element<vcsn_test::S, int> e;
+
+  vcsn::Element<vcsn_test::eS, int> e;
   tag = "";
-  vcsn::Element<vcsn_test::S, vcsn_test::T> e2(e);
+  vcsn::Element<vcsn_test::eS, vcsn_test::T> e2(e);
   TEST_ASSERT(tag == "convert1", "delegation to convert with no s. e.");
-  e.bound(); e2.bound(); // use var
+  e = e; e2 = e2; // use var
 
   vcsn::Element<vcsn_test::eS, float> ee;
   ee.value() = 3.14;
@@ -59,36 +62,37 @@ void test_convert1()
   vcsn::Element<vcsn_test::eS, vcsn_test::eT> ee2(ee);
   TEST_ASSERT(tag.substr(0,4) == (std::string("eTc") + typeid(float).name()).substr(0,4),
 	      "delegation to intrinsics convert");
-  ee2.bound(); // use var
+  ee2 = ee2; // use var
 
-  vcsn_test::S s;
-  e.attach(s);
+  vcsn_test::S	s;
+  vcsn::Element<vcsn_test::S, int> u (s);
   tag = "";
-  t e3(e);
+  t e3(u);
   TEST_ASSERT(tag == "setconvert1", "delegation to convert when c. c. with s. e.");
-  e3.bound(); // use var
+  e3 = e3; u = u; // use var
 
   tag = "";
   t e4(s, 123);
   TEST_ASSERT(tag == "setconvert1", "delegation to convert when explicit construction with s. e.");
-  e4.bound(); // use var
+  e4 = e4; // use var
 
   tag = "";
   vcsn_test::eS es;
   et ee4(es, 123);
-  TEST_ASSERT(tag.substr(0,4) == (std::string("eTc") + typeid(int).name()).substr(0,4), 
+  TEST_ASSERT(tag.substr(0,4) == (std::string("eTc") + typeid(int).name()).substr(0,4),
 	      "delegation to intrinsics convert when explicit construction with s. e.");
-  ee4.bound(); // use var
+  ee4 = ee4; // use var
 }
 
 namespace vcsn
 {
-  vcsn_test::T op_convert(SELECTOR(vcsn_test::S),
+  template <class S>
+  vcsn_test::T op_convert(const S& s1,
 			  SELECTOR(vcsn_test::T),
-			  const vcsn_test::Sna& s,
+			  const vcsn_test::Sna&,
 			  const int& v)
   {
-    if (&s)
+    if (&s1)
       tag += "set";
     tag += "convert2";
     vcsn_test::T t;
@@ -103,31 +107,26 @@ void test_convert2()
 
   vcsn::Element<vcsn_test::Sna, int> e;
   tag = "";
-  t e2(e);
-  TEST_ASSERT(tag == "convert2", 
+  vcsn::Element<vcsn_test::eS, vcsn_test::T> e2(e);
+  TEST_ASSERT(tag == "convert2",
 	      "delegation to convert on foreign c. c. with no s. e.");
-  e.bound(); e2.bound(); // use var
-
-  vcsn_test::Sna s;
-  e.attach(s);
-  tag = "";
-  t e3(e);
-  TEST_ASSERT(tag == "setconvert2", 
-	      "delegation to convert on foreign c. c. with s. e.");
-  e3.bound(); // use var
+  e = e; e2 = e2; // use var
 
   vcsn_test::S s1;
   tag = "";
   t e4(s1, e);
   TEST_ASSERT(tag == "setconvert2",
 	      "delegation to convert on explicit foreign element c. c.");
-  e4.bound(); // use var
+  e4 = e4; // use var
 }
 
 namespace vcsn
 {
-  vcsn_test::T op_convert(const vcsn_test::S& s, SELECTOR(vcsn_test::T),
-			  const vcsn_test::T& other)
+  template <class S>
+  vcsn_test::T
+  op_convert(const S& s,
+	     SELECTOR(vcsn_test::T),
+	     const vcsn_test::T& other)
   {
     if (&s)
       tag += "set";
@@ -141,25 +140,25 @@ void test_convertv()
   TEST_GROUP("delegation for construction from value");
 
   vcsn_test::T v;
-  
+
   tag = "";
-  t e(v);
+  vcsn::Element<vcsn_test::eS, vcsn_test::T> e(v);
   TEST_ASSERT(tag == "convert3",
 	      "delegation to convert on construction from value");
-  e.bound(); // use var
-  
+  e = e; // use var
+
   tag = "";
-  t e2(123);
+  vcsn::Element<vcsn_test::eS, vcsn_test::T> e2(123);
   TEST_ASSERT(tag == "convert1",
 	      "delegation to convert on construction from foreign value");
-  e2.bound(); // use var
+  e2 = e2; // use var
 
   vcsn_test::S s;
   tag = "";
   t e3(s, vcsn_test::T());
   TEST_ASSERT(tag == "setconvert3",
 	      "delegation to convert on explicit construction from value");
-  e3.bound(); // use var
+  e3 = e3; // use var
 }
 
 int main()

@@ -46,7 +46,7 @@ namespace vcsn {
     set_(),
     value_(op_default(SELECT(S), SELECT(T)))
   {
-    static_assertion_(not dynamic_traits<S>::ret, dynamic_set_not_initialized);
+    static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
   }
 
   /*--------------------------.
@@ -77,7 +77,7 @@ namespace vcsn {
       value_(op_convert(SELECT(S), SELECT(T),
 			other.set(), other.value()))
   {
-    static_assertion_(not dynamic_traits<S>::ret, dynamic_set_not_initialized);
+    static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
   }
 
   /*-------------------------.
@@ -90,7 +90,7 @@ namespace vcsn {
     : set_(),
       value_(op_convert(SELECT(S), SELECT(T), other))
   {
-    static_assertion_(not dynamic_traits<S>::ret, dynamic_set_not_initialized);
+    static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
   }
 
   template <class S, class T>
@@ -100,7 +100,7 @@ namespace vcsn {
     : set_(),
       value_(op_convert(SELECT(S), SELECT(T), other))
   {
-    static_assertion_(not dynamic_traits<S>::ret, dynamic_set_not_initialized);
+    static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
   }
 
   /*--------------------------------------.
@@ -146,8 +146,6 @@ namespace vcsn {
   Element<S,T>&
   Element<S,T>::operator=(const Element& other)
   {
-    if (!set_.bound())
-      set_.assign(other.set_);
     op_assign(set(), other.set(), value_, other.value());
     return *this;
   }
@@ -158,8 +156,6 @@ namespace vcsn {
   Element<S,T>&
   Element<S,T>::operator=(const Element<S, U>& other)
   {
-    if (!set_.bound())
-      set_.assign(other.set());
     op_assign(set(), other.set(), value_, other.value());
     return *this;
   }
@@ -169,7 +165,6 @@ namespace vcsn {
   inline
   Element<S,T>& Element<S,T>::operator=(const Element<OtherS, U>& other)
   {
-    recommendation(set_.bound());
     op_assign(set(), other.set(), value_, other.value());
     return *this;
   }
@@ -179,7 +174,6 @@ namespace vcsn {
   inline
   Element<S,T>& Element<S,T>::operator=(const U& other)
   {
-    recommendation(set_.bound());
     op_assign(set(), value(), other);
     return *this;
   }
@@ -202,13 +196,6 @@ namespace vcsn {
   Element<S,T>::set() const
   {
     return set_.get();
-  }
-
-  template <class S, class T>
-  inline
-  bool Element<S,T>::bound() const
-  {
-    return set_.bound();
   }
 
   template <class S, class T>

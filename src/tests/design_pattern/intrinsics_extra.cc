@@ -1,7 +1,7 @@
 // intrinsics_extra.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -34,14 +34,14 @@ void test_extra()
 {
   TEST_GROUP("additional services via MetaElement");
 
-  t e;
+  vcsn::Element<vcsn_test::eS, vcsn_test::T> e1;
 
-  tag = ""; e.foo();
+  tag = ""; e1.foo();
   TEST_ASSERT(tag == "foo", "call delegation operator without s. e.");
 
-  vcsn_test::S s;
-  e.attach(s);
-  tag = ""; e.foo();
+  vcsn_test::S	s;
+  t		e2 (s);
+  tag = ""; e2.foo();
   TEST_ASSERT(tag == "setfoo", "call delegation with s. e.");
 }
 

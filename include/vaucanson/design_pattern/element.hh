@@ -92,10 +92,15 @@ namespace vcsn {
     | Default constructor |
     `--------------------*/
 
-    /** Default constructor.
-     * Note that using this constructor when the structural element is dynamic,
-     * leaves the constructed @c Element instance in an incomplete state,
-     * i.e. not linked to any structural element.
+    /**
+     * Default constructor.
+     *
+     * Note that  it is not possible  to use this  contructor when the
+     * structural element has dynamic  data. If you absolutely need to
+     * do  so,  please  notice  that  it may  be  dangerous,  and  see
+     * utility::Deferrer.
+     *
+     * @see utility::Deferrer
      */
     Element();
 
@@ -110,10 +115,12 @@ namespace vcsn {
     template<typename U>
     Element(const Element<S, U>& other);
 
-    /** Copy constructor from foreign @c Element instances.
-     * Note that using this constructor when the structural element is dynamic,
-     * leaves the constructed @c Element instance in an incomplete state,
-     * i.e. not linked to any structural element.
+    /**
+     * Copy constructor from foreign @c Element instances.
+     *
+     * Note that  it is not possible  to use this  contructor when the
+     * structural  element  has  dynamic   data  since  it  leaves  it
+     * uninitialized.
      */
     template<typename OtherS, typename U>
     Element(const Element<OtherS, U>& other);
@@ -122,12 +129,14 @@ namespace vcsn {
     | Constructors from values |
     `-------------------------*/
 
-    /** @{ */
-    /** Copy constructor from anonymous values.
-     * Note that using this constructor when the structural element is dynamic,
-     * leaves the constructed @c Element instance in an incomplete state,
-     * i.e. not linked to any structural element.
+    /**
+     * Copy constructor from anonymous values.
+     *
+     * Note that  it is not possible  to use this  contructor when the
+     * structural  element  has  dynamic   data  since  it  leaves  it
+     * uninitialized.
      */
+    /** @{ */
     Element(const T& other);
 
     template<typename U>
@@ -138,7 +147,9 @@ namespace vcsn {
     | Constructors from structural elements and values |
     `-------------------------------------------------*/
 
-    /** Default constructor with the structural element specified.
+    /**
+     * Default constructor with the structural element specified.
+     *
      * This constructor invokes the default constructor of the
      * implementation value type.
      */
@@ -183,9 +194,6 @@ namespace vcsn {
     /// Post-construction link to a structural element.
     void	attach(const S& set);
 
-    /// Tell whether the @c Element instance is linked or not.
-    bool	bound() const;
-
     /// Accessor to the value data.
     /** @{ */
     T&		value();
@@ -202,9 +210,8 @@ namespace vcsn {
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-    #include <vaucanson/design_pattern/element.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/design_pattern/element.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_FUNDAMENTAL_ELEMENT_HH

@@ -1,7 +1,7 @@
 // intrinsics_link.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,18 +33,18 @@ void test_link()
 {
   TEST_GROUP("link to s. e.");
 
-  t e1;
-  vcsn_test::S s1;
+  vcsn_test::S	s0;
+  vcsn_test::S	s1;
   s1.s_ = 1;
+  t		e1 (s0);
 
   e1.attach(s1);
-  TEST_ASSERT(e1.bound(), "bound() after attach()");
+  TEST_ASSERT(& e1.set(), "structural element is valid after construction from structure");
   TEST_ASSERT(e1.set() == s1, "attach() propagates the s. e.");
-  
+
   et ee1;
   vcsn_test::eS es1;
   ee1.attach(es1);
-  TEST_ASSERT(ee1.bound(), "bound() after attach() of singleton structure");
   TEST_ASSERT(ee1.set() == es1, "attach() propagates singleton structure");
 
 
@@ -52,29 +52,28 @@ void test_link()
   s2.s_ = 1;
 
   t e2(s2);
-  TEST_ASSERT(e2.bound(), "bound() after construction from structure");
+  TEST_ASSERT(& e2.set(), "structural element is valid after construction from structure");
   TEST_ASSERT(e2.set().s_ == 1, "construction from structure propagates structure");
   TEST_ASSERT(e2.set() == e1.set(), "propagation of equality between structures");
   TEST_ASSERT(& e2.set() == & e1.set(), "equality of references for equal structures");
 
   s2.s_ = 2;
   t e3(s2);
-  TEST_ASSERT(e3.bound(), "bound() after construction from structure");
+  TEST_ASSERT(& e3.set(), "structural element is valid  after construction from structure");
   TEST_ASSERT(e3.set().s_ == 2, "construction from structure propagates structure");
   TEST_ASSERT(e2.set().s_ == 1, "enforced unicity of structures");
   TEST_ASSERT(& e3.set() != & e2.set(), "difference of references for different structures");
 
   t e4(e3);
-  TEST_ASSERT(e4.bound(), "bound() after c. c.");
+  TEST_ASSERT(& e4.set(), "structural element is valid after c. c.");
   TEST_ASSERT(e4.set() == e3.set(), "c. c. propagates structure");
   TEST_ASSERT(& e4.set() == & e3.set(), "c. c. propagates reference");
 
   et ee4(ee1);
-  TEST_ASSERT(ee4.bound(), "bound() after c. c. with singleton structure");
   TEST_ASSERT(ee4.set() == ee1.set(), "c. c. propagates singleton structure");
-  TEST_ASSERT(& ee4.set() == & ee1.set(), 
+  TEST_ASSERT(& ee4.set() == & ee1.set(),
 	      "c. c. propagates reference to singleton structure");
-}  
+}
 
 int main()
 {

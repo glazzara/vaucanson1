@@ -1,7 +1,7 @@
 // intrinsics_ops.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -123,12 +123,8 @@ void test_ops(const vcsn_test::S& s)
   TEST_GROUP(std::string("element arithmetics") + (&s ? " with s.e." : ""));
 
   std::string it = typeid(int).name();
-  t e1;
-  if (&s)
-    e1.attach(s);
-  t e2;
-  if (&s)
-    e2.attach(s);
+  t e1 (s);
+  t e2 (s);
   int v1 = 0; int v2 = 42;
 
   std::string ss2 = (&s ? "s1s2" : "");
@@ -174,7 +170,7 @@ void test_ops(const vcsn_test::S& s)
 
   tag = ""; -e1; TEST_ASSERT(tag == ss1 + "neg", "negation");
   TEST_ASSERT(&(-e1).set() == &e1.set(), "negation preserves s.e.");
-}  
+}
 
 namespace vcsn
 {
@@ -227,17 +223,13 @@ void test_compare(const vcsn_test::S& s)
   TEST_GROUP(std::string("element comparison") + (&s ? " with s.e." : ""));
 
   std::string it = typeid(int).name();
-  t e1;
-  if (&s)
-    e1.attach(s);
-  t e2;
-  if (&s)
-    e2.attach(s);
+  t e1 (s);
+  t e2 (s);
   int v1 = 0; int v2 = 42;
 
   std::string ss2 = (&s ? "s1s2" : "");
   std::string ss1 = (&s ? "s" : "");
-  
+
 #define TEST_OP(Op, Equiv, Label) \
   tag = ""; true == (e1 Op e2); \
   TEST_ASSERT(tag == ss2 + Equiv, "binary " Label); \
@@ -245,7 +237,7 @@ void test_compare(const vcsn_test::S& s)
   TEST_ASSERT(tag == "c" + ss1 + Equiv, "left " Label); \
   tag = ""; true == (e1 Op v2); \
   TEST_ASSERT(tag == "c" + ss1 + Equiv, "right " Label);
-  
+
   TEST_OP(==, "eq", "equality");
   TEST_OP(!=, "eq", "difference");
   TEST_OP(<, "lt", "lower");

@@ -1,3 +1,17 @@
+2004-03-07  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/design_pattern/element.hh,
+	* include/vaucanson/design_pattern/element.hxx: Remove bound(). Update
+	inline documentation. Change the error message in static_assertions.
+	* src/tests/design_pattern/intrinsics_orphanage.cc,
+	* src/tests/design_pattern/intrinsics_ops.cc,
+	* src/tests/design_pattern/intrinsics_link.cc,
+	* src/tests/design_pattern/intrinsics_extra.cc,
+	* src/tests/design_pattern/intrinsics_default.cc,
+	* src/tests/design_pattern/intrinsics_convert.cc,
+	* src/tests/design_pattern/intrinsics_assign.cc,
+	* src/tests/design_pattern/intrinsics.hh: Update accordingly.
+
 2004-03-07  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/semiring/numerical_semiring.hh,

@@ -1,7 +1,7 @@
 // intrinsics_orphanage.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -34,15 +34,13 @@ void test_orphanage()
   TEST_GROUP("construction with no s. e.");
 
   // default instanciation
-  t e;
-  TEST_ASSERT(!e.bound(), "orphan not bound");
+  vcsn::Element<vcsn_test::eS, vcsn_test::T> e;
   TEST_ASSERT(!& e.set(), "orphan has no s. e.");
 
   // default instanciation constructor check
   tag = "";
   et ee;
   TEST_ASSERT(tag.substr(0, 2) == "eT", "orphan value from default constructor");
-  TEST_ASSERT(ee.bound(), "orphan singleton structure already bound");
   TEST_ASSERT(!& ee.set(), "orphan singleton structure has no reference");
 
   // value retrieval
@@ -52,15 +50,13 @@ void test_orphanage()
   TEST_ASSERT(e.value().t_ == 42, "orphan value() returns correct reference");
 
   TEST_GROUP("copy-construction of orphan to const");
-  const t e2(e);
-  TEST_ASSERT(!e2.bound(), "const copy not bound");
+  const vcsn::Element<vcsn_test::eS, vcsn_test::T> e2(e);
   TEST_ASSERT(!& e2.set(), "const copy has no s. e.");
 
   // copy to const
   tag = "";
   const et ee2(ee);
   TEST_ASSERT(tag == "eTc", "orphan value from copy constructor");
-  TEST_ASSERT(ee2.bound(), "orphan singleton structure already set");
   TEST_ASSERT(!& ee2.set(), "orphan singleton structure has no reference");
 
   // const value retrieval

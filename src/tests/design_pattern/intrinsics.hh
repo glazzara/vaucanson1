@@ -1,7 +1,7 @@
 // intrinsics.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -42,7 +42,7 @@ namespace vcsn_test {
 
 
   // empty singleton structure
-  struct eS : vcsn::Structure<eS> { }; 
+  struct eS : vcsn::Structure<eS> { };
 
   // empty implementation type equipped with operator identification
   struct eT {
@@ -97,6 +97,8 @@ namespace vcsn {
   struct MetaElement<vcsn_test::eS, T>
     : MetaElement<Structure<vcsn_test::eS>, T>
   {
+    void foo() const
+    { op_foo(set(), value()); }
   protected:
     MetaElement() : MetaElement<Structure<vcsn_test::eS>, T>() {}
     MetaElement(const MetaElement& other) : MetaElement<Structure<vcsn_test::eS>, T>(other) {}
@@ -115,11 +117,12 @@ namespace vcsn {
   struct dynamic_traits<vcsn_test::Sna>
     : dynamic_traits<Structure<vcsn_test::Sna> >
   {
-    static const bool ret = true;
+    static const bool ret = false;
   };
 
-  // additional operator provided by structure S on type T
-  void op_foo(const vcsn_test::S& s, const vcsn_test::T& )
+  // additional operator provided by any structure on type T
+  template <class S>
+  void op_foo(const S& s, const vcsn_test::T& )
   {
     if (&s)
       tag += "set";
