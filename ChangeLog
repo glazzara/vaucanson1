@@ -1,5 +1,9 @@
 2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* doc/beginner/Makefile.am: Distribute .tex.
+
+2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* configure.ac (doc/beginner): New Makefile.
 	* src/tests/sanity/generate_files.sh: Minor fix.
 	* doc/Makefile.am (beginner): New subdir.

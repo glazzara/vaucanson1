@@ -1,34 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 446)
-(Parent-Version vaucanson 0 445)
+(Project-Version vaucanson 0 447)
+(Parent-Version vaucanson 0 446)
 (New-Version-Log "")
 
 (Version-Log "
 2003-10-17  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* configure.ac (doc/beginner): New Makefile.
-	* src/tests/sanity/generate_files.sh: Minor fix.
-	* doc/Makefile.am (beginner): New subdir.
-	* include/Makefile.am: Distribute new files.
-	* include/vaucanson/tools/usual_io.hxx: Fix typo.
-	* include/vaucanson/vaucanson_z_max_plus.hxx: New.
-	* include/vaucanson/vaucanson_z_max_plus_automaton.hxx: Likewise.
-	* include/vaucanson/vaucanson_z_max_plus_automaton.hh: Likewise.
-	* include/vaucanson/vaucanson_z_automaton.hxx: Likewise.
-	* include/vaucanson/vaucanson_z_automaton.hh: Likewise.
-	* include/vaucanson/vaucanson_r_automaton.hxx: Likewise.
-	* include/vaucanson/vaucanson_r_automaton.hh: Likewise.
-	* include/vaucanson/standard_algorithms.hh: Likewise.
-	* doc/beginner/help.tex: Likewise.
-	* doc/beginner/Makefile.am: Likewise.
-	* doc/beginner/macros.tex: Likewise.
-	* doc/beginner/packages.tex: Likewise.
-
-
+	* doc/beginner/Makefile.am: Distribute .tex.
 ")
-(Checkin-Time "Fri, 17 Oct 2003 21:43:36 +0200")
+(Checkin-Time "Fri, 17 Oct 2003 22:16:27 +0200")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -111,7 +93,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.79 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.80 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -876,7 +858,7 @@
 ;; Files added by populate at Fri, 17 Oct 2003 21:38:14 +0200,
 ;; to version 0.445(w), by yann:
 
-  (doc/beginner/Makefile.am (vaucanson/s/12_Makefile.a 1.1 600))
+  (doc/beginner/Makefile.am (vaucanson/s/12_Makefile.a 1.2 600))
 
 ;; Files added by populate at Fri, 17 Oct 2003 21:38:21 +0200,
 ;; to version 0.445(w), by yann:
