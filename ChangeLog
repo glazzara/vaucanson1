@@ -1,3 +1,7 @@
+2004-07-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/automata/algos/Makefile.am: Add missing file.
+
 2004-07-12  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_ops.hh,

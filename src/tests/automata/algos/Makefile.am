@@ -10,6 +10,7 @@ EXTRA_DIST = 					\
 	closure_test.hh				\
 	thompson_test.hh			\
 	product_test.hh				\
+	product_regression_test.hh		\
 	glushkov_test.hh			\
 	in_concat_test.hh			\
 	determinist_test.hh			\
