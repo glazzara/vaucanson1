@@ -8,7 +8,7 @@ AC_PREREQ([2.54])
 AC_INIT([vaucanson], [0.3.0], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config/vcsn.m4])
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AM_INIT_AUTOMAKE([1.7 no-define foreign dist-bzip2])
 AM_CONFIG_HEADER([config.h:config.hin])
 
 # Some C and C++ code used.
@@ -91,14 +91,14 @@ AC_CONFIG_FILES([
         doc/doc.doxy
 	include/Makefile])
 
-VCSN_TESTS([usual_automaton_t])
-VCSN_TESTS([algebra_series_krat])
-VCSN_TESTS([algebra_series_krat_derivation])
-VCSN_TESTS([algebra_series_misc])
-VCSN_TESTS([algebra_numerical_semiring])
-VCSN_TESTS([algebra_set_alphabet])
-VCSN_TESTS([algebra_string_free_monoid])
-VCSN_TESTS([algebra_tropical_max_semiring])
+dnl VCSN_TESTS([usual_automaton_t])
+dnl VCSN_TESTS([algebra_series_krat])
+dnl VCSN_TESTS([algebra_series_krat_derivation])
+dnl VCSN_TESTS([algebra_series_misc])
+dnl VCSN_TESTS([algebra_numerical_semiring])
+dnl VCSN_TESTS([algebra_set_alphabet])
+dnl VCSN_TESTS([algebra_string_free_monoid])
+dnl VCSN_TESTS([algebra_tropical_max_semiring])
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 

@@ -1,5 +1,11 @@
 2003-07-09  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* Makefile.am (AUTOMAKE_OPTIONS): Removed.
+	* configure.ac: Add options for Automake. Temporarily disable
+	testsuites.
+
+2003-07-09  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* config/vcsn.m4 (VCSN_TESTS): Fix subdirectory existence test.
 
 2003-07-09  Thomas Claveirole  <clavei_t@lrde.epita.fr>
