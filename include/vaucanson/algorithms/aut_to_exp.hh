@@ -66,7 +66,7 @@ namespace vcsn {
    * @see generalized()
    */
   template<typename A, typename T>
-  typename Element<A, T>::series_elt_t
+  typename Element<A, T>::series_set_elt_t
   aut_to_exp(const Element<A, T>& a);
 
   /**
@@ -87,7 +87,7 @@ namespace vcsn {
    * @see generalized()
    */
   template<typename A, typename T, typename Chooser_>
-  typename Element<A, T>::series_elt_t
+  typename Element<A, T>::series_set_elt_t
   aut_to_exp(const Element<A, T>& a, const Chooser_& c);
 
   /** @} */

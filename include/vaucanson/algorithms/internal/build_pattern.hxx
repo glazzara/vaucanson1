@@ -112,7 +112,7 @@ namespace vcsn
     void
     IncAutomataConstructor<Self, T_auto, Etiq>::link_to
     (
-      const Etiq& etiq, const series_elt_t& el
+      const Etiq& etiq, const series_set_elt_t& el
     )
     {
       hstate_t	s;
@@ -148,7 +148,7 @@ namespace vcsn
     template <typename Self, typename T_auto, typename Etiq>
     void
     IncAutomataConstructor<Self, T_auto, Etiq>::set_final
-    (const series_elt_t& el)
+    (const series_set_elt_t& el)
     {
       auto_p->set_final(current_state->second.first, el);
     }

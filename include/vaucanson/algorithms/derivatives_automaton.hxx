@@ -94,7 +94,7 @@ namespace vcsn {
 	undefined = true;
       if (c_term.first !=
 	  e.exp_structure().semiring().zero(SELECT(semiring_elt_value_t)))
-	set_final(series_elt_t (e.exp_structure(), c_term.first));
+	set_final(series_set_elt_t (e.exp_structure(), c_term.first));
 
       // Create links between current state and states corresponding to
       // partial derivatives of current expression
@@ -108,7 +108,7 @@ namespace vcsn {
 	for (exp_list_iterator i = s.first.begin(); i != s.first.end(); ++i)
 	{
 	  PartialExp<S, T> p_exp = *i;
-	  series_elt_t s_elt (e.exp_structure(),
+	  series_set_elt_t s_elt (e.exp_structure(),
 			      monoid_elt_t(e.exp_structure().monoid(), *a));
 	  s_elt = p_exp.weight() * s_elt;
 	  p_exp.weight() =

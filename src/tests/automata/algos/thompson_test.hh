@@ -56,9 +56,9 @@
     int tr_X = 0;							\
     for_each_edge(e, au)						\
       {									\
-	if (au.series_of(*e) == series_elt_t (ss, ma))			\
+	if (au.series_of(*e) == series_set_elt_t (ss, ma))			\
 	  ++tr_a;							\
-	else if (au.series_of(*e) == series_elt_t (ss, mb))		\
+	else if (au.series_of(*e) == series_set_elt_t (ss, mb))		\
 	  ++tr_b;							\
 	else if (au.series_of(*e) ==					\
 		 identity_as<series_set_elt_value_t>::of(ss))		\

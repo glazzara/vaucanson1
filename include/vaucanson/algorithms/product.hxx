@@ -155,14 +155,14 @@ namespace vcsn {
     typedef std::set<hedge_t>				delta_ret_t;
     typedef std::map<pair_hstate_t, hstate_t>		visited_t;
     AUTOMATON_TYPES(output_t);
-    typedef typename series_elt_t::support_t		support_t;
+    typedef typename series_set_elt_t::support_t		support_t;
 
     delta_ret_t					edge_lhs;
     delta_ret_t					edge_rhs;
     visited_t					visited;
     std::queue<pair_hstate_t>			to_process;
-    series_elt_t				series_zero =
-      output.structure().series().zero(SELECT(typename series_elt_t::value_t));
+    series_set_elt_t				series_zero =
+      output.structure().series().zero(SELECT(typename series_set_elt_t::value_t));
 
     tag_t lhs_tag = grphx::align<tag_t>(lhs);
     tag_t rhs_tag = grphx::align<tag_t>(rhs);
@@ -207,12 +207,12 @@ namespace vcsn {
 
 	for_all_const_(delta_ret_t, iel, edge_lhs)
 	  {
-	    series_elt_t s     = lhs.series_of(*iel);
+	    series_set_elt_t s     = lhs.series_of(*iel);
 
 	    for_all_const_(delta_ret_t, ier, edge_rhs)
 	      {
-		series_elt_t s_  = rhs.series_of(*ier);
-		series_elt_t s__ = s;
+		series_set_elt_t s_  = rhs.series_of(*ier);
+		series_set_elt_t s__ = s;
 		pair_hstate_t new_pair(lhs.aim_of(*iel), rhs.aim_of(*ier));
 
 		for_all_(support_t, supp, s.supp())

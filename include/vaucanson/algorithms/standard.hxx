@@ -56,13 +56,13 @@ namespace vcsn {
     std::set<hedge_t> edge_oi;
     for_each_initial_state(oi, a)
       {
-	series_elt_t s = a.get_initial(*oi);
+	series_set_elt_t s = a.get_initial(*oi);
 	std::set<hedge_t> edge_oi;
 	edge_oi.clear();
 	a.deltac(edge_oi, *oi, delta_kind::edges());
 	for_all_const_(std::set<hedge_t>, oil, edge_oi)
 	  {
-	    series_elt_t t = s*a.series_of(*oil);
+	    series_set_elt_t t = s*a.series_of(*oil);
 	    a.add_series_edge(i,a.aim_of(*oil),t);
 	  }
       }

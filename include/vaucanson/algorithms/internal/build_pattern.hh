@@ -86,10 +86,10 @@ namespace vcsn {
       IncAutomataConstructor(const series_set_t& series, const Etiq& etiq);
       // Add a link from current state to indicated state
       void	link_to(const Etiq& etiq, const letter_t& l);
-      void	link_to(const Etiq& etiq, const series_elt_t& el);
+      void	link_to(const Etiq& etiq, const series_set_elt_t& el);
       // To make the current state final
       void	set_final();
-      void	set_final(const series_elt_t& el);
+      void	set_final(const series_set_elt_t& el);
     private:
       // Function to apply on each state (call on_state function)
       void on_state_caller(const Etiq& e);

@@ -38,17 +38,19 @@ namespace vcsn {
 
   template<typename S, typename A>
   bool
-  do_is_normalized_transducer(const AutomataBase<S>& trans_set, 
+  do_is_normalized_transducer(const AutomataBase<S>& trans_set,
 			      const A& trans)
   {
     AUTOMATON_TYPES(A);
-    bool is_normalized = false; 
+    bool is_normalized = false;
     for_each_edge(e, trans)
       {
         is_normalized ^= is_letter_support(trans.series_of(*e));
-	for_each_const_(series_elt_t::support_t, i, trans.series_of(*e).supp())
-	  {	
-	    is_normalized ^= is_letter_support(trans.series_of(*e).get(*i)); 
+	for_each_const_(series_set_elt_t::support_t,
+			i,
+			trans.series_of(*e).supp())
+	  {
+	    is_normalized ^= is_letter_support(trans.series_of(*e).get(*i));
 	    if (!is_normalized)
 	      return false;
 	  }

@@ -63,7 +63,7 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  typename MetaElement<TransducerBase<Self>, T>::output_series_elt_t
+  typename MetaElement<TransducerBase<Self>, T>::output_series_set_elt_t
   MetaElement<TransducerBase<Self>, T>::output_of(hedge_t e) const
   {
     return op_output_of(this->structure(), this->value(), e);

@@ -667,7 +667,7 @@ namespace vcsn {
     set_edges_t                                edges_comming, edges_leaving;
     queue<pair_class_letter_t>                 the_queue;
     vector<vector<set_pair_state_semiring_elt_t> >   inverse;
-    series_elt_t                               series_identity    = input.series().zero_;
+    series_set_elt_t                               series_identity    = input.series().zero_;
     semiring_elt_t                             weight_zero       = input.series().semiring().wzero_;
     monoid_elt_t                               monoid_identity   = input.series().monoid().empty_;
     const alphabet_t&	                       alphabet(input.series().monoid().alphabet());
@@ -847,14 +847,14 @@ namespace vcsn {
     /*----------------
       Form the output
       ----------------*/
-    typedef map<unsigned, series_elt_t> map_class_series_elt_t;
-    map_class_series_elt_t series_of;
+    typedef map<unsigned, series_set_elt_t> map_class_series_set_elt_t;
+    map_class_series_set_elt_t series_of;
 
     for(int i = 0; i < max_partition; i++) // Add states
       {
 	hstate_t p = output.add_state();
 	hstate_t a_state = *classes[i].begin();
-	series_elt_t a_series = series_identity;
+	series_set_elt_t a_series = series_identity;
 
 	for_each_const_(set_states_t, state, classes[i])
 	  if(input.is_initial(*state))
@@ -875,7 +875,7 @@ namespace vcsn {
 	for_each_const_(set_edges_t, e, edges_leaving)
 	    series_of[class_of_state[input.aim_of(*e)]] += input.series_of(*e);
 
-	for_each_const_(map_class_series_elt_t, it, series_of)
+	for_each_const_(map_class_series_set_elt_t, it, series_of)
 	    output.add_series_edge(i, (*it).first, (*it).second);
       }
   }

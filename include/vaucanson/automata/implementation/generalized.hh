@@ -1,7 +1,7 @@
 // generalized.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -52,10 +52,10 @@ namespace vcsn {
     // FIXME: static check on the concept of automaton
     typedef typename Auto_::series_set_t		series_set_t;
     typedef typename series_set_t::monoid_t		monoid_t;
-    typedef typename Auto_::series_elt_t	series_elt_t;
-    typedef typename series_elt_t::monoid_elt_t monoid_elt_t;
-    typedef typename monoid_elt_t::value_t	monoid_elt_value_t;
-    typedef typename series_elt_t::semiring_elt_t     semiring_elt_t;
+    typedef typename Auto_::series_set_elt_t		series_set_elt_t;
+    typedef typename series_set_elt_t::monoid_elt_t	monoid_elt_t;
+    typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
+    typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
 
     typedef vcsn::Element
@@ -73,13 +73,13 @@ namespace vcsn {
   template <class Auto_>
   typename generalized_traits<Auto_>::automaton_t
   generalized(const Auto_& from);
-  
+
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/automata/implementation/generalized.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // VCSN_AUTOMATA_CONCRETE_GENERALIZED_HH

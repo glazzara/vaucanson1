@@ -116,7 +116,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto_t);
     typedef typename std::set<hedge_t>			hedge_set_t;
-    typedef std::map<hstate_t, series_elt_t>	      	sums_t;
+    typedef std::map<hstate_t, series_set_elt_t>	      	sums_t;
 
     typename hedge_set_t::const_iterator		i, j;
     hstate_t					        q;
@@ -129,7 +129,7 @@ namespace vcsn {
 
     while (int(b.states().size()) != num)
       {
-	series_elt_t loop_sum(b.series());
+	series_set_elt_t loop_sum(b.series());
 	sums_t       in_sums, out_sums;
 	typename sums_t::iterator f;
 	q = chooser(b);
@@ -170,14 +170,14 @@ namespace vcsn {
 	for_each_const_(sums_t, in, in_sums)
 	  for_each_const_(sums_t, out, out_sums)
 	  {
-	    series_elt_t res = in->second * loop_sum * out->second;
+	    series_set_elt_t res = in->second * loop_sum * out->second;
 	    b.add_series_edge(in->first, out->first, res);
 	  }
 	b.del_state(q);
       }
 
-    typedef std::map<hstate_t, series_elt_t>   se_map_t;
-    typedef std::pair<hstate_t, series_elt_t>  state_exp_pair_t;
+    typedef std::map<hstate_t, series_set_elt_t>   se_map_t;
+    typedef std::pair<hstate_t, series_set_elt_t>  state_exp_pair_t;
     se_map_t se_m;
 
     // maybe there are more than one edge comming to one final state
@@ -188,7 +188,7 @@ namespace vcsn {
 	typename se_map_t::iterator i = se_m.find(aim);
 	if (i == se_m.end())
 	  se_m.insert(std::make_pair(aim,
-				     series_elt_t (b.structure().series(),
+				     series_set_elt_t (b.structure().series(),
 						   b.label_of(*e))));
 	else
 	  i->second += b.label_of(*e);
@@ -246,7 +246,7 @@ namespace vcsn {
     typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
       state_pair_map_t;
     typedef std::map<hstate_t, hstate_t> state_state_map_t;
-    typedef std::pair<hstate_t, ret_series_elt_t> se_pair_t;
+    typedef std::pair<hstate_t, ret_series_set_elt_t> se_pair_t;
 
     Trans_t tmp_trans(t.structure());
     tmp_trans = extension(a, t);

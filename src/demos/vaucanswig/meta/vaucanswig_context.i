@@ -162,22 +162,22 @@ namespace Kind ##_types
 
   struct Kind ##_series_set_t;
 
-  struct Kind ##_series_elt_t
+  struct Kind ##_series_set_elt_t
   {
-    Kind ##_series_elt_t(const Kind ##_series_elt_t&);
-    Kind ##_series_elt_t(const Kind ##_series_set_t&);
-    Kind ##_series_elt_t(const Kind ##_series_set_t&, const Kind ##_semiring_elt_t&);
-    Kind ##_series_elt_t(const Kind ##_series_set_t&, const Kind ##_monoid_elt_t&);
+    Kind ##_series_set_elt_t(const Kind ##_series_set_elt_t&);
+    Kind ##_series_set_elt_t(const Kind ##_series_set_t&);
+    Kind ##_series_set_elt_t(const Kind ##_series_set_t&, const Kind ##_semiring_elt_t&);
+    Kind ##_series_set_elt_t(const Kind ##_series_set_t&, const Kind ##_monoid_elt_t&);
     const Kind ##_series_set_t& structure() const;
-    EXTEND_DESCRIBE(Kind ##_series_elt_t)
-    series_ops(Kind ##_series_elt_t, Kind ##_semiring_elt_t, Kind ##_monoid_elt_t)
+    EXTEND_DESCRIBE(Kind ##_series_set_elt_t)
+    series_ops(Kind ##_series_set_elt_t, Kind ##_semiring_elt_t, Kind ##_monoid_elt_t)
   };
 
   struct Kind ##_exp_t
   {
     Kind ##_exp_t(const Kind ##_exp_t&);
     Kind ##_exp_t(const Kind ##_series_set_t&);
-    Kind ##_exp_t(const Kind ##_series_set_t&, const Kind ##_series_elt_t&);
+    Kind ##_exp_t(const Kind ##_series_set_t&, const Kind ##_series_set_elt_t&);
     Kind ##_exp_t(const Kind ##_series_set_t&, const Kind ##_semiring_elt_t&);
     Kind ##_exp_t(const Kind ##_series_set_t&, const Kind ##_monoid_elt_t&);
     %extend {
@@ -195,14 +195,14 @@ namespace Kind ##_types
     const Kind ##_semiring_t& semiring() const;
     EXTEND_DESCRIBE(Kind ##_series_set_t)
     %extend {
-    Kind ##_series_elt_t make(int i) const
-    { return Kind ##_series_elt_t(*self, Kind ##_semiring_elt_t(self->semiring(), i)); }
-    Kind ##_series_elt_t make(const std::string& l) const
-    { return Kind ##_series_elt_t(*self, Kind ##_monoid_elt_t(self->monoid(), l)); }
+    Kind ##_series_set_elt_t make(int i) const
+    { return Kind ##_series_set_elt_t(*self, Kind ##_semiring_elt_t(self->semiring(), i)); }
+    Kind ##_series_set_elt_t make(const std::string& l) const
+    { return Kind ##_series_set_elt_t(*self, Kind ##_monoid_elt_t(self->monoid(), l)); }
 
-    Kind ##_series_elt_t identity()
+    Kind ##_series_set_elt_t identity()
     { return self->identity(SELECT(Kind ## _series_set_elt_value_t)); }
-    Kind ##_series_elt_t zero()
+    Kind ##_series_set_elt_t zero()
     { return self->zero(SELECT(Kind ## _series_set_elt_value_t)); }
     Kind ##_exp_t exp_identity()
     { return self->identity(SELECT(Kind ## _exp_value_t)); }
@@ -249,23 +249,23 @@ namespace Kind ##_types
 	      throw std::runtime_error("letter not in alphabet");
 	  return Kind ##_monoid_elt_t(self->monoid(), l);
 	}
-      Kind ##_series_elt_t series(int i) const
-	{ return Kind ##_series_elt_t(self->series(), Kind ##_semiring_elt_t(self->semiring(), i)); }
-      Kind ##_series_elt_t series(const std::string& l) const
+      Kind ##_series_set_elt_t series(int i) const
+	{ return Kind ##_series_set_elt_t(self->series(), Kind ##_semiring_elt_t(self->semiring(), i)); }
+      Kind ##_series_set_elt_t series(const std::string& l) const
 	{
 	  for (unsigned i = 0; i < l.size(); ++i)
 	    if (!self->alphabet().contains(l[i]))
 	      throw std::runtime_error("letter not in alphabet");
-	  return Kind ##_series_elt_t(self->series(), Kind ##_monoid_elt_t(self->monoid(), l));
+	  return Kind ##_series_set_elt_t(self->series(), Kind ##_monoid_elt_t(self->monoid(), l));
 	}
-      Kind ##_series_elt_t series(const Kind ##_exp_t& e) const
+      Kind ##_series_set_elt_t series(const Kind ##_exp_t& e) const
 	{
-	  Kind ##_series_elt_t ret(self->series());
+	  Kind ##_series_set_elt_t ret(self->series());
 	  vcsn::finite_support_convert(ret, e);
 	  return ret;
 	}
 
-      Kind ##_exp_t exp(const Kind ##_series_elt_t& s) const
+      Kind ##_exp_t exp(const Kind ##_series_set_elt_t& s) const
 	{
 	  Kind ##_exp_t ret(self->series());
 	  vcsn::finite_support_convert(ret, s);

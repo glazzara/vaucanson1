@@ -885,7 +885,7 @@ namespace vcsn
 	    }
 	    else
 	      l = xml2str(label);
-	    series_elt_t lelt(type.series());
+	    series_set_elt_t lelt(type.series());
 	    lelt = xml::XmlValue(l);
 	    hedge_t e = a.add_edge(x.sname2num_.find(xml2str(src))->second,
 				   x.sname2num_.find(xml2str(dst))->second,
@@ -914,7 +914,7 @@ namespace vcsn
 	    else
 	      l = xml2str(label);
 
-	    series_elt_t lelt(type.series());
+	    series_set_elt_t lelt(type.series());
 	    lelt = xml::XmlValue(l);
 	    hstate_t s = x.sname2num_.find(xml2str(state))->second;
 	    a.set_initial(s, lelt.value(),
@@ -944,7 +944,7 @@ namespace vcsn
 	    else
 	      l = xml2str(label);
 
-	    series_elt_t lelt(type.series());
+	    series_set_elt_t lelt(type.series());
 	    lelt = xml::XmlValue(l);
 	    hstate_t s = x.sname2num_.find(xml2str(state))->second;
 	    a.set_final(s,

@@ -51,24 +51,24 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto);
     typedef std::vector<std::vector<semiring_elt_t> > matrix_semiring_elt_t;
-    typedef std::vector<std::vector<series_elt_t> > matrix_series_set_elt_t;
+    typedef std::vector<std::vector<series_set_elt_t> > matrix_series_set_elt_t;
     typedef std::vector<semiring_elt_t> matrix_semiring_elt_initial_t;
 
-    series_elt_t            series_identity  = a.series().zero_;
-    semiring_elt_t	    semiring_elt_zero     = a.series().semiring().wzero_;
-    monoid_elt_t            monoid_identity = a.series().monoid().empty_;
+    series_set_elt_t	series_identity		= a.series().zero_;
+    semiring_elt_t	semiring_elt_zero	= a.series().semiring().wzero_;
+    monoid_elt_t	monoid_identity		= a.series().monoid().empty_;
 
-    int                     i, j, k, size = a.states().size();
+    int			i, j, k, size = a.states().size();
 
-    matrix_series_set_elt_t m_series(size), m_series_ret(size);
-    matrix_semiring_elt_t   m_semiring_elt(size), m_semiring_elt_tmp(size);
+    matrix_series_set_elt_t	m_series(size), m_series_ret(size);
+    matrix_semiring_elt_t	m_semiring_elt(size), m_semiring_elt_tmp(size);
     matrix_semiring_elt_initial_t m_winitial(size), m_winitial_tmp(size);
 
     for (i = 0; i < size; i++){
       m_semiring_elt[i].resize(size, semiring_elt_t(a.series().semiring()));
       m_semiring_elt_tmp[i].resize(size, semiring_elt_t(a.series().semiring()));
-      m_series[i].resize(size, series_elt_t(a.series()));
-      m_series_ret[i].resize(size, series_elt_t(a.series()));
+      m_series[i].resize(size, series_set_elt_t(a.series()));
+      m_series_ret[i].resize(size, series_set_elt_t(a.series()));
     }
 
     /// @bug FIXME: This converters should be removed
@@ -140,7 +140,7 @@ namespace vcsn {
       }
       if (m_winitial[i] != semiring_elt_zero)
 	a.set_initial(index_to_state[i],
-		      series_elt_t(a.series(), m_winitial[i]));
+		      series_set_elt_t(a.series(), m_winitial[i]));
     }
   }
 

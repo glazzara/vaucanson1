@@ -50,24 +50,27 @@ namespace vcsn {
     // Types of the resulting expression
     typedef typename linearize_element<Series, T>::index_t	index_t;
     typedef typename linearize_element<Series, T>::element_t	return_type;
-    typedef typename return_type::value_t			exp_impl_t;
-    typedef typename return_type::monoid_elt_value_t		l_monoid_elt_value_t;
-    typedef typename return_type::set_t				l_series_elt_t;
-    typedef typename l_series_elt_t::monoid_t			l_monoid_t;
-    typedef typename l_series_elt_t::semiring_t			l_semiring_t;
-    typedef typename l_monoid_t::alphabet_t			l_alphabet_t;
-    typedef typename l_monoid_t::letter_t			l_letter_t;
-    typedef typename return_type::monoid_elt_t			l_monoid_elt_t;
-    typedef typename return_type::semiring_elt_t			l_semiring_elt_t;
+    typedef typename return_type::value_t		exp_impl_t;
+    typedef typename return_type::monoid_elt_value_t	l_monoid_elt_value_t;
+    typedef typename return_type::set_t			l_series_set_elt_t;
+    typedef typename l_series_set_elt_t::monoid_t	l_monoid_t;
+    typedef typename l_series_set_elt_t::semiring_t	l_semiring_t;
+    typedef typename l_monoid_t::alphabet_t		l_alphabet_t;
+    typedef typename l_monoid_t::letter_t		l_letter_t;
+    typedef typename return_type::monoid_elt_t		l_monoid_elt_t;
+    typedef typename return_type::semiring_elt_t	l_semiring_elt_t;
     // Types of the source expression
-    typedef KRatExpLinearize<Series, T, Dispatch>		self_t;
-    typedef typename Element<Series, T>::semiring_elt_t		semiring_elt_t;
-    typedef typename Element<Series, T>::monoid_elt_t		monoid_elt_t;
-    typedef typename monoid_elt_t::value_t	      		monoid_elt_value_t;
+    typedef KRatExpLinearize<Series, T, Dispatch>	self_t;
+    typedef typename Element<Series, T>::semiring_elt_t	semiring_elt_t;
+    typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
+    typedef typename monoid_elt_t::value_t	      	monoid_elt_value_t;
     INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
     KRatExpLinearize(const Element<Series, T>& exp) :
-      index_(LINEAR_INDEX_START), exp_(exp), l_alpha_(), l_series_(l_semiring_t(), l_monoid_t(l_alpha_))
+      index_(LINEAR_INDEX_START),
+      exp_(exp),
+      l_alpha_(),
+      l_series_(l_semiring_t (), l_monoid_t (l_alpha_))
     {
     }
 
@@ -77,7 +80,8 @@ namespace vcsn {
       return_type	result = match(exp_.value());
       l_monoid_t	l_monoid(l_alpha_);
       l_semiring_t	l_semiring;
-      return return_type(l_series_elt_t(l_semiring, l_monoid), result.value());
+      return return_type (l_series_set_elt_t (l_semiring, l_monoid),
+			  result.value());
     }
 
     MATCH__(Product, lhs, rhs)
@@ -142,7 +146,7 @@ namespace vcsn {
     index_t		index_;
     Element<Series, T>	exp_;
     l_alphabet_t	l_alpha_;
-    l_series_elt_t		l_series_;
+    l_series_set_elt_t		l_series_;
   };
 
   template <class Series, class T>

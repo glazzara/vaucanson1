@@ -42,15 +42,15 @@ namespace Kind ##_types
     Kind ##_auto_t(const Kind ##_context&);
     Kind ##_auto_t(const Kind ##_auto_t&);
 
-    Kind ##_series_elt_t series_of(int) const;
-    int add_series_edge(int, int, const Kind ##_series_elt_t&);
+    Kind ##_series_set_elt_t series_of(int) const;
+    int add_series_edge(int, int, const Kind ##_series_set_elt_t&);
 
-    Kind ##_series_elt_t get_initial(int) const;
-    Kind ##_series_elt_t get_final(int) const;
+    Kind ##_series_set_elt_t get_initial(int) const;
+    Kind ##_series_set_elt_t get_final(int) const;
 
-    void set_initial(int, const Kind ##_series_elt_t&);
+    void set_initial(int, const Kind ##_series_set_elt_t&);
 
-    void set_final(int, const Kind ##_series_elt_t&);
+    void set_final(int, const Kind ##_series_set_elt_t&);
 
     const Kind ##_automata_set_t& structure() const;
 

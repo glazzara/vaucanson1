@@ -51,8 +51,8 @@ namespace vcsn {
 
     using namespace std;
 
-    typedef series_elt_t exp_t;
-    typedef typename series_elt_t::semiring_elt_t      output_exp_t;
+    typedef series_set_elt_t exp_t;
+    typedef typename series_set_elt_t::semiring_elt_t      output_exp_t;
     typedef set<std::pair<hstate_t, output_exp_t> >    state_exp_pair_set_t;
     typedef pair<hstate_t, hstate_t>                   state_pair_t;
     typedef map<state_pair_t, hstate_t>                state_pair_map_t;
@@ -117,7 +117,7 @@ namespace vcsn {
 	    partial_2(a, rhs, q, exp1);
 
 	    output_exp_t null_series =
-	      a.series().zero(SELECT(typename a_series_elt_t::value_t));
+	      a.series().zero(SELECT(typename a_series_set_elt_t::value_t));
 
 	    if (exp1 != null_series)
 	      {

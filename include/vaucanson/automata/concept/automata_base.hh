@@ -140,14 +140,14 @@ namespace vcsn {
 							series_set_elt_value_t;
 
     /** type of the element of the set of series that holds the automaton. */
-    typedef Element<series_set_t, series_set_elt_value_t> series_elt_t;
-    typedef Element<series_set_t, series_set_elt_value_t> series_elt_t;
+    typedef Element<series_set_t, series_set_elt_value_t> series_set_elt_t;
+    typedef Element<series_set_t, series_set_elt_value_t> series_set_elt_t;
 
     /** type of the free monoid. */
     typedef typename series_set_t::monoid_t		monoid_t;
 
     /** type of the free monoid element. */
-    typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
+    typedef typename series_set_elt_t::monoid_elt_t	monoid_elt_t;
 
     /** type of the implementation of a word. */
     typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
@@ -159,10 +159,11 @@ namespace vcsn {
     typedef typename series_set_t::semiring_t		semiring_t;
 
     /** type of the free monoid element. */
-    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
+    typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
 
     /** type of the implementation of a semiring_elt. */
-    typedef typename series_elt_t::semiring_elt_value_t	semiring_elt_value_t;
+    typedef typename series_set_elt_t::semiring_elt_value_t
+							semiring_elt_value_t;
 
     /** type of additional information that is aggregated to the automaton. */
     typedef typename automaton_traits<T>::tag_t		tag_t;
@@ -236,13 +237,13 @@ namespace vcsn {
     void set_initial(hstate_t state);
 
     /** set an initial multiplicity to the state. */
-    void set_initial(hstate_t state, const series_elt_t& m);
+    void set_initial(hstate_t state, const series_set_elt_t& m);
 
     /** set the state to be final. */
     void set_final(hstate_t state);
 
     /** set a final multiplicity to the state. */
-    void set_final(hstate_t state, const series_elt_t& m);
+    void set_final(hstate_t state, const series_set_elt_t& m);
 
     /** set the state not to be initial. */
     void unset_initial(hstate_t state);
@@ -277,7 +278,8 @@ namespace vcsn {
     /** add an edge using a series. */
     /** If the underlying implementation is not sufficiently general
      *  to support this operation, you will have several edges created.*/
-    hedge_t add_series_edge(hstate_t from, hstate_t to, const series_elt_t& e);
+    hedge_t add_series_edge(hstate_t from, hstate_t to,
+			    const series_set_elt_t& e);
 
     /** add a spontaneous transition between 'from' and 'to'. */
     hedge_t add_spontaneous(hstate_t from, hstate_t to,
@@ -318,7 +320,7 @@ namespace vcsn {
     label_of(hedge_t e) const;
 
     /** return the label seen as a series. */
-    series_elt_t series_of(hedge_t e) const;
+    series_set_elt_t series_of(hedge_t e) const;
 
     /** return the label seen as a series implementation. */
     series_set_elt_value_t series_value_of(hedge_t e) const;
@@ -603,10 +605,8 @@ namespace vcsn {
 
 } // vcsn
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concept/automata_base.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
-
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/automata/concept/automata_base.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH

@@ -53,8 +53,8 @@ namespace vcsn {
     typedef Element<S, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     typedef typename identity_transducer_helper<S, T>::ret  ret_t;
-    typedef typename ret_t::series_elt_t output_series_elt_t;
-    typedef typename series_elt_t::support_t support_t;
+    typedef typename ret_t::series_set_elt_t output_series_set_elt_t;
+    typedef typename series_set_elt_t::support_t support_t;
     typedef typename ret_t::set_t set_t;
     typedef typename set_t::series_set_t o_series_set_t;
     set_t s (o_series_set_t (a.structure().series(),
@@ -66,13 +66,13 @@ namespace vcsn {
       conv[ret.add_state()] = *s;
     for_each_edge(e, a)
       {
-	series_elt_t t = a.series_of(*e);
-	series_elt_t s(t);
-	output_series_elt_t os(ret.structure().series());
+	series_set_elt_t t = a.series_of(*e);
+	series_set_elt_t s(t);
+	output_series_set_elt_t os(ret.structure().series());
 	support_t supp = s.supp();
 	for_each_const_(support_t, m, supp)
 	  {
-	    series_elt_t tmp(a.structure().series());
+	    series_set_elt_t tmp(a.structure().series());
 	    tmp.assoc(*m, s.get(*m));
 	    os.assoc(*m, tmp);
 	  }

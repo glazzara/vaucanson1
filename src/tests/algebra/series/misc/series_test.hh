@@ -43,21 +43,21 @@ bool series_test(tests::Tester& t)
   using namespace vcsn::algebra;
   using namespace vcsn;
 
-  typedef SeriesElt				series_elt_t;
-  typedef typename series_elt_t::set_t		series_set_t;
-  typedef typename series_elt_t::value_t	series_set_elt_value_t;
+  typedef SeriesElt					series_set_elt_t;
+  typedef typename series_set_elt_t::set_t		series_set_t;
+  typedef typename series_set_elt_t::value_t		series_set_elt_value_t;
 
   typedef typename series_set_t::monoid_t		monoid_t;
-  typedef typename monoid_t::alphabet_t		alphabet_t;
-  typedef typename alphabet_t::letter_t		letter_t;
+  typedef typename monoid_t::alphabet_t			alphabet_t;
+  typedef typename alphabet_t::letter_t			letter_t;
 
   typedef typename series_set_t::semiring_t		semiring_t;
-  typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
-  typedef typename semiring_elt_t::value_t	semiring_value_t;
+  typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
+  typedef typename semiring_elt_t::value_t		semiring_value_t;
 
-  typedef typename series_elt_t::monoid_elt_t	monoid_elt_t;
-  typedef typename monoid_elt_t::value_t	monoid_elt_value_t;
-  typedef typename series_elt_t::support_t	support_t;
+  typedef typename series_set_elt_t::monoid_elt_t	monoid_elt_t;
+  typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
+  typedef typename series_set_elt_t::support_t		support_t;
 
   alphabet_t		base;
   size_t		test_sizes[] =
@@ -93,10 +93,10 @@ bool series_test(tests::Tester& t)
 	w2 = monoid.choose(SELECT(monoid_elt_value_t));
       while (w2 == w1);
 
-      series_elt_t	s1(series, w1);
-      series_elt_t	s2(series, w2);
-      series_elt_t	s3 = identity_as<series_set_elt_value_t>::of(series);
-      series_elt_t	s4 = zero_as<series_set_elt_value_t>::of(series);
+      series_set_elt_t	s1(series, w1);
+      series_set_elt_t	s2(series, w2);
+      series_set_elt_t	s3 = identity_as<series_set_elt_value_t>::of(series);
+      series_set_elt_t	s4 = zero_as<series_set_elt_value_t>::of(series);
 
       semiring_elt_t	zero = zero_as<semiring_value_t>::of(semiring);
 
@@ -122,7 +122,7 @@ bool series_test(tests::Tester& t)
       std::map<monoid_elt_t, semiring_elt_t>	random_values;
       const size_t				max =
 	utility::random::generate<unsigned>(0, op_choose_max_word_length);
-      series_elt_t		s5 (series);
+      series_set_elt_t		s5 (series);
       bool			allright = true;
       for (size_t j = 0; j < max; ++j)
 	{

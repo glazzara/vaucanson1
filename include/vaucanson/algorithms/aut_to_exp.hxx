@@ -106,7 +106,7 @@ namespace vcsn {
   `-----------*/
 
   template <class A_, typename Auto_, typename Chooser_>
-  typename Auto_::series_elt_t
+  typename Auto_::series_set_elt_t
   do_in_aut_to_exp(const AutomataBase<A_>&  a_set,
 		    Auto_&		    a,
 		    Chooser_	            chooser)
@@ -114,10 +114,10 @@ namespace vcsn {
     AUTOMATON_TYPES(Auto_);
     typedef Auto_				automaton_t;
     typedef typename automaton_t::series_set_t      series_set_t;
-    typedef typename automaton_t::series_elt_t  series_elt_t;
+    typedef typename automaton_t::series_set_elt_t  series_set_elt_t;
 
     typedef typename std::set<hedge_t>			hedge_set_t;
-    typedef std::map<hstate_t, series_elt_t>	      	sums_t;
+    typedef std::map<hstate_t, series_set_elt_t>	      	sums_t;
 
     typename hedge_set_t::const_iterator		i, j;
     hstate_t					        q;
@@ -128,7 +128,7 @@ namespace vcsn {
 
     while (a.states().size() != 2)
       {
-	series_elt_t loop_sum(a_set.series());
+	series_set_elt_t loop_sum(a_set.series());
 	sums_t       in_sums, out_sums;
 
 	q = chooser(a);
@@ -150,7 +150,7 @@ namespace vcsn {
 		if (f == out_sums.end())
 		  f = out_sums.insert
 		    (std::make_pair(a.aim_of(*i),
-				    series_elt_t(a_set.series()))).first;
+				    series_set_elt_t(a_set.series()))).first;
 	        f->second += a.series_of(*i);
 	      }
 	    a.del_edge(*i);
@@ -167,7 +167,7 @@ namespace vcsn {
 	    if (f == in_sums.end())
 	      f = in_sums.insert
 		(std::make_pair(a.origin_of(*i),
-				series_elt_t(a_set.series()))).first;
+				series_set_elt_t(a_set.series()))).first;
 
 	    f->second += a.series_of(*i);
 	    a.del_edge(*i);
@@ -177,12 +177,12 @@ namespace vcsn {
 	for_each_const_(sums_t, in, in_sums)
 	  for_each_const_(sums_t, out, out_sums)
 	  {
-	    series_elt_t res = in->second * loop_sum * out->second;
+	    series_set_elt_t res = in->second * loop_sum * out->second;
 	    a.add_series_edge(in->first, out->first, res);
 	  }
 	a.del_state(q);
       }
-    series_elt_t final(a_set.series());
+    series_set_elt_t final(a_set.series());
     for_each_edge(i, a)
       final += a.label_of(*i);
     return final;
@@ -193,7 +193,7 @@ namespace vcsn {
   `-----------*/
 
   template<typename A, typename T, typename Chooser_>
-  typename Element<A, T>::series_elt_t
+  typename Element<A, T>::series_set_elt_t
   aut_to_exp(const Element<A, T>& a, const Chooser_& c)
   {
     Element<A, T> ret(a);
@@ -201,7 +201,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T>
-  typename Element<A, T>::series_elt_t
+  typename Element<A, T>::series_set_elt_t
   aut_to_exp(const Element<A, T>& a)
   {
     return aut_to_exp(a, DefaultChooser());

@@ -59,7 +59,7 @@ bool elimination_test(tests::Tester& tg)
     {
       Auto	a = gen.generate(5,10, 2, 2);
       generalized_automaton_t a_ = generalized(a);
-      gseries_elt_t language (a_.structure().series());
+      gseries_set_elt_t language (a_.structure().series());
       language = aut_to_exp(a_);
       if (t.verbose() == tests::high)
 	{

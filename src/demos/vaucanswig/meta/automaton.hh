@@ -109,37 +109,37 @@ struct vcsn_automaton : vcsn::virtual_automaton
 
   const automata_set_t &structure() const { return (*auto_).structure(); }
 
-  series_elt_t series_of(int e) const
+  series_set_elt_t series_of(int e) const
   {
     CHECK_EDGE(this, e);
     return (*auto_).series_of(e);
   }
 
-  int add_series_edge(int from, int to, const series_elt_t& s)
+  int add_series_edge(int from, int to, const series_set_elt_t& s)
   {
     CHECK_STATE(this, from); CHECK_STATE(this, to);
     return (*auto_).add_series_edge(from, to, s);
   }
 
-  series_elt_t get_initial(int state) const
+  series_set_elt_t get_initial(int state) const
   {
     CHECK_STATE(this, state);
     return (*auto_).get_initial(state);
   }
 
-  series_elt_t get_final(int state) const
+  series_set_elt_t get_final(int state) const
   {
     CHECK_STATE(this, state);
     return (*auto_).get_final(state);
   }
 
-  void set_initial(int state, const series_elt_t& s)
+  void set_initial(int state, const series_set_elt_t& s)
   {
     CHECK_STATE(this, state);
     return (*auto_).set_initial(state, s);
   }
 
-  void set_final(int state, const series_elt_t& s)
+  void set_final(int state, const series_set_elt_t& s)
   {
     CHECK_STATE(this, state);
     return (*auto_).set_final(state, s);
@@ -198,7 +198,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     for (std::string::const_iterator c = l.begin(); c != l.end(); ++c)
       CHECK_LETTER(this, *c);
 
-    series_elt_t s(SERIES_OF(this));
+    series_set_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = WEIGHT(this, w) * s;
     return (*auto_).add_series_edge(from, to, s);
@@ -211,7 +211,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     for (std::string::const_iterator c = l.begin(); c != l.end(); ++c)
       CHECK_LETTER(this, *c);
 
-    series_elt_t s(SERIES_OF(this));
+    series_set_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = s * WEIGHT(this, w);
     return (*auto_).add_series_edge(from, to, s);
@@ -224,7 +224,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     for (std::string::const_iterator c = l.begin(); c != l.end(); ++c)
       CHECK_LETTER(this, *c);
 
-    series_elt_t s(SERIES_OF(this));
+    series_set_elt_t s(SERIES_OF(this));
     s = WORD_OF_LETTER(this, l);
     s = WEIGHT(this, lw) * s * WEIGHT(this, rw);
     return (*auto_).add_series_edge(from, to, s);
@@ -292,7 +292,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {										\
     CHECK_STATE(this, state);							\
     CHECK_LETTER(this, letter);							\
-    series_elt_t s (SERIES_OF(this), WORD_OF_LETTER(this, letter));		\
+    series_set_elt_t s (SERIES_OF(this), WORD_OF_LETTER(this, letter));		\
     return (*auto_).set_## InitialFinal (state, s);				\
   }										\
 										\
@@ -302,7 +302,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
     CHECK_LETTER(this, letter);							\
 										\
-    series_elt_t s(SERIES_OF(this));						\
+    series_set_elt_t s(SERIES_OF(this));						\
     s = WORD_OF_LETTER(this, letter);						\
     s = WEIGHT(this, weight) * s;						\
     return (*auto_).set_## InitialFinal (state, s);				\
@@ -312,7 +312,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
     CHECK_LETTER(this, letter);							\
 										\
-    series_elt_t s(SERIES_OF(this));						\
+    series_set_elt_t s(SERIES_OF(this));						\
     s = WORD_OF_LETTER(this, letter);						\
     s = s * WEIGHT(this, weight);						\
     return (*auto_).set_## InitialFinal (state, s);				\
@@ -323,7 +323,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
     CHECK_STATE(this, state);							\
     CHECK_LETTER(this, letter);							\
 										\
-    series_elt_t s(SERIES_OF(this));						\
+    series_set_elt_t s(SERIES_OF(this));						\
     s = WORD_OF_LETTER(this, letter);						\
     s = WEIGHT(this, lweight) * s * WEIGHT(this, rweight);			\
     return (*auto_).set_## InitialFinal (state, s);				\
@@ -334,7 +334,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {										\
     CHECK_STATE(this, state);							\
 										\
-    series_elt_t s(SERIES_OF(this));						\
+    series_set_elt_t s(SERIES_OF(this));						\
     s = SERIES_OF(this).identity(SELECT(series_set_elt_value_t));			\
     s = WEIGHT(this, weight) * s;						\
     return (*auto_).set_## InitialFinal (state, s);				\
@@ -343,7 +343,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {										\
     CHECK_STATE(this, state);							\
 										\
-    series_elt_t s(SERIES_OF(this));						\
+    series_set_elt_t s(SERIES_OF(this));						\
     s = SERIES_OF(this).identity(SELECT(series_set_elt_value_t));			\
     s = s * WEIGHT(this, weight);						\
     return (*auto_).set_## InitialFinal (state, s);				\
@@ -352,7 +352,7 @@ struct vcsn_automaton : vcsn::virtual_automaton
   {										\
     CHECK_STATE(this, state);							\
 										\
-    series_elt_t s(SERIES_OF(this));						\
+    series_set_elt_t s(SERIES_OF(this));						\
     s = SERIES_OF(this).identity(SELECT(series_set_elt_value_t));			\
     s = WEIGHT(this, lweight) * s * WEIGHT(this, rweight);			\
     return (*auto_).set_## InitialFinal (state, s);				\

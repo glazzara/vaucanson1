@@ -65,7 +65,7 @@ namespace vcsn {
     AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>::
     series_of(hedge_t e) const
     { 
-      return series_elt_t(auto_self().series(),
+      return series_set_elt_t(auto_self().series(),
 			  auto_self().label_of(e));
     }
 
@@ -143,7 +143,7 @@ namespace vcsn {
 		  const L& l)
     { 
       return auto_self().add_edge(from, to, 
-				  series_elt_t(auto_self().series(),
+				  series_set_elt_t(auto_self().series(),
 					       monoid_elt_t(auto_self().series().monoid(),
 							    l)
 					       ).value()
@@ -234,7 +234,7 @@ namespace vcsn {
     const LabelT& label = auto_self().label_of(e);
     const Series& s = auto_self().series();
     
-    series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
+    series_set_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
     return se *= semiring_elt_t(s.semiring(), label.first);
   }
   
@@ -246,7 +246,7 @@ namespace vcsn {
     const LabelT& label = auto_self().label_of(e);
     const Series& s = auto_self().series();
     
-    series_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
+    series_set_elt_t se(s, monoid_elt_t(s.monoid(), label.second));
     return (se *= semiring_elt_t(s.semiring(), label.first)).value();
   }
 

@@ -164,7 +164,7 @@ namespace vcsn {
   template <typename Self, typename T>
   void
   MetaElement<AutomataBase<Self>, T>::
-  set_initial(hstate_t state, const series_elt_t& s)
+  set_initial(hstate_t state, const series_set_elt_t& s)
   {
     op_set_initial(this->structure(), this->value(), state, s);
   }
@@ -185,7 +185,7 @@ namespace vcsn {
   template <typename Self, typename T>
   void
   MetaElement<AutomataBase<Self>, T>::
-  set_final(hstate_t state, const series_elt_t& s)
+  set_final(hstate_t state, const series_set_elt_t& s)
   {
     op_set_final(this->structure(), this->value(), state, s);
   }
@@ -232,7 +232,7 @@ namespace vcsn {
 
   /** return the initial multiplicity of the state. */
   template <typename Self, typename T>
-  typename MetaElement<AutomataBase<Self>, T>::series_elt_t
+  typename MetaElement<AutomataBase<Self>, T>::series_set_elt_t
   MetaElement<AutomataBase<Self>, T>::get_initial(hstate_t state) const
   {
     return op_get_initial(this->structure(), this->value(), state);
@@ -240,7 +240,7 @@ namespace vcsn {
 
   /** return the final multiplicity of the state. */
   template <typename Self, typename T>
-  typename MetaElement<AutomataBase<Self>, T>::series_elt_t
+  typename MetaElement<AutomataBase<Self>, T>::series_set_elt_t
   MetaElement<AutomataBase<Self>, T>::get_final(hstate_t what) const
   {
     return op_get_final(this->structure(), this->value(), what);
@@ -281,7 +281,7 @@ namespace vcsn {
   hedge_t
   MetaElement<AutomataBase<Self>, T>::add_series_edge(hstate_t from,
 						     hstate_t to,
-						     const series_elt_t& e)
+						     const series_set_elt_t& e)
   {
     return op_add_series_edge(this->structure(), this->value(), from, to, e);
   }
@@ -392,7 +392,7 @@ namespace vcsn {
 
   /** return the label seen as a series. */
   template <typename Self, typename T>
-  typename MetaElement<AutomataBase<Self>, T>::series_elt_t
+  typename MetaElement<AutomataBase<Self>, T>::series_set_elt_t
   MetaElement<AutomataBase<Self>, T>::series_of(hedge_t e) const
   {
     return op_series_of(this->structure(), this->value(), e);

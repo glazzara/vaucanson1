@@ -96,7 +96,7 @@ namespace vcsn {
   void
   op_set_initial(const AutomataBase<S>& ss, T& v,
 		 hstate_t state,
-		 const AutoType(series_elt_t)& s)
+		 const AutoType(series_set_elt_t)& s)
   {
     typedef
       typename Element<S, T>::series_set_elt_value_t series_set_elt_value_t;
@@ -107,12 +107,12 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  typename Element<S, T>::series_elt_t
+  typename Element<S, T>::series_set_elt_t
   op_get_initial(const AutomataBase<S>& s,
 		 const T& v,
 		 hstate_t state)
   {
-    return typename Element<S, T>::series_elt_t
+    return typename Element<S, T>::series_set_elt_t
       (s.series(),
        v.get_initial(state,
 		     zero_value(s.series(),
@@ -123,7 +123,7 @@ namespace vcsn {
   void
   op_set_final(const AutomataBase<S>& ss, T& v,
 	       hstate_t state,
-	       const typename Element<S, T>::series_elt_t& s)
+	       const typename Element<S, T>::series_set_elt_t& s)
   {
     v.set_final(state,
 		s.value(),
@@ -132,12 +132,12 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  typename Element<S, T>::series_elt_t
+  typename Element<S, T>::series_set_elt_t
   op_get_final(const AutomataBase<S>& s,
 	       const T& v,
 	       hstate_t state)
   {
-    return typename Element<S, T>::series_elt_t
+    return typename Element<S, T>::series_set_elt_t
       (s.series(),
        v.get_final(state,
 		   zero_value(s.series(),
@@ -195,7 +195,7 @@ namespace vcsn {
   op_add_series_edge(const AutomataBase<S>& s, T& v,
 		    hstate_t from,
 		    hstate_t to,
-		    const typename Element<S, T>::series_elt_t& l)
+		    const typename Element<S, T>::series_set_elt_t& l)
   {
     return op_add_edge(s, v, from, to, l.value());
   }
@@ -207,7 +207,7 @@ namespace vcsn {
 		     hstate_t to,
 		     const typename Element<S, T>::semiring_elt_t& w)
   {
-    AutoType(series_elt_t) ss(s.series());
+    AutoType(series_set_elt_t) ss(s.series());
     ss.assoc(algebra::identity_as<AutoType(monoid_elt_value_t)>::
 	    of(s.series().monoid()), w);
     return op_add_series_edge(s, v, from, to, ss);
@@ -298,11 +298,11 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  const typename Element<S, T>::series_elt_t
+  const typename Element<S, T>::series_set_elt_t
   op_series_of(const AutomataBase<S>& s, const T& v,
 	      hedge_t e)
   {
-    return typename Element<S, T>::series_elt_t
+    return typename Element<S, T>::series_set_elt_t
       (s.series(),
        v.label_of(e));
   }

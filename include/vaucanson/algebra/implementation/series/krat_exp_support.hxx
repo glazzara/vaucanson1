@@ -48,10 +48,10 @@ namespace vcsn {
     typedef IsFiniteAppMatcher<Series, T, Dispatch>	self_t;
     typedef int					        return_type;
     typedef Series					series_set_t;
-    typedef Element<Series, T>				series_elt_t;
-    typedef typename series_elt_t::monoid_elt_t		monoid_elt_t;
+    typedef Element<Series, T>				series_set_elt_t;
+    typedef typename series_set_elt_t::monoid_elt_t		monoid_elt_t;
     typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
-    typedef typename series_elt_t::semiring_elt_t	semiring_elt_t;
+    typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
     typedef std::list<monoid_elt_value_t>			support_t;
     typedef std::list<std::pair<semiring_elt_value_t, monoid_elt_value_t> >

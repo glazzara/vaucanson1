@@ -42,7 +42,7 @@ namespace vcsn
 		 const rhs_t& from)
   {
     lhs_t dst(dst_.structure());
-    typedef typename lhs_t::series_elt_t dst_series_elt_t;
+    typedef typename lhs_t::series_set_elt_t dst_series_set_elt_t;
 
     std::map<hstate_t, hstate_t> stmap;
 
@@ -51,9 +51,9 @@ namespace vcsn
 	 ++i)
       {
 	hstate_t s = dst.add_state();
-	dst_series_elt_t s_(from.get_final(*i));
+	dst_series_set_elt_t s_(from.get_final(*i));
 	dst.set_final(s, s_);
-	dst_series_elt_t s__(from.get_initial(*i));
+	dst_series_set_elt_t s__(from.get_initial(*i));
 	dst.set_initial(s, s__);
 	stmap[*i] = s;
       }
@@ -62,7 +62,7 @@ namespace vcsn
 	 i != from.edges().end();
 	 ++i)
       {
-	dst_series_elt_t s(from.series_of(*i));
+	dst_series_set_elt_t s(from.series_of(*i));
 	dst.add_series_edge(stmap[from.origin_of(*i)], stmap[from.aim_of(*i)], s);
       }
     dst_.swap(dst);

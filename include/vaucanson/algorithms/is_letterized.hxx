@@ -38,7 +38,7 @@ namespace vcsn {
 
   template<typename S, typename A>
   bool
-  do_is_letterized_transducer(const AutomataBase<S>& trans_set, 
+  do_is_letterized_transducer(const AutomataBase<S>& trans_set,
 			      const A& trans)
   {
     AUTOMATON_TYPES(A);
@@ -46,9 +46,11 @@ namespace vcsn {
     for_each_edge(e, trans)
       {
         is_letterized &= is_letter_support(trans.series_of(*e));
-	for_each_const_(series_elt_t::support_t, i, trans.series_of(*e).supp())
-	  {	
-	    is_letterized &= is_letter_support(trans.series_of(*e).get(*i)); 
+	for_each_const_(series_set_elt_t::support_t,
+			i,
+			trans.series_of(*e).supp())
+	  {
+	    is_letterized &= is_letter_support(trans.series_of(*e).get(*i));
 	    if (!is_letterized)
 	      return false;
 	  }

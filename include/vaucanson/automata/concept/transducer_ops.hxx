@@ -45,12 +45,12 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  typename Element<S, T>::output_series_elt_t
+  typename Element<S, T>::output_series_set_elt_t
   op_output_of(const TransducerBase<S>& s,
 	       const T& v,
 	       hedge_t e)
   {
-    AutoType(series_elt_t) is = op_series_of(s, v, e);
+    AutoType(series_set_elt_t) is = op_series_of(s, v, e);
     precondition(is.supp().size() == 1);
     return
       is.get(AutoType(monoid_elt_t) (is.structure().monoid(), *is.supp().begin()));
@@ -68,9 +68,9 @@ namespace vcsn {
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);
-    AutoType(output_series_elt_t) os(s.series().semiring());
+    AutoType(output_series_set_elt_t) os(s.series().semiring());
     os.assoc(output_w, w);
-    AutoType(series_elt_t) is(s.series());
+    AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
     std::cout << "add io edge :" << o << " "
 	      << output_w << " " << w << " "
@@ -88,9 +88,9 @@ namespace vcsn {
 		 AutoType(output_monoid_elt_t) output_w,
 		 AutoType(output_semiring_elt_t) w)
   {
-    AutoType(output_series_elt_t) os(s.series().semiring());
+    AutoType(output_series_set_elt_t) os(s.series().semiring());
     os.assoc(output_w, w);
-    AutoType(series_elt_t) is(s.series());
+    AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
     return op_add_series_edge(s, v, from, to, is);
   }
@@ -106,9 +106,9 @@ namespace vcsn {
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid());
-    AutoType(output_series_elt_t) os(s.series().semiring());
+    AutoType(output_series_set_elt_t) os(s.series().semiring());
     os.assoc(output_w, w);
-    AutoType(series_elt_t) is(s.series());
+    AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
     return op_add_series_edge(s, v, from, to, is);
   }
@@ -124,9 +124,9 @@ namespace vcsn {
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid());
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);
-    AutoType(output_series_elt_t) os(s.series().semiring());
+    AutoType(output_series_set_elt_t) os(s.series().semiring());
     os.assoc(output_w, w);
-    AutoType(series_elt_t) is(s.series());
+    AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
     return op_add_series_edge(s, v, from, to, is);
   }

@@ -67,8 +67,8 @@ bool in_concat_test(tests::Tester& tg)
       int lhs_states_num = auto_lhs.states().size();
       generalized_t g_auto_lhs = generalized(auto_lhs);
       generalized_t g_auto_rhs = generalized(auto_rhs);
-      g_series_elt_t exp_lhs(g_auto_lhs.structure().series());
-      g_series_elt_t exp_rhs(g_auto_rhs.structure().series());
+      g_series_set_elt_t exp_lhs(g_auto_lhs.structure().series());
+      g_series_set_elt_t exp_rhs(g_auto_rhs.structure().series());
       exp_lhs = aut_to_exp(g_auto_lhs);
       exp_rhs = aut_to_exp(g_auto_rhs);
 

@@ -45,7 +45,7 @@ namespace vcsn {
 	      hedge_t e);
 
   template <class S, class T>
-  typename Element<S, T>::output_series_elt_t
+  typename Element<S, T>::output_series_set_elt_t
   op_output_of(const TransducerBase<S>& s,
 	       const T& v,
 	       hedge_t e);

@@ -49,10 +49,10 @@ namespace vcsn {
     typedef typename identity_transducer_helper<S, T>::ret    ret_t;
 
     AUTOMATON_TYPES_(ret_t, t_);
-    typedef typename ret_t::set_t                 set_t;
-    typedef typename set_t::series_set_t              o_series_set_t;
-    typedef typename ret_t::series_elt_t               output_series_elt_t;
-    typedef typename series_elt_t::support_t           support_t;
+    typedef typename ret_t::set_t		 set_t;
+    typedef typename set_t::series_set_t	 o_series_set_t;
+    typedef typename ret_t::series_set_elt_t	 output_series_set_elt_t;
+    typedef typename series_set_elt_t::support_t support_t;
 
     set_t
       ts(o_series_set_t (a.structure().series(),
@@ -70,13 +70,13 @@ namespace vcsn {
 
     for_each_edge(e, a)
       {
-	series_elt_t t = a.series_of(*e);
-	series_elt_t s(t);
-	output_series_elt_t os(t_ret.structure().series());
+	series_set_elt_t t = a.series_of(*e);
+	series_set_elt_t s(t);
+	output_series_set_elt_t os(t_ret.structure().series());
 	support_t supp = s.supp();
 	for_each_const_(support_t, m, supp)
 	  {
-	    series_elt_t tmp(a.structure().series());
+	    series_set_elt_t tmp(a.structure().series());
 	    // try to associate the neutral monoid element with a weight
 	    // to create a series which will be a weight in the series os
 	    tmp.assoc(neutre, s.get(*m));
@@ -89,16 +89,16 @@ namespace vcsn {
 
     for_each_initial_state(i, a)
       {
-	series_elt_t a_series = a.get_initial(*i);
-	t_series_elt_t s;
+	series_set_elt_t a_series = a.get_initial(*i);
+	t_series_set_elt_t s;
 	s.set(t_neutre, a_series);
 	t_ret.set_initial(conv[*i], s);
       }
 
     for_each_final_state(f, a)
       {
-	series_elt_t a_series = a.get_final(*f);
-	t_series_elt_t s;
+	series_set_elt_t a_series = a.get_final(*f);
+	t_series_set_elt_t s;
 	s.value_set(t_neutre, a_series);
 	t_ret.set_final(conv[*f], s);
       }
@@ -122,9 +122,9 @@ namespace vcsn {
   {
     AUTOMATON_TYPES_(Trans_t, t_);
     AUTOMATON_TYPES_(Auto_t, a_);
-    typedef typename Trans_t::series_elt_t            t_output_series_elt_t;
-    typedef typename Auto_t::series_elt_t::support_t  a_support_t;
-    typedef typename Trans_t::semiring_elt_t	      t_weight_t;
+    typedef typename Trans_t::series_set_elt_t	t_output_series_set_elt_t;
+    typedef typename Auto_t::series_set_elt_t::support_t a_support_t;
+    typedef typename Trans_t::semiring_elt_t	t_weight_t;
 
     Trans_t                   tt(t.structure());
     map<hstate_t, hstate_t>   conv;
@@ -140,10 +140,10 @@ namespace vcsn {
     // convert edges
     for(a_edge_iterator e = a.edges().begin(); e != a.edges().end(); ++e)
       {
-	a_series_elt_t s_ = a.series_of(*e);
-	a_series_elt_t s(s_);
+	a_series_set_elt_t s_ = a.series_of(*e);
+	a_series_set_elt_t s(s_);
 
-	t_output_series_elt_t os(t.structure().series());
+	t_output_series_set_elt_t os(t.structure().series());
 
 	a_support_t supp = s.supp();
 	for(typename a_support_t::const_iterator m = supp.begin();
@@ -161,8 +161,8 @@ namespace vcsn {
 	p != a.initial().end();
 	++p)
       {
-	a_series_elt_t a_series = a.get_initial(*p);
-	t_series_elt_t s (t.structure().series());
+	a_series_set_elt_t a_series = a.get_initial(*p);
+	t_series_set_elt_t s (t.structure().series());
 	s.assoc(t_neutre, a_series);
 	tt.set_initial(conv[*p], s);
       }
@@ -171,8 +171,8 @@ namespace vcsn {
 	p != a.final().end();
 	++p)
       {
-	a_series_elt_t a_series = a.get_final(*p);
-	t_series_elt_t s (t.structure().series());
+	a_series_set_elt_t a_series = a.get_final(*p);
+	t_series_set_elt_t s (t.structure().series());
 	s.assoc(t_neutre, a_series);
 	tt.set_final(conv[*p], s);
       }

@@ -77,7 +77,7 @@ unsigned product_test(tests::Tester& tg)
 					  3, 6, 1, 2);
       automaton_t p = product(auto_lhs, auto_rhs);
       generalized_t g_p = generalized(p);
-      g_series_elt_t exp_p(g_p.structure().series());
+      g_series_set_elt_t exp_p(g_p.structure().series());
       exp_p = aut_to_exp(g_p);
 
       if (p.final().size() == 0)
@@ -99,8 +99,8 @@ unsigned product_test(tests::Tester& tg)
 	  // Print the failing expressions.
 	  generalized_t g_auto_lhs = generalized(auto_lhs);
 	  generalized_t g_auto_rhs = generalized(auto_rhs);
-	  g_series_elt_t exp_lhs(g_auto_lhs.structure().series());
-	  g_series_elt_t exp_rhs(g_auto_rhs.structure().series());
+	  g_series_set_elt_t exp_lhs(g_auto_lhs.structure().series());
+	  g_series_set_elt_t exp_rhs(g_auto_rhs.structure().series());
 	  exp_lhs = aut_to_exp(g_auto_lhs);
 	  exp_rhs = aut_to_exp(g_auto_rhs);
 	  std::cerr << "Error, automata saved in /tmp." << std::endl;

@@ -198,7 +198,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(input_t);
     typedef typename std::set<hedge_t>		delta_ret_t;
-    typedef typename series_elt_t::support_t	support_t;
+    typedef typename series_set_elt_t::support_t	support_t;
 
     delta_ret_t	delta_ret;
     semiring_elt_t		  zero_semiring
@@ -219,12 +219,12 @@ namespace vcsn {
 	// FIXME : O(n^2) => O(nlog(n))
 	for_all_const_(delta_ret_t, j, delta_ret)
 	  {
-	    series_elt_t s = input.series_of(*j);
+	    series_set_elt_t s = input.series_of(*j);
 	    typename delta_ret_t::const_iterator k = j;
 	    ++k;
 	    for (; k != delta_ret.end(); ++k)
 	      {
-		series_elt_t s_ = input.series_of(*k);
+		series_set_elt_t s_ = input.series_of(*k);
 		for_all_(support_t, supp, s.supp())
 		  if (s_.get(*supp) != zero_semiring)
 		    return false;

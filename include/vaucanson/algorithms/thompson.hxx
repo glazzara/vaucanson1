@@ -50,14 +50,14 @@ namespace vcsn {
     public rat::ConstNodeVisitor<Monoid_, Semiring_>
   {
   public :
-    typedef Auto_						automaton_t;
-    typedef typename automaton_t::set_t				automata_set_t;
-    typedef typename automaton_t::series_set_t			series_set_t;
-    typedef typename automaton_t::series_elt_t			series_elt_t;
-    typedef typename series_elt_t::semiring_elt_t		semiring_elt_t;
-    typedef Monoid_						monoid_elt_value_t;
-    typedef Semiring_						semiring_elt_value_t;
-    typedef rat::Node<monoid_elt_value_t, semiring_elt_value_t>           node_t;
+    typedef Auto_					automaton_t;
+    typedef typename automaton_t::set_t			automata_set_t;
+    typedef typename automaton_t::series_set_t		series_set_t;
+    typedef typename automaton_t::series_set_elt_t	series_set_elt_t;
+    typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
+    typedef Monoid_					monoid_elt_value_t;
+    typedef Semiring_					semiring_elt_value_t;
+    typedef rat::Node<monoid_elt_value_t, semiring_elt_value_t> node_t;
 
   public :
 
