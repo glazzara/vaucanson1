@@ -1,5 +1,9 @@
 2003-10-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/Makefile.am: Adjust.
+
+2003-10-02  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* include/vaucanson/vaucanson_boolean_automaton.hh,
 	  include/vaucanson/vaucanson_boolean_automaton.hxx: New.
 
