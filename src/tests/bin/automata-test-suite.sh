@@ -19,13 +19,18 @@ ALL_TEST=`find $TEST_DIR/automata -name \*_test.hh`
 
 # Generate corresponding -test.cc
 for NAME in $ALL_TEST; do
+  echo $NAME
   BNAME=`basename $NAME`
+  echo $BNAME
   FUN_NAME=`echo $BNAME | sed s/'.hh'/''/`
+  echo $FUN_NAME
   FUN_SNAME=`echo $FUN_NAME | sed s/_test/''/`
+  echo $FUN_SNAME
   TEST_DIR_ECHAP=`echo $TEST_DIR | sed -e s/'\\/'/'\\\\\\/'/`
+  echo $TEST_DIR_ECHAP
   NAME_TEST_FILE=`echo $NAME | sed s/"$TEST_DIR_ECHAP"// | sed s/'\\/'// `
   echo $NAME_TEST_FILE
-  `cat > $DEST_DIR/$FUN_SNAME-test.cc << EOF
+`cat > $DEST_DIR/$FUN_SNAME-test.cc << EOF
 /*  Vaucanson, a generic library for finite state machines.
 Copyright (C) 2001-2002 Sakarovitch, Poss, Rey and Regis-Gianas.
 
@@ -66,7 +71,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	verbose = tests::high;
       else 
 	verbose = tests::low;
-    }
+    }; 
     tests::Tester t(verbose);
     if ($FUN_NAME<$AUTOTYPE>(t)) 
       return EXIT_SUCCESS;

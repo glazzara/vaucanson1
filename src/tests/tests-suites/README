@@ -1,0 +1,10 @@
+
+	test suites are generated with scripts distributed in src/tests/bin. 
+
+	For example, to generate the usual_automaton_t test suite, we used:
+
+../bin/automata-test-suite.sh usual_automaton_t          \ 
+			      usual_automaton_t.includes \ 
+			      usual_automaton_t          \ 
+			      ../
+

@@ -117,10 +117,10 @@ namespace vcsn {
 	return std::make_pair(token, std::string());
     }
 
-    template <typename St, typename automaton_t>
-    void fsm_load(St& in, automaton_t& a)
+    template <typename St, typename AutoType_>
+    void fsm_load(St& in, AutoType_& a)
     {
-      AUTOMATON_TYPES(automaton_t);
+      AUTOMATON_TYPES(AutoType_);
 
       // read everything and build the alphabet.
       alphabet_t		alpha;

@@ -64,6 +64,7 @@ namespace vcsn {
     usual_automaton_t;
 
 #define AUTOMATON_TYPES_(AutoType,Prefix)				      \
+ typedef AutoType				    Prefix##automaton_t;      \
  typedef typename AutoType::states_t		    Prefix##states_t;	      \
  typedef typename AutoType::state_iterator	    Prefix##state_iterator;   \
  typedef typename AutoType::edges_t		    Prefix##edges_t;	      \

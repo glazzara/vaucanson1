@@ -1,4 +1,4 @@
-// global_consistance_test.hh
+// global_consistency_test.hh
 //
 // $Id$
 // Vaucanson, a generic library for finite state machines.
@@ -18,37 +18,23 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+#ifndef GLOBAL_CONSISTENCY_TEST_HH
+# define GLOBAL_CONSISTENCY_TEST_HH
 
-#ifndef GLOBAL_CONSISTANCE_TEST_HH
-# define GLOBAL_CONSISTANCE_TEST_HH
-
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-
-
-# include <vaucanson/automata/concept/automata.hh>
-# include <vaucanson/automata/concept/automaton_impl.hh>
-
-# include <vaucanson/automata/concept/kinds.hh>
-
-# include <vaucanson/automata/concept/tags.hh>
-
-# include <vaucanson/automata/concrete/manylinks.hh>
-
-# include <check/tests_stuff.hh>
 # include <map>
 # include <set>
 # include <time.h>
-
+# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/automata/concept/automata.hh>
+# include <vaucanson/automata/concept/automaton_impl.hh>
+# include <vaucanson/automata/concept/kinds.hh>
+# include <vaucanson/automata/concept/tags.hh>
+# include <check/tests_stuff.hh>
 # include <vaucanson/misc/ref.hh>
-
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual.hh>
 
 template <class Auto>
-unsigned global_consistance_test(tests::Tester& tg)
+unsigned global_consistency_test(tests::Tester& tg)
 {
   tests::Tester t(tg.verbose());
 
@@ -80,16 +66,22 @@ unsigned global_consistance_test(tests::Tester& tg)
        i != automaton.edges().end();
        i++)
     {
-      hstate_t tmp = automaton.aim_of(*i);
-      bool res = false;
+      hstate_t aim  = automaton.aim_of(*i);
+      hstate_t from = automaton.origin_of(*i);
+      bool res  = false;
+      bool res2 = false;
 
       for (tools::usual_automaton_t::state_iterator j = 
 	     automaton.states().begin();
 	   j != automaton.states().end();
 	   j++)
-	if (*j == tmp)
-	  res = true;
-      final = final && res;
+	{
+	  if (*j == aim)
+	    res = true;
+	  if (*j == from)
+	    res2 = true;
+	}
+      final = final && res && res2;
     }
 
   TEST(t, "All edges are well defined.", final);
@@ -97,4 +89,4 @@ unsigned global_consistance_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-# endif
+#endif // GLOBAL_CONSISTENCY_TEST_HH

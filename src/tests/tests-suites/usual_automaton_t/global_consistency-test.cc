@@ -17,7 +17,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 #include <vaucanson/tools/usual.hh>
   #include <check/tests_stuff.hh>
-  #include <automata/implementation_check/global_consistance_test.hh>
+  #include <automata/implementation_check/global_consistency_test.hh>
 
   int main(int argc, char **argv)
   {
@@ -35,9 +35,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	verbose = tests::high;
       else 
 	verbose = tests::low;
-    }
+    };
     tests::Tester t(verbose);
-    if (global_consistance_test<usual_automaton_t>(t)) 
+    if (global_consistency_test<usual_automaton_t>(t)) 
       return EXIT_SUCCESS;
     else
       return EXIT_FAILURE;

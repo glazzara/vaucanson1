@@ -18,31 +18,16 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
 #ifndef ADD_EDGE_TEST_HH
 # define ADD_EDGE_TEST_HH
 
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-
-
+# include <map>
+# include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automaton_impl.hh>
-
 # include <vaucanson/automata/concept/kinds.hh>
-
 # include <vaucanson/automata/concept/tags.hh>
-
-# include <vaucanson/automata/concrete/manylinks.hh>
-
 # include <check/tests_stuff.hh>
-# include <map>
-
-# include <vaucanson/misc/ref.hh>
-# include <vaucanson/tools/usual.hh>
-
 # include <vaucanson/automata/concept/handlers.hh>
 
 template <class Auto> 
@@ -64,19 +49,19 @@ unsigned add_edge_test(tests::Tester& tg)
   hstate_t s1 = automaton.add_state();
   hstate_t s2 = automaton.add_state();
 
-  TEST(t, "Initial Number of Edges (0)", automaton.edges().size() == 0);
+  TEST(t, "Initial number of edge = 0.", automaton.edges().size() == 0);
 
   hedge_t h1 = automaton.add_edge(s1, s2, series_elt_t());
 
-  TEST(t, "Number of Edges after 1 edge added", 
+  TEST(t, "Number of edge after one add_edge = 1.", 
        automaton.edges().size() == 1);
 
   automaton.del_edge(h1);
 
-  TEST(t, "Number of Edges after 1 edge deleted ", 
+  TEST(t, "Number of edge after one deletion = 0.", 
        automaton.edges().size() == 0);
 
   return t.all_passed();
 }
 
-#endif
+#endif // ADD_EDGE_TEST_HH

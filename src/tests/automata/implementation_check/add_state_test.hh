@@ -18,32 +18,16 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
 #ifndef ADD_STATE_TEST_HH
 # define ADD_STATE_TEST_HH
 
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-
-
+# include <map>
+# include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automaton_impl.hh>
-
 # include <vaucanson/automata/concept/kinds.hh>
-
 # include <vaucanson/automata/concept/tags.hh>
-
-# include <vaucanson/automata/concrete/manylinks.hh>
-
 # include <check/tests_stuff.hh>
-# include <map>
-
-# include <vaucanson/misc/ref.hh>
-# include <vaucanson/tools/usual.hh>
-
-
 
 template <class Auto> 
 unsigned add_state_test(tests::Tester& tg)
@@ -61,19 +45,19 @@ unsigned add_state_test(tests::Tester& tg)
 
   automaton.create();
 
-  TEST(t, "Initial Number of States (0)", automaton.states().size() == 0);
+  TEST(t, "Initial number of state = 0.", automaton.states().size() == 0);
 
   hstate_t s1 = automaton.add_state();
 
-  TEST(t, "Number of States after 1 state added", 
+  TEST(t, "Number of state after one state addition = 1.",
        automaton.states().size() == 1);
 
   automaton.del_state(s1);
  
- TEST(t, "Number of States after state deleted", 
+  TEST(t, "Number of state after one state deletion = 0.",
        automaton.states().size() == 0);  
 
   return t.all_passed();
 }
 
-#endif
+#endif // ADD_STATE_TEST_HH

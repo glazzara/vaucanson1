@@ -1,3 +1,10 @@
+2002-08-12  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.103)
+	* src/tests/automata/implementation_check/init_final_test.hh: fixed.
+	* src/tests/automata/implementation_check/coherence_state_edge_test.hh: fixed.
+	* src/tests/automata/implementation_check/add_state_test.hh: fixed.
+	* src/tests/automata/implementation_check/add_edge_test.hh: fixed.
+
 2002-08-09  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.102)
 	* include/vaucanson/tools/gen_book.hh: added.

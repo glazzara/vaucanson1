@@ -18,31 +18,16 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
 #ifndef COHERENCE_STATE_EDGE_TEST_HH
 # define COHERENCE_STATE_EDGE_TEST_HH
 
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/algebra/concrete/free_monoid/str_words.hh>
-#include <vaucanson/algebra/concrete/series/polynoms.hh>
-#include <vaucanson/algebra/concrete/semiring/numerical_semiring.hh>
-
-
+# include <map>
+# include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/automaton_impl.hh>
-
 # include <vaucanson/automata/concept/kinds.hh>
-
 # include <vaucanson/automata/concept/tags.hh>
-
-# include <vaucanson/automata/concrete/manylinks.hh>
-
 # include <check/tests_stuff.hh>
-# include <map>
-
-# include <vaucanson/misc/ref.hh>
-
-# include <vaucanson/tools/usual.hh>
 
 template <class Auto>
 unsigned coherence_state_edge_test(tests::Tester& tg)
@@ -65,13 +50,12 @@ unsigned coherence_state_edge_test(tests::Tester& tg)
 
   hedge_t h1 = automaton.add_edge(s1, s2, series_elt_t() );
 
-  TEST(t, "Check Number of States", automaton.states().size() == 2);
-
-  TEST(t, "Check Number of Edges", automaton.edges().size() == 1);
+  TEST(t, "Check number of state.", automaton.states().size() == 2);
+  TEST(t, "Check number of edge.", automaton.edges().size() == 1);
 
   automaton.del_state(s1);
 
-  TEST(t, "Check for zombies edges", automaton.edges().size() == 0);
+  TEST(t, "Check for zombies edge.", automaton.edges().size() == 0);
 
   return t.all_passed();
 }
