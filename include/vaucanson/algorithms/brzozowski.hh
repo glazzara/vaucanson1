@@ -38,6 +38,8 @@ namespace vcsn {
   /*! \addtogroup algorithms */  /* @{ */
 
   //! Convert a krat expression into an automaton using Brzozowski construction.
+  // INTERFACE: void brzozowski(Automaton& a, const Exp& e) { return vcsn::brzozowski(*a, e); }
+  // INTERFACE: void brzozowski(GenAutomaton& a, const Exp& e) { return vcsn::brzozowski(*a, e); }
   template <typename A, typename T, typename Exp>
   void
   brzozowski(Element<A, T>&, const Exp&);

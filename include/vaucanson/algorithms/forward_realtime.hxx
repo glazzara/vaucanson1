@@ -37,6 +37,7 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
 # include <vaucanson/algorithms/forward_closure.hh>
+# include <vaucanson/algorithms/accessible.hh>
 
 namespace vcsn {
 

@@ -139,7 +139,7 @@ namespace vcsn {
   void union_of_normalized_here(Element<A, T>& lhs, 
 				const Element<A, U>& rhs)
   {
-    // assert (lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     do_union_of_normalized_here(lhs.set(), lhs, rhs);
   }
 
@@ -148,7 +148,7 @@ namespace vcsn {
   union_of_normalized(const Element<A, T>& lhs, 
 		      const Element<A, U>& rhs)
   {
-    // assert(lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
     do_union_of_normalized_here(ret.set(), ret, rhs);
@@ -238,7 +238,7 @@ namespace vcsn {
   void concatenate_of_normalized_here(Element<A, T>& lhs, 
 				      const Element<A, U>& rhs)
   {
-    // assert (lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     do_concatenate_of_normalized_here(lhs.set(), lhs, rhs);
   }
 
@@ -247,7 +247,7 @@ namespace vcsn {
   concatenate_of_normalized(const Element<A, T>& lhs, 
 			    const Element<A, U>& rhs)
   {
-    // assert(lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
     do_concatenate_of_normalized_here(ret.set(), ret, rhs);
@@ -285,7 +285,7 @@ namespace vcsn {
   Element<A, T> 
   star_of_normalized(const Element<A, T>& a)
   {
-    // assert(lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(a);
     ret.emancipate();
     do_star_of_normalized_here(ret.set(), ret);

@@ -186,7 +186,7 @@ namespace vcsn {
   Element<A, T> 
   product(const Element<A, T>& lhs, const Element<A, U>& rhs)
   {
-    // assert(lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(rhs.set());
     product(ret.set(), ret, lhs, rhs);
     return ret;
@@ -218,7 +218,7 @@ namespace vcsn {
       {
 	b_event = dynamic_cast<const history::BinaryEvent<hstate_t> *>
 	  (a.history().get_state_event_about(PRODUCT_EVENT, *s));
-	assert(b_event);
+	assertion(b_event);
 	if (b_event->get_first() == b_event->get_second())
 	  diagonal_states.insert(*s);
       }

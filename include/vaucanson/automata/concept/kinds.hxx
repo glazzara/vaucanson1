@@ -31,7 +31,7 @@
 # define VCSN_AUTOMATA_CONCEPT_KINDS_HXX
 
 #include <iterator>
-#include <cassert>
+#include <vaucanson/misc/contract.hh>
 #include <algorithm>
 
 #include <vaucanson/fundamental/fundamental.hh>
@@ -296,7 +296,7 @@ namespace vcsn {
     add_serie_edge(hstate_t from, hstate_t to, 
 		   const S& e)
     { 
-      assert(e.is_finite_app());
+      assertion(e.is_finite_app());
       hedge_t x;
 
       typedef typename S::value_t supp_t;

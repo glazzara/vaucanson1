@@ -38,7 +38,7 @@ namespace vcsn {
     T 
     DefaultTransposeFun<S, T>::operator()(const S&, const T& label) const
     {
-      assert(!"Default transposition is not defined.");
+      assertion(!"Default transposition is not defined.");
     }
 
   } // algebra

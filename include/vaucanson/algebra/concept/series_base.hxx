@@ -89,7 +89,7 @@ namespace vcsn {
   typename MetaElement<algebra::SeriesBase<S>, T>::weight_value_t 
   MetaElement<algebra::SeriesBase<S>, T>::value_get(const monoid_value_t& m) const
   { 
-    // assert(set().monoid().contains(m));
+    // assertion(set().monoid().contains(m));
     return op_series_get(this->set(), value(), m);
   }
 
@@ -105,8 +105,8 @@ namespace vcsn {
   MetaElement<algebra::SeriesBase<S>, T>::value_set(const monoid_value_t& m, 
 					   const weight_value_t& w) 
   { 
-    // assert(set().monoid().contains(m));
-    // assert(set().weights().contains(w));
+    // assertion(set().monoid().contains(m));
+    // assertion(set().weights().contains(w));
     return op_series_set(this->set(), value(), m, w);
   }
 
@@ -164,13 +164,13 @@ namespace vcsn {
   template<typename S, typename T, typename M, typename W>
   void op_series_set(const algebra::SeriesBase<S>& s, const T& t, const W& w)
   {
-    assert(! "defined.");
+    assertion(! "defined.");
   }
 
   template <class S, class T>
   Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T)) 
   {
-    assert(! "defined.");
+    assertion(! "defined.");
   }
 
   template <class S, class T>

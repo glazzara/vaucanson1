@@ -65,7 +65,7 @@ namespace vcsn {
   inline
   bool op_contains(const algebra::Series<W, M>&, const rat::exp<Tm, Tw>&)
   { 
-    assert(! "op_contains for Element<Series<W,M>, exp<Tm,Tw> > not defined.");
+    assertion(! "op_contains for Element<Series<W,M>, exp<Tm,Tw> > not defined.");
     return true; 
   }
 

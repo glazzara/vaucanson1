@@ -34,7 +34,7 @@
 # include <vaucanson/algebra/concrete/series/series.hh>
 # include <iostream>
 # include <utility>
-# include <cassert>
+# include <vaucanson/misc/contract.hh>
 
 namespace vcsn {
 

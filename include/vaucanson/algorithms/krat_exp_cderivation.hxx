@@ -167,7 +167,7 @@ namespace vcsn {
       {
 	algebra::KRatExpCDerivation<Series, T, algebra::DispatchFunction<T> >
 	  matcher(exp, *a);
-	ret = matcher.match(ret);
+	ret = matcher.match(ret.value());
       }
     return ret;
   }

@@ -35,7 +35,7 @@
 # include <algorithm>
 # include <set>
 # include <queue>
-# include <cassert>
+# include <vaucanson/misc/contract.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/selectors.hh>
@@ -57,7 +57,7 @@ namespace vcsn {
     hstate_t
     operator()(const Auto_& a) const
     {
-      assert(a.states().size() > 0);
+      assertion(a.states().size() > 0);
       typename Auto_::state_iterator s = a.states().begin();
       typename Auto_::state_iterator k = s;
       while ((k != a.states().end()) &&
@@ -85,7 +85,7 @@ namespace vcsn {
     template <class Auto_>
     hstate_t operator()(const Auto_& a) 
     {
-      assert(pos_ != list_.end());
+      assertion(pos_ != list_.end());
       return *pos_++;
     }
 

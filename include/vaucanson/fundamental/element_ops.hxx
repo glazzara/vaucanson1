@@ -201,7 +201,7 @@ namespace std
   void swap(vcsn::Element<S, T1>& e1, 
 	    vcsn::Element<S, T2>& e2)
   { 
-    assert(&e1.set() == &e2.set());
+    assertion(&e1.set() == &e2.set());
     vcsn::op_swap(e1.set(), e1.value(), e2.value()); 
   } 
 

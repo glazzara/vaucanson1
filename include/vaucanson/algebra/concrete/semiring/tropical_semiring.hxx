@@ -150,7 +150,7 @@ namespace vcsn {
 	  b = 0;
 	  return;
 	}
-      assert(! "star not defined.");
+      assertion(! "star not defined.");
     }
 
     template <typename T>
@@ -171,7 +171,7 @@ namespace vcsn {
 	  b = 0;
 	  return;
 	}
-      assert(! "star not defined.");
+      assertion(! "star not defined.");
     }
 
     template <class TropicalKind, class T>

@@ -31,7 +31,7 @@
 # define VCSN_ALGEBRA_CONCEPT_SEMIRING_BASE_HH
 
 # include <vaucanson/algebra/concept/monoid_base.hh>
-# include <cassert>
+# include <vaucanson/misc/contract.hh>
 # include <string>
 
 namespace vcsn {

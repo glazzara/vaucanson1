@@ -136,7 +136,7 @@ namespace vcsn {
     template<typename M_, typename W_>
     M_ RandomVisitor<M_,W_>::get() const 
     { 
-      assert(not_empty);
+      assertion(not_empty);
       return w_; 
     } 
 

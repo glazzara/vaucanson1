@@ -163,7 +163,7 @@ namespace vcsn {
   Element<S, T> 
   op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
-    assert(! "default implementation of op_choose_non_starable called");
+    assertion(! "default implementation of op_choose_non_starable called");
     return T();
   }
 
@@ -201,7 +201,7 @@ namespace vcsn {
   template <typename Self, typename T>
   void op_in_star(const algebra::SemiringBase<Self>&, T& v)
   {
-    assert(op_eq(SELECT(Self), v, zero_value(SELECT(Self), SELECT(T))));
+    assertion(op_eq(SELECT(Self), v, zero_value(SELECT(Self), SELECT(T))));
     v = identity_value(SELECT(Self), SELECT(T));
   } 
 

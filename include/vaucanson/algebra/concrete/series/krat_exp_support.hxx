@@ -92,7 +92,7 @@ namespace vcsn {
     MATCH_(Star, node)
     {
       // undefined case.
-      assert(0);
+      assertion(0);
     }
     END
 

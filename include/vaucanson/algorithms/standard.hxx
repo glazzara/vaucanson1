@@ -114,7 +114,7 @@ namespace vcsn {
   void union_of_standard_here(Element<A, T>& lhs, 
 			      const Element<A, U>& rhs)
   {
-    // assert (lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     do_union_of_standard_here(lhs.set(), lhs, rhs);
   }
 
@@ -123,7 +123,7 @@ namespace vcsn {
   union_of_standard(const Element<A, T>& lhs, 
 		    const Element<A, U>& rhs)
   {
-    // assert(lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
     do_union_of_standard_here(ret.set(), ret, rhs);
@@ -228,7 +228,7 @@ namespace vcsn {
   void concat_of_standard_here(Element<A, T>& lhs, 
 			       const Element<A, U>& rhs)
   {
-    // assert (lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     do_concat_of_standard_here(lhs.set(), lhs, rhs);
   }
   
@@ -237,7 +237,7 @@ namespace vcsn {
   concat_of_standard(const Element<A, T>& lhs, 
 		     const Element<A, U>& rhs)
   {
-    // assert(lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(lhs);
     ret.emancipate();
     do_concat_of_standard_here(ret.set(), ret, rhs);
@@ -281,7 +281,7 @@ namespace vcsn {
   Element<A, T> 
   star_of_standard(const Element<A, T>& a)
   {
-    // assert(lhs.set() == rhs.set())
+    // assertion(lhs.set() == rhs.set())
     Element<A, T> ret(a);
     ret.emancipate();
     do_star_of_standard_here(ret.set(), ret);

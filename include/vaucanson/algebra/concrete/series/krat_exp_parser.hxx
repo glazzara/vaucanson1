@@ -206,7 +206,7 @@ namespace vcsn {
 	     ++i)
 	  if (i->type == a_word)
 	    return i->m;
-	assert(! "internal error in krat_exp parser.");
+	assertion(! "internal error in krat_exp parser.");
 	return MonoidValue();
       }
 
@@ -217,7 +217,7 @@ namespace vcsn {
 	     ++i)
 	  if (i->type == a_weight)
 	    return i->w;
-	assert(! "internal error in krat_exp parser.");
+	assertion(! "internal error in krat_exp parser.");
 	return WeightValue();
       }
 

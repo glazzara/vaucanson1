@@ -1,5 +1,45 @@
 2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/complement.hh: Equip for vaucanswig.
+	* include/vaucanson/algorithms/complete.hh,
+	include/vaucanson/algorithms/eval.hh,
+	include/vaucanson/algorithms/concatenate.hh,
+	include/vaucanson/algorithms/isomorph.hh,
+	include/vaucanson/algorithms/brzozowski.hh,
+	include/vaucanson/algorithms/berry_sethi.hh,
+	include/vaucanson/algorithms/derivatives_automaton.hh,
+	include/vaucanson/algorithms/krat_exp_cderivation.hh:,
+	include/vaucanson/algorithms/forward_closure.hh,
+	include/vaucanson/algorithms/forward_realtime.hh,
+	include/vaucanson/algorithms/backward_realtime.hh: Likewise.
+
+	* include/vaucanson/algorithms/complement.hxx: Add missing include.
+	* include/vaucanson/algorithms/forward_realtime.hxx: Likewise.
+	* include/vaucanson/algorithms/krat_exp_cderivation.hxx: Fix.
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx: Fix.
+
+	* include/vaucanson/fundamental/element_ops.hxx: Update contracts.
+	* include/vaucanson/automata/concept/kinds.hh,
+	include/vaucanson/automata/concept/kinds.hxx,
+	include/vaucanson/algorithms/aut_to_exp.hxx,
+	include/vaucanson/algorithms/normalized.hxx,
+	include/vaucanson/algorithms/product.hxx,
+	include/vaucanson/algorithms/standard.hxx,
+	include/vaucanson/algorithms/sum.hxx,
+	include/vaucanson/algebra/concrete/series/transpose.hxx,
+	include/vaucanson/algebra/concrete/series/rat/random_visitor.hxx,
+	include/vaucanson/algebra/concrete/series/krat.hxx,
+	include/vaucanson/algebra/concrete/series/krat_exp_parser.hxx,
+	include/vaucanson/algebra/concrete/series/krat_exp_pattern.hh,
+	include/vaucanson/algebra/concrete/series/krat_exp_support.hxx,
+	include/vaucanson/algebra/concrete/semiring/numerical_semiring.hxx,
+	include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx,
+	include/vaucanson/algebra/concept/semiring_base.hh,
+	include/vaucanson/algebra/concept/semiring_base.hxx,
+	include/vaucanson/algebra/concept/series_base.hxx: Likewise.
+
+2003-07-14  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* src/tests/tests-suites/algebra_tropical_max_semiring.defs: Add
 	missing namespace specification.
 	* include/vaucanson/tools/io.hxx: Remove unused argument name.

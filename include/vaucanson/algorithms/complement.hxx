@@ -34,6 +34,7 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/tools/usual.hh>
+# include <vaucanson/algorithms/determinize.hh>
 
 namespace vcsn {
   

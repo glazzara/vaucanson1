@@ -49,6 +49,8 @@ namespace vcsn {
    * @see complete.
    * @see is_complete.
    */ 
+  // INTERFACE: void complete_here(Automaton& a) { return vcsn::complete_here(*a); }
+  // INTERFACE: void complete_here(GenAutomaton& a) { return vcsn::complete_here(*a); }
   template <typename A, typename T>
   void
   complete_here(Element<A, T>& a);
@@ -61,6 +63,8 @@ namespace vcsn {
    * @see complete_here.
    * @see is_complete.
    */ 
+  // INTERFACE: Automaton complete(const Automaton& a) { return vcsn::complete(*a); }
+  // INTERFACE: GenAutomaton complete(const GenAutomaton& a) { return vcsn::complete(*a); }
   template <typename A, typename T>
   Element<A, T>
   complete(const Element<A, T>&);
@@ -73,6 +77,8 @@ namespace vcsn {
    * @see complete.
    * @see complete_here.
    */
+  // INTERFACE: bool is_complete(const Automaton& a) { return vcsn::is_complete(*a); }
+  // INTERFACE: bool is_complete(const GenAutomaton& a) { return vcsn::is_complete(*a); }
   template <class A, class T>
   bool
   is_complete(const Element<A, T>& e);

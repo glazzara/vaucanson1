@@ -67,12 +67,8 @@ namespace vcsn {
     INHERIT_CONSTRUCTORS(self_t, T, weight_t, Dispatch);
 
     KRatExpLinearize(const Element<Series, T>& exp) :
-      index_(LINEAR_INDEX_START), exp_(exp), l_alpha_()
+      index_(LINEAR_INDEX_START), exp_(exp), l_alpha_(), l_serie_(l_weights_t(), l_monoid_t(l_alpha_))
     {
-      // Build a serie with the new type but with an empty alphabet.
-      l_monoid_t	l_monoid(l_alpha_);
-      l_weights_t	l_semiring;
-      l_serie_ = l_serie_t(l_semiring, l_monoid);
     }
 
     return_type linearize()

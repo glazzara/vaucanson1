@@ -57,6 +57,8 @@ namespace vcsn {
    * @see forward_realtime
    * @see backward_realtime_here
    */
+  // INTERFACE: void forward_realtime_here(Automaton& a) { return vcsn::forward_realtime_here(*a); }
+  // INTERFACE: void forward_realtime_here(GenAutomaton& a) { return vcsn::forward_realtime_here(*a); }
   template<typename A, typename T>
   void
   forward_realtime_here(Element<A, T>& a);
@@ -73,6 +75,8 @@ namespace vcsn {
    * @see forward_realtime_here
    * @see backward_realtime
    */
+  // INTERFACE: Automaton forward_realtime(const Automaton& a) { return vcsn::forward_realtime(*a); }
+  // INTERFACE: GenAutomaton forward_realtime(const GenAutomaton& a) { return vcsn::forward_realtime(*a); }
   template<typename A, typename T>
   Element<A, T>
   forward_realtime(const Element<A, T>& a);

@@ -182,7 +182,7 @@ namespace vcsn {
   Element<algebra::NumericalSemiring, bool> 
   op_choose_non_starable(const algebra::NumericalSemiring& set, SELECTOR(bool))
   {
-    assert(! "Cannot choose non-starable boolean: that does not exist");
+    assertion(! "Cannot choose non-starable boolean: that does not exist");
     return false;
   }
 
@@ -222,7 +222,7 @@ namespace vcsn {
     if (f < 1.0)
       f = (1.0 / (1.0 - f));
     else
-      assert(! "star not defined.");
+      assertion(! "star not defined.");
   }
 
   inline

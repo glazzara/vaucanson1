@@ -59,6 +59,8 @@ namespace vcsn {
    * of the series to work with. Thus, the series can be different
    * from the expresion ones.
    */
+  // INTERFACE: void derivatives_automaton(Automaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
+  // INTERFACE: void derivatives_automaton(GenAutomaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
   template <typename A, typename T, typename Exp>
   void
   derivatives_automaton(Element<A, T>& a, const Exp& e);

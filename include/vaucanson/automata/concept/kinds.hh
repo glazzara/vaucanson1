@@ -32,7 +32,7 @@
 
 # include <vaucanson/config/system.hh>
 # include <iterator>
-# include <cassert>
+# include <vaucanson/misc/contract.hh>
 # include <algorithm>
 
 # include <vaucanson/algebra/concept/series_base.hh>
