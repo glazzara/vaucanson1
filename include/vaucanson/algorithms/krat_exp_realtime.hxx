@@ -39,37 +39,71 @@ namespace vcsn {
 
   namespace algebra
   {
-    template <class Series, class T, class Dispatch>
-    struct KRatExpIsRealtime : algebra::KRatExpIdentity<
-      KRatExpIsRealtime<Series, T, Dispatch>,
-      Series,
+    template <class Exp_,
+	      class Dispatch_>
+    class KRatExpIsRealtime :
+      public algebra::KRatExpMatcher<
+      KRatExpIsRealtime<Exp_, Dispatch_>,
+      Exp_,
       bool,
-      Dispatch
+      Dispatch_
       >
     {
-      typedef KRatExpIsRealtime<Series, T, Dispatch>	self_t;
+    public :
+      typedef KRatExpIsRealtime<Exp_, Dispatch_>	this_class;
       typedef bool					return_type;
-      typedef typename Element<Series, T>::semiring_elt_t semiring_elt_t;
-      typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
-      typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
-      typedef typename monoid_elt_t::value_t		monoid_value_t;
-      typedef typename monoid_elt_t::set_t		monoid_t;
-      typedef typename monoid_t::alphabet_t		alphabet_t;
-      typedef typename alphabet_t::letter_t		letter_t;
-      INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
+      typedef typename Exp_::monoid_value_t		monoid_value_t;
+      typedef typename Exp_::semiring_elt_value_t	semiring_elt_value_t;
+      INHERIT_CONSTRUCTORS(this_class, Exp_, bool, Dispatch_);
 
-      KRatExpIsRealtime(const Element<Series, T>& exp) :
- 	KRatExpIdentity<KRatExpIsRealtime<Series, T, Dispatch>,
- 			Series,
- 			bool,
- 			Dispatch
- 			>(exp)
-       {}
+      MATCH__(Sum, l, r)
+      {
+	return match(l) and match(r);
+      }
+      END
+
+      MATCH__(Product, l, r)
+      {
+	return match(l) and match(r);
+      }
+      END
+
+      MATCH_(Star, e)
+      {
+	return match(e);
+      }
+      END
+
+      MATCH__(LeftWeight, w, e)
+      {
+	w = w; // Avoid warning.
+	return match(e);
+      }
+      END
+
+      MATCH__(RightWeight, e, w)
+      {
+	w = w; // Avoid warning.
+	return match(e);
+      }
+      END
 
       MATCH_(Constant, m)
       {
 	typename monoid_value_t::const_iterator i = m.begin();
 	return ++i == m.end();
+      }
+      END
+
+      MATCH(Zero)
+      {
+	return true;
+      }
+      END
+
+      MATCH(One)
+      {
+	return true;
       }
       END
     };
@@ -83,8 +117,8 @@ namespace vcsn {
     typedef S_				S;
     typedef typename Exp_::value_t	T;
 
-    algebra::KRatExpIsRealtime< S, T, algebra::DispatchFunction<T> >
-      matcher(exp);
+    algebra::KRatExpIsRealtime< T, algebra::DispatchFunction<T> >
+      matcher;
     return matcher.match(exp.value());
   }
 

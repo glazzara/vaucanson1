@@ -1,3 +1,10 @@
+2004-03-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh:
+	Improve the test on krat_exp_realtime.
+	* include/vaucanson/algorithms/krat_exp_realtime.hxx:
+	Update accordingly.
+
 2004-03-21  Valentin David  <valentin@lrde.epita.fr>
 
 	* doc/xml/format.sgml, doc/xml/dev.sgml, doc/xml/Makefile.am:
