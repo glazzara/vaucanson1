@@ -21,6 +21,7 @@
 #ifndef AUTOMATA_MANYLINKS_HH
 # define AUTOMATA_MANYLINKS_HH
 
+# include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/fundamental/fundamental.hh>
 # include <vaucanson/automata/concrete/manylinks_carriers.hh>
 

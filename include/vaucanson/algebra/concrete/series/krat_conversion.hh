@@ -91,7 +91,7 @@ namespace vcsn {
 
 } // vcsn
 
-# include <vaucanson/algebra/krat_conversion.hxx>
+# include <vaucanson/algebra/concrete/series/krat_conversion.hxx>
 
 #endif // ALGEBRA_KRAT_CONVERSION_HH
  

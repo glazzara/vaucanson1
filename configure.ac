@@ -17,9 +17,12 @@ AC_LANG(C++)
 AC_CHECK_HEADERS([limits])
 AC_CHECK_HEADERS([stl_config.h])
 
+AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
+
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
+	src/tests/defs
 	src/tests/Makefile
 	src/tests/check/Makefile
 	src/tests/fundamental/Makefile
@@ -31,6 +34,7 @@ AC_CONFIG_FILES([
 	src/tests/automata/Makefile
 	src/tests/automata/algos/Makefile
 	src/tests/automata/implementation_check/Makefile
+	src/tests/sanity/Makefile
 	src/tests/tests-suites/Makefile
 	src/tests/bin/Makefile
 	src/tests/tests-suites/usual_automaton_t/Makefile

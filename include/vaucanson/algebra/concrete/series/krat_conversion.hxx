@@ -33,20 +33,20 @@ namespace vcsn {
 
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::ExpConvertVisitor(const Series_& s)
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::ExpConvertVisitor(const Series_& s)
       : exp_(), series_(s)
     {}
     
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::~ExpConvertVisitor()
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::~ExpConvertVisitor()
     {}
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    virtual void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::product(const node_t* left_, 
+     void
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::product(const node_t* left_, 
 						 const node_t* right_)
     {
       right_->accept(*this);
@@ -57,8 +57,8 @@ namespace vcsn {
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    virtual void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::sum(const node_t* left_, 
+     void
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::sum(const node_t* left_, 
 					     const node_t* right_)
     {
       right_->accept(*this);
@@ -69,8 +69,8 @@ namespace vcsn {
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    virtual void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::star(const node_t* node_)
+     void
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::star(const node_t* node_)
     {
       node_->accept(*this);
       op_in_star(series_, exp_);
@@ -78,8 +78,8 @@ namespace vcsn {
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    virtual void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::left_weight(const oTw& w, 
+     void
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::left_weight(const oTw& w, 
 						     const node_t* node_)
     {
       node_->accept(*this);
@@ -92,8 +92,8 @@ namespace vcsn {
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    virtual void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::right_weight(const oTw& w, 
+     void
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::right_weight(const oTw& w, 
 						      const node_t* node_)
     {
       node_->accept(*this);
@@ -105,8 +105,8 @@ namespace vcsn {
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    virtual void 
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::constant(const oTm& m_)
+     void 
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::constant(const oTm& m_)
     {
       Tm m = op_convert(SELECT(Tm),
 			SELECT(typename Series_::monoid_t),
@@ -120,24 +120,24 @@ namespace vcsn {
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    virtual void 
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::one()
+     void 
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::one()
     {
       exp_ = exp_t::one();
     }
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    virtual void 
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::zero()
+     void 
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::zero()
     {
       exp_ = exp_t::zero();
     }
     
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    const exp_t& 
-    ExpConvertVisitor<Tm, Tw, oTm, oTw>::get() const
+    const typename ExpConvertVisitor<Tm,Tw,oTm,oTw,Series_>::exp_t& 
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::get() const
     {
       return exp_;
     }

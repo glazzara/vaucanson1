@@ -152,50 +152,6 @@ namespace vcsn
   }
 }
 
-#include <vaucanson/algebra/concept/bimonoid_base.hh>
-
-namespace vcsn
-{
-  namespace algebra
-  {
-
-    /*-----------------.
-    | Bimonoid concept |
-    `-----------------*/
-
-    template<typename S, typename T>
-    struct BimonoidConcept
-    {
-      S s;
-
-      typedef Element<S, T> elt_t;
-
-      elt_t elt;
-
-      void constraints();
-
-      BimonoidBase<S>&			check_inheritance();
-      MetaElement<BimonoidBase<S>, T>&	check_elt_inheritance();
-
-      const typename S::lmonoid_t& check_lmonoid(const S& s);
-      const typename S::rmonoid_t& check_rmonoid(const S& s);
-
-      Element<typename S::lmonoid_t, typename elt_t::lmonoid_value_t>
-      check_left();
-      Element<typename S::rmonoid_t, typename elt_t::rmonoid_value_t>
-      check_right();
-
-      typename elt_t::lmonoid_value_t& 
-      check_left_value();
-      typename elt_t::rmonoid_value_t&
-      check_right_value();
-
-    };
-  }
-}
-
-
-
 #include <vaucanson/algebra/concept/freemonoid_base.hh>
 
 namespace vcsn

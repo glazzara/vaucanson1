@@ -87,19 +87,20 @@ SUBDIRS = \
 	fundamental				\
 	algebra    				\
 	bin                                     \
+	sanity                                  \
 	automata
 
 subdir = src/tests
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/include/vaucanson/config/config.hh
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = defs
 DIST_SOURCES =
 
 RECURSIVE_TARGETS = info-recursive dvi-recursive install-info-recursive \
 	uninstall-info-recursive all-recursive install-data-recursive \
 	install-exec-recursive installdirs-recursive install-recursive \
 	uninstall-recursive check-recursive installcheck-recursive
-DIST_COMMON = Makefile.am Makefile.in
+DIST_COMMON = Makefile.am Makefile.in defs.in
 DIST_SUBDIRS = $(SUBDIRS)
 all: all-recursive
 
@@ -109,6 +110,8 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	  $(AUTOMAKE) --gnu  src/tests/Makefile
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
+defs: $(top_builddir)/config.status defs.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 uninstall-info-am:
 
 # This directory's subdirectories are mostly independent; you can cd

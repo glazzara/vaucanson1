@@ -134,7 +134,6 @@ vaucanson/algebra/concept/tropical_semiring.hh\
 vaucanson/algebra/concept/freemonoid_base.hh\
 vaucanson/algebra/concept/series_base.hh\
 vaucanson/automata/concrete/manylinks_states.hh\
-vaucanson/automata/concrete/manylinks_impl.hh\
 vaucanson/automata/concrete/manylinks_edges.hh\
 vaucanson/automata/concrete/manylinks_carriers.hh\
 vaucanson/automata/concrete/manylinks.hh\
@@ -151,7 +150,6 @@ vaucanson/automata/concept/automaton_impl.hh\
 vaucanson/automata/concept/automata_base.hh\
 vaucanson/automata/concept/automata.hh\
 vaucanson/automata/concept/kinds.hh\
-vaucanson/automata/concept/generalized.hh\
 vaucanson/algorithms/extract.hh\
 vaucanson/algorithms/reachable.hh\
 vaucanson/algorithms/determinize.hh\
@@ -223,7 +221,6 @@ vaucanson/automata/concept/automaton_impl.hxx\
 vaucanson/automata/concept/automata_base.hxx\
 vaucanson/automata/concept/automata.hxx\
 vaucanson/automata/concept/kinds.hxx\
-vaucanson/automata/concept/generalized.hxx\
 vaucanson/algorithms/extract.hxx\
 vaucanson/algorithms/reachable.hxx\
 vaucanson/algorithms/determinize.hxx\

@@ -56,7 +56,7 @@ namespace vcsn {
   // wrapper:
   template<typename A, typename T, typename StatesSet>
   Element<A, T> 
-  auto_extract(const Element<A, T>& a, const StatesSet& s, bool check_states = true)
+  auto_extract(const Element<A, T>& a, const StatesSet& s, bool check_states)
   { 
     Element<A, T> ret(a);
     ret.emancipate();
@@ -65,7 +65,7 @@ namespace vcsn {
   }
 
   template<typename A, typename T, typename StatesSet>
-  void auto_in_extract(Element<A, T>& a, const StatesSet& s, bool check_states = true)
+  void auto_in_extract(Element<A, T>& a, const StatesSet& s, bool check_states)
   {
     auto_do_extract(a.set(), a, s, check_states);
   }

@@ -24,11 +24,12 @@
 # include <algorithm>
 # include <iostream>
 
+# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/algebra/concrete/series/rat/exp.hh>
 # include <vaucanson/algebra/concrete/series/transpose.hh>
 # include <vaucanson/algebra/concrete/series/rat/nodes.hh>
 # include <vaucanson/algebra/concrete/series/rat/depth_visitor.hh>
-# include <vaucanson/fundamental/element.hh>
 
 namespace vcsn {
 
@@ -254,7 +255,7 @@ namespace vcsn {
 
   template <typename S, typename M, typename W>
   rat::exp<M, W>&
-  DefaultTransposeFun<S, rat::exp<M,W> >::
+  algebra::DefaultTransposeFun<S, rat::exp<M,W> >::
   operator()(const S&, const rat::exp<M, W>& exp)
   {
     rat::exp<M, W>*  rexp = new rat::exp<M, W>(exp);

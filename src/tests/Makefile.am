@@ -9,4 +9,5 @@ SUBDIRS = \
 	fundamental				\
 	algebra    				\
 	bin                                     \
+	sanity                                  \
 	automata

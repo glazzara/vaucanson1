@@ -1,8 +1,23 @@
 2002-08-06  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.99)
-	* include/vaucanson/config/extrconf.sh : fixed.
-	+cat ${1+"$@"} | egrep '^#.*(VCSN_CONFIG_SYSTEM_HH|HAVE_LIMITS)'
+	* "src/tests/defs"    : added.
+	* "src/tests/defs.in" : added.
+	* "src/tests/sanity/incltest.cc" : added.
+	* "src/tests/sanity/Makefile.am" : added.
+	* "src/tests/sanity/includes.test" : added.
 
+	* include/vaucanson/algebra/concept/concepts.hh : fixed.
+	* configure.ac : sanity and defs added.
+	* src/tests/Makefile.am : add subdir sanity.
+	* include/vaucanson/algebra/concrete/series/krat_conversion.hxx: fixed.
+	* include/vaucanson/algebra/concrete/series/krat_conversion.hh: fixed.
+	* include/vaucanson/automata/concrete/manylinks.hh: fixed.
+	* include/vaucanson/automata/concept/kinds.hh: fixed.
+	* include/vaucanson/algorithms/extract.hxx: fixed.
+	* include/vaucanson/algebra/concrete/series/rat/exp.hxx: fixed.
+	* include/vaucanson/config/config.hh: fixed.
+	* include/vaucanson/config/config.hh.in: fixed.
+	* include/vaucanson/misc/limits.hh: fixed.
 
 2002-07-31  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.98)

@@ -5,6 +5,8 @@
 #ifndef INTERNAL_LIMITS_HH
 # define INTERNAL_LIMITS_HH
 
+# include <climits>
+
 namespace std {
 
   template <class _Tp>

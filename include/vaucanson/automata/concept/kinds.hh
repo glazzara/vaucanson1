@@ -26,8 +26,9 @@
 # include <cassert>
 # include <algorithm>
 
-#include <vaucanson/fundamental/fundamental.hh>
-#include <vaucanson/automata/concept/handlers.hh>
+# include <vaucanson/algebra/concept/series_base.hh>
+# include <vaucanson/fundamental/fundamental.hh>
+# include <vaucanson/automata/concept/handlers.hh>
 
 namespace vcsn
 {
