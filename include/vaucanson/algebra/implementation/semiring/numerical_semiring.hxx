@@ -262,9 +262,10 @@ namespace vcsn {
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(float))
   {
-    return
-      Element<algebra::NumericalSemiring, float>
-        (set, utility::random::generate<float>() * 1000. + 1.0);
+    float res = utility::random::generate<float>() * 1000.;
+    while (op_starable(set, res))
+      res = utility::random::generate<float>() * 1000.;
+    return Element<algebra::NumericalSemiring, float>(set, res);
   }
 
   inline
@@ -295,9 +296,10 @@ namespace vcsn {
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(double))
   {
-    return
-      Element<algebra::NumericalSemiring, double>
-        (set, utility::random::generate<double>() * 1000. + 1.0);
+    double res = utility::random::generate<double>() * 1000.;
+    while (op_starable(set, res))
+      res = utility::random::generate<double>() * 1000.;
+    return Element<algebra::NumericalSemiring, double>(set, res);
   }
   // FIXME: add some more operators as syntactic sugar
 

@@ -1,3 +1,12 @@
+2004-07-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/misc/random.hxx: Add comment on real number 
+	generation.
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
+	Fix op_choose_non_starable for real numbers.
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh: 
+	Minor fix in the test.
+
 2004-07-05  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/demos/vaucanswig/meta/vaucanswig_context.i,

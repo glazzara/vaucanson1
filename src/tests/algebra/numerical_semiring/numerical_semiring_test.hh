@@ -81,11 +81,12 @@ bool numerical_semiring_test(tests::Tester& t)
   result_test = true;
   do
     {
-      result_test = result_test && (-T(1) > nb.value() or nb.value() > T(1));
+      result_test = result_test and
+	(-T(1) >= nb.value() or nb.value() >= T(1));
       ++timeout;
       nb = semiring.choose_non_starable(SELECT(T));
     }
-  while (timeout < 100);
+  while (timeout < 1000);
   TEST(t, "starable works. (3)", result_test);
   // FIXME: add some other tests.
   return t.all_passed();
