@@ -104,5 +104,6 @@ namespace utility
 }
 
 #include <vaucanson/misc/unique.hxx>
+#include <vaucanson/misc/unique.hcc>
 
 #endif

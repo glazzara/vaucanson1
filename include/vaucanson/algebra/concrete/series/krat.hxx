@@ -637,7 +637,7 @@ namespace vcsn {
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   inline
-  void op_in_mul(const algebra::Series<W, M>&,
+  void op_in_mul(const algebra::Series<W, M>& s,
 		 const W& weights,
 		 rat::exp<Tm, Tw>& ret,
 		 const oTw& w)
@@ -676,7 +676,7 @@ namespace vcsn {
     if (this_type == node_t::one || this_type == node_t::constant)
       { 
 	ret.base() = new n_lweight_t
-	  (op_convert(SELECT(Tw), SELECT(W), w), ret.base()); 
+	  (op_convert(SELECT(W), SELECT(Tw), w), ret.base()); 
 	return; 
       }
 
@@ -691,7 +691,7 @@ namespace vcsn {
 	if (child_type == node_t::one || child_type == node_t::constant)
 	  { 
 	    op_in_mul
-	      (s.weights(), p->weight_, op_convert(SELECT(Tw), SELECT(W), w)); 
+	      (s.weights(), p->weight_, op_convert(SELECT(W), SELECT(Tw), w)); 
 	    return; 
 	  }
       }
@@ -699,13 +699,13 @@ namespace vcsn {
       {
 	op_in_mul(s.weights(),
 		  dynamic_cast<n_rweight_t* >(ret.base())
-		  ->weight_, op_convert(SELECT(Tw), SELECT(W), w));
+		  ->weight_, op_convert(SELECT(W), SELECT(Tw), w));
 	return;
       }
 
     // general case
     ret.base() = 
-      new n_rweight_t(op_convert(SELECT(Tw), SELECT(W), w), ret.base()); 
+      new n_rweight_t(op_convert(SELECT(W), SELECT(Tw), w), ret.base()); 
     return; 
   }
 

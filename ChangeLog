@@ -1,3 +1,9 @@
+2003-06-07  Loïc Fosse  <loic@lrde.epita.fr>
+
+	* include/vaucanson/misc/unique.hh: Include needed file.
+	* include/vaucanson/algebra/concrete/series/krat.hxx: Change function
+	  calls.
+
 2003-06-26  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concrete/series/krat_exp_parser.hh,
