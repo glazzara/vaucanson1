@@ -198,7 +198,7 @@ namespace vcsn {
       monoid_t	  monoid(alpha);
       semiring_t   semiring;
       series_set_t	  series(semiring, monoid);
-      automata_set_t astructure(series);
+      automata_set_t aset(series);
       automaton_t automaton(aset);
       std::map<int, hstate_t> to_h;
 

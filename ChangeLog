@@ -1,3 +1,7 @@
+2004-07-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/tools/fsm_dump.hxx: Minor fix in variable names.
+
 2004-07-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/demos/xml/static_boolean.cc: Build a simpler automaton as
