@@ -1,7 +1,7 @@
 // freemonoid_product_base.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -101,7 +101,7 @@ namespace vcsn {
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first()
   {
-    return Self::first_monoid();
+    return op_first(structure(), value());
   }
 
   template <class Self, typename T>
@@ -110,7 +110,7 @@ namespace vcsn {
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first() const
   {
-    return Self::first_monoid();
+    return op_first(structure(), value());
   }
 
   template <class Self, typename T>
@@ -118,7 +118,7 @@ namespace vcsn {
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second_monoid_elt_t&
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second()
   {
-    return Self::second_monoid();
+    return op_second(structure(), value());
   }
 
   template <class Self, typename T>
@@ -127,7 +127,7 @@ namespace vcsn {
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second_monoid_elt_t&
   MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second() const
   {
-    return Self::second_monoid();
+    return op_second(structure(), value());
   }
 
   template <class Self, typename T>

@@ -1,7 +1,7 @@
 // freemonoid_product_pair_str.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -43,6 +43,16 @@ namespace vcsn {
   /*----------------------------------------------------------.
   | Implementation of freemonoid_product with pair of strings |
   `----------------------------------------------------------*/
+
+  template <class Self, typename T>
+  typename
+  MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
+  op_first(const algebra::FreeMonoidProductBase<Self>& s, T& v);
+
+  template <class Self, typename T>
+  typename
+  MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
+  op_second(const algebra::FreeMonoidProductBase<Self>& s, T& v);
 
   template <class F, class S>
   void

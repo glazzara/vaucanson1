@@ -1,5 +1,13 @@
 2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx:
+	Modify MetaElement methods first() and second() to delegate the work
+	to op_* functions op_first and op_second.
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: Add op_first and op_second functions.
+
+2005-01-21  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* configure.ac: Generate src/tests/algebra/free_monoid_product/Makefile
 	and src/tests/context_headers/transducers/Makefile.
 

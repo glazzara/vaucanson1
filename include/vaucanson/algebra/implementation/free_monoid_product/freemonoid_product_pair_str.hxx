@@ -1,7 +1,7 @@
 // freemonoid_product_pair_str.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -36,6 +36,24 @@
 # include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx>
 
 namespace vcsn {
+
+  template <class Self, typename T>
+  typename
+  MetaElement<algebra::FreeMonoidProductBase<Self>, T>::first_monoid_elt_t&
+  op_first(const algebra::FreeMonoidProductBase<Self>& s, T& v)
+  {
+    return Element<typename virtual_types<Self>::first_monoid_t,
+		   typename T::first_type> (s.first_monoid(), v.first);
+  }
+
+  template <class Self, typename T>
+  typename
+  MetaElement<algebra::FreeMonoidProductBase<Self>, T>::second_monoid_elt_t&
+  op_second(const algebra::FreeMonoidProductBase<Self>& s, T& v)
+  {
+    return Element<typename virtual_types<Self>::second_monoid_t,
+		   typename T::second_type> (s.second_monoid(), v.second);
+  }
 
   template <class F, class S>
   void
