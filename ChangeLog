@@ -1,5 +1,13 @@
 2003-05-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/semiring/tropical_semiring.hxx,
+	  include/vaucanson/misc/numerical_constraints.hh,
+	  include/vaucanson/misc/random.hh:
+		Use our 'limits' wrapper.
+	* include/vaucanson/misc/limits.hh: Is now a wrapper.
+		
+2003-05-19  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* doc/doc.doxy: Remove this generated file.
 
 2003-05-19  Yann Régis-Gianas  <yann@lrde.epita.fr>

@@ -23,11 +23,7 @@
 # define UTILITY_NUMERICAL_CONSTRAINTS_HH
 
 # include <vaucanson/config/system.hh>
-# ifdef USE_CXX_LIMITS
-#  include <limits>
-# else
-#  include <vaucanson/misc/limits.hh>
-# endif // USE_CXX_LIMITS
+# include <vaucanson/misc/limits.hh>
 # include <vaucanson/misc/misc_constraints.hh>
 
 namespace utility {

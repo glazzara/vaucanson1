@@ -23,11 +23,7 @@
 #ifndef ALGEBRA_TROPICAL_SEMIRING_HXX
 # define ALGEBRA_TROPICAL_SEMIRING_HXX
 # include <vaucanson/config/system.hh>
-# ifdef USE_CXX_LIMITS
-#  include <limits>
-# else
-#  include <vaucanson/misc/limits.hh>
-# endif // USE_CXX_LIMITS
+# include <vaucanson/misc/limits.hh>
 # include <vaucanson/algebra/concrete/semiring/tropical_semiring.hh>
 
 namespace vcsn {
@@ -229,7 +225,7 @@ namespace vcsn {
     | Pretty printer |
     `---------------*/
     template<typename St, typename T>
-    St& op_rout(const TropicalSemiring<TropicalMax>& s, St& st, const T& v)
+    St& op_rout(const TropicalSemiring<TropicalMax>&, St& st, const T& v)
     { 
       if (v == zero_value(SELECT(TropicalSemiring<TropicalMax>), SELECT(T)))
 	st << "-oo";

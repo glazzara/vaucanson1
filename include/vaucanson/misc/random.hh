@@ -24,7 +24,7 @@
 
 # include <cstdlib>
 # include <utility>
-# include <limits>
+# include <vaucanson/misc/limits.hh>
 
 namespace vcsn {
 
