@@ -1,5 +1,10 @@
 2004-03-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concrete/series/krat_exp_is_finite_app.hxx:
+	Minor fix to avoid compilation warning.
+
+2004-03-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/standard.hxx: Fix is_standard.
 
 2004-03-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
