@@ -73,6 +73,11 @@ namespace vcsn {
 
   using namespace algebra;
 
+  template<typename Self>
+  struct MetaSet<algebra::AlphabetSetBase<Self> > 
+    : MetaSet<Structure<Self> >
+  { };
+
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup alphabet */ /* @{ */
   
@@ -150,7 +155,7 @@ namespace vcsn {
 				 const T& a, 
 				 L lhs,
 				 L rhs);
-  
+ 
   // FIXME: add equality between two alphabets !
 
   // FIXME: add the op_choose for Element<AlphabetSetBase, T>

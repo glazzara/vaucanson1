@@ -82,7 +82,15 @@ namespace vcsn {
   
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup monoid */ /* @{ */
-  
+
+  /*---------------------------.
+  | MetaSet<MonoidBase<Self> > |
+  `---------------------------*/
+  template<class Self>
+  struct MetaSet<MonoidBase<Self> >
+    : MetaSet<SemigroupBase<Self> >
+  { };
+
   /*---------------------------------.
   | MetaElement<MonoidBase<Self>, T> |
   `---------------------------------*/

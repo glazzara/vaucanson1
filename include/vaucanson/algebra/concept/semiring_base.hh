@@ -69,6 +69,14 @@ namespace vcsn {
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup semiring */ /* @{ */
 
+  /*-----------------------------.
+  | MetaSet<SemiringBase<Self> > |
+  `-----------------------------*/
+  template<typename Self>
+  struct MetaSet<algebra::SemiringBase<Self> >
+    : MetaSet<algebra::MonoidBase<Self> >
+  { };
+
   /*-----------------------------------.
   | MetaElement<SemiringBase<Self>, T> |
   `-----------------------------------*/

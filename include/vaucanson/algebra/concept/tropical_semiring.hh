@@ -45,10 +45,8 @@ namespace vcsn {
   //! Meta information about the tropical semirings.
   template<class TropicalKind>
   struct MetaSet<TropicalSemiring<TropicalKind> >
+    : MetaSet<SemiringBase<TropicalSemiring<TropicalKind> > >
   {
-    //! Semiring are static structures.
-    static const bool dynamic_set = false;
-    
     //! We can see a NumericalSemiring as a semigroup with +. It is
     //! an arbitrary decision, it could be mul_kind too.
     typedef add_kind	semigroup_kind;

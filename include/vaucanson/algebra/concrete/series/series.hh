@@ -59,7 +59,7 @@ namespace vcsn {
   template <class W, class M, class T>
   struct MetaElement<Series<W, M>, T> :
     public MetaElement<SeriesBase<Series<W, M> >, T>
-  {};
+  { };
 
     /*----------------------.
     | MetaSet<Series<W, M>> |
@@ -67,6 +67,7 @@ namespace vcsn {
 
     template<typename W, typename M>
     struct MetaSet<Series<W, M> >
+      : MetaSet<SeriesBase<Series<W, M> > >
     {
       typedef algebra::mul_kind semigroup_kind;
 
@@ -87,6 +88,9 @@ namespace vcsn {
   } // traits
 
 } // vcsn
+
+template<typename W, typename M>
+bool operator==(const vcsn::algebra::Series<W, M>&, const vcsn::algebra::Series<W, M>&);
 
 # include <vaucanson/algebra/concrete/series/series.hxx>
 

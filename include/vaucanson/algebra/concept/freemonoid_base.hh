@@ -70,7 +70,15 @@ namespace vcsn {
 
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup freemonoid */ /* @{ */
-  
+
+  /*-------------------------------.
+  | MetaSet<FreeMonoidBase<Self> > |
+  `-------------------------------*/
+  template<class Self>
+  struct MetaSet<algebra::FreeMonoidBase<Self> >
+    : MetaSet<algebra::MonoidBase<Self> >
+  { };
+
   /*-------------------------------------.
   | MetaElement<FreeMonoidBase<Self>, T> |
   `-------------------------------------*/

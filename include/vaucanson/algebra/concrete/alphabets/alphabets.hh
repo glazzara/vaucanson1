@@ -55,11 +55,9 @@ namespace vcsn {
   `------------------------*/
   //! meta information about AlphabetSet.
   template<typename L>
-  struct MetaSet<AlphabetSet<L> >
-  {
-    //! The set of alphabet is a static structure.
-    static const bool		dynamic_set = false;
-  };     
+  struct MetaSet<algebra::AlphabetSet<L> >
+    : MetaSet<algebra::AlphabetSetBase<L> >
+  { };     
 
   //! @}
 

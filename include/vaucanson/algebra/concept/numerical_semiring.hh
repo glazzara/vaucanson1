@@ -53,10 +53,8 @@ namespace vcsn {
   //! NumericalSemiring structural element. 
   template<>
   struct MetaSet<NumericalSemiring>
+    : MetaSet<SemiringBase<NumericalSemiring> >
   {
-    //! NumericalSemiring are static structural element.
-    static const bool dynamic_set = false;
-
     //! We can see a NumericalSemiring as a semigroup with +. It is
     //! an arbitrary decision, it could be mul_kind too.
     typedef           add_kind    semigroup_kind;

@@ -100,11 +100,4 @@ bool operator==(const vcsn::Structure<S>& a,
   return true; 
 }
 
-template<typename S>
-bool operator!=(const vcsn::Structure<S>& a,
-		const vcsn::Structure<S>& b)
-{ 
-  return !(a == b); 
-}
-
 #endif // FUNDAMENTAL_STRUCTURE_HXX

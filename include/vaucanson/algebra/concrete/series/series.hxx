@@ -22,6 +22,7 @@
 # define ALGEBRA_SERIES_HXX
 
 # include <vaucanson/algebra/concrete/series/series.hh>
+# include <vaucanson/misc/unique.hh>
 
 namespace vcsn {
 
@@ -74,5 +75,28 @@ namespace vcsn {
   } // algebra
 
 } // vcsn
+
+namespace utility
+{
+  namespace unique
+  {
+    template<typename W, typename M>
+    struct hash<::vcsn::algebra::Series<W, M> >
+    {
+      unsigned operator()(const ::vcsn::algebra::Series<W, M>& s) const
+      { 
+	return hash<W>()(s.weights()) ^ hash<M>()(s.monoid());
+      }
+    };
+  } // unique
+} // utility
+
+template<typename W, typename M>
+bool operator==(const vcsn::algebra::Series<W, M>& s1, 
+		const vcsn::algebra::Series<W, M>& s2)
+{
+  return s1.monoid() == s2.monoid() &&
+    s1.weights() == s2.weights();
+}
 
 #endif

@@ -120,7 +120,7 @@ namespace vcsn {
   typename alphabet_traits<Self, T>::letter_t
   MetaElement<AlphabetSetBase<Self>, T>::choose() const
   { 
-    assert (this->size() > 0);
+    assert (this->is_finite() && this->size() > 0);
     int  n = this->size();
     int  c = ((unsigned) floor(((float) rand() / (float) RAND_MAX) * n));
 

@@ -1,5 +1,37 @@
 2003-05-30  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/fundamental/structure.hxx: Remove unused
+	operator!=().
+
+	* include/vaucanson/algebra/concept/alphabets_base.hxx: Minor fix.
+
+	* include/vaucanson/algebra/concrete/free_monoid/words.hxx
+	(utility): Add hash specialization.
+
+	* include/vaucanson/algebra/concrete/series/series.hxx (utility):
+	Likewise. Implement operator==().
+
+	* include/vaucanson/algebra/concrete/free_monoid/words.hh: Inherit
+	MetaSet from parent.
+	* include/vaucanson/algebra/concrete/series/series.hh: Likewise. Mention operator==().
+
+
+	* include/vaucanson/algebra/concept/tropical_semiring.hh: Inherit
+	MetaSet from parent, so that defining dynamic_set is no longer
+	necessary.
+	* include/vaucanson/algebra/concept/numerical_semiring.hh: Likewise.
+	* include/vaucanson/algebra/concrete/alphabets/alphabets.hh: Likewise.
+
+	* include/vaucanson/algebra/concept/monoid_base.hh: Add missing
+	MetaSet specialization.
+	* include/vaucanson/algebra/concept/semigroup_base.hh: Likewise.
+	* include/vaucanson/algebra/concept/alphabets_base.hh: Likewise.
+	* include/vaucanson/algebra/concept/series_base.hh: Likewise.
+	* include/vaucanson/algebra/concept/semiring_base.hh: Likewise.
+	* include/vaucanson/algebra/concept/freemonoid_base.hh: Likewise.
+
+2003-05-30  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* include/vaucanson/misc/unique.hcc,
 	  include/vaucanson/misc/unique.hh,
 	  include/vaucanson/misc/unique.hxx: New.

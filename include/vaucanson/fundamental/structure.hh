@@ -79,21 +79,40 @@ namespace vcsn {
     Structure(const Structure& other);
   };
 
+
+  /*--------------------------.
+  | MetaSet<Structure<Self> > |
+  `--------------------------*/
+  template<typename Self>
+  struct MetaSet<Structure<Self> >
+  {
+    // By default all structural elements have no dynamic type information.
+    static const bool dynamic_set = false;
+  };
+
+
   /*! @} */
 
+       
+
 } // vcsn
+
+/** @addtogroup fundamental *//** @{ */
 
 /*--------------------.
 | default comparisons |
 `--------------------*/
-// FIXME: why there are here ?
+
+/** The deep equality operator
+ * The implementation for @c Structure always return true since
+ * there is no dynamic type information attached to Structure itself.
+ */
 template<typename S>
 bool operator==(const vcsn::Structure<S>& a,
 		const vcsn::Structure<S>& b);
 
-template<typename S>
-bool operator!=(const vcsn::Structure<S>& a,
-		const vcsn::Structure<S>& b);
+
+/** @} */
 
 # include <vaucanson/fundamental/structure.hxx>
 

@@ -59,6 +59,34 @@ namespace vcsn {
     
 } // vcsn
 
+namespace utility
+{
+  namespace unique
+  {
+    template<typename A>
+    struct hash<::vcsn::algebra::FreeMonoid<A> >
+    {
+      unsigned operator()(const ::vcsn::algebra::FreeMonoid<A>& f) const
+      {
+	if (!f.alphabet().is_finite())
+	  return 0;
+	else
+	  {
+	    unsigned res = 0; 
+	    int nl = 0;
+	    for (typename A::const_iterator i = f.alphabet().begin();
+		 nl < 10 && i != f.alphabet().end();
+		 ++i, ++nl)
+	      res ^= static_cast<unsigned>(*i);
+	    return res;
+	  }
+      } // operator()
+    }; // hash
+
+  } // unique 
+} // utility
+
+
 template<typename A>
 bool operator==(const vcsn::algebra::FreeMonoid<A>& a,
 		const vcsn::algebra::FreeMonoid<A>& b)

@@ -63,6 +63,15 @@ namespace vcsn {
   /*! \addtogroup algebra */  /* @{ */
   /*! \addtogroup semigroup */ /* @{ */
 
+  /*------------------------------.
+  | MetaSet<SemigroupBase<Self> > |
+  `------------------------------*/
+  template<class Self>
+  struct MetaSet<algebra::SemigroupBase<Self> >
+    : MetaSet<Structure<Self> >
+  { };
+
+
   /*-----------------------------------.
   | MetaElement<SemigroupBase<Self>,T> |
   `-----------------------------------*/

@@ -23,6 +23,7 @@
 
 # include <string>
 # include <vaucanson/algebra/concept/freemonoid_base.hh>
+# include <vaucanson/misc/unique.hh>
 
 namespace vcsn {
 
@@ -73,6 +74,7 @@ namespace vcsn {
   //! Meta information about FreeMonoid.
   template<typename A>
   struct MetaSet<FreeMonoid<A> >
+    : MetaSet<FreeMonoidBase<FreeMonoid<A> > >
   {
     //! SetWord is dynamic iff its alphabet is.
     static const bool		dynamic_set = A::dynamic;

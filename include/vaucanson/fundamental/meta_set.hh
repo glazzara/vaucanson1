@@ -29,11 +29,11 @@ namespace vcsn {
   /*--------.
   | MetaSet |
   `--------*/
-  //! MetaSet is a trait that propagates static information about set.
-  /*!  MetaSet is aimed to propagate information about set such as
-    their dynamic/static status.
-  */
-
+  //! A trait that propagates static information about structural elements.
+  /**  It propagates information about structural elements, especially
+   * their virtual type definitions and whether their instances carry
+   * dynamic type data (the @c dynamic_set attribute).
+   */
   template<typename S>
   struct MetaSet
   {
