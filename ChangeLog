@@ -1,3 +1,9 @@
+2003-03-18  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+
+	* src/tests/algebra/series/misc/series_test.hh (test_series): Rename
+	function to 'series_test', inorder to work with the test generator.
+	* src/tests/tests-suites/algebra_series_misc.defs: Add.
+
 2003-03-17  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
 	* src/tests/bin/generate-test-suite.sh: Change CPPFLAGS to AM_CPPFLAGS

@@ -1,37 +1,15 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 175)
-(Parent-Version vaucanson 0 174)
-(Version-Log "2003-03-17  Thomas Claveirole  <clavei_t@lrde.epita.fr>
+(Project-Version vaucanson 0 176)
+(Parent-Version vaucanson 0 175)
+(Version-Log "2003-03-18  Thomas Claveirole  <clavei_t@lrde.epita.fr>
 
-	* src/tests/bin/generate-test-suite.sh: Change CPPFLAGS to AM_CPPFLAGS
-	to avoid an automake warning.
-	* src/tests/tests-suites/algebra_series_krat.defs: Add.
-	* configure.ac: Add new test directories.
-	* src/tests/algebra/series/Makefile.am: Create subdirectories, for the
-	test generator to work properly, with definition files for
-	algebra_series_krat and algebra_series_misc.
-	* src/tests/algebra/series/krat/Makefile.am: Add.
-	* src/tests/algebra/series/misc/Makefile.am: Add.
-	* src/tests/algebra/series/krat/krat_exp_parse_test.hh,
-	src/tests/algebra/series/krat/krat_exp_linearize_test.hh,
-	src/tests/algebra/series/krat/krat_exp_derivation_test.hh,
-	src/tests/algebra/series/krat/krat_exp_constant_term_test.hh: Move
-	from parent directory in a newly created directory 'krat'.
-	* src/tests/algebra/series/misc/series_test.hh: Move from parent 
-	directory in a newly created directory 'misc', and rename
-	'series-test.hh' to 'series_test.hh' for compatibility with the test
-	generator.
-	* src/tests/algebra/series/krat_exp_constant_term_test.hh,
-	src/tests/algebra/series/krat_exp_derivation_test.hh,
-	src/tests/algebra/series/krat_exp_linearize_test.hh,
-	src/tests/algebra/series/krat_exp_parse_test.hh: Move to subdirectory
-	'krat'.
-	* src/tests/algebra/series/series-test.hh: Move to subdirectory 'misc'
-	and rename to 'series_test.hh'.")
+	* src/tests/algebra/series/misc/series_test.hh (test_series): Rename
+	function to 'series_test', inorder to work with the test generator.
+	* src/tests/tests-suites/algebra_series_misc.defs: Add.")
 (New-Version-Log "")
-(Checkin-Time "Mon, 17 Mar 2003 21:37:05 +0100")
+(Checkin-Time "Tue, 18 Mar 2003 19:01:10 +0100")
 (Checkin-Login clavei_t)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -112,7 +90,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.115 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.116 600))
   (HEADER (vaucanson/f/35_HEADER 1.4 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.7 600))
@@ -495,13 +473,18 @@
 ;; Files added by populate at Mon, 17 Mar 2003 21:16:52 +0100,
 ;; to version 0.174(w), by clavei_t:
 
-  (src/tests/algebra/series/misc/series_test.hh (vaucanson/j/23_series_tes 1.1 600))
+  (src/tests/algebra/series/misc/series_test.hh (vaucanson/j/23_series_tes 1.2 600))
   (src/tests/algebra/series/misc/Makefile.am (vaucanson/j/24_Makefile.a 1.1 600))
 
 ;; Files added by populate at Mon, 17 Mar 2003 21:21:14 +0100,
 ;; to version 0.174(w), by clavei_t:
 
   (src/tests/tests-suites/algebra_series_krat.defs (vaucanson/j/25_algebra_se 1.1 600))
+
+;; Files added by populate at Tue, 18 Mar 2003 18:56:54 +0100,
+;; to version 0.175(w), by clavei_t:
+
+  (src/tests/tests-suites/algebra_series_misc.defs (vaucanson/j/26_algebra_se 1.1 600))
 )
 (Merge-Parents)
 (New-Merge-Parents)

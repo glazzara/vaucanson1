@@ -32,7 +32,7 @@
 using namespace vcsn;
 
 template <typename S, typename T> 
-bool test_series(tests::Tester& t)
+bool series_test(tests::Tester& t)
 {
   using namespace vcsn::algebra;
   using namespace vcsn;
