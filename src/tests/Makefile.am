@@ -12,6 +12,7 @@ SUBDIRS =					\
 	algebra					\
 	automata				\
 	boolean_automata			\
+	k_automata				\
 	transducers				\
 	xml					\
 	context_headers

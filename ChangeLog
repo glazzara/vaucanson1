@@ -1,9 +1,13 @@
+2004-07-08  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* src/tests/Makefile.am: Add k_automata to SUBDIRS.
+
 2004-07-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/bin/generate-test-suite.sh: Add macro VCSN_SRC_DIR defined
-	for all tests, representing the absolute path to the top-level 
+	for all tests, representing the absolute path to the top-level
 	directory of Vaucanson archive.
-	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Update 
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Update
 	accordingly, and improve code portability.
 
 2004-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
@@ -11,15 +15,15 @@
 	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh: Minor fix
 	in the test. Now you can directly modify randomly generated test files,
 	the test automatically deals with it.
-	
+
 2004-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	Since we used random expressions, random results may occur...
-	This patch fix this problem for KRat exp, using a randomly 
+	This patch fix this problem for KRat exp, using a randomly
 	generated test battery and use always the same for each future test.
-	
+
 	* include/vaucanson/misc/random.hxx: Fix typo in comments.
 
-	* src/tests/algebra/series/krat/tests/generate_random_krat.cc: New 
+	* src/tests/algebra/series/krat/tests/generate_random_krat.cc: New
 	file. Used to generate random KRat expressions.
 
 	* src/tests/algebra/series/krat/tests/random_krat_exp_b_ab,
@@ -30,7 +34,7 @@
 	* src/tests/algebra/series/krat/tests/random_krat_exp_b_weird: New
 	files. Randomly generated KRat expressions.
 
-	* src/tests/algebra/series/krat/tests/Makefile.am: New file. 
+	* src/tests/algebra/series/krat/tests/Makefile.am: New file.
 	Corresponding Makefile for the new tests directory for KRat.
 	* configure.ac,
 	* src/tests/algebra/series/krat/Makefile.am: Update accordingly.
