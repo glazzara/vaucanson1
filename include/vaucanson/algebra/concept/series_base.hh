@@ -18,9 +18,8 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-#ifndef ALGEBRA_SERIES_BASE_HH
-# define ALGEBRA_SERIES_BASE_HH
+#ifndef VCSN_ALGEBRA_SERIES_BASE_HH
+# define VCSN_ALGEBRA_SERIES_BASE_HH
 
 # include <vaucanson/algebra/concept/semiring_base.hh>
 
@@ -180,4 +179,4 @@ namespace vcsn {
 
 # include <vaucanson/algebra/concept/series_base.hxx>
 
-#endif // ALGEBRA_SERIES_BASE_HH
+#endif // VCSN_ALGEBRA_SERIES_BASE_HH

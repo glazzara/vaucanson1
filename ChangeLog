@@ -1,3 +1,12 @@
+2002-11-21  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.135)
+	* include/vaucanson/algebra/
+		concept/series_base.hh: minor changes.
+		concrete/series/krat_exp_pattern.hh: idem.
+	* include/vaucanson/algorithms/krat_exp_linearize.hxx: 
+		monoid_value_t typedef missed.
+	* include/vaucanson/misc/random.hh: include <cstdlib>
+
 2002-11-20  Yann Régis-Gianas  <yann@lrde.epita.fr>
 (0.134)
 	* include/vaucanson/tools/usual.hh:

@@ -21,9 +21,11 @@
 #ifndef VCSN_ALGEBRA_CONCRETE_KRAT_EXP_PATTERN_HH
 # define VCSN_ALGEBRA_CONCRETE_KRAT_EXP_PATTERN_HH
 
-#include <iostream>
-#include <utility>
-#include <cassert>
+# include <vaucanson/fundamental/element.hh>
+# include <vaucanson/algebra/concrete/series/series.hh>
+# include <iostream>
+# include <utility>
+# include <cassert>
 
 namespace vcsn {
 
