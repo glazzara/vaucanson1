@@ -1,21 +1,16 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 465)
-(Parent-Version vaucanson 0 464)
+(Project-Version vaucanson 0 466)
+(Parent-Version vaucanson 0 465)
 (New-Version-Log "")
 
 (Version-Log "
 2003-12-08  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/aut_to_exp.hxx:
-	    Fix uninitialized set in var.
-	* include/vaucanson/algorithms/product.hxx: 
-	    Fix unused var.
-	* include/vaucanson/algorithms/extension.hxx: Likewise.
-	* src/demos/fibonacci/fibonacci.cc: Use verbalize.
+	* configure.ac: Update.
 ")
-(Checkin-Time "Mon, 08 Dec 2003 20:11:49 +0100")
+(Checkin-Time "Mon, 08 Dec 2003 20:14:03 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -98,7 +93,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.3 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.131.1.128.1.33.1.95.1.4 600))
   (vauc/ChangeLog (vaucanson/l/23_ChangeLog 1.4 600))
   (vauc/mpp++/ChangeLog (vaucanson/l/24_ChangeLog 1.2 600))
   (src/demos/vaucanswig/ChangeLog (vaucanson/r/6_ChangeLog 1.16 600))
@@ -111,7 +106,7 @@
   (README (vaucanson/f/48_README 1.8 600))
   (THANKS (vaucanson/f/36_THANKS 1.7 600))
   (bootstrap.sh (vaucanson/h/45_bootstrap. 1.10 700))
-  (configure.ac (vaucanson/47_configure. 1.6.1.44 600))
+  (configure.ac (vaucanson/47_configure. 1.6.1.44.1.1 600))
   (prj (vaucanson.prj) :symlink)
 
   (config/vcsn.m4 (vaucanson/h/42_vcsn.m4 1.8 600))
