@@ -3,24 +3,24 @@ OVERVIEW
 
 Vaucanson, a C++ generic library for weighted finite state machine.
 
-Firstly initiated by Jacques Sakarovitch, Lombardy in 2000, Vaucanson is a
-project developed by the Ecole Nationale Supérieure des
-Télécommunications and the EPITA Research and Development Laboratory
+Firstly  initiated by   Jacques Sakarovitch  in  2000, Vaucanson  is a
+project    developed   by  the     Ecole Nationale     Supérieure  des
+Télécommunications and the EPITA  Research and Development  Laboratory
 (LRDE).
 
-The goal of this library is to enable the development of C++ programs
-in an abstract and general way with, at the same time, a large
+The goal of this library is to enable  the development of C++ programs
+in  an abstract  and general  way  with,  at  the  same time, a  large
 specialization power. Indeed, on the one hand, we can write algorithms
-working on every automaton with weights over any semirings and with
-words from any free monoids. And on the other hand, a particular
-algorithm can be specialized for a particular data structure
+working on every  automaton with weights over  any  semirings and with
+words from any   free monoids. And  on  the other hand,  a  particular
+algorithm  can    be specialized for     a particular  data  structure
 implementing only a pseudo behaviour.
 
-Yet, Vaucanson is still in a fundamental development phase and
-algorithms, data structures and global architecture are not totally
-stable and well tested. The src directory will be extended with
-demonstration programs soon. For the moment, you can look at the
-include/vaucanson/algorithms to be introduced to the basics of
+Yet,  Vaucanson is still  in   a  fundamental  development  phase  and
+algorithms, data structures  and global  architecture are not  totally
+stable and  well tested.  The   src directory will  be  extended  with
+demonstration programs   soon. For the  moment, you   can look  at the
+include/vaucanson/algorithms  to  be  introduced  to  the  basics   of
 Vaucanson.
 
 Please send any question or comments to <vaucanson@lrde.epita.fr>, or
@@ -42,12 +42,12 @@ compile with the same compiler to avoid compatibility problems.
 ----------------------------------------------------------------------------
 REQUIREMENTS
 
-Vaucanson was only tested with g++-3.0.4, g++-3.1.0, g++-2.95.4. The
-code is written in respect to the ISO standard to permit a higher
+Vaucanson was  only tested with  g++-3.0.4, g++-3.1.0, g++-2.95.4. The
+code is written  in respect to  the ISO standard   to permit a  higher
 portability in the future.
 
-Moreover, high verbose mode of the testing suites uses the AT&T dot
-format to save automaton in a human readable file. Use Graphviz to
+Moreover, high  verbose mode of the testing  suites uses the  AT&T dot
+format to  save automaton  in a human  readable file.  Use Graphviz to
 visualize these .dot files.
 
 ----------------------------------------------------------------------------

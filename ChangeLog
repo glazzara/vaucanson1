@@ -1,5 +1,15 @@
-2002-11-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+2002-11-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.141)
+	* include/vaucanson/algorithms/krat_exp_derivation.hh:
+		(word_derivate): New.
+	* include/vaucanson/algorithms/krat_exp_derivation.hxx:
+		(word_derivate): New.
+	* README: Aesthetic adjustment.
+	* src/tests/algebra/series/krat_exp_derivation_test.hh:
+		(krat_exp_derivation_test): Test word_derivate.
 
+2002-11-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.140)
 	* include/vaucanson/algorithms/standard.hxx: add a FIXME.
 	* include/vaucanson/automata/concept/kinds.hxx: minor.
 	* include/vaucanson/misc/fsm_dump.hh: fix the interpretation of '1'.

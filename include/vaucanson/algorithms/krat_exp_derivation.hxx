@@ -139,6 +139,24 @@ namespace vcsn {
     return std::make_pair(ret, true);
   }
 
+  template <class Series, class T, class Word>
+  std::pair<Element<Series, T>, bool>
+  word_derivate(const Element<Series, T>& exp, 
+		Word w)
+  {
+    Element<Series, T> ret(exp);
+    for (typename Word::reverse_iterator a = w.rbegin();
+	 a != w.rend(); ++a)
+      {
+	KRatExpDerivation<Series, T, algebra::DispatchFunction<T> > 
+	  matcher(exp, *a);
+	ret = matcher.match(ret);
+	if (matcher.undefined)
+	  return std::make_pair(ret, false);
+      }
+    return std::make_pair(ret, true);
+  }
+
 } // vcsn
 
 #endif // VCSN_ALGORITHMS_KRAT_EXP_DERIVATION_HXX

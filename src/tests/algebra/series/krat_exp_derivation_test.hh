@@ -56,6 +56,9 @@ bool krat_exp_derivation_test(tests::Tester& tg)
   std::cout << exp << std::endl;
   std::pair<krat_exp_t, bool> dexp_a = derivate(exp, a);
   std::pair<krat_exp_t, bool> dexp_b = derivate(exp, b);
+  monoid_elt_t w;
+  w = a; w *= b;
+  std::pair<krat_exp_t, bool> dexp_ab = word_derivate(exp, w);
   if (!dexp_a.second)
     std::cout << "undefined" << std::endl;
   else 

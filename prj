@@ -1,24 +1,20 @@
 ;; -*- Prcs -*-
 (Created-By-Prcs-Version 1 3 2)
 (Project-Description "Vaucanson - library")
-(Project-Version vaucanson 0 140)
-(Parent-Version vaucanson 0 139)
-(Version-Log "2002-11-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
-
-	* include/vaucanson/algorithms/standard.hxx: add a FIXME.
-	* include/vaucanson/automata/concept/kinds.hxx: minor.
-	* include/vaucanson/misc/fsm_dump.hh: fix the interpretation of '1'.
-	* src/demos/fsm/arg.cc: add --help.
-	* src/demos/fsm/generate_toolbox.sh: 
-		add 'realtime', 
-		fix vcsn_krat2auto options
-	* src/demos/fsm/README: add CPPFLAGS in configure command.
-	* src/demos/fsm/usual_automaton_t/arg.cc: minor.
-	* src/demos/fsm/usual_automaton_t/Makefile.am: minor.
-
+(Project-Version vaucanson 0 141)
+(Parent-Version vaucanson 0 140)
+(Version-Log "2002-11-26  Yann Régis-Gianas  <yann@lrde.epita.fr>
+(0.141)
+	* include/vaucanson/algorithms/krat_exp_derivation.hh:
+		(word_derivate): New.
+	* include/vaucanson/algorithms/krat_exp_derivation.hxx:
+		(word_derivate): New.
+	* README: Aesthetic adjustment.
+	* src/tests/algebra/series/krat_exp_derivation_test.hh:
+		(krat_exp_derivation_test): Test word_derivate.
 ")
 (New-Version-Log "")
-(Checkin-Time "Mon, 25 Nov 2002 12:14:02 +0100")
+(Checkin-Time "Tue, 26 Nov 2002 10:25:01 +0100")
 (Checkin-Login yann)
 (Populate-Ignore ("~$"
 		  ".#"
@@ -102,7 +98,7 @@
 
 (Project-Keywords)
 (Files
-  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.81 600))
+  (ChangeLog (vaucanson/0_ChangeLog 1.29.1.16.1.82 600))
   (configure.ac (vaucanson/47_configure. 1.6.1.9 600))
   (doc/css/vaucanson.css (vaucanson/39_vaucanson. 1.2 600))
   (doc/doc.doxy.in (vaucanson/g/48_doc.doxy.i 1.2 600))
@@ -197,8 +193,8 @@
   (include/vaucanson/algorithms/isomorph.hxx (vaucanson/g/29_isomorph.h 1.1 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hh (vaucanson/h/18_krat_exp_c 1.3 600))
   (include/vaucanson/algorithms/krat_exp_constant_term.hxx (vaucanson/h/17_krat_exp_c 1.1 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.3 600))
-  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.2 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hh (vaucanson/h/22_krat_exp_d 1.4 600))
+  (include/vaucanson/algorithms/krat_exp_derivation.hxx (vaucanson/h/21_krat_exp_d 1.3 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hh (vaucanson/h/23_krat_exp_l 1.3 600))
   (include/vaucanson/algorithms/krat_exp_linearize.hxx (vaucanson/h/24_krat_exp_l 1.2 600))
   (include/vaucanson/algorithms/moore.hh (vaucanson/e/24_moore.hh 1.5 600))
@@ -311,7 +307,7 @@
   (include/vaucanson/tools/usual.hh (vaucanson/e/2_usual.hh 1.21 600))
   (LICENCE (vaucanson/f/37_LICENCE 1.1 600))
   (Makefile.am (vaucanson/48_Makefile.a 1.5 600))
-  (README (vaucanson/f/48_README 1.6 600))
+  (README (vaucanson/f/48_README 1.7 600))
   (src/demos/fsm/arg.cc (vaucanson/g/39_arg.cc 1.4 600))
   (src/demos/fsm/arg.hh (vaucanson/g/40_arg.hh 1.3 600))
   (src/demos/fsm/generate_toolbox.sh (vaucanson/g/9_generate_t 1.5 700))
@@ -349,7 +345,7 @@
   (src/tests/algebra/series/krat_exp_constant_term-test.cc (vaucanson/h/15_krat_exp_c 1.1 600))
   (src/tests/algebra/series/krat_exp_constant_term_test.hh (vaucanson/h/16_krat_exp_c 1.1 600))
   (src/tests/algebra/series/krat_exp_derivation-test.cc (vaucanson/h/19_krat_exp_d 1.1 600))
-  (src/tests/algebra/series/krat_exp_derivation_test.hh (vaucanson/h/20_krat_exp_d 1.1 600))
+  (src/tests/algebra/series/krat_exp_derivation_test.hh (vaucanson/h/20_krat_exp_d 1.2 600))
   (src/tests/algebra/series/krat_exp_linearize-test.cc (vaucanson/h/26_krat_exp_l 1.1 600))
   (src/tests/algebra/series/krat_exp_linearize_test.hh (vaucanson/h/25_krat_exp_l 1.1 600))
   ; (src/tests/algebra/series/krat_exp_parse.hh ())
