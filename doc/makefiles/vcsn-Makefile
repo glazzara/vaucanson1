@@ -1,0 +1,88 @@
+# Makefile
+# $Id$
+#
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2001,2002,2003,2004 The Vaucanson Group.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# The Vaucanson Group represents the following contributors:
+#    * Jacques Sakarovitch <sakarovitch@enst.fr>
+#    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+#    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+#    * Loic Fosse <loic.fosse@lrde.epita.fr>
+#    * Thanh-Hoc Nguyen <nguyen@enst.fr>
+#    * Raphael Poss <raphael.poss@lrde.epita.fr>
+#    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
+#    * Maxime Rey <maxime.rey@lrde.epita.fr>
+#
+
+# This Makefile can be used to develop a standalone program in
+# Vaucanson. It uses a trick to enhance the compilation speed (you can
+# gain a factor 5).  The trick is based on the fact that Vaucanson
+# does not have to be analysed and instanciated at each modifications
+# of your code.  During the first compilation, Vaucanson's code is
+# collected in a compilation unit. In the next compilation, only the
+# interface of Vaucanson will be used on the condition that no new
+# Vaucanson code is instanciated. Otherwise, the system must collect
+# the new code i.e.  it must recompile the two compilation units.
+
+# System options.
+CXX=g++
+CXXFLAGS= # your compilation options (do not forget -DXXX for system
+          # compliance).
+CPPFLAGS= # -I your_vaucanson_directory
+MAKE=make
+GREP=grep
+RM=rm -f
+
+# Your program variables.
+TARGET= # your program.
+SOURCES= # its sources.
+FAKE_SOURCES=$(SOURCES:.cc=.unitcc)
+FAKE_UNITS=$(FAKE_SOURCES:.cc=.o)
+OBJECTS=$(FAKE_SOURCES:.unitcc=.unito) $(SOURCES:.cc=.o)
+
+all: $(TARGET)
+
+# No dependency with the source.
+%.unitcc: 
+	@ SOURCE=`echo $@ | sed 's,.unitcc,.cc,'` \
+	  && echo Collecting Vaucanson code in $$SOURCE. \
+	  && $(GREP) '#include' $$SOURCE > $@ \
+	  &&  echo 'namespace __instanciator_code {' >> $@ \
+	  && $(GREP) -v '#include' $$SOURCE >> $@ \
+	  && echo '}' >> $@
+
+# The fake unit is compiled using all Vaucanson's code.
+# It is very slow.
+%.unito:%.unitcc
+	$(CXX) -x c++ -c $(CPPFLAGS) $(CXXFLAGS) $< -o $@ 
+
+# Your source may only need the interface of Vaucanson if you do
+# not use a code that is not already in the fake unit.
+# Well, it is always slow (but less), this is due to C++ now.
+%.o:%.cc
+	$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $< -o $@ -DINTERFACE_ONLY
+
+# The t-time: will your code be compiled quickly ?
+$(TARGET): $(OBJECTS) 
+	@ echo "Try to link."
+	@ $(CXX) -o $@ $^ \
+	  || (echo 'Sorry, it failed: we must recompile everything.' \
+	  && ($(RM) $(FAKE_UNITS) && $(MAKE)))
+
+clean:
+	$(RM) $(OBJECTS) $(TARGET)

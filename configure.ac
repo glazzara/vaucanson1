@@ -113,6 +113,7 @@ AC_CONFIG_FILES([
 	doc/Makefile
 	doc/tutorial/Makefile
 	doc/beginner/Makefile
+	doc/makefiles/Makefile
         doc/doc.doxy
 	include/Makefile])
 

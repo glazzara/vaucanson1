@@ -1,3 +1,10 @@
+2004-01-15  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
+	* configure.ac: Update.
+	* doc/Makefile.am (SUBDIRS): Update.
+	* doc/makefiles/Makefile.am: New.
+	* doc/makefiles/vcsn-Makefile: New.
+
 2003-12-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
 	* src/demos/Makefile.am: Update
