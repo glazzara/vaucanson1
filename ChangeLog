@@ -1,5 +1,10 @@
 2003-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
 
+	* src/tests/sanity/generate_files.sh:
+		Fix.
+
+2003-09-25  Yann Régis-Gianas  <yann@lrde.epita.fr>
+
 	* src/tests/sanity/generate_files.sh: 
 		Depend on include/Makefile.am
 	* include/Makefile.am: Update.

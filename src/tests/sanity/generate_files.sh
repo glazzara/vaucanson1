@@ -11,25 +11,28 @@ cd "$1"
 # Set check_PROGRAMS.
 cat > Makefile.am << EOF
 EXTRA_DIST = generate_files.sh
-test_base.cc: generate_files.sh \$(topsrc_dir)/include/Makefile.am
+test_base.cc: generate_files.sh \$(top_srcdir)/include/Makefile.am
 	\$(SHELL) "\$(srcdir)"/generate_files.sh "\$(srcdir)"
 
 AM_CPPFLAGS = -DINTERNAL_CHECKS -DSTRICT -I\$(top_srcdir)/include -I\$(top_builddir)/include
 AM_CXXFLAGS = \$(CXXFLAGS_STRICT)
-check_PROGRAMS = \\
+check_PROGRAMS= \\
 EOF
-awk '{ gsub(/[.\/]/, "_"); print "\t"$0" \\" }' files.tmp | \
+awk '{ gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' files.tmp | \
   sed '$s/\(.*\) \\/\1/' >> Makefile.am
 
 echo >> Makefile.am
+echo "TESTS= \\" >> Makefile.am
+awk '{ gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' files.tmp | \
+  sed '$s/\(.*\) \\/\1/' >> Makefile.am
 
 # Set test sources and CPPFLAGS.
 awk '
   {
     target = $1
     gsub(/[.\/]/, "_", target)
-    print target"_SOURCES = test_base.cc"
-    print target"_CPPFLAGS = \$(AM_CPPFLAGS) -DINCLUDE="$1"\n"
+    print target"_test_SOURCES = test_base.cc"
+    print target"_test_CPPFLAGS = \$(AM_CPPFLAGS) -DINCLUDE="$1"\n"
   }
 ' files.tmp >> Makefile.am
 
