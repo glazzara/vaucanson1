@@ -307,19 +307,14 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/realtime_decl.hh				   \
 	vaucanson/vaucanson.hh						   \
 	vaucanson/boolean_automaton.hh					   \
-	vaucanson/boolean_automaton.hxx					   \
 	vaucanson/boolean_transducer.hh					   \
 	vaucanson/contextual_automaton_functions.thh			   \
 	vaucanson/contextual_automaton_functions.thxx			   \
 	vaucanson/contextual_transducer_functions.thh			   \
 	vaucanson/contextual_transducer_functions.thxx			   \
 	vaucanson/contextual_headers.hh					   \
-	vaucanson/z_max_plus.hxx					   \
-	vaucanson/z_max_plus_automaton.hxx				   \
 	vaucanson/z_max_plus_automaton.hh				   \
-	vaucanson/z_automaton.hxx					   \
 	vaucanson/z_automaton.hh					   \
-	vaucanson/r_automaton.hxx					   \
 	vaucanson/r_automaton.hh					   \
 	vaucanson/standard_algorithms.hh				   \
 	vaucanson/xml/xmlstrings.inc					   \

@@ -1,3 +1,15 @@
+2004-06-20  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/z_max_plus.hxx, include/vaucanson/r_automaton.hxx,
+	* include/vaucanson/z_automaton.hxx,
+	* include/vaucanson/boolean_automaton.hxx,
+	* include/vaucanson/z_max_plus_automaton.hxx: Delete.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh: Update accordingly
+	* include/Makefile.am: Update.
+
 2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/semiring_base.hxx: Fix parsing of
@@ -5,9 +17,9 @@
 
 2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* src/tests/automata/algos/realtime_test.hh: Fix missing namespace 
+	* src/tests/automata/algos/realtime_test.hh: Fix missing namespace
 	specification.
-	
+
 2004-06-18  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx: Remove unused variables.

@@ -73,8 +73,4 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/z_automaton.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
-
 #endif // VCSN_Z_AUTOMATON_HH

@@ -75,8 +75,4 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/z_max_plus_automaton.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
-
 #endif // VCSN_Z_MAX_PLUS_AUTOMATON_HH
