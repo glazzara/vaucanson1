@@ -1,3 +1,8 @@
+2005-04-12  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx: Add op_rout function to display	free monoid product Automata.
+
 2005-03-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/demos/vaucanswig/meta/context.hh,

@@ -126,8 +126,19 @@ namespace vcsn {
     return f(v.first.length(), v.second.length());
   }
 
-
-
+  template <typename Self, typename St, typename T>
+  St&
+  op_rout(const algebra::FreeMonoidProductBase<Self>& s,
+	  St& st,
+	  const T& v)
+  {
+    st << "(";
+    op_rout(s.first_monoid(), st, v.first);
+    st << ",";
+    op_rout(s.second_monoid(), st, v.second);  
+    st << ")";
+    return st;
+  }
 } // vcsn
 
 #endif // VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HXX

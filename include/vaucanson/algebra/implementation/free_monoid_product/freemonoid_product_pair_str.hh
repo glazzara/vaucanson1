@@ -93,6 +93,11 @@ namespace vcsn {
   typename Ftor::result_type
   op_length(const algebra::FreeMonoidProductBase<Self>&, const T& v, Ftor f);
 
+  template <typename Self, typename St, typename T>
+  St&
+  op_rout(const algebra::FreeMonoidProductBase<Self>& s,
+	  St& st,
+	  const T& v);
 
 } // vcsn
 
