@@ -1,5 +1,10 @@
 2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/misc/contract.hh: Fix undefined macro
+	`result_not_computable' in VCSN_NDEBUG mode.
+
+2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx,
 	* include/vaucanson/misc/deferrer.hh,
 	* include/vaucanson/misc/constraints.hh,

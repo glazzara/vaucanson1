@@ -233,6 +233,8 @@ namespace utility {
 
 # else // VCSN_NDEBUG
 
+#  define result_not_computable(Mess, Exc) static_cast<void>(0)
+
 #  define static_assertion(Cond, Message) typedef void Message
 #  define static_assertion_(Cond, Message) typedef void Message
 #  define static_error(Message) typedef void Message
