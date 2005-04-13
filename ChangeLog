@@ -1,5 +1,11 @@
 2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/misc/support.hxx: Secure the `begin()' method
+	for SparseInterval if `from_' is not the actual first element of
+	the interval.
+
+2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/automata/implementation/graph.hh,
 	* include/vaucanson/automata/implementation/graph.hxx,
 	* include/vaucanson/automata/implementation/automaton_view.hh,
