@@ -1,5 +1,18 @@
 2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/contextual_headers.hh: Include a different
+	graph implementation according to the macro VCSN_FAST.
+	* include/vaucanson/fast.hh: New. Add fast and unsure header which
+	set VCSN_FAST macro and VCSN_NDEBUG.
+	* include/vaucanson/automata/implementation/graph_fast.hxx,
+	* include/vaucanson/automata/implementation/graph_fast.hh:
+	New. Add a graph implementation which is lighter in term of
+	security and faster than the original one.
+
+2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/tools/bencher.hh,
 	* include/vaucanson/tools/bencher.hxx: New. Add bencher utility.
 

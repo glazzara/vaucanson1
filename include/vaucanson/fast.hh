@@ -1,4 +1,4 @@
-// contextual_headers.hh: this file is part of the Vaucanson project.
+// fast.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004, 2005 The Vaucanson Group.
@@ -30,32 +30,15 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
-#ifndef VCSN_CONTEXTUAL_HEADERS_HH
-# define VCSN_CONTEXTUAL_HEADERS_HH
 
-# ifdef NDEBUG
-#  define VCSN_NDEBUG 1
-# endif // ! NDEBUG
+/**
+ ** \brief Macro definitions for using fast and unsure implementations.
+ */
 
-# include <vaucanson/algebra/implementation/predefs.hh>
-# include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
-# include <vaucanson/algebra/implementation/series/polynoms.hh>
-# include <vaucanson/algebra/implementation/series/krat.hh>
-# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
+#ifndef VCSN_FAST_HH
+# define VCSN_FAST_HH
 
-# include <vaucanson/automata/concept/automata.hh>
-# ifdef VCSN_FAST
-#  include <vaucanson/automata/implementation/graph_fast.hh>
-# else // VCSN_FAST
-#  include <vaucanson/automata/implementation/graph.hh>
-# endif // ! VCSN_FAST
-# include <vaucanson/automata/implementation/generalized.hh>
+# define VCSN_NDEBUG 1
+# define VCSN_FAST 1
 
-# include <vaucanson/tools/dot_dump.hh>
-# include <vaucanson/tools/usual_macros.hh>
-
-# include <vaucanson/algorithms/standard_of.hh>
-# include <vaucanson/algorithms/thompson.hh>
-# include <vaucanson/algorithms/aut_to_exp.hh>
-
-#endif // ! VCSN_CONTEXTUAL_HEADERS_HH
+#endif // ! VCSN_FAST_HH
