@@ -1,5 +1,10 @@
 2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/tools/bencher.hh,
+	* include/vaucanson/tools/bencher.hxx: New. Add bencher utility.
+
+2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/misc/support.hxx: Secure the `begin()' method
 	for SparseInterval if `from_' is not the actual first element of
 	the interval.
