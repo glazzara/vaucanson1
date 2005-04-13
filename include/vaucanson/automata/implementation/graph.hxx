@@ -1,7 +1,7 @@
 // graph.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HXX
 # define VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HXX
@@ -104,22 +105,6 @@ namespace vcsn {
 	  }
       }
     return true;
-  }
-
-
-  TParam
-  void GClass::safe_del_state(hstate_t n)
-  {
-    precondition(has_state(n));
-
-    // Call standard del_state.
-    del_state(n);
-
-    // Perform a check with all edges to see if no ones are related,
-    // and delete them if so.
-    for (int i = first_edge_; i < int(edges_.size()); ++i)
-      if (aim_of(hedge_t(i)) == n || origin_of(hedge_t(i)) == n)
-	del_edge(hedge_t(i));
   }
 
 

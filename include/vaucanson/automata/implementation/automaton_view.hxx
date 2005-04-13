@@ -1,7 +1,7 @@
 // automaton_view.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_AUTOMATON_VIEW_HXX
 # define VCSN_AUTOMATA_IMPLEMENTATION_AUTOMATON_VIEW_HXX
@@ -272,14 +273,6 @@ namespace vcsn {
 	      hedge_t e)
   {
     op_del_edge(s, v.object(), e);
-  }
-
-  template <class S, class T>
-  void
-  op_safe_del_state(const AutomataBase<S>& s, IdentityView<T>& v,
-		    hstate_t st)
-  {
-    op_safe_del_state(s, v.object(), st);
   }
 
   template <class S, class T>

@@ -1,7 +1,7 @@
 // automata_base.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HXX
 # define VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HXX
@@ -355,14 +356,6 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>::del_edge(hedge_t e)
   {
     return op_del_edge(this->structure(), this->value(), e);
-  }
-
-  /** delete the state 's' and every references to it in the automaton. */
-  template <typename Self, typename T>
-  void
-  MetaElement<AutomataBase<Self>, T>::safe_del_state(hstate_t s)
-  {
-    return op_safe_del_state(this->structure(), this->value(), s);
   }
 
   /** check if the state 's' is in the automaton. */
