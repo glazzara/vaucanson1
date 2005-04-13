@@ -1,3 +1,13 @@
+2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx,
+	* include/vaucanson/misc/deferrer.hh,
+	* include/vaucanson/misc/constraints.hh,
+	* include/vaucanson/misc/contract.hh: Change NDEBUG directives to
+	VCSN_NDEBUG.
+	* include/vaucanson/contextual_headers.hh: Set VCSN_NDEBUG if
+	NDEBUG is set.
+
 2005-04-12  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh,

@@ -1,7 +1,7 @@
 // deferrer.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_MISC_DEFERRER_HH
 # define VCSN_MISC_DEFERRER_HH
@@ -48,11 +49,11 @@ namespace utility
 
   /** @addtogroup utility *//** @{ */
 
-#ifndef NDEBUG
+# ifndef VCSN_NDEBUG
   enum { deferrer_runtime_checks_default = true };
-#else
+#  else // VCSN_NDEBUG
   enum { deferrer_runtime_checks_default = false };
-#endif
+# endif // ! VCSN_NDEBUG
 
   /// Helper class for Deferrer.
   /** @{ */

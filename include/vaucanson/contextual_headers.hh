@@ -1,7 +1,7 @@
 // contextual_headers.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,9 +28,14 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_CONTEXTUAL_HEADERS_HH
 # define VCSN_CONTEXTUAL_HEADERS_HH
+
+# ifdef NDEBUG
+#  define VCSN_NDEBUG 1
+# endif // ! NDEBUG
 
 # include <vaucanson/algebra/implementation/predefs.hh>
 # include <vaucanson/algebra/implementation/free_monoid/str_words.hh>

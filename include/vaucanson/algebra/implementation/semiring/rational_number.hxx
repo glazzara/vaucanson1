@@ -1,7 +1,7 @@
 // rational_number.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX
 # define VCSN_ALGEBRA_IMPLEMENTATION_SEMIRING_RATIONAL_NUMBER_HXX
@@ -280,10 +281,10 @@ namespace vcsn
       if (!a || !b || !(d = gcd(abs(a), b)))
 	return 0;
       int r = a * b / d;
-# ifndef NDEBUG
+# ifndef VCSN_NDEBUG
       if (not r)
 	throw std::overflow_error ("");
-# endif // NDEBUG
+# endif // ! VCSN_NDEBUG
       return r;
     }
   }
