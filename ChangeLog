@@ -1,3 +1,7 @@
+2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/Makefile.am (nobase_include_HEADERS): Update.
+
 2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/contexts/ratseries_semiring.thh,
