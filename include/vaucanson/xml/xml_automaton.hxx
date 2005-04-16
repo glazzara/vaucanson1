@@ -1,7 +1,7 @@
 // xml_automaton.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -44,6 +44,7 @@
 # include <vaucanson/z_max_plus_automaton.hh>
 # include <vaucanson/z_min_plus_automaton.hh>
 
+# include <vaucanson/algebra/implementation/predefs.hh>
 
 # include <vaucanson/xml/error_handler.hh>
 # include <vaucanson/xml/strings.hh>

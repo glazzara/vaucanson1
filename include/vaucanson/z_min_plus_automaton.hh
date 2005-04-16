@@ -1,7 +1,7 @@
 // z_min_plus_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,46 +32,27 @@
 #ifndef VCSN_Z_MIN_PLUS_AUTOMATON_HH
 # define VCSN_Z_MIN_PLUS_AUTOMATON_HH
 
+# define VCSN_CONTEXT_NAMESPACE z_min_plus_automaton
+
 # include <vaucanson/contextual_headers.hh>
-# include <vaucanson/algebra/implementation/semiring/tropical_semiring.hh>
 
-namespace vcsn {
-
-  namespace z_min_plus_automaton {
-
-    using namespace vcsn;
-    using namespace vcsn::algebra;
-    using namespace vcsn::algebra::char_letter;
-
-    typedef polynom<WordValue, int> series_set_elt_value_t;
-
-    typedef TropicalSemiring<TropicalMin> semiring_t;
-    typedef Series<semiring_t, Words> series_set_t;
-
-    typedef Graph
-    <
-      labels_are_series,
-      WordValue,
-      int,
-      series_set_elt_value_t,
-      char,
-      NoTag>
-    automaton_impl_t;
-
-    typedef Element<Automata<series_set_t>, automaton_impl_t>
-    automaton_t;
-
-    typedef generalized_traits<automaton_t>::automaton_t gen_automaton_t;
-
-    AUTOMATON_TYPES_EXACT(automaton_t);
-    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
-    typedef rat::exp<monoid_elt_value_t, semiring_elt_value_t>	rat_exp_impl_t;
-    typedef Element<series_set_t, rat_exp_impl_t>			rat_exp_t;
-
+# include <vaucanson/contexts/char_letter.thh>
+# include <vaucanson/contexts/dynamic_alphabet.thh>
+# include <vaucanson/contexts/free_monoid.thh>
+# include <vaucanson/contexts/z_min_plus_semiring.thh>
+# include <vaucanson/contexts/generic_series.thh>
+# include <vaucanson/contexts/generic_automaton_impl.thh>
+# include <vaucanson/contexts/automaton.thh>
 # include <vaucanson/contextual_automaton_functions.thh>
 
-  } // z_min_plus_automaton
+namespace vcsn
+{
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
+    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
+  }
+}
 
-} // vcsn
+# undef VCSN_CONTEXT_NAMESPACE
 
 #endif // ! VCSN_Z_MIN_PLUS_AUTOMATON_HH

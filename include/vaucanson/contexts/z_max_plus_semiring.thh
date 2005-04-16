@@ -1,0 +1,32 @@
+// -*- C++ -*-
+
+// Input: nothing.
+// Output: semiring_elt_t, semiring_elt_set_t, semiring_elt_value_t.
+
+# include <vaucanson/algebra/implementation/semiring/tropical_semiring.hh>
+
+/*---------.
+| Semiring |
+`---------*/
+
+namespace vcsn
+{
+
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
+
+    typedef
+    vcsn::algebra::TropicalSemiring<vcsn::algebra::TropicalMax>
+    semiring_t;
+
+    typedef
+    int
+    semiring_elt_value_t;
+
+    typedef
+    vcsn::Element<semiring_t, semiring_elt_value_t>
+    semiring_elt_t;
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.

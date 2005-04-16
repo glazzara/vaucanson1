@@ -31,6 +31,13 @@ nobase_include_HEADERS =						   \
 	vaucanson/config/system.hh					   \
 	vaucanson/config/math.hh					   \
 	vaucanson/config/pconf.hh					   \
+	vaucanson/contexts/automaton.thh				   \
+	vaucanson/contexts/boolean_semiring.thh				   \
+	vaucanson/contexts/char_letter.thh				   \
+	vaucanson/contexts/dynamic_alphabet.thh				   \
+	vaucanson/contexts/free_monoid.thh				   \
+	vaucanson/contexts/generic_automaton_impl.thh			   \
+	vaucanson/contexts/generic_series.thh				   \
 	vaucanson/misc/iomanip.hh					   \
 	vaucanson/misc/iomanip.hxx					   \
 	vaucanson/misc/escaper.hh					   \

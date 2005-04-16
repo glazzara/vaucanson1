@@ -3,7 +3,7 @@
 // project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,133 +32,144 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-/*----------------.
-| new_automaton() |
-`----------------*/
 
-template <class InputIterator>
-automata_set_t new_automata_set(InputIterator begin,
-				InputIterator end)
+namespace vcsn
 {
-  alphabet_t		alpha;
-  for (InputIterator e = begin; e != end; ++e)
-    alpha.insert(*e);
-  semiring_t		semiring;
-  monoid_t		freemonoid (alpha);
-  series_set_t		series (semiring, freemonoid);
-  return automata_set_t	(series);
-}
 
-template <class InputIterator>
-automaton_t new_automaton(InputIterator begin,
-			  InputIterator end)
-{
-  return automaton_t (new_automata_set(begin, end));
-}
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
 
-template <class T>
-automaton_t new_automaton(const T& alphabet)
-{
-  return new_automaton(alphabet.begin(), alphabet.end());
-}
+    /*----------------.
+    | new_automaton() |
+    `----------------*/
 
-template <class InputIterator>
-gen_automaton_t new_gen_automaton(InputIterator begin,
-				  InputIterator end)
-{
-  return gen_automaton_t (new_automata_set(begin, end));
-}
+    template <class InputIterator>
+    automata_set_t new_automata_set(InputIterator begin,
+				    InputIterator end)
+    {
+      alphabet_t		alpha;
+      for (InputIterator e = begin; e != end; ++e)
+	alpha.insert(*e);
+      semiring_t		semiring;
+      monoid_t			freemonoid (alpha);
+      series_set_t		series (semiring, freemonoid);
+      return automata_set_t (series);
+    }
 
-template <class T>
-gen_automaton_t new_gen_automaton(const T& alphabet)
-{
-  return new_gen_automaton(alphabet.begin(), alphabet.end());
-}
+    template <class InputIterator>
+    automaton_t new_automaton(InputIterator begin,
+			      InputIterator end)
+    {
+      return automaton_t (new_automata_set(begin, end));
+    }
+
+    template <class T>
+    automaton_t new_automaton(const T& alphabet)
+    {
+      return new_automaton(alphabet.begin(), alphabet.end());
+    }
+
+    template <class InputIterator>
+    gen_automaton_t new_gen_automaton(InputIterator begin,
+				      InputIterator end)
+    {
+      return gen_automaton_t (new_automata_set(begin, end));
+    }
+
+    template <class T>
+    gen_automaton_t new_gen_automaton(const T& alphabet)
+    {
+      return new_gen_automaton(alphabet.begin(), alphabet.end());
+    }
 
 
-/*--------------.
-| new_rat_exp() |
-`--------------*/
+    /*--------------.
+    | new_rat_exp() |
+    `--------------*/
 
-template <class Iterator>
-rat_exp_t new_rat_exp(const Iterator& begin,
-		      const Iterator& end,
-		      const std::string& exp)
-{
-  alphabet_t	alphabet;
-  for (Iterator i = begin; i != end; ++i)
-    alphabet.insert(*i);
-  monoid_t	monoid (alphabet);
-  semiring_t	semiring;
-  series_set_t	series (semiring, monoid);
+    template <class Iterator>
+    rat_exp_t new_rat_exp(const Iterator& begin,
+			  const Iterator& end,
+			  const std::string& exp)
+    {
+      alphabet_t	alphabet;
+      for (Iterator i = begin; i != end; ++i)
+	alphabet.insert(*i);
+      monoid_t		monoid (alphabet);
+      semiring_t	semiring;
+      series_set_t	series (semiring, monoid);
 
-  rat_exp_t	r (series);
-  std::pair<bool, std::string> p = parse(exp, r);
-  if (p.first)
-    throw std::invalid_argument (p.second);
-  return r;
-}
+      rat_exp_t	r (series);
+      std::pair<bool, std::string> p = parse(exp, r);
+      if (p.first)
+	throw std::invalid_argument (p.second);
+      return r;
+    }
 
-template <class T>
-rat_exp_t new_rat_exp(const T& alphabet, const std::string& exp)
-{
-  return new_rat_exp(alphabet.begin(), alphabet.end(), exp);
-}
+    template <class T>
+    rat_exp_t new_rat_exp(const T& alphabet, const std::string& exp)
+    {
+      return new_rat_exp(alphabet.begin(), alphabet.end(), exp);
+    }
 
-/*--------------.
-| standard_of() |
-`--------------*/
+    /*--------------.
+    | standard_of() |
+    `--------------*/
 
-template <class SeriesImpl>
-automaton_t
-do_standard_of(const series_set_t& structure, const SeriesImpl& impl)
-{
-  automaton_t r = new_automaton(structure.monoid().alphabet());
-  standard_of(r, impl);
-  return r;
-}
+    template <class SeriesImpl>
+    automaton_t
+    do_standard_of(const series_set_t& structure, const SeriesImpl& impl)
+    {
+      automaton_t r = new_automaton(structure.monoid().alphabet());
+      standard_of(r, impl);
+      return r;
+    }
 
-template <class SeriesSet, class SeriesImpl>
-automaton_t
-standard_of(const Element<SeriesSet, SeriesImpl>& e)
-{
-  return do_standard_of(e.structure(), e.value());
-}
+    template <class SeriesSet, class SeriesImpl>
+    automaton_t
+    standard_of(const Element<SeriesSet, SeriesImpl>& e)
+    {
+      return do_standard_of(e.structure(), e.value());
+    }
 
-/*--------------.
-| thompson_of() |
-`--------------*/
+    /*--------------.
+    | thompson_of() |
+    `--------------*/
 
-template <class SeriesImpl>
-automaton_t
-do_thompson_of(const series_set_t& structure, const SeriesImpl& impl)
-{
-  automaton_t r = new_automaton(structure.monoid().alphabet());
-  thompson_of(r, impl);
-  return r;
-}
+    template <class SeriesImpl>
+    automaton_t
+    do_thompson_of(const series_set_t& structure, const SeriesImpl& impl)
+    {
+      automaton_t r = new_automaton(structure.monoid().alphabet());
+      thompson_of(r, impl);
+      return r;
+    }
 
-template <class SeriesSet, class SeriesImpl>
-automaton_t
-thompson_of(const Element<SeriesSet, SeriesImpl>& e)
-{
-  return do_thompson_of(e.structure(), e.value());
-}
+    template <class SeriesSet, class SeriesImpl>
+    automaton_t
+    thompson_of(const Element<SeriesSet, SeriesImpl>& e)
+    {
+      return do_thompson_of(e.structure(), e.value());
+    }
 
-/*-------------.
-| aut_to_exp() |
-`-------------*/
+    /*-------------.
+    | aut_to_exp() |
+    `-------------*/
 
-inline
-rat_exp_t
-aut_to_exp(const automaton_t& a)
-{
-  return aut_to_exp(generalized(a));
-}
+    inline
+    rat_exp_t
+    aut_to_exp(const automaton_t& a)
+    {
+      return aut_to_exp(generalized(a));
+    }
 
-template <class Chooser>
-rat_exp_t
-aut_to_exp(const automaton_t& a, const Chooser& c)
-{
-  return aut_to_exp(generalized(a), c);
-}
+    template <class Chooser>
+    rat_exp_t
+    aut_to_exp(const automaton_t& a, const Chooser& c)
+    {
+      return aut_to_exp(generalized(a), c);
+    }
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.

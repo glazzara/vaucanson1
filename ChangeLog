@@ -1,3 +1,55 @@
+2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Break context headers in multiple headers.  This give more
+	modularity to context headers. Thus, writing new context headers
+	should be done by combining existing header templates.  So
+	declaring context headers should be much easier.
+
+	However, more work is needed to improve context headers for
+	transducers. Also, this disables the trick with the fast
+	implementation of graphs. This will be fixed soon. The full test
+	suite has not been tested, but the demo programs compile and work
+	correctly.
+
+	* include/vaucanson/contexts/automaton.thh,
+	* include/vaucanson/contexts/boolean_semiring.thh,
+	* include/vaucanson/contexts/char_letter.thh,
+	* include/vaucanson/contexts/dynamic_alphabet.thh,
+	* include/vaucanson/contexts/free_monoid.thh,
+	* include/vaucanson/contexts/generic_automaton_impl.thh,
+	* include/vaucanson/contexts/generic_series.thh,
+	* include/vaucanson/contexts/r_semiring.thh,
+	* include/vaucanson/contexts/z_max_plus_semiring.thh,
+	* include/vaucanson/contexts/z_min_plus_semiring.thh,
+	* include/vaucanson/contexts/z_semiring.thh: New. Basic
+	header templates for use with the context headers.
+	* contextual_automaton_functions.thh,
+	* contextual_automaton_functions.thxx: Define and declare everything
+	in the vcsn::VCSN_CONTEXT_NAMESPACE namespace.
+	* include/vaucanson/algebra/implementation/series/polynoms.hh
+	(polynom): Typedef Tw and Tm to monoid_elt_value_t and
+	semiring_elt_value_t.
+	* include/vaucanson/boolean_transducer.hh,
+	* include/vaucanson/boolean_automaton.hh
+	* include/vaucanson/z_automaton.hh
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/z_min_plus_automaton.hh: Update. Use headers
+	in include/vaucanson/contexts.
+	* include/vaucanson/contextual_headers.hh,
+	* include/Makefile.am: Update.
+
+	These fixes were necessary, because vcsn::*_automaton do not use
+	namespaces vcsn and vcsn::algebra anymore, neither they use the
+	various predefs.hh headers from
+	include/vaucanson/algebra/implementation.
+
+	* src/demos/vgrep/vgrep.cc (main): Use namespace vcsn.
+	* src/demos/samples/algorithms/derivatives_automaton.cc (main):
+	s/tools/vcsn::tools/.
+	* include/vaucanson/xml/xml_automaton.hxx: Include
+	vaucanson/algebra/implementation/predefs.hh.
+
 2005-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/krat.hxx,
@@ -58,12 +110,12 @@
 2005-03-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/demos/vaucanswig/meta/context.hh,
-	* src/demos/vaucanswig/meta/automaton.hh: Add macro 
+	* src/demos/vaucanswig/meta/automaton.hh: Add macro
 	AUTOMATON_FREEMONOID_TYPES* where needed.
 
 2005-02-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* src/tests/xml/test.src: Change standard error redirection method for 
+	* src/tests/xml/test.src: Change standard error redirection method for
 	the shell script.
 
 2005-02-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>

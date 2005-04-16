@@ -1,0 +1,27 @@
+// -*- C++ -*-
+
+// Input: nothing.
+// Output: semiring_elt_t, semiring_elt_set_t, semiring_elt_value_t.
+
+#include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+
+/*---------.
+| Semiring |
+`---------*/
+
+namespace vcsn
+{
+
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
+
+    typedef vcsn::algebra::NumericalSemiring	semiring_t;
+    typedef float				semiring_elt_value_t;
+
+    typedef
+    vcsn::Element<semiring_t, semiring_elt_value_t>
+    semiring_elt_t;
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.

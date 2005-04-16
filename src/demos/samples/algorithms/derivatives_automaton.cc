@@ -1,7 +1,7 @@
 // derivatives_automaton.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 
   // If the automaton is valid, display it !
   if (automaton.states().size())
-    tools::dot_display(automaton, "derivatives_automaton");
+    vcsn::tools::dot_display(automaton, "derivatives_automaton");
   else
     std::cout << "Empty automaton." << std::endl;
 }

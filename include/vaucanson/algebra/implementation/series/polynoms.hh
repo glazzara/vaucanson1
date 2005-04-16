@@ -1,7 +1,7 @@
 // polynoms.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -52,6 +52,9 @@ namespace vcsn {
     class polynom
     {
     public:
+      typedef Tm	monoid_elt_value_t;
+      typedef Tw	semiring_elt_value_t;
+
       typedef typename std::map<Tm, Tw>::const_iterator const_iterator;
       typedef typename std::map<Tm, Tw>::iterator	iterator;
 

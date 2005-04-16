@@ -1,0 +1,36 @@
+// -*- C++ -*-
+
+// Input: series_set_elt_t.
+// Output: automaton_impl_t.
+
+#include <vaucanson/automata/implementation/graph.hh>
+
+namespace vcsn
+{
+
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
+
+    typedef vcsn::Graph<
+      labels_are_series,
+      series_set_elt_t::value_t::monoid_elt_value_t,
+      series_set_elt_t::value_t::semiring_elt_value_t,
+      series_set_elt_t::value_t,
+      series_set_elt_t::set_t::monoid_t::letter_t,
+      NoTag
+      >
+    automaton_impl_t;
+
+    typedef vcsn::Graph<
+      labels_are_series,
+      rat_exp_t::value_t::monoid_elt_value_t,
+      rat_exp_t::value_t::semiring_elt_value_t,
+      rat_exp_t::value_t,
+      rat_exp_t::set_t::monoid_t::letter_t,
+      NoTag
+      >
+    gen_automaton_impl_t;
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.

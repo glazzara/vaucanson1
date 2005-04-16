@@ -1,0 +1,16 @@
+// -*- C++ -*-
+
+// Input: nothing.
+// Output: letter_t.
+
+namespace vcsn
+{
+
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
+
+    typedef char	letter_t;
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.

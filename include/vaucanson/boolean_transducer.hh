@@ -32,45 +32,39 @@
 #ifndef VCSN_BOOLEAN_TRANSDUCER_HH
 # define VCSN_BOOLEAN_TRANSDUCER_HH
 
-# include <vaucanson/contextual_headers.hh>
-# include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+# define VCSN_CONTEXT_NAMESPACE boolean_transducer
+
 # include <vaucanson/automata/concept/transducer.hh>
 # include <vaucanson/boolean_automaton.hh>
 # include <vaucanson/algorithms/evaluation.hh>
-# include <vaucanson/algorithms/eval.hh>
-# include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/algorithms/standard_of.hh>
 
-namespace vcsn {
-  namespace boolean_transducer {
+# include <vaucanson/contextual_headers.hh>
 
-    using namespace vcsn;
-    using namespace vcsn::algebra;
-    using namespace vcsn::algebra::char_letter;
+# include <vaucanson/contexts/char_letter.thh>
+# include <vaucanson/contexts/dynamic_alphabet.thh>
+# include <vaucanson/contexts/free_monoid.thh>
 
+namespace vcsn
+{
 
-    typedef char				letter_t;
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
 
-    typedef Words				monoid_t;
-    typedef WordValue				monoid_elt_value_t;
-    typedef Element<monoid_t, monoid_elt_value_t>
-						monoid_elt_t;
-
-    typedef NumericalSemiring			output_semiring_t;
+    typedef algebra::NumericalSemiring		output_semiring_t;
     typedef bool				output_semiring_elt_value_t;
     typedef Element<output_semiring_t, output_semiring_elt_value_t>
 						output_semiring_elt_t;
 
-    typedef Series<output_semiring_t, monoid_t>
+    typedef algebra::Series<output_semiring_t, monoid_t>
 						output_series_set_t;
     typedef rat::exp<monoid_elt_value_t, output_semiring_elt_value_t>
 						output_series_set_elt_value_t;
     typedef Element<output_series_set_t, output_series_set_elt_value_t>
 						output_series_set_elt_t;
 
-    typedef Series<output_series_set_t, monoid_t>
+    typedef algebra::Series<output_series_set_t, monoid_t>
 						series_set_t;
-    typedef polynom<monoid_elt_value_t, output_series_set_elt_value_t>
+    typedef algebra::polynom<monoid_elt_value_t, output_series_set_elt_value_t>
 						series_set_elt_value_t;
 
     typedef Element<series_set_t, series_set_elt_value_t>
@@ -96,7 +90,10 @@ namespace vcsn {
 
 # include <vaucanson/contextual_transducer_functions.thh>
 
-  } // boolean_transducer
-} // vcsn
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.
+
+# undef VCSN_CONTEXT_NAMESPACE
 
 #endif // ! VCSN_BOOLEAN_TRANSDUCER_HH

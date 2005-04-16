@@ -33,22 +33,6 @@
 #ifndef VCSN_CONTEXTUAL_HEADERS_HH
 # define VCSN_CONTEXTUAL_HEADERS_HH
 
-# ifdef NDEBUG
-#  define VCSN_NDEBUG 1
-# endif // ! NDEBUG
-
-# include <vaucanson/algebra/implementation/predefs.hh>
-# include <vaucanson/algebra/implementation/free_monoid/str_words.hh>
-# include <vaucanson/algebra/implementation/series/polynoms.hh>
-# include <vaucanson/algebra/implementation/series/krat.hh>
-# include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-
-# include <vaucanson/automata/concept/automata.hh>
-# ifdef VCSN_FAST
-#  include <vaucanson/automata/implementation/graph_fast.hh>
-# else // VCSN_FAST
-#  include <vaucanson/automata/implementation/graph.hh>
-# endif // ! VCSN_FAST
 # include <vaucanson/automata/implementation/generalized.hh>
 
 # include <vaucanson/tools/dot_dump.hh>
