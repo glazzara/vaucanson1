@@ -1,5 +1,19 @@
 2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/contexts/contextual_headers.hh: Delete.
+	* include/vaucanson/contexts/contextual_automaton_functions.thh:
+	Include the files that were included by contextual_headers.hh.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh,
+	* include/vaucanson/fmp_transducer.hh: Do not include
+	contextual_headers.hh.
+
+2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/contextual_headers.hh,
 	* include/vaucanson/contextual_automaton_functions.thh,
 	* include/vaucanson/contextual_transducer_functions.thh,

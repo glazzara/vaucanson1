@@ -38,8 +38,6 @@
 # include <vaucanson/boolean_automaton.hh>
 # include <vaucanson/algorithms/evaluation.hh>
 
-# include <vaucanson/contexts/contextual_headers.hh>
-
 # include <vaucanson/contexts/char_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>
 # include <vaucanson/contexts/free_monoid.thh>

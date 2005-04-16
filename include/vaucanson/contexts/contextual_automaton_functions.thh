@@ -32,6 +32,15 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
+# include <vaucanson/automata/implementation/generalized.hh>
+
+# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/usual_macros.hh>
+
+# include <vaucanson/algorithms/standard_of.hh>
+# include <vaucanson/algorithms/thompson.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
+
 namespace vcsn
 {
 
