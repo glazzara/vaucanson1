@@ -1,5 +1,21 @@
 2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/contexts/automaton.thh,
+	* include/vaucanson/contexts/boolean_semiring.thh,
+	* include/vaucanson/contexts/char_letter.thh,
+	* include/vaucanson/contexts/dynamic_alphabet.thh,
+	* include/vaucanson/contexts/free_monoid.thh,
+	* include/vaucanson/contexts/generic_automaton_impl.thh,
+	* include/vaucanson/contexts/generic_series.thh,
+	* include/vaucanson/contexts/r_semiring.thh,
+	* include/vaucanson/contexts/z_max_plus_semiring.thh,
+	* include/vaucanson/contexts/z_min_plus_semiring.thh,
+	* include/vaucanson/contexts/z_semiring.thh: Bless with the GPL header.
+	* include/vaucanson/z_min_plus_automaton.hh: Fix copyright. Last
+	patch has added years for free.
+
+2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	Break context headers in multiple headers.  This give more
 	modularity to context headers. Thus, writing new context headers
 	should be done by combining existing header templates.  So
