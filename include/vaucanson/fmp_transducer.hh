@@ -42,12 +42,12 @@ namespace vcsn
 
   namespace VCSN_CONTEXT_NAMESPACE
   {
-    typedef boolean_automaton::monoid_elt_t	first_monoid_t;
+    typedef boolean_automaton::monoid_elt_t	first_monoid_elt_t;
     typedef first_monoid_elt_t::set_t		first_monoid_t;
     typedef first_monoid_elt_t::value_t		first_monoid_elt_value_t;
     typedef first_monoid_t::alphabet_t		first_alphabet_t;
 
-    typedef boolean_automaton::monoid_elt_t	second_monoid_t;
+    typedef boolean_automaton::monoid_elt_t	second_monoid_elt_t;
     typedef second_monoid_elt_t::set_t		second_monoid_t;
     typedef second_monoid_elt_t::value_t	second_monoid_elt_value_t;
     typedef second_monoid_t::alphabet_t		second_alphabet_t;
@@ -58,8 +58,8 @@ namespace vcsn
 # include <vaucanson/contexts/free_monoid_product.thh>
 # include <vaucanson/contexts/boolean_semiring.thh>
 # include <vaucanson/contexts/polynom_series.thh>
-# include <vaucanson/generic_automaton_impl.thh>
-# include <vaucanson/automaton.thh>
+# include <vaucanson/contexts/generic_automaton_impl.thh>
+# include <vaucanson/contexts/automaton.thh>
 
 # undef VCSN_CONTEXT_NAMESPACE
 

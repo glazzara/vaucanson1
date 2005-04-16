@@ -1,5 +1,13 @@
 2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/contexts/free_monoid_product.thh: Fully
+	qualify namespaces for FreeMonoidProduct and Element.
+	* include/vaucanson/fmp_transducer.hh: Typos.
+	* include/vaucanson/contexts/automaton.thh: Typedef
+	vcsn::hstate_t and vcsn::hedge_t to hstate_t and hedge_t.
+
+2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/Makefile.am (nobase_include_HEADERS): Update.
 
 2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
