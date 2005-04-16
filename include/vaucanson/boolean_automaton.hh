@@ -34,7 +34,7 @@
 
 # define VCSN_CONTEXT_NAMESPACE boolean_automaton
 
-# include <vaucanson/contextual_headers.hh>
+# include <vaucanson/contexts/contextual_headers.hh>
 
 # include <vaucanson/contexts/char_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>
@@ -43,7 +43,7 @@
 # include <vaucanson/contexts/generic_series.thh>
 # include <vaucanson/contexts/generic_automaton_impl.thh>
 # include <vaucanson/contexts/automaton.thh>
-# include <vaucanson/contextual_automaton_functions.thh>
+# include <vaucanson/contexts/contextual_automaton_functions.thh>
 
 namespace vcsn
 {

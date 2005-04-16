@@ -33,7 +33,7 @@
 #ifndef VCSN_FMP_TRANSDUCER_HH
 # define VCSN_FMP_TRANSDUCER_HH
 
-# include <vaucanson/contextual_headers.hh>
+# include <vaucanson/contexts/contextual_headers.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 

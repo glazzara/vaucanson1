@@ -1,5 +1,30 @@
 2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/contextual_headers.hh,
+	* include/vaucanson/contextual_automaton_functions.thh,
+	* include/vaucanson/contextual_transducer_functions.thh,
+	* include/vaucanson/contextual_automaton_functions.thxx,
+	* include/vaucanson/contextual_transducer_functions.thxx: Move...
+	* include/vaucanson/contexts/contextual_headers.hh,
+	* include/vaucanson/contexts/contextual_automaton_functions.thh,
+	* include/vaucanson/contexts/contextual_transducer_functions.thh,
+	* include/vaucanson/contexts/contextual_automaton_functions.thxx,
+	* include/vaucanson/contexts/contextual_transducer_functions.thxx:
+	... Here.
+	* include/vaucanson/fast.hh: Delete.
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh,
+	* include/vaucanson/contexts/contextual_automaton_functions.thh,
+	* include/vaucanson/contexts/contextual_transducer_functions.thh,
+	* include/vaucanson/fmp_transducer.hh,
+	* include/Makefile.am: Update accordingly.
+
+2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/contexts/automaton.thh,
 	* include/vaucanson/contexts/boolean_semiring.thh,
 	* include/vaucanson/contexts/char_letter.thh,

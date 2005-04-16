@@ -38,7 +38,7 @@
 # include <vaucanson/boolean_automaton.hh>
 # include <vaucanson/algorithms/evaluation.hh>
 
-# include <vaucanson/contextual_headers.hh>
+# include <vaucanson/contexts/contextual_headers.hh>
 
 # include <vaucanson/contexts/char_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>
@@ -88,7 +88,7 @@ namespace vcsn
     AUTOMATON_TYPES_EXACT(automaton_t);
     AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
 
-# include <vaucanson/contextual_transducer_functions.thh>
+# include <vaucanson/contexts/contextual_transducer_functions.thh>
 
   } // End of namespace VCSN_CONTEXT_NAMESPACE.
 

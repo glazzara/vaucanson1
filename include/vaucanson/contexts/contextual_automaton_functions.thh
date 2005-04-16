@@ -1,9 +1,9 @@
 //								-*- c++ -*-
-// contextual_transducer_functions.thh: this file is part of the
+// contextual_automaton_functions.thh: this file is part of the
 // Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,25 +32,58 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-template <class T>
-automaton_t new_automaton(const T& input_alphabet,
-			  const T& output_alphabet);
+namespace vcsn
+{
 
-template <class InputIterator>
-automaton_t new_automaton(InputIterator input_alphabet_begin,
-			  InputIterator input_alphabet_end,
-			  InputIterator output_alphabet_begin,
-			  InputIterator output_alphabet_end);
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
 
-template <typename TransStruct,
-	  typename TransImpl,
-	  typename ArgStruct,
-	  typename ArgImpl>
-output_series_set_elt_t
-evaluation(const Element<TransStruct, TransImpl>& t,
-	   const Element<ArgStruct, ArgImpl>& input);
 
+    template <class T>
+    automaton_t new_automaton(const T& alphabet);
+
+    template <class InputIterator>
+    automaton_t new_automaton(InputIterator begin,
+			      InputIterator end);
+
+    template <class T>
+    gen_automaton_t new_gen_automaton(const T& alphabet);
+
+    template <class InputIterator>
+    gen_automaton_t new_gen_automaton(InputIterator begin,
+				      InputIterator end);
+
+    template <class Iterator>
+    rat_exp_t
+    new_rat_exp(const Iterator& begin,
+		const Iterator& end,
+		const std::string& exp = "0");
+
+    template <class T>
+    rat_exp_t
+    new_rat_exp(const T& alphabet, const std::string& exp = "0");
+
+    template <class SeriesSet, class SeriesImpl>
+    automaton_t
+    standard_of(const Element<SeriesSet, SeriesImpl>& e);
+
+
+    template <class SeriesSet, class SeriesImpl>
+    automaton_t
+    thompson_of(const Element<SeriesSet, SeriesImpl>& e);
+
+    rat_exp_t
+    aut_to_exp(const automaton_t& a);
+
+    template <class Chooser>
+    rat_exp_t
+    aut_to_exp(const automaton_t& a, const Chooser& c);
+
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/contextual_transducer_functions.thxx>
+#  include <vaucanson/contexts/contextual_automaton_functions.thxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY
