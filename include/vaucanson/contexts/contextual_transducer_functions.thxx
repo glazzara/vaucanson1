@@ -3,7 +3,7 @@
 // Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,98 +32,110 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-/*----------------.
-| new automaton() |
-`----------------*/
+# include <vaucanson/algorithms/evaluation.hh>
 
-template <class InputIterator>
-automaton_t
-new_automaton(InputIterator input_alphabet_begin,
-	      InputIterator input_alphabet_end,
-	      InputIterator output_alphabet_begin,
-	      InputIterator output_alphabet_end)
+namespace vcsn
 {
-  alphabet_t		input_alpha;
-  alphabet_t		output_alpha;
 
-  for (InputIterator e = input_alphabet_begin;
-       e != input_alphabet_end; ++e)
-    input_alpha.insert(*e);
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
 
-  for (InputIterator e = output_alphabet_begin;
-       e != output_alphabet_end; ++e)
-    output_alpha.insert(*e);
+    /*----------------.
+    | new automaton() |
+    `----------------*/
 
-  monoid_t		output_freemonoid (output_alpha);
-  typename output_series_set_t::semiring_t	semiring;
-  output_series_set_t	output_series (semiring, output_freemonoid);
-  monoid_t		freemonoid (input_alpha);
-  series_set_t		series (output_series, freemonoid);
-  automata_set_t	automata_set (series);
+    template <class InputIterator>
+    automaton_t
+    new_automaton(InputIterator input_alphabet_begin,
+		  InputIterator input_alphabet_end,
+		  InputIterator output_alphabet_begin,
+		  InputIterator output_alphabet_end)
+    {
+      alphabet_t		input_alpha;
+      alphabet_t		output_alpha;
 
-  return automaton_t (automata_set);
-}
+      for (InputIterator e = input_alphabet_begin;
+	   e != input_alphabet_end; ++e)
+	input_alpha.insert(*e);
 
+      for (InputIterator e = output_alphabet_begin;
+	   e != output_alphabet_end; ++e)
+	output_alpha.insert(*e);
 
-template <class T>
-automaton_t new_automaton(const T& input_alphabet,
-			  const T& output_alphabet)
-{
-  return new_automaton(input_alphabet.begin(),
-		       input_alphabet.end(),
-		       output_alphabet.begin(),
-		       output_alphabet.end());
-}
+      monoid_t			output_freemonoid (output_alpha);
+      typename output_series_set_t::semiring_t	semiring;
+      output_series_set_t	output_series (semiring, output_freemonoid);
+      monoid_t			freemonoid (input_alpha);
+      series_set_t		series (output_series, freemonoid);
+      automata_set_t		automata_set (series);
 
-
-template <typename TransStruct,
-	  typename TransImpl,
-	  typename MonoidStruct,
-	  typename MonoidImpl>
-output_series_set_elt_t
-do_evaluation(const vcsn::TransducerBase<TransStruct>&,
-	      const TransImpl&,
-	      const vcsn::algebra::FreeMonoidBase<MonoidStruct>&,
-	      const MonoidImpl& input,
-	      const Element<TransStruct, TransImpl>& t,
-	      const Element<MonoidStruct, MonoidImpl>&)
-{
-  return eval(t, input);
-}
+      return automaton_t (automata_set);
+    }
 
 
-template <typename TransStruct,
-	  typename TransImpl,
-	  typename SeriesStruct,
-	  typename SeriesImpl,
-	  typename S,
-	  typename T>
-output_series_set_elt_t
-do_evaluation(const vcsn::TransducerBase<TransStruct>&,
-	      const TransImpl&,
-	      const SeriesStruct&,
-	      const vcsn::rat::exp<S, T>& input,
-	      const Element<TransStruct, TransImpl>& t,
-	      const Element<SeriesStruct, SeriesImpl>&)
-{
-  boolean_automaton::automaton_t w = boolean_automaton::
-    new_automaton(t.structure().series().monoid().alphabet());
-  boolean_automaton::gen_automaton_t result (w.structure());
-  standard_of(w, input);
-  evaluation(w, t, result);
-  return aut_to_exp(result);
-}
+    template <class T>
+    automaton_t new_automaton(const T& input_alphabet,
+			      const T& output_alphabet)
+    {
+      return new_automaton(input_alphabet.begin(),
+			   input_alphabet.end(),
+			   output_alphabet.begin(),
+			   output_alphabet.end());
+    }
 
 
-template <typename TransStruct,
-	  typename TransImpl,
-	  typename ArgStruct,
-	  typename ArgImpl>
-output_series_set_elt_t
-evaluation(const Element<TransStruct, TransImpl>& t,
-	   const Element<ArgStruct, ArgImpl>& input)
-{
-  return do_evaluation(t.structure(), t.value(),
-		       input.structure(), input.value(),
-		       t, input);
-}
+    template <typename TransStruct,
+	      typename TransImpl,
+	      typename MonoidStruct,
+	      typename MonoidImpl>
+    output_series_set_elt_t
+    do_evaluation(const vcsn::TransducerBase<TransStruct>&,
+		  const TransImpl&,
+		  const vcsn::algebra::FreeMonoidBase<MonoidStruct>&,
+		  const MonoidImpl& input,
+		  const Element<TransStruct, TransImpl>& t,
+		  const Element<MonoidStruct, MonoidImpl>&)
+    {
+      return eval(t, input);
+    }
+
+
+    template <typename TransStruct,
+	      typename TransImpl,
+	      typename SeriesStruct,
+	      typename SeriesImpl,
+	      typename S,
+	      typename T>
+    output_series_set_elt_t
+    do_evaluation(const vcsn::TransducerBase<TransStruct>&,
+		  const TransImpl&,
+		  const SeriesStruct&,
+		  const vcsn::rat::exp<S, T>& input,
+		  const Element<TransStruct, TransImpl>& t,
+		  const Element<SeriesStruct, SeriesImpl>&)
+    {
+      boolean_automaton::automaton_t w = boolean_automaton::
+	new_automaton(t.structure().series().monoid().alphabet());
+      boolean_automaton::gen_automaton_t result (w.structure());
+      standard_of(w, input);
+      evaluation(w, t, result);
+      return aut_to_exp(result);
+    }
+
+
+    template <typename TransStruct,
+	      typename TransImpl,
+	      typename ArgStruct,
+	      typename ArgImpl>
+    output_series_set_elt_t
+    evaluation(const Element<TransStruct, TransImpl>& t,
+	       const Element<ArgStruct, ArgImpl>& input)
+    {
+      return do_evaluation(t.structure(), t.value(),
+			   input.structure(), input.value(),
+			   t, input);
+    }
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.

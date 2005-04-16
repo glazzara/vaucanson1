@@ -32,9 +32,10 @@
 //
 
 // Input: series_set_elt_t, automaton_impl_t.
-// Output: automaton_t.
+// Output: automaton_t, gen_automaton_t.
 
 #include <vaucanson/automata/concept/automata.hh>
+#include <vaucanson/automata/implementation/generalized.hh>
 
 namespace vcsn
 {
@@ -44,7 +45,7 @@ namespace vcsn
 
     typedef vcsn::Automata<series_set_elt_t::set_t>	       automata_set_t;
     typedef vcsn::Element<automata_set_t, automaton_impl_t>    automaton_t;
-    typedef vcsn::Element<automata_set_t, gen_automaton_impl_t>gen_automaton_t;
+    typedef vcsn::generalized_traits<automaton_t>::automaton_t gen_automaton_t;
 
     AUTOMATON_TYPES_EXACT(automaton_t);
 

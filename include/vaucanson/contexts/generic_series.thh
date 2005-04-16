@@ -34,9 +34,9 @@
 // Input: monoid_elt_t, semiring_elt_t.
 // Output: series_set_elt_t, rat_exp_t.
 
-# include <vaucanson/algebra/implementation/series/krat.hh>
-# include <vaucanson/algebra/implementation/series/polynoms.hh>
+# include <vaucanson/contexts/polynom_series.thh>
 
+# include <vaucanson/algebra/implementation/series/krat.hh>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 
 /*-------.
@@ -50,20 +50,8 @@ namespace vcsn
   {
 
     typedef
-    vcsn::algebra::Series<semiring_elt_t::set_t, monoid_elt_t::set_t>
-    series_set_t;
-
-    typedef
-    vcsn::algebra::polynom<monoid_elt_t::value_t, semiring_elt_t::value_t>
-    series_set_elt_value_t;
-
-    typedef
     vcsn::rat::exp<monoid_elt_t::value_t, semiring_elt_t::value_t>
     rat_exp_impl_t;
-
-    typedef
-    vcsn::Element<series_set_t, series_set_elt_value_t>
-    series_set_elt_t;
 
     typedef
     vcsn::Element<series_set_t, rat_exp_impl_t>

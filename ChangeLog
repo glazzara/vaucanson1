@@ -1,5 +1,23 @@
 2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/vaucanson/contexts/ratseries_semiring.thh,
+	* include/vaucanson/contexts/transducer.thh,
+	* include/vaucanson/contexts/polynom_series.thh: New.
+	* include/vaucanson/contexts/generic_series.thh: Use
+	polynom_series.thh.
+	* include/vaucanson/contexts/automaton.thh: Use generalized_traits
+	to define gen_automaton_t.
+	* include/vaucanson/contexts/generic_automaton_impl.thh: Do not
+	define gen_auto_t.
+	* include/vaucanson/contexts/contextual_transducer_functions.thxx,
+	* include/vaucanson/contexts/contextual_transducer_functions.thh:
+	Enclose every definition and declaration in
+	vcsn::VCSN_CONTEXT_NAMESPACE.
+	* include/vaucanson/boolean_transducer.hh: Update. Use headers from
+	contexts/.
+
+2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/contexts/contextual_headers.hh: Delete.
 	* include/vaucanson/contexts/contextual_automaton_functions.thh:
 	Include the files that were included by contextual_headers.hh.

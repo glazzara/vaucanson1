@@ -32,24 +32,33 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-template <class T>
-automaton_t new_automaton(const T& input_alphabet,
-			  const T& output_alphabet);
+namespace vcsn
+{
 
-template <class InputIterator>
-automaton_t new_automaton(InputIterator input_alphabet_begin,
-			  InputIterator input_alphabet_end,
-			  InputIterator output_alphabet_begin,
-			  InputIterator output_alphabet_end);
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
 
-template <typename TransStruct,
-	  typename TransImpl,
-	  typename ArgStruct,
-	  typename ArgImpl>
-output_series_set_elt_t
-evaluation(const Element<TransStruct, TransImpl>& t,
-	   const Element<ArgStruct, ArgImpl>& input);
+    template <class T>
+    automaton_t new_automaton(const T& input_alphabet,
+			      const T& output_alphabet);
 
+    template <class InputIterator>
+    automaton_t new_automaton(InputIterator input_alphabet_begin,
+			      InputIterator input_alphabet_end,
+			      InputIterator output_alphabet_begin,
+			      InputIterator output_alphabet_end);
+
+    template <typename TransStruct,
+	      typename TransImpl,
+	      typename ArgStruct,
+	      typename ArgImpl>
+    output_series_set_elt_t
+    evaluation(const Element<TransStruct, TransImpl>& t,
+	       const Element<ArgStruct, ArgImpl>& input);
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/contexts/contextual_transducer_functions.thxx>
