@@ -1,4 +1,5 @@
-// fmp_transducer.hh: this file is part of the Vaucanson project.
+// -*- C++ -*-
+// free_monoid_product.thh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -30,37 +31,25 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-#ifndef VCSN_FMP_TRANSDUCER_HH
-# define VCSN_FMP_TRANSDUCER_HH
+// Input: first_monoid_elt_t, second_monoid_elt_t.
+// Output: monoid_elt_t.
 
-# include <vaucanson/boolean_automaton.hh>
+# include <vaucanson/algebra/concept/freemonoid_product.hh>
 
-# define VCSN_CONTEXT_NAMESPACE fmp_transducer
+/*-------.
+| Monoid |
+`-------*/
 
 namespace vcsn
 {
 
   namespace VCSN_CONTEXT_NAMESPACE
   {
-    typedef boolean_automaton::monoid_elt_t	first_monoid_t;
-    typedef first_monoid_elt_t::set_t		first_monoid_t;
-    typedef first_monoid_elt_t::value_t		first_monoid_elt_value_t;
-    typedef first_monoid_t::alphabet_t		first_alphabet_t;
 
-    typedef boolean_automaton::monoid_elt_t	second_monoid_t;
-    typedef second_monoid_elt_t::set_t		second_monoid_t;
-    typedef second_monoid_elt_t::value_t	second_monoid_elt_value_t;
-    typedef second_monoid_t::alphabet_t		second_alphabet_t;
+    typedef FreeMonoidProduct<first_monoid_t, second_monoid_t>	monoid_t;
+    typedef std::pair<std::string, std::string>		monoid_elt_value_t;
+    typedef Element<monoid_t, monoid_elt_value_t>	monoid_elt_t;
+
   } // End of namespace VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.
-
-# include <vaucanson/contexts/free_monoid_product.thh>
-# include <vaucanson/contexts/boolean_semiring.thh>
-# include <vaucanson/contexts/polynom_series.thh>
-# include <vaucanson/generic_automaton_impl.thh>
-# include <vaucanson/automaton.thh>
-
-# undef VCSN_CONTEXT_NAMESPACE
-
-#endif // ! VCSN_FMP_TRANSDUCER_HH

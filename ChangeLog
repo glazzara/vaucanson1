@@ -1,5 +1,14 @@
 2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	src/tests/fmp_transducers/Makefile.am has no rules for check. So,
+	I could not test this patch.
+
+	* include/vaucanson/contexts/free_monoid_product.thh: New.
+	* include/vaucanson/fmp_transducer.hh: Update. Use headers from
+	include/contexts.
+
+2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/Makefile.am (nobase_include_HEADERS): Update.
 
 2005-04-16  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
