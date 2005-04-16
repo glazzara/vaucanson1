@@ -1,5 +1,9 @@
 2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* include/Makefile.am (nobase_include_HEADERS): Update.
+
+2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	src/tests/fmp_transducers/Makefile.am has no rules for check. So,
 	I could not test this patch.
 

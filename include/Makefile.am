@@ -33,12 +33,17 @@ nobase_include_HEADERS =						   \
 	vaucanson/config/pconf.hh					   \
 	vaucanson/contexts/automaton.thh				   \
 	vaucanson/contexts/boolean_semiring.thh				   \
+	vaucanson/contexts/ratseries_semiring.thh			   \
+	vaucanson/contexts/r_semiring.thh				   \
+	vaucanson/contexts/z_semiring.thh				   \
+	vaucanson/contexts/z_max_plus_semiring.thh			   \
+	vaucanson/contexts/z_min_plus_semiring.thh			   \
 	vaucanson/contexts/char_letter.thh				   \
 	vaucanson/contexts/dynamic_alphabet.thh				   \
 	vaucanson/contexts/free_monoid.thh				   \
+	vaucanson/contexts/free_monoid_product.thh			   \
 	vaucanson/contexts/generic_automaton_impl.thh			   \
 	vaucanson/contexts/generic_series.thh				   \
-	vaucanson/contexts/ratseries_semiring.thh			   \
 	vaucanson/contexts/transducer.thh				   \
 	vaucanson/contexts/polynom_series.thh				   \
 	vaucanson/misc/iomanip.hh					   \
