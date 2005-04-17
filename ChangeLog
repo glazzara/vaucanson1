@@ -1,5 +1,10 @@
 2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	* src/tests/context_headers/automata/global_consistency_test.hh:
+	s/zero_as/vcsn::algebra::zero_as/.
+
+2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* include/vaucanson/contexts/free_monoid_product.thh: Fully
 	qualify namespaces for FreeMonoidProduct and Element.
 	* include/vaucanson/fmp_transducer.hh: Typos.

@@ -1,7 +1,7 @@
 // global_consistency_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -59,7 +59,7 @@ global_consistency_test(tests::Tester& t)
   TEST_TYPE(automata_set_t, set_t);
 
   bool			test_done = false;
-  
+
   alphabet_t		at;
   at.insert('a');
   at.insert('b');
@@ -89,7 +89,7 @@ global_consistency_test(tests::Tester& t)
       {
 	do
 	  e = ss.choose(SELECT(rat_exp_impl_t));
-	while (e == zero_as<rat_exp_impl_t>::of(ss));
+	while (e == vcsn::algebra::zero_as<rat_exp_impl_t>::of(ss));
 
 	automaton_t		a1 = new_automaton(at);
 	automaton_t		a2 = new_automaton(at.begin(), at.end());
