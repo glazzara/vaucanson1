@@ -161,29 +161,6 @@ namespace utility {
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
 			     std::string(Message1) + ": " + Message2)
 
-
-// Definition of macro needed where result can't be computed.
-#  ifdef EXCEPTION_TRAPS
-#   define _result_not_computable(file, line, location, Message, Exception) \
-      std::ostringstream os; \
-      os << file << ':' << line << ':' \
-	 << (location ? location : "") \
-	 << (location ? ": " : " ") \
-	 << Message; \
-      throw Exception(os.str());
-#  else // !EXCEPTION_TRAPS
-#   define _result_not_computable(file, line, location, Message, Exception) \
-      std::cerr << file << ':' << line << ':' \
-		<< (location ? location : "") \
-		<< std::endl \
-		<< '\t' << Message \
-		<< std::endl;
-#  endif // EXCEPTION_TRAPS
-
-#  define result_not_computable(Mess, Exc) \
-      _result_not_computable(__FILE__, __LINE__, PRETTY_FUNCTION(), Mess, Exc);
-
-
 #  define assertion(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Assertion failed", Cond))
 #  define precondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Precondition failed", Cond))
 #  define postcondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Postcondition failed", Cond))
@@ -233,8 +210,6 @@ namespace utility {
 
 # else // VCSN_NDEBUG
 
-#  define result_not_computable(Mess, Exc) static_cast<void>(0)
-
 #  define static_assertion(Cond, Message) typedef void Message
 #  define static_assertion_(Cond, Message) typedef void Message
 #  define static_error(Message) typedef void Message
@@ -253,4 +228,27 @@ namespace utility {
 #  define warning(Message) static_cast<void>(0)
 
 # endif // ! VCSN_NDEBUG
+
+// Definition of macro needed where result can't be computed.
+# ifdef EXCEPTION_TRAPS
+#  define _result_not_computable(file, line, location, Message, Exception) \
+      std::ostringstream os; \
+      os << file << ':' << line << ':' \
+	 << (location ? location : "") \
+	 << (location ? ": " : " ") \
+	 << Message; \
+      throw Exception(os.str());
+# else // !EXCEPTION_TRAPS
+#  define _result_not_computable(file, line, location, Message, Exception) \
+      std::cerr << file << ':' << line << ':' \
+		<< (location ? location : "") \
+		<< std::endl \
+		<< '\t' << Message \
+		<< std::endl;
+# endif // EXCEPTION_TRAPS
+
+# define result_not_computable(Mess, Exc)				\
+  _result_not_computable(__FILE__, __LINE__, PRETTY_FUNCTION(), Mess, Exc);
+
+
 #endif // ! VCSN_MISC_CONTRACT_HH

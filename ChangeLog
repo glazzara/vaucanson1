@@ -1,5 +1,10 @@
 2005-04-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/misc/contract.hh: Change `result_not_computable'
+	visibility, set it defined the same way with or without VCSN_NDEBUG.
+
+2005-04-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/contexts/contextual_automaton_functions.thh,
 	* include/vaucanson/contexts/contextual_transducer_functions.thh,
 	* include/vaucanson/contexts/contextual_automaton_functions.thxx,
