@@ -76,7 +76,7 @@ namespace vcsn
 
 } // End of namespace vcsn.
 
-# include <vaucanson/contexts/contextual_transducer_functions.thh>
+# include <vaucanson/contexts/transducer_functions.thh>
 
 # undef VCSN_CONTEXT_NAMESPACE
 

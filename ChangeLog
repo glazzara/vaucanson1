@@ -1,3 +1,23 @@
+2005-04-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/contexts/contextual_automaton_functions.thh,
+	* include/vaucanson/contexts/contextual_transducer_functions.thh,
+	* include/vaucanson/contexts/contextual_automaton_functions.thxx,
+	* include/vaucanson/contexts/contextual_transducer_functions.thxx:
+	Move...
+	* include/vaucanson/contexts/automaton_functions.thh,
+	* include/vaucanson/contexts/transducer_functions.thh,
+	* include/vaucanson/contexts/automaton_functions.thxx,
+	* include/vaucanson/contexts/transducer_functions.thxx: ...Here.
+	* include/Makefile.am,
+	* include/vaucanson/r_automaton.hh,
+	* include/vaucanson/z_automaton.hh,
+	* include/vaucanson/z_min_plus_automaton.hh,
+	* include/vaucanson/boolean_automaton.hh,
+	* include/vaucanson/z_max_plus_automaton.hh,
+	* include/vaucanson/boolean_transducer.hh: Update accordingly.
+	
+
 2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* src/tests/context_headers/automata/global_consistency_test.hh:

@@ -41,7 +41,7 @@
 # include <vaucanson/contexts/generic_series.thh>
 # include <vaucanson/contexts/generic_automaton_impl.thh>
 # include <vaucanson/contexts/automaton.thh>
-# include <vaucanson/contexts/contextual_automaton_functions.thh>
+# include <vaucanson/contexts/automaton_functions.thh>
 
 namespace vcsn
 {
