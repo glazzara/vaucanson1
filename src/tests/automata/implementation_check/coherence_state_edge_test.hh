@@ -54,11 +54,13 @@ unsigned coherence_state_edge_test(tests::Tester& tg)
   gen_auto_t gen(time(0x0));
   typedef Auto automaton_t;
   automaton_t automaton(gen.generate_dfa(10).structure());
-  
+
   hstate_t s1 = automaton.add_state();
   hstate_t s2 = automaton.add_state();
 
-  hedge_t h1 = automaton.add_letter_edge(s1, s2, 'a');
+  hedge_t h1 = automaton.add_letter_edge(s1, s2,
+					 automaton.structure().series().
+					 monoid().alphabet().choose());
 
   EQTEST(t, "Check number of state.", automaton.states().size(), 2);
   EQTEST(t, "Check number of edge.", automaton.edges().size(), 1);

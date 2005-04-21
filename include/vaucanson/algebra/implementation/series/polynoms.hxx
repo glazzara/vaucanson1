@@ -437,14 +437,17 @@ namespace vcsn {
   }
 
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
-  algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+  algebra::polynom<Tm, Tw> op_convert(const algebra::Series<W, M>& s,
 				      SELECTOR2(algebra::polynom<Tm, Tw>),
 				      SELECTOR(algebra::MonoidBase<M>),
 				      const oTm& m_value)
   {
+    const M&	monoid = s.monoid();
+    const W&	semiring = s.semiring();
+
     algebra::polynom<Tm, Tw> ret;
-    ret.insert(op_convert(SELECT(M), SELECT(Tm), m_value),
-	       identity_value(SELECT(W), SELECT(Tw)));
+    ret.insert(op_convert(monoid, SELECT(Tm), m_value),
+	       identity_value(semiring, SELECT(Tw)));
     return ret;
   }
 
@@ -666,30 +669,33 @@ namespace vcsn {
 
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
-  Tw op_series_get(const algebra::Series<W, M>&,
+  Tw op_series_get(const algebra::Series<W, M>& s,
 		   const algebra::polynom<Tm, Tw>& p,
 		   const oTm& m)
   {
-    return p.get(SELECT(W), op_convert(SELECT(M), SELECT(Tm), m));
+    return p.get(s.semiring(), op_convert(s.semiring(), SELECT(Tm), m));
   }
 
   template <typename W, typename M,
 	    typename Tm, typename Tw,
 	    typename oTm, typename oTw>
-  void op_series_set(const algebra::Series<W, M>&,
+  void op_series_set(const algebra::Series<W, M>& s,
 		     algebra::polynom<Tm, Tw>& p,
 		     const oTm& m,
 		     const oTw& w)
   {
+    const M&	monoid = s.monoid();
+    const W&	semiring = s.semiring();
+
     typename utility::static_if
       <utility::static_eq<Tm, oTm>::value, const Tm&, Tm>::t
-      new_m = op_convert(SELECT(M), SELECT(Tm), m);
+      new_m = op_convert(monoid, new_m, m);
     typename utility::static_if
       <utility::static_eq<Tw, oTw>::value, const Tw&, Tw>::t
-      new_w = op_convert(SELECT(W), SELECT(Tw), w);
+      new_w = op_convert(semiring, new_w, w);
 
     typename algebra::polynom<Tm, Tw>::iterator i = p.find(new_m);
-    if (new_w == zero_value(SELECT(W), SELECT(Tw)))
+    if (new_w == zero_value(semiring, new_w))
       {
 	if (i != p.end())
 	  p.erase(i);

@@ -306,7 +306,7 @@ namespace vcsn {
   }
 
   template<typename Tm, typename Tw, typename W, typename M, typename oTm>
-  rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
+  rat::exp<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>) s,
 			      SELECTOR2(rat::exp<Tm, Tw>),
 			      SELECTOR(M),
 			      const oTm& m_value)
@@ -315,7 +315,7 @@ namespace vcsn {
     // into letters.
     if (m_value == identity_value(SELECT(M), SELECT(oTm)))
       return rat::exp<Tm, Tw>::one();
-    return rat::exp<Tm, Tw>::constant(op_convert(SELECT(M), SELECT(Tm),
+    return rat::exp<Tm, Tw>::constant(op_convert(s.monoid(), SELECT(Tm),
     						 m_value));
   }
 
@@ -672,7 +672,7 @@ namespace vcsn {
       }
 
     rat::exp<Tm, Tw> ret =
-      rat::exp<Tm, Tw>::constant(op_convert(SELECT(M),
+      rat::exp<Tm, Tw>::constant(op_convert(s.monoid(),
 					    SELECT(Tm),
 					    m));
     op_in_add(s, p, op_mul(s.semiring(), s, w, ret));

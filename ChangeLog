@@ -1,3 +1,14 @@
+2005-04-21  Florent Terrones  <florent.terrones@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Change
+	`SELECT' use to `s.monoid' or `s.semiring'.
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Add
+	specialized version of `op_convert' for `FreeMonoidBase' and
+	`std::basic_chars' to allow letter checking in edge adding.
+	* src/tests/automata/implementation_check/coherence_state_edge_test.hh:
+	Fix the selection of the letter that will be added as an edge.
+
 2005-04-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/misc/contract.hh: Change `result_not_computable'
