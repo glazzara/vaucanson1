@@ -1,3 +1,12 @@
+2005-04-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx: Add weight_of
+	method, in the spirit of word_of method. Returns the weight of an edge
+	for an automaton.
+
 2005-04-21  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/polynoms.hxx,

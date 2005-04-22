@@ -332,6 +332,14 @@ namespace vcsn {
   }
 
   template <class S, class T>
+  typename Element<S, T>::semiring_elt_t
+  op_weight_of(const AutomataBase<S>& s, const T& v,
+	       hedge_t e)
+  {
+    return op_series_of(s, v, e).get(op_word_of(s, v, e));
+  }
+  
+  template <class S, class T>
   typename Element<S, T>::monoid_elt_value_t
   op_word_value_of(const AutomataBase<S>& s, const T& v,
 		   hedge_t e)

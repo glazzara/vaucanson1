@@ -430,6 +430,14 @@ namespace vcsn {
     return op_word_of(this->structure(), this->value(), e);
   }
 
+  /** return the label seen as a weight. */
+  template <typename Self, typename T>
+  typename MetaElement<AutomataBase<Self>, T>::semiring_elt_t
+  MetaElement<AutomataBase<Self>, T>::weight_of(hedge_t e) const
+  {
+    return op_weight_of(this->structure(), this->value(), e);
+  }
+
   /** returns the label seen as word implementation. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::monoid_elt_value_t

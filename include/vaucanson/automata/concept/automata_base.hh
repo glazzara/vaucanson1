@@ -337,6 +337,9 @@ namespace vcsn {
     /** return the label seen as a word. */
     monoid_elt_t word_of(hedge_t e) const;
 
+    /** return the label seen as a weight. */
+    semiring_elt_t weight_of(hedge_t e) const;
+
     /** returns the label seen as word implementation. */
     monoid_elt_value_t word_value_of(hedge_t e) const;
 

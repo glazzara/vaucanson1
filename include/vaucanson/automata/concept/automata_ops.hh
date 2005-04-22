@@ -218,6 +218,11 @@ namespace vcsn {
 	     hedge_t);
 
   template <class S, class T>
+  typename Element<S, T>::semiring_elt_t
+  op_weight_of(const AutomataBase<S>&, const T&,
+	       hedge_t);
+
+  template <class S, class T>
   typename Element<S, T>::monoid_elt_value_t
   op_word_value_of(const AutomataBase<S>&, const T&,
 		   hedge_t);
