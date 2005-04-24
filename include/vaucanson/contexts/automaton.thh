@@ -49,9 +49,6 @@ namespace vcsn
 
     AUTOMATON_TYPES_EXACT(automaton_t);
 
-    typedef vcsn::hstate_t	hstate_t;
-    typedef vcsn::hedge_t	hedge_t;
-
   } // End of namespace VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.

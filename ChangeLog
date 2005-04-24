@@ -1,3 +1,11 @@
+2005-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	* include/vaucanson/contexts/automaton.thh: Remove the
+	typedefs to hstate_t and hedge_t. They used to cause an ambiguity
+	with source files that used both the vcsn and vcsn::*_automaton
+	namespaces.
+	* src/tests/fmp_transducers/instantiation_test.hh: Use namespace vcsn.
+
 2005-04-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_ops.hh,
@@ -41,7 +49,7 @@
 	* include/vaucanson/boolean_automaton.hh,
 	* include/vaucanson/z_max_plus_automaton.hh,
 	* include/vaucanson/boolean_transducer.hh: Update accordingly.
-	
+
 
 2005-04-17  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 

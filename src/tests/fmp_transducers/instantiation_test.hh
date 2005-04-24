@@ -36,6 +36,7 @@
 # include <vaucanson/misc/static.hh>
 # include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh>
 
+using namespace vcsn;
 using namespace vcsn::fmp_transducer;
 
 # define TYPE_OK(T1, T2) utility::static_eq<T1, typename Automaton::T2>::value
