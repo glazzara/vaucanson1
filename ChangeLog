@@ -1,5 +1,10 @@
 2005-04-27  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/automata/algos/series_multiplicity_transducers/realtime:
+	Remove. 
+
+2005-04-27  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	Change organization of the test suite, according to algorithms domain
 	definition. This is the first part of the reorganization of the test
 	suite, and no particular concerns are given to tests themselves. This 
