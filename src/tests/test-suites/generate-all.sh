@@ -92,11 +92,15 @@ for automata_kind in boolean r z z_max_plus z_min_plus; do
     context_headers_${automata_kind}.defs \
     ../context_headers/automata
 
-    TEST="../automata";
+# Create directories test list.
+    TEST="../automata/implementation_check"
+    DIR="../automata/algos/"
+    for i in label_aware_graphs labeled_graphs letter_combination_labeled_graphs freemonoid_labeled_graphs graphs; do
+	TEST="$TEST $DIR$i"
+    done
+
     if [ $automata_kind = "boolean" ]; then
-	TEST="$TEST ../boolean_automata"
-    else
-	TEST="$TEST ../k_automata"
+	TEST="$TEST ../automata/algos/boolean_automata"
     fi
     ../bin/generate-test-suite.sh \
 	${automata_kind}_automaton \
@@ -113,12 +117,17 @@ done;
    context_headers_boolean_transducer.defs \
    ../context_headers/transducers
 
+# FIXME: Directories labeled_graphs, label_aware_graphs and 
+#	 freemonoid_labeled_graphs are not tested.
 ../bin/generate-test-suite.sh \
    boolean_transducer \
    boolean_transducer.defs \
-   ../transducers
+    ../automata/implementation_check ../automata/algos/graphs \
+    ../automata/algos/series_multiplicity_transducers
 
+# FIXME: Directories labeled_graphs, implementation_check, graphs and 
+#	 label_aware_graphs are not tested.
 ../bin/generate-test-suite.sh \
    fmp_transducer \
    fmp_transducer.defs \
-   ../fmp_transducers
+    ../automata/algos/fmp_transducers

@@ -64,8 +64,7 @@ standard_of_regression_test(tests::Tester& tg)
   semiring_elt_t	w (sg);
   do
     w = sg.choose(SELECT(semiring_elt_value_t));
-  while (w == identity_as<semiring_elt_value_t>::of(sg) or
-	 w == zero_as<semiring_elt_value_t>::of(sg)) ;
+  while (w == zero_as<semiring_elt_value_t>::of(sg)) ;
 
   krat_t e = a.star() * w; // WARNING: star() has side effects on a!
 

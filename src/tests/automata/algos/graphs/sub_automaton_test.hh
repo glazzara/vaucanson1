@@ -54,7 +54,7 @@ unsigned sub_automaton_test(tests::Tester& tg)
   alphabet.insert(a);
   alphabet.insert(b);
   monoid_t		monoid(alphabet);
-  semiring_t 		semiring;
+  semiring_t 		semiring = semiring_t(CREATE_SEMIRING(monoid));
   series_set_t		series(semiring, monoid);
   automata_set_t	automata(series);
   automaton_t		automaton(automata);

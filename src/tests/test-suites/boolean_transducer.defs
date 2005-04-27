@@ -2,3 +2,9 @@
 
 #define TEST_STATIC_ARGS \
    vcsn::boolean_transducer::automaton_t
+
+#ifdef CREATE_SEMIRING
+# undef CREATE_SEMIRING
+# define CREATE_SEMIRING(m) \
+   vcsn::boolean_automaton::semiring_t(), m
+#endif

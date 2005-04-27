@@ -1,0 +1,11 @@
+Algorithms directory tree for tests
+
+- graphs: graphs algorithms
+- labeled_graphs: labeled graphs (discard label)
+- label_aware_graphs: labeled graphs (with consideration of label)
+- freemonoid_labeled_graphs: labeled graphs where labels are on K<<A*>>
+- letter_combination_labeled_graphs: labeled graphs where labels are
+linear combination of letters
+- boolean_automata: Boolean automata
+- series_multiplicity_transducers: Transducers over P(B*)
+- fmp_transducers: Free monoid product transducers

@@ -48,7 +48,7 @@ bool	trim_test(tests::Tester& tg)
       letter_t		la = at.random_letter(); at.insert(la);
       letter_t		lb = at.random_letter(); at.insert(lb);
       monoid_t		md (at);
-      semiring_t	sg;
+      semiring_t	sg = semiring_t(CREATE_SEMIRING(md));
       series_set_t		ss (sg, md);
       automata_set_t	aa (ss);
       automaton_t	au (aa);

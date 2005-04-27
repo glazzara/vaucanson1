@@ -1,3 +1,116 @@
+2005-04-27  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	Change organization of the test suite, according to algorithms domain
+	definition. This is the first part of the reorganization of the test
+	suite, and no particular concerns are given to tests themselves. This 
+	patch should be completed with new tests, as it doesn't enable full 
+	tests on transducers.
+
+	* src/tests/automata/algos/README: New file. Explains directory tree of
+	algorithms tests.
+
+	* configure.ac,
+	* src/tests/Makefile.am,
+	* src/tests/automata/algos/Makefile.am: Update.
+	* src/tests/test-suites/generate-all.sh: Update with new algorithm 
+	tests organization. 
+
+	* src/tests/test-suites/boolean_transducer.defs: Add CREATE_SEMIRING 
+	macro to enable semiring creation for transducers. This macro is
+	used when a test tries to instanciate a semiring_t, which must be
+	parameterized with monoid and semiring, in case of boolean
+	transducers.
+	* src/tests/bin/generate-test-suite.sh: Add default
+	CREATE_SEMIRING macro.
+	* src/tests/automata/implementation_check/rdelta_test.hh: Use 
+	CREATE_SEMIRING macro for semiring creation.
+
+	Transducers over P(B*):
+	* src/tests/transducers/realtime_test.hh: Move to...
+	* src/tests/automata/algos/series_multiplicity_transducers/realtime_trans_test.hh: ...this.
+	* src/tests/automata/algos/extension_test.hh,
+	* src/tests/transducers/realtime_test.hh: Move to...
+	* src/tests/automata/algos/series_multiplicity_transducers:... this
+	directory.
+	* src/tests/automata/algos/series_multiplicity_transducers/Makefile.am:
+	New file.
+	* src/tests/transducers/Makefile.am,
+	* src/tests/transducers: Delete.
+	
+	Free Monoid Product transducers:
+	* src/tests/fmp_transducers/instantiation_test.hh: Move to...
+	* src/tests/automata/algos/fmp_transducers/instantiation_test.hh:
+	...this.
+	* src/tests/automata/algos/fmp_transducers/Makefile.am: New file.
+	* src/tests/fmp_transducers/Makefile.am,
+	* src/tests/fmp_transducers: Delete.
+
+	Boolean automata:
+	* src/tests/automata/algos/complete_test.hh,
+	* src/tests/automata/algos/berry_sethi_test.hh,
+	* src/tests/automata/algos/minimization_test.hh,
+	* src/tests/automata/algos/aci_canonical_test.hh,
+	* src/tests/automata/algos/determinist_test.hh,
+	* src/tests/boolean_automata/brzozowski_test.hh: Move to...
+	* src/tests/automata/algos/boolean_automata: ...this directory. 
+	* src/tests/automata/algos/boolean_automata/Makefile.am: New file.
+	* src/tests/boolean_automata/Makefile.am,
+	* src/tests/boolean_automata: Delete.
+
+	Graphs:
+	* src/tests/automata/algos/trim_test.hh,
+	* src/tests/automata/algos/extract_test.hh,
+	* src/tests/automata/algos/accessible_test.hh,
+	* src/tests/automata/algos/sub_automaton_test.hh,
+	* src/tests/automata/algos/reachable_test.hh,
+	* src/tests/automata/algos/graphs/sub_automaton_test.hh,
+	* src/tests/automata/algos/trim_test.hh: Move to...
+	* src/tests/automata/algos/graphs/: ...this directory, and use 
+	CREATE_SEMIRING macro where needed.
+	* src/tests/automata/algos/graphs/Makefile.am: New file.
+
+	Graph labeled on K<<A*>>:
+	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh,
+	* src/tests/automata/algos/realtime_test.hh,
+	* src/tests/automata/algos/generalized_test.hh: Move to...
+	* src/tests/automata/algos/freemonoid_labeled_graphs: ...this 
+	directory.
+	* src/tests/automata/algos/freemonoid_labeled_graphs/Makefile.am: New
+	file.
+	* src/tests/k_automata/Makefile.am,
+	* src/tests/k_automata: Delete.
+	
+	Labeled graphs:
+	* src/tests/automata/algos/elimination_test.hh,
+	* src/tests/automata/algos/normalize_test.hh,
+	* src/tests/automata/algos/is_isomorph_test.hh: Move to...
+	* src/tests/automata/algos/labeled_graphs: ...this directory.
+	* src/tests/automata/algos/labeled_graphs/Makefile.am: New file.
+	
+	Label aware labeled graphs:
+	* src/tests/automata/algos/closure_test.hh,
+	* src/tests/automata/algos/glushkov_test.hh,
+	* src/tests/automata/algos/transpose_test.hh,
+	* src/tests/automata/algos/thompson_test.hh,
+	* src/tests/automata/algos/concat_test.hh,
+	* src/tests/automata/algos/sum_test.hh,
+	* src/tests/automata/algos/in_concat_test.hh: Move to...
+	* src/tests/automata/algos/label_aware_graphs: ...this directory.
+	* src/tests/automata/algos/standard_of_regression_test.hh: Move to...
+	* src/tests/automata/algos/label_aware_graphs/standard_of_regression_test.hh:
+	...this and fix to make the test work on boolean automata.
+	* src/tests/automata/algos/label_aware_graphs/Makefile.am: New file.
+
+	Graphs labeled with letter combination:
+	* src/tests/automata/algos/product_test.hh,
+	* src/tests/automata/algos/product_regression_test.hh,
+	* src/tests/automata/algos/derivatives_automaton_test.hh,
+	* src/tests/automata/algos/compute_test.hh: Move to...
+	* src/tests/automata/algos/letter_combination_labeled_graphs: ...this
+	directory.
+	* src/tests/automata/algos/letter_combination_labeled_graphs/Makefile.am:
+	New file.
+	
 2005-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/contexts/automaton.thh: Remove the

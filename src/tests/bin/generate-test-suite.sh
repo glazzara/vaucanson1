@@ -90,6 +90,7 @@ EOF
     cat >> $DEST_DIR/$FUN_SNAME-"$SUFFIX".cc<<EOF
 #include <cassert>
 #include <vaucanson/design_pattern/design_pattern.hh>
+#define CREATE_SEMIRING(m)
 EOF
 
     # Include headers inclusion.
