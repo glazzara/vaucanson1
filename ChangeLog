@@ -1,5 +1,11 @@
 2005-05-03  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Add
+	#ifndef VCSN_NDEBUG to disable the letter-in-alphabet check if
+	NDEBUG is set.
+
+2005-05-03  Florent Terrones  <florent.terrones@lrde.epita.fr>
+
 	* include/vaucanson/tools/dot_format.hxx: Add std::string
 	name that does not contain special characters, so as to
 	avoid a dotty bug.
