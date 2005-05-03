@@ -1,3 +1,10 @@
+2005-05-03  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/transducer.hh: 
+	Fix a bad typedef of the monoid for the output projection
+	helper.
+	Add a new helper for input projections.
+	
 2005-05-03  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Add
