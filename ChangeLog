@@ -1,3 +1,10 @@
+2005-05-03  Florent Terrones  <florent.terrones@lrde.epita.fr>
+
+	* include/vaucanson/tools/dot_format.hxx: Add std::string
+	name that does not contain special characters, so as to
+	avoid a dotty bug.
+	name_ is now just used to show the automaton name to the user.
+
 2005-04-30  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/automata/algos/series_multiplicity_transducers/Makefile.am:

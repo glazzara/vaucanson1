@@ -53,7 +53,7 @@ namespace vcsn
     {
       typedef typename Saver::automaton_t auto_t;
       const auto_t& a = s.automaton();
-
+      std::string   name("automaton_name");
       unsigned count = 0;
       std::map<hstate_t, unsigned> state_map;
 
@@ -68,33 +68,33 @@ namespace vcsn
 	  unsigned c = state_map[*i] = count++;
 	  if (a.is_initial(*i))
 	    {
-	      out << name_ << count
+	      out << name << count
 		  << " [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
-		  << name_ << count << " -> " << name_ << c
+		  << name << count << " -> " << name << c
 		  << " [label=\"" << conv(a, a.get_initial(*i)) << "\"];"
 		  << std::endl;
 	      ++count;
 	    }
 	  if (a.is_final(*i))
 	    {
-	      out << name_ << count
+	      out << name << count
 		  << " [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
-		  << name_ << c << " -> "  << name_ << count
+		  << name << c << " -> "  << name << count
 		  << " [label=\""<< conv(a, a.get_final(*i)) <<"\"];"
 		  << std::endl;
 	      ++count;
 	    }
-	  out << name_ << c << " [label=\"" << *i << "\"];" << std::endl;
+	  out << name << c << " [label=\"" << *i << "\"];" << std::endl;
 	}
       for (typename auto_t::edge_iterator i = a.edges().begin();
 	   i != a.edges().end();
 	   ++i)
 	{
-	  out << name_ << state_map[a.origin_of(*i)]
+	  out << name << state_map[a.origin_of(*i)]
 	      << " -> "
-	      << name_ << state_map[a.aim_of(*i)];
+	      << name << state_map[a.aim_of(*i)];
 	  out << " [label=\"" << conv(a, a.series_of(*i)) << "\"];"
 	      << std::endl;
 	}
@@ -112,7 +112,7 @@ namespace vcsn
       typedef typename Saver::automaton_t auto_t;
       AUTOMATON_TYPES(auto_t);
       const auto_t& a = s.automaton();
-
+      std::string   name("automaton_name");
       unsigned count = 0;
       std::map<hstate_t, unsigned> state_map;
 
@@ -127,10 +127,10 @@ namespace vcsn
 	  unsigned c = state_map[*i] = count++;
 	  if (a.is_initial(*i))
 	    {
-	      out << name_ << count
+	      out << name << count
 		  << " [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
-		  << name_ << count << " -> " << name_ << c ;
+		  << name << count << " -> " << name << c ;
 	      std::ostringstream o;
 	      series_set_elt_t ss = a.get_initial(*i);
 	      for_each_const_(series_set_elt_t::support_t, s, ss.supp())
@@ -143,10 +143,10 @@ namespace vcsn
 	    }
 	  if (a.is_final(*i))
 	    {
-	      out << name_ << count
+	      out << name << count
 		  << " [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
-		  << name_ << c << " -> "  << name_ << count;
+		  << name << c << " -> "  << name << count;
 	      std::ostringstream o;
 	      series_set_elt_t ss = a.get_final(*i);
 	      for_each_const_(series_set_elt_t::support_t, s, ss.supp())
@@ -157,15 +157,15 @@ namespace vcsn
 		  << std::endl;
 	      ++count;
 	    }
-	  out << name_ << c << " [label=\"" << *i << "\"];" << std::endl;
+	  out << name << c << " [label=\"" << *i << "\"];" << std::endl;
 	}
       for (typename auto_t::edge_iterator i = a.edges().begin();
 	   i != a.edges().end();
 	   ++i)
 	{
-	  out << name_ << state_map[a.origin_of(*i)]
+	  out << name << state_map[a.origin_of(*i)]
 	      << " -> "
-	      << name_ << state_map[a.aim_of(*i)];
+	      << name << state_map[a.aim_of(*i)];
 	  std::ostringstream o;
 	  series_set_elt_t ss = a.series_of(*i);
 	  for_each_const_(series_set_elt_t::support_t, s, ss.supp())
