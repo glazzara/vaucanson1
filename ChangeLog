@@ -1,3 +1,7 @@
+2005-05-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/Makefile.am: Add `graph_fast.hh' and `graph_fast.hxx'.
+
 2005-05-05  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/projection.hh,
