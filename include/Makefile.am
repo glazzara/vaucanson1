@@ -73,6 +73,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/misc/deferrer.hh					   \
 	vaucanson/misc/functors.hh					   \
 	vaucanson/misc/functors.hxx					   \
+	vaucanson/tools/bencher.hh					   \
+	vaucanson/tools/bencher.hxx					   \
 	vaucanson/tools/container_ops.hxx				   \
 	vaucanson/tools/container_ops.hh				   \
 	vaucanson/tools/automaton_tools.hh				   \
