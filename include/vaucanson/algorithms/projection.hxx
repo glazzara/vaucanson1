@@ -32,9 +32,9 @@
 #ifndef VCSN_ALGORITHMS_PROJECTION_HXX
 # define VCSN_ALGORITHMS_PROJECTION_HXX
 
-#include <vaucanson/algorithms/projection.hh>
+# include <vaucanson/algorithms/projection.hh>
 
-#include <map>
+# include <map>
 
 namespace vcsn {
 
@@ -135,6 +135,56 @@ namespace vcsn {
     std::map<hstate_t, hstate_t> m;
     return do_output_projection(t.structure(), t, m);
   }
+
+  ///////////////////////////////////////////////////////////
+
+  template <typename S, typename T>
+  typename input_projection_helper<S, T>::ret
+  do_input_projection(const TransducerBase<S>&,
+		      const Element<S, T>& t)
+  {
+    using namespace std;
+    typedef Element<S, T> Trans_t;
+    AUTOMATON_TYPES(Trans_t);
+
+    typedef typename input_projection_helper<S, T>::ret	Auto_t;
+    typedef typename Auto_t::set_t			Auto_set_t;
+    typedef typename Auto_set_t::series_set_t		Auto_series_set_t;
+
+    Auto_set_t   auto_set(Auto_series_set_t(t.structure().series().semiring()));
+    Auto_t       ret(auto_set);
+
+    monoid_elt_t empty = t.series().monoid().empty_;
+    std::map<hstate_t, hstate_t> m;
+
+    for_each_state(p, t)
+      {
+	m[*p] = ret.add_state();
+      }
+
+    for_each_initial_state(p, t)
+      ret.set_initial(m[*p]);
+
+    for_each_final_state(p, t)
+      ret.set_final(m[*p]);
+
+    for_each_edge(e, t)
+      {
+	ret.add_series_edge(m[t.origin_of(*e)],
+			    m[t.aim_of(*e)],
+			    t.input_of(*e));
+      }
+
+    return ret;
+  }
+
+  template <typename S, typename T>
+  typename input_projection_helper<S, T>::ret
+  input_projection(const Element<S, T>& t)
+  {
+    return do_input_projection(t.structure(), t);
+  }
+
 }
 
 #endif // ! VCSN_ALGORITHMS_PROJECTION_HXX

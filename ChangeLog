@@ -1,3 +1,9 @@
+2005-05-05  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/projection.hh,
+	* include/vaucanson/algorithms/projection.hxx:
+	Add input projection algorithm for transducers.
+
 2005-05-03  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/transducer.hh: 

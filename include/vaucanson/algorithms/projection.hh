@@ -64,6 +64,10 @@ namespace vcsn {
   typename output_projection_helper<S, T>::ret
   output_projection(const Element<S, T>&);
 
+  template <class S, class T>
+  typename input_projection_helper<S, T>::ret
+  input_projection(const Element<S, T>&);
+
   /** @} */
 
 }
