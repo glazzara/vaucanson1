@@ -1,3 +1,9 @@
+2005-05-05  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime_composition.hxx:
+	Fix wrong structure used for "auto_structure" since it raised an
+	assertion in Fibonacci demo.
+	
 2005-05-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/Makefile.am: Add `bencher.hh' and `bencher.hxx'.
