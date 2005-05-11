@@ -1,4 +1,4 @@
-// graph_fast.hh: this file is part of the Vaucanson project.
+// graph.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -30,8 +30,8 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_FAST_HH
-# define VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_FAST_HH
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HH
+# define VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HH
 
 # include <set>
 # include <map>
@@ -47,6 +47,8 @@
 
 namespace vcsn
 {
+
+  /// Edge decorator.
   template<typename EdgeLabel>
   struct edge_value
   {
@@ -62,6 +64,7 @@ namespace vcsn
       hstate_t	to;
   };
 
+  /// State decorator.
   struct state_value
   {
       typedef std::set<hedge_t> edges_t;
@@ -71,6 +74,7 @@ namespace vcsn
       edges_t input_edges;
   };
 
+  /// Needed containers.
   typedef utility::SparseInterval<hstate_t, std::set<hstate_t> >
   StateContainer;
 
@@ -129,8 +133,8 @@ namespace vcsn
       final_support_t		final() const;
 
 
-      /** \name State's manipulation
-       ** \{ */
+      /** @name State's manipulation
+       ** @{ */
     public:
       bool			has_state(hstate_t n) const;
 
@@ -153,11 +157,11 @@ namespace vcsn
 					      const
 					      series_set_elt_value_t&) const;
       void			clear_final();
-      /** \}*/
+      /** @}*/
 
 
-      /** \name Edge's manipulation
-       ** \{ */
+      /** @name Edge's manipulation
+       ** @{ */
     public:
       bool			has_edge(hedge_t n) const;
 
@@ -166,11 +170,6 @@ namespace vcsn
 					 const label_t& v);
       void			del_edge(hedge_t e);
 
-      // FIXME: These functions are not implemented here, see why.
-    public:
-      hedge_t			add_spontaneous(hstate_t, hstate_t);
-      bool			is_spontaneous(hedge_t) const;
-
     public:
       hstate_t			origin_of(hedge_t e1) const;
       hstate_t			aim_of(hedge_t e2) const;
@@ -178,10 +177,10 @@ namespace vcsn
     public:
       const label_t&		label_of(hedge_t n) const;
       void			update(hedge_t, label_t);
-      /** \} */
+      /** @} */
 
-      /** \name Only automaton related methods
-       ** \{ */
+      /** @name Only automaton related methods
+       ** @{ */
     public:
       template <class S>
       bool			exists(const AutomataBase<S>& s) const;
@@ -207,19 +206,19 @@ namespace vcsn
 				       hstate_t from,
 				       const Query& q,
 				       delta_kind::states) const;
-      /** \}*/
+      /** @}*/
 
       // FIXME: Not implemented.
     public:
       self_t&			clone() const;
 
-      /** \name Tag access
-       ** \{ */
+      /** @name Tag access
+       ** @{ */
     public:
       typedef Tag tag_t;
       tag_t& tag();
       const tag_t& tag() const;
-      /** \}*/
+      /** @}*/
 
     public:
       state_data_t		states_;
@@ -272,8 +271,8 @@ namespace vcsn
 	    typename OutputIterator, typename L>
   void op_letter_delta(const AutomataBase<S>&,
 		       const Graph<labels_are_letters,
-				   WordValue, WeightValue,
-				   SeriesValue, Letter, Tag>&,
+		       WordValue, WeightValue,
+		       SeriesValue, Letter, Tag>&,
 		       OutputIterator, hstate_t, const L&,
 		       delta_kind::states);
 
@@ -281,13 +280,13 @@ namespace vcsn
 	    class Letter, class Tag, class I>
   Tag& op_tag(const AutomataBase<I>&,
 	      Graph<Kind, WordValue, WeightValue,
-		    SerieValue, Letter, Tag>&);
+	      SerieValue, Letter, Tag>&);
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
             class Letter, class Tag, class I>
   const Tag& op_tag(const AutomataBase<I>&,
                     const Graph<Kind, WordValue, WeightValue,
-                                SerieValue, Letter, Tag>&);
+		    SerieValue, Letter, Tag>&);
 
 # undef TParam
 
@@ -305,34 +304,34 @@ namespace vcsn
 				Letter,
 				Tag>  >
   {
-    typedef SeriesValue					series_set_elt_value_t;
-    typedef WordValue					word_value_t;
-    typedef WordValue					monoid_elt_value_t;
-    typedef WeightValue					semiring_elt_value_t;
-    typedef Letter					letter_t;
-    typedef typename LabelOf<Kind, WordValue, WeightValue, SeriesValue, Letter>
-    ::ret						label_t;
-    typedef Tag						tag_t;
-    typedef edge_value<label_t>				edge_value_t;
-    typedef state_value					state_value_t;
-    typedef std::vector<state_value_t>			state_data_t;
-    typedef std::vector<edge_value_t>			edge_data_t;
+      typedef SeriesValue					series_set_elt_value_t;
+      typedef WordValue					word_value_t;
+      typedef WordValue					monoid_elt_value_t;
+      typedef WeightValue					semiring_elt_value_t;
+      typedef Letter					letter_t;
+      typedef typename LabelOf<Kind, WordValue, WeightValue, SeriesValue, Letter>
+      ::ret						label_t;
+      typedef Tag						tag_t;
+      typedef edge_value<label_t>				edge_value_t;
+      typedef state_value					state_value_t;
+      typedef std::vector<state_value_t>			state_data_t;
+      typedef std::vector<edge_value_t>			edge_data_t;
 
-    typedef std::vector<state_value_t>			state_data_t;
-    typedef std::vector<edge_value_t>			edge_data_t;
+      typedef std::vector<state_value_t>			state_data_t;
+      typedef std::vector<edge_value_t>			edge_data_t;
 
-    typedef StateContainer				states_t;
-    typedef EdgeContainer				edges_t;
+      typedef StateContainer				states_t;
+      typedef EdgeContainer				edges_t;
 
-    typedef typename states_t::iterator			state_iterator;
-    typedef typename edges_t::iterator			edge_iterator;
+      typedef typename states_t::iterator			state_iterator;
+      typedef typename edges_t::iterator			edge_iterator;
 
-    typedef std::map<hstate_t, series_set_elt_value_t>	initial_t;
-    typedef std::map<hstate_t, series_set_elt_value_t>	final_t;
-    typedef utility::Support<initial_t>			initial_support_t;
-    typedef utility::Support<final_t>			final_support_t;
-    typedef typename initial_support_t::iterator	initial_iterator;
-    typedef typename final_support_t::iterator		final_iterator;
+      typedef std::map<hstate_t, series_set_elt_value_t>	initial_t;
+      typedef std::map<hstate_t, series_set_elt_value_t>	final_t;
+      typedef utility::Support<initial_t>			initial_support_t;
+      typedef utility::Support<final_t>			final_support_t;
+      typedef typename initial_support_t::iterator	initial_iterator;
+      typedef typename final_support_t::iterator		final_iterator;
   };
 
   // This implementation can be used as a transducer one.
@@ -349,11 +348,11 @@ namespace vcsn
 				 Letter,
 				 Tag>  >
   {
-    typedef WordValue			input_monoid_elt_value_t;
-    typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t
-    output_monoid_elt_value_t;
-    typedef typename algebra::series_traits<WeightValue>::semiring_elt_value_t
-    output_semiring_elt_value_t;
+      typedef WordValue			input_monoid_elt_value_t;
+      typedef typename algebra::series_traits<WeightValue>::monoid_elt_value_t
+      output_monoid_elt_value_t;
+      typedef typename algebra::series_traits<WeightValue>::semiring_elt_value_t
+      output_semiring_elt_value_t;
   };
 
   // Explain how to project type of transducer into input automaton type.
@@ -371,25 +370,25 @@ namespace vcsn
 				    Letter,
 				    Tag>  >
   {
-    typedef Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
-    self_t;
-    typedef typename transducer_traits<self_t>::output_semiring_elt_value_t
-    semiring_elt_value_t;
-    typedef typename transducer_traits<self_t>::input_monoid_elt_value_t
-    monoid_elt_value_t;
-    typedef typename algebra::mute_series_impl<SeriesValue,
-					      semiring_elt_value_t,
-					      monoid_elt_value_t>
-    ::ret series_set_elt_value_t;
+      typedef Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
+      self_t;
+      typedef typename transducer_traits<self_t>::output_semiring_elt_value_t
+      semiring_elt_value_t;
+      typedef typename transducer_traits<self_t>::input_monoid_elt_value_t
+      monoid_elt_value_t;
+      typedef typename algebra::mute_series_impl<SeriesValue,
+						 semiring_elt_value_t,
+						 monoid_elt_value_t>
+      ::ret series_set_elt_value_t;
 
-    typedef
-    Graph<Kind,
-	  monoid_elt_value_t,
-	  semiring_elt_value_t,
-	  series_set_elt_value_t,
-	  Letter,
-	  Tag>
-    ret;
+      typedef
+      Graph<Kind,
+	    monoid_elt_value_t,
+	    semiring_elt_value_t,
+	    series_set_elt_value_t,
+	    Letter,
+	    Tag>
+      ret;
   };
 
   template <class Kind,
@@ -399,34 +398,34 @@ namespace vcsn
 	    class Letter,
 	    class Tag>
   struct output_projection_traits<Graph<Kind,
-					   WordValue,
-					   WeightValue,
-					   SeriesValue,
-					   Letter,
-					   Tag>  >
+					WordValue,
+					WeightValue,
+					SeriesValue,
+					Letter,
+					Tag>  >
   {
-    typedef Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
-    self_t;
+      typedef Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
+      self_t;
 
-    typedef typename automaton_traits<self_t>::semiring_elt_value_t
-    series_set_elt_value_t;
+      typedef typename automaton_traits<self_t>::semiring_elt_value_t
+      series_set_elt_value_t;
 
-    typedef typename
-    algebra::series_traits<series_set_elt_value_t>::monoid_elt_value_t
-    monoid_elt_value_t;
+      typedef typename
+      algebra::series_traits<series_set_elt_value_t>::monoid_elt_value_t
+      monoid_elt_value_t;
 
-    typedef typename
-    algebra::series_traits<series_set_elt_value_t>::semiring_elt_value_t
-    semiring_elt_value_t;
+      typedef typename
+      algebra::series_traits<series_set_elt_value_t>::semiring_elt_value_t
+      semiring_elt_value_t;
 
-    typedef
-    Graph<Kind,
-	  monoid_elt_value_t,
-	  semiring_elt_value_t,
-	  series_set_elt_value_t,
-	  Letter,
-	  Tag>
-    ret;
+      typedef
+      Graph<Kind,
+	    monoid_elt_value_t,
+	    semiring_elt_value_t,
+	    series_set_elt_value_t,
+	    Letter,
+	    Tag>
+      ret;
   };
 
   // Explain how to extend an input automaton into a transducer.
@@ -443,28 +442,28 @@ namespace vcsn
 				Letter,
 				Tag>  >
   {
-    typedef Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
-    self_t;
-    typedef typename automaton_traits<self_t>::monoid_elt_value_t
-    monoid_elt_value_t;
-    typedef typename algebra::mute_series_impl<SeriesValue, SeriesValue, monoid_elt_value_t>
-    ::ret series_set_elt_value_t;
+      typedef Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
+      self_t;
+      typedef typename automaton_traits<self_t>::monoid_elt_value_t
+      monoid_elt_value_t;
+      typedef typename algebra::mute_series_impl<SeriesValue, SeriesValue, monoid_elt_value_t>
+      ::ret series_set_elt_value_t;
 
-    typedef
-    Graph<Kind,
-	  monoid_elt_value_t,
-	  SeriesValue,
-	  series_set_elt_value_t,
-	  Letter,
-	  Tag>
-    ret;
+      typedef
+      Graph<Kind,
+	    monoid_elt_value_t,
+	    SeriesValue,
+	    series_set_elt_value_t,
+	    Letter,
+	    Tag>
+      ret;
   };
 
 }
 
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/automata/implementation/graph_fast.hxx>
+#  include <vaucanson/automata/implementation/graph.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_FAST_HH
+#endif // ! VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HH

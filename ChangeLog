@@ -1,5 +1,11 @@
 2005-05-11  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx: Minor fixes
+	according to coding style.
+
+2005-05-11  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/automata/implementation/graph_fast.hxx,
 	* include/vaucanson/automata/implementation/graph_fast.hh: Rename to...
 	* include/vaucanson/automata/implementation/graph.hh,

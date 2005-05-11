@@ -30,8 +30,8 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
-#ifndef VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_FAST_HXX
-# define VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_FAST_HXX
+#ifndef VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HXX
+# define VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HXX
 
 # include <fstream>
 # include <sstream>
@@ -39,15 +39,17 @@
 # include <algorithm>
 # include <utility>
 
-# include <vaucanson/automata/implementation/graph_fast.hh>
+# include <vaucanson/automata/implementation/graph.hh>
 # include <vaucanson/misc/contract.hh>
 
 
 namespace vcsn
 {
 
-  /** \name Decorators' implementation
-   ** \{ */
+  /*---------------------------.
+  | Decorators' implementation |
+  `---------------------------*/
+
   template<typename EdgeLabel>
   edge_value<EdgeLabel>::edge_value(hstate_t h1,
 				    hstate_t h2,
@@ -60,9 +62,10 @@ namespace vcsn
   state_value::state_value()
   {}
 
-  /** \}*/
 
-  // Convenient macros.
+  /*------------------.
+  | Convenient macros |
+  `------------------*/
 
 # define TParam							\
   template <class Kind, class WordValue, class WeightValue,	\
@@ -72,10 +75,14 @@ namespace vcsn
   Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
 
 
-  // Graph's implementation.
+  /*-----------------------.
+  | Graph's implementation |
+  `-----------------------*/
 
-  /** \name Constructors' implementations
-   ** \{ */
+  /*-------------.
+  | Constructors |
+  `-------------*/
+
   TParam
   GClass::Graph()
   { }
@@ -88,10 +95,12 @@ namespace vcsn
     states_.resize(initial_number_of_state);
     edges_.reserve(reserve_number_of_edge);
   }
-  /** \}*/
 
-  /** \name Basic accessors' implementations
-   ** \{ */
+
+  /*----------------.
+  | Basic accessors |
+  `----------------*/
+
   TParam
   typename GClass::states_t
   GClass::states() const
@@ -123,10 +132,11 @@ namespace vcsn
   {
     return final_support_t(final_);
   }
-  /** \}*/
 
-  /** \name State's manipulation implementation
-   ** \{ */
+  /*---------------------.
+  | State's manipulation |
+  `---------------------*/
+
   TParam
   bool
   GClass::has_state(hstate_t n) const
@@ -194,7 +204,7 @@ namespace vcsn
     removed_states_.insert(n);
     initial_.erase(n);
     final_.erase(n);
-    postcondition(! has_state(n));
+    postcondition(!has_state(n));
   }
 
   TParam
@@ -252,10 +262,12 @@ namespace vcsn
   {
     return final_.clear();
   }
-  /** \}*/
 
-  /** \name Edge's manipulation implementation.
-   ** \{ */
+
+  /*--------------------.
+  | Edge's manipulation |
+  `--------------------*/
+
   TParam
   bool
   GClass::has_edge(hedge_t e) const
@@ -308,14 +320,13 @@ namespace vcsn
   {
     if (!has_edge(e))
       return;
-    precondition(has_edge(e));
 
     const edge_value_t& ev = edges_[e];
     states_[ev.from].output_edges.erase(e);
     states_[ev.to].input_edges.erase(e);
     removed_edges_.insert(e);
 
-    postcondition(! has_edge(e));
+    postcondition(!has_edge(e));
   }
 
 
@@ -350,7 +361,7 @@ namespace vcsn
     precondition(has_edge(e));
     edges_[e].label = l;
   }
-  /** \}*/
+
 
   /// Check the consistency of an automata.
   TParam
@@ -385,6 +396,10 @@ namespace vcsn
     return true;
   }
 
+  /*----------------.
+  | Delta functions |
+  `----------------*/
+
   TParam
   template <class OutputIterator, class Query>
   void
@@ -393,7 +408,7 @@ namespace vcsn
 		const Query& q,
 		delta_kind::edges) const
   {
-    assertion(from < int(states_.size()));
+    assertion(has_state(from));
     const std::set<hedge_t>& edges = states_[from].output_edges;
     for_each_const_(std::set<hedge_t>, e, edges)
       if (q(*e))
@@ -408,6 +423,7 @@ namespace vcsn
 		const Query& query,
 		delta_kind::states) const
   {
+    assertion(has_state(from));
     const std::set<hedge_t>& edges = states_[from].output_edges;
     for_each_const_(std::set<hedge_t>, e, edges)
       if (query(*e))
@@ -422,6 +438,7 @@ namespace vcsn
 		 const Query& q,
 		 delta_kind::edges) const
   {
+    assertion(has_state(from));
     const std::set<hedge_t>& edges = states_[from].input_edges;
     for_each_const_(std::set<hedge_t>, e, edges)
       if (q(*e))
@@ -436,6 +453,7 @@ namespace vcsn
 		 const Query& q,
 		 delta_kind::states) const
   {
+    assertion(has_state(from));
     const state_value_t::edges_t& edges =
       states_[from].input_edges;
     for_each_const_(std::set<hedge_t>, e, edges)
@@ -462,6 +480,29 @@ namespace vcsn
     v.rdelta(res, from, query, k);
   }
 
+  template <class S, class WordValue, class WeightValue, class SeriesValue,
+	    class Letter, class Tag,
+	    typename OutputIterator, typename L>
+  void op_letter_delta(const AutomataBase<S>& s,
+		       const Graph<labels_are_letters,
+		       WordValue, WeightValue,
+		       SeriesValue, Letter, Tag>& v,
+		       OutputIterator res,
+		       hstate_t from,
+		       const L& letter,
+		       delta_kind::states k)
+  {
+    typedef typename state_value::edges_t edges_t;
+    const edges_t& edges = v.states_[from].output_edges;
+    for_each_const_(edges_t, e, edges)
+      if (v.edges_[*e].label == letter)
+	*res++ = v.edges_[*e].to;
+  }
+
+
+  /*----.
+  | Tag |
+  `----*/
 
   TParam
   inline
@@ -492,25 +533,6 @@ namespace vcsn
 		                SerieValue ,Letter, Tag>& v)
   {
     return v.tag();
-  }
-
-  template <class S, class WordValue, class WeightValue, class SeriesValue,
-	    class Letter, class Tag,
-	    typename OutputIterator, typename L>
-  void op_letter_delta(const AutomataBase<S>& s,
-		       const Graph<labels_are_letters,
-		       WordValue, WeightValue,
-		       SeriesValue, Letter, Tag>& v,
-		       OutputIterator res,
-		       hstate_t from,
-		       const L& letter,
-		       delta_kind::states k)
-  {
-    typedef typename state_value::edges_t edges_t;
-    const edges_t& edges = v.states_[from].output_edges;
-    for_each_const_(edges_t, e, edges)
-      if (v.edges_[*e].label == letter)
-	*res++ = v.edges_[*e].to;
   }
 
   // Remove macros to avoid name clashes.
