@@ -1,3 +1,9 @@
+2005-05-11  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/automata/implementation/graph.hxx,
+	* include/vaucanson/automata/implementation/graph.hh: Remove. These
+	files have to be replaced by graph_fast.h{h,xx}.
+
 2005-05-05  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/realtime_composition.hxx:
