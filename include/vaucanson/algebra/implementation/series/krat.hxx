@@ -48,11 +48,7 @@
 
 # include <vaucanson/algebra/implementation/series/polynoms.hh>
 # include <vaucanson/automata/concept/automata.hh>
-# ifdef VCSN_FAST
-#  include <vaucanson/automata/implementation/graph_fast.hh>
-# else // VCSN_FAST
-#  include <vaucanson/automata/implementation/graph.hh>
-# endif // ! VCSN_FAST
+# include <vaucanson/automata/implementation/graph.hh>
 
 # include <vaucanson/misc/contract.hh>
 

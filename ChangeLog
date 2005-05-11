@@ -1,5 +1,17 @@
 2005-05-11  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/automata/implementation/graph_fast.hxx,
+	* include/vaucanson/automata/implementation/graph_fast.hh: Rename to...
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx: ...These
+	* include/Makefile.am: Update accordingly.
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Remove
+	the selection between the two implementations of graph according
+	to VCSN_FAST.
+
+2005-05-11  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/automata/implementation/graph.hxx,
 	* include/vaucanson/automata/implementation/graph.hh: Remove. These
 	files have to be replaced by graph_fast.h{h,xx}.
