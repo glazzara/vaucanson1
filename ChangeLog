@@ -1,3 +1,10 @@
+2005-05-12  Florent Terrones  <florent.terrones@lrde.epita.fr>
+
+	* include/vaucanson/tools/dot_format.hxx: Enclose the
+	automaton name with quotes and escape those which are
+	in it, so as to avoid a bug that occured if it contained
+	quotes.
+
 2005-05-11  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/automata/implementation/graph.hh,
