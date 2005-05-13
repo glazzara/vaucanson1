@@ -1,4 +1,4 @@
-// usual_macros.hh: this file is part of the Vaucanson project.
+// graph.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -535,10 +535,51 @@ namespace vcsn
     return v.tag();
   }
 
+  
+  /*---------.
+  | Geometry |
+  `---------*/
+
+  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+	    class Letter, class Tag, class I>
+  std::map<hstate_t, std::pair<double, double> >&
+  op_geometry(const AutomataBase<I>&,
+	      Graph<Kind, WordValue, WeightValue,
+	      SerieValue, Letter, Tag>& v)
+  {
+    return v.geometry();
+  }
+
+  template <class Kind, class WordValue, class WeightValue, class SerieValue,
+            class Letter, class Tag, class I>
+  const std::map<hstate_t, std::pair<double, double> >&
+  op_geometry(const AutomataBase<I>&,
+	      const Graph<Kind, WordValue, WeightValue,
+	      SerieValue, Letter, Tag>& v)
+  {
+    return v.geometry();
+  }
+
+  
+  TParam
+  const typename GClass::geometry_map_t&
+  GClass::geometry() const
+  {
+    return geometry_;
+  }
+
+  TParam
+  typename GClass::geometry_map_t&
+  GClass::geometry()
+  {
+    return geometry_;
+  }
+  
+  
   // Remove macros to avoid name clashes.
 #undef TParam
 #undef GClass
 
 }
 
-#endif // !GRAPH_GRAPH_HXX
+#endif // !VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HXX

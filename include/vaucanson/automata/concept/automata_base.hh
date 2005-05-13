@@ -93,6 +93,7 @@ namespace vcsn {
     typedef undefined_type final_t;
     typedef undefined_type final_iterator;
     typedef undefined_type final_support_t;
+    typedef undefined_type geometry_map_t;
  };
 
   /*-----------------------------------.
@@ -201,6 +202,9 @@ namespace vcsn {
     /** type of the iterator of the final application support. */
     typedef typename automaton_traits<T>::final_iterator final_iterator;
 
+    /** type of the geometry map containing state coordinates. */
+    typedef std::map<hstate_t, std::pair<double, double> > geometry_map_t;
+    
     /** the set of series from which is build the automaton (const version). */
     const series_set_t& series() const;
 
@@ -209,6 +213,12 @@ namespace vcsn {
 
     /** the optional information aggregated to the automaton. */
     const tag_t& tag() const;
+
+    /** the optional geometry information aggregated to the automaton. */
+    geometry_map_t& geometry();
+
+    /** the optional geometry information aggregated to the automaton. */
+    const geometry_map_t& geometry() const;
 
     /** return true if the automaton is consistent. */
     bool exists() const;
@@ -601,7 +611,7 @@ namespace vcsn {
     void spontaneous_rdeltac(Container& res,
 			    hstate_t from,
 			    delta_kind::states k) const;
-
+    
   protected:
     MetaElement();
     MetaElement(const MetaElement& other);

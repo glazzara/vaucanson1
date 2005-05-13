@@ -1,3 +1,20 @@
+2005-05-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	This patch enrich graph implementation with a map of states to pair of
+	double; giving the ability to store state geometric coordinates
+	regardless automaton tag type. This map is accessible with the 
+	geometry() method, from the automaton or its graph implementation. 
+	
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx: Add a map to
+	store geometric coordinates of states.
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hh: Add methods to
+	access geometry map.
+
+	* include/vaucanson/algorithms/product.hh,
+	* include/vaucanson/algorithms/product.hxx: Update geometry system, and
+	add an optionnal boolean argument to use geometry (default is false). 
+
 2005-05-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/z_fmp_transducer.hh: New. Add a context header for

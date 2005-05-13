@@ -1,7 +1,7 @@
 // product.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -61,13 +61,15 @@ namespace vcsn
   /// Returns a fresh automaton that is the product of the two input ones.
   template<typename A, typename T, typename U>
   Element<A, T>
-  product(const Element<A, T>& lhs, const Element<A, U>& rhs);
+  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
+	  const bool use_geometry = false);
 
   template<typename A, typename T, typename U>
   Element<A, T>
   product(const Element<A, T>& lhs,
 	  const Element<A, U>& rhs,
-	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >&);
+	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >&,
+	  const bool use_geometry = false);
   //@}
 
   /** @} */

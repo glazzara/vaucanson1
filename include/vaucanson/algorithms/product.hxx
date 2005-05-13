@@ -1,7 +1,7 @@
 // product.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -37,8 +37,6 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
-# include <vaucanson/xml/infos.hh>
-
 # include <set>
 # include <map>
 # include <queue>
@@ -46,98 +44,61 @@
 
 namespace vcsn {
 
-  /// @bug FIXME: This should be defined differently.
-  # define PRODUCT_EVENT	"product"
-
-
   // Some little graphic tools
   namespace grphx {
 
-    // Default routines, no Xml tag.
-    template <typename Tag>
-    struct if_tag
+    // Diagonal alignement with a depth-first traversal
+    template<typename I>
+    static
+    void align(const I& a)
     {
-      template<typename I>
-      static
-      Tag align(const I& a)
-      {
-        return a.tag();
-      }
-      template <typename Auto>
-      static
-      void setcoordfrom(const Auto&, hstate_t,
-                        Tag, hstate_t,
-                        Tag, hstate_t)
-      {
-      }
-    };
+      AUTOMATON_TYPES(I);
+      int x = 0;
+      std::map<hstate_t,bool> visited;
+      std::stack<hstate_t> stack;
 
-    // Specialisation for Xml tag.
-    template <>
-    struct if_tag<xml::XmlInfosTag>
-    {
-      // Diagonal alignement with a depth-first traversal
-      template<typename I>
-      static
-      xml::XmlInfosTag align(const I& a)
-      {
-        AUTOMATON_TYPES(I);
-	xml::XmlInfosTag tag;
-        int x = 0;
-	std::map<hstate_t,bool> visited;
-	std::stack<hstate_t> stack;
-
-        for_each_state(i, a) {
-          visited[*i] = false;
-          // ensure inaccessible states will be visited
-          stack.push(*i);
-        }
-
-        for_each_initial_state(i, a)
-          stack.push(*i);
-
-        while (!stack.empty()) {
-          hstate_t i = stack.top();
-          stack.pop();
-
-          if (!visited[i]) {
-            visited[i] = true;
-
-            tag.states[i]().x = tag.states[i]().y = x++;
-
-	    std::list<hedge_t> aim;
-            a.deltac(aim, i, delta_kind::edges());
-            for_all_const_(std::list<hedge_t>, j, aim)
-              stack.push(a.aim_of(*j));
-          }
-        }
-        return tag;
+      for_each_state(i, a) {
+	visited[*i] = false;
+	// ensure inaccessible states will be visited
+	stack.push(*i);
       }
 
-      template <typename Auto>
-      static
-      void setcoordfrom(Auto& a, hstate_t state,
-                        xml::XmlInfosTag x_tag, hstate_t x_state,
-                        xml::XmlInfosTag y_tag, hstate_t y_state)
-      {
-        a.tag().states[state]().x = x_tag.states[x_state]().x;
-        a.tag().states[state]().y = y_tag.states[y_state]().y;
-      }
-    };
+      for_each_initial_state(i, a)
+	stack.push(*i);
 
-    template <typename Tag, typename I>
-    Tag align(const I& a)
-    {
-      return if_tag<Tag>::align(a);
+      while (!stack.empty()) {
+	hstate_t i = stack.top();
+	stack.pop();
+
+	if (!visited[i]) {
+	  visited[i] = true;
+
+	  a.geometry()[i] = make_pair(x, x);
+	  x++;
+
+	  std::list<hedge_t> aim;
+	  a.deltac(aim, i, delta_kind::edges());
+	  for_all_const_(std::list<hedge_t>, j, aim)
+	    stack.push(a.aim_of(*j));
+	}
+      }
     }
 
-    template <typename Auto, typename Tag>
-    void setcoordfrom(Auto& a, hstate_t state,
-                      Tag x_tag, hstate_t x_state,
-                      Tag y_tag, hstate_t y_state)
+    template <typename Output, typename Lhs, typename Rhs>
+    static
+    void setcoordfrom(Output& a,
+		      Lhs& lhs,
+		      Rhs& rhs,
+		      hstate_t state,
+		      hstate_t x_state,
+		      hstate_t y_state)
     {
-      if_tag<Tag>::setcoordfrom(a, state, x_tag, x_state, y_tag, y_state);
+      double x = lhs.geometry().find(x_state)->second.first;
+      double y = rhs.geometry().find(y_state)->second.second;
+      a.geometry()[state] = std::make_pair(x, y);
     }
+
+
   }
 
 
@@ -151,7 +112,8 @@ namespace vcsn {
 	  output_t&			output,
 	  const lhs_t&			lhs,
 	  const rhs_t&			rhs,
-	  std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m)
+	  std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m,
+	  const bool use_geometry = false)
   {
     AUTOMATON_TYPES(output_t);
 
@@ -170,8 +132,6 @@ namespace vcsn {
     visited_t			visited;
     std::queue<pair_hstate_t>	to_process;
 
-    tag_t lhs_tag = grphx::align<tag_t>(lhs);
-    tag_t rhs_tag = grphx::align<tag_t>(rhs);
 
     /*----------------------------------.
     | Get initial states of the product |
@@ -186,9 +146,8 @@ namespace vcsn {
 	visited[new_pair] = new_state;
 	to_process.push(new_pair);
 
-	grphx::setcoordfrom(output, new_state,
-			    lhs_tag, *lhs_s,
-			    rhs_tag, *rhs_s);
+	if (use_geometry)
+	  grphx::setcoordfrom(output, lhs, rhs, new_state, *lhs_s, *rhs_s);
       }
 
     /*-----------.
@@ -249,9 +208,9 @@ namespace vcsn {
 		    m[aim] = new_pair;
 		    to_process.push(new_pair);
 
-		    grphx::setcoordfrom(output, aim,
-					lhs_tag, new_pair.first,
-					rhs_tag, new_pair.second);
+		    if (use_geometry)
+		      grphx::setcoordfrom(output, lhs, rhs, aim, 
+					  new_pair.first, new_pair.second);
 		  }
 		else
 		  aim = found->second;
@@ -264,22 +223,24 @@ namespace vcsn {
   // wrappers
   template<typename A, typename T, typename U>
   Element<A, T>
-  product(const Element<A, T>& lhs, const Element<A, U>& rhs)
+  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
+	  const bool use_geometry)
   {
     std::map<hstate_t, std::pair<hstate_t, hstate_t> > m;
     // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(rhs.structure());
-    product(ret.structure(), ret, lhs, rhs, m);
+    product(ret.structure(), ret, lhs, rhs, m, use_geometry);
     return ret;
   }
 
   template<typename A, typename T, typename U>
   Element<A, T>
   product(const Element<A, T>& lhs, const Element<A, U>& rhs,
-	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m)
+	  std::map<hstate_t, std::pair<hstate_t, hstate_t> >& m,
+	  const bool use_geometry)
   {
     Element<A, T> ret(rhs.structure());
-    product(ret.structure(), ret, lhs, rhs, m);
+    product(ret.structure(), ret, lhs, rhs, m, use_geometry);
     return ret;
   }
 
