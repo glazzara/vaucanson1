@@ -60,6 +60,7 @@ namespace vcsn
 # include <vaucanson/contexts/polynom_series.thh>
 # include <vaucanson/contexts/generic_automaton_impl.thh>
 # include <vaucanson/contexts/automaton.thh>
+# include <vaucanson/contexts/fmp_transducer_functions.thh>
 
 # undef VCSN_CONTEXT_NAMESPACE
 

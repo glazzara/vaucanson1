@@ -1,3 +1,32 @@
+2005-05-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/z_fmp_transducer.hh: New. Add a context header for
+	transducers seen as automata over a free monoid product, with
+	multiplicity in Z semiring.
+
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx: New. Add
+	new_automaton() and make_couple() functions, to ease the creation of an
+	automaton_t and a series_elt_t.
+	* include/Makefile.am: Update.
+
+	* include/vaucanson/fmp_transducer.hh: Include
+	fmp_transducer_functions.thh file.
+
+	* src/tests/context_headers/fmp_transducers/Makefile.am,
+	* src/tests/context_headers/fmp_transducers/global_consistency_test.hh:
+	New. Add a consistency test for fmp transducers context headers.
+	* src/tests/context_headers/Makefile.am,
+	* configure.ac: Update
+
+	* src/tests/test-suites/context_headers_z_fmp_transducer.defs: New.
+	Instanciate test on fmp transducers on Z semiring.
+	* src/tests/test-suites/generate-all.sh: Update.
+
+	* include/vaucanson/contexts/free_monoid_product.thh: Modify a wrong
+	include.
+
+
 2005-05-12  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
 	* include/vaucanson/tools/dot_format.hxx: Enclose the
@@ -34,7 +63,7 @@
 	* include/vaucanson/algorithms/realtime_composition.hxx:
 	Fix wrong structure used for "auto_structure" since it raised an
 	assertion in Fibonacci demo.
-	
+
 2005-05-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/Makefile.am: Add `bencher.hh' and `bencher.hxx'.
@@ -51,11 +80,11 @@
 
 2005-05-03  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
-	* include/vaucanson/automata/concept/transducer.hh: 
+	* include/vaucanson/automata/concept/transducer.hh:
 	Fix a bad typedef of the monoid for the output projection
 	helper.
 	Add a new helper for input projections.
-	
+
 2005-05-03  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Add
@@ -77,14 +106,14 @@
 2005-04-27  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/automata/algos/series_multiplicity_transducers/realtime:
-	Remove. 
+	Remove.
 
 2005-04-27  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	Change organization of the test suite, according to algorithms domain
 	definition. This is the first part of the reorganization of the test
-	suite, and no particular concerns are given to tests themselves. This 
-	patch should be completed with new tests, as it doesn't enable full 
+	suite, and no particular concerns are given to tests themselves. This
+	patch should be completed with new tests, as it doesn't enable full
 	tests on transducers.
 
 	* src/tests/automata/algos/README: New file. Explains directory tree of
@@ -93,17 +122,17 @@
 	* configure.ac,
 	* src/tests/Makefile.am,
 	* src/tests/automata/algos/Makefile.am: Update.
-	* src/tests/test-suites/generate-all.sh: Update with new algorithm 
-	tests organization. 
+	* src/tests/test-suites/generate-all.sh: Update with new algorithm
+	tests organization.
 
-	* src/tests/test-suites/boolean_transducer.defs: Add CREATE_SEMIRING 
+	* src/tests/test-suites/boolean_transducer.defs: Add CREATE_SEMIRING
 	macro to enable semiring creation for transducers. This macro is
 	used when a test tries to instanciate a semiring_t, which must be
 	parameterized with monoid and semiring, in case of boolean
 	transducers.
 	* src/tests/bin/generate-test-suite.sh: Add default
 	CREATE_SEMIRING macro.
-	* src/tests/automata/implementation_check/rdelta_test.hh: Use 
+	* src/tests/automata/implementation_check/rdelta_test.hh: Use
 	CREATE_SEMIRING macro for semiring creation.
 
 	Transducers over P(B*):
@@ -117,7 +146,7 @@
 	New file.
 	* src/tests/transducers/Makefile.am,
 	* src/tests/transducers: Delete.
-	
+
 	Free Monoid Product transducers:
 	* src/tests/fmp_transducers/instantiation_test.hh: Move to...
 	* src/tests/automata/algos/fmp_transducers/instantiation_test.hh:
@@ -133,7 +162,7 @@
 	* src/tests/automata/algos/aci_canonical_test.hh,
 	* src/tests/automata/algos/determinist_test.hh,
 	* src/tests/boolean_automata/brzozowski_test.hh: Move to...
-	* src/tests/automata/algos/boolean_automata: ...this directory. 
+	* src/tests/automata/algos/boolean_automata: ...this directory.
 	* src/tests/automata/algos/boolean_automata/Makefile.am: New file.
 	* src/tests/boolean_automata/Makefile.am,
 	* src/tests/boolean_automata: Delete.
@@ -146,7 +175,7 @@
 	* src/tests/automata/algos/reachable_test.hh,
 	* src/tests/automata/algos/graphs/sub_automaton_test.hh,
 	* src/tests/automata/algos/trim_test.hh: Move to...
-	* src/tests/automata/algos/graphs/: ...this directory, and use 
+	* src/tests/automata/algos/graphs/: ...this directory, and use
 	CREATE_SEMIRING macro where needed.
 	* src/tests/automata/algos/graphs/Makefile.am: New file.
 
@@ -154,20 +183,20 @@
 	* src/tests/automata/algos/krat_exp_realtime_conflict_test.hh,
 	* src/tests/automata/algos/realtime_test.hh,
 	* src/tests/automata/algos/generalized_test.hh: Move to...
-	* src/tests/automata/algos/freemonoid_labeled_graphs: ...this 
+	* src/tests/automata/algos/freemonoid_labeled_graphs: ...this
 	directory.
 	* src/tests/automata/algos/freemonoid_labeled_graphs/Makefile.am: New
 	file.
 	* src/tests/k_automata/Makefile.am,
 	* src/tests/k_automata: Delete.
-	
+
 	Labeled graphs:
 	* src/tests/automata/algos/elimination_test.hh,
 	* src/tests/automata/algos/normalize_test.hh,
 	* src/tests/automata/algos/is_isomorph_test.hh: Move to...
 	* src/tests/automata/algos/labeled_graphs: ...this directory.
 	* src/tests/automata/algos/labeled_graphs/Makefile.am: New file.
-	
+
 	Label aware labeled graphs:
 	* src/tests/automata/algos/closure_test.hh,
 	* src/tests/automata/algos/glushkov_test.hh,
@@ -191,7 +220,7 @@
 	directory.
 	* src/tests/automata/algos/letter_combination_labeled_graphs/Makefile.am:
 	New file.
-	
+
 2005-04-24  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	* include/vaucanson/contexts/automaton.thh: Remove the

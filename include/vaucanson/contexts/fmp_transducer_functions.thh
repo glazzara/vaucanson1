@@ -1,5 +1,5 @@
-// -*- C++ -*-
-// free_monoid_product.thh: this file is part of the Vaucanson project.
+//								-*- c++ -*-
+// fmp_transducer_functions.thh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -18,7 +18,7 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group consists of the following contributors:
+// The Vaucanson Group represents the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
 //    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
@@ -31,14 +31,8 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-// Input: first_monoid_elt_t, second_monoid_elt_t.
-// Output: monoid_elt_t.
-
-# include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh>
-
-/*-------.
-| Monoid |
-`-------*/
+# include <vaucanson/algebra/concept/alphabets_base.hh>
+# include <vaucanson/tools/usual_macros.hh>
 
 namespace vcsn
 {
@@ -46,13 +40,35 @@ namespace vcsn
   namespace VCSN_CONTEXT_NAMESPACE
   {
 
-    typedef
-    vcsn::algebra::FreeMonoidProduct<first_monoid_t, second_monoid_t>
-    monoid_t;
+    template <class T1, class T2>
+    automaton_t new_automaton(const T1& first_alphabet,
+			      const T2& second_alphabet);
 
-    typedef std::pair<std::string, std::string>		monoid_elt_value_t;
-    typedef vcsn::Element<monoid_t, monoid_elt_value_t>	monoid_elt_t;
+    template <class FirstInputIterator, class SecondInputIterator>
+    automaton_t new_automaton(const FirstInputIterator first_begin,
+			      const FirstInputIterator first_end,
+			      const SecondInputIterator second_begin,
+			      const SecondInputIterator second_end);
+
+    template <class T1, class T2>
+    series_set_elt_t make_couple(const T1& first_alphabet,
+				 const T2& second_alphabet,
+				 const std::string& first_exp = "",
+				 const std::string& second_exp = "");
+
+    template <class FirstIterator, class SecondIterator>
+    series_set_elt_t make_couple(const FirstIterator first_begin,
+				 const FirstIterator first_end,
+				 const SecondIterator second_begin,
+				 const SecondIterator second_end,
+				 const std::string& first_exp,
+				 const std::string& second_exp);
 
   } // End of namespace VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.
+
+
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/contexts/fmp_transducer_functions.thxx>
+# endif // ! VCSN_USE_INTERFACE_ONLY

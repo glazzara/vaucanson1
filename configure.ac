@@ -142,6 +142,7 @@ AC_CONFIG_FILES([
 	src/tests/context_headers/Makefile
 	src/tests/context_headers/automata/Makefile
 	src/tests/context_headers/transducers/Makefile
+	src/tests/context_headers/fmp_transducers/Makefile
 	src/tests/test-suites/Makefile
 	src/tests/xml/Makefile
 	src/demos/Makefile

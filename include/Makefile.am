@@ -342,10 +342,13 @@ nobase_include_HEADERS =						   \
 	vaucanson/boolean_automaton.hh					   \
 	vaucanson/boolean_transducer.hh					   \
 	vaucanson/fmp_transducer.hh					   \
+	vaucanson/z_fmp_transducer.hh					   \
 	vaucanson/contexts/automaton_functions.thh			   \
 	vaucanson/contexts/automaton_functions.thxx			   \
 	vaucanson/contexts/transducer_functions.thh		   	   \
 	vaucanson/contexts/transducer_functions.thxx		   	   \
+	vaucanson/contexts/fmp_transducer_functions.thh			   \
+	vaucanson/contexts/fmp_transducer_functions.thxx		   \
 	vaucanson/z_max_plus_automaton.hh				   \
 	vaucanson/z_min_plus_automaton.hh				   \
 	vaucanson/z_automaton.hh					   \

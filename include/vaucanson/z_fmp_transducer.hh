@@ -1,5 +1,4 @@
-// -*- C++ -*-
-// free_monoid_product.thh: this file is part of the Vaucanson project.
+// z_fmp_transducer.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -30,29 +29,39 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
+#ifndef VCSN_Z_FMP_TRANSDUCER_HH
+# define VCSN_Z_FMP_TRANSDUCER_HH
 
-// Input: first_monoid_elt_t, second_monoid_elt_t.
-// Output: monoid_elt_t.
+# include <vaucanson/z_automaton.hh>
 
-# include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh>
+# define VCSN_CONTEXT_NAMESPACE z_fmp_transducer
 
-/*-------.
-| Monoid |
-`-------*/
 
 namespace vcsn
 {
 
   namespace VCSN_CONTEXT_NAMESPACE
   {
+    typedef z_automaton::monoid_elt_t		first_monoid_elt_t;
+    typedef first_monoid_elt_t::set_t		first_monoid_t;
+    typedef first_monoid_elt_t::value_t		first_monoid_elt_value_t;
+    typedef first_monoid_t::alphabet_t		first_alphabet_t;
 
-    typedef
-    vcsn::algebra::FreeMonoidProduct<first_monoid_t, second_monoid_t>
-    monoid_t;
-
-    typedef std::pair<std::string, std::string>		monoid_elt_value_t;
-    typedef vcsn::Element<monoid_t, monoid_elt_value_t>	monoid_elt_t;
-
+    typedef z_automaton::monoid_elt_t		second_monoid_elt_t;
+    typedef second_monoid_elt_t::set_t		second_monoid_t;
+    typedef second_monoid_elt_t::value_t	second_monoid_elt_value_t;
+    typedef second_monoid_t::alphabet_t		second_alphabet_t;
   } // End of namespace VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.
+
+# include <vaucanson/contexts/free_monoid_product.thh>
+# include <vaucanson/contexts/z_semiring.thh>
+# include <vaucanson/contexts/polynom_series.thh>
+# include <vaucanson/contexts/generic_automaton_impl.thh>
+# include <vaucanson/contexts/automaton.thh>
+# include <vaucanson/contexts/fmp_transducer_functions.thh>
+
+# undef VCSN_CONTEXT_NAMESPACE
+
+#endif // ! VCSN_Z_FMP_TRANSDUCER_HH

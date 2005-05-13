@@ -1,0 +1,120 @@
+//								-*- c++ -*-
+// fmp_transducer_functions.thxx: this file is part of the Vaucanson project.
+//
+// Vaucanson, a generic library for finite state machines.
+// Copyright (C) 2005 The Vaucanson Group.
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+//
+// The Vaucanson Group represents the following contributors:
+//    * Jacques Sakarovitch <sakarovitch@enst.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
+//    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+//    * Loic Fosse <loic.fosse@lrde.epita.fr>
+//    * Thanh-Hoc Nguyen <nguyen@enst.fr>
+//    * Raphael Poss <raphael.poss@lrde.epita.fr>
+//    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
+//    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+//    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//
+
+namespace vcsn
+{
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
+
+    template <class FirstInputIterator, class SecondInputIterator>
+    automata_set_t new_automata_set(const FirstInputIterator first_begin,
+				    const FirstInputIterator first_end,
+				    const SecondInputIterator second_begin,
+				    const SecondInputIterator second_end)
+    {
+      first_alphabet_t		first_alpha;
+      for (FirstInputIterator e = first_begin; e != first_end; ++e)
+	first_alpha.insert(*e);
+
+      second_alphabet_t		second_alpha;
+      for (SecondInputIterator e = second_begin; e != second_end; ++e)
+	second_alpha.insert(*e);
+
+      semiring_t		semiring;
+      monoid_t			freemonoidproduct (first_alpha, second_alpha);
+      series_set_t		series (semiring, freemonoidproduct);
+      return automata_set_t	(series);
+    }
+
+
+    template <class FirstInputIterator, class SecondInputIterator>
+    automaton_t new_automaton(const FirstInputIterator first_begin,
+			      const FirstInputIterator first_end,
+			      const SecondInputIterator second_begin,
+			      const SecondInputIterator second_end)
+    {
+      return automaton_t (new_automata_set(first_begin, first_end,
+					   second_begin, second_end));
+    }
+
+    template <class T1, class T2>
+    automaton_t new_automaton(const T1& first_alphabet,
+			      const T2& second_alphabet)
+    {
+      return new_automaton(first_alphabet.begin(), first_alphabet.end(),
+			   second_alphabet.begin(), second_alphabet.end());
+    }
+
+    template <class FirstIterator, class SecondIterator>
+    series_set_elt_t make_couple(const FirstIterator first_begin,
+				 const FirstIterator first_end,
+				 const SecondIterator second_begin,
+				 const SecondIterator second_end,
+				 const std::string& first_exp,
+				 const std::string& second_exp)
+    {
+      first_alphabet_t		first_alpha;
+      for (FirstIterator e = first_begin; e != first_end; ++e)
+	first_alpha.insert(*e);
+
+      second_alphabet_t		second_alpha;
+      for (SecondIterator e = second_begin; e != second_end; ++e)
+	second_alpha.insert(*e);
+
+      semiring_t		semiring;
+      monoid_t			freemonoidproduct (first_alpha, second_alpha);
+      series_set_t		series (semiring, freemonoidproduct);
+
+      series_set_elt_t		series_elt(series);
+
+      monoid_elt_value_t	fmp_elt (first_exp, second_exp);
+
+      semiring_elt_value_t	semiring_elt = true;
+      series_elt.assoc(fmp_elt, semiring_elt);
+
+      return series_elt;
+    }
+
+    template <class T1, class T2>
+    series_set_elt_t make_couple(const T1& first_alphabet,
+				 const T2& second_alphabet,
+				 const std::string& first_exp,
+				 const std::string& second_exp)
+    {
+      return make_couple(first_alphabet.begin(), first_alphabet.end(),
+			 second_alphabet.begin(), second_alphabet.end(),
+			 first_exp, second_exp);
+    }
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+} // End of namespace vcsn.
