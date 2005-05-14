@@ -73,7 +73,7 @@ namespace vcsn {
 	if (!visited[i]) {
 	  visited[i] = true;
 
-	  a.geometry()[i] = make_pair(x, x);
+	  a.geometry()[i] = std::make_pair(x, x);
 	  x++;
 
 	  std::list<hedge_t> aim;

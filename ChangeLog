@@ -1,3 +1,8 @@
+2005-05-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/product.hxx: Fix missing namespace 
+	before function.
+
 2005-05-14  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/tests/test-suites/context_headers_fmp_transducer.defs: New.
