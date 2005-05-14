@@ -1,9 +1,14 @@
+2005-05-14  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/tests/test-suites/context_headers_fmp_transducer.defs: New.
+	Instantiate test on fmp transducers on Boolean semiring.
+
 2005-05-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	This patch enrich graph implementation with a map of states to pair of
 	double; giving the ability to store state geometric coordinates
-	regardless automaton tag type. This map is accessible with the 
-	geometry() method, from the automaton or its graph implementation. 
-	
+	regardless automaton tag type. This map is accessible with the
+	geometry() method, from the automaton or its graph implementation.
+
 	* include/vaucanson/automata/implementation/graph.hh,
 	* include/vaucanson/automata/implementation/graph.hxx: Add a map to
 	store geometric coordinates of states.
@@ -13,7 +18,7 @@
 
 	* include/vaucanson/algorithms/product.hh,
 	* include/vaucanson/algorithms/product.hxx: Update geometry system, and
-	add an optionnal boolean argument to use geometry (default is false). 
+	add an optionnal boolean argument to use geometry (default is false).
 
 2005-05-13  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
@@ -37,7 +42,7 @@
 	* configure.ac: Update
 
 	* src/tests/test-suites/context_headers_z_fmp_transducer.defs: New.
-	Instanciate test on fmp transducers on Z semiring.
+	Instantiate test on fmp transducers on Z semiring.
 	* src/tests/test-suites/generate-all.sh: Update.
 
 	* include/vaucanson/contexts/free_monoid_product.thh: Modify a wrong
