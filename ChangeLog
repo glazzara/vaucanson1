@@ -1,7 +1,11 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/Makefile.am: Remove links to old XML files.
+
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	Fix demos with new XML system, and make XML reference files compliant 
-	with XSD. The two demos are temporarely removed, and will be updated
-	soon in a patch dedicated to XML sessions.
+	with XSD. The two session demos are temporarely removed, and will be 
+	updated soon in a patch dedicated to XML sessions.
 	
 	* src/demos/xml/samples/div3base2.xml,
 	* src/demos/xml/samples/c1.xml,
