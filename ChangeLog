@@ -1,5 +1,12 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/xml/xml_trans_tester.cc,
+	* src/tests/xml/xml_automaton_tester.cc,
+	* src/tests/xml/xml_fmp_tester.cc: New. XML test programs. Used to 
+	generate XML / DOT for known automata, and to parse XML.
+	
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/Makefile.am: Remove links to old XML files.
 
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
