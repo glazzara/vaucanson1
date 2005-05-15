@@ -1,5 +1,27 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/xml/xml_chooser.hh,
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/xml_converter.hh,
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/xerces_parser.hh: Fix some include problems.
+	
+	* include/vaucanson/xml/XML.hh: Move macro definitions ...
+	* include/vaucanson/tools/usual_macros.hh:... here.
+	
+	* include/vaucanson/xml/if_tag.hh,
+	* include/vaucanson/xml/if_tag.hxx: Delete. These files are inaccurate
+	at the moment. They will be fixed and re-added, if necessary.
+
+	* include/vaucanson/xml/strings.hh: Remove a bad include.
+
+	* doc/xml/vaucanson.xsd: Fix monoid and semiring order for 
+	transducers. 
+		
+	* include/Makefile.am: Fix and update.
+
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/tests/xml/import_dynamic-simple.xml.ref,
 	* src/tests/xml/export_static-numerical.xml.ref,
 	* src/tests/xml/session.xml,

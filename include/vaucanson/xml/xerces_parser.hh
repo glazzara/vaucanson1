@@ -48,7 +48,7 @@
 # include <xercesc/dom/DOM.hpp>
 # include <xercesc/framework/Wrapper4InputSource.hpp>
 
-# include <vaucanson/xml/XML.hh>
+# include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/xml/ios.hh>
 # include <vaucanson/xml/strings.hh>
 # include <vaucanson/xml/error_handler.hh>

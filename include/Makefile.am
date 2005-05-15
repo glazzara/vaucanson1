@@ -360,12 +360,9 @@ nobase_include_HEADERS =						   \
 XMLSOURCES =						\
 	vaucanson/xml/error_handler.hh			\
 	vaucanson/xml/error_handler.hxx			\
-	vaucanson/xml/errors.hh				\
 	vaucanson/xml/infos.hh				\
 	vaucanson/xml/ios.hh				\
 	vaucanson/xml/ios.hxx				\
-	vaucanson/xml/if_tag.hh				\
-	vaucanson/xml/if_tag.hxx			\
 	vaucanson/xml/strings.hh			\
 	vaucanson/xml/strings.hxx			\
 	vaucanson/xml/XML.hh				\

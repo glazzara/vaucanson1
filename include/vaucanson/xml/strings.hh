@@ -46,11 +46,6 @@ namespace vcsn
     std::string
     xml2str(const XMLCh*);
 
-    // FIXME: We need that horror for xmlstrings.inc to work properly!
-    using namespace xercesc;
-
-# include <vaucanson/xml/xmlstrings.inc>
-
   } // End of namespace xml.
 
 } // End of namespace vcsn.

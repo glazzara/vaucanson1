@@ -47,7 +47,6 @@
 # include <sstream>
 # include <xercesc/dom/DOM.hpp>
 
-# include <vaucanson/xml/tools.hh>
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/boolean_automaton.hh>
 # include <vaucanson/z_automaton.hh>
@@ -56,6 +55,8 @@
 # include <vaucanson/r_automaton.hh>
 # include <vaucanson/fmp_transducer.hh>
 # include <vaucanson/boolean_transducer.hh>
+# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/xml/tools.hh>
 
 
 namespace vcsn

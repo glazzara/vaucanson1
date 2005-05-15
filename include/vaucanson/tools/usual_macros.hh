@@ -190,6 +190,18 @@ typedef typename alphabet_t::letter_t		letter_t;
 #define RAND___(Max)						\
 ((unsigned) int(((float) rand() / (float) RAND_MAX) * Max));
 
+// Some useful macros for XML.
+#ifndef VCSN_NDEBUG
+# define XML_FAIL(S) \
+   std::cerr << "Implement for " << typeid(S).name() << std::endl; \
+   exit(1)
+#else
+# define XML_FAIL(S)
+#endif
+#define FAIL(S) { std::cerr << (S) << std::endl; exit(1); }
+#define STR2XML(S) xercesc::XMLString::transcode(S)
+
+//
 
 // These macros can be use instead of some method calls.
 // This is really tricky and dirty but so useful !

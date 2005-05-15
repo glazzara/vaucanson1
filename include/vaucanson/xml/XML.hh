@@ -44,18 +44,7 @@
  */
 
 
-// Some useful macros.
-# ifndef VCSN_NDEBUG
-#  define XML_FAIL(S) \
-    std::cerr << "Implement for " << typeid(S).name() << std::endl; \
-    exit(1)
-# else
-#  define XML_FAIL(S)
-# endif
-# define FAIL(S) { std::cerr << (S) << std::endl; exit(1); }
-# define STR2XML(S) xercesc::XMLString::transcode(S)
-
-
+# include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/xml/xml_converter.hh>
 
 

@@ -75,8 +75,8 @@ The default semiring is Boolean.
 -->
 <xs:complexType name="semiring">
   <xs:sequence>
-    <xs:element name="semiring" type="semiring" minOccurs="0"/>
     <xs:element name="monoid" type="monoid_automaton" minOccurs="0"/>
+    <xs:element name="semiring" type="semiring" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="set" default="B">
     <xs:simpleType>
