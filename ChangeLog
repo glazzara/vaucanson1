@@ -1,4 +1,90 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/xml/import_dynamic-simple.xml.ref,
+	* src/tests/xml/export_static-numerical.xml.ref,
+	* src/tests/xml/session.xml,
+	* src/tests/xml/import_static-simple.xml.ref,
+	* src/tests/xml/export_session-transcoder.xml.ref,
+	* src/tests/xml/export_session-float.xml.ref,
+	* src/tests/xml/export_dynamic-transcoder.xml.ref,
+	* src/tests/xml/transcoder.xml,
+	* src/tests/xml/import_session-numerical.xml.ref,
+	* src/tests/xml/test.src,
+	* src/tests/xml/import_static-numerical.xml.ref,
+	* src/tests/xml/export_session.cc,
+	* src/tests/xml/export_dynamic.cc,
+	* src/tests/xml/export_dynamic-tropical.xml.ref,
+	* src/tests/xml/numerical.xml,
+	* src/tests/xml/nodata-float.xml.ref,
+	* src/tests/xml/import_generic-float.xml.ref,
+	* src/tests/xml/export_session-simple.xml.ref,
+	* src/tests/xml/export_dynamic-simple.xml.ref,
+	* src/tests/xml/simple.xml,
+	* src/tests/xml/nodata-tropical.xml.ref,
+	* src/tests/xml/import_dynamic-float.xml.ref,
+	* src/tests/xml/import_generic-tropical.xml.ref,
+	* src/tests/xml/import_dynamic-tropical.xml.ref,
+	* src/tests/xml/export_static-transcoder.xml.ref,
+	* src/tests/xml/export_static-float.xml.ref,
+	* src/tests/xml/import_session-session.xml.ref,
+	* src/tests/xml/z_min_plus_ref.xml,
+	* src/tests/xml/import_static-session.xml.ref,
+	* src/tests/xml/export_dynamic-numerical.xml.ref,
+	* src/tests/xml/export_static.cc,
+	* src/tests/xml/export_session-session.xml.ref,
+	* src/tests/xml/export_static-simple.xml.ref,
+	* src/tests/xml/import_session-float.xml.ref,
+	* src/tests/xml/import_static-float.xml.ref,
+	* src/tests/xml/import_generic-session.xml.ref,
+	* src/tests/xml/nodata-session.xml.ref,
+	* src/tests/xml/float.xml,	
+	* src/tests/xml/import_dynamic-session.xml.ref,
+	* src/tests/xml/export_session-tropical.xml.ref,
+	* src/tests/xml/export_session-numerical.xml.ref,
+	* src/tests/xml/tropical.xml,
+	* src/tests/xml/export_dynamic-session.xml.ref,
+	* src/tests/xml/import_generic-transcoder.xml.ref,
+	* src/tests/xml/nodata-transcoder.xml.ref,
+	* src/tests/xml/export_static-session.xml.ref,
+	* src/tests/xml/import_session-transcoder.xml.ref,
+	* src/tests/xml/import_generic.cc,
+	* src/tests/xml/import_dynamic-transcoder.xml.ref,
+	* src/tests/xml/nodata.cc,
+	* src/tests/xml/import_static-transcoder.xml.ref,
+	* src/tests/xml/import_generic-numerical.xml.ref,
+	* src/tests/xml/nodata-numerical.xml.ref,
+	* src/tests/xml/import_session.cc,
+	* src/tests/xml/import_dynamic.cc,
+	* src/tests/xml/export_dynamic-float.xml.ref,
+	* src/tests/xml/import_session-tropical.xml.ref,
+	* src/tests/xml/import_static.cc,
+	* src/tests/xml/import_dynamic-numerical.xml.ref,
+	* src/tests/xml/import_static-tropical.xml.ref,
+	* src/tests/xml/import_generic-simple.xml.ref,
+	* src/tests/xml/nodata-simple.xml.ref,
+	* src/tests/xml/export_static-tropical.xml.ref,
+	* src/tests/xml/import_session-simple.xml.ref: Remove old XML test 
+	suite.
+
+	* src/tests/xml/tester.sh: New. Script used to test XML.
+	* src/tests/xml/b_ref.xml,
+	* src/tests/xml/fmp_ref.xml,
+	* src/tests/xml/trans_ref.xml,
+	* src/tests/xml/r_ref.xml,
+	* src/tests/xml/z_ref.xml,
+	* src/tests/xml/z_max_plus_ref.xml: New. XML reference files.
+	
+	* src/tests/xml/z_max_plus_ref.dot,
+	* src/tests/xml/b_ref.dot,
+	* src/tests/xml/fmp_ref.dot,
+	* src/tests/xml/trans_ref.dot	
+	* src/tests/xml/r_ref.dot,
+	* src/tests/xml/z_ref.dot,
+	* src/tests/xml/z_min_plus_ref.dot: New. DOT reference files.
+	
+	* src/tests/xml/Makefile.am: Update accordingly.
+	
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	This patch enable full functionnality of the new version of XML support
 	in Vaucanson. It works with any kind of automaton supported in 
 	Vaucanson, including transducers. Also, it enable full support of the 

@@ -3,115 +3,83 @@ AM_CPPFLAGS = -I$(top_builddir)/include -I$(top_srcdir)/include
 
 TESTS_ENVIRONMENT= SRCDIR=$(srcdir)
 
-CLEANFILES= vaucanson.dtd \
-	    export_dynamic.test \
-            export_session.test \
-            export_static.test \
-            import_dynamic.test \
-            import_session.test \
-            import_static.test \
-            import_generic.test \
-            nodata.test \
-	    test.sh
+b_tester_SOURCES = xml_automaton_tester.cc
+b_tester_CPPFLAGS = $(AM_CPPFLAGS)				\
+	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
+	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
+
+z_tester_SOURCES = xml_automaton_tester.cc
+z_tester_CPPFLAGS = $(AM_CPPFLAGS)			\
+	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"	\
+	-DCONTEXT_NAMESPACE="vcsn::z_automaton"
+
+r_tester_SOURCES = xml_automaton_tester.cc
+r_tester_CPPFLAGS = $(AM_CPPFLAGS)			\
+	-DCONTEXT_HEADER="<vaucanson/r_automaton.hh>"	\
+	-DCONTEXT_NAMESPACE="vcsn::r_automaton"
+
+z_max_plus_tester_SOURCES = xml_automaton_tester.cc
+z_max_plus_tester_CPPFLAGS = $(AM_CPPFLAGS)			\
+	-DCONTEXT_HEADER="<vaucanson/z_max_plus_automaton.hh>"	\
+	-DCONTEXT_NAMESPACE="vcsn::z_max_plus_automaton"
+
+z_min_plus_tester_SOURCES = xml_automaton_tester.cc
+z_min_plus_tester_CPPFLAGS = $(AM_CPPFLAGS)			\
+	-DCONTEXT_HEADER="<vaucanson/z_min_plus_automaton.hh>"	\
+	-DCONTEXT_NAMESPACE="vcsn::z_min_plus_automaton"
+
+fmp_tester_SOURCES = xml_fmp_tester.cc
+
+trans_tester_SOURCES = xml_trans_tester.cc
 
 if XML_CHECK
-check_SCRIPTS= \
-	export_dynamic.test \
-	export_session.test \
-	export_static.test \
-	import_dynamic.test \
-	import_session.test \
-	import_static.test \
-	import_generic.test \
-        nodata.test
-  TESTS=$(check_SCRIPTS)
+check_SCRIPTS = 				\
+	tester.sh
 
-$(check_SCRIPTS): vaucanson.dtd test.sh
+TESTS = $(check_SCRIPTS)
 
-test.sh: $(srcdir)/test.src
-	cp $(srcdir)/test.src test.sh
-	chmod +x test.sh
+check_PROGRAMS = 				\
+	b_tester				\
+	r_tester				\
+	z_tester				\
+	z_max_plus_tester			\
+	z_min_plus_tester			\
+	fmp_tester				\
+	trans_tester
 
-vaucanson.dtd:
-	ln -sf $(top_builddir)/xml/vaucanson.dtd .
+CLEANFILES = vaucanson.xsd
+
+$(check_SCRIPTS): vaucanson.xsd
+
+vaucanson.xsd:
+	ln -sf $(top_builddir)/doc/xml/vaucanson.xsd .
+
 endif
 
-EXTRA_DIST=test.src \
-	export_dynamic-float.xml.ref \
-	export_dynamic-numerical.xml.ref \
-	export_dynamic-session.xml.ref \
-	export_dynamic-simple.xml.ref \
-	export_dynamic-transcoder.xml.ref \
-	export_dynamic-tropical.xml.ref \
-	export_session-float.xml.ref \
-	export_session-numerical.xml.ref \
-	export_session-session.xml.ref \
-	export_session-simple.xml.ref \
-	export_session-transcoder.xml.ref \
-	export_session-tropical.xml.ref \
-	export_static-float.xml.ref \
-	export_static-numerical.xml.ref \
-	export_static-session.xml.ref \
-	export_static-simple.xml.ref \
-	export_static-transcoder.xml.ref \
-	export_static-tropical.xml.ref \
-	import_dynamic-float.xml.ref \
-	import_dynamic-numerical.xml.ref \
-	import_dynamic-session.xml.ref \
-	import_dynamic-simple.xml.ref \
-	import_dynamic-transcoder.xml.ref \
-	import_dynamic-tropical.xml.ref \
-	import_generic-float.xml.ref \
-	import_generic-numerical.xml.ref \
-	import_generic-session.xml.ref \
-	import_generic-simple.xml.ref \
-	import_generic-transcoder.xml.ref \
-	import_generic-tropical.xml.ref \
-	import_session-float.xml.ref \
-	import_session-numerical.xml.ref \
-	import_session-session.xml.ref \
-	import_session-simple.xml.ref \
-	import_session-transcoder.xml.ref \
-	import_session-tropical.xml.ref \
-	import_static-float.xml.ref \
-	import_static-numerical.xml.ref \
-	import_static-session.xml.ref \
-	import_static-simple.xml.ref \
-	import_static-transcoder.xml.ref \
-	import_static-tropical.xml.ref \
-	nodata-float.xml.ref \
-	nodata-numerical.xml.ref \
-	nodata-session.xml.ref \
-	nodata-simple.xml.ref \
-	nodata-transcoder.xml.ref \
-	nodata-tropical.xml.ref \
-	float.xml \
-	numerical.xml \
-	session.xml \
-	simple.xml \
-	transcoder.xml \
-	tropical.xml
 
-.cc.test:
-	ln -sf test.sh $@
-
-if XML_CHECK
-  check_PROGRAMS= \
-	export_dynamic \
-	export_session \
-	export_static \
-	import_dynamic \
-	import_session \
-	import_static \
-	import_generic \
-	nodata
-endif
-
-export_dynamic_SOURCES=export_dynamic.cc
-export_session_SOURCES=export_session.cc
-export_static_SOURCES=export_static.cc
-import_dynamic_SOURCES=import_dynamic.cc
-import_session_SOURCES=import_session.cc
-import_static_SOURCES=import_static.cc
-import_generic_SOURCES=import_generic.cc
-nodata_SOURCES=nodata.cc
+EXTRA_DIST =					\
+	xml_automaton_tester.cc			\
+	xml_fmp_tester.cc			\
+	xml_trans_tester.cc			\
+	tester.sh				\
+	b_ref.xml				\
+	z_ref.xml				\
+	r_ref.xml				\
+	z_max_plus_ref.xml			\
+	z_min_plus_ref.xml			\
+	fmp_ref.xml				\
+	trans_ref.xml				\
+        b_ref.dot				\
+        fmp_ref.dot				\
+        r_ref.dot				\
+        trans_ref.dot				\
+        z_max_plus_ref.dot			\
+        z_min_plus_ref.dot			\
+        z_ref.dot				\
+        b_ref.xml				\
+        fmp_ref.xml				\
+        r_ref.xml				\
+        trans_ref.xml				\
+        z_max_plus_ref.xml			\
+        z_min_plus_ref.xml			\
+        z_ref.xml

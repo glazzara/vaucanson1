@@ -1,0 +1,30 @@
+
+<automaton xmlns="http://vaucanson.lrde.epita.fr">
+
+  <type>
+    <monoid generators="letters" type="free">
+      <generator value="a"/>
+      <generator value="b"/>
+    </monoid>
+    <semiring operations="tropicalMax" set="Z"/>
+  </type>
+
+  <content>
+    <states>
+      <state name="s0"/>
+      <state name="s1"/>
+      <state name="s2"/>
+    </states>
+    <transitions>
+      <transition dst="s1" label="a" src="s0"/>
+      <transition dst="s2" label="b" src="s1"/>
+    </transitions>
+    <initials>
+      <initial label="1" state="s0"/>
+    </initials>
+    <finals>
+      <final label="1" state="s1"/>
+    </finals>
+  </content>
+
+</automaton>
