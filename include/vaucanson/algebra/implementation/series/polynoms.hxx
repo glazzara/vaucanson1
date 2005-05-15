@@ -689,10 +689,10 @@ namespace vcsn {
 
     typename utility::static_if
       <utility::static_eq<Tm, oTm>::value, const Tm&, Tm>::t
-      new_m = op_convert(monoid, new_m, m);
+      new_m = op_convert(monoid, SELECT(Tm), m);
     typename utility::static_if
       <utility::static_eq<Tw, oTw>::value, const Tw&, Tw>::t
-      new_w = op_convert(semiring, new_w, w);
+      new_w = op_convert(semiring, SELECT(Tw), w);
 
     typename algebra::polynom<Tm, Tw>::iterator i = p.find(new_m);
     if (new_w == zero_value(semiring, new_w))

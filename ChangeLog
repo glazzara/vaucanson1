@@ -1,3 +1,8 @@
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Remove
+	compilation warning.
+
 2005-05-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/product.hxx: Fix missing namespace 
