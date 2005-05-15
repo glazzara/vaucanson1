@@ -357,14 +357,26 @@ nobase_include_HEADERS =						   \
 	vaucanson/standard_algorithms.hh				   \
 	$(XMLSOURCES)
 
-XMLSOURCES = \
-	vaucanson/xml/error_handler.hh		\
-	vaucanson/xml/error_handler.hxx		\
-	vaucanson/xml/errors.hh			\
-	vaucanson/xml/infos.hh			\
-	vaucanson/xml/ios.hh			\
-	vaucanson/xml/ios.hxx			\
-	vaucanson/xml/if_tag.hh			\
-	vaucanson/xml/if_tag.hxx		\
-	vaucanson/xml/strings.hh		\
-	vaucanson/xml/strings.hxx		
+XMLSOURCES =						\
+	vaucanson/xml/error_handler.hh			\
+	vaucanson/xml/error_handler.hxx			\
+	vaucanson/xml/errors.hh				\
+	vaucanson/xml/infos.hh				\
+	vaucanson/xml/ios.hh				\
+	vaucanson/xml/ios.hxx				\
+	vaucanson/xml/if_tag.hh				\
+	vaucanson/xml/if_tag.hxx			\
+	vaucanson/xml/strings.hh			\
+	vaucanson/xml/strings.hxx			\
+	vaucanson/xml/XML.hh				\
+	vaucanson/xml/XML.hxx				\
+	vaucanson/xml/node.hh				\
+	vaucanson/xml/node.hxx				\
+	vaucanson/xml/tools.hh				\
+	vaucanson/xml/tools.hxx				\
+	vaucanson/xml/xerces_parser.hh			\
+	vaucanson/xml/xerces_parser.hxx			\
+	vaucanson/xml/xml_chooser.hh			\
+	vaucanson/xml/xml_chooser.hxx			\
+	vaucanson/xml/xml_converter.hh			\
+	vaucanson/xml/xml_converter.hxx

@@ -1,4 +1,49 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	This patch enable full functionnality of the new version of XML support
+	in Vaucanson. It works with any kind of automaton supported in 
+	Vaucanson, including transducers. Also, it enable full support of the 
+	new XSD Schema definition. 
+	Macros XML_BEGIN and XML_END are suppressed. to use XML,
+
+	#include <vaucanson/xml/XML.hh> 
+
+	and use one of the following:
+	out << automaton_saver(automaton, io::string_out(), xml::XML());
+	- or -
+	in >> automaton_loader(automaton, io::string_out(), xml::XML());
+
+	Some facilities function like dot_dump will be commited soon.
+	
+	* include/vaucanson/xml/XML.hh,
+	* include/vaucanson/xml/XML.hxx: New. Provides xml::XML() class, to be
+	used in automaton_{loader, saver}. It is the only file needed to be 
+	included in order to work with XML capabilities.
+
+	* include/vaucanson/xml/xerces_parser.hh,
+	* include/vaucanson/xml/xerces_parser.hxx: New. Xerces-C++ parser.
+
+	* include/vaucanson/xml/xml_converter.hh
+	* include/vaucanson/xml/xml_converter.hxx: New. Base class to convert
+	any automaton to XML and vice et versa.
+
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/node.hxx: New. Node hierarchy used with the 
+	factory, to create automaton from XML.
+
+	* include/vaucanson/xml/xml_chooser.hh,
+	* include/vaucanson/xml/xml_chooser.hxx: New. Class providing 
+	facilities to get / create labels, etc. w.r.t automaton type. Some
+	specializations to custom XML output are here.
+	
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/tools.hxx: New. Useful tools to build string
+	from automaton type, to check conformance of automaton type with XML
+	document, etc. Most of the specialization w.r.t supported automaton 
+	types are here.
+	
+	* include/Makefile.am: Update accordingly.
+	
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	
 	* include/vaucanson/design_pattern/factory.hh: New. Add Factory Method
 	design pattern. This implementation is the one proposed by Alexandrescu
