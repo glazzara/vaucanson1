@@ -1,4 +1,35 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Fix demos with new XML system, and make XML reference files compliant 
+	with XSD. The two demos are temporarely removed, and will be updated
+	soon in a patch dedicated to XML sessions.
+	
+	* src/demos/xml/samples/div3base2.xml,
+	* src/demos/xml/samples/c1.xml,
+	* src/demos/xml/samples/occ_b.xml,
+	* src/demos/xml/samples/lomb1.xml,
+	* src/demos/xml/samples/lomb2.xml,
+	* src/demos/xml/samples/double_ring6.xml: Remove reference to DTD and
+	fix namespace.
+	
+	* src/demos/xml/samples/lomb2.cc,
+	* src/demos/xml/samples/c1.cc,
+	* src/demos/xml/samples/occ_b.cc,
+	* src/demos/xml/samples/double_ring.cc,
+	* src/demos/xml/samples/divkbaseb.cc,
+	* src/demos/xml/samples/lomb1.cc,
+	* src/demos/xml/static_boolean.cc,
+	* src/demos/xml/algorithms.cc: Update with new XML system.
+	
+	* src/demos/xml/make_session.cc,
+	* src/demos/xml/display_session.cc: Remove. These files will be updated
+	and re-added in a future patch about XML session handling.
+	
+	* src/demos/xml/Makefile.am
+	* src/demos/xml/samples/Makefile.am: Update accordingly.
+	
+	* src/tests/xml/tester.sh: Fix fail return code.
+	
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/xml_chooser.hh,
 	* include/vaucanson/xml/node.hh,

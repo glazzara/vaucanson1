@@ -1,7 +1,7 @@
 // static_boolean.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -46,7 +46,7 @@
 
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/tools/dot_display.hh>
-#include <vaucanson/xml/static.hh>
+#include <vaucanson/xml/XML.hh>
 
 int
 usage(int, char** argv)
@@ -60,7 +60,7 @@ main(int argc, char** argv)
 {
   using namespace vcsn::boolean_automaton;
   using vcsn::io::string_out;
-  using vcsn::xml::xml_loader;
+  using vcsn::xml::XML;
 
   if (argc != 3)
     return usage(argc, argv);
@@ -73,13 +73,12 @@ main(int argc, char** argv)
 
   automaton_t a = new_automaton(alpha);
 
-  XML_BEGIN;
   if (std::string (argv[1]) == "load")
     {
       std::ifstream in (argv[2]);
       if (not in.fail())
 	{
-	  in >> automaton_loader(a, string_out (), xml_loader ());
+	  in >> automaton_loader(a, string_out (), XML ());
 	  vcsn::tools::dot_display(a, argv[2]);
 	}
       else
@@ -103,13 +102,12 @@ main(int argc, char** argv)
 
       std::ofstream out (argv[2]);
       if (not out.fail())
-	out << automaton_saver(a, string_out (), xml_loader ());
+	out << automaton_saver(a, string_out (), XML ());
       else
 	rval = 2;
     }
   else
     rval = usage(argc, argv);
-  XML_END;
 
   return rval;
 }

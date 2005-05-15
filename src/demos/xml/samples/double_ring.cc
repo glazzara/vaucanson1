@@ -1,7 +1,7 @@
 // double_ring.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,14 +33,14 @@
 #include <sstream>
 
 #include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/xml/static.hh>
+#include <vaucanson/xml/XML.hh>
 
 int
 main(int argc, char** argv)
 {
   using namespace vcsn::boolean_automaton;
   using vcsn::io::string_out;
-  using vcsn::xml::xml_loader;
+  using vcsn::xml::XML;
 
   if (argc < 2)
     {
@@ -83,7 +83,5 @@ main(int argc, char** argv)
 	a.set_final(s);
     }
 
-  XML_BEGIN;
-  std::cout << automaton_saver(a, string_out (), xml_loader ());
-  XML_END;
+  std::cout << automaton_saver(a, string_out (), XML ());
 }

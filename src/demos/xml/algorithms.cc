@@ -58,7 +58,7 @@
 #include <list>
 
 #include CONTEXT_HEADER
-#include <vaucanson/xml/static.hh>
+#include <vaucanson/xml/XML.hh>
 
 #include <vaucanson/algorithms/derivatives_automaton.hh>
 #include <vaucanson/algorithms/product.hh>
@@ -74,7 +74,7 @@ using namespace CONTEXT_NAMESPACE;
 
 using namespace vcsn;
 using namespace vcsn::io;
-using namespace vcsn::xml;
+using vcsn::xml::XML;
 
 static
 void
@@ -113,7 +113,7 @@ get_aut(std::string s)
       using namespace vcsn::xml;
 
       automaton_t a = new_automaton(alphabet());
-      *is >> automaton_loader(a, string_out (), xml_loader ());
+      *is >> automaton_loader(a, string_out (), XML ());
 
       if (s != "-")
 	delete is;
@@ -136,7 +136,7 @@ derivatives_automaton_command(int argc, char** argv)
   rat_exp_t	e = get_exp(argv[2]);
   automaton_t	a = new_automaton(alphabet());
   derivatives_automaton(a, e);
-  std::cout << automaton_saver(a, string_out (), xml_loader ());
+  std::cout << automaton_saver(a, string_out (), XML ());
 }
 
 static
@@ -185,7 +185,7 @@ product_command(int argc, char** argv)
 
   std::cout << automaton_saver(product(get_aut(argv[2]), get_aut(argv[3])),
 			       string_out (),
-			       xml_loader ());
+			       XML ());
 }
 
 void
@@ -218,7 +218,7 @@ ONE_ARG_COMMAND(GetArg, Algo)(int argc, char** argv)	\
     usage(argc, argv);					\
   std::cout << automaton_saver(Algo(GetArg(argv[2])),	\
 			       string_out (),		\
-			       xml_loader ());		\
+			       XML ());			\
 }
 
 DEFINE_ONE_ARG_COMMAND(get_exp, standard_of)
@@ -261,8 +261,6 @@ main(int argc, char** argv)
   if (argc < 2)
     usage(argc, argv);
 
-  XML_BEGIN;
-
   std::string cmd (argv[1]);
   int i;
 
@@ -274,6 +272,4 @@ main(int argc, char** argv)
       }
   if (command_map[i].name == 0)
     usage(argc, argv);
-
-  XML_END;
 }

@@ -10,8 +10,6 @@ if XML_CHECK
 
   noinst_PROGRAMS =				\
 	static_boolean				\
-	make_session				\
-	display_session				\
 	b					\
 	z					\
 	r					\
@@ -19,12 +17,10 @@ if XML_CHECK
 	z_min_plus
 endif
 
-vaucanson.dtd:
-	ln -sf $(top_builddir)/xml/vaucanson.dtd
+vaucanson.xsd:
+	ln -sf $(top_builddir)/doc/xml/vaucanson.xsd
 
 static_boolean_SOURCES = static_boolean.cc
-make_session_SOURCES = make_session.cc
-display_session_SOURCES = display_session.cc
 
 b_SOURCES = algorithms.cc
 b_CPPFLAGS = $(AM_CPPFLAGS)					\

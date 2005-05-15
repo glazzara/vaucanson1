@@ -1,7 +1,7 @@
 // divkbaseb.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,7 +33,7 @@
 #include <sstream>
 
 #include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/xml/static.hh>
+#include <vaucanson/xml/XML.hh>
 
 int
 main(int argc, char** argv)
@@ -78,9 +78,7 @@ main(int argc, char** argv)
       d = (d + 1) % divisor;
     }
 
-  XML_BEGIN;
   using vcsn::io::string_out;
-  using vcsn::xml::xml_loader;
-  std::cout << automaton_saver(a, string_out (), xml_loader ());
-  XML_END;
+  using vcsn::xml::XML;
+  std::cout << automaton_saver(a, string_out (), XML ());
 }

@@ -1,7 +1,7 @@
 // lomb2.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -33,14 +33,14 @@
 #include <ostream>
 
 #include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/xml/static.hh>
+#include <vaucanson/xml/XML.hh>
 
 int
 main()
 {
   using namespace vcsn::boolean_automaton;
   using vcsn::io::string_out;
-  using vcsn::xml::xml_loader;
+  using vcsn::xml::XML;
 
   alphabet_t	alpha;
   alpha.insert('a');
@@ -64,7 +64,5 @@ main()
   a.add_letter_edge(2, 2, 'a');
   a.add_letter_edge(2, 2, 'b');
 
-  XML_BEGIN;
-  std::cout << automaton_saver(a, string_out (), xml_loader ());
-  XML_END;
+  std::cout << automaton_saver(a, string_out (), XML ());
 }

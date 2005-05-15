@@ -10,7 +10,7 @@ for i in b z r z_min_plus z_max_plus fmp trans; do
     diff_result=`diff ${i}_result.tmp ${i}_ref.xml`
     if [ -s "$diff_result" ]; then
 	echo "FAIL: $i output has difference with reference"
-	out=1
+	out=255
     fi
     ## Testing XML parse.
     parse=`$prog < ${i}_ref.xml`
@@ -18,7 +18,7 @@ for i in b z r z_min_plus z_max_plus fmp trans; do
     echo "$parse" > ${i}_ref.dot
     if [ -s "$parse" ]; then
 	echo "FAIL: $i output has difference with reference"
-	out=1
+	out=255
     fi
 done
 exit $out

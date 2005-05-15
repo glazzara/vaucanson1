@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO8859-1" standalone="no" ?>
-<!DOCTYPE automaton SYSTEM "vaucanson.dtd">
-<automaton xmlns="http://www.lrde.epita.fr/vaucanson">
+<automaton xmlns="http://vaucanson.lrde.epita.fr">
 
   <type>
     <monoid generators="letters" type="free">
