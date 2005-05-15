@@ -1,4 +1,43 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	WARNING: This patch temporarely breaks XML feature.
+
+	* include/vaucanson/xml/xml_ops.hh,
+	* include/vaucanson/xml/session.hh,
+	* include/vaucanson/xml/xml_set.hxx,
+	* include/vaucanson/xml/dynamic.hh,
+	* include/vaucanson/xml/xml_loader.hh,
+	* include/vaucanson/xml/xml_automaton.hh,
+	* include/vaucanson/xml/static.hh,
+	* include/vaucanson/xml/xml_ops.hxx,
+	* include/vaucanson/xml/session.hxx,
+	* include/vaucanson/xml/callback.hh,
+	* include/vaucanson/xml/xml_value.hh,
+	* include/vaucanson/xml/xml_loader.hxx,
+	* include/vaucanson/xml/xml_automaton.hxx,
+	* include/vaucanson/xml/callback.hxx,
+	* include/vaucanson/xml/types.hh,
+	* include/vaucanson/xml/xml_value.hxx,
+	* include/vaucanson/xml/defaults.hh,
+	* include/vaucanson/xml/xml_set.hh,
+	* include/vaucanson/xml/errors.hh,
+	* include/vaucanson/xml/generic.hh,
+	* include/vaucanson/xml/genutfstrings.sh,
+	* xml/style-to-tex.awk,
+	* xml/vaucanson-g.style,
+	* xml/automaton-to-dot.xsl,
+	* xml/automaton-to-neato.xsl,
+	* xml/automaton-to-vcsng.xsl.sh,
+	* xml/style-to-xsl-vcsng.awk,
+	* xml/style-to-geometryvalue.awk,
+	* xml/Makefile.am,
+	* xml/style-to-code.awk,
+	* xml/style-to-dtd.awk,
+	* xml/gendtd.sh: Remove previous XML implementation and related files.
+	
+	* include/Makefile.am,
+	* configure.ac: Update accordingly
+	
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Remove
 	compilation warning.

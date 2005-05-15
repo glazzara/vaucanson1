@@ -161,8 +161,7 @@ AC_CONFIG_FILES([
 	doc/makefiles/Makefile
 	doc/xml/Makefile
         doc/doc.doxy
-	include/Makefile
-	xml/Makefile])
+	include/Makefile])
 
 m4_include([tests.m4])
 

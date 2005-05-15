@@ -354,38 +354,16 @@ nobase_include_HEADERS =						   \
 	vaucanson/z_automaton.hh					   \
 	vaucanson/r_automaton.hh					   \
 	vaucanson/standard_algorithms.hh				   \
-	vaucanson/xml/xmlstrings.inc					   \
-	vaucanson/xml/geometry.inc					   \
-	vaucanson/xml/loadgeometry.inc					   \
 	$(XMLSOURCES)
 
 XMLSOURCES = \
-	vaucanson/xml/callback.hh		\
-	vaucanson/xml/callback.hxx		\
-	vaucanson/xml/defaults.hh		\
-	vaucanson/xml/dynamic.hh		\
 	vaucanson/xml/error_handler.hh		\
 	vaucanson/xml/error_handler.hxx		\
 	vaucanson/xml/errors.hh			\
-	vaucanson/xml/generic.hh		\
 	vaucanson/xml/infos.hh			\
 	vaucanson/xml/ios.hh			\
 	vaucanson/xml/ios.hxx			\
 	vaucanson/xml/if_tag.hh			\
 	vaucanson/xml/if_tag.hxx		\
-	vaucanson/xml/session.hh		\
-	vaucanson/xml/session.hxx		\
-	vaucanson/xml/static.hh			\
 	vaucanson/xml/strings.hh		\
-	vaucanson/xml/strings.hxx		\
-	vaucanson/xml/types.hh			\
-	vaucanson/xml/xml_automaton.hh		\
-	vaucanson/xml/xml_automaton.hxx		\
-	vaucanson/xml/xml_loader.hh		\
-	vaucanson/xml/xml_loader.hxx		\
-	vaucanson/xml/xml_ops.hh		\
-	vaucanson/xml/xml_ops.hxx		\
-	vaucanson/xml/xml_set.hh		\
-	vaucanson/xml/xml_set.hxx		\
-	vaucanson/xml/xml_value.hh		\
-	vaucanson/xml/xml_value.hxx
+	vaucanson/xml/strings.hxx		
