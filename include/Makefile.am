@@ -116,6 +116,7 @@ nobase_include_HEADERS =						   \
 	vaucanson/design_pattern/slots.hxx				   \
 	vaucanson/design_pattern/structure.hh				   \
 	vaucanson/design_pattern/structure.hxx				   \
+	vaucanson/design_pattern/factory.hh				   \
 	vaucanson/algebra/concept/alphabets_base.hh			   \
 	vaucanson/algebra/concept/alphabets_base.hxx			   \
 	vaucanson/algebra/concept/freemonoid_base.hh			   \

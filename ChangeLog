@@ -1,5 +1,12 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	
+	* include/vaucanson/design_pattern/factory.hh: New. Add Factory Method
+	design pattern. This implementation is the one proposed by Alexandrescu
+	in "Modern C++ Design".
+	* include/Makefile.am: Update accordingly.
+
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	
 	* doc/xml/vaucanson.xsd: New. XSD Schema for Vaucanson-XML 
 	specification.
 	* doc/xml/Makefile.am: Update accordingly.
