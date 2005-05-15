@@ -1,4 +1,12 @@
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	
+	* doc/xml/vaucanson.xsd: New. XSD Schema for Vaucanson-XML 
+	specification.
+	* doc/xml/Makefile.am: Update accordingly.
+
+	* Makefile.am: Remove dead directory reference.
+	
+2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	WARNING: This patch temporarely breaks XML feature.
 
 	* include/vaucanson/xml/xml_ops.hh,
