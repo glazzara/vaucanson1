@@ -1,3 +1,15 @@
+2005-05-15  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/transducer_to_fmp.hxx,
+	* include/vaucanson/algorithms/transducer_to_fmp.hh,
+	* include/vaucanson/algorithms/fmp_to_transducer.hxx,
+	* include/vaucanson/algorithms/fmp_to_transducer.hh:
+	New. Add new functions to transform an automaton over a free monoid
+	product to an equivalent transducer (and vice-versa). 
+	Note that those functions work only if the support of each edge is finite.
+
+	* include/Makefile.am: Update accordingly.
+
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/xml/xml_trans_tester.cc,

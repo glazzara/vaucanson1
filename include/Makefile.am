@@ -320,6 +320,10 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/krat_exp_flatten.hh			   \
 	vaucanson/algorithms/realtime_decl.hxx				   \
 	vaucanson/algorithms/realtime_decl.hh				   \
+	vaucanson/algorithms/fmp_to_transducer.hxx			   \
+	vaucanson/algorithms/fmp_to_transducer.hh			   \
+	vaucanson/algorithms/transducer_to_fmp.hxx			   \
+	vaucanson/algorithms/transducer_to_fmp.hh			   \
 	vaucanson/vaucanson.hh						   \
 	vaucanson/boolean_automaton.hh					   \
 	vaucanson/boolean_transducer.hh					   \
