@@ -80,6 +80,12 @@ nobase_include_HEADERS =						   \
 	vaucanson/tools/fsm_dump.hxx					   \
 	vaucanson/tools/usual_escaped_characters.hxx			   \
 	vaucanson/tools/usual_escaped_characters.hh			   \
+	vaucanson/tools/xml_dump.hh					   \
+	vaucanson/tools/xml_dump.hxx					   \
+	vaucanson/tools/xml_display.hh					   \
+	vaucanson/tools/xml_display.hxx					   \
+	vaucanson/tools/out_display.hh					   \
+	vaucanson/tools/out_display.hxx					   \
 	vaucanson/design_pattern/default_ops.hh				   \
 	vaucanson/design_pattern/default_ops.hxx			   \
 	vaucanson/design_pattern/element.hh				   \

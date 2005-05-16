@@ -1,7 +1,7 @@
-// dot_display.hxx: this file is part of the Vaucanson project.
+// xml_dump.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -29,44 +29,29 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_TOOLS_DOT_DISPLAY_HXX
-# define VCSN_TOOLS_DOT_DISPLAY_HXX
+#ifndef VCSN_TOOLS_XML_DUMP_HXX
+# define VCSN_TOOLS_XML_DUMP_HXX
 
 /**
- * @file dot_display.hxx
+ * @file xml_dump.hxx
  *
- * Calls out_display with dot_dump as the function to launch by out_display.
+ * Calls a method to display an automaton 'a' in XML format on the stream 'o'.
  *
- * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+ * @author Florent Terrones <florent.terrones@lrde.epita.fr>
  */
-
-# include <vaucanson/tools/dot_display.hh>
-
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/dot_dump.hh>
-
-# include <ostream>
-# include <string>
-# include <vaucanson/tools/out_display.hh>
 
 namespace vcsn {
 
   namespace tools {
 
-    template <class S, class T>
-    bool
-    dot_display(const Element<S, T>& a,
-		const std::string& name,
-		const bool bg,
-		char *const argv[])
+    template <typename Auto>
+    void xml_dump(std::ostream& o, const Auto& a, const std::string& name)
     {
-      return out_display(a.structure(), a.value(),
-			 a, name, bg, argv,
-			 dot_dump<Element<S, T> >);
+      o << automaton_saver(a, io::string_out(), xml::XML());
     }
 
-  } // End of namespace tools.
+  } // tools
 
-} // End of namespace vcsn.
+} // vcsn
 
-#endif // ! VCSN_TOOLS_DOT_DISPLAY_HXX
+#endif // ! VCSN_TOOLS_XML_DUMP_HXX

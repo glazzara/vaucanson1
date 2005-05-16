@@ -1,7 +1,7 @@
 // dot_display.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -32,6 +32,14 @@
 #ifndef VCSN_TOOLS_DOT_DISPLAY_HH
 # define VCSN_TOOLS_DOT_DISPLAY_HH
 
+/**
+ * @file dot_display.hxx
+ *
+ * Calls out_display with dot_dump as the function to launch by out_display.
+ *
+ * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+ */
+
 # include <vaucanson/design_pattern/element.hh>
 
 # include <string>
@@ -52,6 +60,8 @@ namespace vcsn
   }
 }
 
+# ifndef VCSN_USE_INTERFACE_ONLY
 # include <vaucanson/tools/dot_display.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_TOOLS_DOT_DISPLAY_HH

@@ -1,7 +1,7 @@
-// dot_display.hxx: this file is part of the Vaucanson project.
+// out_display.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -29,25 +29,16 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-#ifndef VCSN_TOOLS_DOT_DISPLAY_HXX
-# define VCSN_TOOLS_DOT_DISPLAY_HXX
+#ifndef VCSN_TOOLS_OUT_DISPLAY_HXX
+# define VCSN_TOOLS_OUT_DISPLAY_HXX
 
 /**
- * @file dot_display.hxx
+ * @file out_display.hxx
  *
- * Calls out_display with dot_dump as the function to launch by out_display.
+ * Out_display method, useful for xml_display and dot_display.
  *
- * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+ * @author Florent Terrones <florent.terrones@lrde.epita.fr>
  */
-
-# include <vaucanson/tools/dot_display.hh>
-
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/dot_dump.hh>
-
-# include <ostream>
-# include <string>
-# include <vaucanson/tools/out_display.hh>
 
 namespace vcsn {
 
@@ -55,18 +46,63 @@ namespace vcsn {
 
     template <class S, class T>
     bool
-    dot_display(const Element<S, T>& a,
+    out_display(const AutomataBase<S>&,
+		const T&,
+		const Element<S, T>& a,
 		const std::string& name,
 		const bool bg,
-		char *const argv[])
+		char *const argv[],
+		void (*function)(std::ostream& o,
+				 const Element<S, T>& a,
+				 const std::string& name))
+
     {
-      return out_display(a.structure(), a.value(),
-			 a, name, bg, argv,
-			 dot_dump<Element<S, T> >);
+      int filedes[2];
+      if (pipe(filedes))
+	return false;
+
+      pid_t child_pid = fork();
+      if (child_pid)
+	{
+	  close(filedes[0]);
+	  if (child_pid == -1)
+	    {
+	      close(filedes[1]);
+	      return false;
+	    }
+	  else
+	    {
+	      // FIXME: That trick is dirty!
+	      {
+		std::cout.flush();
+		int old = dup(STDOUT_FILENO);
+		if (old != -1)
+		  dup2(filedes[1], STDOUT_FILENO);
+		close(filedes[1]);
+
+		function(std::cout, a, name);
+
+		if (old != -1)
+		  {
+		    dup2(old, STDOUT_FILENO);
+		    close(old);
+		  }
+	      }
+	      return bg or waitpid(child_pid, NULL, 0) == child_pid;
+	    }
+	}
+      else
+	{
+	  close(filedes[1]);
+	  dup2(filedes[0], STDIN_FILENO);
+	  close(filedes[0]);
+	  execvp(argv[0], argv);
+	  return false;
+	}
     }
 
   } // End of namespace tools.
 
 } // End of namespace vcsn.
 
-#endif // ! VCSN_TOOLS_DOT_DISPLAY_HXX
+#endif // ! VCSN_TOOLS_OUT_DISPLAY_HXX

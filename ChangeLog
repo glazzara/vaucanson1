@@ -1,9 +1,26 @@
 2005-05-16  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
+	* include/vaucanson/tools/out_display.hh,
+	* include/vaucanson/tools/out_display.hxx: Add function out_display
+	-a former dot_display function which name is now inappropriate-
+	that calls in a pipe the function given as an argument.
+	* include/vaucanson/tools/xml_display.hh,
+	* include/vaucanson/tools/xml_display.hxx: Add xml_display function
+	that calls out_display with xml_dump as an argument.
+	* include/vaucanson/tools/xml_dump.hh,
+	* include/vaucanson/tools/xml_dump.hxx: Add xml_dump function
+	that shows an automaton in XML format.
+	* include/vaucanson/tools/dot_display.hh: Minor fixes.
+	* include/vaucanson/tools/dot_display.hxx: Change dot_display that
+	now calls out_display with dot_dump as an argument.
+	* include/Makefile.am: Update accordingly.
+
+2005-05-16  Florent Terrones  <florent.terrones@lrde.epita.fr>
+
 	This patch changes the dotty output by putting the empty word instead
 	of nothing in the case of empty word for both Transducers and FMP
-	transducers. 
-	
+	transducers.
+
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Change
 	op_rout method to add the empty word in the stream instead of nothing.
 	* include/vaucanson/tools/dot_format.hxx: Apply conv (= string_out)
