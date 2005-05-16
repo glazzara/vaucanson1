@@ -59,8 +59,9 @@ namespace vcsn
       {
 	std::string label = get_label(series);
 
-	elt->setAttribute(STR2XML("label"),
-			  STR2XML(label.c_str()));
+	if (label.size())
+	  elt->setAttribute(STR2XML("label"),
+			    STR2XML(label.c_str()));
       }
 
       template <class S, class T, class U, class M1, class M2>
