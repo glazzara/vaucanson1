@@ -1,3 +1,9 @@
+2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/xml/infos.hh: Remove useless file. This file 
+	will be re-added if necessary.
+	* include/Makefile.am: Update accordingly.
+
 2005-05-16  Florent Terrones  <florent.terrones@lrde.epita.fr>
 	
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx:
