@@ -1,5 +1,22 @@
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/transducer_to_fmp.hh,
+	* include/vaucanson/algorithms/transducer_to_fmp.hxx: Rename to...
+	* include/vaucanson/algorithms/realtime_to_fmp.hh,
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx: ...These. 
+	Rename algorithm trans_to_fmp to realtime_to_fmp.
+
+	* include/vaucanson/algorithms/fmp_to_transducer.hh,
+	* include/vaucanson/algorithms/fmp_to_transducer.hxx: Rename to...
+	* include/vaucanson/algorithms/fmp_to_realtime.hh,
+	* include/vaucanson/algorithms/fmp_to_realtime.hxx: ...These. 
+	Rename algorithm fmp_to_trans to fmp_to_realtime. 
+
+	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
+	* include/Makefile.am: Update accordingly.
+	
+2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/cut_up.hxx: Fix error in algorithm.
 	
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>

@@ -1,4 +1,4 @@
-// fmp_to_transducer.hh: this file is part of the Vaucanson project.
+// fmp_to_realtime.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -31,14 +31,14 @@
 //    * Robert Bigaignon <robert.bigaignon@lrde.epita.fr>
 //
 
-#ifndef VCSN_ALGORITHMS_FMP_TO_TRANSDUCER_HH
-# define VCSN_ALGORITHMS_FMP_TO_TRANSDUCER_HH
+#ifndef VCSN_ALGORITHMS_FMP_TO_REALTIME_HH
+# define VCSN_ALGORITHMS_FMP_TO_REALTIME_HH
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file   fmp_to_transducer.hh
+ * @file   fmp_to_realtime.hh
  *
  * This file provides a transformation function that computes
  * the equivalent transducer of a FMP automaton.
@@ -46,7 +46,7 @@
  * @author Robert Bigaignon <robert.bigaignon@lrde.epita.fr>
  * @date   Mon Mar 16 16:15:15 2005
  *
- * @see fmp_to_trans()
+ * @see fmp_to_realtime()
  */
 /** @} */
 
@@ -54,7 +54,7 @@ namespace vcsn
 {
   /** @addtogroup algorithms *//** @{ */
 
-  /// @name Transducer to FMP automaton algorithm.
+  /// @name FMP automaton to realtime transducer algorithm.
   //@{
   /// Compute the equivalent transducer of a FMP automaton.
   /// Please note that for the moment this function works
@@ -70,13 +70,13 @@ namespace vcsn
   template<typename S, typename T,
 	   typename SS, typename TT>
   Element<SS, TT>&
-  fmp_to_trans(const Element<S, T>& fmp,
-	       Element<SS, TT>& res);
+  fmp_to_realtime(const Element<S, T>& fmp,
+		  Element<SS, TT>& res);
   //@}
 
   /** @} */
 }
 
-# include <vaucanson/algorithms/fmp_to_transducer.hxx>
+# include <vaucanson/algorithms/fmp_to_realtime.hxx>
 
-#endif // !VCSN_ALGORITHMS_FMP_TO_TRANSDUCER_HH
+#endif // !VCSN_ALGORITHMS_FMP_TO_REALTIME_HH

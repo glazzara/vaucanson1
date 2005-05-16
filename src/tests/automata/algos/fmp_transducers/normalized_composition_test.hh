@@ -34,7 +34,7 @@
 # define VCSN_TESTS_FMP_TRANSDUCERS_NORMALIZED_COMPOSITION_TEST_HH
 
 # include <vaucanson/algorithms/normalized_composition.hh>
-# include <vaucanson/algorithms/fmp_to_transducer.hh>
+# include <vaucanson/algorithms/fmp_to_realtime.hh>
 # include <vaucanson/algorithms/evaluation.hh>
 # include <vaucanson/boolean_transducer.hh>
 # include <vaucanson/boolean_automaton.hh>
@@ -160,9 +160,9 @@ normalized_composition_test(tests::Tester& t)
   boolean_transducer::automaton_t trans3 =
     boolean_transducer::new_automaton(first_at, third_at);
 
-  fmp_to_trans(t1, trans1);
-  fmp_to_trans(t2, trans2);
-  fmp_to_trans(t3, trans3);
+  fmp_to_realtime(t1, trans1);
+  fmp_to_realtime(t2, trans2);
+  fmp_to_realtime(t3, trans3);
 
   boolean_automaton::rat_exp_t exp =
     boolean_automaton::new_rat_exp(first_at, "abbababa");

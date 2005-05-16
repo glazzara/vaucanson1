@@ -1,4 +1,4 @@
-// fmp_to_transducer.hxx: this file is part of the Vaucanson project.
+// fmp_to_realtime.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -31,8 +31,8 @@
 //    * Robert Bigaignon <robert.bigaignon@lrde.epita.fr>
 //
 
-#ifndef VCSN_ALGORITHMS_FMP_TO_TRANSDUCER_HXX
-# define VCSN_ALGORITHMS_FMP_TO_TRANSDUCER_HXX
+#ifndef VCSN_ALGORITHMS_FMP_TO_REALTIME_HXX
+# define VCSN_ALGORITHMS_FMP_TO_REALTIME_HXX
 
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/transducer.hh>
@@ -47,11 +47,11 @@ namespace vcsn
 	   typename SS, typename TT,
 	   typename Self>
   void
-  do_fmp_to_trans(const vcsn::AutomataBase<S>&,
-		  const vcsn::TransducerBase<SS>&,
-		  const vcsn::algebra::FreeMonoidProductBase<Self>&,
-		  const vcsn::Element<S, T>& fmp,
-		  vcsn::Element<SS, TT>& res)
+  do_fmp_to_realtime(const vcsn::AutomataBase<S>&,
+		     const vcsn::TransducerBase<SS>&,
+		     const vcsn::algebra::FreeMonoidProductBase<Self>&,
+		     const vcsn::Element<S, T>& fmp,
+		     vcsn::Element<SS, TT>& res)
   {
     // Map source automaton's states with result's states
     std::map<vcsn::hstate_t, vcsn::hstate_t> m;
@@ -209,13 +209,13 @@ namespace vcsn
   template<typename S, typename T,
 	   typename SS, typename TT>
   vcsn::Element<SS, TT>&
-  fmp_to_trans(const vcsn::Element<S, T>& fmp,
-	       vcsn::Element<SS, TT>& res)
+  fmp_to_realtime(const vcsn::Element<S, T>& fmp,
+		  vcsn::Element<SS, TT>& res)
   {
-    do_fmp_to_trans(fmp.structure(), res.structure(),
-		    fmp.structure().series().monoid(),
-		    fmp, res);
+    do_fmp_to_realtime(fmp.structure(), res.structure(),
+		       fmp.structure().series().monoid(),
+		       fmp, res);
     return res;
   }
 }
-#endif // !VCSN_ALGORITHMS_FMP_TO_TRANSDUCER_HXX
+#endif // !VCSN_ALGORITHMS_FMP_TO_REALTIME_HXX
