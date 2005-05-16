@@ -1,7 +1,7 @@
 // freemonoid_base.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -266,7 +266,7 @@ namespace vcsn {
   {
     typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
-    uint j = 0;
+    unsigned int j = 0;
     for (const_iterator i = op_begin_const(s.self(), v);
 	 i != op_end_const(s.self(), v);
 	 ++i, ++j)

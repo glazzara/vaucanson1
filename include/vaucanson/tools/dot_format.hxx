@@ -1,7 +1,7 @@
 // dot_format.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -77,8 +77,8 @@ namespace vcsn
 		  << "\" [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
 		  << name_ << count << "\" -> " << name_ << c
-		  << "\" [label=\"" << conv(a.structure(), a.get_initial(*i)) << "\"];"
-		  << std::endl;
+		  << "\" [label=\"" << conv(a.structure(), a.get_initial(*i))
+		  << "\"];" << std::endl;
 	      ++count;
 	    }
 	  if (a.is_final(*i))
@@ -87,8 +87,8 @@ namespace vcsn
 		  << "\" [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
 		  << name_ << c << "\" -> "  << name_ << count
-		  << "\" [label=\""<< conv(a.structure(), a.get_final(*i)) <<"\"];"
-		  << std::endl;
+		  << "\" [label=\""<< conv(a.structure(), a.get_final(*i))
+		  <<"\"];" << std::endl;
 	      ++count;
 	    }
 	  out << name_ << c << "\" [label=\"" << *i << "\"];" << std::endl;
@@ -100,8 +100,8 @@ namespace vcsn
 	  out << name_ << state_map[a.origin_of(*i)]
 	      << "\" -> "
 	      << name_ << state_map[a.aim_of(*i)];
-	  out << "\" [label=\"" << conv(a.structure(), a.series_of(*i)) << "\"];"
-	      << std::endl;
+	  out << "\" [label=\"" << conv(a.structure(), a.series_of(*i))
+	      << "\"];" << std::endl;
 	}
       out << "}" << std::endl;
     }

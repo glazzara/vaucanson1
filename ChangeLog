@@ -1,4 +1,11 @@
 2005-05-16  Florent Terrones  <florent.terrones@lrde.epita.fr>
+	
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx:
+	Replaced uint with unsigned int in op_rout.
+	* include/vaucanson/tools/dot_format.hxx: Fixed 80-column
+	problems.
+
+2005-05-16  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
 	* include/vaucanson/tools/out_display.hh,
 	* include/vaucanson/tools/out_display.hxx: Add function out_display
