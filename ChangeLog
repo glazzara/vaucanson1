@@ -1,3 +1,11 @@
+2005-05-16  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/transducer_to_fmp.hxx,
+	* include/vaucanson/algorithms/transducer_to_fmp.hh,
+	* include/vaucanson/algorithms/fmp_to_transducer.hxx,
+	* include/vaucanson/algorithms/fmp_to_transducer.hh:
+	Minor fixes according to coding style.
+	
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/cut_up.hxx: Minor fix to reduce 

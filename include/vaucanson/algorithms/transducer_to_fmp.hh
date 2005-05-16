@@ -1,7 +1,7 @@
 // transducer_to_fmp.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Robert Bigaignon <robert.bigaignon@lrde.epita.fr>
 //
 
 #ifndef VCSN_ALGORITHMS_TRANSDUCER_TO_FMP_HH
@@ -35,14 +36,44 @@
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
-//Precondition :
-//The transducer is realtime.
-//The weight of each edge must have a finite support.
-template<typename S, typename T,
-	 typename SS, typename TT>
-vcsn::Element<SS, TT>&
-trans_to_fmp(const vcsn::Element<S, T>& trans,
-	     vcsn::Element<SS, TT>& res);
+/** @addtogroup algorithms *//** @{ */
+/**
+ * @file   transducer_to_fmp.hh
+ *
+ * This file provides a transformation function that computes
+ * the equivalent FMP automaton of a tranducer.
+ *
+ * @author Robert Bigaignon <robert.bigaignon@lrde.epita.fr>
+ * @date   Mon Mar 16 16:15:15 2005
+ *
+ * @see trans_to_fmp()
+ */
+/** @} */
+
+namespace vcsn
+{
+
+  /** @addtogroup algorithms *//** @{ */
+
+  /// @name Transducer to FMP automaton algorithm
+  //@{
+  /// Compute the equivalent FMP automaton of a transducer.
+  /// Please note that for the moment this function works
+  /// only if the support of each edge is finite.
+  ///
+  /// Preconditions :
+  /// The transducer is realtime.
+  /// The weight of each edge must have a finite support.
+  template<typename S, typename T,
+	   typename SS, typename TT>
+  Element<SS, TT>&
+  trans_to_fmp(const Element<S, T>& trans,
+	       Element<SS, TT>& res);
+
+  //@}
+
+  /** @} */
+}
 
 # include <vaucanson/algorithms/transducer_to_fmp.hxx>
 
