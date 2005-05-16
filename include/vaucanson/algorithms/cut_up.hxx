@@ -56,10 +56,10 @@ namespace vcsn {
     AUTOMATON_TYPES(automaton_t);
 
     for_each_edge(e, a)
-      {
-	if (a.series_of(*e).supp().size() > 1)
-	  return false;
-      }
+      if (! a.series_of(*e).is_finite_app() ||
+	  a.series_of(*e).supp().size() > 1)
+	return false;
+
     return true;
   }
 
@@ -97,7 +97,7 @@ namespace vcsn {
 	    for_each_initial_state(i, tmp)
 	      res.add_series_edge(res.origin_of(*e),
 				  statemap[*i],
-				  tmp.get_final(*i));
+				  tmp.get_initial(*i));
 
 	    for_each_edge(ed, tmp)
 	      res.add_edge(statemap[tmp.origin_of(*ed)],

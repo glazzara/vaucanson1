@@ -1,5 +1,9 @@
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/cut_up.hxx: Fix error in algorithm.
+	
+2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/xml/infos.hh: Remove useless file. This file 
 	will be re-added if necessary.
 	* include/Makefile.am: Update accordingly.
