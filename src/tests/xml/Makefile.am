@@ -50,7 +50,24 @@ check_PROGRAMS = 				\
 	trans_tester				\
 	session_tester				
 
-CLEANFILES = vaucanson.xsd
+CLEANFILES = 					\
+	vaucanson.xsd				\
+	b_result.tmp				\
+	fmp_result.tmp				\
+	trans_result.tmp			\
+	z_result.tmp				\
+	session_result.tmp			\
+	z_max_plus_result.tmp			\
+	r_result.tmp				\
+	z_min_plus_result.tmp			\
+	b_result.dot.tmp			\
+	fmp_result.dot.tmp			\
+	trans_result.dot.tmp			\
+	z_result.dot.tmp			\
+	session_result.dot.tmp			\
+	z_max_plus_result.dot.tmp		\
+	r_result.dot.tmp			\
+	z_min_plus_result.dot.tmp
 
 $(check_SCRIPTS): vaucanson.xsd
 

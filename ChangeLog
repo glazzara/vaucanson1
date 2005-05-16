@@ -1,4 +1,8 @@
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/xml/Makefile.am: Add test result files to CLEANFILES.
+
+2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	This patch re-activate XML session support. Usage is the same as 
 	before, but the class is named xml_session.
 	
