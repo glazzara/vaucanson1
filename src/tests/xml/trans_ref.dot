@@ -3,7 +3,7 @@ label="T { 3 states, 3 edges, #I = 0, #T = 1 }";
 node [shape=circle];
 "T0" [label="0"];
 "T2" [style=invis,label="",width=.01,height=.01];
-"T1" -> "T2"[label="|x "];
+"T1" -> "T2"[label="1|x "];
 "T1" [label="1"];
 "T3" [label="2"];
 "T0" -> "T1"[label="a|x "];

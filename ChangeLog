@@ -1,3 +1,20 @@
+2005-05-16  Florent Terrones  <florent.terrones@lrde.epita.fr>
+
+	This patch changes the dotty output by putting the empty word instead
+	of nothing in the case of empty word for both Transducers and FMP
+	transducers. 
+	
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Change
+	op_rout method to add the empty word in the stream instead of nothing.
+	* include/vaucanson/tools/dot_format.hxx: Apply conv (= string_out)
+	method for transducers to 'in' labels.
+	* include/vaucanson/tools/io.hh,
+	* include/vaucanson/tools/io.hxx: Change the struct string_out
+	by making different methods for AutomataBase and TransducerBase.
+	Add check_empty_word method that adds the empty word to the label
+	if its content is empty.
+	* src/tests/xml/trans_ref.dot: Update reference accordingly.
+
 2005-05-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	This patch adds a new algorithm to the library: normalized_composition.

@@ -266,11 +266,14 @@ namespace vcsn {
   {
     typedef typename op_begin_traits<Self, T>::const_ret_t const_iterator;
 
+    uint j = 0;
     for (const_iterator i = op_begin_const(s.self(), v);
 	 i != op_end_const(s.self(), v);
-	 ++i)
+	 ++i, ++j)
       st << utility::make_escaper(*i);
 
+    if (j == 0)
+      st << "1";
     return st;
   }
 

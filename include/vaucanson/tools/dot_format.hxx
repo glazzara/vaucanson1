@@ -77,7 +77,7 @@ namespace vcsn
 		  << "\" [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
 		  << name_ << count << "\" -> " << name_ << c
-		  << "\" [label=\"" << conv(a, a.get_initial(*i)) << "\"];"
+		  << "\" [label=\"" << conv(a.structure(), a.get_initial(*i)) << "\"];"
 		  << std::endl;
 	      ++count;
 	    }
@@ -87,7 +87,7 @@ namespace vcsn
 		  << "\" [style=invis,label=\"\",width=.01,height=.01];"
 		  << std::endl
 		  << name_ << c << "\" -> "  << name_ << count
-		  << "\" [label=\""<< conv(a, a.get_final(*i)) <<"\"];"
+		  << "\" [label=\""<< conv(a.structure(), a.get_final(*i)) <<"\"];"
 		  << std::endl;
 	      ++count;
 	    }
@@ -100,7 +100,7 @@ namespace vcsn
 	  out << name_ << state_map[a.origin_of(*i)]
 	      << "\" -> "
 	      << name_ << state_map[a.aim_of(*i)];
-	  out << "\" [label=\"" << conv(a, a.series_of(*i)) << "\"];"
+	  out << "\" [label=\"" << conv(a.structure(), a.series_of(*i)) << "\"];"
 	      << std::endl;
 	}
       out << "}" << std::endl;
@@ -117,7 +117,7 @@ namespace vcsn
 
     template<typename Saver, typename Conv>
     void transducer_dot::operator()(std::ostream& out, const Saver& s,
-				    const Conv&) const
+				    const Conv& conv) const
     {
       typedef typename Saver::automaton_t auto_t;
       AUTOMATON_TYPES(auto_t);
@@ -143,7 +143,7 @@ namespace vcsn
 	      std::ostringstream o;
 	      series_set_elt_t ss = a.get_initial(*i);
 	      for_each_const_(series_set_elt_t::support_t, s, ss.supp())
-		o << *s << "|"
+		o << conv(a.structure(), *s) << "|"
 		  << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
 		  << " ";
 	      out << "[label=\"" << o.str() << "\"];"
@@ -159,7 +159,7 @@ namespace vcsn
 	      std::ostringstream o;
 	      series_set_elt_t ss = a.get_final(*i);
 	      for_each_const_(series_set_elt_t::support_t, s, ss.supp())
-		o << *s << "|"
+		o << conv(a.structure(), *s) << "|"
 		  << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
 		  << " ";
 	      out << "[label=\"" << o.str() << "\"];"
@@ -178,7 +178,7 @@ namespace vcsn
 	  std::ostringstream o;
 	  series_set_elt_t ss = a.series_of(*i);
 	  for_each_const_(series_set_elt_t::support_t, s, ss.supp())
-	    o << *s << "|"
+	    o << conv(a.structure(), *s) << "|"
 	      << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
 	      << " ";
 	  out << "[label=\"" << o.str() << "\"];"

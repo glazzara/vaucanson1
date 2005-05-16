@@ -75,12 +75,27 @@ namespace vcsn
       return o;
     }
 
-    template<typename A, typename T>
-    std::string string_out::operator()(const A&, const T& t) const
+    std::string string_out::check_empty_word(const std::string& str) const
+    {
+      if (str.empty())
+	return std::string("1");
+      return str;
+    }
+
+    template<typename S, typename T>
+    std::string string_out::operator()(const AutomataBase<S>&, const T& t) const
     {
       std::ostringstream os;
       os << t;
       return os.str();
+    }
+
+    template<typename S, typename T>
+    std::string string_out::operator()(const TransducerBase<S>&, const T& t) const
+    {
+      std::ostringstream os;
+      os << t;
+      return check_empty_word(os.str());
     }
 
   } // io

@@ -33,6 +33,8 @@
 # define VCSN_TOOLS_IO_HH
 
 # include <vaucanson/automata/concept/handlers.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/transducer_base.hh>
 # include <iostream>
 # include <string>
 # include <map>
@@ -77,8 +79,14 @@ namespace vcsn
 
     struct string_out
     {
-      template<typename A, typename T>
-      std::string operator()(const A&, const T&) const;
+      std::string check_empty_word(const std::string&) const;
+
+      template<typename S, typename T>
+      std::string operator()(const AutomataBase<S>&, const T&) const;
+
+      template<typename S, typename T>
+      std::string operator()(const TransducerBase<S>&, const T&) const;
+
     };
 
   }
