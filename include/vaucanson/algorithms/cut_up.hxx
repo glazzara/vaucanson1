@@ -85,26 +85,31 @@ namespace vcsn {
 
     for_each_(edges_t, e, edges)
       {
-	gen_automaton_t tmp(res.structure());
-	standard_of(tmp, res.series_of(*e).value());
+	if (! res.series_of(*e).is_finite_app() ||
+	    res.series_of(*e).supp().size() > 1)
+	  {
+	    gen_automaton_t tmp(res.structure());
+	    standard_of(tmp, res.series_of(*e).value());
 
-	for_each_state(s, tmp)
-	  statemap[*s] = res.add_state();
+	    for_each_state(s, tmp)
+	      statemap[*s] = res.add_state();
 
-	for_each_initial_state(i, tmp)
-	  res.add_series_edge(res.origin_of(*e),
-			      statemap[*i],
-			      tmp.get_final(*i));
+	    for_each_initial_state(i, tmp)
+	      res.add_series_edge(res.origin_of(*e),
+				  statemap[*i],
+				  tmp.get_final(*i));
 
-	for_each_edge(ed, tmp)
-	  res.add_edge(statemap[tmp.origin_of(*ed)],
-		       statemap[tmp.aim_of(*ed)],
-		       tmp.label_of(*ed));
+	    for_each_edge(ed, tmp)
+	      res.add_edge(statemap[tmp.origin_of(*ed)],
+			   statemap[tmp.aim_of(*ed)],
+			   tmp.label_of(*ed));
 
-	for_each_final_state(f, tmp)
-	  res.add_series_edge(statemap[*f], res.aim_of(*e), tmp.get_final(*f));
+	    for_each_final_state(f, tmp)
+	      res.add_series_edge(statemap[*f], res.aim_of(*e),
+				  tmp.get_final(*f));
 
-	res.del_edge(*e);
+	    res.del_edge(*e);
+	  }
       }
   }
 

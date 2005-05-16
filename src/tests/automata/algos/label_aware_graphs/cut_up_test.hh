@@ -35,7 +35,6 @@
 # include <vaucanson/algorithms/cut_up.hh>
 # include <vaucanson/automata/implementation/generalized.hh>
 
-
 template <class Auto>
 bool cut_up_test(tests::Tester& tg)
 {
@@ -137,8 +136,8 @@ bool cut_up_test(tests::Tester& tg)
   gena1 = cut_up(gena);
 
   TEST(t, "Cut-up (Rational series labeled graph)   (1/1)",
-       is_cut_up(gena1) && gena1.states().size() == 12
-       && gena1.edges().size() == 15);
+       is_cut_up(gena1) && gena1.states().size() == 10
+       && gena1.edges().size() == 13);
 
   return t.all_passed();
 }
