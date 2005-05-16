@@ -20,10 +20,10 @@
       <transition dst="s2" label="b" src="s1"/>
     </transitions>
     <initials>
-      <initial label="" state="s0"/>
+      <initial state="s0"/>
     </initials>
     <finals>
-      <final label="" state="s1"/>
+      <final state="s1"/>
     </finals>
   </content>
 

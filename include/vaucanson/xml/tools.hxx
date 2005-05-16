@@ -73,8 +73,9 @@ namespace vcsn
 	if (series.supp().size() > 1)
 	  {
 	    out = get_label(series);
-	    elt->setAttribute(STR2XML("label"),
-			      STR2XML(out.c_str()));
+	    if (out.size())
+	      elt->setAttribute(STR2XML("label"),
+				STR2XML(out.c_str()));
 	  }
 	else
 	  {
@@ -128,7 +129,7 @@ namespace vcsn
       {
 	if (l)
 	  return "";
-	return 0;
+	return "0";
       }
 
 

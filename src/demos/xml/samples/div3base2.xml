@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO8859-1" standalone="no" ?>
+
 <automaton xmlns="http://vaucanson.lrde.epita.fr">
 
   <type>
@@ -16,18 +16,18 @@
       <state name="s2"/>
     </states>
     <transitions>
-      <transition dst="s0" label="\0" src="s0"/>
-      <transition dst="s1" label="\1" src="s0"/>
-      <transition dst="s2" label="\0" src="s1"/>
-      <transition dst="s0" label="\1" src="s1"/>
-      <transition dst="s1" label="\0" src="s2"/>
-      <transition dst="s2" label="\1" src="s2"/>
+      <transition dst="s0" label="0" src="s0"/>
+      <transition dst="s1" label="1" src="s0"/>
+      <transition dst="s2" label="0" src="s1"/>
+      <transition dst="s0" label="1" src="s1"/>
+      <transition dst="s1" label="0" src="s2"/>
+      <transition dst="s2" label="1" src="s2"/>
     </transitions>
     <initials>
-      <initial label="1" state="s0"/>
+      <initial state="s0"/>
     </initials>
     <finals>
-      <final label="1" state="s0"/>
+      <final state="s0"/>
     </finals>
   </content>
 

@@ -2,6 +2,18 @@
 
 	* include/vaucanson/xml/tools.hxx: Fix label creation for automata.
 
+	* src/demos/xml/samples/div3base2.xml,
+	* src/demos/xml/samples/c1.xml,
+	* src/demos/xml/samples/occ_b.xml,
+	* src/demos/xml/samples/lomb1.xml,
+	* src/demos/xml/samples/lomb2.xml,
+	* src/demos/xml/samples/double_ring6.xml,
+	* src/tests/xml/b_ref.xml: Update reference files.
+
+2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/xml/tools.hxx: Fix label creation for automata.
+
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/transducer_to_fmp.hh,

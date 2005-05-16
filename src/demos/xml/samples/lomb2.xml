@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO8859-1" standalone="no" ?>
+
 <automaton xmlns="http://vaucanson.lrde.epita.fr">
 
   <type>
@@ -24,10 +24,10 @@
       <transition dst="s2" label="b" src="s2"/>
     </transitions>
     <initials>
-      <initial label="1" state="s0"/>
+      <initial state="s0"/>
     </initials>
     <finals>
-      <final label="1" state="s1"/>
+      <final state="s1"/>
     </finals>
   </content>
 
