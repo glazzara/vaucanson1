@@ -354,6 +354,8 @@ XMLSOURCES =						\
 	vaucanson/xml/XML.hxx				\
 	vaucanson/xml/node.hh				\
 	vaucanson/xml/node.hxx				\
+	vaucanson/xml/session.hh			\
+	vaucanson/xml/session.hxx			\
 	vaucanson/xml/tools.hh				\
 	vaucanson/xml/tools.hxx				\
 	vaucanson/xml/xerces_parser.hh			\

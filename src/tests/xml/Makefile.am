@@ -32,6 +32,8 @@ fmp_tester_SOURCES = xml_fmp_tester.cc
 
 trans_tester_SOURCES = xml_trans_tester.cc
 
+session_tester_SOURCES = xml_session_tester.cc
+
 if XML_CHECK
 check_SCRIPTS = 				\
 	tester.sh
@@ -45,7 +47,8 @@ check_PROGRAMS = 				\
 	z_max_plus_tester			\
 	z_min_plus_tester			\
 	fmp_tester				\
-	trans_tester
+	trans_tester				\
+	session_tester				
 
 CLEANFILES = vaucanson.xsd
 
@@ -61,6 +64,7 @@ EXTRA_DIST =					\
 	xml_automaton_tester.cc			\
 	xml_fmp_tester.cc			\
 	xml_trans_tester.cc			\
+	xml_session_tester.cc			\
 	tester.sh				\
 	b_ref.xml				\
 	z_ref.xml				\

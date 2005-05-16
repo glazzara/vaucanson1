@@ -99,7 +99,7 @@ namespace vcsn
 
       if (err->has_error())
 	FAIL(err->get_msg());
-
+      // parser->release();
       delete err;
       return doc;
     }
@@ -119,18 +119,14 @@ namespace vcsn
 
       DOMNodeList* nodelist;
 
-      /// FIXME: Handle sessions here.
-      nodelist = doc->
-	getElementsByTagNameNS(STR2XML("http://vaucanson.lrde.epita.fr"),
-			       STR2XML("automaton"));
+      nodelist = doc->getElementsByTagName(STR2XML("session"));
       if (! nodelist->getLength())
-	{
-	  nodelist = doc->
-	    getElementsByTagNameNS(STR2XML("http://vaucanson.lrde.epita.fr"),
-				   STR2XML("transducer"));
-	  if (! nodelist->getLength())
-	    FAIL("Cannot find any automaton / transducer root.");
-	}
+	nodelist = doc->getElementsByTagName(STR2XML("automaton"));
+      if (! nodelist->getLength())
+	nodelist = doc->getElementsByTagName(STR2XML("transducer"));
+      if (! nodelist->getLength())
+	FAIL("Cannot find any appropriate root.");
+
       DOMElement* node = static_cast<DOMElement*>(nodelist->item(0));
       return node;
     }

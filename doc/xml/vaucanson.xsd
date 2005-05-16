@@ -188,8 +188,8 @@ set using the <drawing> tag.
 <xs:element name="session">
   <xs:complexType>
     <xs:sequence>
-      <xs:element name="automaton" type="automaton" minOccurs="0"/>
-      <xs:element name="transducer" type="transducer" minOccurs="0"/>
+      <xs:element name="automaton" type="automaton" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="transducer" type="transducer" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="geometry" type="geometry_full" minOccurs="0"/>
       <xs:element name="drawing" type="drawing" minOccurs="0"/>
     </xs:sequence>

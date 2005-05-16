@@ -53,6 +53,13 @@ namespace vcsn
     template <class OStream>
     void xml_converter<Auto>::save(const Auto& aut, OStream& os)
     {
+      create_document(aut);
+      tools::print_document(root_, os);
+    }
+
+    template <class Auto>
+    void xml_converter<Auto>::create_document(const Auto& aut)
+    {
       typedef typename Auto::state_iterator state_iterator;
       typedef typename Auto::edge_iterator edge_iterator;
       typedef typename Auto::initial_iterator initial_iterator;
@@ -66,8 +73,8 @@ namespace vcsn
       // Document creation.
       impl_ = DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
       doc_ = impl_->createDocument(STR2XML
-				   ("http://vaucanson.lrde.epita.fr"),
-				   STR2XML(root_name), 0);
+				  ("http://vaucanson.lrde.epita.fr"),
+				  STR2XML(root_name), 0);
       root_ = doc_->getDocumentElement();
 
       // Create type tag.
@@ -99,9 +106,6 @@ namespace vcsn
       content->appendChild(node);
       for_each_final_state(f, aut)
 	create_final(*f, aut, node, state2str);
-
-      // Print result to stream.
-      print_document(os);
     }
 
 
@@ -193,29 +197,7 @@ namespace vcsn
       /// FIXME: Code this !
     }
 
-    // Print XML document to stream.
-    template <class Auto>
-    template <class OStream>
-    void xml_converter<Auto>::print_document(OStream& os)
-    {
-      using namespace xercesc;
-      if (! impl_)
-	impl_ = DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
-      DOMWriter* serializer = ((DOMImplementationLS*)impl_)->createDOMWriter();
-
-      // Set serializer properties.
-      if (serializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent,
-				    true))
-	serializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, true);
-      if (serializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
-	serializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
-
-      // Create buffer.
-      MemBufFormatTarget buf;
-      serializer->writeNode(&buf, *root_);
-      os << buf.getRawBuffer();
-    }
-
+    
     /**
      * @brief Load automaton from stream.
      *

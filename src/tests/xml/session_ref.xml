@@ -1,0 +1,50 @@
+
+<session xmlns="http://vaucanson.lrde.epita.fr">
+
+  <automaton>
+    <type>
+      <monoid generators="letters" type="free">
+        <generator value="a"/>
+        <generator value="b"/>
+      </monoid>
+      <semiring operations="numerical" set="B"/>
+    </type>
+    <content>
+      <states>
+        <state name="s0"/>
+        <state name="s1"/>
+        <state name="s2"/>
+      </states>
+      <transitions>
+        <transition dst="s1" label="a" src="s0"/>
+        <transition dst="s2" label="b" src="s1"/>
+      </transitions>
+      <initials/>
+      <finals/>
+    </content>
+  </automaton>
+
+  <automaton>
+    <type>
+      <monoid generators="letters" type="free">
+        <generator value="a"/>
+        <generator value="b"/>
+      </monoid>
+      <semiring operations="numerical" set="B"/>
+    </type>
+    <content>
+      <states>
+        <state name="s0"/>
+        <state name="s1"/>
+        <state name="s2"/>
+      </states>
+      <transitions>
+        <transition dst="s1" label="a" src="s0"/>
+        <transition dst="s2" label="b" src="s1"/>
+      </transitions>
+      <initials/>
+      <finals/>
+    </content>
+  </automaton>
+
+</session>

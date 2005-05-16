@@ -44,7 +44,6 @@
  * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
  */
 
-# include <xercesc/framework/MemBufFormatTarget.hpp>
 # include <xercesc/dom/DOM.hpp>
 # include <xercesc/util/XMLString.hpp>
 # include <xercesc/util/PlatformUtils.hpp>
@@ -102,10 +101,11 @@ namespace vcsn
       template <class IStream>
       void load(Auto& a, IStream& in);
 
-    private:
-      template <class OStream>
+      void create_document(const Auto& aut);
 
-      void print_document(OStream&);
+      xercesc::DOMElement* root_get() { return root_;}
+      
+    private:
       std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);
       void create_transition(hedge_t, const Auto&,
 			     xercesc::DOMElement*, map_t&);

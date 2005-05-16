@@ -44,6 +44,9 @@
  * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
  */
 # include <xercesc/dom/DOM.hpp>
+# include <xercesc/framework/MemBufFormatTarget.hpp>
+# include <xercesc/util/XMLString.hpp>
+# include <xercesc/util/PlatformUtils.hpp>
 
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/tools/usual_macros.hh>
@@ -86,19 +89,22 @@ namespace vcsn
 					   xercesc::DOMDocument* doc,
 					   xercesc::DOMElement* elt);
 
-    template <class T>
-    typename T::series_set_elt_t get_series(xercesc::DOMElement*, T&);
+      template <class T>
+      typename T::series_set_elt_t get_series(xercesc::DOMElement*, T&);
 
-    template <class U, class V>
-    void insert_letter(Element<vcsn::algebra::AlphabetSet<U>, V>&,
-		       const std::string&);
+      template <class U, class V>
+      void insert_letter(Element<vcsn::algebra::AlphabetSet<U>, V>&,
+			 const std::string&);
 
-    template <class U>
-    void ensure_monoid_type(const xercesc::DOMElement*, const U&);
+      template <class U>
+      void ensure_monoid_type(const xercesc::DOMElement*, const U&);
 
-    template <class T, class U>
-    void ensure_semiring_type(const xercesc::DOMElement*, const T&, const U&);
+      template <class T, class U>
+      void ensure_semiring_type(const xercesc::DOMElement*, const T&,
+				const U&);
 
+      template <class OStream>
+      void print_document(const xercesc::DOMElement*, OStream&);
 
     } // ! tools
 

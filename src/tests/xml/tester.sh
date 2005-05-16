@@ -1,7 +1,7 @@
 #!/bin/sh
 
 out=0
-for i in b z r z_min_plus z_max_plus fmp trans; do
+for i in b z r z_min_plus z_max_plus fmp trans session; do
 
     prog="./${i}_tester"
     $prog output > ${i}_result.tmp

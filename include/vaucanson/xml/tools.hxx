@@ -531,6 +531,43 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	  FAIL("Bad monoid type");
       }
 
+
+      /**
+       * Print XML tree to output stream.
+       *
+       * @param OStream	Type of output stream.
+       *
+       * @arg node	XML root node to print.
+       * @arg os	Output stream.
+       *
+       */
+      template <class OStream>
+      void print_document(const xercesc::DOMElement* node, OStream& os)
+      {
+	using namespace xercesc;
+	DOMImplementation* impl =
+	  DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
+	DOMWriter* serializer =
+	  ((DOMImplementationLS*)impl)->createDOMWriter();
+
+	// Set serializer properties.
+	if (serializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent,
+				      true))
+	  serializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, true);
+	if (serializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
+	  serializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
+
+	// Create buffer.
+	MemBufFormatTarget buf;
+	if (node)
+	  {
+	    serializer->writeNode(&buf, *node);
+	    os << buf.getRawBuffer();
+	    os << std::endl;
+	  }
+      }
+
+
     } // ! tools
 
   } // ! xml

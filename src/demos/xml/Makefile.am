@@ -10,6 +10,8 @@ if XML_CHECK
 
   noinst_PROGRAMS =				\
 	static_boolean				\
+	make_session				\
+	display_session				\
 	b					\
 	z					\
 	r					\
@@ -21,6 +23,8 @@ vaucanson.xsd:
 	ln -sf $(top_builddir)/doc/xml/vaucanson.xsd
 
 static_boolean_SOURCES = static_boolean.cc
+make_session_SOURCES = make_session.cc
+display_session_SOURCES = display_session.cc
 
 b_SOURCES = algorithms.cc
 b_CPPFLAGS = $(AM_CPPFLAGS)					\

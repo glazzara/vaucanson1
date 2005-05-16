@@ -1,3 +1,42 @@
+2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	This patch re-activate XML session support. Usage is the same as 
+	before, but the class is named xml_session.
+	
+	* include/vaucanson/xml/session.hh,
+	* include/vaucanson/xml/session.hxx: New. XML session support.
+
+	* include/vaucanson/xml/xml_converter.hh,
+	* include/vaucanson/xml/xml_converter.hxx,
+	* include/vaucanson/xml/xerces_parser.hxx,
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/tools.hxx: Code maintainance to ease XML 
+	session handling.
+
+	* src/demos/xml/make_session.cc,
+	* src/demos/xml/display_session.cc: New. Re-add demos for session. 
+	These demos are temporarely limited to boolean automata. 
+
+	* src/tests/xml/trans_ref.xml,
+	* src/tests/xml/r_ref.xml,
+	* src/tests/xml/z_ref.xml,
+	* src/tests/xml/z_min_plus_ref.xml,
+	* src/tests/xml/b_ref.xml,
+	* src/tests/xml/z_max_plus_ref.xml,
+	* src/tests/xml/fmp_ref.xml: Fix. Add an extraneous blank line at end 
+	of file.
+
+	* src/tests/xml/session_ref.xml
+	* src/tests/xml/session_ref.dot,
+	* src/tests/xml/xml_session_tester.cc: Add tests for XML sessions.
+	* src/tests/xml/tester.sh: Update accordingly.
+	
+	* include/Makefile.am,
+	* src/tests/xml/Makefile.am,
+	* src/demos/xml/Makefile.am: Update.
+
+	* doc/xml/vaucanson.xsd: Fix maxOccurs parameter for sessions (was set 
+	to 1, set to unbounded).
+	
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/xml/tester.sh: Fix the XML test script.
