@@ -1,3 +1,27 @@
+2005-05-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	This patch adds a new algorithm to the library: normalized_composition.
+	This composition can only be applied to normalized and sub-normalized
+	transducers seen as automata over a free monoid product.(edges with
+	labels of types (a,1), (1,a) and (a,b) )
+
+	* include/vaucanson/algorithms/outsplitting.hh,
+	* include/vaucanson/algorithms/outsplitting.hxx: New. Add outsplitting
+	and insplitting algorithms (used in particular in normalized
+	composition algorithm).
+
+	* include/vaucanson/algorithms/normalized_composition.hh,
+	* include/vaucanson/algorithms/normalized_composition.hxx: New. Add a
+	new composition algorithm, for normalized and sub-normalized
+	transducers seen as automata over a free monoid product.
+
+	* include/Makefile.am: Update accordingly.
+
+	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh:
+	New. Add a test on composition for normalized and sub-normalized
+	transducers seen as automata over a free monoid product.
+	* src/tests/automata/algos/fmp_transducers/Makefile.am: Update.
+
 2005-05-16  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/transducer_to_fmp.hxx,
@@ -5,10 +29,10 @@
 	* include/vaucanson/algorithms/fmp_to_transducer.hxx,
 	* include/vaucanson/algorithms/fmp_to_transducer.hh:
 	Minor fixes according to coding style.
-	
+
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/cut_up.hxx: Minor fix to reduce 
+	* include/vaucanson/algorithms/cut_up.hxx: Minor fix to reduce
 	complexity of the treatment.
 	* src/tests/automata/algos/label_aware_graphs/cut_up_test.hh: Update.
 
@@ -19,9 +43,9 @@
 
 	* src/tests/automata/algos/label_aware_graphs/cut_up_test.hh: New. Add
 	test for cut-up algorithm.
-	
+
 	* include/Makefile.am,
-	* src/tests/automata/algos/label_aware_graphs/Makefile.am: Update 
+	* src/tests/automata/algos/label_aware_graphs/Makefile.am: Update
 	accordingly.
 
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
@@ -29,9 +53,9 @@
 	* src/tests/xml/Makefile.am: Add test result files to CLEANFILES.
 
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
-	This patch re-activate XML session support. Usage is the same as 
+	This patch re-activate XML session support. Usage is the same as
 	before, but the class is named xml_session.
-	
+
 	* include/vaucanson/xml/session.hh,
 	* include/vaucanson/xml/session.hxx: New. XML session support.
 
@@ -39,12 +63,12 @@
 	* include/vaucanson/xml/xml_converter.hxx,
 	* include/vaucanson/xml/xerces_parser.hxx,
 	* include/vaucanson/xml/tools.hh,
-	* include/vaucanson/xml/tools.hxx: Code maintainance to ease XML 
+	* include/vaucanson/xml/tools.hxx: Code maintainance to ease XML
 	session handling.
 
 	* src/demos/xml/make_session.cc,
-	* src/demos/xml/display_session.cc: New. Re-add demos for session. 
-	These demos are temporarely limited to boolean automata. 
+	* src/demos/xml/display_session.cc: New. Re-add demos for session.
+	These demos are temporarely limited to boolean automata.
 
 	* src/tests/xml/trans_ref.xml,
 	* src/tests/xml/r_ref.xml,
@@ -52,21 +76,21 @@
 	* src/tests/xml/z_min_plus_ref.xml,
 	* src/tests/xml/b_ref.xml,
 	* src/tests/xml/z_max_plus_ref.xml,
-	* src/tests/xml/fmp_ref.xml: Fix. Add an extraneous blank line at end 
+	* src/tests/xml/fmp_ref.xml: Fix. Add an extraneous blank line at end
 	of file.
 
 	* src/tests/xml/session_ref.xml
 	* src/tests/xml/session_ref.dot,
 	* src/tests/xml/xml_session_tester.cc: Add tests for XML sessions.
 	* src/tests/xml/tester.sh: Update accordingly.
-	
+
 	* include/Makefile.am,
 	* src/tests/xml/Makefile.am,
 	* src/demos/xml/Makefile.am: Update.
 
-	* doc/xml/vaucanson.xsd: Fix maxOccurs parameter for sessions (was set 
+	* doc/xml/vaucanson.xsd: Fix maxOccurs parameter for sessions (was set
 	to 1, set to unbounded).
-	
+
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/xml/tester.sh: Fix the XML test script.
@@ -78,8 +102,8 @@
 	* include/vaucanson/algorithms/fmp_to_transducer.hxx,
 	* include/vaucanson/algorithms/fmp_to_transducer.hh:
 	New. Add new functions to transform an automaton over a free monoid
-	product to an equivalent transducer (and vice-versa). 
-	Note that those functions work only if the support of each edge is 
+	product to an equivalent transducer (and vice-versa).
+	Note that those functions work only if the support of each edge is
 	finite.
 
 	* include/Makefile.am: Update accordingly.
@@ -88,18 +112,18 @@
 
 	* src/tests/xml/xml_trans_tester.cc,
 	* src/tests/xml/xml_automaton_tester.cc,
-	* src/tests/xml/xml_fmp_tester.cc: New. XML test programs. Used to 
+	* src/tests/xml/xml_fmp_tester.cc: New. XML test programs. Used to
 	generate XML / DOT for known automata, and to parse XML.
-	
+
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/Makefile.am: Remove links to old XML files.
 
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
-	Fix demos with new XML system, and make XML reference files compliant 
-	with XSD. The two session demos are temporarely removed, and will be 
+	Fix demos with new XML system, and make XML reference files compliant
+	with XSD. The two session demos are temporarely removed, and will be
 	updated soon in a patch dedicated to XML sessions.
-	
+
 	* src/demos/xml/samples/div3base2.xml,
 	* src/demos/xml/samples/c1.xml,
 	* src/demos/xml/samples/occ_b.xml,
@@ -107,7 +131,7 @@
 	* src/demos/xml/samples/lomb2.xml,
 	* src/demos/xml/samples/double_ring6.xml: Remove reference to DTD and
 	fix namespace.
-	
+
 	* src/demos/xml/samples/lomb2.cc,
 	* src/demos/xml/samples/c1.cc,
 	* src/demos/xml/samples/occ_b.cc,
@@ -116,16 +140,16 @@
 	* src/demos/xml/samples/lomb1.cc,
 	* src/demos/xml/static_boolean.cc,
 	* src/demos/xml/algorithms.cc: Update with new XML system.
-	
+
 	* src/demos/xml/make_session.cc,
 	* src/demos/xml/display_session.cc: Remove. These files will be updated
 	and re-added in a future patch about XML session handling.
-	
+
 	* src/demos/xml/Makefile.am
 	* src/demos/xml/samples/Makefile.am: Update accordingly.
-	
+
 	* src/tests/xml/tester.sh: Fix fail return code.
-	
+
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/xml_chooser.hh,
@@ -133,19 +157,19 @@
 	* include/vaucanson/xml/xml_converter.hh,
 	* include/vaucanson/xml/tools.hh,
 	* include/vaucanson/xml/xerces_parser.hh: Fix some include problems.
-	
+
 	* include/vaucanson/xml/XML.hh: Move macro definitions ...
 	* include/vaucanson/tools/usual_macros.hh:... here.
-	
+
 	* include/vaucanson/xml/if_tag.hh,
 	* include/vaucanson/xml/if_tag.hxx: Delete. These files are inaccurate
 	at the moment. They will be fixed and re-added, if necessary.
 
 	* include/vaucanson/xml/strings.hh: Remove a bad include.
 
-	* doc/xml/vaucanson.xsd: Fix monoid and semiring order for 
-	transducers. 
-		
+	* doc/xml/vaucanson.xsd: Fix monoid and semiring order for
+	transducers.
+
 	* include/Makefile.am: Fix and update.
 
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
@@ -187,7 +211,7 @@
 	* src/tests/xml/import_static-float.xml.ref,
 	* src/tests/xml/import_generic-session.xml.ref,
 	* src/tests/xml/nodata-session.xml.ref,
-	* src/tests/xml/float.xml,	
+	* src/tests/xml/float.xml,
 	* src/tests/xml/import_dynamic-session.xml.ref,
 	* src/tests/xml/export_session-tropical.xml.ref,
 	* src/tests/xml/export_session-numerical.xml.ref,
@@ -213,7 +237,7 @@
 	* src/tests/xml/import_generic-simple.xml.ref,
 	* src/tests/xml/nodata-simple.xml.ref,
 	* src/tests/xml/export_static-tropical.xml.ref,
-	* src/tests/xml/import_session-simple.xml.ref: Remove old XML test 
+	* src/tests/xml/import_session-simple.xml.ref: Remove old XML test
 	suite.
 
 	* src/tests/xml/tester.sh: New. Script used to test XML.
@@ -223,25 +247,25 @@
 	* src/tests/xml/r_ref.xml,
 	* src/tests/xml/z_ref.xml,
 	* src/tests/xml/z_max_plus_ref.xml: New. XML reference files.
-	
+
 	* src/tests/xml/z_max_plus_ref.dot,
 	* src/tests/xml/b_ref.dot,
 	* src/tests/xml/fmp_ref.dot,
-	* src/tests/xml/trans_ref.dot	
+	* src/tests/xml/trans_ref.dot
 	* src/tests/xml/r_ref.dot,
 	* src/tests/xml/z_ref.dot,
 	* src/tests/xml/z_min_plus_ref.dot: New. DOT reference files.
-	
+
 	* src/tests/xml/Makefile.am: Update accordingly.
-	
+
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	This patch enable full functionnality of the new version of XML support
-	in Vaucanson. It works with any kind of automaton supported in 
-	Vaucanson, including transducers. Also, it enable full support of the 
-	new XSD Schema definition. 
+	in Vaucanson. It works with any kind of automaton supported in
+	Vaucanson, including transducers. Also, it enable full support of the
+	new XSD Schema definition.
 	Macros XML_BEGIN and XML_END are suppressed. to use XML,
 
-	#include <vaucanson/xml/XML.hh> 
+	#include <vaucanson/xml/XML.hh>
 
 	and use one of the following:
 	out << automaton_saver(automaton, io::string_out(), xml::XML());
@@ -249,10 +273,10 @@
 	in >> automaton_loader(automaton, io::string_out(), xml::XML());
 
 	Some facilities function like dot_dump will be commited soon.
-	
+
 	* include/vaucanson/xml/XML.hh,
 	* include/vaucanson/xml/XML.hxx: New. Provides xml::XML() class, to be
-	used in automaton_{loader, saver}. It is the only file needed to be 
+	used in automaton_{loader, saver}. It is the only file needed to be
 	included in order to work with XML capabilities.
 
 	* include/vaucanson/xml/xerces_parser.hh,
@@ -263,37 +287,37 @@
 	any automaton to XML and vice et versa.
 
 	* include/vaucanson/xml/node.hh,
-	* include/vaucanson/xml/node.hxx: New. Node hierarchy used with the 
+	* include/vaucanson/xml/node.hxx: New. Node hierarchy used with the
 	factory, to create automaton from XML.
 
 	* include/vaucanson/xml/xml_chooser.hh,
-	* include/vaucanson/xml/xml_chooser.hxx: New. Class providing 
+	* include/vaucanson/xml/xml_chooser.hxx: New. Class providing
 	facilities to get / create labels, etc. w.r.t automaton type. Some
 	specializations to custom XML output are here.
-	
+
 	* include/vaucanson/xml/tools.hh,
 	* include/vaucanson/xml/tools.hxx: New. Useful tools to build string
 	from automaton type, to check conformance of automaton type with XML
-	document, etc. Most of the specialization w.r.t supported automaton 
+	document, etc. Most of the specialization w.r.t supported automaton
 	types are here.
-	
+
 	* include/Makefile.am: Update accordingly.
-	
+
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
-	
+
 	* include/vaucanson/design_pattern/factory.hh: New. Add Factory Method
 	design pattern. This implementation is the one proposed by Alexandrescu
 	in "Modern C++ Design".
 	* include/Makefile.am: Update accordingly.
 
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
-	
-	* doc/xml/vaucanson.xsd: New. XSD Schema for Vaucanson-XML 
+
+	* doc/xml/vaucanson.xsd: New. XSD Schema for Vaucanson-XML
 	specification.
 	* doc/xml/Makefile.am: Update accordingly.
 
 	* Makefile.am: Remove dead directory reference.
-	
+
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	WARNING: This patch temporarely breaks XML feature.
 
@@ -329,10 +353,10 @@
 	* xml/style-to-code.awk,
 	* xml/style-to-dtd.awk,
 	* xml/gendtd.sh: Remove previous XML implementation and related files.
-	
+
 	* include/Makefile.am,
 	* configure.ac: Update accordingly
-	
+
 2005-05-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/polynoms.hxx: Remove
@@ -340,7 +364,7 @@
 
 2005-05-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/product.hxx: Fix missing namespace 
+	* include/vaucanson/algorithms/product.hxx: Fix missing namespace
 	before function.
 
 2005-05-14  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
