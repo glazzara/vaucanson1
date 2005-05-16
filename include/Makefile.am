@@ -232,6 +232,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/complement.hxx				   \
 	vaucanson/algorithms/complete.hh				   \
 	vaucanson/algorithms/complete.hxx				   \
+	vaucanson/algorithms/cut_up.hh					   \
+	vaucanson/algorithms/cut_up.hxx					   \
 	vaucanson/algorithms/eval.hh					   \
 	vaucanson/algorithms/eval.hxx					   \
 	vaucanson/algorithms/concatenate.hh				   \
