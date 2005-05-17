@@ -8,8 +8,121 @@ This document describes major updates to the Vaucanson_ project.
 
 .. _Vaucanson: http://www.lrde.epita.fr/vaucanson
 
-Vaucanson ..... 2005
-====================
+Vaucanson 0.7 May 17, 2005
+==========================
+
+- Vaucanson works with `GNU C++`_ 3.2, 3.3, 3.4 and ICC_ 8.1.
+
+.. _GNU C++: http://gcc.gnu.org
+.. _ICC: http://www.intel.com/software/products/compilers/
+
+
+- Transducers seen as automata over a free monoid product are now available.
+
+  Until now, transducers in Vaucanson could only be seen as automata
+  with multiplicity in a series. It is now possible to manipulate
+  transducers seen as automata over a free monoid product.
+
+  - Two context headers have been written: ``fmp_transducer`` and
+    ``z_fmp_ransducer`` (fmp stands for Free Monoid Product), which
+    can be used in the same way as previous context headers.
+
+    On top of the classical types defined in all context headers, they
+    define several types needed when manipulating this type of
+    transducers:
+
+    ===================== ======================= =========================
+    ALGEBRAIC SETS        ELEMENTS OF SET         LOW LEVEL IMPLEMENTATIONS
+    ===================== ======================= =========================
+    first_alphabet_t
+    second_alphabet_t
+    first_monoid_t	  first_monoid_elt_t	  first_monoid_elt_value_t
+    second_monoid_t	  second_monoid_elt_t	  second_monoid_elt_value_t
+    ===================== ======================= =========================
+
+
+    In addition to that, the contexts provide the user with the
+    following functions::
+
+      // Create an empty automaton.
+      automaton_t new_automaton(first_alphabet_t, second_alphabet_t); 
+
+      // Create a couple of words that can directly be given to
+      // add_series_edge() for instance.
+      series_set_elt_t make_couple(first_alphabet_t, second_alphabet_t,
+				   std::string, std::string); 
+
+  - Some new algorithms have also been added:
+
+    - ``fmp_to_realtime`` and ``realtime_to_fmp``: Enables the
+      user to switch from one view of transducers to another.
+
+    - ``normalized_composition``: Enables the composition of
+      normalized and sub-normalized transducers seen as automata over
+      a free monoid product. (edges with labels of types (a,b), (1,a)
+      and (a,1)).
+
+
+- New XML I/O system.
+
+  The former XML system based on a DTD grammar was replaced by a
+  system based on XSD schema specification. The new system is
+  backward-compatible with old XML documents, just change namespace
+  reference to ``http://vaucanson.lrde.epita.fr`` and remove DTD node.
+
+  This new specification comes with full transducer support, and a set of
+  default types for both automata and transducer. To declare a transducer on
+  free monoid product, do as the following::
+
+    <transducer xmlns=``http://vaucanson.lrde.epita.fr``>
+      <content>
+        <states>
+          <state name=``s0``/>
+        </states>
+        <transitions>
+          <transition src=``s0`` dst=``s0`` in=``a`` out=``b``/>
+        </transitions>
+        <initials/>
+        <finals/>
+    </transducer>
+
+
+   To load an automaton (for example on Z semiring) from a stream
+   (containing the XML document), do as the following::
+
+   #include <vaucanson/xml/XML.hh>
+   #include <vaucanson/z_automaton.hh>
+   using namespace vcsn;
+   using namespace vcsn::z_automaton;
+   using namespace vcsn::xml;
+   automaton_t a = new_automaton(alphabet_t());
+   std::cin >> automaton_loader(a, io::string_out(), xml::XML());
+
+
+   To dump automaton as an XML document, do::
+
+   #include <vaucanson/tools/xml_dump.hh>
+   ...
+   tools::xml_dump(std::cout, a, "A name");
+   ...
+
+   Or use the automaton_saver() function.
+
+
+- Big cleaning in the graph implementation.
+
+  A lot of superfluous operations were done in the former implementation. 
+  Cleaning the code provided huge performance improvement. The actual 
+  implementation has the same interface than the former one.
+
+
+- Update context headers.
+
+  More granularity has been added to context headers. To create one,
+  you need to include desired files from the include/vaucanson/contexts
+  directory in a specific order. Please refer to the sources for more
+  details.
+
 
 - A long-standing bug in the core of the library was corrected.
 

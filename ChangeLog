@@ -1,3 +1,8 @@
+2005-05-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* configure.ac: Bump to Vaucanson 0.7.
+	* doc/NEWS.txt: Update with Vaucanson new features.
+	
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx: Fix label creation for automata.
