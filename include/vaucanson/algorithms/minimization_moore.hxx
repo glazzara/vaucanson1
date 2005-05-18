@@ -1,7 +1,7 @@
 // minimization_moore.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX
@@ -42,19 +43,16 @@
 # include <set>
 # include <vector>
 
-// Useful macros for Moore's minimization algorithm.
+// Useful macros for Moore's minimization.
 
-// Iterator on partitions (begin + 1 because we don't interate on the final
-//state partition).
-# define for_each_partition(I, P) \
-  PARTITIONS_END = P.end(); \
-  for (partitions_t::iterator I = P.begin() + 1; I != PARTITIONS_END; ++I)
+// Iterator on a list of groups. We don't iterate on the first fixed group.
+# define for_each_group(I, P)						\
+  for (groupid_to_group_t::iterator I = ++((P).begin()); I != (P).end(); ++I)
 
-// Iterator on state in partitions.
-# define for_each_state_in_partition(I, P) \
-  PARTITION_END = P.end(); \
-  for (partition_t::iterator I = P.begin(); I != PARTITION_END; ++I)
-
+// Iterator on state in a group. We don't iterate on the first not
+// processed state.
+# define for_each_state_in_group(I, P)					\
+  for (group_t::iterator I = ++((P).begin()); I != (P).end(); ++I)
 
 namespace vcsn {
 
@@ -62,70 +60,56 @@ namespace vcsn {
   | minimization_moore |
   `-------------------*/
   // preconditions :
-  //  - the input automaton is deterministic ;
-  //  - the output automaton is well initialized with good sets ;
+  // - the input automaton is deterministic or co-deterministic
+  //   according to Transposed;
+  // - the output automaton is well initialized with good sets ;
   //
 
-  template<typename A, typename T>
+  template<typename A, typename T, bool Transposed>
   void
   do_minimization_moore(const Element<A, T>& input, Element<A, T>& output)
   {
     typedef Element<A, T> automata_type;
     AUTOMATON_TYPES(automata_type);
+    AUTOMATON_FREEMONOID_TYPES(automata_type);
+    using std::map;
+    using std::vector;
+    using std::set;
 
-    // Used const.
+    // Consts.
 
-    const int						NO_EDGE = -1;
+    const hstate_t	NullState = -1;
+    const hstate_t	NullGroup = -1;
+    const alphabet_t&	alphabet (input.series().monoid().alphabet());
 
-    // Used typedefs.
+    // Typedefs.
 
-    typedef std::set<hstate_t>				partition_t;
-    typedef std::vector<partition_t>			partitions_t;
+    typedef int					letterid_t;
+    typedef int					groupid_t;
 
-    typedef std::vector<hstate_t>			state_vect_t;
-    typedef std::vector<int>				int_vect_t;
-    typedef std::map<hstate_t, state_vect_t>		full_map_t;
-    typedef std::map<hstate_t, int_vect_t>		state_to_group_map_t;
-    typedef std::map<label_t, int>			letter_map_t;
+    typedef set<hstate_t>			group_t;
+    typedef vector<group_t>			groupid_to_group_t;
 
-    // Used iterators.
+    typedef vector<hstate_t>			letterid_to_state_t;
 
-    partition_t::iterator		PARTITION_END;
-    partitions_t::iterator		PARTITIONS_END;
-    typename letter_map_t::iterator	current_letter;
-    partition_t::iterator		ref;
-    partition_t::iterator		elt;
+    typedef map<hstate_t, letterid_to_state_t>	state_to_letterid_to_state_t;
 
-    // Used structures.
+    typedef map<hstate_t, groupid_t>		state_to_groupid_t;
+    typedef map<letter_t,  letterid_t>		letter_to_letterid_t;
 
-    //Map to count letters used in alphabet.
-    letter_map_t			letter_map;
-    //Map a state to a group index.
-    std::map<hstate_t, int>		group_map;
+    // Variables.
 
-    // Full array of the input automaton.
-    full_map_t				full_map;
-    // Local group array for the automaton.
-    state_to_group_map_t		local_map;
+    letter_to_letterid_t			letter_to_letterid;
+    state_to_groupid_t				state_to_groupid;
+    group_t					delta_ret;
 
-    // Partitions.
-    partitions_t			partitions(input.states().size());
+    // Store successors if non-inverted, predecessors otherwise.
+    state_to_letterid_to_state_t		aut_view;
 
-    // Used globals.
-    unsigned				letter_count = 0;
-    unsigned				partition_count = 1;
-    bool				partition_created = false;
-    bool				partition_modified;
-    hstate_t				initial_state;
+    groupid_to_group_t	groupid_to_group(input.states().size());
 
-    // Used counting variables.
-    unsigned				current_partition;
-    unsigned				i, j;
-    unsigned				iter;
-
-    // Special state used for map initialization.
-    hstate_t				NullState = -1;
-
+    int						letter_count = 0;
+    int						i;
 
     /*---------------.
     | Initialization |
@@ -133,118 +117,136 @@ namespace vcsn {
 
     precondition(input.exists());
 
-    for_each_edge(e, input)
-      {
-	if (letter_map.find(input.label_of(*e)) == letter_map.end())
-	  letter_map[input.label_of(*e)] = letter_count++;
-      }
+    state_to_groupid[NullState] = NullGroup;
 
-    letter_count = letter_map.size();
-    for_each_state(s, input)
+    for_each_letter(iletter, alphabet)
+      letter_to_letterid[*iletter] = letter_count++;
+
+    for_each_state(istate, input)
+    {
+      aut_view[*istate] = letterid_to_state_t(letter_count, NullState);
+      if ((not Transposed and input.is_final(*istate)) or
+	  (Transposed and input.is_initial(*istate)))
       {
-	if (input.is_initial(*s))
-	  initial_state = *s;
-	full_map[*s] = state_vect_t(letter_count, NullState);
-	local_map[*s] = int_vect_t(letter_count, NO_EDGE);
-	if (input.is_final(*s))
-	  {
-	    partitions[0].insert(*s);
-	    group_map[*s] = 0;
-	  }
+	groupid_to_group[0].insert(*istate);
+	state_to_groupid[*istate] = 0;
+      }
+      else
+      {
+	groupid_to_group[1].insert(*istate);
+	state_to_groupid[*istate] = 1;
+      }
+    }
+
+    for_each_state(istate, input)
+    {
+      for_each_const_(letter_to_letterid_t, iletter, letter_to_letterid)
+      {
+	delta_ret.clear();
+	if (not Transposed)
+	  input.letter_deltac(delta_ret, *istate, iletter->first,
+			      delta_kind::states());
 	else
-	  {
-	    partitions[1].insert(*s);
-	    group_map[*s] = 1;
-	  }
+	  input.letter_rdeltac(delta_ret, *istate, iletter->first,
+			       delta_kind::states());
+	if (not delta_ret.empty())
+	  aut_view[*istate][iletter->second] = *delta_ret.begin();
       }
+    }
 
-    for_each_edge(ee, input)
-      {
-	full_map[input.origin_of(*ee)][letter_map[input.label_of(*ee)]]
-	  = input.aim_of(*ee);
-      }
 
     /*-----.
     | Loop |
     `-----*/
 
+    int	 last_group = 1;
+    bool group_modified;
+
     do
+    {
+      group_modified = false;
+
+      for_each_group(igroup, groupid_to_group)
       {
-	partition_modified = false;
- 	current_partition = 0;
-   	for_each_partition(p, partitions)
-	  {
-	    // Quit iteration when all used partitions were computed.
-	    if (current_partition++ > partition_count)
+	if (igroup->empty())
+	  break;
+
+	hstate_t first_state = *(igroup->begin());
+	bool	 group_created = false;
+
+	for_each_state_in_group(istate, *igroup)
+	{
+	  for (i = 0; i < letter_count; ++i)
+	    if (state_to_groupid[aut_view[first_state][i]] !=
+		state_to_groupid[aut_view[*istate][i]])
 	      break;
-	    for_each_state_in_partition(sp, (*p))
-	      {
-		for (i = 0; i < letter_count; ++i)
-		  if (full_map[*sp][i] == NullState)
-		    local_map[*sp][i] = NO_EDGE;
-		  else
-		    local_map[*sp][i] = group_map[full_map[*sp][i]];
-	      }
+	  if (i != letter_count)
+	  {
+	    group_t::iterator istate_save = istate;
 
-	    partition_created = false;
-
-	    iter = 0;
-  	    for_each_state_in_partition(li, (*p))
-	      {
-		if (!iter++)
-		  ref = li;
-   		if (local_map[*ref] != local_map[*li])
-		  {
-		    if (partition_created == false)
-		      {
-			partition_count++;
-			partition_created = true;
-			partition_modified = true;
-		      }
-		    partitions[partition_count].insert(*li);
-		    group_map[*li] = partition_count;
-		    (*p).erase(*li);
-		  }
-	      }
+	    istate_save--;
+	    if (group_created == false)
+	    {
+	      last_group++;
+	      group_created = true;
+	      group_modified = true;
+	    }
+	    groupid_to_group[last_group].insert(*istate);
+	    state_to_groupid[*istate] = last_group;
+	    igroup->erase(*istate);
+	    istate = istate_save;
 	  }
+	}
       }
-    while (partition_modified);
+    }
+    while (group_modified);
 
 
     /*-----------------------.
     | Automaton construction |
     `-----------------------*/
 
-    std::vector<hstate_t> sv(partition_count + 1);
+    std::vector<hstate_t> new_states(last_group + 1);
 
     // Create all states.
-     for (i = 0; i <= partition_count; ++i)
-       sv[i] = output.add_state();
-    output.set_final(sv[0]);
-    output.set_initial(sv[group_map[initial_state]]);
+    for (i = 0; i <= last_group; ++i)
+      new_states[i] = output.add_state();
 
     // Create all edges.
-    for (i = 0; i <= partition_count; ++i)
-      {
- 	elt = partitions[i].begin();
-	letter_count = 0;
-	current_letter = letter_map.begin();
-	for (j = 0; j < letter_map.size(); ++j)
-	  {
- 	    if (full_map[*elt][j] != NullState)
-	      {
-		// Little trick to go to the correct iterator on letter map.
-		while (j > letter_count)
-		  {
-		    current_letter++;
-		    letter_count++;
-		  }
-		output.add_edge(sv[i],
-				sv[group_map[full_map[*elt][j]]],
-				current_letter->first);
-	      }
-	  }
-      }
+    for (i = 0; i <= last_group; ++i)
+    {
+      hstate_t repres = *(groupid_to_group[i].begin());
+
+      for_each_const_(letter_to_letterid_t, iletter, letter_to_letterid)
+	if (aut_view[repres][iletter->second] != NullState)
+	{
+	  if (not Transposed)
+	    output.add_letter_edge(new_states[i],
+				   new_states[state_to_groupid
+					      [aut_view[repres]
+					       [iletter->second]]],
+				   iletter->first);
+	  else
+	    output.add_letter_edge(new_states[state_to_groupid
+					      [aut_view[repres]
+					       [iletter->second]]],
+				   new_states[i],
+				   iletter->first);
+	}
+    }
+
+    // Setting initial and final states.
+    if (not Transposed)
+    {
+      output.set_final(new_states[0]);
+      output.set_initial(new_states[state_to_groupid[*input.initial().begin()]]);
+    }
+    else
+    {
+      output.set_initial(new_states[0]);
+      output.set_final(new_states[state_to_groupid[*input.final().begin()]]);
+    }
+
   }
 
 
@@ -253,7 +255,7 @@ namespace vcsn {
   minimization_moore_here(Element<A, T>& a)
   {
     Element<A, T> output(a.structure());
-    do_minimization_moore(a, output);
+    do_minimization_moore<A, T, false>(a, output);
     a = output;
   }
 
@@ -263,15 +265,34 @@ namespace vcsn {
   minimization_moore(const Element<A, T>& a)
   {
     Element<A, T> output(a.structure());
-    do_minimization_moore(a, output);
+    do_minimization_moore<A, T, false>(a, output);
+    return output;
+  }
+
+  template<typename A, typename T>
+  void
+  co_minimization_moore_here(Element<A, T>& a)
+  {
+    Element<A, T> output(a.structure());
+    do_minimization_moore<A, T, true>(a, output);
+    a = output;
+  }
+
+
+  template<typename A, typename T>
+  Element<A, T>
+  co_minimization_moore(const Element<A, T>& a)
+  {
+    Element<A, T> output(a.structure());
+    do_minimization_moore<A, T, true>(a, output);
     return output;
   }
 
 } // vcsn
 
 // Prevent potential conflicts.
-# undef for_each_partition
-# undef for_each_state_in_partition
+# undef for_each_group
+# undef for_each_state_in_group
 
 
 #endif // ! VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX

@@ -1,3 +1,13 @@
+2005-05-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_moore.hh,
+	* include/vaucanson/algorithms/minimization_moore.hxx: Debug
+	`minimization_moore' with non letter transitions, making sort of
+	`cut_up' on the fly. Add a `co_minimization_moore' algorithm,
+	making a co-minimization on a co-deterministic automaton.
+	* src/tests/automata/algos/boolean_automata/minimization_test.hh:
+	Add `co_minimization_moore' test.
+
 2005-05-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* configure.ac: Bump to Vaucanson 0.7.

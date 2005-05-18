@@ -1,7 +1,7 @@
 // minimization_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_MINIMIZATION_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_MINIMIZATION_TEST_HH
@@ -66,41 +67,50 @@ unsigned minimization_test(tests::Tester& tg)
   const unsigned nb_test    = 20;
   unsigned success_hopcroft = 0;
   unsigned success_moore    = 0;
+  unsigned success_co_moore = 0;
 
   for (unsigned i = 0; i < nb_test; i++)
     {
       automaton_t work = gen.generate_dfa(4, 5);
+      automaton_t co_work = transpose(work);
 
       if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_initial", work, i);
+
+	  TEST_MSG("Automaton saved in /tmp.");
+	  SAVE_AUTOMATON_DOT("/tmp", "co_minimization_initial", co_work, i);
 	}
 
       automaton_t temp = trim(determinize(transpose(work)));
-      //      temp = trim(determinize(temp));
 
-      automaton_t minimize =
-	trim(determinize(transpose(temp)));
+      automaton_t minimize = trim(determinize(transpose(temp)));
+      automaton_t co_minimize = trim(transpose(minimize));
+
       if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("/tmp", "minimization_broz", temp, i);
+	  SAVE_AUTOMATON_DOT("/tmp", "minimization_broz", minimize, i);
+
+	  TEST_MSG("Automaton saved in /tmp.");
+	  SAVE_AUTOMATON_DOT("/tmp", "co_minimization_broz", co_minimize, i);
 	}
 
       automaton_t hopcroft = trim(minimization_hopcroft(work));
       automaton_t moore = trim(minimization_moore(work));
+      automaton_t co_moore = trim(co_minimization_moore(co_work));
 
       if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_hopcroft", hopcroft, i);
-	}
 
-      if (t.verbose() == tests::high)
-	{
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_DOT("/tmp", "minimization_moore", moore, i);
+
+	  TEST_MSG("Automaton saved in /tmp.");
+	  SAVE_AUTOMATON_DOT("/tmp", "co_minimization_moore", co_moore, i);
 	}
 
       if ((minimize.states().size() == hopcroft.states().size()) &&
@@ -123,14 +133,27 @@ unsigned minimization_test(tests::Tester& tg)
 	  TEST_MSG(s.str());
 	}
 
+      if ((co_minimize.states().size() == co_moore.states().size()) &&
+	  (co_minimize.edges().size() ==  co_moore.edges().size()))
+	++success_co_moore;
+      else if (t.verbose() == tests::high)
+	{
+	  std::ostringstream s;
+	  s << "Co-Moore failed on " << i << std::ends;
+	  TEST_MSG(s.str());
+	}
+
     }
 
   std::string rate_hopcroft;
   SUCCESS_RATE(rate_hopcroft, success_hopcroft, nb_test);
   std::string rate_moore;
   SUCCESS_RATE(rate_moore, success_moore, nb_test);
+  std::string co_rate_moore;
+  SUCCESS_RATE(co_rate_moore, success_co_moore, nb_test);
   TEST(t, "Hopcroft minimization "+rate_hopcroft, success_hopcroft == nb_test);
   TEST(t, "Moore minimization    "+rate_moore,    success_moore    == nb_test);
+  TEST(t, "Moore Co-minimization "+co_rate_moore, success_co_moore == nb_test);
 
   return t.all_passed();
 }

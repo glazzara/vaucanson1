@@ -1,7 +1,7 @@
 // minimization_moore.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
 # define VCSN_ALGORITHMS_MINIMIZATION_MOORE_HH
@@ -37,8 +38,6 @@
  * @file minimization_moore.hh
  *
  * This file containes the declaration of minimization_moore().
- *
- * @see minimization_moore(), minimization_moore_here()
  */
 /** @} */
 
@@ -58,12 +57,27 @@ namespace vcsn {
    * O(n2). See  minimize_hopcroft for O(nlogn).
    *
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
-   * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
    * @bug Put the precondition.
    */
   template<typename A, typename T>
   Element<A, T>
   minimization_moore(const Element<A, T>& a);
+
+  /**
+   * Returns the co-minimal co-deterministic automaton associated to
+   * the input one.
+   *
+   * Use   Moore's  algorithm  to   compute  the   minimal  equivalent
+   * co-deterministic  automaton.  The complexity  of  this algorithm  is
+   * O(n2).
+   *
+   * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
+   * @bug Put the precondition.
+   */
+  template<typename A, typename T>
+  Element<A, T>
+  co_minimization_moore(const Element<A, T>& a);
+
 
   /**
    * Minimalize the deterministic input automaton.
@@ -73,11 +87,24 @@ namespace vcsn {
    * minimize_hopcroft for O(nlogn).
    *
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
-   * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
    */
   template<typename A, typename T>
   void
   minimization_moore_here(Element<A, T>& a);
+
+
+  /**
+   * Co-minimalize the co-deterministic input automaton.
+   *
+   * Use Moore's algorithm to co-minimalize (in place) the input
+   * automaton. The complexity of this algorithm is O(n2). See
+   * minimize_hopcroft for O(nlogn).
+   *
+   * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
+   */
+  template<typename A, typename T>
+  void
+  co_minimization_moore_here(Element<A, T>& a);
 
   /** @} */
 
