@@ -5,6 +5,11 @@
 
 SUBDIRS = include doc src
 
+EXTRA_DIST = debian
+
+dist-hook:
+        rm -rf `find $(distdir)/debian -name .svn`
+
 ###
 ### Autoconf needs additional macros.
 ### Tell it where to find them.
@@ -30,3 +35,7 @@ maintainer-check:
 	else \
 	  echo "$@: GNU cppi is required" >&2; \
 	fi
+
+# Build debian packages
+debianpkg:
+	dpkg-buildpackage -uc -us -rfakeroot

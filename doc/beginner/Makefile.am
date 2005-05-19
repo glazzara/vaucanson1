@@ -11,4 +11,4 @@ help.pdf: $(dist_tex_TEX) $(dist_help_tex_TEX)
 
 dist_doc_DATA += help.dvi help.pdf 
 
-MAINTAINERCLEAN = $(dist_doc_DATA)
+MAINTAINERCLEANFILES = $(dist_doc_DATA)

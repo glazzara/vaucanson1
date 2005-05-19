@@ -26,7 +26,6 @@ AC_WITH_VCSN
 AC_PROG_AWK
 
 # SWIG and Python used.
-AC_CHECK_SWIG13
 AM_PATH_PYTHON([2.2])
 
 AC_ARG_ENABLE(
@@ -36,7 +35,7 @@ AC_ARG_ENABLE(
 	[WANT_INTERPRETER=$enableval],
         [WANT_INTERPRETER=no
 cat << \EOF
-
+**********************************************************************
 WARNING:  Vaucanswig  WILL NOT  be  built.   Vaucanswig  is a  set  of
 bindings for the Python language  to use Vaucanson from an interpreter
 or within a scripting language.
@@ -49,24 +48,35 @@ modern computer.
 
 Instructions about Vaucanswig are provided in
 src/demos/vaucanswig/README.
-
+**********************************************************************
 EOF
 sleep 5])
 
 VCSN_VAUCANSWIG_SUBDIR=""
 if test "x$WANT_INTERPRETER" != "xno"; then
-if test "x$ac_cv_recent_swig" != "xyes"; then
+  AC_CHECK_SWIG13
+  if test "x$ac_cv_recent_swig" != "xyes"; then
     AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
-else
-  AC_CONFIG_FILES([src/demos/vaucanswig/Makefile
- 	           src/demos/vaucanswig/doc/Makefile
- 	           src/demos/vaucanswig/meta/Makefile
-                   src/demos/vaucanswig/src/Makefile
-                   src/demos/vaucanswig/python/Makefile])
-  VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
-fi
+  else
+    AC_CONFIG_FILES([src/demos/vaucanswig/Makefile
+ 	             src/demos/vaucanswig/doc/Makefile
+ 	             src/demos/vaucanswig/meta/Makefile
+                     src/demos/vaucanswig/src/Makefile
+                     src/demos/vaucanswig/python/Makefile])
+    VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
+  fi
 fi
 
+# Whether to compile samples or not.
+# (hack to speed up debian packages build)
+AC_ARG_ENABLE(
+	[build-demo],
+        [AC_HELP_STRING([--disable-build-demo],
+			[disable compilation of demos subdirectory])],
+	[build_demo=],
+	[build_demo=true]
+)
+AM_CONDITIONAL([BUILD_DEMO], test $build_demo)
 
 # Libtool used
 AC_DISABLE_STATIC
