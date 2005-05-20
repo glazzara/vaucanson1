@@ -8,7 +8,7 @@ SUBDIRS = include doc src
 EXTRA_DIST = debian
 
 dist-hook:
-        rm -rf `find $(distdir)/debian -name .svn`
+	rm -rf `find $(distdir)/debian -name .svn`
 
 ###
 ### Autoconf needs additional macros.
