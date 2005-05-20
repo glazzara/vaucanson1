@@ -1,3 +1,8 @@
+2005-05-20  Florent Terrones  <florent.terrones@lrde.epita.fr>
+	
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx:
+	Replace unsigned int with bool to avoid a possible bug.
+
 2005-05-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_moore.hh,
