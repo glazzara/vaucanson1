@@ -1,3 +1,8 @@
+2005-05-20  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_moore.hxx: Add the
+	include to `delta_kind.hh'.
+
 2005-05-20  Florent Terrones  <florent.terrones@lrde.epita.fr>
 	
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx:
