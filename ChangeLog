@@ -1,5 +1,16 @@
 2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
 
+	Fix long-standing bug that prevented the correct optimization of
+	static Element structures. Thank Nicolas Stroppa for this report. 
+	
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	* include/vaucanson/algebra/implementation/series/krat.hh,
+	* include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh,
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hh:
+	Replace 'dynamic_values' with 'dynamic_value'.
+
+2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
+
 	Make more parts of Vaucanson compile with -fno-exceptions. Clean
 	use of contract macros.
 

@@ -69,7 +69,7 @@ namespace vcsn {
   struct MetaElement<algebra::Series<W, M>, rat::exp<Tm, Tw> >
     : MetaElement<algebra::SeriesBase<algebra::Series<W, M> >, rat::exp<Tm, Tw> >
   {
-    static const bool dynamic_values = true;
+    static const bool dynamic_value = true;
 
     void	accept(const rat::ConstNodeVisitor<Tm, Tw>& v) const;
     size_t	depth() const;
