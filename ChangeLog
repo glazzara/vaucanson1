@@ -1,5 +1,19 @@
 2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
 
+	Cosmetic changes, as suggested by Thomas Claveirole.
+	
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx: 
+	Change 'unreachable' to 'result_not_computable'.
+	
+	* include/vaucanson/misc/contract.hh: Replace '__trap' with
+	'vcsn_trap_' to avoid using names reserved by the standard
+	library.
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	Fix spelling error.
+
+2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
+
 	Fix long-standing bug that prevented the correct optimization of
 	static Element structures. Thank Nicolas Stroppa for this report. 
 	

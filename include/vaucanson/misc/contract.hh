@@ -157,30 +157,30 @@ namespace utility {
 
 # ifndef VCSN_NDEBUG
 
-#  define __trap(Message, Cond) \
+#  define vcsn_trap_(Message, Cond) \
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
 			   std::string(Message) + ": " #Cond)
-#  define __trap_(Message, Cond, Explanation)				  \
+#  define vcsn_trap__(Message, Cond, Explanation)				  \
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
 			   std::string(Message) + ": " #Cond " // " + Explanation)
-#  define __trap2(Message1, Message2) \
+#  define vcsn_trap_2(Message1, Message2) \
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
 			   std::string(Message1) + ": " + Message2)
 
-#  define assertion(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Assertion failed", Cond))
-#  define precondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Precondition failed", Cond))
-#  define postcondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Postcondition failed", Cond))
+#  define assertion(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : vcsn_trap_("Assertion failed", Cond))
+#  define precondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : vcsn_trap_("Precondition failed", Cond))
+#  define postcondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : vcsn_trap_("Postcondition failed", Cond))
 
-#  define unreachable(Explanation) __trap2("Unreachable code reached", Explanation)
+#  define unreachable(Explanation) vcsn_trap_2("Unreachable code reached", Explanation)
 
-#  define assertion_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : __trap_("Assertion failed", Cond, Explanation_if_false))
-#  define precondition_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : __trap_("Precondition failed", Cond, Explanation_if_false))
-#  define postcondition_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : __trap_("Postcondition failed", Cond, Explanation_if_false))
+#  define assertion_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : vcsn_trap__("Assertion failed", Cond, Explanation_if_false))
+#  define precondition_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : vcsn_trap__("Precondition failed", Cond, Explanation_if_false))
+#  define postcondition_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : vcsn_trap__("Postcondition failed", Cond, Explanation_if_false))
 
-#  define result_not_computable_if(Cond) static_cast<void>((Cond) ? __trap("Result is not computable", Cond) : static_cast<void>(0))
-#  define result_not_computable(Message) __trap2("Result is not computable", Message)
+#  define result_not_computable_if(Cond) static_cast<void>((Cond) ? vcsn_trap_("Result is not computable", Cond) : static_cast<void>(0))
+#  define result_not_computable(Message) vcsn_trap_2("Result is not computable", Message)
 
-#  define pure_service_call(Service) __trap("Pure absract service called", Service)
+#  define pure_service_call(Service) vcsn_trap_("Pure absract service called", Service)
 
 #  define static_assertion(Cond, Message) \
   { utility::static_if<Cond, int, utility::contract::fail<void> >::t Message; Message = 0; }
@@ -205,7 +205,7 @@ namespace utility {
 #  else // ! INTERNAL_CHECKS
 
 #   ifdef STRICT
-#    define __inconsistency(Message1, Message2) __trap2(Message1, Message2)
+#    define __inconsistency(Message1, Message2) vcsn_trap_2(Message1, Message2)
 #   else // ! STRICT
 #    define __inconsistency(Message1, Message2) \
   static_cast<void>(std::cerr << __FILE__ << ':' << __LINE__ << ": " \

@@ -310,7 +310,7 @@ namespace vcsn {
 	assertion_ ((m.size() > 1 ||
 		    elt.first != identity_value(SELECT(typename Self::monoid_t),
 						SELECT(Tm))),
-		    "Support is not empty, start cannot be computed.");
+		    "Support is not empty, star cannot be computed.");
 
 	op_in_star(SELECT(typename Self::semiring_t), elt.second);
 	m.clear();
