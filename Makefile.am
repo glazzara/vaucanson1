@@ -39,3 +39,7 @@ maintainer-check:
 # Build debian packages
 debianpkg:
 	dpkg-buildpackage -uc -us -rfakeroot
+
+# Write <package>-pre<revision>, for the buildfarm
+relname:
+	echo -n $(distdir) > relname

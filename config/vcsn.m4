@@ -522,3 +522,39 @@ AC_DEFUN([AC_CHECK_SWIG13],
 ])
 
 
+# XT_SVN_REVISION
+# ---------------
+# Borrowed from Stratego/XT, for compatibility with the buildfarm
+#
+AC_DEFUN([XT_SVN_REVISION],
+[
+AC_MSG_CHECKING([for the SVN revision of the source tree])
+
+if test -e ".svn"; then
+   REVFIELD="1"
+   SVN_REVISION=`svn status -v -N -q ./ | awk "{ if(\\\$NF == \".\") print \\\$$REVFIELD }"`
+   AC_MSG_RESULT($SVN_REVISION)
+else
+  if test -e "svn-revision"; then
+    SVN_REVISION="`cat svn-revision`"
+    AC_MSG_RESULT($SVN_REVISION)
+  else
+    SVN_REVISION="0"
+    AC_MSG_RESULT([not available, defaulting to 0])
+  fi
+fi
+AC_SUBST([SVN_REVISION])
+
+])
+
+AU_DEFUN([DETECT_SVN_REVISION], [XT_SVN_REVISION])
+
+
+AC_DEFUN([XT_PRE_RELEASE],
+[
+  AC_REQUIRE([XT_SVN_REVISION])
+  VERSION="${VERSION}pre${SVN_REVISION}"
+  PACKAGE_VERSION="${PACKAGE_VERSION}pre${SVN_REVISION}"
+])
+
+AU_DEFUN([PRE_RELEASE], [XT_PRE_RELEASE])

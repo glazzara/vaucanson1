@@ -11,6 +11,10 @@ AC_CONFIG_SRCDIR([config/vcsn.m4])
 AM_INIT_AUTOMAKE([1.9 tar-ustar no-define foreign dist-bzip2])
 AM_CONFIG_HEADER([config.h:config.hin])
 
+DETECT_SVN_REVISION
+# comment to make this a stable release
+PRE_RELEASE
+
 # Some C and C++ code used.
 # Using $CXX as the C compiler is a hack to allow building shared
 # modules from C++ source with libtool.
