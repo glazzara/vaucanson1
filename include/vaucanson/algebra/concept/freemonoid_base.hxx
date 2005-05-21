@@ -183,9 +183,8 @@ namespace vcsn {
     for (typename std::basic_string<T>::const_iterator it = from_data.begin();
 	 it != from_data.end();
 	 ++it)
-      if (not s.alphabet().contains(*it))
-	throw std::invalid_argument (std::string("The Letter ") +
-				     *it + " is not in the given alphabet");
+      precondition_ (s.alphabet().contains(*it),
+		     "The letter " + *it + " is not in the given alphabet");
 # endif // ! VCSN_NDEBUG
     return from_data;
   }

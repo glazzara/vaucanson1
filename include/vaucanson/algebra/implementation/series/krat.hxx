@@ -74,7 +74,7 @@ namespace vcsn {
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const algebra::Series<W, M>&, const rat::exp<Tm, Tw>&)
   {
-    assertion(! "op_contains for Element<Series<W,M>, exp<Tm,Tw> > not defined.");
+    pure_service_call ("default version of op_contains(Series<W,M>, exp<Tm,Tw>)");
     return true;
   }
 

@@ -99,11 +99,8 @@ namespace vcsn {
     // Compute star(m_semiring_elt) <--> epsilon-closure
     for (int r = 0; r < size; r++)
       {
-	if (!m_semiring_elt[r][r].starable())
-	  {
-	    result_not_computable("Star not defined.", std::logic_error);
-	    return;
-	  }
+	result_not_computable_if(!m_semiring_elt[r][r].starable());
+
 	semiring_elt_t w = m_semiring_elt[r][r].star();
 	m_semiring_elt[r][r] = w;
 	for (i = 0; i < size; i++)

@@ -46,6 +46,7 @@
 #  else // ! EXCEPTION_TRAPS
 #   include <cstdlib>
 #  endif // EXCEPTION_TRAP
+# endif // ! VCSN_DEBUG
 
 namespace utility {
   namespace contract {
@@ -154,16 +155,30 @@ namespace utility {
   }
 }
 
+# ifndef VCSN_NDEBUG
+
 #  define __trap(Message, Cond) \
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
-			     std::string(Message) + ": " #Cond)
+			   std::string(Message) + ": " #Cond)
+#  define __trap_(Message, Cond, Explanation)				  \
+   utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
+			   std::string(Message) + ": " #Cond " // " + Explanation)
 #  define __trap2(Message1, Message2) \
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \
-			     std::string(Message1) + ": " + Message2)
+			   std::string(Message1) + ": " + Message2)
 
 #  define assertion(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Assertion failed", Cond))
 #  define precondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Precondition failed", Cond))
 #  define postcondition(Cond) static_cast<void>((Cond) ? static_cast<void>(0) : __trap("Postcondition failed", Cond))
+
+#  define unreachable(Explanation) __trap2("Unreachable code reached", Explanation)
+
+#  define assertion_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : __trap_("Assertion failed", Cond, Explanation_if_false))
+#  define precondition_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : __trap_("Precondition failed", Cond, Explanation_if_false))
+#  define postcondition_(Cond, Explanation_if_false) static_cast<void>((Cond) ? static_cast<void>(0) : __trap_("Postcondition failed", Cond, Explanation_if_false))
+
+#  define result_not_computable_if(Cond) static_cast<void>((Cond) ? __trap("Result is not computable", Cond) : static_cast<void>(0))
+#  define result_not_computable(Message) __trap2("Result is not computable", Message)
 
 #  define pure_service_call(Service) __trap("Pure absract service called", Service)
 
@@ -217,6 +232,14 @@ namespace utility {
 #  define assertion(Cond) static_cast<void>(0)
 #  define precondition(Cond) static_cast<void>(0)
 #  define postcondition(Cond) static_cast<void>(0)
+#  define assertion_(Cond, Explanation_if_false) static_cast<void>(0)
+#  define precondition_(Cond, Explanation_if_false) static_cast<void>(0)
+#  define postcondition_(Cond, Explanation_if_false) static_cast<void>(0)
+
+#  define unreachable(Explanation) static_cast<void>(0)
+
+#  define result_not_computable_if(Cond) static_cast<void>(0)
+#  define result_not_computable(Message) static_cast<void>(0)
 
 #  define pure_service_call(Service) static_cast<void>(0)
 
@@ -228,27 +251,5 @@ namespace utility {
 #  define warning(Message) static_cast<void>(0)
 
 # endif // ! VCSN_NDEBUG
-
-// Definition of macro needed where result can't be computed.
-# ifdef EXCEPTION_TRAPS
-#  define _result_not_computable(file, line, location, Message, Exception) \
-      std::ostringstream os; \
-      os << file << ':' << line << ':' \
-	 << (location ? location : "") \
-	 << (location ? ": " : " ") \
-	 << Message; \
-      throw Exception(os.str());
-# else // !EXCEPTION_TRAPS
-#  define _result_not_computable(file, line, location, Message, Exception) \
-      std::cerr << file << ':' << line << ':' \
-		<< (location ? location : "") \
-		<< std::endl \
-		<< '\t' << Message \
-		<< std::endl;
-# endif // EXCEPTION_TRAPS
-
-# define result_not_computable(Mess, Exc)				\
-  _result_not_computable(__FILE__, __LINE__, PRETTY_FUNCTION(), Mess, Exc);
-
 
 #endif // ! VCSN_MISC_CONTRACT_HH

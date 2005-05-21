@@ -161,7 +161,7 @@ namespace vcsn {
   Element<S, T>
   op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T))
   {
-    assertion(! "default implementation of op_choose_non_starable called");
+    pure_service_call ("default implementation of op_choose_non_starable()");
     return T();
   }
 

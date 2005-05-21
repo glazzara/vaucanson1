@@ -36,7 +36,6 @@
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/limits.hh>
 # include <cmath>
-# include <stdexcept>
 
 /**
  * @file   rational_number.hxx
@@ -281,10 +280,9 @@ namespace vcsn
       if (!a || !b || !(d = gcd(abs(a), b)))
 	return 0;
       int r = a * b / d;
-# ifndef VCSN_NDEBUG
-      if (not r)
-	throw std::overflow_error ("");
-# endif // ! VCSN_NDEBUG
+
+      postcondition_ (r != 0, "Overflow");
+
       return r;
     }
   }

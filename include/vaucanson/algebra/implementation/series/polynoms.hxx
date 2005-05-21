@@ -183,10 +183,10 @@ namespace vcsn {
     {
       const_iterator i = map_.find(m);
 
-      if (i == map_.end())
-	throw std::invalid_argument ("word not in the support");
-      else
-	return i->second;
+      postcondition_ (i != map_.end(),
+		      "Word is not in the support");
+
+      return i->second;
     }
 
     template<typename Tm, typename Tw>
@@ -307,16 +307,14 @@ namespace vcsn {
     else
       {
 	typename std::pair<Tm, Tw> elt = *m.as_map().begin();
-	if (m.size() > 1 ||
-	    elt.first != identity_value(SELECT(typename Self::monoid_t),
-					SELECT(Tm)))
-	  assertion(! "Support is not empty, start can not be computed.");
-	else
-	  {
-	    op_in_star(SELECT(typename Self::semiring_t), elt.second);
-	    m.clear();
-	    m.insert(elt.first, elt.second);
-	  }
+	assertion_ ((m.size() > 1 ||
+		    elt.first != identity_value(SELECT(typename Self::monoid_t),
+						SELECT(Tm))),
+		    "Support is not empty, start cannot be computed.");
+
+	op_in_star(SELECT(typename Self::semiring_t), elt.second);
+	m.clear();
+	m.insert(elt.first, elt.second);
       }
   }
 
