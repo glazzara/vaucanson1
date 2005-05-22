@@ -42,7 +42,7 @@ namespace vcsn {
     T 
     DefaultTransposeFun<S, T>::operator()(const S&, const T& label) const
     {
-      assertion(!"Default transposition is not defined.");
+      pure_service_call ("default transposition");
       return T();
     }
 

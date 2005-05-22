@@ -331,7 +331,7 @@ namespace vcsn {
   struct MetaElement<algebra::Series<W, M>, algebra::polynom<Tm, Tw> >
     : public MetaElement<algebra::SeriesBase<algebra::Series<W, M> >, algebra::polynom<Tm, Tw> >
   {
-    static const bool dynamic_values = true;
+    static const bool dynamic_value = true;
   };
 
   /*------------------------------.

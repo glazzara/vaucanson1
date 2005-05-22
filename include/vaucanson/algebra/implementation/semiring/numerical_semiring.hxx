@@ -190,7 +190,7 @@ namespace vcsn {
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(bool))
   {
-    assertion(! "Cannot choose non-starable Boolean: that does not exist");
+    assertion_(false, "Cannot choose non-starable boolean: all boolean are starable.");
     return Element<algebra::NumericalSemiring, bool>(set, false);
   }
 

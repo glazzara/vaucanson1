@@ -75,7 +75,7 @@ namespace vcsn {
     : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, std::set<L> >
   {
     /// An alphabet implemented with std::set is a dynamic value.
-    static const bool dynamic_values = true;
+    static const bool dynamic_value = true;
   };
 
   /** @} */

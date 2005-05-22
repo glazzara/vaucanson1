@@ -99,8 +99,7 @@ namespace vcsn {
 
     MATCH_(Star, node)
     {
-      // undefined case.
-      assertion(!"valid");
+      result_not_computable("undefined case (star) in krat_exp_support");
       return 0;
     }
     END

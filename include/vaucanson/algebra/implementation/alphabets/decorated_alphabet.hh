@@ -127,8 +127,8 @@ namespace vcsn {
     : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, algebra::AlphabetDecorator<L, T> >
   {
     /// The dynamic properties depends on the implementation one.
-    static const bool dynamic_values =
-    MetaElement<algebra::AlphabetSet<L>,T >::dynamic_values;
+    static const bool dynamic_value =
+    MetaElement<algebra::AlphabetSet<L>,T >::dynamic_value;
 
     /// The meta-symbol that symbolizes all the alphabet's symbols.
     L	joker() const;

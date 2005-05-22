@@ -88,6 +88,8 @@ namespace vcsn {
      * indicating whether an error  occured or not. The second element
      * is an error message when a parse error have been ecountered.
      *
+     * Note that this function requires exception support from the compiler.
+     *
      * @param from The rational expression, as a string.
      * @param exp The element to store the result in. Be sure its set
      *            is correct before calling parse.

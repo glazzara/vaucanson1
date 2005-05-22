@@ -168,13 +168,13 @@ namespace vcsn {
   template<typename S, typename T, typename M, typename W>
   void op_series_structure(const algebra::SeriesBase<S>& s, const T& t, const W& w)
   {
-    assertion(! "defined.");
+    pure_service_call ("default implementation of op_series_structure()");
   }
 
   template <class S, class T>
   Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T))
   {
-    assertion(! "defined.");
+    pure_service_call ("default implementation of op_series_choose()");
     return Element<S, T>();
   }
 

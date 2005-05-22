@@ -1,8 +1,91 @@
 2005-05-21  Olivier Gournet  <victor@lrde.epita.fr>
 
+	* doc/beginner/Makefile.am: Fix MAINTAINERCLEANFILES.
 	* Makefile.am: Add 'relname' rule.
 	* config/vcns.m4,
 	* configure.ac: Add macro to get svn revision, and build -pre package.
+
+2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
+
+	Cosmetic changes, as suggested by Thomas Claveirole.
+	
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx: 
+	Change 'unreachable' to 'result_not_computable'.
+	
+	* include/vaucanson/misc/contract.hh: Replace '__trap' with
+	'vcsn_trap_' to avoid using names reserved by the standard
+	library.
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	Fix spelling error.
+
+2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
+
+	Fix long-standing bug that prevented the correct optimization of
+	static Element structures. Thank Nicolas Stroppa for this report. 
+	
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	* include/vaucanson/algebra/implementation/series/krat.hh,
+	* include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh,
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hh:
+	Replace 'dynamic_values' with 'dynamic_value'.
+
+2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
+
+	Make more parts of Vaucanson compile with -fno-exceptions. Clean
+	use of contract macros.
+
+	Now uses of 'result_not_computable' will abort() the program
+	unless EXCEPTION_TRAPS is defined. (this is what EXCEPTION_TRAPS
+	stands for in the first place).
+	
+	* include/vaucanson/misc/contract.hh: Always define
+	vcsn::contract::trap. Add macro 'result_not_computable_if'. Change
+	'result_not_computable' to look more like other contract
+	macros. Add 'assertion_', 'precondition_' and 'postcondition_' to
+	accept an explanation message. Add 'unreachable' macro to detect
+	unreachable code.
+
+	* include/vaucanson/algorithms/closure.hxx: Use
+	'result_not_computable_if()'.
+
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx: Use
+	'precondition_()' instead of direct throw.
+
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx:
+	Use 'postcondition()' instead of direct throw.
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	Use 'postcondition()' instead of direct throw.
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hh:
+	Report dependency on exceptions in the documentation.
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	Use 'unreachable' to beautify.
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx: 
+	Use 'unreachable' to beautify and express error message more verbosely.
+
+	* include/vaucanson/contexts/automaton_functions.thxx: Use
+	'postcondition_()' instead of direct throw.
+
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hxx:
+	Use 'assertion_' to beautify.
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
+	Use 'assertion_' to simplify. (this change also optimizes one test
+	away when VCSN_NDEBUG is defined)
+
+	* include/vaucanson/algebra/implementation/series/transpose.hxx, 
+	* include/vaucanson/algebra/implementation/series/krat.hxx, 
+	* include/vaucanson/algebra/concept/semiring_base.hxx, 
+	* include/vaucanson/algebra/concept/series_base.hxx: Use
+	'pure_service_call' instead of 'assertion', because it is what it
+	was intended for in the first place.
+
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
+	Change exception test accordingly.
 
 2005-05-20  Olivier Gournet  <victor@lrde.epita.fr>
 
@@ -16,7 +99,12 @@
 	* src/demos/fibonacci/fibonacci.cc: Remove svn:executable property.
 	* doc/Makefile.doc: Dont prompt user on latex error.
 	* doc/beginner/Makefile.am: Fix MAINTAINERCLEANFILES typo.
-	
+
+2005-05-20  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_moore.hxx: Add the
+	include to `delta_kind.hh'.
+
 2005-05-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_moore.hh,

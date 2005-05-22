@@ -69,9 +69,9 @@ bool numerical_semiring_test(tests::Tester& t)
 	   );
 
     }
-  catch(std::overflow_error&)
+  catch(std::logic_error& e)
     {
-      std::cerr << "Integer overflow in rational calculus."
+      std::cerr << "Exception:" << e.what()
 		<< std::endl;
     }
   TEST(t, "starable works. (2)", result_test);  

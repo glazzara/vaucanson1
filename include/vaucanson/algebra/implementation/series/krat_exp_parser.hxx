@@ -201,7 +201,7 @@ namespace vcsn {
 	     ++i)
 	  if (i->type == a_word)
 	    return i->m;
-	assertion(! "internal error in krat_exp parser.");
+	unreachable("internal error in krat_exp parser");
 	return MonoidValue();
       }
 
@@ -212,7 +212,7 @@ namespace vcsn {
 	     ++i)
 	  if (i->type == a_weight)
 	    return i->w;
-	assertion(! "internal error in krat_exp parser.");
+	unreachable("internal error in krat_exp parser.");
 	return SemiringEltValue();
       }
 

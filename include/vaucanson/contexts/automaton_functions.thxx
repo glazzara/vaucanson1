@@ -100,8 +100,9 @@ namespace vcsn
 
       rat_exp_t	r (series);
       std::pair<bool, std::string> p = parse(exp, r);
-      if (p.first)
-	throw std::invalid_argument (p.second);
+
+      postcondition_ (not p.first, p.second);
+
       return r;
     }
 
