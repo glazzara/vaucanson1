@@ -307,7 +307,7 @@ namespace vcsn {
     else
       {
 	typename std::pair<Tm, Tw> elt = *m.as_map().begin();
-	assertion_ ((m.size() > 1 ||
+	assertion_ (!(m.size() > 1 ||
 		    elt.first != identity_value(SELECT(typename Self::monoid_t),
 						SELECT(Tm))),
 		    "Support is not empty, star cannot be computed.");

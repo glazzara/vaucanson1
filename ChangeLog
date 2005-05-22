@@ -1,3 +1,8 @@
+2005-05-22  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx: 
+	Fix bug introduced by the use of 'assertion_()'.
+
 2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
 
 	Cosmetic changes, as suggested by Thomas Claveirole.
