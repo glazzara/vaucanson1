@@ -1,7 +1,7 @@
 // aut_to_exp.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -42,6 +42,9 @@
 # include <list>
 # include <set>
 
+# include <stdlib.h>
+# include <time.h>
+
 namespace vcsn {
 
   /*---------------.
@@ -68,6 +71,57 @@ namespace vcsn {
 	++k;
       s = k;
       return *s;
+    }
+  };
+
+
+/*--------------.
+| RandomChooser |
+`--------------*/
+
+/**
+ * Choose randomly a state between all currently choosable
+ * @pre There must be at least one state in the automaton.
+ * @see aut_to_exp()
+ */
+
+  struct RandomChooser
+  {
+    template <class Auto_>
+    hstate_t
+    operator()(const Auto_& a) const
+    {
+      assertion(a.states().size() > 0);
+      srand((unsigned)time( NULL ));
+
+      int n_init = 0;
+      int n_final = 0;
+      for (typename Auto_::state_iterator i = a.states().begin();
+	   i != a.states().end();
+	   ++i)
+      {
+	if (a.is_initial(*i))
+	  ++n_init;
+	if (a.is_final(*i))
+	  ++n_final;
+      }
+
+      int n = (rand() % (a.states().size() - n_init - n_final));
+
+      typename Auto_::state_iterator k = a.states().begin();
+      int kk = 0;
+      while (kk <= n ||
+	     ((a.is_initial(*k)) || (a.is_final(*k))) || k == a.states().end())
+	{
+	  if (k == a.states().end())
+	    {
+	      k = a.states().begin();
+	      continue;
+	    }
+	  ++k;
+	  ++kk;
+	}
+      return *k;
     }
   };
 

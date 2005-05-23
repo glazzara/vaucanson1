@@ -1,15 +1,20 @@
+2005-05-23  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/aut_to_exp.hxx:
+	Add a new chooser that chooses randomly states to delete.
+
 2005-05-22  Raphaël Poss  <raph@lrde.epita.fr>
 
-	* include/vaucanson/algebra/implementation/series/polynoms.hxx: 
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx:
 	Fix bug introduced by the use of 'assertion_()'.
 
 2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
 
 	Cosmetic changes, as suggested by Thomas Claveirole.
-	
-	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx: 
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx:
 	Change 'unreachable' to 'result_not_computable'.
-	
+
 	* include/vaucanson/misc/contract.hh: Replace '__trap' with
 	'vcsn_trap_' to avoid using names reserved by the standard
 	library.
@@ -20,8 +25,8 @@
 2005-05-21  Raphaël Poss  <raph@lrde.epita.fr>
 
 	Fix long-standing bug that prevented the correct optimization of
-	static Element structures. Thank Nicolas Stroppa for this report. 
-	
+	static Element structures. Thank Nicolas Stroppa for this report.
+
 	* include/vaucanson/algebra/implementation/series/polynoms.hh,
 	* include/vaucanson/algebra/implementation/series/krat.hh,
 	* include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh,
@@ -36,7 +41,7 @@
 	Now uses of 'result_not_computable' will abort() the program
 	unless EXCEPTION_TRAPS is defined. (this is what EXCEPTION_TRAPS
 	stands for in the first place).
-	
+
 	* include/vaucanson/misc/contract.hh: Always define
 	vcsn::contract::trap. Add macro 'result_not_computable_if'. Change
 	'result_not_computable' to look more like other contract
@@ -62,7 +67,7 @@
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
 	Use 'unreachable' to beautify.
 
-	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx: 
+	* include/vaucanson/algebra/implementation/series/krat_exp_support.hxx:
 	Use 'unreachable' to beautify and express error message more verbosely.
 
 	* include/vaucanson/contexts/automaton_functions.thxx: Use
@@ -75,23 +80,23 @@
 	Use 'assertion_' to simplify. (this change also optimizes one test
 	away when VCSN_NDEBUG is defined)
 
-	* include/vaucanson/algebra/implementation/series/transpose.hxx, 
-	* include/vaucanson/algebra/implementation/series/krat.hxx, 
-	* include/vaucanson/algebra/concept/semiring_base.hxx, 
+	* include/vaucanson/algebra/implementation/series/transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/algebra/concept/semiring_base.hxx,
 	* include/vaucanson/algebra/concept/series_base.hxx: Use
 	'pure_service_call' instead of 'assertion', because it is what it
 	was intended for in the first place.
 
 	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh:
 	Change exception test accordingly.
-	
+
 2005-05-20  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_moore.hxx: Add the
 	include to `delta_kind.hh'.
 
 2005-05-20  Florent Terrones  <florent.terrones@lrde.epita.fr>
-	
+
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx:
 	Replace unsigned int with bool to avoid a possible bug.
 
@@ -109,7 +114,7 @@
 
 	* configure.ac: Bump to Vaucanson 0.7.
 	* doc/NEWS.txt: Update with Vaucanson new features.
-	
+
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx: Fix label creation for automata.
@@ -131,30 +136,30 @@
 	* include/vaucanson/algorithms/transducer_to_fmp.hh,
 	* include/vaucanson/algorithms/transducer_to_fmp.hxx: Rename to...
 	* include/vaucanson/algorithms/realtime_to_fmp.hh,
-	* include/vaucanson/algorithms/realtime_to_fmp.hxx: ...These. 
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx: ...These.
 	Rename algorithm trans_to_fmp to realtime_to_fmp.
 
 	* include/vaucanson/algorithms/fmp_to_transducer.hh,
 	* include/vaucanson/algorithms/fmp_to_transducer.hxx: Rename to...
 	* include/vaucanson/algorithms/fmp_to_realtime.hh,
-	* include/vaucanson/algorithms/fmp_to_realtime.hxx: ...These. 
-	Rename algorithm fmp_to_trans to fmp_to_realtime. 
+	* include/vaucanson/algorithms/fmp_to_realtime.hxx: ...These.
+	Rename algorithm fmp_to_trans to fmp_to_realtime.
 
 	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
 	* include/Makefile.am: Update accordingly.
-	
+
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/cut_up.hxx: Fix error in algorithm.
-	
+
 2005-05-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/xml/infos.hh: Remove useless file. This file 
+	* include/vaucanson/xml/infos.hh: Remove useless file. This file
 	will be re-added if necessary.
 	* include/Makefile.am: Update accordingly.
 
 2005-05-16  Florent Terrones  <florent.terrones@lrde.epita.fr>
-	
+
 	* include/vaucanson/algebra/concept/freemonoid_base.hxx:
 	Replaced uint with unsigned int in op_rout.
 	* include/vaucanson/tools/dot_format.hxx: Fixed 80-column
