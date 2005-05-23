@@ -89,6 +89,20 @@ namespace vcsn {
       /// Compute the depth of the expression.
       size_t depth() const;
 
+      /// Compute the star height (h) of the expression (E).
+      /// Definition:
+      /// if E=0 or E=1 or E='letter'
+      ///    then 0
+      /// if E=E1 + E2 or E=E1.E2
+      ///    then max(h(E1), h(E2))
+      /// if E=F*
+      ///    then 1 + h(F)
+      size_t star_height() const;
+
+      /// Compute the length of the expression,
+      /// i.e. the number of letters used in the expression.
+      size_t length() const;
+
       /// Get the root node of the expression.
       //@{
       node_t*		&base();

@@ -35,6 +35,8 @@
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 
 # include <vaucanson/algebra/implementation/series/rat/depth_visitor.hh>
+# include <vaucanson/algebra/implementation/series/rat/star_height_visitor.hh>
+# include <vaucanson/algebra/implementation/series/rat/length_visitor.hh>
 
 namespace vcsn {
 
@@ -120,6 +122,22 @@ namespace vcsn {
     size_t exp<LetterT, WeightT>::depth() const
     {
       DepthVisitor<monoid_elt_value_t, semiring_elt_value_t> v;
+      accept(v);
+      return v.get();
+    }
+
+    template<typename LetterT, typename WeightT>
+    size_t exp<LetterT, WeightT>::star_height() const
+    {
+      StarHeightVisitor<monoid_elt_value_t, semiring_elt_value_t> v;
+      accept(v);
+      return v.get();
+    }
+
+    template<typename LetterT, typename WeightT>
+    size_t exp<LetterT, WeightT>::length() const
+    {
+      LengthVisitor<monoid_elt_value_t, semiring_elt_value_t> v;
       accept(v);
       return v.get();
     }

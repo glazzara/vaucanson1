@@ -1,5 +1,23 @@
 2005-05-23  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
 
+	* include/vaucanson/algebra/implementation/series/rat/star_height_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx:
+	New. Add a new visitor that computes the star height of an expression.
+
+	* include/vaucanson/algebra/implementation/series/rat/length_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/length_visitor.hxx:
+	New. Add a new visitor that computes the length of an expression,
+	i.e. the number of letters in the expression.
+
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh:
+	Add star_height() and length() methods to class exp.
+
+	* include/Makefile.am:
+	Update accordingly.
+
+2005-05-23  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/aut_to_exp.hxx:
 	Add a new chooser that chooses randomly states to delete.
 

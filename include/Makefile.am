@@ -159,6 +159,10 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/implementation/series/rat/dispatch_visitor.hxx   \
 	vaucanson/algebra/implementation/series/rat/dump_visitor.hh	   \
 	vaucanson/algebra/implementation/series/rat/dump_visitor.hxx	   \
+	vaucanson/algebra/implementation/series/rat/star_height_visitor.hh \
+	vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx\
+	vaucanson/algebra/implementation/series/rat/length_visitor.hh      \
+	vaucanson/algebra/implementation/series/rat/length_visitor.hxx     \
 	vaucanson/algebra/implementation/series/rat/exp.hh		   \
 	vaucanson/algebra/implementation/series/rat/exp.hxx		   \
 	vaucanson/algebra/implementation/series/rat/nodes.hh		   \
