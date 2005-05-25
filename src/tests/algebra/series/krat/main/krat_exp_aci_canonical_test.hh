@@ -1,7 +1,7 @@
 // krat_exp_aci_canonical_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_ACI_CANONICAL_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_ACI_CANONICAL_TEST_HH
@@ -92,12 +93,10 @@ bool krat_exp_aci_canonical_test(tests::Tester& tg)
     if (canonical(exp1) == canonical(exp2))
       nb_success++;
     else
-      std::cerr << "canonical("
-	        << samples[nb_tests].fst
-	        << ") != canonical("
-		<<  samples[nb_tests].snd
-		<< ")"
-		<< std::endl;;
+      TEST_FAIL_SAVE("krat_exp_aci_canonical", nb_tests,
+		     "canonical(" << samples[nb_tests].fst
+		     << ") != canonical("
+		     << samples[nb_tests].snd << ")" << std::endl);
   }
 
   std::string rate;

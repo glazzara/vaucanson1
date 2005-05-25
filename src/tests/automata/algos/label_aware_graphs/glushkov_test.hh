@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_GLUSHKOV_TEST_HH
@@ -75,15 +76,12 @@
 	for (i = 0; i < nb_word_test; ++i)				\
 	  {								\
 	    monoid_elt_t w = e.choose_from_supp();			\
-	    if (t.verbose() == tests::high)				\
-	      std::cout << "TEST: glushkov " << i << " on " << e	\
-			<< " : test " << w << std::endl;		\
 	    if (eval(au, w) ==						\
 		zero_as<semiring_elt_value_t>::of(ss.semiring()))	\
 	      {								\
-		if (t.verbose() == tests::high)				\
-		  std::cout << "TEST: glushkov " << i			\
-			    << " failed." << std::endl;			\
+		TEST_FAIL_SAVE("glushkov", i,				\
+			       "on " << e				\
+			       << " : test " << w << std::endl);	\
 		break;							\
 	      }								\
 	  }								\
@@ -154,8 +152,6 @@ bool glushkov_test(tests::Tester& tg)
 
 	try
 	  {
-	    if (t.verbose() == tests::high)
-	      std::cerr << "Expression : " << exp << std::endl;
 	    standard_of(au, exp.value());
 	    bool standard = is_standard(au) or exp == zero_as<exp_t>::of(ss);
 	    realtime_here(au);
@@ -170,20 +166,17 @@ bool glushkov_test(tests::Tester& tg)
 	      {
 		unsigned i;
 		for (i = 0; i < nb_word_test; ++i)
+		{
+		  monoid_elt_t w = exp.choose_from_supp();
+		  if (eval(au, w) ==
+		      zero_as<semiring_elt_value_t>::of(ss.semiring()))
 		  {
-		    monoid_elt_t w = exp.choose_from_supp();
-		    if (t.verbose() == tests::high)
-		      std::cout << "TEST: glushkov " << i << " : test " << w
-				<< std::endl;
-		    if (eval(au, w) ==
-			zero_as<semiring_elt_value_t>::of(ss.semiring()))
-		      {
-			if (t.verbose() == tests::high)
-			  std::cout << "TEST: glushkov " << i << " failed."
-				    << std::endl;
-			break;
-		      }
+		    TEST_FAIL_SAVE("glushkov", i,
+				   "on " << exp
+				   << " : test " << w << std::endl);
+		    break;
 		  }
+		}
 		if (standard and
 		    ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
 		  ++success;
@@ -195,7 +188,6 @@ bool glushkov_test(tests::Tester& tg)
 	catch (...)
 	  {
 	    ++nb_test;
-	    //	    std::cout << exp << std::endl;
 	  }
       }
     std::string rate;

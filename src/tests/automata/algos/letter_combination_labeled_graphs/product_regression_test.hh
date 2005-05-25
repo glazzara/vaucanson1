@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_PRODUCT_REGRESSION_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_PRODUCT_REGRESSION_TEST_HH
@@ -84,9 +85,8 @@ product_regression_test(tests::Tester& tg)
 
   if (not t.all_passed())
     {
+      TEST_MSG("Automaton saved in /tmp.");
       SAVE_AUTOMATON_DOT("/tmp", "product_regression_test", prod, 0);
-      std::cerr << "Product saved in /tmp/product_regression_test_0.dot"
-		<< std::endl;
     }
   return t.all_passed();
 }

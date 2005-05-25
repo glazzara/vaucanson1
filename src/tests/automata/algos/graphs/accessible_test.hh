@@ -1,7 +1,7 @@
 // accessible_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_ACCESSIBLE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_ACCESSIBLE_TEST_HH
@@ -65,8 +66,7 @@ bool accessible_test(tests::Tester& tg)
 	equal(coac_states.begin(), coac_states.end(), coac_auto.states().begin()))
       success++;
     else
-      std::cerr << "TEST: Accessible algorithm do not give expected states."
-	        << std::endl;
+      TEST_MSG("TEST: Accessible algorithm do not give expected states.");
   }
 
   std::string test_rate;

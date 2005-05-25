@@ -1,7 +1,7 @@
 // assert_test.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,9 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
+#include <check/tester.hh>
 #include <vaucanson/config/system.hh>
 #include <iostream>
 #include <cassert>
@@ -39,7 +41,6 @@
 int main()
 {
   assert(false);
-  std::cerr << "assert() does not work or is disabled." << std::endl;
+  TEST_MSG("assert() does not work or is disabled.");
   return 0;
 }
-

@@ -1,7 +1,7 @@
 // krat_exp_constant_term_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_CONSTANT_TERM_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_CONSTANT_TERM_TEST_HH
@@ -46,7 +47,7 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
   typedef typename krat_exp_t::monoid_elt_t	monoid_elt_t;
   typedef typename monoid_elt_t::set_t		monoid_t;
   typedef typename monoid_elt_t::value_t	monoid_elt_value_t;
-  
+
   typedef typename krat_exp_t::semiring_elt_t	semiring_elt_t;
   typedef typename semiring_elt_t::value_t	semiring_elt_value_t;
   typedef typename semiring_elt_t::set_t	semiring_t;
@@ -69,11 +70,11 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
   semiring_elt_t s_zero = semiring.zero(SELECT(semiring_elt_value_t));
 
   monoid_elt_t m_identity = monoid.identity(SELECT(monoid_elt_value_t));
-  
+
   semiring_elt_t s_2identity = s_identity + s_identity;
   bool s_identity_computable =
     (semiring.identity(SELECT(semiring_elt_value_t))).starable();
-  
+
   letter_t larray[] = { a, b, letter_t () };
 
   unsigned int nb_tests = 0;
@@ -182,12 +183,12 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
 	  w_star,
 	  w.starable()
 	},
-	{// a+1 
+	{// a+1
 	  krat_exp_t (s, a) + krat_exp_t (s, m_identity),
 	  s_identity,
 	  true
 	},
-	{// (a+1)* 
+	{// (a+1)*
 	  (krat_exp_t (s, a) + krat_exp_t (s, m_identity)).star(),
 	  s_identity_star,
 	  s_identity_computable
@@ -215,13 +216,19 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
 	if (exps[i].computable != ret.second)
 	  {
 	    if (exps[i].computable)
-	      std::cerr << "FAIL: Constant term should be computed in "
-			<< exps[i].exp
-			<< std::endl;
+	    {
+	      TEST_FAIL_SAVE("krat_exp_constant_term",
+			     i,
+			     "Constant term should be computed in "
+			     << exps[i].exp
+			     << std::endl);
+	    }
 	    else
-	      std::cerr << "FAIL: Constant term shouldn't be computed in "
-			<< exps[i].exp
-			<< std::endl;
+	      TEST_FAIL_SAVE("krat_exp_constant_term",
+			     i,
+			     "Constant term shouldn't be computed in "
+			     << exps[i].exp
+			     << std::endl);
 	  }
 	else
 	  if (exps[i].computable)
@@ -229,20 +236,22 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
 	      if (ret.first == exps[i].res)
 		++nb_succs;
 	      else
-		std::cerr << "FAIL: Expression "
-			  << exps[i].exp
-			  << " returned "
-			  << ret.first
-			  << " as constant term, instead of "
-			  << exps[i].res
-			  << std::endl;
+		TEST_FAIL_SAVE("krat_exp_constant_term",
+			       i,
+			       "Expression "
+			       << exps[i].exp
+			       << " returned "
+			       << ret.first
+			       << " as constant term, instead of "
+			       << exps[i].res
+			       << std::endl);
 	    }
 	  else
 	    ++nb_succs;
 	++nb_tests;
       }
   }
-  
+
   std::string rate;
   SUCCESS_RATE(rate, nb_succs, nb_tests);
   TEST(t, "Constant term on all kind of basic expressions " + rate,

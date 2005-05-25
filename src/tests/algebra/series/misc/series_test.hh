@@ -1,7 +1,7 @@
 // series_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_MISC_SERIES_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_MISC_SERIES_TEST_HH
@@ -56,6 +57,7 @@ bool series_test(tests::Tester& t)
   typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
   typedef typename series_set_elt_t::support_t		support_t;
 
+  int			n_test = 0;
   alphabet_t		base;
   size_t		test_sizes[] =
     {
@@ -65,7 +67,7 @@ bool series_test(tests::Tester& t)
       base.max_size() <= 256 ? base.max_size() : 256
     };
 
-  for (size_t i = 0; i < sizeof (test_sizes) / sizeof (size_t); ++i)
+  for (size_t i = 0; i < sizeof (test_sizes) / sizeof (size_t); ++i, ++n_test)
     {
       alphabet_t alphabet (base);
       for (size_t j = 0; j < test_sizes[i]; ++j)
@@ -150,16 +152,20 @@ bool series_test(tests::Tester& t)
 	    random_values.find(m);
 	  if (i == random_values.end())
 	    {
-
-	      std::cerr << "m is " << m
-			<< " and has not been found in random_values."
-			<< std::endl;
+	      TEST_FAIL_SAVE("series",
+			     n_test,
+			     "m is " << m
+			     << " and has not been found in random_values."
+			     << std::endl);
 	      allright = false;
 	    }
 	  else if (i->second != s5.get(m))
 	    {
-	      std::cerr << "get(" << m << ") is " << s5.get(m)
-			<< " instead of " << i->second << '.' << std::endl;
+	      TEST_FAIL_SAVE("series",
+			     n_test,
+			     "get(" << m << ") is " << s5.get(m)
+			     << " instead of " << i->second
+			     << '.' << std::endl);
 	      allright = false;
 	    }
 	}
@@ -197,15 +203,20 @@ bool series_test(tests::Tester& t)
 	    random_values.find(mirror(m));
 	  if (i == random_values.end())
 	    {
-	      std::cerr << "m is " << m
-			<< " and has not been found in random_values."
-			<< std::endl;
+	      TEST_FAIL_SAVE("series",
+			     n_test,
+			     "m is " << m
+			     << " and has not been found in random_values."
+			     << std::endl);
 	      allright = false;
 	    }
 	  else if (i->second != s5.get(m))
 	    {
-	      std::cerr << "get(" << m << ") is " << s5.get(m)
-			<< " instead of " << i->second << '.' << std::endl;
+	      TEST_FAIL_SAVE("series",
+			     n_test,
+			     "get(" << m << ") is " << s5.get(m)
+			     << " instead of " << i->second
+			     << '.' << std::endl);
 	      allright = false;
 	    }
 	}

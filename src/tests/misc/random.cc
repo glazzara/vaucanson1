@@ -1,7 +1,7 @@
 // random.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,9 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
+#include <check/tester.hh>
 #include <vaucanson/misc/random.hh>
 #include <cassert>
 #include <climits>
@@ -36,21 +38,22 @@
 
 int main()
 {
-#define TEST_TYPE(Type, MAX)					\
-  for (int i = 0; i < MAXITER; ++i)				\
-    {								\
-      Type c = utility::random::generate< Type >();		\
-      Type min = utility::random::generate< Type >(0, MAX);	\
-      Type max = utility::random::generate< Type >(min, MAX);	\
-      c = utility::random::generate< Type >(min, max);		\
-      if (!(min <= c && max >= c)) \
-      { \
-  std::cerr << "random failed: min = " << min \
-            << ", max = " << max \
-            << ", val = " << c << std::endl; \
-        exit(1); \
-      } \
-    }
+#define TEST_TYPE(Type, MAX)						\
+  for (int i = 0; i < MAXITER; ++i)					\
+  {									\
+    Type c = utility::random::generate< Type >();			\
+    Type min = utility::random::generate< Type >(0, MAX);		\
+    Type max = utility::random::generate< Type >(min, MAX);		\
+    c = utility::random::generate< Type >(min, max);			\
+    if (!(min <= c && max >= c))					\
+    {									\
+      TEST_FAIL_SAVE("random", i,					\
+		     "random failed: min = " << min			\
+		     << ", max = " << max				\
+		     << ", val = " << c << std::endl);			\
+      exit(1);								\
+    }									\
+  }
   TEST_TYPE(char, CHAR_MAX);
   TEST_TYPE(int, INT_MAX);
   for (int i = 0; i < MAXITER; ++i)
@@ -64,4 +67,3 @@ int main()
       assert(f >= -2. && f <= 2.);
     }
 }
-

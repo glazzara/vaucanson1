@@ -1,7 +1,7 @@
 // krat_exp_cderivation_linear_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_BOOLEAN_KRAT_EXP_CDERIVATION_LINEAR_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_BOOLEAN_KRAT_EXP_CDERIVATION_LINEAR_TEST_HH
@@ -44,7 +45,7 @@ template <class Expr>
 bool krat_exp_cderivation_linear_test(tests::Tester& tg)
 {
   using namespace utility;
-  
+
   typedef Expr						krat_exp_t;
   typedef typename krat_exp_t::value_t			kexp_t;
   typedef typename krat_exp_t::monoid_elt_t		monoid_elt_t;
@@ -96,12 +97,13 @@ bool krat_exp_cderivation_linear_test(tests::Tester& tg)
 	      if (dexp.first == cdexp)
 		++success;
 	      else
-		std::cerr << "FAIL: exp was \"" << exp << "\"." << std::endl
-			  << "FAIL: derivate says \"" << dexp.first << "\"."
-			  << std::endl
-			  << "FAIL: cderivate says \"" << cdexp << "\"."
-			  << std::endl
-			  << "FAIL: (letter was " << *it << ")" << std::endl;
+		TEST_FAIL_SAVE("krat_exp_cderivation_linear", tests,
+			       "exp was \"" << exp << "\"." << std::endl
+			       << "derivate says \"" << dexp.first << "\"."
+			       << std::endl
+			       << "cderivate says \"" << cdexp << "\"."
+			       << std::endl
+			       << "(letter was " << *it << ")" << std::endl);
 	    }
 	}
     }

@@ -1,7 +1,7 @@
 // numerical_semiring_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_NUMERICAL_SEMIRING_NUMERICAL_SEMIRING_TEST_HH
 # define VCSN_TESTS_ALGEBRA_NUMERICAL_SEMIRING_NUMERICAL_SEMIRING_TEST_HH
@@ -65,16 +66,15 @@ bool numerical_semiring_test(tests::Tester& t)
       average_value = average_value < T(0) ? -average_value : average_value;
       TEST(t,
 	   "starable distribution is correct",
-	   (average_value / T(2000)) <= (T(1) / T(10)) 
+	   (average_value / T(2000)) <= (T(1) / T(10))
 	   );
 
     }
   catch(std::logic_error& e)
     {
-      std::cerr << "Exception:" << e.what()
-		<< std::endl;
+      TEST_MSG("Exception:" << e.what());
     }
-  TEST(t, "starable works. (2)", result_test);  
+  TEST(t, "starable works. (2)", result_test);
   nb = semiring.choose_non_starable(SELECT(T));
   timeout = 0;
   result_test = true;

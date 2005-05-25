@@ -1,7 +1,7 @@
 // krat_exp_parse_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_PARSE_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_PARSE_TEST_HH
@@ -50,17 +51,18 @@
   typedef typename monoid_t::alphabet_t		alphabet_t;
 
 template <class Alphabet>
-void
-error(const std::string& original,
-      const std::string& result,
-      const std::string& expected,
-      const Alphabet& a)
+void error(const std::string& original,
+	   const std::string& result,
+	   const std::string& expected,
+	   const Alphabet& a, int iteration)
+
 {
-  std::cerr << "*** PARSER TEST ***" << std::endl
-	    << "On \"" << original << '\"' << std::endl
-	    << "Got \"" << result << '\"' << std::endl
-	    << "Instead of \"" << expected << '\"' << std::endl
-	    << "(Alphabet is " << a << " )" << std::endl;
+  TEST_FAIL_SAVE("krat_exp_parse",
+		 iteration,
+		 "On \"" << original << '\"' << std::endl
+		 << "Got \"" << result << '\"' << std::endl
+		 << "Instead of \"" << expected << '\"' << std::endl
+		 << "(Alphabet is " << a << " )" << std::endl);
 }
 
 template <class Expr>
@@ -84,7 +86,7 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
     typeid_name = "i";
   if (typeid(semiring_elt_value_t) == typeid(bool))
     typeid_name = "b";
-  
+
   std::string path_to_test(VCSN_SRC_DIR);
   path_to_test += "/src/tests/algebra/series/krat/tests/";
   std::string filename =
@@ -109,21 +111,21 @@ bool krat_exp_parse_random_test(tests::Tester& tg)
 	  std::pair<bool, std::string> ret = parse(sstr.str(), exp);
 	  if (ret.first)
 	    error(sstr.str(), ret.second, sstr.str(),
-		  exp.structure().monoid().alphabet());
+		  exp.structure().monoid().alphabet(), nb_test);
 	  else
 	    {
 	      std::ostringstream ostr;
 	      ostr << exp;
 	      if (ostr.str() != sstr.str())
 		error(sstr.str(), ostr.str(), sstr.str(),
-		      exp.structure().monoid().alphabet());
+		      exp.structure().monoid().alphabet(), nb_test);
 	      else
 		++nb_success;
 	    }
 	  ++nb_test;
 	  file.getline(buff, 2048);
 	}
-      
+
       file.close();
       file.clear();
       filename = path_to_test + "random_krat_exp_" + typeid_name + "_weird";
@@ -242,7 +244,7 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 	{
 	  if (samples[nb_test].out != 0)
 	    error(samples[nb_test].exp, r.second, samples[nb_test].out,
-		  exp.structure().monoid().alphabet());
+		  exp.structure().monoid().alphabet(), nb_test);
 	  else
 	    nb_success++;
 	}
@@ -259,10 +261,10 @@ bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 	       << exp;
 	  if (samples[nb_test].out == 0)
 	    error(samples[nb_test].exp, ostr.str(), "error",
-		  exp.structure().monoid().alphabet());
+		  exp.structure().monoid().alphabet(), nb_test);
 	  else if (samples[nb_test].out != ostr.str())
 	    error(samples[nb_test].exp, ostr.str(), samples[nb_test].out,
-		  exp.structure().monoid().alphabet());
+		  exp.structure().monoid().alphabet(), nb_test);
 	  else
 	    nb_success++;
 	}

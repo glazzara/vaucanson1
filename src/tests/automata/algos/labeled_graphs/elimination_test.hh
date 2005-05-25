@@ -1,7 +1,7 @@
 // elimination_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_ELIMINATION_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_ELIMINATION_TEST_HH
@@ -68,16 +69,16 @@ bool elimination_test(tests::Tester& tg)
       for (; i < nb_word_test; ++i)
 	{
 	  monoid_elt_t w = language.choose_from_supp();
-	  if (t.verbose() == tests::high)
-	    std::cout << "TEST: aut_to_exp " << nb << " : test "
-		      << w << std::endl;
 	  if (eval(a, w) ==
 	      zero_as<semiring_elt_value_t>::of(a.structure().series().semiring()))
 	    {
+	      if (t.verbose() != tests::high)
+	      {
+		TEST_MSG("Automaton saved in /tmp.");
+		SAVE_AUTOMATON_DOT("/tmp", "aut_to_exp", a, nb);
+	      }
+	      TEST_MSG("aut_to_exp " << nb << " failed.");
 	      break;
-	      if (t.verbose() == tests::high)
-		std::cout << "TEST: aut_to_exp " << nb
-			  << " failed." << std::endl;
 	    }
 	}
       if (i == nb_word_test)

@@ -1,7 +1,7 @@
 // closure_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_CLOSURE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_CLOSURE_TEST_HH
@@ -77,7 +78,7 @@ bool closure_test(tests::Tester& tg)
 		error_backward_epsilon = true;
 	    if (error_backward_idempotence or error_backward_epsilon)
 	      {
-		std::cerr << "Error, automata saved in /tmp." << std::endl;
+		TEST_MSG("Automata saved in /tmp.");
 		SAVE_AUTOMATON_DOT("/tmp",
 				   "backward_closure_in",
 				   auto_epsilon,
@@ -99,7 +100,7 @@ bool closure_test(tests::Tester& tg)
 		error_forward_epsilon = true;
 	    if (error_backward_idempotence or error_backward_epsilon)
 	      {
-		std::cerr << "Error, automata saved in /tmp." << std::endl;
+		TEST_MSG("Automata saved in /tmp.");
 		SAVE_AUTOMATON_DOT("/tmp",
 				   "forward_closure_in",
 				   auto_epsilon,

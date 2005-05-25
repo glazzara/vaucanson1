@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_THOMPSON_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_THOMPSON_TEST_HH
@@ -82,15 +83,12 @@
 	for (i = 0; i < nb_word_test; ++i)				\
 	  {								\
 	    monoid_elt_t w = e.choose_from_supp();			\
-	    if (t.verbose() == tests::high)				\
-	      std::cout << "TEST: glushkov " << i << " on " << e	\
-			<< " : test " << w << std::endl;		\
 	    if (eval(au, w) ==						\
 		zero_as<semiring_elt_value_t>::of(ss.semiring()))	\
 	      {								\
-		if (t.verbose() == tests::high)				\
-		  std::cout << "TEST: glushkov " << i			\
-			    << " failed." << std::endl;			\
+		TEST_FAIL_SAVE("glushkov", i,				\
+			       "on " << e				\
+			       << " : test " << w << std::endl);	\
 		break;							\
 	      }								\
 	  }								\
@@ -175,15 +173,12 @@ bool thompson_test(tests::Tester& tg)
 	      for (; i < nb_word_test; ++i)
 		{
 		  monoid_elt_t w = exp.choose_from_supp();
-		  if (t.verbose() == tests::high)
-		    std::cout << "TEST: thompson (" << nb << ")"
-			      << i << " : test " << w << std::endl;
 		  if (eval(au, w) ==
 		      zero_as<semiring_elt_value_t>::of(ss.semiring()))
 		    {
-		      if (t.verbose() == tests::high)
-			std::cout << "TEST: thompson " << i
-				  << " failed." << std::endl;
+		      TEST_FAIL_SAVE("thompson", nb,
+				     i << " : test "
+				     << w << std::endl);
 		      break;
 		    }
 		}

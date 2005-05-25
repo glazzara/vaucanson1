@@ -1,7 +1,7 @@
 // in_concat_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_IN_CONCAT_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_IN_CONCAT_TEST_HH
@@ -85,10 +86,12 @@ bool in_concat_test(tests::Tester& tg)
 	    ++size;
 	  else
 	    {
-	      std::cerr << "TEST: concatenation of automata corresponding"
-			<< "to following expressions failed."
-			<< std::endl;
-	      std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs << std::endl;
+	      TEST_FAIL_SAVE("in_concat",
+			     i,
+			     "concatenation of automata corresponding"
+			     << "to following expressions failed."
+			     << std::endl
+			     << exp_lhs << " and " << exp_rhs << std::endl);
 	    }
 	  ++nb_test_done;
 	}

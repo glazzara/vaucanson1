@@ -1,7 +1,7 @@
 // derivations_common.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,10 +28,12 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_DERIVATIONS_COMMON_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_DERIVATIONS_DERIVATIONS_COMMON_HH
 
+# include <check/tester.hh>
 # include <utility>
 
 template <class Derivation,
@@ -45,7 +47,7 @@ choose_exp_and_derivate(const Series& series,
 {
   Expr random = series.choose(SELECT(typename Expr::value_t));
   Derivation d(random, l);
-  
+
   while (!d.is_defined())
     {
       random = series.choose(SELECT(typename Expr::value_t));
@@ -68,7 +70,7 @@ choose_cancelable_exp_and_derivate(const Series& series,
   Expr random = series.choose(SELECT(typename Expr::value_t));
   random.star();
   Derivation d(random, l);
-  
+
   while (!d.is_defined())
     {
       random = series.choose(SELECT(typename Expr::value_t));
@@ -83,24 +85,26 @@ template <class Derivation,
 inline
 bool test_derivate(const Expr& specimen,
 		   const Letter& l,
-		   const typename Derivation::result_t& expected)
+		   const typename Derivation::result_t& expected,
+		   int count)
 {
   Derivation d(specimen, l);
-  
+
   if (d.is_defined() && (d.get_result() == expected))
     return true;
   else
     {
-      std::cerr << "TEST FAILED: derivation of \"" << specimen <<
-	"\" with letter '" << l << "' does not give \"" << expected << "\"." <<
-	std::endl;
+      TEST_FAIL_SAVE("derivation", count,
+		     "derivation of \"" << specimen
+		     << "\" with letter '" << l << "' does not give \""
+		     << expected << "\"." << std::endl);
       return false;
     }
 }
 
 # define TEST_DERIVATE(Count, SuccessCount, Exp, Ltr, Expected)	\
 {								\
-  if (test_derivate<derivation_t>(Exp, Ltr, Expected))		\
+  if (test_derivate<derivation_t>(Exp, Ltr, Expected, Count))	\
     SuccessCount++;						\
   Count++;							\
 }

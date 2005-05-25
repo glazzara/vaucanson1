@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_COMPLETE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_COMPLETE_TEST_HH
@@ -66,39 +67,49 @@ unsigned complete_test(tests::Tester& tg)
   bool					result_test;
 
   for (unsigned i = 0 ; i < nb_test; i++)
-    {
-      automaton_t a = gen.generate_dfa(30);
-      automaton_t b = a;
-      complete_here(a);
-      alphabet_t alphabet = a.structure().series().monoid().alphabet();
-      result_test = true;
+  {
+    automaton_t a = gen.generate_dfa(30);
+    automaton_t b = a;
+    complete_here(a);
+    alphabet_t alphabet = a.structure().series().monoid().alphabet();
+    result_test = true;
 
-      if ((a.edges().size() == a.states().size() *
-	   a.structure().series().monoid().alphabet().size())
-	  && is_deterministic(a))
+    if ((a.edges().size() == a.states().size() *
+	 a.structure().series().monoid().alphabet().size())
+	&& is_deterministic(a))
+    {
+      for (alphabet_iterator l = alphabet.begin();
+	   l != alphabet.end();
+	   ++l)
+      {
+	for_each_state(s, a)
 	{
-	  for (alphabet_iterator l = alphabet.begin();
-	       l != alphabet.end();
-	       ++l)
-	    {
-	      for_each_state(s, a)
-		{
-		  delta_ret.clear();
-		  a.letter_deltac(delta_ret, *s, *l,
-				  delta_kind::states());
-		  if (delta_ret.size() == 0)
-		    result_test = false;
-		}
-	    }
-	  if (result_test)
-	    ++nb_success;
+	  delta_ret.clear();
+	  a.letter_deltac(delta_ret, *s, *l,
+			  delta_kind::states());
+	  if (delta_ret.size() == 0)
+	    result_test = false;
 	}
-      else if (tg.verbose() == tests::high)
-	{
-	  tools::dot_dump(std::cout, b, "input");
-	  tools::dot_dump(std::cout, a, "automaton");
-	}
-     }
+      }
+      if (result_test)
+	++nb_success;
+    }
+    else
+      result_test = false;
+
+    if (not result_test)
+    {
+      std::ostringstream s;
+      s << "Test failed on " << i << std::ends;
+      TEST_MSG(s.str());
+    }
+
+    if (tg.verbose() != tests::high or not result_test)
+    {
+      TEST_MSG("Automaton saved in /tmp.");
+      SAVE_AUTOMATON_DOT("/tmp", "complete_initial", b, i);
+    }
+  }
   std::string rate;
   SUCCESS_RATE(rate, nb_success, nb_test);
   TEST(t, "complete on DFA." + rate, nb_success == nb_test);

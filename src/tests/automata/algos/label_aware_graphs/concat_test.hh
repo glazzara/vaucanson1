@@ -1,7 +1,7 @@
 // concat_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_CONCAT_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_CONCAT_TEST_HH
@@ -74,7 +75,7 @@ bool concat_test(tests::Tester& tg)
       monoid_elt_t word_1 = exp_lhs.choose_from_supp();
       monoid_elt_t word_2 = exp_rhs.choose_from_supp();
       monoid_elt_t word = word_1 * word_2;
-     
+
       try
 	{
 	  automaton_t ret = concatenate(auto_lhs, auto_rhs);
@@ -87,11 +88,13 @@ bool concat_test(tests::Tester& tg)
 	    ++size;
 	  else
 	    {
-	      std::cerr << "TEST: concatenation of automata corresponding"
-			<< "to following expressions failed."
-			<< std::endl;
-	      std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs
-			<< std::endl;
+	      TEST_FAIL_SAVE("concat",
+			     i,
+			     "concatenation of automata corresponding"
+			     << "to following expressions failed."
+			     << std::endl
+			     << exp_lhs << " and " << exp_rhs
+			     << std::endl);
 	    }
 	  ++nb_test_done;
 	}

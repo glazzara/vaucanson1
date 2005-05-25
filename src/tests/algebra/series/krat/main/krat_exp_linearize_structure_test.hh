@@ -1,7 +1,7 @@
 // krat_exp_linearize_structure_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_STRUCTURE_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_STRUCTURE_TEST_HH
@@ -118,7 +119,11 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
       lin_str << lin;
 
       if (exp_str.str() != lin_str.str())
-	std::cerr << "TEST:" << exp << "!=" << lin << std::endl;
+      {
+	TEST_FAIL_SAVE("exp_linearize_structure",
+		       n,
+		       exp << "!=" << lin << std::endl);
+      }
       else
 	++nb_succs;
     }

@@ -102,15 +102,17 @@ unsigned product_test(tests::Tester& tg)
 	  g_series_set_elt_t exp_rhs(g_auto_rhs.structure().series());
 	  exp_lhs = aut_to_exp(g_auto_lhs);
 	  exp_rhs = aut_to_exp(g_auto_rhs);
-	  std::cerr << "Error, automata saved in /tmp." << std::endl;
+	  TEST_MSG("Automata saved in /tmp.");
 	  SAVE_AUTOMATON_DOT("/tmp", "rhs", auto_rhs, cpt);
 	  SAVE_AUTOMATON_DOT("/tmp", "lhs", auto_lhs, cpt);
 	  SAVE_AUTOMATON_DOT("/tmp", "prod", p, cpt);
-	  std::cerr << "TEST: product of automata corresponding"
-		    << " to following expressions failed."
-		    << std::endl;
-	  std::cerr << "TEST: " << exp_lhs << " and " << exp_rhs
-		    << std::endl;
+	  TEST_FAIL_SAVE("product",
+			 cpt,
+			 "product of automata corresponding"
+			 << " to following expressions failed."
+			 << std::endl
+			 << exp_lhs << " and " << exp_rhs
+			 << std::endl);
 	}
       else
 	++success_product;

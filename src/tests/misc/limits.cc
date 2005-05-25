@@ -1,7 +1,7 @@
 // limits.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001,2002,2003 The Vaucanson Group.
+// Copyright (C) 2001,2002,2003,2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -26,12 +26,31 @@
 //    * Raphael Poss <raphael.poss@lrde.epita.fr>
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #include <vaucanson/misc/limits.hh>
 #include "check/tester.hh"
 
+template <typename T>
+void print_attr(T attr)
+{
+  std::cout << attr << std::endl;
+}
+
+template <>
+void print_attr<signed char>(signed char attr)
+{
+  std::cout << static_cast<int>(attr) << std::endl;
+}
+
+template <>
+void print_attr<unsigned char>(unsigned char attr)
+{
+  std::cout << static_cast<unsigned>(attr) << std::endl;
+}
+
 #define NATTR(Attr)  \
-std::cout << #Attr "\t:" << utility::limits<T>::Attr << std::endl
+std::cout << #Attr "\t:"; print_attr(utility::limits<T>::Attr);
 
 template<typename T>
 void test_limits()

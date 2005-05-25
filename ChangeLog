@@ -1,3 +1,45 @@
+2005-05-25  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	This patch aim to make the test suite only output printable
+	characters.
+	In case of error in a test, relevant informations are now output
+	in a file in `/tmp'.
+	* src/tests/check/tester.hh: Add `TEST_FAIL_SAVE' macro for
+	test to save informations about failing tests in a file. Force
+	`EQTEST' to only output printable characters through the
+	filtering function `printable'.
+	* src/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/closure_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
+	* src/tests/automata/algos/graphs/accessible_test.hh,
+	* src/tests/automata/algos/boolean_automata/complete_test.hh,
+	* src/tests/automata/algos/labeled_graphs/thompson_test.hh,
+	* src/tests/automata/algos/labeled_graphs/elimination_test.hh,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/product_regression_test.hh,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh,
+	* src/tests/algebra/series/krat/boolean/krat_exp_cderivation_linear_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_expand_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh,
+	* src/tests/algebra/series/misc/series_test.hh,
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh,
+	* src/tests/misc/assert_test.cc,
+	* src/tests/misc/random.cc,
+	* src/tests/misc/limits.cc: Fix the output of these tests, forcing
+	it to be clean by only printing printable characters.
+	* src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh:
+	Remove. This test is useless as
+	`src/tests/algebra/series/krat/derivations/derivation/*' do the
+	same, in a more complete way.	
+	* src/tests/algebra/series/krat/main/Makefile.am: Update accordingly.
+
 2005-05-23  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/rat/star_height_visitor.hh,

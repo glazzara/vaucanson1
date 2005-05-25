@@ -1,7 +1,7 @@
 // krat_exp_linearize_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -28,6 +28,7 @@
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+//    * Michael Cadilhac <michael.cadilhac@lrde.epita.fr>
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_TEST_HH
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_TEST_HH
@@ -98,31 +99,37 @@ bool krat_exp_linearize_test(tests::Tester& tg)
 	      lin.structure().monoid().alphabet().value().end())
 	    {
 	      success = false;
-	      std::cerr << "TEST: in: " << exp << std::endl;
-	      std::cerr << "TEST: out: " << lin << std::endl;
-	      std::cerr << "FAIL: Letter not in alphabet: " << *i << "."
-			<< std::endl;
+	      TEST_FAIL_SAVE("krat_exp_linearize",
+			     nb_tests,
+			     "in: " << exp << std::endl
+			     << "out: " << lin << std::endl
+			     << "Letter not in alphabet: " << *i << "."
+			     << std::endl);
 	    }
 	  // The letter should not exists anywhere else.
 	  unsigned int t;
 	  if ((t = count(llin.begin(), llin.end(), *i)) != 1)
 	    {
 	      success = false;
-	      std::cerr << "TEST: in: " << exp << std::endl;
-	      std::cerr << "TEST: out: " << lin << std::endl;
-	      std::cerr << "FAIL: Letter <<" << *i << ">> found " << t
-			<< " times in the expression instead of 1."
-			<< std::endl;
+	      TEST_FAIL_SAVE("krat_exp_linearize",
+			     nb_tests,
+			     "in: " << exp << std::endl
+			     << "out: " << lin << std::endl
+			     << "Letter <<" << *i << ">> found " << t
+			     << " times in the expression instead of 1."
+			     << std::endl);
 	    }
 	  // The letter should be the same in both expressions.
 	  if (i->first != *j)
 	    {
 	      success = false;
-	      std::cerr << "TEST: in: " << exp << std::endl;
-	      std::cerr << "TEST: out: " << lin << std::endl;
-	      std::cerr << "FAIL: Letter <<" << *i << ">> in the linearized"
-		"expression does not match letter " << *j << " in the "
-		"base expression." << std::endl;
+	      TEST_FAIL_SAVE("krat_exp_linearize",
+			     nb_tests,
+			     "in: " << exp << std::endl
+			     << "out: " << lin << std::endl
+			     << "Letter <<" << *i << ">> in the linearized"
+			     "expression does not match letter " << *j <<
+			     " in the base expression." << std::endl);
 	    }
 	}
       if (success)
