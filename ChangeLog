@@ -1,3 +1,12 @@
+2005-05-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/sub_normalize.hh,
+	* include/vaucanson/algorithms/sub_normalize.hxx: New. Add 
+	sub-normalization for FMP transducers.
+
+	* src/tests/automata/algos/fmp_transducers/sub_normalize_test.hh: New.
+	Add test for sub-normalization of FMP transducers.
+
 2005-05-25  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx:
