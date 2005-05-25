@@ -1,3 +1,9 @@
+2005-05-25  Florent Terrones  <florent.terrones@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx:
+	Fix a compilation error that happens if one uses derivatives_automaton
+	with the DEBUG flag.
+
 2005-05-25  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	This patch aim to make the test suite only output printable

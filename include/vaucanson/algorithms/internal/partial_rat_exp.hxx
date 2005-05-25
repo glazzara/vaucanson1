@@ -1,7 +1,7 @@
 // partial_rat_exp.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -270,7 +270,7 @@ namespace vcsn
     for (i++; i != e.end(); ++i)
     {
       if (i.on_node())
-	o << '|' << PartialExp<S, T>::series_set_elt_value_t(i.node());
+	o << '|' << typename PartialExp<S, T>::series_set_elt_value_t(i.node());
       else
 	o << '|' << i.semiring_elt();
     }
