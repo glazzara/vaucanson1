@@ -1,5 +1,10 @@
 2005-05-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/xml/tools.hxx: Fix a bug with boolean automata.
+	* src/tests/xml/b_ref.dot: Update accordingly.
+	
+2005-05-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/sub_normalize.hh,
 	* include/vaucanson/algorithms/sub_normalize.hxx: New. Add 
 	sub-normalization for FMP transducers.

@@ -288,10 +288,10 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
        *
        * @return	series_set_elt_t
        *
-       * @param T		Type of the automaton.
+       * @param T	Type of the automaton.
        *
        * @arg node	XML node.
-       * @arg aut		Automaton to store series.
+       * @arg aut	Automaton to store series.
        *
        */
       template <class T>
@@ -304,6 +304,10 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	typedef Element<typename T::series_set_t, krat_exp_impl_t> krat_exp_t;
 
 	krat_exp_t res (aut.structure().series());
+	if (xml2str(node->getAttribute(STR2XML("label"))) == "")
+	  return
+	    vcsn::algebra::identity_as<typename T::series_set_elt_t::value_t>
+	    ::of(aut.structure().series());
 	parse(xml2str(node->getAttribute(STR2XML("label"))), res);
 
 	return res;
