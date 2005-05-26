@@ -254,6 +254,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/aut_to_exp.hxx				   \
 	vaucanson/algorithms/sub_automaton.hh				   \
 	vaucanson/algorithms/sub_automaton.hxx				   \
+	vaucanson/algorithms/sub_normalize.hh				   \
+	vaucanson/algorithms/sub_normalize.hxx				   \
 	vaucanson/algorithms/standard_of.hh				   \
 	vaucanson/algorithms/standard_of.hxx				   \
 	vaucanson/algorithms/minimization_hopcroft.hh			   \
