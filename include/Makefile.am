@@ -82,6 +82,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/tools/usual_escaped_characters.hh			   \
 	vaucanson/tools/xml_dump.hh					   \
 	vaucanson/tools/xml_dump.hxx					   \
+	vaucanson/tools/xml_load.hh					   \
+	vaucanson/tools/xml_load.hxx					   \
 	vaucanson/tools/xml_display.hh					   \
 	vaucanson/tools/xml_display.hxx					   \
 	vaucanson/tools/out_display.hh					   \

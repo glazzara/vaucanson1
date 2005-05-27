@@ -47,7 +47,7 @@ namespace vcsn {
     template <typename Auto>
     void xml_dump(std::ostream& o, const Auto& a, const std::string& name)
     {
-      o << automaton_saver(a, io::string_out(), xml::XML());
+      o << automaton_saver(a, io::string_out(), xml::XML(name));
     }
 
   } // tools

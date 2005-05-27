@@ -1,3 +1,15 @@
+2005-05-27  Florent Terrones  <florent.terrones@lrde.epita.fr>
+	
+	* include/vaucanson/xml/XML.hh: Add the attribute 'name_' to the
+	structure 'XML' so as to store the automaton name during the XML
+	session.
+	* include/vaucanson/tools/xml_dump.hxx: Add the name of the automaton
+	in 'xml_dump'.
+	* include/vaucanson/tools/xml_load.hh,
+	* include/vaucanson/tools/xml_load.hxx: New. Add 'xml_load' tool to
+	fill an automaton from a IStream containing XML	data.
+	* include/Makefile.am: Update accordingly.
+	
 2005-05-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/Makefile.am: Add missing files.

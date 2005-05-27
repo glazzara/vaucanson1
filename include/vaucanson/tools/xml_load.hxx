@@ -1,4 +1,4 @@
-// XML.hh: this file is part of the Vaucanson project.
+// xml_load.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -29,55 +29,29 @@
 //    * Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
-
-#ifndef VCSN_XML_XML_HH
-# define VCSN_XML_XML_HH
+#ifndef VCSN_TOOLS_XML_LOAD_HXX
+# define VCSN_TOOLS_XML_LOAD_HXX
 
 /**
- * @file XML.hh
+ * @file xml_load.hxx
  *
- * XML main file. Contains the base functor to load / save XML.
+ * Calls a method to fill the automaton 'a' by reading on 'i'.
  *
- * @see io::automaton_loader, io::automaton_saver
- *
- * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+ * @author Florent Terrones <florent.terrones@lrde.epita.fr>
  */
 
+namespace vcsn {
 
-# include <vaucanson/tools/usual_macros.hh>
-# include <vaucanson/xml/xml_converter.hh>
+  namespace tools {
 
-
-namespace vcsn
-{
-  namespace xml
-  {
-    struct XML
+    template <typename Auto, class IStream>
+    void xml_load(IStream& i, Auto& a)
     {
-      XML()
-	{}
-      XML(const std::string& name) : name_(name)
-	{}
+      i >> automaton_loader(a, io::string_out(), xml::XML());
+    }
 
-      template <typename Saver, typename Conv>
-      void operator()(std::ostream& out,
-		      const Saver& s,
-		      const Conv& conv) const;
+  } // tools
 
-      template<typename Loader>
-      void operator()(std::istream& in, Loader& l);
+} // vcsn
 
-    protected:
-      const std::string name_;
-    };
-
-  } // !xml
-
-} // !vcsn
-
-
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/xml/XML.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
-
-#endif // VCSN_XML_XML_HH
+#endif // ! VCSN_TOOLS_XML_LOAD_HXX
