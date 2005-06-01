@@ -44,7 +44,7 @@
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/automata/concept/copy.hh>
 # include <vaucanson/algorithms/cut_up.hh>
-
+# include <vector>
 
 namespace vcsn
 {

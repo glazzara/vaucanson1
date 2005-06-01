@@ -101,8 +101,6 @@ namespace vcsn {
     typedef typename monoid_elt_t::first_monoid_elt_t first_monoid_elt_t;
     typedef typename monoid_elt_t::second_monoid_elt_t
       second_monoid_elt_t;
-    typedef typename monoid_t::first_monoid_t first_monoid_t;
-    typedef typename monoid_t::second_monoid_t second_monoid_t;
     typedef typename monoid_elt_t::first_monoid_elt_value_t
       first_monoid_elt_value_t;
     typedef typename monoid_elt_t::second_monoid_elt_value_t
@@ -196,16 +194,24 @@ namespace vcsn {
 			Ret& res)
   {
     AUTOMATON_TYPES(Ret);
-
+    typedef std::vector<hstate_t> vector_t;
+    
     auto_copy(res, cut_up(a));
 
     edges_t edges = res.value().edges();
+    vector_t i_states; i_states.reserve(res.initial().size());
+    vector_t f_states; f_states.reserve(res.final().size());
 
-    for_each_initial_state(i, res)
+    for_each_initial_state(f, res)
+      i_states.push_back(*f);
+    for_each_final_state(i, res)
+      f_states.push_back(*i);
+    
+    for_each_(vector_t, i, i_states)
       do_sub_normalize_transition(res, hstate_t(), *i,
 				  res.get_initial(*i), true, false);
 
-    for_each_final_state(f, res)
+    for_each_(vector_t, f, f_states)
       do_sub_normalize_transition(res, *f, hstate_t(),
 				  res.get_final(*f), false, true);
 

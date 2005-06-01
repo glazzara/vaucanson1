@@ -1,3 +1,8 @@
+2005-06-01  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/sub_normalize.hh,
+	* include/vaucanson/algorithms/sub_normalize.hxx: Minor fix.
+
 2005-05-27  Florent Terrones  <florent.terrones@lrde.epita.fr>
 	
 	* include/vaucanson/xml/XML.hh: Add the attribute 'name_' to the
