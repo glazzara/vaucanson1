@@ -1,5 +1,4 @@
-//								-*- c++ -*-
-// fmp_transducer_functions.thh: this file is part of the Vaucanson project.
+// z_transducer.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -18,7 +17,7 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
-// The Vaucanson Group represents the following contributors:
+// The Vaucanson Group consists of the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
 //    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
@@ -31,8 +30,39 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
-# include <vaucanson/algebra/concept/alphabets_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+#ifndef VCSN_Z_TRANSDUCER_HH
+# define VCSN_Z_TRANSDUCER_HH
+
+# include <vaucanson/z_automaton.hh>
+# include <vaucanson/boolean_automaton.hh>
+
+# define VCSN_CONTEXT_NAMESPACE z_transducer
+
+# include <vaucanson/contexts/char_letter.thh>
+# include <vaucanson/contexts/dynamic_alphabet.thh>
+# include <vaucanson/contexts/free_monoid.thh>
+
+namespace vcsn
+{
+
+  namespace VCSN_CONTEXT_NAMESPACE
+  {
+    typedef z_automaton::semiring_elt_t		output_semiring_elt_t;
+    typedef output_semiring_elt_t::set_t	output_semiring_t;
+    typedef output_semiring_elt_t::value_t	output_semiring_elt_value_t;
+
+    typedef z_automaton::rat_exp_t		output_series_set_elt_t;
+    typedef output_series_set_elt_t::set_t	output_series_set_t;
+    typedef output_series_set_elt_t::value_t	output_series_set_elt_value_t;
+
+  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+
+} // End of namespace vcsn.
+
+# include <vaucanson/contexts/ratseries_semiring.thh>
+# include <vaucanson/contexts/polynom_series.thh>
+# include <vaucanson/contexts/generic_automaton_impl.thh>
+# include <vaucanson/contexts/transducer.thh>
 
 namespace vcsn
 {
@@ -40,35 +70,15 @@ namespace vcsn
   namespace VCSN_CONTEXT_NAMESPACE
   {
 
-    template <class T1, class T2>
-    automaton_t new_automaton(const T1& first_alphabet,
-			      const T2& second_alphabet);
-
-    template <class FirstInputIterator, class SecondInputIterator>
-    automaton_t new_automaton(const FirstInputIterator first_begin,
-			      const FirstInputIterator first_end,
-			      const SecondInputIterator second_begin,
-			      const SecondInputIterator second_end);
-
-    template <class T1, class T2>
-    monoid_elt_t make_couple(const T1& first_alphabet,
-			     const T2& second_alphabet,
-			     const std::string& first_exp = "",
-			     const std::string& second_exp = "");
-
-    template <class FirstIterator, class SecondIterator>
-    monoid_elt_t make_couple(const FirstIterator first_begin,
-			     const FirstIterator first_end,
-			     const SecondIterator second_begin,
-			     const SecondIterator second_end,
-			     const std::string& first_exp,
-			     const std::string& second_exp);
+    AUTOMATON_TYPES_EXACT(automaton_t);
+    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
 
   } // End of namespace VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.
 
+# include <vaucanson/contexts/transducer_functions.thh>
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/contexts/fmp_transducer_functions.thxx>
-# endif // ! VCSN_USE_INTERFACE_ONLY
+# undef VCSN_CONTEXT_NAMESPACE
+
+#endif // ! VCSN_Z_TRANSDUCER_HH

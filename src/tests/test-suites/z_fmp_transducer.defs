@@ -1,0 +1,4 @@
+#include <vaucanson/z_fmp_transducer.hh>
+
+#define TEST_STATIC_ARGS \
+   vcsn::z_fmp_transducer::automaton_t

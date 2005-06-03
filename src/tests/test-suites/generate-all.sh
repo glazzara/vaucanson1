@@ -117,6 +117,12 @@ done;
    context_headers_boolean_transducer.defs \
    ../context_headers/transducers
 
+../bin/generate-test-suite.sh \
+   context_headers_z_transducer \
+   context_headers_z_transducer.defs \
+   ../context_headers/transducers
+
+
 # FIXME: Directories labeled_graphs, label_aware_graphs and
 #	 freemonoid_labeled_graphs are not tested.
 ../bin/generate-test-suite.sh \
@@ -125,6 +131,11 @@ done;
     ../automata/implementation_check ../automata/algos/graphs \
     ../automata/algos/series_multiplicity_transducers
 
+../bin/generate-test-suite.sh \
+   z_transducer \
+   z_transducer.defs \
+    ../automata/implementation_check ../automata/algos/graphs \
+    ../automata/algos/series_multiplicity_transducers
 
 ../bin/generate-test-suite.sh \
    context_headers_fmp_transducer \
@@ -141,4 +152,9 @@ done;
 ../bin/generate-test-suite.sh \
    fmp_transducer \
    fmp_transducer.defs \
+    ../automata/algos/fmp_transducers
+
+../bin/generate-test-suite.sh \
+   z_fmp_transducer \
+   z_fmp_transducer.defs \
     ../automata/algos/fmp_transducers

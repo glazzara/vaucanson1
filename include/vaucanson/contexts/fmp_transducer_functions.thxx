@@ -76,12 +76,12 @@ namespace vcsn
     }
 
     template <class FirstIterator, class SecondIterator>
-    series_set_elt_t make_couple(const FirstIterator first_begin,
-				 const FirstIterator first_end,
-				 const SecondIterator second_begin,
-				 const SecondIterator second_end,
-				 const std::string& first_exp,
-				 const std::string& second_exp)
+    monoid_elt_t make_couple(const FirstIterator first_begin,
+			     const FirstIterator first_end,
+			     const SecondIterator second_begin,
+			     const SecondIterator second_end,
+			     const std::string& first_exp,
+			     const std::string& second_exp)
     {
       first_alphabet_t		first_alpha;
       for (FirstIterator e = first_begin; e != first_end; ++e)
@@ -91,25 +91,17 @@ namespace vcsn
       for (SecondIterator e = second_begin; e != second_end; ++e)
 	second_alpha.insert(*e);
 
-      semiring_t		semiring;
-      monoid_t			freemonoidproduct (first_alpha, second_alpha);
-      series_set_t		series (semiring, freemonoidproduct);
+      monoid_t			fmp (first_alpha, second_alpha);
 
-      series_set_elt_t		series_elt(series);
-
-      monoid_elt_value_t	fmp_elt (first_exp, second_exp);
-
-      semiring_elt_value_t	semiring_elt = true;
-      series_elt.assoc(fmp_elt, semiring_elt);
-
-      return series_elt;
+      monoid_elt_value_t	fmp_elt_value (first_exp, second_exp);
+      return Element<monoid_t, monoid_elt_value_t> (fmp, fmp_elt_value);
     }
 
     template <class T1, class T2>
-    series_set_elt_t make_couple(const T1& first_alphabet,
-				 const T2& second_alphabet,
-				 const std::string& first_exp,
-				 const std::string& second_exp)
+    monoid_elt_t make_couple(const T1& first_alphabet,
+			     const T2& second_alphabet,
+			     const std::string& first_exp,
+			     const std::string& second_exp)
     {
       return make_couple(first_alphabet.begin(), first_alphabet.end(),
 			 second_alphabet.begin(), second_alphabet.end(),

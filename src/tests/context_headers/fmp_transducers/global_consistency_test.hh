@@ -91,13 +91,10 @@ global_consistency_test(tests::Tester& t)
 
 
   monoid_elt_value_t	fmp_elt ("aa", "yx");
-  semiring_elt_value_t	semiring_elt = true;
-  series_set_elt_t		series_elt(ss);
-  series_elt.assoc(fmp_elt, semiring_elt);
 
-  series_set_elt_t	couple = make_couple(first_at, second_at, "aa", "yx");
+  monoid_elt_t	couple = make_couple(first_at, second_at, "aa", "yx");
 
-  TEST(t, "make_couple works.", series_elt == couple);
+  TEST(t, "make_couple works.", fmp_elt == couple.value());
 
   while (not test_done)
     try

@@ -1,0 +1,5 @@
+#include <vaucanson/z_transducer.hh>
+
+using namespace vcsn::z_transducer;
+
+#define TEST_STATIC_ARGS automaton_t

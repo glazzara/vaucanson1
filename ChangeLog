@@ -1,10 +1,37 @@
+2005-06-03  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/z_transducer.hh: New. Add a context header for
+	transducers on Z semiring.
+	* include/Makefile.am: Update accordingly.
+
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx: Modify
+	'make_couple' function to return a monoid_elt_t instead of a
+	series_elt_t.
+	* src/tests/context_headers/fmp_transducers/global_consistency_test.hh:
+	Update accordingly.
+
+	* src/tests/test-suites/context_headers_z_transducer.defs: New.
+	Instantiate a test for the new context header.
+	* src/tests/test-suites/z_transducer.defs: New. Instantiate a test on
+	transducers on Z semiring.
+
+	* src/tests/test-suites/z_fmp_transducer.defs: New. Instantiate a test
+	on fmp transducers on Z semiring.
+	* src/tests/test-suites/generate-all.sh: Update accordingly.
+
+	* src/tests/automata/algos/fmp_transducers/instantiation_test.hh:
+	Remove useless test.
+	* src/tests/automata/algos/fmp_transducers/Makefile.am: Update
+	accordingly.
+
 2005-06-01  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/sub_normalize.hh,
 	* include/vaucanson/algorithms/sub_normalize.hxx: Minor fix.
 
 2005-05-27  Florent Terrones  <florent.terrones@lrde.epita.fr>
-	
+
 	* include/vaucanson/xml/XML.hh: Add the attribute 'name_' to the
 	structure 'XML' so as to store the automaton name during the XML
 	session.
@@ -14,7 +41,7 @@
 	* include/vaucanson/tools/xml_load.hxx: New. Add 'xml_load' tool to
 	fill an automaton from a IStream containing XML	data.
 	* include/Makefile.am: Update accordingly.
-	
+
 2005-05-26  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/Makefile.am: Add missing files.
@@ -23,11 +50,11 @@
 
 	* include/vaucanson/xml/tools.hxx: Fix a bug with boolean automata.
 	* src/tests/xml/b_ref.dot: Update accordingly.
-	
+
 2005-05-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/sub_normalize.hh,
-	* include/vaucanson/algorithms/sub_normalize.hxx: New. Add 
+	* include/vaucanson/algorithms/sub_normalize.hxx: New. Add
 	sub-normalization for FMP transducers.
 
 	* src/tests/automata/algos/fmp_transducers/sub_normalize_test.hh: New.
@@ -78,7 +105,7 @@
 	* src/tests/algebra/series/krat/main/krat_exp_derivation_test.hh:
 	Remove. This test is useless as
 	`src/tests/algebra/series/krat/derivations/derivation/*' do the
-	same, in a more complete way.	
+	same, in a more complete way.
 	* src/tests/algebra/series/krat/main/Makefile.am: Update accordingly.
 
 2005-05-23  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
