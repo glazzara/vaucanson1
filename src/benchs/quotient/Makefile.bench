@@ -1,0 +1,11 @@
+# minimization_2n/Makefile.bench				* -*- Makefile -*-
+
+bench: $(noinst_PROGRAMS)
+	@echo '================';					\
+	echo '|Quotient bench|';					\
+	echo '================';					\
+	for n_states in $$(seq 5 5 ); do				\
+	    echo "----------------------For $$n_states states";		\
+	    echo "--------------VCSN:";					\
+	    ./quotient-bench $$n_states;				\
+	done;

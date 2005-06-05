@@ -1,0 +1,13 @@
+# derived_terms/Makefile.bench				* -*- Makefile -*-
+
+bench: $(noinst_PROGRAMS)
+	@echo '=====================';				\
+	echo '|Derived Terms bench|';				\
+	echo '=====================';				\
+	for n_states in $$(seq 3 3); do			\
+	   echo "----------------------For $$n_states states";	\
+	   echo "--------------VCSN (standard_of):";		\
+	   ./derived_terms_so-bench $$n_states;			\
+	   echo "--------------VCSN (derived_terms):";		\
+	   ./derived_terms_dt-bench $$n_states;			\
+	done

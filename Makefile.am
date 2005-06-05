@@ -19,6 +19,12 @@ m4datadir = $(datadir)/aclocal
 dist_m4data_DATA = config/vcsn.m4 config/vaucanson_xml.m4
 
 ###
+### For benchs.
+###
+bench:
+	cd $(srcdir)/src/benchs && make bench
+
+###
 ### Check headers for sanity.
 ###
 

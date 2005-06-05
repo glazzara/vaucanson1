@@ -155,6 +155,15 @@ AC_CONFIG_FILES([
 	src/demos/samples/algorithms/Makefile
 	src/demos/xml/Makefile
 	src/demos/xml/samples/Makefile
+	src/benchs/Makefile
+	src/benchs/common/Makefile
+	src/benchs/determinization/Makefile
+	src/benchs/minimization_debruijn/Makefile
+	src/benchs/minimization_stroppa/Makefile
+	src/benchs/minimization_2n/Makefile
+	src/benchs/minimization_nd/Makefile
+	src/benchs/quotient/Makefile
+	src/benchs/derived_terms/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile
 	doc/beginner/Makefile

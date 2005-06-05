@@ -1,0 +1,21 @@
+# determinization/Makefile.bench			* -*- Makefile -*-
+
+noinst_PROGRAMS += determinization_bench_fsm
+determinization_bench_fsm_SOURCES = determinization_bench_fsm.cc
+
+bench: $(noinst_PROGRAMS)
+	@echo '=======================';				\
+	echo '|Determinization bench|';					\
+	echo '=======================';					\
+	echo "./determinization_bench_fsm \$1 | $$FSM_PATH/fsmcompile |"\
+	   	"$$FSM_PATH/fsmdeterminize > /dev/null" > tmp.det;	\
+	for n_states in $$(seq 5 6); do				\
+		echo "----------------------For $$n_states states";	\
+		echo "--------------VCSN:";				\
+		./determinization-bench $$n_states;			\
+		if [ ! -z "$$FSM_PATH" ]; then				\
+		  echo "--------------FSM:";				\
+		  time sh tmp.det $$n_states;				\
+		fi;							\
+	done;								\
+	rm -f tmp.det

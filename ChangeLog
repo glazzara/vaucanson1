@@ -1,5 +1,81 @@
 2005-06-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* bootstrap.sh: Add the bootstrapping of bench files.
+
+	* src/benchs: New. Bench suite directory.
+	* src/benchs/generate_benchs.sh: New.   This script  generates .cc
+	files associated  with _bench.hh files,  and creates corresponding
+	Makefile.am's.
+	* src/benchs/generate_all_benchs.sh:  New.   Wrapper    that  call
+	generate_benchs.sh for all bench directories.
+	
+	* src/benchs/minimization_stroppa/minimization_bench_fsm.cc,
+	* src/benchs/minimization_stroppa/usual.hxx,
+	* src/benchs/minimization_stroppa/init.hh,
+	* src/benchs/minimization_stroppa/fsm_minimize.hh,
+	* src/benchs/minimization_stroppa/tools.hxx,
+	* src/benchs/minimization_stroppa/data,
+	* src/benchs/minimization_stroppa/init.hxx,
+	* src/benchs/minimization_stroppa/Makefile.bench,
+	* src/benchs/minimization_stroppa/minimization_bench_moore.cc,
+	* src/benchs/minimization_stroppa/int_traits.hh,
+	* src/benchs/minimization_stroppa/minimization_bench_hopcroft.cc,
+	* src/benchs/minimization_stroppa/tools.hh,
+	* src/benchs/minimization_stroppa/usual_ana_predefs.hh,
+	* src/benchs/minimization_stroppa:   New.  A   minimization  bench
+	thanks to Nicolas Stroppa.
+
+	* src/benchs/determinization/determinization_bench.hh,
+	* src/benchs/determinization/Makefile.bench,
+	* src/benchs/determinization/determinization_bench_fsm.cc,
+	* src/benchs/determinization: New. A  bench which determinize an n
+	states automaton to a 2^n automaton.
+
+	* src/benchs/minimization_2n/minimization_2n_moore_bench.hh,
+	* src/benchs/minimization_2n/minimization_2n_hopcroft_bench.hh,
+	* src/benchs/minimization_2n/Makefile.bench,
+	* src/benchs/minimization_2n: New.  A   minimization bench  on the
+	resulting automaton of the determinization previously described.
+
+	* src/benchs/quotient/quotient_bench.hh,
+	* src/benchs/quotient/Makefile.bench,
+	* src/benchs/quotient: New. A quotient bench.
+	
+	* src/benchs/minimization_nd/minimization_nd_bench.hh,
+	* src/benchs/minimization_nd/Makefile.bench,
+	* src/benchs/minimization_nd:  New.  A  minimization bench  over a
+	nondeterministic automaton.
+	
+	* src/benchs/minimization_debruijn/minimization_debruijn_moore_bench.hh,
+	* src/benchs/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh,
+	* src/benchs/minimization_debruijn/Makefile.bench,
+	* src/benchs/minimization_debruijn: New. A minimization bench over
+	the De Bruijn automaton, thanks to Sylvain Lombardy.
+
+	* src/benchs/derived_terms/derived_terms_dt_bench.hh,
+	* src/benchs/derived_terms/derived_terms_so_bench.hh,
+	* src/benchs/derived_terms/Makefile.bench,
+	* src/benchs/derived_terms:  New. A bench  to compare consequences
+	of the `derived terms' algorithm, and the `standard_of' one.
+
+	* src/benchs/common/alpha.syms: New. Alpha mapping for FSM.
+	* src/benchs/common/algorithm.hh: New. Algorithm used in benchs.
+	* src/benchs/common/bench_automaton.hh: New. The `bench_automaton'
+	is   a   light    automaton   with   `label_are_letters'   and   a
+	`small_alpha_letter'.
+	* src/benchs/common/bench_constructs.hh:   New.   Basic  automaton
+	constructions used in the benchs.
+	* src/benchs/common/Makefile.flags,
+	* src/benchs/common/Makefile.am,
+	* src/benchs/common: New.
+	
+	* src/benchs/Makefile.am: New. Define a `bench' rule and subdirs.
+	* src/Makefile.am: Add `bench' as a subdir.
+	* configure.ac: Add Makefiles in src/bench to be generated.
+	* Makefile.am: Add a `bench' rule.
+
+2005-06-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/tools/bencher.hh: Add macros to bench silently
 	and just have the numerical value of the bench.
 
