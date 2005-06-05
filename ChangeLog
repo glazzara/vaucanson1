@@ -1,5 +1,10 @@
 2005-06-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/tools/bencher.hh: Add macros to bench silently
+	and just have the numerical value of the bench.
+
+2005-06-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/automata/implementation/graph.hxx (op_letter_delta):
 	Don't name the `delta_kind' nor the structure to avoid a warning.
 

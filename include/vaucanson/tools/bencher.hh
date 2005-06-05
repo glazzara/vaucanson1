@@ -70,6 +70,12 @@ namespace vcsn
   std::vector<bencher*>				v_benchers;
   std::vector< std::pair<int, bencher*> >	v_old_benchers;
 
+#  define VCSN_BENCH_START_QUIET					\
+  {									\
+    v_benchers.push_back(new bencher);					\
+    v_benchers.back()->start();						\
+  }
+
 #  define VCSN_BENCH_START						\
   {									\
     v_benchers.push_back(new bencher);					\
@@ -77,6 +83,14 @@ namespace vcsn
     std::cerr << std::string(n_bench_indent, ' ') <<			\
       "Start bench in " << __FUNCTION__ << "..." << std::endl;		\
     n_bench_indent += 3;						\
+  }
+
+#  define VCSN_BENCH_STOP_QUIET(Result)					\
+  {									\
+    v_benchers.back()->stop();						\
+    Result = v_benchers.back()->get_time();				\
+    delete v_benchers.back();						\
+    v_benchers.pop_back();						\
   }
 
 #  define VCSN_BENCH_STOP						\
