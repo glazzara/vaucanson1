@@ -483,14 +483,14 @@ namespace vcsn
   template <class S, class WordValue, class WeightValue, class SeriesValue,
 	    class Letter, class Tag,
 	    typename OutputIterator, typename L>
-  void op_letter_delta(const AutomataBase<S>& s,
+  void op_letter_delta(const AutomataBase<S>&,
 		       const Graph<labels_are_letters,
 		       WordValue, WeightValue,
 		       SeriesValue, Letter, Tag>& v,
 		       OutputIterator res,
 		       hstate_t from,
 		       const L& letter,
-		       delta_kind::states k)
+		       delta_kind::states)
   {
     typedef typename state_value::edges_t edges_t;
     const edges_t& edges = v.states_[from].output_edges;
@@ -535,7 +535,7 @@ namespace vcsn
     return v.tag();
   }
 
-  
+
   /*---------.
   | Geometry |
   `---------*/
@@ -560,7 +560,7 @@ namespace vcsn
     return v.geometry();
   }
 
-  
+
   TParam
   const typename GClass::geometry_map_t&
   GClass::geometry() const
@@ -574,8 +574,8 @@ namespace vcsn
   {
     return geometry_;
   }
-  
-  
+
+
   // Remove macros to avoid name clashes.
 #undef TParam
 #undef GClass
