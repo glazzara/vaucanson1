@@ -1,5 +1,9 @@
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/benchs/determinization/Makefile.bench: Change \$1 to \$$1.
+
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/benchs/derived_terms/Makefile.bench,
 	* src/benchs/minimization_debruijn/Makefile.bench,
 	* src/benchs/minimization_2n/Makefile.bench,

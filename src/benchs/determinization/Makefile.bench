@@ -7,7 +7,7 @@ bench: $(noinst_PROGRAMS)
 	@echo '=======================';				\
 	echo '|Determinization bench|';					\
 	echo '=======================';					\
-	echo "./determinization_bench_fsm \$1 | $$FSM_PATH/fsmcompile |"\
+	echo "./determinization_bench_fsm \$$1 | $$FSM_PATH/fsmcompile |"\
 	   	"$$FSM_PATH/fsmdeterminize > /dev/null" > tmp.det;	\
 	for n_states in $$(seq 14 20); do				\
 		echo "----------------------For $$n_states states";	\
