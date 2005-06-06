@@ -1,3 +1,13 @@
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* src/benchs/minimization_nd: Remove.
+	* src/benchs/minimization_nd/minimization_nd_bench.hh: Remove.
+	* src/benchs/minimization_nd/Makefile.bench: Remove. This bench
+	has been removed as it's redundant seeing `derived_term' bench.
+	* src/benchs/Makefile.am,
+	* src/benchs/generate_all_benchs.sh,
+	* configure.ac: Update accordingly.
+
 2005-06-06  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/normalized_composition.hxx: Remove

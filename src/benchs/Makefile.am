@@ -1,10 +1,10 @@
 SUBDIRS = common determinization minimization_stroppa		\
 	  minimization_debruijn	minimization_2n derived_terms	\
-	  quotient composition minimization_nd
+	  quotient composition
 
 BENCHDIRS = determinization minimization_debruijn 		\
 	    derived_terms minimization_2n quotient		\
-	    composition minimization_nd minimization_stroppa
+	    composition 
 
 bench:
 	for f in $(BENCHDIRS); do				\
