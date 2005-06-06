@@ -36,25 +36,4 @@ void debruijn(unsigned n_value, automaton_t& an)
   }
 }
 
-void binary(automaton_t& an)
-{
-  std::vector<hstate_t>	c(2);
-
-  c[0] = an.add_state();
-  c[1] = an.add_state();
-
-  an.set_initial(c[0]);
-  an.set_final(c[1]);
-
-  an.add_letter_edge(c[0], c[0], 'a');
-  an.add_letter_edge(c[0], c[0], 'b');
-
-  an.add_letter_edge(c[0], c[1], 'b');
-
-  an.add_letter_edge(c[1], c[1], 'a');
-  an.add_letter_edge(c[1], c[1], 'a');
-  an.add_letter_edge(c[1], c[1], 'b');
-  an.add_letter_edge(c[1], c[1], 'b');
-}
-
 #endif

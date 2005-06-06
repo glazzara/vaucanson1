@@ -1,5 +1,10 @@
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/benchs/common/bench_constructs.hh: Remove the binary automaton
+	C_1 construction as it's implemented in quotient_*_bench.hh.
+
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/benchs/quotient/quotient_bool_bench.hh: New.
 	* src/benchs/quotient/quotient_bench.hh: Remove.
 	* src/benchs/quotient/quotient_z_bench.hh: New.
