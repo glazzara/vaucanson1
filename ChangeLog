@@ -1,5 +1,10 @@
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/aut_to_exp.hxx: Fix use of
+	`srand': use it only once in the lifetime of a RandomChooser.
+
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/realtime_to_fmp.hxx: Fix
 	use of support. Copy them before their use.
 
