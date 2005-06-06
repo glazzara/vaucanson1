@@ -1,3 +1,16 @@
+2005-06-06  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
+
+	* debian/control: Don't build an empty vaucanson package.
+	* debian/vaucanson-doc.docs,
+	* debian/rules,
+	* debian/vaucanson-doc.examples,
+	* debian/vaucanson-dev.install: Clean the way files are installed.
+	
+	* src/demos/xml/samples/Makefile.am: 
+	Remove superfluous MAINTAINERCLEANFILES.
+	* src/demos/Makefile.am,
+	* configure.ac: Remove --disable-build-demo option.
+
 2005-05-21  Olivier Gournet  <victor@lrde.epita.fr>
 
 	* doc/beginner/Makefile.am: Fix MAINTAINERCLEANFILES.

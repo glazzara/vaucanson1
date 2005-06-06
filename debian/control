@@ -5,9 +5,9 @@ Maintainer: Olivier Gournet <victor@lrde.epita.fr>
 Build-Depends: debhelper (>= 4.0.0), autotools-dev
 Standards-Version: 3.6.1
 
-Package: vaucanson
+Package: vaucanson-dev
 Architecture: any
-Depends: ${shlibs:Depends}, vaucanson-dev (= ${Source-Version})
+Depends: ${shlibs:Depends}
 Description:  C++ generic library for weighted finite state machine
  The goal of this library is  to enable the development of C++ programs
  in  an abstract  and  general way  with,  at the  same  time, a  large
@@ -23,15 +23,9 @@ Description:  C++ generic library for weighted finite state machine
  .
  For documentation and demo programs, install vaucanson-doc
 
-Package: vaucanson-dev
-Architecture: any
-Depends: ${shlibs:Depends}, vaucanson (= ${Source-Version})
-Description: vcn dev
- headers files.
-
 Package: vaucanson-doc
 Architecture: any
 Section: doc
-Depends: ${shlibs:Depends}, vaucanson (= ${Source-Version})
+Depends: ${shlibs:Depends}, vaucanson-dev (= ${Source-Version})
 Description: vcn doc and samples
  doc and samples.

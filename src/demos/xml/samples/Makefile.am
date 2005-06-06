@@ -39,7 +39,6 @@ XML_SAMPLES =					\
 	$(srcdir)/lomb2.xml
 
 EXTRA_DIST = $(XML_SAMPLES)
-MAINTAINERCLEANFILES = $(XML_SAMPLES)
 
 $(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT) vaucanson.xsd

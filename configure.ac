@@ -71,17 +71,6 @@ if test "x$WANT_INTERPRETER" != "xno"; then
   fi
 fi
 
-# Whether to compile samples or not.
-# (hack to speed up debian packages build)
-AC_ARG_ENABLE(
-	[build-demo],
-        [AC_HELP_STRING([--disable-build-demo],
-			[disable compilation of demos subdirectory])],
-	[build_demo=],
-	[build_demo=true]
-)
-AM_CONDITIONAL([BUILD_DEMO], test $build_demo)
-
 # Libtool used
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
