@@ -29,15 +29,18 @@ void derived_terms_so_bench(int n_states)
   aut_2n(n_states, a);
   krat_t e = aut_to_exp(a);
   VCSN_BENCH_START;
-  std::cout << "standard_of:" << std::endl;
+  std::cout << "standard_of (current nb of states: "
+	    <<  a.states().size() << "):" << std::endl;
   VCSN_BENCH_START;
   a = standard_of(e);
   VCSN_BENCH_STOP_AND_PRINT;
-  std::cout << "determinize:" << std::endl;
+  std::cout << "determinize (current nb of states: "
+	    <<  a.states().size() << "):" << std::endl;
   VCSN_BENCH_START;
   a = determinize(a);
   VCSN_BENCH_STOP_AND_PRINT;
-  std::cout << "minimization_hopcroft:" << std::endl;
+  std::cout << "minimization_hopcroft (current nb of states: "
+	    <<  a.states().size() << "):" << std::endl;
   VCSN_BENCH_START;
   a = minimization_hopcroft(a);
   VCSN_BENCH_STOP_AND_PRINT;

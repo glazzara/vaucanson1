@@ -32,7 +32,6 @@ void minimization_nd_bench(int n_states)
 
   for (int i = 0; i < 10; ++i)
   {
-    std::cerr << "Iteration " << i << std::endl;
     automaton_t nd = standard_of(aut_to_exp(a, RandomChooser()));
     VCSN_BENCH_START_QUIET;
     quotient(nd);

@@ -6,7 +6,7 @@ bench: $(noinst_PROGRAMS)
 	echo '====================================';			\
 	echo "$$FSM_PATH/fsmcompile -i../common/alpha.syms init_o_tmp.fsm |"\
 	   	"$$FSM_PATH/fsmminimize > /dev/null" > tmp.min;		\
-	for n_states in $$(seq 5 5 ); do				\
+	for n_states in $$(seq 11 15); do				\
 	    echo "----------------------For $$n_states states";		\
 	    echo "--------------VCSN (moore):";				\
 	    ./minimization_2n_moore-bench $$n_states;			\

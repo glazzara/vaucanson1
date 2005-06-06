@@ -9,7 +9,7 @@ bench: $(noinst_PROGRAMS)
 	echo '=======================';					\
 	echo "./determinization_bench_fsm \$1 | $$FSM_PATH/fsmcompile |"\
 	   	"$$FSM_PATH/fsmdeterminize > /dev/null" > tmp.det;	\
-	for n_states in $$(seq 5 6); do				\
+	for n_states in $$(seq 14 20); do				\
 		echo "----------------------For $$n_states states";	\
 		echo "--------------VCSN:";				\
 		./determinization-bench $$n_states;			\

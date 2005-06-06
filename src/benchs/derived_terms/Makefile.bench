@@ -4,7 +4,7 @@ bench: $(noinst_PROGRAMS)
 	@echo '=====================';				\
 	echo '|Derived Terms bench|';				\
 	echo '=====================';				\
-	for n_states in $$(seq 3 3); do			\
+	for n_states in $$(seq 7 11); do			\
 	   echo "----------------------For $$n_states states";	\
 	   echo "--------------VCSN (standard_of):";		\
 	   ./derived_terms_so-bench $$n_states;			\

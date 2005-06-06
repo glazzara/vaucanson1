@@ -29,15 +29,18 @@ void derived_terms_dt_bench(int n_states)
   aut_2n(n_states, a);
   krat_t e = aut_to_exp(a);
   VCSN_BENCH_START;
-  std::cout << "derivatives_automaton:" << std::endl;
+  std::cout << "derivatives_automaton (current nb of states: "
+	    <<  a.states().size() << "):" << std::endl;
   VCSN_BENCH_START;
   derivatives_automaton(a, e);
   VCSN_BENCH_STOP_AND_PRINT;
-  std::cout << "determinize:" << std::endl;
+  std::cout << "determinize (current nb of states: "
+	    <<  a.states().size() << "):" << std::endl;
   VCSN_BENCH_START;
   a = determinize(a);
   VCSN_BENCH_STOP_AND_PRINT;
-  std::cout << "minimization_hopcroft:" << std::endl;
+  std::cout << "minimization_hopcroft (current nb of states: "
+	    <<  a.states().size() << "):" << std::endl;
   VCSN_BENCH_START;
   a = minimization_hopcroft(a);
   VCSN_BENCH_STOP_AND_PRINT;

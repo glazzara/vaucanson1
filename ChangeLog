@@ -1,3 +1,16 @@
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* src/benchs/derived_terms/Makefile.bench,
+	* src/benchs/minimization_debruijn/Makefile.bench,
+	* src/benchs/minimization_2n/Makefile.bench,
+	* src/benchs/determinization/Makefile.bench: Set interval of bench.
+	* src/benchs/minimization_nd/minimization_nd_bench.hh,
+	* src/benchs/derived_terms/derived_terms_dt_bench.hh,
+	* src/benchs/derived_terms/derived_terms_so_bench.hh: Change output.
+	Be more verbose.
+	* src/benchs/Makefile.am: Change the order of bench. The Stroppa's
+	bench is the last one as it's more likely to fail.
+
 2005-06-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* bootstrap.sh: Add the bootstrapping of bench files.
