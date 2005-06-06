@@ -1,5 +1,10 @@
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/benchs/derived_terms/derived_terms_bench.hh: Print edges
+	number.
+
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/benchs/minimization_nd: Remove.
 	* src/benchs/minimization_nd/minimization_nd_bench.hh: Remove.
 	* src/benchs/minimization_nd/Makefile.bench: Remove. This bench
