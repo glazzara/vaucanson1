@@ -1,5 +1,13 @@
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/benchs/derived_terms/derived_terms_dt_bench.hh: Remove.
+	* src/benchs/derived_terms/derived_terms_bench.hh: New.
+	* src/benchs/derived_terms/derived_terms_so_bench.hh: Remove.
+	* src/benchs/derived_terms/Makefile.bench: Derived terms bench
+	now does both derivatives_automaton and standard_of.
+
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/benchs/composition/realtime_composition_bench.hh,
 	* src/benchs/composition/normalized_composition_bench.hh,
 	* src/benchs/composition/Makefile.bench: Change input of this
