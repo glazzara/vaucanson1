@@ -12,6 +12,8 @@ bench: $(noinst_PROGRAMS)
 	    ./minimization_2n_moore-bench $$n_states;			\
 	    echo "--------------VCSN (hopcroft):";			\
 	    ./minimization_2n_hopcroft-bench $$n_states;		\
+	    echo "--------------VCSN (brzozowski):";			\
+	    ./minimization_2n_brzozowski-bench $$n_states;		\
 	    if [ ! -z "$$FSM_PATH" ]; then				\
 	      echo "--------------FSM:";				\
 	      time sh tmp.min;						\

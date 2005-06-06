@@ -6,12 +6,14 @@ bench: $(noinst_PROGRAMS)
 	echo '================================';			\
 	echo "$$FSM_PATH/fsmcompile -i../common/alpha.syms init_o_tmp.fsm |"\
 	   	"$$FSM_PATH/fsmminimize > /dev/null" > tmp.min;		\
-	for n_states in $$(seq 16 21); do				\
+	for n_states in 15 20; do					\
 	    echo "----------------------For $$n_states states";		\
 	    echo "--------------VCSN (moore):";				\
 	    ./minimization_debruijn_moore-bench $$n_states;		\
 	    echo "--------------VCSN (hopcroft):";			\
 	    ./minimization_debruijn_hopcroft-bench $$n_states;		\
+	    echo "--------------VCSN (brzozowski):";			\
+	    ./minimization_debruijn_brzozowski-bench $$n_states;	\
 	    if [ ! -z "$$FSM_PATH" ]; then				\
 	      echo "--------------FSM:";				\
 	      time sh tmp.min;						\

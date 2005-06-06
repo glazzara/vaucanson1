@@ -1,5 +1,13 @@
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/benchs/minimization_2n/minimization_2n_brzozowski_bench.hh: New.
+	* src/benchs/minimization_debruijn/minimization_debruijn_brzozowski_bench.hh: New.
+	* src/benchs/minimization_2n/Makefile.bench,
+	* src/benchs/minimization_debruijn/Makefile.bench: Add the Brzozowski
+	minimization to be benched.
+
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/benchs/common/bench_constructs.hh: Remove the binary automaton
 	C_1 construction as it's implemented in quotient_*_bench.hh.
 
