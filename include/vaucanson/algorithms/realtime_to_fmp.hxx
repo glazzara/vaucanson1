@@ -106,15 +106,18 @@ namespace vcsn
 	  weight(res.structure().series().semiring());
 
 	mult_elt_t mult = trans.get_initial(*St);
-	for_each_const_(mult_elt_t::support_t, i, mult.supp())
+	typename mult_elt_t::support_t mult_supp = mult.supp();
+	for_each_const_(mult_elt_t::support_t, i, mult_supp)
 	  {
 	    first = *i;
 
 	    typename Trans_t::semiring_elt_t
 	      output(trans.structure().series().semiring(), mult.get(*i));
+	    typename Trans_t::semiring_elt_t::support_t
+	      output_supp = output.supp();
 	    for_each_const_(Trans_t::semiring_elt_t::support_t,
 			    j,
-			    output.supp())
+			    output_supp)
 	      {
 		second = *j;
 		weight = output.get(*j);
@@ -145,15 +148,18 @@ namespace vcsn
 	  weight(res.structure().series().semiring());
 
 	mult_elt_t mult = trans.get_final(*St);
-	for_each_const_(mult_elt_t::support_t, i, mult.supp())
+	typename mult_elt_t::support_t mult_supp = mult.supp();
+	for_each_const_(mult_elt_t::support_t, i, mult_supp)
 	  {
 	    first = *i;
 
 	    typename Trans_t::semiring_elt_t
 	      output(trans.structure().series().semiring(), mult.get(*i));
+	    typename Trans_t::semiring_elt_t::support_t
+	      output_supp = output.supp();
 	    for_each_const_(Trans_t::semiring_elt_t::support_t,
 			    j,
-			    output.supp())
+			    output_supp)
 	      {
 		second = *j;
 		weight = output.get(*j);
