@@ -107,7 +107,8 @@ normalized_composition_test(tests::Tester& t)
   monoid_elt_value_t	fmp_elt23 ("y", "");
   monoid_elt_value_t	fmp_elt24 ("y", "z");
 
-  semiring_elt_value_t	semi_elt = true;
+  semiring_elt_value_t	semi_elt =
+    algebra::identity_as<semiring_elt_value_t>::of(sg).value();
 
   series_elt1.assoc(fmp_elt1, semi_elt);
   series_elt2.assoc(fmp_elt2, semi_elt);

@@ -47,6 +47,7 @@
 # include <vaucanson/algorithms/outsplitting.hh>
 # include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
+# include <vaucanson/algebra/concept/freemonoid_product.hh>
 
 namespace vcsn {
 
@@ -54,9 +55,12 @@ namespace vcsn {
   /// a|1 on one state,
   /// 1|x and a|x on the other.
 
-  template <typename Auto_t>
-  static Auto_t
-  outsplitting(const Auto_t& aut, std::set<hstate_t>& m)
+  template <typename S, typename M1, typename M2, typename Auto_t>
+  Auto_t
+  do_outsplitting(const AutomataBase<S>&,
+		  const algebra::FreeMonoidProduct<M1, M2>&,
+		  const Auto_t& aut,
+		  std::set<hstate_t>& m)
   {
     AUTOMATON_TYPES(Auto_t);
 
@@ -150,9 +154,12 @@ namespace vcsn {
   /// 1|x on one state,
   /// a|1 and a|x on the other.
 
-  template <typename Auto_t>
-  static Auto_t
-  insplitting(const Auto_t& aut, std::set<hstate_t>& m)
+  template <typename S, typename M1, typename M2, typename Auto_t>
+  Auto_t
+  do_insplitting(const AutomataBase<S>&,
+		 const algebra::FreeMonoidProduct<M1, M2>&,
+		 const Auto_t& aut,
+		 std::set<hstate_t>& m)
   {
     AUTOMATON_TYPES(Auto_t);
 
@@ -242,6 +249,52 @@ namespace vcsn {
     return res;
   }
 
+
+  template <typename S, typename T>
+  Element<S, T>
+  outsplitting(const Element<S, T>& aut, std::set<hstate_t>& states)
+  {
+    return do_outsplitting(aut.structure(),
+			   aut.structure().series().monoid(),
+			   aut,
+			   states);
+  }
+
+
+  template <typename S, typename T>
+  Element<S, T>
+  insplitting(const Element<S, T>& aut, std::set<hstate_t>& states)
+  {
+    return do_insplitting(aut.structure(),
+			  aut.structure().series().monoid(),
+			  aut,
+			  states);
+  }
+
+
+
+  template <typename S, typename T>
+  Element<S, T>
+  outsplitting(const Element<S, T>& aut)
+  {
+    std::set<hstate_t>		states;
+    return do_outsplitting(aut.structure(),
+			   aut.structure().series().monoid(),
+			   aut,
+			   states);
+  }
+
+
+  template <typename S, typename T>
+  Element<S, T>
+  insplitting(const Element<S, T>& aut)
+  {
+    std::set<hstate_t>		states;
+    return do_insplitting(aut.structure(),
+			  aut.structure().series().monoid(),
+			  aut,
+			  states);
+  }
 
 } // End of namespace vcsn.
 

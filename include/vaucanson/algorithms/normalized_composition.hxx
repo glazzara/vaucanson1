@@ -47,7 +47,6 @@
 # include <set>
 # include <queue>
 # include <vaucanson/algorithms/normalized_composition.hh>
-# include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/outsplitting.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>

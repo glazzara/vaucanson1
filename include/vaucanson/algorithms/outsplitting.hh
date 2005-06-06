@@ -50,13 +50,21 @@
 
 namespace vcsn {
 
-  template <typename Auto_t>
-  static Auto_t
-  outsplitting(const Auto_t& aut, std::set<hstate_t>& m);
+  template <typename S, typename T>
+  Element<S, T>
+  outsplitting(const Element<S, T>& aut, std::set<hstate_t>& m);
 
-  template <typename Auto_t>
-  static Auto_t
-  insplitting(const Auto_t& aut, std::set<hstate_t>& m);
+  template <typename S, typename T>
+  Element<S, T>
+  insplitting(const Element<S, T>& aut, std::set<hstate_t>& m);
+
+  template <typename S, typename T>
+  Element<S, T>
+  outsplitting(const Element<S, T>& aut);
+
+  template <typename S, typename T>
+  Element<S, T>
+  insplitting(const Element<S, T>& aut);
 
 } // End of namespace vcsn.
 

@@ -1,3 +1,15 @@
+2005-06-06  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/normalized_composition.hxx: Remove
+	useless included file.
+
+	* include/vaucanson/algorithms/outsplitting.hh,
+	* include/vaucanson/algorithms/outsplitting.hxx: Add wrappers to
+	outsplitting and insplitting functions.
+
+	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh:
+	Fix a small bug.
+
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/benchs/minimization_2n/minimization_2n_brzozowski_bench.hh: New.
