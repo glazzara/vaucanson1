@@ -112,13 +112,14 @@ void normalized_composition_bench(int n_value)
 
   std::string	from, to;
 
+  from = "a";
+  to = "b";
+
   for (int i = 0; i < n_value; ++i)
   {
-    from += "ab";
-    to += "ba";
+    from += "b";
+    to += "a";
   }
-  from += "aba";
-  to += "bab";
 
 
   VCSN_BENCH_START;

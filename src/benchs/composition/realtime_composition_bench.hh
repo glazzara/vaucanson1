@@ -108,13 +108,14 @@ void realtime_composition_bench(int n_value)
 
   std::string	from, to;
 
+  from = "a";
+  to = "b";
+
   for (int i = 0; i < n_value; ++i)
   {
-    from += "ab";
-    to += "ba";
+    from += "b";
+    to += "a";
   }
-  from += "aba";
-  to += "bab";
 
   VCSN_BENCH_START;
   automaton_t	left_auto = replace_left(from, to, A, B);

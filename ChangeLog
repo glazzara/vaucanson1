@@ -1,5 +1,12 @@
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/benchs/composition/realtime_composition_bench.hh,
+	* src/benchs/composition/normalized_composition_bench.hh,
+	* src/benchs/composition/Makefile.bench: Change input of this
+	bench to be a(b)^n and b(a)^n.
+
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/aut_to_exp.hxx: Fix use of
 	`srand': use it only once in the lifetime of a RandomChooser.
 

@@ -4,7 +4,7 @@ bench: $(noinst_PROGRAMS)
 	@echo '===================';				\
 	echo '|Composition bench|';				\
 	echo '===================';				\
-	for n_value in $$(seq 1 11); do			\
+	for n_value in $$(seq 20 40); do				\
 	   echo "----------------------For $$n_value:";		\
 	   echo "--------------VCSN (Realtime):";		\
 	   ./realtime_composition-bench $$n_value;		\
