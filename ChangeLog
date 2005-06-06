@@ -1,5 +1,15 @@
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/benchs/quotient/quotient_bool_bench.hh: New.
+	* src/benchs/quotient/quotient_bench.hh: Remove.
+	* src/benchs/quotient/quotient_z_bench.hh: New.
+	* src/benchs/quotient/Makefile.bench: Bench the quotient
+	on the C_1 automaton (as described in Inside Vaucanson),
+	for both boolean and Z automata.
+	
+
+2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/benchs/derived_terms/derived_terms_dt_bench.hh: Remove.
 	* src/benchs/derived_terms/derived_terms_bench.hh: New.
 	* src/benchs/derived_terms/derived_terms_so_bench.hh: Remove.
