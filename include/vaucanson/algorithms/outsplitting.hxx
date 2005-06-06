@@ -45,6 +45,7 @@
   */
 
 # include <vaucanson/algorithms/outsplitting.hh>
+# include <vaucanson/algorithms/accessible.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
 
 namespace vcsn {
@@ -141,7 +142,7 @@ namespace vcsn {
 	    m.insert(s2);
 	  }
       }
-    return res;
+    return coaccessible(res);
   }
 
 

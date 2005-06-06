@@ -238,7 +238,6 @@ namespace vcsn {
 		if (lhs_states.find(new_pair.first) == lhs_states.end() or
 		    rhs_states.find(new_pair.second) == rhs_states.end())
 		  {
-		    bool already_exists = false;
 		    typename visited_t::const_iterator found =
 		      visited.find(new_pair);
 		    hstate_t aim;
@@ -250,20 +249,8 @@ namespace vcsn {
 			to_process.push(new_pair);
 		      }
 		    else
-		      {
-			aim = found->second;
-			delta_ret_t edges;
-			output.deltac(edges, current_state,
-				      delta_kind::edges());
-			for_all_const_(delta_ret_t, l, edges)
-			  {
-			    if (output.aim_of(*l) == aim and
-				output.series_of(*l) == prod_series)
-			      already_exists = true;
-			  }
-		      }
-		    if (not already_exists)
-		      output.add_series_edge(current_state, aim, prod_series);
+		      aim = found->second;
+		    output.add_series_edge(current_state, aim, prod_series);
 		  }
 
 	      }
@@ -301,7 +288,6 @@ namespace vcsn {
 			    rhs_states.find(new_pair.second) ==
 			    rhs_states.end())
 			  {
-			    bool already_exists = false;
 			    typename visited_t::const_iterator found =
 			      visited.find(new_pair);
 			    hstate_t aim;
@@ -313,21 +299,9 @@ namespace vcsn {
 				to_process.push(new_pair);
 			      }
 			    else
-			      {
-				aim = found->second;
-				delta_ret_t edges;
-				output.deltac(edges, current_state,
-					      delta_kind::edges());
-				for_all_const_(delta_ret_t, l, edges)
-				  {
-				    if (output.aim_of(*l) == aim and
-					output.series_of(*l) == prod_series)
-				      already_exists = true;
-				  }
-			      }
-			    if (not already_exists)
-			      output.add_series_edge(current_state, aim,
-						     prod_series);
+			      aim = found->second;
+			    output.add_series_edge(current_state, aim,
+						   prod_series);
 			  }
 		      }
 		    // Else we try to connect a transition of lhs and
@@ -360,7 +334,6 @@ namespace vcsn {
 			    rhs_states.find(new_pair.second) ==
 			    rhs_states.end())
 			  {
-			    bool already_exists = false;
 			    typename visited_t::const_iterator found =
 			      visited.find(new_pair);
 			    hstate_t aim;
@@ -372,21 +345,9 @@ namespace vcsn {
 				to_process.push(new_pair);
 			      }
 			    else
-			      {
-				aim = found->second;
-				delta_ret_t edges;
-				output.deltac(edges, current_state,
-					      delta_kind::edges());
-				for_all_const_(delta_ret_t, l, edges)
-				  {
-				    if (output.aim_of(*l) == aim and
-					output.series_of(*l) == prod_series)
-				      already_exists = true;
-				  }
-			      }
-			    if (not already_exists)
-			      output.add_series_edge(current_state, aim,
-						     prod_series);
+			      aim = found->second;
+			    output.add_series_edge(current_state, aim,
+						   prod_series);
 			  }
 		      }
 		  }

@@ -163,6 +163,7 @@ AC_CONFIG_FILES([
 	src/benchs/minimization_2n/Makefile
 	src/benchs/minimization_nd/Makefile
 	src/benchs/quotient/Makefile
+	src/benchs/composition/Makefile
 	src/benchs/derived_terms/Makefile
 	doc/Makefile
 	doc/tutorial/Makefile

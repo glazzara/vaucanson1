@@ -1,3 +1,16 @@
+2005-06-06  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/normalized_composition.hxx,
+	* include/vaucanson/algorithms/outsplitting.hxx: Fix small problems in
+	composition of fmp transducers.
+
+	* src/benchs/composition/realtime_composition_bench.hh,
+	* src/benchs/composition/normalized_composition_bench.hh: New. Add
+	bench for fmp transducer composition.
+	* src/benchs/composition/Makefile.bench,
+	* src/benchs/generate_all_benchs.sh,
+	* configure.ac: Update accordingly.
+
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/benchs/determinization/Makefile.bench: Change \$1 to \$$1.
@@ -25,7 +38,7 @@
 	Makefile.am's.
 	* src/benchs/generate_all_benchs.sh:  New.   Wrapper    that  call
 	generate_benchs.sh for all bench directories.
-	
+
 	* src/benchs/minimization_stroppa/minimization_bench_fsm.cc,
 	* src/benchs/minimization_stroppa/usual.hxx,
 	* src/benchs/minimization_stroppa/init.hh,
@@ -57,12 +70,12 @@
 	* src/benchs/quotient/quotient_bench.hh,
 	* src/benchs/quotient/Makefile.bench,
 	* src/benchs/quotient: New. A quotient bench.
-	
+
 	* src/benchs/minimization_nd/minimization_nd_bench.hh,
 	* src/benchs/minimization_nd/Makefile.bench,
 	* src/benchs/minimization_nd:  New.  A  minimization bench  over a
 	nondeterministic automaton.
-	
+
 	* src/benchs/minimization_debruijn/minimization_debruijn_moore_bench.hh,
 	* src/benchs/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh,
 	* src/benchs/minimization_debruijn/Makefile.bench,
@@ -85,7 +98,7 @@
 	* src/benchs/common/Makefile.flags,
 	* src/benchs/common/Makefile.am,
 	* src/benchs/common: New.
-	
+
 	* src/benchs/Makefile.am: New. Define a `bench' rule and subdirs.
 	* src/Makefile.am: Add `bench' as a subdir.
 	* configure.ac: Add Makefiles in src/bench to be generated.
