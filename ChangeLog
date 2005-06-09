@@ -1,3 +1,9 @@
+2005-06-09  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/aut_to_exp.hxx: As  the  user would
+	like  to  precise her  own  seed,  remove  the  automated  one  in
+	RandomChooser's constructor.
+
 2005-06-06  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/benchs/derived_terms/derived_terms_bench.hh: Print edges

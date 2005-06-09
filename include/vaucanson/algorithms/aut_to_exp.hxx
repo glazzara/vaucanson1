@@ -87,11 +87,6 @@ namespace vcsn {
 
   struct RandomChooser
   {
-    RandomChooser()
-    {
-      srand((unsigned)time( NULL ));
-    }
-
     template <class Auto_>
     hstate_t
     operator()(const Auto_& a) const
