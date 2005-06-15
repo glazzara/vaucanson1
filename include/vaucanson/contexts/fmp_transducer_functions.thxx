@@ -31,6 +31,8 @@
 //    * Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
 //
 
+# include <vaucanson/algorithms/evaluation_fmp.hh>
+
 namespace vcsn
 {
   namespace VCSN_CONTEXT_NAMESPACE
@@ -107,6 +109,47 @@ namespace vcsn
 			 second_alphabet.begin(), second_alphabet.end(),
 			 first_exp, second_exp);
     }
+
+
+    template <typename TransStruct,
+	      typename TransImpl,
+	      typename SeriesStruct,
+	      typename SeriesImpl,
+	      typename S,
+	      typename T>
+    boolean_automaton::series_set_elt_t
+    do_evaluation(const vcsn::AutomataBase<TransStruct>&,
+		  const TransImpl&,
+		  const SeriesStruct&,
+		  const vcsn::rat::exp<S, T>& input,
+		  const Element<TransStruct, TransImpl>& t,
+		  const Element<SeriesStruct, SeriesImpl>&)
+    {
+      boolean_automaton::automaton_t w = boolean_automaton::
+	new_automaton(t.structure().series()
+		      .monoid().first_monoid().alphabet());
+      boolean_automaton::automaton_t result = boolean_automaton::
+	new_automaton(t.structure().series()
+		      .monoid().second_monoid().alphabet());
+      standard_of(w, input);
+      evaluation_fmp(t, w, result);
+      return aut_to_exp(result);
+    }
+
+
+    template <typename TransStruct,
+	      typename TransImpl,
+	      typename ArgStruct,
+	      typename ArgImpl>
+    boolean_automaton::series_set_elt_t
+    evaluation(const Element<TransStruct, TransImpl>& t,
+	       const Element<ArgStruct, ArgImpl>& input)
+    {
+      return do_evaluation(t.structure(), t.value(),
+			   input.structure(), input.value(),
+			   t, input);
+    }
+
 
   } // End of namespace VCSN_CONTEXT_NAMESPACE.
 } // End of namespace vcsn.

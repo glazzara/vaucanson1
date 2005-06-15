@@ -344,6 +344,10 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/normalized_composition.hxx			   \
 	vaucanson/algorithms/outsplitting.hh				   \
 	vaucanson/algorithms/outsplitting.hxx				   \
+	vaucanson/algorithms/projections_fmp.hh				   \
+	vaucanson/algorithms/projections_fmp.hxx			   \
+	vaucanson/algorithms/evaluation_fmp.hh				   \
+	vaucanson/algorithms/evaluation_fmp.hxx				   \
 	vaucanson/vaucanson.hh						   \
 	vaucanson/boolean_automaton.hh					   \
 	vaucanson/boolean_transducer.hh					   \
