@@ -36,6 +36,7 @@
 # include <vaucanson/boolean_automaton.hh>
 
 # define VCSN_CONTEXT_NAMESPACE fmp_transducer
+# define AUTOMATON_CONTEXT boolean_automaton
 
 namespace vcsn
 {
@@ -63,5 +64,6 @@ namespace vcsn
 # include <vaucanson/contexts/fmp_transducer_functions.thh>
 
 # undef VCSN_CONTEXT_NAMESPACE
+# undef AUTOMATON_CONTEXT
 
 #endif // ! VCSN_FMP_TRANSDUCER_HH

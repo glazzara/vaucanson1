@@ -44,6 +44,11 @@
  */
 /** @} */
 
+# include <vaucanson/automata/concept/automata.hh>
+# include <vaucanson/algebra/implementation/free_monoid/words.hh>
+# include <vaucanson/algebra/concept/freemonoid_product.hh>
+# include <vaucanson/algebra/implementation/series/series.hh>
+
 namespace vcsn
 {
   /*-------.

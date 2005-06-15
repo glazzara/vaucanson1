@@ -35,7 +35,7 @@
 # include <vaucanson/z_automaton.hh>
 
 # define VCSN_CONTEXT_NAMESPACE z_fmp_transducer
-
+# define AUTOMATON_CONTEXT z_automaton
 
 namespace vcsn
 {
@@ -63,5 +63,6 @@ namespace vcsn
 # include <vaucanson/contexts/fmp_transducer_functions.thh>
 
 # undef VCSN_CONTEXT_NAMESPACE
+# undef AUTOMATON_CONTEXT
 
 #endif // ! VCSN_Z_FMP_TRANSDUCER_HH

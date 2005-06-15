@@ -1,3 +1,16 @@
+2005-06-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/z_fmp_transducer.hh,
+	* include/vaucanson/fmp_transducer.hh: Define macro AUTOMATON_CONTEXT,
+	regarding the automaton context used in fmp_transducer_functions.
+	
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx: Use macro
+	AUTOMATON_CONTEXT instead of boolean_automaton.
+
+	* include/vaucanson/algorithms/projections_fmp.hh: Fix missing 
+	includes.
+	
 2005-06-15  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	This patch offers several new algorithms on transducers seen as

@@ -117,7 +117,7 @@ namespace vcsn
 	      typename SeriesImpl,
 	      typename S,
 	      typename T>
-    boolean_automaton::series_set_elt_t
+    AUTOMATON_CONTEXT::series_set_elt_t
     do_evaluation(const vcsn::AutomataBase<TransStruct>&,
 		  const TransImpl&,
 		  const SeriesStruct&,
@@ -125,10 +125,10 @@ namespace vcsn
 		  const Element<TransStruct, TransImpl>& t,
 		  const Element<SeriesStruct, SeriesImpl>&)
     {
-      boolean_automaton::automaton_t w = boolean_automaton::
+      AUTOMATON_CONTEXT::automaton_t w = AUTOMATON_CONTEXT::
 	new_automaton(t.structure().series()
 		      .monoid().first_monoid().alphabet());
-      boolean_automaton::automaton_t result = boolean_automaton::
+      AUTOMATON_CONTEXT::automaton_t result = AUTOMATON_CONTEXT::
 	new_automaton(t.structure().series()
 		      .monoid().second_monoid().alphabet());
       standard_of(w, input);
@@ -141,7 +141,7 @@ namespace vcsn
 	      typename TransImpl,
 	      typename ArgStruct,
 	      typename ArgImpl>
-    boolean_automaton::series_set_elt_t
+    AUTOMATON_CONTEXT::series_set_elt_t
     evaluation(const Element<TransStruct, TransImpl>& t,
 	       const Element<ArgStruct, ArgImpl>& input)
     {
