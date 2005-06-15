@@ -124,8 +124,6 @@ PROCESS_NODE(type)
 PROCESS_NODE(content)
 PROCESS_NODE(states)
 PROCESS_NODE(transitions)
-PROCESS_NODE(initials)
-PROCESS_NODE(finals)
 
 
     /*-------.

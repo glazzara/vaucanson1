@@ -1,5 +1,25 @@
 2005-06-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* doc/xml/vaucanson.xsd: Change the grammar in order to make <initial>
+	and <final> children of <transitions>. Suppress tags <initials> and
+	<finals>.
+	
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/node.hxx,
+	* include/vaucanson/xml/xml_converter.hxx: Update according to the 
+	grammar changes.
+
+	* src/tests/xml/trans_ref.xml,
+	* src/tests/xml/r_ref.xml,
+	* src/tests/xml/z_ref.xml,
+	* src/tests/xml/z_min_plus_ref.xml,
+	* src/tests/xml/b_ref.xml,
+	* src/tests/xml/z_max_plus_ref.xml,
+	* src/tests/xml/fmp_ref.xml,
+	* src/tests/xml/session_ref.xml: Update accordingly.
+	
+2005-06-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/z_fmp_transducer.hh,
 	* include/vaucanson/fmp_transducer.hh: Define macro AUTOMATON_CONTEXT,
 	regarding the automaton context used in fmp_transducer_functions.

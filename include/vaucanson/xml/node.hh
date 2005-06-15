@@ -106,8 +106,6 @@ CREATE_CLASSNODE(type)
 CREATE_CLASSNODE(content)
 CREATE_CLASSNODE(states)
 CREATE_CLASSNODE(transitions)
-CREATE_CLASSNODE(initials)
-CREATE_CLASSNODE(finals)
 CREATE_CLASSNODE(state)
 CREATE_CLASSNODE(transition)
 CREATE_CLASSNODE(initial)
@@ -187,8 +185,6 @@ CREATE_SPEC_PARAM_NODE(monoid, TParmFMP, FMPtype)
     register_in_factory(f, T, content)			\
     register_in_factory(f, T, states)			\
     register_in_factory(f, T, transitions)		\
-    register_in_factory(f, T, initials)			\
-    register_in_factory(f, T, finals)			\
     register_in_factory(f, T, state)			\
     register_in_factory(f, T, transition)		\
     register_in_factory(f, T, initial)			\

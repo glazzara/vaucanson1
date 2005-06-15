@@ -25,13 +25,9 @@
       <transition dst="s1" in="a" out="x" src="s0"/>
       <transition dst="s1" in="a" out="y" src="s0"/>
       <transition dst="s2" in="b" out="x" src="s1"/>
-    </transitions>
-    <initials>
       <initial state="s0"/>
-    </initials>
-    <finals>
       <final out="x" state="s1"/>
-    </finals>
+    </transitions>
   </content>
 
 </transducer>

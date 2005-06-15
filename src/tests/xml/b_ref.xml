@@ -18,13 +18,9 @@
     <transitions>
       <transition dst="s1" label="a" src="s0"/>
       <transition dst="s2" label="b" src="s1"/>
-    </transitions>
-    <initials>
       <initial state="s0"/>
-    </initials>
-    <finals>
       <final state="s1"/>
-    </finals>
+    </transitions>
   </content>
 
 </automaton>

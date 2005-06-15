@@ -19,8 +19,6 @@
         <transition dst="s1" label="a" src="s0"/>
         <transition dst="s2" label="b" src="s1"/>
       </transitions>
-      <initials/>
-      <finals/>
     </content>
   </automaton>
 
@@ -42,8 +40,6 @@
         <transition dst="s1" label="a" src="s0"/>
         <transition dst="s2" label="b" src="s1"/>
       </transitions>
-      <initials/>
-      <finals/>
     </content>
   </automaton>
 

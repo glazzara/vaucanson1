@@ -219,7 +219,7 @@ properties can be set with the <drawing> tag.
 
 <!--
 <transition> tag properties. Used to define a transition between two
-states. This tag must be a child of <transitions> tag.
+states . This tag must be a child of <transitions> tag.
 The optional "weight" attribute can be used on weighted automata.
 On transducers, use the "in" and "out" attributes to define input and
 output for the transition.
@@ -280,12 +280,15 @@ Global geometry and drawing properties can be set for all states.
 
 
 <!--
-<transitions> tag properties. Used to enumerate transitions in the automaton.
+<transitions> tag properties. Used to enumerate transitions in the
+automaton, including initials and finals.
 Global geometry and drawing properties can be set for all transitions.
 -->
 <xs:complexType name="transitions">
   <xs:sequence>
     <xs:element name="transition" type="transition" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="initial" type="initial" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="final" type="final" minOccurs="0" maxOccurs="unbounded"/>
     <xs:element name="geometry" type="geometry_trans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
   </xs:sequence>
@@ -294,6 +297,8 @@ Global geometry and drawing properties can be set for all transitions.
 <xs:complexType name="transitions_transducer">
   <xs:sequence>
     <xs:element name="transition" type="transition_transducer" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="initial" type="initial_transducer" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="final" type="final_transducer" minOccurs="0" maxOccurs="unbounded"/>
     <xs:element name="geometry" type="geometry_trans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
   </xs:sequence>
@@ -355,45 +360,6 @@ and drawing properties.
 </xs:complexType>
 
 
-<!--
-<initials> tag properties. Used to enumerate <initial> tags.
--->
-<xs:complexType name="initials">
-  <xs:sequence>
-    <xs:element name="initial" type="initial" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="geometry" type="geometry_xy" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-  </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="initials_transducer">
-  <xs:sequence>
-    <xs:element name="initial" type="initial_transducer" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="geometry" type="geometry_xy" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-  </xs:sequence>
-</xs:complexType>
-
-
-<!--
-<finals> tag properties. Used to enumerate <final> tags.
--->
-<xs:complexType name="finals">
-  <xs:sequence>
-    <xs:element name="final" type="final" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="geometry" type="geometry_xy" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-  </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="finals_transducer">
-  <xs:sequence>
-    <xs:element name="final" type="final_transducer" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="geometry" type="geometry_xy" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-  </xs:sequence>
-</xs:complexType>
-
 
 <!-- 
 <content> tag properties. This tag is used to define the structure of
@@ -410,8 +376,6 @@ Two possible contents are available, one for automata and one for transducers.
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="states" type="states"/>
     <xs:element name="transitions" type="transitions"/>
-    <xs:element name="initials" type="initials"/>
-    <xs:element name="finals" type="finals"/>
   </xs:sequence>
 </xs:complexType>
 
@@ -421,8 +385,6 @@ Two possible contents are available, one for automata and one for transducers.
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="states" type="states"/>
     <xs:element name="transitions" type="transitions_transducer"/>
-    <xs:element name="initials" type="initials_transducer"/>
-    <xs:element name="finals" type="finals_transducer"/>
   </xs:sequence>
 </xs:complexType>
 

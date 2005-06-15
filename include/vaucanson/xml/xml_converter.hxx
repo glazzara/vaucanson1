@@ -96,14 +96,10 @@ namespace vcsn
 	create_transition(*e, aut, node, state2str);
 
       // Create initial transitions.
-      node = doc_->createElement(STR2XML("initials"));
-      content->appendChild(node);
       for_each_initial_state(i, aut)
 	create_initial(*i, aut, node, state2str);
 
       // Create final transitions.
-      node = doc_->createElement(STR2XML("finals"));
-      content->appendChild(node);
       for_each_final_state(f, aut)
 	create_final(*f, aut, node, state2str);
     }
