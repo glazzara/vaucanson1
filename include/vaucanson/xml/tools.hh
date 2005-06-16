@@ -58,6 +58,10 @@
 # include <vaucanson/fmp_transducer.hh>
 # include <vaucanson/boolean_transducer.hh>
 
+# include <vaucanson/algebra/concept/monoid_base.hh>
+# include <vaucanson/automata/concept/transducer_base.hh>
+
+
 namespace vcsn
 {
   namespace xml

@@ -347,13 +347,24 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 
       template <class S, class T, class E1, class E2, class R>
       void assoc_exp(TRANStype& a, E1& i_exp, E2& o_exp, R& res,
-		     bool i_res, bool)
+		     bool i_res, bool o_res)
       {
+	typedef typename TRANStype::monoid_elt_t::value_t md_value_t;
+	typedef typename TRANStype::semiring_elt_t::value_t sg_value_t;
 	typename TRANStype::monoid_elt_t m(a.structure().series().monoid());
 
 	if (! i_res && i_exp.supp().size())
-	  m = *(i_exp.supp().begin());
-	res.assoc(m, o_exp);
+	    m = *(i_exp.supp().begin());
+	else
+	  m = vcsn::algebra::identity_as<md_value_t>
+	    ::of(a.structure().series().monoid());
+	
+	if (! o_res && ! o_exp.supp().size())
+	  res.assoc(m,
+		    vcsn::algebra::identity_as<sg_value_t>
+		    ::of(a.structure().series().semiring()));
+	else
+	  res.assoc(m, o_exp);
       }
 
 
@@ -366,14 +377,26 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	typename FMPtype::monoid_elt_t::first_monoid_elt_value_t m1("");
 	typename FMPtype::monoid_elt_t::second_monoid_elt_value_t m2("");
 	typename FMPtype::semiring_elt_value_t sem = 1;
+	typename FMPtype::monoid_elt_t::first_monoid_elt_t::value_t md_value_t;
+	typename FMPtype::semiring_elt_value_t sg_value_t;
 
 	if (! i_res && i_exp.supp().size())
 	  m1 = *(i_exp.supp().begin());
-
+	else
+	  m1 = vcsn::identity_as<md_value_t>
+	    ::of(a.structure().series().monoid().first_monoid());
+	  
 	if (! o_res && o_exp.supp().size())
 	  {
 	    m2 = *(o_exp.supp().begin());
 	    sem = o_exp.get(m2);
+	  }
+	else
+	  {
+	    m2 = vcsn::identity_as<md_value_t>
+	      ::of(a.structure().series().monoid().second_monoid());
+	    sem = vcsn::identity_as<sg_value_t>
+	      ::of(a.structure().series().semiring());
 	  }
 	m = std::make_pair(m1, m2);
   	res.assoc(m, sem);

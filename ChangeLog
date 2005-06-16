@@ -1,5 +1,11 @@
 2005-06-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/tools.hxx: Fix a bug in XML system. Transitions
+	where either "in" or "out" attribute was omitted were badly handled.
+	
+2005-06-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/demos/xml/samples/div3base2.xml,
 	* src/demos/xml/samples/c1.xml,
 	* src/demos/xml/samples/occ_b.xml,
