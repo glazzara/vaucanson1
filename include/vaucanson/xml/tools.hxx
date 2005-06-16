@@ -377,13 +377,14 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	typename FMPtype::monoid_elt_t::first_monoid_elt_value_t m1("");
 	typename FMPtype::monoid_elt_t::second_monoid_elt_value_t m2("");
 	typename FMPtype::semiring_elt_value_t sem = 1;
-	typename FMPtype::monoid_elt_t::first_monoid_elt_t::value_t md_value_t;
-	typename FMPtype::semiring_elt_value_t sg_value_t;
+	typedef typename FMPtype::monoid_elt_t::first_monoid_elt_t::value_t
+	  md_value_t;
+	typedef typename FMPtype::semiring_elt_value_t sg_value_t;
 
 	if (! i_res && i_exp.supp().size())
 	  m1 = *(i_exp.supp().begin());
 	else
-	  m1 = vcsn::identity_as<md_value_t>
+	  m1 = vcsn::algebra::identity_as<md_value_t>
 	    ::of(a.structure().series().monoid().first_monoid());
 	  
 	if (! o_res && o_exp.supp().size())
@@ -393,9 +394,9 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	  }
 	else
 	  {
-	    m2 = vcsn::identity_as<md_value_t>
+	    m2 = vcsn::algebra::identity_as<md_value_t>
 	      ::of(a.structure().series().monoid().second_monoid());
-	    sem = vcsn::identity_as<sg_value_t>
+	    sem = vcsn::algebra::identity_as<sg_value_t>
 	      ::of(a.structure().series().semiring());
 	  }
 	m = std::make_pair(m1, m2);
