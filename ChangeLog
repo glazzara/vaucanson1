@@ -1,3 +1,13 @@
+2005-06-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/xml/samples/div3base2.xml,
+	* src/demos/xml/samples/c1.xml,
+	* src/demos/xml/samples/occ_b.xml,
+	* src/demos/xml/samples/lomb1.xml,
+	* src/demos/xml/samples/lomb2.xml,
+	* src/demos/xml/samples/double_ring6.xml: Update according grammar 
+	change (suppression of <initials> and <finals>).
+
 2005-06-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* doc/xml/vaucanson.xsd: Change the grammar in order to make <initial>

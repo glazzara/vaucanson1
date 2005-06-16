@@ -22,13 +22,9 @@
       <transition dst="s2" label="b" src="s1"/>
       <transition dst="s0" label="b" src="s2"/>
       <transition dst="s2" label="a" src="s2"/>
-    </transitions>
-    <initials>
       <initial state="s1"/>
-    </initials>
-    <finals>
       <final state="s2"/>
-    </finals>
+    </transitions>
   </content>
 
 </automaton>
