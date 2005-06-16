@@ -16,7 +16,9 @@ if XML_CHECK
 	z					\
 	r					\
 	z_max_plus				\
-	z_min_plus
+	z_min_plus				\
+	tdc					\
+	rt_tdc
 endif
 
 vaucanson.xsd:
@@ -50,3 +52,13 @@ z_min_plus_SOURCES = algorithms.cc
 z_min_plus_CPPFLAGS = $(AM_CPPFLAGS)				\
 	-DCONTEXT_HEADER="<vaucanson/z_min_plus_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::z_min_plus_automaton"
+
+tdc_SOURCES = tdc_algorithms.cc
+tdc_CPPFLAGS = $(AM_CPPFLAGS)					\
+	-DCONTEXT_HEADER="<vaucanson/fmp_transducer.hh>"	\
+	-DCONTEXT_NAMESPACE="vcsn::fmp_transducer"
+
+rt_tdc_SOURCES = rt_tdc_algorithms.cc
+rt_tdc_CPPFLAGS = $(AM_CPPFLAGS)				\
+	-DCONTEXT_HEADER="<vaucanson/boolean_transducer.hh>"	\
+	-DCONTEXT_NAMESPACE="vcsn::boolean_transducer"

@@ -1,5 +1,20 @@
 2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	This patch adds two demos inspired on what Thomas had done with
+	'algorithms.cc' for CIAA'04. 'tdc_algorithms.cc' is on fmp
+	transducers and 'rt_tdc_algorithms.cc' on realtime
+	transducers. Two binaries are generated: 'tdc' and 'rt_tdc', which
+	can be used in the same way as the binaries 'b', 'z', etc,
+	generated with 'algorithms.cc'.
+
+	* src/demos/xml/tdc_algorithms.cc: New. Add demo on algorithms on fmp
+	transducers.
+	* src/demos/xml/rt_tdc_algorithms.cc: New. Add demo on algorithms on
+	realtime transducers.
+	* src/demos/xml/Makefile.am: Update accordingly.
+
+2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/normalized_composition.hh,
 	* include/vaucanson/algorithms/normalized_composition.hxx: Make the
 	composition of unweighted fmp transducers available for any user (it
@@ -2616,7 +2631,7 @@
 	* include/vaucanson/algebra/implementation/series/rat/nodes.hxx,
 	* include/vaucanson/algebra/implementation/series/krat.hxx,
 	* include/vaucanson/algorithms/krat_exp_realtime.hxx,
-	* include/vaucanson/algorithms/brzozowski.hxx,
+	* inclsrc/demos/xml/rt_tdc_algorithms.ccude/vaucanson/algorithms/brzozowski.hxx,
 	* include/vaucanson/automata/concept/transducer_base.hxx,
 	* include/vaucanson/automata/concept/automata_base.hxx: Add missing
 	this->.
