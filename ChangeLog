@@ -1,5 +1,20 @@
 2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	This patch adds two demos on fibonacci, the first on realtime
+	transducers, and the second on fmp transducers. They both do the
+	same thing, namely create 4 XML files representing: fibleft,
+	fibright, and the compositions of these two transducers (both
+	ways).
+
+	* src/demos/fibonacci/fibonacci_demo.cc: New. Add demo on realtime
+	transducers that produces XML files.
+	* src/demos/fibonacci/fibonacci_fmp_demo.cc: New. Add demo on fmp
+	transducers that produces XML files.
+	* src/demos/fibonacci/Makefile.am: Update accordingly.
+
+
+2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	This patch adds two demos inspired on what Thomas had done with
 	'algorithms.cc' for CIAA'04. 'tdc_algorithms.cc' is on fmp
 	transducers and 'rt_tdc_algorithms.cc' on realtime
