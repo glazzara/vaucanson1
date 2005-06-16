@@ -358,7 +358,7 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	else
 	  m = vcsn::algebra::identity_as<md_value_t>
 	    ::of(a.structure().series().monoid());
-	
+
 	if (! o_res && ! o_exp.supp().size())
 	  res.assoc(m,
 		    vcsn::algebra::identity_as<sg_value_t>
@@ -385,8 +385,8 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	  m1 = *(i_exp.supp().begin());
 	else
 	  m1 = vcsn::algebra::identity_as<md_value_t>
-	    ::of(a.structure().series().monoid().first_monoid());
-	  
+	    ::of(a.structure().series().monoid().first_monoid()).value();
+
 	if (! o_res && o_exp.supp().size())
 	  {
 	    m2 = *(o_exp.supp().begin());
@@ -395,9 +395,9 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	else
 	  {
 	    m2 = vcsn::algebra::identity_as<md_value_t>
-	      ::of(a.structure().series().monoid().second_monoid());
+	      ::of(a.structure().series().monoid().second_monoid()).value();
 	    sem = vcsn::algebra::identity_as<sg_value_t>
-	      ::of(a.structure().series().semiring());
+	      ::of(a.structure().series().semiring()).value();
 	  }
 	m = std::make_pair(m1, m2);
   	res.assoc(m, sem);

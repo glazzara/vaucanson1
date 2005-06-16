@@ -1,13 +1,17 @@
+2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/xml/tools.hxx: Minor fix.
+
 2005-06-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx: Minor fix.
-	
+
 2005-06-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hh,
 	* include/vaucanson/xml/tools.hxx: Fix a bug in XML system. Transitions
 	where either "in" or "out" attribute was omitted were badly handled.
-	
+
 2005-06-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/demos/xml/samples/div3base2.xml,
@@ -15,7 +19,7 @@
 	* src/demos/xml/samples/occ_b.xml,
 	* src/demos/xml/samples/lomb1.xml,
 	* src/demos/xml/samples/lomb2.xml,
-	* src/demos/xml/samples/double_ring6.xml: Update according grammar 
+	* src/demos/xml/samples/double_ring6.xml: Update according grammar
 	change (suppression of <initials> and <finals>).
 
 2005-06-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
@@ -23,10 +27,10 @@
 	* doc/xml/vaucanson.xsd: Change the grammar in order to make <initial>
 	and <final> children of <transitions>. Suppress tags <initials> and
 	<finals>.
-	
+
 	* include/vaucanson/xml/node.hh,
 	* include/vaucanson/xml/node.hxx,
-	* include/vaucanson/xml/xml_converter.hxx: Update according to the 
+	* include/vaucanson/xml/xml_converter.hxx: Update according to the
 	grammar changes.
 
 	* src/tests/xml/trans_ref.xml,
@@ -37,20 +41,20 @@
 	* src/tests/xml/z_max_plus_ref.xml,
 	* src/tests/xml/fmp_ref.xml,
 	* src/tests/xml/session_ref.xml: Update accordingly.
-	
+
 2005-06-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/z_fmp_transducer.hh,
 	* include/vaucanson/fmp_transducer.hh: Define macro AUTOMATON_CONTEXT,
 	regarding the automaton context used in fmp_transducer_functions.
-	
+
 	* include/vaucanson/contexts/fmp_transducer_functions.thh,
 	* include/vaucanson/contexts/fmp_transducer_functions.thxx: Use macro
 	AUTOMATON_CONTEXT instead of boolean_automaton.
 
-	* include/vaucanson/algorithms/projections_fmp.hh: Fix missing 
+	* include/vaucanson/algorithms/projections_fmp.hh: Fix missing
 	includes.
-	
+
 2005-06-15  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	This patch offers several new algorithms on transducers seen as
