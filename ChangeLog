@@ -1,5 +1,9 @@
 2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/projections_fmp.hxx: Minor fix.
+
+2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/xml/tools.hxx: Minor fix.
 
 2005-06-16  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>

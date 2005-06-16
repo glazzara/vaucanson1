@@ -90,11 +90,11 @@ namespace vcsn
       }
   }
 
-  template <typename S1, typename S2, typename M1, typename M2,
+  template <typename S1, typename S2, typename M1, typename M2, typename M3,
 	    typename auto_t, typename trans_t>
   void
   do_domain(const AutomataBase<S1>&, const algebra::FreeMonoidProduct<M1, M2>&,
-	    const AutomataBase<S2>&, const algebra::FreeMonoid<M1>&,
+	    const AutomataBase<S2>&, const algebra::FreeMonoid<M3>&,
 	    const trans_t& fmp_trans, auto_t& res)
   {
     AUTOMATON_TYPES_(trans_t, trans_);
