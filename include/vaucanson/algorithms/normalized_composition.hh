@@ -44,6 +44,7 @@
  *
  * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
  *
+ * @see b_composition()
  * @see normalized_composition()
  */
 /** @} */
@@ -51,6 +52,37 @@
 namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
+
+
+ /**
+   * Composition for unweighted normalized and sub-normalized
+   * transducers, seen as automata over a free monoid product.
+   *
+   * @param  lhs The left hand side transducer.
+   * @param  rhs The right hand side transducer.
+   * @param  ret The result transducer.
+   *
+   */
+  template <typename S, typename T>
+  void
+  b_composition(const Element<S, T>& lhs,
+		const Element<S, T>& rhs,
+		Element<S, T>& ret);
+
+ /**
+   * Composition for unweighted normalized and sub-normalized
+   * transducers, seen as automata over a free monoid product.
+   *
+   * @param  lhs The left hand side transducer.
+   * @param  rhs The right hand side transducer.
+   *
+   */
+
+  template <typename S, typename T>
+  Element<S, T>
+  b_composition(const Element<S, T>& lhs,
+		const Element<S, T>& rhs);
+
 
  /**
    * Composition for normalized and sub-normalized transducers, seen

@@ -1,5 +1,12 @@
 2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/normalized_composition.hh,
+	* include/vaucanson/algorithms/normalized_composition.hxx: Make the
+	composition of unweighted fmp transducers available for any user (it
+	is now named 'b_composition').
+
+2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/projections_fmp.hxx: Minor fix.
 
 2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>

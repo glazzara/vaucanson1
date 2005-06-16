@@ -55,14 +55,17 @@
 
 namespace vcsn {
 
-  template <typename lhs_t, typename rhs_t, typename res_t>
+  template <typename S, typename M1, typename M2, typename lhs_t,
+	    typename rhs_t, typename res_t>
   void
-  normalized_product(res_t&				output,
-		     const lhs_t&			lhs,
-		     const rhs_t&			rhs,
-		     std::set<hstate_t>&		lhs_states,
-		     std::set<hstate_t>&		rhs_states,
-		     std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m)
+  do_b_composition(const AutomataBase<S>&,
+		   const algebra::FreeMonoidProduct<M1, M2>&,
+		   const lhs_t&			lhs,
+		   const rhs_t&			rhs,
+		   res_t&			output,
+		   std::set<hstate_t>&		lhs_states,
+		   std::set<hstate_t>&		rhs_states,
+		   std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m)
   {
     AUTOMATON_TYPES(res_t);
     AUTOMATON_TYPES_(lhs_t, lhs_);
@@ -375,8 +378,68 @@ namespace vcsn {
     rhs_t rhs_cov = insplitting(rhs, rhs_states);
 
     map_of_states_t m;
-    normalized_product(ret, lhs_cov, rhs_cov, lhs_states, rhs_states, m);
+    do_b_composition(ret.structure(), ret.structure().series().monoid(),
+		     lhs_cov, rhs_cov, ret, lhs_states, rhs_states, m);
   }
+
+
+
+  template <typename S, typename T>
+  void
+  b_composition(const Element<S, T>& lhs,
+		const Element<S, T>& rhs,
+		Element<S, T>& ret)
+  {
+
+    typedef std::set<hstate_t>			set_of_states_t;
+    typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
+						map_of_states_t;
+    set_of_states_t lhs_states;
+    set_of_states_t rhs_states;
+    map_of_states_t m;
+
+    do_b_composition(ret.structure(), ret.structure().series().monoid(),
+		     lhs, rhs, ret, lhs_states, rhs_states, m);
+  }
+
+
+  template <typename S, typename T>
+  Element<S, T>
+  b_composition(const Element<S, T>& lhs,
+		const Element<S, T>& rhs)
+  {
+   typedef Element<S, T> auto_t;
+
+    typedef algebra::FreeMonoidProduct<
+      typename auto_t::series_set_t::monoid_t::first_monoid_t,
+      typename auto_t::series_set_t::monoid_t::second_monoid_t>	monoid_t;
+
+    typedef algebra::Series<typename auto_t::series_set_t::semiring_t,
+			    monoid_t>
+      series_set_t;
+
+    monoid_t monoid(lhs.structure().series().monoid().first_monoid(),
+		    rhs.structure().series().monoid().second_monoid());
+
+
+    series_set_t series(lhs.structure().series().semiring(), monoid);
+
+    Automata<series_set_t> aut_set(series);
+
+    Element< Automata<series_set_t>, T> ret(aut_set);
+
+    typedef std::set<hstate_t>			set_of_states_t;
+    typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
+						map_of_states_t;
+    set_of_states_t lhs_states;
+    set_of_states_t rhs_states;
+    map_of_states_t m;
+
+    do_b_composition(ret.structure(), ret.structure().series().monoid(),
+		     lhs, rhs, ret, lhs_states, rhs_states, m);
+    return ret;
+  }
+
 
 
   template <typename S, typename T>
