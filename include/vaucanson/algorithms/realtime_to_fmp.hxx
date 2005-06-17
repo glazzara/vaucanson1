@@ -87,6 +87,11 @@ namespace vcsn
 	 ++St)
       m[*St] = res.add_state();
 
+    typename Trans_t::series_set_elt_t id_series;
+    id_series = vcsn::algebra::
+      identity_as<typename Trans_t::series_set_elt_value_t>::
+      of(trans.structure().series());
+
 
       /*------------------------.
       | Setting initial states. |
@@ -106,27 +111,34 @@ namespace vcsn
 	  weight(res.structure().series().semiring());
 
 	mult_elt_t mult = trans.get_initial(*St);
-	typename mult_elt_t::support_t mult_supp = mult.supp();
-	for_each_const_(mult_elt_t::support_t, i, mult_supp)
-	  {
-	    first = *i;
+	if (mult != id_series)
+	{
+	  hstate_t tmp = res.add_state();
+	  typename mult_elt_t::support_t mult_supp = mult.supp();
+	  for_each_const_(mult_elt_t::support_t, i, mult_supp)
+	    {
+	      first = *i;
 
-	    typename Trans_t::semiring_elt_t
-	      output(trans.structure().series().semiring(), mult.get(*i));
-	    typename Trans_t::semiring_elt_t::support_t
-	      output_supp = output.supp();
-	    for_each_const_(Trans_t::semiring_elt_t::support_t,
-			    j,
-			    output_supp)
-	      {
-		second = *j;
-		weight = output.get(*j);
-		mon = typename FMP_t::monoid_elt_value_t(first.value(),
-							 second.value());
-		s.assoc(mon, weight);
-	      }
-	  }
-	res.set_initial(m[*St], s);
+	      typename Trans_t::semiring_elt_t
+		output(trans.structure().series().semiring(), mult.get(*i));
+	      typename Trans_t::semiring_elt_t::support_t
+		output_supp = output.supp();
+	      for_each_const_(Trans_t::semiring_elt_t::support_t,
+			      j,
+			      output_supp)
+		{
+		  second = *j;
+		  weight = output.get(*j);
+		  mon = typename FMP_t::monoid_elt_value_t(first.value(),
+							   second.value());
+		  s.assoc(mon, weight);
+		}
+	    }
+	  res.add_series_edge(tmp, m[*St], s);
+	  res.set_initial(tmp);
+	}
+	else
+	  res.set_initial(m[*St]);
       }
 
 
@@ -148,27 +160,35 @@ namespace vcsn
 	  weight(res.structure().series().semiring());
 
 	mult_elt_t mult = trans.get_final(*St);
-	typename mult_elt_t::support_t mult_supp = mult.supp();
-	for_each_const_(mult_elt_t::support_t, i, mult_supp)
-	  {
-	    first = *i;
+	if (mult != id_series)
+	{
+	  hstate_t tmp = res.add_state();
 
-	    typename Trans_t::semiring_elt_t
-	      output(trans.structure().series().semiring(), mult.get(*i));
-	    typename Trans_t::semiring_elt_t::support_t
-	      output_supp = output.supp();
-	    for_each_const_(Trans_t::semiring_elt_t::support_t,
-			    j,
-			    output_supp)
-	      {
-		second = *j;
-		weight = output.get(*j);
-		mon = typename FMP_t::monoid_elt_value_t(first.value(),
-							 second.value());
-		s.assoc(mon, weight);
-	      }
-	  }
-	res.set_final(m[*St], s);
+	  typename mult_elt_t::support_t mult_supp = mult.supp();
+	  for_each_const_(mult_elt_t::support_t, i, mult_supp)
+	    {
+	      first = *i;
+
+	      typename Trans_t::semiring_elt_t
+		output(trans.structure().series().semiring(), mult.get(*i));
+	      typename Trans_t::semiring_elt_t::support_t
+		output_supp = output.supp();
+	      for_each_const_(Trans_t::semiring_elt_t::support_t,
+			      j,
+			      output_supp)
+		{
+		  second = *j;
+		  weight = output.get(*j);
+		  mon = typename FMP_t::monoid_elt_value_t(first.value(),
+							   second.value());
+		  s.assoc(mon, weight);
+		}
+	    }
+	  res.add_series_edge(m[*St], tmp, s);
+	  res.set_final(tmp);
+	}
+	else
+	  res.set_final(m[*St]);
       }
 
 

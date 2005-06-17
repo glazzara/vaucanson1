@@ -1,3 +1,8 @@
+2005-06-17  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx:
+	Fix bug when initial and final states have multiplicities.
+
 2005-06-16  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	This patch adds two demos on fibonacci, the first on realtime
