@@ -53,7 +53,8 @@ namespace vcsn {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
-    hstate_t puits = work.add_state();
+    hstate_t sink_state;
+    bool sink_added = false;
     std::list<hstate_t> aim;
 
     for_each_state(i, work)
@@ -63,7 +64,14 @@ namespace vcsn {
 	    aim.clear();
 	    work.letter_deltac(aim, *i, *j, delta_kind::states());
 	    if (aim.size() == 0)
-	      work.add_letter_edge(*i, puits, *j);
+	    {
+	      if (not sink_added)
+	      {
+		sink_state = work.add_state();
+		sink_added = true;
+	      }
+	      work.add_letter_edge(*i, sink_state, *j);
+	    }
 	  }
       }
   }
