@@ -87,7 +87,7 @@ namespace vcsn
 	 ++St)
       m[*St] = res.add_state();
 
-    typename Trans_t::series_set_elt_t id_series;
+    typename Trans_t::series_set_elt_t id_series(trans.structure().series());
     id_series = vcsn::algebra::
       identity_as<typename Trans_t::series_set_elt_value_t>::
       of(trans.structure().series());

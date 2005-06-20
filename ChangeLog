@@ -1,3 +1,8 @@
+2005-06-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx: Fix a bug: 
+	structural element was missing in the code.
+
 2005-06-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/complete.hxx: Do not create
