@@ -36,6 +36,7 @@
 # include <vaucanson/algorithms/evaluation_fmp.hh>
 # include <vaucanson/algorithms/projections_fmp.hh>
 # include <vaucanson/algorithms/normalized_composition.hh>
+# include <vaucanson/algorithms/sub_normalize.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 
 namespace vcsn
@@ -50,9 +51,10 @@ namespace vcsn
 		    const AutomataBase<S3>&, const algebra::FreeMonoid<M4>&,
 		    const trans_t& trans, const auto_t& aut, res_t& res)
   {
-    trans_t id_aut(trans);
+    trans_t id_aut(trans.structure());
     identity(aut, id_aut);
-    trans_t res_composition = normalized_composition(trans, id_aut);
+    trans_t res_composition = normalized_composition(sub_normalize(id_aut),
+						     sub_normalize(trans));
     image(res_composition, res);
   }
 
