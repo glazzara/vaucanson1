@@ -1,6 +1,18 @@
+2005-06-22  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/aut_to_exp.hxx:
+	Add new choosers to aut_to_exp, including heuristic choosers.
+
+	* src/tests/automata/algos/labeled_graphs/elimination_heuristic_test.hh,
+	* src/tests/automata/algos/labeled_graphs/elimination_dmheuristic_test.hh,
+	* src/tests/automata/algos/labeled_graphs/elimination_random_test.hh:
+	New. Add simple tests for new choosers.
+	* src/tests/automata/algos/labeled_graphs/Makefile.am:
+	Update accordingly.
+
 2005-06-21  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/realtime_to_fmp.hxx: Fix a bug: 
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx: Fix a bug:
 	structural element was missing in the code.
 
 2005-06-18  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>

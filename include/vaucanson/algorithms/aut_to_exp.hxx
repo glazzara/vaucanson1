@@ -38,9 +38,13 @@
 # include <vaucanson/algorithms/normalized.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/misc/contract.hh>
+# include <vaucanson/misc/limits.hh>
+# include <vaucanson/misc/random.hh>
+# include <vaucanson/automata/concept/automata_base.hh>
 
 # include <list>
 # include <set>
+# include <vector>
 
 # include <stdlib.h>
 # include <time.h>
@@ -105,10 +109,12 @@ namespace vcsn {
 	  ++n_final;
       }
 
-      int n = (rand() % (a.states().size() - n_init - n_final));
+      unsigned n = utility::random::generate((unsigned) 0,
+					     a.states().size() -
+					     (n_init + n_final));
 
       typename Auto_::state_iterator k = a.states().begin();
-      int kk = 0;
+      unsigned kk = 0;
       while (kk <= n ||
 	     ((a.is_initial(*k)) || (a.is_final(*k))) || k == a.states().end())
 	{
@@ -123,6 +129,151 @@ namespace vcsn {
       return *k;
     }
   };
+
+
+  /*-----------------------.
+  |    HeuristicChooser    |
+  | Sakarovitch & Lombardy |
+  `-----------------------*/
+
+  struct HChooser
+  {
+    template <class Auto_>
+    hstate_t
+    operator()(const Auto_& a) const
+    {
+      assertion(a.states().size() > 0);
+
+      std::set<hedge_t> delta_in;
+      std::set<hedge_t> delta_out;
+
+      typename Auto_::state_iterator s = a.states().begin();
+      unsigned int d_in = 0;
+      unsigned int d_out = 0;
+      unsigned int max = INT_MAX;
+      bool has_loop = false;
+      bool has_loop_old = false;
+
+      for (typename Auto_::state_iterator i = a.states().begin();
+	   i != a.states().end();
+	   ++i)
+      {
+	if (a.is_final(*i) || a.is_initial(*i))
+	  continue;
+	has_loop = false;
+
+	a.deltac(delta_out, *i, delta_kind::edges());
+	a.rdeltac(delta_in, *i, delta_kind::edges());
+	for (typename std::set<hedge_t>::iterator j = delta_out.begin();
+	     j != delta_out.end();
+	     ++j)
+	  if (*i == a.aim_of(*j))
+	    has_loop = true;
+
+	//FIXME : If the state has several loops
+	if (has_loop)
+	  d_in = delta_in.size() - 1;
+	else
+	  d_in = delta_in.size();
+	d_out = delta_out.size();
+
+	//We prefer to delete a state that has no loop transition
+	if (d_in * d_out < max ||
+	    (d_in * d_out == max &&
+	     has_loop_old && not has_loop))
+	{
+	  s = i;
+	  max = d_in * d_out;
+	  has_loop_old = has_loop;
+	}
+	delta_out.clear();
+	delta_in.clear();
+      }
+      return *s;
+    }
+  };
+
+  /*----------------------------------.
+  | HeuristicChooser Delgado & Morais |
+  `----------------------------------*/
+ struct DMChooser
+  {
+    template <class Auto_>
+    hstate_t
+    operator()(const Auto_& a) const
+    {
+      assertion(a.states().size() > 0);
+
+      std::set<hedge_t> delta_in;
+      std::set<hedge_t> delta_out;
+      typename Auto_::state_iterator s = a.states().begin();
+
+      unsigned int weight_min = INT_MAX;
+      for (typename Auto_::state_iterator i = a.states().begin();
+	   i != a.states().end();
+	   ++i)
+      {
+	if (a.is_final(*i) || a.is_initial(*i))
+	  continue;
+	unsigned int n_loops = 0;
+	unsigned int in = 0;
+	unsigned int out = 0;
+
+	unsigned int weight = 0;
+
+	delta_in.clear();
+	delta_out.clear();
+	a.deltac(delta_out, *i, delta_kind::edges());
+	a.rdeltac(delta_in, *i, delta_kind::edges());
+
+	for (typename std::set<hedge_t>::iterator j = delta_out.begin();
+	     j != delta_out.end();
+	     ++j)
+	  if (*i == a.aim_of(*j))
+	    ++n_loops;
+
+	in = delta_in.size() - n_loops;
+	out = delta_out.size() - n_loops;
+
+	// Compute SUM(Win(k) * (Out - 1))
+	for (typename std::set<hedge_t>::iterator j = delta_in.begin();
+	     j != delta_in.end();
+	     ++j)
+	  if (*i != a.aim_of(*j))
+	  {
+	    weight += a.series_value_of(*j).length() * (out - 1);
+	  }
+
+	// Compute SUM(Wout(k) * (In - 1))
+	for (typename std::set<hedge_t>::iterator j = delta_out.begin();
+	     j != delta_out.end();
+	     ++j)
+	  if (*i != a.aim_of(*j))
+	  {
+	    weight += a.series_value_of(*j).length() * (in - 1);
+	  }
+
+	// Compute Wloop * (In * Out - 1)
+	for (typename std::set<hedge_t>::iterator j = delta_out.begin();
+	     j != delta_out.end();
+	     ++j)
+	  if (*i == a.aim_of(*j))
+	  {
+	    weight += a.series_value_of(*j).length() * (in  * out - 1);
+	  }
+
+	if (weight < weight_min)
+	{
+	  s = i;
+	  weight_min = weight;
+	}
+      }
+      return *s;
+    }
+  };
+
+
+
 
   /*------------.
   | ListChooser |
@@ -210,7 +361,6 @@ namespace vcsn {
 	      }
 	    a.del_edge(*i);
 	  }
-
 	edges.clear();
 	// FIXME: use a new version of delta!
 	a.rdeltac(edges, q, delta_kind::edges());
@@ -227,8 +377,8 @@ namespace vcsn {
 	    f->second += a.series_of(*i);
 	    a.del_edge(*i);
 	  }
-
 	loop_sum.star();
+	//Slow
 	for_each_const_(sums_t, in, in_sums)
 	  for_each_const_(sums_t, out, out_sums)
 	  {
