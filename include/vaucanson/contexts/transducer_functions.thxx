@@ -32,6 +32,10 @@
 //
 
 # include <vaucanson/algorithms/evaluation.hh>
+# include <vaucanson/algorithms/minimization_hopcroft.hh>
+# include <vaucanson/algorithms/trim.hh>
+# include <vaucanson/algorithms/aut_to_exp.hh>
+# include <vaucanson/algorithms/realtime.hh>
 
 namespace vcsn
 {
@@ -113,12 +117,12 @@ namespace vcsn
 		  const Element<TransStruct, TransImpl>& t,
 		  const Element<SeriesStruct, SeriesImpl>&)
     {
-      boolean_automaton::automaton_t w = boolean_automaton::
+      AUTOMATON_CONTEXT::automaton_t w = AUTOMATON_CONTEXT::
 	new_automaton(t.structure().series().monoid().alphabet());
-      boolean_automaton::gen_automaton_t result (w.structure());
+      AUTOMATON_CONTEXT::gen_automaton_t result (w.structure());
       standard_of(w, input);
-      evaluation(w, t, result);
-      return aut_to_exp(result);
+      evaluation(quotient(w), t, result);
+      return aut_to_exp(quotient(realtime(trim(result))), DMChooser());
     }
 
 

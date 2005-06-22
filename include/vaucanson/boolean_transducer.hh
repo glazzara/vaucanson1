@@ -35,6 +35,7 @@
 # include <vaucanson/boolean_automaton.hh>
 
 # define VCSN_CONTEXT_NAMESPACE boolean_transducer
+# define AUTOMATON_CONTEXT boolean_automaton
 
 # include <vaucanson/contexts/char_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>

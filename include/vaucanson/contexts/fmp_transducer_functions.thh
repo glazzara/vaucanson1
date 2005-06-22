@@ -68,7 +68,7 @@ namespace vcsn
 	      typename TransImpl,
 	      typename ArgStruct,
 	      typename ArgImpl>
-    AUTOMATON_CONTEXT::series_set_elt_t
+    AUTOMATON_CONTEXT::rat_exp_t
     evaluation(const Element<TransStruct, TransImpl>& t,
 	       const Element<ArgStruct, ArgImpl>& input);
 
