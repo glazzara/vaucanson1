@@ -1,3 +1,16 @@
+2005-06-22  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/backward_realtime.hxx: Add a function to
+	split words into letters, and call it at the end of the algorithm.
+
+	* include/vaucanson/algorithms/forward_realtime.hxx: Fix a bug: call 
+	co-accessible instead of accessible at the end of the algorithm. Also
+	call the function that split words.
+	
+	* include/vaucanson/algorithms/cut_up.hh,
+	* include/vaucanson/algorithms/cut_up.hxx: Add here version of cut-up 
+	algorithm.
+
 2005-06-22  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/aut_to_exp.hxx:

@@ -32,6 +32,7 @@
 #ifndef VCSN_ALGORITHMS_FORWARD_REALTIME_HXX
 # define VCSN_ALGORITHMS_FORWARD_REALTIME_HXX
 
+# include <vaucanson/algorithms/backward_realtime.hh>
 # include <vaucanson/algorithms/forward_realtime.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
@@ -123,8 +124,10 @@ namespace vcsn {
 	to_del.pop_front();
 	a.del_edge(e);
       }
+   
+    coaccessible_here(a);
 
-    accessible_here(a);
+    realtime_words_here(a);
   }
 
   template<typename A, typename T>

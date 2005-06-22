@@ -96,6 +96,24 @@ namespace vcsn
   void
   cut_up(const Element<S, T>& a, Element<S, T>& res);
 
+
+  /**
+   * @brief Transform an automaton labeled with series to an automaton
+   * where all labels are series with one and only one element.
+   *
+   * @comment No cut-up work is done on input and output transitions.
+   *
+   * Works on all automata and transducers labeled with polynomial series,
+   * and on automata labeled with rational series.
+   *
+   * @arg a	Input automaton.
+   *
+   */
+  template <class S, class T>
+  void
+  cut_up_here(Element<S, T>& a);
+
+  
 } // ! vcsn
 
 

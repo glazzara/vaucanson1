@@ -33,6 +33,7 @@
 # define VCSN_ALGORITHMS_BACKWARD_REALTIME_HXX
 
 # include <vaucanson/algorithms/backward_realtime.hh>
+# include <vaucanson/algorithms/cut_up.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/closure.hh>
@@ -43,6 +44,121 @@
 
 namespace vcsn {
 
+
+
+  /*--------------------------------------------.
+  | Special treatment to cut words into letters |
+  `--------------------------------------------*/
+
+  template <class Auto, class Label>
+  int do_realtime_words(Auto& a,
+			hstate_t start, hstate_t stop,
+			const Label& label, bool initial, bool final)
+  {
+    AUTOMATON_TYPES(Auto);
+    hstate_t			s0;
+    hstate_t			s1;
+
+    semiring_elt_t s_ident =
+      algebra::identity_as<semiring_elt_value_t>
+      ::of(a.structure().series().semiring());
+
+    monoid_elt_t m1(a.structure().series().monoid(), *label.supp().begin());
+    monoid_elt_value_t w1 = m1.value();
+
+    int cpt = 0;
+
+    unsigned int size = w1.size();
+
+    if (size > 1)
+      {
+	monoid_elt_t m(a.structure().series().monoid());
+
+	semiring_elt_t s = label.get(m1);
+	series_set_elt_t in_series(a.structure().series());
+
+	m = w1.substr(cpt++, 1);
+
+	in_series.assoc(m, s);
+
+ 	if (initial)
+	  {
+	    s0 = a.add_state();
+	    a.set_initial(s0, in_series);
+	    a.unset_initial(stop);
+	    s1 = s0;
+	  }
+	else
+	  {
+	    s0 = start;
+	    s1 = a.add_state();
+	    a.add_series_edge(s0, s1, in_series);
+	  }
+
+	for (unsigned int i = 1; i < size - 1; ++i)
+	  {
+	    m = w1.substr(cpt++, 1);
+	    s0 = s1;
+	    s1 = a.add_state();
+	    series_set_elt_t series(a.structure().series());
+	    series.assoc(m, s_ident);
+	    a.add_series_edge(s0, s1, series);
+	  }
+
+	m = w1.substr(cpt++, 1);
+	
+	series_set_elt_t out_series(a.structure().series());
+	out_series.assoc(m, s_ident);
+
+	if (final)
+	  {
+	    a.unset_final(start);
+	    a.set_final(s1, out_series);
+	  }
+	else
+	  a.add_series_edge(s1, stop, out_series);
+
+	return 1;
+      }
+
+    return 0;
+  }
+
+
+  template <class S, class T>
+  void realtime_words_here(Element<S, T>& res)
+  {
+    typedef Element<S, T> auto_t; 
+    AUTOMATON_TYPES(auto_t);
+    typedef std::vector<hstate_t> vector_t;
+
+    // perform cut-up.
+    cut_up_here(res);
+    
+    edges_t edges = res.value().edges();
+    vector_t i_states; i_states.reserve(res.initial().size());
+    vector_t f_states; f_states.reserve(res.final().size());
+
+    for_each_initial_state(f, res)
+      i_states.push_back(*f);
+    for_each_final_state(i, res)
+      f_states.push_back(*i);
+    
+    for_each_(vector_t, i, i_states)
+      do_realtime_words(res, hstate_t(), *i,
+			res.get_initial(*i), true, false);
+    
+    for_each_(vector_t, f, f_states)
+      do_realtime_words(res, *f, hstate_t(),
+			res.get_final(*f), false, true);
+    
+    for_each_(edges_t, e, edges)
+      if (do_realtime_words(res, res.origin_of(*e), res.aim_of(*e),
+			    res.series_of(*e), false, false))
+	res.del_edge(*e);
+  }
+
+  
   template <class A_, typename Auto_>
   void
   do_backward_realtime_here(const AutomataBase<A_>&, Auto_& a)
@@ -125,8 +241,11 @@ namespace vcsn {
       }
 
     accessible_here(a);
+    
+    realtime_words_here(a);
   }
 
+  
   template<typename A, typename T>
   void
   backward_realtime_here(Element<A, T>& a)

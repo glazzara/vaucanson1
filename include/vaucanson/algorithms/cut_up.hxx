@@ -194,6 +194,20 @@ namespace vcsn {
     do_cut_up(a.structure(), SELECT(series_impl_t), a, res);
   }
 
+
+  template <class S, class T>
+  void
+  cut_up_here(Element<S, T>& a)
+  {
+    typedef typename Element<S, T>::series_set_elt_t::value_t series_impl_t;
+
+    Element<S, T> res(a.structure());
+    do_cut_up(a.structure(),SELECT(series_impl_t), a, res);
+
+    a = res;
+  }
+
+  
 } // ! vcsn
 
 
