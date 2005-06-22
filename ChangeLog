@@ -1,5 +1,16 @@
 2005-06-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/normalized_composition.hxx: Fix a huge
+	bug in the composition of fmp transducers.
+
+2005-06-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/projection.hxx: Correct bug in
+	'output_projection', some initial and final transitions ended up being
+	labeled by words.
+
+2005-06-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/evaluation_fmp.hxx: Correct bugs in
 	evaluation on fmp transducers.
 
