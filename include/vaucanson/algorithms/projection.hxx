@@ -1,7 +1,7 @@
 // projection.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -55,13 +55,34 @@ namespace vcsn {
 
     monoid_elt_t empty =
       algebra::identity_as<monoid_elt_value_t>::of(t.series().monoid());
+    typename Trans_t::series_set_elt_t id_series(t.structure().series());
+    id_series = vcsn::algebra::
+      identity_as<typename Trans_t::series_set_elt_value_t>::
+      of(t.structure().series());
+
     for_each_initial_state(p, t)
       {
-	ret.set_initial(m[*p], t.get_initial(*p).get(empty));
+	if (t.get_initial(*p) != id_series)
+	  {
+	    hstate_t tmp = ret.add_state();
+	    ret.set_initial(tmp);
+	    ret.add_series_edge(tmp, m[*p], t.get_initial(*p).get(empty));
+	  }
+	else
+	  ret.set_initial(m[*p], t.get_initial(*p).get(empty));
       }
 
     for_each_final_state(p, t)
-      ret.set_final(m[*p], t.get_final(*p).get(empty));
+      {
+	if (t.get_final(*p) != id_series)
+	  {
+	    hstate_t tmp = ret.add_state();
+	    ret.set_final(tmp);
+	    ret.add_series_edge(m[*p], tmp, t.get_final(*p).get(empty));
+	  }
+	else
+	  ret.set_final(m[*p], t.get_final(*p).get(empty));
+      }
 
     for_each_edge(e, t)
       {
