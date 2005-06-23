@@ -1,5 +1,10 @@
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* Makefile.am: Add a `sanity-check' rule that make the sanity
+	check.
+
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/tools/bencher.hh: Fix declarations
 	of QUIET versions.
 	* include/vaucanson/tools/bencher.hxx: Use VCSN_BENCH.

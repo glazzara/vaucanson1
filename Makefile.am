@@ -32,6 +32,12 @@ dist-hook:
 	done
 
 ###
+### Sanity check.
+###
+sanity-check:
+	cd $(srcdir)/src/tests/sanity && make check
+
+###
 ### Check headers for sanity.
 ###
 
