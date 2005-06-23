@@ -1,5 +1,11 @@
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/Makefile.am: Let `benchs' SUBDIR be on a single line.
+	* Makefile.am: In `dist-hook', remove `benchs' references to avoid
+	`benchs' distribution.
+
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/internal/skeleton.hh,
 	* include/vaucanson/algorithms/internal/skeleton.hxx,
 	* include/vaucanson/algorithms/isomorph.hxx,

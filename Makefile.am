@@ -24,6 +24,13 @@ dist_m4data_DATA = config/vcsn.m4 config/vaucanson_xml.m4
 bench:
 	cd $(srcdir)/src/benchs && make bench
 
+dist-hook:
+	rm -fR $(distdir)/src/benchs
+	for f in configure configure.ac Makefile.am Makefile.in \
+		 src/Makefile.am src/Makefile.in; do		\
+	  grep -v benchs $(srcdir)/$$f > $(distdir)/$$f;	\
+	done
+
 ###
 ### Check headers for sanity.
 ###

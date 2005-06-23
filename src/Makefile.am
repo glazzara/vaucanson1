@@ -3,4 +3,7 @@
 #
 # $Id$
 
-SUBDIRS = benchs tests demos
+# `benchs' subdir has to be on a single line.
+SUBDIRS = tests	\
+	  benchs \
+	  demos
