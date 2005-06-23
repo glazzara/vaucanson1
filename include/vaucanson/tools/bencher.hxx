@@ -36,6 +36,8 @@
 
 # include <vaucanson/tools/bencher.hh>
 
+# ifdef VCSN_BENCH
+
 namespace vcsn
 {
 
@@ -67,4 +69,5 @@ namespace vcsn
     return q;
   }
 }
-#endif // VCSN_TOOLS_BENCHER_HXX
+# endif // ! VCSN_BENCH
+#endif // ! VCSN_TOOLS_BENCHER_HXX

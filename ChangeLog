@@ -1,5 +1,11 @@
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/tools/bencher.hh: Fix declarations
+	of QUIET versions.
+	* include/vaucanson/tools/bencher.hxx: Use VCSN_BENCH.
+
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/Makefile.am: Let `benchs' SUBDIR be on a single line.
 	* Makefile.am: In `dist-hook', remove `benchs' references to avoid
 	`benchs' distribution.

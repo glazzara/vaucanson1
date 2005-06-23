@@ -141,6 +141,8 @@ namespace vcsn
 #  define VCSN_BENCH_STOP
 #  define VCSN_BENCH_PRINT
 #  define VCSN_BENCH_STOP_AND_PRINT
+#  define VCSN_BENCH_START_QUIET
+#  define VCSN_BENCH_STOP_QUIET
 
 # endif // ! VCSN_BENCH
 #endif // ! VCSN_TOOLS_BENCHER_HH
