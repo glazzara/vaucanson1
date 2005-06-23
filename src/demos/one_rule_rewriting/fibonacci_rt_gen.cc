@@ -77,16 +77,24 @@ int main()
   automaton_t	fibrl = new_automaton(A, A);
   realtime_composition(fibright, fibleft, fibrl);
 
-  std::ofstream left_fibo("left_fibo.xml");
-  std::ofstream right_fibo("right_fibo.xml");
-  std::ofstream left_right_fibo("left_right_fibo.xml");
-  std::ofstream right_left_fibo("right_left_fibo.xml");
+  std::ofstream left_fibo("fibo_left.xml");
+  std::ofstream right_fibo("fibo_right.xml");
+  std::ofstream left_right_fibo("fibo_left_right.xml");
+  std::ofstream right_left_fibo("fibo_right_left.xml");
 
   tools::xml_dump(left_fibo, fibleft, "left_fibo");
   tools::xml_dump(right_fibo, fibright, "right_fibo");
   tools::xml_dump(left_right_fibo, fiblr, "left_right_fibo");
   tools::xml_dump(right_left_fibo, fibrl, "right_left_fibo");
 
-  std::cout << "Files left_fibo.xml, right_fibo.xml, left_right_fibo.xml";
-  std::cout << " and right_left_fibo.xml have been created." << std::endl;
+  std::cout << "Cautious left sequential transducer: fibo_left.xml"
+	    << std::endl
+	    << "Cautious right sequential transducer: fibo_right.xml"
+	    << std::endl
+	    << "Left transducer composed by right transducer: "
+	    << "fibo_left_right.xml"
+	    << std::endl
+	    << "Right transducer composed by left transducer: "
+	    << "fibo_right_left.xml"
+	    << std::endl;
 }

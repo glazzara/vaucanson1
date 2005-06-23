@@ -1,39 +1,23 @@
-#include <vaucanson/boolean_automaton.hh>
+#include <vaucanson/fmp_transducer.hh>
 #include <vaucanson/boolean_transducer.hh>
 
-#include <vaucanson/tools/dot_display.hh>
-#include <vaucanson/algorithms/krat_exp_expand.hh>
-#include <vaucanson/algorithms/evaluation.hh>
-#include <vaucanson/algorithms/realtime_composition.hh>
+#include <vaucanson/algorithms/normalized_composition.hh>
+#include <vaucanson/algorithms/sub_normalize.hh>
+#include <vaucanson/algorithms/realtime_to_fmp.hh>
 #include <vaucanson/algorithms/transpose.hh>
+#include <vaucanson/tools/xml_dump.hh>
 
 using namespace vcsn;
 using namespace vcsn::boolean_transducer;
 
+static
 void
-eval_an_expression(const automaton_t& t)
+usage(int, char** argv)
 {
-  const alphabet_t&	alphabet = t.structure().series().monoid().alphabet();
-  std::string		user_string;
-
-  do
-    {
-      std::cout << "Enter your expression over " << alphabet
-		<<" (\"next\", otherwise): ";
-      std::cin >> user_string;
-      if (user_string != "next")
-	{
-	  using namespace vcsn::boolean_automaton;
-	  using namespace vcsn::rat;
-
-	  rat_exp_t exp = new_rat_exp(alphabet, user_string);
-	  std::cout << setpm (MODE_STAR) << expand(evaluation(t, exp))
-		    << std::endl;
-	}
-    }
-  while (user_string != "next");
+  std::cerr << "Usage: " << std::endl
+	    << "\t" << argv[0] << " <word> <replace_word> <name>" << std::endl;
+  exit(1);
 }
-
 
 std::string
 prefsuf(const std::string& u, const std::string& v)
@@ -151,63 +135,75 @@ replace_right(const std::string& from,	const std::string& to,
   return transpose(left);
 }
 
-int
-main()
+int main(int argc, char** argv)
 {
+  if (argc != 4)
+    usage(argc, argv);
+
   alphabet_t	A;
   A.insert('a');
   A.insert('b');
 
-  alphabet_t	B;
-  B.insert('x');
-  B.insert('y');
+  std::string	from = argv[1];
+  std::string	to = argv[2];
+  std::string	name = argv[3];
 
-  alphabet_t	C;
-  C.insert('u');
-  C.insert('v');
+  automaton_t	left_auto = replace_left(from, to, A, A);
 
-  std::map<letter_t, letter_t> a2b = alpha_map(A, B);
-  std::map<letter_t, letter_t> a2c = alpha_map(A, C);
+  fmp_transducer::automaton_t fmp_left =
+    fmp_transducer::new_automaton(A, A);
 
-  std::string	from, to;
+  fmp_transducer::automaton_t sub_left =
+    fmp_transducer::new_automaton(A, A);
 
-  std::cout << "Enter your pattern over " << A <<" : ";
-  std::cin >> from;
+  realtime_to_fmp(left_auto, fmp_left);
 
-  std::cout << "Enter your replacement pattern over " << A <<" : ";
-  std::cin >> to;
+  sub_normalize(fmp_left, sub_left);
 
-  /*-----------------.
-  | Left automaton.  |
-  `-----------------*/
+  automaton_t   right_auto = replace_right(from, to, A, A);
 
-  automaton_t	left_auto = replace_left(from, alpha_convert(a2b, to), A, B);
+  fmp_transducer::automaton_t fmp_right =
+    fmp_transducer::new_automaton(A, A);
 
-  tools::dot_display(left_auto, "G", true);
-  eval_an_expression(left_auto);
+  fmp_transducer::automaton_t sub_right =
+    fmp_transducer::new_automaton(A, A);
 
-  /*------------------.
-  | Right automaton.  |
-  `------------------*/
+  realtime_to_fmp(right_auto, fmp_right);
 
-  automaton_t   right_auto = replace_right(alpha_convert(a2b, from),
-					   alpha_convert(a2c, to),
-					   B, C);
+  sub_normalize(fmp_right, sub_right);
 
-  tools::dot_display(right_auto, "D", true);
-  eval_an_expression(right_auto);
+  fmp_transducer::automaton_t	left_right_auto =
+    fmp_transducer::new_automaton(A, A);
+  fmp_transducer::automaton_t	right_left_auto =
+    fmp_transducer::new_automaton(A, A);
 
-  /*-------------------.
-  | Result automaton.  |
-  `-------------------*/
+  normalized_composition(sub_left, sub_right, left_right_auto);
+  normalized_composition(sub_right, sub_left, right_left_auto);
 
-  automaton_t	res_auto = new_automaton(A, C);
-  realtime_composition(left_auto, right_auto, res_auto);
+  std::string	left_name = name + "_left.xml";
+  std::string	right_name = name + "_right.xml";
+  std::string	left_right_name = name + "_left_right.xml";
+  std::string	right_left_name = name + "_right_left.xml";
 
-  /*----------------.
-  | Dump and eval.  |
-  `----------------*/
+  std::ofstream left(left_name.c_str());
+  std::ofstream right(right_name.c_str());
+  std::ofstream left_right(left_right_name.c_str());
+  std::ofstream right_left(right_left_name.c_str());
 
-  tools::dot_display(res_auto, "GD", true);
-  eval_an_expression(res_auto);
+  tools::xml_dump(left, sub_left, "left");
+  tools::xml_dump(right, sub_right, "right");
+  tools::xml_dump(left_right, left_right_auto, "left_right");
+  tools::xml_dump(right_left, right_left_auto, "right_left");
+
+
+  std::cout << "Cautious left sequential transducer: " << left_name
+	    << std::endl
+	    << "Cautious right sequential transducer: " << right_name
+	    << std::endl
+	    << "Left transducer composed by right transducer: "
+	    << left_right_name
+	    << std::endl
+	    << "Right transducer composed by left transducer: "
+	    << right_left_name
+	    << std::endl;
 }

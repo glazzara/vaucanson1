@@ -100,17 +100,25 @@ int main()
   fmp_transducer::automaton_t	fibrl = fmp_transducer::new_automaton(A, A);
   normalized_composition(sub_fibright, sub_fibleft, fibrl);
 
-  std::ofstream left_fibo("left_fibo_fmp.xml");
-  std::ofstream right_fibo("right_fibo_fmp.xml");
-  std::ofstream left_right_fibo("left_right_fibo_fmp.xml");
-  std::ofstream right_left_fibo("right_left_fibo_fmp.xml");
+  std::ofstream left_fibo("fibo_fmp_left.xml");
+  std::ofstream right_fibo("fibo_fmp_right.xml");
+  std::ofstream left_right_fibo("fibo_fmp_left_right.xml");
+  std::ofstream right_left_fibo("fibo_fmp_right_left.xml");
 
   tools::xml_dump(left_fibo, sub_fibleft, "left_fibo");
   tools::xml_dump(right_fibo, sub_fibright, "right_fibo");
   tools::xml_dump(left_right_fibo, fiblr, "left_right_fibo");
   tools::xml_dump(right_left_fibo, fibrl, "right_left_fibo");
 
-  std::cout << "Files left_fibo_fmp.xml, right_fibo_fmp.xml, " << std::endl;
-  std::cout << "left_right_fibo_fmp.xml";
-  std::cout << " and right_left_fibo_fmp.xml have been created." << std::endl;
+
+  std::cout << "Cautious left sequential transducer: fibo_fmp_left.xml"
+	    << std::endl
+	    << "Cautious right sequential transducer: fibo_fmp_right.xml"
+	    << std::endl
+	    << "Left transducer composed by right transducer: "
+	    << "fibo_fmp_left_right.xml"
+	    << std::endl
+	    << "Right transducer composed by left transducer: "
+	    << "fibo_fmp_right_left.xml"
+	    << std::endl;
 }

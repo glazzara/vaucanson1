@@ -1,9 +1,34 @@
+2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	This patch is the renaming of the fibonacci directory and the
+	addition of some demos on one_rule_rewriting.
+
+	* src/demos/fibonacci/fibonacci.cc,
+	* src/demos/fibonacci/fibonacci_fmp_demo.cc,
+	* src/demos/fibonacci/fibonacci_demo.cc,
+	* src/demos/fibonacci/one_rule_rewriting.cc: Rename as ...
+	* src/demos/one_rule_rewriting/fibonacci_demo.cc,
+	* src/demos/one_rule_rewriting/fibonacci_tdc_gen.cc,
+	* src/demos/one_rule_rewriting/fibonacci_rt_gen.cc,
+	* src/demos/one_rule_rewriting/ORR_demo.cc: ... These and do
+	some small fixes.
+
+	* configure.ac,
+	* src/demos/Makefile.am: Update.
+
+	* src/demos/one_rule_rewriting/ORR_rt_gen.cc: New. Add demo on realtime
+	transducers that produces XML files.
+	* src/demos/one_rule_rewriting/ORR_tdc_gen.cc: New. Add demo on fmp
+	transducers that produces XML files.
+	* src/demos/one_rule_rewriting/Makefile.am: Update.
+
+
 2005-06-23  Florent Terrones  <florent.terrones@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/derivatives_automaton.hh,
 	* include/vaucanson/algorithms/derivatives_automaton.hxx: Move to...
-	* include/vaucanson/algorithms/derived_terms_automaton.hh, 
-	* include/vaucanson/algorithms/derived_terms_automaton.hxx: ... This 
+	* include/vaucanson/algorithms/derived_terms_automaton.hh,
+	* include/vaucanson/algorithms/derived_terms_automaton.hxx: ... This
 	and add Broken derived terms algorithm.
 
 	* include/vaucanson/algorithms/internal/build_pattern.hxx,
@@ -13,9 +38,9 @@
 	* include/vaucanson/algorithms/internal/partial_rat_exp.hh: Add new
 	prat_exp_convert method for lists of expressions.
 	* include/vaucanson/algorithms/initial_derivation.hh,
-	* include/vaucanson/algorithms/initial_derivation.hxx: New. Add new 
+	* include/vaucanson/algorithms/initial_derivation.hxx: New. Add new
 	visitor for broken derived terms algorithms.
-	
+
 	* src/tests/automata/algos/letter_combination_labeled_graphs/derivatives_automaton_test.hh: Move to...
 	* src/tests/automata/algos/letter_combination_labeled_graphs/derived_terms_automaton_test.hh: ... This.
 	* src/demos/samples/algorithms/derivatives_automaton.cc: Move to...
@@ -27,7 +52,7 @@
 	* doc/NEWS.txt,
 	* src/demos/samples/algorithms/Makefile.am,
 	* include/Makefile.am: Update according derivatives_automaton renaming.
-	
+
 2005-06-23  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/aut_to_exp.hxx:

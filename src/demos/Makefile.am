@@ -2,4 +2,4 @@
 #
 # $Id$
 
-SUBDIRS = ciaa universal vgrep fibonacci samples xml $(VCSN_VAUCANSWIG_SUBDIR)
+SUBDIRS = ciaa universal vgrep one_rule_rewriting samples xml $(VCSN_VAUCANSWIG_SUBDIR)

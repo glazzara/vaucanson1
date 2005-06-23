@@ -48,88 +48,83 @@ int main()
   A.insert('a');
   A.insert('b');
 
-  alphabet_t	B;
-  B.insert('x');
-  B.insert('y');
+ /*----------------------.
+  | Creation of fibleft.  |
+  `----------------------*/
 
-  alphabet_t	C;
-  C.insert('u');
-  C.insert('v');
+  automaton_t		fibleft = new_automaton(A, A);
 
-  /*-------------------.
-  | Creation of fibg.  |
-  `-------------------*/
+  hstate_t p = fibleft.add_state();
+  hstate_t q = fibleft.add_state();
+  hstate_t r = fibleft.add_state();
 
-  automaton_t		fibg = new_automaton(A, B);
+  fibleft.add_io_edge(p, p, "b", "b");
+  fibleft.add_io_edge(p, q, "a", "");
+  fibleft.add_io_edge(q, q, "a", "a");
+  fibleft.add_io_edge(q, r, "b", "");
+  fibleft.add_io_edge(r, q, "a", "ab");
+  fibleft.add_io_edge(r, q, "b", "ba");
 
-  hstate_t p = fibg.add_state();
-  hstate_t q = fibg.add_state();
-  hstate_t r = fibg.add_state();
+  fibleft.set_o_final(q, "a");
 
-  fibg.add_io_edge(p, p, "b", "y");
-  fibg.add_io_edge(p, q, "a", "");
-  fibg.add_io_edge(q, q, "a", "x");
-  fibg.add_io_edge(q, r, "b", "");
-  fibg.add_io_edge(r, q, "a", "xy");
-  fibg.add_io_edge(r, q, "b", "yx");
+  fibleft.set_o_final(r, "ab");
 
-  fibg.set_o_final(q, "x");
-
-  fibg.set_o_final(r, "xy");
-
-  fibg.set_final(p);
-  fibg.set_initial(p);
+  fibleft.set_final(p);
+  fibleft.set_initial(p);
 
   /*----------------.
   | Dump and eval.  |
   `----------------*/
 
-  tools::dot_display(fibg, "fibg", true);
-  eval_an_expression(fibg);
+  tools::dot_display(fibleft, "fibleft", true);
+  eval_an_expression(fibleft);
 
-  /*-------------------.
-  | Creation of fibd.  |
-  `-------------------*/
 
-  automaton_t fibd = new_automaton(B, C);
+  /*-----------------------.
+  | Creation of fibright.  |
+  `-----------------------*/
 
-  hstate_t s = fibd.add_state();
-  hstate_t t = fibd.add_state();
-  hstate_t u = fibd.add_state();
+  automaton_t fibright = new_automaton(A, A);
 
-  fibd.add_io_edge(s, s, "y", "v");
-  fibd.add_io_edge(s, t, "y", "");
-  fibd.add_io_edge(t, s, "x", "uu");
-  fibd.add_io_edge(t, u, "y", "");
-  fibd.add_io_edge(u, t, "x", "uv");
-  fibd.add_io_edge(u, u, "x", "u");
+  hstate_t s = fibright.add_state();
+  hstate_t t = fibright.add_state();
+  hstate_t u = fibright.add_state();
 
-  fibd.set_o_initial(s, "vv");
+  fibright.add_io_edge(s, s, "b", "b");
+  fibright.add_io_edge(s, t, "b", "");
+  fibright.add_io_edge(t, s, "a", "aa");
+  fibright.add_io_edge(t, u, "b", "");
+  fibright.add_io_edge(u, t, "a", "ab");
+  fibright.add_io_edge(u, u, "a", "a");
 
-  fibd.set_o_initial(t, "v");
+  fibright.set_o_initial(s, "bb");
 
-  fibd.set_initial(u);
-  fibd.set_final(u);
+  fibright.set_o_initial(t, "b");
+
+  fibright.set_initial(u);
+  fibright.set_final(u);
+
 
   /*----------------.
   | Dump and eval.  |
   `----------------*/
 
-  tools::dot_display(fibd, "fibd", true);
-  eval_an_expression(fibd);
+  tools::dot_display(fibright, "fibright", true);
+  eval_an_expression(fibright);
+
 
   /*----------.
   | Compose.  |
   `----------*/
 
-  automaton_t	fibgd = new_automaton(A, C);
-  realtime_composition(fibg, fibd, fibgd);
+  automaton_t	fiblr = new_automaton(A, A);
+  realtime_composition(fibleft, fibright, fiblr);
 
   /*----------------.
   | Dump and eval.  |
   `----------------*/
 
-  tools::dot_display(fibgd, "fibgd", true);
-  eval_an_expression(fibgd);
+  tools::dot_display(fiblr, "fiblr", true);
+  eval_an_expression(fiblr);
 
 }
