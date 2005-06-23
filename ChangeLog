@@ -1,3 +1,8 @@
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_moore.hxx: Iterate on
+	all groups, do not skip the first one.
+
 2005-06-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/demos/xml/algorithms.cc,

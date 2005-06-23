@@ -46,9 +46,9 @@
 
 // Useful macros for Moore's minimization.
 
-// Iterator on a list of groups. We don't iterate on the first fixed group.
+// Iterator on a list of groups.
 # define for_each_group(I, P)						\
-  for (groupid_to_group_t::iterator I = ++((P).begin()); I != (P).end(); ++I)
+  for (groupid_to_group_t::iterator I = ((P).begin()); I != (P).end(); ++I)
 
 // Iterator on state in a group. We don't iterate on the first not
 // processed state.
