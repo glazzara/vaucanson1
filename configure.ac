@@ -150,6 +150,7 @@ AC_CONFIG_FILES([
 	src/demos/vgrep/Makefile
 	src/demos/one_rule_rewriting/Makefile
 	src/demos/automaton_library/Makefile
+	src/demos/function_library/Makefile
 	src/demos/universal/Makefile
 	src/demos/samples/Makefile
 	src/demos/samples/algebra/Makefile

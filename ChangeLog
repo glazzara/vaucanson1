@@ -47,6 +47,18 @@
 
 2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* src/demos/function_library/algorithms.cc,
+	* src/demos/function_library/rt_tdc_algorithms.cc,
+	* src/demos/function_library/tdc_algorithms.cc,
+	* src/demos/function_library/Makefile.am: New. Generate programs which
+	offer the possibility to use many algorithms of Vaucanson on several
+	automata types.
+
+	* src/demos/Makefile.am,
+	* configure.ac: Update
+
+2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* src/demos/automaton_library/a1.cc,
 	* src/demos/automaton_library/b1.cc,
 	* src/demos/automaton_library/c1.cc,
@@ -56,6 +68,7 @@
 	containing the automata described by the filenames.
 
 	* src/demos/automaton_library/Makefile.am,
+	* src/demos/Makefile.am,
 	* configure.ac: Update.
 
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
