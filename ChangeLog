@@ -1,3 +1,19 @@
+2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/demos/algorithms/equivalent_functions.hh,
+	* src/demos/algorithms/equivalent_functions.cc,
+	* src/demos/algorithms/are_equivalent.cc: New. Add a program which
+	tests if two automata are equivalent.
+	* src/demos/algorithms/exp_recognized.cc: New. Add a program which
+	tests if an expression is recognized by an automaton.
+	* src/demos/algorithms/classics.cc
+	* src/demos/algorithms/universal.cc
+	* src/demos/algorithms/Makefile.am: New. Add useful algorithms on
+	automata.
+
+	* configure.ac,
+	* src/demos/Makefile.am: Update.
+
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/contexts/automaton_functions.thh,
@@ -10,36 +26,36 @@
 
 	* README: Remove. This file is a copy of `doc/README.txt' in the
 	distributed package.
-	
+
 	* doc/xml/dev.txt,
 	* doc/xml/format.txt: Remove. Deprecated.
 	* doc/xml/Makefile.am: Update accordingly.
-	
+
 	* doc/tutorial/tutorial.tex,
 	* doc/tutorial/macros.tex,
 	* doc/tutorial/Makefile.am,
 	* doc/tutorial/definitions.tex,
 	* doc/tutorial/packages.tex,
 	* doc/tutorial: Remove. Deprecated.
-	
+
 	* doc/beginner/macros.tex,
 	* doc/beginner/help.tex,
 	* doc/beginner/Makefile.am,
 	* doc/beginner/packages.tex,
 	* doc/beginner: Remove. Deprecated.
-	
+
 	* doc/Makefile.am,
 	* configure.ac: Update accordingly.
-	
+
 	* doc/INSTALL.txt,
 	* doc/README.txt: Update according to recent changes.
-	
+
 	* Makefile.am: Copy `doc/README.txt' and `doc/INSTALL.txt' as
 	`README' and `INSTALL' in the root dist directory.
 
 2005-06-23  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/cut_up.hxx: Fix a bug in cut-up 
+	* include/vaucanson/algorithms/cut_up.hxx: Fix a bug in cut-up
 	algorithm. An error was made when cut-up'ing transitions labeled by
 	polynomial series.
 	* src/tests/automata/algos/label_aware_graphs/cut_up_test.hh: Update
