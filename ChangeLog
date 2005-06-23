@@ -1,5 +1,19 @@
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/internal/skeleton.hh,
+	* include/vaucanson/algorithms/internal/skeleton.hxx,
+	* include/vaucanson/algorithms/isomorph.hxx,
+	* include/vaucanson/algorithms/isomorph.hh: New. Add "are_isomorphic"
+	algorithm made by Rodrigo de Souza.
+	* include/Makefile.am: Update accordingly.
+
+	* src/tests/automata/algos/labeled_graphs/are_isomorphic_test.hh: New.
+	Add small test for "are_isomorphic".
+	* src/tests/automata/algos/labeled_graphs/Makefile.am: Update
+	accordingly.
+
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/tests/automata/algos/labeled_graphs/is_isomorph_test.hh,
 	* include/vaucanson/algorithms/isomorph.hxx,
 	* include/vaucanson/algorithms/isomorph.hh: Remove.

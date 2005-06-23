@@ -232,6 +232,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/automata/implementation/automaton_view.hh		   \
 	vaucanson/automata/implementation/automaton_view.hxx		   \
 	vaucanson/automata/implementation/kind_adapter.hxx		   \
+	vaucanson/algorithms/internal/skeleton.hh			   \
+	vaucanson/algorithms/internal/skeleton.hxx			   \
 	vaucanson/algorithms/internal/build_pattern.hxx			   \
 	vaucanson/algorithms/internal/build_pattern.hh			   \
 	vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx	   \
