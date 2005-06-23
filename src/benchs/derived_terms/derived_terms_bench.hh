@@ -1,7 +1,7 @@
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/algorithms/determinize.hh>
-#include <vaucanson/algorithms/derivatives_automaton.hh>
+#include <vaucanson/algorithms/derived_terms_automaton.hh>
 #include <vaucanson/algebra/implementation/series/krat.hh>
 #include <vaucanson/algorithms/aut_to_exp.hh>
 #include <iostream>
@@ -67,7 +67,7 @@ void derived_terms_bench(int n_states)
     data.n_len = e.value(). length();
     automaton_t dt = new_automaton(alpha);
     VCSN_BENCH_START_QUIET;
-    derivatives_automaton(dt, e);
+    derived_terms_automaton(dt, e);
     VCSN_BENCH_STOP_QUIET(data.r_time_dt);
     data.n_dt_states = dt.states().size();
     data.n_dt_edges = dt.edges().size();

@@ -289,7 +289,7 @@ Vaucanson 0.6 July 18, 2004
 
   As usual many bugs were fixed.  Especially the quotient should be
   correct now.  There were also some fixes in the ``standard_of``
-  algorithm, and ``derivatives_automaton`` now works with expressions
+  algorithm, and ``derived_terms_automaton`` now works with expressions
   that have right weights.  The closure was rewritten and should be
   faster now.
 

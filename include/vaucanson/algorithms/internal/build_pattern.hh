@@ -85,8 +85,10 @@ namespace vcsn {
       // User may redefine it !
       static bool compare(const Etiq& e1, const Etiq& e2);
     protected:
-      // The constructor (protected in order to not instance the class)
+      // The constructors (protected in order to not instance the class)
       IncAutomataConstructor(const series_set_t& series, const Etiq& etiq);
+      IncAutomataConstructor(const series_set_t& series,
+			     const std::list<Etiq>& listexp);
       // Add a link from current state to indicated state
       void	link_to(const Etiq& etiq, const letter_t& l);
       void	link_to(const Etiq& etiq, const series_set_elt_t& el);

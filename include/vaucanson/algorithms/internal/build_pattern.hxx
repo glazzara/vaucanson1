@@ -63,6 +63,25 @@ namespace vcsn
       current_state = states_map.end();
     }
 
+    // The constructor with list
+    template <typename Self, typename T_auto, typename Etiq>
+    IncAutomataConstructor<Self, T_auto, Etiq>::IncAutomataConstructor
+    (
+      const series_set_t& series, const std::list<Etiq>& listexp
+    )
+    {
+      automata_set_t a_set(series);
+      auto_p = new T_auto(a_set);
+      unvisited = 0;
+
+      for (typename std::list<Etiq>::const_iterator it = listexp.begin();
+ 	   it != listexp.end(); ++it)
+	auto_p->set_initial(add_state(*it));
+
+      current_state = states_map.end();
+    }
+
+
     // To get the result
     template <typename Self, typename T_auto, typename Etiq>
     T_auto*

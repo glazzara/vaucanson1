@@ -1,4 +1,4 @@
-// derivatives_automaton_test.hh: this file is part of the Vaucanson project.
+// derived_terms_automaton_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2004, 2005 The Vaucanson Group.
@@ -32,11 +32,11 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_DERIVATIVES_AUTOMATON_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_DERIVATIVES_AUTOMATON_TEST_HH
 
-# include <vaucanson/algorithms/derivatives_automaton.hh>
+# include <vaucanson/algorithms/derived_terms_automaton.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
 
 template <class Auto>
-bool	derivatives_automaton_test(tests::Tester& tg)
+bool	derived_terms_automaton_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
   AUTOMATON_FREEMONOID_TYPES(Auto);
@@ -60,7 +60,7 @@ bool	derivatives_automaton_test(tests::Tester& tg)
 
 
       // FIXME: Write a real test!
-      vcsn::derivatives_automaton(au, exp);
+      vcsn::derived_terms_automaton(au, exp);
     }
   return t.all_passed();
 }

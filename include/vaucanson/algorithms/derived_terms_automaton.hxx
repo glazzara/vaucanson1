@@ -1,4 +1,4 @@
-// derivatives_automaton.hxx: this file is part of the Vaucanson project.
+// derived_terms_automaton.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
@@ -32,7 +32,7 @@
 #ifndef VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 # define VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HXX
 
-# include <vaucanson/algorithms/derivatives_automaton.hh>
+# include <vaucanson/algorithms/derived_terms_automaton.hh>
 
 # include <vaucanson/algorithms/internal/build_pattern.hh>
 # include <vaucanson/algorithms/internal/partial_rat_exp.hh>
@@ -41,6 +41,7 @@
 
 # include <vaucanson/algorithms/krat_exp_realtime.hh>
 # include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/algorithms/initial_derivation.hh>
 
 # ifdef DEBUG
 
@@ -99,13 +100,23 @@ namespace vcsn {
     AUTOMATON_TYPES(T_auto);
     AUTOMATON_FREEMONOID_TYPES(T_auto);
 
-    // Contructor -> initialize mother class and undefined attribute,
-    // which indicate if the resulting automaton is valide
+    // Contructor -> initialize mother class and undefined attributes,
+    // which indicate if the resulting automaton is valid
     DerivativesAlgo(const series_set_t& series, const Element<S, T>& exp):
       IncAutomataConstructor<DerivativesAlgo, T_auto, PartialExp<S, T> >
         (series, prat_exp_convert(exp)),
       undefined(false)
     {}
+
+    // List Contructor -> initialize mother class and undefined attributes,
+    // which indicate if the resulting automaton is valid.
+    // This is used for the broken_derived_terms_automaton algorithm.
+    DerivativesAlgo(const series_set_t& series,
+ 		    const std::list<Element<S, T> >& listexp):
+      IncAutomataConstructor<DerivativesAlgo, T_auto, PartialExp<S, T> >
+        (series, prat_exp_convert(listexp)),
+       undefined(false)
+     {}
 
     // Function applied on each state
     void on_state(const PartialExp<S, T>& e)
@@ -148,7 +159,7 @@ namespace vcsn {
 
   template<typename T_auto, typename S, typename T>
   T_auto*
-  do_derivatives_automaton(const T_auto& out,
+  do_derived_terms_automaton(const T_auto& out,
 			   const Element<S, T>& kexp)
   {
     Element<S, T>			exp = realtime(kexp);
@@ -165,24 +176,69 @@ namespace vcsn {
 
   template<typename A, typename T, typename Exp>
   void
-  derivatives_automaton(Element<A, T>& out, const Exp& kexp)
+  derived_terms_automaton(Element<A, T>& out, const Exp& kexp)
   {
-    Element<A, T>*	result = do_derivatives_automaton(out, kexp);
+    Element<A, T>*	result = do_derived_terms_automaton(out, kexp);
     if (result != NULL)
       out = *result;
   }
 
   template<typename A, typename T, typename Exp>
   Element<A, T>
-  derivatives_automaton(const Exp& kexp)
+  derived_terms_automaton(const Exp& kexp)
   {
     A			a_structure(kexp.structure());
     Element<A, T>	out (a_structure);
-    Element<A, T>*	result = do_derivatives_automaton(out, kexp);
+    Element<A, T>*	result = do_derived_terms_automaton(out, kexp);
     if (result != NULL)
       out = *result;
     return out;
   }
+
+// broken_derived_terms_automaton implementation
+  template<typename T_auto, typename S, typename T>
+  T_auto*
+  do_broken_derived_terms_automaton(const T_auto& out,
+			   const Element<S, T>& kexp)
+  {
+    Element<S, T>			exp = realtime(kexp);
+    KRatExpInitialDerivation< S, T, algebra::DispatchFunction<T> >
+      matcher(exp);
+    std::list< Element<S, T> > listexp = matcher.match(exp.value());
+    DerivativesAlgo<T_auto, S, T> derivatives_algo(out.series(),
+						   listexp);
+    derivatives_algo.run();
+    if (derivatives_algo.undefined)
+    {
+      delete derivatives_algo.get();
+      return NULL;
+    }
+    else
+      return derivatives_algo.get();
+  }
+
+  template<typename A, typename T, typename Exp>
+  void
+  broken_derived_terms_automaton(Element<A, T>& out, const Exp& kexp)
+  {
+    Element<A, T>*	result = do_broken_derived_terms_automaton(out, kexp);
+    if (result != NULL)
+      out = *result;
+  }
+
+  template<typename A, typename T, typename Exp>
+  Element<A, T>
+  broken_derived_terms_automaton(const Exp& kexp)
+  {
+    A			a_structure(kexp.structure());
+    Element<A, T>	out (a_structure);
+    Element<A, T>*	result = do_broken_derived_terms_automaton(out, kexp);
+    if (result != NULL)
+      out = *result;
+    return out;
+  }
+
+
 
 } // vcsn
 

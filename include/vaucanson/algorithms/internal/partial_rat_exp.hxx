@@ -332,6 +332,16 @@ namespace vcsn
   }
 
   template <typename S, typename T>
+  std::list<PartialExp<S, T> > prat_exp_convert(const std::list<Element<S, T> >& listexp)
+  {
+    std::list<PartialExp<S, T> > res;
+    for (typename std::list<Element<S, T> >::const_iterator it =
+	   listexp.begin(); it != listexp.end(); ++it)
+      res.push_back(prat_exp_convert(*it, it->value().base()));
+    return res;
+  }
+
+  template <typename S, typename T>
   bool operator< (const PartialExp<S, T>& e1, const PartialExp<S, T>& e2)
   {
     typedef

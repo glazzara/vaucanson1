@@ -72,7 +72,7 @@
 #include CONTEXT_HEADER
 #include <vaucanson/xml/XML.hh>
 
-#include <vaucanson/algorithms/derivatives_automaton.hh>
+#include <vaucanson/algorithms/derived_terms_automaton.hh>
 #include <vaucanson/algorithms/product.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/algorithms/eval.hh>
@@ -148,14 +148,14 @@ get_aut(std::string s)
 
 static
 void
-derivatives_automaton_command(int argc, char** argv)
+derived_terms_automaton_command(int argc, char** argv)
 {
   if (argc != 3)
     usage(argc, argv);
 
   rat_exp_t	e = get_exp(argv[2]);
   automaton_t	a = new_automaton(alphabet());
-  derivatives_automaton(a, e);
+  derived_terms_automaton(a, e);
   std::cout << automaton_saver(a, string_out (), XML ());
 }
 
@@ -404,7 +404,7 @@ command_map[] =
     { "expand",			expand_command				},
     { "standard_of",		ONE_ARG_COMMAND(get_exp, standard_of)	},
     { "thompson_of",		ONE_ARG_COMMAND(get_exp, thompson_of)	},
-    { "derived_terms",		derivatives_automaton_command		},
+    { "derived_terms",		derived_terms_automaton_command		},
     { "aut_to_exp",		aut_to_exp_command			},
     { "quotient",		quotient_command			},
     { "product",		product_command				},

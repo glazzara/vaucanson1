@@ -1,3 +1,33 @@
+2005-06-23  Florent Terrones  <florent.terrones@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/derivatives_automaton.hh,
+	* include/vaucanson/algorithms/derivatives_automaton.hxx: Move to...
+	* include/vaucanson/algorithms/derived_terms_automaton.hh, 
+	* include/vaucanson/algorithms/derived_terms_automaton.hxx: ... This 
+	and add Broken derived terms algorithm.
+
+	* include/vaucanson/algorithms/internal/build_pattern.hxx,
+	* include/vaucanson/algorithms/internal/build_pattern.hh: Add
+	new IncAutomataConstructor constructor with a list of expressions.
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh: Add new
+	prat_exp_convert method for lists of expressions.
+	* include/vaucanson/algorithms/initial_derivation.hh,
+	* include/vaucanson/algorithms/initial_derivation.hxx: New. Add new 
+	visitor for broken derived terms algorithms.
+	
+	* src/tests/automata/algos/letter_combination_labeled_graphs/derivatives_automaton_test.hh: Move to...
+	* src/tests/automata/algos/letter_combination_labeled_graphs/derived_terms_automaton_test.hh: ... This.
+	* src/demos/samples/algorithms/derivatives_automaton.cc: Move to...
+	* src/demos/samples/algorithms/derived_terms_automaton.cc: This.
+
+	* src/tests/automata/algos/letter_combination_labeled_graphs/Makefile.am,
+	* src/benchs/derived_terms/derived_terms_bench.hh,
+	* src/demos/xml/algorithms.cc,
+	* doc/NEWS.txt,
+	* src/demos/samples/algorithms/Makefile.am,
+	* include/Makefile.am: Update according derivatives_automaton renaming.
+	
 2005-06-23  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/aut_to_exp.hxx:

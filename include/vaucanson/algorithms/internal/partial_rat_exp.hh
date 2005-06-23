@@ -36,12 +36,12 @@
  * @file partial_rat_exp.hh
  * @author Loic Fosse <loic@lrde.epita.fr>
  * @date   Fri Jul  4 11:53:07 CEST 2003
- * 
+ *
  * @brief The @c PartialExp type. (undocumented)
  *
  * This file discribe the PartialExp type and operations on it.
  * @c PartialExp is a way to describe derivatives with a list of pointer.
- * It is usefull in algorithms like @c derivatives_automaton.
+ * It is usefull in algorithms like @c derived_terms_automaton.
  */
 
 # include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
@@ -86,7 +86,7 @@ namespace vcsn
     typedef typename T::node_t			node_t;
     typedef typename exp_t::semiring_elt_t	semiring_elt_t;
 
-    /* 
+    /*
      * A std::list is used because pop_front is needed,
      * and we must be able to modify an element of the list.
      */
@@ -101,7 +101,7 @@ namespace vcsn
 
     // Insert a new node into the list, and add another weight "after".
     PartialExp&				insert(const node_t *v);
-    
+
     // Accessors
     semiring_elt_list_t&		weights();
     const semiring_elt_list_t&		weights() const;
@@ -136,7 +136,7 @@ namespace vcsn
       typedef typename
       iterator_type<IsConst,semiring_elt_list_t>::ret	semiring_elts_iterator_t;
       typedef typename
-      iterator_type<IsConst,node_list_t>::ret		nodes_iterator_t; 
+      iterator_type<IsConst,node_list_t>::ret		nodes_iterator_t;
     public:
       internal_iterator(const semiring_elts_iterator_t&,
 			const nodes_iterator_t&);
@@ -173,8 +173,11 @@ namespace vcsn
 
   // Be carefull: the exp must be realtime !
   template <typename S, typename T>
+  std::list<PartialExp<S, T> > prat_exp_convert(const std::list<Element<S, T> >& exp);
+
+  template <typename S, typename T>
   PartialExp<S, T> prat_exp_convert(const Element<S, T>& exp);
-  
+
   template <typename S, typename T>
   bool operator< (const PartialExp<S, T>& e1, const PartialExp<S, T>& e2);
 
@@ -193,6 +196,6 @@ namespace vcsn
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algorithms/internal/partial_rat_exp.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_ALGORITHMS_INTERNAL_PARTIAL_RAT_EXP_HH

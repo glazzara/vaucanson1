@@ -1,4 +1,4 @@
-// derivatives_automaton.cc: this file is part of the Vaucanson project.
+// derived_terms_automaton.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001,2002,2003, 2004, 2005 The Vaucanson Group.
@@ -30,7 +30,7 @@
 #include <vaucanson/z_automaton.hh>
 
 #include <vaucanson/tools/dot_display.hh>
-#include <vaucanson/algorithms/derivatives_automaton.hh>
+#include <vaucanson/algorithms/derived_terms_automaton.hh>
 #include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 
 #include <string>
@@ -57,11 +57,11 @@ int main(int argc, char **argv)
   parse(argv[1], rat_exp);
   std::cout << "Expression to transform: " << rat_exp << std::endl;
 
-  derivatives_automaton(automaton, rat_exp);
+  derived_terms_automaton(automaton, rat_exp);
 
   // If the automaton is valid, display it !
   if (automaton.states().size())
-    vcsn::tools::dot_display(automaton, "derivatives_automaton");
+    vcsn::tools::dot_display(automaton, "derived_terms_automaton");
   else
     std::cout << "Empty automaton." << std::endl;
 }

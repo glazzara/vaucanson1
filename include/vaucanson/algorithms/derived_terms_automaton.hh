@@ -1,4 +1,4 @@
-// derivatives_automaton.hh: this file is part of the Vaucanson project.
+// derived_terms_automaton.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
@@ -34,19 +34,19 @@
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file   derivatives_automaton.hh
+ * @file   derived_terms_automaton.hh
  *
  * Provides a converter from expression to automaton based on derivatives.
  *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 17:58:19 2003
  *
- * @see derivatives_automaton()
+ * @see derived_terms_automaton()
  */
 /** @} */
 
-// INTERFACE: void derivatives_automaton(Automaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
-// INTERFACE: void derivatives_automaton(GenAutomaton& a, const Exp& e) { return vcsn::derivatives_automaton(*a, e); }
+// INTERFACE: void derived_terms_automaton(Automaton& a, const Exp& e) { return vcsn::derived_terms_automaton(*a, e); }
+// INTERFACE: void derived_terms_automaton(GenAutomaton& a, const Exp& e) { return vcsn::derived_terms_automaton(*a, e); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
@@ -70,7 +70,11 @@ namespace vcsn {
    */
   template <typename A, typename T, typename Exp>
   void
-  derivatives_automaton(Element<A, T>& a, const Exp& e);
+  derived_terms_automaton(Element<A, T>& a, const Exp& e);
+
+  template <typename A, typename T, typename Exp>
+  void
+  broken_derived_terms_automaton(Element<A, T>& a, const Exp& e);
 
   /**
    * Convert a krat expression into an automaton using derivatives.
@@ -83,14 +87,32 @@ namespace vcsn {
    */
   template <typename A, typename T, typename Exp>
   Element<A, T>
-  derivatives_automaton(const Exp& e);
+  derived_terms_automaton(const Exp& e);
+
+  /**
+   * Convert a krat expression into an automaton using derivatives.
+   *
+   * Derivations are first performed on the starting expression with the
+   * following formulae:
+   * d(0)={0}, d(1)={1}, d(a)={a} for all a in the alphabet,
+   * d(E+F)=d(E) union d(F), d(E.F)=[d(E)].F, d(E*)={E*}
+   *
+   * @param e The expression to convert.
+   *
+   * @return A fresh automaton which recognizes the language denoted by 'e'.
+   *
+   * @note The series of the expression are used to define the automaton.
+   */
+  template <typename A, typename T, typename Exp>
+  Element<A, T>
+  broken_derived_terms_automaton(const Exp& e);
 
   /** @} */
 
 } // vcsn
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/algorithms/derivatives_automaton.hxx>
+#  include <vaucanson/algorithms/derived_terms_automaton.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_DERIVATIVES_AUTOMATON_HH
