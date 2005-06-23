@@ -1,3 +1,11 @@
+2005-06-23  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/cut_up.hxx: Fix a bug in cut-up 
+	algorithm. An error was made when cut-up'ing transitions labeled by
+	polynomial series.
+	* src/tests/automata/algos/label_aware_graphs/cut_up_test.hh: Update
+	accordingly.
+
 2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* src/demos/automaton_library/a1.cc,

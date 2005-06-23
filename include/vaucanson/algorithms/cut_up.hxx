@@ -124,8 +124,6 @@ namespace vcsn {
 		 const Auto& a,
 		 Ret& res)
   {
-    hstate_t			s0;
-    hstate_t			s1;
     int				size;
     typedef typename Ret::series_set_elt_t series_set_elt_t;
     typedef typename series_set_elt_t::support_t support_t;
@@ -143,24 +141,14 @@ namespace vcsn {
 	if ((size = label.supp().size()) > 1)
 	  {
 	    typename support_t::const_iterator m = label.supp().begin();
-	    s1 = res.add_state();
-	    series_set_elt_t series_start(res.structure().series());
-	    series_start.assoc(*m, label.get(*m));
-	    res.add_series_edge(res.origin_of(*e), s1, series_start);
- 	    m++;
-
-	    for (int i = 1; i < size - 1; ++i, ++m)
+	    for (int i = 0; i < size; ++i, ++m)
 	      {
-		s0 = s1;
-		s1 = res.add_state();
 		series_set_elt_t series(res.structure().series());
 		series.assoc(*m, label.get(*m));
-		res.add_series_edge(s0, s1, series);
+		res.add_series_edge(res.origin_of(*e),
+				    res.aim_of(*e),
+				    series);
 	      }
-
-	    series_set_elt_t series_end(res.structure().series());
-	    series_end.assoc(*m, label.get(*m));
-	    res.add_series_edge(s1, res.aim_of(*e), series_end);
 
 	    res.del_edge(*e);
 	  }

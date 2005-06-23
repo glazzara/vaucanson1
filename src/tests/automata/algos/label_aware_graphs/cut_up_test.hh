@@ -113,11 +113,11 @@ bool cut_up_test(tests::Tester& tg)
   a3 = cut_up(a);
 
   TEST(t, "Cut-up (Polynomial series labeled graph) (1/3)",
-       is_cut_up(a1) && a1.states().size() == 5 && a1.edges().size() == 4);
+       is_cut_up(a1) && a1.states().size() == 3 && a1.edges().size() == 4);
   TEST(t, "Cut-up (Polynomial series labeled graph) (2/3)",
-       is_cut_up(a2) && a2.states().size() == 7 && a2.edges().size() == 7);
+       is_cut_up(a2) && a2.states().size() == 3 && a2.edges().size() == 7);
   TEST(t, "Cut-up (Polynomial series labeled graph) (3/3)",
-       is_cut_up(a3) && a3.states().size() == 7 && a3.edges().size() == 8);
+       is_cut_up(a3) && a3.states().size() == 3 && a3.edges().size() == 8);
 
   typedef typename vcsn::generalized_traits<automaton_t>::automaton_t
     gen_automaton_t;
