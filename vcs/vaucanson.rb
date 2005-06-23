@@ -3,7 +3,7 @@ class Vcs
   def vcn_commit! ( s, *args )
 
     common_commit!(*args) do |rev|
-      news!(:groups => ['lrde.vaucanson.patches'],
+      mail!(:to => %w[vaucanson-patches@lrde.epita.fr],
             :subject => "[#{rev}] #{s}")
     end
   end

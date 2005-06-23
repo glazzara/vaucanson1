@@ -1,5 +1,9 @@
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* vcs/vaucanson.rb: Update to post on the mailing list.
+
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/minimization_moore.hxx: Iterate on
 	all groups, do not skip the first one.
 
