@@ -1,5 +1,15 @@
 2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* src/demos/transducers/t1.cc,
+	* src/demos/transducers/u1.cc,
+	* src/demos/transducers/Makefile.am: New. Generate two xml files
+	containing examples of transducers.
+
+	* src/demos/Makefile.am,
+	* configure.ac: Update.
+
+2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* src/demos/algorithms/equivalent_functions.hh,
 	* src/demos/algorithms/equivalent_functions.cc,
 	* src/demos/algorithms/are_equivalent.cc: New. Add a program which

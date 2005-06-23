@@ -152,6 +152,7 @@ AC_CONFIG_FILES([
 	src/demos/automaton_library/Makefile
 	src/demos/function_library/Makefile
 	src/demos/algorithms/Makefile
+	src/demos/transducers/Makefile
 	src/demos/universal/Makefile
 	src/demos/samples/Makefile
 	src/demos/samples/algebra/Makefile
