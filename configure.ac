@@ -166,8 +166,6 @@ AC_CONFIG_FILES([
 	src/benchs/composition/Makefile
 	src/benchs/derived_terms/Makefile
 	doc/Makefile
-	doc/tutorial/Makefile
-	doc/beginner/Makefile
 	doc/makefiles/Makefile
 	doc/xml/Makefile
         doc/doc.doxy

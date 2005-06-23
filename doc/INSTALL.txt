@@ -18,13 +18,17 @@ To install Vaucanson on your system, type in the classical sequence at
 the command prompt::
 
 	./configure
-	make check
+	make sanity-check
+	make check ([1])
 	make install (as root)
 
 Note that an installation is  specific to the compiler used to install
 it. Indeed, the call  to ``./configure`` enables some workarounds and,
 consequently,  users must  compile  with the  same  compiler to  avoid
 compatibility problems.
+
+[1]: Optional: check  the whole library. Note that  this process takes
+about 1.5 Go of free space (memory swap included) and several hours.
 
 Additional features
 -------------------

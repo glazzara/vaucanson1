@@ -30,6 +30,8 @@ dist-hook:
 		 src/Makefile.am src/Makefile.in; do		\
 	  grep -v benchs $(srcdir)/$$f > $(distdir)/$$f;	\
 	done
+	cp $(srcdir)/doc/README.txt $(distdir)/README
+	cp $(srcdir)/doc/INSTALL.txt $(distdir)/INSTALL
 
 ###
 ### Sanity check.

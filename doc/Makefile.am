@@ -2,7 +2,7 @@
 #
 # $Id$
 
-SUBDIRS = tutorial beginner makefiles xml
+SUBDIRS = makefiles xml
 include $(srcdir)/Makefile.doc
 
 dist_doc_DATA = ref.tar.gz

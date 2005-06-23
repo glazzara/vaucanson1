@@ -1,3 +1,34 @@
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* README: Remove. This file is a copy of `doc/README.txt' in the
+	distributed package.
+	
+	* doc/xml/dev.txt,
+	* doc/xml/format.txt: Remove. Deprecated.
+	* doc/xml/Makefile.am: Update accordingly.
+	
+	* doc/tutorial/tutorial.tex,
+	* doc/tutorial/macros.tex,
+	* doc/tutorial/Makefile.am,
+	* doc/tutorial/definitions.tex,
+	* doc/tutorial/packages.tex,
+	* doc/tutorial: Remove. Deprecated.
+	
+	* doc/beginner/macros.tex,
+	* doc/beginner/help.tex,
+	* doc/beginner/Makefile.am,
+	* doc/beginner/packages.tex,
+	* doc/beginner: Remove. Deprecated.
+	
+	* doc/Makefile.am,
+	* configure.ac: Update accordingly.
+	
+	* doc/INSTALL.txt,
+	* doc/README.txt: Update according to recent changes.
+	
+	* Makefile.am: Copy `doc/README.txt' and `doc/INSTALL.txt' as
+	`README' and `INSTALL' in the root dist directory.
+
 2005-06-23  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/cut_up.hxx: Fix a bug in cut-up 

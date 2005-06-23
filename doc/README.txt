@@ -1,12 +1,16 @@
+
+This is Vaucanson, a C++ generic library for weighted finite state
+machine.
+
 ===========================
  Introduction to Vaucanson
 ===========================
 
-:Date: 2005-01-15
+:Date: 2005-06-23
 
 Vaucanson_, a C++ generic library for weighted finite state machine.
 
-.. _Vaucanson: http://www.lrde.epita.fr/vaucanson
+.. _Vaucanson: http://vaucanson.lrde.epita.fr
 
 .. contents::
 
@@ -15,9 +19,9 @@ Overview
 ========
 
 Firstly  initiated by  Jacques  Sakarovitch in  2000,  Vaucanson is  a
-project   developed   by   the   Ecole   Nationale   Supérieure   des
-Télécommunications [1] and the EPITA Research and Development Laboratory
-(LRDE) [2].
+project   developed   by    the   Ecole   Nationale   Supérieure   des
+Télécommunications  [1]   and  the  EPITA   Research  and  Development
+Laboratory (LRDE) [2].
 
 .. [1] http://www.enst.fr
 
@@ -35,20 +39,40 @@ Yet,   Vaucanson  is  an   ongoing  development   project.   Therefore
 algorithms,  data  structures and  the  general  architecture are  not
 totally stable and well tested.
 
-In the  ``doc/help`` directory,  you can find  a short howto  to start
-programming  with Vaucanson.  The ``src``  directory  contains several
-demonstrations,     but     you    can     also     look    at     the
-``include/vaucanson/algorithms``  to be  introduced to  the  basics of
-Vaucanson.
-
 Please send  any question or  comments to ``vaucanson@lrde.epita.fr``,
 and bug reports to ``vaucanson-bugs@lrde.epita.fr``.
+
 
 Installation
 ============
 
-See   the   documentation   file  ``INSTALL.txt``   for   installation
-instructions.
+Complete installation procedure can be found in ``doc/INSTALL.txt``.
+
+Here is a quick way to install Vaucanson. Type in this sequence at the
+command prompt:
+
+	./configure
+	make sanity-check
+	make install (as root)
+
+This installation  requires 220  Mo of free  space and takes  about 30
+minutes on a modern computer.
+
+Note that an installation is  specific to the compiler used to install
+it. Indeed, the call  to ``./configure`` enables some workarounds and,
+consequently,  users must  compile  with the  same  compiler to  avoid
+compatibility problems.
+
+
+Using Vaucanson
+===============
+
+We are sorry but we do not provide a documentation of Vaucanson.
+
+However Vaucanson comes with several  demos. Looking at them is a good
+way to see what Vaucanson can do and how it works.  Those demos can be
+found in the ``src/demos`` directory.
+
 
 See Also
 ========
@@ -68,22 +92,9 @@ There are other sources of interest in the distribution.
 - Information about  the test suite generation mechanism  can be found
   in the file ``src/tests/test-suites/README``.
 
-- There   are  some  demonstration   programs  distributed   with  the
-  project.  See  the ``src/demos``  subdirectory.  Some  of these  are
-  noteworthy:
-
-  - Usage   examples  in   subdirectories   ``src/demos/samples``  and
-    ``src/demos/xml/samples``.
-
-  - Vaucanson-FSM (``src/demos/fsm/README.txt``) is aimed at providing
-    an emulation of the FSM toolbox [3].
-
-  - Vaucanswig  (``src/demos/vaucanswig/doc/README.txt``) is  aimed at
-    providing a dynamic language interpreter to the Vaucanson library.
-
 .. _Doxygen: http://www.doxygen.org
 
-.. [3] http://www.research.att.com/~mohri/fsm/
+.. [3] http://www.research.att.com/sw/tools/fsm/
 
 Licence
 =======
@@ -118,4 +129,3 @@ mail addresses follow.
   | Paristalie, batiment X, aile Mistral
   | F-94270 Le Kremlin Bicêtre cedex
   | France
-
