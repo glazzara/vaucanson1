@@ -1,3 +1,8 @@
+2005-06-23  Robert Bigaignon  <bigaig_r@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/aut_to_exp.hxx:
+	Minor fix.
+
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* vcs/vaucanson.rb: Update to post on the mailing list.

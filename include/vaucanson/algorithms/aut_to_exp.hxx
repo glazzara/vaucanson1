@@ -132,8 +132,8 @@ namespace vcsn {
 
 
   /*-----------------------.
-  |    HeuristicChooser    |
-  | Sakarovitch & Lombardy |
+  |    Heuristic chooser:  |
+  | Edge Number Heuristic  |
   `-----------------------*/
 
   struct HChooser
@@ -193,9 +193,12 @@ namespace vcsn {
     }
   };
 
-  /*----------------------------------.
-  | HeuristicChooser Delgado & Morais |
-  `----------------------------------*/
+
+  /*-------------------------.
+  | Heuristic chooser:       |
+  | from Delgado & Morais    |
+  | (Proposed in CIAA 2004)  |
+  `-------------------------*/
  struct DMChooser
   {
     template <class Auto_>
