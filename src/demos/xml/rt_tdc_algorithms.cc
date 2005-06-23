@@ -48,6 +48,9 @@
  * image <file>
  * trim <file>
  * to-tdc <file>
+ * transpose <file>
+ * display <file>
+ * info <file>
  *
  */
 
@@ -66,6 +69,7 @@
 #include <vaucanson/algorithms/projection.hh>
 #include <vaucanson/algorithms/realtime_to_fmp.hh>
 #include <vaucanson/algorithms/trim.hh>
+#include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/algorithms/krat_exp_expand.hh>
 #include <vaucanson/tools/dot_display.hh>
 #include <vaucanson/boolean_automaton.hh>
@@ -91,8 +95,8 @@ alphabet_t
 alphabet()
 {
   alphabet_t	a;
-  //  a.insert('a');
-  //  a.insert('b');
+  a.insert('a');
+  a.insert('b');
   return a;
 }
 
@@ -174,10 +178,10 @@ evaluation_command(int argc, char** argv)
   if (argc != 4)
     usage(argc, argv);
 
-  std::cout << expand(evaluation(get_aut(argv[2]),
-				 boolean_automaton::new_rat_exp(alphabet(),
-								argv[3])));
-  std::cout << std::endl;
+  std::cout << evaluation(get_aut(argv[2]),
+			  boolean_automaton::new_rat_exp(alphabet(),
+							 argv[3]))
+	    << std::endl;
 }
 
 
@@ -188,9 +192,9 @@ evaluation_aut_command(int argc, char** argv)
   if (argc != 4)
     usage(argc, argv);
 
-  boolean_automaton::automaton_t a = get_bool_aut(argv[2]);
+  boolean_automaton::automaton_t a = get_bool_aut(argv[3]);
   boolean_automaton::gen_automaton_t res(a.structure());
-  automaton_t t = get_aut(argv[3]);
+  automaton_t t = get_aut(argv[2]);
   evaluation(a, t, res);
 
   std::cout << automaton_saver(res, string_out (), XML ()) << std::endl;
@@ -249,6 +253,17 @@ info_command(int argc, char** argv)
   std::cout << "Final states: " << a.final().size() << std::endl;
 }
 
+static
+void
+closure_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+   std::cout << automaton_saver(accessible(closure(get_aut(argv[2]))),
+				string_out (), XML ())
+	     << std::endl;
+}
 
 #define ONE_ARG_COMMAND(GetArg, Algo) one_arg_command_ ## Algo ## _ ## GetArg
 
@@ -267,8 +282,8 @@ ONE_ARG_COMMAND(GetArg, Algo)(int argc, char** argv)	\
 DEFINE_ONE_ARG_COMMAND(get_aut, realtime)
 DEFINE_ONE_ARG_COMMAND(get_aut, input_projection)
 DEFINE_ONE_ARG_COMMAND(get_aut, output_projection)
-DEFINE_ONE_ARG_COMMAND(get_aut, closure)
 DEFINE_ONE_ARG_COMMAND(get_aut, trim)
+DEFINE_ONE_ARG_COMMAND(get_aut, transpose)
 #undef DEFINE_ONE_ARG_COMMAND
 
 const struct
@@ -286,8 +301,9 @@ command_map[] =
     { "domain",			ONE_ARG_COMMAND(get_aut, input_projection)},
     { "image",			ONE_ARG_COMMAND(get_aut, output_projection)},
     { "to-tdc",			realtime_to_fmp_command			},
-    { "closure",		ONE_ARG_COMMAND(get_aut, closure)	},
+    { "closure",		closure_command				},
     { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
+    { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},
     { "display",		display_command				},
     { "info",			info_command				},
     { 0,			0					}
@@ -312,19 +328,20 @@ main(int argc, char** argv)
       }
   if (command_map[i].name == 0)
     {
-      std::cout << "Available algorithms:" << std::endl;
-      std::cout << " * realtime"  << std::endl;
-      std::cout << " * is-realtime"  << std::endl;
-      std::cout << " * compose"  << std::endl;
-      std::cout << " * evaluation"  << std::endl;
-      std::cout << " * evaluation_aut"  << std::endl;
-      std::cout << " * domain"  << std::endl;
-      std::cout << " * image"  << std::endl;
-      std::cout << " * to-tdc"  << std::endl;
-      std::cout << " * closure"  << std::endl;
-      std::cout << " * trim"  << std::endl;
-      std::cout << " * display"  << std::endl;
-      std::cout << " * info"  << std::endl;
+      std::cerr << "Available algorithms:" << std::endl;
+      std::cerr << " * realtime"  << std::endl;
+      std::cerr << " * is-realtime"  << std::endl;
+      std::cerr << " * compose"  << std::endl;
+      std::cerr << " * evaluation"  << std::endl;
+      std::cerr << " * evaluation_aut"  << std::endl;
+      std::cerr << " * domain"  << std::endl;
+      std::cerr << " * image"  << std::endl;
+      std::cerr << " * to-tdc"  << std::endl;
+      std::cerr << " * closure"  << std::endl;
+      std::cerr << " * trim"  << std::endl;
+      std::cerr << " * transpose"  << std::endl;
+      std::cerr << " * display"  << std::endl;
+      std::cerr << " * info"  << std::endl;
       exit(1);
     }
 }

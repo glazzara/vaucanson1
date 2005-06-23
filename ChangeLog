@@ -1,5 +1,12 @@
 2005-06-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+	* src/demos/xml/algorithms.cc,
+	* src/demos/xml/rt_tdc_algorithms.cc,
+	* src/demos/xml/tdc_algorithms.cc: Update demo files with new
+	algorithms.
+
+2005-06-22  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* include/vaucanson/z_transducer.hh,
 	* include/vaucanson/boolean_transducer.hh: Add AUTOMATON_CONTEXT macro,
 	as already done in fmp_transducer and z_fmp_transducer headers.

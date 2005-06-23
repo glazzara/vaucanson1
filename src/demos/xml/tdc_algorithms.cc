@@ -50,6 +50,11 @@
  * composition-co-cover <file>
  * b-compose <file> <file>
  * to-rt-tdc <file>
+ * intersection <file>
+ * display
+ * trim
+ * transpose
+ * info
  *
  */
 
@@ -67,6 +72,7 @@
 #include <vaucanson/algorithms/evaluation_fmp.hh>
 #include <vaucanson/algorithms/projections_fmp.hh>
 #include <vaucanson/algorithms/outsplitting.hh>
+#include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/algorithms/fmp_to_realtime.hh>
 #include <vaucanson/tools/dot_display.hh>
 #include <vaucanson/boolean_automaton.hh>
@@ -188,9 +194,9 @@ evaluation_command(int argc, char** argv)
     usage(argc, argv);
 
   std::cout << evaluation(get_aut(argv[2]),
-			  boolean_automaton:: new_rat_exp(first_alphabet(),
-							  argv[3]));
-  std::cout << std::endl;
+			  boolean_automaton::new_rat_exp(first_alphabet(),
+							 argv[3]))
+	    << std::endl;
 }
 
 static
@@ -200,14 +206,13 @@ evaluation_aut_command(int argc, char** argv)
   if (argc != 4)
     usage(argc, argv);
 
-  boolean_automaton::automaton_t a = get_boolean_aut(argv[2]);
+  boolean_automaton::automaton_t a = get_boolean_aut(argv[3]);
   boolean_automaton::automaton_t res =
     boolean_automaton::new_automaton(second_alphabet());
 
-  evaluation_fmp(get_aut(argv[3]), a, res);
+  evaluation_fmp(get_aut(argv[2]), a, res);
 
-  std::cout << aut_to_exp(a);
-  std::cout << std::endl;
+  std::cout << automaton_saver(res, string_out (), XML ());
 }
 
 static
@@ -271,6 +276,24 @@ image_command(int argc, char** argv)
   std::cout << automaton_saver(a, string_out (), XML ());
 }
 
+
+static
+void
+identity_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+  boolean_automaton::automaton_t a = get_boolean_aut(argv[2]);
+
+  automaton_t fmp = new_automaton(first_alphabet(), second_alphabet());
+
+  identity(a, fmp);
+
+  std::cout << automaton_saver(fmp, string_out (), XML ());
+}
+
+
 static
 void
 fmp_to_realtime_command(int argc, char** argv)
@@ -310,6 +333,17 @@ info_command(int argc, char** argv)
   std::cout << "Final states: " << a.final().size() << std::endl;
 }
 
+static
+void
+closure_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+   std::cout << automaton_saver(accessible(closure(get_aut(argv[2]))),
+				string_out (), XML ())
+	     << std::endl;
+}
 
 #define ONE_ARG_COMMAND(GetArg, Algo) one_arg_command_ ## Algo ## _ ## GetArg
 
@@ -328,8 +362,8 @@ ONE_ARG_COMMAND(GetArg, Algo)(int argc, char** argv)	\
 DEFINE_ONE_ARG_COMMAND(get_aut, sub_normalize)
 DEFINE_ONE_ARG_COMMAND(get_aut, outsplitting)
 DEFINE_ONE_ARG_COMMAND(get_aut, insplitting)
-DEFINE_ONE_ARG_COMMAND(get_aut, closure)
 DEFINE_ONE_ARG_COMMAND(get_aut, trim)
+DEFINE_ONE_ARG_COMMAND(get_aut, transpose)
 #undef DEFINE_ONE_ARG_COMMAND
 
 const struct
@@ -346,12 +380,14 @@ command_map[] =
     { "evaluation_aut",		evaluation_aut_command			},
     { "domain",			domain_command				},
     { "image",			image_command				},
+    { "intersection",		identity_command			},
     { "composition-cover",	ONE_ARG_COMMAND(get_aut, outsplitting)	},
     { "composition-co-cover",	ONE_ARG_COMMAND(get_aut, insplitting)  	},
     { "to-rt-tdc",		fmp_to_realtime_command			},
-    { "closure",		ONE_ARG_COMMAND(get_aut, closure)	},
+    { "closure",		closure_command				},
     { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
     { "b-compose",		b_compose_command			},
+    { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},
     { "display",		display_command				},
     { "info",			info_command				},
     { 0,			0					}
@@ -376,22 +412,24 @@ main(int argc, char** argv)
       }
   if (command_map[i].name == 0)
     {
-      std::cout << "Available algorithms:" << std::endl;
-      std::cout << " * sub-normalize"  << std::endl;
-      std::cout << " * is-sub-normalized"  << std::endl;
-      std::cout << " * compose"  << std::endl;
-      std::cout << " * b-compose"  << std::endl;
-      std::cout << " * composition-cover"  << std::endl;
-      std::cout << " * composition-co-cover"  << std::endl;
-      std::cout << " * evaluation"  << std::endl;
-      std::cout << " * evaluation_aut"  << std::endl;
-      std::cout << " * domain"  << std::endl;
-      std::cout << " * image"  << std::endl;
-      std::cout << " * to-rt-tdc"  << std::endl;
-      std::cout << " * closure"  << std::endl;
-      std::cout << " * display"  << std::endl;
-      std::cout << " * trim" << std::endl;
-      std::cout << " * info" << std::endl;
+      std::cerr << "Available algorithms:" << std::endl;
+      std::cerr << " * sub-normalize"  << std::endl;
+      std::cerr << " * is-sub-normalized"  << std::endl;
+      std::cerr << " * compose"  << std::endl;
+      std::cerr << " * b-compose"  << std::endl;
+      std::cerr << " * composition-cover"  << std::endl;
+      std::cerr << " * composition-co-cover"  << std::endl;
+      std::cerr << " * evaluation"  << std::endl;
+      std::cerr << " * evaluation_aut"  << std::endl;
+      std::cerr << " * domain"  << std::endl;
+      std::cerr << " * image"  << std::endl;
+      std::cerr << " * intersection"  << std::endl;
+      std::cerr << " * to-rt-tdc"  << std::endl;
+      std::cerr << " * closure"  << std::endl;
+      std::cerr << " * display"  << std::endl;
+      std::cerr << " * trim" << std::endl;
+      std::cerr << " * transpose" << std::endl;
+      std::cerr << " * info" << std::endl;
       exit(1);
     }
 }
