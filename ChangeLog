@@ -1,3 +1,11 @@
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* src/tests/automata/algos/labeled_graphs/is_isomorph_test.hh,
+	* include/vaucanson/algorithms/isomorph.hxx,
+	* include/vaucanson/algorithms/isomorph.hh: Remove.
+	* src/tests/automata/algos/labeled_graphs/Makefile.am: Update
+	accordingly.
+
 2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	This patch is the renaming of the fibonacci directory and the
