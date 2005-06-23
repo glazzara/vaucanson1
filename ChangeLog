@@ -1,5 +1,46 @@
 2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
+
+	My five last patches have consisted in cleaning and reorganizing
+	the src/demos directory. There are now 6 directories:
+
+	- function_library: programs to call algorithms on several automata
+	types,
+	- automaton_library: description of several useful automata,
+	- algorithms: a few programs on any kind of automata,
+	- transducers: examples of transducers and the example of
+	one_rule_rewriting,
+	- utilities: former fsm and vgrep directories,
+	- vaucanswig: unchanged.
+
+	* src/demos/xml: Delete. Useless.
+
+	* src/demos/one_rule_rewriting: Move to...
+	* src/demos/transducers/one_rule_rewriting: ... There.
+	* src/demos/transducers/Makefile.am: Update.
+
+	* src/demos/vgrep: Move to...
+	* src/demos/utilities/vgrep: ... There.
+	* src/demos/fsm: Move to...
+	* src/demos/utilities/fsm: ... There.
+	* src/demos/utilities/Makefile.am: New.
+
+	* src/demos/samples/algorithms,
+	* src/demos/samples/algebra,
+	* src/demos/samples: Delete. Useless.
+
+	* src/demos/ciaa: Delete. Deprecated.
+
+	* src/demos/universal: Delete, already recreated in algorithms
+
+	* src/demos/Makefile.am,
+	* configure.ac: Update.
+
+
+
+
+2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
 	* src/demos/transducers/t1.cc,
 	* src/demos/transducers/u1.cc,
 	* src/demos/transducers/Makefile.am: New. Generate two xml files

@@ -1,6 +1,6 @@
 # Makefile.am
 #
-# $Id$
+# $Id: Makefile.am 1005 2005-06-23 17:17:36Z o-conn_s $
 
 AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include

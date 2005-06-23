@@ -2,6 +2,7 @@
 #
 # $Id: Makefile.am 462 2004-03-31 21:55:16Z yann $
 
+SUBDIRS = one_rule_rewriting
 
 if XML_CHECK
   AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT

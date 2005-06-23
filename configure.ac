@@ -146,19 +146,14 @@ AC_CONFIG_FILES([
 	src/tests/test-suites/Makefile
 	src/tests/xml/Makefile
 	src/demos/Makefile
-	src/demos/ciaa/Makefile
-	src/demos/vgrep/Makefile
-	src/demos/one_rule_rewriting/Makefile
+	src/demos/utilities/Makefile
+	src/demos/utilities/vgrep/Makefile
+	src/demos/utilities/fsm/Makefile
 	src/demos/automaton_library/Makefile
 	src/demos/function_library/Makefile
 	src/demos/algorithms/Makefile
 	src/demos/transducers/Makefile
-	src/demos/universal/Makefile
-	src/demos/samples/Makefile
-	src/demos/samples/algebra/Makefile
-	src/demos/samples/algorithms/Makefile
-	src/demos/xml/Makefile
-	src/demos/xml/samples/Makefile
+	src/demos/transducers/one_rule_rewriting/Makefile
 	src/benchs/Makefile
 	src/benchs/common/Makefile
 	src/benchs/determinization/Makefile
