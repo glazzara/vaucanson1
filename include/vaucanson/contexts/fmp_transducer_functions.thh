@@ -34,6 +34,17 @@
 # include <vaucanson/algebra/concept/alphabets_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
 
+# ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
+#  include <vaucanson/algorithms/closure.hh>
+#  include <vaucanson/algorithms/normalized_composition.hh>
+#  include <vaucanson/algorithms/sub_normalize.hh>
+#  include <vaucanson/algorithms/evaluation_fmp.hh>
+#  include <vaucanson/algorithms/projections_fmp.hh>
+#  include <vaucanson/algorithms/outsplitting.hh>
+#  include <vaucanson/algorithms/transpose.hh>
+#  include <vaucanson/algorithms/fmp_to_realtime.hh>
+# endif // ! VCSN_WITHOUT_ALGORITHM_INCLUDES
+
 namespace vcsn
 {
 

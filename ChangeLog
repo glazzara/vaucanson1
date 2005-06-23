@@ -1,5 +1,13 @@
 2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/contexts/automaton_functions.thh,
+	* include/vaucanson/contexts/transducer_functions.thh,
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: Add
+	include of standard algorithms for each type of automata. These
+	includes are avoided if `VCSN_WITHOUT_ALGORITHM_INCLUDES' is set.
+
+2005-06-23  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* README: Remove. This file is a copy of `doc/README.txt' in the
 	distributed package.
 	
