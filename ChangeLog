@@ -1,3 +1,9 @@
+2005-06-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* configure.ac,
+	* src/demos/utilities/Makefile.am: Fix problem in references to 
+	Makefile.
+
 2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 

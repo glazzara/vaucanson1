@@ -148,7 +148,6 @@ AC_CONFIG_FILES([
 	src/demos/Makefile
 	src/demos/utilities/Makefile
 	src/demos/utilities/vgrep/Makefile
-	src/demos/utilities/fsm/Makefile
 	src/demos/automaton_library/Makefile
 	src/demos/function_library/Makefile
 	src/demos/algorithms/Makefile
