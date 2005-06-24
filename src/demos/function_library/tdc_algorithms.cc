@@ -29,6 +29,8 @@
  * compose <file> <file>
  * evaluation <file> <file>
  * evaluation_aut <file> <file>
+ * is-empty <file>
+ * are-isomorphic <file> <file>
  * domain <file>
  * image <file>
  * composition-cover <file>
@@ -55,6 +57,7 @@
 #include <vaucanson/algorithms/normalized_composition.hh>
 #include <vaucanson/algorithms/sub_normalize.hh>
 #include <vaucanson/algorithms/evaluation_fmp.hh>
+#include <vaucanson/algorithms/isomorph.hh>
 #include <vaucanson/algorithms/projections_fmp.hh>
 #include <vaucanson/algorithms/outsplitting.hh>
 #include <vaucanson/algorithms/transpose.hh>
@@ -146,6 +149,16 @@ get_boolean_aut(std::string s)
       std::cerr << "FATAL: Could not load automaton." << std::endl;
       exit(1);
     }
+}
+
+static
+void
+are_isomorphic_command(int argc, char** argv)
+{
+  if (argc != 4)
+    usage(argc, argv);
+
+  std::cout << are_isomorphic(get_aut(argv[2]), get_aut(argv[3])) << std::endl;
 }
 
 
@@ -318,6 +331,22 @@ info_command(int argc, char** argv)
   std::cout << "Final states: " << a.final().size() << std::endl;
 }
 
+
+void
+is_empty_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+  automaton_t a = coaccessible(accessible(get_aut(argv[2])));
+
+  if (a.states().size() > 0)
+    std::cout << false << std::endl;
+  else
+    std::cout << true << std::endl;
+}
+
+
 static
 void
 closure_command(int argc, char** argv)
@@ -365,6 +394,8 @@ command_map[] =
     { "evaluation_aut",		evaluation_aut_command			},
     { "domain",			domain_command				},
     { "image",			image_command				},
+    { "are-isomorphic",		are_isomorphic_command			},
+    { "is-empty",		is_empty_command			},
     { "intersection",		identity_command			},
     { "composition-cover",	ONE_ARG_COMMAND(get_aut, outsplitting)	},
     { "composition-co-cover",	ONE_ARG_COMMAND(get_aut, insplitting)  	},
@@ -398,6 +429,15 @@ main(int argc, char** argv)
   if (command_map[i].name == 0)
     {
       std::cerr << "Available algorithms:" << std::endl;
+      std::cerr << " * domain"  << std::endl;
+      std::cerr << " * image"  << std::endl;
+      std::cerr << " * intersection"  << std::endl;
+      std::cerr << " * closure"  << std::endl; 
+      std::cerr << " * trim" << std::endl;
+      std::cerr << " * transpose" << std::endl; 
+      std::cerr << " * is-empty" << std::endl; 
+      std::cerr << " * are-isomorphic"  << std::endl;
+      std::cerr << " * to-rt-tdc"  << std::endl;
       std::cerr << " * sub-normalize"  << std::endl;
       std::cerr << " * is-sub-normalized"  << std::endl;
       std::cerr << " * compose"  << std::endl;
@@ -406,14 +446,7 @@ main(int argc, char** argv)
       std::cerr << " * composition-co-cover"  << std::endl;
       std::cerr << " * evaluation"  << std::endl;
       std::cerr << " * evaluation_aut"  << std::endl;
-      std::cerr << " * domain"  << std::endl;
-      std::cerr << " * image"  << std::endl;
-      std::cerr << " * intersection"  << std::endl;
-      std::cerr << " * to-rt-tdc"  << std::endl;
-      std::cerr << " * closure"  << std::endl;
       std::cerr << " * display"  << std::endl;
-      std::cerr << " * trim" << std::endl;
-      std::cerr << " * transpose" << std::endl;
       std::cerr << " * info" << std::endl;
       exit(1);
     }

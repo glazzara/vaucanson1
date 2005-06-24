@@ -27,6 +27,8 @@
  * realtime <file>
  * is-realtime <file>
  * compose <file> <file>
+ * is-empty <file>
+ * are-isomorphic <file> <file>
  * evaluation <file> <file>
  * evaluation_aut <file> <file>
  * domain <file>
@@ -54,6 +56,7 @@
 #include <vaucanson/algorithms/projection.hh>
 #include <vaucanson/algorithms/realtime_to_fmp.hh>
 #include <vaucanson/algorithms/trim.hh>
+#include <vaucanson/algorithms/isomorph.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/algorithms/krat_exp_expand.hh>
 #include <vaucanson/tools/dot_display.hh>
@@ -133,6 +136,16 @@ get_bool_aut(std::string s)
     }
 }
 
+static
+void
+are_isomorphic_command(int argc, char** argv)
+{
+  if (argc != 4)
+    usage(argc, argv);
+
+  std::cout << are_isomorphic(get_aut(argv[2]), get_aut(argv[3])) << std::endl;
+}
+
 
 static
 void
@@ -167,6 +180,21 @@ evaluation_command(int argc, char** argv)
 			  boolean_automaton::new_rat_exp(alphabet(),
 							 argv[3]))
 	    << std::endl;
+}
+
+
+void
+is_empty_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+  automaton_t a = coaccessible(accessible(get_aut(argv[2])));
+
+  if (a.states().size() > 0)
+    std::cout << false << std::endl;
+  else
+    std::cout << true << std::endl;
 }
 
 
@@ -284,6 +312,8 @@ command_map[] =
     { "evaluation",		evaluation_command			},
     { "evaluation_aut",		evaluation_aut_command			},
     { "domain",			ONE_ARG_COMMAND(get_aut, input_projection)},
+    { "is-empty",		is_empty_command			},
+    { "are-isomorphic",		are_isomorphic_command			},
     { "image",			ONE_ARG_COMMAND(get_aut, output_projection)},
     { "to-tdc",			realtime_to_fmp_command			},
     { "closure",		closure_command				},
@@ -314,17 +344,19 @@ main(int argc, char** argv)
   if (command_map[i].name == 0)
     {
       std::cerr << "Available algorithms:" << std::endl;
+      std::cerr << " * domain"  << std::endl;
+      std::cerr << " * image"  << std::endl;
+      std::cerr << " * closure"  << std::endl;
+      std::cerr << " * trim"  << std::endl;
       std::cerr << " * realtime"  << std::endl;
+      std::cerr << " * are-isomorphic"  << std::endl;
       std::cerr << " * is-realtime"  << std::endl;
+      std::cerr << " * transpose"  << std::endl;
+      std::cerr << " * is-empty"  << std::endl;
+      std::cerr << " * to-tdc"  << std::endl;
       std::cerr << " * compose"  << std::endl;
       std::cerr << " * evaluation"  << std::endl;
       std::cerr << " * evaluation_aut"  << std::endl;
-      std::cerr << " * domain"  << std::endl;
-      std::cerr << " * image"  << std::endl;
-      std::cerr << " * to-tdc"  << std::endl;
-      std::cerr << " * closure"  << std::endl;
-      std::cerr << " * trim"  << std::endl;
-      std::cerr << " * transpose"  << std::endl;
       std::cerr << " * display"  << std::endl;
       std::cerr << " * info"  << std::endl;
       exit(1);

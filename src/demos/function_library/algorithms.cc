@@ -31,6 +31,8 @@
  * quotient <file>
  * accessible <file>
  * coaccessible <file>
+ * is-empty <file>
+ * are-isomorphic <file> <file>
  * trim <file>
  * concatenate <file1> <file2>
  * sum <file1> <file2>
@@ -63,6 +65,7 @@
 #include <vaucanson/algorithms/eval.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/closure.hh>
+#include <vaucanson/algorithms/isomorph.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/algorithms/minimization_moore.hh>
 #include <vaucanson/algorithms/trim.hh>
@@ -193,14 +196,42 @@ product_command(int argc, char** argv)
 			       XML ());
 }
 
+
+static
+void
+are_isomorphic_command(int argc, char** argv)
+{
+  if (argc != 4)
+    usage(argc, argv);
+
+  std::cout << are_isomorphic(get_aut(argv[2]), get_aut(argv[3])) << std::endl;
+}
+
+
 void
 eval_command(int argc, char** argv)
 {
   if (argc != 4)
     usage(argc, argv);
 
-  std::cout << eval(realtime(get_aut(argv[2])), std::string (argv[3]));
+  std::cout << eval(realtime(get_aut(argv[2])), std::string (argv[3]))
+	    << std::endl;
 }
+
+void
+is_empty_command(int argc, char** argv)
+{
+  if (argc != 3)
+    usage(argc, argv);
+
+  automaton_t a = coaccessible(accessible(get_aut(argv[2])));
+
+  if (a.states().size() > 0)
+    std::cout << false << std::endl;
+  else
+    std::cout << true << std::endl;
+}
+
 
 void
 power_command(int argc, char** argv)
@@ -394,7 +425,9 @@ command_map[] =
     { "quotient",		quotient_command			},
     { "product",		product_command				},
     { "closure",		closure_command				},
-    //    { "is_empty",		ONE_ARG_COMMAND(get_aut, is_void)	},
+    { "is-empty",		is_empty_command			},
+    { "are-isomorphic",		are_isomorphic_command			},
+    { "closure",		closure_command				},
     { "determinize",		determinize_command			},
     { "minimize",		minimize_command			},
     { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
@@ -433,24 +466,25 @@ main(int argc, char** argv)
   if (command_map[i].name == 0)
     {
       std::cerr << "Available algorithms:" << std::endl;
-      std::cerr << " * standard_of"  << std::endl;
-      std::cerr << " * expand"  << std::endl;
-      std::cerr << " * thompson_of"  << std::endl;
-      std::cerr << " * derived_terms"  << std::endl;
-      std::cerr << " * aut_to_exp"  << std::endl;
-      std::cerr << " * quotient"  << std::endl;
-      std::cerr << " * product"  << std::endl;
-      std::cerr << " * determinize"  << std::endl;
-      std::cerr << " * minimize"  << std::endl;
-      std::cerr << " * closure"  << std::endl;
-      std::cerr << " * is_empty"  << std::endl;
+      std::cerr << " * is-empty"  << std::endl;
+      std::cerr << " * are-isomorphic"  << std::endl;
       std::cerr << " * accessible"  << std::endl;
       std::cerr << " * coaccessible"  << std::endl;
       std::cerr << " * realtime"  << std::endl;
-      std::cerr << " * power"  << std::endl;
       std::cerr << " * trim"  << std::endl;
-      std::cerr << " * eval"  << std::endl;
       std::cerr << " * transpose"  << std::endl;
+      std::cerr << " * aut_to_exp"  << std::endl;
+      std::cerr << " * expand"  << std::endl;
+      std::cerr << " * standard_of"  << std::endl;
+      std::cerr << " * thompson_of"  << std::endl;
+      std::cerr << " * derived_terms"  << std::endl;
+      std::cerr << " * product"  << std::endl;
+      std::cerr << " * power"  << std::endl;
+      std::cerr << " * determinize"  << std::endl;
+      std::cerr << " * minimize"  << std::endl;
+      std::cerr << " * quotient"  << std::endl;
+      std::cerr << " * closure"  << std::endl;
+      std::cerr << " * eval"  << std::endl;
       std::cerr << " * display"  << std::endl;
       std::cerr << " * info"  << std::endl;
       exit(1);
