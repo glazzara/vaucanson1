@@ -26,8 +26,8 @@ bench:
 	cd $(srcdir)/src/benchs && make bench
 
 dist-hook:
+	touch $(distdir)/aclocal.m4 $(distdir)/config.hin $(distdir)/src/benchs
 	rm -fR $(distdir)/src/benchs
-	touch $(distdir)/aclocal.m4 $(distdir)/config.hin
 	for f in configure.ac Makefile.am Makefile.in 		\
 		 src/Makefile.am src/Makefile.in; do		\
 	  true;							\
