@@ -99,8 +99,8 @@ There are other sources of interest in the distribution.
 Licence
 =======
 
-Vaucanson  is released under  the GNU  Lesser General  Public Licence.
-See the file ``COPYING`` (at the root of the source tree) for details.
+Vaucanson is released  under the GNU General Public  Licence.  See the
+file ``COPYING`` (at the root of the source tree) for details.
 
 
 Contacts

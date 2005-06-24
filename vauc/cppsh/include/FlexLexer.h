@@ -1,48 +1,19 @@
-// $Header: /cvsroot/cppsh/cppsh/include/FlexLexer.h,v 1.3 2002/07/17 19:30:56 rposs Exp $
+// FlexLexer.h: this file is part of the Vaucanson project.
+// 
+// Vaucanson, a generic library for finite state machines.
+// 
+// Copyright (C) 2005 The Vaucanson Group.
 
-// FlexLexer.h -- define interfaces for lexical analyzer classes generated
-//		  by flex
-
-// Copyright (c) 1993 The Regents of the University of California.
-// All rights reserved.
-//
-// This code is derived from software contributed to Berkeley by
-// Kent Williams and Tom Epperly.
-//
-// Redistribution and use in source and binary forms with or without
-// modification are permitted provided that: (1) source distributions retain
-// this entire copyright notice and comment, and (2) distributions including
-// binaries display the following acknowledgement:  ``This product includes
-// software developed by the University of California, Berkeley and its
-// contributors'' in the documentation or other materials provided with the
-// distribution and in all advertising materials mentioning features or use
-// of this software.  Neither the name of the University nor the names of
-// its contributors may be used to endorse or promote products derived from
-// this software without specific prior written permission.
-
-// THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
-// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-
-// This file defines FlexLexer, an abstract class which specifies the
-// external interface provided to flex C++ lexer objects, and yyFlexLexer,
-// which defines a particular lexer class.
-//
-// If you want to create multiple lexer classes, you use the -P flag
-// to rename each yyFlexLexer to some other xxFlexLexer.  You then
-// include <FlexLexer.h> in your other sources once per lexer class:
-//
-//	#undef yyFlexLexer
-//	#define yyFlexLexer xxFlexLexer
-//	#include <FlexLexer.h>
-//
-//	#undef yyFlexLexer
-//	#define yyFlexLexer zzFlexLexer
-//	#include <FlexLexer.h>
-//	...
-// June 2002, Raphaël Poss <raph@lrde.epita.fr>
-//      Changed iostream.h to iostream, and istream,ostream to std::
-//      equivalents.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// 
+// The complete GNU General Public Licence Notice can be found as the
+// `NOTICE' file in the root directory.
+// 
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef __FLEX_LEXER_H
 // Never included before - need to define base class.
@@ -186,4 +157,4 @@ protected:
 	int yy_prev_more_offset;
 };
 
-#endif
+#endif // ! VCSN_VAUC_CPPSH_INCLUDE_FLEXLEXER_H

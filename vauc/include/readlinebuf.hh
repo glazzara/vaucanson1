@@ -1,33 +1,22 @@
-/*******************************************************************************
- * $LastChangedRevision$
- * $Date: Tue, 13 May 2003 01:19:44 +0200 $
- * $LastChangedBy$
- *
- * Contents: A streambuf which uses the GNU readline library for line I/O
- *           http://www.media.mit.edu/~vyzo/hacks/readlinebuf.html
- *           Patched by Raphael Poss for use in the Vaucanson project.
- * (c) 2001 by Dimitris Vyzovitis [vyzo@media.mit.edu]
- * (c) 2001,2002,2003 by Raphael Poss [r.poss@online.fr]
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program; if not, write to the Free
- * Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
- * MA 02111-1307 USA
- *
- ******************************************************************************/
+// readlinebuf.hh: this file is part of the Vaucanson project.
+// 
+// Vaucanson, a generic library for finite state machines.
+// 
+// Copyright (C) 2005 The Vaucanson Group.
 
-#ifndef _READLINEBUF_H_
-#define _READLINEBUF_H_
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// 
+// The complete GNU General Public Licence Notice can be found as the
+// `NOTICE' file in the root directory.
+// 
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
+//
+#ifndef VCSN_VAUC_INCLUDE_READLINEBUF_HH
+# define VCSN_VAUC_INCLUDE_READLINEBUF_HH
 
 #include <iostream>
 #include <cstdlib>
@@ -144,4 +133,4 @@ public:
 
 };
 
-#endif
+#endif // ! VCSN_VAUC_INCLUDE_READLINEBUF_HH

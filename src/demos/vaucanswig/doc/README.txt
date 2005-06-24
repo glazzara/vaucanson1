@@ -397,7 +397,7 @@ Licence
 =======
 
 Vaucanswig  is part  of Vaucanson,  and is  distributed under  the GNU
-Lesser General Public Licence. See the file ``COPYING`` for details.
+General Public Licence. See the file ``COPYING`` for details.
 
 Contact
 =======

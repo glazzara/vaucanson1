@@ -1,7 +1,20 @@
+// fun_spec.cc: this file is part of the Vaucanson project.
+// 
+// Vaucanson, a generic library for finite state machines.
+// 
+// Copyright (C) 2005 The Vaucanson Group.
 
-/* A Bison parser, made from /home/elrond/src/vaucanson/mpp++/src/parse/fun_spec.yy
-   by GNU bison 1.30.  */
-
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// 
+// The complete GNU General Public Licence Notice can be found as the
+// `NOTICE' file in the root directory.
+// 
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
+//
 #define YYBISON 1  /* Identify Bison output.  */
 
 # define	NAME	257

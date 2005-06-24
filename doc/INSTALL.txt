@@ -85,7 +85,7 @@ If  you want  to use  the XML  I/O system,  you will  need  the Apache
 Licence
 =======
 
-Vaucanson  is released under  the GNU  Lesser General  Public Licence.
-See the file ``COPYING`` for details.
+Vaucanson is released  under the GNU General Public  Licence.  See the
+file ``COPYING`` for details.
 
 

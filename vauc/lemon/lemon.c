@@ -1,35 +1,20 @@
-/*
-** Copyright (c) 1991, 1994, 1997, 1998 D. Richard Hipp
-**
-** This file contains all sources (including headers) to the LEMON
-** LALR(1) parser generator.  The sources have been combined into a
-** single file to make it easy to include LEMON as part of another
-** program.
-**
-** This program is free software; you can redistribute it and/or
-** modify it under the terms of the GNU General Public
-** License as published by the Free Software Foundation; either
-** version 2 of the License, or (at your option) any later version.
-**
-** This program is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-** General Public License for more details.
-** 
-** You should have received a copy of the GNU General Public
-** License along with this library; if not, write to the
-** Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-** Boston, MA  02111-1307, USA.
-**
-** Author contact information:
-**   drh@acm.org
-**   http://www.hwaci.com/drh/
-**
-** October 2001, Raphaël Poss (poss_r@epita.fr):
-**    Minor changes to make the source more ANSI/C compliant.
-** June 2002, Raphaël Poss (raph@lrde.epita.fr):
-**    Added the '-l' flag to output the parser to the current directory.
-*/
+// lemon.c: this file is part of the Vaucanson project.
+// 
+// Vaucanson, a generic library for finite state machines.
+// 
+// Copyright (C) 2005 The Vaucanson Group.
+
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// 
+// The complete GNU General Public Licence Notice can be found as the
+// `NOTICE' file in the root directory.
+// 
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
+//
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>

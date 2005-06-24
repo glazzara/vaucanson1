@@ -4,6 +4,7 @@
 # $Id$
 
 SUBDIRS = include doc src
+EXTRA_DIST = CONTRIBUTORS NOTICE
 
 ###
 ### Autoconf needs additional macros.

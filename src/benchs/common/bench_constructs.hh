@@ -1,5 +1,22 @@
-#ifndef BENCH_CONSTRUCTS_HH
-# define BENCH_CONSTRUCTS_HH
+// bench_constructs.hh: this file is part of the Vaucanson project.
+// 
+// Vaucanson, a generic library for finite state machines.
+// 
+// Copyright (C) 2005 The Vaucanson Group.
+
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// 
+// The complete GNU General Public Licence Notice can be found as the
+// `NOTICE' file in the root directory.
+// 
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
+//
+#ifndef VCSN_BENCHS_COMMON_BENCH_CONSTRUCTS_HH
+# define VCSN_BENCHS_COMMON_BENCH_CONSTRUCTS_HH
 
 /// Create a nice automaton which will have 2^n states once determinized.
 void aut_2n(unsigned n, automaton_t& a)
@@ -36,4 +53,4 @@ void debruijn(unsigned n_value, automaton_t& an)
   }
 }
 
-#endif
+#endif // ! VCSN_BENCHS_COMMON_BENCH_CONSTRUCTS_HH

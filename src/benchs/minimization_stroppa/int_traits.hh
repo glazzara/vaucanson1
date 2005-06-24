@@ -1,12 +1,22 @@
-//////////////////
-//
-// $Id: int_traits.hh 97 2004-03-30 09:03:26Z nico $
-//
-//////////////////
+// int_traits.hh: this file is part of the Vaucanson project.
+// 
+// Vaucanson, a generic library for finite state machines.
+// 
+// Copyright (C) 2005 The Vaucanson Group.
 
-
-#ifndef VCSN_EXT_TOOLS_INT_TRAITS_HH
-# define VCSN_EXT_TOOLS_INT_TRAITS_HH
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// 
+// The complete GNU General Public Licence Notice can be found as the
+// `NOTICE' file in the root directory.
+// 
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
+//
+#ifndef VCSN_BENCHS_MINIMIZATION_STROPPA_INT_TRAITS_HH
+# define VCSN_BENCHS_MINIMIZATION_STROPPA_INT_TRAITS_HH
 
 # include <string>
 # include <locale>
@@ -118,4 +128,4 @@ namespace std
 
 
 
-#endif  // VCSN_EXT_TOOLS_INT_TRAITS_HH
+#endif // ! VCSN_BENCHS_MINIMIZATION_STROPPA_INT_TRAITS_HH
