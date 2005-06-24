@@ -1,3 +1,8 @@
+2005-06-25  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* Makefile.am: Dirty fix to avoid `config/missing' call in the
+	distributed package.
+
 2005-06-24  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/tests/bin/generate-test-suite.sh,
