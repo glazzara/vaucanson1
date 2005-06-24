@@ -1,4 +1,4 @@
-// are_equivalent.cc: this file is part of the Vaucanson project.
+// exp_recognized.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -19,7 +19,7 @@
 //
 // The Vaucanson Group represents the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -29,9 +29,10 @@
 //
 
 /**
- * @file are_equivalent.cc
+ * @file exp_recognized.cc
  *
- * Generates a program that checks if two automata are equivalent.
+ * Generates a program that checks if an expression is recognized by
+ * an automaton.
  *
  */
 

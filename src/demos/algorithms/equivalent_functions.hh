@@ -1,4 +1,4 @@
-// are_equivalent.hh: this file is part of the Vaucanson project.
+// equivalent_functions.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -27,6 +27,16 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
+
+/**
+ * @file equivalent_functions.hh
+ *
+ * Contains the declaration of several functions useful to programs
+ * are_equivalent and exp_recognized, including get_aut, get_exp (to
+ * retrieve the input expression and automaton) and the are_equivalent
+ * function.
+ *
+ */
 
 #include CONTEXT_HEADER
 

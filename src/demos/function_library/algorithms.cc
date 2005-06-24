@@ -19,7 +19,7 @@
 //
 // The Vaucanson Group represents the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -33,8 +33,8 @@
 /**
  * @file algorithms.cc
  *
- * Run  various algorithms.  Results are  dumped  in a  XML format  on
- * stdout.
+ * Run various algorithms on automata.  Results are dumped in a XML
+ * format on stdout.
  *
  * Valid invocations are:
  *

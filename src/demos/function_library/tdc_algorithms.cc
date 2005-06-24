@@ -19,7 +19,7 @@
 //
 // The Vaucanson Group represents the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -33,7 +33,7 @@
 /**
  * @file tdc_algorithms.cc
  *
- * Run various algorithms on realtime transducers.  Results are dumped
+ * Run various algorithms on fmp transducers.  Results are dumped
  * in a XML format on stdout.
  *
  * Valid invocations are:
@@ -51,10 +51,10 @@
  * b-compose <file> <file>
  * to-rt-tdc <file>
  * intersection <file>
- * display
- * trim
- * transpose
- * info
+ * display <file>
+ * trim <file>
+ * transpose <file>
+ * info <file>
  *
  */
 

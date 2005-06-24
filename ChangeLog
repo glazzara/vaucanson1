@@ -1,7 +1,34 @@
+2005-06-24  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* src/demos/function_library/tdc_algorithms.cc,
+	* src/demos/function_library/rt_tdc_algorithms.cc,
+	* src/demos/function_library/algorithms.cc,
+	* src/demos/algorithms/equivalent_functions.hh,
+	* src/demos/algorithms/are_equivalent.cc,
+	* src/demos/algorithms/classics.cc,
+	* src/demos/algorithms/exp_recognized.cc,
+	* src/demos/algorithms/equivalent_functions.cc,
+	* src/demos/algorithms/universal.cc,
+	* src/demos/automaton_library/a1.cc,
+	* src/demos/automaton_library/b1.cc,
+	* src/demos/automaton_library/c1.cc,
+	* src/demos/automaton_library/double_ring.cc,
+	* src/demos/automaton_library/ladybird.cc,
+	* src/demos/automaton_library/divkbaseb.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_rt_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_rt_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_tdc_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_demo.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_tdc_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_demo.cc,
+	* src/demos/transducers/t1.cc,
+	* src/demos/transducers/u1.cc: Add a few lines of comment at the
+	begining of each file to explain what is done and fix typo in comments.
+
 2005-06-24  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* configure.ac,
-	* src/demos/utilities/Makefile.am: Fix problem in references to 
+	* src/demos/utilities/Makefile.am: Fix problem in references to
 	Makefile.
 
 2005-06-23  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>

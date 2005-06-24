@@ -19,7 +19,7 @@
 //
 // The Vaucanson Group represents the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -27,6 +27,16 @@
 //    * Yann Regis-Gianas <yann.regis-gianas@lrde.epita.fr>
 //    * Maxime Rey <maxime.rey@lrde.epita.fr>
 //
+
+/**
+ * @file equivalent_functions.cc
+ *
+ * Contains several functions useful to programs are_equivalent and
+ * exp_recognized, including get_aut, get_exp (to retrieve the input
+ * expression and automaton) and the are_equivalent function.
+ *
+ */
+
 
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/complement.hh>
