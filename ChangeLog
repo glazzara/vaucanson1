@@ -1,4 +1,10 @@
 2005-06-24  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* src/tests/bin/generate-test-suite.sh,
+	* src/benchs/generate_benchs.sh: Fix quoting typos.
+	* Makefile.am: Fix grep'ing -v of `configure' on benchs.
+
+2005-06-24  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 	
 	The main aims of this patch is to change Vaucanson's Licence to GPL
 	and to remove `AUTHORS' from headers in all files.

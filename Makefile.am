@@ -27,10 +27,13 @@ bench:
 
 dist-hook:
 	rm -fR $(distdir)/src/benchs
-	for f in configure configure.ac Makefile.am Makefile.in \
+	for f in configure.ac Makefile.am Makefile.in 		\
 		 src/Makefile.am src/Makefile.in; do		\
-	  grep -v benchs $(srcdir)/$$f > $(distdir)/$$f;	\
+	  true;							\
+	  grep -v bench $(srcdir)/$$f > $(distdir)/$$f;		\
 	done
+	sed 's, src/bench[^ ]*, ,g' $(srcdir)/configure |	\
+	    grep -v bench > $(distdir)/configure
 	cp $(srcdir)/doc/README.txt $(distdir)/README
 	cp $(srcdir)/doc/INSTALL.txt $(distdir)/INSTALL
 

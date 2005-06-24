@@ -76,9 +76,9 @@ as published by the Free Software Foundation; either version 2
 of the License, or (at your option) any later version.
 
 The complete GNU General Public Licence Notice can be found as the
-`NOTICE' file in the root directory.
+\`NOTICE' file in the root directory.
 
-The Vaucanson Group consists of people listed in the `AUTHORS' file.
+The Vaucanson Group consists of people listed in the \`AUTHORS' file.
 */
 EOF
 
