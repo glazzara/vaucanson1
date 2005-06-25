@@ -1,0 +1,689 @@
+\documentclass[a4paper]{llncs}
+\pagestyle{plain}
+\usepackage{amsmath,amsfonts,amscd,amssymb}
+\usepackage{alltt}
+\usepackage{xspace}
+\usepackage{vaucanson-g}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\bigskipneg}{\vspace*{-5ex}} %960728
+\newcommand{\medskipneg}{\vspace*{-2ex}} %960728
+\newcommand{\madskipneg}{\vspace*{-1.5ex}} %960728
+\newcommand{\smallskipneg}{\vspace*{-1ex}} %960728
+\newcommand{\miniskipneg}{\vspace*{-0.25ex}} %960728
+\newcommand{\skipneg}{\vspace*{-0.5cm}}
+
+
+
+\newcommand{\Vauc}{{\sc Vaucanson}\xspace}
+
+\newcommand{\typetag}{\verb|<type>|\xpsace}
+\newcommand{\contenttag}{\verb|<content>|\xpsace}
+\newcommand{\statestag}{\verb|<states>|\xpsace}
+\newcommand{\transitionstag}{\verb|<transitions>|\xpsace}
+
+
+\begin{document}
+
+\title{XML proposal for automata description}
+
+\author{The \Vauc group\inst{}}
+
+\institute{http://vaucanson.lrde.epita.fr}
+%%%
+
+\maketitle{}
+
+\begin{abstract}
+This paper present an XML description format for automata
+representation. We introduce the proposal through some examples that
+enlight characteristic features of the format, with a progressive
+complexity. Finally, we focus briefly on implementation concerns.
+\end{abstract}
+
+
+%%
+\section{Introduction}
+
+The aim of conceiving a universal automata exchange format is to
+provide the community with a communication tool that could be used
+for the connexion of the various softwares that deal with
+automata and transducers.
+
+The idea of establishing an XML format for automata has been
+discussed at the CIAA conferences for several years.
+At CIAA'04, a special session was organized on the subject and two
+proposals were presented, one by our group (see~\cite{VXML04}).
+We come again at CIAA'05 with a new proposal, which is an evolution of
+the former but has undergone profound modifications based on our
+experience in using this format as an input-output format
+for the \Vauc platform.
+
+The most important difference with our previous proposal is the change
+from a DTD (Document Type Definition) to an XSD Schema for the
+description of the format. 
+We explain later the reason for this change.
+
+
+%%
+\section{Overview}
+
+The description of automata is structured in two parts.  The
+\verb|<type>| tag provides automaton type definition, like Boolean
+automaton, or weighted ones with the ability to specify weight type,
+alphabet specification, etc. The \verb|<content>| tag provides the
+definition of the automaton ``structure''.\\
+
+The visual representation of automata involves a very large amount of
+informations.  The \verb|<geometry>| data corresponds to the embedding
+of the automaton in a plane (with informations such as state
+coordinates or edge type for a transition).  The \verb|<drawing>| data
+contains the definition of attributes that characterize the actual
+drawing of the graph (such as label position or state color for
+instance). \\
+
+\section{Description of the format}
+\subsubsection{A first example}
+
+
+%% The \contenttag aims to describe the structure of the automaton. An
+%% automaton is a set of states, where some can be initials or finals,
+%% and transitions; so the \contenttag has two children: \statestag and
+%% \transitions.
+
+As a first example, the automaton of Figure \ref{B1} is represented in
+Figure \ref{B1xml}. This automaton recognizes the set of
+words over the alphabet $\{a,b\}$ that contains at least one $b$.\\
+
+\begin{figure}[ht]
+\begin{center}
+\VCDraw[1.5]{%
+\begin{VCPicture}{(-3,-1.2)(3,.7)}
+\State{(-1,0)}{A}
+\State{(1,0)}{B}
+\Initial{A}\Final{B}
+\EdgeL{A}{B}{b}
+\LoopN{A}{a}\LoopN{B}{a}
+\LoopS{A}{b}\LoopS{B}{b}
+\end{VCPicture}}
+\end{center}
+\vspace*{-.8cm}
+\caption{The automaton~$B_1$}\label{B1}
+\medskipneg
+\end{figure}
+
+{\small
+
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<automaton>
+  <content>
+    <states>
+       <state name="s0"/>
+       <state name="s1"/>
+    </states>
+    <transitions>
+       <transition src="s0" dst="s0" label="a"/>
+       <transition src="s0" dst="s0" label="b"/>
+       <transition src="s0" dst="s1" label="b"/>
+       <transition src="s0" dst="s1" label="a"/>
+       <transition src="s0" dst="s1" label="b"/>
+       <initial state="s0"/>
+       <final state="s1"/>
+    </transitions>
+    </finals>
+  </content>
+</automaton>
+\end{alltt} 
+
+\caption{The XML description of the automaton $B_1$}
+\label{B1xml}
+  \end{center}
+\end{figure}
+}
+
+\subsection{The content tag}
+The \verb|<content>| tag aims to describe the structure of the
+automaton. It has two children, mandatory and supposed to appear in a
+specific order. These two tags allow definitions of states and
+transitions. \\
+
+The first tag is \verb|<states>|, representing start declaration of
+the set of states of the automaton. A state has three attributes: a
+\verb|name| (which is mandatory and has to be unique), a \verb|label|
+and a \verb|number|. The latter can be used to put an ordering on states,
+or to add special data to the state.
+
+The second tag is \verb|<transitions>|, representing start declaration
+of the set of transitions. Let us note that the initial and final
+\textit{transitions} are represented as children of
+\verb|<transitions>|. It is mandatory for a \verb|<transition>| to
+have two attributes: \verb|src| and \verb|dst|, representing source
+and destination of the transition. In the case of an \verb|<initial>|
+or \verb|<final>| transition, the only mandatory attribute is
+\verb|state|, referring to
+the initial or final state the transition belongs.\\
+
+Let us note that there is no limitation of the format for the content
+of attributes, as it is a non-restricted string. For example, a user
+can store a rational expression in the label.  Let us note also that
+when omiting the \verb|label| attribute the XSD grammar propose the
+identity of the monoid ({\it i.e.} the empty word) as the default value.
+
+\subsection{The type tag}
+In the automaton described in Figure \ref{B1xml}, no specific
+information is given on the type of the automaton. The proposal comes
+with a set of predefined types, in order to limit amount of needed
+declarations for widely used structures. When the document starts with
+the \verb|<automaton>| tag and when the \verb|<type>| tag is omitted,
+the default automaton type is Boolean automaton, on the standard
+alphabet (all letters of the alphabet, capitalized or not, and digits).
+
+
+\subsubsection{Weighted automata}
+\label{weightedautomata}
+
+To describe a weighted automaton, the \verb|<type>| tag provides a set
+of customizable tags to specify the type of multiplicities. The example
+of Figure \ref{B1Zxml} shows how to turn the automaton $B_1$ into a
+weighted automaton with weight in ${\mathbb Z}$ -- so it counts the
+number of $b$ in a word.
+
+{\small
+
+\begin{figure}[h]
+  \begin{center}
+\begin{verbatim}
+<automaton>
+  <type>
+     <semiring set="Z"/>
+  </type>
+  <content>
+  ...
+  </content>
+</automaton>
+\end{verbatim}
+
+\caption{The XML description of the $\mathbb{Z}$-automaton $B_1$}
+\label{B1Zxml}
+  \end{center}
+\end{figure}
+
+}
+
+The multiplicity semiring can be described with two attributes. The
+\verb|set| indicates the set of weights, while the \verb|operations|
+attributes indicates the corresponding operations. The possible sets
+are ${\mathbb B}$, ${\mathbb R}$, ${\mathbb Z}$, ${\mathbb N}$ and
+$ratSeries$ (which will be discussed later). 
+
+For instance, describing the tropical semiring $({\mathbb Z}, max, +)$
+is achieved with: {\small
+\verb|<semiring set="Z" operations="tropicalMax">|}\\
+
+
+All the content definition previously defined in Figure \ref{B1xml} is
+still totally compatible with a weighted automaton, and can remain
+unchanged. \\
+
+Two different ways are proposed to set the weight of an edge. One can
+directly store the multiplicity in the \verb|label| attribute, or use
+the dedicated \verb|weight| attribute. These attributes can
+indistinctly be used in a \verb|<transition>|, an
+\verb|<initial>| or a \verb|<final>| tag. When omiting the
+\verb|weight| attribute, the XSD grammar propose the identity of
+the semiring as default value.
+
+%
+\subsubsection{Transducers}
+
+As already mentioned above, this proposal aims to limit amount of
+declarations for widely used structures. Description of transducers is
+now achieved through the \verb|<transducer>| tag. The example of
+Figure \ref{binadd}, the right transducer for binary addition, is
+represented in Figure \ref{binaddxml}. 
+
+\begin{figure}[h]
+  \begin{center}
+\ShowFrame
+\ShowGrid
+\VCDraw[1.2]{%
+\begin{VCPicture}{(-2,-2)(5,2)}
+% states
+\State[C]{(0,0)}{A} \State[N]{(3,0)}{B}
+\Initial[w]{A}
+\Final[se]{A} \FinalR{e}{B}{\IOL{}{1}}
+%transitions
+\LoopN{A}{\IOL{0}{0}}
+\LoopS{A}{\IOL{1}{1}}
+\LoopN[.75]{B}{\IOL{2}{1}}
+\LoopS[.75]{B}{\IOL{1}{0}}
+\ArcL{A}{B}{\IOL{2}{0}}
+\ArcL{B}{A}{\IOL{0}{1}}
+%
+\end{VCPicture}}
+\caption{Right transducer for binary addition}
+\label{binadd}
+  \end{center}
+\end{figure}
+
+{\small
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<transducer>
+  <content>
+    <states>
+       <state name="s0" label="C"/>
+       <state name="s1" label="N"/>
+    </states>
+    <transitions>
+       <transition src="s0" dst="s0" in="0" out="0"/>
+       <transition src="s0" dst="s0" in="1" out="1"/>
+       <transition src="s0" dst="s1" in="2" out="0"/>
+       <transition src="s1" dst="s0" in="0" out="1"/>
+       <transition src="s1" dst="s1" in="1" out="0"/>
+       <transition src="s1" dst="s1" in="2" out="1"/>
+       <initial state="s0"/>
+       <final state="s0"/>
+       <final state="s1" out="1"/>
+    </transitions>
+  </content>
+</transducer>
+\end{alltt}
+
+\caption{The XML description of the right transducer for binary addition}
+\label{binaddxml}
+  \end{center}
+\end{figure}
+
+}
+
+The \verb|<content>| tag follows the exact same structure as for automata
+description. Although a noticeable difference is the extension for
+transitions definitions. Two new attributes are proposed for transducer
+description: \verb|in| and \verb|out|, respectively corresponding to
+the input and the output of a transition. These two attributes are
+proposed in addition to the classical \verb|label| and \verb|weight|
+attributes, that can still be used for transducer description. They of
+course can be used indistinctly in \verb|<transition>|,
+\verb|<initial>| or \verb|<final>|. \\
+
+
+In the example of Figure \ref{binaddxml}, the \verb|<type>| tag is
+omitted. The XSD grammar propose also a default type for transducer:
+automaton over the free monoid product.
+% The two alphabets of free
+%monoid are standard alphabets (all letters of the alphabet,
+%capitalized or not, and digits).
+
+\subsection{The geometry tag}
+
+The visual representation of automata involves a very large amount of
+informations.  The \verb|<geometry>| data corresponds to the embedding
+of the automaton in a plane (with informations such as state
+coordinates or edge type for a transition). The
+format provides the possibility to set these properties at any level of the
+document and to locally override them in a child tag.
+
+The example of Figure \ref{geom1} sets a global offset
+for the document, and then places a state in the plane.
+{\small
+
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<transducer>
+  <geometry x="-2" y="-2"/> 
+  <content>
+     <states>
+        <state name="s0" label="C"><geometry x="0" y="0"/>
+        </state>
+        <state name="s0" label="N"><geometry x="3" y="0"/>
+        </state>
+      ...
+</transducer>
+\end{alltt}
+
+\caption{Setting geometry properties}
+\label{geom1}
+  \end{center}
+\end{figure}
+
+}
+
+The \verb|<geometry>| tag is context sensitive. If it is a child of
+the \verb|<state>| tag, the only two properties that can be set is the
+position, \verb|x| and \verb|y|, of the state. Note that these values
+can only be numeric.
+
+If it is a child of \verb|<transition>|, \verb|<initial>| or
+\verb|<final>|, two attributes can be set. First, the \verb|edgeType|
+attribute, that assign the type of the edge (\textit{line},
+\textit{arcL}, \textit{arcR}, \textit{curve}). Then, the
+\verb|direction| attribute, that can be used to assign the direction
+angle of a loop, for instance. Note that this attribute is numeric.
+
+
+\subsection{The drawing tag}
+The \verb|<drawing>| data
+contains the definition of attributes that characterize the actual
+drawing of the graph (such as label position or state color for
+instance).
+\\Most of them are indeed implicit and provided by drawing programs; the
+format only provides the possibility to make them explicit.
+As the geometry tag, this tag can be used at any level of the
+document and be locally overridden in a child tag.
+
+Since it's not possible to exhaustively
+name all needed attributes users may need, the proposal offers a
+limited set of properties. For example, \verb|stateFillColor| or
+\verb|edgeStyle| usage are shown in Figure \ref{drawing1}. These
+attributes use a string representation to describe their values.
+
+One of the powerful features of XSD Schema descriptions is the
+\verb|anyAttribute| modifier. This modifier allows the user to easily
+extend the main XSD, and then use its own attributes and still be
+compliant with the grammar. The \verb|<drawing>| tag contains a
+\verb|anyAttribute| modifier in the proposal, so the grammar is not
+limited to a specific set of drawing properties.
+
+
+{\small
+
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<transducer>
+  <geometry x="-5" y="0"/> 
+  <drawing stateFillColor="black" edgeStyle="dashed"/>
+  <content>
+     <states>
+        <state name="s0">
+            <drawing stateFillColor="red"/>
+        </state>
+      ...
+</transducer>
+\end{alltt}
+
+\caption{Setting drawing properties}
+\label{drawing1}
+  \end{center}
+\end{figure}
+
+}
+
+
+
+\section{Discussion}
+
+\subsection{The complexity of the {\tt type} tag}
+\label{deepertypetag}
+
+In section \ref{weightedautomata}, we briefly introduced how the
+\verb|<type>| tag can be used to specify weight types for a weighted
+automaton. The aim of the \verb|<type>| tag is to provide a set of
+tags that allows full description of the automaton type.
+
+
+\subsubsection{Alphabet specification}
+
+The user may need to use an alphabet that is not necessarily the
+standard letter alphabet. For example, a restriction of the alphabet
+to $\{a, b\}$ is proposed in Figure \ref{alpha1}.
+
+
+{\small
+
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<type>
+  <monoid>
+     <generator value="a"/>
+     <generator value="b"/>
+  </monoid>
+</type>
+\end{alltt}
+
+\caption{Setting $\{a, b\}$ alphabet}
+\label{alpha1}
+  \end{center}
+\end{figure}
+
+}
+
+
+\subsubsection{Default types}
+
+The \verb|<type>| tag has two children: the \verb|<monoid>| tag and
+the \verb|<semiring>| tag. Note that both of these tags are not
+mandatory, and have different values according to the root tag. Figure
+\ref{automatontype} shows the equivalent XML code if you omit the
+\verb|<type>| tag when declaring an automaton. Similarly,
+Figure~\ref{transducertype} shows the default type for transducers.
+The \verb|operations| attributes is setted to \verb|"numerical"|,
+which means that usual laws over $\mathbb{B}$ shall be applied.
+
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<type>
+  <monoid type="free" generators="letters">
+     <generator range="ascii"/>
+  </monoid>
+  <semiring set="B" operations="numerical"/>
+</type>
+\end{alltt}
+
+\caption{Default type for an automaton}
+\label{automatontype}
+  \end{center}
+\end{figure}
+
+
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<type>
+  <monoid type="product">
+     <monoid type="free" generators="letters">
+       <generator range="ascii"/>
+     </monoid>
+     <monoid type="free" generators="letters">
+       <generator range="ascii"/>
+     </monoid>
+  </monoid>
+  <semiring set="B" operations="numerical"/>
+</type>
+\end{alltt}
+
+\caption{Default type for a transducer}
+\label{transducertype}
+  \end{center}
+\end{figure}
+
+
+
+\subsubsection{Advanced example}
+
+The power of the type tag is enlighted with the example of Figure
+\ref{ratseries1}. This example describes the right transducer for
+binary addition (Figure~\ref{binadd}) seen as a weighted automaton with
+weight in $Rat(B^*)$. \verb|<monoid>| and \verb|<semiring>| tags can
+recursively be defined, in order to describe a complex type. For the
+sake of space saving, the content part is omitted, but is
+\textit{verbatim} the one proposed in Figure \ref{binaddxml}.
+
+
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<transducer>
+  <type>
+    <monoid generators="integers" type="free">
+      <generator value="0"/>
+      <generator value="1"/>
+      <generator value="2"/>
+    </monoid>
+    <semiring set="ratSeries">
+      <monoid generators="integers" type="free">
+        <generator value="0"/>
+        <generator value="1"/>
+      </monoid>
+      <semiring operations="numerical" set="B"/>
+    </semiring>
+  </type>
+  <content>
+     ...
+  </content>
+<transducer>
+\end{alltt}
+
+\caption{Right transducer for binary addition}
+\label{ratseries1}
+  \end{center}
+\end{figure}
+
+\clearpage
+
+\subsection{From DTD to XSD}
+The most important difference with our previous proposal is the change
+from a DTD (Document Type Definition) describing the tags for automata
+representation to an XSD Schema.
+
+It is desirable to keep the description of automata simple when
+describing widely used structures while, giving the possibility to
+describe the most complex ones. For XML, this simplification amounts
+to have default types, in order to omit \verb|<type>| tag when
+describing common Boolean automata or transducers.
+
+The problem then arises when describing an automaton or a transducer,
+the default values for the \verb|<type>| tag must of course be
+different. This is not possible with a DTD description.  The use of a
+XSD overcomes this difficulty, since it is possible to define
+different properties for a same element, according to the embracing
+context. Is is so possible to locally alter the behavior of a tag, and
+make it context-sensitive. With this feature, default values for the
+\verb|<type>| tag are achieved, whether it is a child of
+\verb|<transducer>| or of \verb|<automaton>|.
+
+
+\subsection{Convenient}
+
+\subsubsection{Sessions}
+
+A way to manipulate many automata would be to combine them in
+a single document. The proposal offers this feature, through the
+\verb|<session>| tag. An unlimited number of automata or transducers
+can be combined in a single XML document, as shown in Figure~\ref{session1}.
+
+
+
+{\small
+
+\begin{figure}[h]
+  \begin{center}
+\begin{alltt}
+<session>
+  <automaton name="a1">...</automaton>
+  <transducer name="t1">...</transducer>
+  <transducer name="t2">...</transducer>
+</session>
+\end{alltt}
+
+\caption{Session of numerous automata}
+\label{session1}
+  \end{center}
+\end{figure}
+
+}
+
+
+%% %%
+%% \section{Advanced examples}
+
+%% \subsection{Automaton description}
+
+%% \subsection{Transducer description}
+
+
+
+%%
+%% \section{Implementation concerns}
+
+%% This proposal is the result of a one year experiment of the former
+%% proposal we made at CIAA'04. We had to overcome two major issues:
+%% describe an XML grammar which is context-sensitive, and provide in
+%% \Vauc a corresponding implementation that would let us to easily extend
+%% or modify the grammar.
+
+
+
+
+
+
+%% \subsubsection{Implementation}
+%% To parse the XML document and create the associated tree, the Apache
+%% Xerces C++ parser \cite{xerces} is appropriate. Xerces is a validating
+%% XML parser, and well handles DTD document validation or XSD
+%% validation.
+
+%% The factory method design patterns fulfills our needs of modularity
+%% and adaptability of the implementation. This design pattern, described
+%% in \cite{gof}, is well adapted to dynamic content such as XML
+%% document. We provide an implementation of the format proposal in \Vauc
+%% that relies on this pattern, and it proved its flexibility numerous
+%% times.
+
+
+
+%%
+\section{Conclusion}
+
+For the past year we experimented the proposal made at CIAA'04 in the
+\Vauc platform. This new proposal comes as a result of this
+experiment, with simplifications where it was possible. Thus, the
+\Vauc platform deals with numerous automata types, and it is important
+to be able to define precisely the type of the automaton in addition
+to its content.
+
+This proposal comes as a combination of two needs, shorten declaration
+of widely used structure and make possible definitions of complex
+types. We hope to have proposed a description format that fulfills, at
+least partially, both of these needs.
+
+
+
+
+{\small%
+\begin{thebibliography}{1}
+
+\bibitem{gof}
+{\sc Gamma E., Helm R., Johnson R., and Vlissides J.},
+\newblock {\em Design Patterns: Elements of Reusable Object-Oriented 
+Software},
+\newblock Addison-Wesley, 1995.
+
+\bibitem{LombReGiSaka04}
+{\sc Lombardy S., R\'egis-Gianas Y., and Sakarovitch J.},
+\newblock Introducing Vaucanson
+\newblock {\em Theoretical Comput. Sci. 328\/} (2004), 77--96.
+\newblock Journal version of 
+{\em Proc. of CIAA 2003, Lect. Notes in Comp. Sc. 2759}, (2003), 
+96--107 
+\newblock (with {\sc R. Poss}).
+
+\bibitem{VXML04}
+{\sc Claveirole T.},
+\newblock Proposal: an XML representation for automata,
+\newblock Technical report, LRDE (2004).
+
+
+\bibitem{xerces}
+\verb+http://xml.apache.org/xerces-c/+
+\end{thebibliography}}
+
+
+\end{document}

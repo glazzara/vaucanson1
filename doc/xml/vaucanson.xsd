@@ -55,12 +55,106 @@ used for XML to latex translation.
 
 An optional "any" attribute is used, to let the user use personal attributes.
 -->
-<xs:complexType name="drawing">
+<xs:complexType name="drawing" mixed="true">
   <xs:attribute name="stateSize" type="xs:string"/>
   <xs:attribute name="stateColor" type="xs:string"/>
   <xs:attribute name="stateFillColor" type="xs:string"/>
-  <xs:attribute name="labelPosition" type="xs:string"/>
+  <xs:attribute name="labelPositionX" type="xs:string"/>
+  <xs:attribute name="labelPositionY" type="xs:string"/>
   <xs:attribute name="labelOffset" type="xs:string"/>
+  <xs:attribute name="StateLabelColor" type="xs:string"/>
+  <xs:attribute name="StateLabelScale" type="xs:string"/>
+  <xs:attribute name="StateLineStyle" type="xs:string"/>
+  <xs:attribute name="StateLineWidth" type="xs:string"/>
+  <xs:attribute name="StateLineColor" type="xs:string"/>
+  <xs:attribute name="StateFillStatus" type="xs:string"/>
+  <xs:attribute name="StateFillColor" type="xs:string"/>
+  <xs:attribute name="DimStateLineStyle" type="xs:string"/>
+  <xs:attribute name="DimStateLineColor" type="xs:string"/>
+  <xs:attribute name="DimStateLineCoef" type="xs:string"/>
+  <xs:attribute name="DimStateLabelColor" type="xs:string"/>
+  <xs:attribute name="DimStateFillColor" type="xs:string"/>
+  <xs:attribute name="StateLineDblCoef" type="xs:string"/>
+  <xs:attribute name="StateLineDblSep" type="xs:string"/>
+  <xs:attribute name="EdgeLabelColor" type="xs:string"/>
+  <xs:attribute name="EdgeLabelScale" type="xs:string"/>
+  <xs:attribute name="EdgeLineStyle" type="xs:string"/>
+  <xs:attribute name="EdgeLineWidth" type="xs:string"/>
+  <xs:attribute name="EdgeLineColor" type="xs:string"/>
+  <xs:attribute name="ArcAngle" type="xs:string"/>
+  <xs:attribute name="LArcAngle" type="xs:string"/>
+  <xs:attribute name="ArcCurvature" type="xs:string"/>
+  <xs:attribute name="EdgeOffset" type="xs:string"/>
+  <xs:attribute name="ArcOffset" type="xs:string"/>
+  <xs:attribute name="LoopOffset" type="xs:string"/>
+  <xs:attribute name="ForthBackEdgeOffset" type="xs:string"/>
+  <xs:attribute name="DimEdgeLineStyle" type="xs:string"/>
+  <xs:attribute name="DimEdgeLineCoef" type="xs:string"/>
+  <xs:attribute name="DimEdgeLineColor" type="xs:string"/>
+  <xs:attribute name="DimEdgeLabelColor" type="xs:string"/>
+  <xs:attribute name="EdgeBorderCoef" type="xs:string"/>
+  <xs:attribute name="EdgeBorderColor" type="xs:string"/>
+  <xs:attribute name="EdgeLineDoubleCoefOne" type="xs:string"/>
+  <xs:attribute name="EdgeLineDoubleCoefTwo" type="xs:string"/>
+  <xs:attribute name="ZZSize" type="xs:string"/>
+  <xs:attribute name="ZZShape" type="xs:string"/>
+  <xs:attribute name="ZZLineWidth" type="xs:string"/>
+  <xs:attribute name="TransLabelZZCoef" type="xs:string"/>
+  <xs:attribute name="LargeScale" type="xs:string"/>
+  <xs:attribute name="MediumScale" type="xs:string"/>
+  <xs:attribute name="SmallScale" type="xs:string"/>
+  <xs:attribute name="TinyScale" type="xs:string"/>
+  <xs:attribute name="MediumStateDiameter" type="xs:string"/>
+  <xs:attribute name="SmallStateDiameter" type="xs:string"/>
+  <xs:attribute name="LargeStateDiameter" type="xs:string"/>
+  <xs:attribute name="VerySmallStateDiameter" type="xs:string"/>
+  <xs:attribute name="VSStateLineCoef" type="xs:string"/>
+  <xs:attribute name="ArrowOnMediumState" type="xs:string"/>
+  <xs:attribute name="ArrowOnSmallState" type="xs:string"/>
+  <xs:attribute name="ArrowOnLargeState" type="xs:string"/>
+  <xs:attribute name="ArrowOnVerySmallState" type="xs:string"/>
+  <xs:attribute name="LoopOnMediumState" type="xs:string"/>
+  <xs:attribute name="LoopOnSmallState" type="xs:string"/>
+  <xs:attribute name="LoopOnLargeState" type="xs:string"/>
+  <xs:attribute name="LoopOnVariableState" type="xs:string"/>
+  <xs:attribute name="CLoopOnMediumState" type="xs:string"/>
+  <xs:attribute name="CLoopOnSmallState" type="xs:string"/>
+  <xs:attribute name="CLoopOnLargeState" type="xs:string"/>
+  <xs:attribute name="CLoopOnVariableState" type="xs:string"/>
+  <xs:attribute name="EdgeLabelPosit" type="xs:string"/>
+  <xs:attribute name="EdgeLabelRevPosit" type="xs:string"/>
+  <xs:attribute name="ArcLabelPosit" type="xs:string"/>
+  <xs:attribute name="ArcLabelRevPosit" type="xs:string"/>
+  <xs:attribute name="LArcLabelPosit" type="xs:string"/>
+  <xs:attribute name="LArcLabelRevPosit" type="xs:string"/>
+  <xs:attribute name="LoopLabelPosit" type="xs:string"/>
+  <xs:attribute name="LoopLabelRevPosit" type="xs:string"/>
+  <xs:attribute name="CLoopLabelPosit" type="xs:string"/>
+  <xs:attribute name="CLoopLabelRevPosit" type="xs:string"/>
+  <xs:attribute name="InitStateLabelPosit" type="xs:string"/>
+  <xs:attribute name="InitStateLabelRevPosit" type="xs:string"/>
+  <xs:attribute name="FinalStateLabelPosit" type="xs:string"/>
+  <xs:attribute name="FinalStateLabelRevPosit" type="xs:string"/>
+  <xs:attribute name="EdgeArrowWidth" type="xs:string"/>
+  <xs:attribute name="EdgeArrowLengthCoef" type="xs:string"/>
+  <xs:attribute name="EdgeDblArrowWidth" type="xs:string"/>
+  <xs:attribute name="EdgeDblArrowLengthCoef" type="xs:string"/>
+  <xs:attribute name="EdgeArrowInsetCoef" type="xs:string"/>
+  <xs:attribute name="EdgeArrowStyle" type="xs:string"/>
+  <xs:attribute name="EdgeRevArrowStyle" type="xs:string"/>
+  <xs:attribute name="StateDimen" type="xs:string"/>
+  <xs:attribute name="StateDblDimen" type="xs:string"/>
+  <xs:attribute name="left" type="xs:string"/>
+  <xs:attribute name="bottom" type="xs:string"/>
+  <xs:attribute name="top" type="xs:string"/>
+  <xs:attribute name="right" type="xs:string"/>
+  <xs:attribute name="label" type="xs:string"/>
+  <xs:attribute name="x" type="xs:string"/>
+  <xs:attribute name="y" type="xs:string"/>
+  <xs:attribute name="curvature" type="xs:string"/>
+  <xs:attribute name="curvside" type="xs:string"/>
+  <xs:attribute name="direction" type="xs:string"/>
+  <xs:attribute name="doubleline" type="xs:string"/>
   <xs:anyAttribute/>
 </xs:complexType>
 
@@ -131,6 +225,7 @@ The monoid type is broke in two parts, for automata and transducers.
       </xs:restriction>
       </xs:simpleType>
   </xs:attribute>
+  <xs:attribute name="identity_symbol" type="xs:string"/>
 </xs:complexType>
 
 
@@ -153,6 +248,7 @@ The monoid type is broke in two parts, for automata and transducers.
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
+  <xs:attribute name="identity_symbol" type="xs:string"/>
 </xs:complexType>
 
 

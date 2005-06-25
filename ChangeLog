@@ -1,5 +1,12 @@
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* doc/xml/vaucanson.xsd: Fixes to add drawing properties and identity
+	symbol for monoid.
+	* doc/xml/xml_proposal.tex: Add a document about the XML proposal. 
+	* doc/xml/Makefile.am: Update accordingly.
+	
+2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/demos/function_library/tdc_algorithms.cc,
 	* src/demos/function_library/rt_tdc_algorithms.cc,
 	* src/demos/function_library/algorithms.cc: Add are-isomorphic and 
