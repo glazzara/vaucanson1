@@ -1,4 +1,8 @@
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/tests/xml/trans_ref.dot: Fix a problem in reference file.
+
+2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	This patch renames the derived_terms_automaton to 
 	derived_term_automaton.
 	
