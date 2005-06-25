@@ -20,7 +20,7 @@
 # include <vaucanson/tools/usual_macros.hh>
 
 # ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
-#  include <vaucanson/algorithms/derived_terms_automaton.hh>
+#  include <vaucanson/algorithms/derived_term_automaton.hh>
 #  include <vaucanson/algorithms/product.hh>
 #  include <vaucanson/algorithms/transpose.hh>
 #  include <vaucanson/algorithms/eval.hh>

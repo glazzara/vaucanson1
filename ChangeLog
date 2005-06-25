@@ -1,4 +1,25 @@
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	This patch renames the derived_terms_automaton to 
+	derived_term_automaton.
+	
+	* include/vaucanson/algorithms/derived_terms_automaton.hxx: Move to...
+	* src/tests/automata/algos/letter_combination_labeled_graphs/derived_term_automaton_test.hh
+	* include/vaucanson/algorithms/derived_term_automaton.hh,
+	* include/vaucanson/algorithms/derived_term_automaton.hxx: ... These.
+
+	* include/Makefile.am,
+	* include/vaucanson/contexts/automaton_functions.thh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/algorithms/derived_term_automaton.hxx,
+	* include/vaucanson/algorithms/derived_term_automaton.hh,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/Makefile.am,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/derived_terms_automaton_test.hh,
+	* include/vaucanson/algorithms/derived_terms_automaton.hh,
+	* src/benchs/derived_terms/derived_terms_bench.hh,
+	* src/demos/function_library/algorithms.cc,
+	* doc/NEWS.txt: Update accordingly.
+	
+2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* doc/xml/vaucanson.xsd: Fixes to add drawing properties and identity
 	symbol for monoid.

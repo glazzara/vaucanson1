@@ -1,4 +1,4 @@
-// derived_terms_automaton.hxx: this file is part of the Vaucanson project.
+// derived_term_automaton.hxx: this file is part of the Vaucanson project.
 // 
 // Vaucanson, a generic library for finite state machines.
 // 
@@ -17,7 +17,7 @@
 #ifndef VCSN_ALGORITHMS_DERIVED_TERMS_AUTOMATON_HXX
 # define VCSN_ALGORITHMS_DERIVED_TERMS_AUTOMATON_HXX
 
-# include <vaucanson/algorithms/derived_terms_automaton.hh>
+# include <vaucanson/algorithms/derived_term_automaton.hh>
 
 # include <vaucanson/algorithms/internal/build_pattern.hh>
 # include <vaucanson/algorithms/internal/partial_rat_exp.hh>
@@ -95,7 +95,7 @@ namespace vcsn {
 
     // List Contructor -> initialize mother class and undefined attributes,
     // which indicate if the resulting automaton is valid.
-    // This is used for the broken_derived_terms_automaton algorithm.
+    // This is used for the broken_derived_term_automaton algorithm.
     DerivativesAlgo(const series_set_t& series,
  		    const std::list<Element<S, T> >& listexp):
       IncAutomataConstructor<DerivativesAlgo, T_auto, PartialExp<S, T> >
@@ -144,7 +144,7 @@ namespace vcsn {
 
   template<typename T_auto, typename S, typename T>
   T_auto*
-  do_derived_terms_automaton(const T_auto& out,
+  do_derived_term_automaton(const T_auto& out,
 			   const Element<S, T>& kexp)
   {
     Element<S, T>			exp = realtime(kexp);
@@ -161,29 +161,29 @@ namespace vcsn {
 
   template<typename A, typename T, typename Exp>
   void
-  derived_terms_automaton(Element<A, T>& out, const Exp& kexp)
+  derived_term_automaton(Element<A, T>& out, const Exp& kexp)
   {
-    Element<A, T>*	result = do_derived_terms_automaton(out, kexp);
+    Element<A, T>*	result = do_derived_term_automaton(out, kexp);
     if (result != NULL)
       out = *result;
   }
 
   template<typename A, typename T, typename Exp>
   Element<A, T>
-  derived_terms_automaton(const Exp& kexp)
+  derived_term_automaton(const Exp& kexp)
   {
     A			a_structure(kexp.structure());
     Element<A, T>	out (a_structure);
-    Element<A, T>*	result = do_derived_terms_automaton(out, kexp);
+    Element<A, T>*	result = do_derived_term_automaton(out, kexp);
     if (result != NULL)
       out = *result;
     return out;
   }
 
-// broken_derived_terms_automaton implementation
+// broken_derived_term_automaton implementation
   template<typename T_auto, typename S, typename T>
   T_auto*
-  do_broken_derived_terms_automaton(const T_auto& out,
+  do_broken_derived_term_automaton(const T_auto& out,
 			   const Element<S, T>& kexp)
   {
     Element<S, T>			exp = realtime(kexp);
@@ -204,20 +204,20 @@ namespace vcsn {
 
   template<typename A, typename T, typename Exp>
   void
-  broken_derived_terms_automaton(Element<A, T>& out, const Exp& kexp)
+  broken_derived_term_automaton(Element<A, T>& out, const Exp& kexp)
   {
-    Element<A, T>*	result = do_broken_derived_terms_automaton(out, kexp);
+    Element<A, T>*	result = do_broken_derived_term_automaton(out, kexp);
     if (result != NULL)
       out = *result;
   }
 
   template<typename A, typename T, typename Exp>
   Element<A, T>
-  broken_derived_terms_automaton(const Exp& kexp)
+  broken_derived_term_automaton(const Exp& kexp)
   {
     A			a_structure(kexp.structure());
     Element<A, T>	out (a_structure);
-    Element<A, T>*	result = do_broken_derived_terms_automaton(out, kexp);
+    Element<A, T>*	result = do_broken_derived_term_automaton(out, kexp);
     if (result != NULL)
       out = *result;
     return out;

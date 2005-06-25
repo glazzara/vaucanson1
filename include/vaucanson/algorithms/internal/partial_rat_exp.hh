@@ -26,7 +26,7 @@
  *
  * This file discribe the PartialExp type and operations on it.
  * @c PartialExp is a way to describe derivatives with a list of pointer.
- * It is usefull in algorithms like @c derived_terms_automaton.
+ * It is usefull in algorithms like @c derived_term_automaton.
  */
 
 # include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>

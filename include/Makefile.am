@@ -292,10 +292,10 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/sum.hxx					   \
 	vaucanson/algorithms/berry_sethi.hxx				   \
 	vaucanson/algorithms/berry_sethi.hh				   \
-	vaucanson/algorithms/derived_terms_automaton.hxx		   \
+	vaucanson/algorithms/derived_term_automaton.hxx		   \
 	vaucanson/algorithms/initial_derivation.hh			   \
 	vaucanson/algorithms/initial_derivation.hxx			   \
-	vaucanson/algorithms/derived_terms_automaton.hh			   \
+	vaucanson/algorithms/derived_term_automaton.hh			   \
 	vaucanson/algorithms/krat_exp_partial_derivation.hxx		   \
 	vaucanson/algorithms/krat_exp_partial_derivation.hh		   \
 	vaucanson/algorithms/krat_exp_constant_term.hh			   \

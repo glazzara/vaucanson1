@@ -1,4 +1,4 @@
-// derived_terms_automaton.hh: this file is part of the Vaucanson project.
+// derived_term_automaton.hh: this file is part of the Vaucanson project.
 // 
 // Vaucanson, a generic library for finite state machines.
 // 
@@ -19,19 +19,19 @@
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file   derived_terms_automaton.hh
+ * @file   derived_term_automaton.hh
  *
  * Provides a converter from expression to automaton based on derivatives.
  *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 17:58:19 2003
  *
- * @see derived_terms_automaton()
+ * @see derived_term_automaton()
  */
 /** @} */
 
-// INTERFACE: void derived_terms_automaton(Automaton& a, const Exp& e) { return vcsn::derived_terms_automaton(*a, e); }
-// INTERFACE: void derived_terms_automaton(GenAutomaton& a, const Exp& e) { return vcsn::derived_terms_automaton(*a, e); }
+// INTERFACE: void derived_term_automaton(Automaton& a, const Exp& e) { return vcsn::derived_term_automaton(*a, e); }
+// INTERFACE: void derived_term_automaton(GenAutomaton& a, const Exp& e) { return vcsn::derived_term_automaton(*a, e); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 
@@ -55,11 +55,11 @@ namespace vcsn {
    */
   template <typename A, typename T, typename Exp>
   void
-  derived_terms_automaton(Element<A, T>& a, const Exp& e);
+  derived_term_automaton(Element<A, T>& a, const Exp& e);
 
   template <typename A, typename T, typename Exp>
   void
-  broken_derived_terms_automaton(Element<A, T>& a, const Exp& e);
+  broken_derived_term_automaton(Element<A, T>& a, const Exp& e);
 
   /**
    * Convert a krat expression into an automaton using derivatives.
@@ -72,7 +72,7 @@ namespace vcsn {
    */
   template <typename A, typename T, typename Exp>
   Element<A, T>
-  derived_terms_automaton(const Exp& e);
+  derived_term_automaton(const Exp& e);
 
   /**
    * Convert a krat expression into an automaton using derivatives.
@@ -90,14 +90,14 @@ namespace vcsn {
    */
   template <typename A, typename T, typename Exp>
   Element<A, T>
-  broken_derived_terms_automaton(const Exp& e);
+  broken_derived_term_automaton(const Exp& e);
 
   /** @} */
 
 } // vcsn
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/algorithms/derived_terms_automaton.hxx>
+#  include <vaucanson/algorithms/derived_term_automaton.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGORITHMS_DERIVED_TERMS_AUTOMATON_HH
