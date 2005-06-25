@@ -1,5 +1,17 @@
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* doc/xml/vaucanson-g.sty,
+	* doc/xml/Vaucanson-G.tex: New. Add Vaucanson-G files, useful to 
+	generate documentations.
+	
+2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* doc/xml/Makefile.am,
+	* doc/xml/xml_proposal.tex: Update XML proposal and fix file 
+	generation.
+
+2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/tests/xml/trans_ref.dot: Fix a problem in reference file.
 
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
