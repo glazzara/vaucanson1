@@ -1,5 +1,10 @@
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* configure.ac,
+	* doc/NEWS.txt: Bump to Vaucanson 0.7.1.
+	
+2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* doc/xml/vaucanson-g.sty,
 	* doc/xml/Vaucanson-G.tex: New. Add Vaucanson-G files, useful to 
 	generate documentations.

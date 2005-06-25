@@ -6,7 +6,64 @@
 
 This document describes major updates to the Vaucanson_ project.
 
-.. _Vaucanson: http://www.lrde.epita.fr/vaucanson
+.. _Vaucanson: http://vaucanson.lrde.epita.fr
+
+
+Vaucanson 0.7.1 June 25, 2005
+=============================
+
+- More algorithms on transducers seen as automata over a direct
+  product of free monoid are available: evaluation, composition covering,
+  composition co-covering, intersection.
+
+- A Broken Derived Term automaton algorithm has been added.
+
+- Two heuristics for state elimination method algorithm have been added.
+
+- src/demos directory has been rearranged:
+
+  + algorithms            : Contains demos of small algorithms.
+
+  + automaton_library      : Contains binaries that generate XML samples of  various automata.
+
+  + function_library      : Contains binaries that call common algorithms available in the library for most of the available predefined types (B, Z, R, (Z, min, +), (Z, max, +), transducers, realtime transducers).
+
+  + transducers
+    -  one_rule_rewriting : Fibonnaci and One Rule Rewriting demonstration.
+
+  + utilities
+    - vgrep              : grep demonstration.
+
+- Some bugs were fixed to ensure library stability. Mainly, algorithms Moore
+  minimization, sub-normalized composition, realtime and projection were fixed.
+
+- Context headers now include by default all standard algorithms. 
+
+- All deprecated documentation has been removed.
+
+- XML proposal has been changed, and some documentation added. As an
+example, Boolean automaton that recognize "a+b" is described as
+follows::
+
+    <automaton>
+      <content>
+        <states>
+          <state name="s0"/>
+        </states>
+        <transitions>
+          <transition src="s0" dst="s0" label="a"/>
+          <transition src="s0" dst="s0" label="b"/>
+          <initial state="s0"/>
+          <final state="s0"/>
+    </automaton>
+
+  Note that now <initial> and <final> are children of <transitions>, and the
+  <initials> and <finals> tag are removed. From now on, all files compliant
+  with the previous XML proposal are not compliant with the new proposal.
+
+.. _Vaucanson-XML: http://vaucanson.lrde.epita.fr/VaucansonXML
+
+
 
 Vaucanson 0.7 May 17, 2005
 ==========================
