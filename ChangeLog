@@ -1,3 +1,8 @@
+2005-07-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/function_library/algorithms.cc: Fix a bug in the computation of 
+	the power.
+
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* configure.ac,

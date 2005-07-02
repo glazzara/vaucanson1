@@ -244,7 +244,7 @@ power_command(int argc, char** argv)
   automaton_t a = get_aut(argv[2]);
   automaton_t p(a);
 
-  for (int i = 1; i <= n; ++i)
+  for (int i = 1; i < n; ++i)
     p = product(p, a);
 
   std::cout << automaton_saver(p, string_out (), XML ());
