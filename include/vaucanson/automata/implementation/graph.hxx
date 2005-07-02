@@ -43,6 +43,7 @@ namespace vcsn
     to(h2)
   {}
 
+  inline
   state_value::state_value()
   {}
 

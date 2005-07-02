@@ -1,3 +1,4 @@
+
 # Makefile.am
 #
 # $Id: Makefile.am 486 2004-03-31 22:30:33Z yann $
@@ -15,8 +16,6 @@ noinst_PROGRAMS = universal b_are_equivalent z_are_equivalent	\
 	b_exp_recognized z_exp_recognized classics
 
 endif
-
-CXXFLAGS += -z muldefs
 
 universal_SOURCES = universal.cc
 

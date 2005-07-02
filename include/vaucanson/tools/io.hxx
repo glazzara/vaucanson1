@@ -60,6 +60,7 @@ namespace vcsn
       return o;
     }
 
+    inline
     std::string string_out::check_empty_word(const std::string& str) const
     {
       if (str.empty())

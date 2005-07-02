@@ -1,7 +1,14 @@
 2005-07-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* src/demos/function_library/algorithms.cc: Fix a bug in the computation of 
-	the power.
+	* include/vaucanson/tools/io.hxx,
+	* include/vaucanson/automata/implementation/graph.hxx,
+	* src/demos/algorithms/Makefile.am: Remove a multiple definition 
+	problem.
+	
+2005-07-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* src/demos/function_library/algorithms.cc: Fix a bug in the 
+	computation of the power.
 
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
