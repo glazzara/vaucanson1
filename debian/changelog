@@ -1,0 +1,12 @@
+vaucanson (0.7.1-1) unstable; urgency=low
+
+  * Upstream release.
+
+ -- Olivier Gournet <olivier.gournet@lrde.epita.fr>  Sun,  3 Jul 2005 19:51:34 +0200
+
+vaucanson (0.7-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Olivier Gournet <victor@lrde.epita.fr>  Thu, 19 May 2005 14:02:53 +0200
+

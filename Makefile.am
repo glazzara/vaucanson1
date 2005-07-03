@@ -4,7 +4,7 @@
 # $Id$
 
 SUBDIRS = include doc src
-EXTRA_DIST = CONTRIBUTORS NOTICE
+EXTRA_DIST = CONTRIBUTORS NOTICE debian
 
 ###
 ### Autoconf needs additional macros.
@@ -37,6 +37,7 @@ dist-hook:
 	    grep -v bench > $(distdir)/configure
 	cp $(srcdir)/doc/README.txt $(distdir)/README
 	cp $(srcdir)/doc/INSTALL.txt $(distdir)/INSTALL
+	rm -rf `find $(distdir)/debian -name .svn`
 
 ###
 ### Sanity check.
@@ -56,3 +57,12 @@ maintainer-check:
 	else \
 	  echo "$@: GNU cppi is required" >&2; \
 	fi
+
+# Build debian packages.
+# Do this from a fresh tarball, not from your svn working directory.
+debian-pkg:
+	dpkg-buildpackage -uc -us -rfakeroot
+
+# Write <package>-pre<revision>, for the buildfarm.
+relname:
+	echo -n $(distdir) > relname

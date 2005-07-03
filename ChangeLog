@@ -1,3 +1,17 @@
+2005-07-03  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
+
+	* debian: New. Control files for debian packages.
+
+	* src/tests/automata/algos/fmp_transducers/Makefile.am,
+	* src/tests/algebra/series/krat/main/Makefile.am: 
+	Add missing headers in EXTRA_DIST.
+
+	* configure.ac,
+	* src/demos/Makefile.am: Add configure --disable-build-demo flag.
+	* config/vcsn.m4: Add some macros for revision number.
+	* doc/Makefile.doc: Add --batch to texi, it shouldn't be interactive.
+	* Makefile.am: Distribute debian directory.
+
 2005-07-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/tools/io.hxx,
