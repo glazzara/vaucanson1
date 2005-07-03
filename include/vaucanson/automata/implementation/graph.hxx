@@ -276,7 +276,6 @@ namespace vcsn
   {
     precondition(has_state(n1));
     precondition(has_state(n2));
-    std::pair<bool, hedge_t> edge;
     hedge_t e;
     if (removed_edges_.size() == 0)
     {

@@ -1,3 +1,8 @@
+2005-07-04  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/automata/implementation/graph.hxx: Fix unused 
+	parameter warning for compatibility with GCC 3.2.
+
 2005-07-03  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
 
 	* debian: New. Control files for debian packages.
