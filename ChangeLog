@@ -1,5 +1,11 @@
 2005-07-04  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/tests/automata/algos/fmp_transducers/Makefile.am,
+	* src/tests/algebra/series/krat/main/Makefile.am: Repair make dist.
+	Reference to inexistant files were made.
+	
+2005-07-04  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/automata/implementation/graph.hxx: Fix unused 
 	parameter warning for compatibility with GCC 3.2.
 
