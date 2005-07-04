@@ -1,3 +1,11 @@
+2005-07-05  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
+
+	* vaucanson.spec: New.
+	* config/vcn.m4, Makefile.am: Fix distcheck, by providing svn
+	revision in the tarball.
+	* configure.ac: Bump to v0.8. It makes no sense to produce
+	vcn-0.7.1pre1038.
+
 2005-07-04  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/tests/automata/algos/fmp_transducers/Makefile.am,

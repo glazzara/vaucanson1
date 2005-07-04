@@ -4,7 +4,8 @@
 # $Id$
 
 SUBDIRS = include doc src
-EXTRA_DIST = CONTRIBUTORS NOTICE debian
+EXTRA_DIST = CONTRIBUTORS NOTICE debian vaucanson.spec svn-revision
+CLEANFILES = svn-revision
 
 ###
 ### Autoconf needs additional macros.
@@ -66,3 +67,5 @@ debian-pkg:
 # Write <package>-pre<revision>, for the buildfarm.
 relname:
 	echo -n $(distdir) > relname
+svn-revision:
+	echo $(SVN_REVISION) > svn-revision

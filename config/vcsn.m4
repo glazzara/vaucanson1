@@ -535,8 +535,8 @@ if test -e ".svn"; then
    SVN_REVISION=`svn status -v -N -q ./ | awk "{ if(\\\$NF == \".\") print \\\$$REVFIELD }"`
    AC_MSG_RESULT($SVN_REVISION)
 else
-  if test -e "svn-revision"; then
-    SVN_REVISION="`cat svn-revision`"
+  if test -e "${srcdir}/svn-revision"; then
+    SVN_REVISION="`cat ${srcdir}/svn-revision`"
     AC_MSG_RESULT($SVN_REVISION)
   else
     SVN_REVISION="0"
