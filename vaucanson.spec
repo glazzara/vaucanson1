@@ -1,5 +1,5 @@
 Name: vaucanson
-Summary: C++ generic library for weighted finite state
+Summary: C++ generic library for weighted finite state machine
 Vendor: LRDE
 Version: 0.7.1
 Release: 1
@@ -8,6 +8,7 @@ URL: http://vaucanson.lrde.epita.fr/
 Group: Development/Tools
 Source: %{name}-%{version}.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
+BuildArch: noarch
 # Requires: 
 
 %description
@@ -43,8 +44,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 /usr/include/*
+/usr/share/aclocal/*
+/usr/share/vaucanson/*
+%doc /usr/share/doc/vaucanson/*
 %doc AUTHORS COPYING NOTICE CONTRIBUTORS README ChangeLog
 
 %changelog
+* Tue Jul 5 2005 Olivier Gournet <victor@lrde.epita.fr>
+- Change to noarch
+- Add docs and examples
+
 * Mon Jul 4 2005 Olivier Gournet <victor@lrde.epita.fr> 
 - RPM integration.

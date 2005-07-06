@@ -63,7 +63,7 @@ binary-arch: build install
 	dh_install
 	dh_link
 	dh_strip
-#	dh_compress
+	dh_compress -X.cc
 	dh_fixperms
 	dh_installdeb
 	dh_gencontrol

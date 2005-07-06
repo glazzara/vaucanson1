@@ -1,3 +1,12 @@
+2005-07-06  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
+
+	* debian/control, debian/vaucanson.docs, debian/rules: 
+	Fix, see debian/channgelog.
+	* debian/vaucanson-dev.install: Remove.
+	* vaucanson.spec:
+	Distribute documentation and samples.
+	Change BuildArch to noarch.
+
 2005-07-05  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
 
 	* vaucanson.spec: New.
