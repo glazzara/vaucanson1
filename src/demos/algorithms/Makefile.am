@@ -9,6 +9,8 @@ if XML_CHECK
   AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
   AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
 
+all-am: vaucanson.xsd
+
 vaucanson.xsd:
 	ln -sf $(top_builddir)/doc/xml/vaucanson.xsd
 

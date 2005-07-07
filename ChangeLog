@@ -1,5 +1,12 @@
 2005-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* src/demos/function_library/Makefile.am,
+	* src/demos/algorithms/Makefile.am,
+	* src/demos/transducers/Makefile.am: Add rule to create a link to the 
+	XSD (needed by XML binaries) to all-am.
+	
+2005-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* include/vaucanson/xml/node.hxx,
 	* include/vaucanson/xml/tools.hxx: Fix a bug in XML input for realtime
 	transducers. <semiring> node was badly handled.
