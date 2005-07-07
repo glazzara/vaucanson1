@@ -1,3 +1,9 @@
+2005-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/xml/node.hxx,
+	* include/vaucanson/xml/tools.hxx: Fix a bug in XML input for realtime
+	transducers. <semiring> node was badly handled.
+
 2005-07-06  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
 
 	* debian/control, debian/vaucanson.docs, debian/rules: 

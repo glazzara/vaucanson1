@@ -234,13 +234,24 @@ PROCESS_NODE(transitions)
       tools::ensure_semiring_type(node, a, param);
     }
 
+
     TParm
-    template <class U>
     void
-    semiringNode<TRANStype>::process(xercesc::DOMElement* node, TRANStype& a,
-				     U& param,
-				     typename Node<TRANStype>::map_t& m,
-				     typename Node<TRANStype>::factory_t& f)
+    process_semiring(xercesc::DOMElement* node, TRANStype& a,
+		     typename TRANStype::semiring_t::semiring_t& param,
+		     typename Node<TRANStype>::map_t&,
+		     typename Node<TRANStype>::factory_t&)
+    {
+      using namespace xercesc;
+      tools::ensure_semiring_type(node, a, param);
+    }
+
+    TParm
+    void
+    process_semiring(xercesc::DOMElement* node, TRANStype& a,
+		     typename TRANStype::semiring_t& param,
+		     typename Node<TRANStype>::map_t& m,
+		     typename Node<TRANStype>::factory_t& f)
     {
       using namespace xercesc;
       tools::ensure_semiring_type(node, a, param);
@@ -249,14 +260,40 @@ PROCESS_NODE(transitions)
 
       /// FIXME: Remove these const_cast.
       if (! node || ! node->getFirstChild())
-	nd->process(0, a, const_cast<typename TRANStype::monoid_t&>
+	nd->process(0, a, const_cast<typename TRANStype::semiring_t::monoid_t&>
 		    (param.monoid()), m, f);
       else
 	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
-	    nd->process(static_cast<DOMElement*>(n), a,
-			const_cast<typename TRANStype::monoid_t&>
-			(param.monoid()), m, f);
+	    {
+	      if (! XMLString::compareIString(n->getNodeName(), 
+					      STR2XML("monoid")))
+		nd->process(static_cast<DOMElement*>(n), a,
+			    const_cast
+			    <typename TRANStype::semiring_t::monoid_t&>
+			    (param.monoid()), m, f);
+	      else
+		{
+		  semiringNode<TRANStype>* sg = new semiringNode<TRANStype>;
+		  sg->process(static_cast<DOMElement*>(n), a,
+			      const_cast
+			      <typename TRANStype::semiring_t::semiring_t&>
+			      (param.semiring()), m, f);
+		  
+		}
+	    }
+    }
+
+
+    TParm
+    template <class U>
+    void
+    semiringNode<TRANStype>::process(xercesc::DOMElement* node, TRANStype& a,
+				     U& param,
+				     typename Node<TRANStype>::map_t& m,
+				     typename Node<TRANStype>::factory_t& f)
+    {
+      process_semiring(node, a, param, m, f);
     }
 
     /*---------.
@@ -275,8 +312,12 @@ PROCESS_NODE(transitions)
 
       // Fill monoid with letters.
       if (! node || ! node->getFirstChild())
-	for (unsigned int i = 0; i < 256; ++i)
-	  param.alphabet().insert(i);
+	{
+	  for (unsigned int i = 'a'; i < 'z'; ++i)
+	    param.alphabet().insert(i);
+	  for (unsigned int i = 'A'; i < 'Z'; ++i)
+	    param.alphabet().insert(i);
+	}
       else
 	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)

@@ -485,10 +485,35 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	  FAIL("Bad semiring");
       }
 
+
+      template <class S, class T>
+      void ensure_semiring_type(const xercesc::DOMElement* node,
+				const Element<Transducer<S>, T>&,
+				const typename Element<Transducer<S>, T>
+				::semiring_t::semiring_t& param)
+      {
+	typedef Element<Transducer<S>, T> trans_t;
+	typedef typename
+	  trans_t::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t 
+	  value_t;
+
+	std::string set(tools::get_semiring_set(param, value_t()));
+	std::string set_ref;
+
+	if (node && node->hasAttribute(STR2XML("set")))
+	  set_ref = xml2str(node->getAttribute(STR2XML("set")));
+	else
+	  set_ref = "B";
+	if (set_ref != set)
+	  FAIL("Bad semiring");
+      }
+
+
       template <class S, class T, class U>
       void ensure_semiring_type(const xercesc::DOMElement* node,
 				const Element<Transducer<S>, T>&,
-				const U& param)
+				const typename Element<Transducer<S>, T>
+				::semiring_t& param)
       {
 	typedef Element<Transducer<S>, T> trans_t;
 	typedef typename
