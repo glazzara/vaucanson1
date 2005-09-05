@@ -1,10 +1,15 @@
+2005-09-05  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	* include/vaucanson/automata/implementation/transpose_view.hxx: Fix
+	bug. Labels of initial and final states were not transposed.
+
 2005-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/demos/function_library/Makefile.am,
 	* src/demos/algorithms/Makefile.am,
-	* src/demos/transducers/Makefile.am: Add rule to create a link to the 
+	* src/demos/transducers/Makefile.am: Add rule to create a link to the
 	XSD (needed by XML binaries) to all-am.
-	
+
 2005-07-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/node.hxx,
@@ -13,7 +18,7 @@
 
 2005-07-06  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
 
-	* debian/control, debian/vaucanson.docs, debian/rules: 
+	* debian/control, debian/vaucanson.docs, debian/rules:
 	Fix, see debian/channgelog.
 	* debian/vaucanson-dev.install: Remove.
 	* vaucanson.spec:
@@ -33,10 +38,10 @@
 	* src/tests/automata/algos/fmp_transducers/Makefile.am,
 	* src/tests/algebra/series/krat/main/Makefile.am: Repair make dist.
 	Reference to inexistant files were made.
-	
+
 2005-07-04  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/automata/implementation/graph.hxx: Fix unused 
+	* include/vaucanson/automata/implementation/graph.hxx: Fix unused
 	parameter warning for compatibility with GCC 3.2.
 
 2005-07-03  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
@@ -44,7 +49,7 @@
 	* debian: New. Control files for debian packages.
 
 	* src/tests/automata/algos/fmp_transducers/Makefile.am,
-	* src/tests/algebra/series/krat/main/Makefile.am: 
+	* src/tests/algebra/series/krat/main/Makefile.am:
 	Add missing headers in EXTRA_DIST.
 
 	* configure.ac,
@@ -57,29 +62,29 @@
 
 	* include/vaucanson/tools/io.hxx,
 	* include/vaucanson/automata/implementation/graph.hxx,
-	* src/demos/algorithms/Makefile.am: Remove a multiple definition 
+	* src/demos/algorithms/Makefile.am: Remove a multiple definition
 	problem.
-	
+
 2005-07-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* src/demos/function_library/algorithms.cc: Fix a bug in the 
+	* src/demos/function_library/algorithms.cc: Fix a bug in the
 	computation of the power.
 
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* configure.ac,
 	* doc/NEWS.txt: Bump to Vaucanson 0.7.1.
-	
+
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* doc/xml/vaucanson-g.sty,
-	* doc/xml/Vaucanson-G.tex: New. Add Vaucanson-G files, useful to 
+	* doc/xml/Vaucanson-G.tex: New. Add Vaucanson-G files, useful to
 	generate documentations.
-	
+
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* doc/xml/Makefile.am,
-	* doc/xml/xml_proposal.tex: Update XML proposal and fix file 
+	* doc/xml/xml_proposal.tex: Update XML proposal and fix file
 	generation.
 
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
@@ -87,9 +92,9 @@
 	* src/tests/xml/trans_ref.dot: Fix a problem in reference file.
 
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
-	This patch renames the derived_terms_automaton to 
+	This patch renames the derived_terms_automaton to
 	derived_term_automaton.
-	
+
 	* include/vaucanson/algorithms/derived_terms_automaton.hxx: Move to...
 	* src/tests/automata/algos/letter_combination_labeled_graphs/derived_term_automaton_test.hh
 	* include/vaucanson/algorithms/derived_term_automaton.hh,
@@ -106,21 +111,21 @@
 	* src/benchs/derived_terms/derived_terms_bench.hh,
 	* src/demos/function_library/algorithms.cc,
 	* doc/NEWS.txt: Update accordingly.
-	
+
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* doc/xml/vaucanson.xsd: Fixes to add drawing properties and identity
 	symbol for monoid.
-	* doc/xml/xml_proposal.tex: Add a document about the XML proposal. 
+	* doc/xml/xml_proposal.tex: Add a document about the XML proposal.
 	* doc/xml/Makefile.am: Update accordingly.
-	
+
 2005-06-25  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* src/demos/function_library/tdc_algorithms.cc,
 	* src/demos/function_library/rt_tdc_algorithms.cc,
-	* src/demos/function_library/algorithms.cc: Add are-isomorphic and 
+	* src/demos/function_library/algorithms.cc: Add are-isomorphic and
 	is-empty algorithms to demo programs.
-	
+
 2005-06-25  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* Makefile.am: Fix touch'ing that should be removed in distributed
@@ -138,7 +143,7 @@
 	* Makefile.am: Fix grep'ing -v of `configure' on benchs.
 
 2005-06-24  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
-	
+
 	The main aims of this patch is to change Vaucanson's Licence to GPL
 	and to remove `AUTHORS' from headers in all files.
 	* include/vaucanson/r_automaton.hh,
