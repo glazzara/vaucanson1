@@ -625,6 +625,7 @@ namespace vcsn {
       Tw,
       series_set_elt_value_t,
       Tm,
+      NoTag,
       NoTag
       >
       automaton_impl_t;

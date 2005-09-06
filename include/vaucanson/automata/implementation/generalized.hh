@@ -17,6 +17,7 @@
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_GENERALIZED_HH
 # define VCSN_AUTOMATA_IMPLEMENTATION_GENERALIZED_HH
 
+# include <map>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/concept/copy.hh>
@@ -25,7 +26,6 @@
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
 # include <vaucanson/automata/implementation/graph.hh>
-# include <map>
 
 
 namespace vcsn {
@@ -44,7 +44,8 @@ namespace vcsn {
     typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
     typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
-
+    typedef typename Auto_::value_t::geometry_t		geometry_t;
+    
     typedef vcsn::Element
     <vcsn::Automata<series_set_t>,
      Graph<labels_are_series,
@@ -52,7 +53,8 @@ namespace vcsn {
 	   semiring_elt_value_t,
 	   rat::exp<monoid_elt_value_t, semiring_elt_value_t>,
 	   typename monoid_t::letter_t,
-	   NoTag>
+	   NoTag,
+	   geometry_t>
     > automaton_t;
   };
 

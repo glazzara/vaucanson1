@@ -1,3 +1,44 @@
+2005-09-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	This patch changes the support of geometric coordinates for automata. 
+	The former system (an attribute in the graph class) is replaced by a
+	policy system, using the vcsn::geometry new class.
+
+	* include/vaucanson/automata/implementation/geometry.hh,
+	* include/vaucanson/automata/implementation/geometry.hxx: New. 
+	vcsn::geometry class, used to handle geometric coordinates for 
+	automata.
+
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx: Update geometry
+	support and related types. Add geometry_t type for automata.
+
+	* include/vaucanson/automata/implementation/automaton_view.hh,
+	* include/vaucanson/automata/implementation/automaton_view.hxx,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hxx: Add
+	op_get_geometry() operators.
+
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx: Add default
+	op_get_geometry() operators.
+
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Update 
+	local graph type with extra template parameter for geometry.
+
+	* include/vaucanson/contexts/generic_automaton_impl.thh: Update default
+	graph type with new template parameter for geometry: vcsn::geometry.
+
+	* include/vaucanson/algorithms/product.hxx: Updates in the graphic 
+	system for coordinates. Now uses the new vcsn::geometry class, and 
+	behaves well if geometry is not supported in the graph implementation.
+
+	* include/vaucanson/automata/implementation/generalized.hh: Update 
+	graph type to support geometry.
+
+	* include/Makefile.am: Update with new files.
+
 2005-09-05  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	* include/vaucanson/automata/implementation/transpose_view.hxx: Fix

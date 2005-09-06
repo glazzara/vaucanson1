@@ -52,12 +52,12 @@ namespace vcsn
   | Convenient macros |
   `------------------*/
 
-# define TParam							\
-  template <class Kind, class WordValue, class WeightValue,	\
-	    class SeriesValue, class Letter, class Tag>
+# define TParam								\
+  template <class Kind, class WordValue, class WeightValue,		\
+	    class SeriesValue, class Letter, class Tag, class Geometry>
 
-# define GClass							\
-  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag>
+# define GClass								   \
+  Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
 
 
   /*-----------------------.
@@ -452,6 +452,7 @@ namespace vcsn
 	    class SeriesValue,
 	    class Letter,
 	    class Tag,
+	    class Geometry,
 	    typename  OutputIterator,
 	    typename L>
   void op_rdelta(const AutomataBase<S>&,
@@ -465,12 +466,12 @@ namespace vcsn
   }
 
   template <class S, class WordValue, class WeightValue, class SeriesValue,
-	    class Letter, class Tag,
+	    class Letter, class Tag, class Geometry,
 	    typename OutputIterator, typename L>
   void op_letter_delta(const AutomataBase<S>&,
 		       const Graph<labels_are_letters,
 		       WordValue, WeightValue,
-		       SeriesValue, Letter, Tag>& v,
+		       SeriesValue, Letter, Tag, Geometry>& v,
 		       OutputIterator res,
 		       hstate_t from,
 		       const L& letter,
@@ -502,19 +503,19 @@ namespace vcsn
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-            class Letter, class Tag, class I>
+            class Letter, class Tag, class Geometry, class I>
   Tag& op_tag(const AutomataBase<I>&,
               Graph<Kind, WordValue, WeightValue,
-                    SerieValue ,Letter, Tag>& v)
+                    SerieValue ,Letter, Tag, Geometry>& v)
   {
     return v.tag();
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-            class Letter, class Tag, class I>
+            class Letter, class Tag, class Geometry, class I>
   const Tag& op_tag(const AutomataBase<I>&,
                     const Graph<Kind, WordValue, WeightValue,
-		                SerieValue ,Letter, Tag>& v)
+		                SerieValue ,Letter, Tag, Geometry>& v)
   {
     return v.tag();
   }
@@ -525,35 +526,35 @@ namespace vcsn
   `---------*/
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-	    class Letter, class Tag, class I>
-  std::map<hstate_t, std::pair<double, double> >&
+	    class Letter, class Tag, class Geometry, class I>
+  Geometry&
   op_geometry(const AutomataBase<I>&,
 	      Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag>& v)
+	      SerieValue, Letter, Tag, Geometry>& v)
   {
     return v.geometry();
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-            class Letter, class Tag, class I>
-  const std::map<hstate_t, std::pair<double, double> >&
+            class Letter, class Tag, class Geometry, class I>
+  const Geometry&
   op_geometry(const AutomataBase<I>&,
 	      const Graph<Kind, WordValue, WeightValue,
-	      SerieValue, Letter, Tag>& v)
+	      SerieValue, Letter, Tag, Geometry>& v)
   {
     return v.geometry();
   }
 
 
   TParam
-  const typename GClass::geometry_map_t&
+  const Geometry&
   GClass::geometry() const
   {
     return geometry_;
   }
 
   TParam
-  typename GClass::geometry_map_t&
+  Geometry&
   GClass::geometry()
   {
     return geometry_;

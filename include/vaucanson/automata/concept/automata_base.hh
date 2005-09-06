@@ -77,7 +77,7 @@ namespace vcsn {
     typedef undefined_type final_t;
     typedef undefined_type final_iterator;
     typedef undefined_type final_support_t;
-    typedef undefined_type geometry_map_t;
+    typedef undefined_type geometry_t;
  };
 
   /*-----------------------------------.
@@ -187,7 +187,7 @@ namespace vcsn {
     typedef typename automaton_traits<T>::final_iterator final_iterator;
 
     /** type of the geometry map containing state coordinates. */
-    typedef std::map<hstate_t, std::pair<double, double> > geometry_map_t;
+    typedef typename automaton_traits<T>::geometry_t	geometry_t;
     
     /** the set of series from which is build the automaton (const version). */
     const series_set_t& series() const;
@@ -199,10 +199,10 @@ namespace vcsn {
     const tag_t& tag() const;
 
     /** the optional geometry information aggregated to the automaton. */
-    geometry_map_t& geometry();
+    geometry_t& geometry();
 
     /** the optional geometry information aggregated to the automaton. */
-    const geometry_map_t& geometry() const;
+    const geometry_t& geometry() const;
 
     /** return true if the automaton is consistent. */
     bool exists() const;

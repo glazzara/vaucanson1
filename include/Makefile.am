@@ -224,6 +224,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/automata/concept/transducer_ops.hxx			   \
 	vaucanson/automata/implementation/graph.hh			   \
 	vaucanson/automata/implementation/graph.hxx			   \
+	vaucanson/automata/implementation/geometry.hh			   \
+	vaucanson/automata/implementation/geometry.hxx			   \
 	vaucanson/automata/implementation/kind_adapter.hh		   \
 	vaucanson/automata/implementation/generalized.hh		   \
 	vaucanson/automata/implementation/generalized.hxx		   \

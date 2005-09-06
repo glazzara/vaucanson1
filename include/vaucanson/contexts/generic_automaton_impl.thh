@@ -15,6 +15,7 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/automata/implementation/graph.hh>
+#include <vaucanson/automata/implementation/geometry.hh>
 
 namespace vcsn
 {
@@ -28,7 +29,8 @@ namespace vcsn
       series_set_elt_t::value_t::semiring_elt_value_t,
       series_set_elt_t::value_t,
       series_set_elt_t::set_t::monoid_t::letter_t,
-      NoTag
+      NoTag,
+      geometry
       >
     automaton_impl_t;
 

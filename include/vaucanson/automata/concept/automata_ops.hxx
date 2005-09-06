@@ -43,6 +43,20 @@ namespace vcsn {
   }
 
   template <class S, class T>
+  const typename automaton_traits<T>::geometry_t&
+  op_get_geometry(const AutomataBase<S>&, const T& v)
+  {
+    return v.geometry();
+  }
+
+  template <class S, class T>
+  typename automaton_traits<T>::geometry_t&
+  op_get_geometry(const AutomataBase<S>&, T& v)
+  {
+    return v.geometry();
+  }
+  
+  template <class S, class T>
   bool
   op_exists(const AutomataBase<S>& s, const T& v)
   {

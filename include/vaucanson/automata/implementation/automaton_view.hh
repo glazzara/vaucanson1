@@ -60,6 +60,14 @@ namespace vcsn {
   op_get_tag(const AutomataBase<S>&, IdentityView<T>&);
 
   template <class S, class T>
+  const typename automaton_traits<T>::geometry_t&
+  op_get_geometry(const AutomataBase<S>&, const IdentityView<T>&);
+
+  template <class S, class T>
+  typename automaton_traits<T>::geometry_t&
+  op_get_geometry(const AutomataBase<S>&, IdentityView<T>&);
+
+  template <class S, class T>
   bool
   op_exists(const AutomataBase<S>&, const IdentityView<T>&);
 

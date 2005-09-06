@@ -1,17 +1,17 @@
 // transpose_view.hxx: this file is part of the Vaucanson project.
-//
+// 
 // Vaucanson, a generic library for finite state machines.
-//
+// 
 // Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
-//
+// 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-//
+// 
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-//
+// 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_TRANSPOSE_VIEW_HXX
@@ -71,6 +71,20 @@ namespace vcsn {
   op_get_tag(const AutomataBase<S>& s, TransposeView<T>& v)
   {
     return op_get_tag(s, v.object());
+  }
+
+  template <class S, class T>
+  const typename automaton_traits<T>::geometry_t&
+  op_get_geometry(const AutomataBase<S>& s, const TransposeView<T>& v)
+  {
+    return op_get_geometry(s, v.object());
+  }
+
+  template <class S, class T>
+  typename automaton_traits<T>::geometry_t&
+  op_get_geometry(const AutomataBase<S>& s, TransposeView<T>& v)
+  {
+    return op_get_geometry(s, v.object());
   }
 
   template <class S, class T>
@@ -216,8 +230,8 @@ namespace vcsn {
   template <class S, class T>
   typename Element<S, T>::series_set_elt_value_t
   op_series_value_of(const AutomataBase<S>& s,
-		     const TransposeView<T>& v,
-		     hedge_t e)
+		    const TransposeView<T>& v,
+		    hedge_t e)
   {
     return op_series_value_of(s, v.object(), e);
   }

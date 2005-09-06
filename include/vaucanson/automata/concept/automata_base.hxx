@@ -68,7 +68,7 @@ namespace vcsn {
 
   /** the optional geometry information aggregated to the automaton. */
   template <typename Self, typename T>
-  typename MetaElement<AutomataBase<Self>, T>::geometry_map_t&
+  typename MetaElement<AutomataBase<Self>, T>::geometry_t&
   MetaElement<AutomataBase<Self>, T>::geometry()
   {
     return op_geometry(this->structure(), this->value());
@@ -76,7 +76,7 @@ namespace vcsn {
 
   /** the optional geometry information aggregated to the automaton. */
   template <typename Self, typename T>
-  const typename MetaElement<AutomataBase<Self>, T>::geometry_map_t&
+  const typename MetaElement<AutomataBase<Self>, T>::geometry_t&
   MetaElement<AutomataBase<Self>, T>::geometry() const
   {
     return op_geometry(this->structure(), this->value());
