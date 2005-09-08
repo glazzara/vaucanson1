@@ -1,17 +1,17 @@
 // node.hxx: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_XML_NODE_HXX
@@ -95,7 +95,7 @@ namespace vcsn
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)		      \
 	    {								      \
 	      DOMElement* elt = static_cast<DOMElement*>(n);		      \
-	      process_type(elt, aut, m, f, monoid_done, semiring_done);      \
+	      process_type(elt, aut, m, f, monoid_done, semiring_done);       \
 	    }								      \
     }
 
@@ -160,17 +160,11 @@ PROCESS_NODE(transitions)
     void
     stateNode<T>::process(xercesc::DOMElement* node, T& aut,
 			  typename Node<T>::map_t& m,
-			  typename Node<T>::factory_t&)
+			  typename Node<T>::factory_t& f)
     {
-      m[xml2str(node->getAttribute(STR2XML("name")))] = aut.add_state();
-
-      using namespace xercesc;
-      for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
-	if (n->getNodeType() == DOMNode::ELEMENT_NODE)
-	  {
-	    //DOMElement* elt = static_cast<DOMElement*> (n);
-	    // Deals with geometry tag.
-	  }
+      hstate_t state = aut.add_state();
+      m[xml2str(node->getAttribute(STR2XML("name")))] = state;
+      handle_geometry(node, aut, aut.geometry().states()[state], m, f);
     }
 
 
@@ -181,12 +175,13 @@ PROCESS_NODE(transitions)
     void
     transitionNode<T>::process(xercesc::DOMElement* node, T& aut,
 			       typename Node<T>::map_t& m,
-			       typename Node<T>::factory_t&)
+			       typename Node<T>::factory_t& f)
     {
       hstate_t src = m[xml2str(node->getAttribute(STR2XML("src")))];
       hstate_t dst = m[xml2str(node->getAttribute(STR2XML("dst")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
-      aut.add_series_edge(src, dst, s);
+      hedge_t e = aut.add_series_edge(src, dst, s);
+      handle_geometry(node, aut, aut.geometry().edges()[e], m, f);
     }
 
 
@@ -197,12 +192,14 @@ PROCESS_NODE(transitions)
     void
     initialNode<T>::process(xercesc::DOMElement* node, T& aut,
 			    typename Node<T>::map_t& m,
-			    typename Node<T>::factory_t&)
+			    typename Node<T>::factory_t& f)
     {
       hstate_t state = m[xml2str(node->getAttribute(STR2XML("state")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       aut.set_initial(state, s);
+      handle_geometry(node, aut, aut.geometry().initials()[state], m, f);
     }
+
 
 
     /*--------.
@@ -212,11 +209,12 @@ PROCESS_NODE(transitions)
     void
     finalNode<T>::process(xercesc::DOMElement* node, T& aut,
 			  typename Node<T>::map_t& m,
-			  typename Node<T>::factory_t&)
+			  typename Node<T>::factory_t& f)
     {
       hstate_t state = m[xml2str(node->getAttribute(STR2XML("state")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       aut.set_final(state, s);
+      handle_geometry(node, aut, aut.geometry().finals()[state], m, f);
     }
 
 
@@ -266,7 +264,7 @@ PROCESS_NODE(transitions)
 	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
 	    {
-	      if (! XMLString::compareIString(n->getNodeName(), 
+	      if (! XMLString::compareIString(n->getNodeName(),
 					      STR2XML("monoid")))
 		nd->process(static_cast<DOMElement*>(n), a,
 			    const_cast
@@ -279,7 +277,7 @@ PROCESS_NODE(transitions)
 			      const_cast
 			      <typename TRANStype::semiring_t::semiring_t&>
 			      (param.semiring()), m, f);
-		  
+
 		}
 	    }
     }
@@ -404,6 +402,85 @@ PROCESS_NODE(transitions)
       tools::insert_letter(param,
 			   xml2str(node->getAttribute(STR2XML("value"))));
     }
+
+
+    /*-----------.
+    | <geometry> |
+    `-----------*/
+    template <class T>
+    template <class U>
+    void
+    geometryNode<T>::process(xercesc::DOMElement* node, T&,
+			     U& param,
+			     typename Node<T>::map_t&,
+			     typename Node<T>::factory_t&)
+    {
+      double x, y;
+      if (node->hasAttribute(STR2XML("x")) && node->hasAttribute(STR2XML("y")))
+	{
+	  std::istringstream xstr(xml2str(node->getAttribute(STR2XML("x"))));
+	  std::istringstream ystr(xml2str(node->getAttribute(STR2XML("y"))));
+	  xstr >> x;
+	  ystr >> y;
+	  param = std::make_pair(x, y);
+	}
+      /// FIXME: handle attribute "direction".
+    }
+
+
+    /*----------.
+    | <drawing> |
+    `----------*/
+    template <class T>
+    template <class U>
+    void
+    drawingNode<T>::process(xercesc::DOMElement* node, T&,
+			    U& param,
+			    typename Node<T>::map_t&,
+			    typename Node<T>::factory_t&)
+    {
+      double x, y;
+      if (node->hasAttribute(STR2XML("labelPositionX")) &&
+	  node->hasAttribute(STR2XML("labelPositionY")))
+	{
+	  std::istringstream
+	    xstr(xml2str(node->getAttribute(STR2XML("labelPositionX"))));
+	  std::istringstream
+	    ystr(xml2str(node->getAttribute(STR2XML("labelPositionY"))));
+	  xstr >> x;
+	  ystr >> y;
+	  param = std::make_pair(x, y);
+	}
+    }
+
+
+    template <class T, class U>
+    void
+    handle_geometry(xercesc::DOMElement* node, T& aut,
+		    U& param,
+		    typename Node<T>::map_t& m,
+		    typename Node<T>::factory_t& f)
+    {
+      std::string geometry("geometry");
+      std::string drawing("drawing");
+
+      using namespace xercesc;
+      for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
+	if (n->getNodeType() == DOMNode::ELEMENT_NODE)
+	  {
+	    if (xml2str(n->getNodeName()) == geometry)
+	      {
+		geometryNode<T>* nd = new geometryNode<T>;
+		nd->process(static_cast<DOMElement*>(n), aut, param, m, f);
+	      }
+	    else if (xml2str(n->getNodeName()) == drawing)
+	      {
+		drawingNode<T>* nd = new drawingNode<T>;
+		nd->process(static_cast<DOMElement*>(n), aut, param, m, f);
+	      }
+	  }
+    }
+
 
   } // ! xml
 

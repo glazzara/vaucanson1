@@ -1,17 +1,17 @@
 // xml_converter.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_XML_XML_CONVERTER_HH
@@ -88,7 +88,7 @@ namespace vcsn
       void create_document(const Auto& aut);
 
       xercesc::DOMElement* root_get() { return root_;}
-      
+
     private:
       std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);
       void create_transition(hedge_t, const Auto&,
@@ -97,8 +97,11 @@ namespace vcsn
 			  xercesc::DOMElement*, map_t&);
       void create_final(hstate_t, const Auto&,
 			xercesc::DOMElement*, map_t&);
-      void add_xml_geometry(hstate_t, const Auto& aut, xercesc::DOMElement*);
-      void add_xml_geometry(hedge_t, const Auto& aut, xercesc::DOMElement*);
+
+      template <class Map, class Key>
+      void add_xml_geometry(Map&, Key&, xercesc::DOMElement* node);
+      template <class Map, class Key>
+      void add_xml_drawing(Map&, Key&, xercesc::DOMElement* node);
 
       xercesc::DOMImplementation*			impl_;
       xercesc::DOMDocument*				doc_;

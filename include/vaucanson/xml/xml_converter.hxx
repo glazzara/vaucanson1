@@ -1,17 +1,17 @@
 // xml_converter.hxx: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_XML_XML_CONVERTER_HXX
@@ -100,7 +100,7 @@ namespace vcsn
       xercesc::DOMElement* node = doc_->createElement(STR2XML("state"));
       root->appendChild(node);
       node->setAttribute(STR2XML("name"), STR2XML(os.str().c_str()));
-      add_xml_geometry(s, aut, node);
+      add_xml_geometry(aut.geometry().states(), s, node);
 
       return os.str();
     }
@@ -122,8 +122,9 @@ namespace vcsn
       node->setAttribute(STR2XML("dst"),
 			 STR2XML(state2str[aut.aim_of(e)].c_str()));
       chooser_.create_label(e, aut, node);
-      add_xml_geometry(e, aut, node);
+      add_xml_drawing(aut.geometry().edges(), e, node);
     }
+
 
     // Create an initial state in the XML document.
     template <class Auto>
@@ -139,8 +140,9 @@ namespace vcsn
       node->setAttribute(STR2XML("state"),
 			 STR2XML(state2str[s].c_str()));
       chooser_.create_initial_label(s, aut, node);
-      add_xml_geometry(s, aut, node);
+      add_xml_drawing(aut.geometry().initials(), s, node);
     }
+
 
     // Create a final state in the XML document.
     template <class Auto>
@@ -156,28 +158,56 @@ namespace vcsn
       node->setAttribute(STR2XML("state"),
 			 STR2XML(state2str[s].c_str()));
       chooser_.create_final_label(s, aut, node);
-      add_xml_geometry(s, aut, node);
+      add_xml_drawing(aut.geometry().finals(), s, node);
     }
 
-    // Add geometry informations about the state in the XML document.
+
+    // Add geometry informations in the XML document.
     template <class Auto>
-    void xml_converter<Auto>::add_xml_geometry(hstate_t,
-					       const Auto&,
-					       xercesc::DOMElement*)
+    template <class Map, class Key>
+    void xml_converter<Auto>::add_xml_geometry(Map& map,
+					       Key& key,
+					       xercesc::DOMElement* root)
     {
-      /// FIXME: Code this !
+      typename Map::const_iterator iter;
+      if ((iter = map.find(key)) != map.end())
+	{
+	  std::ostringstream osx, osy;
+	  osx << iter->second.first;
+	  xercesc::DOMElement* nd = doc_->createElement(STR2XML("geometry"));
+	  root->appendChild(nd);
+	  nd->setAttribute(STR2XML("x"),
+			   STR2XML(osx.str().c_str()));
+	  osy << iter->second.second;
+	  nd->setAttribute(STR2XML("y"),
+			   STR2XML(osy.str().c_str()));
+	}
     }
 
-    // Add geometry informations about the transition in the XML document.
+
+    // Add drawing informations in the XML document.
     template <class Auto>
-    void xml_converter<Auto>::add_xml_geometry(hedge_t,
-					       const Auto&,
-					       xercesc::DOMElement*)
+    template <class Map, class Key>
+    void xml_converter<Auto>::add_xml_drawing(Map& map,
+					      Key& key,
+					      xercesc::DOMElement* root)
     {
-      /// FIXME: Code this !
+      typename Map::const_iterator iter;
+      if ((iter = map.find(key)) != map.end())
+	{
+	  std::ostringstream osx, osy;
+	  osx << iter->second.first;
+	  xercesc::DOMElement* nd = doc_->createElement(STR2XML("drawing"));
+	  root->appendChild(nd);
+	  nd->setAttribute(STR2XML("labelPositionX"),
+			   STR2XML(osx.str().c_str()));
+	  osy << iter->second.second;
+	  nd->setAttribute(STR2XML("labelPositionY"),
+			   STR2XML(osy.str().c_str()));
+	}
     }
 
-    
+
     /**
      * @brief Load automaton from stream.
      *

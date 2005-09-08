@@ -1,17 +1,17 @@
 // node.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_XML_NODE_HH
@@ -28,6 +28,7 @@
  * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
  */
 # include <string>
+# include <sstream>
 # include <map>
 # include <xercesc/dom/DOM.hpp>
 # include <vaucanson/design_pattern/factory.hh>
@@ -98,6 +99,8 @@ CREATE_PARAM_CLASSNODE(semiring)
 CREATE_PARAM_CLASSNODE(monoid)
 CREATE_PARAM_CLASSNODE(freemonoid)
 CREATE_PARAM_CLASSNODE(generator)
+CREATE_PARAM_CLASSNODE(geometry)
+CREATE_PARAM_CLASSNODE(drawing)
 
 
 # define TParm					\
