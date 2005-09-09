@@ -62,9 +62,5 @@ int main()
   u1.add_weighted_edge(t, u, true, make_couple(A, A, "b", "1").value());
   u1.add_weighted_edge(u, t, true, make_couple(A, A, "1", "a").value());
 
-  std::ofstream file("u1.xml");
-
-  tools::xml_dump(file, u1, "u1");
-
-  std::cout << "File u1.xml has been created." << std::endl;
+  tools::xml_dump(std::cout, u1, "u1");
 }

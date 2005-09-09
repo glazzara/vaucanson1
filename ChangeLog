@@ -1,3 +1,13 @@
+2005-09-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	See the next entry.
+
+	* src/demos/transducers/u1.cc, src/demos/transducers/t1.cc: Dump the
+	automata to std::cout.
+	* src/demos/transducers/Makefile.am: Do not build t1 and u1.
+	Ship their output instead.
+	* src/demos/transducers/u1.xml, src/demos/transducers/u1.xml: New.
+
 2005-09-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	Avoid useless compilations to end users, without losing any
