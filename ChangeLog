@@ -1,5 +1,17 @@
 2005-09-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	Do compile with GCC 4. Compilations still produce lots of
+	warnings. make check has not been tested.
+
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/implementation/graph.hh: Remove
+	duplicate typedefs.
+	* include/vaucanson/misc/unique.hxx: Introduce template
+	specializations with "template <>" lines.
+
+2005-09-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	Fix compilation errors.
 
 	* src/benchs/common/bench_automaton.hh,

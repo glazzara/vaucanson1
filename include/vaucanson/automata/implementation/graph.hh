@@ -1,17 +1,17 @@
 // graph.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_AUTOMATA_IMPLEMENTATION_GRAPH_HH
@@ -214,7 +214,7 @@ namespace vcsn
 
   private:
     geometry_t		geometry_;
-    
+
   public:
     state_data_t		states_;
     edge_data_t			edges_;
@@ -298,7 +298,7 @@ namespace vcsn
 	      SerieValue, Letter, Tag, Geometry>&);
 
 
-  
+
 # undef TParam
 
   // This implementation can be used as an implementation of automaton.
@@ -327,9 +327,6 @@ namespace vcsn
     typedef Tag						tag_t;
     typedef edge_value<label_t>				edge_value_t;
     typedef state_value					state_value_t;
-    typedef std::vector<state_value_t>			state_data_t;
-    typedef std::vector<edge_value_t>			edge_data_t;
-
     typedef std::vector<state_value_t>			state_data_t;
     typedef std::vector<edge_value_t>			edge_data_t;
 
@@ -472,7 +469,7 @@ namespace vcsn
     monoid_elt_value_t;
     typedef typename algebra::mute_series_impl<SeriesValue, SeriesValue, monoid_elt_value_t>
     ::ret series_set_elt_value_t;
-    
+
     typedef
     Graph<Kind,
 	  monoid_elt_value_t,

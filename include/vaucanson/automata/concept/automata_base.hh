@@ -1,17 +1,17 @@
 // automata_base.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH
@@ -129,7 +129,6 @@ namespace vcsn {
 
     /** type of the element of the set of series that holds the automaton. */
     typedef Element<series_set_t, series_set_elt_value_t> series_set_elt_t;
-    typedef Element<series_set_t, series_set_elt_value_t> series_set_elt_t;
 
     /** type of the free monoid. */
     typedef typename series_set_t::monoid_t		monoid_t;
@@ -188,7 +187,7 @@ namespace vcsn {
 
     /** type of the geometry map containing state coordinates. */
     typedef typename automaton_traits<T>::geometry_t	geometry_t;
-    
+
     /** the set of series from which is build the automaton (const version). */
     const series_set_t& series() const;
 
@@ -595,7 +594,7 @@ namespace vcsn {
     void spontaneous_rdeltac(Container& res,
 			    hstate_t from,
 			    delta_kind::states k) const;
-    
+
   protected:
     MetaElement();
     MetaElement(const MetaElement& other);
