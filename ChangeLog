@@ -1,5 +1,13 @@
 2005-09-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	Fix compilation errors.
+
+	* src/benchs/common/bench_automaton.hh,
+	* src/benchs/minimization_stroppa/usual_ana_predefs.hh: Adjust
+	template parameters.
+
+2005-09-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	Avoid compilation problems when srcdir != builddir. Test for
 	needed programs in the configure script.
 

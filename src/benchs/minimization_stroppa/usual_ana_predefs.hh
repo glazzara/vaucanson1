@@ -1,18 +1,18 @@
 // usual_ana_predefs.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
 
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_BENCHS_MINIMIZATION_STROPPA_USUAL_ANA_PREDEFS_HH
@@ -103,6 +103,7 @@ namespace vcsn {
       bool,
       usual_char_serie_value_t,
       char_letter::Letter,
+      NoTag,
       NoTag>
     usual_char_automaton_impl_t;
 
@@ -114,6 +115,7 @@ namespace vcsn {
       bool,
       usual_int_serie_value_t,
       int_letter::Letter,
+      NoTag,
       NoTag>
     usual_int_automaton_impl_t;
 
@@ -126,6 +128,7 @@ namespace vcsn {
       float,
       weighted_char_serie_value_t,
       char_letter::Letter,
+      NoTag,
       NoTag>
     weighted_char_automaton_impl_t;
 
@@ -137,6 +140,7 @@ namespace vcsn {
       float,
       weighted_int_serie_value_t,
       int_letter::Letter,
+      NoTag,
       NoTag>
     weighted_int_automaton_impl_t;
 
@@ -148,6 +152,7 @@ namespace vcsn {
       rat::exp<char_letter::WordValue, bool>,
       polynom<char_letter::WordValue, rat::exp<char_letter::WordValue, bool> >,
       char_letter::Letter,
+      NoTag,
       NoTag>
     usual_char_transducer_impl_t;
 
@@ -158,6 +163,7 @@ namespace vcsn {
       rat::exp<int_letter::WordValue, bool>,
       polynom<int_letter::WordValue, rat::exp<int_letter::WordValue, bool> >,
       int_letter::Letter,
+      NoTag,
       NoTag>
     usual_int_transducer_impl_t;
 
@@ -168,6 +174,7 @@ namespace vcsn {
       rat::exp<char_letter::WordValue, float>,
       polynom<char_letter::WordValue, rat::exp<char_letter::WordValue, float> >,
       char_letter::Letter,
+      NoTag,
       NoTag>
     weigthed_char_transducer_impl_t;
 
@@ -178,6 +185,7 @@ namespace vcsn {
       rat::exp<int_letter::WordValue, float>,
       polynom<int_letter::WordValue, rat::exp<int_letter::WordValue, float> >,
       int_letter::Letter,
+      NoTag,
       NoTag>
     weigthed_int_transducer_impl_t;
 
@@ -190,7 +198,8 @@ namespace vcsn {
       bool,
       usual_int_serie_value_t,
       int_letter::Letter,
-      std::map<hstate_t, int_fs::state_label_t> >
+      std::map<hstate_t, int_fs::state_label_t>,
+      NoTag>
     usual_int_int_feature_structure_impl_t;
 
     typedef Graph
@@ -201,7 +210,8 @@ namespace vcsn {
       bool,
       usual_int_serie_value_t,
       int_letter::Letter,
-      std::map<hstate_t, string_fs::state_label_t> >
+      std::map<hstate_t, string_fs::state_label_t>,
+      NoTag>
     usual_int_string_feature_structure_impl_t;
 
 
