@@ -34,6 +34,11 @@ namespace vcsn
   namespace xml
   {
 
+    template <class T>
+    Node<T>::~Node()
+    {
+    }
+
 # define PROCESS_NODE(name)						   \
     template <class T>							   \
     void name ## Node<T>::process(xercesc::DOMElement* node, T& aut,	   \

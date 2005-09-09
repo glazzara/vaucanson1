@@ -56,6 +56,7 @@ namespace vcsn
       typedef Factory<Node<T>, std::string> factory_t;
       typedef std::map<std::string, hstate_t> map_t;
       virtual void process(xercesc::DOMElement*, T&, map_t&, factory_t&) = 0;
+      virtual ~Node();
     };
 
 
