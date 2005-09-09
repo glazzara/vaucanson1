@@ -1,11 +1,6 @@
-LATEX = latex
-DVIPDF = dvipdf
-
 xml_proposal.pdf:
-	$(LATEX) xml_proposal.tex
-	$(LATEX) xml_proposal.tex
+	$(TEXI2DVI) $(srcdir)/xml_proposal.tex
 	$(DVIPDF) xml_proposal.dvi
-
 
 docdir = $(datadir)/doc/$(PACKAGE_TARNAME)
 CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp *.log

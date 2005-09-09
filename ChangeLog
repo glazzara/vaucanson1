@@ -1,3 +1,12 @@
+2005-09-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
+	Avoid compilation problems when srcdir != builddir. Test for
+	needed programs in the configure script.
+
+	* doc/xml/Makefile.am: Use texi2dvi instead of latex. Find
+	xml_proposal.tex in srcdir.
+	* configure.ac: Check for dvipdf.
+
 2005-09-08  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/node.hh,
@@ -7,13 +16,13 @@
 	and <drawing> in XML.
 
 2005-09-06  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
-	This patch changes the support of geometric coordinates for automata. 
+	This patch changes the support of geometric coordinates for automata.
 	The former system (an attribute in the graph class) is replaced by a
 	policy system, using the vcsn::geometry new class.
 
 	* include/vaucanson/automata/implementation/geometry.hh,
-	* include/vaucanson/automata/implementation/geometry.hxx: New. 
-	vcsn::geometry class, used to handle geometric coordinates for 
+	* include/vaucanson/automata/implementation/geometry.hxx: New.
+	vcsn::geometry class, used to handle geometric coordinates for
 	automata.
 
 	* include/vaucanson/automata/implementation/graph.hh,
@@ -32,17 +41,17 @@
 	* include/vaucanson/automata/concept/automata_ops.hxx: Add default
 	op_get_geometry() operators.
 
-	* include/vaucanson/algebra/implementation/series/krat.hxx: Update 
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Update
 	local graph type with extra template parameter for geometry.
 
 	* include/vaucanson/contexts/generic_automaton_impl.thh: Update default
 	graph type with new template parameter for geometry: vcsn::geometry.
 
-	* include/vaucanson/algorithms/product.hxx: Updates in the graphic 
-	system for coordinates. Now uses the new vcsn::geometry class, and 
+	* include/vaucanson/algorithms/product.hxx: Updates in the graphic
+	system for coordinates. Now uses the new vcsn::geometry class, and
 	behaves well if geometry is not supported in the graph implementation.
 
-	* include/vaucanson/automata/implementation/generalized.hh: Update 
+	* include/vaucanson/automata/implementation/generalized.hh: Update
 	graph type to support geometry.
 
 	* include/Makefile.am: Update with new files.
