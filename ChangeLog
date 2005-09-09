@@ -1,5 +1,19 @@
 2005-09-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
+	Avoid useless compilations to end users, without losing any
+	feature.  Instead of building programs to generate XML samples,
+	ship their outputs.
+
+	* src/demos/automaton_library/c1.cc, src/demos/automaton_library/b1.cc,
+	* src/demos/automaton_library/a1.cc: Dump the automata to std::cout.
+	* src/demos/automaton_library/Makefile.am: Do not build a1, b1 and
+	c1 by default. Ship their output instead.
+	* src/demos/automaton_library/a1.xml,
+	* src/demos/automaton_library/b1.xml,
+	* src/demos/automaton_library/c1.xml: New.
+
+2005-09-09  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
+
 	* src/benchs/determinization/determinization_bench_fsm.cc: Fix an
 	unused argement warning.
 
