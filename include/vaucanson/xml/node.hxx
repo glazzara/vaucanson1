@@ -135,10 +135,12 @@ PROCESS_NODE(transitions)
 	  else
 	    elt = 0;
 	  monoidNode<T>* nd = new monoidNode<T>;
-	  /// FIXME: Remove these const_cast.
-	  nd->process(elt, aut,
-		      const_cast<typename T::monoid_t&>
-		      (aut.structure().series().monoid()), m, f);
+	  typename T::monoid_t::alphabet_t at;
+	  typename T::monoid_t md(at);
+	  nd->process(elt, aut, md, m, f);
+	  typename T::series_set_t
+	    series(aut.structure().series().semiring(), md);
+	  aut.attach(series);
 	  monoid_done = true;
 	}
       else
@@ -150,13 +152,111 @@ PROCESS_NODE(transitions)
 	    else
 	      elt = 0;
 	    semiringNode<T>* nd = new semiringNode<T>;
-	    nd->process(elt, aut,
-			const_cast<typename T::semiring_t&>
-			(aut.structure().series().semiring()), m, f);
+	    typename T::semiring_t sg;
+	    nd->process(elt, aut, sg, m, f);
+	    typename T::series_set_t
+	      series(sg, aut.structure().series().monoid());
+	    aut.attach(series);
 	    semiring_done = true;
 	  }
     }
 
+
+    TParm
+    void process_type(xercesc::DOMElement* node, TRANStype& aut,
+		      typename Node<TRANStype>::map_t& m,
+		      typename Node<TRANStype>::factory_t& f,
+		      bool& monoid_done,
+		      bool& semiring_done)
+    {
+      std::string arg;
+      xercesc::DOMElement* elt;
+      if (! monoid_done)
+	{
+	  std::string monoid("monoid");
+	  if (node && xml2str(node->getNodeName()) == monoid)
+	    elt = node;
+	  else
+	    elt = 0;
+	  monoidNode<TRANStype>* nd = new monoidNode<TRANStype>;
+	  typename TRANStype::monoid_t::alphabet_t at;
+	  typename TRANStype::monoid_t md(at);
+	  nd->process(elt, aut, md, m, f);
+	  typename TRANStype::series_set_t
+	    series(aut.structure().series().semiring(), md);
+	  aut.attach(series);
+	  monoid_done = true;
+	}
+      else
+	if (! semiring_done)
+	  {
+	    std::string semiring("semiring");
+	    if (node && xml2str(node->getNodeName()) == semiring)
+	      elt = node;
+	    else
+	      elt = 0;
+	    semiringNode<TRANStype>* nd = new semiringNode<TRANStype>;
+	    typename TRANStype::semiring_t::monoid_t::alphabet_t at;
+	    typename TRANStype::semiring_t::monoid_t md(at);
+	    typename TRANStype::semiring_t::semiring_t ssg;
+	    typename TRANStype::semiring_t sg(ssg, md);
+	    nd->process(elt, aut, sg, m, f);
+	    typename TRANStype::series_set_t
+	      series(sg, aut.structure().series().monoid());
+	    aut.attach(series);
+	    semiring_done = true;
+	  }
+    }
+
+
+    TParmFMP
+    void process_type(xercesc::DOMElement* node, FMPtype& aut,
+		      typename Node<FMPtype>::map_t& m,
+		      typename Node<FMPtype>::factory_t& f,
+		      bool& monoid_done,
+		      bool& semiring_done)
+    {
+      std::string arg;
+      xercesc::DOMElement* elt;
+      if (! monoid_done)
+	{
+	  std::string monoid("monoid");
+	  if (node && xml2str(node->getNodeName()) == monoid)
+	    elt = node;
+	  else
+	    elt = 0;
+	  monoidNode<FMPtype>* nd = new monoidNode<FMPtype>;
+	  typename FMPtype::monoid_t::first_monoid_t::alphabet_t at1;
+	  typename FMPtype::monoid_t::second_monoid_t::alphabet_t at2;
+	  typename FMPtype::monoid_t::first_monoid_t md1(at1);
+	  typename FMPtype::monoid_t::second_monoid_t md2(at2);
+	  typename FMPtype::monoid_t md(md1, md2);
+	  nd->process(elt, aut, md, m, f);
+	  typename FMPtype::series_set_t
+	    series(aut.structure().series().semiring(), md);
+	  aut.attach(series);
+	  monoid_done = true;
+	}
+      else
+	if (! semiring_done)
+	  {
+	    std::string semiring("semiring");
+	    if (node && xml2str(node->getNodeName()) == semiring)
+	      elt = node;
+	    else
+	      elt = 0;
+	    semiringNode<FMPtype>* nd = new semiringNode<FMPtype>;
+	    typename FMPtype::semiring_t sg;
+	    nd->process(elt, aut, sg, m, f);
+	    typename FMPtype::series_set_t
+	      series(sg, aut.structure().series().monoid());
+	    aut.attach(series);
+	    semiring_done = true;
+	  }
+    }
+
+
+    
 
     /*--------.
     | <state> |
@@ -239,13 +339,24 @@ PROCESS_NODE(transitions)
 
 
     TParm
+    template <class U>
+    void
+    semiringNode<TRANStype>::process(xercesc::DOMElement* node, TRANStype& a,
+				     U& param,
+				     typename Node<TRANStype>::map_t& m,
+				     typename Node<TRANStype>::factory_t& f)
+    {
+      process_semiring(node, a, param, m, f);
+    }
+
+
+    TParm
     void
     process_semiring(xercesc::DOMElement* node, TRANStype& a,
 		     typename TRANStype::semiring_t::semiring_t& param,
 		     typename Node<TRANStype>::map_t&,
 		     typename Node<TRANStype>::factory_t&)
     {
-      using namespace xercesc;
       tools::ensure_semiring_type(node, a, param);
     }
 
@@ -282,22 +393,10 @@ PROCESS_NODE(transitions)
 			      const_cast
 			      <typename TRANStype::semiring_t::semiring_t&>
 			      (param.semiring()), m, f);
-
 		}
 	    }
     }
 
-
-    TParm
-    template <class U>
-    void
-    semiringNode<TRANStype>::process(xercesc::DOMElement* node, TRANStype& a,
-				     U& param,
-				     typename Node<TRANStype>::map_t& m,
-				     typename Node<TRANStype>::factory_t& f)
-    {
-      process_semiring(node, a, param, m, f);
-    }
 
     /*---------.
     | <monoid> |
