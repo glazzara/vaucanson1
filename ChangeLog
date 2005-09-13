@@ -1,3 +1,8 @@
+2005-09-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/misc/unique.hxx: Fix a bug in compilation with
+	GCC 3.4.2. Make explicit instanciation of a template class.
+
 2005-09-10  Thomas Claveirole  <thomas.claveirole@lrde.epita.fr>
 
 	See the next entry.

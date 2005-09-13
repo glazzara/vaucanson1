@@ -23,6 +23,8 @@ namespace utility {
 
   namespace unique {
 
+    template class UniqueMap<int>;
+    
     template <>
     template <>
     inline
