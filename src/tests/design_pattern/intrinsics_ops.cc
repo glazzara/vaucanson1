@@ -216,13 +216,15 @@ void test_compare(const vcsn_test::S& s)
 
   std::string ss2 = (&s ? "s1s2" : "");
   std::string ss1 = (&s ? "s" : "");
+  bool val;
 
+  
 #define TEST_OP(Op, Equiv, Label) \
-  tag = ""; true == (e1 Op e2); \
+  tag = ""; val = (true == (e1 Op e2)); \
   TEST_ASSERT(tag == ss2 + Equiv, "binary " Label); \
-  tag = ""; true == (v1 Op e2); \
+  tag = ""; val = (true == (v1 Op e2)); \
   TEST_ASSERT(tag == "c" + ss1 + Equiv, "left " Label); \
-  tag = ""; true == (e1 Op v2); \
+  tag = ""; val = (true == (e1 Op v2)); \
   TEST_ASSERT(tag == "c" + ss1 + Equiv, "right " Label);
 
   TEST_OP(==, "eq", "equality");

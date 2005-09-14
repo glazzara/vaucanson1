@@ -26,7 +26,7 @@ namespace vcsn_test {
     Natural()
     {}
 
-    bool operator == (const Natural& other) const
+    bool operator == (const Natural&) const
     {
       return true;
     }
@@ -90,7 +90,7 @@ namespace vcsn {
 
 } // vcsn
 
-int main(int argc, char **argv)
+int main(int, char **)
 {
   using namespace vcsn;
   using namespace vcsn_test;

@@ -34,9 +34,9 @@ namespace vcsn_test {
   // empty implementation type equipped with operator identification
   struct eT {
     eT() { tag += "eT"; }
-    eT(const eT& other) { tag += "eTc"; }
+    eT(const eT&) { tag += "eTc"; }
     template<typename T>
-    eT(const T& other) { tag += "eTc"; tag += typeid(T).name(); }
+    eT(const T&) { tag += "eTc"; tag += typeid(T).name(); }
     eT& operator=(const eT& ) { tag += "eTa"; return *this; }
     template<typename T>
     eT& operator=(const T& ) { tag += "eTa"; tag += typeid(T).name(); return *this; }

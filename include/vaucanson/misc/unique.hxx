@@ -23,7 +23,7 @@ namespace utility {
 
   namespace unique {
 
-    template class UniqueMap<int>;
+    template class UniqueMap<int>::TiSlot<int>;
     
     template <>
     template <>
