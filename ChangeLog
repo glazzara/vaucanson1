@@ -1,3 +1,8 @@
+2005-09-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/letter/range.hh: Remove
+	the hack of enum definition, name the enum instead.
+
 2005-09-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/misc/unique.hxx: Fix template instanciation, to 

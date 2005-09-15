@@ -48,7 +48,7 @@ namespace vcsn {
       static char from();
       static char to();
       static char random();
-      enum
+      enum bounds
 	{
 	  from_value = From,
 	  to_value = To
@@ -60,9 +60,7 @@ namespace vcsn {
     {
       enum
 	{
-	  local_to_value = Interval::to_value,
-	  local_from_value = Interval::from_value,
-	  cardinal = local_to_value - local_from_value + 1
+	  cardinal = Interval::to_value - Interval::from_value + 1
 	};
     };
 
