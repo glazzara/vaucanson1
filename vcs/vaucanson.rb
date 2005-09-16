@@ -1,11 +1,12 @@
 class Vcs
 
-  def vcn_commit! ( s, *args )
+  def vcn_commit! ( *args )
 
-    common_commit!(*args) do |rev|
+    common_commit!( "[<%= rev %>] <%= title %>", *args) do |subject|
       mail!(:to => %w[vaucanson-patches@lrde.epita.fr],
-            :subject => "[#{rev}] #{s}")
+            :subject => subject)
     end
+
   end
   alias_command :vcnci, :vcn_commit
 

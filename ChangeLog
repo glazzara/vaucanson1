@@ -1,3 +1,9 @@
+2005-09-16  Alexandre Borghi  <alexandre.borghi@lrde.epita.fr>
+
+	Update vcs support to 0.3.
+
+	* vcs/vaucanson.rb: Update.
+
 2005-09-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/letter/range.hh: Remove
