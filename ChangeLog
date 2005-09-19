@@ -1,3 +1,39 @@
+2005-09-19  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/xml/session.hxx: Fix a bug in session management. 
+	From now on, when pushing a session to an automaton the automaton is
+	emptied first, and then receive the first automaton from the session
+	as its content.
+
+	* src/tests/xml/Makefile.am: Add XML session test files in EXTRA_DIST.
+
+	* src/demos/function_library/Makefile.am,
+	* src/demos/algorithms/Makefile.am,
+	* src/demos/transducers/Makefile.am: Fix in the link to XSD creation
+	rule. Uses top_srcdir instead of top_builddir.
+
+2005-09-19  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	This patch changes XML document dump. From now on, transitions are 
+	represented:
+	<transition src="s0" dst="s1" label="a">
+	
+	* include/vaucanson/xml/xml_converter.hxx,
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/tools.hxx: Change the XML writer. Don't use the
+	one proposed by xerces, replace it by a hand-coded one. 
+
+	* src/tests/xml/trans_ref.xml,
+	* src/tests/xml/r_ref.xml,
+	* src/tests/xml/z_ref.xml,
+	* src/tests/xml/z_min_plus_ref.xml,
+	* src/tests/xml/b_ref.xml,
+	* src/tests/xml/z_max_plus_ref.xml,
+	* src/tests/xml/fmp_ref.xml,
+	* src/tests/xml/session_ref.xml,
+	* src/demos/automaton_library/a1.xml,
+	* src/demos/automaton_library/b1.xml,
+	* src/demos/automaton_library/c1.xml: Update accordingly.
+
 2005-09-16  Alexandre Borghi  <alexandre.borghi@lrde.epita.fr>
 
 	Update vcs support to 0.3.

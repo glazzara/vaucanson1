@@ -19,7 +19,7 @@ endif
 all-am: vaucanson.xsd
 
 vaucanson.xsd:
-	ln -sf $(top_builddir)/doc/xml/vaucanson.xsd
+	ln -sf $(top_srcdir)/doc/xml/vaucanson.xsd
 
 b_SOURCES = algorithms.cc
 b_CPPFLAGS = $(AM_CPPFLAGS)					\

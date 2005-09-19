@@ -12,7 +12,7 @@ if XML_CHECK
 all-am: vaucanson.xsd
 
 vaucanson.xsd:
-	ln -sf $(top_builddir)/doc/xml/vaucanson.xsd
+	ln -sf $(top_srcdir)/doc/xml/vaucanson.xsd
 
 noinst_PROGRAMS = universal b_are_equivalent z_are_equivalent	\
 	b_exp_recognized z_exp_recognized classics
@@ -27,18 +27,18 @@ b_are_equivalent_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
 
 z_are_equivalent_SOURCES = are_equivalent.cc equivalent_functions.cc
-z_are_equivalent_CPPFLAGS =  $(AM_CPPFLAGS)		\
-	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"	\
+z_are_equivalent_CPPFLAGS =  $(AM_CPPFLAGS)			\
+	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"		\
 	-DCONTEXT_NAMESPACE="vcsn::z_automaton"
 
 b_exp_recognized_SOURCES = exp_recognized.cc equivalent_functions.cc
-b_exp_recognized_CPPFLAGS = $(AM_CPPFLAGS)					\
+b_exp_recognized_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
 
 z_exp_recognized_SOURCES = exp_recognized.cc equivalent_functions.cc
-z_exp_recognized_CPPFLAGS =  $(AM_CPPFLAGS)				\
-	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"	\
+z_exp_recognized_CPPFLAGS =  $(AM_CPPFLAGS)			\
+	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"		\
 	-DCONTEXT_NAMESPACE="vcsn::z_automaton"
 
 classics_SOURCES = classics.cc
