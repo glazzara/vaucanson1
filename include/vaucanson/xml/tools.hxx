@@ -1,17 +1,17 @@
 // tools.hxx: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `NOTICE' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_XML_TOOLS_HXX
@@ -494,7 +494,7 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
       {
 	typedef Element<Transducer<S>, T> trans_t;
 	typedef typename
-	  trans_t::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t 
+	  trans_t::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t
 	  value_t;
 
 	std::string set(tools::get_semiring_set(param, value_t()));
@@ -571,6 +571,69 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
       }
 
 
+      template <class OStream>
+      void print_transition(const xercesc::DOMElement* n,
+			    OStream& os,
+			    std::string& spacing)
+      {
+	os << spacing << "<" << xml2str(n->getNodeName());
+	if (n->hasAttribute(STR2XML("src")))
+	  os << " src=\""
+	     << xml2str(n->getAttribute(STR2XML("src"))) << "\"";
+	if (n->hasAttribute(STR2XML("dst")))
+	  os << " dst=\""
+	     << xml2str(n->getAttribute(STR2XML("dst"))) << "\"";
+	if (n->hasAttribute(STR2XML("label")))
+	  os << " label=\""
+	     << xml2str(n->getAttribute(STR2XML("label"))) << "\"";
+	if (n->hasAttribute(STR2XML("weight")))
+	  os << " weight=\""
+	     << xml2str(n->getAttribute(STR2XML("weight"))) << "\"";
+	if (n->hasAttribute(STR2XML("in")))
+	  os << " in=\""
+	     << xml2str(n->getAttribute(STR2XML("in"))) << "\"";
+	if (n->hasAttribute(STR2XML("out")))
+	  os << " out=\""
+	     << xml2str(n->getAttribute(STR2XML("out"))) << "\"";
+      }
+
+
+      template <class OStream>
+      void print_tree(const xercesc::DOMElement* node,
+		      OStream& os,
+		      std::string spacing)
+      {
+	using namespace xercesc;
+	unsigned i;
+	DOMNamedNodeMap* m;
+
+	if (xml2str(node->getNodeName()) == "transition")
+	  print_transition(static_cast<const DOMElement*>(node), os, spacing);
+	else
+	  {
+	    os << spacing << "<" << xml2str(node->getNodeName());
+	    for (m = node->getAttributes(), i = 0;
+		 i < m->getLength(); ++i)
+	      {
+		os << " " << xml2str(m->item(i)->getNodeName())
+		   << "=\"" << xml2str(m->item(i)->getNodeValue())
+		   << "\"";
+	      }
+	  }
+	if (node->hasChildNodes())
+	  os << ">";
+	else
+	  os << "/>";
+	os << std::endl;
+	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
+	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
+	    print_tree(static_cast<const DOMElement*>(n), os, spacing + "  ");
+	if (node->hasChildNodes())
+	  os << spacing << "</" << xml2str(node->getNodeName()) << ">"
+	     << std::endl;
+      }
+
+
       /**
        * Print XML tree to output stream.
        *
@@ -581,29 +644,11 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
        *
        */
       template <class OStream>
-      void print_document(const xercesc::DOMElement* node, OStream& os)
+      void print_document(xercesc::DOMElement* node, OStream& os)
       {
-	using namespace xercesc;
-	DOMImplementation* impl =
-	  DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
-	DOMWriter* serializer =
-	  ((DOMImplementationLS*)impl)->createDOMWriter();
-
-	// Set serializer properties.
-	if (serializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent,
-				      true))
-	  serializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, true);
-	if (serializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true))
-	  serializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, true);
-
-	// Create buffer.
-	MemBufFormatTarget buf;
-	if (node)
-	  {
-	    serializer->writeNode(&buf, *node);
-	    os << buf.getRawBuffer();
-	    os << std::endl;
-	  }
+	node->setAttribute(STR2XML("xmlns"),
+			   STR2XML("http://vaucanson.lrde.epita.fr"));
+	print_tree(node, os, "");
       }
 
 

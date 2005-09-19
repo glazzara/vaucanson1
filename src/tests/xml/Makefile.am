@@ -103,4 +103,6 @@ EXTRA_DIST =					\
         trans_ref.xml				\
         z_max_plus_ref.xml			\
         z_min_plus_ref.xml			\
-        z_ref.xml
+        z_ref.xml				\
+	session_ref.xml				\
+	session_ref.dot

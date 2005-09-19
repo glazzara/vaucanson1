@@ -92,7 +92,7 @@ namespace vcsn
 				const U&);
 
       template <class OStream>
-      void print_document(const xercesc::DOMElement*, OStream&);
+      void print_document(xercesc::DOMElement*, OStream&);
 
     } // ! tools
 

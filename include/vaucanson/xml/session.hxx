@@ -85,6 +85,11 @@ namespace vcsn
     XMLPlatformUtils::Initialize();
     Element<S, T> a(structure, value);
 
+    // Clear the automaton content.
+    for (typename Element<S, T>::state_iterator is = a.states().begin();
+	 is != a.states().end(); ++is)
+      a.del_state(*is);
+    
     if (! s.root->getFirstChild())
       FAIL("No more automaton in session");
     for (DOMNode* n = s.root->getFirstChild(); n; n = n->getNextSibling())

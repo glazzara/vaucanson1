@@ -52,12 +52,12 @@ namespace vcsn
 
       std::map<hstate_t, std::string> state2str;
       const char* root_name = chooser_.choose_start_tag();
+      const char* xml_namespace = "http://vaucanson.lrde.epita.fr";
       DOMElement* node;
 
       // Document creation.
       impl_ = DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
-      doc_ = impl_->createDocument(STR2XML
-				  ("http://vaucanson.lrde.epita.fr"),
+      doc_ = impl_->createDocument(STR2XML(xml_namespace),
 				  STR2XML(root_name), 0);
       root_ = doc_->getDocumentElement();
 

@@ -1,6 +1,4 @@
-
 <session xmlns="http://vaucanson.lrde.epita.fr">
-
   <automaton>
     <type>
       <monoid generators="letters" type="free">
@@ -16,12 +14,11 @@
         <state name="s2"/>
       </states>
       <transitions>
-        <transition dst="s1" label="a" src="s0"/>
-        <transition dst="s2" label="b" src="s1"/>
+        <transition src="s0" dst="s1" label="a"/>
+        <transition src="s1" dst="s2" label="b"/>
       </transitions>
     </content>
   </automaton>
-
   <automaton>
     <type>
       <monoid generators="letters" type="free">
@@ -37,10 +34,9 @@
         <state name="s2"/>
       </states>
       <transitions>
-        <transition dst="s1" label="a" src="s0"/>
-        <transition dst="s2" label="b" src="s1"/>
+        <transition src="s0" dst="s1" label="a"/>
+        <transition src="s1" dst="s2" label="b"/>
       </transitions>
     </content>
   </automaton>
-
 </session>

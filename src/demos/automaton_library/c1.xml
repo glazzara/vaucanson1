@@ -1,6 +1,4 @@
-
 <automaton xmlns="http://vaucanson.lrde.epita.fr">
-
   <type>
     <monoid generators="letters" type="free">
       <generator value="a"/>
@@ -8,19 +6,17 @@
     </monoid>
     <semiring operations="numerical" set="Z"/>
   </type>
-
   <content>
     <states>
       <state name="s0"/>
       <state name="s1"/>
     </states>
     <transitions>
-      <transition dst="s1" label="b" src="s0"/>
-      <transition dst="s1" label="(2 a)+(2 b)" src="s1"/>
-      <transition dst="s0" label="a+b" src="s0"/>
+      <transition src="s0" dst="s1" label="b"/>
+      <transition src="s1" dst="s1" label="(2 a)+(2 b)"/>
+      <transition src="s0" dst="s0" label="a+b"/>
       <initial label="1" state="s0"/>
       <final label="1" state="s1"/>
     </transitions>
   </content>
-
 </automaton>
