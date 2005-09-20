@@ -28,6 +28,7 @@
 # define VCSN_AUTOMATA_IMPLEMENTATION_GEOMETRY_HH
 
 # include <map>
+# include <string>
 # include <vaucanson/automata/concept/handlers.hh>
 
 
@@ -91,13 +92,20 @@ namespace vcsn
     inline finals_geometry_map_t& finals();
     inline const finals_geometry_map_t& finals() const;
 
+    /**
+     * @brief Retrieve the name of the automaton.
+     *
+     **/
+    inline std::string& name();
+    inline const std::string& name() const;
 
 
-  public:
+  private:
     mutable states_geometry_map_t*	states_;
     mutable edges_geometry_map_t*	edges_;
     mutable initials_geometry_map_t*	initials_;
     mutable finals_geometry_map_t*	finals_;
+    mutable std::string*		name_;
   };
 
 } // !vcsn

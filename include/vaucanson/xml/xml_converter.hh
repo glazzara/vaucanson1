@@ -70,24 +70,25 @@ namespace vcsn
        *
        * @arg a		Automaton to save.
        * @arg out	Output stream.
+       * @arg name	String containing the name of the automaton.
        */
       template <class OStream>
-      void save(const Auto& a, OStream& out);
+      void save(const Auto& a, OStream& out, const std::string& name);
 
       /**
        * @brief Load automaton from stream.
        *
        * @param IStream	Type of the input stream.
        *
-       * @arg a		Automaton to save.
+       * @arg a		Automaton to load.
        * @arg in	Input stream.
        */
       template <class IStream>
       void load(Auto& a, IStream& in);
 
-      void create_document(const Auto& aut);
+      void create_document(const Auto& aut, const std::string& name);
 
-      xercesc::DOMElement* root_get() { return root_;}
+      xercesc::DOMElement* root_get() { return root_; }
 
     private:
       std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);

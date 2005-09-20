@@ -35,14 +35,16 @@ namespace vcsn
   {
     template <class Auto>
     template <class OStream>
-    void xml_converter<Auto>::save(const Auto& aut, OStream& os)
+    void xml_converter<Auto>::save(const Auto& aut, OStream& os,
+				   const std::string& name)
     {
-      create_document(aut);
+      create_document(aut, name);
       tools::print_document(root_, os);
     }
 
     template <class Auto>
-    void xml_converter<Auto>::create_document(const Auto& aut)
+    void xml_converter<Auto>::create_document(const Auto& aut,
+					      const std::string& name)
     {
       typedef typename Auto::state_iterator state_iterator;
       typedef typename Auto::edge_iterator edge_iterator;
@@ -60,6 +62,12 @@ namespace vcsn
       doc_ = impl_->createDocument(STR2XML(xml_namespace),
 				  STR2XML(root_name), 0);
       root_ = doc_->getDocumentElement();
+
+      if (aut.geometry().name() != "")
+	root_->setAttribute(STR2XML("name"),
+			    STR2XML(aut.geometry().name().c_str()));
+      if (name != "")
+	root_->setAttribute(STR2XML("name"), STR2XML(name.c_str()));
 
       // Create type tag.
       chooser_.create_type_tag(aut, doc_, root_);

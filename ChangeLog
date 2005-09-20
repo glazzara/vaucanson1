@@ -1,3 +1,26 @@
+2005-09-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/node.hxx: Retrieve the name of the XML 
+	automaton, and store it in the "geometric" attributes. Also fix a 
+	bug in coordinates management.
+
+	* include/vaucanson/xml/xml_converter.hh,
+	* include/vaucanson/xml/xml_converter.hxx,
+	* include/vaucanson/xml/XML.hh,
+	* include/vaucanson/xml/XML.hxx,
+	* include/vaucanson/tools/xml_dump.hh: Enable naming of the automaton.
+	The tools::xml_dump() function third argument is used to name the 
+	automaton in the XML document.
+
+	* include/vaucanson/automata/implementation/geometry.hh,
+	* include/vaucanson/automata/implementation/geometry.hxx: Add a name
+	attribute in the class, to store the name of the automaton.
+
+	* src/demos/automaton_library/a1.xml,
+	* src/demos/automaton_library/b1.xml,
+	* src/demos/automaton_library/c1.xml: Name the automata.
+	
 2005-09-19  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/session.hxx: Fix a bug in session management. 

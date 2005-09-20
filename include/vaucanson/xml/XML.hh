@@ -38,7 +38,7 @@ namespace vcsn
   {
     struct XML
     {
-      XML()
+      XML() : name_("")
 	{}
       XML(const std::string& name) : name_(name)
 	{}

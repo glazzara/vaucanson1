@@ -1,4 +1,4 @@
-<automaton xmlns="http://vaucanson.lrde.epita.fr">
+<automaton name="b1" xmlns="http://vaucanson.lrde.epita.fr">
   <type>
     <monoid generators="letters" type="free">
       <generator value="a"/>

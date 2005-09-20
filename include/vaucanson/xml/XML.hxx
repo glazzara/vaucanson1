@@ -42,7 +42,7 @@ namespace vcsn
       typedef typename Saver::automaton_t automaton_t;
 
       xml_converter<automaton_t> xc;
-      xc.save(s.automaton(), out);
+      xc.save(s.automaton(), out, name_);
 
       xercesc::XMLPlatformUtils::Terminate();
     }

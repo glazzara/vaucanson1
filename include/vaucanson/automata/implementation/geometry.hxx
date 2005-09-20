@@ -31,12 +31,12 @@ namespace vcsn
 {
   inline
   geometry::geometry()
-    : states_(0), edges_(0), initials_(0), finals_(0)
+    : states_(0), edges_(0), initials_(0), finals_(0), name_(0)
   {}
 
   inline
   geometry::geometry(const geometry& obj)
-    : states_(0), edges_(0), initials_(0), finals_(0)
+    : states_(0), edges_(0), initials_(0), finals_(0), name_(0)
   {
     if (obj.states_ != 0)
       states_ = new states_geometry_map_t(obj.states());
@@ -46,6 +46,8 @@ namespace vcsn
       initials_ = new initials_geometry_map_t(obj.initials());
     if (obj.finals_ != 0)
       finals_ = new finals_geometry_map_t(obj.finals());
+    if (obj.name_ != 0)
+      name_ = new std::string(obj.name());
   }
 
   inline
@@ -59,6 +61,8 @@ namespace vcsn
       delete initials_;
     if (finals_)
       delete finals_;
+    if (name_)
+      delete name_;
   }
 
     
@@ -128,6 +132,24 @@ namespace vcsn
       finals_ = new finals_geometry_map_t();
     return *finals_;
   }
+
+
+  inline
+  std::string& geometry::name()
+  {
+    if (! name_)
+      name_ = new std::string();
+    return *name_;
+  }
+
+  inline
+  const std::string& geometry::name() const
+  {
+    if (! name_)
+      name_ = new std::string();
+    return *name_;
+  }
+
 
 } // !vcsn
 

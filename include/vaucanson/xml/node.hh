@@ -43,6 +43,15 @@ namespace vcsn
 {
   namespace xml
   {
+    // Structure used to simulate pair of references, used in geometry.
+    // FIXME: Use boost::tuple instead.
+    template <class T1, class T2>
+    struct reference_pair
+    {
+      reference_pair(T1& f, T2& s) : first(f), second(s) {}
+      T1& first;
+      T2& second;
+    };
 
     /**
      * Node class interface.
@@ -55,6 +64,10 @@ namespace vcsn
     {
       typedef Factory<Node<T>, std::string> factory_t;
       typedef std::map<std::string, hstate_t> map_t;
+      typedef reference_pair<std::map<hstate_t, std::pair<double, double> >,
+			     hstate_t> map_state_pair_t;
+      typedef reference_pair<std::map<hedge_t, std::pair<double, double> >,
+			     hedge_t> map_edge_pair_t;
       virtual void process(xercesc::DOMElement*, T&, map_t&, factory_t&) = 0;
       virtual ~Node();
     };
@@ -152,7 +165,8 @@ CREATE_SPEC_TYPE_NODE(TParmFMP, FMPtype)
 CREATE_SPEC_PARAM_NODE(semiring, TParm, TRANStype)
 CREATE_SPEC_PARAM_NODE(monoid, TParmFMP, FMPtype)
 
-	} // ! xml
+
+  } // ! xml
 
 } // !vcsn
 

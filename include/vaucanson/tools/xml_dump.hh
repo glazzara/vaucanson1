@@ -35,8 +35,8 @@ namespace vcsn
   namespace tools
   {
     template <typename Auto>
-    void xml_dump(std::ostream& o, const Auto& a, const std::string& name);
-
+    void xml_dump(std::ostream& o, const Auto& a,
+		  const std::string& name = "");
   }
 }
 

@@ -56,14 +56,16 @@ namespace vcsn
     }
 
 
-# define PROCESS_ROOT_NODE(name)					   \
+# define PROCESS_ROOT_NODE(node_name)					   \
     template <class T>							   \
-    void name ## Node<T>::process(xercesc::DOMElement* node, T& aut,	   \
-				  typename Node<T>::map_t& m,		   \
-				  typename Node<T>::factory_t& f)	   \
+    void node_name ## Node<T>::process(xercesc::DOMElement* node, T& aut,  \
+				       typename Node<T>::map_t& m,	   \
+				       typename Node<T>::factory_t& f)	   \
     {									   \
       using namespace xercesc;						   \
       bool type_done = false;						   \
+      if (node->hasAttribute(STR2XML("name")))				   \
+	aut.geometry().name() = xml2str(node->getAttribute(STR2XML("name")));\
       for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling()) \
 	if (n->getNodeType() == DOMNode::ELEMENT_NODE)			   \
 	  {								   \
@@ -256,8 +258,6 @@ PROCESS_NODE(transitions)
     }
 
 
-    
-
     /*--------.
     | <state> |
     `--------*/
@@ -269,7 +269,8 @@ PROCESS_NODE(transitions)
     {
       hstate_t state = aut.add_state();
       m[xml2str(node->getAttribute(STR2XML("name")))] = state;
-      handle_geometry(node, aut, aut.geometry().states()[state], m, f);
+      typename Node<T>::map_state_pair_t p(aut.geometry().states(), state);
+      handle_geometry(node, aut, p, m, f);
     }
 
 
@@ -286,7 +287,8 @@ PROCESS_NODE(transitions)
       hstate_t dst = m[xml2str(node->getAttribute(STR2XML("dst")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       hedge_t e = aut.add_series_edge(src, dst, s);
-      handle_geometry(node, aut, aut.geometry().edges()[e], m, f);
+      typename Node<T>::map_edge_pair_t p(aut.geometry().edges(), e);
+      handle_geometry(node, aut, p, m, f);
     }
 
 
@@ -302,9 +304,9 @@ PROCESS_NODE(transitions)
       hstate_t state = m[xml2str(node->getAttribute(STR2XML("state")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       aut.set_initial(state, s);
-      handle_geometry(node, aut, aut.geometry().initials()[state], m, f);
+      typename Node<T>::map_state_pair_t p(aut.geometry().initials(), state);
+      handle_geometry(node, aut, p, m, f);
     }
-
 
 
     /*--------.
@@ -319,7 +321,8 @@ PROCESS_NODE(transitions)
       hstate_t state = m[xml2str(node->getAttribute(STR2XML("state")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       aut.set_final(state, s);
-      handle_geometry(node, aut, aut.geometry().finals()[state], m, f);
+      typename Node<T>::map_state_pair_t p(aut.geometry().finals(), state);
+      handle_geometry(node, aut, p, m, f);
     }
 
 
@@ -514,7 +517,7 @@ PROCESS_NODE(transitions)
     template <class T>
     template <class U>
     void
-    geometryNode<T>::process(xercesc::DOMElement* node, T&,
+    geometryNode<T>::process(xercesc::DOMElement* node, T& aut,
 			     U& param,
 			     typename Node<T>::map_t&,
 			     typename Node<T>::factory_t&)
@@ -526,7 +529,7 @@ PROCESS_NODE(transitions)
 	  std::istringstream ystr(xml2str(node->getAttribute(STR2XML("y"))));
 	  xstr >> x;
 	  ystr >> y;
-	  param = std::make_pair(x, y);
+  	  param.first[param.second] = std::make_pair(x, y);
 	}
       /// FIXME: handle attribute "direction".
     }
@@ -553,7 +556,7 @@ PROCESS_NODE(transitions)
 	    ystr(xml2str(node->getAttribute(STR2XML("labelPositionY"))));
 	  xstr >> x;
 	  ystr >> y;
-	  param = std::make_pair(x, y);
+  	  param.first[param.second] = std::make_pair(x, y);
 	}
     }
 
