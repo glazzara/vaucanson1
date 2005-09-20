@@ -1,14 +1,9 @@
 digraph vcsn {
-label="A { 6 states, 4 edges, #I = 0, #T = 0 }";
+label="A { 3 states, 2 edges, #I = 0, #T = 0 }";
 node [shape=circle];
 "A0" [label="0"];
 "A1" [label="1"];
 "A2" [label="2"];
-"A3" [label="3"];
-"A4" [label="4"];
-"A5" [label="5"];
 "A0" -> "A1" [label="a"];
 "A1" -> "A2" [label="b"];
-"A3" -> "A4" [label="a"];
-"A4" -> "A5" [label="b"];
 }

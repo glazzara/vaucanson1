@@ -517,7 +517,7 @@ PROCESS_NODE(transitions)
     template <class T>
     template <class U>
     void
-    geometryNode<T>::process(xercesc::DOMElement* node, T& aut,
+    geometryNode<T>::process(xercesc::DOMElement* node, T&,
 			     U& param,
 			     typename Node<T>::map_t&,
 			     typename Node<T>::factory_t&)

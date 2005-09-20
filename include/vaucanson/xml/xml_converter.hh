@@ -73,7 +73,7 @@ namespace vcsn
        * @arg name	String containing the name of the automaton.
        */
       template <class OStream>
-      void save(const Auto& a, OStream& out, const std::string& name);
+      void save(const Auto& a, OStream& out, const std::string& name = "");
 
       /**
        * @brief Load automaton from stream.
@@ -86,7 +86,7 @@ namespace vcsn
       template <class IStream>
       void load(Auto& a, IStream& in);
 
-      void create_document(const Auto& aut, const std::string& name);
+      void create_document(const Auto& aut, const std::string& name = "");
 
       xercesc::DOMElement* root_get() { return root_; }
 
