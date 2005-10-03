@@ -36,6 +36,11 @@ dist-hook:
 	done
 	sed 's, src/bench[^ ]*, ,g' $(srcdir)/configure |	\
 	    grep -v bench > $(distdir)/configure
+	touch $(distdir)/src/demos/automaton_library/a1.xml	\
+	$(distdir)/src/demos/automaton_library/b1.xml		\
+	$(distdir)/src/demos/automaton_library/c1.xml		\
+	$(distdir)/src/demos/transducers/u1.xml			\
+	$(distdir)/src/demos/transducers/t1.xml
 	cp $(srcdir)/doc/README.txt $(distdir)/README
 	cp $(srcdir)/doc/INSTALL.txt $(distdir)/INSTALL
 	rm -rf `find $(distdir)/debian -name .svn`

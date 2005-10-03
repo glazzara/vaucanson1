@@ -1,6 +1,4 @@
-
-<transducer xmlns="http://vaucanson.lrde.epita.fr">
-
+<transducer name="u1" xmlns="http://vaucanson.lrde.epita.fr">
   <type>
     <monoid generators="letters" type="product">
       <monoid generators="letters" type="free">
@@ -14,7 +12,6 @@
     </monoid>
     <semiring operations="numerical" set="B"/>
   </type>
-
   <content>
     <states>
       <state name="s0"/>
@@ -22,14 +19,13 @@
       <state name="s2"/>
     </states>
     <transitions>
-      <transition dst="s1" in="a" out="1" src="s0"/>
-      <transition dst="s0" in="1" out="b" src="s1"/>
-      <transition dst="s2" in="b" out="1" src="s1"/>
-      <transition dst="s1" in="1" out="a" src="s2"/>
+      <transition src="s0" dst="s1" in="a" out="1"/>
+      <transition src="s1" dst="s0" in="1" out="b"/>
+      <transition src="s1" dst="s2" in="b" out="1"/>
+      <transition src="s2" dst="s1" in="1" out="a"/>
       <initial state="s1"/>
       <final state="s0"/>
       <final state="s1"/>
     </transitions>
   </content>
-
 </transducer>
