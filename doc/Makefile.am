@@ -15,10 +15,9 @@ ref.tar.gz: doc.doxy.in
 MAINTAINERCLEANFILES = ref
 
 dist_doc_DATA += README.pdf README.tex README.html \
-		 INSTALL.pdf INSTALL.tex INSTALL.html \
 		 FAQ.pdf FAQ.tex FAQ.html \
 		 NEWS.pdf NEWS.tex NEWS.html
 
-EXTRA_DIST = README.txt INSTALL.txt FAQ.txt NEWS.txt
+EXTRA_DIST = README.txt FAQ.txt NEWS.txt
 
 MAINTAINERCLEANFILES += $(dist_doc_DATA)

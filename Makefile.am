@@ -4,7 +4,7 @@
 # $Id$
 
 SUBDIRS = include doc src
-EXTRA_DIST = CONTRIBUTORS NOTICE debian vaucanson.spec svn-revision
+EXTRA_DIST = debian vaucanson.spec svn-revision
 CLEANFILES = svn-revision
 
 ###
@@ -42,7 +42,7 @@ dist-hook:
 	$(distdir)/src/demos/transducers/u1.xml			\
 	$(distdir)/src/demos/transducers/t1.xml
 	cp $(srcdir)/doc/README.txt $(distdir)/README
-	cp $(srcdir)/doc/INSTALL.txt $(distdir)/INSTALL
+	cp $(srcdir)/doc/NEWS.txt $(distdir)/NEWS
 	rm -rf `find $(distdir)/debian -name .svn`
 
 ###

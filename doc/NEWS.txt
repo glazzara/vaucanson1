@@ -63,7 +63,7 @@ follows::
 
 .. _Vaucanson-XML: http://vaucanson.lrde.epita.fr/VaucansonXML
 
-
+- This version of Vaucanson is released under the GNU General Public Licence.
 
 Vaucanson 0.7 May 17, 2005
 ==========================
@@ -190,6 +190,10 @@ Vaucanson 0.7 May 17, 2005
   this expected optimisation.
 
 
+- This version of Vaucanson is released under the GNU Lesser General Public 
+  Licence.
+
+
 Vaucanson 0.6.1 October 26, 2004
 ================================
 
@@ -241,6 +245,9 @@ Vaucanson 0.6.1 October 26, 2004
   by ``expand()``, which was introduced in Vaucanson 0.6.  A short
   description of ``expand()`` can be found below, in the description
   of Vaucanson 0.6.
+
+- This version of Vaucanson is released under the GNU Lesser General Public 
+  Licence.
 
 Vaucanson 0.6 July 18, 2004
 ===========================
@@ -409,6 +416,10 @@ Vaucanson 0.6 July 18, 2004
   may be needed in ``tools/usual_macros.hh``.
 
 
+- This version of Vaucanson is released under the GNU Lesser General Public 
+  Licence.
+
+
 Vaucanson 0.5 March 24, 2004
 ============================
 
@@ -522,6 +533,9 @@ Vaucanson 0.5 March 24, 2004
   The minimization algorithm named ``minimization_moore()`` has been
   rewritten. It should be more readable and more reliable now.
 
+- This version of Vaucanson is released under the GNU Lesser General Public 
+  Licence.
+
 
 Vaucanson 0.4 October 29, 2003
 ==============================
@@ -540,6 +554,9 @@ Vaucanson 0.4 October 29, 2003
 - Addition of a generic search algorithm able to skip characters in
   the input stream.
 
+- This version of Vaucanson is released under the GNU Lesser General Public 
+  Licence.
+
 Vaucanson 0.3 July 11, 2003
 ===========================
 
@@ -549,6 +566,9 @@ Vaucanson 0.3 July 11, 2003
 
 - Noticeable performance boost thanks to a working unification of
   references to structural elements.
+
+- This version of Vaucanson is released under the GNU Lesser General Public 
+  Licence.
 
 Vaucanson 0.2 July 02, 2003
 ===========================
@@ -566,8 +586,13 @@ Vaucanson 0.2 July 02, 2003
 
 - Initial Doxygen documentation efforts.
 
+- This version of Vaucanson is released under the GNU Lesser General Public 
+  Licence.
+
 Vaucanson 0.1 January, 2002
 ===========================
 
 - Initial release.
 
+- This version of Vaucanson is released under the GNU Lesser General Public 
+  Licence.

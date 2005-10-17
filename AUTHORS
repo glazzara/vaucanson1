@@ -1,14 +1,106 @@
    The Vaucanson Group consists of:
 
+===============
+Permanent staff
+===============
+
 * Jacques Sakarovitch                   sakarovitch@enst.fr
+  - Project manager,
+  - Theoritical mentor.
+
 * Sylvain Lombardy                      lombardy@liafa.jussieu.fr
-* Thomas Claveirole                     thomas.claveirole@lrde.epita.fr
-* Loic Fosse                            loic.fosse@lrde.epita.fr
-* Raphael Poss                          raphael.poss@lrde.epita.fr
+  - Project manager,
+  - Implementation of crucial algorithms.
+
+* Akim Demaille                         akim@freefriends.org
+  - Project manager.
+
+* Sylvain Peyronnet			sylvain.peyronnet@lrde.epita.fr
+  - Project manager.
+
+
+==================
+Year 2003 students
+==================
+
 * Yann Regis-Gianas                     yann.regis-gianas@lrde.epita.fr
+  - Initial code and releases up to 0.4,
+  - Everything else.
+
+* Raphael Poss                          raphael.poss@lrde.epita.fr
+  - Initial code and releases up to 0.4,
+  - Lots of code rewriting and optimization,
+  - Vaucanswig,
+  - Code maintenance.
+
+
+==================
+Year 2004 students
+==================
+
 * Maxime Rey                            maxime.rey@lrde.epita.fr
+  - Mical.
+
+
+==================
+Year 2005 students
+==================
+
+* Thomas Claveirole                     thomas.claveirole@lrde.epita.fr
+  - Lots of code maintenance,
+  - Release manager for Vaucanson 0.5, 0.6 and 0.6.1,
+  - New rational expression parser,
+  - Clean first XML code,
+  - Demo writing,
+  - One derivative algorithm on rational expression,
+  - Algorithms writing,
+  - Lots of cleaning and bug fixes.
+
+* Loic Fosse                            loic.fosse@lrde.epita.fr
+  - Code maintenance,
+  - New automata construction,
+  - Rational expression expander,
+  - Many derivative algorithms on rational expression,
+  - Heavy work on algorithms,
+  - Many bug fixes.
+
+* Valentin David			valentin.david@lrde.epita.fr
+  - First XML code.
+
+
+==================
+Year 2006 students
+==================
+
 * Sarah O'Connor                        sarah.o-connor@lrde.epita.fr
+  - Improvement of transducers on Rat(B*),
+  - Implementation of free monoid product transducers,
+  - Algorithms dedicated to transducers.
+
 * Louis-Noel Pouchet                    louis-noel.pouchet@lrde.epita.fr
-* Florent Terrones                      florent.terrones@lrde.epita.fr
+  - Release manager for Vaucanson 0.7 and 0.7.1,
+  - New XML I/O system including new XSD grammar,
+  - Code maintenance,
+  - Misc algorithms,
+  - Many bug fixes.
+
+
+==================
+Year 2007 students
+==================
+
 * Robert Bigaignon                      robert.bigaignon@lrde.epita.fr
+  - Misc algorithms in [fmp]-transducers,
+  - Heuristic implementations for state elimination algorithm,
+  - Bug fixes.
+
 * Michael Cadilhac                      michael.cadilhac@lrde.epita.fr
+  - Graph re-implementation,
+  - Help in packaging,
+  - Bench suite,
+  - Misc algorithms fixes and rewriting.
+
+* Florent Terrones                      florent.terrones@lrde.epita.fr
+  - Broken Derived terms algorithm,
+  - New XML I/O system,
+  - Bug fixes.

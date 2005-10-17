@@ -1,5 +1,22 @@
 2005-10-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
+	* doc/NEWS.txt: Update. Add licence information.
+	* doc/README.txt: Update. Merge with INSTALL.txt.
+	
+	* AUTHORS: Update. Merge with CONTRIBUTORS.
+	* THANKS: Update.
+
+	* INSTALL: New. Default INSTALL file.
+
+	* NOTICE,
+	* CONTRIBUTORS,
+	* doc/INSTALL.txt: Delete.
+
+	* Makefile.am,
+	* doc/Makefile.am: Update accordingly.
+	
+2005-10-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
 	* src/demos/automaton_library/divkbaseb.cc: Fix the name of the 
 	generated automaton.
 

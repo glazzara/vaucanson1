@@ -46,22 +46,82 @@ and bug reports to ``vaucanson-bugs@lrde.epita.fr``.
 Installation
 ============
 
-Complete installation procedure can be found in ``doc/INSTALL.txt``.
-
-Here is a quick way to install Vaucanson. Type in this sequence at the
-command prompt:
+To install Vaucanson on your system, type in the classical sequence at
+the command prompt::
 
 	./configure
 	make sanity-check
+	make check ([1])
 	make install (as root)
-
-This installation  requires 220  Mo of free  space and takes  about 30
-minutes on a modern computer.
 
 Note that an installation is  specific to the compiler used to install
 it. Indeed, the call  to ``./configure`` enables some workarounds and,
 consequently,  users must  compile  with the  same  compiler to  avoid
 compatibility problems.
+
+[1]: Optional: check  the whole library. Note that  this process takes
+about 1.5 Go of free space (memory swap included) and several hours.
+
+Additional features
+-------------------
+
+There  is a  Python  interpreter in  the  package. It  is disabled  by
+default because its compilation takes  several hours. If you have time
+to spare, use instead::
+
+	./configure --enable-vaucanswig
+
+There  is an  XML  I/O subsystem  in  the library.  It  is enabled  by
+default,  but  requires a  working  installation  of another  software
+package called Xerces-C++. If you do  not have this package, or if you
+do not want to use XML I/O in Vaucanson, you can use::
+
+	./configure --disable-xml
+
+To specify a special path for the Xerces-C library, you can use::
+
+	./configure --with-xerces=/absolute/path/to/xerces
+
+For further configure options, type::
+
+	./configure --help
+
+
+Tweaking compilation options
+----------------------------
+
+Use ``CXXFLAGS_DEBUG`` or ``CXXFLAGS_OPTIMIZE``  to pass debug or optimization
+flags,  not ``CXXFLAGS``. For example::
+
+	./configure CXXFLAGS_DEBUG='-fstack-check -fbounds-check -ggdb'
+
+This is because  Vaucanson tries to use some  particular default flags
+with some specific  compilers such as GCC or  ICC.  Using ``CXXFLAGS``
+conflicts   with   those   specific  flags;   ``CXXFLAGS_DEBUG``   and
+``CXXFLAGS_OPTIMIZE`` override these default flags.
+
+
+Requirements
+============
+
+Vaucanson  was  tested with  the  `GNU  C++  Compiler (GCC)`_  version
+3.[34],  and should  work  with ICC_  8.1.   The code  is written  in
+respect to  the ISO-IEC  14882 (ISO C++)  standard to permit  a higher
+portability in the future.
+
+.. _GNU C++ Compiler (GCC): http://gcc.gnu.org/
+.. _ICC: http://www.intel.com/software/products/compilers/
+
+Moreover, high  verbose mode of the testing  suites uses the  AT&T dot
+format to  save automaton  in a human  readable file.  Use Graphviz_ to
+visualize these .dot files.
+
+.. _Graphviz: http://www.research.att.com/sw/tools/graphviz/
+
+If  you want  to use  the XML  I/O system,  you will  need  the Apache
+`Xerces-C++`_ library version 2.3 or above.
+
+.. _Xerces-C++: http://xml.apache.org/xerces-c/
 
 
 Using Vaucanson
@@ -99,8 +159,11 @@ There are other sources of interest in the distribution.
 Licence
 =======
 
-Vaucanson is released  under the GNU General Public  Licence.  See the
+Vaucanson is now released under the GNU General Public Licence. See the
 file ``COPYING`` (at the root of the source tree) for details.
+
+Vaucanson was released under the GNU Lesser General Public Licence until
+version 0.7. 
 
 
 Contacts
