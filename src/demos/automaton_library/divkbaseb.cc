@@ -75,7 +75,7 @@ main(int argc, char** argv)
 
   std::string name = "div" + div + "base" + b + ".xml";
   std::ofstream file(name.c_str());
-  vcsn::tools::xml_dump(file, a, "divkbaseb");
+  vcsn::tools::xml_dump(file, a, name);
 
   std::cout << "File " << name << " has been created." << std::endl;
 }
