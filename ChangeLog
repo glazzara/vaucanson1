@@ -1,3 +1,19 @@
+2005-10-18  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
+
+	Modify some algorithms in src/demos.
+
+	* src/demos/algorithms/contains_factor.cc: New. Test if a factor is
+	recognized by an automaton.
+	* src/demos/algorithms/exp_equiv.cc: New. Test if an expression
+	describes the same language as an automaton.
+
+	* src/demos/algorithms/equivalent_functions.hh,
+	* src/demos/algorithms/equivalent_functions.cc: Move some includes
+	needed by other files.
+
+	* src/demos/algorithms/exp_recognized.cc: Remove.
+	* src/demos/algorithms/Makefile.am: Update.
+
 2005-10-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* doc/NEWS.txt: Update. Add licence information.

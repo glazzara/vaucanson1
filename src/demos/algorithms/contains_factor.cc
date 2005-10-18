@@ -1,4 +1,4 @@
-// exp_recognized.cc: this file is part of the Vaucanson project.
+// contains_factor.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -29,9 +29,9 @@
 //
 
 /**
- * @file exp_recognized.cc
+ * @file contains_factor.cc
  *
- * Generates a program that checks if an expression is recognized by
+ * Generates a program that checks if a factor is recognized by
  * an automaton.
  *
  */
@@ -43,9 +43,40 @@ main(int argc, char** argv)
 {
   if (argc != 3)
     {
-      std::cerr << "Usage: " << argv[0] << " <automaton> <exp>" << std::endl;
+      std::cerr << "Usage: " << argv[0] << " <automaton> <factor>" << std::endl;
       return 1;
     }
 
-  return are_equivalent(get_aut(argv[1]), standard_of(get_exp(argv[2])));
+
+  rat_exp_t exp = get_exp(argv[2]);
+  automaton_t a = standard_of(exp);
+  alphabet_t alpha = a.structure().series().monoid().alphabet();
+
+  for_each_initial_state(s, a)
+    for_each_letter(l, alpha)
+    {
+      a.add_letter_edge(*s, *s, *l);
+    }
+
+  for_each_final_state(s, a)
+    for_each_letter(l, alpha)
+    {
+      a.add_letter_edge(*s, *s, *l);
+    }
+
+  automaton_t b = get_aut(argv[1]);
+
+  a = trim(product(a, b));
+
+  if (a.states().size() != 0)
+    {
+      std::cout << "The factor \"" << argv[2]
+		<< "\" is recognized by the automaton " << argv[1]
+		<< "." << std::endl;
+      return 0;
+    }
+  std::cout << "The factor \"" << argv[2]
+	    << "\" is NOT recognized by the automaton " << argv[1]
+	    << "." << std::endl;
+  return 1;
 }

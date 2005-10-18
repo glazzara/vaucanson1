@@ -1,4 +1,4 @@
-// equivalent_functions.hh: this file is part of the Vaucanson project.
+// exp_equiv.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 // Copyright (C) 2005 The Vaucanson Group.
@@ -19,7 +19,7 @@
 //
 // The Vaucanson Group represents the following contributors:
 //    * Jacques Sakarovitch <sakarovitch@enst.fr>
-//    * Sylvain Lombardy <lombardy@iafa.jussieu.fr>
+//    * Sylvain Lombardy <lombardy@liafa.jussieu.fr>
 //    * Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
 //    * Loic Fosse <loic.fosse@lrde.epita.fr>
 //    * Thanh-Hoc Nguyen <nguyen@enst.fr>
@@ -29,27 +29,33 @@
 //
 
 /**
- * @file equivalent_functions.hh
+ * @file exp_equiv.cc
  *
- * Contains the declaration of several functions useful to programs
- * are_equivalent and exp_recognized, including get_aut, get_exp (to
- * retrieve the input expression and automaton) and the are_equivalent
- * function.
+ * Generates a program that checks if an expression is equivalent to
+ * an automaton.
  *
  */
 
-#include <vaucanson/algorithms/determinize.hh>
-#include <vaucanson/algorithms/complement.hh>
-#include <vaucanson/algorithms/complete.hh>
-#include <vaucanson/algorithms/trim.hh>
-#include <vaucanson/algorithms/product.hh>
-#include CONTEXT_HEADER
+#include "equivalent_functions.hh"
 
-using namespace CONTEXT_NAMESPACE;
+int
+main(int argc, char** argv)
+{
+  if (argc != 3)
+    {
+      std::cerr << "Usage: " << argv[0] << " <automaton> <exp>" << std::endl;
+      return 1;
+    }
 
-bool are_equivalent(const automaton_t& a,
-		    const automaton_t& b);
-
-automaton_t get_aut(std::string s);
-
-rat_exp_t get_exp(std::string s);
+  if (are_equivalent(standard_of(get_exp(argv[2])), get_aut(argv[1]) ))
+    {
+      std::cout << "The expression \"" << argv[2]
+		<< "\" is equivalent to the automaton " << argv[1]
+		<< "." << std::endl;
+      return 0;
+    }
+  std::cout << "The expression \"" << argv[2]
+	    << "\" is NOT equivalent to the automaton " << argv[1]
+	    << "." << std::endl;
+  return 1;
+}

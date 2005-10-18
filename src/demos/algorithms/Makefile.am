@@ -15,7 +15,7 @@ vaucanson.xsd:
 	ln -sf $(top_srcdir)/doc/xml/vaucanson.xsd
 
 noinst_PROGRAMS = universal b_are_equivalent z_are_equivalent	\
-	b_exp_recognized z_exp_recognized classics
+	b_exp_equiv z_exp_equiv b_contains_factor z_contains_factor classics
 
 endif
 
@@ -31,13 +31,24 @@ z_are_equivalent_CPPFLAGS =  $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"		\
 	-DCONTEXT_NAMESPACE="vcsn::z_automaton"
 
-b_exp_recognized_SOURCES = exp_recognized.cc equivalent_functions.cc
-b_exp_recognized_CPPFLAGS = $(AM_CPPFLAGS)			\
+b_exp_equiv_SOURCES = exp_equiv.cc equivalent_functions.cc
+b_exp_equiv_CPPFLAGS = $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
 	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
 
-z_exp_recognized_SOURCES = exp_recognized.cc equivalent_functions.cc
-z_exp_recognized_CPPFLAGS =  $(AM_CPPFLAGS)			\
+z_exp_equiv_SOURCES = exp_equiv.cc equivalent_functions.cc
+z_exp_equiv_CPPFLAGS =  $(AM_CPPFLAGS)			\
+	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"		\
+	-DCONTEXT_NAMESPACE="vcsn::z_automaton"
+
+
+b_contains_factor_SOURCES = contains_factor.cc equivalent_functions.cc
+b_contains_factor_CPPFLAGS = $(AM_CPPFLAGS)			\
+	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
+	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
+
+z_contains_factor_SOURCES = contains_factor.cc equivalent_functions.cc
+z_contains_factor_CPPFLAGS =  $(AM_CPPFLAGS)			\
 	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"		\
 	-DCONTEXT_NAMESPACE="vcsn::z_automaton"
 

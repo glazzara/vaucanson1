@@ -37,12 +37,6 @@
  *
  */
 
-
-#include <vaucanson/algorithms/determinize.hh>
-#include <vaucanson/algorithms/complement.hh>
-#include <vaucanson/algorithms/complete.hh>
-#include <vaucanson/algorithms/trim.hh>
-#include <vaucanson/algorithms/product.hh>
 #include <vaucanson/xml/XML.hh>
 #include <ostream>
 #include <sstream>
