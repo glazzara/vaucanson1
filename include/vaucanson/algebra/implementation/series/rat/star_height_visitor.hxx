@@ -30,9 +30,9 @@ namespace vcsn {
     StarHeightVisitor<M_,W_>::sum_or_product(const Node<M_, W_>* left_,
 					     const Node<M_, W_>* right_)
     {
-      unsigned post = h_;
+      size_t post = h_;
       left_->accept(*this);
-      unsigned left_height = h_;
+      size_t left_height = h_;
       h_ = post;
       right_->accept(*this);
       h_ = std::max(h_, left_height);

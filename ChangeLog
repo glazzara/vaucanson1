@@ -1,3 +1,10 @@
+2005-10-19  Raphael Poss  <raph@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx (StarHeighVisitor::sum_or_product): 
+	Change the type of "post" and "left_height" to "size_t" for
+	compatibility with class attribute "h_". Needed for G++ 4 which
+	complains about std::max not being defined for (size_t, unsigned).
+	
 2005-10-18  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	Modify some algorithms in src/demos.
