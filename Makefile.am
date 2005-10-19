@@ -3,9 +3,8 @@
 #
 # $Id$
 
-SUBDIRS = include doc src
-EXTRA_DIST = debian vaucanson.spec svn-revision
-CLEANFILES = svn-revision
+SUBDIRS = include doc src debian
+EXTRA_DIST = vaucanson.spec
 
 ###
 ### Autoconf needs additional macros.
@@ -43,7 +42,6 @@ dist-hook:
 	$(distdir)/src/demos/transducers/t1.xml
 	cp $(srcdir)/doc/README.txt $(distdir)/README
 	cp $(srcdir)/doc/NEWS.txt $(distdir)/NEWS
-	rm -rf `find $(distdir)/debian -name .svn`
 
 ###
 ### Sanity check.
@@ -65,12 +63,5 @@ maintainer-check:
 	fi
 
 # Build debian packages.
-# Do this from a fresh tarball, not from your svn working directory.
-debian-pkg:
-	dpkg-buildpackage -uc -us -rfakeroot
-
-# Write <package>-pre<revision>, for the buildfarm.
-relname:
-	echo -n $(distdir) > relname
-svn-revision:
-	echo $(SVN_REVISION) > svn-revision
+deb:
+	$(MAKE) -C debian deb

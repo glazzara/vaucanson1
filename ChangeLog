@@ -1,3 +1,15 @@
+2005-10-19  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
+
+	Update packaging.
+
+	* debian/vaucanson.docs: Remove CONTRIBUTORS and NOTICE from list.
+	* debian/changelog: Update package version number.
+	* debian/Makefile.am: New. Add deb target, to build debian package.
+	* vaucanson.spec: Update package version number.
+	* configure.ac: Downgrade to 0.7.2.
+	* config/vcsn.m4,
+	* Makefile.am: Remove svn revision number detection.
+
 2005-10-19  Raphael Poss  <raph@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx (StarHeighVisitor::sum_or_product): 

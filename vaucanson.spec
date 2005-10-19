@@ -1,7 +1,7 @@
 Name: vaucanson
 Summary: C++ generic library for weighted finite state machine
 Vendor: LRDE
-Version: 0.7.1
+Version: 0.7.2
 Release: 1
 License: GPL
 URL: http://vaucanson.lrde.epita.fr/

@@ -5,15 +5,11 @@
 # VCSN_HEADER
 
 AC_PREREQ([2.54])
-AC_INIT([vaucanson], [0.8], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [0.7.2], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config/vcsn.m4])
 AM_INIT_AUTOMAKE([1.9 tar-ustar no-define foreign dist-bzip2])
 AM_CONFIG_HEADER([config.h:config.hin])
-
-DETECT_SVN_REVISION
-# comment to make this a stable release
-PRE_RELEASE
 
 # Some C and C++ code used.
 # Using $CXX as the C compiler is a hack to allow building shared
@@ -181,7 +177,8 @@ AC_CONFIG_FILES([
 	doc/makefiles/Makefile
 	doc/xml/Makefile
         doc/doc.doxy
-	include/Makefile])
+	include/Makefile
+        debian/Makefile])
 
 m4_include([tests.m4])
 
