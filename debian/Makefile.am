@@ -6,7 +6,6 @@ EXTRA_DIST =                                    \
         compat                                  \
         control                                 \
         copyright                               \
-        files                                   \
 	rules					\
         vaucanson-doc.docs                      \
 	vaucanson-doc.examples			\

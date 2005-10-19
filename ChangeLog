@@ -1,3 +1,7 @@
+2005-10-20  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
+
+	* debian/Makefile.am: Remove non-existant file.
+
 2005-10-19  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
 
 	Update packaging.
