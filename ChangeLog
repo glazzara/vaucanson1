@@ -1,3 +1,9 @@
+2005-10-20  Nicolas Desprès  <nicolas.despres@lrde.epita.fr>
+
+	Warn for generated files.
+
+	* src/benchs/generate_benchs.sh: Add a warning in generated files.
+
 2005-10-20  Olivier Gournet  <olivier.gournet@lrde.epita.fr>
 
 	* debian/Makefile.am: Remove non-existant file.
