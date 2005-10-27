@@ -10,12 +10,12 @@
 // of the License, or (at your option) any later version.
 // 
 // The complete GNU General Public Licence Notice can be found as the
-// `NOTICE' file in the root directory.
+// `COPYING' file in the root directory.
 // 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_DERIVED_TERMS_AUTOMATON_HH
-# define VCSN_ALGORITHMS_DERIVED_TERMS_AUTOMATON_HH
+#ifndef VCSN_ALGORITHMS_DERIVED_TERM_AUTOMATON_HH
+# define VCSN_ALGORITHMS_DERIVED_TERM_AUTOMATON_HH
 
 /** @addtogroup algorithms *//** @{ */
 /**
@@ -100,4 +100,4 @@ namespace vcsn {
 #  include <vaucanson/algorithms/derived_term_automaton.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_ALGORITHMS_DERIVED_TERMS_AUTOMATON_HH
+#endif // ! VCSN_ALGORITHMS_DERIVED_TERM_AUTOMATON_HH

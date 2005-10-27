@@ -10,37 +10,10 @@
 // of the License, or (at your option) any later version.
 // 
 // The complete GNU General Public Licence Notice can be found as the
-// `NOTICE' file in the root directory.
+// `COPYING' file in the root directory.
 // 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-
-/**
- * @file rt_tdc_algorithms.cc
- *
- * Run various algorithms on realtime transducers.  Results are dumped
- * in a XML format on stdout.
- *
- * Valid invocations are:
- *
- * closure <file>
- * realtime <file>
- * is-realtime <file>
- * compose <file> <file>
- * is-empty <file>
- * are-isomorphic <file> <file>
- * evaluation <file> <file>
- * evaluation_aut <file> <file>
- * domain <file>
- * image <file>
- * trim <file>
- * to-tdc <file>
- * transpose <file>
- * display <file>
- * info <file>
- *
- */
-
 #include <fstream>
 #include <sstream>
 #include <cstdlib>

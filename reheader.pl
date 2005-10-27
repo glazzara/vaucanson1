@@ -17,7 +17,7 @@ my $header = "// %BASENAME%: this file is part of the Vaucanson project.
 // of the License, or (at your option) any later version.
 // 
 // The complete GNU General Public Licence Notice can be found as the
-// `NOTICE' file in the root directory.
+// `COPYING' file in the root directory.
 // 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //

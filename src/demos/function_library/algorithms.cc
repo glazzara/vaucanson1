@@ -10,47 +10,10 @@
 // of the License, or (at your option) any later version.
 // 
 // The complete GNU General Public Licence Notice can be found as the
-// `NOTICE' file in the root directory.
+// `COPYING' file in the root directory.
 // 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-
-/**
- * @file algorithms.cc
- *
- * Run various algorithms on automata.  Results are dumped in a XML
- * format on stdout.
- *
- * Valid invocations are:
- *
- * closure <file>
- * realtime <file>
- * transpose <file>
- * product <file1> <file2>
- * power <file> <n>
- * quotient <file>
- * accessible <file>
- * coaccessible <file>
- * is-empty <file>
- * are-isomorphic <file> <file>
- * trim <file>
- * concatenate <file1> <file2>
- * sum <file1> <file2>
- * standardize <file>
- * normalize <file>
- * eval <file> <string>
- * aut_to_exp <file> [state ordering for for eliminations]
- * expand <exp>
- * standard_of <exp>
- * thompson_of <exp>
- * derived_terms <exp>
- * determinize <file>
- * minimize <file> [-m for Moore minimization, -h for Hopcroft minimization]
- * display <file>
- * info <file>
- *
- */
-
 #include <fstream>
 #include <sstream>
 #include <cstdlib>

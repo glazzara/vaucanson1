@@ -10,12 +10,12 @@
 // of the License, or (at your option) any later version.
 // 
 // The complete GNU General Public Licence Notice can be found as the
-// `NOTICE' file in the root directory.
+// `COPYING' file in the root directory.
 // 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DERIVED_TERMS_AUTOMATON_TEST_HH
-# define VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DERIVED_TERMS_AUTOMATON_TEST_HH
+#ifndef VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DERIVED_TERM_AUTOMATON_TEST_HH
+# define VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DERIVED_TERM_AUTOMATON_TEST_HH
 
 # include <vaucanson/algorithms/derived_term_automaton.hh>
 # include <vaucanson/algebra/implementation/series/krat.hh>
@@ -50,4 +50,4 @@ bool	derived_term_automaton_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DERIVED_TERMS_AUTOMATON_TEST_HH
+#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DERIVED_TERM_AUTOMATON_TEST_HH

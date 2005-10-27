@@ -10,41 +10,10 @@
 // of the License, or (at your option) any later version.
 // 
 // The complete GNU General Public Licence Notice can be found as the
-// `NOTICE' file in the root directory.
+// `COPYING' file in the root directory.
 // 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-
-/**
- * @file tdc_algorithms.cc
- *
- * Run various algorithms on fmp transducers.  Results are dumped
- * in a XML format on stdout.
- *
- * Valid invocations are:
- *
- * closure <file>
- * sub-normalize <file>
- * is-sub-normalized <file>
- * compose <file> <file>
- * evaluation <file> <file>
- * evaluation_aut <file> <file>
- * is-empty <file>
- * are-isomorphic <file> <file>
- * domain <file>
- * image <file>
- * composition-cover <file>
- * composition-co-cover <file>
- * b-compose <file> <file>
- * to-rt-tdc <file>
- * intersection <file>
- * display <file>
- * trim <file>
- * transpose <file>
- * info <file>
- *
- */
-
 #include <fstream>
 #include <sstream>
 #include <cstdlib>

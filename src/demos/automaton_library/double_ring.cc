@@ -10,19 +10,10 @@
 // of the License, or (at your option) any later version.
 // 
 // The complete GNU General Public Licence Notice can be found as the
-// `NOTICE' file in the root directory.
+// `COPYING' file in the root directory.
 // 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-
-/*
- * @file double_ring.cc
- *
- * Build an automaton which forms a double ring.
- *
- */
-
-
 #include <sstream>
 
 #include <vaucanson/boolean_automaton.hh>
