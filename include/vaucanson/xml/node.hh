@@ -135,27 +135,27 @@ CREATE_PARAM_CLASSNODE(drawing)
 
 # define CREATE_SPEC_TYPE_NODE(TempParam, Type)			\
     TempParam							\
-    struct typeNode<Type> : Node<Type>				\
+    struct typeNode<Type > : Node<Type >				\
     {								\
       void process(xercesc::DOMElement*, Type&,			\
-		   typename Node<Type>::map_t&,			\
-		   typename Node<Type>::factory_t&);		\
-      static Node<Type>* create() { return new typeNode; }	\
+		   typename Node<Type >::map_t&,			\
+		   typename Node<Type >::factory_t&);		\
+      static Node<Type >* create() { return new typeNode; }	\
     };
 
 
 # define CREATE_SPEC_PARAM_NODE(name, TempParam, Type)		\
     TempParam							\
-    struct name ## Node<Type> : Node<Type>			\
+    struct name ## Node<Type > : Node<Type >			\
     {								\
       void process(xercesc::DOMElement*, Type&,			\
-		   typename Node<Type>::map_t&,			\
-		   typename Node<Type>::factory_t&) {};		\
+		   typename Node<Type >::map_t&,			\
+		   typename Node<Type >::factory_t&) {};		\
       template <class U>					\
       void process(xercesc::DOMElement*, Type&, U &,		\
-		   typename Node<Type>::map_t&,			\
-		   typename Node<Type>::factory_t&);		\
-      static Node<Type>* create() { return new name ## Node; }	\
+		   typename Node<Type >::map_t&,			\
+		   typename Node<Type >::factory_t&);		\
+      static Node<Type >* create() { return new name ## Node; }	\
     };
 
 

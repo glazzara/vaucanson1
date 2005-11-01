@@ -1,3 +1,8 @@
+2005-11-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/xml/node.hh: Add extraneous space in macros, 
+	to be compliant with ICC 9.0.	
+
 2005-10-27  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/r_automaton.hh,
