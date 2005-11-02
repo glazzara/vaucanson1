@@ -161,6 +161,23 @@ namespace vcsn {
     assertion(! "star not defined.");
   }
 
+  // Specialization for Boolean tropical semiring.
+  template <>
+  bool
+  op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>&, bool)
+  {
+    return true;
+  }
+
+  template <>
+  void
+  op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>&, bool& b)
+  {
+    b = 0;
+    return;
+  }
+
+  
   template <typename T>
   bool
   op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>&, T b)

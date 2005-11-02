@@ -1,4 +1,10 @@
 2005-11-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx:
+	Add specialization on op_starable() and op_in_star() for Boolean
+	tropical semiring. Solves a comparison warning with GCC 3.3 for Apple.
+
+2005-11-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	This patch fixes an issue with GCC 3.3 for Apple.
 	
 	* include/vaucanson/misc/unique.hxx: Add conditional macro to avoid 
