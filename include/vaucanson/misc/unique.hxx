@@ -23,7 +23,13 @@ namespace utility {
 
   namespace unique {
 
+#ifdef __GNUC__
+# ifdef __GNUC_MINOR__
+#  if !((__GNUC__ == 3) && (__GNUC_MINOR__ == 3))
     template class UniqueMap<int>::TiSlot<int>;
+#  endif
+# endif
+#endif
     
     template <>
     template <>
