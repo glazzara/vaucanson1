@@ -12,7 +12,7 @@ Permanent staff
   - Project manager,
   - Implementation of crucial algorithms.
 
-* Akim Demaille                         akim@freefriends.org
+* Akim Demaille                         akim.demaille@lrde.epita.fr
   - Project manager.
 
 * Sylvain Peyronnet			sylvain.peyronnet@lrde.epita.fr
@@ -32,14 +32,6 @@ Year 2003 students
   - Lots of code rewriting and optimization,
   - Vaucanswig,
   - Code maintenance.
-
-
-==================
-Year 2004 students
-==================
-
-* Maxime Rey                            maxime.rey@lrde.epita.fr
-  - Mical.
 
 
 ==================
@@ -75,10 +67,11 @@ Year 2006 students
 * Sarah O'Connor                        sarah.o-connor@lrde.epita.fr
   - Improvement of transducers on Rat(B*),
   - Implementation of free monoid product transducers,
-  - Algorithms dedicated to transducers.
+  - Algorithms dedicated to transducers,
+  - Demo for transducers.
 
 * Louis-Noel Pouchet                    louis-noel.pouchet@lrde.epita.fr
-  - Release manager for Vaucanson 0.7 and 0.7.1,
+  - Release manager for Vaucanson 0.7, 0.7.1 and 0.7.2,
   - New XML I/O system including new XSD grammar,
   - Code maintenance,
   - Misc algorithms,

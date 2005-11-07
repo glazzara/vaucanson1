@@ -1,3 +1,9 @@
+2005-11-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* AUTHORS: Remove Maxime Rey, and small updates.
+	* THANKS: Adding Maxime Rey and Nicolas Despres, and add details
+	on everyone's contribution.
+
 2005-11-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx:
