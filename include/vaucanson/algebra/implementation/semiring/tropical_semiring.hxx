@@ -174,7 +174,6 @@ namespace vcsn {
   op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>&, bool& b)
   {
     b = 0;
-    return;
   }
 
   

@@ -23,9 +23,10 @@ namespace utility {
 
   namespace unique {
 
-#ifdef __GNUC__
-# ifdef __GNUC_MINOR__
-#  if !((__GNUC__ == 3) && (__GNUC_MINOR__ == 3))
+    // This code solves a bug in GCC 4.0.0 for Apple Computer Inc.
+#if defined(__GNUC__)
+# if defined(__GNUC_MINOR__) && defined(__GNUC_PATCHLEVEL__)
+#  if (__GNUC__ == 4) && (__GNUC_MINOR__ == 0) && (__GNUC_PATCHLEVEL__ == 0)
     template class UniqueMap<int>::TiSlot<int>;
 #  endif
 # endif

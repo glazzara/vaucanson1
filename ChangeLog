@@ -1,3 +1,10 @@
+2005-11-09  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/misc/unique.hxx: Change macro from "all but 
+	GCC 3.3" to "only GCC 4.0.0" (related to GCC/Apple problem).
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx:
+	Remove URA.
+
 2005-11-07  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* AUTHORS: Remove Maxime Rey, and small updates.
