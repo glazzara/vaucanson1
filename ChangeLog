@@ -1,4 +1,10 @@
 2005-11-09  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+	Bump to Vaucanson 0.7.2.
+	
+	* doc/NEWS.txt: Add text corresponding to version 0.7.2.
+	* doc/README.txt: Updates about new compiler version supported.
+	
+2005-11-09  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/misc/unique.hxx: Change macro from "all but 
 	GCC 3.3" to "only GCC 4.0.0" (related to GCC/Apple problem).

@@ -104,13 +104,17 @@ conflicts   with   those   specific  flags;   ``CXXFLAGS_DEBUG``   and
 Requirements
 ============
 
-Vaucanson  was  tested with  the  `GNU  C++  Compiler (GCC)`_  version
-3.[34],  and should  work  with ICC_  8.1.   The code  is written  in
-respect to  the ISO-IEC  14882 (ISO C++)  standard to permit  a higher
-portability in the future.
+Vaucanson was tested with the `GNU C++ Compiler (GCC)`_ version 3.[34]
+and 4.0, and should work with ICC_ 9.  The code is written in respect
+to the ISO-IEC 14882 (ISO C++) standard to permit a higher portability
+in the future.
 
 .. _GNU C++ Compiler (GCC): http://gcc.gnu.org/
 .. _ICC: http://www.intel.com/software/products/compilers/
+
+A known bug in GCC 4.0.0 for MacOs is supported to make the code
+compliant with this specific compiler version, but MacOs users are
+encouraged to upgrade their compiler.
 
 Moreover, high  verbose mode of the testing  suites uses the  AT&T dot
 format to  save automaton  in a human  readable file.  Use Graphviz_ to

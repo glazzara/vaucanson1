@@ -9,6 +9,31 @@ This document describes major updates to the Vaucanson_ project.
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
 
+Vaucanson 0.7.2 November 09, 2005
+=================================
+
+- Vaucanson works with `GNU C++`_ 3.3, 3.4, 4.0 and ICC_ 9.0.
+
+.. _GNU C++: http://gcc.gnu.org
+.. _ICC: http://www.intel.com/software/products/compilers/
+
+- Compliance with GCC 4.0 and ICC 9.0.
+
+  Vaucanson is compliant with the latest version of GCC and ICC, and
+  was successfully tested on Linux and MacOs.
+
+
+- Bug fixes. 
+
+  Some bugs were fixed in the core library, and in the XML system.
+  
+
+- XML system.
+
+  The system now handles geometric attributes in Vaucanson automata. See 
+  product algorithm for a sample use.
+
+
 Vaucanson 0.7.1 June 25, 2005
 =============================
 
