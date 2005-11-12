@@ -82,9 +82,9 @@ namespace vcsn {
     class AutomatonHistory
     {
     public :
-      typedef std::list<Event<AutoType_>  >		       auto_events_t;
-      typedef std::list<Event<hstate_t>  >		       state_events_t;
-      typedef std::list<Event<hedge_t>  >		       edge_events_t;
+      typedef std::list<Event<AutoType_> >		       auto_events_t;
+      typedef std::list<Event<hstate_t> >		       state_events_t;
+      typedef std::list<Event<hedge_t> >		       edge_events_t;
       typedef std::map<hstate_t, state_events_t>	       states_events_t;
       typedef std::map<hedge_t, edge_events_t>		       edges_events_t;
       

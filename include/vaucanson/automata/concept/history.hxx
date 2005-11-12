@@ -105,7 +105,7 @@ namespace vcsn {
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return false;
-      states_events_[s].push_front(new UnaryEvent<hstate_t>(e, first));
+      states_events_[s].push_front(UnaryEvent<hstate_t>(e, first));
       return true;
     }
       
@@ -122,7 +122,7 @@ namespace vcsn {
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return false;
-      states_events_[s].push_front(new BinaryEvent<hstate_t>
+      states_events_[s].push_front(BinaryEvent<hstate_t>
 				   (e, first, second));
       return true;
     }
@@ -154,7 +154,7 @@ namespace vcsn {
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return false;
-      edges_events_[edge].push_front(new Event<hedge_t>(e));
+      edges_events_[edge].push_front(Event<hedge_t>(e));
       return true;
     }
 
@@ -170,7 +170,7 @@ namespace vcsn {
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return false;
-      edges_events_[edge].push_front(new UnaryEvent<hedge_t>(e, first));
+      edges_events_[edge].push_front(UnaryEvent<hedge_t>(e, first));
       return true;
     }
     
@@ -188,7 +188,7 @@ namespace vcsn {
 	if (ev->get_event_kind() == e)
 	  return false;
       edges_events_[edge].push_front
-	(new BinaryEvent<hedge_t>(e, first, second));
+	(BinaryEvent<hedge_t>(e, first, second));
       return true;
     }
     
@@ -218,7 +218,7 @@ namespace vcsn {
 	   ++ev)
 	if (ev->second->get_event_kind() == e)
 	  return false;
-      auto_events_.push_front(new Event<AutoType_>(e));
+      auto_events_.push_front(Event<AutoType_>(e));
       return true;
     }
     
@@ -232,7 +232,7 @@ namespace vcsn {
 	   ++ev)
 	if (ev->second->get_event_kind() == e)
 	  return false;
-      auto_events_.push_front(new Event<AutoType_>(e, first));
+      auto_events_.push_front(Event<AutoType_>(e, first));
       return true;
     }
 
@@ -247,7 +247,7 @@ namespace vcsn {
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return false;
-      auto_events_.push_front(new BinaryEvent<AutoType_>(e, first, second));
+      auto_events_.push_front(BinaryEvent<AutoType_>(e, first, second));
       return true;
     }
     

@@ -1,3 +1,9 @@
+2005-11-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* include/vaucanson/xml/tools.hh: Add inclusion of file xml/strings.hh.
+	* include/vaucanson/automata/concept/history.hh: Remove a bunch of call
+	to "new" operator, beeing in contradiction with the type used.
+
 2005-11-09  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	Bump to Vaucanson 0.7.2.
 	

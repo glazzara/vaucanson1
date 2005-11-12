@@ -45,6 +45,7 @@
 # include <vaucanson/algebra/concept/monoid_base.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 
+# include <vaucanson/xml/strings.hh>
 
 namespace vcsn
 {
