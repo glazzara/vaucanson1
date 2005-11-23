@@ -2,17 +2,17 @@
 
 	* include/vaucanson/xml/tools.hh: Add inclusion of file xml/strings.hh.
 	* include/vaucanson/automata/concept/history.hh: Remove a bunch of call
-	to "new" operator, beeing in contradiction with the type used.
+	to "new" operator, being in contradiction with the type used.
 
 2005-11-09  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	Bump to Vaucanson 0.7.2.
-	
+
 	* doc/NEWS.txt: Add text corresponding to version 0.7.2.
 	* doc/README.txt: Updates about new compiler version supported.
-	
+
 2005-11-09  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/misc/unique.hxx: Change macro from "all but 
+	* include/vaucanson/misc/unique.hxx: Change macro from "all but
 	GCC 3.3" to "only GCC 4.0.0" (related to GCC/Apple problem).
 	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx:
 	Remove URA.
@@ -31,14 +31,14 @@
 
 2005-11-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 	This patch fixes an issue with GCC 3.3 for Apple.
-	
-	* include/vaucanson/misc/unique.hxx: Add conditional macro to avoid 
+
+	* include/vaucanson/misc/unique.hxx: Add conditional macro to avoid
 	template instanciation with GCC 3.3.
-	
+
 2005-11-02  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/xml/node.hh: Add extraneous space in macros, 
-	to be compliant with ICC 9.0.	
+	* include/vaucanson/xml/node.hh: Add extraneous space in macros,
+	to be compliant with ICC 9.0.
 
 2005-10-27  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
@@ -610,8 +610,8 @@
 	* src/demos/transducers/one_rule_rewriting/ORR_tdc_gen.cc,
 	* src/demos/transducers/one_rule_rewriting/ORR_demo.cc,
 	* src/demos/transducers/t1.cc,
-	* src/demos/transducers/u1.cc: Update headers accroding to the 
-	packaging modifications previously made: change reference to NOTICE 
+	* src/demos/transducers/u1.cc: Update headers accroding to the
+	packaging modifications previously made: change reference to NOTICE
 	file to reference to COPYING file.
 
 	* reheader.pl: Update the header for Vaucanson.
@@ -647,11 +647,11 @@
 
 2005-10-19  Raphael Poss  <raph@lrde.epita.fr>
 
-	* include/vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx (StarHeighVisitor::sum_or_product): 
+	* include/vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx (StarHeighVisitor::sum_or_product):
 	Change the type of "post" and "left_height" to "size_t" for
 	compatibility with class attribute "h_". Needed for G++ 4 which
 	complains about std::max not being defined for (size_t, unsigned).
-	
+
 2005-10-18  Sarah O'Connor  <sarah.o-connor@lrde.epita.fr>
 
 	Modify some algorithms in src/demos.
@@ -672,7 +672,7 @@
 
 	* doc/NEWS.txt: Update. Add licence information.
 	* doc/README.txt: Update. Merge with INSTALL.txt.
-	
+
 	* AUTHORS: Update. Merge with CONTRIBUTORS.
 	* THANKS: Update.
 
@@ -684,10 +684,10 @@
 
 	* Makefile.am,
 	* doc/Makefile.am: Update accordingly.
-	
+
 2005-10-17  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* src/demos/automaton_library/divkbaseb.cc: Fix the name of the 
+	* src/demos/automaton_library/divkbaseb.cc: Fix the name of the
 	generated automaton.
 
 2005-10-11  Nicolas Pouillard  <ertai@lrde.epita.fr>
@@ -710,12 +710,12 @@
 	argument of save() and create_document() functions.
 
 	* src/tests/xml/session_ref.dot: Fix the reference file.
-	
+
 2005-09-20  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/node.hh,
-	* include/vaucanson/xml/node.hxx: Retrieve the name of the XML 
-	automaton, and store it in the "geometric" attributes. Also fix a 
+	* include/vaucanson/xml/node.hxx: Retrieve the name of the XML
+	automaton, and store it in the "geometric" attributes. Also fix a
 	bug in coordinates management.
 
 	* include/vaucanson/xml/xml_converter.hh,
@@ -723,7 +723,7 @@
 	* include/vaucanson/xml/XML.hh,
 	* include/vaucanson/xml/XML.hxx,
 	* include/vaucanson/tools/xml_dump.hh: Enable naming of the automaton.
-	The tools::xml_dump() function third argument is used to name the 
+	The tools::xml_dump() function third argument is used to name the
 	automaton in the XML document.
 
 	* include/vaucanson/automata/implementation/geometry.hh,
@@ -733,10 +733,10 @@
 	* src/demos/automaton_library/a1.xml,
 	* src/demos/automaton_library/b1.xml,
 	* src/demos/automaton_library/c1.xml: Name the automata.
-	
+
 2005-09-19  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/xml/session.hxx: Fix a bug in session management. 
+	* include/vaucanson/xml/session.hxx: Fix a bug in session management.
 	From now on, when pushing a session to an automaton the automaton is
 	emptied first, and then receive the first automaton from the session
 	as its content.
@@ -749,14 +749,14 @@
 	rule. Uses top_srcdir instead of top_builddir.
 
 2005-09-19  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
-	This patch changes XML document dump. From now on, transitions are 
+	This patch changes XML document dump. From now on, transitions are
 	represented:
 	<transition src="s0" dst="s1" label="a">
-	
+
 	* include/vaucanson/xml/xml_converter.hxx,
 	* include/vaucanson/xml/tools.hh,
 	* include/vaucanson/xml/tools.hxx: Change the XML writer. Don't use the
-	one proposed by xerces, replace it by a hand-coded one. 
+	one proposed by xerces, replace it by a hand-coded one.
 
 	* src/tests/xml/trans_ref.xml,
 	* src/tests/xml/r_ref.xml,
@@ -783,14 +783,14 @@
 
 2005-09-14  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
-	* include/vaucanson/misc/unique.hxx: Fix template instanciation, to 
+	* include/vaucanson/misc/unique.hxx: Fix template instanciation, to
 	work with GCC 4.0.0.
 	* include/vaucanson/algebra/implementation/letter/range.hh: Hack enum
 	definition, to work with GCC 4.0.0 and GCC 4.0.2.
 
 	* src/tests/design_pattern/intrinsics.hh,
 	* src/tests/design_pattern/element-full-test.cc,
-	* src/tests/design_pattern/intrinsics_ops.cc: Remove some unused 
+	* src/tests/design_pattern/intrinsics_ops.cc: Remove some unused
 	argument / values warnings.
 
 2005-09-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>

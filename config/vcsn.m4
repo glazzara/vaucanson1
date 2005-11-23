@@ -1,4 +1,4 @@
-# vcsn.m4
+# vcsn.m4                                     -*- Autoconf -*-
 # $Id$
 
 # VCSN_PATH_LOCAL([RELATIVE-PATH-TO-VAUCANSON-SOURCES])
