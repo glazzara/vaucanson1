@@ -65,3 +65,8 @@ maintainer-check:
 # Build debian packages.
 deb:
 	$(MAKE) -C debian deb
+
+# Update headers.
+rehead:
+	find $(srcdir)/include -name '*.hh' -or -name '*.hxx' | \
+	  xargs $(srcdir)/reheader.pl

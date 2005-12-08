@@ -1,3 +1,12 @@
+2005-12-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	Kill white spaces issues.
+
+	* reheader.pl: Run on multiple files.
+	Make sure the last eol is there.
+	Make sure not to leave trailing white spaces.
+	* Makefile.am (rehead): New.
+
 2005-11-13  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hh: Add inclusion of file xml/strings.hh.
