@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
  * the Parallel/High-performance Object-Oriented Scientific Computing
  * (POOSC'2003) Darmstadt, Germany July 2003.
  *
- * @see http://www.lrde.epita.fr/cgi-bin/twiki/view/Publications/200307-Poosc
+ * @see http://publications.lrde.epita.fr/200307-Poosc
 */
 
 # include <vaucanson/design_pattern/element.hh>

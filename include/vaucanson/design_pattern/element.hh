@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ namespace vcsn {
    *
    * @c  Element proposes  a lot  of different  constructors so  as to
    * allow  the  largest structure  of  type  conversions.  Calling  foreign
-   * constructors assume  that there exist  compatible @c op_convert()
+   * constructors assumes  that there exist  compatible @c op_convert()
    * functions.
    *
    * @see
@@ -61,7 +61,7 @@ namespace vcsn {
   class Element : public MetaElement<S, T>, private SetSlot<S>
   {
   public:
-    /// %Structure type for structural elements.
+    /// Structure type for structural elements.
     typedef S	      set_t;
 
     /// Implementation type for values.
@@ -78,9 +78,9 @@ namespace vcsn {
     /**
      * Default constructor.
      *
-     * Note that  it is not possible  to use this  contructor when the
+     * It is not possible  to use this  contructor when the
      * structural element has dynamic  data. If you absolutely need to
-     * do  so,  please  notice  that  it may  be  dangerous,  and  see
+     * do  so,  notice  that  it may  be  dangerous,  and  see
      * utility::Deferrer.
      *
      * @see utility::Deferrer
@@ -101,9 +101,8 @@ namespace vcsn {
     /**
      * Copy constructor from foreign @c Element instances.
      *
-     * Note that  it is not possible  to use this  contructor when the
-     * structural  element  has  dynamic   data  since  it  leaves  it
-     * uninitialized.
+     * Impossible  to use when the structural  element
+     * has  dynamic   data  since  it  leaves  it uninitialized.
      */
     template<typename OtherS, typename U>
     Element(const Element<OtherS, U>& other);
@@ -116,9 +115,8 @@ namespace vcsn {
     /**
      * Copy constructor from anonymous values.
      *
-     * Note that  it is not possible  to use this  contructor when the
-     * structural  element  has  dynamic   data  since  it  leaves  it
-     * uninitialized.
+     * Impossible to use when the structural element has dynamic data
+     * since it leaves it uninitialized.
      */
     Element(const T& other);
 
@@ -133,7 +131,7 @@ namespace vcsn {
     /**
      * Default constructor with the structural element specified.
      *
-     * This constructor invokes the default constructor of the
+     * Invokes the default constructor of the
      * implementation value type.
      */
     explicit Element(const S& structure);

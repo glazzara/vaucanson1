@@ -1,5 +1,20 @@
 2005-12-08  Akim Demaille  <akim@lrde.epita.fr>
 
+	Rework the doc a bit.
+
+	* include/vaucanson/design_pattern/element.hh,
+	* include/vaucanson/design_pattern/structure.hh,
+	* include/vaucanson/design_pattern/predecls.hh,
+	* include/vaucanson/design_pattern/element.hxx,
+	* include/vaucanson/design_pattern/meta_element_root.hh,
+	* include/vaucanson/design_pattern/syntactic_decorator.hh,
+	* include/vaucanson/design_pattern/slots.hh,
+	* include/vaucanson/design_pattern/design_pattern.hh,
+	* include/vaucanson/design_pattern/factory.hh: Kill typos
+	and useless words.
+
+2005-12-08  Akim Demaille  <akim@lrde.epita.fr>
+
 	Kill white spaces issues.
 
 	* reheader.pl: Run on multiple files.

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -72,7 +72,8 @@ namespace vcsn {
     : SetSlot<S> (),
       value_(op_convert(SELECT(S), SELECT(T), other))
   {
-    static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
+    static_assertion_(not dynamic_traits<S>::ret,
+		      need_dynamic_structural_element);
   }
 
   template <class S, class T>
@@ -81,7 +82,8 @@ namespace vcsn {
     : SetSlot<S> (),
       value_(op_convert(SELECT(S), SELECT(T), other))
   {
-    static_assertion_(not dynamic_traits<S>::ret, need_dynamic_structural_element);
+    static_assertion_(not dynamic_traits<S>::ret,
+		      need_dynamic_structural_element);
   }
 
   /*--------------------------------------.

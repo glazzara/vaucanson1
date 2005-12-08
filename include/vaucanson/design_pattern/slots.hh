@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ namespace vcsn {
    * This version (parameter @c dynamic is @c false) is used when the
    * structural element is static, i.e. does not require a
    * S.E. instance reference in all related @c Element instance
-   * objects : all its properties are carried by its type.
+   * objects: all its properties are carried by its type.
    *
    * Because this version has actually no attribute, it should take no
    * memory space in each @c SetSlot (then @c Element) instance to
@@ -71,7 +71,7 @@ namespace vcsn {
      *
      * Because this version of the class pertains to static S.E.'s,
      * this accessor returns a NULL reference, most likely
-     * inappropriate for any other form of dereference other than
+     * inappropriate for any other form of dereferencing other than
      * accessing methods of the S.E. (which do not use the reference
      * anyway).
      */
@@ -94,10 +94,9 @@ namespace vcsn {
     //@}
 
     /**
-     * @brief Tell whether the current set slot is linked to a
-     *        structural element or not.
+     * Whether the current set slot is linked to a structural element.
      *
-     * In this version this method always returns @c true.
+     * This version always returns @c true.
      */
     bool	_structure_bound() const;
   };
@@ -106,7 +105,7 @@ namespace vcsn {
    * Base class for @c SetSlot, specializing @c SetSlotAttribute
    *
    * @anchor dyn_set_slot_attribute
-   * This class is a specialization of @c SetSlotAttribute used when
+   * This class is a specialization of @c SetSlotAttribute used
    * when the structural element is dynamic, i.e. requires a
    * S.E. instance reference in all related @c Element instance objects.
    *
@@ -121,7 +120,7 @@ namespace vcsn {
     /**
      * Copy constructor.
      *
-     * This copy constructor creates an structural element reference
+     * Create a structural element reference
      * by copying from the @c other attribute.
      */
     SetSlotAttribute(const SetSlotAttribute& other);
@@ -129,12 +128,15 @@ namespace vcsn {
     /**
      * Foreign copy constructor.
      *
-     * This copy constructor creates an structural element reference
+     * Create a structural element reference
      * by copying from a reference to a S.E. instance defined elsewhere.
      *
      * @bug
      *   For a number of reasons (see the mailing list), this constructor
      *   creates a fresh copy on the heap which is never deallocated.
+     *
+     * @bug
+     *   Make a better self-contained description of the bug.
      */
     SetSlotAttribute(const S& other);
 
@@ -145,7 +147,7 @@ namespace vcsn {
     /**
      * Update the reference in the @c Slot.
      *
-     * This method updates the S.E. reference in the attribute with
+     * Update the S.E. reference in the attribute with
      * the reference given as argument.
      */
     void	_structure_assign(const SetSlotAttribute& other);
@@ -153,8 +155,7 @@ namespace vcsn {
     //@}
 
     /**
-     * @brief Tell whether the reference to the structural element is
-     *        valid or not (NULL).
+     * Whether the reference to the structural element is valid or not (NULL).
      */
     bool	_structure_bound() const;
 
@@ -167,9 +168,9 @@ namespace vcsn {
   | Set attribute for the Element class |
   `------------------------------------*/
 
-  /** Type of the @c set_ attribute of the @c Element class
+  /** Type of the @c set_ attribute of the @c Element class.
    *
-   * This class derives from @c SetSlotAttribute, a reference to a
+   * Derives from @c SetSlotAttribute, a reference to a
    * structural element to which an @c Element is related.
    *
    * The actual implementation of @c SetSlot\<S\>, for a given
@@ -191,7 +192,7 @@ namespace vcsn {
   struct SetSlot : SetSlotAttribute<S, dynamic_traits<S>::ret>
   {
     typedef Tag tag_type;
- 
+
     //@{
     /**
      * @brief Trivial constructor. Calls the inherited constructor from

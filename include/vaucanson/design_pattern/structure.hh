@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ namespace vcsn {
     bool  contains(const Element<S, T>& elt) const;
 
     /**
-     * Specialization of @c containts that always return false.
+     * Specialization of @c contains that always returns false.
      *
      * Indeed, elements structured by a particular type are always
      * incompatible with structural elements of another type.
@@ -71,14 +71,14 @@ namespace vcsn {
     choose(SELECTOR(T)) const;
 
 
-    /// Exact type of the most derivated type in the hierarchy
+    /// Exact type of the most derivated type in the hierarchy.
     typedef S		self_t;
 
     //@{
     /**
      * Accessor to the real type.
      *
-     * This accessor is intended to be used by implementations in this
+     * To be used by implementations in this
      * class and derivated structures to obtain a reference to the
      * structural element with its most derivated type.
      */
@@ -88,7 +88,7 @@ namespace vcsn {
 
   protected:
 
-    /// @name Protected constructor for class abstraction
+    /// @name Protected constructor for class abstraction.
     /** @{ */
     Structure();
     Structure(const Structure& other);
@@ -101,9 +101,9 @@ namespace vcsn {
 
   /** @addtogroup operators *//** @{ */
   /**
-   * @name Inequality operator for Structures
+   * @name Inequality operator for Structures.
    *
-   * This operator calls equality operator of sub-class.
+   * Calls equality operator of sub-class.
    *
    */
   /** @{ */

@@ -29,7 +29,9 @@
  *
  * @see xml::converter, xml::Node
  *
- * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+ * @author Louis-Noël Pouchet <Louis-Noel.Pouchet@lrde.epita.fr>
+ *
+ * @todo FIXME: Document.
  **/
 
 namespace vcsn
@@ -99,8 +101,6 @@ namespace vcsn
 
     AbstractProduct*		create_object(const IdentifierType& id)
     {
-
-
       typename assoc_map_t::const_iterator i = associations_.find(id);
 
       if (i != associations_.end())

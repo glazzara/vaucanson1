@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 /** @addtogroup design_pattern *//** @{ */
 /**
  * @file syntactic_decorator.hh
- * @brief Declaration of the very base class of @c Element
+ * @brief Declaration of the very base class of @c Element.
  */
 /** @} */
 
@@ -35,7 +35,7 @@ namespace vcsn {
   `-------------------*/
 
   /**
-   * @brief This class provides the standard operator delegations to Element.
+   * @brief Provides the standard operator delegations to Element.
    *
    * It defines all the self-application operators
    * of C++, and delegates them to corresponding @c op_* functions.
@@ -43,7 +43,7 @@ namespace vcsn {
   template<typename S, typename T>
   struct SyntacticDecorator
   {
-    /// Attribute indicating whether the implementation type has run-time data.
+    /// Whether the implementation type has run-time data.
     static const bool dynamic_value = true;
 
     /// Virtual accessor to the structural element.
@@ -121,7 +121,7 @@ namespace vcsn {
     /**
      * Accessor to the real type.
      *
-     * This accessor is intended to be used by implementations in this class
+     * To be used by implementations in this class
      * and derivated MetaElement specializations to obtain a reference to the
      * Element instance with its most derivated type.
      */
