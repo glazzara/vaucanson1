@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -67,9 +67,9 @@ namespace vcsn {
     /**
      * Trait for virtual types of structural elements for alphabets.
      *
-     * This trait contains a definition of @c letter_t, the type of
+     * Contains a definition of @c letter_t, the type of
      * any letter in an alphabet. It should be specialized for all
-     * derivated structures.
+     * derived structures.
      */
     template<typename S, typename T>
     struct alphabet_traits
@@ -117,7 +117,7 @@ namespace vcsn {
   /**
    * Specialization of @c MetaElement for @c AlphabetSetBase.
    *
-   * This class defines services shared by all alphabets.
+   * Services shared by all alphabets.
    */
   template<class S, typename T>
   struct MetaElement<algebra::AlphabetSetBase<S>, T>
@@ -151,10 +151,10 @@ namespace vcsn {
     /// Test for matching letters modulo the alphabet meta-symbols.
     bool letter_equality(letter_t, letter_t) const;
 
-    /// Tell whether the alphabet contains a specified letter.
+    /// Whether the alphabet contains a specified letter.
     bool contains(const letter_t& l) const;
 
-    /// Tell whether the alphabet contains a finite number of letters.
+    /// Whether the alphabet contains a finite number of letters.
     bool is_finite() const;
 
     /// Retrieve a begin iterator.

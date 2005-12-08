@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,9 +26,9 @@ namespace vcsn {
     /** @addtogroup algebra *//** @{ */
     /** @addtogroup alphabet *//** @{ */
 
-    /*---------------------.
-    | AlphabetDecorator<T> |
-    `---------------------*/
+    /*------------------------.
+    | AlphabetDecorator<L, T> |
+    `------------------------*/
 
     /**
      * Decorate a given alphabet implementation with meta-symbols.
@@ -78,11 +78,11 @@ namespace vcsn {
     };
 
 
-    /*--------------------------------------------.
-    | alphabet_traits<AlphabetSet<L>,std::set<L>> |
-    `--------------------------------------------*/
+    /*---------------------------------------------------------.
+    | alphabet_traits<AlphabetSet<L>, AlphabetDecorator<L, T>> |
+    `---------------------------------------------------------*/
 
-    /// Meta information about the mixing of AlphabetSet with std::set.
+    /// Meta information about the mixing of AlphabetSet with AlphabetDecorator.
     template<typename L, typename T>
     struct alphabet_traits<AlphabetSet<L>, AlphabetDecorator<L, T> >
     {
@@ -98,18 +98,19 @@ namespace vcsn {
   /** @addtogroup algebra *//** @{ */
   /** @addtogroup alphabet *//** @{ */
 
-  /*-----------------------------------------.
-  | MetaElement<AlphabetSet<L>, std::set<L>> |
-  `-----------------------------------------*/
+  /*-----------------------------------------------------.
+  | MetaElement<AlphabetSet<L>, AlphabetDecorator<L, T>> |
+  `-----------------------------------------------------*/
 
   /**
-   * Services of every alphabet implemented with AlphabetDecorator<T>.
+   * Services of every alphabet implemented with AlphabetDecorator<L, T>.
    *
    * @see MetaElement<AlphabetSetBase<Self>, T>
    */
   template<typename L, typename T>
   struct MetaElement<algebra::AlphabetSet<L>, algebra::AlphabetDecorator<L, T> >
-    : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >, algebra::AlphabetDecorator<L, T> >
+    : MetaElement<algebra::AlphabetSetBase<algebra::AlphabetSet<L> >,
+		  algebra::AlphabetDecorator<L, T> >
   {
     /// The dynamic properties depends on the implementation one.
     static const bool dynamic_value =

@@ -71,7 +71,7 @@ namespace vcsn {
     choose(SELECTOR(T)) const;
 
 
-    /// Exact type of the most derivated type in the hierarchy.
+    /// Exact type of the most derived type in the hierarchy.
     typedef S		self_t;
 
     //@{
@@ -79,8 +79,8 @@ namespace vcsn {
      * Accessor to the real type.
      *
      * To be used by implementations in this
-     * class and derivated structures to obtain a reference to the
-     * structural element with its most derivated type.
+     * class and derived structures to obtain a reference to the
+     * structural element with its most derived type.
      */
     self_t&        self();
     const self_t&  self() const;

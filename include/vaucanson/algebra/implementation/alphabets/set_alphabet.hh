@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ namespace vcsn {
     template<typename L>
     struct alphabet_traits<AlphabetSet<L>, std::set<L> >
     {
-      /// The type of letter hold by the alphabet.
+      /// The type of letters held by the alphabet.
       typedef L			letter_t;
     };
 
@@ -51,7 +51,7 @@ namespace vcsn {
   `-----------------------------------------*/
 
   /**
-   *  Services of every alphabet implemented with std::set.
+   * Services of every alphabet implemented with std::set.
    *
    * @see MetaElement<AlphabetSetBase<Self>, T>
    */
@@ -67,8 +67,7 @@ namespace vcsn {
   /** @} */
 
   template <typename L>
-  size_t
-  op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&);
+  size_t op_max_size(const algebra::AlphabetSet<L>&, const std::set<L>&);
 
   template <typename L>
   bool op_contains(const algebra::AlphabetSet<L>& s, const std::set<L>& a);

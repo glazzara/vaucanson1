@@ -122,8 +122,8 @@ namespace vcsn {
      * Accessor to the real type.
      *
      * To be used by implementations in this class
-     * and derivated MetaElement specializations to obtain a reference to the
-     * Element instance with its most derivated type.
+     * and derived MetaElement specializations to obtain a reference to the
+     * Element instance with its most derived type.
      */
     Element<S, T>& self();
     const Element<S, T>& self() const;

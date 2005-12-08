@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ namespace vcsn {
     struct AlphabetSet
       : AlphabetSetBase<AlphabetSet<L> >
     {
-      /// The type of letter hold by the alphabets.
+      /// The type of letters held by the alphabet.
       typedef L		letter_t;
     };
 
@@ -52,7 +52,7 @@ namespace vcsn {
   | dynamic_traits<AlphabetSet<L> |
   `------------------------------*/
 
-  /// meta information about AlphabetSet.
+  /// Meta information about AlphabetSet.
   template<typename L>
   struct dynamic_traits<algebra::AlphabetSet<L> >
     : dynamic_traits<algebra::AlphabetSetBase<L> >

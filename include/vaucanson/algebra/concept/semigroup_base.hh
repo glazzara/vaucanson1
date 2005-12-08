@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,19 +26,18 @@ namespace vcsn {
     /** @addtogroup algebra *//** @{ */
     /** @addtogroup semigroup *//** @{ */
 
-    /// @brief Empty class used as static information to denotes the
-    ///        kind of internal operation of a semigroup. Here: operator*
+    /// @brief Empty class used as static information to denote the
+    ///        kind of internal operation of a semigroup. Here: operator*.
     struct mul_kind
     {};
 
-    /// @brief Empty class used as static information to denotes the
-    ///        kind of internal operation of a semigroup. Here: operator+
+    /// @brief Empty class used as static information to denote the
+    ///        kind of internal operation of a semigroup. Here: operator+.
     struct add_kind
     {};
 
     /**
-     * @brief @c SemigroupBase is the base class of all structures that
-     *        are semigroups.
+     * @brief Base class of all structures that are semigroups.
      *
      * All derived classes must define type virtual_types<S>::semigroup_kind.
      */
@@ -88,10 +87,10 @@ namespace vcsn {
     : MetaElement<Structure<Self>, T>
   {
   protected:
-    /// Default constructor is protected since it is an abstract class.
+    /// Protected since it is an abstract class.
     MetaElement();
 
-    /// Copy constructor is protected since it is an abstract class.
+    /// Protected since it is an abstract class.
     MetaElement(const MetaElement& other);
   };
 

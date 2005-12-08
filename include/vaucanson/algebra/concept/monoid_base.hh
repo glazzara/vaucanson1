@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ namespace vcsn {
     `-----------------*/
 
     /**
-     * @c MonoidBase is the base class of all structures that are monoids.
+     * @c The base class of all structures that are monoids.
      *
      * Monoid defines identity for semigroups of mul_kind and zero for
      * semigroup of add_kind.
@@ -48,10 +48,10 @@ namespace vcsn {
       Element<Self, T> zero(SELECTOR(T)) const;
 
     protected:
-      /// Default constructor is protected since it is an abstract class.
+      /// Protected since it is an abstract class.
       MonoidBase();
 
-      /// Copy constructor is protected since it is an abstract class.
+      /// Protected since it is an abstract class.
       MonoidBase(const MonoidBase& other);
     };
 
@@ -103,10 +103,10 @@ namespace vcsn {
     : MetaElement<algebra::SemigroupBase<Self>, T>
   {
   protected:
-    /// Default constructor is protected since it is an abstract class.
+    /// Protected since it is an abstract class.
     MetaElement();
 
-    /// Copy constructor is protected since it is an abstract class.
+    /// Protected since it is an abstract class.
     MetaElement(const MetaElement& other);
   };
 

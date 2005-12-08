@@ -1,5 +1,19 @@
 2005-12-08  Akim Demaille  <akim@lrde.epita.fr>
 
+	More doxymentation fixes.
+
+	* include/vaucanson/algebra/implementation/alphabets/alphabets.hh,
+	* include/vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh,
+	* include/vaucanson/algebra/implementation/alphabets/set_alphabet.hh,
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	* include/vaucanson/algebra/concept/semigroup_base.hh,
+	* include/vaucanson/algebra/concept/monoid_base.hh,
+	* include/vaucanson/design_pattern/structure.hh,
+	* include/vaucanson/design_pattern/syntactic_decorator.hh: Various
+	fixes and simplifications.
+
+2005-12-08  Akim Demaille  <akim@lrde.epita.fr>
+
 	Rework the doc a bit.
 
 	* include/vaucanson/design_pattern/element.hh,
