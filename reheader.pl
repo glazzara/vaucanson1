@@ -5,7 +5,12 @@ my $boundupper = "#ifndef %CPPNAME%
 # define %CPPNAME%";
 my $boundlower = "#endif // ! %CPPNAME%";
 
-my $header = "// %BASENAME%: this file is part of the Vaucanson project.
+my $cxx_hint =
+"//                                                             -*- C++ -*-
+";
+
+my $header =
+"// %BASENAME%: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -55,7 +60,7 @@ sub rehead ($)
   $_ = $header;
   s,%BASENAME%,$basename,g;
   s,%CPPNAME%,$cppname,g;
-  my $xheader = $_;
+  my $xheader = (($fname =~ /\.(cc|hh|hxx)$/) ? '' : $cxx_hint) . $_;
 
 
   print STDERR "Processing for $fname...\n";

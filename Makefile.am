@@ -53,10 +53,16 @@ sanity-check:
 ### Check headers for sanity.
 ###
 
+find_headers = \
+   find $(srcdir)/include -name '*.hh' \
+	              -or -name '*.hxx' \
+	              -or -name '*.thh' \
+	              -or -name '*.txx'
+
 # This is totally experimental. Comments are welcome.
 maintainer-check:
 	if cppi --version >/dev/null 2>&1; then \
-	  find $(srcdir)/include -name '*.hh' -or -name '*.hxx' | \
+	  $(find_headers) | \
 	    xargs cppi --check; \
 	else \
 	  echo "$@: GNU cppi is required" >&2; \
@@ -68,5 +74,5 @@ deb:
 
 # Update headers.
 rehead:
-	find $(srcdir)/include -name '*.hh' -or -name '*.hxx' | \
+	$(find_headers) | \
 	  xargs $(srcdir)/reheader.pl

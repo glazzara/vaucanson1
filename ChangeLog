@@ -1,3 +1,11 @@
+2005-12-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	Rehead all the headers.
+
+	* reheader.pl: Help Emacs with exotic file extensions.
+	* Makefile.am (find_headers): New.
+	Use it.
+
 2005-12-08  Akim Demaille  <akim@lrde.epita.fr>
 
 	More doxymentation fixes.
