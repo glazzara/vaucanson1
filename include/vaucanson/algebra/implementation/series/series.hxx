@@ -27,34 +27,34 @@ namespace vcsn {
     /*------------------------.
     | Series<Semiring, Monoid> |
     `------------------------*/
-    
+
     template<typename Semiring, typename Monoid>
     Series<Semiring, Monoid>::Series(const Semiring& w, const Monoid& m)
-      : SetSlot<Semiring,semiring_slot_tag>(w), 
-	SetSlot<Monoid,monoid_slot_tag>(m) 
+      : SetSlot<Semiring,semiring_slot_tag>(w),
+	SetSlot<Monoid,monoid_slot_tag>(m)
     {}
-    
+
     template<typename Semiring, typename Monoid>
-    Series<Semiring, Monoid>::Series(const Series& other) : 
+    Series<Semiring, Monoid>::Series(const Series& other) :
       SeriesBase<Series<Semiring,Monoid> >(other),
       SetSlot<Semiring,semiring_slot_tag>(other),
       SetSlot<Monoid,monoid_slot_tag>(other)
     {}
-    
+
     template<typename Semiring, typename Monoid>
     const Semiring& Series<Semiring, Monoid>::semiring() const
-    { 
-      return static_cast<const SetSlot<Semiring,semiring_slot_tag>* >(this)->_structure_get(); 
+    {
+      return static_cast<const SetSlot<Semiring,semiring_slot_tag>* >(this)->_structure_get();
     }
-    
+
     template<typename Semiring, typename Monoid>
     const Monoid& Series<Semiring, Monoid>::monoid() const
-    { 
-      return static_cast<const SetSlot<Monoid,monoid_slot_tag>* >(this)->_structure_get(); 
+    {
+      return static_cast<const SetSlot<Monoid,monoid_slot_tag>* >(this)->_structure_get();
     }
 
     template<typename W, typename M>
-    bool operator==(const Series<W, M>& s1, 
+    bool operator==(const Series<W, M>& s1,
 		    const Series<W, M>& s2)
     {
       return & s1.monoid() == & s2.monoid() &&

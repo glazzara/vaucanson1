@@ -101,10 +101,10 @@ namespace utility {
       float generate_one = ((static_cast<float> (rand()) / RAND_MAX +
 			      static_cast<float> (rand())) / RAND_MAX +
 			     static_cast<float> (rand())) / RAND_MAX;
-      
+
       return min + generate_one * range;;
     }
-    
+
     template<>
     inline double generate<double>()
     {
@@ -122,7 +122,7 @@ namespace utility {
       double generate_one = ((static_cast<double> (rand()) / RAND_MAX +
 			      static_cast<double> (rand())) / RAND_MAX +
 			     static_cast<double> (rand())) / RAND_MAX;
-      
+
       return min + generate_one * range;;
     }
 

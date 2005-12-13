@@ -109,7 +109,7 @@ namespace vcsn {
 	to_del.pop_front();
 	a.del_edge(e);
       }
-   
+
     coaccessible_here(a);
 
     realtime_words_here(a);

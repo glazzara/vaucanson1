@@ -29,7 +29,7 @@ namespace vcsn
 			    const F&        translate_fun);
 
   template <typename auto_t, typename F>
-  auto_t auto_translate_edges(const auto_t& from, 
+  auto_t auto_translate_edges(const auto_t& from,
 			      const F&      translate_fun);
 
 }
@@ -38,6 +38,6 @@ namespace vcsn
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/automata/concept/translate.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_TRANSLATE_HH

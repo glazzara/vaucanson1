@@ -40,9 +40,9 @@ namespace vcsn {
     public:
       ExpConvertVisitor(const Series_& s);
       ~ExpConvertVisitor();
-	
+
       virtual void
-      product(const node_t* left_, const node_t* right_);      
+      product(const node_t* left_, const node_t* right_);
 
       virtual void
       sum(const node_t* left_, const node_t* right_);
@@ -56,33 +56,33 @@ namespace vcsn {
       virtual void
       right_weight(const oTw& w, const node_t* node_);
 
-      virtual void 
+      virtual void
       constant(const oTm& m_);
 
-      virtual void 
+      virtual void
       one();
 
-      virtual void 
+      virtual void
       zero();
 
-      const exp_t& 
+      const exp_t&
       get() const;
     };
-      
 
-    template<typename Tm, typename Tw, typename W, typename M, 
+
+    template<typename Tm, typename Tw, typename W, typename M,
 	     typename oTm, typename oTw>
-    rat::exp<Tm, Tw> 
+    rat::exp<Tm, Tw>
     convert_exp(SELECTOR2(rat::exp<Tm, Tw>),
 		const Series<W, M>& s,
 		const rat::exp<oTm, oTw>& arg);
 
-    template<typename W, typename M, typename Tm, typename Tw, 
+    template<typename W, typename M, typename Tm, typename Tw,
 	     typename oTm, typename oTw>
     Element<Series<W, M>, rat::exp<Tm, Tw> >
     convert_exp(SELECTOR4(Element<Series<W, M>, rat::exp<Tm, Tw> >),
 		const Element<Series<W, M>, rat::exp<oTm, oTw> >& arg);
-    
+
   } // algebra
 
 } // vcsn
@@ -91,6 +91,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/implementation/series/krat_conversion.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_CONVERSION_HH

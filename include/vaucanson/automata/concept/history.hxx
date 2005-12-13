@@ -31,18 +31,18 @@ namespace vcsn {
     {}
 
     template <class T>
-    Event<T>::~Event() 
+    Event<T>::~Event()
     {}
 
     template <class T>
-    event_kind_t	
+    event_kind_t
     Event<T>::get_event_kind() const
     {
       return kind_;
     }
 
     template <class T>
-    BinaryEvent<T>::BinaryEvent(event_kind_t e, const T& first, 
+    BinaryEvent<T>::BinaryEvent(event_kind_t e, const T& first,
 				const T& second) :
       Event<T>(e),
       first_(first),
@@ -77,13 +77,13 @@ namespace vcsn {
     }
 
     // FIXME : use std::find_if with a good function object.
-    template <class AutoType_>      
-    bool 
-    AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e, 
+    template <class AutoType_>
+    bool
+    AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e,
 						       hstate_t s)
     {
       // FIXME: fix this code.
-//       for (typename state_events_t::const_iterator ev 
+//       for (typename state_events_t::const_iterator ev
 // 	     = states_events_[s].begin();
 // 	   ev != states_events_[s].end();
 // 	   ++ev)
@@ -94,12 +94,12 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    bool 
-    AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e, 
-						       hstate_t s, 
+    bool
+    AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e,
+						       hstate_t s,
 						       hstate_t first)
     {
-      for (typename state_events_t::const_iterator ev 
+      for (typename state_events_t::const_iterator ev
 	     = states_events_[s].begin();
 	   ev != states_events_[s].end();
 	   ++ev)
@@ -108,15 +108,15 @@ namespace vcsn {
       states_events_[s].push_front(UnaryEvent<hstate_t>(e, first));
       return true;
     }
-      
+
     template <class AutoType_>
-    bool 
-    AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e, 
-						       hstate_t s, 
-						       hstate_t first, 
+    bool
+    AutomatonHistory<AutoType_>::set_state_event_about(event_kind_t e,
+						       hstate_t s,
+						       hstate_t first,
 						       hstate_t second)
     {
-      for (typename state_events_t::const_iterator ev = 
+      for (typename state_events_t::const_iterator ev =
 	     states_events_[s].begin();
 	   ev != states_events_[s].end();
 	   ++ev)
@@ -126,10 +126,10 @@ namespace vcsn {
 				   (e, first, second));
       return true;
     }
-    
+
     template <class AutoType_>
-    const Event<hstate_t> 
-    AutomatonHistory<AutoType_>::get_state_event_about(event_kind_t e, 
+    const Event<hstate_t>
+    AutomatonHistory<AutoType_>::get_state_event_about(event_kind_t e,
 						       hstate_t     s) const
     {
       typename states_events_t::const_iterator se = states_events_.find(s);
@@ -140,15 +140,15 @@ namespace vcsn {
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return *ev;
-      return 0;      
+      return 0;
     }
 
     template <class AutoType_>
-    bool 
+    bool
     AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e,
 						      hedge_t edge)
     {
-      for (typename edge_events_t::const_iterator ev 
+      for (typename edge_events_t::const_iterator ev
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
@@ -159,12 +159,12 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    bool 
-    AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e, 
-						      hedge_t edge, 
+    bool
+    AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e,
+						      hedge_t edge,
 						      hedge_t first)
     {
-      for (typename edge_events_t::const_iterator ev 
+      for (typename edge_events_t::const_iterator ev
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
@@ -173,15 +173,15 @@ namespace vcsn {
       edges_events_[edge].push_front(UnaryEvent<hedge_t>(e, first));
       return true;
     }
-    
+
     template <class AutoType_>
-    bool 
+    bool
     AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e,
-						      hedge_t edge, 
+						      hedge_t edge,
 						      hedge_t first,
 						      hedge_t second)
     {
-      for (typename edge_events_t::const_iterator ev 
+      for (typename edge_events_t::const_iterator ev
 	     = edges_events_[edge].begin();
 	   ev != edges_events_[edge].end();
 	   ++ev)
@@ -191,9 +191,9 @@ namespace vcsn {
 	(BinaryEvent<hedge_t>(e, first, second));
       return true;
     }
-    
+
     template <class AutoType_>
-    const Event<hedge_t> 
+    const Event<hedge_t>
     AutomatonHistory<AutoType_>::get_edge_event_about(event_kind_t e,
 						      hedge_t edge
 						      ) const
@@ -208,9 +208,9 @@ namespace vcsn {
 	  return (*ev);
       return 0;
     }
-    
+
     template <class AutoType_>
-    bool 
+    bool
     AutomatonHistory<AutoType_>::set_auto_event_about(event_kind_t e)
     {
       for (typename auto_events_t::const_iterator ev = auto_events_.begin();
@@ -221,10 +221,10 @@ namespace vcsn {
       auto_events_.push_front(Event<AutoType_>(e));
       return true;
     }
-    
+
     template <class AutoType_>
-    bool 
-    AutomatonHistory<AutoType_>::set_auto_event_about(event_kind_t e, 
+    bool
+    AutomatonHistory<AutoType_>::set_auto_event_about(event_kind_t e,
 						      AutoType_ first)
     {
       for (typename auto_events_t::const_iterator ev = auto_events_.begin();
@@ -237,8 +237,8 @@ namespace vcsn {
     }
 
     template <class AutoType_>
-    bool 
-    AutomatonHistory<AutoType_>::set_auto_event_about(event_kind_t e, 
+    bool
+    AutomatonHistory<AutoType_>::set_auto_event_about(event_kind_t e,
 						      AutoType_ first,
 						      AutoType_ second)
     {
@@ -250,16 +250,16 @@ namespace vcsn {
       auto_events_.push_front(BinaryEvent<AutoType_>(e, first, second));
       return true;
     }
-    
+
     template <class AutoType_>
-    const Event<AutoType_> 
+    const Event<AutoType_>
     AutomatonHistory<AutoType_>::get_auto_event_about(event_kind_t e) const
     {
       for (typename auto_events_t::const_iterator ev = auto_events_.begin();
 	   ev != auto_events_.end();
 	   ++ev)
 	if (ev->get_event_kind() == e)
-	  return (*ev);      
+	  return (*ev);
       return 0;
     }
 

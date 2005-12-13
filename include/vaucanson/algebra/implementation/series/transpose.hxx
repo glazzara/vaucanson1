@@ -24,7 +24,7 @@ namespace vcsn {
   namespace algebra {
 
     template <class S, class T>
-    T 
+    T
     DefaultTransposeFun<S, T>::operator()(const S&, const T& label) const
     {
       pure_service_call ("default transposition");

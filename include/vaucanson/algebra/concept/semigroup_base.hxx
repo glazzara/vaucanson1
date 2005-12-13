@@ -22,27 +22,27 @@
 namespace vcsn {
 
   namespace algebra {
-    
-    template<class Self> 
-    SemigroupBase<Self>::SemigroupBase() 
+
+    template<class Self>
+    SemigroupBase<Self>::SemigroupBase()
     {}
 
-    template<class Self> 
+    template<class Self>
     SemigroupBase<Self>::SemigroupBase(const SemigroupBase& other) :
       Structure<Self>(other)
     {}
-        
+
   } // algebra
-  
+
   template<class Self, typename T>
-  MetaElement<algebra::SemigroupBase<Self>, T>::MetaElement() 
+  MetaElement<algebra::SemigroupBase<Self>, T>::MetaElement()
   {}
-  
+
   template<class Self, typename T>
   MetaElement<algebra::SemigroupBase<Self>, T>::MetaElement(const MetaElement& other) :
     MetaElement<Structure<Self>, T>(other)
   {}
-    
+
 } // vcsn
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_SEMIGROUP_BASE_HXX

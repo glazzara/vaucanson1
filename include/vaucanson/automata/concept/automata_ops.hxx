@@ -55,7 +55,7 @@ namespace vcsn {
   {
     return v.geometry();
   }
-  
+
   template <class S, class T>
   bool
   op_exists(const AutomataBase<S>& s, const T& v)
@@ -336,7 +336,7 @@ namespace vcsn {
   {
     return op_series_of(s, v, e).get(op_word_of(s, v, e));
   }
-  
+
   template <class S, class T>
   typename Element<S, T>::monoid_elt_value_t
   op_word_value_of(const AutomataBase<S>& s, const T& v,

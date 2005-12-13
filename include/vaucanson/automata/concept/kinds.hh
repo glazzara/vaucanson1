@@ -27,40 +27,40 @@
 # include <vaucanson/automata/concept/handlers.hh>
 
 namespace vcsn {
-  
+
   template <
-    typename Kind, 
-    typename Self, 
-    typename Series, 
-    typename SeriesT, 
+    typename Kind,
+    typename Self,
+    typename Series,
+    typename SeriesT,
     typename LabelT
     >
   class AutoKind {};
 
   namespace delta_kind {
 
-    struct edges 
+    struct edges
     {};
 
-    struct states 
+    struct states
     {};
 
   } // delta_kind
 
 
-  struct labels_are_series 
+  struct labels_are_series
   {};
 
   template <
-    typename Series, 
-    typename MonoidElt, 
-    typename SemiringElt, 
+    typename Series,
+    typename MonoidElt,
+    typename SemiringElt,
     typename L
     >
   struct ls_delta_letter_query
   {
     ls_delta_letter_query(const Series& s, const L& l);
-    
+
     template<typename Label>
     bool operator()(const Label& label) const;
 
@@ -80,9 +80,9 @@ namespace vcsn {
     in each accessor.
   */
  template <
-    typename Self, 
-    typename Series, 
-    typename SeriesT, 
+    typename Self,
+    typename Series,
+    typename SeriesT,
     typename LabelT
     >
   class AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>
@@ -110,7 +110,7 @@ namespace vcsn {
     const typename monoid_elt_t::value_t& word_value_of(hedge_t e) const;
 
     template<typename S>
-    hedge_t add_series_edge(hstate_t from, hstate_t to, 
+    hedge_t add_series_edge(hstate_t from, hstate_t to,
 			   const S& e);
 
     hedge_t add_spontaneous(hstate_t from, hstate_t to);
@@ -119,52 +119,52 @@ namespace vcsn {
     hedge_t add_letter_edge(hstate_t from, hstate_t to,
 			    const L& l);
 
-    template <typename OutputIterator, typename L>   
-    void letter_delta(OutputIterator	res, 
-		      hstate_t		from, 
-		      const L&		l, 
+    template <typename OutputIterator, typename L>
+    void letter_delta(OutputIterator	res,
+		      hstate_t		from,
+		      const L&		l,
 		      delta_kind::edges k = delta_kind::edges()) const;
 
     template <typename Container, typename L>
-    void letter_deltac(Container&	 dst, 
-		       hstate_t		 from, 
-		       const L&		 l, 
+    void letter_deltac(Container&	 dst,
+		       hstate_t		 from,
+		       const L&		 l,
 		       delta_kind::edges k = delta_kind::edges()) const;
 
-    template <typename OutputIterator, typename L>   
-    void letter_rdelta(OutputIterator	res, 
-		      hstate_t		from, 
-		      const L&		l, 
+    template <typename OutputIterator, typename L>
+    void letter_rdelta(OutputIterator	res,
+		      hstate_t		from,
+		      const L&		l,
 		      delta_kind::edges k = delta_kind::edges()) const;
 
     template <typename Container, typename L>
-    void letter_rdeltac(Container&	 dst, 
-		       hstate_t		 from, 
-		       const L&		 l, 
+    void letter_rdeltac(Container&	 dst,
+		       hstate_t		 from,
+		       const L&		 l,
 		       delta_kind::edges k = delta_kind::edges()) const;
 
-    template <typename OutputIterator, typename L>   
-    void letter_delta(OutputIterator 	 res, 
-		      hstate_t		 from, 
-		      const L&		 l, 
+    template <typename OutputIterator, typename L>
+    void letter_delta(OutputIterator 	 res,
+		      hstate_t		 from,
+		      const L&		 l,
 		      delta_kind::states k) const;
 
     template <typename Container, typename L>
-    void letter_deltac(Container&	  dst, 
-		       hstate_t		  from, 
-		       const L&		  l, 
+    void letter_deltac(Container&	  dst,
+		       hstate_t		  from,
+		       const L&		  l,
 		       delta_kind::states k) const;
 
-    template <typename OutputIterator, typename L>   
-    void letter_rdelta(OutputIterator	  res, 
-		       hstate_t		  from, 
-		       const L&		  l, 
+    template <typename OutputIterator, typename L>
+    void letter_rdelta(OutputIterator	  res,
+		       hstate_t		  from,
+		       const L&		  l,
 		       delta_kind::states k) const;
-    
+
     template <typename Container, typename L>
-    void letter_rdeltac(Container&	   dst, 
-			hstate_t	   from, 
-			const L&	   l, 
+    void letter_rdeltac(Container&	   dst,
+			hstate_t	   from,
+			const L&	   l,
 			delta_kind::states k) const;
 
   protected:
@@ -173,7 +173,7 @@ namespace vcsn {
   };
 
 
-  struct labels_are_couples 
+  struct labels_are_couples
   {};
 
   template<typename Monoid, typename L>
@@ -215,7 +215,7 @@ namespace vcsn {
     const typename monoid_elt_t::value_t& word_value_of(hedge_t e) const;
 
     template<typename S>
-    hedge_t add_series_edge(hstate_t from, hstate_t to, 
+    hedge_t add_series_edge(hstate_t from, hstate_t to,
 			   const S& e);
 
     hedge_t add_spontaneous(hstate_t from, hstate_t to);
@@ -224,52 +224,52 @@ namespace vcsn {
     hedge_t add_letter_edge(hstate_t from, hstate_t to,
 			    const L& l);
 
-    template <typename OutputIterator, typename L>   
-    void letter_delta(OutputIterator	res, 
-		      hstate_t		from, 
-		      const L&		l, 
+    template <typename OutputIterator, typename L>
+    void letter_delta(OutputIterator	res,
+		      hstate_t		from,
+		      const L&		l,
 		      delta_kind::edges k = delta_kind::edges()) const;
 
     template <typename Container, typename L>
-    void letter_deltac(Container&	 dst, 
-		       hstate_t		 from, 
-		       const L&		 l, 
+    void letter_deltac(Container&	 dst,
+		       hstate_t		 from,
+		       const L&		 l,
 		       delta_kind::edges k = delta_kind::edges()) const;
 
-    template <typename OutputIterator, typename L>   
-    void letter_rdelta(OutputIterator	res, 
-		      hstate_t		from, 
-		      const L&		l, 
+    template <typename OutputIterator, typename L>
+    void letter_rdelta(OutputIterator	res,
+		      hstate_t		from,
+		      const L&		l,
 		      delta_kind::edges k = delta_kind::edges()) const;
 
     template <typename Container, typename L>
-    void letter_rdeltac(Container&	 dst, 
-			hstate_t		 from, 
-			const L&		 l, 
+    void letter_rdeltac(Container&	 dst,
+			hstate_t		 from,
+			const L&		 l,
 			delta_kind::edges k = delta_kind::edges()) const;
 
-    template <typename OutputIterator, typename L>   
-    void letter_delta(OutputIterator 	 res, 
-		      hstate_t		 from, 
-		      const L&		 l, 
+    template <typename OutputIterator, typename L>
+    void letter_delta(OutputIterator 	 res,
+		      hstate_t		 from,
+		      const L&		 l,
 		      delta_kind::states k) const;
 
     template <typename Container, typename L>
-    void letter_deltac(Container&	  dst, 
-		       hstate_t		  from, 
-		       const L&		  l, 
+    void letter_deltac(Container&	  dst,
+		       hstate_t		  from,
+		       const L&		  l,
 		       delta_kind::states k) const;
 
-    template <typename OutputIterator, typename L>   
-    void letter_rdelta(OutputIterator	  res, 
-		       hstate_t		  from, 
-		       const L&		  l, 
+    template <typename OutputIterator, typename L>
+    void letter_rdelta(OutputIterator	  res,
+		       hstate_t		  from,
+		       const L&		  l,
 		       delta_kind::states k) const;
-    
+
     template <typename Container, typename L>
-    void letter_rdeltac(Container&	   dst, 
-			hstate_t	   from, 
-			const L&	   l, 
+    void letter_rdeltac(Container&	   dst,
+			hstate_t	   from,
+			const L&	   l,
 			delta_kind::states k) const;
 
   protected:
@@ -278,11 +278,11 @@ namespace vcsn {
   };
 
 }
- 
+
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/automata/concept/kinds.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_KINDS_HH

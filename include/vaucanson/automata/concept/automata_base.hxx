@@ -38,7 +38,7 @@ namespace vcsn {
     return this->self().series();
   }
 
-  
+
   /** */
   template <typename Self, typename T>
   MetaElement<AutomataBase<Self>, T>::MetaElement()
@@ -81,7 +81,7 @@ namespace vcsn {
   {
     return op_geometry(this->structure(), this->value());
   }
-  
+
   /** return true if the automaton is consistent. */
   template <typename Self, typename T>
   bool

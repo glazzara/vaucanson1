@@ -27,7 +27,7 @@ namespace vcsn {
   namespace algebra {
 
     namespace small_alpha_letter {
-      
+
       typedef static_ranged<char, static_char_interval<'a','z'> >  Letter;
       typedef AlphabetSet<Letter>				 Alphabets;
       typedef Element<Alphabets, std::set<Letter> >		 Alphabet;

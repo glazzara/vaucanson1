@@ -32,17 +32,17 @@ namespace vcsn {
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::ExpConvertVisitor(const Series_& s)
       : exp_(), series_(s)
     {}
-    
-    
+
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::~ExpConvertVisitor()
     {}
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
      void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::product(const node_t* left_, 
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::product(const node_t* left_,
 						 const node_t* right_)
     {
       right_->accept(*this);
@@ -50,11 +50,11 @@ namespace vcsn {
       left_->accept(*this);
       op_in_mul(series_, exp_, tmp);
     }
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
      void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::sum(const node_t* left_, 
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::sum(const node_t* left_,
 					     const node_t* right_)
     {
       right_->accept(*this);
@@ -62,7 +62,7 @@ namespace vcsn {
       left_->accept(*this);
       op_in_add(series_, exp_, tmp);
     }
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
      void
@@ -71,38 +71,38 @@ namespace vcsn {
       node_->accept(*this);
       op_in_star(series_, exp_);
     }
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
      void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::left_weight(const oTw& w, 
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::left_weight(const oTw& w,
 							      const node_t* node_)
     {
       node_->accept(*this);
-      exp_ = op_mul(series_.semiring(), series_, 
+      exp_ = op_mul(series_.semiring(), series_,
 		    op_convert(SELECT(typename Series_::semiring_t),
 			       SELECT(Tw),
 			       w),
 		    exp_);
     }
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
      void
-    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::right_weight(const oTw& w, 
+    ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::right_weight(const oTw& w,
 							       const node_t*
 								 node_)
     {
       node_->accept(*this);
-      op_in_mul(series_, series_.semiring(), exp_, 
+      op_in_mul(series_, series_.semiring(), exp_,
 		op_convert(SELECT(typename Series_::semiring_t),
 			   SELECT(Tw),
 			   w));
     }
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-     void 
+     void
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::constant(const oTm& m_)
     {
       Tm m = op_convert(SELECT(typename Series_::monoid_t),
@@ -114,34 +114,34 @@ namespace vcsn {
       else
 	exp_ = exp_t::constant(m);
     }
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-     void 
+     void
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::one()
     {
       exp_ = exp_t::one();
     }
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-     void 
+     void
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::zero()
     {
       exp_ = exp_t::zero();
     }
-    
+
     template<typename Tm, typename Tw, typename oTm, typename oTw,
 	     typename Series_>
-    const typename ExpConvertVisitor<Tm,Tw,oTm,oTw,Series_>::exp_t& 
+    const typename ExpConvertVisitor<Tm,Tw,oTm,oTw,Series_>::exp_t&
     ExpConvertVisitor<Tm, Tw, oTm, oTw, Series_>::get() const
     {
       return exp_;
     }
-        
-    template<typename Tm, typename Tw, typename W, typename M, 
+
+    template<typename Tm, typename Tw, typename W, typename M,
 	     typename oTm, typename oTw>
-    rat::exp<Tm, Tw> 
+    rat::exp<Tm, Tw>
     convert_exp(SELECTOR2(rat::exp<Tm, Tw>),
 		const Series<W, M>& s,
 		const rat::exp<oTm, oTw>& arg)
@@ -150,8 +150,8 @@ namespace vcsn {
       arg.accept(v);
       return v.get();
     }
-    
-    template<typename W, typename M, typename Tm, typename Tw, 
+
+    template<typename W, typename M, typename Tm, typename Tw,
 	     typename oTm, typename oTw>
     Element<Series<W, M>, rat::exp<Tm, Tw> >
     convert_exp(SELECTOR4(Element<Series<W, M>, rat::exp<Tm, Tw> >),

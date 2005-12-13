@@ -38,7 +38,7 @@ namespace vcsn
 	{
 	  o << 's' << *i << ' ';
 	  if (a.is_initial(*i))
-	    o << "i[" << conv(a, a.get_initial(*i)) << "] "; 
+	    o << "i[" << conv(a, a.get_initial(*i)) << "] ";
 	  if (a.is_final(*i))
 	    o << "f[" << conv(a, a.get_final(*i)) << "]";
 	  o << std::endl;
@@ -63,7 +63,7 @@ namespace vcsn
     void get_delimited_exp(std::istream& in, std::string& s)
     {
       std::string::size_type	i = 1;
-      
+
       // Ignore the first '['
       in.ignore();
       // Readline

@@ -26,7 +26,7 @@ namespace vcsn {
   struct labels_are_series  {};
   struct labels_are_couples {};
 
-  template <class Kind, 
+  template <class Kind,
 	    class WordValue,
 	    class WeightValue,
 	    class SeriesValue,
@@ -37,7 +37,7 @@ namespace vcsn {
 	    class WeightValue,
 	    class SeriesValue,
 	    class Letter>
-  struct LabelOf<labels_are_letters, WordValue, WeightValue, 
+  struct LabelOf<labels_are_letters, WordValue, WeightValue,
 		 SeriesValue, Letter>
   {
     typedef Letter	ret;
@@ -47,7 +47,7 @@ namespace vcsn {
 	    class WeightValue,
 	    class SeriesValue,
 	    class Letter>
-  struct LabelOf<labels_are_series, WordValue, WeightValue, 
+  struct LabelOf<labels_are_series, WordValue, WeightValue,
 		 SeriesValue, Letter>
   {
     typedef SeriesValue	ret;
@@ -57,7 +57,7 @@ namespace vcsn {
 	    class WeightValue,
 	    class SeriesValue,
 	    class Letter>
-  struct LabelOf<labels_are_couples, WordValue, WeightValue, 
+  struct LabelOf<labels_are_couples, WordValue, WeightValue,
 		 SeriesValue, Letter>
   {
     typedef std::pair<WeightValue, WordValue>	ret;
@@ -67,7 +67,7 @@ namespace vcsn {
 	    class WeightValue,
 	    class SeriesValue,
 	    class Letter>
-  struct LabelOf<labels_are_words, WordValue, WeightValue, 
+  struct LabelOf<labels_are_words, WordValue, WeightValue,
 		 SeriesValue, Letter>
   {
     typedef WordValue	ret;

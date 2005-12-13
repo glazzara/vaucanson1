@@ -37,7 +37,7 @@ namespace vcsn {
       Event(event_kind_t e);
 
       virtual
-      event_kind_t	
+      event_kind_t
       get_event_kind() const;
 
       virtual ~Event();
@@ -87,34 +87,34 @@ namespace vcsn {
       typedef std::list<Event<hedge_t> >		       edge_events_t;
       typedef std::map<hstate_t, state_events_t>	       states_events_t;
       typedef std::map<hedge_t, edge_events_t>		       edges_events_t;
-      
-      bool 
+
+      bool
       set_state_event_about(event_kind_t, hstate_t);
-      bool 
+      bool
       set_state_event_about(event_kind_t, hstate_t, hstate_t);
-      bool 
+      bool
       set_state_event_about(event_kind_t, hstate_t, hstate_t, hstate_t);
-      const Event<hstate_t> 
+      const Event<hstate_t>
       get_state_event_about(event_kind_t, hstate_t) const;
-							 
-      bool 
+
+      bool
       set_edge_event_about(event_kind_t, hedge_t);
-      bool 
+      bool
       set_edge_event_about(event_kind_t, hedge_t, hedge_t);
-      bool 
+      bool
       set_edge_event_about(event_kind_t, hedge_t, hedge_t, hedge_t);
-      const Event<hedge_t> 
+      const Event<hedge_t>
       get_edge_event_about(event_kind_t, hedge_t) const;
- 
-      bool 
+
+      bool
       set_auto_event_about(event_kind_t);
-      bool 
+      bool
       set_auto_event_about(event_kind_t, AutoType_);
-      bool 
+      bool
       set_auto_event_about(event_kind_t, AutoType_, AutoType_);
-      const Event<AutoType_> 
+      const Event<AutoType_>
       get_auto_event_about(event_kind_t) const;
-      
+
     protected :
       states_events_t		states_events_;
       edges_events_t	        edges_events_;
@@ -129,6 +129,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/automata/concept/history.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_HISTORY_HH

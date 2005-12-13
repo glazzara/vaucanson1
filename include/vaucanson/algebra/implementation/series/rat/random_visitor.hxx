@@ -24,7 +24,7 @@
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 
 namespace vcsn {
-  
+
   namespace rat {
 
     // FIXME : adapt this code to multiplicity.
@@ -45,10 +45,10 @@ namespace vcsn {
     {}
 
     template<typename M_, typename W_>
-    void 
-    RandomVisitor<M_,W_>::product(const Node<M_, W_>* left_, 
+    void
+    RandomVisitor<M_,W_>::product(const Node<M_, W_>* left_,
 				  const Node<M_, W_>* right_)
-    { 
+    {
       M_ tmp;
       right_->accept(*this);
       tmp = w_;
@@ -58,35 +58,35 @@ namespace vcsn {
     }
 
     template <class M_, class W_>
-    void 
+    void
     RandomVisitor<M_,W_>::left_weight(const W_&, const Node<M_, W_>* node)
     {
       node->accept(*this);
     }
 
     template <class M_, class W_>
-    void 
+    void
     RandomVisitor<M_,W_>::right_weight(const W_&, const Node<M_, W_>* node)
     {
       node->accept(*this);
     }
 
     template<typename M_, typename W_>
-    void 
-    RandomVisitor<M_,W_>::sum(const Node<M_, W_>* left_, 
+    void
+    RandomVisitor<M_,W_>::sum(const Node<M_, W_>* left_,
 			      const Node<M_, W_>* right_)
-    { 
+    {
       unsigned r = rand() * 2 / RAND_MAX;
-      if (r < 1) 
+      if (r < 1)
 	left_->accept(*this);
       else
 	right_->accept(*this);
     }
 
     template<typename M_, typename W_>
-    void 
+    void
     RandomVisitor<M_,W_>::star(const Node<M_, W_>* node)
-    { 
+    {
       not_empty = true;
       unsigned n = rand() * nb_star_max_ / RAND_MAX;
       M_       tmp;
@@ -101,15 +101,15 @@ namespace vcsn {
     }
 
     template<typename M_, typename W_>
-    void 
+    void
     RandomVisitor<M_,W_>::constant(const M_& m)
-    { 
+    {
       not_empty = true;
       w_ = m;
     }
 
     template <class M_, class W_>
-    void 
+    void
     RandomVisitor<M_,W_>::one()
     {
       w_ = M_();
@@ -117,17 +117,17 @@ namespace vcsn {
     }
 
     template <class M_, class W_>
-    void 
+    void
     RandomVisitor<M_,W_>::zero()
     {
     }
 
     template<typename M_, typename W_>
-    M_ RandomVisitor<M_,W_>::get() const 
-    { 
+    M_ RandomVisitor<M_,W_>::get() const
+    {
       assertion(not_empty);
-      return w_; 
-    } 
+      return w_;
+    }
 
   } // rat
 

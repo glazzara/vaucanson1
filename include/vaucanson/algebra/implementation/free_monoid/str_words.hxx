@@ -79,7 +79,7 @@ namespace vcsn {
       utility::char_traits<typename A::letter_t> > instance;
     return instance;
   }
-  
+
   template<typename A>
   std::basic_string<typename A::letter_t>
   op_convert(SELECTOR(algebra::FreeMonoid<A>),

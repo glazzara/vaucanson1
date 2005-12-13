@@ -28,11 +28,11 @@ namespace vcsn {
   `------------------------------------------*/
 
   template <typename A>
-  void 
-  op_in_mul(const algebra::FreeMonoid<A>& s, 
+  void
+  op_in_mul(const algebra::FreeMonoid<A>& s,
 	    std::basic_string<typename A::letter_t>& dst,
 	    const std::basic_string<typename A::letter_t>& src);
-    
+
   template<typename A>
   std::basic_string<typename A::letter_t>
   op_mul(const algebra::FreeMonoid<A>& s,
@@ -50,13 +50,13 @@ namespace vcsn {
   op_convert(SELECTOR(algebra::FreeMonoid<A>),
 	     SELECTOR(std::basic_string<typename A::letter_t>), const typename A::letter_t& c);
 
-  
+
 } // vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/implementation/free_monoid/str_words.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_STR_WORDS_HH

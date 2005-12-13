@@ -34,7 +34,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto);
     std::map<hstate_t, hstate_t>	trans;
-    
+
     for_each_state(s, rhs)
       {
 	hstate_t ns = lhs.add_state();

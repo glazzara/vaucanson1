@@ -40,7 +40,7 @@ namespace vcsn {
       typedef std::pair<semiring_elt_t, Element<Series, T> >  return_type;
       typedef typename semiring_elt_t::value_t	        semiring_elt_value_t;
       INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
-  
+
       CoefficientEval(const Element<Series, T>& exp) :
 	exp_(exp)
       {}
@@ -98,17 +98,17 @@ namespace vcsn {
 	return return_type(zero(), zero_as<T>::of(exp_.structure()));
       }
       END
-  
+
       MATCH(One)
       {
 	return return_type(one(), identity_as<T>::of(exp_.structure()));
       }
       END
-  
+
     private:
       Element<Series, T> exp_;
     };
-  
+
     template <class Series, class T>
     std::pair<typename Element<Series, T>::semiring_elt_t, Element<Series, T> >
     coefficient(const Element<Series, T>& exp)

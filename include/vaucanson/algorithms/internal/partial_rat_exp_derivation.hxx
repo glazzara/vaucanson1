@@ -268,11 +268,11 @@ namespace vcsn {
     const_iterator i = exp.begin();
     semiring_elt_t w = i.semiring_elt();
     i++;
-    
+
     // Check if the exp is not empty
     if (i == exp.end())
       return std::make_pair(exp_list_t(), true);
-    
+
     // Visit the first element of the exp
     PRatExpDerivationVisitor<Series, T> visitor(exp.exp(), a);
     const typename exp_t::node_t*	n = i.node();

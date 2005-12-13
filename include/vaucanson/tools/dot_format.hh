@@ -21,7 +21,7 @@
 #include <string>
 
 namespace vcsn {
-  
+
   namespace io {
 
     struct dot
@@ -29,8 +29,8 @@ namespace vcsn {
       inline dot(const std::string& auto_name = "automaton");
 
       template <typename Saver, typename Conv>
-      void operator()(std::ostream& out, 
-		      const Saver& s, 
+      void operator()(std::ostream& out,
+		      const Saver& s,
 		      const Conv& conv) const;
 
     protected:
@@ -42,8 +42,8 @@ namespace vcsn {
       inline transducer_dot(const std::string& auto_name = "transducer");
 
       template <typename Saver, typename Conv>
-      void operator()(std::ostream& out, 
-		      const Saver& s, 
+      void operator()(std::ostream& out,
+		      const Saver& s,
 		      const Conv& conv) const;
 
     protected:
@@ -58,6 +58,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/tools/dot_format.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_TOOLS_DOT_FORMAT_HH

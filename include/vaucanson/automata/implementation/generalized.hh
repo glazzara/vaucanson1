@@ -45,7 +45,7 @@ namespace vcsn {
     typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
     typedef typename Auto_::value_t::geometry_t		geometry_t;
-    
+
     typedef vcsn::Element
     <vcsn::Automata<series_set_t>,
      Graph<labels_are_series,

@@ -33,7 +33,7 @@ namespace vcsn {
       series_set_elt_value_t;
     typedef std::pair<typename Element<Series, T>::semiring_elt_t, bool>
       result_t;
-    
+
     const_iterator	i = exp.begin();
     semiring_elt_t 	res = i.semiring_elt();
     bool		defined = true;

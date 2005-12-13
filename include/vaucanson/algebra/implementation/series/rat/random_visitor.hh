@@ -33,18 +33,18 @@ namespace vcsn {
       RandomVisitor(unsigned nb_star_max);
       RandomVisitor();
 
-      virtual void 
+      virtual void
       product(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
-      virtual void 
+      virtual void
       sum(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
 
-      virtual void 
+      virtual void
       star(const Node<M_, W_>* node);
 
       virtual void left_weight(const W_&, const Node<M_, W_>*);
       virtual void right_weight(const W_&, const Node<M_, W_>*);
 
-      virtual void 
+      virtual void
       constant(const M_& m);
       virtual void zero();
       virtual void one();
@@ -65,6 +65,6 @@ namespace vcsn {
 #ifndef VCSN_USE_INTERFACE_ONLY
     # include <vaucanson/algebra/implementation/series/rat/random_visitor.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
-    
+
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_RANDOM_VISITOR_HH

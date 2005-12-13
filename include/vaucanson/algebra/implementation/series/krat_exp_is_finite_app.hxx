@@ -25,7 +25,7 @@ namespace vcsn {
   template <class Series, class T, class Dispatch>
   class IsFiniteAppMatcher : public algebra::KRatExpMatcher<
     IsFiniteAppMatcher<Series, T, Dispatch>,
-    T, 
+    T,
     bool,
     Dispatch
     >
@@ -89,7 +89,7 @@ namespace vcsn {
     END
 
   };
-  
+
 } // vcsn
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_EXP_IS_FINITE_APP_HXX

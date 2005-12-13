@@ -91,7 +91,7 @@ namespace vcsn {
 	  }
 
 	m = w1.substr(cpt++, 1);
-	
+
 	series_set_elt_t out_series(a.structure().series());
 	out_series.assoc(m, s_ident);
 
@@ -113,13 +113,13 @@ namespace vcsn {
   template <class S, class T>
   void realtime_words_here(Element<S, T>& res)
   {
-    typedef Element<S, T> auto_t; 
+    typedef Element<S, T> auto_t;
     AUTOMATON_TYPES(auto_t);
     typedef std::vector<hstate_t> vector_t;
 
     // perform cut-up.
     cut_up_here(res);
-    
+
     edges_t edges = res.value().edges();
     vector_t i_states; i_states.reserve(res.initial().size());
     vector_t f_states; f_states.reserve(res.final().size());
@@ -128,22 +128,22 @@ namespace vcsn {
       i_states.push_back(*f);
     for_each_final_state(i, res)
       f_states.push_back(*i);
-    
+
     for_each_(vector_t, i, i_states)
       do_realtime_words(res, hstate_t(), *i,
 			res.get_initial(*i), true, false);
-    
+
     for_each_(vector_t, f, f_states)
       do_realtime_words(res, *f, hstate_t(),
 			res.get_final(*f), false, true);
-    
+
     for_each_(edges_t, e, edges)
       if (do_realtime_words(res, res.origin_of(*e), res.aim_of(*e),
 			    res.series_of(*e), false, false))
 	res.del_edge(*e);
   }
 
-  
+
   template <class A_, typename Auto_>
   void
   do_backward_realtime_here(const AutomataBase<A_>&, Auto_& a)
@@ -226,11 +226,11 @@ namespace vcsn {
       }
 
     accessible_here(a);
-    
+
     realtime_words_here(a);
   }
 
-  
+
   template<typename A, typename T>
   void
   backward_realtime_here(Element<A, T>& a)

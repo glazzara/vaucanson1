@@ -178,16 +178,16 @@ namespace vcsn {
 
     // If rhs initial multiplicity is 1 and so is lhs final multiplicity,
     // we can merge the lhs final state and the rhs initial state.
-    bool merge_lhs_final_and_rhs_initial = 
+    bool merge_lhs_final_and_rhs_initial =
       (lhs.get_final(*lhs.final().begin()).value() ==
        lhs.series().identity(SELECT(series_set_elt_value_t)) &&
        rhs.get_initial(*rhs.initial().begin()).value() ==
        rhs.series().identity(SELECT(series_set_elt_value_t)));
-    
+
     for_each_state(s, rhs)
       {
 	hstate_t new_state;
-	
+
 	if (merge_lhs_final_and_rhs_initial)
 	  {
 	    if (rhs.is_initial(*s))

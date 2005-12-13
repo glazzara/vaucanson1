@@ -55,7 +55,7 @@ namespace vcsn
       delete name_;
   }
 
-    
+
   inline
   geometry::states_geometry_map_t& geometry::states()
   {
@@ -72,7 +72,7 @@ namespace vcsn
     return *states_;
   }
 
-    
+
   inline
   geometry::edges_geometry_map_t& geometry::edges()
   {
@@ -89,7 +89,7 @@ namespace vcsn
     return *edges_;
   }
 
-  
+
   inline
   geometry::initials_geometry_map_t& geometry::initials()
   {
@@ -106,7 +106,7 @@ namespace vcsn
     return *initials_;
   }
 
-  
+
   inline
   geometry::finals_geometry_map_t& geometry::finals()
   {

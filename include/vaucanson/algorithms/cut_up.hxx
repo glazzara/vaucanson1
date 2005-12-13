@@ -179,7 +179,7 @@ namespace vcsn {
     a = res;
   }
 
-  
+
 } // ! vcsn
 
 

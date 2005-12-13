@@ -29,7 +29,7 @@ namespace vcsn {
     auto_copy(to, from);
     return to;
   }
-  
+
 
 } // vcsn
 

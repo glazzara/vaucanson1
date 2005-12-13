@@ -31,7 +31,7 @@ namespace utility {
 #  endif
 # endif
 #endif
-    
+
     template <>
     template <>
     inline

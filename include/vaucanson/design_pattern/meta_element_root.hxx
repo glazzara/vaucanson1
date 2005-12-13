@@ -24,12 +24,12 @@ namespace vcsn {
   template <class S, class T>
   MetaElement<Structure<S>, T>::MetaElement()
   {}
-  
+
   template <class S, class T>
   MetaElement<Structure<S>, T>::MetaElement(const MetaElement& o) :
     SyntacticDecorator<S, T>(o)
   {}
-  
+
 } // vcsn
 
 #endif // ! VCSN_DESIGN_PATTERN_META_ELEMENT_ROOT_HXX

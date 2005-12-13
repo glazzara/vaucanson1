@@ -35,8 +35,8 @@ namespace vcsn {
     /// This is the final class for series.
     template<typename Semiring, typename Monoid>
     struct Series
-      : SeriesBase<Series<Semiring, Monoid> >, 
-	private SetSlot<Semiring, semiring_slot_tag>, 
+      : SeriesBase<Series<Semiring, Monoid> >,
+	private SetSlot<Semiring, semiring_slot_tag>,
 	private SetSlot<Monoid, monoid_slot_tag>
     {
       Series(const Semiring& w, const Monoid& m);

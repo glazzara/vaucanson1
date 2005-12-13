@@ -21,43 +21,43 @@
 
 namespace vcsn
 {
-  
+
   template<typename Tag>
-  handler<Tag>::handler() : v_(0) 
+  handler<Tag>::handler() : v_(0)
   {}
 
   template<typename Tag>
-  handler<Tag>::handler(int h) : v_(h) 
+  handler<Tag>::handler(int h) : v_(h)
   {}
 
   template<typename Tag>
-  handler<Tag>::handler(const handler& h) : v_(h.v_) 
+  handler<Tag>::handler(const handler& h) : v_(h.v_)
   {}
-    
+
   template<typename Tag>
   handler<Tag>& handler<Tag>::operator=(const handler<Tag>& h)
-  { 
-    v_ = h.v_; 
-    return *this; 
+  {
+    v_ = h.v_;
+    return *this;
   }
 
   template<typename Tag>
   handler<Tag>& handler<Tag>::operator=(int h)
-  { 
-    v_ = h; 
-    return *this; 
+  {
+    v_ = h;
+    return *this;
   }
-    
+
   template<typename Tag>
-  int handler<Tag>::value() const 
-  { 
-    return v_; 
+  int handler<Tag>::value() const
+  {
+    return v_;
   }
-    
+
   template<typename Tag>
-  handler<Tag>::operator int () const 
-  { 
-    return v_; 
+  handler<Tag>::operator int () const
+  {
+    return v_;
   }
 
 } // vcsn
@@ -80,7 +80,7 @@ HOPERATOR(>=);
 namespace std {
 
   template <typename kind>
-  std::ostream&	
+  std::ostream&
   operator<<(std::ostream& out, const vcsn::handler<kind>& h)
   {
     out << h.value();

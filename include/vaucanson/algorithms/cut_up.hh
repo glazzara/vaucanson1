@@ -97,7 +97,7 @@ namespace vcsn
   void
   cut_up_here(Element<S, T>& a);
 
-  
+
 } // ! vcsn
 
 

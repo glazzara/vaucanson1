@@ -38,11 +38,11 @@ namespace vcsn {
       typedef rat::exp<Tm, Tw> kexp_t;
       kexp_t	exp;
 
-      if (p_value == identity_value(SELECT2(algebra::Series<W, M>), 
+      if (p_value == identity_value(SELECT2(algebra::Series<W, M>),
 				    SELECT2(algebra::polynom<Tm, Tw>)))
 	return kexp_t::one();
-      
-      if (p_value == zero_value(SELECT2(algebra::Series<W, M>), 
+
+      if (p_value == zero_value(SELECT2(algebra::Series<W, M>),
 				SELECT2(algebra::polynom<Tm, Tw>)))
 	return kexp_t::zero();
 

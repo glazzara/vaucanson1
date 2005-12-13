@@ -99,7 +99,12 @@ sub rehead ($)
 
   $xheader =~ s,%COPYRIGHT%,$copyright,g;
 
+  # Prepare the new contents.
   $_ = $content;
+
+  # Kill trailing spaces.
+  s/[ \t]+$//mg;
+
   s,^((/\*.*?\*/)|(//[^\n]*\n)|[ \t\n])*,,sg;
   s,([ \t\n])*$,\n,sg;
 
@@ -116,12 +121,8 @@ sub rehead ($)
 
   s/^/$xheader/sg;
 
-  # Kill trailing spaces.
-  s/\s+$//g;
-
-  # Make sure we have an ending eol.
-  $_ = "$_\n"
-    unless /\n\z/s;
+  # Make sure we have a unique ending eol.
+  s/\n+\z/\n/;
 
   $content = $_;
 

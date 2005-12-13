@@ -119,7 +119,7 @@ namespace vcsn {
     st << "(";
     op_rout(s.first_monoid(), st, v.first);
     st << ",";
-    op_rout(s.second_monoid(), st, v.second);  
+    op_rout(s.second_monoid(), st, v.second);
     st << ")";
     return st;
   }

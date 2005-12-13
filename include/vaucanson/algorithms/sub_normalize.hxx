@@ -27,7 +27,7 @@
 
 
 namespace vcsn {
-  
+
   /*------------------.
   | is_sub_normalized |
   `------------------*/
@@ -179,7 +179,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Ret);
     typedef std::vector<hstate_t> vector_t;
-    
+
     auto_copy(res, cut_up(a));
 
     edges_t edges = res.value().edges();
@@ -190,7 +190,7 @@ namespace vcsn {
       i_states.push_back(*f);
     for_each_final_state(i, res)
       f_states.push_back(*i);
-    
+
     for_each_(vector_t, i, i_states)
       do_sub_normalize_transition(res, hstate_t(), *i,
 				  res.get_initial(*i), true, false);

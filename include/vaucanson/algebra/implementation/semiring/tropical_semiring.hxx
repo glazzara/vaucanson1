@@ -176,7 +176,7 @@ namespace vcsn {
     b = 0;
   }
 
-  
+
   template <typename T>
   bool
   op_starable(const algebra::TropicalSemiring<algebra::TropicalMax>&, T b)

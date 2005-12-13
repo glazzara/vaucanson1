@@ -1,5 +1,68 @@
 2005-12-13  Akim Demaille  <akim@lrde.epita.fr>
 
+	Kill trailing spaces.
+
+	* reheader.pl: Fix the handling of trailing spaces.
+
+	* include/vaucanson/misc/random.hxx,
+	* include/vaucanson/misc/unique.hxx,
+	* include/vaucanson/algebra/implementation/alphabets/predefs.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hxx,
+	* include/vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx,
+	* include/vaucanson/algebra/implementation/series/transpose.hxx,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hxx,
+	* include/vaucanson/algebra/implementation/series/generalized.hh,
+	* include/vaucanson/algebra/implementation/series/series.hh,
+	* include/vaucanson/algebra/implementation/series/krat_coefficient.hh,
+	* include/vaucanson/algebra/implementation/series/generalized.hxx,
+	* include/vaucanson/algebra/implementation/series/series.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_conversion.hh,
+	* include/vaucanson/algebra/implementation/series/krat_coefficient.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_conversion.hxx,
+	* include/vaucanson/algebra/implementation/series/krat_exp_is_finite_app.hxx,
+	* include/vaucanson/algebra/implementation/series/transpose.hh,
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx,
+	* include/vaucanson/algebra/concept/semigroup_base.hxx,
+	* include/vaucanson/xml/session.hxx,
+	* include/vaucanson/tools/gen_book.hh,
+	* include/vaucanson/tools/simple_format.hh,
+	* include/vaucanson/tools/simple_format.hxx,
+	* include/vaucanson/tools/usual_io.hh,
+	* include/vaucanson/tools/automaton_tools.hh,
+	* include/vaucanson/tools/dot_format.hh,
+	* include/vaucanson/design_pattern/meta_element_root.hxx,
+	* include/vaucanson/design_pattern/syntactic_decorator.hxx,
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/cut_up.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_derivation.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/cut_up.hh,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/automata/implementation/generalized.hxx,
+	* include/vaucanson/automata/implementation/geometry.hxx,
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/automata/concept/translate.hh,
+	* include/vaucanson/automata/concept/tags.hh,
+	* include/vaucanson/automata/concept/handlers.hh,
+	* include/vaucanson/automata/concept/history.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/translate.hxx,
+	* include/vaucanson/automata/concept/handlers.hxx,
+	* include/vaucanson/automata/concept/kinds.hh,
+	* include/vaucanson/automata/concept/history.hxx,
+	* include/vaucanson/automata/concept/copy.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* include/vaucanson/automata/concept/automata_kind.hh:
+	Do it.
+
+2005-12-13  Akim Demaille  <akim@lrde.epita.fr>
+
 	Normalize doc for files.
 
 	No need to report "This file is...", the context makes it

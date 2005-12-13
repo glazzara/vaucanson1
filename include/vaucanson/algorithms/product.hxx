@@ -39,7 +39,7 @@
 namespace vcsn {
 
   namespace geom {
-  
+
     // Some little graphic tools
     struct grphx {
 
@@ -80,7 +80,7 @@ namespace vcsn {
 	}
       }
 
-    
+
       template <typename Output, typename Lhs, typename Rhs>
       static
       void setcoordfrom(Output& a,
@@ -103,7 +103,7 @@ namespace vcsn {
 
 	a.geometry().states()[state] = std::make_pair(x, y);
       }
-    
+
     };
 
     struct no_grphx
@@ -117,12 +117,12 @@ namespace vcsn {
 			const hstate_t x_state,
 			const hstate_t y_state)
       {}
-      
+
     };
 
   } // ! geom
 
-  
+
   /*--------.
   | product |
   `--------*/
@@ -162,7 +162,7 @@ namespace vcsn {
       {
 	const hstate_t		new_state = output.add_state();
 	const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
-	
+
 	m[new_state] = new_pair;
 	visited[new_pair] = new_state;
 	to_process.push(new_pair);
