@@ -63,7 +63,7 @@ sub rehead ($)
   my $xheader = (($fname =~ /\.(cc|hh|hxx)$/) ? '' : $cxx_hint) . $_;
 
 
-  print STDERR "Processing for $fname...\n";
+  # print STDERR "Processing $fname...\n";
 
   open(FILE, "<", $fname) or die "cannot open $fname: $!\n";
 
@@ -85,9 +85,14 @@ sub rehead ($)
 	    }
 	  else
 	    {
-	      warn "Multiple copyright lines found!\n";
+	      warn "$fname: Multiple copyright lines found\n";
 	    }
-	  print "Copyright is $copyright\n";
+	  # print STDERR "Copyright is $copyright\n";
+	}
+      elsif (/\@file\s+([\w.\/]+)/)
+	{
+	  warn "$fname: incorrect \@file\n"
+	    unless $1 eq $basename or $1 eq $shortname;
 	}
     }
   close FILE;

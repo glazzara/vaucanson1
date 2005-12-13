@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -27,45 +27,11 @@
  */
 namespace utility {}
 
-/**
- * @file selectors.hh
- * Definition of type argument macros.
- */
 #include <vaucanson/misc/selectors.hh>
-
-/**
- * @file unique.hh
- * Declarations for the type canonicalization tools.
- */
 #include <vaucanson/misc/unique.hh>
-
-/**
- * @file misc/static.hh
- * Definition of metaprogrammation helpers.
- */
 #include <vaucanson/misc/static.hh>
-
-/**
- * @file random.hh
- * Definition of random generators.
- */
 #include <vaucanson/misc/random.hh>
-
-/**
- * @file contract.hh
- * Definition of contract macros.
- */
 #include <vaucanson/misc/contract.hh>
-
-/**
- * @file limits.hh
- *
- * Wrapper about the numeric limits for Vaucanson
- *
- * This file defines the utility trait @c vcsn::limits, by using
- * standard C++ @c std::numeric_limits if available, or the
- * standard C limits if @c USE_C_LIMITS is defined.
- */
 #include <vaucanson/misc/limits.hh>
 
 /** @} */

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 /**
  * @file   bitset.hh
- * @brief  This file contains a Bitset class declaration.
+ * @brief  Bitset class declaration.
  *
  * @author Thomas Claveirole <thomas@lrde.epita.fr>
  * @see Bitset

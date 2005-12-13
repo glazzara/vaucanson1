@@ -17,6 +17,11 @@
 #ifndef VCSN_MISC_CONTRACT_HH
 # define VCSN_MISC_CONTRACT_HH
 
+/**
+ * @file contract.hh
+ * Definition of contract macros.
+ */
+
 # ifndef VCSN_NDEBUG
 #  include <vaucanson/config/system.hh>
 #  include <vaucanson/misc/static.hh>

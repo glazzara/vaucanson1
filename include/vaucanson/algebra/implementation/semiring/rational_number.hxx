@@ -23,7 +23,7 @@
 
 /**
  * @file   rational_number.hxx
- * @brief  This file contains a Rational class implementation.
+ * @brief  Rational class implementation.
  *
  * @author Sarah O'Connor <sarah@lrde.epita.fr>
  */

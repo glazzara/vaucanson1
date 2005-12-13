@@ -1,3 +1,12 @@
+2005-12-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	Normalize doc for files.
+
+	No need to report "This file is...", the context makes it
+	clear enough.  Likewise for functions, ctors (to do).
+	* reheader.pl: Check that @file are correct.
+	Fix the uncovered errors.
+
 2005-12-12  Akim Demaille  <akim@lrde.epita.fr>
 
 	Rehead all the headers.

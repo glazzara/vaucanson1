@@ -21,7 +21,7 @@
 /**
  * @file deferrer.hh
  *
- * This file contains declarations for the Deferrer class.
+ * Declarations for the Deferrer class.
  *
  * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
  * @see utility::Deferrer

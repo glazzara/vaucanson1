@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 /**
  * @file deferrer.hxx
  *
- * This file contains definitions for the Deferrer class.
+ * Definitions for the Deferrer class.
  *
  * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
  * @see utility::Deferrer, utility::SafeDeferrer

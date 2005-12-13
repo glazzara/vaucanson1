@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +17,12 @@
 #ifndef VCSN_TOOLS_FSM_DUMP_HH
 # define VCSN_TOOLS_FSM_DUMP_HH
 
+/**
+ * @file fsm_dump.hh
+ *
+ * @brief I/O with FSM format.
+ */
+
 # include <map>
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/tools/usual_macros.hh>
@@ -28,18 +34,18 @@ namespace vcsn {
     /*---------.
     | fsm_dump |
     `---------*/
-    // Description :
-    //   - Basic and non configurable pretty-printer in the 'fsm' format
-    //
-    // Constraints :
-    //   - Every elements (series, state_content ...) must be printable
-    //
+    /** Basic and non configurable saver in the 'fsm' format.
+     *
+     * Every elements (series, state_content ...) must be printable.
+     */
     template <typename St, typename auto_t>
     void fsm_dump(St& out, const auto_t& a);
 
     /*---------.
     | fsm_load |
     `---------*/
+    /** Basic and non configurable loader in the 'fsm' format.
+     */
     template <typename St, typename AutoType_>
     void fsm_load(St& in, AutoType_& a);
 

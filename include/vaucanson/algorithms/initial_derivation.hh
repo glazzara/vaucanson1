@@ -21,8 +21,7 @@
 /**
  * @file initial_derivation.hh
  *
- * This file contains the declaration for the initial derivation visitor,
- * used for smart_derivative_automaton.
+ * Declaration of the initial derivation visitor, used for smart_derivative_automaton.
  *
  */
 /** @} */

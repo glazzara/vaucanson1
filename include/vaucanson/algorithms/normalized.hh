@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,8 +23,8 @@
  *
  * @brief Thompson normalization operations.
  *
- * This file contains algorithms related to thompson automata normalization,
- * and thompson-normalized automata operations.
+ * Algorithms related to Thompson automata normalization,
+ * and Thompson-normalized automata operations.
  *
  * @see normalize(), is_normalized(), union_of_normalized(),
  *      concatenate_of_normalized(), star_of_normalized()

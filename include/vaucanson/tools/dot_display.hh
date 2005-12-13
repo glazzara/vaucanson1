@@ -18,9 +18,10 @@
 # define VCSN_TOOLS_DOT_DISPLAY_HH
 
 /**
- * @file dot_display.hxx
+ * @file dot_display.hh
  *
- * Calls out_display with dot_dump as the function to launch by out_display.
+ * @brief Call out_display with dot_dump as the function to launch
+ * by out_display.
  *
  * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
  */

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
  *
  * @brief Algorithms for accessible/coaccessible states computation.
  *
- * This file contains a few algorithms to get accessible or coaccessible
+ * A few algorithms to get accessible or coaccessible
  * states from an automaton.
  *
  * @see accessible_states(), accessible(), accessible_here(),

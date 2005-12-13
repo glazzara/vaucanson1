@@ -18,7 +18,7 @@
 # define VCSN_ALGORITHMS_SUB_NORMALIZE_HH
 
 /**
- * @file sub-normalize.hh
+ * @file sub_normalize.hh
  *
  * Sub-normalization algorithm for FMP transducers.
  *

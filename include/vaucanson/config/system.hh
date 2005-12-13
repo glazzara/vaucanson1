@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,9 +22,8 @@
  * @file system.hh
  * @brief System-wide configuration helpers
  *
- * This file contains global configuration checks for the Vaucanson
- * library. 
- * 
+ * Global configuration checks for the Vaucanson library.
+ *
  * In especially includes @c config.h if the @c HAVE_CONFIG_H is
  * defined, and attempts to force G++ v2.95 to use namespaces in the
  * STL definitions.
@@ -35,7 +34,7 @@
 
 # ifdef HAVE_CONFIG_H
 #  include <config.h>
-# endif 
+# endif
 
 #ifdef HAVE_PRETTY_FUNCTION
 # define PRETTY_FUNCTION() __PRETTY_FUNCTION__
@@ -49,7 +48,7 @@
 
 # include <vaucanson/config/math.hh>
 
-#if (defined __GNUC__) && (__GNUC__ < 3) 
+#if (defined __GNUC__) && (__GNUC__ < 3)
 # include <stl_config.h>
 #  undef __STL_BEGIN_RELOPS_NAMESPACE
 #  define __STL_BEGIN_RELOPS_NAMESPACE namespace rel_ops {

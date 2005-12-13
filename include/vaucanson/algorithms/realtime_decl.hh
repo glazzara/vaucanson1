@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
  * function has the same prototype, but different meanings, and expect
  * to be called with different types.
  *
- * This file contains the unique declaration of realtime(), which will
+ * This is the unique declaration of realtime(), which will
  * then do  the dispatch onto  the right do_realtime() in  function of
  * its parameter.
  *

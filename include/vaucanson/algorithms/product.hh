@@ -21,7 +21,7 @@
 /**
  * @file product.hh
  *
- * This file contains the declarations of product().
+ * Declarations of product().
  *
  * @see product()
  */

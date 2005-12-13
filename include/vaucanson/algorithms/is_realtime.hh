@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 /**
  * @file   is_realtime.hh
  *
- * This file contains a test for realtime transducers.
+ * Test for realtime transducers.
  *
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Fri Jul  4 13:49:07 2003

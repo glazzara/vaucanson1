@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
  *
  * General algorithms concerning realtime aspect of automata.
  *
- * This file contains algorithms concerning realtime aspect of automata, i.e.
+ * Algorithms concerning realtime aspect of automata, i.e.
  * presence or absence of epsilon transitions in the automaton.
  *
  * @see is_realtime(), realtime_here(), realtime()

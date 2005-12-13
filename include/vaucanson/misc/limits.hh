@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +17,16 @@
 #ifndef VCSN_MISC_LIMITS_HH
 # define VCSN_MISC_LIMITS_HH
 
+/**
+ * @file limits.hh
+ *
+ * Wrapper about the numeric limits for Vaucanson
+ *
+ * This file defines the utility trait @c vcsn::limits, by using
+ * standard C++ @c std::numeric_limits if available, or the
+ * standard C limits if @c USE_C_LIMITS is defined.
+ */
+
 # include <vaucanson/config/math.hh>
 
 # ifdef USE_C_LIMITS
@@ -28,7 +38,7 @@
 namespace utility
 {
   template<typename T>
-  struct limits 
+  struct limits
 # ifndef USE_C_LIMITS
     : std::numeric_limits<T>
   { };
@@ -39,16 +49,16 @@ namespace utility
 
   template<>
   struct limits<bool>
-  { 
+  {
     static const int digits = sizeof(bool)*8;
     static const int digits10 = 1;
     static const bool is_specialized = true;
     static bool min() throw() { return false; }
-    static bool max() throw() { return false; }   
+    static bool max() throw() { return false; }
     static const bool has_infinity = false;
     static bool infinity() throw() { return false; }
     static const bool has_quiet_NaN = false;
-    static bool quiet_NaN() throw() 
+    static bool quiet_NaN() throw()
     { return static_cast<bool>(0); }
     static const bool is_signed = false;
     static const bool is_integer = true;
@@ -72,10 +82,10 @@ namespace utility
     static const bool is_exact = true;
     static const int radix = 2;
     static const bool has_infinity = false;
-    static signed char infinity() throw() 
+    static signed char infinity() throw()
     { return static_cast<signed char>(0); }
     static const bool has_quiet_NaN = false;
-    static signed char quiet_NaN() throw() 
+    static signed char quiet_NaN() throw()
     { return static_cast<signed char>(0); }
     static const bool is_iec559 = false;
     static const bool is_bounded = true;
@@ -95,16 +105,16 @@ namespace utility
     static const bool is_exact = true;
     static const int radix = 2;
     static const bool has_infinity = false;
-    static unsigned char infinity() throw() 
+    static unsigned char infinity() throw()
     { return static_cast<unsigned char>(0); }
     static const bool has_quiet_NaN = false;
-    static unsigned char quiet_NaN() throw() 
+    static unsigned char quiet_NaN() throw()
     { return static_cast<unsigned char>(0); }
     static const bool is_iec559 = false;
     static const bool is_bounded = true;
     static const bool is_modulo = true;
   };
-  
+
   template<>
   struct limits<int>
   {
@@ -118,10 +128,10 @@ namespace utility
     static const bool is_exact = true;
     static const int radix = 2;
     static const bool has_infinity = false;
-    static int infinity() throw() 
+    static int infinity() throw()
     { return static_cast<int>(0); }
     static const bool has_quiet_NaN = false;
-    static int quiet_NaN() throw() 
+    static int quiet_NaN() throw()
     { return static_cast<int>(0); }
     static const bool is_iec559 = true;
     static const bool is_bounded = true;
@@ -141,10 +151,10 @@ namespace utility
     static const bool is_exact = true;
     static const int radix = 2;
     static const bool has_infinity = false;
-    static unsigned int infinity() throw() 
+    static unsigned int infinity() throw()
     { return static_cast<unsigned int>(0); }
     static const bool has_quiet_NaN = false;
-    static unsigned int quiet_NaN() throw() 
+    static unsigned int quiet_NaN() throw()
     { return static_cast<unsigned int>(0); }
     static const bool is_iec559 = true;
     static const bool is_bounded = true;
@@ -164,7 +174,7 @@ namespace utility
     static const bool is_exact = false;
     static const int radix = 2;
     static const bool has_infinity = true;
-    static float infinity() throw() 
+    static float infinity() throw()
     { return HUGE_VAL; }
     static const bool has_quiet_NaN = true;
     static float quiet_NaN() throw()
@@ -187,7 +197,7 @@ namespace utility
     static const bool is_exact = false;
     static const int radix = 2;
     static const bool has_infinity = true;
-    static float infinity() throw() 
+    static float infinity() throw()
     { return HUGE_VAL; }
     static const bool has_quiet_NaN = true;
     static float quiet_NaN() throw()
