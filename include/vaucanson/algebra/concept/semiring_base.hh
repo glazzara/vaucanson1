@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -32,13 +32,13 @@ namespace vcsn {
     | SemiringBase<Self> |
     `-------------------*/
 
-    /// SemiringBase is the base class for all structures that are semirings.
+    /// Base class for all structures that are semirings.
     template <class Self>
     struct SemiringBase : MonoidBase<Self>
     {
     public:
       /**
-       * Indicate wether it is possible or not to call choose_non_starable.
+       * Whether it is possible to call choose_non_starable.
        *
        * There's no need for can_choose_starable, since Zero is always
        * starable and therefor can be choosen.
@@ -46,11 +46,11 @@ namespace vcsn {
       template <class T>
       bool can_choose_non_starable(SELECTOR(T)) const;
 
-      /// Return a randomly choosed starable semiring element.
+      /// A randomly chosen starable semiring element.
       template <class T>
       Element<Self, T>	choose_starable(SELECTOR(T)) const;
 
-      /// Return a randomly choosed non-starable semiring element.
+      /// A randomly chosen non-starable semiring element.
       template <class T>
       Element<Self, T> choose_non_starable(SELECTOR(T)) const;
     protected:
@@ -95,7 +95,7 @@ namespace vcsn {
     /// In-place star transformation of the weight.
     Element<Self, T>&   star();
 
-    /// Returns true if we can compute the star of the weight.
+    /// True if we can compute the star of the weight.
     bool		starable() const;
 
   protected:
@@ -133,17 +133,17 @@ namespace vcsn {
 
   // default implementations:
 
-  /// Returns whether a non-starable @c Element can be choosen from a Semiring.
+  /// Whether a non-starable @c Element can be choosen from a Semiring.
   template <typename S, typename T>
   bool
   op_can_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
 
-  /// Returns a random starable element in the set.
+  /// A random starable element in the set.
   template <typename S, typename T>
   Element<S, T>
   op_choose_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));
 
-  /// Returns a random non-starable element in the set.
+  /// A random non-starable element in the set.
   template <typename S, typename T>
   Element<S, T>
   op_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));

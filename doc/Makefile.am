@@ -1,15 +1,15 @@
-# Makefile.am
-#
-# $Id$
-
 SUBDIRS = makefiles xml
 include $(srcdir)/Makefile.doc
 
 dist_doc_DATA = ref.tar.gz
 
-ref.tar.gz: doc.doxy.in
+ref: doc.doxy.in
+	rm -rf ref
 	mkdir -p ref
+	$(MAKE) doc.doxy
 	$(DOXYGEN) doc.doxy
+
+ref.tar.gz: ref
 	$(TAR) -czf $@ `test -d ref || echo '$(srcdir)/'`ref
 
 MAINTAINERCLEANFILES = ref

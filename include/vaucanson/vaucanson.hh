@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -36,8 +36,7 @@
  * T&eacute;l&eacute;communications (<A
  * HREF="http://www.enst.fr/">ENST</A>).
  *
- * See also <A HREF="http://www.lrde.epita.fr/cgi-bin/twiki/view/Projects/Vaucanson">
- * the web page of the Vaucanson project</A>.
+ * See also the Vaucanson home page, http://vaucanson.lrde.epita.fr.
  *
  * @section intro Purpose of this documentation
  *
@@ -82,16 +81,17 @@
  * <li>The @link design_pattern Fundamental @endlink section describes the
  *     peculiar design pattern used in Vaucanson.</li>
  *
- * <li>The @link algebra algebra constructs listing @endlink describe the algebraic
- *     system used by the library.</li>
+ * <li>The @link algebra algebra constructs listing @endlink describe the
+ *     algebraic system used by the library.</li>
  *
- * <li>The @link automata automaton constructs listing @endlink describe the different
- *     automaton structures available.</li>
+ * <li>The @link automata automaton constructs listing @endlink describe
+ *     the different automaton structures available.</li>
  *
- * <li>The @link algorithms algorithm listing @endlink describe the different algorithms.</li>
+ * <li>The @link algorithms algorithm listing @endlink describe the
+ *     different algorithms.</li>
  *
- * <li>The <A HREF="files.html">file listing</A> lists all the source files together
- *       with their documentation.</li>
+ * <li>The <A HREF="files.html">file listing</A> lists all the source
+ *     files together with their documentation.</li>
  *
  * </ul>
  */

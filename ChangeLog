@@ -1,3 +1,16 @@
+2005-12-16  Akim Demaille  <akim@lrde.epita.fr>
+
+	Adjust the use of Doxygen.
+
+	* doc/doc.doxy.in: Enable code browsing.
+	* doc/Makefile.am (ref): New.
+	Make sure the doxyfile is up to date.
+	(ref.tar.gz): Adjust.
+	* include/vaucanson/vaucanson.hh: Doc changes.
+	* include/vaucanson/algebra/concept/semiring_base.hh: Idem.
+	* include/vaucanson/automata/concept/transducer.hh: Idem.
+	* include/vaucanson/automata/concept/automata.hh: Idem.
+
 2005-12-13  Akim Demaille  <akim@lrde.epita.fr>
 
 	Kill trailing spaces.
