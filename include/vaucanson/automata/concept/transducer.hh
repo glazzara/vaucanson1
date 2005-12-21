@@ -30,6 +30,7 @@ namespace vcsn {
   /// Dynamic traits for transducers.
   template <class Series>
   struct dynamic_traits<Transducer<Series> >
+    : dynamic_traits<TransducerBase<Series> >
   {
     static const bool ret = dynamic_traits<Series>::ret;
   };
@@ -69,37 +70,34 @@ namespace vcsn {
     typedef typename S::series_set_t::semiring_t
     typeof_auto_series_set_t;
 
-    //check this typedef
-    typedef typename S::series_set_t::monoid_t              auto_monoid_t;
+    /// @todo FIXME: check this typedef
+    typedef typename S::series_set_t::monoid_t auto_monoid_t;
 
-    typedef typename typeof_auto_series_set_t::semiring_t           auto_semiring_t;
+    typedef typename typeof_auto_series_set_t::semiring_t auto_semiring_t;
     typedef typename algebra::mute_series_traits<typeof_auto_series_set_t,
 						 auto_semiring_t,
 						 auto_monoid_t>::ret
     auto_series_set_t;
 
-    typedef typename output_projection_traits<T>::ret          auto_impl_t;
-    typedef Element<Automata<auto_series_set_t>,
-		    auto_impl_t>      ret;
+    typedef typename output_projection_traits<T>::ret auto_impl_t;
+    typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
 
   template <class S, class T>
   struct output_projection_helper
   {
-    typedef typename S::series_set_t::semiring_t
-    typeof_auto_series_set_t;
+    typedef typename S::series_set_t::semiring_t typeof_auto_series_set_t;
 
-    typedef typename S::series_set_t::semiring_t::monoid_t              auto_monoid_t;
+    typedef typename S::series_set_t::semiring_t::monoid_t auto_monoid_t;
 
-    typedef typename typeof_auto_series_set_t::semiring_t           auto_semiring_t;
+    typedef typename typeof_auto_series_set_t::semiring_t auto_semiring_t;
     typedef typename algebra::mute_series_traits<typeof_auto_series_set_t,
 						 auto_semiring_t,
 						 auto_monoid_t>::ret
     auto_series_set_t;
 
-    typedef typename output_projection_traits<T>::ret          auto_impl_t;
-    typedef Element<Automata<auto_series_set_t>,
-		    auto_impl_t>      ret;
+    typedef typename output_projection_traits<T>::ret auto_impl_t;
+    typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
 
   template <class S, class T>
@@ -126,7 +124,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concept/transducer.hxx>
+# include <vaucanson/automata/concept/transducer.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

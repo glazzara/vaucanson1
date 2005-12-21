@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -78,6 +78,22 @@ namespace vcsn {
   {
     typedef undefined_type	ret;
   };
+
+  /*-----------------------------------.
+  | virtual_types<AutomataBase<Self> > |
+  `-----------------------------------*/
+  template <class S>
+  struct virtual_types<TransducerBase<S> >
+    : virtual_types<AutomataBase<S> >
+  { };
+
+  /*------------------------------------.
+  | dynamic_traits<AutomataBase<Self> > |
+  `------------------------------------*/
+  template <class S>
+  struct dynamic_traits<TransducerBase<S> >
+    : dynamic_traits<AutomataBase<S> >
+  { };
 
   /*-------------------------------------.
   | MetaElement<TransducerBase<Self>, T> |

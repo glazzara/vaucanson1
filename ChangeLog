@@ -1,3 +1,18 @@
+2005-12-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix dynamic_traits and virtual_types for Tranducer.
+
+	* include/vaucanson/automata/concept/transducer_base.hh,
+	* include/vaucanson/automata/concept/transducer.hh,
+	Do that.
+
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh,
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hh,
+	* include/vaucanson/algebra/concept/semiring_base.hh,
+	* include/vaucanson/automata/concept/automata.hh,
+	* include/vaucanson/algebra/concept/numerical_semiring.hh: Doc &
+	formatting fixes.
+
 2005-12-16  Akim Demaille  <akim@lrde.epita.fr>
 
 	Adjust the use of Doxygen.
