@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,8 +29,7 @@ namespace vcsn {
     /*------------------.
     | NumericalSemiring |
     `------------------*/
-    /// NumericalSemiring is the set of semirings implemented with
-    /// usual operations (+, *).
+    /// The set of semirings implemented with usual operations (+, *).
     struct NumericalSemiring
       : SemiringBase<NumericalSemiring>
     {
@@ -48,7 +47,7 @@ namespace vcsn {
   /*----------------------------------.
   | dynamic_traits<NumericalSemiring> |
   `----------------------------------*/
-  /// Meta information about then NumericalSemiring structural element.
+  /// Meta information about the NumericalSemiring structural element.
   template<>
   struct dynamic_traits<algebra::NumericalSemiring>
     : dynamic_traits<algebra::SemiringBase<algebra::NumericalSemiring> >

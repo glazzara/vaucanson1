@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -112,10 +112,12 @@ namespace vcsn {
     | Pretty printer |
     `---------------*/
     template<typename St, typename T>
-    St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMax>& s, St& st, const T& v);
+    St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMax>& s,
+		St& st, const T& v);
 
     template<typename St, typename T>
-    St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>& s, St& st, const T& v);
+    St& op_rout(const algebra::TropicalSemiring<algebra::TropicalMin>& s,
+		St& st, const T& v);
 
 //  } // algebra
 

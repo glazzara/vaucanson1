@@ -133,7 +133,7 @@ namespace vcsn {
 
   // default implementations:
 
-  /// Whether a non-starable @c Element can be choosen from a Semiring.
+  /// Whether a non-starable @c Element can be chosen from a Semiring.
   template <typename S, typename T>
   bool
   op_can_choose_non_starable(const algebra::SemiringBase<S>& set, SELECTOR(T));

@@ -1,5 +1,16 @@
 2005-12-21  Akim Demaille  <akim@lrde.epita.fr>
 
+	Formatting changes.
+
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh,
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hh,
+	* include/vaucanson/algebra/concept/semiring_base.hh,
+	* include/vaucanson/algebra/concept/numerical_semiring.hh,
+	* include/vaucanson/automata/concept/automata.hh: Formatting and
+	doc changes.
+
+2005-12-21  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix dynamic_traits and virtual_types for Tranducer.
 
 	* include/vaucanson/automata/concept/transducer_base.hh,

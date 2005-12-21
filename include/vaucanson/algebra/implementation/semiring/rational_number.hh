@@ -208,8 +208,8 @@ namespace std
 
 } // End of namespace std.
 
-// FIXME: utility::limits should be removed, or std::numeric_limits should
-// FIXME: not be used/specialized.
+/// @bug FIXME: utility::limits should be removed, or std::numeric_limits should
+/// not be used/specialized.
 namespace utility
 {
   template <>
