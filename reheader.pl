@@ -1,4 +1,4 @@
-#! /usr/bin/env perl -w
+#! /usr/bin/env perl
 #
 # reheader.pl: this file is part of the Vaucanson project.
 #
@@ -29,6 +29,7 @@
 ## Then the copyright and licence text is replaced with the
 ## Vaucanson official text.
 
+use warnings;
 use strict;
 
 my $boundupper = "#ifndef %CPPNAME%

@@ -1,5 +1,9 @@
 2005-12-24  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* reheader.pl: Fix use of "env", as suggested by Thomas.
+
+2005-12-24  Raphaël Poss  <raph@lrde.epita.fr>
+
 	* configure.ac,
 	* find_tests.sh: Move tests.m4 to config/ with other m4 files.
 
