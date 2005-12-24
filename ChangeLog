@@ -1,3 +1,12 @@
+2005-12-24  Raphaël Poss  <raph@lrde.epita.fr>
+
+	* configure.ac,
+	* find_tests.sh: Move tests.m4 to config/ with other m4 files.
+
+	* Makefile.am: Put a dependency for 'configure' oon tests.m4.
+	
+	* reheader.pl: Document.
+
 2005-12-21  Akim Demaille  <akim@lrde.epita.fr>
 
 	Formatting changes.

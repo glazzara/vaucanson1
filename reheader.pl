@@ -1,4 +1,34 @@
-#! /usr/bin/perl -w
+#! /usr/bin/env perl -w
+#
+# reheader.pl: this file is part of the Vaucanson project.
+#
+# Vaucanson, a generic library for finite state machines.
+#
+# Copyright (C) The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `COPYING' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
+#
+
+##
+## Raphaël Poss notes: I'm the culprit responsible for this perl mess.
+## I don't remember how it works, so don't bug me about it and
+## fix it yourself.
+##
+## reheader.pl ensures that all C++ header files are properly
+## "protected" with #ifndef..#endif, using a CPP variable that should
+## be unique across the whole project. For this purpose it uses
+## the filename uppercased and prefixes it with "VCSN".
+## Then the copyright and licence text is replaced with the
+## Vaucanson official text.
+
 use strict;
 
 my $boundupper = "#ifndef %CPPNAME%

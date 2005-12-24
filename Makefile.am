@@ -11,7 +11,7 @@ EXTRA_DIST = vaucanson.spec
 ### Tell it where to find them.
 ###
 ACLOCAL_AMFLAGS = -I config
-CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4 $(srcdir)/config/vaucanson_xml.m4
+CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4 $(srcdir)/config/vaucanson_xml.m4 $(srcdir)/config/tests.m4
 
 ###
 ### Autoconf macros are installable and distributable.
@@ -75,4 +75,4 @@ deb:
 # Update headers.
 rehead:
 	$(find_headers) | \
-	  xargs $(srcdir)/reheader.pl
+	  xargs perl $(srcdir)/reheader.pl

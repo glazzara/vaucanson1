@@ -180,7 +180,7 @@ AC_CONFIG_FILES([
 	include/Makefile
         debian/Makefile])
 
-m4_include([tests.m4])
+m4_include([config/tests.m4])
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 AC_SUBST([VCSN_VAUCANSWIG_SUBDIR])
