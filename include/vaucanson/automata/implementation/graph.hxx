@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -257,8 +257,8 @@ namespace vcsn
   bool
   GClass::has_edge(hedge_t e) const
   {
-    bool res =(removed_edges_.find(e) == removed_edges_.end()
-	       && (e < int(edges_.size())));
+    bool res = (removed_edges_.find(e) == removed_edges_.end()
+		&& (e < int(edges_.size())));
 # ifndef VCSN_NDEBUG
     if (res == false)
       for (int i = 0; i < int(states_.size()); ++i)
@@ -360,9 +360,9 @@ namespace vcsn
 
     for (int i = 0; i < int(edges_.size()); ++i)
     {
-      if (removed_edges_.find(hedge_t(i)) == removed_edges_.end())
+      if (removed_edges_.find(hedge_t(i)) != removed_edges_.end())
 	continue;
-      // Make sure that origin and aim of edge are part of the automaton
+      // Make sure that origin and aim of edge are part of the automaton.
       if (!has_state(aim_of(hedge_t(i))) ||
 	  !has_state(origin_of(hedge_t(i))))
 	return false;

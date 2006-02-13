@@ -1,3 +1,10 @@
+2006-02-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Minor fix in Graph::exists().
+
+	* include/vaucanson/automata/implementation/graph.hxx (Graph::exists):
+	Fix bug with `removed_edges_' search.
+
 2005-12-24  Raphaël Poss  <raph@lrde.epita.fr>
 
 	* reheader.pl: Fix use of "env", as suggested by Thomas.
