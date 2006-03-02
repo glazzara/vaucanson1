@@ -1,3 +1,27 @@
+2006-03-02  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Add a user's manual draft.
+
+	Add a the first files of Vaucanson user's manual.
+	It gives the outline of the first chapter of the manual
+	that is the use of vaucanson's toolkit.
+
+	* configure.ac,
+	* doc/Makefile.am: Update accordingly.
+	* doc/manual: New.
+	* doc/manual/vaucanson-g.sty: New.
+	* doc/manual/installation.tex: New.
+	* doc/manual/vaucanson_library.tex: New.
+	* doc/manual/vaucanson_toolkit.tex: New.
+	* doc/manual/images: New.
+	* doc/manual/images/a1_det.eps: New.
+	* doc/manual/images/a1_det_min.eps: New.
+	* doc/manual/images/a1.eps: New.
+	* doc/manual/Makefile.am: New.
+	* doc/manual/users_manual.tex: New.
+	* doc/manual/examples: New.
+	* doc/manual/examples/a1.xml: New.
+
 2006-02-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Minor fix in Graph::exists().

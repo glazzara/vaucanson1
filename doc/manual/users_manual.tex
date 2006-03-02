@@ -1,0 +1,66 @@
+\documentclass[a4paper]{report}
+
+\usepackage[american]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{textcomp}
+\usepackage{tabularx}
+\usepackage{alltt}
+\usepackage{url}
+\usepackage{vaucanson-g}
+\usepackage{graphicx}
+
+\usepackage{listings}
+\lstset{%
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=5,
+  numbersep=5pt,
+  firstnumber=1,
+  basicstyle=\small,
+  frame=single,
+  language=C++,
+  float}
+
+\newenvironment{cmp}{%
+  \begin{center}
+    \begin{minipage}{\textwidth}}{%
+    \end{minipage}
+  \end{center}}
+
+
+\newcommand\inputcode[4][]{%
+  \begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+      \lstinputlisting[language=C++, #1]{#2}
+    \end{minipage}
+    \caption{#3}
+    \label{fig:#4}
+  \end{figure}}
+
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+
+\newcommand{\Vauc}{\textsc{Vaucanson}\xspace}
+
+\title{\Vauc User's manual}
+\author{The \Vauc group}
+\setcounter{tocdepth}{2}
+
+\makeindex
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\input{installation}
+\input{vaucanson_toolkit}
+\input{vaucanson_library}
+
+\end{document}

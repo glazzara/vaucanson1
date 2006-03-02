@@ -1,0 +1,30 @@
+\chapter{Installation}
+
+\section{Getting the archive}
+
+The latest stable version of the \Vauc platform is downloadable on the
+web site \url{http://vaucanson.lrde.epita.fr/}. Please note that the
+current development version can be retrieved through
+\textbf{Subversion} repository (Subversion could be found at
+\url{http://subversion.tigris.org/}).
+
+\begin{alltt}
+user> svn checkout https://svn.lrde.epita.fr/svn/vaucanson
+\end{alltt}
+
+\section{Building the archive}
+
+The following commands build and install the platform:
+\begin{alltt}
+user> cd vaucanson-0.x
+\end{alltt}
+if you are using the current development version:
+\begin{alltt}
+user> cd vaucanson/trunk
+\end{alltt}
+Then:
+\begin{alltt}
+user> ./configure
+user> make
+root> make install
+\end{alltt}
