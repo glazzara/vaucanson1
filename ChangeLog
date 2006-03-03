@@ -4,7 +4,7 @@
 
 	Add a the first files of Vaucanson user's manual.
 	It gives the outline of the first chapter of the manual
-	that is the use of vaucanson's toolkit.
+	that is the use of Vaucanson's toolkit.
 
 	* configure.ac,
 	* doc/Makefile.am: Update accordingly.
