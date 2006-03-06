@@ -1,3 +1,12 @@
+2006-03-06  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	More work on user's manual draft.
+
+	* doc/manual/vaucanson_toolkit.tex: Add the description of
+	available functions for boolean automata. Add an example for
+	weighted automata. Minor changes on the boolean automata
+	example.
+
 2006-03-02  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Add a user's manual draft.

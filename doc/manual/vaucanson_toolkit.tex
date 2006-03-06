@@ -6,7 +6,6 @@ how to use those programs. Actually there are 6 programs
 located in src/demos/function\_library/ directory. Each of them
 dealing with a specific type of automata:
 
-
 \begin{itemize}
   \item b for manipulating automata over Boolean semiring $\mathbb{B}$;
   \item z for manipulating automata over $(\mathbb{Z},+)$;
@@ -16,15 +15,21 @@ dealing with a specific type of automata:
   \item tdc for manipulating automata over free monoid product.
 \end{itemize}
 
+The first step before starting to work with \Vauc toolkit is to choose
+on which type of automata you intend to work. Then you should just use
+the proper program between those listed before.
 
 %%Example on boolean automaton
 \section{Boolean automata}
 
+This part show the use of the program \textit{b}.
+
 \subsection{A first example}
 
-Let's consider the following boolean automaton :
+%%FIXME: Ref marche pas
+Let's consider the following boolean automaton \ref{A_1} :
 
-%%Schema de l'automate A
+%%Schema de l'automate A1
 \begin{figure}[ht] \centering
   \begin{VCPicture}{(0,-2)(6,2)}
     % states
@@ -37,6 +42,7 @@ Let's consider the following boolean automaton :
     %
   \end{VCPicture}
   \caption{The automaton $A_1$}
+  \label{A_1}
 \end{figure}
 
 You can find the XML code that describe this automaton in
@@ -70,11 +76,12 @@ Or we can use dotty to visualize our newly created automaton:
 \end{alltt}
 
 %%Dotty output of det(A1)
-\begin{figure}[ht]
-  \centering
+%%\begin{figure}[ht]
+\begin{center}
   \scalebox{0.7}{\includegraphics{images/a1_det.eps}}
-  \caption{Determinized of $A_1$}
-\end{figure}
+\end{center}
+%%  \caption{Determinized of $A_1$}
+%%\end{figure}
 
 \subsubsection{Minimizing}
 
@@ -83,11 +90,12 @@ Or we can use dotty to visualize our newly created automaton:
 \end{alltt}
 
 %% Dotty min(det(A1))
-\begin{figure}[!ht]
-  \centering
+%%\begin{figure}[!h]
+\begin{center}
   \scalebox{0.7}{\includegraphics{images/a1_det_min.eps}}
-  \caption{Minimizing the Determinized of $A_1$}
-\end{figure}
+\end{center}
+%%\caption{Minimizing the Determinized of $A_1$}
+%%\end{figure}
 
 \subsubsection{Evaluation}
 
@@ -121,58 +129,235 @@ minimize the resulting automaton:
 \begin{alltt}
 # /b standard_of "(a+b)*a.b.(a+b)*" | ./b minimize - | ./b display -
 \end{alltt}
-\begin{figure}[ht]
-  \centering
+%%\begin{figure}[ht]
+\begin{center}
   \scalebox{0.7}{\includegraphics{images/a1.eps}}
-  \caption{The minimize standard automaton of "(a+b)*a.b.(a+b)*"}
-\end{figure}
+\end{center}
+%%  \caption{The minimize standard automaton of "(a+b)*a.b.(a+b)*"}
+%%\end{figure}
 Please note that your rationnal expressions should follow the
-following grammar :
-\begin{verbatim}
-         exp ::= '(' exp ')'
-         |   exp '+' exp
-         |   exp '.' exp
-         |   exp exp
-         |   exp '*'
-         |   weight ' ' exp
-         |   exp ' ' weight
-         |   0
-         |   1
-         |   word
-\end{verbatim}
+following grammar. %%Fixme : Lien vers la grammaire des ratexp
+%% \begin{verbatim}
+%%         exp ::= '(' exp ')'
+%%         |   exp '+' exp
+%%         |   exp '.' exp
+%%         |   exp exp
+%%         |   exp '*'
+%%         |   weight ' ' exp
+%%         |   exp ' ' weight
+%%         |   0
+%%         |   1
+%%         |   word
+%% \end{verbatim}
 
-\subsection{Building your own automaton}
-%%FIXME: Here we should give a small example of define_automaton
-%%function.
+\subsection{Description of available funtions}
+%% Fixme: A finir
+%%
+%% Une definition plus rigoureuse des algorithmes devrait etre fournie
+%% en annexe.
+In this section you will find a brief definition of all functions that
+\Vauc provides for manipulating boolean automata.\\
+\begin{itemize}
+\item[-] \textit{a1.xml} \textit{a2.xml} are two boolean automata described in
+  \Vauc XML format.
+\item[-] \textit{w} is a word, for example \textit{"aabb"} if you are working on an
+  alphabet that contains the letters \textit{a} and \textit{b}.
+\item[-] \textit{exp} is a rationnal expression denoting a language.
+\item[-] \textit{n} is a strictly positive integer.
+\end{itemize}
+
+\begin{description}
+  \item [are-isomorphic] :\\
+    ./b a1.xml a2.xml\\
+    Return 1 (resp. 0) if the two automata are (resp. aren't)
+    isomorphic.
+
+  \item [aut\_to\_exp] : \\
+    ./b aut\_to\_exp a1.xml\\
+    Return a regular expression denoting the langage recognized by
+    \textit{aut}.
+
+  \item [accessible] :\\
+    ./b accessible a1.xml\\
+    Extract the sub-automaton of accessible states of a1.xml.
+
+  \item [closure] :\\
+    ./b closure a1.xml\\
+    Complete the automaton a1.xml to make it
+    close over epsilon transition (based on the
+    Floyd-McNaughton-Yamada algorithm).
+
+  \item [co-accessible] :\\
+    ./b accessible a1.xml\\
+    Extract the sub-automaton of co-accessible states of a1.xml.
+
+  \item [derived\_terms] :\\
+
+  \item [determinize] :\\
+    ./b determinize a1.xml\\
+    Return the determinized of a1.xml.
+
+  \item [display] :\\
+    ./b display a1.xml\\
+    Display a graphical view of the automaton a1.xml using DOT format.
+
+  \item [evaluation] :\\
+    ./b eval a1.xml w\\
+    Return 1 (resp. 0) if the word w is accepted by the automaton
+    a1.xml
+
+  \item [expand] :\\
+
+  \item [info] :\\
+    ./b info a1.xml\\
+    Display general information (Number of states, number of
+    transitions, number of initial states and number of final
+    states) on the automaton \textit{a1.xml}.
+
+  \item [is-empty] :\\
+    ./b is-empty a1.xml\\
+    Return 1 (resp. 0) if the automaton has (resp. hasn't) accessible
+    or (resp. and) co-accessible states.
+
+  \item [minimize] :\\
+    ./b minimize [hm] a1.xml\\
+    Return the minimal automaton of a1.xml (By default the minimal
+    automaton is built using Hopcroft algorithm).
+    \begin{itemize}
+      \item[-] h Use Hopcroft algorithm
+      \item[-] m Use Moore algorithm
+    \end{itemize}
+
+  \item [power] :\\
+    ./b power a1.xml n\\
+    Return the ...
+
+  \item [product] :\\
+    ./b product a1.xml a2.xml\\
+    Return the product of the two automata.
+
+  \item [quotient] :\\
+    ./b quotient a1.xml\\
+    Return the quotient of a non deterministic automaton.
+
+  \item [realtime] :\\
+    ./b realtime a1.xml\\
+    Return the realtime automaton of the automaton a1.xml.
+
+  \item [standard\_of] :\\
+    ./b standard\_of exp\\
+    Return the standard automaton build from the rationnal expression exp.
+
+  \item [trim] :\\
+    ./b trim a1.xml\\
+    Return the trimmed automaton of a1.xml.
+
+  \item [transpose] :\\
+    ./b transpose a1.xml\\
+    Return the transposed of the automaton a1.xml.
+
+  \item [thompson\_of] :\\
+
+\end{description}
 
 \section{Transducers}
+%%FIXME: L'algorithme fmp_to_trans et trans_to_fmp devrait paut-etre fournit par
+%%ces programmes.
 \subsection{Example}
+
+The transducer $T$(\ref{bindiv3}) gives the quotient by 3 of a binary number.
+
+\begin{figure}[h]
+  \begin{center}
+    \begin{VCPicture}{(0,-2)(6,2)}
+% states
+\State{(0,0)}{A} \State{(3,0)}{B} \State{(6,0)}{C}
+\Initial[w]{A}
+\Final[s]{A}
+%transitions
+\LoopN{A}{\IOL{0}{0}}
+\LoopN{C}{\IOL{1}{1}}
+\ArcL{A}{B}{\IOL{1}{0}}
+\ArcL{B}{A}{\IOL{1}{1}}
+\ArcL{B}{C}{\IOL{0}{0}}
+\ArcL{C}{B}{\IOL{0}{1}}
+\end{VCPicture}
+\caption{Transducer $T$ giving the quotient by 3 of a binary number}
+\label{bindiv3}
+  \end{center}
+\end{figure}
+
+\subsubsection{Evalutation}
+
 
 \section{Weighted automata}
+
+This part shows the use of the program \textit{z}, (but all
+comments should also stand for the programs \textit{z\_min\_plus and
+z\_max\_plus}).
+
 \subsection{Example}
 
-\section{List of available functions}
+Let's consider the following $\mathbb{N}$-automaton, \textit{i.e.}
+an automaton which label's weights are in $\mathbb{N}$:
 
-\begin{itemize}
-  \item is-empty
-  \item are-isomorphic
-  \item accessible
-  \item coaccessible
-  \item realtime
-  \item trim
-  \item transpose
-  \item aut\_to\_exp
-  \item expand
-  \item standard\_of
-  \item thompson\_of
-  \item derived\_terms
-  \item product
-  \item power
-  \item determinize
-  \item minimize
-  \item quotient
-  \item closure
-  \item eval
-  \item display
-  \item info
-\end{itemize}
+%%Schema de l'automate B1
+\begin{figure}[ht] \centering
+  \begin{VCPicture}{(0,-2)(3,2)}
+    % states
+    \State{(0,0)}{A} \State{(3,0)}{B}
+    % initial--final
+    \Initial{A} \Final{B}
+    % transitions
+    \EdgeL{A}{B}{b}
+    \LoopS[.5]{A}{b} \LoopN[.5]{A}{a}
+    \LoopS[.5]{B}{b} \LoopN[.5]{B}{a}
+    %
+  \end{VCPicture}
+  \caption{The automaton $B_1$}
+\end{figure}
+
+This time the evaluation of the word \textit{w} by the automaton $B_1$
+will produce a number, rather than simply accept or reject \textit{w}.
+For instance let's evaluate "abab" and "bbab":
+
+\subsubsection{Evaluation}
+
+\begin{alltt}
+# ./z eval b1.xml 'abbb'
+\textit{3}
+# ./z eval b1.xml 'abab'
+\textit{2}
+\end{alltt}
+
+As you may have already guessed the automaton $B_1$ "counts" the
+number of 'b' contained in \textit{w}.
+
+\subsubsection{Power}
+
+Now let's consider the $B_1^4$, where
+$$B_1^4 = \prod_{i=1}^4 B_1, 4 > 0$$
+
+\begin{alltt}
+# ./z eval b1.xml 4 > b1_4.xml
+\end{alltt}
+
+Now the file \textit{b1\_4.xml} contains the automaton $B_1^4$. Lets
+see what the evaluation of the words "abab" and "bbab" gives with this
+automaton:
+
+\begin{alltt}
+#./z eval b1_4.xml 'bbab'
+\textit{81}
+./z eval b1_4.xml 'abab'
+\textit{16}
+\end{alltt}
+
+This time one can notice that the automaton $B_1^4$ returns the
+evaluation of $B_1$ but at power 4.
+
+\subsection{Description of available funtions}
+
+
+\section{Building your own automaton}
+%%FIXME: Here we should give the usage of define_automaton function.
