@@ -1,3 +1,16 @@
+2006-03-13  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Add transducers' example to user's manual.
+
+	* doc/manual/installation.tex: Minor changes.
+	* doc/manual/vaucanson_toolkit.tex: Add the section on
+	transducers. Complete the weighted automata section. Minor
+	changes on Boolean automata section.
+	* doc/manual/examples/b1.xml,
+	* doc/manual/examples/add1_rt.xml,
+	* doc/manual/examples/quot_3_rt.xml: New. Examples used in
+	user's manual.
+
 2006-03-10  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx: Remove spaces in label generation.
