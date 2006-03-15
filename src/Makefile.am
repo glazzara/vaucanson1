@@ -3,7 +3,9 @@
 #
 # $Id$
 
-# `benchs' subdir has to be on a single line.
 SUBDIRS = tests	\
 	  benchs \
 	  demos
+
+# The XSD file will be installed in a data directory.
+dist_pkgdata_DATA = vaucanson.xsd

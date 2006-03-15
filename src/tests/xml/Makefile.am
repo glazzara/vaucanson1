@@ -72,7 +72,7 @@ CLEANFILES = 					\
 $(check_SCRIPTS): vaucanson.xsd
 
 vaucanson.xsd:
-	ln -sf $(top_builddir)/doc/xml/vaucanson.xsd .
+	ln -sf $(top_srcdir)/src/vaucanson.xsd $@
 
 endif
 

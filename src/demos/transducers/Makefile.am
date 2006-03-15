@@ -29,4 +29,4 @@ endif XML_CHECK
 all-am: vaucanson.xsd
 
 vaucanson.xsd:
-	ln -sf $(top_srcdir)/doc/xml/vaucanson.xsd
+	ln -sf $(top_srcdir)/src/vaucanson.xsd $@

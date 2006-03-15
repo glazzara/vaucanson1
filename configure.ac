@@ -92,6 +92,12 @@ AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
 
 VCSN_XML
 
+# Tell what's the default XSD path.
+old_prefix="$prefix"
+expr "x$prefix" : "x/" > /dev/null || prefix=$ac_default_prefix
+AC_SUBST([VCSN_XSD_PATH], "$(eval echo \"$datadir/vaucanson/vaucanson.xsd\")")
+prefix="$old_prefix"
+
 ##
 ## for documentation purpose.
 ##
@@ -115,6 +121,7 @@ AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 AC_CONFIG_FILES([
 	Makefile
 	include/vaucanson/config/pconf.hh:include/vaucanson/config/pconf-hh.in
+	include/vaucanson/xml/xerces_parser.hh:include/vaucanson/xml/xerces_parser-hh.in
 	src/Makefile
 	src/tests/Makefile
 	src/tests/check/Makefile

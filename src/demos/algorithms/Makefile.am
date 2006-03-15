@@ -12,7 +12,7 @@ if XML_CHECK
 all-am: vaucanson.xsd
 
 vaucanson.xsd:
-	ln -sf $(top_srcdir)/doc/xml/vaucanson.xsd
+	ln -sf $(top_srcdir)/src/vaucanson.xsd $@
 
 noinst_PROGRAMS = universal b_are_equivalent z_are_equivalent	\
 	b_exp_equiv z_exp_equiv b_contains_factor z_contains_factor classics

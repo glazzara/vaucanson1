@@ -26,6 +26,8 @@
  * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
  */
 
+# include <fstream>
+
 # define parser_set_property(prop) \
       if (parser->canSetFeature(XMLUni::prop, true)) \
 	parser->setFeature(XMLUni::prop, true);
@@ -38,6 +40,27 @@ namespace vcsn
 {
   namespace xml
   {
+
+    static inline std::string get_xsd_path ()
+    {
+      { // Test the environment variable before anything.
+	const char* xsd_env = getenv ("VCSN_XSD_PATH");
+	if (xsd_env)
+	  return xsd_env;
+      }
+      static const char* possible_xsds[] =
+	{ "vaucanson.xsd", VCSN_XSD_PATH, 0 };
+      const char**	 result;
+      for (result = possible_xsds; *result; ++result)
+      {
+	std::ifstream is (*result);
+	if (is.good ())
+	  break;
+      }
+      if (*result)
+	return *result;
+      return "";
+    }
 
     template <class IStream>
     xercesc::DOMDocument*
@@ -52,8 +75,12 @@ namespace vcsn
       parser_set_property(fgXercesUseCachedGrammarInParse);
       parser_set_property(fgXercesCacheGrammarFromParse);
 
+      std::string xsd_file = get_xsd_path ();
+      if (xsd_file == "")
+	FAIL ("Error: XSD file not found.");
+
       XMLCh* xsd_link =
-	STR2XML("http://vaucanson.lrde.epita.fr vaucanson.xsd");
+	STR2XML(("http://vaucanson.lrde.epita.fr " + xsd_file).c_str ());
       parser_set_value(fgXercesSchemaExternalSchemaLocation, xsd_link);
 
       // fgXercesSchemaExternalNoNamespaceSchemaLocation
