@@ -1,5 +1,12 @@
 2006-03-15  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Fix small bug in XML output.
+
+	* include/vaucanson/xml/tools.hxx: Make sure "0" is output on
+	  transitions labeled by the no-word.
+
+2006-03-15  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Be more flexible on XML's XSD location.
 	XML's XSD file is now searched :
 	1) As the file pointed by the environment variable VCSN_XSD_PATH,

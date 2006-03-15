@@ -139,6 +139,9 @@ namespace vcsn
 	    for (; i != l.supp().end(); ++i)
 	      os << "+" << get_label(*i);
 	  }
+	else
+	  os << "0";
+
 	return os.str().c_str();
       }
 
