@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,27 +21,33 @@
 # include <vaucanson/tools/usual_macros.hh>
 
 # ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
-#  include <vaucanson/algorithms/derived_term_automaton.hh>
-#  include <vaucanson/algorithms/product.hh>
-#  include <vaucanson/algorithms/transpose.hh>
-#  include <vaucanson/algorithms/eval.hh>
-#  include <vaucanson/algorithms/determinize.hh>
+#  include <vaucanson/algorithms/accessible.hh>
 #  include <vaucanson/algorithms/closure.hh>
+#  include <vaucanson/algorithms/complement.hh>
+#  include <vaucanson/algorithms/complete.hh>
+#  include <vaucanson/algorithms/concatenate.hh>
+#  include <vaucanson/algorithms/cut_up.hh>
+#  include <vaucanson/algorithms/derived_term_automaton.hh>
+#  include <vaucanson/algorithms/determinize.hh>
+#  include <vaucanson/algorithms/eval.hh>
+#  include <vaucanson/algorithms/isomorph.hh>
+#  include <vaucanson/algorithms/is_realtime.hh>
 #  include <vaucanson/algorithms/minimization_hopcroft.hh>
 #  include <vaucanson/algorithms/minimization_moore.hh>
-#  include <vaucanson/algorithms/trim.hh>
-#  include <vaucanson/algorithms/concatenate.hh>
-#  include <vaucanson/algorithms/sum.hh>
-#  include <vaucanson/algorithms/krat_exp_expand.hh>
-#  include <vaucanson/algorithms/accessible.hh>
+#  include <vaucanson/algorithms/normalized.hh>
+#  include <vaucanson/algorithms/product.hh>
 #  include <vaucanson/algorithms/realtime.hh>
 #  include <vaucanson/algorithms/standard.hh>
-#  include <vaucanson/algorithms/normalized.hh>
+#  include <vaucanson/algorithms/sum.hh>
+#  include <vaucanson/algorithms/transpose.hh>
+#  include <vaucanson/algorithms/trim.hh>
+
+#  include <vaucanson/algorithms/krat_exp_expand.hh>
 # endif // ! VCSN_WITHOUT_ALGORITHM_INCLUDES
 
+# include <vaucanson/algorithms/aut_to_exp.hh>
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/thompson.hh>
-# include <vaucanson/algorithms/aut_to_exp.hh>
 
 namespace vcsn
 {

@@ -1,3 +1,9 @@
+2006-03-15  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+
+	* include/vaucanson/contexts/automaton_functions.thh: Add some
+	  algorithms, sort them in alphabetical order.
+
 2006-03-13  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Add transducers' example to user's manual.
