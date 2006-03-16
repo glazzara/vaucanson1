@@ -2,7 +2,8 @@
 #
 # $Id$
 
-EXTRA_DIST = vaucanson/config/pconf-hh.in
+EXTRA_DIST = vaucanson/config/pconf-hh.in				   \
+	     vaucanson/xml/xerces_parser-hh.in
 
 mkdir_vaucanson_xml:
 	$(mkinstalldirs) ./vaucanson/xml

@@ -1,3 +1,8 @@
+2006-03-16  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+
+	* include/Makefile.am: Add `xerces_parser-hh.in' to EXTRA_DIST.
+
 2006-03-15  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Fix small bug in XML output.
