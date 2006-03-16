@@ -38,7 +38,9 @@
 # include <vaucanson/xml/strings.hh>
 # include <vaucanson/xml/error_handler.hh>
 
-# define VCSN_XSD_PATH "@VCSN_XSD_PATH@"
+# ifndef VCSN_XSD_PATH
+#  define VCSN_XSD_PATH "@VCSN_XSD_PATH@"
+# endif // ! VCSN_XSD_PATH
 
 namespace vcsn
 {

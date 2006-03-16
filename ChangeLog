@@ -1,5 +1,12 @@
 2006-03-16  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Allow the user to override default XSD path in her code.
+
+	* include/vaucanson/xml/xerces_parser-hh.in: Add a guard macro for
+	  `VCSN_XSD_PATH'.
+
+2006-03-16  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 
 	* include/Makefile.am: Add `xerces_parser-hh.in' to EXTRA_DIST.
 
