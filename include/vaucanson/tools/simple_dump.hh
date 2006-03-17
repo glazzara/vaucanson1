@@ -1,8 +1,8 @@
-// dot_dump.hh: this file is part of the Vaucanson project.
+// simple_dump.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,6 +29,8 @@ namespace vcsn
   }
 }
 
+#ifndef VCSN_USE_INTERFACE_ONLY
 # include <vaucanson/tools/simple_dump.hxx>
+#endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_TOOLS_SIMPLE_DUMP_HH

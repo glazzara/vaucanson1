@@ -1,5 +1,13 @@
 2006-03-17  Raphaël Poss  <raph@lrde.epita.fr>
 
+	* include/vaucanson/tools/simple_dump.hh,
+	* include/vaucanson/tools/simple_dump.hxx: Fix headers.
+	
+	* include/vaucanson/tools/simple_dump.hh,
+	* include/vaucanson/tools/dot_dump.hh: Use VCSN_USE_INTERFACE_ONLY.
+
+2006-03-17  Raphaël Poss  <raph@lrde.epita.fr>
+
 	Make Vaucanson a bit more usable when Xerces-C++ is not available.
 	
 	* config/vaucanson_xml.m4: Add AC_DEFINE and AM_CONDITIONAL for
