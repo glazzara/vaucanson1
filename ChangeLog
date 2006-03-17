@@ -1,3 +1,8 @@
+2006-03-17  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* doc/xml/xml_proposal.tex: New version. Change structure and
+	content according to discussions.
+
 2006-03-16  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Allow the user to override default XSD path in her code.
@@ -119,7 +124,7 @@
 	* find_tests.sh: Move tests.m4 to config/ with other m4 files.
 
 	* Makefile.am: Put a dependency for 'configure' oon tests.m4.
-	
+
 	* reheader.pl: Document.
 
 2005-12-21  Akim Demaille  <akim@lrde.epita.fr>
