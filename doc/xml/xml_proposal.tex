@@ -1,4 +1,4 @@
-\documentclass[a4paper]{llncs}
+\documentclass[a4paper]{article}
 \pagestyle{plain}
 \usepackage{amsmath,amsfonts,amscd,amssymb}
 \usepackage{alltt}
@@ -43,6 +43,8 @@
 
 \def\nameattr{\texttt{name}}
 \def\labelattr{\texttt{label}}
+\def\inattr{\texttt{in}}
+\def\outattr{\texttt{out}}
 \def\numberattr{\texttt{number}}
 \def\stateattr{\texttt{state}}
 
@@ -50,9 +52,7 @@
 
 \title{XML proposal for automata description}
 
-\author{The \Vauc group\inst{}}
-
-\institute{http://vaucanson.lrde.epita.fr}
+\author{The \Vauc group}
 
 \maketitle{}
 
@@ -228,7 +228,7 @@ The first tag is \statestag{}, representing start declaration of
 the set of states of the automaton. A state has three attributes: a
 \nameattr{} (which is mandatory and has to be unique), a \labelattr{}
 and a \numberattr{}. The latter can be used to put an ordering on states,
-or to add special data to the state.
+or to add special integer data to the state.
 
 The second tag is \transitionstag{}, representing start declaration
 of the set of transitions. The initial and final
@@ -246,9 +246,10 @@ or \finaltag{} transition, the only mandatory attribute is
 
 There is no limitation of the format for the content
 of attributes, as it is a non-restricted string. For example, a user
-can store a rational expression in the label.
-When omitting the \labelattr{} attribute, the XSD grammar proposes the empty
-word as the default value.
+can store a rational expression in the \labelattr{}, \inattr{} or \outattr{}
+ attributes of a transition. The use of these attributes depends on the
+structure of automaton one defines. When omitting them, the XSD grammar
+proposes the empty word as the default value.\\
 
 At this point, most of automata can be easily described. These examples use
 only a part of the XML description that we present, but allow the reader to
@@ -569,7 +570,7 @@ description: \verb|in| and \verb|out|, respectively corresponding to
 the input and the output of a transition. These two attributes are
 proposed in addition to the classical \verb|label| and \verb|weight|
 attributes, that can still be used for transducer description. Of course, they
-can be used indistinctly in \transitiontag{}, \initialtag{} or \finaltag{}. \\
+can be used indistinctly in \transitiontag{}, \initialtag{} or \finaltag{}.
 
 \subsubsection{About the labels}
 
@@ -697,6 +698,7 @@ which means that usual laws over $\mathbb{B}$ shall be applied.
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section{The visualization tags}
 \label{title_vizualisation}
 The visual representation of automata involves a very large amount of
@@ -707,11 +709,12 @@ On the other hand, the \drawingtag{} tag gives some graphical information about
 the way the automata of a session must be drawn.
 
 Let us note that these tags can be used at any level of the document. In this
-case, the defined properties are applied to the tag in which they are defined.
-It is possible to define some properties in a tag and to locally override
-them in a child tag. For example in Figure \ref{override_properties}, the
-filling color of the states is globally set to \textit{black}, and the color of state
-$s_1$ is locally set to red. As a result, $s_0$ and $s_2$ will be black, and $s_1$ will be red.
+case, the defined properties are applied to the tag in which they are defined,
+and to its children. It is possible to define some properties in a tag and to
+locally override them in a child tag. For example in Figure
+\ref{override_properties}, the filling color of the states is globally set to
+\textit{black}, and the color of state $s_1$ is locally set to red. As a
+result, $s_0$ and $s_2$ will be black, and $s_1$ will be red.
 
 {\small
 \begin{figure}[h]
@@ -826,8 +829,7 @@ limited to a specific set of drawing properties.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion}
-\subsection{From DTD to XSD}
+\section{From DTD to XSD}
 The most important difference with our previous proposal (see \cite{VXML04}) is
 the change from a DTD (Document Type Definition) document to an XSD (XML Schema
 Description) Schema.
@@ -846,8 +848,10 @@ different properties for a same element, according to the embracing
 context. It is so possible to locally change the behavior of a tag, and
 make it context-sensitive. With this feature, default values for the
 \typetag{} tag are achieved, whether it is a child of
-\transducertag{} or \automatontag{}.
+\transducertag{} or \automatontag{}.\\
 
+For information about the XSD Schema are available on the
+\textit{World Wide Web Consortium} website \cite{W3C}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
@@ -890,6 +894,12 @@ Software},
 
 \bibitem{xerces}
 \verb+http://xml.apache.org/xerces-c/+
+
+\bibitem{W3C}
+\verb+http://www.w3.org/XML/Schema+
+
+\bibitem{VCSN-XML}
+\verb+http://vaucanson.lrde.epita.fr/XML+
 
 \bibitem{XSD}
 \verb+http://www.lrde.epita.fr/dload/vaucanson/vaucanson.xsd+
