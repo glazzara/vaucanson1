@@ -15,14 +15,15 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/tools/xml_dump.hh>
+
+using namespace vcsn;
+using namespace vcsn::boolean_automaton;
+#include "dumper.hcc"
 
 
 int
-main()
+main(int argc, char **argv)
 {
-  using namespace vcsn;
-  using namespace vcsn::boolean_automaton;
 
   alphabet_t	A;
   A.insert('a');
@@ -48,6 +49,6 @@ main()
   b1.set_initial(p);
   b1.set_final(q);
 
-  tools::xml_dump(std::cout, b1, "b1");
+  dumper(argc, argv)(std::cout, b1, "b1");
 }
 

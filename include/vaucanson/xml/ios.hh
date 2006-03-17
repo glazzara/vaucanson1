@@ -17,6 +17,11 @@
 #ifndef VCSN_XML_IOS_HH
 # define VCSN_XML_IOS_HH
 
+#include <vaucanson/config/system.hh>
+#ifndef VCSN_USE_XML
+# error Vaucanson XML support is disabled.
+#endif
+
 # include <xercesc/util/BinInputStream.hpp>
 # include <xercesc/sax/InputSource.hpp>
 # include <iostream>

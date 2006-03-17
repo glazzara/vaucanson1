@@ -17,6 +17,11 @@
 #ifndef VCSN_XML_XML_HH
 # define VCSN_XML_XML_HH
 
+#include <vaucanson/config/system.hh>
+#ifndef VCSN_USE_XML
+# error Vaucanson XML support is disabled.
+#endif
+
 /**
  * @file XML.hh
  *

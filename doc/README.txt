@@ -1,14 +1,10 @@
-
-This is Vaucanson, a C++ generic library for weighted finite state
-machine.
-
 ===========================
  Introduction to Vaucanson
 ===========================
 
 :Date: 2005-06-23
 
-Vaucanson_, a C++ generic library for weighted finite state machine.
+Vaucanson_, a C++ generic library for weighted finite state machines.
 
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
@@ -145,6 +141,11 @@ There are other sources of interest in the distribution.
 
 - Headline news about the project can be found in the file ``NEWS`` at
   the root of the source tree.
+
+- Frequently asked questions are answered in the file ``FAQ``.
+
+- Some information about input and output of automata can be found in
+  the file ``README-IO``.
 
 - Documentation  about the  XML  I/O  subsystem can  be  found in  the
   ``doc/xml`` subdirectory.

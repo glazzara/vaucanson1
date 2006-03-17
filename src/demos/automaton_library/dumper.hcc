@@ -1,0 +1,86 @@
+// dumper.hcc: this file is part of the Vaucanson project.
+// 
+// Vaucanson, a generic library for finite state machines.
+// 
+// Copyright (C) 2005 The Vaucanson Group.
+// 
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+// 
+// The complete GNU General Public Licence Notice can be found as the
+// `COPYING' file in the root directory.
+// 
+// The Vaucanson Group consists of people listed in the `AUTHORS' file.
+//
+#include <vaucanson/tools/usual_io.hh>
+#ifdef VCSN_USE_XML
+# include <vaucanson/tools/xml_dump.hh>
+#endif
+#include <vaucanson/tools/dot_dump.hh>
+#include <vaucanson/tools/fsm_dump.hh>
+#include <vaucanson/tools/simple_dump.hh>
+#include <cstring>
+#include <cstdlib>
+#include <string>
+
+enum dump_format {
+  fmt_dot, fmt_fsm, fmt_simple
+#ifdef VCSN_USE_XML
+  , fmt_xml
+#endif
+};
+
+struct dumper {
+  dump_format fmt_;
+
+  dumper(int argc, char **argv, int pos = 1) {
+    if (argc > pos) {
+      if (!strcmp(argv[pos], "dot")) { fmt_ = fmt_dot; }
+      else if (!strcmp(argv[pos], "simple")) { fmt_ = fmt_simple; }
+#ifdef VCSN_USE_XML
+      else if (!strcmp(argv[pos], "xml")) { fmt_ = fmt_xml; }
+#endif
+      else if (!strcmp(argv[pos], "fsm")) { fmt_ = fmt_fsm; }
+      else {
+	std::cerr << "Usage: " << argv[0] << " ... <fmt>" << std::endl
+		  << "where fmt is one of:" << std::endl
+		  << "  dot : graphviz format" << std::endl
+		  << "  fsm : FSM toolbox format" << std::endl
+		  << "  simple : internal Vaucanson format" << std::endl
+#ifdef VCSN_USE_XML
+		  << "  xml : Vaucanson XML I/O format" << std::endl
+#endif
+	  ;
+	exit(1);
+      }
+    }
+    else { fmt_ = fmt_dot; }
+  }
+
+  const char* get_fmt() const {
+    switch(fmt_) {
+    case fmt_dot: return "dot";
+#ifdef VCSN_USE_XML
+    case fmt_xml: return "xml";
+#endif
+    case fmt_simple: return "simple";
+    case fmt_fsm: return "fsm";
+    }
+    return "unknown";
+  }
+
+  void operator()(std::ostream& o, const automaton_t& automaton, const std::string& name = "automaton") {
+
+    switch(fmt_) {
+    case fmt_dot: vcsn::tools::dot_dump(o, automaton, name); break;
+#ifdef VCSN_USE_XML
+    case fmt_xml: vcsn::tools::xml_dump(o, automaton, name); break;
+#endif
+    case fmt_simple: vcsn::tools::simple_dump(o, automaton, vcsn::io::usual_converter_poly<rat_exp_t>()); break;
+    case fmt_fsm: vcsn::tools::fsm_dump(o, automaton); break;
+    }
+  }
+
+};

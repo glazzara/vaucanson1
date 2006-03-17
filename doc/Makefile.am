@@ -1,4 +1,4 @@
-SUBDIRS = makefiles xml manual
+SUBDIRS = makefiles
 include $(srcdir)/Makefile.doc
 
 dist_doc_DATA = ref.tar.gz
@@ -16,8 +16,9 @@ MAINTAINERCLEANFILES = ref
 
 dist_doc_DATA += README.pdf README.tex README.html \
 		 FAQ.pdf FAQ.tex FAQ.html \
-		 NEWS.pdf NEWS.tex NEWS.html
+		 NEWS.pdf NEWS.tex NEWS.html \
+	         README-IO.pdf README-IO.tex README-IO.html
 
-EXTRA_DIST = README.txt FAQ.txt NEWS.txt
+EXTRA_DIST = README.txt FAQ.txt NEWS.txt README-IO.txt
 
 MAINTAINERCLEANFILES += $(dist_doc_DATA)

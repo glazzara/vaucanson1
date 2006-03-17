@@ -9,7 +9,7 @@ EXTRA_PROGRAMS = a1 b1 c1
 noinst_PROGRAMS = divkbaseb double_ring ladybird
 
 XML_SAMPLES = $(srcdir)/a1.xml $(srcdir)/b1.xml $(srcdir)/c1.xml
-EXTRA_DIST = $(XML_SAMPLES)
+EXTRA_DIST = $(XML_SAMPLES) dumper.hcc
 MAINTAINERCLEANFILES = $(XML_SAMPLES)
 
 a1_SOURCES = a1.cc

@@ -15,16 +15,17 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/tools/xml_dump.hh>
-
 #include <ostream>
 #include <sstream>
 
+using namespace vcsn::boolean_automaton;
+#include "dumper.hcc"
+
 int main(int argc, char** argv)
 {
-  if (argc != 2)
+  if (argc < 2)
     {
-      std::cerr << "Usage: " << argv[0] << " <n>" << std::endl;
+      std::cerr << "Usage: " << argv[0] << " <n> [<fmt>]" << std::endl;
       return 1;
     }
 
@@ -36,15 +37,12 @@ int main(int argc, char** argv)
 
   std::string nstates (argv[1]);
 
-  using vcsn::boolean_automaton::alphabet_t;
-  using vcsn::boolean_automaton::automaton_t;
-
   alphabet_t	alpha;
   alpha.insert('a');
   alpha.insert('b');
   alpha.insert('c');
 
-  automaton_t an = vcsn::boolean_automaton::new_automaton(alpha);
+  automaton_t an = new_automaton(alpha);
 
   vcsn::hstate_t p = an.add_state();
   vcsn::hstate_t x = p;
@@ -58,9 +56,10 @@ int main(int argc, char** argv)
   an.add_letter_edge(x, p, 'a');
   an.set_initial(p); an.set_final(p);
 
-  std::string name = "ladybird" + nstates + ".xml";
+  dumper d(argc, argv, 2);
+  std::string name = "ladybird" + nstates + "." + d.get_fmt();
   std::ofstream file(name.c_str());
-  vcsn::tools::xml_dump(file, an, "ladybird");
+  d(file, an, "ladybird");
 
   std::cout << "File " << name << " has been created." << std::endl;
 }

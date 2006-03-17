@@ -17,6 +17,11 @@
 #ifndef VCSN_XML_STRINGS_HH
 # define VCSN_XML_STRINGS_HH
 
+#include <vaucanson/config/system.hh>
+#ifndef VCSN_USE_XML
+# error Vaucanson XML support is disabled.
+#endif
+
 # include <string>
 
 # include <xercesc/util/XMLUniDefs.hpp>

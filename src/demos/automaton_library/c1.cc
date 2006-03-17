@@ -15,14 +15,15 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/z_automaton.hh>
-#include <vaucanson/tools/xml_dump.hh>
+
+using namespace vcsn;
+using namespace vcsn::z_automaton;
+#include "dumper.hcc"
 
 
 int
-main()
+main(int argc, char **argv)
 {
-  using namespace vcsn;
-  using namespace vcsn::z_automaton;
 
   alphabet_t	A;
   A.insert('a');
@@ -54,6 +55,6 @@ main()
   c1.set_initial(p);
   c1.set_final(q);
 
-  tools::xml_dump(std::cout, c1, "c1");
+  dumper(argc, argv)(std::cout, c1, "c1");
 }
 

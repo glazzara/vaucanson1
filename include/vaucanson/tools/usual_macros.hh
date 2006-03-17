@@ -184,7 +184,10 @@ typedef typename alphabet_t::letter_t		letter_t;
 # define XML_FAIL(S)
 #endif
 #define FAIL(S) { std::cerr << (S) << std::endl; exit(1); }
+
+#ifdef VCSN_USE_XML
 #define STR2XML(S) xercesc::XMLString::transcode(S)
+#endif
 
 //
 

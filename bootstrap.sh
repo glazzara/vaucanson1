@@ -11,7 +11,9 @@ fi
 (cd src/tests/sanity && /bin/sh ./generate_files.sh .)
 (cd src/demos/vaucanswig && /bin/sh ./expand.sh .)
 (cd src/benchs && /bin/sh ./generate_all_benchs.sh)
-./find_tests.sh
+sh ./find_tests.sh
+sh ./check_xml.sh
+
 $AUTORECONF -v -f -i
 
 # disabled temporarily

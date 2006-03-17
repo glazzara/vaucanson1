@@ -17,15 +17,16 @@
 #include <sstream>
 
 #include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/tools/xml_dump.hh>
+using namespace vcsn::boolean_automaton;
+#include "dumper.hcc"
 
 int
 main(int argc, char** argv)
 {
-  if (argc != 3)
+  if (argc < 3)
     {
       std::cerr << "Usage:" << std::endl
-		<< "\t" << argv[0] << " <divisor> <base>" << std::endl;
+		<< "\t" << argv[0] << " <divisor> <base> [<fmt>]" << std::endl;
       return 1;
     }
 
@@ -43,8 +44,6 @@ main(int argc, char** argv)
 
   std::string div (argv[1]);
   std::string b (argv[2]);
-
-  using namespace vcsn::boolean_automaton;
 
   alphabet_t	alpha;
   for (int i = 0; i < base; ++i)
@@ -65,9 +64,11 @@ main(int argc, char** argv)
       d = (d + 1) % divisor;
     }
 
-  std::string name = "div" + div + "base" + b + ".xml";
+  dumper dump(argc, argv, 3);
+
+  std::string name = "div" + div + "base" + b + "." + dump.get_fmt();
   std::ofstream file(name.c_str());
-  vcsn::tools::xml_dump(file, a, name);
+  dump(file, a, name);
 
   std::cout << "File " << name << " has been created." << std::endl;
 }

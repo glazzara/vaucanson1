@@ -17,15 +17,13 @@
 #include <sstream>
 
 #include <vaucanson/boolean_automaton.hh>
-#include <vaucanson/tools/xml_dump.hh>
+
+using namespace vcsn::boolean_automaton;
+#include "dumper.hcc"
 
 int
 main(int argc, char** argv)
 {
-  using namespace vcsn::boolean_automaton;
-  using vcsn::io::string_out;
-  using vcsn::xml::XML;
-
   if (argc < 2)
     {
       std::cerr << "Usage:" << std::endl
@@ -59,7 +57,8 @@ main(int argc, char** argv)
   a.add_letter_edge(n - 1, 0, 'a');
   a.add_letter_edge(0, n - 1, 'b');
 
-  for (int i = 2; i < argc; ++i)
+  int i;
+  for (i = 2; i < argc; ++i)
     {
       std::stringstream	is (argv[i]);
       int		s;
@@ -67,11 +66,14 @@ main(int argc, char** argv)
       is >> s;
       if (s >= 0 and s < n)
 	a.set_final(s);
+      else
+	break;
     }
 
-  std::string name = "double_ring" + nstates + ".xml";
+  dumper d(argc, argv, i);
+  std::string name = "double_ring" + nstates + "." + d.get_fmt();
   std::ofstream file(name.c_str());
-  vcsn::tools::xml_dump(file, a, "double_ring");
+  d(file, a, "double_ring");
 
   std::cout << "File " << name << " has been created." << std::endl;
 }

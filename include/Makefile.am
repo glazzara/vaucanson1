@@ -73,6 +73,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/tools/io.hh						   \
 	vaucanson/tools/simple_format.hxx				   \
 	vaucanson/tools/simple_format.hh				   \
+	vaucanson/tools/simple_dump.hxx					   \
+	vaucanson/tools/simple_dump.hh					   \
 	vaucanson/tools/usual_io.hxx					   \
 	vaucanson/tools/usual_io.hh					   \
 	vaucanson/tools/dot_dump.hxx					   \
