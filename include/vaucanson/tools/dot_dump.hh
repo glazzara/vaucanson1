@@ -29,6 +29,8 @@ namespace vcsn
   }
 }
 
+#ifndef VCSN_USE_INTERFACE_ONLY
 # include <vaucanson/tools/dot_dump.hxx>
+#endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_TOOLS_DOT_DUMP_HH
