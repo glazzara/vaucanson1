@@ -9,3 +9,6 @@
 
 /* Define to the version of this package. */
 #define VCSN_PACKAGE_VERSION "@PACKAGE_VERSION@"
+
+/* Define the path to data of this package. */
+#define VCSN_DATA_PATH "@VCSN_DATA_PATH@"

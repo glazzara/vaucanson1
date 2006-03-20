@@ -16,12 +16,6 @@
 //
 #ifndef VCSN_XML_XERCES_PARSER_HH
 # define VCSN_XML_XERCES_PARSER_HH
-
-#include <vaucanson/config/system.hh>
-#ifndef VCSN_USE_XML
-# error Vaucanson XML support is disabled.
-#endif
-
 /**
  * @file xerces_parser.hh
  *
@@ -45,7 +39,7 @@
 # include <vaucanson/xml/error_handler.hh>
 
 # ifndef VCSN_XSD_PATH
-#  define VCSN_XSD_PATH "@VCSN_XSD_PATH@"
+#  define VCSN_XSD_PATH VCSN_DATA_PATH "/vaucanson.xsd"
 # endif // ! VCSN_XSD_PATH
 
 namespace vcsn

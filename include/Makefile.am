@@ -2,12 +2,13 @@
 #
 # $Id$
 
-EXTRA_DIST = vaucanson/config/pconf-hh.in				   \
-	     vaucanson/xml/xerces_parser-hh.in
+EXTRA_DIST = vaucanson/config/pconf-hh.in
 
 mkdir_vaucanson_xml:
 	$(mkinstalldirs) ./vaucanson/xml
 
+vaucanson/config/pconf.hh: vaucanson/config/pconf-hh
+	sed "s,@VCSN_DATA_PATH@,$(pkgdatadir),g" "$<" > "$@"
 
 nobase_include_HEADERS =						   \
 	vaucanson/config/system.hh					   \
