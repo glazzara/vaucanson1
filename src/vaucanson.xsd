@@ -492,7 +492,7 @@ be set.
 -->
 <xs:complexType name="automaton">
   <xs:sequence>
-    <xs:element name="type" type="type_automaton" minOccurs="0"/>
+    <xs:element name="label_type" type="type_automaton" minOccurs="0"/>
     <xs:element name="content" type="content_automaton"/>
     <xs:element name="geometry" type="geometry_full" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
@@ -507,7 +507,7 @@ be set.
 -->
 <xs:complexType name="transducer">
   <xs:sequence>
-    <xs:element name="type" type="type_transducer" minOccurs="0"/>
+    <xs:element name="label_type" type="type_transducer" minOccurs="0"/>
     <xs:element name="content" type="content_transducer"/>
     <xs:element name="geometry" type="geometry_full" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>

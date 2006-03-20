@@ -1,12 +1,12 @@
 <session xmlns="http://vaucanson.lrde.epita.fr">
   <automaton>
-    <type>
+    <label_type>
       <monoid generators="letters" type="free">
         <generator value="a"/>
         <generator value="b"/>
       </monoid>
       <semiring operations="numerical" set="B"/>
-    </type>
+    </label_type>
     <content>
       <states>
         <state name="s0"/>
@@ -20,13 +20,13 @@
     </content>
   </automaton>
   <automaton>
-    <type>
+    <label_type>
       <monoid generators="letters" type="free">
         <generator value="a"/>
         <generator value="b"/>
       </monoid>
       <semiring operations="numerical" set="B"/>
-    </type>
+    </label_type>
     <content>
       <states>
         <state name="s0"/>

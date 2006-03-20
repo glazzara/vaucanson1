@@ -73,9 +73,9 @@ namespace vcsn
 	    if (! type_done)						   \
 	      {								   \
 		if (XMLString::compareIString(n->getNodeName(),		   \
-					      STR2XML("type")))		   \
+					      STR2XML("label_type")))	   \
 		  {							   \
-		    typeNode<T>* node = new typeNode<T>;		   \
+		    label_typeNode<T>* node = new label_typeNode<T>;	   \
 		    node->process(0, aut, m, f);			   \
 		  }							   \
 		type_done = true;					   \
@@ -88,7 +88,8 @@ namespace vcsn
 
 # define PROCESS_TYPE_NODE(TempParam, AutType)				      \
     TempParam								      \
-    void typeNode<AutType>::process(xercesc::DOMElement* node, AutType& aut,  \
+    void label_typeNode<AutType>::process(xercesc::DOMElement* node,	      \
+					  AutType& aut,			      \
 				    typename Node<AutType>::map_t& m,	      \
 				    typename Node<AutType>::factory_t& f)     \
     {									      \
@@ -111,7 +112,7 @@ PROCESS_ROOT_NODE(automaton)
 PROCESS_TYPE_NODE(TParm, AUTtype)
 PROCESS_TYPE_NODE(TParm, TRANStype)
 PROCESS_TYPE_NODE(TParmFMP, FMPtype)
-PROCESS_NODE(type)
+PROCESS_NODE(label_type)
 PROCESS_NODE(content)
 PROCESS_NODE(states)
 PROCESS_NODE(transitions)

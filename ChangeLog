@@ -1,3 +1,23 @@
+2006-03-20  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	First change in Vaucanson because of the new version of the XML
+	documentation. From now on, the first element of the automaton
+	and transducer types is "label_type" and not "type" anymore.
+
+	* src/vaucanson.xsd: Change "label" to "label_type" in the automaton
+	and transducer types.
+	* include/vaucanson/xml/xml_chooser.hxx,
+	* include/vaucanson/xml/node.hxx,
+	* include/vaucanson/xml/node.hh: Propagate the change of the xsd file.
+	* src/tests/xml/trans_ref.xml,
+	* src/tests/xml/r_ref.xml,
+	* src/tests/xml/z_ref.xml,
+	* src/tests/xml/z_min_plus_ref.xml,
+	* src/tests/xml/b_ref.xml,
+	* src/tests/xml/z_max_plus_ref.xml,
+	* src/tests/xml/fmp_ref.xml,
+	* src/tests/xml/session_ref.xml: Change the reference files.
+
 2006-03-20  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* Makefile.am: s/vaucanson_xml.m4/vcsn_xml.m4/.

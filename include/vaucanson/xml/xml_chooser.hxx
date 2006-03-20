@@ -48,7 +48,7 @@ namespace vcsn
 					    xercesc::DOMDocument* doc,
 					    xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(STR2XML("type"));
+      xercesc::DOMElement* type = doc->createElement(STR2XML("label_type"));
       xercesc::DOMElement* monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
       tools::create_alphabet(aut.structure().series().monoid().alphabet(),
@@ -105,7 +105,7 @@ namespace vcsn
 		      xercesc::DOMDocument* doc,
 		      xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(STR2XML("type"));
+      xercesc::DOMElement* type = doc->createElement(STR2XML("label_type"));
       xercesc::DOMElement* in_monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
       tools::create_alphabet(aut.structure().series().monoid().alphabet(),
@@ -142,7 +142,7 @@ namespace vcsn
 		      xercesc::DOMDocument* doc,
 		      xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(STR2XML("type"));
+      xercesc::DOMElement* type = doc->createElement(STR2XML("label_type"));
       xercesc::DOMElement* monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
 
