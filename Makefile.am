@@ -11,13 +11,13 @@ EXTRA_DIST = vaucanson.spec
 ### Tell it where to find them.
 ###
 ACLOCAL_AMFLAGS = -I config
-CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4 $(srcdir)/config/vaucanson_xml.m4 $(srcdir)/config/tests.m4
+CONFIGURE_DEPENDENCIES = $(srcdir)/config/vcsn.m4 $(srcdir)/config/vcsn_xml.m4 $(srcdir)/config/tests.m4
 
 ###
 ### Autoconf macros are installable and distributable.
 ###
 m4datadir = $(datadir)/aclocal
-dist_m4data_DATA = config/vcsn.m4 config/vaucanson_xml.m4
+dist_m4data_DATA = config/vcsn.m4 config/vcsn_xml.m4
 
 ###
 ### For benchs.

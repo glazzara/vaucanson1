@@ -1,5 +1,9 @@
 2006-03-20  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* Makefile.am: s/vaucanson_xml.m4/vcsn_xml.m4/.
+
+2006-03-20  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* config/vaucanson_xml.m4: Move to...
 	* config/vcsn_xml.m4: ... here, and fix a `test'.
 
