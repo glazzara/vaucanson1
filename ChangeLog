@@ -1,3 +1,17 @@
+2006-03-20  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Share Vaucanson-g between manual and xml proposal.
+	Now the xml proposal and the user manual will have symbolic
+	links to Vaucanson-g files instead of having their own copies.
+
+	* doc/vaucanson-g.sty: New.
+	* doc/xml/vaucanson-g.sty: Remove.
+	* doc/xml/Vaucanson-G.tex: Remove.
+	* doc/xml/Makefile.am: Create links to Vaucanson-g files.
+	* doc/Vaucanson-G.tex: New.
+	* doc/manual/vaucanson-g.sty: Remove.
+	* doc/manual/Makefile.am: Create links to Vaucanson-g files.
+
 2006-03-20  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	First change in Vaucanson because of the new version of the XML
