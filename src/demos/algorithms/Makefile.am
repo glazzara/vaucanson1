@@ -5,16 +5,13 @@
 
 EXTRA_DIST = equivalent_functions.hh
 
+AM_CPPFLAGS = -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
+
 if XML_CHECK
   AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
-  AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
+  AM_CPPFLAGS += -I$(top_srcdir)/include -I$(top_builddir)/include
 
-all-am: vaucanson.xsd
-
-vaucanson.xsd:
-	ln -sf $(top_srcdir)/src/vaucanson.xsd $@
-
-noinst_PROGRAMS = universal b_are_equivalent z_are_equivalent	\
+  noinst_PROGRAMS = universal b_are_equivalent z_are_equivalent	\
 	b_exp_equiv z_exp_equiv b_contains_factor z_contains_factor classics
 
 endif

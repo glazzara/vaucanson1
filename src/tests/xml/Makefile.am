@@ -1,5 +1,6 @@
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
-AM_CPPFLAGS = -I$(top_builddir)/include -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_builddir)/include -I$(top_srcdir)/include	\
+	-DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
 
 TESTS_ENVIRONMENT= SRCDIR=$(srcdir)
 
@@ -51,7 +52,6 @@ check_PROGRAMS = 				\
 	session_tester				
 
 CLEANFILES = 					\
-	vaucanson.xsd				\
 	b_result.tmp				\
 	fmp_result.tmp				\
 	trans_result.tmp			\
@@ -68,11 +68,6 @@ CLEANFILES = 					\
 	z_max_plus_result.dot.tmp		\
 	r_result.dot.tmp			\
 	z_min_plus_result.dot.tmp
-
-$(check_SCRIPTS): vaucanson.xsd
-
-vaucanson.xsd:
-	ln -sf $(top_srcdir)/src/vaucanson.xsd $@
 
 endif
 

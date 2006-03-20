@@ -1,5 +1,19 @@
 2006-03-20  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Cosmetic changes on Makefiles.
+
+	* src/demos/function_library/Makefile.am,
+	* src/demos/algorithms/Makefile.am,
+	* src/demos/transducers/Makefile.am,
+	* src/tests/xml/Makefile.am: Use VCSN_XSD_PATH define instead of
+	  making a symlink to the XSD file.
+
+	* doc/xml/Makefile.am,
+	* doc/manual/Makefile.am: Use TEXINPUTS env variable instead of
+	  making symlinks for Vaucanson-G.
+
+2006-03-20  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Cosmetic changes for 1105.
 
 	* configure.ac: Generate `pconf-hh' instead of `pconf.hh'. It still

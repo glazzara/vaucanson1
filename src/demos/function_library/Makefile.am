@@ -2,9 +2,11 @@
 #
 # $Id: Makefile.am 462 2004-03-31 21:55:16Z yann $
 
+AM_CPPFLAGS = -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
+
 if XML_CHECK
   AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
-  AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
+  AM_CPPFLAGS += -I$(top_srcdir)/include -I$(top_builddir)/include
 
   noinst_PROGRAMS =				\
 	b					\
@@ -15,11 +17,6 @@ if XML_CHECK
 	tdc					\
 	rt_tdc
 endif
-
-all-am: vaucanson.xsd
-
-vaucanson.xsd:
-	ln -sf $(top_srcdir)/src/vaucanson.xsd $@
 
 b_SOURCES = algorithms.cc
 b_CPPFLAGS = $(AM_CPPFLAGS)					\
