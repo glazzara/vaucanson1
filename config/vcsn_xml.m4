@@ -104,7 +104,7 @@ AC_DEFUN([VCSN_XML],
   else
      enable_xml_tests=no
   fi
-  if [ x$enable_vcsn_xml = xyes ]; then
+  if test x$enable_vcsn_xml = xyes; then
     AC_DEFINE([VCSN_USE_XML], 1, [Define this if you want to use XML I/O])
   fi
   AM_CONDITIONAL([VCSN_USE_XML], [test x$enable_vcsn_xml = xyes])
