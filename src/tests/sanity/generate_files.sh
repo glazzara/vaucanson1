@@ -17,7 +17,8 @@ EXTRA_DIST = generate_files.sh
 test_base.cc: generate_files.sh \$(top_srcdir)/include/Makefile.am
 	\$(SHELL) "\$(srcdir)"/generate_files.sh "\$(srcdir)"
 
-AM_CPPFLAGS = -I\$(top_srcdir)/include -I\$(top_builddir)/include
+AM_CPPFLAGS = -I\$(top_srcdir)/include -I\$(top_builddir)/include	\
+		-DVCSN_SANITY_CHECK
 AM_CXXFLAGS = \$(CXXFLAGS_STRICT)
 
 check_PROGRAMS= \\

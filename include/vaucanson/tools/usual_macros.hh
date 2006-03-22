@@ -18,6 +18,7 @@
 # define VCSN_TOOLS_USUAL_MACROS_HH
 
 # include <fstream>
+# include <vaucanson/config/system.hh>
 
 #define for_all_const(T, I, C) \
    for (T::const_iterator I = (C).begin(); I != (C).end(); ++I)
@@ -186,7 +187,7 @@ typedef typename alphabet_t::letter_t		letter_t;
 #define FAIL(S) { std::cerr << (S) << std::endl; exit(1); }
 
 #ifdef VCSN_USE_XML
-#define STR2XML(S) xercesc::XMLString::transcode(S)
+# define STR2XML(S) xercesc::XMLString::transcode(S)
 #endif
 
 //

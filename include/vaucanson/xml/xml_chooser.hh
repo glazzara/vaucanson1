@@ -14,13 +14,16 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_XML_XML_CHOOSER_HH
-# define VCSN_XML_XML_CHOOSER_HH
 
 #include <vaucanson/config/system.hh>
-#ifndef VCSN_USE_XML
-# error Vaucanson XML support is disabled.
-#endif
+
+#if not defined (VCSN_XML_XML_CHOOSER_HH) and				\
+    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
+# define VCSN_XML_XML_CHOOSER_HH
+
+# ifndef VCSN_USE_XML
+#  error Vaucanson XML support is disabled.
+# endif
 
 /**
  * @file xml_chooser.hh
@@ -145,4 +148,4 @@ namespace vcsn
 # endif // VCSN_USE_INTERFACE_ONLY
 
 
-#endif // ! VCSN_XML_XML_CHOOSER_HH
+#endif // ! VCSN_XML_XML_CHOOSER_HH && (! VCSN_SANITY_CHECK || VCSN_USE_XML)

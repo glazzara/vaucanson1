@@ -14,13 +14,16 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_XML_NODE_HH
-# define VCSN_XML_NODE_HH
 
 #include <vaucanson/config/system.hh>
-#ifndef VCSN_USE_XML
-# error Vaucanson XML support is disabled.
-#endif
+
+#if not defined (VCSN_XML_NODE_HH) and				\
+    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
+# define VCSN_XML_NODE_HH
+
+# ifndef VCSN_USE_XML
+#  error Vaucanson XML support is disabled.
+# endif
 
 /**
  * @file node.hh
@@ -202,4 +205,4 @@ CREATE_SPEC_PARAM_NODE(monoid, TParmFMP, FMPtype)
 #  include <vaucanson/xml/node.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_XML_NODE_HH
+#endif // ! VCSN_XML_NODE_HH && (! VCSN_SANITY_CHECK || VCSN_USE_XML)

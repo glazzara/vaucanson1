@@ -14,13 +14,16 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_XML_STRINGS_HH
-# define VCSN_XML_STRINGS_HH
 
 #include <vaucanson/config/system.hh>
-#ifndef VCSN_USE_XML
-# error Vaucanson XML support is disabled.
-#endif
+
+#if not defined (VCSN_XML_STRINGS_HH) and				\
+    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
+# define VCSN_XML_STRINGS_HH
+
+# ifndef VCSN_USE_XML
+#  error Vaucanson XML support is disabled.
+# endif
 
 # include <string>
 
@@ -44,4 +47,4 @@ namespace vcsn
 #  include <vaucanson/xml/strings.hxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_XML_STRINGS_HH
+#endif // ! VCSN_XML_STRINGS_HH && (! VCSN_SANITY_CHECK || VCSN_USE_XML)
