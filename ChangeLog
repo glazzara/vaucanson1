@@ -1,3 +1,8 @@
+2006-03-31  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* include/vaucanson/xml/tools.hxx: Use a stringstream to fix a
+	bug that occured in the xml_session test.
+
 2006-03-22  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Fix sanity check with and without XML enabled.
@@ -95,20 +100,20 @@
 
 	* include/vaucanson/tools/simple_dump.hh,
 	* include/vaucanson/tools/simple_dump.hxx: Fix headers.
-	
+
 	* include/vaucanson/tools/simple_dump.hh,
 	* include/vaucanson/tools/dot_dump.hh: Use VCSN_USE_INTERFACE_ONLY.
 
 2006-03-17  Raphaël Poss  <raph@lrde.epita.fr>
 
 	Make Vaucanson a bit more usable when Xerces-C++ is not available.
-	
+
 	* config/vaucanson_xml.m4: Add AC_DEFINE and AM_CONDITIONAL for
 	VCSN_USE_XML. Ensure both are set properly depending on
 	--enable-xml.
 
-	* check_xml.sh: Add. 
-	
+	* check_xml.sh: Add.
+
 	* boostrap.sh: Run check_xml.sh. Run find_tests.sh using sh (for
 	systems where scripts are not executables).
 
@@ -123,16 +128,16 @@
 	* include/vaucanson/xml/xml_converter.hh,
 	* include/vaucanson/xml/xerces_parser-hh.in,
 	* include/vaucanson/tools/xml_display.hh,
-	* include/vaucanson/tools/xml_load.hh,	
+	* include/vaucanson/tools/xml_load.hh,
 	* include/vaucanson/tools/xml_dump.hh: Complain early if
 	  VCSN_USE_XML is not set.
-	
+
 	* include/vaucanson/tools/usual_macros.hh: Do not set STR2XML if
 	  VCSN_USE_XML is not set.
 
 	As a proof of concept, make the "automaton library" available even
 	when XML support is disabled. Make utilities more generic.
-	
+
 	* include/vaucanson/tools/simple_dump.hh,
 	* include/vaucanson/tools/simple_dump.hxx: Add.
 	* include/Makefile.am: Update accordingly.
@@ -140,17 +145,17 @@
 	* src/demos/automaton_library/dumper.hcc: Add logic to output
 	  automata to different formats, ignoring XML if it is not available.
 	* src/demos/automaton_library/Makefile.am: Update accordingly.
-	
+
 	* src/demos/automaton_library/a1.cc,
 	* src/demos/automaton_library/b1.cc,
 	* src/demos/automaton_library/c1.cc,
 	* src/demos/automaton_library/divkbaseb.cc,
 	* src/demos/automaton_library/ladybird.cc,
 	* src/demos/automaton_library/double_ring.cc: Change to use dumper.hcc.
-	
+
 	* doc/README-IO.txt: Add.
 	* doc/Makefile.am: Update accordingly.
-	
+
 	* doc/README.txt: Mention README-IO. Mention FAQ.
 
 

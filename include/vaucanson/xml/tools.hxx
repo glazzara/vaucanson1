@@ -153,9 +153,11 @@ namespace vcsn
 	typedef typename A::const_iterator alphabet_iterator;
 	for_each_letter(l, alphabet)
 	  {
+	    std::ostringstream letter;
 	    xercesc::DOMElement* gen =
 	      doc->createElement(STR2XML("generator"));
-	    gen->setAttribute(STR2XML("value"), STR2XML(get_label(*l)));
+	    letter << *l;
+	    gen->setAttribute(STR2XML("value"), STR2XML(letter.str().c_str()));
 	    root->appendChild(gen);
 	  }
       }
