@@ -23,6 +23,7 @@ namespace vcsn
 {
     namespace xml
     {
+      inline
       unsigned
       BinCxxInputStream::readBytes (XMLByte *const toFill,
 				    const unsigned int maxToRead)
@@ -33,12 +34,14 @@ namespace vcsn
 	return s;
       }
 
+      inline
       unsigned int
       BinCxxInputStream::curPos() const
       {
 	return _pos;
       }
 
+      inline
       BinCxxInputStream*
       CxxInputSource::makeStream() const
       {

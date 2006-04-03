@@ -1,3 +1,8 @@
+2006-04-03  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/xml/ios.hxx,
+	* include/vaucanson/algorithms/isomorph.hxx: Add missing `inline'.
+
 2006-03-31  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx: Use a stringstream to fix a

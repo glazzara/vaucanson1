@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -53,12 +53,12 @@ namespace vcsn {
   };
 
   // Finds node associated to the insertion of a vector of integers
-  Trie* Trie::insert(std::vector<int>& S)
+  inline Trie* Trie::insert(std::vector<int>& S)
   {
     return insert_suffix(S, 0);
   }
 
-  Trie* Trie::insert_suffix(std::vector<int>& S, unsigned int p)
+  inline Trie* Trie::insert_suffix(std::vector<int>& S, unsigned int p)
   {
     if (p == S.capacity() - 1)
       return this;
