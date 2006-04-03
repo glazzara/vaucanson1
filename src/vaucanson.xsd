@@ -18,7 +18,7 @@ element.
 This type is scinded in two parts, since it's irrelevant to set
 edgeType for states or coordinates for transitions.
 -->
-<xs:complexType name="geometry_xy">
+<xs:complexType name="geometry_state">
   <xs:attribute name="x" type="xs:decimal"/>
   <xs:attribute name="y" type="xs:decimal"/>
 </xs:complexType>
@@ -34,16 +34,9 @@ edgeType for states or coordinates for transitions.
   <xs:attribute name="direction" type="xs:decimal"/>
 </xs:complexType>
 
-<xs:complexType name="geometry_full">
+<xs:complexType name="geometry_global">
   <xs:attribute name="x" type="xs:decimal"/>
   <xs:attribute name="y" type="xs:decimal"/>
-  <xs:attribute name="edgeStyle">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-	<xs:pattern value="line|arc|curve"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:attribute>
   <xs:attribute name="orientation" type="xs:decimal"/>
 </xs:complexType>
 
@@ -286,7 +279,7 @@ set using the <drawing> tag.
     <xs:sequence>
       <xs:element name="automaton" type="automaton" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="transducer" type="transducer" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="geometry" type="geometry_full" minOccurs="0"/>
+      <xs:element name="geometry" type="geometry_global" minOccurs="0"/>
       <xs:element name="drawing" type="drawing" minOccurs="0"/>
     </xs:sequence>
   <xs:attribute name="name" type="xs:string"/>
@@ -304,7 +297,7 @@ properties can be set with the <drawing> tag.
 -->
 <xs:complexType name="state">
   <xs:sequence>
-    <xs:element name="geometry" type="geometry_xy" minOccurs="0"/>
+    <xs:element name="geometry" type="geometry_state" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="name" type="xs:string" use="required"/>
@@ -369,7 +362,7 @@ Global geometry and drawing properties can be set for all states.
 <xs:complexType name="states">
   <xs:sequence>
     <xs:element name="state" type="state" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="geometry" type="geometry_xy" minOccurs="0"/>
+    <xs:element name="geometry" type="geometry_state" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
   </xs:sequence>
 </xs:complexType>
@@ -468,7 +461,7 @@ Two possible contents are available, one for automata and one for transducers.
 -->
 <xs:complexType name="content_automaton">
   <xs:sequence>
-    <xs:element name="geometry" type="geometry_full" minOccurs="0"/>
+    <xs:element name="geometry" type="geometry_global" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="states" type="states"/>
     <xs:element name="transitions" type="transitions"/>
@@ -477,7 +470,7 @@ Two possible contents are available, one for automata and one for transducers.
 
 <xs:complexType name="content_transducer">
   <xs:sequence>
-    <xs:element name="geometry" type="geometry_full" minOccurs="0"/>
+    <xs:element name="geometry" type="geometry_global" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="states" type="states"/>
     <xs:element name="transitions" type="transitions_transducer"/>
@@ -494,7 +487,7 @@ be set.
   <xs:sequence>
     <xs:element name="label_type" type="type_automaton" minOccurs="0"/>
     <xs:element name="content" type="content_automaton"/>
-    <xs:element name="geometry" type="geometry_full" minOccurs="0"/>
+    <xs:element name="geometry" type="geometry_global" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="name" type="xs:string"/>
@@ -509,7 +502,7 @@ be set.
   <xs:sequence>
     <xs:element name="label_type" type="type_transducer" minOccurs="0"/>
     <xs:element name="content" type="content_transducer"/>
-    <xs:element name="geometry" type="geometry_full" minOccurs="0"/>
+    <xs:element name="geometry" type="geometry_global" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="name" type="xs:string"/>

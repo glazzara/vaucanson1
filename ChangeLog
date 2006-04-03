@@ -1,3 +1,15 @@
+2006-04-03  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* include/vaucanson/xml/tools.hxx: Add 2006 Copyright.
+	* src/tests/xml/xml_geometry_tester.cc: New. Test for the geometry tag.
+	* src/tests/xml/tester.sh: Add Geometry test in the script.
+	* src/tests/xml/geometry_ref.xml,
+	* src/tests/xml/geometry_ref.dot: Add references for the geometry test.
+	* src/tests/xml/Makefile.am: Update accordingly.
+	* src/vaucanson.xsd: Change 'geometry_xy' to `geometry_state', and
+	`geometry_full' to `geometry_global'. Remove attribute edgeStyle from
+	the `geometry_global' complexType.
+
 2006-04-03  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/ios.hxx,

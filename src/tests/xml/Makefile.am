@@ -35,6 +35,8 @@ trans_tester_SOURCES = xml_trans_tester.cc
 
 session_tester_SOURCES = xml_session_tester.cc
 
+geometry_tester_SOURCES = xml_geometry_tester.cc
+
 if XML_CHECK
 check_SCRIPTS = 				\
 	tester.sh
@@ -49,7 +51,8 @@ check_PROGRAMS = 				\
 	z_min_plus_tester			\
 	fmp_tester				\
 	trans_tester				\
-	session_tester				
+	session_tester				\
+	geometry_tester
 
 CLEANFILES = 					\
 	b_result.tmp				\
@@ -67,7 +70,9 @@ CLEANFILES = 					\
 	session_result.dot.tmp			\
 	z_max_plus_result.dot.tmp		\
 	r_result.dot.tmp			\
-	z_min_plus_result.dot.tmp
+	z_min_plus_result.dot.tmp		\
+	geometry_result.tmp			\
+	geometry_result.dot.tmp
 
 endif
 
@@ -100,4 +105,6 @@ EXTRA_DIST =					\
         z_min_plus_ref.xml			\
         z_ref.xml				\
 	session_ref.xml				\
-	session_ref.dot
+	session_ref.dot				\
+	geometry_ref.xml			\
+	geometry_ref.dot
