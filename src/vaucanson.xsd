@@ -4,6 +4,9 @@ targetNamespace="http://vaucanson.lrde.epita.fr"
 xmlns="http://vaucanson.lrde.epita.fr"
 elementFormDefault="qualified">
 
+<!--
+vaucanson.xsd version 0.3.
+-->
 
 <!--
 <geometry> tag properties. Used to set the geometry properties of each
@@ -12,10 +15,10 @@ element.
 - Appened to <transition> node : edgeType set the type of the edge
 (line, arcL, arcR, curve).
 - Appended to <automaton> or <transducer> node : x, y set the global offset.
---> 
+-->
 
-<!-- 
-This type is scinded in two parts, since it's irrelevant to set
+<!--
+This type is divided in two parts, since it's irrelevant to set
 edgeType for states or coordinates for transitions.
 -->
 <xs:complexType name="geometry_state">
@@ -186,13 +189,13 @@ The default semiring is Boolean.
 <monoid> tag properties. Used to define all the monoid(s) properties
 of the automaton / transducer.
 A monoid expects <generator> tags to define its generators, when available.
-The <monoid> tag can be recursively constructed to build n-product of monoid. 
+The <monoid> tag can be recursively constructed to build n-product of monoid.
 
 For automata, default is free monoid, on the ASCII alphabet.
 For transducers, default is product of free monoid, both on the ASCII alphabet
 -->
 <!--
-The monoid type is broke in two parts, for automata and transducers.
+The monoid type is broken in two parts, for automata and transducers.
 -->
 <xs:complexType name="generator">
   <xs:attribute name="value" type="xs:string"/>
@@ -214,7 +217,7 @@ The monoid type is broke in two parts, for automata and transducers.
   <xs:attribute name="generators" default="letters">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="letters|integers|pair|weighted"/>
+	<xs:pattern value="letters|digits|pair|weighted"/>
       </xs:restriction>
       </xs:simpleType>
   </xs:attribute>
@@ -237,7 +240,7 @@ The monoid type is broke in two parts, for automata and transducers.
   <xs:attribute name="generators" default="letters">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="letters|integers|pair|weighted"/>
+	<xs:pattern value="letters|digits|pair|weighted"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
@@ -396,7 +399,7 @@ Global geometry and drawing properties can be set for all transitions.
 
 <!--
 <initial> tag properties. Used to set a state as initial state. This
-tag must be a child of <initials> tag.  
+tag must be a child of <initials> tag.
 Geometry can be defined (the orientation of the initial transition),
 and drawing properties.
 -->
@@ -423,7 +426,7 @@ and drawing properties.
 </xs:complexType>
 
 
-<!-- 
+<!--
 <final> tag properties. Same as below, on final states.
 -->
 <xs:complexType name="final">
@@ -450,7 +453,7 @@ and drawing properties.
 
 
 
-<!-- 
+<!--
 <content> tag properties. This tag is used to define the structure of
 the automaton. It's a combination of <states>, <transitions>,
 <initials> and <finals> tags. None of them are optional, and the order

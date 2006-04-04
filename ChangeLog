@@ -1,3 +1,10 @@
+2006-04-04  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* src/vaucanson.xsd: Several minor changes. Change `integers' to
+	`digits' in the `generators' attribute.
+	* doc/xml/xml_proposal.tex: Change version number. The version of the
+	new proposal and its xsd file is 0.3.
+
 2006-04-03  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx: Add 2006 Copyright.
