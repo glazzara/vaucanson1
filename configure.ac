@@ -110,7 +110,6 @@ AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 ##
 ## generate files.
 ##
-#AC_CONFIG_SUBDIRS([vauc])
 
 AC_CONFIG_FILES([
 	Makefile

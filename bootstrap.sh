@@ -16,7 +16,4 @@ sh ./check_xml.sh
 
 $AUTORECONF -v -f -i
 
-# disabled temporarily
-# cd vauc
-# ./bootstrap.sh
 echo "Reconfiguration done."

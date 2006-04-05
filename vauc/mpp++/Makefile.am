@@ -1,6 +1,0 @@
-# Makefile.am
-#
-#
-SUBDIRS = src
-
-EXTRA_DIST = ChangeLog

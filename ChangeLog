@@ -1,3 +1,11 @@
+2006-04-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Remove `vauc'.
+
+	* vauc/: Remove.
+	* configure.ac,
+	* bootstrap.sh: Update accordingly.
+
 2006-04-04  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* src/vaucanson.xsd: Several minor changes. Change `integers' to
