@@ -129,20 +129,10 @@ namespace vcsn
 				  vcsn::algebra::polynom<S, bool> >& l)
       {
 	std::ostringstream os;
-	typedef typename Element<Series,
-	  vcsn::algebra::polynom<S, bool> >::support_t::const_iterator iter;
-
-	iter i = l.supp().begin();
-	if (l.supp().size() > 0)
-	  {
-	    os << get_label(*(i++));
-	    for (; i != l.supp().end(); ++i)
-	      os << "+" << get_label(*i);
-	  }
-	else
-	  os << "0";
-
-	return os.str().c_str();
+	os << l;
+	if (os.str() == "1")
+	  return "";
+        return os.str().c_str();
       }
 
 

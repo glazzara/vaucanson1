@@ -1,3 +1,10 @@
+2006-04-06  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/xml/tools.hxx (get_label): Fix a previous patch
+	that used `0' as the null series. The specialisation for
+	`polynom<S, bool>' should be kept to avoid the writing of `label = 1'
+	in Boolean automata.
+
 2006-04-05  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Remove `vauc'.
