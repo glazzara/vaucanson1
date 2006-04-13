@@ -1,17 +1,17 @@
 // u1.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/fmp_transducer.hh>
@@ -36,10 +36,10 @@ int main()
   u1.set_final(s);
   u1.set_final(t);
 
-  u1.add_weighted_edge(s, t, true, make_couple(A, A, "a", "1").value());
-  u1.add_weighted_edge(t, s, true, make_couple(A, A, "1", "b").value());
-  u1.add_weighted_edge(t, u, true, make_couple(A, A, "b", "1").value());
-  u1.add_weighted_edge(u, t, true, make_couple(A, A, "1", "a").value());
+  u1.add_weighted_transition(s, t, true, make_couple(A, A, "a", "1").value());
+  u1.add_weighted_transition(t, s, true, make_couple(A, A, "1", "b").value());
+  u1.add_weighted_transition(t, u, true, make_couple(A, A, "b", "1").value());
+  u1.add_weighted_transition(u, t, true, make_couple(A, A, "1", "a").value());
 
   tools::xml_dump(std::cout, u1, "u1");
 }

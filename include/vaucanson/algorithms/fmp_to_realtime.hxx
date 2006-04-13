@@ -45,9 +45,9 @@ namespace vcsn
     // Output transducer type
     typedef vcsn::Element<SS, TT> Trans_t;
 
-      /*-------------------------.
-      | Creating the transducer. |
-      `-------------------------*/
+    /*-------------------------.
+    | Creating the transducer. |
+    `-------------------------*/
 
     // Adding states
     for (typename FMP_t::state_iterator St = fmp.states().begin();
@@ -56,137 +56,137 @@ namespace vcsn
       m[*St] = res.add_state();
 
 
-      /*-------------------------.
-      | Setting initial states.  |
-      `-------------------------*/
+    /*-------------------------.
+    | Setting initial states.  |
+    `-------------------------*/
 
     for (typename FMP_t::initial_iterator St = fmp.initial().begin();
 	 St != fmp.initial().end();
 	 ++St)
+    {
+      //Series to be created
+      typename Trans_t::series_set_elt_t s(res.structure().series());
+
+      typename FMP_t::series_set_elt_t s_elt = fmp.get_initial(*St);
+      for_each_const_(FMP_t::series_set_elt_t::support_t, i, s_elt.supp())
       {
-	//Series to be created
-	typename Trans_t::series_set_elt_t s(res.structure().series());
+	typename Trans_t::semiring_elt_value_t::monoid_elt_value_t
+	  output_monoid_value;
+	typename Trans_t::semiring_elt_t::semiring_elt_t weight;
 
-	typename FMP_t::series_set_elt_t s_elt = fmp.get_initial(*St);
-	for_each_const_(FMP_t::series_set_elt_t::support_t, i, s_elt.supp())
-	  {
-	    typename Trans_t::semiring_elt_value_t::monoid_elt_value_t
-	      output_monoid_value;
-	    typename Trans_t::semiring_elt_t::semiring_elt_t weight;
+	typename Trans_t::monoid_elt_value_t
+	  input_monoid_value = (*i).first;
+	typename Trans_t::monoid_elt_t
+	  input_monoid(res.structure().series().monoid(),
+		       input_monoid_value);
 
-	    typename Trans_t::monoid_elt_value_t
-	      input_monoid_value = (*i).first;
-	    typename Trans_t::monoid_elt_t
-	      input_monoid(res.structure().series().monoid(),
-			   input_monoid_value);
+	typename Trans_t::semiring_elt_t::monoid_elt_t
+	  output_monoid(res.structure().series().semiring().monoid(),
+			(*i).second);
+	weight = s_elt.get(*i);
 
-	    typename Trans_t::semiring_elt_t::monoid_elt_t
-	      output_monoid(res.structure().series().semiring().monoid(),
-			    (*i).second);
-	    weight = s_elt.get(*i);
+	//Creating the element multiplicity
+	typename Trans_t::semiring_elt_t
+	  out_mult(res.structure().series().semiring());
+	out_mult.assoc(output_monoid, weight);
 
-	    //Creating the element multiplicity
-	    typename Trans_t::semiring_elt_t
-	      out_mult(res.structure().series().semiring());
-	    out_mult.assoc(output_monoid, weight);
-
-	    //Associating it to the input monoid
-	    s.assoc(input_monoid, out_mult);
-	  }
-	res.set_initial(m[*St], s);
+	//Associating it to the input monoid
+	s.assoc(input_monoid, out_mult);
       }
+      res.set_initial(m[*St], s);
+    }
 
 
-      /*------------------------.
-      | Setting final states.   |
-      `------------------------*/
+    /*------------------------.
+    | Setting final states.   |
+    `------------------------*/
 
     for (typename FMP_t::final_iterator St = fmp.final().begin();
 	 St != fmp.final().end();
 	 ++St)
+    {
+      //Series to be created
+      typename Trans_t::series_set_elt_t s(res.structure().series());
+
+      typename FMP_t::series_set_elt_t s_elt = fmp.get_final(*St);
+      for_each_const_(FMP_t::series_set_elt_t::support_t, i, s_elt.supp())
       {
-	//Series to be created
-	typename Trans_t::series_set_elt_t s(res.structure().series());
-
-	typename FMP_t::series_set_elt_t s_elt = fmp.get_final(*St);
-	for_each_const_(FMP_t::series_set_elt_t::support_t, i, s_elt.supp())
-	  {
-	    typename Trans_t::semiring_elt_value_t::monoid_elt_value_t
-	      output_monoid_value;
-	    typename Trans_t::semiring_elt_t::semiring_elt_t weight;
-
-	    typename Trans_t::monoid_elt_value_t input_monoid_value =
-	      (*i).first;
-	    typename Trans_t::monoid_elt_t
-	      input_monoid(res.structure().series().monoid(),
-			   input_monoid_value);
-	    typename Trans_t::semiring_elt_t::monoid_elt_t
-	      output_monoid(res.structure().series().semiring().monoid(),
-			    (*i).second);
-	    weight = s_elt.get(*i);
-
-	    //Creating the element multiplicity
-	    typename Trans_t::semiring_elt_t
-	      out_mult(res.structure().series().semiring());
-	    out_mult.assoc(output_monoid, weight);
-
-	    //Associating it to the input monoid
-	    s.assoc(input_monoid, out_mult);
-	  }
-	res.set_final(m[*St], s);
-      }
-
-
-      /*-----------------.
-      | Creating edges.  |
-      `-----------------*/
-
-    for (typename FMP_t::edge_iterator Ed = fmp.edges().begin();
-	 Ed != fmp.edges().end();
-	 ++Ed)
-      {
-	// FIXME
-	// No Special Treatment is done for 0 weighted
-	typename Trans_t::series_set_elt_t
-	  edge_value(res.structure().series());
-
-	typename Trans_t::monoid_elt_value_t input_monoid_value;
 	typename Trans_t::semiring_elt_value_t::monoid_elt_value_t
 	  output_monoid_value;
+	typename Trans_t::semiring_elt_t::semiring_elt_t weight;
 
-	typename FMP_t::series_set_elt_t series_fmp(fmp.structure().series());
+	typename Trans_t::monoid_elt_value_t input_monoid_value =
+	  (*i).first;
+	typename Trans_t::monoid_elt_t
+	  input_monoid(res.structure().series().monoid(),
+		       input_monoid_value);
+	typename Trans_t::semiring_elt_t::monoid_elt_t
+	  output_monoid(res.structure().series().semiring().monoid(),
+			(*i).second);
+	weight = s_elt.get(*i);
+
+	//Creating the element multiplicity
 	typename Trans_t::semiring_elt_t
 	  out_mult(res.structure().series().semiring());
-	series_fmp = fmp.series_of(*Ed);
+	out_mult.assoc(output_monoid, weight);
 
-	for_each_const_(FMP_t::series_set_elt_t::support_t,
-			i,
-			series_fmp.supp())
-	  {
-	    input_monoid_value = (*i).first;
-	    output_monoid_value = (*i).second;
-
-	    //Creating the edge's semiring value
-	    typename Trans_t::semiring_elt_t::semiring_elt_t
-	      edge_weight(res.structure().series().semiring().semiring(),
-			  series_fmp.get(*i));
-	    typename Trans_t::semiring_elt_t
-	      out_mult(res.structure().series().semiring());
-	    out_mult.assoc(typename Trans_t::semiring_elt_t::monoid_elt_t
-			   (res.structure().series().semiring().monoid(),
-			    output_monoid_value),
-			   edge_weight);
-
-	    //Creating the edge's monoid value
-	    typename Trans_t::monoid_elt_t
-	      input(res.structure().series().monoid(),
-		    input_monoid_value);
-	    edge_value.assoc(input, out_mult);
-	    res.add_series_edge(m[fmp.origin_of(*Ed)],
-				m[fmp.aim_of(*Ed)],
-				edge_value);
-	  }
+	//Associating it to the input monoid
+	s.assoc(input_monoid, out_mult);
       }
+      res.set_final(m[*St], s);
+    }
+
+
+    /*-----------------------.
+    | Creating transitions.  |
+    `-----------------------*/
+
+    for (typename FMP_t::transition_iterator Ed = fmp.transitions().begin();
+	 Ed != fmp.transitions().end();
+	 ++Ed)
+    {
+      // FIXME
+      // No Special Treatment is done for 0 weighted
+      typename Trans_t::series_set_elt_t
+	transition_value(res.structure().series());
+
+      typename Trans_t::monoid_elt_value_t input_monoid_value;
+      typename Trans_t::semiring_elt_value_t::monoid_elt_value_t
+	output_monoid_value;
+
+      typename FMP_t::series_set_elt_t series_fmp(fmp.structure().series());
+      typename Trans_t::semiring_elt_t
+	out_mult(res.structure().series().semiring());
+      series_fmp = fmp.series_of(*Ed);
+
+      for_each_const_(FMP_t::series_set_elt_t::support_t,
+		      i,
+		      series_fmp.supp())
+      {
+	input_monoid_value = (*i).first;
+	output_monoid_value = (*i).second;
+
+	//Creating the transition's semiring value
+	typename Trans_t::semiring_elt_t::semiring_elt_t
+	  transition_weight(res.structure().series().semiring().semiring(),
+			    series_fmp.get(*i));
+	typename Trans_t::semiring_elt_t
+	  out_mult(res.structure().series().semiring());
+	out_mult.assoc(typename Trans_t::semiring_elt_t::monoid_elt_t
+		       (res.structure().series().semiring().monoid(),
+			output_monoid_value),
+		       transition_weight);
+
+	//Creating the transition's monoid value
+	typename Trans_t::monoid_elt_t
+	  input(res.structure().series().monoid(),
+		input_monoid_value);
+	transition_value.assoc(input, out_mult);
+	res.add_series_transition(m[fmp.origin_of(*Ed)],
+				  m[fmp.aim_of(*Ed)],
+				  transition_value);
+      }
+    }
   }
 
   template<typename S, typename T,

@@ -1,17 +1,17 @@
 // global_consistency_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_GLOBAL_CONSISTENCY_TEST_HH
@@ -56,29 +56,29 @@ unsigned global_consistency_test(tests::Tester& tg)
   // call our function to check consistency of the automaton.
 
   bool final = true;
-  for (typename automaton_t::edge_iterator i = automaton.edges().begin();
-       i != automaton.edges().end();
+  for (typename automaton_t::transition_iterator i = automaton.transitions().begin();
+       i != automaton.transitions().end();
        i++)
+  {
+    hstate_t aim  = automaton.aim_of(*i);
+    hstate_t from = automaton.origin_of(*i);
+    bool res  = false;
+    bool res2 = false;
+
+    for (typename automaton_t::state_iterator j =
+	   automaton.states().begin();
+	 j != automaton.states().end();
+	 j++)
     {
-      hstate_t aim  = automaton.aim_of(*i);
-      hstate_t from = automaton.origin_of(*i);
-      bool res  = false;
-      bool res2 = false;
-
-      for (typename automaton_t::state_iterator j =
-	     automaton.states().begin();
-	   j != automaton.states().end();
-	   j++)
-	{
-	  if (*j == aim)
-	    res = true;
-	  if (*j == from)
-	    res2 = true;
-	}
-      final = final && res && res2;
+      if (*j == aim)
+	res = true;
+      if (*j == from)
+	res2 = true;
     }
+    final = final && res && res2;
+  }
 
-  TEST(t, "All edges are well defined.", final);
+  TEST(t, "All transitions are well defined.", final);
 
   return t.all_passed();
 }

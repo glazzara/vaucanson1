@@ -364,9 +364,9 @@ taken into consideration:
         The automaton types for the category.
 
      ``HList``:
-        A  list of  state or  edge handlers  (integers). This  type is
-        ``std::list<int>`` in  C++ and a standard  sequence of numbers
-        in the target language.
+        A list of state or transition handlers (integers). This type
+        is ``std::list<int>`` in C++ and a standard sequence of
+        numbers in the target language.
 
 - When accessing automata, a special behavior stands. Instead of 
   writing::

@@ -24,19 +24,19 @@ namespace vcsn
 {
 
   template <typename lhs_t, typename rhs_t, typename F>
-  void auto_translate_edges(lhs_t&          dst,
-			    const rhs_t&    from,
-			    const F&        translate_fun);
+  void auto_translate_transitions(lhs_t&	  dst,
+				  const rhs_t&	  from,
+				  const F&	  translate_fun);
 
   template <typename auto_t, typename F>
-  auto_t auto_translate_edges(const auto_t& from,
-			      const F&      translate_fun);
+  auto_t auto_translate_transitions(const auto_t& from,
+				    const F&	  translate_fun);
 
 }
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concept/translate.hxx>
+# include <vaucanson/automata/concept/translate.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

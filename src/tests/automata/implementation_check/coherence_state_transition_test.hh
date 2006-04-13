@@ -1,21 +1,21 @@
-// coherence_state_edge_test.hh: this file is part of the Vaucanson project.
-// 
+// coherence_state_transition_test.hh: this file is part of the Vaucanson project.
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_COHERENCE_STATE_EDGE_TEST_HH
-# define VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_COHERENCE_STATE_EDGE_TEST_HH
+#ifndef VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_COHERENCE_STATE_TRANSITION_TEST_HH
+# define VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_COHERENCE_STATE_TRANSITION_TEST_HH
 
 # include <map>
 # include <vaucanson/design_pattern/design_pattern.hh>
@@ -25,7 +25,7 @@
 # include <check/tester.hh>
 
 template <class Auto>
-unsigned coherence_state_edge_test(tests::Tester& tg)
+unsigned coherence_state_transition_test(tests::Tester& tg)
 {
   tests::Tester t(tg.verbose());
 
@@ -43,19 +43,19 @@ unsigned coherence_state_edge_test(tests::Tester& tg)
   hstate_t s1 = automaton.add_state();
   hstate_t s2 = automaton.add_state();
 
-  hedge_t h1 = automaton.add_letter_edge(s1, s2,
-					 automaton.structure().series().
-					 monoid().alphabet().choose());
+  htransition_t h1 = automaton.add_letter_transition(s1, s2,
+						     automaton.structure().series().
+						     monoid().alphabet().choose());
 
   EQTEST(t, "Check number of state.", automaton.states().size(), 2);
-  EQTEST(t, "Check number of edge.", automaton.edges().size(), 1);
+  EQTEST(t, "Check number of transition.", automaton.transitions().size(), 1);
 
   automaton.del_state(s1);
   automaton.del_state(s2);
 
-  TEST(t, "Check for zombies edge.", automaton.edges().size() == 0);
+  TEST(t, "Check for zombies transition.", automaton.transitions().size() == 0);
 
   return t.all_passed();
 }
 
-#endif // ! VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_COHERENCE_STATE_EDGE_TEST_HH
+#endif // ! VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_COHERENCE_STATE_TRANSITION_TEST_HH

@@ -1,17 +1,17 @@
 // cut_up_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_CUT_UP_TEST_HH
@@ -86,23 +86,23 @@ bool cut_up_test(tests::Tester& tg)
   // Series ss3 has 1 elements.
   ss3.assoc(m0, w);
 
-  // Create edges.
-  a.add_series_edge(s0, s1, ss0);
-  a.add_series_edge(s1, s2, ss1);
+  // Create transitions.
+  a.add_series_transition(s0, s1, ss0);
+  a.add_series_transition(s1, s2, ss1);
   a1 = cut_up(a);
 
-  a.add_series_edge(s1, s2, ss2);
+  a.add_series_transition(s1, s2, ss2);
   a2 = cut_up(a);
 
-  a.add_series_edge(s0, s1, ss3);
+  a.add_series_transition(s0, s1, ss3);
   a3 = cut_up(a);
 
   TEST(t, "Cut-up (Polynomial series labeled graph) (1/3)",
-       is_cut_up(a1) && a1.states().size() == 3 && a1.edges().size() == 4);
+       is_cut_up(a1) && a1.states().size() == 3 && a1.transitions().size() == 4);
   TEST(t, "Cut-up (Polynomial series labeled graph) (2/3)",
-       is_cut_up(a2) && a2.states().size() == 3 && a2.edges().size() == 7);
+       is_cut_up(a2) && a2.states().size() == 3 && a2.transitions().size() == 7);
   TEST(t, "Cut-up (Polynomial series labeled graph) (3/3)",
-       is_cut_up(a3) && a3.states().size() == 3 && a3.edges().size() == 8);
+       is_cut_up(a3) && a3.states().size() == 3 && a3.transitions().size() == 8);
 
   typedef typename vcsn::generalized_traits<automaton_t>::automaton_t
     gen_automaton_t;
@@ -114,15 +114,15 @@ bool cut_up_test(tests::Tester& tg)
   vcsn::hstate_t gs1 = gena.add_state();
   vcsn::hstate_t gs2 = gena.add_state();
 
-  gena.add_series_edge(gs0, gs1, ss1);
-  gena.add_series_edge(gs0, gs1, ss2);
-  gena.add_series_edge(gs1, gs2, ss3);
+  gena.add_series_transition(gs0, gs1, ss1);
+  gena.add_series_transition(gs0, gs1, ss2);
+  gena.add_series_transition(gs1, gs2, ss3);
 
   gena1 = cut_up(gena);
 
   TEST(t, "Cut-up (Rational series labeled graph)   (1/1)",
        is_cut_up(gena1) && gena1.states().size() == 10
-       && gena1.edges().size() == 13);
+       && gena1.transitions().size() == 13);
 
   return t.all_passed();
 }

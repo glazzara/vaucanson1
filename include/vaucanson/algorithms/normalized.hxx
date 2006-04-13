@@ -40,7 +40,7 @@ namespace vcsn {
     hstate_t h = a.add_state();
 
     for_each_initial_state(i, a)
-      a.add_series_edge(h, *i, a.get_initial(*i));
+      a.add_series_transition(h, *i, a.get_initial(*i));
 
     a.clear_initial();
     a.set_initial(h);
@@ -48,7 +48,7 @@ namespace vcsn {
     h = a.add_state();
 
     for_each_final_state(i, a)
-      a.add_series_edge(*i, h, a.get_final(*i));
+      a.add_series_transition(*i, h, a.get_final(*i));
 
     a.clear_final();
     a.set_final(h);
@@ -88,25 +88,25 @@ namespace vcsn {
     monoid_elt_t ident =
       lhs.series().monoid().identity(SELECT(monoid_elt_value_t));
     for_each_initial_state(i, lhs)
-      {
- 	lhs.add_spontaneous(new_i, *i, lhs.get_initial(*i).get(ident));
-	init.push(*i);
-      }
+    {
+      lhs.add_spontaneous(new_i, *i, lhs.get_initial(*i).get(ident));
+      init.push(*i);
+    }
     while (!init.empty())
-      {
-	lhs.unset_initial(init.top());
-	init.pop();
-      }
+    {
+      lhs.unset_initial(init.top());
+      init.pop();
+    }
     for_each_final_state(f, lhs)
-      {
- 	lhs.add_spontaneous(*f, new_f, lhs.get_final(*f).get(ident));
-	init.push(*f);
-      }
+    {
+      lhs.add_spontaneous(*f, new_f, lhs.get_final(*f).get(ident));
+      init.push(*f);
+    }
     while (!init.empty())
-      {
-	lhs.unset_final(init.top());
-	init.pop();
-      }
+    {
+      lhs.unset_final(init.top());
+      init.pop();
+    }
     lhs.set_final(new_f);
     lhs.set_initial(new_i);
   }
@@ -167,7 +167,7 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(rhs_t);
     typedef std::map<hstate_t, hstate_t>	       map_lhs_rhs_t;
-    typedef std::set<hedge_t>			       delta_ret_t;
+    typedef std::set<htransition_t>			       delta_ret_t;
 
     hstate_t	glue_state = *lhs.final().begin();
 
@@ -185,51 +185,51 @@ namespace vcsn {
        rhs.series().identity(SELECT(series_set_elt_value_t)));
 
     for_each_state(s, rhs)
-      {
-	hstate_t new_state;
+    {
+      hstate_t new_state;
 
-	if (merge_lhs_final_and_rhs_initial)
-	  {
-	    if (rhs.is_initial(*s))
-	      new_state = glue_state;
-	    else
-	      new_state = lhs.add_state();
-	  }
+      if (merge_lhs_final_and_rhs_initial)
+      {
+	if (rhs.is_initial(*s))
+	  new_state = glue_state;
 	else
 	  new_state = lhs.add_state();
-	map_h[*s] = new_state;
-	lhs.set_final(new_state, rhs.get_final(*s));
       }
+      else
+	new_state = lhs.add_state();
+      map_h[*s] = new_state;
+      lhs.set_final(new_state, rhs.get_final(*s));
+    }
 
-    /*----------------.
-    | Concat of edges |
-    `----------------*/
+    /*----------------------.
+    | Concat of transitions |
+    `----------------------*/
     delta_ret_t	aim;
     for_each_state(i, rhs)
-      {
-	aim.clear();
-	rhs.deltac(aim, *i, delta_kind::edges());
-	for (typename delta_ret_t::const_iterator d = aim.begin();
-	     d != aim.end();
-	     ++d)
-	  lhs.add_edge(map_h[rhs.origin_of(*d)],
-		       map_h[rhs.aim_of(*d)],
-		       rhs.label_of(*d));
-      }
+    {
+      aim.clear();
+      rhs.deltac(aim, *i, delta_kind::transitions());
+      for (typename delta_ret_t::const_iterator d = aim.begin();
+	   d != aim.end();
+	   ++d)
+	lhs.add_transition(map_h[rhs.origin_of(*d)],
+			   map_h[rhs.aim_of(*d)],
+			   rhs.label_of(*d));
+    }
     // If initial multiplicity of rhs isn't 1, add a spontaneous transition
     // between lhs final state and rhs initial state, with lhs final
     // multiplicity * rhs initial multiplicity.
     if (!merge_lhs_final_and_rhs_initial)
-      {
-	monoid_elt_t ident =
-	  rhs.series().monoid().identity(SELECT(monoid_elt_value_t));
-	lhs.add_spontaneous(*lhs.final().begin(),
-			    map_h[*rhs.initial().begin()],
-			    lhs.get_final(*lhs.final().begin()).get(ident) *
-			   rhs.get_initial(*rhs.initial().begin()).get(ident));
-	lhs.unset_final(*lhs.final().begin());
-	lhs.unset_initial(map_h[*rhs.initial().begin()]);
-      }
+    {
+      monoid_elt_t ident =
+	rhs.series().monoid().identity(SELECT(monoid_elt_value_t));
+      lhs.add_spontaneous(*lhs.final().begin(),
+			  map_h[*rhs.initial().begin()],
+			  lhs.get_final(*lhs.final().begin()).get(ident) *
+			  rhs.get_initial(*rhs.initial().begin()).get(ident));
+      lhs.unset_final(*lhs.final().begin());
+      lhs.unset_initial(map_h[*rhs.initial().begin()]);
+    }
   }
 
   template<typename A, typename T, typename U>

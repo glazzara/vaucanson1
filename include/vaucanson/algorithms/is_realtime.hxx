@@ -30,11 +30,11 @@ namespace vcsn {
 		 const A& trans)
   {
     AUTOMATON_TYPES(A);
-    for_each_edge(e, trans)
-      {
-        if (!is_letter_support(trans.series_of(*e)))
-	  return false;
-      }
+    for_each_transition(e, trans)
+    {
+      if (!is_letter_support(trans.series_of(*e)))
+	return false;
+    }
     return true;
   }
 

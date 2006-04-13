@@ -21,14 +21,14 @@
 
 namespace vcsn {
 
-#define AutoType(Type) \
+#define AutoType(Type)				\
   typename Element<S, T>::Type
 
   template <class S, class T>
   typename Element<S, T>::input_monoid_elt_t
   op_input_of(const TransducerBase<S>& s,
 	      const T& v,
-	      hedge_t e)
+	      htransition_t e)
   {
     return op_word_of(s, v, e);
   }
@@ -37,7 +37,7 @@ namespace vcsn {
   typename Element<S, T>::output_series_set_elt_t
   op_output_of(const TransducerBase<S>& s,
 	       const T& v,
-	       hedge_t e)
+	       htransition_t e)
   {
     AutoType(series_set_elt_t) is = op_series_of(s, v, e);
     precondition(is.supp().size() == 1);
@@ -46,14 +46,14 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  hedge_t
-  op_add_io_edge(const TransducerBase<S>& s,
-		 T& v,
-		 hstate_t from,
-		 hstate_t to,
-		 AutoType(input_letter_t) i,
-		 AutoType(output_letter_t) o,
-		 AutoType(output_semiring_elt_t) w)
+  htransition_t
+  op_add_io_transition(const TransducerBase<S>& s,
+		       T& v,
+		       hstate_t from,
+		       hstate_t to,
+		       AutoType(input_letter_t) i,
+		       AutoType(output_letter_t) o,
+		       AutoType(output_semiring_elt_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);
@@ -61,37 +61,37 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
-    std::cout << "add io edge :" << o << " "
+    std::cout << "add io transition :" << o << " "
 	      << output_w << " " << w << " "
 	      << os << std::endl;
-   return op_add_series_edge(s, v, from, to, is);
+    return op_add_series_transition(s, v, from, to, is);
   }
 
   template <class S, class T>
-  hedge_t
-  op_add_io_edge(const TransducerBase<S>& s,
-		 T& v,
-		 hstate_t from,
-		 hstate_t to,
-		 AutoType(input_monoid_elt_t) input_w,
-		 AutoType(output_monoid_elt_t) output_w,
-		 AutoType(output_semiring_elt_t) w)
+  htransition_t
+  op_add_io_transition(const TransducerBase<S>& s,
+		       T& v,
+		       hstate_t from,
+		       hstate_t to,
+		       AutoType(input_monoid_elt_t) input_w,
+		       AutoType(output_monoid_elt_t) output_w,
+		       AutoType(output_semiring_elt_t) w)
   {
     AutoType(output_series_set_elt_t) os(s.series().semiring());
     os.assoc(output_w, w);
     AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
-    return op_add_series_edge(s, v, from, to, is);
+    return op_add_series_transition(s, v, from, to, is);
   }
 
   template <class S, class T>
-  hedge_t
-  op_add_i_edge(const TransducerBase<S>& s,
-		 T& v,
-		 hstate_t from,
-		 hstate_t to,
-		 AutoType(input_letter_t) i,
-		 AutoType(output_semiring_elt_t) w)
+  htransition_t
+  op_add_i_transition(const TransducerBase<S>& s,
+		      T& v,
+		      hstate_t from,
+		      hstate_t to,
+		      AutoType(input_letter_t) i,
+		      AutoType(output_semiring_elt_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid(), i);
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid());
@@ -99,17 +99,17 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
-    return op_add_series_edge(s, v, from, to, is);
+    return op_add_series_transition(s, v, from, to, is);
   }
 
   template <class S, class T>
-  hedge_t
-  op_add_o_edge(const TransducerBase<S>& s,
-		 T& v,
-		 hstate_t from,
-		 hstate_t to,
-		 AutoType(input_letter_t) o,
-		 AutoType(output_semiring_elt_t) w)
+  htransition_t
+  op_add_o_transition(const TransducerBase<S>& s,
+		      T& v,
+		      hstate_t from,
+		      hstate_t to,
+		      AutoType(input_letter_t) o,
+		      AutoType(output_semiring_elt_t) w)
   {
     AutoType(input_monoid_elt_t) input_w(s.series().monoid());
     AutoType(output_monoid_elt_t) output_w(s.series().semiring().monoid(), o);
@@ -117,13 +117,13 @@ namespace vcsn {
     os.assoc(output_w, w);
     AutoType(series_set_elt_t) is(s.series());
     is.assoc(input_w, os);
-    return op_add_series_edge(s, v, from, to, is);
+    return op_add_series_transition(s, v, from, to, is);
   }
 
   template <class S, class T>
   AutoType(series_set_elt_t)
-    make_series(const TransducerBase<S>& s,
-		AutoType(output_monoid_elt_value_t) o)
+  make_series(const TransducerBase<S>& s,
+	      AutoType(output_monoid_elt_value_t) o)
   {
     AutoType(input_monoid_elt_t) empty =
       algebra::identity_as<AutoType(input_monoid_elt_value_t)>::

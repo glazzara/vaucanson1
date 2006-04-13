@@ -24,117 +24,117 @@ namespace vcsn {
   /// we define a series of macros to make the data structure for
   /// automaton simpler.
 
-#define ADAPT_ADD_LETTER_EDGE_TO_SERIES_LABEL(T...)			      \
-  hedge_t								      \
-  op_add_letter_edge(const AutomataBase<S>& s,				      \
-		     T& v,						      \
-		     hstate_t from,					      \
-		     hstate_t to,					      \
-		     const typename Element<S, T >::letter_t & l)	      \
-  {									      \
-    typedef typename S::series_set_t		series_set_t;		      \
-    typedef typename series_set_t::monoid_t	monoid_t;		      \
-    typedef typename series_set_t::semiring_t	semiring_t;		      \
-    typedef typename Element<S, T >::monoid_elt_value_t			      \
-						monoid_elt_value_t;	      \
-    typedef typename Element<S, T >::semiring_elt_value_t		      \
-						semiring_elt_value_t;	      \
-    typedef typename Element<S, T >::series_set_elt_value_t		      \
-						series_set_elt_value_t;       \
-									      \
-    Element<series_set_t, series_set_elt_value_t> label (s.series());	      \
-									      \
-    Element<monoid_t, monoid_elt_value_t> word (s.series().monoid(), l);      \
-    label.assoc(word,							      \
-		s.series().semiring().identity(SELECT(semiring_elt_value_t)));\
-									      \
-    return op_add_edge(s, v, from, to, label.value());			      \
+#define ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(T...)		\
+  htransition_t								\
+  op_add_letter_transition(const AutomataBase<S>& s,			\
+			   T& v,					\
+			   hstate_t from,				\
+			   hstate_t to,					\
+			   const typename Element<S, T >::letter_t & l)	\
+  {									\
+    typedef typename S::series_set_t		series_set_t;		\
+    typedef typename series_set_t::monoid_t	monoid_t;		\
+    typedef typename series_set_t::semiring_t	semiring_t;		\
+    typedef typename Element<S, T >::monoid_elt_value_t			\
+      monoid_elt_value_t;						\
+    typedef typename Element<S, T >::semiring_elt_value_t		\
+      semiring_elt_value_t;						\
+    typedef typename Element<S, T >::series_set_elt_value_t		\
+      series_set_elt_value_t;						\
+									\
+    Element<series_set_t, series_set_elt_value_t> label (s.series());	\
+									\
+    Element<monoid_t, monoid_elt_value_t> word (s.series().monoid(), l); \
+    label.assoc(word,							\
+		s.series().semiring().identity(SELECT(semiring_elt_value_t))); \
+									\
+    return op_add_transition(s, v, from, to, label.value());		\
   }
 
-#define ADAPT_LETTER_OF_TO_SERIES_LABEL(T...)				      \
-  typename Element<AutomataBase<S>, T >::letter_t			      \
-  op_letter_of(const AutomataBase<S>& s,				      \
-	       const T& v,						      \
-               hedge_t e)						      \
-  {									      \
-    typedef typename S::series_set_t series_set_t;			      \
-    typedef typename series_set_t::monoid_t monoid_t;			      \
-    typedef typename Element<S, T >::monoid_elt_value_t			      \
-    word_value_t;							      \
-    typedef typename Element<S, T >::series_set_elt_value_t		      \
-    series_set_elt_value_t;						      \
-									      \
+#define ADAPT_LETTER_OF_TO_SERIES_LABEL(T...)				\
+  typename Element<AutomataBase<S>, T >::letter_t			\
+  op_letter_of(const AutomataBase<S>& s,				\
+	       const T& v,						\
+	       htransition_t e)						\
+  {									\
+    typedef typename S::series_set_t series_set_t;			\
+    typedef typename series_set_t::monoid_t monoid_t;			\
+    typedef typename Element<S, T >::monoid_elt_value_t			\
+      word_value_t;							\
+    typedef typename Element<S, T >::series_set_elt_value_t		\
+      series_set_elt_value_t;						\
+									\
     Element<series_set_t, series_set_elt_value_t> sl = op_series_of(s, v, e); \
-    precondition(sl.supp().size() == 1);				      \
-    Element<monoid_t, word_value_t> w = sl.choose_from_supp();		      \
-    precondition(w.length() == 1);					      \
-    return *w.begin();							      \
+    precondition(sl.supp().size() == 1);				\
+    Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
+    precondition(w.length() == 1);					\
+    return *w.begin();							\
   }
 
-#define ADAPT_WORD_OF_TO_SERIES_LABEL(T...)				      \
-  typename Element<AutomataBase<S>, T >::monoid_elt_t			      \
-  op_word_of(const AutomataBase<S>& s,					      \
-	     const T& v,						      \
-             hedge_t e)							      \
-  {									      \
-    typedef typename S::series_set_t series_set_t;			      \
-    typedef typename series_set_t::monoid_t monoid_t;			      \
-    typedef typename Element<S, T >::monoid_elt_value_t			      \
-    word_value_t;							      \
-    typedef typename Element<S, T >::series_set_elt_value_t		      \
-    series_set_elt_value_t;						      \
-									      \
+#define ADAPT_WORD_OF_TO_SERIES_LABEL(T...)				\
+  typename Element<AutomataBase<S>, T >::monoid_elt_t			\
+  op_word_of(const AutomataBase<S>& s,					\
+	     const T& v,						\
+	     htransition_t e)						\
+  {									\
+    typedef typename S::series_set_t series_set_t;			\
+    typedef typename series_set_t::monoid_t monoid_t;			\
+    typedef typename Element<S, T >::monoid_elt_value_t			\
+      word_value_t;							\
+    typedef typename Element<S, T >::series_set_elt_value_t		\
+      series_set_elt_value_t;						\
+									\
     Element<series_set_t, series_set_elt_value_t> sl = op_series_of(s, v, e); \
-    precondition(sl.supp().size() == 1);				      \
-    Element<monoid_t, word_value_t> w = sl.choose_from_supp();		      \
-    return w;								      \
+    precondition(sl.supp().size() == 1);				\
+    Element<monoid_t, word_value_t> w = sl.choose_from_supp();		\
+    return w;								\
   }
 
-#define ADAPT_ADD_SERIE_EDGE_TO_LETTERS_LABEL(T...)			\
-  hedge_t								\
-  op_add_series_edge(const AutomataBase<S>& a_set,			\
-		    T& v,						\
-		    hstate_t from,					\
-		    hstate_t to,					\
-		    const typename Element<S,T >::series_set_elt_t& s)	\
+#define ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(T...)		\
+  htransition_t								\
+  op_add_series_transition(const AutomataBase<S>& a_set,		\
+			   T& v,					\
+			   hstate_t from,				\
+			   hstate_t to,					\
+			   const typename Element<S,T >::series_set_elt_t& s) \
   {									\
     assertion(s.supp().size() == 1);					\
-    return op_add_letter_edge(a_set, v, from, to, *s.supp().begin());	\
+    return op_add_letter_transition(a_set, v, from, to, *s.supp().begin()); \
   }
 
 #define ADAPT_WORD_OF_TO_LETTERS_LABEL(T...)			\
   typename Element<AutomataBase<S>, T >::monoid_elt_t		\
   op_word_of(const AutomataBase<S>& a_set,			\
 	     const T& v,					\
-             hedge_t e)						\
+	     htransition_t e)					\
   {								\
     typedef T value_t;						\
     typedef typename S::series_set_t series_set_t;		\
     typedef typename series_set_t::monoid_t monoid_t;		\
     typedef typename Element<S, value_t>::monoid_elt_value_t	\
-    word_value_t;						\
+      word_value_t;						\
     Element<monoid_t, word_value_t>				\
-         w(a_set.series().monoid());				\
+      w(a_set.series().monoid());				\
     w += op_letter_of(a_set, v, e);				\
     return w;							\
   }
 
 #define ADAPT_SERIE_OF_TO_LETTERS_LABEL(T...)				\
-  typename Element<AutomataBase<S>, T >::series_set_elt_t			\
+  typename Element<AutomataBase<S>, T >::series_set_elt_t		\
   op_series_of(const AutomataBase<S>& a_set,				\
-	      const T& v,						\
-	      hedge_t e)						\
+	       const T& v,						\
+	       htransition_t e)						\
   {									\
     typedef T value_t;							\
 									\
     typedef typename S::series_set_t series_set_t;			\
     typedef typename series_set_t::monoid_t monoid_t;			\
     typedef typename Element<S, value_t>::monoid_elt_value_t		\
-    word_value_t;							\
+      word_value_t;							\
     typedef typename Element<S, value_t>::semiring_elt_value_t		\
-        semiring_elt_value_t;						\
+      semiring_elt_value_t;						\
     typedef typename Element<S, value_t>::series_set_elt_value_t	\
-    series_set_elt_value_t;						\
+      series_set_elt_value_t;						\
     Element<monoid_t, word_value_t> w(a_set.series().monoid());		\
     w = op_letter_of(a_set, v, e);					\
     Element<series_set_t, series_set_elt_value_t> s(a_set.series());	\

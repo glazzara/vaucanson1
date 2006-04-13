@@ -1,17 +1,17 @@
 // product_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_PRODUCT_TEST_HH
@@ -56,52 +56,52 @@ unsigned product_test(tests::Tester& tg)
   unsigned success_product = 0;
 
   for (unsigned cpt = 0; cpt < nb_test_product; ++cpt)
+  {
+    automaton_t auto_lhs = gen.generate(3, 6, 1, 2, 2);
+    automaton_t auto_rhs = gen.generate(auto_lhs.structure(),
+					3, 6, 1, 2);
+    automaton_t p = product(auto_lhs, auto_rhs);
+    generalized_t g_p = generalized(p);
+    g_series_set_elt_t exp_p(g_p.structure().series());
+    exp_p = aut_to_exp(g_p);
+
+    if (p.final().size() == 0)
     {
-      automaton_t auto_lhs = gen.generate(3, 6, 1, 2, 2);
-      automaton_t auto_rhs = gen.generate(auto_lhs.structure(),
-					  3, 6, 1, 2);
-      automaton_t p = product(auto_lhs, auto_rhs);
-      generalized_t g_p = generalized(p);
-      g_series_set_elt_t exp_p(g_p.structure().series());
-      exp_p = aut_to_exp(g_p);
-
-      if (p.final().size() == 0)
-	{
-	  // Intersection is empty. Redo the test.
-	  ++nb_test_product;
-	  continue;
-	}
-      monoid_elt_t word_prod = exp_p.choose_from_supp();
-      bool	   b_eval_lhs;
-      bool	   b_eval_rhs;
-
-      eval(auto_lhs, word_prod, b_eval_lhs);
-      eval(auto_rhs, word_prod, b_eval_rhs);
-      if ((not b_eval_lhs) or (not b_eval_rhs))
-	{
-	  // Print the failing expressions.
-	  generalized_t g_auto_lhs = generalized(auto_lhs);
-	  generalized_t g_auto_rhs = generalized(auto_rhs);
-	  g_series_set_elt_t exp_lhs(g_auto_lhs.structure().series());
-	  g_series_set_elt_t exp_rhs(g_auto_rhs.structure().series());
-	  exp_lhs = aut_to_exp(g_auto_lhs);
-	  exp_rhs = aut_to_exp(g_auto_rhs);
-	  TEST_MSG("Automata saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("/tmp", "rhs", auto_rhs, cpt);
-	  SAVE_AUTOMATON_DOT("/tmp", "lhs", auto_lhs, cpt);
-	  SAVE_AUTOMATON_DOT("/tmp", "prod", p, cpt);
-	  TEST_FAIL_SAVE("product",
-			 cpt,
-			 "product of automata corresponding"
-			 << " to following expressions failed."
-			 << std::endl
-			 << exp_lhs << " and " << exp_rhs
-			 << std::endl);
-	}
-      else
-	++success_product;
-      ++nb_test_product_done;
+      // Intersection is empty. Redo the test.
+      ++nb_test_product;
+      continue;
     }
+    monoid_elt_t word_prod = exp_p.choose_from_supp();
+    bool	   b_eval_lhs;
+    bool	   b_eval_rhs;
+
+    eval(auto_lhs, word_prod, b_eval_lhs);
+    eval(auto_rhs, word_prod, b_eval_rhs);
+    if ((not b_eval_lhs) or (not b_eval_rhs))
+    {
+      // Print the failing expressions.
+      generalized_t g_auto_lhs = generalized(auto_lhs);
+      generalized_t g_auto_rhs = generalized(auto_rhs);
+      g_series_set_elt_t exp_lhs(g_auto_lhs.structure().series());
+      g_series_set_elt_t exp_rhs(g_auto_rhs.structure().series());
+      exp_lhs = aut_to_exp(g_auto_lhs);
+      exp_rhs = aut_to_exp(g_auto_rhs);
+      TEST_MSG("Automata saved in /tmp.");
+      SAVE_AUTOMATON_DOT("/tmp", "rhs", auto_rhs, cpt);
+      SAVE_AUTOMATON_DOT("/tmp", "lhs", auto_lhs, cpt);
+      SAVE_AUTOMATON_DOT("/tmp", "prod", p, cpt);
+      TEST_FAIL_SAVE("product",
+		     cpt,
+		     "product of automata corresponding"
+		     << " to following expressions failed."
+		     << std::endl
+		     << exp_lhs << " and " << exp_rhs
+		     << std::endl);
+    }
+    else
+      ++success_product;
+    ++nb_test_product_done;
+  }
 
   std::string rate_product;
   SUCCESS_RATE(rate_product, success_product, nb_test_product_done);
@@ -112,24 +112,24 @@ unsigned product_test(tests::Tester& tg)
   // Battery 2.
   const unsigned nb_test    = 30;
   unsigned success_identity = 0;
-  unsigned success_null     = 0;
+  unsigned success_null	    = 0;
 
   for (unsigned i = 0 ; i < nb_test; i++)
-    {
-      automaton_t a = gen.generate(10, 20);
+  {
+    automaton_t a = gen.generate(10, 20);
 
-      complete_here(a);
-      a = determinize(a);
-      automaton_t ac = complement(a);
-      automaton_t squared = product(a,a);
+    complete_here(a);
+    a = determinize(a);
+    automaton_t ac = complement(a);
+    automaton_t squared = product(a,a);
 
-      if ((squared.states().size() == a.states().size()) &&
-	  (squared.edges().size() == a.edges().size()))
-	success_identity++;
+    if ((squared.states().size() == a.states().size()) &&
+	(squared.transitions().size() == a.transitions().size()))
+      success_identity++;
 
-      if (trim(product(a, ac)).states().size() == 0)
-	success_null++;
-    }
+    if (trim(product(a, ac)).states().size() == 0)
+      success_null++;
+  }
 
   std::string rate_identity;
   std::string rate_null;

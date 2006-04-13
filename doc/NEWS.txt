@@ -130,7 +130,7 @@ Vaucanson 0.7 May 17, 2005
       automaton_t new_automaton(first_alphabet_t, second_alphabet_t); 
 
       // Create a couple of words that can directly be given to
-      // add_series_edge() for instance.
+      // add_series_transition() for instance.
       series_set_elt_t make_couple(first_alphabet_t, second_alphabet_t,
 				   std::string, std::string); 
 
@@ -141,8 +141,8 @@ Vaucanson 0.7 May 17, 2005
 
     - ``normalized_composition``: Enables the composition of
       normalized and sub-normalized transducers seen as automata over
-      a free monoid product. (edges with labels of types (a,b), (1,a)
-      and (a,1)).
+      a free monoid product. (transitions with labels of types (a,b),
+      (1,a) and (a,1)).
 
 
 - New XML I/O system.

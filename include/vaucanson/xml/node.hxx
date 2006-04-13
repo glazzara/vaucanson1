@@ -39,83 +39,83 @@ namespace vcsn
     {
     }
 
-# define PROCESS_NODE(name)						   \
-    template <class T>							   \
-    void name ## Node<T>::process(xercesc::DOMElement* node, T& aut,	   \
-				  typename Node<T>::map_t& m,		   \
-				  typename Node<T>::factory_t& f)	   \
-    {									   \
-      using namespace xercesc;						   \
+# define PROCESS_NODE(name)						\
+    template <class T>							\
+    void name ## Node<T>::process(xercesc::DOMElement* node, T& aut,	\
+				  typename Node<T>::map_t& m,		\
+				  typename Node<T>::factory_t& f)	\
+    {									\
+      using namespace xercesc;						\
       for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling()) \
-	if (n->getNodeType() == DOMNode::ELEMENT_NODE)			   \
-	  {								   \
-	    DOMElement* elt = static_cast<DOMElement*>(n);		   \
-	    Node<T>* node = f.create_object(xml2str(elt->getNodeName()));  \
-	    node->process(elt, aut, m, f);				   \
-	  }								   \
+	if (n->getNodeType() == DOMNode::ELEMENT_NODE)			\
+	{								\
+	  DOMElement* elt = static_cast<DOMElement*>(n);		\
+	  Node<T>* node = f.create_object(xml2str(elt->getNodeName()));	\
+	  node->process(elt, aut, m, f);				\
+	}								\
     }
 
 
-# define PROCESS_ROOT_NODE(node_name)					   \
-    template <class T>							   \
-    void node_name ## Node<T>::process(xercesc::DOMElement* node, T& aut,  \
-				       typename Node<T>::map_t& m,	   \
-				       typename Node<T>::factory_t& f)	   \
-    {									   \
-      using namespace xercesc;						   \
-      bool type_done = false;						   \
-      if (node->hasAttribute(STR2XML("name")))				   \
-	aut.geometry().name() = xml2str(node->getAttribute(STR2XML("name")));\
+# define PROCESS_ROOT_NODE(node_name)					\
+    template <class T>							\
+    void node_name ## Node<T>::process(xercesc::DOMElement* node, T& aut, \
+				       typename Node<T>::map_t& m,	\
+				       typename Node<T>::factory_t& f)	\
+    {									\
+      using namespace xercesc;						\
+      bool type_done = false;						\
+      if (node->hasAttribute(STR2XML("name")))				\
+	aut.geometry().name() = xml2str(node->getAttribute(STR2XML("name"))); \
       for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling()) \
-	if (n->getNodeType() == DOMNode::ELEMENT_NODE)			   \
-	  {								   \
-	    DOMElement* elt = static_cast<DOMElement*>(n);		   \
-	    if (! type_done)						   \
-	      {								   \
-		if (XMLString::compareIString(n->getNodeName(),		   \
-					      STR2XML("label_type")))	   \
-		  {							   \
-		    label_typeNode<T>* node = new label_typeNode<T>;	   \
-		    node->process(0, aut, m, f);			   \
-		  }							   \
-		type_done = true;					   \
-	      }								   \
-             Node<T>* node = f.create_object(xml2str(elt->getNodeName())); \
-	     node->process(elt, aut, m, f);				   \
-	  }								   \
+	if (n->getNodeType() == DOMNode::ELEMENT_NODE)			\
+	{								\
+	  DOMElement* elt = static_cast<DOMElement*>(n);		\
+	  if (! type_done)						\
+	  {								\
+	    if (XMLString::compareIString(n->getNodeName(),		\
+					  STR2XML("label_type")))	\
+	    {								\
+	      label_typeNode<T>* node = new label_typeNode<T>;		\
+	      node->process(0, aut, m, f);				\
+	    }								\
+	    type_done = true;						\
+	  }								\
+	  Node<T>* node = f.create_object(xml2str(elt->getNodeName())); \
+	  node->process(elt, aut, m, f);				\
+	}								\
     }
 
 
-# define PROCESS_TYPE_NODE(TempParam, AutType)				      \
-    TempParam								      \
-    void label_typeNode<AutType>::process(xercesc::DOMElement* node,	      \
-					  AutType& aut,			      \
-				    typename Node<AutType>::map_t& m,	      \
-				    typename Node<AutType>::factory_t& f)     \
-    {									      \
-      using namespace xercesc;						      \
-      bool monoid_done = false, semiring_done = false;			      \
-									      \
-      if (! node)							      \
-	process_type(node, aut, m, f, monoid_done, semiring_done);	      \
-      else								      \
-	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())  \
-	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)		      \
-	    {								      \
-	      DOMElement* elt = static_cast<DOMElement*>(n);		      \
-	      process_type(elt, aut, m, f, monoid_done, semiring_done);       \
-	    }								      \
+# define PROCESS_TYPE_NODE(TempParam, AutType)				\
+    TempParam								\
+    void label_typeNode<AutType>::process(xercesc::DOMElement* node,	\
+					  AutType& aut,			\
+					  typename Node<AutType>::map_t& m, \
+					  typename Node<AutType>::factory_t& f)	\
+    {									\
+      using namespace xercesc;						\
+      bool monoid_done = false, semiring_done = false;			\
+									\
+      if (! node)							\
+	process_type(node, aut, m, f, monoid_done, semiring_done);	\
+      else								\
+	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling()) \
+	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)		\
+	  {								\
+	    DOMElement* elt = static_cast<DOMElement*>(n);		\
+	    process_type(elt, aut, m, f, monoid_done, semiring_done);	\
+	  }								\
     }
 
-PROCESS_ROOT_NODE(transducer)
-PROCESS_ROOT_NODE(automaton)
-PROCESS_TYPE_NODE(TParm, AUTtype)
-PROCESS_TYPE_NODE(TParm, TRANStype)
-PROCESS_TYPE_NODE(TParmFMP, FMPtype)
-PROCESS_NODE(label_type)
-PROCESS_NODE(content)
-PROCESS_NODE(states)
-PROCESS_NODE(transitions)
+    PROCESS_ROOT_NODE(transducer)
+    PROCESS_ROOT_NODE(automaton)
+    PROCESS_TYPE_NODE(TParm, AUTtype)
+    PROCESS_TYPE_NODE(TParm, TRANStype)
+    PROCESS_TYPE_NODE(TParmFMP, FMPtype)
+    PROCESS_NODE(label_type)
+    PROCESS_NODE(content)
+    PROCESS_NODE(states)
+    PROCESS_NODE(transitions)
 
 
     /*-------.
@@ -131,37 +131,37 @@ PROCESS_NODE(transitions)
       std::string arg;
       xercesc::DOMElement* elt;
       if (! monoid_done)
+      {
+	std::string monoid("monoid");
+	if (node && xml2str(node->getNodeName()) == monoid)
+	  elt = node;
+	else
+	  elt = 0;
+	monoidNode<T>* nd = new monoidNode<T>;
+	typename T::monoid_t::alphabet_t at;
+	typename T::monoid_t md(at);
+	nd->process(elt, aut, md, m, f);
+	typename T::series_set_t
+	  series(aut.structure().series().semiring(), md);
+	aut.attach(series);
+	monoid_done = true;
+      }
+      else
+	if (! semiring_done)
 	{
-	  std::string monoid("monoid");
-	  if (node && xml2str(node->getNodeName()) == monoid)
+	  std::string semiring("semiring");
+	  if (node && xml2str(node->getNodeName()) == semiring)
 	    elt = node;
 	  else
 	    elt = 0;
-	  monoidNode<T>* nd = new monoidNode<T>;
-	  typename T::monoid_t::alphabet_t at;
-	  typename T::monoid_t md(at);
-	  nd->process(elt, aut, md, m, f);
+	  semiringNode<T>* nd = new semiringNode<T>;
+	  typename T::semiring_t sg;
+	  nd->process(elt, aut, sg, m, f);
 	  typename T::series_set_t
-	    series(aut.structure().series().semiring(), md);
+	    series(sg, aut.structure().series().monoid());
 	  aut.attach(series);
-	  monoid_done = true;
+	  semiring_done = true;
 	}
-      else
-	if (! semiring_done)
-	  {
-	    std::string semiring("semiring");
-	    if (node && xml2str(node->getNodeName()) == semiring)
-	      elt = node;
-	    else
-	      elt = 0;
-	    semiringNode<T>* nd = new semiringNode<T>;
-	    typename T::semiring_t sg;
-	    nd->process(elt, aut, sg, m, f);
-	    typename T::series_set_t
-	      series(sg, aut.structure().series().monoid());
-	    aut.attach(series);
-	    semiring_done = true;
-	  }
     }
 
 
@@ -175,40 +175,40 @@ PROCESS_NODE(transitions)
       std::string arg;
       xercesc::DOMElement* elt;
       if (! monoid_done)
+      {
+	std::string monoid("monoid");
+	if (node && xml2str(node->getNodeName()) == monoid)
+	  elt = node;
+	else
+	  elt = 0;
+	monoidNode<TRANStype>* nd = new monoidNode<TRANStype>;
+	typename TRANStype::monoid_t::alphabet_t at;
+	typename TRANStype::monoid_t md(at);
+	nd->process(elt, aut, md, m, f);
+	typename TRANStype::series_set_t
+	  series(aut.structure().series().semiring(), md);
+	aut.attach(series);
+	monoid_done = true;
+      }
+      else
+	if (! semiring_done)
 	{
-	  std::string monoid("monoid");
-	  if (node && xml2str(node->getNodeName()) == monoid)
+	  std::string semiring("semiring");
+	  if (node && xml2str(node->getNodeName()) == semiring)
 	    elt = node;
 	  else
 	    elt = 0;
-	  monoidNode<TRANStype>* nd = new monoidNode<TRANStype>;
-	  typename TRANStype::monoid_t::alphabet_t at;
-	  typename TRANStype::monoid_t md(at);
-	  nd->process(elt, aut, md, m, f);
+	  semiringNode<TRANStype>* nd = new semiringNode<TRANStype>;
+	  typename TRANStype::semiring_t::monoid_t::alphabet_t at;
+	  typename TRANStype::semiring_t::monoid_t md(at);
+	  typename TRANStype::semiring_t::semiring_t ssg;
+	  typename TRANStype::semiring_t sg(ssg, md);
+	  nd->process(elt, aut, sg, m, f);
 	  typename TRANStype::series_set_t
-	    series(aut.structure().series().semiring(), md);
+	    series(sg, aut.structure().series().monoid());
 	  aut.attach(series);
-	  monoid_done = true;
+	  semiring_done = true;
 	}
-      else
-	if (! semiring_done)
-	  {
-	    std::string semiring("semiring");
-	    if (node && xml2str(node->getNodeName()) == semiring)
-	      elt = node;
-	    else
-	      elt = 0;
-	    semiringNode<TRANStype>* nd = new semiringNode<TRANStype>;
-	    typename TRANStype::semiring_t::monoid_t::alphabet_t at;
-	    typename TRANStype::semiring_t::monoid_t md(at);
-	    typename TRANStype::semiring_t::semiring_t ssg;
-	    typename TRANStype::semiring_t sg(ssg, md);
-	    nd->process(elt, aut, sg, m, f);
-	    typename TRANStype::series_set_t
-	      series(sg, aut.structure().series().monoid());
-	    aut.attach(series);
-	    semiring_done = true;
-	  }
     }
 
 
@@ -222,40 +222,40 @@ PROCESS_NODE(transitions)
       std::string arg;
       xercesc::DOMElement* elt;
       if (! monoid_done)
+      {
+	std::string monoid("monoid");
+	if (node && xml2str(node->getNodeName()) == monoid)
+	  elt = node;
+	else
+	  elt = 0;
+	monoidNode<FMPtype>* nd = new monoidNode<FMPtype>;
+	typename FMPtype::monoid_t::first_monoid_t::alphabet_t at1;
+	typename FMPtype::monoid_t::second_monoid_t::alphabet_t at2;
+	typename FMPtype::monoid_t::first_monoid_t md1(at1);
+	typename FMPtype::monoid_t::second_monoid_t md2(at2);
+	typename FMPtype::monoid_t md(md1, md2);
+	nd->process(elt, aut, md, m, f);
+	typename FMPtype::series_set_t
+	  series(aut.structure().series().semiring(), md);
+	aut.attach(series);
+	monoid_done = true;
+      }
+      else
+	if (! semiring_done)
 	{
-	  std::string monoid("monoid");
-	  if (node && xml2str(node->getNodeName()) == monoid)
+	  std::string semiring("semiring");
+	  if (node && xml2str(node->getNodeName()) == semiring)
 	    elt = node;
 	  else
 	    elt = 0;
-	  monoidNode<FMPtype>* nd = new monoidNode<FMPtype>;
-	  typename FMPtype::monoid_t::first_monoid_t::alphabet_t at1;
-	  typename FMPtype::monoid_t::second_monoid_t::alphabet_t at2;
-	  typename FMPtype::monoid_t::first_monoid_t md1(at1);
-	  typename FMPtype::monoid_t::second_monoid_t md2(at2);
-	  typename FMPtype::monoid_t md(md1, md2);
-	  nd->process(elt, aut, md, m, f);
+	  semiringNode<FMPtype>* nd = new semiringNode<FMPtype>;
+	  typename FMPtype::semiring_t sg;
+	  nd->process(elt, aut, sg, m, f);
 	  typename FMPtype::series_set_t
-	    series(aut.structure().series().semiring(), md);
+	    series(sg, aut.structure().series().monoid());
 	  aut.attach(series);
-	  monoid_done = true;
+	  semiring_done = true;
 	}
-      else
-	if (! semiring_done)
-	  {
-	    std::string semiring("semiring");
-	    if (node && xml2str(node->getNodeName()) == semiring)
-	      elt = node;
-	    else
-	      elt = 0;
-	    semiringNode<FMPtype>* nd = new semiringNode<FMPtype>;
-	    typename FMPtype::semiring_t sg;
-	    nd->process(elt, aut, sg, m, f);
-	    typename FMPtype::series_set_t
-	      series(sg, aut.structure().series().monoid());
-	    aut.attach(series);
-	    semiring_done = true;
-	  }
     }
 
 
@@ -287,8 +287,8 @@ PROCESS_NODE(transitions)
       hstate_t src = m[xml2str(node->getAttribute(STR2XML("src")))];
       hstate_t dst = m[xml2str(node->getAttribute(STR2XML("dst")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
-      hedge_t e = aut.add_series_edge(src, dst, s);
-      typename Node<T>::map_edge_pair_t p(aut.geometry().edges(), e);
+      htransition_t e = aut.add_series_transition(src, dst, s);
+      typename Node<T>::map_transition_pair_t p(aut.geometry().transitions(), e);
       handle_geometry(node, aut, p, m, f);
     }
 
@@ -383,22 +383,22 @@ PROCESS_NODE(transitions)
       else
 	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
+	  {
+	    if (! XMLString::compareIString(n->getNodeName(),
+					    STR2XML("monoid")))
+	      nd->process(static_cast<DOMElement*>(n), a,
+			  const_cast
+			  <typename TRANStype::semiring_t::monoid_t&>
+			  (param.monoid()), m, f);
+	    else
 	    {
-	      if (! XMLString::compareIString(n->getNodeName(),
-					      STR2XML("monoid")))
-		nd->process(static_cast<DOMElement*>(n), a,
-			    const_cast
-			    <typename TRANStype::semiring_t::monoid_t&>
-			    (param.monoid()), m, f);
-	      else
-		{
-		  semiringNode<TRANStype>* sg = new semiringNode<TRANStype>;
-		  sg->process(static_cast<DOMElement*>(n), a,
-			      const_cast
-			      <typename TRANStype::semiring_t::semiring_t&>
-			      (param.semiring()), m, f);
-		}
+	      semiringNode<TRANStype>* sg = new semiringNode<TRANStype>;
+	      sg->process(static_cast<DOMElement*>(n), a,
+			  const_cast
+			  <typename TRANStype::semiring_t::semiring_t&>
+			  (param.semiring()), m, f);
 	    }
+	  }
     }
 
 
@@ -418,21 +418,21 @@ PROCESS_NODE(transitions)
 
       // Fill monoid with letters.
       if (! node || ! node->getFirstChild())
-	{
-	  for (unsigned int i = 'a'; i < 'z'; ++i)
-	    param.alphabet().insert(i);
-	  for (unsigned int i = 'A'; i < 'Z'; ++i)
-	    param.alphabet().insert(i);
-	}
+      {
+	for (unsigned int i = 'a'; i < 'z'; ++i)
+	  param.alphabet().insert(i);
+	for (unsigned int i = 'A'; i < 'Z'; ++i)
+	  param.alphabet().insert(i);
+      }
       else
 	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
-	    {
-	      DOMElement* elt = static_cast<DOMElement*>(n);
-	      generatorNode<T>* nd = static_cast<generatorNode<T>*>
-		(f.create_object(xml2str(elt->getNodeName())));
-	      nd->process(elt, aut, param.alphabet(), m, f);
-	    }
+	  {
+	    DOMElement* elt = static_cast<DOMElement*>(n);
+	    generatorNode<T>* nd = static_cast<generatorNode<T>*>
+	      (f.create_object(xml2str(elt->getNodeName())));
+	    nd->process(elt, aut, param.alphabet(), m, f);
+	  }
     }
 
     template <class T>
@@ -473,26 +473,26 @@ PROCESS_NODE(transitions)
       tools::ensure_monoid_type(node, param);
 
       if (! node || ! node->getFirstChild())
-	{
-	  freemonoidNode<FMPtype>* nd_first = new freemonoidNode<FMPtype>;
-	  freemonoidNode<FMPtype>* nd_snd = new freemonoidNode<FMPtype>;
-	  nd_first->process(0, aut, param.first_monoid(), m, f);
-	  nd_snd->process(0, aut, param.second_monoid(), m, f);
-	}
+      {
+	freemonoidNode<FMPtype>* nd_first = new freemonoidNode<FMPtype>;
+	freemonoidNode<FMPtype>* nd_snd = new freemonoidNode<FMPtype>;
+	nd_first->process(0, aut, param.first_monoid(), m, f);
+	nd_snd->process(0, aut, param.second_monoid(), m, f);
+      }
       else
 	for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
+	  {
+	    DOMElement* elt = static_cast<DOMElement*>(n);
+	    freemonoidNode<FMPtype>* nd = new freemonoidNode<FMPtype>;
+	    if (first)
 	    {
-	      DOMElement* elt = static_cast<DOMElement*>(n);
-	      freemonoidNode<FMPtype>* nd = new freemonoidNode<FMPtype>;
-	      if (first)
-		{
-		  nd->process(elt, aut, param.first_monoid(), m, f);
-		  first = false;
-		}
-	      else
-		nd->process(elt, aut, param.second_monoid(), m, f);
+	      nd->process(elt, aut, param.first_monoid(), m, f);
+	      first = false;
 	    }
+	    else
+	      nd->process(elt, aut, param.second_monoid(), m, f);
+	  }
     }
 
 
@@ -525,13 +525,13 @@ PROCESS_NODE(transitions)
     {
       double x, y;
       if (node->hasAttribute(STR2XML("x")) && node->hasAttribute(STR2XML("y")))
-	{
-	  std::istringstream xstr(xml2str(node->getAttribute(STR2XML("x"))));
-	  std::istringstream ystr(xml2str(node->getAttribute(STR2XML("y"))));
-	  xstr >> x;
-	  ystr >> y;
-  	  param.first[param.second] = std::make_pair(x, y);
-	}
+      {
+	std::istringstream xstr(xml2str(node->getAttribute(STR2XML("x"))));
+	std::istringstream ystr(xml2str(node->getAttribute(STR2XML("y"))));
+	xstr >> x;
+	ystr >> y;
+	param.first[param.second] = std::make_pair(x, y);
+      }
       /// FIXME: handle attribute "direction".
     }
 
@@ -550,15 +550,15 @@ PROCESS_NODE(transitions)
       double x, y;
       if (node->hasAttribute(STR2XML("labelPositionX")) &&
 	  node->hasAttribute(STR2XML("labelPositionY")))
-	{
-	  std::istringstream
-	    xstr(xml2str(node->getAttribute(STR2XML("labelPositionX"))));
-	  std::istringstream
-	    ystr(xml2str(node->getAttribute(STR2XML("labelPositionY"))));
-	  xstr >> x;
-	  ystr >> y;
-  	  param.first[param.second] = std::make_pair(x, y);
-	}
+      {
+	std::istringstream
+	  xstr(xml2str(node->getAttribute(STR2XML("labelPositionX"))));
+	std::istringstream
+	  ystr(xml2str(node->getAttribute(STR2XML("labelPositionY"))));
+	xstr >> x;
+	ystr >> y;
+	param.first[param.second] = std::make_pair(x, y);
+      }
     }
 
 
@@ -575,18 +575,18 @@ PROCESS_NODE(transitions)
       using namespace xercesc;
       for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling())
 	if (n->getNodeType() == DOMNode::ELEMENT_NODE)
+	{
+	  if (xml2str(n->getNodeName()) == geometry)
 	  {
-	    if (xml2str(n->getNodeName()) == geometry)
-	      {
-		geometryNode<T>* nd = new geometryNode<T>;
-		nd->process(static_cast<DOMElement*>(n), aut, param, m, f);
-	      }
-	    else if (xml2str(n->getNodeName()) == drawing)
-	      {
-		drawingNode<T>* nd = new drawingNode<T>;
-		nd->process(static_cast<DOMElement*>(n), aut, param, m, f);
-	      }
+	    geometryNode<T>* nd = new geometryNode<T>;
+	    nd->process(static_cast<DOMElement*>(n), aut, param, m, f);
 	  }
+	  else if (xml2str(n->getNodeName()) == drawing)
+	  {
+	    drawingNode<T>* nd = new drawingNode<T>;
+	    nd->process(static_cast<DOMElement*>(n), aut, param, m, f);
+	  }
+	}
     }
 
 

@@ -100,10 +100,10 @@ namespace vcsn {
 
   /** accessor to the set of states. (const version) */
   template <typename Self, typename T>
-  typename automaton_traits<T>::edges_t
-  MetaElement<AutomataBase<Self>, T>::edges() const
+  typename automaton_traits<T>::transitions_t
+  MetaElement<AutomataBase<Self>, T>::transitions() const
   {
-    return op_edges(this->structure(), this->value());
+    return op_transitions(this->structure(), this->value());
   }
 
   /** the optional information aggregated to the automaton. */
@@ -132,7 +132,7 @@ namespace vcsn {
   }
 
   /** return true if the state is initial (ie it is in the initial
-    support) . */
+   support) . */
   template <typename Self, typename T>
   bool
   MetaElement<AutomataBase<Self>, T>::is_initial(hstate_t state) const
@@ -259,7 +259,7 @@ namespace vcsn {
   }
 
   /** return a randomly chosen state. (valid only if the automaton
-    is not empty) */
+   is not empty) */
   template <typename Self, typename T>
   hstate_t
   MetaElement<AutomataBase<Self>, T>::choose_state() const
@@ -267,45 +267,45 @@ namespace vcsn {
     return op_choose_state(this->structure(), this->value());
   }
 
-  /** add a new edge between 'from' and 'to' labelled by 'label' */
+  /** add a new transition between 'from' and 'to' labelled by 'label' */
   template <typename Self, typename T>
-  hedge_t
-  MetaElement<AutomataBase<Self>, T>::add_edge(hstate_t from,
-					       hstate_t to,
-					       const label_t& label)
-  {
-    return op_add_edge(this->structure(), this->value(),
-		       from, to, label);
-  }
-
-  /** add a new weighted edge. */
-  template <typename Self, typename T>
-  hedge_t
-  MetaElement<AutomataBase<Self>, T>::
-  add_weighted_edge(hstate_t from,
-		    hstate_t to,
-		    const semiring_elt_t& w,
-		    const monoid_elt_value_t& m)
-  {
-    return op_add_weighted_edge(this->structure(), this->value(),
-				from, to, w, m);
-  }
-
-  /** add an edge using a series. */
-  /** If the underlying implementation is not sufficiently general
-   *  to support this operation, you will have several edges created.*/
-  template <typename Self, typename T>
-  hedge_t
-  MetaElement<AutomataBase<Self>, T>::add_series_edge(hstate_t from,
+  htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_transition(hstate_t from,
 						     hstate_t to,
-						     const series_set_elt_t& e)
+						     const label_t& label)
   {
-    return op_add_series_edge(this->structure(), this->value(), from, to, e);
+    return op_add_transition(this->structure(), this->value(),
+			     from, to, label);
+  }
+
+  /** add a new weighted transition. */
+  template <typename Self, typename T>
+  htransition_t
+  MetaElement<AutomataBase<Self>, T>::
+  add_weighted_transition(hstate_t from,
+			  hstate_t to,
+			  const semiring_elt_t& w,
+			  const monoid_elt_value_t& m)
+  {
+    return op_add_weighted_transition(this->structure(), this->value(),
+				      from, to, w, m);
+  }
+
+  /** add a transition using a series. */
+  /** If the underlying implementation is not sufficiently general
+   *  to support this operation, you will have several transitions created.*/
+  template <typename Self, typename T>
+  htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_series_transition(hstate_t from,
+							    hstate_t to,
+							    const series_set_elt_t& e)
+  {
+    return op_add_series_transition(this->structure(), this->value(), from, to, e);
   }
 
   /** add a spontaneous transition between 'from' and 'to'. */
   template <typename Self, typename T>
-  hedge_t
+  htransition_t
   MetaElement<AutomataBase<Self>, T>::add_spontaneous(hstate_t from,
 						      hstate_t to)
   {
@@ -316,7 +316,7 @@ namespace vcsn {
   }
 
   template <typename Self, typename T>
-  hedge_t
+  htransition_t
   MetaElement<AutomataBase<Self>, T>
   ::add_spontaneous(hstate_t from,
 		    hstate_t to,
@@ -325,20 +325,20 @@ namespace vcsn {
     return op_add_spontaneous(this->structure(), this->value(), from, to, w);
   }
 
-  /** add an transition between 'from' and 'to' labelled by a letter. */
+  /** add a transition between 'from' and 'to' labelled by a letter. */
   template <typename Self, typename T>
-  hedge_t
-  MetaElement<AutomataBase<Self>, T>::add_letter_edge(hstate_t from,
-						      hstate_t to,
-						      const letter_t& l)
+  htransition_t
+  MetaElement<AutomataBase<Self>, T>::add_letter_transition(hstate_t from,
+							    hstate_t to,
+							    const letter_t& l)
   {
-    return op_add_letter_edge(this->structure(), this->value(), from, to, l);
+    return op_add_letter_transition(this->structure(), this->value(), from, to, l);
   }
 
-  /** update the label of an edge. */
+  /** update the label of a transition. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::update(hedge_t e, const label_t& l)
+  MetaElement<AutomataBase<Self>, T>::update(htransition_t e, const label_t& l)
   {
     op_update(this->structure(), this->value(), e, l);
   }
@@ -351,12 +351,12 @@ namespace vcsn {
     return op_del_state(this->structure(), this->value(), s);
   }
 
-  /** delete the edge 'e'. */
+  /** delete the transition 'e'. */
   template <typename Self, typename T>
   void
-  MetaElement<AutomataBase<Self>, T>::del_edge(hedge_t e)
+  MetaElement<AutomataBase<Self>, T>::del_transition(htransition_t e)
   {
-    return op_del_edge(this->structure(), this->value(), e);
+    return op_del_transition(this->structure(), this->value(), e);
   }
 
   /** check if the state 's' is in the automaton. */
@@ -367,34 +367,34 @@ namespace vcsn {
     return op_has_state(this->structure(), this->value(), s);
   }
 
-  /** check if the edge 'e' is in the automaton. */
+  /** check if the transition 'e' is in the automaton. */
   template <typename Self, typename T>
   bool
-  MetaElement<AutomataBase<Self>, T>::has_edge(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::has_transition(htransition_t e) const
   {
-    return op_has_edge(this->structure(), this->value(), e);
+    return op_has_transition(this->structure(), this->value(), e);
   }
 
-  /** return the origin of the edge 'e'. */
+  /** return the origin of the transition 'e'. */
   template <typename Self, typename T>
   hstate_t
-  MetaElement<AutomataBase<Self>, T>::origin_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::origin_of(htransition_t e) const
   {
     return op_origin_of(this->structure(), this->value(), e);
   }
 
-  /** return the aim of the edge 'e'. */
+  /** return the aim of the transition 'e'. */
   template <typename Self, typename T>
   hstate_t
-  MetaElement<AutomataBase<Self>, T>::aim_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::aim_of(htransition_t e) const
   {
     return op_aim_of(this->structure(), this->value(), e);
   }
 
-  /** return the label of the edge 'e'. */
+  /** return the label of the transition 'e'. */
   template <typename Self, typename T>
   typename automaton_traits<T>::label_t
-  MetaElement<AutomataBase<Self>, T>::label_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::label_of(htransition_t e) const
   {
     return op_label_of(this->structure(), this->value(), e);
   }
@@ -402,7 +402,7 @@ namespace vcsn {
   /** return the label seen as a series. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::series_set_elt_t
-  MetaElement<AutomataBase<Self>, T>::series_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::series_of(htransition_t e) const
   {
     return op_series_of(this->structure(), this->value(), e);
   }
@@ -410,7 +410,7 @@ namespace vcsn {
   /** return the label seen as a series implementation. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::series_set_elt_value_t
-  MetaElement<AutomataBase<Self>, T>::series_value_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::series_value_of(htransition_t e) const
   {
     return op_series_value_of(this->structure(), this->value(), e);
   }
@@ -418,7 +418,7 @@ namespace vcsn {
   /** return true if the transition is spontaneous. */
   template <typename Self, typename T>
   bool
-  MetaElement<AutomataBase<Self>, T>::is_spontaneous(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::is_spontaneous(htransition_t e) const
   {
     return op_is_spontaneous(this->structure(), this->value(), e);
   }
@@ -426,7 +426,7 @@ namespace vcsn {
   /** return the label seen as a word. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::monoid_elt_t
-  MetaElement<AutomataBase<Self>, T>::word_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::word_of(htransition_t e) const
   {
     return op_word_of(this->structure(), this->value(), e);
   }
@@ -434,7 +434,7 @@ namespace vcsn {
   /** return the label seen as a weight. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::semiring_elt_t
-  MetaElement<AutomataBase<Self>, T>::weight_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::weight_of(htransition_t e) const
   {
     return op_weight_of(this->structure(), this->value(), e);
   }
@@ -442,7 +442,7 @@ namespace vcsn {
   /** returns the label seen as word implementation. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::monoid_elt_value_t
-  MetaElement<AutomataBase<Self>, T>::word_value_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::word_value_of(htransition_t e) const
   {
     return op_word_value_of(this->structure(), this->value(), e);
   }
@@ -452,48 +452,48 @@ namespace vcsn {
    *  probably invalidated. */
   template <typename Self, typename T>
   typename MetaElement<AutomataBase<Self>, T>::letter_t
-  MetaElement<AutomataBase<Self>, T>::letter_of(hedge_t e) const
+  MetaElement<AutomataBase<Self>, T>::letter_of(htransition_t e) const
   {
     return op_letter_of(this->structure(), this->value(), e);
   }
 
   // output_return_type = OutputIterator
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction	  = output
 
-  /** store the output edges of the state 'from' using 'res'. */
+  /** store the output transitions of the state 'from' using 'res'. */
   template <typename Self, typename T>
   template <typename OutputIterator>
   void
   MetaElement<AutomataBase<Self>, T>::delta(OutputIterator res,
 					    hstate_t from,
-					    delta_kind::edges k) const
+					    delta_kind::transitions k) const
   {
     op_delta(this->structure(), this->value(), res, from, k);
   }
 
-  /** store the output edges of the state 'from' where
-    query(label(e)) = true using 'res'. */
+  /** store the output transitions of the state 'from' where
+   query(label(e)) = true using 'res'. */
   template <typename Self, typename T>
   template <typename OutputIterator, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::delta(OutputIterator res,
 					    hstate_t from,
 					    const L& query,
-					    delta_kind::edges k) const
+					    delta_kind::transitions k) const
   {
     op_delta(this->structure(), this->value(), res, from, query, k);
   }
 
-  /** store the output edges of the state 'from' where
-    the label matches the letter. */
+  /** store the output transitions of the state 'from' where
+   the label matches the letter. */
   template <typename Self, typename T>
   template <typename OutputIterator, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::letter_delta(OutputIterator res,
 						   hstate_t from,
 						   const L& letter,
-						   delta_kind::edges k) const
+						   delta_kind::transitions k) const
   {
     op_letter_delta(this->structure(), this->value(), res, from, letter, k);
   }
@@ -505,48 +505,48 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_delta(OutputIterator res,
 		      hstate_t from,
-		      delta_kind::edges k) const
+		      delta_kind::transitions k) const
   {
     return op_spontaneous_delta(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = Container
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction	  = output
 
-  /** store the output edges of the state 'from' in the container
-    'res' */
+  /** store the output transitions of the state 'from' in the container
+   'res' */
   template <typename Self, typename T>
   template <typename Container>
   void
   MetaElement<AutomataBase<Self>, T>::deltac(Container& res, hstate_t from,
-					     delta_kind::edges k) const
+					     delta_kind::transitions k) const
   {
     op_deltac(this->structure(), this->value(), res, from, k);
   }
 
-  /** store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+  /** store the output transitions of the state 'from' where
+   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
   template <typename Container, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::deltac(Container& res,
 					     hstate_t from,
 					     const L& query,
-					     delta_kind::edges k) const
+					     delta_kind::transitions k) const
   {
     op_deltac(this->structure(), this->value(), res, from, query, k);
   }
 
-  /** store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+  /** store the output transitions of the state 'from' where
+   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
   template <typename Container, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::letter_deltac(Container& res,
 						    hstate_t from,
 						    const L& letter,
-						    delta_kind::edges k) const
+						    delta_kind::transitions k) const
   {
     op_letter_deltac(this->structure(), this->value(), res, from, letter, k);
   }
@@ -558,16 +558,16 @@ namespace vcsn {
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_deltac(Container& res,
 		       hstate_t from,
-		       delta_kind::edges k) const
+		       delta_kind::transitions k) const
   {
     op_spontaneous_deltac(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = OutputIterator
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction	  = output
 
-  /** store the output edges of the state 'from' using 'res'. */
+  /** store the output transitions of the state 'from' using 'res'. */
   template <typename Self, typename T>
   template <typename OutputIterator>
   void
@@ -579,7 +579,7 @@ namespace vcsn {
   }
 
   /** store the output states of the state 'from' where
-    query(label(e)) = true using 'res'. */
+   query(label(e)) = true using 'res'. */
   template <typename Self, typename T>
   template <typename OutputIterator, typename L>
   void
@@ -592,7 +592,7 @@ namespace vcsn {
   }
 
   /** store the output states of the state 'from' where
-    the label matches the letter. */
+   the label matches the letter. */
   template <typename Self, typename T>
   template <typename OutputIterator, typename L>
   void
@@ -617,11 +617,11 @@ namespace vcsn {
   }
 
   // output_return_type = Container
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction	  = output
 
   /** store the output states of the state 'from' in the container
-    'res' */
+   'res' */
   template <typename Self, typename T>
   template <typename Container>
   void
@@ -632,7 +632,7 @@ namespace vcsn {
   }
 
   /** store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
   template <typename Container, typename L>
   void
@@ -645,7 +645,7 @@ namespace vcsn {
   }
 
   /** store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
   template <typename Container, typename L>
   void
@@ -671,42 +671,42 @@ namespace vcsn {
 
 
   // output_return_type = OutputIterator
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction	  = input
 
-  /** store the output edges of the state 'from' using 'res'. */
+  /** store the output transitions of the state 'from' using 'res'. */
   template <typename Self, typename T>
   template <typename OutputIterator>
   void
   MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
-					    hstate_t from,
-					    delta_kind::edges k) const
+					     hstate_t from,
+					     delta_kind::transitions k) const
   {
     op_rdelta(this->structure(), this->value(), res, from, k);
   }
 
-  /** store the output edges of the state 'from' where
-    query(label(e)) = true using 'res'. */
+  /** store the output transitions of the state 'from' where
+   query(label(e)) = true using 'res'. */
   template <typename Self, typename T>
   template <typename OutputIterator, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
-					    hstate_t from,
-					    const L& query,
-					    delta_kind::edges k) const
+					     hstate_t from,
+					     const L& query,
+					     delta_kind::transitions k) const
   {
     op_rdelta(this->structure(), this->value(), res, from, query, k);
   }
 
-  /** store the output edges of the state 'from' where
-    the label matches the letter. */
+  /** store the output transitions of the state 'from' where
+   the label matches the letter. */
   template <typename Self, typename T>
   template <typename OutputIterator, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdelta(OutputIterator res,
-						   hstate_t from,
-						   const L& letter,
-						   delta_kind::edges k) const
+						    hstate_t from,
+						    const L& letter,
+						    delta_kind::transitions k) const
   {
     op_letter_rdelta(this->structure(), this->value(), res, from, letter, k);
   }
@@ -717,49 +717,49 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_rdelta(OutputIterator res,
-		      hstate_t from,
-		      delta_kind::edges k) const
+		       hstate_t from,
+		       delta_kind::transitions k) const
   {
     return op_spontaneous_rdelta(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = Container
-  // output_type        = hedge_t
-  // direction	        = input
+  // output_type	= htransition_t
+  // direction		= input
 
-  /** store the output edges of the state 'from' in the container
-    'res' */
+  /** store the output transitions of the state 'from' in the container
+   'res' */
   template <typename Self, typename T>
   template <typename Container>
   void
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res, hstate_t from,
-					     delta_kind::edges k) const
+					      delta_kind::transitions k) const
   {
     op_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
-  /** store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+  /** store the output transitions of the state 'from' where
+   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
   template <typename Container, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res,
-					     hstate_t from,
-					     const L& query,
-					     delta_kind::edges k) const
+					      hstate_t from,
+					      const L& query,
+					      delta_kind::transitions k) const
   {
     op_rdeltac(this->structure(), this->value(), res, from, query, k);
   }
 
-  /** store the output edges of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+  /** store the output transitions of the state 'from' where
+   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
   template <typename Container, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdeltac(Container& res,
-						    hstate_t from,
-						    const L& letter,
-						    delta_kind::edges k) const
+						     hstate_t from,
+						     const L& letter,
+						     delta_kind::transitions k) const
   {
     op_letter_rdeltac(this->structure(), this->value(), res, from, letter, k);
   }
@@ -770,49 +770,49 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_rdeltac(Container& res,
-		       hstate_t from,
-		       delta_kind::edges k) const
+			hstate_t from,
+			delta_kind::transitions k) const
   {
     op_spontaneous_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
   // output_return_type = OutputIterator
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction	  = output
 
-  /** store the output edges of the state 'from' using 'res'. */
+  /** store the output transitions of the state 'from' using 'res'. */
   template <typename Self, typename T>
   template <typename OutputIterator>
   void
   MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
-					    hstate_t from,
-					    delta_kind::states k) const
+					     hstate_t from,
+					     delta_kind::states k) const
   {
     op_rdelta(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output states of the state 'from' where
-    query(label(e)) = true using 'res'. */
+   query(label(e)) = true using 'res'. */
   template <typename Self, typename T>
   template <typename OutputIterator, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
-					    hstate_t from,
-					    const L& query,
-					    delta_kind::states k) const
+					     hstate_t from,
+					     const L& query,
+					     delta_kind::states k) const
   {
     op_rdelta(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output states of the state 'from' where
-    the label matches the letter. */
+   the label matches the letter. */
   template <typename Self, typename T>
   template <typename OutputIterator, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdelta(OutputIterator res,
-						   hstate_t from,
-						   const L& letter,
-						   delta_kind::states k) const
+						    hstate_t from,
+						    const L& letter,
+						    delta_kind::states k) const
   {
     op_letter_rdelta(this->structure(), this->value(), res, from, letter, k);
   }
@@ -830,42 +830,42 @@ namespace vcsn {
   }
 
   // output_return_type = Container
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction	  = output
 
   /** store the output states of the state 'from' in the container
-    'res' */
+   'res' */
   template <typename Self, typename T>
   template <typename Container>
   void
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res, hstate_t from,
-					     delta_kind::states k) const
+					      delta_kind::states k) const
   {
     op_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
   /** store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
   template <typename Container, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res,
-					     hstate_t from,
-					     const L& query,
-					     delta_kind::states k) const
+					      hstate_t from,
+					      const L& query,
+					      delta_kind::states k) const
   {
     op_rdeltac(this->structure(), this->value(), res, from, query, k);
   }
 
   /** store the output states of the state 'from' where
-    query(label(e)) = true in the container 'res' */
+   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
   template <typename Container, typename L>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdeltac(Container& res,
-						    hstate_t from,
-						    const L& letter,
-						    delta_kind::states k) const
+						     hstate_t from,
+						     const L& letter,
+						     delta_kind::states k) const
   {
     op_letter_rdeltac(this->structure(), this->value(), res, from, letter, k);
   }
@@ -876,8 +876,8 @@ namespace vcsn {
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_rdeltac(Container& res,
-		       hstate_t from,
-		       delta_kind::states k) const
+			hstate_t from,
+			delta_kind::states k) const
   {
     op_spontaneous_rdeltac(this->structure(), this->value(), res, from, k);
   }
@@ -889,7 +889,7 @@ namespace vcsn {
     Element<S, T> r(s.self(), v);
     st << "{ "
        << r.states().size() << " states, "
-       << r.edges().size() << " edges, "
+       << r.transitions().size() << " transitions, "
        << "#I = " << r.initial().size() << ", "
        << "#T = " << r.final().size()
        << " }";

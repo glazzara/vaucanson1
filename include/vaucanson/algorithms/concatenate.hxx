@@ -28,7 +28,7 @@ namespace vcsn {
 
   template <class Self, class Auto>
   void
-  do_auto_in_concat(const AutomataBase<Self>&   ,
+  do_auto_in_concat(const AutomataBase<Self>&	,
 		    Auto&			lhs,
 		    const Auto&			rhs)
   {
@@ -36,18 +36,18 @@ namespace vcsn {
     std::map<hstate_t, hstate_t>	trans;
 
     for_each_state(s, rhs)
-      {
-	hstate_t ns = lhs.add_state();
-	trans[*s] = ns;
-	if (rhs.is_initial(*s))
-	  for_each_final_state(f, lhs)
-	    lhs.add_series_edge(*f, ns,
-				lhs.get_final(*f) * rhs.get_initial(*s));
-      }
-    for_each_edge(e, rhs)
-      lhs.add_edge(trans[rhs.origin_of(*e)],
-		   trans[rhs.aim_of(*e)],
-		   rhs.label_of(*e));
+    {
+      hstate_t ns = lhs.add_state();
+      trans[*s] = ns;
+      if (rhs.is_initial(*s))
+	for_each_final_state(f, lhs)
+	  lhs.add_series_transition(*f, ns,
+				    lhs.get_final(*f) * rhs.get_initial(*s));
+    }
+    for_each_transition(e, rhs)
+      lhs.add_transition(trans[rhs.origin_of(*e)],
+			 trans[rhs.aim_of(*e)],
+			 rhs.label_of(*e));
     lhs.clear_final();
     for_each_final_state(f, rhs)
       lhs.set_final(trans[*f], rhs.get_final(*f));

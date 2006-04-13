@@ -1,17 +1,17 @@
 // rt_tdc_algorithms.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <fstream>
@@ -67,22 +67,22 @@ get_aut(std::string s)
 {
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
-    {
-      using namespace vcsn::io;
-      using namespace vcsn::xml;
+  {
+    using namespace vcsn::io;
+    using namespace vcsn::xml;
 
-      automaton_t a = new_automaton(alphabet(), alphabet());
-      *is >> automaton_loader(a, string_out (), XML ());
+    automaton_t a = new_automaton(alphabet(), alphabet());
+    *is >> automaton_loader(a, string_out (), XML ());
 
-      if (s != "-")
-	delete is;
-      return a;
-    }
+    if (s != "-")
+      delete is;
+    return a;
+  }
   else
-    {
-      std::cerr << "FATAL: Could not load automaton." << std::endl;
-      exit(1);
-    }
+  {
+    std::cerr << "FATAL: Could not load automaton." << std::endl;
+    exit(1);
+  }
 }
 
 boolean_automaton::automaton_t
@@ -90,23 +90,23 @@ get_bool_aut(std::string s)
 {
   std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
   if (not is->fail())
-    {
-      using namespace vcsn::io;
-      using namespace vcsn::xml;
+  {
+    using namespace vcsn::io;
+    using namespace vcsn::xml;
 
-      boolean_automaton::automaton_t a =
-	boolean_automaton::new_automaton(alphabet());
-      *is >> automaton_loader(a, string_out (), XML ());
+    boolean_automaton::automaton_t a =
+      boolean_automaton::new_automaton(alphabet());
+    *is >> automaton_loader(a, string_out (), XML ());
 
-      if (s != "-")
-	delete is;
-      return a;
-    }
+    if (s != "-")
+      delete is;
+    return a;
+  }
   else
-    {
-      std::cerr << "FATAL: Could not load automaton." << std::endl;
-      exit(1);
-    }
+  {
+    std::cerr << "FATAL: Could not load automaton." << std::endl;
+    exit(1);
+  }
 }
 
 static
@@ -234,7 +234,7 @@ info_command(int argc, char** argv)
   automaton_t a = get_aut(argv[2]);
 
   std::cout << "States: " << a.states().size() << std::endl;
-  std::cout << "Transitions: " << a.edges().size() << std::endl;
+  std::cout << "Transitions: " << a.transitions().size() << std::endl;
   std::cout << "Initial states: " << a.initial().size() << std::endl;
   std::cout << "Final states: " << a.final().size() << std::endl;
 }
@@ -246,24 +246,24 @@ closure_command(int argc, char** argv)
   if (argc != 3)
     usage(argc, argv);
 
-   std::cout << automaton_saver(accessible(closure(get_aut(argv[2]))),
-				string_out (), XML ())
-	     << std::endl;
+  std::cout << automaton_saver(accessible(closure(get_aut(argv[2]))),
+			       string_out (), XML ())
+	    << std::endl;
 }
 
 #define ONE_ARG_COMMAND(GetArg, Algo) one_arg_command_ ## Algo ## _ ## GetArg
 
 #define DEFINE_ONE_ARG_COMMAND(GetArg, Algo)		\
-static							\
-void							\
-ONE_ARG_COMMAND(GetArg, Algo)(int argc, char** argv)	\
-{							\
-  if (argc != 3)					\
-    usage(argc, argv);					\
-  std::cout << automaton_saver(Algo(GetArg(argv[2])),	\
-			       string_out (),		\
-			       XML ());			\
-}
+  static						\
+  void							\
+  ONE_ARG_COMMAND(GetArg, Algo)(int argc, char** argv)	\
+  {							\
+    if (argc != 3)					\
+      usage(argc, argv);				\
+    std::cout << automaton_saver(Algo(GetArg(argv[2])),	\
+				 string_out (),		\
+				 XML ());		\
+  }
 
 DEFINE_ONE_ARG_COMMAND(get_aut, realtime)
 DEFINE_ONE_ARG_COMMAND(get_aut, input_projection)
@@ -274,28 +274,28 @@ DEFINE_ONE_ARG_COMMAND(get_aut, transpose)
 
 const struct
 {
-  char*	name;
-  void	(*command)(int, char**);
+    char*	name;
+    void	(*command)(int, char**);
 }
 command_map[] =
-  {
-    { "realtime",		ONE_ARG_COMMAND(get_aut, realtime)	},
-    { "is-realtime",		is_realtime_command			},
-    { "compose",		compose_command				},
-    { "evaluation",		evaluation_command			},
-    { "evaluation_aut",		evaluation_aut_command			},
-    { "domain",			ONE_ARG_COMMAND(get_aut, input_projection)},
-    { "is-empty",		is_empty_command			},
-    { "are-isomorphic",		are_isomorphic_command			},
-    { "image",			ONE_ARG_COMMAND(get_aut, output_projection)},
-    { "to-tdc",			realtime_to_fmp_command			},
-    { "closure",		closure_command				},
-    { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
-    { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},
-    { "display",		display_command				},
-    { "info",			info_command				},
-    { 0,			0					}
-  };
+{
+  { "realtime",		ONE_ARG_COMMAND(get_aut, realtime)	},
+  { "is-realtime",		is_realtime_command			},
+  { "compose",		compose_command				},
+  { "evaluation",		evaluation_command			},
+  { "evaluation_aut",		evaluation_aut_command			},
+  { "domain",			ONE_ARG_COMMAND(get_aut, input_projection)},
+  { "is-empty",		is_empty_command			},
+  { "are-isomorphic",		are_isomorphic_command			},
+  { "image",			ONE_ARG_COMMAND(get_aut, output_projection)},
+  { "to-tdc",			realtime_to_fmp_command			},
+  { "closure",		closure_command				},
+  { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
+  { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},
+  { "display",		display_command				},
+  { "info",			info_command				},
+  { 0,			0					}
+};
 
 #undef ONE_ARG_COMMAND
 
@@ -310,29 +310,29 @@ main(int argc, char** argv)
 
   for (i = 0; command_map[i].name != 0; ++i)
     if (cmd == command_map[i].name)
-      {
-	command_map[i].command(argc, argv);
-	break ;
-      }
-  if (command_map[i].name == 0)
     {
-      std::cerr << "Available algorithms:" << std::endl;
-      std::cerr << " * domain"  << std::endl;
-      std::cerr << " * image"  << std::endl;
-      std::cerr << " * closure"  << std::endl;
-      std::cerr << " * trim"  << std::endl;
-      std::cerr << " * realtime"  << std::endl;
-      std::cerr << " * are-isomorphic"  << std::endl;
-      std::cerr << " * is-realtime"  << std::endl;
-      std::cerr << " * transpose"  << std::endl;
-      std::cerr << " * is-empty"  << std::endl;
-      std::cerr << " * to-tdc"  << std::endl;
-      std::cerr << " * compose"  << std::endl;
-      std::cerr << " * evaluation"  << std::endl;
-      std::cerr << " * evaluation_aut"  << std::endl;
-      std::cerr << " * display"  << std::endl;
-      std::cerr << " * info"  << std::endl;
-      exit(1);
+      command_map[i].command(argc, argv);
+      break ;
     }
+  if (command_map[i].name == 0)
+  {
+    std::cerr << "Available algorithms:" << std::endl;
+    std::cerr << " * domain"  << std::endl;
+    std::cerr << " * image"  << std::endl;
+    std::cerr << " * closure"  << std::endl;
+    std::cerr << " * trim"  << std::endl;
+    std::cerr << " * realtime"	<< std::endl;
+    std::cerr << " * are-isomorphic"  << std::endl;
+    std::cerr << " * is-realtime"  << std::endl;
+    std::cerr << " * transpose"	 << std::endl;
+    std::cerr << " * is-empty"	<< std::endl;
+    std::cerr << " * to-tdc"  << std::endl;
+    std::cerr << " * compose"  << std::endl;
+    std::cerr << " * evaluation"  << std::endl;
+    std::cerr << " * evaluation_aut"  << std::endl;
+    std::cerr << " * display"  << std::endl;
+    std::cerr << " * info"  << std::endl;
+    exit(1);
+  }
 }
 

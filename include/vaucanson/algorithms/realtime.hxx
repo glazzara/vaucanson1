@@ -32,8 +32,8 @@ namespace vcsn {
   do_is_realtime(const AutomataBase<A_>&,
 		 const Auto_&		   a)
   {
-    for (typename Auto_::edge_iterator e = a.edges().begin();
-	 e != a.edges().end();
+    for (typename Auto_::transition_iterator e = a.transitions().begin();
+	 e != a.transitions().end();
 	 ++e)
       if (a.series_of(*e) ==
 	  a.structure().series().

@@ -61,7 +61,7 @@ namespace vcsn
 
     template <class S, class T>
     void
-    xml_chooser_base<S, T>::create_label(hedge_t e,
+    xml_chooser_base<S, T>::create_label(htransition_t e,
 					 const Element<S, T>& aut,
 					 xercesc::DOMElement* elt)
 

@@ -17,8 +17,8 @@
 
 #include <vaucanson/config/system.hh>
 
-#if not defined (VCSN_XML_XML_CHOOSER_HH) and				\
-    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
+#if not defined (VCSN_XML_XML_CHOOSER_HH) and			\
+  (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
 # define VCSN_XML_XML_CHOOSER_HH
 
 # ifndef VCSN_USE_XML
@@ -65,14 +65,14 @@ namespace vcsn
     template <class S, class T>
     struct xml_chooser_base
     {
-      const char* choose_start_tag();
-      void create_type_tag(const Element<S, T>&, xercesc::DOMDocument*,
-			   xercesc::DOMElement*);
-      void create_label(hedge_t, const Element<S, T>&, xercesc::DOMElement*);
-      void create_initial_label(hstate_t, const Element<S, T>&,
+	const char* choose_start_tag();
+	void create_type_tag(const Element<S, T>&, xercesc::DOMDocument*,
+			     xercesc::DOMElement*);
+	void create_label(htransition_t, const Element<S, T>&, xercesc::DOMElement*);
+	void create_initial_label(hstate_t, const Element<S, T>&,
+				  xercesc::DOMElement*);
+	void create_final_label(hstate_t, const Element<S, T>&,
 				xercesc::DOMElement*);
-      void create_final_label(hstate_t, const Element<S, T>&,
-			      xercesc::DOMElement*);
     };
 
     /**
@@ -107,9 +107,9 @@ namespace vcsn
     template <class S, class T>
     struct xml_chooser<Transducer<S>, T> : xml_chooser_base<Transducer<S>, T>
     {
-      const char* choose_start_tag();
-      void create_type_tag(const Element<Transducer<S>, T>&,
-			   xercesc::DOMDocument*, xercesc::DOMElement*);
+	const char* choose_start_tag();
+	void create_type_tag(const Element<Transducer<S>, T>&,
+			     xercesc::DOMDocument*, xercesc::DOMElement*);
     };
 
     /**
@@ -121,19 +121,19 @@ namespace vcsn
      * @param M2	Automaton second monoid type.
      *
      */
-# define TParmFMP						\
-      template <class S, class T, class M1, class M2>
-# define FMPtype							   \
-      Automata<								   \
-      vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> >  \
+# define TParmFMP					\
+    template <class S, class T, class M1, class M2>
+# define FMPtype							\
+    Automata<								\
+      vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
       >, T
 
     TParmFMP
     struct xml_chooser<FMPtype> : xml_chooser_base<FMPtype>
     {
-      const char* choose_start_tag();
-      void create_type_tag(const Element<FMPtype>&, xercesc::DOMDocument*,
-			   xercesc::DOMElement*);
+	const char* choose_start_tag();
+	void create_type_tag(const Element<FMPtype>&, xercesc::DOMDocument*,
+			     xercesc::DOMElement*);
     };
 
 

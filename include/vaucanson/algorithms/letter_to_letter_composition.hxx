@@ -35,7 +35,7 @@ namespace vcsn {
     typedef Element<Self, T> transducer_t;
     AUTOMATON_TYPES(transducer_t);
     typedef std::map<std::pair<hstate_t, hstate_t>, hstate_t> assoc_t;
-    typedef std::set<hedge_t> delta_ret_t;
+    typedef std::set<htransition_t> delta_ret_t;
 
     semiring_t output_series(f.series().semiring().semiring(),
 			     f.series().semiring().monoid());
@@ -49,53 +49,53 @@ namespace vcsn {
 
     for_each_state(s, f)
       for_each_state(t, g)
-      {
-	hstate_t ns = output.add_state();
-	conv[std::make_pair(*s, *t)] = ns;
-	output.set_initial(ns,
-			   f.get_initial(*s) * g.get_initial(*t));
-	output.set_final(ns,
-			 f.get_final(*s) * g.get_final(*t));
+    {
+      hstate_t ns = output.add_state();
+      conv[std::make_pair(*s, *t)] = ns;
+      output.set_initial(ns,
+			 f.get_initial(*s) * g.get_initial(*t));
+      output.set_final(ns,
+		       f.get_final(*s) * g.get_final(*t));
 
-      }
+    }
 
     for_each_state(s, f)
       for_each_state(t, g)
+    {
+      f_delta_ret.clear();
+      g_delta_ret.clear();
+
+      f.deltac(f_delta_ret, *s, delta_kind::transitions());
+      g.deltac(g_delta_ret, *t, delta_kind::transitions());
+
+      for_all_const_(delta_ret_t, lhs_e, f_delta_ret)
       {
-	f_delta_ret.clear();
-	g_delta_ret.clear();
-
-	f.deltac(f_delta_ret, *s, delta_kind::edges());
-	g.deltac(g_delta_ret, *t, delta_kind::edges());
-
-	for_all_const_(delta_ret_t, lhs_e, f_delta_ret)
+	series_set_elt_t l = f.series_of(*lhs_e);
+	for_all_const_(delta_ret_t, rhs_e, g_delta_ret)
+	{
+	  series_set_elt_t l_ = g.series_of(*rhs_e);
+	  series_set_elt_t l__(series);
+	  typedef typename series_set_t::support_t support_t;
+	  for_all_const_(support_t, supp, l.supp())
 	  {
-	    series_set_elt_t l = f.series_of(*lhs_e);
-	    for_all_const_(delta_ret_t, rhs_e, g_delta_ret)
-	      {
-		series_set_elt_t l_ = g.series_of(*rhs_e);
-		series_set_elt_t l__(series);
-		typedef typename series_set_t::support_t support_t;
-		for_all_const_(support_t, supp, l.supp())
-		  {
-		    semiring_elt_t ol = l.get(*supp);
-		    typedef typename semiring_elt_t::support_t wsupport_t;
-		    wsupport_t wsupp = ol.supp();
-		    series_set_t ts(series, monoid_elt_t(*supp));
-		    for_all_const_(wsupport_t, ss, wsupp)
-		      l__ += ts * l_.get(*ss);
-		  }
-		if (l__ != zero)
-		  {
-		    output.add_series_edge(conv[std::make_pair(*s, *t)],
-					  conv[std::make_pair(f.aim_of(*lhs_e),
-							      g.aim_of(*rhs_e))
-					  ],
-					  l__);
-		  }
-	      }
+	    semiring_elt_t ol = l.get(*supp);
+	    typedef typename semiring_elt_t::support_t wsupport_t;
+	    wsupport_t wsupp = ol.supp();
+	    series_set_t ts(series, monoid_elt_t(*supp));
+	    for_all_const_(wsupport_t, ss, wsupp)
+	      l__ += ts * l_.get(*ss);
 	  }
+	  if (l__ != zero)
+	  {
+	    output.add_series_transition(conv[std::make_pair(*s, *t)],
+					 conv[std::make_pair(f.aim_of(*lhs_e),
+							     g.aim_of(*rhs_e))
+					   ],
+					 l__);
+	  }
+	}
       }
+    }
     return output;
   }
 

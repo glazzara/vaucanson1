@@ -81,7 +81,7 @@ namespace vcsn {
 
     // We can start with good suppositions
     if ((a.states().size() != b.states().size())
-	|| (a.edges().size() != b.edges().size())
+	|| (a.transitions().size() != b.transitions().size())
 	|| (a.initial().size() != b.initial().size())
 	|| (a.final().size() != b.final().size()))
       return false;
@@ -127,9 +127,9 @@ namespace vcsn {
     // The automata are isomorphic unless one proves the contrary
     iso = true;
 
-    // Constructs lists of deterministic ingoing and outgoing edges
+    // Constructs lists of deterministic ingoing and outgoing transitions
     // for each state (delta_det_in[i] = list of deterministic ingoing
-    // edges for state i, idem for delta_det_out[i])
+    // transitions for state i, idem for delta_det_out[i])
 
     std::vector< std::list<int> > delta_det_in_A(a.states().size());
     std::vector< std::list<int> > delta_det_out_A(a.states().size());
@@ -142,7 +142,7 @@ namespace vcsn {
       if ((Sa.delta_in[i]).size() > 0)
       {
 	it_int = Sa.delta_in[i].begin();
-        // Number of edges with the same label
+	// Number of transitions with the same label
 	j = 1;
 	for (it_int++; it_int != Sa.delta_in[i].end(); it_int++)
 	{
@@ -151,13 +151,13 @@ namespace vcsn {
 	  k = *(--it_int);
 	  it_int++;
 	  // New label?
-	  if (Sa.edges_labels[*it_int] != Sa.edges_labels[k])
-	    // The last edge is deterministic?
+	  if (Sa.transitions_labels[*it_int] != Sa.transitions_labels[k])
+	    // The last transition is deterministic?
 	    if (j == 1)
 	      delta_det_in_A[i].push_back(k);
-            // Several edges with the same label?
+	  // Several transitions with the same label?
 	    else
-	      // Does nothing. A series of edges with a new label begins.
+	      // Does nothing. A series of transitions with a new label begins.
 	      j = 1;
 	  // Same label?
 	  else
@@ -173,7 +173,7 @@ namespace vcsn {
       if ((Sa.delta_out[i]).size() > 0)
       {
 	it_int = Sa.delta_out[i].begin();
-	// Number of edges with the same label
+	// Number of transitions with the same label
 	j = 1;
 	for (it_int++; it_int != Sa.delta_out[i].end(); it_int++)
 	{
@@ -182,13 +182,13 @@ namespace vcsn {
 	  k = *(--it_int);
 	  it_int++;
 	  // New label?
-	  if (Sa.edges_labels[*it_int] != Sa.edges_labels[k])
-	    // The last edge is deterministic?
+	  if (Sa.transitions_labels[*it_int] != Sa.transitions_labels[k])
+	    // The last transition is deterministic?
 	    if (j == 1)
 	      delta_det_out_A[i].push_back(k);
- 	    // Several edges with the same label?
+	  // Several transitions with the same label?
 	    else
-	      // Does nothing. A series of edges with a new label begins.
+	      // Does nothing. A series of transitions with a new label begins.
 	      j = 1;
 	  // Same label?
 	  else
@@ -209,7 +209,7 @@ namespace vcsn {
       if ((Sb.delta_in[i]).size() > 0)
       {
 	it_int = Sb.delta_in[i].begin();
-	// Number of edges with the same label
+	// Number of transitions with the same label
 	j = 1;
 	for (it_int++; it_int != Sb.delta_in[i].end(); it_int++)
 	{
@@ -218,13 +218,13 @@ namespace vcsn {
 	  k = *(--it_int);
 	  it_int++;
 	  // New label?
-	  if (Sb.edges_labels[*it_int] != Sb.edges_labels[k])
-	    // The last edge is deterministic?
+	  if (Sb.transitions_labels[*it_int] != Sb.transitions_labels[k])
+	    // The last transition is deterministic?
 	    if (j == 1)
 	      delta_det_in_B[i].push_back(k);
-	    // Several edges with the same label?
+	  // Several transitions with the same label?
 	    else
-	      // Does nothing. A series of edges with a new label begins.
+	      // Does nothing. A series of transitions with a new label begins.
 	      j = 1;
 	  // Same label?
 	  else
@@ -240,7 +240,7 @@ namespace vcsn {
       if ((Sb.delta_out[i]).size() > 0)
       {
 	it_int = Sb.delta_out[i].begin();
-	// Number of edges with the same label
+	// Number of transitions with the same label
 	j = 1;
 	for (it_int++; it_int != Sb.delta_out[i].end(); it_int++)
 	{
@@ -249,13 +249,13 @@ namespace vcsn {
 	  k = *(--it_int);
 	  it_int++;
 	  // New label?
-	  if (Sb.edges_labels[*it_int] != Sb.edges_labels[k])
-	    // The last edge is deterministic?
+	  if (Sb.transitions_labels[*it_int] != Sb.transitions_labels[k])
+	    // The last transition is deterministic?
 	    if (j == 1)
 	      delta_det_out_B[i].push_back(k);
-	    // Several edges with the same label?
+	  // Several transitions with the same label?
 	    else
-	      // Does nothing. A series of edges with a new label begins.
+	      // Does nothing. A series of transitions with a new label begins.
 	      j = 1;
 	  // Same label?
 	  else
@@ -271,35 +271,35 @@ namespace vcsn {
     }
 
     // Constructs Tries of classes of states with the same sequence of
-    // ingoing and outgoing edges in lex. order (for automaton A)
+    // ingoing and outgoing transitions in lex. order (for automaton A)
     for (i = 0; i < static_cast<int>(a.states().size()); i++)
     {
-      // Vector all_edges_lex contains the sequence of labels of
-      // ingoing and outgoing edges of state i in lex. order,
+      // Vector all_transitions_lex contains the sequence of labels of
+      // ingoing and outgoing transitions of state i in lex. order,
       // separated by a mark (-1)
-      std::vector<int> all_edges_lex((Sa.delta_in[i]).size() +
-				     (Sa.delta_out[i]).size() + 1);
+      std::vector<int> all_transitions_lex((Sa.delta_in[i]).size() +
+					   (Sa.delta_out[i]).size() + 1);
 
-      // First stores the sequence of ingoing edges
+      // First stores the sequence of ingoing transitions
       for (it_int = Sa.delta_in[i].begin();
 	   it_int != Sa.delta_in[i].end(); ++it_int)
-	all_edges_lex.push_back(Sa.edges_labels[*it_int]);
+	all_transitions_lex.push_back(Sa.transitions_labels[*it_int]);
 
-      all_edges_lex.push_back(-1);
-      // Next, outgoing edges
+      all_transitions_lex.push_back(-1);
+      // Next, outgoing transitions
       for (it_int = Sa.delta_out[i].begin();
 	   it_int != Sa.delta_out[i].end(); ++it_int)
-	all_edges_lex.push_back(Sa.edges_labels[*it_int]);
+	all_transitions_lex.push_back(Sa.transitions_labels[*it_int]);
 
       // Gets the node of the correct Trie (Trie of initial, final or normal
       // states) for the sequence of transitions of state i
       if (a.is_initial(Sa.states[i]))
-	T_aux = T_I->insert(all_edges_lex);
+	T_aux = T_I->insert(all_transitions_lex);
       else
 	if (a.is_final(Sa.states[i]))
-	  T_aux = T_T->insert(all_edges_lex);
+	  T_aux = T_T->insert(all_transitions_lex);
 	else
-	  T_aux = T_Q_IT->insert(all_edges_lex);
+	  T_aux = T_Q_IT->insert(all_transitions_lex);
 
       // New class?
       if ((T_aux->A).size() == 0)
@@ -321,34 +321,34 @@ namespace vcsn {
 
 
     // Constructs Tries of classes of states with the same sequence of
-    // ingoing and outgoing edges in lex. order (for automaton B)
+    // ingoing and outgoing transitions in lex. order (for automaton B)
     for (i = 0; (i < static_cast<int>(b.states().size())) && iso; i++)
     {
-      // Vector all_edges_lex contains the sequence of labels of
-      // ingoing and outgoing edges of state i in lex. order,
+      // Vector all_transitions_lex contains the sequence of labels of
+      // ingoing and outgoing transitions of state i in lex. order,
       // separated by a mark (-1)
-      std::vector<int> all_edges_lex((Sb.delta_in[i]).size() +
-				     (Sb.delta_out[i]).size() + 1);
-      // First stores the sequence of ingoing edges
+      std::vector<int> all_transitions_lex((Sb.delta_in[i]).size() +
+					   (Sb.delta_out[i]).size() + 1);
+      // First stores the sequence of ingoing transitions
       for (it_int = Sb.delta_in[i].begin();
 	   it_int != Sb.delta_in[i].end(); ++it_int)
-	all_edges_lex.push_back(Sb.edges_labels[*it_int]);
+	all_transitions_lex.push_back(Sb.transitions_labels[*it_int]);
 
-      all_edges_lex.push_back(-1);
-      // Next, outgoing edges
+      all_transitions_lex.push_back(-1);
+      // Next, outgoing transitions
       for (it_int = Sb.delta_out[i].begin();
 	   it_int != Sb.delta_out[i].end(); ++it_int)
-	all_edges_lex.push_back(Sb.edges_labels[*it_int]);
+	all_transitions_lex.push_back(Sb.transitions_labels[*it_int]);
 
       // Gets the node of the correct Trie (Trie of initial, final or
       // normal states) for the sequence of transitions of state i
       if (b.is_initial(Sa.states[i]))
-	T_aux = T_I->insert(all_edges_lex);
+	T_aux = T_I->insert(all_transitions_lex);
       else
 	if (b.is_final(Sa.states[i]))
-	  T_aux = T_T->insert(all_edges_lex);
+	  T_aux = T_T->insert(all_transitions_lex);
 	else
-	  T_aux = T_Q_IT->insert(all_edges_lex);
+	  T_aux = T_Q_IT->insert(all_transitions_lex);
 
       // Does the class of state i have more states for automaton B
       // than those for automaton A ?
@@ -430,22 +430,22 @@ namespace vcsn {
       j = perm_A[i = U.front()];
       U.pop_front();
 
-      // Deterministic ingoing and outgoing edges are analyzed
+      // Deterministic ingoing and outgoing transitions are analyzed
 
       // As states i and j are already associated, they belong to
       // the same class, then have the same sequence of
-      // deterministic edges.
+      // deterministic transitions.
 
-      // First analyzes co-deterministic ingoing edges
+      // First analyzes co-deterministic ingoing transitions
       it_int = delta_det_in_A[i].begin();
       it_int_aux = delta_det_in_B[j].begin();
       for (; it_int != delta_det_in_A[i].end() and iso; ++it_int, ++it_int_aux)
       {
 
 	// The states being considered are the origins of current
-	// co-deterministic edges (k for automaton A, l for B)
-	k = Sa.origins_edges[*it_int];
-	l = Sb.origins_edges[*it_int_aux];
+	// co-deterministic transitions (k for automaton A, l for B)
+	k = Sa.origins_transitions[*it_int];
+	l = Sb.origins_transitions[*it_int_aux];
 
 	// Has state k already been visited?
 	if (perm_A[k] >= 0)
@@ -460,13 +460,13 @@ namespace vcsn {
 	  // true for state l.
 	  if (perm_B[l] != -1)
 	    iso = false;
-	  // Tries to associate states k and l
+	// Tries to associate states k and l
 	  else
 	    // Does k and l belongs to different classes?
 	    if (class_state_A[k] != class_state_B[l])
 	      iso = false;
-	    // The states k and l belong to the same class and can be
-	    // associated.
+	// The states k and l belong to the same class and can be
+	// associated.
 	    else
 	    {
 	      perm_A[perm_B[l] = k] = l;
@@ -499,16 +499,16 @@ namespace vcsn {
       }
 
 
-      // Next analyzes deterministic outgoing edges
+      // Next analyzes deterministic outgoing transitions
       it_int = delta_det_out_A[i].begin();
       it_int_aux = delta_det_out_B[j].begin();
       for (; it_int != delta_det_out_A[i].end() && iso; ++it_int, ++it_int_aux)
       {
 
 	// The states being considered are the ends of current
-	// deterministic edges (k for automaton A, l for B)
-	k = Sa.aims_edges[*it_int];
-	l = Sb.aims_edges[*it_int_aux];
+	// deterministic transitions (k for automaton A, l for B)
+	k = Sa.aims_transitions[*it_int];
+	l = Sb.aims_transitions[*it_int_aux];
 
 	// Has state k already been visited?
 	if (perm_A[k] >= 0)
@@ -522,12 +522,12 @@ namespace vcsn {
 	  // State k has not already been visited. The same must be true for state l.
 	  if (perm_B[l] != -1)
 	    iso = false;
-	  // Tries to associate states k and l
+	// Tries to associate states k and l
 	  else
 	    // Does k and l belongs to different classes?
 	    if (class_state_A[k] != class_state_B[l])
 	      iso = false;
-            // The states belong to the same class and can be associated.
+	// The states belong to the same class and can be associated.
 	    else
 	    {
 	      perm_A[perm_B[l] = k] = l;
@@ -575,7 +575,7 @@ namespace vcsn {
     for (itr_C = C.begin(); itr_C != C.end(); ++itr_C)
       l += (*itr_C)->A.size();
 
-    // Vectors of classes of remaining states.  States in the same
+    // Vectors of classes of remaining states.	States in the same
     // class are stored contiguously, and in the case of vector for
     // automaton B, classes are separated by two enTries: one with -1,
     // denoting the end of the class, and the following with the
@@ -587,12 +587,12 @@ namespace vcsn {
     std::vector<int> current(l);
 
 
-    // Vector for test of correspondence of edges of states already
+    // Vector for test of correspondence of transitions of states already
     // attributed
-    std::vector<int> correspondence_edges(a.states().size());
+    std::vector<int> correspondence_transitions(a.states().size());
 
     for (i = 0; i < static_cast<int>(a.states().size()); ++i)
-      correspondence_edges[i] = 0;
+      correspondence_transitions[i] = 0;
 
     // Stores states in C_A and C_B. Partial results of the
     // backtracking are stored in vector current, that is initialized
@@ -659,7 +659,7 @@ namespace vcsn {
 	perm_A[C_A[i]] = C_B[j];
 	perm_B[C_B[j]] = C_A[i];
 
-	// Tests correspondence of ingoing edges, considering
+	// Tests correspondence of ingoing transitions, considering
 	// states that are already in the permutation.
 
 	std::list<int>::iterator int_itr_B;
@@ -672,55 +672,56 @@ namespace vcsn {
 	// with the same label. The sequence begins at it_int
 	while ((it_int != Sa.delta_in[C_A[i]].end()) && b)
 	{
-	  // Searches for origins of ingoing edges for current
+	  // Searches for origins of ingoing transitions for current
 	  // label that have already been associated. For each
-	  // state visited, its position in correspondence_edges
+	  // state visited, its position in correspondence_transitions
 	  // is incremented.
 	  k = 0;
 	  for (it_int_aux = it_int;
 	       (it_int_aux != Sa.delta_in[C_A[i]].end()) &&
-		 (Sa.edges_labels[*it_int_aux] == Sa.edges_labels[*it_int]);
+		 (Sa.transitions_labels[*it_int_aux] ==
+		  Sa.transitions_labels[*it_int]);
 	       it_int_aux++, k++)
-	    // Is the origin of current edge associated?
-	    if (perm_A[Sa.origins_edges[*it_int_aux]] >= 0)
-	      correspondence_edges[Sa.origins_edges[*it_int_aux]]++;
+	    // Is the origin of current transition associated?
+	    if (perm_A[Sa.origins_transitions[*it_int_aux]] >= 0)
+	      correspondence_transitions[Sa.origins_transitions[*it_int_aux]]++;
 
-	  // Here, k = number of ingoing edges for current label
+	  // Here, k = number of ingoing transitions for current label
 
-	  // Idem for ingoing edges of state C_B[j], but positions in
-	  // correspondence_edges are decremented.
+	  // Idem for ingoing transitions of state C_B[j], but positions in
+	  // correspondence_transitions are decremented.
 	  for (; (k > 0) && b; it_int_B++, k--)
-	    // Has the origin of current edge already been visited?
-	    if (perm_B[Sb.origins_edges[*it_int_B]] >= 0)
+	    // Has the origin of current transition already been visited?
+	    if (perm_B[Sb.origins_transitions[*it_int_B]] >= 0)
 	      // Trying to decrement a position with 0 means that the
 	      // corresponding state in A is not correct.
-	      if (correspondence_edges[perm_B[Sb.origins_edges[*it_int_B]]] == 0)
+	      if (correspondence_transitions[perm_B[Sb.origins_transitions[*it_int_B]]] == 0)
 		// The association of C_A[i] and C_B[j] is impossible
 		b = false;
 	      else
-		correspondence_edges[perm_B[Sb.origins_edges[*it_int_B]]]--;
+		correspondence_transitions[perm_B[Sb.origins_transitions[*it_int_B]]]--;
 
-	  // Verifies correspondence_edges. The correspondence for
-	  // current label is correct iff correspondence_edges[l] = 0
-	  // for all origin l of ingoing edges of C_A[i] labelled by
+	  // Verifies correspondence_transitions. The correspondence for
+	  // current label is correct iff correspondence_transitions[l] = 0
+	  // for all origin l of ingoing transitions of C_A[i] labelled by
 	  // the current label.
-	  // For this, int_itr visits all edges until int_itr_aux.
+	  // For this, int_itr visits all transitions until int_itr_aux.
 
 	  for (; it_int != it_int_aux; it_int++)
 	  {
-	    if (perm_A[Sa.origins_edges[*it_int]] >= 0)
-	      if (correspondence_edges[Sa.origins_edges[*it_int]] != 0)
+	    if (perm_A[Sa.origins_transitions[*it_int]] >= 0)
+	      if (correspondence_transitions[Sa.origins_transitions[*it_int]] != 0)
 		b = false;
 	    // All positions must be 0 for next iteration
-	    correspondence_edges[Sa.origins_edges[*it_int]] = 0;
+	    correspondence_transitions[Sa.origins_transitions[*it_int]] = 0;
 	  }
 
-	} // end while for ingoing edges
+	} // end while for ingoing transitions
 
-	// Ok for ingoing edges? Tests outgoing edges.
+	// Ok for ingoing transitions? Tests outgoing transitions.
 	if (b)
 	{
-	  // Tests correspondence of outgoing edges, considering
+	  // Tests correspondence of outgoing transitions, considering
 	  // states that are already in the permutation.
 
 	  std::list<int>::iterator int_itr_B;
@@ -732,54 +733,55 @@ namespace vcsn {
 	  // with the same label. The sequence begins at it_int
 	  while ((it_int != Sa.delta_out[C_A[i]].end()) && b)
 	  {
-	    // Searches for ends of outgoing edges for current
+	    // Searches for ends of outgoing transitions for current
 	    // label that have already been associated. For each
-	    // state visited, its position in correspondence_edges
+	    // state visited, its position in correspondence_transitions
 	    // is incremented.
 	    k = 0;
 	    for (it_int_aux = it_int;
 		 (it_int_aux != Sa.delta_out[C_A[i]].end()) &&
-		   (Sa.edges_labels[*it_int_aux] == Sa.edges_labels[*it_int]);
+		   (Sa.transitions_labels[*it_int_aux] ==
+		    Sa.transitions_labels[*it_int]);
 		 it_int_aux++, k++)
-	      // Is the end of current edge associated?
-	      if (perm_A[Sa.aims_edges[*it_int_aux]] >= 0)
-		correspondence_edges[Sa.aims_edges[*it_int_aux]]++;
+	      // Is the end of current transition associated?
+	      if (perm_A[Sa.aims_transitions[*it_int_aux]] >= 0)
+		correspondence_transitions[Sa.aims_transitions[*it_int_aux]]++;
 
-	    // Here, k = number of outgoing edges for current label
+	    // Here, k = number of outgoing transitions for current label
 
-	    // Idem for outgoing edges of state C_B[j], but positions in
-	    // correspondence_edges are decremented.
+	    // Idem for outgoing transitions of state C_B[j], but positions in
+	    // correspondence_transitions are decremented.
 	    for (; (k > 0) && b; it_int_B++, k--)
-	      // Has the end of current edge already been visited?
-	      if (perm_B[Sb.aims_edges[*it_int_B]] >= 0)
+	      // Has the end of current transition already been visited?
+	      if (perm_B[Sb.aims_transitions[*it_int_B]] >= 0)
 		// Trying to decrement a position with 0 means that
 		// the corresponding state in A is not correct.
-		if (correspondence_edges[perm_B[Sb.aims_edges[*it_int_B]]] == 0)
+		if (correspondence_transitions[perm_B[Sb.aims_transitions[*it_int_B]]] == 0)
 		  // The association of C_A[i] and C_B[j] is
 		  // impossible
 		  b = false;
 		else
-		  correspondence_edges[perm_B[Sb.aims_edges[*it_int_B]]]--;
+		  correspondence_transitions[perm_B[Sb.aims_transitions[*it_int_B]]]--;
 
-	    // Verifies correspondence_edges. The correspondence
+	    // Verifies correspondence_transitions. The correspondence
 	    // for current label is correct iff
-	    // correspondence_edges[l] = 0 for all end l of
-	    // outgoing edges of C_A[i] labelled by the current
+	    // correspondence_transitions[l] = 0 for all end l of
+	    // outgoing transitions of C_A[i] labelled by the current
 	    // label.
-	    // For this, int_itr visits all edges until int_itr_aux.
+	    // For this, int_itr visits all transitions until int_itr_aux.
 
 	    for (; it_int != it_int_aux; it_int++)
 	    {
-	      if (perm_A[Sa.aims_edges[*it_int]] >= 0)
-		if (correspondence_edges[Sa.aims_edges[*it_int]] != 0)
+	      if (perm_A[Sa.aims_transitions[*it_int]] >= 0)
+		if (correspondence_transitions[Sa.aims_transitions[*it_int]] != 0)
 		  b = false;
 	      // All positions must be 0 for next iteration
-	      correspondence_edges[Sa.aims_edges[*it_int]] = 0;
+	      correspondence_transitions[Sa.aims_transitions[*it_int]] = 0;
 	    }
 
-	  } // End while for outgoing edges
+	  } // End while for outgoing transitions
 
-	} // End of test of outgoing edges
+	} // End of test of outgoing transitions
 
 	// States C_A[i] and C_B[j] can be associated.
 	if (b)

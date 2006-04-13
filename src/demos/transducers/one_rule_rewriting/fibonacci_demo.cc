@@ -1,17 +1,17 @@
 // fibonacci_demo.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_automaton.hh>
@@ -32,21 +32,21 @@ eval_an_expression(const vcsn::boolean_transducer::automaton_t& t)
   std::string		user_string;
 
   do
+  {
+    std::cout << "Enter your expression over " << alphabet
+	      <<" (\"next\", otherwise): ";
+    std::getline(std::cin, user_string);
+    if (user_string != "next")
     {
-      std::cout << "Enter your expression over " << alphabet
-		<<" (\"next\", otherwise): ";
-      std::getline(std::cin, user_string);
-      if (user_string != "next")
-	{
-	  using namespace vcsn::boolean_automaton;
-	  using namespace vcsn::rat; // For setpm and MODE_STAR.
+      using namespace vcsn::boolean_automaton;
+      using namespace vcsn::rat; // For setpm and MODE_STAR.
 
-	  rat_exp_t exp = new_rat_exp(alphabet, user_string);
-	  std::cout << setpm (MODE_STAR) << expand(evaluation(t, exp))
-		    << std::endl;
-	}
-
+      rat_exp_t exp = new_rat_exp(alphabet, user_string);
+      std::cout << setpm (MODE_STAR) << expand(evaluation(t, exp))
+		<< std::endl;
     }
+
+  }
   while (user_string != "next");
 }
 
@@ -64,7 +64,7 @@ int main()
   A.insert('a');
   A.insert('b');
 
- /*----------------------.
+  /*----------------------.
   | Creation of fibleft.  |
   `----------------------*/
 
@@ -74,12 +74,12 @@ int main()
   hstate_t q = fibleft.add_state();
   hstate_t r = fibleft.add_state();
 
-  fibleft.add_io_edge(p, p, "b", "b");
-  fibleft.add_io_edge(p, q, "a", "");
-  fibleft.add_io_edge(q, q, "a", "a");
-  fibleft.add_io_edge(q, r, "b", "");
-  fibleft.add_io_edge(r, q, "a", "ab");
-  fibleft.add_io_edge(r, q, "b", "ba");
+  fibleft.add_io_transition(p, p, "b", "b");
+  fibleft.add_io_transition(p, q, "a", "");
+  fibleft.add_io_transition(q, q, "a", "a");
+  fibleft.add_io_transition(q, r, "b", "");
+  fibleft.add_io_transition(r, q, "a", "ab");
+  fibleft.add_io_transition(r, q, "b", "ba");
 
   fibleft.set_o_final(q, "a");
 
@@ -106,12 +106,12 @@ int main()
   hstate_t t = fibright.add_state();
   hstate_t u = fibright.add_state();
 
-  fibright.add_io_edge(s, s, "b", "b");
-  fibright.add_io_edge(s, t, "b", "");
-  fibright.add_io_edge(t, s, "a", "aa");
-  fibright.add_io_edge(t, u, "b", "");
-  fibright.add_io_edge(u, t, "a", "ab");
-  fibright.add_io_edge(u, u, "a", "a");
+  fibright.add_io_transition(s, s, "b", "b");
+  fibright.add_io_transition(s, t, "b", "");
+  fibright.add_io_transition(t, s, "a", "aa");
+  fibright.add_io_transition(t, u, "b", "");
+  fibright.add_io_transition(u, t, "a", "ab");
+  fibright.add_io_transition(u, u, "a", "a");
 
   fibright.set_o_initial(s, "bb");
 

@@ -40,31 +40,31 @@ namespace vcsn {
     typedef typename series_set_elt_t::support_t support_t;
 
     for_each_initial_state(i, a)
-      {
-	series_set_elt_t label = a.get_initial(*i);
-	for (typename support_t::const_iterator it = label.supp().begin();
-	     it != label.supp().end(); ++it)
-	  if ((*it).first.size() > 1 || (*it).second.size() > 1)
-	    return false;
-      }
+    {
+      series_set_elt_t label = a.get_initial(*i);
+      for (typename support_t::const_iterator it = label.supp().begin();
+	   it != label.supp().end(); ++it)
+	if ((*it).first.size() > 1 || (*it).second.size() > 1)
+	  return false;
+    }
 
     for_each_final_state(f, a)
-      {
-	series_set_elt_t label = a.get_initial(*f);
-	for (typename support_t::const_iterator it = label.supp().begin();
-	     it != label.supp().end(); ++it)
-	  if ((*it).first.size() > 1 || (*it).second.size() > 1)
-	    return false;
-      }
+    {
+      series_set_elt_t label = a.get_initial(*f);
+      for (typename support_t::const_iterator it = label.supp().begin();
+	   it != label.supp().end(); ++it)
+	if ((*it).first.size() > 1 || (*it).second.size() > 1)
+	  return false;
+    }
 
-    for_each_edge(e, a)
-      {
-	series_set_elt_t label = a.series_of(*e);
-	for (typename support_t::const_iterator it = label.supp().begin();
-	     it != label.supp().end(); ++it)
-	  if ((*it).first.size() > 1 || (*it).second.size() > 1)
-	    return false;
-      }
+    for_each_transition(e, a)
+    {
+      series_set_elt_t label = a.series_of(*e);
+      for (typename support_t::const_iterator it = label.supp().begin();
+	   it != label.supp().end(); ++it)
+	if ((*it).first.size() > 1 || (*it).second.size() > 1)
+	  return false;
+    }
 
     return true;
   }
@@ -114,58 +114,58 @@ namespace vcsn {
     unsigned int size = std::max(w1.size(), w2.size());
 
     if (size > 1)
+    {
+      monoid_elt_t m(a.structure().series().monoid());
+
+      semiring_elt_t s = label.get(m1);
+      series_set_elt_t in_series(a.structure().series());
+
+      m = std::make_pair(cpt1 < size1 ? w1.substr(cpt1++, 1) : m1_ident,
+			 cpt2 < size2 ? w2.substr(cpt2++, 1) : m2_ident);
+
+      in_series.assoc(m, s);
+
+      if (initial)
       {
-	monoid_elt_t m(a.structure().series().monoid());
-
-	semiring_elt_t s = label.get(m1);
-	series_set_elt_t in_series(a.structure().series());
-
-	m = std::make_pair(cpt1 < size1 ? w1.substr(cpt1++, 1) : m1_ident,
-			   cpt2 < size2 ? w2.substr(cpt2++, 1) : m2_ident);
-
-	in_series.assoc(m, s);
-
- 	if (initial)
-	  {
-	    s0 = a.add_state();
-	    a.set_initial(s0, in_series);
-	    a.unset_initial(stop);
-	    s1 = s0;
-	  }
-	else
-	  {
-	    s0 = start;
-	    s1 = a.add_state();
-	    a.add_series_edge(s0, s1, in_series);
-	  }
-
-	for (unsigned int i = 1; i < size - 1; ++i)
-	  {
-	    m = std::make_pair(cpt1 < size1 ? w1.substr(cpt1++, 1) : m1_ident,
-			       cpt2 < size2 ? w2.substr(cpt2++, 1) : m2_ident);
-	    s0 = s1;
-	    s1 = a.add_state();
-	    series_set_elt_t series(a.structure().series());
-	    series.assoc(m, s_ident);
-	    a.add_series_edge(s0, s1, series);
-	  }
-
-	m = std::make_pair(cpt1 < size1 ? w1.substr(cpt1++, 1) : m1_ident,
-			   cpt2 < size2 ? w2.substr(cpt2++, 1) : m2_ident);
-
-	series_set_elt_t out_series(a.structure().series());
-	out_series.assoc(m, s_ident);
-
-	if (final)
-	  {
-	    a.unset_final(start);
-	    a.set_final(s1, out_series);
-	  }
-	else
-	  a.add_series_edge(s1, stop, out_series);
-
-	return 1;
+	s0 = a.add_state();
+	a.set_initial(s0, in_series);
+	a.unset_initial(stop);
+	s1 = s0;
       }
+      else
+      {
+	s0 = start;
+	s1 = a.add_state();
+	a.add_series_transition(s0, s1, in_series);
+      }
+
+      for (unsigned int i = 1; i < size - 1; ++i)
+      {
+	m = std::make_pair(cpt1 < size1 ? w1.substr(cpt1++, 1) : m1_ident,
+			   cpt2 < size2 ? w2.substr(cpt2++, 1) : m2_ident);
+	s0 = s1;
+	s1 = a.add_state();
+	series_set_elt_t series(a.structure().series());
+	series.assoc(m, s_ident);
+	a.add_series_transition(s0, s1, series);
+      }
+
+      m = std::make_pair(cpt1 < size1 ? w1.substr(cpt1++, 1) : m1_ident,
+			 cpt2 < size2 ? w2.substr(cpt2++, 1) : m2_ident);
+
+      series_set_elt_t out_series(a.structure().series());
+      out_series.assoc(m, s_ident);
+
+      if (final)
+      {
+	a.unset_final(start);
+	a.set_final(s1, out_series);
+      }
+      else
+	a.add_series_transition(s1, stop, out_series);
+
+      return 1;
+    }
 
     return 0;
   }
@@ -182,7 +182,7 @@ namespace vcsn {
 
     auto_copy(res, cut_up(a));
 
-    edges_t edges = res.value().edges();
+    transitions_t transitions = res.transitions();
     vector_t i_states; i_states.reserve(res.initial().size());
     vector_t f_states; f_states.reserve(res.final().size());
 
@@ -199,10 +199,10 @@ namespace vcsn {
       do_sub_normalize_transition(res, *f, hstate_t(),
 				  res.get_final(*f), false, true);
 
-    for_each_(edges_t, e, edges)
+    for_each_(transitions_t, e, transitions)
       if (do_sub_normalize_transition(res, res.origin_of(*e), res.aim_of(*e),
 				      res.series_of(*e), false, false))
-	res.del_edge(*e);
+	res.del_transition(*e);
   }
 
 

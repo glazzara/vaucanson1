@@ -41,14 +41,14 @@ namespace vcsn
   //@{
   /// Compute the equivalent transducer of a FMP automaton.
   /// Please note that for the moment this function works
-  /// only if the support of each edge is finite.
+  /// only if the support of each transition is finite.
   ///
   /// Algorithm :
-  /// If the FMP contains edges with "complex" expression (E),
-  ///    i.e. infinite support,
-  ///    then Thompson of E.
+  /// If the FMP contains transitions with "complex" expression (E),
+  ///	 i.e. infinite support,
+  ///	 then Thompson of E.
   /// With the resulting automaton apply a conversion.
-  ///    i.e. (a,x) -> a|x
+  ///	 i.e. (a,x) -> a|x
 
   template<typename S, typename T,
 	   typename SS, typename TT>

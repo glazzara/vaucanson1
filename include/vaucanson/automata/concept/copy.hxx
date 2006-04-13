@@ -36,22 +36,22 @@ namespace vcsn
     for (typename rhs_t::state_iterator i = from.states().begin();
 	 i != from.states().end();
 	 ++i)
-      {
-	hstate_t s = dst.add_state();
-	dst_series_set_elt_t s_(from.get_final(*i));
-	dst.set_final(s, s_);
-	dst_series_set_elt_t s__(from.get_initial(*i));
-	dst.set_initial(s, s__);
-	stmap[*i] = s;
-      }
+    {
+      hstate_t s = dst.add_state();
+      dst_series_set_elt_t s_(from.get_final(*i));
+      dst.set_final(s, s_);
+      dst_series_set_elt_t s__(from.get_initial(*i));
+      dst.set_initial(s, s__);
+      stmap[*i] = s;
+    }
 
-    for (typename rhs_t::edge_iterator i = from.edges().begin();
-	 i != from.edges().end();
+    for (typename rhs_t::transition_iterator i = from.transitions().begin();
+	 i != from.transitions().end();
 	 ++i)
-      {
-	dst_series_set_elt_t s(from.series_of(*i));
-	dst.add_series_edge(stmap[from.origin_of(*i)], stmap[from.aim_of(*i)], s);
-      }
+    {
+      dst_series_set_elt_t s(from.series_of(*i));
+      dst.add_series_transition(stmap[from.origin_of(*i)], stmap[from.aim_of(*i)], s);
+    }
     dst_.swap(dst);
   }
 

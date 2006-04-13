@@ -43,16 +43,16 @@ namespace vcsn {
       hstate_t		c	= initial;
 
       for (unsigned i = 0; i < size; ++i)
-	{
-	  hstate_t	next = automaton.add_state();
-	  automaton.add_letter_edge(c, c, 'a');
-	  automaton.add_letter_edge(c, next, 'b');
-	  automaton.set_initial(c);
-	  c = next;
-	}
+      {
+	hstate_t	next = automaton.add_state();
+	automaton.add_letter_transition(c, c, 'a');
+	automaton.add_letter_transition(c, next, 'b');
+	automaton.set_initial(c);
+	c = next;
+      }
       automaton.set_final(c);
       automaton.set_initial(c);
-      automaton.add_letter_edge(c, initial, 'a');
+      automaton.add_letter_transition(c, initial, 'a');
       return automaton;
     }
 

@@ -164,7 +164,7 @@ Where:
   the object must already be constructed, even to be read into.
 
 - ``converter`` is a helper class that is able to convert automaton
-  transitions (edges) to character strings and possibly vice-versa.
+  transitions to character strings and possibly vice-versa.
 
 - ``format`` is a helper class that is able to convert the automaton
   to (and possibly from) a character string, using the converter as an
@@ -332,7 +332,8 @@ What happens in Vaucanson when you write::
  
   - f1 finds a transition from state numbered N to state P, labeled
     with character string S. Then it says to AL1: "hey, create a
-    transition with N, P, and S."  (callback ``AL1.add_edge``). Then:
+    transition with N, P, and S." (callback ``AL1.add_transition``).
+    Then:
 
     - AL1 remembers handler for state N (s1)
 

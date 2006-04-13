@@ -1,17 +1,17 @@
 // thompson_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_LABELED_GRAPHS_THOMPSON_TEST_HH
@@ -41,43 +41,43 @@
     int tr_b = 0;							\
     int tr_1 = 0;							\
     int tr_X = 0;							\
-    for_each_edge(e, au)						\
-      {									\
-	if (au.series_of(*e) == series_set_elt_t (ss, ma))			\
-	  ++tr_a;							\
-	else if (au.series_of(*e) == series_set_elt_t (ss, mb))		\
-	  ++tr_b;							\
-	else if (au.series_of(*e) ==					\
-		 identity_as<series_set_elt_value_t>::of(ss))		\
-	  ++tr_1;							\
-	else								\
-	  ++tr_X;							\
-      }									\
+    for_each_transition(e, au)						\
+    {									\
+      if (au.series_of(*e) == series_set_elt_t (ss, ma))		\
+	++tr_a;								\
+      else if (au.series_of(*e) == series_set_elt_t (ss, mb))		\
+	++tr_b;								\
+      else if (au.series_of(*e) ==					\
+	       identity_as<series_set_elt_value_t>::of(ss))		\
+	++tr_1;								\
+      else								\
+	++tr_X;								\
+    }									\
     TEST(t, "a has consistent transitions.",				\
 	 tr_a == TrA and tr_b == TrB and tr_1 == Tr1 and tr_X == 0);	\
 									\
     TEST(t, "a is normalized.",						\
 	 e == zero_as<exp_t>::of(ss) or is_normalized(au))		\
 									\
-    realtime_here(au);							\
+      realtime_here(au);						\
 									\
     if (e != zero_as<exp_t>::of(ss))					\
+    {									\
+      unsigned i;							\
+      for (i = 0; i < nb_word_test; ++i)				\
       {									\
-	unsigned i;							\
-	for (i = 0; i < nb_word_test; ++i)				\
-	  {								\
-	    monoid_elt_t w = e.choose_from_supp();			\
-	    if (eval(au, w) ==						\
-		zero_as<semiring_elt_value_t>::of(ss.semiring()))	\
-	      {								\
-		TEST_FAIL_SAVE("glushkov", i,				\
-			       "on " << e				\
-			       << " : test " << w << std::endl);	\
-		break;							\
-	      }								\
-	  }								\
-	TEST(t, "Basic test.", nb_word_test == i);			\
+	monoid_elt_t w = e.choose_from_supp();				\
+	if (eval(au, w) ==						\
+	    zero_as<semiring_elt_value_t>::of(ss.semiring()))		\
+	{								\
+	  TEST_FAIL_SAVE("glushkov", i,					\
+			 "on " << e					\
+			 << " : test " << w << std::endl);		\
+	  break;							\
+	}								\
       }									\
+      TEST(t, "Basic test.", nb_word_test == i);			\
+    }									\
     else								\
       TEST(t, "Basic test.", true);					\
   }
@@ -136,46 +136,46 @@ bool thompson_test(tests::Tester& tg)
     unsigned nb_test_done = 0;
 
     for (unsigned nb = 0; nb < nb_test; ++nb)
+    {
+      krat_t		exp = ss.choose(SELECT(exp_t));
+      automaton_t	au (aa);
+
+      try
       {
-	krat_t		exp = ss.choose(SELECT(exp_t));
-	automaton_t	au (aa);
+	thompson_of(au, exp.value());
+	bool normalized = is_normalized(au) or
+	  exp == zero_as<exp_t>::of(ss);
+	realtime_here(au);
 
-	try
+	if (t.verbose() == tests::high)
+	{
+	  TEST_MSG("Automaton saved in /tmp.");
+	  SAVE_AUTOMATON_DOT("/tmp", "thompson", au, nb);
+	}
+	unsigned i = 0;
+	if (exp != ss.zero(SELECT(exp_t)))
+	  for (; i < nb_word_test; ++i)
 	  {
-	    thompson_of(au, exp.value());
-	    bool normalized = is_normalized(au) or
-	      exp == zero_as<exp_t>::of(ss);
-	    realtime_here(au);
-
-	    if (t.verbose() == tests::high)
-	      {
-		TEST_MSG("Automaton saved in /tmp.");
-		SAVE_AUTOMATON_DOT("/tmp", "thompson", au, nb);
-	      }
-	    unsigned i = 0;
-	    if (exp != ss.zero(SELECT(exp_t)))
-	      for (; i < nb_word_test; ++i)
-		{
-		  monoid_elt_t w = exp.choose_from_supp();
-		  if (eval(au, w) ==
-		      zero_as<semiring_elt_value_t>::of(ss.semiring()))
-		    {
-		      TEST_FAIL_SAVE("thompson", nb,
-				     i << " : test "
-				     << w << std::endl);
-		      break;
-		    }
-		}
-	    if (normalized and
-		((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
-	      ++success;
-	    ++nb_test_done;
+	    monoid_elt_t w = exp.choose_from_supp();
+	    if (eval(au, w) ==
+		zero_as<semiring_elt_value_t>::of(ss.semiring()))
+	    {
+	      TEST_FAIL_SAVE("thompson", nb,
+			     i << " : test "
+			     << w << std::endl);
+	      break;
+	    }
 	  }
-	catch (std::logic_error&)
-	  {
-	    ++nb_test;
-	  }
+	if (normalized and
+	    ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
+	  ++success;
+	++nb_test_done;
       }
+      catch (std::logic_error&)
+      {
+	++nb_test;
+      }
+    }
     std::string rate;
     SUCCESS_RATE(rate, success, nb_test_done);
     TEST(t, "Random test " + rate, success == nb_test_done);

@@ -27,75 +27,75 @@ namespace vcsn
   /**
    * @brief Store 4 maps for geometry properties of the automaton.
    * states_ map is used to store states coordinates.
-   * edges_ map is used to store the label position for edges.
+   * transitions_ map is used to store the label position for transitions.
    * initials_ map is used to store the label position for initial transitions.
    * finals_ map is used to store the label position for final transitions.
    *
    */
   struct geometry
   {
-    // Store in this map state coordinates.
-    typedef std::map<hstate_t, std::pair<double, double> >
-    states_geometry_map_t;
+      // Store in this map state coordinates.
+      typedef std::map<hstate_t, std::pair<double, double> >
+      states_geometry_map_t;
 
-    // Store in this map label coordinates for edges.
-    typedef std::map<hedge_t, std::pair<double, double> >
-    edges_geometry_map_t;
+      // Store in this map label coordinates for transitions.
+      typedef std::map<htransition_t, std::pair<double, double> >
+      transitions_geometry_map_t;
 
-    // Store in this map label coordinates for initial transitions.
-    typedef std::map<hstate_t, std::pair<double, double> >
-    initials_geometry_map_t;
+      // Store in this map label coordinates for initial transitions.
+      typedef std::map<hstate_t, std::pair<double, double> >
+      initials_geometry_map_t;
 
-    // Store in this map label coordinates for final transitions.
-    typedef std::map<hstate_t, std::pair<double, double> >
-    finals_geometry_map_t;
+      // Store in this map label coordinates for final transitions.
+      typedef std::map<hstate_t, std::pair<double, double> >
+      finals_geometry_map_t;
 
-    geometry();
-    geometry(const geometry& obj);
-    ~geometry();
+      geometry();
+      geometry(const geometry& obj);
+      ~geometry();
 
-    /**
-     * @brief Retrieve the map of state coordinates.
-     *
-     **/
-    inline states_geometry_map_t& states();
-    inline const states_geometry_map_t& states() const;
+      /**
+       * @brief Retrieve the map of state coordinates.
+       *
+       **/
+      inline states_geometry_map_t& states();
+      inline const states_geometry_map_t& states() const;
 
-    /**
-     * @brief Retrieve the map of label coordinates for edges.
-     *
-     **/
-    inline edges_geometry_map_t& edges();
-    inline const edges_geometry_map_t& edges() const;
+      /**
+       * @brief Retrieve the map of label coordinates for transitions.
+       *
+       **/
+      inline transitions_geometry_map_t& transitions();
+      inline const transitions_geometry_map_t& transitions() const;
 
-    /**
-     * @brief Retrieve the map of label coordinates for initial transitions.
-     *
-     **/
-    inline initials_geometry_map_t& initials();
-    inline const initials_geometry_map_t& initials() const;
+      /**
+       * @brief Retrieve the map of label coordinates for initial transitions.
+       *
+       **/
+      inline initials_geometry_map_t& initials();
+      inline const initials_geometry_map_t& initials() const;
 
-    /**
-     * @brief Retrieve the map of label coordinates for final transitions.
-     *
-     **/
-    inline finals_geometry_map_t& finals();
-    inline const finals_geometry_map_t& finals() const;
+      /**
+       * @brief Retrieve the map of label coordinates for final transitions.
+       *
+       **/
+      inline finals_geometry_map_t& finals();
+      inline const finals_geometry_map_t& finals() const;
 
-    /**
-     * @brief Retrieve the name of the automaton.
-     *
-     **/
-    inline std::string& name();
-    inline const std::string& name() const;
+      /**
+       * @brief Retrieve the name of the automaton.
+       *
+       **/
+      inline std::string& name();
+      inline const std::string& name() const;
 
 
-  private:
-    mutable states_geometry_map_t*	states_;
-    mutable edges_geometry_map_t*	edges_;
-    mutable initials_geometry_map_t*	initials_;
-    mutable finals_geometry_map_t*	finals_;
-    mutable std::string*		name_;
+    private:
+      mutable states_geometry_map_t*	states_;
+      mutable transitions_geometry_map_t*	transitions_;
+      mutable initials_geometry_map_t*	initials_;
+      mutable finals_geometry_map_t*	finals_;
+      mutable std::string*		name_;
   };
 
 } // !vcsn

@@ -60,9 +60,9 @@ namespace vcsn
       mult_elt_t;
 
 
-      /*----------------------------.
-      | Creating the FMP automaton. |
-      `----------------------------*/
+    /*----------------------------.
+    | Creating the FMP automaton. |
+    `----------------------------*/
 
     // Adding states
     for (typename Trans_t::state_iterator St = trans.states().begin();
@@ -76,164 +76,164 @@ namespace vcsn
       of(trans.structure().series());
 
 
-      /*------------------------.
-      | Setting initial states. |
-      `------------------------*/
+    /*------------------------.
+    | Setting initial states. |
+    `------------------------*/
 
     for (typename Trans_t::initial_iterator St = trans.initial().begin();
 	 St != trans.initial().end();
 	 ++St)
+    {
+      typename FMP_t::series_set_elt_t s(ss);
+      typename FMP_t::monoid_elt_t mon(res.structure().series().monoid());
+      first_monoid_elt_t
+	first(res.structure().series().monoid().first_monoid());
+      second_monoid_elt_t
+	second(res.structure().series().monoid().second_monoid());
+      typename FMP_t::semiring_elt_t
+	weight(res.structure().series().semiring());
+
+      mult_elt_t mult = trans.get_initial(*St);
+      if (mult != id_series)
       {
-	typename FMP_t::series_set_elt_t s(ss);
-	typename FMP_t::monoid_elt_t mon(res.structure().series().monoid());
-	first_monoid_elt_t
-	  first(res.structure().series().monoid().first_monoid());
-	second_monoid_elt_t
-	  second(res.structure().series().monoid().second_monoid());
-	typename FMP_t::semiring_elt_t
-	  weight(res.structure().series().semiring());
-
-	mult_elt_t mult = trans.get_initial(*St);
-	if (mult != id_series)
+	hstate_t tmp = res.add_state();
+	typename mult_elt_t::support_t mult_supp = mult.supp();
+	for_each_const_(mult_elt_t::support_t, i, mult_supp)
 	{
-	  hstate_t tmp = res.add_state();
-	  typename mult_elt_t::support_t mult_supp = mult.supp();
-	  for_each_const_(mult_elt_t::support_t, i, mult_supp)
-	    {
-	      first = *i;
+	  first = *i;
 
-	      typename Trans_t::semiring_elt_t
-		output(trans.structure().series().semiring(), mult.get(*i));
-	      typename Trans_t::semiring_elt_t::support_t
-		output_supp = output.supp();
-	      for_each_const_(Trans_t::semiring_elt_t::support_t,
-			      j,
-			      output_supp)
-		{
-		  second = *j;
-		  weight = output.get(*j);
-		  mon = typename FMP_t::monoid_elt_value_t(first.value(),
-							   second.value());
-		  s.assoc(mon, weight);
-		}
-	    }
-	  res.add_series_edge(tmp, m[*St], s);
-	  res.set_initial(tmp);
+	  typename Trans_t::semiring_elt_t
+	    output(trans.structure().series().semiring(), mult.get(*i));
+	  typename Trans_t::semiring_elt_t::support_t
+	    output_supp = output.supp();
+	  for_each_const_(Trans_t::semiring_elt_t::support_t,
+			  j,
+			  output_supp)
+	  {
+	    second = *j;
+	    weight = output.get(*j);
+	    mon = typename FMP_t::monoid_elt_value_t(first.value(),
+						     second.value());
+	    s.assoc(mon, weight);
+	  }
 	}
-	else
-	  res.set_initial(m[*St]);
+	res.add_series_transition(tmp, m[*St], s);
+	res.set_initial(tmp);
       }
+      else
+	res.set_initial(m[*St]);
+    }
 
 
-      /*----------------------.
-      | Setting final states. |
-      `----------------------*/
+    /*----------------------.
+    | Setting final states. |
+    `----------------------*/
 
     for (typename Trans_t::final_iterator St = trans.final().begin();
 	 St != trans.final().end();
 	 ++St)
-      {
-	typename FMP_t::series_set_elt_t s(ss);
-	typename FMP_t::monoid_elt_t mon(res.structure().series().monoid());
-	first_monoid_elt_t
-	  first(res.structure().series().monoid().first_monoid());
-	second_monoid_elt_t
-	  second(res.structure().series().monoid().second_monoid());
-	typename FMP_t::semiring_elt_t
-	  weight(res.structure().series().semiring());
+    {
+      typename FMP_t::series_set_elt_t s(ss);
+      typename FMP_t::monoid_elt_t mon(res.structure().series().monoid());
+      first_monoid_elt_t
+	first(res.structure().series().monoid().first_monoid());
+      second_monoid_elt_t
+	second(res.structure().series().monoid().second_monoid());
+      typename FMP_t::semiring_elt_t
+	weight(res.structure().series().semiring());
 
-	mult_elt_t mult = trans.get_final(*St);
-	if (mult != id_series)
+      mult_elt_t mult = trans.get_final(*St);
+      if (mult != id_series)
+      {
+	hstate_t tmp = res.add_state();
+
+	typename mult_elt_t::support_t mult_supp = mult.supp();
+	for_each_const_(mult_elt_t::support_t, i, mult_supp)
 	{
-	  hstate_t tmp = res.add_state();
+	  first = *i;
 
-	  typename mult_elt_t::support_t mult_supp = mult.supp();
-	  for_each_const_(mult_elt_t::support_t, i, mult_supp)
-	    {
-	      first = *i;
-
-	      typename Trans_t::semiring_elt_t
-		output(trans.structure().series().semiring(), mult.get(*i));
-	      typename Trans_t::semiring_elt_t::support_t
-		output_supp = output.supp();
-	      for_each_const_(Trans_t::semiring_elt_t::support_t,
-			      j,
-			      output_supp)
-		{
-		  second = *j;
-		  weight = output.get(*j);
-		  mon = typename FMP_t::monoid_elt_value_t(first.value(),
-							   second.value());
-		  s.assoc(mon, weight);
-		}
-	    }
-	  res.add_series_edge(m[*St], tmp, s);
-	  res.set_final(tmp);
-	}
-	else
-	  res.set_final(m[*St]);
-      }
-
-
-      /*----------------.
-      | Creating edges. |
-      `----------------*/
-
-    for (typename Trans_t::edge_iterator Ed = trans.edges().begin();
-	 Ed != trans.edges().end();
-	 ++Ed)
-      {
-	typename FMP_t::series_set_elt_t s(ss);
-
-	first_monoid_elt_t first(trans.structure().series().monoid());
-	second_monoid_elt_t
-	  second(trans.structure().series().semiring().monoid());
-	typename FMP_t::monoid_elt_t
-	  mon(res.structure().series().monoid());
-
-	typename Trans_t::series_set_elt_t
-	  series_elt(trans.structure().series());
-	series_elt = trans.series_of(*Ed);
-
-	for (typename Trans_t::series_set_elt_t::support_t::const_iterator
-	       i = series_elt.supp().begin();
-	     i != series_elt.supp().end();
-	     ++i)
+	  typename Trans_t::semiring_elt_t
+	    output(trans.structure().series().semiring(), mult.get(*i));
+	  typename Trans_t::semiring_elt_t::support_t
+	    output_supp = output.supp();
+	  for_each_const_(Trans_t::semiring_elt_t::support_t,
+			  j,
+			  output_supp)
 	  {
-	    first = *i;
-
-	    typename Trans_t::semiring_elt_t
-	      mult(trans.structure().series().semiring());
-	    mult = series_elt.get(first);
-
-	    //FIXME
-	    //If we don't use a copy of the support we don't get ALL the
-	    //element of the series when card(mult) > 1.
-	    typename Trans_t::semiring_elt_t::support_t
-	      mult_supp = mult.supp();
-	    for (typename Trans_t::semiring_elt_t::support_t::const_iterator
-		   j = mult_supp.begin();
-		 j != mult_supp.end();
-		 ++j)
-	      {
-		second = *j;
-
-		mon = typename FMP_t::monoid_elt_value_t(first.value(),
-							 second.value());
-		s.assoc(mon, trans.output_of(*Ed).get(second));
-	      }
+	    second = *j;
+	    weight = output.get(*j);
+	    mon = typename FMP_t::monoid_elt_value_t(first.value(),
+						     second.value());
+	    s.assoc(mon, weight);
 	  }
-	res.add_series_edge(m[trans.origin_of(*Ed)],
-			    m[trans.aim_of(*Ed)],
-			    s);
+	}
+	res.add_series_transition(m[*St], tmp, s);
+	res.set_final(tmp);
       }
+      else
+	res.set_final(m[*St]);
+    }
+
+
+    /*-----------------------.
+    | Creating transitions.  |
+    `-----------------------*/
+
+    for (typename Trans_t::transition_iterator Ed = trans.transitions().begin();
+	 Ed != trans.transitions().end();
+	 ++Ed)
+    {
+      typename FMP_t::series_set_elt_t s(ss);
+
+      first_monoid_elt_t first(trans.structure().series().monoid());
+      second_monoid_elt_t
+	second(trans.structure().series().semiring().monoid());
+      typename FMP_t::monoid_elt_t
+	mon(res.structure().series().monoid());
+
+      typename Trans_t::series_set_elt_t
+	series_elt(trans.structure().series());
+      series_elt = trans.series_of(*Ed);
+
+      for (typename Trans_t::series_set_elt_t::support_t::const_iterator
+	     i = series_elt.supp().begin();
+	   i != series_elt.supp().end();
+	   ++i)
+      {
+	first = *i;
+
+	typename Trans_t::semiring_elt_t
+	  mult(trans.structure().series().semiring());
+	mult = series_elt.get(first);
+
+	//FIXME
+	//If we don't use a copy of the support we don't get ALL the
+	//element of the series when card(mult) > 1.
+	typename Trans_t::semiring_elt_t::support_t
+	  mult_supp = mult.supp();
+	for (typename Trans_t::semiring_elt_t::support_t::const_iterator
+	       j = mult_supp.begin();
+	     j != mult_supp.end();
+	     ++j)
+	{
+	  second = *j;
+
+	  mon = typename FMP_t::monoid_elt_value_t(first.value(),
+						   second.value());
+	  s.assoc(mon, trans.output_of(*Ed).get(second));
+	}
+      }
+      res.add_series_transition(m[trans.origin_of(*Ed)],
+				m[trans.aim_of(*Ed)],
+				s);
+    }
   }
 
   template<typename S, typename T,
 	   typename SS, typename TT>
   vcsn::Element<SS, TT>&
   realtime_to_fmp(const vcsn::Element<S, T>& trans,
-	       vcsn::Element<SS, TT>& res)
+		  vcsn::Element<SS, TT>& res)
   {
     do_realtime_to_fmp(trans.structure(), res.structure(),
 		       res.structure().series().monoid(),

@@ -54,40 +54,40 @@ namespace vcsn
       for (typename auto_t::state_iterator i = a.states().begin();
 	   i != a.states().end();
 	   ++i)
+      {
+	unsigned c = state_map[*i] = count++;
+	if (a.is_initial(*i))
 	{
-	  unsigned c = state_map[*i] = count++;
-	  if (a.is_initial(*i))
-	    {
-	      out << name_ << count
-		  << "\" [style=invis,label=\"\",width=.01,height=.01];"
-		  << std::endl
-		  << name_ << count << "\" -> " << name_ << c
-		  << "\" [label=\"" << conv(a.structure(), a.get_initial(*i))
-		  << "\"];" << std::endl;
-	      ++count;
-	    }
-	  if (a.is_final(*i))
-	    {
-	      out << name_ << count
-		  << "\" [style=invis,label=\"\",width=.01,height=.01];"
-		  << std::endl
-		  << name_ << c << "\" -> "  << name_ << count
-		  << "\" [label=\""<< conv(a.structure(), a.get_final(*i))
-		  <<"\"];" << std::endl;
-	      ++count;
-	    }
-	  out << name_ << c << "\" [label=\"" << *i << "\"];" << std::endl;
-	}
-      for (typename auto_t::edge_iterator i = a.edges().begin();
-	   i != a.edges().end();
-	   ++i)
-	{
-	  out << name_ << state_map[a.origin_of(*i)]
-	      << "\" -> "
-	      << name_ << state_map[a.aim_of(*i)];
-	  out << "\" [label=\"" << conv(a.structure(), a.series_of(*i))
+	  out << name_ << count
+	      << "\" [style=invis,label=\"\",width=.01,height=.01];"
+	      << std::endl
+	      << name_ << count << "\" -> " << name_ << c
+	      << "\" [label=\"" << conv(a.structure(), a.get_initial(*i))
 	      << "\"];" << std::endl;
+	  ++count;
 	}
+	if (a.is_final(*i))
+	{
+	  out << name_ << count
+	      << "\" [style=invis,label=\"\",width=.01,height=.01];"
+	      << std::endl
+	      << name_ << c << "\" -> "	 << name_ << count
+	      << "\" [label=\""<< conv(a.structure(), a.get_final(*i))
+	      <<"\"];" << std::endl;
+	  ++count;
+	}
+	out << name_ << c << "\" [label=\"" << *i << "\"];" << std::endl;
+      }
+      for (typename auto_t::transition_iterator i = a.transitions().begin();
+	   i != a.transitions().end();
+	   ++i)
+      {
+	out << name_ << state_map[a.origin_of(*i)]
+	    << "\" -> "
+	    << name_ << state_map[a.aim_of(*i)];
+	out << "\" [label=\"" << conv(a.structure(), a.series_of(*i))
+	    << "\"];" << std::endl;
+      }
       out << "}" << std::endl;
     }
 
@@ -117,58 +117,58 @@ namespace vcsn
       for (typename auto_t::state_iterator i = a.states().begin();
 	   i != a.states().end();
 	   ++i)
+      {
+	unsigned c = state_map[*i] = count++;
+	if (a.is_initial(*i))
 	{
-	  unsigned c = state_map[*i] = count++;
-	  if (a.is_initial(*i))
-	    {
-	      out << name_ << count
-		  << "\" [style=invis,label=\"\",width=.01,height=.01];"
-		  << std::endl
-		  << name_ << count << "\" -> " << name_ << c << '"';
-	      std::ostringstream o;
-	      series_set_elt_t ss = a.get_initial(*i);
-	      for_each_const_(series_set_elt_t::support_t, s, ss.supp())
-		o << conv(a.structure(), *s) << "|"
-		  << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
-		  << " ";
-	      out << "[label=\"" << o.str() << "\"];"
-		  << std::endl;
-	      ++count;
-	    }
-	  if (a.is_final(*i))
-	    {
-	      out << name_ << count
-		  << "\" [style=invis,label=\"\",width=.01,height=.01];"
-		  << std::endl
-		  << name_ << c << "\" -> " << name_ << count << '"';
-	      std::ostringstream o;
-	      series_set_elt_t ss = a.get_final(*i);
-	      for_each_const_(series_set_elt_t::support_t, s, ss.supp())
-		o << conv(a.structure(), *s) << "|"
-		  << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
-		  << " ";
-	      out << "[label=\"" << o.str() << "\"];"
-		  << std::endl;
-	      ++count;
-	    }
-	  out << name_ << c << "\" [label=\"" << *i << "\"];" << std::endl;
-	}
-      for (typename auto_t::edge_iterator i = a.edges().begin();
-	   i != a.edges().end();
-	   ++i)
-	{
-	  out << name_ << state_map[a.origin_of(*i)]
-	      << "\" -> "
-	      << name_ << state_map[a.aim_of(*i)] << '"';
+	  out << name_ << count
+	      << "\" [style=invis,label=\"\",width=.01,height=.01];"
+	      << std::endl
+	      << name_ << count << "\" -> " << name_ << c << '"';
 	  std::ostringstream o;
-	  series_set_elt_t ss = a.series_of(*i);
+	  series_set_elt_t ss = a.get_initial(*i);
 	  for_each_const_(series_set_elt_t::support_t, s, ss.supp())
 	    o << conv(a.structure(), *s) << "|"
 	      << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
 	      << " ";
 	  out << "[label=\"" << o.str() << "\"];"
 	      << std::endl;
+	  ++count;
 	}
+	if (a.is_final(*i))
+	{
+	  out << name_ << count
+	      << "\" [style=invis,label=\"\",width=.01,height=.01];"
+	      << std::endl
+	      << name_ << c << "\" -> " << name_ << count << '"';
+	  std::ostringstream o;
+	  series_set_elt_t ss = a.get_final(*i);
+	  for_each_const_(series_set_elt_t::support_t, s, ss.supp())
+	    o << conv(a.structure(), *s) << "|"
+	      << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
+	      << " ";
+	  out << "[label=\"" << o.str() << "\"];"
+	      << std::endl;
+	  ++count;
+	}
+	out << name_ << c << "\" [label=\"" << *i << "\"];" << std::endl;
+      }
+      for (typename auto_t::transition_iterator i = a.transitions().begin();
+	   i != a.transitions().end();
+	   ++i)
+      {
+	out << name_ << state_map[a.origin_of(*i)]
+	    << "\" -> "
+	    << name_ << state_map[a.aim_of(*i)] << '"';
+	std::ostringstream o;
+	series_set_elt_t ss = a.series_of(*i);
+	for_each_const_(series_set_elt_t::support_t, s, ss.supp())
+	  o << conv(a.structure(), *s) << "|"
+	    << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
+	    << " ";
+	out << "[label=\"" << o.str() << "\"];"
+	    << std::endl;
+      }
       out << "}" << std::endl;
     }
 

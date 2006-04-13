@@ -97,7 +97,7 @@ it. The tag consequently contains information such as the coordinates of the
 states, or the directions and types of the transitions. The \drawingtag{} data
 contain the definition of attributes that characterize the graphical aspects of the
 automaton's elements. Therefore, this tag contains information like the color of the
-states or the style of the edges. \\
+states or the style of the transitions. \\
 
 The proposed policy supposes these properties to be checked by the program, and that it is
 not complicated nor more costly than to test whether an announced property is indeed fulfilled.
@@ -275,10 +275,11 @@ explicit name to an automaton and to store it in a XML file.
 
 \subsection{The \typetag{} tag}
 
-In many cases, automata are graphs whose edges are labeled by symbols called
-letters, taken in a set called alphabet. In full generality, this label can be
-a polynomial, or even a rational series, over a monoid with coefficients taken in a
-semiring. The \typetag{} tag allows to refer to this semiring and this monoid.\\
+In many cases, automata are graphs whose transitions are labeled by
+symbols called letters, taken in a set called alphabet. In full
+generality, this label can be a polynomial, or even a rational series,
+over a monoid with coefficients taken in a semiring. The \typetag{}
+tag allows to refer to this semiring and this monoid.\\
 
 In the automaton described in Figure \ref{B1xml}, no specific
 information is given on the type of the automaton. The proposal comes
@@ -445,13 +446,13 @@ All the content definition previously defined in figure \ref{B1xml} is
 still totally compatible with a weighted automaton, and can remain
 unchanged.\\
 
-Two different ways are proposed to set the weight of an edge. One can
-directly store the multiplicity in the \verb|label| attribute, or use
-the dedicated \verb|weight| attribute. These attributes can
-indistinctly be used in a \transitiontag{}, an
-\initialtag{} or a \finaltag{} tag. When omitting the
-\verb|weight| attribute, the XSD grammar proposes the identity of
-the semiring as the default value.\\\\
+Two different ways are proposed to set the weight of a transition. One
+can directly store the multiplicity in the \verb|label| attribute, or
+use the dedicated \verb|weight| attribute. These attributes can
+indistinctly be used in a \transitiontag{}, an \initialtag{} or a
+\finaltag{} tag. When omitting the \verb|weight| attribute, the XSD
+grammar proposes the identity of the semiring as the default
+value.\\\\
 
 
 The \semiringtag{} tag proposes some solutions for the transducers, like the
@@ -702,11 +703,11 @@ which means that usual laws over $\mathbb{B}$ shall be applied.
 \section{The visualization tags}
 \label{title_vizualisation}
 The visual representation of automata involves a very large amount of
-information. On the one hand, the \geometrytag{} is context sensitive with
-data such as state coordinates or edge type for a transition. It gives
-some information about the way the automata are set in the plane only.
-On the other hand, the \drawingtag{} tag gives some graphical information about
-the way the automata of a session must be drawn.
+information. On the one hand, the \geometrytag{} is context sensitive
+with data such as state coordinates or transition type. It gives some
+information about the way the automata are set in the plane only.  On
+the other hand, the \drawingtag{} tag gives some graphical information
+about the way the automata of a session must be drawn.
 
 Let us note that these tags can be used at any level of the document. In this
 case, the defined properties are applied to the tag in which they are defined,
@@ -746,8 +747,8 @@ the \statetag{} tag, the only two properties that can be set are the
 position, \verb|x| and \verb|y|, of the state. These values can only be numeric.
 
 If it is a child of \transitiontag{}, \initialtag{} or
-\finaltag{}, two attributes can be set. Firstly, the \texttt{edgeType}
-attribute, that assign the type of the edge (\textit{line},
+\finaltag{}, two attributes can be set. Firstly, the \texttt{transitionType}
+attribute, that assign the type of the transition (\textit{line},
 \textit{arcL}, \textit{arcR}, \textit{curve}). Then, the
 \texttt{direction} attribute, that can be used to assign the direction
 angle of a loop, for instance. This attribute is numeric.
@@ -770,7 +771,7 @@ It also sets the type of the transition as a left arc.
         </state>
      <transitions>
         <transition \srcname{}="s0 \dstname{}="s1" label="a">
-          <geometry edgeType="arcL">
+          <geometry transitionType="arcL">
         </transition>
      </transitions>
 </automaton>
@@ -792,11 +793,11 @@ format only provides the possibility to make them explicit.
 A lot of different properties, that have been taken from the options proposed by
 Vaucanson-G, can be used in the \drawingtag{} tag at many places in the proposal.
 
-Since it's not possible to exhaustively
-name all needed attributes users may need, the proposal offers a
-limited set of properties. For example, \textit{stateFillColor} or
-\textit{edgeStyle} usage are shown in Figure \ref{drawing1}. These
-attributes use a string representation to describe their values.
+Since it's not possible to exhaustively name all needed attributes
+users may need, the proposal offers a limited set of properties. For
+example, \textit{stateFillColor} or \textit{transitionStyle} usage are
+shown in Figure \ref{drawing1}. These attributes use a string
+representation to describe their values.
 
 One of the powerful features of XSD files is the
 \textit{anyAttribute} modifier. This modifier allows the user to easily
@@ -812,7 +813,7 @@ limited to a specific set of drawing properties.
 \begin{alltt}
 <transducer>
   <geometry x="-5" y="0"/>
-  <drawing stateFillColor="black" edgeStyle="dashed"/>
+  <drawing stateFillColor="black" transitionStyle="dashed"/>
   <content>
      <states>
         <state name="s0">

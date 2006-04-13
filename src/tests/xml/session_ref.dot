@@ -1,5 +1,5 @@
 digraph vcsn {
-label="A { 3 states, 2 edges, #I = 0, #T = 0 }";
+label="A { 3 states, 2 transitions, #I = 0, #T = 0 }";
 node [shape=circle];
 "A0" [label="0"];
 "A1" [label="1"];

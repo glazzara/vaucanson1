@@ -19,14 +19,14 @@
 
 
 /**
-  * @file outsplitting.hxx
-  *
-  * @brief Outsplitting and insplitting algorithms for normalized and
-  * sub-normalized transducers seen as automata over a free monoid
-  * product.
-  *
-  * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
-  */
+ * @file outsplitting.hxx
+ *
+ * @brief Outsplitting and insplitting algorithms for normalized and
+ * sub-normalized transducers seen as automata over a free monoid
+ * product.
+ *
+ * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+ */
 
 # include <vaucanson/algorithms/outsplitting.hh>
 # include <vaucanson/algorithms/accessible.hh>
@@ -53,11 +53,11 @@ namespace vcsn {
     typedef typename monoid_t::second_monoid_t	second_monoid_t;
 
     typedef typename monoid_elt_value_t::second_type
-						second_monoid_elt_value_t;
+      second_monoid_elt_value_t;
     typedef Element<second_monoid_t, second_monoid_elt_value_t>
-						second_monoid_elt_t;
+      second_monoid_elt_t;
 
-    typedef std::set<hedge_t>			set_of_edges_t;
+    typedef std::set<htransition_t>			set_of_transitions_t;
 
 
 
@@ -67,69 +67,69 @@ namespace vcsn {
 
     Auto_t res(aut);
 
-    const series_set_t&	series   = res.structure().series();
-    const monoid_t&	monoid   = series.monoid();
+    const series_set_t&	series	 = res.structure().series();
+    const monoid_t&	monoid	 = series.monoid();
 
 
 
     for_each_state(s, res)
+    {
+      bool eps_out = false;
+      bool other_out = false;
+      bool diff = false;
+
+      // Test whether there are different types of outgoing transitions.
+
+      set_of_transitions_t transitions;
+      res.deltac(transitions, *s, delta_kind::transitions());
+      for_each_const_(set_of_transitions_t, e, transitions)
       {
-	bool eps_out = false;
-	bool other_out = false;
-	bool diff = false;
+	const series_set_elt_t	series	= res.series_of(*e);
+	support_t			supp = series.supp();
+	const monoid_elt_t		supp_elt (monoid, *(supp.begin()));
 
-	// Test whether there are different types of outgoing transitions.
-
-	set_of_edges_t edges;
-	res.deltac(edges, *s, delta_kind::edges());
-	for_each_const_(set_of_edges_t, e, edges)
-	  {
-	    const series_set_elt_t	series  = res.series_of(*e);
-	    support_t			supp = series.supp();
-	    const monoid_elt_t		supp_elt (monoid, *(supp.begin()));
-
-	    if (supp_elt.value().second == second_identity.value())
-	      eps_out = true;
-	    else
-	      other_out = true;
-	    if (eps_out and other_out)
-	      {
-		diff = true;
-		break;
-	      }
-	  }
-
-	if (eps_out and not diff)
-	  m.insert(*s);
-
-	// If there are different types of outgoing transitions.
-	if (diff)
-	  {
-	    hstate_t s2 = res.add_state();
-	    if (res.is_initial(*s))
-	      res.set_initial(s2, res.get_initial(*s));
-
-	    set_of_edges_t in_edges;
-	    res.rdeltac(in_edges, *s, delta_kind::edges());
-
-	    for_each_(set_of_edges_t, e, in_edges)
-	      res.add_series_edge(res.origin_of(*e), s2, res.series_of(*e));
-
-	    for_each_const_(set_of_edges_t, e, edges)
-	      {
-		const series_set_elt_t	series  = res.series_of(*e);
-		support_t		supp = series.supp();
-		const monoid_elt_t	supp_elt (monoid, *(supp.begin()));
-
-		if (supp_elt.value().second == second_identity.value())
-		  {
-		    res.add_series_edge(s2, res.aim_of(*e), res.series_of(*e));
-		    res.del_edge(*e);
-		  }
-	      }
-	    m.insert(s2);
-	  }
+	if (supp_elt.value().second == second_identity.value())
+	  eps_out = true;
+	else
+	  other_out = true;
+	if (eps_out and other_out)
+	{
+	  diff = true;
+	  break;
+	}
       }
+
+      if (eps_out and not diff)
+	m.insert(*s);
+
+      // If there are different types of outgoing transitions.
+      if (diff)
+      {
+	hstate_t s2 = res.add_state();
+	if (res.is_initial(*s))
+	  res.set_initial(s2, res.get_initial(*s));
+
+	set_of_transitions_t in_transitions;
+	res.rdeltac(in_transitions, *s, delta_kind::transitions());
+
+	for_each_(set_of_transitions_t, e, in_transitions)
+	  res.add_series_transition(res.origin_of(*e), s2, res.series_of(*e));
+
+	for_each_const_(set_of_transitions_t, e, transitions)
+	{
+	  const series_set_elt_t	series	= res.series_of(*e);
+	  support_t		supp = series.supp();
+	  const monoid_elt_t	supp_elt (monoid, *(supp.begin()));
+
+	  if (supp_elt.value().second == second_identity.value())
+	  {
+	    res.add_series_transition(s2, res.aim_of(*e), res.series_of(*e));
+	    res.del_transition(*e);
+	  }
+	}
+	m.insert(s2);
+      }
+    }
     return coaccessible(res);
   }
 
@@ -152,11 +152,11 @@ namespace vcsn {
     typedef typename monoid_t::first_monoid_t	first_monoid_t;
 
     typedef typename monoid_elt_value_t::first_type
-						first_monoid_elt_value_t;
+      first_monoid_elt_value_t;
     typedef Element<first_monoid_t, first_monoid_elt_value_t>
-						first_monoid_elt_t;
+      first_monoid_elt_t;
 
-    typedef std::set<hedge_t>			set_of_edges_t;
+    typedef std::set<htransition_t>			set_of_transitions_t;
 
 
 
@@ -166,70 +166,70 @@ namespace vcsn {
 
     Auto_t res(aut);
 
-    const series_set_t&	series   = res.structure().series();
-    const monoid_t&	monoid   = series.monoid();
+    const series_set_t&	series	 = res.structure().series();
+    const monoid_t&	monoid	 = series.monoid();
 
 
 
     for_each_state(s, res)
+    {
+      bool eps_in = false;
+      bool other_in = false;
+      bool diff = false;
+
+      // Test whether there are different types of incoming transitions.
+
+      set_of_transitions_t transitions;
+      res.rdeltac(transitions, *s, delta_kind::transitions());
+      for_each_const_(set_of_transitions_t, e, transitions)
       {
-	bool eps_in = false;
-	bool other_in = false;
-	bool diff = false;
+	const series_set_elt_t	series	= res.series_of(*e);
+	support_t			supp = series.supp();
+	const monoid_elt_t		supp_elt (monoid, *(supp.begin()));
 
-	// Test whether there are different types of incoming transitions.
-
-	set_of_edges_t edges;
-	res.rdeltac(edges, *s, delta_kind::edges());
-	for_each_const_(set_of_edges_t, e, edges)
-	  {
-	    const series_set_elt_t	series  = res.series_of(*e);
-	    support_t			supp = series.supp();
-	    const monoid_elt_t		supp_elt (monoid, *(supp.begin()));
-
-	    if (supp_elt.value().first == first_identity.value())
-	      eps_in = true;
-	    else
-	      other_in = true;
-	    if (eps_in and other_in)
-	      {
-		diff = true;
-		break;
-	      }
-	  }
-
-	if (eps_in and not diff)
-	  m.insert(*s);
-
-	// If there are different types of incoming transitions.
-	if (diff)
-	  {
-	    hstate_t s2 = res.add_state();
-	    if (res.is_final(*s))
-	      res.set_final(s2, res.get_final(*s));
-
-	    set_of_edges_t out_edges;
-	    res.deltac(out_edges, *s, delta_kind::edges());
-
-	    for_each_(set_of_edges_t, e, out_edges)
-	      res.add_series_edge(s2, res.aim_of(*e), res.series_of(*e));
-
-	    for_each_const_(set_of_edges_t, e, edges)
-	      {
-		const series_set_elt_t	series  = res.series_of(*e);
-		support_t		supp = series.supp();
-		const monoid_elt_t	supp_elt (monoid, *(supp.begin()));
-
-		if (supp_elt.value().first == first_identity.value())
-		  {
-		    res.add_series_edge(res.origin_of(*e), s2,
-					res.series_of(*e));
-		    res.del_edge(*e);
-		  }
-	      }
-	    m.insert(s2);
-	  }
+	if (supp_elt.value().first == first_identity.value())
+	  eps_in = true;
+	else
+	  other_in = true;
+	if (eps_in and other_in)
+	{
+	  diff = true;
+	  break;
+	}
       }
+
+      if (eps_in and not diff)
+	m.insert(*s);
+
+      // If there are different types of incoming transitions.
+      if (diff)
+      {
+	hstate_t s2 = res.add_state();
+	if (res.is_final(*s))
+	  res.set_final(s2, res.get_final(*s));
+
+	set_of_transitions_t out_transitions;
+	res.deltac(out_transitions, *s, delta_kind::transitions());
+
+	for_each_(set_of_transitions_t, e, out_transitions)
+	  res.add_series_transition(s2, res.aim_of(*e), res.series_of(*e));
+
+	for_each_const_(set_of_transitions_t, e, transitions)
+	{
+	  const series_set_elt_t	series	= res.series_of(*e);
+	  support_t		supp = series.supp();
+	  const monoid_elt_t	supp_elt (monoid, *(supp.begin()));
+
+	  if (supp_elt.value().first == first_identity.value())
+	  {
+	    res.add_series_transition(res.origin_of(*e), s2,
+				      res.series_of(*e));
+	    res.del_transition(*e);
+	  }
+	}
+	m.insert(s2);
+      }
+    }
     return res;
   }
 

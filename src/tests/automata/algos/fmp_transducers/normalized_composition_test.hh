@@ -1,17 +1,17 @@
 // normalized_composition_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_NORMALIZED_COMPOSITION_TEST_HH
@@ -119,20 +119,20 @@ normalized_composition_test(tests::Tester& t)
   t2.set_initial(st21);
   t2.set_final(st23);
 
-  hedge_t			h1 = t1.add_series_edge(st1, st2, series_elt1);
-  hedge_t			h2 = t1.add_series_edge(st2, st3, series_elt2);
-  hedge_t			h3 = t1.add_series_edge(st1, st2, series_elt3);
-  hedge_t			h4 = t1.add_series_edge(st1, st3, series_elt4);
+  htransition_t			h1 = t1.add_series_transition(st1, st2, series_elt1);
+  htransition_t			h2 = t1.add_series_transition(st2, st3, series_elt2);
+  htransition_t			h3 = t1.add_series_transition(st1, st2, series_elt3);
+  htransition_t			h4 = t1.add_series_transition(st1, st3, series_elt4);
 
 
-  hedge_t			h21 = t2.add_series_edge(st21, st22,
-							 series_elt21);
-  hedge_t			h22 = t2.add_series_edge(st22, st23,
-							 series_elt22);
-  hedge_t			h23 = t2.add_series_edge(st21, st23,
-							 series_elt23);
-  hedge_t			h24 = t2.add_series_edge(st21, st22,
-							 series_elt24);
+  htransition_t			h21 = t2.add_series_transition(st21, st22,
+							       series_elt21);
+  htransition_t			h22 = t2.add_series_transition(st22, st23,
+							       series_elt22);
+  htransition_t			h23 = t2.add_series_transition(st21, st23,
+							       series_elt23);
+  htransition_t			h24 = t2.add_series_transition(st21, st22,
+							       series_elt24);
 
   t3 = normalized_composition(t1, t2);
 

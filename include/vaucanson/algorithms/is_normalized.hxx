@@ -30,18 +30,18 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(A);
     bool is_normalized = false;
-    for_each_edge(e, trans)
+    for_each_transition(e, trans)
+    {
+      is_normalized ^= is_letter_support(trans.series_of(*e));
+      for_each_const_(series_set_elt_t::support_t,
+		      i,
+		      trans.series_of(*e).supp())
       {
-        is_normalized ^= is_letter_support(trans.series_of(*e));
-	for_each_const_(series_set_elt_t::support_t,
-			i,
-			trans.series_of(*e).supp())
-	  {
-	    is_normalized ^= is_letter_support(trans.series_of(*e).get(*i));
-	    if (!is_normalized)
-	      return false;
-	  }
+	is_normalized ^= is_letter_support(trans.series_of(*e).get(*i));
+	if (!is_normalized)
+	  return false;
       }
+    }
     return true;
   }
 

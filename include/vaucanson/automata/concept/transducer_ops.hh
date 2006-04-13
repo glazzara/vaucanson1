@@ -22,63 +22,63 @@
 
 namespace vcsn {
 
-#define AutoType(Type) \
+#define AutoType(Type)				\
   typename Element<S, T>::Type
 
   template <class S, class T>
   typename Element<S, T>::input_monoid_elt_t
   op_input_of(const TransducerBase<S>& s,
 	      const T& v,
-	      hedge_t e);
+	      htransition_t e);
 
   template <class S, class T>
   typename Element<S, T>::output_series_set_elt_t
   op_output_of(const TransducerBase<S>& s,
 	       const T& v,
-	       hedge_t e);
+	       htransition_t e);
 
   template <class S, class T>
-  hedge_t
-  op_add_io_edge(const TransducerBase<S>& s,
-		 T& v,
-		 hstate_t from,
-		 hstate_t to,
-		 AutoType(input_letter_t) i,
-		 AutoType(output_letter_t) o,
-		 AutoType(output_semiring_elt_t) w);
+  htransition_t
+  op_add_io_transition(const TransducerBase<S>& s,
+		       T& v,
+		       hstate_t from,
+		       hstate_t to,
+		       AutoType(input_letter_t) i,
+		       AutoType(output_letter_t) o,
+		       AutoType(output_semiring_elt_t) w);
 
   template <class S, class T>
-  hedge_t
-  op_add_io_edge(const TransducerBase<S>& s,
-		 T& v,
-		 hstate_t from,
-		 hstate_t to,
-		 AutoType(input_monoid_elt_t) input_w,
-		 AutoType(output_monoid_elt_t) output_w,
-		 AutoType(output_semiring_elt_t) w);
+  htransition_t
+  op_add_io_transition(const TransducerBase<S>& s,
+		       T& v,
+		       hstate_t from,
+		       hstate_t to,
+		       AutoType(input_monoid_elt_t) input_w,
+		       AutoType(output_monoid_elt_t) output_w,
+		       AutoType(output_semiring_elt_t) w);
 
   template <class S, class T>
-  hedge_t
-  op_add_i_edge(const TransducerBase<S>& s,
-		T& v,
-		hstate_t from,
-		hstate_t to,
-		AutoType(input_letter_t) i,
-		AutoType(output_semiring_elt_t) w);
+  htransition_t
+  op_add_i_transition(const TransducerBase<S>& s,
+		      T& v,
+		      hstate_t from,
+		      hstate_t to,
+		      AutoType(input_letter_t) i,
+		      AutoType(output_semiring_elt_t) w);
 
   template <class S, class T>
-  hedge_t
-  op_add_o_edge(const TransducerBase<S>& s,
-		T& v,
-		hstate_t from,
-		hstate_t to,
-		AutoType(input_letter_t) o,
-		AutoType(output_semiring_elt_t) w);
+  htransition_t
+  op_add_o_transition(const TransducerBase<S>& s,
+		      T& v,
+		      hstate_t from,
+		      hstate_t to,
+		      AutoType(input_letter_t) o,
+		      AutoType(output_semiring_elt_t) w);
 
   template <class S, class T>
   static AutoType(series_set_elt_t)
-    make_series(const TransducerBase<S>& s,
-		AutoType(output_monoid_elt_value_t) o);
+  make_series(const TransducerBase<S>& s,
+	      AutoType(output_monoid_elt_value_t) o);
 
   template <class S, class T>
   void

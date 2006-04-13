@@ -34,52 +34,52 @@ namespace vcsn
     | Output |
     `-------*/
 
-    template<typename Auto, typename EdgeConverter, typename Format>
+    template<typename Auto, typename TransitionConverter, typename Format>
     struct automaton_saver_
     {
-      typedef Auto automaton_t;
-      typedef EdgeConverter edge_converter_t;
-      typedef Format format_t;
+	typedef Auto automaton_t;
+	typedef TransitionConverter transition_converter_t;
+	typedef Format format_t;
 
-      automaton_saver_(const Auto&, const EdgeConverter&, const Format&);
+	automaton_saver_(const Auto&, const TransitionConverter&, const Format&);
 
-      automaton_t& automaton();
-      const automaton_t& automaton() const;
+	automaton_t& automaton();
+	const automaton_t& automaton() const;
 
-    protected:
-      const automaton_t& a_;
-      edge_converter_t conv_;
-      format_t format_;
+      protected:
+	const automaton_t& a_;
+	transition_converter_t conv_;
+	format_t format_;
 
-      template<typename A, typename E, typename F>
-      friend std::ostream&
-      operator<<(std::ostream&, const automaton_saver_<A, E, F>&);
+	template<typename A, typename E, typename F>
+	friend std::ostream&
+	operator<<(std::ostream&, const automaton_saver_<A, E, F>&);
     };
 
 
-    template<typename Auto, typename EdgeConverter, typename Format>
+    template<typename Auto, typename TransitionConverter, typename Format>
     std::ostream&
     operator<<(std::ostream&,
-	       const automaton_saver_<Auto, EdgeConverter, Format>&);
+	       const automaton_saver_<Auto, TransitionConverter, Format>&);
 
     struct string_out
     {
-      std::string check_empty_word(const std::string&) const;
+	std::string check_empty_word(const std::string&) const;
 
-      template<typename S, typename T>
-      std::string operator()(const AutomataBase<S>&, const T&) const;
+	template<typename S, typename T>
+	std::string operator()(const AutomataBase<S>&, const T&) const;
 
-      template<typename S, typename T>
-      std::string operator()(const TransducerBase<S>&, const T&) const;
+	template<typename S, typename T>
+	std::string operator()(const TransducerBase<S>&, const T&) const;
 
     };
 
   }
 
-  template<typename Auto, typename EdgeConverter, typename Format>
-  io::automaton_saver_<Auto, EdgeConverter, Format>
+  template<typename Auto, typename TransitionConverter, typename Format>
+  io::automaton_saver_<Auto, TransitionConverter, Format>
   automaton_saver(const Auto&,
-		  const EdgeConverter& e = EdgeConverter(),
+		  const TransitionConverter& e = TransitionConverter(),
 		  const Format& f = Format());
 
 
@@ -89,52 +89,52 @@ namespace vcsn
     | Input |
     `------*/
 
-    template<typename Auto, typename EdgeConverter, typename Format>
+    template<typename Auto, typename TransitionConverter, typename Format>
     struct automaton_loader_
     {
-      typedef Auto automaton_t;
-      typedef EdgeConverter edge_converter_t;
-      typedef Format format_t;
+	typedef Auto automaton_t;
+	typedef TransitionConverter transition_converter_t;
+	typedef Format format_t;
 
-      automaton_loader_(automaton_t& a,
-			const edge_converter_t& conv,
-			const format_t& format,
-			bool merge_states);
+	automaton_loader_(automaton_t& a,
+			  const transition_converter_t& conv,
+			  const format_t& format,
+			  bool merge_states);
 
-      automaton_t& automaton();
-      const automaton_t& automaton() const;
+	automaton_t& automaton();
+	const automaton_t& automaton() const;
 
-      hstate_t add_state(unsigned);
-      void set_initial(unsigned, const std::string&);
-      void set_final(unsigned, const std::string&);
-      void add_edge(unsigned, unsigned, const std::string&);
-      void add_spontaneous(unsigned, unsigned);
+	hstate_t add_state(unsigned);
+	void set_initial(unsigned, const std::string&);
+	void set_final(unsigned, const std::string&);
+	void add_transition(unsigned, unsigned, const std::string&);
+	void add_spontaneous(unsigned, unsigned);
 
-    protected:
-      automaton_t& a_;
-      edge_converter_t conv_;
-      format_t format_;
-      unsigned scount_;
-      std::map<unsigned, hstate_t> smap_;
-      bool merge_states_;
+      protected:
+	automaton_t& a_;
+	transition_converter_t conv_;
+	format_t format_;
+	unsigned scount_;
+	std::map<unsigned, hstate_t> smap_;
+	bool merge_states_;
 
-      template<typename A, typename E, typename F>
-      friend std::istream&
-      operator>>(std::istream&, automaton_loader_<A, E, F>);
+	template<typename A, typename E, typename F>
+	friend std::istream&
+	operator>>(std::istream&, automaton_loader_<A, E, F>);
     };
 
-    template<typename Auto, typename EdgeConverter, typename Format>
+    template<typename Auto, typename TransitionConverter, typename Format>
     std::istream&
-    operator>>(std::istream&, automaton_loader_<Auto, EdgeConverter, Format>);
+    operator>>(std::istream&, automaton_loader_<Auto, TransitionConverter, Format>);
 
 
   }
 
 
-  template<typename Auto, typename EdgeConverter, typename Format>
-  io::automaton_loader_<Auto, EdgeConverter, Format>
+  template<typename Auto, typename TransitionConverter, typename Format>
+  io::automaton_loader_<Auto, TransitionConverter, Format>
   automaton_loader(Auto& a,
-		   const EdgeConverter& e = EdgeConverter(),
+		   const TransitionConverter& e = TransitionConverter(),
 		   const Format& f = Format(),
 		   bool merge_states = false);
 
@@ -142,7 +142,7 @@ namespace vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/tools/io.hxx>
+# include <vaucanson/tools/io.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

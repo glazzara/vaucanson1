@@ -21,7 +21,7 @@ namespace vcsn {
 
   namespace delta_kind {
 
-    struct edges {};
+    struct transitions {};
     struct states {};
 
   } // delta_kind

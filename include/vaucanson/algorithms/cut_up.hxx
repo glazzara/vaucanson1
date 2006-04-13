@@ -39,7 +39,7 @@ namespace vcsn {
     typedef Element<S, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
-    for_each_edge(e, a)
+    for_each_transition(e, a)
       if (! a.series_of(*e).is_finite_app() ||
 	  a.series_of(*e).supp().size() > 1)
 	return false;
@@ -65,36 +65,36 @@ namespace vcsn {
 
     std::map<hstate_t, hstate_t> statemap;
 
-    edges_t		edges = res.value().edges();
+    transitions_t		transitions = res.transitions();
 
-    for_each_(edges_t, e, edges)
+    for_each_(transitions_t, e, transitions)
+    {
+      if (! res.series_of(*e).is_finite_app() ||
+	  res.series_of(*e).supp().size() > 1)
       {
-	if (! res.series_of(*e).is_finite_app() ||
-	    res.series_of(*e).supp().size() > 1)
-	  {
-	    gen_automaton_t tmp(res.structure());
-	    standard_of(tmp, res.series_of(*e).value());
+	gen_automaton_t tmp(res.structure());
+	standard_of(tmp, res.series_of(*e).value());
 
-	    for_each_state(s, tmp)
-	      statemap[*s] = res.add_state();
+	for_each_state(s, tmp)
+	  statemap[*s] = res.add_state();
 
-	    for_each_initial_state(i, tmp)
-	      res.add_series_edge(res.origin_of(*e),
-				  statemap[*i],
-				  tmp.get_initial(*i));
+	for_each_initial_state(i, tmp)
+	  res.add_series_transition(res.origin_of(*e),
+				    statemap[*i],
+				    tmp.get_initial(*i));
 
-	    for_each_edge(ed, tmp)
-	      res.add_edge(statemap[tmp.origin_of(*ed)],
-			   statemap[tmp.aim_of(*ed)],
-			   tmp.label_of(*ed));
+	for_each_transition(ed, tmp)
+	  res.add_transition(statemap[tmp.origin_of(*ed)],
+			     statemap[tmp.aim_of(*ed)],
+			     tmp.label_of(*ed));
 
-	    for_each_final_state(f, tmp)
-	      res.add_series_edge(statemap[*f], res.aim_of(*e),
-				  tmp.get_final(*f));
+	for_each_final_state(f, tmp)
+	  res.add_series_transition(statemap[*f], res.aim_of(*e),
+				    tmp.get_final(*f));
 
-	    res.del_edge(*e);
-	  }
+	res.del_transition(*e);
       }
+    }
   }
 
 
@@ -108,35 +108,34 @@ namespace vcsn {
 		 const Auto& a,
 		 Ret& res)
   {
-    int				size;
-    typedef typename Ret::series_set_elt_t series_set_elt_t;
-    typedef typename series_set_elt_t::support_t support_t;
-    typedef typename Ret::value_t::edges_t edges_t;
+    AUTOMATON_TYPES(Ret);
+    typedef typename Ret::series_set_elt_t::support_t support_t;
+    int	size;
 
     auto_copy(res, a);
 
-    edges_t		edges = res.value().edges();
+    transitions_t		transitions = res.transitions();
 
-    for_each_(edges_t, e, edges)
+    for_each_(transitions_t, e, transitions)
+    {
+      series_set_elt_t label(res.structure().series());
+      label = res.series_of(*e);
+
+      if ((size = label.supp().size()) > 1)
       {
-	series_set_elt_t label(res.structure().series());
-	label = res.series_of(*e);
-
-	if ((size = label.supp().size()) > 1)
-	  {
-	    typename support_t::const_iterator m = label.supp().begin();
-	    for (int i = 0; i < size; ++i, ++m)
-	      {
-		series_set_elt_t series(res.structure().series());
-		series.assoc(*m, label.get(*m));
-		res.add_series_edge(res.origin_of(*e),
+	typename support_t::const_iterator m = label.supp().begin();
+	for (int i = 0; i < size; ++i, ++m)
+	{
+	  series_set_elt_t series(res.structure().series());
+	  series.assoc(*m, label.get(*m));
+	  res.add_series_transition(res.origin_of(*e),
 				    res.aim_of(*e),
 				    series);
-	      }
+	}
 
-	    res.del_edge(*e);
-	  }
+	res.del_transition(*e);
       }
+    }
   }
 
 

@@ -30,31 +30,31 @@ namespace vcsn
     | Output |
     `-------*/
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    Auto& automaton_saver_<Auto, EdgeConverter, Format>::automaton()
+    template<typename Auto, typename TransitionConverter, typename Format>
+    Auto& automaton_saver_<Auto, TransitionConverter, Format>::automaton()
     {
       return a_;
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    const Auto& automaton_saver_<Auto, EdgeConverter, Format>::
+    template<typename Auto, typename TransitionConverter, typename Format>
+    const Auto& automaton_saver_<Auto, TransitionConverter, Format>::
     automaton() const
     {
       return a_;
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    automaton_saver_<Auto, EdgeConverter, Format>::
+    template<typename Auto, typename TransitionConverter, typename Format>
+    automaton_saver_<Auto, TransitionConverter, Format>::
     automaton_saver_(const Auto& a,
-		       const EdgeConverter& c,
-		       const Format& f)
+		     const TransitionConverter& c,
+		     const Format& f)
       : a_(a), conv_(c), format_(f)
     {}
 
-    template<typename Auto, typename EdgeConverter, typename Format>
+    template<typename Auto, typename TransitionConverter, typename Format>
     std::ostream&
     operator<<(std::ostream& o,
-	       const automaton_saver_<Auto, EdgeConverter, Format>& s)
+	       const automaton_saver_<Auto, TransitionConverter, Format>& s)
     {
       s.format_(o, s, s.conv_);
       return o;
@@ -86,13 +86,13 @@ namespace vcsn
 
   } // io
 
-  template<typename Auto, typename EdgeConverter, typename Format>
-  io::automaton_saver_<Auto, EdgeConverter, Format>
+  template<typename Auto, typename TransitionConverter, typename Format>
+  io::automaton_saver_<Auto, TransitionConverter, Format>
   automaton_saver(const Auto& a,
-		  const EdgeConverter& e = EdgeConverter(),
+		  const TransitionConverter& e = TransitionConverter(),
 		  const Format& f = Format())
   {
-    return io::automaton_saver_<Auto, EdgeConverter, Format>(a, e, f);
+    return io::automaton_saver_<Auto, TransitionConverter, Format>(a, e, f);
   }
 
   namespace io
@@ -103,23 +103,23 @@ namespace vcsn
     `------*/
 
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    Auto& automaton_loader_<Auto, EdgeConverter, Format>::automaton()
+    template<typename Auto, typename TransitionConverter, typename Format>
+    Auto& automaton_loader_<Auto, TransitionConverter, Format>::automaton()
     {
       return a_;
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
+    template<typename Auto, typename TransitionConverter, typename Format>
     const Auto&
-    automaton_loader_<Auto, EdgeConverter, Format>::automaton() const
+    automaton_loader_<Auto, TransitionConverter, Format>::automaton() const
     {
       return a_;
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    automaton_loader_<Auto, EdgeConverter, Format>::
+    template<typename Auto, typename TransitionConverter, typename Format>
+    automaton_loader_<Auto, TransitionConverter, Format>::
     automaton_loader_(Auto& a,
-		      const EdgeConverter& conv,
+		      const TransitionConverter& conv,
 		      const Format& format,
 		      bool merge_states)
       : a_(a),
@@ -130,52 +130,52 @@ namespace vcsn
 	merge_states_(merge_states)
     {}
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    hstate_t automaton_loader_<Auto, EdgeConverter, Format>::
+    template<typename Auto, typename TransitionConverter, typename Format>
+    hstate_t automaton_loader_<Auto, TransitionConverter, Format>::
     add_state(unsigned s)
     {
       if (smap_.find(s) == smap_.end())
-	{
-	  if (a_.has_state(s) && merge_states_)
-	    smap_[s] = s;
-	  else
-	    smap_[s] = a_.add_state();
-	}
+      {
+	if (a_.has_state(s) && merge_states_)
+	  smap_[s] = s;
+	else
+	  smap_[s] = a_.add_state();
+      }
       return smap_[s];
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    void automaton_loader_<Auto, EdgeConverter, Format>::
+    template<typename Auto, typename TransitionConverter, typename Format>
+    void automaton_loader_<Auto, TransitionConverter, Format>::
     set_initial(unsigned s, const std::string& lbl)
     {
       a_.set_initial(add_state(s), conv_(a_, lbl));
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    void automaton_loader_<Auto, EdgeConverter, Format>::
+    template<typename Auto, typename TransitionConverter, typename Format>
+    void automaton_loader_<Auto, TransitionConverter, Format>::
     set_final(unsigned s, const std::string& lbl)
     {
       a_.set_final(add_state(s), conv_(a_, lbl));
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    void automaton_loader_<Auto, EdgeConverter, Format>::
+    template<typename Auto, typename TransitionConverter, typename Format>
+    void automaton_loader_<Auto, TransitionConverter, Format>::
     add_spontaneous(unsigned from, unsigned to)
     {
       a_.add_spontaneous(add_state(from), add_state(to));
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
-    void automaton_loader_<Auto, EdgeConverter, Format>::
-    add_edge(unsigned from, unsigned to, const std::string& lbl)
+    template<typename Auto, typename TransitionConverter, typename Format>
+    void automaton_loader_<Auto, TransitionConverter, Format>::
+    add_transition(unsigned from, unsigned to, const std::string& lbl)
     {
-      a_.add_series_edge(add_state(from), add_state(to), conv_(a_, lbl));
+      a_.add_series_transition(add_state(from), add_state(to), conv_(a_, lbl));
     }
 
-    template<typename Auto, typename EdgeConverter, typename Format>
+    template<typename Auto, typename TransitionConverter, typename Format>
     std::istream&
     operator>>(std::istream& in,
-	       automaton_loader_<Auto, EdgeConverter, Format> l)
+	       automaton_loader_<Auto, TransitionConverter, Format> l)
     {
       l.format_(in, l);
       return in;
@@ -184,15 +184,15 @@ namespace vcsn
 
   }
 
-  template<typename Auto, typename EdgeConverter, typename Format>
-  io::automaton_loader_<Auto, EdgeConverter, Format>
+  template<typename Auto, typename TransitionConverter, typename Format>
+  io::automaton_loader_<Auto, TransitionConverter, Format>
   automaton_loader(Auto& a,
-		   const EdgeConverter& e = EdgeConverter(),
+		   const TransitionConverter& e = TransitionConverter(),
 		   const Format& f = Format(),
 		   bool merge_states = false)
   {
     return io::
-      automaton_loader_<Auto, EdgeConverter, Format>(a, e, f, merge_states);
+      automaton_loader_<Auto, TransitionConverter, Format>(a, e, f, merge_states);
   }
 
 } // vcsn

@@ -47,7 +47,7 @@ namespace vcsn
 					      const std::string& name)
     {
       typedef typename Auto::state_iterator state_iterator;
-      typedef typename Auto::edge_iterator edge_iterator;
+      typedef typename Auto::transition_iterator transition_iterator;
       typedef typename Auto::initial_iterator initial_iterator;
       typedef typename Auto::final_iterator final_iterator;
       using namespace xercesc;
@@ -60,7 +60,7 @@ namespace vcsn
       // Document creation.
       impl_ = DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
       doc_ = impl_->createDocument(STR2XML(xml_namespace),
-				  STR2XML(root_name), 0);
+				   STR2XML(root_name), 0);
       root_ = doc_->getDocumentElement();
 
       if (aut.geometry().name() != "")
@@ -79,12 +79,12 @@ namespace vcsn
       node = doc_->createElement(STR2XML("states"));
       content->appendChild(node);
       for_each_state(s, aut)
-	 state2str[*s] = create_state(*s, aut, node);
+	state2str[*s] = create_state(*s, aut, node);
 
       // Create transitions.
       node = doc_->createElement(STR2XML("transitions"));
       content->appendChild(node);
-      for_each_edge(e, aut)
+      for_each_transition(e, aut)
 	create_transition(*e, aut, node, state2str);
 
       // Create initial transitions.
@@ -117,7 +117,7 @@ namespace vcsn
     // Create a transition in the XML document.
     template <class Auto>
     void
-    xml_converter<Auto>::create_transition(hedge_t e,
+    xml_converter<Auto>::create_transition(htransition_t e,
 					   const Auto& aut,
 					   xercesc::DOMElement* root,
 					   std::map<hstate_t, std::string>&
@@ -130,7 +130,7 @@ namespace vcsn
       node->setAttribute(STR2XML("dst"),
 			 STR2XML(state2str[aut.aim_of(e)].c_str()));
       chooser_.create_label(e, aut, node);
-      add_xml_drawing(aut.geometry().edges(), e, node);
+      add_xml_drawing(aut.geometry().transitions(), e, node);
     }
 
 
@@ -179,17 +179,17 @@ namespace vcsn
     {
       typename Map::const_iterator iter;
       if ((iter = map.find(key)) != map.end())
-	{
-	  std::ostringstream osx, osy;
-	  osx << iter->second.first;
-	  xercesc::DOMElement* nd = doc_->createElement(STR2XML("geometry"));
-	  root->appendChild(nd);
-	  nd->setAttribute(STR2XML("x"),
-			   STR2XML(osx.str().c_str()));
-	  osy << iter->second.second;
-	  nd->setAttribute(STR2XML("y"),
-			   STR2XML(osy.str().c_str()));
-	}
+      {
+	std::ostringstream osx, osy;
+	osx << iter->second.first;
+	xercesc::DOMElement* nd = doc_->createElement(STR2XML("geometry"));
+	root->appendChild(nd);
+	nd->setAttribute(STR2XML("x"),
+			 STR2XML(osx.str().c_str()));
+	osy << iter->second.second;
+	nd->setAttribute(STR2XML("y"),
+			 STR2XML(osy.str().c_str()));
+      }
     }
 
 
@@ -202,17 +202,17 @@ namespace vcsn
     {
       typename Map::const_iterator iter;
       if ((iter = map.find(key)) != map.end())
-	{
-	  std::ostringstream osx, osy;
-	  osx << iter->second.first;
-	  xercesc::DOMElement* nd = doc_->createElement(STR2XML("drawing"));
-	  root->appendChild(nd);
-	  nd->setAttribute(STR2XML("labelPositionX"),
-			   STR2XML(osx.str().c_str()));
-	  osy << iter->second.second;
-	  nd->setAttribute(STR2XML("labelPositionY"),
-			   STR2XML(osy.str().c_str()));
-	}
+      {
+	std::ostringstream osx, osy;
+	osx << iter->second.first;
+	xercesc::DOMElement* nd = doc_->createElement(STR2XML("drawing"));
+	root->appendChild(nd);
+	nd->setAttribute(STR2XML("labelPositionX"),
+			 STR2XML(osx.str().c_str()));
+	osy << iter->second.second;
+	nd->setAttribute(STR2XML("labelPositionY"),
+			 STR2XML(osy.str().c_str()));
+      }
     }
 
 

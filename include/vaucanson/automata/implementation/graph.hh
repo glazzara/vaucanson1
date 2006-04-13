@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,6 +34,13 @@
 namespace vcsn
 {
 
+
+  typedef htransition_t hedge_t;
+  namespace delta_kind
+  {
+    typedef transitions edges;
+  }
+            
   /// Edge decorator.
   template<typename EdgeLabel>
   struct edge_value
@@ -231,9 +238,9 @@ namespace vcsn
 	    class Letter, class Tag, class Geometry>
 
   TParam
-  ADAPT_ADD_LETTER_EDGE_TO_SERIES_LABEL(Graph<labels_are_series,
- 					WordValue, WeightValue,
- 					SeriesValue, Letter, Tag, Geometry>);
+  ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL(Graph<labels_are_series,
+ 					      WordValue, WeightValue,
+ 					      SeriesValue, Letter, Tag, Geometry>);
 
 
   TParam
@@ -257,9 +264,9 @@ namespace vcsn
 				  SeriesValue, Letter, Tag, Geometry>);
 
   TParam
-  ADAPT_ADD_SERIE_EDGE_TO_LETTERS_LABEL(Graph<labels_are_letters,
-					WordValue, WeightValue,
-					SeriesValue, Letter, Tag, Geometry>);
+  ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(Graph<labels_are_letters,
+					      WordValue, WeightValue,
+					      SeriesValue, Letter, Tag, Geometry>);
 
   template <class S, class WordValue, class WeightValue, class SeriesValue,
 	    class Letter, class Tag, class Geometry,
@@ -325,16 +332,16 @@ namespace vcsn
     typedef typename LabelOf<Kind, WordValue, WeightValue, SeriesValue, Letter>
     ::ret						label_t;
     typedef Tag						tag_t;
-    typedef edge_value<label_t>				edge_value_t;
+    typedef edge_value<label_t>				transition_value_t;
     typedef state_value					state_value_t;
     typedef std::vector<state_value_t>			state_data_t;
-    typedef std::vector<edge_value_t>			edge_data_t;
+    typedef std::vector<transition_value_t>		transition_data_t;
 
     typedef StateContainer				states_t;
-    typedef EdgeContainer				edges_t;
+    typedef EdgeContainer				transitions_t;
 
     typedef typename states_t::iterator			state_iterator;
-    typedef typename edges_t::iterator			edge_iterator;
+    typedef typename transitions_t::iterator		transition_iterator;
 
     typedef std::map<hstate_t, series_set_elt_value_t>	initial_t;
     typedef std::map<hstate_t, series_set_elt_value_t>	final_t;

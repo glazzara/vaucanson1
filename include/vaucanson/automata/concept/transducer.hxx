@@ -59,22 +59,22 @@ namespace vcsn {
 
     for_each_state(s, a)
       conv[ret.add_state()] = *s;
-    for_each_edge(e, a)
+    for_each_transition(e, a)
+    {
+      series_set_elt_t t = a.series_of(*e);
+      series_set_elt_t s(t);
+      output_series_set_elt_t os(ret.structure().series());
+      support_t supp = s.supp();
+      for_each_const_(support_t, m, supp)
       {
-	series_set_elt_t t = a.series_of(*e);
-	series_set_elt_t s(t);
-	output_series_set_elt_t os(ret.structure().series());
-	support_t supp = s.supp();
-	for_each_const_(support_t, m, supp)
-	  {
-	    series_set_elt_t tmp(a.structure().series());
-	    tmp.assoc(*m, s.get(*m));
-	    os.assoc(*m, tmp);
-	  }
-	hedge_t f = ret.add_series_edge(conv[a.origin_of(*e)],
-				       conv[a.aim_of(*e)],
-				       os);
+	series_set_elt_t tmp(a.structure().series());
+	tmp.assoc(*m, s.get(*m));
+	os.assoc(*m, tmp);
       }
+      htransition_t f = ret.add_series_transition(conv[a.origin_of(*e)],
+						  conv[a.aim_of(*e)],
+						  os);
+    }
     // FIXME: set initial/final weights.
     for_each_initial_state(i, a)
       ret.set_initial(conv[*i], a.get_initial(*i));

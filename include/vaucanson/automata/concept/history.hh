@@ -33,45 +33,45 @@ namespace vcsn {
     template <class T>
     class Event
     {
-    public:
-      Event(event_kind_t e);
+      public:
+	Event(event_kind_t e);
 
-      virtual
-      event_kind_t
-      get_event_kind() const;
+	virtual
+	event_kind_t
+	get_event_kind() const;
 
-      virtual ~Event();
-    protected :
-      event_kind_t	kind_;
+	virtual ~Event();
+      protected :
+	event_kind_t	kind_;
     };
 
     template <class T>
     class BinaryEvent : public Event<T>
     {
-    public:
-      BinaryEvent(event_kind_t e, const T& first, const T& second);
+      public:
+	BinaryEvent(event_kind_t e, const T& first, const T& second);
 
-      const T&
-      get_first() const;
+	const T&
+	get_first() const;
 
-      const T&
-      get_second() const;
+	const T&
+	get_second() const;
 
-    protected :
-      T		first_, second_;
+      protected :
+	T		first_, second_;
     };
 
     template <class T>
     class UnaryEvent : public Event<T>
     {
-    public:
-      UnaryEvent(event_kind_t e, const T& first);
+      public:
+	UnaryEvent(event_kind_t e, const T& first);
 
-      const T&
-      get_first() const;
+	const T&
+	get_first() const;
 
-    protected :
-      T		first_;
+      protected :
+	T		first_;
     };
 
     template <class T>
@@ -81,44 +81,45 @@ namespace vcsn {
     template <class AutoType_>
     class AutomatonHistory
     {
-    public :
-      typedef std::list<Event<AutoType_> >		       auto_events_t;
-      typedef std::list<Event<hstate_t> >		       state_events_t;
-      typedef std::list<Event<hedge_t> >		       edge_events_t;
-      typedef std::map<hstate_t, state_events_t>	       states_events_t;
-      typedef std::map<hedge_t, edge_events_t>		       edges_events_t;
+      public :
+	typedef std::list<Event<AutoType_> >		     auto_events_t;
+	typedef std::list<Event<hstate_t> >		     state_events_t;
+	typedef std::list<Event<htransition_t> >	     transition_events_t;
+	typedef std::map<hstate_t, state_events_t>	     states_events_t;
+	typedef std::map<htransition_t, transition_events_t> transitions_events_t;
 
-      bool
-      set_state_event_about(event_kind_t, hstate_t);
-      bool
-      set_state_event_about(event_kind_t, hstate_t, hstate_t);
-      bool
-      set_state_event_about(event_kind_t, hstate_t, hstate_t, hstate_t);
-      const Event<hstate_t>
-      get_state_event_about(event_kind_t, hstate_t) const;
+	bool
+	set_state_event_about(event_kind_t, hstate_t);
+	bool
+	set_state_event_about(event_kind_t, hstate_t, hstate_t);
+	bool
+	set_state_event_about(event_kind_t, hstate_t, hstate_t, hstate_t);
+	const Event<hstate_t>
+	get_state_event_about(event_kind_t, hstate_t) const;
 
-      bool
-      set_edge_event_about(event_kind_t, hedge_t);
-      bool
-      set_edge_event_about(event_kind_t, hedge_t, hedge_t);
-      bool
-      set_edge_event_about(event_kind_t, hedge_t, hedge_t, hedge_t);
-      const Event<hedge_t>
-      get_edge_event_about(event_kind_t, hedge_t) const;
+	bool
+	set_transition_event_about(event_kind_t, htransition_t);
+	bool
+	set_transition_event_about(event_kind_t, htransition_t, htransition_t);
+	bool
+	set_transition_event_about(event_kind_t, htransition_t, htransition_t,
+				   htransition_t);
+	const Event<htransition_t>
+	get_transition_event_about(event_kind_t, htransition_t) const;
 
-      bool
-      set_auto_event_about(event_kind_t);
-      bool
-      set_auto_event_about(event_kind_t, AutoType_);
-      bool
-      set_auto_event_about(event_kind_t, AutoType_, AutoType_);
-      const Event<AutoType_>
-      get_auto_event_about(event_kind_t) const;
+	bool
+	set_auto_event_about(event_kind_t);
+	bool
+	set_auto_event_about(event_kind_t, AutoType_);
+	bool
+	set_auto_event_about(event_kind_t, AutoType_, AutoType_);
+	const Event<AutoType_>
+	get_auto_event_about(event_kind_t) const;
 
-    protected :
-      states_events_t		states_events_;
-      edges_events_t	        edges_events_;
-      auto_events_t    		auto_events_;
+      protected :
+	states_events_t		states_events_;
+	transitions_events_t		transitions_events_;
+	auto_events_t			auto_events_;
     };
 
   } // history
@@ -127,7 +128,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concept/history.hxx>
+# include <vaucanson/automata/concept/history.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

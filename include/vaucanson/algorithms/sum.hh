@@ -44,8 +44,8 @@ namespace vcsn {
   /**
    * In place summing of two automata.
    *
-   * This function adds states and edges of an automaton to states and edges
-   * of a second automaton.
+   * This function adds states and transitions of an automaton to
+   * states and transitions of a second automaton.
    *
    * @param lhs Destination of the summing
    * @param rhs Source of summing
@@ -59,8 +59,8 @@ namespace vcsn {
   /**
    * Summing of two automata.
    *
-   * This function  returns the  fresh union of  two automata.  It put
-   * edges and states of the  two automata together, and create a news
+   * This function  returns the	 fresh union of	 two automata.	It put
+   * transitions and states of the  two automata together, and create a news
    * one with the result.
    *
    * @param lhs First automaton to sum

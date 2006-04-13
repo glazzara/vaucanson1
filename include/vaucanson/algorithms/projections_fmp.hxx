@@ -35,43 +35,43 @@ namespace vcsn
     const monoid_t&		monoid = res.structure().series().monoid();
 
     for_each_state(fmp_s, fmp_trans)
+    {
+      hstate_t s = res.add_state();
+      stmap[*fmp_s] = s;
+
+      if (fmp_trans.is_initial(*fmp_s))
       {
-	hstate_t s = res.add_state();
-	stmap[*fmp_s] = s;
+	trans_series_set_elt_t	in = fmp_trans.get_initial(*fmp_s);
+	trans_support_t		supp = in.supp();
 
-	if (fmp_trans.is_initial(*fmp_s))
-	  {
-	    trans_series_set_elt_t	in = fmp_trans.get_initial(*fmp_s);
-	    trans_support_t		supp = in.supp();
+	semiring_elt_t		in_semi_elt = in.get(*(supp.begin()));
+	series_set_elt_t		series_elt(series);
 
-	    semiring_elt_t		in_semi_elt = in.get(*(supp.begin()));
-	    series_set_elt_t		series_elt(series);
-
-	    series_elt.assoc(monoid_elt_t(monoid,
-					  algebra::identity_as<
-					  monoid_elt_value_t>::
-					  of(monoid).value()),
-			     in_semi_elt);
-	    res.set_initial(s, series_elt);
-	  }
-
-	if (fmp_trans.is_final(*fmp_s))
-	  {
-	    trans_series_set_elt_t	out = fmp_trans.get_final(*fmp_s);
-	    trans_support_t		supp = out.supp();
-
-	    semiring_elt_t		out_semi_elt =
-	      out.get(*(supp.begin()));
-	    series_set_elt_t		series_elt(series);
-
-	    series_elt.assoc(monoid_elt_t(monoid,
-					  algebra::identity_as<
-					  monoid_elt_value_t>::
-					  of(monoid).value()),
-			     out_semi_elt);
-	    res.set_final(s, series_elt);
-	  }
+	series_elt.assoc(monoid_elt_t(monoid,
+				      algebra::identity_as<
+				      monoid_elt_value_t>::
+				      of(monoid).value()),
+			 in_semi_elt);
+	res.set_initial(s, series_elt);
       }
+
+      if (fmp_trans.is_final(*fmp_s))
+      {
+	trans_series_set_elt_t	out = fmp_trans.get_final(*fmp_s);
+	trans_support_t		supp = out.supp();
+
+	semiring_elt_t		out_semi_elt =
+	  out.get(*(supp.begin()));
+	series_set_elt_t		series_elt(series);
+
+	series_elt.assoc(monoid_elt_t(monoid,
+				      algebra::identity_as<
+				      monoid_elt_value_t>::
+				      of(monoid).value()),
+			 out_semi_elt);
+	res.set_final(s, series_elt);
+      }
+    }
   }
 
   template <typename S1, typename S2, typename M1, typename M2, typename M3,
@@ -94,23 +94,23 @@ namespace vcsn
 
     set_states(fmp_trans, res, stmap);
 
-    for_each_edge(fmp_e, fmp_trans)
-      {
-	const trans_series_set_elt_t	trans_series_elt =
-	  fmp_trans.series_of(*fmp_e);
-	trans_support_t			trans_supp = trans_series_elt.supp();
-	const trans_monoid_elt_t	trans_monoid_elt
-	  (trans_monoid, *(trans_supp.begin()));
-	const monoid_elt_value_t	word(trans_monoid_elt.value().first);
+    for_each_transition(fmp_e, fmp_trans)
+    {
+      const trans_series_set_elt_t	trans_series_elt =
+	fmp_trans.series_of(*fmp_e);
+      trans_support_t			trans_supp = trans_series_elt.supp();
+      const trans_monoid_elt_t	trans_monoid_elt
+	(trans_monoid, *(trans_supp.begin()));
+      const monoid_elt_value_t	word(trans_monoid_elt.value().first);
 
-	series_set_elt_t		series_elt(series);
+      series_set_elt_t		series_elt(series);
 
-	series_elt.assoc(monoid_elt_t(monoid, word),
-			 trans_series_elt.get(trans_monoid_elt));
+      series_elt.assoc(monoid_elt_t(monoid, word),
+		       trans_series_elt.get(trans_monoid_elt));
 
-	res.add_series_edge(stmap[fmp_trans.origin_of(*fmp_e)],
-			    stmap[fmp_trans.aim_of(*fmp_e)], series_elt);
-      }
+      res.add_series_transition(stmap[fmp_trans.origin_of(*fmp_e)],
+				stmap[fmp_trans.aim_of(*fmp_e)], series_elt);
+    }
   }
 
   template <typename S1, typename S2, typename M1, typename M2,
@@ -133,24 +133,24 @@ namespace vcsn
 
     set_states(fmp_trans, res, stmap);
 
-    for_each_edge(fmp_e, fmp_trans)
-      {
-	const trans_series_set_elt_t	trans_series_elt =
-	  fmp_trans.series_of(*fmp_e);
-	trans_support_t			trans_supp = trans_series_elt.supp();
-	const trans_monoid_elt_t	trans_monoid_elt
-	  (trans_monoid, *(trans_supp.begin()));
+    for_each_transition(fmp_e, fmp_trans)
+    {
+      const trans_series_set_elt_t	trans_series_elt =
+	fmp_trans.series_of(*fmp_e);
+      trans_support_t			trans_supp = trans_series_elt.supp();
+      const trans_monoid_elt_t	trans_monoid_elt
+	(trans_monoid, *(trans_supp.begin()));
 
-	const monoid_elt_value_t	word(trans_monoid_elt.value().second);
+      const monoid_elt_value_t	word(trans_monoid_elt.value().second);
 
-	series_set_elt_t		series_elt(series);
+      series_set_elt_t		series_elt(series);
 
-	series_elt.assoc(monoid_elt_t(monoid, word),
-			 trans_series_elt.get(trans_monoid_elt));
+      series_elt.assoc(monoid_elt_t(monoid, word),
+		       trans_series_elt.get(trans_monoid_elt));
 
-	res.add_series_edge(stmap[fmp_trans.origin_of(*fmp_e)],
-			    stmap[fmp_trans.aim_of(*fmp_e)], series_elt);
-      }
+      res.add_series_transition(stmap[fmp_trans.origin_of(*fmp_e)],
+				stmap[fmp_trans.aim_of(*fmp_e)], series_elt);
+    }
   }
 
   template <typename S1, typename S2, typename M1, typename M2,
@@ -174,24 +174,24 @@ namespace vcsn
 
     set_states(aut, res, stmap);
 
-    for_each_edge(aut_e, aut)
-      {
-	const aut_series_set_elt_t	aut_series_elt =
-	  aut.series_of(*aut_e);
-	aut_support_t			aut_supp = aut_series_elt.supp();
-	const aut_monoid_elt_t	aut_monoid_elt
-	  (aut_monoid, *(aut_supp.begin()));
-	const monoid_elt_value_t	word(aut_monoid_elt.value(),
-					     aut_monoid_elt.value());
+    for_each_transition(aut_e, aut)
+    {
+      const aut_series_set_elt_t	aut_series_elt =
+	aut.series_of(*aut_e);
+      aut_support_t			aut_supp = aut_series_elt.supp();
+      const aut_monoid_elt_t	aut_monoid_elt
+	(aut_monoid, *(aut_supp.begin()));
+      const monoid_elt_value_t	word(aut_monoid_elt.value(),
+				     aut_monoid_elt.value());
 
-	series_set_elt_t		series_elt(series);
+      series_set_elt_t		series_elt(series);
 
-	series_elt.assoc(monoid_elt_t(monoid, word),
-			 aut_series_elt.get(aut_monoid_elt));
+      series_elt.assoc(monoid_elt_t(monoid, word),
+		       aut_series_elt.get(aut_monoid_elt));
 
-	res.add_series_edge(stmap[aut.origin_of(*aut_e)],
-			    stmap[aut.aim_of(*aut_e)], series_elt);
-      }
+      res.add_series_transition(stmap[aut.origin_of(*aut_e)],
+				stmap[aut.aim_of(*aut_e)], series_elt);
+    }
   }
 
 
@@ -218,7 +218,7 @@ namespace vcsn
       typename trans_t::series_set_t::monoid_t::first_monoid_t> monoid_t;
 
     typedef algebra::Series<typename trans_t::series_set_t::semiring_t,
-			    monoid_t>
+      monoid_t>
       series_set_t;
 
     monoid_t				monoid
@@ -257,7 +257,7 @@ namespace vcsn
       typename trans_t::series_set_t::monoid_t::second_monoid_t> monoid_t;
 
     typedef algebra::Series<typename trans_t::series_set_t::semiring_t,
-			    monoid_t>
+      monoid_t>
       series_set_t;
 
     monoid_t				monoid
@@ -296,7 +296,7 @@ namespace vcsn
       typename auto_t::series_set_t::monoid_t> monoid_t;
 
     typedef algebra::Series<typename auto_t::series_set_t::semiring_t,
-			    monoid_t>
+      monoid_t>
       series_set_t;
 
     monoid_t		monoid (aut.structure().series().monoid(),

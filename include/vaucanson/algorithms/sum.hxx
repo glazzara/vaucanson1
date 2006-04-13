@@ -27,7 +27,7 @@
 namespace vcsn {
 
   // FIXME : this should be defined differently :
-  # define INSUM_EVENT	"in place sum "
+# define INSUM_EVENT	"in place sum "
 
   /*------.
   |  sum  |
@@ -46,40 +46,41 @@ namespace vcsn {
     for (typename rhs_t::state_iterator i = rhs.states().begin();
 	 i != rhs.states().end();
 	 ++i)
-      {
-	hstate_t new_state = lhs.add_state();
-	states_map[*i] = new_state;
+    {
+      hstate_t new_state = lhs.add_state();
+      states_map[*i] = new_state;
 
-	//  lhs.history().set_state_event_about(INSUM_EVENT, new_state, *i);
+      //  lhs.history().set_state_event_about(INSUM_EVENT, new_state, *i);
 
-	lhs.set_final(new_state, rhs.get_final(*i));
-	lhs.set_initial(new_state, rhs.get_initial(*i));
-      }
+      lhs.set_final(new_state, rhs.get_final(*i));
+      lhs.set_initial(new_state, rhs.get_initial(*i));
+    }
 
-    /*-------------.
-    | Sum of edges |
-    `-------------*/
+    /*-------------------.
+    | Sum of transitions |
+    `-------------------*/
 
-    typedef std::set<hedge_t> aim_t;
+    typedef std::set<htransition_t> aim_t;
     aim_t aim;
 
     for (typename rhs_t::state_iterator i = rhs.states().begin();
 	 i != rhs.states().end();
 	 ++i)
+    {
+      aim.clear();
+      rhs.deltac(aim, *i, delta_kind::transitions());
+      for (typename aim_t::const_iterator d = aim.begin();
+	   d != aim.end();
+	   ++d)
       {
-	aim.clear();
-	rhs.deltac(aim, *i, delta_kind::edges());
-	for (typename aim_t::const_iterator d = aim.begin();
-	     d != aim.end();
-	     ++d)
-	  {
-	      lhs.add_edge(states_map[rhs.origin_of(*d)],
+	lhs.add_transition(states_map[rhs.origin_of(*d)],
 			   states_map[rhs.aim_of(*d)],
 			   rhs.label_of(*d));
 
-	    //  lhs.history().set_edge_event_about(INSUM_EVENT, new_edge, *d);
-	  }
+	//  lhs.history().set_transition_event_about(INSUM_EVENT,
+	//					     new_transition, *d);
       }
+    }
   }
 
   // wrappers
@@ -96,7 +97,7 @@ namespace vcsn {
   {
     // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
-    //    ret.history().set_auto_event_about(INSUM_EVENT, lhs, rhs);
+    //	  ret.history().set_auto_event_about(INSUM_EVENT, lhs, rhs);
     do_sum(ret.structure(), ret, rhs);
     return ret;
   }

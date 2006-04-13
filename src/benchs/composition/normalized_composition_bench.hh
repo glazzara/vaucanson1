@@ -1,17 +1,17 @@
 // normalized_composition_bench.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/tools/bencher.hh>
@@ -35,11 +35,11 @@ prefsuf(const std::string& u, const std::string& v)
   int	s = std::min(u.size(), v.size());
 
   for (int n = s; n > 0; --n)
-    {
-      std::string tmp = u.substr(0, n);
-      if (tmp == v.substr(vs - n, n))
-	return tmp;
-    }
+  {
+    std::string tmp = u.substr(0, n);
+    if (tmp == v.substr(vs - n, n))
+      return tmp;
+  }
 
   return "";
 }
@@ -57,44 +57,44 @@ replace_left(const std::string& from,	const std::string& to,
 
   // Create states and set them all final.
   for (int i = 0; i < n; ++i)
-    {
-      s[i] = a.add_state();
-      a.set_o_final(s[i], from.substr(0, i));
-    }
+  {
+    s[i] = a.add_state();
+    a.set_o_final(s[i], from.substr(0, i));
+  }
 
   // Set the first state initial.
   a.set_initial(s[0]);
 
-  // Create all the edges of the type (ui | 1).
+  // Create all the transitions of the type (ui | 1).
   for (int i = 0; i < n - 1; ++i)
-    {
-      const letter_t l[] = {from[i], 0 };
-      a.add_io_edge(s[i], s[i + 1], l, "");
-    }
+  {
+    const letter_t l[] = {from[i], 0 };
+    a.add_io_transition(s[i], s[i + 1], l, "");
+  }
 
-  // Create the backward edges.
+  // Create the backward transitions.
   for (int i = 0; i < n; ++i)
     for_each_letter(j, A)
       if (*j != from[i])
-	{
-	  const letter_t	l[] = {*j, 0};
+      {
+	const letter_t	l[] = {*j, 0};
 
-	  const std::string	in = from.substr(0, i) + *j;
-	  const std::string	factor = prefsuf(from, in);
-	  const int		len = factor.size();
+	const std::string	in = from.substr(0, i) + *j;
+	const std::string	factor = prefsuf(from, in);
+	const int		len = factor.size();
 
-	  a.add_io_edge(s[i], s[len], l,
-			in.substr(0, i - len + 1));
-	}
+	a.add_io_transition(s[i], s[len], l,
+			    in.substr(0, i - len + 1));
+      }
 
-  // Last state goes back to state i (length of w) with an edge
+  // Last state goes back to state i (length of w) with a transition
   // of the type : (un | y) (to = y.w)
   const letter_t	l[] = {from[n - 1], 0};
 
   std::string		f = prefsuf(from, to);
   int			f_len = f.size();
 
-  a.add_io_edge(s[n - 1], s[f_len], l, to.substr(0, n - f_len));
+  a.add_io_transition(s[n - 1], s[f_len], l, to.substr(0, n - f_len));
 
   return a;
 }
@@ -151,10 +151,10 @@ void normalized_composition_bench(int n_value)
   realtime_to_fmp(left_auto, fmp_left_auto);
   sub_normalize(fmp_left_auto, sub_left_auto);
   std::cout << "nb states: " << sub_left_auto.states().size() << std::endl;
-  std::cout << "nb edges: " << sub_left_auto.edges().size() << std::endl;
+  std::cout << "nb transitions: " << sub_left_auto.transitions().size() << std::endl;
   VCSN_BENCH_STOP_AND_PRINT;
 
-  automaton_t   right_auto = replace_right(from, to, B, C);
+  automaton_t	right_auto = replace_right(from, to, B, C);
 
   fmp_transducer::automaton_t fmp_right_auto =
     fmp_transducer::new_automaton(B,C);
@@ -166,7 +166,8 @@ void normalized_composition_bench(int n_value)
   realtime_to_fmp(right_auto, fmp_right_auto);
   sub_normalize(fmp_right_auto, sub_right_auto);
   std::cout << "nb states: " << sub_right_auto.states().size() << std::endl;
-  std::cout << "nb edges: " << sub_right_auto.edges().size() << std::endl;
+  std::cout << "nb transitions: " << sub_right_auto.transitions().size()
+	    << std::endl;
   VCSN_BENCH_STOP_AND_PRINT;
 
   std::cerr << "Normalized composition" << std::endl;
@@ -177,7 +178,8 @@ void normalized_composition_bench(int n_value)
   normalized_composition(sub_left_auto, sub_right_auto, res_auto);
 
   std::cout << "nb states: " << res_auto.states().size() << std::endl;
-  std::cout << "nb edges: " << res_auto.edges().size() << std::endl;
+  std::cout << "nb transitions: " << res_auto.transitions().size()
+	    << std::endl;
 
   VCSN_BENCH_STOP_AND_PRINT;
   VCSN_BENCH_STOP_AND_PRINT;

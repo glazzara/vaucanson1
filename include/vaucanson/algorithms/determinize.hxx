@@ -30,16 +30,16 @@ namespace vcsn {
   | subset_construction |
   `--------------------*/
   // preconditions :
-  //    - output has been initialized with good series set
-  //      (alphabet is well initialized) ;
-  //    - this algorithm is intended to work with realtime automaton
-  //      over |B<A*> => add concept checking.
+  //	- output has been initialized with good series set
+  //	  (alphabet is well initialized) ;
+  //	- this algorithm is intended to work with realtime automaton
+  //	  over |B<A*> => add concept checking.
   //
 
   template <typename A, typename input_t, typename output_t>
   void
   do_subset_construction(const AutomataBase<A>&	,
-			 output_t&	       	output,
+			 output_t&		output,
 			 const input_t&		input,
 			 std::map<hstate_t, std::set<hstate_t> >& m =
 			 std::map<hstate_t, std::set<hstate_t> >())
@@ -47,8 +47,8 @@ namespace vcsn {
     AUTOMATON_TYPES(input_t);
     AUTOMATON_FREEMONOID_TYPES(input_t);
     typedef typename input_t::series_set_t			    series_set_t;
-    typedef typename std::set<hstate_t>	                    subset_t;
-    typedef typename std::map<subset_t, hstate_t>           subset_set_t;
+    typedef typename std::set<hstate_t>			    subset_t;
+    typedef typename std::map<subset_t, hstate_t>	    subset_set_t;
     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
     typedef std::vector<hstate_t>			    delta_ret_t;
 
@@ -69,11 +69,11 @@ namespace vcsn {
     aim.reserve(input.states().size());
 
     for_each_initial_state(i, input)
-      {
-	qi.insert(*i);
-	is_final |= input.is_final(*i);
-	output.set_initial(qi_hstate);
-      }
+    {
+      qi.insert(*i);
+      is_final |= input.is_final(*i);
+      output.set_initial(qi_hstate);
+    }
 
     if (is_final)
       output.set_final(qi_hstate);
@@ -90,43 +90,43 @@ namespace vcsn {
     path.push(qi);
 
     do {
-      s        = path.front();
+      s	       = path.front();
       s_hstate = subset_set[s];
       path.pop();
 
       for_each_letter(e, alphabet)
+      {
+	q.clear();
+	is_final = false;
+	for (typename subset_t::const_iterator j = s.begin();
+	     j != s.end(); ++j)
 	{
-	  q.clear();
-	  is_final = false;
-	  for (typename subset_t::const_iterator j = s.begin();
-	       j != s.end(); ++j)
-	    {
-	      aim.clear();
-	      // FIXME : Use a more efficient version of delta !
-	      input.letter_deltac(aim, *j, *e, delta_kind::states());
-	      for_all_const_(delta_ret_t, k, aim)
-		{
-		  hstate_t state = *k;
-		  q.insert(state);
-		  is_final   |= input.is_final(state);
-		}
-	    }
-	  current = subset_set.find(q);
-	  if (current == subset_set.end())
-	    {
-	      hstate_t qs = output.add_state();
-	      current = (subset_set.insert
-			 (subset_set_pair_t(q, qs))).first;
-	      m[qs] = q;
-
-	      // Log history ?
-
- 	      if (is_final)
- 		output.set_final(current->second);
-	      path.push(q);
-	    }
-	  output.add_letter_edge(s_hstate, (*current).second, *e);
+	  aim.clear();
+	  // FIXME : Use a more efficient version of delta !
+	  input.letter_deltac(aim, *j, *e, delta_kind::states());
+	  for_all_const_(delta_ret_t, k, aim)
+	  {
+	    hstate_t state = *k;
+	    q.insert(state);
+	    is_final   |= input.is_final(state);
+	  }
 	}
+	current = subset_set.find(q);
+	if (current == subset_set.end())
+	{
+	  hstate_t qs = output.add_state();
+	  current = (subset_set.insert
+		     (subset_set_pair_t(q, qs))).first;
+	  m[qs] = q;
+
+	  // Log history ?
+
+	  if (is_final)
+	    output.set_final(current->second);
+	  path.push(q);
+	}
+	output.add_letter_transition(s_hstate, (*current).second, *e);
+      }
     } while (!path.empty());
   }
 
@@ -154,7 +154,7 @@ namespace vcsn {
      * it must be rewritten to do the twice at the same time more efficiently.
      */
     do_subset_construction(a_set, output, input, m);
-    //    accessible_here(output);
+    //	  accessible_here(output);
   }
 
   template<typename A, typename T>
@@ -185,7 +185,7 @@ namespace vcsn {
 		      const input_t&		input)
   {
     AUTOMATON_TYPES(input_t);
-    typedef typename std::set<hedge_t>		delta_ret_t;
+    typedef typename std::set<htransition_t>		delta_ret_t;
     typedef typename series_set_elt_t::support_t	support_t;
 
     delta_ret_t	delta_ret;
@@ -201,24 +201,24 @@ namespace vcsn {
       return false;
 
     for_each_state(i, input)
+    {
+      delta_ret.clear();
+      input.deltac(delta_ret, *i, delta_kind::transitions());
+      // FIXME : O(n^2) => O(nlog(n))
+      for_all_const_(delta_ret_t, j, delta_ret)
       {
-	delta_ret.clear();
-	input.deltac(delta_ret, *i, delta_kind::edges());
-	// FIXME : O(n^2) => O(nlog(n))
-	for_all_const_(delta_ret_t, j, delta_ret)
-	  {
-	    series_set_elt_t s = input.series_of(*j);
-	    typename delta_ret_t::const_iterator k = j;
-	    ++k;
-	    for (; k != delta_ret.end(); ++k)
-	      {
-		series_set_elt_t s_ = input.series_of(*k);
-		for_all_(support_t, supp, s.supp())
-		  if (s_.get(*supp) != zero_semiring)
-		    return false;
-	      }
-	  }
+	series_set_elt_t s = input.series_of(*j);
+	typename delta_ret_t::const_iterator k = j;
+	++k;
+	for (; k != delta_ret.end(); ++k)
+	{
+	  series_set_elt_t s_ = input.series_of(*k);
+	  for_all_(support_t, supp, s.supp())
+	    if (s_.get(*supp) != zero_semiring)
+	      return false;
+	}
       }
+    }
     return true;
   }
 

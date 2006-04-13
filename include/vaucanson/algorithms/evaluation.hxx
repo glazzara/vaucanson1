@@ -81,7 +81,7 @@ namespace vcsn {
   }
 
   /* Input : an expression, a transducer.
-     Output : a set of pair (hstate_t, expression)*/
+   Output : a set of pair (hstate_t, expression)*/
   template<typename S1, typename T1,
 	   typename S2, typename T2,
 	   typename M>
@@ -101,12 +101,12 @@ namespace vcsn {
 			 M& state_exp_pair_set)
   {
     AUTOMATON_TYPES(Auto_t);
-    typedef typename std::set<hedge_t>			hedge_set_t;
-    typedef std::map<hstate_t, series_set_elt_t>	      	sums_t;
+    typedef typename std::set<htransition_t>		htransition_set_t;
+    typedef std::map<hstate_t, series_set_elt_t>	sums_t;
 
-    typename hedge_set_t::const_iterator		i, j;
-    hstate_t					        q;
-    hedge_set_t						edges;
+    typename htransition_set_t::const_iterator		i, j;
+    hstate_t						q;
+    htransition_set_t					transitions;
 
     Auto_t b = a;
     standardize(b);
@@ -114,78 +114,78 @@ namespace vcsn {
     int num = b.final().size() + 1; // all final states and the initial state.
 
     while (int(b.states().size()) != num)
+    {
+      series_set_elt_t loop_sum(b.series());
+      sums_t	   in_sums, out_sums;
+      typename sums_t::iterator f;
+      q = chooser(b);
+      if (b.is_initial(q) || b.is_final(q))
+	continue;
+
+      transitions.clear();
+      // FIXME: use a new version of delta !
+      b.deltac(transitions, q, delta_kind::transitions());
+      for (i = transitions.begin(); i != transitions.end(); i = j)
       {
-	series_set_elt_t loop_sum(b.series());
-	sums_t       in_sums, out_sums;
-	typename sums_t::iterator f;
-	q = chooser(b);
-	if (b.is_initial(q) || b.is_final(q))
-	  continue;
+	j = i; ++j;
 
-	edges.clear();
-	// FIXME: use a new version of delta !
-	b.deltac(edges, q, delta_kind::edges());
-	for (i = edges.begin(); i != edges.end(); i = j)
-	  {
-	    j = i; ++j;
-
-	    if (b.aim_of(*i) == q)
-	      loop_sum += b.series_of(*i);
-	    else if ((f = out_sums.find(b.aim_of(*i))) !=
-		     out_sums.end())
-	      f->second += b.series_of(*i);
-	    else
-	      out_sums.insert(std::make_pair(b.aim_of(*i), b.series_of(*i)));
-	    b.del_edge(*i);
-	  }
-	edges.clear();
-	// FIXME: use a new version of delta !
-	b.rdeltac(edges, q, delta_kind::edges());
-	for (i = edges.begin(); i != edges.end(); i = j)
-	  {
-	    j = i; ++j;
-	    // here all loops have already been removed
-	    if ((f = in_sums.find(b.origin_of(*i))) !=
-		     in_sums.end())
-	      f->second += b.series_of(*i);
-	    else
-	      in_sums.insert(std::make_pair(b.origin_of(*i), b.series_of(*i)));
-	    b.del_edge(*i);
-	  }
-	loop_sum.star();
-	for_each_const_(sums_t, in, in_sums)
-	  for_each_const_(sums_t, out, out_sums)
-	  {
-	    series_set_elt_t res = in->second * loop_sum * out->second;
-	    b.add_series_edge(in->first, out->first, res);
-	  }
-	b.del_state(q);
+	if (b.aim_of(*i) == q)
+	  loop_sum += b.series_of(*i);
+	else if ((f = out_sums.find(b.aim_of(*i))) !=
+		 out_sums.end())
+	  f->second += b.series_of(*i);
+	else
+	  out_sums.insert(std::make_pair(b.aim_of(*i), b.series_of(*i)));
+	b.del_transition(*i);
       }
+      transitions.clear();
+      // FIXME: use a new version of delta !
+      b.rdeltac(transitions, q, delta_kind::transitions());
+      for (i = transitions.begin(); i != transitions.end(); i = j)
+      {
+	j = i; ++j;
+	// here all loops have already been removed
+	if ((f = in_sums.find(b.origin_of(*i))) !=
+	    in_sums.end())
+	  f->second += b.series_of(*i);
+	else
+	  in_sums.insert(std::make_pair(b.origin_of(*i), b.series_of(*i)));
+	b.del_transition(*i);
+      }
+      loop_sum.star();
+      for_each_const_(sums_t, in, in_sums)
+	for_each_const_(sums_t, out, out_sums)
+      {
+	series_set_elt_t res = in->second * loop_sum * out->second;
+	b.add_series_transition(in->first, out->first, res);
+      }
+      b.del_state(q);
+    }
 
     typedef std::map<hstate_t, series_set_elt_t>   se_map_t;
     typedef std::pair<hstate_t, series_set_elt_t>  state_exp_pair_t;
     se_map_t se_m;
 
-    // maybe there are more than one edge comming to one final state
+    // maybe there are more than one transition comming to one final state
     // we must sum the labels
-    for_each_edge(e, b)
-      {
-	hstate_t aim = b.aim_of(*e);
-	typename se_map_t::iterator i = se_m.find(aim);
-	if (i == se_m.end())
-	  se_m.insert(std::make_pair(aim,
-				     series_set_elt_t (b.structure().series(),
-						   b.label_of(*e))));
-	else
-	  i->second += b.label_of(*e);
-      }
+    for_each_transition(e, b)
+    {
+      hstate_t aim = b.aim_of(*e);
+      typename se_map_t::iterator i = se_m.find(aim);
+      if (i == se_m.end())
+	se_m.insert(std::make_pair(aim,
+				   series_set_elt_t (b.structure().series(),
+						     b.label_of(*e))));
+      else
+	i->second += b.label_of(*e);
+    }
 
     for_each_final_state(p, b)
-      {
-	typename se_map_t::iterator i = se_m.find(*p);
-	if (i != se_m.end())
-	  state_exp_pair_set.insert(std::make_pair(*p, i->second));
-      }
+    {
+      typename se_map_t::iterator i = se_m.find(*p);
+      if (i != se_m.end())
+	state_exp_pair_set.insert(std::make_pair(*p, i->second));
+    }
   }
 
   /*------------.
@@ -193,7 +193,7 @@ namespace vcsn {
   `------------*/
   // preconditions :
   //   - hope that automaton's labels are sufficient to support "star"
-  //     => in fact, generalized automaton are generally expected here.
+  //	 => in fact, generalized automaton are generally expected here.
   //
 
   template<typename A, typename T, typename M>
@@ -221,7 +221,7 @@ namespace vcsn {
   {
     typedef typename Trans_t::value_t T;
     typedef typename output_projection_helper<ST, T>::ret Auto_ret_t;
-    typedef typename Auto_ret_t::set_t::series_set_t      Auto_ret_series_set_t;
+    typedef typename Auto_ret_t::set_t::series_set_t	  Auto_ret_series_set_t;
     typename Auto_ret_t::set_t
       auto_structure(Auto_ret_series_set_t(t.structure().series().semiring()));
 
@@ -250,36 +250,36 @@ namespace vcsn {
     /* for each state u of t, add one final state to 'auto_p' */
     state_state_map_t final_of, is_final_of;
     for(t_state_iterator u = t.states().begin(); u != t.states().end(); ++u)
-      {
-	hstate_t new_state = auto_p.add_state();
-	final_of[*u] = new_state;
-	is_final_of[new_state] = *u;
-	auto_p.set_final(new_state);
-      }
+    {
+      hstate_t new_state = auto_p.add_state();
+      final_of[*u] = new_state;
+      is_final_of[new_state] = *u;
+      auto_p.set_final(new_state);
+    }
 
     for(a_state_iterator u = auto_p.states().begin();
 	u != auto_p.states().end(); ++u)
+    {
+      if (!auto_p.is_final(*u))
       {
-	if (!auto_p.is_final(*u))
-	  {
-	    hstate_t p = sp_m[proj_m[*u]].first;
-	    hstate_t q = sp_m[proj_m[*u]].second;
+	hstate_t p = sp_m[proj_m[*u]].first;
+	hstate_t q = sp_m[proj_m[*u]].second;
 
-	    if (tmp_trans.is_final(p))
-	      auto_p.add_spontaneous(*u, final_of[q]);
-	  }
+	if (tmp_trans.is_final(p))
+	  auto_p.add_spontaneous(*u, final_of[q]);
       }
+    }
 
     M se;
     partial_elimination(auto_p, se);
 
     state_exp_pair_set.clear();
     for_each_(M, p, se)
-      {
-	se_pair_t my_pair = std::make_pair(is_final_of[(*p).first],
-					   p->second); // checking type compatibility
-	state_exp_pair_set.insert(my_pair);
-      }
+    {
+      se_pair_t my_pair = std::make_pair(is_final_of[(*p).first],
+					 p->second); // checking type compatibility
+      state_exp_pair_set.insert(my_pair);
+    }
   }
 
   template<typename SA, typename TA,
@@ -308,7 +308,7 @@ namespace vcsn {
   {
     typedef typename Trans_t::value_t T;
     typedef typename output_projection_helper<ST, T>::ret    Auto_ret_t;
-    typedef typename Auto_ret_t::set_t::series_set_t      Auto_ret_series_set_t;
+    typedef typename Auto_ret_t::set_t::series_set_t	  Auto_ret_series_set_t;
 
     typename Auto_ret_t::set_t
       auto_structure(Auto_ret_series_set_t(t.structure().series().semiring()));

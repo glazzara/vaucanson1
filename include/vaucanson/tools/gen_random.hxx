@@ -40,7 +40,7 @@ namespace vcsn {
 
     alphabet_t		alpha;
     unsigned		nb = alea(nb_letter ? nb_letter :
-					      alpha.max_size());
+				  alpha.max_size());
     for (unsigned i = 0; i < nb; ++i)
       alpha.insert(alpha.random_letter());
 
@@ -104,9 +104,9 @@ namespace vcsn {
     srand(init);
   }
 
-	/*------.
-	| empty |
-	`------*/
+  /*------.
+  | empty |
+  `------*/
 
   template <class TAutomata, class AutomataSetGenerator>
   TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -126,33 +126,33 @@ namespace vcsn {
     return work;
   }
 
-	/*---------.
-	| generate |
-	`---------*/
+  /*---------.
+  | generate |
+  `---------*/
 
   template <class TAutomata, class AutomataSetGenerator>
   TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
-  generate(unsigned nb_state, unsigned nb_edge_,
+  generate(unsigned nb_state, unsigned nb_transition_,
 	   unsigned istate, unsigned fstate,
 	   unsigned nb_letter)
   {
     automata_set_t aset =
       GenRandomAutomataSet::generate(SELECT(automata_set_t), nb_letter);
-    return generate(aset, nb_state, nb_edge_, istate, fstate);
+    return generate(aset, nb_state, nb_transition_, istate, fstate);
   }
 
   template <class TAutomata, class AutomataSetGenerator>
   TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate(const automata_set_t& set,
-	   unsigned nb_state, unsigned nb_edge_,
+	   unsigned nb_state, unsigned nb_transition_,
 	   unsigned istate, unsigned fstate)
   {
     AUTOMATON_TYPES(TAutomata);
     AUTOMATON_FREEMONOID_TYPES(TAutomata);
-    int nb_edge = nb_edge_;
+    int nb_transition = nb_transition_;
     // check consistency of automaton
-    if (nb_edge_ < nb_state - 1)
-      nb_edge = nb_state - 1;
+    if (nb_transition_ < nb_state - 1)
+      nb_transition = nb_state - 1;
     if (fstate > nb_state) fstate = nb_state;
     if (fstate <= 0) fstate = 1;
     if (istate > nb_state) istate = nb_state;
@@ -168,62 +168,62 @@ namespace vcsn {
     state_iterator i = prev;
     ++i;
     for (; i != work.states().end(); ++i)
-      {
-	nb_edge--;
-	std::set<hedge_t> aim;
-	letter_t e = set.series().monoid().alphabet().choose();
-	work.letter_deltac(aim, *prev, e, delta_kind::edges());
-	if (aim.size() == 0)
-	  work.add_letter_edge(*prev, *i, e);
-	prev = i;
-      }
+    {
+      nb_transition--;
+      std::set<htransition_t> aim;
+      letter_t e = set.series().monoid().alphabet().choose();
+      work.letter_deltac(aim, *prev, e, delta_kind::transitions());
+      if (aim.size() == 0)
+	work.add_letter_transition(*prev, *i, e);
+      prev = i;
+    }
 
-    for (int i = 0; i < nb_edge; i++)
-      {
-	std::set<hstate_t> aim;
-	letter_t e = set.series().monoid().alphabet().choose();
-	hstate_t s = work.choose_state();
-	hstate_t a = work.choose_state();
-	work.letter_deltac(aim, s, e, delta_kind::states());
-	if (aim.find(a) == aim.end())
-	  work.add_letter_edge(s, a, e);
-      }
+    for (int i = 0; i < nb_transition; i++)
+    {
+      std::set<hstate_t> aim;
+      letter_t e = set.series().monoid().alphabet().choose();
+      hstate_t s = work.choose_state();
+      hstate_t a = work.choose_state();
+      work.letter_deltac(aim, s, e, delta_kind::states());
+      if (aim.find(a) == aim.end())
+	work.add_letter_transition(s, a, e);
+    }
 
     work.set_initial(*work.states().begin());
     // set initial states
     for (unsigned i = 1; i < istate; i++)
-      {
-	hstate_t tmp = work.choose_state();
-	while (work.is_initial(tmp))
-	  tmp = work.choose_state();
-	work.set_initial(tmp);
-      }
+    {
+      hstate_t tmp = work.choose_state();
+      while (work.is_initial(tmp))
+	tmp = work.choose_state();
+      work.set_initial(tmp);
+    }
 
     work.set_final(*--work.states().end());
     // set final states
     for (unsigned i = 1; i < fstate; i++)
-      {
-	hstate_t tmp = work.choose_state();
-	while (work.is_final(tmp))
-	  tmp = work.choose_state();
-	work.set_final(tmp);
-      }
+    {
+      hstate_t tmp = work.choose_state();
+      while (work.is_final(tmp))
+	tmp = work.choose_state();
+      work.set_final(tmp);
+    }
 
     return work;
   }
 
-	/*---------------.
-	| useful methods |
-	`---------------*/
+  /*---------------.
+  | useful methods |
+  `---------------*/
 
   template <class TAutomata, class AutomataSetGenerator>
   unsigned GenRandomAutomata<TAutomata, AutomataSetGenerator>::
-  nb_edge_circle(TAutomata work, hstate_t state)
+  nb_transition_circle(TAutomata work, hstate_t state)
   {
     AUTOMATON_TYPES(TAutomata);
     unsigned res = 0;
 
-    for_each_edge(i, work)
+    for_each_transition(i, work)
       if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
 	res++;
 
@@ -232,36 +232,36 @@ namespace vcsn {
 
   template <class TAutomata, class AutomataSetGenerator>
   void GenRandomAutomata<TAutomata, AutomataSetGenerator>::
-  del_edge_circle(TAutomata& work, hstate_t state)
+  del_transition_circle(TAutomata& work, hstate_t state)
   {
     AUTOMATON_TYPES(TAutomata);
 
-    std::list<hedge_t> to_remove;
-    for_each_edge(i, work)
-      {
-	if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
-	  to_remove.push_back(*i);
-      }
-    for_each_const_(std::list<hedge_t>, e, to_remove)
-      work.del_edge(*e);
+    std::list<htransition_t> to_remove;
+    for_each_transition(i, work)
+    {
+      if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
+	to_remove.push_back(*i);
+    }
+    for_each_const_(std::list<htransition_t>, e, to_remove)
+      work.del_transition(*e);
   }
 
 
-	/*----------------------.
-	| generate with epsilon |
-	`----------------------*/
+  /*----------------------.
+  | generate with epsilon |
+  `----------------------*/
 
   template <class TAutomata, class AutomataSetGenerator>
   TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate_with_epsilon(unsigned nb_state,
-			unsigned nb_edge,
+			unsigned nb_transition,
 			unsigned nb_epsilon_min,
 			unsigned nb_epsilon_max)
   {
     automata_set_t aset =
       GenRandomAutomataSet::generate(SELECT(automata_set_t));
-    TAutomata a = generate_with_epsilon(aset, nb_state, nb_edge,
-					      nb_epsilon_min, nb_epsilon_max);
+    TAutomata a = generate_with_epsilon(aset, nb_state, nb_transition,
+					nb_epsilon_min, nb_epsilon_max);
     return a;
   }
 
@@ -271,26 +271,26 @@ namespace vcsn {
   TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
   generate_with_epsilon(const automata_set_t& set,
 			unsigned nb_state,
-			unsigned nb_edge,
+			unsigned nb_transition,
 			unsigned nb_epsilon_min,
 			unsigned nb_epsilon_max)
   {
-    TAutomata a = generate(set, nb_state, nb_edge);
+    TAutomata a = generate(set, nb_state, nb_transition);
     unsigned nb_eps = nb_epsilon_min + alea(nb_epsilon_max - nb_epsilon_min);
 
     for (unsigned i = 0; i < nb_eps; ++i)
-      {
-	hstate_t f = a.choose_state();
-	hstate_t t = a.choose_state();
-	a.add_spontaneous(f, t);
-      }
+    {
+      hstate_t f = a.choose_state();
+      hstate_t t = a.choose_state();
+      a.add_spontaneous(f, t);
+    }
     return a;
   }
 
 
-	/*-------------.
-	| generate dfa |
-	`-------------*/
+  /*-------------.
+  | generate dfa |
+  `-------------*/
 
   template <class TAutomata, class AutomataSetGenerator>
   TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -320,44 +320,44 @@ namespace vcsn {
       work.add_state();
 
     for_each_state(i, work)
+    {
+      for_each_letter(j, set.series().monoid().alphabet())
+	work.add_letter_transition(*i,work.choose_state(),*j);
+      while (nb_transition_circle(work, *i) == set.series().monoid().alphabet().size())
       {
+	del_transition_circle(work, *i);
 	for_each_letter(j, set.series().monoid().alphabet())
-	  work.add_letter_edge(*i,work.choose_state(),*j);
-	while (nb_edge_circle(work, *i) == set.series().monoid().alphabet().size())
+	{
+	  std::set<hstate_t> ret;
+	  work.letter_deltac(ret, *i, *j, delta_kind::states());
+	  if (ret.size() == 0)
 	  {
-	    del_edge_circle(work, *i);
-	    for_each_letter(j, set.series().monoid().alphabet())
-	      {
-		std::set<hstate_t> ret;
-		work.letter_deltac(ret, *i, *j, delta_kind::states());
-		if (ret.size() == 0)
-		  {
-		    hstate_t s;
-		    while ((s = work.choose_state()) == *i);
-		    work.add_letter_edge(*i, s, *j);
-		  }
-	      }
+	    hstate_t s;
+	    while ((s = work.choose_state()) == *i);
+	    work.add_letter_transition(*i, s, *j);
 	  }
+	}
       }
+    }
 
     // set initial states
     work.set_initial(work.choose_state());
 
     // set final states
     for (unsigned i = 0; i < fstate; i++)
-      {
-	hstate_t tmp = work.choose_state();
-	while (work.is_final(tmp))
-	  tmp = work.choose_state();
-	work.set_final(tmp);
-      }
+    {
+      hstate_t tmp = work.choose_state();
+      while (work.is_final(tmp))
+	tmp = work.choose_state();
+      work.set_final(tmp);
+    }
     return work;
   }
 
 
-	/*--------------------.
-	| generate normalized |
-	`--------------------*/
+  /*--------------------.
+  | generate normalized |
+  `--------------------*/
 
   template <class TAutomata, class AutomataSetGenerator>
   TAutomata GenRandomAutomata<TAutomata, AutomataSetGenerator>::
@@ -386,12 +386,12 @@ namespace vcsn {
 
     for (state_iterator i = work.states().begin(); i != work.states().end();
 	 i++)
-      {
-	if (work.is_initial(*i))
-	  work.unset_initial(*i);
-	if (work.is_final(*i))
-	  work.unset_final(*i);
-      }
+    {
+      if (work.is_initial(*i))
+	work.unset_initial(*i);
+      if (work.is_final(*i))
+	work.unset_final(*i);
+    }
 
     hstate_t init = work.add_state();
     hstate_t final = work.add_state();
@@ -406,13 +406,13 @@ namespace vcsn {
 
     for (unsigned i = 0; i < density; i++)
       if (tmp = work.choose_state() != init)
-	work.add_letter_edge(init, tmp,
-			     alpha.choose());
+	work.add_letter_transition(init, tmp,
+				   alpha.choose());
 
     for (unsigned i =0; i < density; i++)
       if (tmp = work.choose_state() != final)
-	work.add_letter_edge(tmp, final,
-			     alpha.choose());
+	work.add_letter_transition(tmp, final,
+				   alpha.choose());
 
     return work;
   }

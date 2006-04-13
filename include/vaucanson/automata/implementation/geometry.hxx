@@ -21,17 +21,17 @@ namespace vcsn
 {
   inline
   geometry::geometry()
-    : states_(0), edges_(0), initials_(0), finals_(0), name_(0)
+    : states_(0), transitions_(0), initials_(0), finals_(0), name_(0)
   {}
 
   inline
   geometry::geometry(const geometry& obj)
-    : states_(0), edges_(0), initials_(0), finals_(0), name_(0)
+    : states_(0), transitions_(0), initials_(0), finals_(0), name_(0)
   {
     if (obj.states_ != 0)
       states_ = new states_geometry_map_t(obj.states());
-    if (obj.edges_ != 0)
-      edges_ = new edges_geometry_map_t(obj.edges());
+    if (obj.transitions_ != 0)
+      transitions_ = new transitions_geometry_map_t(obj.transitions());
     if (obj.initials_ != 0)
       initials_ = new initials_geometry_map_t(obj.initials());
     if (obj.finals_ != 0)
@@ -45,8 +45,8 @@ namespace vcsn
   {
     if (states_)
       delete states_;
-    if (edges_)
-      delete edges_;
+    if (transitions_)
+      delete transitions_;
     if (initials_)
       delete initials_;
     if (finals_)
@@ -74,19 +74,19 @@ namespace vcsn
 
 
   inline
-  geometry::edges_geometry_map_t& geometry::edges()
+  geometry::transitions_geometry_map_t& geometry::transitions()
   {
-    if (! edges_)
-      edges_ = new edges_geometry_map_t();
-    return *edges_;
+    if (! transitions_)
+      transitions_ = new transitions_geometry_map_t();
+    return *transitions_;
   }
 
   inline
-  const geometry::edges_geometry_map_t& geometry::edges() const
+  const geometry::transitions_geometry_map_t& geometry::transitions() const
   {
-    if (! edges_)
-      edges_ = new edges_geometry_map_t();
-    return *edges_;
+    if (! transitions_)
+      transitions_ = new transitions_geometry_map_t();
+    return *transitions_;
   }
 
 

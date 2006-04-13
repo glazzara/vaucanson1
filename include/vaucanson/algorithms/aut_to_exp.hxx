@@ -48,19 +48,19 @@ namespace vcsn {
    */
   struct DefaultChooser
   {
-    template <class Auto_>
-    hstate_t
-    operator()(const Auto_& a) const
-    {
-      assertion(a.states().size() > 0);
-      typename Auto_::state_iterator s = a.states().begin();
-      typename Auto_::state_iterator k = s;
-      while ((k != a.states().end()) &&
-	     ((a.is_initial(*k)) || (a.is_final(*k))))
-	++k;
-      s = k;
-      return *s;
-    }
+      template <class Auto_>
+      hstate_t
+      operator()(const Auto_& a) const
+      {
+	assertion(a.states().size() > 0);
+	typename Auto_::state_iterator s = a.states().begin();
+	typename Auto_::state_iterator k = s;
+	while ((k != a.states().end()) &&
+	       ((a.is_initial(*k)) || (a.is_final(*k))))
+	  ++k;
+	s = k;
+	return *s;
+      }
   };
 
 
@@ -76,188 +76,188 @@ namespace vcsn {
 
   struct RandomChooser
   {
-    template <class Auto_>
-    hstate_t
-    operator()(const Auto_& a) const
-    {
-      assertion(a.states().size() > 0);
-
-      int n_init = 0;
-      int n_final = 0;
-      for (typename Auto_::state_iterator i = a.states().begin();
-	   i != a.states().end();
-	   ++i)
+      template <class Auto_>
+      hstate_t
+      operator()(const Auto_& a) const
       {
-	if (a.is_initial(*i))
-	  ++n_init;
-	if (a.is_final(*i))
-	  ++n_final;
-      }
+	assertion(a.states().size() > 0);
 
-      unsigned n = utility::random::generate((unsigned) 0,
-					     a.states().size() -
-					     (n_init + n_final));
+	int n_init = 0;
+	int n_final = 0;
+	for (typename Auto_::state_iterator i = a.states().begin();
+	     i != a.states().end();
+	     ++i)
+	{
+	  if (a.is_initial(*i))
+	    ++n_init;
+	  if (a.is_final(*i))
+	    ++n_final;
+	}
 
-      typename Auto_::state_iterator k = a.states().begin();
-      unsigned kk = 0;
-      while (kk <= n ||
-	     ((a.is_initial(*k)) || (a.is_final(*k))) || k == a.states().end())
+	unsigned n = utility::random::generate((unsigned) 0,
+					       a.states().size() -
+					       (n_init + n_final));
+
+	typename Auto_::state_iterator k = a.states().begin();
+	unsigned kk = 0;
+	while (kk <= n || k == a.states().end() ||
+	       ((a.is_initial(*k)) || (a.is_final(*k))))
 	{
 	  if (k == a.states().end())
-	    {
-	      k = a.states().begin();
-	      continue;
-	    }
+	  {
+	    k = a.states().begin();
+	    continue;
+	  }
 	  ++k;
 	  ++kk;
 	}
-      return *k;
-    }
+	return *k;
+      }
   };
 
 
-  /*-----------------------.
-  |    Heuristic chooser:  |
-  | Edge Number Heuristic  |
-  `-----------------------*/
+  /*----------------------------.
+  |    Heuristic chooser:       |
+  | Transition Number Heuristic |
+  `----------------------------*/
 
   struct HChooser
   {
-    template <class Auto_>
-    hstate_t
-    operator()(const Auto_& a) const
-    {
-      assertion(a.states().size() > 0);
-
-      std::set<hedge_t> delta_in;
-      std::set<hedge_t> delta_out;
-
-      typename Auto_::state_iterator s = a.states().begin();
-      unsigned int d_in = 0;
-      unsigned int d_out = 0;
-      unsigned int max = INT_MAX;
-      bool has_loop = false;
-      bool has_loop_old = false;
-
-      for (typename Auto_::state_iterator i = a.states().begin();
-	   i != a.states().end();
-	   ++i)
+      template <class Auto_>
+      hstate_t
+      operator()(const Auto_& a) const
       {
-	if (a.is_final(*i) || a.is_initial(*i))
-	  continue;
-	has_loop = false;
+	assertion(a.states().size() > 0);
 
-	a.deltac(delta_out, *i, delta_kind::edges());
-	a.rdeltac(delta_in, *i, delta_kind::edges());
-	for (typename std::set<hedge_t>::iterator j = delta_out.begin();
-	     j != delta_out.end();
-	     ++j)
-	  if (*i == a.aim_of(*j))
-	    has_loop = true;
+	std::set<htransition_t> delta_in;
+	std::set<htransition_t> delta_out;
 
-	//FIXME : If the state has several loops
-	if (has_loop)
-	  d_in = delta_in.size() - 1;
-	else
-	  d_in = delta_in.size();
-	d_out = delta_out.size();
+	typename Auto_::state_iterator s = a.states().begin();
+	unsigned int d_in = 0;
+	unsigned int d_out = 0;
+	unsigned int max = INT_MAX;
+	bool has_loop = false;
+	bool has_loop_old = false;
 
-	//We prefer to delete a state that has no loop transition
-	if (d_in * d_out < max ||
-	    (d_in * d_out == max &&
-	     has_loop_old && not has_loop))
+	for (typename Auto_::state_iterator i = a.states().begin();
+	     i != a.states().end();
+	     ++i)
 	{
-	  s = i;
-	  max = d_in * d_out;
-	  has_loop_old = has_loop;
+	  if (a.is_final(*i) || a.is_initial(*i))
+	    continue;
+	  has_loop = false;
+
+	  a.deltac(delta_out, *i, delta_kind::transitions());
+	  a.rdeltac(delta_in, *i, delta_kind::transitions());
+	  for (typename std::set<htransition_t>::iterator j = delta_out.begin();
+	       j != delta_out.end();
+	       ++j)
+	    if (*i == a.aim_of(*j))
+	      has_loop = true;
+
+	  //FIXME : If the state has several loops
+	  if (has_loop)
+	    d_in = delta_in.size() - 1;
+	  else
+	    d_in = delta_in.size();
+	  d_out = delta_out.size();
+
+	  //We prefer to delete a state that has no loop transition
+	  if (d_in * d_out < max ||
+	      (d_in * d_out == max &&
+	       has_loop_old && not has_loop))
+	  {
+	    s = i;
+	    max = d_in * d_out;
+	    has_loop_old = has_loop;
+	  }
+	  delta_out.clear();
+	  delta_in.clear();
 	}
-	delta_out.clear();
-	delta_in.clear();
+	return *s;
       }
-      return *s;
-    }
   };
 
 
   /*-------------------------.
-  | Heuristic chooser:       |
+  | Heuristic chooser:	     |
   | from Delgado & Morais    |
   | (Proposed in CIAA 2004)  |
   `-------------------------*/
- struct DMChooser
+  struct DMChooser
   {
-    template <class Auto_>
-    hstate_t
-    operator()(const Auto_& a) const
-    {
-      assertion(a.states().size() > 0);
-
-      std::set<hedge_t> delta_in;
-      std::set<hedge_t> delta_out;
-      typename Auto_::state_iterator s = a.states().begin();
-
-      unsigned int weight_min = INT_MAX;
-      for (typename Auto_::state_iterator i = a.states().begin();
-	   i != a.states().end();
-	   ++i)
+      template <class Auto_>
+      hstate_t
+      operator()(const Auto_& a) const
       {
-	if (a.is_final(*i) || a.is_initial(*i))
-	  continue;
-	unsigned int n_loops = 0;
-	unsigned int in = 0;
-	unsigned int out = 0;
+	assertion(a.states().size() > 0);
 
-	unsigned int weight = 0;
+	std::set<htransition_t> delta_in;
+	std::set<htransition_t> delta_out;
+	typename Auto_::state_iterator s = a.states().begin();
 
-	delta_in.clear();
-	delta_out.clear();
-	a.deltac(delta_out, *i, delta_kind::edges());
-	a.rdeltac(delta_in, *i, delta_kind::edges());
-
-	for (typename std::set<hedge_t>::iterator j = delta_out.begin();
-	     j != delta_out.end();
-	     ++j)
-	  if (*i == a.aim_of(*j))
-	    ++n_loops;
-
-	in = delta_in.size() - n_loops;
-	out = delta_out.size() - n_loops;
-
-	// Compute SUM(Win(k) * (Out - 1))
-	for (typename std::set<hedge_t>::iterator j = delta_in.begin();
-	     j != delta_in.end();
-	     ++j)
-	  if (*i != a.aim_of(*j))
-	  {
-	    weight += a.series_value_of(*j).length() * (out - 1);
-	  }
-
-	// Compute SUM(Wout(k) * (In - 1))
-	for (typename std::set<hedge_t>::iterator j = delta_out.begin();
-	     j != delta_out.end();
-	     ++j)
-	  if (*i != a.aim_of(*j))
-	  {
-	    weight += a.series_value_of(*j).length() * (in - 1);
-	  }
-
-	// Compute Wloop * (In * Out - 1)
-	for (typename std::set<hedge_t>::iterator j = delta_out.begin();
-	     j != delta_out.end();
-	     ++j)
-	  if (*i == a.aim_of(*j))
-	  {
-	    weight += a.series_value_of(*j).length() * (in  * out - 1);
-	  }
-
-	if (weight < weight_min)
+	unsigned int weight_min = INT_MAX;
+	for (typename Auto_::state_iterator i = a.states().begin();
+	     i != a.states().end();
+	     ++i)
 	{
-	  s = i;
-	  weight_min = weight;
+	  if (a.is_final(*i) || a.is_initial(*i))
+	    continue;
+	  unsigned int n_loops = 0;
+	  unsigned int in = 0;
+	  unsigned int out = 0;
+
+	  unsigned int weight = 0;
+
+	  delta_in.clear();
+	  delta_out.clear();
+	  a.deltac(delta_out, *i, delta_kind::transitions());
+	  a.rdeltac(delta_in, *i, delta_kind::transitions());
+
+	  for (typename std::set<htransition_t>::iterator j = delta_out.begin();
+	       j != delta_out.end();
+	       ++j)
+	    if (*i == a.aim_of(*j))
+	      ++n_loops;
+
+	  in = delta_in.size() - n_loops;
+	  out = delta_out.size() - n_loops;
+
+	  // Compute SUM(Win(k) * (Out - 1))
+	  for (typename std::set<htransition_t>::iterator j = delta_in.begin();
+	       j != delta_in.end();
+	       ++j)
+	    if (*i != a.aim_of(*j))
+	    {
+	      weight += a.series_value_of(*j).length() * (out - 1);
+	    }
+
+	  // Compute SUM(Wout(k) * (In - 1))
+	  for (typename std::set<htransition_t>::iterator j = delta_out.begin();
+	       j != delta_out.end();
+	       ++j)
+	    if (*i != a.aim_of(*j))
+	    {
+	      weight += a.series_value_of(*j).length() * (in - 1);
+	    }
+
+	  // Compute Wloop * (In * Out - 1)
+	  for (typename std::set<htransition_t>::iterator j = delta_out.begin();
+	       j != delta_out.end();
+	       ++j)
+	    if (*i == a.aim_of(*j))
+	    {
+	      weight += a.series_value_of(*j).length() * (in  * out - 1);
+	    }
+
+	  if (weight < weight_min)
+	  {
+	    s = i;
+	    weight_min = weight;
+	  }
 	}
+	return *s;
       }
-      return *s;
-    }
   };
 
 
@@ -277,22 +277,22 @@ namespace vcsn {
    */
   class ListChooser
   {
-  public :
-    ListChooser(const std::list<hstate_t>& l) :
-      list_(l),
-      pos_(l.begin())
-    {}
+    public :
+      ListChooser(const std::list<hstate_t>& l) :
+	list_(l),
+	pos_(l.begin())
+      {}
 
-    template <class Auto_>
-    hstate_t operator() (const Auto_&)
-    {
-      assertion(pos_ != list_.end());
-      return *pos_++;
-    }
+      template <class Auto_>
+      hstate_t operator() (const Auto_&)
+      {
+	assertion(pos_ != list_.end());
+	return *pos_++;
+      }
 
-  private :
-    std::list<hstate_t>	list_;
-    std::list<hstate_t>::const_iterator pos_;
+    private :
+      std::list<hstate_t>	list_;
+      std::list<hstate_t>::const_iterator pos_;
   };
 
   /*-----------.
@@ -302,81 +302,81 @@ namespace vcsn {
   template <class A_, typename Auto_, typename Chooser_>
   typename Auto_::series_set_elt_t
   do_in_aut_to_exp(const AutomataBase<A_>&  a_set,
-		    Auto_&		    a,
-		    Chooser_	            chooser)
+		   Auto_&		    a,
+		   Chooser_		    chooser)
   {
     AUTOMATON_TYPES(Auto_);
-    typedef Auto_				automaton_t;
-    typedef typename automaton_t::series_set_t      series_set_t;
-    typedef typename automaton_t::series_set_elt_t  series_set_elt_t;
+    typedef Auto_					automaton_t;
+    typedef typename automaton_t::series_set_t		series_set_t;
+    typedef typename automaton_t::series_set_elt_t	series_set_elt_t;
 
-    typedef typename std::set<hedge_t>			hedge_set_t;
-    typedef std::map<hstate_t, series_set_elt_t>	      	sums_t;
+    typedef typename std::set<htransition_t>		htransition_set_t;
+    typedef std::map<hstate_t, series_set_elt_t>	sums_t;
 
-    typename hedge_set_t::const_iterator		i, j;
-    hstate_t					        q;
-    hedge_set_t						edges;
-    std::list<hedge_t> edges_to_remove;
+    typename htransition_set_t::const_iterator		i, j;
+    hstate_t						q;
+    htransition_set_t					transitions;
+    std::list<htransition_t> transitions_to_remove;
     normalize_here(a);
     precondition(is_normalized(a));
 
     while (a.states().size() != 2)
+    {
+      series_set_elt_t loop_sum(a_set.series());
+      sums_t	   in_sums, out_sums;
+
+      q = chooser(a);
+      if (a.is_initial(q) || a.is_final(q))
+	continue;
+
+      transitions.clear();
+      // FIXME: use a new version of delta!
+      a.deltac(transitions, q, delta_kind::transitions());
+      for (i = transitions.begin(); i != transitions.end(); i = j)
       {
-	series_set_elt_t loop_sum(a_set.series());
-	sums_t       in_sums, out_sums;
+	j = i; ++j;
 
-	q = chooser(a);
-	if (a.is_initial(q) || a.is_final(q))
-	  continue;
-
-	edges.clear();
-	// FIXME: use a new version of delta!
-	a.deltac(edges, q, delta_kind::edges());
-	for (i = edges.begin(); i != edges.end(); i = j)
-	  {
-	    j = i; ++j;
-
-	    if (a.aim_of(*i) == q)
-		loop_sum += a.series_of(*i);
-	    else
-	      {
-		typename sums_t::iterator f = out_sums.find(a.aim_of(*i));
-		if (f == out_sums.end())
-		  f = out_sums.insert
-		    (std::make_pair(a.aim_of(*i),
-				    series_set_elt_t(a_set.series()))).first;
-	        f->second += a.series_of(*i);
-	      }
-	    a.del_edge(*i);
-	  }
-	edges.clear();
-	// FIXME: use a new version of delta!
-	a.rdeltac(edges, q, delta_kind::edges());
-	for (i = edges.begin(); i != edges.end(); i = j)
-	  {
-	    j = i; ++j;
-	    // Here all loops have already been removed.
-	    typename sums_t::iterator f = in_sums.find(a.origin_of(*i));
-	    if (f == in_sums.end())
-	      f = in_sums.insert
-		(std::make_pair(a.origin_of(*i),
-				series_set_elt_t(a_set.series()))).first;
-
-	    f->second += a.series_of(*i);
-	    a.del_edge(*i);
-	  }
-	loop_sum.star();
-	//Slow
-	for_each_const_(sums_t, in, in_sums)
-	  for_each_const_(sums_t, out, out_sums)
-	  {
-	    series_set_elt_t res = in->second * loop_sum * out->second;
-	    a.add_series_edge(in->first, out->first, res);
-	  }
-	a.del_state(q);
+	if (a.aim_of(*i) == q)
+	  loop_sum += a.series_of(*i);
+	else
+	{
+	  typename sums_t::iterator f = out_sums.find(a.aim_of(*i));
+	  if (f == out_sums.end())
+	    f = out_sums.insert
+	      (std::make_pair(a.aim_of(*i),
+			      series_set_elt_t(a_set.series()))).first;
+	  f->second += a.series_of(*i);
+	}
+	a.del_transition(*i);
       }
+      transitions.clear();
+      // FIXME: use a new version of delta!
+      a.rdeltac(transitions, q, delta_kind::transitions());
+      for (i = transitions.begin(); i != transitions.end(); i = j)
+      {
+	j = i; ++j;
+	// Here all loops have already been removed.
+	typename sums_t::iterator f = in_sums.find(a.origin_of(*i));
+	if (f == in_sums.end())
+	  f = in_sums.insert
+	    (std::make_pair(a.origin_of(*i),
+			    series_set_elt_t(a_set.series()))).first;
+
+	f->second += a.series_of(*i);
+	a.del_transition(*i);
+      }
+      loop_sum.star();
+      //Slow
+      for_each_const_(sums_t, in, in_sums)
+	for_each_const_(sums_t, out, out_sums)
+      {
+	series_set_elt_t res = in->second * loop_sum * out->second;
+	a.add_series_transition(in->first, out->first, res);
+      }
+      a.del_state(q);
+    }
     series_set_elt_t final(a_set.series());
-    for_each_edge(i, a)
+    for_each_transition(i, a)
       final += a.label_of(*i);
     return final;
   }

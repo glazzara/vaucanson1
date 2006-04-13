@@ -42,11 +42,11 @@ namespace vcsn
   //@{
   /// Compute the equivalent FMP automaton of a transducer.
   /// Please note that for the moment this function works
-  /// only if the support of each edge is finite.
+  /// only if the support of each transition is finite.
   ///
   /// Preconditions :
   /// The transducer is realtime.
-  /// The weight of each edge must have a finite support.
+  /// The weight of each transition must have a finite support.
   template<typename S, typename T,
 	   typename SS, typename TT>
   Element<SS, TT>&

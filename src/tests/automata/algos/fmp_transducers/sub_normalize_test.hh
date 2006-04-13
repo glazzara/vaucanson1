@@ -1,17 +1,17 @@
 // sub_normalize_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_SUB_NORMALIZE_TEST_HH
@@ -83,18 +83,18 @@ sub_normalize_test(tests::Tester& t)
   t1.set_initial(s0, series_elt1);
   t1.set_final(s2, series_elt4);
 
-  t1.add_series_edge(s0, s1, series_elt2);
-  t1.add_series_edge(s0, s0, series_elt5);
-  t1.add_series_edge(s1, s2, series_elt3);
-  t1.add_series_edge(s1, s1, series_elt5);
-  t1.add_series_edge(s2, s2, series_elt5);
-  t1.add_series_edge(s2, s0, series_elt2);
+  t1.add_series_transition(s0, s1, series_elt2);
+  t1.add_series_transition(s0, s0, series_elt5);
+  t1.add_series_transition(s1, s2, series_elt3);
+  t1.add_series_transition(s1, s1, series_elt5);
+  t1.add_series_transition(s2, s2, series_elt5);
+  t1.add_series_transition(s2, s0, series_elt2);
 
   t2 = sub_normalize(t1);
 
   TEST(t, "Sub-normalization of FMP transducers",
        (! is_sub_normalized(t1)) && is_sub_normalized(t2)
-       && t2.states().size() == 18 && t2.edges().size() == 21);
+       && t2.states().size() == 18 && t2.transitions().size() == 21);
 
   return t.all_passed();
 }

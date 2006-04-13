@@ -31,7 +31,7 @@
 
 namespace vcsn {
 
-#define AutoType(Type) \
+#define AutoType(Type)				\
   typename Element<S, T>::Type
 
   /** @addtogroup automata *//** @{ */
@@ -65,8 +65,8 @@ namespace vcsn {
   op_states(const AutomataBase<S>&, const T&);
 
   template <class S, class T>
-  typename automaton_traits<T>::edges_t
-  op_edges(const AutomataBase<S>&, const T&);
+  typename automaton_traits<T>::transitions_t
+  op_transitions(const AutomataBase<S>&, const T&);
 
   template <class S, class T>
   typename automaton_traits<T>::initial_support_t
@@ -117,45 +117,45 @@ namespace vcsn {
   op_choose_state(const AutomataBase<S>&, T&);
 
   template <class S, class T>
-  hedge_t
-  op_add_edge(const AutomataBase<S>&, T&,
-	      hstate_t from,
-	      hstate_t to,
-	      const typename Element<S, T>::label_t& label);
-
-  template<class S, class T>
-  hedge_t
-  op_add_weighted_edge(const AutomataBase<S>&, T&,
-		       hstate_t from,
-		       hstate_t to,
-		       const typename Element<S, T>::semiring_elt_t& w,
-		       const typename Element<S, T>::monoid_elt_value_t& m);
-
-  template <class S, class T>
-  hedge_t
-  op_add_series_edge(const AutomataBase<S>&, T&,
+  htransition_t
+  op_add_transition(const AutomataBase<S>&, T&,
 		    hstate_t from,
 		    hstate_t to,
-		    const typename Element<S, T>::series_set_elt_t&);
+		    const typename Element<S, T>::label_t& label);
+
+  template<class S, class T>
+  htransition_t
+  op_add_weighted_transition(const AutomataBase<S>&, T&,
+			     hstate_t from,
+			     hstate_t to,
+			     const typename Element<S, T>::semiring_elt_t& w,
+			     const typename Element<S, T>::monoid_elt_value_t& m);
 
   template <class S, class T>
-  hedge_t
+  htransition_t
+  op_add_series_transition(const AutomataBase<S>&, T&,
+			   hstate_t from,
+			   hstate_t to,
+			   const typename Element<S, T>::series_set_elt_t&);
+
+  template <class S, class T>
+  htransition_t
   op_add_spontaneous(const AutomataBase<S>&, T&,
 		     hstate_t from,
 		     hstate_t to,
 		     const typename Element<S, T>::semiring_elt_t&);
 
   template <class S, class T>
-  hedge_t
-  op_add_letter_edge(const AutomataBase<S>&, T&,
-		     hstate_t from,
-		     hstate_t to,
-		     const typename Element<S, T>::letter_t&);
+  htransition_t
+  op_add_letter_transition(const AutomataBase<S>&, T&,
+			   hstate_t from,
+			   hstate_t to,
+			   const typename Element<S, T>::letter_t&);
 
   template <class S, class T>
   void
   op_update(const AutomataBase<S>&, T&,
-	    hedge_t,
+	    htransition_t,
 	    const AutoType(label_t)& l);
 
   template <class S, class T>
@@ -165,8 +165,8 @@ namespace vcsn {
 
   template <class S, class T>
   void
-  op_del_edge(const AutomataBase<S>&, T&,
-	      hedge_t);
+  op_del_transition(const AutomataBase<S>&, T&,
+		    htransition_t);
 
   template <class S, class T>
   bool
@@ -175,78 +175,78 @@ namespace vcsn {
 
   template <class S, class T>
   bool
-  op_has_edge(const AutomataBase<S>&, const T&,
-	      hedge_t);
+  op_has_transition(const AutomataBase<S>&, const T&,
+		    htransition_t);
 
   template <class S, class T>
   hstate_t
   op_origin_of(const AutomataBase<S>&, const T&,
-	       hedge_t);
+	       htransition_t);
 
   template <class S, class T>
   hstate_t
   op_aim_of(const AutomataBase<S>&, const T&,
-	    hedge_t);
+	    htransition_t);
 
   template <class S, class T>
   typename Element<S, T>::label_t
   op_label_of(const AutomataBase<S>&, const T&,
-	      hedge_t);
+	      htransition_t);
 
   template <class S, class T>
   const typename Element<S, T>::series_set_elt_t
   op_series_of(const AutomataBase<S>&, const T&,
-	      hedge_t);
+	       htransition_t);
 
   template <class S, class T>
   typename Element<S, T>::series_set_elt_value_t
   op_series_value_of(const AutomataBase<S>&, const T&,
-		    hedge_t);
+		     htransition_t);
 
 
   template <class S, class T>
   typename Element<S, T>::monoid_elt_t
   op_word_of(const AutomataBase<S>&, const T&,
-	     hedge_t);
+	     htransition_t);
 
   template <class S, class T>
   typename Element<S, T>::semiring_elt_t
   op_weight_of(const AutomataBase<S>&, const T&,
-	       hedge_t);
+	       htransition_t);
 
   template <class S, class T>
   typename Element<S, T>::monoid_elt_value_t
   op_word_value_of(const AutomataBase<S>&, const T&,
-		   hedge_t);
+		   htransition_t);
 
   template <class S, class T>
   typename Element<S, T>::letter_t
   op_letter_of(const AutomataBase<S>&, const T&,
-	       hedge_t);
+	       htransition_t);
 
   template <class S, class T>
   bool
   op_is_spontaneous(const AutomataBase<S>&, const T&,
-		    hedge_t);
+		    htransition_t);
 
   //@}
 
   // output_return_type = OutputIterator
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction		= output
 
-  /// store the output edges of the state 'from' using 'res'.
+  /// store the output transitions of the state 'from' using 'res'.
   template <class S, class T,
 	    typename OutputIterator>
   void op_delta(const AutomataBase<S>&, const T&,
 		OutputIterator res,
 		hstate_t from,
-		delta_kind::edges k);
+		delta_kind::transitions k);
 
   /**
    * Delta using a query, with iterator output.
    *
-   * Store the output edges  of the state 'from' where query(label(e))
+   * Store the output transitions  of the state 'from' where query(label(e))
    * is true using 'res'.
    */
   template <class S, class T,
@@ -255,12 +255,12 @@ namespace vcsn {
 		OutputIterator res,
 		hstate_t from,
 		const L& query,
-		delta_kind::edges k);
+		delta_kind::transitions k);
 
   /**
    * Delta on a letter, with iterator output.
    *
-   * Store  the output  edges  of  the state  'from'  where the  label
+   * Store  the output	transitions  of	 the state  'from'  where the  label
    * matches the letter.
    */
   template <class S, class T,
@@ -269,7 +269,7 @@ namespace vcsn {
 		       OutputIterator res,
 		       hstate_t from,
 		       const L& letter,
-		       delta_kind::edges k);
+		       delta_kind::transitions k);
 
   /// Store the output spontaneous transitions.
   template <class S, class T,
@@ -277,22 +277,22 @@ namespace vcsn {
   void op_spontaneous_delta(const AutomataBase<S>&, const T&,
 			    OutputIterator res,
 			    hstate_t from,
-			    delta_kind::edges k);
+			    delta_kind::transitions k);
 
   // output_return_type = Container
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction		= output
 
-  /// Store the output edges of the state 'from' in the container 'res'.
+  /// Store the output transitions of the state 'from' in the container 'res'.
   template <class S, class T,
 	    typename Container>
   void op_deltac(const AutomataBase<S>&, const T&,
-		 Container& res, hstate_t from, delta_kind::edges k);
+		 Container& res, hstate_t from, delta_kind::transitions k);
 
   /**
    * Delta using a query, with container output.
    *
-   * Store the output edges  of the state 'from' where query(label(e))
+   * Store the output transitions  of the state 'from' where query(label(e))
    * is true in the container 'res'.
    */
   template <class S, class T,
@@ -301,12 +301,12 @@ namespace vcsn {
 		 Container& res,
 		 hstate_t from,
 		 const L& query,
-		 delta_kind::edges k);
+		 delta_kind::transitions k);
 
   /**
    * Delta on a letter, with container output.
    *
-   * Store the output edges  of the state 'from' where query(label(e))
+   * Store the output transitions  of the state 'from' where query(label(e))
    * is true in the container 'res'.
    */
   template <class S, class T,
@@ -315,17 +315,17 @@ namespace vcsn {
 			Container& res,
 			hstate_t from,
 			const L& letter,
-			delta_kind::edges k);
+			delta_kind::transitions k);
 
   /// Store the output op_spontaneous transitions.
   template <class S, class T, class Container>
   void op_spontaneous_deltac(const AutomataBase<S>&, const T&,
 			     Container& res,
 			     hstate_t from,
-			     delta_kind::edges k);
+			     delta_kind::transitions k);
 
   // output_return_type = OutputIterator
-  // output_type        = hstate_t
+  // output_type	= hstate_t
   // direction		= output
 
   /// Store the output states of the state 'from' using 'res'.
@@ -351,7 +351,7 @@ namespace vcsn {
   /**
    * Delta on a letter, with iterator output.
    *
-   * Store  the output  states of  the  state 'from'  where the  label
+   * Store  the output	states of  the	state 'from'  where the	 label
    * matches the letter.
    */
   template<class S, class T, typename OutputIterator, typename L>
@@ -369,7 +369,7 @@ namespace vcsn {
 			    delta_kind::states k);
 
   // output_return_type = Container
-  // output_type        = hstate_t
+  // output_type	= hstate_t
   // direction		= output
 
   /// Store the output states of the state 'from' in the container 'res'.
@@ -411,20 +411,20 @@ namespace vcsn {
 			     delta_kind::states k);
 
   // output_return_type = OutputIterator
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction		= input
 
-  /// Store the output edges of the state 'from' using 'res'.
+  /// Store the output transitions of the state 'from' using 'res'.
   template<class S, class T, typename OutputIterator>
   void op_rdelta(const AutomataBase<S>&, const T&,
 		 OutputIterator res,
 		 hstate_t from,
-		 delta_kind::edges k);
+		 delta_kind::transitions k);
 
   /**
    * Reverse delta using a query, with iterator output.
    *
-   * Store the output edges  of the state 'from' where query(label(e))
+   * Store the output transitions  of the state 'from' where query(label(e))
    * is true using 'res'.
    */
   template<class S, class T, typename OutputIterator, typename L>
@@ -432,12 +432,12 @@ namespace vcsn {
 		 OutputIterator res,
 		 hstate_t from,
 		 const L& query,
-		 delta_kind::edges k);
+		 delta_kind::transitions k);
 
   /**
    * Reverse delta on a letter, with iterator output.
    *
-   * Store  the output  edges  of  the state  'from'  where the  label
+   * Store  the output	transitions  of	 the state  'from'  where the  label
    * matches the letter.
    */
   template<class S, class T, typename OutputIterator, typename L>
@@ -445,28 +445,28 @@ namespace vcsn {
 			OutputIterator res,
 			hstate_t from,
 			const L& letter,
-			delta_kind::edges k);
+			delta_kind::transitions k);
 
   /// Store the output op_spontaneous transitions.
   template<class S, class T, typename OutputIterator>
   void op_spontaneous_rdelta(const AutomataBase<S>&, const T&,
 			     OutputIterator res,
 			     hstate_t from,
-			     delta_kind::edges k);
+			     delta_kind::transitions k);
 
   // output_return_type = Container
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction		= input
 
-  /// store the output edges of the state 'from' in the container 'res'.
+  /// store the output transitions of the state 'from' in the container 'res'.
   template<class S, class T, typename Container>
   void op_rdeltac(const AutomataBase<S>&, const T&,
-		  Container& res, hstate_t from, delta_kind::edges k);
+		  Container& res, hstate_t from, delta_kind::transitions k);
 
   /**
    * Reverse delta using a query, with container output.
    *
-   * Store the output edges  of the state 'from' where query(label(e))
+   * Store the output transitions  of the state 'from' where query(label(e))
    * is true in the container 'res'.
    */
   template<class S, class T, typename Container, typename L>
@@ -474,12 +474,12 @@ namespace vcsn {
 		  Container& res,
 		  hstate_t from,
 		  const L& query,
-		  delta_kind::edges k);
+		  delta_kind::transitions k);
 
   /**
    * Reverse delta on a letter, with container output.
    *
-   * Store the output edges  of the state 'from' where query(label(e))
+   * Store the output transitions  of the state 'from' where query(label(e))
    * is true in the container 'res'.
    */
   template<class S, class T, typename Container, typename L>
@@ -487,17 +487,17 @@ namespace vcsn {
 			 Container& res,
 			 hstate_t from,
 			 const L& letter,
-			 delta_kind::edges k);
+			 delta_kind::transitions k);
 
   /// store the output op_spontaneous transitions.
   template<class S, class T, typename Container>
   void op_spontaneous_rdeltac(const AutomataBase<S>&, const T&,
 			      Container& res,
 			      hstate_t from,
-			      delta_kind::edges k);
+			      delta_kind::transitions k);
 
   // output_return_type = OutputIterator
-  // output_type        = hstate_t
+  // output_type	= hstate_t
   // direction		= input
 
   /// store the output states of the state 'from' using 'res'.
@@ -523,7 +523,7 @@ namespace vcsn {
   /**
    * Reverse delta on a letter, with iterator output.
    *
-   * Store  the output  states of  the  state 'from'  where the  label
+   * Store  the output	states of  the	state 'from'  where the	 label
    * matches the letter.
    */
   template<class S, class T, typename OutputIterator, typename L>
@@ -541,7 +541,7 @@ namespace vcsn {
 			     delta_kind::states k);
 
   // output_return_type = Container
-  // output_type        = hstate_t
+  // output_type	= hstate_t
   // direction		= input
 
   /// Store the output states of the state 'from' in the container 'res'.

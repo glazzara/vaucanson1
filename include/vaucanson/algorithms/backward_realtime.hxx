@@ -56,55 +56,55 @@ namespace vcsn {
     unsigned int size = w1.size();
 
     if (size > 1)
+    {
+      monoid_elt_t m(a.structure().series().monoid());
+
+      semiring_elt_t s = label.get(m1);
+      series_set_elt_t in_series(a.structure().series());
+
+      m = w1.substr(cpt++, 1);
+
+      in_series.assoc(m, s);
+
+      if (initial)
       {
-	monoid_elt_t m(a.structure().series().monoid());
-
-	semiring_elt_t s = label.get(m1);
-	series_set_elt_t in_series(a.structure().series());
-
-	m = w1.substr(cpt++, 1);
-
-	in_series.assoc(m, s);
-
- 	if (initial)
-	  {
-	    s0 = a.add_state();
-	    a.set_initial(s0, in_series);
-	    a.unset_initial(stop);
-	    s1 = s0;
-	  }
-	else
-	  {
-	    s0 = start;
-	    s1 = a.add_state();
-	    a.add_series_edge(s0, s1, in_series);
-	  }
-
-	for (unsigned int i = 1; i < size - 1; ++i)
-	  {
-	    m = w1.substr(cpt++, 1);
-	    s0 = s1;
-	    s1 = a.add_state();
-	    series_set_elt_t series(a.structure().series());
-	    series.assoc(m, s_ident);
-	    a.add_series_edge(s0, s1, series);
-	  }
-
-	m = w1.substr(cpt++, 1);
-
-	series_set_elt_t out_series(a.structure().series());
-	out_series.assoc(m, s_ident);
-
-	if (final)
-	  {
-	    a.unset_final(start);
-	    a.set_final(s1, out_series);
-	  }
-	else
-	  a.add_series_edge(s1, stop, out_series);
-
-	return 1;
+	s0 = a.add_state();
+	a.set_initial(s0, in_series);
+	a.unset_initial(stop);
+	s1 = s0;
       }
+      else
+      {
+	s0 = start;
+	s1 = a.add_state();
+	a.add_series_transition(s0, s1, in_series);
+      }
+
+      for (unsigned int i = 1; i < size - 1; ++i)
+      {
+	m = w1.substr(cpt++, 1);
+	s0 = s1;
+	s1 = a.add_state();
+	series_set_elt_t series(a.structure().series());
+	series.assoc(m, s_ident);
+	a.add_series_transition(s0, s1, series);
+      }
+
+      m = w1.substr(cpt++, 1);
+
+      series_set_elt_t out_series(a.structure().series());
+      out_series.assoc(m, s_ident);
+
+      if (final)
+      {
+	a.unset_final(start);
+	a.set_final(s1, out_series);
+      }
+      else
+	a.add_series_transition(s1, stop, out_series);
+
+      return 1;
+    }
 
     return 0;
   }
@@ -120,7 +120,7 @@ namespace vcsn {
     // perform cut-up.
     cut_up_here(res);
 
-    edges_t edges = res.value().edges();
+    transitions_t transitions = res.transitions();
     vector_t i_states; i_states.reserve(res.initial().size());
     vector_t f_states; f_states.reserve(res.final().size());
 
@@ -137,10 +137,10 @@ namespace vcsn {
       do_realtime_words(res, *f, hstate_t(),
 			res.get_final(*f), false, true);
 
-    for_each_(edges_t, e, edges)
+    for_each_(transitions_t, e, transitions)
       if (do_realtime_words(res, res.origin_of(*e), res.aim_of(*e),
 			    res.series_of(*e), false, false))
-	res.del_edge(*e);
+	res.del_transition(*e);
   }
 
 
@@ -149,8 +149,8 @@ namespace vcsn {
   do_backward_realtime_here(const AutomataBase<A_>&, Auto_& a)
   {
     AUTOMATON_TYPES(Auto_);
-    typedef std::set<hedge_t>		    	delta_ret_t;
-    typedef std::deque<hedge_t>	     		queue_t;
+    typedef std::set<htransition_t>			delta_ret_t;
+    typedef std::deque<htransition_t>			queue_t;
 
     queue_t		to_del, origin_d;
     delta_ret_t		aim_d;
@@ -168,62 +168,62 @@ namespace vcsn {
     for (typename automaton_t::state_iterator origin = a.states().begin();
 	 origin != a.states().end();
 	 ++origin)
+    {
+      std::insert_iterator<queue_t> origin_i(origin_d, origin_d.begin());
+      a.delta(origin_i, *origin, delta_kind::transitions());
+
+      while (!origin_d.empty())
       {
-	std::insert_iterator<queue_t> origin_i(origin_d, origin_d.begin());
-	a.delta(origin_i, *origin, delta_kind::edges());
+	htransition_t d_o = origin_d.front();
+	origin_d.pop_front();
+	if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
+	{
+	  aim_d.clear();
+	  a.deltac(aim_d, a.aim_of(d_o), delta_kind::transitions());
+	  for (typename delta_ret_t::const_iterator d = aim_d.begin();
+	       d != aim_d.end();
+	       ++d)
+	    if (a.series_of(*d).get(monoid_identity) == semiring_zero)
+	    {
+	      bool new_transition = true;
+	      for (typename queue_t::const_iterator d__o =
+		     origin_d.begin();
+		   d__o != origin_d.end();
+		   ++d__o)
+		if ((a.aim_of(*d__o) == a.aim_of(*d) &&
+		     (a.label_of(*d__o) == a.label_of(*d))))
+		{
+		  new_transition = false;
+		  break;
+		}
 
-	while (!origin_d.empty())
-	  {
-	    hedge_t d_o = origin_d.front();
-	    origin_d.pop_front();
-	    if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
+	      if (new_transition)
 	      {
-		aim_d.clear();
-		a.deltac(aim_d, a.aim_of(d_o), delta_kind::edges());
-		for (typename delta_ret_t::const_iterator d = aim_d.begin();
-		     d != aim_d.end();
-		     ++d)
-		  if (a.series_of(*d).get(monoid_identity) == semiring_zero)
-		    {
-		      bool new_edge = true;
-		      for (typename queue_t::const_iterator d__o =
-			     origin_d.begin();
-			   d__o != origin_d.end();
-			   ++d__o)
-			if ((a.aim_of(*d__o) == a.aim_of(*d) &&
-			     (a.label_of(*d__o) == a.label_of(*d))))
-			  {
-			    new_edge = false;
-			    break;
-			  }
-
-		      if (new_edge)
-			{
-			  hedge_t new_hedge = a.add_series_edge
-			    (*origin,
-			     a.aim_of(*d),
-			     a.series_of(d_o) * a.series_of(*d));
-			  origin_d.push_back(new_hedge);
-			}
-		    }
-		if (a.is_final(a.aim_of(d_o)))
-		  a.set_final(*origin);
+		htransition_t new_htransition = a.add_series_transition
+		  (*origin,
+		   a.aim_of(*d),
+		   a.series_of(d_o) * a.series_of(*d));
+		origin_d.push_back(new_htransition);
 	      }
-	  }
+	    }
+	  if (a.is_final(a.aim_of(d_o)))
+	    a.set_final(*origin);
+	}
       }
+    }
 
-    for (typename automaton_t::edge_iterator e = a.edges().begin();
-	 e != a.edges().end();
+    for (typename automaton_t::transition_iterator e = a.transitions().begin();
+	 e != a.transitions().end();
 	 ++e)
       if (a.series_of(*e).get(monoid_identity) != semiring_zero)
 	to_del.push_back(*e);
 
     while (!to_del.empty())
-      {
-	hedge_t e = to_del.front();
-	to_del.pop_front();
-	a.del_edge(e);
-      }
+    {
+      htransition_t e = to_del.front();
+      to_del.pop_front();
+      a.del_transition(e);
+    }
 
     accessible_here(a);
 

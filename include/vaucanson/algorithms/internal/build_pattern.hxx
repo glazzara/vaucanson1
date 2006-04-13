@@ -39,7 +39,7 @@ namespace vcsn
     IncAutomataConstructor<Self, T_auto, Etiq>::IncAutomataConstructor
     (
       const series_set_t& series, const Etiq& etiq
-    )
+      )
     {
       automata_set_t a_set(series);
       auto_p = new T_auto(a_set);
@@ -53,14 +53,14 @@ namespace vcsn
     IncAutomataConstructor<Self, T_auto, Etiq>::IncAutomataConstructor
     (
       const series_set_t& series, const std::list<Etiq>& listexp
-    )
+      )
     {
       automata_set_t a_set(series);
       auto_p = new T_auto(a_set);
       unvisited = 0;
 
       for (typename std::list<Etiq>::const_iterator it = listexp.begin();
- 	   it != listexp.end(); ++it)
+	   it != listexp.end(); ++it)
 	auto_p->set_initial(add_state(*it));
 
       current_state = states_map.end();
@@ -102,7 +102,7 @@ namespace vcsn
     IncAutomataConstructor<Self, T_auto, Etiq>::link_to
     (
       const Etiq& etiq, const letter_t& l
-    )
+      )
     {
       hstate_t	s;
       iterator	i = states_map.find(etiq);
@@ -111,7 +111,7 @@ namespace vcsn
 	s = add_state(etiq);
       else
 	s = i->second.first;
-      auto_p->add_letter_edge(current_state->second.first, s, l);
+      auto_p->add_letter_transition(current_state->second.first, s, l);
     }
 
     template <typename Self, typename T_auto, typename Etiq>
@@ -119,7 +119,7 @@ namespace vcsn
     IncAutomataConstructor<Self, T_auto, Etiq>::link_to
     (
       const Etiq& etiq, const series_set_elt_t& el
-    )
+      )
     {
       hstate_t	s;
       iterator	i = states_map.find(etiq);
@@ -128,7 +128,7 @@ namespace vcsn
 	s = add_state(etiq);
       else
 	s = i->second.first;
-      auto_p->add_series_edge(current_state->second.first, s, el);
+      auto_p->add_series_transition(current_state->second.first, s, el);
     }
 
     // A tool to add a state in the set and the automaton
@@ -176,7 +176,7 @@ namespace vcsn
     IncAutomataConstructor<Self, T_auto, Etiq>::compare
     (
       const Etiq& e1, const Etiq& e2
-    )
+      )
     {
       return e1 < e2;
     }
@@ -192,7 +192,7 @@ namespace vcsn
     MathAutomataConstructor<Self, T_auto, Etiq>::MathAutomataConstructor
     (
       const series_set_t& series, const Container container
-    )
+      )
     {
       typedef typename Container::iterator	c_iterator;
 
@@ -238,7 +238,7 @@ namespace vcsn
     MathAutomataConstructor<Self, T_auto, Etiq>::is_initial_caller
     (
       const Etiq& e
-    )	const
+      )	const
     {
       return static_cast<const Self&>(*this).is_initial(e);
     }
@@ -248,7 +248,7 @@ namespace vcsn
     MathAutomataConstructor<Self, T_auto, Etiq>::is_final_caller
     (
       const Etiq& e
-    )	const
+      )	const
     {
       return static_cast<const Self&>(*this).is_final(e);
     }
@@ -261,14 +261,14 @@ namespace vcsn
     MathAutomataConstructor<Self, T_auto, Etiq>::link_to
     (
       const hstate_t& state, const letter_t& letter, const Container container
-    )
+      )
     {
       typedef typename Container::iterator	c_iterator;
       for (c_iterator j = container.begin(); j != container.end(); ++j)
       {
 	iterator tmp = states_map.find(*j);
 	if (tmp != states_map.end())
-	  auto_p->add_letter_edge(state, tmp->second, letter);
+	  auto_p->add_letter_transition(state, tmp->second, letter);
       }
     }
 
@@ -278,7 +278,7 @@ namespace vcsn
     MathAutomataConstructor<Self, T_auto, Etiq>::compare
     (
       const Etiq& e1, const Etiq& e2
-    )
+      )
     {
       return e1 < e2;
     }

@@ -1,17 +1,17 @@
 // evaluation_fmp_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_EVALUATION_FMP_TEST_HH
@@ -82,13 +82,13 @@ evaluation_fmp_test(tests::Tester& t)
   t1.set_initial(st1);
   t1.set_final(st3);
 
-  hedge_t	h1 = t1.add_series_edge(st1, st2, series_elt1);
-  hedge_t	h2 = t1.add_series_edge(st2, st3, series_elt2);
-  hedge_t	h3 = t1.add_series_edge(st1, st2, series_elt3);
-  hedge_t	h4 = t1.add_series_edge(st1, st3, series_elt4);
+  htransition_t	h1 = t1.add_series_transition(st1, st2, series_elt1);
+  htransition_t	h2 = t1.add_series_transition(st2, st3, series_elt2);
+  htransition_t	h3 = t1.add_series_transition(st1, st2, series_elt3);
+  htransition_t	h4 = t1.add_series_transition(st1, st3, series_elt4);
 
 
- boolean_transducer::automaton_t trans1 =
+  boolean_transducer::automaton_t trans1 =
     boolean_transducer::new_automaton(first_at, second_at);
 
   fmp_to_realtime(t1, trans1);

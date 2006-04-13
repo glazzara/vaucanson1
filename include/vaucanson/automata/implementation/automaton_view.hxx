@@ -20,7 +20,7 @@
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/automata/implementation/automaton_view.hh>
 
-#define AutoType(Type) \
+#define AutoType(Type)				\
   typename Element<S, IdentityView<T> >::Type
 
 namespace vcsn {
@@ -124,10 +124,10 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  typename automaton_traits<T>::edges_t
-  op_edges(const AutomataBase<S>& s, const IdentityView<T>& v)
+  typename automaton_traits<T>::transitions_t
+  op_transitions(const AutomataBase<S>& s, const IdentityView<T>& v)
   {
-    return op_edges(s, v.object());
+    return op_transitions(s, v.object());
   }
 
   template <class S, class T>
@@ -209,28 +209,28 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  hedge_t
-  op_add_edge(const AutomataBase<S>& s, IdentityView<T>& v,
-	      hstate_t from,
-	      hstate_t to,
-	      const typename Element<S, T>::label_t& label)
-  {
-    return op_add_edge(s, v.object(), from, to, label);
-  }
-
-  template <class S, class T>
-  hedge_t
-  op_add_series_edge(const AutomataBase<S>& s,
-		    IdentityView<T>& v,
+  htransition_t
+  op_add_transition(const AutomataBase<S>& s, IdentityView<T>& v,
 		    hstate_t from,
 		    hstate_t to,
-		    const typename Element<S, T>::series_set_elt_t& se)
+		    const typename Element<S, T>::label_t& label)
   {
-    return op_add_series_edge(s, v.object(), from, to, se);
+    return op_add_transition(s, v.object(), from, to, label);
   }
 
   template <class S, class T>
-  hedge_t
+  htransition_t
+  op_add_series_transition(const AutomataBase<S>& s,
+			   IdentityView<T>& v,
+			   hstate_t from,
+			   hstate_t to,
+			   const typename Element<S, T>::series_set_elt_t& se)
+  {
+    return op_add_series_transition(s, v.object(), from, to, se);
+  }
+
+  template <class S, class T>
+  htransition_t
   op_add_spontaneous(const AutomataBase<S>& s, IdentityView<T>& v,
 		     hstate_t from,
 		     hstate_t to)
@@ -239,19 +239,19 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  hedge_t
-  op_add_letter_edge(const AutomataBase<S>& s, IdentityView<T>& v,
-		     hstate_t from,
-		     hstate_t to,
-		     const typename Element<S, T>::letter_t& e)
+  htransition_t
+  op_add_letter_transition(const AutomataBase<S>& s, IdentityView<T>& v,
+			   hstate_t from,
+			   hstate_t to,
+			   const typename Element<S, T>::letter_t& e)
   {
-    return op_add_letter_edge(s, v.object(), from, to, e);
+    return op_add_letter_transition(s, v.object(), from, to, e);
   }
 
   template <class S, class T>
   void
   op_update(const AutomataBase<S>& s, IdentityView<T>& v,
-	    hedge_t e,
+	    htransition_t e,
 	    const AutoType(label_t)& l)
   {
     op_update(s, v.object(), e, l);
@@ -267,10 +267,10 @@ namespace vcsn {
 
   template <class S, class T>
   void
-  op_del_edge(const AutomataBase<S>& s, IdentityView<T>& v,
-	      hedge_t e)
+  op_del_transition(const AutomataBase<S>& s, IdentityView<T>& v,
+		    htransition_t e)
   {
-    op_del_edge(s, v.object(), e);
+    op_del_transition(s, v.object(), e);
   }
 
   template <class S, class T>
@@ -284,18 +284,18 @@ namespace vcsn {
 
   template <class S, class T>
   bool
-  op_has_edge(const AutomataBase<S>& s,
-	      const IdentityView<T>& v,
-	      hedge_t e)
+  op_has_transition(const AutomataBase<S>& s,
+		    const IdentityView<T>& v,
+		    htransition_t e)
   {
-    return op_has_edge(s, v.object(), e);
+    return op_has_transition(s, v.object(), e);
   }
 
   template <class S, class T>
   hstate_t
   op_origin_of(const AutomataBase<S>& s,
 	       const IdentityView<T>& v,
-	       hedge_t e)
+	       htransition_t e)
   {
     return op_origin_of(s, v.object(), e);
   }
@@ -304,7 +304,7 @@ namespace vcsn {
   hstate_t
   op_aim_of(const AutomataBase<S>& s,
 	    const IdentityView<T>& v,
-	    hedge_t e)
+	    htransition_t e)
   {
     return op_aim_of(s, v.object(), e);
   }
@@ -313,7 +313,7 @@ namespace vcsn {
   typename Element<S, T>::label_t
   op_label_of(const AutomataBase<S>& s,
 	      const IdentityView<T>& v,
-	      hedge_t e)
+	      htransition_t e)
   {
     return op_label_of(s, v.object(), e);
   }
@@ -321,8 +321,8 @@ namespace vcsn {
   template <class S, class T>
   const typename Element<S, T>::series_set_elt_t
   op_series_of(const AutomataBase<S>& s,
-	      const IdentityView<T>& v,
-	      hedge_t e)
+	       const IdentityView<T>& v,
+	       htransition_t e)
   {
     return op_series_of(s, v.object(), e);
   }
@@ -330,8 +330,8 @@ namespace vcsn {
   template <class S, class T>
   typename Element<S, T>::series_set_elt_value_t
   op_series_value_of(const AutomataBase<S>& s,
-		    const IdentityView<T>& v,
-		    hedge_t e)
+		     const IdentityView<T>& v,
+		     htransition_t e)
   {
     return op_series_value_of(s, v.object(), e);
   }
@@ -340,7 +340,7 @@ namespace vcsn {
   typename Element<S, T>::monoid_elt_t
   op_word_of(const AutomataBase<S>& s,
 	     const IdentityView<T>& v,
-	     hedge_t e)
+	     htransition_t e)
   {
     return op_word_of(s, v.object(), e);
   }
@@ -349,7 +349,7 @@ namespace vcsn {
   typename Element<S, T>::monoid_elt_value_t
   op_word_value_of(const AutomataBase<S>& s,
 		   const IdentityView<T>& v,
-		   hedge_t e)
+		   htransition_t e)
   {
     return op_word_value_of(s, v.object(), e);
   }
@@ -358,7 +358,7 @@ namespace vcsn {
   typename Element<S, T>::letter_t
   op_letter_of(const AutomataBase<S>& s,
 	       const IdentityView<T>& v,
-	       hedge_t e)
+	       htransition_t e)
   {
     return op_letter_of(s, v.object(), e);
   }
@@ -367,13 +367,13 @@ namespace vcsn {
   bool
   op_is_spontaneous(const AutomataBase<S>& s,
 		    const IdentityView<T>& v,
-		    hedge_t e)
+		    htransition_t e)
   {
     return op_is_spontaneous(s, v.object(), e);
   }
 
   // output_return_type = OutputIterator
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction		= output
 
   template <class S, class T,
@@ -382,7 +382,7 @@ namespace vcsn {
 		const IdentityView<T>& v,
 		OutputIterator res,
 		hstate_t from,
-		delta_kind::edges k)
+		delta_kind::transitions k)
   {
     op_delta(s, v.object(), res, from, k);
   }
@@ -394,7 +394,7 @@ namespace vcsn {
 		OutputIterator res,
 		hstate_t from,
 		const L& query,
-		delta_kind::edges k)
+		delta_kind::transitions k)
   {
     op_delta(s, v.object(), res, from, query, k);
   }
@@ -406,7 +406,7 @@ namespace vcsn {
 		       OutputIterator res,
 		       hstate_t from,
 		       const L& letter,
-		       delta_kind::edges k)
+		       delta_kind::transitions k)
   {
     op_letter_delta(s, v.object(), res, from, letter, k);
   }
@@ -417,20 +417,20 @@ namespace vcsn {
 			    const IdentityView<T>& v,
 			    OutputIterator res,
 			    hstate_t from,
-			    delta_kind::edges k)
+			    delta_kind::transitions k)
   {
     op_spontaneous_delta(s, v.object(), res, from, k);
   }
 
   // output_return_type = Container
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction		= output
 
   template <class S, class T,
 	    typename Container>
   void op_deltac(const AutomataBase<S>& s,
 		 const IdentityView<T>& v,
-		 Container& res, hstate_t from, delta_kind::edges k)
+		 Container& res, hstate_t from, delta_kind::transitions k)
   {
     op_deltac(s, v.object(), res, from, k);
   }
@@ -442,7 +442,7 @@ namespace vcsn {
 		 Container& res,
 		 hstate_t from,
 		 const L& query,
-		 delta_kind::edges k)
+		 delta_kind::transitions k)
   {
     op_deltac(s, v.object(), res, from, query, k);
   }
@@ -454,7 +454,7 @@ namespace vcsn {
 			Container& res,
 			hstate_t from,
 			const L& letter,
-			delta_kind::edges k)
+			delta_kind::transitions k)
   {
     op_letter_deltac(s, v.object(), res, from, letter, k);
   }
@@ -464,13 +464,13 @@ namespace vcsn {
 			     const IdentityView<T>& v,
 			     Container& res,
 			     hstate_t from,
-			     delta_kind::edges k)
+			     delta_kind::transitions k)
   {
     op_spontaneous_deltac(s, v.object(), res, from, k);
   }
 
   // output_return_type = OutputIterator
-  // output_type        = hstate_t
+  // output_type	= hstate_t
   // direction		= output
 
   template<class S, class T, typename OutputIterator>
@@ -516,7 +516,7 @@ namespace vcsn {
   }
 
   // output_return_type = Container
-  // output_type        = hstate_t
+  // output_type	= hstate_t
   // direction		= output
 
   template<class S, class T, typename Container>
@@ -560,14 +560,14 @@ namespace vcsn {
   }
 
   // output_return_type = OutputIterator
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction		= input
 
   template<class S, class T, typename OutputIterator>
   void op_rdelta(const AutomataBase<S>& s, const IdentityView<T>& v,
 		 OutputIterator res,
 		 hstate_t from,
-		 delta_kind::edges k)
+		 delta_kind::transitions k)
   {
     op_rdelta(s, v.object(), res, from, k);
   }
@@ -577,7 +577,7 @@ namespace vcsn {
 		 OutputIterator res,
 		 hstate_t from,
 		 const L& query,
-		 delta_kind::edges k)
+		 delta_kind::transitions k)
   {
     op_rdelta(s, v.object(), res, from, query, k);
   }
@@ -587,7 +587,7 @@ namespace vcsn {
 			OutputIterator res,
 			hstate_t from,
 			const L& letter,
-			delta_kind::edges k)
+			delta_kind::transitions k)
   {
     op_letter_rdelta(s, v.object(), res, from, letter, k);
   }
@@ -597,18 +597,18 @@ namespace vcsn {
 			     const IdentityView<T>& v,
 			     OutputIterator res,
 			     hstate_t from,
-			     delta_kind::edges k)
+			     delta_kind::transitions k)
   {
     op_spontaneous_rdelta(s, v.object(), res, from, k);
   }
 
   // output_return_type = Container
-  // output_type        = hedge_t
+  // output_type	= htransition_t
   // direction		= input
 
   template<class S, class T, typename Container>
   void op_rdeltac(const AutomataBase<S>& s, const IdentityView<T>& v,
-		  Container& res, hstate_t from, delta_kind::edges k)
+		  Container& res, hstate_t from, delta_kind::transitions k)
   {
     op_rdeltac(s, v.object(), res, from, k);
   }
@@ -618,7 +618,7 @@ namespace vcsn {
 		  Container& res,
 		  hstate_t from,
 		  const L& query,
-		  delta_kind::edges k)
+		  delta_kind::transitions k)
   {
     op_rdeltac(s, v.object(), res, from, query, k);
   }
@@ -628,7 +628,7 @@ namespace vcsn {
 			 Container& res,
 			 hstate_t from,
 			 const L& letter,
-			 delta_kind::edges k)
+			 delta_kind::transitions k)
   {
     op_letter_rdeltac(s, v.object(), res, from, letter, k);
   }
@@ -638,13 +638,13 @@ namespace vcsn {
 			      const IdentityView<T>& v,
 			      Container& res,
 			      hstate_t from,
-			      delta_kind::edges k)
+			      delta_kind::transitions k)
   {
     op_spontaneous_rdeltac(s, v.object(), res, from, k);
   }
 
   // output_return_type = OutputIterator
-  // output_type        = hstate_t
+  // output_type	= hstate_t
   // direction		= input
 
   template<class S, class T, typename OutputIterator>
@@ -687,7 +687,7 @@ namespace vcsn {
   }
 
   // output_return_type = Container
-  // output_type        = hstate_t
+  // output_type	= hstate_t
   // direction		= input
 
   template<class S, class T, typename Container>

@@ -1,17 +1,17 @@
 // global_consistency_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2004 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_CONTEXT_HEADERS_TRANSDUCERS_GLOBAL_CONSISTENCY_TEST_HH
@@ -24,14 +24,14 @@ operator == (const automaton_t& a, const automaton_t& b)
 {
   return
     a.states().size() == b.states().size() and
-    a.edges().size() == b.edges().size() and
+    a.transitions().size() == b.transitions().size() and
     a.initial().size() == b.initial().size() and
     a.final().size() == b.final().size();
 }
 
 # define TYPE_OK(T1, T2) utility::static_eq<T1, typename Automaton::T2>::value
-# define TEST_TYPE(T1, T2) \
-TEST(t, #T1 " is consistent.", TYPE_OK(T1, T2))
+# define TEST_TYPE(T1, T2)				\
+  TEST(t, #T1 " is consistent.", TYPE_OK(T1, T2))
 
 template <class Automaton>
 bool
@@ -78,9 +78,9 @@ global_consistency_test(tests::Tester& t)
        a1.structure().series().monoid() == in_md);
   TEST(t, "new_automaton gives a correct semiring.",
        a1.structure().series().semiring() == out_ss);
- TEST(t, "new_automaton gives a correct automata set.", a1.structure() == aa);
- TEST(t, "automata set inegality is consistent.",
-      a1.structure() != a3.structure());
+  TEST(t, "new_automaton gives a correct automata set.", a1.structure() == aa);
+  TEST(t, "automata set inegality is consistent.",
+       a1.structure() != a3.structure());
 
   return t.all_passed();
 }

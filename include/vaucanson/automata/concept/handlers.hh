@@ -24,35 +24,35 @@ namespace vcsn {
   struct state_h
   {};
 
-  struct edge_h
+  struct transition_h
   {};
 
   template<typename Tag>
   class handler
   {
-  public:
-    typedef Tag kind;
+    public:
+      typedef Tag kind;
 
-    handler();
+      handler();
 
-    handler(int h);
+      handler(int h);
 
-    handler(const handler& h);
+      handler(const handler& h);
 
-    handler& operator=(const handler& h);
+      handler& operator=(const handler& h);
 
-    handler& operator=(int h);
+      handler& operator=(int h);
 
-    int value() const;
+      int value() const;
 
-    operator int () const;
+      operator int () const;
 
-  protected:
-    int v_;
+    protected:
+      int v_;
   };
 
   typedef handler<state_h> hstate_t;
-  typedef handler<edge_h> hedge_t;
+  typedef handler<transition_h> htransition_t;
 
   template<typename kind>
   bool operator==(const handler<kind>& h1,
@@ -90,7 +90,7 @@ namespace std {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concept/handlers.hxx>
+# include <vaucanson/automata/concept/handlers.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

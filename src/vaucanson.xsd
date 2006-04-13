@@ -12,14 +12,14 @@ vaucanson.xsd version 0.3.
 <geometry> tag properties. Used to set the geometry properties of each
 element.
 - Appened to <state> node : x, y set position.
-- Appened to <transition> node : edgeType set the type of the edge
+- Appened to <transition> node : transitionType set the type of the transition
 (line, arcL, arcR, curve).
 - Appended to <automaton> or <transducer> node : x, y set the global offset.
 -->
 
 <!--
 This type is divided in two parts, since it's irrelevant to set
-edgeType for states or coordinates for transitions.
+transitionType for states or coordinates for transitions.
 -->
 <xs:complexType name="geometry_state">
   <xs:attribute name="x" type="xs:decimal"/>
@@ -27,7 +27,7 @@ edgeType for states or coordinates for transitions.
 </xs:complexType>
 
 <xs:complexType name="geometry_trans">
-  <xs:attribute name="edgeType">
+  <xs:attribute name="transitionType">
     <xs:simpleType>
       <xs:restriction base="xs:string">
 	<xs:pattern value="line|arcL|arcR|curve"/>
@@ -72,26 +72,26 @@ An optional "any" attribute is used, to let the user use personal attributes.
   <xs:attribute name="DimStateFillColor" type="xs:string"/>
   <xs:attribute name="StateLineDblCoef" type="xs:string"/>
   <xs:attribute name="StateLineDblSep" type="xs:string"/>
-  <xs:attribute name="EdgeLabelColor" type="xs:string"/>
-  <xs:attribute name="EdgeLabelScale" type="xs:string"/>
-  <xs:attribute name="EdgeLineStyle" type="xs:string"/>
-  <xs:attribute name="EdgeLineWidth" type="xs:string"/>
-  <xs:attribute name="EdgeLineColor" type="xs:string"/>
+  <xs:attribute name="TransitionLabelColor" type="xs:string"/>
+  <xs:attribute name="TransitionLabelScale" type="xs:string"/>
+  <xs:attribute name="TransitionLineStyle" type="xs:string"/>
+  <xs:attribute name="TransitionLineWidth" type="xs:string"/>
+  <xs:attribute name="TransitionLineColor" type="xs:string"/>
   <xs:attribute name="ArcAngle" type="xs:string"/>
   <xs:attribute name="LArcAngle" type="xs:string"/>
   <xs:attribute name="ArcCurvature" type="xs:string"/>
-  <xs:attribute name="EdgeOffset" type="xs:string"/>
+  <xs:attribute name="TransitionOffset" type="xs:string"/>
   <xs:attribute name="ArcOffset" type="xs:string"/>
   <xs:attribute name="LoopOffset" type="xs:string"/>
-  <xs:attribute name="ForthBackEdgeOffset" type="xs:string"/>
-  <xs:attribute name="DimEdgeLineStyle" type="xs:string"/>
-  <xs:attribute name="DimEdgeLineCoef" type="xs:string"/>
-  <xs:attribute name="DimEdgeLineColor" type="xs:string"/>
-  <xs:attribute name="DimEdgeLabelColor" type="xs:string"/>
-  <xs:attribute name="EdgeBorderCoef" type="xs:string"/>
-  <xs:attribute name="EdgeBorderColor" type="xs:string"/>
-  <xs:attribute name="EdgeLineDoubleCoefOne" type="xs:string"/>
-  <xs:attribute name="EdgeLineDoubleCoefTwo" type="xs:string"/>
+  <xs:attribute name="ForthBackTransitionOffset" type="xs:string"/>
+  <xs:attribute name="DimTransitionLineStyle" type="xs:string"/>
+  <xs:attribute name="DimTransitionLineCoef" type="xs:string"/>
+  <xs:attribute name="DimTransitionLineColor" type="xs:string"/>
+  <xs:attribute name="DimTransitionLabelColor" type="xs:string"/>
+  <xs:attribute name="TransitionBorderCoef" type="xs:string"/>
+  <xs:attribute name="TransitionBorderColor" type="xs:string"/>
+  <xs:attribute name="TransitionLineDoubleCoefOne" type="xs:string"/>
+  <xs:attribute name="TransitionLineDoubleCoefTwo" type="xs:string"/>
   <xs:attribute name="ZZSize" type="xs:string"/>
   <xs:attribute name="ZZShape" type="xs:string"/>
   <xs:attribute name="ZZLineWidth" type="xs:string"/>
@@ -117,8 +117,8 @@ An optional "any" attribute is used, to let the user use personal attributes.
   <xs:attribute name="CLoopOnSmallState" type="xs:string"/>
   <xs:attribute name="CLoopOnLargeState" type="xs:string"/>
   <xs:attribute name="CLoopOnVariableState" type="xs:string"/>
-  <xs:attribute name="EdgeLabelPosit" type="xs:string"/>
-  <xs:attribute name="EdgeLabelRevPosit" type="xs:string"/>
+  <xs:attribute name="TransitionLabelPosit" type="xs:string"/>
+  <xs:attribute name="TransitionLabelRevPosit" type="xs:string"/>
   <xs:attribute name="ArcLabelPosit" type="xs:string"/>
   <xs:attribute name="ArcLabelRevPosit" type="xs:string"/>
   <xs:attribute name="LArcLabelPosit" type="xs:string"/>
@@ -131,13 +131,13 @@ An optional "any" attribute is used, to let the user use personal attributes.
   <xs:attribute name="InitStateLabelRevPosit" type="xs:string"/>
   <xs:attribute name="FinalStateLabelPosit" type="xs:string"/>
   <xs:attribute name="FinalStateLabelRevPosit" type="xs:string"/>
-  <xs:attribute name="EdgeArrowWidth" type="xs:string"/>
-  <xs:attribute name="EdgeArrowLengthCoef" type="xs:string"/>
-  <xs:attribute name="EdgeDblArrowWidth" type="xs:string"/>
-  <xs:attribute name="EdgeDblArrowLengthCoef" type="xs:string"/>
-  <xs:attribute name="EdgeArrowInsetCoef" type="xs:string"/>
-  <xs:attribute name="EdgeArrowStyle" type="xs:string"/>
-  <xs:attribute name="EdgeRevArrowStyle" type="xs:string"/>
+  <xs:attribute name="TransitionArrowWidth" type="xs:string"/>
+  <xs:attribute name="TransitionArrowLengthCoef" type="xs:string"/>
+  <xs:attribute name="TransitionDblArrowWidth" type="xs:string"/>
+  <xs:attribute name="TransitionDblArrowLengthCoef" type="xs:string"/>
+  <xs:attribute name="TransitionArrowInsetCoef" type="xs:string"/>
+  <xs:attribute name="TransitionArrowStyle" type="xs:string"/>
+  <xs:attribute name="TransitionRevArrowStyle" type="xs:string"/>
   <xs:attribute name="StateDimen" type="xs:string"/>
   <xs:attribute name="StateDblDimen" type="xs:string"/>
   <xs:attribute name="left" type="xs:string"/>
@@ -315,7 +315,7 @@ states . This tag must be a child of <transitions> tag.
 The optional "weight" attribute can be used on weighted automata.
 On transducers, use the "in" and "out" attributes to define input and
 output for the transition.
-Edge type can be defined using the <geometry> tag, and drawing properties can
+Transition type can be defined using the <geometry> tag, and drawing properties can
 be set with the <drawing> tag.
 
 When unspecified, the unlabeled transition should be considered

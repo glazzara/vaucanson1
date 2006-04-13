@@ -35,28 +35,28 @@ namespace vcsn
       for (typename auto_t::state_iterator i = a.states().begin();
 	   i != a.states().end();
 	   ++i, ++count)
-	{
-	  o << 's' << *i << ' ';
-	  if (a.is_initial(*i))
-	    o << "i[" << conv(a, a.get_initial(*i)) << "] ";
-	  if (a.is_final(*i))
-	    o << "f[" << conv(a, a.get_final(*i)) << "]";
-	  o << std::endl;
-	}
+      {
+	o << 's' << *i << ' ';
+	if (a.is_initial(*i))
+	  o << "i[" << conv(a, a.get_initial(*i)) << "] ";
+	if (a.is_final(*i))
+	  o << "f[" << conv(a, a.get_final(*i)) << "]";
+	o << std::endl;
+      }
 
       o << std::endl;
       o << "# Transitions list" << std::endl;
-      for (typename auto_t::edge_iterator i = a.edges().begin();
-	   i != a.edges().end();
+      for (typename auto_t::transition_iterator i = a.transitions().begin();
+	   i != a.transitions().end();
 	   ++i)
-	{
-	  o << 's' << a.origin_of(*i) << ' '
-	    << 's' << a.aim_of(*i) << ' ';
-	  if (a.is_spontaneous(*i))
-	    o << 'S';
-	  else
-	    o << "l[" << conv(a, a.series_of(*i)) << "]" << std::endl;
-	}
+      {
+	o << 's' << a.origin_of(*i) << ' '
+	  << 's' << a.aim_of(*i) << ' ';
+	if (a.is_spontaneous(*i))
+	  o << 'S';
+	else
+	  o << "l[" << conv(a, a.series_of(*i)) << "]" << std::endl;
+      }
       o << '.' << std::endl;
     }
 
@@ -74,10 +74,10 @@ namespace vcsn
       // While the final ']' is escaped, read again and concat
       while (i % 2 == 1)
       {
-        std::string	tmp;
+	std::string	tmp;
 
 	s = s + "]";
-        std::getline(in, tmp, ']');
+	std::getline(in, tmp, ']');
 	s = s + tmp;
 	for (i = 0; i < tmp.size() && tmp[tmp.size() - i - 1] == '\\' ; ++i)
 	  ;
@@ -92,40 +92,40 @@ namespace vcsn
       char cmd;
       std::string str;
       while (in && !done)
+      {
+	in >> cmd;
+	switch(cmd)
 	{
-	  in >> cmd;
-	  switch(cmd)
-	    {
-	    case 's': // Definition of a state
-	      from = to;
-	      in >> to;
-	      l.add_state(to);
-	      break;
-	    case 'i': // The previous state is an initial one
-	      get_delimited_exp(in, str);
-	      l.set_initial(to, str);
-	      break;
-	    case 'f': // The previous state is a final one
-	      get_delimited_exp(in, str);
-	      l.set_final(to, str);
-	      break;
-	    case 'l': // The label of transition between the 2 previous states
-	      get_delimited_exp(in, str);
-	      l.add_edge(from, to, str);
-	      break;
-	    case 'S': // A spontaneous transions between the 2 previous states
-	      l.add_spontaneous(from, to);
-	      break;
-	    case '.':
-	      done = true;
-	      break;
-	    case '#': // The start of a comment
-	      std::getline(in, str);
-	      break;
-	    default: // Ignore other caracters
-	      break;
-	    }
+	  case 's': // Definition of a state
+	    from = to;
+	    in >> to;
+	    l.add_state(to);
+	    break;
+	  case 'i': // The previous state is an initial one
+	    get_delimited_exp(in, str);
+	    l.set_initial(to, str);
+	    break;
+	  case 'f': // The previous state is a final one
+	    get_delimited_exp(in, str);
+	    l.set_final(to, str);
+	    break;
+	  case 'l': // The label of transition between the 2 previous states
+	    get_delimited_exp(in, str);
+	    l.add_transition(from, to, str);
+	    break;
+	  case 'S': // A spontaneous transions between the 2 previous states
+	    l.add_spontaneous(from, to);
+	    break;
+	  case '.':
+	    done = true;
+	    break;
+	  case '#': // The start of a comment
+	    std::getline(in, str);
+	    break;
+	  default: // Ignore other caracters
+	    break;
 	}
+      }
     }
   }
 }

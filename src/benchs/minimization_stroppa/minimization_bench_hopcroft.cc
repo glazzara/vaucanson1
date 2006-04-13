@@ -1,17 +1,17 @@
 // minimization_bench_hopcroft.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/tools/usual_macros.hh>
@@ -53,7 +53,7 @@ int main(unsigned int argc, char **argv) {
   backward_closure_here(a);
 
   std::cout << "Automaton has " << a.states().size() << " states "
-	    << " and " << a.edges().size() << " edges." << std::endl;
+	    << " and " << a.transitions().size() << " transitions." << std::endl;
 
   VCSN_BENCH_START;
   a = minimization_hopcroft(a);

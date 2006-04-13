@@ -197,7 +197,7 @@ namespace vcsn {
     for (i = 0; i <= last_group; ++i)
       new_states[i] = output.add_state();
 
-    // Create all edges.
+    // Create all transitions.
     for (i = 0; i <= last_group; ++i)
     {
       hstate_t repres = *(groupid_to_group[i].begin());
@@ -206,17 +206,17 @@ namespace vcsn {
 	if (aut_view[repres][iletter->second] != NullState)
 	{
 	  if (not Transposed)
-	    output.add_letter_edge(new_states[i],
-				   new_states[state_to_groupid
-					      [aut_view[repres]
-					       [iletter->second]]],
-				   iletter->first);
+	    output.add_letter_transition(new_states[i],
+					 new_states[state_to_groupid
+						    [aut_view[repres]
+						     [iletter->second]]],
+					 iletter->first);
 	  else
-	    output.add_letter_edge(new_states[state_to_groupid
-					      [aut_view[repres]
-					       [iletter->second]]],
-				   new_states[i],
-				   iletter->first);
+	    output.add_letter_transition(new_states[state_to_groupid
+						    [aut_view[repres]
+						     [iletter->second]]],
+					 new_states[i],
+					 iletter->first);
 	}
     }
 

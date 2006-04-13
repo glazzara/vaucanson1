@@ -18,7 +18,7 @@
 #include <vaucanson/config/system.hh>
 
 #if not defined (VCSN_XML_NODE_HH) and				\
-    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
+  (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
 # define VCSN_XML_NODE_HH
 
 # ifndef VCSN_USE_XML
@@ -56,9 +56,9 @@ namespace vcsn
     template <class T1, class T2>
     struct reference_pair
     {
-      reference_pair(T1& f, T2& s) : first(f), second(s) {}
-      T1& first;
-      T2& second;
+	reference_pair(T1& f, T2& s) : first(f), second(s) {}
+	T1& first;
+	T2& second;
     };
 
     /**
@@ -70,14 +70,14 @@ namespace vcsn
     template <class T>
     struct Node
     {
-      typedef Factory<Node<T>, std::string> factory_t;
-      typedef std::map<std::string, hstate_t> map_t;
-      typedef reference_pair<std::map<hstate_t, std::pair<double, double> >,
-			     hstate_t> map_state_pair_t;
-      typedef reference_pair<std::map<hedge_t, std::pair<double, double> >,
-			     hedge_t> map_edge_pair_t;
-      virtual void process(xercesc::DOMElement*, T&, map_t&, factory_t&) = 0;
-      virtual ~Node();
+	typedef Factory<Node<T>, std::string> factory_t;
+	typedef std::map<std::string, hstate_t> map_t;
+	typedef reference_pair<std::map<hstate_t, std::pair<double, double> >,
+			       hstate_t> map_state_pair_t;
+	typedef reference_pair<std::map<htransition_t, std::pair<double, double> >,
+			       htransition_t> map_transition_pair_t;
+	virtual void process(xercesc::DOMElement*, T&, map_t&, factory_t&) = 0;
+	virtual ~Node();
     };
 
 
@@ -100,54 +100,54 @@ namespace vcsn
 		   typename Node<T>::factory_t&) {};		\
 								\
       template <class U>					\
-      void process(xercesc::DOMElement*, T&, U &,		\
-		   typename Node<T>::map_t&,			\
-		   typename Node<T>::factory_t&);		\
+	void process(xercesc::DOMElement*, T&, U &,		\
+		     typename Node<T>::map_t&,			\
+		     typename Node<T>::factory_t&);		\
       static Node<T>* create() { return new name ## Node; }	\
     };
 
 
-CREATE_CLASSNODE(automaton)
-CREATE_CLASSNODE(transducer)
-CREATE_CLASSNODE(label_type)
-CREATE_CLASSNODE(content)
-CREATE_CLASSNODE(states)
-CREATE_CLASSNODE(transitions)
-CREATE_CLASSNODE(state)
-CREATE_CLASSNODE(transition)
-CREATE_CLASSNODE(initial)
-CREATE_CLASSNODE(final)
-CREATE_PARAM_CLASSNODE(semiring)
-CREATE_PARAM_CLASSNODE(monoid)
-CREATE_PARAM_CLASSNODE(freemonoid)
-CREATE_PARAM_CLASSNODE(generator)
-CREATE_PARAM_CLASSNODE(geometry)
-CREATE_PARAM_CLASSNODE(drawing)
+    CREATE_CLASSNODE(automaton)
+    CREATE_CLASSNODE(transducer)
+    CREATE_CLASSNODE(label_type)
+    CREATE_CLASSNODE(content)
+    CREATE_CLASSNODE(states)
+    CREATE_CLASSNODE(transitions)
+    CREATE_CLASSNODE(state)
+    CREATE_CLASSNODE(transition)
+    CREATE_CLASSNODE(initial)
+    CREATE_CLASSNODE(final)
+    CREATE_PARAM_CLASSNODE(semiring)
+    CREATE_PARAM_CLASSNODE(monoid)
+    CREATE_PARAM_CLASSNODE(freemonoid)
+    CREATE_PARAM_CLASSNODE(generator)
+    CREATE_PARAM_CLASSNODE(geometry)
+    CREATE_PARAM_CLASSNODE(drawing)
 
 
 # define TParm					\
     template <class S, class T>
 # define TParmFMP					\
-      template <class S, class T, class M1, class M2>
+    template <class S, class T, class M1, class M2>
 # define AUTtype				\
     Element<Automata<S>, T>
 # define TRANStype				\
     Element<Transducer<S>, T>
 
-# define FMPtype      							  \
-    Element<								  \
-      Automata<								  \
-      vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
-      >, T								  \
-    >
+# define FMPtype							\
+    Element<								\
+      Automata<								\
+	vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
+	>,								\
+      T>
 
-# define CREATE_SPEC_TYPE_NODE(TempParam, Type)			\
-    TempParam							\
+# define CREATE_SPEC_TYPE_NODE(TempParam, Type)				\
+    TempParam								\
     struct label_typeNode<Type > : Node<Type >				\
-    {								\
-      void process(xercesc::DOMElement*, Type&,			\
+    {									\
+      void process(xercesc::DOMElement*, Type&,				\
 		   typename Node<Type >::map_t&,			\
-		   typename Node<Type >::factory_t&);		\
+		   typename Node<Type >::factory_t&);			\
       static Node<Type >* create() { return new label_typeNode; }	\
     };
 
@@ -157,21 +157,21 @@ CREATE_PARAM_CLASSNODE(drawing)
     struct name ## Node<Type > : Node<Type >			\
     {								\
       void process(xercesc::DOMElement*, Type&,			\
-		   typename Node<Type >::map_t&,			\
-		   typename Node<Type >::factory_t&) {};		\
+		   typename Node<Type >::map_t&,		\
+		   typename Node<Type >::factory_t&) {};	\
       template <class U>					\
-      void process(xercesc::DOMElement*, Type&, U &,		\
-		   typename Node<Type >::map_t&,			\
-		   typename Node<Type >::factory_t&);		\
+	void process(xercesc::DOMElement*, Type&, U &,		\
+		     typename Node<Type >::map_t&,		\
+		     typename Node<Type >::factory_t&);		\
       static Node<Type >* create() { return new name ## Node; }	\
     };
 
 
-CREATE_SPEC_TYPE_NODE(TParm, AUTtype)
-CREATE_SPEC_TYPE_NODE(TParm, TRANStype)
-CREATE_SPEC_TYPE_NODE(TParmFMP, FMPtype)
-CREATE_SPEC_PARAM_NODE(semiring, TParm, TRANStype)
-CREATE_SPEC_PARAM_NODE(monoid, TParmFMP, FMPtype)
+    CREATE_SPEC_TYPE_NODE(TParm, AUTtype)
+    CREATE_SPEC_TYPE_NODE(TParm, TRANStype)
+    CREATE_SPEC_TYPE_NODE(TParmFMP, FMPtype)
+    CREATE_SPEC_PARAM_NODE(semiring, TParm, TRANStype)
+    CREATE_SPEC_PARAM_NODE(monoid, TParmFMP, FMPtype)
 
 
   } // ! xml
@@ -181,24 +181,24 @@ CREATE_SPEC_PARAM_NODE(monoid, TParmFMP, FMPtype)
 
 // Macros used to declare the factory. It cannot be done using a
 // static attribute since the class is templated.
-# define register_in_factory(f, T, name)				\
-    factory_reg(f, std::string(#name), name ## Node<T>::create);
+# define register_in_factory(f, T, name)			\
+  factory_reg(f, std::string(#name), name ## Node<T>::create);
 
-# define register_all_factory(f, T)			\
-    register_in_factory(f, T, automaton)		\
-    register_in_factory(f, T, transducer)		\
-    register_in_factory(f, T, label_type)	       	\
-    register_in_factory(f, T, semiring)			\
-    register_in_factory(f, T, monoid)			\
-    register_in_factory(f, T, freemonoid)		\
-    register_in_factory(f, T, generator)		\
-    register_in_factory(f, T, content)			\
-    register_in_factory(f, T, states)			\
-    register_in_factory(f, T, transitions)		\
-    register_in_factory(f, T, state)			\
-    register_in_factory(f, T, transition)		\
-    register_in_factory(f, T, initial)			\
-    register_in_factory(f, T, final)
+# define register_all_factory(f, T)		\
+  register_in_factory(f, T, automaton)		\
+  register_in_factory(f, T, transducer)		\
+  register_in_factory(f, T, label_type)		\
+  register_in_factory(f, T, semiring)		\
+  register_in_factory(f, T, monoid)		\
+  register_in_factory(f, T, freemonoid)		\
+  register_in_factory(f, T, generator)		\
+  register_in_factory(f, T, content)		\
+  register_in_factory(f, T, states)		\
+  register_in_factory(f, T, transitions)	\
+  register_in_factory(f, T, state)		\
+  register_in_factory(f, T, transition)		\
+  register_in_factory(f, T, initial)		\
+  register_in_factory(f, T, final)
 
 
 # ifndef VCSN_USE_INTERFACE_ONLY

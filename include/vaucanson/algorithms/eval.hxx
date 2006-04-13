@@ -56,7 +56,7 @@ namespace vcsn {
     std::vector<semiring_elt_t>	v2(max_hstate_t + 1,
 				   semiring_elt_t (a.series().semiring()));
     std::vector<bool>		v2_b(max_hstate_t + 1, false);
-    std::list<hedge_t>		delta_ret;
+    std::list<htransition_t>		delta_ret;
     const typename semiring_elt_t::set_t &semiring = a.series().semiring();
     semiring_elt_t zero =
       semiring.zero(SELECT(typename semiring_elt_t::value_t));
@@ -81,25 +81,25 @@ namespace vcsn {
     | Computation |
     `------------*/
     for_all_const_(input_t, e, word)
-      {
- 	std::fill(v2.begin(), v2.end(), zero);
- 	std::fill(v2_b.begin(), v2_b.end(), false);
-	for (unsigned i = 0; i < v1.size(); ++i)
-	  if (v1_b[i])
+    {
+      std::fill(v2.begin(), v2.end(), zero);
+      std::fill(v2_b.begin(), v2_b.end(), false);
+      for (unsigned i = 0; i < v1.size(); ++i)
+	if (v1_b[i])
+	{
+	  // FIXME : use the other version of delta to be more efficient !
+	  delta_ret.clear();
+	  a.letter_deltac(delta_ret, i, *e, delta_kind::transitions());
+	  for_all_const_(std::list<htransition_t>, l, delta_ret)
 	  {
-	    // FIXME : use the other version of delta to be more efficient !
-	    delta_ret.clear();
-	    a.letter_deltac(delta_ret, i, *e, delta_kind::edges());
-	    for_all_const_(std::list<hedge_t>, l, delta_ret)
-	    {
-	      v2[a.aim_of(*l)] += v1[i] *
-		a.series_of(*l).get(monoid_elt_t(a.structure().series().monoid(), *e));
-	      v2_b[a.aim_of(*l)] = true;
-	    }
+	    v2[a.aim_of(*l)] += v1[i] *
+	      a.series_of(*l).get(monoid_elt_t(a.structure().series().monoid(), *e));
+	    v2_b[a.aim_of(*l)] = true;
 	  }
-	std::swap(v1, v2);
-	std::swap(v1_b, v2_b);
-      }
+	}
+      std::swap(v1, v2);
+      std::swap(v1_b, v2_b);
+    }
 
     /*-----------------.
     | Final and Result |

@@ -46,35 +46,35 @@ namespace vcsn {
       of(t.structure().series());
 
     for_each_initial_state(p, t)
+    {
+      if (t.get_initial(*p) != id_series)
       {
-	if (t.get_initial(*p) != id_series)
-	  {
-	    hstate_t tmp = ret.add_state();
-	    ret.set_initial(tmp);
-	    ret.add_series_edge(tmp, m[*p], t.get_initial(*p).get(empty));
-	  }
-	else
-	  ret.set_initial(m[*p], t.get_initial(*p).get(empty));
+	hstate_t tmp = ret.add_state();
+	ret.set_initial(tmp);
+	ret.add_series_transition(tmp, m[*p], t.get_initial(*p).get(empty));
       }
+      else
+	ret.set_initial(m[*p], t.get_initial(*p).get(empty));
+    }
 
     for_each_final_state(p, t)
+    {
+      if (t.get_final(*p) != id_series)
       {
-	if (t.get_final(*p) != id_series)
-	  {
-	    hstate_t tmp = ret.add_state();
-	    ret.set_final(tmp);
-	    ret.add_series_edge(m[*p], tmp, t.get_final(*p).get(empty));
-	  }
-	else
-	  ret.set_final(m[*p], t.get_final(*p).get(empty));
+	hstate_t tmp = ret.add_state();
+	ret.set_final(tmp);
+	ret.add_series_transition(m[*p], tmp, t.get_final(*p).get(empty));
       }
+      else
+	ret.set_final(m[*p], t.get_final(*p).get(empty));
+    }
 
-    for_each_edge(e, t)
-      {
-	ret.add_series_edge(m[t.origin_of(*e)],
-			   m[t.aim_of(*e)],
-			   t.output_of(*e));
-      }
+    for_each_transition(e, t)
+    {
+      ret.add_series_transition(m[t.origin_of(*e)],
+				m[t.aim_of(*e)],
+				t.output_of(*e));
+    }
   }
 
   template <class ST, class TT,
@@ -99,20 +99,20 @@ namespace vcsn {
     AUTOMATON_TYPES(Trans_t);
 
     typedef typename output_projection_helper<S, T>::ret    Auto_t;
-    typedef typename Auto_t::set_t                   Auto_set_t;
-    typedef typename Auto_set_t::series_set_t            Auto_series_set_t;
+    typedef typename Auto_t::set_t		     Auto_set_t;
+    typedef typename Auto_set_t::series_set_t		 Auto_series_set_t;
 
-    Auto_set_t   auto_set(Auto_series_set_t(t.structure().series().semiring()));
-    Auto_t       ret(auto_set);
+    Auto_set_t	 auto_set(Auto_series_set_t(t.structure().series().semiring()));
+    Auto_t	 ret(auto_set);
 
     monoid_elt_t empty = t.series().monoid().empty_;
     std::map<hstate_t, hstate_t> m;
 
     for_each_state(p, t)
-      {
-	m[*p] = ret.add_state();
-	m_[m[*p]] = *p;
-      }
+    {
+      m[*p] = ret.add_state();
+      m_[m[*p]] = *p;
+    }
 
     for_each_initial_state(p, t)
       ret.set_initial(m[*p], t.get_initial(*p).get(empty));
@@ -120,8 +120,8 @@ namespace vcsn {
     for_each_final_state(p, t)
       ret.set_final(m[*p], t.get_final(*p).get(empty));
 
-    for_each_edge(e, t)
-      ret.add_series_edge(m[t.origin_of(*e)], m[t.aim_of(*e)], t.output_of(*e));
+    for_each_transition(e, t)
+      ret.add_series_transition(m[t.origin_of(*e)], m[t.aim_of(*e)], t.output_of(*e));
 
     return ret;
   }
@@ -157,16 +157,16 @@ namespace vcsn {
     typedef typename Auto_t::set_t			Auto_set_t;
     typedef typename Auto_set_t::series_set_t		Auto_series_set_t;
 
-    Auto_set_t   auto_set(Auto_series_set_t(t.structure().series().semiring()));
-    Auto_t       ret(auto_set);
+    Auto_set_t	 auto_set(Auto_series_set_t(t.structure().series().semiring()));
+    Auto_t	 ret(auto_set);
 
     monoid_elt_t empty = t.series().monoid().empty_;
     std::map<hstate_t, hstate_t> m;
 
     for_each_state(p, t)
-      {
-	m[*p] = ret.add_state();
-      }
+    {
+      m[*p] = ret.add_state();
+    }
 
     for_each_initial_state(p, t)
       ret.set_initial(m[*p]);
@@ -174,12 +174,12 @@ namespace vcsn {
     for_each_final_state(p, t)
       ret.set_final(m[*p]);
 
-    for_each_edge(e, t)
-      {
-	ret.add_series_edge(m[t.origin_of(*e)],
-			    m[t.aim_of(*e)],
-			    t.input_of(*e));
-      }
+    for_each_transition(e, t)
+    {
+      ret.add_series_transition(m[t.origin_of(*e)],
+				m[t.aim_of(*e)],
+				t.input_of(*e));
+    }
 
     return ret;
   }

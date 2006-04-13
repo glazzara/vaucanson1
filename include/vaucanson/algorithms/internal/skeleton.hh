@@ -35,7 +35,7 @@
 namespace vcsn
 {
   // "Skeleton" of an automaton, consisting of a numbering of states
-  // and edges by means of vectors. Additional auxiliary vectors are
+  // and transitions by means of vectors. Additional auxiliary vectors are
   // not used in this file.
   template<typename A, typename T>
   class Skeleton
@@ -51,34 +51,34 @@ namespace vcsn
       std::vector<hstate_t> states;
       // Vector of transitions. Each transition can be also
       // represented by its index.
-      std::vector<hedge_t> edges;
-      std::vector<int> origins_edges;
-      std::vector<int> aims_edges;
+      std::vector<htransition_t> transitions;
+      std::vector<int> origins_transitions;
+      std::vector<int> aims_transitions;
 
-      // List of indices of ingoing edges in lex. order of each state
+      // List of indices of ingoing transitions in lex. order of each state
       std::vector< std::list<int> > delta_in;
-      // List of indices of outgoing edges in lex. order of each state
+      // List of indices of outgoing transitions in lex. order of each state
       std::vector< std::list<int> > delta_out;
 
 
-       // Indices of initial and final states
+      // Indices of initial and final states
       std::list<int> I, F;
       // Index in labels of the label of each transition
-      std::vector<int> edges_labels;
-      // (edges_labels[i] = index of label of edge i) Auxiliary data
+      std::vector<int> transitions_labels;
+      // (transitions_labels[i] = index of label of transition i) Auxiliary data
       std::vector<int> aux_states_int;
       std::vector<bool> aux_states_bool;
       std::vector<void*> aux_states_generic;
-      std::vector<int> aux_edges_int;
-      std::vector<bool> aux_edges_bool;
-      std::vector<void*> aux_edges_generic;
+      std::vector<int> aux_transitions_int;
+      std::vector<bool> aux_transitions_bool;
+      std::vector<void*> aux_transitions_generic;
 
       void reserve_aux_states_int();
       void reserve_aux_states_bool();
       void reserve_aux_states_generic();
-      void reserve_aux_edges_int();
-      void reserve_aux_edges_bool();
-      void reserve_aux_edges_generic();
+      void reserve_aux_transitions_int();
+      void reserve_aux_transitions_bool();
+      void reserve_aux_transitions_generic();
   };
 
 } // vcsn

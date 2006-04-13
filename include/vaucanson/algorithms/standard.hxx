@@ -38,19 +38,19 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(Auto_);
     hstate_t i = a.add_state();
-    std::set<hedge_t> edge_oi;
+    std::set<htransition_t> transition_oi;
     for_each_initial_state(oi, a)
+    {
+      series_set_elt_t s = a.get_initial(*oi);
+      std::set<htransition_t> transition_oi;
+      transition_oi.clear();
+      a.deltac(transition_oi, *oi, delta_kind::transitions());
+      for_all_const_(std::set<htransition_t>, oil, transition_oi)
       {
-	series_set_elt_t s = a.get_initial(*oi);
-	std::set<hedge_t> edge_oi;
-	edge_oi.clear();
-	a.deltac(edge_oi, *oi, delta_kind::edges());
-	for_all_const_(std::set<hedge_t>, oil, edge_oi)
-	  {
-	    series_set_elt_t t = s*a.series_of(*oil);
-	    a.add_series_edge(i,a.aim_of(*oil),t);
-	  }
+	series_set_elt_t t = s*a.series_of(*oil);
+	a.add_series_transition(i,a.aim_of(*oil),t);
       }
+    }
     a.clear_initial();
     a.set_initial(i);
     accessible_here(a);
@@ -72,7 +72,7 @@ namespace vcsn {
 				 lhs_t& lhs,
 				 const rhs_t& rhs)
   {
-    typedef typename std::set<hedge_t>		edelta_ret_t;
+    typedef typename std::set<htransition_t>		edelta_ret_t;
     edelta_ret_t	aim;
     hstate_t		new_i, old_i;
 
@@ -80,41 +80,41 @@ namespace vcsn {
     sum_here(lhs, rhs);
     for (typename lhs_t::initial_iterator i = lhs.initial().begin();
 	 i != lhs.initial().end();
-	   ++i)
+	 ++i)
+    {
+      // FIXME : is there something like an iterator over the
+      // support of initial ?
+      if (*i != new_i)
       {
-	// FIXME : is there something like an iterator over the
-	// support of initial ?
-	if (*i != new_i)
-	  {
-	    old_i = *i;
-	    lhs.set_final(new_i,
-			  lhs.get_final(new_i) +
-			  lhs.get_final(old_i));
-	    aim.clear();
-	    lhs.deltac(aim, old_i, delta_kind::edges());
-	    for (typename edelta_ret_t::const_iterator d = aim.begin();
-		 d != aim.end();
-		 ++d)
-	      {
-		lhs.add_edge(new_i,
+	old_i = *i;
+	lhs.set_final(new_i,
+		      lhs.get_final(new_i) +
+		      lhs.get_final(old_i));
+	aim.clear();
+	lhs.deltac(aim, old_i, delta_kind::transitions());
+	for (typename edelta_ret_t::const_iterator d = aim.begin();
+	     d != aim.end();
+	     ++d)
+	{
+	  lhs.add_transition(new_i,
 			     lhs.aim_of(*d),
 			     lhs.label_of(*d));
-		lhs.del_edge(*d);
-	      }
-	      aim.clear();
-	      lhs.rdeltac(aim, old_i, delta_kind::edges());
-	      for (typename edelta_ret_t::const_iterator d = aim.begin();
-		   d != aim.end();
-		   ++d)
-		{
-		  lhs.add_edge(lhs.origin_of(*d),
-				     new_i,
-				     lhs.label_of(*d));
-		  lhs.del_edge(*d);
-		}
-	      lhs.del_state(old_i);
-	  }
+	  lhs.del_transition(*d);
+	}
+	aim.clear();
+	lhs.rdeltac(aim, old_i, delta_kind::transitions());
+	for (typename edelta_ret_t::const_iterator d = aim.begin();
+	     d != aim.end();
+	     ++d)
+	{
+	  lhs.add_transition(lhs.origin_of(*d),
+			     new_i,
+			     lhs.label_of(*d));
+	  lhs.del_transition(*d);
+	}
+	lhs.del_state(old_i);
       }
+    }
   }
 
   template<typename A, typename T, typename U>
@@ -174,11 +174,11 @@ namespace vcsn {
   `----------------*/
   template <typename A, typename lhs_t, typename rhs_t>
   void do_concat_of_standard_here(const AutomataBase<A>& ,
-				     lhs_t& lhs,
+				  lhs_t& lhs,
 				  const rhs_t& rhs)
   {
     typedef std::map<hstate_t, hstate_t>	map_t;
-    typedef std::set<hedge_t>			delta_ret_t;
+    typedef std::set<htransition_t>			delta_ret_t;
 
     /*-----------------.
     | Concat of states |
@@ -192,27 +192,27 @@ namespace vcsn {
 	 s != rhs.states().end();
 	 ++s)
       if (!rhs.is_initial(*s))
-	{
-	  new_state = lhs.add_state();
-	  map_h[*s] = new_state;
-	}
+      {
+	new_state = lhs.add_state();
+	map_h[*s] = new_state;
+      }
 
-    // Add edges
+    // Add transitions
     hstate_t rhs_i = *rhs.initial().begin();
     aim.clear();
-    rhs.deltac(aim, rhs_i, delta_kind::edges());
+    rhs.deltac(aim, rhs_i, delta_kind::transitions());
     for (typename lhs_t::final_iterator f = lhs.final().begin();
 	 f != lhs.final().end();
 	 ++f)
-      {
-	typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
-	for (typename delta_ret_t::const_iterator d = aim.begin();
-	     d != aim.end();
-	     ++d)
-	  lhs.add_series_edge(*f,
-			      map_h[rhs.aim_of(*d)],
-			      weight * rhs.label_of(*d));
-      }
+    {
+      typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
+      for (typename delta_ret_t::const_iterator d = aim.begin();
+	   d != aim.end();
+	   ++d)
+	lhs.add_series_transition(*f,
+				  map_h[rhs.aim_of(*d)],
+				  weight * rhs.label_of(*d));
+    }
 
     for (typename lhs_t::state_iterator s = lhs.states().begin();
 	 s != lhs.states().end();
@@ -225,23 +225,23 @@ namespace vcsn {
       if (rhs.is_final(nf->first))
 	lhs.set_final(nf->second);
 
-    /*----------------.
-    | Concat of edges |
-    `----------------*/
+    /*----------------------.
+    | Concat of transitions |
+    `----------------------*/
     for (typename rhs_t::state_iterator i = rhs.states().begin();
 	 i != rhs.states().end();
 	 ++i)
       if (!rhs.is_initial(*i))
-	{
-	  aim.clear();
-	  rhs.deltac(aim, *i, delta_kind::edges());
-	  for (typename delta_ret_t::const_iterator d = aim.begin();
-	       d != aim.end();
-	       ++d)
-	    lhs.add_edge(map_h[*i],
-			 map_h[rhs.aim_of(*d)],
-			 rhs.label_of(*d));
-	}
+      {
+	aim.clear();
+	rhs.deltac(aim, *i, delta_kind::transitions());
+	for (typename delta_ret_t::const_iterator d = aim.begin();
+	     d != aim.end();
+	     ++d)
+	  lhs.add_transition(map_h[*i],
+			     map_h[rhs.aim_of(*d)],
+			     rhs.label_of(*d));
+      }
   }
 
   template<typename A, typename T, typename U>
@@ -272,38 +272,38 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(auto_t);
 
-    typedef std::set<hedge_t>		edelta_ret_t;
+    typedef std::set<htransition_t>		edelta_ret_t;
     edelta_ret_t			aim;
 
     hstate_t				new_i = *a.initial().begin();
     series_set_elt_t			out_mult = a.get_final(new_i);
     out_mult.star();
 
-    a.deltac(aim, new_i, delta_kind::edges());
+    a.deltac(aim, new_i, delta_kind::transitions());
 
     for (typename auto_t::final_iterator f = a.final().begin();
 	 f != a.final().end();
 	 ++f)
-      {
-	if (*f != new_i)
-	  for (typename edelta_ret_t::iterator d = aim.begin();
-	       d != aim.end();
-	       ++d)
-	    // FIXME: it is wanted that we can create two similar edges.
-	    // FIXME: is it a good thing ?
-	    a.add_edge(*f, a.aim_of(*d), a.label_of(*d));
+    {
+      if (*f != new_i)
+	for (typename edelta_ret_t::iterator d = aim.begin();
+	     d != aim.end();
+	     ++d)
+	  // FIXME: it is wanted that we can create two similar transitions.
+	  // FIXME: is it a good thing ?
+	  a.add_transition(*f, a.aim_of(*d), a.label_of(*d));
 
-      }
+    }
 
     for (typename edelta_ret_t::iterator d = aim.begin();
 	 d != aim.end();
 	 ++d)
-      {
-	series_set_elt_t st = out_mult * a.series_of(*d);
-	hstate_t to = a.aim_of(*d);
-	a.del_edge(*d);
-	a.add_series_edge(new_i, to, st);
-      }
+    {
+      series_set_elt_t st = out_mult * a.series_of(*d);
+      hstate_t to = a.aim_of(*d);
+      a.del_transition(*d);
+      a.add_series_transition(new_i, to, st);
+    }
 
     a.set_final(new_i, out_mult);
   }

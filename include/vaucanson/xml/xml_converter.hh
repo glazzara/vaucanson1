@@ -17,8 +17,8 @@
 
 #include <vaucanson/config/system.hh>
 
-#if not defined (VCSN_XML_XML_CONVERTER_HH) and				\
-    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
+#if not defined (VCSN_XML_XML_CONVERTER_HH) and			\
+  (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
 # define VCSN_XML_XML_CONVERTER_HH
 
 # ifndef VCSN_USE_XML
@@ -64,58 +64,58 @@ namespace vcsn
     template <class Auto>
     struct xml_converter
     {
-      xml_converter() : impl_(0), doc_(0), root_(0) {};
+	xml_converter() : impl_(0), doc_(0), root_(0) {};
 
-      typedef std::map<hstate_t, std::string>		map_t;
-      typedef typename Auto::set_t			auto_set_t;
-      typedef typename Auto::value_t			auto_impl_t;
-      typedef xml_chooser<auto_set_t, auto_impl_t>	xml_chooser_t;
+	typedef std::map<hstate_t, std::string>		map_t;
+	typedef typename Auto::set_t			auto_set_t;
+	typedef typename Auto::value_t			auto_impl_t;
+	typedef xml_chooser<auto_set_t, auto_impl_t>	xml_chooser_t;
 
-      /**
-       * @brief Save automaton to stream.
-       *
-       * @param OStream	Type of the output stream.
-       *
-       * @arg a		Automaton to save.
-       * @arg out	Output stream.
-       * @arg name	String containing the name of the automaton.
-       */
-      template <class OStream>
-      void save(const Auto& a, OStream& out, const std::string& name = "");
+	/**
+	 * @brief Save automaton to stream.
+	 *
+	 * @param OStream	Type of the output stream.
+	 *
+	 * @arg a		Automaton to save.
+	 * @arg out	Output stream.
+	 * @arg name	String containing the name of the automaton.
+	 */
+	template <class OStream>
+	void save(const Auto& a, OStream& out, const std::string& name = "");
 
-      /**
-       * @brief Load automaton from stream.
-       *
-       * @param IStream	Type of the input stream.
-       *
-       * @arg a		Automaton to load.
-       * @arg in	Input stream.
-       */
-      template <class IStream>
-      void load(Auto& a, IStream& in);
+	/**
+	 * @brief Load automaton from stream.
+	 *
+	 * @param IStream	Type of the input stream.
+	 *
+	 * @arg a		Automaton to load.
+	 * @arg in	Input stream.
+	 */
+	template <class IStream>
+	void load(Auto& a, IStream& in);
 
-      void create_document(const Auto& aut, const std::string& name = "");
+	void create_document(const Auto& aut, const std::string& name = "");
 
-      xercesc::DOMElement* root_get() { return root_; }
+	xercesc::DOMElement* root_get() { return root_; }
 
-    private:
-      std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);
-      void create_transition(hedge_t, const Auto&,
-			     xercesc::DOMElement*, map_t&);
-      void create_initial(hstate_t, const Auto&,
+      private:
+	std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);
+	void create_transition(htransition_t, const Auto&,
+			       xercesc::DOMElement*, map_t&);
+	void create_initial(hstate_t, const Auto&,
+			    xercesc::DOMElement*, map_t&);
+	void create_final(hstate_t, const Auto&,
 			  xercesc::DOMElement*, map_t&);
-      void create_final(hstate_t, const Auto&,
-			xercesc::DOMElement*, map_t&);
 
-      template <class Map, class Key>
-      void add_xml_geometry(Map&, Key&, xercesc::DOMElement* node);
-      template <class Map, class Key>
-      void add_xml_drawing(Map&, Key&, xercesc::DOMElement* node);
+	template <class Map, class Key>
+	void add_xml_geometry(Map&, Key&, xercesc::DOMElement* node);
+	template <class Map, class Key>
+	void add_xml_drawing(Map&, Key&, xercesc::DOMElement* node);
 
-      xercesc::DOMImplementation*			impl_;
-      xercesc::DOMDocument*				doc_;
-      xercesc::DOMElement*				root_;
-      xml_chooser_t					chooser_;
+	xercesc::DOMImplementation*			impl_;
+	xercesc::DOMDocument*				doc_;
+	xercesc::DOMElement*				root_;
+	xml_chooser_t					chooser_;
     };
 
   } // !xml

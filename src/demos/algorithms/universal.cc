@@ -1,17 +1,17 @@
 // universal.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2004, 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_automaton.hh>
@@ -133,27 +133,27 @@ automaton_t universal(const automaton_t& automaton)
   for_each_state(x, u)
     for_each_state(y, u)
     for_each_letter(a, u.series().monoid().alphabet())
+  {
+    bool cont = false;
+    std::set<hstate_t> delta_ret;
+    for_all_const(state_set_t, s, subset_label[*x])
     {
-      bool cont = false;
-      std::set<hstate_t> delta_ret;
-      for_all_const(state_set_t, s, subset_label[*x])
-	{
-	  state_set_t delta_tmp;
-	  automaton.letter_deltac(delta_tmp, *s, *a, delta_kind::states());
-	  if (delta_tmp.size() == 0)
-	    {
-	      cont = true;
-	      break;
-	    }
-	  delta_ret = union_structure(delta_ret, delta_tmp);
-	}
-      // case 1: \exists p \in X, p.a = {}
-      if (cont)
-	continue;
-      // case 2: X.a \subset Y ?
-      if (includes(delta_ret, subset_label[*y]))
- 	u.add_letter_edge(*x, *y, *a);
+      state_set_t delta_tmp;
+      automaton.letter_deltac(delta_tmp, *s, *a, delta_kind::states());
+      if (delta_tmp.size() == 0)
+      {
+	cont = true;
+	break;
+      }
+      delta_ret = union_structure(delta_ret, delta_tmp);
     }
+    // case 1: \exists p \in X, p.a = {}
+    if (cont)
+      continue;
+    // case 2: X.a \subset Y ?
+    if (includes(delta_ret, subset_label[*y]))
+      u.add_letter_transition(*x, *y, *a);
+  }
   return u;
 }
 
@@ -168,15 +168,15 @@ int main()
   hstate_t p = a.add_state();
   hstate_t q = a.add_state();
   hstate_t r = a.add_state();
-  a.add_letter_edge(p, q, 'a');
-  a.add_letter_edge(p, q, 'c');
-  a.add_letter_edge(p, r, 'b');
-  a.add_letter_edge(q, p, 'b');
-  a.add_letter_edge(q, p, 'c');
-  a.add_letter_edge(q, r, 'a');
-  a.add_letter_edge(r, r, 'b');
-  a.add_letter_edge(r, p, 'a');
-  a.add_letter_edge(r, p, 'c');
+  a.add_letter_transition(p, q, 'a');
+  a.add_letter_transition(p, q, 'c');
+  a.add_letter_transition(p, r, 'b');
+  a.add_letter_transition(q, p, 'b');
+  a.add_letter_transition(q, p, 'c');
+  a.add_letter_transition(q, r, 'a');
+  a.add_letter_transition(r, r, 'b');
+  a.add_letter_transition(r, p, 'a');
+  a.add_letter_transition(r, p, 'c');
   a.set_initial(p);
   a.set_final(r);
   automaton_t univers = universal(a);

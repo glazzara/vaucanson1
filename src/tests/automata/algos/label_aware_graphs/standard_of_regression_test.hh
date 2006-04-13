@@ -1,17 +1,17 @@
 // standard_of_regression_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2004, 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_STANDARD_OF_REGRESSION_TEST_HH
@@ -60,7 +60,7 @@ standard_of_regression_test(tests::Tester& tg)
   TEST(t, "Number of states", au.states().size() == 2);
   TEST(t, "Number of initial states", au.initial().size() == 1);
   TEST(t, "Number of final states", au.final().size() == 2);
-  TEST(t, "Number of edges", au.edges().size() == 2);
+  TEST(t, "Number of transitions", au.transitions().size() == 2);
 
   bool b (true);
   for_each_initial_state(i, au)
@@ -69,9 +69,9 @@ standard_of_regression_test(tests::Tester& tg)
   TEST(t, "Weight of initials", b);
 
   b = true;
-  for_each_edge(e, au)
+  for_each_transition(e, au)
     b = b and au.series_of(*e) == series_set_elt_t (ss, ma);
-  TEST(t, "Weight of edges", b);
+  TEST(t, "Weight of transitions", b);
 
   b = true;
   for_each_final_state(f, au)

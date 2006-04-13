@@ -1,17 +1,17 @@
 // classics.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2004, 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_automaton.hh>
@@ -31,20 +31,20 @@ ask_and_eval(const automaton_t& x)
 {
   std::string user_string;
   do
+  {
+    std::cout << "Enter a word over "
+	      << x.structure().series().monoid().alphabet()
+	      << " (\"next\", otherwise): ";
+    std::cin >> user_string;
+
+    if (user_string != "next")
     {
-      std::cout << "Enter a word over "
-		<< x.structure().series().monoid().alphabet()
-		<< " (\"next\", otherwise): ";
-      std::cin >> user_string;
+      monoid_elt_t w (x.structure().series().monoid(), user_string);
 
-      if (user_string != "next")
-	{
-	  monoid_elt_t w (x.structure().series().monoid(), user_string);
-
-	  std::cout << w << std::endl;
-	  std::cout << eval(x, w) << std::endl;
-	}
+      std::cout << w << std::endl;
+      std::cout << eval(x, w) << std::endl;
     }
+  }
   while (user_string != "next") ;
 }
 
@@ -60,11 +60,11 @@ main()
 
   hstate_t p = a.add_state();
   hstate_t q = a.add_state();
-  a.add_letter_edge(p, p, 'a');
-  a.add_letter_edge(p, p, 'b');
-  a.add_letter_edge(p, q, 'b');
-  a.add_letter_edge(q, q, 'a');
-  a.add_letter_edge(q, q, 'b');
+  a.add_letter_transition(p, p, 'a');
+  a.add_letter_transition(p, p, 'b');
+  a.add_letter_transition(p, q, 'b');
+  a.add_letter_transition(q, q, 'a');
+  a.add_letter_transition(q, q, 'b');
   a.set_initial(p);
   a.set_final(q);
 

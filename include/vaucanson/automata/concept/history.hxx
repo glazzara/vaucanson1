@@ -83,13 +83,13 @@ namespace vcsn {
 						       hstate_t s)
     {
       // FIXME: fix this code.
-//       for (typename state_events_t::const_iterator ev
-// 	     = states_events_[s].begin();
-// 	   ev != states_events_[s].end();
-// 	   ++ev)
-// 	if (ev->second->get_event_kind() == e)
-// 	  return false;
-//       states_events_[s].push_front(new Event<hstate_t>(e));
+//	 for (typename state_events_t::const_iterator ev
+//	     = states_events_[s].begin();
+//	   ev != states_events_[s].end();
+//	   ++ev)
+//	if (ev->second->get_event_kind() == e)
+//	  return false;
+//	 states_events_[s].push_front(new Event<hstate_t>(e));
       return true;
     }
 
@@ -130,7 +130,7 @@ namespace vcsn {
     template <class AutoType_>
     const Event<hstate_t>
     AutomatonHistory<AutoType_>::get_state_event_about(event_kind_t e,
-						       hstate_t     s) const
+						       hstate_t	    s) const
     {
       typename states_events_t::const_iterator se = states_events_.find(s);
       if (se == states_events_.end())
@@ -145,63 +145,64 @@ namespace vcsn {
 
     template <class AutoType_>
     bool
-    AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e,
-						      hedge_t edge)
+    AutomatonHistory<AutoType_>::set_transition_event_about(event_kind_t e,
+							    htransition_t transition)
     {
-      for (typename edge_events_t::const_iterator ev
-	     = edges_events_[edge].begin();
-	   ev != edges_events_[edge].end();
+      for (typename transition_events_t::const_iterator ev
+	     = transitions_events_[transition].begin();
+	   ev != transitions_events_[transition].end();
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return false;
-      edges_events_[edge].push_front(Event<hedge_t>(e));
+      transitions_events_[transition].push_front(Event<htransition_t>(e));
       return true;
     }
 
     template <class AutoType_>
     bool
-    AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e,
-						      hedge_t edge,
-						      hedge_t first)
+    AutomatonHistory<AutoType_>::set_transition_event_about(event_kind_t e,
+							    htransition_t transition,
+							    htransition_t first)
     {
-      for (typename edge_events_t::const_iterator ev
-	     = edges_events_[edge].begin();
-	   ev != edges_events_[edge].end();
+      for (typename transition_events_t::const_iterator ev
+	     = transitions_events_[transition].begin();
+	   ev != transitions_events_[transition].end();
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return false;
-      edges_events_[edge].push_front(UnaryEvent<hedge_t>(e, first));
+      transitions_events_[transition].push_front(UnaryEvent<htransition_t>(e, first));
       return true;
     }
 
     template <class AutoType_>
     bool
-    AutomatonHistory<AutoType_>::set_edge_event_about(event_kind_t e,
-						      hedge_t edge,
-						      hedge_t first,
-						      hedge_t second)
+    AutomatonHistory<AutoType_>::set_transition_event_about(event_kind_t e,
+							    htransition_t transition,
+							    htransition_t first,
+							    htransition_t second)
     {
-      for (typename edge_events_t::const_iterator ev
-	     = edges_events_[edge].begin();
-	   ev != edges_events_[edge].end();
+      for (typename transition_events_t::const_iterator ev
+	     = transitions_events_[transition].begin();
+	   ev != transitions_events_[transition].end();
 	   ++ev)
 	if (ev->get_event_kind() == e)
 	  return false;
-      edges_events_[edge].push_front
-	(BinaryEvent<hedge_t>(e, first, second));
+      transitions_events_[transition].push_front
+	(BinaryEvent<htransition_t>(e, first, second));
       return true;
     }
 
     template <class AutoType_>
-    const Event<hedge_t>
-    AutomatonHistory<AutoType_>::get_edge_event_about(event_kind_t e,
-						      hedge_t edge
-						      ) const
+    const Event<htransition_t>
+    AutomatonHistory<AutoType_>::get_transition_event_about(event_kind_t e,
+							    htransition_t transition
+      ) const
     {
-      typename edges_events_t::const_iterator ee = edges_events_.find(edge);
-      if (ee == edges_events_.end())
+      typename transitions_events_t::const_iterator ee =
+	transitions_events_.find(transition);
+      if (ee == transitions_events_.end())
 	return 0;
-      for (typename edge_events_t::const_iterator ev = ee->second.begin();
+      for (typename transition_events_t::const_iterator ev = ee->second.begin();
 	   ev != ee->second.end();
 	   ++ev)
 	if (ev->get_event_kind() == e)

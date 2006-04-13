@@ -39,7 +39,7 @@ namespace vcsn {
 
   namespace delta_kind {
 
-    struct edges
+    struct transitions
     {};
 
     struct states
@@ -59,14 +59,14 @@ namespace vcsn {
     >
   struct ls_delta_letter_query
   {
-    ls_delta_letter_query(const Series& s, const L& l);
+      ls_delta_letter_query(const Series& s, const L& l);
 
-    template<typename Label>
-    bool operator()(const Label& label) const;
+      template<typename Label>
+      bool operator()(const Label& label) const;
 
-  protected:
-    SetSlot<Series>			s_;
-    typename MonoidElt::value_t		l_;
+    protected:
+      SetSlot<Series>			s_;
+      typename MonoidElt::value_t		l_;
   };
 
   /*--------------------------------.
@@ -74,12 +74,12 @@ namespace vcsn {
   `--------------------------------*/
   /// Add adapted accessors in function of the automaton kind.
   /** AutoKind adds methods to automaton adapted to the kind of label
-    that are held by the internal data structure. Indeed, label can be
-    either series element or things from which series elements can be
-    build. In the latter case, we have to insert a series construction
-    in each accessor.
-  */
- template <
+   that are held by the internal data structure. Indeed, label can be
+   either series element or things from which series elements can be
+   build. In the latter case, we have to insert a series construction
+   in each accessor.
+   */
+  template <
     typename Self,
     typename Series,
     typename SeriesT,
@@ -87,89 +87,89 @@ namespace vcsn {
     >
   class AutoKind<labels_are_series, Self, Series, SeriesT, LabelT>
   {
-  protected:
-    typedef Element<Series, SeriesT>			series_set_elt_t;
-    typedef typename Series::monoid_t			monoid_t;
-    typedef typename series_set_elt_t::monoid_elt_t		monoid_elt_t;
-    typedef typename Series::semiring_t			semiring_t;
-    typedef typename series_set_elt_t::semiring_elt_t		semiring_elt_t;
+    protected:
+      typedef Element<Series, SeriesT>			series_set_elt_t;
+      typedef typename Series::monoid_t			monoid_t;
+      typedef typename series_set_elt_t::monoid_elt_t		monoid_elt_t;
+      typedef typename Series::semiring_t			semiring_t;
+      typedef typename series_set_elt_t::semiring_elt_t		semiring_elt_t;
 
-  public:
+    public:
 
-    series_set_elt_t series_of(hedge_t e) const;
+      series_set_elt_t series_of(htransition_t e) const;
 
-    const SeriesT& series_value_of(hedge_t e) const;
+      const SeriesT& series_value_of(htransition_t e) const;
 
-    bool is_spontaneous(hedge_t e) const;
+      bool is_spontaneous(htransition_t e) const;
 
-    template<typename L>
-    L letter_of(SELECTOR(L), hedge_t e) const;
+      template<typename L>
+      L letter_of(SELECTOR(L), htransition_t e) const;
 
-    monoid_elt_t word_of(hedge_t e) const;
+      monoid_elt_t word_of(htransition_t e) const;
 
-    const typename monoid_elt_t::value_t& word_value_of(hedge_t e) const;
+      const typename monoid_elt_t::value_t& word_value_of(htransition_t e) const;
 
-    template<typename S>
-    hedge_t add_series_edge(hstate_t from, hstate_t to,
-			   const S& e);
+      template<typename S>
+      htransition_t add_series_transition(hstate_t from, hstate_t to,
+					  const S& e);
 
-    hedge_t add_spontaneous(hstate_t from, hstate_t to);
+      htransition_t add_spontaneous(hstate_t from, hstate_t to);
 
-    template<typename L>
-    hedge_t add_letter_edge(hstate_t from, hstate_t to,
-			    const L& l);
+      template<typename L>
+      htransition_t add_letter_transition(hstate_t from, hstate_t to,
+					  const L& l);
 
-    template <typename OutputIterator, typename L>
-    void letter_delta(OutputIterator	res,
-		      hstate_t		from,
-		      const L&		l,
-		      delta_kind::edges k = delta_kind::edges()) const;
+      template <typename OutputIterator, typename L>
+      void letter_delta(OutputIterator	res,
+			hstate_t		from,
+			const L&		l,
+			delta_kind::transitions k = delta_kind::transitions()) const;
 
-    template <typename Container, typename L>
-    void letter_deltac(Container&	 dst,
-		       hstate_t		 from,
-		       const L&		 l,
-		       delta_kind::edges k = delta_kind::edges()) const;
+      template <typename Container, typename L>
+      void letter_deltac(Container&	 dst,
+			 hstate_t		 from,
+			 const L&		 l,
+			 delta_kind::transitions k = delta_kind::transitions()) const;
 
-    template <typename OutputIterator, typename L>
-    void letter_rdelta(OutputIterator	res,
-		      hstate_t		from,
-		      const L&		l,
-		      delta_kind::edges k = delta_kind::edges()) const;
+      template <typename OutputIterator, typename L>
+      void letter_rdelta(OutputIterator	res,
+			 hstate_t		from,
+			 const L&		l,
+			 delta_kind::transitions k = delta_kind::transitions()) const;
 
-    template <typename Container, typename L>
-    void letter_rdeltac(Container&	 dst,
-		       hstate_t		 from,
-		       const L&		 l,
-		       delta_kind::edges k = delta_kind::edges()) const;
+      template <typename Container, typename L>
+      void letter_rdeltac(Container&	 dst,
+			  hstate_t		 from,
+			  const L&		 l,
+			  delta_kind::transitions k = delta_kind::transitions()) const;
 
-    template <typename OutputIterator, typename L>
-    void letter_delta(OutputIterator 	 res,
-		      hstate_t		 from,
-		      const L&		 l,
-		      delta_kind::states k) const;
-
-    template <typename Container, typename L>
-    void letter_deltac(Container&	  dst,
-		       hstate_t		  from,
-		       const L&		  l,
-		       delta_kind::states k) const;
-
-    template <typename OutputIterator, typename L>
-    void letter_rdelta(OutputIterator	  res,
-		       hstate_t		  from,
-		       const L&		  l,
-		       delta_kind::states k) const;
-
-    template <typename Container, typename L>
-    void letter_rdeltac(Container&	   dst,
-			hstate_t	   from,
-			const L&	   l,
+      template <typename OutputIterator, typename L>
+      void letter_delta(OutputIterator	 res,
+			hstate_t		 from,
+			const L&		 l,
 			delta_kind::states k) const;
 
-  protected:
-    Self&       auto_self();
-    const Self& auto_self() const;
+      template <typename Container, typename L>
+      void letter_deltac(Container&	  dst,
+			 hstate_t		  from,
+			 const L&		  l,
+			 delta_kind::states k) const;
+
+      template <typename OutputIterator, typename L>
+      void letter_rdelta(OutputIterator	  res,
+			 hstate_t		  from,
+			 const L&		  l,
+			 delta_kind::states k) const;
+
+      template <typename Container, typename L>
+      void letter_rdeltac(Container&	   dst,
+			  hstate_t	   from,
+			  const L&	   l,
+			  delta_kind::states k) const;
+
+    protected:
+      Self&	  auto_self();
+      const Self& auto_self() const;
   };
 
 
@@ -179,109 +179,109 @@ namespace vcsn {
   template<typename Monoid, typename L>
   struct lc_delta_letter_query
   {
-    lc_delta_letter_query(const Monoid& m, const L& l);
+      lc_delta_letter_query(const Monoid& m, const L& l);
 
-    template<typename Label>
-    bool operator()(const Label& label) const;
+      template<typename Label>
+      bool operator()(const Label& label) const;
 
-  protected:
-    SetSlot<Monoid>		m_;
-    L				l_;
+    protected:
+      SetSlot<Monoid>		m_;
+      L				l_;
   };
 
   template<typename Self, typename Series, typename SeriesT, typename LabelT>
   class AutoKind<labels_are_couples, Self, Series, SeriesT, LabelT>
   {
-  protected:
-    typedef Element<Series, SeriesT>			series_set_elt_t;
-    typedef typename Series::monoid_t			monoid_t;
-    typedef typename series_set_elt_t::monoid_elt_t		monoid_elt_t;
-    typedef typename Series::semiring_t			semiring_t;
-    typedef typename series_set_elt_t::semiring_elt_t		semiring_elt_t;
+    protected:
+      typedef Element<Series, SeriesT>			series_set_elt_t;
+      typedef typename Series::monoid_t			monoid_t;
+      typedef typename series_set_elt_t::monoid_elt_t		monoid_elt_t;
+      typedef typename Series::semiring_t			semiring_t;
+      typedef typename series_set_elt_t::semiring_elt_t		semiring_elt_t;
 
-  public:
+    public:
 
-    series_set_elt_t  series_of(hedge_t e) const;
+      series_set_elt_t	series_of(htransition_t e) const;
 
-    const SeriesT series_value_of(hedge_t e) const;
+      const SeriesT series_value_of(htransition_t e) const;
 
-    bool is_spontaneous(hedge_t e) const;
+      bool is_spontaneous(htransition_t e) const;
 
-    template<typename L>
-    L letter_of(SELECTOR(L), hedge_t e) const;
+      template<typename L>
+      L letter_of(SELECTOR(L), htransition_t e) const;
 
-    monoid_elt_t word_of(hedge_t e) const;
+      monoid_elt_t word_of(htransition_t e) const;
 
-    const typename monoid_elt_t::value_t& word_value_of(hedge_t e) const;
+      const typename monoid_elt_t::value_t& word_value_of(htransition_t e) const;
 
-    template<typename S>
-    hedge_t add_series_edge(hstate_t from, hstate_t to,
-			   const S& e);
+      template<typename S>
+      htransition_t add_series_transition(hstate_t from, hstate_t to,
+					  const S& e);
 
-    hedge_t add_spontaneous(hstate_t from, hstate_t to);
+      htransition_t add_spontaneous(hstate_t from, hstate_t to);
 
-    template<typename L>
-    hedge_t add_letter_edge(hstate_t from, hstate_t to,
-			    const L& l);
+      template<typename L>
+      htransition_t add_letter_transition(hstate_t from, hstate_t to,
+					  const L& l);
 
-    template <typename OutputIterator, typename L>
-    void letter_delta(OutputIterator	res,
-		      hstate_t		from,
-		      const L&		l,
-		      delta_kind::edges k = delta_kind::edges()) const;
+      template <typename OutputIterator, typename L>
+      void letter_delta(OutputIterator	res,
+			hstate_t		from,
+			const L&		l,
+			delta_kind::transitions k = delta_kind::transitions()) const;
 
-    template <typename Container, typename L>
-    void letter_deltac(Container&	 dst,
-		       hstate_t		 from,
-		       const L&		 l,
-		       delta_kind::edges k = delta_kind::edges()) const;
+      template <typename Container, typename L>
+      void letter_deltac(Container&	 dst,
+			 hstate_t		 from,
+			 const L&		 l,
+			 delta_kind::transitions k = delta_kind::transitions()) const;
 
-    template <typename OutputIterator, typename L>
-    void letter_rdelta(OutputIterator	res,
-		      hstate_t		from,
-		      const L&		l,
-		      delta_kind::edges k = delta_kind::edges()) const;
+      template <typename OutputIterator, typename L>
+      void letter_rdelta(OutputIterator	res,
+			 hstate_t		from,
+			 const L&		l,
+			 delta_kind::transitions k = delta_kind::transitions()) const;
 
-    template <typename Container, typename L>
-    void letter_rdeltac(Container&	 dst,
+      template <typename Container, typename L>
+      void letter_rdeltac(Container&	 dst,
+			  hstate_t		 from,
+			  const L&		 l,
+			  delta_kind::transitions k = delta_kind::transitions()) const;
+
+      template <typename OutputIterator, typename L>
+      void letter_delta(OutputIterator	 res,
 			hstate_t		 from,
 			const L&		 l,
-			delta_kind::edges k = delta_kind::edges()) const;
-
-    template <typename OutputIterator, typename L>
-    void letter_delta(OutputIterator 	 res,
-		      hstate_t		 from,
-		      const L&		 l,
-		      delta_kind::states k) const;
-
-    template <typename Container, typename L>
-    void letter_deltac(Container&	  dst,
-		       hstate_t		  from,
-		       const L&		  l,
-		       delta_kind::states k) const;
-
-    template <typename OutputIterator, typename L>
-    void letter_rdelta(OutputIterator	  res,
-		       hstate_t		  from,
-		       const L&		  l,
-		       delta_kind::states k) const;
-
-    template <typename Container, typename L>
-    void letter_rdeltac(Container&	   dst,
-			hstate_t	   from,
-			const L&	   l,
 			delta_kind::states k) const;
 
-  protected:
-    Self&       auto_self();
-    const Self& auto_self() const;
+      template <typename Container, typename L>
+      void letter_deltac(Container&	  dst,
+			 hstate_t		  from,
+			 const L&		  l,
+			 delta_kind::states k) const;
+
+      template <typename OutputIterator, typename L>
+      void letter_rdelta(OutputIterator	  res,
+			 hstate_t		  from,
+			 const L&		  l,
+			 delta_kind::states k) const;
+
+      template <typename Container, typename L>
+      void letter_rdeltac(Container&	   dst,
+			  hstate_t	   from,
+			  const L&	   l,
+			  delta_kind::states k) const;
+
+    protected:
+      Self&	  auto_self();
+      const Self& auto_self() const;
   };
 
 }
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concept/kinds.hxx>
+# include <vaucanson/automata/concept/kinds.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

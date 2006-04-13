@@ -44,26 +44,26 @@ namespace vcsn {
 
   template <typename Self, typename T>
   typename MetaElement<TransducerBase<Self>, T>::input_monoid_elt_t
-  MetaElement<TransducerBase<Self>, T>::input_of(hedge_t e) const
+  MetaElement<TransducerBase<Self>, T>::input_of(htransition_t e) const
   {
     return op_input_of(this->structure(), this->value(), e);
   }
 
   template <typename Self, typename T>
   typename MetaElement<TransducerBase<Self>, T>::output_series_set_elt_t
-  MetaElement<TransducerBase<Self>, T>::output_of(hedge_t e) const
+  MetaElement<TransducerBase<Self>, T>::output_of(htransition_t e) const
   {
     return op_output_of(this->structure(), this->value(), e);
   }
 
   template <typename Self, typename T>
-  hedge_t
+  htransition_t
   MetaElement<TransducerBase<Self>, T>::
-  add_io_edge(hstate_t from,
-	      hstate_t to,
-	      input_monoid_elt_value_t i,
-	      output_monoid_elt_value_t o,
-	      output_semiring_elt_t w)
+  add_io_transition(hstate_t from,
+		    hstate_t to,
+		    input_monoid_elt_value_t i,
+		    output_monoid_elt_value_t o,
+		    output_semiring_elt_t w)
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
@@ -72,54 +72,54 @@ namespace vcsn {
       i_elt (this->structure().series().monoid(), i);
     Element<output_monoid_t, output_monoid_elt_value_t>
       o_elt (this->structure().series().semiring().monoid(), o);
-    return op_add_io_edge(this->structure(), this->value(),
-			  from, to, i_elt, o_elt, w);
+    return op_add_io_transition(this->structure(), this->value(),
+				from, to, i_elt, o_elt, w);
   }
 
 
   template <typename Self, typename T>
-  hedge_t
-  MetaElement<TransducerBase<Self>, T>::add_io_edge(hstate_t from,
-						    hstate_t to,
-						    input_letter_t i,
-						    output_letter_t o,
-						    output_semiring_elt_t w)
+  htransition_t
+  MetaElement<TransducerBase<Self>, T>::add_io_transition(hstate_t from,
+							  hstate_t to,
+							  input_letter_t i,
+							  output_letter_t o,
+							  output_semiring_elt_t w)
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(this->series().semiring().semiring());
-    return op_add_io_edge(this->structure(), this->value(),
-			  from, to, i, o, w);
+    return op_add_io_transition(this->structure(), this->value(),
+				from, to, i, o, w);
   }
 
   template <typename Self, typename T>
-  hedge_t
-  MetaElement<TransducerBase<Self>, T>::add_o_edge(hstate_t from,
-						   hstate_t to,
-						   output_letter_t o,
-						   output_semiring_elt_t w)
-  {
-    if (w == output_semiring_elt_t())
-      w = algebra::identity_as<output_semiring_elt_value_t>
-	::of(this->series().semiring().semiring());
-
-    return op_add_o_edge(this->structure(), this->value(),
-			  from, to, o, w);
-  }
-
-  template <typename Self, typename T>
-  hedge_t
-  MetaElement<TransducerBase<Self>, T>::add_i_edge(hstate_t from,
-						   hstate_t to,
-						   input_letter_t i,
-						   output_semiring_elt_t w)
+  htransition_t
+  MetaElement<TransducerBase<Self>, T>::add_o_transition(hstate_t from,
+							 hstate_t to,
+							 output_letter_t o,
+							 output_semiring_elt_t w)
   {
     if (w == output_semiring_elt_t())
       w = algebra::identity_as<output_semiring_elt_value_t>
 	::of(this->series().semiring().semiring());
 
-    return op_add_i_edge(this->structure(), this->value(),
-			 from, to, i, w);
+    return op_add_o_transition(this->structure(), this->value(),
+			       from, to, o, w);
+  }
+
+  template <typename Self, typename T>
+  htransition_t
+  MetaElement<TransducerBase<Self>, T>::add_i_transition(hstate_t from,
+							 hstate_t to,
+							 input_letter_t i,
+							 output_semiring_elt_t w)
+  {
+    if (w == output_semiring_elt_t())
+      w = algebra::identity_as<output_semiring_elt_value_t>
+	::of(this->series().semiring().semiring());
+
+    return op_add_i_transition(this->structure(), this->value(),
+			       from, to, i, w);
   }
 
   template <typename Self, typename T>

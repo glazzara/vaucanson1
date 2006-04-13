@@ -26,92 +26,92 @@ namespace vcsn {
 
   namespace algebra {
 
-  /*-------------------.
-  | Standard_OfVisitor |
-  `-------------------*/
-  template <class Exp_,
-	    class Auto_,
-	    class Dispatch_>
-  class Standard_OfVisitor :
-    public algebra::KRatExpMatcher<
-    Standard_OfVisitor<Exp_, Auto_, Dispatch_>,
-    Exp_,
-    Auto_*,
-    Dispatch_
-    >
-  {
-  public :
-    typedef Auto_*					automaton_ptr_t;
-    typedef Auto_					automaton_t;
-    typedef typename automaton_t::set_t			automata_set_t;
-
-    typedef typename automaton_t::series_set_t		series_set_t;
-    typedef typename automaton_t::monoid_t		monoid_t;
-    typedef typename automaton_t::semiring_t		semiring_t;
-
-    typedef typename automaton_t::series_set_elt_t	series_set_elt_t;
-    typedef typename automaton_t::monoid_elt_t		monoid_elt_t;
-    typedef typename automaton_t::semiring_elt_t	semiring_elt_t;
-
-    typedef typename Exp_::monoid_elt_value_t		monoid_elt_value_t;
-    typedef typename Exp_::semiring_elt_value_t		semiring_elt_value_t;
-
-    typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>	this_class;
-    typedef algebra::KRatExpMatcher<this_class, Exp_, Auto_*, Dispatch_>
-							parent_class;
-    typedef typename parent_class::return_type          return_type;
-
-  public :
-
-    Standard_OfVisitor(const series_set_t& series) :
-      automata_set_(series)
-    {}
-
-    INHERIT_CONSTRUCTORS(this_class, Exp_, Auto_*, Dispatch_);
-
-    MATCH__(Product, lhs, rhs)
+    /*-------------------.
+    | Standard_OfVisitor |
+    `-------------------*/
+    template <class Exp_,
+	      class Auto_,
+	      class Dispatch_>
+    class Standard_OfVisitor :
+	public algebra::KRatExpMatcher<
+      Standard_OfVisitor<Exp_, Auto_, Dispatch_>,
+      Exp_,
+      Auto_*,
+      Dispatch_
+      >
     {
-      automaton_ptr_t tmp_  = match(rhs);
-      automaton_ptr_t auto_ = match(lhs);
-      concat_of_standard_here(*auto_, *tmp_);
-      delete (tmp_);
-      return auto_;
-    }
-    END
+      public :
+	typedef Auto_*					automaton_ptr_t;
+	typedef Auto_					automaton_t;
+	typedef typename automaton_t::set_t		automata_set_t;
 
-    MATCH__(Sum, lhs, rhs)
-    {
-      automaton_ptr_t tmp_  = match(rhs);
-      automaton_ptr_t auto_ = match(lhs);
-      union_of_standard_here(*auto_, *tmp_);
-      delete (tmp_);
-      return auto_;
-    }
-    END
+	typedef typename automaton_t::series_set_t	series_set_t;
+	typedef typename automaton_t::monoid_t		monoid_t;
+	typedef typename automaton_t::semiring_t	semiring_t;
 
-    MATCH_(Star, node)
-    {
-      automaton_ptr_t stared = match(node);
-      star_of_standard_here(*stared);
-      return stared;
-    }
-    END
+	typedef typename automaton_t::series_set_elt_t	series_set_elt_t;
+	typedef typename automaton_t::monoid_elt_t	monoid_elt_t;
+	typedef typename automaton_t::semiring_elt_t	semiring_elt_t;
 
-    MATCH__(LeftWeight, w, node)
-    {
-      const semiring_t&		semiring = automata_set_.series().semiring();
-      const semiring_elt_t	weight (semiring, w);
-      automaton_ptr_t		auto_ = match(node);
+	typedef typename Exp_::monoid_elt_value_t	monoid_elt_value_t;
+	typedef typename Exp_::semiring_elt_value_t	semiring_elt_value_t;
 
-      for (typename automaton_t::initial_iterator i = auto_->initial().begin();
-	   i != auto_->initial().end();
-	   ++i)
+	typedef Standard_OfVisitor<Exp_, Auto_, Dispatch_>	this_class;
+	typedef algebra::KRatExpMatcher<this_class, Exp_, Auto_*, Dispatch_>
+	parent_class;
+	typedef typename parent_class::return_type	return_type;
+
+      public :
+
+	Standard_OfVisitor(const series_set_t& series) :
+	  automata_set_(series)
+	{}
+
+	INHERIT_CONSTRUCTORS(this_class, Exp_, Auto_*, Dispatch_);
+
+	MATCH__(Product, lhs, rhs)
 	{
-	  std::list<hedge_t>	e;
-	  auto_->deltac(e, *i, delta_kind::edges());
-	  for (typename std::list<hedge_t>::const_iterator j = e.begin();
-	       j != e.end();
-	       ++j)
+	  automaton_ptr_t tmp_	= match(rhs);
+	  automaton_ptr_t auto_ = match(lhs);
+	  concat_of_standard_here(*auto_, *tmp_);
+	  delete (tmp_);
+	  return auto_;
+	}
+	END
+
+	MATCH__(Sum, lhs, rhs)
+	{
+	  automaton_ptr_t tmp_	= match(rhs);
+	  automaton_ptr_t auto_ = match(lhs);
+	  union_of_standard_here(*auto_, *tmp_);
+	  delete (tmp_);
+	  return auto_;
+	}
+	END
+
+	MATCH_(Star, node)
+	{
+	  automaton_ptr_t stared = match(node);
+	  star_of_standard_here(*stared);
+	  return stared;
+	}
+	END
+
+	MATCH__(LeftWeight, w, node)
+	{
+	  const semiring_t&	semiring = automata_set_.series().semiring();
+	  const semiring_elt_t	weight (semiring, w);
+	  automaton_ptr_t	auto_ = match(node);
+
+	  for (typename automaton_t::initial_iterator i = auto_->initial().begin();
+	       i != auto_->initial().end();
+	       ++i)
+	  {
+	    std::list<htransition_t>	e;
+	    auto_->deltac(e, *i, delta_kind::transitions());
+	    for (typename std::list<htransition_t>::const_iterator j = e.begin();
+		 j != e.end();
+		 ++j)
 	    {
 	      // FIXME: The following code is only correct when labels are
 	      // FIXME: series. We should add meta code to make the code
@@ -127,70 +127,70 @@ namespace vcsn {
 	      label  = weight * label;
 
 	      hstate_t				aim = auto_->aim_of(*j);
-	      auto_->del_edge(*j);
+	      auto_->del_transition(*j);
 
 	      if (label != zero_as<label_t>::of(automata_set_.series()))
-		auto_->add_edge(*i, aim, label.value());
+		auto_->add_transition(*i, aim, label.value());
 	    }
-	  auto_->set_final(*i, weight * auto_->get_final(*i));
+	    auto_->set_final(*i, weight * auto_->get_final(*i));
+	  }
+	  return auto_;
 	}
-      return auto_;
-    }
-    END
+	END
 
-    MATCH__(RightWeight, node, w)
-    {
-      const semiring_t&		semiring = automata_set_.series().semiring();
-      const semiring_elt_t	weight (semiring, w);
-      automaton_ptr_t		auto_ = match(node);
-
-      for (typename automaton_t::final_iterator i = auto_->final().begin();
-	   i != auto_->final().end();
-	   ++i)
-	auto_->set_final(*i, auto_->get_final(*i) * weight);
-      return auto_;
-    }
-    END
-
-    MATCH_(Constant, m)
-    {
-      automaton_ptr_t auto_ = new automaton_t(automata_set_);
-      hstate_t new_i = auto_->add_state();
-      hstate_t last = new_i;
-      hstate_t new_f;
-      for (typename monoid_elt_value_t::const_iterator i = m.begin();
-	   i != m.end(); ++i)
+	MATCH__(RightWeight, node, w)
 	{
-	  new_f = auto_->add_state();
-	  auto_->add_letter_edge(last, new_f, *i);
-	  last = new_f;
+	  const semiring_t&	semiring = automata_set_.series().semiring();
+	  const semiring_elt_t	weight (semiring, w);
+	  automaton_ptr_t	auto_ = match(node);
+
+	  for (typename automaton_t::final_iterator i = auto_->final().begin();
+	       i != auto_->final().end();
+	       ++i)
+	    auto_->set_final(*i, auto_->get_final(*i) * weight);
+	  return auto_;
 	}
-      auto_->set_initial(new_i);
-      auto_->set_final(new_f);
-      return auto_;
-    }
-    END
+	END
 
-    MATCH(Zero)
-    {
-      automaton_ptr_t auto_ = new automaton_t(automata_set_);
-      return auto_;
-    }
-    END
+	MATCH_(Constant, m)
+	{
+	  automaton_ptr_t auto_ = new automaton_t(automata_set_);
+	  hstate_t new_i = auto_->add_state();
+	  hstate_t last = new_i;
+	  hstate_t new_f;
+	  for (typename monoid_elt_value_t::const_iterator i = m.begin();
+	       i != m.end(); ++i)
+	  {
+	    new_f = auto_->add_state();
+	    auto_->add_letter_transition(last, new_f, *i);
+	    last = new_f;
+	  }
+	  auto_->set_initial(new_i);
+	  auto_->set_final(new_f);
+	  return auto_;
+	}
+	END
 
-    MATCH(One)
-    {
-      automaton_ptr_t auto_ = new automaton_t(automata_set_);
-      hstate_t new_i = auto_->add_state();
-      auto_->set_initial(new_i);
-      auto_->set_final(new_i);
-      return auto_;
-    }
-    END
+	MATCH(Zero)
+	{
+	  automaton_ptr_t auto_ = new automaton_t(automata_set_);
+	  return auto_;
+	}
+	END
 
-  private:
-    automata_set_t automata_set_;
-  };
+	MATCH(One)
+	{
+	  automaton_ptr_t auto_ = new automaton_t(automata_set_);
+	  hstate_t new_i = auto_->add_state();
+	  auto_->set_initial(new_i);
+	  auto_->set_final(new_i);
+	  return auto_;
+	}
+	END
+
+	private:
+	automata_set_t automata_set_;
+    };
 
   }
 
@@ -199,8 +199,8 @@ namespace vcsn {
 	    typename Exp>
   void
   do_standard_of(const AutomataBase<A>&,
-	      Output& output,
-	      const Exp& kexp)
+		 Output& output,
+		 const Exp& kexp)
   {
     algebra::Standard_OfVisitor<Exp, Output, algebra::DispatchFunction<Exp> >
       m(output.structure().series());
@@ -212,7 +212,7 @@ namespace vcsn {
 	   typename Exp>
   void
   standard_of(Element<A, T>& out,
-	   const Exp& kexp)
+	      const Exp& kexp)
   {
     do_standard_of(out.structure(), out, kexp);
   }

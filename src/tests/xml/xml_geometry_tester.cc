@@ -26,38 +26,38 @@ int main(int argc, char** argv)
   using namespace vcsn::xml;
 
   if (argc > 1 && ! strcmp(argv[1], "output"))
-    {
-      using namespace vcsn::boolean_automaton;
+  {
+    using namespace vcsn::boolean_automaton;
 
-      alphabet_t alpha; alpha.insert('a'); alpha.insert('b');
-      automaton_t a = new_automaton(alpha);
+    alphabet_t alpha; alpha.insert('a'); alpha.insert('b');
+    automaton_t a = new_automaton(alpha);
 
-      hstate_t s0 = a.add_state();
-      hstate_t s1 = a.add_state();
-      hstate_t s2 = a.add_state();
-      hedge_t e;
+    hstate_t s0 = a.add_state();
+    hstate_t s1 = a.add_state();
+    hstate_t s2 = a.add_state();
+    htransition_t e;
 
-      a.set_initial(s0);
-      a.set_final(s1);
+    a.set_initial(s0);
+    a.set_final(s1);
 
-      e = a.add_letter_edge(s0, s1, 'a');
-      a.add_letter_edge(s1, s2, 'b');
+    e = a.add_letter_transition(s0, s1, 'a');
+    a.add_letter_transition(s1, s2, 'b');
 
-      a.geometry().edges()[e] = make_pair(1, 2);
-      a.geometry().states()[s2] = make_pair(12, 14);
-      a.geometry().initials()[s0] = make_pair(10, 3.14);
-      a.geometry().finals()[s1] = make_pair(5, 5);
+    a.geometry().transitions()[e] = make_pair(1, 2);
+    a.geometry().states()[s2] = make_pair(12, 14);
+    a.geometry().initials()[s0] = make_pair(10, 3.14);
+    a.geometry().finals()[s1] = make_pair(5, 5);
 
-      std::cout << automaton_saver(a, io::string_out(), xml::XML());
-    }
+    std::cout << automaton_saver(a, io::string_out(), xml::XML());
+  }
   else
-    {
-      using namespace vcsn::boolean_automaton;
+  {
+    using namespace vcsn::boolean_automaton;
 
-      alphabet_t alpha;
-      automaton_t a = new_automaton(alpha);
+    alphabet_t alpha;
+    automaton_t a = new_automaton(alpha);
 
-      std::cin >> automaton_loader(a, io::string_out(), xml::XML());
-      vcsn::tools::dot_dump(std::cout, a, "A");
-    }
+    std::cin >> automaton_loader(a, io::string_out(), xml::XML());
+    vcsn::tools::dot_dump(std::cout, a, "A");
+  }
 }

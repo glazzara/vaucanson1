@@ -36,8 +36,8 @@ namespace vcsn {
   {
     typedef Auto_				automaton_t;
     AUTOMATON_TYPES(automaton_t);
-    typedef std::set<hedge_t>		    	delta_ret_t;
-    typedef std::deque<hedge_t>	     		queue_t;
+    typedef std::set<htransition_t>			delta_ret_t;
+    typedef std::deque<htransition_t>			queue_t;
 
     queue_t		  to_del, origin_d;
     delta_ret_t		  aim_d;
@@ -47,68 +47,68 @@ namespace vcsn {
     semiring_elt_t		  semiring_zero =
       algebra::zero_as<semiring_elt_value_t>::
       of(a.structure().series().semiring());
-    series_set_elt_t          series_identity =
+    series_set_elt_t	      series_identity =
       algebra::identity_as<series_set_elt_value_t>::of(a.structure().series());
 
     forward_closure_here(a);
 
     for_each_state(origin, a)
+    {
+      std::insert_iterator<queue_t> origin_i(origin_d, origin_d.begin());
+      a.delta(origin_i, *origin, delta_kind::transitions());
+
+      while (!origin_d.empty())
       {
-	std::insert_iterator<queue_t> origin_i(origin_d, origin_d.begin());
-	a.delta(origin_i, *origin, delta_kind::edges());
+	htransition_t d_o = origin_d.front();
+	origin_d.pop_front();
+	if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
+	{
+	  aim_d.clear();
+	  a.deltac(aim_d, a.aim_of(d_o), delta_kind::transitions());
+	  for (typename delta_ret_t::const_iterator d = aim_d.begin();
+	       d != aim_d.end();
+	       ++d)
+	    if (a.series_of(*d).get(monoid_identity) == semiring_zero)
+	    {
+	      bool new_transition = true;
+	      for (typename queue_t::const_iterator d__o =
+		     origin_d.begin();
+		   d__o != origin_d.end();
+		   ++d__o)
+		if ((a.aim_of(*d__o) == a.aim_of(*d) &&
+		     (a.label_of(*d__o) == a.label_of(*d))))
+		{
+		  new_transition = false;
+		  break;
+		}
 
-	while (!origin_d.empty())
-	  {
-	    hedge_t d_o = origin_d.front();
-	    origin_d.pop_front();
-	    if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
+	      if (new_transition)
 	      {
-		aim_d.clear();
-		a.deltac(aim_d, a.aim_of(d_o), delta_kind::edges());
-		for (typename delta_ret_t::const_iterator d = aim_d.begin();
-		     d != aim_d.end();
-		     ++d)
-		  if (a.series_of(*d).get(monoid_identity) == semiring_zero)
-		    {
-		      bool new_edge = true;
-		      for (typename queue_t::const_iterator d__o =
-			     origin_d.begin();
-			   d__o != origin_d.end();
-			   ++d__o)
-			if ((a.aim_of(*d__o) == a.aim_of(*d) &&
-			     (a.label_of(*d__o) == a.label_of(*d))))
-			  {
-			    new_edge = false;
-			    break;
-			  }
-
-		      if (new_edge)
-			{
-			  hedge_t new_hedge = a.add_series_edge
-			    (*origin,
-			     a.aim_of(*d),
-			     a.series_of(d_o) * a.series_of(*d));
-			  origin_d.push_back(new_hedge);
-			}
-		    }
-		if (a.is_final(a.aim_of(d_o)))
-		  a.set_final(*origin);
+		htransition_t new_htransition = a.add_series_transition
+		  (*origin,
+		   a.aim_of(*d),
+		   a.series_of(d_o) * a.series_of(*d));
+		origin_d.push_back(new_htransition);
 	      }
-	  }
+	    }
+	  if (a.is_final(a.aim_of(d_o)))
+	    a.set_final(*origin);
+	}
       }
+    }
 
-    for (typename automaton_t::edge_iterator e = a.edges().begin();
-	 e != a.edges().end();
+    for (typename automaton_t::transition_iterator e = a.transitions().begin();
+	 e != a.transitions().end();
 	 ++e)
       if (a.series_of(*e).get(monoid_identity) != semiring_zero)
 	to_del.push_back(*e);
 
     while (!to_del.empty())
-      {
-	hedge_t e = to_del.front();
-	to_del.pop_front();
-	a.del_edge(e);
-      }
+    {
+      htransition_t e = to_del.front();
+      to_del.pop_front();
+      a.del_transition(e);
+    }
 
     coaccessible_here(a);
 
