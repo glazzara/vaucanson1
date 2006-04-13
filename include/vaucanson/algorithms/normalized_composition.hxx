@@ -215,7 +215,7 @@ namespace vcsn {
 	  prod_series.assoc(monoid_elt_t(monoid, word),
 			    left_series.get(left_supp_elt));
 
-	  const pair_hstate_t new_pair (lhs.aim_of(*l), rhs_s);
+	  const pair_hstate_t new_pair (lhs.dst_of(*l), rhs_s);
 
 	  /*-----------------.
 	  | Add transition.  |
@@ -271,8 +271,8 @@ namespace vcsn {
 		prod_series.assoc(word, p.value());
 
 
-		const pair_hstate_t new_pair (lhs.aim_of(*l),
-					      rhs.aim_of(*r));
+		const pair_hstate_t new_pair (lhs.dst_of(*l),
+					      rhs.dst_of(*r));
 
 
 		/*-----------------.
@@ -325,7 +325,7 @@ namespace vcsn {
 	  prod_series.assoc(monoid_elt_t(monoid, word),
 			    right_series.get(right_supp_elt));
 
-	  const pair_hstate_t new_pair (lhs_s, rhs.aim_of(*r));
+	  const pair_hstate_t new_pair (lhs_s, rhs.dst_of(*r));
 
 
 	  /*-----------------.

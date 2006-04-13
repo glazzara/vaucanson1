@@ -45,8 +45,8 @@ namespace vcsn {
 				    lhs.get_final(*f) * rhs.get_initial(*s));
     }
     for_each_transition(e, rhs)
-      lhs.add_transition(trans[rhs.origin_of(*e)],
-			 trans[rhs.aim_of(*e)],
+      lhs.add_transition(trans[rhs.src_of(*e)],
+			 trans[rhs.dst_of(*e)],
 			 rhs.label_of(*e));
     lhs.clear_final();
     for_each_final_state(f, rhs)

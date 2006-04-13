@@ -310,10 +310,10 @@ namespace vcsn {
       bool has_transition(htransition_t e) const;
 
       /** return the origin of the transition 'e'. */
-      hstate_t origin_of(htransition_t e) const;
+      hstate_t src_of(htransition_t e) const;
 
       /** return the aim of the transition 'e'. */
-      hstate_t aim_of(htransition_t e) const;
+      hstate_t dst_of(htransition_t e) const;
 
       /** return the label of the transition 'e'. */
       typename automaton_traits<T>::label_t

@@ -71,12 +71,12 @@ namespace vcsn {
 
       for_each_const_(std::list<htransition_t>, e, transition_list)
       {
-	int aim = state_to_index[a.aim_of(*e)];
+	int aim = state_to_index[a.dst_of(*e)];
 	series_set_elt_t t = a.series_of(*e);
 	m_semiring_elt[origin][aim] += t.get(monoid_identity);
 	t.assoc(monoid_identity.value(), semiring_elt_zero.value());
 	if(t != series_identity)
-	  a.add_series_transition(*s, a.aim_of(*e), t);
+	  a.add_series_transition(*s, a.dst_of(*e), t);
 	a.del_transition(*e);
       }
     }
@@ -120,7 +120,7 @@ namespace vcsn {
 	int aim = state_to_index[*s];
 	for_each_const_(std::list<htransition_t>, e, transition_list)
 	{
-	  int origin = state_to_index[a.origin_of(*e)];
+	  int origin = state_to_index[a.src_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
 	  for (k = 0; k < size; k++)
 	  {
@@ -154,7 +154,7 @@ namespace vcsn {
 	int origin = state_to_index[*s];
 	for_each_const_(std::list<htransition_t>, e, transition_list)
 	{
-	  int aim = state_to_index[a.aim_of(*e)];
+	  int aim = state_to_index[a.dst_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
 	  for (k = 0; k < size; k++)
 	  {

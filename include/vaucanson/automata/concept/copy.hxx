@@ -50,7 +50,7 @@ namespace vcsn
 	 ++i)
     {
       dst_series_set_elt_t s(from.series_of(*i));
-      dst.add_series_transition(stmap[from.origin_of(*i)], stmap[from.aim_of(*i)], s);
+      dst.add_series_transition(stmap[from.src_of(*i)], stmap[from.dst_of(*i)], s);
     }
     dst_.swap(dst);
   }

@@ -279,18 +279,18 @@ namespace vcsn {
 
   template <class S, class T>
   hstate_t
-  op_origin_of(const AutomataBase<S>&, const T& v,
-	       htransition_t e)
+  op_src_of(const AutomataBase<S>&, const T& v,
+	    htransition_t e)
   {
-    return v.origin_of(e);
+    return v.src_of(e);
   }
 
   template <class S, class T>
   hstate_t
-  op_aim_of(const AutomataBase<S>&, const T& v,
+  op_dst_of(const AutomataBase<S>&, const T& v,
 	    htransition_t e)
   {
-    return v.aim_of(e);
+    return v.dst_of(e);
   }
 
   template <class S, class T>
@@ -756,7 +756,7 @@ namespace vcsn {
     for (typename std::set<htransition_t>::const_iterator e = ret.begin();
 	 e != ret.end(); ++e)
     {
-      *res = a.origin_of(*e);
+      *res = a.src_of(*e);
       ++res;
     }
   }

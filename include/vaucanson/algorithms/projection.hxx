@@ -71,8 +71,8 @@ namespace vcsn {
 
     for_each_transition(e, t)
     {
-      ret.add_series_transition(m[t.origin_of(*e)],
-				m[t.aim_of(*e)],
+      ret.add_series_transition(m[t.src_of(*e)],
+				m[t.dst_of(*e)],
 				t.output_of(*e));
     }
   }
@@ -121,7 +121,7 @@ namespace vcsn {
       ret.set_final(m[*p], t.get_final(*p).get(empty));
 
     for_each_transition(e, t)
-      ret.add_series_transition(m[t.origin_of(*e)], m[t.aim_of(*e)], t.output_of(*e));
+      ret.add_series_transition(m[t.src_of(*e)], m[t.dst_of(*e)], t.output_of(*e));
 
     return ret;
   }
@@ -176,8 +176,8 @@ namespace vcsn {
 
     for_each_transition(e, t)
     {
-      ret.add_series_transition(m[t.origin_of(*e)],
-				m[t.aim_of(*e)],
+      ret.add_series_transition(m[t.src_of(*e)],
+				m[t.dst_of(*e)],
 				t.input_of(*e));
     }
 

@@ -56,7 +56,7 @@ namespace vcsn
   template <class Kind, class WordValue, class WeightValue,		\
 	    class SeriesValue, class Letter, class Tag, class Geometry>
 
-# define GClass								   \
+# define GClass								\
   Graph<Kind, WordValue, WeightValue, SeriesValue, Letter, Tag, Geometry>
 
 
@@ -316,7 +316,7 @@ namespace vcsn
 
   TParam
   hstate_t
-  GClass::origin_of(hedge_t e1) const
+  GClass::src_of(hedge_t e1) const
   {
     precondition(has_edge(e1));
     return edges_[e1].from;
@@ -324,7 +324,7 @@ namespace vcsn
 
   TParam
   hstate_t
-  GClass::aim_of(hedge_t e2) const
+  GClass::dst_of(hedge_t e2) const
   {
     precondition(has_edge(e2));
     return edges_[e2].to;
@@ -363,8 +363,8 @@ namespace vcsn
       if (removed_edges_.find(hedge_t(i)) != removed_edges_.end())
 	continue;
       // Make sure that origin and aim of edge are part of the automaton.
-      if (!has_state(aim_of(hedge_t(i))) ||
-	  !has_state(origin_of(hedge_t(i))))
+      if (!has_state(dst_of(hedge_t(i))) ||
+	  !has_state(src_of(hedge_t(i))))
 	return false;
 
       // Make sure that every letter of the edge is in the alphabet.
@@ -503,19 +503,19 @@ namespace vcsn
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-            class Letter, class Tag, class Geometry, class I>
+	    class Letter, class Tag, class Geometry, class I>
   Tag& op_tag(const AutomataBase<I>&,
-              Graph<Kind, WordValue, WeightValue,
-                    SerieValue ,Letter, Tag, Geometry>& v)
+	      Graph<Kind, WordValue, WeightValue,
+	      SerieValue ,Letter, Tag, Geometry>& v)
   {
     return v.tag();
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-            class Letter, class Tag, class Geometry, class I>
+	    class Letter, class Tag, class Geometry, class I>
   const Tag& op_tag(const AutomataBase<I>&,
-                    const Graph<Kind, WordValue, WeightValue,
-		                SerieValue ,Letter, Tag, Geometry>& v)
+		    const Graph<Kind, WordValue, WeightValue,
+		    SerieValue ,Letter, Tag, Geometry>& v)
   {
     return v.tag();
   }
@@ -536,7 +536,7 @@ namespace vcsn
   }
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
-            class Letter, class Tag, class Geometry, class I>
+	    class Letter, class Tag, class Geometry, class I>
   const Geometry&
   op_geometry(const AutomataBase<I>&,
 	      const Graph<Kind, WordValue, WeightValue,

@@ -224,7 +224,7 @@ namespace vcsn {
     unsigned res = 0;
 
     for_each_transition(i, work)
-      if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
+      if ((work.src_of(*i) == state) && (work.dst_of(*i) == state))
 	res++;
 
     return res;
@@ -239,7 +239,7 @@ namespace vcsn {
     std::list<htransition_t> to_remove;
     for_each_transition(i, work)
     {
-      if ((work.origin_of(*i) == state) && (work.aim_of(*i) == state))
+      if ((work.src_of(*i) == state) && (work.dst_of(*i) == state))
 	to_remove.push_back(*i);
     }
     for_each_const_(std::list<htransition_t>, e, to_remove)

@@ -126,9 +126,9 @@ namespace vcsn
       xercesc::DOMElement* node = doc_->createElement(STR2XML("transition"));
       root->appendChild(node);
       node->setAttribute(STR2XML("src"),
-			 STR2XML(state2str[aut.origin_of(e)].c_str()));
+			 STR2XML(state2str[aut.src_of(e)].c_str()));
       node->setAttribute(STR2XML("dst"),
-			 STR2XML(state2str[aut.aim_of(e)].c_str()));
+			 STR2XML(state2str[aut.dst_of(e)].c_str()));
       chooser_.create_label(e, aut, node);
       add_xml_drawing(aut.geometry().transitions(), e, node);
     }

@@ -126,7 +126,7 @@ namespace vcsn {
 	      label_elt_t label (automata_set_.series(), auto_->label_of(*j));
 	      label  = weight * label;
 
-	      hstate_t				aim = auto_->aim_of(*j);
+	      hstate_t				aim = auto_->dst_of(*j);
 	      auto_->del_transition(*j);
 
 	      if (label != zero_as<label_t>::of(automata_set_.series()))
@@ -186,9 +186,9 @@ namespace vcsn {
 	  auto_->set_final(new_i);
 	  return auto_;
 	}
-	END
+      END
 
-	private:
+      private:
 	automata_set_t automata_set_;
     };
 

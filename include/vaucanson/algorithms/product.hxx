@@ -75,7 +75,7 @@ namespace vcsn {
 	      std::list<htransition_t> aim;
 	      a.deltac(aim, i, delta_kind::transitions());
 	      for_all_const_(std::list<htransition_t>, j, aim)
-		stack.push(a.aim_of(*j));
+		stack.push(a.dst_of(*j));
 	    }
 	  }
 	}
@@ -220,7 +220,7 @@ namespace vcsn {
 
 	if (not prod_is_null)
 	{
-	  const pair_hstate_t new_pair (lhs.aim_of(*l), rhs.aim_of(*r));
+	  const pair_hstate_t new_pair (lhs.dst_of(*l), rhs.dst_of(*r));
 
 	  typename visited_t::const_iterator found =
 	    visited.find(new_pair);

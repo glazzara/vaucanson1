@@ -92,9 +92,9 @@ namespace vcsn {
 	  a.letter_deltac(delta_ret, i, *e, delta_kind::transitions());
 	  for_all_const_(std::list<htransition_t>, l, delta_ret)
 	  {
-	    v2[a.aim_of(*l)] += v1[i] *
+	    v2[a.dst_of(*l)] += v1[i] *
 	      a.series_of(*l).get(monoid_elt_t(a.structure().series().monoid(), *e));
-	    v2_b[a.aim_of(*l)] = true;
+	    v2_b[a.dst_of(*l)] = true;
 	  }
 	}
       std::swap(v1, v2);

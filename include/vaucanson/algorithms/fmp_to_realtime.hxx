@@ -182,8 +182,8 @@ namespace vcsn
 	  input(res.structure().series().monoid(),
 		input_monoid_value);
 	transition_value.assoc(input, out_mult);
-	res.add_series_transition(m[fmp.origin_of(*Ed)],
-				  m[fmp.aim_of(*Ed)],
+	res.add_series_transition(m[fmp.src_of(*Ed)],
+				  m[fmp.dst_of(*Ed)],
 				  transition_value);
       }
     }

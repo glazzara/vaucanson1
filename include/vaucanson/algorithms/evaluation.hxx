@@ -129,13 +129,13 @@ namespace vcsn {
       {
 	j = i; ++j;
 
-	if (b.aim_of(*i) == q)
+	if (b.dst_of(*i) == q)
 	  loop_sum += b.series_of(*i);
-	else if ((f = out_sums.find(b.aim_of(*i))) !=
+	else if ((f = out_sums.find(b.dst_of(*i))) !=
 		 out_sums.end())
 	  f->second += b.series_of(*i);
 	else
-	  out_sums.insert(std::make_pair(b.aim_of(*i), b.series_of(*i)));
+	  out_sums.insert(std::make_pair(b.dst_of(*i), b.series_of(*i)));
 	b.del_transition(*i);
       }
       transitions.clear();
@@ -145,11 +145,11 @@ namespace vcsn {
       {
 	j = i; ++j;
 	// here all loops have already been removed
-	if ((f = in_sums.find(b.origin_of(*i))) !=
+	if ((f = in_sums.find(b.src_of(*i))) !=
 	    in_sums.end())
 	  f->second += b.series_of(*i);
 	else
-	  in_sums.insert(std::make_pair(b.origin_of(*i), b.series_of(*i)));
+	  in_sums.insert(std::make_pair(b.src_of(*i), b.series_of(*i)));
 	b.del_transition(*i);
       }
       loop_sum.star();
@@ -170,7 +170,7 @@ namespace vcsn {
     // we must sum the labels
     for_each_transition(e, b)
     {
-      hstate_t aim = b.aim_of(*e);
+      hstate_t aim = b.dst_of(*e);
       typename se_map_t::iterator i = se_m.find(aim);
       if (i == se_m.end())
 	se_m.insert(std::make_pair(aim,

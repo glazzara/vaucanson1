@@ -119,7 +119,7 @@ namespace vcsn {
 
       for_each_const_(set_of_transitions_t, e, transitions)
       {
-	hstate_t p_ = lhs.aim_of(*e);
+	hstate_t p_ = lhs.dst_of(*e);
 	exp_t exp = lhs.series_of(*e);
 
 	assertion(exp.supp().size() == 1);

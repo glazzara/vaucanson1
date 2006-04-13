@@ -88,8 +88,8 @@ namespace vcsn {
 	  if (l__ != zero)
 	  {
 	    output.add_series_transition(conv[std::make_pair(*s, *t)],
-					 conv[std::make_pair(f.aim_of(*lhs_e),
-							     g.aim_of(*rhs_e))
+					 conv[std::make_pair(f.dst_of(*lhs_e),
+							     g.dst_of(*rhs_e))
 					   ],
 					 l__);
 	  }

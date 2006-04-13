@@ -60,8 +60,8 @@ unsigned global_consistency_test(tests::Tester& tg)
        i != automaton.transitions().end();
        i++)
   {
-    hstate_t aim  = automaton.aim_of(*i);
-    hstate_t from = automaton.origin_of(*i);
+    hstate_t aim  = automaton.dst_of(*i);
+    hstate_t from = automaton.src_of(*i);
     bool res  = false;
     bool res2 = false;
 

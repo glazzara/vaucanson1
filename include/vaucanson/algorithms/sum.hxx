@@ -73,8 +73,8 @@ namespace vcsn {
 	   d != aim.end();
 	   ++d)
       {
-	lhs.add_transition(states_map[rhs.origin_of(*d)],
-			   states_map[rhs.aim_of(*d)],
+	lhs.add_transition(states_map[rhs.src_of(*d)],
+			   states_map[rhs.dst_of(*d)],
 			   rhs.label_of(*d));
 
 	//  lhs.history().set_transition_event_about(INSUM_EVENT,

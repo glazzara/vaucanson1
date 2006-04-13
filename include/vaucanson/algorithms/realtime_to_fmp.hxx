@@ -223,8 +223,8 @@ namespace vcsn
 	  s.assoc(mon, trans.output_of(*Ed).get(second));
 	}
       }
-      res.add_series_transition(m[trans.origin_of(*Ed)],
-				m[trans.aim_of(*Ed)],
+      res.add_series_transition(m[trans.src_of(*Ed)],
+				m[trans.dst_of(*Ed)],
 				s);
     }
   }

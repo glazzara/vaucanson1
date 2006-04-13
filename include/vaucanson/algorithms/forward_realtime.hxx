@@ -64,7 +64,7 @@ namespace vcsn {
 	if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
 	{
 	  aim_d.clear();
-	  a.deltac(aim_d, a.aim_of(d_o), delta_kind::transitions());
+	  a.deltac(aim_d, a.dst_of(d_o), delta_kind::transitions());
 	  for (typename delta_ret_t::const_iterator d = aim_d.begin();
 	       d != aim_d.end();
 	       ++d)
@@ -75,7 +75,7 @@ namespace vcsn {
 		     origin_d.begin();
 		   d__o != origin_d.end();
 		   ++d__o)
-		if ((a.aim_of(*d__o) == a.aim_of(*d) &&
+		if ((a.dst_of(*d__o) == a.dst_of(*d) &&
 		     (a.label_of(*d__o) == a.label_of(*d))))
 		{
 		  new_transition = false;
@@ -86,12 +86,12 @@ namespace vcsn {
 	      {
 		htransition_t new_htransition = a.add_series_transition
 		  (*origin,
-		   a.aim_of(*d),
+		   a.dst_of(*d),
 		   a.series_of(d_o) * a.series_of(*d));
 		origin_d.push_back(new_htransition);
 	      }
 	    }
-	  if (a.is_final(a.aim_of(d_o)))
+	  if (a.is_final(a.dst_of(d_o)))
 	    a.set_final(*origin);
 	}
       }

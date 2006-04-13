@@ -228,16 +228,16 @@ struct vcsn_automaton : vcsn::virtual_automaton
       return s.str();
     }
 
-    virtual int origin_of(int transition) const
+    virtual int src_of(int transition) const
     {
       CHECK_TRANSITION(this, transition);
-      return (*auto_).origin_of(transition);
+      return (*auto_).src_of(transition);
     }
 
-    virtual int aim_of(int transition) const
+    virtual int dst_of(int transition) const
     {
       CHECK_TRANSITION(this, transition);
-      return (*auto_).aim_of(transition);
+      return (*auto_).dst_of(transition);
     }
 
 #define DefInitialFinalMembers(InitialFinal)				\

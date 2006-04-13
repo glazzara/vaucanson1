@@ -1,5 +1,60 @@
 2006-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Change `origin_of' to `src_of' and `aim_of' to `dst_of'.
+
+	* include/vaucanson/tools/dot_format.hxx,
+	* include/vaucanson/tools/simple_format.hxx,
+	* include/vaucanson/tools/gen_random.hxx,
+	* include/vaucanson/tools/fsm_dump.hxx,
+	* include/vaucanson/xml/xml_converter.hxx,
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/standard_of.hxx,
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/cut_up.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/internal/skeleton.hxx,
+	* include/vaucanson/algorithms/fmp_to_realtime.hxx,
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx,
+	* include/vaucanson/algorithms/closure.hxx,
+	* include/vaucanson/algorithms/product.hxx,
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	* include/vaucanson/algorithms/evaluation.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/projections_fmp.hxx,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/normalized_composition.hxx,
+	* include/vaucanson/algorithms/sum.hxx,
+	* include/vaucanson/algorithms/outsplitting.hxx,
+	* include/vaucanson/automata/implementation/automaton_view.hh,
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/transpose_view.hh,
+	* include/vaucanson/automata/implementation/automaton_view.hxx,
+	* include/vaucanson/automata/implementation/graph.hxx,
+	* include/vaucanson/automata/implementation/transpose_view.hxx,
+	* include/vaucanson/automata/concept/transducer.hxx,
+	* include/vaucanson/automata/concept/copy.hxx,
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx,
+	* src/benchs/minimization_stroppa/init.hxx,
+	* src/benchs/common/algorithm.hh,
+	* src/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/automata/implementation_check/global_consistency_test.hh,
+	* src/demos/vaucanswig/meta/automaton.hh,
+	* src/demos/vaucanswig/meta/vaucanswig_automaton.i,
+	* src/demos/vaucanswig/meta/vauto.hh: s/origin_of/src_of/;
+	s/aim_of/dst_of/.
+
+2006-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Change `new_*' functions to `make_*'.
 	Reindendation made on modified files.
 

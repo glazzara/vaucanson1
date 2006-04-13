@@ -50,8 +50,8 @@ namespace vcsn
 	   i != a.transitions().end();
 	   ++i)
       {
-	o << 's' << a.origin_of(*i) << ' '
-	  << 's' << a.aim_of(*i) << ' ';
+	o << 's' << a.src_of(*i) << ' '
+	  << 's' << a.dst_of(*i) << ' ';
 	if (a.is_spontaneous(*i))
 	  o << 'S';
 	else

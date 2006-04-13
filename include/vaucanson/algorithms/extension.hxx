@@ -68,8 +68,8 @@ namespace vcsn {
 	tmp.assoc(neutre, s.get(*m));
 	os.assoc(*m, tmp);
       }
-      htransition_t f = t_ret.add_series_transition(conv[a.origin_of(*e)],
-						    conv[a.aim_of(*e)],
+      htransition_t f = t_ret.add_series_transition(conv[a.src_of(*e)],
+						    conv[a.dst_of(*e)],
 						    os);
     }
 
@@ -141,7 +141,7 @@ namespace vcsn {
 	os.assoc(a_monoid_elt_t (a.structure().series().monoid(), *m), tmp);
       }
 
-      tt.add_series_transition(conv[a.origin_of(*e)], conv[a.aim_of(*e)], os);
+      tt.add_series_transition(conv[a.src_of(*e)], conv[a.dst_of(*e)], os);
     }
 
     for(a_initial_iterator p = a.initial().begin();

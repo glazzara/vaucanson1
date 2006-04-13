@@ -117,7 +117,7 @@ namespace vcsn {
 
 
   /*----------------------------.
-  |    Heuristic chooser:       |
+  |    Heuristic chooser:	|
   | Transition Number Heuristic |
   `----------------------------*/
 
@@ -152,7 +152,7 @@ namespace vcsn {
 	  for (typename std::set<htransition_t>::iterator j = delta_out.begin();
 	       j != delta_out.end();
 	       ++j)
-	    if (*i == a.aim_of(*j))
+	    if (*i == a.dst_of(*j))
 	      has_loop = true;
 
 	  //FIXME : If the state has several loops
@@ -217,7 +217,7 @@ namespace vcsn {
 	  for (typename std::set<htransition_t>::iterator j = delta_out.begin();
 	       j != delta_out.end();
 	       ++j)
-	    if (*i == a.aim_of(*j))
+	    if (*i == a.dst_of(*j))
 	      ++n_loops;
 
 	  in = delta_in.size() - n_loops;
@@ -227,7 +227,7 @@ namespace vcsn {
 	  for (typename std::set<htransition_t>::iterator j = delta_in.begin();
 	       j != delta_in.end();
 	       ++j)
-	    if (*i != a.aim_of(*j))
+	    if (*i != a.dst_of(*j))
 	    {
 	      weight += a.series_value_of(*j).length() * (out - 1);
 	    }
@@ -236,7 +236,7 @@ namespace vcsn {
 	  for (typename std::set<htransition_t>::iterator j = delta_out.begin();
 	       j != delta_out.end();
 	       ++j)
-	    if (*i != a.aim_of(*j))
+	    if (*i != a.dst_of(*j))
 	    {
 	      weight += a.series_value_of(*j).length() * (in - 1);
 	    }
@@ -245,7 +245,7 @@ namespace vcsn {
 	  for (typename std::set<htransition_t>::iterator j = delta_out.begin();
 	       j != delta_out.end();
 	       ++j)
-	    if (*i == a.aim_of(*j))
+	    if (*i == a.dst_of(*j))
 	    {
 	      weight += a.series_value_of(*j).length() * (in  * out - 1);
 	    }
@@ -336,14 +336,14 @@ namespace vcsn {
       {
 	j = i; ++j;
 
-	if (a.aim_of(*i) == q)
+	if (a.dst_of(*i) == q)
 	  loop_sum += a.series_of(*i);
 	else
 	{
-	  typename sums_t::iterator f = out_sums.find(a.aim_of(*i));
+	  typename sums_t::iterator f = out_sums.find(a.dst_of(*i));
 	  if (f == out_sums.end())
 	    f = out_sums.insert
-	      (std::make_pair(a.aim_of(*i),
+	      (std::make_pair(a.dst_of(*i),
 			      series_set_elt_t(a_set.series()))).first;
 	  f->second += a.series_of(*i);
 	}
@@ -356,10 +356,10 @@ namespace vcsn {
       {
 	j = i; ++j;
 	// Here all loops have already been removed.
-	typename sums_t::iterator f = in_sums.find(a.origin_of(*i));
+	typename sums_t::iterator f = in_sums.find(a.src_of(*i));
 	if (f == in_sums.end())
 	  f = in_sums.insert
-	    (std::make_pair(a.origin_of(*i),
+	    (std::make_pair(a.src_of(*i),
 			    series_set_elt_t(a_set.series()))).first;
 
 	f->second += a.series_of(*i);

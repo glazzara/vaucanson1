@@ -78,8 +78,8 @@ namespace Kind ##_types
 
       virtual std::string label_of(int) const;
 
-      virtual int origin_of(int) const;
-      virtual int aim_of(int) const;
+      virtual int src_of(int) const;
+      virtual int dst_of(int) const;
 
       virtual void clear_initial();
       virtual std::list<int> initial() const;
@@ -190,8 +190,8 @@ namespace Kind ##_types
 
       virtual std::string label_of(int) const;
 
-      virtual int origin_of(int) const;
-      virtual int aim_of(int) const;
+      virtual int src_of(int) const;
+      virtual int dst_of(int) const;
 
       virtual void clear_initial();
       virtual std::list<int> initial() const;

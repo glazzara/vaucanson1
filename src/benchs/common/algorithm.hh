@@ -27,7 +27,7 @@ void fsm_dump(St& out, const auto_t& a)
 
   a.deltac(succ, *initial, delta_kind::transitions());
   for_all_const_(std::set<htransition_t>, e, succ)
-    out << *initial << "\t" << a.aim_of(*e) << "\t"
+    out << *initial << "\t" << a.dst_of(*e) << "\t"
 	<< a.series_of(*e) << "\t 0"
 	<< std::endl;
   for_each_state(s, a)
@@ -36,7 +36,7 @@ void fsm_dump(St& out, const auto_t& a)
       succ.clear();
       a.deltac(succ, *s, delta_kind::transitions());
       for_all_const_(std::set<htransition_t>, e, succ)
-	out << *s << "\t" << a.aim_of(*e) << "\t"
+	out << *s << "\t" << a.dst_of(*e) << "\t"
 	    << a.series_of(*e) << "\t 0"
 	    << std::endl;
     }

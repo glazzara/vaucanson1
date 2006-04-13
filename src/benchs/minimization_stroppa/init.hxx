@@ -151,7 +151,7 @@ namespace vcsn {
 	a.letter_deltac(transitions, current_state, (*letter_p), delta_kind::transitions());
 	if (transitions.size()) // should be 0 or 1
 	{
-	  current_state = a.aim_of(*(transitions.begin()));
+	  current_state = a.dst_of(*(transitions.begin()));
 	}
 	else
 	{
@@ -265,7 +265,7 @@ namespace vcsn {
 	assertion(cont.size());
 
 	transitions_weights[cont[0]] += (*weight_p);
-	current_state = b.aim_of(cont[0]);
+	current_state = b.dst_of(cont[0]);
       }
       assertion(b.is_final(current_state));
 
@@ -279,7 +279,7 @@ namespace vcsn {
     hstate_t origin;
     for_each_transition(transition_p, b)
     {
-      origin = b.origin_of( (*transition_p));
+      origin = b.src_of( (*transition_p));
       if (! states_weights[origin]) {
 	final_weight = 0;
       }

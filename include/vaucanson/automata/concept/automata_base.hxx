@@ -378,17 +378,17 @@ namespace vcsn {
   /** return the origin of the transition 'e'. */
   template <typename Self, typename T>
   hstate_t
-  MetaElement<AutomataBase<Self>, T>::origin_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::src_of(htransition_t e) const
   {
-    return op_origin_of(this->structure(), this->value(), e);
+    return op_src_of(this->structure(), this->value(), e);
   }
 
   /** return the aim of the transition 'e'. */
   template <typename Self, typename T>
   hstate_t
-  MetaElement<AutomataBase<Self>, T>::aim_of(htransition_t e) const
+  MetaElement<AutomataBase<Self>, T>::dst_of(htransition_t e) const
   {
-    return op_aim_of(this->structure(), this->value(), e);
+    return op_dst_of(this->structure(), this->value(), e);
   }
 
   /** return the label of the transition 'e'. */

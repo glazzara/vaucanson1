@@ -73,7 +73,7 @@ namespace vcsn
     // Gives each transition the index of its label (transitions_labels[i] = index
     // of label of transition i)
     // (time complexity: O(m log s + m log n))
-    // Constructs vectors origin_of and aim_of
+    // Constructs vectors src_of and dst_of
 
     // Index of the labels
     i = 0;
@@ -82,8 +82,8 @@ namespace vcsn
     for_each_transition(e, a)
     {
       transitions.push_back(*e);
-      origins_transitions.push_back(Smap[a.origin_of(*e)]);
-      aims_transitions.push_back(Smap[a.aim_of(*e)]);
+      origins_transitions.push_back(Smap[a.src_of(*e)]);
+      aims_transitions.push_back(Smap[a.dst_of(*e)]);
 
       if (Lmap.find(a.series_of(*e)) == Lmap.end())
 	transitions_labels.push_back(Lmap[a.series_of(*e)] = i++);

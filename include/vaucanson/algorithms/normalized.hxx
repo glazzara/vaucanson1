@@ -212,8 +212,8 @@ namespace vcsn {
       for (typename delta_ret_t::const_iterator d = aim.begin();
 	   d != aim.end();
 	   ++d)
-	lhs.add_transition(map_h[rhs.origin_of(*d)],
-			   map_h[rhs.aim_of(*d)],
+	lhs.add_transition(map_h[rhs.src_of(*d)],
+			   map_h[rhs.dst_of(*d)],
 			   rhs.label_of(*d));
     }
     // If initial multiplicity of rhs isn't 1, add a spontaneous transition

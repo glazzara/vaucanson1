@@ -48,7 +48,7 @@ namespace vcsn {
       for_all_const_(std::set<htransition_t>, oil, transition_oi)
       {
 	series_set_elt_t t = s*a.series_of(*oil);
-	a.add_series_transition(i,a.aim_of(*oil),t);
+	a.add_series_transition(i,a.dst_of(*oil),t);
       }
     }
     a.clear_initial();
@@ -97,7 +97,7 @@ namespace vcsn {
 	     ++d)
 	{
 	  lhs.add_transition(new_i,
-			     lhs.aim_of(*d),
+			     lhs.dst_of(*d),
 			     lhs.label_of(*d));
 	  lhs.del_transition(*d);
 	}
@@ -107,7 +107,7 @@ namespace vcsn {
 	     d != aim.end();
 	     ++d)
 	{
-	  lhs.add_transition(lhs.origin_of(*d),
+	  lhs.add_transition(lhs.src_of(*d),
 			     new_i,
 			     lhs.label_of(*d));
 	  lhs.del_transition(*d);
@@ -210,7 +210,7 @@ namespace vcsn {
 	   d != aim.end();
 	   ++d)
 	lhs.add_series_transition(*f,
-				  map_h[rhs.aim_of(*d)],
+				  map_h[rhs.dst_of(*d)],
 				  weight * rhs.label_of(*d));
     }
 
@@ -239,7 +239,7 @@ namespace vcsn {
 	     d != aim.end();
 	     ++d)
 	  lhs.add_transition(map_h[*i],
-			     map_h[rhs.aim_of(*d)],
+			     map_h[rhs.dst_of(*d)],
 			     rhs.label_of(*d));
       }
   }
@@ -291,7 +291,7 @@ namespace vcsn {
 	     ++d)
 	  // FIXME: it is wanted that we can create two similar transitions.
 	  // FIXME: is it a good thing ?
-	  a.add_transition(*f, a.aim_of(*d), a.label_of(*d));
+	  a.add_transition(*f, a.dst_of(*d), a.label_of(*d));
 
     }
 
@@ -300,7 +300,7 @@ namespace vcsn {
 	 ++d)
     {
       series_set_elt_t st = out_mult * a.series_of(*d);
-      hstate_t to = a.aim_of(*d);
+      hstate_t to = a.dst_of(*d);
       a.del_transition(*d);
       a.add_series_transition(new_i, to, st);
     }

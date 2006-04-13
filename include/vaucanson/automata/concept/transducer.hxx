@@ -71,8 +71,8 @@ namespace vcsn {
 	tmp.assoc(*m, s.get(*m));
 	os.assoc(*m, tmp);
       }
-      htransition_t f = ret.add_series_transition(conv[a.origin_of(*e)],
-						  conv[a.aim_of(*e)],
+      htransition_t f = ret.add_series_transition(conv[a.src_of(*e)],
+						  conv[a.dst_of(*e)],
 						  os);
     }
     // FIXME: set initial/final weights.

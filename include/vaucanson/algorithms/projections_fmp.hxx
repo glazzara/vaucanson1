@@ -108,8 +108,8 @@ namespace vcsn
       series_elt.assoc(monoid_elt_t(monoid, word),
 		       trans_series_elt.get(trans_monoid_elt));
 
-      res.add_series_transition(stmap[fmp_trans.origin_of(*fmp_e)],
-				stmap[fmp_trans.aim_of(*fmp_e)], series_elt);
+      res.add_series_transition(stmap[fmp_trans.src_of(*fmp_e)],
+				stmap[fmp_trans.dst_of(*fmp_e)], series_elt);
     }
   }
 
@@ -148,8 +148,8 @@ namespace vcsn
       series_elt.assoc(monoid_elt_t(monoid, word),
 		       trans_series_elt.get(trans_monoid_elt));
 
-      res.add_series_transition(stmap[fmp_trans.origin_of(*fmp_e)],
-				stmap[fmp_trans.aim_of(*fmp_e)], series_elt);
+      res.add_series_transition(stmap[fmp_trans.src_of(*fmp_e)],
+				stmap[fmp_trans.dst_of(*fmp_e)], series_elt);
     }
   }
 
@@ -189,8 +189,8 @@ namespace vcsn
       series_elt.assoc(monoid_elt_t(monoid, word),
 		       aut_series_elt.get(aut_monoid_elt));
 
-      res.add_series_transition(stmap[aut.origin_of(*aut_e)],
-				stmap[aut.aim_of(*aut_e)], series_elt);
+      res.add_series_transition(stmap[aut.src_of(*aut_e)],
+				stmap[aut.dst_of(*aut_e)], series_elt);
     }
   }
 

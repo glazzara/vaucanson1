@@ -57,7 +57,7 @@ unsigned rdelta_test(tests::Tester& tg)
   std::list<int> r;
   automaton.rdelta(inserter(r, r.begin()), s2, vcsn::delta_kind::transitions());
   TEST(t, "rdelta returns consistent results (1/4). ",
-       !r.empty() && (automaton.origin_of(r.front()) == s1));
+       !r.empty() && (automaton.src_of(r.front()) == s1));
 
   r.clear();
   automaton.rdelta(inserter(r, r.begin()), s2, vcsn::delta_kind::states());
@@ -67,7 +67,7 @@ unsigned rdelta_test(tests::Tester& tg)
   r.clear();
   automaton.rdelta(inserter(r, r.begin()), s1, vcsn::delta_kind::transitions());
   TEST(t, "rdelta returns consistent results (3/4). ",
-       !r.empty() && (automaton.origin_of(r.front()) == s2));
+       !r.empty() && (automaton.src_of(r.front()) == s2));
 
   r.clear();
   automaton.rdelta(inserter(r, r.begin()), s1, vcsn::delta_kind::states());

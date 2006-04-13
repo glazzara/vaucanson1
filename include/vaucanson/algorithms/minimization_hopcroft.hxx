@@ -653,7 +653,7 @@ namespace vcsn {
 
       for_each_const_(set_transitions_t, e, transitions_comming)
       {
-	hstate_t		p = input.origin_of(*e);
+	hstate_t		p = input.src_of(*e);
 	if (states_visited.find(p) != states_visited.end())
 	  inverse[*q][pos_of_letter[*a]].
 	    erase(pair_state_semiring_elt_t (p, old_weight[p]));
@@ -838,7 +838,7 @@ namespace vcsn {
       for_each_const_(set_transitions_t, e, transitions_leaving)
       {
 	series_set_elt_t	se = input.series_of(*e);
-	unsigned		cs = class_of_state[input.aim_of(*e)];
+	unsigned		cs = class_of_state[input.dst_of(*e)];
 
 	if (met_classes.find(cs) == met_classes.end())
 	{

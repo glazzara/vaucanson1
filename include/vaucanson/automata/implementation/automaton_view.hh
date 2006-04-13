@@ -182,12 +182,12 @@ namespace vcsn {
 
   template <class S, class T>
   hstate_t
-  op_origin_of(const AutomataBase<S>&, const IdentityView<T>&,
-	       htransition_t);
+  op_src_of(const AutomataBase<S>&, const IdentityView<T>&,
+	    htransition_t);
 
   template <class S, class T>
   hstate_t
-  op_aim_of(const AutomataBase<S>&, const IdentityView<T>&,
+  op_dst_of(const AutomataBase<S>&, const IdentityView<T>&,
 	    htransition_t);
 
   template <class S, class T>

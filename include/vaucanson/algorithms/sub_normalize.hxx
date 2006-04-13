@@ -200,7 +200,7 @@ namespace vcsn {
 				  res.get_final(*f), false, true);
 
     for_each_(transitions_t, e, transitions)
-      if (do_sub_normalize_transition(res, res.origin_of(*e), res.aim_of(*e),
+      if (do_sub_normalize_transition(res, res.src_of(*e), res.dst_of(*e),
 				      res.series_of(*e), false, false))
 	res.del_transition(*e);
   }

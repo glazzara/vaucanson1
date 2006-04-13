@@ -47,8 +47,8 @@ namespace vcsn
 
       virtual std::string label_of(int) const = 0;
 
-      virtual int origin_of(int) const = 0;
-      virtual int aim_of(int) const = 0;
+      virtual int src_of(int) const = 0;
+      virtual int dst_of(int) const = 0;
 
       virtual void clear_initial() = 0;
       virtual std::list<int> initial() const = 0;

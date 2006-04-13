@@ -79,17 +79,17 @@ namespace vcsn {
 	  statemap[*s] = res.add_state();
 
 	for_each_initial_state(i, tmp)
-	  res.add_series_transition(res.origin_of(*e),
+	  res.add_series_transition(res.src_of(*e),
 				    statemap[*i],
 				    tmp.get_initial(*i));
 
 	for_each_transition(ed, tmp)
-	  res.add_transition(statemap[tmp.origin_of(*ed)],
-			     statemap[tmp.aim_of(*ed)],
+	  res.add_transition(statemap[tmp.src_of(*ed)],
+			     statemap[tmp.dst_of(*ed)],
 			     tmp.label_of(*ed));
 
 	for_each_final_state(f, tmp)
-	  res.add_series_transition(statemap[*f], res.aim_of(*e),
+	  res.add_series_transition(statemap[*f], res.dst_of(*e),
 				    tmp.get_final(*f));
 
 	res.del_transition(*e);
@@ -128,8 +128,8 @@ namespace vcsn {
 	{
 	  series_set_elt_t series(res.structure().series());
 	  series.assoc(*m, label.get(*m));
-	  res.add_series_transition(res.origin_of(*e),
-				    res.aim_of(*e),
+	  res.add_series_transition(res.src_of(*e),
+				    res.dst_of(*e),
 				    series);
 	}
 

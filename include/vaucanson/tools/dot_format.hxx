@@ -82,9 +82,9 @@ namespace vcsn
 	   i != a.transitions().end();
 	   ++i)
       {
-	out << name_ << state_map[a.origin_of(*i)]
+	out << name_ << state_map[a.src_of(*i)]
 	    << "\" -> "
-	    << name_ << state_map[a.aim_of(*i)];
+	    << name_ << state_map[a.dst_of(*i)];
 	out << "\" [label=\"" << conv(a.structure(), a.series_of(*i))
 	    << "\"];" << std::endl;
       }
@@ -157,9 +157,9 @@ namespace vcsn
 	   i != a.transitions().end();
 	   ++i)
       {
-	out << name_ << state_map[a.origin_of(*i)]
+	out << name_ << state_map[a.src_of(*i)]
 	    << "\" -> "
-	    << name_ << state_map[a.aim_of(*i)] << '"';
+	    << name_ << state_map[a.dst_of(*i)] << '"';
 	std::ostringstream o;
 	series_set_elt_t ss = a.series_of(*i);
 	for_each_const_(series_set_elt_t::support_t, s, ss.supp())

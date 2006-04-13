@@ -113,7 +113,7 @@ namespace vcsn {
 	res.rdeltac(in_transitions, *s, delta_kind::transitions());
 
 	for_each_(set_of_transitions_t, e, in_transitions)
-	  res.add_series_transition(res.origin_of(*e), s2, res.series_of(*e));
+	  res.add_series_transition(res.src_of(*e), s2, res.series_of(*e));
 
 	for_each_const_(set_of_transitions_t, e, transitions)
 	{
@@ -123,7 +123,7 @@ namespace vcsn {
 
 	  if (supp_elt.value().second == second_identity.value())
 	  {
-	    res.add_series_transition(s2, res.aim_of(*e), res.series_of(*e));
+	    res.add_series_transition(s2, res.dst_of(*e), res.series_of(*e));
 	    res.del_transition(*e);
 	  }
 	}
@@ -212,7 +212,7 @@ namespace vcsn {
 	res.deltac(out_transitions, *s, delta_kind::transitions());
 
 	for_each_(set_of_transitions_t, e, out_transitions)
-	  res.add_series_transition(s2, res.aim_of(*e), res.series_of(*e));
+	  res.add_series_transition(s2, res.dst_of(*e), res.series_of(*e));
 
 	for_each_const_(set_of_transitions_t, e, transitions)
 	{
@@ -222,7 +222,7 @@ namespace vcsn {
 
 	  if (supp_elt.value().first == first_identity.value())
 	  {
-	    res.add_series_transition(res.origin_of(*e), s2,
+	    res.add_series_transition(res.src_of(*e), s2,
 				      res.series_of(*e));
 	    res.del_transition(*e);
 	  }
