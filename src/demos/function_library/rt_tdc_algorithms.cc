@@ -71,7 +71,7 @@ get_aut(std::string s)
     using namespace vcsn::io;
     using namespace vcsn::xml;
 
-    automaton_t a = new_automaton(alphabet(), alphabet());
+    automaton_t a = make_automaton(alphabet(), alphabet());
     *is >> automaton_loader(a, string_out (), XML ());
 
     if (s != "-")
@@ -95,7 +95,7 @@ get_bool_aut(std::string s)
     using namespace vcsn::xml;
 
     boolean_automaton::automaton_t a =
-      boolean_automaton::new_automaton(alphabet());
+      boolean_automaton::make_automaton(alphabet());
     *is >> automaton_loader(a, string_out (), XML ());
 
     if (s != "-")
@@ -150,8 +150,8 @@ evaluation_command(int argc, char** argv)
     usage(argc, argv);
 
   std::cout << evaluation(get_aut(argv[2]),
-			  boolean_automaton::new_rat_exp(alphabet(),
-							 argv[3]))
+			  boolean_automaton::make_rat_exp(alphabet(),
+							  argv[3]))
 	    << std::endl;
 }
 
@@ -207,7 +207,7 @@ realtime_to_fmp_command(int argc, char** argv)
     usage(argc, argv);
 
   fmp_transducer::automaton_t fmp_a =
-    fmp_transducer::new_automaton(alphabet(), alphabet());
+    fmp_transducer::make_automaton(alphabet(), alphabet());
 
   realtime_to_fmp(get_aut(argv[2]), fmp_a);
 

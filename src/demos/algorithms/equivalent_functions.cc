@@ -1,17 +1,17 @@
 // equivalent_functions.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/xml/XML.hh>
@@ -27,7 +27,7 @@ get_exp(std::string s)
   a.insert('a');
   a.insert('b');
 
-  return new_rat_exp(a, s);
+  return make_rat_exp(a, s);
 }
 
 automaton_t
@@ -35,22 +35,22 @@ get_aut(std::string s)
 {
   std::istream* is (new std::ifstream (s.c_str()));
   if (not is->fail())
-    {
-      using namespace vcsn::io;
-      using namespace vcsn::xml;
+  {
+    using namespace vcsn::io;
+    using namespace vcsn::xml;
 
-      automaton_t a = new_automaton(alphabet_t ());
-      *is >> automaton_loader(a, string_out (), XML ());
+    automaton_t a = make_automaton(alphabet_t ());
+    *is >> automaton_loader(a, string_out (), XML ());
 
-      if (s != "-")
-	delete is;
-      return a;
-    }
+    if (s != "-")
+      delete is;
+    return a;
+  }
   else
-    {
-      std::cerr << "FATAL: Could not load automaton." << std::endl;
-      exit(1);
-    }
+  {
+    std::cerr << "FATAL: Could not load automaton." << std::endl;
+    exit(1);
+  }
 }
 
 

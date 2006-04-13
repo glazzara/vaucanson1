@@ -1,4 +1,4 @@
-//                                                             -*- C++ -*-
+//							       -*- C++ -*-
 // transducer_functions.thh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
@@ -34,14 +34,14 @@ namespace vcsn
   {
 
     template <class T>
-    automaton_t new_automaton(const T& input_alphabet,
-			      const T& output_alphabet);
+    automaton_t make_automaton(const T& input_alphabet,
+			       const T& output_alphabet);
 
     template <class InputIterator>
-    automaton_t new_automaton(InputIterator input_alphabet_begin,
-			      InputIterator input_alphabet_end,
-			      InputIterator output_alphabet_begin,
-			      InputIterator output_alphabet_end);
+    automaton_t make_automaton(InputIterator input_alphabet_begin,
+			       InputIterator input_alphabet_end,
+			       InputIterator output_alphabet_begin,
+			       InputIterator output_alphabet_end);
 
     template <typename TransStruct,
 	      typename TransImpl,

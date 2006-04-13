@@ -48,7 +48,7 @@ automaton_t
 replace_left(const std::string& from,	const std::string& to,
 	     const alphabet_t& A,	const alphabet_t& B)
 {
-  automaton_t	a = new_automaton(A, B);
+  automaton_t	a = make_automaton(A, B);
 
   int		n = from.size();
 
@@ -142,9 +142,9 @@ void normalized_composition_bench(int n_value)
   automaton_t	left_auto = replace_left(from, to, A, B);
 
   fmp_transducer::automaton_t fmp_left_auto =
-    fmp_transducer::new_automaton(A,B);
+    fmp_transducer::make_automaton(A,B);
   fmp_transducer::automaton_t sub_left_auto =
-    fmp_transducer::new_automaton(A,B);
+    fmp_transducer::make_automaton(A,B);
 
   std::cerr << "Left sub-normalisation" << std::endl;
   VCSN_BENCH_START;
@@ -157,9 +157,9 @@ void normalized_composition_bench(int n_value)
   automaton_t	right_auto = replace_right(from, to, B, C);
 
   fmp_transducer::automaton_t fmp_right_auto =
-    fmp_transducer::new_automaton(B,C);
+    fmp_transducer::make_automaton(B,C);
   fmp_transducer::automaton_t sub_right_auto =
-    fmp_transducer::new_automaton(B,C);
+    fmp_transducer::make_automaton(B,C);
 
   std::cerr << "Right sub-normalisation" << std::endl;
   VCSN_BENCH_START;
@@ -173,7 +173,7 @@ void normalized_composition_bench(int n_value)
   std::cerr << "Normalized composition" << std::endl;
   VCSN_BENCH_START;
 
-  fmp_transducer::automaton_t res_auto = fmp_transducer::new_automaton(A,C);
+  fmp_transducer::automaton_t res_auto = fmp_transducer::make_automaton(A,C);
 
   normalized_composition(sub_left_auto, sub_right_auto, res_auto);
 

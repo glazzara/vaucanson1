@@ -70,7 +70,7 @@ void derived_terms_bench(int n_states)
   typedef vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef vcsn::Element<series_set_t, exp_t>				krat_t;
 
-  automaton_t a = new_automaton(alpha);
+  automaton_t a = make_automaton(alpha);
   aut_2n(n_states, a);
 
   // Get all data.
@@ -81,7 +81,7 @@ void derived_terms_bench(int n_states)
 
     // Get derived terms automaton of e.
     data.n_len = e.value(). length();
-    automaton_t dt = new_automaton(alpha);
+    automaton_t dt = make_automaton(alpha);
     VCSN_BENCH_START_QUIET;
     derived_term_automaton(dt, e);
     VCSN_BENCH_STOP_QUIET(data.r_time_dt);

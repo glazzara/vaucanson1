@@ -47,7 +47,7 @@ namespace vcsn
 
 
     template <class FirstInputIterator, class SecondInputIterator>
-    automaton_t new_automaton(const FirstInputIterator first_begin,
+    automaton_t make_automaton(const FirstInputIterator first_begin,
 			      const FirstInputIterator first_end,
 			      const SecondInputIterator second_begin,
 			      const SecondInputIterator second_end)
@@ -57,10 +57,10 @@ namespace vcsn
     }
 
     template <class T1, class T2>
-    automaton_t new_automaton(const T1& first_alphabet,
+    automaton_t make_automaton(const T1& first_alphabet,
 			      const T2& second_alphabet)
     {
-      return new_automaton(first_alphabet.begin(), first_alphabet.end(),
+      return make_automaton(first_alphabet.begin(), first_alphabet.end(),
 			   second_alphabet.begin(), second_alphabet.end());
     }
 
@@ -113,10 +113,10 @@ namespace vcsn
 		  const Element<SeriesStruct, SeriesImpl>&)
     {
       AUTOMATON_CONTEXT::automaton_t w = AUTOMATON_CONTEXT::
-	new_automaton(t.structure().series()
+	make_automaton(t.structure().series()
 		      .monoid().first_monoid().alphabet());
       AUTOMATON_CONTEXT::automaton_t result = AUTOMATON_CONTEXT::
-	new_automaton(t.structure().series()
+	make_automaton(t.structure().series()
 		      .monoid().second_monoid().alphabet());
       standard_of(w, input);
       evaluation_fmp(t, quotient(w), result);

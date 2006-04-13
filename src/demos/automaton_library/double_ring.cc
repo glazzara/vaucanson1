@@ -44,7 +44,7 @@ main(int argc, char** argv)
   alpha.insert('a');
   alpha.insert('b');
 
-  automaton_t	a = new_automaton(alpha);
+  automaton_t	a = make_automaton(alpha);
   a.add_state();
   a.set_initial(0);
 

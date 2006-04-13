@@ -21,7 +21,7 @@ namespace vcsn
   {
 
     /*----------------.
-    | new_automaton() |
+    | make_automaton() |
     `----------------*/
 
     template <class InputIterator>
@@ -38,38 +38,38 @@ namespace vcsn
     }
 
     template <class InputIterator>
-    automaton_t new_automaton(InputIterator begin,
+    automaton_t make_automaton(InputIterator begin,
 			      InputIterator end)
     {
       return automaton_t (new_automata_set(begin, end));
     }
 
     template <class T>
-    automaton_t new_automaton(const T& alphabet)
+    automaton_t make_automaton(const T& alphabet)
     {
-      return new_automaton(alphabet.begin(), alphabet.end());
+      return make_automaton(alphabet.begin(), alphabet.end());
     }
 
     template <class InputIterator>
-    gen_automaton_t new_gen_automaton(InputIterator begin,
+    gen_automaton_t make_gen_automaton(InputIterator begin,
 				      InputIterator end)
     {
       return gen_automaton_t (new_automata_set(begin, end));
     }
 
     template <class T>
-    gen_automaton_t new_gen_automaton(const T& alphabet)
+    gen_automaton_t make_gen_automaton(const T& alphabet)
     {
-      return new_gen_automaton(alphabet.begin(), alphabet.end());
+      return make_gen_automaton(alphabet.begin(), alphabet.end());
     }
 
 
     /*--------------.
-    | new_rat_exp() |
+    | make_rat_exp() |
     `--------------*/
 
     template <class Iterator>
-    rat_exp_t new_rat_exp(const Iterator& begin,
+    rat_exp_t make_rat_exp(const Iterator& begin,
 			  const Iterator& end,
 			  const std::string& exp)
     {
@@ -89,9 +89,9 @@ namespace vcsn
     }
 
     template <class T>
-    rat_exp_t new_rat_exp(const T& alphabet, const std::string& exp)
+    rat_exp_t make_rat_exp(const T& alphabet, const std::string& exp)
     {
-      return new_rat_exp(alphabet.begin(), alphabet.end(), exp);
+      return make_rat_exp(alphabet.begin(), alphabet.end(), exp);
     }
 
     /*--------------.
@@ -102,7 +102,7 @@ namespace vcsn
     automaton_t
     do_standard_of(const series_set_t& structure, const SeriesImpl& impl)
     {
-      automaton_t r = new_automaton(structure.monoid().alphabet());
+      automaton_t r = make_automaton(structure.monoid().alphabet());
       standard_of(r, impl);
       return r;
     }
@@ -122,7 +122,7 @@ namespace vcsn
     automaton_t
     do_thompson_of(const series_set_t& structure, const SeriesImpl& impl)
     {
-      automaton_t r = new_automaton(structure.monoid().alphabet());
+      automaton_t r = make_automaton(structure.monoid().alphabet());
       thompson_of(r, impl);
       return r;
     }

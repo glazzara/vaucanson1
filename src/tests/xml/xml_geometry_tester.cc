@@ -30,7 +30,7 @@ int main(int argc, char** argv)
     using namespace vcsn::boolean_automaton;
 
     alphabet_t alpha; alpha.insert('a'); alpha.insert('b');
-    automaton_t a = new_automaton(alpha);
+    automaton_t a = make_automaton(alpha);
 
     hstate_t s0 = a.add_state();
     hstate_t s1 = a.add_state();
@@ -55,7 +55,7 @@ int main(int argc, char** argv)
     using namespace vcsn::boolean_automaton;
 
     alphabet_t alpha;
-    automaton_t a = new_automaton(alpha);
+    automaton_t a = make_automaton(alpha);
 
     std::cin >> automaton_loader(a, io::string_out(), xml::XML());
     vcsn::tools::dot_dump(std::cout, a, "A");

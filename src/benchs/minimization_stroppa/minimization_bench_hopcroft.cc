@@ -42,7 +42,7 @@ int main(unsigned int argc, char **argv) {
     exit(1);
   }
 
-  usual_char_automaton_t a = new_automaton<usual_char_automaton_t>(*ascii_alphabet::instance());
+  usual_char_automaton_t a = make_automaton<usual_char_automaton_t>(*ascii_alphabet::instance());
   AUTOMATON_TYPES_EXACT(usual_char_automaton_t);
 
   std::vector<std::string> language = ana::misc::file_to_vector<std::string>(argv[1]);

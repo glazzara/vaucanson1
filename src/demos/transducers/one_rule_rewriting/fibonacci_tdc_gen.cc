@@ -41,7 +41,7 @@ int main()
   | Creation of fibleft.  |
   `----------------------*/
 
-  automaton_t		fibleft = new_automaton(A, A);
+  automaton_t		fibleft = make_automaton(A, A);
 
   hstate_t p = fibleft.add_state();
   hstate_t q = fibleft.add_state();
@@ -62,10 +62,10 @@ int main()
   fibleft.set_initial(p);
 
   fmp_transducer::automaton_t fmp_fibleft =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   fmp_transducer::automaton_t sub_fibleft =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   realtime_to_fmp(fibleft, fmp_fibleft);
 
@@ -75,7 +75,7 @@ int main()
   | Creation of fibright.  |
   `-----------------------*/
 
-  automaton_t fibright = new_automaton(A, A);
+  automaton_t fibright = make_automaton(A, A);
 
   hstate_t s = fibright.add_state();
   hstate_t t = fibright.add_state();
@@ -97,10 +97,10 @@ int main()
 
 
   fmp_transducer::automaton_t fmp_fibright =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   fmp_transducer::automaton_t sub_fibright =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   realtime_to_fmp(fibright, fmp_fibright);
 
@@ -110,10 +110,10 @@ int main()
   | Compose.  |
   `----------*/
 
-  fmp_transducer::automaton_t	fiblr = fmp_transducer::new_automaton(A, A);
+  fmp_transducer::automaton_t	fiblr = fmp_transducer::make_automaton(A, A);
   normalized_composition(sub_fibleft, sub_fibright, fiblr);
 
-  fmp_transducer::automaton_t	fibrl = fmp_transducer::new_automaton(A, A);
+  fmp_transducer::automaton_t	fibrl = fmp_transducer::make_automaton(A, A);
   normalized_composition(sub_fibright, sub_fibleft, fibrl);
 
   std::ofstream left_fibo("fibo_fmp_left.xml");

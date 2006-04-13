@@ -33,7 +33,7 @@ int main(int argc, char** argv)
     alphabet_t alpha1; alpha1.insert('a'); alpha1.insert('b');
     alphabet_t alpha2; alpha2.insert('x'); alpha2.insert('y');
 
-    automaton_t a = new_automaton(alpha1, alpha2);
+    automaton_t a = make_automaton(alpha1, alpha2);
 
     hstate_t s0 = a.add_state();
     hstate_t s1 = a.add_state();
@@ -55,7 +55,7 @@ int main(int argc, char** argv)
     alphabet_t alpha1;
     alphabet_t alpha2;
 
-    automaton_t a = new_automaton(alpha1, alpha2);
+    automaton_t a = make_automaton(alpha1, alpha2);
 
     std::cin >> automaton_loader(a, io::string_out(), xml::XML());
     vcsn::tools::dot_dump(std::cout, a, "T");

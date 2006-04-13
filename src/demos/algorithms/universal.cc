@@ -110,7 +110,7 @@ automaton_t universal(const automaton_t& automaton)
   pstate_t univers_states(intersection_closure(transp_states));
 
   // create the universal automaton.
-  automaton_t u = new_automaton(automaton.series().monoid().alphabet());
+  automaton_t u = make_automaton(automaton.series().monoid().alphabet());
 
   // we have to save the state set associated to each automaton.
   map_t subset_label;
@@ -164,7 +164,7 @@ int main()
   alpha.insert('a');
   alpha.insert('b');
   alpha.insert('c');
-  automaton_t a = new_automaton(alpha);
+  automaton_t a = make_automaton(alpha);
   hstate_t p = a.add_state();
   hstate_t q = a.add_state();
   hstate_t r = a.add_state();

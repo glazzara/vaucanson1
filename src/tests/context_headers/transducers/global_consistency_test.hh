@@ -65,20 +65,20 @@ global_consistency_test(tests::Tester& t)
 
   series_set_t				ss_2 (out_ss, other_in_md);
 
-  automaton_t		a1 = new_automaton(in_at, out_at);
-  automaton_t		a2 = new_automaton(in_at.begin(), in_at.end(),
-					   out_at.begin(), out_at.end());
-  automaton_t		a3 = new_automaton(other_in_at, out_at);
+  automaton_t		a1 = make_automaton(in_at, out_at);
+  automaton_t		a2 = make_automaton(in_at.begin(), in_at.end(),
+					    out_at.begin(), out_at.end());
+  automaton_t		a3 = make_automaton(other_in_at, out_at);
 
   TEST(t, "alphabet inegality is consistent", in_md != other_in_md);
-  TEST(t, "new_automaton is consistent.", a1 == a2);
-  TEST(t, "new_automaton gives a correct alphabet.",
+  TEST(t, "make_automaton is consistent.", a1 == a2);
+  TEST(t, "make_automaton gives a correct alphabet.",
        a1.structure().series().monoid().alphabet() == in_at);
-  TEST(t, "new_automaton gives a correct monoid.",
+  TEST(t, "make_automaton gives a correct monoid.",
        a1.structure().series().monoid() == in_md);
-  TEST(t, "new_automaton gives a correct semiring.",
+  TEST(t, "make_automaton gives a correct semiring.",
        a1.structure().series().semiring() == out_ss);
-  TEST(t, "new_automaton gives a correct automata set.", a1.structure() == aa);
+  TEST(t, "make_automaton gives a correct automata set.", a1.structure() == aa);
   TEST(t, "automata set inegality is consistent.",
        a1.structure() != a3.structure());
 

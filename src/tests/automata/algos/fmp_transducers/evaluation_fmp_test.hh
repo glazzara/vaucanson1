@@ -89,15 +89,15 @@ evaluation_fmp_test(tests::Tester& t)
 
 
   boolean_transducer::automaton_t trans1 =
-    boolean_transducer::new_automaton(first_at, second_at);
+    boolean_transducer::make_automaton(first_at, second_at);
 
   fmp_to_realtime(t1, trans1);
 
   boolean_automaton::rat_exp_t exp =
-    boolean_automaton::new_rat_exp(first_at, "abbababa");
+    boolean_automaton::make_rat_exp(first_at, "abbababa");
 
   boolean_automaton::automaton_t res_aut =
-    boolean_automaton::new_automaton(second_at);
+    boolean_automaton::make_automaton(second_at);
 
   evaluation_fmp(t1, boolean_automaton::standard_of(exp), res_aut);
 

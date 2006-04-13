@@ -54,7 +54,7 @@ void quotient_bool_bench(int n_power)
   alpha.insert('b');
   alpha.insert('c');
 
-  automaton_t a = new_automaton(alpha);
+  automaton_t a = make_automaton(alpha);
   binary(a);
   automaton_t an = a;
 

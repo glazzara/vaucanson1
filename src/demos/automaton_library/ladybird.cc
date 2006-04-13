@@ -42,7 +42,7 @@ int main(int argc, char** argv)
   alpha.insert('b');
   alpha.insert('c');
 
-  automaton_t an = new_automaton(alpha);
+  automaton_t an = make_automaton(alpha);
 
   vcsn::hstate_t p = an.add_state();
   vcsn::hstate_t x = p;

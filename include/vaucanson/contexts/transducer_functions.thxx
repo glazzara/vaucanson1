@@ -32,7 +32,7 @@ namespace vcsn
 
     template <class InputIterator>
     automaton_t
-    new_automaton(InputIterator input_alphabet_begin,
+    make_automaton(InputIterator input_alphabet_begin,
 		  InputIterator input_alphabet_end,
 		  InputIterator output_alphabet_begin,
 		  InputIterator output_alphabet_end)
@@ -60,10 +60,10 @@ namespace vcsn
 
 
     template <class T>
-    automaton_t new_automaton(const T& input_alphabet,
+    automaton_t make_automaton(const T& input_alphabet,
 			      const T& output_alphabet)
     {
-      return new_automaton(input_alphabet.begin(),
+      return make_automaton(input_alphabet.begin(),
 			   input_alphabet.end(),
 			   output_alphabet.begin(),
 			   output_alphabet.end());
@@ -101,7 +101,7 @@ namespace vcsn
 		  const Element<SeriesStruct, SeriesImpl>&)
     {
       AUTOMATON_CONTEXT::automaton_t w = AUTOMATON_CONTEXT::
-	new_automaton(t.structure().series().monoid().alphabet());
+	make_automaton(t.structure().series().monoid().alphabet());
       AUTOMATON_CONTEXT::gen_automaton_t result (w.structure());
       standard_of(w, input);
       evaluation(quotient(w), t, result);

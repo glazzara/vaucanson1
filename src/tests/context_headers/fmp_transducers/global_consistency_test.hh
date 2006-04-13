@@ -83,17 +83,17 @@ global_consistency_test(tests::Tester& t)
   while (not test_done)
     try
     {
-      automaton_t		a1 = new_automaton(first_at, second_at);
-      automaton_t		a2 = new_automaton(first_at.begin(),
-						   first_at.end(),
-						   second_at.begin(),
-						   second_at.end());
+      automaton_t		a1 = make_automaton(first_at, second_at);
+      automaton_t		a2 = make_automaton(first_at.begin(),
+						    first_at.end(),
+						    second_at.begin(),
+						    second_at.end());
       automaton_t		a3 (aa);
-      automaton_t		a4 = new_automaton(other_first_at,
-						   other_second_at);
+      automaton_t		a4 = make_automaton(other_first_at,
+						    other_second_at);
 
-      TEST(t, "new_automaton is consistent.", a1 == a2);
-      TEST(t, "new_automaton gives a correct alphabet.",
+      TEST(t, "make_automaton is consistent.", a1 == a2);
+      TEST(t, "make_automaton gives a correct alphabet.",
 	   a1.structure().series().monoid().first_monoid().alphabet()
 	   == first_at
 	   and
@@ -105,11 +105,11 @@ global_consistency_test(tests::Tester& t)
 	   and
 	   a1.structure().series().monoid().second_monoid().alphabet()
 	   != other_second_at);
-      TEST(t, "new_automaton gives a correct monoid.",
+      TEST(t, "make_automaton gives a correct monoid.",
 	   a1.structure().series().monoid() == fmp);
-      TEST(t, "new_automaton gives a correct semiring.",
+      TEST(t, "make_automaton gives a correct semiring.",
 	   a1.structure().series().semiring() == sg);
-      TEST(t, "new_automaton gives a correct automata set.",
+      TEST(t, "make_automaton gives a correct automata set.",
 	   a1.structure() == aa);
       TEST(t, "new automata set is consistent.",
 	   a1.structure() != a4.structure());

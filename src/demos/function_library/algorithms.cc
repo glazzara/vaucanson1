@@ -70,7 +70,7 @@ static
 rat_exp_t
 get_exp(std::string s)
 {
-  return new_rat_exp(alphabet(), s);
+  return make_rat_exp(alphabet(), s);
 }
 
 static
@@ -83,7 +83,7 @@ get_aut(std::string s)
     using namespace vcsn::io;
     using namespace vcsn::xml;
 
-    automaton_t a = new_automaton(alphabet());
+    automaton_t a = make_automaton(alphabet());
     *is >> automaton_loader(a, string_out (), XML ());
 
     if (s != "-")
@@ -105,7 +105,7 @@ derived_term_automaton_command(int argc, char** argv)
     usage(argc, argv);
 
   rat_exp_t	e = get_exp(argv[2]);
-  automaton_t	a = new_automaton(alphabet());
+  automaton_t	a = make_automaton(alphabet());
   derived_term_automaton(a, e);
   std::cout << automaton_saver(a, string_out (), XML ());
 }

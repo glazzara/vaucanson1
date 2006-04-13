@@ -81,7 +81,7 @@ get_aut(std::string s)
     using namespace vcsn::io;
     using namespace vcsn::xml;
 
-    automaton_t a = new_automaton(first_alphabet(), second_alphabet());
+    automaton_t a = make_automaton(first_alphabet(), second_alphabet());
     *is >> automaton_loader(a, string_out (), XML ());
 
     if (s != "-")
@@ -106,7 +106,7 @@ get_boolean_aut(std::string s)
     using namespace vcsn::xml;
 
     boolean_automaton::automaton_t a =
-      boolean_automaton::new_automaton(first_alphabet());
+      boolean_automaton::make_automaton(first_alphabet());
     *is >> automaton_loader(a, string_out (), XML ());
 
     if (s != "-")
@@ -161,8 +161,8 @@ evaluation_command(int argc, char** argv)
     usage(argc, argv);
 
   std::cout << evaluation(get_aut(argv[2]),
-			  boolean_automaton::new_rat_exp(first_alphabet(),
-							 argv[3]))
+			  boolean_automaton::make_rat_exp(first_alphabet(),
+							  argv[3]))
 	    << std::endl;
 }
 
@@ -175,7 +175,7 @@ evaluation_aut_command(int argc, char** argv)
 
   boolean_automaton::automaton_t a = get_boolean_aut(argv[3]);
   boolean_automaton::automaton_t res =
-    boolean_automaton::new_automaton(second_alphabet());
+    boolean_automaton::make_automaton(second_alphabet());
 
   evaluation_fmp(get_aut(argv[2]), a, res);
 
@@ -221,7 +221,7 @@ domain_command(int argc, char** argv)
     usage(argc, argv);
 
   boolean_automaton::automaton_t a =
-    boolean_automaton::new_automaton(first_alphabet());
+    boolean_automaton::make_automaton(first_alphabet());
 
   domain(get_aut(argv[2]), a);
 
@@ -236,7 +236,7 @@ image_command(int argc, char** argv)
     usage(argc, argv);
 
   boolean_automaton::automaton_t a =
-    boolean_automaton::new_automaton(second_alphabet());
+    boolean_automaton::make_automaton(second_alphabet());
 
   image(get_aut(argv[2]), a);
 
@@ -253,7 +253,7 @@ identity_command(int argc, char** argv)
 
   boolean_automaton::automaton_t a = get_boolean_aut(argv[2]);
 
-  automaton_t fmp = new_automaton(first_alphabet(), second_alphabet());
+  automaton_t fmp = make_automaton(first_alphabet(), second_alphabet());
 
   identity(a, fmp);
 
@@ -269,7 +269,7 @@ fmp_to_realtime_command(int argc, char** argv)
     usage(argc, argv);
 
   boolean_transducer::automaton_t a =
-    boolean_transducer::new_automaton(first_alphabet(), second_alphabet());
+    boolean_transducer::make_automaton(first_alphabet(), second_alphabet());
 
   fmp_to_realtime(get_aut(argv[2]), a);
   std::cout << automaton_saver(a, string_out (), XML ());

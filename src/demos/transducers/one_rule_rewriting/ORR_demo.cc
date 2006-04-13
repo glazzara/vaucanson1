@@ -42,7 +42,7 @@ eval_an_expression(const automaton_t& t)
       using namespace vcsn::boolean_automaton;
       using namespace vcsn::rat;
 
-      rat_exp_t exp = new_rat_exp(alphabet, user_string);
+      rat_exp_t exp = make_rat_exp(alphabet, user_string);
       std::cout << setpm (MODE_STAR) << expand(evaluation(t, exp))
 		<< std::endl;
     }
@@ -100,7 +100,7 @@ automaton_t
 replace_left(const std::string& from,	const std::string& to,
 	     const alphabet_t& A,	const alphabet_t& B)
 {
-  automaton_t	a = new_automaton(A, B);
+  automaton_t	a = make_automaton(A, B);
 
   int		n = from.size();
 
@@ -207,7 +207,7 @@ main()
   | Result automaton.  |
   `-------------------*/
 
-  automaton_t	res_auto = new_automaton(A, A);
+  automaton_t	res_auto = make_automaton(A, A);
   realtime_composition(left_auto, right_auto, res_auto);
 
   /*----------------.

@@ -44,7 +44,7 @@ automaton_t
 replace_left(const std::string& from,	const std::string& to,
 	     const alphabet_t& A,	const alphabet_t& B)
 {
-  automaton_t	a = new_automaton(A, B);
+  automaton_t	a = make_automaton(A, B);
 
   int		n = from.size();
 
@@ -142,7 +142,7 @@ void realtime_composition_bench(int n_value)
   std::cout << "right nb states: " << right_auto.states().size() << std::endl;
   std::cout << "right nb transitions: " << right_auto.transitions().size()
 	    << std::endl;
-  automaton_t	res_auto = new_automaton(A, C);
+  automaton_t	res_auto = make_automaton(A, C);
   realtime_composition(left_auto, right_auto, res_auto);
   std::cout << "nb states: " << res_auto.states().size() << std::endl;
   std::cout << "nb transitions: " << res_auto.transitions().size() << std::endl;

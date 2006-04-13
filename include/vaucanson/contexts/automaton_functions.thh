@@ -1,4 +1,4 @@
-//                                                             -*- C++ -*-
+//							       -*- C++ -*-
 // automaton_functions.thh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
@@ -57,28 +57,28 @@ namespace vcsn
 
 
     template <class T>
-    automaton_t new_automaton(const T& alphabet);
+    automaton_t make_automaton(const T& alphabet);
 
     template <class InputIterator>
-    automaton_t new_automaton(InputIterator begin,
-			      InputIterator end);
+    automaton_t make_automaton(InputIterator begin,
+			       InputIterator end);
 
     template <class T>
-    gen_automaton_t new_gen_automaton(const T& alphabet);
+    gen_automaton_t make_gen_automaton(const T& alphabet);
 
     template <class InputIterator>
-    gen_automaton_t new_gen_automaton(InputIterator begin,
-				      InputIterator end);
+    gen_automaton_t make_gen_automaton(InputIterator begin,
+				       InputIterator end);
 
     template <class Iterator>
     rat_exp_t
-    new_rat_exp(const Iterator& begin,
-		const Iterator& end,
-		const std::string& exp = "0");
+    make_rat_exp(const Iterator& begin,
+		 const Iterator& end,
+		 const std::string& exp = "0");
 
     template <class T>
     rat_exp_t
-    new_rat_exp(const T& alphabet, const std::string& exp = "0");
+    make_rat_exp(const T& alphabet, const std::string& exp = "0");
 
     template <class SeriesSet, class SeriesImpl>
     automaton_t

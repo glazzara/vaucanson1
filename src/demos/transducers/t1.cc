@@ -26,7 +26,7 @@ int main()
   A.insert('a');
   A.insert('b');
 
-  automaton_t t1 = new_automaton(A, A);
+  automaton_t t1 = make_automaton(A, A);
 
 
   hstate_t p = t1.add_state();

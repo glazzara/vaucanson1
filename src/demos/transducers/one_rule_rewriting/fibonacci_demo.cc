@@ -41,7 +41,7 @@ eval_an_expression(const vcsn::boolean_transducer::automaton_t& t)
       using namespace vcsn::boolean_automaton;
       using namespace vcsn::rat; // For setpm and MODE_STAR.
 
-      rat_exp_t exp = new_rat_exp(alphabet, user_string);
+      rat_exp_t exp = make_rat_exp(alphabet, user_string);
       std::cout << setpm (MODE_STAR) << expand(evaluation(t, exp))
 		<< std::endl;
     }
@@ -68,7 +68,7 @@ int main()
   | Creation of fibleft.  |
   `----------------------*/
 
-  automaton_t		fibleft = new_automaton(A, A);
+  automaton_t		fibleft = make_automaton(A, A);
 
   hstate_t p = fibleft.add_state();
   hstate_t q = fibleft.add_state();
@@ -100,7 +100,7 @@ int main()
   | Creation of fibright.  |
   `-----------------------*/
 
-  automaton_t fibright = new_automaton(A, A);
+  automaton_t fibright = make_automaton(A, A);
 
   hstate_t s = fibright.add_state();
   hstate_t t = fibright.add_state();
@@ -133,7 +133,7 @@ int main()
   | Compose.  |
   `----------*/
 
-  automaton_t	fiblr = new_automaton(A, A);
+  automaton_t	fiblr = make_automaton(A, A);
   realtime_composition(fibleft, fibright, fiblr);
 
   /*----------------.

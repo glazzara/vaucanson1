@@ -36,7 +36,7 @@ main(int argc, char **argv)
   | Creation of the automaton C_1 |
   `------------------------------*/
 
-  automaton_t c1 = new_automaton(A);
+  automaton_t c1 = make_automaton(A);
 
   hstate_t p = c1.add_state();
   hstate_t q = c1.add_state();

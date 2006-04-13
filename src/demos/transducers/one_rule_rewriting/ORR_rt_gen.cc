@@ -80,7 +80,7 @@ automaton_t
 replace_left(const std::string& from,	const std::string& to,
 	     const alphabet_t& A,	const alphabet_t& B)
 {
-  automaton_t	a = new_automaton(A, B);
+  automaton_t	a = make_automaton(A, B);
 
   int		n = from.size();
 
@@ -164,8 +164,8 @@ int main(int argc, char** argv)
 
   automaton_t	right_auto = replace_right(from, to, A, A);
 
-  automaton_t	left_right_auto = new_automaton(A, A);
-  automaton_t	right_left_auto = new_automaton(A, A);
+  automaton_t	left_right_auto = make_automaton(A, A);
+  automaton_t	right_left_auto = make_automaton(A, A);
 
   realtime_composition(left_auto, right_auto, left_right_auto);
   realtime_composition(right_auto, left_auto, right_left_auto);

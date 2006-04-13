@@ -55,34 +55,34 @@ namespace vcsn
       {
 	std::string out;
 	if (series.supp().size() > 1)
-	  {
-	    out = get_label(series);
-	    if (out.size())
-	      elt->setAttribute(STR2XML("label"),
-				STR2XML(out.c_str()));
-	  }
+	{
+	  out = get_label(series);
+	  if (out.size())
+	    elt->setAttribute(STR2XML("label"),
+			      STR2XML(out.c_str()));
+	}
 	else
-	  {
-	    std::string in_word =
-	      get_label((*(series.supp().begin())).first);
-	    std::string out_word =
-	      get_label((*(series.supp().begin())).second);
-	    std::string mult =
-	      get_label(series.get(*(series.supp().begin())));
-	    if (mult.size())
-	      out = mult;
-	    if (out != "" && out_word.size())
-	      out += " ";
-	    if (out_word.size())
-	      out += out_word;
+	{
+	  std::string in_word =
+	    get_label((*(series.supp().begin())).first);
+	  std::string out_word =
+	    get_label((*(series.supp().begin())).second);
+	  std::string mult =
+	    get_label(series.get(*(series.supp().begin())));
+	  if (mult.size())
+	    out = mult;
+	  if (out != "" && out_word.size())
+	    out += " ";
+	  if (out_word.size())
+	    out += out_word;
 
-	    if (in_word.size())
-	      elt->setAttribute(STR2XML("in"),
-				STR2XML(in_word.c_str()));
-	    if (out.size())
-	      elt->setAttribute(STR2XML("out"),
-				STR2XML(out.c_str()));
-	  }
+	  if (in_word.size())
+	    elt->setAttribute(STR2XML("in"),
+			      STR2XML(in_word.c_str()));
+	  if (out.size())
+	    elt->setAttribute(STR2XML("out"),
+			      STR2XML(out.c_str()));
+	}
       }
 
       template <class S, class T, class U>
@@ -132,7 +132,7 @@ namespace vcsn
 	os << l;
 	if (os.str() == "1")
 	  return "";
-        return os.str().c_str();
+	return os.str().c_str();
       }
 
 
@@ -142,14 +142,14 @@ namespace vcsn
       {
 	typedef typename A::const_iterator alphabet_iterator;
 	for_each_letter(l, alphabet)
-	  {
-	    std::ostringstream letter;
-	    xercesc::DOMElement* gen =
-	      doc->createElement(STR2XML("generator"));
-	    letter << *l;
-	    gen->setAttribute(STR2XML("value"), STR2XML(letter.str().c_str()));
-	    root->appendChild(gen);
-	  }
+	{
+	  std::ostringstream letter;
+	  xercesc::DOMElement* gen =
+	    doc->createElement(STR2XML("generator"));
+	  letter << *l;
+	  gen->setAttribute(STR2XML("value"), STR2XML(letter.str().c_str()));
+	  root->appendChild(gen);
+	}
       }
 
       template <class M>
@@ -176,8 +176,8 @@ namespace vcsn
 	xercesc::DOMElement* s = doc->createElement(STR2XML("semiring"));
 
 	if (get_semiring_set(semiring, value_t()) != "ratSeries")
-	s->setAttribute(STR2XML("operations"),
-			STR2XML(get_semiring_operations(semiring)));
+	  s->setAttribute(STR2XML("operations"),
+			  STR2XML(get_semiring_operations(semiring)));
 	s->setAttribute(STR2XML("set"),
 			STR2XML(get_semiring_set(semiring, value_t())));
 	elt->appendChild(s);
@@ -205,15 +205,15 @@ namespace vcsn
       }
 
 
-    /**
-     * Tools to generate automaton labels from string, and to ensure type
-     * compatibility.
-     *
-     */
+      /**
+       * Tools to generate automaton labels from string, and to ensure type
+       * compatibility.
+       *
+       */
 # define GET_SEMIRING_SET(T, Value)			\
-    template <class S>					\
-    const char* get_semiring_set(const S&, const T&)	\
-    { return Value; }
+      template <class S>				\
+      const char* get_semiring_set(const S&, const T&)	\
+      { return Value; }
 
       // Default.
       template <class S, class T>
@@ -226,24 +226,24 @@ namespace vcsn
 				   const vcsn::rat::exp<U, V>&)
       { return "ratSeries"; }
 
-GET_SEMIRING_SET(bool, "B")
-GET_SEMIRING_SET(double, "R")
-GET_SEMIRING_SET(float, "R")
-GET_SEMIRING_SET(int, "Z")
+      GET_SEMIRING_SET(bool, "B")
+      GET_SEMIRING_SET(double, "R")
+      GET_SEMIRING_SET(float, "R")
+      GET_SEMIRING_SET(int, "Z")
 
-	// Deals with the "operation" attribute of <semiring> tag.
+      // Deals with the "operation" attribute of <semiring> tag.
 # define GET_SEMIRING_OPERATIONS(S, Value)		\
-    const char* get_semiring_operations(const S&)	\
-    { return Value; }
+      const char* get_semiring_operations(const S&)	\
+      { return Value; }
 
       // Default.
       template <class S>
       const char* get_semiring_operations(const S&)
       { return "undefined"; }
 
-GET_SEMIRING_OPERATIONS(vcsn::algebra::NumericalSemiring, "numerical")
-GET_SEMIRING_OPERATIONS(vcsn::z_max_plus_automaton::semiring_t, "tropicalMax")
-GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
+      GET_SEMIRING_OPERATIONS(vcsn::algebra::NumericalSemiring, "numerical")
+      GET_SEMIRING_OPERATIONS(vcsn::z_max_plus_automaton::semiring_t, "tropicalMax")
+      GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 
 
       // Deal with the "type" attribute of <monoid> tag.
@@ -297,7 +297,7 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
       typename FMPtype::series_set_elt_t
       get_series(xercesc::DOMElement* node, FMPtype& a)
       {
- 	typename FMPtype::series_set_elt_t res(a.structure().series());
+	typename FMPtype::series_set_elt_t res(a.structure().series());
 
 	parse_label(node, a,
 		    a.structure().series().monoid().first_monoid().alphabet(),
@@ -313,7 +313,7 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
       get_series(xercesc::DOMElement* node,
 		 TRANStype& a)
       {
- 	typename TRANStype::series_set_elt_t res(a.structure().series());
+	typename TRANStype::series_set_elt_t res(a.structure().series());
 
 	parse_label(node, a,
 		    a.structure().series().monoid().alphabet(),
@@ -333,7 +333,7 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	typename TRANStype::monoid_elt_t m(a.structure().series().monoid());
 
 	if (! i_res && i_exp.supp().size())
-	    m = *(i_exp.supp().begin());
+	  m = *(i_exp.supp().begin());
 	else
 	  m = vcsn::algebra::identity_as<md_value_t>
 	    ::of(a.structure().series().monoid());
@@ -367,19 +367,19 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	    ::of(a.structure().series().monoid().first_monoid()).value();
 
 	if (! o_res && o_exp.supp().size())
-	  {
-	    m2 = *(o_exp.supp().begin());
-	    sem = o_exp.get(m2);
-	  }
+	{
+	  m2 = *(o_exp.supp().begin());
+	  sem = o_exp.get(m2);
+	}
 	else
-	  {
-	    m2 = vcsn::algebra::identity_as<md_value_t>
-	      ::of(a.structure().series().monoid().second_monoid()).value();
-	    sem = vcsn::algebra::identity_as<sg_value_t>
-	      ::of(a.structure().series().semiring()).value();
-	  }
+	{
+	  m2 = vcsn::algebra::identity_as<md_value_t>
+	    ::of(a.structure().series().monoid().second_monoid()).value();
+	  sem = vcsn::algebra::identity_as<sg_value_t>
+	    ::of(a.structure().series().semiring()).value();
+	}
 	m = std::make_pair(m1, m2);
-  	res.assoc(m, sem);
+	res.assoc(m, sem);
       }
 
 
@@ -388,41 +388,41 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 		       const A1& alphabet1, const A2& alphabet2, S& res)
       {
 	using namespace vcsn::r_automaton;
-	automaton_t bin = new_automaton(alphabet1);
- 	automaton_t bout = new_automaton(alphabet2);
- 	rat_exp_t i_exp(bin.structure().series());
- 	rat_exp_t o_exp(bout.structure().series());
+	automaton_t bin = make_automaton(alphabet1);
+	automaton_t bout = make_automaton(alphabet2);
+	rat_exp_t i_exp(bin.structure().series());
+	rat_exp_t o_exp(bout.structure().series());
 
 	std::pair<bool, std::string> i_res;
 	std::pair<bool, std::string> o_res;
 
 	if (node->hasAttribute(STR2XML("label")))
+	{
+	  std::string label = xml2str(node->getAttribute(STR2XML("label")));
+	  std::string in, out;
+	  unsigned int pos = label.find("|");
+	  if (pos != std::string::npos)
 	  {
-	    std::string label = xml2str(node->getAttribute(STR2XML("label")));
-	    std::string in, out;
-	    unsigned int pos = label.find("|");
-	    if (pos != std::string::npos)
-	      {
-		in = label.substr(0, pos);
-		out = label.substr(pos + 1);
-		i_res = parse(in, i_exp);
-		o_res = parse(out, o_exp);
-	      }
-	    else
-	      i_res = parse(label, i_exp);
-	    if (node->hasAttribute(STR2XML("weight")))
-	      o_res = parse(xml2str(node->getAttribute(STR2XML("weight"))),
-			    o_exp);
+	    in = label.substr(0, pos);
+	    out = label.substr(pos + 1);
+	    i_res = parse(in, i_exp);
+	    o_res = parse(out, o_exp);
 	  }
+	  else
+	    i_res = parse(label, i_exp);
+	  if (node->hasAttribute(STR2XML("weight")))
+	    o_res = parse(xml2str(node->getAttribute(STR2XML("weight"))),
+			  o_exp);
+	}
 	else
-	  {
-	    if (node->hasAttribute(STR2XML("in")))
-	      i_res = parse(xml2str(node->getAttribute(STR2XML("in"))),
-			    i_exp);
-	    if (node->hasAttribute(STR2XML("out")))
-		o_res = parse(xml2str(node->getAttribute(STR2XML("out"))),
-			    o_exp);
-	  }
+	{
+	  if (node->hasAttribute(STR2XML("in")))
+	    i_res = parse(xml2str(node->getAttribute(STR2XML("in"))),
+			  i_exp);
+	  if (node->hasAttribute(STR2XML("out")))
+	    o_res = parse(xml2str(node->getAttribute(STR2XML("out"))),
+			  o_exp);
+	}
 	assoc_exp(a, i_exp, o_exp, res, i_res.first, o_res.first);
       }
 
@@ -605,16 +605,16 @@ GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
 	if (xml2str(node->getNodeName()) == "transition")
 	  print_transition(static_cast<const DOMElement*>(node), os, spacing);
 	else
+	{
+	  os << spacing << "<" << xml2str(node->getNodeName());
+	  for (m = node->getAttributes(), i = 0;
+	       i < m->getLength(); ++i)
 	  {
-	    os << spacing << "<" << xml2str(node->getNodeName());
-	    for (m = node->getAttributes(), i = 0;
-		 i < m->getLength(); ++i)
-	      {
-		os << " " << xml2str(m->item(i)->getNodeName())
-		   << "=\"" << xml2str(m->item(i)->getNodeValue())
-		   << "\"";
-	      }
+	    os << " " << xml2str(m->item(i)->getNodeName())
+	       << "=\"" << xml2str(m->item(i)->getNodeValue())
+	       << "\"";
 	  }
+	}
 	if (node->hasChildNodes())
 	  os << ">";
 	else

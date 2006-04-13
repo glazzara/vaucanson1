@@ -49,7 +49,7 @@ main(int argc, char** argv)
   for (int i = 0; i < base; ++i)
     alpha.insert(i < 10 ? '0' + i : 'A' + i);
 
-  automaton_t	a = new_automaton(alpha);
+  automaton_t	a = make_automaton(alpha);
 
   for (int i = 0; i < divisor; ++i)
     a.add_state();

@@ -30,7 +30,7 @@ int main(int argc, char** argv)
   using namespace vcsn::xml;
 
   alphabet_t alpha; alpha.insert('a'); alpha.insert('b');
-  automaton_t a = new_automaton(alpha);
+  automaton_t a = make_automaton(alpha);
 
   hstate_t s0 = a.add_state();
   hstate_t s1 = a.add_state();

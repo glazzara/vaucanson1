@@ -137,20 +137,20 @@ normalized_composition_test(tests::Tester& t)
   t3 = normalized_composition(t1, t2);
 
   boolean_transducer::automaton_t trans1 =
-    boolean_transducer::new_automaton(first_at, second_at);
+    boolean_transducer::make_automaton(first_at, second_at);
 
   boolean_transducer::automaton_t trans2 =
-    boolean_transducer::new_automaton(second_at, third_at);
+    boolean_transducer::make_automaton(second_at, third_at);
 
   boolean_transducer::automaton_t trans3 =
-    boolean_transducer::new_automaton(first_at, third_at);
+    boolean_transducer::make_automaton(first_at, third_at);
 
   fmp_to_realtime(t1, trans1);
   fmp_to_realtime(t2, trans2);
   fmp_to_realtime(t3, trans3);
 
   boolean_automaton::rat_exp_t exp =
-    boolean_automaton::new_rat_exp(first_at, "abbababa");
+    boolean_automaton::make_rat_exp(first_at, "abbababa");
 
   TEST(t, "Normalized composition works.",
        (boolean_transducer::evaluation(trans3, exp) ==

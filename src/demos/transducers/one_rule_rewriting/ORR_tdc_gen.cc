@@ -84,7 +84,7 @@ automaton_t
 replace_left(const std::string& from,	const std::string& to,
 	     const alphabet_t& A,	const alphabet_t& B)
 {
-  automaton_t	a = new_automaton(A, B);
+  automaton_t	a = make_automaton(A, B);
 
   int		n = from.size();
 
@@ -167,10 +167,10 @@ int main(int argc, char** argv)
   automaton_t	left_auto = replace_left(from, to, A, A);
 
   fmp_transducer::automaton_t fmp_left =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   fmp_transducer::automaton_t sub_left =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   realtime_to_fmp(left_auto, fmp_left);
 
@@ -179,19 +179,19 @@ int main(int argc, char** argv)
   automaton_t	right_auto = replace_right(from, to, A, A);
 
   fmp_transducer::automaton_t fmp_right =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   fmp_transducer::automaton_t sub_right =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   realtime_to_fmp(right_auto, fmp_right);
 
   sub_normalize(fmp_right, sub_right);
 
   fmp_transducer::automaton_t	left_right_auto =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
   fmp_transducer::automaton_t	right_left_auto =
-    fmp_transducer::new_automaton(A, A);
+    fmp_transducer::make_automaton(A, A);
 
   normalized_composition(sub_left, sub_right, left_right_auto);
   normalized_composition(sub_right, sub_left, right_left_auto);

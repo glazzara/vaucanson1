@@ -1,4 +1,4 @@
-//                                                             -*- C++ -*-
+//							       -*- C++ -*-
 // fmp_transducer_functions.thh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
@@ -36,14 +36,14 @@ namespace vcsn
   {
 
     template <class T1, class T2>
-    automaton_t new_automaton(const T1& first_alphabet,
-			      const T2& second_alphabet);
+    automaton_t make_automaton(const T1& first_alphabet,
+			       const T2& second_alphabet);
 
     template <class FirstInputIterator, class SecondInputIterator>
-    automaton_t new_automaton(const FirstInputIterator first_begin,
-			      const FirstInputIterator first_end,
-			      const SecondInputIterator second_begin,
-			      const SecondInputIterator second_end);
+    automaton_t make_automaton(const FirstInputIterator first_begin,
+			       const FirstInputIterator first_end,
+			       const SecondInputIterator second_begin,
+			       const SecondInputIterator second_end);
 
     template <class T1, class T2>
     monoid_elt_t make_couple(const T1& first_alphabet,

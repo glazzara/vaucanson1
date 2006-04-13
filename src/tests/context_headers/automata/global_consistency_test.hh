@@ -59,14 +59,14 @@ global_consistency_test(tests::Tester& t)
   automata_set_t	aa (ss);
 
   rat_exp_t		e (ss);
-  rat_exp_t		f = new_rat_exp(at);
-  rat_exp_t		g = new_rat_exp(at, "a+b");
-  TEST(t, "new_rat_exp works. [1/3]", e == f);
-  TEST(t, "new_rat_exp works. [2/3]", g != f);
+  rat_exp_t		f = make_rat_exp(at);
+  rat_exp_t		g = make_rat_exp(at, "a+b");
+  TEST(t, "make_rat_exp works. [1/3]", e == f);
+  TEST(t, "make_rat_exp works. [2/3]", g != f);
 
   rat_exp_t::support_t			s = g.supp();
   rat_exp_t::support_t::const_iterator	i = s.begin();
-  TEST(t, "new_rat_exp works. [3/3]",
+  TEST(t, "make_rat_exp works. [3/3]",
        s.size() == 2 and *i == "a" and *(++i) == "b");
 
   while (not test_done)
@@ -76,23 +76,23 @@ global_consistency_test(tests::Tester& t)
 	e = ss.choose(SELECT(rat_exp_impl_t));
       while (e == vcsn::algebra::zero_as<rat_exp_impl_t>::of(ss));
 
-      automaton_t		a1 = new_automaton(at);
-      automaton_t		a2 = new_automaton(at.begin(), at.end());
+      automaton_t		a1 = make_automaton(at);
+      automaton_t		a2 = make_automaton(at.begin(), at.end());
       automaton_t		a3 (aa);
       automaton_t		a4 = standard_of(e);
       automaton_t		a5 = thompson_of(e);
-      automaton_t		a6 = new_automaton(other_at);
+      automaton_t		a6 = make_automaton(other_at);
 
-      TEST(t, "new_automaton is consistent.", a1 == a2);
-      TEST(t, "new_automaton gives a correct alphabet.",
+      TEST(t, "make_automaton is consistent.", a1 == a2);
+      TEST(t, "make_automaton gives a correct alphabet.",
 	   a1.structure().series().monoid().alphabet() == at);
       TEST(t, "new automaton alphabet is consistent.",
 	   a1.structure().series().monoid().alphabet() != other_at);
-      TEST(t, "new_automaton gives a correct monoid.",
+      TEST(t, "make_automaton gives a correct monoid.",
 	   a1.structure().series().monoid() == md);
-      TEST(t, "new_automaton gives a correct semiring.",
+      TEST(t, "make_automaton gives a correct semiring.",
 	   a1.structure().series().semiring() == sg);
-      TEST(t, "new_automaton gives a correct automata set.",
+      TEST(t, "make_automaton gives a correct automata set.",
 	   a1.structure() == aa);
       TEST(t, "new automata set is consistent.",
 	   a1.structure() != a6.structure());

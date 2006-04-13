@@ -1,5 +1,68 @@
 2006-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Change `new_*' functions to `make_*'.
+	Reindendation made on modified files.
+
+	* include/vaucanson/xml/tools.hxx,
+	* include/vaucanson/contexts/automaton_functions.thh,
+	* include/vaucanson/contexts/transducer_functions.thh,
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	* include/vaucanson/contexts/automaton_functions.thxx,
+	* include/vaucanson/contexts/transducer_functions.thxx,
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx,
+	* src/benchs/minimization_stroppa/minimization_bench_fsm.cc,
+	* src/benchs/minimization_stroppa/usual.hxx,
+	* src/benchs/minimization_stroppa/minimization_bench_moore.cc,
+	* src/benchs/minimization_stroppa/minimization_bench_hopcroft.cc,
+	* src/benchs/composition/realtime_composition_bench.hh,
+	* src/benchs/composition/normalized_composition_bench.hh,
+	* src/benchs/determinization/determinization_bench.hh,
+	* src/benchs/minimization_2n/minimization_2n_moore_bench.hh,
+	* src/benchs/minimization_2n/minimization_2n_brzozowski_bench.hh,
+	* src/benchs/minimization_2n/minimization_2n_hopcroft_bench.hh,
+	* src/benchs/common/bench_automaton.hh,
+	* src/benchs/quotient/quotient_bool_bench.hh,
+	* src/benchs/quotient/quotient_z_bench.hh,
+	* src/benchs/minimization_debruijn/minimization_debruijn_moore_bench.hh,
+	* src/benchs/minimization_debruijn/minimization_debruijn_brzozowski_bench.hh,
+	* src/benchs/minimization_debruijn/minimization_debruijn_hopcroft_bench.hh,
+	* src/benchs/derived_terms/derived_terms_bench.hh,
+	* src/tests/context_headers/fmp_transducers/global_consistency_test.hh,
+	* src/tests/context_headers/automata/global_consistency_test.hh,
+	* src/tests/context_headers/transducers/global_consistency_test.hh,
+	* src/tests/xml/xml_trans_tester.cc,
+	* src/tests/xml/xml_geometry_tester.cc,
+	* src/tests/xml/xml_automaton_tester.cc,
+	* src/tests/xml/xml_fmp_tester.cc,
+	* src/tests/xml/xml_session_tester.cc,
+	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
+	* src/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh,
+	* src/demos/algorithms/classics.cc,
+	* src/demos/algorithms/equivalent_functions.cc,
+	* src/demos/algorithms/universal.cc,
+	* src/demos/function_library/tdc_algorithms.cc,
+	* src/demos/function_library/rt_tdc_algorithms.cc,
+	* src/demos/function_library/algorithms.cc,
+	* src/demos/automaton_library/a1.cc,
+	* src/demos/automaton_library/b1.cc,
+	* src/demos/automaton_library/c1.cc,
+	* src/demos/automaton_library/double_ring.cc,
+	* src/demos/automaton_library/divkbaseb.cc,
+	* src/demos/automaton_library/ladybird.cc,
+	* src/demos/utilities/vgrep/vgrep.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_rt_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_rt_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_tdc_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_demo.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_tdc_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_demo.cc,
+	* src/demos/transducers/t1.cc,
+	* src/demos/transducers/u1.cc: s/new_/make_/.
+
+	* doc/NEWS.txt: Not concerned by the renamming, so revert it.
+
+2006-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Change `edge' to `transition'.
 	Some bugs fixed in algorithms/ and xml/.
 	Reindendation made on modified files.

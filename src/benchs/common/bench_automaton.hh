@@ -1,17 +1,17 @@
 // bench_automaton.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_BENCHS_COMMON_BENCH_AUTOMATON_HH
@@ -50,11 +50,11 @@ namespace vcsn {
     AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
 
     template <class T>
-    automaton_t new_automaton(const T& alphabet);
+    automaton_t make_automaton(const T& alphabet);
 
     template <class InputIterator>
-    automaton_t new_automaton(InputIterator begin,
-			      InputIterator end);
+    automaton_t make_automaton(InputIterator begin,
+			       InputIterator end);
 
     template <class InputIterator>
     automata_set_t new_automata_set(InputIterator begin,
@@ -70,16 +70,16 @@ namespace vcsn {
     }
 
     template <class InputIterator>
-    automaton_t new_automaton(InputIterator begin,
-			      InputIterator end)
+    automaton_t make_automaton(InputIterator begin,
+			       InputIterator end)
     {
       return automaton_t (new_automata_set(begin, end));
     }
 
     template <class T>
-    automaton_t new_automaton(const T& alphabet)
+    automaton_t make_automaton(const T& alphabet)
     {
-      return new_automaton(alphabet.begin(), alphabet.end());
+      return make_automaton(alphabet.begin(), alphabet.end());
     }
 
 

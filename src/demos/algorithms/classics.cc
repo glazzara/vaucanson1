@@ -56,7 +56,7 @@ main()
   alpha.insert('a');
   alpha.insert('b');
 
-  automaton_t a = new_automaton(alpha);
+  automaton_t a = make_automaton(alpha);
 
   hstate_t p = a.add_state();
   hstate_t q = a.add_state();

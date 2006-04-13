@@ -38,7 +38,7 @@ int main()
   | Creation of fibleft.  |
   `----------------------*/
 
-  automaton_t		fibleft = new_automaton(A, A);
+  automaton_t		fibleft = make_automaton(A, A);
 
   hstate_t p = fibleft.add_state();
   hstate_t q = fibleft.add_state();
@@ -62,7 +62,7 @@ int main()
   | Creation of fibright.  |
   `-----------------------*/
 
-  automaton_t fibright = new_automaton(A, A);
+  automaton_t fibright = make_automaton(A, A);
 
   hstate_t s = fibright.add_state();
   hstate_t t = fibright.add_state();
@@ -87,10 +87,10 @@ int main()
   | Compose.  |
   `----------*/
 
-  automaton_t	fiblr = new_automaton(A, A);
+  automaton_t	fiblr = make_automaton(A, A);
   realtime_composition(fibleft, fibright, fiblr);
 
-  automaton_t	fibrl = new_automaton(A, A);
+  automaton_t	fibrl = make_automaton(A, A);
   realtime_composition(fibright, fibleft, fibrl);
 
   std::ofstream left_fibo("fibo_left.xml");
