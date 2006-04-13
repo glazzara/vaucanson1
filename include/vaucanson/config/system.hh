@@ -24,38 +24,33 @@
  *
  * Global configuration checks for the Vaucanson library.
  *
- * In especially includes @c config.h if the @c HAVE_CONFIG_H is
- * defined, and attempts to force G++ v2.95 to use namespaces in the
+ * It especially attempts to force G++ v2.95 to use namespaces in the
  * STL definitions.
  *
  * @see @c math.hh
  */
 /** @} */
 
-# ifdef HAVE_CONFIG_H
-#  include <config.h>
+# ifdef HAVE_PRETTY_FUNCTION
+#  define PRETTY_FUNCTION() __PRETTY_FUNCTION__
+# else
+#  define PRETTY_FUNCTION() static_cast<const char*>(0)
 # endif
 
-#ifdef HAVE_PRETTY_FUNCTION
-# define PRETTY_FUNCTION() __PRETTY_FUNCTION__
-#else
-# define PRETTY_FUNCTION() static_cast<const char*>(0)
-#endif
-
-# ifndef IGNORE_PCONF_HH
+# ifndef VCSN_INTERNAL_IGNORE_PCONF_HH
 #  include <vaucanson/config/pconf.hh>
 # endif
 
 # include <vaucanson/config/math.hh>
 
-#if (defined __GNUC__) && (__GNUC__ < 3)
+# if (defined __GNUC__) && (__GNUC__ < 3)
 # include <stl_config.h>
 #  undef __STL_BEGIN_RELOPS_NAMESPACE
 #  define __STL_BEGIN_RELOPS_NAMESPACE namespace rel_ops {
 #  undef __STL_END_RELOPS_NAMESPACE
 #  define __STL_END_RELOPS_NAMESPACE }
 #  define __STL_USE_NAMESPACES
-#endif
+# endif
 
 // FIXME: these should be tested
 

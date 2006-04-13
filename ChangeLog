@@ -1,3 +1,20 @@
+2006-04-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Clean up `config.h' use.
+
+	* include/vaucanson/config/pconf-hh.in: Remove. Move to...
+	* include/vaucanson/config/pconf.hh.in: New. ... here. This file is
+	now considered as a config header. It only contains #undef's.
+	* configure.ac: Set pconf.hh.in to be a config header and AC_DEFINE
+	`VCSN_PACKAGE_*'. Also AC_DEFINE `VCSN_DATA_PATH'.
+	* include/Makefile.am: Don't put the `.in' file in EXTRA_DIST. Don't
+	sed(1) pconf-hh.
+	* config/vcsn.m4: s/IGNORE_PCONF_HH/VCSN_INTERNAL_\0/.
+	* include/vaucanson/config/system.hh: Likewise. Don't include
+	`config.h'.
+
+	* config/vcsn_xml.m4: Fix typos.
+
 2006-04-06  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx (get_label): Fix a previous patch

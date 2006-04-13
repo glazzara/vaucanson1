@@ -56,7 +56,7 @@ AC_DEFUN([_VCSN_CHECK_HEADERS],
  # At this point, we can be in a situation where pconf.hh does not
  # exist _yet_. In that particular case, we need a workaround.
  AC_CHECK_HEADER([vaucanson/config/pconf.hh], [],
-          [CPPFLAGS="$CPPFLAGS -DIGNORE_PCONF_HH"])
+          [CPPFLAGS="$CPPFLAGS -DVCSN_INTERNAL_IGNORE_PCONF_HH"])
  AC_CHECK_HEADER([vaucanson/config/system.hh], [], [have_vaucanson=no])
  CPPFLAGS=$vcsn_save_CPPFLAGS
 

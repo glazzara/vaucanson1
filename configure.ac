@@ -9,7 +9,8 @@ AC_INIT([vaucanson], [0.7.2], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_SRCDIR([config/vcsn.m4])
 AM_INIT_AUTOMAKE([1.9 tar-ustar no-define foreign dist-bzip2])
-AM_CONFIG_HEADER([config.h:config.hin])
+AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
+
 
 # Some C and C++ code used.
 # Using $CXX as the C compiler is a hack to allow building shared
@@ -93,6 +94,28 @@ AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
 VCSN_XML
 
 ##
+## Package header configuration.
+##
+
+# Tell what's the default XSD path.
+old_prefix=$prefix
+case $prefix in
+  [\\/]* | ?:[\\/]* ) ;;
+  *) prefix=$ac_default_prefix ;;
+esac
+AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$(eval echo \"$datadir/vaucanson/\")"],
+		   [Path in which data such as XSD will be installed])
+prefix=$old_prefix
+
+# Package misc variables.
+AC_DEFINE_UNQUOTED([VCSN_PACKAGE_NAME], ["$PACKAGE_NAME"], [Full name.])
+AC_DEFINE_UNQUOTED([VCSN_PACKAGE_BUGREPORT], ["$PACKAGE_BUGREPORT"],
+		   [Bug report address.])
+AC_DEFINE_UNQUOTED([VCSN_PACKAGE_STRING], ["$PACKAGE_STRING"],
+		   [Full name and version.])
+AC_DEFINE_UNQUOTED([VCSN_PACKAGE_VERSION], ["$PACKAGE_VERSION"], [Version.])
+
+##
 ## for documentation purpose.
 ##
 AC_ARG_VAR([DOXYGEN], [the Doxygen documentation generation program])
@@ -113,7 +136,6 @@ AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 
 AC_CONFIG_FILES([
 	Makefile
-	include/vaucanson/config/pconf-hh:include/vaucanson/config/pconf-hh.in
 	src/Makefile
 	src/tests/Makefile
 	src/tests/check/Makefile
