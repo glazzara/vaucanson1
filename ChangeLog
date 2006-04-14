@@ -1,3 +1,22 @@
+2006-04-14  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Fix use of XML according to VCSN_USE_XML or XML_CHECK.
+
+	* check_xml.sh: Rewrite a bit. Check if the hh that includes the hxx or
+	hcc already checks for USE_XML. Same with the Makefile.am.
+	* include/Makefile.am: Install XML files iif VCSN_USE_XML is set.
+
+	* Makefile.am,
+	* include/vaucanson/tools/out_display.hh,
+	* include/vaucanson/design_pattern/factory.hh: Pacify `check_xml' by
+	talking about VCSN_USE_XML in a comment.
+
+	* src/tests/Makefile.am: Check for XML only if XML_CHECK.
+	* src/demos/automaton_library/Makefile.am,
+	* src/demos/transducers/one_rule_rewriting/Makefile.am,
+	* doc/xml/Makefile.am: Surround code by tests for VCSN_USE_XML or
+	XML_CHECK.
+
 2006-04-13  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Change `origin_of' to `src_of' and `aim_of' to `dst_of'.

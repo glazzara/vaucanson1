@@ -27,7 +27,7 @@
  * the proposed implementation by Alexandrescu, in his "Modern C++
  * Design" book.
  *
- * @see xml::converter, xml::Node
+ * @see xml::converter, xml::Node if VCSN_USE_XML
  *
  * @author Louis-Noël Pouchet <Louis-Noel.Pouchet@lrde.epita.fr>
  *

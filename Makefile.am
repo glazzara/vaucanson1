@@ -50,7 +50,7 @@ sanity-check:
 	cd $(srcdir)/src/tests/sanity && make check
 
 ###
-### Check headers for sanity.
+### Check headers for sanity. Headers will check for VCSN_USE_XML.
 ###
 
 find_headers = \

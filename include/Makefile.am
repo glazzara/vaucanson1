@@ -2,9 +2,6 @@
 #
 # $Id$
 
-mkdir_vaucanson_xml:
-	$(mkinstalldirs) ./vaucanson/xml
-
 nobase_include_HEADERS =						   \
 	vaucanson/config/system.hh					   \
 	vaucanson/config/math.hh					   \
@@ -369,8 +366,11 @@ nobase_include_HEADERS =						   \
 	vaucanson/z_min_plus_automaton.hh				   \
 	vaucanson/z_automaton.hh					   \
 	vaucanson/r_automaton.hh					   \
-	vaucanson/standard_algorithms.hh				   \
-	$(XMLSOURCES)
+	vaucanson/standard_algorithms.hh
+
+if VCSN_USE_XML
+  nobase_include_HEADERS += $(XMLSOURCES)
+endif
 
 XMLSOURCES =						\
 	vaucanson/xml/error_handler.hh			\

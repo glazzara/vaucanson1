@@ -2,6 +2,8 @@
 #
 # $Id: Makefile.am 1005 2005-06-23 17:17:36Z o-conn_s $
 
+if VCSN_USE_XML
+
 AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
 
@@ -30,3 +32,5 @@ $(srcdir)/b1.xml: b1.cc $(top_srcdir)/configure.ac
 $(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT)
 	./c1$(EXEEXT) > $@
+
+endif
