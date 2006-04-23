@@ -1,5 +1,5 @@
 <transducer xmlns="http://vaucanson.lrde.epita.fr">
-  <type>
+  <label_type>
     <monoid generators="letters" type="free">
       <generator value="a"/>
       <generator value="b"/>
@@ -11,7 +11,7 @@
       </monoid>
       <semiring operations="numerical" set="B"/>
     </semiring>
-  </type>
+  </label_type>
   <content>
     <states>
       <state name="s0"/>

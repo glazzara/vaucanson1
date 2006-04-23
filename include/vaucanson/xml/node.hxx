@@ -118,9 +118,9 @@ namespace vcsn
     PROCESS_NODE(transitions)
 
 
-    /*-------.
-    | <type> |
-    `-------*/
+    /*-------------.
+    | <label_type> |
+    `-------------*/
     template <class T>
     void process_type(xercesc::DOMElement* node, T& aut,
 		      typename Node<T>::map_t& m,

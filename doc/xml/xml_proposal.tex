@@ -311,12 +311,12 @@ alphabet would be defined as shown in figure \ref{alpha1}
 \begin{figure}[h]
   \begin{center}
 \begin{alltt}
-<type>
+<label_type>
   <monoid>
      <generator value="a"/>
      <generator value="b"/>
   </monoid>
-</type>
+</label_type>
 \end{alltt}
 
 \caption{Setting $\{a, b\}$ alphabet}
@@ -332,12 +332,12 @@ In like manner, one can also set a restriction on the alphabet like in Figure \r
 \begin{figure}[h]
   \begin{center}
 \begin{alltt}
-<type>
+<label_type>
   <monoid generators="digits" type="free">
     <generator value="0"/>
     <generator value="1"/>
   </monoid>
-</type>
+</label_type>
 \end{alltt}
 
 \caption{Example of a restriction}
@@ -466,7 +466,7 @@ the example \ref{ratseries1} so as to remain clear.
   \begin{center}
 \begin{alltt}
 <transducer>
-  <type>
+  <label_type>
     <monoid generators="digits" type="free">
       <generator value="0"/>
       <generator value="1"/>
@@ -479,7 +479,7 @@ the example \ref{ratseries1} so as to remain clear.
       </monoid>
       <semiring operations="numerical" set="B"/>
     </semiring>
-  </type>
+  </label_type>
   <content>
     ...
   </content>
@@ -663,12 +663,12 @@ which means that usual laws over $\mathbb{B}$ shall be applied.
 \begin{figure}[h]
   \begin{center}
 \begin{alltt}
-<type>
+<label_type>
   <monoid type="free" generators="letters">
      <generator range="ascii"/>
   </monoid>
   <semiring set="B" operations="numerical"/>
-</type>
+</label_type>
 \end{alltt}
 
 \caption{Default type for an automaton}
@@ -680,7 +680,7 @@ which means that usual laws over $\mathbb{B}$ shall be applied.
 \begin{figure}[h]
   \begin{center}
 \begin{alltt}
-<type>
+<label_type>
   <monoid type="product">
      <monoid type="free" generators="letters">
        <generator range="ascii"/>
@@ -690,7 +690,7 @@ which means that usual laws over $\mathbb{B}$ shall be applied.
      </monoid>
   </monoid>
   <semiring set="B" operations="numerical"/>
-</type>
+</label_type>
 \end{alltt}
 
 \caption{Default type for a transducer}
