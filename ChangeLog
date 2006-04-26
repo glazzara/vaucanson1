@@ -1,3 +1,9 @@
+2006-04-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Minor fix in autotools use of `doc'.
+
+	* doc/Makefile.am: Add `manual' and `xml' to the SUBDIRS variable.
+
 2006-04-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Change "type" to "label_type", part II.

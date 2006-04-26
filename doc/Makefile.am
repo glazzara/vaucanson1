@@ -1,4 +1,4 @@
-SUBDIRS = makefiles
+SUBDIRS = makefiles manual xml
 include $(srcdir)/Makefile.doc
 
 dist_doc_DATA = ref.tar.gz
