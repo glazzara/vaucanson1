@@ -610,6 +610,7 @@ namespace utility
   `------------------*/
 
   // get_data_size
+  inline
   Bitset::size_type
   Bitset::get_data_size(size_type max)
   {
@@ -1100,17 +1101,20 @@ namespace utility
 namespace std
 {
   template <>
+  inline
   void swap(utility::Bitset& lhs, utility::Bitset& rhs)
   {
     lhs.swap(rhs);
   }
 
+  inline
   insert_iterator<utility::Bitset>::insert_iterator(utility::Bitset& x,
 						    utility::Bitset::iterator)
   {
     container = &x;
   }
 
+  inline
   insert_iterator<utility::Bitset>&
   insert_iterator<utility::Bitset>::operator = (utility::Bitset::
 						const_reference value)
@@ -1119,18 +1123,21 @@ namespace std
     return *this;
   }
 
+  inline
   insert_iterator<utility::Bitset>&
   insert_iterator<utility::Bitset>::operator * ()
   {
     return *this;
   }
 
+  inline
   insert_iterator<utility::Bitset>&
   insert_iterator<utility::Bitset>::operator ++ ()
   {
     return *this;
   }
 
+  inline
   insert_iterator<utility::Bitset>&
   insert_iterator<utility::Bitset>::operator ++ (int)
   {

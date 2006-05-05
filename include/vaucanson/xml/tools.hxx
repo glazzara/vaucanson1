@@ -109,7 +109,7 @@ namespace vcsn
 	return os.str().c_str();
       }
 
-      const char*	get_label(const bool& l)
+      inline const char* get_label(const bool& l)
       {
 	if (l)
 	  return "";
@@ -117,7 +117,7 @@ namespace vcsn
       }
 
 
-      const char* get_label(const std::pair<std::string, std::string>& l)
+      inline const char* get_label(const std::pair<std::string, std::string>& l)
       {
 	std::ostringstream os;
 	os << "(" << l.first << ", " << l.second << ")";
@@ -233,7 +233,8 @@ namespace vcsn
 
       // Deals with the "operation" attribute of <semiring> tag.
 # define GET_SEMIRING_OPERATIONS(S, Value)		\
-      const char* get_semiring_operations(const S&)	\
+      template <>					\
+      inline const char* get_semiring_operations<S>(const S&)	\
       { return Value; }
 
       // Default.

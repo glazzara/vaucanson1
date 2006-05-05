@@ -1,3 +1,11 @@
+2006-05-06  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	More inlining.
+
+	* include/vaucanson/misc/bitset.hxx,
+	* include/vaucanson/algebra/implementation/semiring/tropical_semiring.hxx,
+	* include/vaucanson/xml/tools.hxx: Inline `template <>' functions.
+
 2006-05-05  Matthieu Varin  <matt@lrde.epita.fr>
 
 	Clean determinize algorithm.

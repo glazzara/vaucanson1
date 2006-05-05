@@ -163,14 +163,14 @@ namespace vcsn {
 
   // Specialization for Boolean tropical semiring.
   template <>
-  bool
+  inline bool
   op_starable(const algebra::TropicalSemiring<algebra::TropicalMin>&, bool)
   {
     return true;
   }
 
   template <>
-  void
+  inline void
   op_in_star(const algebra::TropicalSemiring<algebra::TropicalMin>&, bool& b)
   {
     b = 0;
