@@ -97,3 +97,11 @@ Year 2007 students
   - Broken Derived terms algorithm,
   - New XML I/O system,
   - Bug fixes.
+
+==================
+Year 2008 students
+==================
+
+* Matthieu Varin                      matthieu.varin@lrde.epita.fr
+  - New implementation of closure
+  - Bug fixes.

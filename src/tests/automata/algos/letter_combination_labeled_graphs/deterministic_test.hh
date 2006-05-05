@@ -1,4 +1,4 @@
-// determinist_test.hh: this file is part of the Vaucanson project.
+// deterministic_test.hh: this file is part of the Vaucanson project.
 // 
 // Vaucanson, a generic library for finite state machines.
 // 
@@ -14,8 +14,8 @@
 // 
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DETERMINIST_TEST_HH
-# define VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DETERMINIST_TEST_HH
+#ifndef VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DETERMINISTIC_TEST_HH
+# define VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DETERMINISTIC_TEST_HH
 
 # include <time.h>
 # include <map>
@@ -28,7 +28,7 @@
 # include <vaucanson/tools/dot_dump.hh>
 
 template <class Auto>
-unsigned determinist_test(tests::Tester& tg)
+unsigned deterministic_test(tests::Tester& tg)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
@@ -44,12 +44,15 @@ unsigned determinist_test(tests::Tester& tg)
   for (unsigned i = 0; i < nb_tests; i++)
     {
       automaton_t dfa = gen.generate_dfa(50);;
-      if (is_deterministic(dfa))
+      if (is_deterministic (dfa))
 	++success;
     } 
   std::string rate;
   SUCCESS_RATE(rate, success, nb_tests);
-  TEST(t, "is_determinist on randomly generated dfa " + rate, success == nb_tests);
+  TEST(t, "is_deterministic on randomly generated dfa " + rate, success == nb_tests);
+
+
+  // add my test mettre a jour t
 
   success = 0;
   for (unsigned i = 0; i < nb_tests; i++)
@@ -65,4 +68,4 @@ unsigned determinist_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DETERMINIST_TEST_HH
+#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_DETERMINISTIC_TEST_HH

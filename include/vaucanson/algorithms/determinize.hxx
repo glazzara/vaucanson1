@@ -81,7 +81,6 @@ namespace vcsn {
     subset_set[qi] = qi_hstate;
     m[qi_hstate] = qi;
 
-    // FIXME : log history ?
 
     /*----------.
     | Main loop |
@@ -102,7 +101,7 @@ namespace vcsn {
 	     j != s.end(); ++j)
 	{
 	  aim.clear();
-	  // FIXME : Use a more efficient version of delta !
+
 	  input.letter_deltac(aim, *j, *e, delta_kind::states());
 	  for_all_const_(delta_ret_t, k, aim)
 	  {
@@ -119,7 +118,7 @@ namespace vcsn {
 		     (subset_set_pair_t(q, qs))).first;
 	  m[qs] = q;
 
-	  // Log history ?
+
 
 	  if (is_final)
 	    output.set_final(current->second);
@@ -149,12 +148,7 @@ namespace vcsn {
 		 const input_t&		input,
 		 std::map<hstate_t, std::set<hstate_t> >& m)
   {
-    /** @bug
-     * FIXME: for the moment, it uses subset_construction and trim but
-     * it must be rewritten to do the twice at the same time more efficiently.
-     */
     do_subset_construction(a_set, output, input, m);
-    //	  accessible_here(output);
   }
 
   template<typename A, typename T>
@@ -175,20 +169,48 @@ namespace vcsn {
     return ret;
   }
 
+  template <typename input_t>
+  static bool
+  is_state_deterministic (input_t&						input,
+			  typename input_t::state_iterator&			current_state,
+			  typename input_t::series_set_elt_t::semiring_elt_t&	zero_semiring)
+  {
+    AUTOMATON_TYPES(input_t);
+
+    typedef typename series_set_elt_t::support_t	support_t;
+    typedef typename std::set<htransition_t>		delta_ret_t;
+    delta_ret_t	delta_ret;
+
+    input.deltac(delta_ret, *current_state, delta_kind::transitions());
+    // FIXME : O(n^2) => O(nlog(n)) There is maybe an algorithm in O(nlog(n))
+    for_all_const_(delta_ret_t, j, delta_ret)
+      {
+	series_set_elt_t s = input.series_of(*j);
+	typename delta_ret_t::const_iterator k = j;
+	++k;
+	for (; k != delta_ret.end(); ++k)
+	  {
+	    series_set_elt_t s_ = input.series_of(*k);
+	    for_all_(support_t, supp, s.supp())
+	      if (s_.get(*supp) != zero_semiring)
+		return false;
+	  }
+      }
+    return true;
+  }
+
+
+
+
   /*-----------------.
   | is_deterministic |
   `-----------------*/
-  // FIXME : verbose mode will be modified for being clearer.
   template <typename A, typename input_t>
   bool
   do_is_deterministic(const AutomataBase<A>&	,
 		      const input_t&		input)
   {
     AUTOMATON_TYPES(input_t);
-    typedef typename std::set<htransition_t>		delta_ret_t;
-    typedef typename series_set_elt_t::support_t	support_t;
-
-    delta_ret_t	delta_ret;
     semiring_elt_t		  zero_semiring
       = input.structure().series().semiring()
       .zero(SELECT(typename semiring_elt_t::value_t));
@@ -202,25 +224,12 @@ namespace vcsn {
 
     for_each_state(i, input)
     {
-      delta_ret.clear();
-      input.deltac(delta_ret, *i, delta_kind::transitions());
-      // FIXME : O(n^2) => O(nlog(n))
-      for_all_const_(delta_ret_t, j, delta_ret)
-      {
-	series_set_elt_t s = input.series_of(*j);
-	typename delta_ret_t::const_iterator k = j;
-	++k;
-	for (; k != delta_ret.end(); ++k)
-	{
-	  series_set_elt_t s_ = input.series_of(*k);
-	  for_all_(support_t, supp, s.supp())
-	    if (s_.get(*supp) != zero_semiring)
-	      return false;
-	}
-      }
+      if (not is_state_deterministic (input, i, zero_semiring))
+	return false;
     }
     return true;
   }
+
 
   template<typename A, typename T>
   bool

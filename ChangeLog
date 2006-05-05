@@ -1,3 +1,12 @@
+2006-05-05  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Clean determinize algorithm.
+
+	* include/vaucanson/algorithms/determinize.hxx: Create a new function so as to clean up is_deterministic.
+	* src/tests/automata/algos/letter_combination_labeled_graphs/deterministic_test.hh: New. Fix Typo.
+	* src/tests/automata/algos/letter_combination_labeled_graphs/determinist_test.hh: Remove.
+	* src/tests/automata/algos/letter_combination_labeled_graphs/Makefile.am: Update accordingly.
+
 2006-04-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Minor fix in autotools use of `doc'.
