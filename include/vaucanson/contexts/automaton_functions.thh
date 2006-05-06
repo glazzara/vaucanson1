@@ -15,39 +15,45 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-# include <vaucanson/automata/implementation/generalized.hh>
 
-# include <vaucanson/tools/dot_dump.hh>
-# include <vaucanson/tools/usual_macros.hh>
+/**
+ * @note CPP guard should not be inserted here as
+ * VCSN_CONTEXT_NAMESPACE could be changed.
+ */
 
-# ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
-#  include <vaucanson/algorithms/accessible.hh>
-#  include <vaucanson/algorithms/closure.hh>
-#  include <vaucanson/algorithms/complement.hh>
-#  include <vaucanson/algorithms/complete.hh>
-#  include <vaucanson/algorithms/concatenate.hh>
-#  include <vaucanson/algorithms/cut_up.hh>
-#  include <vaucanson/algorithms/derived_term_automaton.hh>
-#  include <vaucanson/algorithms/determinize.hh>
-#  include <vaucanson/algorithms/eval.hh>
-#  include <vaucanson/algorithms/isomorph.hh>
-#  include <vaucanson/algorithms/is_realtime.hh>
-#  include <vaucanson/algorithms/minimization_hopcroft.hh>
-#  include <vaucanson/algorithms/minimization_moore.hh>
-#  include <vaucanson/algorithms/normalized.hh>
-#  include <vaucanson/algorithms/product.hh>
-#  include <vaucanson/algorithms/realtime.hh>
-#  include <vaucanson/algorithms/standard.hh>
-#  include <vaucanson/algorithms/sum.hh>
-#  include <vaucanson/algorithms/transpose.hh>
-#  include <vaucanson/algorithms/trim.hh>
+#include <vaucanson/automata/implementation/generalized.hh>
 
-#  include <vaucanson/algorithms/krat_exp_expand.hh>
-# endif // ! VCSN_WITHOUT_ALGORITHM_INCLUDES
+#include <vaucanson/tools/dot_dump.hh>
+#include <vaucanson/tools/usual_macros.hh>
 
-# include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/algorithms/standard_of.hh>
-# include <vaucanson/algorithms/thompson.hh>
+#ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
+# include <vaucanson/algorithms/accessible.hh>
+# include <vaucanson/algorithms/closure.hh>
+# include <vaucanson/algorithms/complement.hh>
+# include <vaucanson/algorithms/complete.hh>
+# include <vaucanson/algorithms/concatenate.hh>
+# include <vaucanson/algorithms/cut_up.hh>
+# include <vaucanson/algorithms/derived_term_automaton.hh>
+# include <vaucanson/algorithms/determinize.hh>
+# include <vaucanson/algorithms/eval.hh>
+# include <vaucanson/algorithms/isomorph.hh>
+# include <vaucanson/algorithms/is_realtime.hh>
+# include <vaucanson/algorithms/minimization_hopcroft.hh>
+# include <vaucanson/algorithms/minimization_moore.hh>
+# include <vaucanson/algorithms/normalized.hh>
+# include <vaucanson/algorithms/product.hh>
+# include <vaucanson/algorithms/realtime.hh>
+# include <vaucanson/algorithms/standard.hh>
+# include <vaucanson/algorithms/sum.hh>
+# include <vaucanson/algorithms/transpose.hh>
+# include <vaucanson/algorithms/trim.hh>
+
+# include <vaucanson/algorithms/krat_exp_expand.hh>
+#endif // ! VCSN_WITHOUT_ALGORITHM_INCLUDES
+
+#include <vaucanson/algorithms/aut_to_exp.hh>
+#include <vaucanson/algorithms/standard_of.hh>
+#include <vaucanson/algorithms/thompson.hh>
 
 namespace vcsn
 {
@@ -101,6 +107,6 @@ namespace vcsn
 
 } // End of namespace vcsn.
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/contexts/automaton_functions.thxx>
-#endif // ! VCSN_CONTEXTS_AUTOMATON_FUNCTIONS_THH
+#ifndef VCSN_USE_INTERFACE_ONLY
+# include <vaucanson/contexts/automaton_functions.thxx>
+#endif // ! VCSN_USE_INTERFACE_ONLY

@@ -4,7 +4,7 @@
 # $Id$
 
 SUBDIRS = include doc src debian
-EXTRA_DIST = vaucanson.spec
+EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2
 
 ###
 ### Autoconf needs additional macros.

@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,19 +15,25 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-# include <vaucanson/algebra/concept/alphabets_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
 
-# ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
-#  include <vaucanson/algorithms/closure.hh>
-#  include <vaucanson/algorithms/normalized_composition.hh>
-#  include <vaucanson/algorithms/sub_normalize.hh>
-#  include <vaucanson/algorithms/evaluation_fmp.hh>
-#  include <vaucanson/algorithms/projections_fmp.hh>
-#  include <vaucanson/algorithms/outsplitting.hh>
-#  include <vaucanson/algorithms/transpose.hh>
-#  include <vaucanson/algorithms/fmp_to_realtime.hh>
-# endif // ! VCSN_WITHOUT_ALGORITHM_INCLUDES
+/**
+ * @note CPP guard should not be inserted here as
+ * VCSN_CONTEXT_NAMESPACE could be changed.
+ */
+
+#include <vaucanson/algebra/concept/alphabets_base.hh>
+#include <vaucanson/tools/usual_macros.hh>
+
+#ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
+# include <vaucanson/algorithms/closure.hh>
+# include <vaucanson/algorithms/normalized_composition.hh>
+# include <vaucanson/algorithms/sub_normalize.hh>
+# include <vaucanson/algorithms/evaluation_fmp.hh>
+# include <vaucanson/algorithms/projections_fmp.hh>
+# include <vaucanson/algorithms/outsplitting.hh>
+# include <vaucanson/algorithms/transpose.hh>
+# include <vaucanson/algorithms/fmp_to_realtime.hh>
+#endif // ! VCSN_WITHOUT_ALGORITHM_INCLUDES
 
 namespace vcsn
 {
@@ -72,6 +78,6 @@ namespace vcsn
 } // End of namespace vcsn.
 
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/contexts/fmp_transducer_functions.thxx>
-#endif // ! VCSN_CONTEXTS_FMP_TRANSDUCER_FUNCTIONS_THH
+#ifndef VCSN_USE_INTERFACE_ONLY
+# include <vaucanson/contexts/fmp_transducer_functions.thxx>
+#endif // ! VCSN_USE_INTERFACE_ONLY

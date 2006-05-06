@@ -3,7 +3,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,11 +15,13 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-# include <vaucanson/algebra/implementation/series/polynoms.hh>
 
-/*-------.
-| Series |
-`-------*/
+/**
+ * @note CPP guard should not be inserted here as
+ * VCSN_CONTEXT_NAMESPACE could be changed.
+ */
+
+#include <vaucanson/algebra/implementation/series/polynoms.hh>
 
 namespace vcsn
 {

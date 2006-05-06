@@ -1,24 +1,31 @@
+//							-*- C++ -*-
 // fmp_transducer_functions.thxx: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
-// Copyright (C) 2005 The Vaucanson Group.
-// 
+//
+// Copyright (C) 2005, 2006 The Vaucanson Group.
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-# include <vaucanson/algorithms/evaluation_fmp.hh>
-# include <vaucanson/algorithms/minimization_hopcroft.hh>
-# include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/algorithms/trim.hh>
-# include <vaucanson/algorithms/realtime.hh>
+
+/**
+ * @note CPP guard should not be inserted here as
+ * VCSN_CONTEXT_NAMESPACE could be changed.
+ */
+
+#include <vaucanson/algorithms/evaluation_fmp.hh>
+#include <vaucanson/algorithms/minimization_hopcroft.hh>
+#include <vaucanson/algorithms/aut_to_exp.hh>
+#include <vaucanson/algorithms/trim.hh>
+#include <vaucanson/algorithms/realtime.hh>
 
 namespace vcsn
 {
@@ -26,10 +33,10 @@ namespace vcsn
   {
 
     template <class FirstInputIterator, class SecondInputIterator>
-    automata_set_t new_automata_set(const FirstInputIterator first_begin,
-				    const FirstInputIterator first_end,
-				    const SecondInputIterator second_begin,
-				    const SecondInputIterator second_end)
+    automata_set_t make_automata_set(const FirstInputIterator first_begin,
+				     const FirstInputIterator first_end,
+				     const SecondInputIterator second_begin,
+				     const SecondInputIterator second_end)
     {
       first_alphabet_t		first_alpha;
       for (FirstInputIterator e = first_begin; e != first_end; ++e)
@@ -48,20 +55,20 @@ namespace vcsn
 
     template <class FirstInputIterator, class SecondInputIterator>
     automaton_t make_automaton(const FirstInputIterator first_begin,
-			      const FirstInputIterator first_end,
-			      const SecondInputIterator second_begin,
-			      const SecondInputIterator second_end)
+			       const FirstInputIterator first_end,
+			       const SecondInputIterator second_begin,
+			       const SecondInputIterator second_end)
     {
-      return automaton_t (new_automata_set(first_begin, first_end,
-					   second_begin, second_end));
+      return automaton_t (make_automata_set(first_begin, first_end,
+					    second_begin, second_end));
     }
 
     template <class T1, class T2>
     automaton_t make_automaton(const T1& first_alphabet,
-			      const T2& second_alphabet)
+			       const T2& second_alphabet)
     {
       return make_automaton(first_alphabet.begin(), first_alphabet.end(),
-			   second_alphabet.begin(), second_alphabet.end());
+			    second_alphabet.begin(), second_alphabet.end());
     }
 
     template <class FirstIterator, class SecondIterator>
@@ -114,10 +121,10 @@ namespace vcsn
     {
       AUTOMATON_CONTEXT::automaton_t w = AUTOMATON_CONTEXT::
 	make_automaton(t.structure().series()
-		      .monoid().first_monoid().alphabet());
+		       .monoid().first_monoid().alphabet());
       AUTOMATON_CONTEXT::automaton_t result = AUTOMATON_CONTEXT::
 	make_automaton(t.structure().series()
-		      .monoid().second_monoid().alphabet());
+		       .monoid().second_monoid().alphabet());
       standard_of(w, input);
       evaluation_fmp(t, quotient(w), result);
       return aut_to_exp(generalized(quotient(realtime(trim(result)))),

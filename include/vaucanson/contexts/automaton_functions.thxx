@@ -1,32 +1,39 @@
+//								-*- C++ -*-
 // automaton_functions.thxx: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
-// Copyright (C) 2004, 2005 The Vaucanson Group.
-// 
+//
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
+/**
+ * @note CPP guard should not be inserted here as
+ * VCSN_CONTEXT_NAMESPACE could be changed.
+ */
+
 namespace vcsn
 {
 
   namespace VCSN_CONTEXT_NAMESPACE
   {
 
-    /*----------------.
+    /*-----------------.
     | make_automaton() |
-    `----------------*/
+    `-----------------*/
 
     template <class InputIterator>
-    automata_set_t new_automata_set(InputIterator begin,
-				    InputIterator end)
+    automata_set_t make_automata_set(InputIterator begin,
+				     InputIterator end)
     {
       alphabet_t		alpha;
       for (InputIterator e = begin; e != end; ++e)
@@ -39,9 +46,9 @@ namespace vcsn
 
     template <class InputIterator>
     automaton_t make_automaton(InputIterator begin,
-			      InputIterator end)
+			       InputIterator end)
     {
-      return automaton_t (new_automata_set(begin, end));
+      return automaton_t (make_automata_set(begin, end));
     }
 
     template <class T>
@@ -52,9 +59,9 @@ namespace vcsn
 
     template <class InputIterator>
     gen_automaton_t make_gen_automaton(InputIterator begin,
-				      InputIterator end)
+				       InputIterator end)
     {
-      return gen_automaton_t (new_automata_set(begin, end));
+      return gen_automaton_t (make_automata_set(begin, end));
     }
 
     template <class T>
@@ -64,14 +71,14 @@ namespace vcsn
     }
 
 
-    /*--------------.
+    /*---------------.
     | make_rat_exp() |
-    `--------------*/
+    `---------------*/
 
     template <class Iterator>
     rat_exp_t make_rat_exp(const Iterator& begin,
-			  const Iterator& end,
-			  const std::string& exp)
+			   const Iterator& end,
+			   const std::string& exp)
     {
       alphabet_t	alphabet;
       for (Iterator i = begin; i != end; ++i)
@@ -155,4 +162,3 @@ namespace vcsn
   } // End of namespace VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.
-
