@@ -1,5 +1,10 @@
 2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algebra/implementation/series/krat.hxx: Don't
+	#undef `echo' as it's not defined.
+
+2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Minor fixes.
 
 	* include/vaucanson/contexts/ratseries_semiring.thh,

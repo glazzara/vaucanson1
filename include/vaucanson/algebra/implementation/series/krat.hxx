@@ -731,6 +731,4 @@ namespace vcsn {
 
 } // vcsn
 
-#undef echo
-
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_KRAT_HXX
