@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -462,6 +462,7 @@ namespace vcsn {
 		 const oTw& w)
   {
     precondition(& s.semiring() == & semiring);
+    (void) s; (void) semiring;
 
     typedef rat::Node<Tm, Tw>				node_t;
     typedef typename rat::Node<Tm, Tw>::type		type;
@@ -552,6 +553,7 @@ namespace vcsn {
 			  const rat::exp<Tm, Tw>& b)
   {
     precondition(& s.semiring() == & semiring);
+    (void) s; (void) semiring;
 
     typedef rat::Node<Tm, Tw>				node_t;
     typedef typename rat::Node<Tm, Tw>::type		type;
@@ -607,8 +609,6 @@ namespace vcsn {
     ret.base() = new n_lweight_t(w, ret.base());
     return ret;
   }
-
-#define FIXME(Msg) std::cerr << "FIXME: " << Msg << std::endl;
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   Tw op_series_get(const algebra::Series<W, M>& s,

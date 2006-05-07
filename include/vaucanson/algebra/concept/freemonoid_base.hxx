@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -170,6 +170,8 @@ namespace vcsn {
 	 ++it)
       precondition_ (s.alphabet().contains(*it),
 		     "The letter " + *it + " is not in the given alphabet");
+# else // ! VCSN_NDEBUG
+    (void) s;
 # endif // ! VCSN_NDEBUG
     return from_data;
   }

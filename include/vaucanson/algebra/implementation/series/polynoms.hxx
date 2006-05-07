@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -558,6 +558,7 @@ namespace vcsn {
 		 const oTw& src)
   {
     precondition(& s.semiring() == & semiring);
+    (void) s; (void) semiring;
 
     typename algebra::polynom<Tm, Tw>::iterator p;
     for (typename algebra::polynom<Tm, Tw>::iterator i = dst.begin();
@@ -589,6 +590,7 @@ namespace vcsn {
 				  const algebra::polynom<Tm, Tw>& b)
   {
     precondition(& s.semiring() == & semiring);
+    (void) s; (void) semiring;
 
     algebra::polynom<Tm, Tw> ret(b);
 

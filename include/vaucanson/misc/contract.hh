@@ -35,7 +35,6 @@
 #  else // ! EXCEPTION_TRAPS
 #   include <cstdlib>
 #  endif // EXCEPTION_TRAP
-# endif // ! VCSN_DEBUG
 
 namespace utility {
   namespace contract {
@@ -143,8 +142,6 @@ namespace utility {
     struct fail;
   }
 }
-
-# ifndef VCSN_NDEBUG
 
 #  define vcsn_trap_(Message, Cond) \
    utility::contract::trap(__FILE__, __LINE__, PRETTY_FUNCTION(), \

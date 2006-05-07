@@ -52,6 +52,11 @@
 #  define __STL_USE_NAMESPACES
 # endif
 
+// Set VCSN_NDEBUG if NDEBUG is defined.
+# ifdef NDEBUG
+#  define VCSN_NDEBUG 1
+# endif
+
 // FIXME: these should be tested
 
 # if (defined __GNUC__)

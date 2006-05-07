@@ -1,5 +1,19 @@
 2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Fix VCSN_NDEBUG use.
+
+	* include/vaucanson/config/system.hh: Define VCSN_NDEBUG if NDEBUG is.
+	* include/vaucanson/misc/contract.hh: Don't define `trap' if
+	VCSN_NDEBUG is set.
+	* include/vaucanson/algebra/implementation/free_monoid/str_words.hh,
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/implementation/series/krat.hxx,
+	* include/vaucanson/algebra/concept/freemonoid_base.hxx,
+	* include/vaucanson/design_pattern/default_ops.hxx: Fix warnings with
+	VCSN_NDEBUG set.
+
+2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/series/krat.hxx: Don't
 	#undef `echo' as it's not defined.
 

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -144,46 +144,49 @@ namespace vcsn {
 		 const U& src)
   {
     precondition(& s1 == & s2);
+    (void) s2;
     op_assign(s1.self(), dst, src);
   }
 
-#define INOP_IMPL(Name)						\
-    template<typename S, typename T, typename U>		\
-    void op_in_ ## Name (const Structure<S>& s1, 	\
-			 const Structure<S>& s2,	\
-			 T& dst,				\
-			 const U& arg)				\
-    { 								\
-      precondition(& s1 == & s2);			\
-      return op_in_ ## Name (s1.self(), dst, arg); 		\
-    }
+# define INOP_IMPL(Name)				\
+  template<typename S, typename T, typename U>		\
+  void op_in_ ## Name (const Structure<S>& s1,		\
+		       const Structure<S>& s2,		\
+		       T& dst,				\
+		       const U& arg)			\
+  {							\
+    precondition(& s1 == & s2);				\
+    (void) s2;						\
+    return op_in_ ## Name (s1.self(), dst, arg);	\
+  }
 
   INOP_IMPL(add);
   INOP_IMPL(sub);
   INOP_IMPL(mul);
   INOP_IMPL(div);
   INOP_IMPL(mod);
-#undef INOP_IMPL
+# undef INOP_IMPL
 
 
 
-#define BINOP_IMPL(Name)					\
-    template<typename S, typename T, typename U>		\
-    T op_ ## Name (const Structure<S>& s1,			\
-		   const Structure<S>& s2,			\
-		   const T& v1,					\
-		   const U& v2)					\
-    { 								\
-      precondition(& s1 == & s2); 			\
-      return op_ ## Name(s1.self(), v1, v2); 			\
-    }
+# define BINOP_IMPL(Name)			\
+  template<typename S, typename T, typename U>	\
+  T op_ ## Name (const Structure<S>& s1,	\
+		 const Structure<S>& s2,	\
+		 const T& v1,			\
+		 const U& v2)			\
+  {						\
+    precondition(& s1 == & s2);			\
+    (void) s2;					\
+    return op_ ## Name(s1.self(), v1, v2);	\
+  }
 
   BINOP_IMPL(add);
   BINOP_IMPL(sub);
   BINOP_IMPL(mul);
   BINOP_IMPL(div);
   BINOP_IMPL(mod);
-#undef BINOP_IMPL
+# undef BINOP_IMPL
 
   template<typename S, typename St, typename T>
   St& op_rin(const Structure<S>& s, St& st, const T& v)
