@@ -1,5 +1,37 @@
 2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Add TAF-Kit for Boolean automata.
+	TAF-Kit stands for Typed Automata Function Kit, that is to say,
+	programs that deal with fixed type automata, on the command line.
+
+	* src/taf-kit: New. TAF-Kit directory.
+
+	* src/taf-kit/b_commands.cc: New. Add commands specific to Boolean
+	automata.
+
+	The following files will be common to all TAF-Kit binaries:
+
+	* src/taf-kit/commands.hh: New.
+	* src/taf-kit/edit_automaton.hh,
+	* src/taf-kit/edit_automaton.hxx: New. `edit_automaton' and 
+	`create_automaton' functions.
+	* src/taf-kit/commands_macros.hh: New. Useful macros to define commands.
+	* src/taf-kit/getters.hh,
+	* src/taf-kit/getters.hxx: New. Getters for expressions, automata, ...
+	* src/taf-kit/common.hh: New.
+	* src/taf-kit/predefined_alphabets.hh: New.
+	* src/taf-kit/common_commands.hh: New.
+	* src/taf-kit/main.cc: New.
+
+	* src/taf-kit/Makefile.am: New.
+	* src/Makefile.am: Include TAF-Kit as a subdirectory if its build has
+	been requested.
+	* config/vcsn_taf_kit.m4: New. Check for Curses and enable the build
+	of TAF-Kit on demand.
+	* configure.ac: Update accordingly.
+
+2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Fix VCSN_NDEBUG use.
 
 	* include/vaucanson/config/system.hh: Define VCSN_NDEBUG if NDEBUG is.

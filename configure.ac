@@ -92,6 +92,7 @@ AC_DEFINE_UNQUOTED([CXX], ["$CXX"], [The C++ compiler])
 # AC_CHECK_HEADERS([stl_config.h])
 
 VCSN_XML
+VCSN_TAF_KIT
 
 ##
 ## Package header configuration.
@@ -137,6 +138,7 @@ AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
+	src/taf-kit/Makefile
 	src/tests/Makefile
 	src/tests/check/Makefile
 	src/tests/check/defs
