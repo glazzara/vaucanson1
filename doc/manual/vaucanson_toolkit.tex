@@ -2,16 +2,15 @@
 
 \Vauc provides several programs that manipulate various types of
 automata. In this chapter we will learn how to use those
-programs. Actually there are 6 programs located in
-src/demos/function\_library/ directory. Each of them dealing with a
+programs. Actually there are 6 programs, each of them deals with a
 specific type of automata:
 \begin{description}
-  \item [b] for manipulating automata over Boolean semiring $\mathbb{B}$;
-  \item [z] for manipulating automata over $(\mathbb{Z},+)$;
-  \item [z\_min\_plus] for manipulating automata over $(\mathbb{Z},min)$;
-  \item [z\_max\_plus] for manipulating automata over $(\mathbb{Z},max)$;
-  \item [rt\_tdc] for manipulating realtime transducers;
-  \item [tdc] for manipulating automata over free monoid product.
+  \item [vcsn-b] for manipulating automata over Boolean semiring $\mathbb{B}$;
+  \item [vcsn-z] for manipulating automata over $(\mathbb{Z},+)$;
+  \item [vcsn-z\_min\_plus] for manipulating automata over $(\mathbb{Z},min)$;
+  \item [vcsn-z\_max\_plus] for manipulating automata over $(\mathbb{Z},max)$;
+  \item [vcsn-rt\_tdc] for manipulating realtime transducers;
+  \item [vcsn-tdc] for manipulating automata over free monoid product.
 \end{description}
 The first step before starting to work with \Vauc toolkit is to choose
 on which type of automata you intend to work. Then you should just use
@@ -51,7 +50,7 @@ then we will minimize the resulting automaton.
 Computing the determinized of a Boolean automaton is simply realized
 by calling \textit{determinize} function:
 \begin{alltt}
-# ./b determinize a1.xml > a1\_det.xml
+# vcsn-b determinize a1.xml > a1\_det.xml
 \end{alltt}
 Now the file a1\_det.xml contains the XML description of the
 determinized of the automaton A.
@@ -61,7 +60,7 @@ determinized of the automaton A.
 We can get some information about our newly created automaton by calling
 the \textit{info} function:
 \begin{alltt}
-# ./b info a1\_det.xml
+# vcsn-b info a1\_det.xml
 \textit{States: 4
 Transitions: 8
 Initial states: 1
@@ -69,38 +68,37 @@ Final states: 2}
 \end{alltt}
 Or we can use dotty to visualize our newly created automaton:
 \begin{alltt}
-# ./b display a1\_det.xml
+# vcsn-b display a1\_det.xml
 \end{alltt}
 
 %%Dotty output of det(A1)
 %%\begin{figure}[ht]
 \begin{center}
-  \scalebox{0.7}{\includegraphics{images/a1_det.eps}}
+  \scalebox{0.7}{\includegraphics{images/a1_det.ps}}
 \end{center}
 %%  \caption{Determinized of $A_1$}
 %%\end{figure}
 
 \subsubsection{Minimizing}
 
+The minimal automaton can be computed in the same way:
 \begin{alltt}
-# ./b determinize a1.xml | ./b minimize - | ./b display -
+# vcsn_b minimize a1_det.xml > a1_min.xml
 \end{alltt}
-
-%% Dotty min(det(A1))
-%%\begin{figure}[!h]
-\begin{center}
-  \scalebox{0.7}{\includegraphics{images/a1_det_min.eps}}
-\end{center}
-%%\caption{Minimizing the Determinized of $A_1$}
-%%\end{figure}
+The commands can be composed throught the pipe of the shell:
+\begin{alltt}
+# vcsn_b determinize a1.xml | vcsn_b minimize - > a1_min.xml
+\end{alltt}
+The '{\tt -}' means that the input is to be read on the standard
+input instead of a file.
 
 \subsubsection{Evaluation}
 
 Evaluating if a word is accepted by our automaton:
 \begin{alltt}
-# ./b eval a1.xml 'abab'
+# vcsn-b eval a1.xml 'abab'
 \textit{1}
-# ./b eval a1.xml 'bbba'
+# vcsn-b eval a1.xml 'bbba'
 \textit{0}
 \end{alltt}
 where 1 (resp. 0) means that the word is accepted (resp. not accepted)
@@ -113,25 +111,17 @@ associated to Boolean automata. For instance, computing the language
 recognized by a Boolean automaton can be done thanks to the
 \textit{aut\_to\_exp} function:
 \begin{alltt}
-# ./b aut_to_exp a1.xml
+# vcsn-b aut-to-exp a1.xml
 \textit{(a+b)*.a.b.(a+b)*}
-# ./b aut_to_exp a1_det.xml
+# vcsn-b aut-to-exp a1_det.xml
 \textit{b*.a.a*.b.(a.a*.b+b)*.(a.a*+1)}
 \end{alltt}
 Plus \Vauc provides several algorithms that build an automaton that
-recognizes a given language. For instance let's build the standard
-automaton that recognizes the language "$(a+b)*a.b.(a+b)*$" and
-minimize the resulting automaton:
-
+recognizes a given language:
 \begin{alltt}
-# /b standard_of "(a+b)*a.b.(a+b)*" | ./b minimize - | ./b display -
+# vcsn-b standard "(a+b)*a.b.(a+b)*" | vcsn-b minimize -
 \end{alltt}
-%%\begin{figure}[ht]
-\begin{center}
-  \scalebox{0.7}{\includegraphics{images/a1.eps}}
-\end{center}
-%%  \caption{The minimize standard automaton of "(a+b)*a.b.(a+b)*"}
-%%\end{figure}
+computes the minimal automaton of $(a+b)*ab(a+b)*$.
 %%Please note that your rational expressions should follow the
 %%following grammar. %%Fixme : Lien vers la grammaire des ratexp
 
@@ -139,116 +129,115 @@ minimize the resulting automaton:
 %% Une definition plus rigoureuse des algorithmes devrait etre fournie
 %% en annexe.
 In this section you will find a brief definition of all functions that
-\Vauc provides for manipulating Boolean automata.
+\Vauc provides for manipulating Boolean automata. All these algorithms
+are called vcsn-b \textit{algorithm-name} [\textit{arguments}]. If the
+argument is replaced by ``-'' then the program will read this argument
+from the standard input. All algorithms dump their results to the
+standard output, except the ``tests'' functions that also return an
+exit status (0 if the test is successfull, anything else otherwise).
+In the following:
+
 \begin{itemize}
-\item a1.xml and a2.xml are two Boolean automata described in
-  \Vauc XML format.
-\item w is a word, for example \textit{"aabb"} if you are working on an
-  alphabet that contains the letters \textit{a} and \textit{b}.
-\item exp is a rational expression denoting a language.
-\item n is a strictly positive integer.
+\item \textarg{a1.xml} and \textarg{a2.xml} are two Boolean automata
+  described in \Vauc XML format;
+\item \textarg{w} is a word, for example \textit{"aabb"} if you are
+  working on an alphabet that contains the letters \textit{a} and
+  \textit{b};
+\item \textarg{exp} is a rational expression denoting a language;
+\item \textarg{n} is a strictly positive integer.
 \end{itemize}
 
-\begin{description}
-  \item [are-isomorphic]
-    ./b a1.xml a2.xml\\
-    Return 1 (resp. 0) if the two automata are (resp. aren't)
-    isomorphic.
-
-  \item [aut\_to\_exp]
-    ./b aut\_to\_exp a1.xml\\
-    Return a regular expression denoting the language recognized by
-    \textit{aut}.
-
-  \item [accessible]
-    ./b accessible a1.xml\\
-    Extract the sub-automaton of accessible states of a1.xml.
-
-  \item [closure]
-    ./b closure a1.xml\\
-    Complete the automaton a1.xml to make it
-    closed over epsilon transition (based on the
-    Floyd-McNaughton-Yamada algorithm).
-
-  \item [co-accessible]
-    ./b accessible a1.xml\\
-    Extract the sub-automaton of co-accessible states of a1.xml.
-
-  \item [derived\_terms]
-    ./b derived\_terms exp\\
-    Return the Boolean automaton build from the derived terms of exp.
-
-  \item [determinize]
-    ./b determinize a1.xml\\
-    Return the determinized of a1.xml.
-
-  \item [display]
-    ./b display a1.xml\\
-    Display a graphical view of the automaton a1.xml using DOT format.
-
-  \item [evaluation]
-    ./b eval a1.xml w\\
-    Return 1 (resp. 0) if the word w is accepted by the automaton
-    a1.xml
-
-  \item [expand]
-    ./b expand exp\\
-    Return the expanded expression of exp.
-
-  \item [info]
-    ./b info a1.xml\\
-    Display general information (Number of states, number of
-    transitions, number of initial states and number of final
-    states) on the automaton \textit{a1.xml}.
-
-  \item [is-empty]
-    ./b is-empty a1.xml\\
-    Return 1 (resp. 0) if the automaton has (resp. hasn't) accessible
-    or (resp. and) co-accessible states.
-
-  \item [minimize]
-    ./b minimize [hm] a1.xml\\
-    Return the minimal automaton of a1.xml (By default the minimal
-    automaton is built using Hopcroft algorithm).
-    \begin{description}
-      \item [h] Use Hopcroft algorithm
-      \item [m] Use Moore algorithm
-    \end{description}
-
-  \item [power]
-    ./b power a1.xml n\\
-    Return a1.xml to the power of n.
-
-  \item [product]
-    ./b product a1.xml a2.xml\\
-    Return the product of the two automata.
-
-  \item [quotient]
-    ./b quotient a1.xml\\
-    Return the quotient of a non deterministic automaton.
-
-  \item [realtime]
-    ./b realtime a1.xml\\
-    Return the realtime automaton of the automaton a1.xml.
-
-  \item [standard\_of]
-    ./b standard\_of exp\\
-    Return the standard automaton build from the rational expression exp.
-
-  \item [transpose]
-    ./b transpose a1.xml\\
-    Return the transposed of the automaton a1.xml.
-
-  \item [trim]
-    ./b trim a1.xml\\
-    Return the trimmed automaton of a1.xml.
-
-  \item [thompson\_of]
-    ./b thompson\_of exp\\
-    Return the Thompson automaton of the rational expression exp.
-\end{description}
+\noindent
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\multicolumn{2}{|c|}{Input/output work with automata} \\
+\hline
+{\tt define-automaton} &Define an automaton from scratch.\\
+{\tt edit-automaton} \textarg{a1.xml} & Edit an existing automaton.\\
+{\tt info} \textarg{a1.xml} & Print the number of states, transitions,
+initial and final states of \textarg{a1.xml}.\\
+{\tt display} \textarg{a1.xml} & Display the automaton using DOTTY.\\
+{\tt dump} \textarg{a1.xml} & Dump the automaton to DOT format.\\
+\hline
+\multicolumn{2}{|c|}{Tests and evaluation on automata}\\
+\hline
+{\tt are-isomorphic} \textarg{a1.xml a2.xml} & Test whether
+\textarg{a1.xml} and \textarg{a2.xml} are isomorphic.\\
+{\tt evaluation} \textarg{a1.xml w} & Test whether the word
+\textarg{w} is accepted by \textarg{a1.xml}.\\
+{\tt is-deterministic} \textarg{a1.xml} & Test whether
+\textarg{a1.xml} is deterministic.\\
+{\tt is-empty} \textarg{a1.xml} & Test whether \textarg{a1.xml}
+accepts no word.\\
+\hline
+\end{tabularx}
 \newpage
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\multicolumn{2}{|c|}{Generic algorithms for automata}\\
+\hline
+{\tt accessible} \textarg{a1.xml} & Extract the sub-automaton of accessible
+            states of  \textarg{a1.xml}.\\
+{\tt co-accessible} \textarg{a1.xml} & Extract the sub-automaton of
+co-accessible states of  \textarg{a1.xml}.\\
+{\tt trim} \textarg{a1.xml} & Trim the automaton  \textarg{a1.xml}.\\
+{\tt transpose} \textarg{a1.xml} & Compute the automaton accepting the mirror
+           language of the one accepted by  \textarg{a1.xml}.\\
 
+{\tt closure} \textarg{[-bf] a1.xml} & $\varepsilon$-removal algorithm.\\
+                           & -b : backward closure\\
+                           & -f : forward closure\\
+{\tt concatenate} \textarg{a1.xml a2.xml} & Concatenate  \textarg{a1.xml}
+            to \textarg{a2.xml}.\\
+{\tt sum} \textarg{ aut1 aut2} & Compute the sum of  \textarg{a1.xml}
+            and \textarg{a2.xml}.\\
+{\tt normalize} \textarg{ aut1} & Compute an automaton with unique initial
+            and final states, with $\varepsilon$-transitions.\\
+{\tt standardize} \textarg{ aut1} & Compute an automaton with unique initial
+            state without adding $\varepsilon$-transitions.\\
+\hline
+\multicolumn{2}{|c|}{Generic algorithms for automata on letters}\\
+\hline
+{\tt realtime} \textarg{[-bf] a1.xml} & $\varepsilon$-removal
+algorithm and make every transition labeled by a letter.\\
+                           & -b : backward closure\\
+                           & -f : forward closure\\
+{\tt product} \textarg{a1.xml a2.xml} & Compute the (cartesian) product
+           of  \textarg{a1.xml} and \textarg{a2.xml}.\\
+{\tt power} \textarg{a1.xml n} & Compute the (cartesian) product of
+\textarg{a1.xml} by itself $n$ times.\\
+{\tt quotient} \textarg{a1.xml} & Compute the minimal automaton in
+bi-simulation with \textarg{a1.xml}.\\
+\hline
+\multicolumn{2}{|c|}{Algorithms specific to Boolean automata}\\
+\hline
+{\tt determinize} \textarg{a1.xml} & Compute the determinized automaton
+            of  \textarg{a1.xml}.\\
+{\tt complement} \textarg{a1.xml} & Compute an automaton that accepts
+the complement language of the one accepted by  \textarg{a1.xml}.\\
+{\tt minimize} \textarg{[-hm] a1.xml} & Minimize the {\em deterministic}
+           automaton  \textarg{a1.xml}.\\
+                           & -h : use the Hopcroft algorithm\\
+                           & -m : use the Moore algorithm\\
+\hline
+\multicolumn{2}{|c|}{Conversion between automata and expressions}\\
+\hline
+{\tt aut-to-exp} \textarg{a1.xml} & Print a rational expression denoting the
+            language accepted by  \textarg{a1.xml}.\\
+{\tt expand} \textarg{exp} & Partially expand rational
+expressions. For instance, expanding ``a(b+ab(a+b))'' will produce
+``aab.(a+b)*+ab''\\
+{\tt derived-term} \textarg{exp} & Compute the derived term automaton
+           of \textarg{exp}.\\
+{\tt standard}  \textarg{exp} & Compute the standard (Glushkov) automaton
+           of \textarg{exp}.\\
+{\tt thompson-of} \textarg{exp} & Compute the Thompson automaton
+           of \textarg{exp}.\\
+\hline
+\end{tabularx}
+
+
+\newpage
 \section{Transducers}
 
 This section deals with transducers. In \Vauc we distinguish two types
@@ -261,8 +250,10 @@ takes a word as input and produce another word as output (the
 
 \subsection{Example}
 
-The transducer $T_1$(\autoref{bindiv3}) gives the quotient by 3 of a
-binary number and the transducer $T_2$(\autoref{add1}) adds 1 to a binary number.
+The realtime transducer $T_1$(\autoref{bindiv3}) gives the quotient by
+3 of a binary number and the transducer $T_2$(\autoref{add1}) adds 1 to a
+binary number.
+
 
 \begin{figure}[h]
   \begin{center}
@@ -272,14 +263,14 @@ binary number and the transducer $T_2$(\autoref{add1}) adds 1 to a binary number
 \Initial[w]{A}
 \Final[s]{A}
 %transitions
-\LoopN[.5]{A}{\IOL{a}{a}}
-\LoopN[.5]{C}{\IOL{b}{b}}
-\ArcL{A}{B}{\IOL{b}{a}}
-\ArcL{B}{A}{\IOL{b}{b}}
-\ArcL{B}{C}{\IOL{a}{a}}
-\ArcL{C}{B}{\IOL{a}{b}}
+\LoopN[.5]{A}{\IOL{0}{0}}
+\LoopN[.5]{C}{\IOL{1}{1}}
+\ArcL{A}{B}{\IOL{1}{0}}
+\ArcL{B}{A}{\IOL{1}{1}}
+\ArcL{B}{C}{\IOL{0}{0}}
+\ArcL{C}{B}{\IOL{0}{1}}
 \end{VCPicture}
-\caption{Transducer $T_1$ computing the quotient by 3 of a binary number}
+\caption{Realtime transducer $T_1$ computing the quotient by 3 of a binary number}
 \label{bindiv3}
   \end{center}
 \end{figure}
@@ -289,13 +280,13 @@ binary number and the transducer $T_2$(\autoref{add1}) adds 1 to a binary number
 % states
 \State{(0,0)}{A} \State{(3,0)}{B}
 \Initial[w]{A}
-\FinalL{s}{A}{\IOL{}{b}}
+\FinalL{s}{A}{(,1)}
 \Final[e]{B}
 %transitions
-\LoopN[.5]{A}{\IOL{b}{a}}
-\LoopN[.5]{B}{\IOL{b}{b}}
-\LoopS[.5]{B}{\IOL{a}{a}}
-\EdgeL{A}{B}{\IOL{a}{b}}
+\LoopN[.5]{A}{(1,0)}
+\LoopN[.5]{B}{(1,1)}
+\LoopS[.5]{B}{(0,0)}
+\EdgeL{A}{B}{(0,1)}
 \end{VCPicture}
 \caption{Transducer $T_2$ adding 1 to a binary number}
 \label{add1}
@@ -304,15 +295,15 @@ binary number and the transducer $T_2$(\autoref{add1}) adds 1 to a binary number
 
 \subsubsection{Evaluation}
 \begin{alltt}
-# ./rt_tdc evaluation quot_3_rt.xml 'bba'
-\textit{a.b.a}
+# vcsn-rt_tdc evaluation quot_3_rt.xml '110'
+\textit{0.1.0}
 \end{alltt}
 
 \subsubsection{Domain}
 The transducer $T$ only accepts binary number which are divisible by 3
 as input.
 \begin{alltt}
-# ./rt_tdc domain quot_3_rt.xml > divisible_by_3.xml
+# vcsn-rt_tdc domain quot_3_rt.xml > divisible_by_3.xml
 \end{alltt}
 Now the file divisible\_by\_3.xml contains the description of a Boolean
 automaton that accepts only the numbers divisible by 3.
@@ -321,140 +312,123 @@ automaton that accepts only the numbers divisible by 3.
 Each transucers can be transformed to the other type of transducer
 thanks to the ``to-tdc'' and ``to-rt-tdc'' functions.
 \begin{alltt}
-# ./rt_tdc to-tdc quot_3_rt.xml > quot_3.xml
-# ./rt_tdc to-tdc add1_rt.xml > add1.xml
+# vcsn-rt_tdc to-tdc quot_3_rt.xml > quot_3.xml
+# vcsn-tdc to-rt-tdc add1.xml > add1_rt.xml
 \end{alltt}
 
 \subsubsection{Composing}
 \begin{alltt}
-# ./tdc compose quot_3.xml add1.xml
+# vcsn-tdc compose quot_3.xml add1.xml
 \end{alltt}
 
 \subsection{Available functions}
+The following functions are available for both vcsn-rt\_tdc and
+vcsn-tdc programs. They are called vcsn-\{tdc, rt\_tdc\}
+\textit{algorithm-name} [\textit{arguments}].  In the following:
 
 \begin{itemize}
-\item t1.xml and t2.xml are two transducers (either ``realtime'' or
-  not) described in \Vauc XML format.
-\item w is a word, for example \textit{"aabb"} if you are working on an
-  alphabet that contains the letters \textit{a} and \textit{b}.
-\item a.xml is a Boolean automaton.
-\item t1\_rt.xml is a realtime transducer.
-\item t1\_fmp.xml is a transducer (seen as an automaton over a free monoid
-  product).
+\item \textarg{t1.xml} and \textarg{t2.xml} are two transducers
+  (either ``realtime'' or not) described in \Vauc XML format;
+\item \textarg{w} is a word, for example \textit{"aabb"} if you are
+  working on an alphabet that contains the letters \textit{a} and \textit{b};
+\item \textarg{a.xml} is a Boolean automaton;
+\item \textarg{t1\_rt.xml} is a realtime transducer;
+\item \textarg{t1\_fmp.xml} is a transducer (seen as an automaton over
+  a free monoid product).
 \end{itemize}
-The following functions are available for both rt\_tdc and tdc program:
-\begin{description}
-  \item [are-isomorphic]
-    ./tdc t1.xml t2.xml\\
-    Return 1 (resp. 0) if the two transducers are (resp. aren't)
-    isomorphic.
 
-  \item [closure]
-    ./tdc closure t1.xml\\
-    Complete the transducer t1.xml to make it
-    closed over epsilon transition (based on the
-    Floyd-McNaughton-Yamada algorithm).
+\noindent
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\multicolumn{2}{|c|}{Input/output work with transducers} \\
+\hline
+{\tt define-automaton} & Define a transducer from scratch.\\
+{\tt edit-automaton} \textarg{t1.xml} & Edit an existing transducer.\\
+{\tt info} \textarg{t1.xml} & Print the number of states, transitions,
+initial and final states of \textit{t1.xml}.\\
+{\tt display} \textarg{t1.xml} & Display the transducer using DOTTY.\\
 
-  \item [compose]
-    ./tdc compose t1.xml t2.xml\\
-    Return the composed transducer from t1.xml and t2.xml. t1.xml and
-    t2.xml must be the same type of transducers.
 
-  \item [display]
-    ./tdc display t1.xml\\
-    Display a graphical view of the transducer t1.xml using DOT format.
+\hline
+\multicolumn{2}{|c|}{Tests and evaluation on tranducers}\\
+\hline
+{\tt are-isomorphic} \textarg{t1.xml t2.xml} & Test if
+the two transducers are isomorphic.\\
+{\tt evaluation} \textarg{t1.xml w} & Compute the evaluation of
+\textit{w} by \textit{t1.xml}.\\
+{\tt is-empty} \textarg{t1.xml} & Test if \textit{t1.xml} realizes the
+empty relation.\\
 
-  \item [domain]
-    ./tdc domain t1.xml\\
-    Return an automaton describing all input accepted by the
-    transducer t1.xml.
+\hline
+\multicolumn{2}{|c|}{Generic algorithm for tranducers}\\
+\hline
+{\tt closure} \textarg{t1.xml} & $\varepsilon$-removal algorithm.\\
 
-  \item [evaluation]
-    ./tdc evaluation t1.xml w\\
-    Return the evaluation of w by t1.xml.
+{\tt compose} \textarg{t1.xml t2.xml} & Compute a tranducer realizing
+$f_2 \circ f_1$, where $f_1$ (resp. $f_2$) is the function associated to
+\textit{t1.xml} (resp. \textit{t2.xml}).\\
 
-  \item [evaluation\_aut]
-    ./tdc evaluation\_aut t1.xml a.xml\\
-    Return a Boolean automaton describing the words produced by the
-    language described by a.xml evaluated by t1.xml.
+{\tt domain} \textarg{t1.xml} & Compute an automaton accepting all
+input accepted by the transducer t1.xml.\\
 
-  \item [image]
-    ./tdc image t1.xml\\
-    Return an automaton describing all output produced by the
-    transducer t1.xml.
+{\tt evaluation} \textarg{t1.xml} & Compute the evaluation of w by
+t1.xml.\\
 
-  \item [info]
-    ./tdc info t1.xml\\
-    Display general information (Number of states, number of
-    transitions, number of initial states and number of final
-    states) on the transducer \textit{t1.xml}.
+{\tt evaluation\_aut} \textarg{t1.xml} & Compute a Boolean automaton
+describing the words produced by the language described by a.xml
+evaluated by t1.xml.\\
 
-  \item [is-empty]
-    ./tdc is-empty t1.xml\\
-    Return 1 (resp. 0) if the transducer has (resp. hasn't) accessible
-    or (resp. and) co-accessible states.
+{\tt image} \textarg{t1.xml} & Compute an automaton describing all
+output produced by the transducer t1.xml.\\
 
-  \item [transpose]
-    ./tdc transpose t1.xml\\
-    Return the transposed of the transducer t1.xml.
+{\tt transpose} \textarg{t1.xml} & Compute the transposed of the
+transducer t1.xml.\\
 
-  \item [trim]
-    ./tdc trim t1.xml\\
-    Return the trimmed transducer of t1.xml.
-\end{description}
 
-\subsubsection{Algorithms for ``realtime'' transducers}
+{\tt trim} \textarg{t1.xml} & Compute the trimmed transducer of
+t1.xml.\\
 
-\begin{description}
-%%Fixme: ambigue
-\item [realtime]
-./rt\_tdc realtime t1\_rt.xml\\
-Return the realtime transducer of t1\_rt.xml.
+\hline
+\multicolumn{2}{|c|}{Algorithms for transducers}\\
+\hline
+{\tt sub-normalize} \textarg{t1\_fmp.xml} & Compute the sub-nomalized
+transducer of \textit{t1\_fmp.xml}.\\
+{\tt is-sub-normalize} \textarg{t1\_fmp.xml} & Test if
+\textit{t1\_fmp.xml} is sub-normalized.\\
+{\tt composition-cover} \textarg{t1\_fmp.xml} & .\\%%FIXME
+{\tt composition-co-cover} \textarg{t1\_fmp.xml} & .\\%%FIXME
+{\tt b-compose} \textarg{t1\_fmp.xml t2\_fmp.xml} & Compose
+\textarg{t1\_fmp.xml} and  \textarg{t2\_fmp.xml}. The latters must be
+unweighted normalized or sub-normalized transducers.\\
+{\tt to-rt-tdc} \textarg{t1\_fmp.xml} & Compute the equivalent
+realtime transducer of \textit{t1\_fmp.xml}.\\
+{\tt intersection} \textarg{a.xml} & Transform \textarg{a.xml} in a
+fmp transducer by creating, for each word, a pair containing twice
+this word.\\
+\hline
+\end{tabularx}
+\newpage
 
-\item [is-realtime]
-./rt\_tdc is-realtime t1\_rt.xml\\
-Return 1 (resp. 0) if the transducer t1\_rt.xml is (isn't) realtime.
-
-\item [to-tdc]
-./rt\_tdc to-tdc t1\_rt.xml\\
-Return the equivalent fmp transducer of t1\_rt.xml.
-\end{description}
-
-\subsubsection{Algorithms for transducers}
-%%Fixme : A finir
-\begin{description}
-\item [sub-normalize]
-  ./tdc sub-normalize t1\_fmp.xml\\
-  Return the sub-normalized transducer of t1\_fmp.xml.
-
-\item [is-sub-normalized]
-  ./tdc is-sub-normalized t1\_fmp.xml
-  Return 1 (resp. 0) if the t1\_fmp.xml is (isn't) sub-normalized.
-
-\item [composition-cover]
-  ./tdc composition-cover t1\_fmp.xml
-
-\item [composition-co-cover]
-  ./tdc composition-co-cover t1\_fmp.xml
-
-\item [b-compose]
-  ./tdc b-compose t1\_fmp.xml t2\_fmp.xml
-
-\item [to-rt-tdc]
-  ./tdc to-rt-tdc t1\_fmp.xml\\
-  Return the equivalent realtime transducer of t1\_fmp.xml.
-
-\item [intersection]
-  ./tdc intersection t1\_fmp.xml
-
-\end{description}
+\noindent
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\multicolumn{2}{|c|}{Algorithms for ``realtime'' transducers}\\
+\hline
+{\tt realtime} \textarg{t1\_rt.xml} & Compute the realtime transducer
+of  \textit{t1\_rt.xml}.\\
+{\tt is-realtime} \textarg(t1\_rt.xml) & Test if \textit{t1\_rt.xml}
+is realtime.\\
+{\tt to-tdc} \textarg{t1\_rt.xml} & Compute the equivalent fmp
+transducer of \textit{t1\_rt.xml}.\\
+\hline
+\end{tabularx}
 \newpage
 
 \section{Weighted automata}
 
-This part shows the use of the program \textit{z}, but all
-comments should also stand for the programs \textit{z\_min\_plus and
-z\_max\_plus}.
+This part shows the use of the program \textit{vcsn-z}, but all
+comments should also stand for the programs \textit{vcsn-z\_min\_plus and
+vcsn-z\_max\_plus}.
 
 \subsection{Example}
 
@@ -484,9 +458,9 @@ For instance let's evaluate "abab" and "bbab":
 \subsubsection{Evaluation}
 
 \begin{alltt}
-# ./z eval b1.xml 'abbb'
+# vcsn-z eval b1.xml 'abbb'
 \textit{3}
-# ./z eval b1.xml 'abab'
+# vcsn-z eval b1.xml 'abab'
 \textit{2}
 \end{alltt}
 
@@ -495,11 +469,11 @@ number of 'b' contained in \textit{w}.
 
 \subsubsection{Power}
 
-Now let's consider the $B_1^4$, where
-$$B_1^4 = \prod_{i=1}^4 B_1, 4 > 0$$
+Now let's consider the $B_1^n$, where
+$$B_1^n = \prod_{i=1}^n B_1, n > 0$$
 
 \begin{alltt}
-# ./z power b1.xml 4 > b1_4.xml
+# vcsn-z power b1.xml 4 > b1_4.xml
 \end{alltt}
 
 Now the file \textit{b1\_4.xml} contains the automaton $B_1^4$. Lets
@@ -507,9 +481,9 @@ see what the evaluation of the words "abab" and "bbab" gives with this
 automaton:
 
 \begin{alltt}
-#./z eval b1_4.xml 'bbab'
+# vcsn-z eval b1_4.xml 'bbab'
 \textit{81}
-./z eval b1_4.xml 'abab'
+# vcsn-z eval b1_4.xml 'abab'
 \textit{16}
 \end{alltt}
 
@@ -521,7 +495,7 @@ evaluation of $B_1$ at power 4.
 One drawback of doing successive products of an automaton is
 that it creates a lot of new states and transitions.
 \begin{alltt}
-#./z power b1.xml 4 | ./z info -
+# vcsn-z power b1.xml 4 | vcsn-z info -
 \textit{States: 16}
 \textit{Transitions: 97}
 \textit{Initial states: 1}
@@ -530,7 +504,7 @@ that it creates a lot of new states and transitions.
 One way of reducing the size of our automaton is to use the "quotient"
 algorithm.
 \begin{alltt}
-#./z power b1.xml 4 | ./z quotient - | ./z info -
+# vcsn-z power b1.xml 4 | vcsn-z quotient - | vcsn-z info -
 \textit{States: 5}
 \textit{Transitions: 15}
 \textit{Initial states: 1}
@@ -539,112 +513,93 @@ algorithm.
 
 \subsection{Available functions}
 In this section you will find a brief definition of all functions for
-manipulating weighted automata.
+manipulating weighted automata. The following functions are available
+for both . They are called using vcsn-\{z, z\_max\_plus, z\_min\_plus\}
+\textit{algorithm-name} [\textit{arguments}]. In the following:
+
 \begin{itemize}
-\item a1.xml and a2.xml are two weighted automata described in
-  \Vauc XML format.
-\item w is a word, for example \textit{"aabb"} if you are working on an
-  alphabet that contains the letters \textit{a} and \textit{b}.
-\item exp is a rational expression denoting a language.
-\item n is a strictly positive integer.
+\item \textarg{a1.xml} and \textarg{a2.xml} are two weighted automata
+  described in \Vauc XML format;
+\item \textarg{w} is a word, for example \textit{"aabb"} if you are
+  working on an alphabet that contains the letters \textit{a} and
+  \textit{b};
+\item \textarg{exp} is a rational expression denoting a language;
+\item \textarg{n} is a strictly positive integer.
 \end{itemize}
+\newpage
 
-\begin{description}
-  \item [are-isomorphic]
-    ./z a1.xml a2.xml\\
-    Return 1 (resp. 0) if the two automata are (resp. aren't)
-    isomorphic.
+\noindent
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\multicolumn{2}{|c|}{Input/output work with weighted automata}\\
+\hline
+{\tt define-automaton} & Define an automaton from scratch.\\
+{\tt edit-automaton} \textarg{a1.xml} & Edit an existing automaton.\\
+{\tt info} \textarg{a1.xml} & Print the number of states, transitions,
+initial and final states of \textarg{a1.xml}.\\
+{\tt display} \textarg{a1.xml} & Display the automaton using DOTTY.\\
 
-  \item [aut\_to\_exp]
-    ./z aut\_to\_exp a1.xml\\
-    %%Fixme
 
-  \item [accessible]
-    ./z accessible a1.xml\\
-    Extract the sub-automaton of accessible states of a1.xml.
+\hline
+\multicolumn{2}{|c|}{Tests and evaluation on weighted automata}\\
+\hline
+{\tt are-isomorphic} \textarg{a1.xml a2.xml} & Test if
+the two automata are isomorphic.\\
+{\tt evaluation} \textarg{a1.xml w} & Compute the evaluation of
+\textarg{w} by \textarg{a1.xml}.\\
+{\tt is-empty} \textarg{a1.xml} & .\\
+\hline
 
-  \item [closure]
-    ./z closure a1.xml\\
-    Complete the automaton a1.xml to make it
-    closed over epsilon transition (based on the
-    Floyd-McNaughton-Yamada algorithm).
+\hline
+\multicolumn{2}{|c|}{Generic algorithms for automata}\\
+\hline
+{\tt accessible} \textarg{a1.xml} & Extract the sub-automaton of
+accessible states of \textarg{a1.xml}.\\
+{\tt co-accessible} \textarg{a1.xml} & Extract the sub-automaton of
+co-accessible states of \textarg{a1.xml}.\\
+{\tt trim} \textarg{a1.xml} & Trim the automaton \textarg{a1.xml}.\\
+{\tt transpose} \textarg{a1.xml} & Compute the automaton accepting the
+mirror language of the one accepted by \textarg{a1.xml}.\\
+{\tt closure} \textarg{[-bf] a1.xml} & $\varepsilon$-removal algorithm.\\
+                           & -b : backward closure\\
+                           & -f : forward closure\\
+{\tt concatenate} \textarg{a1.xml a2.xml} & Concatenate \textarg{a1.xml}
+to \textarg{a2.xml}.\\
+{\tt sum} \textarg{a1.xml a2.xml} & Compute the sum of \textarg{a1.xml}
+and \textarg{a2.xml}.\\
+{\tt normalize} \textarg{a1.xml} & Compute an automaton with unique
+initial and final states, with $\varepsilon$-transitions.\\
+{\tt standardize} \textarg{a1.xml} & Compute an automaton with unique
+initial state without adding $\varepsilon$-transitions.\\
 
-  \item [co-accessible]
-    ./z accessible a1.xml\\
-    Extract the sub-automaton of co-accessible states of a1.xml.
+\hline
+\multicolumn{2}{|c|}{Generic algorithms for automata on letters}\\
+\hline
+{\tt realtime} \textarg{[-bf] a1.xml} & $\varepsilon$-removal
+algorithm and make every transition labeled by a letter.\\
+& -b : backward closure\\
+& -f : forward closure\\
+{\tt product} \textarg{a1.xml a2.xml} & Compute the (cartesian) product
+of \textarg{a1.xml} and \textarg{a1.xml}.\\
+{\tt power} \textarg{a1.xml n} & Compute the (cartesian) product of
+\textarg{a1.xml} by itself $n$ times.\\
+{\tt quotient} \textarg{a1.xml} & Compute the $\mathbb{Z}$-quotient of
+ \textarg{a1.xml}.\\
 
-  \item [derived\_terms]
-    ./z derived\_terms exp\\
-    Return the weighted automaton build from the derived terms of exp.
+\hline
+\multicolumn{2}{|c|}{Conversion between automata and expressions}\\
+\hline
+{\tt aut-to-exp} \textarg{a1.xml} & .\\%%FIXME
+{\tt expand} \textarg{exp} & Partially expand rational expressions.\\
+{\tt derived-term} \textarg{exp} & Compute the derived term automaton
+of \textarg{exp}.\\
+{\tt standard}  \textarg{exp} & Compute the standard (Glushkov)
+automaton of \textarg{exp}.\\
+{\tt thompson-of} \textarg{exp} & Compute the Thompson automaton
+of \textarg{exp}.\\
+\hline
 
-  \item [determinize]
-    ./z determinize a1.xml\\
-    Return the determinized of a1.xml.
-
-  \item [display]
-    ./z display a1.xml\\
-    Display a graphical view of the automaton a1.xml using DOT format.
-
-  \item [evaluation]
-    ./z eval a1.xml w\\
-    Return the evaluation of w by a1.xml.
-
-  \item [expand]
-    ./z expand exp\\
-    Return the expanded expression of exp.
-
-  \item [info]
-    ./z info a1.xml\\
-    Display general information (Number of states, number of
-    transitions, number of initial states and number of final
-    states) on the automaton \textit{a1.xml}.
-
-  \item [is-empty]
-    ./z is-empty a1.xml\\
-    Return 1 (resp. 0) if the automaton has (resp. hasn't) accessible
-    or (resp. and) co-accessible states.
-
-  \item [minimize]
-    ./z minimize [hm] a1.xml\\
-    Return the minimal automaton of a1.xml (By default the minimal
-    automaton is built using Hopcroft algorithm).
-    \begin{description}
-      \item [h] Use Hopcroft algorithm
-      \item [m] Use Moore algorithm
-    \end{description}
-
-  \item [power]
-    ./z power a1.xml n\\
-    Return a1.xml to the power of n.
-
-  \item [product]
-    ./z product a1.xml a2.xml\\
-    Return the product of the two automata.
-
-  \item [quotient]
-    ./z quotient a1.xml\\
-    Return the quotient of a non deterministic automaton.
-
-  \item [realtime]
-    ./z realtime a1.xml\\
-    Return the realtime automaton of the automaton a1.xml.
-
-  \item [standard\_of]
-    ./z standard\_of exp\\
-    Return the standard automaton build from the rational expression exp.
-
-  \item [transpose]
-    ./z transpose a1.xml\\
-    Return the transposed of the automaton a1.xml.
-
-  \item [trim]
-    ./z trim a1.xml\\
-    Return the trimmed automaton of a1.xml.
-
-  \item [thompson\_of]
-    ./z thompson\_of exp\\
-    Return the Thompson automaton of the rational expression exp.
-\end{description}
+\end{tabularx}
 \newpage
 
 \section{Building your own automaton}

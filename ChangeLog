@@ -1,5 +1,19 @@
 2006-05-08  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
+	The listing of algorithms available for each programms has been
+	changed and now algorithms are grouped (I/O, algorithms on
+	letters, on boolean automatons, etc.).
+
+	* doc/manual/vaucanson_toolkit.tex,
+	* doc/manual/users_manual.tex: Change the listing of algorithms.
+	Fix some typo and minor fixes.
+	* doc/manual/images/a1_det.ps: New.
+	* doc/manual/images/a1_det.eps,
+	* doc/manual/images/a1_det_min.eps,
+	* doc/manual/images/a1.eps: Remove.
+
+2006-05-08  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
 	Add dump function to TAF-Kit.
 
 	* src/taf-kit/b_commands.cc,
@@ -21,7 +35,7 @@
 
 	* src/taf-kit/commands.hh: New.
 	* src/taf-kit/edit_automaton.hh,
-	* src/taf-kit/edit_automaton.hxx: New. `edit_automaton' and 
+	* src/taf-kit/edit_automaton.hxx: New. `edit_automaton' and
 	`create_automaton' functions.
 	* src/taf-kit/commands_macros.hh: New. Useful macros to define commands.
 	* src/taf-kit/getters.hh,
@@ -769,5 +783,5 @@
 
 	* include/vaucanson/automata/implementation/graph.hxx (Graph::exists):
 	Fix bug with `removed_edges_' search.
-	
+
 See ChangeLog.2 for earlier changes.
