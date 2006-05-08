@@ -29,6 +29,7 @@
 # include CONTEXT_HEADER
 # include <vaucanson/xml/XML.hh>
 # include <vaucanson/tools/dot_display.hh>
+# include <vaucanson/tools/dot_dump.hh>
 
 using namespace CONTEXT_NAMESPACE;
 
@@ -37,6 +38,7 @@ using namespace vcsn::io;
 using vcsn::xml::XML;
 
 # include <cstdlib>
+# include <iostream>
 
 # include "getters.hh"
 # include "edit_automaton.hh"
@@ -173,5 +175,13 @@ DEFINE_COMMAND (NAME (display)
 						     "A", true))
 		OUTPUT ("")
 		RETURNVALUE ((b ? 0 : 1)));
+
+DEFINE_COMMAND (NAME (dump)
+		CODE (
+		  vcsn::tools::dot_dump (std::cout,
+					 get_aut(args.args[1]),
+					 "A"))
+		OUTPUT ("")
+		RETURNVALUE (0));
 
 #endif /* !COMMON_COMMANDS_HH */

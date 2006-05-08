@@ -1,3 +1,11 @@
+2006-05-08  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Add dump function to TAF-Kit.
+
+	* src/taf-kit/b_commands.cc,
+	* src/taf-kit/common_commands.hh: Add dump function that
+	performs DOT dump on COUT.
+
 2006-05-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Add TAF-Kit for Boolean automata.
