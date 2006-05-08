@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -59,6 +59,9 @@ namespace vcsn
       }
       if (*result)
 	return *result;
+      FAIL ("Error: XSD file not found. Please either set VCSN_XSD_PATH\n"
+	    "to the path of `vaucanson.xsd', put this file in the current\n"
+	    "directory or put it in " VCSN_XSD_PATH ".");
       return "";
     }
 
@@ -75,12 +78,8 @@ namespace vcsn
       parser_set_property(fgXercesUseCachedGrammarInParse);
       parser_set_property(fgXercesCacheGrammarFromParse);
 
-      std::string xsd_file = get_xsd_path ();
-      if (xsd_file == "")
-	FAIL ("Error: XSD file not found.");
-
       XMLCh* xsd_link =
-	STR2XML(("http://vaucanson.lrde.epita.fr " + xsd_file).c_str ());
+	STR2XML(("http://vaucanson.lrde.epita.fr " + get_xsd_path ()).c_str ());
       parser_set_value(fgXercesSchemaExternalSchemaLocation, xsd_link);
 
       // fgXercesSchemaExternalNoNamespaceSchemaLocation

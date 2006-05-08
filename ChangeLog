@@ -1,3 +1,8 @@
+2006-05-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/xml/xerces_parser.hxx: Precise where the XSD must
+	be put on the error ``XSD not found''.
+
 2006-05-08  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	The listing of algorithms available for each programms has been
