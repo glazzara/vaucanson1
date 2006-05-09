@@ -34,8 +34,13 @@ namespace vcsn
     /*----------------.
     | Converter tools |
     `----------------*/
+
+    /*---------.
+    | Automata |
+    `---------*/
     namespace tools
     {
+      // Add the label as a string attribute
       template <class S, class T, class U>
       void add_label(xercesc::DOMElement* elt,
 		     const Element<S, T>&,
@@ -48,6 +53,35 @@ namespace vcsn
 			    STR2XML(label.c_str()));
       }
 
+      // Add the label as an xml node
+      template <class S, class T, class U>
+      void add_xml_label(xercesc::DOMDocument* doc,
+			  xercesc::DOMElement* elt,
+			  const Element<S, T>& a,
+			  const U& series)
+      {
+	typedef Element<S,T> automaton_t;
+	typedef typename
+	  rat::exp<typename automaton_t::monoid_elt_value_t,
+	  typename automaton_t::semiring_elt_value_t> krat_exp_impl_t;
+	typedef Element<typename automaton_t::series_set_t, krat_exp_impl_t> krat_exp_t;
+
+
+	std::string label = get_label(series);
+	if (label.size())
+	{
+	  krat_exp_t res (a.structure().series());
+	  parse(label, res);
+	  elt->appendChild(res.value().xml_tree(doc, "label"));
+	}
+      }
+
+
+    /*----------------.
+    | FMP Transducers |
+    `----------------*/
+
+      // Add the label as a string attribute
       template <class S, class T, class U, class M1, class M2>
       void add_label(xercesc::DOMElement* elt,
 		     const FMPtype&,
@@ -85,6 +119,61 @@ namespace vcsn
 	}
       }
 
+      // Add the label as an xml node
+      template <class S, class T, class U, class M1, class M2>
+      void add_xml_label(xercesc::DOMDocument* doc,
+			 xercesc::DOMElement* elt,
+			 const FMPtype& a,
+			 const U& series)
+      {
+	std::string out;
+	if (series.supp().size() > 1)
+	{
+	  out = get_label(series);
+	  if (out.size())
+	    elt->setAttribute(STR2XML("label"),
+			      STR2XML(out.c_str()));
+	}
+	else
+	{
+	  std::string in_word =
+	    get_label((*(series.supp().begin())).first);
+	  std::string out_word =
+	    get_label((*(series.supp().begin())).second);
+	  std::string mult =
+	    get_label(series.get(*(series.supp().begin())));
+
+	  if (in_word.size() && in_word != "1")
+	  {
+	    using namespace vcsn::r_automaton;
+	    automaton_t bin = make_automaton(
+	      a.structure().series().monoid().first_monoid().alphabet());
+	    rat_exp_t res_in(bin.structure().series());
+	    parse(in_word, res_in);
+	    elt->appendChild(res_in.value().xml_tree(doc, "in"));
+	  }
+	  if (out_word.size() && out_word != "1")
+	  {
+	    using namespace vcsn::r_automaton;
+	    automaton_t bout = make_automaton(
+	      a.structure().series().monoid().second_monoid().alphabet());
+	    rat_exp_t res_out(bout.structure().series());
+	    parse(out_word, res_out);
+	    xercesc::DOMElement* out_node =
+	      res_out.value().xml_tree(doc, "out");
+	    if (mult.size())
+	      out_node->setAttribute(STR2XML("weight"), STR2XML(mult.c_str()));
+	    elt->appendChild(out_node);
+	  }
+	}
+      }
+
+
+    /*---------------------.
+    | Transducers on P(B*) |
+    `---------------------*/
+
+      // Add the label as a string attribute
       template <class S, class T, class U>
       void add_label(xercesc::DOMElement* elt,
 		     const Element<Transducer<S>, T>&,
@@ -100,6 +189,37 @@ namespace vcsn
 	  elt->setAttribute(STR2XML("out"),
 			    STR2XML(out.c_str()));
       }
+
+      // Add the label as an xml node
+      template <class S, class T, class U>
+      void add_xml_label(xercesc::DOMDocument* doc,
+			 xercesc::DOMElement* elt,
+			 const Element<Transducer<S>, T>& a,
+			 const U& series)
+      {
+	std::string in = get_label(*(series.supp().begin()));
+	std::string out = get_label((series.get(*(series.supp().begin()))));
+
+	if (in.size() && in != "1")
+	{
+	  using namespace vcsn::r_automaton;
+	  automaton_t bin = make_automaton(
+	    a.structure().series().monoid().alphabet());
+	  rat_exp_t res_in(bin.structure().series());
+	  parse(in, res_in);
+	  elt->appendChild(res_in.value().xml_tree(doc, "in"));
+	}
+	if (out.size() && out != "1")
+	{
+	  using namespace vcsn::r_automaton;
+	  automaton_t bout = make_automaton(
+	    a.structure().series().semiring().monoid().alphabet());
+	  rat_exp_t res_out(bout.structure().series());
+	  parse(out, res_out);
+	  elt->appendChild(res_out.value().xml_tree(doc, "out"));
+	}
+      }
+
 
       template <class L>
       const char*	get_label(const L& l)

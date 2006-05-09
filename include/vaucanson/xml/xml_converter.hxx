@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -129,7 +129,7 @@ namespace vcsn
 			 STR2XML(state2str[aut.src_of(e)].c_str()));
       node->setAttribute(STR2XML("dst"),
 			 STR2XML(state2str[aut.dst_of(e)].c_str()));
-      chooser_.create_label(e, aut, node);
+      chooser_.create_label(doc_, e, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().transitions(), e, node);
     }
 
@@ -147,7 +147,7 @@ namespace vcsn
       root->appendChild(node);
       node->setAttribute(STR2XML("state"),
 			 STR2XML(state2str[s].c_str()));
-      chooser_.create_initial_label(s, aut, node);
+      chooser_.create_initial_label(doc_, s, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().initials(), s, node);
     }
 
@@ -165,7 +165,7 @@ namespace vcsn
       root->appendChild(node);
       node->setAttribute(STR2XML("state"),
 			 STR2XML(state2str[s].c_str()));
-      chooser_.create_final_label(s, aut, node);
+      chooser_.create_final_label(doc_, s, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().finals(), s, node);
     }
 

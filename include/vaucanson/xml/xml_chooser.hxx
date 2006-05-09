@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -61,31 +61,46 @@ namespace vcsn
 
     template <class S, class T>
     void
-    xml_chooser_base<S, T>::create_label(htransition_t e,
+    xml_chooser_base<S, T>::create_label(xercesc::DOMDocument* doc,
+					 htransition_t e,
 					 const Element<S, T>& aut,
-					 xercesc::DOMElement* elt)
+					 xercesc::DOMElement* elt,
+					 bool use_label_node)
 
     {
-      tools::add_label(elt, aut, aut.series_of(e));
+      if (use_label_node)
+	tools::add_xml_label(doc, elt, aut, aut.series_of(e));
+      else
+	tools::add_label(elt, aut, aut.series_of(e));
     }
 
 
     template <class S, class T>
     void
-    xml_chooser_base<S, T>::create_initial_label(hstate_t s,
+    xml_chooser_base<S, T>::create_initial_label(xercesc::DOMDocument* doc,
+						 hstate_t s,
 						 const Element<S, T>& aut,
-						 xercesc::DOMElement* elt)
+						 xercesc::DOMElement* elt,
+						 bool use_label_node)
     {
-      tools::add_label(elt, aut, aut.get_initial(s));
+      if (use_label_node)
+	tools::add_xml_label(doc, elt, aut, aut.get_initial(s));
+      else
+	tools::add_label(elt, aut, aut.get_initial(s));
     }
 
     template <class S, class T>
     void
-    xml_chooser_base<S, T>::create_final_label(hstate_t s,
+    xml_chooser_base<S, T>::create_final_label(xercesc::DOMDocument* doc,
+					       hstate_t s,
 					       const Element<S, T>& aut,
-					       xercesc::DOMElement* elt)
+					       xercesc::DOMElement* elt,
+					       bool use_label_node)
     {
-      tools::add_label(elt, aut, aut.get_final(s));
+      if (use_label_node)
+	tools::add_xml_label(doc, elt, aut, aut.get_final(s));
+      else
+	tools::add_label(elt, aut, aut.get_final(s));
     }
 
 

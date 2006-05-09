@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -46,11 +46,9 @@ namespace vcsn
   {
     struct XML
     {
-      XML() : name_("")
+      XML(const std::string& name = "", bool use_label_node = false) :
+	name_(name), use_label_node_(use_label_node)
 	{}
-      XML(const std::string& name) : name_(name)
-	{}
-
       template <typename Saver, typename Conv>
       void operator()(std::ostream& out,
 		      const Saver& s,
@@ -61,6 +59,7 @@ namespace vcsn
 
     protected:
       const std::string name_;
+      bool		use_label_node_;
     };
 
   } // !xml

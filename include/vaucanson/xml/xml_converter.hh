@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -64,7 +64,8 @@ namespace vcsn
     template <class Auto>
     struct xml_converter
     {
-	xml_converter() : impl_(0), doc_(0), root_(0) {};
+	xml_converter(bool use_label_node = false) :
+	  impl_(0), doc_(0), root_(0), use_label_node_(use_label_node) {};
 
 	typedef std::map<hstate_t, std::string>		map_t;
 	typedef typename Auto::set_t			auto_set_t;
@@ -116,6 +117,7 @@ namespace vcsn
 	xercesc::DOMDocument*				doc_;
 	xercesc::DOMElement*				root_;
 	xml_chooser_t					chooser_;
+	bool						use_label_node_;
     };
 
   } // !xml

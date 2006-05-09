@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 # include <vaucanson/algebra/implementation/series/rat/depth_visitor.hh>
 # include <vaucanson/algebra/implementation/series/rat/star_height_visitor.hh>
 # include <vaucanson/algebra/implementation/series/rat/length_visitor.hh>
+# include <vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh>
 
 namespace vcsn {
 
@@ -126,6 +127,17 @@ namespace vcsn {
       accept(v);
       return v.get();
     }
+
+# if (not defined (VCSN_SANITY_CHECK)) or (defined (VCSN_USE_XML))
+    template<typename LetterT, typename WeightT>
+    xercesc::DOMElement* exp<LetterT, WeightT>::xml_tree(
+      xercesc::DOMDocument* doc, char* node_name) const
+    {
+      XmlExpVisitor<monoid_elt_value_t, semiring_elt_value_t> v(doc, node_name);
+      accept(v);
+      return v.get();
+    }
+# endif
 
     template<typename LetterT, typename WeightT>
     typename exp<LetterT, WeightT>::node_t* &

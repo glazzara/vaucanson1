@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ namespace vcsn
 
       typedef typename Saver::automaton_t automaton_t;
 
-      xml_converter<automaton_t> xc;
+      xml_converter<automaton_t> xc(use_label_node_);
       xc.save(s.automaton(), out, name_);
 
       xercesc::XMLPlatformUtils::Terminate();
@@ -56,7 +56,7 @@ namespace vcsn
 
       typedef typename Loader::automaton_t automaton_t;
 
-      xml_converter<automaton_t> xc;
+      xml_converter<automaton_t> xc(use_label_node_);
       xc.load(l.automaton(), in);
 
       xercesc::XMLPlatformUtils::Terminate();

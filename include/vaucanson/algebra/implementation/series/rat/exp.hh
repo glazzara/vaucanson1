@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,6 +16,14 @@
 //
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_EXP_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_EXP_HH
+
+#include <vaucanson/config/system.hh>
+
+# if (not defined (VCSN_SANITY_CHECK)) or (defined (VCSN_USE_XML))
+#  include <xercesc/dom/DOM.hpp>
+#  include <xercesc/util/XMLString.hpp>
+#  include <xercesc/util/PlatformUtils.hpp>
+# endif
 
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 # include <vaucanson/design_pattern/element.hh>
@@ -87,6 +95,11 @@ namespace vcsn {
       /// Compute the length of the expression,
       /// i.e. the number of letters used in the expression.
       size_t length() const;
+
+# if (not defined (VCSN_SANITY_CHECK)) or (defined (VCSN_USE_XML))
+	xercesc::DOMElement* xml_tree(xercesc::DOMDocument* doc,
+				      char* node_name) const;
+# endif
 
       /// Get the root node of the expression.
       //@{
