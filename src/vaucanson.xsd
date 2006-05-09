@@ -5,8 +5,79 @@ xmlns="http://vaucanson.lrde.epita.fr"
 elementFormDefault="qualified">
 
 <!--
-vaucanson.xsd version 0.3.
+vaucanson.xsd version 0.3.1
 -->
+
+<!--
+ The following tags are used for the <expression_label> tag.
+-->
+
+<!--
+ Attribute group used to factorize some code.
+-->
+ <xs:attributeGroup name="expression_attributes">
+   <xs:attribute name="star" type="xs:boolean"/>
+   <xs:attribute name="parenthesis" type="xs:boolean"/>
+   <xs:attribute name="weight" type="xs:decimal"/>
+ </xs:attributeGroup>
+
+<!--
+ Terminal tags of the expression grammar.
+-->
+<xs:complexType name="word">
+   <xs:attribute name="value" type="xs:string" use="required"/>
+   <xs:attributeGroup ref="expression_attributes"/>
+ </xs:complexType>
+
+<xs:complexType name="zero_val">
+   <xs:attribute name="weight" type="xs:decimal"/>
+</xs:complexType>
+
+<xs:complexType name="identity_val">
+   <xs:attribute name="weight" type="xs:decimal"/>
+</xs:complexType>
+
+<!--
+ <sum> tag properties. Used to represent a product in the regular expression.
+ The members of a sum can be any tag out of the <product>, <sum>, <zero>,
+ <identity> and <word> ones.
+ Caution, only these tags should be inserted where the <xs:any> tag stands.
+-->
+<xs:complexType name="sum">
+   <xs:choice>
+    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+   </xs:choice>
+   <xs:attributeGroup ref="expression_attributes"/>
+</xs:complexType>
+
+<!--
+ <product> tag properties. Used to represent a product in the regular expression.
+ The members of a product can be any tag out of the <product>, <sum>, <zero>,
+ <identity> and <word> ones.
+ Caution, only these tags should be inserted where the <xs:any> tag stands.
+-->
+<xs:complexType name="product">
+  <xs:choice>
+   <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+  </xs:choice>
+   <xs:attributeGroup ref="expression_attributes"/>
+</xs:complexType>
+
+<!--
+ <expression_label> tag properties. Used to clearly define the content of a
+label by using <product>, <sum>, <zero>, <identity> and <word> tags.
+-->
+<xs:complexType name="expression_label">
+  <xs:choice>
+    <xs:element name="word" type="word" minOccurs="0"/>
+    <xs:element name="sum" type="sum" minOccurs="0"/>
+    <xs:element name="product" type="product" minOccurs="0"/>
+    <xs:element name="zero" type="zero_val" minOccurs="0"/>
+    <xs:element name="identity" type="identity_val" minOccurs="0"/>
+  </xs:choice>
+   <xs:attributeGroup ref="expression_attributes"/>
+</xs:complexType>
+
 
 <!--
 <geometry> tag properties. Used to set the geometry properties of each
@@ -249,7 +320,7 @@ The monoid type is broken in two parts, for automata and transducers.
 
 
 <!--
-<label_type> tag properties. This tag encapsulates semiring and monoid
+<type> tag properties. This tag encapsulates semiring and monoid
 definitions to entirely define the algebraic structure the automaton /
 transducer is working on. This tag is optionnal if you want to use
 default values. You can specify only one of the monoid / semiring tag,
@@ -335,6 +406,7 @@ labeled with the identity on the monoid.
   <xs:sequence>
     <xs:element name="geometry" type="geometry_trans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
+    <xs:element name="label" type="expression_label" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="src" type="xs:string" use="required"/>
   <xs:attribute name="dst" type="xs:string" use="required"/>
@@ -347,6 +419,8 @@ labeled with the identity on the monoid.
   <xs:sequence>
     <xs:element name="geometry" type="geometry_trans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
+    <xs:element name="in" type="expression_label" minOccurs="0"/>
+    <xs:element name="out" type="expression_label" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="src" type="xs:string" use="required"/>
   <xs:attribute name="dst" type="xs:string" use="required"/>
@@ -407,6 +481,7 @@ and drawing properties.
   <xs:sequence>
     <xs:element name="geometry" type="geometry_trans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
+    <xs:element name="label" type="expression_label" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="state" type="xs:string" use="required"/>
   <xs:attribute name="label" type="xs:string"/>
@@ -433,6 +508,7 @@ and drawing properties.
   <xs:sequence>
     <xs:element name="geometry" type="geometry_trans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
+    <xs:element name="label" type="expression_label" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="state" type="xs:string" use="required"/>
   <xs:attribute name="label" type="xs:string"/>

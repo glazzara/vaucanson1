@@ -263,8 +263,102 @@ namespace vcsn
       { return "product"; }
 
 
+
+# define VCSN_XML_NO_TYPE ""
+# define VCSN_XML_SUM_TYPE "+"
+# define VCSN_XML_PRODUCT_TYPE "."
+
+      template <class T>
+      std::string
+      get_rec_xml_series(xercesc::DOMNode* n, T& aut,
+			 std::string op_type = VCSN_XML_NO_TYPE,
+			 std::string res = "")
+      {
+	xercesc::DOMElement* element_n;
+	std::string next_op_type;
+
+	if (!n)
+	  return res;
+	for (; n; n = n->getNextSibling())
+	  {
+	    if (n->getNodeType() == xercesc::DOMNode::ELEMENT_NODE)
+	      {
+		element_n = (static_cast<const xercesc::DOMElement*>(n));
+
+		if (xml2str(n->getNodeName()) == "sum")
+		  next_op_type = VCSN_XML_SUM_TYPE;
+		if (xml2str(n->getNodeName()) == "product")
+		  next_op_type = VCSN_XML_PRODUCT_TYPE;
+
+		// Add weight (and opening brace if complex expression)
+		if (element_n->hasAttribute(STR2XML("weight")))
+		  res += xml2str(element_n->getAttribute(STR2XML("weight")))
+		    + " ";
+
+		// Add opening prace if attribute or complex starified/weighted
+		// expression or sum in product
+		if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
+		     xml2str(element_n->getAttribute(STR2XML("parenthesis")))
+		     == "true")
+		    || ((((element_n->hasAttribute(STR2XML("star")))
+			  && (xml2str(element_n->getAttribute(STR2XML("star")))
+			      == "true"))
+			 ||(element_n->hasAttribute(STR2XML("weight"))))
+			&& (xml2str(n->getNodeName()) != "word"))
+		    || ((xml2str(n->getNodeName()) == "sum")
+			&& (op_type == VCSN_XML_PRODUCT_TYPE)))
+		  res += "(";
+
+		// Word, zero or identity
+		if (xml2str(n->getNodeName()) == "word")
+		  res += xml2str(element_n->getAttribute(STR2XML("value")));
+		if (xml2str(n->getNodeName()) == "zero")
+		  res += "1";
+		if (xml2str(n->getNodeName()) == "identity")
+		  res += "0";
+
+		// Recursive call
+		if (n->hasChildNodes())
+		  res += get_rec_xml_series(n->getFirstChild(),
+					    aut, next_op_type);
+
+		// Add closing brace if parenthesis attribute
+		if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
+		     xml2str(element_n->getAttribute(STR2XML("parenthesis")))
+		     == "true")
+		    // Or star/weight...
+		    || ((((element_n->hasAttribute(STR2XML("star")))
+			  && (xml2str(element_n->getAttribute(STR2XML("star")))
+			      == "true"))
+			 || (element_n->hasAttribute(STR2XML("weight"))))
+			// ...in a complex expression
+			&& (xml2str(n->getNodeName()) != "word"))
+		    // Or a sum in a product
+		    || ((xml2str(n->getNodeName()) == "sum")
+			&& (op_type == VCSN_XML_PRODUCT_TYPE))
+		    // Or a product in a sum
+		    || ((xml2str(n->getNodeName()) == "product")
+			&& (op_type == VCSN_XML_SUM_TYPE)))
+		  res += ")";
+
+		// Add star
+		if (element_n->hasAttribute(STR2XML("star"))
+		    && (xml2str(element_n->getAttribute(STR2XML("star")))
+			== "true"))
+		  res += "*";
+
+		// Add operator
+		if ((n->getNextSibling())
+		    && (n->getNextSibling()->getNextSibling()))
+		  res += op_type;
+	      }
+	  }
+	return res;
+      }
+
+
       /**
-       * Get series from a XML node.
+       * Get series from a XML label node.
        *
        * @return	series_set_elt_t
        *
@@ -282,13 +376,23 @@ namespace vcsn
 	  rat::exp<typename T::monoid_elt_value_t,
 	  typename T::semiring_elt_value_t> krat_exp_impl_t;
 	typedef Element<typename T::series_set_t, krat_exp_impl_t> krat_exp_t;
-
+	std::string str_res;
 	krat_exp_t res (aut.structure().series());
-	if (xml2str(node->getAttribute(STR2XML("label"))) == "")
-	  return
-	    vcsn::algebra::identity_as<typename T::series_set_elt_t::value_t>
-	    ::of(aut.structure().series());
-	parse(xml2str(node->getAttribute(STR2XML("label"))), res);
+	xercesc::DOMNode* n = node->getFirstChild();
+	if (n && n->getNextSibling()
+	    && (xml2str(n->getNextSibling()->getNodeName()) == "label"))
+	  str_res = get_rec_xml_series(n, aut);
+	if (str_res == "")
+	  {
+	    if (xml2str(node->getAttribute(STR2XML("label"))) == "")
+	      return
+		vcsn::algebra::identity_as<typename T::series_set_elt_t::value_t>
+		::of(aut.structure().series());
+	    else
+	      parse(xml2str(node->getAttribute(STR2XML("label"))), res);
+	  }
+	else
+	  parse(str_res, res);
 
 	return res;
       }
@@ -393,36 +497,57 @@ namespace vcsn
 	automaton_t bout = make_automaton(alphabet2);
 	rat_exp_t i_exp(bin.structure().series());
 	rat_exp_t o_exp(bout.structure().series());
+	std::string in, out;
 
 	std::pair<bool, std::string> i_res;
 	std::pair<bool, std::string> o_res;
 
-	if (node->hasAttribute(STR2XML("label")))
-	{
-	  std::string label = xml2str(node->getAttribute(STR2XML("label")));
-	  std::string in, out;
-	  unsigned int pos = label.find("|");
-	  if (pos != std::string::npos)
+	xercesc::DOMNode* n = node->getFirstChild();
+
+	if (n)
+	  for (; n; n = n->getNextSibling())
 	  {
-	    in = label.substr(0, pos);
-	    out = label.substr(pos + 1);
-	    i_res = parse(in, i_exp);
-	    o_res = parse(out, o_exp);
+ 	    if (xml2str(n->getNodeName()) == "in" && n->getFirstChild())
+	    {
+	      in = get_rec_xml_series(n->getFirstChild(), a);
+	      i_res = parse(in, i_exp);
+	    }
+ 	    if (xml2str(n->getNodeName()) == "out" && n->getFirstChild())
+	    {
+	      out = get_rec_xml_series(n->getFirstChild(), a);
+	      o_res = parse(out, o_exp);
+	    }
 	  }
-	  else
-	    i_res = parse(label, i_exp);
-	  if (node->hasAttribute(STR2XML("weight")))
-	    o_res = parse(xml2str(node->getAttribute(STR2XML("weight"))),
-			  o_exp);
-	}
+	// No expression tag
 	else
 	{
-	  if (node->hasAttribute(STR2XML("in")))
-	    i_res = parse(xml2str(node->getAttribute(STR2XML("in"))),
-			  i_exp);
-	  if (node->hasAttribute(STR2XML("out")))
-	    o_res = parse(xml2str(node->getAttribute(STR2XML("out"))),
-			  o_exp);
+	  if (node->hasAttribute(STR2XML("label")))
+	  {
+	    std::string label = xml2str(node->getAttribute(STR2XML("label")));
+	    unsigned int pos = label.find("|");
+	    if (pos != std::string::npos)
+	    {
+	      in = label.substr(0, pos);
+	      out = label.substr(pos + 1);
+	      i_res = parse(in, i_exp);
+	      o_res = parse(out, o_exp);
+	    }
+	    else
+	      i_res = parse(label, i_exp);
+	    if (node->hasAttribute(STR2XML("weight")))
+	      o_res = parse(xml2str(node->getAttribute(STR2XML("weight"))),
+			    o_exp);
+	  }
+	  // No expression tag, no label attribute.
+	  else
+	  {
+	    if (node->hasAttribute(STR2XML("in")))
+	      i_res = parse(xml2str(node->getAttribute(STR2XML("in"))),
+			    i_exp);
+	    if (node->hasAttribute(STR2XML("out")))
+	      o_res = parse(xml2str(node->getAttribute(STR2XML("out"))),
+			    o_exp);
+	  }
 	}
 	assoc_exp(a, i_exp, o_exp, res, i_res.first, o_res.first);
       }

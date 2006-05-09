@@ -1,3 +1,11 @@
+2006-05-09  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	Add an xml format for a label node, part I.
+
+	* src/vaucanson.xml: Add content for a label node.
+	* include/vaucanson/xml/tools.hxx: Change the parsing of the XML input
+	so as to read correctly a label written as a node.
+
 2006-05-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Precise where the XSD must
