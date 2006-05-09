@@ -1,3 +1,10 @@
+2006-05-09  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Change dump funtion to dot-dump in TAF-Kit.
+
+	* src/taf-kit/b_commands.cc,
+	* src/taf-kit/common_commands.hh: Change dump to dot-dump.
+
 2006-05-09  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	Add an xml format for a label node, part I.

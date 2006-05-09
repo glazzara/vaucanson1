@@ -176,7 +176,7 @@ DEFINE_COMMAND (NAME (display)
 		OUTPUT ("")
 		RETURNVALUE ((b ? 0 : 1)));
 
-DEFINE_COMMAND (NAME (dump)
+DEFINE_COMMAND (NAME (dot_dump)
 		CODE (
 		  vcsn::tools::dot_dump (std::cout,
 					 get_aut(args.args[1]),
