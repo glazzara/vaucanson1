@@ -1,3 +1,7 @@
+2006-05-11  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hh: Comment fix.
+
 2006-05-09  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	Add an xml format for a label node, part II.

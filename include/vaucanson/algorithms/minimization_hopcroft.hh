@@ -51,9 +51,10 @@ namespace vcsn {
   minimization_hopcroft(const Element<A, T>& a);
 
   /**
-   * Return the quotient of a non deterministic acceptor.
+   * Return the quotient of a non-deterministic acceptor.
+   * This algorithms works with both Boolean and weighted automata.
    *
-   * @param a The Boolean automaton to minimize.
+   * @param a The automaton to minimize.
    *
    * @return A fresh automaton that is the quotient of 'a'.
    */
