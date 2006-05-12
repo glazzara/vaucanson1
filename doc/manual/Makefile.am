@@ -1,4 +1,5 @@
 SRC_FILES = users_manual.tex vaucanson_toolkit.tex installation.tex
+EXTRA_DIST = $(SRC_FILES)
 
 users_manual.pdf: $(SRC_FILES)
 	env TEXINPUTS=$(top_srcdir)/doc:$$TEXINPUTS 		\
