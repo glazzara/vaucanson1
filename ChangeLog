@@ -1,5 +1,17 @@
 2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Remove Stroppa's bench and distribute other ones.
+	Benchs weren't distributed because copyright's owning of Nicolas
+	Stroppa in one test. This one is removed.
+
+	* src/benchs/minimization_stroppa: Remove.
+	* src/benchs/Makefile.am,
+	* src/benchs/generate_all_benchs.sh,
+	* configure.ac: Update accordingly.
+	* Makefile.am: Remove hacks.
+
+2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* doc/xml/Makefile.am,
 	* doc/manual/Makefile.am: Add PDF sources in EXTRA_DIST.
 

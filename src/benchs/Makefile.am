@@ -1,4 +1,4 @@
-SUBDIRS = common determinization minimization_stroppa		\
+SUBDIRS = common determinization 				\
 	  minimization_debruijn	minimization_2n derived_terms	\
 	  quotient composition
 

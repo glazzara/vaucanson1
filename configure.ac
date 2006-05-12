@@ -191,7 +191,6 @@ AC_CONFIG_FILES([
 	src/benchs/common/Makefile
 	src/benchs/determinization/Makefile
 	src/benchs/minimization_debruijn/Makefile
-	src/benchs/minimization_stroppa/Makefile
 	src/benchs/minimization_2n/Makefile
 	src/benchs/quotient/Makefile
 	src/benchs/composition/Makefile

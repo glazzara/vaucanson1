@@ -26,20 +26,6 @@ bench:
 	cd $(srcdir)/src/benchs && make bench
 
 dist-hook:
-	touch $(distdir)/aclocal.m4 $(distdir)/config.hin $(distdir)/src/benchs
-	rm -fR $(distdir)/src/benchs
-	for f in configure.ac Makefile.am Makefile.in 		\
-		 src/Makefile.am src/Makefile.in; do		\
-	  true;							\
-	  grep -v bench $(srcdir)/$$f > $(distdir)/$$f;		\
-	done
-	sed 's, src/bench[^ ]*, ,g' $(srcdir)/configure |	\
-	    grep -v bench > $(distdir)/configure
-	touch $(distdir)/src/demos/automaton_library/a1.xml	\
-	$(distdir)/src/demos/automaton_library/b1.xml		\
-	$(distdir)/src/demos/automaton_library/c1.xml		\
-	$(distdir)/src/demos/transducers/u1.xml			\
-	$(distdir)/src/demos/transducers/t1.xml
 	cp $(srcdir)/doc/README.txt $(distdir)/README
 	cp $(srcdir)/doc/NEWS.txt $(distdir)/NEWS
 
