@@ -4,7 +4,7 @@
 # $Id$
 
 SUBDIRS = include doc src debian
-EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2
+EXTRA_DIST = svn-revision vaucanson.spec ChangeLog.1 ChangeLog.2
 
 ###
 ### Autoconf needs additional macros.
@@ -62,3 +62,7 @@ deb:
 rehead:
 	$(find_headers) | \
 	  xargs perl $(srcdir)/reheader.pl
+
+# For pre-release numbering.
+svn-revision:
+	echo $(SVN_REVISION) > svn-revision
