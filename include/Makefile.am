@@ -169,6 +169,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algebra/implementation/series/rat/random_visitor.hxx	   \
 	vaucanson/algebra/implementation/series/rat/reverse_visitor.hh	   \
 	vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx	   \
+	vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh	   \
+	vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx	   \
 	vaucanson/algebra/implementation/series/generalized.hh		   \
 	vaucanson/algebra/implementation/series/generalized.hxx		   \
 	vaucanson/algebra/implementation/series/krat.hh			   \

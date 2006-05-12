@@ -1,5 +1,10 @@
 2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/Makefile.am: Add `xml_exp_visitor.{hh,hxx}' to distributed
+	files.
+
+2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Bump to 0.8pre and add (back) a pre-release numbering system.
 
 	* configure.ac: Bump to 0.8, pre-release.
