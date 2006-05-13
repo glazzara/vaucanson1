@@ -127,12 +127,15 @@ If  you want  to use  the XML  I/O system,  you will  need  the Apache
 Using Vaucanson
 ===============
 
-We are sorry but we do not provide a documentation of Vaucanson.
+We are sorry but we do not provide a documentation of the Vaucanson
+library.
 
 However Vaucanson comes with several  demos. Looking at them is a good
 way to see what Vaucanson can do and how it works.  Those demos can be
 found in the ``src/demos`` directory.
 
+The TAF-Kit (Typed Automata Functions) documentation can be found
+as the first chapter of the User's Manual (see ``doc/manual``).
 
 See Also
 ========
@@ -197,3 +200,7 @@ mail addresses follow.
   | Paristalie, batiment X, aile Mistral
   | F-94270 Le Kremlin Bicêtre cedex
   | France
+
+.. Local Variables:
+.. mode: rst
+.. End:

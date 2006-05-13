@@ -382,4 +382,6 @@ If available, this convenience utility is defined in ``tools/XXX_load.hh``.
 As of today (2006-03-17) the FSM format is only available using the
 fsm_load() and fsm_dump() interface. 
 
-
+.. Local Variables:
+.. mode: rst
+.. End:

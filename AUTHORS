@@ -4,18 +4,15 @@
 Permanent staff
 ===============
 
-* Jacques Sakarovitch                   sakarovitch@enst.fr
+* Jacques Sakarovitch			sakarovitch@enst.fr
   - Project manager,
   - Theoritical mentor.
 
-* Sylvain Lombardy                      lombardy@liafa.jussieu.fr
+* Sylvain Lombardy			lombardy@liafa.jussieu.fr
   - Project manager,
   - Implementation of crucial algorithms.
 
-* Akim Demaille                         akim.demaille@lrde.epita.fr
-  - Project manager.
-
-* Sylvain Peyronnet			sylvain.peyronnet@lrde.epita.fr
+* Akim Demaille				akim.demaille@lrde.epita.fr
   - Project manager.
 
 
@@ -23,11 +20,11 @@ Permanent staff
 Year 2003 students
 ==================
 
-* Yann Regis-Gianas                     yann.regis-gianas@lrde.epita.fr
+* Yann Regis-Gianas			yann.regis-gianas@lrde.epita.fr
   - Initial code and releases up to 0.4,
   - Everything else.
 
-* Raphael Poss                          raphael.poss@lrde.epita.fr
+* Raphael Poss				raphael.poss@lrde.epita.fr
   - Initial code and releases up to 0.4,
   - Lots of code rewriting and optimization,
   - Vaucanswig,
@@ -38,7 +35,7 @@ Year 2003 students
 Year 2005 students
 ==================
 
-* Thomas Claveirole                     thomas.claveirole@lrde.epita.fr
+* Thomas Claveirole			thomas.claveirole@lrde.epita.fr
   - Lots of code maintenance,
   - Release manager for Vaucanson 0.5, 0.6 and 0.6.1,
   - New rational expression parser,
@@ -48,7 +45,7 @@ Year 2005 students
   - Algorithms writing,
   - Lots of cleaning and bug fixes.
 
-* Loic Fosse                            loic.fosse@lrde.epita.fr
+* Loic Fosse				loic.fosse@lrde.epita.fr
   - Code maintenance,
   - New automata construction,
   - Rational expression expander,
@@ -64,13 +61,13 @@ Year 2005 students
 Year 2006 students
 ==================
 
-* Sarah O'Connor                        sarah.o-connor@lrde.epita.fr
+* Sarah O'Connor			sarah.o-connor@lrde.epita.fr
   - Improvement of transducers on Rat(B*),
   - Implementation of free monoid product transducers,
   - Algorithms dedicated to transducers,
   - Demo for transducers.
 
-* Louis-Noel Pouchet                    louis-noel.pouchet@lrde.epita.fr
+* Louis-Noel Pouchet			louis-noel.pouchet@lrde.epita.fr
   - Release manager for Vaucanson 0.7, 0.7.1 and 0.7.2,
   - New XML I/O system including new XSD grammar,
   - Code maintenance,
@@ -82,26 +79,40 @@ Year 2006 students
 Year 2007 students
 ==================
 
-* Robert Bigaignon                      robert.bigaignon@lrde.epita.fr
+* Robert Bigaignon			robert.bigaignon@lrde.epita.fr
+  - Coordinator of the brainstorms on Vaucanson v2.0,
+  - Documentation effort,
   - Misc algorithms in [fmp]-transducers,
   - Heuristic implementations for state elimination algorithm,
   - Bug fixes.
 
-* Michael Cadilhac                      michael.cadilhac@lrde.epita.fr
+* Michael Cadilhac			michael.cadilhac@lrde.epita.fr
+  - Release manager for Vaucanson 0.8,
+  - TAF-Kit,
+  - Renaming campaign,
   - Graph re-implementation,
-  - Help in packaging,
   - Bench suite,
   - Misc algorithms fixes and rewriting.
 
-* Florent Terrones                      florent.terrones@lrde.epita.fr
-  - Broken Derived terms algorithm,
+* Florent Terrones			florent.terrones@lrde.epita.fr
+  - Coordinator on XML work,
   - New XML I/O system,
+  - XML extension for label as XML tree,
+  - XML proposal rewriting,
+  - Broken Derived terms algorithm,
   - Bug fixes.
+
 
 ==================
 Year 2008 students
 ==================
 
-* Matthieu Varin                      matthieu.varin@lrde.epita.fr
-  - New implementation of closure
+* Matthieu Varin			matthieu.varin@lrde.epita.fr
+  - New implementation of closure,
   - Bug fixes.
+
+* Guillaume Lazzara			guillaume.lazzara@lrde.epita.fr
+  - Performances in Vaucanson.
+
+* Guillaume Leroi			guillaume.leroi@lrde.epita.fr
+  - Transducer synchronization.

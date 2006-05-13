@@ -1,3 +1,16 @@
+2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Prepare the release.
+
+	* AUTHORS: Add 2008 students. Move Sylvain Peyronnet ...
+	* THANKS: ... Here. Thanks Sylvain.
+
+	* doc/NEWS.txt: Update for Vaucanson 0.8.
+	* doc/README.txt: Mention the documentation for the TAF-Kit.
+
+	* doc/README-IO.txt,
+	* doc/FAQ.txt: Add Emacs Local Variables.
+
 2006-05-13  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* src/vaucanson.xsd: Add `label' nodes to allow one to write labels like

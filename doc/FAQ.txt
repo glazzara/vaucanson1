@@ -47,3 +47,6 @@ above. This is a known misfeature, that cannot be corrected without
 making the code bigger and slower. Since a very readable, simple
 workaround exists, use it instead.
  
+.. Local Variables:
+.. mode: rst
+.. End:
