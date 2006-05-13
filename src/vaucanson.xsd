@@ -320,7 +320,7 @@ The monoid type is broken in two parts, for automata and transducers.
 
 
 <!--
-<type> tag properties. This tag encapsulates semiring and monoid
+<label_type> tag properties. This tag encapsulates semiring and monoid
 definitions to entirely define the algebraic structure the automaton /
 transducer is working on. This tag is optionnal if you want to use
 default values. You can specify only one of the monoid / semiring tag,

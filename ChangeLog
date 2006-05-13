@@ -1,5 +1,9 @@
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/vaucanson.xsd: s/type/label_type/.
+
+2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* doc/Makefile.am: Don't force the user to recompile the reference
 	documentation.
 
