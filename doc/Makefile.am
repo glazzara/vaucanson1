@@ -1,3 +1,5 @@
+# VCSN_USE_XML is tested in the `xml' subdirectory.
+
 SUBDIRS = makefiles manual xml
 include $(srcdir)/Makefile.doc
 
@@ -6,10 +8,11 @@ dist_doc_DATA = ref.tar.gz
 ref: doc.doxy.in
 	rm -rf ref
 	mkdir -p ref
-	$(MAKE) doc.doxy
+	$(MAKE) $(AM_MAKEFLAGS) doc.doxy
 	$(DOXYGEN) doc.doxy
 
-ref.tar.gz: ref
+ref.tar.gz: doc.doxy.in
+	$(MAKE) $(AM_MAKEFLAGS) ref
 	$(TAR) -czf $@ `test -d ref || echo '$(srcdir)/'`ref
 
 MAINTAINERCLEANFILES = ref

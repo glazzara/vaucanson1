@@ -1,5 +1,10 @@
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* doc/Makefile.am: Don't force the user to recompile the reference
+	documentation.
+
+2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Enhance SVN revision detection.
 
 	* config/vcsn.m4: Check for the SVN revision in the ChangeLog.
