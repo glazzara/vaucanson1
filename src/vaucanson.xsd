@@ -373,6 +373,7 @@ properties can be set with the <drawing> tag.
   <xs:sequence>
     <xs:element name="geometry" type="geometry_state" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
+    <xs:element name="label" type="expression_label" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="name" type="xs:string" use="required"/>
   <xs:attribute name="label" type="xs:string"/>
@@ -421,6 +422,7 @@ labeled with the identity on the monoid.
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="in" type="expression_label" minOccurs="0"/>
     <xs:element name="out" type="expression_label" minOccurs="0"/>
+    <xs:element name="label" type="expression_label" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="src" type="xs:string" use="required"/>
   <xs:attribute name="dst" type="xs:string" use="required"/>
@@ -492,6 +494,9 @@ and drawing properties.
   <xs:sequence>
     <xs:element name="geometry" type="geometry_trans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
+    <xs:element name="in" type="expression_label" minOccurs="0"/>
+    <xs:element name="out" type="expression_label" minOccurs="0"/>
+    <xs:element name="label" type="expression_label" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="state" type="xs:string" use="required"/>
   <xs:attribute name="label" type="xs:string"/>
@@ -519,6 +524,9 @@ and drawing properties.
   <xs:sequence>
     <xs:element name="geometry" type="geometry_trans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
+    <xs:element name="in" type="expression_label" minOccurs="0"/>
+    <xs:element name="out" type="expression_label" minOccurs="0"/>
+    <xs:element name="label" type="expression_label" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="state" type="xs:string" use="required"/>
   <xs:attribute name="label" type="xs:string"/>

@@ -1,3 +1,10 @@
+2006-05-13  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* src/vaucanson.xsd: Add `label' nodes to allow one to write labels like
+	`(a,b)+(b,a)' on FMP.
+	Add forgotten `in' and `out' label nodes in `initial_transducer' and
+	`final_transducer' nodes.
+	
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Don't consider - or _ in command name of TAF-Kit.
