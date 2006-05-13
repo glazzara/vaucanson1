@@ -527,17 +527,13 @@ AC_DEFUN([AC_CHECK_SWIG13],
 AC_DEFUN([DETECT_SVN_REVISION],
 [
   AC_MSG_CHECKING([for the SVN revision of the source tree])
-  if test -e ".svn"; then
-     [SVN_REVISION=$(svn info | sed -n '/^Rev/s/[^0-9]//gp')]
-     AC_MSG_RESULT($SVN_REVISION)
+  # Use the `Rev:' line of the ChangeLog.
+  if test -e "${srcdir}/ChangeLog"; then
+    SVN_REVISION=$(sed -n '/^\$Rev:/s/[^0-9]//gp' "${srcdir}/ChangeLog")
+    AC_MSG_RESULT($SVN_REVISION)
   else
-    if test -e "${srcdir}/svn-revision"; then
-      SVN_REVISION="`cat ${srcdir}/svn-revision`"
-      AC_MSG_RESULT($SVN_REVISION)
-    else
-      SVN_REVISION="0"
-      AC_MSG_RESULT([not available, defaulting to 0])
-    fi
+    SVN_REVISION="0"
+    AC_MSG_RESULT([not available, defaulting to 0])
   fi
   AC_SUBST([SVN_REVISION])
 ])

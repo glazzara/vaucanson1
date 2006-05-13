@@ -1,3 +1,12 @@
+2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Enhance SVN revision detection.
+
+	* config/vcsn.m4: Check for the SVN revision in the ChangeLog.
+	* Makefile.am: Don't create a `svn-revision' file, the information
+	would be duplicated with ChangeLog `Rev' entry.
+	* ChangeLog: Last line contains SVN related informations.
+
 2006-05-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/Makefile.am: Add `xml_exp_visitor.{hh,hxx}' to distributed
@@ -870,3 +879,7 @@
 	Fix bug with `removed_edges_' search.
 
 See ChangeLog.2 for earlier changes.
+
+$Rev$
+$Id$
+$Date$
