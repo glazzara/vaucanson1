@@ -2,12 +2,12 @@
 #
 # $Id: Makefile.am 1005 2005-06-23 17:17:36Z o-conn_s $
 
-if VCSN_USE_XML
+# Don't check VCSN_USE_XML, as programs aren't automatically compiled.
 
 AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
 
-noinst_PROGRAMS = fibonacci_demo fibonacci_rt fibonacci_tdc ORR_demo ORR_rt \
+EXTRA_PROGRAMS = fibonacci_demo fibonacci_rt fibonacci_tdc ORR_demo ORR_rt \
 	ORR_tdc
 
 fibonacci_demo_SOURCES = fibonacci_demo.cc
@@ -21,5 +21,3 @@ ORR_demo_SOURCES = ORR_demo.cc
 ORR_rt_SOURCES = ORR_rt_gen.cc
 
 ORR_tdc_SOURCES = ORR_tdc_gen.cc
-
-endif

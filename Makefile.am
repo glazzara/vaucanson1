@@ -20,10 +20,17 @@ m4datadir = $(datadir)/aclocal
 dist_m4data_DATA = config/vcsn.m4 config/vcsn_xml.m4
 
 ###
-### For benchs.
+### Making the demos. (. is builddir)
 ###
-bench:
-	cd $(srcdir)/src/benchs && make bench
+
+demos:
+	cd src/demos && $(MAKE) $(AM_MAKEFLAGS) demos
+
+###
+### For benchs. (. is builddir)
+###
+benchs:
+	cd src/benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
 
 dist-hook:
 	cp $(srcdir)/doc/README.txt $(distdir)/README

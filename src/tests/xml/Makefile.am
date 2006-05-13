@@ -39,14 +39,7 @@ geometry_tester_SOURCES = xml_geometry_tester.cc
 
 label_node_tester_SOURCES = xml_label_node_tester.cc
 
-if XML_CHECK
-check_SCRIPTS = 				\
-	tester.sh
-
-TESTS = $(check_SCRIPTS)
-
-check_PROGRAMS = 				\
-	b_tester				\
+Progs =	b_tester				\
 	r_tester				\
 	z_tester				\
 	z_max_plus_tester			\
@@ -56,6 +49,16 @@ check_PROGRAMS = 				\
 	session_tester				\
 	geometry_tester				\
 	label_node_tester
+
+check_SCRIPTS = 				\
+	tester.sh
+
+if XML_CHECK
+  TESTS = $(check_SCRIPTS)
+  check_PROGRAMS = $(Progs)
+else
+  EXTRA_PROGRAMS = $(Progs)
+endif
 
 CLEANFILES = 					\
 	b_result.tmp				\
@@ -79,15 +82,7 @@ CLEANFILES = 					\
 	label_node_result.tmp			\
 	label_node_result.dot.tmp
 
-endif
-
-
 EXTRA_DIST =					\
-	xml_automaton_tester.cc			\
-	xml_fmp_tester.cc			\
-	xml_trans_tester.cc			\
-	xml_session_tester.cc			\
-	tester.sh				\
 	b_ref.xml				\
 	z_ref.xml				\
 	r_ref.xml				\

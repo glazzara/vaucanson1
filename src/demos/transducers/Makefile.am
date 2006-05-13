@@ -6,17 +6,23 @@ SUBDIRS = one_rule_rewriting
 
 AM_CPPFLAGS = -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
 
-if XML_CHECK
-  AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
-  AM_CPPFLAGS += -I$(top_srcdir)/include -I$(top_builddir)/include
+AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
+AM_CPPFLAGS += -I$(top_srcdir)/include -I$(top_builddir)/include
 
-  EXTRA_PROGRAMS = u1 t1
-  XML_SAMPLES = $(srcdir)/u1.xml $(srcdir)/t1.xml
-  EXTRA_DIST = $(XML_SAMPLES)
-  MAINTAINERCLEANFILES = $(XML_SAMPLES)
+EXTRA_PROGRAMS = u1 t1
 
-  u1_SOURCES = u1.cc
-  t1_SOURCES = t1.cc
+if VCSN_USE_XML
+demos: $(EXTRA_PROGRAMS)
+else
+demos:
+endif
+
+XML_SAMPLES = $(srcdir)/u1.xml $(srcdir)/t1.xml
+EXTRA_DIST = $(XML_SAMPLES)
+MAINTAINERCLEANFILES = $(XML_SAMPLES)
+
+u1_SOURCES = u1.cc
+t1_SOURCES = t1.cc
 
 $(srcdir)/u1.xml: u1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) u1$(EXEEXT)
@@ -25,5 +31,3 @@ $(srcdir)/u1.xml: u1.cc $(top_srcdir)/configure.ac
 $(srcdir)/t1.xml: t1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) t1$(EXEEXT)
 	./t1$(EXEEXT) > $@
-
-endif

@@ -529,7 +529,7 @@ AC_DEFUN([DETECT_SVN_REVISION],
   AC_MSG_CHECKING([for the SVN revision of the source tree])
   # Use the `Rev:' line of the ChangeLog.
   if test -e "${srcdir}/ChangeLog"; then
-    SVN_REVISION=$(sed -n '/^\$Rev:/s/[^0-9]//gp' "${srcdir}/ChangeLog")
+    [SVN_REVISION=$(sed -n '/^\$Rev:/s/[^0-9]//gp' "${srcdir}/ChangeLog")]
     AC_MSG_RESULT($SVN_REVISION)
   else
     SVN_REVISION="0"

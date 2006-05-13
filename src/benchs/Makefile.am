@@ -6,7 +6,7 @@ BENCHDIRS = determinization minimization_debruijn 		\
 	    derived_terms minimization_2n quotient		\
 	    composition 
 
-bench:
+benchs:
 	for f in $(BENCHDIRS); do				\
-	  (cd $$f && make bench)				\
+	  (cd $$f && $(MAKE) $(AM_MAKEFLAGS) benchs || exit 1)	\
 	done

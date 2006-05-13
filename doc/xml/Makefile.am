@@ -1,4 +1,4 @@
-if VCSN_USE_XML
+# This document should be compiled even if VCSN_USE_XML is not set.
 
 EXTRA_DIST = xml_proposal.tex
 
@@ -13,5 +13,3 @@ CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp *.log
 MAINTAINERCLEANFILES = $(dist_doc_DATA)
 
 dist_doc_DATA = xml_proposal.pdf
-
-endif

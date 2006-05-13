@@ -1,5 +1,51 @@
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Rework distribution (autotools'ing and directory location).
+
+	* src/demos/vaucanswig: Move to...
+	* src/vaucanswig: ... Here.
+	* bootstrap.sh: Update accordingly.
+
+	* src/demos/function_library/Makefile.am,
+	* src/demos/algorithms/Makefile.am,
+	* src/demos/automaton_library,
+	* src/demos/automaton_library/a1.xml,
+	* src/demos/automaton_library/b1.xml,
+	* src/demos/automaton_library/c1.xml,
+	* src/demos/automaton_library/Makefile.am,
+	* src/demos/utilities/vgrep/Makefile.am,
+	* src/demos/utilities/Makefile.am,
+	* src/demos/transducers,
+	* src/demos/transducers/one_rule_rewriting/Makefile.am,
+	* src/demos/transducers/Makefile.am,
+	* src/tests/Makefile.am,
+	* src/tests/sanity/generate_files.sh,
+	* src/tests/xml/Makefile.am,
+	* include/Makefile.am: Fix the use of VCSN_USE_XML and XML_CHECK.
+
+	* Makefile.am: Add a `demos' rule, rename `bench' to `benchs'.
+
+	* src/demos/Makefile.am: Update accordingly.
+
+	* config/vcsn.m4: Fix revision checking.
+
+	* src/benchs/composition/Makefile.bench,
+	* src/benchs/generate_benchs.sh,
+	* src/benchs/determinization/Makefile.bench,
+	* src/benchs/minimization_2n/Makefile.bench,
+	* src/benchs/quotient/Makefile.bench,
+	* src/benchs/Makefile.am,
+	* src/benchs/minimization_debruijn/Makefile.bench,
+	* src/benchs/derived_terms/Makefile.bench: Compile on make bench only.
+
+	* src/vaucanswig/expand.sh: Fix the path to INCLUDE directory.
+	* src/Makefile.am: Add  `demos' and `benchs' rules.
+	* configure.ac: Remove build-demo enabling and update Vaucanswig dir.
+	* doc/xml/Makefile.am: Compile the xml proposal even if
+	VCSN_USE_XML is not set.
+
+2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/vaucanson.xsd: s/type/label_type/.
 
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>

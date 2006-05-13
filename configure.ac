@@ -51,7 +51,7 @@ BE WARNED: the  compilation of Vaucanswig may take  several hours on a
 modern computer.
 
 Instructions about Vaucanswig are provided in
-src/demos/vaucanswig/README.
+src/vaucanswig/README.
 **********************************************************************
 EOF
 sleep 5])
@@ -62,25 +62,14 @@ if test "x$WANT_INTERPRETER" != "xno"; then
   if test "x$ac_cv_recent_swig" != "xyes"; then
     AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
   else
-    AC_CONFIG_FILES([src/demos/vaucanswig/Makefile
- 	             src/demos/vaucanswig/doc/Makefile
- 	             src/demos/vaucanswig/meta/Makefile
-                     src/demos/vaucanswig/src/Makefile
-                     src/demos/vaucanswig/python/Makefile])
+    AC_CONFIG_FILES([src/vaucanswig/Makefile
+ 	             src/vaucanswig/doc/Makefile
+ 	             src/vaucanswig/meta/Makefile
+                     src/vaucanswig/src/Makefile
+                     src/vaucanswig/python/Makefile])
     VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
   fi
 fi
-
-# Whether to compile samples or not.
-# (speed up compilation)
-AC_ARG_ENABLE(
-       [build-demo],
-        [AC_HELP_STRING([--disable-build-demo],
-                       [disable compilation of demos subdirectory])],
-       [build_demo=],
-       [build_demo=true]
-)
-AM_CONDITIONAL([BUILD_DEMO], test $build_demo)
 
 # Libtool used
 AC_DISABLE_STATIC

@@ -5,11 +5,18 @@
 
 SUBDIRS = tests	\
 	  benchs \
-	  demos
+	  demos \
+	  $(VCSN_VAUCANSWIG_SUBDIR) \
+	  taf-kit
 
-if VCSN_TAF_KIT
-  SUBDIRS += taf-kit
-endif
+.PHONY: demos benchs
+
+demos:
+	cd demos && $(MAKE) $(AM_MAKEFLAGS) demos
+	
+benchs:
+	cd benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
+        
 
 # The XSD file will be installed in a data directory.
 dist_pkgdata_DATA = vaucanson.xsd

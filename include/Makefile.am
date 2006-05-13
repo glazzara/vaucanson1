@@ -370,9 +370,10 @@ nobase_include_HEADERS =						   \
 	vaucanson/r_automaton.hh					   \
 	vaucanson/standard_algorithms.hh
 
-if VCSN_USE_XML
-  nobase_include_HEADERS += $(XMLSOURCES)
-endif
+# XMLSOURCES can be included even if VCSN_USE_XML is not set.
+
+nobase_include_HEADERS += $(XMLSOURCES)
+
 
 XMLSOURCES =						\
 	vaucanson/xml/error_handler.hh			\

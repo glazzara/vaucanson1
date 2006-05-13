@@ -4,11 +4,10 @@
 
 AM_CPPFLAGS = -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
 
-if XML_CHECK
-  AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
-  AM_CPPFLAGS += -I$(top_srcdir)/include -I$(top_builddir)/include
+AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
+AM_CPPFLAGS += -I$(top_srcdir)/include -I$(top_builddir)/include
 
-  noinst_PROGRAMS =				\
+EXTRA_PROGRAMS = 				\
 	b					\
 	z					\
 	r					\
@@ -16,6 +15,11 @@ if XML_CHECK
 	z_min_plus				\
 	tdc					\
 	rt_tdc
+
+if VCSN_USE_XML
+demos: $(EXTRA_PROGRAMS)
+else
+demos:
 endif
 
 b_SOURCES = algorithms.cc
