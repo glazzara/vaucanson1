@@ -403,7 +403,7 @@ namespace vcsn
 	  {
 	    if (n->getNodeType() == xercesc::DOMNode::ELEMENT_NODE)
 	      {
-		element_n = (static_cast<const xercesc::DOMElement*>(n));
+		element_n = (static_cast<xercesc::DOMElement*>(n));
 
 		if (xml2str(n->getNodeName()) == "sum")
 		  next_op_type = VCSN_XML_SUM_TYPE;

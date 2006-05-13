@@ -1,5 +1,11 @@
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/xml/node.hxx: Put a space in template use to avoid
+	macro expansion that leads to `>>'.
+	* include/vaucanson/xml/tools.hxx: Don't `static_cast' in `const'.
+
+2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Prepare the release.
 
 	* AUTHORS: Add 2008 students. Move Sylvain Peyronnet ...

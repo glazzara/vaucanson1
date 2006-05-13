@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -88,10 +88,10 @@ namespace vcsn
 
 # define PROCESS_TYPE_NODE(TempParam, AutType)				\
     TempParam								\
-    void label_typeNode<AutType>::process(xercesc::DOMElement* node,	\
-					  AutType& aut,			\
-					  typename Node<AutType>::map_t& m, \
-					  typename Node<AutType>::factory_t& f)	\
+    void label_typeNode<AutType >::process(xercesc::DOMElement* node,	\
+					   AutType& aut,		\
+					   typename Node<AutType >::map_t& m, \
+					   typename Node<AutType >::factory_t& f) \
     {									\
       using namespace xercesc;						\
       bool monoid_done = false, semiring_done = false;			\
