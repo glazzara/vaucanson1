@@ -118,7 +118,7 @@ static const command_t command_map[] =
     COMMAND_ENTRY_CN (derived-term, derived_term_automaton, Exp,
 		      "Use derivative to compute the automaton of `exp'."),
     COMMAND_ENTRY_CN (exp-to-aut, standard_of, Exp,
-		      "Alias of `stardard_of'."),
+		      "Alias of `stardard-of'."),
     COMMAND_ENTRY (expand, Exp, "Expand `exp'."),
     COMMAND_ENTRY_CN (standard, standard_of, Exp,
 		      "Give the standard automaton of `exp'."),
@@ -145,6 +145,25 @@ void list_commands ()
       echo (" * " << command->docstring);
 }
 
+/// Tell if two strings are equal, modulo dashes and underscores.
+bool equal_without_dashes (const char* s, const char* t)
+{
+#define skip_dashes_and_underscores()		\
+  while (*s == '-' or *s == '_')		\
+    ++s;					\
+  while (*t == '-' or *t == '_')		\
+    ++t;
+  skip_dashes_and_underscores ();
+  while (*s and *t)
+  {
+    if (*s++ != *t++)
+      return false;
+    skip_dashes_and_underscores ();
+  };
+  return *s == 0 and *t == 0;
+#undef skip_dashes_and_underscores
+}
+
 /**
  * Execute an command according to the program's arguments.
  *
@@ -156,7 +175,7 @@ void list_commands ()
 int execute_command (const arguments_t& args)
 {
   for (const command_t* command = command_map; command->docstring; ++command)
-    if (command->name && command->name == args.args[0])
+    if (command->name && equal_without_dashes (command->name, args.args[0]))
     {
       if (command->n_params != args.n_args - 1)
       {

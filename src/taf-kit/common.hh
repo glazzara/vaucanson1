@@ -52,7 +52,7 @@
 struct arguments_t
 {
     std::string	progname;
-    std::string	args[3];
+    char*	args[3];
     int		n_args;
     char*	alphabet;
     char	epsilon;

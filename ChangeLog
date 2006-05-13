@@ -1,5 +1,14 @@
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Don't consider - or _ in command name of TAF-Kit.
+
+	* src/taf-kit/common.hh: Change `args' from `std::string' to `char*'.
+	* src/taf-kit/common_commands.hh,
+	* src/taf-kit/edit_automaton.hxx: Update accordingly.
+	* src/taf-kit/b_commands.cc: String compare without considering _ or -.
+
+2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* src/tests/xml/Makefile.am: Add back `tester.sh' in EXTRA_DIST.
 
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>

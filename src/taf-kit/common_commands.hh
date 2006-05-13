@@ -129,7 +129,8 @@ DEFINE_COMMAND (NAME (are_isomorphic)
 DEFINE_COMMAND (NAME (eval)
 		CODE (/* Empty */)
 		OUTPUT (
-		  eval (realtime (get_aut (args.args[1])), args.args[2])
+		  eval (realtime (get_aut (args.args[1])),
+			std::string (args.args[2]))
 		  << std::endl)
 		RETURNVALUE (0));
 
@@ -141,7 +142,7 @@ DEFINE_COMMAND (NAME (is_empty)
 		RETURNVALUE (states == 0 ? 0 : 1));
 
 DEFINE_COMMAND (NAME (power)
-		CODE (int n = atoi (args.args[2].c_str ());
+		CODE (int n = atoi (args.args[2]);
 		      automaton_t a = get_aut (args.args[1]);
 		      automaton_t p (a);
 		      for (int i = 1; i < n; ++i)

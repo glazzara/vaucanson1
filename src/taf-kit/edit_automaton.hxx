@@ -373,7 +373,7 @@ static int edit_automaton_command (const arguments_t& args)
 
   automaton_t a = make_automaton (get_alphabet ("dummy"));
 
-  std::fstream input (args.args[1].c_str ());
+  std::fstream input (args.args[1]);
 
   if (not input.is_open ())
   {
@@ -385,7 +385,7 @@ static int edit_automaton_command (const arguments_t& args)
 
   edit_automaton::main_loop (a);
 
-  std::ofstream output (args.args[1].c_str ());
+  std::ofstream output (args.args[1]);
   output << automaton_saver (a, string_out (), XML ()) << std::endl;
   output.close ();
 
@@ -400,7 +400,7 @@ static int define_automaton_command (const arguments_t& args)
   using namespace vcsn::io;
   using namespace vcsn::xml;
 
-  std::ofstream output (args.args[1].c_str ());
+  std::ofstream output (args.args[1]);
 
   if (not output.good ())
   {
