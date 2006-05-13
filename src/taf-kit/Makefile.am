@@ -1,8 +1,18 @@
+
+# VCSN_USE_XML doesn't need to be checked as VCSN_TAF_KIT
+# is not enabled if the former isn't.
+
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
 AM_CXXFLAGS = $(CXXFLAGS_STRICT) $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 
-bin_PROGRAMS = vcsn-b
+Progs = vcsn-b
+
+if VCSN_TAF_KIT
+  bin_PROGRAMS = $(Progs)
+else
+  EXTRA_PROGRAMS = $(Progs)
+endif
 
 COMMON_SOURCES = commands.hh			\
 		 commands_macros.hh		\

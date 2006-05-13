@@ -1,5 +1,9 @@
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/taf-kit/Makefile.am: Minor fix.
+
+2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Rework distribution (autotools'ing and directory location).
 
 	* src/demos/vaucanswig: Move to...
