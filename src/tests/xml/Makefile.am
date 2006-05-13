@@ -83,6 +83,7 @@ CLEANFILES = 					\
 	label_node_result.dot.tmp
 
 EXTRA_DIST =					\
+	tester.sh				\
 	b_ref.xml				\
 	z_ref.xml				\
 	r_ref.xml				\
