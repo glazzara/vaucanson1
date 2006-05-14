@@ -1,0 +1,62 @@
+%% texi.sty: Semantically meaningful macros inspired from Texinfo.
+
+%% The following Texinfo-like macros are provided:
+%% \code, \env, \command, \samp, \file, \option, \kbd, \key, \var, \dfn.
+
+%% In addition, the following macros are provided:
+%% - \link{URL}: format a cliquable link URL.
+%% - \link[TEXT]{URL}: display TEXT with an associated cliquable footnote
+%%                     displaying URL.
+%% - \email{EMAIL}: format a cliquable email link EMAIL.
+%% - \email[TEXT]{EMAIL}: display TEXT with an associated cliquable footnote
+%%                        displaying EMAIL.
+
+%% Note that with \link, you have to specify the locator's header: http, ftp
+%% etc. However, \email adds the "mailto:" part for you. See also the hyperref
+%% macro \href, and the url macro \url. "hyperref" requires "url".
+
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{texi}[2004/07/13 v0.1
+                       Semantically meaningful macros inspired from Texinfo]
+
+\RequirePackage{hevea}
+\input{texi.hva}
+
+% The following is grabbed and tweaked from texinfo.tex:
+
+\let\@ptexslash=\/
+
+% This macro is used to make a character print one way in \tt
+% (where it can probably be output as-is), and another way in other fonts,
+% where something hairier probably needs to be done.
+%
+% #1 is what to print if we are indeed using \tt; #2 is what to print
+% otherwise.  Since all the Computer Modern typewriter fonts have zero
+% interword stretch (and shrink), and it is reasonable to expect all
+% typewriter fonts to have this, we can check that font parameter.
+%
+\def\@ifusingtt#1#2{\ifdim \fontdimen3\font=0pt #1\else #2\fi}
+
+% Same as above, but check for italic font.  Actually this also catches
+% non-italic slanted fonts since it is impossible to distinguish them from
+% italic fonts.  But since this is only used by $ and it uses \sl anyway
+% this is not a problem.
+\def\@ifusingit#1#2{\ifdim \fontdimen1\font>0pt #1\else #2\fi}
+
+% \@smartitalic{ARG} outputs arg in italics, followed by an italic correction
+% unless the following character is such as not to need one.
+\def\@smartitalicx{\ifx\@next,\else\ifx\@next-\else\ifx\@next.\else
+                    \@ptexslash\fi\fi\fi}
+% FIXME: AD: \ttsl is not defined, and I don't know where to find it.
+%\def\@smartslanted#1{{\@ifusingtt\ttsl\sl #1}\futurelet\@next\@smartitalicx}
+%\def\@smartitalic#1{{\@ifusingtt\ttsl\it #1}\futurelet\@next\@smartitalicx}
+\def\@smartslanted#1{{\sl #1}\futurelet\@next\@smartitalicx}
+\def\@smartitalic#1{{\it #1}\futurelet\@next\@smartitalicx}
+
+\newcommand\var[1]{\@smartslanted{#1}}
+\newcommand\dfn[1]{\@smartslanted{#1}}
+
+\endinput
+
+%% texi.sty ends here.

@@ -22,6 +22,7 @@ dist_doc_DATA += README.pdf README.tex README.html \
 		 NEWS.pdf NEWS.tex NEWS.html \
 	         README-IO.pdf README-IO.tex README-IO.html
 
-EXTRA_DIST = README.txt FAQ.txt NEWS.txt README-IO.txt
+EXTRA_DIST = README.txt FAQ.txt NEWS.txt README-IO.txt \
+             texi.hva texi.sty
 
 MAINTAINERCLEANFILES += $(dist_doc_DATA)

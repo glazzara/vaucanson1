@@ -1,3 +1,12 @@
+2006-05-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	* doc/texi.hva, doc/texi.sty: New, added by hand until we use
+	share/.
+	* doc/manual/users_manual: Use them.
+	* doc/manual/installation.tex, doc/manual/vaucanson_toolkit.tex:
+	Several fixes.
+	* doc/Makefile.am (EXTRA_DIST): Adjust.
+
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/node.hxx: Put a space in template use to avoid
