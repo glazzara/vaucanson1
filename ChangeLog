@@ -1,5 +1,9 @@
 2006-05-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* src/demos/utilities/Makefile.am: Fix typos.
+
+2006-05-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* doc/manual/installation.tex,
 	* doc/manual/vaucanson_toolkit.tex: Fix typos.
 

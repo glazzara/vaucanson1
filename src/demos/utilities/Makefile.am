@@ -6,5 +6,5 @@ SUBDIRS = vgrep
 
 demos:
 	for dir in $(SUBDIRS); do               \
-          (cd "$dir" && $(MAKE) $(AM_MAKEFLAGS) demos); \
+          (cd "$$dir" && $(MAKE) $(AM_MAKEFLAGS) demos); \
         done
