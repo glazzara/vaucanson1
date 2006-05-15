@@ -1,3 +1,9 @@
+2006-05-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* doc/hevea.sty: New. Needed by `texi.sty'.
+	* doc/Makefile.am: Add it in the EXTRA_DIST together with Vaucanson-G
+	files.
+
 2006-05-15  Akim Demaille  <akim@lrde.epita.fr>
 
 	* doc/texi.hva, doc/texi.sty: New, added by hand until we use

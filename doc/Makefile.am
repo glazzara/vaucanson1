@@ -23,6 +23,7 @@ dist_doc_DATA += README.pdf README.tex README.html \
 	         README-IO.pdf README-IO.tex README-IO.html
 
 EXTRA_DIST = README.txt FAQ.txt NEWS.txt README-IO.txt \
-             texi.hva texi.sty
+             texi.hva texi.sty hevea.sty Vaucanson-G.tex \
+             vaucanson-g.sty
 
 MAINTAINERCLEANFILES += $(dist_doc_DATA)
