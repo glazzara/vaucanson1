@@ -95,7 +95,7 @@ The commands can be composed with pipes from the shell:
 
 \subsubsection{Evaluation}
 
-To Evaluate whether a word is accepted:
+To evaluate whether a word is accepted:
 \begin{alltt}
 # vcsn-b eval a1.xml 'abab'
 \textit{1}
@@ -132,7 +132,7 @@ computes the minimal automaton of $(a+b)*ab(a+b)*$.
 This section gives a brief definition of all functions that \Vauc
 provides for manipulating Boolean automata.  All these algorithms are
 invoked using \samp{vcsn-b \var{algorithm-name} [\var{arguments}]}. If
-the argument is replaced by \samp{-} then the program will read this
+the argument is replaced by \samp{-} then the program will read an
 argument from the standard input.  All algorithms dump their result to
 the standard output, except the ``tests'' functions that also return
 an exit status (0 if the test is successful, anything else otherwise).
@@ -496,7 +496,7 @@ One way of reducing the size of our automaton is to use the
 In this section you will find a brief definition of all functions for
 manipulating weighted automata. The following functions are available
 for both.  They are called using \command{vcsn-z},
-\command{vcsn-z\_max\_plus}, and \command{vcsn-z\_min\_plus\} run as
+\command{vcsn-z\_max\_plus}, and \command{vcsn-z\_min\_plus} run as
   \samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
 
 \smallskip
