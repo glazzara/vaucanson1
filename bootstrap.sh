@@ -11,8 +11,8 @@ fi
 (cd src/tests/sanity && /bin/sh ./generate_files.sh .)
 (cd src/vaucanswig && /bin/sh ./expand.sh .)
 (cd src/benchs && /bin/sh ./generate_all_benchs.sh)
-sh ./find_tests.sh
-sh ./check_xml.sh
+sh build-aux/find_tests.sh
+sh build-aux/check_xml.sh
 
 $AUTORECONF -v -f -i
 

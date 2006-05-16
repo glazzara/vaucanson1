@@ -1,3 +1,15 @@
+2006-05-16  Akim Demaille  <akim@epita.fr>
+
+	* src/tests/test-suites/generate-all.sh (generate): New.
+	Use it.
+	* build-aux/find_tests.sh: Rewrite so that it does not pick my
+	_build symlinks.
+	* config: Rename as...
+	* build-aux: this ugly but now standard name.
+	* check_xml.sh, find_tests.sh: Move to...
+	* build-aux: here.
+	* bootstrap.sh: Adjust.
+
 2006-05-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* src/demos/utilities/Makefile.am: Fix typos.
@@ -47,7 +59,7 @@
 	`(a,b)+(b,a)' on FMP.
 	Add forgotten `in' and `out' label nodes in `initial_transducer' and
 	`final_transducer' nodes.
-	
+
 2006-05-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Don't consider - or _ in command name of TAF-Kit.

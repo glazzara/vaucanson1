@@ -4,12 +4,11 @@
 # $Id$
 # VCSN_HEADER
 
-AC_PREREQ([2.54])
+AC_PREREQ([2.57])
 
 AC_INIT([vaucanson], [0.8], [vaucanson-bugs@lrde.epita.fr])
-AC_CONFIG_AUX_DIR([config])
-AC_CONFIG_SRCDIR([config/vcsn.m4])
-AM_INIT_AUTOMAKE([1.9 tar-ustar no-define foreign dist-bzip2])
+AC_CONFIG_AUX_DIR([build-aux])
+AM_INIT_AUTOMAKE([1.9.6 tar-ustar no-define foreign dist-bzip2])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
 # Comment the following to have a stable version numbering.
@@ -195,7 +194,7 @@ AC_CONFIG_FILES([
 	include/Makefile
         debian/Makefile])
 
-m4_include([config/tests.m4])
+m4_include([build-aux/tests.m4])
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
 AC_SUBST([VCSN_VAUCANSWIG_SUBDIR])

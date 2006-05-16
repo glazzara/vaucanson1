@@ -1,13 +1,20 @@
 #!/bin/sh
 
+generate ()
+{
+    dir=$1
+    defs=$1.defs
+    shift
+    ../bin/generate-test-suite.sh "$dir" "$defs" "$@"
+}
+
 #    /*----------.
 #    | Alphabets |
 #    `----------*/
 
 for letter_kind in alpha char int pair_char_int; do
-../bin/generate-test-suite.sh \
+generate \
    algebra_alphabet_set_${letter_kind} \
-   algebra_alphabet_set_${letter_kind}.defs \
    ../algebra/alphabets
 done;
 
@@ -16,9 +23,8 @@ done;
 #    | Free monoid |
 #    `------------*/
 
-../bin/generate-test-suite.sh \
+generate \
    algebra_free_monoid_string \
-   algebra_free_monoid_string.defs \
    ../algebra/free_monoid
 
 
@@ -26,9 +32,8 @@ done;
 #    | Free monoid product |
 #    `--------------------*/
 
-../bin/generate-test-suite.sh \
+generate \
    algebra_free_monoid_product_string \
-   algebra_free_monoid_product_string.defs \
    ../algebra/free_monoid_product
 
 
@@ -45,9 +50,8 @@ for semiring_type in numerical_semiring tropical_semiring_max tropical_semiring_
 	    numerical_semiring:*)
 		TEST="$TEST ../algebra/numerical_semiring";;
 	esac
-	../bin/generate-test-suite.sh \
+	generate \
 	algebra_${semiring_type}_${semiring_elt_value_t} \
-	algebra_${semiring_type}_${semiring_elt_value_t}.defs \
 	${TEST}
     done;
 done;
@@ -62,22 +66,19 @@ for semiring_elt_value_t in bool double int; do
 	TEST="$TEST ../algebra/series/krat/boolean"
     fi
 
-    ../bin/generate-test-suite.sh \
+    generate \
 	algebra_series_krat_${semiring_elt_value_t}_string \
-	algebra_series_krat_${semiring_elt_value_t}_string.defs \
 	${TEST}
 
-    ../bin/generate-test-suite.sh \
+    generate \
 	algebra_series_polynom_${semiring_elt_value_t}_string \
-	algebra_series_polynom_${semiring_elt_value_t}_string.defs \
 	../algebra/series/misc \
 	../algebra/series/polynom
 done;
 
 for derivation_type in derivation cderivation partial_derivation; do
-../bin/generate-test-suite.sh \
+generate \
    algebra_series_krat_${derivation_type} \
-   algebra_series_krat_${derivation_type}.defs \
    ../algebra/series/krat/derivations/${derivation_type}
 done;
 
@@ -87,9 +88,8 @@ done;
 #    `----------*/
 
 for automata_kind in boolean r z z_max_plus z_min_plus; do
-    ../bin/generate-test-suite.sh \
+    generate \
     context_headers_${automata_kind} \
-    context_headers_${automata_kind}.defs \
     ../context_headers/automata
 
 # Create directories test list.
@@ -102,9 +102,8 @@ for automata_kind in boolean r z z_max_plus z_min_plus; do
     if [ $automata_kind = "boolean" ]; then
 	TEST="$TEST ../automata/algos/boolean_automata"
     fi
-    ../bin/generate-test-suite.sh \
+    generate \
 	${automata_kind}_automaton \
-	${automata_kind}_automaton.defs \
 	${TEST}
 done;
 
@@ -112,49 +111,33 @@ done;
 #    | Transducer |
 #    `-----------*/
 
-../bin/generate-test-suite.sh \
-   context_headers_boolean_transducer \
-   context_headers_boolean_transducer.defs \
-   ../context_headers/transducers
+for kind in boolean z
+do
+  generate \
+      context_headers_${kind}_transducer \
+      ../context_headers/transducers
 
-../bin/generate-test-suite.sh \
-   context_headers_z_transducer \
-   context_headers_z_transducer.defs \
-   ../context_headers/transducers
-
+  generate \
+      ${kind}_transducer \
+      ../automata/implementation_check ../automata/algos/graphs \
+      ../automata/algos/series_multiplicity_transducers
+done
 
 # FIXME: Directories labeled_graphs, label_aware_graphs and
 #	 freemonoid_labeled_graphs are not tested.
-../bin/generate-test-suite.sh \
-   boolean_transducer \
-   boolean_transducer.defs \
-    ../automata/implementation_check ../automata/algos/graphs \
-    ../automata/algos/series_multiplicity_transducers
 
-../bin/generate-test-suite.sh \
-   z_transducer \
-   z_transducer.defs \
-    ../automata/implementation_check ../automata/algos/graphs \
-    ../automata/algos/series_multiplicity_transducers
 
-../bin/generate-test-suite.sh \
-   context_headers_fmp_transducer \
-   context_headers_fmp_transducer.defs \
-   ../context_headers/fmp_transducers
+# How come there is no explicit name here?
+for kind in "" "z_"
+do
+  generate \
+      context_headers_${kind}fmp_transducer \
+      ../context_headers/fmp_transducers
 
-../bin/generate-test-suite.sh \
-   context_headers_z_fmp_transducer \
-   context_headers_z_fmp_transducer.defs \
-   ../context_headers/fmp_transducers
+  generate \
+      ${kind}fmp_transducer \
+      ../automata/algos/fmp_transducers
+done
 
 # FIXME: Directories labeled_graphs, implementation_check, graphs and
 #	 label_aware_graphs are not tested.
-../bin/generate-test-suite.sh \
-   fmp_transducer \
-   fmp_transducer.defs \
-    ../automata/algos/fmp_transducers
-
-../bin/generate-test-suite.sh \
-   z_fmp_transducer \
-   z_fmp_transducer.defs \
-    ../automata/algos/fmp_transducers
