@@ -1,0 +1,155 @@
+-*- outline -*-
+
+* Pourquoi share/ ?
+Ce répertoire cherche à fédérer les différents fichiers (LaTeX,
+BibTeX, Make etc.) qui sont utilisés pour écrire nos articles,
+rapports, présentations etc.
+
+Pour une utilisation normale, ne surtout pas dépendre de lui « par
+l'extérieur », du genre `-I ../share/styles' depuis votre dossier, car
+alors si dans le futur un changement incompatible a lieu (e.g., clef
+BibTeX qui change), alors votre document ne compilera plus.  Pour
+éviter ce défaut, exécutez share/bin/update-share depuis votre
+répertoire de travail : une indirection (svn:externals) sera installée
+dans votre répertoire vers la version *courante* de share .  Cette
+indirection portant le numéro courant de révision de share/, il n'y a
+aucun risque que dans le futur il ne soit pas compatible avec votre
+document.
+
+** Pour augmenter le contenu de share
+Choisissez de travailler soit dans le vrai "maître", i.e.,
+
+     https://svn.lrde.epita.fr/svn/lrde-publis/trunk/share
+
+soit dans votre checkout local.  Dans les deux cas, faire un "svn up"
+pour être certain de travailler sur la version courante.  Une fois les
+changements faits, comme d'habitude, un ChangeLog, un commit, un post
+dans lrde-patches@lrde.epita.fr.
+
+** Pour mettre à jour votre version local de share/
+Si votre Makefile inclut share/bin/share.mk, alors taper "make update"
+le fera pour vous.  Sinon, à la main, faire "share/bin/update-share".
+Ne pas oublier de faire un checkin de votre répertoire de travail,
+sinon la mise à jour de la dépendance sur share/ reste locale à votre
+répertoire de travail.
+
+* share/bin
+** texi2dvi
+Une version récente qui sache compiler dans un sous-répertoire comme
+tmp.t2d, et évite les problèmes quand on fait à la fois du DVI et du
+PDF.  Début de support pour le HTML.
+
+* share/bib
+Les bibliographies en BibTeX utilisées au labo.  Merci de les
+exploiter et de les augmenter.
+
+Pour l'instant, le fichier lrde.bib est ailleurs.  Tout est mis en
+place pour le "sortir" automatiquement au premier make.
+
+* share/styles
+Ce répertoire fournit des styles courants mais pas omniprésents (e.g.,
+qtree, bibunits etc.), des paquets pratiques mais rares (e.g., texi,
+bilan), mais également des wrappers pour certains paquetages de façon
+à les "améliorer" (listings -> mylistings).  Dans ce dernier cas, on
+ajoute :
+
+- des alarmes pour les ordres dangereux
+- des paramètres par défaut pour les cas courants
+- un support étendu (plus de langages etc.)
+
+On essaie aussi de fournir un support pour HeVeA.  C'est un peu
+pénible, voir l'item HeVeA.
+
+** curve.cls 1.10.
+Pour faire son CV.
+http://www.lrde.epita.fr/~didier/comp/development/software.php#curve
+
+** latex8.bst, latex8.sty
+IEEE 8.5 x 11-Inch Proceedings Style `latex8.sty'.  Et son style
+BibTeX.
+
+** mybabel
+L'utiliser avec les langues en options, comme le vrai.  Il vaut mieux
+l'appeler en premier pour éviter les conflits par la suite.
+
+** myacronyms
+Les acronymes les plus utilisés au labo.
+
+** myhyperref
+Définit ce qu'il faut pour que \autoref marche bien.  Mieux vaut
+l'inclure parmi les derniers.
+
+** mylisting
+Emballe listing.sty pour qu'il fonctionne correctement dans les cas
+attendus.
+
+*** Nouveaux langages
+- ATerm pour les ATerms
+- Box pour les formules Box
+- HIR, langage intermédiaire d'Appel.
+- [Mips]Assembler,
+- parse-testsuite (Stratego/XT)
+- RTG, Regular Tree Grammar (Stratego/XT)
+- SDF, [Boxed]SDF, [AG]SDF
+- STL (C++ + typedef de stl)
+- Stratego
+- [Appel]Tiger, [EPITA]Tiger (dialecte par défaut)
+- Vaucanson (STL + typedef et structures de contrôle de Vcn)
+- Yacc, [Bison]Yacc (aka Bison)
+
+*** Nouveaux environnements
+- asgsdf
+- boxedsdf
+- sdf
+
+*** Nouveaux lst styles
+- box, plutôt pour le papier, sur fond légèrement grisé.
+- ttcolor, plutôt pour les transparents
+
+** prooftree
+Un environnement LaTeX pour faire des arbres de preuve.
+
+** texi
+Un style écrit par Didier pour avoir des commandes sémantiques comme
+en Texinfo :
+
+  abbr::          Indicating abbreviations.
+  acronym::       Indicating acronyms.
+  cite::          Referring to books not in the Info system.
+  code::          Indicating program code.
+  command::       Indicating command names.
+  dfn::           Specifying definitions.
+  email::         Indicating an electronic mail address.
+  env::           Indicating environment variables.
+  file::          Indicating file names.
+  indicateurl::   Indicating an example URL.
+  kbd::           Showing keyboard input.
+  key::           Specifying keys.
+  link{ulr, title} ou link{url}
+  option::        Indicating option names.
+  samp::          Indicating a literal sequence of characters.
+  var::           Indicating metasyntactic variables.
+  verb::          Indicating a verbatim sequence of characters.
+
+
+* Utilisation d'HeVeA
+Lorsqu'un document fait un \usepackage{foo}, si foo.hva existe, il est
+lu *sinon c'est tout*.  En particulier HeVeA ne tente même pas de lire
+foo.sty.  Du coup, pour les cas les plus courants, il faut implémenter
+un foo.hva, qui est un fichier en syntaxe LaTeX : seules quelques
+commandes sont absentes.  En conséquence un fichier foo.sty et foo.hva
+sont extraordinairement semblables ; trop semblables : on a envie de
+les partager.  Mais dans ce cas, c'est plutôt le hva qui doit être
+inclus par le sty, puisque ce dernier est plus riche en syntaxe.
+
+On peut imaginer d'autres schémas, e.g., le sty contient des balises
+\ifhevea pour gérer ce cas-là, et foo.hva se contente d'inclure
+foo.sty.  Je (Akim) n'ai pas encore les idées claires sur ce qui est
+le plus élégant, le plus pratique.  Je cherche, et je suis preneur
+d'opinions.
+
+Chose importante est très pénible : les fichiers hva ne sont pas
+protégés en double inclusion, et RequirePackage n'existe pas en
+HeVeA.  Résultat des courses, il faut faire des \usepackage, en
+faisant attention de ne pas en faire deux fois.  C'est très pénible
+quand on veut inclure deux fichiers qui ont la même dépendance :(

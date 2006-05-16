@@ -1,0 +1,4 @@
+\ifhevea
+  \newcommand{\og}{<<}
+  \newcommand{\fg}{>>}
+\fi

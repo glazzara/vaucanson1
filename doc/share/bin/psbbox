@@ -1,0 +1,95 @@
+#! /usr/bin/perl -w
+
+use strict;
+use diagnostics;
+use IO::File;
+
+my $gs_bbox = "gs -q -dBATCH -sDEVICE=bbox -dNOPAUSE";
+my $file = $ARGV[0];
+
+sub set_min (\$$)
+{
+  my ($ref, $val) = @_;
+  $$ref = $val
+    unless (defined $$ref && $$ref < $val);
+}
+
+sub set_max (\$$)
+{
+  my ($ref, $val) = @_;
+  $$ref = $val
+    unless (defined $$ref && $$ref > $val);
+}
+
+sub set_union (\@@)
+{
+  my ($bbox, @new) = @_;
+  set_min ($$bbox[0], $new[0]);
+  set_min ($$bbox[1], $new[1]);
+  set_max ($$bbox[2], $new[2]);
+  set_max ($$bbox[3], $new[3]);
+}
+
+sub bbox ($)
+{
+  my ($input) = @_;
+  my $in = new IO::File ($input) or die;
+  my $res = ();
+
+  while ($_ = $in->getline)
+    {
+      if (/%%((?:HiRes)?BoundingBox): ([\d.]+) ([\d.]+) ([\d.]+) ([\d.]+)/)
+	{
+	  set_union (@{$res->{$1}}, $2, $3, $4, $5);
+	}
+    }
+
+  return $res;
+}
+
+my $claimed   = bbox ($file);
+my $effective = bbox ("$gs_bbox \"$file\" 2>&1 >/dev/null |");
+
+print "Claimed:   @{$claimed->{'BoundingBox'}}\n";
+print "Effective: @{$effective->{'BoundingBox'}}\n";
+
+{
+  use File::Copy;
+  my $SIMPLE_BACKUP_SUFFIX = $ENV{'SIMPLE_BACKUP_SUFFIX'} || '~';
+
+  # Back up and install the new one.
+  my $backup = "$file$SIMPLE_BACKUP_SUFFIX";
+  move ($file, $backup)
+    or die "cannot backup $file: $!";
+  my $in = new IO::File ($backup) or die;
+  my $out = new IO::File (">$file") or die;
+  while ($_ = $in->getline ())
+    {
+      # FIXME: Maybe we should fix all the PageBoundingBoxes?
+      if (/%%(?:Page)?((?:HiRes)?BoundingBox)/)
+	{
+	  print $out "%%$1: @{$effective->{$1}}\n";
+	}
+      else
+	{
+	  print $out $_;
+	}
+    }
+}
+
+### Setup "GNU" style for perl-mode and cperl-mode.
+## Local Variables:
+## perl-indent-level: 2
+## perl-continued-statement-offset: 2
+## perl-continued-brace-offset: 0
+## perl-brace-offset: 0
+## perl-brace-imaginary-offset: 0
+## perl-label-offset: -2
+## cperl-indent-level: 2
+## cperl-brace-offset: 0
+## cperl-continued-brace-offset: 0
+## cperl-label-offset: -2
+## cperl-extra-newline-before-brace: t
+## cperl-merge-trailing-else: nil
+## cperl-continued-statement-offset: 2
+## End:

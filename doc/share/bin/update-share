@@ -1,0 +1,80 @@
+#! /bin/sh
+
+export LC_ALL=C
+
+set -e
+url='https://svn.lrde.epita.fr/svn/lrde-publis/trunk'
+me=$(basename $0)
+
+## BEGIN
+#    update-share [-h]  [DIR = .]
+#
+# Run this program when you are inside the publication directory
+# to refresh the use of the share directory for its most up to date
+# revision.  Note that it hard codes this revision, to avoid
+# backward compatibility issues.
+#
+# It also checks out the corresponding version of lrde.bib.
+#
+# -h, --help               display this message and exit
+# -l, --lrde, --lrde.bib   only update lrde.bib
+## END
+
+fatal ()
+{
+    echo >&2 "$me: $@"
+    exit 1
+}
+
+case $1 in
+    -h | --help )
+	sed -rn '/^## BEGIN/,/^## END/{s/^# ?//;/^#/!p}' $0
+	exit 0;;
+    -l | --lrde | --lrde.bib )
+	tasks=lrde.bib
+	;;
+esac
+set -x
+
+: ${tasks="update lrde.bib"}
+
+dir=${1-.}
+
+# grep -v may exit with failure.
+externals=$(svn propget svn:externals "$dir" | sed  '/^share/d')
+rev=$(svn info $url/share | sed -n 's/Revision *: *//p')
+if test -z "$rev"; then
+  fatal "cannot fetch the revision of $url/share"
+fi
+
+set -x
+
+for task in $tasks
+do
+    case $task in 
+	(update) # Update share/.
+	externals="share -r $rev $url/share
+$externals"
+	cd $dir
+	svn propset svn:externals "$externals" .
+	svn up
+	;;
+
+	(lrde.bib) # Update share/bib/lrde.bib.
+	cd share/bib
+        # Backup, in case the user was risky enough to 
+	# make local modifications.
+	if test -f lrde.bib; then
+	    cp --backup=numbered --force lrde.bib lrde.bib
+	    chmod +w lrde.bib
+	fi
+	svn cat -r $rev $url/lrde-publis/lrde.bib >lrde.bib
+	chmod -w lrde.bib
+	cd ../..
+	;;
+
+	(*)
+	fatal "unknown task: $task"
+	;;
+    esac
+done

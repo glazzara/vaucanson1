@@ -1,4 +1,4 @@
-include $(top_srcdir)/doc/Makefile.doc
+include $(top_srcdir)/doc/doc.mk
 
 dist_doc_DATA = README.tex README.pdf README.html \
 		build-process.tex build-process.pdf build-process.html \

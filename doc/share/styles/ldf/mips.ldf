@@ -1,0 +1,19 @@
+%%                                                       -*- LaTeX -*-
+%% Language definition of MIPS Assembler for listings package
+%%
+
+\lstdefinelanguage[Mips]{Assembler}%
+  {morekeywords={add,addu,addi,addiu,sub,subu,neg,negu,abs,mul,div,divu,rem,%
+      remu,sll,sllv,sra,srav,srl,srlv,rol,ror,and,andi,or,ori,xor,%
+      xori,nor,not,seq,sne,sge,sgeu,sgt,sgtu,sle,sleu,slt,sltu,slti,%
+      sltiu,beq,beqz,bne,bnez,bge,bgeu,bgez,bgezal,bgt,bgtu,bgtz,ble,%
+      bleu,blez,blt,bltu,bltz,bltzal,j,jal,jr,jalr,lb,lbu,lw,lui,li,la,%
+      sb,sw,move,mfhi,mflo,mthi,mtlo,mfc0,mtc0,syscall,nop},%
+   sensitive=true,%
+   morecomment=[l]{\#},%
+   morestring=[b]{"},%
+   morekeywords={\$zero,\$at,\$v0,\$v1,\$a0,\$a1,\$a2,\$a3,%
+   \$t0,\$t1,\$t2,\$t3,\$t4,\$t5,\$t6,\$t7,\$t8,\$t9,%
+   \$s0,\$s1,\$s2,\$s3,\$s4,\$s5,\$s6,\$s7,\$k0,\$k1,%
+   \$gp,\$sp,\$fp,\$ra}%
+  }[keywords,comments,strings]%

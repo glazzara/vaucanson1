@@ -1,0 +1,16 @@
+#! /bin/zsh
+
+in=$1
+out=$2
+
+## To PostScript.
+# Adobe Reader doesn't produce sound PostScript files when it uses its
+# standard input/output (e.g., you can't ``go back'' when viewing such
+# files).  Such issues don't happen with files (whose names are passed as
+# arguments), so use a temporary file instead.
+in_ps=$(mktemp)
+acroread -toPostScript -pairs $in $in_ps
+psbook <$in_ps | psnup -2 | ps2pdf14 - >$out
+
+# Remove intermediate products.
+rm -f $in_ps

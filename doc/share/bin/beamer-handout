@@ -1,0 +1,24 @@
+#! /bin/sh
+
+# Failures are errors.
+set -e
+
+in=$1
+out=$2
+# It is incredible how complex this is.  Acroread sucks.
+
+## To PostScript.
+acroread -toPostScript <$in >$out.ps
+
+## Fix orientation and media.
+sed -ri -e "2a\
+%%Orientation: Landscape" \
+      -e "2a\
+%%DocumentMedia: A4 595 842 0 () ()" $out.ps
+
+## Fix BBoxes.
+psbbox $out.ps
+
+## Make the booklet.
+psnup -4 -l $out.ps | \
+ps2pdf14 - $out

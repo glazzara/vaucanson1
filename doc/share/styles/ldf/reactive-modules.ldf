@@ -1,0 +1,10 @@
+%%                                                       -*- LaTeX -*-
+%% Language definition of Reactive Modules for listings package
+%%
+
+\lstdefinelanguage{reactivemodules}
+  {otherkeywords={->,;,+,\&,\[\]},
+   morekeywords=[1]{endmodule,false,init,module,true},
+   sensitive,
+   morecomment=[l]{//}
+  }[keywords,comments]

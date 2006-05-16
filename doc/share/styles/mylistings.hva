@@ -1,0 +1,39 @@
+%%					 -*- LaTeX -*-
+%%
+%% This file is read by HeVeA and LaTeX.
+
+\ifhevea
+  \usepackage{listings}
+\else
+  \RequirePackage{listings}
+\fi
+
+% When there is no <+-> running, \alert<.> does not work.
+\lstdefinestyle{alert}{emphstyle={\alert}}
+
+\input{ldf/asn1.ldf}
+\input{ldf/aterm.ldf}
+\input{ldf/box.ldf}
+\input{ldf/hir.ldf}
+\input{ldf/lex.ldf}
+\input{ldf/mips.ldf}
+\input{ldf/parse-testsuite.ldf}
+\input{ldf/reactive-modules.ldf}
+\input{ldf/rtg.ldf}
+\input{ldf/sdf.ldf}
+\input{ldf/stl.ldf}
+\input{ldf/stratego.ldf}
+\input{ldf/tiger.ldf}
+\input{ldf/vaucanson.ldf}
+\input{ldf/yacc.ldf}
+
+
+%% Give a means to have color requests.
+\lstdefinelanguage{Colors}%
+  {moredelim=*[is][\color{green}]{g(}{)},
+   moredelim=*[is][\color{red}]{r(}{)},
+   moredelim=*[is][\color{cyan}]{c(}{)}}
+
+%% Give a means to have emphasis requests.
+\lstdefinelanguage{Emphasis}%
+  {moredelim=*[is][\alert]{bf(}{)}}

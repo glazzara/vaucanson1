@@ -1,0 +1,2 @@
+\input{hyperref.hva}
+\let\autoref\ref

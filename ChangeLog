@@ -1,5 +1,22 @@
 2006-05-16  Akim Demaille  <akim@epita.fr>
 
+	* doc/share: New svn:external.
+	* doc/Makefile.am: Adjust.
+	Ship it.
+	Fix MAINTAINERCLEANFILES.
+	* doc/Makefile.doc: Rename as...
+	* doc/doc.mk: this.
+	Use share/ features.
+	Use GNU Make features (if someone thinks that's too much to
+	ask for, make it independent from share/make Makefiles).
+	* doc/texi.hva, doc/texi.sty, doc/vaucanson-g.sty,
+	* doc/Vaucanson-G.tex, doc/hevea.sty: Remove, they are
+	in share/.
+	* doc/manual/Makefile.am: Include doc.mk, it is there to be used.
+	Remove the duplicate code.
+
+2006-05-16  Akim Demaille  <akim@epita.fr>
+
 	* src/tests/test-suites/generate-all.sh (generate): New.
 	Use it.
 	* build-aux/find_tests.sh: Rewrite so that it does not pick my

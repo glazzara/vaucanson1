@@ -1,0 +1,23 @@
+\RequirePackage{xspace}
+\makeatletter
+
+\DeclareRobustCommand{\Cxx}
+{\texorpdfstring{%
+    \valign{\vfil\hbox{##}\vfil\cr
+      \textsf{C\kern-.1em}\cr
+      $\hbox{\fontsize{\sf@size}{0}\textbf{+\kern-0.05em+}}$\cr}%
+  }{%
+    C++%
+  }%
+  \xspace%
+}
+
+\DeclareRobustCommand{\C}
+{\texorpdfstring{%
+    \textsf{C}%
+  }{%
+    C%
+  }%
+  \xspace%
+}
+\makeatother

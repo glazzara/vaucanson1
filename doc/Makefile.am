@@ -1,7 +1,7 @@
 # VCSN_USE_XML is tested in the `xml' subdirectory.
 
 SUBDIRS = makefiles manual xml
-include $(srcdir)/Makefile.doc
+include $(srcdir)/doc.mk
 
 dist_doc_DATA = ref.tar.gz
 
@@ -15,15 +15,14 @@ ref.tar.gz: doc.doxy.in
 	$(MAKE) $(AM_MAKEFLAGS) ref
 	$(TAR) -czf $@ `test -d ref || echo '$(srcdir)/'`ref
 
-MAINTAINERCLEANFILES = ref
-
 dist_doc_DATA += README.pdf README.tex README.html \
 		 FAQ.pdf FAQ.tex FAQ.html \
 		 NEWS.pdf NEWS.tex NEWS.html \
 	         README-IO.pdf README-IO.tex README-IO.html
 
 EXTRA_DIST = README.txt FAQ.txt NEWS.txt README-IO.txt \
-             texi.hva texi.sty hevea.sty Vaucanson-G.tex \
-             vaucanson-g.sty
+	     share
 
-MAINTAINERCLEANFILES += $(dist_doc_DATA)
+MAINTAINERCLEANFILES = $(dist_doc_DATA)
+maintainer-clean-local:
+	rm -rf ref
