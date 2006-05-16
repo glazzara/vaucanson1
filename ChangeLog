@@ -14,6 +14,8 @@
 	in share/.
 	* doc/manual/Makefile.am: Include doc.mk, it is there to be used.
 	Remove the duplicate code.
+	* doc/manual/users_manual.tex: Use mybabel and mylisting and
+	myhyperref instead of the native ones.
 
 2006-05-16  Akim Demaille  <akim@epita.fr>
 
