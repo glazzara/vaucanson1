@@ -1,3 +1,9 @@
+2006-05-17  Akim Demaille  <akim@epita.fr>
+
+	Help distcheck.
+	* doc/manual/Makefile.am (SRC_FILES): Add the missing bits.
+	* doc/doc.mk: Fix the order of the rules.
+
 2006-05-16  Akim Demaille  <akim@epita.fr>
 
 	* doc/share: New svn:external.
