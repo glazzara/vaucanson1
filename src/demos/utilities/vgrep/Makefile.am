@@ -2,8 +2,9 @@
 #
 # $Id$
 
-AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
-AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
+include $(top_srcdir)/src/vaucanson.mk
+
+AM_CXXFLAGS += -DINTERNAL_CHECKS -DSTRICT
 
 EXTRA_PROGRAMS = vgrep
 

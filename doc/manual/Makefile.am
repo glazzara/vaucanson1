@@ -10,7 +10,9 @@ images/a1_det.ps
 EXTRA_DIST = $(SRC_FILES)
 
 # We use vaucanson-g, which requires plain DVI compilation.
-users_manual.pdf: users_manual.dvi
-	$(DVIPDF) users_manual.dvi
+manual = vaucanson-users-manual.pdf
+pdf: $(manual)
+$(manual): users_manual.dvi
+	$(DVIPDF) users_manual.dvi $(manual)
 
-dist_doc_DATA = users_manual.pdf
+dist_doc_DATA = $(manual)

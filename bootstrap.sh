@@ -10,7 +10,7 @@ fi
 (cd src/tests/test-suites && /bin/sh ./generate-all.sh)
 (cd src/tests/sanity && /bin/sh ./generate_files.sh .)
 (cd src/vaucanswig && /bin/sh ./expand.sh .)
-(cd src/benchs && /bin/sh ./generate_all_benchs.sh)
+(cd src/benchs && /bin/sh ./generate_benchs.sh --all)
 sh build-aux/find_tests.sh
 sh build-aux/check_xml.sh
 

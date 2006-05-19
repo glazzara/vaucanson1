@@ -1,11 +1,10 @@
 # Makefile.am
 #
 # $Id: Makefile.am 462 2004-03-31 21:55:16Z yann $
+include $(top_srcdir)/src/vaucanson.mk
 
-AM_CPPFLAGS = -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
-
-AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
-AM_CPPFLAGS += -I$(top_srcdir)/include -I$(top_builddir)/include
+AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
+AM_CXXFLAGS += -DINTERNAL_CHECKS -DSTRICT
 
 EXTRA_PROGRAMS = 				\
 	b					\

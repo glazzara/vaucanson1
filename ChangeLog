@@ -1,8 +1,38 @@
-2006-05-17  Akim Demaille  <akim@epita.fr>
+2006-05-18  Akim Demaille  <akim@epita.fr>
 
-	Help distcheck.
+	Fix various distro issues.
 	* doc/manual/Makefile.am (SRC_FILES): Add the missing bits.
 	* doc/doc.mk: Fix the order of the rules.
+
+	* src/benchs/generate_all_benchs.sh: Remove, merged into...
+	* src/benchs/generate_benchs.sh: this.
+	Adjust uses.
+	Introduce functions to clarify this program.
+	* src/tests/test-suites/Makefile.am: Ship it.
+
+	* configure.ac: Pass nostdinc to Automake to avoid useless -I on
+	already too long command lines.
+	All the uses must be adjusted to pass -I$(top_builddir) for
+	config.h.
+	So a Makefile snippet to factor all this would be most welcome.
+	* src/vaucanson.mk: New.
+	* src/taf-kit/Makefile.am: Use it.
+	* src/benchs/common/Makefile.bench: Rename as...
+	* src/benchs/common/bench.mk: this.
+	Don't use INCLUDES, it is not defined.
+	* src/tests/check/Makefile.flags,
+	* src/benchs/common/bench.mk: Adjust to nostdinc.
+
+	* src/demos/demo.mk: New.
+	* src/demos/algorithms/Makefile.am: Use it.
+	* src/demos/function_library/Makefile.am,
+	* src/demos/automaton_library/Makefile.am,
+	* src/demos/utilities/vgrep/Makefile.am,
+	* src/demos/transducers/one_rule_rewriting/Makefile.am,
+	* src/demos/transducers/Makefile.am: Ditto.
+
+	* src/tests/bin/generate-test-suite.sh:
+	Don't use "env", it's useless.
 
 2006-05-16  Akim Demaille  <akim@epita.fr>
 

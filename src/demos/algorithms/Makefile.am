@@ -1,22 +1,26 @@
-# Makefile.am
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `NOTICE' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
 #
 # $Id: Makefile.am 486 2004-03-31 22:30:33Z yann $
 
+include ../demo.mk
+
 EXTRA_DIST = equivalent_functions.hh
 
-AM_CPPFLAGS = -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
+AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
 
-AM_CXXFLAGS = $(CXXFLAGS_STRICT) -DINTERNAL_CHECKS -DSTRICT
-AM_CPPFLAGS += -I$(top_srcdir)/include -I$(top_builddir)/include
-
-EXTRA_PROGRAMS = universal b_are_equivalent z_are_equivalent	\
+TESTERS = universal b_are_equivalent z_are_equivalent	\
 	b_exp_equiv z_exp_equiv b_contains_factor z_contains_factor classics
-	
-if VCSN_USE_XML
-demos: $(EXTRA_PROGRAMS)
-else
-demos:
-endif
 
 universal_SOURCES = universal.cc
 

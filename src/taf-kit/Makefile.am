@@ -1,9 +1,7 @@
-
+include $(top_srcdir)/src/vaucanson.mk
 # VCSN_USE_XML doesn't need to be checked as VCSN_TAF_KIT
 # is not enabled if the former isn't.
-
-AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
-AM_CXXFLAGS = $(CXXFLAGS_STRICT) $(CXXFLAGS_OPTIMIZE)
+AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 
 Progs = vcsn-b
