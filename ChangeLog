@@ -1,3 +1,7 @@
+2006-05-19  Akim Demaille  <akim@epita.fr>
+
+	* src/demos/demo.mk: New for real.
+
 2006-05-18  Akim Demaille  <akim@epita.fr>
 
 	Fix various distro issues.
