@@ -22,8 +22,7 @@ AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9.6 tar-ustar no-define foreign dist-bzip2 nostdinc])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
-# Comment the following to have a stable version numbering.
-PRE_RELEASE
+VCSN_PRE_RELEASE
 
 # Some C and C++ code used.
 # Using $CXX as the C compiler is a hack to allow building shared
@@ -106,11 +105,14 @@ case $prefix in
   [\\/]* | ?:[\\/]* ) ;;
   *) prefix=$ac_default_prefix ;;
 esac
+m4_pattern_allow([^VCSN_DATA_PATH$])
 AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$(eval echo \"$datadir/vaucanson/\")"],
 		   [Path in which data such as XSD will be installed])
 prefix=$old_prefix
 
 # Package misc variables.
+# Arguably, AC_DEFINE should pattern_allow its argument.
+m4_pattern_allow([^VCSN_PACKAGE_(NAME|BUGREPORT|STRING|VERSION)$])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_NAME], ["$PACKAGE_NAME"], [Full name.])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_BUGREPORT], ["$PACKAGE_BUGREPORT"],
 		   [Bug report address.])

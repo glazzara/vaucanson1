@@ -1,6 +1,8 @@
 # vcsn.m4                                     -*- Autoconf -*-
 # $Id$
 
+m4_pattern_forbid([^_?VCSN_])
+
 # VCSN_PATH_LOCAL([RELATIVE-PATH-TO-VAUCANSON-SOURCES])
 
 # Tries to detect Vaucanson sources "near" the current source directory.
@@ -52,7 +54,7 @@ AC_DEFUN([_VCSN_CHECK_HEADERS],
 
  have_vaucanson=yes
  vcsn_save_CPPFLAGS=$CPPFLAGS
- CPPFLAGS="$VCSN_EXTRA_CPPFLAGS $CPPFLAGS"
+ CPPFLAGS="$vcsn_extra_CPPFLAGS $CPPFLAGS"
  # At this point, we can be in a situation where pconf.hh does not
  # exist _yet_. In that particular case, we need a workaround.
  AC_CHECK_HEADER([vaucanson/config/pconf.hh], [],
@@ -95,7 +97,7 @@ AC_DEFUN([VCSN_PATH_HEADERS],
       VCSN_LOCAL_BUILD='$(top_builddir)/'$vcsn_cv_local_src
 
       #
-      VCSN_EXTRA_CPPFLAGS="-I$vcsn_cv_local_src/include -I$srcdir/$vcsn_cv_local_src/include"
+      vcsn_extra_CPPFLAGS="-I$vcsn_cv_local_src/include -I$srcdir/$vcsn_cv_local_src/include"
 
       AC_SUBST([VCSN_LOCAL_SRC])
       AC_SUBST([VCSN_LOCAL_BUILD])
@@ -524,7 +526,7 @@ AC_DEFUN([AC_CHECK_SWIG13],
 
 # Detecting SVN revision. Inspired by Stratego/XT.
 
-AC_DEFUN([DETECT_SVN_REVISION],
+AC_DEFUN([VCSN_DETECT_SVN_REVISION],
 [
   AC_MSG_CHECKING([for the SVN revision of the source tree])
   # Use the `Rev:' line of the ChangeLog.
@@ -540,9 +542,13 @@ AC_DEFUN([DETECT_SVN_REVISION],
 
 # Pre-release numbering.
 
-AC_DEFUN([PRE_RELEASE],
+AC_DEFUN([VCSN_PRE_RELEASE],
 [
-  DETECT_SVN_REVISION
-  VERSION="${VERSION}pre${SVN_REVISION}"
-  PACKAGE_VERSION="${PACKAGE_VERSION}pre${SVN_REVISION}"
+  case $PACKAGE_VERSION in
+    *[a-z]*)
+      VCSN_DETECT_SVN_REVISION
+      VERSION="${VERSION}pre${SVN_REVISION}"
+      PACKAGE_VERSION="${PACKAGE_VERSION}pre${SVN_REVISION}"
+      ;;
+  esac
 ])

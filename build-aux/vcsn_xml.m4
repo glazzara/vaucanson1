@@ -1,6 +1,18 @@
-# xml.m4
+# xml.m4 				-*- Autoconf -*-
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2005, 2006 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `NOTICE' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-AC_DEFUN([_VCSN_CHECK_XML], 
+AC_DEFUN([_VCSN_CHECK_XML],
 [dnl
    # User-specified directory overrides any other definition
    if test "x$vcsn_cv_xml_user_hint" != xno; then
@@ -29,10 +41,10 @@ AC_DEFUN([_VCSN_CHECK_XML],
 @%:@if XERCES_VERSION_MINOR < 3
 @%:@ error "Bad Xerces-C++ minor version."
 @%:@endif
-                                                      ])], 
+                                                      ])],
                                             [vcsn_cv_xerces=yes])])
       CPPFLAGS=$vcsn_save_CPPFLAGS
-   fi          
+   fi
 
    if test x$vcsn_cv_xerces != xyes; then
       AC_ERROR([Xerces-C++ not found or not >= 2.3])
@@ -105,6 +117,7 @@ AC_DEFUN([VCSN_XML],
      enable_xml_tests=no
   fi
   if test x$enable_vcsn_xml = xyes; then
+    m4_pattern_allow([^VCSN_USE_XML$])dnl
     AC_DEFINE([VCSN_USE_XML], 1, [Define to 1 if you want to use XML I/O.])
   fi
   AM_CONDITIONAL([VCSN_USE_XML], [test x$enable_vcsn_xml = xyes])

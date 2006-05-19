@@ -42,5 +42,6 @@ AC_DEFUN([VCSN_TAF_KIT],
   else
     enable_taf_kit=no
   fi
+m4_pattern_allow([^VCSN_TAF_KIT$])dnl Hum... Dangerous.
   AM_CONDITIONAL([VCSN_TAF_KIT], [test x$enable_taf_kit = xyes])
 ])
