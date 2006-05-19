@@ -13,7 +13,7 @@
 share_dir = $(top_srcdir)/doc/share
 # Cannot factor here because Automake needs to be able to read
 # the full path and does not accept variables.
-include $(top_srcdir)/doc/share/make/share.mk
+include $(top_srcdir)/doc/share/make/share-am.mk
 include $(top_srcdir)/doc/share/make/tex.mk
 
 docdir = $(datadir)/doc/$(PACKAGE_TARNAME)

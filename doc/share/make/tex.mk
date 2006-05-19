@@ -36,17 +36,15 @@ TEXI2HTML_FLAGS = $(TEXI2DVI_FLAGS)
 # lrde.bib.  Make sure it is always there.
 all: $(bib_dir)/lrde.bib
 $(bib_dir)/lrde.bib:
-	$(bin_dir)/update-share --lrde.bib
+	cd $(share_dir) && bin/update-share --lrde.bib
 
 
 # Handouts.
 %-handout-4.pdf: %-handout.pdf
 	PATH=$(bin_dir):$$PATH $(bin_dir)/beamer-handout $< $@
 
-
-tex-mostly-clean:
+tex-mostlyclean:
 	rm -rf tmp.t2d
 
-mostly-clean: tex-mostly-clean
-
-clean: mostly-clean
+# mostlyclean-local is an Automake special target.
+mostlyclean-local: tex-mostlyclean

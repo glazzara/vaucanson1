@@ -1,3 +1,25 @@
+2006-05-19  Akim Demaille  <akim@epita.fr>
+
+	* make/share-am.mk: New, contains most of the former contents
+	of...
+	* make/share.mk: this file.
+	Now includes the previous one and defines clean and mostlyclean.
+	* make/tex.mk: Adjust.
+	* README: Adjust.
+
+2006-05-19  Akim Demaille  <akim@epita.fr>
+
+	* make/tex.mk (mostlyclean-local): New alias for mostlyclean to
+	hook Automake's mostlyclean target.
+
+2006-05-19  Akim Demaille  <akim@epita.fr>
+
+	* styles/mybabel.hva: Load the real babel with the right
+	language.
+	* styles/mybabel.sty: Don't load it.
+	* bin/update-share: Put the cd in a sub shell.
+	* make/tex.mk, make/share.mk: Fix the invocation of update-share.
+
 2006-05-16  Akim Demaille  <akim@epita.fr>
 
 	* styles/hevea.sty: New.

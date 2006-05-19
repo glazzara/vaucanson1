@@ -46,6 +46,20 @@ exploiter et de les augmenter.
 Pour l'instant, le fichier lrde.bib est ailleurs.  Tout est mis en
 place pour le "sortir" automatiquement au premier make.
 
+* share/make
+Morceaux de Makefile qui vont bien.
+
+** share/make/share.mk
+Le minimum syndical pour utiliser share/.  Une target "update" pour
+mettre à jour share/.  Définir share_dir = path/to/share avant.
+
+** share/make/share-am.mk
+Le même, mais à utiliser quand inclus dans un Makefile.am au lieu de
+Makefile.
+
+** share/make/tex.mk
+De quoi compiler du *.tex ou *.ltx vers du *.dvi, *.pdf, ou *.html.
+
 * share/styles
 Ce répertoire fournit des styles courants mais pas omniprésents (e.g.,
 qtree, bibunits etc.), des paquets pratiques mais rares (e.g., texi,

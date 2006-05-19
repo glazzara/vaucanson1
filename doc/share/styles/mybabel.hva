@@ -1,4 +1,5 @@
-\ifhevea
-  \newcommand{\og}{<<}
-  \newcommand{\fg}{>>}
-\fi
+% Ask for the same languages.
+\usepackage[\@pkg@opts]{babel}
+
+\newcommand{\og}{<<}
+\newcommand{\fg}{>>}

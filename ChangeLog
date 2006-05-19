@@ -1,3 +1,11 @@
+2006-05-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix distcheck.
+
+	* doc/doc.mk: Use share-am.mk, not share.mk.
+	* doc/manual/Makefile.am: Avoid the recompilation of the manual.
+	* Makefile.am (distcheck): Work around a problem with Automake.
+
 2006-05-19  Akim Demaille  <akim@epita.fr>
 
 	* src/demos/demo.mk: New for real.
