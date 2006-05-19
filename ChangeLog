@@ -1,5 +1,17 @@
 2006-05-19  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix the user's manual.
+
+	* doc/manual/users_manual.tex (shell, \taffn): New.
+	(\textarg): Remove.
+	* doc/manual/vaucanson_toolkit.tex: Use them, use also texi.sty's
+	features.
+	Don't use `_', but `-' to separate TAF-kit program and function
+	name components.
+	* doc/manual/Makefile.am (users_manual.dvi): Declare the depencencies.
+
+2006-05-19  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix distcheck.
 
 	* doc/doc.mk: Use share-am.mk, not share.mk.

@@ -17,7 +17,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesPackage{texi}[2004/07/13 v0.1
+\ProvidesPackage{texi}[2006/05/19 v0.2
                        Semantically meaningful macros inspired from Texinfo]
 
 \RequirePackage{hevea}
@@ -27,32 +27,12 @@
 
 \let\@ptexslash=\/
 
-% This macro is used to make a character print one way in \tt
-% (where it can probably be output as-is), and another way in other fonts,
-% where something hairier probably needs to be done.
-%
-% #1 is what to print if we are indeed using \tt; #2 is what to print
-% otherwise.  Since all the Computer Modern typewriter fonts have zero
-% interword stretch (and shrink), and it is reasonable to expect all
-% typewriter fonts to have this, we can check that font parameter.
-%
-\def\@ifusingtt#1#2{\ifdim \fontdimen3\font=0pt #1\else #2\fi}
-
-% Same as above, but check for italic font.  Actually this also catches
-% non-italic slanted fonts since it is impossible to distinguish them from
-% italic fonts.  But since this is only used by $ and it uses \sl anyway
-% this is not a problem.
-\def\@ifusingit#1#2{\ifdim \fontdimen1\font>0pt #1\else #2\fi}
-
 % \@smartitalic{ARG} outputs arg in italics, followed by an italic correction
 % unless the following character is such as not to need one.
 \def\@smartitalicx{\ifx\@next,\else\ifx\@next-\else\ifx\@next.\else
                     \@ptexslash\fi\fi\fi}
-% FIXME: AD: \ttsl is not defined, and I don't know where to find it.
-%\def\@smartslanted#1{{\@ifusingtt\ttsl\sl #1}\futurelet\@next\@smartitalicx}
-%\def\@smartitalic#1{{\@ifusingtt\ttsl\it #1}\futurelet\@next\@smartitalicx}
-\def\@smartslanted#1{{\sl #1}\futurelet\@next\@smartitalicx}
-\def\@smartitalic#1{{\it #1}\futurelet\@next\@smartitalicx}
+\def\@smartslanted#1{{\ttfamily\slshape #1}\futurelet\@next\@smartitalicx}
+\def\@smartitalic#1{{\ttfamily\itshape #1}\futurelet\@next\@smartitalicx}
 
 \newcommand\var[1]{\@smartslanted{#1}}
 \newcommand\dfn[1]{\@smartslanted{#1}}

@@ -14,8 +14,10 @@ pdf: $(manual)
 # We use vaucanson-g, which requires plain DVI compilation.  Don't
 # depend on users_manual.dvi directly, since it is not shipped, so
 # that would trigger a user-side compilation.
-$(manual): $(manual_sources)
+$(manual): $(manual_sources) $(share_tex_dependencies)
 	$(MAKE) $(AM_MAKEFLAGS) users_manual.dvi
-	$(DVIPDF) users_manual.dvi $(manual)
+# Help dvipdf find the images/ directory.
+	TEXINPUTS=$(srcdir): $(DVIPDF) users_manual.dvi $(manual)
 
+users_manual.dvi: $(manual_sources) $(share_tex_dependencies)
 dist_doc_DATA = $(manual)

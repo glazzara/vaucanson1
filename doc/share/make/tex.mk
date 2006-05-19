@@ -13,23 +13,27 @@ TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
 TEXI2HTML = $(TEXI2DVI) --html
 TEXI2HTML_FLAGS = $(TEXI2DVI_FLAGS)
 
-%.pdf: %.tex $(STYLES) $(wildcard $(style_dir)/* $(bib_dir)/*)
+share_tex_dependencies = \
+$(STYLES) \
+$(wildcard $(style_dir)/* $(bib_dir)/*)
+
+%.pdf: %.tex $(share_tex_dependencies)
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
 
-%.dvi: %.tex $(STYLES) $(wildcard $(style_dir)/* $(bib_dir)/*)
+%.dvi: %.tex $(share_tex_dependencies)
 	$(TEXI2DVI) $(TEXI2DVI_FLAGS) -o $@ $<
 
-%.html: %.tex $(STYLES) $(wildcard $(style_dir)/* $(bib_dir)/*)
+%.html: %.tex $(share_tex_dependencies)
 	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -o $@ $<
 
 
-%.pdf: %.ltx $(STYLES) $(wildcard $(style_dir)/* $(bib_dir)/*)
+%.pdf: %.ltx $(share_tex_dependencies)
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
 
-%.dvi: %.ltx $(STYLES) $(wildcard $(style_dir)/* $(bib_dir)/*)
+%.dvi: %.ltx $(share_tex_dependencies)
 	$(TEXI2DVI) $(TEXI2DVI_FLAGS) -o $@ $<
 
-%.html: %.ltx $(STYLES) $(wildcard $(style_dir)/* $(bib_dir)/*)
+%.html: %.ltx $(share_tex_dependencies)
 	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -o $@ $<
 
 

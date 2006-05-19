@@ -34,8 +34,8 @@
   \end{center}}
 
 \newcommand{\textrp}[1]{\textit{#1}}
-\newcommand{\textarg}[1]{\textsl{#1}}
-\newcommand\inputcode[4][]{%
+
+\newcommand{\inputcode}[4][]{%
   \begin{figure}[htbp]
     \centering
     \begin{minipage}{0.9\textwidth}
@@ -47,6 +47,15 @@
 
 \usepackage{graphicx}
 \graphicspath{{figures/}}
+
+%% Display an interactive session.
+\newenvironment{shell}
+{\begin{alltt}}
+{\end{alltt}}
+
+%% A TAF-kit function name (i.e., the first argument for TAF-Kit
+%% programs).
+\newcommand{\taffn}[1]{\code{#1}}
 
 \newcommand{\Vauc}{\textsc{Vaucanson}\xspace}
 

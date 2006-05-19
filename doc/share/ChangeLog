@@ -1,3 +1,11 @@
+2006-05-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix texi.sty.
+
+	* styles/texi.sty: Don't reproduce texinfo.tex's code, using LaTeX
+	features suffices.
+	* make/tex.mk (share_tex_dependencies): New.
+
 2006-05-19  Akim Demaille  <akim@epita.fr>
 
 	* make/share-am.mk: New, contains most of the former contents
