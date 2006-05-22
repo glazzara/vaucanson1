@@ -10,8 +10,6 @@
 # `NOTICE' file in the root directory.
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
-#
-# $Id$
 
 # VCSN_HEADER
 
@@ -209,7 +207,9 @@ AC_CONFIG_FILES([
 
 m4_include([build-aux/tests.m4])
 
+m4_pattern_allow([VCSN_TESTS_SUBDIRS])
 AC_SUBST([VCSN_TESTS_SUBDIRS])
+m4_pattern_allow([VCSN_VAUCANSWIG_SUBDIR])
 AC_SUBST([VCSN_VAUCANSWIG_SUBDIR])
 
 AC_OUTPUT

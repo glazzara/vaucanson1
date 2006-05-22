@@ -1,3 +1,12 @@
+2006-05-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	* build-aux/vcsn_xml.m4, build-aux/vcsn_taf_kit.m4: Rename as...
+	* build-aux/vcsn-xml.m4, build-aux/vcsn-taf-kit.m4: these.
+	* build-aux/vcsn.m4, build-aux/vcsn-xml.m4, build-aux/vcsn-taf-kit.m4,
+	* configure.ac: 
+	Use m4_pattern_forbid/allow properly.
+	Formatting changes.
+
 2006-05-19  Akim Demaille  <akim@epita.fr>
 
 	* build-aux/vcsn.m4, build-aux/vcsn_xml.m4, build-aux/vcsn_taf_kit.m4:

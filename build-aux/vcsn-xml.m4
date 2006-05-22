@@ -12,6 +12,8 @@
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+# _VCSN_CHECK_XML
+# ---------------
 AC_DEFUN([_VCSN_CHECK_XML],
 [dnl
    # User-specified directory overrides any other definition
@@ -86,6 +88,9 @@ int main() {
    AC_LANG_POP([C++])
 ])
 
+
+# VCSN_XML
+# --------
 # Xerces C++
 AC_DEFUN([VCSN_XML],
 [dnl
@@ -117,7 +122,7 @@ AC_DEFUN([VCSN_XML],
      enable_xml_tests=no
   fi
   if test x$enable_vcsn_xml = xyes; then
-    m4_pattern_allow([^VCSN_USE_XML$])dnl
+    m4_pattern_allow([^VCSN_USE_XML(_(TRUE|FALSE))?$])dnl
     AC_DEFINE([VCSN_USE_XML], 1, [Define to 1 if you want to use XML I/O.])
   fi
   AM_CONDITIONAL([VCSN_USE_XML], [test x$enable_vcsn_xml = xyes])

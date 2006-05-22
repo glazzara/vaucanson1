@@ -1,5 +1,20 @@
+#                                                           -*- Autoconf -*-
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2006 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `NOTICE' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-## Terminal library test, taken from GNU Texinfo configure.ac
+# VCSN_CHECK_TERMLIB
+# ------------------
+# Terminal library test, taken from GNU Texinfo configure.ac
 AC_DEFUN([VCSN_CHECK_TERMLIB],
 [dnl
   AC_CHECK_HEADERS(ncurses/termcap.h termcap.h)
@@ -16,7 +31,10 @@ AC_DEFUN([VCSN_CHECK_TERMLIB],
   AC_SUBST([TERMLIBS])
 ])
 
-## TAF Kit enabling
+
+# VCSN_TAF_KIT
+# ------------
+# TAF Kit enabling
 AC_DEFUN([VCSN_TAF_KIT],
 [dnl
 
@@ -42,6 +60,6 @@ AC_DEFUN([VCSN_TAF_KIT],
   else
     enable_taf_kit=no
   fi
-m4_pattern_allow([^VCSN_TAF_KIT$])dnl Hum... Dangerous.
+m4_pattern_allow([^VCSN_TAF_KIT(_(TRUE|FALSE))?$])
   AM_CONDITIONAL([VCSN_TAF_KIT], [test x$enable_taf_kit = xyes])
 ])
