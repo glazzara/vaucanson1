@@ -1,5 +1,13 @@
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
+	Move the xml-doc to using share/.
+
+	* doc/xml/Makefile.am: Mock the changes in manual/.
+	* doc/xml/xml_proposal.tex: Use myhyperref.
+	Use \autoref consistently over \ref.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
 	Remove CONFIGURE_DEPENDENCIES.
 
 	* Makefile.am: As they are useless (Automake does it) and troublesome.

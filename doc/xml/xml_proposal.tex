@@ -4,6 +4,7 @@
 \usepackage{alltt}
 \usepackage{xspace}
 \usepackage{vaucanson-g}
+\usepackage{myhyperref}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\bigskipneg}{\vspace*{-5ex}} %960728
@@ -106,8 +107,8 @@ not complicated nor more costly than to test whether an announced property is in
 \section{Simple examples with default types}
 \subsection{A Boolean automaton}
 
-As a first example, the automaton of Figure \ref{B1} is represented in
-Figure \ref{B1xml}. This Boolean automaton recognizes the set of
+As a first example, the automaton of \autoref{B1} is represented in
+\autoref{B1xml}. This Boolean automaton recognizes the set of
 words over the alphabet $\{a,b\}$ that contain at least one $b$.\\
 
 \begin{figure}[ht]
@@ -160,8 +161,8 @@ words over the alphabet $\{a,b\}$ that contain at least one $b$.\\
 \subsection{A Boolean transducer}
 
 The XML proposition can also be used to represent transducers. The example of
-Figure \ref{bindiv3} gives the quotient by 3 of a binary number. It is
-represented in Figure \ref{bindiv3xml}.
+\autoref{bindiv3} gives the quotient by 3 of a binary number. It is
+represented in \autoref{bindiv3xml}.
 
 
 \begin{figure}[h]
@@ -267,10 +268,11 @@ presented.
 
 \subsection{The \automatontag{} and \transducertag{} tags}
 
-As one can see in the previous examples \ref{B1xml} and \ref{bindiv3xml}, these
-tags specify the type(s) of the object(s) contained in the XML session. The content
-of an object is then specific, and it is linked to the type of tag that is used.
-In any case, an attribute ``name'', present in these tags, allows to bring an
+As one can see in the previous examples, \autoref{B1xml} and
+\autoref{bindiv3xml}, these tags specify the type(s) of the object(s)
+contained in the XML session. The content of an object is then
+specific, and it is linked to the type of tag that is used.  In any
+case, an attribute ``name'', present in these tags, allows to bring an
 explicit name to an automaton and to store it in a XML file.
 
 \subsection{The \typetag{} tag}
@@ -281,7 +283,7 @@ generality, this label can be a polynomial, or even a rational series,
 over a monoid with coefficients taken in a semiring. The \typetag{}
 tag allows to refer to this semiring and this monoid.\\
 
-In the automaton described in Figure \ref{B1xml}, no specific
+In the automaton described in \autoref{B1xml}, no specific
 information is given on the type of the automaton. The proposal comes
 with a set of predefined types, in order to limit amount of needed
 declarations for widely used structures. When the document starts with
@@ -300,11 +302,11 @@ monoid doesn't fit. For this reason, this tag enables the user to
 determine the basic symbols set that she wants to use as an alphabet in the
 labels of the transitions.\\
 
-For instance, in the current state, the automaton of figure \ref{B1} is
+For instance, in the current state, the automaton of \autoref{B1} is
 defined with the default alphabet. It could be better to set an alphabet that
 only contains the letters \textit{a} and \textit{b}, so as to prevent the user
 from possible errors subsequent to the first definition. So, the resticted
-alphabet would be defined as shown in figure \ref{alpha1}
+alphabet would be defined as shown in \autoref{alpha1}.
 
 {\small
 
@@ -325,7 +327,8 @@ alphabet would be defined as shown in figure \ref{alpha1}
 \end{figure}
 }
 
-In like manner, one can also set a restriction on the alphabet like in Figure \ref{restriction1}.
+In like manner, one can also set a restriction on the alphabet like in
+\autoref{restriction1}.
 
 {\small
 
@@ -353,17 +356,18 @@ alphabet.
 
 To create a transducer based on a free monoid product, it is necessary to
 declare the two monoids in order to determine the two needed alphabets. A
-suitable example can be found in the figure \ref{transducertype}. It represents
+suitable example can be found in the \autoref{transducertype}. It represents
 the type of a default transducer.\\
 
-The XSD description of this tag is a little complicated. Some elements allow
-the proposition to be extensive and to fully describe any monoid type. This is
-why the first elements of the \monoidtag{} tag are a choice. It can be one or
-more monoid types to allow some complex definitions (See figure
-\ref{transducertype} for an example), or it can be one or more generator types
-to describe the letters composing the alphabet of the monoid. But both types
-cannot exist in the same monoid type description. Concerning transducers, only
-two monoids can be defined under the main \monoidtag{} tag so as to remain a
+The XSD description of this tag is a little complicated. Some elements
+allow the proposition to be extensive and to fully describe any monoid
+type. This is why the first elements of the \monoidtag{} tag are a
+choice. It can be one or more monoid types to allow some complex
+definitions (see \autoref{transducertype} for an example), or it can
+be one or more generator types to describe the letters composing the
+alphabet of the monoid. But both types cannot exist in the same monoid
+type description. Concerning transducers, only two monoids can be
+defined under the main \monoidtag{} tag so as to remain a
 free monoid product.\\
 
 The monoid attributes are:
@@ -397,7 +401,7 @@ seen as a weighted automaton with its weights in $Rat(B^*)$.\\
 
 To describe a weighted automaton, the \typetag{} tag provides a set
 of customizable tags to specify the type of multiplicities. The example
-of Figure \ref{B1Zxml} shows how to turn the automaton $B_1$ into a
+of \autoref{B1Zxml} shows how to turn the automaton $B_1$ into a
 weighted automaton with weights in ${\mathbb Z}$ -- so it counts the
 number of $b$ in a word.
 
@@ -442,7 +446,7 @@ is achieved with:
 \verb|<semiring set="Z" operations="tropicalMax">|}
 \end{center}
 
-All the content definition previously defined in figure \ref{B1xml} is
+All the content definition previously defined in \autoref{B1xml} is
 still totally compatible with a weighted automaton, and can remain
 unchanged.\\
 
@@ -456,11 +460,11 @@ value.\\\\
 
 
 The \semiringtag{} tag proposes some solutions for the transducers, like the
-example of figure \ref{ratseries1}. It describes the right transducer
+example of \autoref{ratseries1}. It describes the right transducer
 for binary addition seen as a weighted automaton with
 weight in $Rat(B^*)$. \monoidtag{} and \semiringtag{} tags can recursively be
 defined, in order to describe a complex type. Only the \typetag{} is shown in
-the example \ref{ratseries1} so as to remain clear.
+the example \autoref{ratseries1} so as to remain clear.
 
 \begin{figure}[h]
   \begin{center}
@@ -517,7 +521,7 @@ For automata and transducers, the \contenttag{} tag has the same structure.
 The following is the description of this tag. Bold elements are mandatory ones.
 The tags \geometrytag{} and \drawingtag{} can be placed at any
 place of the document and are quite special. They are ignored here, but more
-information can be found in section \ref{title_vizualisation}.\\\\
+information can be found in \autoref{title_vizualisation}.\\\\
 
 The first tag, \textbf{\statestag{}}, gives the possibility to fully describe the states of an automaton
 and their content. The \statestag{} tag is composed of:
@@ -580,7 +584,7 @@ tag . Most of the time, there isn't any problem since its value is a single
 character. But one can prefer to set a rational expression denoting the
 language that must be recognized to pass through the given transition. Its
 type is a non-restricted string, but there is a grammar to follow so as to be correctly
-understood by \Vauc. It is presented in figure \ref{Grammar}, The empty word
+understood by \Vauc. It is presented in \autoref{Grammar}, The empty word
 is represented by ``1'', and the absorbent element of the semiring by ``0''.
 These are default values in \Vauc.
 
@@ -629,7 +633,7 @@ A way to manipulate many automata would be to combine them in
 a single document. The proposal offers this feature through the
 \sessiontag{} tag. An unlimited number of automata or transducers
 can be combined in a single XML document. A XML session can also be named.
-An application can be found in figure \ref{session1}.
+An application can be found in \autoref{session1}.
 
 {\small
 
@@ -653,10 +657,10 @@ An application can be found in figure \ref{session1}.
 
 The \typetag{} tag has two children: the \monoidtag{} tag and
 the \semiringtag{} tag. None of these tags is mandatory, and both have
-different values according to the root tag. Figure
-\ref{automatontype} shows the equivalent XML code if one omits the
+different values according to the root tag. \autoref{automatontype}
+shows the equivalent XML code if one omits the
 \typetag{} tag when declaring an automaton. Similarly,
-Figure \ref{transducertype} shows the default type for transducers.
+\autoref{transducertype} shows the default type for transducers.
 The \texttt{operations} attributes is set to \verb|"numerical"|,
 which means that usual laws over $\mathbb{B}$ shall be applied.
 
@@ -712,8 +716,9 @@ about the way the automata of a session must be drawn.
 Let us note that these tags can be used at any level of the document. In this
 case, the defined properties are applied to the tag in which they are defined,
 and to its children. It is possible to define some properties in a tag and to
-locally override them in a child tag. For example in Figure
-\ref{override_properties}, the filling color of the states is globally set to
+locally override them in a child tag. For example in
+\autoref{override_properties}, the filling color of the states is
+globally set to
 \textit{black}, and the color of state $s_1$ is locally set to red. As a
 result, $s_0$ and $s_2$ will be black, and $s_1$ will be red.
 
@@ -753,7 +758,7 @@ attribute, that assign the type of the transition (\textit{line},
 \texttt{direction} attribute, that can be used to assign the direction
 angle of a loop, for instance. This attribute is numeric.
 
-The example of Figure \ref{geom1} sets a global offset
+The example of \autoref{geom1} sets a global offset
 for the document, and then places the states in the plane.
 It also sets the type of the transition as a left arc.
 {\small
@@ -796,7 +801,7 @@ Vaucanson-G, can be used in the \drawingtag{} tag at many places in the proposal
 Since it's not possible to exhaustively name all needed attributes
 users may need, the proposal offers a limited set of properties. For
 example, \textit{stateFillColor} or \textit{transitionStyle} usage are
-shown in Figure \ref{drawing1}. These attributes use a string
+shown in \autoref{drawing1}. These attributes use a string
 representation to describe their values.
 
 One of the powerful features of XSD files is the

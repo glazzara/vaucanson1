@@ -1,15 +1,21 @@
-# This document should be compiled even if VCSN_USE_XML is not set.
+include $(top_srcdir)/doc/doc.mk
 
-EXTRA_DIST = xml_proposal.tex
+manual_name = xml_proposal
+manual = $(srcdir)/$(manual_name).pdf
+manual_sources = \
+xml_proposal.tex
 
-xml_proposal.pdf: xml_proposal.tex
-	env TEXINPUTS=$(top_srcdir)/doc:$$TEXINPUTS 		\
-		$(TEXI2DVI) $(srcdir)/xml_proposal.tex
-	$(DVIPDF) xml_proposal.dvi
+EXTRA_DIST = $(manual_sources)
 
-docdir = $(datadir)/doc/$(PACKAGE_TARNAME)
-CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp *.log
+pdf: $(manual)
 
-MAINTAINERCLEANFILES = $(dist_doc_DATA)
+# We use vaucanson-g, which requires plain DVI compilation.  Don't
+# depend on users_manual.dvi directly, since it is not shipped, so
+# that would trigger a user-side compilation.
+$(manual): $(manual_sources) $(share_tex_dependencies)
+	$(MAKE) $(AM_MAKEFLAGS) $(manual_name).dvi
+# Help dvipdf find the images/ directory.
+	TEXINPUTS=$(srcdir): $(DVIPDF) $(manual_name).dvi $(manual)
 
-dist_doc_DATA = xml_proposal.pdf
+$(manual_name).dvi: $(manual_sources) $(share_tex_dependencies)
+dist_doc_DATA = $(manual)
