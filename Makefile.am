@@ -11,13 +11,12 @@ EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2
 ### Tell it where to find them.
 ###
 ACLOCAL_AMFLAGS = -I build-aux
-CONFIGURE_DEPENDENCIES = $(srcdir)/build-aux/vcsn.m4 $(srcdir)/build-aux/vcsn_xml.m4 $(srcdir)/build-aux/tests.m4
 
 ###
 ### Autoconf macros are installable and distributable.
 ###
 m4datadir = $(datadir)/aclocal
-dist_m4data_DATA = build-aux/vcsn.m4 build-aux/vcsn_xml.m4
+dist_m4data_DATA = build-aux/vcsn.m4 build-aux/vcsn-xml.m4
 
 ###
 ### Making the demos. (. is builddir)
