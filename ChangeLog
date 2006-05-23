@@ -1,5 +1,12 @@
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
+	XML: fill paragraphs.
+
+	* doc/xml/xml_proposal.tex: Fill the paragraphs.
+	Don't use \\ to end the paragraphs, two \n suffice.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
 	Move the xml-doc to using share/.
 
 	* doc/xml/Makefile.am: Mock the changes in manual/.

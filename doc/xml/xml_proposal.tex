@@ -67,49 +67,53 @@ complexity. Finally, we briefly focus on implementation concerns.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Introduction}
 
-Conceiving a universal automaton exchange format aims at
-providing the community a communication tool that could be used
-for the connection of the various programs that deal with
-automata and transducers.
-This system is used in the Vaucanson platform. Someone can load an automaton in
-Vaucanson from a XML file, or store an existing one from Vaucanson into an XML file.
+Conceiving a universal automaton exchange format aims at providing the
+community a communication tool that could be used for the connection
+of the various programs that deal with automata and transducers.  This
+system is used in the Vaucanson platform. Someone can load an
+automaton in Vaucanson from a XML file, or store an existing one from
+Vaucanson into an XML file.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview}
 
-As it will be described further, we use a XSD file (see \cite{XSD}) for the description
-format of this XML proposition, since it allows context sensitive declarations.
-This report first presents a XML representation of a classical Boolean
-automaton. Then this example will be fleshed out, so as to deal with transducers
-and most general automata with multiplicity.\\
+As it will be described further, we use a XSD file (see \cite{XSD})
+for the description format of this XML proposition, since it allows
+context sensitive declarations.  This report first presents a XML
+representation of a classical Boolean automaton. Then this example
+will be fleshed out, so as to deal with transducers
+and most general automata with multiplicity.
 
 The description of automata is structured in two parts.  The
-\typetag{} tag provides some automaton type definitions. This can be a Boolean
-automaton, or a weighted one with the ability to specify the weight type.
-It can also have some alphabet specifications, etc. The \contenttag{} tag provides
-the definition of the automaton ``structure''.\\
+\typetag{} tag provides some automaton type definitions. This can be a
+Boolean automaton, or a weighted one with the ability to specify the
+weight type.  It can also have some alphabet specifications, etc. The
+\contenttag{} tag provides the definition of the automaton
+``structure''.
 
 The visual representation of automata involves a very large amount of
 information. This is why two different types of information are
-distinguished in this proposition. They are described in the two following tags.
- The \geometrytag{} data correspond to the embedding
-of the automaton in a plane. They represent the way the automaton is placed in
-it. The tag consequently contains information such as the coordinates of the
-states, or the directions and types of the transitions. The \drawingtag{} data
-contain the definition of attributes that characterize the graphical aspects of the
-automaton's elements. Therefore, this tag contains information like the color of the
-states or the style of the transitions. \\
+distinguished in this proposition. They are described in the two
+following tags.  The \geometrytag{} data correspond to the embedding
+of the automaton in a plane. They represent the way the automaton is
+placed in it. The tag consequently contains information such as the
+coordinates of the states, or the directions and types of the
+transitions. The \drawingtag{} data contain the definition of
+attributes that characterize the graphical aspects of the automaton's
+elements. Therefore, this tag contains information like the color of
+the states or the style of the transitions.
 
-The proposed policy supposes these properties to be checked by the program, and that it is
-not complicated nor more costly than to test whether an announced property is indeed fulfilled.
+The proposed policy supposes these properties to be checked by the
+program, and that it is not complicated nor more costly than to test
+whether an announced property is indeed fulfilled.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Simple examples with default types}
 \subsection{A Boolean automaton}
 
 As a first example, the automaton of \autoref{B1} is represented in
-\autoref{B1xml}. This Boolean automaton recognizes the set of
-words over the alphabet $\{a,b\}$ that contain at least one $b$.\\
+\autoref{B1xml}. This Boolean automaton recognizes the set of words
+over the alphabet $\{a,b\}$ that contain at least one $b$.
 
 \begin{figure}[ht]
 \begin{center}
@@ -221,9 +225,9 @@ represented in \autoref{bindiv3xml}.
 \subsection{Naive description of the \contenttag{} tag}
 
 The \contenttag{} tag aims at describing the structure of the
-automaton. It has two children which are mandatory and supposed to appear in a
-specific order. These tags enable definitions of states and
-transitions. \\
+automaton. It has two children which are mandatory and supposed to
+appear in a specific order. These tags enable definitions of states
+and transitions.
 
 The first tag is \statestag{}, representing start declaration of
 the set of states of the automaton. A state has three attributes: a
@@ -238,33 +242,34 @@ of the set of transitions. The initial and final
 which destination is $s$. This transition can have a \labelattr{} or a
 \numberattr{} in some cases, so it seems to be logical to have the list of
 initial states in the \transitionstag{} tag. In like manner, the final
-states can be found at the same place in the XML description.\\
-It is mandatory for a \transitiontag{} to
-have two attributes: \srcname{} and \dstname{}, representing source
-and destination of the transition. In the case of an \initialtag{}
-or \finaltag{} transition, the only mandatory attribute is
-\stateattr{}, referring to the initial or final state the transition belongs to.\\
+states can be found at the same place in the XML description.
 
-There is no limitation of the format for the content
-of attributes, as it is a non-restricted string. For example, a user
-can store a rational expression in the \labelattr{}, \inattr{} or \outattr{}
- attributes of a transition. The use of these attributes depends on the
-structure of automaton one defines. When omitting them, the XSD grammar
-proposes the empty word as the default value.\\
+It is mandatory for a \transitiontag{} to have two attributes:
+\srcname{} and \dstname{}, representing source and destination of the
+transition. In the case of an \initialtag{} or \finaltag{} transition,
+the only mandatory attribute is \stateattr{}, referring to the initial
+or final state the transition belongs to.
 
-At this point, most of automata can be easily described. These examples use
-only a part of the XML description that we present, but allow the reader to
-understand the basis of this format and to easily deal with a great amount of
-automata and transducers.
+There is no limitation of the format for the content of attributes, as
+it is a non-restricted string. For example, a user can store a
+rational expression in the \labelattr{}, \inattr{} or \outattr{}
+attributes of a transition. The use of these attributes depends on the
+structure of automaton one defines. When omitting them, the XSD
+grammar proposes the empty word as the default value.
+
+At this point, most of automata can be easily described. These
+examples use only a part of the XML description that we present, but
+allow the reader to understand the basis of this format and to easily
+deal with a great amount of automata and transducers.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Description of the format}
 
-This part describes in details some tags of the XML format.
-Firstly, the tags \automatontag{} and \transducertag{} will be introduced.
-Then, the two main tags, namely \typetag{} and \contenttag{}, will be described.
-Eventually, the main \sessiontag{} tag that holds all the other ones will be
-presented.
+This part describes in details some tags of the XML format.  Firstly,
+the tags \automatontag{} and \transducertag{} will be introduced.
+Then, the two main tags, namely \typetag{} and \contenttag{}, will be
+described.  Eventually, the main \sessiontag{} tag that holds all the
+other ones will be presented.
 
 \subsection{The \automatontag{} and \transducertag{} tags}
 
@@ -281,32 +286,34 @@ In many cases, automata are graphs whose transitions are labeled by
 symbols called letters, taken in a set called alphabet. In full
 generality, this label can be a polynomial, or even a rational series,
 over a monoid with coefficients taken in a semiring. The \typetag{}
-tag allows to refer to this semiring and this monoid.\\
+tag allows to refer to this semiring and this monoid.
 
-In the automaton described in \autoref{B1xml}, no specific
-information is given on the type of the automaton. The proposal comes
-with a set of predefined types, in order to limit amount of needed
-declarations for widely used structures. When the document starts with
-the \automatontag{} tag and when the \typetag{} tag is omitted,
-the default automaton type is a Boolean automaton, on the standard
-alphabet (all the letters of the alphabet, including capitalized ones, and digits).
-Concerning the \transducertag{} tag without any \typetag{} tag, the default
-transducer is Boolean with two monoids built on the same standard alphabet.
-These default types will be described further in the XML format.
+In the automaton described in \autoref{B1xml}, no specific information
+is given on the type of the automaton. The proposal comes with a set
+of predefined types, in order to limit amount of needed declarations
+for widely used structures. When the document starts with the
+\automatontag{} tag and when the \typetag{} tag is omitted, the
+default automaton type is a Boolean automaton, on the standard
+alphabet (all the letters of the alphabet, including capitalized ones,
+and digits).  Concerning the \transducertag{} tag without any
+\typetag{} tag, the default transducer is Boolean with two monoids
+built on the same standard alphabet.  These default types will be
+described further in the XML format.
 
 
 \subsubsection{The \monoidtag{} tag}
 
 There are cases for which the default alphabet proposed to build the
 monoid doesn't fit. For this reason, this tag enables the user to
-determine the basic symbols set that she wants to use as an alphabet in the
-labels of the transitions.\\
+determine the basic symbols set that she wants to use as an alphabet
+in the labels of the transitions.
 
 For instance, in the current state, the automaton of \autoref{B1} is
-defined with the default alphabet. It could be better to set an alphabet that
-only contains the letters \textit{a} and \textit{b}, so as to prevent the user
-from possible errors subsequent to the first definition. So, the resticted
-alphabet would be defined as shown in \autoref{alpha1}.
+defined with the default alphabet. It could be better to set an
+alphabet that only contains the letters \textit{a} and \textit{b}, so
+as to prevent the user from possible errors subsequent to the first
+definition. So, the resticted alphabet would be defined as shown in
+\autoref{alpha1}.
 
 {\small
 
@@ -349,15 +356,16 @@ In like manner, one can also set a restriction on the alphabet like in
 \end{figure}
 }
 
-In order to avoid some potential problems, the user can set the value of the
-empty word with the attribute \textit{identity\_symbol} of the monoid. This way,
-the empty word symbol can always be different from any character of the used
-alphabet.
+In order to avoid some potential problems, the user can set the value
+of the empty word with the attribute \textit{identity\_symbol} of the
+monoid. This way, the empty word symbol can always be different from
+any character of the used alphabet.
 
-To create a transducer based on a free monoid product, it is necessary to
-declare the two monoids in order to determine the two needed alphabets. A
-suitable example can be found in the \autoref{transducertype}. It represents
-the type of a default transducer.\\
+To create a transducer based on a free monoid product, it is necessary
+to declare the two monoids in order to determine the two needed
+alphabets. A suitable example can be found in the
+\autoref{transducertype}. It represents the type of a default
+transducer.
 
 The XSD description of this tag is a little complicated. Some elements
 allow the proposition to be extensive and to fully describe any monoid
@@ -367,40 +375,43 @@ definitions (see \autoref{transducertype} for an example), or it can
 be one or more generator types to describe the letters composing the
 alphabet of the monoid. But both types cannot exist in the same monoid
 type description. Concerning transducers, only two monoids can be
-defined under the main \monoidtag{} tag so as to remain a
-free monoid product.\\
+defined under the main \monoidtag{} tag so as to remain a free monoid
+product.
 
 The monoid attributes are:
 \begin{itemize}
-  \item \texttt{type}\\
-This is used to set the type of the monoid. Choices are unit, free or product.
-  \item \texttt{generators}\\
-This attribute sets a global restriction to the alphabet. The current possibilities
-are letters, digits, pair or weighted.
-  \item \texttt{identity\_symbol}\\
-Used to set an empty word symbol.
+\item \texttt{type}\\
+  This is used to set the type of the monoid. Choices are unit, free
+  or product.
+\item \texttt{generators}\\
+  This attribute sets a global restriction to the alphabet. The
+  current possibilities are letters, digits, pair or weighted.
+\item \texttt{identity\_symbol}\\
+  Used to set an empty word symbol.
 \end{itemize}
 \newpage
 
 The XSD description of the \generatortag{} tag is:
 \begin{itemize}
-  \item \texttt{value}\\
-This is used to add one letter in the alphabet. One can put several
-\generatortag{} tags in a monoid description so as to have bigger alphabets.
-  \item \texttt{range}\\
-This allows to set a fixed range without being obliged to add all the symbols
-one by one. For instance, the range ascii sets the alphabet on the ascii
-characters.
+\item \texttt{value}\\
+  This is used to add one letter in the alphabet. One can put several
+  \generatortag{} tags in a monoid description so as to have bigger
+  alphabets.
+\item \texttt{range}\\
+  This allows to set a fixed range without being obliged to add all
+  the symbols one by one. For instance, the range ascii sets the
+  alphabet on the ascii characters.
 \end{itemize}
 
 \subsubsection{The \semiringtag{} tag}
 
 The XML proposition enables a full description of the automaton type.
-It consequently proposes a way to write weighted automata or transducers
-seen as a weighted automaton with its weights in $Rat(B^*)$.\\
+It consequently proposes a way to write weighted automata or
+transducers seen as a weighted automaton with its weights in
+$Rat(B^*)$.
 
-To describe a weighted automaton, the \typetag{} tag provides a set
-of customizable tags to specify the type of multiplicities. The example
+To describe a weighted automaton, the \typetag{} tag provides a set of
+customizable tags to specify the type of multiplicities. The example
 of \autoref{B1Zxml} shows how to turn the automaton $B_1$ into a
 weighted automaton with weights in ${\mathbb Z}$ -- so it counts the
 number of $b$ in a word.
@@ -429,14 +440,14 @@ number of $b$ in a word.
 
 The \semiringtag{} tag can be described with two attributes:
 \begin{itemize}
-  \item \texttt{Set}\\
-    The set on which the automaton is built. The possible sets are
-    ${\mathbb B}$, ${\mathbb R}$, ${\mathbb Z}$, ${\mathbb N}$ and $ratSeries$
-    (which will be discussed later).
-  \item \texttt{Operations}\\
-    The type of operations that can be performed on this set.
-    The possibilities are \textit{numerical}, \textit{boolean}, \textit{tropicalMin}
-    or \textit{tropicalMax}.
+\item \texttt{Set}\\
+  The set on which the automaton is built. The possible sets are
+  ${\mathbb B}$, ${\mathbb R}$, ${\mathbb Z}$, ${\mathbb N}$ and
+  $ratSeries$ (which will be discussed later).
+\item \texttt{Operations}\\
+  The type of operations that can be performed on this set.  The
+  possibilities are \textit{numerical}, \textit{boolean},
+  \textit{tropicalMin} or \textit{tropicalMax}.
 \end{itemize}
 
 For instance, describing the tropical semiring $({\mathbb Z}, max, +)$
@@ -448,23 +459,24 @@ is achieved with:
 
 All the content definition previously defined in \autoref{B1xml} is
 still totally compatible with a weighted automaton, and can remain
-unchanged.\\
+unchanged.
 
 Two different ways are proposed to set the weight of a transition. One
 can directly store the multiplicity in the \verb|label| attribute, or
 use the dedicated \verb|weight| attribute. These attributes can
 indistinctly be used in a \transitiontag{}, an \initialtag{} or a
 \finaltag{} tag. When omitting the \verb|weight| attribute, the XSD
-grammar proposes the identity of the semiring as the default
-value.\\\\
+grammar proposes the identity of the semiring as the default value.
 
+\medskip
 
-The \semiringtag{} tag proposes some solutions for the transducers, like the
-example of \autoref{ratseries1}. It describes the right transducer
-for binary addition seen as a weighted automaton with
-weight in $Rat(B^*)$. \monoidtag{} and \semiringtag{} tags can recursively be
-defined, in order to describe a complex type. Only the \typetag{} is shown in
-the example \autoref{ratseries1} so as to remain clear.
+The \semiringtag{} tag proposes some solutions for the transducers,
+like the example of \autoref{ratseries1}. It describes the right
+transducer for binary addition seen as a weighted automaton with
+weight in $Rat(B^*)$. \monoidtag{} and \semiringtag{} tags can
+recursively be defined, in order to describe a complex type. Only the
+\typetag{} is shown in the example \autoref{ratseries1} so as to
+remain clear.
 
 \begin{figure}[h]
   \begin{center}
@@ -517,34 +529,40 @@ recursion in the definition of an automaton structure.
 
 \subsection{The \contenttag{} tag}
 
-For automata and transducers, the \contenttag{} tag has the same structure.
-The following is the description of this tag. Bold elements are mandatory ones.
-The tags \geometrytag{} and \drawingtag{} can be placed at any
-place of the document and are quite special. They are ignored here, but more
-information can be found in \autoref{title_vizualisation}.\\\\
+For automata and transducers, the \contenttag{} tag has the same
+structure.  The following is the description of this tag. Bold
+elements are mandatory ones.  The tags \geometrytag{} and
+\drawingtag{} can be placed at any place of the document and are quite
+special. They are ignored here, but more information can be found in
+\autoref{title_vizualisation}.
 
-The first tag, \textbf{\statestag{}}, gives the possibility to fully describe the states of an automaton
-and their content. The \statestag{} tag is composed of:
+\medskip
+
+The first tag, \textbf{\statestag{}}, gives the possibility to fully
+describe the states of an automaton and their content. The
+\statestag{} tag is composed of:
 \begin{itemize}
-  \item \statetag{}\\
-    This tag represents one state. There must be as many of these tags as there are states
-in the automaton. Such a tag has the following elements and attributes:
-\begin{itemize}
+\item \statetag{}\\
+  This tag represents one state. There must be as many of these tags
+  as there are states in the automaton. Such a tag has the following
+  elements and attributes:
+  \begin{itemize}
   \item \texttt{\textbf{name}}\\
     The name to the state.
   \item \texttt{label}\\
     Optional label for a state.
   \item \texttt{number}\\
     Used if one wants to set an order on the states.~\\
-\end{itemize}
+  \end{itemize}
 \end{itemize}
 
-With the second tag, \textbf{\transitionstag{}}, one can describe the transitions. It is composed of:
+With the second tag, \textbf{\transitionstag{}}, one can describe the
+transitions. It is composed of:
 \begin{itemize}
 \item \transitiontag{}\\
-  This tag describes the content of one transition of the automaton. It is
-  composed of:
-\begin{itemize}
+  This tag describes the content of one transition of the automaton.
+  It is composed of:
+  \begin{itemize}
   \item \texttt{\textbf{src}}\\
     The state that is the source of the transition.
   \item \texttt{\textbf{dst}}\\
@@ -553,40 +571,42 @@ With the second tag, \textbf{\transitionstag{}}, one can describe the transition
   \item \texttt{label}
   \item \texttt{weight}\\
     Optional name, label and weight for the transition.
-\end{itemize}
+  \end{itemize}
 \item \initialtag{}\\
   This tag describes the content of an initial state of the automaton:
-\begin{itemize}
+  \begin{itemize}
   \item \texttt{\textbf{state}}\\
     The state that is initial.
   \item \texttt{label}
   \item \texttt{weight}\\
     Optional label and weigth for the entering transition.
-\end{itemize}
+  \end{itemize}
 \item \finaltag{}\\
-  This tag describes the content of a final state of the automaton. Its
-strucure is the same as the \initialtag{} tag's one.
+  This tag describes the content of a final state of the automaton.
+  Its strucure is the same as the \initialtag{} tag's one.
 \end{itemize}
 
-Concerning transducers, the \contenttag{} tag follows the same structure as
-for automata description, although a noticeable difference is the extension for
-transition definitions. Two new attributes are proposed for transducer
-description: \verb|in| and \verb|out|, respectively corresponding to
-the input and the output of a transition. These two attributes are
-proposed in addition to the classical \verb|label| and \verb|weight|
-attributes, that can still be used for transducer description. Of course, they
-can be used indistinctly in \transitiontag{}, \initialtag{} or \finaltag{}.
+Concerning transducers, the \contenttag{} tag follows the same
+structure as for automata description, although a noticeable
+difference is the extension for transition definitions. Two new
+attributes are proposed for transducer description: \verb|in| and
+\verb|out|, respectively corresponding to the input and the output of
+a transition. These two attributes are proposed in addition to the
+classical \verb|label| and \verb|weight| attributes, that can still be
+used for transducer description. Of course, they can be used
+indistinctly in \transitiontag{}, \initialtag{} or \finaltag{}.
 
 \subsubsection{About the labels}
 
-There is a specificity about the attribute ``label'' of the \transitiontag{}
-tag . Most of the time, there isn't any problem since its value is a single
-character. But one can prefer to set a rational expression denoting the
-language that must be recognized to pass through the given transition. Its
-type is a non-restricted string, but there is a grammar to follow so as to be correctly
-understood by \Vauc. It is presented in \autoref{Grammar}, The empty word
-is represented by ``1'', and the absorbent element of the semiring by ``0''.
-These are default values in \Vauc.
+There is a specificity about the attribute ``label'' of the
+\transitiontag{} tag . Most of the time, there isn't any problem since
+its value is a single character. But one can prefer to set a rational
+expression denoting the language that must be recognized to pass
+through the given transition. Its type is a non-restricted string, but
+there is a grammar to follow so as to be correctly understood by
+\Vauc. It is presented in \autoref{Grammar}, The empty word is
+represented by ``1'', and the absorbent element of the semiring by
+``0''.  These are default values in \Vauc.
 
 {\small
 
@@ -620,20 +640,23 @@ important:
 \item \textbf{+} (plus), to do the union of two series.
 \end{itemize}
 
-The \verb|in| and \verb|out| attributes follow the same rules for transducers.\\
-The \Vauc group is aware that with some special alphabets and a special empty
-word, some errors can occur when parsing some complicated labels.
-It would be preferable to design another XML description to represent a rational
-expression instead of a non-limited string, and it could be one of the further
-works of the \Vauc{} group.
+The \verb|in| and \verb|out| attributes follow the same rules for
+transducers.
+
+The \Vauc group is aware that with some special alphabets and a
+special empty word, some errors can occur when parsing some
+complicated labels.  It would be preferable to design another XML
+description to represent a rational expression instead of a
+non-limited string, and it could be one of the further works of the
+\Vauc{} group.
 
 \subsection{The \sessiontag{} tag}
 
-A way to manipulate many automata would be to combine them in
-a single document. The proposal offers this feature through the
-\sessiontag{} tag. An unlimited number of automata or transducers
-can be combined in a single XML document. A XML session can also be named.
-An application can be found in \autoref{session1}.
+A way to manipulate many automata would be to combine them in a single
+document. The proposal offers this feature through the \sessiontag{}
+tag. An unlimited number of automata or transducers can be combined in
+a single XML document. A XML session can also be named.  An
+application can be found in \autoref{session1}.
 
 {\small
 
@@ -655,14 +678,14 @@ An application can be found in \autoref{session1}.
 
 \subsection{The cascade of default options}
 
-The \typetag{} tag has two children: the \monoidtag{} tag and
-the \semiringtag{} tag. None of these tags is mandatory, and both have
+The \typetag{} tag has two children: the \monoidtag{} tag and the
+\semiringtag{} tag. None of these tags is mandatory, and both have
 different values according to the root tag. \autoref{automatontype}
-shows the equivalent XML code if one omits the
-\typetag{} tag when declaring an automaton. Similarly,
-\autoref{transducertype} shows the default type for transducers.
-The \texttt{operations} attributes is set to \verb|"numerical"|,
-which means that usual laws over $\mathbb{B}$ shall be applied.
+shows the equivalent XML code if one omits the \typetag{} tag when
+declaring an automaton. Similarly, \autoref{transducertype} shows the
+default type for transducers.  The \texttt{operations} attributes is
+set to \verb|"numerical"|, which means that usual laws over
+$\mathbb{B}$ shall be applied.
 
 \begin{figure}[h]
   \begin{center}
@@ -713,14 +736,14 @@ information about the way the automata are set in the plane only.  On
 the other hand, the \drawingtag{} tag gives some graphical information
 about the way the automata of a session must be drawn.
 
-Let us note that these tags can be used at any level of the document. In this
-case, the defined properties are applied to the tag in which they are defined,
-and to its children. It is possible to define some properties in a tag and to
-locally override them in a child tag. For example in
-\autoref{override_properties}, the filling color of the states is
-globally set to
-\textit{black}, and the color of state $s_1$ is locally set to red. As a
-result, $s_0$ and $s_2$ will be black, and $s_1$ will be red.
+Let us note that these tags can be used at any level of the document.
+In this case, the defined properties are applied to the tag in which
+they are defined, and to its children. It is possible to define some
+properties in a tag and to locally override them in a child tag. For
+example in \autoref{override_properties}, the filling color of the
+states is globally set to \textit{black}, and the color of state $s_1$
+is locally set to red. As a result, $s_0$ and $s_2$ will be black, and
+$s_1$ will be red.
 
 {\small
 \begin{figure}[h]
@@ -747,21 +770,21 @@ result, $s_0$ and $s_2$ will be black, and $s_1$ will be red.
 
 \subsection{The \geometrytag{} tag}
 
-The \geometrytag{} tag is context sensitive. If it is a child of
-the \statetag{} tag, the only two properties that can be set are the
-position, \verb|x| and \verb|y|, of the state. These values can only be numeric.
+The \geometrytag{} tag is context sensitive. If it is a child of the
+\statetag{} tag, the only two properties that can be set are the
+position, \verb|x| and \verb|y|, of the state. These values can only
+be numeric.
 
-If it is a child of \transitiontag{}, \initialtag{} or
-\finaltag{}, two attributes can be set. Firstly, the \texttt{transitionType}
+If it is a child of \transitiontag{}, \initialtag{} or \finaltag{},
+two attributes can be set. Firstly, the \texttt{transitionType}
 attribute, that assign the type of the transition (\textit{line},
 \textit{arcL}, \textit{arcR}, \textit{curve}). Then, the
 \texttt{direction} attribute, that can be used to assign the direction
 angle of a loop, for instance. This attribute is numeric.
 
-The example of \autoref{geom1} sets a global offset
-for the document, and then places the states in the plane.
-It also sets the type of the transition as a left arc.
-{\small
+The example of \autoref{geom1} sets a global offset for the document,
+and then places the states in the plane.  It also sets the type of the
+transition as a left arc.  {\small
 
 \begin{figure}[h]
   \begin{center}
@@ -791,12 +814,12 @@ It also sets the type of the transition as a left arc.
 
 \subsection{The \drawingtag{} tag}
 
-The \drawingtag{} tag contains the definition of attributes that characterize
-the actual drawing of the graph.
-Most of them are indeed implicit and provided by drawing programs; the
-format only provides the possibility to make them explicit.
-A lot of different properties, that have been taken from the options proposed by
-Vaucanson-G, can be used in the \drawingtag{} tag at many places in the proposal.
+The \drawingtag{} tag contains the definition of attributes that
+characterize the actual drawing of the graph.  Most of them are indeed
+implicit and provided by drawing programs; the format only provides
+the possibility to make them explicit.  A lot of different properties,
+that have been taken from the options proposed by Vaucanson-G, can be
+used in the \drawingtag{} tag at many places in the proposal.
 
 Since it's not possible to exhaustively name all needed attributes
 users may need, the proposal offers a limited set of properties. For
@@ -804,12 +827,12 @@ example, \textit{stateFillColor} or \textit{transitionStyle} usage are
 shown in \autoref{drawing1}. These attributes use a string
 representation to describe their values.
 
-One of the powerful features of XSD files is the
-\textit{anyAttribute} modifier. This modifier allows the user to easily
-extend the main XSD, and then use its own attributes and still be
-compliant with the grammar. The \drawingtag{} tag contains a
-\textit{anyAttribute} modifier in the proposal, so the grammar is not
-limited to a specific set of drawing properties.
+One of the powerful features of XSD files is the \textit{anyAttribute}
+modifier. This modifier allows the user to easily extend the main XSD,
+and then use its own attributes and still be compliant with the
+grammar. The \drawingtag{} tag contains a \textit{anyAttribute}
+modifier in the proposal, so the grammar is not limited to a specific
+set of drawing properties.
 
 {\small
 
@@ -836,25 +859,25 @@ limited to a specific set of drawing properties.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{From DTD to XSD}
-The most important difference with our previous proposal (see \cite{VXML04}) is
-the change from a DTD (Document Type Definition) document to an XSD (XML Schema
-Description) Schema.
+The most important difference with our previous proposal (see
+\cite{VXML04}) is the change from a DTD (Document Type Definition)
+document to an XSD (XML Schema Description) Schema.
 
 It is desirable to keep the description of automata simple when
 describing widely used structures while giving the possibility to
 describe the most complex ones. For XML, this simplification enables
-to have default types, in order to omit \typetag{} tag when
-describing common Boolean automata or transducers.
+to have default types, in order to omit \typetag{} tag when describing
+common Boolean automata or transducers.
 
 The problem then arises when describing an automaton or a transducer,
-the default values for the \typetag{} tag must of course be
-different. This is not possible with a DTD description.  The use of a
-XSD overcomes this difficulty, since it is possible to define
-different properties for a same element, according to the embracing
-context. It is so possible to locally change the behavior of a tag, and
-make it context-sensitive. With this feature, default values for the
+the default values for the \typetag{} tag must of course be different.
+This is not possible with a DTD description.  The use of a XSD
+overcomes this difficulty, since it is possible to define different
+properties for a same element, according to the embracing context. It
+is so possible to locally change the behavior of a tag, and make it
+context-sensitive. With this feature, default values for the
 \typetag{} tag are achieved, whether it is a child of
-\transducertag{} or \automatontag{}.\\
+\transducertag{} or \automatontag{}.
 
 For information about the XSD Schema are available on the
 \textit{World Wide Web Consortium} website \cite{W3C}.
@@ -863,11 +886,10 @@ For information about the XSD Schema are available on the
 \section{Conclusion}
 
 For the past year we experimented the proposal made at CIAA'04 in the
-\Vauc platform. This version 0.3 comes as a result of this
-experiment, with simplifications where possible. Thus, the
-\Vauc platform deals with numerous automata types, and it is important
-to be able to define precisely the type of the automaton in addition
-to its content.
+\Vauc platform. This version 0.3 comes as a result of this experiment,
+with simplifications where possible. Thus, the \Vauc platform deals
+with numerous automata types, and it is important to be able to define
+precisely the type of the automaton in addition to its content.
 
 This proposal comes as a combination of two needs, shorten declaration
 of widely used structure and make possible definitions of complex
