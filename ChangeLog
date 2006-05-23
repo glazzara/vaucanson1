@@ -1,5 +1,12 @@
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
+	Enforce the checks in bootstrap.
+
+	* bootstrap.sh (stderr, run): New.
+	Use them and set -e to catch hidden failures.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix warning.
 
 	* doc/doc.mk: Disable circular dependencies.
