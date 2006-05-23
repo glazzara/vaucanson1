@@ -2,8 +2,8 @@
 all:
 
 share_dir ?= share
-bin_dir = $(share_dir)/bin
-make_dir = $(share_dir)/make
+share_bin_dir = $(share_dir)/bin
+share_make_dir = $(share_dir)/make
 
 update:
 	cd $(share_dir)/.. && share/bin/update-share

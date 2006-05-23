@@ -1,11 +1,11 @@
 # Make sure we don't become promoted as default target.
 all:
 
-style_dir = $(share_dir)/styles
-bib_dir = $(share_dir)/bib
+share_style_dir = $(share_dir)/styles
+share_bib_dir = $(share_dir)/bib
 
-TEXI2DVI = $(bin_dir)/texi2dvi
-TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch -I figs -I $(style_dir) -I $(bib_dir)
+TEXI2DVI = $(share_bin_dir)/texi2dvi
+TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch -I figs -I $(share_style_dir) -I $(share_bib_dir)
 
 TEXI2PDF = $(TEXI2DVI) --pdf
 TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
@@ -13,9 +13,20 @@ TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)
 TEXI2HTML = $(TEXI2DVI) --html
 TEXI2HTML_FLAGS = $(TEXI2DVI_FLAGS)
 
+TEXI2TEXT = $(TEXI2DVI) --text
+TEXI2TEXT_FLAGS = $(TEXI2DVI_FLAGS)
+
+TEXI2INFO = $(TEXI2DVI) --info
+TEXI2INFO_FLAGS = $(TEXI2DVI_FLAGS)
+
 share_tex_dependencies = \
 $(STYLES) \
-$(wildcard $(style_dir)/* $(bib_dir)/*)
+$(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
+
+
+## ----- ##
+## *.tex ##
+## ----- ##
 
 %.pdf: %.tex $(share_tex_dependencies)
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
@@ -26,6 +37,16 @@ $(wildcard $(style_dir)/* $(bib_dir)/*)
 %.html: %.tex $(share_tex_dependencies)
 	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -o $@ $<
 
+%.txt: %.tex $(share_tex_dependencies)
+	$(TEXI2TEXT) $(TEXI2TEXT_FLAGS) -o $@ $<
+
+%.info: %.tex $(share_tex_dependencies)
+	$(TEXI2INFO) $(TEXI2INFO_FLAGS) -o $@ $<
+
+
+## ----- ##
+## *.ltx ##
+## ----- ##
 
 %.pdf: %.ltx $(share_tex_dependencies)
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
@@ -36,16 +57,22 @@ $(wildcard $(style_dir)/* $(bib_dir)/*)
 %.html: %.ltx $(share_tex_dependencies)
 	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -o $@ $<
 
+%.txt: %.ltx $(share_tex_dependencies)
+	$(TEXI2TEXT) $(TEXI2TEXT_FLAGS) -o $@ $<
+
+%.info: %.ltx $(share_tex_dependencies)
+	$(TEXI2INFO) $(TEXI2INFO_FLAGS) -o $@ $<
+
 
 # lrde.bib.  Make sure it is always there.
-all: $(bib_dir)/lrde.bib
-$(bib_dir)/lrde.bib:
-	cd $(share_dir) && bin/update-share --lrde.bib
+all: $(share_bib_dir)/lrde.bib
+$(share_bib_dir)/lrde.bib:
+	cd $(share_share_dir) && bin/update-share --lrde.bib
 
 
 # Handouts.
 %-handout-4.pdf: %-handout.pdf
-	PATH=$(bin_dir):$$PATH $(bin_dir)/beamer-handout $< $@
+	PATH=$(share_bin_dir):$$PATH $(share_bin_dir)/beamer2handout $< 4up $@
 
 tex-mostlyclean:
 	rm -rf tmp.t2d

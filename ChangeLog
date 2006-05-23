@@ -1,5 +1,11 @@
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix warning.
+
+	* doc/doc.mk: Disable circular dependencies.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
 	xml-doc: Various fixes.
 
 	* doc/xml/xml_proposal.tex (\xattr, \xtag): New.

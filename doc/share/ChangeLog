@@ -1,3 +1,46 @@
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix update-share interface.
+
+	* bin/update-share: When --lrde.bib is passed on the command
+	line, don't also process it as a directory name.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
+	Compile LaTeX to info/txt.
+
+	* bin/texi2dvi (run_to_html): Rename as...
+	(run_hevea): this.
+	Accept $1: the destination language.
+	Extend the getarg loop to accept --info and --text (currently
+	hidden).
+	* make/tex.mk (.txt, .info): New targets from tex and ltx.
+
+2006-05-23  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bin/beamer-handout: Remove.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
+	/!\ Renaming directory variables.
+
+	This change might require adjustments in your Makefiles.
+	* make/share-am.mk, make/tex.mk, make/share.mk
+	(bib_dire, style_dir, make_dir): Rename as...
+	(share_bib_dire, share_style_dir, share_make_dir): Rename as...
+
+	* bin/beamer2handout: Diagnose a missing pdfnup.
+
+2006-05-22  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add beamer2handout.
+
+	* bin/beamer2handout: New (imported script).
+	* make/handout.mk (%-handout-4.pdf),
+	* make/tex.mk (%-handout-4.pdf): Use beamer2handout instead of
+	beamer-handout.
+	* README: Mention beamer2handout.
+
 2006-05-19  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fix texi.sty.

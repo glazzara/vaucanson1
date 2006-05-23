@@ -16,5 +16,9 @@ share_dir = $(top_srcdir)/doc/share
 include $(top_srcdir)/doc/share/make/share-am.mk
 include $(top_srcdir)/doc/share/make/tex.mk
 
+# Disable rules from share/ we don't use, and that lead to circular
+# tex -> txt -> tex dependencies.
+%.txt: %.tex $(share_tex_dependencies)
+
 docdir = $(datadir)/doc/$(PACKAGE_TARNAME)
 CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp *.log

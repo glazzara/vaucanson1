@@ -85,7 +85,7 @@ TeX tuning:
       --no-line-error        do not pass --file-line-error to TeX
   -p, --pdf                  use pdftex or pdflatex for processing
   -r, --recode               call recode before TeX to translate input
-      --recode-from=ENC      recode from ENC to the @documentencoding       
+      --recode-from=ENC      recode from ENC to the @documentencoding
   -t, --command=CMD          insert CMD in copy of input file
    or --texinfo=CMD          multiple values accumulate
       --translate-file=FILE  use given charset translation file for TeX
@@ -498,7 +498,7 @@ aux_file_p ()
       ## are citations in sub aux files.  We need to be
       ## smarter in this case.
       ## && grep '^\\citation[{]' "$f"
-      ) >&6 2>&1; 
+      ) >&6 2>&1;
   then
     return 0
   fi
@@ -695,7 +695,7 @@ run_tex ()
       true:*file-line-error*) cmd="$cmd --file-line-error";;
     esac
   fi
-  
+
   # Tell TeX about TCX file, if specified.
   test -n "$translate_file" && cmd="$cmd --translate-file=$translate_file"
 
@@ -1001,7 +1001,7 @@ run_recode ()
 {
   local from
   local to
-  
+
   if test $language = texinfo; then
     pgm='s/^ *@documentencoding  *\([^ ][^ ]*\) *$/\1/
 	t found
@@ -1056,23 +1056,30 @@ compute_language ()
 }
 
 
-# run_to_html ()
-# --------------
+# run_hevea (MODE)
+# ----------------
 # Convert to HTML.
-run_to_html ()
+run_hevea ()
 {
-  hevea=${HEVEA:-hevea}
+  local hevea=${HEVEA:-hevea}
+  local run_hevea="$hevea"
+
+  case $1 in
+    html) ;;
+    text|info) run_hevea="$run_hevea -$1";;
+    *) fatal "run_hevea: invalid argument: $1";;
+  esac
 
   # Compiling to the tmp directory enables to preserve a previous
   # successful compilation.  Unfortunately it makes it hard to move
   # the image back to the destination directory.  So compile to the
   # actual destination.
-  local to_html="$hevea -fix -noiso -O -o '$out_name'"
-  to_html="$to_html `list_prefix includes -I` -I '$orig_pwd' "
-  to_html="$to_html '$in_input'"
+  run_hevea="$run_hevea -fix -noiso -O -o '$out_name'"
+  run_hevea="$run_hevea `list_prefix includes -I` -I '$orig_pwd' "
+  run_hevea="$run_hevea '$in_input'"
 
-  verbose "running $to_html"
-  if eval "$to_html" >&5; then :; else
+  verbose "running $run_hevea"
+  if eval "$run_hevea" >&5; then :; else
     fatal 1 "$hevea exited with bad status, quitting."
   fi
 }
@@ -1090,8 +1097,8 @@ run_core_conversion ()
   fi
 
   case $out_lang in
-    dvi|pdf) run_tex_suite;;
-    html   ) run_to_html;;
+    dvi|pdf)        run_tex_suite;;
+    html|text|info) run_hevea $out_lang;;
   esac
 
   cd_orig
@@ -1223,6 +1230,7 @@ while test x"$1" != x"$arg_sep"; do
       val=`absolute "$1"`
       list_append includes "$val"
       ;;
+    --info) out_lang=info;;
     -l | --lang | --language) shift; set_language=$1;;
     --mostly-clean) action=mostly-clean;;
     --no-line-error) no_line_error=true;;
@@ -1236,7 +1244,8 @@ while test x"$1" != x"$arg_sep"; do
     --recode-from) shift; recode=true; recode_from="$1";;
     -t | --texinfo | --command ) shift; textra="$textra\\
 "`echo "$1" | sed 's/\\\\/\\\\\\\\/g'`;;
-    --translate-file ) shift; translate_file="$1";;    
+    --text) out_lang=text;;
+    --translate-file ) shift; translate_file="$1";;
     --tidy) build_mode=tidy;;
     -v | --vers*) echo "$version"; exit 0;;
     -V | --verb*) verb=true;;

@@ -3,6 +3,7 @@
 # order to make share/ useful with Automake too, we must not define
 # these targets.  Hence a two-layer system: share.mk is to be included
 # by regular Make users, and share-am.mk to be used by Automake users.
-include share-am.uk
+share_dir ?= share
+include $(share_dir)/make/share-am.mk
 mostlyclean: mostlyclean-local
 clean: clean-local

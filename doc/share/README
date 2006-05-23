@@ -39,6 +39,12 @@ Une version récente qui sache compiler dans un sous-répertoire comme
 tmp.t2d, et évite les problèmes quand on fait à la fois du DVI et du
 PDF.  Début de support pour le HTML.
 
+** beamer2handout
+Un script au dessus de pdfnup (disponible dans le paquet Debian
+pdfjam) pour produire des ``handouts'' à partir de fichiers Beamer
+PDF. Devrait à termer remplacer beamer-handout, qui fait la même chose
+en passant par PostScript.
+
 * share/bib
 Les bibliographies en BibTeX utilisées au labo.  Merci de les
 exploiter et de les augmenter.
