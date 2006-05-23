@@ -46,10 +46,8 @@ set -x
 
 : ${tasks="update lrde.bib"}
 
-dir=.
-
 # grep -v may exit with failure.
-externals=$(svn propget svn:externals "$dir" | sed  '/^share/d')
+externals=$(svn propget svn:externals "." | sed  '/^share/d')
 rev=$(svn info $url/share | sed -n 's/Revision *: *//p')
 if test -z "$rev"; then
   fatal "cannot fetch the revision of $url/share"
@@ -61,26 +59,24 @@ for task in $tasks
 do
     case $task in
 	(update) # Update share/.
-	(
-	    externals="share -r $rev $url/share
+	externals="share -r $rev $url/share
 $externals"
-	    cd $dir
-	    svn propset svn:externals "$externals" .
-	    svn up
-	)
+	svn propset svn:externals "$externals" .
+	svn up
 	;;
 
 	(lrde.bib) # Update share/bib/lrde.bib.
-	cd share/bib
-        # Backup, in case the user was risky enough to
-	# make local modifications.
-	if test -f lrde.bib; then
-	    cp --backup=numbered --force lrde.bib lrde.bib
-	    chmod +w lrde.bib
-	fi
-	svn cat -r $rev $url/lrde-publis/lrde.bib >lrde.bib
-	chmod -w lrde.bib
-	cd ../..
+	(
+	    cd share/bib
+           # Backup, in case the user was risky enough to
+	   # make local modifications.
+	    if test -f lrde.bib; then
+		cp --backup=numbered --force lrde.bib lrde.bib
+		chmod +w lrde.bib
+	    fi
+	    svn cat -r $rev $url/lrde-publis/lrde.bib >lrde.bib
+	    chmod -w lrde.bib
+	)
 	;;
 
 	(*)

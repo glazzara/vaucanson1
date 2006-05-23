@@ -67,7 +67,7 @@ $(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
 # lrde.bib.  Make sure it is always there.
 all: $(share_bib_dir)/lrde.bib
 $(share_bib_dir)/lrde.bib:
-	cd $(share_dir) && bin/update-share --lrde.bib
+	cd $(share_dir)/.. && share/bin/update-share --lrde.bib
 
 
 # Handouts.

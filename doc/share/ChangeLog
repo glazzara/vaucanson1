@@ -1,5 +1,25 @@
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
+	More update-share fixes.
+
+	* bin/update-share: Protect the cd using a sub-shell.
+	* make/tex.mk (lrde.bib): Use the relative path to update-share.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix update-share again.
+
+	* bin/update-share, make/tex.mk: Fix them so that update-share
+	is always invoked from the host directory.
+
+2006-05-23  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Fix update-share.
+
+	* bin/update-share: Fix change of directory.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
 	share_share -> share.
 
 	* make/tex.mk: Fix stupid typo.
