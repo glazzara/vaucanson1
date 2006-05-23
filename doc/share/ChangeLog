@@ -1,5 +1,11 @@
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
+	share_share -> share.
+
+	* make/tex.mk: Fix stupid typo.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix update-share interface.
 
 	* bin/update-share: When --lrde.bib is passed on the command
