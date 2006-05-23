@@ -1,3 +1,7 @@
+2006-05-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* build-aux/check_xml.sh: Fix XML use warnings.
+
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
 	Enforce the checks in bootstrap.

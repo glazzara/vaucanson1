@@ -3,7 +3,7 @@
 # Don't barf on file not found.
 exec 2> /dev/null
 
-use_xml_flags='VCSN_USE_XML\|XML_CHECK'
+use_xml_flags='VCSN_USE_XML\|XML_CHECK\|demo.mk'
 exit_status=0
 
 for f in $(find . -type f \
