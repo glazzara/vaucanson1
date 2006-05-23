@@ -1,5 +1,17 @@
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
+	xml-doc: Various fixes.
+
+	* doc/xml/xml_proposal.tex (\xattr, \xtag): New.
+	Use them.
+	(texi): Use it.
+	Various English fixes.
+	Give ht to floats.
+	Put \small requests in the floats, putting it around is a weird
+	idea.
+
+2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
+
 	XML: fill paragraphs.
 
 	* doc/xml/xml_proposal.tex: Fill the paragraphs.

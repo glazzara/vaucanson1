@@ -5,6 +5,8 @@
 \usepackage{xspace}
 \usepackage{vaucanson-g}
 \usepackage{myhyperref}
+\usepackage{texi}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\bigskipneg}{\vspace*{-5ex}} %960728
@@ -17,37 +19,45 @@
 
 
 \newcommand{\Vauc}{{\sc Vaucanson}\xspace}
-\def\typetagend{\texttt{</label-type>}}
-\def\typetag{\texttt{<label-type>}}
-\def\contenttag{\texttt{<content>}}
-\def\statestag{\texttt{<states>}}
-\def\statetag{\texttt{<state>}}
-\def\dstname{\texttt{dst}}
-\def\srcname{\texttt{src}}
 
-\def\transitionstag{\texttt{<transitions>}}
-\def\transitiontag{\texttt{<transition>}}
-\def\finaltag{\texttt{<final>}}
-\def\initialtag{\texttt{<initial>}}
+%% XML Tag.
+\newcommand{\xtag}[1]{\texttt{<#1>}}
+%% XML Attribute.
+\newcommand{\xattr}[1]{\texttt{#1}}
 
-\def\geometrytag{\texttt{<geometry>}}
-\def\drawingtag{\texttt{<drawing>}}
 
-\def\sessiontag{\texttt{<session>}}
-\def\automatontag{\texttt{<automaton>}}
-\def\transducertag{\texttt{<transducer>}}
+%% Is this really useful???
+\def\typetagend{\xtag{/label-type}}
+\def\typetag{\xtag{label-type}}
+\def\contenttag{\xtag{content}}
+\def\statestag{\xtag{states}}
+\def\statetag{\xtag{state}}
+\def\dstname{\xattr{dst}}
+\def\srcname{\xattr{src}}
 
-\def\monoidtag{\texttt{<monoid>}}
-\def\semiringtag{\texttt{<semiring>}}
+\def\transitionstag{\xtag{transitions}}
+\def\transitiontag{\xtag{transition}}
+\def\finaltag{\xtag{final}}
+\def\initialtag{\xtag{initial}}
 
-\def\generatortag{\texttt{<generator>}}
+\def\geometrytag{\xtag{geometry}}
+\def\drawingtag{\xtag{drawing}}
 
-\def\nameattr{\texttt{name}}
-\def\labelattr{\texttt{label}}
-\def\inattr{\texttt{in}}
-\def\outattr{\texttt{out}}
-\def\numberattr{\texttt{number}}
-\def\stateattr{\texttt{state}}
+\def\sessiontag{\xtag{session}}
+\def\automatontag{\xtag{automaton}}
+\def\transducertag{\xtag{transducer}}
+
+\def\monoidtag{\xtag{monoid}}
+\def\semiringtag{\xtag{semiring}}
+
+\def\generatortag{\xtag{generator}}
+
+\def\nameattr{\xattr{name}}
+\def\labelattr{\xattr{label}}
+\def\inattr{\xattr{in}}
+\def\outattr{\xattr{out}}
+\def\numberattr{\xattr{number}}
+\def\stateattr{\xattr{state}}
 
 \begin{document}
 
@@ -68,7 +78,7 @@ complexity. Finally, we briefly focus on implementation concerns.
 \section*{Introduction}
 
 Conceiving a universal automaton exchange format aims at providing the
-community a communication tool that could be used for the connection
+community with a communication tool for the connection
 of the various programs that deal with automata and transducers.  This
 system is used in the Vaucanson platform. Someone can load an
 automaton in Vaucanson from a XML file, or store an existing one from
@@ -77,14 +87,14 @@ Vaucanson into an XML file.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview}
 
-As it will be described further, we use a XSD file (see \cite{XSD})
+As it will be described further, we use an XSD file \cite{XSD}
 for the description format of this XML proposition, since it allows
-context sensitive declarations.  This report first presents a XML
+context sensitive declarations.  This report first presents an XML
 representation of a classical Boolean automaton. Then this example
 will be fleshed out, so as to deal with transducers
-and most general automata with multiplicity.
+and more general automata with multiplicity.
 
-The description of automata is structured in two parts.  The
+The automaton description is structured in two parts.  The
 \typetag{} tag provides some automaton type definitions. This can be a
 Boolean automaton, or a weighted one with the ability to specify the
 weight type.  It can also have some alphabet specifications, etc. The
@@ -93,8 +103,8 @@ weight type.  It can also have some alphabet specifications, etc. The
 
 The visual representation of automata involves a very large amount of
 information. This is why two different types of information are
-distinguished in this proposition. They are described in the two
-following tags.  The \geometrytag{} data correspond to the embedding
+distinguished in this proposition, described in the following
+two tags.  The \geometrytag{} data correspond to the embedding
 of the automaton in a plane. They represent the way the automaton is
 placed in it. The tag consequently contains information such as the
 coordinates of the states, or the directions and types of the
@@ -103,7 +113,7 @@ attributes that characterize the graphical aspects of the automaton's
 elements. Therefore, this tag contains information like the color of
 the states or the style of the transitions.
 
-The proposed policy supposes these properties to be checked by the
+The proposed policy expects these properties to be checked by the
 program, and that it is not complicated nor more costly than to test
 whether an announced property is indeed fulfilled.
 
@@ -132,9 +142,8 @@ over the alphabet $\{a,b\}$ that contain at least one $b$.
 \medskipneg
 \end{figure}
 
-{\small
-
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
 <automaton>
@@ -160,7 +169,6 @@ over the alphabet $\{a,b\}$ that contain at least one $b$.
 \label{B1xml}
   \end{center}
 \end{figure}
-}
 
 \subsection{A Boolean transducer}
 
@@ -169,7 +177,7 @@ The XML proposition can also be used to represent transducers. The example of
 represented in \autoref{bindiv3xml}.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
 \VCDraw[1.2]{%
 \begin{VCPicture}{(-2,-2)(5,2)}
@@ -192,7 +200,7 @@ represented in \autoref{bindiv3xml}.
 \end{figure}
 
 \small
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
 \begin{alltt}
 <transducer>
@@ -225,27 +233,28 @@ represented in \autoref{bindiv3xml}.
 \subsection{Naive description of the \contenttag{} tag}
 
 The \contenttag{} tag aims at describing the structure of the
-automaton. It has two children which are mandatory and supposed to
-appear in a specific order. These tags enable definitions of states
+automaton. It has two children, both mandatory and expected
+in a specific order. These tags enable definitions of states
 and transitions.
 
-The first tag is \statestag{}, representing start declaration of
+The first tag, \statestag{}, introduces the declaration of
 the set of states of the automaton. A state has three attributes: a
 \nameattr{} (which is mandatory and has to be unique), a \labelattr{}
 and a \numberattr{}. The latter can be used to put an ordering on states,
 or to add special integer data to the state.
 
-The second tag is \transitionstag{}, representing start declaration
+The second tag, \transitionstag{}, introduces the declaration
 of the set of transitions. The initial and final
 \textit{transitions} are represented as children of
 \transitionstag{}. Effectively, an initial state $s$ can be seen as a transition
 which destination is $s$. This transition can have a \labelattr{} or a
 \numberattr{} in some cases, so it seems to be logical to have the list of
-initial states in the \transitionstag{} tag. In like manner, the final
+initial states in the \transitionstag{} tag.  Similarly, the final
 states can be found at the same place in the XML description.
 
 It is mandatory for a \transitiontag{} to have two attributes:
-\srcname{} and \dstname{}, representing source and destination of the
+\srcname{} and \dstname{}, representing source and destination state
+names of the
 transition. In the case of an \initialtag{} or \finaltag{} transition,
 the only mandatory attribute is \stateattr{}, referring to the initial
 or final state the transition belongs to.
@@ -315,9 +324,8 @@ as to prevent the user from possible errors subsequent to the first
 definition. So, the resticted alphabet would be defined as shown in
 \autoref{alpha1}.
 
-{\small
-
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
 <label_type>
@@ -332,14 +340,12 @@ definition. So, the resticted alphabet would be defined as shown in
 \label{alpha1}
   \end{center}
 \end{figure}
-}
 
-In like manner, one can also set a restriction on the alphabet like in
+Similarly, one can also set a restriction on the alphabet like in
 \autoref{restriction1}.
 
-{\small
-
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
 <label_type>
@@ -354,12 +360,12 @@ In like manner, one can also set a restriction on the alphabet like in
 \label{restriction1}
   \end{center}
 \end{figure}
-}
 
-In order to avoid some potential problems, the user can set the value
-of the empty word with the attribute \textit{identity\_symbol} of the
-monoid. This way, the empty word symbol can always be different from
-any character of the used alphabet.
+
+The user can set the string denoting the empty word with the attribute
+\textit{identity\_symbol} of the monoid. This way, the empty word
+symbol can always be different from any character of the used
+alphabet.
 
 To create a transducer based on a free monoid product, it is necessary
 to declare the two monoids in order to determine the two needed
@@ -371,7 +377,7 @@ The XSD description of this tag is a little complicated. Some elements
 allow the proposition to be extensive and to fully describe any monoid
 type. This is why the first elements of the \monoidtag{} tag are a
 choice. It can be one or more monoid types to allow some complex
-definitions (see \autoref{transducertype} for an example), or it can
+definitions (\autoref{transducertype} for an example), or it can
 be one or more generator types to describe the letters composing the
 alphabet of the monoid. But both types cannot exist in the same monoid
 type description. Concerning transducers, only two monoids can be
@@ -380,27 +386,27 @@ product.
 
 The monoid attributes are:
 \begin{itemize}
-\item \texttt{type}\\
-  This is used to set the type of the monoid. Choices are unit, free
-  or product.
-\item \texttt{generators}\\
+\item \xattr{type}\\
+  This is used to set the type of the monoid. Choices are \code{unit},
+  \code{free} or \code{product}.
+\item \xattr{generators}\\
   This attribute sets a global restriction to the alphabet. The
   current possibilities are letters, digits, pair or weighted.
-\item \texttt{identity\_symbol}\\
+\item \xattr{identity\_symbol}\\
   Used to set an empty word symbol.
 \end{itemize}
 \newpage
 
 The XSD description of the \generatortag{} tag is:
 \begin{itemize}
-\item \texttt{value}\\
+\item \xattr{value}\\
   This is used to add one letter in the alphabet. One can put several
   \generatortag{} tags in a monoid description so as to have bigger
   alphabets.
-\item \texttt{range}\\
+\item \xattr{range}\\
   This allows to set a fixed range without being obliged to add all
-  the symbols one by one. For instance, the range ascii sets the
-  alphabet on the ascii characters.
+  the symbols one by one. For instance, the range \textsc{ascii} sets
+  the alphabet on the \textsc{ascii} characters.
 \end{itemize}
 
 \subsubsection{The \semiringtag{} tag}
@@ -416,9 +422,8 @@ of \autoref{B1Zxml} shows how to turn the automaton $B_1$ into a
 weighted automaton with weights in ${\mathbb Z}$ -- so it counts the
 number of $b$ in a word.
 
-{\small
-
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
 <automaton>
@@ -436,15 +441,13 @@ number of $b$ in a word.
   \end{center}
 \end{figure}
 
-}
-
 The \semiringtag{} tag can be described with two attributes:
 \begin{itemize}
-\item \texttt{Set}\\
+\item \xattr{set}\\
   The set on which the automaton is built. The possible sets are
   ${\mathbb B}$, ${\mathbb R}$, ${\mathbb Z}$, ${\mathbb N}$ and
   $ratSeries$ (which will be discussed later).
-\item \texttt{Operations}\\
+\item \xattr{operations}\\
   The type of operations that can be performed on this set.  The
   possibilities are \textit{numerical}, \textit{boolean},
   \textit{tropicalMin} or \textit{tropicalMax}.
@@ -478,7 +481,7 @@ recursively be defined, in order to describe a complex type. Only the
 \typetag{} is shown in the example \autoref{ratseries1} so as to
 remain clear.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
 \begin{alltt}
 <transducer>
@@ -531,9 +534,9 @@ recursion in the definition of an automaton structure.
 
 For automata and transducers, the \contenttag{} tag has the same
 structure.  The following is the description of this tag. Bold
-elements are mandatory ones.  The tags \geometrytag{} and
-\drawingtag{} can be placed at any place of the document and are quite
-special. They are ignored here, but more information can be found in
+elements are mandatory.  The special tags \geometrytag{} and
+\drawingtag{} can be at any place of the document. They are ignored
+here, but more information can be found in
 \autoref{title_vizualisation}.
 
 \medskip
@@ -547,11 +550,11 @@ describe the states of an automaton and their content. The
   as there are states in the automaton. Such a tag has the following
   elements and attributes:
   \begin{itemize}
-  \item \texttt{\textbf{name}}\\
+  \item \textbf{\xattr{name}}\\
     The name to the state.
-  \item \texttt{label}\\
+  \item \xattr{label}\\
     Optional label for a state.
-  \item \texttt{number}\\
+  \item \xattr{number}\\
     Used if one wants to set an order on the states.~\\
   \end{itemize}
 \end{itemize}
@@ -563,22 +566,22 @@ transitions. It is composed of:
   This tag describes the content of one transition of the automaton.
   It is composed of:
   \begin{itemize}
-  \item \texttt{\textbf{src}}\\
+  \item \xattr{\textbf{src}}\\
     The state that is the source of the transition.
-  \item \texttt{\textbf{dst}}\\
+  \item \xattr{\textbf{dst}}\\
     The state that is the destination of the transition.
-  \item \texttt{name}
-  \item \texttt{label}
-  \item \texttt{weight}\\
+  \item \xattr{name}
+  \item \xattr{label}
+  \item \xattr{weight}\\
     Optional name, label and weight for the transition.
   \end{itemize}
 \item \initialtag{}\\
   This tag describes the content of an initial state of the automaton:
   \begin{itemize}
-  \item \texttt{\textbf{state}}\\
+  \item \xattr{\textbf{state}}\\
     The state that is initial.
-  \item \texttt{label}
-  \item \texttt{weight}\\
+  \item \xattr{label}
+  \item \xattr{weight}\\
     Optional label and weigth for the entering transition.
   \end{itemize}
 \item \finaltag{}\\
@@ -599,18 +602,17 @@ indistinctly in \transitiontag{}, \initialtag{} or \finaltag{}.
 \subsubsection{About the labels}
 
 There is a specificity about the attribute ``label'' of the
-\transitiontag{} tag . Most of the time, there isn't any problem since
+\transitiontag{} tag. Most of the time, there isn't any problem since
 its value is a single character. But one can prefer to set a rational
 expression denoting the language that must be recognized to pass
 through the given transition. Its type is a non-restricted string, but
 there is a grammar to follow so as to be correctly understood by
 \Vauc. It is presented in \autoref{Grammar}, The empty word is
-represented by ``1'', and the absorbent element of the semiring by
-``0''.  These are default values in \Vauc.
+represented by \samp{1}, and the absorbent element of the semiring by
+\samp{0}.  These are default values in \Vauc.
 
-{\small
-
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
      exp ::= '(' exp ')'
@@ -629,15 +631,15 @@ represented by ``1'', and the absorbent element of the semiring by
 \label{Grammar}
   \end{center}
 \end{figure}
-}
 
 Priority for operators is, from the most important to the least
 important:
 \begin{itemize}
-\item \textbf{*} (star), to star a series.
-\item ' ' (space), to weight a series either on the right or on the left.
-\item \textbf{.} (dot), to concatenate two series.
-\item \textbf{+} (plus), to do the union of two series.
+\item \samp{*} (star), to star a series.
+\item \samp{ } (space), to weight a series either on the right or on
+  the left.
+\item \samp{.} (dot), to concatenate two series.
+\item \samp{+} (plus), to do the union of two series.
 \end{itemize}
 
 The \verb|in| and \verb|out| attributes follow the same rules for
@@ -658,9 +660,8 @@ tag. An unlimited number of automata or transducers can be combined in
 a single XML document. A XML session can also be named.  An
 application can be found in \autoref{session1}.
 
-{\small
-
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
 <session name="session1">
@@ -670,11 +671,10 @@ application can be found in \autoref{session1}.
 </session>
 \end{alltt}
 
-\caption{Session of numerous automata}
+\caption{A session with several automata}
 \label{session1}
   \end{center}
 \end{figure}
-}
 
 \subsection{The cascade of default options}
 
@@ -683,11 +683,11 @@ The \typetag{} tag has two children: the \monoidtag{} tag and the
 different values according to the root tag. \autoref{automatontype}
 shows the equivalent XML code if one omits the \typetag{} tag when
 declaring an automaton. Similarly, \autoref{transducertype} shows the
-default type for transducers.  The \texttt{operations} attributes is
+default type for transducers.  The \xattr{operations} attributes is
 set to \verb|"numerical"|, which means that usual laws over
 $\mathbb{B}$ shall be applied.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
 \begin{alltt}
 <label_type>
@@ -704,7 +704,7 @@ $\mathbb{B}$ shall be applied.
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \begin{center}
 \begin{alltt}
 <label_type>
@@ -745,8 +745,8 @@ states is globally set to \textit{black}, and the color of state $s_1$
 is locally set to red. As a result, $s_0$ and $s_2$ will be black, and
 $s_1$ will be red.
 
-{\small
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
 <transducer>
@@ -762,11 +762,10 @@ $s_1$ will be red.
 </transducer>
 \end{alltt}
 
-\caption{Example of overriding drawing properties}
-\label{override_properties}
+    \caption{Example of overriding drawing properties}
+    \label{override_properties}
   \end{center}
 \end{figure}
-}
 
 \subsection{The \geometrytag{} tag}
 
@@ -776,17 +775,18 @@ position, \verb|x| and \verb|y|, of the state. These values can only
 be numeric.
 
 If it is a child of \transitiontag{}, \initialtag{} or \finaltag{},
-two attributes can be set. Firstly, the \texttt{transitionType}
-attribute, that assign the type of the transition (\textit{line},
+two attributes can be set. Firstly, the \xattr{transitionType}
+attribute, that assigns the type of the transition (\textit{line},
 \textit{arcL}, \textit{arcR}, \textit{curve}). Then, the
-\texttt{direction} attribute, that can be used to assign the direction
+\xattr{direction} attribute, that can be used to assign the direction
 angle of a loop, for instance. This attribute is numeric.
 
 The example of \autoref{geom1} sets a global offset for the document,
 and then places the states in the plane.  It also sets the type of the
-transition as a left arc.  {\small
+transition as a left arc.
 
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
 <automaton>
@@ -810,7 +810,6 @@ transition as a left arc.  {\small
   \end{center}
 \end{figure}
 
-}
 
 \subsection{The \drawingtag{} tag}
 
@@ -834,9 +833,8 @@ grammar. The \drawingtag{} tag contains a \textit{anyAttribute}
 modifier in the proposal, so the grammar is not limited to a specific
 set of drawing properties.
 
-{\small
-
-\begin{figure}[h]
+\begin{figure}[ht]
+  \small
   \begin{center}
 \begin{alltt}
 <transducer>
@@ -855,12 +853,12 @@ set of drawing properties.
 \label{drawing1}
   \end{center}
 \end{figure}
-}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{From DTD to XSD}
-The most important difference with our previous proposal (see
-\cite{VXML04}) is the change from a DTD (Document Type Definition)
+The most important difference with our previous proposal
+\cite{VXML04} is the change from a DTD (Document Type Definition)
 document to an XSD (XML Schema Description) Schema.
 
 It is desirable to keep the description of automata simple when
@@ -871,7 +869,7 @@ common Boolean automata or transducers.
 
 The problem then arises when describing an automaton or a transducer,
 the default values for the \typetag{} tag must of course be different.
-This is not possible with a DTD description.  The use of a XSD
+This is not possible with a DTD description.  The use of an XSD
 overcomes this difficulty, since it is possible to define different
 properties for a same element, according to the embracing context. It
 is so possible to locally change the behavior of a tag, and make it
