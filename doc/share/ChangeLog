@@ -1,5 +1,13 @@
 2006-05-24  Akim Demaille  <akim@lrde.epita.fr>
 
+	Add lrde.bib.
+
+	* bib/lrde.bib: New.
+	Add it, there are too many problems with this approach.
+	Currently, the original is still in another repository.
+
+2006-05-24  Akim Demaille  <akim@lrde.epita.fr>
+
 	Include lrde.bib in the tex dependencies.
 
 	* make/tex.mk (share_tex_dependencies): Include lrde.bib.
