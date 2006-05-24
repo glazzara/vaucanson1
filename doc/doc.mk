@@ -21,4 +21,3 @@ include $(top_srcdir)/doc/share/make/tex.mk
 %.txt: %.tex $(share_tex_dependencies)
 
 docdir = $(datadir)/doc/$(PACKAGE_TARNAME)
-CLEANFILES = *.dvi *.aux *blg *.out *.toc *.lot *.tmp *.log

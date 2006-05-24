@@ -49,8 +49,13 @@ en passant par PostScript.
 Les bibliographies en BibTeX utilisées au labo.  Merci de les
 exploiter et de les augmenter.
 
-Pour l'instant, le fichier lrde.bib est ailleurs.  Tout est mis en
-place pour le "sortir" automatiquement au premier make.
+Pour l'instant, le fichier lrde.bib est ailleurs.  Pour avoir de bonne
+dépendances, et être sûr d'avoir lrde.bib, annoncer les dépendances
+ainsi:
+
+	foo.pdf: $(share_tex_dependencies)
+
+Ce dernier contient toutes les sty, bib, lrde.bib etc. que share fournit.
 
 * share/make
 Morceaux de Makefile qui vont bien.

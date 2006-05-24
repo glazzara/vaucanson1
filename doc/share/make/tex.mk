@@ -21,6 +21,7 @@ TEXI2INFO_FLAGS = $(TEXI2DVI_FLAGS)
 
 share_tex_dependencies = \
 $(STYLES) \
+$(share_bib_dir)/lrde.bib \
 $(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
 
 
@@ -65,7 +66,7 @@ $(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
 
 
 # lrde.bib.  Make sure it is always there.
-all: $(share_bib_dir)/lrde.bib
+# all: $(share_bib_dir)/lrde.bib
 $(share_bib_dir)/lrde.bib:
 	cd $(share_dir)/.. && share/bin/update-share --lrde.bib
 

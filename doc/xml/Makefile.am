@@ -1,23 +1,7 @@
 # This document should be compiled even if VCSN_USE_XML is not set.
 # The token VCSN_USE_XML is spelled out to pacify build-aux/check_xml.sh.
-include $(top_srcdir)/doc/doc.mk
+include $(top_srcdir)/doc/manual.mk
 
 manual_name = xml_proposal
-manual = $(srcdir)/$(manual_name).pdf
 manual_sources = \
 xml_proposal.tex
-
-EXTRA_DIST = $(manual_sources)
-
-pdf: $(manual)
-
-# We use vaucanson-g, which requires plain DVI compilation.  Don't
-# depend on users_manual.dvi directly, since it is not shipped, so
-# that would trigger a user-side compilation.
-$(manual): $(manual_sources) $(share_tex_dependencies)
-	$(MAKE) $(AM_MAKEFLAGS) $(manual_name).dvi
-# Help dvipdf find the images/ directory.
-	TEXINPUTS=$(srcdir): $(DVIPDF) $(manual_name).dvi $(manual)
-
-$(manual_name).dvi: $(manual_sources) $(share_tex_dependencies)
-dist_doc_DATA = $(manual)

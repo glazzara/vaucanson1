@@ -1,5 +1,16 @@
 2006-05-24  Akim Demaille  <akim@lrde.epita.fr>
 
+	Factor code between xml and doc's Makefile.am.
+
+	* doc/manual/users_manual.tex: Rename as...
+	* doc/manual/vaucanson-user-manual.tex: this, so that input and
+	output share the same base name.
+	* doc/doc.mk (CLEANFILES): Remove, as it is now handled by share/.
+	* doc/manual.mk: New.
+	* doc/xml/Makefile.am, doc/manual/Makefile.am: Use it.
+
+2006-05-24  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix bootstrap's tests.
 
 	* bootstrap.sh: Run checks first.

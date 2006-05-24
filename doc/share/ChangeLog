@@ -1,3 +1,11 @@
+2006-05-24  Akim Demaille  <akim@lrde.epita.fr>
+
+	Include lrde.bib in the tex dependencies.
+
+	* make/tex.mk (share_tex_dependencies): Include lrde.bib.
+	This ensures that it is checked out *before* we try to
+	use it (something that using "all" only is not enforced).
+
 2006-05-23  Akim Demaille  <akim@lrde.epita.fr>
 
 	More update-share fixes.
