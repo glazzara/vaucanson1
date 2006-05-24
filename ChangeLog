@@ -1,3 +1,13 @@
+2006-05-24  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix bootstrap's tests.
+
+	* bootstrap.sh: Run checks first.
+	* build-aux/check_xml.sh: Be more readable.
+	Don't redirect stderr to /dev/null!
+	Exit with failure on failures.
+	* doc/xml/Makefile.am: Make sure check_xml.sh is happy.
+
 2006-05-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* build-aux/check_xml.sh: Fix XML use warnings.

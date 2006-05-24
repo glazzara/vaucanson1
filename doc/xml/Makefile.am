@@ -1,3 +1,5 @@
+# This document should be compiled even if VCSN_USE_XML is not set.
+# The token VCSN_USE_XML is spelled out to pacify build-aux/check_xml.sh.
 include $(top_srcdir)/doc/doc.mk
 
 manual_name = xml_proposal

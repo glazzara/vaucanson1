@@ -1,29 +1,39 @@
 #! /bin/sh
 
-# Don't barf on file not found.
-exec 2> /dev/null
+set -e
 
 use_xml_flags='VCSN_USE_XML\|XML_CHECK\|demo.mk'
 exit_status=0
 
-for f in $(find . -type f \
+find . \
+    -type f \
     -and \( -name \*.am -or -name \*.cc -or -name \*.hh -or -name \*.hxx \
-    -or -name \*.thh -or -name \*.thxx -or -name \*.hcc \) \
+            -or -name \*.thh -or -name \*.thxx -or -name \*.hcc \
+         \) \
     -and -exec grep -q -i xml '{}' \; \
     -and -not -exec grep -q $use_xml_flags '{}' \; \
-    -print); do
+    -print |
+while read f;
+do
 
-    # See if the corresponding header check for XML.
+    # See if the corresponding header checks for XML.
     header_check=false
-    base=$(expr "$f" : '\(.*h\)\(.\)\2$') && \
-	grep -q $use_xml_flags "${base}h" && header_check=true
+    if base=$(expr "$f" : '\(.*h\)\(.\)\2$') &&
+	grep -q $use_xml_flags "${base}h"; then
+	header_check=true
+    fi
 
     # Or if the Makefile.am does.
     makefile_check=false
-    grep -q $use_xml_flags "$(dirname "$f")/Makefile.am" && makefile_check=true
+    makefile=$(dirname "$f")/Makefile.am
+    if test -f $makefile &&
+	grep -q $use_xml_flags "$makefile"; then
+	makefile_check=true
+    fi
 
-    ! $header_check && ! $makefile_check && \
-	echo "Warning: $f uses XML I/O but does not test $use_xml_flags." && \
-	((exit_status == 127 ? 0 : ++exit_status))
+    if ! $header_check && ! $makefile_check; then
+	echo "Warning: $f uses XML I/O but does not test $use_xml_flags."
+	exit_status=1
+    fi
 done
 exit $exit_status

@@ -14,7 +14,7 @@ stderr ()
 run ()
 {
     (
-	stderr "bootstrapping: $@"
+	stderr "$@"
 	cd "$1"
 	shift
 	if ! /bin/sh "$@"; then
@@ -33,12 +33,14 @@ else
   AUTORECONF=autoreconf
 fi
 
+run .                     build-aux/check_xml.sh
+
 run src/tests/test-suites ./generate-all.sh
 run src/tests/sanity      ./generate_files.sh .
 run src/vaucanswig        ./expand.sh .
 run src/benchs            ./generate_benchs.sh --all
 run .                     build-aux/find_tests.sh
-run .                     build-aux/check_xml.sh
+
 run .                     $AUTORECONF -v -f -i
 
 echo "Reconfiguration done."
