@@ -1,3 +1,10 @@
+2006-05-29  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Change compilation flags in test suite.
+
+	* src/tests/bin/generate-test-suite.sh: Add CPPFLAGS to
+	compilation flags.
+
 2006-05-24  Akim Demaille  <akim@lrde.epita.fr>
 
 	Factor code between xml and doc's Makefile.am.
