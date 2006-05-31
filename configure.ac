@@ -17,7 +17,7 @@ AC_PREREQ([2.57])
 
 AC_INIT([vaucanson], [0.8], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([1.9.6 tar-ustar no-define foreign dist-bzip2 nostdinc])
+AM_INIT_AUTOMAKE([1.9.5 tar-ustar no-define foreign dist-bzip2 nostdinc])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 
 VCSN_PRE_RELEASE
@@ -118,9 +118,19 @@ AC_DEFINE_UNQUOTED([VCSN_PACKAGE_STRING], ["$PACKAGE_STRING"],
 		   [Full name and version.])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_VERSION], ["$PACKAGE_VERSION"], [Version.])
 
-##
-## for documentation purpose.
-##
+
+## ------------ ##
+## Components.  ##
+## ------------ ##
+
+AC_CONFIG_SUBDIRS([argp])
+
+
+
+## --------------- ##
+## Documentation.  ##
+## --------------- ##
+
 AC_ARG_VAR([DOXYGEN], [the Doxygen documentation generation program])
 AC_CHECK_PROGS([DOXYGEN], [doxygen], [$am_aux_dir/missing doxygen])
 AC_ARG_VAR([TEXI2DVI], [program to create DVI from TeX files])

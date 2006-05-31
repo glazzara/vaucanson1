@@ -1,3 +1,41 @@
+2006-05-31  Akim Demaille  <akim@lrde.epita.fr>
+
+	Include argp for sake on non Glibc architectures.
+
+	Reported by Jacques Sakarovich.
+	* argp: New.
+	* argp/argp-fmtstream.h: New.
+	* argp/argp.h: New.
+	* argp/strndup.c: New.
+	* argp/argp-parse.c: New.
+	* argp/argp-xinl.c: New.
+	* argp/argp-test.c: New.
+	* argp/ChangeLog: New.
+	* argp/argp-fs-xinl.c: New.
+	* argp/testsuite: New.
+	* argp/testsuite/ex3.c: New.
+	* argp/testsuite/ex4.c: New.
+	* argp/testsuite/run-tests: New.
+	* argp/testsuite/Makefile.am: New.
+	* argp/testsuite/ex1-test: New.
+	* argp/testsuite/ex1.c: New.
+	* argp/testsuite/permute-test: New.
+	* argp/argp-ba.c: New.
+	* argp/mempcpy.c: New.
+	* argp/argp-pv.c: New.
+	* argp/argp-eexst.c: New.
+	* argp/argp-help.c: New.
+	* argp/configure.ac: New.
+	* argp/TODO: New.
+	* argp/argp-pvh.c: New.
+	* argp/strchrnul.c: New.
+	* argp/argp-namefrob.h: New.
+	* argp/acinclude.m4: New.
+	* argp/Versions: New.
+	* argp/Makefile.am: New.
+	* argp/argp-fmtstream.c: New.
+	* configure.ac: Adjust.
+
 2006-05-29  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Change compilation flags in test suite.

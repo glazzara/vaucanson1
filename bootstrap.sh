@@ -41,6 +41,7 @@ run src/vaucanswig        ./expand.sh .
 run src/benchs            ./generate_benchs.sh --all
 run .                     build-aux/find_tests.sh
 
+# Will also boostrap argp/.
 run .                     $AUTORECONF -v -f -i
 
 echo "Reconfiguration done."
