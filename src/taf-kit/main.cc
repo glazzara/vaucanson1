@@ -37,8 +37,8 @@ extern "C" {
 /**
  * Base info for the program.
  */
-const char* argp_program_version = "VCSN TAF-Kit - 0.1";
-const char* argp_program_bug_address = "<vaucanson@lrde.epita.fr>";
+const char* argp_program_version = "VCSN TAF-Kit (" PACKAGE_STRING ")";
+const char* argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";
 
 /**
  * Documentation of the program, of the arguments we accept and the

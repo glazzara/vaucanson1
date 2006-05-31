@@ -31,3 +31,11 @@ vcsn_b_CPPFLAGS = $(AM_CPPFLAGS)					\
 
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\
 		 b_commands.cc
+
+## ------ ##
+## argp.  ##
+## ------ ##
+
+# Be sure to fetch the argp we ship.
+AM_CPPFLAGS += -I$(top_srcdir)/argp
+vcsn_b_LDADD = $(top_builddir)/argp/libargp.la

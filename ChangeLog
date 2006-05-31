@@ -1,3 +1,11 @@
+2006-05-31  Akim Demaille  <akim@lrde.epita.fr>
+
+	Bind taf-kit to argp.
+
+	* src/taf-kit/main.cc: Use the standard version strings.
+	* src/taf-kit/Makefile.am: Use argp.
+	* Makefile.am (SUBDIRS): Add argp.
+
 2006-05-31  Matthieu Varin  <matt@lrde.epita.fr>
 
 	Closing ticket 15.

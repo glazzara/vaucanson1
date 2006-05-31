@@ -3,7 +3,7 @@
 #
 # $Id$
 
-SUBDIRS = include doc src debian
+SUBDIRS = argp include doc src debian
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2
 
 ###
