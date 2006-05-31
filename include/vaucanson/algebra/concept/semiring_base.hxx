@@ -39,29 +39,21 @@ namespace vcsn {
       MonoidBase<Self>(other)
     {}
 
-    template <class Self>
-    template <class T>
-    bool
-    SemiringBase<Self>::can_choose_non_starable(SELECTOR(T)) const
-    {
-      return op_can_choose_non_starable(this->self(), SELECT(T));
+# define VCSN_CHOOSE_SEMIRING(CanArg, NonArg, RetType...)		      \
+    template <class Self>						      \
+    template <class T>							      \
+    RetType								      \
+    SemiringBase<Self>::CanArg ## choose_ ## NonArg ## starable(	      \
+    SELECTOR(T)) const							      \
+    {									      \
+      return op_ ## CanArg ## choose_ ## NonArg ## starable(this->self(),     \
+							    SELECT(T));	      \
     }
+    VCSN_CHOOSE_SEMIRING(can_,non_,bool)
+    VCSN_CHOOSE_SEMIRING(,,Element<Self, T>)
+    VCSN_CHOOSE_SEMIRING(,non_,Element<Self, T>)
+# undef VCSN_CHOOSE_SEMIRING
 
-    template <class Self>
-    template <class T>
-    Element<Self, T>
-    SemiringBase<Self>::choose_starable(SELECTOR(T)) const
-    {
-      return op_choose_starable(this->self(), SELECT(T));
-    }
-
-    template <class Self>
-    template <class T>
-    Element<Self, T>
-    SemiringBase<Self>::choose_non_starable(SELECTOR(T)) const
-    {
-      return op_choose_non_starable(this->self(), SELECT(T));
-    }
 
   } // algebra
 

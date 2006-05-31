@@ -1,3 +1,9 @@
+2006-05-31  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Closing ticket 15.
+
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Using CPP.
+
 2006-05-31  Akim Demaille  <akim@lrde.epita.fr>
 
 	Update README.
