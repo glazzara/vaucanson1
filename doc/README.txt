@@ -2,7 +2,7 @@
  Introduction to Vaucanson
 ===========================
 
-:Date: 2005-06-23
+:Date: 2006-05-31
 
 Vaucanson_, a C++ generic library for weighted finite state machines.
 
@@ -14,10 +14,9 @@ Vaucanson_, a C++ generic library for weighted finite state machines.
 Overview
 ========
 
-Firstly  initiated by  Jacques  Sakarovitch in  2000,  Vaucanson is  a
-project   developed   by    the   Ecole   Nationale   Supérieure   des
-Télécommunications  [1]   and  the  EPITA   Research  and  Development
-Laboratory (LRDE) [2].
+Initiated  by Jacques  Sakarovitch  in 2000,  Vaucanson  is a  project
+developed by the École Nationale Supérieure des Télécommunications [1]
+and the EPITA Research and Development Laboratory (LRDE) [2].
 
 .. [1] http://www.enst.fr
 
@@ -25,19 +24,19 @@ Laboratory (LRDE) [2].
 
 The goal of this library is  to enable the development of C++ programs
 in  an abstract  and  general way  with,  at the  same  time, a  large
-specialization power. Indeed, on the one hand, we can write algorithms
-working on  every automaton with  weights over any semirings  and with
-words  from any  free monoids.  And on  the other  hand,  a particular
-algorithm  can   be  specialized  for  a   particular  data  structure
-implementing only a pseudo behaviour.
+specialization  power.   Indeed,  on   the  one  hand,  we  can  write
+algorithms working on every  automaton with weights over any semirings
+and  with words  from any  free  monoids.  And  on the  other hand,  a
+particular  algorithm  can  be   specialized  for  a  particular  data
+structure implementing only a pseudo behaviour.
 
 Yet,   Vaucanson  is  an   ongoing  development   project.   Therefore
 algorithms,  data  structures and  the  general  architecture are  not
 totally stable and well tested.
 
-Please send  any question or  comments to ``vaucanson@lrde.epita.fr``,
-and bug reports to ``vaucanson-bugs@lrde.epita.fr``.
-
+Please send  any question or comments  to vaucanson@lrde.epita.fr, and
+report bugs to either our issue tracker http://vaucanson.lrde.org/, or
+to vaucanson-bugs@lrde.epita.fr.
 
 Installation
 ============
@@ -46,6 +45,7 @@ To install Vaucanson on your system, type in the classical sequence at
 the command prompt::
 
 	./configure
+	make
 	make sanity-check
 	make check ([1])
 	make install (as root)
@@ -63,7 +63,7 @@ Additional features
 
 There  is a  Python  interpreter in  the  package. It  is disabled  by
 default because its compilation takes  several hours. If you have time
-to spare, use instead::
+to spare, use::
 
 	./configure --enable-vaucanswig
 
@@ -74,7 +74,7 @@ do not want to use XML I/O in Vaucanson, you can use::
 
 	./configure --disable-xml
 
-To specify a special path for the Xerces-C library, you can use::
+To specify a special path for the Xerces-C library::
 
 	./configure --with-xerces=/absolute/path/to/xerces
 
@@ -86,8 +86,8 @@ For further configure options, type::
 Tweaking compilation options
 ----------------------------
 
-Use ``CXXFLAGS_DEBUG`` or ``CXXFLAGS_OPTIMIZE``  to pass debug or optimization
-flags,  not ``CXXFLAGS``. For example::
+Use  ``CXXFLAGS_DEBUG``  or  ``CXXFLAGS_OPTIMIZE``  to pass  debug  or
+optimization flags, not ``CXXFLAGS``.  For example::
 
 	./configure CXXFLAGS_DEBUG='-fstack-check -fbounds-check -ggdb'
 
@@ -101,20 +101,22 @@ Requirements
 ============
 
 Vaucanson was tested with the `GNU C++ Compiler (GCC)`_ version 3.[34]
-and 4.0, and should work with ICC_ 9.  The code is written in respect
-to the ISO-IEC 14882 (ISO C++) standard to permit a higher portability
-in the future.
+and 4.0,  and should work  with ICC_ 9.   The code is  fully compliant
+with  the  ISO  C++  standard  (ISO-IEC  14882)  to  permit  a  higher
+portability in the future.
 
 .. _GNU C++ Compiler (GCC): http://gcc.gnu.org/
 .. _ICC: http://www.intel.com/software/products/compilers/
 
-A known bug in GCC 4.0.0 for MacOs is supported to make the code
-compliant with this specific compiler version, but MacOs users are
-encouraged to upgrade their compiler.
+A  known bug in  GCC 4.0.0  for MacOs  is supported  to make  the code
+compliant  with this specific  compiler version,  but MacOs  users are
+encouraged to  upgrade their compiler.   They should also  notice that
+their  platform   allows  to  select  their   default  compiler  using
+``gcc_select``.  GCC 4.0 is preferred.
 
-Moreover, high  verbose mode of the testing  suites uses the  AT&T dot
-format to  save automaton  in a human  readable file.  Use Graphviz_ to
-visualize these .dot files.
+High verbose  mode of the testing  suites uses the AT&T  dot format to
+save automaton in  a human readable file.  Use  Graphviz_ to visualize
+these .dot files.
 
 .. _Graphviz: http://www.research.att.com/sw/tools/graphviz/
 
@@ -127,15 +129,12 @@ If  you want  to use  the XML  I/O system,  you will  need  the Apache
 Using Vaucanson
 ===============
 
-We are sorry but we do not provide a documentation of the Vaucanson
-library.
+Vaucanson comes with several demos.  Looking  at them is a good way to
+see what Vaucanson can do and how  it works.  They can be found in the
+``src/demos`` directory.
 
-However Vaucanson comes with several  demos. Looking at them is a good
-way to see what Vaucanson can do and how it works.  Those demos can be
-found in the ``src/demos`` directory.
-
-The TAF-Kit (Typed Automata Functions) documentation can be found
-as the first chapter of the User's Manual (see ``doc/manual``).
+The TAF-Kit  (Typed Automata Functions) documentation can  be found as
+the first chapter of the User's Manual (see ``doc/manual``).
 
 See Also
 ========
@@ -162,7 +161,6 @@ There are other sources of interest in the distribution.
 
 .. _Doxygen: http://www.doxygen.org
 
-.. [3] http://www.research.att.com/sw/tools/fsm/
 
 Licence
 =======
@@ -171,14 +169,14 @@ Vaucanson is now released under the GNU General Public Licence. See the
 file ``COPYING`` (at the root of the source tree) for details.
 
 Vaucanson was released under the GNU Lesser General Public Licence until
-version 0.7. 
+version 0.7.
 
 
 Contacts
 ========
 
-The team can be  reached by mail at ``vaucanson@lrde.epita.fr``. Snail
-mail addresses follow.
+The team can be reached by mail at vaucanson@lrde.epita.fr. Snail mail
+addresses follow.
 
 * Vaucanson - ENST
 

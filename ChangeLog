@@ -1,5 +1,12 @@
 2006-05-31  Akim Demaille  <akim@lrde.epita.fr>
 
+	Update README.
+
+	* doc/FAQ.txt, doc/README.txt: Update.
+	* doc/doc.mk: Don't tolerate warnings.
+
+2006-05-31  Akim Demaille  <akim@lrde.epita.fr>
+
 	Include argp for sake on non Glibc architectures.
 
 	Reported by Jacques Sakarovich.
