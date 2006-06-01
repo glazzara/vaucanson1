@@ -1,3 +1,36 @@
+2006-06-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	Multipurpose patch, don't do that at home.
+
+	* src/taf-kit/main.cc: Remove useless extern "C".
+
+        * src/tests/design_pattern/Makefile.am: Adjust.
+
+        * src/tests/bin/generate-test-suite.sh: Revamp it.
+	Use lower case names for non env vars.
+	Factor some code.
+
+        * src/tests/Makefile.am: License.
+	* src/tests/check/Makefile.check, src/tests/check/Makefile.flags:
+	Rename as...
+	* src/tests/check/check.mk, src/tests/check/check-flags.mk:
+	these.
+	Adjust all dependencies.
+
+        * argp/configure.ac: Remove obsolete invocation to
+	AM_PROG_CC_STDC.
+	
+        * build-aux/vcsn-xml.m4: s/vcsn_cv_xml_user_hint/with_xerces/
+	to please expert users of config.site.
+
+        * configure.ac: Stop pretending CXX can be CC.
+	
+        * doc/makefiles/vcsn-Makefile: 
+
+        * Makefile.am (SUBDIRS): Compile src first then doc. 
+
+	NOTICE is named COPYING.
+
 2006-05-31  Akim Demaille  <akim@lrde.epita.fr>
 
 	Bind taf-kit to argp.

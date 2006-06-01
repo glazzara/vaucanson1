@@ -6,7 +6,7 @@
 
 
 
-include ../check/Makefile.check
+include ../check/check.mk
 
 check_PROGRAMS = \
 	intrinsics_orphanage \

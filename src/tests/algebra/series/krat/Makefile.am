@@ -3,7 +3,7 @@
 # $Id$
 
 
-include $(top_srcdir)/src/tests/check/Makefile.check
+include $(top_srcdir)/src/tests/check/check.mk
 
 SUBDIRS = derivations \
 	  boolean \

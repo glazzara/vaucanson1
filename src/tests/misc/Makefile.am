@@ -2,7 +2,7 @@
 #
 # $Id$
 
-include $(srcdir)/../check/Makefile.check
+include $(srcdir)/../check/check.mk
 
 XFAIL_TESTS = assert_test$(EXEEXT)
 

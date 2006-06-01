@@ -3,7 +3,7 @@
 # $Id$
 
 
-include $(top_srcdir)/src/tests/check/Makefile.check
+include $(top_srcdir)/src/tests/check/check.mk
 
 EXTRA_DIST = \
   krat_exp_aci_canonical_test.hh \

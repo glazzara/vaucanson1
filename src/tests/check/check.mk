@@ -11,17 +11,8 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-# VCSN_USE_XML is tested in the `xml' directory.
+# VCSN_HEADER
 
-SUBDIRS =					\
-	check					\
-	sanity					\
-	misc					\
-	design_pattern				\
-	test-suites				\
-	algebra					\
-	automata				\
-	context_headers				\
-	xml
-
-EXTRA_DIST = bin/generate-test-suite.sh
+include $(top_srcdir)/src/tests/check/check-flags.mk
+LDADD = $(top_builddir)/src/tests/check/libcheck.a
+TESTS = $(check_PROGRAMS)

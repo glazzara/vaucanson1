@@ -22,10 +22,7 @@
  * Main file, common to all TAF-Kit binaries.
  */
 
-
-extern "C" {
 #include <argp.h>
-}
 #include <string>
 #include <iostream>
 #include <stdexcept>

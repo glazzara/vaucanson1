@@ -1,7 +1,7 @@
 # algebra/series/krat/tests/Makefile.am
 
 
-include $(top_srcdir)/src/tests/check/Makefile.check
+include $(top_srcdir)/src/tests/check/check.mk
 
 EXTRA_DIST = \
 	random_krat_exp_b_ab			\

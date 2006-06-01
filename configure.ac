@@ -7,7 +7,7 @@
 # of the License, or (at your option) any later version.
 #
 # The complete GNU General Public Licence Notice can be found as the
-# `NOTICE' file in the root directory.
+# `COPYING' file in the root directory.
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
@@ -23,10 +23,7 @@ AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
 VCSN_PRE_RELEASE
 
 # Some C and C++ code used.
-# Using $CXX as the C compiler is a hack to allow building shared
-# modules from C++ source with libtool.
 AC_PROG_CXX
-CC=$CXX
 AC_PROG_CC
 
 # Use included Vaucanson version.
