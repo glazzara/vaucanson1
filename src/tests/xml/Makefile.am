@@ -1,7 +1,5 @@
-AM_CXXFLAGS = $(CXXFLAGS_STRICT)
-AM_CPPFLAGS = -I$(top_builddir)/include -I$(top_srcdir)/include	\
-	-DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
-
+include $(top_srcdir)/src/vaucanson.mk
+AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
 TESTS_ENVIRONMENT= SRCDIR=$(srcdir)
 
 b_tester_SOURCES = xml_automaton_tester.cc

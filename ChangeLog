@@ -1,5 +1,13 @@
 2006-06-01  Akim Demaille  <akim@lrde.epita.fr>
 
+	* src/vaucanson.mk (AM_CPPFLAGS): Put build dirs first to protect
+	people like me who moved from a src = build build to a src !=
+	build build, and still have a trailing generated file in the "src"
+	directory.
+	* src/tests/xml/Makefile.am: Use it.
+
+2006-06-01  Akim Demaille  <akim@lrde.epita.fr>
+
 	Multipurpose patch, don't do that at home.
 
 	* src/taf-kit/main.cc: Remove useless extern "C".
