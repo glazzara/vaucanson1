@@ -390,6 +390,8 @@ namespace vcsn {
 		const Element<S, T>& rhs,
 		Element<S, T>& ret)
   {
+    typedef Element<S, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
 
     typedef std::set<hstate_t>			set_of_states_t;
     typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
@@ -398,6 +400,10 @@ namespace vcsn {
     set_of_states_t rhs_states;
     map_of_states_t m;
 
+    for_each_state (s, ret)
+      {
+	ret.del_state (*s);
+      }
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs, rhs, ret, lhs_states, rhs_states, m);
   }
@@ -448,6 +454,13 @@ namespace vcsn {
 			 const Element<S, T>& rhs,
 			 Element<S, T>& ret)
   {
+    typedef Element<S,T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
+    for_each_state (s, ret)
+      {
+	ret.del_state (*s);
+      }
     do_normalized_composition(ret.structure(),
 			      ret.structure().series().monoid(),
 			      lhs, rhs, ret);

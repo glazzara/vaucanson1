@@ -1,3 +1,10 @@
+2006-06-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Ticket 26: realtime_composition: initialize the transducer which will contain the result.
+
+	* include/vaucanson/algorithms/realtime_composition.hxx:,
+	* include/vaucanson/algorithms/normalized_composition.hxx: Delete states of the transducer which will contain the result of the composition.
+
 2006-06-01  Akim Demaille  <akim@lrde.epita.fr>
 
 	* src/vaucanson.mk (AM_CPPFLAGS): Put build dirs first to protect
@@ -33,9 +40,9 @@
 
 	* configure.ac: Stop pretending CXX can be CC.
 
-	* doc/makefiles/vcsn-Makefile: 
+	* doc/makefiles/vcsn-Makefile:
 
-	* Makefile.am (SUBDIRS): Compile src first then doc. 
+	* Makefile.am (SUBDIRS): Compile src first then doc.
 
 	NOTICE is named COPYING.
 
@@ -49,9 +56,8 @@
 
 2006-05-31  Matthieu Varin  <matt@lrde.epita.fr>
 
-	Closing ticket 15.
-
-	* include/vaucanson/algebra/concept/semiring_base.hxx: Using CPP.
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Use CPP to
+	factor op*_choose_*.
 
 2006-05-31  Akim Demaille  <akim@lrde.epita.fr>
 
@@ -182,7 +188,7 @@
 	* build-aux/vcsn_xml.m4, build-aux/vcsn_taf_kit.m4: Rename as...
 	* build-aux/vcsn-xml.m4, build-aux/vcsn-taf-kit.m4: these.
 	* build-aux/vcsn.m4, build-aux/vcsn-xml.m4, build-aux/vcsn-taf-kit.m4,
-	* configure.ac: 
+	* configure.ac:
 	Use m4_pattern_forbid/allow properly.
 	Formatting changes.
 

@@ -159,6 +159,12 @@ namespace vcsn {
 		       const Element<S, T>& rhs,
 		       Element<S, T>& ret)
   {
+    typedef Element<S, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+    for_each_state (s, ret)
+      {
+	ret.del_state (*s);
+      }
     do_realtime_composition(lhs.structure(), lhs, rhs, ret);
   }
 
