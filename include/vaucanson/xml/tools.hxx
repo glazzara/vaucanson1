@@ -222,14 +222,14 @@ namespace vcsn
 
 
       template <class L>
-      const char*	get_label(const L& l)
+      const std::string	get_label(const L& l)
       {
 	std::ostringstream os;
 	os << l;
-	return os.str().c_str();
+	return os.str();
       }
 
-      inline const char* get_label(const bool& l)
+      inline const std::string get_label(const bool& l)
       {
 	if (l)
 	  return "";
@@ -237,7 +237,7 @@ namespace vcsn
       }
 
 
-      inline const char* get_label(const std::pair<std::string, std::string>& l)
+      inline const std::string get_label(const std::pair<std::string, std::string>& l)
       {
 	std::ostringstream os;
 	os << "(" << l.first << ", " << l.second << ")";
@@ -245,14 +245,14 @@ namespace vcsn
       }
 
       template <class S, class Series>
-      const char*	get_label(const Element<Series,
+      const std::string	get_label(const Element<Series,
 				  vcsn::algebra::polynom<S, bool> >& l)
       {
 	std::ostringstream os;
 	os << l;
 	if (os.str() == "1")
 	  return "";
-	return os.str().c_str();
+	return os.str();
       }
 
 

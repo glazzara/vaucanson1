@@ -1,3 +1,10 @@
+2006-06-03  Guillaume Lazzara  <z@lrde.epita.fr>
+
+
+	* include/vaucanson/xml/tools.hxx: Remove `c_str' call in
+	`get_label' function. `get_label' returns now std::string instead of
+	char*.
+
 2006-06-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Ticket 26: realtime_composition: initialize the transducer which will contain the result.
