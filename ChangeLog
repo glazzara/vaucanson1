@@ -1,3 +1,10 @@
+2006-06-05  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/automata/implementation/geometry.hxx,
+	* include/vaucanson/automata/implementation/geometry.hh: Add a
+	`operator=' that copies the pointers in the same way as the copy
+	constructor of `geometry'. Factorize this.
+
 2006-06-05  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fix test generation.

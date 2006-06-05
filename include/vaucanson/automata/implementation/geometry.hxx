@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,8 +25,20 @@ namespace vcsn
   {}
 
   inline
+  geometry& geometry::operator=(const geometry& obj)
+  {
+    return copy_from(obj);
+  }
+
+  inline
   geometry::geometry(const geometry& obj)
     : states_(0), transitions_(0), initials_(0), finals_(0), name_(0)
+  {
+    copy_from(obj);
+  }
+
+  inline
+  geometry& geometry::copy_from(const geometry& obj)
   {
     if (obj.states_ != 0)
       states_ = new states_geometry_map_t(obj.states());
@@ -38,6 +50,7 @@ namespace vcsn
       finals_ = new finals_geometry_map_t(obj.finals());
     if (obj.name_ != 0)
       name_ = new std::string(obj.name());
+    return *this;
   }
 
   inline

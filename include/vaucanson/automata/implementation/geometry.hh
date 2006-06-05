@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -53,6 +53,8 @@ namespace vcsn
       geometry();
       geometry(const geometry& obj);
       ~geometry();
+      inline geometry& operator=(const geometry& obj);
+      inline geometry& copy_from(const geometry& obj);
 
       /**
        * @brief Retrieve the map of state coordinates.
