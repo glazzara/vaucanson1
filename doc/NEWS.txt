@@ -9,6 +9,9 @@ This document describes major updates to the Vaucanson_ project.
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
 
+Vaucanson 0.8a
+==============
+
 Vaucanson 0.8 May 15, 2006
 ==========================
 
@@ -71,14 +74,14 @@ Vaucanson 0.7.2 November 09, 2005
   was successfully tested on Linux and MacOs.
 
 
-- Bug fixes. 
+- Bug fixes.
 
   Some bugs were fixed in the core library, and in the XML system.
-  
+
 
 - XML system.
 
-  The system now handles geometric attributes in Vaucanson automata. See 
+  The system now handles geometric attributes in Vaucanson automata. See
   product algorithm for a sample use.
 
 
@@ -110,7 +113,7 @@ Vaucanson 0.7.1 June 25, 2005
 - Some bugs were fixed to ensure library stability. Mainly, algorithms Moore
   minimization, sub-normalized composition, realtime and projection were fixed.
 
-- Context headers now include by default all standard algorithms. 
+- Context headers now include by default all standard algorithms.
 
 - All deprecated documentation has been removed.
 
@@ -175,12 +178,12 @@ Vaucanson 0.7 May 17, 2005
     following functions::
 
       // Create an empty automaton.
-      automaton_t new_automaton(first_alphabet_t, second_alphabet_t); 
+      automaton_t new_automaton(first_alphabet_t, second_alphabet_t);
 
       // Create a couple of words that can directly be given to
       // add_series_edge() for instance.
       series_set_elt_t make_couple(first_alphabet_t, second_alphabet_t,
-				   std::string, std::string); 
+				   std::string, std::string);
 
   - Some new algorithms have also been added:
 
@@ -241,8 +244,8 @@ Vaucanson 0.7 May 17, 2005
 
 - Big cleaning in the graph implementation.
 
-  A lot of superfluous operations were done in the former implementation. 
-  Cleaning the code provided huge performance improvement. The actual 
+  A lot of superfluous operations were done in the former implementation.
+  Cleaning the code provided huge performance improvement. The actual
   implementation has the same interface than the former one.
 
 
@@ -263,7 +266,7 @@ Vaucanson 0.7 May 17, 2005
   this expected optimisation.
 
 
-- This version of Vaucanson is released under the GNU Lesser General Public 
+- This version of Vaucanson is released under the GNU Lesser General Public
   Licence.
 
 
@@ -289,19 +292,19 @@ Vaucanson 0.6.1 October 26, 2004
   The demo formerly named ``algorithms`` is now compiled for various
   semirings under the following names:
 
-  ``b``: 
+  ``b``:
     Boolean semiring.
 
-  ``z``: 
+  ``z``:
     usual semiring on Z.
 
-  ``r``: 
+  ``r``:
     usual semiring on R.
 
-  ``z_max_plus``: 
+  ``z_max_plus``:
     tropical semiring with (max, +) on Z.
 
-  ``z_min_plus``: 
+  ``z_min_plus``:
     tropical semiring with (min, +) on Z.
 
   Furthermore, additional algorithms may be called from this demo:
@@ -319,7 +322,7 @@ Vaucanson 0.6.1 October 26, 2004
   description of ``expand()`` can be found below, in the description
   of Vaucanson 0.6.
 
-- This version of Vaucanson is released under the GNU Lesser General Public 
+- This version of Vaucanson is released under the GNU Lesser General Public
   Licence.
 
 Vaucanson 0.6 July 18, 2004
@@ -489,7 +492,7 @@ Vaucanson 0.6 July 18, 2004
   may be needed in ``tools/usual_macros.hh``.
 
 
-- This version of Vaucanson is released under the GNU Lesser General Public 
+- This version of Vaucanson is released under the GNU Lesser General Public
   Licence.
 
 
@@ -505,7 +508,7 @@ Vaucanson 0.5 March 24, 2004
 
   ``doc/xml/``:
      You can find a minimal documentation here.
- 
+
   ``xml/``:
      DTD and XSL files and some scripts.
 
@@ -606,7 +609,7 @@ Vaucanson 0.5 March 24, 2004
   The minimization algorithm named ``minimization_moore()`` has been
   rewritten. It should be more readable and more reliable now.
 
-- This version of Vaucanson is released under the GNU Lesser General Public 
+- This version of Vaucanson is released under the GNU Lesser General Public
   Licence.
 
 
@@ -627,7 +630,7 @@ Vaucanson 0.4 October 29, 2003
 - Addition of a generic search algorithm able to skip characters in
   the input stream.
 
-- This version of Vaucanson is released under the GNU Lesser General Public 
+- This version of Vaucanson is released under the GNU Lesser General Public
   Licence.
 
 Vaucanson 0.3 July 11, 2003
@@ -640,7 +643,7 @@ Vaucanson 0.3 July 11, 2003
 - Noticeable performance boost thanks to a working unification of
   references to structural elements.
 
-- This version of Vaucanson is released under the GNU Lesser General Public 
+- This version of Vaucanson is released under the GNU Lesser General Public
   Licence.
 
 Vaucanson 0.2 July 02, 2003
@@ -659,7 +662,7 @@ Vaucanson 0.2 July 02, 2003
 
 - Initial Doxygen documentation efforts.
 
-- This version of Vaucanson is released under the GNU Lesser General Public 
+- This version of Vaucanson is released under the GNU Lesser General Public
   Licence.
 
 Vaucanson 0.1 January, 2002
@@ -667,7 +670,7 @@ Vaucanson 0.1 January, 2002
 
 - Initial release.
 
-- This version of Vaucanson is released under the GNU Lesser General Public 
+- This version of Vaucanson is released under the GNU Lesser General Public
   Licence.
 
 .. Local Variables:

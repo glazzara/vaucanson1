@@ -1,3 +1,17 @@
+2006-06-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Remove VCSN_TESTS.
+
+	* src/tests/test-suites/subdirs.mk: New.
+	* src/tests/test-suites/Makefile.am: Use it.
+	* src/tests/test-suites/generate-all.sh: Comment changes.
+	* build-aux/move-if-change: New.
+	* build-aux/vcsn.m4 (VCSN_TESTS): Remove.
+	* build-aux/Makefile.am: New.
+	* build-aux/find_tests.sh: Also create subdirs.mk.
+	* Makefile.am, configure.ac: Process build-aux/Makefile.am.
+	* doc/NEWS.txt: 0.8a.
+
 2006-06-03  Guillaume Lazzara  <z@lrde.epita.fr>
 
 

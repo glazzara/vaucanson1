@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2006 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -11,6 +11,14 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include subdirs.mk
+###
+### Autoconf macros are installable and distributable.
+###
+m4datadir = $(datadir)/aclocal
+dist_m4data_DATA = vcsn.m4 vcsn-xml.m4
 
-EXTRA_DIST = generate-all.sh
+
+EXTRA_DIST =					\
+check_xml.sh					\
+find_tests.sh					\
+move-if-change

@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = argp include src doc debian
+SUBDIRS = argp include src doc build-aux debian
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2
 
 ###
@@ -19,12 +19,6 @@ EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2
 ### Tell it where to find them.
 ###
 ACLOCAL_AMFLAGS = -I build-aux
-
-###
-### Autoconf macros are installable and distributable.
-###
-m4datadir = $(datadir)/aclocal
-dist_m4data_DATA = build-aux/vcsn.m4 build-aux/vcsn-xml.m4
 
 ###
 ### Making the demos. (. is builddir)

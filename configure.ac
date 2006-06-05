@@ -15,7 +15,7 @@
 
 AC_PREREQ([2.57])
 
-AC_INIT([vaucanson], [0.8], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [0.8a], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9.5 tar-ustar no-define foreign dist-bzip2 nostdinc])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
@@ -146,6 +146,7 @@ AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 
 AC_CONFIG_FILES([
 	Makefile
+	build-aux/Makefile
 	src/Makefile
 	src/taf-kit/Makefile
 	src/tests/Makefile

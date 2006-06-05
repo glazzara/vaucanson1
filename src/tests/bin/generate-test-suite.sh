@@ -94,7 +94,7 @@ generate_CCs()
     for test_dir in $test_dirs; do
       name_test_file=$(echo $name_test_file | sed s,$test_dir//\*,,)
     done
-    
+
 
     # Include licence.
     dump_header "//" >$dest_dir/$fun_sname-$suffix.cc

@@ -1,5 +1,9 @@
 #!/bin/sh
 
+
+# generate DESTINATION-DIRECTORY DESCRIPTION-FILE TESTS-DIRS
+# ----------------------------------------------------------
+# Convenient wrapper around generate-test-suite.sh.
 generate ()
 {
     dir=$1
@@ -7,6 +11,7 @@ generate ()
     shift
     ../bin/generate-test-suite.sh "$dir" "$defs" "$@"
 }
+
 
 #    /*----------.
 #    | Alphabets |

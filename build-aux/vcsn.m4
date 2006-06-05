@@ -503,21 +503,6 @@ AC_DEFUN([AC_WITH_VCSN],
 ])
 
 
-# VCSN_TESTS
-# ----------
-# Test invocation macro
-AC_DEFUN([VCSN_TESTS],
-[AC_MSG_CHECKING([for $1 in testsuite])
-if test -r "$srcdir"/src/tests/test-suites/$1/Makefile.am; then
-   AC_MSG_RESULT([yes])
-   VCSN_TESTS_SUBDIRS="$VCSN_TESTS_SUBDIRS $1"
-   AC_CONFIG_FILES([src/tests/test-suites/$1/Makefile])
-else
-   AC_MSG_RESULT([no])
-fi
-])
-
-
 # AC_CHECK_SWIG13
 # ---------------
 # Check for SWIG
