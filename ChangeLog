@@ -1,5 +1,16 @@
 2006-06-05  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix test generation.
+
+	None of the tests were generated...
+	* src/tests/bin/generate-test-suite.sh: Fix the remaining
+	uppercase/lowercase issues.
+	(generate_CCs): Sort the output.
+	Use standard shell quotes.
+	Produce readble output.
+
+2006-06-05  Akim Demaille  <akim@lrde.epita.fr>
+
 	Remove VCSN_TESTS.
 
 	* src/tests/test-suites/subdirs.mk: New.
