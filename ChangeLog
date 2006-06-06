@@ -1,3 +1,9 @@
+2006-06-06  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Bacward.
+
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Old version.
+
 2006-06-06  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fix a couple of rights.
