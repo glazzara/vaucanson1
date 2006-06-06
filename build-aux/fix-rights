@@ -1,0 +1,15 @@
+#! /bin/sh
+
+# Run this program from the top level of the distribution.
+
+# The extension we are interested in.
+ext='(cc|hh|hxx|thh|txx)'
+ext=$(echo "$ext" | sed -e 's/[(|)]/\\&/g')
+
+# What we are not interested in.
+my_find ()
+{
+    find . \( -name _build -o -name .svn -o -regex './\+.*' \) -prune -o "$@"
+}
+
+my_find -regex ".*\.$ext" -exec chmod 644 {} ';'

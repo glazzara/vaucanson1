@@ -1,3 +1,10 @@
+2006-06-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix a couple of rights.
+
+	* build-aux/fix-rights: New.
+	Use it.
+
 2006-06-05  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/automata/implementation/geometry.hxx,
