@@ -140,15 +140,26 @@ AC_CHECK_PROGS([RST2HTML], [rst2html rst2html.py], [$am_aux_dir/missing rst2html
 AC_ARG_VAR([TAR], [the tape archiver program])
 AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
 
-##
-## generate files.
-##
+
+## ------- ##
+## TAF-Kit ##
+## ------- ##
+
+AC_CONFIG_FILES([
+	taf-kit/Makefile
+	  taf-kit/src/Makefile
+	  taf-kit/tests/Makefile
+	  taf-kit/tests/defs
+])
+
+## ---------------- ##
+## generate files.  ##
+## ---------------- ##
 
 AC_CONFIG_FILES([
 	Makefile
 	build-aux/Makefile
 	src/Makefile
-	src/taf-kit/Makefile
 	src/tests/Makefile
 	src/tests/check/Makefile
 	src/tests/check/defs

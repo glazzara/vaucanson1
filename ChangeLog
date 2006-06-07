@@ -1,5 +1,19 @@
 2006-06-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	Set up a test framework for TAF-Kit.
+
+	* src/taf-kit: Move too...
+	* taf-kit/src: here.
+	* taf-kit/tests: New.
+	* taf-kit/tests/defs.in: New.
+	* taf-kit/tests/vcsn-b.test: New.
+	* taf-kit/tests/Makefile.am: New.
+	* taf-kit/Makefile.am: New.
+
+	* src/Makefile.am, configure.ac, Makefile.am: Adjust.
+
+2006-06-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix a1.xml, b1.xml, c1.xml.
 
 	* src/demos/automaton_library/a1.xml,

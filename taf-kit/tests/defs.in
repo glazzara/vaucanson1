@@ -1,0 +1,145 @@
+# -*- shell-script -*-
+# @configure_input@
+#
+# Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2006
+# Free Software Foundation, Inc.
+#
+# This file is part of Vaucanson.
+# This file was part of GNU Automake.
+#
+# GNU Automake is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# GNU Automake is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Automake; see the file COPYING.  If not, write to
+# the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+# Boston, MA 02110-1301, USA.
+
+# Be Bourne compatible.
+# (Snippet copied from configure's initialization in Autoconf 2.57.)
+if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
+  emulate sh
+  NULLCMD=:
+  # Zsh 3.x and 4.x performs word splitting on ${1+"$@"}, which
+  # is contrary to our usage.  Disable this feature.
+  alias -g '${1+"$@"}'='"$@"'
+elif test -n "${BASH_VERSION+set}" && (set -o posix) >/dev/null 2>&1; then
+  set -o posix
+fi
+
+# Ensure we are running from the right directory.
+test -f ./defs || {
+   echo "defs: not found in current directory" 1>&2
+   exit 1
+}
+
+# If srcdir is not set, then we are not running from `make check', be verbose.
+if test -z "$srcdir"; then
+   VERBOSE=x
+   # compute $srcdir.
+   srcdir=`echo "$0" | sed -e 's,/[^\\/]*$,,'`
+   test $srcdir = $0 && srcdir=.
+fi
+
+# Always use an absolute srcdir.  Otherwise symlinks made in subdirs
+# of the test dir just won't work.
+case "$srcdir" in
+ [\\/]* | ?:[\\/]*)
+    ;;
+
+ *)
+    srcdir=`CDPATH=: && cd "$srcdir" && pwd`
+    ;;
+esac
+
+# Ensure $srcdir and $top_srcdir are set correctly.
+test -f $srcdir/defs.in || {
+   echo "$srcdir/defs.in not found, check \$srcdir" 1>&2
+   exit 1
+}
+
+top_srcdir=$(cd $srcdir/../.. && pwd)
+test -f $top_srcdir/configure.ac || {
+   echo "$top_srcdir/configure.ac not found, check \$top_srcdir" 1>&2
+   exit 1
+}
+
+me=`echo "$0" | sed -e 's,.*[\\/],,;s/\.test$//'`
+
+# See how redirections should work.  User can set VERBOSE to see all
+# output.
+test -z "$VERBOSE" && {
+   exec > /dev/null 2>&1
+}
+
+# Make sure we override the user shell.
+SHELL='@SHELL@'
+export SHELL
+# POSIX no longer requires 'egrep' and 'fgrep',
+# but some hosts lack 'grep -E' and 'grep -F'.
+EGREP='@EGREP@'
+FGREP='@FGREP@'
+
+test -z "$VCSN_B" && VCSN_B=`cd ../src && pwd`/vcsn-b
+test -z "$VCSN_XSD_PATH" && export VCSN_XSD_PATH=$top_srcdir/src/vaucanson.xsd
+
+echo $PATH
+# Some shells forget to export modified environment variables.
+# (See note about `export' in the Autoconf manual.)
+export PATH
+# User can override various tools used.
+test -z "$PERL" && PERL='@PERL@'
+
+if test -n "$required"
+then
+  for tool in $required
+  do
+    # Check that each required tool is present.
+    case $tool in
+      # Generic case: the tool must support --version.
+      *)
+	echo "$me: running $tool --version"
+	( $tool --version ) || exit 77
+	;;
+    esac
+  done
+fi
+
+
+## ---------- ##
+## Automata.  ##
+## ---------- ##
+
+automata_dir=$top_srcdir/src/demos/automaton_library
+a1=$automata_dir/a1.xml
+b1=$automata_dir/b1.xml
+c1=$automata_dir/c1.xml
+
+
+## ---------- ##
+## Test dir.  ##
+## ---------- ##
+
+chmod -R a+rwx testSubDir > /dev/null 2>&1
+rm -rf testSubDir > /dev/null 2>&1
+mkdir testSubDir
+cd ./testSubDir
+
+
+
+echo "=== Running test $0"
+
+# Turn on shell traces when VERBOSE is set.
+if test -n "$VERBOSE"; then
+  set -x
+else
+  :
+fi
+pwd

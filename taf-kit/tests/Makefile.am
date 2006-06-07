@@ -11,19 +11,15 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = tests	\
-	  benchs \
-	  demos \
-	  $(VCSN_VAUCANSWIG_SUBDIR)
+XFAIL_TESTS =
 
-.PHONY: demos benchs
+TESTS = \
+vcsn-b.test
 
-demos:
-	cd demos && $(MAKE) $(AM_MAKEFLAGS) demos
+EXTRA_DIST = $(TESTS)
 
-benchs:
-	cd benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
+# Each test case depends on defs.
+check_SCRIPTS = defs
 
-
-# The XSD file will be installed in a data directory.
-dist_pkgdata_DATA = vaucanson.xsd
+distclean-local:
+	-rm -rf testSubDir
