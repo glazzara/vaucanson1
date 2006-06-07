@@ -1,15 +1,24 @@
-digraph vcsn {
-label="b1 { 2 states, 5 transitions, #I = 1, #T = 1 }";
-node [shape=circle];
-"b11" [style=invis,label="",width=.01,height=.01];
-"b11" -> "b10" [label="1"];
-"b10" [label="0"];
-"b13" [style=invis,label="",width=.01,height=.01];
-"b12" -> "b13" [label="1"];
-"b12" [label="1"];
-"b10" -> "b10" [label="a"];
-"b10" -> "b10" [label="b"];
-"b10" -> "b12" [label="b"];
-"b12" -> "b12" [label="a"];
-"b12" -> "b12" [label="b"];
-}
+<automaton name="b1" xmlns="http://vaucanson.lrde.epita.fr">
+  <label_type>
+    <monoid generators="letters" type="free">
+      <generator value="a"/>
+      <generator value="b"/>
+    </monoid>
+    <semiring operations="numerical" set="B"/>
+  </label_type>
+  <content>
+    <states>
+      <state name="s0"/>
+      <state name="s1"/>
+    </states>
+    <transitions>
+      <transition src="s0" dst="s0" label="a"/>
+      <transition src="s0" dst="s0" label="b"/>
+      <transition src="s0" dst="s1" label="b"/>
+      <transition src="s1" dst="s1" label="a"/>
+      <transition src="s1" dst="s1" label="b"/>
+      <initial state="s0"/>
+      <final state="s1"/>
+    </transitions>
+  </content>
+</automaton>
