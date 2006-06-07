@@ -123,7 +123,6 @@ DEFINE_COMMAND (NAME (aut_to_exp)
 DEFINE_COMMAND (NAME (are_isomorphic)
 		CODE (bool b = are_isomorphic (get_aut (args.args[1]),
 					       get_aut (args.args[2])))
-		OUTPUT (b << std::endl)
 		RETURNVALUE (b ? 0 : 1));
 
 DEFINE_COMMAND (NAME (eval)

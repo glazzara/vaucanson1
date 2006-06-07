@@ -1,5 +1,18 @@
 2006-06-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	More vcsn-b tests.
+
+	* taf-kit/src/common_commands.hh: Don't output what's not to output.
+	* taf-kit/tests/vcsn-b.test: Order tests by function, not by input.
+
+2006-06-07  Akim Demaille  <akim@epita.fr>
+
+	* taf-kit/src/common_commands.hh (are-isomorphic): Don't output
+	anything.
+	* taf-kit/tests/vcsn-b.test
+
+2006-06-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	Set up a test framework for TAF-Kit.
 
 	* src/taf-kit: Move too...

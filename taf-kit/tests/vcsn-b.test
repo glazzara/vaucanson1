@@ -17,15 +17,32 @@
 
 set -e
 
-## -------------- ##
-## Automaton a1.  ##
-## -------------- ##
+## ---------------- ##
+## Test fonctions.  ##
+## ---------------- ##
 
-# Test fonctions.
+# are-isomorphic
   $VCSN_B are-isomorphic $a1 $a1
+! $VCSN_B are-isomorphic $a1 $b1
+
+# is-complete
 ! $VCSN_B is-complete $a1
+  $VCSN_B complete $a1 | $VCSN_B is-complete -
+
+# is-deterministic
 ! $VCSN_B is-deterministic $a1
+  $VCSN_B determinize $a1 | $VCSN_B is-deterministic -
+
+# is-empty.
 ! $VCSN_B is-empty $a1
+
+# is-normzalized.
 ! $VCSN_B is-normalized $a1
+  $VCSN_B normalize $a1 | $VCSN_B is-normalized -
+
+# is-realtime.
 ! $VCSN_B is-realtime $a1
+
+# is-standard
 ! $VCSN_B is-standard $a1
+  $VCSN_B standardize $a1 | $VCSN_B is-standard -
