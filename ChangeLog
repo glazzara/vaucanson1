@@ -1,5 +1,12 @@
 2006-06-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix vcsn-b are-isomorphic.
+
+	* taf-kit/src/common_commands.hh (are_isomorphic): Using
+	OUTPUT is mandated.
+
+2006-06-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	More vcsn-b tests.
 
 	* taf-kit/src/common_commands.hh: Don't output what's not to output.
