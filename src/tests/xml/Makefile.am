@@ -1,5 +1,5 @@
 include $(top_srcdir)/src/vaucanson.mk
-AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
+AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/data/vaucanson.xsd\""
 TESTS_ENVIRONMENT= SRCDIR=$(srcdir)
 
 b_tester_SOURCES = xml_automaton_tester.cc

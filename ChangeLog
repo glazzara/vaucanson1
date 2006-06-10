@@ -1,5 +1,21 @@
 2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Move `vaucanson.xsd' from src/ to data/.
+
+	* src/vaucanson.xsd: Move to...
+	* data/vaucanson.xsd: ... Here.
+
+	* src/tests/xml/Makefile.am,
+	* src/demos/algorithms/Makefile.am,
+	* src/demos/function_library/Makefile.am,
+	* src/demos/transducers/Makefile.am,
+	* src/Makefile.am,
+	* taf-kit/tests/defs.in,
+	* doc/xml/xml_proposal.tex,
+	* data/Makefile.am: Update accordingly.
+
+2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* data: New.
 	* data/Makefile.am: New.
 	* configure.ac,

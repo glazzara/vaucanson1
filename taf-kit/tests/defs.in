@@ -88,7 +88,7 @@ EGREP='@EGREP@'
 FGREP='@FGREP@'
 
 test -z "$VCSN_B" && VCSN_B=`cd ../src && pwd`/vcsn-b
-test -z "$VCSN_XSD_PATH" && export VCSN_XSD_PATH=$top_srcdir/src/vaucanson.xsd
+test -z "$VCSN_XSD_PATH" && export VCSN_XSD_PATH=$top_srcdir/data/vaucanson.xsd
 
 echo $PATH
 # Some shells forget to export modified environment variables.

@@ -3,7 +3,7 @@
 # $Id: Makefile.am 462 2004-03-31 21:55:16Z yann $
 include $(top_srcdir)/src/vaucanson.mk
 
-AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
+AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/data/vaucanson.xsd\""
 AM_CXXFLAGS += -DINTERNAL_CHECKS -DSTRICT
 
 EXTRA_PROGRAMS = 				\

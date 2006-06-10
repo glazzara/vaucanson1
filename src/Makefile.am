@@ -23,7 +23,3 @@ demos:
 
 benchs:
 	cd benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
-
-
-# The XSD file will be installed in a data directory.
-dist_pkgdata_DATA = vaucanson.xsd

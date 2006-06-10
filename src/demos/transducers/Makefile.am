@@ -5,7 +5,7 @@ include $(top_srcdir)/src/vaucanson.mk
 
 SUBDIRS = one_rule_rewriting
 
-AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/src/vaucanson.xsd\""
+AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/data/vaucanson.xsd\""
 
 EXTRA_PROGRAMS = u1 t1
 
