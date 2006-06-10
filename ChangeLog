@@ -1,5 +1,14 @@
 2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* data: New.
+	* data/Makefile.am: New.
+	* configure.ac,
+	* Makefile.am: Update accordingly.
+
+	* data/misc.el: New. Indentation for Vaucanson and other minor stuff.
+
+2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* bootstrap.sh (run): Call directly the parameters without invoking
 	/bin/sh. It fixes an issue when having different versions of
 	`autoreconf'.

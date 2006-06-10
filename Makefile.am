@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = argp include src taf-kit doc build-aux debian
+SUBDIRS = argp include src taf-kit doc build-aux debian data
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2
 
 ###

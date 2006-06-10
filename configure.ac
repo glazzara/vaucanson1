@@ -159,6 +159,7 @@ AC_CONFIG_FILES([
 AC_CONFIG_FILES([
 	Makefile
 	build-aux/Makefile
+	data/Makefile
 	src/Makefile
 	src/tests/Makefile
 	src/tests/check/Makefile
