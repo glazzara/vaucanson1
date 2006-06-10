@@ -14,6 +14,9 @@
 ###
 ### Autoconf macros are installable and distributable.
 ###
+
+### XML files should be distributed even if VCSN_USE_XML is not set.
+
 m4datadir = $(datadir)/aclocal
 dist_m4data_DATA = vcsn.m4 vcsn-xml.m4
 

@@ -17,7 +17,7 @@ run ()
 	stderr "$@"
 	cd "$1"
 	shift
-	if ! /bin/sh "$@"; then
+	if ! "$@"; then
 	    stderr "unexpected failure: $@"
 	    exit 1
 	fi
