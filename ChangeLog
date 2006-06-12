@@ -1,3 +1,11 @@
+2006-06-12  Guillaume Lazzara  <z@lrde.epita.fr>
+
+
+	* src/tests/automata/implementation_check/geometry_equal_operator_test.hh:
+	  New test for geometry `=' operator.
+	* src/tests/automata/implementation_check/Makefile.am:
+	  Add a new entry for this test.
+
 2006-06-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
