@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -599,7 +599,7 @@ namespace vcsn {
     typedef set<pair_state_semiring_elt_t>     set_pair_state_semiring_elt_t;
     typedef map<semiring_elt_t, unsigned>      map_semiring_elt_t;
 
-    series_set_elt_t	series_identity	= input.series().zero_;
+    series_set_elt_t	null_series	= input.series().zero_;
     semiring_elt_t	weight_zero	= input.series().semiring().wzero_;
     monoid_elt_t	monoid_identity	= input.series().monoid().empty_;
     const alphabet_t&	alphabet (input.series().monoid().alphabet());
@@ -812,7 +812,7 @@ namespace vcsn {
     {
       out_states[i]  = output.add_state();
       hstate_t a_state = *classes[i].begin();
-      series_set_elt_t a_serie = series_identity;
+      series_set_elt_t a_serie = null_series;
 
       for_each_const_(set_states_t, state, classes[i])
 	if(input.is_initial(*state))
@@ -825,7 +825,7 @@ namespace vcsn {
     }
 
     // Add transitions.
-    vector_series_set_elt_t seriesof (max_partition, series_identity);
+    vector_series_set_elt_t seriesof (max_partition, null_series);
 
     for(unsigned i = 0; i < max_partition; i++)
     {

@@ -1,5 +1,11 @@
 2006-06-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx,
+	* include/vaucanson/algorithms/closure.hxx: Rename non-sense
+	`series_identity' to `null_series'.
+
+2006-06-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Add VCSN_INCLUDE_XML() macro to factorize some CPP test handling.
 
 	* include/vaucanson/config/system.hh: Define VCSN_INCLUDE_XML(),

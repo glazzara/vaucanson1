@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ namespace vcsn {
     typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
     typedef std::vector<series_set_elt_t>		vector_series_t;
 
-    series_set_elt_t	series_identity = a.series().zero_;
+    series_set_elt_t	null_series = a.series().zero_;
     semiring_elt_t	semiring_elt_zero = a.series().semiring().wzero_;
     monoid_elt_t	monoid_identity = a.series().monoid().empty_;
 
@@ -75,7 +75,7 @@ namespace vcsn {
 	series_set_elt_t t = a.series_of(*e);
 	m_semiring_elt[origin][aim] += t.get(monoid_identity);
 	t.assoc(monoid_identity.value(), semiring_elt_zero.value());
-	if(t != series_identity)
+	if(t != null_series)
 	  a.add_series_transition(*s, a.dst_of(*e), t);
 	a.del_transition(*e);
       }
@@ -107,7 +107,7 @@ namespace vcsn {
     {
       // Backward_closure
       // Initialize the m_wfinal
-      vector_series_t	m_wfinal (size, series_identity);
+      vector_series_t	m_wfinal (size, null_series);
       for_each_final_state(p, a)
 	m_wfinal[state_to_index[*p]] = a.get_final(*p);
       a.clear_final();
@@ -130,10 +130,10 @@ namespace vcsn {
 	  }
 	  a.del_transition(*e);
 	}
-	series_set_elt_t tw = series_identity;
+	series_set_elt_t tw = null_series;
 	for (k = 0; k < size; k++)
 	  tw += m_semiring_elt[aim][k] * m_wfinal[k];
-	if (tw != series_identity)
+	if (tw != null_series)
 	  a.set_final(*s, tw);
       }
     }
@@ -141,7 +141,7 @@ namespace vcsn {
     {
       // Forward closure
       // Initialize the m_wfinal
-      vector_series_t	m_winitial (size, series_identity);
+      vector_series_t	m_winitial (size, null_series);
       for_each_initial_state(p, a)
 	m_winitial[state_to_index[*p]] = a.get_initial(*p);
       a.clear_initial();
@@ -164,10 +164,10 @@ namespace vcsn {
 	  }
 	  a.del_transition(*e);
 	}
-	series_set_elt_t tw = series_identity;
+	series_set_elt_t tw = null_series;
 	for (k = 0; k < size; k++)
 	  tw += m_winitial[k] * m_semiring_elt[k][origin];
-	if (tw != series_identity)
+	if (tw != null_series)
 	  a.set_initial(*s, tw);
       }
     }
