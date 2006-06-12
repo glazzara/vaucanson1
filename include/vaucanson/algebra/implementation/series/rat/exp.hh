@@ -19,7 +19,7 @@
 
 #include <vaucanson/config/system.hh>
 
-# if (not defined (VCSN_SANITY_CHECK)) or (defined (VCSN_USE_XML))
+# if VCSN_INCLUDE_XML()
 #  include <xercesc/dom/DOM.hpp>
 #  include <xercesc/util/XMLString.hpp>
 #  include <xercesc/util/PlatformUtils.hpp>
@@ -96,7 +96,7 @@ namespace vcsn {
       /// i.e. the number of letters used in the expression.
       size_t length() const;
 
-# if (not defined (VCSN_SANITY_CHECK)) or (defined (VCSN_USE_XML))
+# if VCSN_INCLUDE_XML()
 	xercesc::DOMElement* xml_tree(xercesc::DOMDocument* doc,
 				      char* node_name) const;
 # endif

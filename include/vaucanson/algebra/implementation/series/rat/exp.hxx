@@ -128,7 +128,7 @@ namespace vcsn {
       return v.get();
     }
 
-# if (not defined (VCSN_SANITY_CHECK)) or (defined (VCSN_USE_XML))
+# if VCSN_INCLUDE_XML()
     template<typename LetterT, typename WeightT>
     xercesc::DOMElement* exp<LetterT, WeightT>::xml_tree(
       xercesc::DOMDocument* doc, char* node_name) const

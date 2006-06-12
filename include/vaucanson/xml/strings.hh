@@ -17,8 +17,7 @@
 
 #include <vaucanson/config/system.hh>
 
-#if not defined (VCSN_XML_STRINGS_HH) and				\
-    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
+#if not defined (VCSN_XML_STRINGS_HH) and VCSN_INCLUDE_XML()
 # define VCSN_XML_STRINGS_HH
 
 # ifndef VCSN_USE_XML
@@ -47,4 +46,4 @@ namespace vcsn
 #  include <vaucanson/xml/strings.hxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_XML_STRINGS_HH && (! VCSN_SANITY_CHECK || VCSN_USE_XML)
+#endif // ! VCSN_XML_STRINGS_HH && VCSN_INCLUDE_XML()

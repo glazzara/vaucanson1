@@ -1,3 +1,30 @@
+2006-06-12  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Add VCSN_INCLUDE_XML() macro to factorize some CPP test handling.
+
+	* include/vaucanson/config/system.hh: Define VCSN_INCLUDE_XML(),
+	valuated to `true' if XML files can be included.
+
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx,
+	* include/vaucanson/xml/xml_chooser.hh,
+	* include/vaucanson/xml/session.hh,
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/error_handler.hh,
+	* include/vaucanson/xml/xml_converter.hh,
+	* include/vaucanson/xml/strings.hh,
+	* include/vaucanson/xml/ios.hh,
+	* include/vaucanson/xml/XML.hh,
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/xerces_parser.hh,
+	* include/vaucanson/tools/xml_dump.hh,
+	* include/vaucanson/tools/xml_display.hh,
+	* include/vaucanson/tools/xml_load.hh: Use it.
+
+	* build-aux/check_xml.sh: Say that VCSN_INCLUDE_XML() is a valid test
+	of XML include'ability.
+
 2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Move `vaucanson.xsd' from src/ to data/.
@@ -11,8 +38,9 @@
 	* src/demos/transducers/Makefile.am,
 	* src/Makefile.am,
 	* taf-kit/tests/defs.in,
-	* doc/xml/xml_proposal.tex,
 	* data/Makefile.am: Update accordingly.
+
+	* doc/xml/xml_proposal.tex: Update the URL to the XSD.
 
 2006-06-10  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
@@ -44,12 +72,6 @@
 	* taf-kit/src/common_commands.hh: Don't output what's not to output.
 	* taf-kit/tests/vcsn-b.test: Order tests by function, not by input.
 
-2006-06-07  Akim Demaille  <akim@epita.fr>
-
-	* taf-kit/src/common_commands.hh (are-isomorphic): Don't output
-	anything.
-	* taf-kit/tests/vcsn-b.test
-
 2006-06-07  Akim Demaille  <akim@lrde.epita.fr>
 
 	Set up a test framework for TAF-Kit.
@@ -80,9 +102,8 @@
 
 2006-06-06  Matthieu Varin  <matt@lrde.epita.fr>
 
-	Bacward.
-
-	* include/vaucanson/algebra/concept/semiring_base.hxx: Old version.
+	* include/vaucanson/algebra/concept/semiring_base.hxx: Revert previous
+	patch on this file.
 
 2006-06-06  Akim Demaille  <akim@lrde.epita.fr>
 
@@ -125,17 +146,15 @@
 
 2006-06-03  Guillaume Lazzara  <z@lrde.epita.fr>
 
-
 	* include/vaucanson/xml/tools.hxx: Remove `c_str' call in
 	`get_label' function. `get_label' returns now std::string instead of
 	char*.
 
 2006-06-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
-	Ticket 26: realtime_composition: initialize the transducer which will contain the result.
-
-	* include/vaucanson/algorithms/realtime_composition.hxx:,
-	* include/vaucanson/algorithms/normalized_composition.hxx: Delete states of the transducer which will contain the result of the composition.
+	* include/vaucanson/algorithms/realtime_composition.hxx,
+	* include/vaucanson/algorithms/normalized_composition.hxx: Clear the
+	transducer that will the result of the composition.
 
 2006-06-01  Akim Demaille  <akim@lrde.epita.fr>
 
@@ -468,8 +487,8 @@
 
 2006-05-13  Florent Terrones  <terron_f@lrde.epita.fr>
 
-	* src/vaucanson.xsd: Add `label' nodes to allow one to write labels like
-	`(a,b)+(b,a)' on FMP.
+	* src/vaucanson.xsd: Add `label' nodes to allow one to write
+	labels like `(a,b)+(b,a)' on FMP.
 	Add forgotten `in' and `out' label nodes in `initial_transducer' and
 	`final_transducer' nodes.
 
@@ -678,7 +697,8 @@
 	* src/taf-kit/edit_automaton.hh,
 	* src/taf-kit/edit_automaton.hxx: New. `edit_automaton' and
 	`create_automaton' functions.
-	* src/taf-kit/commands_macros.hh: New. Useful macros to define commands.
+	* src/taf-kit/commands_macros.hh: New. Useful macros to define
+	commands.
 	* src/taf-kit/getters.hh,
 	* src/taf-kit/getters.hxx: New. Getters for expressions, automata, ...
 	* src/taf-kit/common.hh: New.
@@ -1308,7 +1328,6 @@
 
 	* doc/README.txt: Mention README-IO. Mention FAQ.
 
-
 2006-03-17  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* doc/xml/xml_proposal.tex: New version. Change structure and
@@ -1322,7 +1341,6 @@
 	  `VCSN_XSD_PATH'.
 
 2006-03-16  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
-
 
 	* include/Makefile.am: Add `xerces_parser-hh.in' to EXTRA_DIST.
 
@@ -1363,7 +1381,6 @@
 	  in `xerces_parser-hh.in'.
 
 2006-03-15  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
-
 
 	* include/vaucanson/contexts/automaton_functions.thh: Add some
 	  algorithms, sort them in alphabetical order.

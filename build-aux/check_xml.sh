@@ -2,7 +2,7 @@
 
 set -e
 
-use_xml_flags='VCSN_USE_XML\|XML_CHECK\|demo.mk'
+use_xml_flags='VCSN_USE_XML\|XML_CHECK\|VCSN_INCLUDE_XML\|demo.mk'
 exit_status=0
 
 find . \

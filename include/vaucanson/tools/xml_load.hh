@@ -16,8 +16,7 @@
 //
 #include <vaucanson/config/system.hh>
 
-#if not defined (VCSN_TOOLS_XML_LOAD_HH)  and                           \
-    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
+#if not defined (VCSN_TOOLS_XML_LOAD_HH) and VCSN_INCLUDE_XML()
 # define VCSN_TOOLS_XML_LOAD_HH
 
 # ifndef VCSN_USE_XML
@@ -50,4 +49,4 @@ namespace vcsn
 #  include <vaucanson/tools/xml_load.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_TOOLS_XML_LOAD_HH && (!VCSN_SANITY_CHECK || VCSN_USE_XML) && (! VCSN_SANITY_CHECK || VCSN_USE_XML)
+#endif // ! VCSN_TOOLS_XML_LOAD_HH && VCSN_INCLUDE_XML()
