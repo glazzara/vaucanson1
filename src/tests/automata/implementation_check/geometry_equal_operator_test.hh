@@ -28,7 +28,7 @@
   class.
   It used to crash when we made a copy of the transducer and we deleted both.
   It was due to the pointer attributes of the tranduscer which were copied
-  directly whithout allocating new space memory. As pointers were freed in the
+  directly without allocating new space memory. As pointers were freed in the
   destructor, attributes were destructed twice, causing a segfault.
 */
 
@@ -46,16 +46,16 @@ unsigned geometry_equal_operator_test(tests::Tester& tg)
 
   bool		ok = true;
 
-  /*------------------------------------.
-  | Creation of a realtime transducer.  |
-  `------------------------------------*/
+  /*--------------------------.
+  | Creation of an automaton. |
+  `--------------------------*/
   typedef GenRandomAutomata<Auto> gen_auto_t;
   gen_auto_t gen(time(0x0));
   automaton_t rttdc(gen.generate_dfa(10).structure());
 
-  /*------------------------------------.
-  | Copy of this  realtime transducer.  |
-  `------------------------------------*/
+  /*-------------------------.
+  | Copy of this automaton.  |
+  `-------------------------*/
   automaton_t	aut(rttdc.structure());
 
   aut.geometry().initials();

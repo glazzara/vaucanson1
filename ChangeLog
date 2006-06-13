@@ -1,3 +1,11 @@
+2006-06-13  Guillaume Lazzara  <z@lrde.epita.fr>
+
+
+	* include/vaucanson/automata/implementation/geometry.hxx: Add `delete'
+	  calls in the geometry copy constructor. Attributes were not deleted.
+	* src/tests/automata/implementation_check/geometry_equal_operator_test.hh:
+	  Fix some comments.
+
 2006-06-12  Guillaume Lazzara  <z@lrde.epita.fr>
 
 

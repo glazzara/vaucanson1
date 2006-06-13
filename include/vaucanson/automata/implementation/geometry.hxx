@@ -41,31 +41,41 @@ namespace vcsn
   geometry& geometry::copy_from(const geometry& obj)
   {
     if (obj.states_ != 0)
+    {
+      delete states_;
       states_ = new states_geometry_map_t(obj.states());
+    }
     if (obj.transitions_ != 0)
+    {
+      delete transitions_;
       transitions_ = new transitions_geometry_map_t(obj.transitions());
+    }
     if (obj.initials_ != 0)
+    {
+      delete initials_;
       initials_ = new initials_geometry_map_t(obj.initials());
+    }
     if (obj.finals_ != 0)
+    {
+      delete finals_;
       finals_ = new finals_geometry_map_t(obj.finals());
+    }
     if (obj.name_ != 0)
+    {
+      delete name_;
       name_ = new std::string(obj.name());
+    }
     return *this;
   }
 
   inline
   geometry::~geometry()
   {
-    if (states_)
-      delete states_;
-    if (transitions_)
-      delete transitions_;
-    if (initials_)
-      delete initials_;
-    if (finals_)
-      delete finals_;
-    if (name_)
-      delete name_;
+    delete states_;
+    delete transitions_;
+    delete initials_;
+    delete finals_;
+    delete name_;
   }
 
 
