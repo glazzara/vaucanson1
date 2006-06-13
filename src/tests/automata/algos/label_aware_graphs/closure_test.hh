@@ -56,7 +56,7 @@ bool closure_test(tests::Tester& tg)
 	if (backward_closure(cauto).transitions().size() !=
 	    cauto.transitions().size())
 	  error_backward_idempotence = true;
-	for_each_transition(e, cauto)
+	for_all_transitions(e, cauto)
 	  if (cauto.series_of(*e) ==
 	      identity_as<series_set_elt_value_t>::
 	      of(cauto.structure().series()))
@@ -79,7 +79,7 @@ bool closure_test(tests::Tester& tg)
 	if (forward_closure(cauto).transitions().size() !=
 	    cauto.transitions().size())
 	  error_forward_idempotence = true;
-	for_each_transition(e, cauto)
+	for_all_transitions(e, cauto)
 	  if (cauto.series_of(*e) ==
 	      identity_as<series_set_elt_value_t>::
 	      of(cauto.structure().series()))

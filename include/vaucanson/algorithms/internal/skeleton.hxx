@@ -56,7 +56,7 @@ namespace vcsn
     // and final states
     // Time complexity: O(n log n)
     i = 0;
-    for_each_state(q, a)
+    for_all_states(q, a)
     {
       states.push_back(*q);
       Smap[*q] = i++;
@@ -79,7 +79,7 @@ namespace vcsn
     i = 0;
     // Index of the transitions
     j = 0;
-    for_each_transition(e, a)
+    for_all_transitions(e, a)
     {
       transitions.push_back(*e);
       origins_transitions.push_back(Smap[a.src_of(*e)]);

@@ -130,9 +130,9 @@ automaton_t universal(const automaton_t& automaton)
     }
 
   // finally, the transition set.
-  for_each_state(x, u)
-    for_each_state(y, u)
-    for_each_letter(a, u.series().monoid().alphabet())
+  for_all_states(x, u)
+    for_all_states(y, u)
+    for_all_letters(a, u.series().monoid().alphabet())
   {
     bool cont = false;
     std::set<hstate_t> delta_ret;

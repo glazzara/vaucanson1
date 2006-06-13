@@ -42,9 +42,9 @@ namespace vcsn {
     bool sink_added = false;
     std::list<hstate_t> aim;
 
-    for_each_state(i, work)
+    for_all_states(i, work)
     {
-      for_each_letter(j, work.structure().series().monoid().alphabet())
+      for_all_letters(j, work.structure().series().monoid().alphabet())
       {
 	aim.clear();
 	work.letter_deltac(aim, *i, *j, delta_kind::states());
@@ -85,11 +85,11 @@ namespace vcsn {
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
-    for_each_state(i, e)
+    for_all_states(i, e)
     {
       std::set<hstate_t> aim;
       const alphabet_t& alpha = e.structure().series().monoid().alphabet();
-      for_each_letter(j, alpha)
+      for_all_letters(j, alpha)
       {
 	aim.clear();
 	e.letter_deltac(aim, *i, *j, delta_kind::states());

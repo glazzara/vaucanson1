@@ -41,11 +41,11 @@ namespace vcsn {
   `---------------*/
 
   /**
-   * Default chooser for aut_to_exp().
-   *
-   * @pre There must be at least one state in the automaton.
-   * @see aut_to_exp()
-   */
+     * Default chooser for aut_to_exp().
+     *
+     * @pre There must be at least one state in the automaton.
+     * @see aut_to_exp()
+     */
   struct DefaultChooser
   {
       template <class Auto_>
@@ -68,11 +68,11 @@ namespace vcsn {
 | RandomChooser |
 `--------------*/
 
-/**
- * Choose randomly a state between all currently choosable
- * @pre There must be at least one state in the automaton.
- * @see aut_to_exp()
- */
+  /**
+     * Choose randomly a state between all currently choosable
+     * @pre There must be at least one state in the automaton.
+     * @see aut_to_exp()
+     */
 
   struct RandomChooser
   {
@@ -268,13 +268,13 @@ namespace vcsn {
   `------------*/
 
   /**
-   * Chooser for aut_to_exp().
-   *
-   * This chooser  is built  using a std::list<hstate_t>.   It returns
-   * the states of the automaton with the same order as in the list.
-   *
-   * @see aut_to_exp().
-   */
+     * Chooser for aut_to_exp().
+     *
+     * This chooser  is built  using a std::list<hstate_t>.   It returns
+     * the states of the automaton with the same order as in the list.
+     *
+     * @see aut_to_exp().
+     */
   class ListChooser
   {
     public :
@@ -367,8 +367,8 @@ namespace vcsn {
       }
       loop_sum.star();
       //Slow
-      for_each_const_(sums_t, in, in_sums)
-	for_each_const_(sums_t, out, out_sums)
+      for_all_const_(sums_t, in, in_sums)
+	for_all_const_(sums_t, out, out_sums)
       {
 	series_set_elt_t res = in->second * loop_sum * out->second;
 	a.add_series_transition(in->first, out->first, res);
@@ -376,7 +376,7 @@ namespace vcsn {
       a.del_state(q);
     }
     series_set_elt_t final(a_set.series());
-    for_each_transition(i, a)
+    for_all_transitions(i, a)
       final += a.label_of(*i);
     return final;
   }

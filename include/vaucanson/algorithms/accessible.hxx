@@ -42,8 +42,8 @@ namespace vcsn {
 		       const Auto_&		   a)
   {
     AUTOMATON_TYPES(Auto_);
-    typedef std::set<hstate_t>	      		reachable_set_t;
-    typedef std::set<hstate_t>		       	delta_ret_t;
+    typedef std::set<hstate_t>			reachable_set_t;
+    typedef std::set<hstate_t>			delta_ret_t;
     typedef std::queue<hstate_t>		queue_t;
 
     delta_ret_t			      delta_ret;
@@ -54,31 +54,31 @@ namespace vcsn {
     /*---------------.
     | Initialization |
     `---------------*/
-    for_each_initial_state(i, a)
-      {
-	queue.push(*i);
-	reachable_states.insert(*i);
-      }
+    for_all_initial_states(i, a)
+    {
+      queue.push(*i);
+      reachable_states.insert(*i);
+    }
 
     /*----------.
     | Main loop |
     `----------*/
     while (!queue.empty())
+    {
+      state = queue.front();
+      queue.pop();
+      delta_ret.clear();
+      a.deltac(delta_ret, state, delta_kind::states());
+      for_all_const_(delta_ret_t, j, delta_ret)
       {
-	state = queue.front();
-	queue.pop();
-	delta_ret.clear();
-	a.deltac(delta_ret, state, delta_kind::states());
-	for_each_const_(delta_ret_t, j, delta_ret)
-	  {
-	    state = *j;
-	    if (reachable_states.find(state) == reachable_states.end())
-	      {
-		reachable_states.insert(state);
-		queue.push(state);
-	      }
-	  }
+	state = *j;
+	if (reachable_states.find(state) == reachable_states.end())
+	{
+	  reachable_states.insert(state);
+	  queue.push(state);
+	}
       }
+    }
     return reachable_states;
   }
 

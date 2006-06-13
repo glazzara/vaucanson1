@@ -31,12 +31,12 @@
 // Useful macros for Moore's minimization.
 
 // Iterator on a list of groups.
-# define for_each_group(I, P)						\
+# define for_all_groups(I, P)						\
   for (groupid_to_group_t::iterator I = ((P).begin()); I != (P).end(); ++I)
 
 // Iterator on state in a group. We don't iterate on the first not
 // processed state.
-# define for_each_state_in_group(I, P)					\
+# define for_all_state_in_groups(I, P)					\
   for (group_t::iterator I = ++((P).begin()); I != (P).end(); ++I)
 
 namespace vcsn {
@@ -104,10 +104,10 @@ namespace vcsn {
 
     state_to_groupid[NullState] = NullGroup;
 
-    for_each_letter(iletter, alphabet)
+    for_all_letters(iletter, alphabet)
       letter_to_letterid[*iletter] = letter_count++;
 
-    for_each_state(istate, input)
+    for_all_states(istate, input)
     {
       aut_view[*istate] = letterid_to_state_t(letter_count, NullState);
       if ((not Transposed and input.is_final(*istate)) or
@@ -123,9 +123,9 @@ namespace vcsn {
       }
     }
 
-    for_each_state(istate, input)
+    for_all_states(istate, input)
     {
-      for_each_const_(letter_to_letterid_t, iletter, letter_to_letterid)
+      for_all_const_(letter_to_letterid_t, iletter, letter_to_letterid)
       {
 	delta_ret.clear();
 	if (not Transposed)
@@ -151,7 +151,7 @@ namespace vcsn {
     {
       group_modified = false;
 
-      for_each_group(igroup, groupid_to_group)
+      for_all_groups(igroup, groupid_to_group)
       {
 	if (igroup->empty())
 	  break;
@@ -159,7 +159,7 @@ namespace vcsn {
 	hstate_t first_state = *(igroup->begin());
 	bool	 group_created = false;
 
-	for_each_state_in_group(istate, *igroup)
+	for_all_state_in_groups(istate, *igroup)
 	{
 	  for (i = 0; i < letter_count; ++i)
 	    if (state_to_groupid[aut_view[first_state][i]] !=
@@ -202,7 +202,7 @@ namespace vcsn {
     {
       hstate_t repres = *(groupid_to_group[i].begin());
 
-      for_each_const_(letter_to_letterid_t, iletter, letter_to_letterid)
+      for_all_const_(letter_to_letterid_t, iletter, letter_to_letterid)
 	if (aut_view[repres][iletter->second] != NullState)
 	{
 	  if (not Transposed)
@@ -276,8 +276,8 @@ namespace vcsn {
 } // vcsn
 
 // Prevent potential conflicts.
-# undef for_each_group
-# undef for_each_state_in_group
+# undef for_all_groups
+# undef for_all_state_in_groups
 
 
 #endif // ! VCSN_ALGORITHMS_MINIMIZATION_MOORE_HXX

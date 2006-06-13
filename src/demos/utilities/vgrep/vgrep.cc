@@ -193,10 +193,10 @@ int main(int argc, char **argv)
     complete_here(automaton);
     // FIXME: tools::dot_dump(std::cout, automaton, "automaton");
     // STATE FINAL => sigma * on it.
-    for_each_initial_state(s, automaton)
+    for_all_initial_states(s, automaton)
       for (unsigned l = 0; l <= 255; ++l)
 	automaton.add_letter_transition(*s, *s, char(l));
-    for_each_final_state(s, automaton)
+    for_all_final_states(s, automaton)
       for (unsigned l = 0; l <= 255; ++l)
 	automaton.add_letter_transition(*s, *s, char(l));
 

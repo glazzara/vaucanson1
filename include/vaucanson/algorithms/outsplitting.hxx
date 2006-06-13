@@ -19,14 +19,14 @@
 
 
 /**
- * @file outsplitting.hxx
- *
- * @brief Outsplitting and insplitting algorithms for normalized and
- * sub-normalized transducers seen as automata over a free monoid
- * product.
- *
- * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
- */
+   * @file outsplitting.hxx
+   *
+   * @brief Outsplitting and insplitting algorithms for normalized and
+   * sub-normalized transducers seen as automata over a free monoid
+   * product.
+   *
+   * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+   */
 
 # include <vaucanson/algorithms/outsplitting.hh>
 # include <vaucanson/algorithms/accessible.hh>
@@ -72,7 +72,7 @@ namespace vcsn {
 
 
 
-    for_each_state(s, res)
+    for_all_states(s, res)
     {
       bool eps_out = false;
       bool other_out = false;
@@ -82,7 +82,7 @@ namespace vcsn {
 
       set_of_transitions_t transitions;
       res.deltac(transitions, *s, delta_kind::transitions());
-      for_each_const_(set_of_transitions_t, e, transitions)
+      for_all_const_(set_of_transitions_t, e, transitions)
       {
 	const series_set_elt_t	series	= res.series_of(*e);
 	support_t			supp = series.supp();
@@ -112,10 +112,10 @@ namespace vcsn {
 	set_of_transitions_t in_transitions;
 	res.rdeltac(in_transitions, *s, delta_kind::transitions());
 
-	for_each_(set_of_transitions_t, e, in_transitions)
+	for_all_(set_of_transitions_t, e, in_transitions)
 	  res.add_series_transition(res.src_of(*e), s2, res.series_of(*e));
 
-	for_each_const_(set_of_transitions_t, e, transitions)
+	for_all_const_(set_of_transitions_t, e, transitions)
 	{
 	  const series_set_elt_t	series	= res.series_of(*e);
 	  support_t		supp = series.supp();
@@ -171,7 +171,7 @@ namespace vcsn {
 
 
 
-    for_each_state(s, res)
+    for_all_states(s, res)
     {
       bool eps_in = false;
       bool other_in = false;
@@ -181,7 +181,7 @@ namespace vcsn {
 
       set_of_transitions_t transitions;
       res.rdeltac(transitions, *s, delta_kind::transitions());
-      for_each_const_(set_of_transitions_t, e, transitions)
+      for_all_const_(set_of_transitions_t, e, transitions)
       {
 	const series_set_elt_t	series	= res.series_of(*e);
 	support_t			supp = series.supp();
@@ -211,10 +211,10 @@ namespace vcsn {
 	set_of_transitions_t out_transitions;
 	res.deltac(out_transitions, *s, delta_kind::transitions());
 
-	for_each_(set_of_transitions_t, e, out_transitions)
+	for_all_(set_of_transitions_t, e, out_transitions)
 	  res.add_series_transition(s2, res.dst_of(*e), res.series_of(*e));
 
-	for_each_const_(set_of_transitions_t, e, transitions)
+	for_all_const_(set_of_transitions_t, e, transitions)
 	{
 	  const series_set_elt_t	series	= res.series_of(*e);
 	  support_t		supp = series.supp();

@@ -63,18 +63,18 @@ standard_of_regression_test(tests::Tester& tg)
   TEST(t, "Number of transitions", au.transitions().size() == 2);
 
   bool b (true);
-  for_each_initial_state(i, au)
+  for_all_initial_states(i, au)
     b = b and
     au.get_initial(*i) == identity_as<series_set_elt_value_t>::of(ss);
   TEST(t, "Weight of initials", b);
 
   b = true;
-  for_each_transition(e, au)
+  for_all_transitions(e, au)
     b = b and au.series_of(*e) == series_set_elt_t (ss, ma);
   TEST(t, "Weight of transitions", b);
 
   b = true;
-  for_each_final_state(f, au)
+  for_all_final_states(f, au)
     b = b and au.get_final(*f) == series_set_elt_t (ss, w);
   TEST(t, "Weight of finals", b);
 

@@ -30,14 +30,14 @@ main(int argc, char** argv)
   automaton_t a = standard_of(exp);
   alphabet_t alpha = a.structure().series().monoid().alphabet();
 
-  for_each_initial_state(s, a)
-    for_each_letter(l, alpha)
+  for_all_initial_states(s, a)
+    for_all_letters(l, alpha)
   {
     a.add_letter_transition(*s, *s, *l);
   }
 
-  for_each_final_state(s, a)
-    for_each_letter(l, alpha)
+  for_all_final_states(s, a)
+    for_all_letters(l, alpha)
   {
     a.add_letter_transition(*s, *s, *l);
   }

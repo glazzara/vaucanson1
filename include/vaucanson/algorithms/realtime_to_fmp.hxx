@@ -98,7 +98,7 @@ namespace vcsn
       {
 	hstate_t tmp = res.add_state();
 	typename mult_elt_t::support_t mult_supp = mult.supp();
-	for_each_const_(mult_elt_t::support_t, i, mult_supp)
+	for_all_const_(mult_elt_t::support_t, i, mult_supp)
 	{
 	  first = *i;
 
@@ -106,9 +106,9 @@ namespace vcsn
 	    output(trans.structure().series().semiring(), mult.get(*i));
 	  typename Trans_t::semiring_elt_t::support_t
 	    output_supp = output.supp();
-	  for_each_const_(Trans_t::semiring_elt_t::support_t,
-			  j,
-			  output_supp)
+	  for_all_const_(Trans_t::semiring_elt_t::support_t,
+			 j,
+			 output_supp)
 	  {
 	    second = *j;
 	    weight = output.get(*j);
@@ -148,7 +148,7 @@ namespace vcsn
 	hstate_t tmp = res.add_state();
 
 	typename mult_elt_t::support_t mult_supp = mult.supp();
-	for_each_const_(mult_elt_t::support_t, i, mult_supp)
+	for_all_const_(mult_elt_t::support_t, i, mult_supp)
 	{
 	  first = *i;
 
@@ -156,9 +156,9 @@ namespace vcsn
 	    output(trans.structure().series().semiring(), mult.get(*i));
 	  typename Trans_t::semiring_elt_t::support_t
 	    output_supp = output.supp();
-	  for_each_const_(Trans_t::semiring_elt_t::support_t,
-			  j,
-			  output_supp)
+	  for_all_const_(Trans_t::semiring_elt_t::support_t,
+			 j,
+			 output_supp)
 	  {
 	    second = *j;
 	    weight = output.get(*j);

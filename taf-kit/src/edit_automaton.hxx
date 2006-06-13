@@ -138,7 +138,7 @@ namespace edit_automaton
     int n_trans = get_int ();
     htransition_t trans;
 
-    for_each_state (s, a)
+    for_all_states (s, a)
     {
       std::set<htransition_t> succ;
       a.deltac(succ, *s, delta_kind::transitions());
@@ -271,16 +271,16 @@ namespace edit_automaton
 
     echo ("Automaton description:");
 
-    Print_States ("  States", for_each_state,
+    Print_States ("  States", for_all_states,
 		  false, get_initial /* Don't care */);
-    Print_States ("  Initial states", for_each_initial_state,
+    Print_States ("  Initial states", for_all_initial_states,
 		  true, get_initial);
-    Print_States ("  Final states", for_each_final_state,
+    Print_States ("  Final states", for_all_final_states,
 		  true, get_final);
 
     echo_ ("\n  Transitions: ");
     unsigned n_trans = 0;
-    for_each_state (s, a)
+    for_all_states (s, a)
     {
       std::set<htransition_t> succ;
       a.deltac(succ, *s, delta_kind::transitions());

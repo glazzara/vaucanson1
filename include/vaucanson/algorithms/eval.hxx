@@ -47,7 +47,7 @@ namespace vcsn {
     // FIXME: Variants of eval will be available soon of course.
 
     hstate_t max_hstate_t = 0;
-    for_each_state(i, a)
+    for_all_states(i, a)
       max_hstate_t = std::max(*i, max_hstate_t);
 
     std::vector<semiring_elt_t>	v1(max_hstate_t + 1,
@@ -71,7 +71,7 @@ namespace vcsn {
     | Initial |
     `--------*/
     // FIXME: here we assume that there is only weight in the initial app.
-    for_each_initial_state(i, a)
+    for_all_initial_states(i, a)
     {
       v1[*i] = a.get_initial(*i).get(empty);
       v1_b[*i] = true;

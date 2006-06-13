@@ -64,12 +64,12 @@ namespace vcsn {
     exp_t	  null_exp = lhs.series().zero_;
     monoid_elt_t  empty	   = lhs.series().monoid().empty_;
 
-    for_each_initial_state(p, lhs)
+    for_all_initial_states(p, lhs)
     {
       exp_t exp = lhs.get_initial(*p);
       partial_evaluation(exp, rhs, sep_set);
 
-      for_each_const_(state_exp_pair_set_t, mypair, sep_set)
+      for_all_const_(state_exp_pair_set_t, mypair, sep_set)
       {
 
 	hstate_t new_state = ret.add_state(); // add_state
@@ -117,7 +117,7 @@ namespace vcsn {
       set_of_transitions_t transitions;
       lhs.deltac(transitions, p, delta_kind::transitions());
 
-      for_each_const_(set_of_transitions_t, e, transitions)
+      for_all_const_(set_of_transitions_t, e, transitions)
       {
 	hstate_t p_ = lhs.dst_of(*e);
 	exp_t exp = lhs.series_of(*e);
@@ -132,7 +132,7 @@ namespace vcsn {
 	state_exp_pair_set_t sep_set1;
 	partial_3(a, rhs, q, sep_set1);
 
-	for_each_const_(state_exp_pair_set_t, mypair, sep_set1)
+	for_all_const_(state_exp_pair_set_t, mypair, sep_set1)
 	{
 	  state_pair_t sp1;
 	  sp1.first = p_;
@@ -161,10 +161,10 @@ namespace vcsn {
   {
     typedef Element<S, T> auto_t;
     AUTOMATON_TYPES(auto_t);
-    for_each_state (s, ret)
-      {
-	ret.del_state (*s);
-      }
+    for_all_states (s, ret)
+    {
+      ret.del_state (*s);
+    }
     do_realtime_composition(lhs.structure(), lhs, rhs, ret);
   }
 

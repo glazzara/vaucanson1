@@ -17,15 +17,15 @@
 #ifndef VCSN_XML_TOOLS_HXX
 # define VCSN_XML_TOOLS_HXX
 /**
- * @file tools.hxx
- *
- * Some useful utility functions.
- *
- *
- * @see vcsn::xml::xml_converter, vcsn::xml::Node
- *
- * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
- */
+   * @file tools.hxx
+   *
+   * Some useful utility functions.
+   *
+   *
+   * @see vcsn::xml::xml_converter, vcsn::xml::Node
+   *
+   * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+   */
 
 namespace vcsn
 {
@@ -56,9 +56,9 @@ namespace vcsn
       // Add the label as an xml node
       template <class S, class T, class U>
       void add_xml_label(xercesc::DOMDocument* doc,
-			  xercesc::DOMElement* elt,
-			  const Element<S, T>& a,
-			  const U& series)
+			 xercesc::DOMElement* elt,
+			 const Element<S, T>& a,
+			 const U& series)
       {
 	typedef Element<S,T> automaton_t;
 	typedef typename
@@ -261,7 +261,7 @@ namespace vcsn
 			   xercesc::DOMElement* root)
       {
 	typedef typename A::const_iterator alphabet_iterator;
-	for_each_letter(l, alphabet)
+	for_all_letters(l, alphabet)
 	{
 	  std::ostringstream letter;
 	  xercesc::DOMElement* gen =
@@ -326,10 +326,10 @@ namespace vcsn
 
 
       /**
-       * Tools to generate automaton labels from string, and to ensure type
-       * compatibility.
-       *
-       */
+	 * Tools to generate automaton labels from string, and to ensure type
+	 * compatibility.
+	 *
+	 */
 # define GET_SEMIRING_SET(T, Value)			\
       template <class S>				\
       const char* get_semiring_set(const S&, const T&)	\
@@ -352,8 +352,8 @@ namespace vcsn
       GET_SEMIRING_SET(int, "Z")
 
       // Deals with the "operation" attribute of <semiring> tag.
-# define GET_SEMIRING_OPERATIONS(S, Value)		\
-      template <>					\
+# define GET_SEMIRING_OPERATIONS(S, Value)			\
+      template <>						\
       inline const char* get_semiring_operations<S>(const S&)	\
       { return Value; }
 
@@ -400,94 +400,94 @@ namespace vcsn
 	if (!n)
 	  return res;
 	for (; n; n = n->getNextSibling())
+	{
+	  if (n->getNodeType() == xercesc::DOMNode::ELEMENT_NODE)
 	  {
-	    if (n->getNodeType() == xercesc::DOMNode::ELEMENT_NODE)
-	      {
-		element_n = (static_cast<xercesc::DOMElement*>(n));
+	    element_n = (static_cast<xercesc::DOMElement*>(n));
 
-		if (xml2str(n->getNodeName()) == "sum")
-		  next_op_type = VCSN_XML_SUM_TYPE;
-		if (xml2str(n->getNodeName()) == "product")
-		  next_op_type = VCSN_XML_PRODUCT_TYPE;
+	    if (xml2str(n->getNodeName()) == "sum")
+	      next_op_type = VCSN_XML_SUM_TYPE;
+	    if (xml2str(n->getNodeName()) == "product")
+	      next_op_type = VCSN_XML_PRODUCT_TYPE;
 
-		// Add weight (and opening brace if complex expression)
-		if (element_n->hasAttribute(STR2XML("weight")))
-		  res += xml2str(element_n->getAttribute(STR2XML("weight")))
-		    + " ";
+	    // Add weight (and opening brace if complex expression)
+	    if (element_n->hasAttribute(STR2XML("weight")))
+	      res += xml2str(element_n->getAttribute(STR2XML("weight")))
+		+ " ";
 
-		// Add opening prace if attribute or complex starified/weighted
-		// expression or sum in product
-		if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
-		     xml2str(element_n->getAttribute(STR2XML("parenthesis")))
-		     == "true")
-		    || ((((element_n->hasAttribute(STR2XML("star")))
-			  && (xml2str(element_n->getAttribute(STR2XML("star")))
-			      == "true"))
-			 ||(element_n->hasAttribute(STR2XML("weight"))))
-			&& (xml2str(n->getNodeName()) != "word"))
-		    || ((xml2str(n->getNodeName()) == "sum")
-			&& (op_type == VCSN_XML_PRODUCT_TYPE)))
-		  res += "(";
+	    // Add opening prace if attribute or complex starified/weighted
+	    // expression or sum in product
+	    if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
+		 xml2str(element_n->getAttribute(STR2XML("parenthesis")))
+		 == "true")
+		|| ((((element_n->hasAttribute(STR2XML("star")))
+		      && (xml2str(element_n->getAttribute(STR2XML("star")))
+			  == "true"))
+		     ||(element_n->hasAttribute(STR2XML("weight"))))
+		    && (xml2str(n->getNodeName()) != "word"))
+		|| ((xml2str(n->getNodeName()) == "sum")
+		    && (op_type == VCSN_XML_PRODUCT_TYPE)))
+	      res += "(";
 
-		// Word, zero or identity
-		if (xml2str(n->getNodeName()) == "word")
-		  res += xml2str(element_n->getAttribute(STR2XML("value")));
-		if (xml2str(n->getNodeName()) == "zero")
-		  res += "1";
-		if (xml2str(n->getNodeName()) == "identity")
-		  res += "0";
+	    // Word, zero or identity
+	    if (xml2str(n->getNodeName()) == "word")
+	      res += xml2str(element_n->getAttribute(STR2XML("value")));
+	    if (xml2str(n->getNodeName()) == "zero")
+	      res += "1";
+	    if (xml2str(n->getNodeName()) == "identity")
+	      res += "0";
 
-		// Recursive call
-		if (n->hasChildNodes())
-		  res += get_rec_xml_series(n->getFirstChild(),
-					    aut, next_op_type);
+	    // Recursive call
+	    if (n->hasChildNodes())
+	      res += get_rec_xml_series(n->getFirstChild(),
+					aut, next_op_type);
 
-		// Add closing brace if parenthesis attribute
-		if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
-		     xml2str(element_n->getAttribute(STR2XML("parenthesis")))
-		     == "true")
-		    // Or star/weight...
-		    || ((((element_n->hasAttribute(STR2XML("star")))
-			  && (xml2str(element_n->getAttribute(STR2XML("star")))
-			      == "true"))
-			 || (element_n->hasAttribute(STR2XML("weight"))))
-			// ...in a complex expression
-			&& (xml2str(n->getNodeName()) != "word"))
-		    // Or a sum in a product
-		    || ((xml2str(n->getNodeName()) == "sum")
-			&& (op_type == VCSN_XML_PRODUCT_TYPE))
-		    // Or a product in a sum
-		    || ((xml2str(n->getNodeName()) == "product")
-			&& (op_type == VCSN_XML_SUM_TYPE)))
-		  res += ")";
+	    // Add closing brace if parenthesis attribute
+	    if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
+		 xml2str(element_n->getAttribute(STR2XML("parenthesis")))
+		 == "true")
+		// Or star/weight...
+		|| ((((element_n->hasAttribute(STR2XML("star")))
+		      && (xml2str(element_n->getAttribute(STR2XML("star")))
+			  == "true"))
+		     || (element_n->hasAttribute(STR2XML("weight"))))
+		    // ...in a complex expression
+		    && (xml2str(n->getNodeName()) != "word"))
+		// Or a sum in a product
+		|| ((xml2str(n->getNodeName()) == "sum")
+		    && (op_type == VCSN_XML_PRODUCT_TYPE))
+		// Or a product in a sum
+		|| ((xml2str(n->getNodeName()) == "product")
+		    && (op_type == VCSN_XML_SUM_TYPE)))
+	      res += ")";
 
-		// Add star
-		if (element_n->hasAttribute(STR2XML("star"))
-		    && (xml2str(element_n->getAttribute(STR2XML("star")))
-			== "true"))
-		  res += "*";
+	    // Add star
+	    if (element_n->hasAttribute(STR2XML("star"))
+		&& (xml2str(element_n->getAttribute(STR2XML("star")))
+		    == "true"))
+	      res += "*";
 
-		// Add operator
-		if ((n->getNextSibling())
-		    && (n->getNextSibling()->getNextSibling()))
-		  res += op_type;
-	      }
+	    // Add operator
+	    if ((n->getNextSibling())
+		&& (n->getNextSibling()->getNextSibling()))
+	      res += op_type;
 	  }
+	}
 	return res;
       }
 
 
       /**
-       * Get series from a XML label node.
-       *
-       * @return	series_set_elt_t
-       *
-       * @param T	Type of the automaton.
-       *
-       * @arg node	XML node.
-       * @arg aut	Automaton to store series.
-       *
-       */
+	 * Get series from a XML label node.
+	 *
+	 * @return	series_set_elt_t
+	 *
+	 * @param T	Type of the automaton.
+	 *
+	 * @arg node	XML node.
+	 * @arg aut	Automaton to store series.
+	 *
+	 */
       template <class T>
       typename T::series_set_elt_t
       get_series(xercesc::DOMElement* node, T& aut)
@@ -503,14 +503,14 @@ namespace vcsn
 	    && (xml2str(n->getNextSibling()->getNodeName()) == "label"))
 	  str_res = get_rec_xml_series(n, aut);
 	if (str_res == "")
-	  {
-	    if (xml2str(node->getAttribute(STR2XML("label"))) == "")
-	      return
-		vcsn::algebra::identity_as<typename T::series_set_elt_t::value_t>
-		::of(aut.structure().series());
-	    else
-	      parse(xml2str(node->getAttribute(STR2XML("label"))), res);
-	  }
+	{
+	  if (xml2str(node->getAttribute(STR2XML("label"))) == "")
+	    return
+	      vcsn::algebra::identity_as<typename T::series_set_elt_t::value_t>
+	      ::of(aut.structure().series());
+	  else
+	    parse(xml2str(node->getAttribute(STR2XML("label"))), res);
+	}
 	else
 	  parse(str_res, res);
 
@@ -627,12 +627,12 @@ namespace vcsn
 	if (n)
 	  for (; n; n = n->getNextSibling())
 	  {
- 	    if (xml2str(n->getNodeName()) == "in" && n->getFirstChild())
+	    if (xml2str(n->getNodeName()) == "in" && n->getFirstChild())
 	    {
 	      in = get_rec_xml_series(n->getFirstChild(), a);
 	      i_res = parse(in, i_exp);
 	    }
- 	    if (xml2str(n->getNodeName()) == "out" && n->getFirstChild())
+	    if (xml2str(n->getNodeName()) == "out" && n->getFirstChild())
 	    {
 	      out = get_rec_xml_series(n->getFirstChild(), a);
 	      o_res = parse(out, o_exp);
@@ -674,15 +674,15 @@ namespace vcsn
 
 
       /**
-       * Insert a letter in an alphabet.
-       *
-       * @param U	Type of the letter.
-       * @param V	Type of the alphabet container.
-       *
-       * @arg a		Alphabet to insert a letter.
-       * @arg str	string containing the letter.
-       *
-       */
+	 * Insert a letter in an alphabet.
+	 *
+	 * @param U	Type of the letter.
+	 * @param V	Type of the alphabet container.
+	 *
+	 * @arg a		Alphabet to insert a letter.
+	 * @arg str	string containing the letter.
+	 *
+	 */
       template <class U, class V>
       void insert_letter(Element<vcsn::algebra::AlphabetSet<U>, V>&,
 			 const std::string&)
@@ -699,16 +699,16 @@ namespace vcsn
 
 
       /**
-       * Check semiring conformance of the automaton w.r.t. XML node.
-       *
-       * @param U	Type of the semiring.
-       * @param T	Type of the automaton.
-       *
-       * @arg node	XML node to check.
-       * @arg a		Automaton.
-       * @arg param	Automaton semiring.
-       *
-       */
+	 * Check semiring conformance of the automaton w.r.t. XML node.
+	 *
+	 * @param U	Type of the semiring.
+	 * @param T	Type of the automaton.
+	 *
+	 * @arg node	XML node to check.
+	 * @arg a		Automaton.
+	 * @arg param	Automaton semiring.
+	 *
+	 */
       template <class T, class U>
       void ensure_semiring_type(const xercesc::DOMElement* node,
 				const T&, const U& param)
@@ -773,14 +773,14 @@ namespace vcsn
 
 
       /**
-       * Check semiring conformance of the automaton w.r.t. XML node.
-       *
-       * @param U	Type of the monoid.
-       *
-       * @arg node	XML node to check.
-       * @arg param	Automaton monoid.
-       *
-       */
+	 * Check semiring conformance of the automaton w.r.t. XML node.
+	 *
+	 * @param U	Type of the monoid.
+	 *
+	 * @arg node	XML node to check.
+	 * @arg param	Automaton monoid.
+	 *
+	 */
       template <class U>
       void ensure_monoid_type(const xercesc::DOMElement* node, const U& param)
       {
@@ -876,14 +876,14 @@ namespace vcsn
 
 
       /**
-       * Print XML tree to output stream.
-       *
-       * @param OStream	Type of output stream.
-       *
-       * @arg node	XML root node to print.
-       * @arg os	Output stream.
-       *
-       */
+	 * Print XML tree to output stream.
+	 *
+	 * @param OStream	Type of output stream.
+	 *
+	 * @arg node	XML root node to print.
+	 * @arg os	Output stream.
+	 *
+	 */
       template <class OStream>
       void print_document(xercesc::DOMElement* node, OStream& os)
       {

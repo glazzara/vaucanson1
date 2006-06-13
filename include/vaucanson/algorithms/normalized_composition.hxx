@@ -19,13 +19,13 @@
 
 
 /**
- * @file normalized_composition.hxx
- *
- * @brief Composition for normalized and sub-normalized transducers
- * seen as automata over a free monoid product.
- *
- * @author Sarah O'Connor
- */
+   * @file normalized_composition.hxx
+   *
+   * @brief Composition for normalized and sub-normalized transducers
+   * seen as automata over a free monoid product.
+   *
+   * @author Sarah O'Connor
+   */
 
 
 # include <set>
@@ -123,8 +123,8 @@ namespace vcsn {
     /*----------------------------------.
     | Get initial states of the product |
     `----------------------------------*/
-    for_each_initial_state(lhs_s, lhs)
-      for_each_initial_state(rhs_s, rhs)
+    for_all_initial_states(lhs_s, lhs)
+      for_all_initial_states(rhs_s, rhs)
     {
       if (lhs_states.find(*lhs_s) == lhs_states.end() or
 	  rhs_states.find(*rhs_s) == rhs_states.end())
@@ -400,10 +400,10 @@ namespace vcsn {
     set_of_states_t rhs_states;
     map_of_states_t m;
 
-    for_each_state (s, ret)
-      {
-	ret.del_state (*s);
-      }
+    for_all_states (s, ret)
+    {
+      ret.del_state (*s);
+    }
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs, rhs, ret, lhs_states, rhs_states, m);
   }
@@ -457,10 +457,10 @@ namespace vcsn {
     typedef Element<S,T> auto_t;
     AUTOMATON_TYPES(auto_t);
 
-    for_each_state (s, ret)
-      {
-	ret.del_state (*s);
-      }
+    for_all_states (s, ret)
+    {
+      ret.del_state (*s);
+    }
     do_normalized_composition(ret.structure(),
 			      ret.structure().series().monoid(),
 			      lhs, rhs, ret);

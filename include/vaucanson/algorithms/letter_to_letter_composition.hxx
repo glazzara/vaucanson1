@@ -47,8 +47,8 @@ namespace vcsn {
     series_set_elt_t zero =
       algebra::zero_as<series_set_elt_value_t>::of(output.series());
 
-    for_each_state(s, f)
-      for_each_state(t, g)
+    for_all_states(s, f)
+      for_all_states(t, g)
     {
       hstate_t ns = output.add_state();
       conv[std::make_pair(*s, *t)] = ns;
@@ -59,8 +59,8 @@ namespace vcsn {
 
     }
 
-    for_each_state(s, f)
-      for_each_state(t, g)
+    for_all_states(s, f)
+      for_all_states(t, g)
     {
       f_delta_ret.clear();
       g_delta_ret.clear();

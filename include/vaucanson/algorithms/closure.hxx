@@ -54,7 +54,7 @@ namespace vcsn {
     std::vector<hstate_t>	index_to_state (size);
     std::map<hstate_t, int>	state_to_index;
     i = 0;
-    for_each_state(s, a)
+    for_all_states(s, a)
     {
       index_to_state[i] = *s;
       state_to_index[*s] = i++;
@@ -62,14 +62,14 @@ namespace vcsn {
 
     // Initialize the matrix m_semiring_elt
     // with the original automaton and delete epsilon-transitions
-    for_each_state(s, a)
+    for_all_states(s, a)
     {
       std::list<htransition_t>	transition_list;
       a.deltac(transition_list, *s, delta_kind::transitions());
 
       int origin = state_to_index[*s];
 
-      for_each_const_(std::list<htransition_t>, e, transition_list)
+      for_all_const_(std::list<htransition_t>, e, transition_list)
       {
 	int aim = state_to_index[a.dst_of(*e)];
 	series_set_elt_t t = a.series_of(*e);
@@ -108,17 +108,17 @@ namespace vcsn {
       // Backward_closure
       // Initialize the m_wfinal
       vector_series_t	m_wfinal (size, null_series);
-      for_each_final_state(p, a)
+      for_all_final_states(p, a)
 	m_wfinal[state_to_index[*p]] = a.get_final(*p);
       a.clear_final();
 
       // Compute the backward_closure
-      for_each_state(s, a)
+      for_all_states(s, a)
       {
 	std::list<htransition_t> transition_list;
 	a.rdeltac(transition_list, *s, delta_kind::transitions());
 	int aim = state_to_index[*s];
-	for_each_const_(std::list<htransition_t>, e, transition_list)
+	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
 	  int origin = state_to_index[a.src_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
@@ -142,17 +142,17 @@ namespace vcsn {
       // Forward closure
       // Initialize the m_wfinal
       vector_series_t	m_winitial (size, null_series);
-      for_each_initial_state(p, a)
+      for_all_initial_states(p, a)
 	m_winitial[state_to_index[*p]] = a.get_initial(*p);
       a.clear_initial();
 
       // Compute the forward_closure
-      for_each_state(s, a)
+      for_all_states(s, a)
       {
 	std::list<htransition_t> transition_list;
 	a.deltac(transition_list, *s, delta_kind::transitions());
 	int origin = state_to_index[*s];
-	for_each_const_(std::list<htransition_t>, e, transition_list)
+	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
 	  int aim = state_to_index[a.dst_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);

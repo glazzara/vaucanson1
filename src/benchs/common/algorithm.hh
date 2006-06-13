@@ -30,7 +30,7 @@ void fsm_dump(St& out, const auto_t& a)
     out << *initial << "\t" << a.dst_of(*e) << "\t"
 	<< a.series_of(*e) << "\t 0"
 	<< std::endl;
-  for_each_state(s, a)
+  for_all_states(s, a)
     if (!a.is_initial(*s))
     {
       succ.clear();
@@ -40,7 +40,7 @@ void fsm_dump(St& out, const auto_t& a)
 	    << a.series_of(*e) << "\t 0"
 	    << std::endl;
     }
-  for_each_final_state(f, a)
+  for_all_final_states(f, a)
     out << *f << "\t 0" << std::endl;
 }
 #endif // ! VCSN_BENCHS_COMMON_ALGORITHM_HH

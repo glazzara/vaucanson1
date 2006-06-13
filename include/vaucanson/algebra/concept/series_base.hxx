@@ -185,7 +185,7 @@ namespace vcsn {
   {
     typedef typename algebra::series_traits<T>::support_t support_t;
     support_t supp = s.supp();
-    for_each_const_(support_t, e, supp)
+    for_all_const_(support_t, e, supp)
       if (op_size(s.structure().monoid(), *e) != 1)
 	return false;
     return true;
@@ -198,7 +198,7 @@ namespace vcsn {
     typedef typename algebra::series_traits<T2>::support_t support_t;
     typedef typename algebra::series_traits<T1>::semiring_elt_value_t
       semiring_elt_value_t;
-    for_each_const_(support_t, e, s2.supp())
+    for_all_const_(support_t, e, s2.supp())
       s1.assoc(*e,
 	       algebra::identity_as<semiring_elt_value_t>::
 	       of(s1.structure().semiring()));
@@ -217,10 +217,10 @@ namespace vcsn {
     for (typename support_t::iterator supp = support.begin();
 	 supp != support.end();
 	 ++supp)
-      {
- 	output +=  lhs.get(*supp) *
- 	  rhs.get(*supp) * series_set_elt_t(lhs.structure(), monoid_elt_t(*supp));
-      }
+    {
+      output +=	 lhs.get(*supp) *
+	rhs.get(*supp) * series_set_elt_t(lhs.structure(), monoid_elt_t(*supp));
+    }
     return output;
   }
 
@@ -252,7 +252,7 @@ namespace vcsn {
     Element<S, U> src(ts, src_);
     Element<S, T> dst(ts);
     support_t support = src.supp();
-    for_each_const_(support_t, ss, support)
+    for_all_const_(support_t, ss, support)
       dst += src.get(monoid_elt_t(s.monoid(), *ss)) *
       Element<S, T>(s.self(), monoid_elt_t(s.monoid(), *ss));
     return dst.value();

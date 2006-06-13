@@ -58,7 +58,7 @@ main(int argc, char** argv)
 
   int d = 0;
   for (int i = 0; i < divisor; ++i)
-    for_each_letter(l, alpha)
+    for_all_letters(l, alpha)
     {
       a.add_letter_transition(i, d, *l);
       d = (d + 1) % divisor;

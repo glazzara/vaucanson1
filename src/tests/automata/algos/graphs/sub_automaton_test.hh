@@ -1,26 +1,26 @@
 // sub_automaton_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_GRAPHS_SUB_AUTOMATON_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_GRAPHS_SUB_AUTOMATON_TEST_HH
 
-#include <vaucanson/automata/concept/handlers.hh>
-#include <vaucanson/algorithms/sub_automaton.hh>
+# include <vaucanson/automata/concept/handlers.hh>
+# include <vaucanson/algorithms/sub_automaton.hh>
 
-#include <set>
+# include <set>
 
 template <class Auto>
 unsigned sub_automaton_test(tests::Tester& tg)
@@ -39,7 +39,7 @@ unsigned sub_automaton_test(tests::Tester& tg)
   alphabet.insert(a);
   alphabet.insert(b);
   monoid_t		monoid(alphabet);
-  semiring_t 		semiring = semiring_t(CREATE_SEMIRING(monoid));
+  semiring_t		semiring = semiring_t(CREATE_SEMIRING(monoid));
   series_set_t		series(semiring, monoid);
   automata_set_t	automata(series);
   automaton_t		automaton(automata);
@@ -77,13 +77,13 @@ unsigned sub_automaton_test(tests::Tester& tg)
   TEST(t, "r has consistant final states. ",
        r.final().max() <= r.states().max());
 
-  for_each_state(s, r)
+  for_all_states(s, r)
     TEST(t, "r has the right states. ", *s <= r.states().max());
 
-  for_each_state(s, r)
+  for_all_states(s, r)
     TEST(t, "r has the right initial states. ", *s <= r.states().max());
 
-  for_each_state(s, r)
+  for_all_states(s, r)
     TEST(t, "r has the right final states. ", *s <= r.states().max());
 
   return t.all_passed();

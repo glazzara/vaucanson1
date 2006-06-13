@@ -90,7 +90,7 @@ alpha_map(const alphabet_t& A,
   std::map<letter_t, letter_t>	m;
 
   alphabet_iterator j = B.begin();
-  for_each_letter(i, A)
+  for_all_letters(i, A)
     m[*i] = *j++;
 
   return m;
@@ -129,7 +129,7 @@ replace_left(const std::string& from,	const std::string& to,
 
   // Create the backward transitions.
   for (int i = 0; i < n; ++i)
-    for_each_letter(j, A)
+    for_all_letters(j, A)
       if (*j != from[i])
       {
 	const letter_t	l[] = {*j, 0};
@@ -174,9 +174,9 @@ main()
   A.insert('a');
   A.insert('b');
   /*
-   std::map<letter_t, letter_t> a2b = alpha_map(A, B);
-   std::map<letter_t, letter_t> a2c = alpha_map(A, C);
-   */
+     std::map<letter_t, letter_t> a2b = alpha_map(A, B);
+     std::map<letter_t, letter_t> a2c = alpha_map(A, C);
+     */
   std::string	from, to;
 
   std::cout << "Enter your pattern over " << A <<" : ";

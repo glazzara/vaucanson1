@@ -35,7 +35,7 @@ namespace vcsn {
 
     std::map<hstate_t, hstate_t> m;
 
-    for_each_state(p, t)
+    for_all_states(p, t)
       m[*p] = ret.add_state();
 
     monoid_elt_t empty =
@@ -45,7 +45,7 @@ namespace vcsn {
       identity_as<typename Trans_t::series_set_elt_value_t>::
       of(t.structure().series());
 
-    for_each_initial_state(p, t)
+    for_all_initial_states(p, t)
     {
       if (t.get_initial(*p) != id_series)
       {
@@ -57,7 +57,7 @@ namespace vcsn {
 	ret.set_initial(m[*p], t.get_initial(*p).get(empty));
     }
 
-    for_each_final_state(p, t)
+    for_all_final_states(p, t)
     {
       if (t.get_final(*p) != id_series)
       {
@@ -69,7 +69,7 @@ namespace vcsn {
 	ret.set_final(m[*p], t.get_final(*p).get(empty));
     }
 
-    for_each_transition(e, t)
+    for_all_transitions(e, t)
     {
       ret.add_series_transition(m[t.src_of(*e)],
 				m[t.dst_of(*e)],
@@ -108,19 +108,19 @@ namespace vcsn {
     monoid_elt_t empty = t.series().monoid().empty_;
     std::map<hstate_t, hstate_t> m;
 
-    for_each_state(p, t)
+    for_all_states(p, t)
     {
       m[*p] = ret.add_state();
       m_[m[*p]] = *p;
     }
 
-    for_each_initial_state(p, t)
+    for_all_initial_states(p, t)
       ret.set_initial(m[*p], t.get_initial(*p).get(empty));
 
-    for_each_final_state(p, t)
+    for_all_final_states(p, t)
       ret.set_final(m[*p], t.get_final(*p).get(empty));
 
-    for_each_transition(e, t)
+    for_all_transitions(e, t)
       ret.add_series_transition(m[t.src_of(*e)], m[t.dst_of(*e)], t.output_of(*e));
 
     return ret;
@@ -163,18 +163,18 @@ namespace vcsn {
     monoid_elt_t empty = t.series().monoid().empty_;
     std::map<hstate_t, hstate_t> m;
 
-    for_each_state(p, t)
+    for_all_states(p, t)
     {
       m[*p] = ret.add_state();
     }
 
-    for_each_initial_state(p, t)
+    for_all_initial_states(p, t)
       ret.set_initial(m[*p]);
 
-    for_each_final_state(p, t)
+    for_all_final_states(p, t)
       ret.set_final(m[*p]);
 
-    for_each_transition(e, t)
+    for_all_transitions(e, t)
     {
       ret.add_series_transition(m[t.src_of(*e)],
 				m[t.dst_of(*e)],

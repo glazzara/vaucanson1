@@ -40,7 +40,7 @@
     int tr_a = 0;						\
     int tr_b = 0;						\
     int tr_X = 0;						\
-    for_each_transition(e, au)					\
+    for_all_transitions(e, au)					\
     {								\
       if (au.series_of(*e) == series_set_elt_t (ss, ma))	\
 	++tr_a;							\

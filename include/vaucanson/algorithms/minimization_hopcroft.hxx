@@ -45,7 +45,7 @@ namespace vcsn {
     typedef std::set<hstate_t>			delta_ret_t;
 
     int			max_states = 0;
-    for_each_state(i, input)
+    for_all_states(i, input)
       max_states = std::max(int(*i), max_states);
     ++max_states;
 
@@ -92,7 +92,7 @@ namespace vcsn {
     `-------------------------*/
     int nb_final = 0;
 
-    for_each_state(p, input)
+    for_all_states(p, input)
     {
       unsigned c = input.is_final(*p) ? 1 : 0;
       nb_final += c;
@@ -125,7 +125,7 @@ namespace vcsn {
 	inverse[i][j] = 0;
     }
 
-    for_each_state(p, input)
+    for_all_states(p, input)
       for (unsigned e = 0; e < max_letters; ++e)
       {
 	delta_ret.clear();
@@ -298,7 +298,7 @@ namespace vcsn {
 	}
       }
 
-    for_each_initial_state(i, input)
+    for_all_initial_states(i, input)
       output.set_initial(out_states[class_[*i]]);
   }
 
@@ -330,7 +330,7 @@ namespace vcsn {
 
     unsigned			max_states = 0;
 
-    for_each_state(i, input)
+    for_all_states(i, input)
       max_states = std::max(unsigned(*i), max_states);
     ++max_states;
     // to avoid special case problem (one state initial and final ...)
@@ -565,7 +565,7 @@ namespace vcsn {
       }
     //set initial states
 
-    for_each_initial_state(i, input)
+    for_all_initial_states(i, input)
       output.set_initial(out_states[class_[*i]]);
   }
 
@@ -610,10 +610,10 @@ namespace vcsn {
     set_transitions_t		transitions_leaving;
 
     unsigned	max_partition	= 0;
-//     unsigned	max_letters	= alphabet.size();
+    //	   unsigned	max_letters	= alphabet.size();
     unsigned	max_states	= 0;
 
-    for_each_state(q, input)
+    for_all_states(q, input)
       max_states = std::max(unsigned (*q), max_states);
     ++max_states;
     // Avoid special case problem (one initial and final state...)
@@ -625,7 +625,7 @@ namespace vcsn {
     {
       unsigned pos (0);
 
-      for_each_letter(a, alphabet)
+      for_all_letters(a, alphabet)
 	pos_of_letter[*a] = pos++;
     }
 
@@ -639,11 +639,11 @@ namespace vcsn {
     for(unsigned i = 0; i < max_states; ++i)
       inverse[i].resize(max_states);
 
-    for_each_state(q, input)
-      for_each_letter(a, alphabet)
+    for_all_states(q, input)
+      for_all_letters(a, alphabet)
     {
 
-      for_each_const_(set_states_t, r, states_visited)
+      for_all_const_(set_states_t, r, states_visited)
 	old_weight[*r] = weight_zero;
       states_visited.clear();
 
@@ -651,7 +651,7 @@ namespace vcsn {
       input.letter_rdeltac(transitions_comming, *q, *a,
 			   delta_kind::transitions());
 
-      for_each_const_(set_transitions_t, e, transitions_comming)
+      for_all_const_(set_transitions_t, e, transitions_comming)
       {
 	hstate_t		p = input.src_of(*e);
 	if (states_visited.find(p) != states_visited.end())
@@ -676,7 +676,7 @@ namespace vcsn {
     bool	 empty = true;
     unsigned	 class_non_final (0);
 
-    for_each_state(q, input)
+    for_all_states(q, input)
     {
       if (not input.is_final(*q))
       {
@@ -713,7 +713,7 @@ namespace vcsn {
     `-----------------------------------------------------*/
 
     for (unsigned i = 0; i < max_partition; i++)
-      for_each_letter(a, alphabet)
+      for_all_letters(a, alphabet)
 	the_queue.push(pair_class_letter_t (i, *a));
 
     /*----------------.
@@ -730,13 +730,13 @@ namespace vcsn {
       met_classes.clear();
       vector_semiring_elt_t val (max_states);
 
-      for_each_state(q, input)
+      for_all_states(q, input)
 	val[*q] = 0;
 
       // First, calculcate val[state] and note met_classes.
-      for_each_const_(set_states_t, q, classes[pair.first])
-	for_each_const_(set_pair_state_semiring_elt_t, pair_,
-			inverse[*q][pos_of_letter[pair.second]])
+      for_all_const_(set_states_t, q, classes[pair.first])
+	for_all_const_(set_pair_state_semiring_elt_t, pair_,
+		       inverse[*q][pos_of_letter[pair.second]])
       {
 	unsigned  state = pair_->first;
 	if (met_classes.find(class_of_state[state]) ==
@@ -746,7 +746,7 @@ namespace vcsn {
       }
 
       // Next, for each met class, do the partition.
-      for_each_const_(set<unsigned>, class_id, met_classes)
+      for_all_const_(set<unsigned>, class_id, met_classes)
       {
 	if (classes[*class_id].size() == 1)
 	  continue ;
@@ -757,7 +757,7 @@ namespace vcsn {
 	class_of_weight.clear();
 	semiring_had_class.clear();
 
-	for_each_const_(set_states_t, p, classes[*class_id])
+	for_all_const_(set_states_t, p, classes[*class_id])
 	{
 	  next_val = val[*p];
 	  // This state must be moved to another class!
@@ -790,7 +790,7 @@ namespace vcsn {
 
 	// Push pairs <new_class_id, letter> into the queue.
 	for (unsigned i = old_max_partition; i < max_partition; i++)
-	  for_each_letter(b, alphabet)
+	  for_all_letters(b, alphabet)
 	    the_queue.push(pair_class_letter_t(i, *b));
 	old_max_partition = max_partition;
       }
@@ -814,7 +814,7 @@ namespace vcsn {
       hstate_t a_state = *classes[i].begin();
       series_set_elt_t a_serie = null_series;
 
-      for_each_const_(set_states_t, state, classes[i])
+      for_all_const_(set_states_t, state, classes[i])
 	if(input.is_initial(*state))
 	  a_serie += input.get_initial(*state);
 
@@ -835,7 +835,7 @@ namespace vcsn {
       input.deltac(transitions_leaving, *classes[i].begin(),
 		   delta_kind::transitions());
 
-      for_each_const_(set_transitions_t, e, transitions_leaving)
+      for_all_const_(set_transitions_t, e, transitions_leaving)
       {
 	series_set_elt_t	se = input.series_of(*e);
 	unsigned		cs = class_of_state[input.dst_of(*e)];
@@ -849,7 +849,7 @@ namespace vcsn {
 	  seriesof[cs] += se;
       }
 
-      for_each_const_(set<unsigned>, cs, met_classes)
+      for_all_const_(set<unsigned>, cs, met_classes)
 	output.add_series_transition(out_states[i],
 				     out_states[*cs],
 				     seriesof[*cs]);

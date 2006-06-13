@@ -53,13 +53,13 @@ namespace vcsn {
 	  std::map<hstate_t,bool> visited;
 	  std::stack<hstate_t> stack;
 
-	  for_each_state(i, a) {
+	  for_all_states(i, a) {
 	    visited[*i] = false;
 	    // ensure inaccessible states will be visited
 	    stack.push(*i);
 	  }
 
-	  for_each_initial_state(i, a)
+	  for_all_initial_states(i, a)
 	    stack.push(*i);
 
 	  while (!stack.empty()) {
@@ -157,8 +157,8 @@ namespace vcsn {
     /*----------------------------------.
     | Get initial states of the product |
     `----------------------------------*/
-    for_each_initial_state(lhs_s, lhs)
-      for_each_initial_state(rhs_s, rhs)
+    for_all_initial_states(lhs_s, lhs)
+      for_all_initial_states(rhs_s, rhs)
     {
       const hstate_t		new_state = output.add_state();
       const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
@@ -276,8 +276,8 @@ namespace vcsn {
 } // End of namespace vcsn.
 
 
-#undef if_
-#undef eq_
+# undef if_
+# undef eq_
 
 
 #endif // ! VCSN_ALGORITHMS_PRODUCT_HXX

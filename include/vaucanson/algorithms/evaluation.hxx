@@ -81,7 +81,7 @@ namespace vcsn {
   }
 
   /* Input : an expression, a transducer.
-   Output : a set of pair (hstate_t, expression)*/
+     Output : a set of pair (hstate_t, expression)*/
   template<typename S1, typename T1,
 	   typename S2, typename T2,
 	   typename M>
@@ -153,8 +153,8 @@ namespace vcsn {
 	b.del_transition(*i);
       }
       loop_sum.star();
-      for_each_const_(sums_t, in, in_sums)
-	for_each_const_(sums_t, out, out_sums)
+      for_all_const_(sums_t, in, in_sums)
+	for_all_const_(sums_t, out, out_sums)
       {
 	series_set_elt_t res = in->second * loop_sum * out->second;
 	b.add_series_transition(in->first, out->first, res);
@@ -168,7 +168,7 @@ namespace vcsn {
 
     // maybe there are more than one transition comming to one final state
     // we must sum the labels
-    for_each_transition(e, b)
+    for_all_transitions(e, b)
     {
       hstate_t aim = b.dst_of(*e);
       typename se_map_t::iterator i = se_m.find(aim);
@@ -180,7 +180,7 @@ namespace vcsn {
 	i->second += b.label_of(*e);
     }
 
-    for_each_final_state(p, b)
+    for_all_final_states(p, b)
     {
       typename se_map_t::iterator i = se_m.find(*p);
       if (i != se_m.end())
@@ -274,7 +274,7 @@ namespace vcsn {
     partial_elimination(auto_p, se);
 
     state_exp_pair_set.clear();
-    for_each_(M, p, se)
+    for_all_(M, p, se)
     {
       se_pair_t my_pair = std::make_pair(is_final_of[(*p).first],
 					 p->second); // checking type compatibility

@@ -51,16 +51,16 @@ namespace vcsn {
 
     vector<hstate_t>	conv(a.states().size());
 
-    for_each_state(s, a)
+    for_all_states(s, a)
       conv[t_ret.add_state()] = *s;
 
-    for_each_transition(e, a)
+    for_all_transitions(e, a)
     {
       series_set_elt_t t = a.series_of(*e);
       series_set_elt_t s(t);
       output_series_set_elt_t os(t_ret.structure().series());
       support_t supp = s.supp();
-      for_each_const_(support_t, m, supp)
+      for_all_const_(support_t, m, supp)
       {
 	series_set_elt_t tmp(a.structure().series());
 	// try to associate the neutral monoid element with a weight
@@ -73,7 +73,7 @@ namespace vcsn {
 						    os);
     }
 
-    for_each_initial_state(i, a)
+    for_all_initial_states(i, a)
     {
       series_set_elt_t a_series = a.get_initial(*i);
       t_series_set_elt_t s;
@@ -81,7 +81,7 @@ namespace vcsn {
       t_ret.set_initial(conv[*i], s);
     }
 
-    for_each_final_state(f, a)
+    for_all_final_states(f, a)
     {
       series_set_elt_t a_series = a.get_final(*f);
       t_series_set_elt_t s;

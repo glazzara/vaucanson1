@@ -124,20 +124,20 @@ namespace vcsn {
     vector_t i_states; i_states.reserve(res.initial().size());
     vector_t f_states; f_states.reserve(res.final().size());
 
-    for_each_initial_state(f, res)
+    for_all_initial_states(f, res)
       i_states.push_back(*f);
-    for_each_final_state(i, res)
+    for_all_final_states(i, res)
       f_states.push_back(*i);
 
-    for_each_(vector_t, i, i_states)
+    for_all_(vector_t, i, i_states)
       do_realtime_words(res, hstate_t(), *i,
 			res.get_initial(*i), true, false);
 
-    for_each_(vector_t, f, f_states)
+    for_all_(vector_t, f, f_states)
       do_realtime_words(res, *f, hstate_t(),
 			res.get_final(*f), false, true);
 
-    for_each_(transitions_t, e, transitions)
+    for_all_(transitions_t, e, transitions)
       if (do_realtime_words(res, res.src_of(*e), res.dst_of(*e),
 			    res.series_of(*e), false, false))
 	res.del_transition(*e);

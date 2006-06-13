@@ -68,7 +68,7 @@ namespace vcsn {
     bool is_final = false;
     aim.reserve(input.states().size());
 
-    for_each_initial_state(i, input)
+    for_all_initial_states(i, input)
     {
       qi.insert(*i);
       is_final |= input.is_final(*i);
@@ -93,7 +93,7 @@ namespace vcsn {
       s_hstate = subset_set[s];
       path.pop();
 
-      for_each_letter(e, alphabet)
+      for_all_letters(e, alphabet)
       {
 	q.clear();
 	is_final = false;
@@ -184,18 +184,18 @@ namespace vcsn {
     input.deltac(delta_ret, *current_state, delta_kind::transitions());
     // FIXME : O(n^2) => O(nlog(n)) There is maybe an algorithm in O(nlog(n))
     for_all_const_(delta_ret_t, j, delta_ret)
+    {
+      series_set_elt_t s = input.series_of(*j);
+      typename delta_ret_t::const_iterator k = j;
+      ++k;
+      for (; k != delta_ret.end(); ++k)
       {
-	series_set_elt_t s = input.series_of(*j);
-	typename delta_ret_t::const_iterator k = j;
-	++k;
-	for (; k != delta_ret.end(); ++k)
-	  {
-	    series_set_elt_t s_ = input.series_of(*k);
-	    for_all_(support_t, supp, s.supp())
-	      if (s_.get(*supp) != zero_semiring)
-		return false;
-	  }
+	series_set_elt_t s_ = input.series_of(*k);
+	for_all_(support_t, supp, s.supp())
+	  if (s_.get(*supp) != zero_semiring)
+	    return false;
       }
+    }
     return true;
   }
 
@@ -222,7 +222,7 @@ namespace vcsn {
     if (input.initial().size() != 1)
       return false;
 
-    for_each_state(i, input)
+    for_all_states(i, input)
     {
       if (not is_state_deterministic (input, i, zero_semiring))
 	return false;

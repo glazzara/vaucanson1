@@ -68,7 +68,7 @@ namespace vcsn
       typename Trans_t::series_set_elt_t s(res.structure().series());
 
       typename FMP_t::series_set_elt_t s_elt = fmp.get_initial(*St);
-      for_each_const_(FMP_t::series_set_elt_t::support_t, i, s_elt.supp())
+      for_all_const_(FMP_t::series_set_elt_t::support_t, i, s_elt.supp())
       {
 	typename Trans_t::semiring_elt_value_t::monoid_elt_value_t
 	  output_monoid_value;
@@ -109,7 +109,7 @@ namespace vcsn
       typename Trans_t::series_set_elt_t s(res.structure().series());
 
       typename FMP_t::series_set_elt_t s_elt = fmp.get_final(*St);
-      for_each_const_(FMP_t::series_set_elt_t::support_t, i, s_elt.supp())
+      for_all_const_(FMP_t::series_set_elt_t::support_t, i, s_elt.supp())
       {
 	typename Trans_t::semiring_elt_value_t::monoid_elt_value_t
 	  output_monoid_value;
@@ -159,9 +159,9 @@ namespace vcsn
 	out_mult(res.structure().series().semiring());
       series_fmp = fmp.series_of(*Ed);
 
-      for_each_const_(FMP_t::series_set_elt_t::support_t,
-		      i,
-		      series_fmp.supp())
+      for_all_const_(FMP_t::series_set_elt_t::support_t,
+		     i,
+		     series_fmp.supp())
       {
 	input_monoid_value = (*i).first;
 	output_monoid_value = (*i).second;

@@ -39,7 +39,7 @@ namespace vcsn {
     AUTOMATON_TYPES(Auto_);
     hstate_t i = a.add_state();
     std::set<htransition_t> transition_oi;
-    for_each_initial_state(oi, a)
+    for_all_initial_states(oi, a)
     {
       series_set_elt_t s = a.get_initial(*oi);
       std::set<htransition_t> transition_oi;

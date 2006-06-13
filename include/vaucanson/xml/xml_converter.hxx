@@ -18,15 +18,15 @@
 # define VCSN_XML_XML_CONVERTER_HXX
 
 /**
- * @file xml_converter.hxx
- *
- * XML conversion class. Used to convert stream containing XML to automaton,
- * and vice et versa.
- *
- * @see vcsn::xml::xml_chooser, vcsn::xml::Node, vcsn::Factory
- *
- * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
- */
+   * @file xml_converter.hxx
+   *
+   * XML conversion class. Used to convert stream containing XML to automaton,
+   * and vice et versa.
+   *
+   * @see vcsn::xml::xml_chooser, vcsn::xml::Node, vcsn::Factory
+   *
+   * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+   */
 
 
 namespace vcsn
@@ -78,21 +78,21 @@ namespace vcsn
       // Create states.
       node = doc_->createElement(STR2XML("states"));
       content->appendChild(node);
-      for_each_state(s, aut)
+      for_all_states(s, aut)
 	state2str[*s] = create_state(*s, aut, node);
 
       // Create transitions.
       node = doc_->createElement(STR2XML("transitions"));
       content->appendChild(node);
-      for_each_transition(e, aut)
+      for_all_transitions(e, aut)
 	create_transition(*e, aut, node, state2str);
 
       // Create initial transitions.
-      for_each_initial_state(i, aut)
+      for_all_initial_states(i, aut)
 	create_initial(*i, aut, node, state2str);
 
       // Create final transitions.
-      for_each_final_state(f, aut)
+      for_all_final_states(f, aut)
 	create_final(*f, aut, node, state2str);
     }
 
@@ -217,18 +217,18 @@ namespace vcsn
 
 
     /**
-     * @brief Load automaton from stream.
-     *
-     * This method uses the Factory Method design pattern. The factory has to
-     * be registered with the macro register_all_factory(f, Auto) (where f is
-     * the factory, and Auto the template parameter.
-     *
-     * @param Auto	Type of the automaton.
-     * @param IStream	Type of the input stream.
-     *
-     * @arg a		Automaton to save.
-     * @arg in		Input stream.
-     */
+       * @brief Load automaton from stream.
+       *
+       * This method uses the Factory Method design pattern. The factory has to
+       * be registered with the macro register_all_factory(f, Auto) (where f is
+       * the factory, and Auto the template parameter.
+       *
+       * @param Auto	Type of the automaton.
+       * @param IStream	Type of the input stream.
+       *
+       * @arg a		Automaton to save.
+       * @arg in		Input stream.
+       */
     template <class Auto>
     template <class IStream>
     void xml_converter<Auto>::load(Auto& aut,

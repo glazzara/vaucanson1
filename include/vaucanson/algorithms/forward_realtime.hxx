@@ -52,7 +52,7 @@ namespace vcsn {
 
     forward_closure_here(a);
 
-    for_each_state(origin, a)
+    for_all_states(origin, a)
     {
       std::insert_iterator<queue_t> origin_i(origin_d, origin_d.begin());
       a.delta(origin_i, *origin, delta_kind::transitions());

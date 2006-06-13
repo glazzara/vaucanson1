@@ -18,12 +18,12 @@
 # define VCSN_ALGORITHMS_CUT_UP_HXX
 
 /**
- * @file cut_up.hxx
- *
- * Cut-up algorithm.
- *
- * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
- */
+   * @file cut_up.hxx
+   *
+   * Cut-up algorithm.
+   *
+   * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+   */
 
 
 namespace vcsn {
@@ -39,7 +39,7 @@ namespace vcsn {
     typedef Element<S, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
-    for_each_transition(e, a)
+    for_all_transitions(e, a)
       if (! a.series_of(*e).is_finite_app() ||
 	  a.series_of(*e).supp().size() > 1)
 	return false;
@@ -67,7 +67,7 @@ namespace vcsn {
 
     transitions_t		transitions = res.transitions();
 
-    for_each_(transitions_t, e, transitions)
+    for_all_(transitions_t, e, transitions)
     {
       if (! res.series_of(*e).is_finite_app() ||
 	  res.series_of(*e).supp().size() > 1)
@@ -75,20 +75,20 @@ namespace vcsn {
 	gen_automaton_t tmp(res.structure());
 	standard_of(tmp, res.series_of(*e).value());
 
-	for_each_state(s, tmp)
+	for_all_states(s, tmp)
 	  statemap[*s] = res.add_state();
 
-	for_each_initial_state(i, tmp)
+	for_all_initial_states(i, tmp)
 	  res.add_series_transition(res.src_of(*e),
 				    statemap[*i],
 				    tmp.get_initial(*i));
 
-	for_each_transition(ed, tmp)
+	for_all_transitions(ed, tmp)
 	  res.add_transition(statemap[tmp.src_of(*ed)],
 			     statemap[tmp.dst_of(*ed)],
 			     tmp.label_of(*ed));
 
-	for_each_final_state(f, tmp)
+	for_all_final_states(f, tmp)
 	  res.add_series_transition(statemap[*f], res.dst_of(*e),
 				    tmp.get_final(*f));
 
@@ -116,7 +116,7 @@ namespace vcsn {
 
     transitions_t		transitions = res.transitions();
 
-    for_each_(transitions_t, e, transitions)
+    for_all_(transitions_t, e, transitions)
     {
       series_set_elt_t label(res.structure().series());
       label = res.series_of(*e);

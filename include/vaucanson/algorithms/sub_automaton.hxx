@@ -32,20 +32,20 @@ namespace vcsn {
 
   template<typename A, typename auto_t, typename list_t>
   void do_sub_automaton(const AutomataBase<A>&,
-		       auto_t& a,
-		       const list_t& selected,
-		       bool check_states)
+			auto_t& a,
+			const list_t& selected,
+			bool check_states)
   {
     std::list<hstate_t> to_be_removed;
     for (typename auto_t::state_iterator i = a.states().begin();
 	 i != a.states().end(); ++i)
-      {
-	if (std::find(selected.begin(), selected.end(), *i)
-	    == selected.end())
-	  to_be_removed.push_back(*i);
-      }
+    {
+      if (std::find(selected.begin(), selected.end(), *i)
+	  == selected.end())
+	to_be_removed.push_back(*i);
+    }
 
-    for_each_const_(std::list<hstate_t>, i, to_be_removed)
+    for_all_const_(std::list<hstate_t>, i, to_be_removed)
       if ((!check_states) || (a.has_state(*i)))
 	a.del_state(*i);
   }

@@ -48,7 +48,9 @@ Vaucanson 0.8 May 15, 2006
 
   + `edge` is now `transition`,
   + `new_*` functions are now `make_*`,
-  + `origin_of` and `src_of` are now `aim_of` and `dst_of`.
+  + `origin_of` and `src_of` are now `aim_of` and `dst_of`,
+  + `for_each` loops have been changed to `for_all`, for consistency
+     with STL `for_each` that uses functor.
 
 - Benchmarks.
 

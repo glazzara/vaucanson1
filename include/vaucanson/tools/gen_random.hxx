@@ -223,7 +223,7 @@ namespace vcsn {
     AUTOMATON_TYPES(TAutomata);
     unsigned res = 0;
 
-    for_each_transition(i, work)
+    for_all_transitions(i, work)
       if ((work.src_of(*i) == state) && (work.dst_of(*i) == state))
 	res++;
 
@@ -237,12 +237,12 @@ namespace vcsn {
     AUTOMATON_TYPES(TAutomata);
 
     std::list<htransition_t> to_remove;
-    for_each_transition(i, work)
+    for_all_transitions(i, work)
     {
       if ((work.src_of(*i) == state) && (work.dst_of(*i) == state))
 	to_remove.push_back(*i);
     }
-    for_each_const_(std::list<htransition_t>, e, to_remove)
+    for_all_const_(std::list<htransition_t>, e, to_remove)
       work.del_transition(*e);
   }
 
@@ -319,14 +319,14 @@ namespace vcsn {
     for (unsigned i = 0; i < nb_state; i++)
       work.add_state();
 
-    for_each_state(i, work)
+    for_all_states(i, work)
     {
-      for_each_letter(j, set.series().monoid().alphabet())
+      for_all_letters(j, set.series().monoid().alphabet())
 	work.add_letter_transition(*i,work.choose_state(),*j);
       while (nb_transition_circle(work, *i) == set.series().monoid().alphabet().size())
       {
 	del_transition_circle(work, *i);
-	for_each_letter(j, set.series().monoid().alphabet())
+	for_all_letters(j, set.series().monoid().alphabet())
 	{
 	  std::set<hstate_t> ret;
 	  work.letter_deltac(ret, *i, *j, delta_kind::states());

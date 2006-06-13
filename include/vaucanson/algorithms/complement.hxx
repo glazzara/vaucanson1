@@ -41,7 +41,7 @@ namespace vcsn {
     AUTOMATON_TYPES(automaton_t);
 
     precondition(is_complete(e) && is_deterministic(e));
-    for_each_state(i, e)
+    for_all_states(i, e)
       if (e.is_final(*i))
 	e.unset_final(*i);
       else

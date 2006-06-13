@@ -66,7 +66,7 @@ unsigned complete_test(tests::Tester& tg)
 	   l != alphabet.end();
 	   ++l)
       {
-	for_each_state(s, a)
+	for_all_states(s, a)
 	{
 	  delta_ret.clear();
 	  a.letter_deltac(delta_ret, *s, *l,

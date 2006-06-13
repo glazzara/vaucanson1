@@ -17,7 +17,7 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HXX
 # define VCSN_AUTOMATA_CONCEPT_TRANSDUCER_HXX
 
-#include <vaucanson/automata/concept/transducer_base.hh>
+# include <vaucanson/automata/concept/transducer_base.hh>
 
 namespace vcsn {
 
@@ -57,15 +57,15 @@ namespace vcsn {
     ret_t ret(s);
     std::vector<hstate_t> conv(a.states().size());
 
-    for_each_state(s, a)
+    for_all_states(s, a)
       conv[ret.add_state()] = *s;
-    for_each_transition(e, a)
+    for_all_transitions(e, a)
     {
       series_set_elt_t t = a.series_of(*e);
       series_set_elt_t s(t);
       output_series_set_elt_t os(ret.structure().series());
       support_t supp = s.supp();
-      for_each_const_(support_t, m, supp)
+      for_all_const_(support_t, m, supp)
       {
 	series_set_elt_t tmp(a.structure().series());
 	tmp.assoc(*m, s.get(*m));
@@ -76,9 +76,9 @@ namespace vcsn {
 						  os);
     }
     // FIXME: set initial/final weights.
-    for_each_initial_state(i, a)
+    for_all_initial_states(i, a)
       ret.set_initial(conv[*i], a.get_initial(*i));
-    for_each_final_state(f, a)
+    for_all_final_states(f, a)
       ret.set_final(conv[*f], a.get_final(*f));
     return ret;
   }

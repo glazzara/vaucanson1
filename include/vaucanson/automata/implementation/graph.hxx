@@ -394,7 +394,7 @@ namespace vcsn
   {
     assertion(has_state(from));
     const std::set<hedge_t>& edges = states_[from].output_edges;
-    for_each_const_(std::set<hedge_t>, e, edges)
+    for_all_const_(std::set<hedge_t>, e, edges)
       if (q(*e))
 	*res++ = *e;
   }
@@ -409,7 +409,7 @@ namespace vcsn
   {
     assertion(has_state(from));
     const std::set<hedge_t>& edges = states_[from].output_edges;
-    for_each_const_(std::set<hedge_t>, e, edges)
+    for_all_const_(std::set<hedge_t>, e, edges)
       if (query(*e))
 	*res++ = edges_[*e].to;
   }
@@ -424,7 +424,7 @@ namespace vcsn
   {
     assertion(has_state(from));
     const std::set<hedge_t>& edges = states_[from].input_edges;
-    for_each_const_(std::set<hedge_t>, e, edges)
+    for_all_const_(std::set<hedge_t>, e, edges)
       if (q(*e))
 	*res++ = *e;
   }
@@ -440,7 +440,7 @@ namespace vcsn
     assertion(has_state(from));
     const state_value_t::edges_t& edges =
       states_[from].input_edges;
-    for_each_const_(std::set<hedge_t>, e, edges)
+    for_all_const_(std::set<hedge_t>, e, edges)
       if (q(*e))
 	*res++ = edges_[*e].from;
   }
@@ -479,7 +479,7 @@ namespace vcsn
   {
     typedef typename state_value::edges_t edges_t;
     const edges_t& edges = v.states_[from].output_edges;
-    for_each_const_(edges_t, e, edges)
+    for_all_const_(edges_t, e, edges)
       if (v.edges_[*e].label == letter)
 	*res++ = v.edges_[*e].to;
   }
@@ -562,8 +562,8 @@ namespace vcsn
 
 
   // Remove macros to avoid name clashes.
-#undef TParam
-#undef GClass
+# undef TParam
+# undef GClass
 
 }
 
