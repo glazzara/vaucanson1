@@ -77,12 +77,12 @@
 	(while (re-search-forward "^[[:space:]]*#\\([[:space:]]*\\)\\([a-z]\\{,5\\}\\)" nil t)
 	  (and (or (string= "endif" (match-string 2))
 		   (string= "el" (substring (match-string 2) 0 2))) (> spaces 0)
-	       (decf spaces))
+	       (setq spaces (1- spaces)))
 	  (unless (= (- (match-end 1) (match-beginning 1)) spaces)
 	    (replace-match (make-string spaces ? ) nil nil nil 1))
 	  (when (string= "el" (substring (match-string 2) 0 2))
-	    (incf spaces))
-	  (when (string-match "^if" (match-string 2)) (incf spaces)))))))
+	    (setq spaces (1+ spaces)))
+	  (when (string-match "^if" (match-string 2)) (setq spaces (1+ spaces))))))))
 
 ;; Vaucansonize a buffer.
 
@@ -96,8 +96,8 @@
   (with-current-buffer buffer
     (let ((c-indentation-style "Vaucanson"))
       (barf-if-buffer-read-only)
-      (indent-region (point-min) (point-max))
       (cpp-indent-macros (point-min) (point-max))
+      (indent-region (point-min) (point-max))
       (delete-trailing-whitespace)
       (tabify (point-min) (point-max)))))
 

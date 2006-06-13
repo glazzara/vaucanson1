@@ -1,3 +1,7 @@
+2006-06-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* data/misc.el: Don't use 'cl macros. Indent macros before buffer.
+
 2006-06-13  Guillaume Lazzara  <z@lrde.epita.fr>
 
 
@@ -98,8 +102,8 @@
 
 	Set up a test framework for TAF-Kit.
 
-	* src/taf-kit: Move too...
-	* taf-kit/src: here.
+	* src/taf-kit: Move to...
+	* taf-kit/src: ...Here.
 	* taf-kit/tests: New.
 	* taf-kit/tests/defs.in: New.
 	* taf-kit/tests/vcsn-b.test: New.
