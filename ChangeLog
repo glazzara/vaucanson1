@@ -2,6 +2,13 @@
 
 	Minor fix.
 
+	* include/vaucanson/algorithms/is_ambiguous.hh: Change commentary
+	thanks to Jacques Sakarovitch advice.
+
+2006-06-14  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Minor fix.
+
 	* include/vaucanson/algorithms/is_ambiguous.hh: Fix typo.
 
 2006-06-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
