@@ -76,7 +76,7 @@ me=`echo "$0" | sed -e 's,.*[\\/],,;s/\.test$//'`
 # See how redirections should work.  User can set VERBOSE to see all
 # output.
 test -z "$VERBOSE" && {
-   exec > /dev/null 2>&1
+   exec 2> /dev/null
 }
 
 # Make sure we override the user shell.
@@ -90,7 +90,7 @@ FGREP='@FGREP@'
 test -z "$VCSN_B" && VCSN_B=`cd ../src && pwd`/vcsn-b
 test -z "$VCSN_XSD_PATH" && export VCSN_XSD_PATH=$top_srcdir/data/vaucanson.xsd
 
-echo $PATH
+echo "Path is $PATH" >&2
 # Some shells forget to export modified environment variables.
 # (See note about `export' in the Autoconf manual.)
 export PATH
@@ -146,4 +146,4 @@ if test -n "$VERBOSE"; then
 else
   :
 fi
-pwd
+echo "Working in $(pwd)" >&2

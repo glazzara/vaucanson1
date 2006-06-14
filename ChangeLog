@@ -1,5 +1,10 @@
 2006-06-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* taf-kit/tests/defs.in: Only hide stderr when not verbose.
+	* taf-kit/tests/vcsn-b.test: Use history to print the failed command.
+
+2006-06-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/complete.hxx: Add the loop on the sink
 	state.
 
