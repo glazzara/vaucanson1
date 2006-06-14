@@ -118,9 +118,13 @@ fi
 ## ---------- ##
 
 automata_dir=$top_srcdir/src/demos/automaton_library
+automata_tests_dir=$top_srcdir/taf-kit/tests
 a1=$automata_dir/a1.xml
 b1=$automata_dir/b1.xml
 c1=$automata_dir/c1.xml
+non_ambiguous1=$automata_tests_dir/non_ambiguous.xml
+non_ambiguous2=$automata_tests_dir/non_ambiguous2.xml
+ambiguous=$automata_tests_dir/ambiguous.xml
 
 
 ## ---------- ##

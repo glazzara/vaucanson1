@@ -37,6 +37,7 @@
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/algorithms/isomorph.hh>
+# include <vaucanson/algorithms/is_ambiguous.hh>
 # include <vaucanson/algorithms/is_realtime.hh>
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/algorithms/minimization_moore.hh>

@@ -68,6 +68,8 @@ static const command_t command_map[] =
     COMMAND_ENTRY_CN (are-isomorphic, are_isomorphic, AutAut,
 		      "Return whether `aut1' and `aut2' are isomorphic."),
     COMMAND_ENTRY (eval, AutWord, "Evaluate `word' on `aut'."),
+    COMMAND_ENTRY_CN (is-ambiguous, is_ambiguous, Aut,
+		      "Return whether `aut' is ambiguous."),
     COMMAND_ENTRY_CN (is-complete, is_complete, Aut,
 		      "Return whether `aut' is complete."),
     COMMAND_ENTRY_CN (is-deterministic, is_deterministic, Aut,

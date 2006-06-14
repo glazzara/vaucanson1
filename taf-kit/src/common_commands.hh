@@ -50,6 +50,8 @@ using vcsn::xml::XML;
   | Command definition |
   `-------------------*/
 
+DEFINE_IS_PROPERTY_COMMAND (ambiguous);
+
 DEFINE_IS_PROPERTY_COMMAND (normalized);
 
 DEFINE_IS_PROPERTY_COMMAND (realtime);

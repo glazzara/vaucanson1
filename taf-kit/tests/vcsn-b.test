@@ -25,6 +25,11 @@ set -e
   $VCSN_B are-isomorphic $a1 $a1
 ! $VCSN_B are-isomorphic $a1 $b1
 
+# is-ambiguous
+! $VCSN_B is-ambiguous $non_ambiguous1
+! $VCSN_B is-ambiguous $non_ambiguous2
+  $VCSN_B is-ambiguous $ambiguous
+
 # is-complete
 ! $VCSN_B is-complete $a1
   $VCSN_B complete $a1 | $VCSN_B is-complete -

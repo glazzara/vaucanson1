@@ -1,3 +1,20 @@
+2006-06-14  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Add an algorithm that tests ambiguity.
+
+	* include/vaucanson/algorithms/is_ambiguous.hxx,
+	* include/vaucanson/algorithms/is_ambiguous.hh: New. Test ambiguity.
+	* include/vaucanson/contexts/automaton_functions.thh: Include it.
+
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/common_commands.hh: Add is_ambiguous command.
+
+	* taf-kit/tests/vcsn-b.test: Add test for is_ambiguous algorithm.
+	* taf-kit/tests/non_ambiguous.xml,
+	* taf-kit/tests/non_ambiguous2.xml,
+	* taf-kit/tests/ambiguous.xml: New. Test samples.
+	* taf-kit/tests/defs.in: Add some variable for the new tests.
+
 2006-06-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Change `for_each' loops to `for_all'.
