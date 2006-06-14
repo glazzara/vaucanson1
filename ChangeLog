@@ -1,3 +1,8 @@
+2006-06-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/complete.hxx: Add the loop on the sink
+	state.
+
 2006-06-14  Matthieu Varin  <matt@lrde.epita.fr>
 
 	Add an algorithm that tests ambiguity.

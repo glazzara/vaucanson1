@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,12 +42,12 @@ namespace vcsn {
     bool sink_added = false;
     std::list<hstate_t> aim;
 
-    for_all_states(i, work)
+    for_all_states(s, work)
     {
-      for_all_letters(j, work.structure().series().monoid().alphabet())
+      for_all_letters(l, work.structure().series().monoid().alphabet())
       {
 	aim.clear();
-	work.letter_deltac(aim, *i, *j, delta_kind::states());
+	work.letter_deltac(aim, *s, *l, delta_kind::states());
 	if (aim.size() == 0)
 	{
 	  if (not sink_added)
@@ -55,10 +55,13 @@ namespace vcsn {
 	    sink_state = work.add_state();
 	    sink_added = true;
 	  }
-	  work.add_letter_transition(*i, sink_state, *j);
+	  work.add_letter_transition(*s, sink_state, *l);
 	}
       }
     }
+    if (sink_added)
+      for_all_letters(l, work.structure().series().monoid().alphabet())
+	work.add_letter_transition(sink_state, sink_state, *l);
   }
 
   /*---------.
