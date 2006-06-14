@@ -37,8 +37,8 @@ namespace vcsn {
   /** @addtogroup algorithms *//** @{ */
   /**
    * Test the ambiguity of automaton.
-   * @note A trimmed automaton @c A is ambiguous if for a word @c f of @c L(A) there
-   * is not an unique path labeled by @c f in @c A.
+   * @note A trimmed automaton @c A is ambiguous if for a word @c f of @c
+   * L(A) there is not an unique path labeled by @c f in @c A.
    *
    * @param aut The automaton to test.
    *

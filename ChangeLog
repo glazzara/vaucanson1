@@ -1,3 +1,9 @@
+2006-06-14  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Minor fix.
+
+	* include/vaucanson/algorithms/is_ambiguous.hh: Fix typo.
+
 2006-06-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/tests/defs.in: Only hide stderr when not verbose.
