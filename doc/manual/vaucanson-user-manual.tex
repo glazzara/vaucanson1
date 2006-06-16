@@ -1,3 +1,4 @@
+\def\withDeveloperSection{}
 \documentclass[a4paper]{report}
 
 \usepackage[american]{mybabel}
@@ -26,6 +27,15 @@
   frame=single,
   language=C++,
   float}
+
+%% Whether the developer's documentation is included.
+\newboolean{developer}
+\ifx\withDeveloperSection\undefined
+  \setboolean{developer}{false}
+\else
+  \setboolean{developer}{true}
+\fi
+
 
 \newenvironment{cmp}{%
   \begin{center}
@@ -57,6 +67,7 @@
 %% programs).
 \newcommand{\taffn}[1]{\code{#1}}
 
+\newcommand{\tafkit}{\textsc{TAF-Kit}\xspace}
 \newcommand{\Vauc}{\textsc{Vaucanson}\xspace}
 
 \title{\Vauc User's manual}
@@ -68,11 +79,17 @@
 \begin{document}
 
 \maketitle
-
 \tableofcontents
 
 \input{installation}
-\input{vaucanson_toolkit}
-\input{vaucanson_library}
+\input{taf-kit}
+\input{library}
+\ifthenelse{\boolean{developer}}{\input{developer}}{}
 
 \end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
