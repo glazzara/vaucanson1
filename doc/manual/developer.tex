@@ -29,18 +29,81 @@ algorithms into the library:
     an URL to a mailing-list archive.
   \item detailed description of the assumptions, or, if you wish, pre-
     and post-conditions.
+  \item the name of the developer
   \end{itemize}
+
+\item[Comment the code] Especially if the code is a bit tricky, or
+  smart, or avoids nasty pitfalls, it \emph{must} be commented.
+
 \item[Bind the algorithm to \tafkit]
+
 \item[Include tests] See \autoref{sec:writing-tests} for more
   details.  Tests based on \tafkit are appreciated.  Note that tests
   require test cases: to exercise an algorithm, not any automaton will
   do, try to find relevant samples.  Again, ETA is a nice source of
   inspiration.
+
+\item[Complete the documentation]  The pre- and post-conditions should
+  also be described here.
 \end{description}
+
+When submitting a patch, make it complete (i.e., including the
+aforementioned items), and provide a ChangeLog.  See
+\href{http://www.lrde.epita.fr/dload/guidelines/guidelines.html}{Le
+  Guide du \lrde}, section ``La maintenance de projets'' and
+especially ``Écrire un ChangeLog'' for more details.
+
+Because \Vauc uses Trac, ChangeLog entries should explicit refer to
+tickets (e.g., ``Fixing issue \#38: implement is\_ambiguous''), and
+possible previous revisions (e.g., ``Fix a bug introduced in
+[1224]'').
 
 \subsection{Writing Tests}
 \label{sec:writing-tests}
 
+
+\subsection{Mailing Lists}
+\label{sec:mailing-lists}
+
+\Vauc comes with a set of mailing lists:
+\begin{description}
+\item[vaucanson@lrde.epita.fr] General discussions, feature request etc.
+\item[vaucanson-bugs@lrde.epita.fr] To report errors in code,
+  documentation, web pages, etc.
+\item[vaucanson-patches@lrde.epita.fr] To submitted patches on code,
+  documentation, and so forth.
+\item[vaucanson-private@lrde.epita.fr] To contact privately the
+  \Vauc team.
+\end{description}
+
+Please, bear in mind that there are these lists have many readers,
+therefore this is a WORM medium: Write Once, Read Many.  As a
+consequence:
+\begin{itemize}
+\item Be complete.\\
+  One should not strive to understand what you are referring to, so
+  always include proper references: URLs, Ticket numbers \emph{and
+    summary}, etc.
+\item Be concise.\\
+  Write short, spell checked, understandable sentences.  Reread
+  yourself, remove useless words, be proud of what you wrote.  Show
+  respect to the reader.  Spare us useless messages.
+\item Be structured.\\
+  Quick and dirty replies with accumulated layers of replies at the
+  bottom of the message is not acceptable.  The right ordering is not
+  the one that is the quickest to write, but the easiest to read.
+\item Be attentive.\\
+  Lists are not write-only: consider the feedback that is given with
+  respect.
+\end{itemize}
+
+As an example of what's not to be done, avoid answering to yourself to
+point out you made a spell mistake: we can see that, and that's a
+waste of time to read another message for that.  Also, there is no
+hurry, it would probably be better to wait a bit to have a complete,
+well thought out, message, rather than a thread of 4 messages
+completing, contradicting, each other.  Finally, if you still need to
+fix your message, supersede it, or even cancel it.
 
 \section{Vaucanson I/O}
 \label{sec:vaucanson-io}
