@@ -16,7 +16,6 @@ vaucanson.xsd version 0.3.1
  Attribute group used to factorize some code.
 -->
  <xs:attributeGroup name="expression_attributes">
-   <xs:attribute name="star" type="xs:boolean"/>
    <xs:attribute name="parenthesis" type="xs:boolean"/>
    <xs:attribute name="weight" type="xs:decimal"/>
  </xs:attributeGroup>
@@ -38,14 +37,32 @@ vaucanson.xsd version 0.3.1
 </xs:complexType>
 
 <!--
+ <star> tag properties. Used to add a star in the regular expression.
+ The members of a star can be any tag out of the <product>, <sum>, <star>,
+ <zero>, <identity> and <word> ones.
+-->
+<xs:complexType name="star">
+  <xs:choice>
+    <xs:element name="star" type="star" minOccurs="0"/>
+    <xs:element name="word" type="word" minOccurs="0"/>
+    <xs:element name="sum" type="sum" minOccurs="0"/>
+    <xs:element name="product" type="product" minOccurs="0"/>
+    <xs:element name="zero" type="zero_val" minOccurs="0"/>
+    <xs:element name="identity" type="identity_val" minOccurs="0"/>
+  </xs:choice>
+  <xs:attributeGroup ref="expression_attributes"/>
+</xs:complexType>
+
+<!--
  <sum> tag properties. Used to represent a product in the regular expression.
  The members of a sum can be any tag out of the <product>, <sum>, <zero>,
- <identity> and <word> ones.
+ <identity> and <word> ones, or a star.
  Caution, only these tags should be inserted where the <xs:any> tag stands.
 -->
 <xs:complexType name="sum">
    <xs:choice>
     <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    <xs:element name="star" type="star" minOccurs="0"/>
    </xs:choice>
    <xs:attributeGroup ref="expression_attributes"/>
 </xs:complexType>
@@ -53,12 +70,13 @@ vaucanson.xsd version 0.3.1
 <!--
  <product> tag properties. Used to represent a product in the regular expression.
  The members of a product can be any tag out of the <product>, <sum>, <zero>,
- <identity> and <word> ones.
+ <identity> and <word> ones, or a star.
  Caution, only these tags should be inserted where the <xs:any> tag stands.
 -->
 <xs:complexType name="product">
   <xs:choice>
    <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+   <xs:element name="star" type="star" minOccurs="0"/>
   </xs:choice>
    <xs:attributeGroup ref="expression_attributes"/>
 </xs:complexType>
@@ -69,6 +87,7 @@ label by using <product>, <sum>, <zero>, <identity> and <word> tags.
 -->
 <xs:complexType name="expression_label">
   <xs:choice>
+    <xs:element name="star" type="star" minOccurs="0"/>
     <xs:element name="word" type="word" minOccurs="0"/>
     <xs:element name="sum" type="sum" minOccurs="0"/>
     <xs:element name="product" type="product" minOccurs="0"/>

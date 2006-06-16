@@ -410,23 +410,23 @@ namespace vcsn
 	    if (xml2str(n->getNodeName()) == "product")
 	      next_op_type = VCSN_XML_PRODUCT_TYPE;
 
-	    // Add weight (and opening brace if complex expression)
+	    // Add weight (and opening brace if complex expression).
 	    if (element_n->hasAttribute(STR2XML("weight")))
 	      res += xml2str(element_n->getAttribute(STR2XML("weight")))
 		+ " ";
 
-	    // Add opening prace if attribute or complex starified/weighted
-	    // expression or sum in product
+	    // Add opening brace if attribute,complex weighted
+	    // expression, sum in product, product in sum or star.
 	    if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
 		 xml2str(element_n->getAttribute(STR2XML("parenthesis")))
 		 == "true")
-		|| ((((element_n->hasAttribute(STR2XML("star")))
-		      && (xml2str(element_n->getAttribute(STR2XML("star")))
-			  == "true"))
-		     ||(element_n->hasAttribute(STR2XML("weight"))))
+		|| ((element_n->hasAttribute(STR2XML("weight")))
 		    && (xml2str(n->getNodeName()) != "word"))
 		|| ((xml2str(n->getNodeName()) == "sum")
-		    && (op_type == VCSN_XML_PRODUCT_TYPE)))
+		    && (op_type == VCSN_XML_PRODUCT_TYPE))
+		|| ((xml2str(n->getNodeName()) == "product")
+		    && (op_type == VCSN_XML_SUM_TYPE))
+		|| (xml2str(n->getNodeName()) == "star"))
 	      res += "(";
 
 	    // Word, zero or identity
@@ -458,13 +458,13 @@ namespace vcsn
 		    && (op_type == VCSN_XML_PRODUCT_TYPE))
 		// Or a product in a sum
 		|| ((xml2str(n->getNodeName()) == "product")
-		    && (op_type == VCSN_XML_SUM_TYPE)))
+		    && (op_type == VCSN_XML_SUM_TYPE))
+		// Or star.
+		|| (xml2str(n->getNodeName()) == "star"))
 	      res += ")";
 
 	    // Add star
-	    if (element_n->hasAttribute(STR2XML("star"))
-		&& (xml2str(element_n->getAttribute(STR2XML("star")))
-		    == "true"))
+	    if (xml2str(n->getNodeName()) == "star")
 	      res += "*";
 
 	    // Add operator

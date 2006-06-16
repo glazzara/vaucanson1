@@ -70,8 +70,11 @@ namespace vcsn {
     void
     XmlExpVisitor<M_, W_>::star(const Node<M_, W_>* node)
     {
-      current_->setAttribute(STR2XML("star"), STR2XML("true"));
+      xercesc::DOMElement* tmp = current_;
+      current_ = doc_->createElement(STR2XML("star"));
       weight_or_star(node);
+      tmp->appendChild(current_);
+      current_ = tmp;
     }
 
     template<typename M_, typename W_>
