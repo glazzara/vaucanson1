@@ -1,3 +1,12 @@
+2006-06-16  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* include/vaucanson/xml/node.hxx: Do not fill the alphabet with the
+	default range anymore if an empty alphabet is clearly defined.
+	Add the support for the alphabet ranges of the xsd file.
+	* data/vaucanson.xsd: Change the default range from `ascii' to
+	`implicit_alphabet', add a restriction for the range attribute.
+	* doc/xml/xml_proposal.tex: Change the default range accordingly.
+
 2006-06-16  Akim Demaille  <akim@lrde.epita.fr>
 
 	More dev guide.

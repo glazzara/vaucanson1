@@ -416,12 +416,13 @@ namespace vcsn
 
       tools::ensure_monoid_type(node, param);
 
-      // Fill monoid with letters.
-      if (! node || ! node->getFirstChild())
+      // Default case, if there is no label tag.
+      // Here, implicit_alphabet range case is the default.
+      if (! node)
       {
-	for (unsigned int i = 'a'; i < 'z'; ++i)
+	for (unsigned int i = 'a'; i <= 'z'; ++i)
 	  param.alphabet().insert(i);
-	for (unsigned int i = 'A'; i < 'Z'; ++i)
+	for (unsigned int i = 'A'; i <= 'Z'; ++i)
 	  param.alphabet().insert(i);
       }
       else
@@ -429,9 +430,31 @@ namespace vcsn
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
 	  {
 	    DOMElement* elt = static_cast<DOMElement*>(n);
-	    generatorNode<T>* nd = static_cast<generatorNode<T>*>
-	      (f.create_object(xml2str(elt->getNodeName())));
-	    nd->process(elt, aut, param.alphabet(), m, f);
+
+	    // Fill the alphabet if a range attribute exists.
+	    if (elt->hasAttribute(STR2XML("range")))
+	    {
+	      if (xml2str(elt->getAttribute(STR2XML("range"))) == "implicit_alphabet")
+	      {
+		for (unsigned int i = 'a'; i <= 'z'; ++i)
+		  param.alphabet().insert(i);
+		for (unsigned int i = 'A'; i <= 'Z'; ++i)
+		  param.alphabet().insert(i);
+	      }
+	      if (xml2str(elt->getAttribute(STR2XML("range"))) == "digits")
+		for (unsigned int i = '0'; i <= '9'; ++i)
+		  param.alphabet().insert(i);
+	      if (xml2str(elt->getAttribute(STR2XML("range"))) == "ascii")
+		for (unsigned char c = 0; c <= 127; ++c)
+		  param.alphabet().insert(c);
+	    }
+	    // Else, add single letters.
+	    else
+	    {
+	      generatorNode<T>* nd = static_cast<generatorNode<T>*>
+		(f.create_object(xml2str(elt->getNodeName())));
+	      nd->process(elt, aut, param.alphabet(), m, f);
+	    }
 	  }
     }
 

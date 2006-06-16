@@ -262,15 +262,21 @@ of the automaton / transducer.
 A monoid expects <generator> tags to define its generators, when available.
 The <monoid> tag can be recursively constructed to build n-product of monoid.
 
-For automata, default is free monoid, on the ASCII alphabet.
-For transducers, default is product of free monoid, both on the ASCII alphabet
+For automata, default is free monoid, with the alphabet letters.
+For transducers, default is product of free monoid, both the alphabet letters.
 -->
 <!--
 The monoid type is broken in two parts, for automata and transducers.
 -->
 <xs:complexType name="generator">
   <xs:attribute name="value" type="xs:string"/>
-  <xs:attribute name="range" type="xs:string" default="ascii"/>
+  <xs:attribute name="range" default="implicit_alphabet">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="implicit_alphabet|digits|ascii"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
 </xs:complexType>
 
 <xs:complexType name="monoid_automaton">

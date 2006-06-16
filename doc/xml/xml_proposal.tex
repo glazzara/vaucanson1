@@ -405,8 +405,8 @@ The XSD description of the \generatortag{} tag is:
   alphabets.
 \item \xattr{range}\\
   This allows to set a fixed range without being obliged to add all
-  the symbols one by one. For instance, the range \textsc{ascii} sets
-  the alphabet on the \textsc{ascii} characters.
+  the symbols one by one. For instance, the range \textsc{implicit_alphabet}
+  sets the alphabet on the lowercase and uppercase alphabet characters.
 \end{itemize}
 
 \subsubsection{The \semiringtag{} tag}
@@ -692,7 +692,7 @@ $\mathbb{B}$ shall be applied.
 \begin{alltt}
 <label_type>
   <monoid type="free" generators="letters">
-     <generator range="ascii"/>
+     <generator range="implicit_alphabet"/>
   </monoid>
   <semiring set="B" operations="numerical"/>
 </label_type>
@@ -710,10 +710,10 @@ $\mathbb{B}$ shall be applied.
 <label_type>
   <monoid type="product">
      <monoid type="free" generators="letters">
-       <generator range="ascii"/>
+       <generator range="implicit_alphabet"/>
      </monoid>
      <monoid type="free" generators="letters">
-       <generator range="ascii"/>
+       <generator range="implicit_alphabet"/>
      </monoid>
   </monoid>
   <semiring set="B" operations="numerical"/>
