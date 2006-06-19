@@ -20,7 +20,7 @@
 /**
  * @file xml_chooser.hxx
  *
- * XML specialized class, providing methods to create <label_type> tag
+ * XML specialized class, providing methods to create <labelType> tag
  * and to create labels in the XML document.
  *
  * @see vcsn::xml::xml_converter, vcsn::xml::Node
@@ -48,7 +48,7 @@ namespace vcsn
 					    xercesc::DOMDocument* doc,
 					    xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(STR2XML("label_type"));
+      xercesc::DOMElement* type = doc->createElement(STR2XML("labelType"));
       xercesc::DOMElement* monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
       tools::create_alphabet(aut.structure().series().monoid().alphabet(),
@@ -120,7 +120,7 @@ namespace vcsn
 		      xercesc::DOMDocument* doc,
 		      xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(STR2XML("label_type"));
+      xercesc::DOMElement* type = doc->createElement(STR2XML("labelType"));
       xercesc::DOMElement* in_monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
       tools::create_alphabet(aut.structure().series().monoid().alphabet(),
@@ -157,7 +157,7 @@ namespace vcsn
 		      xercesc::DOMDocument* doc,
 		      xercesc::DOMElement* root)
     {
-      xercesc::DOMElement* type = doc->createElement(STR2XML("label_type"));
+      xercesc::DOMElement* type = doc->createElement(STR2XML("labelType"));
       xercesc::DOMElement* monoid =
 	tools::create_monoid(aut.structure().series().monoid(), doc, type);
 

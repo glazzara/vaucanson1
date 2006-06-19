@@ -73,9 +73,9 @@ namespace vcsn
 	  if (! type_done)						\
 	  {								\
 	    if (XMLString::compareIString(n->getNodeName(),		\
-					  STR2XML("label_type")))	\
+					  STR2XML("labelType")))	\
 	    {								\
-	      label_typeNode<T>* node = new label_typeNode<T>;		\
+	      labelTypeNode<T>* node = new labelTypeNode<T>;		\
 	      node->process(0, aut, m, f);				\
 	    }								\
 	    type_done = true;						\
@@ -88,7 +88,7 @@ namespace vcsn
 
 # define PROCESS_TYPE_NODE(TempParam, AutType)				\
     TempParam								\
-    void label_typeNode<AutType >::process(xercesc::DOMElement* node,	\
+    void labelTypeNode<AutType >::process(xercesc::DOMElement* node,	\
 					   AutType& aut,		\
 					   typename Node<AutType >::map_t& m, \
 					   typename Node<AutType >::factory_t& f) \
@@ -112,15 +112,15 @@ namespace vcsn
     PROCESS_TYPE_NODE(TParm, AUTtype)
     PROCESS_TYPE_NODE(TParm, TRANStype)
     PROCESS_TYPE_NODE(TParmFMP, FMPtype)
-    PROCESS_NODE(label_type)
+    PROCESS_NODE(labelType)
     PROCESS_NODE(content)
     PROCESS_NODE(states)
     PROCESS_NODE(transitions)
 
 
-    /*-------------.
-    | <label_type> |
-    `-------------*/
+    /*------------.
+    | <labelType> |
+    `------------*/
     template <class T>
     void process_type(xercesc::DOMElement* node, T& aut,
 		      typename Node<T>::map_t& m,
@@ -417,7 +417,7 @@ namespace vcsn
       tools::ensure_monoid_type(node, param);
 
       // Default case, if there is no label tag.
-      // Here, implicit_alphabet range case is the default.
+      // Here, implicitAlphabet range case is the default.
       if (! node)
       {
 	for (unsigned int i = 'a'; i <= 'z'; ++i)
@@ -434,7 +434,7 @@ namespace vcsn
 	    // Fill the alphabet if a range attribute exists.
 	    if (elt->hasAttribute(STR2XML("range")))
 	    {
-	      if (xml2str(elt->getAttribute(STR2XML("range"))) == "implicit_alphabet")
+	      if (xml2str(elt->getAttribute(STR2XML("range"))) == "implicitAlphabet")
 	      {
 		for (unsigned int i = 'a'; i <= 'z'; ++i)
 		  param.alphabet().insert(i);

@@ -111,14 +111,14 @@ namespace vcsn {
     template<typename M_, typename W_>
     void XmlExpVisitor<M_, W_>::zero()
     {
-      xercesc::DOMElement* zero = doc_->createElement(STR2XML("zero_val"));
+      xercesc::DOMElement* zero = doc_->createElement(STR2XML("zeroVal"));
       current_->appendChild(zero);
     }
 
     template<typename M_, typename W_>
     void XmlExpVisitor<M_, W_>::one()
     {
-      xercesc::DOMElement* identity = doc_->createElement(STR2XML("identity_val"));
+      xercesc::DOMElement* identity = doc_->createElement(STR2XML("identityVal"));
       current_->appendChild(identity);
     }
 

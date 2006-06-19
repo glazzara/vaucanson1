@@ -27,7 +27,7 @@
 /**
  * @file xml_chooser.hh
  *
- * XML specialized class, providing methods to create <label_type> tag
+ * XML specialized class, providing methods to create <labelType> tag
  * and to create labels in the XML document.
  *
  * @see vcsn::xml::xml_converter, vcsn::xml::Node

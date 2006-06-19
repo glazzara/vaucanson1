@@ -1,3 +1,41 @@
+2006-06-19  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	The nodes like `<label_type>' are renamed to `<labelType>', so as to
+	fit with all other XML files format.
+
+	* data/vaucanson.xsd: Remove underscores in all the compound names,
+	capitalize the first letter of the following words. Change weight type
+	from decimal to string. Change the minimal number of children of the
+	nodes `sum' and `product' from 0 to 2.
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx,
+	* include/vaucanson/xml/xml_chooser.hh,
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/xml_chooser.hxx,
+	* include/vaucanson/xml/node.hxx,
+	* src/tests/xml/label_node_ref.xml,
+	* src/tests/xml/trans_ref.xml,
+	* src/tests/xml/geometry_ref.xml,
+	* src/tests/xml/r_ref.xml,
+	* src/tests/xml/z_ref.xml,
+	* src/tests/xml/z_min_plus_ref.xml,
+	* src/tests/xml/b_ref.xml,
+	* src/tests/xml/z_max_plus_ref.xml,
+	* src/tests/xml/fmp_ref.xml,
+	* src/tests/xml/session_ref.xml,
+	* src/demos/automaton_library/a1.xml,
+	* src/demos/automaton_library/b1.xml,
+	* src/demos/automaton_library/c1.xml,
+	* src/demos/transducers/t1.xml,
+	* src/demos/transducers/u1.xml,
+	* taf-kit/tests/non_ambiguous.xml,
+	* taf-kit/tests/non_ambiguous2.xml,
+	* taf-kit/tests/ambiguous.xml,
+	* doc/xml/xml_proposal.tex,
+	* doc/manual/examples/a1.xml,
+	* doc/manual/examples/b1.xml,
+	* doc/manual/examples/add1_rt.xml,
+	* doc/manual/examples/quot_3_rt.xml: Update accordingly.
+
 2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
 
 	Don't compile the developer guide in the user manual.
@@ -11,7 +49,7 @@
 	Update texi2dvi.
 
 	Now that texi2dvi supports --dvipdf, we no longer need
-	manual.mk.  As a benefit (err, target actually), it will be easier 
+	manual.mk.  As a benefit (err, target actually), it will be easier
 	to generate several outputs from a single source (say including
 	or not the developer sections).
 	* doc/manual.mk: Remove.

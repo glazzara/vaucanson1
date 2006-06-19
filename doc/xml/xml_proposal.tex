@@ -328,12 +328,12 @@ definition. So, the resticted alphabet would be defined as shown in
   \small
   \begin{center}
 \begin{alltt}
-<label_type>
+<labelType>
   <monoid>
      <generator value="a"/>
      <generator value="b"/>
   </monoid>
-</label_type>
+</labelType>
 \end{alltt}
 
 \caption{Setting $\{a, b\}$ alphabet}
@@ -348,12 +348,12 @@ Similarly, one can also set a restriction on the alphabet like in
   \small
   \begin{center}
 \begin{alltt}
-<label_type>
+<labelType>
   <monoid generators="digits" type="free">
     <generator value="0"/>
     <generator value="1"/>
   </monoid>
-</label_type>
+</labelType>
 \end{alltt}
 
 \caption{Example of a restriction}
@@ -405,7 +405,7 @@ The XSD description of the \generatortag{} tag is:
   alphabets.
 \item \xattr{range}\\
   This allows to set a fixed range without being obliged to add all
-  the symbols one by one. For instance, the range \textsc{implicit\_alphabet}
+  the symbols one by one. For instance, the range \textsc{implicitAlphabet}
   sets the alphabet on the lowercase and uppercase alphabet characters.
 \end{itemize}
 
@@ -485,7 +485,7 @@ remain clear.
   \begin{center}
 \begin{alltt}
 <transducer>
-  <label_type>
+  <labelType>
     <monoid generators="digits" type="free">
       <generator value="0"/>
       <generator value="1"/>
@@ -498,7 +498,7 @@ remain clear.
       </monoid>
       <semiring operations="numerical" set="B"/>
     </semiring>
-  </label_type>
+  </labelType>
   <content>
     ...
   </content>
@@ -690,12 +690,12 @@ $\mathbb{B}$ shall be applied.
 \begin{figure}[ht]
   \begin{center}
 \begin{alltt}
-<label_type>
+<labelType>
   <monoid type="free" generators="letters">
-     <generator range="implicit_alphabet"/>
+     <generator range="implicitAlphabet"/>
   </monoid>
   <semiring set="B" operations="numerical"/>
-</label_type>
+</labelType>
 \end{alltt}
 
 \caption{Default type for an automaton}
@@ -707,17 +707,17 @@ $\mathbb{B}$ shall be applied.
 \begin{figure}[ht]
   \begin{center}
 \begin{alltt}
-<label_type>
+<labelType>
   <monoid type="product">
      <monoid type="free" generators="letters">
-       <generator range="implicit_alphabet"/>
+       <generator range="implicitAlphabet"/>
      </monoid>
      <monoid type="free" generators="letters">
-       <generator range="implicit_alphabet"/>
+       <generator range="implicitAlphabet"/>
      </monoid>
   </monoid>
   <semiring set="B" operations="numerical"/>
-</label_type>
+</labelType>
 \end{alltt}
 
 \caption{Default type for a transducer}

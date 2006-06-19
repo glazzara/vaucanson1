@@ -108,7 +108,7 @@ namespace vcsn
 
     CREATE_CLASSNODE(automaton)
     CREATE_CLASSNODE(transducer)
-    CREATE_CLASSNODE(label_type)
+    CREATE_CLASSNODE(labelType)
     CREATE_CLASSNODE(content)
     CREATE_CLASSNODE(states)
     CREATE_CLASSNODE(transitions)
@@ -142,12 +142,12 @@ namespace vcsn
 
 # define CREATE_SPEC_TYPE_NODE(TempParam, Type)				\
     TempParam								\
-    struct label_typeNode<Type > : Node<Type >				\
+    struct labelTypeNode<Type > : Node<Type >				\
     {									\
       void process(xercesc::DOMElement*, Type&,				\
 		   typename Node<Type >::map_t&,			\
 		   typename Node<Type >::factory_t&);			\
-      static Node<Type >* create() { return new label_typeNode; }	\
+      static Node<Type >* create() { return new labelTypeNode; }	\
     };
 
 
@@ -186,7 +186,7 @@ namespace vcsn
 # define register_all_factory(f, T)		\
   register_in_factory(f, T, automaton)		\
   register_in_factory(f, T, transducer)		\
-  register_in_factory(f, T, label_type)		\
+  register_in_factory(f, T, labelType)		\
   register_in_factory(f, T, semiring)		\
   register_in_factory(f, T, monoid)		\
   register_in_factory(f, T, freemonoid)		\
