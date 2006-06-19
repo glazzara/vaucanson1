@@ -1,5 +1,13 @@
 2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
 
+	Don't compile the developer guide in the user manual.
+
+	* doc/manual/vaucanson-user-manual.tex: Adjust.
+	* doc/manual/vaucanson-developer-manual.tex: New.
+	* doc/manual/Makefile.am: Compiler the developer guide on request.
+
+2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
+
 	Update texi2dvi.
 
 	Now that texi2dvi supports --dvipdf, we no longer need

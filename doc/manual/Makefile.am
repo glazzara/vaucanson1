@@ -13,6 +13,8 @@
 
 include $(top_srcdir)/doc/doc.mk
 
+# We ship and compiler vaucanson-user-manual.pdf, but
+# vaucanson-developer-manual.pdf must be request by hand.
 manual = $(srcdir)/vaucanson-user-manual.pdf
 
 pdf: $(manual)
@@ -23,7 +25,9 @@ TEXI2PDF_FLAGS += --dvipdf
 dist_doc_DATA = $(manual)
 
 $(manual): $(vaucanson_user_manual_sources)
+$(srcdir)/vaucanson-developer-manual.pdf: $(vaucanson_user_manual_sources)
 vaucanson_user_manual_sources =			\
+vaucanson-developer-manual.tex			\
 vaucanson-user-manual.tex			\
 installation.tex				\
 taf-kit.tex					\
