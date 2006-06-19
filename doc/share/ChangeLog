@@ -1,3 +1,365 @@
+2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update texi2dvi.
+
+	* bin/texi2dvi: From master.
+
+2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	More acronyms.
+
+	* styles/myacronym.sty (prism): New.
+
+2006-06-16  Akim Demaille  <akim@lrde.epita.fr>
+
+	PCTL in XRM.
+
+	* styles/ldf/reactive-modules.ldf (XRM): Add PCTL features.
+
+2006-06-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	More RM languages.
+
+	* styles/mylistings.hva (Underline): New.
+	* styles/ldf/reactive-modules.ldf ([M4] {Reactive Modules}): New.
+
+2006-06-14  Akim Demaille  <akim@lrde.epita.fr>
+
+	More XRM.
+
+	* styles/ldf/reactive-modules.ldf: More keywords.
+
+2006-06-14  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* styles/myacronym.sty: Add Vaucanson related acronyms.
+
+2006-06-14  Akim Demaille  <akim@lrde.epita.fr>
+
+	ctmcs are ctmcs.
+
+	* styles/myacronym.sty (ctmc): Typo.
+
+2006-06-14  Akim Demaille  <akim@lrde.epita.fr>
+
+	More xrm.
+
+	* styles/myacronym.sty (ctmc, xrm): New.
+	* styles/ldf/reactive-modules.ldf: Fix missing `;'.
+	* bin/update-share: Disable set -x at the end.
+
+2006-06-13  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* styles/ldf/vaucanson.ldf: Update. Change for_each to for_all.
+
+2006-06-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	More RM keywords.
+
+	* styles/mylistings.sty: Define the style for keywords[2].
+	* styles/ldf/reactive-modules.ldf: More keywords.
+	* bin/update-share: Prompt the user to check in the host project.
+	* make/share-am.mk (share-ci): New.
+
+2006-06-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	More Reactive Modules.
+
+	* styles/ldf/reactive-modules.ldf (reactivemodules): Rename as...
+	(Reactive Modules): this.
+	([Extended] Reactive Modules): New.
+
+2006-06-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	Typo.
+
+	* styles/mylistings.sty (\lstnewenvironment): takes two args.
+
+2006-06-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add IEEEtran and rev.tex.
+
+	* styles/IEEEtran.bst: New.
+	* styles/IEEEtran.cls: New.
+	* styles/mylistings.sty: Decode and use \latexofthepoor.
+	Preliminary.
+	* make/tex.mk (rev.tex, CLEANFILES): New.
+	* README: Complete.
+
+2006-06-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	Initialize CLEANFILES, fix handouts.
+
+	* make/share-am.mk (CLEANFILES): New.
+	* make/handout.mk: No longer change the PATH.
+	Fix the location of beamer2handout.
+
+2006-06-07  Akim Demaille  <akim@epita.fr>
+
+	* bib/lrde.bib (denise.06.rt, lassaigne.06.qest): Fix the authors.
+
+2006-06-07  Akim Demaille  <akim@epita.fr>
+
+	* bib/lrde.bib (denise.06.rt, lassaigne.06.qest): New.
+
+2006-06-05  Roland Levillain  <roland@lrde.epita.fr>
+
+	Remove styles/GRASSnews.sty.
+
+	* styles/GRASSnews.sty: Remove.
+	* README: Update.
+
+2006-06-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Don't output submissions.
+
+	* share/bin/make-bib.pl: Support --with-submitted.
+	(&output): New.
+
+2006-06-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	share should not check out lrde.bib.
+
+	* bin/update-share, make/tex.mk: lrde.bib lives here.
+
+2006-06-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add lrde.bst.
+
+	* styles/lrde.bst: New.
+	From lrde-publis.
+
+2006-06-05  Akim Demaille  <akim@epita.fr>
+
+	share/bib/lrde.bib becomes the master.
+	2006-06-05  Didier Verna  <didier@lrde.epita.fr>
+
+	* lrde.bib: (verna.06.ecoop): Accepted.
+
+	2006-05-23  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (chekroun.06.iciar): Accepted.
+	Add urllrde.
+
+	2006-05-02  Didier Verna  <didier@lrde.epita.fr>
+
+	* lrde.bib (verna.06.ecoop): Add (Submitted).
+
+	2006-05-02  Didier Verna  <didier@lrde.epita.fr>
+
+	* lrde.bib (verna.06.imecs): Add (accepted).
+
+	2006-04-01  Thierry GERAUD  <theo@tegucigalpa.lrde.epita.fr>
+
+	* darbon.05.phd.pdf: New entry.
+	* contents.bib (chekroun.06.iciar): Add fake entry for
+	make to work.
+	Update.
+
+	2006-01-23  Thierry GERAUD  <theo@tegucigalpa.lrde.epita.fr>
+
+	* darbon.06.siam.pdf: Change format to pdf.
+	* lrde.bib: Commit Jerome's changes.
+	* lrde.txt: Likewise.
+
+	2006-01-18  Jerome Darbon  <jerome@epita.fr>
+
+	* lrde.bib (darbon.06.siam): add
+	* lrde.bib (lesage.06.icpr): add (submission)
+
+	2005-12-19  Akim Demaille  <akim@epita.fr>,
+	    Daniela Becker  <daniela@lrde.epita.fr>
+
+	* lrde.bib: Complete urllrdes.
+
+	2005-12-16  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib: Fix a couple of syntactic errors.
+	(duflot.05.sttt): Remove.
+
+	2005-12-15  Louis-Noel Pouchet  <louis-noel.pouchet@lrde.epita.fr>
+
+	* lrde.bib (claveirole.05.ciaa): Add LNCS references.
+	(lombardy.04.tcs): Add urllrde.
+
+	2005-12-15  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (maes.03.dpcool): Add the abstract.
+
+	2005-11-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix rivf'06.
+
+	* lrde.bib (demaille.06.rivf): Accepted.
+
+	2005-11-21  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (darbon.XX.jmiv, darbon.XXb.jmiv): Update.
+	(demaille.06.rivf): Update.
+
+	2005-11-07  Roland Levillain  <roland@lrde.epita.fr>
+
+	* lrde.bib (levillain.05.olenaposter): New entry.
+	* lrde.tex: Regen.
+
+	2005-11-07  Roland Levillain  <roland@lrde.epita.fr>
+
+	* lrde.bib (levillain.05.tigerposter): New entry.
+
+	2005-10-26  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib: Adjust several url.
+	Sort out the Carlier case.
+	Sort out the SUD case.
+	Remove incorrect fixmes.
+
+	2005-10-25  Documentaliste  <doc@nostromo.lrde.epita.fr>
+
+	* lrde.bib (bloch.03.ai): Change urllrde.
+
+	2005-10-25  Reda Dehak  <reda@lrde.epita.fr>
+
+	* lrde.bib: Update dehak.05.pami
+
+	2005-10-25  Akim Demaille  <akim@epita.fr>,
+	    Daniela Becker <daniela@lrde.epita.fr>
+
+	* lrde.bib: Add the urls.
+
+	2005-10-24  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (demaille.05.iticse): With urllrde.
+
+	2005-10-24  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (demaille.06.rivf): New.
+
+	2005-10-24  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (borghi.06.crossroads): New.
+
+	2005-09-21  Thierry Geraud  <theo@lrde.epita.fr>
+
+	* lrde.bib (geraud.06.ivc): New.
+
+	2005-07-12  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (darbon.05.isvc, duflot.06.book): New.
+	(laplante.0X.tocl): Rename as...
+	(laplante.06.tocl): this.
+
+	2005-05-31  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (lombardy.04.tcs): New.
+
+	2005-05-26  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (claveirole.05.ciaa): New.
+
+	2005-05-25  Akim Demaille  <akim@epita.fr>
+
+	Support category = national for conferences.
+
+	* lrde.bib (geraud.00.rfia, geraud.99.gretsi): Flag as national.
+
+	2005-05-24  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (david.05.sud, gournet.05.sud, pouillard.05.sud):
+	Fix.
+	Reformatting.
+
+	2005-05-23  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib: Fix typos.
+
+	2005-05-23  Sylvain Peyronnet  <peyronnet@lrde.epita.fr>
+
+	* lrde.bib (guirado.05.pdmc): Update
+
+
+	2005-05-23  Jerome Darbon  <jerome@epita.fr>
+
+	* lrde.bib (darbon.04.tr): Update
+	* lrde.bib (darbon.05.tr): Update
+
+	2005-05-23  Akim Demaille  <akim@epita.fr>
+
+	* lrde.bib (duret.01.ae): Fix the project.
+
+2006-06-05  Roland Levillain  <roland@lrde.epita.fr>
+
+	* styles/lrde-bulletin.sty: Fix the previous patch.
+
+2006-06-05  Roland Levillain  <roland@lrde.epita.fr>
+
+	Create the lrde-bulletin package from the GRASSnews package.
+
+	* styles/GRASSnews.sty: Copy as...
+	* styles/lrde-bulletin.sty: ...this.
+	Adjust names.
+	(makesubtitle, section, inputarticle, newfootnote, thefootnote)
+	(urlnote, Href, legend, seminardate, Vauc, Tfers, Mkv, Oln): New
+	commands (imported from L'air de rien 4.0 and 5.0).
+
+2006-06-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Start merging lrde-publis with share.
+
+	* bin/svndiff: bin/make-bib.pl, bin/svnci: New.
+	From lrde-publis/bin.
+	* README: Update.
+
+2006-06-05  Roland Levillain  <roland@lrde.epita.fr>
+
+	Don't display null subvolume numbers in GRASSnews.
+
+	* styles/GRASSnews.sty: Don't display the subvolume number in
+	the complete volume number if it is null.
+
+2006-06-05  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add a subvolume command to the GRASSnews package.
+
+	* styles/GRASSnews.sty (subvolume): New command.
+	Use it to define a complete volume number (following the
+	volume.subvolume scheme), used in headers.
+
+2006-06-05  Roland Levillain  <roland@lrde.epita.fr>
+
+	Resolve GRASSnews.sty's dependency on the array package.
+
+	* styles/GRASSnews.sty: Require the array package.
+
+2006-05-31  Roland Levillain  <roland@lrde.epita.fr>
+
+	Clean up handout support.
+
+	* make/tex.mk (%-handout-4.pdf): Remove rule.
+	* make/handout.mk (clean, handout-clean): Likewise.
+	(CLEANFILES): Append *-handout-4.pdf.
+	* make/share.mk: Remove $(CLEANFILES) when invoked.
+	* README: Update.
+
+2006-05-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update texi2dvi.
+
+	* bin/texi2dvi: Update from master.
+
+2006-05-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update facture.cls.
+
+	* styles/facture.cls: Update the main phone number.
+	Use the same font for "facture" and its reference.
+
+2006-05-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	PHONY targets.
+
+	* styles/facture.cls: Provide a more informative error message.
+	* make/share-am.mk, make/tex.mk, make/share.mk: Declare the phony
+	targets.
+
 2006-05-24  Akim Demaille  <akim@lrde.epita.fr>
 
 	Add lrde.bib.

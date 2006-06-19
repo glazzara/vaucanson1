@@ -1,3 +1,14 @@
+2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update texi2dvi.
+
+	Now that texi2dvi supports --dvipdf, we no longer need
+	manual.mk.  As a benefit (err, target actually), it will be easier 
+	to generate several outputs from a single source (say including
+	or not the developer sections).
+	* doc/manual.mk: Remove.
+	* doc/xml/Makefile.am, doc/manual/Makefile.am: Adjust.
+
 2006-06-16  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* data/vaucanson.xsd: Change the structure of the label as a node. The

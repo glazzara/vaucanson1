@@ -1,5 +1,6 @@
 # Make sure we don't become promoted as default target.
 all:
+.PHONY: all
 
 share_style_dir = $(share_dir)/styles
 share_bib_dir = $(share_dir)/bib
@@ -21,7 +22,6 @@ TEXI2INFO_FLAGS = $(TEXI2DVI_FLAGS)
 
 share_tex_dependencies = \
 $(STYLES) \
-$(share_bib_dir)/lrde.bib \
 $(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
 
 
@@ -65,18 +65,30 @@ $(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
 	$(TEXI2INFO) $(TEXI2INFO_FLAGS) -o $@ $<
 
 
-# lrde.bib.  Make sure it is always there.
-# all: $(share_bib_dir)/lrde.bib
-$(share_bib_dir)/lrde.bib:
-	cd $(share_dir)/.. && share/bin/update-share --lrde.bib
 
+## ------- ##
+## rev.tex ##
+## ------- ##
 
-# Handouts.
-%-handout-4.pdf: %-handout.pdf
-	PATH=$(share_bin_dir):$$PATH $(share_bin_dir)/beamer2handout $< 4up $@
+# Create a file defining \SvnRev as the revision of the ChangeLog.
+# Robust to new existing svn.
+rev.tex: ChangeLog
+	if svn --version >/dev/null 2>&1; then				    \
+	  LC_ALL=C svn info $< |					    \
+	   sed -n							    \
+	      '/^Revision: *\(.*\)$$/{s//\\newcommand{\\SvnRev}{\1}/;p;q;}' \
+	   >$@;								    \
+	elif test -f $@; then						    \
+	  touch $@;							    \
+	else								    \
+	  echo '\\newcommand{\\SvnRev}{}' >$@;				    \
+	fi
+
+CLEANFILES += rev.tex
 
 tex-mostlyclean:
 	rm -rf tmp.t2d
-
+.PHONY: tex-mostlyclean
 # mostlyclean-local is an Automake special target.
 mostlyclean-local: tex-mostlyclean
+.PHONY: mostlyclean-local

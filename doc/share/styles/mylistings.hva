@@ -37,3 +37,7 @@
 %% Give a means to have emphasis requests.
 \lstdefinelanguage{Emphasis}%
   {moredelim=*[is][\alert]{bf(}{)}}
+
+%%
+\lstdefinelanguage{Underline}%
+  {moredelim=*[is][\underbar]{__}{__}}

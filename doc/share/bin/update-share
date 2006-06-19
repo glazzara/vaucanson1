@@ -14,15 +14,17 @@ me=$(basename $0)
 # revision.  Note that it hard codes this revision, to avoid
 # backward compatibility issues.
 #
-# It also checks out the corresponding version of lrde.bib.
-#
 # -h, --help               display this message and exit
-# -l, --lrde, --lrde.bib   only update lrde.bib
 ## END
+
+stderr ()
+{
+    echo >&2 "$me: $@"
+}
 
 fatal ()
 {
-    echo >&2 "$me: $@"
+    stderr "$@"
     exit 1
 }
 
@@ -33,9 +35,6 @@ do
 	  sed -rn '/^## BEGIN/,/^## END/{s/^# ?//;/^#/!p}' $0
 	  exit 0
 	  ;;
-      -l | --lrde | --lrde.bib )
-	  tasks=lrde.bib
-	  ;;
       *)
 	  fatal "unexpected argument: $0"
 	  ;;
@@ -44,7 +43,7 @@ done
 
 set -x
 
-: ${tasks="update lrde.bib"}
+: ${tasks="update"}
 
 # grep -v may exit with failure.
 externals=$(svn propget svn:externals "." | sed  '/^share/d')
@@ -65,22 +64,12 @@ $externals"
 	svn up
 	;;
 
-	(lrde.bib) # Update share/bib/lrde.bib.
-	(
-	    cd share/bib
-           # Backup, in case the user was risky enough to
-	   # make local modifications.
-	    if test -f lrde.bib; then
-		cp --backup=numbered --force lrde.bib lrde.bib
-		chmod +w lrde.bib
-	    fi
-	    svn cat -r $rev $url/lrde-publis/lrde.bib >lrde.bib
-	    chmod -w lrde.bib
-	)
-	;;
-
 	(*)
 	fatal "unknown task: $task"
 	;;
     esac
 done
+
+set +x
+
+stderr "You should checkin the host project, share/ was updated."

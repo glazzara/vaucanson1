@@ -26,6 +26,13 @@ pour être certain de travailler sur la version courante.  Une fois les
 changements faits, comme d'habitude, un ChangeLog, un commit, un post
 dans lrde-patches@lrde.epita.fr.
 
+Depuis votre projet embarquant share/ vous pouvez aussi faire
+
+     make share-ci
+
+qui utilise vcs pour faire un checkin de share/, puis update-share
+pour mettre à jour la dépendance de votre projet hôte.
+
 ** Pour mettre à jour votre version local de share/
 Si votre Makefile inclut share/bin/share.mk, alors taper "make update"
 le fera pour vous.  Sinon, à la main, faire "share/bin/update-share".
@@ -34,28 +41,32 @@ sinon la mise à jour de la dépendance sur share/ reste locale à votre
 répertoire de travail.
 
 * share/bin
+** beamer2handout
+Un script au dessus de pdfnup (disponible dans le paquet Debian
+pdfjam) pour produire des polycopiés (handouts) à partir de fichiers
+Beamer PDF. Remplace feu beamer-handout.
+
+** make-bib.pl
+Un script qui engendre la biblio du labo.
+
+** svnci, svndiff
+Deux petits scripts qui facilitent l'utilisation de svn.  Utilisés
+pour gérer la biblio du labo.
+
 ** texi2dvi
 Une version récente qui sache compiler dans un sous-répertoire comme
 tmp.t2d, et évite les problèmes quand on fait à la fois du DVI et du
 PDF.  Début de support pour le HTML.
 
-** beamer2handout
-Un script au dessus de pdfnup (disponible dans le paquet Debian
-pdfjam) pour produire des ``handouts'' à partir de fichiers Beamer
-PDF. Devrait à termer remplacer beamer-handout, qui fait la même chose
-en passant par PostScript.
+** update-share
+Met à jour la dépendant vis-à-vis de share.  Typiquement appelé par
+"make update".  Il est utile de l'appeler directement pour créer une
+dépendance sur share avec numéro de révision (svn:externals).
+
 
 * share/bib
-Les bibliographies en BibTeX utilisées au labo.  Merci de les
-exploiter et de les augmenter.
-
-Pour l'instant, le fichier lrde.bib est ailleurs.  Pour avoir de bonne
-dépendances, et être sûr d'avoir lrde.bib, annoncer les dépendances
-ainsi:
-
-	foo.pdf: $(share_tex_dependencies)
-
-Ce dernier contient toutes les sty, bib, lrde.bib etc. que share fournit.
+Les bibliographies en BibTeX utilisées au labo, y compris le maître de
+lrde.bib.  Merci de les exploiter et de les augmenter.
 
 * share/make
 Morceaux de Makefile qui vont bien.
@@ -70,6 +81,18 @@ Makefile.
 
 ** share/make/tex.mk
 De quoi compiler du *.tex ou *.ltx vers du *.dvi, *.pdf, ou *.html.
+Permet aussi de constuire "rev.tex" si vous le souhaitez, qui contient
+le numéro de révision du ChangeLog (s'il est possible de l'obtenir)
+dans la macro \SvnRev.  Faire par exemple :
+
+     article.pdf: rev.tex
+
+pour que ça fonctionne.
+
+** share/make/handout.mk
+Définit des cibles supplémentaires pour créer des polycopiés
+(handouts), au format A4 (suffixe `-handout.pdf') ou au format livret
+A4 (suffixe `-handout-4.pdf').
 
 * share/styles
 Ce répertoire fournit des styles courants mais pas omniprésents (e.g.,
@@ -89,9 +112,17 @@ pénible, voir l'item HeVeA.
 Pour faire son CV.
 http://www.lrde.epita.fr/~didier/comp/development/software.php#curve
 
+** IEEEtran.cls, IEEEtran.bst
+Le style ACM/IEEE.  Pour la doc,
+cf. <URL:http://computer.org/cspress/instruct.htm> ou
+/mnt/doc/comp/text/latex/IEEEtran_HOWTO.pdf.
+
 ** latex8.bst, latex8.sty
 IEEE 8.5 x 11-Inch Proceedings Style `latex8.sty'.  Et son style
 BibTeX.
+
+** lrde-bulletin.sty
+Le style utilisé pour L'air de rien. Remplace GRASSnews.sty.
 
 ** mybabel
 L'utiliser avec les langues en options, comme le vrai.  Il vaut mieux
@@ -114,6 +145,7 @@ attendus.
 - HIR, langage intermédiaire d'Appel.
 - [Mips]Assembler,
 - parse-testsuite (Stratego/XT)
+- {Reactive Modules}, [Extended]{Reactive Modules}
 - RTG, Regular Tree Grammar (Stratego/XT)
 - SDF, [Boxed]SDF, [AG]SDF
 - STL (C++ + typedef de stl)

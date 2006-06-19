@@ -11,13 +11,24 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/doc/manual.mk
+include $(top_srcdir)/doc/doc.mk
 
-manual_name = vaucanson-user-manual
-manual_sources =				\
+manual = $(srcdir)/vaucanson-user-manual.pdf
+
+pdf: $(manual)
+
+# We use vaucanson-g, which requires plain DVI compilation.
+TEXI2PDF_FLAGS += --dvipdf
+
+dist_doc_DATA = $(manual)
+
+$(manual): $(vaucanson_user_manual_sources)
+vaucanson_user_manual_sources =			\
 vaucanson-user-manual.tex			\
 installation.tex				\
 taf-kit.tex					\
 library.tex					\
 developer.tex					\
 images/a1_det.ps
+
+EXTRA_DIST = $(vaucanson_user_manual_sources)

@@ -2,8 +2,6 @@
 
 %% Copyright (C) 2002, 2006 Didier Verna.
 
-%% PRCS: $Id: facture.cls 1.2 Wed, 25 Sep 2002 10:09:54 +0200 didier $
-
 %% Author:        Didier Verna <didier@lrde.epita.fr>
 %% Maintainer:    Didier Verna <didier@lrde.epita.fr>
 %% Created:       Tue Sep 24 16:14:34 2002 under XEmacs 21.5 (beta 5)
@@ -12,13 +10,13 @@
 %% This program may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.1
 %% of this license or (at your option) any later version.
-%% The latest version of this license is in 
+%% The latest version of this license is in
 %% http://www.latex-project.org/lppl.txt
 %% and version 1.1 or later is part of all distributions of LaTeX
 %% version 1999/06/01 or later.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{facture}[2006/03/02 v1.0 Bill Class for LRDE]
+\ProvidesClass{facture}[2006/03/02 v1.1 Bill Class for LRDE]
 
 \def\@header{{\LARGE Association EPITA}}
 \def\@footer{%
@@ -46,16 +44,16 @@
 \RequirePackage{eurosym}
 
 \def\@numero{%
-  \ClassError{Facture}{Il manque le numero de facture}{%
+  \ClassError{Facture}{Il manque le numero de facture (\protect\numero\space)}{%
     Vous devez appeler la commande \protect\numero\space dans le preambule
     du document.\MessageBreak}}
 \newcommand\numero[1]{\gdef\@numero{#1}}
 \@onlypreamble\numero
 
 \def\@kind{%
-  \ClassError{Facture}{Il manque la nature du document (facture ou devis)}{%
+  \ClassError{Facture}{Il manque la nature du document ( (\protect\kind\space))}{%
     Vous devez appeler la commande \protect\kind\space dans le preambule
-    du document.\MessageBreak}}
+    du document en précisant devis ou facture.\MessageBreak}}
 \newcommand\kind[1]{\gdef\@kind{#1}}
 \@onlypreamble\kind
 
@@ -130,12 +128,12 @@
     94276 Le Kremlin-Bicêtre CEDEX\\
     France\\
     \\
-    Téléphone: 01 53 14 59 47\\
+    Téléphone: 01 53 14 59 22\\
     Télécopie: 01 53 14 59 22
   \end{minipage}
   \hfill
   \begin{minipage}{.385\textwidth}
-    {\LARGE\bfseries \@kind} n$^{o}$ \@numero
+    {\LARGE{\bfseries \@kind} \@numero}
   \end{minipage}
   \thispagestyle{empty}
 

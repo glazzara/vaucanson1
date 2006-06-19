@@ -1,29 +1,51 @@
-\RequirePackage{hevea}
-\RequirePackage{xcolor}
-\input{mylistings.hva}
+\ifx\latexofthepoor\undefined
 
-\definecolor{verylightgray}{gray}{.90}
-\lstdefinestyle{box}
-  {basicstyle=\normalsize,
-    keywordstyle=\bfseries,
-    emphstyle=\slshape,
-    commentstyle=\slshape,
-    stringstyle=\sffamily,
-    backgroundcolor=\color{verylightgray}
+   %% ----------------------- %%
+   %% Not LaTeX of the poor.  %%
+   %% ----------------------- %%
+
+  \RequirePackage{hevea}
+  \RequirePackage{xcolor}
+  \input{mylistings.hva}
+
+  \definecolor{verylightgray}{gray}{.90}
+  \lstdefinestyle{box}
+    {basicstyle=\normalsize,
+      keywordstyle=[1]\bfseries,
+      keywordstyle=[2]\slshape,
+      emphstyle=\slshape,
+      commentstyle=\slshape,
+      stringstyle=\sffamily,
+      backgroundcolor=\color{verylightgray}
+    }
+
+  \definecolor{darkorange}{rgb}{1,.25,0}
+  \definecolor{darkgreen}{rgb}{0,.5,0}
+
+  % Some parameters to color the code and avoid visible spaces.
+  \newcommand{\warn}[1]{\alt<.>{\alert{#1}}{{\color{violet}{#1}}}}
+  \lstdefinestyle{ttcolor}
+     {basicstyle={\ttfamily\scriptsize},%
+      showstringspaces=false,
+      keywordstyle=[1]{\color{blue}\bfseries},%
+      keywordstyle=[2]{\color{blue}},%
+      stringstyle={\color{darkgreen}},%
+      commentstyle={\color{darkorange}},%
+      emphstyle={\warn}}
+
+  %% Default style.
+  \lstset{style=ttcolor}
+
+\else
+
+   %% ------------------- %%
+   %% LaTeX of the poor.  %%
+   %% ------------------- %%
+
+  \RequirePackage{alltt}
+  \newcommand{\lstset}[1]{}
+  \newcommand{\lstnewenvironment}[2]{%
+    \newenvironment{#1}{\begin{alltt}}{\end{alltt}}%
   }
 
-\definecolor{darkorange}{rgb}{1,.25,0}
-\definecolor{darkgreen}{rgb}{0,.5,0}
-
-% Some parameters to color the code and avoid visible spaces.
-\newcommand{\warn}[1]{\alt<.>{\alert{#1}}{{\color{violet}{#1}}}}
-\lstdefinestyle{ttcolor}
-   {basicstyle={\ttfamily\scriptsize},%
-    showstringspaces=false,
-    keywordstyle={\color{blue}\bfseries},%
-    stringstyle={\color{darkgreen}},%
-    commentstyle={\color{darkorange}},%
-    emphstyle={\warn}}
-
-%% Default style.
-\lstset{style=ttcolor}
+\fi
