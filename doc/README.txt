@@ -97,6 +97,44 @@ conflicts   with   those   specific  flags;   ``CXXFLAGS_DEBUG``   and
 ``CXXFLAGS_OPTIMIZE`` override these default flags.
 
 
+Layout of the tarball
+---------------------
+
+The Vaucanson project directory layout is as follows:
+
+argp
+   A freestanding version of the GNU C Library's argp, a powerful
+   command line argument parser.  Used by TAF-Kit.
+
+build-aux
+   Auxialiary tools used by the GNU Build System during "make"
+   stages.
+
+data
+   Files to be installed on your system.
+
+debian
+   Data to generated Debian packages.
+
+doc
+   The documentations.
+
+   manual
+      The Vaucanson User Guide.
+   share
+      LaTeX components used to generate the documentation.
+   xml
+      The XML Proposal for Automata I/O.
+
+include
+   The code of the Vaucanson C++ Library.
+
+src
+   Demonstration tools, tests.
+
+taf-kit
+   TAF-Kit sources and tests.
+
 Requirements
 ============
 
@@ -135,6 +173,7 @@ see what Vaucanson can do and how  it works.  They can be found in the
 
 The TAF-Kit  (Typed Automata Functions) documentation can  be found as
 the first chapter of the User's Manual (see ``doc/manual``).
+
 
 See Also
 ========

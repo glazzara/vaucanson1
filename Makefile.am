@@ -12,7 +12,13 @@
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 SUBDIRS = argp include src taf-kit doc build-aux debian data
-EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2
+EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
+
+$(srcdir)/README:
+	cp $(srcdir)/doc/README.txt $(srcdir)/README
+$(srcdir)/NEWS:
+	cp $(srcdir)/doc/NEWS.txt $(srcdir)/NEWS
+
 
 ###
 ### Autoconf needs additional macros.
@@ -32,10 +38,6 @@ demos:
 ###
 benchs:
 	cd src/benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
-
-dist-hook:
-	cp $(srcdir)/doc/README.txt $(distdir)/README
-	cp $(srcdir)/doc/NEWS.txt $(distdir)/NEWS
 
 ###
 ### Sanity check.

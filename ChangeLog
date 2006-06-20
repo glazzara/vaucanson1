@@ -1,3 +1,12 @@
+2006-06-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Address #53: Complete README with a map of the tarball.
+
+	* doc/README.txt: Do it.
+	* Makefile.am (dist-hook): Remove.
+	(EXTRA_DIST): Add README and NEWS.
+	(README, NEWS): New targets.
+
 2006-06-19  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	The nodes like `<label_type>' are renamed to `<labelType>', so as to
