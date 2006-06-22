@@ -57,7 +57,7 @@ namespace vcsn
     /**
      * @brief Base conversion class.
      *
-     * @param Auto	Type of the automaton to load / save.
+     * @arg \c Auto	Type of the automaton to load / save.
      *
      */
     template <class Auto>
@@ -74,11 +74,11 @@ namespace vcsn
 	/**
 	 * @brief Save automaton to stream.
 	 *
-	 * @param OStream	Type of the output stream.
+	 * @arg \c OStream	Type of the output stream.
 	 *
-	 * @arg a		Automaton to save.
-	 * @arg out	Output stream.
-	 * @arg name	String containing the name of the automaton.
+	 * @param a	Automaton to save.
+	 * @param out	Output stream.
+	 * @param name	String containing the name of the automaton.
 	 */
 	template <class OStream>
 	void save(const Auto& a, OStream& out, const std::string& name = "");
@@ -86,10 +86,10 @@ namespace vcsn
 	/**
 	 * @brief Load automaton from stream.
 	 *
-	 * @param IStream	Type of the input stream.
+	 * @arg \c IStream	Type of the input stream.
 	 *
-	 * @arg a		Automaton to load.
-	 * @arg in	Input stream.
+	 * @param a	Automaton to load.
+	 * @param in	Input stream.
 	 */
 	template <class IStream>
 	void load(Auto& a, IStream& in);

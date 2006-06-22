@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ namespace vcsn
    * @brief Transform an automaton labeled with series to an automaton
    * where all labels are series with one and only one element.
    *
-   * @comment No cut-up work is done on input and output transitions.
+   * @note No cut-up work is done on input and output transitions.
    *
    * Works on all automata and transducers labeled with polynomial series,
    * and on automata labeled with rational series.
@@ -67,7 +67,7 @@ namespace vcsn
    * @brief Transform an automaton labeled with series to an automaton
    * where all labels are series with one and only one element.
    *
-   * @comment No cut-up work is done on input and output transitions.
+   * @note No cut-up work is done on input and output transitions.
    *
    * Works on all automata and transducers labeled with polynomial series,
    * and on automata labeled with rational series.
@@ -85,7 +85,7 @@ namespace vcsn
    * @brief Transform an automaton labeled with series to an automaton
    * where all labels are series with one and only one element.
    *
-   * @comment No cut-up work is done on input and output transitions.
+   * @note No cut-up work is done on input and output transitions.
    *
    * Works on all automata and transducers labeled with polynomial series,
    * and on automata labeled with rational series.

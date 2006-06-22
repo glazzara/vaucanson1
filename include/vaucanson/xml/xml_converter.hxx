@@ -223,11 +223,11 @@ namespace vcsn
        * be registered with the macro register_all_factory(f, Auto) (where f is
        * the factory, and Auto the template parameter.
        *
-       * @param Auto	Type of the automaton.
-       * @param IStream	Type of the input stream.
+       * @arg \c Auto	  Type of the automaton.
+       * @arg \c IStream  Type of the input stream.
        *
-       * @arg a		Automaton to save.
-       * @arg in		Input stream.
+       * @param a	Automaton to save.
+       * @param in	Input stream.
        */
     template <class Auto>
     template <class IStream>

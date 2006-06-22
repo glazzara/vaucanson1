@@ -1,3 +1,44 @@
+2006-06-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	Doxygen issues.
+
+	* doc/doc.doxy.in: Be quiet, to emphasize warnings.
+	* doc/manual/vaucanson-user-manual.tex: Save trees, use a4wide.
+	* doc/manual/developer.tex (Commenting Code): New.
+
+	* include/vaucanson/xml/xml_chooser.hh: Don't use @note when it is
+	not meant to appear in the documentation.
+	Also, use @param and @arg more correctly.
+	Lots are still needed.
+	* include/vaucanson/xml/xml_converter.hh: Idem.
+	* include/vaucanson/xml/xml_chooser.hxx: Idem.
+	* include/vaucanson/xml/xml_converter.hxx: Idem.
+	* include/vaucanson/xml/xerces_parser.hh: Idem.
+	* include/vaucanson/xml/tools.hxx: Idem.
+	* include/vaucanson/contexts/ratseries_semiring.thh: Idem.
+	* include/vaucanson/contexts/r_semiring.thh: Idem.
+	* include/vaucanson/contexts/automaton_functions.thh: Idem.
+	* include/vaucanson/contexts/transducer_functions.thh: Idem.
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: Idem.
+	* include/vaucanson/contexts/z_semiring.thh: Idem.
+	* include/vaucanson/contexts/polynom_series.thh: Idem.
+	* include/vaucanson/contexts/automaton_functions.thxx: Idem.
+	* include/vaucanson/contexts/automaton.thh: Idem.
+	* include/vaucanson/contexts/transducer.thh: Idem.
+	* include/vaucanson/contexts/transducer_functions.thxx: Idem.
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx: Idem.
+	* include/vaucanson/contexts/boolean_semiring.thh: Idem.
+	* include/vaucanson/contexts/z_min_plus_semiring.thh: Idem.
+	* include/vaucanson/contexts/z_max_plus_semiring.thh: Idem.
+	* include/vaucanson/contexts/generic_automaton_impl.thh: Idem.
+	* include/vaucanson/contexts/dynamic_alphabet.thh: Idem.
+	* include/vaucanson/contexts/generic_series.thh: Idem.
+	* include/vaucanson/contexts/free_monoid_product.thh: Idem.
+	* include/vaucanson/contexts/free_monoid.thh: Idem.
+	* include/vaucanson/contexts/char_letter.thh: Idem.
+	* include/vaucanson/algorithms/cut_up.hh: Idem.
+	* include/vaucanson/automata/implementation/automaton_view.hh: Idem.
+
 2006-06-20  Akim Demaille  <akim@lrde.epita.fr>
 
 	Address #53: Complete README with a map of the tarball.

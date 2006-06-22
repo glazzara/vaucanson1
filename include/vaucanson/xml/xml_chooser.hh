@@ -57,8 +57,8 @@ namespace vcsn
     /**
      * @brief Chooser base class. All specialization should inherit from it.
      *
-     * @param S		Automaton structure type.
-     * @param T		Automaton implementation type.
+     * @arg \c S	Automaton structure type.
+     * @arg \c T	Automaton implementation type.
      *
      */
     template <class S, class T>
@@ -81,8 +81,8 @@ namespace vcsn
     /**
      * @brief Default Chooser class.
      *
-     * @param S		Automaton structure type.
-     * @param T		Automaton implementation type.
+     * @arg \c S	Automaton structure type.
+     * @arg \c T	Automaton implementation type.
      *
      */
     template <class S, class T>
@@ -92,8 +92,8 @@ namespace vcsn
     /**
      * @brief Chooser specialization for automata.
      *
-     * @param S		Automaton structure type.
-     * @param T		Automaton implementation type.
+     * @arg \c S	Automaton structure type.
+     * @arg \c T	Automaton implementation type.
      *
      */
     template <class S, class T>
@@ -103,8 +103,8 @@ namespace vcsn
     /**
      * @brief Chooser specialization for transducers on P(B*).
      *
-     * @param S		Automaton structure type.
-     * @param T		Automaton implementation type.
+     * @arg \c S	Automaton structure type.
+     * @arg \c T	Automaton implementation type.
      *
      */
     template <class S, class T>
@@ -118,10 +118,10 @@ namespace vcsn
     /**
      * @brief Chooser specialization for FMP transducers.
      *
-     * @param S		Automaton semiring type.
-     * @param T		Automaton implementation type.
-     * @param M1	Automaton first monoid type.
-     * @param M2	Automaton second monoid type.
+     * @arg \c S	Automaton semiring type.
+     * @arg \c T	Automaton implementation type.
+     * @arg \c M1	Automaton first monoid type.
+     * @arg \c M2	Automaton second monoid type.
      *
      */
 # define TParmFMP					\

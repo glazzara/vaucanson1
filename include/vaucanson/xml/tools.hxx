@@ -480,12 +480,12 @@ namespace vcsn
       /**
 	 * Get series from a XML label node.
 	 *
+	 * @arg \c T	Type of the automaton.
+	 *
 	 * @return	series_set_elt_t
 	 *
-	 * @param T	Type of the automaton.
-	 *
-	 * @arg node	XML node.
-	 * @arg aut	Automaton to store series.
+	 * @param node	XML node.
+	 * @param aut	Automaton to store series.
 	 *
 	 */
       template <class T>
@@ -676,11 +676,11 @@ namespace vcsn
       /**
 	 * Insert a letter in an alphabet.
 	 *
-	 * @param U	Type of the letter.
-	 * @param V	Type of the alphabet container.
+	 * @arg \c U	Type of the letter.
+	 * @arg \c V	Type of the alphabet container.
 	 *
-	 * @arg a		Alphabet to insert a letter.
-	 * @arg str	string containing the letter.
+	 * @param a	Alphabet to insert a letter.
+	 * @param str	string containing the letter.
 	 *
 	 */
       template <class U, class V>
@@ -701,12 +701,12 @@ namespace vcsn
       /**
 	 * Check semiring conformance of the automaton w.r.t. XML node.
 	 *
-	 * @param U	Type of the semiring.
-	 * @param T	Type of the automaton.
+	 * @arg \c U	Type of the semiring.
+	 * @arg \c T	Type of the automaton.
 	 *
-	 * @arg node	XML node to check.
-	 * @arg a		Automaton.
-	 * @arg param	Automaton semiring.
+	 * @param node	XML node to check.
+	 * @param a		Automaton.
+	 * @param param	Automaton semiring.
 	 *
 	 */
       template <class T, class U>
@@ -775,10 +775,10 @@ namespace vcsn
       /**
 	 * Check semiring conformance of the automaton w.r.t. XML node.
 	 *
-	 * @param U	Type of the monoid.
+	 * @arg \c U	Type of the monoid.
 	 *
-	 * @arg node	XML node to check.
-	 * @arg param	Automaton monoid.
+	 * @param node	XML node to check.
+	 * @param param	Automaton monoid.
 	 *
 	 */
       template <class U>
@@ -878,10 +878,10 @@ namespace vcsn
       /**
 	 * Print XML tree to output stream.
 	 *
-	 * @param OStream	Type of output stream.
+	 * @arg \c OStream	Type of output stream.
 	 *
-	 * @arg node	XML root node to print.
-	 * @arg os	Output stream.
+	 * @param node	XML root node to print.
+	 * @param os	Output stream.
 	 *
 	 */
       template <class OStream>

@@ -15,23 +15,59 @@ Until this is written, please refer to
 \href{http://www.lrde.epita.fr/~akim/compil/assignments.split/Coding-Style.html#Coding-Style}{Tiger's
   Coding Style}.
 
+\subsection{Commenting Code}
+\label{sec:commenting-code}
+
+Use Doxygen.  Besides the usual interface description, the Doxygen
+documentation must include:
+\begin{itemize}
+\item references to the definitions of the algorithm, e.g., a
+  reference to the ``Éléments de la théorie des automates'', or even
+  an URL to a mailing-list archive.
+\item detailed description of the assumptions, or, if you wish, pre-
+  and post-conditions.
+\item the name of the developer
+\item use the \texttt{@pre} and \texttt{@post} tags liberally.
+\end{itemize}
+
+Don't try to outsmart your tool, even though it does not use the words
+``param'' and ``arg'' as we do, stick to \emph{its} semantics (let
+alone to generate correct documentation without warnings).  This is
+correct:
+\begin{lstlisting}[language=C++]
+  /**
+   * Delete memory associated with a stream upon its destruction.
+   *
+   * @arg \c T	Type of the pointed element.
+   *
+   * @param ev	IO event.
+   * @param io	Related stream.
+   * @param idx	Index in the internal extensible array of a pointer to delete.
+   *
+   * @see iomanip
+   * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
+   */
+  template <class T>
+  void
+  pword_delete(std::ios_base::event ev, std::ios_base &io, int idx);
+\end{lstlisting}
+while this is not:
+\begin{lstlisting}[language=C++]
+  /** ...
+   * @param T	Type of the pointed element.
+   *
+   * @arg ev	IO event.
+   * @arg io	Related stream.
+   * @arg idx	Index in the internal extensible array of a pointer to delete.
+   * ... */
+\end{lstlisting}
 
 \subsection{Writing Algorithms}
 
 There is a number of requirement to be met before including an
 algorithms into the library:
 \begin{description}
-\item[Document the algorithm] Besides the usual interface description,
-  the Doxygen documentation must include:
-  \begin{itemize}
-  \item references to the definitions of the algorithm, e.g., a
-    reference to the ``Éléments de la théorie des automates'', or even
-    an URL to a mailing-list archive.
-  \item detailed description of the assumptions, or, if you wish, pre-
-    and post-conditions.
-  \item the name of the developer
-  \end{itemize}
-
+\item[Document the algorithm] See \autoref{sec:commenting-code}.
 \item[Comment the code] Especially if the code is a bit tricky, or
   smart, or avoids nasty pitfalls, it \emph{must} be commented.
 

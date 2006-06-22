@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -278,7 +278,7 @@ namespace vcsn {
 		 Container& res, hstate_t from, delta_kind::transitions k);
 
   /** store the output transitions of the state 'from' where
-   query(label(e)) = true in the container 'res' */
+      query(label(e)) = true in the container 'res' */
   template <class S, class T,
 	    typename Container, typename L>
   void op_deltac(const AutomataBase<S>&, const IdentityView<T>&,
@@ -288,7 +288,7 @@ namespace vcsn {
 		 delta_kind::transitions k);
 
   /** store the output transitions of the state 'from' where
-   query(label(e)) = true in the container 'res' */
+      query(label(e)) = true in the container 'res' */
   template <class S, class T,
 	    typename Container, typename L>
   void op_letter_deltac(const AutomataBase<S>&, const IdentityView<T>&,

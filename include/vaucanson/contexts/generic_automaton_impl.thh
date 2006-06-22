@@ -17,7 +17,7 @@
 //
 
 /**
- * @note CPP guard should not be inserted here as
+ * CPP guard should not be inserted here as
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
 
