@@ -26,6 +26,7 @@
  */
 
 # include <ostream>
+# include <functional>
 
 namespace utility
 {

@@ -1,3 +1,12 @@
+2006-06-29  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Adding missing include.
+	This patch is designed to please ICC that didn't passed sanity
+	check because of missing include.
+
+	* include/vaucanson/misc/bitset.hh,
+	* include/vaucanson/misc/iomanip.hh: Add missing include.
+
 2006-06-23  Akim Demaille  <akim@lrde.epita.fr>
 
 	Move demos/utilities/* into demos/.

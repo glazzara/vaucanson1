@@ -27,6 +27,7 @@
 
 # include <iterator>
 # include <iostream>
+# include <functional>
 
 namespace utility
 {
