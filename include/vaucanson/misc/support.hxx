@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -82,6 +82,13 @@ namespace utility {
   Support<std::map<U, T> >::size() const
   {
     return m_.size();
+  }
+
+  template <class U, class T>
+  bool
+  Support<std::map<U, T> >::empty() const
+  {
+    return m_.empty ();
   }
 
   template <class U, class T>

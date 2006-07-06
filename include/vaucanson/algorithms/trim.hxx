@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -60,6 +60,13 @@ namespace vcsn {
   trim(const Element<A, T>& a)
   {
     return sub_automaton(a, useful_states(a));
+  }
+
+  template<typename A, typename T>
+  void
+  trim_here(Element<A, T>& a)
+  {
+    sub_automaton_here(a, useful_states(a));
   }
 
 } // vcsn

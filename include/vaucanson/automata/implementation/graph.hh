@@ -131,6 +131,10 @@ namespace vcsn
 
     public:
       hstate_t			add_state();
+
+    /// Remove state \a n.
+    ///
+    /// \pre \a n is a state of this graph.
       void			del_state(hstate_t n);
 
     public:

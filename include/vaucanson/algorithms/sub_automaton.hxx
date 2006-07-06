@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,10 +31,10 @@ namespace vcsn {
   `----------------------------------------*/
 
   template<typename A, typename auto_t, typename list_t>
-  void do_sub_automaton(const AutomataBase<A>&,
-			auto_t& a,
-			const list_t& selected,
-			bool check_states)
+  void do_sub_automaton_here(const AutomataBase<A>&,
+			     auto_t& a,
+			     const list_t& selected,
+			     bool check_states)
   {
     std::list<hstate_t> to_be_removed;
     for (typename auto_t::state_iterator i = a.states().begin();
@@ -46,7 +46,8 @@ namespace vcsn {
     }
 
     for_all_const_(std::list<hstate_t>, i, to_be_removed)
-      if ((!check_states) || (a.has_state(*i)))
+      if (!check_states
+	  || a.has_state(*i))
 	a.del_state(*i);
   }
 
@@ -57,14 +58,14 @@ namespace vcsn {
   sub_automaton(const Element<A, T>& a, const StatesSet& s, bool check_states)
   {
     Element<A, T> ret(a);
-    do_sub_automaton(ret.structure(), ret, s, check_states);
+    do_sub_automaton_here(ret.structure(), ret, s, check_states);
     return ret;
   }
 
   template<typename A, typename T, typename StatesSet>
   void sub_automaton_here(Element<A, T>& a, const StatesSet& s, bool check_states)
   {
-    do_sub_automaton(a.structure(), a, s, check_states);
+    do_sub_automaton_here(a.structure(), a, s, check_states);
   }
 
 } // vcsn

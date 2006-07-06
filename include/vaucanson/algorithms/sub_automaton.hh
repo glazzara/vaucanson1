@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -57,7 +57,13 @@ namespace vcsn {
   template<typename A, typename T, typename StatesSet>
   Element<A, T>
   sub_automaton(const Element<A, T>& a, const StatesSet& s,
-		bool check_states = true);
+		bool check_states =
+#if defined VCSN_NDEBUG
+		                    false
+#else
+		                    true
+#endif
+		);
 
   /**
    * Select a sub-automaton into a given automaton.
@@ -73,7 +79,13 @@ namespace vcsn {
   void
   sub_automaton_here(Element<A, T>& a,
 		     const StatesSet& s,
-		     bool check_states = true);
+		     bool check_states =
+#if defined VCSN_NDEBUG
+		                    false
+#else
+		                    true
+#endif
+		     );
 
   /** @} */
 

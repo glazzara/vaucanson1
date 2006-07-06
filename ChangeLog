@@ -1,3 +1,25 @@
+2006-07-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	trim_here.
+
+	* include/Makefile.am: Copyright update.
+	* include/vaucanson/misc/support.hxx, include/vaucanson/misc/support.hh
+	(empty): New.
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/sub_automaton.hh (do_sub_automaton):
+	Rename as...
+	(do_sub_automaton_here): this, for consistency.
+	(sub_automaton, sub_automaton_here): Don't protect the removal of
+	nonexistent states by default, do it only when NDEBUG is not set.
+	* include/vaucanson/algorithms/trim.hxx,
+	* include/vaucanson/algorithms/trim.hh (trim_here): New.
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx
+	(del_state): Removing a nonexistent state is incorrect.
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx: Formatting
+	changes.
+
 2006-06-29  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Adding missing include.

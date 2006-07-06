@@ -164,8 +164,7 @@ namespace vcsn
   void
   GClass::del_state(hstate_t n)
   {
-    if (!has_state(n))
-      return;
+    precondition (has_state(n));
 
     const state_value_t& v = states_[n];
     state_value::edges_t::const_iterator e = v.output_edges.begin();
