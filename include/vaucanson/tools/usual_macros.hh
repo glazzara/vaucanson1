@@ -159,12 +159,6 @@
 # endif
 # define FAIL(S) { std::cerr << (S) << std::endl; exit(1); }
 
-# ifdef VCSN_USE_XML
-#  define STR2XML(S) xercesc::XMLString::transcode(S)
-# endif
-
-//
-
 // These macros can be use instead of some method calls.
 // This is really tricky and dirty but so useful !
 // !! * must be well documented * !!

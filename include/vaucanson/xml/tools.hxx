@@ -31,9 +31,11 @@ namespace vcsn
 {
   namespace xml
   {
+
     /*----------------.
     | Converter tools |
     `----------------*/
+
 
     /*---------.
     | Automata |
@@ -49,8 +51,8 @@ namespace vcsn
 	std::string label = get_label(series);
 
 	if (label.size())
-	  elt->setAttribute(STR2XML("label"),
-			    STR2XML(label.c_str()));
+	  elt->setAttribute(transcode("label"),
+			    transcode(label));
       }
 
       // Add the label as an xml node
@@ -92,8 +94,8 @@ namespace vcsn
 	{
 	  out = get_label(series);
 	  if (out.size())
-	    elt->setAttribute(STR2XML("label"),
-			      STR2XML(out.c_str()));
+	    elt->setAttribute(transcode("label"),
+			      transcode(out));
 	}
 	else
 	{
@@ -111,11 +113,11 @@ namespace vcsn
 	    out += out_word;
 
 	  if (in_word.size())
-	    elt->setAttribute(STR2XML("in"),
-			      STR2XML(in_word.c_str()));
+	    elt->setAttribute(transcode("in"),
+			      transcode(in_word));
 	  if (out.size())
-	    elt->setAttribute(STR2XML("out"),
-			      STR2XML(out.c_str()));
+	    elt->setAttribute(transcode("out"),
+			      transcode(out));
 	}
       }
 
@@ -131,8 +133,8 @@ namespace vcsn
 	{
 	  out = get_label(series);
 	  if (out.size())
-	    elt->setAttribute(STR2XML("label"),
-			      STR2XML(out.c_str()));
+	    elt->setAttribute(transcode("label"),
+			      transcode(out));
 	}
 	else
 	{
@@ -162,7 +164,7 @@ namespace vcsn
 	    xercesc::DOMElement* out_node =
 	      res_out.value().xml_tree(doc, "out");
 	    if (mult.size())
-	      out_node->setAttribute(STR2XML("weight"), STR2XML(mult.c_str()));
+	      out_node->setAttribute(transcode("weight"), transcode(mult));
 	    elt->appendChild(out_node);
 	  }
 	}
@@ -183,11 +185,11 @@ namespace vcsn
 	std::string out = get_label((series.get(*(series.supp().begin()))));
 
 	if (in.size() && in != "1")
-	  elt->setAttribute(STR2XML("in"),
-			    STR2XML(in.c_str()));
+	  elt->setAttribute(transcode("in"),
+			    transcode(in));
 	if (out.size() && out != "1")
-	  elt->setAttribute(STR2XML("out"),
-			    STR2XML(out.c_str()));
+	  elt->setAttribute(transcode("out"),
+			    transcode(out));
       }
 
       // Add the label as an xml node
@@ -265,9 +267,9 @@ namespace vcsn
 	{
 	  std::ostringstream letter;
 	  xercesc::DOMElement* gen =
-	    doc->createElement(STR2XML("generator"));
+	    doc->createElement(transcode("generator"));
 	  letter << *l;
-	  gen->setAttribute(STR2XML("value"), STR2XML(letter.str().c_str()));
+	  gen->setAttribute(transcode("value"), transcode(letter.str().c_str()));
 	  root->appendChild(gen);
 	}
       }
@@ -277,9 +279,9 @@ namespace vcsn
 					 xercesc::DOMDocument* doc,
 					 xercesc::DOMElement* elt)
       {
-	xercesc::DOMElement* m = doc->createElement(STR2XML("monoid"));
-	m->setAttribute(STR2XML("type"), STR2XML(get_monoid_type(monoid)));
-	m->setAttribute(STR2XML("generators"), STR2XML("letters"));
+	xercesc::DOMElement* m = doc->createElement(transcode("monoid"));
+	m->setAttribute(transcode("type"), transcode(get_monoid_type(monoid)));
+	m->setAttribute(transcode("generators"), transcode("letters"));
 	elt->appendChild(m);
 
 	return m;
@@ -293,13 +295,13 @@ namespace vcsn
       {
 	typedef typename A::series_set_elt_t::semiring_elt_t::value_t value_t;
 
-	xercesc::DOMElement* s = doc->createElement(STR2XML("semiring"));
+	xercesc::DOMElement* s = doc->createElement(transcode("semiring"));
 
 	if (get_semiring_set(semiring, value_t()) != "ratSeries")
-	  s->setAttribute(STR2XML("operations"),
-			  STR2XML(get_semiring_operations(semiring)));
-	s->setAttribute(STR2XML("set"),
-			STR2XML(get_semiring_set(semiring, value_t())));
+	  s->setAttribute(transcode("operations"),
+			  transcode(get_semiring_operations(semiring)));
+	s->setAttribute(transcode("set"),
+			transcode(get_semiring_set(semiring, value_t())));
 	elt->appendChild(s);
 
 	return s;
@@ -315,10 +317,10 @@ namespace vcsn
 	typedef typename
 	  Element<Transducer<S>, T>::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t value_t;
 
-	xercesc::DOMElement* s = doc->createElement(STR2XML("semiring"));
-	s->setAttribute(STR2XML("operations"), STR2XML("numerical"));
-	s->setAttribute(STR2XML("set"),
-			STR2XML(get_semiring_set(semiring, value_t())));
+	xercesc::DOMElement* s = doc->createElement(transcode("semiring"));
+	s->setAttribute(transcode("operations"), transcode("numerical"));
+	s->setAttribute(transcode("set"),
+			transcode(get_semiring_set(semiring, value_t())));
 	elt->appendChild(s);
 
 	return s;
@@ -411,16 +413,16 @@ namespace vcsn
 	      next_op_type = VCSN_XML_PRODUCT_TYPE;
 
 	    // Add weight (and opening brace if complex expression).
-	    if (element_n->hasAttribute(STR2XML("weight")))
-	      res += xml2str(element_n->getAttribute(STR2XML("weight")))
+	    if (element_n->hasAttribute(transcode("weight")))
+	      res += xml2str(element_n->getAttribute(transcode("weight")))
 		+ " ";
 
 	    // Add opening brace if attribute,complex weighted
 	    // expression, sum in product, product in sum or star.
-	    if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
-		 xml2str(element_n->getAttribute(STR2XML("parenthesis")))
+	    if ((element_n->hasAttribute(transcode("parenthesis")) &&
+		 xml2str(element_n->getAttribute(transcode("parenthesis")))
 		 == "true")
-		|| ((element_n->hasAttribute(STR2XML("weight")))
+		|| ((element_n->hasAttribute(transcode("weight")))
 		    && (xml2str(n->getNodeName()) != "word"))
 		|| ((xml2str(n->getNodeName()) == "sum")
 		    && (op_type == VCSN_XML_PRODUCT_TYPE))
@@ -431,7 +433,7 @@ namespace vcsn
 
 	    // Word, zero or identity
 	    if (xml2str(n->getNodeName()) == "word")
-	      res += xml2str(element_n->getAttribute(STR2XML("value")));
+	      res += xml2str(element_n->getAttribute(transcode("value")));
 	    if (xml2str(n->getNodeName()) == "zero")
 	      res += "1";
 	    if (xml2str(n->getNodeName()) == "identity")
@@ -443,14 +445,14 @@ namespace vcsn
 					aut, next_op_type);
 
 	    // Add closing brace if parenthesis attribute
-	    if ((element_n->hasAttribute(STR2XML("parenthesis")) &&
-		 xml2str(element_n->getAttribute(STR2XML("parenthesis")))
+	    if ((element_n->hasAttribute(transcode("parenthesis")) &&
+		 xml2str(element_n->getAttribute(transcode("parenthesis")))
 		 == "true")
 		// Or star/weight...
-		|| ((((element_n->hasAttribute(STR2XML("star")))
-		      && (xml2str(element_n->getAttribute(STR2XML("star")))
+		|| ((((element_n->hasAttribute(transcode("star")))
+		      && (xml2str(element_n->getAttribute(transcode("star")))
 			  == "true"))
-		     || (element_n->hasAttribute(STR2XML("weight"))))
+		     || (element_n->hasAttribute(transcode("weight"))))
 		    // ...in a complex expression
 		    && (xml2str(n->getNodeName()) != "word"))
 		// Or a sum in a product
@@ -504,12 +506,12 @@ namespace vcsn
 	  str_res = get_rec_xml_series(n, aut);
 	if (str_res == "")
 	{
-	  if (xml2str(node->getAttribute(STR2XML("label"))) == "")
+	  if (xml2str(node->getAttribute(transcode("label"))) == "")
 	    return
 	      vcsn::algebra::identity_as<typename T::series_set_elt_t::value_t>
 	      ::of(aut.structure().series());
 	  else
-	    parse(xml2str(node->getAttribute(STR2XML("label"))), res);
+	    parse(xml2str(node->getAttribute(transcode("label"))), res);
 	}
 	else
 	  parse(str_res, res);
@@ -641,9 +643,9 @@ namespace vcsn
 	// No expression tag
 	else
 	{
-	  if (node->hasAttribute(STR2XML("label")))
+	  if (node->hasAttribute(transcode("label")))
 	  {
-	    std::string label = xml2str(node->getAttribute(STR2XML("label")));
+	    std::string label = xml2str(node->getAttribute(transcode("label")));
 	    unsigned int pos = label.find("|");
 	    if (pos != std::string::npos)
 	    {
@@ -654,18 +656,18 @@ namespace vcsn
 	    }
 	    else
 	      i_res = parse(label, i_exp);
-	    if (node->hasAttribute(STR2XML("weight")))
-	      o_res = parse(xml2str(node->getAttribute(STR2XML("weight"))),
+	    if (node->hasAttribute(transcode("weight")))
+	      o_res = parse(xml2str(node->getAttribute(transcode("weight"))),
 			    o_exp);
 	  }
 	  // No expression tag, no label attribute.
 	  else
 	  {
-	    if (node->hasAttribute(STR2XML("in")))
-	      i_res = parse(xml2str(node->getAttribute(STR2XML("in"))),
+	    if (node->hasAttribute(transcode("in")))
+	      i_res = parse(xml2str(node->getAttribute(transcode("in"))),
 			    i_exp);
-	    if (node->hasAttribute(STR2XML("out")))
-	      o_res = parse(xml2str(node->getAttribute(STR2XML("out"))),
+	    if (node->hasAttribute(transcode("out")))
+	      o_res = parse(xml2str(node->getAttribute(transcode("out"))),
 			    o_exp);
 	  }
 	}
@@ -718,8 +720,8 @@ namespace vcsn
 	std::string set(tools::get_semiring_set(param, value_t()));
 	std::string set_ref;
 
-	if (node && node->hasAttribute(STR2XML("set")))
-	  set_ref = xml2str(node->getAttribute(STR2XML("set")));
+	if (node && node->hasAttribute(transcode("set")))
+	  set_ref = xml2str(node->getAttribute(transcode("set")));
 	else
 	  set_ref = "B";
 	if (set_ref != set)
@@ -741,8 +743,8 @@ namespace vcsn
 	std::string set(tools::get_semiring_set(param, value_t()));
 	std::string set_ref;
 
-	if (node && node->hasAttribute(STR2XML("set")))
-	  set_ref = xml2str(node->getAttribute(STR2XML("set")));
+	if (node && node->hasAttribute(transcode("set")))
+	  set_ref = xml2str(node->getAttribute(transcode("set")));
 	else
 	  set_ref = "B";
 	if (set_ref != set)
@@ -763,8 +765,8 @@ namespace vcsn
 	std::string set(tools::get_semiring_set(param, value_t()));
 	std::string set_ref;
 
-	if (node && node->hasAttribute(STR2XML("set")))
-	  set_ref = xml2str(node->getAttribute(STR2XML("set")));
+	if (node && node->hasAttribute(transcode("set")))
+	  set_ref = xml2str(node->getAttribute(transcode("set")));
 	else
 	  set_ref = "ratSeries";
 	if (set_ref != set)
@@ -787,10 +789,10 @@ namespace vcsn
 	std::string monoid_type = tools::get_monoid_type(param);
 	std::string monoid_type_ref;
 
-	if (! node || ! node->hasAttribute(STR2XML("type")))
+	if (! node || ! node->hasAttribute(transcode("type")))
 	  monoid_type_ref = "free";
 	else
-	  monoid_type_ref = xml2str(node->getAttribute(STR2XML("type")));
+	  monoid_type_ref = xml2str(node->getAttribute(transcode("type")));
 	if (monoid_type_ref != monoid_type)
 	  FAIL("Bad monoid type");
       }
@@ -803,10 +805,10 @@ namespace vcsn
 	std::string monoid_type = tools::get_monoid_type(param);
 	std::string monoid_type_ref;
 
-	if (! node || ! node->hasAttribute(STR2XML("type")))
+	if (! node || ! node->hasAttribute(transcode("type")))
 	  monoid_type_ref = "product";
 	else
-	  monoid_type_ref = xml2str(node->getAttribute(STR2XML("type")));
+	  monoid_type_ref = xml2str(node->getAttribute(transcode("type")));
 	if (monoid_type_ref != monoid_type)
 	  FAIL("Bad monoid type");
       }
@@ -818,24 +820,24 @@ namespace vcsn
 			    std::string& spacing)
       {
 	os << spacing << "<" << xml2str(n->getNodeName());
-	if (n->hasAttribute(STR2XML("src")))
+	if (n->hasAttribute(transcode("src")))
 	  os << " src=\""
-	     << xml2str(n->getAttribute(STR2XML("src"))) << "\"";
-	if (n->hasAttribute(STR2XML("dst")))
+	     << xml2str(n->getAttribute(transcode("src"))) << "\"";
+	if (n->hasAttribute(transcode("dst")))
 	  os << " dst=\""
-	     << xml2str(n->getAttribute(STR2XML("dst"))) << "\"";
-	if (n->hasAttribute(STR2XML("label")))
+	     << xml2str(n->getAttribute(transcode("dst"))) << "\"";
+	if (n->hasAttribute(transcode("label")))
 	  os << " label=\""
-	     << xml2str(n->getAttribute(STR2XML("label"))) << "\"";
-	if (n->hasAttribute(STR2XML("weight")))
+	     << xml2str(n->getAttribute(transcode("label"))) << "\"";
+	if (n->hasAttribute(transcode("weight")))
 	  os << " weight=\""
-	     << xml2str(n->getAttribute(STR2XML("weight"))) << "\"";
-	if (n->hasAttribute(STR2XML("in")))
+	     << xml2str(n->getAttribute(transcode("weight"))) << "\"";
+	if (n->hasAttribute(transcode("in")))
 	  os << " in=\""
-	     << xml2str(n->getAttribute(STR2XML("in"))) << "\"";
-	if (n->hasAttribute(STR2XML("out")))
+	     << xml2str(n->getAttribute(transcode("in"))) << "\"";
+	if (n->hasAttribute(transcode("out")))
 	  os << " out=\""
-	     << xml2str(n->getAttribute(STR2XML("out"))) << "\"";
+	     << xml2str(n->getAttribute(transcode("out"))) << "\"";
       }
 
 
@@ -887,8 +889,8 @@ namespace vcsn
       template <class OStream>
       void print_document(xercesc::DOMElement* node, OStream& os)
       {
-	node->setAttribute(STR2XML("xmlns"),
-			   STR2XML("http://vaucanson.lrde.epita.fr"));
+	node->setAttribute(transcode("xmlns"),
+			   transcode("http://vaucanson.lrde.epita.fr"));
 	print_tree(node, os, "");
       }
 

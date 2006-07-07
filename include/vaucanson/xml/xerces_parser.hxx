@@ -78,9 +78,8 @@ namespace vcsn
       parser_set_property(fgXercesUseCachedGrammarInParse);
       parser_set_property(fgXercesCacheGrammarFromParse);
 
-      XMLCh* xsd_link =
-	STR2XML(("http://vaucanson.lrde.epita.fr " + get_xsd_path ()).c_str ());
-      parser_set_value(fgXercesSchemaExternalSchemaLocation, xsd_link);
+      parser_set_value(fgXercesSchemaExternalSchemaLocation,
+		       transcode("http://vaucanson.lrde.epita.fr " + get_xsd_path ()));
 
       // fgXercesSchemaExternalNoNamespaceSchemaLocation
 
@@ -121,7 +120,7 @@ namespace vcsn
       using namespace xercesc;
 
       DOMImplementation* impl =
-	DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
+	DOMImplementationRegistry::getDOMImplementation(transcode("LS"));
       DOMBuilder* parser = static_cast<DOMImplementationLS*> (impl)
 	->createDOMBuilder(DOMImplementationLS::MODE_SYNCHRONOUS, 0);
 
@@ -129,11 +128,11 @@ namespace vcsn
 
       DOMNodeList* nodelist;
 
-      nodelist = doc->getElementsByTagName(STR2XML("session"));
+      nodelist = doc->getElementsByTagName(transcode("session"));
       if (! nodelist->getLength())
-	nodelist = doc->getElementsByTagName(STR2XML("automaton"));
+	nodelist = doc->getElementsByTagName(transcode("automaton"));
       if (! nodelist->getLength())
-	nodelist = doc->getElementsByTagName(STR2XML("transducer"));
+	nodelist = doc->getElementsByTagName(transcode("transducer"));
       if (! nodelist->getLength())
 	FAIL("Cannot find any appropriate root.");
 

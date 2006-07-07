@@ -58,31 +58,31 @@ namespace vcsn
       DOMElement* node;
 
       // Document creation.
-      impl_ = DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
-      doc_ = impl_->createDocument(STR2XML(xml_namespace),
-				   STR2XML(root_name), 0);
+      impl_ = DOMImplementationRegistry::getDOMImplementation(transcode("LS"));
+      doc_ = impl_->createDocument(transcode(xml_namespace),
+				   transcode(root_name), 0);
       root_ = doc_->getDocumentElement();
 
       if (aut.geometry().name() != "")
-	root_->setAttribute(STR2XML("name"),
-			    STR2XML(aut.geometry().name().c_str()));
+	root_->setAttribute(transcode("name"),
+			    transcode(aut.geometry().name()));
       if (name != "")
-	root_->setAttribute(STR2XML("name"), STR2XML(name.c_str()));
+	root_->setAttribute(transcode("name"), transcode(name));
 
       // Create type tag.
       chooser_.create_type_tag(aut, doc_, root_);
 
-      DOMElement* content = doc_->createElement(STR2XML("content"));
+      DOMElement* content = doc_->createElement(transcode("content"));
       root_->appendChild(content);
 
       // Create states.
-      node = doc_->createElement(STR2XML("states"));
+      node = doc_->createElement(transcode("states"));
       content->appendChild(node);
       for_all_states(s, aut)
 	state2str[*s] = create_state(*s, aut, node);
 
       // Create transitions.
-      node = doc_->createElement(STR2XML("transitions"));
+      node = doc_->createElement(transcode("transitions"));
       content->appendChild(node);
       for_all_transitions(e, aut)
 	create_transition(*e, aut, node, state2str);
@@ -105,9 +105,9 @@ namespace vcsn
     {
       std::ostringstream os;
       os << "s" << s;
-      xercesc::DOMElement* node = doc_->createElement(STR2XML("state"));
+      xercesc::DOMElement* node = doc_->createElement(transcode("state"));
       root->appendChild(node);
-      node->setAttribute(STR2XML("name"), STR2XML(os.str().c_str()));
+      node->setAttribute(transcode("name"), transcode(os.str()));
       add_xml_geometry(aut.geometry().states(), s, node);
 
       return os.str();
@@ -123,12 +123,12 @@ namespace vcsn
 					   std::map<hstate_t, std::string>&
 					   state2str)
     {
-      xercesc::DOMElement* node = doc_->createElement(STR2XML("transition"));
+      xercesc::DOMElement* node = doc_->createElement(transcode("transition"));
       root->appendChild(node);
-      node->setAttribute(STR2XML("src"),
-			 STR2XML(state2str[aut.src_of(e)].c_str()));
-      node->setAttribute(STR2XML("dst"),
-			 STR2XML(state2str[aut.dst_of(e)].c_str()));
+      node->setAttribute(transcode("src"),
+			 transcode(state2str[aut.src_of(e)]));
+      node->setAttribute(transcode("dst"),
+			 transcode(state2str[aut.dst_of(e)]));
       chooser_.create_label(doc_, e, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().transitions(), e, node);
     }
@@ -143,10 +143,10 @@ namespace vcsn
 					std::map<hstate_t, std::string>&
 					state2str)
     {
-      xercesc::DOMElement* node = doc_->createElement(STR2XML("initial"));
+      xercesc::DOMElement* node = doc_->createElement(transcode("initial"));
       root->appendChild(node);
-      node->setAttribute(STR2XML("state"),
-			 STR2XML(state2str[s].c_str()));
+      node->setAttribute(transcode("state"),
+			 transcode(state2str[s]));
       chooser_.create_initial_label(doc_, s, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().initials(), s, node);
     }
@@ -161,10 +161,10 @@ namespace vcsn
 				      std::map<hstate_t, std::string>&
 				      state2str)
     {
-      xercesc::DOMElement* node = doc_->createElement(STR2XML("final"));
+      xercesc::DOMElement* node = doc_->createElement(transcode("final"));
       root->appendChild(node);
-      node->setAttribute(STR2XML("state"),
-			 STR2XML(state2str[s].c_str()));
+      node->setAttribute(transcode("state"),
+			 transcode(state2str[s]));
       chooser_.create_final_label(doc_, s, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().finals(), s, node);
     }
@@ -182,13 +182,13 @@ namespace vcsn
       {
 	std::ostringstream osx, osy;
 	osx << iter->second.first;
-	xercesc::DOMElement* nd = doc_->createElement(STR2XML("geometry"));
+	xercesc::DOMElement* nd = doc_->createElement(transcode("geometry"));
 	root->appendChild(nd);
-	nd->setAttribute(STR2XML("x"),
-			 STR2XML(osx.str().c_str()));
+	nd->setAttribute(transcode("x"),
+			 transcode(osx.str()));
 	osy << iter->second.second;
-	nd->setAttribute(STR2XML("y"),
-			 STR2XML(osy.str().c_str()));
+	nd->setAttribute(transcode("y"),
+			 transcode(osy.str()));
       }
     }
 
@@ -205,13 +205,13 @@ namespace vcsn
       {
 	std::ostringstream osx, osy;
 	osx << iter->second.first;
-	xercesc::DOMElement* nd = doc_->createElement(STR2XML("drawing"));
+	xercesc::DOMElement* nd = doc_->createElement(transcode("drawing"));
 	root->appendChild(nd);
-	nd->setAttribute(STR2XML("labelPositionX"),
-			 STR2XML(osx.str().c_str()));
+	nd->setAttribute(transcode("labelPositionX"),
+			 transcode(osx.str()));
 	osy << iter->second.second;
-	nd->setAttribute(STR2XML("labelPositionY"),
-			 STR2XML(osy.str().c_str()));
+	nd->setAttribute(transcode("labelPositionY"),
+			 transcode(osy.str()));
       }
     }
 

@@ -64,8 +64,8 @@ namespace vcsn
     {									\
       using namespace xercesc;						\
       bool type_done = false;						\
-      if (node->hasAttribute(STR2XML("name")))				\
-	aut.geometry().name() = xml2str(node->getAttribute(STR2XML("name"))); \
+      if (node->hasAttribute(transcode("name")))				\
+	aut.geometry().name() = xml2str(node->getAttribute(transcode("name"))); \
       for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling()) \
 	if (n->getNodeType() == DOMNode::ELEMENT_NODE)			\
 	{								\
@@ -73,7 +73,7 @@ namespace vcsn
 	  if (! type_done)						\
 	  {								\
 	    if (XMLString::compareIString(n->getNodeName(),		\
-					  STR2XML("labelType")))	\
+					  transcode("labelType")))	\
 	    {								\
 	      labelTypeNode<T>* node = new labelTypeNode<T>;		\
 	      node->process(0, aut, m, f);				\
@@ -269,7 +269,7 @@ namespace vcsn
 			  typename Node<T>::factory_t& f)
     {
       hstate_t state = aut.add_state();
-      m[xml2str(node->getAttribute(STR2XML("name")))] = state;
+      m[xml2str(node->getAttribute(transcode("name")))] = state;
       typename Node<T>::map_state_pair_t p(aut.geometry().states(), state);
       handle_geometry(node, aut, p, m, f);
     }
@@ -284,8 +284,8 @@ namespace vcsn
 			       typename Node<T>::map_t& m,
 			       typename Node<T>::factory_t& f)
     {
-      hstate_t src = m[xml2str(node->getAttribute(STR2XML("src")))];
-      hstate_t dst = m[xml2str(node->getAttribute(STR2XML("dst")))];
+      hstate_t src = m[xml2str(node->getAttribute(transcode("src")))];
+      hstate_t dst = m[xml2str(node->getAttribute(transcode("dst")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       htransition_t e = aut.add_series_transition(src, dst, s);
       typename Node<T>::map_transition_pair_t p(aut.geometry().transitions(), e);
@@ -302,7 +302,7 @@ namespace vcsn
 			    typename Node<T>::map_t& m,
 			    typename Node<T>::factory_t& f)
     {
-      hstate_t state = m[xml2str(node->getAttribute(STR2XML("state")))];
+      hstate_t state = m[xml2str(node->getAttribute(transcode("state")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       aut.set_initial(state, s);
       typename Node<T>::map_state_pair_t p(aut.geometry().initials(), state);
@@ -319,7 +319,7 @@ namespace vcsn
 			  typename Node<T>::map_t& m,
 			  typename Node<T>::factory_t& f)
     {
-      hstate_t state = m[xml2str(node->getAttribute(STR2XML("state")))];
+      hstate_t state = m[xml2str(node->getAttribute(transcode("state")))];
       typename T::series_set_elt_t s = tools::get_series(node, aut);
       aut.set_final(state, s);
       typename Node<T>::map_state_pair_t p(aut.geometry().finals(), state);
@@ -385,7 +385,7 @@ namespace vcsn
 	  if (n->getNodeType() == DOMNode::ELEMENT_NODE)
 	  {
 	    if (! XMLString::compareIString(n->getNodeName(),
-					    STR2XML("monoid")))
+					    transcode("monoid")))
 	      nd->process(static_cast<DOMElement*>(n), a,
 			  const_cast
 			  <typename TRANStype::semiring_t::monoid_t&>
@@ -432,19 +432,19 @@ namespace vcsn
 	    DOMElement* elt = static_cast<DOMElement*>(n);
 
 	    // Fill the alphabet if a range attribute exists.
-	    if (elt->hasAttribute(STR2XML("range")))
+	    if (elt->hasAttribute(transcode("range")))
 	    {
-	      if (xml2str(elt->getAttribute(STR2XML("range"))) == "implicitAlphabet")
+	      if (xml2str(elt->getAttribute(transcode("range"))) == "implicitAlphabet")
 	      {
 		for (unsigned int i = 'a'; i <= 'z'; ++i)
 		  param.alphabet().insert(i);
 		for (unsigned int i = 'A'; i <= 'Z'; ++i)
 		  param.alphabet().insert(i);
 	      }
-	      if (xml2str(elt->getAttribute(STR2XML("range"))) == "digits")
+	      if (xml2str(elt->getAttribute(transcode("range"))) == "digits")
 		for (unsigned int i = '0'; i <= '9'; ++i)
 		  param.alphabet().insert(i);
-	      if (xml2str(elt->getAttribute(STR2XML("range"))) == "ascii")
+	      if (xml2str(elt->getAttribute(transcode("range"))) == "ascii")
 		for (unsigned char c = 0; c <= 127; ++c)
 		  param.alphabet().insert(c);
 	    }
@@ -531,7 +531,7 @@ namespace vcsn
 			      typename Node<T>::factory_t&)
     {
       tools::insert_letter(param,
-			   xml2str(node->getAttribute(STR2XML("value"))));
+			   xml2str(node->getAttribute(transcode("value"))));
     }
 
 
@@ -547,10 +547,10 @@ namespace vcsn
 			     typename Node<T>::factory_t&)
     {
       double x, y;
-      if (node->hasAttribute(STR2XML("x")) && node->hasAttribute(STR2XML("y")))
+      if (node->hasAttribute(transcode("x")) && node->hasAttribute(transcode("y")))
       {
-	std::istringstream xstr(xml2str(node->getAttribute(STR2XML("x"))));
-	std::istringstream ystr(xml2str(node->getAttribute(STR2XML("y"))));
+	std::istringstream xstr(xml2str(node->getAttribute(transcode("x"))));
+	std::istringstream ystr(xml2str(node->getAttribute(transcode("y"))));
 	xstr >> x;
 	ystr >> y;
 	param.first[param.second] = std::make_pair(x, y);
@@ -571,13 +571,13 @@ namespace vcsn
 			    typename Node<T>::factory_t&)
     {
       double x, y;
-      if (node->hasAttribute(STR2XML("labelPositionX")) &&
-	  node->hasAttribute(STR2XML("labelPositionY")))
+      if (node->hasAttribute(transcode("labelPositionX")) &&
+	  node->hasAttribute(transcode("labelPositionY")))
       {
 	std::istringstream
-	  xstr(xml2str(node->getAttribute(STR2XML("labelPositionX"))));
+	  xstr(xml2str(node->getAttribute(transcode("labelPositionX"))));
 	std::istringstream
-	  ystr(xml2str(node->getAttribute(STR2XML("labelPositionY"))));
+	  ystr(xml2str(node->getAttribute(transcode("labelPositionY"))));
 	xstr >> x;
 	ystr >> y;
 	param.first[param.second] = std::make_pair(x, y);

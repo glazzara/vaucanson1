@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -35,8 +35,17 @@ namespace vcsn
   namespace xml
   {
 
-    std::string
-    xml2str(const XMLCh*);
+    /// Transcode \a cpp to XML.
+    inline
+    XMLCh* transcode (const char* ccp);
+
+    /// Transcode \a s to XML.
+    inline
+    XMLCh* transcode (const std::string& s);
+
+    /// Convert back to a C++ string.
+    inline
+    std::string xml2str(const XMLCh*);
 
   } // End of namespace xml.
 

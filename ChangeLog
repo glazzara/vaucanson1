@@ -1,5 +1,26 @@
 2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	transcode.
+
+	* include/vaucanson/tools/usual_macros.hh (STR2XML): Remove.
+	Macros are bad, and prevent overloading.
+	* include/vaucanson/xml/strings.hh, include/vaucanson/xml/strings.hxx
+	(transcode): Two new overloaded functions.
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx:
+	Move the definition of function in the hxx file.
+	* include/vaucanson/xml/xml_chooser.hxx,
+	* include/vaucanson/xml/session.hxx,
+	* include/vaucanson/xml/node.hxx,
+	* include/vaucanson/xml/xml_converter.hxx,
+	* include/vaucanson/xml/XML.hh,
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/tools.hxx,
+	* include/vaucanson/xml/xerces_parser.hxx,
+	* include/vaucanson/boolean_automaton.hh: Use transcode.
+
+2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	XSD_CPPFLAGS.
 
 	* src/vaucanson.mk (XSD_CPPFLAGS): New.

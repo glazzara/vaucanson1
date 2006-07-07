@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -39,9 +39,9 @@ namespace vcsn
       using namespace xercesc;
 
       XMLPlatformUtils::Initialize();
-      impl = DOMImplementationRegistry::getDOMImplementation(STR2XML("LS"));
-      doc = impl->createDocument(STR2XML("http://vaucanson.lrde.epita.fr"),
-				 STR2XML("session"), 0);
+      impl = DOMImplementationRegistry::getDOMImplementation(transcode("LS"));
+      doc = impl->createDocument(transcode("http://vaucanson.lrde.epita.fr"),
+				 transcode("session"), 0);
       root = doc->getDocumentElement();
     }
 

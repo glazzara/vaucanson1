@@ -21,10 +21,21 @@
 
 # include <algorithm>
 # include <sstream>
+# include <vaucanson/xml/strings.hh>
 
 namespace vcsn {
 
   namespace rat {
+
+    using xml::transcode;
+
+    template<typename M_, typename W_>
+    XmlExpVisitor<M_,W_>::XmlExpVisitor(xercesc::DOMDocument* doc, char* node_name) :
+      doc_(doc),
+      label_(doc_->createElement(transcode(node_name))),
+      current_(label_)
+    {}
+
 
     template<typename M_, typename W_>
     void
@@ -48,7 +59,7 @@ namespace vcsn {
 				   const Node<M_, W_>* right_)
     {
       xercesc::DOMElement* tmp = current_;
-      current_ = doc_->createElement(STR2XML("product"));
+      current_ = doc_->createElement(transcode("product"));
       sum_or_product(left_, right_);
       tmp->appendChild(current_);
       current_ = tmp;
@@ -60,7 +71,7 @@ namespace vcsn {
 			       const Node<M_, W_>* right_)
     {
       xercesc::DOMElement* tmp = current_;
-      current_ = doc_->createElement(STR2XML("sum"));
+      current_ = doc_->createElement(transcode("sum"));
       sum_or_product(left_, right_);
       tmp->appendChild(current_);
       current_ = tmp;
@@ -71,7 +82,7 @@ namespace vcsn {
     XmlExpVisitor<M_, W_>::star(const Node<M_, W_>* node)
     {
       xercesc::DOMElement* tmp = current_;
-      current_ = doc_->createElement(STR2XML("star"));
+      current_ = doc_->createElement(transcode("star"));
       weight_or_star(node);
       tmp->appendChild(current_);
       current_ = tmp;
@@ -83,7 +94,7 @@ namespace vcsn {
     {
       std::stringstream ss;
       ss << w;
-      current_->setAttribute(STR2XML("weight"), STR2XML(ss.str().c_str()));
+      current_->setAttribute(transcode("weight"), transcode(ss.str()));
       weight_or_star(node);
     }
 
@@ -93,7 +104,7 @@ namespace vcsn {
     {
       std::stringstream ss;
       ss << w;
-      current_->setAttribute(STR2XML("weight"), STR2XML(ss.str().c_str()));
+      current_->setAttribute(transcode("weight"), transcode(ss.str()));
       weight_or_star(node);
     }
 
@@ -103,30 +114,40 @@ namespace vcsn {
     {
       std::stringstream ss;
       ss << m;
-      xercesc::DOMElement* word = doc_->createElement(STR2XML("word"));
-      word->setAttribute(STR2XML("value"), STR2XML(ss.str().c_str()));
+      xercesc::DOMElement* word = doc_->createElement(transcode("word"));
+      word->setAttribute(transcode("value"), transcode(ss.str()));
       current_->appendChild(word);
     }
 
     template<typename M_, typename W_>
     void XmlExpVisitor<M_, W_>::zero()
     {
-      xercesc::DOMElement* zero = doc_->createElement(STR2XML("zeroVal"));
+      xercesc::DOMElement* zero = doc_->createElement(transcode("zeroVal"));
       current_->appendChild(zero);
     }
 
     template<typename M_, typename W_>
     void XmlExpVisitor<M_, W_>::one()
     {
-      xercesc::DOMElement* identity = doc_->createElement(STR2XML("identityVal"));
+      xercesc::DOMElement* identity = doc_->createElement(transcode("identityVal"));
       current_->appendChild(identity);
     }
 
     template<typename M_, typename W_>
-    xercesc::DOMElement* XmlExpVisitor<M_, W_>::get() const
+    xercesc::DOMElement*
+    XmlExpVisitor<M_, W_>::get() const
     {
       return label_;
     }
+
+    template<typename M_, typename W_>
+    xercesc::DOMDocument*
+    XmlExpVisitor<M_, W_>::set(xercesc::DOMDocument* v)
+    {
+      this->doc_ = v;
+      return this->doc_;
+    }
+
 
   } // End of namespace rat.
 

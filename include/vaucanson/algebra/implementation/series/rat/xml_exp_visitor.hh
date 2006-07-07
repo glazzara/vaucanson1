@@ -49,18 +49,8 @@ namespace vcsn {
     template<typename M_, typename W_>
     class XmlExpVisitor : public ConstNodeVisitor<M_, W_>
     {
-    protected:
-      void
-      sum_or_product(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
-      void
-      weight_or_star(const Node<M_, W_>* node);
-
     public:
-      XmlExpVisitor(xercesc::DOMDocument* doc, char* node_name) :
-	doc_(doc),
-	label_(doc_->createElement(STR2XML(node_name))),
-	current_(label_)
-      {}
+      XmlExpVisitor(xercesc::DOMDocument* doc, char* node_name);
 
       virtual void
       product(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
@@ -86,11 +76,11 @@ namespace vcsn {
 
       xercesc::DOMElement* get() const;
 
-      xercesc::DOMDocument* set(xercesc::DOMDocument* v)
-      {
-	this->doc_ = v;
-	return this->doc_;
-      }
+      xercesc::DOMDocument* set(xercesc::DOMDocument* v);
+
+    protected:
+      void sum_or_product(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
+      void weight_or_star(const Node<M_, W_>* node);
 
     protected:
       xercesc::DOMDocument*	doc_;

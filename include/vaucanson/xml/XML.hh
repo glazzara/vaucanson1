@@ -43,6 +43,7 @@ namespace vcsn
 {
   namespace xml
   {
+
     struct XML
     {
       XML(const std::string& name = "", bool use_label_node = false) :
