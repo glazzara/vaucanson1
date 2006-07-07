@@ -19,3 +19,7 @@ AM_CPPFLAGS = \
 -I$(top_srcdir)/include
 
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
+
+## The directory where we store automata.
+automatadir = $(pkgdatadir)/automata
+b_automatadir = $(automatadir)/b

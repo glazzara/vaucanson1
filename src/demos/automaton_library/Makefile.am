@@ -13,30 +13,52 @@
 
 include ../demo.mk
 
-GENERATORS = a1 b1 c1
+GENERATORS = a1 b1 c1 divkbaseb ladybird double_ring
 
-XML_SAMPLES = $(srcdir)/a1.xml $(srcdir)/b1.xml $(srcdir)/c1.xml
+dist_b_automata_DATA =				\
+  $(srcdir)/a1.xml				\
+  $(srcdir)/b1.xml				\
+  $(srcdir)/c1.xml				\
+  $(srcdir)/div3base2.xml			\
+  $(srcdir)/ladybird-6.xml			\
+  $(srcdir)/double-3-1.xml
+
 EXTRA_DIST = $(XML_SAMPLES) dumper.hcc
-MAINTAINERCLEANFILES = $(XML_SAMPLES)
+MAINTAINERCLEANFILES = $(dist_b_automata_DATA)
 
 a1_SOURCES = a1.cc
-b1_SOURCES = b1.cc
-c1_SOURCES = c1.cc
 
 $(srcdir)/a1.xml: a1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) a1$(EXEEXT)
-	./a1$(EXEEXT) > $@
+	./a1$(EXEEXT) xml >$@.tmp
+	mv $@.tmp $@
 
+b1_SOURCES = b1.cc
 $(srcdir)/b1.xml: b1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) b1$(EXEEXT)
-	./b1$(EXEEXT) > $@
+	./b1$(EXEEXT) xml >$@.tmp
+	mv $@.tmp $@
 
+c1_SOURCES = c1.cc
 $(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT)
-	./c1$(EXEEXT) > $@
+	./c1$(EXEEXT) xml >$@.tmp
+	mv $@.tmp $@
 
-
-TESTERS    = divkbaseb double_ring ladybird
 divkbaseb_SOURCES = divkbaseb.cc
-double_ring_SOURCES = double_ring.cc
+$(srcdir)/div3base2.xml: divkbaseb.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) divkbaseb$(EXEEXT)
+	./divkbaseb$(EXEEXT) 3 2 xml >$@.tmp
+	mv $@.tmp $@
+
 ladybird_SOURCES = ladybird.cc
+$(srcdir)/ladybird-6.xml: ladybird.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) ladybird$(EXEEXT)
+	./ladybird$(EXEEXT) 6 xml >$@.tmp
+	mv $@.tmp $@
+
+double_ring_SOURCES = double_ring.cc
+$(srcdir)/double-3-1.xml: double_ring.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) double_ring$(EXEEXT)
+	./double_ring$(EXEEXT) 3 1 xml >$@.tmp
+	mv $@.tmp $@

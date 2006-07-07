@@ -1,5 +1,30 @@
 2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	Install automaton library.
+
+	* src/vaucanson.mk (automatadir, b_automatadir): New.
+	* src/demos/automaton_library/Makefile.am: Use it.
+
+	* src/demos/automaton_library/dump.hcc: Complete.
+	(string_to_int): New.
+	* src/demos/automaton_library/double_ring.cc,
+	* src/demos/automaton_library/divkbaseb.cc,
+	* src/demos/automaton_library/ladybird.cc: Update to the new calling
+	convention.
+	Simplify.
+
+	For some reason, these are *wrong* (the type is undefined), but it
+	seems to be a problem on my machine.  Please someone, check in
+	the real values.
+	* src/demos/automaton_library/a1.xml,
+	* src/demos/automaton_library/b1.xml,
+	* src/demos/automaton_library/c1.xml: Update to incorrect values.
+	* src/demos/automaton_library/div3base2.xml: New.
+	* src/demos/automaton_library/double-3-1.xml: New.
+	* src/demos/automaton_library/ladybird-6.xml: New.
+
+2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	Comment changes.
 
 	* include/vaucanson/algebra/concept/series_base.hh: Complete comments.

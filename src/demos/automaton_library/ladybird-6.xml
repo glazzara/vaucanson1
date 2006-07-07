@@ -1,0 +1,45 @@
+<automaton name="ladybird 6" xmlns="http://vaucanson.lrde.epita.fr">
+  <labelType>
+    <monoid generators="letters" type="undefined">
+      <generator value="a"/>
+      <generator value="b"/>
+      <generator value="c"/>
+    </monoid>
+    <semiring operations="numerical" set="undefined"/>
+  </labelType>
+  <content>
+    <states>
+      <state name="s0"/>
+      <state name="s1"/>
+      <state name="s2"/>
+      <state name="s3"/>
+      <state name="s4"/>
+      <state name="s5"/>
+    </states>
+    <transitions>
+      <transition src="s0" dst="s1" label="a"/>
+      <transition src="s1" dst="s1" label="b"/>
+      <transition src="s1" dst="s1" label="c"/>
+      <transition src="s1" dst="s0" label="c"/>
+      <transition src="s1" dst="s2" label="a"/>
+      <transition src="s2" dst="s2" label="b"/>
+      <transition src="s2" dst="s2" label="c"/>
+      <transition src="s2" dst="s0" label="c"/>
+      <transition src="s2" dst="s3" label="a"/>
+      <transition src="s3" dst="s3" label="b"/>
+      <transition src="s3" dst="s3" label="c"/>
+      <transition src="s3" dst="s0" label="c"/>
+      <transition src="s3" dst="s4" label="a"/>
+      <transition src="s4" dst="s4" label="b"/>
+      <transition src="s4" dst="s4" label="c"/>
+      <transition src="s4" dst="s0" label="c"/>
+      <transition src="s4" dst="s5" label="a"/>
+      <transition src="s5" dst="s5" label="b"/>
+      <transition src="s5" dst="s5" label="c"/>
+      <transition src="s5" dst="s0" label="c"/>
+      <transition src="s5" dst="s0" label="a"/>
+      <initial state="s0"/>
+      <final state="s0"/>
+    </transitions>
+  </content>
+</automaton>

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,22 +29,19 @@ int main(int argc, char** argv)
     return 1;
   }
 
-  unsigned n;
-  {
-    std::istringstream is (argv[1]);
-    is >> n;
-  }
-
   std::string nstates (argv[1]);
+  unsigned n = string_to_int (nstates);
 
-  alphabet_t	alpha;
+  // Alphabet.
+  alphabet_t alpha;
   alpha.insert('a');
   alpha.insert('b');
   alpha.insert('c');
 
-  automaton_t an = make_automaton(alpha);
+  // Automaton.
+  automaton_t an = make_automaton (alpha);
 
-  vcsn::hstate_t p = an.add_state();
+  vcsn::hstate_t p = an.add_state ();
   vcsn::hstate_t x = p;
   for(unsigned i = 1; i < n; ++i)
   {
@@ -56,11 +53,7 @@ int main(int argc, char** argv)
   an.add_letter_transition(x, p, 'a');
   an.set_initial(p); an.set_final(p);
 
-  dumper d(argc, argv, 2);
-  std::string name = "ladybird" + nstates + "." + d.get_fmt();
-  std::ofstream file(name.c_str());
-  d(file, an, "ladybird");
-
-  std::cout << "File " << name << " has been created." << std::endl;
+  // Dump.
+  std::string name = "ladybird " + nstates;
+  dumper (argc, argv, 2)(std::cout, an, name);
 }
-

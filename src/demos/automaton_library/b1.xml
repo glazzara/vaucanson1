@@ -1,10 +1,10 @@
 <automaton name="b1" xmlns="http://vaucanson.lrde.epita.fr">
   <labelType>
-    <monoid generators="letters" type="free">
+    <monoid generators="letters" type="undefined">
       <generator value="a"/>
       <generator value="b"/>
     </monoid>
-    <semiring operations="numerical" set="B"/>
+    <semiring operations="numerical" set="undefined"/>
   </labelType>
   <content>
     <states>

@@ -1,4 +1,4 @@
-<automaton name="a1" xmlns="http://vaucanson.lrde.epita.fr">
+<automaton name="double_ring 3" xmlns="http://vaucanson.lrde.epita.fr">
   <labelType>
     <monoid generators="letters" type="undefined">
       <generator value="a"/>
@@ -13,14 +13,14 @@
       <state name="s2"/>
     </states>
     <transitions>
-      <transition src="s0" dst="s0" label="a"/>
-      <transition src="s0" dst="s0" label="b"/>
       <transition src="s0" dst="s1" label="a"/>
-      <transition src="s1" dst="s2" label="b"/>
-      <transition src="s2" dst="s2" label="a"/>
-      <transition src="s2" dst="s2" label="b"/>
+      <transition src="s1" dst="s0" label="b"/>
+      <transition src="s1" dst="s2" label="a"/>
+      <transition src="s2" dst="s1" label="b"/>
+      <transition src="s2" dst="s0" label="a"/>
+      <transition src="s0" dst="s2" label="b"/>
       <initial state="s0"/>
-      <final state="s2"/>
+      <final state="s1"/>
     </transitions>
   </content>
 </automaton>

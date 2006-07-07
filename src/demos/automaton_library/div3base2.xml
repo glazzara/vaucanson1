@@ -1,0 +1,26 @@
+<automaton name="div3base2" xmlns="http://vaucanson.lrde.epita.fr">
+  <labelType>
+    <monoid generators="letters" type="undefined">
+      <generator value="0"/>
+      <generator value="1"/>
+    </monoid>
+    <semiring operations="numerical" set="undefined"/>
+  </labelType>
+  <content>
+    <states>
+      <state name="s0"/>
+      <state name="s1"/>
+      <state name="s2"/>
+    </states>
+    <transitions>
+      <transition src="s0" dst="s0" label="\0"/>
+      <transition src="s0" dst="s1" label="\1"/>
+      <transition src="s1" dst="s2" label="\0"/>
+      <transition src="s1" dst="s0" label="\1"/>
+      <transition src="s2" dst="s1" label="\0"/>
+      <transition src="s2" dst="s2" label="\1"/>
+      <initial state="s0"/>
+      <final state="s0"/>
+    </transitions>
+  </content>
+</automaton>
