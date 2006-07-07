@@ -1,5 +1,10 @@
 2006-07-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/evaluation.hxx: Use `trim_here', avoid
+	the use of temp variables.
+
+2006-07-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/xml/tools.hxx: Add a missing '\' in CPP use.
 
 2006-07-07  Akim Demaille  <akim@lrde.epita.fr>

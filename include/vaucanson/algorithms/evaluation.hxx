@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,12 +43,7 @@ namespace vcsn {
 		const Trans_t& t,
 		Ret_t& ret)
   {
-    Trans_t tt(t.structure());
-    tt = extension(a, t);
-    Trans_t pro(t.structure());
-    pro = product(tt, t);
-    pro = trim(pro);
-    output_projection(pro, ret);
+    output_projection(trim(product(t, extension(a, t))), ret);
   }
 
   template<typename SA, typename TA, typename ST,
@@ -355,7 +350,7 @@ namespace vcsn {
     Trans_t tt = t;
     tt.clear_initial();
     tt.set_initial(p);
-    tt=trim(tt);
+    trim_here(tt);
     partial_1(a, tt, state_exp_pair_set);
   }
 
