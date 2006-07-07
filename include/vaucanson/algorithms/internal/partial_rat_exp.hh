@@ -179,7 +179,7 @@ namespace vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/internal/partial_rat_exp.hxx>
+# include <vaucanson/algorithms/internal/partial_rat_exp.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

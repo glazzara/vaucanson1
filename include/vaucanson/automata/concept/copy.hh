@@ -33,7 +33,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/concept/copy.hxx>
+# include <vaucanson/automata/concept/copy.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

@@ -362,7 +362,7 @@ namespace std {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/series/polynoms.hxx>
+# include <vaucanson/algebra/implementation/series/polynoms.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

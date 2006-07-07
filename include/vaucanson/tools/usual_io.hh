@@ -44,7 +44,7 @@ namespace vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/tools/usual_io.hxx>
+# include <vaucanson/tools/usual_io.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

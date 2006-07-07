@@ -37,7 +37,7 @@ namespace vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/tools/simple_format.hxx>
+# include <vaucanson/tools/simple_format.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

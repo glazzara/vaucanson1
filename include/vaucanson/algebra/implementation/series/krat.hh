@@ -274,7 +274,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/series/krat.hxx>
+# include <vaucanson/algebra/implementation/series/krat.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

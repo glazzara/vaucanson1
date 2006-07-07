@@ -56,7 +56,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/tools/dot_format.hxx>
+# include <vaucanson/tools/dot_format.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

@@ -240,7 +240,7 @@ namespace utility {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/misc/support.hxx>
+# include <vaucanson/misc/support.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

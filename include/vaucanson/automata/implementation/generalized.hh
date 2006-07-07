@@ -67,7 +67,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/automata/implementation/generalized.hxx>
+# include <vaucanson/automata/implementation/generalized.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

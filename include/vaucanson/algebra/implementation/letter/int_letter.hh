@@ -39,7 +39,7 @@ namespace std {
 }
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/letter/int_letter.hxx>
+# include <vaucanson/algebra/implementation/letter/int_letter.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_INT_LETTER_HH

@@ -42,7 +42,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx>
+# include <vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

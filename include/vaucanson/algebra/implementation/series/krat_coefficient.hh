@@ -34,7 +34,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/series/krat_coefficient.hxx>
+# include <vaucanson/algebra/implementation/series/krat_coefficient.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

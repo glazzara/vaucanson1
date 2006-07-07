@@ -33,7 +33,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/series/transpose.hxx>
+# include <vaucanson/algebra/implementation/series/transpose.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

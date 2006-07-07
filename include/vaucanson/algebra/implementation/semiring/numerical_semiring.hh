@@ -167,7 +167,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hxx>
+# include <vaucanson/algebra/implementation/semiring/numerical_semiring.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

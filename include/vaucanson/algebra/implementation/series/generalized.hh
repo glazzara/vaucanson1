@@ -37,7 +37,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/series/generalized.hxx>
+# include <vaucanson/algebra/implementation/series/generalized.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

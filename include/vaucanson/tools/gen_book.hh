@@ -30,7 +30,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/tools/gen_book.hxx>
+# include <vaucanson/tools/gen_book.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

@@ -99,7 +99,7 @@ namespace vcsn
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/tools/container_ops.hxx>
+# include <vaucanson/tools/container_ops.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 

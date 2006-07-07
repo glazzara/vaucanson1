@@ -1,3 +1,32 @@
+2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	Normalize cpp directives.
+
+	White space changes only.
+	* include/vaucanson/misc/support.hh,
+	* include/vaucanson/algebra/implementation/letter/int_letter.hh,
+	* include/vaucanson/algebra/implementation/free_monoid/tools.hh,
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/generalized.hh,
+	* include/vaucanson/algebra/implementation/series/krat_coefficient.hh,
+	* include/vaucanson/algebra/implementation/series/krat.hh,
+	* include/vaucanson/algebra/implementation/series/krat_conversion.hh,
+	* include/vaucanson/algebra/implementation/series/transpose.hh,
+	* include/vaucanson/algebra/implementation/series/polynoms.hh,
+	* include/vaucanson/algebra/implementation/semiring/numerical_semiring.hh,
+	* include/vaucanson/tools/gen_book.hh,
+	* include/vaucanson/tools/simple_format.hh,
+	* include/vaucanson/tools/usual_io.hh,
+	* include/vaucanson/tools/dot_format.hh,
+	* include/vaucanson/tools/container_ops.hh,
+	* include/vaucanson/algorithms/internal/build_pattern.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh,
+	* include/vaucanson/algorithms/internal/partial_rat_exp.hh,
+	* include/vaucanson/automata/implementation/generalized.hh,
+	* include/vaucanson/automata/concept/tags.hh,
+	* include/vaucanson/automata/concept/copy.hh,
+	* include/vaucanson/misc/bitset.hh: Remove spaces before "#".
+
 2006-07-06  Akim Demaille  <akim@lrde.epita.fr>
 
 	trim_here.

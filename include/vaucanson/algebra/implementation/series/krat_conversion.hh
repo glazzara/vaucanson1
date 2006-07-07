@@ -89,7 +89,7 @@ namespace vcsn {
 
 
 #ifndef VCSN_USE_INTERFACE_ONLY
-    # include <vaucanson/algebra/implementation/series/krat_conversion.hxx>
+# include <vaucanson/algebra/implementation/series/krat_conversion.hxx>
 #endif // VCSN_USE_INTERFACE_ONLY
 
 
