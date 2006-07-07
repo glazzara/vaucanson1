@@ -1,3 +1,13 @@
+2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	XSD_CPPFLAGS.
+
+	* src/vaucanson.mk (XSD_CPPFLAGS): New.
+	* src/tests/xml/Makefile.am,
+	* src/demos/algorithms/Makefile.am,
+	* src/demos/function_library/Makefile.am,
+	* src/demos/transducers/Makefile.am: Use it.
+
 2006-07-07  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* src/demos/automaton_library/Makefile.am: Add Z automata case.

@@ -10,14 +10,12 @@
 # `COPYING' file in the root directory.
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
-#
-# $Id: Makefile.am 486 2004-03-31 22:30:33Z yann $
 
 include ../demo.mk
 
 EXTRA_DIST = equivalent_functions.hh
 
-AM_CPPFLAGS += -DVCSN_XSD_PATH="\"$(top_srcdir)/data/vaucanson.xsd\""
+AM_CPPFLAGS += $(XSD_CPPFLAGS)
 
 TESTERS = universal b_are_equivalent z_are_equivalent	\
 	b_exp_equiv z_exp_equiv b_contains_factor z_contains_factor classics
