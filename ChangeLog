@@ -1,5 +1,11 @@
 2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	Simple factoring.
+
+	* include/vaucanson/xml/tools.hxx (print_transition): Factor.
+
+2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	transcode.
 
 	* include/vaucanson/tools/usual_macros.hh (STR2XML): Remove.

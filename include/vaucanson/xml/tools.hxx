@@ -820,24 +820,17 @@ namespace vcsn
 			    std::string& spacing)
       {
 	os << spacing << "<" << xml2str(n->getNodeName());
-	if (n->hasAttribute(transcode("src")))
-	  os << " src=\""
-	     << xml2str(n->getAttribute(transcode("src"))) << "\"";
-	if (n->hasAttribute(transcode("dst")))
-	  os << " dst=\""
-	     << xml2str(n->getAttribute(transcode("dst"))) << "\"";
-	if (n->hasAttribute(transcode("label")))
-	  os << " label=\""
-	     << xml2str(n->getAttribute(transcode("label"))) << "\"";
-	if (n->hasAttribute(transcode("weight")))
-	  os << " weight=\""
-	     << xml2str(n->getAttribute(transcode("weight"))) << "\"";
-	if (n->hasAttribute(transcode("in")))
-	  os << " in=\""
-	     << xml2str(n->getAttribute(transcode("in"))) << "\"";
-	if (n->hasAttribute(transcode("out")))
-	  os << " out=\""
-	     << xml2str(n->getAttribute(transcode("out"))) << "\"";
+#define VCSN_TRANS_OUTPUT(What)						\
+	if (n->hasAttribute(transcode(What)))				\
+	  os << " " What "=\""
+	     << xml2str(n->getAttribute(transcode(What))) << "\""
+	VCSN_TRANS_OUTPUT("src");
+	VCSN_TRANS_OUTPUT("dst");
+	VCSN_TRANS_OUTPUT("label");
+	VCSN_TRANS_OUTPUT("weight");
+	VCSN_TRANS_OUTPUT("in");
+	VCSN_TRANS_OUTPUT("out");
+#undef VCSN_TRANS_OUTPUT
       }
 
 
