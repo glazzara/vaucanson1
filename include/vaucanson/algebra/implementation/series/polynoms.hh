@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -30,8 +30,8 @@ namespace vcsn {
   namespace algebra  {
 
     /*----------------.
-      | polynom<Tm, Tw> |
-      `----------------*/
+    | polynom<Tm, Tw> |
+    `----------------*/
 
     template<typename Tm, typename Tw>
     class polynom
@@ -164,9 +164,9 @@ namespace vcsn {
 				  const algebra::polynom<Tm, Tw>& a,
 				  const algebra::polynom<Tm, Tw>& b);
 
-  /*-----------------.
-    | cauchy's product |
-    `-----------------*/
+  /*-------------------.
+  | Cauchy's product.  |
+  `-------------------*/
   template<typename W, typename M, typename Tm, typename Tw>
   algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
 				  const algebra::polynom<Tm, Tw>& a,
@@ -177,9 +177,9 @@ namespace vcsn {
 		 algebra::polynom<Tm, Tw>& dst,
 		 const algebra::polynom<Tm, Tw>& arg);
 
-  /*---------------------.
-    | foreign constructors |
-    `---------------------*/
+  /*-----------------------.
+  | foreign constructors.  |
+  `-----------------------*/
 
   template <typename Tm, typename Tw, typename W, typename M>
   algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
@@ -210,9 +210,9 @@ namespace vcsn {
 		 algebra::polynom<Tm, Tw>& dst,
 		 const oTw& src);
 
-  /*--------------------------------------.
-    | foreign addition with monoid elements |
-    `--------------------------------------*/
+  /*----------------------------------------.
+  | foreign addition with monoid elements.  |
+  `----------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   void op_in_add(const algebra::Series<W, M>& s,
@@ -239,9 +239,9 @@ namespace vcsn {
 				  const oTm& a,
 				  const algebra::polynom<Tm, Tw>& b);
 
-  /*---------------------------------------.
-    | foreign addition with semiring elements |
-    `---------------------------------------*/
+  /*------------------------------------------.
+  | Foreign addition with semiring elements.  |
+  `------------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_add(const algebra::Series<W, M>& s,
@@ -267,9 +267,9 @@ namespace vcsn {
 				  const oTw& a,
 				  const algebra::polynom<Tm, Tw>& b);
 
-  /*-------------------------------------------.
-    | foreign multiplication by semiring elements |
-    `-------------------------------------------*/
+  /*----------------------------------------------.
+  | Foreign multiplication by semiring elements.  |
+  `----------------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_mul(const algebra::Series<W, M>& s,
@@ -296,14 +296,14 @@ namespace vcsn {
 				  const algebra::polynom<Tm, Tw>& b);
 
   /*----------.
-    | transpose |
-    `----------*/
+  | Transpose. |
+  `----------*/
   template <typename W, typename M, typename Tm, typename Tw>
   void  op_in_transpose(const algebra::Series<W, M>& s, algebra::polynom<Tm, Tw>& t);
 
   /*-------------.
-    | input-output |
-    `-------------*/
+  | input-output. |
+  `-------------*/
 
   template<typename W, typename M, typename St, typename Tm, typename Tw>
   St& op_rout(const algebra::Series<W, M>& s, St& st, const algebra::polynom<Tm, Tw>& p);
@@ -319,9 +319,9 @@ namespace vcsn {
     static const bool dynamic_value = true;
   };
 
-  /*------------------------------.
-    | design_pattern series operations |
-    `------------------------------*/
+  /*---------------------------------.
+  | design_pattern series operations |
+  `---------------------------------*/
 
   template <class W, class M, class Tm, class Tw>
   Tm op_choose_from_supp(const algebra::Series<W, M>& s,

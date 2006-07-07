@@ -30,8 +30,8 @@ namespace vcsn {
   namespace algebra {
 
     /*----------------.
-      | polynom<Tm, Tw> |
-      `----------------*/
+    | polynom<Tm, Tw> |
+    `----------------*/
 
     template<typename Tm, typename Tw>
     template<typename M, typename W>
@@ -264,8 +264,8 @@ namespace vcsn {
 
 
   /*-------------------.
-    | External functions |
-    `-------------------*/
+  | External functions |
+  `-------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw>
   bool op_contains(const algebra::Series<W, M>& s, const algebra::polynom<Tm, Tw>& m)
@@ -373,8 +373,8 @@ namespace vcsn {
   }
 
   /*-----------------.
-    | cauchy's product |
-    `-----------------*/
+  | cauchy's product |
+  `-----------------*/
   template<typename W, typename M, typename Tm, typename Tw>
   algebra::polynom<Tm, Tw> op_mul(const algebra::Series<W, M>& s,
 				  const algebra::polynom<Tm, Tw>& a,
@@ -406,8 +406,8 @@ namespace vcsn {
   }
 
   /*---------------------.
-    | foreign constructors |
-    `---------------------*/
+  | foreign constructors |
+  `---------------------*/
 
   template <typename Tm, typename Tw, typename W, typename M>
   algebra::polynom<Tm, Tw> op_convert(SELECTOR2(algebra::Series<W, M>),
@@ -471,8 +471,8 @@ namespace vcsn {
   }
 
   /*--------------------------------------.
-    | foreign addition with monoid elements |
-    `--------------------------------------*/
+  | foreign addition with monoid elements |
+  `--------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
   void op_in_add(const algebra::Series<W, M>& s,
@@ -508,9 +508,9 @@ namespace vcsn {
     return ret;
   }
 
-  /*---------------------------------------.
-    | foreign addition with semiring elements |
-    `---------------------------------------*/
+  /*----------------------------------------.
+  | foreign addition with semiring elements |
+  `----------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_add(const algebra::Series<W, M>& s,
@@ -547,9 +547,9 @@ namespace vcsn {
     return ret;
   }
 
-  /*-------------------------------------------.
-    | foreign multiplication by semiring elements |
-    `-------------------------------------------*/
+  /*--------------------------------------------.
+  | foreign multiplication by semiring elements |
+  `--------------------------------------------*/
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTw>
   void op_in_mul(const algebra::Series<W, M>& s,
@@ -645,12 +645,12 @@ namespace vcsn {
   }
 
   /*---------------.
-    | specialization |
-    `---------------*/
+  | specialization |
+  `---------------*/
 
-  /*------------------------------.
-    | design_pattern series operations |
-    `------------------------------*/
+  /*---------------------------------.
+  | design_pattern series operations |
+  `---------------------------------*/
 
 
   template<typename W, typename M, typename Tm, typename Tw, typename oTm>
@@ -685,11 +685,10 @@ namespace vcsn {
 	if (i != p.end())
 	  p.erase(i);
       }
+    else if (i == p.end())
+      p.insert(new_m, new_w);
     else
-      if (i == p.end())
-	p.insert(new_m, new_w);
-      else
-	i->second = new_w;
+      i->second = new_w;
   }
 
 
@@ -727,8 +726,8 @@ namespace vcsn {
   }
 
   /*----------.
-    | transpose |
-    `----------*/
+  | transpose |
+  `----------*/
   template <typename W, typename M, typename Tm, typename Tw>
   void  op_in_transpose(const algebra::Series<W, M>& s,
 			algebra::polynom<Tm, Tw>& t)

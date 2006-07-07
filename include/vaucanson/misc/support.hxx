@@ -23,6 +23,11 @@
 
 namespace utility {
 
+
+  /*-------------------*
+   | SupportIterator.  |
+   *-------------------*/
+
   template <class C>
   SupportIterator<C>::SupportIterator(map_iterator mp):
     i(mp)
@@ -64,6 +69,13 @@ namespace utility {
     return !(*this != o);
   }
 
+
+
+  /*-----------*
+   | Support.  |
+   *-----------*/
+
+
   /// support<map<U, T> > is a const adapter of std::map to container.
   template <class U, class T>
   Support<std::map<U, T> >::Support(const Support& s):
@@ -85,6 +97,13 @@ namespace utility {
   }
 
   template <class U, class T>
+  typename Support<std::map<U, T> >::iterator
+  Support<std::map<U, T> >::find(const U& k) const
+  {
+    return m_.find(k);
+  }
+
+  template <class U, class T>
   bool
   Support<std::map<U, T> >::empty() const
   {
@@ -92,14 +111,14 @@ namespace utility {
   }
 
   template <class U, class T>
-  SupportIterator<std::map<U, T> >
+  typename Support<std::map<U, T> >::iterator
   Support<std::map<U, T> >::begin() const
   {
     return iterator(m_.begin());
   }
 
   template <class U, class T>
-  SupportIterator<std::map<U, T> >
+  typename Support<std::map<U, T> >::iterator
   Support<std::map<U, T> >::end() const
   {
     return iterator(m_.end());
@@ -112,7 +131,11 @@ namespace utility {
     return *max_element(begin(), end());
   }
 
-  /// SparseIterator
+
+
+  /*----------------*
+   | SparseIterator |
+   *----------------*/
 
   template <class Integer, class ExcludedContainer>
   SparseIterator<Integer, ExcludedContainer>::
@@ -199,6 +222,14 @@ namespace utility {
     excluded_ = i.excluded_;
     return *this;
   }
+
+
+
+
+  /*------------------*
+   | SparseInterval.  |
+   *------------------*/
+
 
   /// SparseInterval is a const adapter of a 3-uple :
   /// (from, begin, excluded).

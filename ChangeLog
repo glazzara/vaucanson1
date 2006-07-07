@@ -1,5 +1,15 @@
 2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	Support::find.
+
+	* include/vaucanson/misc/support.hxx,
+	* include/vaucanson/misc/support.hh (Support::find): New.
+	* include/vaucanson/algebra/implementation/series/polynoms.hxx,
+	* include/vaucanson/algebra/implementation/series/polynoms.hh:
+	Formatting changes.
+
+2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	Don't define variables in hxx files.
 
 	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hh

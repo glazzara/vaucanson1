@@ -69,6 +69,8 @@ namespace utility {
   public:
     typedef SupportIterator<std::map<U, T> > iterator;
     typedef SupportIterator<std::map<U, T> > const_iterator;
+    /// The type of the values.
+    typedef typename std::map<U, T>::value_type value_type;
 
     Support(const std::map<U, T>&);
     Support(const Support&);
@@ -76,6 +78,9 @@ namespace utility {
     iterator begin() const;
     iterator end() const;
     unsigned size() const;
+
+    // Find the element associated to \a k.
+    iterator find (const U& k) const;
 
     /// Whether it's empty.
     bool empty () const;
