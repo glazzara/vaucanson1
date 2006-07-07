@@ -1,5 +1,11 @@
 2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	Comment changes.
+
+	* include/vaucanson/algebra/concept/series_base.hh: Complete comments.
+
+2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	Support::find.
 
 	* include/vaucanson/misc/support.hxx,

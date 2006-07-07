@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -142,21 +142,24 @@ namespace vcsn {
     /// returns the weight associated to a word.
     semiring_elt_t		get(const monoid_elt_t& m) const;
 
-    /// associates a semiring_elt to a word.
-    void		assoc(const monoid_elt_value_t& m,
-			      const semiring_elt_value_t& w);
+    /// Associate a semiring_elt to a word.
+    ///
+    /// Remove \a m if \a w is zero.
+    void assoc(const monoid_elt_value_t& m, const semiring_elt_value_t& w);
 
-    /// associates a weight to a word.
-    void		assoc(const monoid_elt_t& m, const semiring_elt_t& w);
+    /// Associate a weight to a word.
+    ///
+    /// Remove \a m if \a w is zero.
+    void assoc(const monoid_elt_t& m, const semiring_elt_t& w);
 
-    /// returns true if the series support is finite.
-    bool		is_finite_app() const;
+    /// Whether the series support is finite.
+    bool is_finite_app() const;
 
-    /// returns a word that is in the support of the series.
-    monoid_elt_t	choose_from_supp() const;
+    /// A random word that is in the support of the series.
+    monoid_elt_t choose_from_supp() const;
 
     /// in-place transpose transformation of the series.
-    void       	        transpose();
+    void transpose();
 
     /**
      * Returns a container which is the support of the series.
