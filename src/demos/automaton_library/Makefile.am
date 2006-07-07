@@ -13,12 +13,11 @@
 
 include ../demo.mk
 
-GENERATORS = a1 b1 c1 divkbaseb ladybird double_ring
+GENERATORS = a1 b1 divkbaseb ladybird double_ring
 
 dist_b_automata_DATA =				\
   $(srcdir)/a1.xml				\
   $(srcdir)/b1.xml				\
-  $(srcdir)/c1.xml				\
   $(srcdir)/div3base2.xml			\
   $(srcdir)/ladybird-6.xml			\
   $(srcdir)/double-3-1.xml
@@ -39,12 +38,6 @@ $(srcdir)/b1.xml: b1.cc $(top_srcdir)/configure.ac
 	./b1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
-c1_SOURCES = c1.cc
-$(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT)
-	./c1$(EXEEXT) xml >$@.tmp
-	mv $@.tmp $@
-
 divkbaseb_SOURCES = divkbaseb.cc
 $(srcdir)/div3base2.xml: divkbaseb.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) divkbaseb$(EXEEXT)
@@ -61,4 +54,18 @@ double_ring_SOURCES = double_ring.cc
 $(srcdir)/double-3-1.xml: double_ring.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) double_ring$(EXEEXT)
 	./double_ring$(EXEEXT) 3 1 xml >$@.tmp
+	mv $@.tmp $@
+
+# Z automata.
+GENERATORS += c1
+
+dist_z_automata_DATA =				\
+  $(srcdir)/c1.xml
+
+MAINTAINERCLEANFILES += $(dist_z_automata_DATA)
+
+c1_SOURCES = c1.cc
+$(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT)
+	./c1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@

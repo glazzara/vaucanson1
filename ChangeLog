@@ -1,3 +1,14 @@
+2006-07-07  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* src/demos/automaton_library/Makefile.am: Add Z automata case.
+	* src/vaucanson.mk: Add Z automata directory.
+	* src/demos/automaton_library/a1.xml,
+	* src/demos/automaton_library/b1.xml,
+	* src/demos/automaton_library/div3base2.xml,
+	* src/demos/automaton_library/c1.xml,
+	* src/demos/automaton_library/double-3-1.xml,
+	* src/demos/automaton_library/ladybird-6.xml: Correct.
+
 2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
 
 	Install automaton library.

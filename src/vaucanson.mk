@@ -23,3 +23,4 @@ AM_CXXFLAGS = $(CXXFLAGS_STRICT)
 ## The directory where we store automata.
 automatadir = $(pkgdatadir)/automata
 b_automatadir = $(automatadir)/b
+z_automatadir = $(automatadir)/z
