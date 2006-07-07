@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,11 +26,6 @@
 namespace vcsn {
 
   namespace rat {
-
-    // FIXME : adapt this code to multiplicity.
-    template <typename M_, typename W_>
-    const
-    unsigned RandomVisitor<M_, W_>::nb_star_max_default = 5;
 
     template <typename M_, typename W_>
     RandomVisitor<M_, W_>::RandomVisitor(unsigned nb_star_max) :

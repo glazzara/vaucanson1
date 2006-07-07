@@ -28,7 +28,7 @@ namespace vcsn {
     class RandomVisitor : public ConstNodeVisitor<M_, W_>
     {
     public:
-      static const unsigned nb_star_max_default /* = 5 */;
+      enum { nb_star_max_default = 5 };
 
       RandomVisitor(unsigned nb_star_max);
       RandomVisitor();

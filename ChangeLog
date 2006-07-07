@@ -1,5 +1,15 @@
 2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
 
+	Don't define variables in hxx files.
+
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hh
+	(nb_star_max_default): Define it as an enum, to avoid multiple
+	definitions.
+	* include/vaucanson/algebra/implementation/series/rat/random_visitor.hxx:
+	Adjust.
+
+2006-07-07  Akim Demaille  <akim@lrde.epita.fr>
+
 	Normalize cpp directives.
 
 	White space changes only.
