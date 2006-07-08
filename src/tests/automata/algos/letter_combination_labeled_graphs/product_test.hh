@@ -72,12 +72,10 @@ unsigned product_test(tests::Tester& tg)
       continue;
     }
     monoid_elt_t word_prod = exp_p.choose_from_supp();
-    bool	   b_eval_lhs;
-    bool	   b_eval_rhs;
+    const semiring_elt_t zero = auto_lhs.series().semiring().wzero_;
 
-    eval(auto_lhs, word_prod, b_eval_lhs);
-    eval(auto_rhs, word_prod, b_eval_rhs);
-    if ((not b_eval_lhs) or (not b_eval_rhs))
+    if (eval(auto_lhs, word_prod) == zero or
+        eval(auto_rhs, word_prod) == zero)
     {
       // Print the failing expressions.
       generalized_t g_auto_lhs = generalized(auto_lhs);

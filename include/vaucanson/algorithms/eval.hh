@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -49,18 +49,6 @@ namespace vcsn {
   template<typename A, typename T, typename W>
   typename Element<A, T>::semiring_elt_t
   eval(const Element<A, T>& a, const W& word);
-
-
-  /**
-   * Return the image of a word by an automaton.
-   *
-   * eval(a, w,  b) is  the same as  the previous  function eval(a,w),
-   * except that it stores in 'b'  if the word 'w' has been recognized
-   * by the automaton 'a'.
-   */
-  template<typename A, typename T, typename W>
-  typename Element<A, T>::semiring_elt_t
-  eval(const Element<A, T>& a, const W& word, bool& b_ret);
 
   /** @} */
 

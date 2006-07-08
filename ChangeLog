@@ -1,5 +1,14 @@
 2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/eval.hh,
+	* include/vaucanson/algorithms/eval.hxx: Use `deltaf', remove the
+	Boolean flag of `eval'.
+	* src/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh:
+	Remove the use of Boolean flag of `eval'. THIS TEST IS NOW BROKEN,
+	in particular for z_automata.
+
+2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* data/misc.el: Use `c-set-style'.
 
 2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
