@@ -457,430 +457,284 @@ namespace vcsn {
     return op_letter_of(this->structure(), this->value(), e);
   }
 
-  // output_return_type = OutputIterator
-  // output_type	= htransition_t
-  // direction	  = output
+  /*---------.
+  | Deltas.  |
+  `---------*/
 
-  /** store the output transitions of the state 'from' using 'res'. */
   template <typename Self, typename T>
-  template <typename OutputIterator>
+  template <typename OutputIterator, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::delta(OutputIterator res,
 					    hstate_t from,
-					    delta_kind::transitions k) const
+					    delta_kind::kind<Kind> k) const
   {
     op_delta(this->structure(), this->value(), res, from, k);
   }
 
-  /** store the output transitions of the state 'from' where
-   query(label(e)) = true using 'res'. */
   template <typename Self, typename T>
-  template <typename OutputIterator, typename L>
+  template <typename OutputIterator, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::delta(OutputIterator res,
 					    hstate_t from,
 					    const L& query,
-					    delta_kind::transitions k) const
+					    delta_kind::kind<Kind> k) const
   {
     op_delta(this->structure(), this->value(), res, from, query, k);
   }
 
-  /** store the output transitions of the state 'from' where
-   the label matches the letter. */
   template <typename Self, typename T>
-  template <typename OutputIterator, typename L>
+  template <typename OutputIterator, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_delta(OutputIterator res,
 						   hstate_t from,
 						   const L& letter,
-						   delta_kind::transitions k) const
+						   delta_kind::kind<Kind> k) const
   {
     op_letter_delta(this->structure(), this->value(), res, from, letter, k);
   }
 
-  /** store the output spontaneous transitions. */
   template <typename Self, typename T>
-  template <typename OutputIterator>
+  template <typename OutputIterator, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_delta(OutputIterator res,
 		      hstate_t from,
-		      delta_kind::transitions k) const
+		      delta_kind::kind<Kind> k) const
   {
     return op_spontaneous_delta(this->structure(), this->value(), res, from, k);
   }
 
-  // output_return_type = Container
-  // output_type	= htransition_t
-  // direction	  = output
+  /*----------.
+  | Deltacs.  |
+  `----------*/
 
-  /** store the output transitions of the state 'from' in the container
-   'res' */
   template <typename Self, typename T>
-  template <typename Container>
+  template <typename Container, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::deltac(Container& res, hstate_t from,
-					     delta_kind::transitions k) const
+					     delta_kind::kind<Kind> k) const
   {
     op_deltac(this->structure(), this->value(), res, from, k);
   }
 
-  /** store the output transitions of the state 'from' where
-   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
-  template <typename Container, typename L>
+  template <typename Container, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::deltac(Container& res,
 					     hstate_t from,
 					     const L& query,
-					     delta_kind::transitions k) const
+					     delta_kind::kind<Kind> k) const
   {
     op_deltac(this->structure(), this->value(), res, from, query, k);
   }
 
-  /** store the output transitions of the state 'from' where
-   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
-  template <typename Container, typename L>
+  template <typename Container, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_deltac(Container& res,
 						    hstate_t from,
 						    const L& letter,
-						    delta_kind::transitions k) const
+						    delta_kind::kind<Kind> k) const
   {
     op_letter_deltac(this->structure(), this->value(), res, from, letter, k);
   }
 
-  /** store the output spontaneous transitions. */
   template <typename Self, typename T>
-  template <typename Container>
+  template <typename Container, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_deltac(Container& res,
 		       hstate_t from,
-		       delta_kind::transitions k) const
+		       delta_kind::kind<Kind> k) const
   {
     op_spontaneous_deltac(this->structure(), this->value(), res, from, k);
   }
 
-  // output_return_type = OutputIterator
-  // output_type	= htransition_t
-  // direction	  = output
+  /*----------.
+  | Deltafs.  |
+  `----------*/
 
-  /** store the output transitions of the state 'from' using 'res'. */
   template <typename Self, typename T>
-  template <typename OutputIterator>
+  template <typename Functor, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::delta(OutputIterator res,
-					    hstate_t from,
-					    delta_kind::states k) const
+  MetaElement<AutomataBase<Self>, T>::deltaf(Functor& fun, hstate_t from,
+					     delta_kind::kind<Kind> k) const
   {
-    op_delta(this->structure(), this->value(), res, from, k);
+    op_deltaf(this->structure(), this->value(), fun, from, k);
   }
 
-  /** store the output states of the state 'from' where
-   query(label(e)) = true using 'res'. */
   template <typename Self, typename T>
-  template <typename OutputIterator, typename L>
+  template <typename Functor, typename L, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::delta(OutputIterator res,
-					    hstate_t from,
-					    const L& query,
-					    delta_kind::states k) const
-  {
-    op_delta(this->structure(), this->value(), res, from, query, k);
-  }
-
-  /** store the output states of the state 'from' where
-   the label matches the letter. */
-  template <typename Self, typename T>
-  template <typename OutputIterator, typename L>
-  void
-  MetaElement<AutomataBase<Self>, T>::letter_delta(OutputIterator res,
-						   hstate_t from,
-						   const L& letter,
-						   delta_kind::states k) const
-  {
-    op_letter_delta(this->structure(), this->value(), res, from, letter, k);
-  }
-
-  /** store the output spontaneous transitions. */
-  template <typename Self, typename T>
-  template <typename OutputIterator>
-  void
-  MetaElement<AutomataBase<Self>, T>
-  ::spontaneous_delta(OutputIterator res,
-		      hstate_t from,
-		      delta_kind::states k) const
-  {
-    return op_spontaneous_delta(this->structure(), this->value(), res, from, k);
-  }
-
-  // output_return_type = Container
-  // output_type	= htransition_t
-  // direction	  = output
-
-  /** store the output states of the state 'from' in the container
-   'res' */
-  template <typename Self, typename T>
-  template <typename Container>
-  void
-  MetaElement<AutomataBase<Self>, T>::deltac(Container& res, hstate_t from,
-					     delta_kind::states k) const
-  {
-    op_deltac(this->structure(), this->value(), res, from, k);
-  }
-
-  /** store the output states of the state 'from' where
-   query(label(e)) = true in the container 'res' */
-  template <typename Self, typename T>
-  template <typename Container, typename L>
-  void
-  MetaElement<AutomataBase<Self>, T>::deltac(Container& res,
+  MetaElement<AutomataBase<Self>, T>::deltaf(Functor& fun,
 					     hstate_t from,
 					     const L& query,
-					     delta_kind::states k) const
+					     delta_kind::kind<Kind> k) const
   {
-    op_deltac(this->structure(), this->value(), res, from, query, k);
+    op_deltaf(this->structure(), this->value(), fun, from, query, k);
   }
 
-  /** store the output states of the state 'from' where
-   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
-  template <typename Container, typename L>
+  template <typename Functor, typename L, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::letter_deltac(Container& res,
+  MetaElement<AutomataBase<Self>, T>::letter_deltaf(Functor& fun,
 						    hstate_t from,
 						    const L& letter,
-						    delta_kind::states k) const
+						    delta_kind::kind<Kind> k) const
   {
-    op_letter_deltac(this->structure(), this->value(), res, from, letter, k);
+    op_letter_deltaf(this->structure(), this->value(), fun, from, letter, k);
   }
 
-  /** store the output spontaneous transitions. */
   template <typename Self, typename T>
-  template <typename Container>
+  template <typename Functor, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>
-  ::spontaneous_deltac(Container& res,
+  ::spontaneous_deltaf(Functor& fun,
 		       hstate_t from,
-		       delta_kind::states k) const
+		       delta_kind::kind<Kind> k) const
   {
-    op_spontaneous_deltac(this->structure(), this->value(), res, from, k);
+    op_spontaneous_deltaf(this->structure(), this->value(), fun, from, k);
   }
 
+  /*-----------------.
+  | Reverse deltas.  |
+  `-----------------*/
 
-  // output_return_type = OutputIterator
-  // output_type	= htransition_t
-  // direction	  = input
-
-  /** store the output transitions of the state 'from' using 'res'. */
   template <typename Self, typename T>
-  template <typename OutputIterator>
+  template <typename OutputIterator, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
 					     hstate_t from,
-					     delta_kind::transitions k) const
+					     delta_kind::kind<Kind> k) const
   {
     op_rdelta(this->structure(), this->value(), res, from, k);
   }
 
-  /** store the output transitions of the state 'from' where
-   query(label(e)) = true using 'res'. */
   template <typename Self, typename T>
-  template <typename OutputIterator, typename L>
+  template <typename OutputIterator, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
 					     hstate_t from,
 					     const L& query,
-					     delta_kind::transitions k) const
+					     delta_kind::kind<Kind> k) const
   {
     op_rdelta(this->structure(), this->value(), res, from, query, k);
   }
 
-  /** store the output transitions of the state 'from' where
-   the label matches the letter. */
   template <typename Self, typename T>
-  template <typename OutputIterator, typename L>
+  template <typename OutputIterator, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdelta(OutputIterator res,
 						    hstate_t from,
 						    const L& letter,
-						    delta_kind::transitions k) const
+						    delta_kind::kind<Kind> k) const
   {
     op_letter_rdelta(this->structure(), this->value(), res, from, letter, k);
   }
 
-  /** store the output spontaneous transitions. */
   template <typename Self, typename T>
-  template <typename OutputIterator>
+  template <typename OutputIterator, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_rdelta(OutputIterator res,
 		       hstate_t from,
-		       delta_kind::transitions k) const
+		       delta_kind::kind<Kind> k) const
   {
     return op_spontaneous_rdelta(this->structure(), this->value(), res, from, k);
   }
 
-  // output_return_type = Container
-  // output_type	= htransition_t
-  // direction		= input
+  /*------------------.
+  | Reverse deltacs.  |
+  `------------------*/
 
-  /** store the output transitions of the state 'from' in the container
-   'res' */
   template <typename Self, typename T>
-  template <typename Container>
+  template <typename Container, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res, hstate_t from,
-					      delta_kind::transitions k) const
+					      delta_kind::kind<Kind> k) const
   {
     op_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
-  /** store the output transitions of the state 'from' where
-   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
-  template <typename Container, typename L>
+  template <typename Container, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res,
 					      hstate_t from,
 					      const L& query,
-					      delta_kind::transitions k) const
+					      delta_kind::kind<Kind> k) const
   {
     op_rdeltac(this->structure(), this->value(), res, from, query, k);
   }
 
-  /** store the output transitions of the state 'from' where
-   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
-  template <typename Container, typename L>
+  template <typename Container, typename L, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>::letter_rdeltac(Container& res,
 						     hstate_t from,
 						     const L& letter,
-						     delta_kind::transitions k) const
+						     delta_kind::kind<Kind> k) const
   {
     op_letter_rdeltac(this->structure(), this->value(), res, from, letter, k);
   }
 
-  /** store the output spontaneous transitions. */
   template <typename Self, typename T>
-  template <typename Container>
+  template <typename Container, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>
   ::spontaneous_rdeltac(Container& res,
 			hstate_t from,
-			delta_kind::transitions k) const
+			delta_kind::kind<Kind> k) const
   {
     op_spontaneous_rdeltac(this->structure(), this->value(), res, from, k);
   }
 
-  // output_return_type = OutputIterator
-  // output_type	= htransition_t
-  // direction	  = output
+  /*------------------.
+  | Reverse deltafs.  |
+  `------------------*/
 
-  /** store the output transitions of the state 'from' using 'res'. */
   template <typename Self, typename T>
-  template <typename OutputIterator>
+  template <typename Functor, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
-					     hstate_t from,
-					     delta_kind::states k) const
+  MetaElement<AutomataBase<Self>, T>::rdeltaf(Functor& fun, hstate_t from,
+					      delta_kind::kind<Kind> k) const
   {
-    op_rdelta(this->structure(), this->value(), res, from, k);
+    op_rdeltaf(this->structure(), this->value(), fun, from, k);
   }
 
-  /** store the output states of the state 'from' where
-   query(label(e)) = true using 'res'. */
   template <typename Self, typename T>
-  template <typename OutputIterator, typename L>
+  template <typename Functor, typename L, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::rdelta(OutputIterator res,
-					     hstate_t from,
-					     const L& query,
-					     delta_kind::states k) const
-  {
-    op_rdelta(this->structure(), this->value(), res, from, query, k);
-  }
-
-  /** store the output states of the state 'from' where
-   the label matches the letter. */
-  template <typename Self, typename T>
-  template <typename OutputIterator, typename L>
-  void
-  MetaElement<AutomataBase<Self>, T>::letter_rdelta(OutputIterator res,
-						    hstate_t from,
-						    const L& letter,
-						    delta_kind::states k) const
-  {
-    op_letter_rdelta(this->structure(), this->value(), res, from, letter, k);
-  }
-
-  /** store the output spontaneous transitions. */
-  template <typename Self, typename T>
-  template <typename OutputIterator>
-  void
-  MetaElement<AutomataBase<Self>, T>
-  ::spontaneous_rdelta(OutputIterator res,
-		       hstate_t from,
-		       delta_kind::states k) const
-  {
-    return op_spontaneous_rdelta(this->structure(), this->value(), res, from, k);
-  }
-
-  // output_return_type = Container
-  // output_type	= htransition_t
-  // direction	  = output
-
-  /** store the output states of the state 'from' in the container
-   'res' */
-  template <typename Self, typename T>
-  template <typename Container>
-  void
-  MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res, hstate_t from,
-					      delta_kind::states k) const
-  {
-    op_rdeltac(this->structure(), this->value(), res, from, k);
-  }
-
-  /** store the output states of the state 'from' where
-   query(label(e)) = true in the container 'res' */
-  template <typename Self, typename T>
-  template <typename Container, typename L>
-  void
-  MetaElement<AutomataBase<Self>, T>::rdeltac(Container& res,
+  MetaElement<AutomataBase<Self>, T>::rdeltaf(Functor& fun,
 					      hstate_t from,
 					      const L& query,
-					      delta_kind::states k) const
+					      delta_kind::kind<Kind> k) const
   {
-    op_rdeltac(this->structure(), this->value(), res, from, query, k);
+    op_rdeltaf(this->structure(), this->value(), fun, from, query, k);
   }
 
-  /** store the output states of the state 'from' where
-   query(label(e)) = true in the container 'res' */
   template <typename Self, typename T>
-  template <typename Container, typename L>
+  template <typename Functor, typename L, typename Kind>
   void
-  MetaElement<AutomataBase<Self>, T>::letter_rdeltac(Container& res,
+  MetaElement<AutomataBase<Self>, T>::letter_rdeltaf(Functor& fun,
 						     hstate_t from,
 						     const L& letter,
-						     delta_kind::states k) const
+						     delta_kind::kind<Kind> k) const
   {
-    op_letter_rdeltac(this->structure(), this->value(), res, from, letter, k);
+    op_letter_rdeltaf(this->structure(), this->value(), fun, from, letter, k);
   }
 
-  /** store the output spontaneous transitions. */
   template <typename Self, typename T>
-  template <typename Container>
+  template <typename Functor, typename Kind>
   void
   MetaElement<AutomataBase<Self>, T>
-  ::spontaneous_rdeltac(Container& res,
+  ::spontaneous_rdeltaf(Functor& fun,
 			hstate_t from,
-			delta_kind::states k) const
+			delta_kind::kind<Kind> k) const
   {
-    op_spontaneous_rdeltac(this->structure(), this->value(), res, from, k);
+    op_spontaneous_rdeltaf(this->structure(), this->value(), fun, from, k);
   }
+
 
 
   template<typename S, typename St, typename T>

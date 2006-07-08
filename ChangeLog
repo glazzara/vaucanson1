@@ -1,3 +1,21 @@
+2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Cleanup delta declarations, add `deltaf' for functor.
+
+	* include/vaucanson/automata/concept/delta_kind.hh: Define `kind',
+	an helper for automata kinds use. It avoids the necessary declaration
+	of `op_' wrappers for deltas.
+
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx: Declare
+	`deltaf' functions that take functor, remove dead code for
+	`letter_delta' and `rdelta'.
+	* include/vaucanson/automata/concept/automata_ops.hh,
+	* include/vaucanson/automata/concept/automata_ops.hxx,
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx: Factor delta
+	functions thanks to `kind', declare `deltaf' functions.
+
 2006-07-07  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/evaluation.hxx: Use `trim_here', avoid

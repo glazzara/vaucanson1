@@ -414,6 +414,37 @@ namespace vcsn
   }
 
   TParam
+  template <typename Functor, class Query>
+  void
+  GClass::deltaf(Functor& fun,
+		 hstate_t from,
+		 const Query& query,
+		 delta_kind::edges) const
+  {
+    assertion(has_state(from));
+    const std::set<hedge_t>& edges = states_[from].output_edges;
+    for_all_const_(std::set<hedge_t>, e, edges)
+      if (query(*e))
+	fun(*e);
+  }
+
+  TParam
+  template <class Functor, class Query>
+  void
+  GClass::deltaf(Functor& fun,
+		 hstate_t from,
+		 const Query& query,
+		 delta_kind::states) const
+  {
+    assertion(has_state(from));
+    const std::set<hedge_t>& edges = states_[from].output_edges;
+    for_all_const_(std::set<hedge_t>, e, edges)
+      if (query(*e))
+	fun(edges_[*e].to);
+  }
+
+
+  TParam
   template <class OutputIterator, class Query>
   void
   GClass::rdelta(OutputIterator res,
@@ -444,45 +475,36 @@ namespace vcsn
 	*res++ = edges_[*e].from;
   }
 
-  template <class S,
-	    class Kind,
-	    class WordValue,
-	    class WeightValue,
-	    class SeriesValue,
-	    class Letter,
-	    class Tag,
-	    class Geometry,
-	    typename  OutputIterator,
-	    typename L>
-  void op_rdelta(const AutomataBase<S>&,
-		 const GClass& v,
-		 OutputIterator res,
-		 hstate_t from,
-		 const L& query,
-		 delta_kind::states k)
+  TParam
+  template <class Functor, class Query>
+  void
+  GClass::rdeltaf(Functor& fun,
+		  hstate_t from,
+		  const Query& query,
+		  delta_kind::edges) const
   {
-    v.rdelta(res, from, query, k);
+    assertion(has_state(from));
+    const std::set<hedge_t>& edges = states_[from].input_edges;
+    for_all_const_(std::set<hedge_t>, e, edges)
+      if (query(*e))
+	fun(*e);
   }
 
-  template <class S, class WordValue, class WeightValue, class SeriesValue,
-	    class Letter, class Tag, class Geometry,
-	    typename OutputIterator, typename L>
-  void op_letter_delta(const AutomataBase<S>&,
-		       const Graph<labels_are_letters,
-		       WordValue, WeightValue,
-		       SeriesValue, Letter, Tag, Geometry>& v,
-		       OutputIterator res,
-		       hstate_t from,
-		       const L& letter,
-		       delta_kind::states)
+  TParam
+  template <class Functor, class Query>
+  void
+  GClass::rdeltaf(Functor& fun,
+		  hstate_t from,
+		  const Query& query,
+		  delta_kind::states) const
   {
-    typedef typename state_value::edges_t edges_t;
-    const edges_t& edges = v.states_[from].output_edges;
-    for_all_const_(edges_t, e, edges)
-      if (v.edges_[*e].label == letter)
-	*res++ = v.edges_[*e].to;
+    assertion(has_state(from));
+    const state_value_t::edges_t& edges =
+      states_[from].input_edges;
+    for_all_const_(std::set<hedge_t>, e, edges)
+      if (query(*e))
+	fun(edges_[*e].from);
   }
-
 
   /*----.
   | Tag |

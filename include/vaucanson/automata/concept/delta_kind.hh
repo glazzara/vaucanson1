@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,11 +19,27 @@
 
 namespace vcsn {
 
+  /// These are helpers for @c delta functions: transition or state
+  /// oriented delta are chosen according to them.
+
   namespace delta_kind {
 
-    struct transitions {};
-    struct states {};
+    /// Not for public use.
+    struct kind_transitions_ {};
+    struct kind_states_ {};
 
+    template <typename T>
+    struct kind;
+
+    template <>
+    struct kind<kind_transitions_> {};
+
+    template <>
+    struct kind<kind_states_> {};
+
+    /// Use them.
+    typedef kind<kind_transitions_> transitions;
+    typedef kind<kind_states_> states;
   } // delta_kind
 
 } // vcsn

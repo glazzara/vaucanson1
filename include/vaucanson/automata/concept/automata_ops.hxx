@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -433,405 +433,296 @@ namespace vcsn {
     return spontaneous_query<S, T>(s.self(), t);
   }
 
-  // output_return_type = OutputIterator
-  // output_type	= htransition_t
-  // direction	  = output
+    /*---------.
+    | Deltas.  |
+    `---------*/
 
   template <class S, class T,
-	    typename OutputIterator>
-  void op_delta(const AutomataBase<S>& s, const T& v,
+	    typename OutputIterator, typename Kind>
+  void op_delta(const AutomataBase<S>&, const T& v,
 		OutputIterator res,
 		hstate_t from,
-		delta_kind::transitions k)
+		delta_kind::kind<Kind> k)
   {
-    op_delta(s, v, res, from, always_true(), k);
+    v.delta(res, from, always_true(), k);
   }
 
   template <class S, class T,
-	    typename OutputIterator, typename L>
+	    typename OutputIterator, typename L, typename Kind>
   void op_delta(const AutomataBase<S>&, const T& v,
 		OutputIterator res,
 		hstate_t from,
 		const L& query,
-		delta_kind::transitions k)
+		delta_kind::kind<Kind> k)
   {
     v.delta(res, from, query, k);
   }
 
   template <class S, class T,
-	    typename OutputIterator, typename L>
+	    typename OutputIterator, typename L, typename Kind>
   void op_letter_delta(const AutomataBase<S>& s, const T& v,
 		       OutputIterator res,
 		       hstate_t from,
 		       const L& letter,
-		       delta_kind::transitions k)
+		       delta_kind::kind<Kind> k)
   {
-    op_delta(s, v, res, from, make_letter_query(s.self(), v, letter), k);
+    v.delta(res, from, make_letter_query(s.self(), v, letter), k);
   }
 
   template <class S, class T,
-	    typename OutputIterator>
+	    typename OutputIterator, typename Kind>
   void op_spontaneous_delta(const AutomataBase<S>& s,
 			    const T& v,
 			    OutputIterator res,
 			    hstate_t from,
-			    delta_kind::transitions k)
+			    delta_kind::kind<Kind> k)
   {
-    op_delta(s, v, res, from, make_spontaneous_query(s.self(), v), k);
+    v.delta (res, from, make_spontaneous_query(s.self(), v), k);
   }
 
-  // output_return_type = Container
-  // output_type	= htransition_t
-  // direction		= output
+    /*----------.
+    | Deltacs.  |
+    `----------*/
 
   template <class S, class T,
-	    typename Container>
-  void op_deltac(const AutomataBase<S>& s, const T& v,
-		 Container& res, hstate_t from, delta_kind::transitions k)
+	    typename Container, typename Kind>
+  void op_deltac(const AutomataBase<S>&, const T& v,
+		 Container& res, hstate_t from, delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
-    op_delta(s, v, i, from, k);
+    v.delta(i, from, always_true(), k);
   }
 
   template <class S, class T,
-	    typename Container, typename L>
-  void op_deltac(const AutomataBase<S>& s,
+	    typename Container, typename L, typename Kind>
+  void op_deltac(const AutomataBase<S>&,
 		 const T& v,
 		 Container& res,
 		 hstate_t from,
 		 const L& query,
-		 delta_kind::transitions k)
+		 delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
-    op_delta(s, v, i, from, query, k);
+    v.delta(i, from, query, k);
   }
 
 
   template <class S, class T,
-	    typename Container, typename L>
+	    typename Container, typename L, typename Kind>
   void op_letter_deltac(const AutomataBase<S>& s,
 			const T& v,
 			Container& res,
 			hstate_t from,
 			const L& letter,
-			delta_kind::transitions k)
+			delta_kind::kind<Kind> k)
   {
-    op_letter_delta(s, v,
-		    std::insert_iterator<Container>(res, res.begin()),
-		    from, letter, k);
+    std::insert_iterator<Container> i(res, res.begin());
+    v.delta(i, from, make_letter_query(s.self(), v, letter), k);
   }
 
-  template <class S, class T, class Container>
+  template <class S, class T, class Container, typename Kind>
   void op_spontaneous_deltac(const AutomataBase<S>& s,
 			     const T& v,
 			     Container& res,
 			     hstate_t from,
-			     delta_kind::transitions k)
+			     delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
-    op_spontaneous_delta(s, v, i, from, k);
+    v.delta (i, from, make_spontaneous_query(s.self(), v), k);
   }
 
-  // output_return_type = OutputIterator
-  // output_type	= hstate_t
-  // direction	  = output
+    /*----------.
+    | Deltafs.  |
+    `----------*/
 
   template <class S, class T,
-	    typename OutputIterator>
-  void op_delta(const AutomataBase<S>& s, const T& v,
-		OutputIterator res,
-		hstate_t from,
-		delta_kind::states k)
+	    typename Functor, typename Kind>
+  void op_deltaf(const AutomataBase<S>& s, const T& v,
+		 Functor& fun, hstate_t from, delta_kind::kind<Kind> k)
   {
-    op_delta(s, v, res, from, always_true(), k);
+    v.deltaf(fun, from, always_true(), k);
   }
 
   template <class S, class T,
-	    typename OutputIterator, typename L>
-  void op_delta(const AutomataBase<S>&, const T& v,
-		OutputIterator res,
-		hstate_t from,
-		const L& query,
-		delta_kind::states)
-  {
-    v.delta(res, from, query, delta_kind::states());
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L>
-  void op_letter_delta(const AutomataBase<S>& s, const T& v,
-		       OutputIterator res,
-		       hstate_t from,
-		       const L& letter,
-		       delta_kind::states k)
-  {
-    op_delta(s, v, res, from, make_letter_query(s.self(), v, letter), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator>
-  void op_spontaneous_delta(const AutomataBase<S>& s, const T& v,
-			    OutputIterator res,
-			    hstate_t from,
-			    delta_kind::states k)
-  {
-    op_delta(s, v, res, from, make_spontaneous_query(s.self(), v), k);
-  }
-
-  // output_return_type = Container
-  // output_type	= hstate_t
-  // direction	  = output
-
-  template <class S, class T,
-	    typename Container>
-  void op_deltac(const AutomataBase<S>& s, const T& v,
-		 Container& res, hstate_t from, delta_kind::states k)
-  {
-    std::insert_iterator<Container> i(res, res.begin());
-    op_delta(s, v, i, from, k);
-  }
-
-  template <class S, class T,
-	    typename Container, typename L>
-  void op_deltac(const AutomataBase<S>& s,
+	    typename Functor, typename L, typename Kind>
+  void op_deltaf(const AutomataBase<S>& s,
 		 const T& v,
-		 Container& res,
+		 Functor& fun,
 		 hstate_t from,
 		 const L& query,
-		 delta_kind::states k)
+		 delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    op_delta(s, v, i, from, query, k);
+    v.deltaf(fun, from, query, k);
   }
 
 
   template <class S, class T,
-	    typename Container, typename L>
-  void op_letter_deltac(const AutomataBase<S>& s,
+	    typename Functor, typename L, typename Kind>
+  void op_letter_deltaf(const AutomataBase<S>& s,
 			const T& v,
-			Container& res,
+			Functor& fun,
 			hstate_t from,
 			const L& letter,
-			delta_kind::states k)
+			delta_kind::kind<Kind> k)
   {
-    op_letter_delta(s.self(), v,
-		    std::insert_iterator<Container>(res, res.begin()),
-		    from, letter, k);
+    v.deltaf(fun, from, make_letter_query(s.self(), v, letter), k);
   }
 
-  template <class S, class T, class Container>
-  void op_spontaneous_deltac(const AutomataBase<S>& s,
+  template <class S, class T, class Functor, typename Kind>
+  void op_spontaneous_deltaf(const AutomataBase<S>& s,
 			     const T& v,
-			     Container& res,
+			     Functor& fun,
 			     hstate_t from,
-			     delta_kind::states k)
+			     delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    op_spontaneous_delta(s, v, i, from, k);
+    v.deltaf(fun, from, make_spontaneous_query(s.self(), v), k);
   }
 
-  // output_return_type = OutputIterator
-  // output_type	= htransition_t
-  // direction	  = output
+
+    /*-----------------.
+    | Reverse deltas.  |
+    `-----------------*/
 
   template <class S, class T,
-	    typename OutputIterator>
-  void op_rdelta(const AutomataBase<S>& s, const T& v,
+	    typename OutputIterator, typename Kind>
+  void op_rdelta(const AutomataBase<S>&, const T& v,
 		 OutputIterator res,
 		 hstate_t from,
-		 delta_kind::transitions k)
+		 delta_kind::kind<Kind> k)
   {
-    op_rdelta(s, v, res, from, always_true(), k);
+    v.rdelta (res, from, always_true(), k);
   }
 
   template <class S, class T,
-	    typename OutputIterator, typename L>
+	    typename OutputIterator, typename L, typename Kind>
   void op_rdelta(const AutomataBase<S>&, const T& v,
 		 OutputIterator res,
 		 hstate_t from,
 		 const L& query,
-		 delta_kind::transitions k)
+		 delta_kind::kind<Kind> k)
   {
     v.rdelta(res, from, query, k);
   }
 
   template <class S, class T,
-	    typename OutputIterator, typename L>
+	    typename OutputIterator, typename L, typename Kind>
   void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
 			OutputIterator res,
 			hstate_t from,
 			const L& letter,
-			delta_kind::transitions k)
+			delta_kind::kind<Kind> k)
   {
-    op_rdelta(s, v, res, from, make_letter_query(s.self(), v, letter), k);
+    v.rdelta(res, from, make_letter_query(s.self(), v, letter), k);
   }
 
   template <class S, class T,
-	    typename OutputIterator>
+	    typename OutputIterator, typename Kind>
   void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
 			     OutputIterator res,
 			     hstate_t from,
-			     delta_kind::transitions k)
+			     delta_kind::kind<Kind> k)
   {
-    op_rdelta(s, v, res, from, make_spontaneous_query(s.self(), v), k);
+    v.rdelta(res, from, make_spontaneous_query(s.self(), v), k);
   }
 
-  // output_return_type = Container
-  // output_type	= htransition_t
-  // direction	  = output
+    /*------------------.
+    | Reverse deltacs.  |
+    `------------------*/
 
   template <class S, class T,
-	    typename Container>
-  void op_rdeltac(const AutomataBase<S>& s, const T& v,
-		  Container& res, hstate_t from, delta_kind::transitions k)
+	    typename Container, typename Kind>
+  void op_rdeltac(const AutomataBase<S>&, const T& v,
+		  Container& res, hstate_t from, delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
-    op_rdelta(s, v, i, from, k);
+    v.rdelta(i, from, always_true(), k);
   }
 
   template <class S, class T,
-	    typename Container, typename L>
-  void op_rdeltac(const AutomataBase<S>& s,
+	    typename Container, typename L, typename Kind>
+  void op_rdeltac(const AutomataBase<S>&,
 		  const T& v,
 		  Container& res,
 		  hstate_t from,
 		  const L& query,
-		  delta_kind::transitions k)
+		  delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
-    op_rdelta(s, v, i, from, query, k);
+    v.rdelta(i, from, query, k);
   }
 
 
   template <class S, class T,
-	    typename Container, typename L>
+	    typename Container, typename L, typename Kind>
   void op_letter_rdeltac(const AutomataBase<S>& s,
 			 const T& v,
 			 Container& res,
 			 hstate_t from,
 			 const L& letter,
-			 delta_kind::transitions k)
+			 delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
-    op_letter_rdelta(s, v, i, from, letter, k);
+    v.rdelta (i, from, make_letter_query(s.self(), v, letter), k);
   }
 
-  template <class S, class T, class  Container>
+  template <class S, class T, class  Container, typename Kind>
   void op_spontaneous_rdeltac(const AutomataBase<S>& s,
 			      const T& v,
 			      Container& res,
 			      hstate_t from,
-			      delta_kind::transitions k)
+			      delta_kind::kind<Kind> k)
   {
     std::insert_iterator<Container> i(res, res.begin());
-    op_spontaneous_rdelta(s, v, i, from, k);
+    v.rdelta (i, from, make_spontaneous_query(s.self(), v), k);
   }
 
-  // output_return_type = OutputIterator
-  // output_type	= hstate_t
-  // direction	  = output
+    /*------------------.
+    | Reverse Deltafs.  |
+    `------------------*/
 
   template <class S, class T,
-	    typename OutputIterator>
-  void op_rdelta(const AutomataBase<S>&, const T& v,
-		 OutputIterator res,
-		 hstate_t from,
-		 delta_kind::states k)
+	    typename Functor, typename Kind>
+  void op_rdeltaf(const AutomataBase<S>& s, const T& v,
+		  Functor& fun, hstate_t from, delta_kind::kind<Kind> k)
   {
-    v.rdelta(res, from, always_true(), k);
+    v.rdeltaf(fun, from, always_true(), k);
   }
 
   template <class S, class T,
-	    typename OutputIterator, typename L>
-  void op_rdelta(const AutomataBase<S>& s, const T& v,
-		 OutputIterator res,
-		 hstate_t from,
-		 const L& query,
-		 delta_kind::states)
-  {
-    std::set<htransition_t> ret;
-    std::insert_iterator<std::set<htransition_t> > ret_i(ret, ret.begin());
-    op_rdelta(s, v, ret_i, from, query, delta_kind::transitions());
-    const Element<S, T> a(s.self(), v);
-    for (typename std::set<htransition_t>::const_iterator e = ret.begin();
-	 e != ret.end(); ++e)
-    {
-      *res = a.src_of(*e);
-      ++res;
-    }
-  }
-
-  template <class S, class T,
-	    typename OutputIterator, typename L>
-  void op_letter_rdelta(const AutomataBase<S>& s, const T& v,
-			OutputIterator res,
-			hstate_t from,
-			const L& letter,
-			delta_kind::states k)
-  {
-    op_rdelta(s, v, res, from, make_letter_query(s.self(), v, letter), k);
-  }
-
-  template <class S, class T,
-	    typename OutputIterator>
-  void op_spontaneous_rdelta(const AutomataBase<S>& s, const T& v,
-			     OutputIterator res,
-			     hstate_t from,
-			     delta_kind::states k)
-  {
-    op_rdelta(s, v, res, from, make_spontaneous_query(s.self(), v), k);
-  }
-
-  // output_return_type = Container
-  // output_type	= hstate_t
-  // direction	  = output
-
-  template <class S, class T,
-	    typename Container>
-  void op_rdeltac(const AutomataBase<S>& s, const T& v,
-		  Container& res, hstate_t from, delta_kind::states k)
-  {
-    std::insert_iterator<Container> i(res, res.begin());
-    op_rdelta(s, v, i, from, k);
-  }
-
-  template <class S, class T,
-	    typename Container, typename L>
-  void op_rdeltac(const AutomataBase<S>& s,
+	    typename Functor, typename L, typename Kind>
+  void op_rdeltaf(const AutomataBase<S>& s,
 		  const T& v,
-		  Container& res,
+		  Functor& fun,
 		  hstate_t from,
 		  const L& query,
-		  delta_kind::states k)
+		  delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    op_rdelta(s, v, i, from, query, k);
+    v.rdeltaf(fun, from, query, k);
   }
 
 
   template <class S, class T,
-	    typename Container, typename L>
-  void op_letter_rdeltac(const AutomataBase<S>& s,
+	    typename Functor, typename L, typename Kind>
+  void op_letter_rdeltaf(const AutomataBase<S>& s,
 			 const T& v,
-			 Container& res,
+			 Functor& fun,
 			 hstate_t from,
 			 const L& letter,
-			 delta_kind::states k)
+			 delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    op_letter_rdelta(s, v, i, from, letter, k);
+    v.rdeltaf(fun, from, make_letter_query(s.self(), v, letter), k);
   }
 
-  template <class S, class T, class Container>
-  void op_spontaneous_rdeltac(const AutomataBase<S>& s,
+  template <class S, class T, class Functor, typename Kind>
+  void op_spontaneous_rdeltaf(const AutomataBase<S>& s,
 			      const T& v,
-			      Container& res,
+			      Functor& fun,
 			      hstate_t from,
-			      delta_kind::states k)
+			      delta_kind::kind<Kind> k)
   {
-    std::insert_iterator<Container> i(res, res.begin());
-    op_spontaneous_rdelta(s, v, i, from, k);
+    v.rdeltaf(fun, from, make_spontaneous_query(s.self(), v), k);
   }
+
 
 } // vcsn
 

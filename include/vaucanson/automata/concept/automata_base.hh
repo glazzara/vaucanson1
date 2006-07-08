@@ -342,258 +342,204 @@ namespace vcsn {
        *! raised.) */
       letter_t letter_of(htransition_t e) const;
 
-      // output_return_type = OutputIterator
-      // output_type	    = htransition_t
-      // direction	  = output
+      /*---------.
+      | Deltas.	 |
+      `---------*/
 
-      /** store the output transitions of the state 'from' using 'res'. */
-      template <typename OutputIterator>
+      /** Store the output transitions/states of the state @a from
+       *  using @a res.	 */
+      template <typename OutputIterator, typename Kind>
       void delta(OutputIterator res,
 		 hstate_t from,
-		 delta_kind::transitions k) const;
+		 delta_kind::kind<Kind> k) const;
 
-      /** store the output transitions of the state 'from' where
-       query(a.structure(), a.value(), e)) = true using 'res'. */
-      template <typename OutputIterator, typename L>
-      void delta(OutputIterator res,
-		 hstate_t from,
-		 const L& query,
-		 delta_kind::transitions k) const;
-
-      /** store the output transitions of the state 'from' where
-       the label matches the letter. */
-      template <typename OutputIterator, typename L>
-      void letter_delta(OutputIterator res,
-			hstate_t from,
-			const L& letter,
-			delta_kind::transitions k) const;
-
-      /** store the output spontaneous transitions. */
-      template <typename OutputIterator>
-      void spontaneous_delta(OutputIterator res,
-			     hstate_t from,
-			     delta_kind::transitions k) const;
-
-      // output_return_type = Container
-      // output_type	    = htransition_t
-      // direction	  = output
-
-      /** store the output transitions of the state 'from' in the container
-       'res' */
-      template <typename Container>
-      void deltac(Container& res, hstate_t from, delta_kind::transitions k) const;
-
-      /** store the output transitions of the state 'from' where
-       query(label(e)) = true in the container 'res' */
-      template <typename Container, typename L>
-      void deltac(Container& res,
-		  hstate_t from,
-		  const L& query,
-		  delta_kind::transitions k) const;
-
-      /** store the output transitions of the state 'from' where
-       query(label(e)) = true in the container 'res' */
-      template <typename Container, typename L>
-      void letter_deltac(Container& res,
-			 hstate_t from,
-			 const L& letter,
-			 delta_kind::transitions k) const;
-
-      /** store the output spontaneous transitions. */
-      template <typename Container>
-      void spontaneous_deltac(Container& res,
-			      hstate_t from,
-			      delta_kind::transitions k) const;
-
-      // output_return_type = OutputIterator
-      // output_type	    = hstate_t
-      // direction	  = output
-
-      /** store the output states of the state 'from' using 'res'. */
-      template <typename OutputIterator>
-      void delta(OutputIterator res,
-		 hstate_t from,
-		 delta_kind::states k) const;
-
-      /** store the output states of the state 'from' where
-       query(label(e)) = true using 'res'. */
-      template <typename OutputIterator, typename L>
+      /** Store the output transitions/states of the state @a from where
+       *  @a query is true on a transition/state, using @a res.	 */
+      template <typename OutputIterator, typename L, typename Kind>
       void delta(OutputIterator res,
 		 hstate_t from,
 		 const L& query,
-		 delta_kind::states k) const;
+		 delta_kind::kind<Kind> k) const;
 
-      /** store the output states of the state 'from' where
-       the label matches the letter. */
-      template <typename OutputIterator, typename L>
+      /** Store the output transitions/states of the state @a from where
+       *  the label matches the letter @a letter.  */
+      template <typename OutputIterator, typename L, typename Kind>
       void letter_delta(OutputIterator res,
 			hstate_t from,
 			const L& letter,
-			delta_kind::states k) const;
+			delta_kind::kind<Kind> k) const;
 
-      /** store the output spontaneous transitions. */
-      template <typename OutputIterator>
+      /** Store the output spontaneous transitions or states reached
+       *  from @a from by an epsilon-transition.  */
+      template <typename OutputIterator, typename Kind>
       void spontaneous_delta(OutputIterator res,
 			     hstate_t from,
-			     delta_kind::states k) const;
+			     delta_kind::kind<Kind> k) const;
 
-      // output_return_type = Container
-      // output_type	    = hstate_t
-      // direction	  = output
+      /*----------.
+      | Deltacs.  |
+      `----------*/
 
-      /** store the output states of the state 'from' in the container
-       'res' */
-      template <typename Container>
-      void deltac(Container& res, hstate_t from, delta_kind::states k) const;
+      /** Store the output transitions/states of the state @a from
+       *  in the container @a res.  */
+      template <typename Container, typename Kind>
+      void deltac(Container& res, hstate_t from, delta_kind::kind<Kind> k) const;
 
-      /** store the output states of the state 'from' where
-       query(label(e)) = true in the container 'res' */
-      template <typename Container, typename L>
+      /** Store the output transitions/states of the state @a from where
+       *  @a query is true on a transition/state, using the container
+       *  @a res.  */
+      template <typename Container, typename L, typename Kind>
       void deltac(Container& res,
 		  hstate_t from,
 		  const L& query,
-		  delta_kind::states k) const;
+		  delta_kind::kind<Kind> k) const;
 
-      /** store the output states of the state 'from' where
-       query(label(e)) = true in the container 'res' */
-      template <typename Container, typename L>
+      /** Store the output transitions/states of the state @a from where
+       *  the label matches the letter @a letter.  */
+      template <typename Container, typename L, typename Kind>
       void letter_deltac(Container& res,
 			 hstate_t from,
 			 const L& letter,
-			 delta_kind::states k) const;
+			 delta_kind::kind<Kind> k) const;
 
-      /** store the output spontaneous transitions. */
-      template <typename Container>
+      /** Store the output spontaneous transitions or states reached
+       *  from @a from by an epsilon-transition in the container @a res.  */
+      template <typename Container, typename Kind>
       void spontaneous_deltac(Container& res,
 			      hstate_t from,
-			      delta_kind::states k) const;
+			      delta_kind::kind<Kind> k) const;
 
-      // output_return_type = OutputIterator
-      // output_type	    = htransition_t
-      // direction	  = input
 
-      /** store the output transitions of the state 'from' using 'res'. */
-      template <typename OutputIterator>
+      /*----------.
+      | Deltafs.  |
+      `----------*/
+
+      /** Call the functor @a fun on every output transitions/states of
+       *  the state @a from.  */
+      template <typename Functor, typename Kind>
+      void deltaf(Functor& fun, hstate_t from, delta_kind::kind<Kind> k) const;
+
+      /** Call the functor @a fun on every output transitions/states of
+       *  the state @a from where @a query is true. */
+      template <typename Functor, typename L, typename Kind>
+      void deltaf(Functor& fun,
+		  hstate_t from,
+		  const L& query,
+		  delta_kind::kind<Kind> k) const;
+
+      /** Call the functor @a fun on every output transitions/states of
+       *  the state @a from where the label matches the letter @a letter.  */
+      template <typename Functor, typename L, typename Kind>
+      void letter_deltaf(Functor& fun,
+			 hstate_t from,
+			 const L& letter,
+			 delta_kind::kind<Kind> k) const;
+
+      /** Call the functor @a fun on every output spontaneous transitions
+       *  or every states reached by @a from with an epsilon-transition.  */
+      template <typename Functor, typename Kind>
+      void spontaneous_deltaf(Functor& fun,
+			      hstate_t from,
+			      delta_kind::kind<Kind> k) const;
+
+      /*-----------------.
+      | Reverse deltas.	 |
+      `-----------------*/
+
+      /** Store the input transitions/states of the state @a from
+       *  using @a res.	 */
+      template <typename OutputIterator, typename Kind>
       void rdelta(OutputIterator res,
 		  hstate_t from,
-		  delta_kind::transitions k) const;
+		  delta_kind::kind<Kind> k) const;
 
-      /** store the output transitions of the state 'from' where
-       query(label(e)) = true using 'res'. */
-      template <typename OutputIterator, typename L>
+      /** Store the input transitions/states of the state @a from where
+       *  @a query is true on a transition/state, using @a res.	 */
+      template <typename OutputIterator, typename L, typename Kind>
       void rdelta(OutputIterator res,
 		  hstate_t from,
 		  const L& query,
-		  delta_kind::transitions k) const;
+		  delta_kind::kind<Kind> k) const;
 
-      /** store the output transitions of the state 'from' where
-       the label matches the letter. */
-      template <typename OutputIterator, typename L>
+      /** Store the input transitions/states of the state @a from where
+       *  the label matches the letter @a letter.  */
+      template <typename OutputIterator, typename L, typename Kind>
       void letter_rdelta(OutputIterator res,
 			 hstate_t from,
 			 const L& letter,
-			 delta_kind::transitions k) const;
+			 delta_kind::kind<Kind> k) const;
 
-      /** store the output spontaneous transitions. */
-      template <typename OutputIterator>
+      /** Store every input spontaneous transitions or every states that
+       *  reach @a from with an epsilon-transition using @a res.  */
+      template <typename OutputIterator, typename Kind>
       void spontaneous_rdelta(OutputIterator res,
 			      hstate_t from,
-			      delta_kind::transitions k) const;
+			      delta_kind::kind<Kind> k) const;
 
-      // output_return_type = Container
-      // output_type	    = htransition_t
-      // direction	  = input
+      /*------------------.
+      | Reverse deltacs.  |
+      `------------------*/
 
-      /** store the output transitions of the state 'from' in the container
-       'res' */
-      template <typename Container>
-      void rdeltac(Container& res, hstate_t from, delta_kind::transitions k) const;
+      /** Store the input transitions/states of the state @a from
+       *  in the container @a res.  */
+      template <typename Container, typename Kind>
+      void rdeltac(Container& res, hstate_t from, delta_kind::kind<Kind> k) const;
 
-      /** store the output transitions of the state 'from' where
-       query(label(e)) = true in the container 'res' */
-      template <typename Container, typename L>
+      /** Store the input transitions/states of the state @a from where
+       *  @a query is true on a transition/state, using the container
+       *  @a res.  */
+      template <typename Container, typename L, typename Kind>
       void rdeltac(Container& res,
 		   hstate_t from,
 		   const L& query,
-		   delta_kind::transitions k) const;
+		   delta_kind::kind<Kind> k) const;
 
-      /** store the output transitions of the state 'from' where
-       query(label(e)) = true in the container 'res' */
-      template <typename Container, typename L>
+      /** Store the input transitions/states of the state @a from where
+       *  the label matches the letter @a letter.  */
+      template <typename Container, typename L, typename Kind>
       void letter_rdeltac(Container& res,
 			  hstate_t from,
 			  const L& letter,
-			  delta_kind::transitions k) const;
+			  delta_kind::kind<Kind> k) const;
 
-      /** store the output spontaneous transitions. */
-      template <typename Container>
+      /** Store every input spontaneous transitions or every states that
+       *  reach @a from with an epsilon-transition in the container @a res.  */
+      template <typename Container, typename Kind>
       void spontaneous_rdeltac(Container& res,
 			       hstate_t from,
-			       delta_kind::transitions k) const;
+			       delta_kind::kind<Kind> k) const;
 
+      /*------------------.
+      | Reverse deltafs.  |
+      `------------------*/
 
-      // output_return_type = OutputIterator
-      // output_type	    = hstate_t
-      // direction	  = input
+      /** Call the functor @a fun on every input transitions/states of
+       *  the state @a from.  */
+      template <typename Functor, typename Kind>
+      void rdeltaf(Functor& fun, hstate_t from, delta_kind::kind<Kind> k) const;
 
-      /** store the output states of the state 'from' using 'res'. */
-      template <typename OutputIterator>
-      void rdelta(OutputIterator res,
-		  hstate_t from,
-		  delta_kind::states k) const;
-
-      /** store the output states of the state 'from' where
-       query(label(e)) = true using 'res'. */
-      template <typename OutputIterator, typename L>
-      void rdelta(OutputIterator res,
-		  hstate_t from,
-		  const L& query,
-		  delta_kind::states k) const;
-
-      /** store the output states of the state 'from' where
-       the label matches the letter. */
-      template <typename OutputIterator, typename L>
-      void letter_rdelta(OutputIterator res,
-			 hstate_t from,
-			 const L& letter,
-			 delta_kind::states k) const;
-
-      /** store the output spontaneous transitions. */
-      template <typename OutputIterator>
-      void spontaneous_rdelta(OutputIterator res,
-			      hstate_t from,
-			      delta_kind::states k) const;
-
-      // output_return_type = Container
-      // output_type	    = hstate_t
-      // direction	  = input
-
-      /** store the output states of the state 'from' in the container
-       'res' */
-      template <typename Container>
-      void rdeltac(Container& res, hstate_t from, delta_kind::states k) const;
-
-      /** store the output states of the state 'from' where
-       query(label(e)) = true in the container 'res' */
-      template <typename Container, typename L>
-      void rdeltac(Container& res,
+      /** Call the functor @a fun on every input transitions/states of
+       *  the state @a from where @a query is true. */
+      template <typename Functor, typename L, typename Kind>
+      void rdeltaf(Functor& fun,
 		   hstate_t from,
 		   const L& query,
-		   delta_kind::states k) const;
+		   delta_kind::kind<Kind> k) const;
 
-      /** store the output states of the state 'from' where
-       query(label(e)) = true in the container 'res' */
-      template <typename Container, typename L>
-      void letter_rdeltac(Container& res,
+      /** Call the functor @a fun on every input transitions/states of
+       *  the state @a from where the label matches the letter @a letter.  */
+      template <typename Functor, typename L, typename Kind>
+      void letter_rdeltaf(Functor& fun,
 			  hstate_t from,
 			  const L& letter,
-			  delta_kind::states k) const;
+			  delta_kind::kind<Kind> k) const;
 
-      /** store the output spontaneous transitions. */
-      template <typename Container>
-      void spontaneous_rdeltac(Container& res,
+      /** Call the functor @a fun on every input spontaneous transitions
+       *  or every states that reach @a from with an epsilon-transition.  */
+      template <typename Functor, typename Kind>
+      void spontaneous_rdeltaf(Functor& fun,
 			       hstate_t from,
-			       delta_kind::states k) const;
+			       delta_kind::kind<Kind> k) const;
 
     protected:
       MetaElement();

@@ -125,16 +125,16 @@ namespace vcsn
       final_support_t		final() const;
 
       /** @name State's manipulation
-       ** @{ */
+	 ** @{ */
     public:
       bool			has_state(hstate_t n) const;
 
     public:
       hstate_t			add_state();
 
-    /// Remove state \a n.
-    ///
-    /// \pre \a n is a state of this graph.
+      /// Remove state \a n.
+      ///
+      /// \pre \a n is a state of this graph.
       void			del_state(hstate_t n);
 
     public:
@@ -156,7 +156,7 @@ namespace vcsn
 
 
       /** @name Edge's manipulation
-       ** @{ */
+	 ** @{ */
     public:
       bool			has_edge(hedge_t n) const;
 
@@ -175,12 +175,14 @@ namespace vcsn
       /** @} */
 
       /** @name Only automaton related methods
-       ** @{ */
+	 ** @{ */
     public:
       template <class S>
       bool			exists(const AutomataBase<S>& s) const;
 
     public:
+
+      /// Delta.
       template <class OutputIterator, class Query>
       void			delta(OutputIterator res,
 				      hstate_t from,
@@ -191,6 +193,17 @@ namespace vcsn
 				      hstate_t from,
 				      const Query& q,
 				      delta_kind::states) const;
+      template <class Functor, class Query>
+      void			deltaf(Functor& fun,
+				       hstate_t from,
+				       const Query& q,
+				       delta_kind::edges) const;
+      template <class Functor, class Query>
+      void			deltaf(Functor& fun,
+				       hstate_t from,
+				       const Query& q,
+				       delta_kind::states) const;
+      /// Reverse delta.
       template <class OutputIterator, class Query>
       void			rdelta(OutputIterator res,
 				       hstate_t from,
@@ -201,6 +214,16 @@ namespace vcsn
 				       hstate_t from,
 				       const Query& q,
 				       delta_kind::states) const;
+      template <class Functor, class Query>
+      void			rdeltaf(Functor& res,
+					hstate_t from,
+					const Query& q,
+					delta_kind::edges) const;
+      template <class Functor, class Query>
+      void			rdeltaf(Functor& res,
+					hstate_t from,
+					const Query& q,
+					delta_kind::states) const;
       /** @}*/
 
       // FIXME: Not implemented.
@@ -208,7 +231,7 @@ namespace vcsn
       self_t&			clone() const;
 
       /** @name Tag access
-       ** @{ */
+	 ** @{ */
     public:
       typedef Tag tag_t;
       tag_t& tag();
@@ -216,7 +239,7 @@ namespace vcsn
       /** @}*/
 
       /** @name Geometry access
-       ** @{ */
+	 ** @{ */
     public:
       typedef Geometry geometry_t;
       geometry_t&		geometry();
@@ -271,16 +294,6 @@ namespace vcsn
   ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL(Graph<labels_are_letters,
 					      WordValue, WeightValue,
 					      SeriesValue, Letter, Tag, Geometry>);
-
-  template <class S, class WordValue, class WeightValue, class SeriesValue,
-	    class Letter, class Tag, class Geometry,
-	    typename OutputIterator, typename L>
-  void op_letter_delta(const AutomataBase<S>&,
-		       const Graph<labels_are_letters,
-		       WordValue, WeightValue,
-		       SeriesValue, Letter, Tag, Geometry>&,
-		       OutputIterator, hstate_t, const L&,
-		       delta_kind::states);
 
   template <class Kind, class WordValue, class WeightValue, class SerieValue,
 	    class Letter, class Tag, class Geometry, class I>
