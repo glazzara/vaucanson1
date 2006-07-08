@@ -46,7 +46,7 @@
 	 (c . (lambda (of)
 		(save-excursion
 		  (forward-line 0)
-		  (if (looking-at "[[:space:]]*[|`]") 0 3))))
+		  (if (looking-at "[[:space:]]*[|`]") 0 1))))
 	 ;; /*- comments stay in place.
 	 (comment-intro . (lambda (of)
 			    (save-excursion
@@ -94,12 +94,14 @@
   (unless buffer
     (setq buffer (current-buffer)))
   (with-current-buffer buffer
-    (let ((c-indentation-style "Vaucanson"))
+    (let (c-indentation-style)
+      (c-set-style "Vaucanson")
       (barf-if-buffer-read-only)
       (cpp-indent-macros (point-min) (point-max))
       (indent-region (point-min) (point-max))
       (delete-trailing-whitespace)
-      (tabify (point-min) (point-max)))))
+      (tabify (point-min) (point-max)))
+    (c-set-style c-indentation-style)))
 
 
 ;; arch-tag: 97e769b8-ed42-42d9-bac6-7833bea581c5

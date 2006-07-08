@@ -1,5 +1,9 @@
 2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* data/misc.el: Use `c-set-style'.
+
+2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Cleanup delta declarations, add `deltaf' for functor.
 
 	* include/vaucanson/automata/concept/delta_kind.hh: Define `kind',
