@@ -1,3 +1,9 @@
+2006-07-11  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_ops.hxx: Don't give a
+	name to the structure.
+	* src/benchs/generate_benchs.sh: Output `<<', not `\<\<'.
+
 2006-07-08  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/eval.hh,

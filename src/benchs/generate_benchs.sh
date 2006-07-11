@@ -75,7 +75,7 @@ EOF
 
 int main(int argc, char* argv[])
 {
-  std::cerr \<\< BENCHTEXT \<\< ":" \<\< std::endl;
+  std::cerr << BENCHTEXT << ":" << std::endl;
   if (argc == 2)
     BENCHFUN(atoi(argv[1]));
 }
