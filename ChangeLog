@@ -1,3 +1,17 @@
+2006-07-17  Akim Demaille  <akim@lrde.epita.fr>
+
+	Autoconf 2.60.
+
+	* configure.ac: Require Autoconf 2.60, which fixes issues such as
+	forbidden/allowed tokens.
+	* build-aux/vcsn-xml.m4, build-aux/vcsn.m4: Likewise.
+	* build-aux: Do not ignore files such as ltversion.m4 that should
+	not exist.  We use Libtool 1.5.*, not 2.* that does seem to have
+	problems with Autoconf 2.60.
+	* src/vaucanswig/expand.sh (output, canonical): New, use them.
+	I have a file using `-' instead of `_', and that broke the
+	generation of Makefile.ams.
+
 2006-07-11  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_ops.hxx: Don't give a

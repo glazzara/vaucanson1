@@ -13,7 +13,7 @@
 
 # VCSN_HEADER
 
-AC_PREREQ([2.57])
+AC_PREREQ([2.60])
 
 AC_INIT([vaucanson], [0.8a], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([build-aux])
@@ -100,14 +100,11 @@ case $prefix in
   [\\/]* | ?:[\\/]* ) ;;
   *) prefix=$ac_default_prefix ;;
 esac
-m4_pattern_allow([^VCSN_DATA_PATH$])
 AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$(eval echo \"$datadir/vaucanson/\")"],
 		   [Path in which data such as XSD will be installed])
 prefix=$old_prefix
 
 # Package misc variables.
-# Arguably, AC_DEFINE should pattern_allow its argument.
-m4_pattern_allow([^VCSN_PACKAGE_(NAME|BUGREPORT|STRING|VERSION)$])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_NAME], ["$PACKAGE_NAME"], [Full name.])
 AC_DEFINE_UNQUOTED([VCSN_PACKAGE_BUGREPORT], ["$PACKAGE_BUGREPORT"],
 		   [Bug report address.])
@@ -228,9 +225,7 @@ AC_CONFIG_FILES([
 
 m4_include([build-aux/tests.m4])
 
-m4_pattern_allow([VCSN_TESTS_SUBDIRS])
 AC_SUBST([VCSN_TESTS_SUBDIRS])
-m4_pattern_allow([VCSN_VAUCANSWIG_SUBDIR])
 AC_SUBST([VCSN_VAUCANSWIG_SUBDIR])
 
 AC_OUTPUT

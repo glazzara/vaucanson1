@@ -12,6 +12,8 @@
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+AC_PREREQ([2.60])
+
 # VCSN_CHECK_TERMLIB
 # ------------------
 # Terminal library test, taken from GNU Texinfo configure.ac
@@ -60,6 +62,6 @@ AC_DEFUN([VCSN_TAF_KIT],
   else
     enable_taf_kit=no
   fi
-m4_pattern_allow([^VCSN_TAF_KIT(_(TRUE|FALSE))?$])
+  m4_pattern_allow([^VCSN_TAF_KIT$])
   AM_CONDITIONAL([VCSN_TAF_KIT], [test x$enable_taf_kit = xyes])
 ])

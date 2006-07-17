@@ -14,6 +14,7 @@
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 
+AC_PREREQ([2.60])
 m4_pattern_forbid([^_?VCSN_])
 
 # VCSN_PATH_LOCAL([RELATIVE-PATH-TO-VAUCANSON-SOURCES])
@@ -105,7 +106,6 @@ AC_DEFUN([VCSN_PATH_HEADERS],
       VCSN_INCLUDE_DIR=''
 
       # This is useful for sanity checks.
-      m4_pattern_allow([VCSN_LOCAL_(BUILD|SRC)$])dnl
       AC_SUBST([VCSN_LOCAL_SRC],   ['$(top_srcdir)/'$vcsn_cv_local_src])
       AC_SUBST([VCSN_LOCAL_BUILD], ['$(top_builddir)/'$vcsn_cv_local_src])
 
@@ -113,7 +113,6 @@ AC_DEFUN([VCSN_PATH_HEADERS],
     fi
   fi
 
-  m4_pattern_allow([VCSN_INCLUDE_DIR])
   AC_ARG_VAR([VCSN_INCLUDE_DIR],
 	     [location of Vaucanson (<include dir>, should be autodetected)])
   if test "x$VCSN_INCLUDE_DIR" != x ; then

@@ -41,11 +41,15 @@ end_algorithms() {
   dbapp "%enddef"
 }
 
+# afapp FAMILY-NAME LINES...
 afapp() {
   AF=$1
   AFDB=$VAUCANSWIG/src/vaucanswig_alg_$AF.i
   shift
-  echo "$@" >>"$AFDB"
+  for i
+  do
+    echo "$i" >>"$AFDB"
+  done
 }
 
 start_family() {
@@ -78,6 +82,52 @@ do_family_interface() {
   afapp "$AF" "%enddef"
 }
 
+# output FAMILY-NAME
+# ------------------
+output ()
+{
+  family_name=$1
+  # Create a sub-database with its header
+  start_family "$family_name"
+
+  do_family_interface "$family_name"
+  do_family_interface_impl "$family_name"
+
+  afapp "$family_name"							  \
+    "%define alg_interface_${family_name}(Kind)"			  \
+    "%{"								  \
+    "struct Kind ##_alg_${family_name} {"				  \
+    "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"	  \
+    "                     Kind ##_types::gen_## Kind ##_auto_t, \\"	  \
+    "                     Kind ##_types::Kind ##_series_set_elt_t, \\"	  \
+    "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"  \
+    "};"								  \
+    "%}"								  \
+    "%enddef"								  \
+    "%define decl_alg_${family_name}(Kind)"				  \
+    "algo_common_decls(Kind)"						  \
+    "%{"								  \
+    "struct Kind ##_alg_${family_name} {"				  \
+    "alg_${family_name}_interface_impl(Kind ##_types::Kind ##_auto_t, \\" \
+    "                     Kind ##_types::gen_## Kind ##_auto_t, \\"	  \
+    "                     Kind ##_types::Kind ##_series_set_elt_t, \\"	  \
+    "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"  \
+    "};"								  \
+    "%}"								  \
+    "struct Kind ##_alg_${family_name} {"				  \
+    "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"	  \
+    "                     Kind ##_types::gen_## Kind ##_auto_t, \\"	  \
+    "                     Kind ##_types::Kind ##_series_set_elt_t, \\"	  \
+    "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"  \
+    "};"								  \
+    "%enddef"
+
+  # Mention the sub-database in the general database
+  dbapp "%import vaucanswig_## Kind ##_alg_${family_name}.i"
+  dbapp "%include vaucanswig_alg_${family_name}.i"
+  dbapp "alg_interface_${family_name}(Kind)"
+}
+
 start_algorithms
 
 if [ "$3" != "noalg" ]; then
@@ -87,47 +137,8 @@ for family_header in `cd "$VAUC" && find vaucanson/algorithms -name \*.hh`; do
    # Test whether the file declares some interfaces
    if grep "^ *// INTERFACE:" <"$VAUC/$family_header" >/dev/null 2>&1; then
 
-      # Yes, retrieve the algorithm family name
-      family_name=`basename "$family_header" .hh`
-
-      # Create a sub-database with its header
-      start_family "$family_name"
-
-      do_family_interface "$family_name"
-      do_family_interface_impl "$family_name"
-
-      afapp "$family_name"  "%define alg_interface_${family_name}(Kind)"
-      afapp "$family_name"  "%{"
-      afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
-      afapp "$family_name"  "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_series_set_elt_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
-      afapp "$family_name"  "};"
-      afapp "$family_name"  "%}"
-      afapp "$family_name"  "%enddef"
-      afapp "$family_name"  "%define decl_alg_${family_name}(Kind)"
-      afapp "$family_name"  "algo_common_decls(Kind)"
-      afapp "$family_name"  "%{"
-      afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
-      afapp "$family_name"  "alg_${family_name}_interface_impl(Kind ##_types::Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_series_set_elt_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
-      afapp "$family_name"  "};"
-      afapp "$family_name"  "%}"
-      afapp "$family_name"  "struct Kind ##_alg_${family_name} {"
-      afapp "$family_name"  "alg_${family_name}_interface(Kind ##_types::Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::gen_## Kind ##_auto_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_series_set_elt_t, \\"
-      afapp "$family_name"  "                     Kind ##_types::Kind ##_exp_t, std::list<int>)"
-      afapp "$family_name"  "};"
-      afapp "$family_name"  "%enddef"
-
-     # Mention the sub-database in the general database
-     dbapp "%import vaucanswig_## Kind ##_alg_${family_name}.i"
-     dbapp "%include vaucanswig_alg_${family_name}.i"
-     dbapp "alg_interface_${family_name}(Kind)"
+      # Yes, retrieve the algorithm family name.
+      output $(basename "$family_header" .hh)
 
      # Add the sub-database to the algorithm category
      ALGS="$ALGS alg_${family_name}"
@@ -192,6 +203,13 @@ AM_LDFLAGS = -module -avoid-version
 EOF
 }
 
+# canonical NAME
+# Return an Automake canonical name, i.e., non-alphanumerical -> _.
+canonical ()
+{
+  echo "$@" | sed 's/[^a-zA-Z0-9]/_/g'
+}
+
 dump_python()
 {
     printf "pyexec_LTLIBRARIES ="
@@ -210,23 +228,23 @@ dump_python()
       if [ `expr $ilist % 4` = 0 ]; then
          echo " \\"; printf "\t"
       fi
-      printf " vaucanswig_${mod}.py"
+      printf " vaucanswig_$(canonical $mod).py"
       ilist=`expr $ilist + 1`
     done
     echo; echo
     for mod in $MODULES; do
-      echo "libvs_${mod}_la_SOURCES = vaucanswig_${mod}_wrap.cxx"
+      echo "libvs_$(canonical $mod)_la_SOURCES = vaucanswig_$(canonical $mod)_wrap.cxx"
       if [ "$mod" = "core" ]; then
         echo "libvs_core_la_LIBADD = ../meta/libvv.la -lswigpy"
       else
         if test -r "$VAUCANSWIG/src/$mod.deps"; then
-           printf "libvs_${mod}_la_LIBADD ="
+           printf "libvs_$(canonical $mod)_la_LIBADD ="
            for dep in `cat "$VAUCANSWIG/src/$mod.deps"`; do
               printf " libvs_${dep}.la"
            done
            echo
         else
-           echo "libvs_${mod}_la_LIBADD = libvs_core.la"
+           echo "libvs_$(canonical $mod)_la_LIBADD = libvs_core.la"
         fi
       fi
     done

@@ -12,6 +12,8 @@
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+AC_PREREQ([2.60])
+
 # _VCSN_CHECK_XML
 # ---------------
 AC_DEFUN([_VCSN_CHECK_XML],
@@ -118,7 +120,6 @@ AC_DEFUN([VCSN_XML],
      enable_xml_tests=no
   fi
   if test x$enable_vcsn_xml = xyes; then
-    m4_pattern_allow([^VCSN_USE_XML(_(TRUE|FALSE))?$])dnl
     AC_DEFINE([VCSN_USE_XML], 1, [Define to 1 if you want to use XML I/O.])
   fi
   AM_CONDITIONAL([VCSN_USE_XML], [test x$enable_vcsn_xml = xyes])
