@@ -1,3 +1,7 @@
+2006-07-18  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/tools/usual_macros.hh: Pacify check_xml.sh.
+
 2006-07-17  Akim Demaille  <akim@lrde.epita.fr>
 
 	Autoconf 2.60.

@@ -150,12 +150,16 @@
   ((unsigned) int(((float) rand() / (float) RAND_MAX) * Max));
 
 // Some useful macros for XML.
-# ifndef VCSN_NDEBUG
-#  define XML_FAIL(S)							\
-  std::cerr << "Implement for " << typeid(S).name() << std::endl;	\
-  exit(1)
-# else
-#  define XML_FAIL(S)
+# ifdef VCSN_USE_XML
+#  ifndef VCSN_NDEBUG
+#   define XML_FAIL(S)							\
+  do {									\
+    std::cerr << "Implement for " << typeid(S).name() << std::endl;	\
+    exit(1);								\
+  } while (0)
+#  else
+#   define XML_FAIL(S)
+#  endif
 # endif
 # define FAIL(S) { std::cerr << (S) << std::endl; exit(1); }
 
