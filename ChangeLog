@@ -1,5 +1,12 @@
 2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
 
+	Variable names.
+
+	* doc/manual/developer.tex (Variable Names): New.
+	Initial list.
+
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix XML with G++ 4.1.
 
 	Function templates should be defined before being used.

@@ -1,3 +1,4 @@
+%                                                         -*- latex -*-
 \chapter{Developer Guide}
 
 The chapter is work in progress.  It is not meant for user of the
@@ -14,6 +15,27 @@ code in \Vauc.
 Until this is written, please refer to
 \href{http://www.lrde.epita.fr/~akim/compil/assignments.split/Coding-Style.html#Coding-Style}{Tiger's
   Coding Style}.
+
+\subsection{Variable Names}
+
+Using long variable names clutters the code, so please, don't name
+your variables and arguments like \code{automaton1} or
+\code{alphabet}.  Structure members and functions should be
+descriptive though.
+
+In order to keep the variable names reasonable in size, and
+understandable, there are variable name conventions: some families of
+identifiers are reserved for some types of entities.  The conventions
+are listed below; developers must follow it, and users are encouraged
+to do it too.  In the following list, \samp{*} stands for ``nothing,
+or a number''.
+\begin{description}
+\item[al*, alpha*, A*] alphabets
+\item[a*, aut*] automata (\code{automaton_t}, etc.)
+\item[t*, tr*] transitions
+\item[p*, q*, r*, s*] states (\code{hstate_t})
+\end{description}
+
 
 \subsection{Commenting Code}
 \label{sec:commenting-code}
@@ -644,7 +666,6 @@ fsm{\_}load() and fsm{\_}dump() interface.
 % End:
 
 \end{document}
-
 
 %%% Local Variables:
 %%% mode: latex
