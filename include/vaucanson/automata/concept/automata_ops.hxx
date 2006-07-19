@@ -682,7 +682,7 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Functor, typename Kind>
-  void op_rdeltaf(const AutomataBase<S>& s, const T& v,
+  void op_rdeltaf(const AutomataBase<S>&, const T& v,
 		  Functor& fun, hstate_t from, delta_kind::kind<Kind> k)
   {
     v.rdeltaf(fun, from, always_true(), k);
@@ -690,7 +690,7 @@ namespace vcsn {
 
   template <class S, class T,
 	    typename Functor, typename L, typename Kind>
-  void op_rdeltaf(const AutomataBase<S>& s,
+  void op_rdeltaf(const AutomataBase<S>&,
 		  const T& v,
 		  Functor& fun,
 		  hstate_t from,
