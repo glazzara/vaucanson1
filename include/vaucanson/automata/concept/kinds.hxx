@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -297,7 +297,8 @@ namespace vcsn {
     for (typename supp_t::const_iterator i = e.supp().begin();
 	 i != e.supp().end();
 	 ++i)
-      x = auto_self().add_transition(from, to, std::make_pair(i->second, i->first));
+      x = auto_self().add_transition(from, to,
+				     std::make_pair(i->second, i->first));
 
     return x;
   }

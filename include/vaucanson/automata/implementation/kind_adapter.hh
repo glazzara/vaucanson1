@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -99,7 +99,7 @@ namespace vcsn {
 			   const typename Element<S,T >::series_set_elt_t& s) \
   {									\
     assertion(s.supp().size() == 1);					\
-    return op_add_letter_transition(a_set, v, from, to, *s.supp().begin()); \
+    return op_add_letter_transition(a_set, v, from, to, *s.supp()); \
   }
 
 #define ADAPT_WORD_OF_TO_LETTERS_LABEL(T...)			\

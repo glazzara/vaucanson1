@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -102,7 +102,7 @@ namespace vcsn {
       ::of(a.structure().series().semiring());
 
 
-    monoid_elt_t m1(a.structure().series().monoid(), *label.supp().begin());
+    monoid_elt_t m1(a.structure().series().monoid(), *label.supp());
     first_monoid_elt_value_t w1 = m1.value().first;
     second_monoid_elt_value_t w2 = m1.value().second;
 

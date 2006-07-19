@@ -12,6 +12,11 @@ This document describes major updates to the Vaucanson_ project.
 Vaucanson 0.8a
 ==============
 
+- libvaucanson
+
+  + Support::operator* simplifies the writing for one-letter
+  supports.  Instead of `*e.supp().begin()`, write `*e.supp()`.
+
 Vaucanson 0.8 May 15, 2006
 ==========================
 

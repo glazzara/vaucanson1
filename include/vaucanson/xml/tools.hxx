@@ -89,22 +89,19 @@ namespace vcsn
 		     const FMPtype&,
 		     const U& series)
       {
-	std::string out;
 	if (series.supp().size() > 1)
 	{
-	  out = get_label(series);
+	  std::string out = get_label(series);
 	  if (out.size())
 	    elt->setAttribute(transcode("label"),
 			      transcode(out));
 	}
 	else
 	{
-	  std::string in_word =
-	    get_label((*(series.supp().begin())).first);
-	  std::string out_word =
-	    get_label((*(series.supp().begin())).second);
-	  std::string mult =
-	    get_label(series.get(*(series.supp().begin())));
+	  std::string in_word = get_label(series.supp()->first);
+	  std::string out_word = get_label(series.supp()->second);
+	  std::string mult = get_label(series.get(*series.supp()));
+	  std::string out;
 	  if (mult.size())
 	    out = mult;
 	  if (out != "" && out_word.size())
@@ -138,12 +135,9 @@ namespace vcsn
 	}
 	else
 	{
-	  std::string in_word =
-	    get_label((*(series.supp().begin())).first);
-	  std::string out_word =
-	    get_label((*(series.supp().begin())).second);
-	  std::string mult =
-	    get_label(series.get(*(series.supp().begin())));
+	  std::string in_word = get_label(series.supp()->first);
+	  std::string out_word = get_label(series.supp()->second);
+	  std::string mult = get_label(series.get(*series.supp()));
 
 	  if (in_word.size() && in_word != "1")
 	  {
@@ -181,8 +175,8 @@ namespace vcsn
 		     const Element<Transducer<S>, T>&,
 		     const U& series)
       {
-	std::string in = get_label(*(series.supp().begin()));
-	std::string out = get_label((series.get(*(series.supp().begin()))));
+	std::string in = get_label(*series.supp());
+	std::string out = get_label(series.get(*series.supp()));
 
 	if (in.size() && in != "1")
 	  elt->setAttribute(transcode("in"),
@@ -199,8 +193,8 @@ namespace vcsn
 			 const Element<Transducer<S>, T>& a,
 			 const U& series)
       {
-	std::string in = get_label(*(series.supp().begin()));
-	std::string out = get_label((series.get(*(series.supp().begin()))));
+	std::string in = get_label(*series.supp());
+	std::string out = get_label(series.get(*series.supp()));
 
 	if (in.size() && in != "1")
 	{
@@ -560,7 +554,7 @@ namespace vcsn
 	typename TRANStype::monoid_elt_t m(a.structure().series().monoid());
 
 	if (! i_res && i_exp.supp().size())
-	  m = *(i_exp.supp().begin());
+	  m = *i_exp.supp();
 	else
 	  m = vcsn::algebra::identity_as<md_value_t>
 	    ::of(a.structure().series().monoid());
@@ -588,14 +582,14 @@ namespace vcsn
 	typedef typename FMPtype::semiring_elt_value_t sg_value_t;
 
 	if (! i_res && i_exp.supp().size())
-	  m1 = *(i_exp.supp().begin());
+	  m1 = *i_exp.supp();
 	else
 	  m1 = vcsn::algebra::identity_as<md_value_t>
 	    ::of(a.structure().series().monoid().first_monoid()).value();
 
 	if (! o_res && o_exp.supp().size())
 	{
-	  m2 = *(o_exp.supp().begin());
+	  m2 = *o_exp.supp();
 	  sem = o_exp.get(m2);
 	}
 	else

@@ -1,3 +1,15 @@
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add support for Support::operator*.
+
+	* include/vaucanson/misc/support.hxx, include/vaucanson/misc/support.hh
+	(Support::operator*): New.
+	* include/vaucanson/xml/tools.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/automata/implementation/kind_adapter.hh,
+	* include/vaucanson/automata/concept/transducer_ops.hxx,
+	* include/vaucanson/automata/concept/kinds.hxx: Use it.
+
 2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/NEWS.txt: Document `deltaf' functions.

@@ -111,6 +111,14 @@ namespace utility {
   }
 
   template <class U, class T>
+  typename Support<std::map<U, T> >::value_type
+  Support<std::map<U, T> >::operator*() const
+  {
+    precondition (m_.size () == 1);
+    return *m_.begin();
+  }
+
+  template <class U, class T>
   typename Support<std::map<U, T> >::iterator
   Support<std::map<U, T> >::begin() const
   {

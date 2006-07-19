@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ namespace vcsn {
     AutoType(series_set_elt_t) is = op_series_of(s, v, e);
     precondition(is.supp().size() == 1);
     return
-      is.get(AutoType(monoid_elt_t) (is.structure().monoid(), *is.supp().begin()));
+      is.get(AutoType(monoid_elt_t) (is.structure().monoid(), *is.supp()));
   }
 
   template <class S, class T>
