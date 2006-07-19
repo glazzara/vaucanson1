@@ -1,5 +1,9 @@
 2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* doc/NEWS.txt: Document `deltaf' functions.
+
+2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Permit functors to return Booleans used as a loop stopper.
 
 	* include/vaucanson/misc/static.hh: Declare static Booleans type

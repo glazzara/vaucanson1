@@ -52,6 +52,14 @@ Vaucanson 0.8 May 15, 2006
   + `for_each` loops have been changed to `for_all`, for consistency
      with STL `for_each` that uses functor.
 
+- Delta funtions.
+
+  Delta functions,  used to extract  the successor states or  edges of
+  a  state, can  now  take functor  with  the `deltaf`  methods of  an
+  automaton. If the operator() of  the functor returns Booleans and an
+  application  of  the functor  returns  `false`,  the  loop over  all
+  successors is stopped.
+
 - Benchmarks.
 
   Some Vaucanson benchmarks have been added to the distribution. Feel
