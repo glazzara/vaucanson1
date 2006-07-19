@@ -29,7 +29,7 @@ SUFFIXES = .log .test
 	echo "$$(basename $<): $$res";		\
 	echo "$$(basename $<): $$res" >$@;	\
 	case $$res in				\
-	  XFAIL | XPASS | FAIL) cat $@-t >$@;;	\
+	  XFAIL | XPASS | FAIL) cat $@-t >>$@;;	\
 	esac;					\
 	rm $@-t;
 

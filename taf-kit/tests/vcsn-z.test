@@ -17,9 +17,27 @@
 
 set -e
 
-## ---------------- ##
-## Test fonctions.  ##
-## ---------------- ##
+## --------------------------------- ##
+## Input/output work with automata.  ##
+## --------------------------------- ##
 
-# are-isomorphic
+$VCSN_Z dot-dump $c1
+$VCSN_Z info $c1
+
+
+## ---------------------------------- ##
+## Tests and evaluation on automata.  ##
+## ---------------------------------- ##
+
   $VCSN_Z are-isomorphic $c1 $c1
+test $($VCSN_Z eval $c1 bababa) -eq 42
+! $VCSN_Z is-ambiguous $c1
+! $VCSN_Z is-empty $c1
+! $VCSN_Z is-normalized $c1
+! $VCSN_Z is-realtime $c1
+! $VCSN_Z is-standard $c1
+
+
+## --------------------------------- ##
+## Generic algorithms for automata.  ##
+## --------------------------------- ##
