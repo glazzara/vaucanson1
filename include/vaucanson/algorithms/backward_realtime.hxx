@@ -41,14 +41,13 @@ namespace vcsn {
 			const Label& label, bool initial, bool final)
   {
     AUTOMATON_TYPES(Auto);
-    hstate_t			s0;
     hstate_t			s1;
 
     semiring_elt_t s_ident =
       algebra::identity_as<semiring_elt_value_t>
       ::of(a.structure().series().semiring());
 
-    monoid_elt_t m1(a.structure().series().monoid(), *label.supp());
+    monoid_elt_t m1(a.structure().series().monoid(), *label.supp().begin());
     monoid_elt_value_t w1 = m1.value();
 
     int cpt = 0;
@@ -68,14 +67,14 @@ namespace vcsn {
 
       if (initial)
       {
-	s0 = a.add_state();
+	hstate_t s0 = a.add_state();
 	a.set_initial(s0, in_series);
 	a.unset_initial(stop);
 	s1 = s0;
       }
       else
       {
-	s0 = start;
+	hstate_t s0 = start;
 	s1 = a.add_state();
 	a.add_series_transition(s0, s1, in_series);
       }
@@ -83,7 +82,7 @@ namespace vcsn {
       for (unsigned int i = 1; i < size - 1; ++i)
       {
 	m = w1.substr(cpt++, 1);
-	s0 = s1;
+	hstate_t s0 = s1;
 	s1 = a.add_state();
 	series_set_elt_t series(a.structure().series());
 	series.assoc(m, s_ident);
