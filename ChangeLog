@@ -1,5 +1,13 @@
 2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix RST generated junk.
+
+	* doc/manual/developer.tex: Fix the (poor) result from
+	rst2latex.
+	Fix variable names.
+
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
 	Variable names.
 
 	* doc/manual/developer.tex (Variable Names): New.

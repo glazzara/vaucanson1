@@ -1,4 +1,3 @@
-%                                                         -*- latex -*-
 \chapter{Developer Guide}
 
 The chapter is work in progress.  It is not meant for user of the
@@ -17,7 +16,7 @@ Until this is written, please refer to
   Coding Style}.
 
 \subsection{Variable Names}
-
+\newcommand{\textstar}{\texttt{\ensuremath{*}}}
 Using long variable names clutters the code, so please, don't name
 your variables and arguments like \code{automaton1} or
 \code{alphabet}.  Structure members and functions should be
@@ -27,13 +26,13 @@ In order to keep the variable names reasonable in size, and
 understandable, there are variable name conventions: some families of
 identifiers are reserved for some types of entities.  The conventions
 are listed below; developers must follow it, and users are encouraged
-to do it too.  In the following list, \samp{*} stands for ``nothing,
+to do it too.  In the following list, \samp{\textstar} stands for ``nothing,
 or a number''.
 \begin{description}
-\item[al*, alpha*, A*] alphabets
-\item[a*, aut*] automata (\code{automaton_t}, etc.)
-\item[t*, tr*] transitions
-\item[p*, q*, r*, s*] states (\code{hstate_t})
+\item[al\textstar, alpha\textstar, A\textstar] alphabets
+\item[a\textstar, aut\textstar] automata (\code{automaton\_t}, etc.)
+\item[t\textstar, tr\textstar] transitions
+\item[p\textstar, q\textstar, r\textstar, s\textstar] states (\code{hstate\_t})
 \end{description}
 
 
@@ -346,37 +345,35 @@ The library provides an infrastructure for generic I/O, which
 
 The basis for this infrastructure is the way a developer C++ using the
 library will use it:
-\begin{quote}{\ttfamily \raggedright \noindent
-{\#}include~<vaucanson/tools/io.hh>~\\
-~\\
-/*~to~save~an~automaton~*/~\\
-output{\_}stream~<{}<~automaton{\_}saver(automaton,~converter,~format)~\\
-~\\
-/*~to~load~an~automaton~*/~\\
-input{\_}stream~>{}>~automaton{\_}loader(automaton,~converter,~format,~merge{\_}states)
-}\end{quote}
+
+\begin{lstlisting}[language=Vaucanson]
+#include <vaucanson/tools/io.hh>
+
+/* to save an automaton */
+output_stream << automaton_saver(automaton, converter, format)
+
+/* to load an automaton */
+input_stream >> automaton_loader(automaton, converter, format, merge_states)
+\end{lstlisting}
 
 Where:
-\begin{itemize}
-\item {}
-\texttt{automaton} is the automaton undergoing input or output. Note that
-the object must already be constructed, even to be read into.
+\begin{description}
+\item[\texttt{automaton}] is the automaton undergoing input or output.
+  Note that the object must already be constructed, even to be read
+  into.
 
-\item {}
-\texttt{converter} is a helper class that is able to convert automaton
-transitions to character strings and possibly vice-versa.
+\item[\texttt{converter}] is a helper class that is able to convert
+  automaton transitions to character strings and possibly vice-versa.
 
-\item {}
-\texttt{format} is a helper class that is able to convert the automaton
-to (and possibly from) a character string, using the converter as an
-argument.
+\item[\texttt{format}] is a helper class that is able to convert the
+  automaton to (and possibly from) a character string, using the
+  converter as an argument.
 
-\item {}
-\texttt{merge{\_}states} is an optional argument that should be omitted in
-most cases. For advanced users, it allows loading a single automaton
-from several different streams that share the same state set.
-
-\end{itemize}
+\item[\texttt{merge{\_}states}] is an optional argument that should be
+  omitted in most cases. For advanced users, it allows loading a
+  single automaton from several different streams that share the same
+  state set.
+\end{description}
 
 
 %___________________________________________________________________________
@@ -388,51 +385,39 @@ types already available in Vaucanson. See below.
 
 An I/O converter is a function object with one or both of the following:
 \begin{itemize}
-\item {}
-an operation that takes an automaton, a transition label and
-converts the transition label to a character string
-(std::string). This is called the output conversion.
+\item an operation that takes an automaton, a transition label and
+  converts the transition label to a character string (std::string).
+  This is called the output conversion.
 
-\item {}
-an operation that takes an automaton, a character string and
-converts the character string to a transition label. This is called
-the input conversion.
-
+\item an operation that takes an automaton, a character string and
+  converts the character string to a transition label. This is called
+  the input conversion.
 \end{itemize}
 
 Vaucanson already provides these converters:
 \begin{description}
-%[visit_definition_list_item]
-\item[{\texttt{vcsn::io::string{\_}out}, bundled with \texttt{io.hh}.}] %[visit_definition]
+\item[{\texttt{vcsn::io::string{\_}out}, bundled with \texttt{io.hh}.}]
 
-Provides the output conversion only. Uses the C++ operator {\textless}{\textless} to
-create a textual representation of transition labels. Should work
-with all label types.
+  Provides the output conversion only. Uses the C++ operator
+  {\textless}{\textless} to create a textual representation of
+  transition labels. Should work with all label types.
 
-%[depart_definition]
-%[depart_definition_list_item]
-%[visit_definition_list_item]
-\item[{\texttt{vcsn::io::usual{\_}converter{\_}exp}, defined in \texttt{tools/usual{\_}io.hh}.}] %[visit_definition]
+\item[{\texttt{vcsn::io::usual{\_}converter{\_}exp}, defined in
+    \texttt{tools/usual{\_}io.hh}.}]
 
-Provides both input and output conversions. Uses the C++ operator {\textless}{\textless}
-to create a textual representation of transition labels, but
-requires also that algebra::parse can read back that representation
-into a variable of the same type. It is mostly used for generalized
-automata where transitions are labeled by rational expressions,
-hence the name.
+  Provides both input and output conversions. Uses the C++ operator
+  {\textless}{\textless} to create a textual representation of
+  transition labels, but requires also that algebra::parse can read
+  back that representation into a variable of the same type. It is
+  mostly used for generalized automata where transitions are labeled
+  by rational expressions, hence the name.
 
-%[depart_definition]
-%[depart_definition_list_item]
-%[visit_definition_list_item]
-\item[{\texttt{vcsn::io::usual{\_}converter{\_}poly<ExpType>}, defined in \texttt{tools/usual{\_}io.hh}.}] %[visit_definition]
-
-Provides both input and output conversions. Converts transition labels
-to and from ExpType before (after) doing I/O. The implementation
-is meant to be used when labels are polynoms, and using the
-generalized (expression) type as ExpType.
-
-%[depart_definition]
-%[depart_definition_list_item]
+\item[{\texttt{vcsn::io::usual{\_}converter{\_}poly<ExpType>}, defined
+    in \texttt{tools/usual{\_}io.hh}.}]  Provides both input and
+  output conversions. Converts transition labels to and from ExpType
+  before (after) doing I/O. The implementation is meant to be used
+  when labels are polynoms, and using the generalized (expression)
+  type as ExpType.
 \end{description}
 
 
@@ -467,17 +452,16 @@ object in charge of the actual input or output.
 A format object is a function object that provides one or both the
 following operations:
 \begin{itemize}
-\item {}
-an operation that takes an output stream, the caller \texttt{automaton{\_}saver}
-object, and the \texttt{converter} object. This is called the output operation.
+\item an operation that takes an output stream, the caller
+  \texttt{automaton{\_}saver} object, and the \texttt{converter}
+  object. This is called the output operation.
 
-\item {}
-an operation that takes an input stream and the caller
-\texttt{automaton{\_}loader} object. This is called the input operation.  Note
-that this operation does not uses the \texttt{converter} object, because
-it should call back the \texttt{automaton{\_}loader} object to actually perform
-string to transition label conversions.
-
+\item an operation that takes an input stream and the caller
+  \texttt{automaton{\_}loader} object. This is called the input
+  operation.  Note that this operation does not uses the
+  \texttt{converter} object, because it should call back the
+  \texttt{automaton{\_}loader} object to actually perform string to
+  transition label conversions.
 \end{itemize}
 
 Format objects may require arguments to be constructed, such as the
@@ -486,36 +470,31 @@ title of the automaton in the output.
 Format objects for a format should be defined in a
 \texttt{tools/xxx{\_}format.hh} file.
 
-Vaucanson already provides the following format objects:
+Vaucanson provides the following format objects:
 \begin{description}
-%[visit_definition_list_item]
-\item[{\texttt{vscn::io::dot(const std::string{\&} digraph{\_}title)}, in \texttt{tools/dot{\_}format.hh}.}] %[visit_definition]
+\item[{\texttt{vscn::io::dot(const std::string{\&} digraph{\_}title)},
+    in \texttt{tools/dot{\_}format.hh}.}]
 
-Provides an output operation for the Graphviz \texttt{dot} subformat. The title
-provided when buildint the \texttt{dot} object in Vaucanson becomes the title
-of the graph in the output data and a prefix for state names. Therefore
-the title must contain only alphanumeric characters or the underscore ({\_}),
-and no spaces.
+  Provides an output operation for the Graphviz \texttt{dot}
+  subformat. The title provided when buildint the \texttt{dot} object
+  in Vaucanson becomes the title of the graph in the output data and a
+  prefix for state names. Therefore the title must contain only
+  alphanumeric characters or the underscore ({\_}), and no spaces.
 
-%[depart_definition]
-%[depart_definition_list_item]
-%[visit_definition_list_item]
-\item[{\texttt{vcsn::io::simple()}, in \texttt{tools/simple{\_}format.hh}.}] %[visit_definition]
+\item[{\texttt{vcsn::io::simple()}, in
+    \texttt{tools/simple{\_}format.hh}.}]
 
-Provides both input and output operations for a simple text format.
+  Provides both input and output operations for a simple text format.
 
-%[depart_definition]
-%[depart_definition_list_item]
-%[visit_definition_list_item]
-\item[{\texttt{vcsn::xml::XML(const std::string{\&} xml{\_}title)}, in \texttt{xml/XML.hh}.}] %[visit_definition]
+\item[{\texttt{vcsn::xml::XML(const std::string{\&} xml{\_}title)}, in
+    \texttt{xml/XML.hh}.}]
 
-Provides both input and output operations for the Vaucanson XML I/O format.
-
-%[depart_definition]
-%[depart_definition_list_item]
+  Provides both input and output operations for the Vaucanson XML I/O
+  format.
 \end{description}
 
-(FIXME: why not tools/xml{\_}format.hh with proper includes of headers in xml/?)
+(FIXME: why not tools/xml{\_}format.hh with proper includes of headers
+in xml/?)
 
 (FIXME: really the FSM format should have a format object too.)
 
@@ -525,35 +504,35 @@ Provides both input and output operations for the Vaucanson XML I/O format.
 \subsection{Examples}
 
 Create a simple dot output for an automaton a1:
-\begin{quote}{\ttfamily \raggedright \noindent
-std::ofstream~fout("output.dot");~\\
-fout~<{}<~automaton{\_}saver(a1,~vcsn::io::string{\_}output(),~vcsn::io::dot("a1"));~\\
+\begin{lstlisting}[language=vaucanson]
+std::ofstream fout("output.dot");
+fout << automaton_saver(a1, vcsn::io::string_output(), vcsn::io::dot("a1"));
 fout.close()
-}\end{quote}
+\end{lstlisting}
 
 Output automaton a1 to XML, read it back into another automaton a2
 (possibly of another type):
-\begin{quote}{\ttfamily \raggedright \noindent
-std::ofstream~fout("file.xml");~\\
-fout~<{}<~automaton{\_}saver(a1,~NULL,~vcsn::xml::XML());~\\
-fout.close()~\\
-~\\
-std::ifstream~fin("file.xml");~\\
-fin~>{}>~automaton{\_}loader(a2,~NULL,~vcsn::xml::XML());~\\
+\begin{lstlisting}[language=Vaucanson]
+std::ofstream fout("file.xml");
+fout << automaton_saver(a1, NULL, vcsn::xml::XML());
+fout.close()
+
+std::ifstream fin("file.xml");
+fin >> automaton_loader(a2, NULL, vcsn::xml::XML());
 fin.close()
-}\end{quote}
+\end{lstlisting}
 
 Do the same, but this time using the simple format. The automata are
 generalized, i.e. labeled by expressions:
-\begin{quote}{\ttfamily \raggedright \noindent
-std::ofstream~fout("file.txt");~\\
-fout~<{}<~automaton{\_}saver(a1,~vcsn::io::usual{\_}converter{\_}exp(),~vcsn::io::simple());~\\
-fout.close()~\\
-~\\
-std::ifstream~fin("file.txt");~\\
-fin~>{}>~automaton{\_}loader(a2,~vcsn::io::usual{\_}converter{\_}exp(),~vcsn::io::simple());~\\
+\begin{lstlisting}[language=Vaucanson]
+std::ofstream fout("file.txt");
+fout << automaton_saver(a1, vcsn::io::usual_converter_exp(), vcsn::io::simple());
+fout.close()
+
+std::ifstream fin("file.txt");
+fin >> automaton_loader(a2, vcsn::io::usual_converter_exp(), vcsn::io::simple());
 fin.close()
-}\end{quote}
+\end{lstlisting}
 
 
 %___________________________________________________________________________
@@ -561,109 +540,91 @@ fin.close()
 \subsection{Internal scenario}
 
 What happens in Vaucanson when you write:
-\begin{quote}{\ttfamily \raggedright \noindent
-fin~>{}>~automaton{\_}loader(a1,~c1,~f1)
-}\end{quote}
-
+\begin{lstlisting}[language=Vaucanson]
+fin >> automaton_loader(a1, c1, f1)
+\end{lstlisting}
 ?
-\newcounter{listcnt1}
-\begin{list}{\arabic{listcnt1}.}
-{
-\usecounter{listcnt1}
-\setlength{\rightmargin}{\leftmargin}
-}
-\item {}
-function \texttt{automaton{\_}loader} creates an object AL1 of type
-\texttt{automaton{\_}loader{\_}} that memorizes its arguments.
 
-\item {}
-\texttt{automaton{\_}loader()} returns AL1.
+\begin{enumerate}
+\item function \texttt{automaton{\_}loader} creates an object AL1 of
+  type \texttt{automaton{\_}loader{\_}} that memorizes its arguments.
 
-\item {}
-\texttt{operator>{}>(fin, AL1)} is called.
+\item \texttt{automaton{\_}loader()} returns AL1.
 
-\item {}
-\texttt{operator>{}>} says to format object f1: ``hi, please use fin to load
-something with AL1''.
+\item \texttt{operator>{}>(fin, AL1)} is called.
 
-\item {}
-f1 scans input stream fin. Things may happen then:
+\item \texttt{operator>{}>} says to format object f1: ``hi, please use
+  fin to load something with AL1''.
 
-\end{list}
-\begin{quote}
-\begin{itemize}
-\item {}
-f1 finds a state numbered N. Then it says to AL1: ``hey, make a new
-state into the output automaton, keep its handler s1 for yourself
-and remember it is associated to N''.  (callback \texttt{AL1.add{\_}state})
+\item f1 scans input stream fin. Things may happen then:
+  \begin{itemize}
+  \item f1 finds a state numbered N. Then it says to AL1: ``hey, make
+    a new state into the output automaton, keep its handler s1 for
+    yourself and remember it is associated to N''.  (callback
+    \texttt{AL1.add{\_}state})
 
-\item {}
-f1 finds a transition from state numbered N to state P, labeled
-with character string S. Then it says to AL1: ``hey, create a
-transition with N, P, and S.'' (callback \texttt{AL1.add{\_}transition}).
-Then:
-\begin{itemize}
-\item {}
-AL1 remembers handler for state N (s1)
+  \item f1 finds a transition from state numbered N to state P,
+    labeled with character string S. Then it says to AL1: ``hey,
+    create a transition with N, P, and S.'' (callback
+    \texttt{AL1.add{\_}transition}).  Then:
+    \begin{itemize}
+    \item AL1 remembers handler for state N (s1)
 
-\item {}
-AL1 remembers handler for state P (s2)
+    \item AL1 remembers handler for state P (s2)
 
-\item {}
-AL1 says to converter c1: ``hey, make me a transition label from S''
+    \item AL1 says to converter c1: ``hey, make me a transition label
+      from S''
 
-\item {}
-AL1 creates transition from s1 to s2 using converted label into
-output automaton.
-
+    \item AL1 creates transition from s1 to s2 using converted label
+      into output automaton.
+\end{itemize}
 \end{itemize}
 
-\end{itemize}
-\end{quote}
+\item When f1 is finished, it returns control to \texttt{operator>{}>}
+  and then calling code.
 
-6. when f1 is finished, it returns control to \texttt{operator>{}>} and then
-calling code.
+  Of course since everything is statically compiled using templates
+  there is no performance drawback due to the intensive use of
+  callbacks.
 
-Of course since everything is statically compiled using templates
-there is no performance drawback due to the intensive use of
-callbacks.
-
+\end{enumerate}
 
 %___________________________________________________________________________
 
 \subsection{Convenience utilities}
 
 For most formats the (relatively) tedious following piece of code:
-\begin{quote}{\ttfamily \raggedright \noindent
-output{\_}stream~<{}<~automaton{\_}saver(a,~CONVERTER(),~FORMAT(...))
-}\end{quote}
-
+\begin{lstlisting}[language=Vaucanson]
+output_stream << automaton_saver(a, CONVERTER(), FORMAT(...))
+\end{lstlisting} %>>
 is also available as:
-\begin{quote}{\ttfamily \raggedright \noindent
-FORMAT{\_}dump(output{\_}stream,~a,~...)
-}\end{quote}
 
-If available, this convenience utility is defined in \texttt{tools/XXX{\_}dump.hh}.
+\begin{lstlisting}[language=Vaucanson]
+FORMAT_dump(output_stream, a, ...)
+\end{lstlisting}
+
+If available, this convenience utility is defined in
+\texttt{tools/XXX{\_}dump.hh}.
 
 Conversely, the following piece of code:
-\begin{quote}{\ttfamily \raggedright \noindent
-input{\_}stream~>{}>~automaton{\_}loader(a,~CONVERTER(),~FORMAT(...))
-}\end{quote}
+
+\begin{lstlisting}[language=Vaucanson]
+input_stream >> automaton_loader(a, CONVERTER(), FORMAT(...))
+\end{lstlisting}
 
 is usually also available as:
-\begin{quote}{\ttfamily \raggedright \noindent
-FORMAT{\_}load(input{\_}stream,~a,~...)
-}\end{quote}
 
-If available, this convenience utility is defined in \texttt{tools/XXX{\_}load.hh}.
+\begin{lstlisting}[language=Vaucanson]
+FORMAT_load(input_stream, a, ...)
+\end{lstlisting}
+
+If available, this convenience utility is defined in
+\texttt{tools/XXX{\_}load.hh}.
 
 (FIXME: move fsm{\_}load away from fsm{\_}dump.hh!)
 
 As of today (2006-03-17) the FSM format is only available using the
 fsm{\_}load() and fsm{\_}dump() interface.
-% Local Variables:
-% mode: rst
-% End:
 
 \end{document}
 
