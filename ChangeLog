@@ -1,5 +1,10 @@
 2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/z_commands.cc: Some _CN are still needed.
+
+2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	TAF: Lessen the use of _CN macros.
 	_CN macros of TAF-Kit are used to precise a `Code Name' when it 
 	differs from the name of the command.  Here, the only difference is
