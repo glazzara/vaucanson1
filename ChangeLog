@@ -1,3 +1,10 @@
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Factor a bit in composition.
+
+	* include/vaucanson/algorithms/normalized_composition.hxx
+	(composition_traits, add_transition): New.
+
 2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/automata/concept/automata_ops.hxx: Don't talk

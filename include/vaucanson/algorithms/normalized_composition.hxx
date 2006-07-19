@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -39,6 +39,58 @@
 
 namespace vcsn {
 
+  struct composition_traits
+  {
+    /// Pair of states.
+    typedef std::pair<hstate_t, hstate_t>	pair_hstate_t;
+    /// Map from pair of states to state.
+    typedef std::map<pair_hstate_t, hstate_t>	visited_t;
+    /// Map from state to pair of states.
+    typedef std::map<hstate_t, pair_hstate_t >  map_of_states_t;
+    /// Queue of pair of states.
+    typedef std::queue<pair_hstate_t> 		to_process_t;
+  };
+
+
+  // FIXME: Document.
+  template <typename S, typename M1, typename M2, typename lhs_t,
+	    typename rhs_t, typename res_t>
+  inline
+  void
+  add_transition(res_t&			        output,
+		 composition_traits::visited_t& 	visited,
+		 composition_traits::to_process_t&	to_process,
+		 std::set<hstate_t>&		lhs_states,
+		 std::set<hstate_t>&		rhs_states,
+		 composition_traits::map_of_states_t& m,
+		 const hstate_t current_state,
+		 const hstate_t from,
+		 const hstate_t to,
+		 typename res_t::series_set_elt_t& prod_series)
+  {
+    if (lhs_states.find(from) == lhs_states.end()
+	or rhs_states.find(to) == rhs_states.end())
+      {
+	const composition_traits::pair_hstate_t new_pair (from, to);
+
+	typename composition_traits::visited_t::const_iterator found =
+	  visited.find(new_pair);
+	hstate_t dst;
+	if (found == visited.end())
+	  {
+	    dst = output.add_state();
+	    visited[new_pair] = dst;
+	    m[dst] = new_pair;
+	    to_process.push(new_pair);
+	  }
+	else
+	  dst = found->second;
+	output.add_series_transition(current_state, dst, prod_series);
+      }
+  }
+
+
+
   template <typename S, typename M1, typename M2, typename lhs_t,
 	    typename rhs_t, typename res_t>
   void
@@ -55,9 +107,8 @@ namespace vcsn {
     AUTOMATON_TYPES_(lhs_t, lhs_);
     AUTOMATON_TYPES_(rhs_t, rhs_);
 
-    typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
-    typedef std::set<htransition_t>				delta_ret_t;
-    typedef std::map<pair_hstate_t, hstate_t>		visited_t;
+    typedef composition_traits::pair_hstate_t		pair_hstate_t;
+    typedef std::set<htransition_t>			delta_ret_t;
     typedef typename series_set_elt_t::support_t	support_t;
     typedef typename lhs_series_set_elt_t::support_t	lhs_support_t;
     typedef typename rhs_series_set_elt_t::support_t	rhs_support_t;
@@ -117,26 +168,26 @@ namespace vcsn {
       of(rhs.structure().series().monoid().second_monoid());
 
 
-    visited_t			visited;
-    std::queue<pair_hstate_t>	to_process;
+    composition_traits::visited_t	visited;
+    composition_traits::to_process_t	to_process;
 
     /*----------------------------------.
     | Get initial states of the product |
     `----------------------------------*/
     for_all_initial_states(lhs_s, lhs)
       for_all_initial_states(rhs_s, rhs)
-    {
-      if (lhs_states.find(*lhs_s) == lhs_states.end() or
-	  rhs_states.find(*rhs_s) == rhs_states.end())
       {
-	const hstate_t	new_state = output.add_state();
-	const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
+	if (lhs_states.find(*lhs_s) == lhs_states.end() or
+	    rhs_states.find(*rhs_s) == rhs_states.end())
+	  {
+	    const hstate_t	new_state = output.add_state();
+	    const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
 
-	m[new_state] = new_pair;
-	visited[new_pair] = new_state;
-	to_process.push(new_pair);
+	    m[new_state] = new_pair;
+	    visited[new_pair] = new_state;
+	    to_process.push(new_pair);
+	  }
       }
-    }
 
     /*-----------.
     | Processing |
@@ -209,36 +260,16 @@ namespace vcsn {
 	// If the outgoing transition is of type (*, 1).
 	if (left_supp_elt.value().second == lhs_second_identity.value())
 	{
-	  series_set_elt_t	    prod_series (series);
+	  series_set_elt_t          prod_series (series);
 	  const monoid_elt_value_t word(left_supp_elt.value().first,
 					rhs_second_identity.value());
 	  prod_series.assoc(monoid_elt_t(monoid, word),
 			    left_series.get(left_supp_elt));
 
-	  const pair_hstate_t new_pair (lhs.dst_of(*l), rhs_s);
-
-	  /*-----------------.
-	  | Add transition.  |
-	  `-----------------*/
-
-	  if (lhs_states.find(new_pair.first) == lhs_states.end() or
-	      rhs_states.find(new_pair.second) == rhs_states.end())
-	  {
-	    typename visited_t::const_iterator found =
-	      visited.find(new_pair);
-	    hstate_t aim;
-	    if (found == visited.end())
-	    {
-	      aim = output.add_state();
-	      visited[new_pair] = aim;
-	      m[aim] = new_pair;
-	      to_process.push(new_pair);
-	    }
-	    else
-	      aim = found->second;
-	    output.add_series_transition(current_state, aim, prod_series);
-	  }
-
+	  add_transition (output, visited, to_process,
+			  lhs_states, rhs_states,
+			  m,
+			  lhs.dst_of(*l), rhs_s, prod_series);
 	}
 	else
 	{
@@ -270,36 +301,10 @@ namespace vcsn {
 
 		prod_series.assoc(word, p.value());
 
-
-		const pair_hstate_t new_pair (lhs.dst_of(*l),
-					      rhs.dst_of(*r));
-
-
-		/*-----------------.
-		| Add transition.  |
-		`-----------------*/
-
-		if (lhs_states.find(new_pair.first) ==
-		    lhs_states.end()
-		    or
-		    rhs_states.find(new_pair.second) ==
-		    rhs_states.end())
-		{
-		  typename visited_t::const_iterator found =
-		    visited.find(new_pair);
-		  hstate_t aim;
-		  if (found == visited.end())
-		  {
-		    aim = output.add_state();
-		    visited[new_pair] = aim;
-		    m[aim] = new_pair;
-		    to_process.push(new_pair);
-		  }
-		  else
-		    aim = found->second;
-		  output.add_series_transition(current_state, aim,
-					       prod_series);
-		}
+		add_transition (output, visited, to_process,
+				lhs_states, rhs_states,
+				m,
+				lhs.dst_of(*l), rhs.dst_of(*r), prod_series);
 	      }
 	    }
 	  }
@@ -308,12 +313,9 @@ namespace vcsn {
 
       for_all_const_(delta_ret_t, r, transition_rhs)
       {
-	const rhs_series_set_elt_t  right_series =
-	  rhs.series_of(*r);
-	rhs_support_t		right_supp =
-	  right_series.supp();
-	const rhs_monoid_elt_t	right_supp_elt
-	  (rhs_monoid, *(right_supp.begin()));
+	const rhs_series_set_elt_t  right_series = rhs.series_of(*r);
+	rhs_support_t		right_supp = right_series.supp();
+	const rhs_monoid_elt_t	right_supp_elt (rhs_monoid, *right_supp);
 
 	if (right_supp_elt.value().first ==
 	    rhs_first_identity.value())
@@ -325,33 +327,10 @@ namespace vcsn {
 	  prod_series.assoc(monoid_elt_t(monoid, word),
 			    right_series.get(right_supp_elt));
 
-	  const pair_hstate_t new_pair (lhs_s, rhs.dst_of(*r));
-
-
-	  /*-----------------.
-	  | Add transition.  |
-	  `-----------------*/
-
-	  if (lhs_states.find(new_pair.first) ==
-	      lhs_states.end() or
-	      rhs_states.find(new_pair.second) ==
-	      rhs_states.end())
-	  {
-	    typename visited_t::const_iterator found =
-	      visited.find(new_pair);
-	    hstate_t aim;
-	    if (found == visited.end())
-	    {
-	      aim = output.add_state();
-	      visited[new_pair] = aim;
-	      m[aim] = new_pair;
-	      to_process.push(new_pair);
-	    }
-	    else
-	      aim = found->second;
-	    output.add_series_transition(current_state, aim,
-					 prod_series);
-	  }
+	  add_transition (output, visited, to_process,
+			  lhs_states, rhs_states,
+			  m,
+			  lhs_s, rhs.dst_of(*r), prod_series);
 	}
       }
     }
@@ -369,15 +348,13 @@ namespace vcsn {
 			    res_t& ret)
   {
     typedef std::set<hstate_t>			set_of_states_t;
-    typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
-      map_of_states_t;
     set_of_states_t lhs_states;
     set_of_states_t rhs_states;
 
     lhs_t lhs_cov = outsplitting(lhs, lhs_states);
     rhs_t rhs_cov = insplitting(rhs, rhs_states);
 
-    map_of_states_t m;
+    composition_traits::map_of_states_t m;
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs_cov, rhs_cov, ret, lhs_states, rhs_states, m);
   }
@@ -394,16 +371,13 @@ namespace vcsn {
     AUTOMATON_TYPES(auto_t);
 
     typedef std::set<hstate_t>			set_of_states_t;
-    typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
-      map_of_states_t;
     set_of_states_t lhs_states;
     set_of_states_t rhs_states;
-    map_of_states_t m;
+    composition_traits::map_of_states_t m;
 
     for_all_states (s, ret)
-    {
       ret.del_state (*s);
-    }
+
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs, rhs, ret, lhs_states, rhs_states, m);
   }
@@ -435,11 +409,9 @@ namespace vcsn {
     Element< Automata<series_set_t>, T> ret(aut_set);
 
     typedef std::set<hstate_t>			set_of_states_t;
-    typedef std::map<hstate_t, std::pair<hstate_t, hstate_t> >
-      map_of_states_t;
     set_of_states_t lhs_states;
     set_of_states_t rhs_states;
-    map_of_states_t m;
+    composition_traits::map_of_states_t m;
 
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs, rhs, ret, lhs_states, rhs_states, m);
@@ -499,6 +471,6 @@ namespace vcsn {
 
 
 
-} // End of namespace vcsn.
+} // vcsn
 
 #endif // ! VCSN_ALGORITHMS_NORMALIZED_COMPOSITION_HXX
