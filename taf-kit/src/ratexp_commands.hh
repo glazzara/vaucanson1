@@ -21,7 +21,7 @@
  * @file ratexp_commands.hh
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
  *
- * Commands declaration and definition for all type of automata.
+ * Command declarations and definitions for all the types of automata.
  */
 
 # include "common.hh"

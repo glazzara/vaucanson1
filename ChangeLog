@@ -1,3 +1,16 @@
+2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	TAF: Lessen the use of _CN macros.
+	_CN macros of TAF-Kit are used to precise a `Code Name' when it 
+	differs from the name of the command.  Here, the only difference is
+	'_' changed to '-'.  We just print commands changing '_' to '-' now.
+
+	* taf-kit/src/ratexp_commands.hh: Fix typo.
+	* taf-kit/src/interface.cc: Change '_' to '-' for command names when
+	printing.
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/z_commands.cc: Don't use CN macros.
+
 2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
 
 	More tests.

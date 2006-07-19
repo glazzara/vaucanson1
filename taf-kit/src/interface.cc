@@ -30,20 +30,32 @@
   | Interface |
   `----------*/
 
+inline void write_with_dashs (const char* s)
+{
+  for (; *s; ++s)
+    if (*s == '_')
+      echo_ ("-");
+    else
+      echo_ (*s);
+}
+
 /// List all the commands.
 void list_commands ()
 {
   echo ("List of available commands:");
   for (const command_t* command = command_map; command->docstring; ++command)
     if (command->name)
-      echo ("   - " << command->name << " " << command->params
-	    << ": " << command->docstring);
+    {
+      echo_ ("   - ");
+      write_with_dashs (command->name);
+      echo (" " << command->params << ": " << command->docstring);
+    }
     else
       echo (" * " << command->docstring);
 }
 
-/// Tell if two strings are equal, modulo dashes and underscores.
-static bool equal_without_dashes (const char* s, const char* t)
+/// Whether two strings are equal, modulo dashes and underscores.
+inline bool equal_without_dashes (const char* s, const char* t)
 {
   for (; *s and *t; ++s, ++t)
     if (*s != *t
@@ -54,7 +66,7 @@ static bool equal_without_dashes (const char* s, const char* t)
 }
 
 /**
- * Execute an command according to the program's arguments.
+ * Execute a command according to the program's arguments.
  *
  * @param args Arguments.
  *
