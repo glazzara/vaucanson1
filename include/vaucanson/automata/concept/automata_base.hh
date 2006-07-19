@@ -415,12 +415,14 @@ namespace vcsn {
       `----------*/
 
       /** Call the functor @a fun on every output transitions/states of
-       *  the state @a from.  */
+       *  the state @a from.  If @a fun returns Boolean values and returns
+       * false, the loop is stopped.  */
       template <typename Functor, typename Kind>
       void deltaf(Functor& fun, hstate_t from, delta_kind::kind<Kind> k) const;
 
       /** Call the functor @a fun on every output transitions/states of
-       *  the state @a from where @a query is true. */
+       *  the state @a from where @a query is true.  If @a fun returns
+       *  Boolean values and returns false, the loop is stopped.  */
       template <typename Functor, typename L, typename Kind>
       void deltaf(Functor& fun,
 		  hstate_t from,
@@ -428,7 +430,9 @@ namespace vcsn {
 		  delta_kind::kind<Kind> k) const;
 
       /** Call the functor @a fun on every output transitions/states of
-       *  the state @a from where the label matches the letter @a letter.  */
+       *  the state @a from where the label matches the letter @a letter.
+       *  If @a fun returns Boolean values and returns false, the loop
+       *  is stopped.  */
       template <typename Functor, typename L, typename Kind>
       void letter_deltaf(Functor& fun,
 			 hstate_t from,
@@ -436,7 +440,9 @@ namespace vcsn {
 			 delta_kind::kind<Kind> k) const;
 
       /** Call the functor @a fun on every output spontaneous transitions
-       *  or every states reached by @a from with an epsilon-transition.  */
+       *  or every states reached by @a from with an epsilon-transition.
+       *  If @a fun returns Boolean values and returns false, the loop
+       *  is stopped.  */
       template <typename Functor, typename Kind>
       void spontaneous_deltaf(Functor& fun,
 			      hstate_t from,

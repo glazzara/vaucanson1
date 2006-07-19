@@ -27,6 +27,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/misc/support.hh>
+# include <vaucanson/misc/static.hh>
 # include <vaucanson/tools/usual_macros.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
 
@@ -182,48 +183,47 @@ namespace vcsn
 
     public:
 
-      /// Delta.
-      template <class OutputIterator, class Query>
-      void			delta(OutputIterator res,
-				      hstate_t from,
-				      const Query& q,
-				      delta_kind::edges) const;
-      template <class OutputIterator, class Query>
-      void			delta(OutputIterator res,
-				      hstate_t from,
-				      const Query& q,
-				      delta_kind::states) const;
-      template <class Functor, class Query>
-      void			deltaf(Functor& fun,
-				       hstate_t from,
-				       const Query& q,
-				       delta_kind::edges) const;
-      template <class Functor, class Query>
-      void			deltaf(Functor& fun,
-				       hstate_t from,
-				       const Query& q,
-				       delta_kind::states) const;
-      /// Reverse delta.
-      template <class OutputIterator, class Query>
-      void			rdelta(OutputIterator res,
-				       hstate_t from,
-				       const Query& q,
-				       delta_kind::edges) const;
-      template <class OutputIterator, class Query>
-      void			rdelta(OutputIterator res,
-				       hstate_t from,
-				       const Query& q,
-				       delta_kind::states) const;
-      template <class Functor, class Query>
-      void			rdeltaf(Functor& res,
-					hstate_t from,
-					const Query& q,
-					delta_kind::edges) const;
-      template <class Functor, class Query>
-      void			rdeltaf(Functor& res,
-					hstate_t from,
-					const Query& q,
-					delta_kind::states) const;
+      /// Delta, Reverse deltas, for functor and iterator.
+# define DECLARE_DELTA_FUNCTION(DeltaName, DKind)			\
+      template <class OutputIterator, class Query>			\
+      void			DeltaName(OutputIterator res,		\
+					  hstate_t from,		\
+					  const Query& q,		\
+					  delta_kind::DKind) const
+      DECLARE_DELTA_FUNCTION (delta, states);
+      DECLARE_DELTA_FUNCTION (delta, edges);
+      DECLARE_DELTA_FUNCTION (rdelta, states);
+      DECLARE_DELTA_FUNCTION (rdelta, edges);
+# undef DECLARE_DELTA_FUNCTION
+
+# define DECLARE_DELTAF_BOOL_FUNCTION(DeltaName, DKind, IsBool)		\
+      template <class Functor, class Query>				\
+      void			DeltaName(Functor& fun,			\
+					  hstate_t from,		\
+					  const Query& q,		\
+					  delta_kind::DKind,		\
+					  utility::IsBool ## _t) const
+      DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
+      DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, false);
+      DECLARE_DELTAF_BOOL_FUNCTION (deltaf, edges, true);
+      DECLARE_DELTAF_BOOL_FUNCTION (deltaf, edges, false);
+      DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, true);
+      DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, states, false);
+      DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, edges, true);
+      DECLARE_DELTAF_BOOL_FUNCTION (rdeltaf, edges, false);
+# undef DECLARE_DELTAF_BOOL_FUNCTION
+
+# define DECLARE_DELTAF_FUNCTION(DeltaName)				\
+      template <class Functor, class Query, typename DKind>		\
+      void			DeltaName(Functor& fun,			\
+					  hstate_t from,		\
+					  const Query& q,		\
+					  delta_kind::kind<DKind>) const
+      DECLARE_DELTAF_FUNCTION (deltaf);
+      DECLARE_DELTAF_FUNCTION (rdeltaf);
+
+# undef DECLARE_DELTAF_FUNCTION
+
       /** @}*/
 
       // FIXME: Not implemented.

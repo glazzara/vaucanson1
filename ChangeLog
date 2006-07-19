@@ -1,3 +1,17 @@
+2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Permit functors to return Booleans used as a loop stopper.
+
+	* include/vaucanson/misc/static.hh: Declare static Booleans type
+	`true_t' and `false_t'. Declare a macro to convert Booleans to static
+	Booleans.
+	* include/vaucanson/automata/implementation/graph.hh,
+	* include/vaucanson/automata/implementation/graph.hxx: Factor. Define
+	different `deltaf'. Dispatch according to the return type of the
+	functor. If it's Bool, then stop the loop if the functor returns
+	false on an input.
+	* include/vaucanson/automata/concept/automata_base.hh: Document.
+
 2006-07-18  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/tools/usual_macros.hh: Pacify check_xml.sh.

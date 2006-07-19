@@ -25,7 +25,7 @@
 
 # include <vaucanson/automata/implementation/graph.hh>
 # include <vaucanson/misc/contract.hh>
-
+# include <vaucanson/misc/static.hh>
 
 namespace vcsn
 {
@@ -383,128 +383,98 @@ namespace vcsn
   | Delta functions |
   `----------------*/
 
-  TParam
-  template <class OutputIterator, class Query>
-  void
-  GClass::delta(OutputIterator res,
-		hstate_t from,
-		const Query& q,
-		delta_kind::edges) const
-  {
-    assertion(has_state(from));
-    const std::set<hedge_t>& edges = states_[from].output_edges;
-    for_all_const_(std::set<hedge_t>, e, edges)
-      if (q(*e))
-	*res++ = *e;
+  // Classical ones.
+
+# define DEFINE_DELTA_FUNCTION(DeltaName, DKind, IO, WhatFromE)		\
+  TParam								\
+  template <class OutputIterator, class Query>				\
+  void									\
+  GClass::DeltaName(OutputIterator res,					\
+		    hstate_t from,					\
+		    const Query& query,					\
+		    delta_kind::DKind) const				\
+  {									\
+    assertion(has_state(from));						\
+    const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
+    for_all_const_(std::set<hedge_t>, e, edges)				\
+      if (query(*e))							\
+	*res++ = WhatFromE;						\
+  }									\
+
+  DEFINE_DELTA_FUNCTION (delta, edges, output, *e);
+  DEFINE_DELTA_FUNCTION (delta, states, output, edges_[*e].to;);
+  DEFINE_DELTA_FUNCTION (rdelta, edges, input, *e);
+  DEFINE_DELTA_FUNCTION (rdelta, states, input, edges_[*e].from);
+
+# undef DEFINE_DELTA_FUNCTION
+
+  // Delta with functor.  Much more than the previous one, because
+  // functor is statically checked for return type of its operator(),
+  // and behave differently if it is bool: loop breaks if false is
+  // returned.
+# define DEFINE_DELTAF_FUNCTION(DeltaName, DKind, IO, IsBool, Action)	\
+  TParam								\
+  template <typename Functor, class Query>				\
+  void									\
+  GClass::DeltaName(Functor& fun,					\
+		    hstate_t from,					\
+		    const Query& query,					\
+		    delta_kind::DKind,					\
+		    utility::IsBool ## _t) const			\
+  {									\
+    assertion(has_state(from));						\
+    const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
+    for_all_const_(std::set<hedge_t>, e, edges)				\
+      if (query(*e))							\
+      { Action; }							\
   }
 
-  TParam
-  template <class OutputIterator, class Query>
-  void
-  GClass::delta(OutputIterator res,
-		hstate_t from,
-		const Query& query,
-		delta_kind::states) const
-  {
-    assertion(has_state(from));
-    const std::set<hedge_t>& edges = states_[from].output_edges;
-    for_all_const_(std::set<hedge_t>, e, edges)
-      if (query(*e))
-	*res++ = edges_[*e].to;
+  DEFINE_DELTAF_FUNCTION (deltaf, states, output, true,
+			  if (not fun(edges_[*e].to)) break);
+  DEFINE_DELTAF_FUNCTION (deltaf, states, output, false, fun(edges_[*e].to));
+  DEFINE_DELTAF_FUNCTION (deltaf, edges, output, true,
+			  if (not fun(*e)) break);
+  DEFINE_DELTAF_FUNCTION (deltaf, edges, output, false, fun(*e));
+
+  DEFINE_DELTAF_FUNCTION (rdeltaf, states, input, true,
+			  if (not fun(edges_[*e].from)) break);
+  DEFINE_DELTAF_FUNCTION (rdeltaf, states, input, false, fun(edges_[*e].from));
+  DEFINE_DELTAF_FUNCTION (rdeltaf, edges, input, true,
+			  if (not fun(*e)) break);
+  DEFINE_DELTAF_FUNCTION (rdeltaf, edges, input, false, fun(*e));
+
+# undef DEFINE_DELTAF_FUNCTION
+
+  // Helpers for static dispatch.
+  namespace deltaf_helper {
+    template <typename T, typename R, typename Arg>
+    char is_returning_bool_helper (R (T::*) (Arg));
+
+    template <typename T, typename Arg>
+    int is_returning_bool_helper (bool (T::*) (Arg));
+
+# define is_returning_bool(T)						\
+    (sizeof (deltaf_helper::is_returning_bool_helper (T)) == sizeof (int))
   }
 
-  TParam
-  template <typename Functor, class Query>
-  void
-  GClass::deltaf(Functor& fun,
-		 hstate_t from,
-		 const Query& query,
-		 delta_kind::edges) const
-  {
-    assertion(has_state(from));
-    const std::set<hedge_t>& edges = states_[from].output_edges;
-    for_all_const_(std::set<hedge_t>, e, edges)
-      if (query(*e))
-	fun(*e);
+# define DEFINE_DELTAF_HELPER(DeltaName)				\
+  TParam								\
+  template <typename Functor, class Query, typename DKind>		\
+  void									\
+  GClass::DeltaName(Functor& fun,					\
+		    hstate_t from,					\
+		    const Query& query,					\
+		    delta_kind::kind<DKind> k) const			\
+  {									\
+    DeltaName (fun, from, query, k,					\
+	       bool_to_type (is_returning_bool (&Functor::operator ())) ()); \
   }
 
-  TParam
-  template <class Functor, class Query>
-  void
-  GClass::deltaf(Functor& fun,
-		 hstate_t from,
-		 const Query& query,
-		 delta_kind::states) const
-  {
-    assertion(has_state(from));
-    const std::set<hedge_t>& edges = states_[from].output_edges;
-    for_all_const_(std::set<hedge_t>, e, edges)
-      if (query(*e))
-	fun(edges_[*e].to);
-  }
+  DEFINE_DELTAF_HELPER (deltaf);
+  DEFINE_DELTAF_HELPER (rdeltaf);
 
-
-  TParam
-  template <class OutputIterator, class Query>
-  void
-  GClass::rdelta(OutputIterator res,
-		 hstate_t from,
-		 const Query& q,
-		 delta_kind::edges) const
-  {
-    assertion(has_state(from));
-    const std::set<hedge_t>& edges = states_[from].input_edges;
-    for_all_const_(std::set<hedge_t>, e, edges)
-      if (q(*e))
-	*res++ = *e;
-  }
-
-  TParam
-  template <class OutputIterator, class Query>
-  void
-  GClass::rdelta(OutputIterator res,
-		 hstate_t from,
-		 const Query& q,
-		 delta_kind::states) const
-  {
-    assertion(has_state(from));
-    const state_value_t::edges_t& edges =
-      states_[from].input_edges;
-    for_all_const_(std::set<hedge_t>, e, edges)
-      if (q(*e))
-	*res++ = edges_[*e].from;
-  }
-
-  TParam
-  template <class Functor, class Query>
-  void
-  GClass::rdeltaf(Functor& fun,
-		  hstate_t from,
-		  const Query& query,
-		  delta_kind::edges) const
-  {
-    assertion(has_state(from));
-    const std::set<hedge_t>& edges = states_[from].input_edges;
-    for_all_const_(std::set<hedge_t>, e, edges)
-      if (query(*e))
-	fun(*e);
-  }
-
-  TParam
-  template <class Functor, class Query>
-  void
-  GClass::rdeltaf(Functor& fun,
-		  hstate_t from,
-		  const Query& query,
-		  delta_kind::states) const
-  {
-    assertion(has_state(from));
-    const state_value_t::edges_t& edges =
-      states_[from].input_edges;
-    for_all_const_(std::set<hedge_t>, e, edges)
-      if (query(*e))
-	fun(edges_[*e].from);
-  }
+# undef DEFINE_DELTAF_HELPER
+# undef is_returning_bool
 
   /*----.
   | Tag |
