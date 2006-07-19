@@ -88,6 +88,7 @@ EGREP='@EGREP@'
 FGREP='@FGREP@'
 
 test -z "$VCSN_B" && VCSN_B=`cd ../src && pwd`/vcsn-b
+test -z "$VCSN_Z" && VCSN_Z=`cd ../src && pwd`/vcsn-z
 test -z "$VCSN_XSD_PATH" && export VCSN_XSD_PATH=$top_srcdir/data/vaucanson.xsd
 
 echo "Path is $PATH" >&2
@@ -131,10 +132,11 @@ ambiguous=$automata_tests_dir/ambiguous.xml
 ## Test dir.  ##
 ## ---------- ##
 
-chmod -R a+rwx testSubDir > /dev/null 2>&1
-rm -rf testSubDir > /dev/null 2>&1
-mkdir testSubDir
-cd ./testSubDir
+testSubDir=testSubDir-$me
+chmod -R a+rwx $testSubDir > /dev/null 2>&1
+rm -rf $testSubDir > /dev/null 2>&1
+mkdir $testSubDir
+cd $testSubDir
 
 
 

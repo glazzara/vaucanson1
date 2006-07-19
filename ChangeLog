@@ -1,3 +1,15 @@
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Harness taf-kit for vcsn-z tests.
+
+	* taf-kit/tests/check.mk: New.
+	One day this guys should go into Automake.
+	* taf-kit/tests/Makefile.am: Use it.
+	* taf-kit/tests/defs.in (testSubDir): Let's have several of them for
+	parallel test suites.
+	* taf-kit/tests/vcsn-b.test: Remove my antonym's trashy kludges.
+	* taf-kit/tests/vcsn-z.test: New.
+
 2006-07-19  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Add some comments to invert algorithm.

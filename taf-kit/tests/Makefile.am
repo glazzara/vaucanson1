@@ -11,10 +11,13 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+include check.mk
+
 XFAIL_TESTS =
 
-TESTS = \
-vcsn-b.test
+TESTS =						\
+vcsn-b.test					\
+vcsn-z.test
 
 EXTRA_DIST = $(TESTS)
 
@@ -22,4 +25,4 @@ EXTRA_DIST = $(TESTS)
 check_SCRIPTS = defs
 
 distclean-local:
-	-rm -rf testSubDir
+	-rm -rf testSubDir*
