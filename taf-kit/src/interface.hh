@@ -1,4 +1,4 @@
-// commands.hh: this file is part of Vaucanson.
+// interface.hh: this file is part of Vaucanson.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,27 +14,19 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef COMMANDS_HH
-# define COMMANDS_HH
+#ifndef INTERFACE_HH
+# define INTERFACE_HH
 
 /**
- * @file commands.hh
+ * @file interface.hh
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
  *
- * Command chooser interface.
+ * Interface for TAF-Kit.
  */
 
 # include "common.hh"
 
-struct command_t
-{
-    const char*	name;
-    int	(*command)(const arguments_t&);
-    const char*	params;
-    int		n_params;
-    const char*	docstring;
-};
+int execute_command (const arguments_t&);
+void list_commands ();
 
-extern const command_t command_map[];
-
-#endif /* !COMMANDS_HH */
+#endif /* !INTERFACE_HH */

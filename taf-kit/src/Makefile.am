@@ -17,7 +17,7 @@ include $(top_srcdir)/src/vaucanson.mk
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 
-Progs = vcsn-b
+Progs = vcsn-b vcsn-z
 
 if VCSN_TAF_KIT
   bin_PROGRAMS = $(Progs)
@@ -33,6 +33,8 @@ COMMON_SOURCES = commands.hh			\
 		 edit_automaton.hxx		\
 		 getters.hh			\
 		 getters.hxx			\
+		 interface.cc			\
+		 interface.hh			\
 		 main.cc			\
 		 predefined_alphabets.hh
 
@@ -41,9 +43,16 @@ vcsn_b_CPPFLAGS = $(AM_CPPFLAGS)					\
 		  -DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"   \
 		  -DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
 
+vcsn_z_CPPFLAGS = $(AM_CPPFLAGS)					\
+		  -DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"   	\
+		  -DCONTEXT_NAMESPACE="vcsn::z_automaton"
+
 
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\
-		 b_commands.cc
+		 ratexp_commands.hh b_commands.cc
+
+vcsn_z_SOURCES = $(COMMON_SOURCES)		\
+		 ratexp_commands.hh z_commands.cc
 
 ## ------ ##
 ## argp.  ##

@@ -1,3 +1,18 @@
+2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Add TAF-Kit for Z weighted automata.
+
+	* taf-kit/src/ratexp_commands.hh: New. RatExp specific commands. Not
+	common because RatExp are not handled for every type of automata.
+	* taf-kit/src/common_commands.hh: Update accordingly.
+	* taf-kit/src/interface.hh,
+	* taf-kit/src/interface.cc: New. Interface to choose a command and to
+	list them.
+	* taf-kit/src/commands.hh,
+	* taf-kit/src/b_commands.cc: Update accordingly.
+	* taf-kit/src/z_commands.cc: New. Z weighted automata support.
+	* taf-kit/src/Makefile.am: Add `vcsn-z'.
+
 2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
 
 	Factor a bit in composition.

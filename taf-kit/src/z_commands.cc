@@ -1,5 +1,4 @@
-
-// b_commands.cc: this file is part of the Vaucanson project.
+// z_commands.cc: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -18,39 +17,15 @@
 
 
 /**
- * @file b_commands.c
+ * @file z_commands.c
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
  *
- * Commands declaration and definition for Boolean automata.
+ * Commands declaration and definition for Z weighted automata.
  */
 
 #include "commands.hh"
 #include "ratexp_commands.hh"
 #include "common_commands.hh"
-
-  /*-------------------.
-  | Command definition |
-  `-------------------*/
-
-DEFINE_IS_PROPERTY_COMMAND (complete);
-
-DEFINE_IS_PROPERTY_COMMAND (deterministic);
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (complete));
-
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (determinize)
-				  ARG_KIND (aut)
-				  ALGOS (determinize, realtime));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (complement));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (minimization_hopcroft));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (minimization_moore));
 
   /*-----------------------------.
   | Define the set of commands.  |
@@ -78,10 +53,6 @@ const command_t command_map[] =
     COMMAND_ENTRY (eval, AutWord, "Evaluate `word' on `aut'."),
     COMMAND_ENTRY_CN (is-ambiguous, is_ambiguous, Aut,
 		      "Return whether `aut' is ambiguous."),
-    COMMAND_ENTRY_CN (is-complete, is_complete, Aut,
-		      "Return whether `aut' is complete."),
-    COMMAND_ENTRY_CN (is-deterministic, is_deterministic, Aut,
-		      "Return whether `aut' is deterministic."),
     COMMAND_ENTRY_CN (is-empty, is_empty, Aut,
 		      "Return whether trimed `aut' is empty."),
     COMMAND_ENTRY_CN (is-normalized, is_normalized, Aut,
@@ -100,15 +71,7 @@ const command_t command_map[] =
 		   "Give `aut' closed over epsilon transitions."),
     COMMAND_ENTRY_CN (co-accessible, coaccessible, Aut,
 		      "Give the maximal coaccessible subautomaton of `aut'."),
-    COMMAND_ENTRY (complement, Aut, "Complement `aut1'."),
-    COMMAND_ENTRY (complete, Aut, "Give the complete version of `aut1'."),
     COMMAND_ENTRY (concatenate, AutAut, "Concatenate `aut1' and `aut2'."),
-    COMMAND_ENTRY (determinize, Aut,
-		   "Give the determinized automaton of `aut'."),
-    COMMAND_ENTRY_CN (minimize, minimization_hopcroft, Aut,
-		      "Give the minimized of `aut' (Hopcroft algorithm)."),
-    COMMAND_ENTRY_CN (minimize-moore, minimization_moore, Aut,
-		      "Give the minimized of `aut' (Moore algorithm)."),
     COMMAND_ENTRY (normalize, Aut,
 		   "Give the Thompson-normalized automaton of `aut'."),
     COMMAND_ENTRY (power, AutInt, "Give the power of `aut' by `n'."),

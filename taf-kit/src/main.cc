@@ -30,6 +30,7 @@
 #include "common.hh"
 #include "predefined_alphabets.hh"
 #include "commands.hh"
+#include "interface.hh"
 
 /**
  * Base info for the program.

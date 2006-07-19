@@ -46,9 +46,9 @@ using vcsn::xml::XML;
 # include "commands_macros.hh"
 
 
-  /*-------------------.
-  | Command definition |
-  `-------------------*/
+  /*---------------------------------------.
+  | Command definition (RatExp excluded).  |
+  `---------------------------------------*/
 
 DEFINE_IS_PROPERTY_COMMAND (ambiguous);
 
@@ -57,12 +57,6 @@ DEFINE_IS_PROPERTY_COMMAND (normalized);
 DEFINE_IS_PROPERTY_COMMAND (realtime);
 
 DEFINE_IS_PROPERTY_COMMAND (standard);
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (exp)
-			ALGO (standard_of));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (exp)
-			ALGO (thompson_of));
 
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (trim));
@@ -82,13 +76,6 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (normalize));
 
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (minimization_hopcroft));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (minimization_moore));
-
-
 DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (quotient)
 				  ARG_KIND (aut)
 				  ALGOS (quotient, realtime));
@@ -107,20 +94,6 @@ DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 			 ALGO (concatenate));
 
-
-DEFINE_COMMAND (NAME (derived_term_automaton)
-		CODE (
-		  rat_exp_t   e = get_exp (args.args[1]);
-		  automaton_t a = make_automaton (get_alphabet (args.alphabet));
-		  derived_term_automaton (a, e))
-		OUTPUT (automaton_saver (a, string_out (), XML ()))
-		RETURNVALUE (0));
-
-DEFINE_COMMAND (NAME (aut_to_exp)
-		CODE (/* Empty */)
-		OUTPUT (aut_to_exp (get_aut (args.args[1]), DMChooser ())
-			<< std::endl)
-		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (are_isomorphic)
 		CODE (bool b = are_isomorphic (get_aut (args.args[1]),
@@ -153,11 +126,6 @@ DEFINE_COMMAND (NAME (power)
 		      for (int i = 1; i < n; ++i)
 			p = product (p, a))
 		OUTPUT (automaton_saver (p, string_out (), XML ()))
-		RETURNVALUE (0));
-
-DEFINE_COMMAND (NAME (expand)
-		CODE (/* Empty */)
-		OUTPUT (expand (get_exp (args.args[1])))
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (info)
