@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef   	INVERSE_HXX_
-# define   	INVERSE_HXX_
+#ifndef   	INVERT_HXX_
+# define   	INVERT_HXX_
 
 # include <map>
 
@@ -61,6 +61,9 @@ namespace vcsn {
 	   (t.structure().series().semiring()));
 	Auto_t auto_tmp(auto_structure);
 
+	// As the output of each transition is not supposed to be
+	// realtime we build the standard automaton corresponding to
+	// this expression
 	standard_of(auto_tmp, exp.value());
 
 	std::map<hstate_t, hstate_t> map_auto_u;
@@ -71,14 +74,16 @@ namespace vcsn {
 	  else
 	    map_auto_u[*p] = u.add_state();
 
-	typename semiring_elt_t::semiring_elt_t o_sm_zero (u.structure().series().semiring().semiring());
+	typename semiring_elt_t::semiring_elt_t
+	  o_sm_zero (u.structure().series().semiring().semiring());
 	monoid_elt_t monoid_identity = u.series().monoid().empty_;
 
 	monoid_elt_t a (u.structure().series().monoid());
 	semiring_elt_t sm (u.structure().series().semiring());
 	series_set_elt_t s (u.structure().series());
 
-	for (typename Auto_t::transition_iterator f = auto_tmp.transitions().begin();
+	for (typename Auto_t::transition_iterator f =
+	       auto_tmp.transitions().begin();
 	     f != auto_tmp.transitions().end();
 	     ++f)
 	{
@@ -186,4 +191,4 @@ namespace vcsn {
   }
 }
 
-#endif /* !INVERSE_HXX_ */
+#endif /* !INVERT_HXX_ */

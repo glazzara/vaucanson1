@@ -1,3 +1,12 @@
+2006-07-19  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Add some comments to invert algorithm.
+
+	* include/vaucanson/algorithms/invert.hxx,
+	* include/vaucanson/algorithms/invert.hh,
+	* src/tests/automata/algos/boolean_rw_transducers/invert_test.hh:
+	  Add more comments and doxygen tags. Plus minor fixes.
+
 2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fix an incorrect use of operator*.

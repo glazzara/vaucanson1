@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TESTS_AUTOMATA_ALGOS_SERIES_MULTIPLICITY_TRANSDUCERS_INVERT_TEST_HH
-# define VCSN_TESTS_AUTOMATA_ALGOS_SERIES_MULTIPLICITY_TRANSDUCERS_INVERT_TEST_HH
+#ifndef VCSN_TESTS_AUTOMATA_ALGOS_BOOLEAN_RW_TRANSDUCERS_INVERT_TEST_HH
+# define VCSN_TESTS_AUTOMATA_ALGOS_BOOLEAN_RW_TRANSDUCERS_INVERT_TEST_HH
 
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
@@ -133,4 +133,4 @@ bool invert_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_SERIES_MULTIPLICITY_TRANSDUCERS_INVERT_TEST_HH
+#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_BOOLEAN_RW_TRANSDUCERS_INVERT_TEST_HH

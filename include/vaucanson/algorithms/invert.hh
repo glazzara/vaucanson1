@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,42 +15,51 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef INVERSE_HH
-# define INVERSE_HH
+#ifndef INVERT_HH
+# define INVERT_HH
 
-/** @addtogroup algorithms *//** @{ */
 /**
- * @file inverse.hh
+ * @file invert.hh
  *
- * Declarations of inverse().
+ * Declarations of invert().
+ * Compute the automaton performing the inverse rationnal relation.
  *
- * @see inverse()
+ * This algorithm is described in "Weighted automata and transducers
+ * in Vaucanson" by Akim Demaille, Sylvain Lombardy and Jacques
+ * Sakarovitch, for WOWA 2006.
+ *
+ * @author Robert Bigaignon <robert.bigaignon@lrde.epita.fr>
+ *
+ * @see invert()
  */
-/** @} */
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/transducer.hh>
 
 namespace vcsn {
 
-  /** @addtogroup algorithms *//** @{ */
-
-  /// @name invert algorithm
-  //@{
-
-  /// Compute the automaton performing the invert rationnal relation.
+  /**
+   * @brief Invert a transducer.
+   *
+   * @param t	Input transducer.
+   * @param res	Inverse transducer.
+   *
+   */
   template<typename A, typename T>
   void
-  invert(const Element<A, T>&,
-	 Element<A, T>&);
+  invert(const Element<A, T>& t,
+	 Element<A, T>& res);
 
+  /**
+   * @brief Invert a transducer.
+   *
+   * @param t	Input transducer.
+   * @return	Inverse transducer.
+   *
+   */
   template<typename A, typename T>
   Element<A, T>&
   invert(const Element<A, T>&);
-
-  //@}
-
-  /** @} */
 
 } // vcsn
 
@@ -58,4 +67,4 @@ namespace vcsn {
 #  include <vaucanson/algorithms/invert.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // !INVERSE_HH
+#endif // !INVERT_HH
