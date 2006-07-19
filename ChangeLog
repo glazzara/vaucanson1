@@ -1,3 +1,28 @@
+2006-07-19  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Add invert algorithm for rw transducers.
+	The specialization for FMP transducers should come later.
+
+
+	* include/vaucanson/algorithms/invert.hxx,
+	* include/vaucanson/algorithms/invert.hh: New. Invert
+	  algorithm for rw transducers.
+
+	* include/Makefile.am: Update accordingly.
+
+	* src/tests/automata/algos/boolean_rw_transducers: This
+	  directory contains tests for boolean rw transducers
+	  exclusively.
+	* src/tests/automata/algos/boolean_rw_transducers/invert_test.hh:
+	  New. Small test for invert algorithm.
+	* src/tests/automata/algos/boolean_rw_transducers/Makefile.am:
+	  New.
+
+	* src/tests/test-suites/generate-all.sh,
+	* src/tests/automata/algos/Makefile.am: Update accordingly.
+
+	* configure.ac: Update accordingly.
+
 2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
 
 	Add support for Support::operator*.

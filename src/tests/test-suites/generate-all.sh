@@ -112,11 +112,28 @@ for automata_kind in boolean r z z_max_plus z_min_plus; do
 	${TEST}
 done;
 
-#    /*-----------.
-#    | Transducer |
-#    `-----------*/
+#    /*----------------------.
+#    | Boolean RW_Transducer |
+#    `----------------------*/
 
-for kind in boolean z
+for kind in boolean
+do
+  generate \
+      context_headers_${kind}_transducer \
+      ../context_headers/transducers
+
+  generate \
+      ${kind}_transducer \
+      ../automata/implementation_check ../automata/algos/graphs \
+      ../automata/algos/series_multiplicity_transducers \
+      ../automata/algos/boolean_rw_transducers
+done
+
+#  /*-------------.
+#  | Z Transducer |
+#  `-------------*/
+
+for kind in z
 do
   generate \
       context_headers_${kind}_transducer \
@@ -127,6 +144,7 @@ do
       ../automata/implementation_check ../automata/algos/graphs \
       ../automata/algos/series_multiplicity_transducers
 done
+
 
 # FIXME: Directories labeled_graphs, label_aware_graphs and
 #	 freemonoid_labeled_graphs are not tested.

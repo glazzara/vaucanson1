@@ -193,6 +193,7 @@ AC_CONFIG_FILES([
 	src/tests/automata/algos/labeled_graphs/Makefile
 	src/tests/automata/algos/letter_combination_labeled_graphs/Makefile
 	src/tests/automata/algos/series_multiplicity_transducers/Makefile
+	src/tests/automata/algos/boolean_rw_transducers/Makefile
 	src/tests/automata/implementation_check/Makefile
 	src/tests/context_headers/Makefile
 	src/tests/context_headers/automata/Makefile

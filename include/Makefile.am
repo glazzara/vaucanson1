@@ -361,6 +361,8 @@ nobase_include_HEADERS =						   \
 	vaucanson/algorithms/projections_fmp.hxx			   \
 	vaucanson/algorithms/evaluation_fmp.hh				   \
 	vaucanson/algorithms/evaluation_fmp.hxx				   \
+	vaucanson/algorithms/invert.hh					\
+	vaucanson/algorithms/invert.hxx					\
 	vaucanson/vaucanson.hh						   \
 	vaucanson/boolean_automaton.hh					   \
 	vaucanson/boolean_transducer.hh					   \
