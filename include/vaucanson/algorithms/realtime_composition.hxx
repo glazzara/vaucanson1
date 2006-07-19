@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -123,8 +123,7 @@ namespace vcsn {
 	exp_t exp = lhs.series_of(*e);
 
 	assertion(exp.supp().size() == 1);
-	monoid_elt_t word (exp.structure().monoid(),
-			   *(exp.supp().begin()));
+	monoid_elt_t word (exp.structure().monoid(), *exp.supp());
 	// This supp would have one word
 
 	Auto_t a(auto_structure);

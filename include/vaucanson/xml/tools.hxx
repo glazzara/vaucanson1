@@ -14,8 +14,10 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #ifndef VCSN_XML_TOOLS_HXX
 # define VCSN_XML_TOOLS_HXX
+
 /**
  * @file tools.hxx
  *
@@ -32,16 +34,97 @@ namespace vcsn
   namespace xml
   {
 
-    /*----------------.
-    | Converter tools |
-    `----------------*/
+    namespace tools
+    {
+
+    /*--------------------------------------.
+    | Extract information about the types.  |
+    `--------------------------------------*/
+
+      /**
+       * Tools to generate automaton labels from string, and to ensure type
+       * compatibility.
+       *
+       */
+      // Default.
+      template <class S, class T>
+      const char* get_semiring_set(const S&, const T&)
+      { return "undefined"; }
+
+# define GET_SEMIRING_SET(T, Value)			\
+      template <class S>				\
+      const char* get_semiring_set(const S&, const T&)	\
+      { return Value; }
+
+      GET_SEMIRING_SET(bool, "B")
+      GET_SEMIRING_SET(double, "R")
+      GET_SEMIRING_SET(float, "R")
+      GET_SEMIRING_SET(int, "Z")
+# undef GET_SEMIRING_SET
+
+      // Transducer on P(B*).
+      template <class S, class U, class V>
+      const char* get_semiring_set(const S&,
+				   const vcsn::rat::exp<U, V>&)
+      { return "ratSeries"; }
+
+
+
+      // Deals with the "operation" attribute of <semiring> tag.
+      // Default.
+      template <class S>
+      const char* get_semiring_operations(const S&)
+      { return "undefined"; }
+
+# define GET_SEMIRING_OPERATIONS(S, Value)			\
+      template <>						\
+      inline const char* get_semiring_operations<S>(const S&)	\
+      { return Value; }
+
+      GET_SEMIRING_OPERATIONS(vcsn::algebra::NumericalSemiring,
+			      "numerical")
+      GET_SEMIRING_OPERATIONS(vcsn::z_max_plus_automaton::semiring_t,
+			      "tropicalMax")
+      GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t,
+			      "tropicalMin")
+# undef GET_SEMIRING_OPERATIONS
+
+
+
+      // Deal with the "type" attribute of <monoid> tag.
+      // Default.
+      template <class S>
+      const char* get_monoid_type(const S&)
+      { return "undefined"; }
+
+      template <class S>
+      const char* get_monoid_type(const vcsn::algebra::FreeMonoid<S>&)
+      { return "free"; }
+
+      template <class S1, class S2>
+      const char*
+      get_monoid_type(const vcsn::algebra::FreeMonoidProduct<S1, S2>&)
+      { return "product"; }
 
 
     /*---------.
     | Automata |
     `---------*/
-    namespace tools
-    {
+
+    // Useful abbreviation to circumvent the impossibility to define
+    // parametric typedefs.
+# define AUTtype				\
+    Element<Automata<S>, T>
+# define TRANStype				\
+    Element<Transducer<S>, T>
+# define FMPtype      							  \
+    Element<								  \
+      Automata<								  \
+      vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
+      >, T								  \
+    >
+
+
       // Add the label as a string attribute
       template <class S, class T, class U>
       void add_label(xercesc::DOMElement* elt,
@@ -321,65 +404,6 @@ namespace vcsn
       }
 
 
-      /**
-       * Tools to generate automaton labels from string, and to ensure type
-       * compatibility.
-       *
-       */
-# define GET_SEMIRING_SET(T, Value)			\
-      template <class S>				\
-      const char* get_semiring_set(const S&, const T&)	\
-      { return Value; }
-
-      // Default.
-      template <class S, class T>
-      const char* get_semiring_set(const S&, const T&)
-      { return "undefined"; }
-
-      // Transducer on P(B*).
-      template <class S, class U, class V>
-      const char* get_semiring_set(const S&,
-				   const vcsn::rat::exp<U, V>&)
-      { return "ratSeries"; }
-
-      GET_SEMIRING_SET(bool, "B")
-      GET_SEMIRING_SET(double, "R")
-      GET_SEMIRING_SET(float, "R")
-      GET_SEMIRING_SET(int, "Z")
-
-      // Deals with the "operation" attribute of <semiring> tag.
-# define GET_SEMIRING_OPERATIONS(S, Value)			\
-      template <>						\
-      inline const char* get_semiring_operations<S>(const S&)	\
-      { return Value; }
-
-      // Default.
-      template <class S>
-      const char* get_semiring_operations(const S&)
-      { return "undefined"; }
-
-      GET_SEMIRING_OPERATIONS(vcsn::algebra::NumericalSemiring, "numerical")
-      GET_SEMIRING_OPERATIONS(vcsn::z_max_plus_automaton::semiring_t, "tropicalMax")
-      GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t, "tropicalMin")
-
-
-      // Deal with the "type" attribute of <monoid> tag.
-      // Default.
-      template <class S>
-      const char* get_monoid_type(const S&)
-      { return "undefined"; }
-
-      template <class S>
-      const char* get_monoid_type(const vcsn::algebra::FreeMonoid<S>&)
-      { return "free"; }
-
-      template <class S1, class S2>
-      const char*
-      get_monoid_type(const vcsn::algebra::FreeMonoidProduct<S1, S2>&)
-      { return "product"; }
-
-
-
 # define VCSN_XML_NO_TYPE ""
 # define VCSN_XML_SUM_TYPE "+"
 # define VCSN_XML_PRODUCT_TYPE "."
@@ -514,7 +538,7 @@ namespace vcsn
       }
 
 
-      TParmFMP
+      template <class S, class T, class M1, class M2>
       typename FMPtype::series_set_elt_t
       get_series(xercesc::DOMElement* node, FMPtype& a)
       {
@@ -529,7 +553,7 @@ namespace vcsn
       }
 
 
-      TParm
+      template <class S, class T>
       typename TRANStype::series_set_elt_t
       get_series(xercesc::DOMElement* node,
 		 TRANStype& a)
@@ -589,8 +613,7 @@ namespace vcsn
 
 	if (! o_res && o_exp.supp().size())
 	{
-	  m2 = *o_exp.supp();
-	  sem = o_exp.get(m2);
+	  sem = o_exp.get(*o_exp.supp());
 	}
 	else
 	{
@@ -889,13 +912,8 @@ namespace vcsn
 } // ! vcsn
 
 
-# undef GET_FREEMONOID_TYPE
-# undef GET_SEMIRING_OPERATIONS
-# undef GET_SEMIRING_SET
 # undef AUTtype
 # undef TRANStype
 # undef FMPtype
-# undef TParm
-# undef TParmFMP
 
 #endif // ! VCSN_XML_TOOLS_HXX

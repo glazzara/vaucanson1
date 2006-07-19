@@ -109,22 +109,6 @@ namespace vcsn
 
 } // ! vcsn
 
-# define TParm					\
-    template <class S, class T>
-# define TParmFMP					\
-      template <class S, class T, class M1, class M2>
-# define AUTtype				\
-    Element<Automata<S>, T>
-# define TRANStype				\
-    Element<Transducer<S>, T>
-# define FMPtype      							  \
-    Element<								  \
-      Automata<								  \
-      vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
-      >, T								  \
-    >
-
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/xml/tools.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY

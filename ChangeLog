@@ -1,3 +1,19 @@
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix XML with G++ 4.1.
+
+	Function templates should be defined before being used.
+	* include/vaucanson/xml/tools.hh: Move local #defines into...
+	* include/vaucanson/xml/tools.hxx: here.
+	(TParmFMP, TParm): Remove, used once each.
+	(get_semiring_set, get_semiring_operations, get_monoid_type): Move
+	higher in the file.
+
+	Don't forget to save files before checking in.
+	* include/vaucanson/algorithms/backward_realtime.hxx: Use
+	Support::operator*.
+	* include/vaucanson/algorithms/realtime_composition.hxx: Ditto.
+
 2006-07-19  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Add invert algorithm for rw transducers.
