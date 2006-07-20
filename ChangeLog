@@ -1,3 +1,9 @@
+2006-07-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	More variable names.
+
+	* doc/manual/developer.tex: Some specialized var names..
+
 2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/src/b_commands.cc,

@@ -35,6 +35,24 @@ or a number''.
 \item[p\textstar, q\textstar, r\textstar, s\textstar] states (\code{hstate\_t})
 \end{description}
 
+Some variables should be consistently used to refer to some ``fixed''
+values.
+\begin{description}
+\item[monoid_identity] The neutral for the monoid, the empty word.
+\begin{lstlisting}[language=Vaucanson]
+monoid_elt_t monoid_identity = a.series().monoid().empty_;
+\end{lstlisting}
+
+\item[null_series] The null series, the 0, the identity for the sum.
+\begin{lstlisting}[language=Vaucanson]
+series_set_elt_t null_series = a.series().zero_;
+\end{lstlisting}
+
+\item[semiring_elt_zero] The zero for the weights.
+\begin{lstlisting}[language=Vaucanson]
+semiring_elt_t semiring_elt_zero = a.series().semiring().wzero_;
+\end{lstlisting}
+\end{description}
 
 \subsection{Commenting Code}
 \label{sec:commenting-code}
