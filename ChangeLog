@@ -1,3 +1,8 @@
+2006-07-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* doc/manual/vaucanson-user-manual.tex: Add missing myacronym package.
+	* doc/manual/developer.tex: Describe directories. Add a rule on macros.
+
 2006-07-20  Akim Demaille  <akim@lrde.epita.fr>
 
 	No longer use VCSN_XSD_PATH.

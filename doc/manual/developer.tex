@@ -8,12 +8,73 @@ code in \Vauc.
 \label{sec:contributing-code}
 
 
+\subsection{Directory usage}
+
+The \Vauc package is organized as follows:
+
+\newcommand{\dir}[2]{\path{#1} & #2\\}
+\noindent
+\begin{tabularx}{\textwidth}{|l|X|}
+  \hline
+  Directory & Usage\\
+  \hline
+  \dir{doc}{Documentation.}
+  \dir{doc/css}{CSS style for Doxygen.} 
+  \dir{doc/makefiles}{Sample Makefile to reduce compilation time in
+    \Vauc.}
+  \dir{doc/manual}{User's (and developer's) manual.}
+  \dir{doc/share}{LRDE share repository.}
+  \dir{doc/xml}{XML proposal.}
+  \dir{include/vaucanson}{Library start point: defines classical entry
+    points such as ``boolean\_automaton.hh''.}
+  \dir{include/vaucanson/algebra/concept}{Algebra concepts, ``Structure''
+    part of an Element.}
+  \dir{include/vaucanson/algebra/implementation}{Implementations of
+    algebraic Structures.  Some specialized structures too.}
+  \dir{include/vaucanson/algorithms}{Algorithms.}
+  \dir{include/vaucanson/algorithms/internal}{Internal functions of
+    algorithms.}
+  \dir{include/vaucanson/automata/concept}{Structure of an
+    automaton.}
+  \dir{include/vaucanson/automata/implementation}{Its
+    implementation.}
+  \dir{include/vaucanson/config}{Package configuration and system
+    files.}
+  \dir{include/vaucanson/contexts}{Context headers.}
+  \dir{include/vaucanson/design_pattern}{Element design pattern
+    implementation.}
+  \dir{include/vaucanson/misc}{Internal headers of the whole
+    library. }
+  \dir{include/vaucanson/tools}{Tools such as dumper, bencher.}
+  \dir{include/vaucanson/xml}{XML implementation.}
+  \hline
+\end{tabularx}
+\begin{tabularx}{\textwidth}{|l|X|}
+  \hline
+  Directory & Usage\\
+  \hline
+  \dir{argp}{Argp library for TAF-Kit.}
+  \dir{build-aux}{Where Autotools things go.}
+  \dir{data}{Misc data, like Vaucanson's XSD, Emacs files.}
+  \dir{debian}{Debian packaging.}
+  \dir{src/benchs}{Benches.}
+  \dir{src/demos}{Demos.}
+  \dir{src/tests}{Test suite.}
+  \dir{src/vaucanswig}{Vaucanswig, a SWIG interface for \Vauc.}
+  \dir{taf-kit}{Typed Automata Function Kit, binaries to use \Vauc.}
+  \dir{taf-kit/tests}{Test suite using the TAF-Kit.}
+  \dir{vcs}{Version Control System configuration
+    (\href{http://rubyforge.org/projects/vcs}{VCS Home Page}).}
+  \hline
+\end{tabularx}
 
 \subsection{Coding Style}
 
 Until this is written, please refer to
 \href{http://www.lrde.epita.fr/~akim/compil/assignments.split/Coding-Style.html#Coding-Style}{Tiger's
   Coding Style}.
+
+Emacs users should use the indentation style of ``data/misc.el''.
 
 \subsection{Use of macros}
 
@@ -39,14 +100,34 @@ PARSER_SET_PROPERTY(fgXercesCacheGrammarFromParse);
 but please, respect the following conventions.
 \begin{itemize}
 \item Use upper case names, unless they are part of the interface such
-  as \code{for_all_transitions} and so forth.
+  as \code{for\_all\_transitions} and so forth.
 \item Make them live short lives, as above: undefine them as soon as
   they are no longer needed.
 \item Indent \ac{cpp} directives.  The initial dash should always be
   in the first column, but indent the spaces (one per indentation)
   between it and the directive.  The above code snippet was included
   in an outer \code{\#if}.
+\item We often rely on \texttt{grep} and tags to search things. Please
+  don't clutter names with \ac{cpp} evilness.
 \end{itemize}
+
+For instance, this is bad style:
+
+\begin{lstlisting}[language=Vaucanson]
+#define VCSN_choose_semiring(Canarg, Nonarg, Typeret...)                  \
+    template <class Self>                                                 \
+    template <class T>                                                    \
+    Typeret                                                               \
+    SemiringBase<Self>::Canarg ## choose_ ## Nonarg ## starable(          \
+    SELECTOR(T)) const                                                    \
+    {                                                                     \
+      return op_ ## Canarg ## choose_ ## Nonarg ## starable(this->self(), \
+                                                           SELECT(T));    \
+    };
+    VCSN_choose_semiring(can_,non_,bool)
+    VCSN_choose_semiring(,,Element<Self, T>)
+    VCSN_choose_semiring(,non_,Element<Self, T>)
+\end{lstlisting}
 
 \subsection{Variable Names}
 \newcommand{\textstar}{\texttt{\ensuremath{*}}}
@@ -71,17 +152,17 @@ or a number''.
 Some variables should be consistently used to refer to some ``fixed''
 values.
 \begin{description}
-\item[monoid_identity] The neutral for the monoid, the empty word.
+\item[monoid\_identity] The neutral for the monoid, the empty word.
 \begin{lstlisting}[language=Vaucanson]
 monoid_elt_t monoid_identity = a.series().monoid().empty_;
 \end{lstlisting}
 
-\item[null_series] The null series, the 0, the identity for the sum.
+\item[null\_series] The null series, the 0, the identity for the sum.
 \begin{lstlisting}[language=Vaucanson]
 series_set_elt_t null_series = a.series().zero_;
 \end{lstlisting}
 
-\item[semiring_elt_zero] The zero for the weights.
+\item[semiring\_elt\_zero] The zero for the weights.
 \begin{lstlisting}[language=Vaucanson]
 semiring_elt_t semiring_elt_zero = a.series().semiring().wzero_;
 \end{lstlisting}
