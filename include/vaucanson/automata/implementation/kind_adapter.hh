@@ -99,7 +99,7 @@ namespace vcsn {
 			   const typename Element<S,T >::series_set_elt_t& s) \
   {									\
     assertion(s.supp().size() == 1);					\
-    return op_add_letter_transition(a_set, v, from, to, *s.supp()); \
+    return op_add_letter_transition(a_set, v, from, to, *s.supp().begin()); \
   }
 
 #define ADAPT_WORD_OF_TO_LETTERS_LABEL(T...)			\

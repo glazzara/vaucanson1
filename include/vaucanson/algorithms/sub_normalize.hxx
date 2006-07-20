@@ -102,7 +102,8 @@ namespace vcsn {
       ::of(a.structure().series().semiring());
 
 
-    monoid_elt_t m1(a.structure().series().monoid(), *label.supp());
+    monoid_elt_t m1(a.structure().series().monoid(),
+		    *(label.supp().begin()));
     first_monoid_elt_value_t w1 = m1.value().first;
     second_monoid_elt_value_t w2 = m1.value().second;
 

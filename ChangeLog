@@ -1,3 +1,15 @@
+2006-07-20  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Fix the use of operator*.
+	Since the adapter class Support is not always used, the
+	Support::operator* can't be used in all cases.
+
+	* include/vaucanson/xml/tools.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/automata/implementation/kind_adapter.hh,
+	* include/vaucanson/automata/concept/transducer_ops.hxx: Do
+	  not use Support::operator*.
+
 2006-07-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/manual/vaucanson-user-manual.tex: Add missing myacronym package.

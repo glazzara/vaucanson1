@@ -183,7 +183,7 @@ namespace vcsn
 	{
 	  std::string in_word = get_label(series.supp()->first);
 	  std::string out_word = get_label(series.supp()->second);
-	  std::string mult = get_label(series.get(*series.supp()));
+	  std::string mult = get_label(series.get(*(series.supp().begin())));
 	  std::string out;
 	  if (mult.size())
 	    out = mult;
@@ -220,7 +220,7 @@ namespace vcsn
 	{
 	  std::string in_word = get_label(series.supp()->first);
 	  std::string out_word = get_label(series.supp()->second);
-	  std::string mult = get_label(series.get(*series.supp()));
+	  std::string mult = get_label(series.get(*(series.supp().begin())));
 
 	  if (in_word.size() && in_word != "1")
 	  {
@@ -258,8 +258,8 @@ namespace vcsn
 		     const Element<Transducer<S>, T>&,
 		     const U& series)
       {
-	std::string in = get_label(*series.supp());
-	std::string out = get_label(series.get(*series.supp()));
+	std::string in = get_label(*(series.supp().begin()));
+	std::string out = get_label(series.get(*(series.supp().begin())));
 
 	if (in.size() && in != "1")
 	  elt->setAttribute(transcode("in"),
@@ -276,8 +276,8 @@ namespace vcsn
 			 const Element<Transducer<S>, T>& a,
 			 const U& series)
       {
-	std::string in = get_label(*series.supp());
-	std::string out = get_label(series.get(*series.supp()));
+	std::string in = get_label(*(series.supp().begin()));
+	std::string out = get_label(series.get(*(series.supp().begin())));
 
 	if (in.size() && in != "1")
 	{
