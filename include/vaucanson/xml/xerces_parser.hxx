@@ -28,14 +28,6 @@
 
 # include <fstream>
 
-# define parser_set_property(prop) \
-      if (parser->canSetFeature(XMLUni::prop, true)) \
-	parser->setFeature(XMLUni::prop, true);
-
-# define parser_set_value(prop, value) \
-	parser->setProperty(XMLUni::prop, value);
-
-
 namespace vcsn
 {
   namespace xml
@@ -43,25 +35,16 @@ namespace vcsn
 
     static inline std::string get_xsd_path ()
     {
-      { // Test the environment variable before anything.
-	const char* xsd_env = getenv ("VCSN_XSD_PATH");
-	if (xsd_env)
-	  return xsd_env;
-      }
-      static const char* possible_xsds[] =
-	{ "vaucanson.xsd", VCSN_XSD_PATH, 0 };
-      const char**	 result;
-      for (result = possible_xsds; *result; ++result)
-      {
-	std::ifstream is (*result);
-	if (is.good ())
-	  break;
-      }
-      if (*result)
-	return *result;
-      FAIL ("Error: XSD file not found. Please either set VCSN_XSD_PATH\n"
-	    "to the path of `vaucanson.xsd', put this file in the current\n"
-	    "directory or put it in " VCSN_XSD_PATH ".");
+      // Test the environment variable before anything.
+      std::string path = getenv ("VCSN_DATA_PATH");
+      if (path == "")
+	path = VCSN_DATA_PATH;
+      std::string file = path + "/" + VCSN_DATA_PATH;
+      if (std::ifstream (file.c_str ()).good ())
+	return file;
+      FAIL (std::string ("Error: XSD file not found in ") + path + ".\n"
+	    "Please either set VCSN_DATA_PATH to the Vaucanson data \n"
+	    "directory, containing `vaucanson.xsd'.");
       return "";
     }
 
@@ -71,17 +54,28 @@ namespace vcsn
     {
       using namespace xercesc;
 
-      parser_set_property(fgDOMValidation);
-      parser_set_property(fgDOMNamespaces);
-      parser_set_property(fgDOMDatatypeNormalization);
-      parser_set_property(fgXercesSchema);
-      parser_set_property(fgXercesUseCachedGrammarInParse);
-      parser_set_property(fgXercesCacheGrammarFromParse);
+# define PARSER_SET_PROPERTY(prop)			\
+      if (parser->canSetFeature(XMLUni::prop, true))	\
+	parser->setFeature(XMLUni::prop, true);
 
-      parser_set_value(fgXercesSchemaExternalSchemaLocation,
+      PARSER_SET_PROPERTY(fgDOMValidation);
+      PARSER_SET_PROPERTY(fgDOMNamespaces);
+      PARSER_SET_PROPERTY(fgDOMDatatypeNormalization);
+      PARSER_SET_PROPERTY(fgXercesSchema);
+      PARSER_SET_PROPERTY(fgXercesUseCachedGrammarInParse);
+      PARSER_SET_PROPERTY(fgXercesCacheGrammarFromParse);
+
+# undef PARSER_SET_PROPERTY
+
+
+# define PARSER_SET_VALUE(prop, value) \
+	parser->setProperty(XMLUni::prop, value);
+
+      PARSER_SET_VALUE(fgXercesSchemaExternalSchemaLocation,
 		       transcode("http://vaucanson.lrde.epita.fr " + get_xsd_path ()));
 
-      // fgXercesSchemaExternalNoNamespaceSchemaLocation
+# undef PARSER_SET_VALUE
+
 
       myDOMErrorHandler* err = new myDOMErrorHandler();
       parser->setErrorHandler(err);
@@ -143,9 +137,5 @@ namespace vcsn
   } // xml
 
 } // vcsn
-
-# undef parser_set_property
-# undef parser_set_value
-
 
 #endif // ! VCSN_XML_XERCES_PARSER_HXX

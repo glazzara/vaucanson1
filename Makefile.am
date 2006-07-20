@@ -14,10 +14,14 @@
 SUBDIRS = argp include src taf-kit doc build-aux debian data
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
 
+# Prevent accidental edition of generated files.
 $(srcdir)/README:
 	cp $(srcdir)/doc/README.txt $(srcdir)/README
+	chmod -w $(srcdir)/README
+
 $(srcdir)/NEWS:
 	cp $(srcdir)/doc/NEWS.txt $(srcdir)/NEWS
+	chmod -w $(srcdir)/NEWS
 
 
 ###

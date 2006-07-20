@@ -11,6 +11,8 @@
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+m4_pattern_forbid([^VCSN_])
+
 # VCSN_HEADER
 
 AC_PREREQ([2.60])
@@ -32,6 +34,11 @@ AC_WITH_VCSN
 
 # Awk is used.
 AC_PROG_AWK
+
+
+## ------------ ##
+## Vaucanswig.  ##
+## ------------ ##
 
 # SWIG and Python used.
 AM_PATH_PYTHON([2.2])
@@ -75,6 +82,8 @@ if test "x$WANT_INTERPRETER" != "xno"; then
   fi
 fi
 
+
+
 # Libtool used
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
@@ -101,7 +110,7 @@ case $prefix in
   *) prefix=$ac_default_prefix ;;
 esac
 AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$(eval echo \"$datadir/vaucanson/\")"],
-		   [Path in which data such as XSD will be installed])
+		   [Directory where Vaucaunson data is installed.])
 prefix=$old_prefix
 
 # Package misc variables.
@@ -125,17 +134,19 @@ AC_CONFIG_SUBDIRS([argp])
 ## Documentation.  ##
 ## --------------- ##
 
-AC_ARG_VAR([DOXYGEN], [the Doxygen documentation generation program])
-AC_CHECK_PROGS([DOXYGEN], [doxygen], [$am_aux_dir/missing doxygen])
-AC_ARG_VAR([TEXI2DVI], [program to create DVI from TeX files])
-AC_CHECK_PROGS([TEXI2DVI], [texi2dvi], [$am_aux_dir/missing texi2dvi])
-AC_CHECK_PROGS([DVIPDF], [dvipdf], [$am_aux_dir/missing dvipdf])
-AC_ARG_VAR([RST2TEX], [program to create TeX from reStructuredText documents])
-AC_CHECK_PROGS([RST2TEX], [rst2latex rst2latex.py], [$am_aux_dir/missing rst2latex])
-AC_ARG_VAR([RST2HTML], [program to create HTML from reStructuredText documents])
-AC_CHECK_PROGS([RST2HTML], [rst2html rst2html.py], [$am_aux_dir/missing rst2html])
-AC_ARG_VAR([TAR], [the tape archiver program])
-AC_CHECK_PROGS([TAR], [tar], [$am_aux_dir/missing tar])
+# VCSN_ARG_PROGS(VAR, PROG, DOC)
+# ------------------------------
+m4_define([VCSN_ARG_PROGS],
+[AC_ARG_VAR([$1], [$3])
+AC_CHECK_PROGS([$1], [$2], [$am_aux_dir/missing $2])
+])
+
+
+VCSN_ARG_PROGS([DOXYGEN],  [doxygen],   [the Doxygen documentation generation program])
+VCSN_ARG_PROGS([TEXI2DVI], [texi2dvi],  [program to create DVI from TeX files])
+VCSN_ARG_PROGS([RST2TEX],  [rst2latex], [program to create TeX from reStructuredText documents])
+VCSN_ARG_PROGS([RST2HTML], [rst2html],  [program to create HTML from reStructuredText documents])
+VCSN_ARG_PROGS([TAR],      [tar],       [the tape archiver program])
 
 
 ## ------- ##

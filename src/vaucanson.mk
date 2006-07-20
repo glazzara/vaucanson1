@@ -20,8 +20,8 @@ AM_CPPFLAGS = \
 
 AM_CXXFLAGS = $(CXXFLAGS_STRICT)
 
-# Add this to CPPFLAGS to use the shipped XSD file.
-XSD_CPPFLAGS = -DVCSN_XSD_PATH="\"$(top_srcdir)/data/vaucanson.xsd\""
+# Add this to CPPFLAGS to use the shipped data.
+XSD_CPPFLAGS = -DVCSN_DATA_PATH="\"$(top_srcdir)/data\""
 
 ## The directory where we store automata.
 automatadir = $(pkgdatadir)/automata

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@ using namespace vcsn::z_automaton;
 int
 main(int argc, char **argv)
 {
-
   alphabet_t	A;
   A.insert('a');
   A.insert('b');
@@ -57,4 +56,3 @@ main(int argc, char **argv)
 
   dumper(argc, argv)(std::cout, c1, "c1");
 }
-

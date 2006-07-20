@@ -1,5 +1,23 @@
 2006-07-20  Akim Demaille  <akim@lrde.epita.fr>
 
+	No longer use VCSN_XSD_PATH.
+
+	* configure.ac (VCSN_ARG_PROGS): New.
+	Use it.
+	* include/vaucanson/xml/xerces_parser.hh,
+	* include/vaucanson/xml/xerces_parser.hxx:
+	Don't rely on VCSN_XSD_PATH, but only on VCSN_DATA_PATH.
+	Don't define macros in lower case.
+	Make them short lived.
+	* src/vaucanson.mk: Adjust.
+	* doc/NEWS.txt: Document it.
+
+	* doc/manual/developer.tex (Use of Macros): New.
+
+	* Makefile.am (README, NEWS): Make them read only.
+
+2006-07-20  Akim Demaille  <akim@lrde.epita.fr>
+
 	More variable names.
 
 	* doc/manual/developer.tex: Some specialized var names..
