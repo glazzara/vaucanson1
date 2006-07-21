@@ -1,5 +1,14 @@
 2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
 
+	Remove dead code and figure.
+
+	* src/demos/function_library/Makefile.am: Remove z and b.
+	* doc/manual/images: Remove.
+	* doc/manual/images/a1_det.ps: Remove.
+	* doc/manual/Makefile.am: Adjust.
+
+2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
+
 	Adjust TAF-Kit tests to data/automata.
 
 	* taf-kit/tests/wrapper.in: Do it.

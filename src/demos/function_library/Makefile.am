@@ -17,8 +17,6 @@ AM_CPPFLAGS += $(CXXFLAGS_STRICT)
 AM_CXXFLAGS += -DINTERNAL_CHECKS -DSTRICT
 
 EXTRA_PROGRAMS = 				\
-	b					\
-	z					\
 	r					\
 	z_max_plus				\
 	z_min_plus				\
@@ -30,16 +28,6 @@ demos: $(EXTRA_PROGRAMS)
 else
 demos:
 endif
-
-b_SOURCES = algorithms.cc
-b_CPPFLAGS = $(AM_CPPFLAGS)					\
-	-DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"	\
-	-DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-
-z_SOURCES = algorithms.cc
-z_CPPFLAGS = $(AM_CPPFLAGS)				\
-	-DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"	\
-	-DCONTEXT_NAMESPACE="vcsn::z_automaton"
 
 r_SOURCES = algorithms.cc
 r_CPPFLAGS = $(AM_CPPFLAGS)				\

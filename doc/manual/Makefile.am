@@ -32,8 +32,7 @@ vaucanson-user-manual.tex			\
 installation.tex				\
 taf-kit.tex					\
 library.tex					\
-developer.tex					\
-images/a1_det.ps
+developer.tex
 
 EXTRA_DIST = $(vaucanson_user_manual_sources)
 
