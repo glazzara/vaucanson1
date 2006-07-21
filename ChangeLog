@@ -1,3 +1,7 @@
+2006-07-21  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* data/vaucanson.xsd: Remove annoying default range.
+
 2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Move automaton library to data/automata.
