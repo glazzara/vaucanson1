@@ -37,14 +37,15 @@ namespace vcsn
     {
       // Test the environment variable before anything.
       std::string path = getenv ("VCSN_DATA_PATH");
+      const char* xsd = "vaucanson.xsd";
       if (path == "")
 	path = VCSN_DATA_PATH;
-      std::string file = path + "/" + VCSN_DATA_PATH;
+      std::string file = path + "/" + xsd;
       if (std::ifstream (file.c_str ()).good ())
 	return file;
-      FAIL (std::string ("Error: XSD file not found in ") + path + ".\n"
-	    "Please either set VCSN_DATA_PATH to the Vaucanson data \n"
-	    "directory, containing `vaucanson.xsd'.");
+      FAIL (std::string ("Error: ") + xsd + "file not found in " + path + ".\n"
+	    "Please set VCSN_DATA_PATH to the Vaucanson data directory,\n"
+	    "containing `" + xsd + "'.");
       return "";
     }
 

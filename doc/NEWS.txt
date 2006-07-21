@@ -15,7 +15,7 @@ Vaucanson 0.8a
 - libvaucanson
 
   + Support::operator* simplifies the writing for one-letter
-  supports.  Instead of `*e.supp().begin()`, write `*e.supp()`.
+    supports.  Instead of `*e.supp().begin()`, write `*e.supp()`.
 
 - `VCSN_XSD_PATH` is no longer used.
   The environment variable `VCSN_DATA_PATH` should point to the

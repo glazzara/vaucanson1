@@ -28,13 +28,12 @@ ref.tar.gz: doc.doxy.in
 	$(MAKE) $(AM_MAKEFLAGS) ref
 	$(TAR) -czf $@ `test -d ref || echo '$(srcdir)/'`ref
 
-dist_doc_DATA += README.pdf README.tex README.html \
-		 FAQ.pdf FAQ.tex FAQ.html \
-		 NEWS.pdf NEWS.tex NEWS.html
+dist_pdf_DATA = README.pdf FAQ.pdf NEWS.pdf
 
-EXTRA_DIST = README.txt FAQ.txt NEWS.txt \
+EXTRA_DIST = README.tex FAQ.tex NEWS.tex \
+	     README.txt FAQ.txt NEWS.txt \
 	     share
 
-MAINTAINERCLEANFILES = $(dist_doc_DATA)
+MAINTAINERCLEANFILES = $(dist_doc_DATA) $(dist_pdf_DATA)
 maintainer-clean-local:
 	rm -rf ref

@@ -103,13 +103,18 @@ VCSN_TAF_KIT
 ## Package header configuration.
 ##
 
-# Tell what's the default XSD path.
+# Tell what's the default pkgdata dir.
 old_prefix=$prefix
 case $prefix in
   [\\/]* | ?:[\\/]* ) ;;
   *) prefix=$ac_default_prefix ;;
 esac
-AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$(eval echo \"$datadir/vaucanson/\")"],
+# This expansion by hand is a PITA, but we don't have much choice,
+# Autoconf provides no standard means to do that, since RMS wants to
+# support make-time changes of $prefix.  We do not support this silly
+# idea.
+VCSN_DATA_PATH=$(eval echo $(eval echo "$datadir/vaucanson/"))
+AC_DEFINE_UNQUOTED([VCSN_DATA_PATH], ["$VCSN_DATA_PATH"],
 		   [Directory where Vaucaunson data is installed.])
 prefix=$old_prefix
 
@@ -134,19 +139,19 @@ AC_CONFIG_SUBDIRS([argp])
 ## Documentation.  ##
 ## --------------- ##
 
-# VCSN_ARG_PROGS(VAR, PROG, DOC)
-# ------------------------------
+# VCSN_ARG_PROGS(PROG, DOC)
+# -------------------------
 m4_define([VCSN_ARG_PROGS],
-[AC_ARG_VAR([$1], [$3])
-AC_CHECK_PROGS([$1], [$2], [$am_aux_dir/missing $2])
+[AC_ARG_VAR(m4_toupper([$1]), [$2])
+AC_CHECK_PROGS(m4_toupper([$1]), [$1], [$am_aux_dir/missing $1])
 ])
 
 
-VCSN_ARG_PROGS([DOXYGEN],  [doxygen],   [the Doxygen documentation generation program])
-VCSN_ARG_PROGS([TEXI2DVI], [texi2dvi],  [program to create DVI from TeX files])
-VCSN_ARG_PROGS([RST2TEX],  [rst2latex], [program to create TeX from reStructuredText documents])
-VCSN_ARG_PROGS([RST2HTML], [rst2html],  [program to create HTML from reStructuredText documents])
-VCSN_ARG_PROGS([TAR],      [tar],       [the tape archiver program])
+VCSN_ARG_PROGS([doxygen],   [the Doxygen documentation generation program])
+VCSN_ARG_PROGS([texi2dvi],  [program to create DVI from TeX files])
+VCSN_ARG_PROGS([rst2latex], [program to create TeX from reStructuredText documents])
+VCSN_ARG_PROGS([rst2html],  [program to create HTML from reStructuredText documents])
+VCSN_ARG_PROGS([tar],       [the tape archiver program])
 
 
 ## ------- ##
@@ -160,6 +165,16 @@ AC_CONFIG_FILES([
 ])
 # Prevent accidental edition of generated files.
 AC_CONFIG_FILES([taf-kit/tests/defs], [chmod a-w taf-kit/tests/defs])
+
+# VCSN_CONFIG_WRAPPER TAF-KIT-COMPONENT-NAME
+# ------------------------------------------
+# Create a testing wrapper for the TAF-KIT-COMPONENT-NAME.
+m4_define([VCSN_CONFIG_WRAPPER],
+[AC_CONFIG_FILES([taf-kit/tests/$1:taf-kit/tests/wrapper.in],
+                 [chmod a+x taf-kit/tests/$1])
+])
+VCSN_CONFIG_WRAPPER([vcsn-b])
+VCSN_CONFIG_WRAPPER([vcsn-z])
 
 
 ## ---------------- ##

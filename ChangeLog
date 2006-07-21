@@ -1,3 +1,33 @@
+2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Improve the TAF-Kit test suite framework.
+
+	* include/vaucanson/xml/xerces_parser.hxx (get_xsd_path): Don't
+	forget to look for the xsd file.
+	* taf-kit/tests/check.mk: Improve the layout by splitting long
+	string assignments.
+	* taf-kit/tests/wrapper.in: New.
+	* taf-kit/tests/defs.in: Use it.
+	Set the PATH to use the wrappers.
+	No longer use VERBOSE in anyway.
+	Use a common base test directory containing sub dirs.
+	* taf-kit/tests/vcsn-b.test,
+	* taf-kit/tests/vcsn-z.test: No longer rely on envvars to find the
+	programs to test, but only the PATH.
+	* taf-kit/tests/Makefile.am: Adjust.
+	* configure.ac: Fix the expansion of VCSN_DATA_PATH.
+	(VCSN_ARG_PROGS): Improve the interface.
+	As a consequence RST2TEX is now RST2LATEX.
+	Create the taf-kit wrappers.
+	* doc/makefiles/Makefile.am (docdir): Don't define it, Autoconf 2.60
+	takes care of that.
+	* doc/Makefile.am (dist_doc_DATA): Don't ship nor install html file.
+	Just ship TeX files.
+	Use dist_pdf_DATA for PDF files.
+	* doc/doc.mk: Use RST2LATEX.
+	Don't defined docdir either.
+	* doc/manual/Makefile.am: Use pdf_DATA, not doc_DATA.
+
 2006-07-20  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Fix the use of operator*.

@@ -22,32 +22,32 @@ set -e
 ## ---------------- ##
 
 # are-isomorphic
-  $VCSN_B are-isomorphic $a1 $a1
-! $VCSN_B are-isomorphic $a1 $b1
+  vcsn-b are-isomorphic $a1 $a1
+! vcsn-b are-isomorphic $a1 $b1
 
 # is-ambiguous
-! $VCSN_B is-ambiguous $non_ambiguous1
-! $VCSN_B is-ambiguous $non_ambiguous2
-  $VCSN_B is-ambiguous $ambiguous
+! vcsn-b is-ambiguous $non_ambiguous1
+! vcsn-b is-ambiguous $non_ambiguous2
+  vcsn-b is-ambiguous $ambiguous
 
 # is-complete
-! $VCSN_B is-complete $a1
-  $VCSN_B complete $a1 | $VCSN_B is-complete -
+! vcsn-b is-complete $a1
+  vcsn-b complete $a1 | vcsn-b is-complete -
 
 # is-deterministic
-! $VCSN_B is-deterministic $a1
-  $VCSN_B determinize $a1 | $VCSN_B is-deterministic -
+! vcsn-b is-deterministic $a1
+  vcsn-b determinize $a1 | vcsn-b is-deterministic -
 
 # is-empty.
-! $VCSN_B is-empty $a1
+! vcsn-b is-empty $a1
 
 # is-normzalized.
-! $VCSN_B is-normalized $a1
-  $VCSN_B normalize $a1 | $VCSN_B is-normalized -
+! vcsn-b is-normalized $a1
+  vcsn-b normalize $a1 | vcsn-b is-normalized -
 
 # is-realtime.
-! $VCSN_B is-realtime $a1
+! vcsn-b is-realtime $a1
 
 # is-standard
-! $VCSN_B is-standard $a1
-  $VCSN_B standardize $a1 | $VCSN_B is-standard -
+! vcsn-b is-standard $a1
+  vcsn-b standardize $a1 | vcsn-b is-standard -

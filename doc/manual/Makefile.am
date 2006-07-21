@@ -22,7 +22,7 @@ pdf: $(manual)
 # We use vaucanson-g, which requires plain DVI compilation.
 TEXI2PDF_FLAGS += --dvipdf
 
-dist_doc_DATA = $(manual)
+dist_pdf_DATA = $(manual)
 
 $(manual): $(vaucanson_user_manual_sources)
 $(srcdir)/vaucanson-developer-manual.pdf: $(vaucanson_user_manual_sources)

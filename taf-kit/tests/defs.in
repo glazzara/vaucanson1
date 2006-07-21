@@ -75,9 +75,9 @@ me=`echo "$0" | sed -e 's,.*[\\/],,;s/\.test$//'`
 
 # See how redirections should work.  User can set VERBOSE to see all
 # output.
-test -z "$VERBOSE" && {
-   exec 2> /dev/null
-}
+# test -z "$VERBOSE" && {
+#    exec 2> /dev/null
+# }
 
 # Make sure we override the user shell.
 SHELL='@SHELL@'
@@ -87,11 +87,11 @@ export SHELL
 EGREP='@EGREP@'
 FGREP='@FGREP@'
 
-test -z "$VCSN_B" && VCSN_B=`cd ../src && pwd`/vcsn-b
-test -z "$VCSN_Z" && VCSN_Z=`cd ../src && pwd`/vcsn-z
-test -z "$VCSN_XSD_PATH" && export VCSN_XSD_PATH=$top_srcdir/data/vaucanson.xsd
-
+# By default, use the tools that are present here.
+PATH=$(pwd):$PATH
+export PATH
 echo "Path is $PATH" >&2
+
 # Some shells forget to export modified environment variables.
 # (See note about `export' in the Autoconf manual.)
 export PATH
@@ -128,11 +128,14 @@ non_ambiguous2=$automata_tests_dir/non_ambiguous2.xml
 ambiguous=$automata_tests_dir/ambiguous.xml
 
 
+
 ## ---------- ##
 ## Test dir.  ##
 ## ---------- ##
 
-testSubDir=testSubDir-$me
+test -d testSubDir ||
+  mkdir testSubDir
+testSubDir=testSubDir/$me
 chmod -R a+rwx $testSubDir > /dev/null 2>&1
 rm -rf $testSubDir > /dev/null 2>&1
 mkdir $testSubDir
@@ -143,9 +146,9 @@ cd $testSubDir
 echo "=== Running test $0"
 
 # Turn on shell traces when VERBOSE is set.
-if test -n "$VERBOSE"; then
+#if test -n "$VERBOSE"; then
   set -x
-else
-  :
-fi
+#else
+#  :
+#fi
 echo "Working in $(pwd)" >&2

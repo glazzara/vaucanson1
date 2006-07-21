@@ -1,0 +1,11 @@
+#! @SHELL@
+# @configure_input@
+# Wrapper around a non installed TAF-Kit component to make it work as
+# an installed one.
+
+# Use the shipped files, not those installed.
+VCSN_DATA_PATH='@abs_top_srcdir@/data'
+export VCSN_DATA_PATH
+
+# PREVCSN can be set to tools such as Valgrind.
+exec $PREVCSN '@abs_top_builddir@/taf-kit/src/'"$(basename "$0")" ${1+"$@"}

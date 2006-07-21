@@ -19,7 +19,7 @@
 	$(RST2HTML) --halt=warning --input-encoding=iso-8859-1 $< >$@
 
 %.tex: %.txt
-	$(RST2TEX) --halt=warning --input-encoding=iso-8859-1 $< >$@
+	$(RST2LATEX) --halt=warning --input-encoding=iso-8859-1 $< >$@
 
 share_dir = $(top_srcdir)/doc/share
 # Cannot factor here because Automake needs to be able to read
@@ -30,5 +30,3 @@ include $(top_srcdir)/doc/share/make/tex.mk
 # Disable rules from share/ we don't use, and that lead to circular
 # tex -> txt -> tex dependencies.
 %.txt: %.tex $(share_tex_dependencies)
-
-docdir = $(datadir)/doc/$(PACKAGE_TARNAME)
