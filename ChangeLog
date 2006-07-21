@@ -1,3 +1,15 @@
+2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Move automaton library to data/automata.
+
+	* data/b,
+	* data/z: Move...
+	* data/automata,
+	* data/automata/b,
+	* data/automata/z: Here.
+	* data/Makefile.am: Update accordingly.
+	* data/automata/Makefile.am: New.
+
 2006-07-21  Matthieu Varin  <matt@lrde.epita.fr>
 
 	Fix Matt's dirtiness.

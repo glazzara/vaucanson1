@@ -11,9 +11,4 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = automata
-
-dist_noinst_DATA = misc.el
-
-# The XSD file is installed.
-dist_pkgdata_DATA = vaucanson.xsd
+SUBDIRS = b z
