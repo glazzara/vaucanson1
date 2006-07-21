@@ -18,6 +18,7 @@
 # define VCSN_ALGORITHMS_NORMALIZED_HXX
 
 # include <vaucanson/algorithms/normalized.hh>
+# include <vaucanson/algorithms/internal/has_neighbour.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/tools/usual_macros.hh>
@@ -138,16 +139,20 @@ namespace vcsn {
   do_is_normalized(const AutomataBase<A>&,
 		   const auto_t& a)
   {
-    if (a.initial().size() != 1)
+    typedef typename auto_t::series_set_elt_value_t	series_set_elt_value_t;
+
+    if (a.initial().size() != 1
+	|| a.final().size() != 1
+	|| (a.get_initial(*a.initial().begin())
+	    != a.series().identity(SELECT(series_set_elt_value_t)))
+	|| (a.get_initial(*a.final().begin())
+	    != a.series().identity(SELECT(series_set_elt_value_t))))
       return false;
-    if (a.final().size() != 1)
-      return false;
-    std::set<hstate_t> delta_ret;
-    a.rdeltac(delta_ret, *a.initial().begin(), delta_kind::states());
-    a.deltac(delta_ret, *a.final().begin(), delta_kind::states());
-    if (delta_ret.size() != 0)
-      return false;
-    return true;
+
+    // Check that there is no input transition on the initial state
+    // and no output transition on the final state.
+    return !has_successors(a, *a.final().begin())
+      && !has_predecessors(a, *a.initial().begin());
   }
 
   template<typename A, typename T>

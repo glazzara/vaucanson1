@@ -18,6 +18,7 @@
 # define VCSN_ALGORITHMS_STANDARD_HXX
 
 # include <vaucanson/algorithms/standard.hh>
+# include <vaucanson/algorithms/internal/has_neighbour.hh>
 
 # include <vaucanson/algorithms/sum.hh>
 # include <vaucanson/algorithms/accessible.hh>
@@ -150,16 +151,14 @@ namespace vcsn {
     if (a.initial().size() != 1)
       return false;
 
-    // Check there is no input transition on the initial state.
+    // Check the multiplicity of the initial state.
     hstate_t		s = *a.initial().begin();
-    std::set<hstate_t>	delta_ret;
-    a.rdeltac(delta_ret, s, vcsn::delta_kind::states());
-    if (delta_ret.size() != 0)
+    if (a.get_initial(s)
+	!= a.series().identity(SELECT(series_set_elt_value_t)))
       return false;
 
-    // Check the multiplicity of the initial state.
-    return
-      a.get_initial(s) == a.series().identity(SELECT(series_set_elt_value_t));
+    // Check that there is no input transition on the initial state.
+    return !has_predecessors(a, s);
   }
 
   template<typename A, typename T>

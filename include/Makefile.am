@@ -271,6 +271,8 @@ vaucanson/algorithms/internal/partial_rat_exp.hxx		\
 vaucanson/algorithms/internal/partial_rat_exp.hh		\
 vaucanson/algorithms/internal/outsplitting.hh			\
 vaucanson/algorithms/internal/outsplitting.hxx			\
+vaucanson/algorithms/internal/has_neighbour.hh			\
+vaucanson/algorithms/internal/has_neighbour.hxx			\
 vaucanson/algorithms/complement.hh				\
 vaucanson/algorithms/complement.hxx				\
 vaucanson/algorithms/complete.hh				\

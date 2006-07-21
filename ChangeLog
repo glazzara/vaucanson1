@@ -1,3 +1,19 @@
+2006-07-21  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Add a test in is_normalized function.
+
+	The first work on it was to fix the ticket #46 (is_normalized).
+	Th URL is : http://vaucanson.lrde.org/trac.cgi/ticket/46.
+	Then, we add a functor to be apply with deltaf, witch is more efficient.
+
+	* include/vaucanson/algorithms/internal/has_neighbour.hxx,
+	* include/vaucanson/algorithms/internal/has_neighbour.hh: New.
+	* include/vaucanson/algorithms/standard.hxx: Compute our new function
+	has_predecessors.
+	* include/vaucanson/algorithms/normalized.hxx: Compute our new
+	functions has_predecessors and has_successors.
+	* include/Makefile.am: Update accordingly.
+
 2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Add library support in TAF-Kit.
