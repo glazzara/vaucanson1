@@ -173,9 +173,9 @@ namespace vcsn
       }
 
 
-    /*----------------.
-    | FMP Transducers |
-    `----------------*/
+      /*----------------.
+      | FMP Transducers |
+      `----------------*/
 
       // Add the label as a string attribute
       template <class S, class T, class U, class M1, class M2>
@@ -189,8 +189,8 @@ namespace vcsn
 	}
 	else
 	{
-	  std::string in_word = get_label(series.supp()->first);
-	  std::string out_word = get_label(series.supp()->second);
+	  std::string in_word = get_label((*(series.supp().begin())).first);
+	  std::string out_word = get_label((*(series.supp().begin())).second);
 	  std::string mult = get_label(series.get(*(series.supp().begin())));
 	  std::string out;
 	  if (mult.size())
@@ -219,8 +219,8 @@ namespace vcsn
 	}
 	else
 	{
-	  std::string in_word = get_label(series.supp()->first);
-	  std::string out_word = get_label(series.supp()->second);
+	  std::string in_word = get_label((*(series.supp())).first);
+	  std::string out_word = get_label((*(series.supp())).second);
 	  std::string mult = get_label(series.get(*(series.supp().begin())));
 
 	  if (in_word.size() && in_word != "1")
@@ -248,9 +248,9 @@ namespace vcsn
       }
 
 
-    /*---------------------.
-    | Transducers on P(B*) |
-    `---------------------*/
+      /*---------------------.
+      | Transducers on P(B*) |
+      `---------------------*/
 
       // Add the label as a string attribute
       template <class S, class T, class U>
@@ -398,97 +398,95 @@ namespace vcsn
 	return s;
       }
 
-
-# define VCSN_XML_NO_TYPE ""
-# define VCSN_XML_SUM_TYPE "+"
-# define VCSN_XML_PRODUCT_TYPE "."
-
       template <class T>
-      std::string
-      get_rec_xml_series(xercesc::DOMNode* n, T& aut,
-			 std::string op_type = VCSN_XML_NO_TYPE,
-			 std::string res = "")
+      Element<typename T::series_set_t, rat::exp<typename T::monoid_elt_value_t,
+						 typename T::semiring_elt_value_t> >
+      get_rec_xml_series(xercesc::DOMNode* n, T& aut)
       {
+	typedef	 rat::exp<typename T::monoid_elt_value_t,
+	  typename T::semiring_elt_value_t> krat_exp_impl_t;
+	typedef Element<typename T::series_set_t, krat_exp_impl_t> krat_exp_t;
+	krat_exp_t krat_exp (aut.structure().series());
+	typename T::semiring_elt_value_t weight =
+	  typename T::semiring_elt_value_t();
+
 	xercesc::DOMElement* element_n;
-	std::string next_op_type;
+	xercesc::DOMNode* ntmp;
 
 	if (!n)
-	  return res;
-	for (; n; n = n->getNextSibling())
+	  return vcsn::algebra::identity_as<krat_exp_impl_t>::
+	    of(krat_exp.structure());
+
+	for (; n ; n = n->getNextSibling())
 	{
 	  if (n->getNodeType() == xercesc::DOMNode::ELEMENT_NODE)
 	  {
 	    element_n = (static_cast<xercesc::DOMElement*>(n));
 
-	    if (xml2str(n->getNodeName()) == "sum")
-	      next_op_type = VCSN_XML_SUM_TYPE;
-	    if (xml2str(n->getNodeName()) == "product")
-	      next_op_type = VCSN_XML_PRODUCT_TYPE;
+	    if ((xml2str(n->getNodeName()) == "label") ||
+		(xml2str(n->getNodeName()) == "in") ||
+		(xml2str(n->getNodeName()) == "out"))
+	      return get_rec_xml_series(n->getFirstChild(), aut);
 
-	    // Add weight (and opening brace if complex expression).
+	    // Add weight
 	    if (element_n->hasAttribute(transcode("weight")))
-	      res += xml2str(element_n->getAttribute(transcode("weight")))
-		+ " ";
+	    {
+	      std::stringstream ss;
+	      ss << xml2str(element_n->getAttribute(transcode("weight")));
+	      ss >> weight;
+	    }
 
-	    // Add opening brace if attribute,complex weighted
-	    // expression, sum in product, product in sum or star.
-	    if ((element_n->hasAttribute(transcode("parenthesis")) &&
-		 xml2str(element_n->getAttribute(transcode("parenthesis")))
-		 == "true")
-		|| ((element_n->hasAttribute(transcode("weight")))
-		    && (xml2str(n->getNodeName()) != "word"))
-		|| ((xml2str(n->getNodeName()) == "sum")
-		    && (op_type == VCSN_XML_PRODUCT_TYPE))
-		|| ((xml2str(n->getNodeName()) == "product")
-		    && (op_type == VCSN_XML_SUM_TYPE))
-		|| (xml2str(n->getNodeName()) == "star"))
-	      res += "(";
+	    // Explore the terms of a sum
+	    if (xml2str(n->getNodeName()) == "sum")
+	    {
+	      ntmp = n->getFirstChild()->getNextSibling();
+	      krat_exp = get_rec_xml_series(ntmp, aut);
+	      if (ntmp)
+		for (ntmp = ntmp->getNextSibling();
+		     ntmp && ntmp->getNextSibling();
+		     ntmp = ntmp->getNextSibling()->getNextSibling())
+		  krat_exp += get_rec_xml_series(ntmp, aut);
+	      return (weight != typename T::semiring_elt_t ())?
+		typename T::semiring_elt_t (weight) * krat_exp : krat_exp;
+	    }
+
+	    // Explore the terms of a product
+	    if (xml2str(n->getNodeName()) == "product")
+	    {
+	      ntmp = n->getFirstChild()->getNextSibling();
+	      krat_exp = get_rec_xml_series(ntmp, aut);
+	      if (ntmp)
+		for (ntmp = ntmp->getNextSibling();
+		     ntmp && ntmp->getNextSibling();
+		     ntmp = ntmp->getNextSibling()->getNextSibling())
+		  krat_exp *= get_rec_xml_series(ntmp, aut);
+	      return (weight != typename T::semiring_elt_t ())?
+		typename T::semiring_elt_t (weight) * krat_exp : krat_exp;
+	    }
 
 	    // Word, zero or identity
 	    if (xml2str(n->getNodeName()) == "word")
-	      res += xml2str(element_n->getAttribute(transcode("value")));
+	      krat_exp = typename T::monoid_elt_t (
+		krat_exp.structure().monoid(),
+		xml2str(element_n->getAttribute(transcode("value"))));
+
 	    if (xml2str(n->getNodeName()) == "zero")
-	      res += "1";
+	      krat_exp = vcsn::algebra::
+		zero_as<krat_exp_impl_t>::of(krat_exp.structure());
+
 	    if (xml2str(n->getNodeName()) == "identity")
-	      res += "0";
-
-	    // Recursive call
-	    if (n->hasChildNodes())
-	      res += get_rec_xml_series(n->getFirstChild(),
-					aut, next_op_type);
-
-	    // Add closing brace if parenthesis attribute
-	    if ((element_n->hasAttribute(transcode("parenthesis")) &&
-		 xml2str(element_n->getAttribute(transcode("parenthesis")))
-		 == "true")
-		// Or star/weight...
-		|| ((((element_n->hasAttribute(transcode("star")))
-		      && (xml2str(element_n->getAttribute(transcode("star")))
-			  == "true"))
-		     || (element_n->hasAttribute(transcode("weight"))))
-		    // ...in a complex expression
-		    && (xml2str(n->getNodeName()) != "word"))
-		// Or a sum in a product
-		|| ((xml2str(n->getNodeName()) == "sum")
-		    && (op_type == VCSN_XML_PRODUCT_TYPE))
-		// Or a product in a sum
-		|| ((xml2str(n->getNodeName()) == "product")
-		    && (op_type == VCSN_XML_SUM_TYPE))
-		// Or star.
-		|| (xml2str(n->getNodeName()) == "star"))
-	      res += ")";
+	      krat_exp =  vcsn::algebra::
+		identity_as<krat_exp_impl_t>::of(krat_exp.structure());
 
 	    // Add star
 	    if (xml2str(n->getNodeName()) == "star")
-	      res += "*";
+	      krat_exp = (get_rec_xml_series(n->getFirstChild(), aut)).star();
 
-	    // Add operator
-	    if ((n->getNextSibling())
-		&& (n->getNextSibling()->getNextSibling()))
-	      res += op_type;
+	    return (weight != typename T::semiring_elt_t ())?
+	      typename T::semiring_elt_t (weight) * krat_exp : krat_exp;
 	  }
 	}
-	return res;
+	return krat_exp;
       }
 
 
@@ -511,13 +509,13 @@ namespace vcsn
 	  rat::exp<typename T::monoid_elt_value_t,
 	  typename T::semiring_elt_value_t> krat_exp_impl_t;
 	typedef Element<typename T::series_set_t, krat_exp_impl_t> krat_exp_t;
-	std::string str_res;
 	krat_exp_t res (aut.structure().series());
 	xercesc::DOMNode* n = node->getFirstChild();
 	if (n && n->getNextSibling()
 	    && (xml2str(n->getNextSibling()->getNodeName()) == "label"))
-	  str_res = get_rec_xml_series(n, aut);
-	if (str_res == "")
+	  res = get_rec_xml_series(n, aut);
+	if (res == vcsn::algebra::
+	    zero_as<krat_exp_impl_t>::of(res.structure()))
 	{
 	  if (xml2str(node->getAttribute(transcode("label"))) == "")
 	    return
@@ -526,9 +524,6 @@ namespace vcsn
 	  else
 	    parse(xml2str(node->getAttribute(transcode("label"))), res);
 	}
-	else
-	  parse(str_res, res);
-
 	return res;
       }
 
@@ -573,7 +568,7 @@ namespace vcsn
 	typename TRANStype::monoid_elt_t m(a.structure().series().monoid());
 
 	if (! i_res && i_exp.supp().size())
-	  m = *i_exp.supp();
+	  m = *(i_exp.supp().begin());
 	else
 	  m = vcsn::algebra::identity_as<md_value_t>
 	    ::of(a.structure().series().monoid());
@@ -601,14 +596,15 @@ namespace vcsn
 	typedef typename FMPtype::semiring_elt_value_t sg_value_t;
 
 	if (! i_res && i_exp.supp().size())
-	  m1 = *i_exp.supp();
+	  m1 = *(i_exp.supp().begin());
 	else
 	  m1 = vcsn::algebra::identity_as<md_value_t>
 	    ::of(a.structure().series().monoid().first_monoid()).value();
 
 	if (! o_res && o_exp.supp().size())
 	{
-	  sem = o_exp.get(*o_exp.supp());
+	  m2 = *(o_exp.supp().begin());
+	  sem = o_exp.get(m2);
 	}
 	else
 	{
@@ -642,15 +638,9 @@ namespace vcsn
 	  for (; n; n = n->getNextSibling())
 	  {
 	    if (xml2str(n->getNodeName()) == "in" && n->getFirstChild())
-	    {
-	      in = get_rec_xml_series(n->getFirstChild(), a);
-	      i_res = parse(in, i_exp);
-	    }
+	      i_exp = get_rec_xml_series(n->getFirstChild(), bin);
 	    if (xml2str(n->getNodeName()) == "out" && n->getFirstChild())
-	    {
-	      out = get_rec_xml_series(n->getFirstChild(), a);
-	      o_res = parse(out, o_exp);
-	    }
+	      o_exp = get_rec_xml_series(n->getFirstChild(), bout);
 	  }
 	// No expression tag
 	else
