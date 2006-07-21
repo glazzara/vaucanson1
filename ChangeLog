@@ -1,5 +1,11 @@
 2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
 
+	Adjust TAF-Kit tests to data/automata.
+
+	* taf-kit/tests/wrapper.in: Do it.
+
+2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
+
 	Factor setAttribute.
 
 	* include/vaucanson/xml/tools.hh,

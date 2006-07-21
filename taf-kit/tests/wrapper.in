@@ -9,7 +9,7 @@ export VCSN_DATA_PATH
 
 # Until Mika has finished implemented dump-automaton and list-automata,
 # we have to emulate them.
-datadir=$VCSN_DATA_PATH/$(basename "$0" | sed s/.*-//)
+datadir=$VCSN_DATA_PATH/automata/$(basename "$0" | sed s/.*-//)
 case $1 in
   list-automata)
     cd $datadir && exec ls -1 *.xml;;
