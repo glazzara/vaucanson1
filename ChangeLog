@@ -1,3 +1,12 @@
+2006-07-21  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Change comments in the file: outsplitting.hh.
+
+	The ticket #44 suggests to change the comment of the begin of
+	the file. The URL is: http://vaucanson.lrde.org/trac.cgi/ticket/44.
+
+	* include/vaucanson/algorithms/internal/outsplitting.hh: Change comments.
+
 2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Store `getenv' result in

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,14 +19,17 @@
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file outsplitting.hh
- *
- * @brief Outsplitting and insplitting algorithms for normalized and
- * sub-normalized transducers seen as automata over a free monoid
- * product.
- *
- * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
- */
+    * @file outsplitting.hh
+    *
+    * @brief Outsplitting and insplitting algorithms for normalized and
+    * sub-normalized fmp_transducers.
+    *
+    * These functions allow the construction of a composed
+    * transducers that respects the multiplicities.
+    * (cf. the paper Inside Vaucanson, CIAA 2005)
+    *
+    * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
+    */
 /** @} */
 
 # include <set>
