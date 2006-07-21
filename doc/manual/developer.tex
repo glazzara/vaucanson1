@@ -19,7 +19,7 @@ The \Vauc package is organized as follows:
   Directory & Usage\\
   \hline
   \dir{doc}{Documentation.}
-  \dir{doc/css}{CSS style for Doxygen.} 
+  \dir{doc/css}{CSS style for Doxygen.}
   \dir{doc/makefiles}{Sample Makefile to reduce compilation time in
     \Vauc.}
   \dir{doc/manual}{User's (and developer's) manual.}
@@ -56,6 +56,8 @@ The \Vauc package is organized as follows:
   \dir{argp}{Argp library for TAF-Kit.}
   \dir{build-aux}{Where Autotools things go.}
   \dir{data}{Misc data, like Vaucanson's XSD, Emacs files.}
+  \dir{data/b}{Generated Boolean automata.}
+  \dir{data/z}{Generated Automata over Z.}
   \dir{debian}{Debian packaging.}
   \dir{src/benchs}{Benches.}
   \dir{src/demos}{Demos.}
@@ -361,9 +363,9 @@ Encapsulated PostScript, PNG, JPEG, and many others.
 
 It uses Graphviz' ``directed graph'' subformat.
 
-If you want to see what it looks like go to the
-\texttt{src/demos/automaton{\_}library} subdirectory, build the examples and run
-them with the ``dot'' argument.
+If you want to see what it looks like go to the \texttt{data/b}
+subdirectory, build the examples and run them with the ``dot''
+argument.
 
 For Graphviz users:
 
@@ -381,29 +383,23 @@ output format for automata.
 
 Using it requires:
 \begin{itemize}
-\item {}
-that the Xerces-C++ library is installed and ready to use by the C++
-compiler that is used to compile Vaucanson.
+\item that the Xerces-C++ library is installed and ready to use by the
+  C++ compiler that is used to compile Vaucanson.
 
-\item {}
-configuring Vaucanson to use XML.
+\item configuring Vaucanson to use XML.
 
-\item {}
-computer resources and time.
-
+\item computer resources and time.
 \end{itemize}
 
 What you gain:
 \begin{itemize}
-\item {}
-support for the Greater and Better I/O format. See documentation in
-the \texttt{doc/xml} subdirectory for further information.
-
+\item support for the Greater and Better I/O format. See documentation
+  in the \texttt{doc/xml} subdirectory for further information.
 \end{itemize}
 
-If you want to see what it looks like go to the
-\texttt{src/demos/automaton{\_}library} subdirectory, build the examples and run
-them with the \texttt{xml} argument.
+If you want to see what it looks like go to the \texttt{data/b}
+subdirectory, build the examples and run them with the \texttt{xml}
+argument.
 
 
 %___________________________________________________________________________
@@ -421,9 +417,8 @@ It is not meant to be used that much apart from performance comparison
 with FSM. Some code exists to simulate FSM, in
 \texttt{src/demos/utilities/fsm}.
 
-If you want to see what it looks like go to the
-\texttt{src/demos/automaton{\_}library subdirectory}, build the examples and run
-them with the \texttt{fsm} argument.
+If you want to see what it looks like go to the \texttt{data/b}, build
+the examples and run them with the \texttt{fsm} argument.
 
 
 %___________________________________________________________________________
@@ -436,36 +431,27 @@ efficient textual representation of automata.
 
 Advantages over XML:
 \begin{itemize}
-\item {}
-does not require additional 3rd party software,
+\item does not require additional 3rd party software,
 
-\item {}
-simple and efficient (designed to be read and written to streams
-with very low memory footprint and minimum complexity),
+\item simple and efficient (designed to be read and written to streams
+  with very low memory footprint and minimum complexity),
 
-\item {}
-less bytes in file,
+\item less bytes in file,
 
-\item {}
-not strongely typed (can be dumped from one automaton type and
-loaded to another).
-
+\item not strongely typed (can be dumped from one automaton type and
+  loaded to another).
 \end{itemize}
 
 Drawbacks from XML:
 \begin{itemize}
-\item {}
-not strongely typed (one cannot know what automaton type to build by
-only looking at the raw data).
+\item not strongely typed (one cannot know what automaton type to
+  build by only looking at the raw data).
 
-\item {}
-currently does not (probably) support transducers.
-
+\item currently does not (probably) support transducers.
 \end{itemize}
 
-If you want to see what it looks like go to the
-\texttt{src/demos/automaton{\_}library subdirectory}, build the examples and run
-them with the \texttt{simple} argument.
+If you want to see what it looks like go to the \texttt{data/b}, build
+the examples and run them with the \texttt{simple} argument.
 
 
 %___________________________________________________________________________
@@ -501,7 +487,7 @@ Where:
   automaton to (and possibly from) a character string, using the
   converter as an argument.
 
-\item[\texttt{merge{\_}states}] is an optional argument that should be
+\item[\texttt{merge\_states}] is an optional argument that should be
   omitted in most cases. For advanced users, it allows loading a
   single automaton from several different streams that share the same
   state set.
@@ -528,14 +514,14 @@ An I/O converter is a function object with one or both of the following:
 
 Vaucanson already provides these converters:
 \begin{description}
-\item[{\texttt{vcsn::io::string{\_}out}, bundled with \texttt{io.hh}.}]
+\item[{\texttt{vcsn::io::string\_out}, bundled with \texttt{io.hh}.}]
 
   Provides the output conversion only. Uses the C++ operator
   {\textless}{\textless} to create a textual representation of
   transition labels. Should work with all label types.
 
-\item[{\texttt{vcsn::io::usual{\_}converter{\_}exp}, defined in
-    \texttt{tools/usual{\_}io.hh}.}]
+\item[{\texttt{vcsn::io::usual\_converter\_exp}, defined in
+    \texttt{tools/usual\_io.hh}.}]
 
   Provides both input and output conversions. Uses the C++ operator
   {\textless}{\textless} to create a textual representation of
@@ -544,8 +530,8 @@ Vaucanson already provides these converters:
   mostly used for generalized automata where transitions are labeled
   by rational expressions, hence the name.
 
-\item[{\texttt{vcsn::io::usual{\_}converter{\_}poly<ExpType>}, defined
-    in \texttt{tools/usual{\_}io.hh}.}]  Provides both input and
+\item[{\texttt{vcsn::io::usual\_converter\_poly<ExpType>}, defined
+    in \texttt{tools/usual\_io.hh}.}]  Provides both input and
   output conversions. Converts transition labels to and from ExpType
   before (after) doing I/O. The implementation is meant to be used
   when labels are polynoms, and using the generalized (expression)
@@ -568,10 +554,10 @@ fsm and simple formats?)
 
 Because of this, when using XML I/O the ``converter'' argument is
 completely ignored by the format processor. Usually you can see
-\texttt{vcsn::io::string{\_}output} mentioned.
+\texttt{vcsn::io::string\_output} mentioned.
 
 (FIXME: this is terrible! it must be patched to use an empty
-vcsn::io::xml{\_}converter{\_}placeholder or something like it).
+vcsn::io::xml\_converter\_placeholder or something like it).
 
 
 %___________________________________________________________________________
@@ -585,14 +571,14 @@ A format object is a function object that provides one or both the
 following operations:
 \begin{itemize}
 \item an operation that takes an output stream, the caller
-  \texttt{automaton{\_}saver} object, and the \texttt{converter}
+  \texttt{automaton\_saver} object, and the \texttt{converter}
   object. This is called the output operation.
 
 \item an operation that takes an input stream and the caller
-  \texttt{automaton{\_}loader} object. This is called the input
+  \texttt{automaton\_loader} object. This is called the input
   operation.  Note that this operation does not uses the
   \texttt{converter} object, because it should call back the
-  \texttt{automaton{\_}loader} object to actually perform string to
+  \texttt{automaton\_loader} object to actually perform string to
   transition label conversions.
 \end{itemize}
 
@@ -600,32 +586,32 @@ Format objects may require arguments to be constructed, such as the
 title of the automaton in the output.
 
 Format objects for a format should be defined in a
-\texttt{tools/xxx{\_}format.hh} file.
+\texttt{tools/xxx\_format.hh} file.
 
 Vaucanson provides the following format objects:
 \begin{description}
-\item[{\texttt{vscn::io::dot(const std::string{\&} digraph{\_}title)},
-    in \texttt{tools/dot{\_}format.hh}.}]
+\item[{\texttt{vscn::io::dot(const std::string{\&} digraph\_title)},
+    in \texttt{tools/dot\_format.hh}.}]
 
   Provides an output operation for the Graphviz \texttt{dot}
   subformat. The title provided when buildint the \texttt{dot} object
   in Vaucanson becomes the title of the graph in the output data and a
   prefix for state names. Therefore the title must contain only
-  alphanumeric characters or the underscore ({\_}), and no spaces.
+  alphanumeric characters or the underscore (\_), and no spaces.
 
 \item[{\texttt{vcsn::io::simple()}, in
-    \texttt{tools/simple{\_}format.hh}.}]
+    \texttt{tools/simple\_format.hh}.}]
 
   Provides both input and output operations for a simple text format.
 
-\item[{\texttt{vcsn::xml::XML(const std::string{\&} xml{\_}title)}, in
+\item[{\texttt{vcsn::xml::XML(const std::string{\&} xml\_title)}, in
     \texttt{xml/XML.hh}.}]
 
   Provides both input and output operations for the Vaucanson XML I/O
   format.
 \end{description}
 
-(FIXME: why not tools/xml{\_}format.hh with proper includes of headers
+(FIXME: why not tools/xml\_format.hh with proper includes of headers
 in xml/?)
 
 (FIXME: really the FSM format should have a format object too.)
@@ -678,10 +664,10 @@ fin >> automaton_loader(a1, c1, f1)
 ?
 
 \begin{enumerate}
-\item function \texttt{automaton{\_}loader} creates an object AL1 of
-  type \texttt{automaton{\_}loader{\_}} that memorizes its arguments.
+\item function \texttt{automaton\_loader} creates an object AL1 of
+  type \texttt{automaton\_loader\_} that memorizes its arguments.
 
-\item \texttt{automaton{\_}loader()} returns AL1.
+\item \texttt{automaton\_loader()} returns AL1.
 
 \item \texttt{operator>{}>(fin, AL1)} is called.
 
@@ -693,12 +679,12 @@ fin >> automaton_loader(a1, c1, f1)
   \item f1 finds a state numbered N. Then it says to AL1: ``hey, make
     a new state into the output automaton, keep its handler s1 for
     yourself and remember it is associated to N''.  (callback
-    \texttt{AL1.add{\_}state})
+    \texttt{AL1.add\_state})
 
   \item f1 finds a transition from state numbered N to state P,
     labeled with character string S. Then it says to AL1: ``hey,
     create a transition with N, P, and S.'' (callback
-    \texttt{AL1.add{\_}transition}).  Then:
+    \texttt{AL1.add\_transition}).  Then:
     \begin{itemize}
     \item AL1 remembers handler for state N (s1)
 
@@ -736,7 +722,7 @@ FORMAT_dump(output_stream, a, ...)
 \end{lstlisting}
 
 If available, this convenience utility is defined in
-\texttt{tools/XXX{\_}dump.hh}.
+\texttt{tools/XXX\_dump.hh}.
 
 Conversely, the following piece of code:
 
@@ -751,12 +737,12 @@ FORMAT_load(input_stream, a, ...)
 \end{lstlisting}
 
 If available, this convenience utility is defined in
-\texttt{tools/XXX{\_}load.hh}.
+\texttt{tools/XXX\_load.hh}.
 
-(FIXME: move fsm{\_}load away from fsm{\_}dump.hh!)
+(FIXME: move fsm\_load away from fsm\_dump.hh!)
 
 As of today (2006-03-17) the FSM format is only available using the
-fsm{\_}load() and fsm{\_}dump() interface.
+fsm\_load() and fsm\_dump() interface.
 
 \end{document}
 

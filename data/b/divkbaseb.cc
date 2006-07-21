@@ -18,7 +18,7 @@
 
 #include <vaucanson/boolean_automaton.hh>
 using namespace vcsn::boolean_automaton;
-#include "dumper.hcc"
+#include <vaucanson/tools/dumper.hh>
 
 int
 main(int argc, char** argv)
@@ -33,8 +33,8 @@ main(int argc, char** argv)
   std::string div (argv[1]);
   std::string b (argv[2]);
 
-  int divisor = string_to_int (div);
-  int base = string_to_int (b);
+  int divisor = vcsn::tools::string_to_int (div);
+  int base = vcsn::tools::string_to_int (b);
 
   // Build the alphabet.
   alphabet_t alpha;
@@ -42,7 +42,7 @@ main(int argc, char** argv)
     alpha.insert(i < 10 ? '0' + i : 'A' + i);
 
   // Build the automaton.
-  automaton_t	a = make_automaton(alpha);
+  automaton_t a = make_automaton(alpha);
 
   for (int i = 0; i < divisor; ++i)
     a.add_state();
@@ -58,5 +58,5 @@ main(int argc, char** argv)
     }
 
   std::string name = "div" + div + "base" + b;
-  dumper (argc, argv, 3) (std::cout, a, name);
+  vcsn::tools::dumper (argc, argv, 3) (std::cout, a, name);
 }

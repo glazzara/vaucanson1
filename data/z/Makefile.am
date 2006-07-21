@@ -11,9 +11,18 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = b z
+include $(top_srcdir)/src/vaucanson.mk
 
-dist_noinst_DATA = misc.el
+# Z automata.
+EXTRA_PROGRAMS = c1
 
-# The XSD file is installed.
-dist_pkgdata_DATA = vaucanson.xsd
+dist_z_automata_DATA =                         \
+  $(srcdir)/c1.xml
+
+MAINTAINERCLEANFILES = $(dist_z_automata_DATA)
+
+c1_SOURCES = c1.cc
+$(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT)
+	./c1$(EXEEXT) xml >$@.tmp
+	mv $@.tmp $@

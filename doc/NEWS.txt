@@ -25,6 +25,14 @@ Vaucanson 0.8a
   `vaucanson.xsd` is no longer looked up for in the current
   directory.
 
+- Layout
+
+  The layout of the sources was changed to match the layout of
+  Vaucanson when installed.
+
+  + The automaton library is now split by type.  See `data/b` and
+    `data/z`.  The generators used there are nice demo programs.
+
 Vaucanson 0.8 May 15, 2006
 ==========================
 

@@ -28,9 +28,7 @@ SUFFIXES = .log .test
 	   esac;				\
 	echo "$$(basename $<): $$res";		\
 	echo "$$(basename $<): $$res" >$@;	\
-	case $$res in				\
-	  XFAIL | XPASS | FAIL) cat $@-t >>$@;;	\
-	esac;					\
+	cat $@-t >>$@;				\
 	rm $@-t;
 
 TEST_LOGS = $(TESTS:.test=.log)
@@ -60,6 +58,13 @@ check-TESTS:
 	  *)									\
             echo >&2 "incorrect case"; exit 4;;					\
 	esac;									\
+	for f in $(TEST_LOGS);							\
+	do									\
+	  case $$(sed 1q $$f) in						\
+	    *SKIP|*PASS|*XFAIL);;						\
+	    *) cat $$f;;							\
+	  esac;									\
+	done >test-suite.log;							\
 	dashes="$$banner";							\
 	skipped="";								\
 	if test "$$skip" -ne 0; then						\
@@ -69,7 +74,7 @@ check-TESTS:
 	fi;									\
 	report="";								\
 	if test "$$fail" -ne 0 && test -n "$(PACKAGE_BUGREPORT)"; then		\
-	  report="Please report to $(PACKAGE_BUGREPORT)";			\
+	  report="Please report test-suite.log to $(PACKAGE_BUGREPORT)";	\
 	  test `echo "$$report" | wc -c` -le `echo "$$banner" | wc -c` ||	\
 	    dashes="$$report";							\
 	fi;									\
@@ -79,5 +84,4 @@ check-TESTS:
 	test -z "$$skipped" || echo "$$skipped";				\
 	test -z "$$report" || echo "$$report";					\
 	echo "$$dashes";							\
-	cat $(TEST_LOGS) >test-suite.log;					\
 	test "$$fail" -eq 0

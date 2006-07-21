@@ -19,7 +19,7 @@
 #include <sstream>
 
 using namespace vcsn::boolean_automaton;
-#include "dumper.hcc"
+#include <vaucanson/tools/dumper.hh>
 
 int main(int argc, char** argv)
 {
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
   }
 
   std::string nstates (argv[1]);
-  unsigned n = string_to_int (nstates);
+  unsigned n = vcsn::tools::string_to_int (nstates);
 
   // Alphabet.
   alphabet_t alpha;
@@ -55,5 +55,5 @@ int main(int argc, char** argv)
 
   // Dump.
   std::string name = "ladybird " + nstates;
-  dumper (argc, argv, 2)(std::cout, an, name);
+  vcsn::tools::dumper (argc, argv, 2)(std::cout, an, name);
 }

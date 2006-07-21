@@ -13,7 +13,6 @@
 
 SUBDIRS =					\
 	algorithms				\
-	automaton_library			\
 	function_library			\
 	transducers   				\
 	vgrep					\

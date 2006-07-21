@@ -153,6 +153,14 @@ VCSN_ARG_PROGS([rst2latex], [program to create TeX from reStructuredText documen
 VCSN_ARG_PROGS([rst2html],  [program to create HTML from reStructuredText documents])
 VCSN_ARG_PROGS([tar],       [the tape archiver program])
 
+AC_CONFIG_FILES([
+   doc/Makefile
+   doc/doc.doxy
+	doc/manual/Makefile
+	doc/makefiles/Makefile
+	doc/xml/Makefile
+])
+
 
 ## ------- ##
 ## TAF-Kit ##
@@ -185,6 +193,8 @@ AC_CONFIG_FILES([
 	Makefile
 	build-aux/Makefile
 	data/Makefile
+	  data/b/Makefile
+	  data/z/Makefile
 	src/Makefile
 	src/tests/Makefile
 	src/tests/check/Makefile
@@ -229,7 +239,6 @@ AC_CONFIG_FILES([
 	src/tests/xml/Makefile
 	src/demos/Makefile
 	src/demos/vgrep/Makefile
-	src/demos/automaton_library/Makefile
 	src/demos/function_library/Makefile
 	src/demos/algorithms/Makefile
 	src/demos/transducers/Makefile
@@ -242,11 +251,6 @@ AC_CONFIG_FILES([
 	src/benchs/quotient/Makefile
 	src/benchs/composition/Makefile
 	src/benchs/derived_terms/Makefile
-	doc/Makefile
-	doc/manual/Makefile
-	doc/makefiles/Makefile
-	doc/xml/Makefile
-        doc/doc.doxy
 	include/Makefile
         debian/Makefile])
 

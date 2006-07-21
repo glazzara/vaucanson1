@@ -19,7 +19,7 @@
 #include <vaucanson/boolean_automaton.hh>
 
 using namespace vcsn::boolean_automaton;
-#include "dumper.hcc"
+#include <vaucanson/tools/dumper.hh>
 
 int
 main(int argc, char** argv)
@@ -33,7 +33,7 @@ main(int argc, char** argv)
   }
 
   std::string nstates (argv[1]);
-  int n = string_to_int (nstates);
+  int n = vcsn::tools::string_to_int (nstates);
 
   // Alphabet.
   alphabet_t alpha;
@@ -57,10 +57,10 @@ main(int argc, char** argv)
   int i;
   for (i = 2; i < argc - 1; ++i)
   {
-    int s = string_to_int (argv[i]);
+    int s = vcsn::tools::string_to_int (argv[i]);
     a.set_final (s);
   }
 
   std::string name = "double_ring " + nstates;
-  dumper (argc, argv, i)(std::cout, a, name);
+  vcsn::tools::dumper (argc, argv, i)(std::cout, a, name);
 }

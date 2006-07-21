@@ -1,8 +1,12 @@
-\chapter{\Vauc as a toolkit}
+\chapter{The \Vauc toolkit}
 
-\Vauc provides several programs that manipulate various types of
-automata. In this chapter we will learn how to use them.  Actually
-there are 6 programs:
+This chapter prevents a simple interface to \Vauc: a set of programs
+tailored to be used from a traditional shell.  Since they exchange
+\emph{typed} XML files, there is one program per automaton type.  Each
+program support a set of operations which depends on the type of the
+automaton.
+
+Six programs are planned to be shipped in a forthcoming version:
 \begin{description}
 \item [vcsn-b] automata over the Boolean semiring $\mathbb{B}$;
 \item [vcsn-z] automata over $(\mathbb{Z},+)$;
@@ -12,19 +16,17 @@ there are 6 programs:
 \item [vcsn-tdc] automata over free monoid products.
 \end{description}
 
-The first step to work with \Vauc toolkit is to choose on which type
-of automata you intend to work. Then use the proper program among
-those listed before.
+Currently, only \command{vcsn-b}, \command{vcsn-z}, and
+\command{vcsn-tdc}, are implemented.
 
 All automata used in this chapter can be found in the
 \textbf{doc/manual/examples/} directory.
 
 \newpage
 
-%%Example on Boolean automaton
 \section{Boolean automata}
 
-This part demonstrates the use of the program \command{b}.
+This section focuses on the program \command{vcsn-b}.
 
 \subsection{A first example}
 

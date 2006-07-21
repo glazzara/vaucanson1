@@ -11,9 +11,9 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include ../demo.mk
+include $(top_srcdir)/src/vaucanson.mk
 
-GENERATORS = a1 b1 divkbaseb ladybird double_ring
+EXTRA_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
 
 dist_b_automata_DATA =				\
   $(srcdir)/a1.xml				\
@@ -22,7 +22,7 @@ dist_b_automata_DATA =				\
   $(srcdir)/ladybird-6.xml			\
   $(srcdir)/double-3-1.xml
 
-EXTRA_DIST = $(XML_SAMPLES) dumper.hcc
+EXTRA_DIST = $(XML_SAMPLES)
 MAINTAINERCLEANFILES = $(dist_b_automata_DATA)
 
 a1_SOURCES = a1.cc
@@ -54,18 +54,4 @@ double_ring_SOURCES = double_ring.cc
 $(srcdir)/double-3-1.xml: double_ring.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) double_ring$(EXEEXT)
 	./double_ring$(EXEEXT) 3 1 xml >$@.tmp
-	mv $@.tmp $@
-
-# Z automata.
-GENERATORS += c1
-
-dist_z_automata_DATA =				\
-  $(srcdir)/c1.xml
-
-MAINTAINERCLEANFILES += $(dist_z_automata_DATA)
-
-c1_SOURCES = c1.cc
-$(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
-	$(MAKE) $(AM_MAKEFLAGS) c1$(EXEEXT)
-	./c1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@

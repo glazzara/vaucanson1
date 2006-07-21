@@ -18,7 +18,7 @@
 
 using namespace vcsn;
 using namespace vcsn::z_automaton;
-#include "dumper.hcc"
+#include <vaucanson/tools/dumper.hh>
 
 
 int
@@ -54,5 +54,5 @@ main(int argc, char **argv)
   c1.set_initial(p);
   c1.set_final(q);
 
-  dumper(argc, argv)(std::cout, c1, "c1");
+  tools::dumper(argc, argv)(std::cout, c1, "c1");
 }
