@@ -1,3 +1,11 @@
+2006-07-21  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Fix Matt's dirtiness.
+
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	* src/demos/function_library/tdc_algorithms.cc: Change the good path
+	to the file outsplitting.
+
 2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/misc.el: Add the non-optional (in Emacs 21) nil as third

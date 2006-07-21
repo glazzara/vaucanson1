@@ -28,7 +28,7 @@
 #include <vaucanson/algorithms/evaluation_fmp.hh>
 #include <vaucanson/algorithms/isomorph.hh>
 #include <vaucanson/algorithms/projections_fmp.hh>
-#include <vaucanson/algorithms/outsplitting.hh>
+#include <vaucanson/algorithms/internal/outsplitting.hh>
 #include <vaucanson/algorithms/transpose.hh>
 #include <vaucanson/algorithms/fmp_to_realtime.hh>
 #include <vaucanson/tools/dot_display.hh>
