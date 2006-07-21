@@ -7,6 +7,7 @@
 	* data/automata,
 	* data/automata/b,
 	* data/automata/z: Here.
+	* configure.ac,
 	* data/Makefile.am: Update accordingly.
 	* data/automata/Makefile.am: New.
 

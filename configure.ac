@@ -193,8 +193,9 @@ AC_CONFIG_FILES([
 	Makefile
 	build-aux/Makefile
 	data/Makefile
-	  data/b/Makefile
-	  data/z/Makefile
+	data/automata/Makefile
+	data/automata/b/Makefile
+	data/automata/z/Makefile
 	src/Makefile
 	src/tests/Makefile
 	src/tests/check/Makefile
