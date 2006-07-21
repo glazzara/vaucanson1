@@ -36,11 +36,11 @@ namespace vcsn
     static inline std::string get_xsd_path ()
     {
       // Test the environment variable before anything.
-      std::string path = getenv ("VCSN_DATA_PATH");
+      const char* = getenv ("VCSN_DATA_PATH");
       const char* xsd = "vaucanson.xsd";
-      if (path == "")
+      if (path == 0)
 	path = VCSN_DATA_PATH;
-      std::string file = path + "/" + xsd;
+      std::string file = std::string (path) + "/" + xsd;
       if (std::ifstream (file.c_str ()).good ())
 	return file;
       FAIL (std::string ("Error: ") + xsd + "file not found in " + path + ".\n"
