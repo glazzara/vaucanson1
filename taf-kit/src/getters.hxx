@@ -48,7 +48,7 @@ static alphabet_t get_alphabet (const char* alphabet)
 
   if (not (alphabet and alphabet[0]))
   {
-    warn ("Error: alphabet should be explicitly defined.");
+    warn ("Error: alphabet must be explicitly defined.");
     exit (-2);
   }
 
@@ -84,7 +84,7 @@ static automaton_t get_aut (const std::string& s)
   }
   else
   {
-    std::cerr << "Error: could not load automaton." << std::endl;
+    std::cerr << "Error: cannot open `" << s << "'." << std::endl;
     exit (-3);
   }
 }

@@ -65,10 +65,12 @@ const command_t command_map[] =
     COMMAND_ENTRY (display, Aut, "Display `aut'."),
     COMMAND_ENTRY (dot_dump, Aut,
 		   "Dump dot output of `aut'."),
+    COMMAND_ENTRY (dump_automaton, File, "Dump a predefined automaton."),
     COMMAND_ENTRY (edit_automaton, File,
 		   "Edit an existing automaton."),
     COMMAND_ENTRY (identity, Aut, "Return `aut'."),
-    COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'.")
+    COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'."),
+    COMMAND_ENTRY (list_automata, Nil, "List predefined automata.")
 
     ),
 

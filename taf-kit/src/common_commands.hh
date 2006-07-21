@@ -41,7 +41,8 @@ using vcsn::xml::XML;
 # include <iostream>
 
 # include "getters.hh"
-# include "edit_automaton.hh"
+# include "edition_commands.hh"
+# include "library_commands.hh"
 # include "commands.hh"
 # include "commands_macros.hh"
 

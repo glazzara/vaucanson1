@@ -1,4 +1,4 @@
-// edit_automaton.hxx: this file is part of the Vaucanson project.
+// edition_commands.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -18,10 +18,10 @@
 # define EDIT_AUTOMATON_HXX
 
 /**
- * @file edit_automaton.hxx
+ * @file edition_commands.hxx
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
  *
- * This file contains the implementations of @c edit_automaton_automaton
+ * This file contains the implementations of @c edit_automaton_command
  * and @c define_automaton_command .
  * @note Should not be put in a .cc file, as CONTEXT_* macros
  *	 could change from one compilation to another.
@@ -57,7 +57,7 @@ extern void tputs (...);
 # include <vaucanson/misc/static.hh>
 
 # include "getters.hh"
-# include "edit_automaton.hh"
+# include "edition_commands.hh"
 
 # define type_equal(T1, T2) (utility::static_eq < T1, T2 >::value)
 # define discard_inputs() std::cin.ignore (LONG_MAX, '\n')
@@ -67,7 +67,7 @@ extern void tputs (...);
   | automaton                                                |
   `---------------------------------------------------------*/
 
-namespace edit_automaton
+namespace edition_commands
 {
   using namespace CONTEXT_NAMESPACE;
   using namespace vcsn;
@@ -383,7 +383,7 @@ static int edit_automaton_command (const arguments_t& args)
   input >> automaton_loader (a, string_out (), XML ());
   input.close ();
 
-  edit_automaton::main_loop (a);
+  edition_commands::main_loop (a);
 
   std::ofstream output (args.args[1]);
   output << automaton_saver (a, string_out (), XML ()) << std::endl;
@@ -410,7 +410,7 @@ static int define_automaton_command (const arguments_t& args)
 
   automaton_t a = make_automaton (get_alphabet (args.alphabet));
 
-  edit_automaton::main_loop (a);
+  edition_commands::main_loop (a);
   output << automaton_saver (a, string_out (), XML ()) << std::endl;
   output.close ();
 

@@ -29,8 +29,9 @@ COMMON_SOURCES = commands.hh			\
 		 commands_macros.hh		\
 		 common_commands.hh		\
 		 common.hh			\
-		 edit_automaton.hh		\
-		 edit_automaton.hxx		\
+		 edition_commands.hh		\
+		 edition_commands.hxx		\
+		 library_commands.hh		\		 
 		 getters.hh			\
 		 getters.hxx			\
 		 interface.cc			\

@@ -48,7 +48,9 @@ void list_commands ()
     {
       echo_ ("   - ");
       write_with_dashs (command->name);
-      echo (" " << command->params << ": " << command->docstring);
+      if (command->n_params)
+	echo_ (" " << command->params);
+      echo (": " << command->docstring);
     }
     else
       echo (" * " << command->docstring);

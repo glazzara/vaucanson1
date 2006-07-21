@@ -1,4 +1,4 @@
-// edit_automaton.hh: this file is part of the Vaucanson project.
+// edition_commands.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -19,10 +19,10 @@
 # define EDIT_AUTOMATON_HH
 
 /**
- * @file edit_automaton.hh
+ * @file edition_commands.hh
  * @author Michaël Cadilhac <michael.cadilhac@lrde.org>
  *
- * This file contains the declarations of @c edit_automaton_automaton
+ * This file contains the declarations of @c edit_automaton_command
  * and @c define_automaton_command .
  */
 
@@ -31,6 +31,6 @@
 static int edit_automaton_command (const arguments_t& args);
 static int define_automaton_command (const arguments_t& args);
 
-# include "edit_automaton.hxx"
+# include "edition_commands.hxx"
 
 #endif /* !EDIT_AUTOMATON_HH */

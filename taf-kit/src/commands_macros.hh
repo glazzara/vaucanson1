@@ -113,5 +113,6 @@
 # define AutInt "aut n", 2
 # define AutWord "aut word", 2
 # define File "file", 1
+# define Nil "", 0
 
 #endif /* !COMMANDS_MACROS_HH */

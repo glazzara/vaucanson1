@@ -1,3 +1,27 @@
+2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Add library support in TAF-Kit.
+
+	* taf-kit/tests/wrapper.in: Remove the fake commands.
+
+	* taf-kit/src/library_commands.hh: New.  Define `list-automata' and
+	`dump-automaton'.
+	* taf-kit/src/common_commands.hh: Include it.
+	* taf-kit/src/z_commands.cc,
+	* taf-kit/src/b_commands.cc: Add them.
+
+	* taf-kit/src/edit_automaton.hh,
+	* taf-kit/src/edit_automaton.hxx: Move to...
+	* taf-kit/src/edition_commands.hh,
+	* taf-kit/src/edition_commands.hxx: Here.  For name consistency.
+
+	* taf-kit/src/getters.hxx: Be more verbose, fix typo.
+
+	* taf-kit/src/commands_macros.hh,
+	* taf-kit/src/interface.cc: Handle commands with 0 argument.
+
+	* taf-kit/src/Makefile.am: Update.
+
 2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
 
 	Remove dead code and figure.
