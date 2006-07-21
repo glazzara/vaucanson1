@@ -1,3 +1,8 @@
+2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* data/misc.el: Add the non-optional (in Emacs 21) nil as third
+	argument of (indent-region).
+
 2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
 
 	Add identity to TAF_kit.

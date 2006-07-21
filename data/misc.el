@@ -98,7 +98,7 @@
       (c-set-style "Vaucanson")
       (barf-if-buffer-read-only)
       (cpp-indent-macros (point-min) (point-max))
-      (indent-region (point-min) (point-max))
+      (indent-region (point-min) (point-max) nil)
       (delete-trailing-whitespace)
       (tabify (point-min) (point-max)))
     (c-set-style c-indentation-style)))
