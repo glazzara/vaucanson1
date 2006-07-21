@@ -269,6 +269,8 @@ vaucanson/algorithms/internal/partial_rat_exp_constant_term.hxx	\
 vaucanson/algorithms/internal/partial_rat_exp_constant_term.hh	\
 vaucanson/algorithms/internal/partial_rat_exp.hxx		\
 vaucanson/algorithms/internal/partial_rat_exp.hh		\
+vaucanson/algorithms/internal/outsplitting.hh			\
+vaucanson/algorithms/internal/outsplitting.hxx			\
 vaucanson/algorithms/complement.hh				\
 vaucanson/algorithms/complement.hxx				\
 vaucanson/algorithms/complete.hh				\
@@ -373,14 +375,14 @@ vaucanson/algorithms/realtime_to_fmp.hxx			\
 vaucanson/algorithms/realtime_to_fmp.hh				\
 vaucanson/algorithms/normalized_composition.hh			\
 vaucanson/algorithms/normalized_composition.hxx			\
-vaucanson/algorithms/outsplitting.hh				\
-vaucanson/algorithms/outsplitting.hxx				\
 vaucanson/algorithms/projections_fmp.hh				\
 vaucanson/algorithms/projections_fmp.hxx			\
 vaucanson/algorithms/evaluation_fmp.hh				\
 vaucanson/algorithms/evaluation_fmp.hxx				\
 vaucanson/algorithms/invert.hh					\
-vaucanson/algorithms/invert.hxx
+vaucanson/algorithms/invert.hxx					\
+vaucanson/algorithms/is_ambiguous.hh				\
+vaucanson/algorithms/is_ambiguous.hxx
 
 nobase_include_HEADERS +=				\
 vaucanson/vaucanson.hh					\

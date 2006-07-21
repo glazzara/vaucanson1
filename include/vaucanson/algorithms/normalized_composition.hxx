@@ -31,7 +31,7 @@
 # include <set>
 # include <queue>
 # include <vaucanson/algorithms/normalized_composition.hh>
-# include <vaucanson/algorithms/outsplitting.hh>
+# include <vaucanson/algorithms/internal/outsplitting.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/algebra/implementation/series/series.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -354,8 +354,8 @@ namespace vcsn {
     set_of_states_t lhs_states;
     set_of_states_t rhs_states;
 
-    lhs_t lhs_cov = outsplitting(lhs, lhs_states);
-    rhs_t rhs_cov = insplitting(rhs, rhs_states);
+    lhs_t lhs_cov = splitting::outsplitting(lhs, lhs_states);
+    rhs_t rhs_cov = splitting::insplitting(rhs, rhs_states);
 
     composition_traits::map_of_states_t m;
     do_b_composition(ret.structure(), ret.structure().series().monoid(),

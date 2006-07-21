@@ -1,3 +1,20 @@
+2006-07-21  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Move splitting functions in internal directory.
+
+	The reference is the ticket #44. The URL is
+	http://vaucanson.lrde.org/trac.cgi/ticket/44
+
+	* include/vaucanson/algorithms/outsplitting.hh,
+	* include/vaucanson/algorithms/outsplitting.hxx: Move ...
+	* include/vaucanson/algorithms/internal/outsplitting.hh,
+	* include/vaucanson/algorithms/internal/outsplitting.hxx: here.
+	Functions are now in the namespace splitting.
+	* include/vaucanson/algorithms/normalized_composition.hxx: Update
+	accordingly.
+	* include/Makefile.am: Update accordingly and add missing
+	is_ambiguous.h{h,xx}.
+
 2006-07-21  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	new facade for fmp_transducer composition.

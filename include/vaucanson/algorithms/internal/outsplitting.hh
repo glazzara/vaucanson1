@@ -33,28 +33,29 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {
+  namespace splitting {
 
-  template <typename S, typename T>
-  Element<S, T>
-  outsplitting(const Element<S, T>& aut, std::set<hstate_t>& m);
+    template <typename S, typename T>
+    Element<S, T>
+    outsplitting(const Element<S, T>& aut, std::set<hstate_t>& m);
 
-  template <typename S, typename T>
-  Element<S, T>
-  insplitting(const Element<S, T>& aut, std::set<hstate_t>& m);
+    template <typename S, typename T>
+    Element<S, T>
+    insplitting(const Element<S, T>& aut, std::set<hstate_t>& m);
 
-  template <typename S, typename T>
-  Element<S, T>
-  outsplitting(const Element<S, T>& aut);
+    template <typename S, typename T>
+    Element<S, T>
+    outsplitting(const Element<S, T>& aut);
 
-  template <typename S, typename T>
-  Element<S, T>
-  insplitting(const Element<S, T>& aut);
-
+    template <typename S, typename T>
+    Element<S, T>
+    insplitting(const Element<S, T>& aut);
+  }
 } // End of namespace vcsn.
 
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/algorithms/outsplitting.hxx>
+#  include <vaucanson/algorithms/internal/outsplitting.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
 
