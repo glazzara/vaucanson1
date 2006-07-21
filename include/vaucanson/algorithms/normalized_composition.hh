@@ -49,55 +49,55 @@ namespace vcsn {
    */
   template <typename S, typename T>
   void
-  b_composition(const Element<S, T>& lhs,
-		const Element<S, T>& rhs,
-		Element<S, T>& ret);
+  compose(const Element<S, T>& lhs,
+	  const Element<S, T>& rhs,
+	  Element<S, T>& ret);
 
- /**
+
+
+  /**
    * Composition for unweighted normalized and sub-normalized
    * transducers, seen as automata over a free monoid product.
-   *
-   * @param  lhs The left hand side transducer.
-   * @param  rhs The right hand side transducer.
-   *
-   */
-
-  template <typename S, typename T>
-  Element<S, T>
-  b_composition(const Element<S, T>& lhs,
-		const Element<S, T>& rhs);
-
-
- /**
-   * Composition for normalized and sub-normalized transducers, seen
-   * as automata over a free monoid product.
    *
    * @param  lhs The left hand side transducer.
    * @param  rhs The right hand side transducer.
    * @param  ret The result transducer.
    *
    */
-
   template <typename S, typename T>
   void
-  normalized_composition(const Element<S, T>& lhs,
-			 const Element<S, T>& rhs,
-			 Element<S, T>& ret);
+  compose(const Element<S, T>& lhs,
+	  const Element<S, T>& rhs);
 
- /**
-   * Composition for normalized and sub-normalized transducers, seen
-   * as automata over a free monoid product.
+
+  /**
+   * Unambiguous composition for unweighted normalized and sub-normalized
+   * transducers, seen as automata over a free monoid product.
    *
    * @param  lhs The left hand side transducer.
    * @param  rhs The right hand side transducer.
+   * @param  ret The result transducer.
    *
    */
-
   template <typename S, typename T>
-  Element<S, T>
-  normalized_composition(const Element<S, T>& lhs,
-			 const Element<S, T>& rhs);
+  void
+  u_compose(const Element<S, T>& lhs,
+	    const Element<S, T>& rhs,
+	    Element<S, T>& ret);
 
+  /**
+   * Unambiguous composition for unweighted normalized and sub-normalized
+   * transducers, seen as automata over a free monoid product.
+   *
+   * @param  lhs The left hand side transducer.
+   * @param  rhs The right hand side transducer.
+   * @param  ret The result transducer.
+   *
+   */
+  template <typename S, typename T>
+  void
+  u_compose(const Element<S, T>& lhs,
+	    const Element<S, T>& rhs);
 
   /** @} */
 

@@ -1,4 +1,4 @@
-// normalized_composition_test.hh: this file is part of the Vaucanson project.
+// subnormalized_composition_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_NORMALIZED_COMPOSITION_TEST_HH
-# define VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_NORMALIZED_COMPOSITION_TEST_HH
+#ifndef VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_SUBNORMALIZED_COMPOSITION_TEST_HH
+# define VCSN_TESTS_AUTOMATA_ALGOS_FMP_TRANSDUCERS_SUBNORMALIZED_COMPOSITION_TEST_HH
 
 # include <vaucanson/algorithms/normalized_composition.hh>
 # include <vaucanson/algorithms/fmp_to_realtime.hh>
@@ -25,7 +25,7 @@
 
 template <class Automaton>
 bool
-normalized_composition_test(tests::Tester& t)
+subnormalized_composition_test(tests::Tester& t)
 {
   using namespace vcsn;
 
@@ -45,8 +45,8 @@ normalized_composition_test(tests::Tester& t)
   second_at.insert('y');
 
   second_alphabet_t		third_at;
-  third_at.insert('u');
-  third_at.insert('v');
+  third_at.insert('z');
+  third_at.insert('t');
 
   first_monoid_t		first_md (first_at);
   second_monoid_t		second_md (second_at);
@@ -82,14 +82,14 @@ normalized_composition_test(tests::Tester& t)
   series_set_elt_t	series_elt24(ss);
 
   monoid_elt_value_t	fmp_elt1 ("a", "");
-  monoid_elt_value_t	fmp_elt2 ("b", "");
-  monoid_elt_value_t	fmp_elt3 ("", "y");
+  monoid_elt_value_t	fmp_elt2 ("b", "x");
+  monoid_elt_value_t	fmp_elt3 ("a", "y");
   monoid_elt_value_t	fmp_elt4 ("", "x");
 
-  monoid_elt_value_t	fmp_elt21 ("", "u");
-  monoid_elt_value_t	fmp_elt22 ("x", "");
+  monoid_elt_value_t	fmp_elt21 ("", "z");
+  monoid_elt_value_t	fmp_elt22 ("x", "t");
   monoid_elt_value_t	fmp_elt23 ("y", "");
-  monoid_elt_value_t	fmp_elt24 ("", "v");
+  monoid_elt_value_t	fmp_elt24 ("y", "z");
 
   semiring_elt_value_t	semi_elt =
     algebra::identity_as<semiring_elt_value_t>::of(sg).value();
@@ -114,29 +114,27 @@ normalized_composition_test(tests::Tester& t)
 
 
   t1.set_initial(st1);
-  t1.set_final(st2);
-  t1.set_final(st1);
+  t1.set_final(st3);
 
   t2.set_initial(st21);
-  t2.set_initial(st23);
-  t2.set_final(st21);
+  t2.set_final(st23);
 
   htransition_t			h1 = t1.add_series_transition(st1, st2, series_elt1);
-  htransition_t			h2 = t1.add_series_transition(st2, st1, series_elt3);
-  htransition_t			h3 = t1.add_series_transition(st1, st3, series_elt4);
-  htransition_t			h4 = t1.add_series_transition(st3, st1, series_elt2);
+  htransition_t			h2 = t1.add_series_transition(st2, st3, series_elt2);
+  htransition_t			h3 = t1.add_series_transition(st1, st2, series_elt3);
+  htransition_t			h4 = t1.add_series_transition(st1, st3, series_elt4);
 
 
   htransition_t			h21 = t2.add_series_transition(st21, st22,
-							       series_elt23);
-  htransition_t			h22 = t2.add_series_transition(st22, st21,
 							       series_elt21);
-  htransition_t			h23 = t2.add_series_transition(st21, st23,
-							       series_elt24);
-  htransition_t			h24 = t2.add_series_transition(st23, st21,
+  htransition_t			h22 = t2.add_series_transition(st22, st23,
 							       series_elt22);
+  htransition_t			h23 = t2.add_series_transition(st21, st23,
+							       series_elt23);
+  htransition_t			h24 = t2.add_series_transition(st21, st22,
+							       series_elt24);
 
-  t3 = compose(t1, t2);
+  t3 = normalized_composition(t1, t2);
 
   boolean_transducer::automaton_t trans1 =
     boolean_transducer::make_automaton(first_at, second_at);
@@ -154,7 +152,7 @@ normalized_composition_test(tests::Tester& t)
   boolean_automaton::rat_exp_t exp =
     boolean_automaton::make_rat_exp(first_at, "abbababa");
 
-  TEST(t, "Normalized composition works.",
+  TEST(t, "Subnormalized composition works.",
        (boolean_transducer::evaluation(trans3, exp) ==
 	boolean_transducer::evaluation(trans2,
 				       boolean_transducer::evaluation(trans1,

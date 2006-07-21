@@ -1,3 +1,14 @@
+2006-07-21  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	new facade for fmp_transducer composition.
+
+	* include/vaucanson/algorithms/normalized_composition.hh: Change the 
+	facade for composition. The algorithm is now named 'compose'.
+	* include/vaucanson/algorithms/normalized_composition.hxx: .
+	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh: .
+	* src/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh: New.
+	Adapt existing test to the new facade.
+
 2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
 
 	Move automaton_library to data.

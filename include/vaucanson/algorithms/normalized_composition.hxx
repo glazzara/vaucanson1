@@ -338,14 +338,17 @@ namespace vcsn {
   }
 
 
-  template <typename S, typename M1, typename M2, typename lhs_t,
+
+  /// compose with multiplicities
+  template <typename S, typename M1, typename M2, typename coeff_t, typename lhs_t,
 	    typename rhs_t, typename res_t>
   void
-  do_normalized_composition(const AutomataBase<S>&,
-			    const algebra::FreeMonoidProduct<M1, M2>&,
-			    const lhs_t& lhs,
-			    const rhs_t& rhs,
-			    res_t& ret)
+  do_compose(const AutomataBase<S>&,
+	     const algebra::FreeMonoidProduct<M1, M2>&,
+	     const coeff_t&,
+	     const lhs_t& lhs,
+	     const rhs_t& rhs,
+	     res_t& ret)
   {
     typedef std::set<hstate_t>			set_of_states_t;
     set_of_states_t lhs_states;
@@ -357,56 +360,23 @@ namespace vcsn {
     composition_traits::map_of_states_t m;
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs_cov, rhs_cov, ret, lhs_states, rhs_states, m);
+    closure_here (ret);
+    sub_automaton_here (ret, useful_states (ret));
   }
 
 
-
-  template <typename S, typename T>
+  /// compose with boolean multiplicities
+  template <typename S, typename M1, typename M2, typename lhs_t,
+	    typename rhs_t, typename res_t>
   void
-  b_composition(const Element<S, T>& lhs,
-		const Element<S, T>& rhs,
-		Element<S, T>& ret)
+  do_compose(const AutomataBase<S>&,
+	     const algebra::FreeMonoidProduct<M1, M2>&,
+	     SELECTOR(bool),
+	     const lhs_t& lhs,
+	     const rhs_t& rhs,
+	     res_t& ret)
   {
-    typedef Element<S, T> auto_t;
-    AUTOMATON_TYPES(auto_t);
-
-    typedef std::set<hstate_t>			set_of_states_t;
-    set_of_states_t lhs_states;
-    set_of_states_t rhs_states;
-    composition_traits::map_of_states_t m;
-
-    for_all_states (s, ret)
-      ret.del_state (*s);
-
-    do_b_composition(ret.structure(), ret.structure().series().monoid(),
-		     lhs, rhs, ret, lhs_states, rhs_states, m);
-  }
-
-
-  template <typename S, typename T>
-  Element<S, T>
-  b_composition(const Element<S, T>& lhs,
-		const Element<S, T>& rhs)
-  {
-    typedef Element<S, T> auto_t;
-
-    typedef algebra::FreeMonoidProduct<
-      typename auto_t::series_set_t::monoid_t::first_monoid_t,
-      typename auto_t::series_set_t::monoid_t::second_monoid_t>	monoid_t;
-
-    typedef algebra::Series<typename auto_t::series_set_t::semiring_t,
-      monoid_t>
-      series_set_t;
-
-    monoid_t monoid(lhs.structure().series().monoid().first_monoid(),
-		    rhs.structure().series().monoid().second_monoid());
-
-
-    series_set_t series(lhs.structure().series().semiring(), monoid);
-
-    Automata<series_set_t> aut_set(series);
-
-    Element< Automata<series_set_t>, T> ret(aut_set);
+    AUTOMATON_TYPES(res_t);
 
     typedef std::set<hstate_t>			set_of_states_t;
     set_of_states_t lhs_states;
@@ -415,61 +385,139 @@ namespace vcsn {
 
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs, rhs, ret, lhs_states, rhs_states, m);
-    return ret;
+  }
+
+  /// unambiguous compose with boolean multiplicities
+  template <typename S, typename M1, typename M2, typename lhs_t,
+	    typename rhs_t, typename res_t>
+  void
+  do_u_compose(const AutomataBase<S>&,
+	       const algebra::FreeMonoidProduct<M1, M2>&,
+	       SELECTOR(bool),
+	       const lhs_t& lhs,
+	       const rhs_t& rhs,
+	       res_t& ret)
+  {
+    AUTOMATON_TYPES(res_t);
+
+    typedef std::set<hstate_t>			set_of_states_t;
+    set_of_states_t lhs_states;
+    set_of_states_t rhs_states;
+    composition_traits::map_of_states_t m;
+
+    do_b_composition(ret.structure(), ret.structure().series().monoid(),
+		     lhs, rhs, ret, lhs_states, rhs_states, m);
+    closure_here (ret);
+    sub_automaton_here (ret, useful_states (ret));
+  }
+
+
+  /// Facade for compose
+
+  template <typename S, typename T>
+  void
+  compose(const Element<S, T>& lhs,
+	  const Element<S, T>& rhs,
+	  Element<S, T>& ret)
+  {
+    typedef Element<S, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
+    for_all_states (s, ret)
+      ret.del_state (*s);
+
+    do_compose (ret.structure(),
+		ret.structure().series().monoid(),
+		SELECT(semiring_elt_value_t),
+		lhs, rhs, ret);
   }
 
 
 
   template <typename S, typename T>
   void
-  normalized_composition(const Element<S, T>& lhs,
-			 const Element<S, T>& rhs,
-			 Element<S, T>& ret)
-  {
-    typedef Element<S,T> auto_t;
-    AUTOMATON_TYPES(auto_t);
-
-    for_all_states (s, ret)
-    {
-      ret.del_state (*s);
-    }
-    do_normalized_composition(ret.structure(),
-			      ret.structure().series().monoid(),
-			      lhs, rhs, ret);
-  }
-
-
-  template <typename S, typename T>
-  Element<S, T>
-  normalized_composition(const Element<S, T>& lhs,
-			 const Element<S, T>& rhs)
+  compose(const Element<S, T>& lhs,
+	  const Element<S, T>& rhs)
   {
     typedef Element<S, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
 
     typedef algebra::FreeMonoidProduct<
       typename auto_t::series_set_t::monoid_t::first_monoid_t,
-      typename auto_t::series_set_t::monoid_t::second_monoid_t>	monoid_t;
+      typename auto_t::series_set_t::monoid_t::second_monoid_t>	res_monoid_t;
 
     typedef algebra::Series<typename auto_t::series_set_t::semiring_t,
-      monoid_t>
-      series_set_t;
+      res_monoid_t>
+      res_series_set_t;
 
-    monoid_t monoid(lhs.structure().series().monoid().first_monoid(),
+    res_monoid_t monoid(lhs.structure().series().monoid().first_monoid(),
 		    rhs.structure().series().monoid().second_monoid());
 
 
-    series_set_t series(lhs.structure().series().semiring(), monoid);
+    res_series_set_t series(lhs.structure().series().semiring(), monoid);
 
     Automata<series_set_t> aut_set(series);
 
     Element< Automata<series_set_t>, T> ret(aut_set);
-    do_normalized_composition(ret.structure(),
-			      ret.structure().series().monoid(),
-			      lhs, rhs, ret);
+    do_compose(ret.structure(),
+	       ret.structure().series().monoid(),
+	       SELECT(semiring_elt_value_t),
+	       lhs, rhs, ret);
     return ret;
   }
 
 
+  /// Facade for unambiguous composition
+
+  template <typename S, typename T>
+  void
+  u_compose(const Element<S, T>& lhs,
+	    const Element<S, T>& rhs,
+	    Element<S, T>& ret)
+  {
+    typedef Element<S, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
+    for_all_states (s, ret)
+      ret.del_state (*s);
+
+    do_u_compose (ret.structure(),
+		  ret.structure().series().monoid(),
+		  SELECT(semiring_elt_value_t),
+		  lhs, rhs, ret);
+  }
+
+  template <typename S, typename T>
+  void
+  u_compose(const Element<S, T>& lhs,
+	    const Element<S, T>& rhs)
+  {
+    typedef Element<S, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
+    typedef algebra::FreeMonoidProduct<
+      typename auto_t::series_set_t::monoid_t::first_monoid_t,
+      typename auto_t::series_set_t::monoid_t::second_monoid_t>	res_monoid_t;
+
+    typedef algebra::Series<typename auto_t::series_set_t::semiring_t,
+      res_monoid_t>
+      res_series_set_t;
+
+    res_monoid_t monoid(lhs.structure().series().monoid().first_monoid(),
+		    rhs.structure().series().monoid().second_monoid());
+
+
+    res_series_set_t series(lhs.structure().series().semiring(), monoid);
+
+    Automata<series_set_t> aut_set(series);
+
+    Element< Automata<series_set_t>, T> ret(aut_set);
+    do_u_compose(ret.structure(),
+		 ret.structure().series().monoid(),
+		 SELECT(semiring_elt_value_t),
+		 lhs, rhs, ret);
+    return ret;
+  }
 
 } // vcsn
 
