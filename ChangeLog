@@ -1,3 +1,7 @@
+2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.
+
 2006-07-21  Matthieu Varin  <matt@lrde.epita.fr>
 
 	Change comments in the file: outsplitting.hh.

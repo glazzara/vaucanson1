@@ -36,7 +36,7 @@ namespace vcsn
     static inline std::string get_xsd_path ()
     {
       // Test the environment variable before anything.
-      const char* = getenv ("VCSN_DATA_PATH");
+      const char* path = getenv ("VCSN_DATA_PATH");
       const char* xsd = "vaucanson.xsd";
       if (path == 0)
 	path = VCSN_DATA_PATH;
