@@ -12,7 +12,7 @@ export VCSN_DATA_PATH
 datadir=$VCSN_DATA_PATH/$(basename "$0" | sed s/.*-//)
 case $1 in
   list-automata)
-    exec ls -1 $datadir/*.xml;;
+    cd $datadir && exec ls -1 *.xml;;
   dump-automaton)
     exec cat $datadir/$2;;
 esac

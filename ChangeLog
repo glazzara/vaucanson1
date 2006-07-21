@@ -1,3 +1,14 @@
+2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add identity to TAF_kit.
+
+	This allows to check that read|write is idempotent easily.
+	And it is not :)
+	* taf-kit/tests/wrapper.in: Better emulation of list-automata.
+	* taf-kit/src/b_commands.cc (identity): New.
+	* taf-kit/src/z_commands.cc (identity): New.
+	* taf-kit/src/common_commands.hh (identity): New.
+
 2006-07-21  Akim Demaille  <akim@epita.fr>
 
 	Automatically generate bit of the documentation using TAF-Kit.

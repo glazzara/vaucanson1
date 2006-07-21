@@ -143,6 +143,11 @@ DEFINE_COMMAND (NAME (standardize)
 		OUTPUT (automaton_saver (a, string_out (), XML ()))
 		RETURNVALUE (0));
 
+DEFINE_COMMAND (NAME (identity)
+		CODE (automaton_t a = get_aut (args.args[1]))
+		OUTPUT (automaton_saver (a, string_out (), XML ()))
+		RETURNVALUE (0));
+
 DEFINE_COMMAND (NAME (display)
 		CODE (
 		  bool b = vcsn::tools::dot_display (get_aut(args.args[1]),

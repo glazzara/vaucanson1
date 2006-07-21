@@ -41,7 +41,10 @@ const command_t command_map[] =
     COMMAND_ENTRY (display, Aut, "Display `aut'."),
     COMMAND_ENTRY (dot_dump, Aut, "Dump dot output of `aut'."),
     COMMAND_ENTRY (edit_automaton, File, "Edit an existing automaton."),
-    COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'.")),
+    COMMAND_ENTRY (identity, Aut, "Return `aut'."),
+    COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'.")
+
+    ),
 
   COMMAND_GROUP (
     "Tests and evaluation on automata:",
@@ -58,7 +61,8 @@ const command_t command_map[] =
     COMMAND_ENTRY (is_realtime, Aut,
 		   "Return whether `aut' is realtime."),
     COMMAND_ENTRY (is_standard, Aut,
-		   "Return whether `aut' is standard.")),
+		   "Return whether `aut' is standard.")
+    ),
 
   COMMAND_GROUP (
     "Generic algorithms for automata:",
@@ -79,7 +83,9 @@ const command_t command_map[] =
     COMMAND_ENTRY (standardize, Aut, "Give the standard automaton of `aut'."),
     COMMAND_ENTRY (sum, AutAut, "Give the sum of `aut1' and `aut2'."),
     COMMAND_ENTRY (transpose, Aut, "Transpose the automaton `aut'."),
-    COMMAND_ENTRY (trim, Aut, "Trim the automaton `aut'.")),
+    COMMAND_ENTRY (trim, Aut, "Trim the automaton `aut'.")
+
+    ),
 
   COMMAND_GROUP (
     "Conversion between automata and expressions:",
@@ -94,6 +100,8 @@ const command_t command_map[] =
     COMMAND_ENTRY_CN (standard, standard_of, Exp,
 		      "Give the standard automaton of `exp'."),
     COMMAND_ENTRY_CN (thompson, thompson_of, Exp,
-		      "Give the Thompson automaton of `exp'.")),
+		      "Give the Thompson automaton of `exp'.")
+    ),
+
   {0, 0, 0, 0, 0}
 };
