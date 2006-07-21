@@ -17,6 +17,8 @@
 #ifndef VCSN_XML_XML_CONVERTER_HXX
 # define VCSN_XML_XML_CONVERTER_HXX
 
+# include <vaucanson/xml/tools.hh>
+
 /**
    * @file xml_converter.hxx
    *
@@ -33,6 +35,7 @@ namespace vcsn
 {
   namespace xml
   {
+
     template <class Auto>
     template <class OStream>
     void xml_converter<Auto>::save(const Auto& aut, OStream& os,
@@ -63,11 +66,8 @@ namespace vcsn
 				   transcode(root_name), 0);
       root_ = doc_->getDocumentElement();
 
-      if (aut.geometry().name() != "")
-	root_->setAttribute(transcode("name"),
-			    transcode(aut.geometry().name()));
-      if (name != "")
-	root_->setAttribute(transcode("name"), transcode(name));
+      tools::xset_attribute(root_, "name", aut.geometry().name());
+      tools::xset_attribute(root_, "name", name);
 
       // Create type tag.
       chooser_.create_type_tag(aut, doc_, root_);
@@ -107,7 +107,7 @@ namespace vcsn
       os << "s" << s;
       xercesc::DOMElement* node = doc_->createElement(transcode("state"));
       root->appendChild(node);
-      node->setAttribute(transcode("name"), transcode(os.str()));
+      tools::set_attribute(node, "name", os.str());
       add_xml_geometry(aut.geometry().states(), s, node);
 
       return os.str();
@@ -125,10 +125,8 @@ namespace vcsn
     {
       xercesc::DOMElement* node = doc_->createElement(transcode("transition"));
       root->appendChild(node);
-      node->setAttribute(transcode("src"),
-			 transcode(state2str[aut.src_of(e)]));
-      node->setAttribute(transcode("dst"),
-			 transcode(state2str[aut.dst_of(e)]));
+      tools::set_attribute(node, "src", state2str[aut.src_of(e)]);
+      tools::set_attribute(node, "dst", state2str[aut.dst_of(e)]);
       chooser_.create_label(doc_, e, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().transitions(), e, node);
     }
@@ -145,8 +143,7 @@ namespace vcsn
     {
       xercesc::DOMElement* node = doc_->createElement(transcode("initial"));
       root->appendChild(node);
-      node->setAttribute(transcode("state"),
-			 transcode(state2str[s]));
+      tools::set_attribute(node, "state", state2str[s]);
       chooser_.create_initial_label(doc_, s, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().initials(), s, node);
     }
@@ -163,8 +160,7 @@ namespace vcsn
     {
       xercesc::DOMElement* node = doc_->createElement(transcode("final"));
       root->appendChild(node);
-      node->setAttribute(transcode("state"),
-			 transcode(state2str[s]));
+      tools::set_attribute(node, "state", state2str[s]);
       chooser_.create_final_label(doc_, s, aut, node, use_label_node_);
       add_xml_drawing(aut.geometry().finals(), s, node);
     }
@@ -184,11 +180,9 @@ namespace vcsn
 	osx << iter->second.first;
 	xercesc::DOMElement* nd = doc_->createElement(transcode("geometry"));
 	root->appendChild(nd);
-	nd->setAttribute(transcode("x"),
-			 transcode(osx.str()));
+	tools::set_attribute(nd, "x", osx.str());
 	osy << iter->second.second;
-	nd->setAttribute(transcode("y"),
-			 transcode(osy.str()));
+	tools::set_attribute(nd, "y", osy.str());
       }
     }
 
@@ -207,11 +201,9 @@ namespace vcsn
 	osx << iter->second.first;
 	xercesc::DOMElement* nd = doc_->createElement(transcode("drawing"));
 	root->appendChild(nd);
-	nd->setAttribute(transcode("labelPositionX"),
-			 transcode(osx.str()));
+	tools::set_attribute(nd, "labelPositionX", osx.str());
 	osy << iter->second.second;
-	nd->setAttribute(transcode("labelPositionY"),
-			 transcode(osy.str()));
+	tools::set_attribute(nd, "labelPositionY", osy.str());
       }
     }
 

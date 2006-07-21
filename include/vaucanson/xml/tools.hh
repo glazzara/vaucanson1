@@ -61,6 +61,7 @@ namespace vcsn
 
     namespace tools
     {
+
       template <class S>
       const char* get_monoid_type(const S&);
 

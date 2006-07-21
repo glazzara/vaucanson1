@@ -63,60 +63,60 @@ namespace vcsn
     template <class Auto>
     struct xml_converter
     {
-	xml_converter(bool use_label_node = false) :
-	  impl_(0), doc_(0), root_(0), use_label_node_(use_label_node) {};
+      xml_converter(bool use_label_node = false) :
+	impl_(0), doc_(0), root_(0), use_label_node_(use_label_node) {};
 
-	typedef std::map<hstate_t, std::string>		map_t;
-	typedef typename Auto::set_t			auto_set_t;
-	typedef typename Auto::value_t			auto_impl_t;
-	typedef xml_chooser<auto_set_t, auto_impl_t>	xml_chooser_t;
+      typedef std::map<hstate_t, std::string>		map_t;
+      typedef typename Auto::set_t			auto_set_t;
+      typedef typename Auto::value_t			auto_impl_t;
+      typedef xml_chooser<auto_set_t, auto_impl_t>	xml_chooser_t;
 
-	/**
-	 * @brief Save automaton to stream.
-	 *
-	 * @arg \c OStream	Type of the output stream.
-	 *
-	 * @param a	Automaton to save.
-	 * @param out	Output stream.
-	 * @param name	String containing the name of the automaton.
-	 */
-	template <class OStream>
-	void save(const Auto& a, OStream& out, const std::string& name = "");
+      /**
+       * @brief Save automaton to stream.
+       *
+       * @arg \c OStream	Type of the output stream.
+       *
+       * @param a	Automaton to save.
+       * @param out	Output stream.
+       * @param name	String containing the name of the automaton.
+       */
+      template <class OStream>
+      void save(const Auto& a, OStream& out, const std::string& name = "");
 
-	/**
-	 * @brief Load automaton from stream.
-	 *
-	 * @arg \c IStream	Type of the input stream.
-	 *
-	 * @param a	Automaton to load.
-	 * @param in	Input stream.
-	 */
-	template <class IStream>
-	void load(Auto& a, IStream& in);
+      /**
+       * @brief Load automaton from stream.
+       *
+       * @arg \c IStream	Type of the input stream.
+       *
+       * @param a	Automaton to load.
+       * @param in	Input stream.
+       */
+      template <class IStream>
+      void load(Auto& a, IStream& in);
 
-	void create_document(const Auto& aut, const std::string& name = "");
+      void create_document(const Auto& aut, const std::string& name = "");
 
-	xercesc::DOMElement* root_get() { return root_; }
+      xercesc::DOMElement* root_get() { return root_; }
 
-      private:
-	std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);
-	void create_transition(htransition_t, const Auto&,
-			       xercesc::DOMElement*, map_t&);
-	void create_initial(hstate_t, const Auto&,
-			    xercesc::DOMElement*, map_t&);
-	void create_final(hstate_t, const Auto&,
+    private:
+      std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);
+      void create_transition(htransition_t, const Auto&,
+			     xercesc::DOMElement*, map_t&);
+      void create_initial(hstate_t, const Auto&,
 			  xercesc::DOMElement*, map_t&);
+      void create_final(hstate_t, const Auto&,
+			xercesc::DOMElement*, map_t&);
 
-	template <class Map, class Key>
-	void add_xml_geometry(Map&, Key&, xercesc::DOMElement* node);
-	template <class Map, class Key>
-	void add_xml_drawing(Map&, Key&, xercesc::DOMElement* node);
+      template <class Map, class Key>
+      void add_xml_geometry(Map&, Key&, xercesc::DOMElement* node);
+      template <class Map, class Key>
+      void add_xml_drawing(Map&, Key&, xercesc::DOMElement* node);
 
-	xercesc::DOMImplementation*			impl_;
-	xercesc::DOMDocument*				doc_;
-	xercesc::DOMElement*				root_;
-	xml_chooser_t					chooser_;
-	bool						use_label_node_;
+      xercesc::DOMImplementation*  impl_;
+      xercesc::DOMDocument*	   doc_;
+      xercesc::DOMElement*	   root_;
+      xml_chooser_t		   chooser_;
+      bool			   use_label_node_;
     };
 
   } // !xml

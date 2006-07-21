@@ -124,18 +124,29 @@ namespace vcsn
       >, T								  \
     >
 
+      inline
+      void
+      set_attribute (xercesc::DOMElement* e, std::string k, std::string v)
+      {
+	e->setAttribute (transcode(k), transcode(v));
+      }
 
-      // Add the label as a string attribute
+      inline
+      void
+      xset_attribute (xercesc::DOMElement* e, std::string k, std::string v)
+      {
+	if (v != "")
+	  set_attribute (e, k, v);
+      }
+
+
+      // Add the label as a string attribute.
       template <class S, class T, class U>
       void add_label(xercesc::DOMElement* elt,
 		     const Element<S, T>&,
 		     const U& series)
       {
-	std::string label = get_label(series);
-
-	if (label.size())
-	  elt->setAttribute(transcode("label"),
-			    transcode(label));
+	xset_attribute(elt, "label", get_label(series));
       }
 
       // Add the label as an xml node
@@ -174,10 +185,7 @@ namespace vcsn
       {
 	if (series.supp().size() > 1)
 	{
-	  std::string out = get_label(series);
-	  if (out.size())
-	    elt->setAttribute(transcode("label"),
-			      transcode(out));
+	  xset_attribute(elt, "label", get_label(series));
 	}
 	else
 	{
@@ -192,12 +200,8 @@ namespace vcsn
 	  if (out_word.size())
 	    out += out_word;
 
-	  if (in_word.size())
-	    elt->setAttribute(transcode("in"),
-			      transcode(in_word));
-	  if (out.size())
-	    elt->setAttribute(transcode("out"),
-			      transcode(out));
+	  xset_attribute(elt, "in", in_word);
+	  xset_attribute(elt, "out", out);
 	}
       }
 
@@ -211,10 +215,7 @@ namespace vcsn
 	std::string out;
 	if (series.supp().size() > 1)
 	{
-	  out = get_label(series);
-	  if (out.size())
-	    elt->setAttribute(transcode("label"),
-			      transcode(out));
+	  xset_attribute(elt, "label", get_label(series));
 	}
 	else
 	{
@@ -240,8 +241,7 @@ namespace vcsn
 	    parse(out_word, res_out);
 	    xercesc::DOMElement* out_node =
 	      res_out.value().xml_tree(doc, "out");
-	    if (mult.size())
-	      out_node->setAttribute(transcode("weight"), transcode(mult));
+	    xset_attribute(out_node, "weight", mult);
 	    elt->appendChild(out_node);
 	  }
 	}
@@ -262,11 +262,9 @@ namespace vcsn
 	std::string out = get_label(series.get(*(series.supp().begin())));
 
 	if (in.size() && in != "1")
-	  elt->setAttribute(transcode("in"),
-			    transcode(in));
+	  set_attribute(elt, "in", in);
 	if (out.size() && out != "1")
-	  elt->setAttribute(transcode("out"),
-			    transcode(out));
+	  set_attribute(elt, "out", out);
       }
 
       // Add the label as an xml node
@@ -346,7 +344,7 @@ namespace vcsn
 	  xercesc::DOMElement* gen =
 	    doc->createElement(transcode("generator"));
 	  letter << *l;
-	  gen->setAttribute(transcode("value"), transcode(letter.str().c_str()));
+	  set_attribute(gen, "value", letter.str().c_str());
 	  root->appendChild(gen);
 	}
       }
@@ -357,8 +355,8 @@ namespace vcsn
 					 xercesc::DOMElement* elt)
       {
 	xercesc::DOMElement* m = doc->createElement(transcode("monoid"));
-	m->setAttribute(transcode("type"), transcode(get_monoid_type(monoid)));
-	m->setAttribute(transcode("generators"), transcode("letters"));
+	set_attribute(m, "type", get_monoid_type(monoid));
+	set_attribute(m, "generators", "letters");
 	elt->appendChild(m);
 
 	return m;
@@ -375,10 +373,8 @@ namespace vcsn
 	xercesc::DOMElement* s = doc->createElement(transcode("semiring"));
 
 	if (get_semiring_set(semiring, value_t()) != "ratSeries")
-	  s->setAttribute(transcode("operations"),
-			  transcode(get_semiring_operations(semiring)));
-	s->setAttribute(transcode("set"),
-			transcode(get_semiring_set(semiring, value_t())));
+	  set_attribute(s, "operations", get_semiring_operations(semiring));
+	set_attribute(s, "set", get_semiring_set(semiring, value_t()));
 	elt->appendChild(s);
 
 	return s;
@@ -395,9 +391,8 @@ namespace vcsn
 	  Element<Transducer<S>, T>::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t value_t;
 
 	xercesc::DOMElement* s = doc->createElement(transcode("semiring"));
-	s->setAttribute(transcode("operations"), transcode("numerical"));
-	s->setAttribute(transcode("set"),
-			transcode(get_semiring_set(semiring, value_t())));
+	set_attribute(s, "operations", "numerical");
+	set_attribute(s, "set", get_semiring_set(semiring, value_t()));
 	elt->appendChild(s);
 
 	return s;
@@ -899,8 +894,7 @@ namespace vcsn
       template <class OStream>
       void print_document(xercesc::DOMElement* node, OStream& os)
       {
-	node->setAttribute(transcode("xmlns"),
-			   transcode("http://vaucanson.lrde.epita.fr"));
+	set_attribute(node, "xmlns", "http://vaucanson.lrde.epita.fr");
 	print_tree(node, os, "");
       }
 

@@ -1,3 +1,13 @@
+2006-07-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Factor setAttribute.
+
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/tools.hxx (set_attribute, xset_attribute):
+	New.
+	* include/vaucanson/xml/xml_converter.hh,
+	* include/vaucanson/xml/xml_converter.hxx: Use it.
+
 2006-07-21  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* data/vaucanson.xsd: Remove annoying default range.
