@@ -20,12 +20,12 @@ manual = $(srcdir)/vaucanson-user-manual.pdf
 pdf: $(manual)
 
 # We use vaucanson-g, which requires plain DVI compilation.
-TEXI2PDF_FLAGS += --dvipdf
+TEXI2PDF_FLAGS += --dvipdf -I manual.ext
 
 dist_pdf_DATA = $(manual)
 
-$(manual): $(vaucanson_user_manual_sources)
-$(srcdir)/vaucanson-developer-manual.pdf: $(vaucanson_user_manual_sources)
+$(manual): manual.ext $(vaucanson_user_manual_sources)
+$(srcdir)/vaucanson-developer-manual.pdf: manual.ext $(vaucanson_user_manual_sources)
 vaucanson_user_manual_sources =			\
 vaucanson-developer-manual.tex			\
 vaucanson-user-manual.tex			\
@@ -36,3 +36,15 @@ developer.tex					\
 images/a1_det.ps
 
 EXTRA_DIST = $(vaucanson_user_manual_sources)
+
+# Extract commands that must be run to produce figures.
+manual.ext: $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
+	$(srcdir)/extex.pl			\
+	  --output-dir=$@			\
+	  --srcdir=$(srcdir)			\
+	  --top_srcdir=$(top_srcdir)		\
+	  --builddir=.				\
+	  --top_builddir=$(top_builddir)	\
+          $(vaucanson_user_manual_sources)
+	$(MAKE) -C $@ dvi
+	touch $@

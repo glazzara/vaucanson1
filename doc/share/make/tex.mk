@@ -4,6 +4,7 @@ all:
 
 share_style_dir = $(share_dir)/styles
 share_bib_dir = $(share_dir)/bib
+ChangeLog ?= ChangeLog
 
 TEXI2DVI = $(share_bin_dir)/texi2dvi
 TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch -I figs -I $(share_style_dir) -I $(share_bib_dir)
@@ -72,7 +73,7 @@ $(wildcard $(share_style_dir)/* $(share_bib_dir)/*)
 
 # Create a file defining \SvnRev as the revision of the ChangeLog.
 # Robust to new existing svn.
-rev.tex: ChangeLog
+rev.tex: $(ChangeLog)
 	if svn --version >/dev/null 2>&1; then				    \
 	  LC_ALL=C svn info $< |					    \
 	   sed -n							    \

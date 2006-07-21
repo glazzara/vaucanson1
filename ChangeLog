@@ -1,3 +1,13 @@
+2006-07-21  Akim Demaille  <akim@epita.fr>
+
+	Automatically generate bit of the documentation using TAF-Kit.
+	* doc/manual/extex.mk, doc/manual/extex.pl: New.
+	* doc/manual/Makefile.am: Use them to extract commands to be run
+	before compiling the LaTeX file.
+	* doc/manual/vaucanson-user-manual.tex (legend): New.
+	* doc/manual/taf-kit.tex (\includegenerateddot, \execcaption):
+	New.
+
 2006-07-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.
@@ -37,7 +47,7 @@
 
 	new facade for fmp_transducer composition.
 
-	* include/vaucanson/algorithms/normalized_composition.hh: Change the 
+	* include/vaucanson/algorithms/normalized_composition.hh: Change the
 	facade for composition. The algorithm is now named 'compose'.
 	* include/vaucanson/algorithms/normalized_composition.hxx: .
 	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh: .
@@ -171,7 +181,7 @@
 2006-07-19  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	TAF: Lessen the use of _CN macros.
-	_CN macros of TAF-Kit are used to precise a `Code Name' when it 
+	_CN macros of TAF-Kit are used to precise a `Code Name' when it
 	differs from the name of the command.  Here, the only difference is
 	'_' changed to '-'.  We just print commands changing '_' to '-' now.
 

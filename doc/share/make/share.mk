@@ -6,6 +6,6 @@
 share_dir ?= share
 include $(share_dir)/make/share-am.mk
 mostlyclean: mostlyclean-local
-clean: clean-local
+clean: clean-local mostlyclean
 	rm -f $(CLEANFILES)
 .PHONY: mostlyclean mostlyclean-local clean clean-local

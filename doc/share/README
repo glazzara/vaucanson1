@@ -34,17 +34,22 @@ qui utilise vcs pour faire un checkin de share/, puis update-share
 pour mettre à jour la dépendance de votre projet hôte.
 
 ** Pour mettre à jour votre version local de share/
-Si votre Makefile inclut share/bin/share.mk, alors taper "make update"
-le fera pour vous.  Sinon, à la main, faire "share/bin/update-share".
-Ne pas oublier de faire un checkin de votre répertoire de travail,
-sinon la mise à jour de la dépendance sur share/ reste locale à votre
-répertoire de travail.
+Si votre Makefile inclut share/bin/share.mk, alors taper "make
+share-up" le fera pour vous.  Sinon, à la main, faire
+"share/bin/update-share".  Ne pas oublier de faire un checkin de votre
+répertoire de travail, sinon la mise à jour de la dépendance sur
+share/ reste locale à votre répertoire de travail.
 
 * share/bin
 ** beamer2handout
 Un script au dessus de pdfnup (disponible dans le paquet Debian
 pdfjam) pour produire des polycopiés (handouts) à partir de fichiers
 Beamer PDF. Remplace feu beamer-handout.
+
+** latin2tex
+Convertir les accents des fichiers donnés en ligne de commande de
+latin 1 vers TeX.  Ressemble à recode, mais ne change pas les {, les \
+etc.  Pratique pour normaliser les fichiers BibTeX.
 
 ** make-bib.pl
 Un script qui engendre la biblio du labo.
@@ -60,34 +65,79 @@ PDF.  Début de support pour le HTML.
 
 ** update-share
 Met à jour la dépendant vis-à-vis de share.  Typiquement appelé par
-"make update".  Il est utile de l'appeler directement pour créer une
+"make share-up".  Il est utile de l'appeler directement pour créer une
 dépendance sur share avec numéro de révision (svn:externals).
 
 
 * share/bib
 Les bibliographies en BibTeX utilisées au labo, y compris le maître de
-lrde.bib.  Merci de les exploiter et de les augmenter.
+lrde.bib.  Merci de les exploiter et de les augmenter.  Pour que cela
+fonctionne correctement en non Latin 1, se contraindre à des accents
+LaTeX, pas de caractères accentués.  bin/latin2tex aide à faire la
+conversion.
+
+Essayer de maintenir les clefs selon la convention LRDE :
+<nom-premier-auteur>.<annnée>.<sigle> (où le <sigle> est celui de la
+conf, du livre etc.).  Pour les pages www, utiliser "<projet>.www".
+Merci de garder les fichiers triés et justifiés comme Emacs sait le
+faire.  Pour éviter les problèmes avec les cross-références (bibtex
+veut les voir après les appels), utiliser "XXXref.<année>.<sigle>".
+Ne pas normaliser les .bib qui viennent verbatim de l'internet et sont
+maintenus (tels que ceux de E. Visser), puisque le travail serait à
+reprendre sans arrêt.
+
+** kernighan.bib
+La biblio de Brian Kernighan, depuis
+<URL:http://netlib.bell-labs.com/cm/cs/bib/bwk.bib>.
+
+** model-checking.bib
+Model checking, probabiliste ou non.
+
+** sensor-networks.bib
 
 * share/make
 Morceaux de Makefile qui vont bien.
 
-** share/make/share.mk
+** dist.mk
+Fournit les cibles "dist", "distdir", et "distcheck" comparables à
+celles d'Automake, en moins puissant bien sûr.  Définir data_DATA
+et/ou EXTRA_DIST pour spécifier ce qu'il faut inclure.  "share" et
+Makefile sont inclus systématiquement.
+
+** figs-pdf.mk
+Des règles de conversion depuis un certain nombre de formats de figure
+(Dia, Dot etc.) vers PDF, voire PNG dans le cas de Dia (la conversion
+vers PDF échoue).
+
+Exporte aussi des fonctions GNU Make utiles.
+
+*** share_convert_to_pdf FILES
+Convertit les extensions reconnues des FILES vers pdf.  Exemple
+d'utilisation:
+
+FIGS_PDF = $(notdir $(call share_convert_to_pdf,$(DOCUMENT_IMAGES)))
+
+** share.mk
 Le minimum syndical pour utiliser share/.  Une target "update" pour
 mettre à jour share/.  Définir share_dir = path/to/share avant.
 
-** share/make/share-am.mk
+** share-am.mk
 Le même, mais à utiliser quand inclus dans un Makefile.am au lieu de
 Makefile.
 
-** share/make/tex.mk
+** tex.mk
 De quoi compiler du *.tex ou *.ltx vers du *.dvi, *.pdf, ou *.html.
-Permet aussi de constuire "rev.tex" si vous le souhaitez, qui contient
-le numéro de révision du ChangeLog (s'il est possible de l'obtenir)
-dans la macro \SvnRev.  Faire par exemple :
+
+*** rev.tex
+tex.mk permet aussi de constuire "rev.tex" si vous le souhaitez, qui
+contient le numéro de révision du ChangeLog (s'il est possible de
+l'obtenir) dans la macro \SvnRev.  Faire par exemple :
 
      article.pdf: rev.tex
 
 pour que ça fonctionne.
+
+Il cherche $(ChangeLog) qui vaut "ChangeLog" par défaut.
 
 ** share/make/handout.mk
 Définit des cibles supplémentaires pour créer des polycopiés
@@ -119,7 +169,8 @@ cf. <URL:http://computer.org/cspress/instruct.htm> ou
 
 ** latex8.bst, latex8.sty
 IEEE 8.5 x 11-Inch Proceedings Style `latex8.sty'.  Et son style
-BibTeX.
+BibTeX.  Documenté dans /mnt/doc/comp/text/latex/latex8.pdf et
+/mnt/doc/comp/text/latex/latex8.tex.
 
 ** lrde-bulletin.sty
 Le style utilisé pour L'air de rien. Remplace GRASSnews.sty.
@@ -133,7 +184,8 @@ Les acronymes les plus utilisés au labo.
 
 ** myhyperref
 Définit ce qu'il faut pour que \autoref marche bien.  Mieux vaut
-l'inclure parmi les derniers.
+l'inclure parmi les derniers.  Si \IsAFinal est défini, les liens sont
+en noirs (plus adéquat pour l'impression), sinon en bleu.
 
 ** mylisting
 Emballe listing.sty pour qu'il fonctionne correctement dans les cas

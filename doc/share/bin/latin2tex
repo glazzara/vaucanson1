@@ -1,0 +1,40 @@
+#! /bin/sh -x
+
+# Change all the latin 1 accents to TeX accents.  We don't use recode,
+# because we don't want to convert { into \{ and so forth.
+
+recode_lower=$(echo "
+s/á/\\'a/g;
+s/à/\\\`a/g;
+s/â/\\^a/g;
+s/ä/\\\"a/g;
+s/ã/\\~a/g;
+s/ß/\\ss{}/g;
+s/é/\\'e/g;
+s/è/\\\`e/g;
+s/ê/\\^e/g;
+s/î/\\^i/g;
+s/ï/\\\"i/g;
+s/ó/\\'o/g;
+s/ô/\\^o/g;
+s/ö/\\\"o/g;
+s/ø/\\o{}/g;
+s/ü/\\\"u/g;
+" | sed -e 's/[\\`"]/\\&/g')
+
+recode_upper=$(echo "$recode_lower" |
+               sed -e 's/\"/\\\"/g' |
+               tr '[:lower:]' '[:upper:]' |
+	       sed 's/^S/s/g;s/G;$/g;/g')
+
+recode_one_file ()
+{
+  local file=$1
+
+  sed -i -e "$recode_lower" -e "$recode_upper" $file
+}
+
+for file
+do
+  recode_one_file "$file"
+done

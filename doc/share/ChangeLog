@@ -1,3 +1,193 @@
+2006-07-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add pdf-figs.mk.
+
+	* make/pdf-figs.mk: New.
+	* README: Document it.
+
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Don't ship .svn files.
+
+	Reported by Valentin David.
+	* make/dist.mk (DIST_IGNORE): New.
+	Include .svn and +commited files.
+	(distdir): Use it.
+
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix accents in bibtex files, add david.06.iccp.
+
+	* bib/lrde.bib (david.06.iccp): New.
+
+	* bin/latin2tex: New.
+	* bib/transformers.bib, bib/ag.bib, bib/vaucanson.bib,
+	* bib/compilation.clement.bib, bib/model-checking.bib,
+	* bib/compilation.bib, bib/csi.bib: Normalize using latin2tex.
+	* README, Makefile: Update.
+
+2006-07-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	updates and IEEE completion.
+
+	* styles/IEEEtranS.bst: New.
+	* bib/IEEEfull.bib: New.
+	* bib/IEEEbcpat.bib: New.
+	* bib/IEEEabrv.bib: New.
+	* bib/IEEEexample.bib: New.
+	* bin/texi2dvi: Try to run bibtex for hevea.
+	It does not work currently, as LaTeX (the real one) must
+	be run to generate the aux file.
+	* make/dist.mk (dist): Use cp, not tar, to preserve subdirectories.
+
+2006-07-18  SIGOURE Benoit  <sigoure.benoit@lrde.epita.fr>
+
+	Add some bib entry.
+
+	* bib/strategoxt.bib: Here.
+	* bib/model-checking.bib: And here.
+
+2006-07-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	Black links.
+
+	* styles/myhyperref.sty: Use \IsAFinal.
+	* README: Explain.
+
+2006-07-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	More doc.
+
+	* README: for latex8.
+
+2006-07-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	Kill trailing spaces.
+
+	* styles/latex8.sty: Do it.
+
+2006-07-13  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add dist.mk.
+
+	* make/dist.mk: New.
+	* README: Update.
+
+2006-07-07  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Add csi techrep bib (to be completed).
+
+	* bib/csi.bib: New. Add bib entries for some CSI students
+	technical reports.
+
+2006-06-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	Bib normalization.
+
+	* bib/compilation.bib (briggs92): Rename as...
+	(briggs.92): this.
+
+2006-06-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update texi2dvi.
+
+	* bin/texi2dvi: from master.
+
+2006-06-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	s/update/share-up/.
+
+	* make/share-am.mk: Do it.
+	* README: Doc it.
+	* bin/texi2dvi: Update.
+
+2006-06-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update texi2dvi.
+
+	* bin/texi2dvi: Update from master.
+
+2006-06-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	$(ChangeLog).
+
+	* make/tex.mk (ChangeLog): New.
+	Use it.
+	* README: Doc it.
+
+2006-06-26  Akim Demaille  <akim@lrde.epita.fr>
+
+	Updates.
+
+	* styles/myacronym.sty (burg, yacc): New.
+	* bin/texi2dvi: Update from master.
+	* make/share-am.mk (share_dir): Take $(srcdir) into account.
+
+2006-06-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add isola.
+
+	* bib/lrde.bib (demaille.06.isola): New.
+
+2006-06-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Remove citeseer url.
+
+	* bib/model-checking.bib (kwiatkowska.02.tacas): Remove url.
+
+2006-06-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Bind mostlyclean to clean.
+
+	* make/share.mk (clean): Depends on mostlyclean.
+
+2006-06-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix accent.
+
+	* bib/lrde.bib: Fix latin 1 accent.
+	* Makefile: New.
+
+2006-06-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Bib renaming.
+
+	* bib/model-checking.bib (ggfirst): Remove, part of lrde.bib.
+	(reactive): Rename as...
+	(alur.96.lics): this.
+	(webapmc): Rename as...
+	(apmc.www): this.
+
+2006-06-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix cross-refs.
+
+	* bib/model-checking.bib (vmcai): Rename as...
+	(herault.04.vmcai): this.
+	(DBLP:conf/vmcai/2004): Rename as...
+	(xxxref.04.vmcai): this to please bibtex (and alphabetical sorting).
+
+2006-06-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	New bibs: sensor networks, and model checking.
+
+	* bib/model-checking.bib: New.
+	* bib/sensor-networks.bib: New.
+
+2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix kernighan.bib.
+
+	* styles/myacronym.sty (ratfor): New.
+	* bib/kernighan.bib: Add missing `,'.
+	Reformat.
+
+2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add kerighan.bib.
+
+	* bib/kernighan.bib: New.
+
 2006-06-19  Akim Demaille  <akim@lrde.epita.fr>
 
 	Update texi2dvi.

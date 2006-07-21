@@ -10,9 +10,12 @@
 \@ifclassloaded{entcs}{}
 {
   \hypersetup{bookmarks, bookmarksnumbered, bookmarksopen,
-              colorlinks, breaklinks,
-              citecolor=blue, linkcolor=blue, urlcolor=blue,
+              breaklinks,
               plainpages=false}
+  % If not in the Final mode, use colors.
+  \ifx\IsAFinal\undefined
+    \hypersetup{colorlinks, citecolor=blue, linkcolor=blue, urlcolor=blue}
+  \fi
 }
 
 %% Thanks to Micha and Thomas Hérault.
