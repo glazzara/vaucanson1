@@ -53,8 +53,7 @@ namespace vcsn {
 
 
   // FIXME: Document.
-  template <typename S, typename M1, typename M2, typename lhs_t,
-	    typename rhs_t, typename res_t>
+  template <typename res_t>
   inline
   void
   add_transition(res_t&			        output,
@@ -101,7 +100,7 @@ namespace vcsn {
 		   res_t&			output,
 		   std::set<hstate_t>&		lhs_states,
 		   std::set<hstate_t>&		rhs_states,
-		   std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m)
+		   composition_traits::map_of_states_t&  m)
   {
     AUTOMATON_TYPES(res_t);
     AUTOMATON_TYPES_(lhs_t, lhs_);
@@ -260,7 +259,7 @@ namespace vcsn {
 	// If the outgoing transition is of type (*, 1).
 	if (left_supp_elt.value().second == lhs_second_identity.value())
 	{
-	  series_set_elt_t          prod_series (series);
+	  typename res_t::series_set_elt_t          prod_series (series);
 	  const monoid_elt_value_t word(left_supp_elt.value().first,
 					rhs_second_identity.value());
 	  prod_series.assoc(monoid_elt_t(monoid, word),
@@ -268,7 +267,7 @@ namespace vcsn {
 
 	  add_transition (output, visited, to_process,
 			  lhs_states, rhs_states,
-			  m,
+			  m, current_state,
 			  lhs.dst_of(*l), rhs_s, prod_series);
 	}
 	else
@@ -291,8 +290,8 @@ namespace vcsn {
 	      if (left_supp_elt.value().second ==
 		  right_supp_elt.value().first)
 	      {
-		series_set_elt_t		prod_series (series);
-		const monoid_elt_value_t	word
+		typename res_t::series_set_elt_t	prod_series (series);
+		const monoid_elt_value_t		word
 		  (left_supp_elt.value().first,
 		   right_supp_elt.value().second);
 		const semiring_elt_t		p =
@@ -303,7 +302,7 @@ namespace vcsn {
 
 		add_transition (output, visited, to_process,
 				lhs_states, rhs_states,
-				m,
+				m, current_state,
 				lhs.dst_of(*l), rhs.dst_of(*r), prod_series);
 	      }
 	    }
@@ -315,12 +314,12 @@ namespace vcsn {
       {
 	const rhs_series_set_elt_t  right_series = rhs.series_of(*r);
 	rhs_support_t		right_supp = right_series.supp();
-	const rhs_monoid_elt_t	right_supp_elt (rhs_monoid, *right_supp);
+	const rhs_monoid_elt_t	right_supp_elt (rhs_monoid, *(right_supp.begin()));
 
 	if (right_supp_elt.value().first ==
 	    rhs_first_identity.value())
 	{
-	  series_set_elt_t	prod_series (series);
+	  typename res_t::series_set_elt_t	prod_series (series);
 	  const monoid_elt_value_t	word
 	    (lhs_first_identity.value(),
 	     right_supp_elt.value().second);
@@ -329,14 +328,12 @@ namespace vcsn {
 
 	  add_transition (output, visited, to_process,
 			  lhs_states, rhs_states,
-			  m,
+			  m, current_state,
 			  lhs_s, rhs.dst_of(*r), prod_series);
 	}
       }
     }
-
   }
-
 
 
   /// compose with multiplicities
@@ -435,7 +432,7 @@ namespace vcsn {
 
 
   template <typename S, typename T>
-  void
+  Element<S, T>
   compose(const Element<S, T>& lhs,
 	  const Element<S, T>& rhs)
   {
@@ -488,7 +485,7 @@ namespace vcsn {
   }
 
   template <typename S, typename T>
-  void
+  Element<S, T>
   u_compose(const Element<S, T>& lhs,
 	    const Element<S, T>& rhs)
   {

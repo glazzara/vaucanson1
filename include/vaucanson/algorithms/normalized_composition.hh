@@ -28,8 +28,8 @@
  *
  * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
  *
- * @see b_composition()
- * @see normalized_composition()
+ * @see compose()
+ * @see u_compose()
  */
 /** @} */
 
@@ -65,7 +65,7 @@ namespace vcsn {
    *
    */
   template <typename S, typename T>
-  void
+  Element<S, T>
   compose(const Element<S, T>& lhs,
 	  const Element<S, T>& rhs);
 
@@ -95,7 +95,7 @@ namespace vcsn {
    *
    */
   template <typename S, typename T>
-  void
+  Element<S, T>
   u_compose(const Element<S, T>& lhs,
 	    const Element<S, T>& rhs);
 

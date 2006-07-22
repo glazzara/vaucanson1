@@ -1,3 +1,21 @@
+2006-07-22  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Add vcsn-tdc.
+
+	* taf-kit/src/tdc_commands.cc: New.
+	* taf-kit/src/edition_commands.hxx: .
+	* taf-kit/src/getters.hxx: .
+	* taf-kit/src/commands_macros.hh: .
+	* taf-kit/src/common_commands.hh: .
+	* taf-kit/src/Makefile.am: .
+	* taf-kit/src/getters.hh: .
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: .
+	* include/vaucanson/algorithms/evaluation_fmp.hxx: .
+	* include/vaucanson/algorithms/normalized_composition.hh: .
+	* include/vaucanson/algorithms/normalized_composition.hxx: .
+	* include/vaucanson/algorithms/composition_cover.hh: New.
+	* include/vaucanson/algorithms/composition_cover.hxx: New.
+
 2006-07-22  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Remove `fsm' demo.

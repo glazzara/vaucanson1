@@ -17,7 +17,7 @@ include $(top_srcdir)/src/vaucanson.mk
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 
-Progs = vcsn-b vcsn-z
+Progs = vcsn-b vcsn-z vcsn-tdc
 
 if VCSN_TAF_KIT
   bin_PROGRAMS = $(Progs)
@@ -31,7 +31,7 @@ COMMON_SOURCES = commands.hh			\
 		 common.hh			\
 		 edition_commands.hh		\
 		 edition_commands.hxx		\
-		 library_commands.hh		\		 
+		 library_commands.hh		\
 		 getters.hh			\
 		 getters.hxx			\
 		 interface.cc			\
@@ -48,12 +48,19 @@ vcsn_z_CPPFLAGS = $(AM_CPPFLAGS)					\
 		  -DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"   	\
 		  -DCONTEXT_NAMESPACE="vcsn::z_automaton"
 
+vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS)					\
+		    -DCONTEXT_HEADER="<vaucanson/fmp_transducer.hh>"	\
+		    -DCONTEXT_NAMESPACE="vcsn::fmp_transducer"		\
+		    -DWITH_TWO_ALPHABETS
 
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\
 		 ratexp_commands.hh b_commands.cc
 
 vcsn_z_SOURCES = $(COMMON_SOURCES)		\
 		 ratexp_commands.hh z_commands.cc
+
+vcsn_tdc_SOURCES = $(COMMON_SOURCES)		\
+		   tdc_commands.cc
 
 ## ------ ##
 ## argp.  ##

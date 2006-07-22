@@ -1,4 +1,4 @@
-// edition_commands.hxx: this file is part of the Vaucanson project.
+// edit_commands.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef EDIT_AUTOMATON_HXX
-# define EDIT_AUTOMATON_HXX
+#ifndef EDITION_COMMANDS_HXX
+# define EDITION_COMMANDS_HXX
 
 /**
  * @file edition_commands.hxx
@@ -66,7 +66,7 @@ extern void tputs (...);
   | Functions that interact with the user to let her edit an |
   | automaton                                                |
   `---------------------------------------------------------*/
-
+#ifndef WITH_TWO_ALPHABETS
 namespace edition_commands
 {
   using namespace CONTEXT_NAMESPACE;
@@ -371,7 +371,11 @@ static int edit_automaton_command (const arguments_t& args)
   using namespace vcsn::io;
   using namespace vcsn::xml;
 
-  automaton_t a = make_automaton (get_alphabet ("dummy"));
+# ifndef WITH_TWO_ALPHABETS
+  automaton_t a = make_automaton (alphabet_t ());
+# else
+  automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t ());
+# endif // !WITH_TWO_ALPHABETS
 
   std::fstream input (args.args[1]);
 
@@ -408,7 +412,12 @@ static int define_automaton_command (const arguments_t& args)
     return -1;
   }
 
+# ifndef WITH_TWO_ALPHABETS
   automaton_t a = make_automaton (get_alphabet (args.alphabet));
+# else
+  automaton_t a = make_automaton (get_first_alphabet (args.alphabet),
+				  get_second_alphabet (args.alphabet2));
+# endif // !WITH_TWO_ALPHABETS
 
   edition_commands::main_loop (a);
   output << automaton_saver (a, string_out (), XML ()) << std::endl;
@@ -416,5 +425,6 @@ static int define_automaton_command (const arguments_t& args)
 
   return 0;
 }
+#endif // ! WITH_TWO_ALPHABETS
 
-#endif // ! EDIT_AUTOMATON_HXX
+#endif // ! EDITION_COMMANDS_HXX

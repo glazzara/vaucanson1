@@ -37,8 +37,8 @@ namespace vcsn
   {
     trans_t id_aut(trans.structure());
     identity(aut, id_aut);
-    trans_t res_composition = normalized_composition(sub_normalize(id_aut),
-						     sub_normalize(trans));
+    trans_t res_composition = compose(sub_normalize(id_aut),
+				      sub_normalize(trans));
     image(res_composition, res);
   }
 
@@ -55,7 +55,6 @@ namespace vcsn
 		      aut.structure(), aut.structure().series().monoid(),
 		      res.structure(), res.structure().series().monoid(),
 		      trans, aut, res);
-
   }
 
 } // End of namespace vcsn.

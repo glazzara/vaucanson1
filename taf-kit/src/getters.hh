@@ -35,12 +35,20 @@
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
 
+# ifndef WITH_TWO_ALPHABETS
 static alphabet_t get_alphabet (const char* alphabet);
+# else
+static first_alphabet_t get_first_alphabet (const char* alphabet);
+static second_alphabet_t get_second_alphabet (const char* alphabet);
+# endif // !WITH_TWO_ALPHABETS
 
+# ifndef WITH_TWO_ALPHABETS
 static rat_exp_t get_exp_complete (const std::string& exp,
 				   const char* alphabet,
 				   char /* @bug epsilon */);
-# define get_exp(S) (get_exp_complete ((S), args.alphabet, args.epsilon))
+
+#  define get_exp(S) (get_exp_complete ((S), args.alphabet, args.epsilon))
+# endif // !WITH_TWO_ALPHABETS
 
 static automaton_t get_aut (const std::string& s);
 

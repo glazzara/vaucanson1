@@ -50,7 +50,7 @@ using vcsn::xml::XML;
   /*---------------------------------------.
   | Command definition (RatExp excluded).  |
   `---------------------------------------*/
-
+#ifndef WITH_TWO_ALPHABETS
 DEFINE_IS_PROPERTY_COMMAND (ambiguous);
 
 DEFINE_IS_PROPERTY_COMMAND (normalized);
@@ -58,12 +58,6 @@ DEFINE_IS_PROPERTY_COMMAND (normalized);
 DEFINE_IS_PROPERTY_COMMAND (realtime);
 
 DEFINE_IS_PROPERTY_COMMAND (standard);
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (trim));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (transpose));
 
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (realtime));
@@ -81,11 +75,6 @@ DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (quotient)
 				  ARG_KIND (aut)
 				  ALGOS (quotient, realtime));
 
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (closure)
-				  ARG_KIND (aut)
-				  ALGOS (accessible, closure));
-
-
 DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 			 ALGO (sum));
 
@@ -95,30 +84,12 @@ DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
 			 ALGO (concatenate));
 
-
-DEFINE_COMMAND (NAME (are_isomorphic)
-		CODE (bool b = are_isomorphic (get_aut (args.args[1]),
-					       get_aut (args.args[2])))
-		OUTPUT_ON_VERBOSE (
-		  (b
-		   ? "Automata are isomorphic\n"
-		   : "Automata are not isomorphic\n"))
-		RETURNVALUE (b ? 0 : 1));
-
 DEFINE_COMMAND (NAME (eval)
 		CODE (/* Empty */)
 		OUTPUT (
 		  eval (realtime (get_aut (args.args[1])),
-			std::string (args.args[2]))
-		  << std::endl)
+			std::string (args.args[2])))
 		RETURNVALUE (0));
-
-DEFINE_COMMAND (NAME (is_empty)
-		CODE (
-		  int states = trim (get_aut (args.args[1])).states ().size ())
-		OUTPUT_ON_VERBOSE (
-		  (states ? "Entry is not empty\n" : "Entry is empty\n"))
-		RETURNVALUE (states == 0 ? 0 : 1));
 
 DEFINE_COMMAND (NAME (power)
 		CODE (int n = atoi (args.args[2]);
@@ -129,6 +100,39 @@ DEFINE_COMMAND (NAME (power)
 		OUTPUT (automaton_saver (p, string_out (), XML ()))
 		RETURNVALUE (0));
 
+DEFINE_COMMAND (NAME (standardize)
+		CODE (automaton_t a = get_aut (args.args[1]);
+		      standardize (a))
+		OUTPUT (automaton_saver (a, string_out (), XML ()))
+		RETURNVALUE (0));
+#endif
+
+DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
+			ALGO (trim));
+
+DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
+			ALGO (transpose));
+
+DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (closure)
+				  ARG_KIND (aut)
+				  ALGOS (accessible, closure));
+
+DEFINE_COMMAND (NAME (are_isomorphic)
+		CODE (bool b = are_isomorphic (get_aut (args.args[1]),
+					       get_aut (args.args[2])))
+		OUTPUT_ON_VERBOSE (
+		  (b
+		   ? "Automata are isomorphic\n"
+		   : "Automata are not isomorphic\n"))
+		RETURNVALUE (b ? 0 : 1));
+
+DEFINE_COMMAND (NAME (is_empty)
+		CODE (
+		  int states = trim (get_aut (args.args[1])).states ().size ())
+		OUTPUT_ON_VERBOSE (
+		  (states ? "Entry is not empty\n" : "Entry is empty\n"))
+		RETURNVALUE (states == 0 ? 0 : 1));
+
 DEFINE_COMMAND (NAME (info)
 		CODE (automaton_t a = get_aut (args.args[1]))
 		OUTPUT (
@@ -136,12 +140,6 @@ DEFINE_COMMAND (NAME (info)
 		  << "Transitions: " << a.transitions ().size () << std::endl
 		  << "Initial states: " << a.initial ().size () << std::endl
 		  << "Final states: " << a.final ().size () << std::endl)
-		RETURNVALUE (0));
-
-DEFINE_COMMAND (NAME (standardize)
-		CODE (automaton_t a = get_aut (args.args[1]);
-		      standardize (a))
-		OUTPUT (automaton_saver (a, string_out (), XML ()))
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (identity)

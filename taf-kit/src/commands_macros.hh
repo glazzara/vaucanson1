@@ -112,6 +112,7 @@
 # define AutAut "aut1 aut2", 2
 # define AutInt "aut n", 2
 # define AutWord "aut word", 2
+# define AutExp "aut exp", 2
 # define File "file", 1
 # define Nil "", 0
 

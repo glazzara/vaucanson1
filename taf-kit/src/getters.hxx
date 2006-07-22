@@ -30,9 +30,12 @@
 # include "common.hh"
 
 # include CONTEXT_HEADER
+# include <vaucanson/boolean_transducer.hh>
 # include <vaucanson/xml/XML.hh>
 # include <string>
+# include <stdlib.h>
 # include "getters.hh"
+# include "commands_macros.hh"
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
@@ -40,23 +43,34 @@ using namespace vcsn;
   /*---------------------------------------------.
   | Getters for alphabet, RatExp and automaton.  |
   `---------------------------------------------*/
-
-/// Getter for alphabet.
-static alphabet_t get_alphabet (const char* alphabet)
-{
-  alphabet_t	a;
-
-  if (not (alphabet and alphabet[0]))
-  {
-    warn ("Error: alphabet must be explicitly defined.");
-    exit (-2);
-  }
-
-  for (int i = 0; alphabet[i]; ++i)
-    a.insert (alphabet[i]);
-  return a;
+# define GET_ALPHABET(Name, Type)				\
+static Type Name (const char* alphabet)				\
+{								\
+  Type a;							\
+  if (not (alphabet and alphabet[0]))				\
+  {								\
+    warn ("Error: alphabet should be explicitly defined.");	\
+    exit (-2);							\
+  }								\
+  for (int i = 0; alphabet[i]; ++i)				\
+    a.insert (alphabet[i]);					\
+  return a;							\
 }
 
+
+/// Getter for alphabet.
+# ifndef WITH_TWO_ALPHABETS
+
+GET_ALPHABET(get_alphabet,alphabet_t);
+
+# else
+
+GET_ALPHABET (get_first_alphabet, first_alphabet_t);
+GET_ALPHABET (get_second_alphabet, second_alphabet_t);
+
+# endif
+
+# ifndef WITH_TWO_ALPHABETS
 /// Getter for RatExp.
 static rat_exp_t get_exp_complete (const std::string& exp,
 				   const char* alphabet,
@@ -64,7 +78,7 @@ static rat_exp_t get_exp_complete (const std::string& exp,
 {
   return make_rat_exp (get_alphabet (alphabet), exp);
 }
-
+# endif // !WITH_TWO_ALPHABETS
 
 /// Getter for automaton.
 static automaton_t get_aut (const std::string& s)
@@ -75,7 +89,12 @@ static automaton_t get_aut (const std::string& s)
     using namespace vcsn::io;
     using namespace vcsn::xml;
 
-    automaton_t a = make_automaton (get_alphabet ("dummy"));
+# ifndef WITH_TWO_ALPHABETS
+    automaton_t a = make_automaton (alphabet_t ());
+# else
+    automaton_t a = make_automaton (first_alphabet_t (), second_alphabet_t ());
+# endif // !WITH_TWO_ALPHABETS
+
     *is >> automaton_loader (a, string_out (), XML ());
 
     if (s != "-")
@@ -88,5 +107,30 @@ static automaton_t get_aut (const std::string& s)
     exit (-3);
   }
 }
+
+#ifdef WITH_TWO_ALPHABETS
+static boolean_automaton::automaton_t get_boolean_aut(std::string s)
+{
+  std::istream* is (s == "-" ? &std::cin : new std::ifstream (s.c_str()));
+  if (not is->fail())
+  {
+    using namespace vcsn::io;
+    using namespace vcsn::xml;
+
+    boolean_automaton::automaton_t a =
+      boolean_automaton::make_automaton(first_alphabet_t());
+    *is >> automaton_loader(a, string_out (), XML ());
+
+    if (s != "-")
+      delete is;
+    return a;
+  }
+  else
+  {
+    std::cerr << "FATAL: Could not load automaton." << std::endl;
+    exit(1);
+  }
+}
+#endif // !WITH_TWO_ALPHABETS
 
 #endif // ! GETTERS_HXX
