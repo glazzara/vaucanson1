@@ -33,6 +33,17 @@ else
   AUTORECONF=autoreconf
 fi
 
+# On some environments (Darwin Ports), libtoolize is glibtoolize.
+# I suppose their autoreconf is adjusted accordingly, but I use
+# my custom Autoconf...
+for lt in "$LIBTOOLIZE" libtoolize glibtoolize
+do
+  if ($lt --version) >/dev/null 2>&1; then
+    export LIBTOOLIZE="$lt"
+    break
+  fi
+done
+
 run .                     build-aux/check_xml.sh
 
 run src/tests/test-suites ./generate-all.sh

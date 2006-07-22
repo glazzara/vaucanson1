@@ -1,3 +1,7 @@
+2006-07-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	* bootstrap.sh: Be Darwin Ports friendly: look for glibtoolize.
+
 2006-07-21  Matthieu Varin  <matt@lrde.epita.fr>
 
 	Add a test in is_normalized function.
