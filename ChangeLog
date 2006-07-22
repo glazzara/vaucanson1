@@ -1,3 +1,31 @@
+2006-07-22  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Remove `fsm' demo.
+	This demo is deprecated and is real drag to use.  People who want to
+	see such functionalities in action will look at other files and, soon,
+	to the multi-input-output TAF-Kit.
+
+	* src/demos/fsm: Remove.
+	* src/demos/fsm/usual_automaton_t: Remove.
+	* src/demos/fsm/usual_automaton_t/configure.ac: Remove.
+	* src/demos/fsm/usual_automaton_t/vcsn_random_generator.cc: Remove.
+	* src/demos/fsm/usual_automaton_t/toolbox.hh: Remove.
+	* src/demos/fsm/usual_automaton_t/vcsn_prune.cc: Remove.
+	* src/demos/fsm/usual_automaton_t/arg.hh: Remove.
+	* src/demos/fsm/usual_automaton_t/vcsn_reverse.cc: Remove.
+	* src/demos/fsm/usual_automaton_t/Makefile.am: Remove.
+	* src/demos/fsm/usual_automaton_t/missing: Remove.
+	* src/demos/fsm/usual_automaton_t/vcsn_closure.cc: Remove.
+	* src/demos/fsm/usual_automaton_t/vcsn_dotdump.cc: Remove.
+	* src/demos/fsm/usual_automaton_t/vcsn_determinize.cc: Remove.
+	* src/demos/fsm/usual_automaton_t/arg.cc: Remove.
+	* src/demos/fsm/usual_automaton_t/vcsn_intersect.cc: Remove.
+	* src/demos/fsm/usual_automaton_t/vcsn_minimize.cc: Remove.
+	* src/demos/fsm/arg.hh: Remove.
+	* src/demos/fsm/generate_toolbox.sh: Remove.
+	* src/demos/fsm/README.txt: Remove.
+	* src/demos/fsm/arg.cc: Remove.
+
 2006-07-22  Akim Demaille  <akim@lrde.epita.fr>
 
 	* bootstrap.sh: Be Darwin Ports friendly: look for glibtoolize.
