@@ -111,10 +111,10 @@ int main()
   `----------*/
 
   fmp_transducer::automaton_t	fiblr = fmp_transducer::make_automaton(A, A);
-  normalized_composition(sub_fibleft, sub_fibright, fiblr);
+  u_compose(sub_fibleft, sub_fibright, fiblr);
 
   fmp_transducer::automaton_t	fibrl = fmp_transducer::make_automaton(A, A);
-  normalized_composition(sub_fibright, sub_fibleft, fibrl);
+  u_compose(sub_fibright, sub_fibleft, fibrl);
 
   std::ofstream left_fibo("fibo_fmp_left.xml");
   std::ofstream right_fibo("fibo_fmp_right.xml");

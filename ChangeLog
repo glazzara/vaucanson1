@@ -1,5 +1,16 @@
 2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	Fix use of normalized/b_composition.
+
+	* src/benchs/composition/normalized_composition_bench.hh,
+	* src/demos/function_library/tdc_algorithms.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_tdc_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_tdc_gen.cc,
+	* src/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh:
+	s/normalized_composition/u_compose/, s/b_composition/compose/.
+
+2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/normalized.hxx: Use get_initial on the
 	initial state and get_final on the final one.
 

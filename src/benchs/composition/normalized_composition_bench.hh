@@ -175,7 +175,7 @@ void normalized_composition_bench(int n_value)
 
   fmp_transducer::automaton_t res_auto = fmp_transducer::make_automaton(A,C);
 
-  normalized_composition(sub_left_auto, sub_right_auto, res_auto);
+  u_compose(sub_left_auto, sub_right_auto, res_auto);
 
   std::cout << "nb states: " << res_auto.states().size() << std::endl;
   std::cout << "nb transitions: " << res_auto.transitions().size()

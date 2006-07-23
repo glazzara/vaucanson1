@@ -147,7 +147,7 @@ compose_command(int argc, char** argv)
   if (!is_sub_normalized(b))
     b = sub_normalize(b);
 
-  std::cout << automaton_saver(normalized_composition(a,b),
+  std::cout << automaton_saver(u_compose(a,b),
 			       string_out (),
 			       XML ());
 }
@@ -198,7 +198,7 @@ b_compose_command(int argc, char** argv)
   if (!is_sub_normalized(b))
     b = sub_normalize(b);
 
-  std::cout << automaton_saver(b_composition(a,b),
+  std::cout << automaton_saver(compose(a,b),
 			       string_out (),
 			       XML ());
 }

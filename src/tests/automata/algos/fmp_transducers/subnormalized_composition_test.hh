@@ -134,7 +134,7 @@ subnormalized_composition_test(tests::Tester& t)
   htransition_t			h24 = t2.add_series_transition(st21, st22,
 							       series_elt24);
 
-  t3 = normalized_composition(t1, t2);
+  t3 = u_compose(t1, t2);
 
   boolean_transducer::automaton_t trans1 =
     boolean_transducer::make_automaton(first_at, second_at);

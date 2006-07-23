@@ -193,8 +193,8 @@ int main(int argc, char** argv)
   fmp_transducer::automaton_t	right_left_auto =
     fmp_transducer::make_automaton(A, A);
 
-  normalized_composition(sub_left, sub_right, left_right_auto);
-  normalized_composition(sub_right, sub_left, right_left_auto);
+  u_compose(sub_left, sub_right, left_right_auto);
+  u_compose(sub_right, sub_left, right_left_auto);
 
   std::string	left_name = name + "_left.xml";
   std::string	right_name = name + "_right.xml";
