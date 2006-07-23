@@ -25,7 +25,7 @@
 # include <vaucanson/algorithms/krat_exp_constant_term.hh>
 # include <vaucanson/algorithms/krat_exp_derivation.hh>
 # include <vaucanson/algorithms/aci_canonical.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
 

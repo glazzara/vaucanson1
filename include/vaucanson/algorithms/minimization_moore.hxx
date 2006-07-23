@@ -21,7 +21,7 @@
 
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/delta_kind.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/misc/contract.hh>
 
 # include <map>

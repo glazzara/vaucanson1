@@ -86,12 +86,12 @@ namespace vcsn {
 
   template <typename S>
   Structure<S>::Structure()
-    : utility::unique::unifiable()
+    : misc::unique::unifiable()
   {}
 
   template <typename S>
   Structure<S>::Structure(const Structure& other)
-    : utility::unique::unifiable(other)
+    : misc::unique::unifiable(other)
   {}
 
 

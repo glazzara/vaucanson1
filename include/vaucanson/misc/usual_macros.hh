@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TOOLS_USUAL_MACROS_HH
-# define VCSN_TOOLS_USUAL_MACROS_HH
+#ifndef VCSN_MISC_USUAL_MACROS_HH
+# define VCSN_MISC_USUAL_MACROS_HH
 
 # include <fstream>
 # include <vaucanson/config/system.hh>
@@ -171,4 +171,4 @@
 # define empty_	identity(SELECT(typename monoid_elt_t::value_t))
 # define wzero_	zero(SELECT(typename semiring_elt_t::value_t))
 
-#endif // ! VCSN_TOOLS_USUAL_MACROS_HH
+#endif // ! VCSN_MISC_USUAL_MACROS_HH

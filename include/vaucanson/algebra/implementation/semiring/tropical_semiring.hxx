@@ -35,41 +35,41 @@ namespace vcsn {
   template<typename T>
   T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(T))
   {
-    return utility::limits<T>::min();
+    return misc::limits<T>::min();
   }
 
   template<>
   inline
   float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(float))
   {
-    return -utility::limits<float>::infinity();
+    return -misc::limits<float>::infinity();
   }
 
   template<>
   inline
   double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMax>), SELECTOR(double))
   {
-    return -utility::limits<double>::infinity();
+    return -misc::limits<double>::infinity();
   }
 
   template<typename T>
   T zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(T))
   {
-    return utility::limits<T>::max();
+    return misc::limits<T>::max();
   }
 
   template<>
   inline
   float zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(float))
   {
-    return utility::limits<float>::infinity();
+    return misc::limits<float>::infinity();
   }
 
   template<>
   inline
   double zero_value(SELECTOR(algebra::TropicalSemiring<algebra::TropicalMin>), SELECTOR(double))
   {
-    return utility::limits<double>::infinity();
+    return misc::limits<double>::infinity();
   }
 
   /*------------.
@@ -203,7 +203,7 @@ namespace vcsn {
   op_choose(const algebra::TropicalSemiring<TropicalKind>& set, SELECTOR(T))
   {
     return Element<algebra::TropicalSemiring<TropicalKind>, T>
-      (set, utility::random::generate<T>());
+      (set, misc::random::generate<T>());
   }
 
   template <class TropicalKind, typename T>

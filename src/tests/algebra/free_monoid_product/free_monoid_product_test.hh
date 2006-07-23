@@ -1,17 +1,17 @@
 // free_monoid_product_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
-// Copyright (C) 2004, 2005 The Vaucanson Group.
-// 
+//
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_ALGEBRA_FREE_MONOID_PRODUCT_FREE_MONOID_PRODUCT_TEST_HH
@@ -128,8 +128,8 @@ bool free_monoid_product_test(tests::Tester& t)
 	  p0 = std::make_pair(first_word_0, second_word_0);
 	  element_t w0(freemonoid_product, p0);
 
-	  pair_len = w0.length(utility::pair<int>());
-	  discr_len = w0.length(utility::discrepancy<int>());
+	  pair_len = w0.length(misc::pair<int>());
+	  discr_len = w0.length(misc::discrepancy<int>());
 	  add_len = w0.length(std::plus<int>());
 	  len = std::make_pair(0, 0);
 
@@ -142,8 +142,8 @@ bool free_monoid_product_test(tests::Tester& t)
 	  p0n = std::make_pair(first_word_0, second_word_n);
 	  element_t w0n(freemonoid_product, p0n);
 
-	  pair_len = w0n.length(utility::pair<int>());
-	  discr_len = w0n.length(utility::discrepancy<int>());
+	  pair_len = w0n.length(misc::pair<int>());
+	  discr_len = w0n.length(misc::discrepancy<int>());
 	  add_len = w0n.length(std::plus<int>());
 
 	  len = std::make_pair(0, n);
@@ -157,8 +157,8 @@ bool free_monoid_product_test(tests::Tester& t)
 	  pn0 = std::make_pair(first_word_n, second_word_0);
 	  element_t wn0(freemonoid_product, pn0);
 
-	  pair_len = wn0.length(utility::pair<int>());
-	  discr_len = wn0.length(utility::discrepancy<int>());
+	  pair_len = wn0.length(misc::pair<int>());
+	  discr_len = wn0.length(misc::discrepancy<int>());
 	  add_len = wn0.length(std::plus<int>());
 
 	  len = std::make_pair(n, 0);
@@ -172,8 +172,8 @@ bool free_monoid_product_test(tests::Tester& t)
 	  pn1 = std::make_pair(first_word_n, second_word_1);
 	  element_t wn1(freemonoid_product, pn1);
 
-	  pair_len = wn1.length(utility::pair<int>());
-	  discr_len = wn1.length(utility::discrepancy<int>());
+	  pair_len = wn1.length(misc::pair<int>());
+	  discr_len = wn1.length(misc::discrepancy<int>());
 	  add_len = wn1.length(std::plus<int>());
 
 	  len = std::make_pair(n, 1);
@@ -188,8 +188,8 @@ bool free_monoid_product_test(tests::Tester& t)
 	  p1n = std::make_pair(first_word_1, second_word_n);
 	  element_t w1n(freemonoid_product, p1n);
 
-	  pair_len = w1n.length(utility::pair<int>());
-	  discr_len = w1n.length(utility::discrepancy<int>());
+	  pair_len = w1n.length(misc::pair<int>());
+	  discr_len = w1n.length(misc::discrepancy<int>());
 	  add_len = w1n.length(std::plus<int>());
 
 	  len = std::make_pair(1, n);

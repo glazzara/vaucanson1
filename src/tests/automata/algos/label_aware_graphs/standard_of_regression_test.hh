@@ -20,7 +20,7 @@
 # include <vaucanson/algebra/implementation/series/krat.hh>
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/eval.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 template <class Auto>
 bool

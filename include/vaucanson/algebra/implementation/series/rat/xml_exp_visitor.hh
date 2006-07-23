@@ -36,7 +36,7 @@
 # include <xercesc/dom/DOM.hpp>
 # include <xercesc/util/XMLString.hpp>
 # include <xercesc/util/PlatformUtils.hpp>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <string>
 # include <cstddef>
 

@@ -18,7 +18,7 @@
 # define VCSN_ALGEBRA_CONCEPT_SERIES_BASE_HXX
 
 # include <vaucanson/algebra/concept/series_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
 
@@ -230,7 +230,7 @@ namespace vcsn {
 	     const algebra::FreeMonoidBase<M>& monoid)
   {
     // Ensures the monoid is compatible with the series.
-    enum { compatible = utility::static_eq<typename S::monoid_t, M>::value };
+    enum { compatible = misc::static_eq<typename S::monoid_t, M>::value };
     static_assertion_(compatible, invalid_conversion_from_monoid_to_series);
 
     typename S::semiring_t semiring;

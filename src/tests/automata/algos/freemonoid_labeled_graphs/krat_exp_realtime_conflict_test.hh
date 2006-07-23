@@ -21,7 +21,7 @@
 # include <vaucanson/algorithms/krat_exp_realtime.hh>
 
 # include <vaucanson/algebra/implementation/series/krat.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/tools/gen_random.hh>
 
 template <class Auto>

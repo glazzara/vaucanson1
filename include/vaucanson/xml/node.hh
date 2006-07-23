@@ -41,7 +41,7 @@
 # include <vaucanson/design_pattern/factory.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/xml/xml_chooser.hh>
 # include <vaucanson/xml/tools.hh>
 

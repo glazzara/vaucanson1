@@ -34,6 +34,8 @@ vaucanson/contexts/transducer.thh		\
 vaucanson/contexts/polynom_series.thh
 
 nobase_include_HEADERS +=			\
+vaucanson/misc/container_ops.hxx		\
+vaucanson/misc/container_ops.hh			\
 vaucanson/misc/iomanip.hh			\
 vaucanson/misc/iomanip.hxx			\
 vaucanson/misc/escaper.hh			\
@@ -41,6 +43,7 @@ vaucanson/misc/escaper.hxx			\
 vaucanson/misc/random.hh			\
 vaucanson/misc/random.hxx			\
 vaucanson/misc/limits.hh			\
+vaucanson/misc/misc.hh				\
 vaucanson/misc/support.hh			\
 vaucanson/misc/support.hxx			\
 vaucanson/misc/constraints.hh			\
@@ -48,7 +51,9 @@ vaucanson/misc/selectors.hh			\
 vaucanson/misc/static.hh			\
 vaucanson/misc/unique.hh			\
 vaucanson/misc/unique.hxx			\
-vaucanson/misc/utility.hh			\
+vaucanson/misc/usual_macros.hh			\
+vaucanson/misc/usual_escaped_characters.hxx	\
+vaucanson/misc/usual_escaped_characters.hh	\
 vaucanson/misc/contract.hh			\
 vaucanson/misc/window.hxx			\
 vaucanson/misc/window.hh			\
@@ -65,14 +70,11 @@ vaucanson/misc/functors.hxx
 nobase_include_HEADERS +=			\
 vaucanson/tools/bencher.hh			\
 vaucanson/tools/bencher.hxx			\
-vaucanson/tools/container_ops.hxx		\
-vaucanson/tools/container_ops.hh		\
 vaucanson/tools/automaton_tools.hh		\
 vaucanson/tools/gen_book.hh			\
 vaucanson/tools/gen_book.hxx			\
 vaucanson/tools/gen_random.hh			\
 vaucanson/tools/gen_random.hxx			\
-vaucanson/tools/usual_macros.hh			\
 vaucanson/tools/dot_dump.hh			\
 vaucanson/tools/dot_display.hh			\
 vaucanson/tools/dot_format.hxx			\
@@ -91,8 +93,6 @@ vaucanson/tools/dot_dump.hxx			\
 vaucanson/tools/dot_display.hxx			\
 vaucanson/tools/fsm_dump.hh			\
 vaucanson/tools/fsm_dump.hxx			\
-vaucanson/tools/usual_escaped_characters.hxx	\
-vaucanson/tools/usual_escaped_characters.hh	\
 vaucanson/tools/xml_dump.hh			\
 vaucanson/tools/xml_dump.hxx			\
 vaucanson/tools/xml_load.hh			\

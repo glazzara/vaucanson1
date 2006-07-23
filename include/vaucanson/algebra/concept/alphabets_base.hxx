@@ -125,7 +125,7 @@ namespace vcsn {
 
     precondition (is_finite() && size() > 0);
 
-    int  nr = ::utility::random::generate<int>(0, size() - 1);
+    int  nr = misc::random::generate<int>(0, size() - 1);
 
     const_iterator it = begin();
     for (int k = 0; k < nr; ++k)
@@ -138,7 +138,7 @@ namespace vcsn {
   typename algebra::alphabet_traits<Self, T>::letter_t
   MetaElement<algebra::AlphabetSetBase<Self>, T>::random_letter() const
   {
-    return utility::random::generate<typename algebra::alphabet_traits<Self, T>::letter_t>();
+    return misc::random::generate<typename algebra::alphabet_traits<Self, T>::letter_t>();
   }
 
   template<typename S, typename T>

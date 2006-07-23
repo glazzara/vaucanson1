@@ -120,7 +120,7 @@ namespace vcsn {
   template <class InputIterator, class Series, class T, class StatesSet>
   static
   std::pair<bool, unsigned int>
-  window_backsearch(const utility::Window<InputIterator,
+  window_backsearch(const misc::Window<InputIterator,
 		    typename Element<Automata<Series>, T>::letter_t>& w,
 		    const Element<Automata<Series>, T>& a,
 		    const std::vector<StatesSet>& distances)
@@ -131,9 +131,9 @@ namespace vcsn {
     typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
-    typedef typename utility::Window<InputIterator, letter_t>	window_t;
+    typedef typename misc::Window<InputIterator, letter_t>	window_t;
     typedef typename window_t::length_t				length_t;
-    typedef utility::Bitset					bitset_t;
+    typedef misc::Bitset					bitset_t;
 
     // Code.
     bitset_t	s_new (a.states().max() + 1);
@@ -165,7 +165,7 @@ namespace vcsn {
   template <class InputIterator, class FoundFunctor, class Series, class T>
   static
   InputIterator
-  confirm_and_report_match(const utility::Window<InputIterator,
+  confirm_and_report_match(const misc::Window<InputIterator,
 			   typename Element<Automata<Series>, T>::letter_t>& w,
 			   const Element<Automata<Series>, T>& a,
 			   FoundFunctor& f)
@@ -174,10 +174,10 @@ namespace vcsn {
     typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
-    typedef typename utility::Window<InputIterator, letter_t>	window_t;
+    typedef typename misc::Window<InputIterator, letter_t>	window_t;
     typedef typename window_t::length_t				length_t;
     typedef typename window_t::iterator_t			iterator_t;
-    typedef utility::Bitset					bitset_t;
+    typedef misc::Bitset					bitset_t;
 
     // Code.
     bitset_t	s_old (a.states().max() + 1);
@@ -222,9 +222,9 @@ namespace vcsn {
     typedef typename vcsn::Element<Automata<Series>, T>		automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
-    typedef typename utility::Window<InputIterator, letter_t>	window_t;
+    typedef typename misc::Window<InputIterator, letter_t>	window_t;
     typedef typename window_t::length_t				length_t;
-    typedef utility::Bitset					bitset_t;
+    typedef misc::Bitset					bitset_t;
 
     // Code.
     std::vector<bitset_t>	distances;

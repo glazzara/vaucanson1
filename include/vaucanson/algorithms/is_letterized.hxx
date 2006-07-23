@@ -19,7 +19,7 @@
 
 # include <vaucanson/algorithms/is_letterized.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
 

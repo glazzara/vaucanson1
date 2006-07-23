@@ -256,7 +256,7 @@ namespace vcsn {
     for (const_iterator i = op_begin_const(s.self(), v);
 	 i != op_end_const(s.self(), v);
 	 ++i, is_empty = false)
-      st << utility::make_escaper(*i);
+      st << misc::make_escaper(*i);
 
     if (is_empty)
       st << "1";

@@ -21,7 +21,7 @@
 # include <vaucanson/algorithms/determinize.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <vaucanson/algorithms/internal/skeleton.hh>
 

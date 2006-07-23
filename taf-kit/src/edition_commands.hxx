@@ -59,7 +59,7 @@ extern void tputs (...);
 # include "getters.hh"
 # include "edition_commands.hh"
 
-# define type_equal(T1, T2) (utility::static_eq < T1, T2 >::value)
+# define type_equal(T1, T2) (misc::static_eq < T1, T2 >::value)
 # define discard_inputs() std::cin.ignore (LONG_MAX, '\n')
 
   /*---------------------------------------------------------.

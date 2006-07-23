@@ -21,7 +21,7 @@
 
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/algorithms/normalized.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/misc/contract.hh>
 # include <vaucanson/misc/limits.hh>
 # include <vaucanson/misc/random.hh>
@@ -94,7 +94,7 @@ namespace vcsn {
 	    ++n_final;
 	}
 
-	unsigned n = utility::random::generate((unsigned) 0,
+	unsigned n = misc::random::generate((unsigned) 0,
 					       a.states().size() -
 					       (n_init + n_final));
 

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,10 +21,11 @@
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/normalized.hh>
 # include <vaucanson/algorithms/eval.hh>
+# include <vaucanson/tools/dot_dump.hh>
 
 # include <vaucanson/algebra/implementation/series/krat.hh>
 
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # define TEST_ON(ExpStr, Exp, St, TrA, TrB, Tr1)			\
   {									\

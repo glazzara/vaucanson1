@@ -20,7 +20,7 @@
 # include <vaucanson/algebra/implementation/series/krat_exp_parser.hh>
 
 # include <vaucanson/algebra/concept/monoid_base.hh>
-# include <vaucanson/tools/usual_escaped_characters.hh>
+# include <vaucanson/misc/usual_escaped_characters.hh>
 
 # include <list>
 # include <set>
@@ -275,7 +275,7 @@ namespace vcsn {
 	typedef std::string::const_iterator		   iterator_t;
 
 	iterator_t i = in.begin();
-	std::set<char> escaped = tools::usual_escaped_characters();
+	std::set<char> escaped = misc::usual_escaped_characters();
 	int len = 0;
 
 	while (!error_ & (i != in.end()))

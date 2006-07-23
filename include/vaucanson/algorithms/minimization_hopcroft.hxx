@@ -20,7 +20,7 @@
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <algorithm>
 # include <vector>

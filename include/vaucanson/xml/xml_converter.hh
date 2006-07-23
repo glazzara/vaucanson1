@@ -44,7 +44,7 @@
 
 # include <vaucanson/design_pattern/element.hh>
 # include <vaucanson/design_pattern/factory.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/xml/xerces_parser.hh>
 # include <vaucanson/xml/node.hh>
 # include <vaucanson/xml/xml_chooser.hh>

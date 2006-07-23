@@ -21,7 +21,7 @@
 # include <vaucanson/algorithms/is_ambiguous.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/algorithms/product.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <map>
 # include <set>

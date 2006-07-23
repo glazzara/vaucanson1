@@ -26,7 +26,7 @@
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/tools/dot_dump.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 using namespace vcsn;
 using namespace vcsn::algebra;

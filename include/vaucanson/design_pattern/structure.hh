@@ -46,7 +46,7 @@ namespace vcsn {
    *   - a @c choose() method to pick randomly @c Element instances.
    */
   template<typename S>
-  struct Structure : utility::unique::unifiable
+  struct Structure : misc::unique::unifiable
   {
     /// Check if a given element is compatible with the structural element
     template<typename T>

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,122 +17,123 @@
 #ifndef VCSN_MISC_UNIQUE_HXX
 # define VCSN_MISC_UNIQUE_HXX
 
-#include <vaucanson/misc/unique.hh>
+# include <vaucanson/misc/unique.hh>
 
-namespace utility {
+namespace vcsn {
+  namespace misc {
 
-  namespace unique {
+    namespace unique {
 
-    // This code solves a bug in GCC 4.0.0 for Apple Computer Inc.
-#if defined(__GNUC__)
-# if defined(__GNUC_MINOR__) && defined(__GNUC_PATCHLEVEL__)
-#  if (__GNUC__ == 4) && (__GNUC_MINOR__ == 0) && (__GNUC_PATCHLEVEL__ == 0)
-    template class UniqueMap<int>::TiSlot<int>;
+      // This code solves a bug in GCC 4.0.0 for Apple Computer Inc.
+# if defined (__GNUC__)
+#  if defined (__GNUC_MINOR__) && defined (__GNUC_PATCHLEVEL__)
+#   if (__GNUC__ == 4) && (__GNUC_MINOR__ == 0) && (__GNUC_PATCHLEVEL__ == 0)
+      template class UniqueMap<int>::TiSlot<int>;
+#   endif
 #  endif
 # endif
-#endif
 
-    template <>
-    template <>
-    inline
-    unique_map::ti_slot::TiSlot(const std::type_info& _id) : id(_id)
-    {
-    }
+      template <>
+      template <>
+      inline
+      unique_map::ti_slot::TiSlot (const std::type_info& _id) : id (_id)
+      {
+      }
 
-    template <>
-    template <>
-    inline
-    bool
-    unique_map::ti_slot::
-    operator==(const unique_map::ti_slot& other) const
-    {
-      return id == other.id;
-    }
+      template <>
+      template <>
+      inline
+      bool
+      unique_map::ti_slot::
+      operator== (const unique_map::ti_slot& other) const
+      {
+	return id == other.id;
+      }
 
-    template <>
-    template <>
-    inline
-    bool unique_map::ti_slot::
-    operator<(const unique_map::ti_slot& other) const
-    {
-      return id.before(other.id);
-    }
+      template <>
+      template <>
+      inline
+      bool unique_map::ti_slot::
+      operator< (const unique_map::ti_slot& other) const
+      {
+	return id.before (other.id);
+      }
 
-    template<typename T>
-    uniquelist<T>::~uniquelist()
-    {}
+      template <typename T>
+      uniquelist<T>::~uniquelist ()
+      {}
 
-    inline
-    unifiable::unifiable() : unique_(false)
-    {}
+      inline
+      unifiable::unifiable () : unique_ (false)
+      {}
 
-    inline
-    unifiable::unifiable(const unifiable& ) : unique_(false)
-    {}
+      inline
+      unifiable::unifiable (const unifiable& ) : unique_ (false)
+      {}
 
-    template<typename T>
-    const T& get(const T& v)
-    {
-      if (static_cast<const unifiable&>(v).unique_)
-	return v;
+      template <typename T>
+      const T& get (const T& v)
+      {
+	if (static_cast<const unifiable&> (v).unique_)
+	  return v;
 
-      unique_map::map_t& m = unique_map::instance();
+	unique_map::map_t& m = unique_map::instance ();
 
-      unique_map::map_t::iterator i = m.find(typeid(T));
-      if (i == m.end())
+	unique_map::map_t::iterator i = m.find (typeid (T));
+	if (i == m.end ())
 	{
 	  uniquelist<T> *l =
-	    static_cast<uniquelist<T>* >(m[typeid(T)] = new uniquelist<T>);
-	  l->push_front(v);
-	  static_cast<unifiable&>(l->front()).unique_ = true;
-	  return l->front();
+	    static_cast<uniquelist<T>* > (m[typeid (T)] = new uniquelist<T>);
+	  l->push_front (v);
+	  static_cast<unifiable&> (l->front ()).unique_ = true;
+	  return l->front ();
 	}
-      uniquelist<T> *l =
-	static_cast<uniquelist<T>*>(i->second);
-      typename uniquelist<T>::const_iterator j;
-      if ((j = std::find(l->begin(), l->end(), v)) == l->end())
+	uniquelist<T> *l =
+	  static_cast<uniquelist<T>*> (i->second);
+	typename uniquelist<T>::const_iterator j;
+	if ((j = std::find (l->begin (), l->end (), v)) == l->end ())
 	{
-	  l->push_front(v);
-	  static_cast<unifiable&>(l->front()).unique_ = true;
-	  return l->front();
+	  l->push_front (v);
+	  static_cast<unifiable&> (l->front ()).unique_ = true;
+	  return l->front ();
 	}
-      return *j;
-    }
+	return *j;
+      }
 
-    template<typename T>
-    const T* get(const T* v)
-    {
-      return & get(*v);
-    }
+      template <typename T>
+      const T* get (const T* v)
+      {
+	return & get (*v);
+      }
 
-    template <>
-    inline
-    uniquelist_base::~UniqueListBase() {}
+      template <>
+      inline
+      uniquelist_base::~UniqueListBase () {}
 
-    template <class T>
-    typename UniqueMap<T>::map_t&
-    UniqueMap<T>::instance()
-    {
-      static unique_map instance_;
-      return instance_.map_;
-    }
+      template <class T>
+      typename UniqueMap<T>::map_t&
+      UniqueMap<T>::instance ()
+      {
+	static unique_map instance_;
+	return instance_.map_;
+      }
 
-    template <class T>
-    UniqueMap<T>::UniqueMap()
-    {
-    }
+      template <class T>
+      UniqueMap<T>::UniqueMap ()
+      {
+      }
 
-    template <class T>
-    UniqueMap<T>::~UniqueMap()
-    {
-      for (typename map_t::iterator i = map_.begin();
-	   i != map_.end();
-	   ++i)
-	delete i->second;
-    }
+      template <class T>
+      UniqueMap<T>::~UniqueMap ()
+      {
+	for (typename map_t::iterator i = map_.begin ();
+	     i != map_.end ();
+	     ++i)
+	  delete i->second;
+      }
 
-  } // unique
-
-} // utility
+    } // unique
+  } // misc
+} // vcsn
 
 #endif // ! VCSN_MISC_UNIQUE_HXX

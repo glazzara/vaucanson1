@@ -20,7 +20,7 @@
 # include <vaucanson/algorithms/is_realtime.hh>
 
 # include <vaucanson/automata/concept/transducer_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
 

@@ -27,230 +27,232 @@
 # include <map>
 # include <string>
 
-namespace utility {
+namespace vcsn {
+  namespace misc {
 
-  /** @addtogroup utility *//** @{ */
+    /** @addtogroup misc *//** @{ */
 
-  template <class T>
-  class Support;
+    template <class T>
+    class Support;
 
-  /// Iterator over the Support generic class.
-  /// @bug is not STL compliant yet.
-  template <class C>
-  class SupportIterator
-  {
-  public:
-    typedef typename C::key_type	key_type;
-    typedef typename C::const_iterator	map_iterator;
-    typedef SupportIterator<C>		self_t;
+    /// Iterator over the Support generic class.
+    /// @bug is not STL compliant yet.
+    template <class C>
+    class SupportIterator
+    {
+      public:
+	typedef typename C::key_type		key_type;
+	typedef typename C::const_iterator	map_iterator;
+	typedef SupportIterator<C>		self_t;
 
-    typedef typename map_iterator::iterator_category	iterator_category;
-    typedef typename map_iterator::difference_type	difference_type;
-    typedef key_type					value_type;
-    typedef key_type*					pointer;
-    typedef key_type&					reference;
+	typedef typename map_iterator::iterator_category iterator_category;
+	typedef typename map_iterator::difference_type	 difference_type;
+	typedef key_type				 value_type;
+	typedef key_type*				 pointer;
+	typedef key_type&				 reference;
 
-    SupportIterator(map_iterator);
+	SupportIterator (map_iterator);
 
-    key_type	operator*() const;
-    self_t&	operator++();
-    self_t	operator++(int);
-    bool	operator!=(const SupportIterator&) const;
-    bool	operator==(const SupportIterator&) const;
+	key_type operator* () const;
+	self_t&	 operator++ ();
+	self_t	 operator++ (int);
+	bool	 operator!= (const SupportIterator&) const;
+	bool	 operator== (const SupportIterator&) const;
 
-  private:
-    map_iterator	i;
-  };
+      private:
+	map_iterator	i;
+    };
 
-  /// Support<map<U, T> > is a const adapter of std::map to container.
-  template <class U, class T>
-  class Support<std::map<U, T> >
-  {
-  public:
-    typedef SupportIterator<std::map<U, T> > iterator;
-    typedef SupportIterator<std::map<U, T> > const_iterator;
-    /// The type of the values.
-    typedef typename std::map<U, T>::value_type value_type;
+    /// Support<map<U, T> > is a const adapter of std::map to container.
+    template <class U, class T>
+    class Support<std::map<U, T> >
+    {
+      public:
+	typedef SupportIterator<std::map<U, T> > iterator;
+	typedef SupportIterator<std::map<U, T> > const_iterator;
+	/// The type of the values.
+	typedef typename std::map<U, T>::value_type value_type;
 
-    Support(const std::map<U, T>&);
-    Support(const Support&);
+	Support (const std::map<U, T>&);
+	Support (const Support&);
 
-    /** Return the one and only element of the support.
-	@pre There is exactly one element in the support.  */
-    value_type operator* () const;
+	/** Return the one and only element of the support.
+	 @pre There is exactly one element in the support.  */
+	value_type operator* () const;
 
-    iterator begin() const;
-    iterator end() const;
-    unsigned size() const;
+	iterator begin () const;
+	iterator end () const;
+	unsigned size () const;
 
-    // Find the element associated to \a k.
-    iterator find (const U& k) const;
+	// Find the element associated to \a k.
+	iterator find (const U& k) const;
 
-    /// Whether it's empty.
-    bool empty () const;
+	/// Whether it's empty.
+	bool empty () const;
 
-    U max() const;
-  private:
-    const std::map<U, T>&	m_;
-  };
+	U max () const;
+      private:
+	const std::map<U, T>&	m_;
+    };
 
-  /// SparseIterator is an iterator over range except some points.
-  template <class Integer, class ExcludedContainer>
-  class SparseIterator
-  {
-  public:
-    typedef Integer		integer_t;
-    typedef ExcludedContainer	excluded_container_t;
+    /// SparseIterator is an iterator over range except some points.
+    template <class Integer, class ExcludedContainer>
+    class SparseIterator
+    {
+      public:
+	typedef Integer		  integer_t;
+	typedef ExcludedContainer excluded_container_t;
 
-    SparseIterator(integer_t, const excluded_container_t&);
+	SparseIterator (integer_t, const excluded_container_t&);
 
-    SparseIterator& operator++();
-    SparseIterator  operator++(int);
-    SparseIterator& operator--();
-    SparseIterator  operator--(int);
-    integer_t	    operator*();
-    bool	    operator!=(const SparseIterator&);
-    bool	    operator==(const SparseIterator&);
-    SparseIterator& operator=(const SparseIterator&);
+	SparseIterator& operator++ ();
+	SparseIterator	operator++ (int);
+	SparseIterator& operator-- ();
+	SparseIterator	operator-- (int);
+	integer_t	operator* ();
+	bool		operator!= (const SparseIterator&);
+	bool		operator== (const SparseIterator&);
+	SparseIterator& operator= (const SparseIterator&);
 
-  private:
-    const excluded_container_t*	excluded_;
-    integer_t			integer_;
-  };
+      private:
+	const excluded_container_t*	excluded_;
+	integer_t			integer_;
+    };
 
-  /** @} */
+    /** @} */
 
-} // utility
-
+  } // misc
+} // vcsn
 
 namespace std {
 
   template <class Integer, class ExcludedContainer>
-  struct iterator_traits<utility::SparseIterator
-  <Integer, ExcludedContainer> >
+  struct iterator_traits<vcsn::misc::SparseIterator
+			 <Integer, ExcludedContainer> >
   {
-    typedef input_iterator_tag  iterator_category;
-    typedef Integer		value_type;
-    typedef int			difference_type;
-    typedef int*		pointer;
-    typedef int&		reference;
+      typedef input_iterator_tag iterator_category;
+      typedef Integer		   value_type;
+      typedef int		   difference_type;
+      typedef int*		   pointer;
+      typedef int&		   reference;
   };
 
 } // std
 
-namespace utility {
+namespace vcsn {
+  namespace misc {
 
-   /** @addtogroup utility *//** @{ */
+    /** @addtogroup misc *//** @{ */
 
-  /**
-   *
-   * @brief Container over a sparse integer range.
-   *
-   * SparseInterval is a const adapter of a 3-uple :
-   *  (from, begin, excluded).
-   *  SparseInterval verifies the container concept.
-   */
-  template <class Integer, class ExcludedContainer>
-  class SparseInterval
-  {
-  public:
-    typedef Integer		integer_t;
-    typedef ExcludedContainer	excluded_container_t;
-    typedef SparseIterator<integer_t, excluded_container_t> iterator;
-
-    SparseInterval(integer_t, integer_t, const excluded_container_t&);
-    SparseInterval(const SparseInterval&);
-
-    iterator begin() const;
-    iterator end() const;
-    unsigned size() const;
-    integer_t max() const;
-    std::string to_string() const;
-
-  private:
-    const excluded_container_t&	excluded_;
-    integer_t			from_;
-    integer_t			to_;
-  };
-
-  /// SelfIterator is an iterator which is also a container.
-  template <template <class> class C, class T>
-  class SelfIterator
-  {
-  public:
-    SelfIterator(const C<T>& c):
-      c_(&c),
-      pos_(c.begin())
-    {}
-
-    SelfIterator():
-      c_(0),
-      pos_()
-    {}
-
-    SelfIterator(const SelfIterator& s):
-      c_(s.c_),
-      pos_(s.pos_)
-    {}
-
-    const T& operator*() const
+    /**
+     *
+     * @brief Container over a sparse integer range.
+     *
+     * SparseInterval is a const adapter of a 3-uple :
+     *	(from, begin, excluded).
+     *	SparseInterval verifies the container concept.
+     */
+    template <class Integer, class ExcludedContainer>
+    class SparseInterval
     {
-      return *pos_;
-    }
+      public:
+	typedef Integer		integer_t;
+	typedef ExcludedContainer	excluded_container_t;
+	typedef SparseIterator<integer_t, excluded_container_t> iterator;
 
-    const SelfIterator& operator++()
+	SparseInterval (integer_t, integer_t, const excluded_container_t&);
+	SparseInterval (const SparseInterval&);
+
+	iterator begin () const;
+	iterator end () const;
+	unsigned size () const;
+	integer_t max () const;
+	std::string to_string () const;
+
+      private:
+	const excluded_container_t&	excluded_;
+	integer_t			from_;
+	integer_t			to_;
+    };
+
+    /// SelfIterator is an iterator which is also a container.
+    template <template <class> class C, class T>
+    class SelfIterator
     {
-      pos_++;
-      return *this;
-    }
+      public:
+	SelfIterator (const C<T>& c):
+	  c_ (&c),
+	  pos_ (c.begin ())
+	{}
 
-    SelfIterator operator++(int)
-    {
-      SelfIterator tmp(*this);
-      ++pos_;
-      return tmp;
-    }
+	SelfIterator ():
+	  c_ (0),
+	  pos_ ()
+	{}
 
-    bool operator!=(const SelfIterator& o) const
-    {
-      if (c_ == 0)
-	if (o.c_ == 0)
-	  return false;
-	else
-	  return o.pos_ != o.c_->end();
-      else if (o.c_ == 0)
-	return pos_ != c_->end();
-      return (o.c_ != c_ ||
-	      o.pos_ != pos_);
-    }
+	SelfIterator (const SelfIterator& s):
+	  c_ (s.c_),
+	  pos_ (s.pos_)
+	{}
 
-    bool operator==(const SelfIterator& o) const
-    {
-      if (c_ == 0)
-	if (o.c_ == 0)
-	  return true;
-	else
-	  return o.pos_ == o.c_->end();
-      else if (o.c_ == 0)
-	return pos_ == c_->end();
-      return (o.c_ == c_ &&
-	      o.pos_ == pos_);
-    }
+	const T& operator* () const
+	{
+	  return *pos_;
+	}
 
-  private:
-    const C<T>* c_;
-    typename C<T>::const_iterator pos_;
-  };
+	const SelfIterator& operator++ ()
+	{
+	  pos_++;
+	  return *this;
+	}
 
-   /** @} */
+	SelfIterator operator++ (int)
+	{
+	  SelfIterator tmp (*this);
+	  ++pos_;
+	  return tmp;
+	}
 
-} // utility
+	bool operator!= (const SelfIterator& o) const
+	{
+	  if (c_ == 0)
+	    if (o.c_ == 0)
+	      return false;
+	    else
+	      return o.pos_ != o.c_->end ();
+	  else if (o.c_ == 0)
+	    return pos_ != c_->end ();
+	  return (o.c_ != c_ ||
+		  o.pos_ != pos_);
+	}
+
+	bool operator== (const SelfIterator& o) const
+	{
+	  if (c_ == 0)
+	    if (o.c_ == 0)
+	      return true;
+	    else
+	      return o.pos_ == o.c_->end ();
+	  else if (o.c_ == 0)
+	    return pos_ == c_->end ();
+	  return (o.c_ == c_ &&
+		  o.pos_ == pos_);
+	}
+
+      private:
+	const C<T>* c_;
+	typename C<T>::const_iterator pos_;
+    };
+
+    /** @} */
+
+  } // misc
+} // vcsn
 
 
-
-#ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/misc/support.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/misc/support.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_MISC_SUPPORT_HH

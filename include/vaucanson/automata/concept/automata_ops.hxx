@@ -172,7 +172,7 @@ namespace vcsn {
     typedef typename states_t::iterator state_iterator;
     const states_t& st = op_states(s, v);
     assertion(st.size() > 0);
-    int n = utility::random::generate(0, int(st.size() - 1));
+    int n = misc::random::generate(0, int(st.size() - 1));
     state_iterator ss = st.begin();
     for (; n > 0; --n)
       ++ss;

@@ -23,7 +23,7 @@
 # include <vaucanson/misc/escaper.hh>
 # include <vaucanson/tools/dot_format.hh>
 # include <vaucanson/automata/concept/handlers.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn
 {
@@ -34,7 +34,7 @@ namespace vcsn
       std::ostringstream os;
       std::set<char> to_escape;
       to_escape.insert('"');
-      (utility::setesc(to_escape))(os) << utility::escaper<std::string>(name);
+      (misc::setesc(to_escape))(os) << misc::escaper<std::string>(name);
       name_ = std::string("\"") + os.str();
     }
 
@@ -96,7 +96,7 @@ namespace vcsn
       std::ostringstream os;
       std::set<char> to_escape;
       to_escape.insert('"');
-      (utility::setesc(to_escape))(os) << utility::escaper<std::string>(name);
+      (misc::setesc(to_escape))(os) << misc::escaper<std::string>(name);
       name_ = std::string("\"") + os.str();
     }
 

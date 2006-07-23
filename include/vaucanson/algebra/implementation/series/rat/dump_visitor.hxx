@@ -262,7 +262,7 @@ namespace vcsn {
       void
       constant(const monoid_elt_value_t& m)
       {
-	ostr_ << utility::make_escaper(m);
+	ostr_ << misc::make_escaper(m);
       }
 
       virtual
@@ -340,7 +340,7 @@ namespace vcsn {
       const int idx = zero();
 
       if (not ostr.pword(idx))
-	ostr.register_callback(utility::pword_delete<std::string>, idx);
+	ostr.register_callback(misc::pword_delete<std::string>, idx);
       else
 	delete static_cast<std::string*> (ostr.pword(idx));
       ostr.pword(idx) = new std::string (z_);
@@ -363,7 +363,7 @@ namespace vcsn {
       const int idx = id();
 
       if (not ostr.pword(idx))
-	ostr.register_callback(utility::pword_delete<std::string>, idx);
+	ostr.register_callback(misc::pword_delete<std::string>, idx);
       else
 	delete static_cast<std::string*> (ostr.pword(idx));
       ostr.pword(idx) = new std::string (i_);

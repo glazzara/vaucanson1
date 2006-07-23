@@ -24,7 +24,7 @@
 #  include <vaucanson/algorithms/determinize.hh>
 # endif // NDEBUG
 
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/misc/contract.hh>
 
 namespace vcsn {

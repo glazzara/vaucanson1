@@ -18,7 +18,7 @@
 # define VCSN_TOOLS_GEN_RANDOM_HXX
 
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <cstdlib>
 

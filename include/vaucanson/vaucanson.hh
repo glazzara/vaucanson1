@@ -18,7 +18,7 @@
 # define VCSN_VAUCANSON_HH
 
 # include <vaucanson/config/system.hh>
-# include <vaucanson/misc/utility.hh>
+# include <vaucanson/misc/misc.hh>
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/algebra/algebra.hh>
 

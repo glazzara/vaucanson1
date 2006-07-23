@@ -23,8 +23,7 @@
 
 #include <vaucanson/automata/implementation/generalized.hh>
 
-#include <vaucanson/tools/dot_dump.hh>
-#include <vaucanson/tools/usual_macros.hh>
+#include <vaucanson/misc/usual_macros.hh>
 
 #ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
 # include <vaucanson/algorithms/accessible.hh>

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
 #ifndef VCSN_MISC_WINDOW_HH
 # define VCSN_MISC_WINDOW_HH
 
-/** @addtogroup utility *//** @{ */
+/** @addtogroup misc *//** @{ */
 /**
  * @file   window.hh
  *
@@ -31,120 +31,122 @@
 # include <iostream>
 # include <string>
 
-namespace utility {
+namespace vcsn {
+  namespace misc {
 
-  /** @addtogroup utility *//** @{ */
-
-  /**
-   * Handle windows in streams for performing regular expression search.
-   *
-   * A window is a portion of a stream, viewable as a string, on which
-   * several operations can be performed:
-   *
-   *  - Read the window's characters.
-   *  - Shift the window forward.
-   *
-   * A window has a constant size, unless an end of line ('\\n') or an
-   * end of file occurs, in which case a window is shorter than its
-   * supposed size.
-   *
-   * @param InputIterator The type of input iterator used to read the stream.
-   *                      It shall be a random access iterator.
-   * @param Letter The type  used for letters.
-   *
-   * @author Thomas Claveirole <thomas@lrde.epita.fr>
-   * @anchor window
-   */
-  template <class InputIterator, class Letter>
-  struct Window
-  {
-    typedef InputIterator				iterator_t;
-    typedef Letter					letter_t;
-    typedef typename std::basic_string<letter_t>	string_t;
-    typedef unsigned int				length_t;
+    /** @addtogroup misc *//** @{ */
 
     /**
-     * Standard constructor for the Window class.
+     * Handle windows in streams for performing regular expression search.
      *
-     * Build a window from a couple of begin/end iterator, a newline
-     * character and a window length.
+     * A window is a portion of a stream, viewable as a string, on which
+     * several operations can be performed:
      *
-     * @param stream Iterator to the begining of the stream.
-     * @param eof Iterator to the end of the stream.
-     * @param eol The newline character.
-     * @param length The window length.
+     *	- Read the window's characters.
+     *	- Shift the window forward.
      *
-     * @see Window
+     * A window has a constant size, unless an end of line ('\\n') or an
+     * end of file occurs, in which case a window is shorter than its
+     * supposed size.
+     *
+     * @param InputIterator The type of input iterator used to read the stream.
+     *			    It shall be a random access iterator.
+     * @param Letter The type  used for letters.
+     *
+     * @author Thomas Claveirole <thomas@lrde.epita.fr>
+     * @anchor window
      */
-    Window(const iterator_t& stream,
-	   const iterator_t& eof,
-	   letter_t eol,
-	   length_t length);
+    template <class InputIterator, class Letter>
+    struct Window
+    {
+	typedef InputIterator				iterator_t;
+	typedef Letter					letter_t;
+	typedef typename std::basic_string<letter_t>	string_t;
+	typedef unsigned int				length_t;
 
-    /// Indicates wether the end of the stream has been reached or not.
-    bool		eof() const;
-    /// Indicates wether a new line has been reached or not.
-    bool		eol() const;
+	/**
+	 * Standard constructor for the Window class.
+	 *
+	 * Build a window from a couple of begin/end iterator, a newline
+	 * character and a window length.
+	 *
+	 * @param stream Iterator to the begining of the stream.
+	 * @param eof Iterator to the end of the stream.
+	 * @param eol The newline character.
+	 * @param length The window length.
+	 *
+	 * @see Window
+	 */
+	Window (const iterator_t& stream,
+		const iterator_t& eof,
+		letter_t eol,
+		length_t length);
 
-    /**
-     * Shift the window.
-     *
-     * @param n The number of character the window must be shifted.
-     */
-    void		shift(unsigned int n);
-    /// Shift the window completely (equivalent to shift(size())).
-    void		shift();
+	/// Indicates wether the end of the stream has been reached or not.
+	bool		eof () const;
+	/// Indicates wether a new line has been reached or not.
+	bool		eol () const;
 
-    //@{
-    /// Move to a specific offset.
-    void		moveto(length_t offset);
-    void		moveto(iterator_t position);
-    //@}
+	/**
+	 * Shift the window.
+	 *
+	 * @param n The number of character the window must be shifted.
+	 */
+	void		shift (unsigned int n);
+	/// Shift the window completely (equivalent to shift (size ())).
+	void		shift ();
 
-    /// Returns the actual window size.
-    length_t		size() const;
+	//@{
+	/// Move to a specific offset.
+	void		moveto (length_t offset);
+	void		moveto (iterator_t position);
+	//@}
 
-    /// Returns the i-th character of the window.
-    letter_t		operator [] (length_t i) const;
+	/// Returns the actual window size.
+	length_t	size () const;
 
-    /// Print the window.
-    std::ostream&	print(std::ostream& ostr) const;
+	/// Returns the i-th character of the window.
+	letter_t	operator[] (length_t i) const;
 
-    /// @name Accessors
-    //@{
-    /// Get an iterator to the beginning of the stream.
-    iterator_t		begin() const;
-    /// Get an iterator to the current position in the stream.
-    iterator_t		stream() const;
-    /// Get an iterator to the end of the stream.
-    iterator_t		end() const;
-    /// Get the actual offset in the stream.
-    size_t		offset() const;
-    /// Get the letter value used for ending lines.
-    letter_t		eol_value() const;
-    /// Get the maximum length of the window.
-    length_t		length() const;
-    /// Get the window as a @c basic_string<letter_t>.
-    string_t		window() const;
-    //@}
-  protected:
-    void		compute_size();
+	/// Print the window.
+	std::ostream&	print (std::ostream& ostr) const;
 
-    iterator_t		begin_;
-    iterator_t		stream_;
-    iterator_t		end_;
-    letter_t		eol_;
-    length_t		length_;
-    length_t		size_;
-  };
+	/// @name Accessors
+	//@{
+	/// Get an iterator to the beginning of the stream.
+	iterator_t	begin () const;
+	/// Get an iterator to the current position in the stream.
+	iterator_t	stream () const;
+	/// Get an iterator to the end of the stream.
+	iterator_t	end () const;
+	/// Get the actual offset in the stream.
+	size_t		offset () const;
+	/// Get the letter value used for ending lines.
+	letter_t	eol_value () const;
+	/// Get the maximum length of the window.
+	length_t	length () const;
+	/// Get the window as a @c basic_string<letter_t>.
+	string_t	window () const;
+	//@}
+      protected:
+	void		compute_size ();
 
-  template <class InputIterator, class Letter>
-  std::ostream&
-  operator << (std::ostream& ostr, const Window<InputIterator, Letter>& w);
+	iterator_t	begin_;
+	iterator_t	stream_;
+	iterator_t	end_;
+	letter_t	eol_;
+	length_t	length_;
+	length_t	size_;
+    };
 
-  /** @} */
+    template <class InputIterator, class Letter>
+    std::ostream&
+    operator<< (std::ostream& ostr, const Window<InputIterator, Letter>& w);
 
-} // utility
+    /** @} */
+
+  } // misc
+} // vcsn
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/misc/window.hxx>

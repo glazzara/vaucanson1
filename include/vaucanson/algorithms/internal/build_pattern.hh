@@ -20,7 +20,7 @@
 # include <map>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/algorithms/standard.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
   namespace algorithm_patterns

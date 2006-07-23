@@ -1,17 +1,17 @@
 // window.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
-// Copyright (C) 2004 The Vaucanson Group.
-// 
+//
+// Copyright (C) 2004, 2006 The Vaucanson Group.
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/misc/random.hh>
@@ -53,7 +53,7 @@ template <class String, class Letter, int Size, int Length>
 void
 test_window(const Letter weol)
 {
-  using namespace utility;
+  using namespace vcsn::misc;
   typedef Window<typename String::const_iterator, Letter>	window_t;
   typedef typename window_t::iterator_t				iterator_t;
 
@@ -154,14 +154,15 @@ test_window(const Letter weol)
 void
 test_window_print(unsigned int wlength, unsigned int nb_tests)
 {
-  using namespace utility;
+  using namespace vcsn::misc;
+  using vcsn::misc::random::generate;
   typedef Window<std::string::const_iterator, char>	window_t;
 
   for (unsigned int i = 0; i < nb_tests; ++i)
     {
       std::string		s;
       for(unsigned int i = 0; i < wlength; ++i)
-	s += utility::random::generate<char>('0', 'z');
+	s += generate<char>('0', 'z');
 
       window_t			w(s.begin(), s.end(), '\n', wlength);
       std::ostringstream	ostr;

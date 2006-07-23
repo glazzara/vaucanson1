@@ -228,7 +228,7 @@ namespace vcsn
     inline
     int		RationalNumber::to_int() const
     {
-      precondition(denom_<static_cast<unsigned>(utility::limits<int>::max()));
+      precondition(denom_<static_cast<unsigned>(misc::limits<int>::max()));
       return num_ / static_cast<int> (denom_);
     }
 

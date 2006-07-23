@@ -1,24 +1,24 @@
 // bitset.cc: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
-// Copyright (C) 2001, 2002, 2003 The Vaucanson Group.
-// 
+//
+// Copyright (C) 2001, 2002, 2003, 2006 The Vaucanson Group.
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/misc/bitset.hh>
 #include <sstream>
 #include <cassert>
 
-using namespace utility;
+using namespace vcsn::misc;
 
 int main()
 {
@@ -103,7 +103,7 @@ int main()
 
   set0.erase(set1.begin(), set1.end());
   assert(set0.size() == 2);
-  
+
   it = set0.begin();
   set0.erase(it);
   it = set0.begin();
@@ -129,14 +129,14 @@ int main()
       assert(set3.count(i) == 0);
     else
       assert(set3.count(i) > 0);
-      
+
   // Test lower_bound(), upper_bound() and equal_range().
   Bitset::iterator lower = set3.lower_bound(400);
   Bitset::iterator upper = set3.upper_bound(69);
   assert(*lower == 505);
   assert(*upper == 51);
   assert(set3.equal_range(69) == std::make_pair(lower, upper));
-  
+
   lower = set3.lower_bound(505);
   upper = set3.upper_bound(51);
   assert(*lower == 505);
@@ -184,7 +184,7 @@ int main()
   Bitset b(46);
   b.insert(42);
   b.insert(44);
-  
+
   Bitset projected = set3.project(b);
   assert(projected.size() == 1);
   assert(projected.max_size() == 2);

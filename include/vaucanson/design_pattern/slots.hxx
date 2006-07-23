@@ -76,7 +76,7 @@ namespace vcsn {
 
   template <class S>
   SetSlotAttribute<S, true>::SetSlotAttribute(const S& other)
-    : s_(& other ? & utility::unique::get(other) : NULL)
+    : s_(& other ? & misc::unique::get(other) : NULL)
   {}
 
   template <class S>
@@ -95,7 +95,7 @@ namespace vcsn {
   void SetSlotAttribute<S, true>::_structure_attach(const S& s)
   {
     precondition(&s != NULL);
-    s_ = & utility::unique::get(s);
+    s_ = & misc::unique::get(s);
   }
 
   template <class S>

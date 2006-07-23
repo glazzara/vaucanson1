@@ -46,7 +46,7 @@
 # include <vaucanson/r_automaton.hh>
 # include <vaucanson/fmp_transducer.hh>
 # include <vaucanson/boolean_transducer.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/xml/tools.hh>
 
 

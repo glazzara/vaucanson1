@@ -20,7 +20,7 @@
 
 # include <map>
 
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/realtime.hh>

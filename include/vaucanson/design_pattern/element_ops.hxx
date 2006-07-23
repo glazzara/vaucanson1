@@ -105,9 +105,9 @@ operator Op(const Element<S1, T1>& e1, const Element<S2, T2>& e2)			\
   typedef typename op_##HookName##_traits<S1, S2, T1, T2>::ret_t ret_t;			\
 											\
   /* Compute return structural element from return Element type	*/			\
-  const bool want_s1 = utility::static_eq<S1, typename ret_t::set_t>::value;		\
-  typedef typename utility::static_if<want_s1, S1, S2>::t ret_set_t;			\
-  const ret_set_t& s = utility::static_if<want_s1, const S1, const S2>::     \
+  const bool want_s1 = misc::static_eq<S1, typename ret_t::set_t>::value;		\
+  typedef typename misc::static_if<want_s1, S1, S2>::t ret_set_t;			\
+  const ret_set_t& s = misc::static_if<want_s1, const S1, const S2>::     \
     choose(e1.structure(), e2.structure());				     \
 											\
   /* Delegate */									\

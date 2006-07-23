@@ -19,7 +19,7 @@
 
 # include <vaucanson/algorithms/realtime.hh>
 
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/tools/gen_random.hh>
 
 

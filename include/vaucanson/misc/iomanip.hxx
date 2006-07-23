@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,45 +21,48 @@
  * @file iomanip.hxx
  *
  * Definitions of the iomanip class and related functions.
- * @see utility::iomanip.
+ * @see vcsn::misc::iomanip.
  * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
  */
 
 # include <vaucanson/misc/iomanip.hh>
 
-namespace utility
+namespace vcsn
 {
+  namespace misc
+  {
 
   /*--------.
   | iomanip |
   `--------*/
 
-  template <class Self>
-  const Self&
-  iomanip<Self>::self() const
-  {
-    return *static_cast<const Self*> (this);
-  }
+    template <class Self>
+    const Self&
+    iomanip<Self>::self () const
+    {
+      return *static_cast<const Self*> (this);
+    }
 
-  template <class IOM>
-  std::ostream&
-  operator << (std::ostream& ostr, const iomanip<IOM>& m)
-  {
-    return m.self() (ostr);
-  }
+    template <class IOM>
+    std::ostream&
+    operator<< (std::ostream& ostr, const iomanip<IOM>& m)
+    {
+      return m.self () (ostr);
+    }
 
   /*-------------.
   | pword_delete |
   `-------------*/
 
-  template <class T>
-  void
-  pword_delete(std::ios_base::event ev, std::ios_base &io, int idx)
-  {
-    if (ev == std::ios_base::erase_event)
-      delete static_cast<T*> (io.pword(idx));
-  }
+    template <class T>
+    void
+    pword_delete (std::ios_base::event ev, std::ios_base &io, int idx)
+    {
+      if (ev == std::ios_base::erase_event)
+	delete static_cast<T*> (io.pword (idx));
+    }
 
-} // End of namespace utility.
+  } // End of namespace misc.
+} // End of namespace vcsn.
 
 #endif // ! VCSN_MISC_IOMANIP_HXX

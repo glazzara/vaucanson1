@@ -80,7 +80,7 @@ namespace vcsn {
   {
     return
       Element<algebra::NumericalSemiring, T>
-        (set, utility::random::generate<T>());
+        (set, misc::random::generate<T>());
   }
 
   /*-----------------------------.
@@ -108,7 +108,7 @@ namespace vcsn {
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(int))
   {
-    int r = utility::random::generate<int>();
+    int r = misc::random::generate<int>();
     if (!r)
       r = 1;
     return Element<algebra::NumericalSemiring, int>(set, r);
@@ -203,12 +203,12 @@ namespace vcsn {
 
   inline void op_in_star(const algebra::NumericalSemiring&, float& f)
   {
-    static_assertion(utility::limits<float>::has_infinity,
+    static_assertion(misc::limits<float>::has_infinity,
 		     float_has_infinity);
     if (f < 1.0)
       f = (1.0 / (1.0 - f));
     else
-      f = utility::limits<float>::infinity();
+      f = misc::limits<float>::infinity();
   }
 
   inline void op_in_star(const algebra::NumericalSemiring&, double& f)
@@ -233,10 +233,10 @@ namespace vcsn {
   op_choose_starable(const algebra::NumericalSemiring& set,
 		     SELECTOR(float))
   {
-    float res = utility::random::generate<float>(-1, 1);
+    float res = misc::random::generate<float>(-1, 1);
 
     while (res == -1)
-      res = utility::random::generate<float>(-1, 1);
+      res = misc::random::generate<float>(-1, 1);
     return
       Element<algebra::NumericalSemiring, float>
         (set, res);
@@ -247,9 +247,9 @@ namespace vcsn {
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(float))
   {
-    float res = utility::random::generate<float>() * 1000.;
+    float res = misc::random::generate<float>() * 1000.;
     while (op_starable(set, res))
-      res = utility::random::generate<float>() * 1000.;
+      res = misc::random::generate<float>() * 1000.;
     return Element<algebra::NumericalSemiring, float>(set, res);
   }
 
@@ -267,10 +267,10 @@ namespace vcsn {
   op_choose_starable(const algebra::NumericalSemiring& set,
 		     SELECTOR(double))
   {
-    double res = utility::random::generate<double>(-1, 1);
+    double res = misc::random::generate<double>(-1, 1);
 
     while (res == -1)
-      res = utility::random::generate<double>(-1, 1);
+      res = misc::random::generate<double>(-1, 1);
     return
       Element<algebra::NumericalSemiring, double>
         (set, res);
@@ -281,9 +281,9 @@ namespace vcsn {
   op_choose_non_starable(const algebra::NumericalSemiring& set,
 			 SELECTOR(double))
   {
-    double res = utility::random::generate<double>() * 1000.;
+    double res = misc::random::generate<double>() * 1000.;
     while (op_starable(set, res))
-      res = utility::random::generate<double>() * 1000.;
+      res = misc::random::generate<double>() * 1000.;
     return Element<algebra::NumericalSemiring, double>(set, res);
   }
   // FIXME: add some more operators as syntactic sugar
@@ -343,7 +343,7 @@ namespace vcsn {
     algebra::RationalNumber max = algebra::RationalNumber(1, 1);
     return
       Element<algebra::NumericalSemiring, algebra::RationalNumber>
-        (set, utility::random::generate<algebra::RationalNumber>(min, max));
+        (set, misc::random::generate<algebra::RationalNumber>(min, max));
   }
 
   inline
@@ -355,7 +355,7 @@ namespace vcsn {
     int denom;
     do
       {
-	res = utility::random::generate<algebra::RationalNumber>();
+	res = misc::random::generate<algebra::RationalNumber>();
 	denom = res.denom();
       }
     while (denom > abs(res.num()));

@@ -49,7 +49,7 @@ namespace vcsn
     operator << (std::ostream& ostr, const exp<Word, Weight>& e);
 
     /// Manipulator to set the print mode of a rational expression.
-    struct setpm : public utility::iomanip<setpm>
+    struct setpm : public misc::iomanip<setpm>
     {
       setpm (print_mode_t mode);
       std::ostream& operator () (std::ostream& ostr) const;
@@ -61,7 +61,7 @@ namespace vcsn
     print_mode_t getpm(const std::ostream& ostr);
 
     /// Manipulator to set the representation of the null series.
-    struct setzero : public utility::iomanip<setzero>
+    struct setzero : public misc::iomanip<setzero>
     {
       setzero(const std::string& zero);
       std::ostream& operator () (std::ostream& ostr) const;
@@ -70,7 +70,7 @@ namespace vcsn
     };
 
     /// Manipulator to set the representation of the identity series.
-    struct setid : public utility::iomanip<setid>
+    struct setid : public misc::iomanip<setid>
     {
       setid(const std::string& id);
       std::ostream& operator () (std::ostream& ostr) const;

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -35,10 +35,10 @@ namespace vcsn
     template <typename U, typename V>
     struct letter_traits< std::pair<U, V> >
     {
-      enum
+	enum
 	{
 	  /*
-	   * Theoretically   cardinal   should   be   the   product   of
+	   * Theoretically   cardinal	should	 be   the   product   of
 	   * letter_traits<U>::cardinal and letter_traits<V>::cardinal.
 	   * But to  avoid overflows and for
 	   * practical reasons, it is better to consider it infinite.
@@ -55,31 +55,32 @@ namespace vcsn
 namespace vcsn {
   // Specialization for pairs.
   template <typename S, typename U, typename V>
-  bool op_parse(const algebra::FreeMonoidBase<S>& set,
-		std::basic_string< std::pair<U, V> >& v,
-		const std::string& s,
-		typename std::string::const_iterator& i,
-		const std::list<char>& escaped);
-}
+  bool op_parse (const algebra::FreeMonoidBase<S>& set,
+		 std::basic_string< std::pair<U, V> >& v,
+		 const std::string& s,
+		 typename std::string::const_iterator& i,
+		 const std::list<char>& escaped);
 
-namespace utility {
 
-  /// To display a single pair
-  /// It assumes that each element of the pair is printable
-  /// (i.e. the operator << is defined on it)
-  template <typename U, typename V>
-  std::ostream& operator<<(std::ostream& o, std::pair<U, V> p);
+  namespace misc {
 
-  /// To display a basic_string of pair (idem)
-  template <typename U, typename V, class Traits, class Allocator>
-  std::ostream& operator<<(std::ostream& o,
-    std::basic_string<std::pair<U, V>, Traits, Allocator> s);
+    /// To display a single pair
+    /// It assumes that each element of the pair is printable
+    /// (i.e. the operator<< is defined on it)
+    template <typename U, typename V>
+    std::ostream& operator<< (std::ostream& o, std::pair<U, V> p);
 
-  //! To read a single pair.
-  template <typename U, typename V>
-  std::istream& operator>>(std::istream& i, std::pair<U, V>& p);
+    /// To display a basic_string of pair (idem)
+    template <typename U, typename V, class Traits, class Allocator>
+    std::ostream& operator<< (std::ostream& o,
+			      std::basic_string<std::pair<U, V>, Traits, Allocator> s);
 
-} // utility
+    //! To read a single pair.
+    template <typename U, typename V>
+    std::istream& operator>> (std::istream& i, std::pair<U, V>& p);
+
+  } // misc
+} // vcsn
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/letter/couple_letter.hxx>

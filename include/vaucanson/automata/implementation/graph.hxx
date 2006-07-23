@@ -420,7 +420,7 @@ namespace vcsn
 		    hstate_t from,					\
 		    const Query& query,					\
 		    delta_kind::DKind,					\
-		    utility::IsBool ## _t) const			\
+		    misc::IsBool ## _t) const			\
   {									\
     assertion(has_state(from));						\
     const std::set<hedge_t>& edges = states_[from].IO ## _edges;	\
@@ -467,7 +467,7 @@ namespace vcsn
 		    delta_kind::kind<DKind> k) const			\
   {									\
     DeltaName (fun, from, query, k,					\
-	       bool_to_type (is_returning_bool (&Functor::operator ())) ()); \
+	       BOOL_TO_TYPE (is_returning_bool (&Functor::operator ())) ()); \
   }
 
   DEFINE_DELTAF_HELPER (deltaf);

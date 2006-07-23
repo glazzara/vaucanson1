@@ -81,9 +81,9 @@ namespace vcsn {
      * It is not possible  to use this  contructor when the
      * structural element has dynamic  data. If you absolutely need to
      * do  so,  notice  that  it may  be  dangerous,  and  see
-     * utility::Deferrer.
+     * misc::Deferrer.
      *
-     * @see utility::Deferrer
+     * @see misc::Deferrer
      */
     Element();
 

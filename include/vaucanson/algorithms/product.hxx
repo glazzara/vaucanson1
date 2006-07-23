@@ -25,15 +25,15 @@
 # include <vaucanson/algorithms/product.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
 # include <vaucanson/misc/static.hh>
 
 # define if_(cond, then_clause, else_clause)			\
-  utility::static_if_simple<cond, then_clause, else_clause>::t
+  misc::static_if_simple<cond, then_clause, else_clause>::t
 
 # define eq_(type1, type2)			\
-  utility::static_eq<type1, type2>::value
+  misc::static_eq<type1, type2>::value
 
 
 namespace vcsn {

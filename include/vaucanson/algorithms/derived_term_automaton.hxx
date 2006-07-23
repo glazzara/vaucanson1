@@ -25,7 +25,7 @@
 # include <vaucanson/algorithms/internal/partial_rat_exp_derivation.hh>
 
 # include <vaucanson/algorithms/krat_exp_realtime.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/algorithms/initial_derivation.hh>
 
 # ifdef DEBUG

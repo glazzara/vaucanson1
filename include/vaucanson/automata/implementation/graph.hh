@@ -28,7 +28,7 @@
 # include <vaucanson/automata/implementation/kind_adapter.hh>
 # include <vaucanson/misc/support.hh>
 # include <vaucanson/misc/static.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
 
 
@@ -69,10 +69,10 @@ namespace vcsn
   };
 
   /// Needed containers.
-  typedef utility::SparseInterval<hstate_t, std::set<hstate_t> >
+  typedef misc::SparseInterval<hstate_t, std::set<hstate_t> >
   StateContainer;
 
-  typedef utility::SparseInterval<hedge_t, std::set<hedge_t> >
+  typedef misc::SparseInterval<hedge_t, std::set<hedge_t> >
   EdgeContainer;
 
 
@@ -105,8 +105,8 @@ namespace vcsn
       typedef std::map<hstate_t, series_set_elt_value_t> initial_t;
       typedef std::map<hstate_t, series_set_elt_value_t> final_t;
 
-      typedef utility::Support<initial_t>	initial_support_t;
-      typedef utility::Support<final_t>	final_support_t;
+      typedef misc::Support<initial_t>	initial_support_t;
+      typedef misc::Support<final_t>	final_support_t;
 
     public:
       // we guarantee that the handlers of state are indexed from 0 to
@@ -202,7 +202,7 @@ namespace vcsn
 					  hstate_t from,		\
 					  const Query& q,		\
 					  delta_kind::DKind,		\
-					  utility::IsBool ## _t) const
+					  misc::IsBool ## _t) const
       DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, true);
       DECLARE_DELTAF_BOOL_FUNCTION (deltaf, states, false);
       DECLARE_DELTAF_BOOL_FUNCTION (deltaf, edges, true);
@@ -362,8 +362,8 @@ namespace vcsn
 
       typedef std::map<hstate_t, series_set_elt_value_t>	initial_t;
       typedef std::map<hstate_t, series_set_elt_value_t>	final_t;
-      typedef utility::Support<initial_t>			initial_support_t;
-      typedef utility::Support<final_t>			final_support_t;
+      typedef misc::Support<initial_t>			initial_support_t;
+      typedef misc::Support<final_t>			final_support_t;
       typedef typename initial_support_t::iterator	initial_iterator;
       typedef typename final_support_t::iterator		final_iterator;
 

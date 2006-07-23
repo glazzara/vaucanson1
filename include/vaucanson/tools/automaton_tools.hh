@@ -30,7 +30,7 @@ namespace vcsn {
   {
     std::deque<hstate_t> s;
     std::insert_iterator<std::deque<hstate_t> > i(s, s.begin());
-    utility::random::sample_n(a.states().begin(),
+    misc::random::sample_n(a.states().begin(),
 			      a.states().end(),
 			      i,
 			      n);

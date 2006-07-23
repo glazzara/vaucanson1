@@ -28,7 +28,7 @@ namespace vcsn {
     {
       enum
 	{
-	  cardinal = utility::static_pow<2, sizeof(L) * 8>::value
+	  cardinal = misc::static_pow<2, sizeof(L) * 8>::value
 	};
     };
 

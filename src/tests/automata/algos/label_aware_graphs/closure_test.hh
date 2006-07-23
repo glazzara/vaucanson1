@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,7 +22,8 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/algorithms/closure.hh>
 
 template <class Auto>

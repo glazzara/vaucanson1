@@ -40,7 +40,7 @@
 # include <xercesc/util/PlatformUtils.hpp>
 
 # include <vaucanson/design_pattern/element.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/boolean_automaton.hh>
 # include <vaucanson/z_automaton.hh>
 # include <vaucanson/z_max_plus_automaton.hh>

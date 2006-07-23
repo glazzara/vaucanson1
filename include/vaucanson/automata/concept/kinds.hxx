@@ -21,7 +21,7 @@
 # include <algorithm>
 
 # include <vaucanson/misc/contract.hh>
-# include <vaucanson/tools/container_ops.hh>
+# include <vaucanson/misc/container_ops.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 
 namespace vcsn {

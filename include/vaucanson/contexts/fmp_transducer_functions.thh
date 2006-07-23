@@ -22,7 +22,7 @@
  */
 
 #include <vaucanson/algebra/concept/alphabets_base.hh>
-#include <vaucanson/tools/usual_macros.hh>
+#include <vaucanson/misc/usual_macros.hh>
 
 #ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
 # include <vaucanson/algorithms/closure.hh>

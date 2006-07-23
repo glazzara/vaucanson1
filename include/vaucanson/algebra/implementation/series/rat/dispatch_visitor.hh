@@ -70,7 +70,7 @@ namespace vcsn
 
     private:
       matcher_t&			matcher_;
-      utility::Deferrer<return_type>	ret_;
+      misc::Deferrer<return_type>	ret_;
     };
 
     template <class T>

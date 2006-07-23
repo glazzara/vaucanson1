@@ -91,7 +91,7 @@ namespace vcsn {
     {
       typedef Tm monoid_elt_value_t;
       typedef Tw semiring_elt_value_t;
-      typedef utility::Support<std::map<Tm, Tw> > support_t;
+      typedef misc::Support<std::map<Tm, Tw> > support_t;
     };
 
     template <class Tm, class Tw, class W, class M>

@@ -29,7 +29,7 @@
 # include <vaucanson/algorithms/extension.hh>
 # include <vaucanson/algorithms/projection.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
 

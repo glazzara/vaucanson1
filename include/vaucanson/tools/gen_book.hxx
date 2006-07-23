@@ -18,7 +18,7 @@
 # define VCSN_TOOLS_GEN_BOOK_HXX
 
 # include <vaucanson/tools/gen_book.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/concept/handlers.hh>
 namespace vcsn {
 

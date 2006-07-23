@@ -672,11 +672,11 @@ namespace vcsn {
     const M&	monoid = s.monoid();
     const W&	semiring = s.semiring();
 
-    typename utility::static_if
-      <utility::static_eq<Tm, oTm>::value, const Tm&, Tm>::t
+    typename misc::static_if
+      <misc::static_eq<Tm, oTm>::value, const Tm&, Tm>::t
       new_m = op_convert(monoid, SELECT(Tm), m);
-    typename utility::static_if
-      <utility::static_eq<Tw, oTw>::value, const Tw&, Tw>::t
+    typename misc::static_if
+      <misc::static_eq<Tw, oTw>::value, const Tw&, Tw>::t
       new_w = op_convert(semiring, SELECT(Tw), w);
 
     typename algebra::polynom<Tm, Tw>::iterator i = p.find(new_m);
@@ -753,7 +753,7 @@ namespace std {
 	if (i != p.begin())
 	  out << "+";
 	out << "(" << i->second << " "
-	    << utility::make_escaper(i->first) << ")";
+	    << vcsn::misc::make_escaper(i->first) << ")";
 	++i;
       }
 

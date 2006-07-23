@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004 The Vaucanson Group.
+// Copyright (C) 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
  * @file escaper.hxx
  *
  * Definitions of the escaper class and related functions.
- * @see utility::escaper.
+ * @see vcsn::misc::escaper.
  * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>
  */
 
@@ -29,94 +29,97 @@
 # include <sstream>
 
 # include <vaucanson/misc/escaper.hh>
-# include <vaucanson/tools/usual_escaped_characters.hh>
+# include <vaucanson/misc/usual_escaped_characters.hh>
 
-namespace utility
+namespace vcsn
 {
-
-  /// Get the index in the internal extensible array for escaped characters.
-  inline
-  int
-  escaped()
+  namespace misc
   {
-    static const int idx = std::ios::xalloc();
-    return idx;
-  }
 
-  /*--------.
-  | escaper |
-  `--------*/
+    /// Get the index in the internal extensible array for escaped characters.
+    inline
+    int
+    escaped ()
+    {
+      static const int idx = std::ios::xalloc ();
+      return idx;
+    }
 
-  template <class T>
-  escaper<T>::escaper(const T& w) : w_ (w)
-  {
-  }
+      /*--------.
+      | escaper |
+      `--------*/
 
-  template <class T>
-  std::ostream&
-  escaper<T>::operator () (std::ostream& ostr) const
-  {
-    std::ostringstream		o;
-    o << w_;
-    std::string			w = o.str();
-    const std::set<char>&	e = getesc(ostr);
-    for (std::string::const_iterator i = w.begin(); i != w.end(); ++i)
-      if (e.find(*i) != e.end())
-	ostr << "\\" << *i;
+    template <class T>
+    escaper<T>::escaper (const T& w) : w_ (w)
+    {
+    }
+
+    template <class T>
+    std::ostream&
+    escaper<T>::operator() (std::ostream& ostr) const
+    {
+      std::ostringstream	o;
+      o << w_;
+      std::string		w = o.str ();
+      const std::set<char>&	e = getesc (ostr);
+      for (std::string::const_iterator i = w.begin (); i != w.end (); ++i)
+	if (e.find (*i) != e.end ())
+	  ostr << "\\" << *i;
+	else
+	  ostr << *i;
+      return ostr;
+    }
+
+      /*-------------.
+      | make_escaper |
+      `-------------*/
+
+    template <class T>
+    escaper<T>
+    make_escaper (const T& w)
+    {
+      return escaper<T> (w);
+    }
+
+      /*-------.
+      | setesc |
+      `-------*/
+
+    inline
+    setesc::setesc (const std::set<char>& s) : s_ (s)
+    {
+    }
+
+    inline
+    std::ostream&
+    setesc::operator() (std::ostream& ostr) const
+    {
+      typedef std::set<char>	esc_set;
+      const int			idx = escaped ();
+
+      if (not ostr.pword (idx))
+	ostr.register_callback (pword_delete<esc_set>, idx);
       else
-	ostr << *i;
-    return ostr;
-  }
+	delete static_cast<esc_set*> (ostr.pword (idx));
+      ostr.pword (idx) = new esc_set (s_);
+      return ostr;
+    }
 
-  /*-------------.
-  | make_escaper |
-  `-------------*/
+      /*-------.
+      | getesc |
+      `-------*/
 
-  template <class T>
-  escaper<T>
-  make_escaper(const T& w)
-  {
-    return escaper<T> (w);
-  }
+    inline
+    std::set<char>& getesc (std::ostream& ostr)
+    {
+      const int idx = escaped ();
 
-  /*-------.
-  | setesc |
-  `-------*/
+      if (not ostr.pword (idx))
+	ostr << setesc (vcsn::misc::usual_escaped_characters ());
+      return *static_cast<std::set<char>*> (ostr.pword (idx));
+    }
 
-  inline
-  setesc::setesc(const std::set<char>& s) : s_ (s)
-  {
-  }
-
-  inline
-  std::ostream&
-  setesc::operator () (std::ostream& ostr) const
-  {
-    typedef std::set<char>	esc_set;
-    const int			idx = escaped();
-
-    if (not ostr.pword(idx))
-      ostr.register_callback(pword_delete<esc_set>, idx);
-    else
-      delete static_cast<esc_set*> (ostr.pword(idx));
-    ostr.pword(idx) = new esc_set (s_);
-    return ostr;
-  }
-
-  /*-------.
-  | getesc |
-  `-------*/
-
-  inline
-  std::set<char>& getesc(std::ostream& ostr)
-  {
-    const int idx = escaped();
-
-    if (not ostr.pword(idx))
-      ostr << setesc (vcsn::tools::usual_escaped_characters());
-    return *static_cast<std::set<char>*> (ostr.pword(idx));
-  }
-
-} // End of namespace utility.
+  } // End of namespace misc.
+} // End of namespace vcsn.
 
 #endif // ! VCSN_MISC_ESCAPER_HXX

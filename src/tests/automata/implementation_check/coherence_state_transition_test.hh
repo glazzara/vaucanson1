@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,7 +33,6 @@ unsigned coherence_state_transition_test(tests::Tester& tg)
 
   using namespace vcsn;
   using namespace vcsn::algebra;
-  using namespace vcsn::tools;
 
   typedef GenRandomAutomata<Auto> gen_auto_t;
   gen_auto_t gen(time(0x0));

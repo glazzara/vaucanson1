@@ -18,7 +18,7 @@
 # define VCSN_ALGORITHMS_LETTER_TO_LETTER_COMPOSITION_HXX
 
 # include <vaucanson/automata/concept/transducer_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <set>
 # include <map>

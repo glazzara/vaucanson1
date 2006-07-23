@@ -21,7 +21,7 @@
 # include <vaucanson/algorithms/internal/has_neighbour.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/algorithms/sum.hh>
 
 # include <stack>

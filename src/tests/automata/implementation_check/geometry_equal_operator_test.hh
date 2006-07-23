@@ -42,7 +42,6 @@ unsigned geometry_equal_operator_test(tests::Tester& tg)
 
   using namespace vcsn;
   using namespace vcsn::algebra;
-  using namespace vcsn::tools;
 
   bool		ok = true;
 

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,7 +18,8 @@
 # define VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_PRODUCT_REGRESSION_TEST_HH
 
 # include <vaucanson/algorithms/product.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <ostream>
 

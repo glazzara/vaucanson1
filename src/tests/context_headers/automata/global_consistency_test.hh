@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@ operator == (const automaton_t& a, const automaton_t& b)
     a.final().size() == b.final().size();
 }
 
-# define TYPE_OK(T1, T2) utility::static_eq<T1, typename Automaton::T2>::value
+# define TYPE_OK(T1, T2) vcsn::misc::static_eq<T1, typename Automaton::T2>::value
 # define TEST_TYPE(T1, T2)				\
   TEST(t, #T1 " is consistent.", TYPE_OK(T1, T2))
 

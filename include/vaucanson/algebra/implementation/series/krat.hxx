@@ -21,7 +21,7 @@
 # include <vaucanson/algebra/implementation/series/series.hh>
 # include <vaucanson/algebra/implementation/series/rat/exp.hh>
 # include <vaucanson/algebra/implementation/series/rat/random_visitor.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <vaucanson/algebra/implementation/series/krat_exp_is_finite_app.hxx>
 # include <vaucanson/algebra/implementation/series/krat_exp_support.hxx>

@@ -31,7 +31,7 @@ namespace vcsn {
       FreeMonoid<Alphabet>					Words;
 
       typedef std::basic_string<Letter,
-				utility::char_traits<Letter> >	WordValue;
+				misc::char_traits<Letter> >	WordValue;
 
       typedef
       Element<Words, WordValue>			     	        Word;

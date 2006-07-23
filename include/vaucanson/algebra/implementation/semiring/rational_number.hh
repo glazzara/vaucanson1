@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ namespace vcsn
      * This is a rational numbers implementation.
      *
      * The way the constructor works ables us to work only on simplified
-     * fractions. So, the numerator (num_) and denominator(denom_)
+     * fractions. So, the numerator (num_) and denominator (denom_)
      * are always relatively prime.
      *
      * Even after operations, the obtained fraction is simplified.
@@ -58,138 +58,138 @@ namespace vcsn
 
     class RationalNumber
     {
-    public:
+      public:
 
-      /// @name Standard constructors.
-      //@{
-      /// Constructor from numerator and denominator.
-      RationalNumber(int num, unsigned int denom);
-      /// Default constructor. Initialize to zero.
-      RationalNumber();
-      /// Copy constructor.
-      RationalNumber(const RationalNumber& nb);
-      /**
-       * Generic constructor.
-       *
-       * @pre
-       * - T should be implicitly convertible into an integer representation.
-       * - T should be implicitly constructible from an integer.
-       * - T should conform the following prerequisite:
-       *      int(T(n)) / int(T(1)) == n
-       */
-      template <typename T>
-      explicit RationalNumber(const T num);
-      //@}
+	/// @name Standard constructors.
+	//@{
+	/// Constructor from numerator and denominator.
+	RationalNumber (int num, unsigned int denom);
+	/// Default constructor. Initialize to zero.
+	RationalNumber ();
+	/// Copy constructor.
+	RationalNumber (const RationalNumber& nb);
+	/**
+	 * Generic constructor.
+	 *
+	 * @pre
+	 * - T should be implicitly convertible into an integer representation.
+	 * - T should be implicitly constructible from an integer.
+	 * - T should conform the following prerequisite:
+	 *	int (T (n)) / int (T (1)) == n
+	 */
+	template <typename T>
+	explicit RationalNumber (const T num);
+	//@}
 
-      /// @name Accessors
-      //@{
-      /// Get the numerator.
-      const int&	num() const;
-      /// Get the denominator.
-      const unsigned&	denom() const;
-      //@}
+	/// @name Accessors
+	//@{
+	/// Get the numerator.
+	const int&	num () const;
+	/// Get the denominator.
+	const unsigned&	denom () const;
+	//@}
 
-      std::ostream&	print(std::ostream& ostr) const;
+	std::ostream&	print (std::ostream& ostr) const;
 
-      /// @name Usual Operators.
-      //@{
-      /// Usual numerical operator.
-      RationalNumber	operator+(const RationalNumber& nb) const;
-      RationalNumber	operator-(const RationalNumber& nb) const;
-      RationalNumber	operator-() const;
-      RationalNumber	operator*(const RationalNumber& nb) const;
-      RationalNumber	operator/(const RationalNumber& nb) const;
-      RationalNumber&	operator+=(const RationalNumber& nb);
-      RationalNumber&	operator-=(const RationalNumber& nb);
-      RationalNumber&	operator*=(const RationalNumber& nb);
-      RationalNumber&	operator/=(const RationalNumber& nb);
-      bool	operator<(const RationalNumber& nb) const;
-      bool	operator>(const RationalNumber& nb) const;
-      bool	operator<=(const RationalNumber& nb) const;
-      bool	operator>=(const RationalNumber& nb) const;
-      bool	operator==(const RationalNumber& nb) const;
-      bool	operator!=(const RationalNumber& nb) const;
-      //@}
+	/// @name Usual Operators.
+	//@{
+	/// Usual numerical operator.
+	RationalNumber	operator+ (const RationalNumber& nb) const;
+	RationalNumber	operator- (const RationalNumber& nb) const;
+	RationalNumber	operator- () const;
+	RationalNumber	operator* (const RationalNumber& nb) const;
+	RationalNumber	operator/ (const RationalNumber& nb) const;
+	RationalNumber&	operator+= (const RationalNumber& nb);
+	RationalNumber&	operator-= (const RationalNumber& nb);
+	RationalNumber&	operator*= (const RationalNumber& nb);
+	RationalNumber&	operator/= (const RationalNumber& nb);
+	bool	operator< (const RationalNumber& nb) const;
+	bool	operator> (const RationalNumber& nb) const;
+	bool	operator<= (const RationalNumber& nb) const;
+	bool	operator>= (const RationalNumber& nb) const;
+	bool	operator== (const RationalNumber& nb) const;
+	bool	operator!= (const RationalNumber& nb) const;
+	//@}
 
-      /// @name Type conversion methods.
-      //@{
-      /**
-       * Provide Explicit cast operator.
-       *
-       * @c to_int()  and @c to_double() allow us  to get respectively
-       * an  integer and  a  double from  the  rational number.  These
-       * numbers are obtained by dividing the fraction's numerator and
-       * denominator.
-       */
-      int		to_int() const;
-      double		to_double() const;
-      //@}
+	/// @name Type conversion methods.
+	//@{
+	/**
+	 * Provide Explicit cast operator.
+	 *
+	 * @c to_int ()	 and @c to_double () allow us  to get respectively
+	 * an  integer and  a  double from  the	 rational number.  These
+	 * numbers are obtained by dividing the fraction's numerator and
+	 * denominator.
+	 */
+	int		to_int () const;
+	double		to_double () const;
+	//@}
 
-    protected:
-      int		num_;
-      unsigned int	denom_;
+      protected:
+	int		num_;
+	unsigned int	denom_;
 
-      /// @name Fraction simplification
-      //@{
-      /**
-       * Simplifies the fraction.
-       *
-       * @c set_result() is used to  simplify the fraction. We use the
-       * GCD (Greatest  Common Divisor)  algorithm. When there  are no
-       * arguments, it simply checks the numerator and denominator and
-       * modifies them if needed.
-       */
-      RationalNumber&	set_result();
-      RationalNumber&	set_result(int num, unsigned int denom);
-      //@}
+	/// @name Fraction simplification
+	//@{
+	/**
+	 * Simplifies the fraction.
+	 *
+	 * @c set_result () is used to	simplify the fraction. We use the
+	 * GCD (Greatest  Common Divisor)  algorithm. When there  are no
+	 * arguments, it simply checks the numerator and denominator and
+	 * modifies them if needed.
+	 */
+	RationalNumber&	set_result ();
+	RationalNumber&	set_result (int num, unsigned int denom);
+	//@}
     };
 
     // Provides generic operators on rational (calls the explicit generic
     // constructor for rational).
-# define RATIONAL_NUMBER_OPERATOR(type, op)	 		\
-template <class T> 						\
-type operator op(const RationalNumber& nb, const T nb2) 	\
-{ 								\
-  return nb op RationalNumber(nb2); 				\
-}								\
+# define RATIONAL_NUMBER_OPERATOR(type, op)			\
+    template <class T>						\
+    type operator op (const RationalNumber& nb, const T nb2)	\
+    {								\
+      return nb op RationalNumber (nb2);			\
+    }								\
 								\
-template <class T> 						\
-type operator op(const T nb2, const RationalNumber& nb) 	\
-{ 								\
-  return RationalNumber(nb2) op nb; 				\
-}
+	template <class T>					\
+	type operator op (const T nb2, const RationalNumber& nb)\
+	{							\
+	  return RationalNumber (nb2) op nb;			\
+	}
 
-# define RATIONAL_NUMBER_IN_PLACE_OPERATOR(op)			\
-template <class T> 						\
-RationalNumber& operator op(RationalNumber& nb, const T nb2)	\
-{ 								\
-  return nb op RationalNumber(nb2); 				\
-}
+# define RATIONAL_NUMBER_IN_PLACE_OPERATOR(op)				\
+    template <class T>							\
+    RationalNumber& operator op (RationalNumber& nb, const T nb2)	\
+    {									\
+      return nb op RationalNumber (nb2);				\
+    }
 
-    RATIONAL_NUMBER_OPERATOR(bool, <);
-    RATIONAL_NUMBER_OPERATOR(bool, <=);
-    RATIONAL_NUMBER_OPERATOR(bool, >);
-    RATIONAL_NUMBER_OPERATOR(bool, >=);
-    RATIONAL_NUMBER_OPERATOR(bool, ==);
-    RATIONAL_NUMBER_OPERATOR(bool, !=);
-    RATIONAL_NUMBER_OPERATOR(RationalNumber, +);
-    RATIONAL_NUMBER_OPERATOR(RationalNumber, -);
-    RATIONAL_NUMBER_OPERATOR(RationalNumber, *);
-    RATIONAL_NUMBER_OPERATOR(RationalNumber, /);
-    RATIONAL_NUMBER_IN_PLACE_OPERATOR(+=);
-    RATIONAL_NUMBER_IN_PLACE_OPERATOR(-=);
-    RATIONAL_NUMBER_IN_PLACE_OPERATOR(*=);
-    RATIONAL_NUMBER_IN_PLACE_OPERATOR(/=);
+    RATIONAL_NUMBER_OPERATOR (bool, <);
+    RATIONAL_NUMBER_OPERATOR (bool, <=);
+    RATIONAL_NUMBER_OPERATOR (bool, >);
+    RATIONAL_NUMBER_OPERATOR (bool, >=);
+    RATIONAL_NUMBER_OPERATOR (bool, ==);
+    RATIONAL_NUMBER_OPERATOR (bool, !=);
+    RATIONAL_NUMBER_OPERATOR (RationalNumber, +);
+    RATIONAL_NUMBER_OPERATOR (RationalNumber, -);
+    RATIONAL_NUMBER_OPERATOR (RationalNumber, *);
+    RATIONAL_NUMBER_OPERATOR (RationalNumber, /);
+    RATIONAL_NUMBER_IN_PLACE_OPERATOR (+=);
+    RATIONAL_NUMBER_IN_PLACE_OPERATOR (-=);
+    RATIONAL_NUMBER_IN_PLACE_OPERATOR (*=);
+    RATIONAL_NUMBER_IN_PLACE_OPERATOR (/=);
 
 # undef RATIONAL_NUMBER_OPERATOR
 # undef RATIONAL_NUMBER_IN_PLACE_OPERATOR
 
     // FIXME: Add other goodies for standard library.
-    std::ostream& operator<<(std::ostream& ostr, const RationalNumber& nb);
+    std::ostream& operator<< (std::ostream& ostr, const RationalNumber& nb);
 
-   // FIXME: We might prefer to define gcd and lcm somewhere else.
-    int		gcd(int a, unsigned int b);
-    int		lcm(int a, unsigned int b);
+    // FIXME: We might prefer to define gcd and lcm somewhere else.
+    int		gcd (int a, unsigned int b);
+    int		lcm (int a, unsigned int b);
 
     /** @} */
     /** @} */
@@ -202,22 +202,25 @@ namespace std
   template <>
   struct numeric_limits< ::vcsn::algebra::RationalNumber >
   {
-    static ::vcsn::algebra::RationalNumber min();
-    static ::vcsn::algebra::RationalNumber max();
+      static ::vcsn::algebra::RationalNumber min ();
+      static ::vcsn::algebra::RationalNumber max ();
   };
 
 } // End of namespace std.
 
-/// @bug FIXME: utility::limits should be removed, or std::numeric_limits should
+/// @bug FIXME: misc::limits should be removed, or std::numeric_limits should
 /// not be used/specialized.
-namespace utility
+namespace vcsn
 {
-  template <>
-  struct limits< ::vcsn::algebra::RationalNumber > :
-    public std::numeric_limits< ::vcsn::algebra::RationalNumber >
+  namespace misc
   {
-  };
-}
+    template <>
+    struct limits< ::vcsn::algebra::RationalNumber > :
+	public std::numeric_limits< ::vcsn::algebra::RationalNumber >
+    {
+    };
+  } // misc
+} // vcsn
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/semiring/rational_number.hxx>

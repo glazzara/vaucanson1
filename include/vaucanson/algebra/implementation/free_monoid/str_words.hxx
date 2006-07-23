@@ -70,13 +70,13 @@ namespace vcsn {
 
   template<typename A>
   const std::basic_string<typename A::letter_t,
-			  utility::char_traits<typename A::letter_t> >&
+			  misc::char_traits<typename A::letter_t> >&
   identity_value(SELECTOR(algebra::FreeMonoid<A>),
 		 SELECTOR2(std::basic_string<typename A::letter_t,
-			  utility::char_traits<typename A::letter_t> >))
+			  misc::char_traits<typename A::letter_t> >))
   {
     static const std::basic_string<typename A::letter_t,
-      utility::char_traits<typename A::letter_t> > instance;
+      misc::char_traits<typename A::letter_t> > instance;
     return instance;
   }
 
@@ -97,7 +97,7 @@ namespace vcsn {
 	    SELECTOR(std::basic_string<typename A::letter_t>))
   {
     unsigned length =
-      utility::random::generate<unsigned>(0, op_choose_max_word_length);
+      misc::random::generate<unsigned>(0, op_choose_max_word_length);
     std::basic_string<typename A::letter_t> r;
     for (unsigned i = 0; i < length; ++i)
       r = r + s.alphabet().choose();

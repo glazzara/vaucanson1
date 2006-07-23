@@ -21,7 +21,7 @@
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/design_pattern/predecls.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 namespace vcsn {
 

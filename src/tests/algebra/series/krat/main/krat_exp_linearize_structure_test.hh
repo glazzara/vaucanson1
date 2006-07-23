@@ -18,7 +18,7 @@
 # define VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_STRUCTURE_TEST_HH
 
 # include <vaucanson/algorithms/krat_exp_linearize.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/tools/gen_random.hh>
 
 /**

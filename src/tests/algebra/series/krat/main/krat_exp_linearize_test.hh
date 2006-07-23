@@ -1,17 +1,17 @@
 // krat_exp_linearize_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
-// Copyright (C) 2004, 2005 The Vaucanson Group.
-// 
+//
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_TEST_HH
@@ -21,14 +21,14 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/krat_exp_linearize.hh>
 # include <vaucanson/algorithms/krat_exp_flatten.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 # include <list>
 
 template <class Expr>
 bool krat_exp_linearize_test(tests::Tester& tg)
 {
-  using namespace utility;
+  using namespace vcsn::misc;
   // Original types (for the input expression).
   typedef Expr						krat_exp_t;
   typedef typename krat_exp_t::value_t			kexp_t;

@@ -21,7 +21,7 @@
 # include <map>
 # include <set>
 # include <vaucanson/automata/concept/handlers.hh>
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 
 namespace vcsn {

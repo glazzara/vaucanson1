@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,34 +14,34 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TOOLS_USUAL_ESCAPED_CHARACTERS_HXX
-# define VCSN_TOOLS_USUAL_ESCAPED_CHARACTERS_HXX
+#ifndef VCSN_MISC_USUAL_ESCAPED_CHARACTERS_HXX
+# define VCSN_MISC_USUAL_ESCAPED_CHARACTERS_HXX
 
-# include <vaucanson/tools/usual_escaped_characters.hh>
+# include <vaucanson/misc/usual_escaped_characters.hh>
 
 namespace vcsn {
-  namespace tools {
+  namespace misc {
 
     inline
     std::set<char>
-    usual_escaped_characters()
+    usual_escaped_characters ()
     {
       std::set<char> result;
-      result.insert('.');
-      result.insert('+');
-      result.insert('*');
-      result.insert('(');
-      result.insert(')');
-      result.insert('\\');
-      result.insert(' ');
-      result.insert('1');
-      result.insert('0');
-      result.insert('[');
-      result.insert(']');
+      result.insert ('.');
+      result.insert ('+');
+      result.insert ('*');
+      result.insert ('(');
+      result.insert (')');
+      result.insert ('\\');
+      result.insert (' ');
+      result.insert ('1');
+      result.insert ('0');
+      result.insert ('[');
+      result.insert (']');
       return result;
     }
 
-  } // tools
+  } // misc
 } // vcsn
 
-#endif // ! VCSN_TOOLS_USUAL_ESCAPED_CHARACTERS_HXX
+#endif // ! VCSN_MISC_USUAL_ESCAPED_CHARACTERS_HXX

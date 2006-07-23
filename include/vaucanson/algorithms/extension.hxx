@@ -19,7 +19,7 @@
 
 # include <vaucanson/algorithms/extension.hh>
 
-# include <vaucanson/tools/usual_macros.hh>
+# include <vaucanson/misc/usual_macros.hh>
 
 using namespace std;
 
