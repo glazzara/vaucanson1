@@ -1,3 +1,7 @@
+2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* doc/manual/taf-kit.tex: Fix `dump-automaton' use in doc.
+
 2006-07-22  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Add vcsn-tdc.

@@ -77,13 +77,13 @@ Let's consider the Boolean automaton $A_1$ (\autoref{A_1}).  It is
 part of the standard library, and can be dumped using
 \taffn{dump-automaton}:
 
-\execcaption{a1-dump}{vcsn-b dump-automaton a1.xml}
+\execcaption{a1-dump}{vcsn-b dump-automaton a1}
 
 Usual shell indirections (\samp{|}, \samp{>}, and \samp{<}) can be
 used to combine TAF-Kit commands.  For instance, this is an easy means
 to bring a local copy of this file:
 
-\execcaption{a1-xml}{vcsn-b dump-automaton a1.xml >a1.xml}
+\execcaption{a1-xml}{vcsn-b dump-automaton a1 >a1.xml}
 
 TAF-Kit uses XML to exchange automata, to get graphical rendering of
 the automaton, you may either invoke \taffn{dot-dump} and then use a
@@ -99,7 +99,7 @@ Dot compliant program, or use \taffn{display} that does both.
 To determinize a Boolean automaton, call the \taffn{determinize}
 function:
 
-\execcaption{a1det}{vcsn-b dump-automaton a1.xml | vcsn-b determinize - >a1det.xml}
+\execcaption{a1det}{vcsn-b dump-automaton a1 | vcsn-b determinize - >a1det.xml}
 
 To get some information an automaton, call the \taffn{info} function:
 \execcaption{a1det-info}{vcsn-b info a1det.xml}
