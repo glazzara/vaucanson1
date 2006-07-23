@@ -25,13 +25,16 @@
  * (dumping to several formats) is pleasant.
  *
  * @warning: A context must be opened before using this file (it
- * uses the @c automaton_t type).
+ * uses the @c automaton_t type).  That's why this file is not checked
+ * for sanity.
  *
  * @author Raphaël Poss <Raphael.Poss@lrde.epita.fr>
  */
 
-#ifndef VCSN_TOOLS_DUMPER_HH
+#if not defined (VCSN_TOOLS_DUMPER_HH) and not defined (VCSN_SANITY_CHECK)
 # define VCSN_TOOLS_DUMPER_HH
+
+# include <string>
 
 namespace vcsn
 {
@@ -42,13 +45,13 @@ namespace vcsn
 
     struct dumper
     {
-      /// Build a dumper which arguments are in @a argv starting at @a pos.
-      dumper (int argc, char **argv, int pos = 1);
+	/// Build a dumper which arguments are in @a argv starting at @a pos.
+	dumper (int argc, char **argv, int pos = 1);
 
-      /// Display a help message, and exit with status @a estatus.
-      void usage (int estatus);
+	/// Display a help message, and exit with status @a estatus.
+	void usage (int estatus);
 
-      enum dump_format
+	enum dump_format
 	{
 	  fmt_error,
 	  fmt_dot,
@@ -57,24 +60,24 @@ namespace vcsn
 	  fmt_xml,
 	};
 
-      enum dump_format dump_format (std::string fmt);
+	enum dump_format dump_format (std::string fmt);
 
-      const char* get_fmt() const;
+	const char* get_fmt () const;
 
-      void
-      operator() (std::ostream& o,
-		  const automaton_t& automaton,
-		  const std::string& name = "automaton");
-    private:
-      enum dump_format fmt_;
-      int argc_;
-      char** argv_;
+	void
+	operator () (std::ostream& o,
+		     const automaton_t& automaton,
+		     const std::string& name = "automaton");
+      private:
+	enum dump_format fmt_;
+	int argc_;
+	char** argv_;
     };
   }
 }
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/tools/dumper.hxx>
+#  include <vaucanson/tools/dumper.hxx>
 # endif // ! VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_TOOLS_DUMPER_HH
+#endif // ! VCSN_TOOLS_DUMPER_HH && ! VCSN_SANITY_CHECK

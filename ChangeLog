@@ -1,5 +1,10 @@
 2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/tools/dumper.hh: Don't sanity check, as the
+	prerequisites for including this file aren't fulfilled.
+
+2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* doc/manual/taf-kit.tex: Fix `dump-automaton' use in doc.
 
 2006-07-22  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
