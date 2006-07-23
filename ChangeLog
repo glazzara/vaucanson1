@@ -1,5 +1,9 @@
 2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* taf-kit/tests/defs.in: Use data/automata as automata_dir.
+
+2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Fix use of normalized/b_composition.
 
 	* src/benchs/composition/normalized_composition_bench.hh,
