@@ -1,5 +1,10 @@
 2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/normalized.hxx: Use get_initial on the
+	initial state and get_final on the final one.
+
+2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/tools/dumper.hh: Don't sanity check, as the
 	prerequisites for including this file aren't fulfilled.
 
