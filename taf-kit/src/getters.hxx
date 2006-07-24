@@ -30,12 +30,10 @@
 # include "common.hh"
 
 # include CONTEXT_HEADER
-# include <vaucanson/boolean_transducer.hh>
 # include <vaucanson/xml/XML.hh>
 # include <string>
-# include <stdlib.h>
+# include <cstdlib>
 # include "getters.hh"
-# include "commands_macros.hh"
 
 using namespace CONTEXT_NAMESPACE;
 using namespace vcsn;
@@ -43,7 +41,7 @@ using namespace vcsn;
   /*---------------------------------------------.
   | Getters for alphabet, RatExp and automaton.  |
   `---------------------------------------------*/
-# define GET_ALPHABET(Name, Type)				\
+# define DEFINE_GET_ALPHABET(Name, Type)			\
 static Type Name (const char* alphabet)				\
 {								\
   Type a;							\
@@ -61,12 +59,12 @@ static Type Name (const char* alphabet)				\
 /// Getter for alphabet.
 # ifndef WITH_TWO_ALPHABETS
 
-GET_ALPHABET(get_alphabet,alphabet_t);
+DEFINE_GET_ALPHABET(get_alphabet,alphabet_t);
 
 # else
 
-GET_ALPHABET (get_first_alphabet, first_alphabet_t);
-GET_ALPHABET (get_second_alphabet, second_alphabet_t);
+DEFINE_GET_ALPHABET (get_first_alphabet, first_alphabet_t);
+DEFINE_GET_ALPHABET (get_second_alphabet, second_alphabet_t);
 
 # endif
 

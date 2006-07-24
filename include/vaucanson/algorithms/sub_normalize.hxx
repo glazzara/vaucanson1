@@ -230,6 +230,13 @@ namespace vcsn {
   }
 
   template <class S, class T>
+  void
+  sub_normalize_here(Element<S, T>& a)
+  {
+    do_sub_normalize (a.structure().series().monoid(), a, a);
+  }
+
+  template <class S, class T>
   bool is_sub_normalized(const Element<S, T>& a)
   {
     return do_is_sub_normalized(a.structure().series().monoid(), a);

@@ -1,3 +1,14 @@
+2006-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Add sub_normalize_here.
+
+	* include/vaucanson/algorithms/sub_normalize.hh: Add to algorithms
+	 listing in reference documentation..
+	* include/vaucanson/algorithms/sub_normalize.hxx: Add in-place version
+	of sub_normalize.
+	* taf-kit/src/tdc_commands.cc,
+	* taf-kit/src/getters.hxx: Use it.
+
 2006-07-24  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* src/tests/xml/tester.sh: Correct some directory names so as to work in

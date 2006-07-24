@@ -17,13 +17,20 @@
 #ifndef VCSN_ALGORITHMS_SUB_NORMALIZE_HH
 # define VCSN_ALGORITHMS_SUB_NORMALIZE_HH
 
+
+/** @addtogroup algorithms *//** @{ */
 /**
  * @file sub_normalize.hh
  *
  * Sub-normalization algorithm for FMP transducers.
  *
  * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
+ *
+ * @see sub_normalize()
+ * @see is_sub_normalize()
+ *
  */
+/** @} */
 
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
 # include <vaucanson/automata/concept/copy.hh>
@@ -32,6 +39,9 @@
 
 namespace vcsn
 {
+
+  /** @addtogroup algorithms *//** @{ */
+
   /**
    * @brief Sub-normalize a FMP transducer.
    *
@@ -54,6 +64,17 @@ namespace vcsn
   void
   sub_normalize(const Element<S, T1>& a, Element<S, T2>& res);
 
+
+  /**
+   * @brief Sub-normalize a FMP transducer, in place version.
+   *
+   * @param a Input automaton.
+   */
+  template <class S, class T>
+  void
+  sub_normalize_here(Element<S, T>& a);
+
+
   /**
    * @brief Check if a FMP transducer is sub-normalized.
    *
@@ -63,6 +84,8 @@ namespace vcsn
    */
   template <class S, class T>
   bool is_sub_normalized(const Element<S, T>& a);
+
+  /** @} */
 
 } // ! vcsn
 

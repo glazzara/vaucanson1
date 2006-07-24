@@ -39,10 +39,10 @@ DEFINE_COMMAND (NAME (compose)
 		  automaton_t b = get_aut(args.args[2]);
 
 		  if (!is_sub_normalized(a))
-		  a = sub_normalize(a);
+		    sub_normalize_here(a);
 
 		  if (!is_sub_normalized(b))
-		  b = sub_normalize(b))
+		    sub_normalize_here(b))
 		OUTPUT (
 		  automaton_saver(compose(a,b),
 				  string_out (),
@@ -56,10 +56,10 @@ DEFINE_COMMAND (NAME (u_compose)
 		  automaton_t b = get_aut(args.args[2]);
 
 		  if (!is_sub_normalized(a))
-		  a = sub_normalize(a);
+		    sub_normalize_here(a);
 
 		  if (!is_sub_normalized(b))
-		  b = sub_normalize(b))
+		    sub_normalize_here(b))
 		OUTPUT (
 		  automaton_saver(u_compose(a,b),
 				  string_out (),
@@ -122,6 +122,7 @@ DEFINE_COMMAND (NAME (to_rt)
 		OUTPUT (
 		  automaton_saver(a, string_out (), XML ()))
 		RETURNVALUE (0));
+
 
 DEFINE_COMMAND (NAME (intersection)
 		CODE (
@@ -195,7 +196,7 @@ const command_t command_map[] =
 		   "transducer `aut'."),
     COMMAND_ENTRY (transpose, Aut,
 		   "Compute the transposed of the transducer `aut'."),
-    COMMAND_ENTRY (trim, Aut, "Compute the trimmed transducer of `aut'.")),
+    COMMAND_ENTRY (trim, Aut, "Trim transducer `aut'.")),
 
 
   COMMAND_GROUP (
