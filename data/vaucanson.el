@@ -101,7 +101,9 @@
   (unless path
     (error "No path provided and `buffer-file-name' nil"))
   (let ((vcsn-start (string-match "include/vaucanson/" path)))
-    (substring path (match-end 0))))
+    (if vcsn-start
+	(substring path (match-end 0))
+      (file-name-nondirectory path))))
 
 
 ;; Verify the form of the guard.
@@ -141,9 +143,9 @@ matches `c-header-file-extensions'.  CPP should be correctly indented."
       (goto-char old-point)
       nil)))
 
-;; Vaucansonize a buffer.
 (require 'tabify)
 
+;; Vaucansonize a buffer.
 (defun vaucansonize-buffer (&optional buffer)
   "Change BUFFER to follow some Vaucanson coding style rules."
   (interactive)

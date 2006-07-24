@@ -1,5 +1,10 @@
 2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* data/vaucanson.el: Use `file-name-nondirectory' on
+	non-include/vaucanson files.
+
+2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* data/vaucanson.el: Fix use of `c-header-file-extensions'.
 
 2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
