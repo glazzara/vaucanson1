@@ -50,62 +50,7 @@ using vcsn::xml::XML;
   /*---------------------------------------.
   | Command definition (RatExp excluded).  |
   `---------------------------------------*/
-#ifndef WITH_TWO_ALPHABETS
-DEFINE_IS_PROPERTY_COMMAND (ambiguous);
 
-DEFINE_IS_PROPERTY_COMMAND (normalized);
-
-DEFINE_IS_PROPERTY_COMMAND (realtime);
-
-DEFINE_IS_PROPERTY_COMMAND (standard);
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (realtime));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (coaccessible));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (accessible));
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (normalize));
-
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (quotient)
-				  ARG_KIND (aut)
-				  ALGOS (quotient, realtime));
-
-DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
-			 ALGO (sum));
-
-DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
-			 ALGO (product));
-
-DEFINE_TWO_ARGS_COMMAND (ARG_KIND (aut)
-			 ALGO (concatenate));
-
-DEFINE_COMMAND (NAME (eval)
-		CODE (/* Empty */)
-		OUTPUT (
-		  eval (realtime (get_aut (args.args[1])),
-			std::string (args.args[2])))
-		RETURNVALUE (0));
-
-DEFINE_COMMAND (NAME (power)
-		CODE (int n = atoi (args.args[2]);
-		      automaton_t a = get_aut (args.args[1]);
-		      automaton_t p (a);
-		      for (int i = 1; i < n; ++i)
-			p = product (p, a))
-		OUTPUT (automaton_saver (p, string_out (), XML ()))
-		RETURNVALUE (0));
-
-DEFINE_COMMAND (NAME (standardize)
-		CODE (automaton_t a = get_aut (args.args[1]);
-		      standardize (a))
-		OUTPUT (automaton_saver (a, string_out (), XML ()))
-		RETURNVALUE (0));
-#endif
 
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (trim));

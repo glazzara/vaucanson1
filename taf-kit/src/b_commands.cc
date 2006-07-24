@@ -26,6 +26,7 @@
 #include "commands.hh"
 #include "ratexp_commands.hh"
 #include "common_commands.hh"
+#include "common_automaton_commands.hh"
 
   /*-------------------.
   | Command definition |

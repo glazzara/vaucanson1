@@ -54,10 +54,10 @@ vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS)					\
 		    -DWITH_TWO_ALPHABETS
 
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\
-		 ratexp_commands.hh b_commands.cc
+		 ratexp_commands.hh common_automaton_commands.hh b_commands.cc
 
 vcsn_z_SOURCES = $(COMMON_SOURCES)		\
-		 ratexp_commands.hh z_commands.cc
+		 ratexp_commands.hh common_automaton_commands.hh z_commands.cc
 
 vcsn_tdc_SOURCES = $(COMMON_SOURCES)		\
 		   tdc_commands.cc

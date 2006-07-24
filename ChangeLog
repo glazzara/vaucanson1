@@ -1,5 +1,16 @@
 2006-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Separate common commands for all types from commands specific to automata.
+
+	* taf-kit/src/common_automaton_commands.hh: New. Add commands specific
+	to automata only.
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/common_commands.hh,
+	* taf-kit/src/Makefile.am,
+	* taf-kit/src/z_commands.cc: Update accordingly.
+
+2006-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Add sub_normalize_here.
 
 	* include/vaucanson/algorithms/sub_normalize.hh: Add to algorithms
