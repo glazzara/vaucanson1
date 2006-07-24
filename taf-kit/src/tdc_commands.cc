@@ -20,7 +20,8 @@
  * @author Guillaume Leroi
  * @date   Thu Jul 20 17:24:46 2006
  *
- * Command declarations and definitions for transducers over free monoid product
+ * Command declarations and definitions for transducers over free monoid
+ * product.
  */
 
 #include "commands.hh"
@@ -144,7 +145,6 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (composition_cover));
 
 
-
 /*-----------------------------.
 | Define the set of commands.  |
 `-----------------------------*/
@@ -172,10 +172,10 @@ const command_t command_map[] =
 
     COMMAND_ENTRY (are_isomorphic, AutAut,
 		   "Test if `aut1' and `aut2' are isomorphic."),
-    // COMMAND_ENTRY (eval, AutWord, "Compute the evaluation of `word' by `aut'."),
+    //COMMAND_ENTRY (eval, AutWord, "Compute the evaluation of `word' by `aut'."),
     COMMAND_ENTRY (is_empty, Aut,
 		   "Test if `aut' realizes the empty relation."),
-    COMMAND_ENTRY (is_sub_normalized, Aut, "Test if `aut' is sub-normalized")),
+    COMMAND_ENTRY (is_sub_normalized, Aut, "Test if `aut' is sub-normalized.")),
 
 
   COMMAND_GROUP (
@@ -183,33 +183,37 @@ const command_t command_map[] =
 
     COMMAND_ENTRY (closure, Aut, "epsilon-removal algorithm."),
     COMMAND_ENTRY (compose, AutAut,
-		   "Compute a the composition of `aut1' and `aut2'"),
+		   "Compute a the composition of `aut1' and `aut2'."),
     COMMAND_ENTRY (domain, Aut,
-		   "Compute an automaton accepting all input accepted by `aut'"),
-    COMMAND_ENTRY (evaluation, AutExp, "Compute the evaluation of `exp' against `aut'"),
+		   "Compute an automaton accepting all input accepted by `aut'."),
+    COMMAND_ENTRY (evaluation, AutExp, "Compute the evaluation of `exp' against `aut'."),
     COMMAND_ENTRY_CN (evaluation-aut, evaluation_fmp, AutAut,
-		      "Compute a boolean automaton describing the words produced by the language\n\t described by a evaluated `aut1'"),
+		      "Compute a boolean automaton describing the words produced "
+		      "by the language\n\t described by a evaluated `aut1'."),
     COMMAND_ENTRY (image, Aut,
-		   "Compute an automaton describing all output produced by the transducer `aut'"),
+		   "Compute an automaton describing all output produced by the "
+		   "transducer `aut'."),
     COMMAND_ENTRY (transpose, Aut,
-		   "Compute the transposed of the transducer `aut'"),
-    COMMAND_ENTRY (trim, Aut, "Compute the trimmed transducer of `aut'")),
+		   "Compute the transposed of the transducer `aut'."),
+    COMMAND_ENTRY (trim, Aut, "Compute the trimmed transducer of `aut'.")),
 
 
   COMMAND_GROUP (
     "Algoritms for transducers:",
 
     COMMAND_ENTRY (sub_normalize, Aut,
-		   "Compute the sub-normalized transducer of `aut'"),
-    COMMAND_ENTRY (composition_cover, Aut, "Outsplitting"),
-    COMMAND_ENTRY (composition_co_cover, Aut, "Insplitting"),
+		   "Compute the sub-normalized transducer of `aut'."),
+    COMMAND_ENTRY (composition_cover, Aut, "Outsplitting."),
+    COMMAND_ENTRY (composition_co_cover, Aut, "Insplitting."),
     COMMAND_ENTRY (compose, AutAut,
 		   "Compose `aut1' and `aut2', two (sub-)normalized transducers."),
     COMMAND_ENTRY (u_compose, AutAut,
-		   "Compose `aut1' and `aut2', two boolean transducers, preserve the number of path."),
+		   "Compose `aut1' and `aut2', two boolean transducers, "
+		   "preserve the number of path."),
     COMMAND_ENTRY (to_rt, Aut,
-		   "Compute the equivalent realtime transducer of `aut'"),
+		   "Compute the equivalent realtime transducer of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
-		   "Transform a boolean automaton in a fmp transducer by creating, for each word,\n\t a pair contianing twice this word.")),
+		   "Transform a boolean automaton in a fmp transducer by "
+		   "creating, for each word,\n a pair contianing twice this word.")),
   {0, 0 ,0 ,0, 0}
 };

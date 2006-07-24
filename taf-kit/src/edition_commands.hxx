@@ -1,4 +1,4 @@
-// edit_commands.hxx: this file is part of the Vaucanson project.
+// edition_commands.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -66,7 +66,7 @@ extern void tputs (...);
   | Functions that interact with the user to let her edit an |
   | automaton                                                |
   `---------------------------------------------------------*/
-#ifndef WITH_TWO_ALPHABETS
+# ifndef WITH_TWO_ALPHABETS
 namespace edition_commands
 {
   using namespace CONTEXT_NAMESPACE;
@@ -425,6 +425,6 @@ static int define_automaton_command (const arguments_t& args)
 
   return 0;
 }
-#endif // ! WITH_TWO_ALPHABETS
+# endif // ! WITH_TWO_ALPHABETS
 
 #endif // ! EDITION_COMMANDS_HXX

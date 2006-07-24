@@ -1,3 +1,11 @@
+2006-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Fix some typos.
+
+	* taf-kit/src/tdc_commands.cc: Add dots at end of lines. 
+	Cut long strings in two.
+	* taf-kit/src/edition_commands.hxx: Reindent macros.
+
 2006-07-23  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Put things in utility:: in vcsn::misc::.
@@ -191,19 +199,24 @@
 
 	Add vcsn-tdc.
 
-	* taf-kit/src/tdc_commands.cc: New.
-	* taf-kit/src/edition_commands.hxx: .
-	* taf-kit/src/getters.hxx: .
-	* taf-kit/src/commands_macros.hh: .
-	* taf-kit/src/common_commands.hh: .
-	* taf-kit/src/Makefile.am: .
-	* taf-kit/src/getters.hh: .
-	* include/vaucanson/contexts/fmp_transducer_functions.thh: .
-	* include/vaucanson/algorithms/evaluation_fmp.hxx: .
-	* include/vaucanson/algorithms/normalized_composition.hh: .
-	* include/vaucanson/algorithms/normalized_composition.hxx: .
-	* include/vaucanson/algorithms/composition_cover.hh: New.
-	* include/vaucanson/algorithms/composition_cover.hxx: New.
+	* taf-kit/src/tdc_commands.cc: New. Add commands for fmp_transducer.
+	* taf-kit/src/edition_commands.hxx,
+	* taf-kit/src/getters.hxx,
+	* taf-kit/src/commands_macros.hh,
+	* taf-kit/src/common_commands.hh,
+	* taf-kit/src/getters.hh: Update for compatibilty with
+	vcsn-tdc. Use WITH_TWO_ALPHABET.
+	* taf-kit/src/Makefile.am: Add a target "vcsn-tdc".
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: Include
+	"composition_cover.hh".
+	* include/vaucanson/algorithms/evaluation_fmp.hxx: Change
+	function's call "normalize_composition" to "compos"
+	* include/vaucanson/algorithms/normalized_composition.hh,
+	* include/vaucanson/algorithms/normalized_composition.hxx: Make it
+	compile.
+	* include/vaucanson/algorithms/composition_cover.hh,
+	* include/vaucanson/algorithms/composition_cover.hxx: New. Add two
+	composition_cover and composition_co_cover, required by vcsn-tdc.
 
 2006-07-22  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
@@ -390,12 +403,12 @@
 
 2006-07-21  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
-	new facade for fmp_transducer composition.
+	New interface for fmp_transducer composition.
 
 	* include/vaucanson/algorithms/normalized_composition.hh: Change the
 	facade for composition. The algorithm is now named 'compose'.
-	* include/vaucanson/algorithms/normalized_composition.hxx: .
-	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh: .
+	* include/vaucanson/algorithms/normalized_composition.hxx,
+	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
 	* src/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh: New.
 	Adapt existing test to the new facade.
 
