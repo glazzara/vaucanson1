@@ -1,3 +1,13 @@
+2006-07-24  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Change namespace in krat_exp_linearize_structure test.
+
+	This patch helps Vaucanson to pass make check.
+	see http://vaucanson.lrde.org/trac.cgi/ticket/74
+
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh:
+	Change << operator namespace.
+
 2006-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Separate common commands for all types from commands specific to automata.

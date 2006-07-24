@@ -1,17 +1,17 @@
 // krat_exp_linearize_structure_test.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
+//
 // Copyright (C) 2004, 2005 The Vaucanson Group.
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_ALGEBRA_SERIES_KRAT_MAIN_KRAT_EXP_LINEARIZE_STRUCTURE_TEST_HH
@@ -31,29 +31,32 @@
  * linearized and original expressions should be printed the same way.
  */
 
-namespace utility
+namespace vcsn
 {
-
-  template <typename U>
-  std::ostream&
-  operator << (std::ostream& o, const std::pair<U, int>& p)
+  namespace misc
   {
-    return o << p.first;
-  }
 
-  template <typename U, class Traits, class Allocator>
-  std::ostream& operator<<(std::ostream& o,
-			   const std::basic_string<std::pair<U, int>,
-			                           Traits,
-			                           Allocator>& s)
-  {
-    typename
-    std::basic_string<std::pair<U, int>, Traits, Allocator>::const_iterator i;
-    for (i = s.begin(); i != s.end(); ++i)
-      o << i->first;
-    return o;
-  }
+    template <typename U>
+    std::ostream&
+    operator << (std::ostream& o, const std::pair<U, int>& p)
+    {
+      return o << p.first;
+    }
 
+    template <typename U, class Traits, class Allocator>
+    std::ostream& operator<<(std::ostream& o,
+			     const std::basic_string<std::pair<U, int>,
+			     Traits,
+			     Allocator>& s)
+    {
+      typename
+	std::basic_string<std::pair<U, int>, Traits, Allocator>::const_iterator i;
+      for (i = s.begin(); i != s.end(); ++i)
+	o << i->first;
+      return o;
+    }
+
+  }
 }
 
 template <class Expr>
@@ -93,24 +96,24 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
   int		nb_succs = 0;
 
   for (int n = 0; n < nb_tests; ++n)
+  {
+    krat_exp_t	exp = s.choose(SELECT(kexp_t));
+    out_krat_exp_t	lin = linearize(exp);
+    std::stringstream	exp_str;
+    std::stringstream	lin_str;
+
+    exp_str << exp;
+    lin_str << lin;
+
+    if (exp_str.str() != lin_str.str())
     {
-      krat_exp_t	exp = s.choose(SELECT(kexp_t));
-      out_krat_exp_t	lin = linearize(exp);
-      std::stringstream	exp_str;
-      std::stringstream	lin_str;
-
-      exp_str << exp;
-      lin_str << lin;
-
-      if (exp_str.str() != lin_str.str())
-      {
-	TEST_FAIL_SAVE("exp_linearize_structure",
-		       n,
-		       exp << "!=" << lin << std::endl);
-      }
-      else
-	++nb_succs;
+      TEST_FAIL_SAVE("exp_linearize_structure",
+		     n,
+		     exp << "!=" << lin << std::endl);
     }
+    else
+      ++nb_succs;
+  }
 
   std::string rate;
   SUCCESS_RATE(rate, nb_succs, nb_tests);
