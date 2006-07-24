@@ -1,5 +1,9 @@
 2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* data/vaucanson.el: Fix use of `c-header-file-extensions'.
+
+2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* data/misc.el: Move...
 	* data/vaucanson.el: Here.  Add `cpp-check-guard' that checks the CPP
 	guard for a standard #ifndef/#define/#endif scheme.  Use it in

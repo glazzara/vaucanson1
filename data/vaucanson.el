@@ -116,27 +116,30 @@ matches `c-header-file-extensions'.  CPP should be correctly indented."
     (setq file-name-to-useful-part 'file-name-nondirectory))
   (unless buffer-file-name
     (error "Current buffer doesn't have any associated file"))
-  (let ((old-point (point))
-	(expected-guard
-	 (concat cpp-guard-prefix
-		 (replace-regexp-in-string
-		  "[./]" "_"
-		  (upcase (funcall file-name-to-useful-part buffer-file-name))))))
-    (goto-char (point-min))
-    (unless (re-search-forward "^#if" nil t)
-      (error "Guard start not found"))
-    (unless (looking-at (concat "ndef[[:space:]]+" (regexp-quote expected-guard)))
-      (error "Expecting a #ifndef %s" expected-guard))
-    (beginning-of-line 2)
-    (unless (looking-at (concat "# define[[:space:]]+"
-				(regexp-quote expected-guard)))
-      (error "Expecting a definition of %s" expected-guard))
-    (unless (re-search-forward "^#endif" nil t)
-      (error "Guard end not found"))
+  (when (string-match (concat c-header-file-extensions "$")
+		      buffer-file-name)
+    (let ((old-point (point))
+	  (expected-guard
+	   (concat cpp-guard-prefix
+		   (replace-regexp-in-string
+		    "[./]" "_"
+		    (upcase (funcall file-name-to-useful-part buffer-file-name))))))
+      (goto-char (point-min))
+      (unless (re-search-forward "^#if" nil t)
+	(error "Guard start not found"))
+      (unless (looking-at (concat "ndef[[:space:]]+" (regexp-quote expected-guard)))
+	(error "Expecting a #ifndef %s" expected-guard))
+      (beginning-of-line 2)
+      (unless (looking-at (concat "# define[[:space:]]+"
+				  (regexp-quote expected-guard)))
+	(error "Expecting a definition of %s" expected-guard))
+      (unless (re-search-forward "^#endif" nil t)
+	(error "Guard end not found"))
 
-    (unless (search-forward expected-guard (point-at-eol) t)
-      (error "Comment #endif should mention %s" expected-guard))
-    (goto-char old-point)))
+      (unless (search-forward expected-guard (point-at-eol) t)
+	(error "Comment #endif should mention %s" expected-guard))
+      (goto-char old-point)
+      nil)))
 
 ;; Vaucansonize a buffer.
 (require 'tabify)
