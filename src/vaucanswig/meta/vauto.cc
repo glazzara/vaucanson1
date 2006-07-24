@@ -15,7 +15,6 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include "vauto.hh"
-// #include <vaucanson/misc/unique.hcc>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
