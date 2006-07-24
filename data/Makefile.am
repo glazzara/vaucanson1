@@ -13,7 +13,7 @@
 
 SUBDIRS = automata
 
-dist_noinst_DATA = misc.el
+dist_noinst_DATA = vaucanson.el
 
 # The XSD file is installed.
 dist_pkgdata_DATA = vaucanson.xsd

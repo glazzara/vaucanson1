@@ -1,4 +1,4 @@
-;;; misc.el --- Miscellaneous functions for Vaucanson development.
+;;; vaucanson.el --- Miscellaneous functions for Vaucanson development.
 ;;
 ;; Copyright (C) 2006 The Vaucanson Group
 
@@ -26,11 +26,20 @@
 ;; .emacs (init.el):
 ;; (setq c-default-style "Vaucanson")
 
+;; To use M-x vaucansonize RET, just add (require 'vaucanson).
+
 ;;; Code:
 
 ;; This is the indentation mode for Vaucanson:
 
 (require 'cc-mode)
+
+(defcustom c-header-file-extensions
+  "\\(hh\\|hxx\\|hcc\\|thh\\|thxx\\)\\(\\.in\\)?"
+  "File extensions regexp for C(++) header files."
+  :group 'c)
+
+(defvar cpp-guard-prefix "VCSN_")
 
 ;; Add indentation style
 (unless (assoc "Vaucanson" c-style-alist)
@@ -63,7 +72,6 @@
 
 
 ;; Indentation of cpp macros.
-
 (defun cpp-indent-macros (beg end)
   "Adjust the use of space after # between BEG and END."
   (interactive "r")
@@ -84,8 +92,53 @@
 	    (setq spaces (1+ spaces)))
 	  (when (string-match "^if" (match-string 2)) (setq spaces (1+ spaces))))))))
 
-;; Vaucansonize a buffer.
 
+;; Get vaucanson relative path.
+(defun get-vcsn-path (&optional path)
+  "Get Vaucanson relative path for PATH."
+  (unless path
+    (setq path buffer-file-name))
+  (unless path
+    (error "No path provided and `buffer-file-name' nil"))
+  (let ((vcsn-start (string-match "include/vaucanson/" path)))
+    (substring path (match-end 0))))
+
+
+;; Verify the form of the guard.
+(defun cpp-check-guard (&optional file-name-to-useful-part)
+  "Verify that the CPP guard is rightly made in the current buffer.
+The function uses `file-name-to-useful-part' (`file-name-nondirectory'
+if nil) to get the part of the filename that should be part of the
+macro gard.  The check is made if and only if the current file name
+matches `c-header-file-extensions'.  CPP should be correctly indented."
+  (interactive)
+  (unless file-name-to-useful-part
+    (setq file-name-to-useful-part 'file-name-nondirectory))
+  (unless buffer-file-name
+    (error "Current buffer doesn't have any associated file"))
+  (let ((old-point (point))
+	(expected-guard
+	 (concat cpp-guard-prefix
+		 (replace-regexp-in-string
+		  "[./]" "_"
+		  (upcase (funcall file-name-to-useful-part buffer-file-name))))))
+    (goto-char (point-min))
+    (unless (re-search-forward "^#if" nil t)
+      (error "Guard start not found"))
+    (unless (looking-at (concat "ndef[[:space:]]+" (regexp-quote expected-guard)))
+      (error "Expecting a #ifndef %s" expected-guard))
+    (beginning-of-line 2)
+    (unless (looking-at (concat "# define[[:space:]]+"
+				(regexp-quote expected-guard)))
+      (error "Expecting a definition of %s" expected-guard))
+    (unless (re-search-forward "^#endif" nil t)
+      (error "Guard end not found"))
+
+    (unless (search-forward expected-guard (point-at-eol) t)
+      (error "Comment #endif should mention %s" expected-guard))
+    (goto-char old-point)))
+
+;; Vaucansonize a buffer.
 (require 'tabify)
 
 (defun vaucansonize-buffer (&optional buffer)
@@ -100,9 +153,13 @@
       (cpp-indent-macros (point-min) (point-max))
       (indent-region (point-min) (point-max) nil)
       (delete-trailing-whitespace)
-      (tabify (point-min) (point-max)))
+      (tabify (point-min) (point-max))
+      (cpp-check-guard 'get-vcsn-path))
     (c-set-style c-indentation-style)))
 
 
+;; For fun ;-)
+(provide 'vaucanson)
+
 ;; arch-tag: 97e769b8-ed42-42d9-bac6-7833bea581c5
-;;; misc.el ends here
+;;; vaucanson.el ends here
