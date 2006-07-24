@@ -1,8 +1,13 @@
+2006-07-24  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* src/tests/xml/tester.sh: Correct some directory names so as to work in
+	another directory than srcdir. Closes ticket #81.
+
 2006-07-24  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Fix some typos.
 
-	* taf-kit/src/tdc_commands.cc: Add dots at end of lines. 
+	* taf-kit/src/tdc_commands.cc: Add dots at end of lines.
 	Cut long strings in two.
 	* taf-kit/src/edition_commands.hxx: Reindent macros.
 

@@ -8,16 +8,16 @@ do
     $prog output > ${i}_result.tmp
     ## Testing XML dump.
     echo "XML: Testing saver for type $i"
-    diff_result=`diff ${i}_result.tmp ${i}_ref.xml`
+    diff_result=`diff ${i}_result.tmp ${SRCDIR}/${i}_ref.xml`
     if ! [ -z "$diff_result" ]; then
 	echo "FAIL: $i output has difference with XML reference"
 	echo "$diff_result"
 	out=255
     fi
     ## Testing XML parse.
-    $prog < ${i}_ref.xml > ${i}_result.dot.tmp
+    $prog < ${SRCDIR}/${i}_ref.xml > ${i}_result.dot.tmp
     echo "XML: Testing loader for type $i"
-    diff_result=`diff ${i}_result.dot.tmp ${i}_ref.dot`
+    diff_result=`diff ${i}_result.dot.tmp ${SRCDIR}/${i}_ref.dot`
     if ! [ -z "$diff_result" ]; then
 	echo "FAIL: $i output has difference with DOT reference"
 	echo "$diff_result"
