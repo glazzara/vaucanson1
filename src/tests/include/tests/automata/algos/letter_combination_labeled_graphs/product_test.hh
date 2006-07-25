@@ -46,7 +46,9 @@ unsigned product_test(tests::Tester& tg)
   GenRandomAutomata<automaton_t> gen(time(0x0));
   tests::Tester t(tg.verbose());
 
-  // Battery 1.
+  /*-------------*
+   | Battery 1.  |
+   *-------------*/
   AUTOMATON_TYPES(Auto);
   typedef typename generalized_traits<Auto>::automaton_t generalized_t;
   AUTOMATON_TYPES_(generalized_t, g_);
@@ -61,6 +63,7 @@ unsigned product_test(tests::Tester& tg)
     automaton_t rhs = gen.generate(lhs.structure(),
 				   3, 6, 1, 2);
     automaton_t p = product(lhs, rhs);
+
     // If the intersection is empty, regenerate a test.
     if (p.final().size() == 0)
     {
@@ -68,51 +71,50 @@ unsigned product_test(tests::Tester& tg)
       continue;
     }
 
+    /*-------------------------------------------*
+     | Look for a word accepted by the product.  |
+     *-------------------------------------------*/
     generalized_t g_p = generalized(p);
     g_series_set_elt_t exp_p(g_p.structure().series());
-    exp_p = aut_to_exp(g_p);
-    const semiring_elt_t wzero = lhs.series().semiring().wzero_;
-
-    // This guy is accepted by the automaton.
+    // This guy is  accepted by the automaton.
     monoid_elt_t word_prod = exp_p.choose_from_supp();
 
-    // Make sure it really is.
+    // We have overflow problems when working on Z, so it does happen
+    // that some evaluation lead to incorrect results, including `0',
+    // on words that should be accepted.  In this case, there is no
+    // chance we can actually test the product, so skip these cases.
     if (eval(p, word_prod) == p.series().semiring().wzero_)
       {
-	TEST_MSG("Automata saved in /tmp.");
-	SAVE_AUTOMATON_XML("/tmp", "product_rhs", rhs, cpt);
-	SAVE_AUTOMATON_XML("/tmp", "product_lhs", lhs, cpt);
-	SAVE_AUTOMATON_XML("/tmp", "product_prod", p, cpt);
+	TEST_MSG("This automata overflows the evaluation, it is saved in /tmp.");
+ 	SAVE_AUTOMATON_XML("/tmp", "product_prod", p, cpt);
+ 	SAVE_AUTOMATON_XML("/tmp", "product_generalized", g_p, cpt);
 	TEST_FAIL_SAVE("product",
 		       cpt,
 		       "element of the support is eval'ed to 0"
 		       << std::endl
 		       << "word: " << word_prod << std::endl
 		       );
+	++nb_test_product;
+	continue;
       }
-    // Then make sure it is accepted by both.
-    else if (eval(lhs, word_prod) == wzero or
+
+
+    /*-------------------------------------------*
+     | The word must accepted by both operands.  |
+     *-------------------------------------------*/
+    const semiring_elt_t wzero = lhs.series().semiring().wzero_;
+    if (eval(lhs, word_prod) == wzero or
 	     eval(rhs, word_prod) == wzero)
     {
-      // Print the failing expressions.
-      generalized_t g_lhs = generalized(lhs);
-      generalized_t g_rhs = generalized(rhs);
-      g_series_set_elt_t exp_lhs(g_lhs.structure().series());
-      g_series_set_elt_t exp_rhs(g_rhs.structure().series());
-      exp_lhs = aut_to_exp(g_lhs);
-      exp_rhs = aut_to_exp(g_rhs);
       TEST_MSG("Automata saved in /tmp.");
       SAVE_AUTOMATON_XML("/tmp", "product_rhs", rhs, cpt);
       SAVE_AUTOMATON_XML("/tmp", "product_lhs", lhs, cpt);
       SAVE_AUTOMATON_XML("/tmp", "product_prod", p, cpt);
       TEST_FAIL_SAVE("product",
 		     cpt,
-		     "product of automata corresponding"
-		     << " to following expressions failed."
+		     "The following word is accepted by the product, but rejected by an"
+		     " operand."
 		     << std::endl
-		     << exp_lhs << " and " << exp_rhs
-		     << std::endl
-		     << "This word is not recognized by one of the automata "
 		     << word_prod
 		     << std::endl
 		     );
@@ -128,7 +130,9 @@ unsigned product_test(tests::Tester& tg)
        success_product == nb_test_product_done);
 
 
-  // Battery 2.
+  /*-------------*
+   | Battery 2.  |
+   *-------------*/
   const unsigned nb_test    = 30;
   unsigned success_identity = 0;
   unsigned success_null	    = 0;

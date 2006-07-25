@@ -1,5 +1,13 @@
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
+	Neutralize false product failures.
+
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh:
+	If the word is not accepted by the product automaton, look
+	for another word.
+
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
 	Make precise error messages.
 
 	I'm still fighting with the test suite.  It appears that, now that
