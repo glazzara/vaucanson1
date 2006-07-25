@@ -1,5 +1,14 @@
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
+	texi: Prefix internal command names.
+
+	* styles/texi.sty: Do it.
+	This fixes a problem where a use of \var{} in a LaTeX document
+	using an index would produce a failing index.  There is probably
+	a name clash, I don't know which, we (with Micha) renamed them all.
+
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
 	Add \strong.
 
 	* styles/texi.hva: Do it.
