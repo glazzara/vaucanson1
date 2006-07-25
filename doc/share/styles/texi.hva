@@ -23,6 +23,8 @@
   \RequirePackage{hyperref}
 \fi
 
+\newcommand\strong[1]{\textbf{#1}}
+
 \newcommand\code[1]{\texttt{#1}}
 \newcommand\env[1]{\code{#1}}
 \newcommand\command[1]{\code{#1}}

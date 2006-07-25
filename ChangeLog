@@ -1,3 +1,9 @@
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
+	Includes.
+
+	* doc/manual/developer.tex (Includes): New.
+
 2006-07-24  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/vaucanson.el: Use `file-name-nondirectory' on

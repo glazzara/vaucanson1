@@ -76,7 +76,40 @@ Until this is written, please refer to
 \href{http://www.lrde.epita.fr/~akim/compil/assignments.split/Coding-Style.html#Coding-Style}{Tiger's
   Coding Style}.
 
-Emacs users should use the indentation style of ``data/misc.el''.
+Emacs users should use the indentation style of ``data/vaucanson.el''.
+
+\subsubsection{Includes}
+
+Please, never use backward relative paths anywhere.  There are very
+difficult to follow (because several such strings can designate the
+same spot), they make renaming and moving virtually impossible etc.
+
+Relative paths to sub-directories are welcome, although in many
+situations they are not the best bet.
+
+In \strong{Makefiles}, please using absolute paths starting from
+\samp{\$(top\_srcdir)}.  Unfortunately, because Automake cannot grok
+includes with Make macros (except... \samp{\$(top\_srcdir)}), we can't
+shorten these.
+
+For \strong{header inclusion}, stacking zillions of \samp{-I} is not
+the best solution because
+\begin{itemize}
+\item you have to work to find what file is really included
+\item you are likely to find unexpected name collisions if two
+  separate directories happens to have (legitimately) two different
+  files share the same name
+\item etc.
+\end{itemize}
+
+So rather, stick to \emph{hierarchies} of include files, and use
+qualified \samp{\#include}s.  For instance, use \samp{-I
+  \$(top\_srcdir)/include -I \$(top\_srcdir)/src/tests/include} and
+\samp{\#include <vaucanson/...>} falls into the first one
+(\file{\$(top\_srcdir)/include} has all its content in
+\file{vaucanson}), and \samp{\#include <tests/...>} falls into the
+latter since \file{\$(top\_srcdir)/src/tests/include} has all its
+content in \file{vaucanson}).
 
 \subsection{Use of macros}
 

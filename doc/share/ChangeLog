@@ -1,3 +1,10 @@
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add \strong.
+
+	* styles/texi.hva: Do it.
+	* README: Doc it.
+
 2006-07-20  Akim Demaille  <akim@lrde.epita.fr>
 
 	Add pdf-figs.mk.

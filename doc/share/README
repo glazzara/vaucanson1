@@ -224,7 +224,6 @@ en Texinfo :
 
   abbr::          Indicating abbreviations.
   acronym::       Indicating acronyms.
-  cite::          Referring to books not in the Info system.
   code::          Indicating program code.
   command::       Indicating command names.
   dfn::           Specifying definitions.
@@ -237,6 +236,7 @@ en Texinfo :
   link{ulr, title} ou link{url}
   option::        Indicating option names.
   samp::          Indicating a literal sequence of characters.
+  strong::        Strong emphasis.
   var::           Indicating metasyntactic variables.
   verb::          Indicating a verbatim sequence of characters.
 
