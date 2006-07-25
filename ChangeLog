@@ -1,5 +1,15 @@
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
+	More doc.
+
+	* doc/manual/vaucanson-user-manual.tex: Generate and use the
+	index.
+	* doc/manual/taf-kit.tex: More index entries.
+	(fnsection): New environment.
+	Use it.
+
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
 	Neutralize false product failures.
 
 	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh:

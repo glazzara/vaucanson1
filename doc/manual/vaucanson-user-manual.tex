@@ -38,18 +38,22 @@
   \setboolean{developer}{true}
 \fi
 
+% The same argument is output and put in the index.
+\newcommand{\Index}[1]{\index{#1}#1}
 
-\newenvironment{legend}{
-  \begin{quote}
-    }{
-  \end{quote}
+\newenvironment{legend}{%
+  \begin{quote}%
+    }{%
+  \end{quote}%
 }
 
 \newenvironment{cmp}{%
   \begin{center}
-    \begin{minipage}{\textwidth}}{%
+    \begin{minipage}{\textwidth}%
+    }{%
     \end{minipage}
-  \end{center}}
+  \end{center}%
+}
 
 \newcommand{\textrp}[1]{\textit{#1}}
 
@@ -93,6 +97,10 @@
 \input{taf-kit}
 \input{library}
 \ifthenelse{\boolean{developer}}{\input{developer}}{}
+
+\appendix
+
+\printindex
 
 \end{document}
 
