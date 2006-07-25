@@ -57,11 +57,11 @@ unsigned product_test(tests::Tester& tg)
 
   for (unsigned cpt = 0; cpt < nb_test_product; ++cpt)
   {
-    automaton_t auto_lhs = gen.generate(3, 6, 1, 2, 2);
-    automaton_t auto_rhs = gen.generate(auto_lhs.structure(),
-					3, 6, 1, 2);
-    automaton_t p = product(auto_lhs, auto_rhs);
-    // if the intersection is empty, regenerate a test.
+    automaton_t lhs = gen.generate(3, 6, 1, 2, 2);
+    automaton_t rhs = gen.generate(lhs.structure(),
+				   3, 6, 1, 2);
+    automaton_t p = product(lhs, rhs);
+    // If the intersection is empty, regenerate a test.
     if (p.final().size() == 0)
     {
       ++nb_test_product;
@@ -71,24 +71,40 @@ unsigned product_test(tests::Tester& tg)
     generalized_t g_p = generalized(p);
     g_series_set_elt_t exp_p(g_p.structure().series());
     exp_p = aut_to_exp(g_p);
+    const semiring_elt_t wzero = lhs.series().semiring().wzero_;
 
+    // This guy is accepted by the automaton.
     monoid_elt_t word_prod = exp_p.choose_from_supp();
-    const semiring_elt_t wzero = auto_lhs.series().semiring().wzero_;
 
-    if (eval(auto_lhs, word_prod) == wzero or
-        eval(auto_rhs, word_prod) == wzero)
+    // Make sure it really is.
+    if (eval(p, word_prod) == p.series().semiring().wzero_)
+      {
+	TEST_MSG("Automata saved in /tmp.");
+	SAVE_AUTOMATON_XML("/tmp", "product_rhs", rhs, cpt);
+	SAVE_AUTOMATON_XML("/tmp", "product_lhs", lhs, cpt);
+	SAVE_AUTOMATON_XML("/tmp", "product_prod", p, cpt);
+	TEST_FAIL_SAVE("product",
+		       cpt,
+		       "element of the support is eval'ed to 0"
+		       << std::endl
+		       << "word: " << word_prod << std::endl
+		       );
+      }
+    // Then make sure it is accepted by both.
+    else if (eval(lhs, word_prod) == wzero or
+	     eval(rhs, word_prod) == wzero)
     {
       // Print the failing expressions.
-      generalized_t g_auto_lhs = generalized(auto_lhs);
-      generalized_t g_auto_rhs = generalized(auto_rhs);
-      g_series_set_elt_t exp_lhs(g_auto_lhs.structure().series());
-      g_series_set_elt_t exp_rhs(g_auto_rhs.structure().series());
-      exp_lhs = aut_to_exp(g_auto_lhs);
-      exp_rhs = aut_to_exp(g_auto_rhs);
+      generalized_t g_lhs = generalized(lhs);
+      generalized_t g_rhs = generalized(rhs);
+      g_series_set_elt_t exp_lhs(g_lhs.structure().series());
+      g_series_set_elt_t exp_rhs(g_rhs.structure().series());
+      exp_lhs = aut_to_exp(g_lhs);
+      exp_rhs = aut_to_exp(g_rhs);
       TEST_MSG("Automata saved in /tmp.");
-      SAVE_AUTOMATON_XML("/tmp", "rhs", auto_rhs, cpt);
-      SAVE_AUTOMATON_XML("/tmp", "lhs", auto_lhs, cpt);
-      SAVE_AUTOMATON_XML("/tmp", "prod", p, cpt);
+      SAVE_AUTOMATON_XML("/tmp", "product_rhs", rhs, cpt);
+      SAVE_AUTOMATON_XML("/tmp", "product_lhs", lhs, cpt);
+      SAVE_AUTOMATON_XML("/tmp", "product_prod", p, cpt);
       TEST_FAIL_SAVE("product",
 		     cpt,
 		     "product of automata corresponding"

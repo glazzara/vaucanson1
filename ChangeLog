@@ -1,5 +1,19 @@
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
+	Make precise error messages.
+
+	I'm still fighting with the test suite.  It appears that, now that
+	we can use TAF-Kit to work the counter-examples, it seems that the
+	failures of the products are rather failures to extract a word
+	accepted by the automaton.  Since we test whether a word accepted
+	by the product is accepted by both operands, if the word is
+	not accepted by the product, the test reports garbage.
+	I don't know yet how to address this failure.
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh:
+	Report when a word from the support is not accepted.
+
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
 	Renane SAVE_AUTOMATON_DOT as SAVE_AUTOMATON_XML.
 
 	The test suite framework saves the failing automata in... dot.
