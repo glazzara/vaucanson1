@@ -1,5 +1,12 @@
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
+	Restore incorrectly removed code.
+
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh:
+	Don't forget to compute the ratexp before using it.
+
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
 	More indexes.
 
 	* doc/manual/vaucanson-user-manual.tex, doc/manual/taf-kit.tex: Do it.

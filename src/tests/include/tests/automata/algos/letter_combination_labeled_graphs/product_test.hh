@@ -76,6 +76,7 @@ unsigned product_test(tests::Tester& tg)
      *-------------------------------------------*/
     generalized_t g_p = generalized(p);
     g_series_set_elt_t exp_p(g_p.structure().series());
+    exp_p = aut_to_exp(g_p);
     // This guy is  accepted by the automaton.
     monoid_elt_t word_prod = exp_p.choose_from_supp();
 
