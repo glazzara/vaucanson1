@@ -22,7 +22,11 @@ vcsn-z.test
 EXTRA_DIST = $(TESTS)
 
 # Each test case depends on defs.
-check_SCRIPTS = defs vcsn-z vcsn-b
+check_SCRIPTS =					\
+defs						\
+vcsn-b						\
+vcsn-tdc					\
+vcsn-z
 
 distclean-local:
 	-rm -rf testSubDir
