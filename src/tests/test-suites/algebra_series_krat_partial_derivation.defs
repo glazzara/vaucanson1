@@ -1,4 +1,7 @@
-#include <algebra/series/krat/derivations/derivations_common.hh>
+// FIXME: This file is almost a duplicate from
+// algebra_series_krat_derivation.defs.
+
+#include <tests/algebra/series/krat/derivations/derivations_common.hh>
 
 #include <vaucanson/algebra/implementation/free_monoid/predefs.hh>
 #include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
@@ -12,23 +15,23 @@ public:
   typedef Expr						krat_exp_t;
   typedef std::set<Expr>				result_t;
   typedef typename Expr::monoid_elt_t::set_t::letter_t	letter_t;
-  
+
   Derivation(const krat_exp_t& expr, const letter_t& l) :
     result (partial_derivate(expr, l))
   {
   }
-  
+
   bool is_defined()
   {
     return result.second;
   }
-  
+
   const result_t& get_result()
   {
     assert(result.second);
     return result.first;
   }
-  
+
 protected:
   std::pair<std::set<krat_exp_t>, bool> result;
 };
@@ -47,4 +50,3 @@ protected:
 
 #define TEST_STATIC_ARGS				\
 	TEST_STATIC_ARG1, TEST_STATIC_ARG2
-

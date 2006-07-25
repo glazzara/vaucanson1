@@ -185,6 +185,60 @@ VCSN_CONFIG_WRAPPER([vcsn-b])
 VCSN_CONFIG_WRAPPER([vcsn-z])
 
 
+
+## ------- ##
+## Tests.  ##
+## ------- ##
+
+AC_CONFIG_FILES([
+src/tests/Makefile
+src/tests/check/defs
+src/tests/sanity/Makefile
+src/tests/misc/Makefile
+src/tests/test-suites/Makefile
+src/tests/xml/Makefile
+
+src/tests/include/tests/algebra/Makefile
+src/tests/include/tests/algebra/alphabets/Makefile
+src/tests/include/tests/algebra/free_monoid/Makefile
+src/tests/include/tests/algebra/free_monoid_product/Makefile
+src/tests/include/tests/algebra/numerical_semiring/Makefile
+src/tests/include/tests/algebra/semiring/Makefile
+src/tests/include/tests/algebra/series/Makefile
+src/tests/include/tests/algebra/series/krat/Makefile
+src/tests/include/tests/algebra/series/krat/boolean/Makefile
+src/tests/include/tests/algebra/series/krat/derivations/Makefile
+src/tests/include/tests/algebra/series/krat/derivations/cderivation/Makefile
+src/tests/include/tests/algebra/series/krat/derivations/derivation/Makefile
+src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/Makefile
+src/tests/include/tests/algebra/series/krat/main/Makefile
+src/tests/include/tests/algebra/series/krat/tests/Makefile
+src/tests/include/tests/algebra/series/misc/Makefile
+src/tests/include/tests/algebra/series/polynom/Makefile
+
+src/tests/include/tests/automata/Makefile
+src/tests/include/tests/automata/algos/Makefile
+src/tests/include/tests/automata/algos/boolean_automata/Makefile
+src/tests/include/tests/automata/algos/boolean_rw_transducers/Makefile
+src/tests/include/tests/automata/algos/fmp_transducers/Makefile
+src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/Makefile
+src/tests/include/tests/automata/algos/graphs/Makefile
+src/tests/include/tests/automata/algos/label_aware_graphs/Makefile
+src/tests/include/tests/automata/algos/labeled_graphs/Makefile
+src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/Makefile
+src/tests/include/tests/automata/algos/series_multiplicity_transducers/Makefile
+src/tests/include/tests/automata/implementation_check/Makefile
+
+src/tests/include/tests/check/Makefile
+
+src/tests/include/tests/context_headers/Makefile
+src/tests/include/tests/context_headers/automata/Makefile
+src/tests/include/tests/context_headers/fmp_transducers/Makefile
+src/tests/include/tests/context_headers/transducers/Makefile
+
+src/tests/include/tests/design_pattern/Makefile
+])
+
 ## ---------------- ##
 ## generate files.  ##
 ## ---------------- ##
@@ -197,47 +251,6 @@ AC_CONFIG_FILES([
 	data/automata/b/Makefile
 	data/automata/z/Makefile
 	src/Makefile
-	src/tests/Makefile
-	src/tests/check/Makefile
-	src/tests/check/defs
-	src/tests/sanity/Makefile
-	src/tests/design_pattern/Makefile
-	src/tests/misc/Makefile
-	src/tests/algebra/Makefile
-	src/tests/algebra/numerical_semiring/Makefile
-	src/tests/algebra/series/Makefile
-	src/tests/algebra/series/krat/Makefile
-	src/tests/algebra/series/krat/derivations/Makefile
-	src/tests/algebra/series/krat/derivations/derivation/Makefile
-	src/tests/algebra/series/krat/derivations/cderivation/Makefile
-	src/tests/algebra/series/krat/derivations/partial_derivation/Makefile
-	src/tests/algebra/series/krat/main/Makefile
-	src/tests/algebra/series/krat/boolean/Makefile
-	src/tests/algebra/series/krat/tests/Makefile
-	src/tests/algebra/series/misc/Makefile
-	src/tests/algebra/series/polynom/Makefile
-	src/tests/algebra/semiring/Makefile
-	src/tests/algebra/alphabets/Makefile
-	src/tests/algebra/free_monoid/Makefile
-	src/tests/algebra/free_monoid_product/Makefile
-	src/tests/automata/Makefile
-	src/tests/automata/algos/Makefile
-	src/tests/automata/algos/boolean_automata/Makefile
-	src/tests/automata/algos/fmp_transducers/Makefile
-	src/tests/automata/algos/freemonoid_labeled_graphs/Makefile
-	src/tests/automata/algos/graphs/Makefile
-	src/tests/automata/algos/label_aware_graphs/Makefile
-	src/tests/automata/algos/labeled_graphs/Makefile
-	src/tests/automata/algos/letter_combination_labeled_graphs/Makefile
-	src/tests/automata/algos/series_multiplicity_transducers/Makefile
-	src/tests/automata/algos/boolean_rw_transducers/Makefile
-	src/tests/automata/implementation_check/Makefile
-	src/tests/context_headers/Makefile
-	src/tests/context_headers/automata/Makefile
-	src/tests/context_headers/transducers/Makefile
-	src/tests/context_headers/fmp_transducers/Makefile
-	src/tests/test-suites/Makefile
-	src/tests/xml/Makefile
 	src/demos/Makefile
 	src/demos/vgrep/Makefile
 	src/demos/function_library/Makefile

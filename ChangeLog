@@ -1,5 +1,273 @@
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
+	Improve the usability of the generated test-suite.
+
+	But really, it's a mess.
+	To make it easier to track, stop using relative paths in the test
+	suite, so move them all to another header hierarchy starting with
+	"tests/".
+	Adjust the generation of the test suite.
+	Save cycle by avoid re-generating files that did not change.
+	Cannot make a proper ChangeLog entry for all the small changes
+	that were needed.
+	More files should probably go into include/tests.
+	* build-aux/move-if-change: Send messages to stderr.
+
+	* configure.ac: Adjust.
+	* src/tests/Makefile.am: Adjust.
+
+	Move test-suite headers into tests/include/tests.
+	* src/tests/algebra/Makefile.am,
+	* src/tests/algebra/alphabets,
+	* src/tests/algebra/alphabets/Makefile.am,
+	* src/tests/algebra/alphabets/alphabet_test.hh,
+	* src/tests/algebra/alphabets/alphabet_torture_test.hh,
+	* src/tests/algebra/free_monoid,
+	* src/tests/algebra/free_monoid/Makefile.am,
+	* src/tests/algebra/free_monoid/constructor_without_arguments2_failcomp.hh,
+	* src/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh,
+	* src/tests/algebra/free_monoid/free_monoid_test.hh,
+	* src/tests/algebra/free_monoid_product,
+	* src/tests/algebra/free_monoid_product/Makefile.am,
+	* src/tests/algebra/free_monoid_product/free_monoid_product_test.hh,
+	* src/tests/algebra/numerical_semiring,
+	* src/tests/algebra/numerical_semiring/Makefile.am,
+	* src/tests/algebra/numerical_semiring/numerical_semiring_test.hh,
+	* src/tests/algebra/semiring,
+	* src/tests/algebra/semiring/Makefile.am,
+	* src/tests/algebra/semiring/semiring_test.hh,
+	* src/tests/algebra/series,
+	* src/tests/algebra/series/Makefile.am,
+	* src/tests/algebra/series/krat,
+	* src/tests/algebra/series/krat/Makefile.am,
+	* src/tests/algebra/series/krat/boolean,
+	* src/tests/algebra/series/krat/boolean/Makefile.am,
+	* src/tests/algebra/series/krat/boolean/krat_exp_cderivation_linear_test.hh,
+	* src/tests/algebra/series/krat/derivations,
+	* src/tests/algebra/series/krat/derivations/Makefile.am,
+	* src/tests/algebra/series/krat/derivations/cderivation,
+	* src/tests/algebra/series/krat/derivations/cderivation/Makefile.am,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/cderivation/krat_exp_cderivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation,
+	* src/tests/algebra/series/krat/derivations/derivation/Makefile.am,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivation/krat_exp_derivation_zero_test.hh,
+	* src/tests/algebra/series/krat/derivations/derivations_common.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/Makefile.am,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_common.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_sum_test.hh,
+	* src/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh,
+	* src/tests/algebra/series/krat/main,
+	* src/tests/algebra/series/krat/main/Makefile.am,
+	* src/tests/algebra/series/krat/main/krat_exp_aci_canonical_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_constant_term_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_expand_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_flatten_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_linearize_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_parse_test.hh,
+	* src/tests/algebra/series/krat/main/krat_exp_realtime_test.hh,
+	* src/tests/algebra/series/krat/tests,
+	* src/tests/algebra/series/krat/tests/Makefile.am,
+	* src/tests/algebra/series/krat/tests/generate_random_krat.cc,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_b_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_b_weird,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_f_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_f_weird,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_i_ab,
+	* src/tests/algebra/series/krat/tests/random_krat_exp_i_weird,
+	* src/tests/algebra/series/misc,
+	* src/tests/algebra/series/misc/Makefile.am,
+	* src/tests/algebra/series/misc/series_test.hh,
+	* src/tests/algebra/series/polynom,
+	* src/tests/algebra/series/polynom/Makefile.am,
+	* src/tests/algebra/series/polynom/series_polynom_test.hh,
+	* src/tests/automata,
+	* src/tests/automata/Makefile.am,
+	* src/tests/automata/algos,
+	* src/tests/automata/algos/Makefile.am,
+	* src/tests/automata/algos/README,
+	* src/tests/automata/algos/boolean_automata,
+	* src/tests/automata/algos/boolean_automata/Makefile.am,
+	* src/tests/automata/algos/boolean_automata/aci_canonical_test.hh,
+	* src/tests/automata/algos/boolean_automata/berry_sethi_test.hh,
+	* src/tests/automata/algos/boolean_automata/brzozowski_test.hh,
+	* src/tests/automata/algos/boolean_automata/complete_test.hh,
+	* src/tests/automata/algos/boolean_automata/minimization_test.hh,
+	* src/tests/automata/algos/boolean_rw_transducers,
+	* src/tests/automata/algos/boolean_rw_transducers/Makefile.am,
+	* src/tests/automata/algos/boolean_rw_transducers/invert_test.hh,
+	* src/tests/automata/algos/fmp_transducers,
+	* src/tests/automata/algos/fmp_transducers/Makefile.am,
+	* src/tests/automata/algos/fmp_transducers/evaluation_fmp_test.hh,
+	* src/tests/automata/algos/fmp_transducers/normalized_composition_test.hh,
+	* src/tests/automata/algos/fmp_transducers/sub_normalize_test.hh,
+	* src/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh,
+	* src/tests/automata/algos/freemonoid_labeled_graphs,
+	* src/tests/automata/algos/freemonoid_labeled_graphs/Makefile.am,
+	* src/tests/automata/algos/freemonoid_labeled_graphs/generalized_test.hh,
+	* src/tests/automata/algos/freemonoid_labeled_graphs/krat_exp_realtime_conflict_test.hh,
+	* src/tests/automata/algos/freemonoid_labeled_graphs/realtime_test.hh,
+	* src/tests/automata/algos/graphs,
+	* src/tests/automata/algos/graphs/Makefile.am,
+	* src/tests/automata/algos/graphs/accessible_test.hh,
+	* src/tests/automata/algos/graphs/extract_test.hh,
+	* src/tests/automata/algos/graphs/reachable_test.hh,
+	* src/tests/automata/algos/graphs/sub_automaton_test.hh,
+	* src/tests/automata/algos/graphs/trim_test.hh,
+	* src/tests/automata/algos/label_aware_graphs,
+	* src/tests/automata/algos/label_aware_graphs/Makefile.am,
+	* src/tests/automata/algos/label_aware_graphs/closure_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/cut_up_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/standard_of_regression_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/automata/algos/label_aware_graphs/transpose_test.hh,
+	* src/tests/automata/algos/labeled_graphs,
+	* src/tests/automata/algos/labeled_graphs/Makefile.am,
+	* src/tests/automata/algos/labeled_graphs/are_isomorphic_test.hh,
+	* src/tests/automata/algos/labeled_graphs/elimination_dmheuristic_test.hh,
+	* src/tests/automata/algos/labeled_graphs/elimination_heuristic_test.hh,
+	* src/tests/automata/algos/labeled_graphs/elimination_random_test.hh,
+	* src/tests/automata/algos/labeled_graphs/elimination_test.hh,
+	* src/tests/automata/algos/labeled_graphs/normalize_test.hh,
+	* src/tests/automata/algos/labeled_graphs/thompson_test.hh,
+	* src/tests/automata/algos/letter_combination_labeled_graphs,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/Makefile.am,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/compute_test.hh,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/derived_term_automaton_test.hh,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/deterministic_test.hh,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/product_regression_test.hh,
+	* src/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh,
+	* src/tests/automata/algos/series_multiplicity_transducers,
+	* src/tests/automata/algos/series_multiplicity_transducers/Makefile.am,
+	* src/tests/automata/algos/series_multiplicity_transducers/extension_test.hh,
+	* src/tests/automata/algos/series_multiplicity_transducers/realtime_trans_test.hh,
+	* src/tests/automata/implementation_check,
+	* src/tests/automata/implementation_check/Makefile.am,
+	* src/tests/automata/implementation_check/add_state_test.hh,
+	* src/tests/automata/implementation_check/add_transition_test.hh,
+	* src/tests/automata/implementation_check/coherence_state_transition_test.hh,
+	* src/tests/automata/implementation_check/geometry_equal_operator_test.hh,
+	* src/tests/automata/implementation_check/global_consistency_test.hh,
+	* src/tests/automata/implementation_check/init_final_test.hh,
+	* src/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/check/Makefile.am,
+	* src/tests/check/tester.cc,
+	* src/tests/check/tester.hh,
+	* src/tests/check/unique.cc,
+	* src/tests/context_headers,
+	* src/tests/context_headers/Makefile.am,
+	* src/tests/context_headers/automata,
+	* src/tests/context_headers/automata/Makefile.am,
+	* src/tests/context_headers/automata/global_consistency_test.hh,
+	* src/tests/context_headers/fmp_transducers,
+	* src/tests/context_headers/fmp_transducers/Makefile.am,
+	* src/tests/context_headers/fmp_transducers/global_consistency_test.hh,
+	* src/tests/context_headers/transducers,
+	* src/tests/context_headers/transducers/Makefile.am,
+	* src/tests/context_headers/transducers/global_consistency_test.hh,
+	* src/tests/design_pattern,
+	* src/tests/design_pattern/Makefile.am,
+	* src/tests/design_pattern/design_pattern-test.hh,
+	* src/tests/design_pattern/element-full-test.cc,
+	* src/tests/design_pattern/intrinsics.hh,
+	* src/tests/design_pattern/intrinsics_assign.cc,
+	* src/tests/design_pattern/intrinsics_binops.cc,
+	* src/tests/design_pattern/intrinsics_convert.cc,
+	* src/tests/design_pattern/intrinsics_default.cc,
+	* src/tests/design_pattern/intrinsics_extra.cc,
+	* src/tests/design_pattern/intrinsics_link.cc,
+	* src/tests/design_pattern/intrinsics_ops.cc,
+	* src/tests/design_pattern/intrinsics_orphanage.cc,
+	* src/tests/design_pattern/intrinsics_size.cc:
+	Move to...
+	* src/tests/include/tests/algebra/alphabets/alphabet_test.hh,
+	* src/tests/include/tests/algebra/alphabets/alphabet_torture_test.hh,
+	* src/tests/include/tests/algebra/free_monoid/constructor_without_arguments2_failcomp.hh,
+	* src/tests/include/tests/algebra/free_monoid/constructor_without_arguments_failcomp.hh,
+	* src/tests/include/tests/algebra/free_monoid/free_monoid_test.hh,
+	* src/tests/include/tests/algebra/numerical_semiring/numerical_semiring_test.hh,
+	* src/tests/include/tests/algebra/semiring/semiring_test.hh,
+	* src/tests/include/tests/algebra/series/krat/derivations/derivations_common.hh,
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_identity_test.hh,
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_letter_test.hh,
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_product_test.hh,
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_star_test.hh,
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_sum_test.hh,
+	* src/tests/include/tests/algebra/series/krat/derivations/partial_derivation/krat_exp_partial_derivation_zero_test.hh,
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_flatten_test.hh,
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_linearize_test.hh,
+	* src/tests/include/tests/algebra/series/polynom/series_polynom_test.hh,
+	* src/tests/include/tests/algebra: New.
+	* src/tests/include/tests/automata/algos/boolean_automata/complete_test.hh,
+	* src/tests/include/tests/automata/algos/boolean_automata/minimization_test.hh,
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh,
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/generalized_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/accessible_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/extract_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/reachable_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/closure_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/normalize_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/deterministic_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh,
+	* src/tests/include/tests/automata/algos/series_multiplicity_transducers/extension_test.hh,
+	* src/tests/include/tests/automata/implementation_check/add_state_test.hh,
+	* src/tests/include/tests/automata/implementation_check/add_transition_test.hh,
+	* src/tests/include/tests/automata/implementation_check/coherence_state_transition_test.hh,
+	* src/tests/include/tests/automata/implementation_check/geometry_equal_operator_test.hh,
+	* src/tests/include/tests/automata/implementation_check/init_final_test.hh:
+	* src/tests/include/tests/automata: New.
+	* src/tests/include/tests/check/Makefile.am: New.
+	* src/tests/include/tests/check/Makefile.in: New.
+	* src/tests/include/tests/check/tester.cc: New.
+	* src/tests/include/tests/check/tester.hh: New.
+	* src/tests/include/tests/check/unique.cc: New.
+	* src/tests/include/tests/check: New.
+	* src/tests/include/tests/context_headers: New.
+	* src/tests/include/tests/design_pattern/Makefile.am,
+	* src/tests/include/tests/design_pattern/element-full-test.cc,
+	* src/tests/include/tests/design_pattern: New.
+	* src/tests/include/tests: New.
+	Here.
+
+
+	* src/tests/bin/generate-test-suite.sh: No longer use relative paths.
+	* src/tests/check/check-flags.mk: Adjust.
+	* src/tests/include/Makefile.am: New.
+	* src/tests/include/tests/Makefile.am: New.
+	* src/tests/include: New.
+	* src/tests/misc/Makefile.am: Adjust.
+	* src/tests/misc/assert_test.cc: Adjust.
+	* src/tests/misc/limits.cc: Adjust.
+	* src/tests/misc/random.cc: Adjust.
+	* src/tests/test-suites/algebra_series_krat_cderivation.defs: Adjust.
+	* src/tests/test-suites/algebra_series_krat_derivation.defs: Ditto.
+	* src/tests/test-suites/algebra_series_krat_partial_derivation.defs:
+	Ditto.
+	* src/tests/test-suites/generate-all.sh: Ditto.
+
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
 	Includes.
 
 	* doc/manual/developer.tex (Includes): New.

@@ -15,7 +15,7 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/misc/limits.hh>
-#include "check/tester.hh"
+#include <tests/check/tester.hh>
 
 template <typename T>
 void print_attr(T attr)
@@ -67,4 +67,3 @@ int main()
   test_limits<unsigned int>();
   test_limits<float>();
 }
-

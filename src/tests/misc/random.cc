@@ -14,7 +14,7 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#include <check/tester.hh>
+#include <tests/check/tester.hh>
 #include <vaucanson/misc/random.hh>
 #include <cassert>
 #include <climits>

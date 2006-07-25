@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2006 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -11,12 +11,9 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-# VCSN_USE_XML is tested in the `xml' directory.
-
 SUBDIRS =					\
-	sanity					\
-	misc					\
-	test-suites				\
-	xml
-
-EXTRA_DIST = bin/generate-test-suite.sh
+	algebra					\
+	automata				\
+	context_headers				\
+	check					\
+	design_pattern

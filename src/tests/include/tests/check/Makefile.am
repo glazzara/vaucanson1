@@ -11,12 +11,11 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-# VCSN_USE_XML is tested in the `xml' directory.
+include $(top_srcdir)/src/tests/check/check-flags.mk
 
-SUBDIRS =					\
-	sanity					\
-	misc					\
-	test-suites				\
-	xml
+check_LIBRARIES = libcheck.a
 
-EXTRA_DIST = bin/generate-test-suite.sh
+libcheck_a_SOURCES =			\
+  tester.hh				\
+  tester.cc				\
+  unique.cc
