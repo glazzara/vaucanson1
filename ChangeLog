@@ -1,5 +1,11 @@
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
+	Remove a Makefile.in.
+
+	* src/tests/include/tests/check/Makefile.in: Remove.
+
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
 	Improve the usability of the generated test-suite.
 
 	But really, it's a mess.
