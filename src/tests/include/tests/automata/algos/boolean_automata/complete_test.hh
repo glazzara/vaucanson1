@@ -25,7 +25,7 @@
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/algorithms/determinize.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
 using namespace vcsn;
@@ -91,7 +91,7 @@ unsigned complete_test(tests::Tester& tg)
     if (tg.verbose() != tests::high or not result_test)
     {
       TEST_MSG("Automaton saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "complete_initial", b, i);
+      SAVE_AUTOMATON_XML("/tmp", "complete_initial", b, i);
     }
   }
   std::string rate;

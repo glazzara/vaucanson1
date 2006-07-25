@@ -18,7 +18,7 @@
 # define VCSN_TESTS_AUTOMATA_IMPLEMENTATION_CHECK_RDELTA_TEST_HH
 
 #include <vaucanson/automata/concept/handlers.hh>
-#include <vaucanson/tools/dot_dump.hh>
+#include <vaucanson/tools/xml_dump.hh>
 
 #include <list>
 #include <iostream>

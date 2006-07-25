@@ -21,7 +21,7 @@
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/normalized.hh>
 # include <vaucanson/algorithms/eval.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 
 # include <vaucanson/algebra/implementation/series/krat.hh>
 
@@ -151,7 +151,7 @@ bool thompson_test(tests::Tester& tg)
 	if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("/tmp", "thompson", au, nb);
+	  SAVE_AUTOMATON_XML("/tmp", "thompson", au, nb);
 	}
 	unsigned i = 0;
 	if (exp != ss.zero(SELECT(exp_t)))

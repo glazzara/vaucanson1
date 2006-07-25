@@ -25,7 +25,7 @@
 # include <tests/check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/accessible.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 
 template <class Auto>
 unsigned extract_test(tests::Tester& tg)

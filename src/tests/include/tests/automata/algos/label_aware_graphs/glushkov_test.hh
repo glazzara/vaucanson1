@@ -21,7 +21,7 @@
 # include <vaucanson/algorithms/standard.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/eval.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 
 # include <vaucanson/algebra/implementation/series/krat.hh>
 
@@ -144,7 +144,7 @@ bool glushkov_test(tests::Tester& tg)
 	if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("/tmp", "glushkov", au, nb);
+	  SAVE_AUTOMATON_XML("/tmp", "glushkov", au, nb);
 	}
 
 	if (exp != ss.zero(SELECT(exp_t)))

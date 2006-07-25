@@ -1,5 +1,41 @@
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
+	Renane SAVE_AUTOMATON_DOT as SAVE_AUTOMATON_XML.
+
+	The test suite framework saves the failing automata in... dot.
+	Which makes it really easy to toy with these automata.
+	* include/vaucanson/misc/usual_macros.hh (SAVE_AUTOMATON_DOT)
+	(SAVE_AUTOMATON_DOT_SIMPLE): Move and rename to.
+	* include/vaucanson/tools/xml_dump.hh(SAVE_AUTOMATON_XML)
+	(SAVE_AUTOMATON_XML_SIMPLE): these.
+	And obviously change the code.
+	Wrap in do/while.
+	* src/tests/include/tests/automata/implementation_check/rdelta_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/closure_test.hh,
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/generalized_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/reachable_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/extract_test.hh,
+	* src/tests/include/tests/automata/algos/boolean_automata/minimization_test.hh,
+	* src/tests/include/tests/automata/algos/boolean_automata/complete_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_heuristic_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_dmheuristic_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_random_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/normalize_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/deterministic_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/compute_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_regression_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh:
+	(dump_dot.hh): No longer include it, rather include...
+	(dump_xml.hh): this one.
+
+	* src/tests/include/tests/check/tester.hh: Adjust.
+
+2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
+
 	Remove a Makefile.in.
 
 	* src/tests/include/tests/check/Makefile.in: Remove.

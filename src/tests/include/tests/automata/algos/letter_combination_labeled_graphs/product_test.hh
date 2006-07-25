@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,12 +22,12 @@
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <tests/check/tester.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/product.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/algorithms/complement.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/trim.hh>
@@ -61,21 +61,22 @@ unsigned product_test(tests::Tester& tg)
     automaton_t auto_rhs = gen.generate(auto_lhs.structure(),
 					3, 6, 1, 2);
     automaton_t p = product(auto_lhs, auto_rhs);
+    // if the intersection is empty, regenerate a test.
+    if (p.final().size() == 0)
+    {
+      ++nb_test_product;
+      continue;
+    }
+
     generalized_t g_p = generalized(p);
     g_series_set_elt_t exp_p(g_p.structure().series());
     exp_p = aut_to_exp(g_p);
 
-    if (p.final().size() == 0)
-    {
-      // Intersection is empty. Redo the test.
-      ++nb_test_product;
-      continue;
-    }
     monoid_elt_t word_prod = exp_p.choose_from_supp();
-    const semiring_elt_t zero = auto_lhs.series().semiring().wzero_;
+    const semiring_elt_t wzero = auto_lhs.series().semiring().wzero_;
 
-    if (eval(auto_lhs, word_prod) == zero or
-        eval(auto_rhs, word_prod) == zero)
+    if (eval(auto_lhs, word_prod) == wzero or
+        eval(auto_rhs, word_prod) == wzero)
     {
       // Print the failing expressions.
       generalized_t g_auto_lhs = generalized(auto_lhs);
@@ -85,16 +86,20 @@ unsigned product_test(tests::Tester& tg)
       exp_lhs = aut_to_exp(g_auto_lhs);
       exp_rhs = aut_to_exp(g_auto_rhs);
       TEST_MSG("Automata saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "rhs", auto_rhs, cpt);
-      SAVE_AUTOMATON_DOT("/tmp", "lhs", auto_lhs, cpt);
-      SAVE_AUTOMATON_DOT("/tmp", "prod", p, cpt);
+      SAVE_AUTOMATON_XML("/tmp", "rhs", auto_rhs, cpt);
+      SAVE_AUTOMATON_XML("/tmp", "lhs", auto_lhs, cpt);
+      SAVE_AUTOMATON_XML("/tmp", "prod", p, cpt);
       TEST_FAIL_SAVE("product",
 		     cpt,
 		     "product of automata corresponding"
 		     << " to following expressions failed."
 		     << std::endl
 		     << exp_lhs << " and " << exp_rhs
-		     << std::endl);
+		     << std::endl
+		     << "This word is not recognized by one of the automata "
+		     << word_prod
+		     << std::endl
+		     );
     }
     else
       ++success_product;

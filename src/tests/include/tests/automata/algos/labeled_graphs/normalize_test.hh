@@ -22,7 +22,7 @@
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <tests/check/tester.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>

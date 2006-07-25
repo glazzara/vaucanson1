@@ -130,22 +130,6 @@
 # define remove_in(S, V)				\
   S.erase(std::remove(S.begin(), S.end(), V), S.end())
 
-# define SAVE_AUTOMATON_DOT(Dir, Name, Auto, Index)	\
-  {							\
-    std::ostringstream s;				\
-    s << Dir << "/" << Name << "_" << Index << ".dot";	\
-    std::ofstream f(s.str().c_str());			\
-    vcsn::tools::dot_dump(f, Auto, Name);		\
-  }
-
-# define SAVE_AUTOMATON_DOT_SIMPLE(Name, Auto)	\
-  {						\
-    std::ostringstream s;			\
-    s << Name << ".dot";			\
-    std::ofstream f(s.str().c_str());		\
-    vcsn::tools::dot_dump(f, Auto, Name);	\
-  }
-
 # define RAND___(Max)						\
   ((unsigned) int(((float) rand() / (float) RAND_MAX) * Max));
 

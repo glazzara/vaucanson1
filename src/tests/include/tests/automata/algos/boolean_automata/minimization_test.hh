@@ -27,7 +27,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/algorithms/determinize.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
@@ -61,10 +61,10 @@ unsigned minimization_test(tests::Tester& tg)
     if (t.verbose() == tests::high)
     {
       TEST_MSG("Automaton saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "minimization_initial", work, i);
+      SAVE_AUTOMATON_XML("/tmp", "minimization_initial", work, i);
 
       TEST_MSG("Automaton saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "co_minimization_initial", co_work, i);
+      SAVE_AUTOMATON_XML("/tmp", "co_minimization_initial", co_work, i);
     }
 
     automaton_t temp = trim(determinize(transpose(work)));
@@ -75,10 +75,10 @@ unsigned minimization_test(tests::Tester& tg)
     if (t.verbose() == tests::high)
     {
       TEST_MSG("Automaton saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "minimization_broz", minimize, i);
+      SAVE_AUTOMATON_XML("/tmp", "minimization_broz", minimize, i);
 
       TEST_MSG("Automaton saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "co_minimization_broz", co_minimize, i);
+      SAVE_AUTOMATON_XML("/tmp", "co_minimization_broz", co_minimize, i);
     }
 
     automaton_t hopcroft = trim(minimization_hopcroft(work));
@@ -88,13 +88,13 @@ unsigned minimization_test(tests::Tester& tg)
     if (t.verbose() == tests::high)
     {
       TEST_MSG("Automaton saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "minimization_hopcroft", hopcroft, i);
+      SAVE_AUTOMATON_XML("/tmp", "minimization_hopcroft", hopcroft, i);
 
       TEST_MSG("Automaton saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "minimization_moore", moore, i);
+      SAVE_AUTOMATON_XML("/tmp", "minimization_moore", moore, i);
 
       TEST_MSG("Automaton saved in /tmp.");
-      SAVE_AUTOMATON_DOT("/tmp", "co_minimization_moore", co_moore, i);
+      SAVE_AUTOMATON_XML("/tmp", "co_minimization_moore", co_moore, i);
     }
 
     if ((minimize.states().size() == hopcroft.states().size()) &&

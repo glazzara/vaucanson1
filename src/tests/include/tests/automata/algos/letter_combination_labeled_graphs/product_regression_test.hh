@@ -18,7 +18,7 @@
 # define VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_PRODUCT_REGRESSION_TEST_HH
 
 # include <vaucanson/algorithms/product.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
 # include <ostream>
@@ -71,7 +71,7 @@ product_regression_test(tests::Tester& tg)
   if (not t.all_passed())
   {
     TEST_MSG("Automaton saved in /tmp.");
-    SAVE_AUTOMATON_DOT("/tmp", "product_regression_test", prod, 0);
+    SAVE_AUTOMATON_XML("/tmp", "product_regression_test", prod, 0);
   }
   return t.all_passed();
 }

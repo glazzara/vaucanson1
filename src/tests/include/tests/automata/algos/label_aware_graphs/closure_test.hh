@@ -22,7 +22,7 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <tests/check/tester.hh>
 # include <vaucanson/tools/gen_random.hh>
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/algorithms/closure.hh>
 
@@ -65,11 +65,11 @@ bool closure_test(tests::Tester& tg)
 	if (error_backward_idempotence or error_backward_epsilon)
 	{
 	  TEST_MSG("Automata saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("/tmp",
+	  SAVE_AUTOMATON_XML("/tmp",
 			     "backward_closure_in",
 			     auto_epsilon,
 			     i);
-	  SAVE_AUTOMATON_DOT("/tmp", "backward_closure_out", cauto, i);
+	  SAVE_AUTOMATON_XML("/tmp", "backward_closure_out", cauto, i);
 	  break;
 	}
       }
@@ -88,11 +88,11 @@ bool closure_test(tests::Tester& tg)
 	if (error_backward_idempotence or error_backward_epsilon)
 	{
 	  TEST_MSG("Automata saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("/tmp",
+	  SAVE_AUTOMATON_XML("/tmp",
 			     "forward_closure_in",
 			     auto_epsilon,
 			     i);
-	  SAVE_AUTOMATON_DOT("/tmp", "forward_closure_out", cauto, i);
+	  SAVE_AUTOMATON_XML("/tmp", "forward_closure_out", cauto, i);
 	  break;
 	}
       }

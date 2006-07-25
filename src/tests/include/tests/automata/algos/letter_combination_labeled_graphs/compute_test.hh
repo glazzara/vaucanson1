@@ -17,7 +17,7 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_COMPUTE_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_LETTER_COMBINATION_LABELED_GRAPHS_COMPUTE_TEST_HH
 
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/algorithms/eval.hh>
 

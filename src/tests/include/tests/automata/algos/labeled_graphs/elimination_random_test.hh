@@ -17,7 +17,7 @@
 #ifndef VCSN_TESTS_AUTOMATA_ALGOS_LABELED_GRAPHS_ELIMINATION_RANDOM_TEST_HH
 # define VCSN_TESTS_AUTOMATA_ALGOS_LABELED_GRAPHS_ELIMINATION_RANDOM_TEST_HH
 
-# include <vaucanson/tools/dot_dump.hh>
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/automata/implementation/generalized.hh>
 # include <vaucanson/algorithms/aut_to_exp.hh>
@@ -47,7 +47,7 @@ bool elimination_random_test(tests::Tester& tg)
       if (t.verbose() == tests::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
-	  SAVE_AUTOMATON_DOT("/tmp", "aut_to_exp_random", a, nb);
+	  SAVE_AUTOMATON_XML("/tmp", "aut_to_exp_random", a, nb);
 	}
       unsigned i = 0;
       for (; i < nb_word_test; ++i)

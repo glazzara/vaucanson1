@@ -1,17 +1,17 @@
 // tester.hh: this file is part of the Vaucanson project.
-// 
+//
 // Vaucanson, a generic library for finite state machines.
-// 
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
-// 
+//
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // The complete GNU General Public Licence Notice can be found as the
 // `COPYING' file in the root directory.
-// 
+//
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #ifndef VCSN_TESTS_CHECK_TESTER_HH
@@ -21,6 +21,22 @@
 # include <fstream>
 # include <iostream>
 # include <string>
+
+# define SAVE_AUTOMATON_XML(Dir, Name, Auto, Index)	\
+  do {							\
+    std::ostringstream s;				\
+    s << Dir << "/" << Name << "_" << Index << ".xml";	\
+    std::ofstream f(s.str().c_str());			\
+    vcsn::tools::xml_dump(f, Auto, Name);		\
+  } while (0)
+
+# define SAVE_AUTOMATON_XML_SIMPLE(Name, Auto)	\
+  do {						\
+    std::ostringstream s;			\
+    s << Name << ".xml";			\
+    std::ofstream f(s.str().c_str());		\
+    vcsn::tools::xml_dump(f, Auto, Name);	\
+  } while (0)
 
 namespace tests {
 
