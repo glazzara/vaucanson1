@@ -1,3 +1,7 @@
+2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.
+
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
 	Restore incorrectly removed code.

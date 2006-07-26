@@ -43,7 +43,7 @@ namespace vcsn
       std::string file = std::string (path) + "/" + xsd;
       if (std::ifstream (file.c_str ()).good ())
 	return file;
-      FAIL (std::string ("Error: ") + xsd + "file not found in " + path + ".\n"
+      FAIL (std::string ("Error: cannot open `") + path + "/" + xsd "'.\n"
 	    "Please set VCSN_DATA_PATH to the Vaucanson data directory,\n"
 	    "containing `" + xsd + "'.");
       return "";
