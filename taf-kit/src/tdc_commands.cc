@@ -187,8 +187,9 @@ const command_t command_map[] =
 		   "Compute a the composition of `aut1' and `aut2'."),
     COMMAND_ENTRY (domain, Aut,
 		   "Compute an automaton accepting all input accepted by `aut'."),
-    COMMAND_ENTRY (evaluation, AutExp, "Compute the evaluation of `exp' against `aut'."),
-    COMMAND_ENTRY_CN (evaluation-aut, evaluation_fmp, AutAut,
+    COMMAND_ENTRY_CN (eval, evaluation, AutExp,
+		      "Compute the evaluation of `exp' against `aut'."),
+    COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, AutAut,
 		      "Compute a boolean automaton describing the words produced "
 		      "by the language\n\t described by a evaluated `aut1'."),
     COMMAND_ENTRY (image, Aut,

@@ -1,3 +1,7 @@
+2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* taf-kit/src/tdc_commands.cc: Name `eval' instead of `evaluation'.
+
 2006-07-26  Akim Demaille  <akim@epita.fr>
 
 	* data/automata/b/Makefile.am: Document b1.
