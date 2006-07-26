@@ -1,3 +1,19 @@
+2006-07-26  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Automata library for vcsn-tdc.
+
+	* data/automata/b/a1.cc,
+	* data/automata/z/c1.cc: Describe from which article or book these 
+	automata come from.
+	* data/automata/Makefile.am: Add tdc to SUBDIRS.
+	* data/automata/tdc: New.
+	* data/automata/tdc/Makefile.in: New.
+	* data/automata/tdc/t1.xml: New.
+	* data/automata/tdc/u1.xml: New.
+	* data/automata/tdc/t1.cc: New.
+	* data/automata/tdc/u1.cc: New.
+	* data/automata/tdc/Makefile.am: New.
+
 2006-07-26  Akim Demaille  <akim@lrde.epita.fr>
 
 	Clean ups.
@@ -441,8 +457,8 @@
 
 	Add sub_normalize_here.
 
-	* include/vaucanson/algorithms/sub_normalize.hh: Add to algorithms
-	 listing in reference documentation..
+	* include/vaucanson/algorithms/sub_normalize.hh: Add two algorithms
+	 list in reference documentation..
 	* include/vaucanson/algorithms/sub_normalize.hxx: Add in-place version
 	of sub_normalize.
 	* taf-kit/src/tdc_commands.cc,

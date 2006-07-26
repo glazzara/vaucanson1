@@ -21,6 +21,12 @@ using namespace vcsn::boolean_automaton;
 
 #include <vaucanson/tools/dumper.hh>
 
+
+   /*----------------------------------------------------------.
+   | This automaton comes from the book ETA (Fig 1.1 p. 58).|
+   `---------------------------------------------------------*/
+
+
 int
 main(int argc, char **argv)
 {

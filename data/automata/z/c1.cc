@@ -21,6 +21,11 @@ using namespace vcsn::z_automaton;
 #include <vaucanson/tools/dumper.hh>
 
 
+   /*------------------------------------------------------------.
+   | This automaton comes from the book ETA (Fig 2.6 p.437 ). |
+   `-----------------------------------------------------------*/
+
+
 int
 main(int argc, char **argv)
 {

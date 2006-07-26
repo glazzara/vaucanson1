@@ -11,4 +11,28 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = b z tdc
+include $(top_srcdir)/src/vaucanson.mk
+
+EXTRA_PROGRAMS = t1 u1
+
+dist_tdc_automata_DATA =			\
+	$(srcdir)/t1.xml			\
+	$(srcdir)/u1.xml
+
+EXTRA_DIST = $(XML_SAMPLES)
+MAINTAINERCLEANFILES = $(dist_tdc_automata_DATA)
+
+t1_SOURCES = t1.cc
+
+$(srcdir)/t1.xml: t1.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) t1$(EXEEXT)
+	./t1$(EXEEXT) >$@.tmp
+	mv $@.tmp $@
+
+
+u1_SOURCES = u1.cc
+
+$(srcdir)/u1.xml: u1.cc $(top_srcdir)/configure.ac
+	$(MAKE) $(AM_MAKEFLAGS) u1$(EXEEXT)
+	./u1$(EXEEXT) >$@.tmp
+	mv $@.tmp $@
