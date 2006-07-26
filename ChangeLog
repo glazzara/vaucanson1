@@ -1,5 +1,9 @@
 2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.
+
+2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* data/automata/tdc/Makefile.in: Remove.  Useless.
 
 2006-07-26  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
