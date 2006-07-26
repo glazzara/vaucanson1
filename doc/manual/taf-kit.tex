@@ -47,6 +47,27 @@ of commands which feed each other.  Therefore, all the functions
 produce a result on the standard output, and if an \var{automaton} is
 \samp{-}, then the standard input is used.
 
+\smallskip
+
+For instance, the following command
+
+\execcaption{a1dmi}{vcsn-b dump-automaton a1 | vcsn-b determinize - | vcsn-b minimize - | vcsn-b info -}
+
+\noindent
+fetches the automaton \code{a1} from the automaton library,
+determinizes it, minimizes the result, and finally displays
+information about the resulting automaton.
+
+Please, not the typographic conventions: user input is represented
+\texttt{\# \kbd{like this}}, standard output follows \texttt{like
+  this}, followed by standard error output \texttt{error: like this},
+and finally, if different from 0, the exit status is represented
+\texttt{=> like this}.  For instance:
+
+\execcaption{bz-mismatch}{vcsn-b dump-automaton a1 | vcsn-z info -}
+
+\smallskip
+
 Other than that, the interface of the \tafkit components is usual,
 including options such as \option{--version} and \option{--help}:
 
@@ -94,8 +115,8 @@ The whole list of supported commands is available via
 \end{figure}
 
 Let's consider the Boolean automaton $\mathcal{A}_1$
-(\autoref{fig:a1}).  It is part of the standard library, and
-can be dumped using \Index{\taffn{dump-automaton}}:
+(\autoref{fig:a1}), part of the standard library.  It can be dumped
+using \Index{\taffn{dump-automaton}}:
 
 \execcaption{a1-dump}{vcsn-b dump-automaton a1}
 
@@ -134,9 +155,11 @@ Or use dotty to visualize it:
 \subsubsection{Minimizing}
 
 The \index{\taffn{minimize}}minimal automaton can be computed the same way:
-\begin{shell}
-# vcsn_b minimize a1_det.xml > a1_min.xml
-\end{shell}
+\execcaption{a1detmin}{vcsn-b minimize a1det.xml >a1detmin.xml}
+\execcaption{a1detmin.dot}{vcsn-b dot-dump a1det.xml >a1detmin.dot}
+\begin{center}
+  \includegenerateddot{a1detmin}
+\end{center}
 
 The commands can be composed with pipes from the shell, using
 \Index{\samp{-}} to denote the standard input.
@@ -334,17 +357,26 @@ view to the other one.
   \end{center}
 \end{figure}
 
-The realtime transducer $\mathcal{T}_1$ (\autoref{fig:t1}) gives the
-quotient by 3 of a binary number and the transducer $\mathcal{T}_2$
-(\autoref{fig:t2}) adds 1 to a binary number.
+The rational-weight transducer
+\index{t1@$\mathcal{T}_1$}$\mathcal{T}_1$ (\autoref{fig:t1}) gives the
+quotient by 3 of a binary number and the transducer
+\index{t2@$\mathcal{T}_2$}$\mathcal{T}_2$ (\autoref{fig:t2}) adds 1 to
+a binary number.
+
+\bigskip
+
+To experiment with transducers, we will use the following standard
+automaton:
+\execcaption{t1.xml}{vcsn-tdc dump-automaton t1 >t1.xml}
+\execcaption{t1.dot}{vcsn-tdc dot-dump t1.xml >t1.dot}
+\begin{center}
+  \includegenerateddot{t1}
+\end{center}
 
 
 \subsubsection{Evaluation}
 
-\begin{shell}
-# vcsn-rw-tdc evaluation quot_3_rw.xml '110'
-\textit{0.1.0}
-\end{shell}
+\execcaption{t1.110}{vcsn-tdc evaluation t1.xml '110'}
 
 \subsubsection{Domain}
 The transducer $T$ only accepts binary number which are divisible by 3

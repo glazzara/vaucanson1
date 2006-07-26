@@ -1,3 +1,14 @@
+2006-07-26  Akim Demaille  <akim@lrde.epita.fr>
+
+	Doc vcsn-tdc.
+
+	* doc/manual/examples: Remove.
+	* doc/manual/examples/add1-rt.xml,
+	* doc/manual/examples/quot-3-rw.xml: Move and rename to...
+	* data/automata/tdc-rw/quot-3-rw.xml,
+	* data/automata/tdc-rw/add1-rw.xml: here.
+	* doc/manual/taf-kit.tex: More documentation.
+
 2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* taf-kit/src/tdc_commands.cc: Name `eval' instead of `evaluation'.
