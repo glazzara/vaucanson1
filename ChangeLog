@@ -1,3 +1,7 @@
+2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* doc/manual/developer.tex: Add a comment on CPP use.
+
 2006-07-26  Akim Demaille  <akim@lrde.epita.fr>
 
 	Doc vcsn-tdc.

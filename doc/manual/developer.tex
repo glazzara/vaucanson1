@@ -147,6 +147,15 @@ but please, respect the following conventions.
   in the first column, but indent the spaces (one per indentation)
   between it and the directive.  The above code snippet was included
   in an outer \code{\#if}.
+\item Each header file (\file{.hh}, \file{.hxx}, \ldots) should start
+  with a classic \ac{cpp} guard of the form
+  \begin{lstlisting}
+#ifndef FILE_HH
+# define FILE_HH
+  ...
+#endif // !FILE_HH
+  \end{lstlisting}
+  GCC has some optimizations on file parsing when this scheme is seen.
 \item We often rely on \texttt{grep} and tags to search things. Please
   don't clutter names with \ac{cpp} evilness.
 \end{itemize}
