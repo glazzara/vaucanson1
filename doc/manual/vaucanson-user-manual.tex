@@ -7,17 +7,22 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{myhyperref}
-\usepackage{xspace}
 \usepackage{textcomp}
 \usepackage{tabularx}
-\usepackage{alltt}
 \usepackage{url}
 \usepackage{vaucanson-g}
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{texi}
 \usepackage{misc}
+
+% The same argument is output and put in the index.
 \usepackage{makeidx}
+\makeindex
+\newcommand{\Index}[1]{\index{#1}#1}
+
+% Bibliography.
+\usepackage{natbib}
 
 \usepackage{mylistings}
 \lstset{%
@@ -39,59 +44,75 @@
   \setboolean{developer}{true}
 \fi
 
-% The same argument is output and put in the index.
-\newcommand{\Index}[1]{\index{#1}#1}
-
+% Document a figure.
 \newenvironment{legend}{%
   \begin{quote}%
     }{%
   \end{quote}%
 }
 
-\newenvironment{cmp}{%
-  \begin{center}
-    \begin{minipage}{\textwidth}%
-    }{%
-    \end{minipage}
-  \end{center}%
-}
-
-\newcommand{\textrp}[1]{\textit{#1}}
-
-\newcommand{\inputcode}[4][]{%
-  \begin{figure}[htbp]
-    \centering
-    \begin{minipage}{0.9\textwidth}
-      \lstinputlisting[language=C++, #1]{#2}
-    \end{minipage}
-    \caption{#3}
-    \label{fig:#4}
-  \end{figure}}
-
-\usepackage{graphicx}
-\graphicspath{{figures/}}
-
 %% Display an interactive session.
+\usepackage{alltt}
 \newenvironment{shell}
 {\begin{alltt}}
 {\end{alltt}}
 
+%% -------------------- %%
+%% Vaucanson commands.  %%
+%% -------------------- %%
+
 %% A TAF-kit function name (i.e., the first argument for TAF-Kit
 %% programs).
 \newcommand{\taffn}[1]{\code{#1}}
-
 \newcommand{\tafkit}{\textsc{TAF-Kit}\xspace}
 \newcommand{\Vauc}{\textsc{Vaucanson}\xspace}
 
+% \begin{fnsection}{NAME}
+% -----------------------
+% A group of taf-kit functions.
+% Putting the ending hline in the end section is tempting, but fails.
+\newenvironment{fnsection}[1]{%
+  % \item{NAME}{ARGS}{DOC}
+  % ----------------------
+  % Define a taf-kit function.
+  % We use \item because it has Emacs indentation support.
+  \renewcommand{\item}[3]{\texttt{##1} \var{##2} & ##3\\}
+
+  \tabularx{\textwidth}{|l|X|}%
+    \hline\multicolumn{2}{|c|}{#1} \\\hline%
+  }{%
+  \endtabularx%
+}
+
+
+%% --------------------------------- %%
+%% Automatic generation of content.  %%
+%% --------------------------------- %%
+
+% These two commands are recognized by extex which will extract the
+% code to run to produce the generated files.  LaTeX will later
+% include them.
+%
+% If you know a simpler means to do that, be my guest...
+%
+% Note that this system "caches" the result, and uses a Makefile to
+% avoid useless recompilation of snippets that did not change.
+\newcommand{\includegenerateddot}[1]{\includegraphics[scale=.6]{#1}}
+\newcommand{\execcaption}[2]{\input{#1}}
+
+
+
 \title{\Vauc User's manual}
 \author{The \Vauc group}
-\setcounter{tocdepth}{2}
 
-\makeindex
-
+%% ---------- %%
+%% Document.  %%
+%% ---------- %%
 \begin{document}
 
 \maketitle
+
+\setcounter{tocdepth}{2}
 \tableofcontents
 
 \input{installation}
@@ -102,6 +123,9 @@
 \appendix
 
 \printindex
+
+\bibliographystyle{apalike}
+\bibliography{vaucanson.bib}
 
 \end{document}
 

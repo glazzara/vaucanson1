@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/src/vaucanson.mk
+include $(top_srcdir)/vaucanson.mk
 
 AM_CPPFLAGS += $(CXXFLAGS_STRICT)
 AM_CXXFLAGS += -DINTERNAL_CHECKS -DSTRICT

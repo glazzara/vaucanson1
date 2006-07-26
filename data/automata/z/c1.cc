@@ -20,7 +20,7 @@ using namespace vcsn;
 using namespace vcsn::z_automaton;
 #include <vaucanson/tools/dumper.hh>
 
-
+// This guy comes from ETA p. 435, example 2.5.
    /*------------------------------------------------------------.
    | This automaton comes from the book ETA (Fig 2.6 p.437 ). |
    `-----------------------------------------------------------*/

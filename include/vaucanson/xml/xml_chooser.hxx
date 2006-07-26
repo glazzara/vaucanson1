@@ -144,13 +144,13 @@ namespace vcsn
     | FMP Transducers |
     `----------------*/
 
-    TParmFMP
+    template <class S, class T, class M1, class M2>
     const char*
     xml_chooser<FMPtype>::choose_start_tag()
     { return "transducer"; }
 
 
-    TParmFMP
+    template <class S, class T, class M1, class M2>
     void
     xml_chooser<FMPtype>
     ::create_type_tag(const Element<FMPtype>& aut,
@@ -184,9 +184,5 @@ namespace vcsn
   } // !xml
 
 } // !vcsn
-
-
-# undef TParmFMP
-# undef FMPtype
 
 #endif // ! VCSN_XML_XML_CHOOSER_HXX

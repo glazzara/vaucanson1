@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/src/vaucanson.mk
+include $(top_srcdir)/vaucanson.mk
 
 SUBDIRS = one_rule_rewriting
 

@@ -11,11 +11,10 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-
-include $(top_srcdir)/src/vaucanson.mk
+include $(top_srcdir)/vaucanson.mk
 AM_CPPFLAGS += $(XSD_CPPFLAGS)
 
-TESTS_ENVIRONMENT= SRCDIR=$(srcdir)
+TESTS_ENVIRONMENT = SRCDIR=$(srcdir)
 
 b_tester_SOURCES = xml_automaton_tester.cc
 b_tester_CPPFLAGS = $(AM_CPPFLAGS)				\

@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/src/vaucanson.mk
+include $(top_srcdir)/vaucanson.mk
 
 EXTRA_PROGRAMS = a1 b1 divkbaseb ladybird double_ring
 
@@ -32,6 +32,7 @@ $(srcdir)/a1.xml: a1.cc $(top_srcdir)/configure.ac
 	./a1$(EXEEXT) xml >$@.tmp
 	mv $@.tmp $@
 
+# Accepts words with a `b'.
 b1_SOURCES = b1.cc
 $(srcdir)/b1.xml: b1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) b1$(EXEEXT)

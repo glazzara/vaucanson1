@@ -1,3 +1,33 @@
+2006-07-26  Akim Demaille  <akim@epita.fr>
+
+	* data/automata/b/Makefile.am: Document b1.
+
+	* data/automata/z/b1.xml: New
+	* data/automata/z/Makefile.am: Adjust.
+	* data/automata/z/c1.cc: Comment.
+	* doc/manual/examples/b1.xml: Remove.
+	* doc/manual/examples/add1_rt.xml,
+	* doc/manual/examples/quot_3_rt.xml: Rename as...
+	* doc/manual/examples/add1-rw.xml,
+	* doc/manual/examples/quot-3-rw.xml: these.
+
+	* doc/manual/extex.pl: Recognize `power' arguments.
+	* doc/manual/taf-kit.tex: Move macros...
+	* doc/manual/vaucanson-user-manual.tex: here.
+	* doc/manual/taf-kit.tex: More automatic generation.
+	Map _ to -.
+	Map rt to rw.
+
+	* include/vaucanson/xml/xml_chooser.hxx (TParmFMP): No longer use it.
+
+	* data/automata/tdc/Makefile.am,
+	* taf-kit/src/Makefile.am,
+	* src/demos/demo.mk,
+	* src/demos/function_library/Makefile.am,
+	* src/demos/transducers/Makefile.am,
+	* src/demos/vgrep/Makefile.am,
+	* src/tests/xml/Makefile.am: Adjust to the location of vaucanson.mk.
+
 2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.
@@ -11,7 +41,7 @@
 	Automata library for vcsn-tdc.
 
 	* data/automata/b/a1.cc,
-	* data/automata/z/c1.cc: Describe from which article or book these 
+	* data/automata/z/c1.cc: Describe from which article or book these
 	automata come from.
 	* data/automata/Makefile.am: Add tdc to SUBDIRS.
 	* data/automata/tdc: New.

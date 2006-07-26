@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/src/vaucanson.mk
+include $(top_srcdir)/vaucanson.mk
 
 EXTRA_PROGRAMS = t1 u1
 

@@ -2,7 +2,7 @@
 #
 # $Id$
 
-include $(top_srcdir)/src/vaucanson.mk
+include $(top_srcdir)/vaucanson.mk
 
 AM_CXXFLAGS += -DINTERNAL_CHECKS -DSTRICT
 

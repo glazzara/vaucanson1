@@ -11,15 +11,21 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/src/vaucanson.mk
+include $(top_srcdir)/vaucanson.mk
 
 # Z automata.
 EXTRA_PROGRAMS = c1
 
-dist_z_automata_DATA =                         \
+dist_z_automata_DATA =                          \
+  $(srcdir)/b1.xml				\
   $(srcdir)/c1.xml
 
 MAINTAINERCLEANFILES = $(dist_z_automata_DATA)
+
+# This automaton counts the number of bs.
+$(srcdir)/b1.xml: $(top_srcdir)/data/automata/b/b1.xml
+	sed -e 's/set="B"/set="Z"/g' $< >$@.tmp
+	mv $@.tmp $@
 
 c1_SOURCES = c1.cc
 $(srcdir)/c1.xml: c1.cc $(top_srcdir)/configure.ac
