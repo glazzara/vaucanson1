@@ -11,4 +11,4 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = b z tdc
+SUBDIRS = b z tdc tdc-rw

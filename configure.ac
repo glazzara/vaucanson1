@@ -248,24 +248,26 @@ AC_CONFIG_FILES([
 	Makefile
 	build-aux/Makefile
 	data/Makefile
-	data/automata/Makefile
-	data/automata/b/Makefile
-	data/automata/z/Makefile
+	  data/automata/Makefile
+	    data/automata/b/Makefile
+	    data/automata/tdc/Makefile
+	    data/automata/tdc-rw/Makefile
+	    data/automata/z/Makefile
 	src/Makefile
-	src/demos/Makefile
-	src/demos/vgrep/Makefile
-	src/demos/function_library/Makefile
-	src/demos/algorithms/Makefile
-	src/demos/transducers/Makefile
-	src/demos/transducers/one_rule_rewriting/Makefile
-	src/benchs/Makefile
-	src/benchs/common/Makefile
-	src/benchs/determinization/Makefile
-	src/benchs/minimization_debruijn/Makefile
-	src/benchs/minimization_2n/Makefile
-	src/benchs/quotient/Makefile
-	src/benchs/composition/Makefile
-	src/benchs/derived_terms/Makefile
+	  src/demos/Makefile
+	    src/demos/vgrep/Makefile
+	    src/demos/function_library/Makefile
+	    src/demos/algorithms/Makefile
+	    src/demos/transducers/Makefile
+	    src/demos/transducers/one_rule_rewriting/Makefile
+	  src/benchs/Makefile
+	    src/benchs/common/Makefile
+	    src/benchs/determinization/Makefile
+	    src/benchs/minimization_debruijn/Makefile
+	    src/benchs/minimization_2n/Makefile
+	    src/benchs/quotient/Makefile
+	    src/benchs/composition/Makefile
+	    src/benchs/derived_terms/Makefile
 	include/Makefile
         debian/Makefile])
 

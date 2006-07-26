@@ -27,6 +27,8 @@ XSD_CPPFLAGS = -DVCSN_DATA_PATH="\"$(top_srcdir)/data\""
 automatadir = $(pkgdatadir)/automata
 b_automatadir = $(automatadir)/b
 z_automatadir = $(automatadir)/z
+tdc_automatadir = $(automatadir)/tdc
+tdc_rw_automatadir = $(automatadir)/tdc-rw
 
 ## Where documentation is uploaded on EPITA servers.
 dloaddir = /mnt/dload

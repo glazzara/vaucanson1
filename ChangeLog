@@ -1,3 +1,13 @@
+2006-07-26  Akim Demaille  <akim@epita.fr>
+
+	* configure.ac: Don't forget automata/tdc.  While we're at
+	it, let deal with automata/tdc-rw.
+	* vaucanson.mk (tdc_automatadir, tdc_rw_automatadir): New.
+	* data/automata/tdc-rw/Makefile.am: New.
+
+	* doc/manual/taf-kit.tex: More about vcsn-tdc, but it fails to
+	evaluate...
+
 2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* doc/manual/developer.tex: Add a comment on CPP use.
