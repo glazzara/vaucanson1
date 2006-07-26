@@ -111,19 +111,6 @@ namespace vcsn
     | Automata |
     `---------*/
 
-    // Useful abbreviation to circumvent the impossibility to define
-    // parametric typedefs.
-# define AUTtype				\
-    Element<Automata<S>, T>
-# define TRANStype				\
-    Element<Transducer<S>, T>
-# define FMPtype      							  \
-    Element<								  \
-      Automata<								  \
-      vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
-      >, T								  \
-    >
-
       inline
       void
       set_attribute (xercesc::DOMElement* e, std::string k, std::string v)
@@ -177,6 +164,12 @@ namespace vcsn
       | FMP Transducers |
       `----------------*/
 
+# define FMPtype      							  \
+    Element<								  \
+      Automata<								  \
+      vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
+      >, T								  \
+    >
       // Add the label as a string attribute
       template <class S, class T, class U, class M1, class M2>
       void add_label(xercesc::DOMElement* elt,
@@ -388,7 +381,8 @@ namespace vcsn
 		      xercesc::DOMElement* elt)
       {
 	typedef typename
-	  Element<Transducer<S>, T>::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t value_t;
+	  Element<Transducer<S>, T>::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t
+	  value_t;
 
 	xercesc::DOMElement* s = doc->createElement(transcode("semiring"));
 	set_attribute(s, "operations", "numerical");
@@ -404,7 +398,7 @@ namespace vcsn
       get_rec_xml_series(xercesc::DOMNode* n, T& aut)
       {
 	typedef	 rat::exp<typename T::monoid_elt_value_t,
-	  typename T::semiring_elt_value_t> krat_exp_impl_t;
+ 	                  typename T::semiring_elt_value_t> krat_exp_impl_t;
 	typedef Element<typename T::series_set_t, krat_exp_impl_t> krat_exp_t;
 	krat_exp_t krat_exp (aut.structure().series());
 	typename T::semiring_elt_value_t weight =
@@ -542,6 +536,9 @@ namespace vcsn
 	return res;
       }
 
+
+# define TRANStype				\
+    Element<Transducer<S>, T>
 
       template <class S, class T>
       typename TRANStype::series_set_elt_t
@@ -788,15 +785,18 @@ namespace vcsn
       template <class U>
       void ensure_monoid_type(const xercesc::DOMElement* node, const U& param)
       {
-	std::string monoid_type = tools::get_monoid_type(param);
-	std::string monoid_type_ref;
+	std::string monoid_type_ref = tools::get_monoid_type(param);
+	std::string monoid_type;
 
 	if (! node || ! node->hasAttribute(transcode("type")))
-	  monoid_type_ref = "free";
+	  monoid_type = "free";
 	else
-	  monoid_type_ref = xml2str(node->getAttribute(transcode("type")));
-	if (monoid_type_ref != monoid_type)
-	  FAIL("Bad monoid type");
+	  monoid_type = xml2str(node->getAttribute(transcode("type")));
+	if (monoid_type != monoid_type_ref)
+	  FAIL(std::string ("Bad monoid type: ")
+	       + monoid_type
+	       + ", expected: "
+	       + monoid_type_ref);
       }
 
 
@@ -804,15 +804,18 @@ namespace vcsn
       void ensure_monoid_type(const xercesc::DOMElement* node,
 			      const FMPtype& param)
       {
-	std::string monoid_type = tools::get_monoid_type(param);
-	std::string monoid_type_ref;
+	std::string monoid_type_ref = tools::get_monoid_type(param);
+	std::string monoid_type;
 
 	if (! node || ! node->hasAttribute(transcode("type")))
-	  monoid_type_ref = "product";
+	  monoid_type = "product";
 	else
-	  monoid_type_ref = xml2str(node->getAttribute(transcode("type")));
-	if (monoid_type_ref != monoid_type)
-	  FAIL("Bad monoid type");
+	  monoid_type = xml2str(node->getAttribute(transcode("type")));
+	if (monoid_type != monoid_type_ref)
+	  FAIL(std::string ("Bad monoid type: ")
+	       + monoid_type
+	       + ", expected: "
+	       + monoid_type_ref);
       }
 
 
@@ -896,7 +899,6 @@ namespace vcsn
 } // ! vcsn
 
 
-# undef AUTtype
 # undef TRANStype
 # undef FMPtype
 

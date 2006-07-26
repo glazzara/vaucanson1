@@ -1,3 +1,28 @@
+2006-07-26  Akim Demaille  <akim@lrde.epita.fr>
+
+	Clean ups.
+
+	* include/vaucanson/algebra/concept/series_base.hxx: Wrapping.
+
+	* include/vaucanson/xml/xml_chooser.hh (TParmFMP): Remove.
+	(FMPtype): Put the #undef where the #define was.
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/tools.hxx (TRANStype, FMPtype):
+	Spread their definitions appropriately to enforce locality.
+	(AUTtype): Remove, unused.
+	(ensure_monoid_type): Produce a useful error message.
+	Rename variables to make more sense.
+
+	* taf-kit/src/common_automaton_commands.hh (eval): Don't forget the \n.
+
+	* src/vaucanson.mk: Move to...
+	* vaucanson.mk: here.
+	(dloaddir, vcsndldir): New.
+	* Makefile,am, doc/Makefile.am, doc/manual/Makefile.am (install-epita):
+	New.
+	* doc/manual/examples/a1.xml: Remove.
+	* doc/manual/taf-kit.tex: Add a noindent.
+
 2006-07-26  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/xml/xerces_parser.hxx: Fix typo.

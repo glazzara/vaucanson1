@@ -124,14 +124,12 @@ namespace vcsn
      * @arg \c M2	Automaton second monoid type.
      *
      */
-# define TParmFMP					\
-    template <class S, class T, class M1, class M2>
 # define FMPtype							\
     Automata<								\
       vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
       >, T
 
-    TParmFMP
+    template <class S, class T, class M1, class M2>
     struct xml_chooser<FMPtype> : xml_chooser_base<FMPtype>
     {
 	const char* choose_start_tag();
@@ -144,11 +142,10 @@ namespace vcsn
 
 } // !vcsn
 
-
-
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/xml/xml_chooser.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
+# undef FMPtype
 
 #endif // ! VCSN_XML_XML_CHOOSER_HH && VCSN_INCLUDE_XML()

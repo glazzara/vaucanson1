@@ -11,6 +11,8 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+include $(top_srcdir)/vaucanson.mk
+
 SUBDIRS = argp include src data taf-kit doc build-aux debian
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
 
@@ -135,3 +137,16 @@ distcheck: dist
 	@(echo "$(distdir) archives ready for distribution: "; \
 	  list='$(DIST_ARCHIVES)'; for i in $$list; do echo $$i; done) | \
 	  sed -e '1{h;s/./=/g;p;x;}' -e '$${p;x;}'
+
+
+## ---------------------------- ##
+## Installing on LRDE servers.  ##
+## ---------------------------- ##
+
+install-epita:
+# If the dload directory does not exist, bail out.
+	if test ! -d $(dloaddir); then			\
+	  echo >&2 "no such directory: $(dloaddir)";	\
+	fi
+	cd doc && $(MAKE) $(AM_MAKEFLAGS) install-epita
+.PHONY: install-epita

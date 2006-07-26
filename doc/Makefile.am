@@ -12,9 +12,10 @@
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 # VCSN_USE_XML is tested in the `xml' subdirectory.
+include $(top_srcdir)/vaucanson.mk
+include $(srcdir)/doc.mk
 
 SUBDIRS = makefiles manual xml
-include $(srcdir)/doc.mk
 
 dist_doc_DATA = ref.tar.gz
 
@@ -37,3 +38,17 @@ EXTRA_DIST = README.tex FAQ.tex NEWS.tex \
 MAINTAINERCLEANFILES = $(dist_doc_DATA) $(dist_pdf_DATA)
 maintainer-clean-local:
 	rm -rf ref
+
+## ---------------------------- ##
+## Installing on LRDE servers.  ##
+## ---------------------------- ##
+vcsndldir_data = ref $(dist_pdf_DATA)
+
+install-epita: ref $(dist_pdf_DATA)
+	$(mkdir_p) $(vcsndldir)
+	$(INSTALL_DATA) $(dist_pdf_DATA) $(vcsndldir)
+	cp -r ref $(vcsndldir)
+	cd $(dloaddir)/vaucanson
+	ln -sf latest-beta $(VERSION)
+	cd manual && $(MAKE) $(AM_MAKEFLAGS) install-epita
+.PHONY: install-epita

@@ -11,6 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+include $(top_srcdir)/vaucanson.mk
 include $(top_srcdir)/doc/doc.mk
 
 # We ship and compiler vaucanson-user-manual.pdf, but
@@ -47,3 +48,16 @@ manual.ext: $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
           $(vaucanson_user_manual_sources)
 	$(MAKE) -C $@ dvi
 	touch $@
+
+
+## ---------------------------- ##
+## Installing on LRDE servers.  ##
+## ---------------------------- ##
+
+vcsndldir_data =				\
+$(dist_pdf_DATA)				\
+$(srcdir)/vaucanson-developer-manual.pdf
+
+install-epita: $(vcsndldir_data)
+	$(INSTALL_DATA) $(vcsndldir_data) $(vcsndldir)
+.PHONY: install-epita

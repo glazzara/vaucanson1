@@ -23,7 +23,11 @@ AM_CXXFLAGS = $(CXXFLAGS_STRICT)
 # Add this to CPPFLAGS to use the shipped data.
 XSD_CPPFLAGS = -DVCSN_DATA_PATH="\"$(top_srcdir)/data\""
 
-## The directory where we store automata.
+## Where we store automata.
 automatadir = $(pkgdatadir)/automata
 b_automatadir = $(automatadir)/b
 z_automatadir = $(automatadir)/z
+
+## Where documentation is uploaded on EPITA servers.
+dloaddir = /mnt/dload
+vcsndldir = $(dloaddir)/vaucanson/$(VERSION)

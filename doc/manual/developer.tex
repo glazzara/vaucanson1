@@ -10,6 +10,7 @@ code in \Vauc.
 
 \subsection{Directory usage}
 
+\index{directories}
 The \Vauc package is organized as follows:
 
 \newcommand{\dir}[2]{\path{#1} & #2\\}
@@ -76,9 +77,10 @@ Until this is written, please refer to
 \href{http://www.lrde.epita.fr/~akim/compil/assignments.split/Coding-Style.html#Coding-Style}{Tiger's
   Coding Style}.
 
-Emacs users should use the indentation style of ``data/vaucanson.el''.
+Emacs users should use the indentation style of \file{data/vaucanson.el}.
 
 \subsubsection{Includes}
+\index{\#include}
 
 Please, never use backward relative paths anywhere.  There are very
 difficult to follow (because several such strings can designate the
@@ -112,6 +114,7 @@ latter since \file{\$(top\_srcdir)/src/tests/include} has all its
 content in \file{vaucanson}).
 
 \subsection{Use of macros}
+\index{\command{cpp}}
 
 \ac{cpp} is evil, but code duplication is even worse.  Macros can be
 useful, as in the following example:
@@ -138,6 +141,8 @@ but please, respect the following conventions.
   as \code{for\_all\_transitions} and so forth.
 \item Make them live short lives, as above: undefine them as soon as
   they are no longer needed.
+\item Respect the nesting structure: if \file{foo.hh} defines a macro,
+  undefine it there too, not in the included \file{foo.hxx}.
 \item Indent \ac{cpp} directives.  The initial dash should always be
   in the first column, but indent the spaces (one per indentation)
   between it and the directive.  The above code snippet was included

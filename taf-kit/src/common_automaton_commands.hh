@@ -91,7 +91,7 @@ DEFINE_COMMAND (NAME (eval)
 		CODE (/* Empty */)
 		OUTPUT (
 		  eval (realtime (get_aut (args.args[1])),
-			std::string (args.args[2])))
+			std::string (args.args[2])) << std::endl)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (power)

@@ -104,11 +104,11 @@ namespace vcsn
       template <class OStream>
       void print_document(xercesc::DOMElement*, OStream&);
 
-    } // ! tools
+    } // tools
 
-  } // ! xml
+  } // xml
 
-} // ! vcsn
+} // vcsn
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/xml/tools.hxx>
