@@ -34,11 +34,7 @@ awk '/xml/ { gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' files.tmp | \
   sed '$s/\(.*\) \\/\1/' >> Makefile.am
 
 cat >> Makefile.am <<EOF
-if XML_CHECK
-  check_PROGRAMS += \$(ProgsXml)
-else
-  EXTRA_PROGRAMS = \$(ProgsXml)
-endif
+check_PROGRAMS += \$(ProgsXml)
 EOF
 
 echo >> Makefile.am
@@ -48,14 +44,11 @@ awk '/xml/ { next }; { gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' \
   files.tmp | sed '$s/\(.*\) \\/\1/' >> Makefile.am
 
 cat >> Makefile.am <<EOF
-if XML_CHECK
 TESTS+= \\
 EOF
 
 awk '/xml/ { gsub(/[.\/]/, "_"); print "\t"$0"-test \\" }' files.tmp | \
   sed '$s/\(.*\) \\/\1/' >> Makefile.am
-
-echo "endif" >> Makefile.am
 
 # Set test sources and CPPFLAGS.
 awk '

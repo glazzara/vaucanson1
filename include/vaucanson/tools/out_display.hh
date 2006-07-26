@@ -20,8 +20,7 @@
 /**
  * @file out_display.hh
  *
- * Out display method, useful for xml_display (if VCSN_USE_XML)
- * and dot_display.
+ * Out display method, useful for xml_display and dot_display.
  *
  * @author Florent Terrones <florent.terrones@lrde.epita.fr>
  */

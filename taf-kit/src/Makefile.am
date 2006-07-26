@@ -12,8 +12,7 @@
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 include $(top_srcdir)/vaucanson.mk
-# VCSN_USE_XML doesn't need to be checked as VCSN_TAF_KIT
-# is not enabled if the former isn't.
+
 AM_CPPFLAGS += $(CXXFLAGS_OPTIMIZE)
 AM_LDFLAGS = $(TERMLIBS)
 

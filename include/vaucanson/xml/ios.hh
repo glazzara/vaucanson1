@@ -15,14 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#include <vaucanson/config/system.hh>
-
-#if not defined (VCSN_XML_IOS_HH) and VCSN_INCLUDE_XML()
+#ifndef VCSN_XML_IOS_HH
 # define VCSN_XML_IOS_HH
-
-# ifndef VCSN_USE_XML
-#  error Vaucanson XML support is disabled.
-# endif
 
 # include <xercesc/util/BinInputStream.hpp>
 # include <xercesc/sax/InputSource.hpp>
@@ -59,4 +53,4 @@ namespace vcsn
 
 # include <vaucanson/xml/ios.hxx>
 
-#endif // ! VCSN_XML_IOS_HH && VCSN_INCLUDE_XML()
+#endif // ! VCSN_XML_IOS_HH

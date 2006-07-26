@@ -405,8 +405,6 @@ vaucanson/z_automaton.hh				\
 vaucanson/r_automaton.hh				\
 vaucanson/standard_algorithms.hh
 
-# XMLSOURCES can be included even if VCSN_USE_XML is not set.
-
 nobase_include_HEADERS += $(XMLSOURCES)
 
 

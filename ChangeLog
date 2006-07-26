@@ -1,3 +1,49 @@
+2006-07-26  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Force the use of XML in Vaucanson.
+
+	* build-aux/vcsn-xml.m4: Don't offer the possibility not to use XML.
+
+	* include/Makefile.am,
+	* include/vaucanson/misc/usual_macros.hh,
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx,
+	* include/vaucanson/tools/xml_dump.hh,
+	* include/vaucanson/tools/out_display.hh,
+	* include/vaucanson/tools/dumper.hxx,
+	* include/vaucanson/tools/xml_display.hh,
+	* include/vaucanson/tools/dumper.hh,
+	* include/vaucanson/tools/xml_load.hh,
+	* include/vaucanson/xml/xml_chooser.hh,
+	* include/vaucanson/xml/session.hh,
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/error_handler.hh,
+	* include/vaucanson/xml/xml_converter.hh,
+	* include/vaucanson/xml/strings.hh,
+	* include/vaucanson/xml/ios.hh,
+	* include/vaucanson/xml/tools.hh,
+	* include/vaucanson/xml/XML.hh,
+	* include/vaucanson/xml/xerces_parser.hh,
+	* include/vaucanson/config/system.hh,
+	* include/vaucanson/config/pconf.hh.in,
+	* include/vaucanson/design_pattern/factory.hh,
+	* src/tests/xml/Makefile.am,
+	* src/tests/sanity/generate_files.sh,
+	* src/tests/Makefile.am,
+	* src/demos/function_library/Makefile.am,
+	* src/demos/demo.mk,
+	* src/demos/transducers/one_rule_rewriting/Makefile.am,
+	* src/demos/transducers/Makefile.am,
+	* build-aux/vcsn-taf-kit.m4,
+	* taf-kit/src/Makefile.am,
+	* doc/xml/Makefile.am,
+	* doc/Makefile.am: Remove every check on XML.
+
+	* build-aux/check_xml.sh: Remove.
+	* bootstrap.sh,
+	* build-aux/Makefile.am: Update accordingly.
+
 2006-07-26  Akim Demaille  <akim@epita.fr>
 
 	* configure.ac: Don't forget automata/tdc.  While we're at

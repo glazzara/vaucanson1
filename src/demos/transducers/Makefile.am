@@ -19,11 +19,7 @@ AM_CPPFLAGS += $(XSD_CPPFLAGS)
 
 EXTRA_PROGRAMS = u1 t1
 
-if VCSN_USE_XML
 demos: $(EXTRA_PROGRAMS)
-else
-demos:
-endif
 
 XML_SAMPLES = $(srcdir)/u1.xml $(srcdir)/t1.xml
 EXTRA_DIST = $(XML_SAMPLES)

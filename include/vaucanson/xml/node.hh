@@ -15,14 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#include <vaucanson/config/system.hh>
-
-#if not defined (VCSN_XML_NODE_HH) and VCSN_INCLUDE_XML()
+#ifndef VCSN_XML_NODE_HH
 # define VCSN_XML_NODE_HH
-
-# ifndef VCSN_USE_XML
-#  error Vaucanson XML support is disabled.
-# endif
 
 /**
  * @file node.hh
@@ -204,4 +198,4 @@ namespace vcsn
 #  include <vaucanson/xml/node.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_XML_NODE_HH && VCSN_INCLUDE_XML()
+#endif // ! VCSN_XML_NODE_HH

@@ -14,14 +14,9 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#include <vaucanson/config/system.hh>
 
-#if not defined (VCSN_XML_ERROR_HANDLER_HH) and VCSN_INCLUDE_XML()
+#ifndef VCSN_XML_ERROR_HANDLER_HH
 # define VCSN_XML_ERROR_HANDLER_HH
-
-# ifndef VCSN_USE_XML
-#  error Vaucanson XML support is disabled.
-# endif
 
 # include <xercesc/util/PlatformUtils.hpp>
 # include <xercesc/dom/DOM.hpp>
@@ -51,4 +46,4 @@ namespace vcsn
 #  include <vaucanson/xml/error_handler.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // ! VCSN_XML_ERROR_HANDLER_HH && VCSN_INCLUDE_XML()
+#endif // ! VCSN_XML_ERROR_HANDLER_HH

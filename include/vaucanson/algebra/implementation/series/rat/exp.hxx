@@ -128,7 +128,6 @@ namespace vcsn {
       return v.get();
     }
 
-# if VCSN_INCLUDE_XML()
     template<typename LetterT, typename WeightT>
     xercesc::DOMElement* exp<LetterT, WeightT>::xml_tree(
       xercesc::DOMDocument* doc, char* node_name) const
@@ -137,7 +136,6 @@ namespace vcsn {
       accept(v);
       return v.get();
     }
-# endif
 
     template<typename LetterT, typename WeightT>
     typename exp<LetterT, WeightT>::node_t* &

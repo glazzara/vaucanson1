@@ -15,14 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#include <vaucanson/config/system.hh>
-
-#if not defined (VCSN_XML_XML_CHOOSER_HH) and VCSN_INCLUDE_XML()
+#ifndef VCSN_XML_XML_CHOOSER_HH
 # define VCSN_XML_XML_CHOOSER_HH
-
-# ifndef VCSN_USE_XML
-#  error Vaucanson XML support is disabled.
-# endif
 
 /**
  * @file xml_chooser.hh
@@ -148,4 +142,4 @@ namespace vcsn
 
 # undef FMPtype
 
-#endif // ! VCSN_XML_XML_CHOOSER_HH && VCSN_INCLUDE_XML()
+#endif // ! VCSN_XML_XML_CHOOSER_HH

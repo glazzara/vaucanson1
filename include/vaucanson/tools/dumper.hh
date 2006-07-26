@@ -31,10 +31,11 @@
  * @author Raphaël Poss <Raphael.Poss@lrde.epita.fr>
  */
 
-#if not defined (VCSN_TOOLS_DUMPER_HH) and not defined (VCSN_SANITY_CHECK)
+#ifndef VCSN_TOOLS_DUMPER_HH
 # define VCSN_TOOLS_DUMPER_HH
+# ifndef  VCSN_SANITY_CHECK
 
-# include <string>
+#  include <string>
 
 namespace vcsn
 {
@@ -76,8 +77,8 @@ namespace vcsn
   }
 }
 
-# ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/tools/dumper.hxx>
-# endif // ! VCSN_USE_INTERFACE_ONLY
-
+#  ifndef VCSN_USE_INTERFACE_ONLY
+#   include <vaucanson/tools/dumper.hxx>
+#  endif // ! VCSN_USE_INTERFACE_ONLY
+# endif // ! VCSN_SANITY_CHECK
 #endif // ! VCSN_TOOLS_DUMPER_HH && ! VCSN_SANITY_CHECK

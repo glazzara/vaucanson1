@@ -44,8 +44,6 @@ do
   fi
 done
 
-run .                     build-aux/check_xml.sh
-
 run src/tests/test-suites ./generate-all.sh
 run src/tests/sanity      ./generate_files.sh .
 run src/vaucanswig        ./expand.sh .

@@ -65,12 +65,8 @@ Progs =	b_tester				\
 check_SCRIPTS = 				\
 	tester.sh
 
-if XML_CHECK
-  TESTS = $(check_SCRIPTS)
-  check_PROGRAMS = $(Progs)
-else
-  EXTRA_PROGRAMS = $(Progs)
-endif
+TESTS = $(check_SCRIPTS)
+check_PROGRAMS = $(Progs)
 
 CLEANFILES = 					\
 	b_result.tmp				\

@@ -96,33 +96,11 @@ int main() {
 # Xerces C++
 AC_DEFUN([VCSN_XML],
 [dnl
-  AC_ARG_ENABLE([xml],
-                [AC_HELP_STRING([--disable-xml],
-                  [disable XML support in Vaucanson (needs Xerces-C++ >= 2.3)])],
-                [enable_vcsn_xml=$enableval],
-                [enable_vcsn_xml=yes])
-
   AC_CACHE_CHECK([for Xerces-C++ in user-specified directory],
                  [with_xerces],
                  [AC_ARG_WITH([xerces],
                               [AC_HELP_STRING([--with-xerces=DIR],
   		                         [base directory where Xerces-C++ is installed])])])
 
-  AC_ARG_ENABLE([xml-tests],
-                [AC_HELP_STRING([--disable-xml-tests],
-		   [disable tests of XML features])],
-                [],
-                [enable_xml_tests=yes])
-
-  if test x$enable_vcsn_xml = xyes; then
-     _VCSN_CHECK_XML
-  else
-     enable_xml_tests=no
-  fi
-  if test x$enable_vcsn_xml = xyes; then
-    AC_DEFINE([VCSN_USE_XML], 1, [Define to 1 if you want to use XML I/O.])
-  fi
-  AM_CONDITIONAL([VCSN_USE_XML], [test x$enable_vcsn_xml = xyes])
-
-  AM_CONDITIONAL([XML_CHECK], [test x$enable_xml_tests = xyes])
+  _VCSN_CHECK_XML
 ])

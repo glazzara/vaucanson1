@@ -23,11 +23,7 @@ EXTRA_PROGRAMS = 				\
 	tdc					\
 	rt_tdc
 
-if VCSN_USE_XML
 demos: $(EXTRA_PROGRAMS)
-else
-demos:
-endif
 
 r_SOURCES = algorithms.cc
 r_CPPFLAGS = $(AM_CPPFLAGS)				\

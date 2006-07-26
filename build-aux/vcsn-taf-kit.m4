@@ -47,17 +47,11 @@ AC_DEFUN([VCSN_TAF_KIT],
 		[enable_taf_kit=yes])
 
   if test x$enable_taf_kit = xyes; then
-    if test x$enable_vcsn_xml = xno; then
-      AC_MSG_WARN([XML support should be enabled for TAF-Kit to be compiled,
-      		   it will not be built])
+    VCSN_CHECK_TERMLIB
+    if test -z "$TERMLIBS"; then
+      AC_MSG_WARN([need a terminal library (${TERMLIB_VARIANTS}), TAF-Kit
+      		   will not be built])
       enable_taf_kit=no
-    else
-      VCSN_CHECK_TERMLIB
-      if test -z "$TERMLIBS"; then
-        AC_MSG_WARN([need a terminal library (${TERMLIB_VARIANTS}), TAF-Kit
-		     will not be built])
-    	enable_taf_kit=no
-      fi
     fi
   else
     enable_taf_kit=no

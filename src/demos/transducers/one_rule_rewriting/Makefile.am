@@ -2,7 +2,6 @@
 #
 # $Id: Makefile.am 1005 2005-06-23 17:17:36Z o-conn_s $
 
-# Don't check VCSN_USE_XML, as programs aren't automatically compiled.
 include ../../demo.mk
 
 TESTERS = fibonacci_demo fibonacci_rt fibonacci_tdc ORR_demo ORR_rt \

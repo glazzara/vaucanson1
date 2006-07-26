@@ -17,13 +17,9 @@
 #ifndef VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_EXP_HH
 # define VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_EXP_HH
 
-#include <vaucanson/config/system.hh>
-
-# if VCSN_INCLUDE_XML()
-#  include <xercesc/dom/DOM.hpp>
-#  include <xercesc/util/XMLString.hpp>
-#  include <xercesc/util/PlatformUtils.hpp>
-# endif
+# include <xercesc/dom/DOM.hpp>
+# include <xercesc/util/XMLString.hpp>
+# include <xercesc/util/PlatformUtils.hpp>
 
 # include <vaucanson/algebra/implementation/series/rat/nodes.hh>
 # include <vaucanson/design_pattern/element.hh>
@@ -96,10 +92,8 @@ namespace vcsn {
       /// i.e. the number of letters used in the expression.
       size_t length() const;
 
-# if VCSN_INCLUDE_XML()
 	xercesc::DOMElement* xml_tree(xercesc::DOMDocument* doc,
 				      char* node_name) const;
-# endif
 
       /// Get the root node of the expression.
       //@{

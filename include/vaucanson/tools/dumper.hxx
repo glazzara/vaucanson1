@@ -18,9 +18,7 @@
 # define VCSN_TOOLS_DUMPER_HXX
 
 # include <vaucanson/tools/usual_io.hh>
-# ifdef VCSN_USE_XML
-#  include <vaucanson/tools/xml_dump.hh>
-# endif
+# include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/tools/dot_dump.hh>
 # include <vaucanson/tools/fsm_dump.hh>
 # include <vaucanson/tools/simple_dump.hh>
@@ -58,11 +56,7 @@ namespace vcsn
       if (pos < argc_)
 	fmt_ = dump_format (argv_[pos]);
 
-      if (fmt_ == fmt_error
-#ifndef VCSN_USE_XML
-	  || fmt_ == fmt_xml
-#endif
-	  )
+      if (fmt_ == fmt_error)
 	{
 	  std::cerr << "Invalid input: " << pos << " " << argv_[pos] << std::endl;
 	  usage (1);
@@ -77,10 +71,7 @@ namespace vcsn
 		<< "  dot : graphviz format" << std::endl
 		<< "  fsm : FSM toolbox format" << std::endl
 		<< "  simple : internal Vaucanson format" << std::endl
-#ifdef VCSN_USE_XML
-		  << "  xml : Vaucanson XML I/O format" << std::endl
-#endif
-	;
+		<< "  xml : Vaucanson XML I/O format" << std::endl;
       exit (estatus);
     }
 
@@ -124,11 +115,9 @@ namespace vcsn
 	case fmt_dot:
 	  vcsn::tools::dot_dump (o, automaton, name);
 	  break;
-#ifdef VCSN_USE_XML
 	case fmt_xml:
 	  vcsn::tools::xml_dump (o, automaton, name);
 	  break;
-#endif
 	case fmt_simple:
 	  vcsn::tools::simple_dump (o, automaton,
 				    vcsn::io::usual_converter_poly<rat_exp_t>());

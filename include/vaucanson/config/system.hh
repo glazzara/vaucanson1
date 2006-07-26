@@ -43,9 +43,6 @@
 
 # include <vaucanson/config/math.hh>
 
-# define VCSN_INCLUDE_XML()					\
-    (not defined (VCSN_SANITY_CHECK) or defined (VCSN_USE_XML))
-
 # if (defined __GNUC__) && (__GNUC__ < 3)
 # include <stl_config.h>
 #  undef __STL_BEGIN_RELOPS_NAMESPACE

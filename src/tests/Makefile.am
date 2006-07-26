@@ -11,8 +11,6 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-# VCSN_USE_XML is tested in the `xml' directory.
-
 SUBDIRS =					\
 	sanity					\
 	misc					\

@@ -12,6 +12,3 @@
 
 /* Define the path to data of this package. */
 #undef VCSN_DATA_PATH
-
-/* Define this if you want to use XML I/O */
-#undef VCSN_USE_XML

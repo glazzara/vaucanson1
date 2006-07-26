@@ -11,7 +11,6 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-# VCSN_USE_XML is tested in the `xml' subdirectory.
 include $(top_srcdir)/vaucanson.mk
 include $(srcdir)/doc.mk
 
