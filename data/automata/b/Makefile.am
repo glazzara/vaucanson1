@@ -33,6 +33,7 @@ $(srcdir)/a1.xml: a1.cc $(top_srcdir)/configure.ac
 	mv $@.tmp $@
 
 # Accepts words with a `b'.
+# See ETA Fig. III.2.3, p. 434.
 b1_SOURCES = b1.cc
 $(srcdir)/b1.xml: b1.cc $(top_srcdir)/configure.ac
 	$(MAKE) $(AM_MAKEFLAGS) b1$(EXEEXT)

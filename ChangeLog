@@ -1,3 +1,11 @@
+2006-07-26  Akim Demaille  <akim@lrde.epita.fr>
+
+	B1's origin, and spell checking.
+
+	* doc/manual/taf-kit.tex: Do not use \index in \caption, it doesn't
+	work.
+	Spell checking.
+
 2006-07-26  Michael Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Force the use of XML in Vaucanson.
