@@ -17,7 +17,8 @@ XFAIL_TESTS =
 
 TESTS =						\
 vcsn-b.test					\
-vcsn-z.test
+vcsn-z.test					\
+vcsn-tdc.test
 
 EXTRA_DIST = $(TESTS)
 

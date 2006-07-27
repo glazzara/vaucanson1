@@ -1,0 +1,48 @@
+#! /bin/bash
+
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `COPYING' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
+
+. ./defs || exit 1
+
+set -e
+
+## ------------------------------------ ##
+## Input/output work with transducers.  ##
+## ------------------------------------ ##
+
+vcsn-tdc dot-dump $t1
+vcsn-tdc info $t1
+
+
+## ------------------------------------- ##
+## Tests and evaluation on transducers.  ##
+## ------------------------------------- ##
+
+  vcsn-tdc are-isomorphic $t1 $t1
+  vcsn-tdc is-sub-normalized $t1
+! vcsn-tdc is-empty $t1
+
+
+
+## ------------------------------------ ##
+## Generic algorithms for transducers.  ##
+## ------------------------------------ ##
+
+  vcsn-tdc compose $t1 $u1 > tmp1.xml
+  vcsn-tdc u_compose $t1 $u1 > tmp2.xml
+! vcsn-tdc are-isomorphic tmp1.xml tmp2.xml
+
+  input=`vcsn-tdc --alphabet1=ab --alphabet2=xy eval $t1 abba`
+  vcsn-tdc --alphabet1=ab --alphabet2=xy domain $t1 | vcsn-b eval - abba
+  vcsn-tdc --alphabet1=ab --alphabet2=xy image $t1 | vcsn-b eval - $input

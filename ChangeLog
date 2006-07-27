@@ -1,3 +1,11 @@
+2006-07-27  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Add tests for vcsn-tdc.
+
+	* taf-kit/tests/vcsn-tdc.test: New.
+	* taf-kit/tests/defs.in: .
+	* taf-kit/tests/Makefile.am: .
+
 2006-07-27  Roland Levillain  <roland@lrde.epita.fr>
 
 	Add missing link options to the TAF-kit.
