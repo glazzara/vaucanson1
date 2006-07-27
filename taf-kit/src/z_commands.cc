@@ -59,12 +59,12 @@ const command_t command_map[] =
 		   "Return whether `aut' is ambiguous."),
     COMMAND_ENTRY (is_empty, Aut,
 		   "Return whether trimed `aut' is empty."),
-    COMMAND_ENTRY (is_normalized, Aut,
-		   "Return whether `aut' is normalized."),
+    //    COMMAND_ENTRY (is_normalized, Aut,
+    //		   "Return whether `aut' is normalized."),
     COMMAND_ENTRY (is_realtime, Aut,
-		   "Return whether `aut' is realtime."),
-    COMMAND_ENTRY (is_standard, Aut,
-		   "Return whether `aut' is standard.")
+		   "Return whether `aut' is realtime.")
+    //    COMMAND_ENTRY (is_standard, Aut,
+    //		   "Return whether `aut' is standard.")
     ),
 
   COMMAND_GROUP (
@@ -77,13 +77,13 @@ const command_t command_map[] =
     COMMAND_ENTRY_CN (co-accessible, coaccessible, Aut,
 		      "Give the maximal coaccessible subautomaton of `aut'."),
     COMMAND_ENTRY (concatenate, AutAut, "Concatenate `aut1' and `aut2'."),
-    COMMAND_ENTRY (normalize, Aut,
-		   "Give the Thompson-normalized automaton of `aut'."),
+    //    COMMAND_ENTRY (normalize, Aut,
+    //		   "Give the Thompson-normalized automaton of `aut'."),
     COMMAND_ENTRY (power, AutInt, "Give the power of `aut' by `n'."),
     COMMAND_ENTRY (product, AutAut, "Give the product of `aut1' by `aut2'." ),
     COMMAND_ENTRY (quotient, Aut, "Give the quotient of `aut'."),
     COMMAND_ENTRY (realtime, Aut, "Give the realtime version of `aut'."),
-    COMMAND_ENTRY (standardize, Aut, "Give the standard automaton of `aut'."),
+    //    COMMAND_ENTRY (standardize, Aut, "Give the standard automaton of `aut'."),
     COMMAND_ENTRY (sum, AutAut, "Give the sum of `aut1' and `aut2'."),
     COMMAND_ENTRY (transpose, Aut, "Transpose the automaton `aut'."),
     COMMAND_ENTRY (trim, Aut, "Trim the automaton `aut'.")

@@ -1,5 +1,15 @@
 2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
 
+	Disable normalize and standardize related functions.
+
+	This addresses ticket #83 for 1.0.
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/common_automaton_commands.hh,
+	* taf-kit/src/z_commands.cc,
+	* doc/manual/taf-kit.tex: Comment out these functions.
+
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
+
 	Add a theoretical appendix.
 
 	* doc/manual/theory.tex: New.
