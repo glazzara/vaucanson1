@@ -193,7 +193,9 @@ VCSN_CONFIG_WRAPPER([vcsn-z])
 
 AC_CONFIG_FILES([
 src/tests/Makefile
+src/tests/check/Makefile
 src/tests/check/defs
+src/tests/design_pattern/Makefile
 src/tests/include/Makefile
 src/tests/misc/Makefile
 src/tests/sanity/Makefile

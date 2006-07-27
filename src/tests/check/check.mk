@@ -11,8 +11,6 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-# VCSN_HEADER
-
 include $(top_srcdir)/src/tests/check/check-flags.mk
 LDADD = $(top_builddir)/src/tests/check/libcheck.a
 TESTS = $(check_PROGRAMS)

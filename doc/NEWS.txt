@@ -17,6 +17,9 @@ Vaucanson 0.8a
   + Support::operator* simplifies the writing for one-letter
     supports.  Instead of `*e.supp().begin()`, write `*e.supp()`.
 
+  + The `closure` functions were renamed as `eps_removal`, since
+    that's what they actually do.
+
 - `VCSN_XSD_PATH` is no longer used.
   The environment variable `VCSN_DATA_PATH` should point to the
   Vaucanson data directory, containing, among others, the

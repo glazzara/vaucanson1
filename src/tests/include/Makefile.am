@@ -112,25 +112,9 @@ tests/automata/implementation_check/rdelta_test.hh
 
 
 noinst_HEADERS +=				\
-tests/check/tester.cc				\
-tests/check/tester.hh				\
-tests/check/unique.cc
+tests/check/tester.hh
 
 noinst_HEADERS +=							\
 tests/context_headers/automata/global_consistency_test.hh		\
 tests/context_headers/fmp_transducers/global_consistency_test.hh	\
 tests/context_headers/transducers/global_consistency_test.hh
-
-noinst_HEADERS +=				\
-tests/design_pattern/design_pattern-test.hh	\
-tests/design_pattern/element-full-test.cc	\
-tests/design_pattern/intrinsics_assign.cc	\
-tests/design_pattern/intrinsics_binops.cc	\
-tests/design_pattern/intrinsics_convert.cc	\
-tests/design_pattern/intrinsics_default.cc	\
-tests/design_pattern/intrinsics_extra.cc	\
-tests/design_pattern/intrinsics.hh		\
-tests/design_pattern/intrinsics_link.cc		\
-tests/design_pattern/intrinsics_ops.cc		\
-tests/design_pattern/intrinsics_orphanage.cc	\
-tests/design_pattern/intrinsics_size.cc

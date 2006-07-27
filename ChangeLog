@@ -1,5 +1,57 @@
 2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix errors in the tests/ overhaul.
+
+	Resurrect the tests in design_pattern.
+	* src/tests/include/tests/design_pattern,
+	* src/tests/include/tests/design_pattern/design_pattern-test.hh,
+	* src/tests/include/tests/design_pattern/intrinsics.hh,
+	* src/tests/include/tests/design_pattern/intrinsics_binops.cc,
+	* src/tests/include/tests/design_pattern/intrinsics_size.cc,
+	* src/tests/include/tests/design_pattern/intrinsics_link.cc,
+	* src/tests/include/tests/design_pattern/intrinsics_convert.cc,
+	* src/tests/include/tests/design_pattern/element-full-test.cc,
+	* src/tests/include/tests/design_pattern/intrinsics_ops.cc,
+	* src/tests/include/tests/design_pattern/intrinsics_extra.cc,
+	* src/tests/include/tests/design_pattern/intrinsics_assign.cc,
+	* src/tests/include/tests/design_pattern/intrinsics_default.cc,
+	* src/tests/include/tests/design_pattern/intrinsics_orphanage.cc:
+	Move to...
+	* src/tests/design_pattern,
+	* src/tests/design_pattern/design_pattern-test.hh,
+	* src/tests/design_pattern/intrinsics.hh,
+	* src/tests/design_pattern/intrinsics_binops.cc,
+	* src/tests/design_pattern/intrinsics_size.cc,
+	* src/tests/design_pattern/intrinsics_link.cc,
+	* src/tests/design_pattern/intrinsics_convert.cc,
+	* src/tests/design_pattern/element-full-test.cc,
+	* src/tests/design_pattern/intrinsics_ops.cc,
+	* src/tests/design_pattern/intrinsics_extra.cc,
+	* src/tests/design_pattern/intrinsics_assign.cc,
+	* src/tests/design_pattern/intrinsics_default.cc,
+	* src/tests/design_pattern/intrinsics_orphanage.cc: here.
+	* src/tests/design_pattern/Makefile.am: New.
+
+	Resurrect libcheck.
+	* src/tests/include/tests/check/tester.cc,
+	* src/tests/include/tests/check/unique.cc: Move to...
+	* src/tests/check/tester.cc,
+	* src/tests/check/unique.cc: here.
+	Yes, the tester.hh remains in the include/ hierarchy.
+	* src/tests/check/Makefile.am: New.
+
+	* src/tests/include/Makefile.am: Adjust.
+	* src/tests/design_pattern: New.
+	* src/tests/Makefile.am: Adjust.
+	* src/tests/check/check.mk: Adjust.
+	* configure.ac: Ditto.
+
+	* doc/NEWS.txt: More.
+	* doc/manual/taf-kit.tex: Use \tafkit.
+	Fix indexes.
+
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
+
 	Spare Autotool cycles.
 
 	* src/tests/include/tests/context_headers/fmp_transducers/Makefile.am: Remove.

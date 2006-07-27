@@ -11,13 +11,10 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS =					\
-	check					\
-	design_pattern				\
-	include					\
-	sanity					\
-	misc					\
-	test-suites				\
-	xml
+include $(top_srcdir)/src/tests/check/check-flags.mk
 
-EXTRA_DIST = bin/generate-test-suite.sh
+check_LIBRARIES = libcheck.a
+
+libcheck_a_SOURCES =			\
+  tester.cc				\
+  unique.cc
