@@ -35,6 +35,7 @@ installation.tex				\
 taf-kit.tex					\
 library.tex					\
 developer.tex					\
+theory.tex					\
 automata.tex					\
 xml.tex
 

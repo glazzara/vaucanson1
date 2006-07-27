@@ -1,0 +1,262 @@
+\chapter{Some Bits of Automaton Theory}
+\label{sec:theory}
+
+\section{On standard and normalized automata}
+
+\subsection{Standard automata}
+
+\subsubsection{Definition}
+
+\begin{definition}[\Index{Standard Automaton}]
+  An automaton (any kind, automata over any monoid with any
+  multiplicity) is said to be \dfn{standard} if it has a unique
+  initial state which is the destination of no transition and whose
+  'initial multiplicity' is equal to the identity (of the multiplicity
+  semiring or of the series semiring, according to the current
+  convention).
+\end{definition}
+
+\begin{remark}
+  These terminology and definition are to be found in ETA and are not
+  (yet) universally known or accepted.
+\end{remark}
+
+\subsubsection{Standardization}
+
+Not only every automaton is equivalent to a standard one, but a simple
+procedure, called 'standardization', transforms every automaton $A$ in
+an equivalent standard one, and goes as follows.
+
+\begin{enumerate}
+\item Add a new state $s$, make it initial, with initial multiplicity
+  equal to the identity.
+
+\item For every initial state i of $A$, with initial multiplicity
+  $I(i)$, add a transition from $s$ to i with label I(i), and set I(i)
+  to 0 (the zero of the semiring, or of the series -- as above).
+
+\item\label{ite:suppress} Suppress all epsilon-transition from the
+  created transitions by a backward closure.
+
+\item\label{ite:take} Take the accessible part of the result.
+\end{enumerate}
+
+\begin{remark}
+  Steps \autoref{ite:suppress} and \autoref{ite:take} are necessary to
+  insure the following property:
+
+  The standardization of a standard automaton $A$ is isomorphic to $A$ .
+
+  More informally, but more generally, they insure that the result of
+  the standardization is of the same "kind" as the automaton on which
+  it is applied (in particular, without epsilon-transition if $A$ is
+  without epsilon-transition).
+\end{remark}
+
+
+
+\subsubsection{Standard automaton of an expression}
+
+A classical algorithm --- often credited to Glushkov --- transforms a
+rational (ie regular) expression (of litteral length n ) into a
+standard automaton (with n+1 states). This automaton is known in the
+litterature as the 'Glushkov automaton' or as the 'position automaton'
+of the expression.
+
+\begin{remark}
+  It is folklore that the epsilon-transition removal --- via a
+  "backward closure" --- applied to the 'Thompson automaton' of a
+  rational expression produces the standard automaton of the
+  expression.
+\end{remark}
+
+\begin{remark}
+  These definitions, constructions and properties are fairly classical
+  for classical automata. Their generalization to automata with
+  multiplicity is more recent (mostly written by the "Rouen school"
+  around the year 2000).
+\end{remark}
+
+\subsection{Normalized automaton}
+
+\subsubsection{Definition}
+
+
+An automaton (any kind, automata over any monoid with any
+multiplicity) is said to be \index{normalized}\dfn{normalized} if
+
+\begin{enumerate}
+\item it has a unique initial state
+  \begin{itemize}
+  \item which is the destination of no transition,
+  \item whose 'initial multiplicity' is equal to the identity (of the
+    multiplicity semiring or of the series semiring, according to the
+    current convention),
+  \item and whose 'final multiplicity' is equal to the zero (with the
+    same convention);
+  \end{itemize}
+
+\item and, symmetrically, it has a unique final state
+  \begin{itemize}
+  \item which is the source of no transition,
+  \item whose 'final multiplicity' is equal to the identity,
+  \item and whose 'initial multiplicity' is equal to the zero.
+  \end{itemize}
+\end{enumerate}
+
+\begin{remark}
+  The terminology is rather unfortunate, for there are already so many
+  different "normalized" things. The notion however, is rather
+  classsical, under this name, at least for classical Boolean
+  automata, because of one classical proof of Kleene theorem. For the
+  same reason, it is a proposition credited to Schutzenberger that
+  every weighted automaton $A$ is equivalent to a normalized one,
+  provided the empty word is not in the support of the series realized
+  by $A$, although the word normalized is not used there. The
+  terminology is even more unfortunate since "normalized transducer"
+  has usually an other meaning, and corresponds to transducers whose
+  transitions have label of the form either (a,1) or (1,b) .
+\end{remark}
+
+\subsubsection{Normalization}
+
+It is not true that every automaton is equivalent to a normalized one.
+This holds only for automata whose accepted language does not contain
+the empty word (for classical automata) or whose realized series gives
+a zero coefficient to the empty word (for weighted automata). There
+exists however a "normalization procedure" which plays mutatis
+mutandis the same role as the standardization and which is best
+described with the help of the standardization.
+
+Let $A$ be an automaton.
+
+Let $B$ = standardize(transpose(standardize(transpose(A))))
+
+Let i be the (unique) initial state of $B$ and let C be the automaton
+obtained from $B$ by setting T(i)=0 --- ie setting to 0 the terminal
+function. Then, C is normalized, we write C = normalize(A) and it
+holds:
+
+for classical automata: The language accepted by normalize(A) is equal
+to the language accepted by $A$ minus the empty word (if it is accepted
+by A):
+
+\begin{displaymath}
+  L(normalize(A))  =  L(A) \ 1_{X^*}
+\end{displaymath}
+
+\noindent
+(where  X  is the alphabet.)
+
+for weighted automata: the series realized by normalize(A) is equel to
+the one realized by $A$, but for the coefficient of $1_{X^*}$ which is 0:
+
+%% FIXME: Can't use \circledot here.  What is the package for it?
+\begin{displaymath}
+  |normalize(A)|  =  |A| \odot  char(X^+)
+\end{displaymath}
+
+\noindent
+(where  $char(X^+)$  is the characteric series of  $X^+$.
+
+that is, in both cases, normalize(A) accepts or realizes the 'proper'
+part of the language accepted, or of the series realized by, $A$ .
+
+\subsection{Operations on automata}
+
+These families of automata have been considered in order to establish
+one direction of Kleene's theorem, the one that amounts to show that
+languages accepted (or series realized) by finite automata are closed
+under rational operations: sum, product and star.
+
+\subsubsection{The sum}
+
+The sum is never a problem: the union of two automata is an automaton
+whose behaviour is the sum of the behaviours of these automata.
+
+\begin{remark}
+  If we consider automata with unique initial and/or final state, it
+  would be a bad idea to realize the sum by merging the initial and/or
+  final states of the two automata in order to recover automata of the
+  same kind --- unless these initial states have no incoming
+  transitions and/or these final states have no outgoing transitions,
+  that is if we consider standard automata, transpose of standard
+  automata, or normalized automata.
+\end{remark}
+\subsubsection{The concatenation}
+
+The product (of accepted language or of realized series) is carried
+out by the "concatenation" of automata --- since we keep the word
+"product" for the cartesian product of automata which realizes the
+intersection of languages or the hadamard product of series. For
+classical automata, the concatenation of $A$ and $B$ can be described as
+follows: add an epsilon-transition from every final state of $A$ to
+every initial state of $B$, and suppress the epsilon-transition (if
+necessary, and by any closure algorithm). For weighted automata, the
+'same' algorithm is more easily described by using a standardization
+step: compute A' the 'co-standardized' automaton of $A$, compute B' the
+standardized automaton of $B$, add an epsilon-transition (with label
+identity) from the unique final state of A' to the unique initial
+state of B' and suppress this new transition (if necessary and by any
+closure algorithm).
+
+\begin{remark}
+  Along the same line as above, if $A$ has a unique final state $t$ and
+  B a unique initial state $j$, it would be a bad idea to realize the
+  concatenation of $A$ and $B$ by merging t and $j$ ---unless t has no
+  outgoing transition, that is if $A$ is 'co-standard' or normalized.
+\end{remark}
+
+
+\subsubsection{The star}
+
+The "star" of an automaton $A$, realizing the star of the accepted
+language or of the realized series, is even more subtle.
+
+If $A$ is normalized, it is easily carried out by the merging of the
+initial and final states of $A$ . Since the series accepted by a
+normalized automaton is proper, its star is always defined, this is
+the advantage of the construction. On the other hand, star(A) is not
+normalized anymore, and if this operation is used inside an algorithm
+that buils an automaton from an expression, it yields an explosion of
+the number of states.
+
+If $A$ is standard, with initial state $i$ and initial multiplicity c
+(usually a scalar), the star of |A| is defined if, and only if, the
+$c^{*}$ is defined \cite[Prop. III.2.6]{sakarovitch.03.eta} --- if $A$ has
+no epsilon-transition.  In this case, star(A) is defined as follows:
+
+\begin{enumerate}
+\item replace the initial multiplicity by $c^*$;
+
+\item for every final state $t$ of $A$, add a new transition from $t$
+  to $i$ with label $T(t) \times 1_{X^*}$;
+
+\item Suppress the epsilon-transition via backward closure.
+\end{enumerate}
+\begin{remark}
+  If $A$ is not standard, it would be a bad idea to use the above
+  construction, even letting asside the multiplicity --- although it
+  may have occured to knowledgeable people.
+\end{remark}
+
+\subsection{Conclusion}
+
+Normalized and standard automata have been introduced in relation with
+the proof of Kleene's theorem. If one does not want to introduce
+epsilon-transition, the notion of normalized automata yields certainly
+the most straightforward argument. The advantage of standard automata
+is that they not only can be used for the same proof, but they also
+yields an efficient algorithm, both for the size of the result and for
+the computational complexity, to transform a rational expression into
+an automaton.
+
+It took me some times to get to this conclusion. If I were to rewrite
+a new edition of \cite{sakarovitch.03.eta}, I would not mention
+normalized automata besides exercices and historical notes. All the
+theory would be presented with standard automata only.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "vaucanson-user-manual"
+%%% End:

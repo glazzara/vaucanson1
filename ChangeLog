@@ -1,3 +1,12 @@
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add a theoretical appendix.
+
+	* doc/manual/theory.tex: New.
+	From http://vaucanson.lrde.org/trac.cgi/wiki/TheoreticalNotes.
+	* doc/manual/vaucanson-user-manual.tex,
+	* doc/manual/Makefile.am: Use it.
+
 2006-07-27  Akim Demaille  <akim@epita.fr>
 
 	Integrate bits of documentation from Jacques.

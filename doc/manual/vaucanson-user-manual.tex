@@ -16,7 +16,9 @@
 \usepackage{texi}
 \usepackage{misc}
 
-% Mathematical symbols.
+%% ---------------------- %%
+%% Mathematical symbols.  %%
+%% ---------------------- %%
 \renewcommand{\max}{\textrm{max}}
 \renewcommand{\min}{\textrm{min}}
 \newcommand{\Z}{\texorpdfstring{\ensuremath{\mathbb{Z}}}{Z}}
@@ -29,6 +31,15 @@
 \newcal{B}
 \newcal{C}
 \newcal{T}
+
+\newtheorem{theorem}             {Theorem}[chapter]
+\newtheorem{definition} [theorem]{Definition}
+\newtheorem{remark}     [theorem]{remark}
+
+
+%% ------------------------ %%
+%% Index and Bibliography.  %%
+%% ------------------------ %%
 
 % The same argument is output and put in the index.
 \usepackage{makeidx}
@@ -165,6 +176,7 @@
 
 \appendix
 
+\input{theory}
 \input{automata}
 \input{xml}
 
