@@ -195,8 +195,8 @@ const command_t command_map[] =
     COMMAND_ENTRY (image, Aut,
 		   "Compute an automaton describing all output produced by the "
 		   "transducer `aut'."),
-    COMMAND_ENTRY (transpose, Aut,
-		   "Compute the transposed of the transducer `aut'."),
+    //    COMMAND_ENTRY (transpose, Aut,
+    //		   "Compute the transposed of the transducer `aut'."),
     COMMAND_ENTRY (trim, Aut, "Trim transducer `aut'.")),
 
 

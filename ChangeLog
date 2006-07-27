@@ -1,5 +1,14 @@
 2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
 
+	Disable transpose for tdc.
+
+	This addresses #84 for 1.0.
+	* taf-kit/src/tdc_commands.cc,
+	* taf-kit/src/common_commands.hh,
+	* doc/manual/taf-kit.tex: Comment them out.
+
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
+
 	Disable normalize and standardize related functions.
 
 	This addresses ticket #83 for 1.0.
