@@ -1,5 +1,15 @@
 2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
 
+	Also disable some TAF-Kit tests.
+
+	* build-aux/check.mk: Use % rules.
+	* taf-kit/tests/vcsn-b.test,
+	* taf-kit/tests/vcsn-z.test: Disable verbs that are not implemented.
+	* taf-kit/src/common_commands.hh: Define transpose for sake of
+	zautomata.
+
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
+
 	Disable transpose for tdc.
 
 	This addresses #84 for 1.0.

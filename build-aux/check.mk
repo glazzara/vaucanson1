@@ -17,7 +17,7 @@
 
 SUFFIXES = .log .test
 # From a test file to a log file.
-.test.log:
+%.log: %.test
 	@if test -f ./$<; then dir=./;			\
 	elif test -f $<; then dir=;			\
 	else dir="$(srcdir)/"; fi;			\

@@ -55,8 +55,8 @@ using vcsn::xml::XML;
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (trim));
 
-//DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-//			ALGO (transpose));
+DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
+			ALGO (transpose));
 
 DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal)
 				  ARG_KIND (aut)
