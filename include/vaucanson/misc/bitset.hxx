@@ -543,11 +543,11 @@ namespace vcsn
       BitActionCount<int, -1, 1> bit_counter;
       Bitset result (b.size ());
 
-      for (bit_iterator it = bit_begin ();
-	   (it != bit_end ()) && (it != b.bit_end ());
-	   ++it)
+      for (bit_iterator it = bit_begin (), b_it = b.bit_begin ();
+	   it != bit_end () && b_it != b.bit_end ();
+	   ++it, ++b_it)
       {
-	if (b.do_on_bit (bit_counter, it) && get_bit (it))
+	if (b.do_on_bit (bit_counter, b_it) && get_bit (it))
 	  result.insert (bit_counter.value);
       }
       return result;
@@ -561,7 +561,8 @@ namespace vcsn
       Bitset result (b.max_size ());
       bit_iterator b_it = b.bit_begin ();
 
-      while ( (b_it != b.bit_end ()) && !b.get_bit (b_it))
+      while (b_it != b.bit_end () 
+	     && !b.get_bit (b_it))
 	++b_it;
       for (bit_iterator it = bit_begin (); it != bit_end (); ++it)
 	if (get_bit (it))

@@ -1,4 +1,9 @@
-2006-07-27  Akim Demaille  <akim@Costaguana.local>
+2006-07-28  Akim Demaille  <akim@epita.fr>
+
+	* include/vaucanson/misc/bitset.hxx (project): Do not use an
+	iterator from one structure to iterate over another!
+
+2006-07-27  Akim Demaille  <akim@epita.fr>
 
 	Various bug fixes.
 	* build-aux/check.mk: Do not make the test-suite.log if there are
