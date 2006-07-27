@@ -1,3 +1,16 @@
+2006-07-27  Akim Demaille  <akim@epita.fr>
+
+	Generate an appendix of shipped automata.
+	* doc/manual/generate-automata.sh: New.
+	* doc/manual/automata.tex: New, generated, but kept in the
+	repository to track changes.
+	* doc/manual/Makefile.am: Create the latter from the former.
+	(MAINTAINERCLEANFILES, deep-clean): New.
+	* doc/manual/vaucanson-user-manual.tex: More documentation.
+	(\execdisplay): new.
+	* doc/manual/extex.pl: Adjust to use it.
+	(&process_execcaption, &process_dot_request): New.
+
 2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
 
 	check-TESTS: Fix the banner.

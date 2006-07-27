@@ -28,13 +28,6 @@ include $(srcdir)/../share/make/pdf-figs.mk
 	  sed 's/.*/=> &/' $*.sta >> $@;	\
 	fi
 	echo '\end{shell}' >> $@
-## Save DOT files if there are.
-	for f in flow liveness interference; do		\
-	  if test -f main-_main-$$f.dot; then		\
-	    echo mv main-_main-$$f.dot $*-$$f.dot;	\
-	    mv main-_main-$$f.dot $*-$$f.dot;		\
-	  fi;						\
-	done
 
 %.eps: %.dot
 	dot -Tps2 $< -o $@

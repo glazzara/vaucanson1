@@ -33,7 +33,15 @@ vaucanson-user-manual.tex			\
 installation.tex				\
 taf-kit.tex					\
 library.tex					\
-developer.tex
+developer.tex					\
+automata.tex
+
+$(srcdir)/automata.tex: generate-automata.sh
+# Use the TAF-Kit wrappers.
+	PATH=$(top_builddir)/taf-kit/tests:$$PATH \
+	$(srcdir)/generate-automata.sh >$@-t
+	mv $@-t $@
+
 
 EXTRA_DIST = $(vaucanson_user_manual_sources)
 
@@ -49,6 +57,9 @@ manual.ext: $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
 	$(MAKE) -C $@ dvi
 	touch $@
 
+MAINTAINERCLEANFILES = $(vcsndldir_data) automata.tex
+maintainer-clean-local:
+	rm -rf manual.ext tmp.t2d
 
 ## ---------------------------- ##
 ## Installing on LRDE servers.  ##
@@ -61,3 +72,14 @@ $(srcdir)/vaucanson-developer-manual.pdf
 install-epita: $(vcsndldir_data)
 	$(INSTALL_DATA) $(vcsndldir_data) $(vcsndldir)
 .PHONY: install-epita
+
+
+## ------------ ##
+## Deep-clean.  ##
+## ------------ ##
+
+# Remove all the is generated, included if it requires maintainer
+# tools, but do not call maintainer-clean nor distclean, since we do
+# not want to have to reconfigure etc.
+deep-clean: clean maintainer-clean-local
+	-rm -f $(MAINTAINERCLEANFILES)
