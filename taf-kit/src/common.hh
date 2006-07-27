@@ -36,9 +36,12 @@
 # define warn(S) std::cerr << S << std::endl
 # define warn_(S) std::cerr << S
 
-# if ! (defined (CONTEXT_HEADER) && defined (CONTEXT_NAMESPACE))
-#  error "CONTEXT_HEADER and CONTEXT_NAMESPACE has to be declared."
-# endif /* defined (CONTEXT_HEADER) && defined (CONTEXT_NAMESPACE) */
+# ifndef CONTEXT
+#  error "CONTEXT has to be declared."
+# endif
+
+# define CONTEXT_HEADER    <vaucanson/CONTEXT.hh>
+# define CONTEXT_NAMESPACE vcsn::CONTEXT
 
 # if 0 /* @bug Should use this with dynamic libraries. */
 #  define VCSN_USE_INTERFACE_ONLY 1

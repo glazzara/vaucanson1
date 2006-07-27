@@ -1,3 +1,15 @@
+2006-07-27  Akim Demaille  <akim@Costaguana.local>
+
+	Fix ATF-Kit on Tiger Intel.
+	* taf-kit/src/Makefile.am (vcsn_b_LDADD): Rename as...
+	(LDADD): these, since they all need argp.
+	Pass CONTEXT only, not CONTEXT_HEADER and CONTEXT_NAMESPACE.
+	* taf-kit/src/common.hh: Adjust to define them.
+
+	* build-aux/check.mk (check-TESTS): Don't rely on wc not outputing
+	space when used as a filter, since that's not what Tiger's wc
+	does.  Use grep -c.
+
 2006-07-27  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Add tests for vcsn-tdc.

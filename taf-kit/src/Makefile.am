@@ -39,27 +39,19 @@ COMMON_SOURCES = commands.hh			\
 		 predefined_alphabets.hh
 
 
-vcsn_b_CPPFLAGS = $(AM_CPPFLAGS)					\
-		  -DCONTEXT_HEADER="<vaucanson/boolean_automaton.hh>"   \
-		  -DCONTEXT_NAMESPACE="vcsn::boolean_automaton"
-
-vcsn_z_CPPFLAGS = $(AM_CPPFLAGS)					\
-		  -DCONTEXT_HEADER="<vaucanson/z_automaton.hh>"   	\
-		  -DCONTEXT_NAMESPACE="vcsn::z_automaton"
-
-vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS)					\
-		    -DCONTEXT_HEADER="<vaucanson/fmp_transducer.hh>"	\
-		    -DCONTEXT_NAMESPACE="vcsn::fmp_transducer"		\
-		    -DWITH_TWO_ALPHABETS
-
 vcsn_b_SOURCES = $(COMMON_SOURCES)		\
 		 ratexp_commands.hh common_automaton_commands.hh b_commands.cc
+vcsn_b_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=boolean_automaton
 
 vcsn_z_SOURCES = $(COMMON_SOURCES)		\
 		 ratexp_commands.hh common_automaton_commands.hh z_commands.cc
+vcsn_z_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=z_automaton
 
 vcsn_tdc_SOURCES = $(COMMON_SOURCES)		\
 		   tdc_commands.cc
+vcsn_tdc_CPPFLAGS = $(AM_CPPFLAGS) -DCONTEXT=fmp_transducer		\
+		    -DWITH_TWO_ALPHABETS
+
 
 ## ------ ##
 ## argp.  ##
@@ -67,6 +59,4 @@ vcsn_tdc_SOURCES = $(COMMON_SOURCES)		\
 
 # Be sure to fetch the argp we ship.
 AM_CPPFLAGS += -I$(top_srcdir)/argp
-vcsn_b_LDADD = $(top_builddir)/argp/libargp.la
-vcsn_z_LDADD = $(top_builddir)/argp/libargp.la
-vcsn_tdc_LDADD = $(top_builddir)/argp/libargp.la
+LDADD = $(top_builddir)/argp/libargp.la

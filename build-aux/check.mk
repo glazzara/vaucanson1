@@ -61,12 +61,12 @@ check-TESTS:
 	@rm -f $(TEST_LOGS);							\
 	$(MAKE) $(TEST_LOGS);							\
 	results=$$(for f in $(TEST_LOGS); do sed 1q $$f; done);			\
-	all=$$(echo "$$results" | wc -l);					\
-	fail=$$(echo "$$results" | grep '^FAIL:' | wc -l);			\
-	pass=$$(echo "$$results" | grep '^PASS:' | wc -l);			\
-	skip=$$(echo "$$results" | grep '^SKIP:' | wc -l);			\
-	xfail=$$(echo "$$results" | grep '^XFAIL:' | wc -l);			\
-	xpass=$$(echo "$$results" | grep '^XPASS:' | wc -l);			\
+	all=$$(echo "$$results" | wc -l | sed -e 's/^[ \t]*//');		\
+	fail=$$(echo "$$results" | grep -c '^FAIL');				\
+	pass=$$(echo "$$results" | grep -c '^PASS');				\
+	skip=$$(echo "$$results" | grep -c '^SKIP');				\
+	xfail=$$(echo "$$results" | grep -c '^XFAIL');				\
+	xpass=$$(echo "$$results" | grep -c '^XPASS');				\
 	case fail=$$fail:xfail=$$xfail:xpass=$$xpass in				\
 	  fail=0:xfail=0:xpass=*)						\
 	    banner="All $$all tests passed";;					\
