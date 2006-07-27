@@ -17,6 +17,8 @@
 
 SUFFIXES = .log .test
 # From a test file to a log file.
+# Do not use a regular `.test.log:' rule here, since in that case the
+# following rule (without incoming extension) will mask this one.
 %.log: %.test
 	@if test -f ./$<; then dir=./;			\
 	elif test -f $<; then dir=;			\
