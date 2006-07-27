@@ -18,17 +18,20 @@
 SUFFIXES = .log .test
 # From a test file to a log file.
 .test.log:
-	@$(TESTS_ENVIRONMENT) $< >$@-t 2>&1;	\
-	case $$?:" $(XFAIL_TESTS) " in		\
-	    0:*"$<"*) res="XPASS";;		\
-	    0:*)      res="PASS" ;;		\
-	    77:*)     res="SKIP" ;;		\
-	    *:*"$<"*) res="XFAIL";;		\
-	    *:*)      res="FAIL" ;;		\
-	   esac;				\
-	echo "$$(basename $<): $$res";		\
-	echo "$$(basename $<): $$res" >$@;	\
-	cat $@-t >>$@;				\
+	@if test -f ./$<; then dir=./;			\
+	elif test -f $<; then dir=;			\
+	else dir="$(srcdir)/"; fi;			\
+	$(TESTS_ENVIRONMENT) $${dir}$< >$@-t 2>&1;	\
+	case $$?:" $(XFAIL_TESTS) " in			\
+	    0:*"$<"*) res="XPASS";;			\
+	    0:*)      res="PASS" ;;			\
+	    77:*)     res="SKIP" ;;			\
+	    *:*"$<"*) res="XFAIL";;			\
+	    *:*)      res="FAIL" ;;			\
+	   esac;					\
+	echo "$$(basename $<): $$res";			\
+	echo "$$(basename $<): $$res" >$@;
+	cat $@-t >>$@;
 	rm $@-t;
 
 TEST_LOGS = $(TESTS:.test=.log)

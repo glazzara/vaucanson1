@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include check.mk
+include $(top_srcdir)/build-aux/check.mk
 
 XFAIL_TESTS =
 

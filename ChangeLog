@@ -1,5 +1,31 @@
 2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix the failures of the XML tests.
+
+	And rewrite the tests a bit.
+	* taf-kit/tests/check.mk: Move to...
+	* build-aux/check.mk: here, as it's quite general.
+	Find the path of the test file before trying to execute it.
+	(Taken from Automake's check-TESTS).
+	* taf-kit/tests/Makefile.am: Adjust.
+
+	* src/tests/xml/tester.sh: No longer loop over contexts, rather
+	be ready to be included by several test programs.
+	* src/tests/xml/xml_automaton_tester.cc (CONTEXT_HEADER)
+	(CONTEXT_NAMESPACE): Remove, replaced by this single...
+	(CONTEXT): new guy.
+
+	* include/vaucanson/config/pconf.hh.in: Don't redefine VCSN_DATA_PATH,
+	if it was defined before, eg., by the command line.  That was making
+	the test fail, since we were not using the locally shipped vaucanson.xsd.
+	* src/tests/xml/Makefile.am: Adjust to all the above changes.
+	And use Make constructs to avoid duplication.
+	Use check.mk to enable parallel checks, and to generate a real
+	test-suite.log.
+	(check_SCRIPTS): New.
+
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
+
 	Rename closure as eps_removal.
 
 	* include/vaucanson/algorithms/closure.hh,

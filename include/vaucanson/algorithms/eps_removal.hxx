@@ -26,9 +26,9 @@
 
 namespace vcsn {
 
-  /*--------.
-  | eps_removal |
-  `--------*/
+  /*--------------.
+  | eps_removal.  |
+  `--------------*/
   template <class A_, typename Auto>
   void
   do_eps_removal_here(const AutomataBase<A_>&, Auto& a, bool bck_fwd)

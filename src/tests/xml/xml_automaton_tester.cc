@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,10 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
+#include <cstring>
 #include <iostream>
-#include <string.h>
+#define CONTEXT_HEADER <vaucanson/CONTEXT.hh>
 #include CONTEXT_HEADER
 #include <vaucanson/tools/dot_dump.hh>
 #include <vaucanson/xml/XML.hh>
@@ -25,11 +27,10 @@ int main(int argc, char** argv)
 {
   using namespace vcsn;
   using namespace vcsn::xml;
+  using namespace vcsn::CONTEXT;
 
   if (argc > 1 && ! strcmp(argv[1], "output"))
   {
-    using namespace CONTEXT_NAMESPACE;
-
     alphabet_t alpha; alpha.insert('a'); alpha.insert('b');
     automaton_t a = make_automaton(alpha);
 
@@ -47,8 +48,6 @@ int main(int argc, char** argv)
   }
   else
   {
-    using namespace CONTEXT_NAMESPACE;
-
     alphabet_t alpha;
     automaton_t a = make_automaton(alpha);
 
@@ -56,4 +55,3 @@ int main(int argc, char** argv)
     vcsn::tools::dot_dump(std::cout, a, "A");
   }
 }
-

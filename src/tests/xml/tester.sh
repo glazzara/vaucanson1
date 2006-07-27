@@ -1,27 +1,41 @@
-#!/bin/sh
+## Vaucanson, a generic library for finite state machines.
+## Copyright (C) 2005, 2006 The Vaucanson Group.
+##
+## This program is free software; you can redistribute it and/or
+## modify it under the terms of the GNU General Public License
+## as published by the Free Software Foundation; either version 2
+## of the License, or (at your option) any later version.
+##
+## The complete GNU General Public Licence Notice can be found as the
+## `COPYING' file in the root directory.
+##
+## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-out=0
-for i in b z r z_min_plus z_max_plus fmp trans session geometry label_node
-do
+# Catch unexpected failures.
+set -ex
 
-    prog="./${i}_tester"
-    $prog output > ${i}_result.tmp
-    ## Testing XML dump.
-    echo "XML: Testing saver for type $i"
-    diff_result=`diff ${i}_result.tmp ${SRCDIR}/${i}_ref.xml`
-    if ! [ -z "$diff_result" ]; then
-	echo "FAIL: $i output has difference with XML reference"
-	echo "$diff_result"
-	out=255
-    fi
-    ## Testing XML parse.
-    $prog < ${SRCDIR}/${i}_ref.xml > ${i}_result.dot.tmp
-    echo "XML: Testing loader for type $i"
-    diff_result=`diff ${i}_result.dot.tmp ${SRCDIR}/${i}_ref.dot`
-    if ! [ -z "$diff_result" ]; then
-	echo "FAIL: $i output has difference with DOT reference"
-	echo "$diff_result"
-	out=255
-    fi
-done
+me=$(basename "$0" _tester.test)
+prog="./${me}_tester"
+
+# Run the program, compare the result with the expected output.
+$prog output > ${me}_result.tmp
+## Testing XML dump.
+echo "XML: Testing saver for type $me"
+diff_result=$(diff ${me}_result.tmp ${srcdir}/${me}_ref.xml)
+if ! test -z "$diff_result"; then
+    echo >&2 "FAIL: ${me} output has difference with XML reference"
+    echo >&2 "$diff_result"
+    out=1
+fi
+
+## Testing XML parse.
+$prog < ${srcdir}/${me}_ref.xml > ${me}_result.dot.tmp
+echo "XML: Testing loader for type ${me}"
+diff_result=$(diff ${me}_result.dot.tmp ${srcdir}/${me}_ref.dot)
+if ! test -z "$diff_result"; then
+    echo >&2 "FAIL: ${me} output has difference with DOT reference"
+    echo >&2 "$diff_result"
+    out=1
+fi
+
 exit $out

@@ -1,14 +1,16 @@
-/* Define to the address where bug reports for this package should be sent. */
+/** The address where bug reports should be sent. */
 #undef VCSN_PACKAGE_BUGREPORT
 
-/* Define to the full name of this package. */
+/** The full name of this package. */
 #undef VCSN_PACKAGE_NAME
 
-/* Define to the full name and version of this package. */
+/** The full name and version of this package. */
 #undef VCSN_PACKAGE_STRING
 
-/* Define to the version of this package. */
+/** The version of this package. */
 #undef VCSN_PACKAGE_VERSION
 
-/* Define the path to data of this package. */
-#undef VCSN_DATA_PATH
+/** The path to data of this package. */
+#ifndef VCSN_DATA_PATH
+# undef VCSN_DATA_PATH
+#endif
