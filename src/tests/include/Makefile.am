@@ -114,6 +114,9 @@ tests/automata/implementation_check/rdelta_test.hh
 noinst_HEADERS +=				\
 tests/check/tester.hh
 
+noinst_HEADERS +=				\
+tests/design_pattern/design_pattern-test.hh
+
 noinst_HEADERS +=							\
 tests/context_headers/automata/global_consistency_test.hh		\
 tests/context_headers/fmp_transducers/global_consistency_test.hh	\

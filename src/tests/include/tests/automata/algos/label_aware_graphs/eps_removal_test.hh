@@ -1,4 +1,4 @@
-// closure_test.hh: this file is part of the Vaucanson project.
+// eps_removal_test.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,8 +14,8 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_CLOSURE_TEST_HH
-# define VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_CLOSURE_TEST_HH
+#ifndef VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_EPS_REMOVAL_TEST_HH
+# define VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_EPS_REMOVAL_TEST_HH
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/automata.hh>
@@ -24,10 +24,10 @@
 # include <vaucanson/tools/gen_random.hh>
 # include <vaucanson/tools/xml_dump.hh>
 # include <vaucanson/misc/usual_macros.hh>
-# include <vaucanson/algorithms/closure.hh>
+# include <vaucanson/algorithms/eps_removal.hh>
 
 template <class Auto>
-bool closure_test(tests::Tester& tg)
+bool eps_removal_test(tests::Tester& tg)
 {
   using namespace vcsn;
   using namespace vcsn::algebra;
@@ -52,9 +52,9 @@ bool closure_test(tests::Tester& tg)
     {
       automaton_t auto_epsilon = gen.generate_with_epsilon(30, 50, 10, 20);
       {
-	automaton_t cauto = backward_closure(auto_epsilon);
+	automaton_t cauto = backward_eps_removal(auto_epsilon);
 
-	if (backward_closure(cauto).transitions().size() !=
+	if (backward_eps_removal(cauto).transitions().size() !=
 	    cauto.transitions().size())
 	  error_backward_idempotence = true;
 	for_all_transitions(e, cauto)
@@ -66,18 +66,18 @@ bool closure_test(tests::Tester& tg)
 	{
 	  TEST_MSG("Automata saved in /tmp.");
 	  SAVE_AUTOMATON_XML("/tmp",
-			     "backward_closure_in",
+			     "backward_eps_removal_in",
 			     auto_epsilon,
 			     i);
-	  SAVE_AUTOMATON_XML("/tmp", "backward_closure_out", cauto, i);
+	  SAVE_AUTOMATON_XML("/tmp", "backward_eps_removal_out", cauto, i);
 	  break;
 	}
       }
 
       {
-	automaton_t cauto = forward_closure(auto_epsilon);
+	automaton_t cauto = forward_eps_removal(auto_epsilon);
 
-	if (forward_closure(cauto).transitions().size() !=
+	if (forward_eps_removal(cauto).transitions().size() !=
 	    cauto.transitions().size())
 	  error_forward_idempotence = true;
 	for_all_transitions(e, cauto)
@@ -89,10 +89,10 @@ bool closure_test(tests::Tester& tg)
 	{
 	  TEST_MSG("Automata saved in /tmp.");
 	  SAVE_AUTOMATON_XML("/tmp",
-			     "forward_closure_in",
+			     "forward_eps_removal_in",
 			     auto_epsilon,
 			     i);
-	  SAVE_AUTOMATON_XML("/tmp", "forward_closure_out", cauto, i);
+	  SAVE_AUTOMATON_XML("/tmp", "forward_eps_removal_out", cauto, i);
 	  break;
 	}
       }
@@ -116,4 +116,4 @@ bool closure_test(tests::Tester& tg)
   return t.all_passed();
 }
 
-#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_CLOSURE_TEST_HH
+#endif // ! VCSN_TESTS_AUTOMATA_ALGOS_LABEL_AWARE_GRAPHS_EPS_REMOVAL_TEST_HH

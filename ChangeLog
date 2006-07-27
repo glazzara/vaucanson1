@@ -1,5 +1,30 @@
 2006-07-27  Akim Demaille  <akim@Costaguana.local>
 
+	Various bug fixes.
+	* build-aux/check.mk: Do not make the test-suite.log if there are
+	no errors.
+	Adjust to the change where log lines start (and no longer end)
+	with PASS, FAIL, etc.
+	(TEST_SUITE_LOG): New.
+
+	* src/tests/include/tests/automata/algos/label_aware_graphs/closure_test.hh:
+	Rename as...
+	* src/tests/include/tests/automata/algos/label_aware_graphs/eps_removal_test.hh: 
+	this.
+	And s/closure/eps_removal/g too.
+
+	* src/tests/design_pattern/design_pattern-test.hh: Move to... 
+	* src/tests/include/tests/design_pattern/design_pattern-test.hh:
+	here.
+	* src/tests/design_pattern/Makefile.am,
+	* src/tests/include/Makefile.am
+	* src/tests/design_pattern/element-full-test.cc: Adjust.
+
+	* src/tests/check/Makefile.am: Include check-flags.mk, not check.mk,
+	as there is no test suite here.
+
+2006-07-27  Akim Demaille  <akim@Costaguana.local>
+
 	Fix ATF-Kit on Tiger Intel.
 	* taf-kit/src/Makefile.am (vcsn_b_LDADD): Rename as...
 	(LDADD): these, since they all need argp.

@@ -11,7 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/src/tests/check/check.mk
+include $(top_srcdir)/src/tests/check/check-flags.mk
 
 # It should be check_LIBRARIES, but this is safer, in case we want to
 # run check in a specific subdir.

@@ -55,10 +55,10 @@ SUFFIXES = .log .test
 	@rm $@-t
 
 TEST_LOGS ?= $(TESTS:.test=.log)
-
+TEST_SUITE_LOG = test-suite.log
 # Run all the tests.
 check-TESTS:
-	@rm -f $(TEST_LOGS);							\
+	@rm -f $(TEST_SUITE_LOG) $(TEST_LOGS);					\
 	$(MAKE) $(TEST_LOGS);							\
 	results=$$(for f in $(TEST_LOGS); do sed 1q $$f; done);			\
 	all=$$(echo "$$results" | wc -l | sed -e 's/^[ \t]*//');		\
@@ -84,10 +84,10 @@ check-TESTS:
 	for f in $(TEST_LOGS);							\
 	do									\
 	  case $$(sed 1q $$f) in						\
-	    *SKIP|*PASS|*XFAIL);;						\
-	    *) cat $$f;;							\
+	    SKIP:*|PASS:*|XFAIL:*);;						\
+	    *) cat $$f >>$(TEST_SUITE_LOG);					\
 	  esac;									\
-	done >test-suite.log;							\
+	done;									\
 	dashes="$$banner";							\
 	skipped="";								\
 	if test "$$skip" -ne 0; then						\
@@ -97,7 +97,7 @@ check-TESTS:
 	fi;									\
 	report="";								\
 	if test "$$fail" -ne 0 && test -n "$(PACKAGE_BUGREPORT)"; then		\
-	  report="Please report test-suite.log to $(PACKAGE_BUGREPORT)";	\
+	  report="Please report $(TEST_SUITE_LOG) to $(PACKAGE_BUGREPORT)";	\
 	  test `echo "$$report" | wc -c` -le `echo "$$banner" | wc -c` ||	\
 	    dashes="$$report";							\
 	fi;									\

@@ -17,7 +17,7 @@
 #include <vaucanson/design_pattern/design_pattern.hh>
 
 #include <tests/check/tester.hh>
-#include "design_pattern-test.hh"
+#include <tests/design_pattern/design_pattern-test.hh>
 
 namespace vcsn_test {
 
