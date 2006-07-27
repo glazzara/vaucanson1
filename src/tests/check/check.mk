@@ -13,4 +13,10 @@
 
 include $(top_srcdir)/src/tests/check/check-flags.mk
 LDADD = $(top_builddir)/src/tests/check/libcheck.a
+
 TESTS = $(check_PROGRAMS)
+TEST_LOGS = $(TESTS:=.log)
+
+# Parallel replacement of Automake's check-TESTS target.
+# Include it last: TEST_LOGS has a default value there.
+include $(top_srcdir)/build-aux/check.mk

@@ -16,7 +16,7 @@
 //
 #include <iomanip>
 #include <string>
-#include "tester.hh"
+#include "tests/check/tester.hh"
 
 namespace tests {
 

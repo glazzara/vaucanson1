@@ -75,7 +75,6 @@ normalized_composition_test(tests::Tester& t)
   series_set_elt_t series_elt3(ss);
   series_set_elt_t series_elt4(ss);
 
-
   series_set_elt_t series_elt21(ss);
   series_set_elt_t series_elt22(ss);
   series_set_elt_t series_elt23(ss);

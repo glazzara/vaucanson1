@@ -11,9 +11,11 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include $(top_srcdir)/src/tests/check/check-flags.mk
+include $(top_srcdir)/src/tests/check/check.mk
 
-check_LIBRARIES = libcheck.a
+# It should be check_LIBRARIES, but this is safer, in case we want to
+# run check in a specific subdir.
+noinst_LIBRARIES = libcheck.a
 
 libcheck_a_SOURCES =			\
   tester.cc				\

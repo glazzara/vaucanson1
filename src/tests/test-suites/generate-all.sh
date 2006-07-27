@@ -18,38 +18,39 @@ generate ()
 }
 
 
-#    /*----------.
-#    | Alphabets |
-#    `----------*/
+## ----------- ##
+## Alphabets.  ##
+## ----------- ##
 
-for letter_kind in alpha char int pair_char_int; do
-generate \
-   algebra_alphabet_set_${letter_kind} \
-   algebra/alphabets
+for letter_kind in alpha char int pair_char_int
+do
+  generate \
+      algebra_alphabet_set_${letter_kind} \
+      algebra/alphabets
 done;
 
 
-#    /*------------.
-#    | Free monoid |
-#    `------------*/
+## ------------- ##
+## Free monoid.  ##
+## ------------- ##
 
 generate \
    algebra_free_monoid_string \
    algebra/free_monoid
 
 
-#    /*--------------------.
-#    | Free monoid product |
-#    `--------------------*/
+## --------------------- ##
+## Free monoid product.  ##
+## --------------------- ##
 
 generate \
    algebra_free_monoid_product_string \
    algebra/free_monoid_product
 
 
-#    /*---------.
-#    | Semiring |
-#    `---------*/
+## ---------- ##
+## Semiring.  ##
+## ---------- ##
 
 for semiring_type in numerical_semiring tropical_semiring_max tropical_semiring_min; do
     for semiring_elt_value_t in int double float rational bool; do
@@ -66,9 +67,11 @@ for semiring_type in numerical_semiring tropical_semiring_max tropical_semiring_
     done;
 done;
 
-#    /*-------.
-#    | Series |
-#    `-------*/
+
+
+## -------- ##
+## Series.  ##
+## -------- ##
 
 for semiring_elt_value_t in bool double int; do
     TEST="algebra/series/misc algebra/series/krat/main"
@@ -86,40 +89,44 @@ for semiring_elt_value_t in bool double int; do
 	algebra/series/polynom
 done;
 
-for derivation_type in derivation cderivation partial_derivation; do
-generate \
-   algebra_series_krat_${derivation_type} \
-   algebra/series/krat/derivations/${derivation_type}
-done;
+for derivation_type in derivation cderivation partial_derivation
+do
+  generate \
+      algebra_series_krat_${derivation_type} \
+      algebra/series/krat/derivations/${derivation_type}
+done
 
 
-#    /*----------.
-#    | Automaton |
-#    `----------*/
+## ----------- ##
+## Automaton.  ##
+## ----------- ##
 
-for automata_kind in boolean r z z_max_plus z_min_plus; do
-    generate \
-    context_headers_${automata_kind} \
-    context_headers/automata
+for kind in boolean r z z_max_plus z_min_plus
+do
+  generate \
+      context_headers_${kind} \
+      context_headers/automata
 
-# Create directories test list.
-    TEST="automata/implementation_check"
-    DIR="automata/algos/"
-    for i in label_aware_graphs labeled_graphs letter_combination_labeled_graphs freemonoid_labeled_graphs graphs; do
-	TEST="$TEST $DIR$i"
-    done
+  # Create directories test list.
+  TEST="automata/implementation_check"
+  DIR="automata/algos/"
+  for i in label_aware_graphs labeled_graphs letter_combination_labeled_graphs freemonoid_labeled_graphs graphs
+  do
+    TEST="$TEST $DIR$i"
+  done
 
-    if [ $automata_kind = "boolean" ]; then
-	TEST="$TEST automata/algos/boolean_automata"
-    fi
-    generate \
-	${automata_kind}_automaton \
-	${TEST}
-done;
+  if [ $kind = "boolean" ]; then
+    TEST="$TEST automata/algos/boolean_automata"
+  fi
+  generate \
+      ${kind}_automaton \
+      ${TEST}
+done
 
-#    /*----------------------.
-#    | Boolean RW_Transducer |
-#    `----------------------*/
+
+## ----------------------- ##
+## Boolean RW_Transducer.  ##
+## ----------------------- ##
 
 for kind in boolean
 do
@@ -134,9 +141,9 @@ do
       automata/algos/boolean_rw_transducers
 done
 
-#  /*-------------.
-#  | Z Transducer |
-#  `-------------*/
+## -------------- ##
+## Z Transducer.  ##
+## -------------- ##
 
 for kind in z
 do
