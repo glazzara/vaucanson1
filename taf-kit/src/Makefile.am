@@ -68,3 +68,5 @@ vcsn_tdc_SOURCES = $(COMMON_SOURCES)		\
 # Be sure to fetch the argp we ship.
 AM_CPPFLAGS += -I$(top_srcdir)/argp
 vcsn_b_LDADD = $(top_builddir)/argp/libargp.la
+vcsn_z_LDADD = $(top_builddir)/argp/libargp.la
+vcsn_tdc_LDADD = $(top_builddir)/argp/libargp.la
