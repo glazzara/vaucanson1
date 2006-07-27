@@ -1,5 +1,16 @@
 2006-07-27  Akim Demaille  <akim@epita.fr>
 
+	Integrate bits of documentation from Jacques.
+	* doc/manual/introduction.tex, doc/manual/xml.tex: New.
+	* doc/manual/Makefile.am, doc/manual/vaucanson-user-manual.tex:
+	Use them.
+	* doc/manual/vaucanson-user-manual.tex (\newcal): New.
+	(\Ac, \Bc, \Cc, \Tc, \Z): New.
+	Use them where possible.
+	* doc/manual/extex.pl: Avoid using undefined values.
+
+2006-07-27  Akim Demaille  <akim@epita.fr>
+
 	Generate an appendix of shipped automata.
 	* doc/manual/generate-automata.sh: New.
 	* doc/manual/automata.tex: New, generated, but kept in the

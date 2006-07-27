@@ -32,6 +32,6 @@ present each one of these automata.
 
 
 EOF
-generate_one_section 'Boolean Automata'     b
-generate_one_section '\texorpdfstring{$\mathbb{Z}$}{Z}-Automata'  z
-generate_one_section 'Transducers'          tdc
+generate_one_section 'Boolean Automata'  b
+generate_one_section '\Z-Automata'       z
+generate_one_section 'Transducers'       tdc

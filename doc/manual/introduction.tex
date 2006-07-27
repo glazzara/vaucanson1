@@ -1,0 +1,44 @@
+\chapter*{Introduction}
+\label{sec:intro}
+
+The \Vauc software platform is dedicated to the computation with
+finite state automata.  Here, `finite state automata' is to be
+understood in the broadest sense: \emph{weighted} automata on a free
+monoid --- that is, automata that not only accept, or recognize,
+\emph{words} but compute for every word a \emph{multiplicity} which is
+taken a priori in \emph{an arbitrary semiring} --- and even weighted
+automata on \emph{non free monoids}.  The latter become far too
+general objects.  As for now, are implemented in \Vauc only the
+(weighted) automata on (direct) products of free monoids, machines
+that are often called \emph{transducers} --- that is automata that
+realize (weighted) relations between words\footnote{When the relation
+  is ``weighted'' the multiplicity has to be taken in a
+  \emph{commutative} semiring.}.
+
+When designing \Vauc, we had three main goals in mind: we wanted
+\begin{enumerate}
+\item a \emph{general purpose} software,
+\item a software that allows a programming style natural to computer
+  scientists who work with automata and transducers,
+\item  an open and free software.
+\end{enumerate}
+\ldots
+
+This is the reason why we implemented so to say \emph{on top} of the
+\Vauc platform a library that allow to apply a number of functions on
+automata, and even to define and edit automata, without having to
+bother with subtleties of \Cxx programming.  The drawback of this is
+obviously that the user is given a \emph{fixed} set of functions that
+apply to \emph{already typed} automata.  This library of functions
+does not allow to write new algorithms on automata but permits to
+combine or compose without much difficulties nor efforts a rather
+large set of commands.  We call it \tafkit, standing for \emph{Typed
+  Automata Function Kit}, as these commands take as input, and output,
+automata whose type is fixed.  \tafkit is presented in
+\autoref{sec:tafkit}.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "vaucanson-user-manual"
+%%% End:

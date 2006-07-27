@@ -16,6 +16,20 @@
 \usepackage{texi}
 \usepackage{misc}
 
+% Mathematical symbols.
+\renewcommand{\max}{\textrm{max}}
+\renewcommand{\min}{\textrm{min}}
+\newcommand{\Z}{\texorpdfstring{\ensuremath{\mathbb{Z}}}{Z}}
+
+\newcommand{\newcal}[1]{%
+  \expandafter \newcommand \csname #1c\endcsname%
+  {\texorpdfstring{\ensuremath{\mathcal{#1}}}{#1}}%
+}
+\newcal{A}
+\newcal{B}
+\newcal{C}
+\newcal{T}
+
 % The same argument is output and put in the index.
 \usepackage{makeidx}
 \makeindex
@@ -143,6 +157,7 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 
+\input{introduction}
 \input{installation}
 \input{taf-kit}
 \input{library}
@@ -150,9 +165,10 @@
 
 \appendix
 
-\printindex
-
 \input{automata}
+\input{xml}
+
+\printindex
 \bibliographystyle{apalike}
 \bibliography{vaucanson.bib}
 

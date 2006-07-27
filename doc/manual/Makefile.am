@@ -30,11 +30,13 @@ $(srcdir)/vaucanson-developer-manual.pdf: manual.ext $(vaucanson_user_manual_sou
 vaucanson_user_manual_sources =			\
 vaucanson-developer-manual.tex			\
 vaucanson-user-manual.tex			\
+introduction.tex				\
 installation.tex				\
 taf-kit.tex					\
 library.tex					\
 developer.tex					\
-automata.tex
+automata.tex					\
+xml.tex
 
 $(srcdir)/automata.tex: generate-automata.sh
 # Use the TAF-Kit wrappers.

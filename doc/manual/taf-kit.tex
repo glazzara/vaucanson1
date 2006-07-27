@@ -4,25 +4,53 @@
 This chapter prevents a simple interface to \Vauc: a set of programs
 tailored to be used from a traditional shell.  Since they exchange
 \emph{typed} XML files, there is one program per automaton type.  Each
-program support a set of operations which depends on the type of the
+program supports a set of operations which depends on the type of the
 automaton.
 
-Six programs are planned to be shipped in a forthcoming version:
-\begin{description}
-\item[vcsn-b] automata over the Boolean semiring $\mathbb{B}$;
-\item[vcsn-z] automata over $(\mathbb{Z},+)$;
-\item[vcsn-z-min-plus] automata over $(\mathbb{Z},min)$;
-\item[vcsn-z-max-plus] automata over $(\mathbb{Z},max)$;
-\item[vcsn-rw-tdc] rational-weight transducers;
-\item[vcsn-tdc] automata over free monoid products.
-\end{description}
+Many users of automata consider only automata whose transitions are
+labeled by letters taken in an alphabet, which we call, roughly
+speaking, \emph{classical} automata or \emph{Boolean} automata.  The
+first program of the \tafkit, \command{vcsn-b}, allows to compute with
+classical automata and is described in \autoref{sec:vcsn-b}.
 
-Currently, only \command{vcsn-b}, \command{vcsn-z}, and
-\command{vcsn-tdc}, are implemented.
+\autoref{sec:vcsn-tdc} describes the program \command{vcsn-tdc} which
+allows to compute with transducers, that is, automata whose
+transitions are labeled by pair of words, which are elements of a
+\emph{product of free monoids}, hence the name.
+
+In \autoref{sec:vcsn-z} we consider the programs of the \tafkit that
+compute with automata over a free monoid and with multiplicity, or
+\emph{weight} taken in the set of integers equipped with the usual
+operations of addition and multiplication, that is, the semiring $\Z$,
+or with the operations of $\min$ and addition, or the operations of
+$\max$ and addition, that is, the semirings $\Z,\min,+$ and
+$\Z,\max,+$.  Finally, the forth section describes the program
+\command{vcsn-rw-tdc} which allows to compute with transducers, viewed
+as automata on a free monoid (the input monoid) with multiplicity
+taken in the semiring of finite and even rational subsets of another
+free monoid (the output monoid).
+
+\medskip
+
+
+It is planned that a forthcomming version will include also:
+
+\begin{description}
+\item[vcsn-zmin] for automata over a free monoid with multiplicity in
+  the semiring (\Z, \min, +)
+
+\item[vcsn-zmax] for automata over a free monoid with multiplicity in the
+  semiring (\Z, \max, +)
+
+\item[vcsn-rw-tdc] for transducers viewed as automata over a free
+  monoid with multiplicity in the semiring of rational sets (or
+  series) over (another) free monoid.
+\end{description}
 
 \newpage
 
 \section{Boolean automata}
+\label{sec:vcsn-b}
 
 This section focuses on the program \Index{\command{vcsn-b}}, the
 \tafkit component dedicated to Boolean automata.
@@ -50,16 +78,58 @@ produce a result on the standard output, and if an \var{automaton} is
 
 \smallskip
 
-For instance, the following command
+A typical line of commands from the \tafkit reads as follows:
+\begin{shell}
+# \kbd{vcsn-b determinize a1.xml > a1det.xml}
+\end{shell}
+and should be understood, or analysed, as follows.
+\begin{enumerate}
+\item \command{vcsn-b} is the call to a \command{shell} command
+  that will launch a \Vauc function.  \command{vcsn-b} has 2
+  arguments, the first one being the \var{function} which will be
+  launched, the second being the \var{automaton} that is the input
+  argument of the \var{function}.
+
+\item \taffn{determinize} is, as just said, a \Vauc function.  And as
+  it can easily be guessed, \taffn{determinize} takes an
+  \var{automaton} as argument, performs the subset construction on it
+  and outputs the result on the standard output.
+
+\item \file{a1.xml} is the description of an automaton --- of the
+  automaton of \autoref{b:a1} indeed --- in an XML format that is
+  understood\footnote{%
+    This format is not exactly part of the \Vauc platform.  It has
+    been developped for providing a mean of communication between
+    various softwares dealing with automata.  And then it has been
+    used as a communication tool between the invocation of \Vauc
+    function by the \tafkit.  A lay user of the \tafkit should not
+    need to know how this format is defined but a rouh description of
+    it is provided at \autoref{sec:xml} of the Appendix.}  by \Vauc.
+  Which means that this file must exist before the line is executed.
+  The \file{data/automata} directory provides a number of XML files
+  for examples of automata, a number of programs that produce the XML
+  files for automata whose definition depend upon some variables and
+  the \tafkit itself allow to define automata and thus to produce the
+  corresponding XML files (cf. below).
+
+\item \verb+ > + \file{a1det.xml} puts the result of
+  \taffn{determinize} \samp{a1.xml}, that is, the XML file which
+  describes the determinized automaton of $\Ac_{1}$ into the file
+  \file{a1det.xml}.
+\end{enumerate}
+
+\bigskip
+
+As a more elaborate example, consider the following command
 
 \execcaption{a1dmi}{vcsn-b dump-automaton a1 | vcsn-b determinize - | vcsn-b minimize - | vcsn-b info -}
 
 \noindent
-fetches the automaton \code{a1} from the automaton library,
+It fetches the automaton \code{a1} from the automaton library,
 determinizes it, minimizes the result, and finally displays
 information about the resulting automaton.
 
-Please, not the typographic conventions: user input is represented
+Please, note the typographic conventions: user input is represented
 \texttt{\# \kbd{like this}}, standard output follows \texttt{like
   this}, followed by standard error output \texttt{error: like this},
 and finally, if different from 0, the exit status is represented
@@ -110,13 +180,13 @@ The whole list of supported commands is available via
     slightly less artistic.
 
     The automaton is taken from \citet[Fig. I.1.1, p.
-    58]{sakarovitch.03.eta}.\index{A1@$\mathcal{A}_1$}
+    58]{sakarovitch.03.eta}.\index{A1@$\Ac_1$}
   \end{legend}
-  \caption{The automaton $\mathcal{A}_1$}
+  \caption{The automaton $\Ac_1$}
   \label{fig:a1}
 \end{figure}
 
-Let's consider the Boolean automaton $\mathcal{A}_1$
+Let's consider the Boolean automaton $\Ac_1$
 (\autoref{fig:a1}), part of the standard library.  It can be dumped
 using \Index{\taffn{dump-automaton}}:
 
@@ -139,7 +209,7 @@ both.
 \end{center}
 
 
-\subsubsection{Determinization of $\mathcal{A}_1$}
+\subsubsection{Determinization of $\Ac_1$}
 To determinize a Boolean automaton, call the
 \Index{\taffn{determinize}} function:
 
@@ -305,6 +375,7 @@ In the following:
 
 \newpage
 \section{Transducers}
+\label{sec:vcsn-tdc}
 
 \Vauc supports two views of transducers, and therefore provides two
 programs:
@@ -334,7 +405,7 @@ view to the other one.
       \ArcL{B}{C}{\IOL{0}{0}}
       \ArcL{C}{B}{\IOL{0}{1}}
     \end{VCPicture}
-    \caption{rational-weight transducer $\mathcal{T}_1$ computing the
+    \caption{rational-weight transducer $\Tc_1$ computing the
       quotient by 3 of a binary number}
     \label{fig:t1}
   \end{center}
@@ -354,15 +425,15 @@ view to the other one.
       \LoopS[.5]{B}{(0,0)}
       \EdgeL{A}{B}{(0,1)}
     \end{VCPicture}
-    \caption{Transducer $\mathcal{T}_2$ adding 1 to a binary number}
+    \caption{Transducer $\Tc_2$ adding 1 to a binary number}
     \label{fig:t2}
   \end{center}
 \end{figure}
 
 The rational-weight transducer
-\index{t1@$\mathcal{T}_1$}$\mathcal{T}_1$ (\autoref{fig:t1}) gives the
+\index{t1@$\Tc_1$}$\Tc_1$ (\autoref{fig:t1}) gives the
 quotient by 3 of a binary number and the transducer
-\index{t2@$\mathcal{T}_2$}$\mathcal{T}_2$ (\autoref{fig:t2}) adds 1 to
+\index{t2@$\Tc_2$}$\Tc_2$ (\autoref{fig:t2}) adds 1 to
 a binary number.
 
 \bigskip
@@ -488,7 +559,8 @@ In the following:
 \end{fnsection}
 
 \newpage
-\section{Weighted automata}
+\section{\Z Automata}
+\label{sec:vcsn-z}
 
 This part shows the use of the program \Index{\command{vcsn-z}}, but
 all comments should also stand for the programs
@@ -515,20 +587,20 @@ Again, we will toy with some of the automata provided by
     \LoopN[.5]{B}{a}
   \end{VCPicture}
   \begin{legend}
-    Considered without weight, $\mathcal{B}_1$ accepts words with a
+    Considered without weight, $\Bc_1$ accepts words with a
     \samp{b}.  With weights, it counts the number of \samp{b}s.  Taken
     from \citet[Fig. III.2.2, p.
-    434]{sakarovitch.03.eta}.\index{B1@$\mathcal{B}_1$}
+    434]{sakarovitch.03.eta}.\index{B1@$\Bc_1$}
   \end{legend}
-  \caption{The automaton $\mathcal{B}_1$}
+  \caption{The automaton $\Bc_1$}
   \label{fig:b1}
 \end{figure}
 
-Let's consider $\mathcal{B}_1$ (\autoref{fig:b1}, an
+Let's consider $\Bc_1$ (\autoref{fig:b1}, an
 \index{N-automaton@$\mathbb{N}$-automaton}$\mathbb{N}$-automaton,
 \textit{i.e.}  an automaton whose label's weights are in $\mathbb{N}$.
 This time the evaluation of the word \var{w} by the automaton
-$\mathcal{B}_1$ will produce a number, rather than simply accept or
+$\Bc_1$ will produce a number, rather than simply accept or
 reject \var{w}.  For instance let's evaluate \samp{abab} and
 \samp{bbab}:
 
@@ -536,13 +608,13 @@ reject \var{w}.  For instance let's evaluate \samp{abab} and
 \execcaption{b1.abab}{vcsn-z dump-automaton b1 | vcsn-z eval - 'abab'}
 
 \noindent
-Indeed, $\mathcal{B}_1$ counts the number of \samp{b}s.
+Indeed, $\Bc_1$ counts the number of \samp{b}s.
 
 \subsubsection{Power}
 
-Now let's consider the $\mathcal{B}_1^n$, where
+Now let's consider the $\Bc_1^n$, where
 \begin{displaymath}
-  \mathcal{B}_1^n = \prod_{i=1}^n \mathcal{B}_1, n > 0
+  \Bc_1^n = \prod_{i=1}^n \Bc_1, n > 0
 \end{displaymath}
 
 \noindent
@@ -554,15 +626,15 @@ This is implemented by the \Index{\taffn{power}} function:
 \end{shell}
 
 \noindent
-The file \file{b4.xml} now contains the automaton $\mathcal{B}_1^4$.
+The file \file{b4.xml} now contains the automaton $\Bc_1^4$.
 Lets see what the evaluation of the words \samp{abab} and \samp{bbab}
 gives with this automaton:
 
 \execcaption{b4.abbb}{vcsn-z eval b4.xml 'abbb'}
 \execcaption{b4.abab}{vcsn-z eval b4.xml 'abab'}
 
-This time one can notice that the automaton $\mathcal{B}_1^4$ returns
-the evaluation of $\mathcal{B}_1$ at power 4.
+This time one can notice that the automaton $\Bc_1^4$ returns
+the evaluation of $\Bc_1$ at power 4.
 
 \subsubsection{Quotient}
 
