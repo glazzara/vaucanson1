@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
  * Algorithms to make an automaton realtime.
  *
  * This file  contains algorithms  to build realtime  automaton. These
- * algorithms use the forward version of closure.
+ * algorithms use the forward version of eps_removal.
  *
  * @see forward_realtime(), forward_realtime_here()
  */
@@ -46,7 +46,7 @@ namespace vcsn {
    * In place modification of the automaton to make it realtime.
    *
    * This function  make an automaton realtime,  using forward version
-   * of closure for building.
+   * of eps_removal for building.
    *
    * @param a The automaton to make realtime.
    *
@@ -60,7 +60,7 @@ namespace vcsn {
    * Returns a fresh realtime automaton.
    *
    * This fonction build a  fresh realtime automaton from those given,
-   * using forward version of closure.
+   * using forward version of eps_removal.
    *
    * @param a The automaton to make realtime.
    *

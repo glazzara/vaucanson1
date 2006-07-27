@@ -1,4 +1,4 @@
-// closure.hxx: this file is part of the Vaucanson project.
+// eps_removal.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,10 +14,10 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_CLOSURE_HXX
-# define VCSN_ALGORITHMS_CLOSURE_HXX
+#ifndef VCSN_ALGORITHMS_EPS_REMOVAL_HXX
+# define VCSN_ALGORITHMS_EPS_REMOVAL_HXX
 
-# include <vaucanson/algorithms/closure.hh>
+# include <vaucanson/algorithms/eps_removal.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/usual_macros.hh>
@@ -27,13 +27,13 @@
 namespace vcsn {
 
   /*--------.
-  | closure |
+  | eps_removal |
   `--------*/
   template <class A_, typename Auto>
   void
-  do_closure_here(const AutomataBase<A_>&, Auto& a, bool bck_fwd)
+  do_eps_removal_here(const AutomataBase<A_>&, Auto& a, bool bck_fwd)
   {
-    // bck_fwd : true -> backward closure , false -> forward closure
+    // bck_fwd : true -> backward eps_removal , false -> forward eps_removal
     AUTOMATON_TYPES(Auto);
     typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
     typedef std::vector<series_set_elt_t>		vector_series_t;
@@ -81,7 +81,7 @@ namespace vcsn {
       }
     }
 
-    // Compute star(m_semiring_elt) <--> epsilon-closure
+    // Compute star(m_semiring_elt) <--> epsilon-eps_removal
     for (int r = 0; r < size; r++)
     {
       result_not_computable_if(!m_semiring_elt[r][r].starable());
@@ -105,14 +105,14 @@ namespace vcsn {
 
     if (bck_fwd)
     {
-      // Backward_closure
+      // Backward_eps_removal
       // Initialize the m_wfinal
       vector_series_t	m_wfinal (size, null_series);
       for_all_final_states(p, a)
 	m_wfinal[state_to_index[*p]] = a.get_final(*p);
       a.clear_final();
 
-      // Compute the backward_closure
+      // Compute the backward_eps_removal
       for_all_states(s, a)
       {
 	std::list<htransition_t> transition_list;
@@ -139,14 +139,14 @@ namespace vcsn {
     }
     else
     {
-      // Forward closure
+      // Forward eps_removal
       // Initialize the m_wfinal
       vector_series_t	m_winitial (size, null_series);
       for_all_initial_states(p, a)
 	m_winitial[state_to_index[*p]] = a.get_initial(*p);
       a.clear_initial();
 
-      // Compute the forward_closure
+      // Compute the forward_eps_removal
       for_all_states(s, a)
       {
 	std::list<htransition_t> transition_list;
@@ -175,52 +175,52 @@ namespace vcsn {
 
   template<typename  A, typename  T>
   void
-  closure_here(Element<A, T>& a, bool bck)
+  eps_removal_here(Element<A, T>& a, bool bck)
   {
-    do_closure_here(a.structure(), a, bck);
+    do_eps_removal_here(a.structure(), a, bck);
   }
 
   template<typename  A, typename  T>
   Element<A, T>
-  closure(const Element<A, T>& a, bool bck)
+  eps_removal(const Element<A, T>& a, bool bck)
   {
     Element<A, T> ret(a);
-    do_closure_here(ret.structure(), ret, bck);
+    do_eps_removal_here(ret.structure(), ret, bck);
     return ret;
   }
 
   template<typename  A, typename  T>
   void
-  backward_closure_here(Element<A, T>& a)
+  backward_eps_removal_here(Element<A, T>& a)
   {
-    do_closure_here(a.structure(), a, true);
+    do_eps_removal_here(a.structure(), a, true);
   }
 
   template<typename  A, typename  T>
   Element<A, T>
-  backward_closure(const Element<A, T>& a)
+  backward_eps_removal(const Element<A, T>& a)
   {
     Element<A, T> ret(a);
-    do_closure_here(ret.structure(), ret, true);
+    do_eps_removal_here(ret.structure(), ret, true);
     return ret;
   }
 
   template<typename  A, typename  T>
   void
-  forward_closure_here(Element<A, T>& a)
+  forward_eps_removal_here(Element<A, T>& a)
   {
-    do_closure_here(a.structure(), a, false);
+    do_eps_removal_here(a.structure(), a, false);
   }
 
   template<typename  A, typename  T>
   Element<A, T>
-  forward_closure(const Element<A, T>& a)
+  forward_eps_removal(const Element<A, T>& a)
   {
     Element<A, T> ret(a);
-    do_closure_here(ret.structure(), ret, false);
+    do_eps_removal_here(ret.structure(), ret, false);
     return ret;
   }
 
 } // vcsn
 
-#endif // ! VCSN_ALGORITHMS_CLOSURE_HXX
+#endif // ! VCSN_ALGORITHMS_EPS_REMOVAL_HXX

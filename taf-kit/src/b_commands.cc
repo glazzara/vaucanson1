@@ -103,8 +103,8 @@ const command_t command_map[] =
 
     COMMAND_ENTRY (accessible, Aut,
 		   "Give the maximal accessible subautomaton of `aut'."),
-    COMMAND_ENTRY (closure, Aut,
-		   "Give `aut' closed over epsilon transitions."),
+    COMMAND_ENTRY_CN (eps-removal, eps_removal, Aut,
+		   "Remove epsilon transitions."),
     COMMAND_ENTRY_CN (co-accessible, coaccessible, Aut,
 		      "Give the maximal coaccessible subautomaton of `aut'."),
     COMMAND_ENTRY (complement, Aut, "Complement `aut1'."),

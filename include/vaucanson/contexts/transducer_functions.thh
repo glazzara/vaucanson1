@@ -22,15 +22,15 @@
  */
 
 #ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
-# include <vaucanson/algorithms/closure.hh>
+# include <vaucanson/algorithms/eps_removal.hh>
+# include <vaucanson/algorithms/evaluation.hh>
+# include <vaucanson/algorithms/krat_exp_expand.hh>
+# include <vaucanson/algorithms/projection.hh>
 # include <vaucanson/algorithms/realtime.hh>
 # include <vaucanson/algorithms/realtime_composition.hh>
-# include <vaucanson/algorithms/evaluation.hh>
-# include <vaucanson/algorithms/projection.hh>
 # include <vaucanson/algorithms/realtime_to_fmp.hh>
-# include <vaucanson/algorithms/trim.hh>
 # include <vaucanson/algorithms/transpose.hh>
-# include <vaucanson/algorithms/krat_exp_expand.hh>
+# include <vaucanson/algorithms/trim.hh>
 #endif // ! VCSN_WITHOUT_ALGORITHM_INCLUDES
 
 namespace vcsn

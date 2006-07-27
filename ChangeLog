@@ -1,3 +1,33 @@
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Rename closure as eps_removal.
+
+	* include/vaucanson/algorithms/closure.hh,
+	* include/vaucanson/algorithms/closure.hxx
+	(backward_closure, backward_closure_here, forward_closure,
+	forward_closure_here, closure, closure_here):
+	Rename as...
+	* include/vaucanson/algorithms/eps_removal.hh,
+	* include/vaucanson/algorithms/eps_removal.hxx
+	(backward_eps_removal, backward_eps_removal_here)
+	(forward_eps_removal, forward_eps_removal_here, eps_removal)
+	(eps_removal_here): these.
+
+	* include/Makefile.am,
+	* include/vaucanson/contexts/automaton_functions.thh,
+	* include/vaucanson/contexts/transducer_functions.thh,
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hh,
+	* include/vaucanson/algorithms/forward_realtime.hh,
+	* include/vaucanson/algorithms/normalized_composition.hxx,
+	* taf-kit/tests/vcsn-b.test,
+	* taf-kit/src/tdc_commands.cc,
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/common_commands.hh,
+	* taf-kit/src/z_commands.cc: Adjust.
+
 2006-07-26  Akim Demaille  <akim@lrde.epita.fr>
 
 	B1's origin, and spell checking.

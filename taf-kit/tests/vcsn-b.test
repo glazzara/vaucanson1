@@ -17,13 +17,23 @@
 
 set -e
 
-## ---------------- ##
-## Test fonctions.  ##
-## ---------------- ##
+
+## -------------- ##
+## Input/output.  ##
+## -------------- ##
+
+## --------------------- ##
+## Test and evaluation.  ##
+## --------------------- ##
 
 # are-isomorphic
   vcsn-b are-isomorphic $a1 $a1
 ! vcsn-b are-isomorphic $a1 $b1
+
+# eval
+test "$(vcsn-b eval $a1 'a')" = 0
+test "$(vcsn-b eval $a1 'ab')" = 1
+test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 
 # is-ambiguous
 ! vcsn-b is-ambiguous $non_ambiguous1
@@ -41,7 +51,7 @@ set -e
 # is-empty.
 ! vcsn-b is-empty $a1
 
-# is-normzalized.
+# is-normalized.
 ! vcsn-b is-normalized $a1
   vcsn-b normalize $a1 | vcsn-b is-normalized -
 
@@ -51,3 +61,8 @@ set -e
 # is-standard
 ! vcsn-b is-standard $a1
   vcsn-b standardize $a1 | vcsn-b is-standard -
+
+
+## -------------------- ##
+## Generic algorithms.  ##
+## -------------------- ##

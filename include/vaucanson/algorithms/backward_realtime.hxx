@@ -21,7 +21,7 @@
 # include <vaucanson/algorithms/cut_up.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/closure.hh>
+# include <vaucanson/algorithms/eps_removal.hh>
 # include <vaucanson/algorithms/accessible.hh>
 
 # include <queue>
@@ -162,7 +162,7 @@ namespace vcsn {
     series_set_elt_t	series_identity =
       algebra::identity_as<series_set_elt_value_t>::of(a.structure().series());
 
-    backward_closure_here(a);
+    backward_eps_removal_here(a);
 
     for (typename automaton_t::state_iterator origin = a.states().begin();
 	 origin != a.states().end();

@@ -27,17 +27,17 @@
 
 #ifndef VCSN_WITHOUT_ALGORITHM_INCLUDES
 # include <vaucanson/algorithms/accessible.hh>
-# include <vaucanson/algorithms/closure.hh>
 # include <vaucanson/algorithms/complement.hh>
 # include <vaucanson/algorithms/complete.hh>
 # include <vaucanson/algorithms/concatenate.hh>
 # include <vaucanson/algorithms/cut_up.hh>
 # include <vaucanson/algorithms/derived_term_automaton.hh>
 # include <vaucanson/algorithms/determinize.hh>
+# include <vaucanson/algorithms/eps_removal.hh>
 # include <vaucanson/algorithms/eval.hh>
-# include <vaucanson/algorithms/isomorph.hh>
 # include <vaucanson/algorithms/is_ambiguous.hh>
 # include <vaucanson/algorithms/is_realtime.hh>
+# include <vaucanson/algorithms/isomorph.hh>
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/algorithms/minimization_moore.hh>
 # include <vaucanson/algorithms/normalized.hh>

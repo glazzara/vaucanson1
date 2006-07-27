@@ -357,7 +357,7 @@ namespace vcsn {
     composition_traits::map_of_states_t m;
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs_cov, rhs_cov, ret, lhs_states, rhs_states, m);
-    closure_here (ret);
+    eps_removal_here (ret);
     sub_automaton_here (ret, useful_states (ret));
   }
 
@@ -404,7 +404,7 @@ namespace vcsn {
 
     do_b_composition(ret.structure(), ret.structure().series().monoid(),
 		     lhs, rhs, ret, lhs_states, rhs_states, m);
-    closure_here (ret);
+    eps_removal_here (ret);
     sub_automaton_here (ret, useful_states (ret));
   }
 

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 # include <vaucanson/algorithms/forward_realtime.hh>
 
 # include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/closure.hh>
+# include <vaucanson/algorithms/eps_removal.hh>
 # include <vaucanson/algorithms/accessible.hh>
 
 # include <deque>
@@ -50,7 +50,7 @@ namespace vcsn {
     series_set_elt_t	      series_identity =
       algebra::identity_as<series_set_elt_value_t>::of(a.structure().series());
 
-    forward_closure_here(a);
+    forward_eps_removal_here(a);
 
     for_all_states(origin, a)
     {

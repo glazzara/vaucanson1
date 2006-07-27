@@ -182,7 +182,7 @@ const command_t command_map[] =
   COMMAND_GROUP (
     "Generic algorithm for transducers:",
 
-    COMMAND_ENTRY (closure, Aut, "epsilon-removal algorithm."),
+    COMMAND_ENTRY (eps_removal, Aut, "epsilon-removal algorithm."),
     COMMAND_ENTRY (compose, AutAut,
 		   "Compute a the composition of `aut1' and `aut2'."),
     COMMAND_ENTRY (domain, Aut,

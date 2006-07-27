@@ -58,9 +58,9 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (transpose));
 
-DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (closure)
+DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (eps_removal)
 				  ARG_KIND (aut)
-				  ALGOS (accessible, closure));
+				  ALGOS (accessible, eps_removal));
 
 DEFINE_COMMAND (NAME (are_isomorphic)
 		CODE (bool b = are_isomorphic (get_aut (args.args[1]),
