@@ -60,22 +60,22 @@ check-TESTS:
 	$(MAKE) $(TEST_LOGS);							\
 	results=$$(for f in $(TEST_LOGS); do sed 1q $$f; done);			\
 	all=$$(echo "$$results" | wc -l);					\
-	fail=$$(echo "$$results" | grep 'FAIL' | wc -l);			\
-	pass=$$(echo "$$results" | grep 'PASS' | wc -l);			\
-	skip=$$(echo "$$results" | grep 'SKIP' | wc -l);			\
-	xfail=$$(echo "$$results" | grep 'XFAIL' | wc -l);			\
-	xpass=$$(echo "$$results" | grep 'XPASS' | wc -l);			\
+	fail=$$(echo "$$results" | grep '^FAIL:' | wc -l);			\
+	pass=$$(echo "$$results" | grep '^PASS:' | wc -l);			\
+	skip=$$(echo "$$results" | grep '^SKIP:' | wc -l);			\
+	xfail=$$(echo "$$results" | grep '^XFAIL:' | wc -l);			\
+	xpass=$$(echo "$$results" | grep '^XPASS:' | wc -l);			\
 	case fail=$$fail:xfail=$$xfail:xpass=$$xpass in				\
 	  fail=0:xfail=0:xpass=*)						\
 	    banner="All $$all tests passed";;					\
 	  fail=0:xfail=*:xpass=*)						\
 	    banner="All $$all tests behaved as expected";			\
-	    banner="$banner ($$xfail expected failures)";;			\
+	    banner="$$banner ($$xfail expected failures)";;			\
 	  fail=*:xfail=*:xpass=0)						\
 	    banner="$$fail of $$all tests failed";;				\
 	  fail=*:xfail=*:xpass=*)						\
 	    banner="$$fail of $$all tests did not behave as expected";		\
-	    banner="$banner ($$xpass unexpected passes)";;			\
+	    banner="$$banner ($$xpass unexpected passes)";;			\
 	  *)									\
             echo >&2 "incorrect case"; exit 4;;					\
 	esac;									\

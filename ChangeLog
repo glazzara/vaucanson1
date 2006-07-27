@@ -1,5 +1,11 @@
 2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
 
+	check-TESTS: Fix the banner.
+
+	* build-aux/check.mk: Also, don't confuse FAIL and XFAIL.
+
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
+
 	Wider use of the new check-TESTS.
 
 	* src/tests/design_pattern/intrinsics.hh: Look for tester.hh at the
