@@ -9,8 +9,8 @@ This document describes major updates to the Vaucanson_ project.
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
 
-Vaucanson 0.8a
-==============
+Vaucanson 1.0, July 28th, 2006
+==============================
 
 - libvaucanson
 
@@ -35,6 +35,21 @@ Vaucanson 0.8a
 
   + The automaton library is now split by type.  See `data/b` and
     `data/z`.  The generators used there are nice demo programs.
+
+  + VaucanSWIG is in the top level.
+
+- This release was made and coordinated by
+
+  + Akim Demaille
+  + Florent Terrones
+  + Guillaume Lazzara
+  + Guillaume Leroi
+  + Jacques Sakarovitch
+  + Matthieu Varin
+  + Michael Cadilhac
+  + Robert Bigaignon
+  + Sylvain Lombardy
+
 
 Vaucanson 0.8 May 15, 2006
 ==========================
@@ -76,7 +91,7 @@ Vaucanson 0.8 May 15, 2006
   + `for_each` loops have been changed to `for_all`, for consistency
      with STL `for_each` that uses functor.
 
-- Delta funtions.
+- Delta functions.
 
   Delta functions,  used to extract  the successor states or  edges of
   a  state, can  now  take functor  with  the `deltaf`  methods of  an
@@ -86,16 +101,28 @@ Vaucanson 0.8 May 15, 2006
 
 - Benchmarks.
 
-  Some Vaucanson benchmarks have been added to the distribution. Feel
-  free to make your bench results and please send us them!
+  Some Vaucanson benchmarks were added to the distribution.  Feel free
+  to make your bench results and please send us them!
 
 - Bug fixes.
 
-  Some bugs have been fixed in the core library and some algorithms
+  Many bugs have been fixed in the core library and some algorithms
   have been cleaned.
 
-Vaucanson 0.7.2 November 09, 2005
-=================================
+- This release was made and coordinated by
+
+  + Akim Demaille
+  + Florent Terrones
+  + Guillaume Lazzara
+  + Guillaume Leroi
+  + Jacques Sakarovitch
+  + Matthieu Varin
+  + Michael Cadilhac
+  + Robert Bigaignon
+  + Sylvain Lombardy
+
+Vaucanson 0.7.2 November 9, 2005
+================================
 
 - Vaucanson works with `GNU C++`_ 3.3, 3.4, 4.0 and ICC_ 9.0.
 

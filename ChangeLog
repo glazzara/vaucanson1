@@ -1,5 +1,12 @@
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
 
+	1.0.
+
+	* configure.ac, doc/NEWS.txt: Prepare for 1.0.
+	* doc/manual/introduction.tex: Spello.
+
+2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
+
 	More adjustment to the doc.
 
 	From Jacques Sakarovitch.
