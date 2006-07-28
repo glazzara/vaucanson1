@@ -9,10 +9,11 @@ This document describes major updates to the Vaucanson_ project.
 .. _Vaucanson: http://vaucanson.lrde.epita.fr
 
 
+
 Vaucanson 1.0, July 28th, 2006
 ==============================
 
-- libvaucanson
+- libvaucanson.
 
   + Support::operator* simplifies the writing for one-letter
     supports.  Instead of `*e.supp().begin()`, write `*e.supp()`.
@@ -20,25 +21,70 @@ Vaucanson 1.0, July 28th, 2006
   + The `closure` functions were renamed as `eps_removal`, since
     that's what they actually do.
 
+  + `vaucanson.xsd` is now is the data/ directory.
+
+  The macros `for_each` are now called `for_all`.
+
+  We can now install the automaton library thanks to `make install`.
+
+  XML:
+    Do not fill the alphabet with the default range anymore
+    if an empty alphabet is clearly defined.
+
+    The nodes like `<label_type>` are renamed to `<labelType>`,
+    so as to fit with all other XML files format.
+
+    + transcode (s);
+      Overloaded function. Convert a std::string (respectively a char) into XML.
+
 - `VCSN_XSD_PATH` is no longer used.
   The environment variable `VCSN_DATA_PATH` should point to the
   Vaucanson data directory, containing, among others, the
   `vaucanson.xsd` file.
 
-  `vaucanson.xsd` is no longer looked up for in the current
-  directory.
+  `vaucanson.xsd` is no longer looked for in the current directory.
 
-- Layout
+
+- TAF-kit.
+  + We can now use vcsn-z and vcsn-tdc to call functions for Z automata
+    and FMP transducers.
+
+  + The program vcsn-b now uses an history to print failed commands.
+
+  + We have now the identity function in the TAF-kit.
+
+- Algorithms.
+  + is_ambiguous(a);
+    Test if `a` is ambiguous.
+
+  + trim_here(a);
+    Trim the automaton `a`.
+
+  + sub_normalize_here(a);
+    Sub-normalized the automaton `a`.
+
+  + invert(t);
+    Return the inverse of the RW transducer `t`, i.e. the
+    transducer that performs the invert rational relation.
+
+  + u_compose(a):
+    Composition for boolean transducers that keeps the same number of paths.
+
+    normalized_composition functions are now called compose.
+
+- Layout.
 
   The layout of the sources was changed to match the layout of
   Vaucanson when installed.
 
-  + The automaton library is now split by type.  See `data/b` and
-    `data/z`.  The generators used there are nice demo programs.
+  + The automaton library is now split by type. See `data/b` and
+    `data/z`. The generators used there are nice demo programs.
 
   + VaucanSWIG is in the top level.
 
-- This release was made and coordinated by
+  demos/utilities/* has been moved into demos/.
+
+- This release was made and coordinated by:
 
   + Akim Demaille
   + Florent Terrones

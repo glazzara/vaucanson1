@@ -1,3 +1,11 @@
+2006-07-28  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Add NEWS.
+
+	Add the NEWS for the release of Vaucanson 1.0.
+
+	* doc/NEWS.txt: Update for Vaucanson 1.0.
+
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
 
 	Doc typos.
