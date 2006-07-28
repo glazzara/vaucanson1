@@ -54,7 +54,7 @@ AC_DEFUN([_VCSN_CHECK_XML],
       AC_ERROR([Xerces-C++ not found or not >= 2.3])
    fi
 
-   AC_CACHE_CHECK([for useable Xerces-C++ library],
+   AC_CACHE_CHECK([for usable Xerces-C++ library],
                   [vcsn_cv_xerces_lib],
                   [vcsn_cv_xerces_lib=no
                    vcsn_save_CPPFLAGS=$CPPFLAGS
@@ -71,6 +71,19 @@ int main() {
   const char *foo = "foo";
   using namespace xercesc;
   XMLCh* bar = XMLString::transcode(foo);
+
+  /* Check libxerces-x C++ ABI.
+
+     When a C++ piece of Vaucanson, compiled with G++ 4.0, is linked
+     against libxerces-c, compiled with G++ 3.3 (which is the case
+     with Fink on Mac OS X Tiger (10.3) / Xcode 1.5), the linker
+     complains about undefined symbols of typeinfo's for the following
+     types.  (This is a simplistic test, but this should be enough to
+     check the C++ ABI).  */
+  xercesc_2_6::InputSource* is;
+  xercesc_2_6::DOMException* de;
+  xercesc_2_6::XMLException* xe;
+  xercesc_2_6::BinInputStream* bis;
 }
                                   ])],
                                   [vcsn_cv_xerces_lib=yes])

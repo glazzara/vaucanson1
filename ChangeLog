@@ -1,3 +1,10 @@
+2006-07-28  Roland Levillain  <roland@lrde.epita.fr>
+
+	Check the C++ ABI of libxerces-x.
+
+	* build-aux/vcsn-xml.m4 (_VCSN_CHECK_XML): Check the C++ ABI of
+	libxerces-x.
+
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
 
 	Wrap --list-commands properly.
