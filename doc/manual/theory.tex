@@ -58,9 +58,9 @@ an equivalent standard one, and goes as follows.
 \subsubsection{Standard automaton of an expression}
 
 A classical algorithm --- often credited to Glushkov --- transforms a
-rational (ie regular) expression (of litteral length n ) into a
+rational (ie regular) expression (of literal length n ) into a
 standard automaton (with n+1 states). This automaton is known in the
-litterature as the 'Glushkov automaton' or as the 'position automaton'
+literature as the 'Glushkov automaton' or as the 'position automaton'
 of the expression.
 
 \begin{remark}
@@ -107,7 +107,7 @@ multiplicity) is said to be \index{normalized}\dfn{normalized} if
 \begin{remark}
   The terminology is rather unfortunate, for there are already so many
   different "normalized" things. The notion however, is rather
-  classsical, under this name, at least for classical Boolean
+  classical, under this name, at least for classical Boolean
   automata, because of one classical proof of Kleene theorem. For the
   same reason, it is a proposition credited to Schutzenberger that
   every weighted automaton $A$ is equivalent to a normalized one,
@@ -148,7 +148,7 @@ by A):
 \noindent
 (where  X  is the alphabet.)
 
-for weighted automata: the series realized by normalize(A) is equel to
+for weighted automata: the series realized by normalize(A) is eke to
 the one realized by $A$, but for the coefficient of $1_{X^*}$ which is 0:
 
 %% FIXME: Can't use \circledot here.  What is the package for it?
@@ -157,7 +157,7 @@ the one realized by $A$, but for the coefficient of $1_{X^*}$ which is 0:
 \end{displaymath}
 
 \noindent
-(where  $char(X^+)$  is the characteric series of  $X^+$.
+(where  $char(X^+)$  is the characteristic series of  $X^+$.
 
 that is, in both cases, normalize(A) accepts or realizes the 'proper'
 part of the language accepted, or of the series realized by, $A$ .
@@ -172,7 +172,7 @@ under rational operations: sum, product and star.
 \subsubsection{The sum}
 
 The sum is never a problem: the union of two automata is an automaton
-whose behaviour is the sum of the behaviours of these automata.
+whose behavior is the sum of the behaviors of these automata.
 
 \begin{remark}
   If we consider automata with unique initial and/or final state, it
@@ -187,8 +187,8 @@ whose behaviour is the sum of the behaviours of these automata.
 
 The product (of accepted language or of realized series) is carried
 out by the "concatenation" of automata --- since we keep the word
-"product" for the cartesian product of automata which realizes the
-intersection of languages or the hadamard product of series. For
+"product" for the Cartesian product of automata which realizes the
+intersection of languages or the Hadamard product of series. For
 classical automata, the concatenation of $A$ and $B$ can be described as
 follows: add an epsilon-transition from every final state of $A$ to
 every initial state of $B$, and suppress the epsilon-transition (if
@@ -218,7 +218,7 @@ initial and final states of $A$ . Since the series accepted by a
 normalized automaton is proper, its star is always defined, this is
 the advantage of the construction. On the other hand, star(A) is not
 normalized anymore, and if this operation is used inside an algorithm
-that buils an automaton from an expression, it yields an explosion of
+that builds an automaton from an expression, it yields an explosion of
 the number of states.
 
 If $A$ is standard, with initial state $i$ and initial multiplicity c
@@ -236,8 +236,8 @@ no epsilon-transition.  In this case, star(A) is defined as follows:
 \end{enumerate}
 \begin{remark}
   If $A$ is not standard, it would be a bad idea to use the above
-  construction, even letting asside the multiplicity --- although it
-  may have occured to knowledgeable people.
+  construction, even letting aside the multiplicity --- although it
+  may have occurred to knowledgeable people.
 \end{remark}
 
 \subsection{Conclusion}
@@ -253,7 +253,7 @@ an automaton.
 
 It took me some times to get to this conclusion. If I were to rewrite
 a new edition of \cite{sakarovitch.03.eta}, I would not mention
-normalized automata besides exercices and historical notes. All the
+normalized automata besides exercises and historical notes. All the
 theory would be presented with standard automata only.
 
 %%% Local Variables:
@@ -261,3 +261,6 @@ theory would be presented with standard automata only.
 %%% ispell-local-dictionary: "american"
 %%% TeX-master: "vaucanson-user-manual"
 %%% End:
+
+% LocalWords:  semiring ite Glushkov Rouen Kleene Schutzenberger mutatis
+% LocalWords:  mutandis Kleene's Hadamard

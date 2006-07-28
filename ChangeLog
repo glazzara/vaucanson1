@@ -1,5 +1,13 @@
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
 
+	Doc typos.
+
+	* doc/manual/installation.tex, doc/manual/introduction.tex,
+	* doc/manual/theory.tex, doc/manual/taf-kit.tex: Typos and
+	spell checking mistakes.
+
+2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
+
 	* src/demos/one_rule_rewriting/Makefile.am: Fix relative backward
 	path.
 

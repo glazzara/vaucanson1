@@ -21,19 +21,21 @@ transitions are labeled by pair of words, which are elements of a
 In \autoref{sec:vcsn-z} we consider the programs of the \tafkit that
 compute with automata over a free monoid and with multiplicity, or
 \emph{weight} taken in the set of integers equipped with the usual
-operations of addition and multiplication, that is, the semiring $\Z$,
-or with the operations of $\min$ and addition, or the operations of
-$\max$ and addition, that is, the semirings $\Z,\min,+$ and
-$\Z,\max,+$.  Finally, the forth section describes the program
-\command{vcsn-rw-tdc} which allows to compute with transducers, viewed
-as automata on a free monoid (the input monoid) with multiplicity
-taken in the semiring of finite and even rational subsets of another
-free monoid (the output monoid).
+operations of addition and multiplication, that is, the semiring $\Z$.
+
+% ,
+% or with the operations of $\min$ and addition, or the operations of
+% $\max$ and addition, that is, the semirings $\Z,\min,+$ and
+% $\Z,\max,+$.  Finally, the forth section describes the program
+% \command{vcsn-rw-tdc} which allows to compute with transducers, viewed
+% as automata on a free monoid (the input monoid) with multiplicity
+% taken in the semiring of finite and even rational subsets of another
+% free monoid (the output monoid).
 
 \medskip
 
 
-It is planned that a forthcomming version will include also:
+It is planned that a forthcoming version will include also:
 
 \begin{description}
 \item[vcsn-zmin] for automata over a free monoid with multiplicity in
@@ -82,7 +84,7 @@ A typical line of commands from the \tafkit reads as follows:
 \begin{shell}
 # \kbd{vcsn-b determinize a1.xml > a1det.xml}
 \end{shell}
-and should be understood, or analysed, as follows.
+and should be understood, or analyzed, as follows.
 \begin{enumerate}
 \item \command{vcsn-b} is the call to a \command{shell} command
   that will launch a \Vauc function.  \command{vcsn-b} has 2
@@ -99,8 +101,8 @@ and should be understood, or analysed, as follows.
   automaton of \autoref{b:a1} indeed --- in an XML format that is
   understood\footnote{%
     This format is not exactly part of the \Vauc platform.  It has
-    been developped for providing a mean of communication between
-    various softwares dealing with automata.  And then it has been
+    been developed for providing a mean of communication between
+    various programs dealing with automata.  And then it has been
     used as a communication tool between the invocation of \Vauc
     function by the \tafkit.  A lay user of the \tafkit should not
     need to know how this format is
@@ -749,5 +751,5 @@ for both.  They are called using \command{vcsn-z},
 %%% End:
 
 % LocalWords:  determinize vcsn semiring rw tdc TAF aut dmi determinizes bz xml
-% LocalWords:  det detmin eval abab bbba aabb determinized Hopcroft aab fmp
-% LocalWords:  Glushkov thompson realtime bbab abbb
+% LocalWords:  det detmin eval abab bbba aabb determinized Hopcroft aab fmp dom
+% LocalWords:  Glushkov thompson realtime bbab abbb monoids zmin zmax
