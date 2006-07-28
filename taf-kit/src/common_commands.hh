@@ -109,7 +109,7 @@ DEFINE_COMMAND (NAME (dot_dump)
 
 # define USE_IO_COMMAND_GROUP()						\
   COMMAND_GROUP (							\
-    "Input/output work with automata:",					\
+    "Input/output work:",						\
 									\
     COMMAND_ENTRY (define_automaton, File,				\
 		   "Define an automaton from scratch."),		\

@@ -153,20 +153,7 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 
 const command_t command_map[] =
 {
-  COMMAND_GROUP (
-    "Input/output work with transducers:",
-
-    COMMAND_ENTRY (define_automaton, File,
-		   "Define an transducer from scratch."),
-    COMMAND_ENTRY (display, Aut, "Display `aut'."),
-    COMMAND_ENTRY (dot_dump, Aut, "Dump dot output of `aut'."),
-    COMMAND_ENTRY (dump_automaton, File, "Dump a predefined automaton."),
-    COMMAND_ENTRY (edit_automaton, File,
-		   "Edit an existing transducer."),
-    COMMAND_ENTRY (list_automata, Nil, "List predefined automata."),
-    COMMAND_ENTRY (identity, Aut, "Return `aut'."),
-    COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'.")),
-
+  USE_IO_COMMAND_GROUP (),
 
   COMMAND_GROUP (
     "Tests and evaluation on transducers:",
@@ -175,7 +162,9 @@ const command_t command_map[] =
 		   "Test if `aut1' and `aut2' are isomorphic."),
     COMMAND_ENTRY (is_empty, Aut,
 		   "Test if `aut' realizes the empty relation."),
-    COMMAND_ENTRY (is_sub_normalized, Aut, "Test if `aut' is sub-normalized.")),
+    COMMAND_ENTRY (is_sub_normalized, Aut, "Test if `aut' is sub-normalized.")
+
+    ),
 
 
   COMMAND_GROUP (
@@ -194,7 +183,9 @@ const command_t command_map[] =
 		   "transducer `aut'."),
     //    COMMAND_ENTRY (transpose, Aut,
     //		   "Compute the transposed of the transducer `aut'."),
-    COMMAND_ENTRY (trim, Aut, "Trim transducer `aut'.")),
+    COMMAND_ENTRY (trim, Aut, "Trim transducer `aut'.")
+
+    ),
 
 
   COMMAND_GROUP (
@@ -213,6 +204,9 @@ const command_t command_map[] =
 		   "Compute the equivalent realtime transducer of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
 		   "Transform a Boolean automaton in a fmp transducer by\n\t"
-		   "creating, for each word,\n a pair containing twice this word.")),
+		   "creating, for each word,\n a pair containing twice this word.")
+
+    ),
+
   {0, 0 ,0 ,0, 0}
 };
