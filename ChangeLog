@@ -1,5 +1,11 @@
 2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* taf-kit/src/common_commands.hh (transpose): Move...
+	* taf-kit/src/common_automaton_commands.hh (transpose): ...Here.  It
+	should be moved back once the algorithm is fixed for TDCs.
+
+2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* taf-kit/src/tdc_commands.cc: Fix some docstrings.
 
 2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
