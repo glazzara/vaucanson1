@@ -1,3 +1,13 @@
+2006-07-28  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Disable tests.
+
+	* src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh,
+	* src/tests/include/tests/algebra/series/misc/series_test.hh:
+	Disable those tests.
+
 2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Rearrange command organization in TAF.
