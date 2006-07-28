@@ -201,7 +201,7 @@ const command_t command_map[] =
 
 
   COMMAND_GROUP (
-    "Algoritms for transducers:",
+    "Algorithms for transducers:",
 
     COMMAND_ENTRY (sub_normalize, Aut,
 		   "Compute the sub-normalized transducer of `aut'."),

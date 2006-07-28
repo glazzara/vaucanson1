@@ -32,12 +32,7 @@
   | Command definition |
   `-------------------*/
 
-DEFINE_IS_PROPERTY_COMMAND (complete);
-
 DEFINE_IS_PROPERTY_COMMAND (deterministic);
-
-DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
-			ALGO (complete));
 
 DEFINE_ONE_ARG_COMMAND_TWO_ALGOS (NAME (determinize)
 				  ARG_KIND (aut)
@@ -58,22 +53,7 @@ DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 
 const command_t command_map[] =
 {
-  COMMAND_GROUP (
-    "Input/output work with automata:",
-
-    COMMAND_ENTRY (define_automaton, File,
-		   "Define an automaton from scratch."),
-    COMMAND_ENTRY (display, Aut, "Display `aut'."),
-    COMMAND_ENTRY (dot_dump, Aut,
-		   "Dump dot output of `aut'."),
-    COMMAND_ENTRY (dump_automaton, File, "Dump a predefined automaton."),
-    COMMAND_ENTRY (edit_automaton, File,
-		   "Edit an existing automaton."),
-    COMMAND_ENTRY (identity, Aut, "Return `aut'."),
-    COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'."),
-    COMMAND_ENTRY (list_automata, Nil, "List predefined automata.")
-
-    ),
+  USE_IO_COMMAND_GROUP (),
 
   COMMAND_GROUP (
     "Tests and evaluation on automata:",
@@ -98,53 +78,21 @@ const command_t command_map[] =
 
     ),
 
-  COMMAND_GROUP (
-    "Generic algorithms for automata:",
+  USE_GENERIC_AUTOMATON_COMMAND_GROUP (),
 
-    COMMAND_ENTRY (accessible, Aut,
-		   "Give the maximal accessible subautomaton of `aut'."),
-    COMMAND_ENTRY_CN (eps-removal, eps_removal, Aut,
-		   "Remove epsilon transitions."),
-    COMMAND_ENTRY_CN (co-accessible, coaccessible, Aut,
-		      "Give the maximal coaccessible subautomaton of `aut'."),
-    COMMAND_ENTRY (complement, Aut, "Complement `aut1'."),
-    COMMAND_ENTRY (complete, Aut, "Give the complete version of `aut1'."),
-    COMMAND_ENTRY (concatenate, AutAut, "Concatenate `aut1' and `aut2'."),
+  COMMAND_GROUP (
+    "Boolean automaton specific algorithms:",
+
+    COMMAND_ENTRY (complement, Aut, "Complement `aut'."),
     COMMAND_ENTRY (determinize, Aut,
 		   "Give the determinized automaton of `aut'."),
     COMMAND_ENTRY_CN (minimize, minimization_hopcroft, Aut,
 		      "Give the minimized of `aut' (Hopcroft algorithm)."),
     COMMAND_ENTRY_CN (minimize-moore, minimization_moore, Aut,
-		      "Give the minimized of `aut' (Moore algorithm)."),
-    //    COMMAND_ENTRY (normalize, Aut,
-    //		   "Give the Thompson-normalized automaton of `aut'."),
-    COMMAND_ENTRY (power, AutInt, "Give the power of `aut' by `n'."),
-    COMMAND_ENTRY (product, AutAut, "Give the product of `aut1' by `aut2'." ),
-    COMMAND_ENTRY (quotient, Aut, "Give the quotient of `aut'."),
-    COMMAND_ENTRY (realtime, Aut, "Give the realtime version of `aut'."),
-    //    COMMAND_ENTRY (standardize, Aut, "Give the standard automaton of `aut'."),
-    COMMAND_ENTRY (sum, AutAut, "Give the sum of `aut1' and `aut2'."),
-    COMMAND_ENTRY (transpose, Aut, "Transpose the automaton `aut'."),
-    COMMAND_ENTRY (trim, Aut, "Trim the automaton `aut'.")
-
+		      "Give the minimized of `aut' (Moore algorithm).")
     ),
 
-  COMMAND_GROUP (
-    "Conversion between automata and expressions:",
-
-    COMMAND_ENTRY (aut_to_exp, Aut,
-		   "Give the automaton associated to `aut'."),
-    COMMAND_ENTRY_CN (derived-term, derived_term_automaton, Exp,
-		      "Use derivative to compute the automaton of `exp'."),
-    COMMAND_ENTRY_CN (exp-to-aut, standard_of, Exp,
-		      "Alias of `stardard'."),
-    COMMAND_ENTRY (expand, Exp, "Expand `exp'."),
-    COMMAND_ENTRY_CN (standard, standard_of, Exp,
-		      "Give the standard automaton of `exp'."),
-    COMMAND_ENTRY_CN (thompson, thompson_of, Exp,
-		      "Give the Thompson automaton of `exp'.")
-
-    ),
+  USE_RATEXP_COMMAND_GROUP (),
 
   {0, 0, 0, 0, 0}
 };

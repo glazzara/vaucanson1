@@ -56,11 +56,17 @@ using vcsn::xml::XML;
 
 DEFINE_IS_PROPERTY_COMMAND (ambiguous);
 
+DEFINE_IS_PROPERTY_COMMAND (complete);
+
 //DEFINE_IS_PROPERTY_COMMAND (normalized);
 
 DEFINE_IS_PROPERTY_COMMAND (realtime);
 
 //DEFINE_IS_PROPERTY_COMMAND (standard);
+
+
+DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
+			ALGO (complete));
 
 DEFINE_ONE_ARG_COMMAND (ARG_KIND (aut)
 			ALGO (realtime));
@@ -108,5 +114,32 @@ DEFINE_COMMAND (NAME (power)
 //		      standardize (a))
 //		OUTPUT (automaton_saver (a, string_out (), XML ()))
 //		RETURNVALUE (0));
+
+# define USE_GENERIC_AUTOMATON_COMMAND_GROUP()				\
+  COMMAND_GROUP (							\
+    "Generic algorithms for automata:",					\
+									\
+    COMMAND_ENTRY (accessible, Aut,					\
+		   "Give the maximal accessible subautomaton of `aut'."), \
+    COMMAND_ENTRY (eps_removal, Aut,					\
+		   "Give `aut' closed over epsilon transitions."),	\
+    COMMAND_ENTRY_CN (co-accessible, coaccessible, Aut,			\
+		      "Give the maximal coaccessible subautomaton of `aut'."), \
+    COMMAND_ENTRY (complete, Aut, "Give the complete version of `aut'."), \
+    COMMAND_ENTRY (concatenate, AutAut, "Concatenate `aut1' and `aut2'."), \
+    /*  COMMAND_ENTRY (normalize, Aut,					\
+        "Give the Thompson-normalized automaton of `aut'."), */		\
+    COMMAND_ENTRY (power, AutInt, "Give the power of `aut' by `n'."),	\
+    COMMAND_ENTRY (product, AutAut, "Give the product of `aut1' by `aut2'." ), \
+    COMMAND_ENTRY (quotient, Aut, "Give the quotient of `aut'."),	\
+    COMMAND_ENTRY (realtime, Aut, "Give the realtime version of `aut'."), \
+    /* COMMAND_ENTRY (standardize, Aut,					\
+       "Give the standard automaton of `aut'."), */			\
+    COMMAND_ENTRY (sum, AutAut, "Give the sum of `aut1' and `aut2'."),	\
+    COMMAND_ENTRY (transpose, Aut, "Transpose the automaton `aut'."),	\
+    COMMAND_ENTRY (trim, Aut, "Trim the automaton `aut'.")		\
+									\
+    )									\
+
 
 #endif // ! COMMON_AUTOMATON_COMMANDS_HH

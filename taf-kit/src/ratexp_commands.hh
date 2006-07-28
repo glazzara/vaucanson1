@@ -74,4 +74,22 @@ DEFINE_COMMAND (NAME (expand)
 		OUTPUT (expand (get_exp (args.args[1])))
 		RETURNVALUE (0));
 
+# define USE_RATEXP_COMMAND_GROUP()					\
+  COMMAND_GROUP (							\
+    "Conversion between automata and expressions:",			\
+									\
+    COMMAND_ENTRY (aut_to_exp, Aut,					\
+		   "Give the automaton associated to `aut'."),		\
+    COMMAND_ENTRY_CN (derived-term, derived_term_automaton, Exp,	\
+		      "Use derivative to compute the automaton of `exp'."), \
+    COMMAND_ENTRY_CN (exp-to-aut, standard_of, Exp,			\
+		      "Alias of `stardard'."),				\
+    COMMAND_ENTRY (expand, Exp, "Expand `exp'."),			\
+    COMMAND_ENTRY_CN (standard, standard_of, Exp,			\
+		      "Give the standard automaton of `exp'."),		\
+    COMMAND_ENTRY_CN (thompson, thompson_of, Exp,			\
+		      "Give the Thompson automaton of `exp'.")		\
+									\
+    )
+
 #endif /* !RATEXP_COMMANDS_HH */

@@ -1,3 +1,15 @@
+2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Rearrange command organization in TAF.
+
+	* taf-kit/src/tdc_commands.cc,
+	* taf-kit/src/ratexp_commands.hh,
+	* taf-kit/src/interface.cc,
+	* taf-kit/src/b_commands.cc,
+	* taf-kit/src/common_automaton_commands.hh,
+	* taf-kit/src/common_commands.hh,
+	* taf-kit/src/z_commands.cc: Do it.  Use sections specific to Z and B.
+
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
 
 	1.0.

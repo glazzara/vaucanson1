@@ -82,9 +82,13 @@ int execute_command (const arguments_t& args)
     {
       if (command->n_params != args.n_args - 1)
       {
-	warn (args.progname << ": wrong number of arguments for `"
-	      << command->name << " " << command->params << "' (should be "
-	      << command->n_params << ").");
+	if (command->n_params)
+	  warn (args.progname << ": wrong number of arguments for `"
+		<< command->name << " " << command->params << "' (should be "
+		<< command->n_params << ").");
+	else
+	  warn (args.progname << ": wrong number of arguments for `"
+		<< command->name << "' (should be 0).");
 	warn ("Try `" << args.progname << " --list-commands'"
 	      << " for more information.");
 	return -1;
