@@ -1,3 +1,14 @@
+2006-07-28  Akim Demaille  <akim@epita.fr>
+
+	Clean the doc.
+	* doc/manual/taf-kit.tex: Comment out the list of available
+	functions, use only the generated lists.
+	Adjust the transducers examples to vcsn-tdc, not vcsn-rw-tdc.
+	* doc/manual/installation.tex: Use our macros.
+	* doc/manual/vaucanson-user-manual.tex (tocbibind): Use it.
+	Include the theory bits only in the dev version.
+	* doc/manual/generate-automata.sh: Give labels to sections.
+
 2006-07-28  Roland Levillain  <roland@lrde.epita.fr>
 
 	Check the C++ ABI of libxerces-x.
@@ -95,11 +106,11 @@
 
 	* src/tests/include/tests/automata/algos/label_aware_graphs/closure_test.hh:
 	Rename as...
-	* src/tests/include/tests/automata/algos/label_aware_graphs/eps_removal_test.hh: 
+	* src/tests/include/tests/automata/algos/label_aware_graphs/eps_removal_test.hh:
 	this.
 	And s/closure/eps_removal/g too.
 
-	* src/tests/design_pattern/design_pattern-test.hh: Move to... 
+	* src/tests/design_pattern/design_pattern-test.hh: Move to...
 	* src/tests/include/tests/design_pattern/design_pattern-test.hh:
 	here.
 	* src/tests/design_pattern/Makefile.am,
@@ -3627,6 +3638,10 @@
 	Fix bug with `removed_edges_' search.
 
 See ChangeLog.2 for earlier changes.
+
+Local Variables:
+ispell-local-dictionary: "american"
+End:
 
 $Rev$
 $Id$

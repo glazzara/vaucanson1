@@ -145,9 +145,7 @@ including options such as \option{--version} and \option{--help}:
 \execcaption{vcsn-b-help}{vcsn-b --help}
 
 The whole list of supported commands is available via
-\option{--list-commands}:
-\execcaption{vcsn-b-commands}{vcsn-b --list-commands}
-
+\option{--list-commands}.
 
 \subsection{A first example}
 
@@ -281,110 +279,118 @@ argument from the standard input.  All algorithms dump their result to
 the standard output, except the ``tests'' functions that also return
 an exit status (0 if the test is successful, anything else otherwise).
 
-\smallskip
-
-In the following:
-\begin{itemize}
-\item \var{a1} and \var{a2} are two Boolean automata described
-  in \Vauc XML format;
-\item \var{w} is a word, for example \samp{"aabb"} if you are
-  working on an alphabet that contains the letters \samp{a} and
-  \samp{b};
-\item \var{exp} is a rational expression denoting a language;
-\item \var{n} is a non-negative integer.
-\end{itemize}
+\execcaption{vcsn-b-commands}{vcsn-b --list-commands}
 
 
-\begin{fnsection}{Input/output work with automata}
-\item{define-automaton}{}{Define an automaton from scratch.}
-\item{edit-automaton}{a1}{Edit an existing automaton.}
-\item{info}{a1}{Print the number of states, transitions, initial and
-    final states of \var{a1}.}
-\item{display}{a1}{Display the automaton using Dotty.}
-\item{dump}{a1}{Dump the automaton to Dot format.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Tests and evaluation on automata}
-\item{are-isomorphic}{a1 a2}{Test whether \var{a1} and \var{a2} are
-    isomorphic.}
-\item{evaluation}{a1 w}{Test whether the word \var{w} is accepted by
-    \var{a1}.}
-\item{is-deterministic}{a1}{Test whether \var{a1} is deterministic.}
-\item{is-empty}{a1}{Test whether \var{a1} accepts no word.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Generic algorithms for automata}
-\item{accessible}{a1}{Extract the sub-automaton of accessible states
-    of \var{a1}.}
-\item{co-accessible}{a1}{Extract the sub-automaton of co-accessible
-    states of \var{a1}.}
-\item{trim}{a1}{Trim the automaton \var{a1}.}
-\item{transpose}{a1}{Compute the automaton accepting the mirror
-    language of the one accepted by \var{a1}.}
-
-\item{closure}{[-bf] a1}{$\varepsilon$-removal algorithm.}
-  & \option{-b} : backward closure\\
-  & \option{-f} : forward closure\\
-\item{concatenate}{a1 a2}{Concatenate \var{a1} to \var{a2}.}
-\item{sum}{aut1 aut2}{Compute the sum of \var{a1} and \var{a2}.}
-%\item{normalize}{aut1}{Compute an automaton with unique initial and
-%    final states, with $\varepsilon$-transitions.}
-%\item{standardize}{aut1}{Compute an automaton with unique initial
-%    state without adding $\varepsilon$-transitions.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Generic algorithms for automata on letters}
-\item{rational-weight}{[-bf] a1}{$\varepsilon$-removal algorithm and make
-    every transition labeled by a letter.}
-  & \option{-b} : backward closure\\
-  & \option{-f} : forward closure\\
-\item{product}{a1 a2}{Compute the (Cartesian) product of \var{a1} and
-    \var{a2}.}
-\item{power}{a1 n}{Compute the (Cartesian) product of \var{a1} by
-    itself \var{n} times.}
-\item{quotient}{a1}{Compute the minimal automaton in bi-simulation
-    with \var{a1}.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Algorithms specific to Boolean automata}
-\item{determinize}{a1}{Compute the determinized automaton of
-    \var{a1}.}
-\item{complement}{a1}{Compute an automaton that accepts the complement
-    language of the one accepted by \var{a1}.}
-\item{minimize}{[-hm] a1}{Minimize the {\em deterministic} automaton
-    \var{a1}.}
-  & \option{-h} : use the Hopcroft algorithm\\
-  & \option{-m} : use the Moore algorithm\\
-  \hline
-\end{fnsection}
-
-\begin{fnsection}{Conversion between automata and expressions}
-\item{aut-to-exp}{a1}{Print a rational expression denoting the
-    language accepted by \var{a1}.}
-\item{expand}{exp}{Partially expand rational expressions. For
-    instance, expanding \samp{a(b+ab(a+b))} will produce
-    \samp{aab.(a+b)*+ab}}
-\item{derived-term}{exp}{Compute the derived term automaton of
-    \var{exp}.}
-\item{standard}{exp}{Compute the standard (Glushkov) automaton of
-    \var{exp}.}
-\item{thompson-of}{exp}{Compute the Thompson automaton of \var{exp}.}
-  \hline
-\end{fnsection}
-
+%% In the following:
+%% \begin{itemize}
+%% \item \var{a1} and \var{a2} are two Boolean automata described
+%%   in \Vauc XML format;
+%% \item \var{w} is a word, for example \samp{"aabb"} if you are
+%%   working on an alphabet that contains the letters \samp{a} and
+%%   \samp{b};
+%% \item \var{exp} is a rational expression denoting a language;
+%% \item \var{n} is a non-negative integer.
+%% \end{itemize}
+%%
+%%
+%% \begin{fnsection}{Input/output work with automata}
+%% \item{define-automaton}{}{Define an automaton from scratch.}
+%% \item{edit-automaton}{a1}{Edit an existing automaton.}
+%% \item{info}{a1}{Print the number of states, transitions, initial and
+%%     final states of \var{a1}.}
+%% \item{display}{a1}{Display the automaton using Dotty.}
+%% \item{dump}{a1}{Dump the automaton to Dot format.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Tests and evaluation on automata}
+%% \item{are-isomorphic}{a1 a2}{Test whether \var{a1} and \var{a2} are
+%%     isomorphic.}
+%% \item{evaluation}{a1 w}{Test whether the word \var{w} is accepted by
+%%     \var{a1}.}
+%% \item{is-deterministic}{a1}{Test whether \var{a1} is deterministic.}
+%% \item{is-empty}{a1}{Test whether \var{a1} accepts no word.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithms for automata}
+%% \item{accessible}{a1}{Extract the sub-automaton of accessible states
+%%     of \var{a1}.}
+%% \item{co-accessible}{a1}{Extract the sub-automaton of co-accessible
+%%     states of \var{a1}.}
+%% \item{trim}{a1}{Trim the automaton \var{a1}.}
+%% \item{transpose}{a1}{Compute the automaton accepting the mirror
+%%     language of the one accepted by \var{a1}.}
+%%
+%% \item{closure}{[-bf] a1}{$\varepsilon$-removal algorithm.}
+%%   & \option{-b} : backward closure\\
+%%   & \option{-f} : forward closure\\
+%% \item{concatenate}{a1 a2}{Concatenate \var{a1} to \var{a2}.}
+%% \item{sum}{aut1 aut2}{Compute the sum of \var{a1} and \var{a2}.}
+%% %\item{normalize}{aut1}{Compute an automaton with unique initial and
+%% %    final states, with $\varepsilon$-transitions.}
+%% %\item{standardize}{aut1}{Compute an automaton with unique initial
+%% %    state without adding $\varepsilon$-transitions.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithms for automata on letters}
+%% \item{rational-weight}{[-bf] a1}{$\varepsilon$-removal algorithm and make
+%%     every transition labeled by a letter.}
+%%   & \option{-b} : backward closure\\
+%%   & \option{-f} : forward closure\\
+%% \item{product}{a1 a2}{Compute the (Cartesian) product of \var{a1} and
+%%     \var{a2}.}
+%% \item{power}{a1 n}{Compute the (Cartesian) product of \var{a1} by
+%%     itself \var{n} times.}
+%% \item{quotient}{a1}{Compute the minimal automaton in bi-simulation
+%%     with \var{a1}.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Algorithms specific to Boolean automata}
+%% \item{determinize}{a1}{Compute the determinized automaton of
+%%     \var{a1}.}
+%% \item{complement}{a1}{Compute an automaton that accepts the complement
+%%     language of the one accepted by \var{a1}.}
+%% \item{minimize}{[-hm] a1}{Minimize the {\em deterministic} automaton
+%%     \var{a1}.}
+%%   & \option{-h} : use the Hopcroft algorithm\\
+%%   & \option{-m} : use the Moore algorithm\\
+%%   \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Conversion between automata and expressions}
+%% \item{aut-to-exp}{a1}{Print a rational expression denoting the
+%%     language accepted by \var{a1}.}
+%% \item{expand}{exp}{Partially expand rational expressions. For
+%%     instance, expanding \samp{a(b+ab(a+b))} will produce
+%%     \samp{aab.(a+b)*+ab}}
+%% \item{derived-term}{exp}{Compute the derived term automaton of
+%%     \var{exp}.}
+%% \item{standard}{exp}{Compute the standard (Glushkov) automaton of
+%%     \var{exp}.}
+%% \item{thompson-of}{exp}{Compute the Thompson automaton of \var{exp}.}
+%%   \hline
+%% \end{fnsection}
+%%
 
 \newpage
 \section{Transducers}
 \label{sec:vcsn-tdc}
 
-\Vauc supports two views of transducers, and therefore provides two
-programs:
+While the \Vauc library supports two views of transducers, currently
+\tafkit only provides one view:
+
 \begin{description}
 \item[vcsn-tdc] considering a transducer as a weighted automaton of a
   product of free monoid,
+\end{description}
+
+In a forthcoming release, \tafkit will provide:
+
+\begin{description}
 \item[vcsn-rw-tdc] considering a transducer as a machine that takes a
   word as input and produce another word as (two-tape automata).
 \end{description}
+
 Both views are equivalent and \Vauc provides algorithms to pass from a
 view to the other one.
 
@@ -405,161 +411,156 @@ view to the other one.
       \ArcL{B}{C}{\IOL{0}{0}}
       \ArcL{C}{B}{\IOL{0}{1}}
     \end{VCPicture}
-    \caption{rational-weight transducer $\Tc_1$ computing the
-      quotient by 3 of a binary number}
+    \begin{legend}
+      The transducer computing the quotient by 3 of a binary number.
+    \end{legend}
+    \caption{Rational-weight transducer $\Tc_1$}
     \label{fig:t1}
   \end{center}
 \end{figure}
 
-\begin{figure}[tp]
-  \begin{center}
-    \begin{VCPicture}{(0,-2)(3,2)}
-      % states
-      \State{(0,0)}{A} \State{(3,0)}{B}
-      \Initial[w]{A}
-      \FinalL{s}{A}{(,1)}
-      \Final[e]{B}
-      % transitions
-      \LoopN[.5]{A}{(1,0)}
-      \LoopN[.5]{B}{(1,1)}
-      \LoopS[.5]{B}{(0,0)}
-      \EdgeL{A}{B}{(0,1)}
-    \end{VCPicture}
-    \caption{Transducer $\Tc_2$ adding 1 to a binary number}
-    \label{fig:t2}
-  \end{center}
-\end{figure}
+%% \begin{figure}[tp]
+%%   \begin{center}
+%%     \begin{VCPicture}{(0,-2)(3,2)}
+%%       % states
+%%       \State{(0,0)}{A} \State{(3,0)}{B}
+%%       \Initial[w]{A}
+%%       \FinalL{s}{A}{(,1)}
+%%       \Final[e]{B}
+%%       % transitions
+%%       \LoopN[.5]{A}{(1,0)}
+%%       \LoopN[.5]{B}{(1,1)}
+%%       \LoopS[.5]{B}{(0,0)}
+%%       \EdgeL{A}{B}{(0,1)}
+%%     \end{VCPicture}
+%%     \caption{Transducer $\Tc_2$ adding 1 to a binary number}
+%%     \label{fig:t2}
+%%   \end{center}
+%% \end{figure}
 
-The rational-weight transducer
-\index{t1@$\Tc_1$}$\Tc_1$ (\autoref{fig:t1}) gives the
-quotient by 3 of a binary number and the transducer
-\index{t2@$\Tc_2$}$\Tc_2$ (\autoref{fig:t2}) adds 1 to
-a binary number.
+To experiment with transducers, we will use \index{T1@$\Tc_1$}$\Tc_1$,
+described in \autoref{fig:t1}, and part of the automaton library
+(\autoref{tdc:t1}).
 
-\bigskip
-
-To experiment with transducers, we will use the following standard
-automaton:
-\execcaption{t1.xml}{vcsn-tdc dump-automaton t1 >t1.xml}
-\execcaption{t1.dot}{vcsn-tdc dot-dump t1.xml >t1.dot}
-\begin{center}
-  \includegenerateddot{t1}
-\end{center}
-
-
-\subsubsection{Evaluation}
-
-\execcaption{t1.110}{vcsn-tdc --alphabet1=01 eval t1.xml '110'}
+%% \subsubsection{Evaluation}
+%%
+%% Currently \tafkit requires the user to specify the alphabets to use
+%% using \option{--alphabet1} and \option{--alphabet2}.
+%%
+%% \execcaption{t1.110}{vcsn-tdc --alphabet1=ab eval t1.xml 'bba'}
 
 \subsubsection{Domain}
-The transducer $T$ only accepts binary number which are divisible by 3
-as input.
-\begin{shell}
-# vcsn-rw-tdc domain quot_3_rw.xml > divisible_by_3.xml
-\end{shell}
+The transducer $T$ only accepts binary numbers divisible by 3.
+
+\execcaption{t1.dom}{vcsn-tdc dump-automaton t1 | vcsn-tdc --alphabet1=ab domain - >div-by-3.xml}
+
 Now the file \file{divisible-by-3.xml} contains the description of a
-Boolean automaton that accepts only the numbers divisible by 3.
+Boolean automaton that accepts only the numbers divisible by 3:
 
-\subsubsection{to-tdc}
-Each transducer can be transformed to the other type of transducer
-thanks to the \taffn{to-tdc} and \taffn{to-rw-tdc} functions.
-\begin{shell}
-# vcsn-rw-tdc to-tdc quot_3_rw.xml > quot_3.xml
-# vcsn-tdc to-rw-tdc add1.xml > add1_rw.xml
-\end{shell}
+\execcaption{div-by-3.dot}{vcsn-b dot-dump div-by-3.xml >div-by-3.dot}
+\includegenerateddot{div-by-3}
 
-\subsubsection{Composing}
-\begin{shell}
-# vcsn-tdc compose quot_3.xml add1.xml
-\end{shell}
+
+%% \subsubsection{to-tdc}
+%% Each transducer can be transformed to the other type of transducer
+%% thanks to the \taffn{to-tdc} and \taffn{to-rw-tdc} functions.
+%% \begin{shell}
+%% # vcsn-rw-tdc to-tdc quot_3_rw.xml > quot_3.xml
+%% # vcsn-tdc to-rw-tdc add1.xml > add1_rw.xml
+%% \end{shell}
+%%
+%% \subsubsection{Composing}
+%% \begin{shell}
+%% # vcsn-tdc compose quot_3.xml add1.xml
+%% \end{shell}
 
 \subsection{Available functions}
 The following functions are available for both \command{vcsn-rw-tdc}
 and \command{vcsn-tdc} programs.  To invoke them, run
 \samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
 
-\smallskip
+\execcaption{vcsn-tdc-commands}{vcsn-tdc --list-commands}
 
-In the following:
-
-\begin{itemize}
-\item \var{t1} and \var{t2} are two transducers (either ``rational-weight''
-  or not) described in \Vauc XML format;
-\item \var{w} is a word, for example \samp{"aabb"} if you are working
-  on an alphabet that contains the letters \samp{a} and \samp{b};
-\item \var{a} is a Boolean automaton;
-\item \var{t1-rw} is a rational-weight transducer;
-\item \var{t1-fmp} is a transducer (seen as an automaton over a free
-  monoid product).
-\end{itemize}
-
-\begin{fnsection}{Input/output work with transducers}
-\item{define-automaton}{}{Define a transducer from scratch.}
-\item{edit-automaton}{t1}{Edit an existing transducer.}
-\item{info}{t1}{Print the number of states, transitions, initial and
-    final states of \var{t1}.}
-\item{display}{t1}{Display the transducer using DOTTY.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Tests and evaluation on transducers}
-\item{are-isomorphic}{t1 t2}{Test if the two transducers are
-    isomorphic.}
-\item{evaluation}{t1 w}{Compute the evaluation of \var{w} by
-    \var{t1}.}
-\item{is-empty}{t1}{Test if \var{t1} realizes the empty relation.}
-  \hline
-\end{fnsection}
-
-\begin{fnsection}{Generic algorithm for transducers}
-\item{closure}{t1}{$\varepsilon$-removal algorithm.}
-
-\item{compose}{t1 t2}{Compute a transducer realizing $f_2 \circ f_1$,
-    where $f_1$ (resp. $f_2$) is the function associated to \var{t1}
-    (resp. \var{t2}).}
-
-\item{domain}{t1}{Compute an automaton accepting all input accepted by
-    the transducer t1.}
-
-\item{evaluation}{t1}{Compute the evaluation of w by t1.}
-
-\item{evaluation-aut}{t1}{Compute a Boolean automaton describing the
-    words produced by the language described by a evaluated by t1.}
-
-\item{image}{t1}{Compute an automaton describing all output produced
-    by the transducer t1.}
-
-%\item{transpose}{t1}{Compute the transposed of the transducer t1.}
-
-\item{trim}{t1}{Compute the trimmed transducer of t1.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Algorithms for transducers}
-\item{sub-normalize}{t1-fmp}{Compute the sub-normalized transducer of
-    \var{t1-fmp}.}
-\item{is-sub-normalized}{t1-fmp}{Test if \var{t1-fmp} is
-    sub-normalized.}
-\item{composition-cover}{t1-fmp}{.}%%FIXME
-\item{composition-co-cover}{t1-fmp}{.}%%FIXME
-\item{b-compose}{t1-fmp t2-fmp}{Compose \var{t1-fmp} and
-    \var{t2-fmp}, two unweighted normalized or sub-normalized
-    transducers.}
-\item{to-rw-tdc}{t1-fmp}{Compute the equivalent realtime transducer
-    of \var{t1-fmp}.}
-\item{intersection}{a}{Transform \var{a} in a fmp transducer by
-    creating, for each word, a pair containing twice this word.}
-  \hline
-\end{fnsection}
-
-
-\begin{fnsection}{Algorithms for ``realtime'' transducers}
-\item{realtime}{t1-rw}{Compute the realtime transducer of  \var{t1-rw}.}
-\item{is-realtime}{t1-rw}{Test if \var{t1-rw} is realtime.}
-\item{to-tdc}{t1-rw}{Compute the equivalent fmp transducer of \var{t1-rw}.}
-\hline
-\end{fnsection}
+%% In the following:
+%%
+%% \begin{itemize}
+%% \item \var{t1} and \var{t2} are two transducers (either ``rational-weight''
+%%   or not) described in \Vauc XML format;
+%% \item \var{w} is a word, for example \samp{"aabb"} if you are working
+%%   on an alphabet that contains the letters \samp{a} and \samp{b};
+%% \item \var{a} is a Boolean automaton;
+%% \item \var{t1-rw} is a rational-weight transducer;
+%% \item \var{t1-fmp} is a transducer (seen as an automaton over a free
+%%   monoid product).
+%% \end{itemize}
+%%
+%% \begin{fnsection}{Input/output work with transducers}
+%% \item{define-automaton}{}{Define a transducer from scratch.}
+%% \item{edit-automaton}{t1}{Edit an existing transducer.}
+%% \item{info}{t1}{Print the number of states, transitions, initial and
+%%     final states of \var{t1}.}
+%% \item{display}{t1}{Display the transducer using DOTTY.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Tests and evaluation on transducers}
+%% \item{are-isomorphic}{t1 t2}{Test if the two transducers are
+%%     isomorphic.}
+%% \item{evaluation}{t1 w}{Compute the evaluation of \var{w} by
+%%     \var{t1}.}
+%% \item{is-empty}{t1}{Test if \var{t1} realizes the empty relation.}
+%%   \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithm for transducers}
+%% \item{closure}{t1}{$\varepsilon$-removal algorithm.}
+%%
+%% \item{compose}{t1 t2}{Compute a transducer realizing $f_2 \circ f_1$,
+%%     where $f_1$ (resp. $f_2$) is the function associated to \var{t1}
+%%     (resp. \var{t2}).}
+%%
+%% \item{domain}{t1}{Compute an automaton accepting all input accepted by
+%%     the transducer t1.}
+%%
+%% \item{evaluation}{t1}{Compute the evaluation of w by t1.}
+%%
+%% \item{evaluation-aut}{t1}{Compute a Boolean automaton describing the
+%%     words produced by the language described by a evaluated by t1.}
+%%
+%% \item{image}{t1}{Compute an automaton describing all output produced
+%%     by the transducer t1.}
+%%
+%% %\item{transpose}{t1}{Compute the transposed of the transducer t1.}
+%%
+%% \item{trim}{t1}{Compute the trimmed transducer of t1.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Algorithms for transducers}
+%% \item{sub-normalize}{t1-fmp}{Compute the sub-normalized transducer of
+%%     \var{t1-fmp}.}
+%% \item{is-sub-normalized}{t1-fmp}{Test if \var{t1-fmp} is
+%%     sub-normalized.}
+%% \item{composition-cover}{t1-fmp}{.}%%FIXME
+%% \item{composition-co-cover}{t1-fmp}{.}%%FIXME
+%% \item{b-compose}{t1-fmp t2-fmp}{Compose \var{t1-fmp} and
+%%     \var{t2-fmp}, two unweighted normalized or sub-normalized
+%%     transducers.}
+%% \item{to-rw-tdc}{t1-fmp}{Compute the equivalent realtime transducer
+%%     of \var{t1-fmp}.}
+%% \item{intersection}{a}{Transform \var{a} in a fmp transducer by
+%%     creating, for each word, a pair containing twice this word.}
+%%   \hline
+%% \end{fnsection}
+%%
+%%
+%% \begin{fnsection}{Algorithms for ``realtime'' transducers}
+%% \item{realtime}{t1-rw}{Compute the realtime transducer of  \var{t1-rw}.}
+%% \item{is-realtime}{t1-rw}{Test if \var{t1-rw} is realtime.}
+%% \item{to-tdc}{t1-rw}{Compute the equivalent fmp transducer of \var{t1-rw}.}
+%% \hline
+%% \end{fnsection}
 
 \newpage
-\section{\Z Automata}
+\section{\Z-Automata}
 \label{sec:vcsn-z}
 
 This part shows the use of the program \Index{\command{vcsn-z}}, but
@@ -567,8 +568,7 @@ all comments should also stand for the programs
 \command{vcsn-z-min-plus} and \command{vcsn-z-max-plus}.
 
 Again, we will toy with some of the automata provided by
-\command{vcsn-z}:
-\execcaption{vcsn-z-automata}{vcsn-z list-automata}
+\command{vcsn-z}, see \autoref{sec:auto:z}.
 
 \subsection{Counting \samp{b}s}
 
@@ -596,7 +596,7 @@ Again, we will toy with some of the automata provided by
   \label{fig:b1}
 \end{figure}
 
-Let's consider $\Bc_1$ (\autoref{fig:b1}, an
+Let's consider $\Bc_1$ (\autoref{fig:b1}), an
 \index{N-automaton@$\mathbb{N}$-automaton}$\mathbb{N}$-automaton,
 \textit{i.e.}  an automaton whose label's weights are in $\mathbb{N}$.
 This time the evaluation of the word \var{w} by the automaton
@@ -626,20 +626,17 @@ This is implemented by the \Index{\taffn{power}} function:
 \end{shell}
 
 \noindent
-The file \file{b4.xml} now contains the automaton $\Bc_1^4$.
-Lets see what the evaluation of the words \samp{abab} and \samp{bbab}
-gives with this automaton:
+The file \file{b4.xml} now contains the automaton $\Bc_1^4$.  Let's
+check that the evaluation of the words \samp{abab} and \samp{bbab} by
+$\Bc_1^4$ gives the fourth power of their evaluation by $\Bc_1$:
 
 \execcaption{b4.abbb}{vcsn-z eval b4.xml 'abbb'}
 \execcaption{b4.abab}{vcsn-z eval b4.xml 'abab'}
 
-This time one can notice that the automaton $\Bc_1^4$ returns
-the evaluation of $\Bc_1$ at power 4.
-
 \subsubsection{Quotient}
 
-One drawback of doing successive products of an automaton is
-that it creates a lot of new states and transitions.
+Successive products of an automaton create a lot of new states and
+transitions.
 
 \execcaption{b1.info}{vcsn-z dump-automaton b1 | vcsn-z info -}
 \execcaption{b4.info}{vcsn-z info b4.xml}
@@ -649,6 +646,7 @@ One way of reducing the size of our automaton is to use the
 
 \execcaption{b4.quot.info}{vcsn-z quotient b4.xml | vcsn-z info -}
 
+
 \subsection{Available functions}
 
 In this section you will find a brief definition of all functions for
@@ -657,77 +655,79 @@ for both.  They are called using \command{vcsn-z},
 \command{vcsn-z-max-plus}, and \command{vcsn-z-min-plus} run as
 \samp{\var{program} \var{algorithm-name} [\var{arguments}]}.
 
-\smallskip
+\execcaption{vcsn-z-commands}{vcsn-z --list-commands}
 
-In the following:
-
-\begin{itemize}
-\item \var{a1} and \var{a2} are two weighted automata described in
-  \Vauc XML format;
-\item \var{w} is a word, for example \samp{aabb} if you are working on
-  an alphabet that contains the letters \samp{a} and \samp{b};
-\item \var{exp} is a rational expression denoting a language;
-\item \var{n} is a non-negative integer.
-\end{itemize}
-
-
-\begin{fnsection}{Input/output work with weighted automata}
-\item{define-automaton}{}{Define an automaton from scratch.}
-\item{edit-automaton}{a1}{Edit an existing automaton.}
-\item{info}{a1}{Print the number of states, transitions, initial and
-    final states of \var{a1}.}
-\item{display}{a1}{Display the automaton using DOTTY.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Tests and evaluation on weighted automata}
-\item{are-isomorphic}{a1 a2}{Test if the two automata are isomorphic.}
-\item{evaluation}{a1 w}{Compute the evaluation of \var{w} by
-    \var{a1}.}
-\item{is-empty}{a1}{.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Generic algorithms for automata}
-\item{accessible}{a1}{Extract the sub-automaton of accessible states
-    of \var{a1}.}
-\item{co-accessible}{a1}{Extract the sub-automaton of co-accessible
-    states of \var{a1}.}
-\item{trim}{a1}{Trim the automaton \var{a1}.}
-\item{transpose}{a1}{Compute the automaton accepting the mirror
-    language of the one accepted by \var{a1}.}
-\item{closure}{[-bf] a1}{$\varepsilon$-removal algorithm.}
-  & \option{-b} : backward closure\\
-  & \option{-f} : forward closure\\
-\item{concatenate}{a1 a2}{Concatenate \var{a1} to \var{a2}.}
-\item{sum}{a1 a2}{Compute the sum of \var{a1} and \var{a2}.}
-%\item{normalize}{a1}{Compute an automaton with unique initial and
-%    final states, with $\varepsilon$-transitions.}
-%\item{standardize}{a1}{Compute an automaton with unique initial state
-%    without adding $\varepsilon$-transitions.}  \hline
-\end{fnsection}
-
-\begin{fnsection}{Generic algorithms for automata on letters}
-\item{realtime}{[-bf] a1}{$\varepsilon$-removal algorithm and make
-    every transition labeled by a letter.}
-  & \option{-b} : backward closure\\
-  & \option{-f} : forward closure\\
-\item{product}{a1 a2}{Compute the (Cartesian) product of \var{a1} and
-    \var{a1}.}
-\item{power}{a1 n}{Compute the (Cartesian) product of \var{a1} by
-    itself \var{n} times.}
-\item{quotient}{a1}{Compute the $\mathbb{Z}$-quotient of \var{a1}.}
-  \hline
-\end{fnsection}
-
-\begin{fnsection}{Conversion between automata and expressions}
-\item{aut-to-exp}{a1}{.}%%FIXME
-\item{expand}{exp}{Partially expand rational expressions.}
-\item{derived-term}{exp}{Compute the derived term automaton of
-    \var{exp}.}
-\item{standard}{exp}{Compute the standard (Glushkov) automaton of
-    \var{exp}.}
-\item{thompson-of}{exp}{Compute the Thompson automaton of \var{exp}.}
-  \hline
-\end{fnsection}
+%% \smallskip
+%%
+%% In the following:
+%%
+%% \begin{itemize}
+%% \item \var{a1} and \var{a2} are two weighted automata described in
+%%   \Vauc XML format;
+%% \item \var{w} is a word, for example \samp{aabb} if you are working on
+%%   an alphabet that contains the letters \samp{a} and \samp{b};
+%% \item \var{exp} is a rational expression denoting a language;
+%% \item \var{n} is a non-negative integer.
+%% \end{itemize}
+%%
+%%
+%% \begin{fnsection}{Input/output work with weighted automata}
+%% \item{define-automaton}{}{Define an automaton from scratch.}
+%% \item{edit-automaton}{a1}{Edit an existing automaton.}
+%% \item{info}{a1}{Print the number of states, transitions, initial and
+%%     final states of \var{a1}.}
+%% \item{display}{a1}{Display the automaton using DOTTY.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Tests and evaluation on weighted automata}
+%% \item{are-isomorphic}{a1 a2}{Test if the two automata are isomorphic.}
+%% \item{evaluation}{a1 w}{Compute the evaluation of \var{w} by
+%%     \var{a1}.}
+%% \item{is-empty}{a1}{.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithms for automata}
+%% \item{accessible}{a1}{Extract the sub-automaton of accessible states
+%%     of \var{a1}.}
+%% \item{co-accessible}{a1}{Extract the sub-automaton of co-accessible
+%%     states of \var{a1}.}
+%% \item{trim}{a1}{Trim the automaton \var{a1}.}
+%% \item{transpose}{a1}{Compute the automaton accepting the mirror
+%%     language of the one accepted by \var{a1}.}
+%% \item{closure}{[-bf] a1}{$\varepsilon$-removal algorithm.}
+%%   & \option{-b} : backward closure\\
+%%   & \option{-f} : forward closure\\
+%% \item{concatenate}{a1 a2}{Concatenate \var{a1} to \var{a2}.}
+%% \item{sum}{a1 a2}{Compute the sum of \var{a1} and \var{a2}.}
+%% %\item{normalize}{a1}{Compute an automaton with unique initial and
+%% %    final states, with $\varepsilon$-transitions.}
+%% %\item{standardize}{a1}{Compute an automaton with unique initial state
+%% %    without adding $\varepsilon$-transitions.}  \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Generic algorithms for automata on letters}
+%% \item{realtime}{[-bf] a1}{$\varepsilon$-removal algorithm and make
+%%     every transition labeled by a letter.}
+%%   & \option{-b} : backward closure\\
+%%   & \option{-f} : forward closure\\
+%% \item{product}{a1 a2}{Compute the (Cartesian) product of \var{a1} and
+%%     \var{a1}.}
+%% \item{power}{a1 n}{Compute the (Cartesian) product of \var{a1} by
+%%     itself \var{n} times.}
+%% \item{quotient}{a1}{Compute the $\mathbb{Z}$-quotient of \var{a1}.}
+%%   \hline
+%% \end{fnsection}
+%%
+%% \begin{fnsection}{Conversion between automata and expressions}
+%% \item{aut-to-exp}{a1}{.}%%FIXME
+%% \item{expand}{exp}{Partially expand rational expressions.}
+%% \item{derived-term}{exp}{Compute the derived term automaton of
+%%     \var{exp}.}
+%% \item{standard}{exp}{Compute the standard (Glushkov) automaton of
+%%     \var{exp}.}
+%% \item{thompson-of}{exp}{Compute the Thompson automaton of \var{exp}.}
+%%   \hline
+%% \end{fnsection}
 
 
 % \section{Building your own automaton}
@@ -735,6 +735,7 @@ In the following:
 
 %%% Local Variables:
 %%% mode: latex
+%%% ispell-local-dictionary: "american"
 %%% TeX-master: "vaucanson-user-manual"
 %%% End:
 

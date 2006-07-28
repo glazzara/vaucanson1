@@ -10,20 +10,29 @@ version can be retrieved from its Subversion\footnote{%
 %%
 } repository as follows:
 
-\begin{alltt}
-user> svn checkout https://svn.lrde.epita.fr/svn/vaucanson/trunk vaucanson
-\end{alltt}
+\begin{shell}
+# \kbd{svn checkout https://svn.lrde.epita.fr/svn/vaucanson/trunk vaucanson}
+\end{shell}
 
 \section{Building \Vauc}
-%%Fixme: Verifier le temps de compilation
+
 The following commands build and install the platform (the process
 takes an hour on a modern computer):
-\begin{alltt}
-user> cd vaucanson-0.x
-\end{alltt}
+\begin{shell}
+# \kbd{cd vaucanson-1.0}
+\end{shell}
 Then:
-\begin{alltt}
-user> ./configure
-user> make
-root> make install
-\end{alltt}
+\begin{shell}
+# \kbd{./configure}
+...
+# \kbd{make}
+...
+# \kbd{sudo make install}
+...
+\end{shell}
+
+%%% Local Variables:
+%%% mode: latex
+%%% ispell-local-dictionary: "american"
+%%% TeX-master: "vaucanson-user-manual"
+%%% End:

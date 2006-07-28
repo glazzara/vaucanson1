@@ -6,7 +6,11 @@ generate_one_section ()
   local short=$2
   local vcsn=vcsn-$short
 
-  echo "\\section{$kind"}
+  cat <<EOF
+\\section{$kind}
+\\label{sec:auto:$short}
+
+EOF
 
   $vcsn list-automata |
     sed -n 's/ *- *//p' |

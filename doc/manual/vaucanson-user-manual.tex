@@ -16,6 +16,9 @@
 \usepackage{texi}
 \usepackage{misc}
 
+%% Put the TOC, the bibliography and index in the TOC.
+\usepackage{tocbibind}
+
 %% ---------------------- %%
 %% Mathematical symbols.  %%
 %% ---------------------- %%
@@ -176,11 +179,12 @@
 
 \appendix
 
-\input{theory}
+\ifthenelse{\boolean{developer}}{\input{theory}}
 \input{automata}
 \input{xml}
 
 \printindex
+
 \bibliographystyle{apalike}
 \bibliography{vaucanson.bib}
 
@@ -189,5 +193,6 @@
 
 %%% Local Variables:
 %%% mode: latex
+%%% ispell-local-dictionary: "american"
 %%% TeX-master: t
 %%% End:
