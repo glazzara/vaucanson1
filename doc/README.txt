@@ -149,12 +149,6 @@ portability in the future.
 .. _GNU C++ Compiler (GCC): http://gcc.gnu.org/
 .. _ICC: http://www.intel.com/software/products/compilers/
 
-A  known bug in  GCC 4.0.0  for MacOs  is supported  to make  the code
-compliant  with this specific  compiler version,  but MacOs  users are
-encouraged to  upgrade their compiler.   They should also  notice that
-their  platform   allows  to  select  their   default  compiler  using
-``gcc_select``.  GCC 4.0 is preferred.
-
 High verbose  mode of the testing  suites uses the AT&T  dot format to
 save automaton in  a human readable file.  Use  Graphviz_ to visualize
 these .dot files.
@@ -165,6 +159,13 @@ If  you want  to use  the XML  I/O system,  you will  need  the Apache
 `Xerces-C++`_ library version 2.3 or above.
 
 .. _Xerces-C++: http://xml.apache.org/xerces-c/
+
+The C++ Application Binary Interface (ABI) of the Xerces-C++ library
+must be the same as the C++ ABI of the compiler used to built
+Vaucanson's XML I/O system.  In particular, users of Fink or
+DarwinPorts on MacOS should pay attention to the compiler that was
+used to build their version of the Xerces-C++ library, as it might
+differ from the one used to build Vaucanson.
 
 
 Using Vaucanson

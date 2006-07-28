@@ -71,19 +71,56 @@ int main() {
   const char *foo = "foo";
   using namespace xercesc;
   XMLCh* bar = XMLString::transcode(foo);
+}
 
-  /* Check libxerces-x C++ ABI.
+/* Check libxerces-x C++ ABI.
 
-     When a C++ piece of Vaucanson, compiled with G++ 4.0, is linked
-     against libxerces-c, compiled with G++ 3.3 (which is the case
-     with Fink on Mac OS X Tiger (10.3) / Xcode 1.5), the linker
-     complains about undefined symbols of typeinfo's for the following
-     types.  (This is a simplistic test, but this should be enough to
-     check the C++ ABI).  */
-  xercesc_2_6::InputSource* is;
-  xercesc_2_6::DOMException* de;
-  xercesc_2_6::XMLException* xe;
-  xercesc_2_6::BinInputStream* bis;
+   When a C++ piece of Vaucanson, compiled with G++ 4.0, is linked
+   against libxerces-c, compiled with G++ 3.3 (which is the case
+   with Fink on Mac OS X Tiger (10.3) / Xcode 1.5), the linker
+   complains about undefined symbols of typeinfo's.  (This is a
+   simplistic test, but this should be enough to check the C++ ABI).
+*/
+#include <iostream>
+#include <xercesc/sax/InputSource.hpp>
+#include <xercesc/util/BinInputStream.hpp>
+
+// Taken from vaucanson/xml/ios.h{h,xx}.
+namespace vcsn
+{
+    namespace xml
+    {
+      class BinCxxInputStream : public xercesc::BinInputStream
+      {
+      private:
+	std::istream* _in;
+	unsigned int _pos;
+
+      public:
+	BinCxxInputStream(std::istream* in) : _in(in), _pos(0) { }
+	virtual unsigned int curPos() const;
+	virtual unsigned readBytes (XMLByte *const toFill,
+				    const unsigned int maxToRead);
+      };
+
+      inline
+      unsigned
+      BinCxxInputStream::readBytes (XMLByte *const toFill,
+				    const unsigned int maxToRead)
+      {
+	// istream::readsome does not seem to work on SunOS
+	unsigned s = _in->rdbuf()->sgetn((char *)toFill, maxToRead);
+	_pos += s;
+	return s;
+      }
+
+      inline
+      unsigned int
+      BinCxxInputStream::curPos() const
+      {
+	return _pos;
+      }
+    }
 }
                                   ])],
                                   [vcsn_cv_xerces_lib=yes])

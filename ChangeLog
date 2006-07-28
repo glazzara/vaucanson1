@@ -1,3 +1,11 @@
+2006-07-28  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix the checking of the C++ ABI of libxerces-x.
+
+	* build-aux/vcsn-xml.m4 (_VCSN_CHECK_XML): Fix the checking of the
+	C++ ABI of libxerces-x.
+	* doc/README.txt: Update (Xerces-C++ ABI).
+
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
 
 	minidist.
