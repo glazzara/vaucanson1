@@ -1,3 +1,7 @@
+2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* doc/NEWS.txt: Minor changes.
+
 2006-07-28  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Better ouput for vcsn-tdc.
