@@ -66,7 +66,7 @@ extern void tputs (...);
   | Functions that interact with the user to let her edit an |
   | automaton                                                |
   `---------------------------------------------------------*/
-# ifndef WITH_TWO_ALPHABETS
+
 namespace edition_commands
 {
   using namespace CONTEXT_NAMESPACE;
@@ -184,6 +184,7 @@ namespace edition_commands
     echo_ ("  To state: ");
     hstate_t n_to = get_state (a);
 
+# ifndef WITH_TWO_ALPHABETS
     echo_ ("  Labeled by the expression: ");
     char ratexp[1024];
     std::cin.getline (ratexp, 1024);
@@ -193,6 +194,23 @@ namespace edition_commands
     a.add_series_transition (n_from, n_to,
 			     make_rat_exp (a.structure ().series ().monoid ().alphabet (),
 					   std::string (ratexp)));
+# else
+    echo_ (" First componenent labeled by the word: ");
+    char first_label[1024];
+    std::cin.getline (first_label, 1024);
+    echo_ (" Second componenent labeled by the word: ");
+    char second_label[1024];
+    std::cin.getline (second_label, 1024);
+
+    // Construct a serie from the two components.
+    semiring_elt_t weight (a.structure().series().semiring());
+    monoid_elt_t label (a.structure().series().monoid());
+    weight = true;
+    label = monoid_elt_value_t(first_label, second_label);
+    series_set_elt_t s (a.structure().series());
+    s.assoc (label, weight);
+    a.add_series_transition (n_from, n_to, s);
+# endif
   }
 
   /// Del a transition in @c a .
@@ -288,8 +306,14 @@ namespace edition_commands
 	   h != succ.end (); ++h)
       {
 	++n_trans;
+# ifndef WITH_TWO_ALPHABETS
 	echo_ ("\n    " << n_trans << ": From " << *s << " to "
 	       << a.dst_of (*h) << " labeled by " << a.series_value_of (*h));
+# else
+	echo_ ("\n    " << n_trans << ": From " << *s << " to " << a.dst_of (*h)
+	       << " labeled by (" << a.word_of (*h).value().first
+	       << " | " << a.word_of (*h).value().second << ")");
+# endif
       }
     }
     if (not n_trans)
@@ -425,6 +449,6 @@ static int define_automaton_command (const arguments_t& args)
 
   return 0;
 }
-# endif // ! WITH_TWO_ALPHABETS
+
 
 #endif // ! EDITION_COMMANDS_HXX

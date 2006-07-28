@@ -156,13 +156,13 @@ const command_t command_map[] =
   COMMAND_GROUP (
     "Input/output work with transducers:",
 
-    //COMMAND_ENTRY (define_automaton, File,
-    //	   "Define an transducer from scratch."),
+    COMMAND_ENTRY (define_automaton, File,
+		   "Define an transducer from scratch."),
     COMMAND_ENTRY (display, Aut, "Display `aut'."),
     COMMAND_ENTRY (dot_dump, Aut, "Dump dot output of `aut'."),
     COMMAND_ENTRY (dump_automaton, File, "Dump a predefined automaton."),
-    //COMMAND_ENTRY (edit_automaton, File,
-    //	   "Edit an existing transducer."),
+    COMMAND_ENTRY (edit_automaton, File,
+		   "Edit an existing transducer."),
     COMMAND_ENTRY (list_automata, Nil, "List predefined automata."),
     COMMAND_ENTRY (identity, Aut, "Return `aut'."),
     COMMAND_ENTRY (info, Aut, "Print useful infos about `aut'.")),
@@ -173,7 +173,6 @@ const command_t command_map[] =
 
     COMMAND_ENTRY (are_isomorphic, AutAut,
 		   "Test if `aut1' and `aut2' are isomorphic."),
-    //COMMAND_ENTRY (eval, AutWord, "Compute the evaluation of `word' by `aut'."),
     COMMAND_ENTRY (is_empty, Aut,
 		   "Test if `aut' realizes the empty relation."),
     COMMAND_ENTRY (is_sub_normalized, Aut, "Test if `aut' is sub-normalized.")),
@@ -183,14 +182,12 @@ const command_t command_map[] =
     "Generic algorithm for transducers:",
 
     COMMAND_ENTRY (eps_removal, Aut, "epsilon-removal algorithm."),
-    COMMAND_ENTRY (compose, AutAut,
-		   "Compute a the composition of `aut1' and `aut2'."),
     COMMAND_ENTRY (domain, Aut,
 		   "Compute an automaton accepting all input accepted by `aut'."),
     COMMAND_ENTRY_CN (eval, evaluation, AutExp,
 		      "Compute the evaluation of `exp' against `aut'."),
     COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, AutAut,
-		      "Compute a boolean automaton describing the words\n't produced "
+		      "Compute a Boolean automaton describing the words\n\t produced "
 		      "by the language described by a evaluated `aut1'."),
     COMMAND_ENTRY (image, Aut,
 		   "Compute an automaton describing all output produced by the\n\t"
@@ -210,12 +207,12 @@ const command_t command_map[] =
     COMMAND_ENTRY (compose, AutAut,
 		   "Compose `aut1' and `aut2', two (sub-)normalized\n\ttransducers."),
     COMMAND_ENTRY (u_compose, AutAut,
-		   "Compose `aut1' and `aut2', two boolean transducers,\n\t"
+		   "Compose `aut1' and `aut2', two Boolean transducers, "
 		   "preserve the number of path."),
     COMMAND_ENTRY (to_rt, Aut,
 		   "Compute the equivalent realtime transducer of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
-		   "Transform a boolean automaton in a fmp transducer by\n\t"
-		   "creating, for each word, a pair contianing twice this word.")),
+		   "Transform a Boolean automaton in a fmp transducer by\n\t"
+		   "creating, for each word,\n a pair containing twice this word.")),
   {0, 0 ,0 ,0, 0}
 };

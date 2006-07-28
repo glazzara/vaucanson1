@@ -1,3 +1,12 @@
+2006-07-28  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Add edition capabilities to vcsn-tdc.
+
+	* taf-kit/src/tdc_commands.cc: Add define_automaton and edit_automaton
+	to commands.
+	* taf-kit/src/edition_commands.hxx: Update add_transition for 
+	fmp_transducer.
+
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
 
 	Remove demos/transducers.
