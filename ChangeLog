@@ -1,5 +1,13 @@
 2006-07-28  Akim Demaille  <akim@epita.fr>
 
+	* src/tests/xml/Makefile.am (CLEANFILES, EXTRA_DIST): Complete
+	and fix.
+	* src/tests/include/Makefile.am: Ship eps_removal_test.hh,
+	not closure_test.hh.
+	* build-aux/check.mk (clean-check-TESTS): New.
+
+2006-07-28  Akim Demaille  <akim@epita.fr>
+
 	* include/vaucanson/misc/bitset.hxx (project): Do not use an
 	iterator from one structure to iterate over another!
 

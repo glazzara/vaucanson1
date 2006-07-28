@@ -73,12 +73,13 @@ $(nodist_check_SCRIPTS):
 	chmod +x $@-t
 	mv $@-t $@
 
-CLEANFILES = 					\
-	$(check_PROGRAMS)			\
-	$(check_PROGRAMS:=.tmp)			\
-	$(check_PROGRAMS:=.dot.tmp)
+CLEANFILES = 							\
+	$(check_PROGRAMS)					\
+	$(check_PROGRAMS:_tester=_result.tmp)			\
+	$(check_PROGRAMS:_tester=_result.dot.tmp)		\
+	$(nodist_check_SCRIPTS)
 
-EXTRA_DIST =					\
-	tester.sh				\
-	$(check_PROGRAMS:=_ref.xml)		\
+EXTRA_DIST =						\
+	tester.sh					\
+	$(check_PROGRAMS:_tester=_ref.xml)		\
 	$(check_PROGRAMS:=.dot)

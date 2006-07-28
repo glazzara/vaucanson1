@@ -108,3 +108,8 @@ check-TESTS:
 	test -z "$$report" || echo "$$report";					\
 	echo "$$dashes";							\
 	test "$$fail" -eq 0
+
+clean-check-TESTS:
+	rm -f $(TEST_SUITE_LOG) $(TEST_LOGS)
+.PHONY: clean-check-TESTS
+clean-local: clean-check-TESTS
