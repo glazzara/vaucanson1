@@ -239,6 +239,8 @@ vaucanson/algorithms/complete.hh				\
 vaucanson/algorithms/complete.hxx				\
 vaucanson/algorithms/concatenate.hh				\
 vaucanson/algorithms/concatenate.hxx				\
+vaucanson/algorithms/composition_cover.hh			\
+vaucanson/algorithms/composition_cover.hxx			\
 vaucanson/algorithms/cut_up.hh					\
 vaucanson/algorithms/cut_up.hxx					\
 vaucanson/algorithms/derived_term_automaton.hh			\
