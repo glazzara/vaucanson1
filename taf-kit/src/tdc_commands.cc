@@ -162,17 +162,16 @@ const command_t command_map[] =
 
     COMMAND_ENTRY (eps_removal, Aut, "epsilon-removal algorithm."),
     COMMAND_ENTRY (domain, Aut,
-		   "Compute an automaton accepting all input accepted by `aut'."),
+		   "Give the automaton that accepts all inputs accepted by `aut'."),
     COMMAND_ENTRY_CN (eval, evaluation, AutExp,
-		      "Compute the evaluation of `exp' against `aut'."),
-    COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, AutAut,
-		      "Compute a Boolean automaton describing the words\n\t produced "
-		      "by the language described by a evaluated `aut1'."),
+		      "Give the evaluation of `exp' against `aut'."),
+    COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, Aut,
+		      "Evaluate the language described by the Boolean automaton\n\t"
+		      "`aut2' on the transducer `aut1'."),
     COMMAND_ENTRY (image, Aut,
-		   "Compute an automaton describing all output produced by the\n\t"
-		   "transducer `aut'."),
-    //    COMMAND_ENTRY (transpose, Aut,
-    //		   "Compute the transposed of the transducer `aut'."),
+		   "Give an automaton that accepts all output produced by `aut'."),
+    //	  COMMAND_ENTRY (transpose, Aut,
+    //		   "Give the transposed of the transducer `aut'."),
     COMMAND_ENTRY (trim, Aut, "Trim transducer `aut'.")
 
     ),
@@ -182,7 +181,7 @@ const command_t command_map[] =
     "Algorithms for transducers:",
 
     COMMAND_ENTRY (sub_normalize, Aut,
-		   "Compute the sub-normalized transducer of `aut'."),
+		   "Give the sub-normalized transducer of `aut'."),
     COMMAND_ENTRY (composition_cover, Aut, "Outsplitting."),
     COMMAND_ENTRY (composition_co_cover, Aut, "Insplitting."),
     COMMAND_ENTRY (compose, AutAut,
@@ -191,7 +190,7 @@ const command_t command_map[] =
 		   "Compose `aut1' and `aut2', two Boolean transducers,\n\t"
 		   "preserve the number of path."),
     COMMAND_ENTRY (to_rt, Aut,
-		   "Compute the equivalent realtime transducer of `aut'."),
+		   "Give the equivalent realtime transducer of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
 		   "Transform a Boolean automaton in a fmp transducer by\n\t"
 		   "creating, for each word, a pair containing twice this word.")

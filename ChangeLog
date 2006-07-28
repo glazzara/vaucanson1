@@ -1,5 +1,9 @@
 2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* taf-kit/src/tdc_commands.cc: Fix some docstrings.
+
+2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* doc/NEWS.txt: Minor changes.
 
 2006-07-28  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
