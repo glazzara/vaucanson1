@@ -66,16 +66,6 @@ DEFINE_COMMAND (NAME (u_compose)
 				  XML ()))
 		RETURNVALUE (0));
 
-// DEFINE_COMMAND (NAME (eval)
-// 		CODE (
-// 		  boolean_transducer::automaton_t a =
-// 		  boolean_transducer::make_automaton(first_alphabet_t(),
-// 						     second_alphabet_t());
-// 		  fmp_to_realtime(get_aut(args.args[1]), a))
-// 		OUTPUT (
-// 		  eval (a, std::string (args.args[2])) << std::endl)
-// 		RETURNVALUE (0));
-
 DEFINE_COMMAND (NAME (evaluation)
 		CODE (/* empty */)
 		OUTPUT (
@@ -198,13 +188,13 @@ const command_t command_map[] =
     COMMAND_ENTRY (compose, AutAut,
 		   "Compose `aut1' and `aut2', two (sub-)normalized\n\ttransducers."),
     COMMAND_ENTRY (u_compose, AutAut,
-		   "Compose `aut1' and `aut2', two Boolean transducers, "
+		   "Compose `aut1' and `aut2', two Boolean transducers,\n\t"
 		   "preserve the number of path."),
     COMMAND_ENTRY (to_rt, Aut,
 		   "Compute the equivalent realtime transducer of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
 		   "Transform a Boolean automaton in a fmp transducer by\n\t"
-		   "creating, for each word,\n a pair containing twice this word.")
+		   "creating, for each word, a pair containing twice this word.")
 
     ),
 
