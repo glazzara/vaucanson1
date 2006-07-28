@@ -22,7 +22,6 @@ When designing \Vauc, we had three main goals in mind: we wanted
   scientists who work with automata and transducers,
 \item  an open and free software.
 \end{enumerate}
-\ldots
 
 This is the reason why we implemented so to say \emph{on top} of the
 \Vauc platform a library that allow to apply a number of functions on
@@ -36,6 +35,38 @@ large set of commands.  We call it \tafkit, standing for \emph{Typed
   Automata Function Kit}, as these commands take as input, and output,
 automata whose type is fixed.  \tafkit is presented in
 \autoref{sec:tafkit}.
+
+
+This document presents a simple interface to \Vauc: a set of programs
+tailored to be used from a traditional shell.  Since they exchange
+\emph{typed} XML files, there is one program per automaton type.  Each
+program supports a set of operations which depends on the type of the
+automaton.
+
+Many users of automata consider only automata whose transitions are
+labeled by letters taken in an alphabet, which we call, roughly
+speaking, \emph{classical} automata or \emph{Boolean} automata.  The
+first program of the \tafkit, \command{vcsn-b}, allows to compute with
+classical automata and is described in \autoref{sec:vcsn-b}.
+
+\autoref{sec:vcsn-tdc} describes the program \command{vcsn-tdc} which
+allows to compute with transducers, that is, automata whose
+transitions are labeled by pair of words, which are elements of a
+\emph{product of free monoids}, hence the name.
+
+In \autoref{sec:vcsn-z} we consider the programs of the \tafkit that
+compute with automata over a free monoid and with multiplicity, or
+\emph{weight} taken in the set of integers equipped with the usual
+operations of addition and multiplication, that is, the semiring $\Z$.
+
+% ,
+% or with the operations of $\min$ and addition, or the operations of
+% $\max$ and addition, that is, the semirings $\Z,\min,+$ and
+% $\Z,\max,+$.  Finally, the forth section describes the program
+% \command{vcsn-rw-tdc} which allows to compute with transducers, viewed
+% as automata on a free monoid (the input monoid) with multiplicity
+% taken in the semiring of finite and even rational subsets of another
+% free monoid (the output monoid).
 
 
 %%% Local Variables:

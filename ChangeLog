@@ -1,3 +1,12 @@
+2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	More adjustment to the doc.
+
+	From Jacques Sakarovitch.
+	* doc/manual/introduction.tex, doc/manual/vaucanson-user-manual.tex,
+	* doc/manual/taf-kit.tex: Make it more lightweight, remove
+	empty and nearly empty sections.
+
 2006-07-28  Akim Demaille  <akim@epita.fr>
 
 	Clean the doc.

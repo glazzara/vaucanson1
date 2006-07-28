@@ -94,6 +94,8 @@
 \newcommand{\taffn}[1]{\code{#1}}
 \newcommand{\tafkit}{\textsc{TAF-Kit}\xspace}
 \newcommand{\Vauc}{\textsc{Vaucanson}\xspace}
+\newcommand{\TFK}{\tafkit\xspace}%
+\newcommand{\TFKv}{\tafkit{} 1.0\xspace}%
 
 % \begin{fnsection}{NAME}
 % -----------------------
@@ -158,8 +160,9 @@
 %
 \newcommand{\execdisplay}[3]{\includegenerated{#1}}
 
-\title{\Vauc User's manual}
-\author{The \Vauc group}
+\title{The \Vauc \TFKv \\ User's Manual}
+\author{The \Vauc \textsc{Group}}
+\date{July 28th, 2006}
 
 %% ---------- %%
 %% Document.  %%
@@ -174,19 +177,24 @@
 \input{introduction}
 \input{installation}
 \input{taf-kit}
+\ifthenelse{\boolean{developer}}{
 \input{library}
-\ifthenelse{\boolean{developer}}{\input{developer}}{}
+  \input{developer}
+}{}
 
-\appendix
+\ifthenelse{\boolean{developer}}{\appendix}{}
 
-\ifthenelse{\boolean{developer}}{\input{theory}}
 \input{automata}
-\input{xml}
 
-\printindex
+\ifthenelse{\boolean{developer}}{
+  \input{theory}
+  \input{xml}
 
-\bibliographystyle{apalike}
-\bibliography{vaucanson.bib}
+  \printindex
+
+  \bibliographystyle{apalike}
+  \bibliography{vaucanson.bib}
+}{}
 
 \end{document}
 
