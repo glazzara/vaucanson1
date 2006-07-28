@@ -736,4 +736,5 @@ Vaucanson 0.1 January, 2002
 
 .. Local Variables:
 .. mode: rst
+.. ispell-local-dictionary: "american"
 .. End:
