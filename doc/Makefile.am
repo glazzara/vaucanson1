@@ -31,7 +31,6 @@ ref.tar.gz: doc.doxy.in
 dist_pdf_DATA = README.pdf FAQ.pdf NEWS.pdf
 
 EXTRA_DIST = README.tex FAQ.tex NEWS.tex \
-	     README.txt FAQ.txt NEWS.txt \
 	     share
 
 MAINTAINERCLEANFILES = $(dist_doc_DATA) $(dist_pdf_DATA)

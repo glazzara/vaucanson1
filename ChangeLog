@@ -1,3 +1,38 @@
+2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	Remove demos/transducers.
+
+	* src/demos/transducers/one_rule_rewriting,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_rt_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_rt_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_tdc_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/fibonacci_demo.cc,
+	* src/demos/transducers/one_rule_rewriting/Makefile.am,
+	* src/demos/transducers/one_rule_rewriting/ORR_tdc_gen.cc,
+	* src/demos/transducers/one_rule_rewriting/ORR_demo.cc:
+	Move to...
+	* src/demos/one_rule_rewriting,
+	* src/demos/one_rule_rewriting/fibonacci_rt_gen.cc,
+	* src/demos/one_rule_rewriting/ORR_rt_gen.cc,
+	* src/demos/one_rule_rewriting/fibonacci_tdc_gen.cc,
+	* src/demos/one_rule_rewriting/fibonacci_demo.cc,
+	* src/demos/one_rule_rewriting/Makefile.am,
+	* src/demos/one_rule_rewriting/ORR_tdc_gen.cc,
+	* src/demos/one_rule_rewriting/ORR_demo.cc:
+	here.
+
+	* src/demos/transducers,
+	* src/demos/transducers/t1.xml,
+	* src/demos/transducers/u1.xml,
+	* src/demos/transducers/t1.cc,
+	* src/demos/transducers/Makefile.am,
+	* src/demos/transducers/u1.cc:
+	Remove.
+	They duplicate what Guillaume Leroi did in data/automata/tdc.
+
+	* src/tests/xml/Makefile.am, src/demos/Makefile.am,
+	* configure.ac, doc/Makefile.am: Adjust.
+
 2006-07-28  Roland Levillain  <roland@lrde.epita.fr>
 
 	Fix the checking of the C++ ABI of libxerces-x.

@@ -14,7 +14,7 @@
 SUBDIRS =					\
 	algorithms				\
 	function_library			\
-	transducers   				\
+	one_rule_rewriting			\
 	vgrep					\
 	.
 

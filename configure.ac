@@ -203,8 +203,7 @@ AC_CONFIG_FILES([
 	    src/demos/vgrep/Makefile
 	    src/demos/function_library/Makefile
 	    src/demos/algorithms/Makefile
-	    src/demos/transducers/Makefile
-	    src/demos/transducers/one_rule_rewriting/Makefile
+	    src/demos/one_rule_rewriting/Makefile
 	  src/benchs/Makefile
 	    src/benchs/common/Makefile
 	    src/benchs/determinization/Makefile

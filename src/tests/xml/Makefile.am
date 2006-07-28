@@ -82,4 +82,4 @@ CLEANFILES = 							\
 EXTRA_DIST =						\
 	tester.sh					\
 	$(check_PROGRAMS:_tester=_ref.xml)		\
-	$(check_PROGRAMS:=.dot)
+	$(check_PROGRAMS:_tester=_ref.dot)
