@@ -1,5 +1,12 @@
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
 
+	Wrap --list-commands properly.
+
+	* taf-kit/src/tdc_commands.cc: Do it.
+	Add missing std::endl.
+
+2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
+
 	Remove VaucanSWIG.
 
 	from the src directory.

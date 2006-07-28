@@ -73,7 +73,7 @@ DEFINE_COMMAND (NAME (u_compose)
 // 						     second_alphabet_t());
 // 		  fmp_to_realtime(get_aut(args.args[1]), a))
 // 		OUTPUT (
-// 		  eval (a, std::string (args.args[2])))
+// 		  eval (a, std::string (args.args[2])) << std::endl)
 // 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation)
@@ -82,7 +82,7 @@ DEFINE_COMMAND (NAME (evaluation)
 		  evaluation (get_aut(args.args[1]),
 			      boolean_automaton::make_rat_exp(
 				get_first_alphabet (args.alphabet),
-				args.args[2])))
+				args.args[2])) << std::endl)
 		RETURNVALUE (0));
 
 DEFINE_COMMAND (NAME (evaluation_fmp)
@@ -190,10 +190,10 @@ const command_t command_map[] =
     COMMAND_ENTRY_CN (eval, evaluation, AutExp,
 		      "Compute the evaluation of `exp' against `aut'."),
     COMMAND_ENTRY_CN (eval-aut, evaluation_fmp, AutAut,
-		      "Compute a boolean automaton describing the words produced "
-		      "by the language\n\t described by a evaluated `aut1'."),
+		      "Compute a boolean automaton describing the words\n't produced "
+		      "by the language described by a evaluated `aut1'."),
     COMMAND_ENTRY (image, Aut,
-		   "Compute an automaton describing all output produced by the "
+		   "Compute an automaton describing all output produced by the\n\t"
 		   "transducer `aut'."),
     //    COMMAND_ENTRY (transpose, Aut,
     //		   "Compute the transposed of the transducer `aut'."),
@@ -208,14 +208,14 @@ const command_t command_map[] =
     COMMAND_ENTRY (composition_cover, Aut, "Outsplitting."),
     COMMAND_ENTRY (composition_co_cover, Aut, "Insplitting."),
     COMMAND_ENTRY (compose, AutAut,
-		   "Compose `aut1' and `aut2', two (sub-)normalized transducers."),
+		   "Compose `aut1' and `aut2', two (sub-)normalized\n\ttransducers."),
     COMMAND_ENTRY (u_compose, AutAut,
-		   "Compose `aut1' and `aut2', two boolean transducers, "
+		   "Compose `aut1' and `aut2', two boolean transducers,\n\t"
 		   "preserve the number of path."),
     COMMAND_ENTRY (to_rt, Aut,
 		   "Compute the equivalent realtime transducer of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
-		   "Transform a boolean automaton in a fmp transducer by "
-		   "creating, for each word,\n a pair contianing twice this word.")),
+		   "Transform a boolean automaton in a fmp transducer by\n\t"
+		   "creating, for each word, a pair contianing twice this word.")),
   {0, 0 ,0 ,0, 0}
 };
