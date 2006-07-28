@@ -43,29 +43,12 @@ AC_PROG_AWK
 # SWIG and Python used.
 AM_PATH_PYTHON([2.2])
 
-AC_ARG_ENABLE(
-	[vaucanswig],
+AC_ARG_ENABLE([vaucanswig],
         [AC_HELP_STRING([--enable-vaucanswig],
 			[enable building vaucanswig])],
 	[WANT_INTERPRETER=$enableval],
         [WANT_INTERPRETER=no
-cat << \EOF
-**********************************************************************
-WARNING:  Vaucanswig  WILL NOT  be  built.   Vaucanswig  is a  set  of
-bindings for the Python language  to use Vaucanson from an interpreter
-or within a scripting language.
-
-To enable Vaucanswig, invoke this script with --enable-vaucanswig.
-To disable this warning, invoke this script with --disable-vaucanswig.
-
-BE WARNED: the  compilation of Vaucanswig may take  several hours on a
-modern computer.
-
-Instructions about Vaucanswig are provided in
-src/vaucanswig/README.
-**********************************************************************
-EOF
-sleep 5])
+	 AC_MSG_WARN([Vaucanswig  WILL NOT  be  built])])
 
 VCSN_VAUCANSWIG_SUBDIR=""
 if test "x$WANT_INTERPRETER" != "xno"; then
@@ -73,15 +56,14 @@ if test "x$WANT_INTERPRETER" != "xno"; then
   if test "x$ac_cv_recent_swig" != "xyes"; then
     AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
   else
-    AC_CONFIG_FILES([src/vaucanswig/Makefile
- 	             src/vaucanswig/doc/Makefile
- 	             src/vaucanswig/meta/Makefile
-                     src/vaucanswig/src/Makefile
-                     src/vaucanswig/python/Makefile])
+    AC_CONFIG_FILES([vaucanswig/Makefile
+ 	             vaucanswig/doc/Makefile
+ 	             vaucanswig/meta/Makefile
+                     vaucanswig/src/Makefile
+                     vaucanswig/python/Makefile])
     VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
   fi
 fi
-
 
 
 # Libtool used

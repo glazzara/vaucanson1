@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2003, 2004, 2006 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -11,14 +11,20 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-SUBDIRS = tests	\
-	  benchs \
-	  demos
+INCLUDES = -I$(srcdir) -I$(top_srcdir)/include -I$(top_builddir)/include
 
-.PHONY: demos benchs
+EXTRA_DIST =					\
+	automaton.hh				\
+	context.hh				\
+	vaucanswig_algo_common.i		\
+	vaucanswig_automaton.i			\
+	vaucanswig_context.i			\
+	vaucanswig_core.i			\
+	vaucanswig_describe.i			\
+	vaucanswig_exception.i			\
+	vauto.hh				\
+	vcontext.hh
 
-demos:
-	cd demos && $(MAKE) $(AM_MAKEFLAGS) demos
+lib_LTLIBRARIES = libvv.la
 
-benchs:
-	cd benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
+libvv_la_SOURCES = vcontext.cc vauto.cc

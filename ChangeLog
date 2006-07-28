@@ -1,3 +1,62 @@
+2006-07-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	Remove VaucanSWIG.
+
+	from the src directory.
+	* src/vaucanswig,
+	* src/vaucanswig/doc,
+	* src/vaucanswig/doc/Makefile.am,
+	* src/vaucanswig/doc/build-process.txt,
+	* src/vaucanswig/doc/README.txt,
+	* src/vaucanswig/doc/meta-build-process.txt,
+	* src/vaucanswig/meta,
+	* src/vaucanswig/meta/context.hh,
+	* src/vaucanswig/meta/vaucanswig_context.i,
+	* src/vaucanswig/meta/vauto.cc,
+	* src/vaucanswig/meta/automaton.hh,
+	* src/vaucanswig/meta/vaucanswig_automaton.i,
+	* src/vaucanswig/meta/vaucanswig_core.i,
+	* src/vaucanswig/meta/vaucanswig_algo_common.i,
+	* src/vaucanswig/meta/vcontext.hh,
+	* src/vaucanswig/meta/Makefile.am,
+	* src/vaucanswig/meta/vaucanswig_exception.i,
+	* src/vaucanswig/meta/vauto.hh,
+	* src/vaucanswig/meta/vaucanswig_describe.i,
+	* src/vaucanswig/meta/vcontext.cc,
+	* src/vaucanswig/ChangeLog,
+	* src/vaucanswig/expand.sh,
+	* src/vaucanswig/Makefile.am:
+	Move to...
+	* vaucanswig,
+	* vaucanswig/doc,
+	* vaucanswig/doc/Makefile.am,
+	* vaucanswig/doc/build-process.txt,
+	* vaucanswig/doc/README.txt,
+	* vaucanswig/doc/meta-build-process.txt,
+	* vaucanswig/meta,
+	* vaucanswig/meta/context.hh,
+	* vaucanswig/meta/vaucanswig_context.i,
+	* vaucanswig/meta/vauto.cc,
+	* vaucanswig/meta/automaton.hh,
+	* vaucanswig/meta/vaucanswig_automaton.i,
+	* vaucanswig/meta/vaucanswig_core.i,
+	* vaucanswig/meta/vaucanswig_algo_common.i,
+	* vaucanswig/meta/vcontext.hh,
+	* vaucanswig/meta/Makefile.am,
+	* vaucanswig/meta/vaucanswig_exception.i,
+	* vaucanswig/meta/vauto.hh,
+	* vaucanswig/meta/vaucanswig_describe.i,
+	* vaucanswig/meta/vcontext.cc,
+	* vaucanswig/ChangeLog,
+	* vaucanswig/expand.sh,
+	* vaucanswig/Makefile.am:
+	here.
+
+	* bootstrap.sh, src/Makefile.am, configure.ac, vaucanswig/expand.sh,
+	* doc/README.txt, doc/manual/developer.tex: Adjust.
+	* vaucanswig/doc/Makefile.am, vaucanswig/meta/Makefile.am,
+	* vaucanswig/Makefile.am, Makefile.am: Ditto.
+
 2006-07-28  Akim Demaille  <akim@epita.fr>
 
 	* src/tests/xml/Makefile.am (CLEANFILES, EXTRA_DIST): Complete

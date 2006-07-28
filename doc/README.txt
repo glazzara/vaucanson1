@@ -135,6 +135,9 @@ src
 taf-kit
    TAF-Kit sources and tests.
 
+vaucanswig
+   VaucanSWIG sources and tests.  Very experimental.
+
 Requirements
 ============
 

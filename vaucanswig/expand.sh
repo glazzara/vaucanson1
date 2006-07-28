@@ -6,7 +6,7 @@ set -e
   { echo "usage: $0 <vaucanswig srcdir>" >&2; exit 1; }
 
 VAUCANSWIG=`cd $1 && pwd`
-VAUC=$VAUCANSWIG/../../include
+VAUC=$VAUCANSWIG/../include
 
 mkdir -p "$VAUCANSWIG/src"
 mkdir -p "$VAUCANSWIG/python"

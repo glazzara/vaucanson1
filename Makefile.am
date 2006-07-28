@@ -13,7 +13,9 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = argp include src data taf-kit doc build-aux debian
+SUBDIRS = argp include src data taf-kit doc build-aux debian  \
+	  $(VCSN_VAUCANSWIG_SUBDIR)
+
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
 
 # Prevent accidental edition of generated files.

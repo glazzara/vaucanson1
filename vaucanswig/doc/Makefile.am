@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2005, 2006 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -10,15 +10,9 @@
 ## `COPYING' file in the root directory.
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
+include $(top_srcdir)/doc/doc.mk
 
-SUBDIRS = tests	\
-	  benchs \
-	  demos
+dist_pdf_DATA = README.pdf build-process.pdf meta-build-process.pdf
 
-.PHONY: demos benchs
-
-demos:
-	cd demos && $(MAKE) $(AM_MAKEFLAGS) demos
-
-benchs:
-	cd benchs && $(MAKE) $(AM_MAKEFLAGS) benchs
+EXTRA_DIST = README.txt build-process.txt meta-build-process.txt
+MAINTAINERCLEANFILES = $(dist_pdf_DATA)
