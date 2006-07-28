@@ -1,5 +1,9 @@
 2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* doc/NEWS.txt: Fix typo.
+
+2006-07-28  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/Makefile.am: Add missing files.
 
 2006-07-28  Matthieu Varin  <matt@lrde.epita.fr>

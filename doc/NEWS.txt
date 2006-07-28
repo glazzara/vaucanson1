@@ -46,6 +46,7 @@ Vaucanson 1.0, July 28th, 2006
 
 
 - TAF-kit.
+
   + We can now use vcsn-z and vcsn-tdc to call functions for Z automata
     and FMP transducers.
 
@@ -54,6 +55,7 @@ Vaucanson 1.0, July 28th, 2006
   + We have now the identity function in the TAF-kit.
 
 - Algorithms.
+
   + is_ambiguous(a);
     Test if `a` is ambiguous.
 
