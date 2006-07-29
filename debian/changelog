@@ -1,3 +1,9 @@
+vaucanson (1.0) stable; urgency=low
+
+  * Release.
+
+ -- Michaël Cadilhac <michael.cadilhac@lrde.epita.fr>  Sat, 29 Jul 2006 18:26:05 +0200
+
 vaucanson (0.7.2-1) unstable; urgency=low
 
   * Upstream release.
