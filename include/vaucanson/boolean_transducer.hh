@@ -64,6 +64,7 @@ namespace vcsn
 
 # include <vaucanson/contexts/transducer_functions.thh>
 
+# undef AUTOMATON_CONTEXT
 # undef VCSN_CONTEXT_NAMESPACE
 
 #endif // ! VCSN_BOOLEAN_TRANSDUCER_HH
