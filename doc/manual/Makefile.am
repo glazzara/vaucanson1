@@ -31,8 +31,8 @@ $(manual): $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
 
 $(srcdir)/vaucanson-developer-manual.pdf: manual.ext $(vaucanson_user_manual_sources)
 vaucanson_user_manual_sources =			\
-vaucanson-developer-manual.tex			\
 vaucanson-user-manual.tex			\
+vaucanson-developer-manual.tex			\
 introduction.tex				\
 installation.tex				\
 taf-kit.tex					\
