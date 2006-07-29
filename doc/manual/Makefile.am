@@ -25,7 +25,10 @@ TEXI2PDF_FLAGS += --dvipdf -I manual.ext
 
 dist_pdf_DATA = $(manual)
 
-$(manual): manual.ext $(vaucanson_user_manual_sources)
+$(manual): $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
+	$(MAKE) $(AM_MAKEFLAGS) manual.ext
+	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
+
 $(srcdir)/vaucanson-developer-manual.pdf: manual.ext $(vaucanson_user_manual_sources)
 vaucanson_user_manual_sources =			\
 vaucanson-developer-manual.tex			\
@@ -46,7 +49,8 @@ $(srcdir)/automata.tex: generate-automata.sh
 	mv $@-t $@
 
 
-EXTRA_DIST = $(vaucanson_user_manual_sources)
+EXTRA_DIST = $(vaucanson_user_manual_sources) $(manual)  \
+	 generate-automata.sh extex.pl extex.mk
 
 # Extract commands that must be run to produce figures.
 manual.ext: $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
@@ -95,7 +99,8 @@ deep-clean: clean maintainer-clean-local
 # Useful to ship just the sources.  It would be nice to be able to
 # ship share/ too, but it's one level higher currently.
 
-EXTRA_MINIDIST = $(vaucanson_user_manual_sources)
+EXTRA_MINIDIST = $(vaucanson_user_manual_sources)    \
+	 generate-automata.sh extex.pl extex.mk
 MINIDISTDIR = vaucanson-user-manual
 # Files to remove from the tarball.
 MINIDIST_IGNORE = \

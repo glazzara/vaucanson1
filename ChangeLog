@@ -1,5 +1,10 @@
 2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* doc/manual/Makefile.am: Don't force the remake of the doc on
+	distributed package.
+
+2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* taf-kit/tests/Makefile.am: Add XML test files to the distribution.
 
 2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
