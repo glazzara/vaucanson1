@@ -1,5 +1,9 @@
 2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* configure.ac: Bump to 1.1pre.
+
+2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	Release 1.0.
 
 	* configure.ac: Remove the `PRE_RELEASE' thing.

@@ -17,10 +17,12 @@ m4_pattern_forbid([^VCSN_])
 
 AC_PREREQ([2.60])
 
-AC_INIT([vaucanson], [1.0], [vaucanson-bugs@lrde.epita.fr])
+AC_INIT([vaucanson], [1.1], [vaucanson-bugs@lrde.epita.fr])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.9.5 tar-ustar no-define foreign dist-bzip2 nostdinc])
 AC_CONFIG_HEADERS([config.h:config.hin] [include/vaucanson/config/pconf.hh])
+
+VCSN_PRE_RELEASE
 
 # Some C and C++ code used.
 AC_PROG_CXX
