@@ -20,7 +20,10 @@ vcsn-b.test					\
 vcsn-z.test					\
 vcsn-tdc.test
 
-EXTRA_DIST = $(TESTS)
+EXTRA_DIST = $(TESTS) 		\
+	ambiguous.xml 		\
+	non_ambiguous.xml 	\
+	non_ambiguous2.xml
 
 # Each test case depends on defs.
 check_SCRIPTS =					\

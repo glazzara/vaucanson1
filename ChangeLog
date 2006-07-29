@@ -1,5 +1,9 @@
 2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
+	* taf-kit/tests/Makefile.am: Add XML test files to the distribution.
+
+2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
 	* include/vaucanson/boolean_transducer.hh,
 	* include/vaucanson/z_transducer.hh: Undef AUTOMATON_CONTEXT.
 
@@ -276,7 +280,7 @@
 	* src/tests/check/Makefile.am: Include check-flags.mk, not check.mk,
 	as there is no test suite here.
 
-2006-07-27  Akim Demaille  <akim@Costaguana.local>
+2006-07-27  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fix ATF-Kit on Tiger Intel.
 	* taf-kit/src/Makefile.am (vcsn_b_LDADD): Rename as...
