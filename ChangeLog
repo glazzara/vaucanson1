@@ -1,5 +1,15 @@
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	* src/tests/sanity/generate_files.sh: Don't generate the whole
+	Makefile.am, but a local check-programs.mk.
+	Use move-if-change.
+	Don't use a single source and varying CPPFLAGS, but varying
+	sources, that's more readable.
+	There are many more files, agreed.
+	* src/tests/sanity/Makefile.am: Use our check-TESTS.
+
+2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/normalized_composition.hh, 
 	* include/vaucanson/algorithms/normalized_composition.hxx:
 	Rewrite, using a function object to share typedefs and state.
