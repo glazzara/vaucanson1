@@ -100,8 +100,7 @@ deep-clean: clean maintainer-clean-local
 # Useful to ship just the sources.  It would be nice to be able to
 # ship share/ too, but it's one level higher currently.
 
-EXTRA_MINIDIST = $(vaucanson_user_manual_sources)    \
-	 generate-automata.sh extex.pl extex.mk
+EXTRA_MINIDIST = $(EXTRA_DIST)
 MINIDISTDIR = vaucanson-user-manual
 # Files to remove from the tarball.
 MINIDIST_IGNORE = \

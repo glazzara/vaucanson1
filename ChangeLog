@@ -1,5 +1,9 @@
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	* doc/manual/Makefile.am (EXTRA_MINIDIST): Simplify.
+
+2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	* include/vaucanson/xml/xml.hh (iostream, string): Include them.
 
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
