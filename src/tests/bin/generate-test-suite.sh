@@ -127,6 +127,8 @@ generate_CCs()
 
     # Include necessary Vaucanson headers.
     cat >> "$tmp_cc" <<EOF
+#undef NDEBUG
+#undef VCSN_NDEBUG
 #include <cassert>
 #include <vaucanson/design_pattern/design_pattern.hh>
 #define CREATE_SEMIRING(m)

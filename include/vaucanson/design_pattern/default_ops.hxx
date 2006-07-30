@@ -19,6 +19,7 @@
 
 # include <vaucanson/design_pattern/default_ops.hh>
 # include <vaucanson/misc/contract.hh>
+# include <algorithm>
 
 namespace vcsn {
 

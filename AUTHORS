@@ -86,8 +86,8 @@ Year 2007 students
   - Heuristic implementations for state elimination algorithm,
   - Bug fixes.
 
-* Michael Cadilhac			michael.cadilhac@lrde.epita.fr
-  - Release manager for Vaucanson 0.8,
+* Michaël Cadilhac			michael.cadilhac@lrde.epita.fr
+  - Release manager for Vaucanson 0.8 and 1.0,
   - TAF-Kit,
   - Renaming campaign,
   - Graph re-implementation,
@@ -109,10 +109,12 @@ Year 2008 students
 
 * Matthieu Varin			matthieu.varin@lrde.epita.fr
   - New implementation of closure,
+  - is_ambiguous algorithm,
   - Bug fixes.
 
 * Guillaume Lazzara			guillaume.lazzara@lrde.epita.fr
   - Performances in Vaucanson.
 
 * Guillaume Leroi			guillaume.leroi@lrde.epita.fr
+  - Implementation of TAF-Kit's vcsn-tdc,
   - Transducer synchronization.
