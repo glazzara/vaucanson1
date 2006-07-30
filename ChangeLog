@@ -1,5 +1,11 @@
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/normalized_composition.hh, 
+	* include/vaucanson/algorithms/normalized_composition.hxx:
+	Rewrite, using a function object to share typedefs and state.
+
+2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
 	Formatting changes.
 	Log the ratexp which is used.	
