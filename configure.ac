@@ -46,29 +46,30 @@ AM_PATH_PYTHON([2.2])
 AC_ARG_ENABLE([vaucanswig],
         [AC_HELP_STRING([--enable-vaucanswig],
 			[enable building vaucanswig])],
-	[WANT_INTERPRETER=$enableval],
-        [WANT_INTERPRETER=no
+        [enable_vaucanswig=no
 	 AC_MSG_WARN([Vaucanswig  WILL NOT  be  built])])
 
-VCSN_VAUCANSWIG_SUBDIR=""
-if test "x$WANT_INTERPRETER" != "xno"; then
+if test "x$enable_vaucanswig" = "xyes"; then
   AC_CHECK_SWIG13
   if test "x$ac_cv_recent_swig" != "xyes"; then
     AC_MSG_ERROR([You need swig >= 1.3 to compile vaucanswig.])
   else
     AC_CONFIG_FILES([vaucanswig/Makefile
- 	             vaucanswig/doc/Makefile
  	             vaucanswig/meta/Makefile
                      vaucanswig/src/Makefile
                      vaucanswig/python/Makefile])
-    VCSN_VAUCANSWIG_SUBDIR="vaucanswig"
   fi
 fi
+AM_CONDITIONAL([ENABLE_VAUCANSWIG], 
+               [test "x$enable_vaucanswig" = "xyes"])
 
 
 # Libtool used
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
+
+# Where the install Emacs files.
+AM_PATH_LISPDIR
 
 # Attempt to use strict language conformance checking.
 AC_CXX_FLAGS
@@ -186,7 +187,7 @@ src/tests/xml/Makefile
 ])
 
 ## ---------------- ##
-## generate files.  ##
+## Generate files.  ##
 ## ---------------- ##
 
 AC_CONFIG_FILES([
@@ -218,6 +219,5 @@ AC_CONFIG_FILES([
 m4_include([build-aux/tests.m4])
 
 AC_SUBST([VCSN_TESTS_SUBDIRS])
-AC_SUBST([VCSN_VAUCANSWIG_SUBDIR])
 
 AC_OUTPUT

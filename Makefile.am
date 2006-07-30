@@ -13,8 +13,10 @@
 
 include $(top_srcdir)/vaucanson.mk
 
-SUBDIRS = argp include src data taf-kit doc build-aux debian  \
-	  $(VCSN_VAUCANSWIG_SUBDIR)
+SUBDIRS = argp include src data taf-kit doc build-aux debian
+if ENABLE_VAUCANSWIG
+  SUBDIRS += vaucanswig
+endif
 
 EXTRA_DIST = vaucanson.spec ChangeLog.1 ChangeLog.2 README NEWS
 
@@ -37,7 +39,6 @@ ACLOCAL_AMFLAGS = -I build-aux
 ###
 ### Making the demos. (. is builddir)
 ###
-
 demos:
 	cd src/demos && $(MAKE) $(AM_MAKEFLAGS) demos
 
@@ -56,7 +57,6 @@ sanity-check:
 ###
 ### Check headers for sanity. Headers will check for VCSN_USE_XML.
 ###
-
 find_headers = \
    find $(srcdir)/include -name '*.hh' \
 	              -or -name '*.hxx' \

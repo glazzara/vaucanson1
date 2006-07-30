@@ -36,6 +36,7 @@ vaucanson-developer-manual.tex			\
 introduction.tex				\
 installation.tex				\
 taf-kit.tex					\
+vaucanswig.tex					\
 library.tex					\
 developer.tex					\
 theory.tex					\
