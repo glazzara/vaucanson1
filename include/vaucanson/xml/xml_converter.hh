@@ -43,7 +43,6 @@
 # include <vaucanson/xml/node.hh>
 # include <vaucanson/xml/xml_chooser.hh>
 
-
 namespace vcsn
 {
   namespace xml
@@ -57,8 +56,7 @@ namespace vcsn
     template <class Auto>
     struct xml_converter
     {
-      xml_converter(bool use_label_node = false) :
-	impl_(0), doc_(0), root_(0), use_label_node_(use_label_node) {};
+      xml_converter(bool use_label_node = false);
 
       typedef std::map<hstate_t, std::string>		map_t;
       typedef typename Auto::set_t			auto_set_t;
@@ -90,7 +88,7 @@ namespace vcsn
 
       void create_document(const Auto& aut, const std::string& name = "");
 
-      xercesc::DOMElement* root_get() { return root_; }
+      xercesc::DOMElement* root_get();
 
     private:
       std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);

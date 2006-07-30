@@ -27,11 +27,17 @@
  * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
  */
 
+# include <vaucanson/misc/usual_macros.hh>
+# include <vaucanson/xml/xml_converter.hh>
 
 namespace vcsn
 {
   namespace xml
   {
+
+    XML::XML(const std::string& name, bool use_label_node)
+      :	name_(name), use_label_node_(use_label_node)
+    {}
 
     template<typename Saver, typename Conv>
     void XML::operator()(std::ostream& out, const Saver& s,

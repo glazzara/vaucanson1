@@ -1,5 +1,14 @@
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/xml/xml_converter.hh, 
+	* include/vaucanson/xml/xml_converter.hxx,
+	* include/vaucanson/xml/XML.hh,
+	* include/vaucanson/xml/XML.hxx: Move bodies in the hxx file.
+	Move header inclusions needed by the implementation in the hxx
+	file.
+
+2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Complete the Emacs support.
 	* data/vaucanson.el: Move to...
 	* data/emacs/vaucanson.el: here.

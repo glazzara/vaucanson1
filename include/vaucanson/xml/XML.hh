@@ -28,11 +28,6 @@
  * @author Louis-Noel Pouchet <louis-noel.pouchet@lrde.epita.fr>
  */
 
-
-# include <vaucanson/misc/usual_macros.hh>
-# include <vaucanson/xml/xml_converter.hh>
-
-
 namespace vcsn
 {
   namespace xml
@@ -40,9 +35,8 @@ namespace vcsn
 
     struct XML
     {
-      XML(const std::string& name = "", bool use_label_node = false) :
-	name_(name), use_label_node_(use_label_node)
-	{}
+      XML(const std::string& name = "", bool use_label_node = false);
+
       template <typename Saver, typename Conv>
       void operator()(std::ostream& out,
 		      const Saver& s,

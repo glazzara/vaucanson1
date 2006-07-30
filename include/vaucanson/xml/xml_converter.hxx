@@ -37,6 +37,11 @@ namespace vcsn
   {
 
     template <class Auto>
+    xml_converter<Auto>::xml_converter (bool use_label_node) 
+	: impl_(0), doc_(0), root_(0), use_label_node_(use_label_node) 
+    {}
+
+    template <class Auto>
     template <class OStream>
     void xml_converter<Auto>::save(const Auto& aut, OStream& os,
 				   const std::string& name)
@@ -96,6 +101,13 @@ namespace vcsn
 	create_final(*f, aut, node, state2str);
     }
 
+
+    template <class Auto>
+    xercesc::DOMElement*  
+    xml_converter<Auto>::root_get() 
+    {
+      return root_; 
+    }
 
     // Create a state in the XML document.
     template <class Auto>
