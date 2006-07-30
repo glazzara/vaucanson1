@@ -21,18 +21,10 @@
 
 #include CONTEXT_HEADER
 #include <vaucanson/xml/XML.hh>
-
-#include <vaucanson/algorithms/closure.hh>
-#include <vaucanson/algorithms/realtime.hh>
-#include <vaucanson/algorithms/realtime_composition.hh>
-#include <vaucanson/algorithms/evaluation.hh>
-#include <vaucanson/algorithms/projection.hh>
-#include <vaucanson/algorithms/realtime_to_fmp.hh>
-#include <vaucanson/algorithms/trim.hh>
-#include <vaucanson/algorithms/isomorph.hh>
-#include <vaucanson/algorithms/transpose.hh>
-#include <vaucanson/algorithms/krat_exp_expand.hh>
+#include <vaucanson/tools/io.hh>
+#include <vaucanson/tools/dot_dump.hh>
 #include <vaucanson/tools/dot_display.hh>
+#include <vaucanson/tools/xml_dump.hh>
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/fmp_transducer.hh>
 
@@ -220,7 +212,6 @@ display_command(int argc, char** argv)
 {
   if (argc != 3)
     usage(argc, argv);
-
   vcsn::tools::dot_display(get_aut(argv[2]), "A", true);
 }
 
@@ -241,12 +232,12 @@ info_command(int argc, char** argv)
 
 static
 void
-closure_command(int argc, char** argv)
+eps_removal_command(int argc, char** argv)
 {
   if (argc != 3)
     usage(argc, argv);
 
-  std::cout << automaton_saver(accessible(closure(get_aut(argv[2]))),
+  std::cout << automaton_saver(accessible(eps_removal(get_aut(argv[2]))),
 			       string_out (), XML ())
 	    << std::endl;
 }
@@ -289,7 +280,7 @@ command_map[] =
   { "are-isomorphic",		are_isomorphic_command			},
   { "image",			ONE_ARG_COMMAND(get_aut, output_projection)},
   { "to-tdc",			realtime_to_fmp_command			},
-  { "closure",		closure_command				},
+  { "eps_removal",		eps_removal_command				},
   { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
   { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},
   { "display",		display_command				},
@@ -319,7 +310,7 @@ main(int argc, char** argv)
     std::cerr << "Available algorithms:" << std::endl;
     std::cerr << " * domain"  << std::endl;
     std::cerr << " * image"  << std::endl;
-    std::cerr << " * closure"  << std::endl;
+    std::cerr << " * eps_removal"  << std::endl;
     std::cerr << " * trim"  << std::endl;
     std::cerr << " * realtime"	<< std::endl;
     std::cerr << " * are-isomorphic"  << std::endl;

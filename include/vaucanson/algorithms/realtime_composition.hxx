@@ -123,7 +123,7 @@ namespace vcsn {
 	exp_t exp = lhs.series_of(*e);
 
 	assertion(exp.supp().size() == 1);
-	monoid_elt_t word (exp.structure().monoid(), *exp.supp());
+	monoid_elt_t word (exp.structure().monoid(), *exp.supp().begin());
 	// This supp would have one word
 
 	Auto_t a(auto_structure);

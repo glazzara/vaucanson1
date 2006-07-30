@@ -14,6 +14,7 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+#include <vaucanson/tools/io.hh>
 #include <vaucanson/xml/XML.hh>
 #include <ostream>
 #include <sstream>

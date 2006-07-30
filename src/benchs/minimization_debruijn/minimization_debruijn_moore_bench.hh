@@ -20,7 +20,6 @@
 #include <fstream>
 
 using namespace vcsn;
-using namespace vcsn::tools;
 using namespace vcsn::boolean_automaton;
 
 #include <common/bench_constructs.hh>

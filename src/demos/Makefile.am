@@ -20,5 +20,6 @@ SUBDIRS =					\
 
 demos:
 	for dir in $(SUBDIRS); do		\
-	  (cd "$$dir" && $(MAKE) $(AM_MAKEFLAGS) demos || exit 1); \
+	  [ "$$dir" = . ] ||			\
+	  	(cd "$$dir" && $(MAKE) $(AM_MAKEFLAGS) demos || exit 1); \
 	done

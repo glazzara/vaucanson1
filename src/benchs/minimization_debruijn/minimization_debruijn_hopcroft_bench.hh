@@ -14,20 +14,22 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#include <common/bench_automaton.hh>
+#include <vaucanson/boolean_automaton.hh>
+#include <vaucanson/tools/fsm_dump.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <iostream>
 #include <fstream>
 
 using namespace vcsn;
 using namespace vcsn::tools;
-using namespace vcsn::bench_automaton;
+using namespace vcsn::boolean_automaton;
 
-#include <common/algorithm.hh>
 #include <common/bench_constructs.hh>
 
 void minimization_debruijn_hopcroft_bench(int n_value)
 {
+  AUTOMATON_TYPES_EXACT(automaton_t);
+  
   alphabet_t	alpha;
   alpha.insert('a');
   alpha.insert('b');

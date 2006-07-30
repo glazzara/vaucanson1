@@ -14,13 +14,12 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#include <common/bench_automaton.hh>
+#include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <iostream>
 
 using namespace vcsn;
-using namespace vcsn::tools;
-using namespace vcsn::bench_automaton;
+using namespace vcsn::boolean_automaton;
 
 #include <common/bench_constructs.hh>
 

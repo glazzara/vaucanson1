@@ -15,6 +15,7 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_automaton.hh>
+#include <vaucanson/tools/fsm_dump.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <iostream>
@@ -25,7 +26,6 @@ using namespace vcsn::tools;
 using namespace vcsn::boolean_automaton;
 
 #include <common/bench_constructs.hh>
-#include <common/algorithm.hh>
 
 void minimization_2n_hopcroft_bench(int n_states)
 {

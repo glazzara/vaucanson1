@@ -21,16 +21,7 @@
 
 #include CONTEXT_HEADER
 #include <vaucanson/xml/XML.hh>
-
-#include <vaucanson/algorithms/closure.hh>
-#include <vaucanson/algorithms/normalized_composition.hh>
-#include <vaucanson/algorithms/sub_normalize.hh>
-#include <vaucanson/algorithms/evaluation_fmp.hh>
-#include <vaucanson/algorithms/isomorph.hh>
-#include <vaucanson/algorithms/projections_fmp.hh>
-#include <vaucanson/algorithms/internal/outsplitting.hh>
-#include <vaucanson/algorithms/transpose.hh>
-#include <vaucanson/algorithms/fmp_to_realtime.hh>
+#include <vaucanson/tools/io.hh>
 #include <vaucanson/tools/dot_display.hh>
 #include <vaucanson/boolean_automaton.hh>
 #include <vaucanson/boolean_transducer.hh>
@@ -318,12 +309,12 @@ is_empty_command(int argc, char** argv)
 
 static
 void
-closure_command(int argc, char** argv)
+eps_removal_command(int argc, char** argv)
 {
   if (argc != 3)
     usage(argc, argv);
 
-  std::cout << automaton_saver(accessible(closure(get_aut(argv[2]))),
+  std::cout << automaton_saver(accessible(eps_removal(get_aut(argv[2]))),
 			       string_out (), XML ())
 	    << std::endl;
 }
@@ -343,8 +334,6 @@ closure_command(int argc, char** argv)
   }
 
 DEFINE_ONE_ARG_COMMAND(get_aut, sub_normalize)
-DEFINE_ONE_ARG_COMMAND(get_aut, outsplitting)
-DEFINE_ONE_ARG_COMMAND(get_aut, insplitting)
 DEFINE_ONE_ARG_COMMAND(get_aut, trim)
 DEFINE_ONE_ARG_COMMAND(get_aut, transpose)
 #undef DEFINE_ONE_ARG_COMMAND
@@ -366,10 +355,8 @@ command_map[] =
   { "are-isomorphic",		are_isomorphic_command			},
   { "is-empty",		is_empty_command			},
   { "intersection",		identity_command			},
-  { "composition-cover",	ONE_ARG_COMMAND(get_aut, outsplitting)	},
-  { "composition-co-cover",	ONE_ARG_COMMAND(get_aut, insplitting)	},
   { "to-rt-tdc",		fmp_to_realtime_command			},
-  { "closure",		closure_command				},
+  { "eps_removal",		eps_removal_command				},
   { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
   { "b-compose",		b_compose_command			},
   { "transpose",		ONE_ARG_COMMAND(get_aut, transpose)	},
@@ -401,7 +388,7 @@ main(int argc, char** argv)
     std::cerr << " * domain"  << std::endl;
     std::cerr << " * image"  << std::endl;
     std::cerr << " * intersection"  << std::endl;
-    std::cerr << " * closure"  << std::endl;
+    std::cerr << " * eps_removal"  << std::endl;
     std::cerr << " * trim" << std::endl;
     std::cerr << " * transpose" << std::endl;
     std::cerr << " * is-empty" << std::endl;

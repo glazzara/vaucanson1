@@ -21,7 +21,6 @@
 #include <fstream>
 
 using namespace vcsn;
-using namespace vcsn::tools;
 using namespace vcsn::z_automaton;
 
 void binary(automaton_t& an)

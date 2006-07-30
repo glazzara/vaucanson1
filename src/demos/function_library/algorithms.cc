@@ -21,24 +21,6 @@
 
 #include CONTEXT_HEADER
 #include <vaucanson/xml/XML.hh>
-
-#include <vaucanson/algorithms/derived_term_automaton.hh>
-#include <vaucanson/algorithms/product.hh>
-#include <vaucanson/algorithms/transpose.hh>
-#include <vaucanson/algorithms/eval.hh>
-#include <vaucanson/algorithms/determinize.hh>
-#include <vaucanson/algorithms/closure.hh>
-#include <vaucanson/algorithms/isomorph.hh>
-#include <vaucanson/algorithms/minimization_hopcroft.hh>
-#include <vaucanson/algorithms/minimization_moore.hh>
-#include <vaucanson/algorithms/trim.hh>
-#include <vaucanson/algorithms/concatenate.hh>
-#include <vaucanson/algorithms/sum.hh>
-#include <vaucanson/algorithms/krat_exp_expand.hh>
-#include <vaucanson/algorithms/accessible.hh>
-#include <vaucanson/algorithms/realtime.hh>
-#include <vaucanson/algorithms/standard.hh>
-#include <vaucanson/algorithms/normalized.hh>
 #include <vaucanson/tools/dot_display.hh>
 
 using namespace CONTEXT_NAMESPACE;
@@ -301,12 +283,12 @@ sum_command(int argc, char** argv)
 
 static
 void
-closure_command(int argc, char** argv)
+eps_removal_command(int argc, char** argv)
 {
   if (argc != 3)
     usage(argc, argv);
 
-  std::cout << automaton_saver(accessible(closure(get_aut(argv[2]))),
+  std::cout << automaton_saver(accessible(eps_removal(get_aut(argv[2]))),
 			       string_out (), XML ())
 	    << std::endl;
 }
@@ -387,10 +369,10 @@ command_map[] =
   { "aut_to_exp",		aut_to_exp_command			},
   { "quotient",		quotient_command			},
   { "product",		product_command				},
-  { "closure",		closure_command				},
+  { "eps_removal",		eps_removal_command				},
   { "is-empty",		is_empty_command			},
   { "are-isomorphic",		are_isomorphic_command			},
-  { "closure",		closure_command				},
+  { "eps_removal",		eps_removal_command				},
   { "determinize",		determinize_command			},
   { "minimize",		minimize_command			},
   { "trim",			ONE_ARG_COMMAND(get_aut, trim)		},
@@ -446,7 +428,7 @@ main(int argc, char** argv)
     std::cerr << " * determinize"  << std::endl;
     std::cerr << " * minimize"	<< std::endl;
     std::cerr << " * quotient"	<< std::endl;
-    std::cerr << " * closure"  << std::endl;
+    std::cerr << " * eps_removal"  << std::endl;
     std::cerr << " * eval"  << std::endl;
     std::cerr << " * display"  << std::endl;
     std::cerr << " * info"  << std::endl;

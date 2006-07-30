@@ -15,13 +15,21 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 #include <vaucanson/boolean_automaton.hh>
-
+#include <vaucanson/tools/xml_dump.hh>
 #include <vaucanson/algorithms/minimization_hopcroft.hh>
 #include <vaucanson/algorithms/determinize.hh>
 #include <vaucanson/algorithms/product.hh>
 #include <vaucanson/algorithms/eval.hh>
 
 #include <iostream>
+
+#define SAVE_AUTOMATON_XML_SIMPLE(Name, Auto)   \
+  do {                                          \
+    std::ostringstream s;                       \
+    s << Name << ".xml";                        \
+    std::ofstream f(s.str().c_str());           \
+    vcsn::tools::xml_dump(f, Auto, Name);       \
+  } while (0)
 
 using namespace vcsn;
 using namespace vcsn::boolean_automaton;
@@ -68,24 +76,24 @@ main()
   a.set_initial(p);
   a.set_final(q);
 
-  SAVE_AUTOMATON_DOT_SIMPLE("a", a);
-  std::cout << "`a' saved in a.dot" << std::endl;
+  SAVE_AUTOMATON_XML_SIMPLE("a", a);
+  std::cout << "`a' saved in a.xml" << std::endl;
 
   automaton_t a_q = quotient(a);
-  SAVE_AUTOMATON_DOT_SIMPLE("a_quotient", a_q);
-  std::cout << "`a' quotient saved in a_quotient.dot" << std::endl;
+  SAVE_AUTOMATON_XML_SIMPLE("a_quotient", a_q);
+  std::cout << "`a' quotient saved in a_quotient.xml" << std::endl;
 
   automaton_t a_d = determinize(a);
-  SAVE_AUTOMATON_DOT_SIMPLE("a_determinize", a_d);
-  std::cout << "`a' determinized saved in a_determinize.dot" << std::endl;
+  SAVE_AUTOMATON_XML_SIMPLE("a_determinize", a_d);
+  std::cout << "`a' determinized saved in a_determinize.xml" << std::endl;
 
   automaton_t a_p = product(a, a);
-  SAVE_AUTOMATON_DOT_SIMPLE("a_product", a_p);
-  std::cout << "`a' product saved in a_product.dot" << std::endl;
+  SAVE_AUTOMATON_XML_SIMPLE("a_product", a_p);
+  std::cout << "`a' product saved in a_product.xml" << std::endl;
 
   automaton_t a_pq = quotient(a_p);
-  SAVE_AUTOMATON_DOT_SIMPLE("a_product_quotient", a_pq);
-  std::cout << "`a' product's quotient saved in a_product_quotient.dot"
+  SAVE_AUTOMATON_XML_SIMPLE("a_product_quotient", a_pq);
+  std::cout << "`a' product's quotient saved in a_product_quotient.xml"
 	    << std::endl;
 
   std::cout << "Evaluating `a' product's quotient." << std::endl;

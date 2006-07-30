@@ -30,7 +30,6 @@
 #define SAMPLES (CLASSES * SAMPLES_PER_CLASS)
 
 using namespace vcsn;
-using namespace vcsn::tools;
 using namespace vcsn::boolean_automaton;
 
 #include <common/bench_constructs.hh>

@@ -94,6 +94,7 @@ namespace vcsn {
 		      const Structure<S>& s2, const T& from_data)
   {
     precondition(& s1 == & s2);
+    static_cast<void> (s1); static_cast<void> (s2);
     return from_data;
   }
 
