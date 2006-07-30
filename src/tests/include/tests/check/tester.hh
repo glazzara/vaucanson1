@@ -40,32 +40,63 @@
 
 namespace tests {
 
-  enum verbose_level
-    {
-      none,
-      low,
-      medium,
-      high
-    };
-
   class Tester
   {
   public:
+    enum verbose_level
+      {
+	none,
+	low,
+	medium,
+	high
+      };
+
     Tester();
     Tester(verbose_level l);
+    Tester(int argc, char **argv);
 
-    bool	     all_passed();
-    void	     ok(std::string test_label);
-    void	     ko(std::string test_label);
-    verbose_level    verbose() const;
+    /// Set up the tester.
+    ///
+    /// To be called at the end of each ctor.
+    void finalize_initialization ();
 
-    static const unsigned  nb_col_msg;
+    /// Process the command line arguments.
+    ///
+    /// Skips argv[0], the command name.
+    void process_options (int argc, char **argv);
+
+    /// Process one command line option.
+    void process_option (const std::string& s);
+
+    /// The current verbosity level.
+    verbose_level verbose() const;
+    /// Whether l is higher or equal to the current verbosity level.
+    bool verbose (verbose_level l) const;
+
+    /// Whether all tests passed.
+    bool all_passed();
+
+    /// Whether test @c label passed or not.
+    void ok_or_ko(std::string test, bool pass);
+    /// Sugar for ok_or_ko().
+    void ok(std::string test);
+    /// Sugar for ok_or_ko().
+    void ko(std::string test);
+
+    static const unsigned nb_col_msg;
+    /// A specific non null number to request a random seed.
+    static const unsigned seed_time;
     // FIXME: Add statistics stuff.
 
   private:
+    /// Number of passed tested.
     unsigned int	passed_;
+    /// Number of failed tested.
     unsigned int	failed_;
+    /// Level of verbosity.
     verbose_level	verbose_;
+    /// The random seed.
+    unsigned seed_;
   };
 
 } // tests
@@ -99,15 +130,15 @@ inline std::string printable(T t)
 }
 
 #define TEST_MSG(Label) \
-  std::cout << "TEST: * " << Label << std::endl;
+  std::cerr << "TEST: * " << Label << std::endl;
 
 #define TEST_GROUP(Label) \
-  std::cout << "GROUP *** " << Label << " ***" << std::endl;
+  std::cerr << "GROUP *** " << Label << " ***" << std::endl;
 
 #define TEST_ASSERT(Code, Label) \
-  std::cout << ((Code) ? "PASS" : "FAIL") << " * " << Label << std::endl; assert(Code);
+  std::cerr << ((Code) ? "PASS" : "FAIL") << " * " << Label << std::endl; assert(Code);
 #define TEST_XASSERT(Code, Label) \
-  std::cout << ((Code) ? "PASS" : "XFAIL") << " * " << Label << std::endl;
+  std::cerr << ((Code) ? "PASS" : "XFAIL") << " * " << Label << std::endl;
 
 #define TEST_FAIL_SAVE(TestName, Iteration, Data)			\
   {									\
@@ -116,46 +147,46 @@ inline std::string printable(T t)
     std::ofstream f(s.str().c_str());					\
     f << Data;								\
     f.close();								\
-    std::cout << "FAIL: Test failed at iteration "			\
+    std::cerr << "FAIL: Test failed at iteration "			\
 	      << Iteration << std::endl;				\
-    std::cout << "FAIL: Relevant information saved in " 		\
+    std::cerr << "FAIL: Relevant information saved in " 		\
 	      << s.str() << std::endl;					\
   }
 
-#define TEST_RETURN(Tester) \
-  if (Tester.all_passed())			\
+#define TEST_RETURN(aTester)			\
+  if (aTester.all_passed())			\
     return EXIT_SUCCESS;			\
   else						\
     return EXIT_FAILURE;
 
 
-#define TEST(Tester, Label, Code)		\
+#define TEST(aTester, Label, Code)		\
 {						\
   bool result = (Code);				\
   if (result)					\
-    Tester.ok(Label);				\
+    aTester.ok(Label);				\
   else						\
    {						\
-     std::cout << "(" << #Code << " is false)"	\
+     std::cerr << "(" << #Code << " is false)"	\
                << std::endl;			\
-     Tester.ko(Label);				\
+     aTester.ko(Label);				\
    }						\
 }
 
-#define EQTEST(Tester, Label, Code, V)			\
+#define EQTEST(aTester, Label, Code, V)			\
 {							\
   bool result = ((Code) == (V));			\
-  if (Tester.verbose() == tests::high)			\
-    std::cout << printable(Code) << " =? "		\
+  if (aTester.verbose(tests::Tester::high))		\
+    std::cerr << printable(Code) << " =? "		\
 	      << printable(V) << std::endl;		\
   if (result)						\
-    Tester.ok(printable(Label));			\
+    aTester.ok(printable(Label));			\
   else							\
    {							\
-     std::cout << "(" << printable(Code)		\
+     std::cerr << "(" << printable(Code)		\
 	       << " != " << printable(V)		\
                << ")" << std::endl;			\
-     Tester.ko(Label);					\
+     aTester.ko(Label);					\
    }							\
 }
 

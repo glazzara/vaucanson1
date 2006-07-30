@@ -44,7 +44,7 @@ bool elimination_test(tests::Tester& tg)
       generalized_automaton_t a_ = generalized(a);
       gseries_set_elt_t language (a_.structure().series());
       language = aut_to_exp(a_);
-      if (t.verbose() == tests::high)
+      if (t.verbose() == tests::Tester::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_XML("/tmp", "aut_to_exp", a, nb);
@@ -56,7 +56,7 @@ bool elimination_test(tests::Tester& tg)
 	  if (eval(a, w) ==
 	      zero_as<semiring_elt_value_t>::of(a.structure().series().semiring()))
 	    {
-	      if (t.verbose() != tests::high)
+	      if (t.verbose() != tests::Tester::high)
 	      {
 		TEST_MSG("Automaton saved in /tmp.");
 		SAVE_AUTOMATON_XML("/tmp", "aut_to_exp", a, nb);

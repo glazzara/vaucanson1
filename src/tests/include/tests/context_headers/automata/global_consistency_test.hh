@@ -29,7 +29,8 @@ operator == (const automaton_t& a, const automaton_t& b)
     a.final().size() == b.final().size();
 }
 
-# define TYPE_OK(T1, T2) vcsn::misc::static_eq<T1, typename Automaton::T2>::value
+# define TYPE_OK(T1, T2) \
+  vcsn::misc::static_eq<T1, typename Automaton::T2>::value
 # define TEST_TYPE(T1, T2)				\
   TEST(t, #T1 " is consistent.", TYPE_OK(T1, T2))
 
@@ -76,12 +77,15 @@ global_consistency_test(tests::Tester& t)
 	e = ss.choose(SELECT(rat_exp_impl_t));
       while (e == vcsn::algebra::zero_as<rat_exp_impl_t>::of(ss));
 
-      automaton_t		a1 = make_automaton(at);
-      automaton_t		a2 = make_automaton(at.begin(), at.end());
-      automaton_t		a3 (aa);
-      automaton_t		a4 = standard_of(e);
-      automaton_t		a5 = thompson_of(e);
-      automaton_t		a6 = make_automaton(other_at);
+      if (t.verbose (tests::Tester::high))
+	std::cerr << "Expression is: " << e << std::endl;
+
+      automaton_t a1 = make_automaton(at);
+      automaton_t a2 = make_automaton(at.begin(), at.end());
+      automaton_t a3 (aa);
+      automaton_t a4 = standard_of(e);
+      automaton_t a5 = thompson_of(e);
+      automaton_t a6 = make_automaton(other_at);
 
       TEST(t, "make_automaton is consistent.", a1 == a2);
       TEST(t, "make_automaton gives a correct alphabet.",

@@ -1,5 +1,32 @@
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
+	Formatting changes.
+	Log the ratexp which is used.	
+
+	* src/tests/include/tests/check/tester.hh (verbose_level): Now
+	a Tester member.
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/include/tests/automata/algos/boolean_automata/minimization_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_heuristic_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_dmheuristic_test.hh
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_random_test.hh
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_test.hh
+	Adjust.
+
+	* src/tests/include/tests/automata/algos/boolean_automata/complete_test.hh:
+	More comments.
+	Simplify the logic of the ifs.
+
+	Implement --seed in the generated tests.
+	* src/tests/include/tests/check/tester.hh (process_option)
+	(process_options, finalize_initialization, ok_or_ko, seed_): New.
+	* src/tests/check/tester.cc: Work on cerr, not cout.
+	* src/tests/bin/generate-test-suite.sh: Adjust.
+
+2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	* include/vaucanson/xml/xml_converter.hh, 
 	* include/vaucanson/xml/xml_converter.hxx,
 	* include/vaucanson/xml/XML.hh,

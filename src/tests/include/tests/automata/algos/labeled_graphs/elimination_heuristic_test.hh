@@ -44,7 +44,7 @@ bool elimination_heuristic_test(tests::Tester& tg)
       generalized_automaton_t a_ = generalized(a);
       gseries_set_elt_t language (a_.structure().series());
       language = aut_to_exp(a_, HChooser());
-      if (t.verbose() == tests::high)
+      if (t.verbose() == tests::Tester::high)
       {
 	TEST_MSG("Automaton saved in /tmp.");
 	SAVE_AUTOMATON_XML("/tmp", "aut_to_exp_heuristic", a, nb);
@@ -53,14 +53,14 @@ bool elimination_heuristic_test(tests::Tester& tg)
       for (; i < nb_word_test; ++i)
       {
 	monoid_elt_t w = language.choose_from_supp();
-	if (t.verbose() == tests::high)
+	if (t.verbose() == tests::Tester::high)
 	  std::cout << "TEST: aut_to_exp_heuristic " << nb << " : test "
 		    << w << std::endl;
 	if (eval(a, w) ==
 	    zero_as<semiring_elt_value_t>::of(a.structure().series().semiring()))
 	{
 	  break;
-	  if (t.verbose() == tests::high)
+	  if (t.verbose() == tests::Tester::high)
 	    std::cout << "TEST: aut_to_exp_heuristic " << nb
 		      << " failed." << std::endl;
 	}

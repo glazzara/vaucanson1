@@ -151,7 +151,7 @@ bool thompson_test(tests::Tester& tg)
 	  exp == zero_as<exp_t>::of(ss);
 	realtime_here(au);
 
-	if (t.verbose() == tests::high)
+	if (t.verbose() == tests::Tester::high)
 	{
 	  TEST_MSG("Automaton saved in /tmp.");
 	  SAVE_AUTOMATON_XML("/tmp", "thompson", au, nb);

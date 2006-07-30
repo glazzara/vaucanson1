@@ -114,15 +114,16 @@ generate_CCs()
   # Generate corresponding .cc
   for name in $tests
   do
-    bname=$(basename $name)
-    fun_name=$(echo $bname | sed 's/\.hh//')
+    fun_name=$(basename $name .hh)
     fun_sname=$(echo $fun_name | sed "s/_$suffix//")
     name_test_file=$name
 
-    # Include licence.
+    # The file to create.
     local test_file_cc=$dest_dir/$fun_sname-$suffix.cc
+    # Its tmp version which we move-if-change.
     local tmp_cc=$test_file_cc.tmp
 
+    # Include licence.
     dump_header "//" >"$tmp_cc"
 
     # Include necessary Vaucanson headers.
@@ -146,23 +147,11 @@ EOF
 int main(int argc, char **argv)
 {
   using namespace vcsn;
-  tests::verbose_level verbose = tests::low;
-  srand(time(0));
-
-  if (argc > 1)
-    {
-      if (argv[1] == std::string("--no-verbose"))
-	verbose = tests::none;
-      else if (argv[1] == std::string ("--high-verbose"))
-	verbose = tests::high;
-      else
-	verbose = tests::low;
-    };
-    tests::Tester t(verbose);
-    if ($fun_name<TEST_STATIC_ARGS>(t))
-      return EXIT_SUCCESS;
-    else
-      return EXIT_FAILURE;
+  tests::Tester t(argc, argv);
+  if ($fun_name<TEST_STATIC_ARGS>(t))
+    return EXIT_SUCCESS;
+  else
+    return EXIT_FAILURE;
 }
 
 EOF

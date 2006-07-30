@@ -58,7 +58,7 @@ unsigned minimization_test(tests::Tester& tg)
     automaton_t work = gen.generate_dfa(4, 5);
     automaton_t co_work = transpose(work);
 
-    if (t.verbose() == tests::high)
+    if (t.verbose() == tests::Tester::high)
     {
       TEST_MSG("Automaton saved in /tmp.");
       SAVE_AUTOMATON_XML("/tmp", "minimization_initial", work, i);
@@ -72,7 +72,7 @@ unsigned minimization_test(tests::Tester& tg)
     automaton_t minimize = trim(determinize(transpose(temp)));
     automaton_t co_minimize = trim(transpose(minimize));
 
-    if (t.verbose() == tests::high)
+    if (t.verbose() == tests::Tester::high)
     {
       TEST_MSG("Automaton saved in /tmp.");
       SAVE_AUTOMATON_XML("/tmp", "minimization_broz", minimize, i);
@@ -85,7 +85,7 @@ unsigned minimization_test(tests::Tester& tg)
     automaton_t moore = trim(minimization_moore(work));
     automaton_t co_moore = trim(co_minimization_moore(co_work));
 
-    if (t.verbose() == tests::high)
+    if (t.verbose() == tests::Tester::high)
     {
       TEST_MSG("Automaton saved in /tmp.");
       SAVE_AUTOMATON_XML("/tmp", "minimization_hopcroft", hopcroft, i);
@@ -100,7 +100,7 @@ unsigned minimization_test(tests::Tester& tg)
     if ((minimize.states().size() == hopcroft.states().size()) &&
 	(minimize.transitions().size() ==  hopcroft.transitions().size()))
       ++success_hopcroft;
-    else if (t.verbose() == tests::high)
+    else if (t.verbose() == tests::Tester::high)
     {
       std::ostringstream s;
       s << "Hopcroft failed on " << i << std::ends;
@@ -110,7 +110,7 @@ unsigned minimization_test(tests::Tester& tg)
     if ((minimize.states().size() == moore.states().size()) &&
 	(minimize.transitions().size() ==  moore.transitions().size()))
       ++success_moore;
-    else if (t.verbose() == tests::high)
+    else if (t.verbose() == tests::Tester::high)
     {
       std::ostringstream s;
       s << "Moore failed on " << i << std::ends;
@@ -120,7 +120,7 @@ unsigned minimization_test(tests::Tester& tg)
     if ((co_minimize.states().size() == co_moore.states().size()) &&
 	(co_minimize.transitions().size() ==  co_moore.transitions().size()))
       ++success_co_moore;
-    else if (t.verbose() == tests::high)
+    else if (t.verbose() == tests::Tester::high)
     {
       std::ostringstream s;
       s << "Co-Moore failed on " << i << std::ends;

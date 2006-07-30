@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -58,10 +58,16 @@ unsigned complete_test(tests::Tester& tg)
     alphabet_t alphabet = a.structure().series().monoid().alphabet();
     result_test = true;
 
+    // One transition per state and letter.
     if ((a.transitions().size() == a.states().size() *
 	 a.structure().series().monoid().alphabet().size())
+	// Remains deterministic.
 	&& is_deterministic(a))
     {
+      // Each state has at least one transition for each letter.
+      // FIXME: This seems duplication of the above test.
+      // What prompted the author to do that?  And why not check
+      // the size() is 1?
       for (alphabet_iterator l = alphabet.begin();
 	   l != alphabet.end();
 	   ++l)
@@ -75,25 +81,26 @@ unsigned complete_test(tests::Tester& tg)
 	    result_test = false;
 	}
       }
-      if (result_test)
-	++nb_success;
     }
     else
       result_test = false;
 
-    if (not result_test)
-    {
-      std::ostringstream s;
-      s << "Test failed on " << i << std::ends;
-      TEST_MSG(s.str());
-    }
+    if (result_test)
+      ++nb_success;
+    else
+      {
+	std::ostringstream s;
+	s << "Test failed on " << i << std::ends;
+	TEST_MSG(s.str());
+      }
 
-    if (tg.verbose() != tests::high or not result_test)
+    if (tg.verbose() == tests::Tester::high or not result_test)
     {
       TEST_MSG("Automaton saved in /tmp.");
       SAVE_AUTOMATON_XML("/tmp", "complete_initial", b, i);
     }
   }
+
   std::string rate;
   SUCCESS_RATE(rate, nb_success, nb_test);
   TEST(t, "complete on DFA." + rate, nb_success == nb_test);
