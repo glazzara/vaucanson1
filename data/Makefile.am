@@ -13,7 +13,7 @@
 
 SUBDIRS = automata
 
-dist_noinst_DATA = vaucanson.el
+dist_lisp_LISP = emacs/rebox.el emacs/vaucanson.el
 
 # The XSD file is installed.
 dist_pkgdata_DATA = vaucanson.xsd

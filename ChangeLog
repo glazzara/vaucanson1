@@ -1,3 +1,27 @@
+2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	Complete the Emacs support.
+	* data/vaucanson.el: Move to...
+	* data/emacs/vaucanson.el: here.
+	* data/emacs/rebox.el: New.
+	* data/Makefile.am: Adjust.
+	Install them with Emacs.
+
+2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	* configure.ac: Replace WANT_INTERPRETER with enable_vaucanswig
+	and ENABLE_VAUCANSWIG.
+	(AM_PATH_LISPDIR): Invoke it.
+	(VCSN_VAUCANSWIG_SUBDIR): Remove.
+	* Makefile.am: Adjust.
+	* vaucanswig/doc/Makefile.am,
+	* vaucanswig/doc/README.txt,
+	* vaucanswig/doc/build-process.txt,
+	* vaucanswig/doc/meta-build-process.txt: Remove, replaced by...
+	* doc/manual/vaucanswig.tex: this new file.
+	* doc/manual/Makefile.am, doc/manual/vaucanson-user-manual.tex:
+	Adjust.
+
 2006-07-29  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* configure.ac: Bump to 1.1pre.
