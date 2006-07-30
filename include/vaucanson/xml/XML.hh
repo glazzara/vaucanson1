@@ -18,6 +18,9 @@
 #ifndef VCSN_XML_XML_HH
 # define VCSN_XML_XML_HH
 
+# include <string>
+# include <iostream>
+
 /**
  * @file XML.hh
  *

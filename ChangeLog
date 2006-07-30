@@ -1,5 +1,9 @@
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/xml/xml.hh (iostream, string): Include them.
+
+2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	* src/tests/sanity/generate_files.sh: Don't generate the whole
 	Makefile.am, but a local check-programs.mk.
 	Use move-if-change.
