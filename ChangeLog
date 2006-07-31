@@ -1,3 +1,12 @@
+2006-07-31  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix sanity tests.
+	* src/tests/sanity/Makefile.am (TESTS, TESTS_LOGS): Define them.
+	Do it before including build-aux/check.mk, otherwise its default
+	values apply.
+	* src/tests/sanity/generate_files.sh: Better error messages.
+	Don't define
+
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
 	* doc/manual/Makefile.am (EXTRA_MINIDIST): Simplify.
