@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,8 +52,8 @@ namespace vcsn
       // Vector of transitions. Each transition can be also
       // represented by its index.
       std::vector<htransition_t> transitions;
-      std::vector<int> origins_transitions;
-      std::vector<int> aims_transitions;
+      std::vector<int> src_transitions;
+      std::vector<int> dst_transitions;
 
       // List of indices of ingoing transitions in lex. order of each state
       std::vector< std::list<int> > delta_in;

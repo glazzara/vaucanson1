@@ -1,5 +1,14 @@
 2006-07-31  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/internal/skeleton.hh,
+	* include/vaucanson/algorithms/internal/skeleton.hxx,
+	* include/vaucanson/algorithms/isomorph.hh,
+	* include/vaucanson/algorithms/isomorph.hxx: 
+	(origins_transitions, aims_transitions): Rename as...
+	(src_transitions, dst_transitions): these.
+
+2006-07-31  Akim Demaille  <akim@lrde.epita.fr>
+
 	* include/vaucanson/automata/concept/automata_base.hh,
 	* include/vaucanson/automata/concept/automata_base.hxx:
 	Renamings: from -> src, to -> dst.

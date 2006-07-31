@@ -442,10 +442,10 @@ namespace vcsn {
       for (; it_int != delta_det_in_A[i].end() and iso; ++it_int, ++it_int_aux)
       {
 
-	// The states being considered are the origins of current
+	// The states being considered are the sources of current
 	// co-deterministic transitions (k for automaton A, l for B)
-	k = Sa.origins_transitions[*it_int];
-	l = Sb.origins_transitions[*it_int_aux];
+	k = Sa.src_transitions[*it_int];
+	l = Sb.src_transitions[*it_int_aux];
 
 	// Has state k already been visited?
 	if (perm_A[k] >= 0)
@@ -507,8 +507,8 @@ namespace vcsn {
 
 	// The states being considered are the ends of current
 	// deterministic transitions (k for automaton A, l for B)
-	k = Sa.aims_transitions[*it_int];
-	l = Sb.aims_transitions[*it_int_aux];
+	k = Sa.dst_transitions[*it_int];
+	l = Sb.dst_transitions[*it_int_aux];
 
 	// Has state k already been visited?
 	if (perm_A[k] >= 0)
@@ -672,48 +672,48 @@ namespace vcsn {
 	// with the same label. The sequence begins at it_int
 	while ((it_int != Sa.delta_in[C_A[i]].end()) && b)
 	{
-	  // Searches for origins of ingoing transitions for current
-	  // label that have already been associated. For each
-	  // state visited, its position in correspondence_transitions
-	  // is incremented.
+	  // Searches for sources of ingoing transitions for current
+	  // label that have already been associated. For each state
+	  // visited, its position in correspondence_transitions is
+	  // incremented.
 	  k = 0;
 	  for (it_int_aux = it_int;
 	       (it_int_aux != Sa.delta_in[C_A[i]].end()) &&
 		 (Sa.transitions_labels[*it_int_aux] ==
 		  Sa.transitions_labels[*it_int]);
 	       it_int_aux++, k++)
-	    // Is the origin of current transition associated?
-	    if (perm_A[Sa.origins_transitions[*it_int_aux]] >= 0)
-	      correspondence_transitions[Sa.origins_transitions[*it_int_aux]]++;
+	    // Is the source of current transition associated?
+	    if (perm_A[Sa.src_transitions[*it_int_aux]] >= 0)
+	      correspondence_transitions[Sa.src_transitions[*it_int_aux]]++;
 
 	  // Here, k = number of ingoing transitions for current label
 
 	  // Idem for ingoing transitions of state C_B[j], but positions in
 	  // correspondence_transitions are decremented.
 	  for (; (k > 0) && b; it_int_B++, k--)
-	    // Has the origin of current transition already been visited?
-	    if (perm_B[Sb.origins_transitions[*it_int_B]] >= 0)
+	    // Has the source of current transition already been visited?
+	    if (perm_B[Sb.src_transitions[*it_int_B]] >= 0)
 	      // Trying to decrement a position with 0 means that the
 	      // corresponding state in A is not correct.
-	      if (correspondence_transitions[perm_B[Sb.origins_transitions[*it_int_B]]] == 0)
+	      if (correspondence_transitions[perm_B[Sb.src_transitions[*it_int_B]]] == 0)
 		// The association of C_A[i] and C_B[j] is impossible
 		b = false;
 	      else
-		correspondence_transitions[perm_B[Sb.origins_transitions[*it_int_B]]]--;
+		correspondence_transitions[perm_B[Sb.src_transitions[*it_int_B]]]--;
 
 	  // Verifies correspondence_transitions. The correspondence for
 	  // current label is correct iff correspondence_transitions[l] = 0
-	  // for all origin l of ingoing transitions of C_A[i] labelled by
+	  // for all src l of ingoing transitions of C_A[i] labelled by
 	  // the current label.
 	  // For this, int_itr visits all transitions until int_itr_aux.
 
 	  for (; it_int != it_int_aux; it_int++)
 	  {
-	    if (perm_A[Sa.origins_transitions[*it_int]] >= 0)
-	      if (correspondence_transitions[Sa.origins_transitions[*it_int]] != 0)
+	    if (perm_A[Sa.src_transitions[*it_int]] >= 0)
+	      if (correspondence_transitions[Sa.src_transitions[*it_int]] != 0)
 		b = false;
 	    // All positions must be 0 for next iteration
-	    correspondence_transitions[Sa.origins_transitions[*it_int]] = 0;
+	    correspondence_transitions[Sa.src_transitions[*it_int]] = 0;
 	  }
 
 	} // end while for ingoing transitions
@@ -744,8 +744,8 @@ namespace vcsn {
 		    Sa.transitions_labels[*it_int]);
 		 it_int_aux++, k++)
 	      // Is the end of current transition associated?
-	      if (perm_A[Sa.aims_transitions[*it_int_aux]] >= 0)
-		correspondence_transitions[Sa.aims_transitions[*it_int_aux]]++;
+	      if (perm_A[Sa.dst_transitions[*it_int_aux]] >= 0)
+		correspondence_transitions[Sa.dst_transitions[*it_int_aux]]++;
 
 	    // Here, k = number of outgoing transitions for current label
 
@@ -753,15 +753,15 @@ namespace vcsn {
 	    // correspondence_transitions are decremented.
 	    for (; (k > 0) && b; it_int_B++, k--)
 	      // Has the end of current transition already been visited?
-	      if (perm_B[Sb.aims_transitions[*it_int_B]] >= 0)
+	      if (perm_B[Sb.dst_transitions[*it_int_B]] >= 0)
 		// Trying to decrement a position with 0 means that
 		// the corresponding state in A is not correct.
-		if (correspondence_transitions[perm_B[Sb.aims_transitions[*it_int_B]]] == 0)
+		if (correspondence_transitions[perm_B[Sb.dst_transitions[*it_int_B]]] == 0)
 		  // The association of C_A[i] and C_B[j] is
 		  // impossible
 		  b = false;
 		else
-		  correspondence_transitions[perm_B[Sb.aims_transitions[*it_int_B]]]--;
+		  correspondence_transitions[perm_B[Sb.dst_transitions[*it_int_B]]]--;
 
 	    // Verifies correspondence_transitions. The correspondence
 	    // for current label is correct iff
@@ -772,11 +772,11 @@ namespace vcsn {
 
 	    for (; it_int != it_int_aux; it_int++)
 	    {
-	      if (perm_A[Sa.aims_transitions[*it_int]] >= 0)
-		if (correspondence_transitions[Sa.aims_transitions[*it_int]] != 0)
+	      if (perm_A[Sa.dst_transitions[*it_int]] >= 0)
+		if (correspondence_transitions[Sa.dst_transitions[*it_int]] != 0)
 		  b = false;
 	      // All positions must be 0 for next iteration
-	      correspondence_transitions[Sa.aims_transitions[*it_int]] = 0;
+	      correspondence_transitions[Sa.dst_transitions[*it_int]] = 0;
 	    }
 
 	  } // End while for outgoing transitions

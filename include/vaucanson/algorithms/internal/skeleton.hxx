@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -41,8 +41,8 @@ namespace vcsn
 
     states.reserve(a.states().size());
     transitions.reserve(a.transitions().size());
-    origins_transitions.reserve(a.transitions().size());
-    aims_transitions.reserve(a.transitions().size());
+    src_transitions.reserve(a.transitions().size());
+    dst_transitions.reserve(a.transitions().size());
     transitions_labels.reserve(a.transitions().size());
 
     // *** FIXME ***
@@ -82,8 +82,8 @@ namespace vcsn
     for_all_transitions(e, a)
     {
       transitions.push_back(*e);
-      origins_transitions.push_back(Smap[a.src_of(*e)]);
-      aims_transitions.push_back(Smap[a.dst_of(*e)]);
+      src_transitions.push_back(Smap[a.src_of(*e)]);
+      dst_transitions.push_back(Smap[a.dst_of(*e)]);
 
       if (Lmap.find(a.series_of(*e)) == Lmap.end())
 	transitions_labels.push_back(Lmap[a.series_of(*e)] = i++);
@@ -120,8 +120,8 @@ namespace vcsn
       for (std::list<int>::iterator it = transitions_lex[i].begin();
 	   it != transitions_lex[i].end(); it++)
       {
-	delta_in[aims_transitions[*it]].push_back(*it);
-	delta_out[origins_transitions[*it]].push_back(*it);
+	delta_in[dst_transitions[*it]].push_back(*it);
+	delta_out[src_transitions[*it]].push_back(*it);
       }
 
   }
