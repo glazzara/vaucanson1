@@ -1,5 +1,18 @@
 2006-07-31  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/automata/concept/translate.hxx: Fix code that
+	visibly never worked, and was never checked.
+	It remains to be checked and documented.
+
+2006-07-31  Akim Demaille  <akim@lrde.epita.fr>
+
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/automata_base.hxx:
+	Renamings: from -> src, to -> dst.
+	Use Doxygen better.
+
+2006-07-31  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix sanity tests.
 	* src/tests/sanity/Makefile.am (TESTS, TESTS_LOGS): Define them.
 	Do it before including build-aux/check.mk, otherwise its default

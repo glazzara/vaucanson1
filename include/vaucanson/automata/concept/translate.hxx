@@ -45,7 +45,7 @@ namespace vcsn {
     for (typename rhs_t::transition_iterator i = from.transitions().begin();
 	 i != from.transitions().end();
 	 ++i)
-      dst.add_series_transition(stmap[i.origin()], stmap[i.aim()],
+      dst.add_series_transition(stmap[from.src_of(*i)], stmap[from.dst_of(*i)],
 				translate_fun(from.series_of(*i)));
     dst_.swap(dst);
   }

@@ -23,6 +23,7 @@
 namespace vcsn
 {
 
+  /// @bug Write documentation and tests.
   template <typename lhs_t, typename rhs_t, typename F>
   void auto_translate_transitions(lhs_t&	  dst,
 				  const rhs_t&	  from,
@@ -35,9 +36,9 @@ namespace vcsn
 }
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/automata/concept/translate.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/automata/concept/translate.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_TRANSLATE_HH
