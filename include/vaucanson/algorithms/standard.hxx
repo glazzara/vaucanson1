@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -64,58 +64,55 @@ namespace vcsn {
     do_in_standardize(a.structure(), a);
   }
 
-  /*---------------.
-  | standard_union |
-  `---------------*/
+  /*-----------------.
+  | standard_union.  |
+  `-----------------*/
 
   template <typename A, typename lhs_t, typename rhs_t>
-  void do_union_of_standard_here(const AutomataBase<A>& ,
+  void do_union_of_standard_here(const AutomataBase<A>&,
 				 lhs_t& lhs,
 				 const rhs_t& rhs)
   {
     typedef typename std::set<htransition_t>		edelta_ret_t;
-    edelta_ret_t	aim;
+    edelta_ret_t	dst;
     hstate_t		new_i, old_i;
 
     new_i = *lhs.initial().begin();
     sum_here(lhs, rhs);
-    for (typename lhs_t::initial_iterator i = lhs.initial().begin();
-	 i != lhs.initial().end();
+    typename lhs_t::initial_support_t initial = lhs.initial();
+    for (typename lhs_t::initial_iterator i = initial.begin();
+	 i != initial.end();
 	 ++i)
-    {
-      // FIXME : is there something like an iterator over the
-      // support of initial ?
+      // FIXME: is there something like an iterator over the support
+      // of initial ?
       if (*i != new_i)
       {
 	old_i = *i;
 	lhs.set_final(new_i,
 		      lhs.get_final(new_i) +
 		      lhs.get_final(old_i));
-	aim.clear();
-	lhs.deltac(aim, old_i, delta_kind::transitions());
-	for (typename edelta_ret_t::const_iterator d = aim.begin();
-	     d != aim.end();
-	     ++d)
+
+	dst.clear();
+	lhs.deltac(dst, old_i, delta_kind::transitions());
+	for_all_const_ (edelta_ret_t, d, dst)
 	{
 	  lhs.add_transition(new_i,
 			     lhs.dst_of(*d),
 			     lhs.label_of(*d));
 	  lhs.del_transition(*d);
 	}
-	aim.clear();
-	lhs.rdeltac(aim, old_i, delta_kind::transitions());
-	for (typename edelta_ret_t::const_iterator d = aim.begin();
-	     d != aim.end();
-	     ++d)
+
+	dst.clear();
+	lhs.rdeltac(dst, old_i, delta_kind::transitions());
+	for_all_const_ (edelta_ret_t, d, dst)
 	{
 	  lhs.add_transition(lhs.src_of(*d),
 			     new_i,
 			     lhs.label_of(*d));
 	  lhs.del_transition(*d);
 	}
-	lhs.del_state(old_i);
+      lhs.del_state(*i);
       }
-    }
   }
 
   template<typename A, typename T, typename U>
@@ -137,9 +134,9 @@ namespace vcsn {
     return ret;
   }
 
-  /*------------.
-  | is_standard |
-  `------------*/
+  /*--------------.
+  | is_standard.  |
+  `--------------*/
   template <typename A, typename auto_t>
   bool
   do_is_standard(const AutomataBase<A>& ,
@@ -168,9 +165,9 @@ namespace vcsn {
     return do_is_standard(a.structure(), a);
   }
 
-  /*----------------.
-  | standard_concat |
-  `----------------*/
+  /*------------------.
+  | standard_concat.  |
+  `------------------*/
   template <typename A, typename lhs_t, typename rhs_t>
   void do_concat_of_standard_here(const AutomataBase<A>& ,
 				  lhs_t& lhs,
@@ -183,7 +180,7 @@ namespace vcsn {
     | Concat of states |
     `-----------------*/
     map_t	map_h;
-    delta_ret_t	aim;
+    delta_ret_t	dst;
     hstate_t	new_state;
 
     // Add states except the initial one
@@ -198,15 +195,15 @@ namespace vcsn {
 
     // Add transitions
     hstate_t rhs_i = *rhs.initial().begin();
-    aim.clear();
-    rhs.deltac(aim, rhs_i, delta_kind::transitions());
+    dst.clear();
+    rhs.deltac(dst, rhs_i, delta_kind::transitions());
     for (typename lhs_t::final_iterator f = lhs.final().begin();
 	 f != lhs.final().end();
 	 ++f)
     {
       typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
-      for (typename delta_ret_t::const_iterator d = aim.begin();
-	   d != aim.end();
+      for (typename delta_ret_t::const_iterator d = dst.begin();
+	   d != dst.end();
 	   ++d)
 	lhs.add_series_transition(*f,
 				  map_h[rhs.dst_of(*d)],
@@ -224,18 +221,18 @@ namespace vcsn {
       if (rhs.is_final(nf->first))
 	lhs.set_final(nf->second);
 
-    /*----------------------.
-    | Concat of transitions |
-    `----------------------*/
+    /*------------------------.
+    | Concat of transitions.  |
+    `------------------------*/
     for (typename rhs_t::state_iterator i = rhs.states().begin();
 	 i != rhs.states().end();
 	 ++i)
       if (!rhs.is_initial(*i))
       {
-	aim.clear();
-	rhs.deltac(aim, *i, delta_kind::transitions());
-	for (typename delta_ret_t::const_iterator d = aim.begin();
-	     d != aim.end();
+	dst.clear();
+	rhs.deltac(dst, *i, delta_kind::transitions());
+	for (typename delta_ret_t::const_iterator d = dst.begin();
+	     d != dst.end();
 	     ++d)
 	  lhs.add_transition(map_h[*i],
 			     map_h[rhs.dst_of(*d)],
@@ -262,9 +259,9 @@ namespace vcsn {
     return ret;
   }
 
-  /*--------------.
-  | standard_star |
-  `--------------*/
+  /*----------------.
+  | standard_star.  |
+  `----------------*/
   template <typename A, typename auto_t>
   void do_star_of_standard_here(const AutomataBase<A>& ,
 				auto_t& a)
@@ -272,30 +269,29 @@ namespace vcsn {
     AUTOMATON_TYPES(auto_t);
 
     typedef std::set<htransition_t>		edelta_ret_t;
-    edelta_ret_t			aim;
+    edelta_ret_t			dst;
 
     hstate_t				new_i = *a.initial().begin();
     series_set_elt_t			out_mult = a.get_final(new_i);
     out_mult.star();
 
-    a.deltac(aim, new_i, delta_kind::transitions());
+    a.deltac(dst, new_i, delta_kind::transitions());
 
     for (typename auto_t::final_iterator f = a.final().begin();
 	 f != a.final().end();
 	 ++f)
     {
       if (*f != new_i)
-	for (typename edelta_ret_t::iterator d = aim.begin();
-	     d != aim.end();
+	for (typename edelta_ret_t::iterator d = dst.begin();
+	     d != dst.end();
 	     ++d)
 	  // FIXME: it is wanted that we can create two similar transitions.
 	  // FIXME: is it a good thing ?
 	  a.add_transition(*f, a.dst_of(*d), a.label_of(*d));
-
     }
 
-    for (typename edelta_ret_t::iterator d = aim.begin();
-	 d != aim.end();
+    for (typename edelta_ret_t::iterator d = dst.begin();
+	 d != dst.end();
 	 ++d)
     {
       series_set_elt_t st = out_mult * a.series_of(*d);

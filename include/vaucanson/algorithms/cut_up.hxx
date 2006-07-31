@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,9 +29,9 @@
 namespace vcsn {
 
 
-  /*--------------------------------.
-  | Check if an automaton is cut up |
-  `--------------------------------*/
+  /*----------------------------------.
+  | Check if an automaton is cut up.  |
+  `----------------------------------*/
 
   template <class S, class T>
   bool is_cut_up(const Element<S, T>& a)
@@ -48,9 +48,9 @@ namespace vcsn {
   }
 
 
-  /*----------------------------------------------.
-  | Specialization for label with rational series |
-  `----------------------------------------------*/
+  /*------------------------------------------------.
+  | Specialization for label with rational series.  |
+  `------------------------------------------------*/
 
   template <class S, class T, class TT, class Auto, class Ret>
   void do_cut_up(const AutomataBase<S>&,
@@ -98,9 +98,9 @@ namespace vcsn {
   }
 
 
-  /*------------------------------------------------.
-  | Specialization for label with polynomial series |
-  `------------------------------------------------*/
+  /*--------------------------------------------------.
+  | Specialization for label with polynomial series.  |
+  `--------------------------------------------------*/
 
   template <class S, class T, class TT, class Auto, class Ret>
   void do_cut_up(const S&,
@@ -114,7 +114,7 @@ namespace vcsn {
 
     auto_copy(res, a);
 
-    transitions_t		transitions = res.transitions();
+    transitions_t transitions = res.transitions();
 
     for_all_(transitions_t, e, transitions)
     {

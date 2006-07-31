@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -72,9 +72,9 @@ namespace vcsn {
 	      a.geometry()[i] = std::make_pair(x, x);
 	      x++;
 
-	      std::list<htransition_t> aim;
-	      a.deltac(aim, i, delta_kind::transitions());
-	      for_all_const_(std::list<htransition_t>, j, aim)
+	      std::list<htransition_t> dst;
+	      a.deltac(dst, i, delta_kind::transitions());
+	      for_all_const_(std::list<htransition_t>, j, dst)
 		stack.push(a.dst_of(*j));
 	    }
 	  }
@@ -139,7 +139,7 @@ namespace vcsn {
     AUTOMATON_TYPES(output_t);
 
     typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
-    typedef std::set<htransition_t>				delta_ret_t;
+    typedef std::set<htransition_t>			delta_ret_t;
     typedef std::map<pair_hstate_t, hstate_t>		visited_t;
     typedef typename series_set_elt_t::support_t	support_t;
 
@@ -225,12 +225,12 @@ namespace vcsn {
 	  typename visited_t::const_iterator found =
 	    visited.find(new_pair);
 
-	  hstate_t aim;
+	  hstate_t dst;
 	  if (found == visited.end())
 	  {
-	    aim = output.add_state();
-	    visited[new_pair] = aim;
-	    m[aim] = new_pair;
+	    dst = output.add_state();
+	    visited[new_pair] = dst;
+	    m[dst] = new_pair;
 	    to_process.push(new_pair);
 
 	    if (use_geometry)
@@ -238,12 +238,12 @@ namespace vcsn {
 		  eq_(typename rhs_t::geometry_t, geometry) and	    \
 		  eq_(typename lhs_t::geometry_t, geometry),	    \
 		  geom::grphx, geom::no_grphx)
-		::setcoordfrom(output, lhs, rhs, aim,
+		::setcoordfrom(output, lhs, rhs, dst,
 			       new_pair.first, new_pair.second);
 	  }
 	  else
-	    aim = found->second;
-	  output.add_series_transition(current_state, aim, prod_series);
+	    dst = found->second;
+	  output.add_series_transition(current_state, dst, prod_series);
 	}
       }
     }

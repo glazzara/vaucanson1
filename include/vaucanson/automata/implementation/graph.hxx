@@ -361,7 +361,8 @@ namespace vcsn
     {
       if (removed_edges_.find(hedge_t(i)) != removed_edges_.end())
 	continue;
-      // Make sure that origin and aim of edge are part of the automaton.
+      // Make sure that source and destination of edge are part of the
+      // automaton.
       if (!has_state(dst_of(hedge_t(i))) ||
 	  !has_state(src_of(hedge_t(i))))
 	return false;

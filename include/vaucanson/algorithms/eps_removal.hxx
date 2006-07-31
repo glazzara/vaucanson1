@@ -67,13 +67,13 @@ namespace vcsn {
       std::list<htransition_t>	transition_list;
       a.deltac(transition_list, *s, delta_kind::transitions());
 
-      int origin = state_to_index[*s];
+      int src = state_to_index[*s];
 
       for_all_const_(std::list<htransition_t>, e, transition_list)
       {
-	int aim = state_to_index[a.dst_of(*e)];
+	int dst = state_to_index[a.dst_of(*e)];
 	series_set_elt_t t = a.series_of(*e);
-	m_semiring_elt[origin][aim] += t.get(monoid_identity);
+	m_semiring_elt[src][dst] += t.get(monoid_identity);
 	t.assoc(monoid_identity.value(), semiring_elt_zero.value());
 	if(t != null_series)
 	  a.add_series_transition(*s, a.dst_of(*e), t);
@@ -117,14 +117,14 @@ namespace vcsn {
       {
 	std::list<htransition_t> transition_list;
 	a.rdeltac(transition_list, *s, delta_kind::transitions());
-	int aim = state_to_index[*s];
+	int dst = state_to_index[*s];
 	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
-	  int origin = state_to_index[a.src_of(*e)];
+	  int src = state_to_index[a.src_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
 	  for (k = 0; k < size; k++)
 	  {
-	    semiring_elt_t w = m_semiring_elt[k][origin];
+	    semiring_elt_t w = m_semiring_elt[k][src];
 	    if (w != semiring_elt_zero)
 	      a.add_series_transition(index_to_state[k], *s, w * t);
 	  }
@@ -132,7 +132,7 @@ namespace vcsn {
 	}
 	series_set_elt_t tw = null_series;
 	for (k = 0; k < size; k++)
-	  tw += m_semiring_elt[aim][k] * m_wfinal[k];
+	  tw += m_semiring_elt[dst][k] * m_wfinal[k];
 	if (tw != null_series)
 	  a.set_final(*s, tw);
       }
@@ -151,14 +151,14 @@ namespace vcsn {
       {
 	std::list<htransition_t> transition_list;
 	a.deltac(transition_list, *s, delta_kind::transitions());
-	int origin = state_to_index[*s];
+	int src = state_to_index[*s];
 	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
-	  int aim = state_to_index[a.dst_of(*e)];
+	  int dst = state_to_index[a.dst_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
 	  for (k = 0; k < size; k++)
 	  {
-	    semiring_elt_t w = m_semiring_elt[aim][k];
+	    semiring_elt_t w = m_semiring_elt[dst][k];
 	    if (w != semiring_elt_zero)
 	      a.add_series_transition(*s, index_to_state[k], t * w);
 	  }
@@ -166,7 +166,7 @@ namespace vcsn {
 	}
 	series_set_elt_t tw = null_series;
 	for (k = 0; k < size; k++)
-	  tw += m_winitial[k] * m_semiring_elt[k][origin];
+	  tw += m_winitial[k] * m_semiring_elt[k][src];
 	if (tw != null_series)
 	  a.set_initial(*s, tw);
       }

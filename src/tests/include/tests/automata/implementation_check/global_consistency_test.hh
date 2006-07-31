@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -60,8 +60,8 @@ unsigned global_consistency_test(tests::Tester& tg)
        i != automaton.transitions().end();
        i++)
   {
-    hstate_t aim  = automaton.dst_of(*i);
-    hstate_t from = automaton.src_of(*i);
+    hstate_t dst  = automaton.dst_of(*i);
+    hstate_t src = automaton.src_of(*i);
     bool res  = false;
     bool res2 = false;
 
@@ -70,9 +70,9 @@ unsigned global_consistency_test(tests::Tester& tg)
 	 j != automaton.states().end();
 	 j++)
     {
-      if (*j == aim)
+      if (*j == dst)
 	res = true;
-      if (*j == from)
+      if (*j == src)
 	res2 = true;
     }
     final = final && res && res2;

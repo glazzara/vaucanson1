@@ -206,16 +206,16 @@ namespace vcsn {
       lhs.set_final(new_state, rhs.get_final(*s));
     }
 
-    /*----------------------.
-    | Concat of transitions |
-    `----------------------*/
-    delta_ret_t	aim;
+    /*------------------------.
+    | Concat of transitions.  |
+    `------------------------*/
+    delta_ret_t	dst;
     for_all_states(i, rhs)
     {
-      aim.clear();
-      rhs.deltac(aim, *i, delta_kind::transitions());
-      for (typename delta_ret_t::const_iterator d = aim.begin();
-	   d != aim.end();
+      dst.clear();
+      rhs.deltac(dst, *i, delta_kind::transitions());
+      for (typename delta_ret_t::const_iterator d = dst.begin();
+	   d != dst.end();
 	   ++d)
 	lhs.add_transition(map_h[rhs.src_of(*d)],
 			   map_h[rhs.dst_of(*d)],

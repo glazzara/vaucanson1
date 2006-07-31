@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -56,21 +56,21 @@ namespace vcsn {
       lhs.set_initial(new_state, rhs.get_initial(*i));
     }
 
-    /*-------------------.
-    | Sum of transitions |
-    `-------------------*/
+    /*---------------------.
+    | Sum of transitions.  |
+    `---------------------*/
 
-    typedef std::set<htransition_t> aim_t;
-    aim_t aim;
+    typedef std::set<htransition_t> dst_t;
+    dst_t dst;
 
     for (typename rhs_t::state_iterator i = rhs.states().begin();
 	 i != rhs.states().end();
 	 ++i)
     {
-      aim.clear();
-      rhs.deltac(aim, *i, delta_kind::transitions());
-      for (typename aim_t::const_iterator d = aim.begin();
-	   d != aim.end();
+      dst.clear();
+      rhs.deltac(dst, *i, delta_kind::transitions());
+      for (typename dst_t::const_iterator d = dst.begin();
+	   d != dst.end();
 	   ++d)
       {
 	lhs.add_transition(states_map[rhs.src_of(*d)],

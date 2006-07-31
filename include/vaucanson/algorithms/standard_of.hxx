@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -126,11 +126,11 @@ namespace vcsn {
 	      label_elt_t label (automata_set_.series(), auto_->label_of(*j));
 	      label  = weight * label;
 
-	      hstate_t				aim = auto_->dst_of(*j);
+	      hstate_t dst = auto_->dst_of(*j);
 	      auto_->del_transition(*j);
 
 	      if (label != zero_as<label_t>::of(automata_set_.series()))
-		auto_->add_transition(*i, aim, label.value());
+		auto_->add_transition(*i, dst, label.value());
 	    }
 	    auto_->set_final(*i, weight * auto_->get_final(*i));
 	  }

@@ -263,7 +263,7 @@ namespace vcsn {
       if (part[i].size() != 0)
       {
 	// FIXME : here we can insert the set of states that are at
-	// the origin of it.
+	// the source of it.
 	out_states[i] = output.add_state();
       }
 

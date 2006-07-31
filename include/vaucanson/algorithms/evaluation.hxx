@@ -165,10 +165,10 @@ namespace vcsn {
     // we must sum the labels
     for_all_transitions(e, b)
     {
-      hstate_t aim = b.dst_of(*e);
-      typename se_map_t::iterator i = se_m.find(aim);
+      hstate_t dst = b.dst_of(*e);
+      typename se_map_t::iterator i = se_m.find(dst);
       if (i == se_m.end())
-	se_m.insert(std::make_pair(aim,
+	se_m.insert(std::make_pair(dst,
 				   series_set_elt_t (b.structure().series(),
 						     b.label_of(*e))));
       else

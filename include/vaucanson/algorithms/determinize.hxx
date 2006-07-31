@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -58,7 +58,7 @@ namespace vcsn {
     const alphabet_t&	   alphabet(input.structure().series().monoid().alphabet());
     subset_t		   q;
     subset_t		   s;
-    delta_ret_t		   aim;
+    delta_ret_t		   dst;
     hstate_t		   s_hstate;
     typename subset_set_t::const_iterator	current;
 
@@ -66,7 +66,7 @@ namespace vcsn {
     | Initialization |
     `---------------*/
     bool is_final = false;
-    aim.reserve(input.states().size());
+    dst.reserve(input.states().size());
 
     for_all_initial_states(i, input)
     {
@@ -100,10 +100,10 @@ namespace vcsn {
 	for (typename subset_t::const_iterator j = s.begin();
 	     j != s.end(); ++j)
 	{
-	  aim.clear();
+	  dst.clear();
 
-	  input.letter_deltac(aim, *j, *e, delta_kind::states());
-	  for_all_const_(delta_ret_t, k, aim)
+	  input.letter_deltac(dst, *j, *e, delta_kind::states());
+	  for_all_const_(delta_ret_t, k, dst)
 	  {
 	    hstate_t state = *k;
 	    q.insert(state);

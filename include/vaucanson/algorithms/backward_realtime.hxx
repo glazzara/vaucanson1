@@ -151,8 +151,8 @@ namespace vcsn {
     typedef std::set<htransition_t>			delta_ret_t;
     typedef std::deque<htransition_t>			queue_t;
 
-    queue_t		to_del, origin_d;
-    delta_ret_t		aim_d;
+    queue_t		to_del, src_d;
+    delta_ret_t		dst_d;
     monoid_elt_t	monoid_identity =
       algebra::identity_as<monoid_elt_value_t>::
       of(a.structure().series().monoid());
@@ -164,30 +164,30 @@ namespace vcsn {
 
     backward_eps_removal_here(a);
 
-    for (typename automaton_t::state_iterator origin = a.states().begin();
-	 origin != a.states().end();
-	 ++origin)
+    for (typename automaton_t::state_iterator src = a.states().begin();
+	 src != a.states().end();
+	 ++src)
     {
-      std::insert_iterator<queue_t> origin_i(origin_d, origin_d.begin());
-      a.delta(origin_i, *origin, delta_kind::transitions());
+      std::insert_iterator<queue_t> src_i(src_d, src_d.begin());
+      a.delta(src_i, *src, delta_kind::transitions());
 
-      while (!origin_d.empty())
+      while (!src_d.empty())
       {
-	htransition_t d_o = origin_d.front();
-	origin_d.pop_front();
+	htransition_t d_o = src_d.front();
+	src_d.pop_front();
 	if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
 	{
-	  aim_d.clear();
-	  a.deltac(aim_d, a.dst_of(d_o), delta_kind::transitions());
-	  for (typename delta_ret_t::const_iterator d = aim_d.begin();
-	       d != aim_d.end();
+	  dst_d.clear();
+	  a.deltac(dst_d, a.dst_of(d_o), delta_kind::transitions());
+	  for (typename delta_ret_t::const_iterator d = dst_d.begin();
+	       d != dst_d.end();
 	       ++d)
 	    if (a.series_of(*d).get(monoid_identity) == semiring_zero)
 	    {
 	      bool new_transition = true;
 	      for (typename queue_t::const_iterator d__o =
-		     origin_d.begin();
-		   d__o != origin_d.end();
+		     src_d.begin();
+		   d__o != src_d.end();
 		   ++d__o)
 		if ((a.dst_of(*d__o) == a.dst_of(*d) &&
 		     (a.label_of(*d__o) == a.label_of(*d))))
@@ -199,14 +199,14 @@ namespace vcsn {
 	      if (new_transition)
 	      {
 		htransition_t new_htransition = a.add_series_transition
-		  (*origin,
+		  (*src,
 		   a.dst_of(*d),
 		   a.series_of(d_o) * a.series_of(*d));
-		origin_d.push_back(new_htransition);
+		src_d.push_back(new_htransition);
 	      }
 	    }
 	  if (a.is_final(a.dst_of(d_o)))
-	    a.set_final(*origin);
+	    a.set_final(*src);
 	}
       }
     }

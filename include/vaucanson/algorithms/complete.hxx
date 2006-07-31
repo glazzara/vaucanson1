@@ -40,15 +40,15 @@ namespace vcsn {
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     hstate_t sink_state;
     bool sink_added = false;
-    std::list<hstate_t> aim;
+    std::list<hstate_t> dst;
 
     for_all_states(s, work)
     {
       for_all_letters(l, work.structure().series().monoid().alphabet())
       {
-	aim.clear();
-	work.letter_deltac(aim, *s, *l, delta_kind::states());
-	if (aim.size() == 0)
+	dst.clear();
+	work.letter_deltac(dst, *s, *l, delta_kind::states());
+	if (dst.size() == 0)
 	{
 	  if (not sink_added)
 	  {
@@ -90,14 +90,14 @@ namespace vcsn {
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
     for_all_states(i, e)
     {
-      std::set<hstate_t> aim;
+      std::set<hstate_t> dst;
       const alphabet_t& alpha = e.structure().series().monoid().alphabet();
       for_all_letters(j, alpha)
       {
-	aim.clear();
-	e.letter_deltac(aim, *i, *j, delta_kind::states());
+	dst.clear();
+	e.letter_deltac(dst, *i, *j, delta_kind::states());
 
-	if (aim.size() == 0)
+	if (dst.size() == 0)
 	  return false;
       }
     }
