@@ -27,8 +27,7 @@ bool krat_exp_cderivation_identity_test(tests::Tester& tg)
 {
   TEST_DERIVATION_TYPEDEF_DECS(Expr, Derivation);
 
-  tests::Tester t(tg.verbose());
-  srand(time(0));
+  tests::Tester t(tg);
   TEST_DERIVATION_USUAL_DECS(alphabet, a, b, monoid, semiring, series);
 
   int sucs = 0;

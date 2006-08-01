@@ -45,7 +45,7 @@ unsigned sum_test(tests::Tester& tg)
   typedef typename generalized_traits<Auto>::automaton_t generalized_t;
   AUTOMATON_TYPES_(generalized_t, g_);
 
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   GenRandomAutomata<automaton_t> gen(time(0x0));
 

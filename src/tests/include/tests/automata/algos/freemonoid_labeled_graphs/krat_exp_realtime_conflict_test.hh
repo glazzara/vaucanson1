@@ -27,7 +27,7 @@
 template <class Auto>
 unsigned krat_exp_realtime_conflict_test(tests::Tester& tg)
 {
-  tests::Tester			t(tg.verbose());
+  tests::Tester t(tg);
 
   // By  the  past  realtime()  in realtime.hh  was  conflicting  with
   // realtime()   in   krat_exp_realtime.hh.   The  following   is   a

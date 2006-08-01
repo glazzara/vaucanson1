@@ -36,7 +36,7 @@
 template <class Auto>
 unsigned geometry_equal_operator_test(tests::Tester& tg)
 {
-  tests::Tester	t(tg.verbose());
+  tests::Tester t(tg);
 
   AUTOMATON_TYPES(Auto);
 

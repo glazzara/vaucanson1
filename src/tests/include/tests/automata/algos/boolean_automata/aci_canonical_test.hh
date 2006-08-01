@@ -25,7 +25,7 @@ bool   aci_canonical_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
   AUTOMATON_FREEMONOID_TYPES(Auto);
-  tests::Tester		t(tg.verbose());
+  tests::Tester t(tg);
   typedef vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef vcsn::Element<series_set_t, exp_t>				krat_t;
 

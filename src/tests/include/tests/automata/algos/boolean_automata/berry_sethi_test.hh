@@ -29,7 +29,7 @@ bool	berry_sethi_test(tests::Tester& tg)
   typedef vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef vcsn::Element<series_set_t, exp_t>				krat_t;
 
-  tests::Tester		t(tg.verbose());
+  tests::Tester t(tg);
 
   for (int i = 0; i < 10; ++i)
     {

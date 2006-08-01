@@ -45,8 +45,7 @@ bool krat_exp_cderivation_linear_test(tests::Tester& tg)
   typedef typename linearize_element_t::element_t	linearize_krat_exp_t;
   typedef typename linearize_element_t::alphabet_t	linearize_alphabet_t;
 
-  tests::Tester t(tg.verbose());
-  srand(time(0));
+  tests::Tester t(tg);
 
   const unsigned int tests_num = 10000;
   unsigned int tests = 0;

@@ -25,7 +25,7 @@
 template <class Auto>
 unsigned sub_automaton_test(tests::Tester& tg)
 {
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   AUTOMATON_TYPES(Auto);
   AUTOMATON_FREEMONOID_TYPES(Auto);

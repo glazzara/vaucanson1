@@ -40,7 +40,7 @@ bool in_concat_test(tests::Tester& tg)
   unsigned int nb_test = 20;
   unsigned int nb_test_done = 0;
   unsigned int size    = 0;
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   GenRandomAutomata<Auto> gen(time(0x0));
   for (unsigned i = 0; i < nb_test; ++i)

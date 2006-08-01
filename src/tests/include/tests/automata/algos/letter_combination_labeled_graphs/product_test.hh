@@ -44,7 +44,7 @@ unsigned product_test(tests::Tester& tg)
 {
   typedef Auto automaton_t;
   GenRandomAutomata<automaton_t> gen(time(0x0));
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   /*-------------*
    | Battery 1.  |

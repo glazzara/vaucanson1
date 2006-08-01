@@ -21,9 +21,5 @@ AM_CXXFLAGS = $(CXXFLAGS_STRICT)
 # and generated from the Makefile.am.
 include check-programs.mk
 
-# It is actually unclear there is any point in running these programs.
-# The whole point is rather to compile them.  Maybe we can just disable
-# TESTS?
-TESTS = $(check_PROGRAMS)
-TEST_LOGS = $(check_PROGRAMS:=.log)
-include $(top_srcdir)/build-aux/check.mk
+# We don't run the resulting tests, there is no point in doing so, as
+#they just check that the syntax is ok.

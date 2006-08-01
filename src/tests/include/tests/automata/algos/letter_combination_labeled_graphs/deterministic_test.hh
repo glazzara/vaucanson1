@@ -36,7 +36,7 @@ unsigned deterministic_test(tests::Tester& tg)
   typedef Auto automaton_t;
 
   
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
   GenRandomAutomata<automaton_t> gen(time(0x0));
   
   const unsigned nb_tests = 1;

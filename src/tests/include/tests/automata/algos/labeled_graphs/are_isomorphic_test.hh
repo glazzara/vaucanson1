@@ -2,7 +2,7 @@
 // 
 // Vaucanson, a generic library for finite state machines.
 // 
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@ bool   are_isomorphic_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
   AUTOMATON_FREEMONOID_TYPES(Auto);
-  tests::Tester		t(tg.verbose());
+  tests::Tester t(tg);
 
   for (int i = 0; i < 100; ++i)
     {
@@ -33,7 +33,7 @@ bool   are_isomorphic_test(tests::Tester& tg)
       letter_t		lb = at.random_letter(); at.insert(lb);
       monoid_t		md (at);
       semiring_t	sg;
-      series_set_t		ss (sg, md);
+      series_set_t	ss (sg, md);
       automata_set_t	aa (ss);
 
       automaton_t	au1 (aa);

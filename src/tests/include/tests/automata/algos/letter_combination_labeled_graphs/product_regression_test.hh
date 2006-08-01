@@ -31,7 +31,7 @@ product_regression_test(tests::Tester& tg)
   AUTOMATON_FREEMONOID_TYPES(Auto);
   using vcsn::hstate_t;
 
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   alphabet_t	at;
   letter_t	l1 = at.random_letter();

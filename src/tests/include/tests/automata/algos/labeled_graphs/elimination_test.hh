@@ -28,7 +28,7 @@ using namespace vcsn;
 template <class Auto>
 bool elimination_test(tests::Tester& tg)
 {
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
   AUTOMATON_TYPES(Auto);
   typedef typename generalized_traits<Auto>::automaton_t generalized_automaton_t;
   AUTOMATON_TYPES_(generalized_automaton_t, g);

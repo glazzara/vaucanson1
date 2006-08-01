@@ -28,11 +28,10 @@
 template <class Auto>
 unsigned add_state_test(tests::Tester& tg)
 {
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   AUTOMATON_TYPES(Auto);
 
-  srand(time(0));
 
   using namespace vcsn;
   using namespace vcsn::algebra;

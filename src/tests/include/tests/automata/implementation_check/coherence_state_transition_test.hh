@@ -27,7 +27,7 @@
 template <class Auto>
 unsigned coherence_state_transition_test(tests::Tester& tg)
 {
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   AUTOMATON_TYPES(Auto);
 

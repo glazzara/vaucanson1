@@ -34,8 +34,7 @@ bool krat_exp_realtime_test(tests::Tester& tg)
   typedef typename monoid_t::letter_t		letter_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
 
-  tests::Tester t(tg.verbose());
-  srand(time(0));
+  tests::Tester t(tg);
   alphabet_t alphabet;
   letter_t a = alphabet.random_letter();
   letter_t b = alphabet.random_letter();

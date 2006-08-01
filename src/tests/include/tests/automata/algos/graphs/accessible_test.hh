@@ -31,7 +31,7 @@ bool accessible_test(tests::Tester& tg)
   using namespace vcsn::algebra;
 
   AUTOMATON_TYPES(Auto);
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
   GenRandomAutomata<Auto> gen(time(0x0));
 
   unsigned int nb_test = 20;

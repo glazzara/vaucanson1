@@ -28,7 +28,7 @@ unsigned realtime_trans_test(tests::Tester& tg)
   using namespace vcsn;
   AUTOMATON_TYPES(Transducer);
 
-  tests::Tester			t(tg.verbose());
+  tests::Tester t(tg);
   GenRandomAutomata<Transducer> gen(time(0x0));
 
   const unsigned nb_tests     = 20;

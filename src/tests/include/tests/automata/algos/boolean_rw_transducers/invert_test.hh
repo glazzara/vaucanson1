@@ -56,7 +56,7 @@ static bool test_exp(const Auto& trans,
 template <class Auto>
 bool invert_test(tests::Tester& tg)
 {
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   unsigned nb_succeed = 0;
   unsigned nb_test = 0;

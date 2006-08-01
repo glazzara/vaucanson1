@@ -35,7 +35,7 @@ bool extension_test(tests::Tester& tg)
   typename identity_transducer_helper<automata_set_t,
 				      automaton_value_t>::ret transducer_t;
 
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
   GenRandomAutomata<Auto> gen(time(0x0));
 
   automaton_t auto1 = gen.generate(30, 60);

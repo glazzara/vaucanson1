@@ -28,7 +28,7 @@ bool cut_up_test(tests::Tester& tg)
   typedef vcsn::rat::exp<monoid_elt_value_t, semiring_elt_value_t>	exp_t;
   typedef vcsn::Element<series_set_t, exp_t>				krat_t;
 
-  tests::Tester t (tg.verbose());
+  tests::Tester t(tg);
 
   alphabet_t		at;
   letter_t		la = at.random_letter();

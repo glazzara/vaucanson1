@@ -52,8 +52,8 @@ namespace tests {
       };
 
     Tester();
-    Tester(verbose_level l);
     Tester(int argc, char **argv);
+    Tester(const Tester& t);
 
     /// Set up the tester.
     ///
@@ -72,6 +72,9 @@ namespace tests {
     verbose_level verbose() const;
     /// Whether l is higher or equal to the current verbosity level.
     bool verbose (verbose_level l) const;
+
+    /// The current seed.
+    unsigned seed() const;
 
     /// Whether all tests passed.
     bool all_passed();

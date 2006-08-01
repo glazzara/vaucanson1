@@ -45,7 +45,7 @@ unsigned minimization_test(tests::Tester& tg)
   typedef GenRandomAutomata<Auto>  gen_auto_t;
   typedef Auto			   automaton_t;
 
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
   gen_auto_t	gen(time(0x0));
 
   const unsigned nb_test    = 20;

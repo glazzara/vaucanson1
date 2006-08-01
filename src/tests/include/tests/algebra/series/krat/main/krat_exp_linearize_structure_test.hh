@@ -80,8 +80,7 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
   typedef
     typename linearize_element_t::element_t		out_krat_exp_t;
 
-  tests::Tester t(tg.verbose());
-  srand(time(0));
+  tests::Tester t(tg);
 
   alphabet_t	alphabet;
   letter_t	a = alphabet.random_letter();

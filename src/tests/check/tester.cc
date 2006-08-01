@@ -37,11 +37,11 @@ namespace tests {
     finalize_initialization ();
   }
 
-  Tester::Tester(verbose_level v) :
+  Tester::Tester(const Tester& t) :
     passed_ (0),
     failed_(0),
-    verbose_(v),
-    seed_ (0)
+    verbose_(t.verbose ()),
+    seed_ (t.seed ())
   {
     finalize_initialization ();
   }
@@ -100,7 +100,8 @@ namespace tests {
   }
 
 
-  Tester::verbose_level Tester::verbose() const
+  Tester::verbose_level 
+  Tester::verbose() const
   {
     return verbose_;
   }
@@ -109,6 +110,15 @@ namespace tests {
   {
     return verbose_ <= l;
   }
+
+
+  unsigned
+  Tester::seed() const
+  {
+    return seed_;
+  }
+
+
 
   bool
   Tester::all_passed()

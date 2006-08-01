@@ -36,7 +36,7 @@ bool eps_removal_test(tests::Tester& tg)
   typedef Auto automaton_t;
   AUTOMATON_TYPES(Auto);
 
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
   GenRandomAutomata<automaton_t> gen(time(0x0));
 
   bool error_forward_idempotence = false;

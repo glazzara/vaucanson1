@@ -35,7 +35,7 @@ using namespace vcsn::tools;
 template <class Auto>
 unsigned complete_test(tests::Tester& tg)
 {
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
   typedef Auto				automaton_t;
   typedef GenRandomAutomata<Auto>	gen_auto_t;
   AUTOMATON_TYPES(automaton_t);

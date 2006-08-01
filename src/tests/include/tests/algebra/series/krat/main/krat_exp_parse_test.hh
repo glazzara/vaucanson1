@@ -53,8 +53,7 @@ template <class Expr>
 bool krat_exp_parse_random_test(tests::Tester& tg)
 {
   KRAT_EXP_PARSE_TEST_USUAL_DECS(Expr);
-  tests::Tester t(tg.verbose());
-  srand(time(0));
+  tests::Tester t(tg);
 
   unsigned nb_test	 = 0;
   unsigned nb_success    = 0;
@@ -208,7 +207,7 @@ template <class Expr>
 bool krat_exp_parse_exhaustive_test (tests::Tester& tg, sample_t samples[])
 {
   KRAT_EXP_PARSE_TEST_USUAL_DECS(Expr);
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
   alphabet_t alphabet;
   alphabet.insert('a');
   alphabet.insert('b');

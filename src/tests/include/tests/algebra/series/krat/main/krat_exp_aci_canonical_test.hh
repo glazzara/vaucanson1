@@ -55,7 +55,7 @@ bool krat_exp_aci_canonical_test(tests::Tester& tg)
   typedef typename monoid_t::letter_t		letter_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
 
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   alphabet_t alphabet;
   alphabet.insert('a');

@@ -24,7 +24,7 @@
 template <class Expr>
 bool krat_exp_constant_term_test(tests::Tester& tg)
 {
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   typedef Expr					krat_exp_t;
   typedef typename krat_exp_t::value_t		kexp_t;
@@ -39,7 +39,6 @@ bool krat_exp_constant_term_test(tests::Tester& tg)
   typedef typename monoid_t::letter_t		letter_t;
   typedef typename monoid_t::alphabet_t		alphabet_t;
 
-  srand(time(0));
   alphabet_t alphabet;
   letter_t a = alphabet.random_letter();
   letter_t b = alphabet.random_letter();

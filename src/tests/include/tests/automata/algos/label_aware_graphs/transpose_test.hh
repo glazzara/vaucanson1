@@ -24,7 +24,7 @@ bool   transpose_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
   AUTOMATON_FREEMONOID_TYPES(Auto);
-  tests::Tester		t(tg.verbose());
+  tests::Tester t(tg);
 
   for (int i = 0; i < 100; ++i)
     {

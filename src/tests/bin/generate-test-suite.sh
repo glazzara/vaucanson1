@@ -153,7 +153,6 @@ int main(int argc, char **argv)
   else
     return EXIT_FAILURE;
 }
-
 EOF
 
     # Save cycles by not regenerating files that did not change.

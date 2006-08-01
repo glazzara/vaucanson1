@@ -45,8 +45,7 @@ bool krat_exp_linearize_test(tests::Tester& tg)
 							linearize_element_t;
   typedef typename linearize_element_t::element_t	out_krat_exp_t;
 
-  tests::Tester t(tg.verbose());
-  srand(time(0));
+  tests::Tester t(tg);
   const unsigned int nb_tests_final = 100;
 
   unsigned int nb_tests = 0;

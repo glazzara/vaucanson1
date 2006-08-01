@@ -28,7 +28,7 @@
 template <class Auto>
 unsigned init_final_test(tests::Tester& tg)
 {
-  tests::Tester t(tg.verbose());
+  tests::Tester t(tg);
 
   AUTOMATON_TYPES(Auto);
 

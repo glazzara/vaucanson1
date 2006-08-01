@@ -28,7 +28,7 @@ unsigned realtime_test(tests::Tester& tg)
 {
   AUTOMATON_TYPES(Auto);
 
-  tests::Tester			t(tg.verbose());
+  tests::Tester t(tg);
   vcsn::GenRandomAutomata<Auto> gen(time(0x0));
 
   const unsigned nb_ok_tests     = 20;
