@@ -30,10 +30,11 @@ include $(srcdir)/../share/make/pdf-figs.mk
 	echo '\end{shell}' >> $@
 
 %.eps: %.dot
-	dot -Tps2 $< -o $@
+	dot -Tps2 $< -o $@.tmp
 # This line: [ /CropBox [36 36 97 89] /PAGES pdfmark
 # breaks the ps2pdf output.
-	sed -i '/CropBox/d' $@
+	sed '/CropBox/d' $@.tmp >$@
+	rm $@.tmp
 
 %.pdf: %.eps
 	epstopdf $*.eps -o $*.pdf

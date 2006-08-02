@@ -69,9 +69,9 @@ simple interface:
 \noindent
 The \var{function} is the name of the operation to perform on the
 \var{automaton}, specified as an XML file.  Some functions, such as
-evaluation, will require additional arguments, such as the word to
-evaluate.  Some other functions, such as \samp{exp-to-aut} do not have
-an \var{automaton} argument.
+\taffn{evaluation}, require additional arguments, such as the word to
+evaluate.  Some others, such as \taffn{exp-to-aut} do not have an
+\var{automaton} argument.
 
 \tafkit is made to work with Unix \emph{pipes}, that is to say, chains
 of commands which feed each other.  Therefore, all the functions
@@ -101,25 +101,24 @@ and should be understood, or analyzed, as follows.
   automaton of \autoref{b:a1} indeed --- in an XML format that is
   understood\footnote{%
     This format is not exactly part of the \Vauc platform.  It has
-    been developed for providing a mean of communication between
-    various programs dealing with automata.  And then it has been
-    used as a communication tool between the invocation of \Vauc
-    function by the \tafkit.  A lay user of the \tafkit should not
-    need to know how this format is
+    been developed for providing a means of communication between
+    various programs dealing with automata.  And then it has been used
+    as a communication tool between the invocations of \Vauc function
+    by the \tafkit.  A lay user of the \tafkit should not need to know
+    how this format is
     defined%% In 1.0, we don't use the bibliography.
     \ifthenelse{\boolean{developer}}{ but a rough description of it is
       provided at \autoref{sec:xml} of the Appendix}{}.}  by \Vauc.
-  Which means that this file must exist before the line is executed.
-  The \file{data/automata} directory provides a number of XML files
-  for examples of automata, a number of programs that produce the XML
+  This file must exist before the line is executed.  The
+  \file{data/automata} directory provides a number of XML files for
+  examples of automata, a number of programs that produce the XML
   files for automata whose definition depend upon some variables and
-  the \tafkit itself allow to define automata and thus to produce the
+  the \tafkit itself allows to define automata and thus to produce the
   corresponding XML files (cf. below).
 
-\item \verb+ > + \file{a1det.xml} puts the result of
-  \taffn{determinize} \samp{a1.xml}, that is, the XML file which
-  describes the determinized automaton of $\Ac_{1}$ into the file
-  \file{a1det.xml}.
+\item \samp{>a1det.xml} puts the result of \taffn{determinize} into
+  the file \file{a1.xml}, that is, the XML file which describes the
+  determinized automaton of $\Ac_{1}$.
 \end{enumerate}
 
 \bigskip
@@ -190,9 +189,9 @@ The whole list of supported commands is available via
   \label{fig:a1}
 \end{figure}
 
-Let's consider the Boolean automaton $\Ac_1$
-(\autoref{fig:a1}), part of the standard library.  It can be dumped
-using \Index{\taffn{dump-automaton}}:
+Let's consider the Boolean automaton $\Ac_1$ (\autoref{fig:a1}), part
+of the standard library.  It can be dumped using
+\Index{\taffn{dump-automaton}}:
 
 \execcaption{a1-dump}{vcsn-b dump-automaton a1}
 
@@ -228,22 +227,6 @@ Or use dotty to visualize it:
   \includegenerateddot{a1det}
 \end{center}
 
-\subsubsection{Minimizing}
-
-The \index{\taffn{minimize}}minimal automaton can be computed the same way:
-\execcaption{a1detmin}{vcsn-b minimize a1det.xml >a1detmin.xml}
-\execcaption{a1detmin.dot}{vcsn-b dot-dump a1det.xml >a1detmin.dot}
-\begin{center}
-  \includegenerateddot{a1detmin}
-\end{center}
-
-The commands can be composed with pipes from the shell, using
-\Index{\samp{-}} to denote the standard input.
-\begin{shell}
-# vcsn_b determinize a1.xml | vcsn_b minimize - > a1_min.xml
-\end{shell}
-
-
 \subsubsection{Evaluation}
 
 To \index{\taffn{eval}}evaluate whether a word is accepted:
@@ -255,14 +238,122 @@ To \index{\taffn{eval}}evaluate whether a word is accepted:
 where 1 (resp. 0) means that the word is accepted (resp. not accepted)
 by the automaton.
 
+\subsection{Interactive Definition of Automata}
+
+\tafkit provides a text interface to define automata interactively,
+rather than having to deal with XML files.  Two functions are
+available:
+\begin{description}
+\item[\taffn{define-automaton}] to build a fresh automaton from scratch,
+\item[\taffn{edit-automaton}] to modify an existing automaton,
+\end{description}
+
+The interface is based on a menu of choices:
+\begin{shell}
+# \kbd{vcsn-b --alphabet=ab define-automaton all.xml}
+Automaton description:
+  States: (none)
+  Initial states: (none)
+  Final states: (none)
+
+  Transitions: (none)
+
+Please choose your action:
+  1. Add states.
+  2. Delete a state.
+
+  3. Add a transition.
+  4. Delete a transition.
+
+  5. Set a state to be initial.
+  6. Set a state not to be initial.
+
+  7. Set a state to be final.
+  8. Set a state not to be final.
+
+  9. Display the automaton in Dotty.
+
+  10. Exit.
+
+Your choice [1-10]:  
+\end{shell}
+
+\noindent
+If you enter \kbd{1}, you will then be prompted for the number of
+states to add, say \kbd{1} again.  The state \code{0} was created.  To
+make it initial select \kbd{5}, and:
+
+\begin{shell}
+Your choice [1-10]: \kbd{5}
+  For state: \kbd{0}
+\end{shell}
+
+Likewise to make it final, using choice \kbd{7}.  Finally, let's add a
+transition:
+
+\begin{shell}
+Your choice [1-10]: \kbd{3}
+  Add a transition from state: \kbd{0}
+  To state: \kbd{0}
+  Labeled by the expression: \kbd{a+b}
+\end{shell}
+
+\noindent
+The automaton is generalized, that is to say, rational expressions are
+valid labels.
+
+On top of the interactive menu, the current definition of the
+automaton is reported in a textual yet readable form:
+
+\begin{shell}
+Automaton description:
+  States: 0
+  Initial states: 0
+  Final states: 0
+
+  Transitions: 
+    1: From 0 to 0 labeled by (1 a)+(1 b)  
+\end{shell}
+
+\noindent
+Interestingly enough, states are numbered from 0, but transitions
+numbers start at 1.  Also, not that weights are reported, although
+only \code{1} is valid for Boolean automata.
+
+Finally, hit \kbd{10} to save the resulting automaton in the file
+\file{all.xml}.
+
+
 \subsection{Rational expressions and Boolean automata}
 
 \Vauc provides functions to manipulate rational expressions associated
-to Boolean automata. For instance, computing the language recognized
-by a Boolean automaton can be done using \Index{\taffn{aut-to-exp}}:
+to Boolean automata.  This provides an alternative means to create
+automata:
 
-\execcaption{a1.rat}{vcsn-b aut-to-exp a1.xml}
-\execcaption{a1det.rat}{vcsn-b aut-to-exp a1det.xml}
+\execcaption{all.xml}{vcsn-b --alphabet=ab exp-to-aut '(a+b)*' >all.xml}
+\execcaption{all.dot}{vcsn-b dot-dump all.xml >all.dot}
+\begin{center}
+  \includegenerateddot{all}
+\end{center}
+
+\subsubsection{Minimizing}
+
+This automaton, constructed following the Thompson algorithm, is not
+the simplest one: it can be \index{minimize@\taffn{minimize}}minimized:
+
+\execcaption{allmin.xml}{vcsn-b minimize all.xml >allmin.xml}
+\execcaption{allmin.dot}{vcsn-b dot-dump allmin.xml >allmin.dot}
+\begin{center}
+  \includegenerateddot{allmin}
+\end{center}
+
+\bigskip
+
+Computing the language recognized by a Boolean automaton can be done
+using \Index{\taffn{aut-to-exp}}:
+
+\execcaption{all.rat}{vcsn-b aut-to-exp all.xml}
+\execcaption{allmin.rat}{vcsn-b aut-to-exp allmin.xml}
 
 \Vauc provides several algorithms that build an automaton that
 recognizes a given language.  The following sequence computes the

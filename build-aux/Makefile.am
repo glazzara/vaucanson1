@@ -22,4 +22,5 @@ dist_m4data_DATA = vcsn.m4 vcsn-xml.m4
 EXTRA_DIST =					\
 find_tests.sh					\
 fix-rights					\
-move-if-change
+move-if-change					\
+Text/Shellwords.pm

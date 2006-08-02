@@ -27,6 +27,7 @@ dist_pdf_DATA = $(manual)
 
 $(manual): $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
 	$(MAKE) $(AM_MAKEFLAGS) manual.ext
+	cd manual.ext && $(MAKE) $(AM_MAKEFLAGS) dvi
 	$(TEXI2PDF) $(TEXI2PDF_FLAGS) -o $@ $<
 
 $(srcdir)/vaucanson-developer-manual.pdf: manual.ext $(vaucanson_user_manual_sources)
@@ -55,14 +56,14 @@ EXTRA_DIST = $(vaucanson_user_manual_sources) $(manual)  \
 
 # Extract commands that must be run to produce figures.
 manual.ext: $(vaucanson_user_manual_sources) $(srcdir)/extex.pl
-	$(srcdir)/extex.pl			\
+	perl -I$(top_srcdir)/build-aux -w	\
+	  $(srcdir)/extex.pl			\
 	  --output-dir=$@			\
 	  --srcdir=$(srcdir)			\
 	  --top_srcdir=$(top_srcdir)		\
 	  --builddir=.				\
 	  --top_builddir=$(top_builddir)	\
           $(vaucanson_user_manual_sources)
-	$(MAKE) -C $@ dvi
 	touch $@
 
 MAINTAINERCLEANFILES = $(vcsndldir_data) automata.tex

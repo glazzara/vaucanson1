@@ -1,3 +1,19 @@
+2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
+
+	Doc cleanups and completion.
+	* doc/manual/taf-kit.tex: More about Boolean automata, including
+	edit-automaton, and exp-to-aut.
+	Makes more sense to presentation minimization there.
+	* doc/manual/developer.tex: Remove a stray end{document}.
+	* doc/manual/vaucanswig.tex: Many fixes.
+	More is needed.
+	* doc/manual/extex.mk: Don't rely on sed -i.
+	* doc/manual/extex.pl: Skip ratexps.
+	* doc/manual/Makefile.am: Pass -I to perl to use our Shellwords.pm.
+	* build-aux/Text/Shellwords.pm: New.
+	* build-aux/Makefile.am (EXTRA_DIST): Ship it, as a convenience
+	for users who don't have it on their system.
+
 2006-08-01  Akim Demaille  <akim@lrde.epita.fr>
 
 	* src/tests/sanity/Makefile.am: Don't run the compiled tests,
