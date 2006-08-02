@@ -34,11 +34,20 @@ elif test -n "${BASH_VERSION+set}" && (set -o posix) >/dev/null 2>&1; then
   set -o posix
 fi
 
-# Ensure we are running from the right directory.
-test -f ./defs || {
-   echo "defs: not found in current directory" 1>&2
-   exit 1
+me=`echo "$0" | sed -e 's,.*[\\/],,;s/\.test$//'`
+
+# fatal MESSAGE...
+fatal ()
+{
+  echo >&2 "$me: $@"
+  exit 1
 }
+
+
+# Ensure we are running from the right directory.
+test -f ./defs ||
+   fatal "defs: not found in current directory"
+
 
 # If srcdir is not set, then we are not running from `make check', be verbose.
 if test -z "$srcdir"; then
@@ -60,18 +69,13 @@ case "$srcdir" in
 esac
 
 # Ensure $srcdir and $top_srcdir are set correctly.
-test -f $srcdir/defs.in || {
-   echo "$srcdir/defs.in not found, check \$srcdir" 1>&2
-   exit 1
-}
+test -f $srcdir/defs.in ||
+   fatal "$srcdir/defs.in not found, check \$srcdir"
 
 top_srcdir=$(cd $srcdir/../.. && pwd)
-test -f $top_srcdir/configure.ac || {
-   echo "$top_srcdir/configure.ac not found, check \$top_srcdir" 1>&2
-   exit 1
-}
+test -f $top_srcdir/configure.ac ||
+   fatal "$top_srcdir/configure.ac not found, check \$top_srcdir"
 
-me=`echo "$0" | sed -e 's,.*[\\/],,;s/\.test$//'`
 
 # See how redirections should work.  User can set VERBOSE to see all
 # output.

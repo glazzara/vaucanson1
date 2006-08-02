@@ -1,0 +1,58 @@
+#! /bin/bash
+
+# Vaucanson, a generic library for finite state machines.
+# Copyright (C) 2006 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `COPYING' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
+
+. ./defs || exit 1
+
+set -e
+
+# set -x pollutes the readability of the output.
+set +x
+
+# completeness_test VCSN-*.test
+# -----------------------------
+# Check that this test covers the whole set of TAF-Kit functions.
+# Only makes sense for vcsn-*.test.
+completeness_test ()
+{
+  # TAF-Kit executable that corresponds to this test.
+  local vcsn=$(basename $1 .test)
+  # What functions do it provide.
+  local funs=$($vcsn --list-commands |
+               sed -n 's/^   - \([-a-z]*\)[ :].*/\1/p')
+  if test $? != 0 || test -z "$funs"; then
+    fatal "cannot $vcsn --list-commands"
+  fi
+  local res=0
+  # Make sure each function appears in the test file.
+  # It is on purpose that we consider comments too.
+  for fn in $funs
+  do
+    if ! grep "$fn" "$1" >/dev/null; then
+      echo >&2 "$me: $vcsn: function not checked: $fn"
+      res=1
+    fi
+  done
+  return $res
+}
+
+pass=true
+for test in $srcdir/vcsn-*.test
+do
+  if ! completeness_test $test; then
+    pass=false
+  fi
+done
+
+$pass

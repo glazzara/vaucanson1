@@ -1,7 +1,7 @@
-#! /bin/bash
+#! /bin/sh
 
 # Vaucanson, a generic library for finite state machines.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+# Copyright (C) 2006 The Vaucanson Group.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,11 +15,46 @@
 
 . ./defs || exit 1
 
-set -ex
+set -e
 
 ## -------------- ##
 ## Input/output.  ##
 ## -------------- ##
+
+ sed '/^#/d' <<EOF | vcsn-b --alphabet=ab define-automaton all.xml
+# Add states
+1
+# Add one state
+1
+# Set a state to be initial.
+5
+# Which state
+0
+# Set a state to be final.
+7
+# Which state
+0
+# Add transition
+3
+# From and to
+0
+0
+# Label
+a+b
+# Exit.
+10
+EOF
+
+# Cannot check display.
+
+# Check that dot accepts the output.
+# vcsn-b dot-dump all.xml | dot -
+
+# Check that each builtin automaton can be dumped.
+for a in $(vcsn-b list-automata | sed -n 's/^  * - \([-a-z0-9]*\).*/\1/p')
+do
+  vcsn-b dump-automaton $a | vcsn-b info -
+done
 
 ## --------------------- ##
 ## Test and evaluation.  ##
@@ -62,8 +97,21 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 #  vcsn-b standardize $a1 | vcsn-b is-standard -
 
 
-## -------------------- ##
-## Generic algorithms.  ##
-## -------------------- ##
+## --------------------------------- ##
+## Generic algorithms for automata.  ##
+## --------------------------------- ##
+
+## --------------------------------------- ##
+## Boolean automaton specific algorithms.  ##
+## --------------------------------------- ##
+
+## --------------------------------------------- ##
+## Conversion between automata and expressions.  ##
+## --------------------------------------------- ##
+
+all=$(vcsn-b aut-to-exp all.xml)
+test $all = '(a+b)*'
+vcsn-b --alphabet=ab exp-to-aut "$all" >aut2.xml
+
 
 exit 0

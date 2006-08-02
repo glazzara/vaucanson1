@@ -18,7 +18,8 @@ XFAIL_TESTS =
 TESTS =						\
 vcsn-b.test					\
 vcsn-z.test					\
-vcsn-tdc.test
+vcsn-tdc.test					\
+completeness.test
 
 EXTRA_DIST = $(TESTS) 		\
 	ambiguous.xml 		\

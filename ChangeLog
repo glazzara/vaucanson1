@@ -1,5 +1,15 @@
 2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
 
+	More about TAF-Kit tests.
+	* taf-kit/tests/defs.in (fatal): New.
+	Use it.
+	* taf-kit/tests/vcsn-b.test: More tests.
+	* taf-kit/tests/completeness.test: New.
+	* taf-kit/tests/Makefile.am: Use it.
+	* taf-kit/src/ratexp_commands.hh: Fix a typo.
+
+2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
+
 	XML factoring and improvement.
 	* include/vaucanson/xml/tools.hxx (check_consistency): New.
 	Use it.

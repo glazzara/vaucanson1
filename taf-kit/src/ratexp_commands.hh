@@ -83,7 +83,7 @@ DEFINE_COMMAND (NAME (expand)
     COMMAND_ENTRY_CN (derived-term, derived_term_automaton, Exp,	\
 		      "Use derivative to compute the automaton of `exp'."), \
     COMMAND_ENTRY_CN (exp-to-aut, standard_of, Exp,			\
-		      "Alias of `stardard'."),				\
+		      "Alias of `standard'."),				\
     COMMAND_ENTRY (expand, Exp, "Expand `exp'."),			\
     COMMAND_ENTRY_CN (standard, standard_of, Exp,			\
 		      "Give the standard automaton of `exp'."),		\
