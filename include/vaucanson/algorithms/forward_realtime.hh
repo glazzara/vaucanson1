@@ -23,7 +23,7 @@
  *
  * Algorithms to make an automaton realtime.
  *
- * This file  contains algorithms  to build realtime  automaton. These
+ * Algorithms  to build realtime  automaton. These
  * algorithms use the forward version of eps_removal.
  *
  * @see forward_realtime(), forward_realtime_here()
@@ -45,7 +45,7 @@ namespace vcsn {
   /**
    * In place modification of the automaton to make it realtime.
    *
-   * This function  make an automaton realtime,  using forward version
+   * Make an automaton realtime,  using forward version
    * of eps_removal for building.
    *
    * @param a The automaton to make realtime.
@@ -59,7 +59,7 @@ namespace vcsn {
   /**
    * Returns a fresh realtime automaton.
    *
-   * This fonction build a  fresh realtime automaton from those given,
+   * Build a  fresh realtime automaton from those given,
    * using forward version of eps_removal.
    *
    * @param a The automaton to make realtime.

@@ -45,7 +45,7 @@ namespace vcsn {
   /**
    * In place modification of the automaton to make it realtime.
    *
-   * This function make an  automaton realtime, using backward version
+   * Make an  automaton realtime, using backward version
    * of eps_removal for building.
    *
    * @param a The automaton to make realtime.
@@ -59,7 +59,7 @@ namespace vcsn {
   /**
    * Returns a fresh realtime automaton.
    *
-   * This fonction build a  fresh realtime automaton from those given,
+   * Build a  fresh realtime automaton from those given,
    * using backward version of eps_removal.
    *
    * @param a The automaton to make realtime.

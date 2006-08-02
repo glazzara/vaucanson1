@@ -17,102 +17,20 @@
 #ifndef VCSN_ALGORITHMS_FORWARD_REALTIME_HXX
 # define VCSN_ALGORITHMS_FORWARD_REALTIME_HXX
 
-# include <vaucanson/algorithms/backward_realtime.hh>
 # include <vaucanson/algorithms/forward_realtime.hh>
-
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/algorithms/eps_removal.hh>
-# include <vaucanson/algorithms/accessible.hh>
-
-# include <deque>
-# include <set>
+#include <vaucanson/algorithms/realtime.hh>
 
 namespace vcsn {
 
+  /*------------------------.
+  | forward_realtime_here.  |
+  `------------------------*/
+
   template <class A_, typename Auto_>
   void
-  do_forward_realtime_here(const AutomataBase<A_>&,
-			   Auto_& a)
+  do_forward_realtime_here(const AutomataBase<A_>&b, Auto_& a)
   {
-    typedef Auto_				automaton_t;
-    AUTOMATON_TYPES(automaton_t);
-    typedef std::set<htransition_t>			delta_ret_t;
-    typedef std::deque<htransition_t>			queue_t;
-
-    queue_t		  to_del, src_d;
-    delta_ret_t		  dst_d;
-    monoid_elt_t	  monoid_identity =
-      algebra::identity_as<monoid_elt_value_t>::
-      of(a.structure().series().monoid());
-    semiring_elt_t		  semiring_zero =
-      algebra::zero_as<semiring_elt_value_t>::
-      of(a.structure().series().semiring());
-    series_set_elt_t	      series_identity =
-      algebra::identity_as<series_set_elt_value_t>::of(a.structure().series());
-
-    forward_eps_removal_here(a);
-
-    for_all_states(src, a)
-    {
-      std::insert_iterator<queue_t> src_i(src_d, src_d.begin());
-      a.delta(src_i, *src, delta_kind::transitions());
-
-      while (!src_d.empty())
-      {
-	htransition_t d_o = src_d.front();
-	src_d.pop_front();
-	if (a.series_of(d_o).get(monoid_identity) != semiring_zero)
-	{
-	  dst_d.clear();
-	  a.deltac(dst_d, a.dst_of(d_o), delta_kind::transitions());
-	  for (typename delta_ret_t::const_iterator d = dst_d.begin();
-	       d != dst_d.end();
-	       ++d)
-	    if (a.series_of(*d).get(monoid_identity) == semiring_zero)
-	    {
-	      bool new_transition = true;
-	      for (typename queue_t::const_iterator d__o =
-		     src_d.begin();
-		   d__o != src_d.end();
-		   ++d__o)
-		if ((a.dst_of(*d__o) == a.dst_of(*d) &&
-		     (a.label_of(*d__o) == a.label_of(*d))))
-		{
-		  new_transition = false;
-		  break;
-		}
-
-	      if (new_transition)
-	      {
-		htransition_t new_htransition = a.add_series_transition
-		  (*src,
-		   a.dst_of(*d),
-		   a.series_of(d_o) * a.series_of(*d));
-		src_d.push_back(new_htransition);
-	      }
-	    }
-	  if (a.is_final(a.dst_of(d_o)))
-	    a.set_final(*src);
-	}
-      }
-    }
-
-    for (typename automaton_t::transition_iterator e = a.transitions().begin();
-	 e != a.transitions().end();
-	 ++e)
-      if (a.series_of(*e).get(monoid_identity) != semiring_zero)
-	to_del.push_back(*e);
-
-    while (!to_del.empty())
-    {
-      htransition_t e = to_del.front();
-      to_del.pop_front();
-      a.del_transition(e);
-    }
-
-    coaccessible_here(a);
-
-    realtime_words_here(a);
+    do_realtime_here (b, a, forward);
   }
 
   template<typename A, typename T>
@@ -122,13 +40,15 @@ namespace vcsn {
     do_forward_realtime_here(a.structure(), a);
   }
 
+  /*-------------------.
+  | forward_realtime.  |
+  `-------------------*/
+
   template<typename A_, typename Auto_>
   Auto_
-  do_forward_realtime(const AutomataBase<A_>&, const Auto_& a)
+  do_forward_realtime(const AutomataBase<A_>&b, const Auto_& a)
   {
-    Auto_ ret(a);
-    do_forward_realtime_here(ret.structure(), ret);
-    return ret;
+    return do_realtime (b, a, forward);
   }
 
 

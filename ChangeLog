@@ -1,5 +1,20 @@
 2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
 
+	Factor duplicate code.  
+	Shame on its author: 2 lines of 83 differed.
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/backward_realtime.hxx
+	(do_forward_realtime_here, do_backward_realtime_here): Move the
+	body into...
+	* include/vaucanson/algorithms/realtime.hxx (do_realtime_here):
+	here.
+	Adjust all the dependencies.
+	* include/vaucanson/algorithms/backward_realtime.hxx
+	(do_realtime_words, realtime_words_here): Move to...
+	* include/vaucanson/algorithms/realtime.hxx: here.
+
+2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
+
 	More about TAF-Kit tests.
 	* taf-kit/tests/defs.in (fatal): New.
 	Use it.
