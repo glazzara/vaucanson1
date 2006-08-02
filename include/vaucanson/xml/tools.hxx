@@ -700,6 +700,32 @@ namespace vcsn
 
 
       /**
+       * Check that observed declarations match the expectations.
+       *
+       * @param node    to check
+       * @param kind    user readable kind of entity to check, e.g. "monoid"
+       * @param key     key used in the XML document, e.g., "type"
+       * @param deflt   default value, e.g., "B"
+       * @param expected  value given the rest of the XML document.
+       */
+      void
+      check_consistency (const xercesc::DOMElement* node,
+			 const std::string& kind,
+			 const char* key, const std::string& deflt,
+			 const std::string& expected)
+      {
+	std::string observed;
+	if (node && node->hasAttribute(transcode(key)))
+	  observed = xml2str(node->getAttribute(transcode(key)));
+	else
+	  observed = deflt;
+	if (expected != observed)
+	  FAIL(std::string ("invalid ") + kind + ": " + observed
+	       + ", expected: " + expected);
+      }
+
+
+      /**
        * Check semiring conformance of the automaton w.r.t. XML node.
        *
        * @arg \c U	Type of the semiring.
@@ -715,16 +741,9 @@ namespace vcsn
 				const T&, const U& param)
       {
 	typedef typename T::series_set_elt_t::semiring_elt_t::value_t value_t;
-
-	std::string set(tools::get_semiring_set(param, value_t()));
-	std::string set_ref;
-
-	if (node && node->hasAttribute(transcode("set")))
-	  set_ref = xml2str(node->getAttribute(transcode("set")));
-	else
-	  set_ref = "B";
-	if (set_ref != set)
-	  FAIL("Bad semiring");
+	check_consistency (node, "semiring",
+			   "set", "B",
+			   tools::get_semiring_set(param, value_t()));
       }
 
 
@@ -738,16 +757,9 @@ namespace vcsn
 	typedef typename
 	  trans_t::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t
 	  value_t;
-
-	std::string set(tools::get_semiring_set(param, value_t()));
-	std::string set_ref;
-
-	if (node && node->hasAttribute(transcode("set")))
-	  set_ref = xml2str(node->getAttribute(transcode("set")));
-	else
-	  set_ref = "B";
-	if (set_ref != set)
-	  FAIL("Bad semiring");
+	check_consistency (node, "semiring",
+			   "set", "B",
+			   tools::get_semiring_set(param, value_t()));
       }
 
 
@@ -761,15 +773,8 @@ namespace vcsn
 	typedef typename
 	  trans_t::series_set_elt_t::semiring_elt_t::value_t value_t;
 
-	std::string set(tools::get_semiring_set(param, value_t()));
-	std::string set_ref;
-
-	if (node && node->hasAttribute(transcode("set")))
-	  set_ref = xml2str(node->getAttribute(transcode("set")));
-	else
-	  set_ref = "ratSeries";
-	if (set_ref != set)
-	  FAIL("Bad semiring");
+	check_consistency (node, "semiring", "set", "ratSeries", 
+			   tools::get_semiring_set(param, value_t()));
       }
 
 
@@ -785,18 +790,9 @@ namespace vcsn
       template <class U>
       void ensure_monoid_type(const xercesc::DOMElement* node, const U& param)
       {
-	std::string monoid_type_ref = tools::get_monoid_type(param);
-	std::string monoid_type;
-
-	if (! node || ! node->hasAttribute(transcode("type")))
-	  monoid_type = "free";
-	else
-	  monoid_type = xml2str(node->getAttribute(transcode("type")));
-	if (monoid_type != monoid_type_ref)
-	  FAIL(std::string ("Bad monoid type: ")
-	       + monoid_type
-	       + ", expected: "
-	       + monoid_type_ref);
+	check_consistency (node,
+			   "monoid", "type", "free",
+			   tools::get_monoid_type(param));
       }
 
 
@@ -804,18 +800,9 @@ namespace vcsn
       void ensure_monoid_type(const xercesc::DOMElement* node,
 			      const FMPtype& param)
       {
-	std::string monoid_type_ref = tools::get_monoid_type(param);
-	std::string monoid_type;
-
-	if (! node || ! node->hasAttribute(transcode("type")))
-	  monoid_type = "product";
-	else
-	  monoid_type = xml2str(node->getAttribute(transcode("type")));
-	if (monoid_type != monoid_type_ref)
-	  FAIL(std::string ("Bad monoid type: ")
-	       + monoid_type
-	       + ", expected: "
-	       + monoid_type_ref);
+	check_consistency (node,
+			   "monoid", "type", "product",
+			   tools::get_monoid_type(param));
       }
 
 

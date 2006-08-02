@@ -1,5 +1,11 @@
 2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
 
+	XML factoring and improvement.
+	* include/vaucanson/xml/tools.hxx (check_consistency): New.
+	Use it.
+
+2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
+
 	Doc cleanups and completion.
 	* doc/manual/taf-kit.tex: More about Boolean automata, including
 	edit-automaton, and exp-to-aut.
