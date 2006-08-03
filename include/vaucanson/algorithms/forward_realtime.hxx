@@ -18,7 +18,7 @@
 # define VCSN_ALGORITHMS_FORWARD_REALTIME_HXX
 
 # include <vaucanson/algorithms/forward_realtime.hh>
-#include <vaucanson/algorithms/realtime.hh>
+# include <vaucanson/algorithms/realtime.hh>
 
 namespace vcsn {
 

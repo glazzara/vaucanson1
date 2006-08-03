@@ -95,7 +95,7 @@ namespace vcsn {
 	  m_semiring_elt[i][r] = z;
 	  if(z != semiring_elt_zero)
 	    for (j = 0; j < size; j++)
-	      if(j != r)
+	      if (j != r)
 		m_semiring_elt[i][j] += z * m_semiring_elt[r][j];
 	}
       for (j = 0; j < size; j++)

@@ -16,7 +16,7 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-/**
+/*
  * CPP guard should not be inserted here as
  * VCSN_CONTEXT_NAMESPACE could be changed.
  */
