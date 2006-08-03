@@ -49,6 +49,7 @@
 // INTERFACE: GenAutomaton eps_removal(const GenAutomaton& a) { return vcsn::eps_removal(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
+# include <vaucanson/misc/direction.hh>
 
 namespace vcsn {
 
@@ -72,7 +73,7 @@ namespace vcsn {
    */
   template<typename A, typename T>
   void
-  eps_removal_here(Element<A, T>& a, bool bck = true);
+  eps_removal_here(Element<A, T>& a, misc::direction_type dir = misc::backward);
 
 
   /**
@@ -93,7 +94,7 @@ namespace vcsn {
    */
   template<typename A, typename T>
   Element<A, T>
-  eps_removal(const Element<A, T>& a, bool bck = true);
+  eps_removal(const Element<A, T>& a, misc::direction_type dir = misc::backward);
 
 
   /**

@@ -1,5 +1,19 @@
 2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/misc/direction.hh: New.
+	* include/vaucanson/algorithms/realtime.hh (realtime_type):
+	Remove, replaced by the above one.
+	Adjust all dependencies.
+	* include/vaucanson/algorithms/eps_removal.hh, 
+	* include/vaucanson/algorithms/eps_removal.hxx: Use it too.
+	* include/Makefile.am: Adjust.
+	Sort lines.
+	(XMLSOURCES): Remove, useless.
+
+	* include/vaucanson/algorithms/forward_realtime.hxx: Fix an error.
+
+2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
+
 	Factor duplicate code.  
 	Shame on its author: 2 lines of 83 differed.
 	* include/vaucanson/algorithms/forward_realtime.hxx,

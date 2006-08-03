@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -34,13 +34,10 @@
 // INTERFACE: bool is_realtime(GenAutomaton& a) { return vcsn::is_realtime(*a); }
 
 # include <vaucanson/automata/concept/automata_base.hh>
-
+# include <vaucanson/misc/direction.hh>
 namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
-
-  /// Enum to indicate which kind of realtime algorithms must be used.
-  enum realtime_type { forward, backward };
 
   /**
    * In place modification of the automaton to make it realtime.
@@ -57,7 +54,7 @@ namespace vcsn {
    */
   template<typename A, typename T>
   void
-  realtime_here(Element<A, T>& a, realtime_type type);
+  realtime_here(Element<A, T>& a, misc::direction_type type);
 
   /**
    * Returns a fresh realtime automaton.
@@ -72,7 +69,7 @@ namespace vcsn {
    */
   template<typename A, typename T>
   Element<A, T>
-  realtime(const Element<A, T>& a, realtime_type type);
+  realtime(const Element<A, T>& a, misc::direction_type type);
 
   /** @} */
 

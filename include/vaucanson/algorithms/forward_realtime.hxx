@@ -30,7 +30,7 @@ namespace vcsn {
   void
   do_forward_realtime_here(const AutomataBase<A_>&b, Auto_& a)
   {
-    do_realtime_here (b, a, forward);
+    do_realtime_here (b, a, misc::forward);
   }
 
   template<typename A, typename T>
@@ -48,7 +48,7 @@ namespace vcsn {
   Auto_
   do_forward_realtime(const AutomataBase<A_>&b, const Auto_& a)
   {
-    return do_realtime (b, a, forward);
+    return do_realtime (b, a, misc::forward);
   }
 
 

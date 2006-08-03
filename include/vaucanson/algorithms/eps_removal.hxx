@@ -31,9 +31,9 @@ namespace vcsn {
   `--------------*/
   template <class A_, typename Auto>
   void
-  do_eps_removal_here(const AutomataBase<A_>&, Auto& a, bool bck_fwd)
+  do_eps_removal_here(const AutomataBase<A_>&, Auto& a,
+		      misc::direction_type dir)
   {
-    // bck_fwd : true -> backward eps_removal , false -> forward eps_removal
     AUTOMATON_TYPES(Auto);
     typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
     typedef std::vector<series_set_elt_t>		vector_series_t;
@@ -103,7 +103,7 @@ namespace vcsn {
 	  m_semiring_elt[r][j] = w * m_semiring_elt[r][j];
     }
 
-    if (bck_fwd)
+    if (dir == misc::backward)
     {
       // Backward_eps_removal
       // Initialize the m_wfinal
@@ -175,17 +175,17 @@ namespace vcsn {
 
   template<typename  A, typename  T>
   void
-  eps_removal_here(Element<A, T>& a, bool bck)
+  eps_removal_here(Element<A, T>& a, misc::direction_type dir)
   {
-    do_eps_removal_here(a.structure(), a, bck);
+    do_eps_removal_here(a.structure(), a, dir);
   }
 
   template<typename  A, typename  T>
   Element<A, T>
-  eps_removal(const Element<A, T>& a, bool bck)
+  eps_removal(const Element<A, T>& a, misc::direction_type dir)
   {
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(), ret, bck);
+    do_eps_removal_here(ret.structure(), ret, dir);
     return ret;
   }
 
@@ -193,7 +193,7 @@ namespace vcsn {
   void
   backward_eps_removal_here(Element<A, T>& a)
   {
-    do_eps_removal_here(a.structure(), a, true);
+    do_eps_removal_here(a.structure(), a, misc::backward);
   }
 
   template<typename  A, typename  T>
@@ -201,7 +201,7 @@ namespace vcsn {
   backward_eps_removal(const Element<A, T>& a)
   {
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(), ret, true);
+    do_eps_removal_here(ret.structure(), ret, misc::backward);
     return ret;
   }
 
@@ -209,7 +209,7 @@ namespace vcsn {
   void
   forward_eps_removal_here(Element<A, T>& a)
   {
-    do_eps_removal_here(a.structure(), a, false);
+    do_eps_removal_here(a.structure(), a, misc::forward);
   }
 
   template<typename  A, typename  T>
@@ -217,7 +217,7 @@ namespace vcsn {
   forward_eps_removal(const Element<A, T>& a)
   {
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(), ret, false);
+    do_eps_removal_here(ret.structure(), ret, misc::forward);
     return ret;
   }
 

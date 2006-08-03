@@ -19,118 +19,119 @@ vaucanson/config/pconf.hh
 nobase_include_HEADERS +=			\
 vaucanson/contexts/automaton.thh		\
 vaucanson/contexts/boolean_semiring.thh		\
-vaucanson/contexts/ratseries_semiring.thh	\
-vaucanson/contexts/r_semiring.thh		\
-vaucanson/contexts/z_semiring.thh		\
-vaucanson/contexts/z_max_plus_semiring.thh	\
-vaucanson/contexts/z_min_plus_semiring.thh	\
 vaucanson/contexts/char_letter.thh		\
 vaucanson/contexts/dynamic_alphabet.thh		\
 vaucanson/contexts/free_monoid.thh		\
 vaucanson/contexts/free_monoid_product.thh	\
 vaucanson/contexts/generic_automaton_impl.thh	\
 vaucanson/contexts/generic_series.thh		\
+vaucanson/contexts/polynom_series.thh		\
+vaucanson/contexts/r_semiring.thh		\
+vaucanson/contexts/ratseries_semiring.thh	\
 vaucanson/contexts/transducer.thh		\
-vaucanson/contexts/polynom_series.thh
+vaucanson/contexts/z_max_plus_semiring.thh	\
+vaucanson/contexts/z_min_plus_semiring.thh	\
+vaucanson/contexts/z_semiring.thh
 
 nobase_include_HEADERS +=			\
-vaucanson/misc/container_ops.hxx		\
+vaucanson/misc/bitset.hh			\
+vaucanson/misc/bitset.hxx			\
+vaucanson/misc/char_traits.hh			\
+vaucanson/misc/char_traits.hxx			\
+vaucanson/misc/constraints.hh			\
 vaucanson/misc/container_ops.hh			\
-vaucanson/misc/iomanip.hh			\
-vaucanson/misc/iomanip.hxx			\
+vaucanson/misc/container_ops.hxx		\
+vaucanson/misc/contract.hh			\
+vaucanson/misc/deferrer.hh			\
+vaucanson/misc/deferrer.hxx			\
+vaucanson/misc/direction.hh			\
 vaucanson/misc/escaper.hh			\
 vaucanson/misc/escaper.hxx			\
-vaucanson/misc/random.hh			\
-vaucanson/misc/random.hxx			\
+vaucanson/misc/functors.hh			\
+vaucanson/misc/functors.hxx			\
+vaucanson/misc/iomanip.hh			\
+vaucanson/misc/iomanip.hxx			\
 vaucanson/misc/limits.hh			\
 vaucanson/misc/misc.hh				\
+vaucanson/misc/random.hh			\
+vaucanson/misc/random.hxx			\
+vaucanson/misc/selectors.hh			\
+vaucanson/misc/special_char_traits.hh		\
+vaucanson/misc/static.hh			\
 vaucanson/misc/support.hh			\
 vaucanson/misc/support.hxx			\
-vaucanson/misc/constraints.hh			\
-vaucanson/misc/selectors.hh			\
-vaucanson/misc/static.hh			\
 vaucanson/misc/unique.hh			\
 vaucanson/misc/unique.hxx			\
-vaucanson/misc/usual_macros.hh			\
-vaucanson/misc/usual_escaped_characters.hxx	\
 vaucanson/misc/usual_escaped_characters.hh	\
-vaucanson/misc/contract.hh			\
-vaucanson/misc/window.hxx			\
+vaucanson/misc/usual_escaped_characters.hxx	\
+vaucanson/misc/usual_macros.hh			\
 vaucanson/misc/window.hh			\
-vaucanson/misc/bitset.hxx			\
-vaucanson/misc/bitset.hh			\
-vaucanson/misc/char_traits.hxx			\
-vaucanson/misc/char_traits.hh			\
-vaucanson/misc/special_char_traits.hh		\
-vaucanson/misc/deferrer.hxx			\
-vaucanson/misc/deferrer.hh			\
-vaucanson/misc/functors.hh			\
-vaucanson/misc/functors.hxx
+vaucanson/misc/window.hxx
 
 nobase_include_HEADERS +=			\
+vaucanson/tools/automaton_tools.hh		\
 vaucanson/tools/bencher.hh			\
 vaucanson/tools/bencher.hxx			\
-vaucanson/tools/automaton_tools.hh		\
+vaucanson/tools/dot_display.hh			\
+vaucanson/tools/dot_display.hxx			\
+vaucanson/tools/dot_dump.hh			\
+vaucanson/tools/dot_dump.hxx			\
+vaucanson/tools/dot_format.hh			\
+vaucanson/tools/dot_format.hxx			\
+vaucanson/tools/dumper.hh			\
+vaucanson/tools/dumper.hxx			\
+vaucanson/tools/fsm_dump.hh			\
+vaucanson/tools/fsm_dump.hxx			\
 vaucanson/tools/gen_book.hh			\
 vaucanson/tools/gen_book.hxx			\
 vaucanson/tools/gen_random.hh			\
 vaucanson/tools/gen_random.hxx			\
-vaucanson/tools/dot_dump.hh			\
-vaucanson/tools/dot_display.hh			\
-vaucanson/tools/dot_format.hxx			\
-vaucanson/tools/dot_format.hh			\
-vaucanson/tools/dumper.hxx			\
-vaucanson/tools/dumper.hh			\
-vaucanson/tools/io.hxx				\
 vaucanson/tools/io.hh				\
-vaucanson/tools/simple_format.hxx		\
-vaucanson/tools/simple_format.hh		\
-vaucanson/tools/simple_dump.hxx			\
+vaucanson/tools/io.hxx				\
+vaucanson/tools/out_display.hh			\
+vaucanson/tools/out_display.hxx			\
 vaucanson/tools/simple_dump.hh			\
-vaucanson/tools/usual_io.hxx			\
+vaucanson/tools/simple_dump.hxx			\
+vaucanson/tools/simple_format.hh		\
+vaucanson/tools/simple_format.hxx		\
 vaucanson/tools/usual_io.hh			\
-vaucanson/tools/dot_dump.hxx			\
-vaucanson/tools/dot_display.hxx			\
-vaucanson/tools/fsm_dump.hh			\
-vaucanson/tools/fsm_dump.hxx			\
+vaucanson/tools/usual_io.hxx			\
+vaucanson/tools/xml_display.hh			\
+vaucanson/tools/xml_display.hxx			\
 vaucanson/tools/xml_dump.hh			\
 vaucanson/tools/xml_dump.hxx			\
 vaucanson/tools/xml_load.hh			\
-vaucanson/tools/xml_load.hxx			\
-vaucanson/tools/xml_display.hh			\
-vaucanson/tools/xml_display.hxx			\
-vaucanson/tools/out_display.hh			\
-vaucanson/tools/out_display.hxx
+vaucanson/tools/xml_load.hxx
 
 nobase_include_HEADERS +=				\
 vaucanson/design_pattern/default_ops.hh			\
 vaucanson/design_pattern/default_ops.hxx		\
+vaucanson/design_pattern/design_pattern.hh		\
 vaucanson/design_pattern/element.hh			\
 vaucanson/design_pattern/element.hxx			\
-vaucanson/design_pattern/meta_element_root.hh		\
-vaucanson/design_pattern/meta_element_root.hxx		\
+vaucanson/design_pattern/element_op_traits.hh		\
 vaucanson/design_pattern/element_ops.hh			\
 vaucanson/design_pattern/element_ops.hxx		\
-vaucanson/design_pattern/design_pattern.hh		\
-vaucanson/design_pattern/syntactic_decorator.hh		\
-vaucanson/design_pattern/syntactic_decorator.hxx	\
-vaucanson/design_pattern/element_op_traits.hh		\
+vaucanson/design_pattern/factory.hh			\
+vaucanson/design_pattern/meta_element_root.hh		\
+vaucanson/design_pattern/meta_element_root.hxx		\
 vaucanson/design_pattern/predecls.hh			\
 vaucanson/design_pattern/slots.hh			\
 vaucanson/design_pattern/slots.hxx			\
 vaucanson/design_pattern/structure.hh			\
 vaucanson/design_pattern/structure.hxx			\
-vaucanson/design_pattern/factory.hh
+vaucanson/design_pattern/syntactic_decorator.hh		\
+vaucanson/design_pattern/syntactic_decorator.hxx
 
 nobase_include_HEADERS +=				\
 vaucanson/algebra/concept/alphabets_base.hh		\
 vaucanson/algebra/concept/alphabets_base.hxx		\
 vaucanson/algebra/concept/freemonoid_base.hh		\
 vaucanson/algebra/concept/freemonoid_base.hxx		\
-vaucanson/algebra/concept/freemonoid_product_base.hh	\
-vaucanson/algebra/concept/freemonoid_product_base.hxx	\
 vaucanson/algebra/concept/freemonoid_product.hh		\
 vaucanson/algebra/concept/freemonoid_product.hxx	\
+vaucanson/algebra/concept/freemonoid_product_base.hh	\
+vaucanson/algebra/concept/freemonoid_product_base.hxx	\
 vaucanson/algebra/concept/letter.hh			\
 vaucanson/algebra/concept/monoid_base.hh		\
 vaucanson/algebra/concept/monoid_base.hxx		\
@@ -146,13 +147,6 @@ vaucanson/algebra/concept/tropical_semiring.hh		\
 vaucanson/algebra/concept/tropical_semiring.hxx
 
 nobase_include_HEADERS +=							     \
-vaucanson/algebra/implementation/letter/couple_letter.hxx			     \
-vaucanson/algebra/implementation/letter/couple_letter.hh			     \
-vaucanson/algebra/implementation/letter/char_letter.hh				     \
-vaucanson/algebra/implementation/letter/range.hh				     \
-vaucanson/algebra/implementation/letter/range.hxx				     \
-vaucanson/algebra/implementation/letter/int_letter.hxx				     \
-vaucanson/algebra/implementation/letter/int_letter.hh				     \
 vaucanson/algebra/implementation/alphabets/alphabets.hh				     \
 vaucanson/algebra/implementation/alphabets/decorated_alphabet.hh		     \
 vaucanson/algebra/implementation/alphabets/decorated_alphabet.hxx		     \
@@ -162,60 +156,67 @@ vaucanson/algebra/implementation/alphabets/set_alphabet.hxx			     \
 vaucanson/algebra/implementation/free_monoid/predefs.hh				     \
 vaucanson/algebra/implementation/free_monoid/str_words.hh			     \
 vaucanson/algebra/implementation/free_monoid/str_words.hxx			     \
-vaucanson/algebra/implementation/free_monoid/words.hh				     \
-vaucanson/algebra/implementation/free_monoid/words.hxx				     \
 vaucanson/algebra/implementation/free_monoid/tools.hh				     \
 vaucanson/algebra/implementation/free_monoid/tools.hxx				     \
+vaucanson/algebra/implementation/free_monoid/words.hh				     \
+vaucanson/algebra/implementation/free_monoid/words.hxx				     \
 vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh  \
 vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx \
+vaucanson/algebra/implementation/letter/char_letter.hh				     \
+vaucanson/algebra/implementation/letter/couple_letter.hh			     \
+vaucanson/algebra/implementation/letter/couple_letter.hxx			     \
+vaucanson/algebra/implementation/letter/int_letter.hh				     \
+vaucanson/algebra/implementation/letter/int_letter.hxx				     \
+vaucanson/algebra/implementation/letter/range.hh				     \
+vaucanson/algebra/implementation/letter/range.hxx				     \
+vaucanson/algebra/implementation/predefs.hh					     \
 vaucanson/algebra/implementation/semiring/numerical_semiring.hh			     \
 vaucanson/algebra/implementation/semiring/numerical_semiring.hxx		     \
+vaucanson/algebra/implementation/semiring/rational_number.hh			     \
+vaucanson/algebra/implementation/semiring/rational_number.hxx			     \
 vaucanson/algebra/implementation/semiring/tropical_semiring.hh			     \
 vaucanson/algebra/implementation/semiring/tropical_semiring.hxx			     \
-vaucanson/algebra/implementation/semiring/rational_number.hxx			     \
-vaucanson/algebra/implementation/semiring/rational_number.hh			     \
+vaucanson/algebra/implementation/series/generalized.hh				     \
+vaucanson/algebra/implementation/series/generalized.hxx				     \
+vaucanson/algebra/implementation/series/krat.hh					     \
+vaucanson/algebra/implementation/series/krat.hxx				     \
+vaucanson/algebra/implementation/series/krat_coefficient.hh			     \
+vaucanson/algebra/implementation/series/krat_coefficient.hxx			     \
+vaucanson/algebra/implementation/series/krat_conversion.hh			     \
+vaucanson/algebra/implementation/series/krat_conversion.hxx			     \
+vaucanson/algebra/implementation/series/krat_exp_is_finite_app.hxx		     \
+vaucanson/algebra/implementation/series/krat_exp_parser.hh			     \
+vaucanson/algebra/implementation/series/krat_exp_parser.hxx			     \
+vaucanson/algebra/implementation/series/krat_exp_pattern.hh			     \
+vaucanson/algebra/implementation/series/krat_exp_pattern.hxx			     \
+vaucanson/algebra/implementation/series/krat_exp_support.hxx			     \
+vaucanson/algebra/implementation/series/krat_exp_transpose.hxx			     \
+vaucanson/algebra/implementation/series/polynoms.hh				     \
+vaucanson/algebra/implementation/series/polynoms.hxx				     \
 vaucanson/algebra/implementation/series/rat/depth_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/depth_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/dispatch_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/dispatch_visitor.hxx		     \
 vaucanson/algebra/implementation/series/rat/dump_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/dump_visitor.hxx			     \
-vaucanson/algebra/implementation/series/rat/star_height_visitor.hh		     \
-vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx		     \
-vaucanson/algebra/implementation/series/rat/length_visitor.hh			     \
-vaucanson/algebra/implementation/series/rat/length_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/exp.hh				     \
 vaucanson/algebra/implementation/series/rat/exp.hxx				     \
+vaucanson/algebra/implementation/series/rat/length_visitor.hh			     \
+vaucanson/algebra/implementation/series/rat/length_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/nodes.hh				     \
 vaucanson/algebra/implementation/series/rat/nodes.hxx				     \
 vaucanson/algebra/implementation/series/rat/random_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/random_visitor.hxx			     \
 vaucanson/algebra/implementation/series/rat/reverse_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/reverse_visitor.hxx			     \
+vaucanson/algebra/implementation/series/rat/star_height_visitor.hh		     \
+vaucanson/algebra/implementation/series/rat/star_height_visitor.hxx		     \
 vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh			     \
 vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx			     \
-vaucanson/algebra/implementation/series/generalized.hh				     \
-vaucanson/algebra/implementation/series/generalized.hxx				     \
-vaucanson/algebra/implementation/series/krat.hh					     \
-vaucanson/algebra/implementation/series/krat.hxx				     \
-vaucanson/algebra/implementation/series/krat_conversion.hh			     \
-vaucanson/algebra/implementation/series/krat_conversion.hxx			     \
-vaucanson/algebra/implementation/series/krat_exp_parser.hh			     \
-vaucanson/algebra/implementation/series/krat_exp_parser.hxx			     \
-vaucanson/algebra/implementation/series/krat_exp_pattern.hh			     \
-vaucanson/algebra/implementation/series/krat_exp_pattern.hxx			     \
-vaucanson/algebra/implementation/series/krat_coefficient.hxx			     \
-vaucanson/algebra/implementation/series/krat_coefficient.hh			     \
-vaucanson/algebra/implementation/series/krat_exp_support.hxx			     \
-vaucanson/algebra/implementation/series/krat_exp_is_finite_app.hxx		     \
-vaucanson/algebra/implementation/series/polynoms.hh				     \
-vaucanson/algebra/implementation/series/polynoms.hxx				     \
 vaucanson/algebra/implementation/series/series.hh				     \
 vaucanson/algebra/implementation/series/series.hxx				     \
 vaucanson/algebra/implementation/series/transpose.hh				     \
-vaucanson/algebra/implementation/series/transpose.hxx				     \
-vaucanson/algebra/implementation/series/krat_exp_transpose.hxx			     \
-vaucanson/algebra/implementation/predefs.hh
+vaucanson/algebra/implementation/series/transpose.hxx
 
 nobase_include_HEADERS +=			\
 vaucanson/algebra/algebra.hh
@@ -237,10 +238,10 @@ vaucanson/algorithms/complement.hh				\
 vaucanson/algorithms/complement.hxx				\
 vaucanson/algorithms/complete.hh				\
 vaucanson/algorithms/complete.hxx				\
-vaucanson/algorithms/concatenate.hh				\
-vaucanson/algorithms/concatenate.hxx				\
 vaucanson/algorithms/composition_cover.hh			\
 vaucanson/algorithms/composition_cover.hxx			\
+vaucanson/algorithms/concatenate.hh				\
+vaucanson/algorithms/concatenate.hxx				\
 vaucanson/algorithms/cut_up.hh					\
 vaucanson/algorithms/cut_up.hxx					\
 vaucanson/algorithms/derived_term_automaton.hh			\
@@ -391,45 +392,42 @@ vaucanson/automata/implementation/transpose_view.hh		\
 vaucanson/automata/implementation/transpose_view.hxx
 
 nobase_include_HEADERS +=				\
-vaucanson/vaucanson.hh					\
 vaucanson/boolean_automaton.hh				\
 vaucanson/boolean_transducer.hh				\
-vaucanson/z_transducer.hh				\
-vaucanson/fmp_transducer.hh				\
-vaucanson/z_fmp_transducer.hh				\
 vaucanson/contexts/automaton_functions.thh		\
 vaucanson/contexts/automaton_functions.thxx		\
-vaucanson/contexts/transducer_functions.thh		\
-vaucanson/contexts/transducer_functions.thxx		\
 vaucanson/contexts/fmp_transducer_functions.thh		\
 vaucanson/contexts/fmp_transducer_functions.thxx	\
+vaucanson/contexts/transducer_functions.thh		\
+vaucanson/contexts/transducer_functions.thxx		\
+vaucanson/fmp_transducer.hh				\
+vaucanson/r_automaton.hh				\
+vaucanson/standard_algorithms.hh			\
+vaucanson/vaucanson.hh					\
+vaucanson/z_automaton.hh				\
+vaucanson/z_fmp_transducer.hh				\
 vaucanson/z_max_plus_automaton.hh			\
 vaucanson/z_min_plus_automaton.hh			\
-vaucanson/z_automaton.hh				\
-vaucanson/r_automaton.hh				\
-vaucanson/standard_algorithms.hh
+vaucanson/z_transducer.hh
 
-nobase_include_HEADERS += $(XMLSOURCES)
-
-
-XMLSOURCES =						\
-	vaucanson/xml/error_handler.hh			\
-	vaucanson/xml/error_handler.hxx			\
-	vaucanson/xml/ios.hh				\
-	vaucanson/xml/ios.hxx				\
-	vaucanson/xml/strings.hh			\
-	vaucanson/xml/strings.hxx			\
-	vaucanson/xml/XML.hh				\
-	vaucanson/xml/XML.hxx				\
-	vaucanson/xml/node.hh				\
-	vaucanson/xml/node.hxx				\
-	vaucanson/xml/session.hh			\
-	vaucanson/xml/session.hxx			\
-	vaucanson/xml/tools.hh				\
-	vaucanson/xml/tools.hxx				\
-	vaucanson/xml/xerces_parser.hh			\
-	vaucanson/xml/xerces_parser.hxx			\
-	vaucanson/xml/xml_chooser.hh			\
-	vaucanson/xml/xml_chooser.hxx			\
-	vaucanson/xml/xml_converter.hh			\
-	vaucanson/xml/xml_converter.hxx
+nobase_include_HEADERS += 			\
+vaucanson/xml/XML.hh				\
+vaucanson/xml/XML.hxx				\
+vaucanson/xml/error_handler.hh			\
+vaucanson/xml/error_handler.hxx			\
+vaucanson/xml/ios.hh				\
+vaucanson/xml/ios.hxx				\
+vaucanson/xml/node.hh				\
+vaucanson/xml/node.hxx				\
+vaucanson/xml/session.hh			\
+vaucanson/xml/session.hxx			\
+vaucanson/xml/strings.hh			\
+vaucanson/xml/strings.hxx			\
+vaucanson/xml/tools.hh				\
+vaucanson/xml/tools.hxx				\
+vaucanson/xml/xerces_parser.hh			\
+vaucanson/xml/xerces_parser.hxx			\
+vaucanson/xml/xml_chooser.hh			\
+vaucanson/xml/xml_chooser.hxx			\
+vaucanson/xml/xml_converter.hh			\
+vaucanson/xml/xml_converter.hxx

@@ -170,7 +170,7 @@ namespace vcsn {
   template<typename Auto_, typename A_>
   void
   do_realtime_here(const AutomataBase<A_>&, Auto_& a,
-		   realtime_type type)
+		   misc::direction_type type)
   {
     typedef Auto_				automaton_t;
     AUTOMATON_TYPES(automaton_t);
@@ -188,10 +188,7 @@ namespace vcsn {
     series_set_elt_t	      series_identity =
       algebra::identity_as<series_set_elt_value_t>::of(a.structure().series());
 
-    if (type == forward)
-      forward_eps_removal_here(a);
-    else
-      backward_eps_removal_here(a);
+    eps_removal_here(a, type);
 
     for_all_states(src, a)
     {
@@ -249,7 +246,7 @@ namespace vcsn {
       a.del_transition(t);
     }
 
-    if (type == forward)
+    if (type == misc::forward)
       coaccessible_here(a);
     else
       accessible_here(a);
@@ -260,7 +257,7 @@ namespace vcsn {
 
   template<typename A, typename T>
   void
-  realtime_here(Element<A, T>& a, realtime_type type)
+  realtime_here(Element<A, T>& a, misc::direction_type type)
   {
     return do_realtime_here(a.structure(), a, type);
   }
@@ -274,7 +271,7 @@ namespace vcsn {
   Auto_
   do_realtime(const AutomataBase<A_>&b,
 	      const Auto_& a,
-	      realtime_type type = forward)
+	      misc::direction_type type = misc::forward)
   {
     Auto_ ret(a);
     do_realtime_here(b, ret, type);
@@ -283,7 +280,7 @@ namespace vcsn {
 
   template<typename A, typename T>
   Element<A, T>
-  realtime(const Element<A, T>& a, realtime_type type)
+  realtime(const Element<A, T>& a, misc::direction_type type)
   {
     return do_realtime(a.structure(), a, type);
   }
