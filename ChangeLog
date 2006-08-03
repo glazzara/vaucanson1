@@ -1,3 +1,8 @@
+2006-08-03  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:
+	Include iostream.
+
 2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
 
 	* include/vaucanson/misc/direction.hh: New.
