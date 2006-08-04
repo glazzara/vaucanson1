@@ -159,7 +159,7 @@ operator Op(const Element<S, T>& e, const U& v)				\
 }									\
 									\
 template<typename U, typename S, typename T>				\
-static 									\ 
+static 									\
 Element<S, T>								\
 operator Op(const U& v, const Element<S, T>& e)				\
 {									\
