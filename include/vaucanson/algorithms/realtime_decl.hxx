@@ -32,7 +32,7 @@ namespace vcsn {
   void
   realtime_here(Element<S, T>& e)
   {
-    return do_realtime_here(e.structure(), e);
+    do_realtime_here(e.structure(), e);
   }
 
   template<typename S, typename T>

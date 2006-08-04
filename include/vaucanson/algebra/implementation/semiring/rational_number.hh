@@ -61,7 +61,7 @@ namespace vcsn
       public:
 
 	/// @name Standard constructors.
-	//@{
+	///@{
 	/// Constructor from numerator and denominator.
 	RationalNumber (int num, unsigned int denom);
 	/// Default constructor. Initialize to zero.
@@ -79,82 +79,86 @@ namespace vcsn
 	 */
 	template <typename T>
 	explicit RationalNumber (const T num);
-	//@}
+	///@}
 
 	/// @name Accessors
-	//@{
+	///@{
 	/// Get the numerator.
-	const int&	num () const;
+	const int& num () const;
 	/// Get the denominator.
-	const unsigned&	denom () const;
-	//@}
+	const unsigned& denom () const;
+	///@}
 
 	std::ostream&	print (std::ostream& ostr) const;
 
 	/// @name Usual Operators.
-	//@{
+	///@{
 	/// Usual numerical operator.
 	RationalNumber	operator+ (const RationalNumber& nb) const;
 	RationalNumber	operator- (const RationalNumber& nb) const;
 	RationalNumber	operator- () const;
 	RationalNumber	operator* (const RationalNumber& nb) const;
 	RationalNumber	operator/ (const RationalNumber& nb) const;
+
 	RationalNumber&	operator+= (const RationalNumber& nb);
 	RationalNumber&	operator-= (const RationalNumber& nb);
 	RationalNumber&	operator*= (const RationalNumber& nb);
 	RationalNumber&	operator/= (const RationalNumber& nb);
-	bool	operator< (const RationalNumber& nb) const;
-	bool	operator> (const RationalNumber& nb) const;
-	bool	operator<= (const RationalNumber& nb) const;
-	bool	operator>= (const RationalNumber& nb) const;
-	bool	operator== (const RationalNumber& nb) const;
-	bool	operator!= (const RationalNumber& nb) const;
-	//@}
+
+	bool operator<  (const RationalNumber& nb) const;
+	bool operator>  (const RationalNumber& nb) const;
+	bool operator<= (const RationalNumber& nb) const;
+	bool operator>= (const RationalNumber& nb) const;
+	bool operator== (const RationalNumber& nb) const;
+	bool operator!= (const RationalNumber& nb) const;
+	///@}
 
 	/// @name Type conversion methods.
-	//@{
+	///@{
 	/**
 	 * Provide Explicit cast operator.
 	 *
-	 * @c to_int ()	 and @c to_double () allow us  to get respectively
+	 * to_int() and to_double() allow us  to get respectively
 	 * an  integer and  a  double from  the	 rational number.  These
 	 * numbers are obtained by dividing the fraction's numerator and
 	 * denominator.
 	 */
-	int		to_int () const;
-	double		to_double () const;
-	//@}
+	int    to_int () const;
+	double to_double () const;
+	///@}
 
       protected:
-	int		num_;
-	unsigned int	denom_;
+	int num_;
+	unsigned int denom_;
 
 	/// @name Fraction simplification
-	//@{
+	///@{
 	/**
 	 * Simplifies the fraction.
 	 *
-	 * @c set_result () is used to	simplify the fraction. We use the
+	 * set_result() is used to simplify the fraction. We use the
 	 * GCD (Greatest  Common Divisor)  algorithm. When there  are no
 	 * arguments, it simply checks the numerator and denominator and
 	 * modifies them if needed.
 	 */
 	RationalNumber&	set_result ();
 	RationalNumber&	set_result (int num, unsigned int denom);
-	//@}
+	///@}
     };
 
     // Provides generic operators on rational (calls the explicit generic
     // constructor for rational).
 # define RATIONAL_NUMBER_OPERATOR(type, op)			\
     template <class T>						\
-    type operator op (const RationalNumber& nb, const T nb2)	\
+    type							\
+    operator op (const RationalNumber& nb, const T nb2)		\
     {								\
       return nb op RationalNumber (nb2);			\
     }								\
 								\
     template <class T>						\
-    type operator op (const T nb2, const RationalNumber& nb)	\
+    type							\
+    operator op (const T nb2, const RationalNumber& nb)		\
     {								\
       return RationalNumber (nb2) op nb;			\
     }
@@ -165,6 +169,7 @@ namespace vcsn
     RATIONAL_NUMBER_OPERATOR (bool, >=);
     RATIONAL_NUMBER_OPERATOR (bool, ==);
     RATIONAL_NUMBER_OPERATOR (bool, !=);
+
     RATIONAL_NUMBER_OPERATOR (RationalNumber, +);
     RATIONAL_NUMBER_OPERATOR (RationalNumber, -);
     RATIONAL_NUMBER_OPERATOR (RationalNumber, *);
@@ -175,7 +180,8 @@ namespace vcsn
 
 # define RATIONAL_NUMBER_IN_PLACE_OPERATOR(op)				\
     template <class T>							\
-    RationalNumber& operator op (RationalNumber& nb, const T nb2)	\
+    RationalNumber&							\
+    operator op (RationalNumber& nb, const T nb2)			\
     {									\
       return nb op RationalNumber (nb2);				\
     }
@@ -187,12 +193,12 @@ namespace vcsn
 
 # undef RATIONAL_NUMBER_IN_PLACE_OPERATOR
 
-    // FIXME: Add other goodies for standard library.
+    // @todo FIXME: Add other goodies for standard library.
     std::ostream& operator<< (std::ostream& ostr, const RationalNumber& nb);
 
-    // FIXME: We might prefer to define gcd and lcm somewhere else.
-    int		gcd (int a, unsigned int b);
-    int		lcm (int a, unsigned int b);
+    // @todo FIXME: We might prefer to define gcd and lcm somewhere else.
+    int gcd (int a, unsigned int b);
+    int lcm (int a, unsigned int b);
 
     /** @} */
     /** @} */

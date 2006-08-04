@@ -1,5 +1,18 @@
 2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
+	Aesthetical/Doxygen changes.
+
+	* include/vaucanson/algorithms/realtime.hxx,
+	* include/vaucanson/algorithms/realtime_decl.hxx:
+	Fix the indirection to do_realtime_here.
+	
+	* src/tests/test-suites/test-suite.mk:New.
+	* src/tests/bin/generate-test-suite.sh: Use it.
+	* src/tests/test-suites/Makefile.am: Ship it.
+
+2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
+
 	* build/check.mk: Run the test in a subshell so that indirections
 	preserve shell messages (such as segmentation violations).
 	* taf-kit/tests/vcsn-b.test: A bit more.

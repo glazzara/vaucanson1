@@ -1,5 +1,5 @@
 ## Vaucanson, a generic library for finite state machines.
-## Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+## Copyright (C) 2006 The Vaucanson Group.
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License
@@ -11,6 +11,14 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-include subdirs.mk
+## This file is used by the Makefile.am of generated test suites.
+include $(top_srcdir)/src/tests/check/check.mk
 
-EXTRA_DIST = generate-all.sh test-suite.mk
+TESTS += failcomp.sh
+EXTRA_DIST = failcomp.sh
+
+AM_CPPFLAGS += -DEXCEPTION_TRAPS
+AM_CPPFLAGS += -DVCSN_SRC_DIR=\"'$(top_srcdir)'\"
+
+TESTS_ENVIRONMENT = CXX="$(CXX)" CXXFLAGS="$(AM_CPPFLAGS) $(CPPFLAGS)"
+

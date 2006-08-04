@@ -216,16 +216,8 @@ makefile_tmp=$makefile.tmp
 {
     dump_header '##'
     cat << EOF
-include \$(top_srcdir)/src/tests/check/check.mk
-AM_CPPFLAGS += -DEXCEPTION_TRAPS
-AM_CPPFLAGS += -DVCSN_SRC_DIR=\"'\$(top_srcdir)'\"
-
-TESTS_ENVIRONMENT = CXX="\$(CXX)" CXXFLAGS="\$(AM_CPPFLAGS) \$(CPPFLAGS)"
-TESTS += failcomp.sh
+include \$(top_srcdir)/src/tests/test-suites/test-suite.mk
 check_PROGRAMS =$(for i in $check_programs; do printf ' \\\n'"$i"; done)
-
-EXTRA_DIST = failcomp.sh
-
 EOF
 
     for prog in $check_programs

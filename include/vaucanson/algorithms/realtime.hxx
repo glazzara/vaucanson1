@@ -170,12 +170,12 @@ namespace vcsn {
   template<typename Auto_, typename A_>
   void
   do_realtime_here(const AutomataBase<A_>&, Auto_& a,
-		   misc::direction_type type)
+		   misc::direction_type type = misc::forward)
   {
-    typedef Auto_				automaton_t;
+    typedef Auto_ automaton_t;
     AUTOMATON_TYPES(automaton_t);
-    typedef std::set<htransition_t>			delta_ret_t;
-    typedef std::deque<htransition_t>			queue_t;
+    typedef std::set<htransition_t> delta_ret_t;
+    typedef std::deque<htransition_t> queue_t;
 
     queue_t		  to_del, src_d;
     delta_ret_t		  dst_d;
@@ -255,11 +255,11 @@ namespace vcsn {
   }
 
 
-  template<typename A, typename T>
+  template<typename S, typename T>
   void
-  realtime_here(Element<A, T>& a, misc::direction_type type)
+  realtime_here(Element<S, T>& a, misc::direction_type type)
   {
-    return do_realtime_here(a.structure(), a, type);
+    do_realtime_here(a.structure(), a, type);
   }
 
 
