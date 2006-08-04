@@ -21,7 +21,7 @@
 /**
  * @file xml_chooser.hh
  *
- * XML specialized class, providing methods to create <labelType> tag
+ * XML specialized class, providing methods to create @c <labelType> tag
  * and to create labels in the XML document.
  *
  * @see vcsn::xml::xml_converter, vcsn::xml::Node
@@ -59,17 +59,23 @@ namespace vcsn
     struct xml_chooser_base
     {
 	const char* choose_start_tag();
-	void create_type_tag(const Element<S, T>&, xercesc::DOMDocument*,
-			     xercesc::DOMElement*);
-	void create_label(xercesc::DOMDocument*,
-			  htransition_t, const Element<S, T>&,
-			  xercesc::DOMElement*, bool use_label_node);
-	void create_initial_label(xercesc::DOMDocument*,
-				  hstate_t, const Element<S, T>&,
-				  xercesc::DOMElement*, bool use_label_node);
-	void create_final_label(xercesc::DOMDocument*,
-				hstate_t, const Element<S, T>&,
-				xercesc::DOMElement*, bool use_label_node);
+
+	void create_type_tag(const Element<S, T>& aut,
+			     xercesc::DOMDocument* doc,
+			     xercesc::DOMElement* root);
+
+	void create_label(xercesc::DOMDocument* doc,
+			  htransition_t e, const Element<S, T>&aut,
+			  xercesc::DOMElement* elt, bool use_label_node);
+
+	void create_initial_label(xercesc::DOMDocument* doc,
+				  hstate_t s, const Element<S, T>& aut,
+				  xercesc::DOMElement* elt,
+				  bool use_label_node);
+	void create_final_label(xercesc::DOMDocument* doc,
+				hstate_t s, const Element<S, T>& aut,
+				xercesc::DOMElement* elt,
+				bool use_label_node);
     };
 
     /**
@@ -105,8 +111,9 @@ namespace vcsn
     struct xml_chooser<Transducer<S>, T> : xml_chooser_base<Transducer<S>, T>
     {
 	const char* choose_start_tag();
-	void create_type_tag(const Element<Transducer<S>, T>&,
-			     xercesc::DOMDocument*, xercesc::DOMElement*);
+	void create_type_tag(const Element<Transducer<S>, T>& aut,
+			     xercesc::DOMDocument* doc, 
+			     xercesc::DOMElement* root);
     };
 
     /**
@@ -127,8 +134,9 @@ namespace vcsn
     struct xml_chooser<FMPtype> : xml_chooser_base<FMPtype>
     {
 	const char* choose_start_tag();
-	void create_type_tag(const Element<FMPtype>&, xercesc::DOMDocument*,
-			     xercesc::DOMElement*);
+	void create_type_tag(const Element<FMPtype>& aut, 
+			     xercesc::DOMDocument* doc,
+			     xercesc::DOMElement* root);
     };
 
 

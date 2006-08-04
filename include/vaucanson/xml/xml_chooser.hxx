@@ -147,15 +147,16 @@ namespace vcsn
     template <class S, class T, class M1, class M2>
     const char*
     xml_chooser<FMPtype>::choose_start_tag()
-    { return "transducer"; }
+    { 
+      return "transducer"; 
+    }
 
 
     template <class S, class T, class M1, class M2>
     void
-    xml_chooser<FMPtype>
-    ::create_type_tag(const Element<FMPtype>& aut,
-		      xercesc::DOMDocument* doc,
-		      xercesc::DOMElement* root)
+    xml_chooser<FMPtype>::create_type_tag(const Element<FMPtype>& aut,
+					  xercesc::DOMDocument* doc,
+					  xercesc::DOMElement* root)
     {
       xercesc::DOMElement* type = doc->createElement(transcode("labelType"));
       xercesc::DOMElement* monoid =

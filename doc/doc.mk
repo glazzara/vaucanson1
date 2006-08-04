@@ -16,10 +16,12 @@
 # because we actually also provide the tex output, so in fact the path
 # has the same length: tex -> html.
 %.html: %.txt
-	$(RST2HTML) --halt=warning --input-encoding=iso-8859-1 $< >$@
+	$(RST2HTML) --halt=warning --input-encoding=iso-8859-1 $< >$@.tmp
+	mv $@.tmp $@
 
 %.tex: %.txt
-	$(RST2LATEX) --halt=warning --input-encoding=iso-8859-1 $< >$@
+	$(RST2LATEX) --halt=warning --input-encoding=iso-8859-1 $< >$@.tmp
+	mv $@.tmp $@
 
 share_dir = $(top_srcdir)/doc/share
 # Cannot factor here because Automake needs to be able to read

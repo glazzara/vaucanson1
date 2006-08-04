@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -140,13 +140,13 @@ namespace vcsn {
     letter_t choose() const;
 
     /// Select a random letter in all the possible letters in letter_t.
-    letter_t    random_letter() const;
+    letter_t random_letter() const;
 
     /// Retrieve the number of letters in the alphabet.
-    size_t size()                      const;
+    size_t size() const;
 
     /// Retrieve the maximum number of letters the alphabet can contain.
-    size_t max_size()			const;
+    size_t max_size() const;
 
     /// Test for matching letters modulo the alphabet meta-symbols.
     bool letter_equality(letter_t, letter_t) const;

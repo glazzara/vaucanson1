@@ -72,78 +72,83 @@ namespace vcsn {
     | MetaElement<SeriesBase<Self>, T> |
     `---------------------------------*/
 
-  template<typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_value_t
-  MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_value_t& m) const
+  template<typename Self, typename T>
+  typename MetaElement<algebra::SeriesBase<Self>, T>::semiring_elt_value_t
+  MetaElement<algebra::SeriesBase<Self>, T>::get(const monoid_elt_value_t& m) const
   {
     // assertion(structure().monoid().contains(m));
     return op_series_get(this->structure(), this->value(), m);
   }
 
-  template<typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::semiring_elt_t
-  MetaElement<algebra::SeriesBase<S>, T>::get(const monoid_elt_t& m) const
+  template<typename Self, typename T>
+  typename MetaElement<algebra::SeriesBase<Self>, T>::semiring_elt_t
+  MetaElement<algebra::SeriesBase<Self>, T>::get(const monoid_elt_t& m) const
   {
     return semiring_elt_t(this->structure().semiring(), get(m.value()));
   }
 
-  template<typename S, typename T>
+  template<typename Self, typename T>
   void
-  MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_value_t& m,
-						const semiring_elt_value_t& w)
+  MetaElement<algebra::SeriesBase<Self>, T>::assoc(const monoid_elt_value_t& m,
+						   const semiring_elt_value_t& w)
   {
     // assertion(structure().monoid().contains(m));
     // assertion(structure().semiring().contains(w));
     return op_series_set(this->structure(), this->value(), m, w);
   }
 
-  template<typename S, typename T>
+  template<typename Self, typename T>
   void
-  MetaElement<algebra::SeriesBase<S>, T>::assoc(const monoid_elt_t& m,
-						const semiring_elt_t& w)
+  MetaElement<algebra::SeriesBase<Self>, T>::assoc(const monoid_elt_t& m,
+						   const semiring_elt_t& w)
   {
     assoc(m.value(), w.value());
   }
 
-  template<typename S, typename T>
+  template<typename Self, typename T>
   bool
-  MetaElement<algebra::SeriesBase<S>, T>::is_finite_app() const
+  MetaElement<algebra::SeriesBase<Self>, T>::is_finite_app() const
   {
     return op_is_finite_app(this->structure(), this->value());
   }
 
-  template <typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
-  MetaElement<algebra::SeriesBase<S>, T>::choose_from_supp() const
+  template <typename Self, typename T>
+  typename MetaElement<algebra::SeriesBase<Self>, T>::monoid_elt_t
+  MetaElement<algebra::SeriesBase<Self>, T>::choose_from_supp() const
   {
     return
-      typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
+      typename MetaElement<algebra::SeriesBase<Self>, T>::monoid_elt_t
       (this->structure().monoid(),
        op_choose_from_supp(this->structure(), this->value()));
   }
 
-  template <typename S, typename T>
+  template <typename Self, typename T>
   void
-  MetaElement<algebra::SeriesBase<S>, T>::transpose()
+  MetaElement<algebra::SeriesBase<Self>, T>::transpose()
   {
     op_in_transpose(this->structure(), this->value());
   }
 
-  template <typename S, typename T>
-  typename MetaElement<algebra::SeriesBase<S>, T>::support_t
-  MetaElement<algebra::SeriesBase<S>, T>::supp() const
+  template <typename Self, typename T>
+  typename MetaElement<algebra::SeriesBase<Self>, T>::support_t
+  MetaElement<algebra::SeriesBase<Self>, T>::supp() const
   {
     return op_support(this->structure(), this->value());
   }
 
-  template<typename S, typename T>
-  MetaElement<algebra::SeriesBase<S>, T>::MetaElement()
+  template<typename Self, typename T>
+  MetaElement<algebra::SeriesBase<Self>, T>::MetaElement()
   {}
 
-  template<typename S, typename T>
-  MetaElement<algebra::SeriesBase<S>, T>::MetaElement(const MetaElement& other) :
-    MetaElement<algebra::SemiringBase<S>, T>(other)
+  template<typename Self, typename T>
+  MetaElement<algebra::SeriesBase<Self>, T>::MetaElement(const MetaElement& other) :
+    MetaElement<algebra::SemiringBase<Self>, T>(other)
   {}
+
+
+  /*------.
+  | Ops.  |
+  `------*/
 
   template<typename S, typename T>
   bool op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t)
@@ -158,7 +163,8 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T))
+  Element<S, T> 
+  op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T))
   {
     pure_service_call ("default implementation of op_series_choose()");
     return Element<S, T>();
@@ -206,8 +212,8 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  Element<S, T> hadamard(const Element<S, T>& lhs,
-			 const Element<S, T>& rhs)
+  Element<S, T> 
+  hadamard(const Element<S, T>& lhs, const Element<S, T>& rhs)
   {
     typedef Element<S, T> series_set_elt_t;
     typedef typename Element<S, T>::monoid_elt_t monoid_elt_t;
@@ -239,13 +245,15 @@ namespace vcsn {
   }
 
   template <class S, class T>
-  T op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), const T& src_)
+  T 
+  op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), const T& src_)
   {
     return src_;
   }
 
   template <class S, class T, class U>
-  T op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const U& src_)
+  T
+  op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const U& src_)
   {
     typedef typename algebra::series_traits<U>::support_t	support_t;
     typedef typename Element<S, T>::monoid_elt_t		monoid_elt_t;

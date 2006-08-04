@@ -33,8 +33,7 @@
  * @see invert()
  */
 
-# include <vaucanson/automata/concept/automata_base.hh>
-# include <vaucanson/automata/concept/transducer.hh>
+# include <vaucanson/design_pattern/design_pattern.hh>
 
 namespace vcsn {
 
@@ -59,7 +58,7 @@ namespace vcsn {
    */
   template<typename A, typename T>
   Element<A, T>&
-  invert(const Element<A, T>&);
+  invert(const Element<A, T>& t);
 
 } // vcsn
 

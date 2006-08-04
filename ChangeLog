@@ -1,3 +1,73 @@
+2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	Many Doxygen fixes.
+	Basically:
+	- declare the macros it has to expand to do its job
+	- use the same parameter names in declarations and implementations
+
+	* include/vaucanson/misc/iomanip.hh: Fix @param/@arg inversion.
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hh,
+	* include/vaucanson/algebra/implementation/semiring/rational_number.hxx:
+	Make macro uses more local.
+	(min, max): Declare them inline, as per the implementation file.
+	* include/vaucanson/algebra/concept/series_base.hh,
+	* include/vaucanson/algebra/concept/series_base.hxx:
+	Use Self or S consistently between declaration and implementation.
+	Formatting changes.
+	* include/vaucanson/algebra/concept/alphabets_base.hh,
+	* include/vaucanson/algebra/concept/alphabets_base.hxx:
+	Ditto.
+	* include/vaucanson/xml/xml_converter.hh,
+	* include/vaucanson/xml/xml_chooser.hxx,
+	* include/vaucanson/xml/xml_chooser.hh: 
+	Name the formal arguments consistently with the implementation.
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/node.hxx: Likewise.
+	Use macros more locally.
+	Sort uses.
+	Undefine where defined (not in the included file).
+	* include/vaucanson/xml/xml_converter.hxx: Use the local typedefs
+	instead of full length definitions.
+	* include/vaucanson/xml/tools.hh, include/vaucanson/xml/tools.hxx:
+	Qualify the @file, there is another tools.*.
+	Document in the hh file, not the hxx.
+	Name the formal arguments.
+	* include/vaucanson/design_pattern/element_ops.hxx:
+	Define operators as static, consistently with the declarations.
+	Formatting changes.
+	Use consistently the same formal argument names.
+	* include/vaucanson/contexts/automaton_functions.thxx,
+	* include/vaucanson/contexts/transducer_functions.thxx,
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx,
+	* include/vaucanson/algorithms/normalized_composition.hxx:
+	Don't use Doxygen comments when not talking to it.
+	* include/vaucanson/algorithms/evaluation_fmp.hh: 
+	Remove incomplete doc.
+	* include/vaucanson/algorithms/normalized_composition.hh:
+	Remove the documentation of imaginary arguments.
+	* include/vaucanson/algorithms/eps_removal.hh:
+	Update the doc to the use of direction_type.
+	* include/vaucanson/algorithms/invert.hh,
+	* include/vaucanson/algorithms/invert.hxx: Move most of the
+	includes from the hh to the hxx.
+	Formatting changes.
+	Fix the CPP guards.
+	* include/vaucanson/automata/implementation/graph.hh:
+	Formatting changes.
+	* include/vaucanson/automata/concept/handlers.hxx:
+	Ditto.
+	Remove useless includes.
+
+	* doc/Makefile.am: Put ref in srcdir.
+	Stop doing/shipping/installing ref.tar.gz.
+	* doc/NEWS.txt: Update.
+	* doc/doc.mk: Use an intermediate temp file.
+	* doc/doc.doxy.in (EXPAND_AS_DEFINED): Define.
+	* doc/manual/developer.tex: More dev guide.
+ 
+	* include/vaucanson/algorithms/forward_realtime.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx: Aesthetical changes.
+
 2006-08-03  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* include/vaucanson/algebra/implementation/series/krat_exp_parser.hxx:

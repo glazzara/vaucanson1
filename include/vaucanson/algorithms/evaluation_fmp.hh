@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -39,9 +39,6 @@ namespace vcsn {
  /**
    * Evaluation over normalized and sub-normalized transducers, seen
    * as automata over a free monoid product.
-   *
-   * @param
-   *
    */
 
   template<typename SA, typename TA,

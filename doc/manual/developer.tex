@@ -4,6 +4,21 @@ The chapter is work in progress.  It is not meant for user of the
 \Vauc library, but to developer and contributor who wish to include
 code in \Vauc.
 
+\section{Tools}
+
+We use a number of tools during the development, so called
+\Index{\dfn{maintainer tools}} because they are not required by the
+end user.
+\begin{description}
+\item[Autoconf] Generates \command{configure} which probes the user
+  system to configure the compilation.
+\item[Doxygen] Reference documentation generator.  Available as
+  \code{doxygen} in most package systems.
+\item[rst2latex, rst2html] These tools are used to convert
+  reStructuredText into more common formats.  Available in the
+  DarwinPorts as \code{py-docutils}.
+\end{description}
+
 \section{Contributing Code}
 \label{sec:contributing-code}
 
@@ -78,6 +93,28 @@ Until this is written, please refer to
   Coding Style}.
 
 Emacs users should use the indentation style of \file{data/vaucanson.el}.
+
+\paragraph{Be extremely conservative with header inclusions}
+Do not include something that is not needed \strong{by the file
+  itself}.  Do not include in a \file{*.hh} something that is required
+by the \file{*.hxx} file itself.
+
+\paragraph{Document in the \file{*.hh}}
+Do not document in the implementation files, but in the declaration
+files.  Unless, of course, the function is private and not
+``exported''.
+
+\paragraph{Use the same signature in the declaration and in the
+  implementation}
+It's a bad idea not to follow the same name on both sides, and it
+confuses the reader.  Even worse is not giving names to the argument
+in the declarations, giving the impression that the argument is
+ignored, while using it for real in the implementation.
+
+Keep also the same template parameter names.
+
+Inconsistency confuses users, peer developers, and... Doxygen too.
+
 
 \subsubsection{Includes}
 \index{\#include}

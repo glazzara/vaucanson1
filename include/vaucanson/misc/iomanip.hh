@@ -61,11 +61,11 @@ namespace vcsn
      * array to an element of type T*. When an erase_event is received,
      * the element idx refers to in the stream is deleted.
      *
-     * @param T	Type of the pointed element.
+     * @arg @c T	Type of the pointed element.
      *
-     * @arg ev	IO event.
-     * @arg io	Related stream.
-     * @arg idx	Index in the internal extensible array of a pointer to delete.
+     * @param ev  IO event.
+     * @param io  Related stream.
+     * @param idx Index in the internal extensible array of a pointer to delete.
      *
      * @see iomanip
      * @author Thomas Claveirole <thomas.claveirole@lrde.epita.fr>

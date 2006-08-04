@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
 #ifndef VCSN_AUTOMATA_CONCEPT_HANDLERS_HXX
 # define VCSN_AUTOMATA_CONCEPT_HANDLERS_HXX
 
-# include <iostream>
+# include <vaucanson/automata/concept/handlers.hh>
 
 namespace vcsn
 {
@@ -35,7 +35,8 @@ namespace vcsn
   {}
 
   template<typename Tag>
-  handler<Tag>& handler<Tag>::operator=(const handler<Tag>& h)
+  handler<Tag>& 
+  handler<Tag>::operator=(const handler<Tag>& h)
   {
     v_ = h.v_;
     return *this;

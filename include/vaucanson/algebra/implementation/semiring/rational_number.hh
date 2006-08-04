@@ -153,17 +153,10 @@ namespace vcsn
       return nb op RationalNumber (nb2);			\
     }								\
 								\
-	template <class T>					\
-	type operator op (const T nb2, const RationalNumber& nb)\
-	{							\
-	  return RationalNumber (nb2) op nb;			\
-	}
-
-# define RATIONAL_NUMBER_IN_PLACE_OPERATOR(op)				\
-    template <class T>							\
-    RationalNumber& operator op (RationalNumber& nb, const T nb2)	\
-    {									\
-      return nb op RationalNumber (nb2);				\
+    template <class T>						\
+    type operator op (const T nb2, const RationalNumber& nb)	\
+    {								\
+      return RationalNumber (nb2) op nb;			\
     }
 
     RATIONAL_NUMBER_OPERATOR (bool, <);
@@ -176,12 +169,22 @@ namespace vcsn
     RATIONAL_NUMBER_OPERATOR (RationalNumber, -);
     RATIONAL_NUMBER_OPERATOR (RationalNumber, *);
     RATIONAL_NUMBER_OPERATOR (RationalNumber, /);
+
+# undef RATIONAL_NUMBER_OPERATOR
+
+
+# define RATIONAL_NUMBER_IN_PLACE_OPERATOR(op)				\
+    template <class T>							\
+    RationalNumber& operator op (RationalNumber& nb, const T nb2)	\
+    {									\
+      return nb op RationalNumber (nb2);				\
+    }
+
     RATIONAL_NUMBER_IN_PLACE_OPERATOR (+=);
     RATIONAL_NUMBER_IN_PLACE_OPERATOR (-=);
     RATIONAL_NUMBER_IN_PLACE_OPERATOR (*=);
     RATIONAL_NUMBER_IN_PLACE_OPERATOR (/=);
 
-# undef RATIONAL_NUMBER_OPERATOR
 # undef RATIONAL_NUMBER_IN_PLACE_OPERATOR
 
     // FIXME: Add other goodies for standard library.
@@ -202,8 +205,8 @@ namespace std
   template <>
   struct numeric_limits< ::vcsn::algebra::RationalNumber >
   {
-      static ::vcsn::algebra::RationalNumber min ();
-      static ::vcsn::algebra::RationalNumber max ();
+      static inline ::vcsn::algebra::RationalNumber min ();
+      static inline ::vcsn::algebra::RationalNumber max ();
   };
 
 } // End of namespace std.

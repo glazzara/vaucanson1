@@ -1,4 +1,4 @@
-// product.hh: this file is part of the Vaucanson project.
+// invert.hxx: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -15,26 +15,30 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef   	INVERT_HXX_
-# define   	INVERT_HXX_
+#ifndef	VCSN_ALGORITHMS_INVERT_HXX_
+# define VCSN_ALGORITHMS_INVERT_HXX_
 
 # include <map>
+
+# include <vaucanson/automata/concept/automata_base.hh>
+# include <vaucanson/automata/concept/transducer.hh>
 
 # include <vaucanson/misc/usual_macros.hh>
 
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/realtime.hh>
 
-namespace vcsn {
+namespace vcsn 
+{
 
-
-  /*----------------------------------.
-  | Specialization for RW transducers |
-  `----------------------------------*/
+  /*------------------------------------.
+  | Specialization for RW transducers.  |
+  `------------------------------------*/
 
   template<typename S, typename T>
-  Element<S, T>& do_invert_rw(Element<S, T>& t,
-			      Element<S, T>& u)
+  Element<S, T>& 
+  do_invert_rw(Element<S, T>& t,
+	       Element<S, T>& u)
   {
     typedef Element<S, T> Trans_t;
     typedef typename output_projection_helper<S, T>::ret Auto_t;
@@ -53,66 +57,66 @@ namespace vcsn {
       u.set_final (map_t_u[*p]);
 
     for_all_transitions (e, t)
+    {
+      semiring_elt_t exp = t.output_of(*e);
+
+      typename Auto_t::set_t auto_structure
+	(typename Auto_t::set_t::series_set_t
+	 (t.structure().series().semiring()));
+      Auto_t auto_tmp(auto_structure);
+
+      // As the output of each transition is not supposed to be
+      // realtime we build the standard automaton corresponding to
+      // this expression
+      standard_of(auto_tmp, exp.value());
+
+      std::map<hstate_t, hstate_t> map_auto_u;
+
+      for_all_states (p, auto_tmp)
+	if (auto_tmp.is_initial (*p))
+	  map_auto_u[*p] = map_t_u[t.src_of(*e)];
+	else
+	  map_auto_u[*p] = u.add_state();
+
+      typename semiring_elt_t::semiring_elt_t
+	o_sm_zero (u.structure().series().semiring().semiring());
+      monoid_elt_t monoid_identity = u.series().monoid().empty_;
+
+      monoid_elt_t a (u.structure().series().monoid());
+      semiring_elt_t sm (u.structure().series().semiring());
+      series_set_elt_t s (u.structure().series());
+
+      for (typename Auto_t::transition_iterator f =
+	     auto_tmp.transitions().begin();
+	   f != auto_tmp.transitions().end();
+	   ++f)
       {
-	semiring_elt_t exp = t.output_of(*e);
+	a = auto_tmp.word_of (*f);
 
-	typename Auto_t::set_t auto_structure
-	  (typename Auto_t::set_t::series_set_t
-	   (t.structure().series().semiring()));
-	Auto_t auto_tmp(auto_structure);
+	s.assoc (a, algebra::identity_as<semiring_elt_value_t>
+		 ::of(u.series().semiring()));
 
-	// As the output of each transition is not supposed to be
-	// realtime we build the standard automaton corresponding to
-	// this expression
-	standard_of(auto_tmp, exp.value());
-
-	std::map<hstate_t, hstate_t> map_auto_u;
-
-	for_all_states (p, auto_tmp)
-	  if (auto_tmp.is_initial (*p))
-	    map_auto_u[*p] = map_t_u[t.src_of(*e)];
-	  else
-	    map_auto_u[*p] = u.add_state();
-
-	typename semiring_elt_t::semiring_elt_t
-	  o_sm_zero (u.structure().series().semiring().semiring());
-	monoid_elt_t monoid_identity = u.series().monoid().empty_;
-
-	monoid_elt_t a (u.structure().series().monoid());
-	semiring_elt_t sm (u.structure().series().semiring());
-	series_set_elt_t s (u.structure().series());
-
-	for (typename Auto_t::transition_iterator f =
-	       auto_tmp.transitions().begin();
-	     f != auto_tmp.transitions().end();
-	     ++f)
-	{
-	  a = auto_tmp.word_of (*f);
-
-	  s.assoc (a, algebra::identity_as<semiring_elt_value_t>
-		   ::of(u.series().semiring()));
-
-	  u.add_series_transition (map_auto_u[auto_tmp.src_of(*f)],
-				   map_auto_u[auto_tmp.dst_of(*f)],
-				   s);
-	}
-
- 	a = t.input_of (*e);
- 	for (typename Auto_t::final_iterator q = auto_tmp.final().begin();
- 	     q != auto_tmp.final().end();
- 	     ++q)
-	{
-	  typedef typename semiring_elt_t::semiring_elt_t output_sm_t;
-	  typedef typename output_sm_t::value_t output_sm_value_t;
-
-	  sm.assoc (a, algebra::identity_as<output_sm_value_t>
-		    ::of(u.series().semiring().semiring()));
-	  s.assoc(monoid_identity, sm);
-	  u.add_series_transition(map_auto_u[*q],
-				  map_t_u[t.dst_of(*e)],
-				  s);
-	}
+	u.add_series_transition (map_auto_u[auto_tmp.src_of(*f)],
+				 map_auto_u[auto_tmp.dst_of(*f)],
+				 s);
       }
+
+      a = t.input_of (*e);
+      for (typename Auto_t::final_iterator q = auto_tmp.final().begin();
+	   q != auto_tmp.final().end();
+	   ++q)
+      {
+	typedef typename semiring_elt_t::semiring_elt_t output_sm_t;
+	typedef typename output_sm_t::value_t output_sm_value_t;
+
+	sm.assoc (a, algebra::identity_as<output_sm_value_t>
+		  ::of(u.series().semiring().semiring()));
+	s.assoc(monoid_identity, sm);
+	u.add_series_transition(map_auto_u[*q],
+				map_t_u[t.dst_of(*e)],
+				s);
+      }
+    }
 
     realtime_here(u);
 
@@ -121,9 +125,9 @@ namespace vcsn {
 
 
 
-  /*---------------------------.
-  | Dispatch for RW tranducers |
-  `---------------------------*/
+  /*-----------------------------.
+  | Dispatch for RW tranducers.  |
+  `-----------------------------*/
 
   template<typename S, typename T>
   Element<S, T>&
@@ -170,7 +174,7 @@ namespace vcsn {
 
 
   /*----------.
-  |  Facades  |
+  | Facades.  |
   `----------*/
 
   template<typename S, typename T>
@@ -191,4 +195,4 @@ namespace vcsn {
   }
 }
 
-#endif /* !INVERT_HXX_ */
+#endif // !VCSN_ALGORITHMS_INVERT_HXX_

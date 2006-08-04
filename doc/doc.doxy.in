@@ -1,3 +1,19 @@
+# doc.doxy.in: this file is part of the Vaucanson project.
+#
+# Vaucanson, a generic library for finite state machines.
+#
+# Copyright (C) 2004, 2006 The Vaucanson Group.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# The complete GNU General Public Licence Notice can be found as the
+# `COPYING' file in the root directory.
+#
+# The Vaucanson Group consists of people listed in the `AUTHORS' file.
+
 #---------------------------------------------------------------------------
 # Project related configuration options
 #---------------------------------------------------------------------------
@@ -24,6 +40,7 @@ ALIASES                =
 OPTIMIZE_OUTPUT_FOR_C  = NO
 OPTIMIZE_OUTPUT_JAVA   = NO
 SUBGROUPING            = YES
+
 #---------------------------------------------------------------------------
 # Build related configuration options
 #---------------------------------------------------------------------------
@@ -48,15 +65,17 @@ GENERATE_DEPRECATEDLIST= YES
 ENABLED_SECTIONS       =
 MAX_INITIALIZER_LINES  = 30
 SHOW_USED_FILES        = NO
+
 #---------------------------------------------------------------------------
 # configuration options related to warning and progress messages
 #---------------------------------------------------------------------------
-QUIET                  = YES
+QUIET                  = NO
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = NO
 WARN_IF_DOC_ERROR      = YES
 WARN_FORMAT            = "$file:$line: $text"
 WARN_LOGFILE           =
+
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
@@ -74,6 +93,7 @@ EXAMPLE_RECURSIVE      = NO
 IMAGE_PATH             =
 INPUT_FILTER           =
 FILTER_SOURCE_FILES    = NO
+
 #---------------------------------------------------------------------------
 # configuration options related to source browsing
 #---------------------------------------------------------------------------
@@ -83,12 +103,14 @@ STRIP_CODE_COMMENTS    = YES
 REFERENCED_BY_RELATION = YES
 REFERENCES_RELATION    = YES
 VERBATIM_HEADERS       = YES
+
 #---------------------------------------------------------------------------
 # configuration options related to the alphabetical class index
 #---------------------------------------------------------------------------
 ALPHABETICAL_INDEX     = YES
 COLS_IN_ALPHA_INDEX    = 5
 IGNORE_PREFIX          =
+
 #---------------------------------------------------------------------------
 # configuration options related to the HTML output
 #---------------------------------------------------------------------------
@@ -109,6 +131,7 @@ DISABLE_INDEX          = NO
 ENUM_VALUES_PER_LINE   = 4
 GENERATE_TREEVIEW      = NO
 TREEVIEW_WIDTH         = 250
+
 #---------------------------------------------------------------------------
 # configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
@@ -124,6 +147,7 @@ PDF_HYPERLINKS         = YES
 USE_PDFLATEX           = YES
 LATEX_BATCHMODE        = YES
 LATEX_HIDE_INDICES     = NO
+
 #---------------------------------------------------------------------------
 # configuration options related to the RTF output
 #---------------------------------------------------------------------------
@@ -133,6 +157,7 @@ COMPACT_RTF            = NO
 RTF_HYPERLINKS         = NO
 RTF_STYLESHEET_FILE    =
 RTF_EXTENSIONS_FILE    =
+
 #---------------------------------------------------------------------------
 # configuration options related to the man page output
 #---------------------------------------------------------------------------
@@ -140,6 +165,7 @@ GENERATE_MAN           = NO
 MAN_OUTPUT             = man
 MAN_EXTENSION          = .3
 MAN_LINKS              = NO
+
 #---------------------------------------------------------------------------
 # configuration options related to the XML output
 #---------------------------------------------------------------------------
@@ -148,10 +174,12 @@ XML_OUTPUT             = xml
 XML_SCHEMA             =
 XML_DTD                =
 XML_PROGRAMLISTING     = YES
+
 #---------------------------------------------------------------------------
 # configuration options for the AutoGen Definitions output
 #---------------------------------------------------------------------------
 GENERATE_AUTOGEN_DEF   = NO
+
 #---------------------------------------------------------------------------
 # configuration options related to the Perl module output
 #---------------------------------------------------------------------------
@@ -159,18 +187,72 @@ GENERATE_PERLMOD       = NO
 PERLMOD_LATEX          = NO
 PERLMOD_PRETTY         = YES
 PERLMOD_MAKEVAR_PREFIX =
+
 #---------------------------------------------------------------------------
 # Configuration options related to the preprocessor
 #---------------------------------------------------------------------------
 ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
-EXPAND_ONLY_PREDEF     = NO
+EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
 INCLUDE_PATH           =
 INCLUDE_FILE_PATTERNS  =
 PREDEFINED             =
-EXPAND_AS_DEFINED      =
+
+# Macros found in design_pattern/elements_ops.hxx,
+# automata/implementation/kind_adapter.hh, xml/node.hxx, xml/node.hh,
+# graph.hh, graph.hxx, automata/implementation/transpose_view.hh,
+# algebra/implementation/semiring/rational_number.hh.
+EXPAND_AS_DEFINED      =						\
+			TParmFMP TParam AUTtype FMPtype			\
+									\
+			ELEMENT_OP_PROTO_SYM				\
+			ELEMENT_OP_PROTO_LEFT_FOREIGN			\
+			ELEMENT_OP_PROTO_RIGHT_FOREIGN			\
+			DELEGATE_SYM					\
+			DELEGATE_LEFT_FOREIGN				\
+			DELEGATE_RIGHT_FOREIGN				\
+			BOOLEAN_DELEGATION				\
+			BOOLEAN_CANONICAL_DELEGATION			\
+			ELEMENT_OPERATOR				\
+									\
+			ADAPT_ADD_LETTER_TRANSITION_TO_SERIES_LABEL	\
+			ADAPT_LETTER_OF_TO_SERIES_LABEL			\
+			ADAPT_WORD_OF_TO_SERIES_LABEL			\
+			ADAPT_ADD_SERIE_TRANSITION_TO_LETTERS_LABEL	\
+			ADAPT_WORD_OF_TO_LETTERS_LABEL			\
+			ADAPT_SERIE_OF_TO_LETTERS_LABEL			\
+									\
+			PROCESS_NODE					\
+			PROCESS_ROOT_NODE				\
+			PROCESS_TYPE_NODE				\
+									\
+			CREATE_CLASSNODE				\
+			CREATE_PARAM_CLASSNODE				\
+			TParm						\
+			TParmFMP					\
+			AUTtype						\
+			TRANStype					\
+			FMPtype						\
+			CREATE_SPEC_TYPE_NODE				\
+			CREATE_SPEC_PARAM_NODE				\
+			register_in_factory				\
+			register_all_factory				\
+									\
+			DECLARE_DELTA_FUNCTION				\
+			DECLARE_DELTAF_BOOL_FUNCTION			\
+			DECLARE_DELTAF_FUNCTION				\
+									\
+			TParam GClass					\
+									\
+			AutoType					\
+									\
+			RATIONAL_NUMBER_OPERATOR			\
+			RATIONAL_NUMBER_IN_PLACE_OPERATOR
+
+
 SKIP_FUNCTION_MACROS   = YES
+
 #---------------------------------------------------------------------------
 # Configuration::addtions related to external references
 #---------------------------------------------------------------------------
@@ -179,6 +261,7 @@ GENERATE_TAGFILE       =
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
 PERL_PATH              = /usr/bin/perl
+
 #---------------------------------------------------------------------------
 # Configuration options related to the dot tool
 #---------------------------------------------------------------------------
@@ -201,7 +284,12 @@ MAX_DOT_GRAPH_HEIGHT   = 1024
 MAX_DOT_GRAPH_DEPTH    = 0
 GENERATE_LEGEND        = YES
 DOT_CLEANUP            = YES
+
 #---------------------------------------------------------------------------
 # Configuration::addtions related to the search engine
 #---------------------------------------------------------------------------
 SEARCHENGINE           = NO
+
+# Local Variables:
+# mode: Makefile
+# End:

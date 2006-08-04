@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -63,14 +63,15 @@ namespace vcsn
     template <class T>
     struct Node
     {
-	typedef Factory<Node<T>, std::string> factory_t;
-	typedef std::map<std::string, hstate_t> map_t;
-	typedef reference_pair<std::map<hstate_t, std::pair<double, double> >,
-			       hstate_t> map_state_pair_t;
-	typedef reference_pair<std::map<htransition_t, std::pair<double, double> >,
-			       htransition_t> map_transition_pair_t;
-	virtual void process(xercesc::DOMElement*, T&, map_t&, factory_t&) = 0;
-	virtual ~Node();
+      typedef Factory<Node<T>, std::string> factory_t;
+      typedef std::map<std::string, hstate_t> map_t;
+      typedef reference_pair<std::map<hstate_t, std::pair<double, double> >,
+			     hstate_t> map_state_pair_t;
+      typedef reference_pair<std::map<htransition_t, std::pair<double, double> >,
+			     htransition_t> map_transition_pair_t;
+      virtual void process(xercesc::DOMElement* node, T& aut, 
+			   map_t& m, factory_t& f) = 0;
+      virtual ~Node();
     };
 
 
@@ -78,19 +79,34 @@ namespace vcsn
     template <class T>						\
     struct name ## Node : Node<T>				\
     {								\
-      void process(xercesc::DOMElement*, T&,			\
-		   typename Node<T>::map_t&,			\
-		   typename Node<T>::factory_t&);		\
+      void process(xercesc::DOMElement* node, T& aut,		\
+		   typename Node<T>::map_t& m,			\
+		   typename Node<T>::factory_t& f);		\
       static Node<T>* create() { return new name ## Node; }	\
     };
+
+
+    CREATE_CLASSNODE(automaton)
+    CREATE_CLASSNODE(content)
+    CREATE_CLASSNODE(final)
+    CREATE_CLASSNODE(initial)
+    CREATE_CLASSNODE(labelType)
+    CREATE_CLASSNODE(state)
+    CREATE_CLASSNODE(states)
+    CREATE_CLASSNODE(transducer)
+    CREATE_CLASSNODE(transition)
+    CREATE_CLASSNODE(transitions)
+
+#undef CREATE_CLASSNODE
+
 
 # define CREATE_PARAM_CLASSNODE(name)				\
     template <class T>						\
     struct name ## Node : Node<T>				\
     {								\
-      void process(xercesc::DOMElement*, T&,			\
-		   typename Node<T>::map_t&,			\
-		   typename Node<T>::factory_t&) {};		\
+      void process(xercesc::DOMElement* node, T& aut,		\
+		   typename Node<T>::map_t& m,			\
+		   typename Node<T>::factory_t& f) {};		\
 								\
       template <class U>					\
 	void process(xercesc::DOMElement*, T&, U &,		\
@@ -99,23 +115,14 @@ namespace vcsn
       static Node<T>* create() { return new name ## Node; }	\
     };
 
-
-    CREATE_CLASSNODE(automaton)
-    CREATE_CLASSNODE(transducer)
-    CREATE_CLASSNODE(labelType)
-    CREATE_CLASSNODE(content)
-    CREATE_CLASSNODE(states)
-    CREATE_CLASSNODE(transitions)
-    CREATE_CLASSNODE(state)
-    CREATE_CLASSNODE(transition)
-    CREATE_CLASSNODE(initial)
-    CREATE_CLASSNODE(final)
-    CREATE_PARAM_CLASSNODE(semiring)
-    CREATE_PARAM_CLASSNODE(monoid)
+    CREATE_PARAM_CLASSNODE(drawing)
     CREATE_PARAM_CLASSNODE(freemonoid)
     CREATE_PARAM_CLASSNODE(generator)
     CREATE_PARAM_CLASSNODE(geometry)
-    CREATE_PARAM_CLASSNODE(drawing)
+    CREATE_PARAM_CLASSNODE(monoid)
+    CREATE_PARAM_CLASSNODE(semiring)
+
+#undef CREATE_PARAM_CLASSNODE
 
 
 # define TParm					\
@@ -145,6 +152,13 @@ namespace vcsn
     };
 
 
+    CREATE_SPEC_TYPE_NODE(TParm, AUTtype)
+    CREATE_SPEC_TYPE_NODE(TParm, TRANStype)
+    CREATE_SPEC_TYPE_NODE(TParmFMP, FMPtype)
+
+#undef CREATE_SPEC_TYPE_NODE
+
+
 # define CREATE_SPEC_PARAM_NODE(name, TempParam, Type)		\
     TempParam							\
     struct name ## Node<Type > : Node<Type >			\
@@ -160,11 +174,10 @@ namespace vcsn
     };
 
 
-    CREATE_SPEC_TYPE_NODE(TParm, AUTtype)
-    CREATE_SPEC_TYPE_NODE(TParm, TRANStype)
-    CREATE_SPEC_TYPE_NODE(TParmFMP, FMPtype)
     CREATE_SPEC_PARAM_NODE(semiring, TParm, TRANStype)
     CREATE_SPEC_PARAM_NODE(monoid, TParmFMP, FMPtype)
+
+# undef CREATE_SPEC_PARAM_NODE
 
 
   } // ! xml
@@ -197,5 +210,11 @@ namespace vcsn
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/xml/node.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
+
+# undef AUTtype
+# undef FMPtype
+# undef TParm
+# undef TParmFMP
+# undef TRANStype
 
 #endif // ! VCSN_XML_NODE_HH

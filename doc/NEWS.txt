@@ -10,6 +10,15 @@ This document describes major updates to the Vaucanson_ project.
 
 
 
+Vaucanson 1.1
+=============
+
+- Documentation
+
+  + The Doxygen documentation is now installed expanded, rather than
+    compressed.
+
+
 Vaucanson 1.0, July 28th, 2006
 ==============================
 

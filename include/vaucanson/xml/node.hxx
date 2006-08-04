@@ -55,12 +55,19 @@ namespace vcsn
 	}								\
     }
 
+    PROCESS_NODE(content)
+    PROCESS_NODE(labelType)
+    PROCESS_NODE(states)
+    PROCESS_NODE(transitions)
+
+# undef PROCESS_NODE
 
 # define PROCESS_ROOT_NODE(node_name)					\
     template <class T>							\
-    void node_name ## Node<T>::process(xercesc::DOMElement* node, T& aut, \
-				       typename Node<T>::map_t& m,	\
-				       typename Node<T>::factory_t& f)	\
+    void								\
+    node_name ## Node<T>::process(xercesc::DOMElement* node, T& aut,	\
+				  typename Node<T>::map_t& m,		\
+				  typename Node<T>::factory_t& f)	\
     {									\
       using namespace xercesc;						\
       bool type_done = false;						\
@@ -85,13 +92,18 @@ namespace vcsn
 	}								\
     }
 
+    PROCESS_ROOT_NODE(automaton)
+    PROCESS_ROOT_NODE(transducer)
+
+# undef PROCESS_ROOT_NODE
 
 # define PROCESS_TYPE_NODE(TempParam, AutType)				\
     TempParam								\
-    void labelTypeNode<AutType >::process(xercesc::DOMElement* node,	\
-					   AutType& aut,		\
-					   typename Node<AutType >::map_t& m, \
-					   typename Node<AutType >::factory_t& f) \
+    void 								\
+    labelTypeNode<AutType >::process(xercesc::DOMElement* node,		\
+				     AutType& aut,			\
+				     typename Node<AutType >::map_t& m, \
+				     typename Node<AutType >::factory_t& f) \
     {									\
       using namespace xercesc;						\
       bool monoid_done = false, semiring_done = false;			\
@@ -107,15 +119,11 @@ namespace vcsn
 	  }								\
     }
 
-    PROCESS_ROOT_NODE(transducer)
-    PROCESS_ROOT_NODE(automaton)
-    PROCESS_TYPE_NODE(TParm, AUTtype)
-    PROCESS_TYPE_NODE(TParm, TRANStype)
+    PROCESS_TYPE_NODE(TParm,    AUTtype)
+    PROCESS_TYPE_NODE(TParm,    TRANStype)
     PROCESS_TYPE_NODE(TParmFMP, FMPtype)
-    PROCESS_NODE(labelType)
-    PROCESS_NODE(content)
-    PROCESS_NODE(states)
-    PROCESS_NODE(transitions)
+
+# undef PROCESS_TYPE_NODE
 
 
     /*------------.
@@ -616,16 +624,5 @@ namespace vcsn
   } // ! xml
 
 } // !vcsn
-
-
-# undef PROCESS_NODE
-# undef PROCESS_ROOT_NODE
-# undef CREATE_TYPE_NODE
-# undef CREATE_SPEC_PARAM_NODE
-# undef AUTtype
-# undef TRANStype
-# undef FMPtype
-# undef TParm
-# undef TParmFMP
 
 #endif // ! VCSN_XML_NODE_HXX

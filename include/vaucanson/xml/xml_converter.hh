@@ -91,18 +91,20 @@ namespace vcsn
       xercesc::DOMElement* root_get();
 
     private:
-      std::string create_state(hstate_t, const Auto&, xercesc::DOMElement*);
-      void create_transition(htransition_t, const Auto&,
-			     xercesc::DOMElement*, map_t&);
-      void create_initial(hstate_t, const Auto&,
-			  xercesc::DOMElement*, map_t&);
-      void create_final(hstate_t, const Auto&,
-			xercesc::DOMElement*, map_t&);
+      std::string create_state(hstate_t s, const Auto& aut, 
+			       xercesc::DOMElement* root);
+      void create_transition(htransition_t e, const Auto& aut,
+			     xercesc::DOMElement* root, map_t& state2str);
+      void create_initial(hstate_t s, const Auto& aut,
+			  xercesc::DOMElement* root, map_t& state2str);
+      void create_final(hstate_t s, const Auto& aut,
+			xercesc::DOMElement* root, map_t& state2str);
 
       template <class Map, class Key>
-      void add_xml_geometry(Map&, Key&, xercesc::DOMElement* node);
+      void add_xml_geometry(Map& map, Key& key, xercesc::DOMElement* node);
+
       template <class Map, class Key>
-      void add_xml_drawing(Map&, Key&, xercesc::DOMElement* node);
+      void add_xml_drawing(Map& map, Key& key, xercesc::DOMElement* node);
 
       xercesc::DOMImplementation*  impl_;
       xercesc::DOMDocument*	   doc_;

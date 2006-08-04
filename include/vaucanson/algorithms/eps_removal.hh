@@ -63,9 +63,8 @@ namespace vcsn {
    *
    * It is based on the Floyd/McNaughton/Yamada algorithm.
    *
-   * @param a The weighted automaton to close.
-   * @param bck The type of eps_removal to call (true is backward, false is
-   * forward).
+   * @param a    The weighted automaton to close.
+   * @param dir  The orientation of the eps_removal.
    *
    * @see eps_removal(), forward_eps_removal(), forward_eps_removal_here(),
    * backward_eps_removal(), backward_eps_removal_here()
@@ -84,9 +83,8 @@ namespace vcsn {
    *
    * It is based on the Floyd/McNaughton/Yamada algorithm.
    *
-   * @param a The weighted automaton to close.
-   * @param bck The type of eps_removal to call (true is backward, false is
-   * forward).
+   * @param a    The weighted automaton to close.
+   * @param dir  The orientation of the eps_removal.
    *
    * @see eps_removal_here(), forward_eps_removal(), forward_eps_removal_here(),
    * backward_eps_removal(), backward_eps_removal_here()

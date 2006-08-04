@@ -60,7 +60,7 @@ namespace vcsn
       typedef typename Auto::final_iterator final_iterator;
       using namespace xercesc;
 
-      std::map<hstate_t, std::string> state2str;
+      map_t state2str;
       const char* root_name = chooser_.choose_start_tag();
       const char* xml_namespace = "http://vaucanson.lrde.epita.fr";
       DOMElement* node;
@@ -132,8 +132,7 @@ namespace vcsn
     xml_converter<Auto>::create_transition(htransition_t e,
 					   const Auto& aut,
 					   xercesc::DOMElement* root,
-					   std::map<hstate_t, std::string>&
-					   state2str)
+					   map_t& state2str)
     {
       xercesc::DOMElement* node = doc_->createElement(transcode("transition"));
       root->appendChild(node);
@@ -150,8 +149,7 @@ namespace vcsn
     xml_converter<Auto>::create_initial(hstate_t s,
 					const Auto& aut,
 					xercesc::DOMElement* root,
-					std::map<hstate_t, std::string>&
-					state2str)
+					map_t& state2str)
     {
       xercesc::DOMElement* node = doc_->createElement(transcode("initial"));
       root->appendChild(node);
@@ -167,8 +165,7 @@ namespace vcsn
     xml_converter<Auto>::create_final(hstate_t s,
 				      const Auto& aut,
 				      xercesc::DOMElement* root,
-				      std::map<hstate_t, std::string>&
-				      state2str)
+				      map_t& state2str)
     {
       xercesc::DOMElement* node = doc_->createElement(transcode("final"));
       root->appendChild(node);

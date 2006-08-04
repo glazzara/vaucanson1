@@ -19,7 +19,7 @@
 # define VCSN_XML_TOOLS_HXX
 
 /**
- * @file tools.hxx
+ * @file xml/tools.hxx
  *
  * Some useful utility functions.
  *
@@ -484,17 +484,6 @@ namespace vcsn
       }
 
 
-      /**
-       * Get series from a XML label node.
-       *
-       * @arg \c T	Type of the automaton.
-       *
-       * @return	series_set_elt_t
-       *
-       * @param node	XML node.
-       * @param aut	Automaton to store series.
-       *
-       */
       template <class T>
       typename T::series_set_elt_t
       get_series(xercesc::DOMElement* node, T& aut)
@@ -674,16 +663,6 @@ namespace vcsn
       }
 
 
-      /**
-       * Insert a letter in an alphabet.
-       *
-       * @arg \c U	Type of the letter.
-       * @arg \c V	Type of the alphabet container.
-       *
-       * @param a	Alphabet to insert a letter.
-       * @param str	string containing the letter.
-       *
-       */
       template <class U, class V>
       void insert_letter(Element<vcsn::algebra::AlphabetSet<U>, V>&,
 			 const std::string&)
@@ -725,17 +704,6 @@ namespace vcsn
       }
 
 
-      /**
-       * Check semiring conformance of the automaton w.r.t. XML node.
-       *
-       * @arg \c U	Type of the semiring.
-       * @arg \c T	Type of the automaton.
-       *
-       * @param node	XML node to check.
-       * @param a		Automaton.
-       * @param param	Automaton semiring.
-       *
-       */
       template <class T, class U>
       void ensure_semiring_type(const xercesc::DOMElement* node,
 				const T&, const U& param)
@@ -778,15 +746,6 @@ namespace vcsn
       }
 
 
-      /**
-       * Check semiring conformance of the automaton w.r.t. XML node.
-       *
-       * @arg \c U	Type of the monoid.
-       *
-       * @param node	XML node to check.
-       * @param param	Automaton monoid.
-       *
-       */
       template <class U>
       void ensure_monoid_type(const xercesc::DOMElement* node, const U& param)
       {
@@ -862,15 +821,6 @@ namespace vcsn
       }
 
 
-      /**
-       * Print XML tree to output stream.
-       *
-       * @arg \c OStream	Type of output stream.
-       *
-       * @param node	XML root node to print.
-       * @param os	Output stream.
-       *
-       */
       template <class OStream>
       void print_document(xercesc::DOMElement* node, OStream& os)
       {

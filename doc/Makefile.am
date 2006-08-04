@@ -16,26 +16,32 @@ include $(srcdir)/doc.mk
 
 SUBDIRS = makefiles manual xml
 
-dist_doc_DATA = ref.tar.gz
 
-ref: doc.doxy.in
-	rm -rf ref
+## ----------------------- ##
+## Doxygen documentation.  ##
+## ----------------------- ##
+
+all: $(srcdir)/ref
+$(srcdir)/ref: doc.doxy.in
+	rm -rf ref $(srcdir)/ref
 	mkdir -p ref
 	$(MAKE) $(AM_MAKEFLAGS) doc.doxy
 	$(DOXYGEN) doc.doxy
+	mv ref $(srcdir)
 
-ref.tar.gz: doc.doxy.in
-	$(MAKE) $(AM_MAKEFLAGS) ref
-	$(TAR) -czf $@ `test -d ref || echo '$(srcdir)/'`ref
+install-data-local:
+	rm -rf $(DESTDIR)$(htmldir)/ref
+	$(mkdir_p) $(DESTDIR)$(htmldir)
+	cp -r $(srcdir)/ref $(DESTDIR)$(htmldir)
 
 dist_pdf_DATA = README.pdf FAQ.pdf NEWS.pdf
 
 EXTRA_DIST = README.tex FAQ.tex NEWS.tex \
 	     share
 
-MAINTAINERCLEANFILES = $(dist_doc_DATA) $(dist_pdf_DATA)
+MAINTAINERCLEANFILES = $(dist_pdf_DATA)
 maintainer-clean-local:
-	rm -rf ref
+	rm -rf ref $(srcdir)/ref
 
 ## ---------------------------- ##
 ## Installing on LRDE servers.  ##

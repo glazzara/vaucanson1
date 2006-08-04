@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -134,11 +134,11 @@ namespace vcsn {
     return *it;
   }
 
-  template <class Self, typename T>
-  typename algebra::alphabet_traits<Self, T>::letter_t
-  MetaElement<algebra::AlphabetSetBase<Self>, T>::random_letter() const
+  template <class S, typename T>
+  typename algebra::alphabet_traits<S, T>::letter_t
+  MetaElement<algebra::AlphabetSetBase<S>, T>::random_letter() const
   {
-    return misc::random::generate<typename algebra::alphabet_traits<Self, T>::letter_t>();
+    return misc::random::generate<typename algebra::alphabet_traits<S, T>::letter_t>();
   }
 
   template<typename S, typename T>

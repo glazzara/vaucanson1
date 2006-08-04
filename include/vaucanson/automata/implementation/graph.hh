@@ -116,10 +116,10 @@ namespace vcsn
 	    unsigned number_of_edge_initially_allocated);
 
       /// Return states set.
-      states_t			states() const;
+      states_t states() const;
 
       /// Return edges set.
-      edges_t			edges() const;
+      edges_t edges() const;
 
       /// Initial/final state supports.
       initial_support_t		initial() const;
@@ -128,10 +128,10 @@ namespace vcsn
       /** @name State's manipulation
 	 ** @{ */
     public:
-      bool			has_state(hstate_t n) const;
+      bool has_state(hstate_t n) const;
 
     public:
-      hstate_t			add_state();
+      hstate_t add_state();
 
       /// Remove state \a n.
       ///
@@ -242,7 +242,7 @@ namespace vcsn
 	 ** @{ */
     public:
       typedef Geometry geometry_t;
-      geometry_t&		geometry();
+      geometry_t& geometry();
       const geometry_t&	geometry() const;
       /** @}*/
 
@@ -251,8 +251,8 @@ namespace vcsn
 
     public:
       state_data_t		states_;
-      edge_data_t			edges_;
-      std::set<hstate_t>		removed_states_;
+      edge_data_t		edges_;
+      std::set<hstate_t>	removed_states_;
       std::set<hedge_t>		removed_edges_;
       tag_t			tag_;
       final_t			final_;

@@ -100,9 +100,9 @@ namespace vcsn {
     : dynamic_traits<algebra::SemiringBase<Self> >
   {};
 
-  template<typename S>
-  struct virtual_types<algebra::SeriesBase<S> >
-    : virtual_types<algebra::SemiringBase<S> >
+  template<typename Self>
+  struct virtual_types<algebra::SeriesBase<Self> >
+    : virtual_types<algebra::SemiringBase<Self> >
   {
     typedef undefined_type monoid_t;
     typedef undefined_type semiring_t;
@@ -201,17 +201,22 @@ namespace vcsn {
   /** @} */
   /** @} */
 
+
+  /*------.
+  | Ops.  |
+  `------*/
+
   template <typename S, typename T>
   bool
   op_is_finite_app(const algebra::SeriesBase<S>& s, const T& t);
 
   template <typename S, typename T>
   typename MetaElement<algebra::SeriesBase<S>, T>::monoid_elt_t
-
   op_choose_from_supp(const algebra::SeriesBase<S>& s, const T& t);
 
   template <class S, class T>
-  Element<S, T> op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T));
+  Element<S, T> 
+  op_series_choose(const algebra::SeriesBase<S>& s, SELECTOR(T));
 
   template <typename S, typename T, typename M, typename W>
   void
@@ -228,10 +233,12 @@ namespace vcsn {
 	     const algebra::FreeMonoidBase<M>&);
 
   template <class S, class T>
-  T op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const T& src_);
+  T
+  op_convert(const algebra::SeriesBase<S>& s, SELECTOR(T), const T& src_);
 
   template <class S, class T, class U>
-  T op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), U& src_);
+  T
+  op_convert(const algebra::SeriesBase<S>&, SELECTOR(T), U& src_);
 
 } // vcsn
 

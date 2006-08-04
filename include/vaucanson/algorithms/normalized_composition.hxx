@@ -404,7 +404,7 @@ namespace vcsn {
   }
 
 
-  /// Facade for compose
+  // Facade for compose
 
   template <typename S, typename T>
   void
@@ -459,7 +459,7 @@ namespace vcsn {
   }
 
 
-  /// Facade for unambiguous composition
+  // Facade for unambiguous composition
 
   template <typename S, typename T>
   void
