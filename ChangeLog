@@ -1,5 +1,11 @@
 2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/algorithms/invert.hh: Fix guards.
+	* include/vaucanson/design_pattern/element_ops.hxx: Formatting
+	changes.
+
+2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
+
 	* include/vaucanson/algebra/implementation/semiring/rational_number.hh:
 	Aesthetical/Doxygen changes.
 

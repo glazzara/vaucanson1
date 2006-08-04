@@ -15,8 +15,8 @@
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
 
-#ifndef INVERT_HH
-# define INVERT_HH
+#ifndef VCSN_ALGORITHMS_INVERT_HH
+# define VCSN_ALGORITHMS_INVERT_HH
 
 /**
  * @file invert.hh
@@ -66,4 +66,4 @@ namespace vcsn {
 #  include <vaucanson/algorithms/invert.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
 
-#endif // !INVERT_HH
+#endif // !VCSN_ALGORITHMS_INVERT_HH

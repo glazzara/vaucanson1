@@ -147,7 +147,8 @@ operator Op(const Element<S1, T1>& e1, const Element<S2, T2>& e2)	\
 }									\
 									\
 template<typename S, typename T, typename U>				\
-static Element<S, T>							\
+static									\
+Element<S, T>								\
 operator Op(const Element<S, T>& e, const U& v)				\
 {									\
   return Element<S, T> (e.structure(),					\
@@ -158,7 +159,8 @@ operator Op(const Element<S, T>& e, const U& v)				\
 }									\
 									\
 template<typename U, typename S, typename T>				\
-static Element<S, T>							\
+static 									\ 
+Element<S, T>								\
 operator Op(const U& v, const Element<S, T>& e)				\
 {									\
   return Element<S, T> (e.structure(),					\
