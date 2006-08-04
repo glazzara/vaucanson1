@@ -1,5 +1,11 @@
 2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
 
+	* include/vaucanson/xml/node.hh,
+	* include/vaucanson/xml/node.hxx: Don't give argument names to
+	unused arguments.
+
+2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
+
 	* include/vaucanson/algorithms/invert.hh: Fix guards.
 	* include/vaucanson/design_pattern/element_ops.hxx: Formatting
 	changes.
@@ -12,7 +18,7 @@
 	* include/vaucanson/algorithms/realtime.hxx,
 	* include/vaucanson/algorithms/realtime_decl.hxx:
 	Fix the indirection to do_realtime_here.
-	
+
 	* src/tests/test-suites/test-suite.mk:New.
 	* src/tests/bin/generate-test-suite.sh: Use it.
 	* src/tests/test-suites/Makefile.am: Ship it.
@@ -48,7 +54,7 @@
 	Ditto.
 	* include/vaucanson/xml/xml_converter.hh,
 	* include/vaucanson/xml/xml_chooser.hxx,
-	* include/vaucanson/xml/xml_chooser.hh: 
+	* include/vaucanson/xml/xml_chooser.hh:
 	Name the formal arguments consistently with the implementation.
 	* include/vaucanson/xml/node.hh,
 	* include/vaucanson/xml/node.hxx: Likewise.
@@ -70,7 +76,7 @@
 	* include/vaucanson/contexts/fmp_transducer_functions.thxx,
 	* include/vaucanson/algorithms/normalized_composition.hxx:
 	Don't use Doxygen comments when not talking to it.
-	* include/vaucanson/algorithms/evaluation_fmp.hh: 
+	* include/vaucanson/algorithms/evaluation_fmp.hh:
 	Remove incomplete doc.
 	* include/vaucanson/algorithms/normalized_composition.hh:
 	Remove the documentation of imaginary arguments.
@@ -93,7 +99,7 @@
 	* doc/doc.mk: Use an intermediate temp file.
 	* doc/doc.doxy.in (EXPAND_AS_DEFINED): Define.
 	* doc/manual/developer.tex: More dev guide.
- 
+
 	* include/vaucanson/algorithms/forward_realtime.hxx,
 	* include/vaucanson/algorithms/eps_removal.hxx: Aesthetical changes.
 
@@ -108,7 +114,7 @@
 	* include/vaucanson/algorithms/realtime.hh (realtime_type):
 	Remove, replaced by the above one.
 	Adjust all dependencies.
-	* include/vaucanson/algorithms/eps_removal.hh, 
+	* include/vaucanson/algorithms/eps_removal.hh,
 	* include/vaucanson/algorithms/eps_removal.hxx: Use it too.
 	* include/Makefile.am: Adjust.
 	Sort lines.
@@ -118,7 +124,7 @@
 
 2006-08-02  Akim Demaille  <akim@lrde.epita.fr>
 
-	Factor duplicate code.  
+	Factor duplicate code.
 	Shame on its author: 2 lines of 83 differed.
 	* include/vaucanson/algorithms/forward_realtime.hxx,
 	* include/vaucanson/algorithms/backward_realtime.hxx
@@ -272,7 +278,7 @@
 	* include/vaucanson/algorithms/internal/skeleton.hh,
 	* include/vaucanson/algorithms/internal/skeleton.hxx,
 	* include/vaucanson/algorithms/isomorph.hh,
-	* include/vaucanson/algorithms/isomorph.hxx: 
+	* include/vaucanson/algorithms/isomorph.hxx:
 	(origins_transitions, aims_transitions): Rename as...
 	(src_transitions, dst_transitions): these.
 
@@ -318,7 +324,7 @@
 
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
-	* include/vaucanson/algorithms/normalized_composition.hh, 
+	* include/vaucanson/algorithms/normalized_composition.hh,
 	* include/vaucanson/algorithms/normalized_composition.hxx:
 	Rewrite, using a function object to share typedefs and state.
 
@@ -326,7 +332,7 @@
 
 	* src/tests/include/tests/context_headers/automata/global_consistency_test.hh:
 	Formatting changes.
-	Log the ratexp which is used.	
+	Log the ratexp which is used.
 
 	* src/tests/include/tests/check/tester.hh (verbose_level): Now
 	a Tester member.
@@ -351,7 +357,7 @@
 
 2006-07-30  Akim Demaille  <akim@lrde.epita.fr>
 
-	* include/vaucanson/xml/xml_converter.hh, 
+	* include/vaucanson/xml/xml_converter.hh,
 	* include/vaucanson/xml/xml_converter.hxx,
 	* include/vaucanson/xml/XML.hh,
 	* include/vaucanson/xml/XML.hxx: Move bodies in the hxx file.
@@ -467,7 +473,7 @@
 
 	* taf-kit/src/tdc_commands.cc: Add define_automaton and edit_automaton
 	to commands.
-	* taf-kit/src/edition_commands.hxx: Update add_transition for 
+	* taf-kit/src/edition_commands.hxx: Update add_transition for
 	fmp_transducer.
 
 2006-07-28  Akim Demaille  <akim@lrde.epita.fr>

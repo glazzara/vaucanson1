@@ -99,20 +99,30 @@ namespace vcsn
 
 #undef CREATE_CLASSNODE
 
+    /// @todo FIXME: This is really weird: why do we define a version
+    /// of process to do nothing?  Why do we instantiate so many
+    /// classes with CPP instead of sharing the code via inheritance?
 
-# define CREATE_PARAM_CLASSNODE(name)				\
+# define CREATE_PARAM_CLASSNODE(Name)				\
     template <class T>						\
-    struct name ## Node : Node<T>				\
+    struct Name ## Node : Node<T>				\
     {								\
-      void process(xercesc::DOMElement* node, T& aut,		\
-		   typename Node<T>::map_t& m,			\
-		   typename Node<T>::factory_t& f) {};		\
+      void process(xercesc::DOMElement*, T&,			\
+		   typename Node<T>::map_t&,			\
+		   typename Node<T>::factory_t&)		\
+      {};							\
 								\
       template <class U>					\
-	void process(xercesc::DOMElement*, T&, U &,		\
-		     typename Node<T>::map_t&,			\
-		     typename Node<T>::factory_t&);		\
-      static Node<T>* create() { return new name ## Node; }	\
+      void process(xercesc::DOMElement*, T&, U &,		\
+		   typename Node<T>::map_t&,			\
+		   typename Node<T>::factory_t&);		\
+								\
+      static							\
+      Node<T>*							\
+      create()							\
+      {								\
+	return new Name ## Node;				\
+      }								\
     };
 
     CREATE_PARAM_CLASSNODE(drawing)

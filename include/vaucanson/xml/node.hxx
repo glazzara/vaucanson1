@@ -39,9 +39,9 @@ namespace vcsn
     {
     }
 
-# define PROCESS_NODE(name)						\
+# define PROCESS_NODE(Name)						\
     template <class T>							\
-    void name ## Node<T>::process(xercesc::DOMElement* node, T& aut,	\
+    void Name ## Node<T>::process(xercesc::DOMElement* node, T& aut,	\
 				  typename Node<T>::map_t& m,		\
 				  typename Node<T>::factory_t& f)	\
     {									\
@@ -62,18 +62,21 @@ namespace vcsn
 
 # undef PROCESS_NODE
 
-# define PROCESS_ROOT_NODE(node_name)					\
+# define PROCESS_ROOT_NODE(Name)					\
     template <class T>							\
     void								\
-    node_name ## Node<T>::process(xercesc::DOMElement* node, T& aut,	\
-				  typename Node<T>::map_t& m,		\
-				  typename Node<T>::factory_t& f)	\
+    Name ## Node<T>::process(xercesc::DOMElement* node, T& aut,		\
+			     typename Node<T>::map_t& m,		\
+			     typename Node<T>::factory_t& f)		\
     {									\
       using namespace xercesc;						\
       bool type_done = false;						\
-      if (node->hasAttribute(transcode("name")))				\
-	aut.geometry().name() = xml2str(node->getAttribute(transcode("name"))); \
-      for (DOMNode* n = node->getFirstChild(); n; n = n->getNextSibling()) \
+      if (node->hasAttribute(transcode("name")))			\
+	aut.geometry().name() =						\
+	  xml2str(node->getAttribute(transcode("name")));		\
+      for (DOMNode* n = node->getFirstChild();				\
+	   n;								\
+	   n = n->getNextSibling())					\
 	if (n->getNodeType() == DOMNode::ELEMENT_NODE)			\
 	{								\
 	  DOMElement* elt = static_cast<DOMElement*>(n);		\
@@ -582,6 +585,8 @@ namespace vcsn
       if (node->hasAttribute(transcode("labelPositionX")) &&
 	  node->hasAttribute(transcode("labelPositionY")))
       {
+	/// @todo FIXME: This is certainly not the smartest atoi
+	/// implementation.  xml2int would help.
 	std::istringstream
 	  xstr(xml2str(node->getAttribute(transcode("labelPositionX"))));
 	std::istringstream
