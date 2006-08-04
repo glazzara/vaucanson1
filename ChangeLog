@@ -1,5 +1,10 @@
 2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
 
+	* taf-kit/src/main.cc (argp_program_version): Add the Copyright
+	and license bits.
+
+2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
+
 	* include/vaucanson/xml/node.hh,
 	* include/vaucanson/xml/node.hxx: Don't give argument names to
 	unused arguments.

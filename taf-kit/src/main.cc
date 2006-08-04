@@ -35,7 +35,14 @@
 /**
  * Base info for the program.
  */
-const char* argp_program_version = "VCSN TAF-Kit (" PACKAGE_STRING ")";
+const char* argp_program_version =
+"VCSN TAF-Kit (" PACKAGE_STRING ")\n"
+"\n"
+"Copyright (C) 2006 The Vaucanson Group.\n"
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE,\n"
+"to the extent permitted by law.";
+
 const char* argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";
 
 /**
