@@ -41,7 +41,7 @@ SUFFIXES = .log .test
 	@if test -f ./$<; then dir=./;			\
 	elif test -f $<; then dir=;			\
 	else dir="$(srcdir)/"; fi;			\
-	$(TESTS_ENVIRONMENT) $${dir}$< >$@-t 2>&1;	\
+	($(TESTS_ENVIRONMENT) $${dir}$<) >$@-t 2>&1;	\
 	case $$?:" $(XFAIL_TESTS) " in			\
 	    0:*"$<"*) res="XPASS";;			\
 	    0:*)      res="PASS" ;;			\

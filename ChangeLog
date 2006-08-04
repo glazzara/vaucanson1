@@ -1,5 +1,11 @@
 2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
 
+	* build/check.mk: Run the test in a subshell so that indirections
+	preserve shell messages (such as segmentation violations).
+	* taf-kit/tests/vcsn-b.test: A bit more.
+
+2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
+
 	* configure.ac: Be kind to DarwinPorts: look for rst2latex.py.
 
 2006-08-04  Akim Demaille  <akim@lrde.epita.fr>

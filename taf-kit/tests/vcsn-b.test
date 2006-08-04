@@ -48,7 +48,7 @@ EOF
 # Cannot check display.
 
 # Check that dot accepts the output.
-# vcsn-b dot-dump all.xml | dot -
+vcsn-b dot-dump all.xml | dot
 
 # Check that each builtin automaton can be dumped.
 for a in $(vcsn-b list-automata | sed -n 's/^  * - \([-a-z0-9]*\).*/\1/p')
@@ -56,9 +56,13 @@ do
   vcsn-b dump-automaton $a | vcsn-b info -
 done
 
-## --------------------- ##
-## Test and evaluation.  ##
-## --------------------- ##
+vcsn-b identity all.xml >all2.xml
+diff -uw all.xml all2.xml
+
+
+## --------------------------------- ##
+## Test and evaluation on automata.  ##
+## --------------------------------- ##
 
 # are-isomorphic
   vcsn-b are-isomorphic $a1 $a1
@@ -100,6 +104,8 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##
+
+
 
 ## --------------------------------------- ##
 ## Boolean automaton specific algorithms.  ##

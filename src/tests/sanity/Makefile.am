@@ -22,4 +22,4 @@ AM_CXXFLAGS = $(CXXFLAGS_STRICT)
 include check-programs.mk
 
 # We don't run the resulting tests, there is no point in doing so, as
-#they just check that the syntax is ok.
+# they just check that the syntax is ok.
