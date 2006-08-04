@@ -1,5 +1,9 @@
 2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
 
+	* configure.ac: Be kind to DarwinPorts: look for rst2latex.py.
+
+2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
+
 	Many Doxygen fixes.
 	Basically:
 	- declare the macros it has to expand to do its job

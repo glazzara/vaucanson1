@@ -122,18 +122,23 @@ AC_CONFIG_SUBDIRS([argp])
 ## Documentation.  ##
 ## --------------- ##
 
-# VCSN_ARG_PROGS(PROG, DOC)
-# -------------------------
+# VCSN_ARG_PROGS(PROG, DOC, [PROGRAMS...])
+# ----------------------------------------
 m4_define([VCSN_ARG_PROGS],
 [AC_ARG_VAR(m4_toupper([$1]), [$2])
-AC_CHECK_PROGS(m4_toupper([$1]), [$1], [$am_aux_dir/missing $1])
+AC_CHECK_PROGS(m4_toupper([$1]), [m4_default([$3], [$1])],
+               [$am_aux_dir/missing $1])
 ])
 
 
 VCSN_ARG_PROGS([doxygen],   [the Doxygen documentation generation program])
 VCSN_ARG_PROGS([texi2dvi],  [program to create DVI from TeX files])
-VCSN_ARG_PROGS([rst2latex], [program to create TeX from reStructuredText documents])
-VCSN_ARG_PROGS([rst2html],  [program to create HTML from reStructuredText documents])
+VCSN_ARG_PROGS([rst2latex], 
+               [reStructuredText to LaTeX converter],
+	       [rst2latex rst2latex.py])
+VCSN_ARG_PROGS([rst2html],
+               [reStructuredText to HTML converter],
+	       [rst2html rst2html.py])
 VCSN_ARG_PROGS([tar],       [the tape archiver program])
 
 AC_CONFIG_FILES([
