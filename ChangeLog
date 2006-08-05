@@ -1,3 +1,10 @@
+2006-08-05  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	Provide a new implementation of Hopcroft (det).
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Do it.  Use
+	functor with deltaf.
+
 2006-08-04  Akim Demaille  <akim@lrde.epita.fr>
 
 	* taf-kit/src/main.cc (argp_program_version): Add the Copyright
