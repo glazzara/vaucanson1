@@ -1,5 +1,5 @@
 ;;; Handling of comment boxes in various styles.
-;;; Copyright © 1991,92,93,94,95,96,97,98,00 Progiciels Bourbeau-Pinard inc.
+;;; Copyright © 1991,92,93,94,95,96,97,98,00,06 Progiciels Bourbeau-Pinard inc.
 ;;; François Pinard <pinard@iro.umontreal.ca>, April 1991.
 
 ;;; This program is free software; you can redistribute it and/or modify
@@ -1006,3 +1006,5 @@ refilled with it."
 ;;; Initialize the internal structures.
 
 (rebox-register-all-templates)
+
+(provide 'rebox)

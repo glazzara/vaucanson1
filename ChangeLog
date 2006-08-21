@@ -1,3 +1,13 @@
+2006-08-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* data/emacs/vaucanson.el: Require rebox.  Minor aesthetical changes.
+	(doxymacs-check-group-consistency): New function. Check for good use
+	of Doxygen groups.
+	(vaucansonize-buffer): Use `whitespace-cleanup'.
+	(cpp-guard-prefix): Don't be specific to Vaucanson here, but set it
+	in `vaucansonize-buffer'.
+	* data/emacs/rebox.el: Provide rebox using Elisp scheme.
+
 2006-08-05  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	Provide a new implementation of Hopcroft (det).

@@ -26,20 +26,24 @@
 ;; .emacs (init.el):
 ;; (setq c-default-style "Vaucanson")
 
-;; To use M-x vaucansonize RET, just add (require 'vaucanson).
+;; To use M-x vaucansonize-buffer RET, just add (require 'vaucanson).
 
 ;;; Code:
 
-;; This is the indentation mode for Vaucanson:
-
 (require 'cc-mode)
+;; Rebox doesn't `provide' itself usually.
+(unless (or (ignore-errors (require 'rebox))
+	    (ignore-errors (load "rebox.el")))
+  (with-temp-message "Warning: `rebox.el' not found"
+    (sleep-for 2)))
 
 (defcustom c-header-file-extensions
   "\\(hh\\|hxx\\|hcc\\|thh\\|thxx\\)\\(\\.in\\)?"
   "File extensions regexp for C(++) header files."
   :group 'c)
 
-(defvar cpp-guard-prefix "VCSN_")
+(defvar cpp-guard-prefix ""
+  "Prefix for CPP guard, e.g. `VCSN_'.")
 
 ;; Add indentation style
 (unless (assoc "Vaucanson" c-style-alist)
@@ -84,7 +88,8 @@
         (narrow-to-region beg end)
 	(while (re-search-forward "^[[:space:]]*#\\([[:space:]]*\\)\\([a-z]\\{,5\\}\\)" nil t)
 	  (and (or (string= "endif" (match-string 2))
-		   (string= "el" (substring (match-string 2) 0 2))) (> spaces 0)
+		   (string= "el" (substring (match-string 2) 0 2)))
+	       (> spaces 0)
 	       (setq spaces (1- spaces)))
 	  (unless (= (- (match-end 1) (match-beginning 1)) spaces)
 	    (replace-match (make-string spaces ? ) nil nil nil 1))
@@ -93,7 +98,7 @@
 	  (when (string-match "^if" (match-string 2)) (setq spaces (1+ spaces))))))))
 
 
-;; Get vaucanson relative path.
+;; Get Vaucanson relative path.
 (defun get-vcsn-path (&optional path)
   "Get Vaucanson relative path for PATH."
   (unless path
@@ -130,20 +135,43 @@ matches `c-header-file-extensions'.  CPP should be correctly indented."
       (unless (re-search-forward "^#if" nil t)
 	(error "Guard start not found"))
       (unless (looking-at (concat "ndef[[:space:]]+" (regexp-quote expected-guard)))
-	(error "Expecting a #ifndef %s" expected-guard))
+	(error "Expecting `#ifndef %s'" expected-guard))
       (beginning-of-line 2)
       (unless (looking-at (concat "# define[[:space:]]+"
 				  (regexp-quote expected-guard)))
-	(error "Expecting a definition of %s" expected-guard))
+	(error "Expecting a definition of `%s'" expected-guard))
       (unless (re-search-forward "^#endif" nil t)
 	(error "Guard end not found"))
 
       (unless (search-forward expected-guard (point-at-eol) t)
-	(error "Comment #endif should mention %s" expected-guard))
+	(error "Comment `#endif' should mention `%s'" expected-guard))
       (goto-char old-point)
       nil)))
 
+(defun doxymacs-check-group-consistency (beg end)
+  "Check if @{ and @} are rightly organized between BEG and END."
+  (interactive "r")
+  (let ((groups nil)
+	(old-point (point)))
+    (goto-char beg)
+    (while (re-search-forward "@{\\|@}" end t)
+      (let (is-comment)
+	(when (dolist (syntax (c-guess-basic-syntax) is-comment)
+		(setq is-comment (or is-comment
+				     (memq (car syntax) '(c comment-intro)))))
+	  (if (eq (char-before) ?{)
+	      (push (point) groups)
+	    (unless (pop groups)
+	      (error "Too much @} here"))))))
+    (unless (null groups)
+      (goto-char (car (last groups)))
+      (error "There is %d doxygen opening (@{) not closed, point at first one"
+	     (length groups)))
+    (goto-char old-point)))
+
+
 (require 'tabify)
+(require 'whitespace)
 
 ;; Vaucansonize a buffer.
 (defun vaucansonize-buffer (&optional buffer)
@@ -157,9 +185,17 @@ matches `c-header-file-extensions'.  CPP should be correctly indented."
       (barf-if-buffer-read-only)
       (cpp-indent-macros (point-min) (point-max))
       (indent-region (point-min) (point-max) nil)
-      (delete-trailing-whitespace)
+      (let ((whitespace-check-buffer-leading t) (whitespace-check-buffer-trailing t)
+	    (whitespace-check-buffer-indent t) (whitespace-check-buffer-spacetab t)
+	    (whitespace-check-buffer-ateol t) (whitespace-highlighted-space t)
+	    (whitespace-silent t))
+	(whitespace-cleanup))
       (tabify (point-min) (point-max))
-      (cpp-check-guard 'get-vcsn-path))
+      (when (and buffer-file-name
+		 (string-match "include/vaucanson/" buffer-file-name))
+	(let ((cpp-guard-prefix "VCSN_"))
+	  (cpp-check-guard 'get-vcsn-path)))
+      (doxymacs-check-group-consistency (point-min) (point-max)))
     (c-set-style c-indentation-style)))
 
 
