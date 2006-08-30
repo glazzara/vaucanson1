@@ -553,7 +553,8 @@ namespace vcsn {
       MetaElement(const MetaElement& other);
   };
 
-  /** @} @} */
+  /** @} */
+  /** @} */
 
   template <typename S, typename St, typename T>
   St& op_rout(const AutomataBase<S>& s, St& st, const T& r);

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,12 +31,10 @@ namespace vcsn {
     AutomataBase<Self>(other)
   {}
 
-  /** */
   template <typename Self, typename T>
   MetaElement<TransducerBase<Self>, T>::MetaElement()
   {}
 
-  /** copy constructor */
   template <typename Self, typename T>
   MetaElement<TransducerBase<Self>, T>::MetaElement(const MetaElement& a):
     MetaElement<AutomataBase<Self>, T>::MetaElement(a)

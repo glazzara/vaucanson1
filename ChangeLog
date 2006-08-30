@@ -1,5 +1,18 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Doxygen fixes.
+
+	* include/vaucanson/automata/concept/transducer_base.hh:
+	Better doxygenation.
+	Sort the typedefs in a clearer way.
+	Document them.
+	Use IMPORT_TYPEDEF_, not INHERIT_TYPEDEF_ which no longer exists.
+	* include/vaucanson/automata/concept/automata_base.hh,
+	* include/vaucanson/automata/concept/transducer_base.hxx:
+	Minor doxygen changes.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	XML cleanups.
 
 	There are several naughty problems with our XML scheme.
