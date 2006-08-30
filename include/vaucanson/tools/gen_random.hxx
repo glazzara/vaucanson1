@@ -97,12 +97,6 @@ namespace vcsn {
   GenRandomAutomata<TAutomata, AutomataSetGenerator>::GenRandomAutomata()
   {}
 
-  template <class TAutomata, class AutomataSetGenerator>
-  GenRandomAutomata<TAutomata, AutomataSetGenerator>::
-  GenRandomAutomata(unsigned init)
-  {
-    srand(init);
-  }
 
   /*------.
   | empty |

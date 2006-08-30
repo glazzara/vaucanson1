@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -53,7 +53,6 @@ namespace vcsn {
 
     public:
       GenRandomAutomata();
-      GenRandomAutomata(unsigned init);
 
       TAutomata empty(unsigned nb_letter = 0);
       TAutomata empty(const automata_set_t& set);
@@ -100,6 +99,5 @@ namespace vcsn {
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/tools/gen_random.hxx>
 # endif // VCSN_USE_INTERFACE_ONLY
-
 
 #endif // ! VCSN_TOOLS_GEN_RANDOM_HH

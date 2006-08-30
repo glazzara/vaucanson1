@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -14,8 +14,6 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_TOOLS_OUT_DISPLAY_HXX
-# define VCSN_TOOLS_OUT_DISPLAY_HXX
 
 /**
  * @file out_display.hxx
@@ -24,6 +22,14 @@
  *
  * @author Florent Terrones <florent.terrones@lrde.epita.fr>
  */
+
+#ifndef VCSN_TOOLS_OUT_DISPLAY_HXX
+# define VCSN_TOOLS_OUT_DISPLAY_HXX
+
+# include <vaucanson/tools/out_display.hh>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
 namespace vcsn {
 

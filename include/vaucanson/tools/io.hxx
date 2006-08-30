@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -56,6 +56,7 @@ namespace vcsn
     operator<<(std::ostream& o,
 	       const automaton_saver_<Auto, TransitionConverter, Format>& s)
     {
+      TIMER_SCOPED ("automaton output");
       s.format_(o, s, s.conv_);
       return o;
     }
@@ -89,8 +90,8 @@ namespace vcsn
   template<typename Auto, typename TransitionConverter, typename Format>
   io::automaton_saver_<Auto, TransitionConverter, Format>
   automaton_saver(const Auto& a,
-		  const TransitionConverter& e = TransitionConverter(),
-		  const Format& f = Format())
+		  const TransitionConverter& e,
+		  const Format& f)
   {
     return io::automaton_saver_<Auto, TransitionConverter, Format>(a, e, f);
   }
@@ -177,6 +178,7 @@ namespace vcsn
     operator>>(std::istream& in,
 	       automaton_loader_<Auto, TransitionConverter, Format> l)
     {
+      TIMER_SCOPED ("automaton input");
       l.format_(in, l);
       return in;
     }
@@ -187,12 +189,12 @@ namespace vcsn
   template<typename Auto, typename TransitionConverter, typename Format>
   io::automaton_loader_<Auto, TransitionConverter, Format>
   automaton_loader(Auto& a,
-		   const TransitionConverter& e = TransitionConverter(),
-		   const Format& f = Format(),
-		   bool merge_states = false)
+		   const TransitionConverter& e,
+		   const Format& f,
+		   bool merge_states)
   {
-    return io::
-      automaton_loader_<Auto, TransitionConverter, Format>(a, e, f, merge_states);
+    return io::automaton_loader_<Auto, TransitionConverter, Format>
+      (a, e, f, merge_states);
   }
 
 } // vcsn

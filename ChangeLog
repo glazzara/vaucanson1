@@ -1,5 +1,19 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Equip tools/ with TIMER.
+
+	* include/vaucanson/tools/bencher.hh: Include C++ headers.
+	* include/vaucanson/tools/gen_random.hh,
+	* include/vaucanson/tools/gen_random.hxx:
+	Remove the ctor taking a seed: the seed should be dealt with
+	from outside, using srand.
+	* include/vaucanson/tools/out_display.hh: Move includes...
+	* include/vaucanson/tools/out_display.hxx: here.
+	* include/vaucanson/tools/io.hh: Formatting changes.
+	* include/vaucanson/tools/io.hxx: Use TIMER_SCOPED.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Straightforward use of the timer.
 
 	* include/vaucanson/algorithms/extension.hxx,
