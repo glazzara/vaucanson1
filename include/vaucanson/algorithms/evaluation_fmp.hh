@@ -49,6 +49,8 @@ namespace vcsn {
 		 const Element<SA, TA>&,
 		 Element<SARET, TARET>&);
 
+  /// @}
+
 } // End of namespace vcsn.
 
 # ifndef VCSN_USE_INTERFACE_ONLY

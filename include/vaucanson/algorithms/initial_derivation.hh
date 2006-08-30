@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,7 +21,8 @@
 /**
  * @file initial_derivation.hh
  *
- * Declaration of the initial derivation visitor, used for smart_derivative_automaton.
+ * Declaration of the initial derivation visitor, used for
+ * smart_derivative_automaton.
  *
  */
 /** @} */

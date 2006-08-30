@@ -170,6 +170,8 @@ namespace vcsn {
   Element<A, T>
   forward_eps_removal(const Element<A, T>& a);
 
+  /// @}
+  
 } // vcsn
 
 

@@ -1,5 +1,17 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix doxygenation.
+
+	* include/vaucanson/algorithms/eps_removal.hh,
+	* include/vaucanson/algorithms/evaluation_fmp.hh,
+	* include/vaucanson/algorithms/extension.hh,
+	* include/vaucanson/algorithms/fmp_to_realtime.hh,
+	* include/vaucanson/algorithms/initial_derivation.hh:
+	Doxygen fixes/adjustments.
+	In particular, add missing @}.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Time invert.
 
 	* include/vaucanson/algorithms/invert.hxx: Use TIMER_SCOPED.

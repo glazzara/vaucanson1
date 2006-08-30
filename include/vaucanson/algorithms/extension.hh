@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -39,8 +39,7 @@ namespace vcsn {
    * Extend  an automaton to  a transducer  whose multiplicity  is the
    * series of the automaton.
    */
-  template <typename S,
-	    typename T>
+  template <typename S, typename T>
   typename identity_transducer_helper<S, T>::ret
   extension(const Element<S, T>&);
 

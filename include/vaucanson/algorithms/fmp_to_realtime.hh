@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ namespace vcsn
   /** @addtogroup algorithms *//** @{ */
 
   /// @name FMP automaton to realtime transducer algorithm.
-  //@{
+  ///@{
   /// Compute the equivalent transducer of a FMP automaton.
   /// Please note that for the moment this function works
   /// only if the support of each transition is finite.
@@ -55,7 +55,7 @@ namespace vcsn
   Element<SS, TT>&
   fmp_to_realtime(const Element<S, T>& fmp,
 		  Element<SS, TT>& res);
-  //@}
+  ///@}
 
   /** @} */
 }
