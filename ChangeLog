@@ -1,5 +1,13 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix and time complement.
+
+	* include/vaucanson/algorithms/complement.hxx:
+	Include is_deterministic.hh, not determinize.hh.
+	Use TIMER_SCOPED.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Adjustments.
 
 	* include/vaucanson/config/system.hh (VAUCANSON): New.
