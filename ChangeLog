@@ -1,5 +1,14 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Simplify and time cut_up.
+
+	* include/vaucanson/algorithms/cut_up.hxx:
+	Use TIMER_SCOPED.
+	Make smarter use of alternative signatures to avoid code
+	duplication.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Simplify accessible.
 
 	* include/vaucanson/algorithms/accessible.hxx: Remove

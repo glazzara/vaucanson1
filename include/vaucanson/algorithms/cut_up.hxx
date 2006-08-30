@@ -36,6 +36,7 @@ namespace vcsn {
   template <class S, class T>
   bool is_cut_up(const Element<S, T>& a)
   {
+    TIMER_SCOPED("is_cut_up");
     typedef Element<S, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
 
@@ -144,25 +145,22 @@ namespace vcsn {
   `---------*/
 
   template <class S, class T>
-  Element<S, T>
-  cut_up(const Element<S, T>& a)
+  void
+  cut_up(const Element<S, T>& a, Element<S, T>& res)
   {
+    TIMER_SCOPED("cut_up");
     typedef typename Element<S, T>::series_set_elt_t::value_t series_impl_t;
-
-    Element<S, T> res(a.structure());
-    do_cut_up(a.structure(),SELECT(series_impl_t), a, res);
-
-    return res;
+    do_cut_up(a.structure(), SELECT(series_impl_t), a, res);
   }
 
 
   template <class S, class T>
-  void
-  cut_up(const Element<S, T>& a, Element<S, T>& res)
+  Element<S, T>
+  cut_up(const Element<S, T>& a)
   {
-    typedef typename Element<S, T>::series_set_elt_t::value_t series_impl_t;
-
-    do_cut_up(a.structure(), SELECT(series_impl_t), a, res);
+    Element<S, T> res(a.structure());
+    cut_up(a, res);
+    return res;
   }
 
 
@@ -170,12 +168,7 @@ namespace vcsn {
   void
   cut_up_here(Element<S, T>& a)
   {
-    typedef typename Element<S, T>::series_set_elt_t::value_t series_impl_t;
-
-    Element<S, T> res(a.structure());
-    do_cut_up(a.structure(),SELECT(series_impl_t), a, res);
-
-    a = res;
+    a = cut_up(a);
   }
 
 
