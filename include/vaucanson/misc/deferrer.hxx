@@ -17,7 +17,7 @@
 #ifndef VCSN_MISC_DEFERRER_HXX
 # define VCSN_MISC_DEFERRER_HXX
 
-/** @addtogroup misg */ /** @{ */
+/** @addtogroup misc */ /** @{ */
 /**
  * @file deferrer.hxx
  *

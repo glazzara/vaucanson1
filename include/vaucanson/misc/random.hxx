@@ -103,7 +103,7 @@ namespace vcsn {
 				static_cast<float> (rand ())) / RAND_MAX +
 			       static_cast<float> (rand ())) / RAND_MAX;
 
-	return min + generate_one * range;;
+	return min + generate_one * range;
       }
 
       template<>
@@ -124,7 +124,7 @@ namespace vcsn {
 				 static_cast<double> (rand ())) / RAND_MAX +
 				static_cast<double> (rand ())) / RAND_MAX;
 
-	return min + generate_one * range;;
+	return min + generate_one * range;
       }
 
       template <class Iterator, class OutputIterator>
@@ -145,52 +145,52 @@ namespace vcsn {
 	}
       }
 
-	template<>
-	inline
-	vcsn::algebra::RationalNumber
-	generate<vcsn::algebra::RationalNumber> ()
-	{
-	  const int num = generate<int> ();
-	  const unsigned denom =
-	    generate<unsigned> (1, vcsn::misc::limits<unsigned>::max ());
-	  return vcsn::algebra::RationalNumber (num, denom);
-	}
+      template<>
+      inline
+      vcsn::algebra::RationalNumber
+      generate<vcsn::algebra::RationalNumber> ()
+      {
+	const int num = generate<int> ();
+	const unsigned denom =
+	  generate<unsigned> (1, vcsn::misc::limits<unsigned>::max ());
+	return vcsn::algebra::RationalNumber (num, denom);
+      }
 
-	  template<>
-	  inline
-	  vcsn::algebra::RationalNumber
-	  generate<vcsn::algebra::RationalNumber>
-	  (const vcsn::algebra::RationalNumber min,
-	   const vcsn::algebra::RationalNumber max)
-	  {
-	    const int denom = vcsn::algebra::lcm (min.denom (), max.denom ());
-	    const int num1 = min.num ()*denom/min.denom ();
-	    const int num2 = max.num ()*denom/max.denom ();
-	    const int maxi = std::max (std::max (abs (num1), abs (num2)),denom);
-	    const int ratio = (vcsn::misc::limits<int>::max ()-1)/maxi;
-	    return
-	      vcsn::algebra::RationalNumber (generate<int> (num1*ratio, num2*ratio),
-					     denom * ratio);
-	  }
+      template<>
+      inline
+      vcsn::algebra::RationalNumber
+      generate<vcsn::algebra::RationalNumber>
+      (const vcsn::algebra::RationalNumber min,
+       const vcsn::algebra::RationalNumber max)
+      {
+	const int denom = vcsn::algebra::lcm (min.denom (), max.denom ());
+	const int num1 = min.num ()*denom/min.denom ();
+	const int num2 = max.num ()*denom/max.denom ();
+	const int maxi = std::max (std::max (abs (num1), abs (num2)),denom);
+	const int ratio = (vcsn::misc::limits<int>::max ()-1)/maxi;
+	return
+	  vcsn::algebra::RationalNumber (generate<int> (num1*ratio, num2*ratio),
+					 denom * ratio);
+      }
 
-	      template <>
-	      inline
-	      std::pair<char, int> generate<std::pair<char, int> > ()
-	    {
-	      return std::make_pair (generate<char> (), generate<int> ());
-				     }
+      template <>
+      inline
+      std::pair<char, int> generate<std::pair<char, int> > ()
+      {
+	return std::make_pair (generate<char> (), generate<int> ());
+      }
 
-		template <>
-				     inline
-		small_alpha_letter_t
-		generate<small_alpha_letter_t> ()
-	      {
-		return generate<char> (small_alpha_interval_t::from_value,
-				       small_alpha_interval_t::to_value);
-	      }
+      template <>
+      inline
+      small_alpha_letter_t
+      generate<small_alpha_letter_t> ()
+      {
+	return generate<char> (small_alpha_interval_t::from_value,
+			       small_alpha_interval_t::to_value);
+      }
 
-	      } // Random
-	    } // misc
-	  } // vcsn
+    } // Random
+  } // misc
+} // vcsn
 
 #endif // ! VCSN_MISC_RANDOM_HXX

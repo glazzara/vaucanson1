@@ -20,8 +20,30 @@
 # include <fstream>
 # include <vaucanson/config/system.hh>
 
-# define INHERIT_TYPEDEF_(From, Type)		\
-  typedef typename From::Type Type;
+/// Import the Type from From qualified with Qual, with a Typename prepended.
+# define IMPORT_TYPEDEF_TYPENAME(From, Qual, Type, Typename) \
+  typedef Typename From::Type Qual ## Type
+
+
+/// Import the Type from From qualified with Qual, without a typename.
+# define IMPORT_QUALIFIED_TYPEDEF(From, Qual, Type)		\
+  IMPORT_TYPEDEF_TYPENAME(From, Qual, Type,)
+
+/// Import the Type from From qualified with Qual, without a typename.
+# define IMPORT_QUALIFIED_TYPEDEF_(From, Qual, Type)			\
+  IMPORT_TYPEDEF_TYPENAME(From, Qual, Type, typename)
+
+
+/// Import the Type from From, with a typename.
+# define IMPORT_TYPEDEF_(From, Type)		\
+  IMPORT_QUALIFIED_TYPEDEF_(From, ,Type)
+
+/// Import the Type from From, without a typename.
+# define IMPORT_TYPEDEF(From, Type)		\
+  IMPORT_QUALIFIED_TYPEDEF(From, ,Type)
+
+
+
 
 # define AUTOMATON_TYPES_MAYBE_TYPENAME(AutoType, Prefix, Typename)	\
   typedef AutoType						Prefix##automaton_t; \
@@ -152,5 +174,21 @@
 # define one_	identity(SELECT(typename series_set_elt_t::value_t))
 # define empty_	identity(SELECT(typename monoid_elt_t::value_t))
 # define wzero_	zero(SELECT(typename semiring_elt_t::value_t))
+
+// Use of a timer.
+# ifdef GLOBAL_TIMER
+#  include <vaucanson/misc/timer.hh>
+#  define TIMER_START()      GLOBAL_TIMER.start ()
+#  define TIMER_PUSH(Task)   GLOBAL_TIMER.push (Task)
+#  define TIMER_POP(Task)    GLOBAL_TIMER.pop (Task)
+#  define TIMER_STOP()       GLOBAL_TIMER.stop ()
+#  define TIMER_SCOPED(Task) vcsn::misc::ScopedTimer stimer (GLOBAL_TIMER, Task)
+# else
+#  define TIMER_START()      (void) 0
+#  define TIMER_PUSH(Task)   (void) 0
+#  define TIMER_POP(Task)    (void) 0
+#  define TIMER_STOP()       (void) 0
+#  define TIMER_SCOPED(Task) (void) 0
+# endif
 
 #endif // ! VCSN_MISC_USUAL_MACROS_HH

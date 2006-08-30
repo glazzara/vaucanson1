@@ -1,3 +1,108 @@
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add a timer framework.
+
+	* include/vaucanson/misc/timer.hh,
+	* include/vaucanson/misc/timer.cc,
+	* include/vaucanson/misc/timer.hxx: New.
+	Based on code from the Tiger Compiler.
+	* include/vaucanson/misc/usual_macros.hh (TIMER_START, TIMER_STOP)
+	(TIMER_POP, TIMER_PUSH, TIMER_SCOPED): New.
+
+	* include/vaucanson/misc/usual_macros.hh
+	(IMPORT_TYPEDEF_TYPENAME, IMPORT_QUALIFIED_TYPEDEF)
+	(IMPORT_QUALIFIED_TYPEDEF_, IMPORT_TYPEDEF_, IMPORT_TYPEDEF):
+	New.
+	(INHERIT_TYPEDEF_): Remove.
+
+	* include/vaucanson/misc/random.hxx: Formatting changes.
+	* include/vaucanson/misc/deferrer.hxx: Typo in Dox.
+
+	Provide a timer framework.
+	* include/vaucanson/misc/timer.cc,
+	* include/vaucanson/misc/timer.hh,
+	* include/vaucanson/misc/timer.hxx: New, inspired from the
+	implementation in the Tiger Compiler.
+
+	Rationalize file names.
+	* include/vaucanson/algorithms/determinize.hh,
+	* include/vaucanson/algorithms/determinize.hxx
+	(is_state_deterministic, is_deterministic): Move to...
+	* include/vaucanson/algorithms/is_deterministic.hh,
+	* include/vaucanson/algorithms/is_deterministic.hxx: these new files.
+	* include/Makefile.am: Adjust.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx
+	* include/vaucanson/algebra/concept/freemonoid_product.hh
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx
+	* include/vaucanson/algebra/implementation/alphabets/predefs.hh
+	* include/vaucanson/algebra/implementation/free_monoid/words.hh
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh
+	* include/vaucanson/algorithms/accessible.hxx
+	* include/vaucanson/algorithms/aci_canonical.hxx
+	* include/vaucanson/algorithms/aut_to_exp.hxx
+	* include/vaucanson/algorithms/berry_sethi.hxx
+	* include/vaucanson/algorithms/brzozowski.hxx
+	* include/vaucanson/algorithms/complement.hxx
+	* include/vaucanson/algorithms/complete.hxx
+	* include/vaucanson/algorithms/composition_cover.hxx
+	* include/vaucanson/algorithms/concatenate.hxx
+	* include/vaucanson/algorithms/cut_up.hxx
+	* include/vaucanson/algorithms/derived_term_automaton.hxx
+	* include/vaucanson/algorithms/determinize.hh
+	* include/vaucanson/algorithms/determinize.hxx
+	* include/vaucanson/algorithms/eps_removal.hh
+	* include/vaucanson/algorithms/eps_removal.hxx
+	* include/vaucanson/algorithms/eval.hxx
+	* include/vaucanson/algorithms/evaluation_fmp.hh
+	* include/vaucanson/algorithms/evaluation_fmp.hxx
+	* include/vaucanson/algorithms/extension.hh
+	* include/vaucanson/algorithms/extension.hxx
+	* include/vaucanson/algorithms/finite_support_conversion.hxx
+	* include/vaucanson/algorithms/fmp_to_realtime.hh
+	* include/vaucanson/algorithms/fmp_to_realtime.hxx
+	* include/vaucanson/algorithms/initial_derivation.hh
+	* include/vaucanson/algorithms/initial_derivation.hxx
+	* include/vaucanson/algorithms/invert.hxx
+	* include/vaucanson/algorithms/is_ambiguous.hxx
+	* include/vaucanson/algorithms/is_letterized.hxx
+	* include/vaucanson/algorithms/is_normalized.hxx
+	* include/vaucanson/algorithms/is_realtime.hxx
+	* include/vaucanson/algorithms/isomorph.hxx
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx
+	* include/vaucanson/algorithms/minimization_moore.hxx
+	* include/vaucanson/algorithms/normalized.hxx
+	* include/vaucanson/algorithms/product.hh
+	* include/vaucanson/algorithms/product.hxx
+	* include/vaucanson/algorithms/projection.hxx
+	* include/vaucanson/algorithms/projections_fmp.hxx
+	* include/vaucanson/algorithms/search.hxx
+	* include/vaucanson/algorithms/standard.hxx
+	* include/vaucanson/algorithms/sub_automaton.hxx
+	* include/vaucanson/algorithms/sub_normalize.hxx
+	* include/vaucanson/algorithms/transpose.hxx
+	* include/vaucanson/algorithms/trim.hxx
+	* include/vaucanson/automata/concept/automata_base.hh
+	* include/vaucanson/automata/concept/transducer_base.hh
+	* include/vaucanson/automata/concept/transducer_base.hxx
+	* include/vaucanson/config/system.hh
+	* include/vaucanson/contexts/automaton_functions.thh
+	* include/vaucanson/misc/deferrer.hxx
+	* include/vaucanson/misc/random.hxx: Formatting changes.
+	* include/vaucanson/misc/usual_macros.hh
+	* include/vaucanson/tools/bencher.hh
+	* include/vaucanson/tools/gen_random.hh
+	* include/vaucanson/tools/gen_random.hxx
+	* include/vaucanson/tools/io.hh
+	* include/vaucanson/tools/io.hxx
+	* include/vaucanson/tools/out_display.hh
+	* include/vaucanson/tools/out_display.hxx
+	* include/vaucanson/xml/XML.hh
+	* include/vaucanson/xml/tools.hxx
+	* include/vaucanson/xml/xml_chooser.hh
+	* include/vaucanson/xml/xml_chooser.hxx
+
 2006-08-21  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/emacs/vaucanson.el: Require rebox.  Minor aesthetical changes.
