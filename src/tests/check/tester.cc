@@ -16,6 +16,7 @@
 //
 #include <iomanip>
 #include <string>
+#include <cassert>
 #include "tests/check/tester.hh"
 
 namespace tests {
@@ -55,7 +56,7 @@ namespace tests {
     process_options (argc, argv);
     finalize_initialization ();
   }
-  
+
   void
   Tester::finalize_initialization ()
   {
@@ -66,7 +67,7 @@ namespace tests {
     srand (seed_);
   }
 
-  void 
+  void
   Tester::process_option (const std::string& arg)
   {
     // --verbose=[no, low, high]
@@ -83,7 +84,7 @@ namespace tests {
       seed_ = seed_time;
     else if (arg.substr (0, strlen ("--seed=")) == "--seed=")
       {
-	unsigned long res = 
+	unsigned long res =
 	  strtoul (arg.substr (strlen ("--seed=")).c_str (), 0, 0);
 	assert (res <= static_cast <unsigned long> (UINT_MAX));
 	seed_ = static_cast <unsigned> (res);
@@ -91,8 +92,8 @@ namespace tests {
     else
       std::cerr << "ignored unrecognized option: " << arg << std::endl;
   }
-  
-  void 
+
+  void
   Tester::process_options (int argc, char **argv)
   {
     for (int i = 1; i < argc; ++i)
@@ -100,7 +101,7 @@ namespace tests {
   }
 
 
-  Tester::verbose_level 
+  Tester::verbose_level
   Tester::verbose() const
   {
     return verbose_;

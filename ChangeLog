@@ -1,5 +1,11 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Include cassert.
+
+	* src/tests/check/tester.cc: Do it.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix doxugenation.
 
 	* doc/Makefile.am (ref): Do not create it directly.
