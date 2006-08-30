@@ -1,5 +1,24 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	@addgroup need a single-word group-name.
+
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hh:
+	Doxygen fixes.
+	* include/vaucanson/algebra/implementation/free_monoid/words.hh:
+	Ditto.
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hh:
+	The group id is fmp, not "freemonoid product".
+	Anyway, the full name for fmp can be given elsewhere.
+	* include/vaucanson/algebra/concept/freemonoid_product.hh:
+	Idem.
+	* include/vaucanson/algebra/concept/freemonoid_product_base.hxx:
+	Ditto.
+	* include/vaucanson/algebra/concept/alphabets_base.hxx:
+	Make assertions more useful.
+	Formatting changes.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Equip tools/ with TIMER.
 
 	* include/vaucanson/tools/bencher.hh: Include C++ headers.

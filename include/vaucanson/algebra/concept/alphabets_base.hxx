@@ -122,8 +122,8 @@ namespace vcsn {
   MetaElement<algebra::AlphabetSetBase<S>, T>::choose() const
   {
     // FIXME: recommendation(overload this operator)
-
-    precondition (is_finite() && size() > 0);
+    precondition (is_finite());
+    precondition (size() > 0);
 
     int  nr = misc::random::generate<int>(0, size() - 1);
 
@@ -138,7 +138,8 @@ namespace vcsn {
   typename algebra::alphabet_traits<S, T>::letter_t
   MetaElement<algebra::AlphabetSetBase<S>, T>::random_letter() const
   {
-    return misc::random::generate<typename algebra::alphabet_traits<S, T>::letter_t>();
+    return misc::random::generate
+      <typename algebra::alphabet_traits<S, T>::letter_t>();
   }
 
   template<typename S, typename T>

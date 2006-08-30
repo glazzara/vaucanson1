@@ -64,18 +64,20 @@ namespace vcsn {
 
   namespace misc {
 
-    /// To display a single pair
+    /// Display a single pair.
+    ///
     /// It assumes that each element of the pair is printable
-    /// (i.e. the operator<< is defined on it)
+    /// (i.e. the operator<< is defined on it).
     template <typename U, typename V>
     std::ostream& operator<< (std::ostream& o, std::pair<U, V> p);
 
-    /// To display a basic_string of pair (idem)
+    /// Display a basic_string of pair.
     template <typename U, typename V, class Traits, class Allocator>
-    std::ostream& operator<< (std::ostream& o,
-			      std::basic_string<std::pair<U, V>, Traits, Allocator> s);
+    std::ostream&
+    operator<< (std::ostream& o,
+		std::basic_string<std::pair<U, V>, Traits, Allocator> s);
 
-    //! To read a single pair.
+    /// Read a single pair.
     template <typename U, typename V>
     std::istream& operator>> (std::istream& i, std::pair<U, V>& p);
 
