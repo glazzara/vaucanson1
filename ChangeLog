@@ -1,5 +1,15 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fix doxugenation.
+
+	* doc/Makefile.am (ref): Do not create it directly.
+	* doc/doc.doxy.in: Adjust.
+	(EXPAND_AS_DEFINED): More of them.
+	* doc/manual/developer.tex (Writing Makefiles): New.
+	(Files Names, Type Names): New.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Use the Timer in TAF-Kit.
 
 	* taf-kit/src/edition_commands.hxx: s/wrong/invalid/.

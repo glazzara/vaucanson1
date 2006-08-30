@@ -23,11 +23,10 @@ SUBDIRS = makefiles manual xml
 
 all: $(srcdir)/ref
 $(srcdir)/ref: doc.doxy.in
-	rm -rf ref $(srcdir)/ref
-	mkdir -p ref
+	rm -rf ref.tmp $(srcdir)/ref
 	$(MAKE) $(AM_MAKEFLAGS) doc.doxy
 	$(DOXYGEN) doc.doxy
-	mv ref $(srcdir)
+	mv ref.tmp $(srcdir)/ref
 
 install-data-local:
 	rm -rf $(DESTDIR)$(htmldir)/ref

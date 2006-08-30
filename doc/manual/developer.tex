@@ -86,6 +86,42 @@ The \Vauc package is organized as follows:
   \hline
 \end{tabularx}
 
+\subsection{Writing Makefiles}
+
+\begin{description}
+\item[Produce the output atomically] Generating an output bits by
+  bits, say with a series of \samp{>> \$@}, or even with some common
+  programs, can result in invalid files if the process failed at some
+  point, or was interrupted.  Note that in that case the (invalid)
+  output file is newer than its dependencies, therefore it will
+  remain.  Instead, create an temporary output, say \samp{\$@.tmp},
+  and as last step, rename it a \samp{\$@}.  Sometimes, using
+  \command{move-if-change} makes more sense.
+
+\item[Look for the economy] Do what you can to save useless
+  recompilations.  Using move-if-change, especially for generated
+  files, does save cycles.  But then, beware that time stamps are not
+  updated, which can be troublesome if the Makefile includes
+  dependency tracking, as they will not be satisfied.
+
+\item[Always include dependencies] included for the bootstrapping
+  process.  In their regular development process, the contributors
+  should not have to bootstrap again, that should be only for the
+  initial check-out, and some other situation where the layout of the
+  project has deeply changed.  Therefore, always hook the generated to
+  the changes in the generators.
+
+\item[Hunt Makefile duplication] Prefer an included Makefile to
+  copy-and-paste of bits.  That's also true for generated Makefiles:
+  put the constant parts in a Makefile to be included in the generated
+  Makefiles, rather than copying these bits several times.
+
+  This makes it easier to maintain, and also improves locality: you
+  can edit the included Makefile and try it in just one directory,
+  instead of having to relaunch the generation of all the Makefiles.
+\end{description}
+
+
 \subsection{Coding Style}
 
 Until this is written, please refer to
@@ -208,12 +244,38 @@ For instance, this is bad style:
     SELECTOR(T)) const                                                    \
     {                                                                     \
       return op_ ## Canarg ## choose_ ## Nonarg ## starable(this->self(), \
-                                                           SELECT(T));    \
+							   SELECT(T));    \
     };
     VCSN_choose_semiring(can_,non_,bool)
     VCSN_choose_semiring(,,Element<Self, T>)
     VCSN_choose_semiring(,non_,Element<Self, T>)
 \end{lstlisting}
+
+\subsection{File Names}
+
+In \Vauc the separator is \samp{\_}, not \samp{-}.  We use the
+following file extensions:
+\begin{description}
+\item[cc] Implementation (compilation unit)
+\item[hh] Declarations and documentation
+\item[hxx] Inline Implementation
+\end{description}
+
+File names should match the class they declare, with the conversion of
+name conventions (i.e., from \code{MyClass} to \file{my_class.*}).
+
+\subsection{Type Names}
+
+Although some coding standards recommend against this practice, types
+in \Vauc should end with \samp{\_t}.  One exception is traits, where
+\code{ret} is commonly used.
+
+\code{self\_t}, when defined, always refers to the current class.
+
+\code{super\_t}, when defined, always refers to \emph{the} super
+class.  When there are several, \code{super_t} is not used.  The
+macros \code{INHERIT\_TYPEDEF} and \code{INHERIT\_TYPEDEF\_} rely on
+this convention.
 
 \subsection{Variable Names}
 \newcommand{\textstar}{\texttt{\ensuremath{*}}}

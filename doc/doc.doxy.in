@@ -19,7 +19,7 @@
 #---------------------------------------------------------------------------
 PROJECT_NAME           = Vaucanson
 PROJECT_NUMBER         = @PACKAGE_VERSION@
-OUTPUT_DIRECTORY       = ref
+OUTPUT_DIRECTORY       = ref.tmp
 OUTPUT_LANGUAGE        = English
 USE_WINDOWS_ENCODING   = NO
 BRIEF_MEMBER_DESC      = YES
@@ -82,7 +82,7 @@ WARN_LOGFILE           =
 INPUT                  = @top_srcdir@/include/
 FILE_PATTERNS          = *.hh *.hxx \
 			 *.thh *.thxx \
-                         *.dox
+			 *.dox
 RECURSIVE              = YES
 EXCLUDE                =
 EXCLUDE_SYMLINKS       = YES
@@ -202,7 +202,7 @@ PREDEFINED             =
 # Macros found in design_pattern/elements_ops.hxx,
 # automata/implementation/kind_adapter.hh, xml/node.hxx, xml/node.hh,
 # graph.hh, graph.hxx, automata/implementation/transpose_view.hh,
-# algebra/implementation/semiring/rational_number.hh.
+# algebra/implementation/semiring/rational_number.hh, usual_macros.hh.
 EXPAND_AS_DEFINED      =						\
 			TParmFMP TParam AUTtype FMPtype			\
 									\
@@ -248,8 +248,23 @@ EXPAND_AS_DEFINED      =						\
 			AutoType					\
 									\
 			RATIONAL_NUMBER_OPERATOR			\
-			RATIONAL_NUMBER_IN_PLACE_OPERATOR
-
+			RATIONAL_NUMBER_IN_PLACE_OPERATOR		\
+									\
+			IMPORT_TYPEDEF_TYPENAME				\
+			IMPORT_QUALIFIED_TYPEDEF			\
+			IMPORT_QUALIFIED_TYPEDEF_			\
+			IMPORT_TYPEDEF_					\
+			IMPORT_TYPEDEF					\
+			AUTOMATON_TYPES_MAYBE_TYPENAME			\
+			AUTOMATON_TYPES_				\
+			AUTOMATON_TYPES_EXACT_				\
+			AUTOMATON_TYPES					\
+			AUTOMATON_TYPES_EXACT				\
+			AUTOMATON_FREEMONOID_TYPES_			\
+			AUTOMATON_FREEMONOID_TYPES_EXACT_		\
+			AUTOMATON_FREEMONOID_TYPES			\
+			AUTOMATON_FREEMONOID_TYPES_EXACT		\
+			AUTOMATA_SET_TYPES
 
 SKIP_FUNCTION_MACROS   = YES
 
@@ -286,7 +301,7 @@ GENERATE_LEGEND        = YES
 DOT_CLEANUP            = YES
 
 #---------------------------------------------------------------------------
-# Configuration::addtions related to the search engine
+# Configuration::additions related to the search engine
 #---------------------------------------------------------------------------
 SEARCHENGINE           = NO
 
