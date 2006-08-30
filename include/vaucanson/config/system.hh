@@ -65,4 +65,7 @@
 #  define XUNUSED(X) /* unused */
 # endif
 
+/// A token to let subpackages know they work for Vaucanson.
+# define VAUCANSON 1
+
 #endif // ! VCSN_CONFIG_SYSTEM_HH

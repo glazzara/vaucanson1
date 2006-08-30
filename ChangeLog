@@ -1,5 +1,14 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Adjustments.
+
+	* include/vaucanson/config/system.hh (VAUCANSON): New.
+	Used by the Timer system.
+	* include/vaucanson/contexts/automaton_functions.thh
+	(is_deterministic.hh): Include it.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Simplify and time cut_up.
 
 	* include/vaucanson/algorithms/cut_up.hxx:

@@ -36,6 +36,7 @@
 # include <vaucanson/algorithms/eps_removal.hh>
 # include <vaucanson/algorithms/eval.hh>
 # include <vaucanson/algorithms/is_ambiguous.hh>
+# include <vaucanson/algorithms/is_deterministic.hh>
 # include <vaucanson/algorithms/is_realtime.hh>
 # include <vaucanson/algorithms/isomorph.hh>
 # include <vaucanson/algorithms/minimization_hopcroft.hh>
