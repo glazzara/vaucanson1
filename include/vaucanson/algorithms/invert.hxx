@@ -28,7 +28,7 @@
 # include <vaucanson/algorithms/standard_of.hh>
 # include <vaucanson/algorithms/realtime.hh>
 
-namespace vcsn 
+namespace vcsn
 {
 
   /*------------------------------------.
@@ -36,7 +36,7 @@ namespace vcsn
   `------------------------------------*/
 
   template<typename S, typename T>
-  Element<S, T>& 
+  Element<S, T>&
   do_invert_rw(Element<S, T>& t,
 	       Element<S, T>& u)
   {
@@ -150,7 +150,6 @@ namespace vcsn
 
     automata_set_t auto_structure(ss_structure);
 
-
     Trans_t* res = new Trans_t(auto_structure);
     Trans_t src(t);
 
@@ -166,7 +165,6 @@ namespace vcsn
 	    Element<S, T>& res)
   {
     Element<S, T> src(t);
-
     return do_invert_rw(src, res);
   }
 
@@ -181,6 +179,7 @@ namespace vcsn
   Element<S, T>&
   invert(const Element<S, T>& t)
   {
+    TIMER_SCOPED("invert");
     return do_invert(t.structure(), t);
   }
 
@@ -189,9 +188,8 @@ namespace vcsn
   invert(const Element<S, T>& t,
 	 Element<S, T>& res)
   {
-    Element<S, T> src(t);
-
-    do_invert(t.structure(), src, res);
+    TIMER_SCOPED("invert");
+    do_invert(t.structure(), t, res);
   }
 }
 

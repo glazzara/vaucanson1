@@ -1,5 +1,11 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Time invert.
+
+	* include/vaucanson/algorithms/invert.hxx: Use TIMER_SCOPED.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Time product.
 
 	* include/vaucanson/algorithms/product.hh:
