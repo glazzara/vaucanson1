@@ -40,17 +40,19 @@ namespace vcsn
     {
       XML(const std::string& name = "", bool use_label_node = false);
 
+      /// Write on @a out.
       template <typename Saver, typename Conv>
       void operator()(std::ostream& out,
 		      const Saver& s,
 		      const Conv& conv) const;
 
+      /// Load from @a in.
       template<typename Loader>
       void operator()(std::istream& in, Loader& l);
 
     protected:
       const std::string name_;
-      bool		use_label_node_;
+      bool use_label_node_;
     };
 
   } // !xml

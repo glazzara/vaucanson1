@@ -1,5 +1,19 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	XML cleanups.
+
+	There are several naughty problems with our XML scheme.
+	In particular, it does not encode non ASCII characters properly.
+	We should use the Writers provided by Xerces instead of doing
+	this ourselves.
+	* include/vaucanson/xml/xml_chooser.hh: Doxygen.
+	* include/vaucanson/xml/xml_chooser.hxx:
+	Remove useless parens.
+	(create_element, has_attribute, get_attribute): New.
+	Use them.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	@addgroup need a single-word group-name.
 
 	* include/vaucanson/algebra/implementation/letter/couple_letter.hh:

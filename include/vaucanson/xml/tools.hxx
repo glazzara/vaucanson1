@@ -107,25 +107,56 @@ namespace vcsn
       { return "product"; }
 
 
-    /*---------.
-    | Automata |
-    `---------*/
+
+    /*-----------------------------------------.
+    | Sugar for Xerces functions on elements.  |
+    `-----------------------------------------*/
+
+      inline
+      xercesc::DOMElement*
+      create_element(xercesc::DOMDocument* doc,
+		     const std::string& e)
+      {
+	return doc->createElement(transcode(e));
+      }
+
 
       inline
       void
-      set_attribute (xercesc::DOMElement* e, std::string k, std::string v)
+      set_attribute (xercesc::DOMElement* e,
+		     const std::string& k, const std::string& v)
       {
 	e->setAttribute (transcode(k), transcode(v));
       }
 
       inline
       void
-      xset_attribute (xercesc::DOMElement* e, std::string k, std::string v)
+      xset_attribute (xercesc::DOMElement* e,
+		      const std::string& k, const std::string& v)
       {
 	if (v != "")
 	  set_attribute (e, k, v);
       }
 
+      inline
+      bool
+      has_attribute (const xercesc::DOMElement* e,
+		     const std::string& k)
+      {
+	return e->hasAttribute(transcode(k));
+      }
+
+      inline
+      std::string
+      get_attribute (const xercesc::DOMElement* e,
+		     const std::string& k)
+      {
+	return xml2str(e->getAttribute(transcode(k)));
+      }
+
+    /*---------.
+    | Automata |
+    `---------*/
 
       // Add the label as a string attribute.
       template <class S, class T, class U>
@@ -164,7 +195,7 @@ namespace vcsn
       | FMP Transducers |
       `----------------*/
 
-# define FMPtype      							  \
+# define FMPtype							  \
     Element<								  \
       Automata<								  \
       vcsn::algebra::Series<S, vcsn::algebra::FreeMonoidProduct<M1, M2> > \
@@ -212,9 +243,9 @@ namespace vcsn
 	}
 	else
 	{
-	  std::string in_word = get_label((*(series.supp())).first);
-	  std::string out_word = get_label((*(series.supp())).second);
-	  std::string mult = get_label(series.get(*(series.supp().begin())));
+	  std::string in_word = get_label((*series.supp()).first);
+	  std::string out_word = get_label((*series.supp()).second);
+	  std::string mult = get_label(series.get(*series.supp().begin()));
 
 	  if (in_word.size() && in_word != "1")
 	  {
@@ -334,20 +365,20 @@ namespace vcsn
 	for_all_letters(l, alphabet)
 	{
 	  std::ostringstream letter;
-	  xercesc::DOMElement* gen =
-	    doc->createElement(transcode("generator"));
+	  xercesc::DOMElement* gen = create_element(doc, "generator");
 	  letter << *l;
-	  set_attribute(gen, "value", letter.str().c_str());
+	  set_attribute(gen, "value", letter.str());
 	  root->appendChild(gen);
 	}
       }
 
       template <class M>
-      xercesc::DOMElement* create_monoid(const M& monoid,
-					 xercesc::DOMDocument* doc,
-					 xercesc::DOMElement* elt)
+      xercesc::DOMElement*
+      create_monoid(const M& monoid,
+		    xercesc::DOMDocument* doc,
+		    xercesc::DOMElement* elt)
       {
-	xercesc::DOMElement* m = doc->createElement(transcode("monoid"));
+	xercesc::DOMElement* m = create_element(doc, "monoid");
 	set_attribute(m, "type", get_monoid_type(monoid));
 	set_attribute(m, "generators", "letters");
 	elt->appendChild(m);
@@ -363,7 +394,7 @@ namespace vcsn
       {
 	typedef typename A::series_set_elt_t::semiring_elt_t::value_t value_t;
 
-	xercesc::DOMElement* s = doc->createElement(transcode("semiring"));
+	xercesc::DOMElement* s = create_element(doc, "semiring");
 
 	if (get_semiring_set(semiring, value_t()) != "ratSeries")
 	  set_attribute(s, "operations", get_semiring_operations(semiring));
@@ -384,7 +415,7 @@ namespace vcsn
 	  Element<Transducer<S>, T>::series_set_elt_t::semiring_elt_t::semiring_elt_t::value_t
 	  value_t;
 
-	xercesc::DOMElement* s = doc->createElement(transcode("semiring"));
+	xercesc::DOMElement* s = create_element(doc, "semiring");
 	set_attribute(s, "operations", "numerical");
 	set_attribute(s, "set", get_semiring_set(semiring, value_t()));
 	elt->appendChild(s);
@@ -398,7 +429,7 @@ namespace vcsn
       get_rec_xml_series(xercesc::DOMNode* n, T& aut)
       {
 	typedef	 rat::exp<typename T::monoid_elt_value_t,
- 	                  typename T::semiring_elt_value_t> krat_exp_impl_t;
+			  typename T::semiring_elt_value_t> krat_exp_impl_t;
 	typedef Element<typename T::series_set_t, krat_exp_impl_t> krat_exp_t;
 	krat_exp_t krat_exp (aut.structure().series());
 	typename T::semiring_elt_value_t weight =
@@ -423,10 +454,10 @@ namespace vcsn
 	      return get_rec_xml_series(n->getFirstChild(), aut);
 
 	    // Add weight
-	    if (element_n->hasAttribute(transcode("weight")))
+	    if (has_attribute(element_n, "weight"))
 	    {
 	      std::stringstream ss;
-	      ss << xml2str(element_n->getAttribute(transcode("weight")));
+	      ss << get_attribute(element_n, "weight");
 	      ss >> weight;
 	    }
 
@@ -462,7 +493,7 @@ namespace vcsn
 	    if (xml2str(n->getNodeName()) == "word")
 	      krat_exp = typename T::monoid_elt_t (
 		krat_exp.structure().monoid(),
-		xml2str(element_n->getAttribute(transcode("value"))));
+		get_attribute(element_n, "value"));
 
 	    if (xml2str(n->getNodeName()) == "zero")
 	      krat_exp = vcsn::algebra::
@@ -500,12 +531,12 @@ namespace vcsn
 	if (res == vcsn::algebra::
 	    zero_as<krat_exp_impl_t>::of(res.structure()))
 	{
-	  if (xml2str(node->getAttribute(transcode("label"))) == "")
+	  if (get_attribute(node, "label") == "")
 	    return
 	      vcsn::algebra::identity_as<typename T::series_set_elt_t::value_t>
 	      ::of(aut.structure().series());
 	  else
-	    parse(xml2str(node->getAttribute(transcode("label"))), res);
+	    parse(get_attribute(node, "label"), res);
 	}
 	return res;
       }
@@ -631,9 +662,9 @@ namespace vcsn
 	// No expression tag
 	else
 	{
-	  if (node->hasAttribute(transcode("label")))
+	  if (has_attribute(node, "label"))
 	  {
-	    std::string label = xml2str(node->getAttribute(transcode("label")));
+	    std::string label = get_attribute(node, "label");
 	    unsigned int pos = label.find("|");
 	    if (pos != std::string::npos)
 	    {
@@ -644,19 +675,16 @@ namespace vcsn
 	    }
 	    else
 	      i_res = parse(label, i_exp);
-	    if (node->hasAttribute(transcode("weight")))
-	      o_res = parse(xml2str(node->getAttribute(transcode("weight"))),
-			    o_exp);
+	    if (has_attribute(node, "weight"))
+	      o_res = parse(get_attribute(node, "weight"), o_exp);
 	  }
 	  // No expression tag, no label attribute.
 	  else
 	  {
-	    if (node->hasAttribute(transcode("in")))
-	      i_res = parse(xml2str(node->getAttribute(transcode("in"))),
-			    i_exp);
-	    if (node->hasAttribute(transcode("out")))
-	      o_res = parse(xml2str(node->getAttribute(transcode("out"))),
-			    o_exp);
+	    if (has_attribute(node, "in"))
+	      i_res = parse(get_attribute(node, "in"), i_exp);
+	    if (has_attribute(node, "out"))
+	      o_res = parse(get_attribute(node, "out"), o_exp);
 	  }
 	}
 	assoc_exp(a, i_exp, o_exp, res, i_res.first, o_res.first);
@@ -694,8 +722,8 @@ namespace vcsn
 			 const std::string& expected)
       {
 	std::string observed;
-	if (node && node->hasAttribute(transcode(key)))
-	  observed = xml2str(node->getAttribute(transcode(key)));
+	if (node && has_attribute(node, key))
+	  observed = get_attribute(node, key);
 	else
 	  observed = deflt;
 	if (expected != observed)
@@ -741,7 +769,7 @@ namespace vcsn
 	typedef typename
 	  trans_t::series_set_elt_t::semiring_elt_t::value_t value_t;
 
-	check_consistency (node, "semiring", "set", "ratSeries", 
+	check_consistency (node, "semiring", "set", "ratSeries",
 			   tools::get_semiring_set(param, value_t()));
       }
 
@@ -772,9 +800,8 @@ namespace vcsn
       {
 	os << spacing << "<" << xml2str(n->getNodeName());
 # define VCSN_TRANS_OUTPUT(What)					\
-	if (n->hasAttribute(transcode(What)))				\
-	  os << " " What "=\""						\
-	     << xml2str(n->getAttribute(transcode(What))) << "\""
+	if (has_attribute(n, What))					\
+	  os << " " What "=\"" << get_attribute(n, What) << "\""
 	VCSN_TRANS_OUTPUT("src");
 	VCSN_TRANS_OUTPUT("dst");
 	VCSN_TRANS_OUTPUT("label");
@@ -785,27 +812,25 @@ namespace vcsn
       }
 
 
+      // FIXME: I don't understand why we have to do that.
+      // Xerces provides no function to do it??? --- ad.
       template <class OStream>
       void print_tree(const xercesc::DOMElement* node,
 		      OStream& os,
 		      std::string spacing)
       {
 	using namespace xercesc;
-	unsigned i;
-	DOMNamedNodeMap* m;
 
 	if (xml2str(node->getNodeName()) == "transition")
 	  print_transition(static_cast<const DOMElement*>(node), os, spacing);
 	else
 	{
 	  os << spacing << "<" << xml2str(node->getNodeName());
-	  for (m = node->getAttributes(), i = 0;
-	       i < m->getLength(); ++i)
-	  {
+	  DOMNamedNodeMap* m = node->getAttributes();
+	  for (unsigned i = 0; i < m->getLength(); ++i)
 	    os << " " << xml2str(m->item(i)->getNodeName())
 	       << "=\"" << xml2str(m->item(i)->getNodeValue())
 	       << "\"";
-	  }
 	}
 	if (node->hasChildNodes())
 	  os << ">";

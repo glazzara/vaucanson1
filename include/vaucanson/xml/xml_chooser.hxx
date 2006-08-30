@@ -147,8 +147,8 @@ namespace vcsn
     template <class S, class T, class M1, class M2>
     const char*
     xml_chooser<FMPtype>::choose_start_tag()
-    { 
-      return "transducer"; 
+    {
+      return "transducer";
     }
 
 
