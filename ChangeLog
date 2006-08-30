@@ -1,5 +1,16 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Time product.
+
+	* include/vaucanson/algorithms/product.hh:
+	Comment changes.
+	* include/vaucanson/algorithms/product.hxx:
+	Use TIMER_SCOPED.
+	(product): Implement the one not taking a map
+	from the one using one, to avoid code duplication.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix and time complement.
 
 	* include/vaucanson/algorithms/complement.hxx:

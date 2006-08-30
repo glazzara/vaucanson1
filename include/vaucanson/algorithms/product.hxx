@@ -123,19 +123,20 @@ namespace vcsn {
   } // ! geom
 
 
-  /*--------.
-  | product |
-  `--------*/
+  /*-------------.
+  | do_product.  |
+  `-------------*/
 
   template <typename A, typename lhs_t, typename rhs_t, typename output_t>
   void
-  product(const AutomataBase<A>&,
-	  output_t&			output,
-	  const lhs_t&			lhs,
-	  const rhs_t&			rhs,
-	  std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m,
-	  const bool use_geometry = false)
+  do_product(const AutomataBase<A>&,
+	     output_t& output,
+	     const lhs_t& lhs,
+	     const rhs_t& rhs,
+	     std::map< hstate_t, std::pair<hstate_t, hstate_t> >& m,
+	     const bool use_geometry = false)
   {
+    TIMER_SCOPED("product");
     AUTOMATON_TYPES(output_t);
 
     typedef std::pair<hstate_t, hstate_t>		pair_hstate_t;
@@ -154,9 +155,9 @@ namespace vcsn {
     std::queue<pair_hstate_t>	to_process;
 
 
-    /*----------------------------------.
-    | Get initial states of the product |
-    `----------------------------------*/
+    /*------------------------------------.
+    | Get initial states of the product.  |
+    `------------------------------------*/
     for_all_initial_states(lhs_s, lhs)
       for_all_initial_states(rhs_s, rhs)
     {
@@ -175,9 +176,9 @@ namespace vcsn {
 	  ::setcoordfrom(output, lhs, rhs, new_state, *lhs_s, *rhs_s);
     }
 
-    /*-----------.
-    | Processing |
-    `-----------*/
+    /*-------------.
+    | Processing.  |
+    `-------------*/
     while (not to_process.empty())
     {
       const pair_hstate_t current_pair	= to_process.front();
@@ -249,18 +250,10 @@ namespace vcsn {
     }
   }
 
-  // wrappers
-  template<typename A, typename T, typename U>
-  Element<A, T>
-  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
-	  const bool use_geometry)
-  {
-    std::map<hstate_t, std::pair<hstate_t, hstate_t> > m;
-    // assertion(lhs.structure() == rhs.structure())
-    Element<A, T> ret(rhs.structure());
-    product(ret.structure(), ret, lhs, rhs, m, use_geometry);
-    return ret;
-  }
+
+  /*-----------.
+  | Wrappers.  |
+  `-----------*/
 
   template<typename A, typename T, typename U>
   Element<A, T>
@@ -269,8 +262,17 @@ namespace vcsn {
 	  const bool use_geometry)
   {
     Element<A, T> ret(rhs.structure());
-    product(ret.structure(), ret, lhs, rhs, m, use_geometry);
+    do_product(ret.structure(), ret, lhs, rhs, m, use_geometry);
     return ret;
+  }
+
+  template<typename A, typename T, typename U>
+  Element<A, T>
+  product(const Element<A, T>& lhs, const Element<A, U>& rhs,
+	  const bool use_geometry)
+  {
+    std::map<hstate_t, std::pair<hstate_t, hstate_t> > m;
+    return product (lhs, rhs, m, use_geometry);
   }
 
 } // End of namespace vcsn.
