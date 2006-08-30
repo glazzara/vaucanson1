@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -37,12 +37,11 @@ unsigned extract_test(tests::Tester& tg)
   typedef Auto automaton_t;
 
   tests::Tester t(tg);
-  GenRandomAutomata<automaton_t> gen(time(0x0));
+  GenRandomAutomata<automaton_t> gen;
 
-  const unsigned nb_tests = 10;
   unsigned	 success  = 0;
 
-  for (unsigned i = 0; i < nb_tests; i++)
+  for (unsigned i = 0; i < t.test_num(); i++)
   {
     unsigned nb_state = 5;
     unsigned nb_transition = 10;
@@ -53,8 +52,8 @@ unsigned extract_test(tests::Tester& tg)
       ++success;
   }
   std::string rate;
-  SUCCESS_RATE(rate, success, nb_tests);
-  TEST(t, "sub automaton "+rate, success == nb_tests);
+  SUCCESS_RATE(rate, success, t.test_num());
+  TEST(t, "sub automaton "+rate, success == t.test_num());
   return t.all_passed();
 }
 

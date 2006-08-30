@@ -22,21 +22,18 @@
 # include <iostream>
 # include <string>
 
-# define SAVE_AUTOMATON_XML(Dir, Name, Auto, Index)	\
-  do {							\
-    std::ostringstream s;				\
-    s << Dir << "/" << Name << "_" << Index << ".xml";	\
-    std::ofstream f(s.str().c_str());			\
-    vcsn::tools::xml_dump(f, Auto, Name);		\
+# define SAVE_AUTOMATON_XML_SIMPLE(Name, Auto)			\
+  do {								\
+    std::ostringstream s;					\
+    s << Name << ".xml";					\
+    std::string name = s.str();					\
+    std::ofstream f(name.c_str());				\
+    vcsn::tools::xml_dump(f, Auto, name);			\
+    TEST_MSG("Automaton saved in " << name);			\
   } while (0)
 
-# define SAVE_AUTOMATON_XML_SIMPLE(Name, Auto)	\
-  do {						\
-    std::ostringstream s;			\
-    s << Name << ".xml";			\
-    std::ofstream f(s.str().c_str());		\
-    vcsn::tools::xml_dump(f, Auto, Name);	\
-  } while (0)
+# define SAVE_AUTOMATON_XML(Dir, Name, Auto, Index)	\
+  SAVE_AUTOMATON_XML_SIMPLE (Dir << "/" << Name << "_" << Index, Auto)
 
 namespace tests {
 
@@ -75,6 +72,9 @@ namespace tests {
 
     /// The current seed.
     unsigned seed() const;
+
+    /// Number of times to run the test where it applies.
+    unsigned test_num () const;
 
     /// Whether all tests passed.
     bool all_passed();
@@ -152,7 +152,7 @@ inline std::string printable(T t)
     f.close();								\
     std::cerr << "FAIL: Test failed at iteration "			\
 	      << Iteration << std::endl;				\
-    std::cerr << "FAIL: Relevant information saved in " 		\
+    std::cerr << "FAIL: Relevant information saved in "		\
 	      << s.str() << std::endl;					\
   }
 
@@ -171,7 +171,7 @@ inline std::string printable(T t)
   else						\
    {						\
      std::cerr << "(" << #Code << " is false)"	\
-               << std::endl;			\
+	       << std::endl;			\
      aTester.ko(Label);				\
    }						\
 }
@@ -188,7 +188,7 @@ inline std::string printable(T t)
    {							\
      std::cerr << "(" << printable(Code)		\
 	       << " != " << printable(V)		\
-               << ")" << std::endl;			\
+	       << ")" << std::endl;			\
      aTester.ko(Label);					\
    }							\
 }

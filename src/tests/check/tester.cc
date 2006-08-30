@@ -119,6 +119,16 @@ namespace tests {
   }
 
 
+  unsigned
+  Tester::test_num() const
+  {
+    // There is no need for a big number here, as the test suite was
+    // already run for quite a while, and is still frequently run
+    // anyway.
+    return 5;
+  }
+
+
 
   bool
   Tester::all_passed()

@@ -22,3 +22,13 @@ AM_CPPFLAGS += -DVCSN_SRC_DIR=\"'$(top_srcdir)'\"
 
 TESTS_ENVIRONMENT = CXX="$(CXX)" CXXFLAGS="$(AM_CPPFLAGS) $(CPPFLAGS)"
 
+## ------------------------ ##
+## Makefile.am generation.  ##
+## ------------------------ ##
+
+tests_dir = $(top_srcdir)/src/tests
+generate_all = $(tests_dir)/test-suites/generate-all.sh
+generate_test_suite = $(tests_dir)/bin/generate-test-suite.sh
+
+$(srcdir)/Makefile.am: $(generate_all) $(generate_test_suite)
+	cd $(tests_dir)/test-suites && ./generate-all.sh

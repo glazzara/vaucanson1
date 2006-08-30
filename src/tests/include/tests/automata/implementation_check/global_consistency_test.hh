@@ -37,7 +37,7 @@ unsigned global_consistency_test(tests::Tester& tg)
   using namespace vcsn;
   using namespace vcsn::algebra;
 
-  GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen;
 
   automaton_t automaton = gen.generate(12, 20);
 

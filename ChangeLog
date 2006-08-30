@@ -1,5 +1,76 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Improve the testing framework.
+
+	* build-aux/check.mk: Document.
+	Log the exit status.
+	Support "Unit tests", that is to say, spare cycles by not
+	rerunning tests whose sources did not change.
+	Huge potential speed up, currently completely wasted by
+	the xml system which includes *all* the functions for
+	several contexts...
+	* build-aux/vcsn.m4: Minor simplification.
+
+	* src/tests/bin/generate-test-suite.sh,
+	* src/tests/design_pattern/Makefile.am: Use EXTRA_PROGRAMS, not check_PROGRAMS.
+	* src/tests/misc/Makefile.am: Ditto.
+	* src/tests/check/check.mk: Ditto.
+	* src/tests/test-suites/test-suite.mk: Ditto.
+	Regen the Makefiles.
+
+	* src/tests/include/tests/check/tester.hh:
+	(SAVE_AUTOMATON_XML, SAVE_AUTOMATON_XML_SIMPLE): Simplify.
+	Use TEST_MSG.
+	(test_num): New.
+	* src/tests/check/tester.cc: Adjust.
+
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_linearize_structure_test.hh,
+	* src/tests/include/tests/algebra/series/krat/main/krat_exp_linearize_test.hh,
+	* src/tests/include/tests/algebra/series/krat/tests/generate_random_krat.cc,
+	* src/tests/include/tests/automata/algos/boolean_automata/brzozowski_test.hh,
+	* src/tests/include/tests/automata/algos/boolean_automata/minimization_test.hh,
+	* src/tests/include/tests/automata/algos/boolean_rw_transducers/invert_test.hh,
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/generalized_test.hh,
+	* src/tests/include/tests/automata/algos/freemonoid_labeled_graphs/realtime_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/accessible_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/extract_test.hh,
+	* src/tests/include/tests/automata/algos/graphs/reachable_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/eps_removal_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/in_concat_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/sum_test.hh,
+	* src/tests/include/tests/automata/algos/label_aware_graphs/transpose_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_dmheuristic_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_heuristic_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_random_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/elimination_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/normalize_test.hh,
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/compute_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/deterministic_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_regression_test.hh,
+	* src/tests/include/tests/automata/algos/letter_combination_labeled_graphs/product_test.hh,
+	* src/tests/include/tests/automata/algos/series_multiplicity_transducers/extension_test.hh,
+	* src/tests/include/tests/automata/algos/series_multiplicity_transducers/realtime_trans_test.hh,
+	* src/tests/include/tests/automata/implementation_check/add_state_test.hh,
+	* src/tests/include/tests/automata/implementation_check/add_transition_test.hh,
+	* src/tests/include/tests/automata/implementation_check/coherence_state_transition_test.hh,
+	* src/tests/include/tests/automata/implementation_check/geometry_equal_operator_test.hh,
+	* src/tests/include/tests/automata/implementation_check/global_consistency_test.hh,
+	* src/tests/include/tests/automata/implementation_check/init_final_test.hh:
+	Ctors for GenRandomAutomata no longer take a seed.
+	No longer hard code the number of runs to do here, rather
+	use the Tester object to know that.
+	Remove uses of TEST_MSG saying that automata are saved.
+	Use Tester::verbose.
+
+	* src/tests/include/tests/automata/algos/boolean_automata/complete_test.hh:
+	Likewise.
+	And simplify, the previous test looked stupid to me.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Time derived_term_automaton.
 
 	* include/vaucanson/algorithms/derived_term_automaton.hxx:

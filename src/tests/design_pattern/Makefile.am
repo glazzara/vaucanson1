@@ -13,7 +13,7 @@
 
 include $(top_srcdir)/src/tests/check/check.mk
 
-check_PROGRAMS = \
+EXTRA_PROGRAMS = \
 	intrinsics_orphanage \
 	intrinsics_link \
 	intrinsics_extra \

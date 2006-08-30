@@ -35,7 +35,7 @@ unsigned coherence_state_transition_test(tests::Tester& tg)
   using namespace vcsn::algebra;
 
   typedef GenRandomAutomata<Auto> gen_auto_t;
-  gen_auto_t gen(time(0x0));
+  gen_auto_t gen;
   typedef Auto automaton_t;
   automaton_t automaton(gen.generate_dfa(10).structure());
 

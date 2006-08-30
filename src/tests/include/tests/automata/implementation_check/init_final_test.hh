@@ -36,7 +36,7 @@ unsigned init_final_test(tests::Tester& tg)
   using namespace vcsn::algebra;
 
   typedef Auto automaton_t;
-  GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen;
 
   automaton_t automaton = gen.empty();
 

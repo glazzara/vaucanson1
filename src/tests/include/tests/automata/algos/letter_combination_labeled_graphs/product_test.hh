@@ -43,7 +43,7 @@ template <class Auto>
 unsigned product_test(tests::Tester& tg)
 {
   typedef Auto automaton_t;
-  GenRandomAutomata<automaton_t> gen(time(0x0));
+  GenRandomAutomata<automaton_t> gen;
   tests::Tester t(tg);
 
   /*-------------*
@@ -87,8 +87,8 @@ unsigned product_test(tests::Tester& tg)
     if (eval(p, word_prod) == p.series().semiring().wzero_)
       {
 	TEST_MSG("This automata overflows the evaluation, it is saved in /tmp.");
- 	SAVE_AUTOMATON_XML("/tmp", "product_prod", p, cpt);
- 	SAVE_AUTOMATON_XML("/tmp", "product_generalized", g_p, cpt);
+	SAVE_AUTOMATON_XML("/tmp", "product_prod", p, cpt);
+	SAVE_AUTOMATON_XML("/tmp", "product_generalized", g_p, cpt);
 	TEST_FAIL_SAVE("product",
 		       cpt,
 		       "element of the support is eval'ed to 0"
@@ -107,7 +107,6 @@ unsigned product_test(tests::Tester& tg)
     if (eval(lhs, word_prod) == wzero or
 	     eval(rhs, word_prod) == wzero)
     {
-      TEST_MSG("Automata saved in /tmp.");
       SAVE_AUTOMATON_XML("/tmp", "product_rhs", rhs, cpt);
       SAVE_AUTOMATON_XML("/tmp", "product_lhs", lhs, cpt);
       SAVE_AUTOMATON_XML("/tmp", "product_prod", p, cpt);
@@ -134,11 +133,10 @@ unsigned product_test(tests::Tester& tg)
   /*-------------*
    | Battery 2.  |
    *-------------*/
-  const unsigned nb_test    = 30;
   unsigned success_identity = 0;
   unsigned success_null	    = 0;
 
-  for (unsigned i = 0 ; i < nb_test; i++)
+  for (unsigned i = 0 ; i < t.test_num(); i++)
   {
     automaton_t a = gen.generate(10, 20);
 
@@ -157,13 +155,13 @@ unsigned product_test(tests::Tester& tg)
 
   std::string rate_identity;
   std::string rate_null;
-  SUCCESS_RATE(rate_identity, success_identity, nb_test);
+  SUCCESS_RATE(rate_identity, success_identity, t.test_num());
   TEST(t,"Square of a complete deterministic automaton." + rate_identity,
-       success_identity == nb_test);
-  SUCCESS_RATE(rate_null, success_null, nb_test);
+       success_identity == t.test_num());
+  SUCCESS_RATE(rate_null, success_null, t.test_num());
   TEST(t, "Product of complete automaton and its complementary." +
        rate_null,
-       success_null == nb_test);
+       success_null == t.test_num());
   return t.all_passed();
 }
 

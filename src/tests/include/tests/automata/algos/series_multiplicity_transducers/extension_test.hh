@@ -36,7 +36,7 @@ bool extension_test(tests::Tester& tg)
 				      automaton_value_t>::ret transducer_t;
 
   tests::Tester t(tg);
-  GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen;
 
   automaton_t auto1 = gen.generate(30, 60);
   automaton_t auto2 = gen.generate(30, 60);

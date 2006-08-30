@@ -29,11 +29,11 @@ m4_pattern_forbid([^_?VCSN_])
 AC_DEFUN([VCSN_PATH_LOCAL],
 [ifelse([$1], [], [vcsn_cv_local_src=no], [dnl
     AC_CACHE_CHECK([for Vaucanson sources in local distribution],
-                   [vcsn_cv_local_src],
-	           [vcsn_cv_local_src=no
-                    if test -r "$srcdir/$1/include/vaucanson/config/system.hh"; then
-                       vcsn_cv_local_src="$1"
-                    fi])
+		   [vcsn_cv_local_src],
+		   [vcsn_cv_local_src=no
+		    if test -r "$srcdir/$1/include/vaucanson/config/system.hh"; then
+		       vcsn_cv_local_src="$1"
+		    fi])
 ])])
 
 
@@ -45,12 +45,12 @@ AC_DEFUN([VCSN_PATH_USER],
 [dnl
   AC_CACHE_CHECK([for Vaucanson in user-specified directory],
 		 [vcsn_cv_user_hint],
-                 [vcsn_cv_user_hint=no
-                  AC_ARG_WITH([vcsn],
-                     [AC_HELP_STRING([--with-vcsn=DIR],
-                     [Include directory where Vaucanson is installed (optional)])],
-                     [if test -r "$withval/vaucanson/config/system.hh"; then
-		        vcsn_cv_user_hint=$withval
+		 [vcsn_cv_user_hint=no
+		  AC_ARG_WITH([vcsn],
+		     [AC_HELP_STRING([--with-vcsn=DIR],
+		     [Include directory where Vaucanson is installed (optional)])],
+		     [if test -r "$withval/vaucanson/config/system.hh"; then
+			vcsn_cv_user_hint=$withval
 		      fi])])
 ])# VCSN_PATH_USER
 
@@ -71,7 +71,7 @@ AC_DEFUN([_VCSN_CHECK_HEADERS],
  # At this point, we can be in a situation where pconf.hh does not
  # exist _yet_. In that particular case, we need a workaround.
  AC_CHECK_HEADER([vaucanson/config/pconf.hh], [],
-          [CPPFLAGS="$CPPFLAGS -DVCSN_INTERNAL_IGNORE_PCONF_HH"])
+	  [CPPFLAGS="$CPPFLAGS -DVCSN_INTERNAL_IGNORE_PCONF_HH"])
  AC_CHECK_HEADER([vaucanson/config/system.hh], [], [have_vaucanson=no])
  CPPFLAGS=$vcsn_save_CPPFLAGS
 
@@ -101,7 +101,7 @@ AC_DEFUN([VCSN_PATH_HEADERS],
   else
     if test "x$vcsn_cv_local_src" != xno; then
       if test "x$VCSN_INCLUDE_DIR" != x ; then
-        AC_MSG_WARN([using $vcsn_cv_user_src instead of $VCSN_INCLUDE_DIR])
+	AC_MSG_WARN([using $vcsn_cv_user_src instead of $VCSN_INCLUDE_DIR])
       fi
       VCSN_INCLUDE_DIR=''
 
@@ -139,33 +139,33 @@ AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
 
   cxx_tdepth=ifelse([$1], , 50, [$1])
   AC_CACHE_CHECK([for C++ template recursion upto $cxx_tdepth levels],
-                 [cxx_cv_cxx_template_flags],
-                 [cxx_cv_cxx_template_flags=direct
-                  vcsn_save_CPPFLAGS=$CPPFLAGS
-                  vcsn_save_CXXFLAGS=$CXXFLAGS
-                  CPPFLAGS="$CPPFLAGS -DTDEPTH=$cxx_tdepth"
-                  AC_LINK_IFELSE([template<unsigned n>
+		 [cxx_cv_cxx_template_flags],
+		 [cxx_cv_cxx_template_flags=direct
+		  vcsn_save_CPPFLAGS=$CPPFLAGS
+		  vcsn_save_CXXFLAGS=$CXXFLAGS
+		  CPPFLAGS="$CPPFLAGS -DTDEPTH=$cxx_tdepth"
+		  AC_LINK_IFELSE([template<unsigned n>
 				  struct rec {
-			             typedef typename rec<n-1>::ret ret;
-                                  };
-                                  template<> struct rec<0>
-                                  { typedef int ret; };
-                                  int main(void)
-                                  { rec<TDEPTH>::ret i = 0; return i; }],
-                      [],
-                      [CXXFLAGS="$CXXFLAGS -ftemplate-depth-$cxx_tdepth"
-                       AC_LINK_IFELSE([template<unsigned n>
-                                       struct rec {
-                                           typedef typename rec<n-1>::ret ret;
-                                       };
-                                      template<> struct rec<0>
-                                      { typedef int ret; };
-                                      int main(void)
-                                      { rec<TDEPTH>::ret i = 0; return i; }],
-                       [cxx_cv_cxx_template_flags="-ftemplate-depth-$cxx_tdepth"],
-                       [cxx_cv_cxx_template_flags=unsupported])])
-                  CPPFLAGS=$vcsn_save_CPPFLAGS
-                  CXXFLAGS=$vcsn_save_CXXFLAGS])
+				     typedef typename rec<n-1>::ret ret;
+				  };
+				  template<> struct rec<0>
+				  { typedef int ret; };
+				  int main(void)
+				  { rec<TDEPTH>::ret i = 0; return i; }],
+		      [],
+		      [CXXFLAGS="$CXXFLAGS -ftemplate-depth-$cxx_tdepth"
+		       AC_LINK_IFELSE([template<unsigned n>
+				       struct rec {
+					   typedef typename rec<n-1>::ret ret;
+				       };
+				      template<> struct rec<0>
+				      { typedef int ret; };
+				      int main(void)
+				      { rec<TDEPTH>::ret i = 0; return i; }],
+		       [cxx_cv_cxx_template_flags="-ftemplate-depth-$cxx_tdepth"],
+		       [cxx_cv_cxx_template_flags=unsupported])])
+		  CPPFLAGS=$vcsn_save_CPPFLAGS
+		  CXXFLAGS=$vcsn_save_CXXFLAGS])
 
 
   AC_LANG_POP([C++])
@@ -194,17 +194,17 @@ AC_DEFUN([AC_CXX_TEMPLATE_DEPTH],
 AC_DEFUN([AC_CXX_EXCEPTIONS],
 [dnl
   AC_CACHE_CHECK([whether the compiler supports exceptions],
-                 [cxx_cv_cxx_exceptions],
-                 [AC_REQUIRE([AC_PROG_CXX])
-                  AC_LANG_PUSH([C++])
-                  AC_COMPILE_IFELSE([try { throw 1; }
-                                     catch (int i) { return i; }],
-			            [cxx_cv_cxx_exceptions=yes],
+		 [cxx_cv_cxx_exceptions],
+		 [AC_REQUIRE([AC_PROG_CXX])
+		  AC_LANG_PUSH([C++])
+		  AC_COMPILE_IFELSE([try { throw 1; }
+				     catch (int i) { return i; }],
+				    [cxx_cv_cxx_exceptions=yes],
 				    [cxx_cv_cxx_exceptions=no])
 		  AC_LANG_POP([C++])])
   if test "$cxx_cv_cxx_exceptions" = yes; then
      AC_DEFINE([HAVE_EXCEPTIONS], 1,
-               [define if the compiler supports exceptions])
+	       [define if the compiler supports exceptions])
   fi
 ])
 
@@ -234,24 +234,24 @@ AC_DEFUN([AC_CXX_NUMERIC_LIMITS],
   # std::numeric_limits. Check it.
 
   AC_CACHE_CHECK([for proper std::numeric_limits in <limits>],
-                 [cxx_cv_have_numeric_limits],
-	         [if test x$ac_cv_header_limits != xno; then
-                     AC_TRY_LINK([@%:@include <limits>
-                                  template<bool b> struct sif {};
-                                  template<> struct sif<true> { int a; };],
-	        		 [float f1 =
+		 [cxx_cv_have_numeric_limits],
+		 [if test x$ac_cv_header_limits != xno; then
+		     AC_TRY_LINK([@%:@include <limits>
+				  template<bool b> struct sif {};
+				  template<> struct sif<true> { int a; };],
+				 [float f1 =
 				     std::numeric_limits<float>::infinity();
-		                  double f2 =
+				  double f2 =
 				     std::numeric_limits<double>::infinity();
-                                  sif<std::numeric_limits<float>::has_infinity> i1;
-                                  sif<std::numeric_limits<double>::has_infinity> i2;
-                                  i1.a = std::numeric_limits<int>::min();
+				  sif<std::numeric_limits<float>::has_infinity> i1;
+				  sif<std::numeric_limits<double>::has_infinity> i2;
+				  i1.a = std::numeric_limits<int>::min();
 				  i2.a = std::numeric_limits<int>::max();],
-                		 [cxx_cv_have_numeric_limits=yes],
-                		 [cxx_cv_have_numeric_limits=no])
-                  else
-                     cxx_cv_have_numeric_limits=no
-                  fi])
+			 [cxx_cv_have_numeric_limits=yes],
+			 [cxx_cv_have_numeric_limits=no])
+		  else
+		     cxx_cv_have_numeric_limits=no
+		  fi])
 
 
   if test x$cxx_cv_have_numeric_limits = xno; then
@@ -280,17 +280,17 @@ AC_DEFUN([AC_CXX_CHECK_MATH],
   AC_REQUIRE([AC_PROG_CXX])
   AC_LANG_PUSH([C++])
   AC_CACHE_CHECK([for flags to enable $1() from C++],
-                 [cxx_cv_$1_flags],
-                 [cxx_save_CPPFLAGS=$CPPFLAGS
-                  AC_LINK_IFELSE([@%:@include <cmath>
-                                  int main() { $3 }],
-                                 [cxx_cv_$1_flags=unneeded],
-                                 [CPPFLAGS="$CPPFLAGS -D_ISOC99_SOURCE=1"
-                                  AC_LINK_IFELSE([@%:@include <cmath>
-                                                  int main() { $3 }],
-                                       [cxx_cv_$1_flags=isodef],
-                                       [cxx_cv_$1_flags=redef])])
-                  CPPFLAGS=$cxx_save_CPPFLAGS])
+		 [cxx_cv_$1_flags],
+		 [cxx_save_CPPFLAGS=$CPPFLAGS
+		  AC_LINK_IFELSE([@%:@include <cmath>
+				  int main() { $3 }],
+				 [cxx_cv_$1_flags=unneeded],
+				 [CPPFLAGS="$CPPFLAGS -D_ISOC99_SOURCE=1"
+				  AC_LINK_IFELSE([@%:@include <cmath>
+						  int main() { $3 }],
+				       [cxx_cv_$1_flags=isodef],
+				       [cxx_cv_$1_flags=redef])])
+		  CPPFLAGS=$cxx_save_CPPFLAGS])
   if test "x$[]cxx_cv_$1_flags" = xredef; then
      CPPFLAGS="$CPPFLAGS -DNEED_$2"
   elif test "x$[]cxx_cv_$1_flags" = xisodef; then
@@ -330,30 +330,30 @@ AC_DEFUN([AC_CXX_FLAGS],
    AC_REQUIRE([AC_PROG_CXX])
    AC_LANG_PUSH([C++])
    AC_CACHE_CHECK([for C++ compiler-specific extra flags],
-                  [ac_cv_cxx_style],
-                  [ac_cv_cxx_style=unknown
+		  [ac_cv_cxx_style],
+		  [ac_cv_cxx_style=unknown
 		   if $CXX -V 2>&1 | grep -i "Intel(R) C++">/dev/null 2>&1;
 		   then
-                      ac_cv_cxx_style=Intel
-                   elif test "x$ac_compiler_gnu" != xno; then
+		      ac_cv_cxx_style=Intel
+		   elif test "x$ac_compiler_gnu" != xno; then
 		      if $CXX --version | grep '^2\.' >/dev/null ; then
 			ac_cv_cxx_style=weakGNU
-                      else
-                        ac_cv_cxx_style=GNU
-                      fi
-                   elif $CXX -V 2>&1 | grep -i "WorkShop">/dev/null 2>&1; then
-		      ac_cv_cxx_style=Sun
-                   else
-                      echo "int main() {}" >conftest.cc
-                      if $CXX --version conftest.cc 2>&1 \
-		         | grep -i "Comeau C/C++" >/dev/null 2>&1; then
-                         ac_cv_cxx_style=Comeau
+		      else
+			ac_cv_cxx_style=GNU
 		      fi
-                      rm -f conftest.*
-                   fi])
+		   elif $CXX -V 2>&1 | grep -i "WorkShop">/dev/null 2>&1; then
+		      ac_cv_cxx_style=Sun
+		   else
+		      echo "int main() {}" >conftest.cc
+		      if $CXX --version conftest.cc 2>&1 \
+			 | grep -i "Comeau C/C++" >/dev/null 2>&1; then
+			 ac_cv_cxx_style=Comeau
+		      fi
+		      rm -f conftest.*
+		   fi])
    AC_LANG_POP([C++])
 
-   case "$ac_cv_cxx_style" in
+   case $ac_cv_cxx_style in
      GNU)
       _CXXFLAGS_DEBUG="-g"
       _CXXFLAGS_OPTIMIZE="-O3 -finline-limit-1500"
@@ -511,14 +511,14 @@ AC_DEFUN([AC_CHECK_SWIG13],
   AC_CHECK_PROGS([SWIG], [swig], [$am_aux_dir/missing swig])
 
   AC_CACHE_CHECK([for SWIG >= 1.3],
-                 [ac_cv_recent_swig],
-                 [ac_cv_recent_swig=no
-                  swig_ver=`$SWIG -version 2>&1 | sed -n -e '/SWIG Version/{s/^.*Version \(.*\)/\1/g;p;q;}'`
-                  swig_minor=`echo "$swig_ver" | sed -e 's/^@<:@0-9@:>@*\.\(@<:@^.@:>@*\).*/\1/g'`
-                  swig_major=`echo "$swig_ver" | sed -e 's/^\(@<:@0-9@:>@*\)\..*/\1/g'`
-	          if test `expr $swig_major \* 100 + $swig_minor 2>/dev/null` -ge 103 >/dev/null 2>&1; then
-                      ac_cv_recent_swig=yes
-                  fi])
+		 [ac_cv_recent_swig],
+		 [ac_cv_recent_swig=no
+		  swig_ver=`$SWIG -version 2>&1 | sed -n -e '/SWIG Version/{s/^.*Version \(.*\)/\1/g;p;q;}'`
+		  swig_minor=`echo "$swig_ver" | sed -e 's/^@<:@0-9@:>@*\.\(@<:@^.@:>@*\).*/\1/g'`
+		  swig_major=`echo "$swig_ver" | sed -e 's/^\(@<:@0-9@:>@*\)\..*/\1/g'`
+		  if test `expr $swig_major \* 100 + $swig_minor 2>/dev/null` -ge 103 >/dev/null 2>&1; then
+		      ac_cv_recent_swig=yes
+		  fi])
 ])
 
 

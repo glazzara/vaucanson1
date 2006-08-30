@@ -2,7 +2,7 @@
 // 
 // Vaucanson, a generic library for finite state machines.
 // 
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -32,10 +32,9 @@ bool generalized_test(tests::Tester&)
 {
   AUTOMATON_TYPES(Auto);
   TEST_MSG("Basic test on a well-known automaton.");
-  GenRandomAutomata<Auto> gen(time(0));
+  GenRandomAutomata<Auto> gen;
   Auto	a = gen.generate(10,20);
-  typename generalized_traits<Auto>::automaton_t a_ =
-    generalized(a);
+  typename generalized_traits<Auto>::automaton_t a_ = generalized(a);
   return true;
 }
 

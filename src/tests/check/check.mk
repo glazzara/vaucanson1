@@ -11,10 +11,20 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+## This file is used in all the test suites (hand written and
+## generated) of libvaucanson.  It is tailored to be used for unit
+## tests, that is to say, tests that can simply be run *once*, and
+## whose result cannot change if the sources did not change.
+## 
+## It expects its users to define EXTRA_PROGRAMS, not check_PROGRAMS.
+## 
+## Enable unit-test supports from our build-aux/check.mk:
+LAZY_TEST_SUITE = 1
+
 include $(top_srcdir)/src/tests/check/check-flags.mk
 LDADD = $(top_builddir)/src/tests/check/libcheck.a
 
-TESTS = $(check_PROGRAMS)
+TESTS = $(EXTRA_PROGRAMS)
 TEST_LOGS = $(TESTS:=.log)
 
 # Parallel replacement of Automake's check-TESTS target.

@@ -36,7 +36,7 @@ unsigned reachable_test(tests::Tester& t)
   using namespace vcsn::tools;
 
 
-  GenRandomAutomata<automaton_t> gen(time(0x0));
+  GenRandomAutomata<automaton_t> gen;
   const unsigned nb_tests			     = 10;
   unsigned	 success_trim			     = 0;
   unsigned	 success_final_reachable_idempotence = 0;

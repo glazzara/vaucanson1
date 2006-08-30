@@ -32,11 +32,10 @@ bool accessible_test(tests::Tester& tg)
 
   AUTOMATON_TYPES(Auto);
   tests::Tester t(tg);
-  GenRandomAutomata<Auto> gen(time(0x0));
+  GenRandomAutomata<Auto> gen;
 
-  unsigned int nb_test = 20;
   unsigned int success = 0;
-  for (unsigned i = 0; i < nb_test; ++i)
+  for (unsigned i = 0; i < t.test_num(); ++i)
   {
     automaton_t ac_auto = gen.generate(20, 40);
     automaton_t coac_auto = gen.generate(20, 40);
@@ -53,9 +52,9 @@ bool accessible_test(tests::Tester& tg)
   }
 
   std::string test_rate;
-  SUCCESS_RATE(test_rate, success, nb_test);
+  SUCCESS_RATE(test_rate, success, t.test_num());
   TEST(t, "Accessible/coaccessible minimal tests." + test_rate,
-       success == nb_test);
+       success == t.test_num());
   return t.all_passed();
 }
 

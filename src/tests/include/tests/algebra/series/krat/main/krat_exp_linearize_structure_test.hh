@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -91,10 +91,9 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
   semiring_t	semiring;
   series_set_t	s (semiring, monoid);
 
-  const int	nb_tests = 200;
-  int		nb_succs = 0;
+  unsigned	nb_succs = 0;
 
-  for (int n = 0; n < nb_tests; ++n)
+  for (unsigned n = 0; n < t.test_num(); ++n)
   {
     krat_exp_t	exp = s.choose(SELECT(kexp_t));
     out_krat_exp_t	lin = linearize(exp);
@@ -115,9 +114,9 @@ krat_exp_linearize_structure_test(tests::Tester& tg)
   }
 
   std::string rate;
-  SUCCESS_RATE(rate, nb_succs, nb_tests);
+  SUCCESS_RATE(rate, nb_succs, t.test_num());
   TEST(t, "Structure of linearize(exp) is the same as exp. " + rate,
-       nb_tests == nb_succs);
+       t.test_num() == nb_succs);
 
   return t.all_passed();
 }

@@ -109,7 +109,6 @@ bool thompson_test(tests::Tester& tg)
   automata_set_t	aa (ss);
 
   unsigned nb_word_test = 100;
-  unsigned nb_test = 40;
 
   letter_t	lalb[] = { la, lb, letter_t () };
 
@@ -139,7 +138,8 @@ bool thompson_test(tests::Tester& tg)
     unsigned success = 0;
     unsigned nb_test_done = 0;
 
-    for (unsigned nb = 0; nb < nb_test; ++nb)
+    unsigned test_num = t.test_num();
+    for (unsigned nb = 0; nb < test_num; ++nb)
     {
       krat_t		exp = ss.choose(SELECT(exp_t));
       automaton_t	au (aa);
@@ -151,11 +151,8 @@ bool thompson_test(tests::Tester& tg)
 	  exp == zero_as<exp_t>::of(ss);
 	realtime_here(au);
 
-	if (t.verbose() == tests::Tester::high)
-	{
-	  TEST_MSG("Automaton saved in /tmp.");
+	if (t.verbose(tests::Tester::high))
 	  SAVE_AUTOMATON_XML("/tmp", "thompson", au, nb);
-	}
 	unsigned i = 0;
 	if (exp != ss.zero(SELECT(exp_t)))
 	  for (; i < nb_word_test; ++i)
@@ -177,7 +174,7 @@ bool thompson_test(tests::Tester& tg)
       }
       catch (std::logic_error&)
       {
-	++nb_test;
+	++test_num;
       }
     }
     std::string rate;

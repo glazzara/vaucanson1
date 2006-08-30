@@ -37,16 +37,15 @@ bool eps_removal_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
 
   tests::Tester t(tg);
-  GenRandomAutomata<automaton_t> gen(time(0x0));
+  GenRandomAutomata<automaton_t> gen;
 
   bool error_forward_idempotence = false;
   bool error_forward_epsilon = false;
   bool error_backward_idempotence = false;
   bool error_backward_epsilon = false;
 
-  int nb_test = 50;
-
-  for (int i = 0; i < nb_test; ++i)
+  unsigned test_num = t.test_num();
+  for (unsigned i = 0; i < test_num; ++i)
   {
     try
     {
@@ -64,7 +63,6 @@ bool eps_removal_test(tests::Tester& tg)
 	    error_backward_epsilon = true;
 	if (error_backward_idempotence or error_backward_epsilon)
 	{
-	  TEST_MSG("Automata saved in /tmp.");
 	  SAVE_AUTOMATON_XML("/tmp",
 			     "backward_eps_removal_in",
 			     auto_epsilon,
@@ -87,7 +85,6 @@ bool eps_removal_test(tests::Tester& tg)
 	    error_forward_epsilon = true;
 	if (error_backward_idempotence or error_backward_epsilon)
 	{
-	  TEST_MSG("Automata saved in /tmp.");
 	  SAVE_AUTOMATON_XML("/tmp",
 			     "forward_eps_removal_in",
 			     auto_epsilon,
@@ -99,7 +96,7 @@ bool eps_removal_test(tests::Tester& tg)
     }
     catch (std::logic_error&)
     {
-      ++nb_test;
+      ++test_num;
     }
   }
 

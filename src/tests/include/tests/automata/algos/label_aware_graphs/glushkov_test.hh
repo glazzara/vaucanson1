@@ -103,7 +103,6 @@ bool glushkov_test(tests::Tester& tg)
   automata_set_t	aa (ss);
 
   unsigned nb_word_test = 100;
-  unsigned nb_test = 40;
   unsigned nb_test_done = 0;
 
   letter_t	lalb[] = { la, lb, letter_t () };
@@ -132,8 +131,8 @@ bool glushkov_test(tests::Tester& tg)
   {
     TEST_MSG("Tests on random expressions.");
     unsigned success = 0;
-
-    for (unsigned nb = 0; nb < nb_test; ++nb)
+    unsigned test_num = t.test_num();
+    for (unsigned nb = 0; nb < test_num; ++nb)
     {
       krat_t		exp = ss.choose(SELECT(exp_t));
       automaton_t	au (aa);
@@ -144,11 +143,8 @@ bool glushkov_test(tests::Tester& tg)
 	bool standard = is_standard(au) or exp == zero_as<exp_t>::of(ss);
 	realtime_here(au);
 
-	if (t.verbose() == tests::Tester::high)
-	{
-	  TEST_MSG("Automaton saved in /tmp.");
+	if (t.verbose(tests::Tester::high))
 	  SAVE_AUTOMATON_XML("/tmp", "glushkov", au, nb);
-	}
 
 	if (exp != ss.zero(SELECT(exp_t)))
 	{
@@ -175,7 +171,7 @@ bool glushkov_test(tests::Tester& tg)
       }
       catch (...)
       {
-	++nb_test;
+	++test_num;
       }
     }
     std::string rate;

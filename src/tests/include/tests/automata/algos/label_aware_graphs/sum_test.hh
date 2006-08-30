@@ -47,13 +47,13 @@ unsigned sum_test(tests::Tester& tg)
 
   tests::Tester t(tg);
 
-  GenRandomAutomata<automaton_t> gen(time(0x0));
+  GenRandomAutomata<automaton_t> gen;
 
-  unsigned	nb_tests       = 10;
+  unsigned	nb_tests       = t.test_num();
   unsigned	success_states = 0;
   unsigned	success_transitions  = 0;
 
-  unsigned	nb_tests_sum = 10;
+  unsigned	nb_tests_sum = t.test_num();
   unsigned	nb_tests_sum_done = 0;
   unsigned	success_sum = 0;
   unsigned	iter;

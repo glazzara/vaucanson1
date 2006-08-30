@@ -15,7 +15,7 @@ include $(top_srcdir)/src/tests/check/check.mk
 
 XFAIL_TESTS = assert_test$(EXEEXT)
 
-check_PROGRAMS = assert_test koenig unique selectors static random \
+EXTRA_PROGRAMS = assert_test koenig unique selectors static random \
 	check_limits bitset window char_traits
 
 check_limits_SOURCES = limits.cc

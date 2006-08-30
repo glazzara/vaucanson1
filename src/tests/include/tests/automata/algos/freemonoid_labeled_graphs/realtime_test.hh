@@ -29,7 +29,7 @@ unsigned realtime_test(tests::Tester& tg)
   AUTOMATON_TYPES(Auto);
 
   tests::Tester t(tg);
-  vcsn::GenRandomAutomata<Auto> gen(time(0x0));
+  vcsn::GenRandomAutomata<Auto> gen;
 
   const unsigned nb_ok_tests     = 20;
   const unsigned nb_non_ok_tests = 20;
@@ -55,7 +55,7 @@ unsigned realtime_test(tests::Tester& tg)
   SUCCESS_RATE(rate, success, nb_non_ok_tests);
   TEST(t, "is_realtime on non-realtime "+rate, success == nb_non_ok_tests);
 
-  unsigned nb_tests = 20;
+  unsigned nb_tests = t.test_num();
   unsigned nb_tests_done = 0;
   success = 0;
   for (unsigned i = 0; i < nb_tests; i++)

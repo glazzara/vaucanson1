@@ -38,13 +38,13 @@ bool concat_test(tests::Tester& tg)
   typedef typename generalized_traits<Auto>::automaton_t generalized_t;
   AUTOMATON_TYPES_(generalized_t, g_);
 
-  unsigned int nb_test = 20;
   unsigned int nb_test_done = 0;
   unsigned int size    = 0;
   tests::Tester t(tg);
+  unsigned test_num = t.test_num();
 
-  GenRandomAutomata<Auto> gen(time(0x0));
-  for (unsigned i = 0; i < nb_test; ++i)
+  GenRandomAutomata<Auto> gen;
+  for (unsigned i = 0; i < test_num; ++i)
     {
       automaton_t auto_lhs = gen.generate_with_epsilon(5, 10, 3, 7);
       automaton_t auto_rhs = gen.generate_with_epsilon(auto_lhs.structure(),
@@ -83,7 +83,7 @@ bool concat_test(tests::Tester& tg)
 	}
       catch (std::logic_error&)
 	{
-	  ++nb_test;
+	  ++test_num;
 	}
     }
 

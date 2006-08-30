@@ -49,7 +49,7 @@ unsigned geometry_equal_operator_test(tests::Tester& tg)
   | Creation of an automaton. |
   `--------------------------*/
   typedef GenRandomAutomata<Auto> gen_auto_t;
-  gen_auto_t gen(time(0x0));
+  gen_auto_t gen;
   automaton_t rttdc(gen.generate_dfa(10).structure());
 
   /*-------------------------.

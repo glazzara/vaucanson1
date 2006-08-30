@@ -217,7 +217,9 @@ makefile_tmp=$makefile.tmp
     dump_header '##'
     cat << EOF
 include \$(top_srcdir)/src/tests/test-suites/test-suite.mk
-check_PROGRAMS =$(for i in $check_programs; do printf ' \\\n'"$i"; done)
+
+EXTRA_PROGRAMS =$(for i in $check_programs; do printf ' \\\n'"$i"; done)
+
 EOF
 
     for prog in $check_programs

@@ -41,69 +41,63 @@ unsigned complete_test(tests::Tester& tg)
   AUTOMATON_TYPES(automaton_t);
   AUTOMATON_FREEMONOID_TYPES(automaton_t);
 
-  gen_auto_t				gen(time(0x0));
+  gen_auto_t				gen;
 
-  const unsigned			nb_test = 50;
   unsigned				nb_success = 0;
 
-  typedef std::set<hstate_t>		delta_ret_t;
-  delta_ret_t				delta_ret;
   bool					result_test;
 
-  for (unsigned i = 0 ; i < nb_test; i++)
+  for (unsigned i = 0 ; i < t.test_num(); i++)
   {
+    if (tg.verbose(tests::Tester::high))
+      std::cerr << "Test " << i << " / " << t.test_num() << std::endl;
+
     automaton_t a = gen.generate_dfa(30);
-    automaton_t b = a;
-    complete_here(a);
+    automaton_t b = complete(a);
     alphabet_t alphabet = a.structure().series().monoid().alphabet();
     result_test = true;
 
-    // One transition per state and letter.
-    if ((a.transitions().size() == a.states().size() *
-	 a.structure().series().monoid().alphabet().size())
-	// Remains deterministic.
-	&& is_deterministic(a))
-    {
-      // Each state has at least one transition for each letter.
-      // FIXME: This seems duplication of the above test.
-      // What prompted the author to do that?  And why not check
-      // the size() is 1?
-      for (alphabet_iterator l = alphabet.begin();
-	   l != alphabet.end();
-	   ++l)
+    // Both alphabets are the same.
+    if (alphabet != b.structure().series().monoid().alphabet())
       {
-	for_all_states(s, a)
-	{
-	  delta_ret.clear();
-	  a.letter_deltac(delta_ret, *s, *l,
-			  delta_kind::states());
-	  if (delta_ret.size() == 0)
-	    result_test = false;
-	}
+	TEST_MSG("alphabet of the completed automaton differs.");
+	result_test = false;
       }
-    }
-    else
-      result_test = false;
+
+    // The result is complete.
+    if (!is_complete(b))
+      {
+	TEST_MSG("!is_complete(complete(a)).");
+	result_test = false;
+      }
+
+    // The result remains deterministic.
+    if (!is_deterministic(b))
+      {
+	TEST_MSG("!is_deterministic(complete(a)) --- a is a dfa.");
+	result_test = false;
+      }
+
+    // Deterministic and complete.
+    if (b.transitions().size() !=
+	b.states().size() * b.structure().series().monoid().alphabet().size())
+      {
+	TEST_MSG("#transitions != #states * #letters.");
+	result_test = false;
+      }
 
     if (result_test)
       ++nb_success;
     else
-      {
-	std::ostringstream s;
-	s << "Test failed on " << i << std::ends;
-	TEST_MSG(s.str());
-      }
+      TEST_MSG("Test failed on " << i);
 
-    if (tg.verbose() == tests::Tester::high or not result_test)
-    {
-      TEST_MSG("Automaton saved in /tmp.");
+    if (tg.verbose(tests::Tester::high) or not result_test)
       SAVE_AUTOMATON_XML("/tmp", "complete_initial", b, i);
-    }
   }
 
   std::string rate;
-  SUCCESS_RATE(rate, nb_success, nb_test);
-  TEST(t, "complete on DFA." + rate, nb_success == nb_test);
+  SUCCESS_RATE(rate, nb_success, t.test_num());
+  TEST(t, "complete on DFA." + rate, nb_success == t.test_num());
   return t.all_passed();
 }
 

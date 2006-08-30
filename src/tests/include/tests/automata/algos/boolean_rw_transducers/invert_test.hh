@@ -59,7 +59,7 @@ bool invert_test(tests::Tester& tg)
   tests::Tester t(tg);
 
   unsigned nb_succeed = 0;
-  unsigned nb_test = 0;
+  unsigned test_num = 0;
 
   AUTOMATON_TYPES(Auto);
 
@@ -111,12 +111,12 @@ bool invert_test(tests::Tester& tg)
   boolean_automaton::rat_exp_t exp1 =
     boolean_automaton::make_rat_exp(alpha, "abab");
 
-  nb_test++;
+  test_num++;
   if (test_exp(trans, trans_inverse, alpha, evaluation(id, exp1)))
     nb_succeed++;
 
   exp1 = boolean_automaton::make_rat_exp(alpha, "ababab");
-  nb_test++;
+  test_num++;
   if (test_exp(trans, trans_inverse, alpha, evaluation(id, exp1)))
     nb_succeed++;
 
@@ -127,9 +127,9 @@ bool invert_test(tests::Tester& tg)
   | SUM UP |
   `-------*/
   std::string rate;
-  SUCCESS_RATE(rate, nb_succeed, nb_test);
+  SUCCESS_RATE(rate, nb_succeed, test_num);
 
-  TEST(t, "Invert on RW transducers." + rate, nb_succeed == nb_test);
+  TEST(t, "Invert on RW transducers." + rate, nb_succeed == test_num);
   return t.all_passed();
 }
 

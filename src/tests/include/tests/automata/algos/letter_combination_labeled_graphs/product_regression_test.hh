@@ -69,10 +69,7 @@ product_regression_test(tests::Tester& tg)
   TEST(t,"Regression test for product() [4/4].", prod.transitions().size() == 0);
 
   if (not t.all_passed())
-  {
-    TEST_MSG("Automaton saved in /tmp.");
     SAVE_AUTOMATON_XML("/tmp", "product_regression_test", prod, 0);
-  }
   return t.all_passed();
 }
 

@@ -46,13 +46,10 @@ bool krat_exp_linearize_test(tests::Tester& tg)
   typedef typename linearize_element_t::element_t	out_krat_exp_t;
 
   tests::Tester t(tg);
-  const unsigned int nb_tests_final = 100;
 
-  unsigned int nb_tests = 0;
   unsigned int nb_succs = 0;
-  for (unsigned int n = 0; n < nb_tests_final; ++n)
+  for (unsigned int n = 0; n < t.test_num(); ++n)
     {
-      ++nb_tests;
       bool success = true;
 
       alphabet_t alphabet;
@@ -83,7 +80,7 @@ bool krat_exp_linearize_test(tests::Tester& tg)
 	    {
 	      success = false;
 	      TEST_FAIL_SAVE("krat_exp_linearize",
-			     nb_tests,
+			     n,
 			     "in: " << exp << std::endl
 			     << "out: " << lin << std::endl
 			     << "Letter not in alphabet: " << *i << "."
@@ -95,7 +92,7 @@ bool krat_exp_linearize_test(tests::Tester& tg)
 	    {
 	      success = false;
 	      TEST_FAIL_SAVE("krat_exp_linearize",
-			     nb_tests,
+			     n,
 			     "in: " << exp << std::endl
 			     << "out: " << lin << std::endl
 			     << "Letter <<" << *i << ">> found " << t
@@ -107,7 +104,7 @@ bool krat_exp_linearize_test(tests::Tester& tg)
 	    {
 	      success = false;
 	      TEST_FAIL_SAVE("krat_exp_linearize",
-			     nb_tests,
+			     n,
 			     "in: " << exp << std::endl
 			     << "out: " << lin << std::endl
 			     << "Letter <<" << *i << ">> in the linearized"
@@ -120,9 +117,9 @@ bool krat_exp_linearize_test(tests::Tester& tg)
     }
 
   std::string rate;
-  SUCCESS_RATE(rate, nb_succs, nb_tests);
+  SUCCESS_RATE(rate, nb_succs, t.test_num());
   TEST(t, "Linearize on lots of random expressions " + rate,
-       nb_tests == nb_succs);
+       t.test_num() == nb_succs);
 
   return t.all_passed();
 }

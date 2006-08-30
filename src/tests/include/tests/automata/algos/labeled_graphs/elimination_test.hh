@@ -2,7 +2,7 @@
 // 
 // Vaucanson, a generic library for finite state machines.
 // 
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 // 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,22 +33,18 @@ bool elimination_test(tests::Tester& tg)
   typedef typename generalized_traits<Auto>::automaton_t generalized_automaton_t;
   AUTOMATON_TYPES_(generalized_automaton_t, g);
 
-  GenRandomAutomata<Auto> gen(time(0));
+  GenRandomAutomata<Auto> gen;
   unsigned success      = 0;
-  unsigned nb_test      = 50;
   unsigned nb_word_test = 100;
 
-  for (unsigned nb = 0; nb < nb_test; ++nb)
+  for (unsigned nb = 0; nb < t.test_num(); ++nb)
     {
       Auto	a = gen.generate(5,10, 2, 2);
       generalized_automaton_t a_ = generalized(a);
       gseries_set_elt_t language (a_.structure().series());
       language = aut_to_exp(a_);
-      if (t.verbose() == tests::Tester::high)
-	{
-	  TEST_MSG("Automaton saved in /tmp.");
-	  SAVE_AUTOMATON_XML("/tmp", "aut_to_exp", a, nb);
-	}
+      if (t.verbose(tests::Tester::high))
+	SAVE_AUTOMATON_XML("/tmp", "aut_to_exp", a, nb);
       unsigned i = 0;
       for (; i < nb_word_test; ++i)
 	{
@@ -57,10 +53,7 @@ bool elimination_test(tests::Tester& tg)
 	      zero_as<semiring_elt_value_t>::of(a.structure().series().semiring()))
 	    {
 	      if (t.verbose() != tests::Tester::high)
-	      {
-		TEST_MSG("Automaton saved in /tmp.");
 		SAVE_AUTOMATON_XML("/tmp", "aut_to_exp", a, nb);
-	      }
 	      TEST_MSG("aut_to_exp " << nb << " failed.");
 	      break;
 	    }
@@ -69,8 +62,8 @@ bool elimination_test(tests::Tester& tg)
 	++success;
     }
   std::string rate;
-  SUCCESS_RATE(rate, success, nb_test);
-  TEST(t, "aut_to_exp basic test " + rate, success == nb_test);
+  SUCCESS_RATE(rate, success, t.test_num());
+  TEST(t, "aut_to_exp basic test " + rate, success == t.test_num());
   return t.all_passed();
 }
 
