@@ -90,7 +90,7 @@ namespace edition_commands
     {
       discard_inputs ();
       std::cin.clear ();
-      throw std::logic_error ("wrong semiring element.");
+      throw std::logic_error ("invalid semiring element");
     }
     discard_inputs ();
     return v;
@@ -112,7 +112,7 @@ namespace edition_commands
     {
       discard_inputs ();
       std::cin.clear ();
-      throw std::logic_error ("wrong number.");
+      throw std::logic_error ("invalid number");
     }
     discard_inputs ();
     return n;

@@ -29,6 +29,8 @@
 #  include <config.h>
 # endif
 
+# include <vaucanson/config/system.hh>
+
 # include <iostream>
 
 # define echo(S) std::cout << S << std::endl
@@ -52,8 +54,27 @@
 
 # include <string>
 
+// Use a global timer.
+# define GLOBAL_TIMER timer
+# include <vaucanson/misc/timer.hh>
+extern vcsn::misc::Timer timer;
+# include <vaucanson/misc/usual_macros.hh>
+
 struct arguments_t
 {
+    arguments_t (std::string name)
+      : progname (name),
+	n_args (0),
+	alphabet (0),
+	epsilon (0),
+# ifdef WITH_TWO_ALPHABETS
+	alphabet2 (0),
+	epsilon2 (0),
+# endif /* ! WITH_TWO_ALPHABETS */
+	verbose (false),
+	report_time (false)
+    {}
+
     std::string	progname;
     char*	args[3];
     int		n_args;
@@ -64,6 +85,7 @@ struct arguments_t
     char	epsilon2;
 # endif /* ! WITH_TWO_ALPHABETS */
     bool	verbose;
+    bool	report_time;
 };
 
 #endif /* !COMMON_HH */

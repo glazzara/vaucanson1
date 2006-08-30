@@ -1,5 +1,21 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Use the Timer in TAF-Kit.
+
+	* taf-kit/src/edition_commands.hxx: s/wrong/invalid/.
+	* taf-kit/src/interface.cc: Idem.
+	* taf-kit/src/common.hh (config/system.hh): Include it to
+	define VAUCANSON.
+	(GLOBAL_TIMER): New.
+	(arguments_t): Provide a ctor.
+	(arguments_t::report_time): New.
+	* taf-kit/src/main.cc (timer): New.
+	(options): Add --report-time.
+	Use the anonymous namespace instead of static.
+	Use the timer.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Improve the testing framework.
 
 	* build-aux/check.mk: Document.
