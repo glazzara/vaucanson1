@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ namespace std
      if (!undef)					\
      {							\
        std::cout << "Deriv "				\
-	         << e					\
+		 << e					\
 		 << " by "				\
 		 << l					\
 		 << " ="				\
@@ -89,7 +89,7 @@ namespace vcsn {
     // which indicate if the resulting automaton is valid
     DerivativesAlgo(const series_set_t& series, const Element<S, T>& exp):
       IncAutomataConstructor<DerivativesAlgo, T_auto, PartialExp<S, T> >
-        (series, prat_exp_convert(exp)),
+	(series, prat_exp_convert(exp)),
       undefined(false)
     {}
 
@@ -97,9 +97,9 @@ namespace vcsn {
     // which indicate if the resulting automaton is valid.
     // This is used for the broken_derived_term_automaton algorithm.
     DerivativesAlgo(const series_set_t& series,
- 		    const std::list<Element<S, T> >& listexp):
+		    const std::list<Element<S, T> >& listexp):
       IncAutomataConstructor<DerivativesAlgo, T_auto, PartialExp<S, T> >
-        (series, prat_exp_convert(listexp)),
+	(series, prat_exp_convert(listexp)),
        undefined(false)
      {}
 
@@ -163,9 +163,10 @@ namespace vcsn {
   void
   derived_term_automaton(Element<A, T>& out, const Exp& kexp)
   {
-    Element<A, T>*	result = do_derived_term_automaton(out, kexp);
-    if (result != NULL)
-      out = *result;
+    TIMER_SCOPED("derived_term_automaton");
+    Element<A, T>* res = do_derived_term_automaton(out, kexp);
+    if (res)
+      out = *res;
   }
 
   template<typename A, typename T, typename Exp>
@@ -174,13 +175,11 @@ namespace vcsn {
   {
     A			a_structure(kexp.structure());
     Element<A, T>	out (a_structure);
-    Element<A, T>*	result = do_derived_term_automaton(out, kexp);
-    if (result != NULL)
-      out = *result;
+    derived_term_automaton (out, kexp);
     return out;
   }
 
-// broken_derived_term_automaton implementation
+  // broken_derived_term_automaton implementation
   template<typename T_auto, typename S, typename T>
   T_auto*
   do_broken_derived_term_automaton(const T_auto& out,

@@ -1,5 +1,13 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Time derived_term_automaton.
+
+	* include/vaucanson/algorithms/derived_term_automaton.hxx:
+	Use TIMER_SCOPED.
+	Avoid code duplication.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Timer Berry Sethi.
 
 	* include/vaucanson/algorithms/berry_sethi.hxx:
