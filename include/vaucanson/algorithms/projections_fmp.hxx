@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005 The Vaucanson Group.
+// Copyright (C) 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ namespace vcsn
 	trans_support_t		supp = in.supp();
 
 	semiring_elt_t		in_semi_elt = in.get(*(supp.begin()));
-	series_set_elt_t		series_elt(series);
+	series_set_elt_t	series_elt(series);
 
 	series_elt.assoc(monoid_elt_t(monoid,
 				      algebra::identity_as<
@@ -60,9 +60,8 @@ namespace vcsn
 	trans_series_set_elt_t	out = fmp_trans.get_final(*fmp_s);
 	trans_support_t		supp = out.supp();
 
-	semiring_elt_t		out_semi_elt =
-	  out.get(*(supp.begin()));
-	series_set_elt_t		series_elt(series);
+	semiring_elt_t		out_semi_elt = out.get(*(supp.begin()));
+	series_set_elt_t	series_elt(series);
 
 	series_elt.assoc(monoid_elt_t(monoid,
 				      algebra::identity_as<
@@ -81,6 +80,7 @@ namespace vcsn
 	    const AutomataBase<S2>&, const algebra::FreeMonoid<M3>&,
 	    const trans_t& fmp_trans, auto_t& res)
   {
+    TIMER_SCOPED("domain");
     AUTOMATON_TYPES_(trans_t, trans_);
     AUTOMATON_TYPES(auto_t);
 
@@ -120,6 +120,7 @@ namespace vcsn
 	   const AutomataBase<S2>&, const algebra::FreeMonoidBase<M2>&,
 	   const trans_t& fmp_trans, auto_t& res)
   {
+    TIMER_SCOPED("image");
     AUTOMATON_TYPES_(trans_t, trans_);
     AUTOMATON_TYPES(auto_t);
 
@@ -162,6 +163,7 @@ namespace vcsn
 	      const algebra::FreeMonoidProduct<M1,M2>&,
 	      const auto_t& aut, trans_t& res)
   {
+    TIMER_SCOPED("identity");
     AUTOMATON_TYPES_(auto_t, aut_);
     AUTOMATON_TYPES(trans_t);
 
@@ -218,7 +220,7 @@ namespace vcsn
       typename trans_t::series_set_t::monoid_t::first_monoid_t> monoid_t;
 
     typedef algebra::Series<typename trans_t::series_set_t::semiring_t,
-      monoid_t>
+                            monoid_t>
       series_set_t;
 
     monoid_t				monoid

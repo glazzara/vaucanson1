@@ -49,6 +49,7 @@ namespace vcsn {
   bool
   is_ambiguous(const Element<A_, Auto_>& aut)
   {
+    TIMER_SCOPED("is_ambiguous");
     return do_is_ambiguous(aut.structure(), aut);
   }
 

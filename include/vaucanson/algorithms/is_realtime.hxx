@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,12 +29,11 @@ namespace vcsn {
   do_is_realtime(const TransducerBase<S>&,
 		 const A& trans)
   {
+    TIMER_SCOPED("is_realtime (automaton)");
     AUTOMATON_TYPES(A);
     for_all_transitions(e, trans)
-    {
       if (!is_letter_support(trans.series_of(*e)))
 	return false;
-    }
     return true;
   }
 

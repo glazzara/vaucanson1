@@ -36,6 +36,7 @@ namespace vcsn {
 			     const list_t& selected,
 			     bool check_states)
   {
+    TIMER_SCOPED("sub_automaton");
     std::list<hstate_t> to_be_removed;
     for (typename auto_t::state_iterator i = a.states().begin();
 	 i != a.states().end(); ++i)

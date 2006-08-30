@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@
 #ifndef VCSN_ALGORITHMS_FINITE_SUPPORT_CONVERSION_HXX
 # define VCSN_ALGORITHMS_FINITE_SUPPORT_CONVERSION_HXX
 
+# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/algorithms/finite_support_conversion.hh>
 # include <vaucanson/algebra/concept/monoid_base.hh> // For zero_as.
 
@@ -28,6 +29,7 @@ namespace vcsn
   template<typename S, typename T, typename Ss, typename Ts>
   void finite_support_convert(Element<S, T>& dst, const Element<Ss, Ts>& org)
   {
+    TIMER_SCOPED("finite_support_convert");
     precondition(org.is_finite_app());
 
     typedef typename Element<S, T>::monoid_elt_t me_t;

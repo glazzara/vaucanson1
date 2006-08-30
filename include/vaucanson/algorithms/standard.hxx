@@ -37,6 +37,7 @@ namespace vcsn {
   do_in_standardize(const AutomataBase<A_>& ,
 		    Auto_&		    a)
   {
+    TIMER_SCOPED("standardize");
     AUTOMATON_TYPES(Auto_);
     hstate_t i = a.add_state();
     std::set<htransition_t> transition_oi;
@@ -73,6 +74,7 @@ namespace vcsn {
 				 lhs_t& lhs,
 				 const rhs_t& rhs)
   {
+    TIMER_SCOPED("union_of_standard");
     typedef typename std::set<htransition_t>		edelta_ret_t;
     edelta_ret_t	dst;
     hstate_t		new_i, old_i;
@@ -130,7 +132,7 @@ namespace vcsn {
   {
     // assertion(lhs.structure() == rhs.structure())
     Element<A, T> ret(lhs);
-    do_union_of_standard_here(ret.structure(), ret, rhs);
+    union_of_standard_here(ret, rhs);
     return ret;
   }
 
@@ -142,6 +144,7 @@ namespace vcsn {
   do_is_standard(const AutomataBase<A>& ,
 		 const auto_t& a)
   {
+    TIMER_SCOPED("is_standard");
     typedef typename auto_t::series_set_elt_value_t	series_set_elt_value_t;
 
     // Check there is only one initial state.
@@ -149,7 +152,7 @@ namespace vcsn {
       return false;
 
     // Check the multiplicity of the initial state.
-    hstate_t		s = *a.initial().begin();
+    hstate_t s = *a.initial().begin();
     if (a.get_initial(s)
 	!= a.series().identity(SELECT(series_set_elt_value_t)))
       return false;
@@ -165,14 +168,15 @@ namespace vcsn {
     return do_is_standard(a.structure(), a);
   }
 
-  /*------------------.
-  | standard_concat.  |
-  `------------------*/
+  /*---------------------.
+  | concat_of_standard.  |
+  `---------------------*/
   template <typename A, typename lhs_t, typename rhs_t>
   void do_concat_of_standard_here(const AutomataBase<A>& ,
 				  lhs_t& lhs,
 				  const rhs_t& rhs)
   {
+    TIMER_SCOPED("concat_of_standard");
     typedef std::map<hstate_t, hstate_t>	map_t;
     typedef std::set<htransition_t>			delta_ret_t;
 
@@ -266,6 +270,7 @@ namespace vcsn {
   void do_star_of_standard_here(const AutomataBase<A>& ,
 				auto_t& a)
   {
+    TIMER_SCOPED("star_of_standard");
     AUTOMATON_TYPES(auto_t);
 
     typedef std::set<htransition_t>		edelta_ret_t;

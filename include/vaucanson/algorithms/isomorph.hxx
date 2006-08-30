@@ -75,17 +75,17 @@ namespace vcsn {
   bool
   are_isomorphic(const Element<A, T>& a, const Element<A, T>& b)
   {
+    TIMER_SCOPED("are_isomorphic");
     typedef Element<A, T> automaton_t;
 
     AUTOMATON_TYPES(automaton_t);
 
-    // We can start with good suppositions
+    // We can start with good suppositions.
     if ((a.states().size() != b.states().size())
 	|| (a.transitions().size() != b.transitions().size())
 	|| (a.initial().size() != b.initial().size())
 	|| (a.final().size() != b.final().size()))
       return false;
-
 
     int i, j , k, l;
     bool iso;
@@ -519,7 +519,8 @@ namespace vcsn {
 	    iso = false;
 	}
 	else
-	  // State k has not already been visited. The same must be true for state l.
+	  // State k has not already been visited. The same must be
+	  // true for state l.
 	  if (perm_B[l] != -1)
 	    iso = false;
 	// Tries to associate states k and l

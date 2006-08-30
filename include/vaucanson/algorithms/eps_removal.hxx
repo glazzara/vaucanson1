@@ -34,6 +34,7 @@ namespace vcsn {
   do_eps_removal_here(const AutomataBase<A_>&, Auto& a,
 		      misc::direction_type dir)
   {
+    TIMER_SCOPED("eps_removal");
     AUTOMATON_TYPES(Auto);
     typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
     typedef std::vector<series_set_elt_t>		vector_series_t;

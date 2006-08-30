@@ -1,5 +1,37 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Straightforward use of the timer.
+
+	* include/vaucanson/algorithms/extension.hxx,
+	* include/vaucanson/algorithms/transpose.hxx,
+	* include/vaucanson/algorithms/finite_support_conversion.hxx,
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/is_ambiguous.hxx,
+	* include/vaucanson/algorithms/letter_to_letter_composition.hxx,
+	* include/vaucanson/algorithms/fmp_to_realtime.hxx,
+	* include/vaucanson/algorithms/evaluation_fmp.hxx,
+	* include/vaucanson/algorithms/trim.hxx,
+	* include/vaucanson/algorithms/eps_removal.hxx,
+	* include/vaucanson/algorithms/aci_canonical.hxx,
+	* include/vaucanson/algorithms/is_letterized.hxx,
+	* include/vaucanson/algorithms/aut_to_exp.hxx,
+	* include/vaucanson/algorithms/sub_normalize.hxx,
+	* include/vaucanson/algorithms/concatenate.hxx,
+	* include/vaucanson/algorithms/standard.hxx,
+	* include/vaucanson/algorithms/isomorph.hxx,
+	* include/vaucanson/algorithms/projections_fmp.hxx,
+	* include/vaucanson/algorithms/normalized.hxx,
+	* include/vaucanson/algorithms/search.hxx,
+	* include/vaucanson/algorithms/complete.hxx,
+	* include/vaucanson/algorithms/projection.hxx,
+	* include/vaucanson/algorithms/brzozowski.hxx,
+	* include/vaucanson/algorithms/eval.hxx,
+	* include/vaucanson/algorithms/is_realtime.hxx,
+	* include/vaucanson/algorithms/is_normalized.hxx,
+	* include/vaucanson/algorithms/composition_cover.hxx: Use TIMER_SCOPED.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Timer in minimizations.
 
 	* include/vaucanson/algorithms/minimization_hopcroft.hxx:

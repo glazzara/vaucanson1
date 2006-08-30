@@ -36,6 +36,7 @@ namespace vcsn {
   do_normalize_here(const AutomataBase<A_>&,
 		    Auto_& a)
   {
+    TIMER_SCOPED("normalize");
     AUTOMATON_TYPES(Auto_);
 
     hstate_t h = a.add_state();
@@ -81,6 +82,7 @@ namespace vcsn {
 				   lhs_t& lhs,
 				   const rhs_t& rhs)
   {
+    TIMER_SCOPED("union_of_normalized");
     AUTOMATON_TYPES(lhs_t);
     std::stack<hstate_t> init;
     sum_here(lhs, rhs);
@@ -139,6 +141,7 @@ namespace vcsn {
   do_is_normalized(const AutomataBase<A>&,
 		   const auto_t& a)
   {
+    TIMER_SCOPED("is_normalized");
     typedef typename auto_t::series_set_elt_value_t	series_set_elt_value_t;
 
     if (a.initial().size() != 1
@@ -170,6 +173,7 @@ namespace vcsn {
 					 lhs_t& lhs,
 					 const rhs_t& rhs)
   {
+    TIMER_SCOPED("concatenate_of_normalized");
     AUTOMATON_TYPES(rhs_t);
     typedef std::map<hstate_t, hstate_t>	       map_lhs_rhs_t;
     typedef std::set<htransition_t>			       delta_ret_t;
@@ -263,6 +267,7 @@ namespace vcsn {
   void do_star_of_normalized_here(const AutomataBase<A>&,
 				  auto_t& a)
   {
+    TIMER_SCOPED("star_of_normalized");
     AUTOMATON_TYPES(auto_t);
     monoid_elt_t ident =
       a.series().monoid().identity(SELECT(monoid_elt_value_t));

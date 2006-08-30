@@ -39,6 +39,7 @@ namespace vcsn {
   do_useful_states(const AutomataBase<A_>&,
 		   const Auto_&		   a)
   {
+    TIMER_SCOPED("useful_states");
     std::set<hstate_t> start = accessible_states(a);
     std::set<hstate_t> final = coaccessible_states(a);
     std::set<hstate_t> result;

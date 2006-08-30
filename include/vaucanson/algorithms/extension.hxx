@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,7 +18,6 @@
 # define VCSN_ALGORITHMS_EXTENSION_HXX
 
 # include <vaucanson/algorithms/extension.hh>
-
 # include <vaucanson/misc/usual_macros.hh>
 
 using namespace std;
@@ -93,12 +92,18 @@ namespace vcsn {
   }
 
   template<typename S, typename T>
-  typename identity_transducer_helper<S, T>::ret extension(const Element<S, T>& a)
+  typename identity_transducer_helper<S, T>::ret
+  extension(const Element<S, T>& a)
   {
+    TIMER_SCOPED("extension/1");
     return do_extension(a.structure(), a);
   }
 
-  ////////////////////////////////////////////////////////////
+
+  /*----------------.
+  | Two arguments.  |
+  `----------------*/
+
 
   template<typename SA, typename ST, typename Auto_t, typename Trans_t>
   Trans_t do_extension(const AutomataBase<SA>&,
@@ -168,8 +173,10 @@ namespace vcsn {
   }
 
   template<typename SA, typename TA, typename ST, typename TT>
-  Element<ST, TT> extension(const Element<SA, TA>& a, const Element<ST, TT>& t)
+  Element<ST, TT> 
+  extension(const Element<SA, TA>& a, const Element<ST, TT>& t)
   {
+    TIMER_SCOPED("extension/2");
     return do_extension(a.structure(), t.structure(), a, t);
   }
 

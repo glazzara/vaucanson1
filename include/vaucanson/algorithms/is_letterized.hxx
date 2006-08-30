@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -49,6 +49,7 @@ namespace vcsn {
   bool
   is_letterized_transducer(const Element<S, A>& a)
   {
+    TIMER_SCOPED("is_letterized_transducer");
     return do_is_letterized_transducer(a.structure(), a);
   }
 }

@@ -36,6 +36,7 @@ namespace vcsn {
   bool do_is_sub_normalized(const algebra::FreeMonoidProduct<M1, M2>&,
 			    const Auto& a)
   {
+    TIMER_SCOPED("is_sub_normalized");
     AUTOMATON_TYPES(Auto);
     typedef typename series_set_elt_t::support_t support_t;
 
@@ -79,6 +80,7 @@ namespace vcsn {
 				  hstate_t start, hstate_t stop,
 				  const Label& label, bool initial, bool final)
   {
+    TIMER_SCOPED("sub_normalize_transition");
     AUTOMATON_TYPES(Auto);
     hstate_t			s0;
     hstate_t			s1;
@@ -178,6 +180,7 @@ namespace vcsn {
 			const Auto& a,
 			Ret& res)
   {
+    TIMER_SCOPED("sub_normalize");
     AUTOMATON_TYPES(Ret);
     typedef std::vector<hstate_t> vector_t;
 

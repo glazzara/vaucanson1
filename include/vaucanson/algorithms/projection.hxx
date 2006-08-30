@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@ namespace vcsn {
 		       const Trans_t& t,
 		       Auto_t& ret)
   {
+    TIMER_SCOPED("output_projection (transducer/automaton)");
     AUTOMATON_TYPES(Trans_t);
 
     std::map<hstate_t, hstate_t> m;
@@ -94,12 +95,12 @@ namespace vcsn {
 		       const Element<S, T>& t,
 		       std::map<hstate_t, hstate_t>& m_)
   {
-    using namespace std;
+    TIMER_SCOPED("output_projection (transducer/element)");
     typedef Element<S, T>  Trans_t;
     AUTOMATON_TYPES(Trans_t);
 
     typedef typename output_projection_helper<S, T>::ret    Auto_t;
-    typedef typename Auto_t::set_t		     Auto_set_t;
+    typedef typename Auto_t::set_t			    Auto_set_t;
     typedef typename Auto_set_t::series_set_t		 Auto_series_set_t;
 
     Auto_set_t	 auto_set(Auto_series_set_t(t.structure().series().semiring()));
@@ -121,7 +122,8 @@ namespace vcsn {
       ret.set_final(m[*p], t.get_final(*p).get(empty));
 
     for_all_transitions(e, t)
-      ret.add_series_transition(m[t.src_of(*e)], m[t.dst_of(*e)], t.output_of(*e));
+      ret.add_series_transition(m[t.src_of(*e)], m[t.dst_of(*e)], 
+				t.output_of(*e));
 
     return ret;
   }
@@ -149,7 +151,7 @@ namespace vcsn {
   do_input_projection(const TransducerBase<S>&,
 		      const Element<S, T>& t)
   {
-    using namespace std;
+    TIMER_SCOPED("input_projection");
     typedef Element<S, T> Trans_t;
     AUTOMATON_TYPES(Trans_t);
 

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -104,6 +104,7 @@ namespace vcsn {
   letter_to_letter_composition(const Element<S, T>& lhs,
 			       const Element<S, T>& rhs)
   {
+    TIMER_SCOPED("letter_to_letter_composition");
     return do_letter_to_letter_composition(lhs.structure(), lhs, rhs);
   }
 

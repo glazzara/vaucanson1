@@ -35,6 +35,7 @@ namespace vcsn {
   void
   complete_here(Element<A, T>& work)
   {
+    TIMER_SCOPED("complete");
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
@@ -43,7 +44,6 @@ namespace vcsn {
     std::list<hstate_t> dst;
 
     for_all_states(s, work)
-    {
       for_all_letters(l, work.structure().series().monoid().alphabet())
       {
 	dst.clear();
@@ -58,7 +58,7 @@ namespace vcsn {
 	  work.add_letter_transition(*s, sink_state, *l);
 	}
       }
-    }
+
     if (sink_added)
       for_all_letters(l, work.structure().series().monoid().alphabet())
 	work.add_letter_transition(sink_state, sink_state, *l);
@@ -85,13 +85,14 @@ namespace vcsn {
   bool
   is_complete(const Element<A, T>& e)
   {
+    TIMER_SCOPED("is_complete");
     typedef Element<A, T> automaton_t;
     AUTOMATON_TYPES(automaton_t);
     AUTOMATON_FREEMONOID_TYPES(automaton_t);
+    const alphabet_t& alpha = e.structure().series().monoid().alphabet();
     for_all_states(i, e)
     {
       std::set<hstate_t> dst;
-      const alphabet_t& alpha = e.structure().series().monoid().alphabet();
       for_all_letters(j, alpha)
       {
 	dst.clear();
