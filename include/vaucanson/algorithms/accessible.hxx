@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -30,26 +30,20 @@
 
 namespace vcsn {
 
-  /*---------------------.
-  | do_accessible_states |
-  `---------------------*/
-  // preconditions :
-  //
-  //
+  /*-----------------------.
+  | do_accessible_states.  |
+  `-----------------------*/
+
   template <class A_, typename Auto_>
   std::set<hstate_t>
   do_accessible_states(const AutomataBase<A_>&,
 		       const Auto_&		   a)
   {
     AUTOMATON_TYPES(Auto_);
-    typedef std::set<hstate_t>			reachable_set_t;
-    typedef std::set<hstate_t>			delta_ret_t;
-    typedef std::queue<hstate_t>		queue_t;
+    typedef std::set<hstate_t> state_set_t;
 
-    delta_ret_t			      delta_ret;
-    hstate_t			      state;
-    queue_t			      queue;
-    reachable_set_t		      reachable_states;
+    std::queue<hstate_t>      queue;
+    state_set_t		      reachable_states;
 
     /*---------------.
     | Initialization |
@@ -65,11 +59,11 @@ namespace vcsn {
     `----------*/
     while (!queue.empty())
     {
-      state = queue.front();
+      hstate_t state = queue.front();
       queue.pop();
-      delta_ret.clear();
+      state_set_t delta_ret;
       a.deltac(delta_ret, state, delta_kind::states());
-      for_all_const_(delta_ret_t, j, delta_ret)
+      for_all_const_(state_set_t, j, delta_ret)
       {
 	state = *j;
 	if (reachable_states.find(state) == reachable_states.end())
@@ -86,6 +80,7 @@ namespace vcsn {
   std::set<hstate_t>
   accessible_states(const Element<A, T>& a)
   {
+    TIMER_SCOPED ("accessible_states");
     return do_accessible_states(a.structure(), a);
   }
 
@@ -106,9 +101,7 @@ namespace vcsn {
   /*-----------------------.
   | do_coaccessible_states |
   `-----------------------*/
-  // preconditions :
-  //
-  //
+
   template <class A_, typename Auto_>
   std::set<hstate_t>
   do_coaccessible_states(const AutomataBase<A_>&,

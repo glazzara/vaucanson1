@@ -1,5 +1,13 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Simplify accessible.
+
+	* include/vaucanson/algorithms/accessible.hxx: Remove
+	useless typedefs.
+	Make local vars more local.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Simplify cut_up.
 
 	* include/vaucanson/algorithms/initial_derivation.hxx:
