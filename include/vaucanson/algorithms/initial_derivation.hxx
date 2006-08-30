@@ -40,17 +40,17 @@ namespace vcsn
     Dispatch
     >
   {
+    typedef KRatExpInitialDerivation<Series, T, Dispatch>	self_t;
     typedef Element<Series, T>				exp_t;
     typedef std::list<exp_t>				list_t;
     typedef std::list<exp_t>				return_type;
     typedef typename list_t::iterator			iterator_t;
-    typedef KRatExpInitialDerivation<Series, T, Dispatch>	self_t;
-    typedef typename Element<Series, T>::semiring_elt_t	semiring_elt_t;
+    IMPORT_TYPEDEF_(exp_t,		 		semiring_elt_t);
+    IMPORT_TYPEDEF_(exp_t, 				monoid_elt_t);
     typedef typename semiring_elt_t::value_t		semiring_elt_value_t;
-    typedef typename Element<Series, T>::monoid_elt_t	monoid_elt_t;
     INHERIT_CONSTRUCTORS(self_t, T, semiring_elt_t, Dispatch);
 
-    KRatExpInitialDerivation(const Element<Series, T>& exp) :
+    KRatExpInitialDerivation(const exp_t& exp) :
       exp_(exp)
     {}
 
@@ -85,7 +85,7 @@ namespace vcsn
     MATCH__(Product, lhs, rhs)
     {
       list_t llist = match(lhs);
-      Element<Series, T> s (exp_.structure(), rhs);
+      exp_t s (exp_.structure(), rhs);
       list_t res;
       for (typename list_t::const_iterator it = llist.begin();
 	   it != llist.end(); ++it)
@@ -109,7 +109,7 @@ namespace vcsn
     MATCH_(Star, e)
     {
       list_t	res;
-      Element<Series, T> s (exp_.structure(), e.star());
+      exp_t s (exp_.structure(), e.star());
       res.push_back(s);
       return res;
     }
@@ -134,7 +134,7 @@ namespace vcsn
     MATCH_(Constant, m)
     {
       list_t	res;
-      Element<Series, T> s (exp_.structure(), m);
+      exp_t s (exp_.structure(), m);
       res.push_back(s);
       return res;
     }
@@ -157,7 +157,7 @@ namespace vcsn
     END
 
   private:
-    Element<Series, T>	exp_;
+    exp_t exp_;
   };
 
 }
