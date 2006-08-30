@@ -28,9 +28,16 @@
 
 ;; To use M-x vaucansonize-buffer RET, just add (require 'vaucanson).
 
+;; The formating can be automatically done at save time by adding
+;; (add-hook 'write-file-functions 'maybe-vaucansonize-buffer)
+;; in your .emacs.
+
 ;;; Code:
 
 (require 'cc-mode)
+(eval-when-compile
+  (require 'cl))
+
 ;; Rebox doesn't `provide' itself usually.
 (unless (or (ignore-errors (require 'rebox))
 	    (ignore-errors (load "rebox.el")))
@@ -38,7 +45,7 @@
     (sleep-for 2)))
 
 (defcustom c-header-file-extensions
-  "\\(hh\\|hxx\\|hcc\\|thh\\|thxx\\)\\(\\.in\\)?"
+  "\\(h\\|hh\\|hxx\\|hcc\\|thh\\|thxx\\)\\(\\.in\\)?"
   "File extensions regexp for C(++) header files."
   :group 'c)
 
@@ -100,11 +107,10 @@
 
 ;; Get Vaucanson relative path.
 (defun get-vcsn-path (&optional path)
-  "Get Vaucanson relative path for PATH."
-  (unless path
-    (setq path buffer-file-name))
-  (unless path
-    (error "No path provided and `buffer-file-name' nil"))
+  "Get Vaucanson relative path for PATH in the include/ hierarchy."
+  (unless (or path (setq path buffer-file-name))
+    (error "No path provided and `buffer-file-name' is nil"))
+  (setq path (expand-file-name path))
   (let ((vcsn-start (string-match "include/vaucanson/" path)))
     (if vcsn-start
 	(substring path (match-end 0))
@@ -114,7 +120,7 @@
 ;; Verify the form of the guard.
 (defun cpp-check-guard (&optional file-name-to-useful-part)
   "Verify that the CPP guard is rightly made in the current buffer.
-The function uses `file-name-to-useful-part' (`file-name-nondirectory'
+The function uses FILE-NAME-TO-USEFUL-PART (`file-name-nondirectory'
 if nil) to get the part of the filename that should be part of the
 macro gard.  The check is made if and only if the current file name
 matches `c-header-file-extensions'.  CPP should be correctly indented."
@@ -169,6 +175,19 @@ matches `c-header-file-extensions'.  CPP should be correctly indented."
 	     (length groups)))
     (goto-char old-point)))
 
+(defun in-vaucanson-p (&optional path)
+  "Tell if PATH is part of a Vaucanson distribution.
+Actually, test if `vaucanson.mk' is in a subdir of path."
+  (unless (or path (setq path buffer-file-name))
+    (error "No path provided and `buffer-file-name' is nil"))
+  (setq path (file-name-directory (expand-file-name path)))
+  (let ((old-path (directory-file-name path)))
+    (while (and (not (file-exists-p
+		      (concat (file-name-as-directory path) "vaucanson.mk")))
+		(setq old-path path
+		      path (directory-file-name (file-name-directory path)))
+		(not (string= path old-path))))
+    (not (string= path old-path))))
 
 (require 'tabify)
 (require 'whitespace)
@@ -198,8 +217,15 @@ matches `c-header-file-extensions'.  CPP should be correctly indented."
       (doxymacs-check-group-consistency (point-min) (point-max)))
     (c-set-style c-indentation-style)))
 
+(defun maybe-vaucansonize-buffer (&optional buffer)
+  "Vaucansonize BUFFER if it is a C/C++ file of Vaucanson.
+See `vaucansonize-buffer'."
+  (interactive)
+  (when (with-current-buffer (or buffer (current-buffer))
+	  (and (in-vaucanson-p) c-buffer-is-cc-mode))
+    (vaucansonize-buffer buffer)))
 
-;; For fun ;-)
+
 (provide 'vaucanson)
 
 ;; arch-tag: 97e769b8-ed42-42d9-bac6-7833bea581c5
