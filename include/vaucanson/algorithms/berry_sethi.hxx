@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -134,12 +134,9 @@ namespace vcsn {
     Element<S, T>					exp_t;
     /// Types from linearize_element.
     /** @{ */
-    typedef typename
-    linearize_element<S, T>::element_t			linear_exp_t;
-    typedef typename
-    linearize_element<S, T>::alphabet_t			linear_alphabet_t;
-    typedef typename
-    linearize_element<S, T>::letter_t			etiq_t;
+    typedef typename linearize_element<S, T>::element_t	  linear_exp_t;
+    typedef typename linearize_element<S, T>::alphabet_t  linear_alphabet_t;
+    typedef typename linearize_element<S, T>::letter_t	  etiq_t;
     /** @} */
     // Common types.
     AUTOMATON_TYPES(T_auto);
@@ -159,14 +156,14 @@ namespace vcsn {
      */
     BerrySethiAlgo(const series_set_t& series, const exp_t& exp):
       MathAutomataConstructor <BerrySethiAlgo, T_auto, etiq_t>
-        (series, linearized_alphabet(exp)),
+	(series, linearized_alphabet(exp)),
       linear_exp(linearize(exp)),
       linear_alpha(linear_exp.structure().monoid().alphabet())
     {
       linear_alpha.insert(etiq_t(0, 0));
     }
 
-    /// Those functions indicates whether a state is final or initial.
+    /// Whether a state is final or initial.
     /** @{ */
     bool is_initial(const etiq_t& e) const
     {
@@ -188,8 +185,9 @@ namespace vcsn {
       linear_exp_t	continuation_e = linear_exp_continuation(linear_exp, e);
 
       for (iterator i = linear_alpha.begin(); i != linear_alpha.end(); ++i)
-	if ((i->first == l) && (derivation(continuation_e, *i)
-	                        == linear_exp_continuation(linear_exp, *i)))
+	if (i->first == l 
+	    && (derivation(continuation_e, *i)
+		== linear_exp_continuation(linear_exp, *i)))
 	  result.insert(*i);
       return result;
     }
@@ -223,6 +221,7 @@ namespace vcsn {
   void
   berry_sethi(Element<A, T>& out, const Exp& kexp)
   {
+    TIMER_SCOPED("berry_sethi");
     Element<A, T>* tmp = do_berry_sethi(out, kexp);
     out = *tmp;
     delete tmp;
