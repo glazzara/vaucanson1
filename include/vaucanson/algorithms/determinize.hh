@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,13 +26,11 @@
  * @author Yann Régis-Gianas <yann@lrde.epita.fr>
  * @date   Tue Jun 24 19:13:10 2003
  *
- * @see determinize(), is_deterministic()
+ * @see determinize()
  */
 /** @} */
 
 // INTERFACE: Automaton determinize(const Automaton& a) { return vcsn::determinize(*a); }
-
-// INTERFACE: bool is_deterministic(const Automaton& a) { return vcsn::is_deterministic(*a); }
 
 # include <vaucanson/design_pattern/design_pattern.hh>
 # include <vaucanson/automata/concept/handlers.hh>
@@ -57,22 +55,21 @@ namespace vcsn {
   Element<A, T>
   determinize(const Element<A, T>& a);
 
+  /**
+   * Returns the determinized of a Boolean automaton.
+   *
+   * @param a The Boolean automaton to determinize.
+   * @param m A map which will be augmented with the correspondance
+   *          from one state of the resulting automaton to the set
+   *          of states of the input automaton.
+   *
+   * @return A fresh Boolean automaton that is the determinization of 'a'.
+   */
   template<typename A, typename T>
   Element<A, T>
   determinize(const Element<A, T>& a,
-	      std::map<hstate_t, std::set<hstate_t> >&);
+	      std::map<hstate_t, std::set<hstate_t> >&m);
   //@}
-
-  /**
-   * Test if an automaton is deterministic.
-   *
-   * @param a A Boolean automaton.
-   *
-   * @return true if 'a' is deterministic.
-   */
-  template<typename A, typename T>
-  bool
-  is_deterministic(const Element<A, T>& a);
 
   /** @} */
 

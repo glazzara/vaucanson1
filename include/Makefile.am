@@ -60,6 +60,9 @@ vaucanson/misc/special_char_traits.hh		\
 vaucanson/misc/static.hh			\
 vaucanson/misc/support.hh			\
 vaucanson/misc/support.hxx			\
+vaucanson/misc/timer.hh				\
+vaucanson/misc/timer.hxx			\
+vaucanson/misc/timer.cc				\
 vaucanson/misc/unique.hh			\
 vaucanson/misc/unique.hxx			\
 vaucanson/misc/usual_escaped_characters.hh	\
@@ -284,6 +287,8 @@ vaucanson/algorithms/invert.hh					\
 vaucanson/algorithms/invert.hxx					\
 vaucanson/algorithms/is_ambiguous.hh				\
 vaucanson/algorithms/is_ambiguous.hxx				\
+vaucanson/algorithms/is_deterministic.hh			\
+vaucanson/algorithms/is_deterministic.hxx			\
 vaucanson/algorithms/is_letterized.hh				\
 vaucanson/algorithms/is_letterized.hxx				\
 vaucanson/algorithms/is_normalized.hh				\

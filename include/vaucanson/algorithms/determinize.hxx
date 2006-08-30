@@ -46,21 +46,21 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(input_t);
     AUTOMATON_FREEMONOID_TYPES(input_t);
-    typedef typename input_t::series_set_t			    series_set_t;
+    typedef typename input_t::series_set_t		    series_set_t;
     typedef typename std::set<hstate_t>			    subset_t;
     typedef typename std::map<subset_t, hstate_t>	    subset_set_t;
     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
     typedef std::vector<hstate_t>			    delta_ret_t;
 
-    hstate_t		   qi_hstate = output.add_state();
-    subset_t		   qi;
-    subset_set_t	   subset_set;
-    const alphabet_t&	   alphabet(input.structure().series().monoid().alphabet());
-    subset_t		   q;
-    subset_t		   s;
-    delta_ret_t		   dst;
-    hstate_t		   s_hstate;
-    typename subset_set_t::const_iterator	current;
+    hstate_t qi_hstate = output.add_state();
+    subset_t qi;
+    subset_set_t subset_set;
+    const alphabet_t& alphabet(input.structure().series().monoid().alphabet());
+    subset_t q;
+    subset_t s;
+    delta_ret_t dst;
+    hstate_t s_hstate;
+    typename subset_set_t::const_iterator current;
 
     /*---------------.
     | Initialization |
@@ -118,8 +118,6 @@ namespace vcsn {
 		     (subset_set_pair_t(q, qs))).first;
 	  m[qs] = q;
 
-
-
 	  if (is_final)
 	    output.set_final(current->second);
 	  path.push(q);
@@ -133,9 +131,9 @@ namespace vcsn {
   Element<A, T>
   subset_construction(const Element<A, T>& a)
   {
-    Element<A, T>    ret(a.structure());
-    do_subset_construction(ret.structure(), ret, a);
-    return ret;
+    Element<A, T> res(a.structure());
+    do_subset_construction(res.structure(), res, a);
+    return res;
   }
 
   /*------------.
@@ -144,19 +142,12 @@ namespace vcsn {
   template <typename A, typename input_t, typename output_t>
   void
   do_determinize(const AutomataBase<A>&	a_set,
-		 output_t&			output,
+		 output_t&		output,
 		 const input_t&		input,
 		 std::map<hstate_t, std::set<hstate_t> >& m)
   {
+    TIMER_SCOPED ("determinize");
     do_subset_construction(a_set, output, input, m);
-  }
-
-  template<typename A, typename T>
-  Element<A, T>
-  determinize(const Element<A, T>& a)
-  {
-    std::map<hstate_t, std::set<hstate_t> > m;
-    return determinize(a, m);
   }
 
   template<typename A, typename T>
@@ -169,73 +160,12 @@ namespace vcsn {
     return ret;
   }
 
-  template <typename input_t>
-  static bool
-  is_state_deterministic (input_t&						input,
-			  typename input_t::state_iterator&			current_state,
-			  typename input_t::series_set_elt_t::semiring_elt_t&	zero_semiring)
-  {
-    AUTOMATON_TYPES(input_t);
-
-    typedef typename series_set_elt_t::support_t	support_t;
-    typedef typename std::set<htransition_t>		delta_ret_t;
-    delta_ret_t	delta_ret;
-
-    input.deltac(delta_ret, *current_state, delta_kind::transitions());
-    // FIXME : O(n^2) => O(nlog(n)) There is maybe an algorithm in O(nlog(n))
-    for_all_const_(delta_ret_t, j, delta_ret)
-    {
-      series_set_elt_t s = input.series_of(*j);
-      typename delta_ret_t::const_iterator k = j;
-      ++k;
-      for (; k != delta_ret.end(); ++k)
-      {
-	series_set_elt_t s_ = input.series_of(*k);
-	for_all_(support_t, supp, s.supp())
-	  if (s_.get(*supp) != zero_semiring)
-	    return false;
-      }
-    }
-    return true;
-  }
-
-
-
-
-  /*-----------------.
-  | is_deterministic |
-  `-----------------*/
-  template <typename A, typename input_t>
-  bool
-  do_is_deterministic(const AutomataBase<A>&	,
-		      const input_t&		input)
-  {
-    AUTOMATON_TYPES(input_t);
-    semiring_elt_t		  zero_semiring
-      = input.structure().series().semiring()
-      .zero(SELECT(typename semiring_elt_t::value_t));
-
-    // Empty automaton is not deterministic
-    if (input.states().size() == 0)
-      return false;
-
-    if (input.initial().size() != 1)
-      return false;
-
-    for_all_states(i, input)
-    {
-      if (not is_state_deterministic (input, i, zero_semiring))
-	return false;
-    }
-    return true;
-  }
-
-
   template<typename A, typename T>
-  bool
-  is_deterministic(const Element<A, T>& a)
+  Element<A, T>
+  determinize(const Element<A, T>& a)
   {
-    return do_is_deterministic(a.structure(), a);
+    std::map<hstate_t, std::set<hstate_t> > m;
+    return determinize(a, m);
   }
 
 } // vcsn
