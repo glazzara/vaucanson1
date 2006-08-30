@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -54,6 +54,7 @@ namespace vcsn {
   void
   do_minimization_moore(const Element<A, T>& input, Element<A, T>& output)
   {
+    TIMER_SCOPED("minimization_moore");
     typedef Element<A, T> automata_type;
     AUTOMATON_TYPES(automata_type);
     AUTOMATON_FREEMONOID_TYPES(automata_type);

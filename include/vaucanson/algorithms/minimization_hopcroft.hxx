@@ -34,7 +34,7 @@ namespace vcsn {
     namespace hopcroft_minimization_det {
 
 # define HOPCROFT_TYPES()						\
-      typedef std::set<int> hstates_t;					\
+      typedef std::set<hstate_t> hstates_t;				\
       typedef std::vector<hstates_t> partition_t;			\
       typedef std::vector<unsigned> class_of_t;				\
       typedef std::queue<std::pair<hstates_t*, unsigned> > to_treat_t;
@@ -96,18 +96,20 @@ namespace vcsn {
 		continue;
 	      }
 	      count_for_[*inpartition] = 0;
-       	      hstates_t states_inter_going_in;
+	      hstates_t states_inter_going_in;
 	      hstates_t& states_minus_going_in = partition[n_partition];
 	      // Compute @a states \ @a going_in_.
-	      set_difference (states.begin (), states.end (),
-			      going_in_.begin (), going_in_.end (),
-			      std::insert_iterator<hstates_t> (states_minus_going_in,
-							       states_minus_going_in.begin ()));
+	      set_difference
+		(states.begin (), states.end (),
+		 going_in_.begin (), going_in_.end (),
+		 std::insert_iterator<hstates_t> (states_minus_going_in,
+						  states_minus_going_in.begin ()));
 	      // Compute @a states Inter @a going_in_.
-	      set_intersection (states.begin(), states.end (),
-				going_in_.begin (), going_in_.end (),
-				std::insert_iterator<hstates_t> (states_inter_going_in,
-								 states_inter_going_in.begin ()));
+	      set_intersection
+		(states.begin(), states.end (),
+		 going_in_.begin (), going_in_.end (),
+		 std::insert_iterator<hstates_t> (states_inter_going_in,
+						  states_inter_going_in.begin ()));
 	      // A split MUST occur.
 	      assertion (not (states_inter_going_in.empty ()
 			      or states_minus_going_in.empty ()));
@@ -118,10 +120,11 @@ namespace vcsn {
 		states_minus_going_in.swap (states_inter_going_in);
 	      }
 	      else
-	        states.swap (states_inter_going_in);
+		states.swap (states_inter_going_in);
 	      for_all (hstates_t, istate, states_minus_going_in)
 		class_of_[*istate] = n_partition;
-	      to_treat.push (std::make_pair (&states_minus_going_in, n_partition++));
+	      to_treat.push (std::make_pair (&states_minus_going_in,
+					     n_partition++));
 	    }
 	  }
       };
@@ -278,6 +281,7 @@ namespace vcsn {
   Element<A, T>
   minimization_hopcroft(const Element<A, T>& a)
   {
+    TIMER_SCOPED ("minimization_hopcroft");
     Element<A, T> output(a.structure());
     do_hopcroft_minimization_det(a.structure(), output, a);
     return output;
@@ -832,6 +836,7 @@ namespace vcsn {
   Element<A, T>
   quotient(const Element<A, T>& a)
   {
+    TIMER_SCOPED ("quotient");
     typedef Element<A, T> auto_t;
     AUTOMATON_TYPES(auto_t);
     Element<A, T> output(a.structure());

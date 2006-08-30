@@ -1,5 +1,16 @@
 2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Timer in minimizations.
+
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx:
+	Use appropriate types.
+	Formatting changes.
+	Add timer support.
+	* include/vaucanson/algorithms/minimization_moore.hxx:
+	Add timer support.
+
+2006-08-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Extract is_deterministic from determinize.
 
 	* include/vaucanson/algorithms/determinize.hh,
