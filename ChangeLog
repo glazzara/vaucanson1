@@ -1,3 +1,9 @@
+2006-09-09  Matthieu Varin  <matt@lrde.epita.fr>
+
+	Make AUTHORS file become true.
+
+	* AUTHORS: Correct the mistake in the file.
+
 2006-08-30  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* data/emacs/vaucanson.el: Require the CL package.

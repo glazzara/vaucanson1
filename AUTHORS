@@ -108,7 +108,6 @@ Year 2008 students
 ==================
 
 * Matthieu Varin			matthieu.varin@lrde.epita.fr
-  - New implementation of closure,
   - is_ambiguous algorithm,
   - Bug fixes.
 
