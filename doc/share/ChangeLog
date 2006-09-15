@@ -1,3 +1,108 @@
+2006-09-14  Akim Demaille  <akim@lrde.epita.fr>
+
+	and fix it.
+
+	* bib/lrde.bib: do it.
+
+2006-09-14  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add urllrde.
+
+	* bib/lrde.bib: Do it.
+
+2006-09-14  Akim Demaille  <akim@lrde.epita.fr>
+
+	Don't force the definition of DISTDIR.
+
+	* make/dist.mk: nor that of TARBALL.
+
+2006-09-14  Akim Demaille  <akim@lrde.epita.fr>
+
+	More citations.
+
+	* bib/lrde.bib (cadilhac.06.XX): Needs to be completed.
+	* bib/gp.bib (veldhuizen.95.c++): New.
+	* bib/csi.bib: Normalize.
+	* bib/sensor-networks.bib: Remove junk.
+	* README: Document csi.bib.
+
+2006-09-13  Didier Verna  <didier@lrde.epita.fr>
+
+	* styles/misc.hva: (\clos): New macro.
+
+2006-09-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	More SIGCSE.
+
+	* bib/compilation.bib (mead.06.sigcse, werner.03.jcsc): New.
+
+2006-09-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	Move Gamma.
+
+	* bib/compilation.bib (gamma.95.dp): Move to...
+	* bib/gp.bib: here (was duplicate).
+	Fix other entries.
+
+2006-09-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	More bib.
+
+	* bib/compilation.bib (appelbe.78.sigcse, haynes.98.sigcse): New.
+
+2006-09-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix style of gp.bib.
+
+	* bib/gp.bib: Do it.
+	(onela.net, oonumerics.net, mpl): Rename as...
+	(onela.www, oonumerics.www, gurtovoy.02.boost): these.
+
+2006-09-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add hyphenation.
+
+	* styles/myacronym.sty (oop): Do it.
+
+2006-09-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	* styles/texi.sty, styles/texi.hva (\dfn, \var): Simplify them,
+	since LaTeX actually already provides these services.
+	(\email): Don't define it if already defined.
+
+2006-09-07  Akim Demaille  <akim@lrde.epita.fr>
+
+	* style/myacronyms.sty (cisc, il, ir, mips, risc, treecc): New.
+
+2006-09-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	* make/share-am.mk (CLEANFILES): Initialize so that we can include
+	these files last, instead of first.
+	* bib/compilation.bib (aiken.96.sigplan): An article.
+	(briggs.92.phd): Complete.
+
+2006-09-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	* bin/update-cite: New.
+	* README: Document.
+	* bin/latin2tex: Implement --help.
+	* bib/compilation.bib: Equip with oldkeys.
+	(diwan.04.jeric, guimar.84.sigcse, shapiro.76.sigcse)
+	(waite.06.iticse): New.
+
+2006-09-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	* bib/lrde.bib (borghi.06.crossroads): Fix references.
+	(darbon.XX.jmiv, darbon.XXb.jmiv): Rename and complete as...
+	(darbon.06.jmiv, darbon.06b.jmiv): these.
+	(demaille.06.isola): Accepted.
+
+2006-08-11  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix transformers.bib.
+
+	* bib/transformers.bib (jastadd-url, uuag.www): Please BibTeX.
+
 2006-07-25  Akim Demaille  <akim@lrde.epita.fr>
 
 	texi: Prefix internal command names.

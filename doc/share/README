@@ -63,6 +63,14 @@ Une version récente qui sache compiler dans un sous-répertoire comme
 tmp.t2d, et évite les problèmes quand on fait à la fois du DVI et du
 PDF.  Début de support pour le HTML.
 
+** update-cite
+Se sert des balises "oldkeys" dans les fichier BibTeX de share/ pour
+mettre à jour les clefs de citation.
+
+       share/bin/update-cite --share=share article.tex
+
+La version précédente du fichier est sauvegardée (en ~).
+
 ** update-share
 Met à jour la dépendant vis-à-vis de share.  Typiquement appelé par
 "make share-up".  Il est utile de l'appeler directement pour créer une
@@ -79,6 +87,15 @@ conversion.
 Essayer de maintenir les clefs selon la convention LRDE :
 <nom-premier-auteur>.<annnée>.<sigle> (où le <sigle> est celui de la
 conf, du livre etc.).  Pour les pages www, utiliser "<projet>.www".
+Si vous changez une clé, mettre l'ancienne dans une entrée "oldkeys"
+comme ceci :
+
+   @Book{muchnick.97.advanced,
+     oldkeys =      {Muchnick97, muchnick.97},
+     ...
+
+ce qui permettra une mise à jour automatique avec update-cite.
+
 Merci de garder les fichiers triés et justifiés comme Emacs sait le
 faire.  Pour éviter les problèmes avec les cross-références (bibtex
 veut les voir après les appels), utiliser "XXXref.<année>.<sigle>".
@@ -86,9 +103,35 @@ Ne pas normaliser les .bib qui viennent verbatim de l'internet et sont
 maintenus (tels que ceux de E. Visser), puisque le travail serait à
 reprendre sans arrêt.
 
+** compilation.bib
+Un peu de tout qui intervient et dans la compilation et dans
+l'enseignement de l'informatique.  Il faudrait sortir un
+computer-history.bib de ce fichier.
+
+** csi.bib
+Tous les rapports des étudiants.  Suivre le même style que conseillé
+pour lrde.bib.  Utiliser des clefs NOM.ANNEE.seminar, voire
+NOM.ANNEE.seminar.TOPIC en cas de conflit.
+
 ** kernighan.bib
 La biblio de Brian Kernighan, depuis
 <URL:http://netlib.bell-labs.com/cm/cs/bib/bwk.bib>.
+
+** lrde.bib
+Les papiers du laboratoire.
+
+- Conférences nationales
+  Mettre category = {national}
+
+- Articles non publiés
+  Faire note = {Submitted} ou {Accepted} ou {Rejected}
+
+- URL LRDE
+  Pensez à inclure l'URL au LRDE de cette façon :
+
+  urllrde = {200102-Wscg},
+
+  si l'url est http://www.lrde.[...]/Publications/200102-Wscg
 
 ** model-checking.bib
 Model checking, probabiliste ou non.

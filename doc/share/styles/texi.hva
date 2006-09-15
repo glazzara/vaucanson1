@@ -43,17 +43,18 @@
   \else%
     #1\footnote{\url{#2}}%
   \fi}
+
+\ifx\email\undefined
 \newcommand\email[2][\empty]{%
   \ifx#1\empty%
     \url{#2}%
   \else%
     #1\footnote{\url{mailto:#2}}%
   \fi}
-
-\ifhevea
-  \newcommand\var[1]{\textsf{#1}}
-  \newcommand\dfn[1]{\textsf{#1}}
 \fi
+
+\newcommand\var[1]{\textsf{#1}}
+\newcommand\dfn[1]{\emph{#1}}
 
 \endinput
 

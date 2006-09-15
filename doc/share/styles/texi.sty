@@ -23,20 +23,6 @@
 \RequirePackage{hevea}
 \input{texi.hva}
 
-% The following is grabbed and tweaked from texinfo.tex:
-
-\let\@texiptexslash=\/
-
-% \@smartitalic{ARG} outputs arg in italics, followed by an italic correction
-% unless the following character is such as not to need one.
-\def\@texismartitalicx{\ifx\@texinext,\else\ifx\@texinext-\else\ifx\@texinext.\else
-                    \@texiptexslash\fi\fi\fi}
-\def\@texismartslanted#1{{\ttfamily\slshape #1}\futurelet\@texinext\@texismartitalicx}
-\def\@texismartitalic#1{{\ttfamily\itshape #1}\futurelet\@texinext\@texismartitalicx}
-
-\newcommand\var[1]{\@texismartslanted{#1}}
-\newcommand\dfn[1]{\@texismartslanted{#1}}
-
 \endinput
 
 %% texi.sty ends here.

@@ -1,5 +1,6 @@
 \newcommand{\lisp}{\textsc{Lisp}\xspace}
 \newcommand{\cl}{\textsc{Common} \textsc{Lisp}\xspace}
+\newcommand{\clos}{\textsc{Clos}\xspace}
 
 \newcommand{\ie}{\emph{i.e.},}
 \newcommand{\eg}{\emph{e.g.},}

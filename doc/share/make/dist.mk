@@ -10,8 +10,8 @@ data_DATA +=	\
 share		\
 Makefile
 
-DISTDIR = $(BASE)
-TARBALL = $(DISTDIR).tar.gz
+DISTDIR ?= $(BASE)
+TARBALL ?= $(DISTDIR).tar.gz
 dist: distdir
 	tar zcf $(TARBALL) $(DISTDIR)
 	rm -rf $(DISTDIR)

@@ -12,7 +12,6 @@
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
 include $(top_srcdir)/doc/doc.mk
-
 manual = $(srcdir)/xml_proposal.pdf
 pdf: $(manual)
 
@@ -23,4 +22,5 @@ xml_proposal_sources = \
 xml_proposal.tex
 $(manual): $(xml_proposal_sources)
 
+dist_pdf_DATA = $(manual)
 EXTRA_DIST = $(xml_proposal_sources)

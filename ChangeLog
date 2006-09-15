@@ -1,3 +1,11 @@
+2006-09-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	Details.
+
+	* include/vaucanson/automata/concept/copy.hxx: Formatting changes.
+	* doc/xml/Makefile.am (dist_pdf_DATA): Define.
+	* doc/xml/xml_proposal.tex (\typetag, \typetagend): Update.
+
 2006-09-15  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* include/vaucanson/xml/tools.hxx: No longer provoke a segfault when

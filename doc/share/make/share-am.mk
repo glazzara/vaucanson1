@@ -5,7 +5,7 @@ share_dir ?= $(srcdir)/share
 share_bin_dir = $(share_dir)/bin
 share_make_dir = $(share_dir)/make
 
-CLEANFILES =
+CLEANFILES ?=
 
 update:
 	echo "*** Use \`make share-up' instead of \`make update' ***"

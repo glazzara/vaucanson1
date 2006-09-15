@@ -23,18 +23,40 @@ s/ü/\\\"u/g;
 " | sed -e 's/[\\`"]/\\&/g')
 
 recode_upper=$(echo "$recode_lower" |
-               sed -e 's/\"/\\\"/g' |
-               tr '[:lower:]' '[:upper:]' |
+	       sed -e 's/\"/\\\"/g' |
+	       tr '[:lower:]' '[:upper:]' |
 	       sed 's/^S/s/g;s/G;$/g;/g')
 
 recode_one_file ()
 {
   local file=$1
 
-  sed -i -e "$recode_lower" -e "$recode_upper" $file
+  sed -i~ -e "$recode_lower" -e "$recode_upper" $file
 }
 
-for file
+for opt
 do
-  recode_one_file "$file"
+  case $opt in
+  -h | --help)
+     cat <<-EOF
+	$0 [OPTIONS] FILES
+
+	Convert the latin 1 accents in the BibTeX FILES to be 7
+	bit clean.  Recode cannot be used, as it changes the special
+	characters ({, } etc.) too.  A backup is left with ~ appended.
+
+	Options:
+	  -h, --help        Display this message and exit successfully
+EOF
+     exit 0
+     ;;
+  -*)
+     echo >&2 "unknown option: $opt"
+     exit 1
+     ;;
+
+  *)
+     recode_one_file "$opt"
+     ;;
+  esac
 done
