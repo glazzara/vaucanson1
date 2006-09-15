@@ -127,6 +127,8 @@ namespace vcsn
 	      << name_ << count << "\" -> " << name_ << c << '"';
 	  std::ostringstream o;
 	  series_set_elt_t ss = a.get_initial(*i);
+	  if (ss.supp().begin() == ss.supp().end())
+	    o << "0";
 	  for_all_const_(series_set_elt_t::support_t, s, ss.supp())
 	    o << conv(a.structure(), *s) << "|"
 	      << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
@@ -143,6 +145,8 @@ namespace vcsn
 	      << name_ << c << "\" -> " << name_ << count << '"';
 	  std::ostringstream o;
 	  series_set_elt_t ss = a.get_final(*i);
+	  if (ss.supp().begin() == ss.supp().end())
+	    o << "0";
 	  for_all_const_(series_set_elt_t::support_t, s, ss.supp())
 	    o << conv(a.structure(), *s) << "|"
 	      << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))
@@ -162,6 +166,8 @@ namespace vcsn
 	    << name_ << state_map[a.dst_of(*i)] << '"';
 	std::ostringstream o;
 	series_set_elt_t ss = a.series_of(*i);
+	if (ss.supp().begin() == ss.supp().end())
+	  o << "0";
 	for_all_const_(series_set_elt_t::support_t, s, ss.supp())
 	  o << conv(a.structure(), *s) << "|"
 	    << ss.get(monoid_elt_t (a.structure().series().monoid(), *s))

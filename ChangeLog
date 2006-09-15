@@ -1,3 +1,8 @@
+2006-09-15  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* include/vaucanson/tools/dot_format.hxx: Fix a bug. Now show "0" for
+	empty series instead of "".
+
 2006-09-09  Matthieu Varin  <matt@lrde.epita.fr>
 
 	Make AUTHORS file become true.
