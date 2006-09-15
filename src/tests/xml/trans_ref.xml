@@ -19,7 +19,7 @@
       <state name="s2"/>
     </states>
     <transitions>
-      <transition src="s0" dst="s1" in="a" out="x"/>
+      <transition src="s0" dst="s0"/>
       <transition src="s0" dst="s1" in="a" out="y"/>
       <transition src="s1" dst="s2" in="b" out="x"/>
       <initial state="s0"/>

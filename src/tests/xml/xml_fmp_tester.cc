@@ -47,6 +47,7 @@ int main(int argc, char** argv)
     series_set_elt_t ss(a.structure().series());
     series_set_elt_t ss2(a.structure().series());
     series_set_elt_t ss3(a.structure().series());
+    series_set_elt_t ss4(a.structure().series());
     semiring_elt_value_t sem = true;
     ss.assoc(m, sem);
     ss2.assoc(m3, sem);
@@ -54,6 +55,7 @@ int main(int argc, char** argv)
 
     a.add_series_transition(s0, s1, ss);
     a.add_series_transition(s0, s1, ss2);
+    a.add_series_transition(s0, s2, ss4);
 
     a.set_final(s2, ss3);
 

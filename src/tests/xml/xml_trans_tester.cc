@@ -42,7 +42,8 @@ int main(int argc, char** argv)
     a.set_initial(s0);
     a.set_o_final(s1, "x");
 
-    a.add_io_transition(s0, s1, "a", "x");
+    series_set_elt_t ss4(a.structure().series());
+    a.add_series_transition (s0, s0, ss4);
     a.add_io_transition(s0, s1, "a", "y");
     a.add_io_transition(s1, s2, "b", "x");
 

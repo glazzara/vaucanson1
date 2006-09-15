@@ -1,5 +1,17 @@
 2006-09-15  Florent Terrones  <terron_f@lrde.epita.fr>
 
+	* include/vaucanson/xml/tools.hxx: No longer provoke a segfault when
+	dealing with empty series on transducers and FMPs.
+	* src/tests/xml/xml_trans_tester.cc,
+	* src/tests/xml/xml_fmp_tester.cc,
+	* src/tests/xml/trans_ref.dot,
+	* src/tests/xml/fmp_ref.dot,
+	* src/tests/xml/trans_ref.xml,
+	* src/tests/xml/fmp_ref.xml: Update tests to check empty words and empty
+	series.
+
+2006-09-15  Florent Terrones  <terron_f@lrde.epita.fr>
+
 	* include/vaucanson/tools/dot_format.hxx: Fix a bug. Now show "0" for
 	empty series instead of "".
 

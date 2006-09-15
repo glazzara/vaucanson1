@@ -207,7 +207,7 @@ namespace vcsn
 		     const FMPtype&,
 		     const U& series)
       {
-	if (series.supp().size() > 1)
+	if (series.supp().size() != 1)
 	{
 	  xset_attribute(elt, "label", get_label(series));
 	}
@@ -237,7 +237,7 @@ namespace vcsn
 			 const U& series)
       {
 	std::string out;
-	if (series.supp().size() > 1)
+	if (series.supp().size() != 1)
 	{
 	  xset_attribute(elt, "label", get_label(series));
 	}
@@ -282,13 +282,16 @@ namespace vcsn
 		     const Element<Transducer<S>, T>&,
 		     const U& series)
       {
-	std::string in = get_label(*(series.supp().begin()));
-	std::string out = get_label(series.get(*(series.supp().begin())));
+	if (series.supp().size())
+	{
+	  std::string in = get_label(*(series.supp().begin()));
+	  std::string out = get_label(series.get(*(series.supp().begin())));
 
-	if (in.size() && in != "1")
-	  set_attribute(elt, "in", in);
-	if (out.size() && out != "1")
-	  set_attribute(elt, "out", out);
+	  if (in.size() && in != "1")
+	    set_attribute(elt, "in", in);
+	  if (out.size() && out != "1")
+	    set_attribute(elt, "out", out);
+	}
       }
 
       // Add the label as an xml node
@@ -298,26 +301,29 @@ namespace vcsn
 			 const Element<Transducer<S>, T>& a,
 			 const U& series)
       {
-	std::string in = get_label(*(series.supp().begin()));
-	std::string out = get_label(series.get(*(series.supp().begin())));
+	if (series.supp().size())
+	{
+	  std::string in = get_label(*(series.supp().begin()));
+	  std::string out = get_label(series.get(*(series.supp().begin())));
 
-	if (in.size() && in != "1")
-	{
-	  using namespace vcsn::r_automaton;
-	  automaton_t bin = make_automaton(
-	    a.structure().series().monoid().alphabet());
-	  rat_exp_t res_in(bin.structure().series());
-	  parse(in, res_in);
-	  elt->appendChild(res_in.value().xml_tree(doc, "in"));
-	}
-	if (out.size() && out != "1")
-	{
-	  using namespace vcsn::r_automaton;
-	  automaton_t bout = make_automaton(
-	    a.structure().series().semiring().monoid().alphabet());
-	  rat_exp_t res_out(bout.structure().series());
-	  parse(out, res_out);
-	  elt->appendChild(res_out.value().xml_tree(doc, "out"));
+	  if (in.size() && in != "1")
+	  {
+	    using namespace vcsn::r_automaton;
+	    automaton_t bin = make_automaton(
+	      a.structure().series().monoid().alphabet());
+	    rat_exp_t res_in(bin.structure().series());
+	    parse(in, res_in);
+	    elt->appendChild(res_in.value().xml_tree(doc, "in"));
+	  }
+	  if (out.size() && out != "1")
+	  {
+	    using namespace vcsn::r_automaton;
+	    automaton_t bout = make_automaton(
+	      a.structure().series().semiring().monoid().alphabet());
+	    rat_exp_t res_out(bout.structure().series());
+	    parse(out, res_out);
+	    elt->appendChild(res_out.value().xml_tree(doc, "out"));
+	  }
 	}
       }
 
@@ -674,7 +680,11 @@ namespace vcsn
 	      o_res = parse(out, o_exp);
 	    }
 	    else
+	    {
 	      i_res = parse(label, i_exp);
+	      if (label == "0")
+		return;
+	    }
 	    if (has_attribute(node, "weight"))
 	      o_res = parse(get_attribute(node, "weight"), o_exp);
 	  }

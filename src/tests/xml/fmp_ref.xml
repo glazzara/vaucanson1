@@ -21,6 +21,7 @@
     <transitions>
       <transition src="s0" dst="s1" in="a" out="x"/>
       <transition src="s0" dst="s1" in="a" out="y"/>
+      <transition src="s0" dst="s2" label="0"/>
       <initial state="s0"/>
       <final in="b" out="x" state="s2"/>
     </transitions>
