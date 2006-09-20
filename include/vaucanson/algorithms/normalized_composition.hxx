@@ -127,10 +127,10 @@ namespace vcsn {
 
         series (output.structure().series()),
 	monoid (series.monoid()),
-      
+
 	lhs_series (lhs.structure().series()),
 	lhs_monoid (lhs_series.monoid()),
-      
+
 	rhs_series (rhs.structure().series()),
 	rhs_monoid (rhs_series.monoid()),
 
@@ -156,7 +156,7 @@ namespace vcsn {
 	  or rhs_states.find(to) == rhs_states.end())
 	{
 	  const pair_hstate_t new_pair (from, to);
-	  
+
 	  typename visited_t::const_iterator found =
 	    visited.find(new_pair);
 	  hstate_t dst;
@@ -174,8 +174,8 @@ namespace vcsn {
     }
 
     typename res_t::series_set_elt_t
-    series_product (typename monoid_elt_value_t::first_type l1, 
-		    typename monoid_elt_value_t::second_type l2, 
+    series_product (typename monoid_elt_value_t::first_type l1,
+		    typename monoid_elt_value_t::second_type l2,
 		    semiring_elt_t w)
     {
       typename res_t::series_set_elt_t res (series);
@@ -183,7 +183,7 @@ namespace vcsn {
       res.assoc(word, w.value());
       return res;
     }
-    
+
 
     // Compute the series for an initial or a final state, on the
     // empty word.
@@ -203,15 +203,15 @@ namespace vcsn {
 			   const hstate_t lhs_s, const hstate_t rhs_s)
     {
       if (lhs.is_initial(lhs_s) and rhs.is_initial(rhs_s))
-	output.set_initial(current_state, 
+	output.set_initial(current_state,
 			   state_series (lhs.get_initial(lhs_s),
-					 rhs.get_initial(rhs_s)));   
-      
+					 rhs.get_initial(rhs_s)));
+
       if (lhs.is_final(lhs_s) and rhs.is_final(rhs_s))
-	output.set_final(current_state, 
+	output.set_final(current_state,
 			 state_series (lhs.get_final(lhs_s),
-				       rhs.get_final(rhs_s)));   
-	  
+				       rhs.get_final(rhs_s)));
+
       delta_ret_t transition_lhs;
       delta_ret_t transition_rhs;
       lhs.deltac(transition_lhs, lhs_s, delta_kind::transitions());
@@ -223,6 +223,7 @@ namespace vcsn {
 	  const lhs_monoid_elt_t left_supp_elt (lhs_monoid,
 						*left_series.supp().begin());
 
+	  // (i)
 	  // If the outgoing transition is of type (*, 1).
 	  if (left_supp_elt.value().second == lhs_second_identity.value())
 	    {
@@ -233,6 +234,7 @@ namespace vcsn {
 	      add_transition (current_state,
 			      lhs.dst_of(*l), rhs_s, s);
 	    }
+	  // (iii')
 	  else
 	    {
 	      for_all_const_(delta_ret_t, r, transition_rhs)
@@ -250,7 +252,7 @@ namespace vcsn {
 		    if (left_supp_elt.value().second ==
 			right_supp_elt.value().first)
 		      {
-			series_set_elt_t s = 
+			series_set_elt_t s =
 			  series_product (left_supp_elt.value().first,
 					  right_supp_elt.value().second,
 					  left_series.get(left_supp_elt)
@@ -270,6 +272,7 @@ namespace vcsn {
 	  const rhs_monoid_elt_t right_supp_elt (rhs_monoid,
 						 *right_series.supp().begin());
 
+	  // (ii)
 	  if (right_supp_elt.value().first == rhs_first_identity.value())
 	    {
 	      series_set_elt_t s =
@@ -297,13 +300,13 @@ namespace vcsn {
 	    {
 	      const hstate_t	new_state = output.add_state();
 	      const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
-	      
+
 	      m[new_state] = new_pair;
 	      visited[new_pair] = new_state;
 	      to_process.push(new_pair);
 	    }
 	}
-      
+
       /*-----------.
       | Processing |
       `-----------*/
@@ -317,55 +320,14 @@ namespace vcsn {
   };
 
 
-  template <typename S, typename M1, typename M2, typename lhs_t,
-	    typename rhs_t, typename res_t>
-  void
-  do_b_composition(const AutomataBase<S>& ab,
-		   const algebra::FreeMonoidProduct<M1, M2>& fmp,
-		   const lhs_t&                 lhs,
-		   const rhs_t&                 rhs,
-		   res_t&                       output,
-		   std::set<hstate_t>&          lhs_states,
-		   std::set<hstate_t>&          rhs_states)
-  {
-    composer<S, M1, M2, lhs_t, rhs_t, res_t> 
-      compose (ab, fmp, lhs, rhs, output, lhs_states, rhs_states);
-    compose ();
-  }
 
-
-  /// compose with multiplicities
-  template <typename S, typename M1, typename M2, typename coeff_t, typename lhs_t,
-	    typename rhs_t, typename res_t>
-  void
-  do_compose(const AutomataBase<S>&,
-	     const algebra::FreeMonoidProduct<M1, M2>&,
-	     const coeff_t&,
-	     const lhs_t& lhs,
-	     const rhs_t& rhs,
-	     res_t& ret)
-  {
-    typedef std::set<hstate_t>			set_of_states_t;
-    set_of_states_t lhs_states;
-    set_of_states_t rhs_states;
-
-    lhs_t lhs_cov = splitting::outsplitting(lhs, lhs_states);
-    rhs_t rhs_cov = splitting::insplitting(rhs, rhs_states);
-
-    do_b_composition(ret.structure(), ret.structure().series().monoid(),
-		     lhs_cov, rhs_cov, ret, lhs_states, rhs_states);
-    eps_removal_here (ret);
-    sub_automaton_here (ret, useful_states (ret));
-  }
-
-
-  /// compose with boolean multiplicities
+  /// Ambiguous composition.
+  /// Works only for boolean transducers.
   template <typename S, typename M1, typename M2, typename lhs_t,
 	    typename rhs_t, typename res_t>
   void
   do_compose(const AutomataBase<S>&,
 	     const algebra::FreeMonoidProduct<M1, M2>&,
-	     SELECTOR(bool),
 	     const lhs_t& lhs,
 	     const rhs_t& rhs,
 	     res_t& ret)
@@ -376,17 +338,19 @@ namespace vcsn {
     set_of_states_t lhs_states;
     set_of_states_t rhs_states;
 
-    do_b_composition(ret.structure(), ret.structure().series().monoid(),
-		     lhs, rhs, ret, lhs_states, rhs_states);
+    composer<S, M1, M2, lhs_t, rhs_t, res_t>
+      compose (ret.structure(), ret.structure().series().monoid(),
+	       lhs, rhs, ret, lhs_states, rhs_states);
+    compose ();
   }
 
-  /// unambiguous compose with boolean multiplicities
+  /// Unambiguous composition.
+  /// Works with all type of weighted transducers.
   template <typename S, typename M1, typename M2, typename lhs_t,
 	    typename rhs_t, typename res_t>
   void
   do_u_compose(const AutomataBase<S>&,
 	       const algebra::FreeMonoidProduct<M1, M2>&,
-	       SELECTOR(bool),
 	       const lhs_t& lhs,
 	       const rhs_t& rhs,
 	       res_t& ret)
@@ -397,12 +361,51 @@ namespace vcsn {
     set_of_states_t lhs_states;
     set_of_states_t rhs_states;
 
-    do_b_composition(ret.structure(), ret.structure().series().monoid(),
-		     lhs, rhs, ret, lhs_states, rhs_states);
+    lhs_t lhs_cov = splitting::outsplitting(lhs, lhs_states);
+    rhs_t rhs_cov = splitting::insplitting(rhs, rhs_states);
+
+    composer<S, M1, M2, lhs_t, rhs_t, res_t>
+      compose (ret.structure(), ret.structure().series().monoid(),
+	       lhs_cov, rhs_cov, ret, lhs_states, rhs_states);
+    compose ();
+
     eps_removal_here (ret);
     sub_automaton_here (ret, useful_states (ret));
   }
 
+
+
+  // Compose dispatchers
+  template <typename S, typename M1, typename M2, typename lhs_t,
+	    typename rhs_t, typename res_t>
+  void
+  do_compose_dispatcher(const AutomataBase<S>&,
+			const algebra::FreeMonoidProduct<M1, M2>&,
+			SELECTOR(bool),
+			const lhs_t& lhs,
+			const rhs_t& rhs,
+			res_t& ret)
+  {
+    do_compose (ret.structure(),
+		ret.structure().series().monoid(),
+		lhs, rhs, ret);
+  }
+
+
+  template <typename S, typename M1, typename M2, typename lhs_t,
+	    typename rhs_t, typename res_t, typename weight_t>
+  void
+  do_compose_dispatcher(const AutomataBase<S>&,
+			const algebra::FreeMonoidProduct<M1, M2>&,
+			const weight_t&,
+			const lhs_t& lhs,
+			const rhs_t& rhs,
+			res_t& ret)
+  {
+    do_u_compose (ret.structure(),
+		  ret.structure().series().monoid(),
+		  lhs, rhs, ret);
+  }
 
   // Facade for compose
 
@@ -415,13 +418,14 @@ namespace vcsn {
     typedef Element<S, T> auto_t;
     AUTOMATON_TYPES(auto_t);
 
+    // FIXME : Is it our politic ?
     for_all_states (s, ret)
       ret.del_state (*s);
 
-    do_compose (ret.structure(),
-		ret.structure().series().monoid(),
-		SELECT(semiring_elt_value_t),
-		lhs, rhs, ret);
+    do_compose_dispatcher (ret.structure(),
+			   ret.structure().series().monoid(),
+			   SELECT(semiring_elt_value_t),
+			   lhs, rhs, ret);
   }
 
 
@@ -451,16 +455,15 @@ namespace vcsn {
     Automata<series_set_t> aut_set(series);
 
     Element< Automata<series_set_t>, T> ret(aut_set);
-    do_compose(ret.structure(),
-	       ret.structure().series().monoid(),
-	       SELECT(semiring_elt_value_t),
-	       lhs, rhs, ret);
+    do_compose_dispatcher(ret.structure(),
+			  ret.structure().series().monoid(),
+			  SELECT(semiring_elt_value_t),
+			  lhs, rhs, ret);
     return ret;
   }
 
 
   // Facade for unambiguous composition
-
   template <typename S, typename T>
   void
   u_compose(const Element<S, T>& lhs,
@@ -475,7 +478,6 @@ namespace vcsn {
 
     do_u_compose (ret.structure(),
 		  ret.structure().series().monoid(),
-		  SELECT(semiring_elt_value_t),
 		  lhs, rhs, ret);
   }
 
@@ -506,7 +508,6 @@ namespace vcsn {
     Element< Automata<series_set_t>, T> ret(aut_set);
     do_u_compose(ret.structure(),
 		 ret.structure().series().monoid(),
-		 SELECT(semiring_elt_value_t),
 		 lhs, rhs, ret);
     return ret;
   }

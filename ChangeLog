@@ -1,3 +1,15 @@
+2006-09-20  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Rework normalized compositions dispatching.
+	https://trac.lrde.org/vaucanson/trac.cgi/ticket/80
+
+	* include/vaucanson/algorithms/normalized_composition.hh,
+	* include/vaucanson/algorithms/normalized_composition.hxx:
+	  Change the disptaching of u_composition and composition.
+
+	* src/tests/include/tests/automata/algos/fmp_transducers/subnormalized_composition_test.hh:
+	  Re-enable the test.
+
 2006-09-15  Akim Demaille  <akim@lrde.epita.fr>
 
 	Details.

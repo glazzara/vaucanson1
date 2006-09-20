@@ -39,7 +39,7 @@ namespace vcsn {
 
 
  /**
-   * Composition for unweighted normalized and sub-normalized
+   * Composition for weighted normalized and sub-normalized
    * transducers, seen as automata over a free monoid product.
    *
    * @param  lhs The left hand side transducer.
@@ -56,7 +56,7 @@ namespace vcsn {
 
 
   /**
-   * Composition for unweighted normalized and sub-normalized
+   * Composition for weighted normalized and sub-normalized
    * transducers, seen as automata over a free monoid product.
    *
    * @param  lhs The left hand side transducer.
@@ -70,7 +70,7 @@ namespace vcsn {
 
 
   /**
-   * Unambiguous composition for unweighted normalized and sub-normalized
+   * Unambiguous composition for weighted normalized and sub-normalized
    * transducers, seen as automata over a free monoid product.
    *
    * @param  lhs The left hand side transducer.
@@ -85,7 +85,7 @@ namespace vcsn {
 	    Element<S, T>& ret);
 
   /**
-   * Unambiguous composition for unweighted normalized and sub-normalized
+   * Unambiguous composition for weighted normalized and sub-normalized
    * transducers, seen as automata over a free monoid product.
    *
    * @param  lhs The left hand side transducer.
