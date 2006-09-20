@@ -1,5 +1,12 @@
 2006-09-20  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
+	Change diff options in vcsn-b.test.
+
+	* taf-kit/tests/vcsn-b.test: Ignore changes that just insert
+	  or delete blank lines.
+
+2006-09-20  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
 	Rework normalized compositions dispatching.
 	https://trac.lrde.org/vaucanson/trac.cgi/ticket/80
 

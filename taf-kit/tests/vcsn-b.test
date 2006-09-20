@@ -57,7 +57,7 @@ do
 done
 
 vcsn-b identity all.xml >all2.xml
-diff -uw all.xml all2.xml
+diff -uBw all.xml all2.xml
 
 
 ## --------------------------------- ##
