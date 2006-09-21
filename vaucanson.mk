@@ -33,3 +33,6 @@ tdc_rw_automatadir = $(automatadir)/tdc-rw
 ## Where documentation is uploaded on EPITA servers.
 dloaddir = /mnt/dload
 vcsndldir = $(dloaddir)/vaucanson/$(VERSION)
+
+## Simplify the use of CLEANFILES: always use +=.
+CLEANFILES =

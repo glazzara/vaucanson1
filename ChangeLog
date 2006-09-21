@@ -1,3 +1,12 @@
+2006-09-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix build problems.
+
+	* vaucanson.mk (CLEANFILES): Initialize.
+	* src/tests/xml/Makefile.am (CLEANFILES): is already initialized.
+	* src/tests/bin/generate-test-suite.sh: Don't use move-if-change.
+	* doc/xml/Makefile.am: Include vaucanson.mk.
+
 2006-09-20  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Change diff options in vcsn-b.test.

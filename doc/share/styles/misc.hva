@@ -4,7 +4,7 @@
 
 \newcommand{\ie}{\emph{i.e.},}
 \newcommand{\eg}{\emph{e.g.},}
-\newcommand{\etc}{{\itshape etc.}}
+\newcommand{\etc}{{\itshape etc.\/}\xspace}
 
 \newcommand{\LRDE}{\textsc{LRDE}\xspace}
 \newcommand{\lrde}{\textsc{LRDE}\xspace}

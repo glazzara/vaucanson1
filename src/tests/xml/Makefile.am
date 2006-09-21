@@ -73,7 +73,7 @@ $(nodist_check_SCRIPTS):
 	chmod +x $@-t
 	mv $@-t $@
 
-CLEANFILES = 							\
+CLEANFILES += 							\
 	$(check_PROGRAMS)					\
 	$(check_PROGRAMS:_tester=_result.tmp)			\
 	$(check_PROGRAMS:_tester=_result.dot.tmp)		\

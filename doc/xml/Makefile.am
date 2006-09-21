@@ -11,6 +11,7 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+include $(top_srcdir)/vaucanson.mk
 include $(top_srcdir)/doc/doc.mk
 manual = $(srcdir)/xml_proposal.pdf
 pdf: $(manual)

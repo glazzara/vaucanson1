@@ -16,7 +16,22 @@
 test_include_root=../include
 top_srcdir=../../..
 build_auxdir=$top_srcdir/build-aux
-move_if_change=$build_auxdir/move-if-change
+
+# For the time being disable the use of move-if-change because it
+# leads to quadratic behavior...
+#
+# The generated Makefiles now include regeneration rules, but they are
+# too coarse: they regenerate *all* the test-suite instead of just the
+# one that needs to be updated.  But since we were using
+# move-if-change, the Makefile were not updated, and we were going
+# into an endless chain of (do-nothing) updates.
+#
+# In the future, we should use a timestamp system (as is done for
+# config.h), and provide smarter means to *update* parts of the test
+# suite, as opposed to regnerating the whole lot.
+
+
+move_if_change=mv #$build_auxdir/move-if-change
 
 # Don't ignore errors.
 set -e

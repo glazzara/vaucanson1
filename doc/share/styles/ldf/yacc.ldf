@@ -19,7 +19,8 @@
 
 %% Yacc: Bison
 
-%% Listings does not support ``moreotherkeywords.''
+%% Listings does not support ``moreotherkeywords'', so we cannot
+%% simply inherit.  To bad for code duplication.
 \lstdefinelanguage[Bison]{Yacc}%
   {otherkeywords=%
     {\%binary,\%debug,\%default-prec,\%define,\%defines,\%destructor,

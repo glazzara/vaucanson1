@@ -1,3 +1,60 @@
+2006-09-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
+
+	* bib/lrde.bib: Add AVoCS 2006 Cadilhac et al paper..
+
+2006-09-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add urls.
+
+	* bib/csi.bib (sigoure.06.seminar.xrm): Add url.
+
+2006-09-20  SIGOURE Benoit  <sigoure.benoit@lrde.epita.fr>
+
+	Add Benoit Sigoure's techrep 0620.
+
+	* bib/csi.bib: Here.
+
+2006-09-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add wsn.
+
+	* styles/myacronym.sty (wsn): New.
+
+2006-09-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Remove the definition of \CurVe.
+
+	* bib/lrde.bib: as it breaks some tools (e.g., bibentry.sty).
+
+2006-09-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	lrde.bib: Make it self contained.
+
+	* bib/lrde.bib (\CurVe): Define.
+
+2006-09-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fixes in lrde.bib.
+
+	* bib/lrde.bib: Fixes and formatting changes.
+
+2006-09-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	More lrde.bib.
+
+	* bib/lrde.bib (baillard.05.adass, geraud.06.lcsd_abstract)
+	(lesage.06.isvc, verna.06.practex): New.
+
+2006-09-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Nolimips Listing support.
+
+	* styles/ldf/mips.ldf ([Nolimips]Assembler): New.
+
+2006-09-18  Didier Verna  <didier@lrde.epita.fr>
+
+	* styles/misc.hva (\etc): Fix typesetting.
+
 2006-09-14  Akim Demaille  <akim@lrde.epita.fr>
 
 	and fix it.
@@ -28,7 +85,7 @@
 
 2006-09-13  Didier Verna  <didier@lrde.epita.fr>
 
-	* styles/misc.hva: (\clos): New macro.
+	* styles/misc.hva (\clos): New macro.
 
 2006-09-08  Akim Demaille  <akim@lrde.epita.fr>
 
