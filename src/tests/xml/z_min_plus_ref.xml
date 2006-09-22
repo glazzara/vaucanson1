@@ -4,7 +4,7 @@
       <generator value="a"/>
       <generator value="b"/>
     </monoid>
-    <semiring operations="tropicalMin" set="Z"/>
+    <semiring operations="minPlus" set="Z"/>
   </labelType>
   <content>
     <states>

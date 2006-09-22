@@ -450,14 +450,14 @@ The \semiringtag{} tag can be described with two attributes:
 \item \xattr{operations}\\
   The type of operations that can be performed on this set.  The
   possibilities are \textit{numerical}, \textit{boolean},
-  \textit{tropicalMin} or \textit{tropicalMax}.
+  \textit{minPlus} or \textit{maxPlus}.
 \end{itemize}
 
 For instance, describing the tropical semiring $({\mathbb Z}, max, +)$
 is achieved with:
 \begin{center}
 {\small
-\verb|<semiring set="Z" operations="tropicalMax">|}
+\verb|<semiring set="Z" operations="maxPlus">|}
 \end{center}
 
 All the content definition previously defined in \autoref{B1xml} is

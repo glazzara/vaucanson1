@@ -1,3 +1,16 @@
+2006-09-22  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* data/vaucanson.xsd: Use a better way to propose the same label
+	description possibilities. Rename and change some attributes, delete
+	most of the drawing attributes.
+	* include/vaucanson/xml/tools.hxx,
+	* src/tests/xml/xml_geometry_tester.cc,
+	* src/tests/xml/geometry_ref.xml,
+	* src/tests/xml/z_min_plus_ref.xml,
+	* src/tests/xml/z_max_plus_ref.xml,
+	* doc/xml/xml_proposal.tex: Update accordingly.
+
+
 2006-09-21  Akim Demaille  <akim@lrde.epita.fr>
 
 	Fix build problems.

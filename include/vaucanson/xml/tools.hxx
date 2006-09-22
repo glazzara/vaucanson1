@@ -84,9 +84,9 @@ namespace vcsn
       GET_SEMIRING_OPERATIONS(vcsn::algebra::NumericalSemiring,
 			      "numerical")
       GET_SEMIRING_OPERATIONS(vcsn::z_max_plus_automaton::semiring_t,
-			      "tropicalMax")
+			      "maxPlus")
       GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t,
-			      "tropicalMin")
+			      "minPlus")
 # undef GET_SEMIRING_OPERATIONS
 
 

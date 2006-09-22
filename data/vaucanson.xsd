@@ -5,7 +5,7 @@ xmlns="http://vaucanson.lrde.epita.fr"
 elementFormDefault="qualified">
 
 <!--
-vaucanson.xsd version 0.3.1
+vaucanson.xsd version 0.3.2
 -->
 
 <!--
@@ -13,7 +13,7 @@ vaucanson.xsd version 0.3.1
 -->
 
 <!--
- Attribute group used to factorize some code.
+ Attribute group used to factor some code.
 -->
  <xs:attributeGroup name="expressionAttributes">
    <xs:attribute name="parenthesis" type="xs:boolean"/>
@@ -39,45 +39,35 @@ vaucanson.xsd version 0.3.1
 <!--
  <star> tag properties. Used to add a star in the regular expression.
  The members of a star can be any tag out of the <product>, <sum>, <star>,
- <zero>, <identity> and <word> ones.
+ <zero>, <identity> and <word> ones, defined in the <ExpressionLabelGroup>
+ group.
 -->
 <xs:complexType name="star">
-  <xs:choice>
-    <xs:element name="star" type="star" minOccurs="0"/>
-    <xs:element name="word" type="word" minOccurs="0"/>
-    <xs:element name="sum" type="sum" minOccurs="0"/>
-    <xs:element name="product" type="product" minOccurs="0"/>
-    <xs:element name="zero" type="zeroVal" minOccurs="0"/>
-    <xs:element name="identity" type="identityVal" minOccurs="0"/>
-  </xs:choice>
+  <xs:group ref="expressionLabelGroup"/>
   <xs:attributeGroup ref="expressionAttributes"/>
 </xs:complexType>
 
 <!--
- <sum> tag properties. Used to represent a product in the regular expression.
- The members of a sum can be any tag out of the <product>, <sum>, <zero>,
- <identity> and <word> ones, or a star.
- Caution, only these tags should be inserted where the <xs:any> tag stands.
+ <sum> tag properties. Used to represent a sum in the regular expression.
+ The members of a sum can be any tag out of those defined in the
+ <ExpressionLabelGroup> group.
 -->
 <xs:complexType name="sum">
-   <xs:choice>
-    <xs:any minOccurs="2" maxOccurs="unbounded" processContents="lax"/>
-    <xs:element name="star" type="star" minOccurs="0"/>
-   </xs:choice>
+   <xs:sequence minOccurs="2" maxOccurs="2">
+     <xs:group ref="expressionLabelGroup"/>
+   </xs:sequence>
    <xs:attributeGroup ref="expressionAttributes"/>
 </xs:complexType>
 
 <!--
  <product> tag properties. Used to represent a product in the regular expression.
- The members of a product can be any tag out of the <product>, <sum>, <zero>,
- <identity> and <word> ones, or a star.
- Caution, only these tags should be inserted where the <xs:any> tag stands.
+ The members of a product can be any tag out of those defined in the
+ <ExpressionLabelGroup> group.
 -->
 <xs:complexType name="product">
-  <xs:choice>
-   <xs:any minOccurs="2" maxOccurs="unbounded" processContents="lax"/>
-   <xs:element name="star" type="star" minOccurs="0"/>
-  </xs:choice>
+   <xs:sequence minOccurs="2" maxOccurs="2">
+     <xs:group ref="expressionLabelGroup"/>
+   </xs:sequence>
    <xs:attributeGroup ref="expressionAttributes"/>
 </xs:complexType>
 
@@ -85,16 +75,20 @@ vaucanson.xsd version 0.3.1
  <expressionLabel> tag properties. Used to clearly define the content of a
 label by using <product>, <sum>, <zero>, <identity> and <word> tags.
 -->
-<xs:complexType name="expressionLabel">
+<xs:group name="expressionLabelGroup">
   <xs:choice>
-    <xs:element name="star" type="star" minOccurs="0"/>
-    <xs:element name="word" type="word" minOccurs="0"/>
-    <xs:element name="sum" type="sum" minOccurs="0"/>
-    <xs:element name="product" type="product" minOccurs="0"/>
-    <xs:element name="zero" type="zeroVal" minOccurs="0"/>
-    <xs:element name="identity" type="identityVal" minOccurs="0"/>
+    <xs:element name="star" type="star"/>
+    <xs:element name="word" type="word"/>
+    <xs:element name="sum" type="sum"/>
+    <xs:element name="product" type="product"/>
+    <xs:element name="zero" type="zeroVal"/>
+    <xs:element name="identity" type="identityVal"/>
   </xs:choice>
-   <xs:attributeGroup ref="expressionAttributes"/>
+</xs:group>
+
+<xs:complexType name="expressionLabel">
+  <xs:group ref="expressionLabelGroup"/>
+  <xs:attributeGroup ref="expressionAttributes"/>
 </xs:complexType>
 
 
@@ -120,7 +114,7 @@ transitionType for states or coordinates for transitions.
   <xs:attribute name="transitionType">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="line|arcL|arcR|curve"/>
+	<xs:pattern value="line|arcL|arcR|curve|loop"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
@@ -142,105 +136,9 @@ used for XML to latex translation.
 An optional "any" attribute is used, to let the user use personal attributes.
 -->
 <xs:complexType name="drawing" mixed="true">
-  <xs:attribute name="stateSize" type="xs:string"/>
   <xs:attribute name="stateColor" type="xs:string"/>
   <xs:attribute name="stateFillColor" type="xs:string"/>
-  <xs:attribute name="labelPositionX" type="xs:string"/>
-  <xs:attribute name="labelPositionY" type="xs:string"/>
-  <xs:attribute name="labelOffset" type="xs:string"/>
-  <xs:attribute name="StateLabelColor" type="xs:string"/>
-  <xs:attribute name="StateLabelScale" type="xs:string"/>
-  <xs:attribute name="StateLineStyle" type="xs:string"/>
-  <xs:attribute name="StateLineWidth" type="xs:string"/>
-  <xs:attribute name="StateLineColor" type="xs:string"/>
-  <xs:attribute name="StateFillStatus" type="xs:string"/>
-  <xs:attribute name="StateFillColor" type="xs:string"/>
-  <xs:attribute name="DimStateLineStyle" type="xs:string"/>
-  <xs:attribute name="DimStateLineColor" type="xs:string"/>
-  <xs:attribute name="DimStateLineCoef" type="xs:string"/>
-  <xs:attribute name="DimStateLabelColor" type="xs:string"/>
-  <xs:attribute name="DimStateFillColor" type="xs:string"/>
-  <xs:attribute name="StateLineDblCoef" type="xs:string"/>
-  <xs:attribute name="StateLineDblSep" type="xs:string"/>
-  <xs:attribute name="TransitionLabelColor" type="xs:string"/>
-  <xs:attribute name="TransitionLabelScale" type="xs:string"/>
-  <xs:attribute name="TransitionLineStyle" type="xs:string"/>
-  <xs:attribute name="TransitionLineWidth" type="xs:string"/>
-  <xs:attribute name="TransitionLineColor" type="xs:string"/>
-  <xs:attribute name="ArcAngle" type="xs:string"/>
-  <xs:attribute name="LArcAngle" type="xs:string"/>
-  <xs:attribute name="ArcCurvature" type="xs:string"/>
-  <xs:attribute name="TransitionOffset" type="xs:string"/>
-  <xs:attribute name="ArcOffset" type="xs:string"/>
-  <xs:attribute name="LoopOffset" type="xs:string"/>
-  <xs:attribute name="ForthBackTransitionOffset" type="xs:string"/>
-  <xs:attribute name="DimTransitionLineStyle" type="xs:string"/>
-  <xs:attribute name="DimTransitionLineCoef" type="xs:string"/>
-  <xs:attribute name="DimTransitionLineColor" type="xs:string"/>
-  <xs:attribute name="DimTransitionLabelColor" type="xs:string"/>
-  <xs:attribute name="TransitionBorderCoef" type="xs:string"/>
-  <xs:attribute name="TransitionBorderColor" type="xs:string"/>
-  <xs:attribute name="TransitionLineDoubleCoefOne" type="xs:string"/>
-  <xs:attribute name="TransitionLineDoubleCoefTwo" type="xs:string"/>
-  <xs:attribute name="ZZSize" type="xs:string"/>
-  <xs:attribute name="ZZShape" type="xs:string"/>
-  <xs:attribute name="ZZLineWidth" type="xs:string"/>
-  <xs:attribute name="TransLabelZZCoef" type="xs:string"/>
-  <xs:attribute name="LargeScale" type="xs:string"/>
-  <xs:attribute name="MediumScale" type="xs:string"/>
-  <xs:attribute name="SmallScale" type="xs:string"/>
-  <xs:attribute name="TinyScale" type="xs:string"/>
-  <xs:attribute name="MediumStateDiameter" type="xs:string"/>
-  <xs:attribute name="SmallStateDiameter" type="xs:string"/>
-  <xs:attribute name="LargeStateDiameter" type="xs:string"/>
-  <xs:attribute name="VerySmallStateDiameter" type="xs:string"/>
-  <xs:attribute name="VSStateLineCoef" type="xs:string"/>
-  <xs:attribute name="ArrowOnMediumState" type="xs:string"/>
-  <xs:attribute name="ArrowOnSmallState" type="xs:string"/>
-  <xs:attribute name="ArrowOnLargeState" type="xs:string"/>
-  <xs:attribute name="ArrowOnVerySmallState" type="xs:string"/>
-  <xs:attribute name="LoopOnMediumState" type="xs:string"/>
-  <xs:attribute name="LoopOnSmallState" type="xs:string"/>
-  <xs:attribute name="LoopOnLargeState" type="xs:string"/>
-  <xs:attribute name="LoopOnVariableState" type="xs:string"/>
-  <xs:attribute name="CLoopOnMediumState" type="xs:string"/>
-  <xs:attribute name="CLoopOnSmallState" type="xs:string"/>
-  <xs:attribute name="CLoopOnLargeState" type="xs:string"/>
-  <xs:attribute name="CLoopOnVariableState" type="xs:string"/>
-  <xs:attribute name="TransitionLabelPosit" type="xs:string"/>
-  <xs:attribute name="TransitionLabelRevPosit" type="xs:string"/>
-  <xs:attribute name="ArcLabelPosit" type="xs:string"/>
-  <xs:attribute name="ArcLabelRevPosit" type="xs:string"/>
-  <xs:attribute name="LArcLabelPosit" type="xs:string"/>
-  <xs:attribute name="LArcLabelRevPosit" type="xs:string"/>
-  <xs:attribute name="LoopLabelPosit" type="xs:string"/>
-  <xs:attribute name="LoopLabelRevPosit" type="xs:string"/>
-  <xs:attribute name="CLoopLabelPosit" type="xs:string"/>
-  <xs:attribute name="CLoopLabelRevPosit" type="xs:string"/>
-  <xs:attribute name="InitStateLabelPosit" type="xs:string"/>
-  <xs:attribute name="InitStateLabelRevPosit" type="xs:string"/>
-  <xs:attribute name="FinalStateLabelPosit" type="xs:string"/>
-  <xs:attribute name="FinalStateLabelRevPosit" type="xs:string"/>
-  <xs:attribute name="TransitionArrowWidth" type="xs:string"/>
-  <xs:attribute name="TransitionArrowLengthCoef" type="xs:string"/>
-  <xs:attribute name="TransitionDblArrowWidth" type="xs:string"/>
-  <xs:attribute name="TransitionDblArrowLengthCoef" type="xs:string"/>
-  <xs:attribute name="TransitionArrowInsetCoef" type="xs:string"/>
-  <xs:attribute name="TransitionArrowStyle" type="xs:string"/>
-  <xs:attribute name="TransitionRevArrowStyle" type="xs:string"/>
-  <xs:attribute name="StateDimen" type="xs:string"/>
-  <xs:attribute name="StateDblDimen" type="xs:string"/>
-  <xs:attribute name="left" type="xs:string"/>
-  <xs:attribute name="bottom" type="xs:string"/>
-  <xs:attribute name="top" type="xs:string"/>
-  <xs:attribute name="right" type="xs:string"/>
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="x" type="xs:string"/>
-  <xs:attribute name="y" type="xs:string"/>
-  <xs:attribute name="curvature" type="xs:string"/>
-  <xs:attribute name="curvside" type="xs:string"/>
-  <xs:attribute name="direction" type="xs:string"/>
-  <xs:attribute name="doubleline" type="xs:string"/>
+  <xs:attribute name="transitionLabelColor" type="xs:string"/>
   <xs:anyAttribute/>
 </xs:complexType>
 
@@ -261,14 +159,14 @@ The default semiring is Boolean.
   <xs:attribute name="set" default="B">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="B|R|Z|ratSeries"/>
+	<xs:pattern value="B|N|Z|Q|R|ratSeries"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
   <xs:attribute name="operations" default="numerical">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="numerical|boolean|tropicalMin|tropicalMax"/>
+	<xs:pattern value="numerical|boolean|minPlus|maxPlus|minMax"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>

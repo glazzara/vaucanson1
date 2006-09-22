@@ -43,10 +43,7 @@ int main(int argc, char** argv)
     e = a.add_letter_transition(s0, s1, 'a');
     a.add_letter_transition(s1, s2, 'b');
 
-    a.geometry().transitions()[e] = make_pair(1, 2);
     a.geometry().states()[s2] = make_pair(12, 14);
-    a.geometry().initials()[s0] = make_pair(10, 3.14);
-    a.geometry().finals()[s1] = make_pair(5, 5);
 
     std::cout << automaton_saver(a, io::string_out(), xml::XML());
   }
