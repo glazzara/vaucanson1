@@ -39,9 +39,20 @@ vcsn-tdc info $t1
 ## Generic algorithms for transducers.  ##
 ## ------------------------------------ ##
 
+
+## Composition test on boolean transducers
   vcsn-tdc compose $t1 $u1 > tmp1.xml
+  diff tmp1.xml $automata_tests_dir/t1_compose_u1.xml
+## End of test
+
   vcsn-tdc u_compose $t1 $u1 > tmp2.xml
 ! vcsn-tdc are-isomorphic tmp1.xml tmp2.xml
+
+## Unambiguous composition test on boolean transducers
+  vcsn-tdc u_compose $automata_tests_dir/t2.xml \
+                     $automata_tests_dir/u2.xml > tmp.xml
+  diff tmp.xml $automata_tests_dir/t2_u-compose_u2.xml
+## End of test
 
   input=`vcsn-tdc --alphabet1=ab --alphabet2=xy eval $t1 abba`
   vcsn-tdc --alphabet1=ab --alphabet2=xy domain $t1 | vcsn-b eval - abba

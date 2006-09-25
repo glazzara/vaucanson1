@@ -22,6 +22,9 @@
    *
    * @brief Composition for normalized and sub-normalized transducers
    * seen as automata over a free monoid product.
+   * The algorithm is described in section 2.3 of "Inside Vaucanson".
+   *
+   * @see http://www.lrde.org/cgi-bin/twiki/view/Publications/200506-Ciaa
    *
    * @author Sarah O'Connor
    */
@@ -95,8 +98,8 @@ namespace vcsn {
     const lhs_t&                 lhs;
     const rhs_t&                 rhs;
     res_t&                       output;
-    std::set<hstate_t>&          lhs_states;
-    std::set<hstate_t>&          rhs_states;
+    std::set<hstate_t>&          lhs_black_states;
+    std::set<hstate_t>&          rhs_black_states;
 
     const series_set_t&	series;
     const monoid_t&	monoid;
@@ -122,8 +125,8 @@ namespace vcsn {
       : lhs (aLhs),
 	rhs (aRhs),
 	output (aOutput),
-	lhs_states (aLhs_states),
-	rhs_states (aRhs_states),
+	lhs_black_states (aLhs_states),
+	rhs_black_states (aRhs_states),
 
         series (output.structure().series()),
 	monoid (series.monoid()),
@@ -145,15 +148,18 @@ namespace vcsn {
     {
     }
 
-    // FIXME: Document.
+    // - Add a transition between current_state and the state
+    //   corresponding to the pair (from,to).
+    // - If the state (from,to) does not exist, then it is created.
+    // - The transition is labelled by prod_series.
     void
     add_transition(const hstate_t current_state,
 		   const hstate_t from,
 		   const hstate_t to,
 		   typename res_t::series_set_elt_t& prod_series)
     {
-      if (lhs_states.find(from) == lhs_states.end()
-	  or rhs_states.find(to) == rhs_states.end())
+      if (lhs_black_states.find(from) == lhs_black_states.end()
+	  or rhs_black_states.find(to) == rhs_black_states.end())
 	{
 	  const pair_hstate_t new_pair (from, to);
 
@@ -202,6 +208,7 @@ namespace vcsn {
     void process_one_pair (const hstate_t current_state,
 			   const hstate_t lhs_s, const hstate_t rhs_s)
     {
+
       if (lhs.is_initial(lhs_s) and rhs.is_initial(rhs_s))
 	output.set_initial(current_state,
 			   state_series (lhs.get_initial(lhs_s),
@@ -289,14 +296,15 @@ namespace vcsn {
 
     void operator() ()
     {
+
       /*----------------------------------.
       | Get initial states of the product |
       `----------------------------------*/
       for_all_initial_states(lhs_s, lhs)
 	for_all_initial_states(rhs_s, rhs)
 	{
-	  if (lhs_states.find(*lhs_s) == lhs_states.end() or
-	      rhs_states.find(*rhs_s) == rhs_states.end())
+	  if (lhs_black_states.find(*lhs_s) == lhs_black_states.end() or
+	      rhs_black_states.find(*rhs_s) == rhs_black_states.end())
 	    {
 	      const hstate_t	new_state = output.add_state();
 	      const pair_hstate_t	new_pair (*lhs_s, *rhs_s);
@@ -418,7 +426,6 @@ namespace vcsn {
     typedef Element<S, T> auto_t;
     AUTOMATON_TYPES(auto_t);
 
-    // FIXME : Is it our politic ?
     for_all_states (s, ret)
       ret.del_state (*s);
 

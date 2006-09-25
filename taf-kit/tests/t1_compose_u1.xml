@@ -1,0 +1,45 @@
+<transducer xmlns="http://vaucanson.lrde.epita.fr">
+  <labelType>
+    <monoid generators="letters" type="product">
+      <monoid generators="letters" type="free">
+        <generator value="a"/>
+        <generator value="b"/>
+      </monoid>
+      <monoid generators="letters" type="free">
+        <generator value="u"/>
+        <generator value="v"/>
+      </monoid>
+    </monoid>
+    <semiring operations="numerical" set="B"/>
+  </labelType>
+  <content>
+    <states>
+      <state name="s0"/>
+      <state name="s1"/>
+      <state name="s2"/>
+      <state name="s3"/>
+      <state name="s4"/>
+      <state name="s5"/>
+      <state name="s6"/>
+      <state name="s7"/>
+    </states>
+    <transitions>
+      <transition src="s0" dst="s2" in="a"/>
+      <transition src="s0" dst="s3"/>
+      <transition src="s1" dst="s4" in="a"/>
+      <transition src="s1" dst="s0" out="v"/>
+      <transition src="s3" dst="s1" in="b"/>
+      <transition src="s3" dst="s5" out="v"/>
+      <transition src="s4" dst="s6"/>
+      <transition src="s4" dst="s2" out="v"/>
+      <transition src="s5" dst="s0" in="b"/>
+      <transition src="s6" dst="s7" in="a"/>
+      <transition src="s6" dst="s1" out="u"/>
+      <transition src="s7" dst="s4" out="u"/>
+      <initial state="s0"/>
+      <initial state="s1"/>
+      <final state="s1"/>
+      <final state="s4"/>
+    </transitions>
+  </content>
+</transducer>

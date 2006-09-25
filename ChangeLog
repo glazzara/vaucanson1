@@ -1,3 +1,22 @@
+2006-09-25  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Document and test normalized compostions.
+
+	* include/vaucanson/algorithms/normalized_composition.hxx:
+  	  Document.
+
+	* taf-kit/tests/t2_u-compose_u2.xml,
+	* taf-kit/tests/t2.xml,
+	* taf-kit/tests/u2.xml,
+	* taf-kit/tests/t1_compose_u1.xml: New.
+	* taf-kit/tests/vcsn-tdc.test: Add tests for normalized
+	  composition.
+	* taf-kit/tests/Makefile.am: Update.
+	* taf-kit/tests/README: New.
+
+	* data/automata/README: New.
+	* data/automata/Makefile.am: Update accordingly.
+
 2006-09-22  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* data/vaucanson.xsd: Use a better way to propose the same label

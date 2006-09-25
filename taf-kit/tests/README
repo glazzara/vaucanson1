@@ -1,0 +1,11 @@
+/*--------------------------.
+| Description of automata.  |
+`--------------------------*/
+
+t1_compose_u1.xml : Result of the composition of the transducers t1
+                    and u1.
+
+t2.xml : Described in Inside Vaucanson (Fig. 3.)
+u2.xml : Same as above.
+t2_u-compose_u2.xml : Result of the unambiguous composition of the
+		      transducers t2 and u2.

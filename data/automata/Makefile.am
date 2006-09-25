@@ -11,4 +11,8 @@
 ##
 ## The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
+include $(top_srcdir)/vaucanson.mk
+
 SUBDIRS = b z tdc tdc-rw
+
+automata_DATA = README

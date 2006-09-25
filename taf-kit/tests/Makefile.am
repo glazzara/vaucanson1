@@ -24,7 +24,11 @@ completeness.test
 EXTRA_DIST = $(TESTS) 		\
 	ambiguous.xml 		\
 	non_ambiguous.xml 	\
-	non_ambiguous2.xml
+	non_ambiguous2.xml	\
+	t1_compose_u1.xml	\
+	t2.xml			\
+	u2.xml			\
+	t2_u-compose_u2.xml
 
 # Each test case depends on defs.
 check_SCRIPTS =					\
