@@ -1,3 +1,19 @@
+2006-10-01  Akim Demaille  <akim.demaille@free.fr>
+
+	Timer overhaul.
+	* include/vaucanson/misc/timer.cc, include/vaucanson/misc/timer.hxx,
+	* include/vaucanson/misc/timer.hh: Clean up almost every bit.
+	(Timer::Time::now, Timer::Time::operator -=)
+	(Timer::Time:operator-, Timer::Time::operator +=)
+	(Timer::Time:operator+, Timer::Time::operator !)
+	(Timer::Time::operator bool): New.
+	(Timer::dump, Timer::timeinfo): Rename as...
+	(Timer::print, Timer::print_time): these.
+	Fix the return value.
+	(Timer::print_time): New overloaded version for Time arguments.
+	(operator<< (Timer)): New.
+	Include a small test case in timer.cc.
+
 2006-09-25  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Document and test normalized compostions.

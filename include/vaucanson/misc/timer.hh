@@ -49,11 +49,11 @@ namespace misc
       Timer (const Timer& rhs);
       ~Timer ();
 
-      /// Start a sub timer for a named task.
+      /// Start a sub-timer for a named task.
       /// \param name a constant string which is the task's name
       void push (const std::string& name);
 
-      /// Start a sub timer with an integer which refers to a string.
+      /// Start a sub-timer with an integer which refers to a string.
       /// \see push (), name ()
       void push (const int i);
 
@@ -68,12 +68,12 @@ namespace misc
       void pop ();
 
       /// Write results.
-      /// \param out an ostream which defaults to cerr.
-      void dump (std::ostream& out);
+      /// \param o an ostream.
+      std::ostream& print (std::ostream& o) const;
 
       /// Write results when the timer is destroyed.
       /// \param out an ostream which defaults to cerr.
-      void dump_on_destruction (std::ostream& out);
+      void print_on_destruction (std::ostream& out);
 
       /// The name function links an int and a constant string.
       /// \param i     the integer key to register
@@ -97,30 +97,63 @@ namespace misc
 
     private :
       class TimeVar;
+      /// User, system and wall clock time convenient interface.
       class Time
       {
 	  friend class Timer;
 	  friend class Timer::TimeVar;
 	public:
+	  /// Initially set to 0.
 	  Time ();
+	  /// Set to the current time.
+	  void now ();
 
-	  Time & operator += (const Time& rhs);
+	  /// \name Comparison to 0.
+	  /// \{
+  	  /// Whether a field is not null.
+ 	  operator bool () const;
+  	  /// Whether all fields are null.
+ 	  bool operator ! () const;
+	  /// \}
 
-	private :
+	  /// \name Arithmetics.
+	  /// \{
+	  /// Accumulate \c lhs into \a this.
+	  Time& operator += (const Time& lhs);
+	  /// Return the sum of \a this and \a lhs
+	  Time operator + (const Time& lhs) const;
+
+	  /// Subtract \c lhs from \a this.
+	  Time& operator -= (const Time& lhs);
+	  /// Return the subtraction of \a this and \a lhs.
+	  Time operator - (const Time& lhs) const;
+	  /// \}
+
+	private:
+	  /// User time.
 	  long user;
+	  /// System time.
 	  long sys;
+	  /// Wall clock time.
 	  long wall;
       };
 
+      /// An actual sub-timer.
       class TimeVar
       {
 	public:
 	  TimeVar ();
-
+	  ///
 	  void start ();
 	  void stop ();
 
-	  bool is_zero ();
+	  /// \name Comparison to 0.
+	  /// \{
+  	  /// Whether \a elapsed is not null.
+ 	  operator bool () const;
+  	  /// Whether \a elapsed is null.
+ 	  bool operator ! () const;
+	  /// \}
 
 	  Time begin;
 	  Time elapsed;
@@ -130,7 +163,15 @@ namespace misc
       };
 
       /// Format timing results.
-      void timeinfo (long, long, std::ostream&);
+      std::ostream& print_time (long t, long total, std::ostream& o) const;
+      /// Print statistics on a Time.
+      /// \param s     title
+      /// \param t     Time to report
+      /// \param tot   total Time \a t is a part of
+      /// \param o     output stream
+      std::ostream& print_time (const std::string& s,
+				const Time& t, const Time& tot,
+				std::ostream& o) const;
 
       typedef std::map<const std::string, TimeVar*> task_map_type;
 
@@ -147,8 +188,7 @@ namespace misc
       /// \see start (), stop ()
       TimeVar total;
 
-      /** \brief A stream onto which the results are dumped when the
-       oject is destroyed.  */
+      /// Stream onto which the results are dumped upon destruction.
       std::ostream* dump_stream;
 
       /// Number of clocks ticks per second, set according to the system
@@ -156,15 +196,22 @@ namespace misc
       const long clocks_per_sec;
   };
 
-  /// A timer which starts at its construction, and stop at its destruction.
+  /// Dump \a t on \a o.
+  std::ostream& operator<< (std::ostream& o, const Timer& t);
+
+  /// A timer which starts at its construction, and stops at its destruction.
   class ScopedTimer
   {
-  public:
-    ScopedTimer (Timer& timer, const std::string& key);
-    ~ScopedTimer ();
-  private:
-    Timer& timer_;
-    const std::string key_;
+    public:
+      /// Start a sub-timer named \a key, register in \a timer.
+      ScopedTimer (Timer& timer, const std::string& key);
+      /// Stop this timer.
+      ~ScopedTimer ();
+    private:
+      /// The host timer.
+      Timer& timer_;
+      /// The name of this task.
+      const std::string key_;
   };
 
 } // namespace misc

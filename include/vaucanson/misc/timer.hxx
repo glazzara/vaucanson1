@@ -34,65 +34,116 @@ namespace misc
   /*--------.
   | Timer.  |
   `--------*/
-  
+
   inline
   void
   Timer::push (const int i)
   {
-    precondition (this->intmap.find (i) != this->intmap.end ());
-    this->push (this->intmap[i]);
+    precondition (intmap.find (i) != intmap.end ());
+    push (intmap[i]);
   }
 
   inline
   void
   Timer::pop (const std::string& task_name)
   {
-    precondition (this->tasksmap[task_name] == this->tasks.top ());
-    this->pop ();
+    precondition (tasksmap[task_name] == tasks.top ());
+    pop ();
   }
 
   inline
   void
   Timer::pop (const int i)
   {
-    this->pop (this->intmap[i]);
+    pop (intmap[i]);
   }
 
 
   inline
   void
-  Timer::dump_on_destruction (std::ostream& out)
+  Timer::print_on_destruction (std::ostream& o)
   {
-    this->dump_stream = &out;
+    dump_stream = &o;
   }
 
   inline
   void
   Timer::start ()
   {
-    this->total.start ();
+    total.start ();
   }
 
   inline
   void
   Timer::stop ()
   {
-    this->total.stop ();
+    total.stop ();
   }
 
+
+
+  /*--------------.
+  | Timer::Time.  |
+  `--------------*/
+
   inline
-  Timer::Time::Time () :
-    user (0), sys (0), wall (0)
+  Timer::Time::Time ()
+    : user (0), sys (0), wall (0)
   { }
 
   inline
-  Timer::Time&
-  Timer::Time::operator += (const Time& rhs)
+  Timer::Time::operator bool () const
   {
-    this->wall += rhs.wall;
-    this->user += rhs.user;
-    this->sys += rhs.sys;
+    return (false
+	    || wall
+	    || user
+	    || sys);
+  }
+
+  inline
+  bool
+  Timer::Time::operator ! () const
+  {
+    return (true
+	    && !wall
+	    && !user
+	    && !sys);
+  }
+
+  inline
+  Timer::Time&
+  Timer::Time::operator+= (const Time& lhs)
+  {
+    wall += lhs.wall;
+    user += lhs.user;
+    sys  += lhs.sys;
     return *this;
+  }
+
+  inline
+  Timer::Time
+  Timer::Time::operator+ (const Time& lhs) const
+  {
+    Timer::Time res = *this;
+    return res += lhs;
+  }
+
+  inline
+  Timer::Time&
+  Timer::Time::operator-= (const Time& lhs)
+  {
+    wall -= lhs.wall;
+    user -= lhs.user;
+    sys  -= lhs.sys;
+    return *this;
+  }
+
+  inline
+  Timer::Time
+  Timer::Time::operator- (const Time& lhs) const
+  {
+    Timer::Time res = *this;
+    return res -= lhs;
   }
 
   /*--------------.

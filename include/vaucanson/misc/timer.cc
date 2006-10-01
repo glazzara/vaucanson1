@@ -44,9 +44,25 @@ NAMESPACE_VCSN_BEGIN
 namespace misc
 {
 
+  /*--------------.
+  | Timer::Time.  |
+  `--------------*/
+
+  INLINE_TIMER_CC
+  void
+  Timer::Time::now ()
+  {
+    struct tms tms;
+    wall = times (&tms);
+    user = tms.tms_utime;
+    sys	 = tms.tms_stime;
+  }
+
+
   /*-----------------.
   | Timer::TimeVar.  |
   `-----------------*/
+
   INLINE_TIMER_CC
   Timer::TimeVar::TimeVar ()
     : initial (true)
@@ -56,12 +72,7 @@ namespace misc
   void
   Timer::TimeVar::start ()
   {
-    struct tms tms;
-
-    begin.wall = times (&tms);
-    begin.user = tms.tms_utime;
-    begin.sys	 = tms.tms_stime;
-
+    begin.now ();
     if (initial)
     {
       initial = false;
@@ -73,24 +84,21 @@ namespace misc
   void
   Timer::TimeVar::stop ()
   {
-    struct tms tms;
+    last.now ();
+    elapsed += last - begin;
+  }
 
-    last.wall = times (&tms);
-    last.user = tms.tms_utime;
-    last.sys = tms.tms_stime;
-    elapsed.wall += last.wall - begin.wall;
-    elapsed.user += last.user - begin.user;
-    elapsed.sys += last.sys - begin.sys;
+  INLINE_TIMER_CC
+  Timer::TimeVar::operator bool () const
+  {
+    return elapsed;
   }
 
   INLINE_TIMER_CC
   bool
-  Timer::TimeVar::is_zero ()
+  Timer::TimeVar::operator ! () const
   {
-    return (true
-	    && elapsed.wall == 0
-	    && elapsed.user == 0
-	    && elapsed.sys  == 0);
+    return ! elapsed;
   }
 
 
@@ -99,18 +107,18 @@ namespace misc
   `--------*/
 
   INLINE_TIMER_CC
-  Timer::Timer () :
-    dump_stream (0),
-    clocks_per_sec (sysconf (_SC_CLK_TCK))
+  Timer::Timer ()
+    : dump_stream (0),
+      clocks_per_sec (sysconf (_SC_CLK_TCK))
   { }
 
   INLINE_TIMER_CC
   // Duplicate a Timer. No tasks should be running.
-  Timer::Timer (const Timer& rhs) :
-    intmap (rhs.intmap),
-    total (rhs.total),
-    dump_stream (rhs.dump_stream),
-    clocks_per_sec (rhs.clocks_per_sec)
+  Timer::Timer (const Timer& rhs)
+    : intmap (rhs.intmap),
+      total (rhs.total),
+      dump_stream (rhs.dump_stream),
+      clocks_per_sec (rhs.clocks_per_sec)
   {
     precondition (rhs.tasks.empty ());
 
@@ -136,7 +144,7 @@ namespace misc
 	while (!tasks.empty ());
 	stop ();
       }
-      dump (*dump_stream);
+      print (*dump_stream);
     }
 
     // Deallocate all our TimeVar.
@@ -154,82 +162,78 @@ namespace misc
   }
 
   INLINE_TIMER_CC
-  void
-  Timer::timeinfo (long time, long total_time, std::ostream& out)
+  std::ostream&
+  Timer::print_time (long time, long total_time, std::ostream& o) const
   {
-    out << setiosflags (std::ios::left);
-    out << std::setw (6) << std::setprecision (6)
-	<< (float) (time) / clocks_per_sec;
-    out << resetiosflags (std::ios::left);
-    out << " (";
-    out << std::setw (5) << std::setprecision (3)
-	<< (total_time ?
-	    (float) time * 100 / total_time :
-	    (float) time);
-    out << "%) ";
+    return o
+      << setiosflags (std::ios::left)
+      << std::setw (6) << std::setprecision (6)
+      << (float) (time) / clocks_per_sec
+      << resetiosflags (std::ios::left)
+      << " ("
+      << std::setw (5) << std::setprecision (3)
+      << (total_time
+	  ? (float) time * 100 / total_time
+	  : (float) time)
+      << "%) ";
   }
 
 
   INLINE_TIMER_CC
-  void
-  Timer::dump (std::ostream& out = std::cerr)
+  std::ostream&
+  Timer::print_time (const std::string& s,
+		     const Time& t, const Time& total, std::ostream& o) const
   {
-    out << "Execution times (seconds)" << std::endl;
+    o << " " << s << std::setw (26 - s.length ()) << ": ";
+    print_time (t.user, total.user, o);
+    o << "  ";
+    print_time (t.sys, total.sys, o);
+    o << "  ";
+    print_time (t.wall, total.wall, o);
+    o << std::endl;
+    return o;
+  }
+
+
+  INLINE_TIMER_CC
+  std::ostream&
+  Timer::print (std::ostream& o) const
+  {
+    o << "Execution times (seconds)" << std::endl;
     for (task_map_type::const_iterator i = tasksmap.begin ();
 	 i != tasksmap.end (); ++i)
-    {
-      if (!(i->second->is_zero ()))
-      {
-	out << " " << i->first << std::setw (26 - i->first.length ());
-	out << ": ";
-	timeinfo (i->second->elapsed.user, total.elapsed.user, out);
-	out << "  ";
-	timeinfo (i->second->elapsed.sys, total.elapsed.sys, out);
-	out << "  ";
-	timeinfo (i->second->elapsed.wall, total.elapsed.wall, out);
-	out << std::endl;
-      }
-    }
-    out << std::endl;
+      if (i->second)
+	print_time (i->first, i->second->elapsed, total.elapsed, o);
+    o << std::endl;
 
-    out << "Cumulated times (seconds)" << std::endl;
+    o << "Cumulated times (seconds)" << std::endl;
     for (task_map_type::const_iterator i = tasksmap.begin ();
 	 i != tasksmap.end (); ++i)
-    {
-      if (0 != (i->second->last.wall - i->second->first.wall))
-      {
-	out << " " << i->first << std::setw (26 - i->first.length ());
-	out << ": ";
-	timeinfo (i->second->last.user - i->second->first.user,
-		  total.elapsed.user, out);
-	out << "  ";
-	timeinfo (i->second->last.sys - i->second->first.sys,
-		  total.elapsed.sys, out);
-	out << "  ";
-	timeinfo (i->second->last.wall - i->second->first.wall,
-		  total.elapsed.wall, out);
-	out << std::endl;
-      }
-    }
-    out << std::endl;
+      if (i->second->last.wall != i->second->first.wall)
+	print_time (i->first, i->second->last - i->second->first,
+		    total.elapsed, o);
+    o << std::endl;
 
-    out << " TOTAL (seconds)"	 << std::setw (11) << ": "
+    o << " TOTAL (seconds)"	 << std::setw (11) << ": "
 
-	<< setiosflags (std::ios::left) << std::setw (7)
-	<< (float) total.elapsed.user / clocks_per_sec
-	<< std::setw (11)
-	<< "user,"
+      << setiosflags (std::ios::left) << std::setw (7)
+      << (float) total.elapsed.user / clocks_per_sec
+      << std::setw (11)
+      << "user,"
 
-	<< std::setw (7)
-	<< (float) total.elapsed.sys / clocks_per_sec
-	<< std::setw (11)
-	<< "system,"
+      << std::setw (7)
+      << (float) total.elapsed.sys / clocks_per_sec
+      << std::setw (11)
+      << "system,"
 
-	<< std::setw (7)
-	<< (float) total.elapsed.wall / clocks_per_sec
-	<< "wall"
+      << std::setw (7)
+      << (float) total.elapsed.wall / clocks_per_sec
+      << "wall"
 
-	<< resetiosflags (std::ios::left) << std::endl;
+      << resetiosflags (std::ios::left)
+      << std::endl;
+
+    return o;
   }
 
   INLINE_TIMER_CC
@@ -274,19 +278,79 @@ namespace misc
 
     for (task_map_type::const_iterator i = rhs.tasksmap.begin ();
 	 i != rhs.tasksmap.end (); ++i)
-    {
       if (tasksmap.find (i->first) == tasksmap.end ())
 	tasksmap[i->first] = new TimeVar (*i->second);
-    }
 
     intmap.insert (rhs.intmap.begin (), rhs.intmap.end ());
     return *this;
   }
 
+
+  /*--------------------------.
+  | Free standing functions.  |
+  `--------------------------*/
+
+  /// Dump \a t on \a o.
+  std::ostream&
+  operator<< (std::ostream& o, const Timer& t)
+  {
+    return t.print (o);
+  }
+
 } // namespace misc
+
+
+  /*--------.
+  | Tests.  |
+  `--------*/
+
+# if TEST_TIMER
+
+#  include <iostream>
+
+/// Test the timers.
+int
+main ()
+{
+  misc::Timer timer;
+  enum timevar
+  {
+    One = 1,
+    Two,
+    Three
+  };
+
+  timer.name (One, "One");
+  timer.name (Two, "Two");
+  timer.name (Three, "Three");
+
+  timer.start ();
+
+  timer.push (One);
+  sleep (1);
+  timer.pop (1);
+
+  timer.push ("Two");
+  sleep (2);
+  timer.pop ("Two");
+
+  timer.push ("Three");
+  sleep (3);
+  timer.pop (Three);
+
+  timer.stop ();
+  std::cerr << timer << std::endl;
+  return 0;
+}
+
+# endif
 
 NAMESPACE_VCSN_END
 
 # undef INLINE_TIMER_CC
 
 #endif //!VCSN_MISC_TIMER_CC
+
+/// Local Variables:
+/// compile-command: "g++ -I ../.. -I ../../../_build/include -DTEST_TIMER timer.cc -o test-timer -Wall && ./test-timer"
+/// End:
