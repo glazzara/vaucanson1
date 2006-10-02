@@ -54,6 +54,11 @@ vcsn-tdc info $t1
   diff tmp.xml $automata_tests_dir/t2_u-compose_u2.xml
 ## End of test
 
+## Inversion of t1
+./vcsn-tdc invert $t1 | \
+./vcsn-tdc are-isomorphic inverted_t1.xml -
+## End of test
+
   input=`vcsn-tdc --alphabet1=ab --alphabet2=xy eval $t1 abba`
   vcsn-tdc --alphabet1=ab --alphabet2=xy domain $t1 | vcsn-b eval - abba
   vcsn-tdc --alphabet1=ab --alphabet2=xy image $t1 | vcsn-b eval - $input

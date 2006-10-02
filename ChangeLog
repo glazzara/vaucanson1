@@ -1,3 +1,22 @@
+2006-10-02  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Add invert for transducers.
+
+	* include/vaucanson/algorithms/invert.hxx: Add specialization
+	  for transducers.
+	* include/vaucanson/contexts/transducer_functions.thh,
+	* include/vaucanson/contexts/fmp_transducer_functions.thh: Add
+	  invert to the algorithms list.
+
+	* taf-kit/src/tdc_commands.cc: Add invert as a command of
+	  vcsn-tdc.
+
+	* taf-kit/tests/inverted_t1.xml: New. Simple test for
+	  inversion of transducers.
+	* taf-kit/tests/vcsn-tdc.test: Update accordingly.
+
+	* taf-kit/tests/Makefile.am: Update accordingly.
+
 2006-10-02  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* doc/xml/xml_proposal.tex: Remove some references to the Vaucanson

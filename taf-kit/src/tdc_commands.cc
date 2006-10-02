@@ -66,6 +66,14 @@ DEFINE_COMMAND (NAME (u_compose)
 				  XML ()))
 		RETURNVALUE (0));
 
+DEFINE_COMMAND (NAME (invert)
+		CODE (
+		  automaton_t a = get_aut(args.args[1]);
+		  automaton_t fmp = invert(a))
+		OUTPUT (
+		  automaton_saver(fmp, string_out (), XML ()))
+		RETURNVALUE (0));
+
 DEFINE_COMMAND (NAME (evaluation)
 		CODE (/* empty */)
 		OUTPUT (
@@ -191,10 +199,10 @@ const command_t command_map[] =
 		   "preserve the number of path."),
     COMMAND_ENTRY (to_rt, Aut,
 		   "Give the equivalent realtime transducer of `aut'."),
+    COMMAND_ENTRY (invert, Aut, "Give the inverse of `aut'."),
     COMMAND_ENTRY (intersection, Aut,
 		   "Transform a Boolean automaton in a fmp transducer by\n\t"
 		   "creating, for each word, a pair containing twice this word.")
-
     ),
 
   {0, 0 ,0 ,0, 0}

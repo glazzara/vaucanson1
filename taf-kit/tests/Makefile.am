@@ -28,7 +28,8 @@ EXTRA_DIST = $(TESTS) 		\
 	t1_compose_u1.xml	\
 	t2.xml			\
 	u2.xml			\
-	t2_u-compose_u2.xml
+	t2_u-compose_u2.xml	\
+	inverted_t1.xml
 
 # Each test case depends on defs.
 check_SCRIPTS =					\

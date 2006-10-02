@@ -1,0 +1,31 @@
+<transducer xmlns="http://vaucanson.lrde.epita.fr">
+  <labelType>
+    <monoid generators="letters" type="product">
+      <monoid generators="letters" type="free">
+        <generator value="x"/>
+        <generator value="y"/>
+      </monoid>
+      <monoid generators="letters" type="free">
+        <generator value="a"/>
+        <generator value="b"/>
+      </monoid>
+    </monoid>
+    <semiring operations="numerical" set="B"/>
+  </labelType>
+  <content>
+    <states>
+      <state name="s0"/>
+      <state name="s1"/>
+      <state name="s2"/>
+    </states>
+    <transitions>
+      <transition src="s0" dst="s1" in="y"/>
+      <transition src="s1" dst="s0" out="a"/>
+      <transition src="s1" dst="s2" in="x"/>
+      <transition src="s2" dst="s1" out="b"/>
+      <initial state="s1"/>
+      <final state="s0"/>
+      <final state="s1"/>
+    </transitions>
+  </content>
+</transducer>

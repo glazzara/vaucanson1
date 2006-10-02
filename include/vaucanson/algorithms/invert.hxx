@@ -22,6 +22,8 @@
 
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/transducer.hh>
+# include <vaucanson/algebra/concept/freemonoid_product.hh>
+# include <vaucanson/algebra/implementation/series/series.hh>
 
 # include <vaucanson/misc/usual_macros.hh>
 
@@ -124,6 +126,150 @@ namespace vcsn
   }
 
 
+  /*----------------------------------.
+  | Specialization for  transducers.  |
+  `----------------------------------*/
+
+
+  // Invert `label' and store the result in `res'.
+  template<typename S, typename T,
+	   typename SS, typename TT>
+  static void invert_label(const Element<S, T>& label,
+			   Element<SS, TT>& res)
+  {
+    typedef Element<S, T> series_set_elt_t;
+    typedef typename series_set_elt_t::monoid_elt_t::value_t
+      res_monoid_elt_value_t;
+
+    // Invert each pair
+    for_all_const_(series_set_elt_t::support_t, w, label.supp())
+      {
+	// (u,v) -> (v,u)
+	res.assoc(res_monoid_elt_value_t((*w).second, (*w).first),
+		label.get(*w));
+      }
+  }
+
+
+  template<typename S, typename T,
+	   typename SS, typename TT>
+  Element<SS, TT>&
+  do_invert_tdc(const Element<S, T>& t,
+		Element<SS, TT>& u)
+  {
+    typedef Element<S, T> Trans_t;
+    typedef Element<SS, TT> res_t;
+    AUTOMATON_TYPES(Trans_t);
+    AUTOMATON_TYPES_(res_t, res_);
+
+    std::map<hstate_t, hstate_t> map_t_u;
+    for_all_states (p, t)
+      map_t_u[*p] = u.add_state ();
+
+    // Proceed initial and final states
+    for_all_initial_states (p, t)
+      {
+	res_series_set_elt_t s (u.structure().series());
+	invert_label(t.get_initial(*p), s);
+	u.set_initial (map_t_u[*p], s);
+      }
+
+    for_all_final_states (p, t)
+      {
+	res_series_set_elt_t s (u.structure().series());
+	invert_label(t.get_final(*p), s);
+	u.set_final (map_t_u[*p], s);
+      }
+
+
+    for_all_transitions (e, t)
+      {
+	res_series_set_elt_t s (u.structure().series());
+	res_monoid_elt_t a (u.structure().series().monoid());
+
+	// Get the label of the current transition
+	series_set_elt_t label(t.structure().series());
+	label = t.series_of(*e);
+
+	invert_label(label, s);
+
+	u.add_series_transition(map_t_u[t.src_of(*e)],
+				map_t_u[t.dst_of(*e)],
+				s);
+      }
+
+    return u;
+  }
+
+
+
+  /*---------------------------.
+  | Dispatch for  tranducers.  |
+  `---------------------------*/
+
+  template<typename S, typename T,
+	   typename M1, typename M2>
+  Element<S, T>&
+  do_invert_fmp(const algebra::FreeMonoidProduct<M1, M2>&,
+		const Element<S, T>& t)
+  {
+    // Declaration of the inverted transducer
+    typedef Element<S, T> trans_t;
+    AUTOMATON_TYPES(trans_t);
+
+    typedef algebra::FreeMonoidProduct<
+      typename trans_t::series_set_t::monoid_t::second_monoid_t,
+      typename trans_t::series_set_t::monoid_t::first_monoid_t>
+      res_monoid_t;
+
+    typedef algebra::Series<typename trans_t::series_set_t::semiring_t,
+      res_monoid_t>
+      res_series_set_t;
+
+    res_monoid_t monoid(t.structure().series().monoid().second_monoid(),
+			t.structure().series().monoid().first_monoid());
+
+
+    res_series_set_t series(t.structure().series().semiring(), monoid);
+
+    Automata<series_set_t> trans_set(series);
+
+    typedef Element< Automata<series_set_t>, T> res_trans_t;
+    res_trans_t* res = new res_trans_t(trans_set);
+
+    return do_invert_tdc(t, *res);
+  }
+
+
+  template<typename S, typename T,
+	   typename SS, typename TT,
+	   typename M1, typename M2>
+  Element<SS, TT>&
+  do_invert_fmp(const algebra::FreeMonoidProduct<M1, M2>&,
+		const Element<S, T>& t,
+		Element<SS, TT>& res)
+  {
+    return do_invert_tdc(t, res);
+  }
+
+
+  template<typename S, typename T>
+  Element<S, T>&
+  do_invert(const AutomataBase<S>&,
+	    const Element<S, T>& t)
+  {
+    return do_invert_fmp(t.structure().series().monoid(), t);
+  }
+
+  template<typename S, typename T>
+  Element<S, T>&
+  do_invert(const AutomataBase<S>&,
+	    const Element<S, T>& t,
+	    Element<S, T>& res)
+  {
+    return do_invert_fmp(t.structure().series().monoid(), t, res);
+
+  }
 
   /*-----------------------------.
   | Dispatch for RW tranducers.  |
