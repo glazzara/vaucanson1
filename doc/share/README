@@ -85,7 +85,7 @@ LaTeX, pas de caractères accentués.  bin/latin2tex aide à faire la
 conversion.
 
 Essayer de maintenir les clefs selon la convention LRDE :
-<nom-premier-auteur>.<annnée>.<sigle> (où le <sigle> est celui de la
+<nom-premier-auteur>.<année>.<sigle> (où le <sigle> est celui de la
 conf, du livre etc.).  Pour les pages www, utiliser "<projet>.www".
 Si vous changez une clé, mettre l'ancienne dans une entrée "oldkeys"
 comme ceci :
@@ -112,6 +112,10 @@ computer-history.bib de ce fichier.
 Tous les rapports des étudiants.  Suivre le même style que conseillé
 pour lrde.bib.  Utiliser des clefs NOM.ANNEE.seminar, voire
 NOM.ANNEE.seminar.TOPIC en cas de conflit.
+
+** dmr.bib
+Denis Ritchie.
+<URL:http://cm.bell-labs.com/cm/cs/bib/dmr.bib>.
 
 ** kernighan.bib
 La biblio de Brian Kernighan, depuis
@@ -214,6 +218,17 @@ cf. <URL:http://computer.org/cspress/instruct.htm> ou
 IEEE 8.5 x 11-Inch Proceedings Style `latex8.sty'.  Et son style
 BibTeX.  Documenté dans /mnt/doc/comp/text/latex/latex8.pdf et
 /mnt/doc/comp/text/latex/latex8.tex.
+
+** lrde.bst
+Style BibTeX pour générer la bibliographie du lrde et celles de l'Air
+de rien.  Pour l'instant, encore en chantier, sera accompagnée d'un
+lrde-bst.sty.  Pour s'en servir, définir les macros suivantes:
+
+  \lrdebibauthor{AUTHOR}
+  \lrdebibkey{KEY}
+  \lrdebibtitle{TITLE}{URL-LRDE}
+  \lrdebiburl{URL}
+  \lrdebibyear{YEAR}
 
 ** lrde-bulletin.sty
 Le style utilisé pour L'air de rien. Remplace GRASSnews.sty.

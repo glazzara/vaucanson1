@@ -6,7 +6,7 @@
 \usepackage{vaucanson-g}
 \usepackage{myhyperref}
 \usepackage{texi}
-
+\usepackage{natbib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\bigskipneg}{\vspace*{-5ex}} %960728
@@ -80,18 +80,17 @@ complexity. Finally, we briefly focus on implementation concerns.
 Conceiving a universal automaton exchange format aims at providing the
 community with a communication tool for the connection
 of the various programs that deal with automata and transducers.  This
-system is used in the Vaucanson platform. Someone can load an
-automaton in Vaucanson from a XML file, or store an existing one from
-Vaucanson into an XML file.
+system would enable someone to load an automaton in any automata
+handling program from a XML file, or to store an existing one from
+this program into an XML file.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview}
 
-As it will be described further, we use an XSD file \cite{XSD}
-for the description format of this XML proposition, since it allows
-context sensitive declarations.  This report first presents an XML
-representation of a classical Boolean automaton. Then this example
-will be fleshed out, so as to deal with transducers
+As it will be described further, we use an XSD file \cite{vaucanson.www.xsd}
+for the description format of this XML proposition, since it fits our needs.
+This report first presents an XML representation of a classical Boolean
+automaton. Then this example will be fleshed out, so as to deal with transducers
 and more general automata with multiplicity.
 
 The automaton description is structured in two parts.  The
@@ -238,7 +237,7 @@ in a specific order. These tags enable definitions of states
 and transitions.
 
 The first tag, \statestag{}, introduces the declaration of
-the set of states of the automaton. A state has three attributes: a
+the set of the automaton states. A state has three attributes: a
 \nameattr{} (which is mandatory and has to be unique), a \labelattr{}
 and a \numberattr{}. The latter can be used to put an ordering on states,
 or to add special integer data to the state.
@@ -264,7 +263,7 @@ it is a non-restricted string. For example, a user can store a
 rational expression in the \labelattr{}, \inattr{} or \outattr{}
 attributes of a transition. The use of these attributes depends on the
 structure of automaton one defines. When omitting them, the XSD
-grammar proposes the empty word as the default value.
+grammar proposes the empty string as the default value.
 
 At this point, most of automata can be easily described. These
 examples use only a part of the XML description that we present, but
@@ -460,7 +459,7 @@ is achieved with:
 \verb|<semiring set="Z" operations="maxPlus">|}
 \end{center}
 
-All the content definition previously defined in \autoref{B1xml} is
+The content definition previously defined in \autoref{B1xml} is
 still totally compatible with a weighted automaton, and can remain
 unchanged.
 
@@ -474,12 +473,10 @@ grammar proposes the identity of the semiring as the default value.
 \medskip
 
 The \semiringtag{} tag proposes some solutions for the transducers,
-like the example of \autoref{ratseries1}. It describes the right
-transducer for binary addition seen as a weighted automaton with
-weight in $Rat(B^*)$. \monoidtag{} and \semiringtag{} tags can
+like the example of \autoref{ratseries1}. It is seen as a weighted automaton
+with weight in $Rat(B^*)$. \monoidtag{} and \semiringtag{} tags can
 recursively be defined, in order to describe a complex type. Only the
-\typetag{} is shown in the example \autoref{ratseries1} so as to
-remain clear.
+\typetag{} is shown so as to remain clear.
 
 \begin{figure}[ht]
   \begin{center}
@@ -546,7 +543,7 @@ describe the states of an automaton and their content. The
 \begin{itemize}
 \item \statetag{}\\
   This tag represents one state. There must be as many of these tags
-  as there are states in the automaton. Such a tag has the following
+  as there are states in the automaton. It has the following
   elements and attributes:
   \begin{itemize}
   \item \textbf{\xattr{name}}\\
@@ -644,12 +641,9 @@ important:
 The \verb|in| and \verb|out| attributes follow the same rules for
 transducers.
 
-The \Vauc group is aware that with some special alphabets and a
-special empty word, some errors can occur when parsing some
-complicated labels.  It would be preferable to design another XML
-description to represent a rational expression instead of a
-non-limited string, and it could be one of the further works of the
-\Vauc{} group.
+It would be preferable to design another XML description to represent a rational
+expression instead of a non-limited string, and it could be one of the further
+works of the \Vauc{} group.
 
 \subsection{The \sessiontag{} tag}
 
@@ -815,15 +809,14 @@ transition as a left arc.
 The \drawingtag{} tag contains the definition of attributes that
 characterize the actual drawing of the graph.  Most of them are indeed
 implicit and provided by drawing programs; the format only provides
-the possibility to make them explicit.  A lot of different properties,
-that have been taken from the options proposed by Vaucanson-G, can be
-used in the \drawingtag{} tag at many places in the proposal.
+the possibility to make them explicit.
 
 Since it's not possible to exhaustively name all needed attributes
-users may need, the proposal offers a limited set of properties. For
-example, \textit{stateFillColor} or \textit{transitionStyle} usage are
-shown in \autoref{drawing1}. These attributes use a string
-representation to describe their values.
+users may need, the proposal offers a very limited set of properties. For
+example, \textit{stateFillColor} or \textit{transitionLabelColor} usage are
+shown in \autoref{drawing1}. These attributes use a string representation to
+describe their values. Providing more attributes will be one of our future
+works.
 
 One of the powerful features of XSD files is the \textit{anyAttribute}
 modifier. This modifier allows the user to easily extend the main XSD,
@@ -838,7 +831,7 @@ set of drawing properties.
 \begin{alltt}
 <transducer>
   <geometry x="-5" y="0"/>
-  <drawing stateFillColor="black" transitionStyle="dashed"/>
+  <drawing stateFillColor="black" transitionLabelColor="dashed"/>
   <content>
      <states>
         <state name="s0">
@@ -857,7 +850,7 @@ set of drawing properties.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{From DTD to XSD}
 The most important difference with our previous proposal
-\cite{VXML04} is the change from a DTD (Document Type Definition)
+\cite{vaucanson.04.techrep} is the change from a DTD (Document Type Definition)
 document to an XSD (XML Schema Description) Schema.
 
 It is desirable to keep the description of automata simple when
@@ -877,14 +870,15 @@ context-sensitive. With this feature, default values for the
 \transducertag{} or \automatontag{}.
 
 For information about the XSD Schema are available on the
-\textit{World Wide Web Consortium} website \cite{W3C}.
+\textit{World Wide Web Consortium} website \cite{w3c.www}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 
-For the past year we experimented the proposal made at CIAA'04 in the
-\Vauc platform. This version 0.3 comes as a result of this experiment,
-with simplifications where possible. Thus, the \Vauc platform deals
+For the past years we experimented the different proposals in the
+\Vauc platform, and we presented our progress at CIAA'05
+\cite{claveirole.05.ciaa}. This version 0.3.2 comes as a result of this
+experiment, with simplifications where possible. Thus, the \Vauc platform deals
 with numerous automata types, and it is important to be able to define
 precisely the type of the automaton in addition to its content.
 
@@ -893,41 +887,16 @@ of widely used structure and make possible definitions of complex
 types. We hope to have proposed a description format that fulfills, at
 least partially, both needs.
 
-{\small%
-\begin{thebibliography}{1}
-
-\bibitem{gof}
-{\sc Gamma E., Helm R., Johnson R., and Vlissides J.},
-\newblock {\em Design Patterns: Elements of Reusable Object-Oriented
-Software},
-\newblock Addison-Wesley, 1995.
-
-\bibitem{LombReGiSaka04}
-{\sc Lombardy S., R\'egis-Gianas Y., and Sakarovitch J.},
-\newblock Introducing Vaucanson
-\newblock {\em Theoretical Comput. Sci. 328\/} (2004), 77--96.
-\newblock Journal version of
-{\em Proc. of CIAA 2003, Lect. Notes in Comp. Sc. 2759}, (2003),
-96--107
-\newblock (with {\sc R. Poss}).
-
-\bibitem{VXML04}
-{\sc Claveirole T.},
-\newblock Proposal: an XML representation for automata,
-\newblock Technical report, LRDE (2004).
+\nocite{lombardy.04.tcs}
+\nocite{claveirole.05.ciaa}
+\nocite{vaucanson.04.techrep}
+\nocite{vaucanson.www.xml}
+\nocite{vaucanson.www.xsd}
+\nocite{w3c.www}
 
 
-\bibitem{xerces}
-\verb+http://xml.apache.org/xerces-c/+
+\bibliographystyle{apalike}
+\bibliography{lrde,vaucanson}
 
-\bibitem{W3C}
-\verb+http://www.w3.org/XML/Schema+
-
-\bibitem{VCSN-XML}
-\verb+http://vaucanson.lrde.epita.fr/XML+
-
-\bibitem{XSD}
-\verb+http://www.lrde.epita.fr/dload/vaucanson/vaucanson-0.3.1.xsd+
-\end{thebibliography}}
 
 \end{document}

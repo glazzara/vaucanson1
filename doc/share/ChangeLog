@@ -1,3 +1,76 @@
+2006-09-27  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* bib/vaucanson.bib: Add some misc urls.
+	* bib/lrde.bib: Add the 2004 XML proposal.
+
+2006-09-27  Roland Levillain  <roland@lrde.epita.fr>
+
+	Adjust lrde.bst.
+
+	* styles/lrde.bst (output.urllrde): Use `write$' instead of `output'.
+	(output.note): New function.
+	(output.etc): New function.
+	(article, book, booklet, inbook, incollection, inproceedings)
+	(manual, mastersthesis, misc, phdthesis, proceedings, techreport):
+	Use it.
+	From Akim Demaille.
+
+2006-09-27  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/lrde.bib (lesage.06.isvc): Remove dummy entries.
+
+2006-09-25  Akim Demaille  <akim@lrde.epita.fr>
+
+	Merge lrde.bst and lrde-bulletin.bst.
+
+	* styles/lrde-bulletin.bst: Remove.
+	* styles/lrde.bst: Merge its features in here.
+	(format): New, to factor.
+	* README: Adjust.
+
+2006-09-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	Don't output the key.
+
+	* styles/lrde-bulletin.bst (\urllrdekey, \urllrdeyear): New.
+	(\urltitlelrde): Rename as...
+	(\lrdebibtitle): this.
+
+2006-09-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add lrde-bulletin.bst.
+
+	* styles/lrde-bulletin.bst: New.
+	* bib/lrde.bib (verna.06.practex): Add a volume.
+
+2006-09-21  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix the previous patch.
+
+	* bib/lrde.bib (darbon.06.iccp): Add a missing coma.
+
+2006-09-21  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add darbon.06.iccp.
+
+	* bib/lrde.bib (darbon.06.iccp): New entry.
+
+2006-09-21  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix cadilhac.06.avocs key.
+
+	* bib/lrde.bib (cadilhac.06.avoics): Rename as...
+	(cadilhac.06.avocs): ...this.
+	* README: Typo.
+
+2006-09-21  Akim Demaille  <akim@lrde.epita.fr>
+
+	dmr.bib.
+
+	* bib/dmr.bib: New.
+	* README: Update.
+
+>>>>>>> .r1564
 2006-09-20  Michaël Cadilhac  <michael.cadilhac@lrde.epita.fr>
 
 	* bib/lrde.bib: Add AVoCS 2006 Cadilhac et al paper..

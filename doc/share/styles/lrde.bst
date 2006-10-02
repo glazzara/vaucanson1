@@ -1,6 +1,6 @@
 % BibTeX `apalike' bibliography style (24-Jan-88 version)
 % Adapted from the `alpha' style, version 0.99a; for BibTeX version 0.99a.
-% Copyright (C) 1988, 2005, all rights reserved.
+% Copyright (C) 1988, 2005, 2006, all rights reserved.
 % Copying of this file is allowed, provided that if you make any changes at all
 % you name it something other than `apalike.bst'.
 % This restriction helps ensure that all copies are identical.
@@ -75,6 +75,17 @@ FUNCTION {init.state.consts}
 
 STRINGS { s t }
 
+
+% TEXT LaTeX-MACRO format
+% -----------------------
+% Produce "\lrdebibKIND{TEXT}".
+FUNCTION {format}
+{ % Make "\LateX-MACRO"
+  "\lrdebib" swap$ * "{" *
+  % Concatenate "BODY}"
+  swap$ * "}" *
+}
+
 FUNCTION {output.nonnull}
 { 's :=
   output.state mid.sentence =
@@ -118,7 +129,7 @@ FUNCTION {output.year.check}
 { year empty$
     { "empty year in " cite$ * warning$ }
     { write$
-      " (" year * extra.label * ")" *
+      " (" year * extra.label * ")" * "year" format
       mid.sentence 'output.state :=
     }
   if$
@@ -197,7 +208,7 @@ FUNCTION {field.or.null}
 FUNCTION {emphasize}
 { duplicate$ empty$
     { pop$ "" }
-    { "{\em " swap$ * "}" * }
+    { "\emph{" swap$ * "}" * }
   if$
 }
 
@@ -235,13 +246,13 @@ FUNCTION {format.names}
 FUNCTION {format.authors}
 { author empty$
     { "" }
-    { author format.names }
+    { author format.names "author" format }
   if$
 }
 
 FUNCTION {format.key}			% this function is just for apalike
 { empty$
-    { key field.or.null }
+    { key field.or.null "key" format }
     { "" }
   if$
 }
@@ -258,10 +269,17 @@ FUNCTION {format.editors}
   if$
 }
 
+FUNCTION {urllrdelink}
+{ urllrde empty$
+    {}
+    { "title" format "{" * urllrde * "}" *}
+  if$
+}
+
 FUNCTION {format.title}
 { title empty$
     { "" }
-    { title "t" change.case$ }
+    { title "t" change.case$ urllrdelink }
   if$
 }
 
@@ -476,14 +494,30 @@ FUNCTION {format.incoll.inproc.crossref}
   " \cite{" * crossref * "}" *
 }
 
+FUNCTION {output.note}                                  % ADded.
+{ note empty$
+    'skip$
+    {
+      note "note" format write$
+    }
+  if$
+}
+
 FUNCTION {output.urllrde}                               % ADded.
 { urllrde empty$
     'skip$
     {
-      "\urllrde{" urllrde * "}" *
-      output
+      urllrde "url" format write$
     }
   if$
+}
+
+FUNCTION {output.etc}
+{
+  new.block
+  output.urllrde
+  new.block
+  output.note
 }
 
 FUNCTION {article}
@@ -502,9 +536,7 @@ FUNCTION {article}
       format.pages output
     }
   if$
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -537,9 +569,7 @@ FUNCTION {book}
     }
   if$
   format.edition output
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -553,9 +583,7 @@ FUNCTION {booklet}
   new.block
   howpublished output
   address output
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -590,9 +618,7 @@ FUNCTION {inbook}
     }
   if$
   format.edition output
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -618,9 +644,7 @@ FUNCTION {incollection}
       format.chapter.pages output
     }
   if$
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -646,9 +670,7 @@ FUNCTION {inproceedings}
       format.pages output
     }
   if$
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -665,9 +687,7 @@ FUNCTION {manual}
   organization output
   address output
   format.edition output
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -682,9 +702,7 @@ FUNCTION {mastersthesis}
   "Master's thesis" format.thesis.type output.nonnull
   school "school" output.check
   address output
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -697,9 +715,7 @@ FUNCTION {misc}
   format.title output
   new.block
   howpublished output
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -714,9 +730,7 @@ FUNCTION {phdthesis}
   "PhD thesis" format.thesis.type output.nonnull
   school "school" output.check
   address output
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -733,9 +747,7 @@ FUNCTION {proceedings}
   new.sentence					% we always output
   organization output				% a nonempty organization
   publisher output				% here
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
@@ -750,9 +762,7 @@ FUNCTION {techreport}
   format.tr.number output.nonnull
   institution "institution" output.check
   address output
-  new.block
-  note output
-  output.urllrde
+  output.etc
   fin.entry
 }
 
