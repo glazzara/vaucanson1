@@ -1,3 +1,13 @@
+2006-10-03  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	More timer overhaul.
+
+	* include/vaucanson/misc/timer.cc,
+	* include/vaucanson/misc/timer.hh: Inline operator<< to avoid
+	  multiple definitions at link.
+
+	* taf-kit/src/main.cc: Call print rather than dump.
+
 2006-10-02  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Add invert for transducers.

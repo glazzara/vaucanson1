@@ -183,9 +183,9 @@ int main (int argc, char* argv[])
     status = -1;
   }
   TIMER_STOP ();
-  
+
   if (args.report_time)
-    timer.dump (std::cerr);
-  
+    timer.print (std::cerr);
+
   return status;
 }

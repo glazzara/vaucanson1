@@ -291,7 +291,7 @@ namespace misc
   `--------------------------*/
 
   /// Dump \a t on \a o.
-  std::ostream&
+  inline std::ostream&
   operator<< (std::ostream& o, const Timer& t)
   {
     return t.print (o);

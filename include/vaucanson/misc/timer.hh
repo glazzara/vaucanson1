@@ -197,7 +197,7 @@ namespace misc
   };
 
   /// Dump \a t on \a o.
-  std::ostream& operator<< (std::ostream& o, const Timer& t);
+  inline std::ostream& operator<< (std::ostream& o, const Timer& t);
 
   /// A timer which starts at its construction, and stops at its destruction.
   class ScopedTimer
