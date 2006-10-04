@@ -55,8 +55,8 @@ vcsn-tdc info $t1
 ## End of test
 
 ## Inversion of t1
-./vcsn-tdc invert $t1 | \
-./vcsn-tdc are-isomorphic inverted_t1.xml -
+  vcsn-tdc invert $t1 | \
+  vcsn-tdc are-isomorphic $automata_tests_dir/inverted_t1.xml -
 ## End of test
 
   input=`vcsn-tdc --alphabet1=ab --alphabet2=xy eval $t1 abba`
