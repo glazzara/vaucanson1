@@ -1,5 +1,13 @@
 2006-10-04  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
+	Re-enable glushkov and series tests.
+
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh,
+	* src/tests/include/tests/algebra/series/misc/series_test.hh:
+	Re-enable.
+
+2006-10-04  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
 	Repair vcsn-tdc.test.
 
 	* taf-kit/tests/vcsn-tdc.test: Fix invert test.
