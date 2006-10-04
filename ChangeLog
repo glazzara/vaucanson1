@@ -1,3 +1,8 @@
+2006-10-04  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* doc/xml/xml_proposal.tex: Add the description of the label as a node
+	in the proposal. Fix some remaining errors. Clean the macro uses.
+
 2006-10-04  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Re-enable glushkov and series tests.
