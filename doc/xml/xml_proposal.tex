@@ -287,7 +287,7 @@ For instance, in the current state, the automaton of \autoref{B1} is
 defined with the default alphabet. It could be better to set an
 alphabet that only contains the letters \textit{a} and \textit{b}, so
 as to prevent the user from possible errors subsequent to the first
-definition. So, the resticted alphabet would be defined as shown in
+definition. So, the restricted alphabet would be defined as shown in
 \autoref{alpha1}.
 
 \begin{figure}[ht]
@@ -483,7 +483,7 @@ structure.  The following is the description of this tag. Bold
 elements are mandatory.  The special tags \xtag{geometry} and
 \xtag{drawing} can be at any place of the document. They are ignored
 here, but more information can be found in
-\autoref{title_vizualisation}.
+\autoref{title_visualization}.
 
 \medskip
 
@@ -528,11 +528,11 @@ transitions. It is composed of:
     The state that is initial.
   \item \xattr{label}
   \item \xattr{weight}\\
-    Optional label and weigth for the entering transition.
+    Optional label and weight for the entering transition.
   \end{itemize}
 \item \xtag{final}\\
   This tag describes the content of a final state of the automaton.
-  Its strucure is the same as the \xtag{initial} tag's one.
+  Its structure is the same as the \xtag{initial} tag's one.
 \end{itemize}
 
 Concerning transducers, the \xtag{content} tag follows the same
@@ -551,7 +551,7 @@ indistinctly in \xtag{transition}, \xtag{initial} or \xtag{final}.
 A label as an attribute of a transition or a state can be useful. It can keep an
 XML description of an automata human-readable and more simple to write. But this
 system comes with its limitations. Written as a string, a label automatically
-comes with a grammar to parse its content. Consequenlty, using attributes should
+comes with a grammar to parse its content. Consequently, using attributes should
 only be done with very simple labels. If not, two programs using different
 grammars would surely be unable to parse a complicated label the same way.
 To avoid such errors, a label node has been defined.
@@ -718,7 +718,7 @@ $\mathbb{B}$ shall be applied.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{The visualization tags}
-\label{title_vizualisation}
+\label{title_visualization}
 The visual representation of automata involves a very large amount of
 information. On the one hand, the \xtag{geometry} is context sensitive
 with data such as state coordinates or transition type. It gives some
