@@ -1,3 +1,11 @@
+2006-10-05  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	This patch may close ticket #8.
+
+	* doc/xml/xml_proposal.tex: Remove the reference to the vaucanson
+	grammar for label as attributes. Update the XSD section.
+	Add some accuracy about the use of an attribute label.
+
 2006-10-04  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* doc/xml/xml_proposal.tex: Add the description of the label as a node

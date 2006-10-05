@@ -361,7 +361,6 @@ The monoid attributes are:
 \item \xattr{identitySymbol}\\
   Used to set an empty word symbol.
 \end{itemize}
-\newpage
 
 The XSD description of the \xtag{generator} tag is:
 \begin{itemize}
@@ -546,7 +545,18 @@ classical \xattr{label} and \xattr{weight} attributes, that can still be
 used for transducer description. Of course, they can be used
 indistinctly in \xtag{transition}, \xtag{initial} or \xtag{final}.
 
-\subsection{The \xtag{label} tag}
+\subsection{Dealing with labels}
+\subsubsection{About the label attributes}
+
+A label as an attribute of a transition or a state can be useful. It can keep an
+XML description of an automata human-readable and more simple to write. But this
+system comes with its limitations. Written as a string, a label automatically
+comes with a grammar to parse its content. Consequenlty, using attributes should
+only be done with very simple labels. If not, two programs using different
+grammars would surely be unable to parse a complicated label the same way.
+To avoid such errors, a label node has been defined.
+
+\subsubsection{The \xtag{label} tag}
 
 This proposal now possesses a strict definition for labels. The \xtag{transition}
 and \xtag{state} tags now have an inner element named \xtag{label} that enables to
@@ -630,54 +640,7 @@ of a transition using the \xtag{in} and \xtag{out} tags.
 If the labels are described this way in an XML file, one can now be sure that
 the labels will be perfectly understood, whatever the program that deals with.
 
-\subsubsection{About the label attributes}
 
-There is a specificity about the \xattr{label} attribute of the
-\xtag{transition} tag. Most of the time, there isn't any problem since
-its value is a single character. But one can prefer to set a rational
-expression denoting the language that must be recognized to pass
-through the given transition. Its type is a non-restricted string, but
-there is a grammar to follow so as to be correctly understood by
-\Vauc. It is presented in \autoref{Grammar}, The empty word is
-represented by \samp{1}, and the absorbent element of the semiring by
-\samp{0}.  These are default values in \Vauc.
-
-\begin{figure}[ht]
-  \small
-  \begin{center}
-\begin{alltt}
-     exp ::= '(' exp ')'
-         |   exp '+' exp
-         |   exp '.' exp
-         |   exp exp
-         |   exp '*'
-         |   weight ' ' exp
-         |   exp ' ' weight
-         |   0
-         |   1
-         |   word
-\end{alltt}
-
-\caption{Grammar of the rational expression}
-\label{Grammar}
-  \end{center}
-\end{figure}
-
-Priority for operators is, from the most important to the least
-important:
-\begin{itemize}
-\item \samp{*} (star), to star a series.
-\item \samp{ } (space), to weight a series either on the right or on
-  the left.
-\item \samp{.} (dot), to concatenate two series.
-\item \samp{+} (plus), to do the union of two series.
-\end{itemize}
-
-The \xattr{in} and \xattr{out} attributes follow the same rules for
-transducers.
-
-These attributes are just introduced to help the user in a first time. We
-strongly recommend the use of the element for label definitions.
 
 \subsection{The \xtag{session} tag}
 
@@ -882,10 +845,10 @@ set of drawing properties.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{From DTD to XSD}
-The most important difference with our previous proposal
-\cite{vaucanson.04.techrep} is the change from a DTD (Document Type Definition)
-document to an XSD (XML Schema Description) Schema.
+\section{Using an XSD file}
+
+Some specifications of the XML format have led us to describe it using an XSD
+(XML Schema Description) Schema.
 
 It is desirable to keep the description of automata simple when
 describing widely used structures while giving the possibility to
@@ -910,9 +873,10 @@ For information about the XSD Schema are available on the
 \section{Conclusion}
 
 For the past years we experimented the different proposals in the
-\Vauc platform, and we presented our progress at CIAA'05
-\cite{claveirole.05.ciaa}. This version 0.3.2 comes as a result of this
-experiment, with simplifications where possible. Thus, the \Vauc platform deals
+\Vauc platform. It begun with a first one in 2004 \cite{vaucanson.04.techrep}
+and we presented our progress at CIAA'05 \cite{claveirole.05.ciaa}.
+This version 0.3.2 comes as a result of this experiment, with
+simplifications where possible. Thus, the \Vauc platform deals
 with numerous automata types, and it is important to be able to define
 precisely the type of the automaton in addition to its content.
 
