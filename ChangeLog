@@ -1,3 +1,11 @@
+2006-10-09  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Fix thompson test.
+	https://trac.lrde.org/vaucanson/trac.cgi/ticket/79
+
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh:
+	Do not test if the thompson automaton is normalized.
+
 2006-10-05  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	This patch may close ticket #8.

@@ -86,8 +86,6 @@
 template <class Auto>
 bool thompson_test(tests::Tester& tg)
 {
-  // FIXME
-  exit (77);
 
   AUTOMATON_TYPES(Auto);
   AUTOMATON_FREEMONOID_TYPES(Auto);
@@ -167,8 +165,7 @@ bool thompson_test(tests::Tester& tg)
 	      break;
 	    }
 	  }
-	if (normalized and
-	    ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t)))))
+	if ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t))))
 	  ++success;
 	++nb_test_done;
       }
