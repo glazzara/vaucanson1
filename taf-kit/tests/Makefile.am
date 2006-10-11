@@ -29,7 +29,9 @@ EXTRA_DIST = $(TESTS) 		\
 	t2.xml			\
 	u2.xml			\
 	t2_u-compose_u2.xml	\
-	inverted_t1.xml
+	inverted_t1.xml		\
+	b_transposed.xml	\
+	b_to_transpose.xml
 
 # Each test case depends on defs.
 check_SCRIPTS =					\

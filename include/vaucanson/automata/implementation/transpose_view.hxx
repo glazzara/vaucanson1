@@ -212,7 +212,6 @@ namespace vcsn {
 	      htransition_t e)
   {
     return op_label_of(s, v.object(), e);
-    // FIXME: The label should be transposed.
   }
 
   template <class S, class T>

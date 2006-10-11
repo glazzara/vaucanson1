@@ -1,3 +1,15 @@
+2006-10-11  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/transpose.hxx: Add the transpose for
+	labels.
+	* include/vaucanson/automata/implementation/transpose_view.hxx: Remove
+	the FIXME.
+	* taf-kit/tests/vcsn-b.test: Add a test in the taf-kit.
+	* taf-kit/tests/b_to_transpose.xml,
+	* taf-kit/tests/b_transposed.xml: New. Files for the test.
+	* taf-kit/tests/README,
+	* taf-kit/tests/Makefile.am: Update accordingly.
+
 2006-10-09  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Fix thompson test.

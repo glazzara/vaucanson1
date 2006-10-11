@@ -27,7 +27,12 @@ namespace vcsn
   void transpose(lhs_t& dst_, const rhs_t& from)
   {
     TIMER_SCOPED("transpose");
+    AUTOMATON_TYPES(lhs_t);
     auto_copy(dst_, transpose_view(from));
+    // transpose_view is still a quick transposition without label transpose.
+    // transpose now inverts all transitions of the dst_ automaton.
+    for_all_transitions(e, dst_)
+      dst_.series_of(*e).transpose();
   }
 
   template<typename auto_t>
