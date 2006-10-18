@@ -29,6 +29,7 @@
 # include <vaucanson/algorithms/eps_removal.hh>
 # include <vaucanson/algorithms/evaluation_fmp.hh>
 # include <vaucanson/algorithms/fmp_to_realtime.hh>
+# include <vaucanson/algorithms/projection.hh>
 # include <vaucanson/algorithms/internal/outsplitting.hh>
 # include <vaucanson/algorithms/normalized_composition.hh>
 # include <vaucanson/algorithms/projections_fmp.hh>

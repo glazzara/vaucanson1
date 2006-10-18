@@ -27,35 +27,40 @@
  */
 /** @} */
 
-#include <vaucanson/automata/concept/transducer.hh>
+# include <vaucanson/automata/concept/transducer.hh>
 
 namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
 
-  // Erase input.
-  template <class ST, class TT,
-	    class SA, class TA>
-  void
-  output_projection(const Element<ST, TT>&,
-		    Element<SA, TA>&);
-
-  template <class S, class T>
-  typename output_projection_helper<S, T>::ret
-  output_projection(const Element<S, T>&,
-		    std::map<hstate_t, hstate_t>& m);
-
-  template <class S, class T>
-  typename output_projection_helper<S, T>::ret
-  output_projection(const Element<S, T>&);
-
   template <class S, class T>
   typename input_projection_helper<S, T>::ret
   input_projection(const Element<S, T>&);
 
-  /** @} */
+  template <typename auto_t, typename trans_t>
+  void
+  set_states(const trans_t&, auto_t&,
+	     std::map<hstate_t, hstate_t>&);
 
+
+  /*---------.
+  | Identity |
+  `---------*/
+
+  // Build an automaton that realizes identity relation
+  // x -> (x,x)
+  template <typename S, typename S2, typename T, typename T2>
+  void
+  identity(const Element<S,T>& aut, Element<S2, T2>& res);
+
+  template <typename S, typename S2, typename T, typename T2>
+  Element<S2, T2>
+  identity(const Element<S,T>& aut);
+
+  /** @} */
 }
+
+# include <vaucanson/algorithms/image.hh>
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/projection.hxx>

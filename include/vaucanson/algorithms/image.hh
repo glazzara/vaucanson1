@@ -1,4 +1,4 @@
-// projections_fmp.hh: this file is part of the Vaucanson project.
+// image.hh: this file is part of the Vaucanson project.
 //
 // Vaucanson, a generic library for finite state machines.
 //
@@ -14,20 +14,23 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
-#ifndef VCSN_ALGORITHMS_PROJECTIONS_FMP_HH
-# define VCSN_ALGORITHMS_PROJECTIONS_FMP_HH
+
+#ifndef VCSN_ALGORITHMS_IMAGE_HH
+# define VCSN_ALGORITHMS_IMAGE_HH
 
 /** @addtogroup algorithms *//** @{ */
 /**
- * @file projections_fmp.hh
+ * @file image.hh
  *
- * @brief Domain and Image projection for transducers seen as automata
- * over a free monoid product.
+ * @brief Image projection for transducers.
  *
  * @author Sarah O'Connor <sarah.o-connor@lrde.epita.fr>
  */
 /** @} */
 
+# include <map>
+
+# include <vaucanson/automata/concept/transducer.hh>
 # include <vaucanson/automata/concept/automata.hh>
 # include <vaucanson/algebra/implementation/free_monoid/words.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>
@@ -36,39 +39,28 @@
 
 namespace vcsn
 {
-  /*-------.
-  | Domain |
-  `-------*/
 
   template <typename S, typename S2, typename T, typename T2>
   void
-  domain(const Element<S,T>& aut, Element<S2, T2>& res);
-
-  template <typename S, typename S2, typename T, typename T2>
-  Element<S2, T2>
-  domain(const Element<S,T>& aut);
+  image(const Element<S,T>& aut, Element<S2, T2>& res);
 
 
-  /*---------.
-  | Identity |
-  `---------*/
+  template <class S, class T>
+  typename output_projection_helper<S, T>::ret
+  image(const Element<S, T>&,
+	std::map<hstate_t, hstate_t>& m);
 
-  // Build automaton that realizes identity relation
-  // x -> (x,x)
-  template <typename S, typename S2, typename T, typename T2>
-  void
-  identity(const Element<S,T>& aut, Element<S2, T2>& res);
 
-  template <typename S, typename S2, typename T, typename T2>
-  Element<S2, T2>
-  identity(const Element<S,T>& aut);
+  /// @todo FIXME: Write a version for transducers.
+  template <class S, class T>
+  typename output_projection_helper<S, T>::ret
+  image(const Element<S, T>&);
 
 } // End of namespace vcsn.
 
 
 # ifndef VCSN_USE_INTERFACE_ONLY
-#  include <vaucanson/algorithms/projections_fmp.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/algorithms/image.hxx>
+# endif // !VCSN_USE_INTERFACE_ONLY
 
-
-#endif // ! VCSN_ALGORITHMS_PROJECTIONS_FMP_HH
+#endif // !VCSN_ALGORITHMS_IMAGE_HH

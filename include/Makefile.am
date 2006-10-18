@@ -267,6 +267,8 @@ vaucanson/algorithms/fmp_to_realtime.hh				\
 vaucanson/algorithms/fmp_to_realtime.hxx			\
 vaucanson/algorithms/forward_realtime.hh			\
 vaucanson/algorithms/forward_realtime.hxx			\
+vaucanson/algorithms/image.hh					\
+vaucanson/algorithms/image.hxx					\
 vaucanson/algorithms/initial_derivation.hh			\
 vaucanson/algorithms/initial_derivation.hxx			\
 vaucanson/algorithms/internal/build_pattern.hh			\

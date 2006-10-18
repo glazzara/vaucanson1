@@ -64,6 +64,11 @@ namespace vcsn {
 
   };
 
+
+  /*-------------------------.
+  | INPUT PROJECTION TRAITS |
+  `-------------------------*/
+
   template <class S, class T>
   struct input_projection_helper
   {
@@ -83,12 +88,26 @@ namespace vcsn {
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
 
+
+  /*-------------------------.
+  | OUTPUT PROJECTION TRAITS |
+  `-------------------------*/
+
   template <class S, class T>
   struct output_projection_helper
-  {
-    typedef typename S::series_set_t::semiring_t typeof_auto_series_set_t;
+  { };
 
-    typedef typename S::series_set_t::semiring_t::monoid_t auto_monoid_t;
+  // RW transducers
+  template <class S, class T>
+  struct output_projection_helper<Transducer<S>, T>
+  {
+    typedef Transducer<S> structure_t;
+
+    typedef typename structure_t::series_set_t::semiring_t
+    typeof_auto_series_set_t;
+
+    typedef typename structure_t::series_set_t::semiring_t::monoid_t
+    auto_monoid_t;
 
     typedef typename typeof_auto_series_set_t::semiring_t auto_semiring_t;
     typedef typename algebra::mute_series_traits<typeof_auto_series_set_t,
@@ -99,6 +118,33 @@ namespace vcsn {
     typedef typename output_projection_traits<T>::ret auto_impl_t;
     typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
   };
+
+  // Transducers
+  template <class S, class T>
+  struct output_projection_helper<Automata<S>, T>
+  {
+    typedef Automata<S> structure_t;
+
+    typedef typename structure_t::series_set_t typeof_auto_series_set_t;
+
+    typedef typename structure_t::series_set_t::semiring_t auto_semiring_t;
+
+    typedef typename structure_t::series_set_t::monoid_t::second_monoid_t
+    auto_monoid_t;
+
+    typedef typename algebra::mute_series_traits<typeof_auto_series_set_t,
+						 auto_semiring_t,
+						 auto_monoid_t>::ret
+    auto_series_set_t;
+
+    typedef typename output_projection_traits<T>::ret auto_impl_t;
+    typedef Element<Automata<auto_series_set_t>, auto_impl_t> ret;
+  };
+
+
+  /*----------------.
+  | IDENTITY TRAITS |
+  `----------------*/
 
   template <class S, class T>
   struct identity_transducer_helper
@@ -115,6 +161,7 @@ namespace vcsn {
   template <class S, class T>
   typename identity_transducer_helper<S, T>::ret
   partial_identity(const Element<S, T>&);
+
 
   template <class Series>
   bool

@@ -1,3 +1,36 @@
+2006-10-18  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Clean projections and fmp_projections, Part 1.
+	Image is now available for both transducers and RW
+	transducers, and is called via the overloaded algorithm
+	vcsn::image ().
+
+	vcsn::identity () is now located in projections.h{h,xx}.
+
+
+	* include/vaucanson/algorithms/image.hh,
+	* include/vaucanson/algorithms/image.hxx: New. Implementation
+	  of image for both types of transducers.
+
+	* include/vaucanson/algorithms/projections_fmp.hh
+	* include/vaucanson/algorithms/projections_fmp.hxx: Remove
+	  implementation of image from this file.
+
+	* include/vaucanson/algorithms/projection.hxx
+	* include/vaucanson/algorithms/projection.hh: Remove
+	  implementation of output_projection. Move vcsn::identity ()
+	  here.
+
+
+	* include/vaucanson/automata/concept/transducer.hh: Adapt
+	  output projection trait.
+
+	* include/Makefile.am,
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	* include/vaucanson/algorithms/evaluation_fmp.hxx,
+	* include/vaucanson/algorithms/evaluation.hxx: Update
+	  accordingly to use vcsn::image ().
+
 2006-10-11  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/transpose.hxx: Add the transpose for

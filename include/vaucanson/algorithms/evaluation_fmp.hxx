@@ -18,7 +18,7 @@
 # define VCSN_ALGORITHMS_EVALUATION_FMP_HXX
 
 # include <vaucanson/algorithms/evaluation_fmp.hh>
-# include <vaucanson/algorithms/projections_fmp.hh>
+# include <vaucanson/algorithms/image.hh>
 # include <vaucanson/algorithms/normalized_composition.hh>
 # include <vaucanson/algorithms/sub_normalize.hh>
 # include <vaucanson/algebra/concept/freemonoid_product.hh>

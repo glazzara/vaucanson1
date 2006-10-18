@@ -43,7 +43,7 @@ namespace vcsn {
 		const Trans_t& t,
 		Ret_t& ret)
   {
-    output_projection(trim(product(t, extension(a, t))), ret);
+    image(trim(product(t, extension(a, t))), ret);
   }
 
   template<typename SA, typename TA, typename ST,
@@ -237,7 +237,7 @@ namespace vcsn {
     pro = product(tmp_trans, t, sp_m);
     Auto_ret_t auto_p(auto_structure);
     std::map<hstate_t, hstate_t> proj_m;
-    auto_p = output_projection(pro, proj_m);
+    auto_p = image(pro, proj_m);
 
     /* unset final all the final states of auto_p */
     auto_p.clear_final();
@@ -318,7 +318,7 @@ namespace vcsn {
     Trans_t pro(t.structure());
     pro = trim(product(tmp_trans, tt));
     Auto_ret_t auto_p(auto_structure);
-    auto_p = output_projection(pro);
+    auto_p = image(pro);
 
     exp = aut_to_exp(auto_p);
   }
