@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,15 +33,10 @@ namespace vcsn {
 
   /** @addtogroup algorithms *//** @{ */
 
-  template <class S, class T>
-  typename input_projection_helper<S, T>::ret
-  input_projection(const Element<S, T>&);
-
   template <typename auto_t, typename trans_t>
   void
   set_states(const trans_t&, auto_t&,
 	     std::map<hstate_t, hstate_t>&);
-
 
   /*---------.
   | Identity |
@@ -61,6 +56,7 @@ namespace vcsn {
 }
 
 # include <vaucanson/algorithms/image.hh>
+# include <vaucanson/algorithms/domain.hh>
 
 # ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algorithms/projection.hxx>

@@ -329,8 +329,8 @@ vaucanson/algorithms/product.hh					\
 vaucanson/algorithms/product.hxx				\
 vaucanson/algorithms/projection.hh				\
 vaucanson/algorithms/projection.hxx				\
-vaucanson/algorithms/projections_fmp.hh				\
-vaucanson/algorithms/projections_fmp.hxx			\
+vaucanson/algorithms/domain.hh					\
+vaucanson/algorithms/domain.hxx					\
 vaucanson/algorithms/realtime.hh				\
 vaucanson/algorithms/realtime.hxx				\
 vaucanson/algorithms/realtime_composition.hh			\

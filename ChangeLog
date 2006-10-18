@@ -1,3 +1,17 @@
+2006-10-18  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* include/vaucanson/algorithms/domain.hh,
+	* include/vaucanson/algorithms/domain.hxx: New. Add domain algorithms
+	for FMP transducers and RW transducers.
+	* include/vaucanson/algorithms/projections_fmp.hh,
+	* include/vaucanson/algorithms/projections_fmp.hxx: Delete empty files.
+	* include/vaucanson/algorithms/projection.hh,
+	* include/vaucanson/algorithms/projection.hxx: Remove input_projection
+	algorithm.
+	* include/Makefile.am,
+	* include/vaucanson/contexts/fmp_transducer_functions.thh,
+	* doc/NEWS.txt: Update accordingly.
+
 2006-10-18  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Clean projections and fmp_projections, Part 1.

@@ -157,54 +157,6 @@ namespace vcsn {
     return res;
   }
 
-
-  template <typename S, typename T>
-  typename input_projection_helper<S, T>::ret
-  do_input_projection(const TransducerBase<S>&,
-		      const Element<S, T>& t)
-  {
-    TIMER_SCOPED("input_projection");
-    typedef Element<S, T> Trans_t;
-    AUTOMATON_TYPES(Trans_t);
-
-    typedef typename input_projection_helper<S, T>::ret	Auto_t;
-    typedef typename Auto_t::set_t			Auto_set_t;
-    typedef typename Auto_set_t::series_set_t		Auto_series_set_t;
-
-    Auto_set_t	 auto_set(Auto_series_set_t(t.structure().series().semiring()));
-    Auto_t	 ret(auto_set);
-
-    monoid_elt_t empty = t.series().monoid().empty_;
-    std::map<hstate_t, hstate_t> m;
-
-    for_all_states(p, t)
-    {
-      m[*p] = ret.add_state();
-    }
-
-    for_all_initial_states(p, t)
-      ret.set_initial(m[*p]);
-
-    for_all_final_states(p, t)
-      ret.set_final(m[*p]);
-
-    for_all_transitions(e, t)
-    {
-      ret.add_series_transition(m[t.src_of(*e)],
-				m[t.dst_of(*e)],
-				t.input_of(*e));
-    }
-
-    return ret;
-  }
-
-  template <typename S, typename T>
-  typename input_projection_helper<S, T>::ret
-  input_projection(const Element<S, T>& t)
-  {
-    return do_input_projection(t.structure(), t);
-  }
-
 }
 
 #endif // ! VCSN_ALGORITHMS_PROJECTION_HXX

@@ -32,7 +32,6 @@
 # include <vaucanson/algorithms/projection.hh>
 # include <vaucanson/algorithms/internal/outsplitting.hh>
 # include <vaucanson/algorithms/normalized_composition.hh>
-# include <vaucanson/algorithms/projections_fmp.hh>
 # include <vaucanson/algorithms/sub_normalize.hh>
 # include <vaucanson/algorithms/transpose.hh>
 # include <vaucanson/algorithms/invert.hh>

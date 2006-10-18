@@ -18,6 +18,14 @@ Vaucanson 1.1
   + The Doxygen documentation is now installed expanded, rather than
     compressed.
 
+- Algorithms
+
+  + transpose(a);
+    Transition labels are now transposed too.
+
+  + image(a, b) and domain(a, b);
+    they replace output_projection and input_projection. These algorithms work
+    for both FMP transducers and RW transducers.
 
 Vaucanson 1.0, July 28th, 2006
 ==============================
