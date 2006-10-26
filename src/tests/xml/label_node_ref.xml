@@ -3,8 +3,10 @@
     <monoid generators="letters" type="free">
       <generator value="a"/>
       <generator value="b"/>
+      <generator value="c"/>
+      <generator value="d"/>
     </monoid>
-    <semiring operations="numerical" set="B"/>
+    <semiring operations="numerical" set="Z"/>
   </labelType>
   <content>
     <states>
@@ -13,30 +15,59 @@
       <state name="s2"/>
     </states>
     <transitions>
-      <transition src="s0" dst="s1">
-        <label>
-          <sum>
-            <word value="a"/>
-            <word value="b"/>
-          </sum>
-        </label>
-      </transition>
-      <transition src="s1" dst="s2">
+      <transition src="s0" dst="s0">
         <label>
           <sum>
             <sum>
               <sum>
-                <word value="aa"/>
-                <word value="ab"/>
+                <word value="a" weight="6"/>
+                <word value="b" weight="6"/>
               </sum>
-              <word value="ba"/>
+              <word value="c" weight="15"/>
             </sum>
-            <word value="bb"/>
+            <word value="d" weight="15"/>
           </sum>
         </label>
       </transition>
-      <initial state="s0"/>
-      <final state="s1"/>
+      <transition src="s0" dst="s1">
+        <label>
+          <sum>
+            <word value="a" weight="6"/>
+            <word value="b" weight="5"/>
+          </sum>
+        </label>
+      </transition>
+      <transition src="s0" dst="s2">
+        <label>
+          <sum>
+            <word value="aa"/>
+            <word value="b" weight="3"/>
+          </sum>
+        </label>
+      </transition>
+      <transition src="s1" dst="s0">
+        <label>
+          <word value="ab" weight="5"/>
+        </label>
+      </transition>
+      <transition src="s1" dst="s1">
+        <label>
+          <sum>
+            <word value="a" weight="5"/>
+            <word value="b" weight="5"/>
+          </sum>
+        </label>
+      </transition>
+      <initial state="s0">
+        <label>
+          <identity/>
+        </label>
+      </initial>
+      <final state="s1">
+        <label>
+          <identity/>
+        </label>
+      </final>
     </transitions>
   </content>
 </automaton>

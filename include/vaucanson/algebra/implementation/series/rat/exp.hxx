@@ -130,7 +130,7 @@ namespace vcsn {
 
     template<typename LetterT, typename WeightT>
     xercesc::DOMElement* exp<LetterT, WeightT>::xml_tree(
-      xercesc::DOMDocument* doc, char* node_name) const
+      xercesc::DOMDocument* doc, const char* node_name) const
     {
       XmlExpVisitor<monoid_elt_value_t, semiring_elt_value_t> v(doc, node_name);
       accept(v);

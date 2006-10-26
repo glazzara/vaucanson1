@@ -93,7 +93,7 @@ namespace vcsn {
       size_t length() const;
 
 	xercesc::DOMElement* xml_tree(xercesc::DOMDocument* doc,
-				      char* node_name) const;
+				      const char* node_name) const;
 
       /// Get the root node of the expression.
       //@{

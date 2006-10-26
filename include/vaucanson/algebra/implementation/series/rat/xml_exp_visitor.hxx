@@ -30,7 +30,7 @@ namespace vcsn {
     using xml::transcode;
 
     template<typename M_, typename W_>
-    XmlExpVisitor<M_,W_>::XmlExpVisitor(xercesc::DOMDocument* doc, char* node_name) :
+    XmlExpVisitor<M_,W_>::XmlExpVisitor(xercesc::DOMDocument* doc, const char* node_name) :
       doc_(doc),
       label_(doc_->createElement(transcode(node_name))),
       current_(label_)
@@ -94,7 +94,7 @@ namespace vcsn {
     {
       std::stringstream ss;
       ss << w;
-      current_->setAttribute(transcode("weight"), transcode(ss.str()));
+      weight_ = ss.str();
       weight_or_star(node);
     }
 
@@ -104,7 +104,6 @@ namespace vcsn {
     {
       std::stringstream ss;
       ss << w;
-      current_->setAttribute(transcode("weight"), transcode(ss.str()));
       weight_or_star(node);
     }
 
@@ -116,21 +115,31 @@ namespace vcsn {
       ss << m;
       xercesc::DOMElement* word = doc_->createElement(transcode("word"));
       word->setAttribute(transcode("value"), transcode(ss.str()));
+      if (weight_.size())
+      {
+	word->setAttribute(transcode("weight"), transcode(weight_));
+	weight_ = "";
+      }
       current_->appendChild(word);
     }
 
     template<typename M_, typename W_>
     void XmlExpVisitor<M_, W_>::zero()
     {
-      xercesc::DOMElement* zero = doc_->createElement(transcode("zeroVal"));
+      xercesc::DOMElement* zero = doc_->createElement(transcode("zero"));
       current_->appendChild(zero);
     }
 
     template<typename M_, typename W_>
     void XmlExpVisitor<M_, W_>::one()
     {
-      xercesc::DOMElement* identity = doc_->createElement(transcode("identityVal"));
+      xercesc::DOMElement* identity = doc_->createElement(transcode("identity"));
       current_->appendChild(identity);
+      if (weight_.size())
+      {
+	identity->setAttribute(transcode("weight"), transcode(weight_));
+	weight_ = "";
+      }
     }
 
     template<typename M_, typename W_>

@@ -43,7 +43,7 @@ namespace vcsn {
     class XmlExpVisitor : public ConstNodeVisitor<M_, W_>
     {
     public:
-      XmlExpVisitor(xercesc::DOMDocument* doc, char* node_name);
+      XmlExpVisitor(xercesc::DOMDocument* doc, const char* node_name);
 
       virtual void
       product(const Node<M_, W_>* left_, const Node<M_, W_>* right_);
@@ -79,6 +79,7 @@ namespace vcsn {
       xercesc::DOMDocument*	doc_;
       xercesc::DOMElement*	label_;
       xercesc::DOMElement*	current_;
+      std::string		weight_;
     };
 
   } // rat

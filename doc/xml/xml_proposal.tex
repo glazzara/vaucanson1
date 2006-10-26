@@ -809,7 +809,7 @@ the possibility to make them explicit.
 
 Since it's not possible to exhaustively name all needed attributes
 users may need, the proposal offers a very limited set of properties. For
-example, \xattr{stateFillColor} or \xattr{transitionLabelColor} usage are
+example, \xattr{stateFillColor} or \xattr{stateLineStyle} usage are
 shown in \autoref{drawing1}. These attributes use a string representation to
 describe their values. Providing more attributes will be one of our future
 works.
@@ -827,7 +827,7 @@ set of drawing properties.
 \begin{alltt}
 <transducer>
   <geometry x="-5" y="0"/>
-  <drawing stateFillColor="black" transitionLabelColor="dashed"/>
+  <drawing stateFillColor="black" stateLineStyle="dashed"/>
   <content>
      <states>
         <state name="s0">

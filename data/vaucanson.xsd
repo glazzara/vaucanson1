@@ -13,27 +13,33 @@ vaucanson.xsd version 0.3.2
 -->
 
 <!--
- Attribute group used to factor some code.
+ Attribute group used for node expressions.
 -->
- <xs:attributeGroup name="expressionAttributes">
-   <xs:attribute name="parenthesis" type="xs:boolean"/>
+ <xs:attributeGroup name="nodeAttributes">
+   <xs:attribute name="leftWeight" type="xs:string"/>
+   <xs:attribute name="rightWeight" type="xs:string"/>
+ </xs:attributeGroup>
+
+<!--
+ Attribute group used for the terminal tags of the expression grammar.
+-->
+ <xs:attributeGroup name="atomAttributes">
    <xs:attribute name="weight" type="xs:string"/>
  </xs:attributeGroup>
 
 <!--
  Terminal tags of the expression grammar.
 -->
-<xs:complexType name="word">
+<xs:complexType name="atom">
    <xs:attribute name="value" type="xs:string" use="required"/>
-   <xs:attributeGroup ref="expressionAttributes"/>
+   <xs:attributeGroup ref="atomAttributes"/>
  </xs:complexType>
 
 <xs:complexType name="zeroVal">
-   <xs:attribute name="weight" type="xs:string"/>
 </xs:complexType>
 
 <xs:complexType name="identityVal">
-   <xs:attribute name="weight" type="xs:string"/>
+   <xs:attributeGroup ref="atomAttributes"/>
 </xs:complexType>
 
 <!--
@@ -44,7 +50,7 @@ vaucanson.xsd version 0.3.2
 -->
 <xs:complexType name="star">
   <xs:group ref="expressionLabelGroup"/>
-  <xs:attributeGroup ref="expressionAttributes"/>
+  <xs:attributeGroup ref="nodeAttributes"/>
 </xs:complexType>
 
 <!--
@@ -56,7 +62,7 @@ vaucanson.xsd version 0.3.2
    <xs:sequence minOccurs="2" maxOccurs="2">
      <xs:group ref="expressionLabelGroup"/>
    </xs:sequence>
-   <xs:attributeGroup ref="expressionAttributes"/>
+   <xs:attributeGroup ref="nodeAttributes"/>
 </xs:complexType>
 
 <!--
@@ -68,7 +74,7 @@ vaucanson.xsd version 0.3.2
    <xs:sequence minOccurs="2" maxOccurs="2">
      <xs:group ref="expressionLabelGroup"/>
    </xs:sequence>
-   <xs:attributeGroup ref="expressionAttributes"/>
+   <xs:attributeGroup ref="nodeAttributes"/>
 </xs:complexType>
 
 <!--
@@ -78,7 +84,7 @@ label by using <product>, <sum>, <zero>, <identity> and <word> tags.
 <xs:group name="expressionLabelGroup">
   <xs:choice>
     <xs:element name="star" type="star"/>
-    <xs:element name="word" type="word"/>
+    <xs:element name="word" type="atom"/>
     <xs:element name="sum" type="sum"/>
     <xs:element name="product" type="product"/>
     <xs:element name="zero" type="zeroVal"/>
@@ -88,7 +94,7 @@ label by using <product>, <sum>, <zero>, <identity> and <word> tags.
 
 <xs:complexType name="expressionLabel">
   <xs:group ref="expressionLabelGroup"/>
-  <xs:attributeGroup ref="expressionAttributes"/>
+
 </xs:complexType>
 
 
@@ -131,14 +137,23 @@ transitionType for states or coordinates for transitions.
 
 <!--
 <drawing> tag properties. Used to define useful properties that can be
-used for XML to latex translation.
+used for XML to latex translation. The entire list of possible attributes is
+very long, the following ones are given as examples.
 
 An optional "any" attribute is used, to let the user use personal attributes.
 -->
 <xs:complexType name="drawing" mixed="true">
-  <xs:attribute name="stateColor" type="xs:string"/>
   <xs:attribute name="stateFillColor" type="xs:string"/>
-  <xs:attribute name="transitionLabelColor" type="xs:string"/>
+  <xs:attribute name="stateLabelColor" type="xs:string"/>
+  <xs:attribute name="stateLineWidth" type="xs:string"/>
+  <xs:attribute name="stateLineStyle">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="solid|dashed|dotted|none"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="arcAngle" type="xs:decimal"/>
   <xs:anyAttribute/>
 </xs:complexType>
 

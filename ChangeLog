@@ -1,3 +1,22 @@
+2006-10-26  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* data/vaucanson.xsd: Split the `expressionAttributes' into two
+	attribute groups: `atomAttributes' and `nodeAttributes'.
+	Add left and right weights for nodes of an expression.
+	Refine the drawing tag.
+	* doc/xml/xml_proposal.tex: Update accordingly.
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hh,
+	* include/vaucanson/algebra/implementation/series/rat/xml_exp_visitor.hxx:
+	Add the support of left and right weights for output. Fix a bug	about
+	weights.
+	* include/vaucanson/algebra/implementation/series/rat/exp.hh,
+	* include/vaucanson/algebra/implementation/series/rat/exp.hxx: Minor fix.
+	* include/vaucanson/xml/tools.hxx: Add the support of left and right
+	weights for input.
+	* src/tests/xml/xml_label_node_tester.cc: Enhance the tests on weights.
+	* src/tests/xml/label_node_ref.xml,
+	* src/tests/xml/label_node_ref.dot: Update accordingly.
+
 2006-10-18  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* include/vaucanson/algorithms/domain.hh,

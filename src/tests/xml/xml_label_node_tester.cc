@@ -16,7 +16,7 @@
 //
 #include <iostream>
 #include <string>
-#include <vaucanson/boolean_automaton.hh>
+#include <vaucanson/z_automaton.hh>
 #include <vaucanson/tools/dot_dump.hh>
 #include <vaucanson/xml/XML.hh>
 
@@ -28,11 +28,13 @@ int main(int argc, char** argv)
 
   if (argc > 1 && ! strcmp(argv[1], "output"))
   {
-    using namespace boolean_automaton;
+    using namespace z_automaton;
 
     alphabet_t alpha;
     alpha.insert('a');
     alpha.insert('b');
+    alpha.insert('c');
+    alpha.insert('d');
 
     automaton_t a = make_automaton(alpha);
 
@@ -43,14 +45,17 @@ int main(int argc, char** argv)
     a.set_initial(s0);
     a.set_final(s1);
 
-    a.add_series_transition(s0, s1, make_rat_exp(alpha, "a+b"));
-    a.add_series_transition(s1, s2, make_rat_exp(alpha, "(a+b).(a+b)"));
+    a.add_series_transition(s0, s0, make_rat_exp(alpha, "3 ((2 (a+b))+(5 (c+d)))"));
+    a.add_series_transition(s0, s1, make_rat_exp(alpha, "6 a+5 b"));
+    a.add_series_transition(s0, s2, make_rat_exp(alpha, "a.a+3 b"));
+    a.add_series_transition(s1, s0, make_rat_exp(alpha, "5 (a.b)"));
+    a.add_series_transition(s1, s1, make_rat_exp(alpha, "5 (a+b)"));
 
     std::cout << automaton_saver(a, io::string_out(), xml::XML("", true));
   }
   else
   {
-    using namespace boolean_automaton;
+    using namespace z_automaton;
 
     alphabet_t alpha;
     automaton_t a = make_automaton(alpha);

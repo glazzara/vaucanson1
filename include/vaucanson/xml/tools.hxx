@@ -429,9 +429,45 @@ namespace vcsn
 	return s;
       }
 
+      // Used by get_rec_xml_series to get the eventual weigths of an expression
+      // element.
       template <class T>
-      Element<typename T::series_set_t, rat::exp<typename T::monoid_elt_value_t,
-						 typename T::semiring_elt_value_t> >
+      void get_weight_attribute(typename T::semiring_elt_value_t& weight,
+				xercesc::DOMElement* element,
+				const char* attribute_name)
+      {
+	if (has_attribute(element, attribute_name))
+	{
+	  std::stringstream ss;
+	  ss << get_attribute(element, attribute_name);
+	  ss >> weight;
+	}
+      }
+
+      // Used by get_rec_xml_series to set the weights to the krat_exp that will
+      // be returned.
+      template <class T>
+      Element<typename T::series_set_t,
+	      rat::exp<typename T::monoid_elt_value_t,
+		       typename T::semiring_elt_value_t> >
+      weighted_krat_exp(Element<typename T::series_set_t,
+			rat::exp<typename T::monoid_elt_value_t,
+			typename T::semiring_elt_value_t> >& krat_exp,
+ 			typename T::semiring_elt_value_t& weight,
+ 			typename T::semiring_elt_value_t& rweight)
+      {
+	if (weight != typename T::semiring_elt_t ())
+	  krat_exp = typename T::semiring_elt_t (weight) * krat_exp;
+	if (rweight != typename T::semiring_elt_t ())
+	  krat_exp = krat_exp * (typename T::semiring_elt_t) rweight;
+	return krat_exp;
+      }
+
+
+      template <class T>
+      Element<typename T::series_set_t,
+	      rat::exp<typename T::monoid_elt_value_t,
+		       typename T::semiring_elt_value_t> >
       get_rec_xml_series(xercesc::DOMNode* n, T& aut)
       {
 	typedef	 rat::exp<typename T::monoid_elt_value_t,
@@ -439,6 +475,8 @@ namespace vcsn
 	typedef Element<typename T::series_set_t, krat_exp_impl_t> krat_exp_t;
 	krat_exp_t krat_exp (aut.structure().series());
 	typename T::semiring_elt_value_t weight =
+	  typename T::semiring_elt_value_t();
+	typename T::semiring_elt_value_t rweight =
 	  typename T::semiring_elt_value_t();
 
 	xercesc::DOMElement* element_n;
@@ -459,13 +497,11 @@ namespace vcsn
 		(xml2str(n->getNodeName()) == "out"))
 	      return get_rec_xml_series(n->getFirstChild(), aut);
 
-	    // Add weight
-	    if (has_attribute(element_n, "weight"))
-	    {
-	      std::stringstream ss;
-	      ss << get_attribute(element_n, "weight");
-	      ss >> weight;
-	    }
+	    // Add weights. It is a weight (leafs) or left and right weights
+	    // (nodes).
+ 	    get_weight_attribute<T>(weight, element_n, "weight");
+ 	    get_weight_attribute<T>(weight, element_n, "leftWeight");
+ 	    get_weight_attribute<T>(rweight, element_n, "rightWeight");
 
 	    // Explore the terms of a sum
 	    if (xml2str(n->getNodeName()) == "sum")
@@ -477,8 +513,7 @@ namespace vcsn
 		     ntmp && ntmp->getNextSibling();
 		     ntmp = ntmp->getNextSibling()->getNextSibling())
 		  krat_exp += get_rec_xml_series(ntmp, aut);
-	      return (weight != typename T::semiring_elt_t ())?
-		typename T::semiring_elt_t (weight) * krat_exp : krat_exp;
+	      return weighted_krat_exp<T>(krat_exp, weight, rweight);
 	    }
 
 	    // Explore the terms of a product
@@ -491,8 +526,7 @@ namespace vcsn
 		     ntmp && ntmp->getNextSibling();
 		     ntmp = ntmp->getNextSibling()->getNextSibling())
 		  krat_exp *= get_rec_xml_series(ntmp, aut);
-	      return (weight != typename T::semiring_elt_t ())?
-		typename T::semiring_elt_t (weight) * krat_exp : krat_exp;
+	      return weighted_krat_exp<T>(krat_exp, weight, rweight);
 	    }
 
 	    // Word, zero or identity
@@ -513,8 +547,7 @@ namespace vcsn
 	    if (xml2str(n->getNodeName()) == "star")
 	      krat_exp = (get_rec_xml_series(n->getFirstChild(), aut)).star();
 
-	    return (weight != typename T::semiring_elt_t ())?
-	      typename T::semiring_elt_t (weight) * krat_exp : krat_exp;
+	    return weighted_krat_exp<T>(krat_exp, weight, rweight);
 	  }
 	}
 	return krat_exp;
