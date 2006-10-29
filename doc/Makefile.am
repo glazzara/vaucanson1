@@ -23,7 +23,7 @@ SUBDIRS = manual xml
 
 all: $(srcdir)/ref
 DOCDIR = ref
-DOXYFILE - doc.doxy
+DOXYFILE = doc.doxy
 $(srcdir)/ref: $(DOXYFILE).in
 	rm -rf $(DOCDIR).tmp $(srcdir)/$(DOCDIR)
 	$(MAKE) $(AM_MAKEFLAGS) $(DOXYFILE)
@@ -39,8 +39,8 @@ install-data-local:
 	cp -r $(srcdir)/$(DOCDIR) $(DESTDIR)$(htmldir)
 
 uninstall-local:
-        chmod -R 700 $(DESTDIR)$(htmldir)/$(DOCDIR)
-        rm -rf $(DESTDIR)$(htmldir)/$(DOCDIR)
+	chmod -R 700 $(DESTDIR)$(htmldir)/$(DOCDIR)
+	rm -rf $(DESTDIR)$(htmldir)/$(DOCDIR)
 
 maintainer-clean-local:
 	rm -rf $(DOCDIR) $(srcdir)/$(DOCDIR)
