@@ -185,7 +185,7 @@ int main (int argc, char* argv[])
   TIMER_STOP ();
 
   if (args.report_time)
-    timer.print (std::cerr);
+    std::cerr << timer;
 
   return status;
 }

@@ -14,6 +14,9 @@
 ## This file is used by the Makefile.am of generated test suites.
 include $(top_srcdir)/src/tests/check/check.mk
 
+# Automake does not automatically clean EXTRA_PROGRAMS.
+CLEANFILES = $(EXTRA_PROGRAMS)
+
 TESTS += failcomp.sh
 EXTRA_DIST = failcomp.sh
 

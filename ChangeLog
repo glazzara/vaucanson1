@@ -1,3 +1,7 @@
+2006-10-29  Akim Demaille  <akim@lrde.epita.fr>
+
+	* taf-kit/src/main.cc (main): Use << to output the time report.
+
 2006-10-26  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* data/vaucanson.xsd: Split the `expressionAttributes' into two
