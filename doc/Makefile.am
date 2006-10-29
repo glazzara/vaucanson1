@@ -14,7 +14,7 @@
 include $(top_srcdir)/vaucanson.mk
 include $(srcdir)/doc.mk
 
-SUBDIRS = makefiles manual xml
+SUBDIRS = manual xml
 
 
 ## ----------------------- ##
@@ -22,35 +22,54 @@ SUBDIRS = makefiles manual xml
 ## ----------------------- ##
 
 all: $(srcdir)/ref
-$(srcdir)/ref: doc.doxy.in
-	rm -rf ref.tmp $(srcdir)/ref
-	$(MAKE) $(AM_MAKEFLAGS) doc.doxy
-	$(DOXYGEN) doc.doxy
-	mv ref.tmp $(srcdir)/ref
+DOCDIR = ref
+DOXYFILE - doc.doxy
+$(srcdir)/ref: $(DOXYFILE).in
+	rm -rf $(DOCDIR).tmp $(srcdir)/$(DOCDIR)
+	$(MAKE) $(AM_MAKEFLAGS) $(DOXYFILE)
+	$(DOXYGEN) $(DOXYFILE)
+	mv $(DOCDIR).tmp $(srcdir)/$(DOCDIR)
 
+# We install by hand, otherwise Automake produces "install .../srcdoc
+# .../srcdoc", which installs our dir into the previous one, instead
+# of replacing it.
 install-data-local:
-	rm -rf $(DESTDIR)$(htmldir)/ref
+	rm -rf $(DESTDIR)$(htmldir)/$(DOCDIR)
 	$(mkdir_p) $(DESTDIR)$(htmldir)
-	cp -r $(srcdir)/ref $(DESTDIR)$(htmldir)
+	cp -r $(srcdir)/$(DOCDIR) $(DESTDIR)$(htmldir)
+
+uninstall-local:
+        chmod -R 700 $(DESTDIR)$(htmldir)/$(DOCDIR)
+        rm -rf $(DESTDIR)$(htmldir)/$(DOCDIR)
+
+maintainer-clean-local:
+	rm -rf $(DOCDIR) $(srcdir)/$(DOCDIR)
+
+## ----------------------- ##
+## Doxygen documentation.  ##
+## ----------------------- ##
 
 dist_pdf_DATA = README.pdf FAQ.pdf NEWS.pdf
+MAINTAINERCLEANFILES = $(dist_pdf_DATA)
 
 EXTRA_DIST = README.tex FAQ.tex NEWS.tex \
 	     share
 
-MAINTAINERCLEANFILES = $(dist_pdf_DATA)
-maintainer-clean-local:
-	rm -rf ref $(srcdir)/ref
+## ------------------ ##
+## Unit compilation.  ##
+## ------------------ ##
+
+dist_doc_DATA = unit-compile.mk
 
 ## ---------------------------- ##
 ## Installing on LRDE servers.  ##
 ## ---------------------------- ##
-vcsndldir_data = ref $(dist_pdf_DATA)
+vcsndldir_data = $(DOCDIR) $(dist_pdf_DATA)
 
-install-epita: ref $(dist_pdf_DATA)
+install-epita: $(DOCDIR) $(dist_pdf_DATA)
 	$(mkdir_p) $(vcsndldir)
 	$(INSTALL_DATA) $(dist_pdf_DATA) $(vcsndldir)
-	cp -r ref $(vcsndldir)
+	cp -r $(DOCDIR) $(vcsndldir)
 	cd $(dloaddir)/vaucanson
 	ln -sf latest-beta $(VERSION)
 	cd manual && $(MAKE) $(AM_MAKEFLAGS) install-epita

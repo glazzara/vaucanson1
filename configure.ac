@@ -145,7 +145,6 @@ AC_CONFIG_FILES([
    doc/Makefile
    doc/doc.doxy
 	doc/manual/Makefile
-	doc/makefiles/Makefile
 	doc/xml/Makefile
 ])
 

@@ -1,3 +1,14 @@
+2006-10-29  Akim Demaille  <akim.demaille@free.fr>
+
+	Move vcsn-Makefile
+	* doc/makefiles/vcsn-Makefile: Rename as...
+	* doc/unit-compile.mk: this.
+	* doc/makefiles/Makefile.am: Remove.
+	* configure.ac, doc/Makefile.am: Adjust.
+	Let's avoid gratuituous Makefile.am.
+	* doc/Makefile.am: Make the doxygen part more generic.
+	(DOXYFILE, DOCDIR): New.
+
 2006-10-29  Akim Demaille  <akim@lrde.epita.fr>
 
 	* taf-kit/src/main.cc (main): Use << to output the time report.
