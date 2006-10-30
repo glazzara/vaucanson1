@@ -29,7 +29,7 @@
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     typedef
@@ -40,6 +40,6 @@ namespace vcsn
     vcsn::Element<series_set_t, rat_exp_impl_t>
     rat_exp_t;
 
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.

@@ -14,10 +14,11 @@
 //
 // The Vaucanson Group consists of people listed in the `AUTHORS' file.
 //
+
 #ifndef VCSN_BOOLEAN_AUTOMATON_HH
 # define VCSN_BOOLEAN_AUTOMATON_HH
 
-# define VCSN_CONTEXT_NAMESPACE boolean_automaton
+# define VCSN_CONTEXT_NAMESPACE namespace boolean_automaton
 
 # include <vaucanson/contexts/char_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>
@@ -30,7 +31,7 @@
 
 namespace vcsn
 {
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
     AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
   }

@@ -40,7 +40,7 @@
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     template <class T1, class T2>
@@ -75,7 +75,7 @@ namespace vcsn
     evaluation(const Element<TransStruct, TransImpl>& t,
 	       const Element<ArgStruct, ArgImpl>& input);
 
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.
 

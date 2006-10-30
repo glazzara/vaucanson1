@@ -30,7 +30,7 @@
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     /*-----------------.
@@ -129,7 +129,7 @@ namespace vcsn
 			   t, input);
     }
 
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.
 

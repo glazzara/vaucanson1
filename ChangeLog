@@ -1,3 +1,38 @@
+2006-10-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	Include namespace in VCSN_CONTEXT_NAMESPACE.
+	So that if the latter is not defined, it triggers an error instead
+	of putting everything in the namespace named VCSN_CONTEXT_NAMESPACE.
+	* include/vaucanson/r_automaton.hh, 
+	* include/vaucanson/z_transducer.hh, 
+	* include/vaucanson/z_fmp_transducer.hh, 
+	* include/vaucanson/boolean_automaton.hh, 
+	* include/vaucanson/z_max_plus_automaton.hh, 
+	* include/vaucanson/boolean_transducer.hh, 
+	* include/vaucanson/contexts/r_semiring.thh, 
+	* include/vaucanson/contexts/ratseries_semiring.thh, 
+	* include/vaucanson/contexts/automaton_functions.thh, 
+	* include/vaucanson/contexts/transducer_functions.thh, 
+	* include/vaucanson/contexts/fmp_transducer_functions.thh, 
+	* include/vaucanson/contexts/z_semiring.thh, 
+	* include/vaucanson/contexts/automaton.thh, 
+	* include/vaucanson/contexts/automaton_functions.thxx, 
+	* include/vaucanson/contexts/polynom_series.thh, 
+	* include/vaucanson/contexts/transducer_functions.thxx, 
+	* include/vaucanson/contexts/transducer.thh, 
+	* include/vaucanson/contexts/z_min_plus_semiring.thh, 
+	* include/vaucanson/contexts/boolean_semiring.thh, 
+	* include/vaucanson/contexts/fmp_transducer_functions.thxx, 
+	* include/vaucanson/contexts/z_max_plus_semiring.thh, 
+	* include/vaucanson/contexts/generic_automaton_impl.thh, 
+	* include/vaucanson/contexts/dynamic_alphabet.thh, 
+	* include/vaucanson/contexts/generic_series.thh, 
+	* include/vaucanson/contexts/free_monoid_product.thh, 
+	* include/vaucanson/contexts/free_monoid.thh, 
+	* include/vaucanson/contexts/char_letter.thh, 
+	* include/vaucanson/fmp_transducer.hh: 
+	Do that.
+
 2006-10-29  Akim Demaille  <akim.demaille@free.fr>
 
 	Move vcsn-Makefile

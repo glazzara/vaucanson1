@@ -24,13 +24,13 @@
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     typedef output_series_set_elt_t		semiring_elt_t;
     typedef output_series_set_elt_t::set_t	semiring_t;
     typedef output_series_set_elt_t::value_t	semiring_elt_value_t;
 
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.

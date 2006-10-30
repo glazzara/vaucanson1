@@ -26,13 +26,13 @@
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     typedef vcsn::algebra::AlphabetSet<letter_t>	   alphabet_set_t;
     typedef std::set<letter_t>				   alphabet_impl_t;
     typedef vcsn::Element<alphabet_set_t, alphabet_impl_t> alphabet_t;
 
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.

@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2004, 2005, 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 # include <vaucanson/boolean_automaton.hh>
 
-# define VCSN_CONTEXT_NAMESPACE boolean_transducer
+# define VCSN_CONTEXT_NAMESPACE namespace boolean_transducer
 # define AUTOMATON_CONTEXT boolean_automaton
 
 # include <vaucanson/contexts/char_letter.thh>
@@ -29,7 +29,7 @@
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     typedef boolean_automaton::semiring_elt_t	output_semiring_elt_t;
@@ -52,7 +52,7 @@ namespace vcsn
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     AUTOMATON_TYPES_EXACT(automaton_t);

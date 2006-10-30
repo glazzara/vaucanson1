@@ -26,7 +26,7 @@
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     typedef
@@ -41,6 +41,6 @@ namespace vcsn
     vcsn::Element<series_set_t, series_set_elt_value_t>
     series_set_elt_t;
 
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.

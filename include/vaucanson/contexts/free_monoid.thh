@@ -26,13 +26,13 @@
 namespace vcsn
 {
 
-  namespace VCSN_CONTEXT_NAMESPACE
+  VCSN_CONTEXT_NAMESPACE
   {
 
     typedef vcsn::algebra::FreeMonoid<alphabet_t>	monoid_t;
     typedef std::basic_string<alphabet_t::letter_t>	monoid_elt_value_t;
     typedef vcsn::Element<monoid_t, monoid_elt_value_t>	monoid_elt_t;
 
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
+  } // End of VCSN_CONTEXT_NAMESPACE.
 
 } // End of namespace vcsn.
