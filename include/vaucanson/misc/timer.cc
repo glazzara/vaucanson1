@@ -166,10 +166,10 @@ namespace misc
   Timer::print_time (long time, long total_time, std::ostream& o) const
   {
     return o
-      << setiosflags (std::ios::left)
+      << std::setiosflags (std::ios::left)
       << std::setw (6) << std::setprecision (6)
       << (float) (time) / clocks_per_sec
-      << resetiosflags (std::ios::left)
+      << std::resetiosflags (std::ios::left)
       << " ("
       << std::setw (5) << std::setprecision (3)
       << (total_time
@@ -216,7 +216,7 @@ namespace misc
 
     o << " TOTAL (seconds)"	 << std::setw (11) << ": "
 
-      << setiosflags (std::ios::left) << std::setw (7)
+      << std::setiosflags (std::ios::left) << std::setw (7)
       << (float) total.elapsed.user / clocks_per_sec
       << std::setw (11)
       << "user,"
@@ -230,7 +230,7 @@ namespace misc
       << (float) total.elapsed.wall / clocks_per_sec
       << "wall"
 
-      << resetiosflags (std::ios::left)
+      << std::resetiosflags (std::ios::left)
       << std::endl;
 
     return o;

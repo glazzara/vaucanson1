@@ -1,5 +1,10 @@
 2006-10-30  Akim Demaille  <akim@lrde.epita.fr>
 
+	Add missing std::.
+	* include/vaucanson/misc/timer.cc: for iomanip guys.
+
+2006-10-30  Akim Demaille  <akim@lrde.epita.fr>
+
 	Include namespace in VCSN_CONTEXT_NAMESPACE.
 	So that if the latter is not defined, it triggers an error instead
 	of putting everything in the namespace named VCSN_CONTEXT_NAMESPACE.
