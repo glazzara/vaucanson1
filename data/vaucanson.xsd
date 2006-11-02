@@ -102,14 +102,25 @@ label by using <product>, <sum>, <zero>, <identity> and <word> tags.
 <geometry> tag properties. Used to set the geometry properties of each
 element.
 - Appened to <state> node : x, y set position.
-- Appened to <transition> node : transitionType set the type of the transition
-(line, arcL, arcR, curve).
+- Appened to <transition> node :
+  * transitionType sets the type of the transition (line, arcL, arcR, curve,
+  loop).
+  * loopDirection sets the direction of the loop if it is selected.
+  * labelPosition sets the position of the label on the position. Values are
+  between 0 (near the origin state) and 100 (near the destination state).
+- Appened to <initial> or <final> node :
+  * typeshowing sets the vizualisation type of the initial/final state: circled
+  or with a transition.
+  * transitionAngle sets the direction of the transition if typeShowing is set
+  to `arrow'.
+  * labelPosition sets the position of the label on the position. Values are
+  between 0 (near the origin state) and 100 (near the destination state).
 - Appended to <automaton> or <transducer> node : x, y set the global offset.
 -->
 
 <!--
-This type is divided in two parts, since it's irrelevant to set
-transitionType for states or coordinates for transitions.
+This type is divided in four parts, since different attributes must be used
+at different places of the automaton description.
 -->
 <xs:complexType name="geometryState">
   <xs:attribute name="x" type="xs:decimal"/>
@@ -124,7 +135,48 @@ transitionType for states or coordinates for transitions.
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-  <xs:attribute name="direction" type="xs:decimal"/>
+  <xs:attribute name="loopDirection">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+	<xs:minInclusive value="0"/>
+	<xs:maxExclusive value="360"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="labelPosition">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+	<xs:minInclusive value="0"/>
+	<xs:maxInclusive value="100"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+</xs:complexType>
+
+<xs:complexType name="geometryInitFinal">
+  <xs:attribute name="typeShowing">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+	<xs:pattern value="circle|arrow"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="transitionAngle">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+	<xs:minInclusive value="0"/>
+	<xs:maxExclusive value="360"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="labelPosition">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+	<xs:minInclusive value="0"/>
+	<xs:maxInclusive value="100"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
 </xs:complexType>
 
 <xs:complexType name="geometryGlobal">
@@ -421,7 +473,7 @@ and drawing properties.
 -->
 <xs:complexType name="initial">
   <xs:sequence>
-    <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
+    <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="label" type="expressionLabel" minOccurs="0"/>
   </xs:sequence>
@@ -432,7 +484,7 @@ and drawing properties.
 
 <xs:complexType name="initialTransducer">
   <xs:sequence>
-    <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
+    <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="in" type="expressionLabel" minOccurs="0"/>
     <xs:element name="out" type="expressionLabel" minOccurs="0"/>
@@ -451,7 +503,7 @@ and drawing properties.
 -->
 <xs:complexType name="final">
   <xs:sequence>
-    <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
+    <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="label" type="expressionLabel" minOccurs="0"/>
   </xs:sequence>
@@ -462,7 +514,7 @@ and drawing properties.
 
 <xs:complexType name="finalTransducer">
   <xs:sequence>
-    <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
+    <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="in" type="expressionLabel" minOccurs="0"/>
     <xs:element name="out" type="expressionLabel" minOccurs="0"/>

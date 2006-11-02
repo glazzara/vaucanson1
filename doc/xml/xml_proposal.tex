@@ -119,11 +119,11 @@ over the alphabet $\{a,b\}$ that contain at least one $b$.
        <state name="s1"/>
     </states>
     <transitions>
-       <transition \xattr{src}="s0" \xattr{dst}="s0" label="a"/>
-       <transition \xattr{src}="s0" \xattr{dst}="s0" label="b"/>
-       <transition \xattr{src}="s0" \xattr{dst}="s1" label="b"/>
-       <transition \xattr{src}="s1" \xattr{dst}="s1" label="a"/>
-       <transition \xattr{src}="s1" \xattr{dst}="s1" label="b"/>
+       <transition src="s0" dst="s0" label="a"/>
+       <transition src="s0" dst="s0" label="b"/>
+       <transition src="s0" dst="s1" label="b"/>
+       <transition src="s1" dst="s1" label="a"/>
+       <transition src="s1" dst="s1" label="b"/>
        <initial state="s0"/>
        <final state="s1"/>
     </transitions>
@@ -177,12 +177,12 @@ represented in \autoref{bindiv3xml}.
        <state name="s2"/>
     </states>
     <transitions>
-       <transition \xattr{src}="s0" \xattr{dst}="s0" in="0" out="0"/>
-       <transition \xattr{src}="s0" \xattr{dst}="s1" in="1" out="0"/>
-       <transition \xattr{src}="s1" \xattr{dst}="s0" in="1" out="1"/>
-       <transition \xattr{src}="s1" \xattr{dst}="s2" in="0" out="0"/>
-       <transition \xattr{src}="s2" \xattr{dst}="s2" in="1" out="1"/>
-       <transition \xattr{src}="s2" \xattr{dst}="s1" in="0" out="1"/>
+       <transition src="s0" dst="s0" in="0" out="0"/>
+       <transition src="s0" dst="s1" in="1" out="0"/>
+       <transition src="s1" dst="s0" in="1" out="1"/>
+       <transition src="s1" dst="s2" in="0" out="0"/>
+       <transition src="s2" dst="s2" in="1" out="1"/>
+       <transition src="s2" dst="s1" in="0" out="1"/>
        <initial state="s0"/>
        <final state="s0"/>
     </transitions>
@@ -758,17 +758,42 @@ $s_1$ will be red.
 
 \subsection{The \xtag{geometry} tag}
 
-The \xtag{geometry} tag is context sensitive. If it is a child of the
-\xtag{state} tag, the only two properties that can be set are the
-position, \textit{x} and \textit{y}, of the state. These values can only
-be numeric.
+The \xtag{geometry} tag is context sensitive. It can have some different
+attributes according to the tag in which it is used. Four different tags exist.
+\begin{itemize}
+\item If this tag is a child of the \xtag{state} tag, the only two properties
+  that can be set are the positions \textit{x} and \textit{y} of the state.
+  These values can only be numeric.
 
-If it is a child of \xtag{transition}, \xtag{initial} or \xtag{final},
-two attributes can be set. Firstly, the \xattr{transitionType}
-attribute, that assigns the type of the transition (\textit{line},
-\textit{arcL}, \textit{arcR}, \textit{curve}). Then, the
-\xattr{direction} attribute, that can be used to assign the direction
-angle of a loop, for instance. This attribute is numeric.
+\item If it is a child of \xtag{transitions} or \xtag{transition},
+  three attributes can be set. Firstly, the \xattr{transitionType}
+  attribute, that assigns the type of the transition. Values can be:
+  \begin{itemize}
+  \item \textit{line} for a straight transition
+  \item \textit{arcL} and \textit{arcR} for left and right arcs
+  \item \textit{curve} for more complicated curved transitions. This value can
+    be used for automata with a big amount of transitions that must not cross
+    over each other.
+  \item \textit{loop} for transitions of which destination state is its origin.
+  \end{itemize}
+  Secondly, if the \xattr{transitionType} attribute is set to \textit{loop}, the
+  \xattr{loopDirection} can be set. Its value, between 0 and 360, indicates
+  the angle of the transition.\\ Lastly, one can set the position of the label
+  on the transition. the \xattr{labelPosition} indicates the place where it
+  should be on it. It is seen as a percentage, from the origin state to
+  the destination state.  For example, one may want to move the label of a
+  transition near the origin state to keep clear the vizualisation of a big
+  automaton. Setting the \xattr{labelPosition} to around 20 enables this.
+
+\item For \xtag{initial} and \xtag{final} tags. Another attribute,
+  \xattr{typeShowing}, indicates if the initial(final) states have to be circled
+  or to have an input(output) transition. If the choice is a transition, its
+  angle can be set through the \xattr{transitionAngle} attribute. And as for
+  transitions, the \xattr{labelPosition} attribute exists.
+
+\item For \xtag{session} and \xtag{automaton} tags, the global position of the
+  automaton can be set.
+\end{itemize}
 
 The example of \autoref{geom1} sets a global offset for the document,
 and then places the states in the plane.  It also sets the type of the
@@ -787,7 +812,7 @@ transition as a left arc.
         <state name="s1"><geometry x="3" y="0"/>
         </state>
      <transitions>
-        <transition \xattr{src}="s0 \xattr{dst}="s1" label="a">
+        <transition src="s0 dst="s1" label="a">
           <geometry transitionType="arcL">
         </transition>
      </transitions>
@@ -885,11 +910,11 @@ types. We hope to have proposed a description format that fulfills, at
 least partially, both needs.
 
 \nocite{lombardy.04.tcs}
-\nocite{claveirole.05.ciaa}
-\nocite{vaucanson.04.techrep}
+\cite{claveirole.05.ciaa}
+\cite{vaucanson.04.techrep}
 \nocite{vaucanson.www.xml}
-\nocite{vaucanson.www.xsd}
-\nocite{w3c.www}
+\cite{vaucanson.www.xsd}
+\cite{w3c.www}
 
 
 \bibliographystyle{apalike}
