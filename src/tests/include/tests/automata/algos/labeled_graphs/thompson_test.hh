@@ -145,8 +145,6 @@ bool thompson_test(tests::Tester& tg)
       try
       {
 	thompson_of(au, exp.value());
-	bool normalized = is_normalized(au) or
-	  exp == zero_as<exp_t>::of(ss);
 	realtime_here(au);
 
 	if (t.verbose(tests::Tester::high))
@@ -165,7 +163,7 @@ bool thompson_test(tests::Tester& tg)
 	      break;
 	    }
 	  }
-	if ((nb_word_test == i) || (exp == ss.zero(SELECT(exp_t))))
+	if (nb_word_test == i || exp == ss.zero(SELECT(exp_t)))
 	  ++success;
 	++nb_test_done;
       }

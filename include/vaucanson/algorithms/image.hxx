@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2006 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -151,9 +151,9 @@ namespace vcsn
 
 
 
-  /*------------.
-  | DISPATCHERS |
-  `------------*/
+  /*-------------.
+  | DISPATCHERS. |
+  `-------------*/
 
   // Dispatchers for RW transducers
   template <typename S, typename S2,
@@ -225,9 +225,9 @@ namespace vcsn
 
 
 
-  /*--------------.
-  | IMAGE FACADES |
-  `--------------*/
+  /*---------------.
+  | IMAGE FACADES. |
+  `---------------*/
 
   template <typename S, typename S2, typename T, typename T2>
   void

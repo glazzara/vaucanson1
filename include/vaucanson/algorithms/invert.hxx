@@ -143,11 +143,9 @@ namespace vcsn
 
     // Invert each pair
     for_all_const_(series_set_elt_t::support_t, w, label.supp())
-      {
-	// (u,v) -> (v,u)
-	res.assoc(res_monoid_elt_value_t((*w).second, (*w).first),
+      // (u,v) -> (v,u)
+      res.assoc(res_monoid_elt_value_t((*w).second, (*w).first),
 		label.get(*w));
-      }
   }
 
 

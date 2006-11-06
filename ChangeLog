@@ -1,3 +1,14 @@
+2006-11-06  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Various minor fixes.
+
+	* include/vaucanson/algorithms/image.hh,
+	* include/vaucanson/algorithms/invert.hxx,
+	* include/vaucanson/algorithms/image.hxx,
+	* src/tests/include/tests/automata/algos/labeled_graphs/thompson_test.hh,
+	* taf-kit/tests/vcsn-tdc.test,
+	* taf-kit/tests/vcsn-b.test: Minor fixes.
+
 2006-11-02  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* data/vaucanson.xsd: Update the geometryTrans node definition. Add
