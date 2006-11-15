@@ -82,7 +82,7 @@ namespace vcsn
       { return Value; }
 
       GET_SEMIRING_OPERATIONS(vcsn::algebra::NumericalSemiring,
-			      "numerical")
+			      "classical")
       GET_SEMIRING_OPERATIONS(vcsn::z_max_plus_automaton::semiring_t,
 			      "maxPlus")
       GET_SEMIRING_OPERATIONS(vcsn::z_min_plus_automaton::semiring_t,
@@ -399,14 +399,18 @@ namespace vcsn
 					   xercesc::DOMElement* elt)
       {
 	typedef typename A::series_set_elt_t::semiring_elt_t::value_t value_t;
-
-	xercesc::DOMElement* s = create_element(doc, "semiring");
+	xercesc::DOMElement* s = NULL;
 
 	if (get_semiring_set(semiring, value_t()) != "ratSeries")
+	{
+	  s = create_element(doc, "semiring");
 	  set_attribute(s, "operations", get_semiring_operations(semiring));
-	set_attribute(s, "set", get_semiring_set(semiring, value_t()));
-	elt->appendChild(s);
+	  set_attribute(s, "set", get_semiring_set(semiring, value_t()));
+	}
+	else
+	  s = create_element(doc, "numericalSemiring");
 
+	elt->appendChild(s);
 	return s;
       }
 
@@ -422,7 +426,7 @@ namespace vcsn
 	  value_t;
 
 	xercesc::DOMElement* s = create_element(doc, "semiring");
-	set_attribute(s, "operations", "numerical");
+	set_attribute(s, "operations", "classical");
 	set_attribute(s, "set", get_semiring_set(semiring, value_t()));
 	elt->appendChild(s);
 
@@ -765,6 +769,8 @@ namespace vcsn
 			 const std::string& expected)
       {
 	std::string observed;
+	if (expected == "ratSeries")
+	  return;
 	if (node && has_attribute(node, key))
 	  observed = get_attribute(node, key);
 	else

@@ -206,8 +206,9 @@ and transitions.
 The first tag, \xtag{states}, introduces the declaration of
 the set of the automaton states. A state has three attributes: a
 \xattr{name} (which is mandatory and has to be unique), a \xattr{label}
-and a \xattr{number}. The latter can be used to put an ordering on states,
-or to add special integer data to the state.
+and a \xattr{number}. The second one can be used in some special cases for
+which states have to store labels. The latter can be used to put an ordering on
+states, or to add special integer data to the state.
 
 The second tag, \xtag{transitions}, introduces the declaration
 of the set of transitions. The initial and final
@@ -225,7 +226,7 @@ transition. In the case of an \xtag{initial} or \xtag{final} transition,
 the only mandatory attribute is \xattr{state}, referring to the initial
 or final state the transition belongs to.
 
-There is no limitation of the format for the content of attributes, as
+The format has no limitation concerning the content of attributes, as
 it is a non-restricted string. For example, a user can store a
 rational expression in the \xattr{label}, \xattr{in} or \xattr{out}
 attributes of a transition. The use of these attributes depends on the
@@ -241,19 +242,19 @@ deal with a great amount of automata and transducers.
 \section{Description of the format}
 
 This part describes in details some tags of the XML format.  Firstly,
-the tags \xtag{automaton} and \xtag{transducer} will be introduced.
-Then, the two main tags, namely \xtag{labelType} and \xtag{content}, will be
-described.  Eventually, the main \xtag{session} tag that holds all the
-other ones will be presented.
+the \xtag{automaton} tag will be introduced.
+Its two main tags, namely \xtag{labelType} and \xtag{content}, will also be
+described. Then, we will discuss the possible ways to describe transition
+labels, notably with the \xtag{label} tag. Eventually, the main \xtag{session}
+tag that holds all the other ones will be presented.
 
-\subsection{The \xtag{automaton} and \xtag{transducer} tags}
+\subsection{The \xtag{automaton} tag}
 
-As one can see in the previous examples, \autoref{B1xml} and
-\autoref{bindiv3xml}, these tags specify the type(s) of the object(s)
-contained in the XML session. The content of an object is then
-specific, and it is linked to the type of tag that is used.  In any
-case, an attribute ``name'', present in these tags, allows to bring an
-explicit name to an automaton and to store it in a XML file.
+As one can see in the previous examples \autoref{B1xml} and
+\autoref{bindiv3xml}, this tag is the main one and delimits the definition of
+one single automaton. Each automaton contains a \xtag{labelType} and a
+\xtag{content} tag. An attribute \xattr{name}, present in this tag, allows to
+bring an explicit name to an automaton when stored in an XML file.
 
 \subsection{The \xtag{labelType} tag}
 
@@ -264,17 +265,13 @@ over a monoid with coefficients taken in a semiring. The \xtag{labelType}
 tag allows to refer to this semiring and this monoid.
 
 In the automaton described in \autoref{B1xml}, no specific information
-is given on the type of the automaton. The proposal comes with a set
-of predefined types, in order to limit amount of needed declarations
+is given on the type of the automaton. The proposal comes with a predefined
+type, in order to limit amount of needed declarations
 for widely used structures. When the document starts with the
 \xtag{automaton} tag and when the \xtag{labelType} tag is omitted, the
 default automaton type is a Boolean automaton, on the standard
 alphabet (all the letters of the alphabet, including capitalized ones,
-and digits).  Concerning the \xtag{transducer} tag without any
-\xtag{labelType} tag, the default transducer is Boolean with two monoids
-built on the same standard alphabet.  These default types will be
-described further in the XML format.
-
+and digits). This default type will be described further in the proposition.
 
 \subsubsection{The \xtag{monoid} tag}
 
@@ -302,27 +299,27 @@ definition. So, the restricted alphabet would be defined as shown in
 </labelType>
 \end{alltt}
 
-\caption{Setting $\{a, b\}$ alphabet}
+\caption{Setting the $\{a, b\}$ alphabet}
 \label{alpha1}
   \end{center}
 \end{figure}
 
 Similarly, one can also set a restriction on the alphabet like in
-\autoref{restriction1}.
+\autoref{restriction1}, where only digits are allowed.
 
 \begin{figure}[ht]
   \small
   \begin{center}
 \begin{alltt}
 <labelType>
-  <monoid generators="digits" type="free">
+  <monoid generators="digits" type="free" identitySymbol="e">
     <generator value="0"/>
     <generator value="1"/>
   </monoid>
 </labelType>
 \end{alltt}
 
-\caption{Example of a restriction}
+\caption{Restriction and identity symbol}
 \label{restriction1}
   \end{center}
 \end{figure}
@@ -331,7 +328,10 @@ Similarly, one can also set a restriction on the alphabet like in
 The user can set the string denoting the empty word with the attribute
 \xattr{identitySymbol} of the monoid. This way, the empty word
 symbol can always be different from any character of the used
-alphabet.
+alphabet. But the XML format cannot check if the user uses the same character
+for both an element of the alphabet and the identity symbol. So, the user has
+to set properly these values, and the program using this format should check
+such properties.
 
 To create a transducer based on a free monoid product, it is necessary
 to declare the two monoids in order to determine the two needed
@@ -350,31 +350,48 @@ type description. Concerning transducers, only two monoids can be
 defined under the main \xtag{monoid} tag so as to remain a free monoid
 product.
 
-The monoid attributes are:
+To sum up, the monoid attributes are:
 \begin{itemize}
 \item \xattr{type}\\
-  This is used to set the type of the monoid. Choices are \code{unit},
-  \code{free} or \code{product}.
+  This is used to set the type of the monoid. Choices are:
+  \begin{itemize}
+    \item \code{unit}, when the monoid is built on only one element;
+    \item \code{free}, when dealing with a free monoid;
+    \item \code{product}, when the monoid is itself a monoid product.
+  \end{itemize}
 \item \xattr{generators}\\
   This attribute sets a global restriction to the alphabet. The
-  current possibilities are letters, digits, pair or weighted.
+  current possibilities are:
+  \begin{itemize}
+  \item \code{letters}, if the only possible values are taken from the
+    alphabet;
+  \item \code{digits}, if one only wants digits;
+  \item \code{pair}, if the elements of the alphabets are pairs;
+  \item \code{indexed}, if each element of the alphabet has to be associated
+    to something, like a weight for instance.
+  \end{itemize}
 \item \xattr{identitySymbol}\\
   Used to set an empty word symbol.
 \end{itemize}
-
+~\\
 The XSD description of the \xtag{generator} tag is:
 \begin{itemize}
 \item \xattr{value}\\
   This is used to add one letter in the alphabet. One can put several
-  \xtag{generator} tags in a monoid description so as to have bigger
+  \xtag{generator} tags in a monoid description so as to obtain bigger
   alphabets.
 \item \xattr{range}\\
   This allows to set a fixed range without being obliged to add all
-  the symbols one by one. For instance, the range \textsc{implicitAlphabet}
-  sets the alphabet on the lowercase and uppercase alphabet characters.
+  the symbols one by one. Possible values are:
+  \begin{itemize}
+  \item \code{implicitAlphabet}, that sets the alphabet on the lowercase
+    and uppercase alphabet characters;
+  \item \code{digits}, that inserts in the alphabet the digit characters;
+  \item \code{ascii}, that sets the alphabet on the \textsc{ascii} characters.
+  \end{itemize}
 \end{itemize}
 
-\subsubsection{The \xtag{semiring} tag}
+\subsubsection{The \xtag{semiring} and \xtag{numericalSemiring} tags}
 
 The XML proposition enables a full description of the automaton type.
 It consequently proposes a way to write weighted automata or
@@ -384,7 +401,7 @@ $Rat(B^*)$.
 To describe a weighted automaton, the \xtag{labelType} tag provides a set of
 customizable tags to specify the type of multiplicities. The example
 of \autoref{B1Zxml} shows how to turn the automaton $B_1$ into a
-weighted automaton with weights in ${\mathbb Z}$ -- so it counts the
+weighted automaton with weights in ${\mathbb Z}$ -- so that it counts the
 number of $b$ in a word.
 
 \begin{figure}[ht]
@@ -410,11 +427,17 @@ The \xtag{semiring} tag can be described with two attributes:
 \begin{itemize}
 \item \xattr{set}\\
   The set on which the automaton is built. The possible values are
-\textit{B, R, Z, N} and \textit{ratSeries} (which will be discussed later).
+\textit{B, R, Z, N}, for the corresponding sets.
 \item \xattr{operations}\\
   The type of operations that can be performed on this set.  The
-  possibilities are \textit{numerical}, \textit{boolean},
-  \textit{minPlus} or \textit{maxPlus}.
+  possibilities are:
+  \begin{itemize}
+  \item \code{classical}, for the classical operations of a semiring, namely
+    $(+, \times)$;
+  \item \code{minPlus}, for a semiring with its operations set to $(min, +)$;
+  \item \code{maxPlus} for $(max, +)$.
+  \item \code{minMax} for $(min, max)$.
+  \end{itemize}
 \end{itemize}
 
 For instance, describing the tropical semiring $({\mathbb Z}, max, +)$
@@ -437,11 +460,14 @@ grammar proposes the identity of the semiring as the default value.
 
 \medskip
 
-The \xtag{semiring} tag proposes some solutions for the transducers,
-like the example of \autoref{ratseries1}. It is seen as a weighted automaton
-with weight in $Rat(B^*)$. \xtag{monoid} and \xtag{semiring} tags can
-recursively be defined, in order to describe a complex type. Only the
-\xtag{labelType} is shown so as to remain clear.
+The \xtag{semiring} tag proposes some solutions for transducers.
+In the example of \autoref{ratseries1}, It is seen as a weighted automaton
+with its weights in $Rat(B^*)$. Only the \xtag{labelType} is shown so as to
+remain clear.
+To make this definition possible, the \xtag{numericalSemiring} tag has been
+defined. It can be used instead of the \xtag{semiring} one to introduce a more
+complex set. In this tag, one can define a monoid and a semiring so as to obtain
+a transducer.
 
 \begin{figure}[ht]
   \begin{center}
@@ -453,13 +479,13 @@ recursively be defined, in order to describe a complex type. Only the
       <generator value="1"/>
       <generator value="2"/>
     </monoid>
-    <semiring set="ratSeries">
+    <numericalSemiring>
       <monoid generators="digits" type="free">
         <generator value="0"/>
         <generator value="1"/>
       </monoid>
-      <semiring operations="numerical" set="B"/>
-    </semiring>
+      <semiring operations="classical" set="B"/>
+    </numericalSemiring>
   </labelType>
   <content>
     ...
@@ -470,10 +496,6 @@ recursively be defined, in order to describe a complex type. Only the
 \label{ratseries1}
   \end{center}
 \end{figure}
-
-The beginning of the XSD description of the \xtag{semiring} is a sequence that
-contains two elements, namely the monoid and the semiring. This allows a
-recursion in the definition of an automaton structure.
 
 \subsection{The \xtag{content} tag}
 
@@ -645,7 +667,7 @@ the labels will be perfectly understood, whatever the program that deals with.
 
 A way to manipulate many automata would be to combine them in a single
 document. The proposal offers this feature through the \xtag{session}
-tag. An unlimited number of automata or transducers can be combined in
+tag. An unlimited number of automata can be combined in
 a single XML document. A XML session can also be named.  An
 application can be found in \autoref{session1}.
 
@@ -655,8 +677,8 @@ application can be found in \autoref{session1}.
 \begin{alltt}
 <session name="session1">
   <automaton name="a1">...</automaton>
-  <transducer name="t1">...</transducer>
-  <transducer name="t2">...</transducer>
+  <automaton name="a2">...</automaton>
+  <automaton name="a3">...</automaton>
 </session>
 \end{alltt}
 
@@ -673,7 +695,7 @@ different values according to the root tag. \autoref{automatontype}
 shows the equivalent XML code if one omits the \xtag{labelType} tag when
 declaring an automaton. Similarly, \autoref{transducertype} shows the
 default type for transducers.  The \xattr{operations} attribute is
-set to \textit{numerical}, which means that usual laws over
+set to \textit{classical}, which means that usual laws over
 $\mathbb{B}$ shall be applied.
 
 \begin{figure}[htp]
@@ -683,7 +705,7 @@ $\mathbb{B}$ shall be applied.
   <monoid type="free" generators="letters">
      <generator range="implicitAlphabet"/>
   </monoid>
-  <semiring set="B" operations="numerical"/>
+  <semiring set="B" operations="classical"/>
 </labelType>
 \end{alltt}
 
@@ -705,7 +727,7 @@ $\mathbb{B}$ shall be applied.
        <generator range="implicitAlphabet"/>
      </monoid>
   </monoid>
-  <semiring set="B" operations="numerical"/>
+  <semiring set="B" operations="classical"/>
 </labelType>
 \end{alltt}
 
@@ -782,7 +804,7 @@ attributes according to the tag in which it is used. Four different tags exist.
   on the transition. the \xattr{labelPosition} indicates the place where it
   should be on it. It is seen as a percentage, from the origin state to
   the destination state.  For example, one may want to move the label of a
-  transition near the origin state to keep clear the vizualisation of a big
+  transition near the origin state to keep clear the visualization of a big
   automaton. Setting the \xattr{labelPosition} to around 20 enables this.
 
 \item For \xtag{initial} and \xtag{final} tags. Another attribute,
@@ -899,7 +921,7 @@ For information about the XSD Schema are available on the
 For the past years we experimented the different proposals in the
 \Vauc platform. It begun with a first one in 2004 \cite{vaucanson.04.techrep}
 and we presented our progress at CIAA'05 \cite{claveirole.05.ciaa}.
-This version 0.3.2 comes as a result of this experiment, with
+This version 0.3.3 comes as a result of this experiment, with
 simplifications where possible. Thus, the \Vauc platform deals
 with numerous automata types, and it is important to be able to define
 precisely the type of the automaton in addition to its content.

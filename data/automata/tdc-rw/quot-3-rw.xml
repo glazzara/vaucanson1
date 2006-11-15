@@ -4,13 +4,13 @@
       <generator value="a"/>
       <generator value="b"/>
     </monoid>
-    <semiring set="ratSeries">
+    <numericalSemiring>
       <monoid generators="letters" type="free">
         <generator value="a"/>
         <generator value="b"/>
       </monoid>
-      <semiring operations="numerical" set="B"/>
-    </semiring>
+      <semiring operations="classical" set="B"/>
+    </numericalSemiring>
   </labelType>
   <content>
     <states>

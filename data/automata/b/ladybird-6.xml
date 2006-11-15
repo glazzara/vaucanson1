@@ -5,7 +5,7 @@
       <generator value="b"/>
       <generator value="c"/>
     </monoid>
-    <semiring operations="numerical" set="B"/>
+    <semiring operations="classical" set="B"/>
   </labelType>
   <content>
     <states>

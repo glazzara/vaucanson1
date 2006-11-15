@@ -5,7 +5,7 @@ xmlns="http://vaucanson.lrde.epita.fr"
 elementFormDefault="qualified">
 
 <!--
-vaucanson.xsd version 0.3.2
+vaucanson.xsd version 0.3.3
 -->
 
 <!--
@@ -213,30 +213,39 @@ An optional "any" attribute is used, to let the user use personal attributes.
 <!--
 <semiring> tag properties. Used to define the semiring of the
 automaton. This tag can be used to define a set, and operations on
-it. It is also possible to recursively construct complex structures
-with monoids and semirings.
+it.
 
 The default semiring is Boolean.
 -->
 <xs:complexType name="semiring">
-  <xs:sequence>
-    <xs:element name="monoid" type="monoidAutomaton" minOccurs="0"/>
-    <xs:element name="semiring" type="semiring" minOccurs="0"/>
-  </xs:sequence>
   <xs:attribute name="set" default="B">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="B|N|Z|Q|R|ratSeries"/>
+	<xs:pattern value="B|N|Z|Q|R"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-  <xs:attribute name="operations" default="numerical">
+  <xs:attribute name="operations" default="classical">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="numerical|boolean|minPlus|maxPlus|minMax"/>
+	<xs:pattern value="classical|minPlus|maxPlus|minMax"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
+</xs:complexType>
+
+<!--
+numericalSemiring is used to enable recursive construction of complex structures
+with monoids and semirings.
+-->
+<xs:complexType name="numericalSemiring">
+  <xs:sequence>
+    <xs:element name="monoid" type="monoidAutomaton" minOccurs="0"/>
+    <xs:choice>
+      <xs:element name="semiring" type="semiring" minOccurs="0"/>
+      <xs:element name="numericalSemiring" type="numericalSemiring" minOccurs="0"/>
+    </xs:choice>
+  </xs:sequence>
 </xs:complexType>
 
 
@@ -280,7 +289,7 @@ The monoid type is broken in two parts, for automata and transducers.
   <xs:attribute name="generators" default="letters">
     <xs:simpleType>
       <xs:restriction base="xs:string">
-	<xs:pattern value="letters|digits|pair|weighted"/>
+	<xs:pattern value="letters|digits|pair|indexed"/>
       </xs:restriction>
       </xs:simpleType>
   </xs:attribute>
@@ -321,14 +330,20 @@ if necessary.
 <xs:complexType name="typeAutomaton">
   <xs:sequence>
     <xs:element name="monoid" type="monoidAutomaton" minOccurs="0"/>
-    <xs:element name="semiring" type="semiring" minOccurs="0"/>
+    <xs:choice>
+      <xs:element name="semiring" type="semiring" minOccurs="0"/>
+      <xs:element name="numericalSemiring" type="numericalSemiring" minOccurs="0"/>
+    </xs:choice>
   </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="typeTransducer">
   <xs:sequence>
     <xs:element name="monoid" type="monoidTransducer" minOccurs="0"/>
-    <xs:element name="semiring" type="semiring" minOccurs="0"/>
+    <xs:choice>
+      <xs:element name="semiring" type="semiring" minOccurs="0"/>
+      <xs:element name="numericalSemiring" type="numericalSemiring" minOccurs="0"/>
+    </xs:choice>
   </xs:sequence>
 </xs:complexType>
 
