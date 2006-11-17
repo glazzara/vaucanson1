@@ -58,8 +58,6 @@ namespace vcsn
     template <class S, class T>
     struct xml_chooser_base
     {
-	const char* choose_start_tag();
-
 	void create_type_tag(const Element<S, T>& aut,
 			     xercesc::DOMDocument* doc,
 			     xercesc::DOMElement* root);
@@ -110,7 +108,6 @@ namespace vcsn
     template <class S, class T>
     struct xml_chooser<Transducer<S>, T> : xml_chooser_base<Transducer<S>, T>
     {
-	const char* choose_start_tag();
 	void create_type_tag(const Element<Transducer<S>, T>& aut,
 			     xercesc::DOMDocument* doc,
 			     xercesc::DOMElement* root);
@@ -133,7 +130,6 @@ namespace vcsn
     template <class S, class T, class M1, class M2>
     struct xml_chooser<FMPtype> : xml_chooser_base<FMPtype>
     {
-	const char* choose_start_tag();
 	void create_type_tag(const Element<FMPtype>& aut,
 			     xercesc::DOMDocument* doc,
 			     xercesc::DOMElement* root);

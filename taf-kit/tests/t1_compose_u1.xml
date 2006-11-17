@@ -1,11 +1,11 @@
-<transducer xmlns="http://vaucanson.lrde.epita.fr">
+<automaton xmlns="http://vaucanson.lrde.epita.fr">
   <labelType>
-    <monoid generators="letters" type="product">
-      <monoid generators="letters" type="free">
+    <monoid generatorType="letters" type="product">
+      <monoid generatorType="letters" type="free">
         <generator value="a"/>
         <generator value="b"/>
       </monoid>
-      <monoid generators="letters" type="free">
+      <monoid generatorType="letters" type="free">
         <generator value="u"/>
         <generator value="v"/>
       </monoid>
@@ -42,4 +42,4 @@
       <final state="s4"/>
     </transitions>
   </content>
-</transducer>
+</automaton>

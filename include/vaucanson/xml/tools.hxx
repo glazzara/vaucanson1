@@ -386,7 +386,7 @@ namespace vcsn
       {
 	xercesc::DOMElement* m = create_element(doc, "monoid");
 	set_attribute(m, "type", get_monoid_type(monoid));
-	set_attribute(m, "generators", "letters");
+	set_attribute(m, "generatorType", "letters");
 	elt->appendChild(m);
 
 	return m;

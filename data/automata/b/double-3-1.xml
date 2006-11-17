@@ -1,6 +1,6 @@
 <automaton name="double_ring 3" xmlns="http://vaucanson.lrde.epita.fr">
   <labelType>
-    <monoid generators="letters" type="free">
+    <monoid generatorType="letters" type="free">
       <generator value="a"/>
       <generator value="b"/>
     </monoid>

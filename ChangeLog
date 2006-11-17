@@ -1,3 +1,46 @@
+2006-11-17  Florent Terrones  <terron_f@lrde.epita.fr>
+
+	* data/vaucanson.xsd: Remove the <transducer> tag.
+	Change the `generators' attribute to `generatorType'.
+	* doc/xml/xml_proposal.tex: Update accordingly.
+	* include/vaucanson/xml/xml_chooser.hh,
+	* include/vaucanson/xml/xml_chooser.hxx,
+	* include/vaucanson/xml/xml_converter.hxx,
+	* include/vaucanson/xml/tools.hxx,
+	* include/vaucanson/xml/xerces_parser.hxx: Update accordingly. Remove
+	the `choose_start_tag' method from xml_chooser.
+	* src/tests/xml/label_node_ref.xml,
+	* src/tests/xml/trans_ref.xml,
+	* src/tests/xml/geometry_ref.xml,
+	* src/tests/xml/r_ref.xml,
+	* src/tests/xml/z_ref.xml,
+	* src/tests/xml/z_min_plus_ref.xml,
+	* src/tests/xml/b_ref.xml,
+	* src/tests/xml/z_max_plus_ref.xml,
+	* src/tests/xml/fmp_ref.xml,
+	* src/tests/xml/session_ref.xml,
+	* taf-kit/tests/b_to_transpose.xml,
+	* taf-kit/tests/t2_u-compose_u2.xml,
+	* taf-kit/tests/b_transposed.xml,
+	* taf-kit/tests/inverted_t1.xml,
+	* taf-kit/tests/t2.xml,
+	* taf-kit/tests/u2.xml,
+	* taf-kit/tests/non_ambiguous2.xml,
+	* taf-kit/tests/ambiguous.xml,
+	* taf-kit/tests/non_ambiguous.xml,
+	* taf-kit/tests/t1_compose_u1.xml,
+	* data/automata/tdc-rw/quot-3-rw.xml,
+	* data/automata/tdc-rw/add1-rw.xml,
+	* data/automata/b/a1.xml,
+	* data/automata/b/b1.xml,
+	* data/automata/b/div3base2.xml,
+	* data/automata/b/double-3-1.xml,
+	* data/automata/b/ladybird-6.xml,
+	* data/automata/z/b1.xml,
+	* data/automata/z/c1.xml,
+	* data/automata/tdc/t1.xml,
+	* data/automata/tdc/u1.xml: Update accordingly.
+
 2006-11-15  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* data/vaucanson.xsd: Change the structure of the semiring description.

@@ -1,7 +1,7 @@
 <session xmlns="http://vaucanson.lrde.epita.fr">
   <automaton>
     <labelType>
-      <monoid generators="letters" type="free">
+      <monoid generatorType="letters" type="free">
         <generator value="a"/>
         <generator value="b"/>
       </monoid>
@@ -21,7 +21,7 @@
   </automaton>
   <automaton>
     <labelType>
-      <monoid generators="letters" type="free">
+      <monoid generatorType="letters" type="free">
         <generator value="a"/>
         <generator value="b"/>
       </monoid>

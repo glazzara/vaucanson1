@@ -5,7 +5,7 @@ xmlns="http://vaucanson.lrde.epita.fr"
 elementFormDefault="qualified">
 
 <!--
-vaucanson.xsd version 0.3.3
+vaucanson.xsd version 0.4
 -->
 
 <!--
@@ -115,7 +115,7 @@ element.
   to `arrow'.
   * labelPosition sets the position of the label on the position. Values are
   between 0 (near the origin state) and 100 (near the destination state).
-- Appended to <automaton> or <transducer> node : x, y set the global offset.
+- Appended to <automaton> node : x, y set the global offset.
 -->
 
 <!--
@@ -240,7 +240,7 @@ with monoids and semirings.
 -->
 <xs:complexType name="numericalSemiring">
   <xs:sequence>
-    <xs:element name="monoid" type="monoidAutomaton" minOccurs="0"/>
+    <xs:element name="monoid" type="monoid" minOccurs="0"/>
     <xs:choice>
       <xs:element name="semiring" type="semiring" minOccurs="0"/>
       <xs:element name="numericalSemiring" type="numericalSemiring" minOccurs="0"/>
@@ -251,17 +251,13 @@ with monoids and semirings.
 
 <!--
 <monoid> tag properties. Used to define all the monoid(s) properties
-of the automaton / transducer.
+of the automaton.
 A monoid expects <generator> tags to define its generators, when available.
 The <monoid> tag can be recursively constructed to build n-product of monoid.
 
-For automata, default is free monoid, with the alphabet letters.
-For transducers, default is product of free monoid, both the alphabet letters.
+Default is free monoid, with the alphabet letters.
 FIXME: generator should be broken into two elements so as to allow a default
 value.
--->
-<!--
-The monoid type is broken in two parts, for automata and transducers.
 -->
 <xs:complexType name="generator">
   <xs:attribute name="value" type="xs:string"/>
@@ -274,9 +270,9 @@ The monoid type is broken in two parts, for automata and transducers.
   </xs:attribute>
 </xs:complexType>
 
-<xs:complexType name="monoidAutomaton">
+<xs:complexType name="monoid">
   <xs:choice>
-    <xs:element name="monoid" type="monoidAutomaton" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="monoid" type="monoid" minOccurs="0" maxOccurs="unbounded"/>
     <xs:element name="generator" type="generator" minOccurs="0" maxOccurs="unbounded"/>
   </xs:choice>
   <xs:attribute name="type" default="free">
@@ -286,7 +282,7 @@ The monoid type is broken in two parts, for automata and transducers.
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-  <xs:attribute name="generators" default="letters">
+  <xs:attribute name="generatorType" default="letters">
     <xs:simpleType>
       <xs:restriction base="xs:string">
 	<xs:pattern value="letters|digits|pair|indexed"/>
@@ -296,61 +292,26 @@ The monoid type is broken in two parts, for automata and transducers.
   <xs:attribute name="identitySymbol" type="xs:string"/>
 </xs:complexType>
 
-
-<xs:complexType name="monoidTransducer">
-  <xs:choice>
-    <xs:element name="monoid" type="monoidAutomaton" minOccurs="0" maxOccurs="2"/>
-    <xs:element name="generator" type="generator" minOccurs="0" maxOccurs="unbounded"/>
-  </xs:choice>
-  <xs:attribute name="type" default="product">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-	<xs:pattern value="unit|free|product"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:attribute>
-  <xs:attribute name="generators" default="letters">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-	<xs:pattern value="letters|digits|pair|weighted"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:attribute>
-  <xs:attribute name="identitySymbol" type="xs:string"/>
-</xs:complexType>
-
-
 <!--
 <labelType> tag properties. This tag encapsulates semiring and monoid
-definitions to entirely define the algebraic structure the automaton /
-transducer is working on. This tag is optionnal if you want to use
+definitions to entirely define the algebraic structure the automaton
+is working on. This tag is optionnal if you want to use
 default values. You can specify only one of the monoid / semiring tag,
 if necessary.
 -->
 <xs:complexType name="typeAutomaton">
   <xs:sequence>
-    <xs:element name="monoid" type="monoidAutomaton" minOccurs="0"/>
+    <xs:element name="monoid" type="monoid" minOccurs="0"/>
     <xs:choice>
       <xs:element name="semiring" type="semiring" minOccurs="0"/>
       <xs:element name="numericalSemiring" type="numericalSemiring" minOccurs="0"/>
     </xs:choice>
   </xs:sequence>
 </xs:complexType>
-
-<xs:complexType name="typeTransducer">
-  <xs:sequence>
-    <xs:element name="monoid" type="monoidTransducer" minOccurs="0"/>
-    <xs:choice>
-      <xs:element name="semiring" type="semiring" minOccurs="0"/>
-      <xs:element name="numericalSemiring" type="numericalSemiring" minOccurs="0"/>
-    </xs:choice>
-  </xs:sequence>
-</xs:complexType>
-
 
 <!--
 <session> tag properties. This tag is used to encapsulate many
-automata / transducers in a single XML file.
+automata in a single XML file.
 The session can be named using the "name" attribute. Global offset can
 be set using the <geometry> tag, and global drawing properties can be
 set using the <drawing> tag.
@@ -359,7 +320,6 @@ set using the <drawing> tag.
   <xs:complexType>
     <xs:sequence>
       <xs:element name="automaton" type="automaton" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="transducer" type="transducer" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="geometry" type="geometryGlobal" minOccurs="0"/>
       <xs:element name="drawing" type="drawing" minOccurs="0"/>
     </xs:sequence>
@@ -369,8 +329,8 @@ set using the <drawing> tag.
 
 
 <!--
-<state> tag properties. Used to define a state in the automaton /
-transducer. This tag must be a child of <states> tag.
+<state> tag properties. Used to define a state in the automaton.
+This tag must be a child of <states> tag.
 The "name" attribute is required, the other are optional. Use the
 "number" attribute to set an order on states.
 State position can be set using the <geometry> tag, and drawing
@@ -392,7 +352,7 @@ properties can be set with the <drawing> tag.
 <transition> tag properties. Used to define a transition between two
 states . This tag must be a child of <transitions> tag.
 The optional "weight" attribute can be used on weighted automata.
-On transducers, use the "in" and "out" attributes to define input and
+For transducers, use the "in" and "out" attributes to define input and
 output for the transition.
 Transition type can be defined using the <geometry> tag, and drawing properties can
 be set with the <drawing> tag.
@@ -400,36 +360,13 @@ be set with the <drawing> tag.
 When unspecified, the unlabeled transition should be considered
 labeled with the identity on the monoid.
 -->
-<xs:complexType name="labelAutomaton">
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="weight" type="xs:string"/>
-</xs:complexType>
-
-<xs:complexType name="labelTransducer">
-  <xs:attribute name="in" type="xs:string"/>
-  <xs:attribute name="out" type="xs:string"/>
-</xs:complexType>
-
 <xs:complexType name="transition">
   <xs:sequence>
     <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="label" type="expressionLabel" minOccurs="0"/>
-  </xs:sequence>
-  <xs:attribute name="src" type="xs:string" use="required"/>
-  <xs:attribute name="dst" type="xs:string" use="required"/>
-  <xs:attribute name="name" type="xs:string"/>
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="weight" type="xs:string"/>
-</xs:complexType>
-
-<xs:complexType name="transitionTransducer">
-  <xs:sequence>
-    <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="in" type="expressionLabel" minOccurs="0"/>
     <xs:element name="out" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="label" type="expressionLabel" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="src" type="xs:string" use="required"/>
   <xs:attribute name="dst" type="xs:string" use="required"/>
@@ -469,16 +406,6 @@ Global geometry and drawing properties can be set for all transitions.
   </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="transitionsTransducer">
-  <xs:sequence>
-    <xs:element name="transition" type="transitionTransducer" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="initial" type="initialTransducer" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="final" type="finalTransducer" minOccurs="0" maxOccurs="unbounded"/>
-    <xs:element name="geometry" type="geometryTrans" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-  </xs:sequence>
-</xs:complexType>
-
 
 <!--
 <initial> tag properties. Used to set a state as initial state. This
@@ -491,19 +418,8 @@ and drawing properties.
     <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="label" type="expressionLabel" minOccurs="0"/>
-  </xs:sequence>
-  <xs:attribute name="state" type="xs:string" use="required"/>
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="weight" type="xs:string"/>
-</xs:complexType>
-
-<xs:complexType name="initialTransducer">
-  <xs:sequence>
-    <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="in" type="expressionLabel" minOccurs="0"/>
     <xs:element name="out" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="label" type="expressionLabel" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="state" type="xs:string" use="required"/>
   <xs:attribute name="label" type="xs:string"/>
@@ -521,19 +437,8 @@ and drawing properties.
     <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="label" type="expressionLabel" minOccurs="0"/>
-  </xs:sequence>
-  <xs:attribute name="state" type="xs:string" use="required"/>
-  <xs:attribute name="label" type="xs:string"/>
-  <xs:attribute name="weight" type="xs:string"/>
-</xs:complexType>
-
-<xs:complexType name="finalTransducer">
-  <xs:sequence>
-    <xs:element name="geometry" type="geometryInitFinal" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="in" type="expressionLabel" minOccurs="0"/>
     <xs:element name="out" type="expressionLabel" minOccurs="0"/>
-    <xs:element name="label" type="expressionLabel" minOccurs="0"/>
   </xs:sequence>
   <xs:attribute name="state" type="xs:string" use="required"/>
   <xs:attribute name="label" type="xs:string"/>
@@ -543,15 +448,11 @@ and drawing properties.
 </xs:complexType>
 
 
-
 <!--
 <content> tag properties. This tag is used to define the structure of
 the automaton. It's a combination of <states>, <transitions>,
 <initials> and <finals> tags. None of them are optional, and the order
 is constrained.
--->
-<!--
-Two possible contents are available, one for automata and one for transducers.
 -->
 <xs:complexType name="contentAutomaton">
   <xs:sequence>
@@ -559,15 +460,6 @@ Two possible contents are available, one for automata and one for transducers.
     <xs:element name="drawing" type="drawing" minOccurs="0"/>
     <xs:element name="states" type="states"/>
     <xs:element name="transitions" type="transitions"/>
-  </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="contentTransducer">
-  <xs:sequence>
-    <xs:element name="geometry" type="geometryGlobal" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-    <xs:element name="states" type="states"/>
-    <xs:element name="transitions" type="transitionsTransducer"/>
   </xs:sequence>
 </xs:complexType>
 
@@ -588,20 +480,5 @@ be set.
 </xs:complexType>
 
 <xs:element name="automaton" type="automaton"/>
-
-<!--
-<transducer> tag properties. Same as above, but for transducers.
--->
-<xs:complexType name="transducer">
-  <xs:sequence>
-    <xs:element name="labelType" type="typeTransducer" minOccurs="0"/>
-    <xs:element name="content" type="contentTransducer"/>
-    <xs:element name="geometry" type="geometryGlobal" minOccurs="0"/>
-    <xs:element name="drawing" type="drawing" minOccurs="0"/>
-  </xs:sequence>
-  <xs:attribute name="name" type="xs:string"/>
-</xs:complexType>
-
-<xs:element name="transducer" type="transducer"/>
 
 </xs:schema>

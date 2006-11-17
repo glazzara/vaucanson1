@@ -127,8 +127,6 @@ namespace vcsn
       if (! nodelist->getLength())
 	nodelist = doc->getElementsByTagName(transcode("automaton"));
       if (! nodelist->getLength())
-	nodelist = doc->getElementsByTagName(transcode("transducer"));
-      if (! nodelist->getLength())
 	FAIL("Cannot find any appropriate root.");
 
       DOMElement* node = static_cast<DOMElement*>(nodelist->item(0));

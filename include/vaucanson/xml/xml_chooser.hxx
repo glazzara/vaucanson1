@@ -38,11 +38,6 @@ namespace vcsn
     `-------------*/
 
     template <class S, class T>
-    const char*
-    xml_chooser_base<S, T>::choose_start_tag()
-    { return "automaton"; }
-
-    template <class S, class T>
     void
     xml_chooser_base<S, T>::create_type_tag(const Element<S, T>& aut,
 					    xercesc::DOMDocument* doc,
@@ -109,11 +104,6 @@ namespace vcsn
     `---------------------*/
 
     template <class S, class T>
-    const char*
-    xml_chooser<Transducer<S>, T>::choose_start_tag()
-    { return "transducer"; }
-
-    template <class S, class T>
     void
     xml_chooser<Transducer<S>, T>
     ::create_type_tag(const Element<Transducer<S>, T>& aut,
@@ -143,14 +133,6 @@ namespace vcsn
     /*----------------.
     | FMP Transducers |
     `----------------*/
-
-    template <class S, class T, class M1, class M2>
-    const char*
-    xml_chooser<FMPtype>::choose_start_tag()
-    {
-      return "transducer";
-    }
-
 
     template <class S, class T, class M1, class M2>
     void

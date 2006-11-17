@@ -57,8 +57,9 @@ this program into an XML file.
 As it will be described further, we use an XSD file \cite{vaucanson.www.xsd}
 for the description format of this XML proposition, since it fits our needs.
 This report first presents an XML representation of a classical Boolean
-automaton. Then this example will be fleshed out, so as to deal with transducers
-and more general automata with multiplicity.
+automaton and a classical transducer. Then the format of the proposal will be
+described in details so as to enable the reader to deal with more general
+automata with multiplicity.
 
 The automaton description is structured in two parts.  The
 \xtag{labelType} tag provides some automaton type definitions. This can be a
@@ -84,7 +85,12 @@ program, and that it is not complicated nor more costly than to test
 whether an announced property is indeed fulfilled.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Simple examples with default types}
+\section{Simple examples}
+
+The following examples aim at showing how some simple automata and transducers
+can be defined in XML. The description and details about each node tag will be
+given in the next sections.
+
 \subsection{A Boolean automaton}
 
 As a first example, the automaton of \autoref{B1} is represented in
@@ -113,6 +119,12 @@ over the alphabet $\{a,b\}$ that contain at least one $b$.
   \begin{center}
 \begin{alltt}
 <automaton>
+  <labelType>
+    <monoid type="free" generators="letters">
+       <generator range="implicitAlphabet"/>
+    </monoid>
+    <semiring set="B" operations="classical"/>
+  </labelType>
   <content>
     <states>
        <state name="s0"/>
@@ -169,7 +181,18 @@ represented in \autoref{bindiv3xml}.
 \begin{figure}[ht]
   \begin{center}
 \begin{alltt}
-<transducer>
+<automaton>
+  <labelType>
+    <monoid type="product">
+       <monoid type="free" generators="letters">
+         <generator range="implicitAlphabet"/>
+       </monoid>
+       <monoid type="free" generators="letters">
+         <generator range="implicitAlphabet"/>
+       </monoid>
+    </monoid>
+    <semiring set="B" operations="classical"/>
+  </labelType>
   <content>
     <states>
        <state name="s0"/>
@@ -187,7 +210,7 @@ represented in \autoref{bindiv3xml}.
        <final state="s0"/>
     </transitions>
   </content>
-</transducer>
+</automaton>
 \end{alltt}
 
 \caption{The XML description of T}
@@ -336,8 +359,7 @@ such properties.
 To create a transducer based on a free monoid product, it is necessary
 to declare the two monoids in order to determine the two needed
 alphabets. A suitable example can be found in the
-\autoref{transducertype}. It represents the type of a default
-transducer.
+\autoref{bindiv3}.
 
 The XSD description of this tag is a little complicated. Some elements
 allow the proposition to be extensive and to fully describe any monoid
@@ -472,7 +494,7 @@ a transducer.
 \begin{figure}[ht]
   \begin{center}
 \begin{alltt}
-<transducer>
+<automaton>
   <labelType>
     <monoid generators="digits" type="free">
       <generator value="0"/>
@@ -490,7 +512,7 @@ a transducer.
   <content>
     ...
   </content>
-<transducer>
+</automaton>
 \end{alltt}
 \caption{Right transducer for binary addition}
 \label{ratseries1}
@@ -687,16 +709,16 @@ application can be found in \autoref{session1}.
   \end{center}
 \end{figure}
 
-\subsection{The cascade of default options}
+\subsection{The default value of the \xtag{labelType} tag}
 
 The \xtag{labelType} tag has two children: the \xtag{monoid} tag and the
 \xtag{semiring} tag. None of these tags is mandatory, and both have
-different values according to the root tag. \autoref{automatontype}
-shows the equivalent XML code if one omits the \xtag{labelType} tag when
-declaring an automaton. Similarly, \autoref{transducertype} shows the
-default type for transducers.  The \xattr{operations} attribute is
-set to \textit{classical}, which means that usual laws over
-$\mathbb{B}$ shall be applied.
+a default value. \autoref{automatontype} shows the equivalent XML code if one
+omits the \xtag{labelType} tag when declaring an automaton. In this case, the
+automaton alphabet is composed of all the letters of the alphabet.
+The \xattr{operations} attribute is set to \textit{classical},
+which means that usual laws over $\mathbb{B}$ shall be applied.
+
 
 \begin{figure}[htp]
   \begin{center}
@@ -714,27 +736,6 @@ $\mathbb{B}$ shall be applied.
   \end{center}
 \end{figure}
 
-
-\begin{figure}[htp]
-  \begin{center}
-\begin{alltt}
-<labelType>
-  <monoid type="product">
-     <monoid type="free" generators="letters">
-       <generator range="implicitAlphabet"/>
-     </monoid>
-     <monoid type="free" generators="letters">
-       <generator range="implicitAlphabet"/>
-     </monoid>
-  </monoid>
-  <semiring set="B" operations="classical"/>
-</labelType>
-\end{alltt}
-
-\caption{Default type for a transducer}
-\label{transducertype}
-  \end{center}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -921,10 +922,15 @@ For information about the XSD Schema are available on the
 For the past years we experimented the different proposals in the
 \Vauc platform. It begun with a first one in 2004 \cite{vaucanson.04.techrep}
 and we presented our progress at CIAA'05 \cite{claveirole.05.ciaa}.
-This version 0.3.3 comes as a result of this experiment, with
+This version 0.4 comes as a result of this experiment, with
 simplifications where possible. Thus, the \Vauc platform deals
 with numerous automata types, and it is important to be able to define
 precisely the type of the automaton in addition to its content.
+
+The particularity of this version is the removal of the \xtag<transducer> tag
+and its corresponding default values. The proposal is consequently less
+readable, but it is more explicit and closer to the mathematical model
+of automata.
 
 This proposal comes as a combination of two needs, shorten declaration
 of widely used structure and make possible definitions of complex

@@ -37,8 +37,8 @@ namespace vcsn
   {
 
     template <class Auto>
-    xml_converter<Auto>::xml_converter (bool use_label_node) 
-	: impl_(0), doc_(0), root_(0), use_label_node_(use_label_node) 
+    xml_converter<Auto>::xml_converter (bool use_label_node)
+	: impl_(0), doc_(0), root_(0), use_label_node_(use_label_node)
     {}
 
     template <class Auto>
@@ -61,7 +61,7 @@ namespace vcsn
       using namespace xercesc;
 
       map_t state2str;
-      const char* root_name = chooser_.choose_start_tag();
+      const char* root_name = "automaton";
       const char* xml_namespace = "http://vaucanson.lrde.epita.fr";
       DOMElement* node;
 
@@ -103,10 +103,10 @@ namespace vcsn
 
 
     template <class Auto>
-    xercesc::DOMElement*  
-    xml_converter<Auto>::root_get() 
+    xercesc::DOMElement*
+    xml_converter<Auto>::root_get()
     {
-      return root_; 
+      return root_;
     }
 
     // Create a state in the XML document.
