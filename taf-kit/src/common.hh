@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -72,7 +72,8 @@ struct arguments_t
 	epsilon2 (0),
 # endif /* ! WITH_TWO_ALPHABETS */
 	verbose (false),
-	report_time (false)
+	report_time (false),
+	bench (false)
     {}
 
     std::string	progname;
@@ -86,6 +87,9 @@ struct arguments_t
 # endif /* ! WITH_TWO_ALPHABETS */
     bool	verbose;
     bool	report_time;
+    bool	bench;
+    unsigned	nb_iteration;
+    std::string plot_output_filename;
 };
 
 #endif /* !COMMON_HH */

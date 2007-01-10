@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2006 The Vaucanson Group.
+// Copyright (C) 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,9 +22,11 @@
  * Main file, common to all TAF-Kit binaries.
  */
 
+#include <stdlib.h>
 #include <argp.h>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <stdexcept>
 
 #include "common.hh"
@@ -36,12 +38,12 @@
  * Base info for the program.
  */
 const char* argp_program_version =
-  "VCSN TAF-Kit (" PACKAGE_STRING ")\n"
-  "\n"
-  "Copyright (C) 2006 The Vaucanson Group.\n"
-  "This is free software; see the source for copying conditions.  There is NO\n"
-  "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE,\n"
-  "to the extent permitted by law.";
+"VCSN TAF-Kit (" PACKAGE_STRING ")\n"
+"\n"
+"Copyright (C) 2006 The Vaucanson Group.\n"
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE,\n"
+"to the extent permitted by law.";
 
 const char* argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";
 
@@ -63,6 +65,10 @@ namespace
       "Be more verbose (print boolean results)", 0 },
     { "report-time",	'T', 0, 0,
       "Report time statistics", 0 },
+    { "bench",	'B', "NB_ITERATIONS", 0,
+      "Bench", 0 },
+    { "bench-plot-output", 'O', "OUTPUT_FILENAME", 0,
+      "Bench output filename", 0 },
 
 #ifdef WITH_TWO_ALPHABETS
     { "alphabet1",	'a', "ALPHABET", 0,
@@ -90,9 +96,9 @@ namespace
 
   const struct alphabet
   {
-      char*	name;
-      char*	alphabet;
-      char	epsilon;
+    char*	name;
+    char*	alphabet;
+    char	epsilon;
   } predefined_alphabets[] = { { "ascii", ALPHABET_ASCII, DEFAULT_EPSILON[0] },
 			       { "a-z", ALPHABET_AZ, DEFAULT_EPSILON[0] },
 			       { "a-zA-Z", ALPHABET_AZAZ, DEFAULT_EPSILON[0] },
@@ -145,6 +151,16 @@ namespace
       case 'T':
 	args.report_time = true;
 	break;
+
+      case 'B':
+	args.bench = true;
+	args.nb_iteration = atoi(arg);
+	break;
+
+      case 'O':
+	args.plot_output_filename = arg;
+	break;
+
       case 'v':
 	args.verbose = true;
 	break;
@@ -167,25 +183,57 @@ namespace
 
 } // anonymous namespace
 
+# include <vaucanson/misc/bencher.hh>
+
+using namespace vcsn::misc;
 
 int main (int argc, char* argv[])
 {
   arguments_t	args (argv[0]);
   argp_parse (&argp_setup, argc, argv, 0, 0, &args);
 
-  int status;
-  TIMER_START ();
-  try {
-    status = execute_command (args);
-  }
-  catch (const std::logic_error& err) {
-    warn (argv[0] << ": " << err.what ());
-    status = -1;
-  }
-  TIMER_STOP ();
+  int status = 0;
 
-  if (args.report_time)
-    std::cerr << timer;
+  if (not args.bench)
+  {
+    TIMER_START ();
+    try {
+      status = execute_command (args);
+    }
+    catch (const std::logic_error& err) {
+      warn (argv[0] << ": " << err.what ());
+      status = -1;
+    }
+    TIMER_STOP ();
 
+    if (args.report_time)
+      std::cerr << timer;
+  }
+  else
+  {
+    BENCH_START(args.nb_iteration, GLOBAL_TIMER)
+      {
+	std::cerr << i_ << std::endl;
+	TIMER_START ();
+	try {
+	  status = execute_command (args);
+	}
+	catch (const std::logic_error& err) {
+	  warn (argv[0] << ": " << err.what ());
+	  status = -1;
+	}
+	TIMER_STOP ();
+      }
+    BENCH_STOP();
+    BENCH_PRINT(std::cerr);
+    if (args.plot_output_filename != "")
+    {
+      std::ofstream outfile;
+      outfile.open (args.plot_output_filename.c_str(),
+		    std::ofstream::out | std::ofstream::trunc);
+      BENCH_PLOT(outfile);
+      outfile.close();
+    }
+  }
   return status;
 }

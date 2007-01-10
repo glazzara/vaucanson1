@@ -1,3 +1,23 @@
+2007-01-10  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
+
+	Add benchmarking facilities to TAF-Kit.
+
+	* include/vaucanson/misc/timer.cc,
+	* include/vaucanson/misc/timer.hxx,
+	* include/vaucanson/misc/timer.hh: Add new operations designed
+	  to be used by Bencher.
+
+	* include/vaucanson/misc/bencher.hh,
+	* include/vaucanson/misc/bencher.cc,
+	* include/vaucanson/misc/bencher.hxx: New. The Bencher
+	  class. Use Timer to collect measures on a programm
+	  execution.
+
+	* taf-kit/src/common.hh: .
+	* taf-kit/src/main.cc: .
+
+	* include/Makefile.am: Update accordingly.
+
 2006-11-17  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* data/vaucanson.xsd: Remove the <transducer> tag.

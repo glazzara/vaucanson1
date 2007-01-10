@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -80,6 +80,28 @@ namespace misc
     total.stop ();
   }
 
+  inline
+  void
+  Timer::clear ()
+  {
+    precondition(this->tasks.empty ());
+
+    this->tasksmap.clear ();
+    this->intmap.clear ();
+    this->total.clear ();
+    this->tab_to_disp.clear ();
+    this->task_ordered.clear ();
+  }
+
+  // Fixme
+  inline
+  Timer::TimeVar&
+  Timer::operator[] (std::string s)
+  {
+    Timer::TimeVar* tmp = this->tasksmap[s];
+    Timer::TimeVar* res = new Timer::TimeVar(*tmp);
+    return *res;
+  }
 
 
   /*--------------.
@@ -144,6 +166,46 @@ namespace misc
   {
     Timer::Time res = *this;
     return res -= lhs;
+  }
+
+  inline
+  Timer::Time&
+  Timer::Time::operator/= (const long n)
+  {
+    wall /= n;
+    user /= n;
+    sys  /= n;
+    return *this;
+  }
+
+  inline
+  Timer::Time
+  Timer::Time::operator/ (const long n) const
+  {
+    Timer::Time res = *this;
+    return res /= n;
+  }
+
+  inline
+  Timer::Time
+  Timer::Time::min (const Timer::Time& rhs) const
+  {
+    Timer::Time res = *new Timer::Time ();
+    res.wall = std::min (this->wall, rhs.wall);
+    res.user = std::min (this->user, rhs.user);
+    res.sys = std::min (this->sys, rhs.sys);
+    return res;
+  }
+
+  inline
+  Timer::Time
+  Timer::Time::max (const Timer::Time& rhs) const
+  {
+    Timer::Time res = *new Timer::Time ();
+    res.wall = std::max (this->wall, rhs.wall);
+    res.user = std::max (this->user, rhs.user);
+    res.sys = std::max (this->sys, rhs.sys);
+    return res;
   }
 
   /*--------------.

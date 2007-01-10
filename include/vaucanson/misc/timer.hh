@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 
 # include <stack>
 # include <map>
+# include <list>
 # include <string>
 # include <iosfwd>
 
@@ -44,156 +45,204 @@ namespace misc
   /// Timing nested tasks.
   class Timer
   {
+  public:
+    friend class Bencher;
+
+    class TimeVar;
+    typedef std::map<const std::string, TimeVar*> task_map_type;
+
+    Timer ();
+    Timer (const Timer& rhs);
+    ~Timer ();
+
+    Timer operator= (const Timer& rhs);
+
+    /// Start a sub-timer for a named task.
+    /// \param name a constant string which is the task's name
+    void push (const std::string& name);
+
+    /// Start a sub-timer with an integer which refers to a string.
+    /// \see push (), name ()
+    void push (const int i);
+
+    /// Stop the named task. Take a const string as parameter
+    /// that make sure that what is popped is indeed what is on top.
+    void pop (const std::string& task_name);
+
+    /// \see pop (), pop (const std::string name)
+    void pop (const int i);
+
+    /// Stop the current task's timer (the last task pushed).
+    void pop ();
+
+    /// Write results.
+    /// \param o an ostream.
+    std::ostream& print (std::ostream& o, const bool) const;
+
+    /// Write results when the timer is destroyed.
+    /// \param out an ostream which defaults to cerr.
+    void print_on_destruction (std::ostream& out);
+
+    /// The name function links an int and a constant string.
+    /// \param i     the integer key to register
+    /// \param name  the associated task name
+    void name (int i, const std::string& name);
+
+    /// The start function must be called at the beginning of the program
+    /// to get the total time spend in the whole program.
+    /// \see stop ()
+    void start ();
+
+    /// The stop function must be called at the end of the program.
+    /// \see start ()
+    void stop ();
+
+    /// \brief Import timer.
+    ///
+    /// Import tasks defined in \a rhs. There must be not stacked task.
+    /// Total execution time of \a rhs is ignored.
+    Timer& operator<< (const Timer& rhs);
+
+
+    /// Reset all timers to zero.
+    void clear();
+
+    //FIXME : Buggued
+    TimeVar& operator[] (std::string s);
+
+  public :
+    /// User, system and wall clock time convenient interface.
+    class Time
+    {
+      friend class Bencher;
+      friend class Timer;
+      friend class Timer::TimeVar;
     public:
-      Timer ();
-      Timer (const Timer& rhs);
-      ~Timer ();
+      /// Initially set to 0.
+      Time ();
+      /// Set to the current time.
+      void now ();
 
-      /// Start a sub-timer for a named task.
-      /// \param name a constant string which is the task's name
-      void push (const std::string& name);
+      void clear ();
 
-      /// Start a sub-timer with an integer which refers to a string.
-      /// \see push (), name ()
-      void push (const int i);
+      /// \name Comparison to 0.
+      /// \{
+      /// Whether a field is not null.
+      operator bool () const;
+      /// Whether all fields are null.
+      bool operator ! () const;
+      /// \}
 
-      /// Stop the named task. Take a const string as parameter
-      /// that make sure that what is popped is indeed what is on top.
-      void pop (const std::string& task_name);
+      /// \name Arithmetics.
+      /// \{
+      /// Accumulate \c lhs into \a this.
+      Time& operator += (const Time& lhs);
+      /// Return the sum of \a this and \a lhs
+      Time operator + (const Time& lhs) const;
 
-      /// \see pop (), pop (const std::string name)
-      void pop (const int i);
+      /// Subtract \c lhs from \a this.
+      Time& operator -= (const Time& lhs);
+      /// Return the subtraction of \a this and \a lhs.
+      Time operator - (const Time& lhs) const;
 
-      /// Stop the current task's timer (the last task pushed).
-      void pop ();
+      Time& operator/= (const long n);
+      Time operator/ (const long n) const;
+      /// \}
 
-      /// Write results.
-      /// \param o an ostream.
-      std::ostream& print (std::ostream& o) const;
+      /// Fixme : Document
+      Time min (const Time& rhs) const;
+      Time max (const Time& rhs) const;
 
-      /// Write results when the timer is destroyed.
-      /// \param out an ostream which defaults to cerr.
-      void print_on_destruction (std::ostream& out);
+    private:
+      /// User time.
+      long user;
+      /// System time.
+      long sys;
+      /// Wall clock time.
+      long wall;
+    };
 
-      /// The name function links an int and a constant string.
-      /// \param i     the integer key to register
-      /// \param name  the associated task name
-      void name (int i, const std::string& name);
+    /// An actual sub-timer.
+    class TimeVar
+    {
+    public:
+      friend class Timer;
+      friend class Bencher;
 
-      /// The start function must be called at the beginning of the program
-      /// to get the total time spend in the whole program.
-      /// \see stop ()
-      void start ();
-
-      /// The stop function must be called at the end of the program.
-      /// \see start ()
-      void stop ();
-
-      /// \brief Import timer.
+      TimeVar ();
       ///
-      /// Import tasks defined in \a rhs. There must be not stacked task.
-      /// Total execution time of \a rhs is ignored.
-      Timer& operator<< (const Timer& rhs);
+      void start ();
+      void stop ();
+      void clear ();
 
-    private :
-      class TimeVar;
-      /// User, system and wall clock time convenient interface.
-      class Time
-      {
-	  friend class Timer;
-	  friend class Timer::TimeVar;
-	public:
-	  /// Initially set to 0.
-	  Time ();
-	  /// Set to the current time.
-	  void now ();
+      /// \name Comparison to 0.
+      /// \{
+      /// Whether \a elapsed is not null.
+      operator bool () const;
+      /// Whether \a elapsed is null.
+      bool operator ! () const;
+      /// \}
 
-	  /// \name Comparison to 0.
-	  /// \{
-  	  /// Whether a field is not null.
- 	  operator bool () const;
-  	  /// Whether all fields are null.
- 	  bool operator ! () const;
-	  /// \}
+      TimeVar operator+ (const TimeVar& rhs) const;
+      TimeVar operator+= (const TimeVar& rhs);
+      TimeVar operator/ (const unsigned n) const;
+      TimeVar operator/= (const unsigned n);
 
-	  /// \name Arithmetics.
-	  /// \{
-	  /// Accumulate \c lhs into \a this.
-	  Time& operator += (const Time& lhs);
-	  /// Return the sum of \a this and \a lhs
-	  Time operator + (const Time& lhs) const;
+      /// Fixme : Document
+      TimeVar min (const TimeVar& rhs) const;
+      TimeVar max (const TimeVar& rhs) const;
 
-	  /// Subtract \c lhs from \a this.
-	  Time& operator -= (const Time& lhs);
-	  /// Return the subtraction of \a this and \a lhs.
-	  Time operator - (const Time& lhs) const;
-	  /// \}
+    private:
+      Time begin;
+      Time elapsed;
+      Time cumulated;
+      Time saved_accumulated_times;
 
-	private:
-	  /// User time.
-	  long user;
-	  /// System time.
-	  long sys;
-	  /// Wall clock time.
-	  long wall;
-      };
+      Time first;
+      Time last;
+      bool initial;
+    };
 
-      /// An actual sub-timer.
-      class TimeVar
-      {
-	public:
-	  TimeVar ();
-	  ///
-	  void start ();
-	  void stop ();
+    /// Format timing results.
+    std::ostream& print_time (long t, long total, std::ostream& o) const;
+    /// Print statistics on a Time.
+    /// \param s		title
+    /// \param t		Time to report
+    /// \param tot		total Time \a t is a part of
+    /// \param o		output stream
+    /// \param tree_mode	Activate tree mode display
+    std::ostream& print_time (const std::string& s,
+			      const Time& t, const Time& tot,
+			      std::ostream& o,
+			      const bool tree_mode) const;
 
-	  /// \name Comparison to 0.
-	  /// \{
-  	  /// Whether \a elapsed is not null.
- 	  operator bool () const;
-  	  /// Whether \a elapsed is null.
- 	  bool operator ! () const;
-	  /// \}
 
-	  Time begin;
-	  Time elapsed;
-	  Time first;
-	  Time last;
-	  bool initial;
-      };
+  private:
+    /// Store differents tasks you benched.
+    task_map_type tasksmap;
 
-      /// Format timing results.
-      std::ostream& print_time (long t, long total, std::ostream& o) const;
-      /// Print statistics on a Time.
-      /// \param s     title
-      /// \param t     Time to report
-      /// \param tot   total Time \a t is a part of
-      /// \param o     output stream
-      std::ostream& print_time (const std::string& s,
-				const Time& t, const Time& tot,
-				std::ostream& o) const;
+    /// Storage for tree-like output.
+    std::map<std::string, std::string> tab_to_disp;
 
-      typedef std::map<const std::string, TimeVar*> task_map_type;
+    // Store tasks in order of creation
+    std::list<std::string> task_ordered;
 
-      /// Store differents tasks you benched.
-      task_map_type tasksmap;
+    /// Currently opened tasks, in order.
+    std::stack<TimeVar*> tasks;
 
-      /// Currently opened tasks, in order.
-      std::stack<TimeVar*> tasks;
+    /// Map for int and string couples (to call push (int)).
+    std::map<int, std::string> intmap;
 
-      /// Map for int and string couples (to call push (int)).
-      std::map<int, std::string> intmap;
+    /// Total time spent in the program.
+    /// \see start (), stop ()
+    TimeVar total;
 
-      /// Total time spent in the program.
-      /// \see start (), stop ()
-      TimeVar total;
+    /// Stream onto which the results are dumped upon destruction.
+    std::ostream* dump_stream;
 
-      /// Stream onto which the results are dumped upon destruction.
-      std::ostream* dump_stream;
-
-      /// Number of clocks ticks per second, set according to the system
-      /// timing function used.
-      const long clocks_per_sec;
+    /// Number of clocks ticks per second, set according to the system
+    /// timing function used.
+    const long clocks_per_sec;
   };
 
   /// Dump \a t on \a o.
@@ -202,16 +251,16 @@ namespace misc
   /// A timer which starts at its construction, and stops at its destruction.
   class ScopedTimer
   {
-    public:
-      /// Start a sub-timer named \a key, register in \a timer.
-      ScopedTimer (Timer& timer, const std::string& key);
-      /// Stop this timer.
-      ~ScopedTimer ();
-    private:
-      /// The host timer.
-      Timer& timer_;
-      /// The name of this task.
-      const std::string key_;
+  public:
+    /// Start a sub-timer named \a key, register in \a timer.
+    ScopedTimer (Timer& timer, const std::string& key);
+    /// Stop this timer.
+    ~ScopedTimer ();
+  private:
+    /// The host timer.
+    Timer& timer_;
+    /// The name of this task.
+    const std::string key_;
   };
 
 } // namespace misc

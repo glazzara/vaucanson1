@@ -63,6 +63,8 @@ vaucanson/misc/support.hxx			\
 vaucanson/misc/timer.hh				\
 vaucanson/misc/timer.hxx			\
 vaucanson/misc/timer.cc				\
+vaucanson/misc/bencher.hh				\
+vaucanson/misc/bencher.hxx			\
 vaucanson/misc/unique.hh			\
 vaucanson/misc/unique.hxx			\
 vaucanson/misc/usual_escaped_characters.hh	\
