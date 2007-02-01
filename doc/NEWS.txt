@@ -27,6 +27,11 @@ Vaucanson 1.1
     they replace output_projection and input_projection. These algorithms work
     for both FMP transducers and RW transducers.
 
+- TAF-Kit
+
+  + The option --bench relies on iterations of --report-time to
+    benchmark the algorithms.
+
 Vaucanson 1.0, July 28th, 2006
 ==============================
 

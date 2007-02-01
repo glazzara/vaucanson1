@@ -1,3 +1,10 @@
+2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update NEWS.
+	* Makefile.am (README, NEWS): Add dependencies so that they are
+	really updated.
+	* doc/NEWS.txt: Update.
+
 2007-01-10  Robert Bigaignon  <robert.bigaignon@lrde.epita.fr>
 
 	Add benchmarking facilities to TAF-Kit.
