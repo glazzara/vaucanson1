@@ -96,9 +96,10 @@ namespace misc
   void
   Timer::TimeVar::stop ()
   {
-    last.now ();
-    elapsed += last - begin;
-    cumulated = saved_accumulated_times + (last - first);
+    Time now;
+    now.now ();
+    elapsed += now - begin;
+    cumulated = saved_accumulated_times + elapsed;
   }
 
   INLINE_TIMER_CC
@@ -109,7 +110,6 @@ namespace misc
     elapsed.clear ();
     cumulated.clear ();
     first.clear ();
-    last.clear ();
   }
 
   INLINE_TIMER_CC
@@ -121,7 +121,6 @@ namespace misc
     res.elapsed += rhs.elapsed;
     res.cumulated += rhs.cumulated;
     res.first += rhs.first;
-    res.last += rhs.last;
     res.initial = false;
 
     return res;
@@ -130,12 +129,11 @@ namespace misc
   INLINE_TIMER_CC
   Timer::TimeVar Timer::TimeVar::operator+= (const TimeVar& rhs)
   {
-    this->begin += rhs.begin;
-    this->elapsed += rhs.elapsed;
-    this->cumulated += rhs.cumulated;
-    this->first += rhs.first;
-    this->last += rhs.last;
-    this->initial = false;
+    begin += rhs.begin;
+    elapsed += rhs.elapsed;
+    cumulated += rhs.cumulated;
+    first += rhs.first;
+    initial = false;
 
     return *this;
   }
@@ -149,7 +147,6 @@ namespace misc
     res.elapsed /= n;
     res.cumulated /= n;
     res.first /= n;
-    res.last /= n;
     res.initial = false;
 
     return res;
@@ -158,12 +155,11 @@ namespace misc
   INLINE_TIMER_CC
   Timer::TimeVar Timer::TimeVar::operator/= (const unsigned n)
   {
-    this->begin /= n;
-    this->elapsed /= n;
-    this->cumulated /= n;;
-    this->first /= n;
-    this->last /= n;
-    this->initial = false;
+    begin /= n;
+    elapsed /= n;
+    cumulated /= n;;
+    first /= n;
+    initial = false;
 
     return *this;
   }
@@ -173,12 +169,11 @@ namespace misc
   {
     Timer::TimeVar res = *(new Timer::TimeVar());
 
-    res.begin = this->begin.min (rhs.begin);
-    res.first = this->first.min (rhs.first);
-    res.last = this->last.min (rhs.last);
+    res.begin = begin.min (rhs.begin);
+    res.first = first.min (rhs.first);
 
-    res.elapsed = this->elapsed.min (rhs.elapsed);
-    res.cumulated = this->cumulated.min (rhs.cumulated);
+    res.elapsed = elapsed.min (rhs.elapsed);
+    res.cumulated = cumulated.min (rhs.cumulated);
     res.initial = false;
 
     return res;
@@ -189,12 +184,11 @@ namespace misc
   {
     Timer::TimeVar res = *(new Timer::TimeVar());
 
-    res.begin = this->begin.max (rhs.begin);
-    res.first = this->first.max (rhs.first);
-    res.last = this->last.max (rhs.last);
+    res.begin = begin.max (rhs.begin);
+    res.first = first.max (rhs.first);
 
-    res.elapsed = this->elapsed.max (rhs.elapsed);
-    res.cumulated = this->cumulated.max (rhs.cumulated);
+    res.elapsed = elapsed.max (rhs.elapsed);
+    res.cumulated = cumulated.max (rhs.cumulated);
     res.initial = false;
 
     return res;
@@ -247,7 +241,7 @@ namespace misc
   INLINE_TIMER_CC
   Timer Timer::operator= (const Timer& rhs)
   {
-    this->intmap = rhs.intmap;
+    intmap = rhs.intmap;
     total = rhs.total;
     dump_stream = rhs.dump_stream;
     //clocks_per_sec = rhs.clocks_per_sec;
@@ -319,8 +313,8 @@ namespace misc
 		     const bool tree_mode = false) const
   {
     std::string s2 = s;
-    if (tree_mode && this->tab_to_disp.find(s) != this->tab_to_disp.end())
-      s2 = this->tab_to_disp.find(s)->second + s;
+    if (tree_mode && tab_to_disp.find(s) != tab_to_disp.end())
+      s2 = tab_to_disp.find(s)->second + s;
 
     if (tree_mode)
       o << " " << s2 << std::setw (50 - s2.length ()) << ": ";
@@ -399,7 +393,7 @@ namespace misc
     if (tasksmap.find (task_name) == tasksmap.end ())
     {
       // Adjustment for Display
-      this->task_ordered.push_back(task_name);
+      task_ordered.push_back(task_name);
       for (unsigned i = 1; i <= tasks.size (); ++i)
 	if (i == tasks.size ())
 	  tabs += "|___";
@@ -409,9 +403,8 @@ namespace misc
       tasksmap[task_name] = new TimeVar;
     }
 
-    if (this->tab_to_disp.find (task_name) ==
-	this->tab_to_disp.end ())
-      this->tab_to_disp[task_name] = tabs;
+    if (tab_to_disp.find (task_name) == tab_to_disp.end ())
+      tab_to_disp[task_name] = tabs;
     TimeVar* current = tasksmap[task_name]; // FIXME : Bug is task is
 					    // already in taskmap
 					    // (first is not

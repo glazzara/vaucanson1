@@ -207,7 +207,6 @@ namespace misc
       /// The date of the first call to start().
       Time first;
 
-      Time last;
       /// Whether this is the first time we use this time var.
       ///
       /// This is used to detect the first invocation of start()
