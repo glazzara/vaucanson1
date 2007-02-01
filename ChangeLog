@@ -1,5 +1,11 @@
 2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
 
+	Factoring.
+	* src/tests/include/tests/check/tester.hh (TEST_ASSERT): Use
+	TEST_XASSERT.
+
+2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
+
 	Update NEWS.
 	* Makefile.am (README, NEWS): Add dependencies so that they are
 	really updated.

@@ -22,6 +22,8 @@
 # include <iostream>
 # include <string>
 
+// If you want to use this macro, you need to include "tools/xml_dump.hh".
+// We don't by default, because there are too many dependencies.
 # define SAVE_AUTOMATON_XML_SIMPLE(Name, Auto)			\
   do {								\
     std::ostringstream s;					\
@@ -138,22 +140,29 @@ inline std::string printable(T t)
 #define TEST_GROUP(Label) \
   std::cerr << "GROUP *** " << Label << " ***" << std::endl;
 
-#define TEST_ASSERT(Code, Label) \
-  std::cerr << ((Code) ? "PASS" : "FAIL") << " * " << Label << std::endl; assert(Code);
-#define TEST_XASSERT(Code, Label) \
-  std::cerr << ((Code) ? "PASS" : "XFAIL") << " * " << Label << std::endl;
 
-#define TEST_FAIL_SAVE(TestName, Iteration, Data)			\
-  {									\
-    std::ostringstream s;						\
-    s << "/tmp/" << TestName << "_" << Iteration << ".txt";		\
-    std::ofstream f(s.str().c_str());					\
-    f << Data;								\
-    f.close();								\
-    std::cerr << "FAIL: Test failed at iteration "			\
-	      << Iteration << std::endl;				\
+#define TEST_XASSERT(Code, Label)			\
+    std::cerr << ((Code) ? "PASS" : "FAIL") << " * "	\
+              << Label << std::endl
+
+#define TEST_ASSERT(Code, Label)		\
+  do {						\
+    TEST_XASSERT(Code, Label);			\
+    assert(Code);				\
+  } while (0)
+
+
+#define TEST_FAIL_SAVE(TestName, Iteration, Data)		\
+  {								\
+    std::ostringstream s;					\
+    s << "/tmp/" << TestName << "_" << Iteration << ".txt";	\
+    std::ofstream f(s.str().c_str());				\
+    f << Data;							\
+    f.close();							\
+    std::cerr << "FAIL: Test failed at iteration "		\
+	      << Iteration << std::endl;			\
     std::cerr << "FAIL: Relevant information saved in "		\
-	      << s.str() << std::endl;					\
+	      << s.str() << std::endl;				\
   }
 
 #define TEST_RETURN(aTester)			\
