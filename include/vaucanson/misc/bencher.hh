@@ -26,17 +26,10 @@
 
 # include <vaucanson/misc/timer.hh>
 
-# if VAUCANSON
-#  define NAMESPACE_VCSN_BEGIN namespace vcsn {
-#  define NAMESPACE_VCSN_END   } // namespace vcsn
-# else
-#  define NAMESPACE_VCSN_BEGIN
-#  define NAMESPACE_VCSN_END
-# endif
-
 NAMESPACE_VCSN_BEGIN
 
-namespace misc {
+namespace misc
+{
   class Bencher
   {
   public:
