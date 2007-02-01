@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -40,11 +40,8 @@ namespace vcsn {
     std::list<hstate_t> to_be_removed;
     for (typename auto_t::state_iterator i = a.states().begin();
 	 i != a.states().end(); ++i)
-    {
-      if (std::find(selected.begin(), selected.end(), *i)
-	  == selected.end())
+      if (std::find(selected.begin(), selected.end(), *i) == selected.end())
 	to_be_removed.push_back(*i);
-    }
 
     for_all_const_(std::list<hstate_t>, i, to_be_removed)
       if (!check_states

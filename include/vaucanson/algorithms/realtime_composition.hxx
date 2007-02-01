@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -161,9 +161,7 @@ namespace vcsn {
     typedef Element<S, T> auto_t;
     AUTOMATON_TYPES(auto_t);
     for_all_states (s, ret)
-    {
       ret.del_state (*s);
-    }
     do_realtime_composition(lhs.structure(), lhs, rhs, ret);
   }
 

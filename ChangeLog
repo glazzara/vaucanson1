@@ -1,5 +1,12 @@
 2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
 
+	Formatting changes.
+	* include/vaucanson/algorithms/sub_automaton.hxx,
+	* include/vaucanson/algorithms/realtime_composition.hxx:
+	Useless braces.
+
+2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix incorrect iterator usage.
 	* include/vaucanson/algorithms/standard.hxx: Don't increment an
 	iterator on a state we just deleted.
