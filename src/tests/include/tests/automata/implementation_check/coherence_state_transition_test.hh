@@ -24,6 +24,8 @@
 # include <vaucanson/automata/concept/tags.hh>
 # include <tests/check/tester.hh>
 
+# include <vaucanson/tools/xml_dump.hh>
+
 template <class Auto>
 unsigned coherence_state_transition_test(tests::Tester& tg)
 {
@@ -37,22 +39,24 @@ unsigned coherence_state_transition_test(tests::Tester& tg)
   typedef GenRandomAutomata<Auto> gen_auto_t;
   gen_auto_t gen;
   typedef Auto automaton_t;
-  automaton_t automaton(gen.generate_dfa(10).structure());
+  automaton_t a(gen.generate_dfa(10).structure());
 
-  hstate_t s1 = automaton.add_state();
-  hstate_t s2 = automaton.add_state();
+  SAVE_AUTOMATON_XML_SIMPLE("coherence_state_transition_test", a);
 
-  htransition_t h1 = automaton.add_letter_transition(s1, s2,
-						     automaton.structure().series().
-						     monoid().alphabet().choose());
+  hstate_t s1 = a.add_state();
+  hstate_t s2 = a.add_state();
 
-  EQTEST(t, "Check number of state.", automaton.states().size(), 2);
-  EQTEST(t, "Check number of transition.", automaton.transitions().size(), 1);
+  htransition_t h1 = a.add_letter_transition(s1, s2,
+					     a.structure().series().
+					     monoid().alphabet().choose());
 
-  automaton.del_state(s1);
-  automaton.del_state(s2);
+  EQTEST(t, "Check number of state.", a.states().size(), 2);
+  EQTEST(t, "Check number of transition.", a.transitions().size(), 1);
 
-  TEST(t, "Check for zombies transition.", automaton.transitions().size() == 0);
+  a.del_state(s1);
+  a.del_state(s2);
+
+  TEST(t, "Check for zombies transition.", a.transitions().size() == 0);
 
   return t.all_passed();
 }
