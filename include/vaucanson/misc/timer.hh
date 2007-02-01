@@ -193,13 +193,27 @@ namespace misc
       TimeVar max (const TimeVar& rhs) const;
 
     private:
+      /// The date of the latest start() invocation.
       Time begin;
+
+      /// The time spend in the latest start()-stop() interval.
       Time elapsed;
+
+      /// The accumulated elapsed times.
       Time cumulated;
+
       Time saved_accumulated_times;
 
+      /// The date of the first call to start().
       Time first;
+
       Time last;
+      /// Whether this is the first time we use this time var.
+      ///
+      /// This is used to detect the first invocation of start()
+      /// that is expected to initialize first.
+      ///
+      /// \todo Maybe it would be smarter to rely on first being null.
       bool initial;
     };
 
