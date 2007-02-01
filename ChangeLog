@@ -1,5 +1,11 @@
 2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
 
+	Update the checking machinery.
+	* build-aux/check.mk: Plenty of new nice bells and whistles (colors,
+	RST output, HTML conversion, factoring, banners).
+
+2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
+
 	Simplify Timer.
 	* include/vaucanson/misc/timer.hh,
 	* include/vaucanson/misc/timer.cc (Timer::TimeVar::last): Remove.
