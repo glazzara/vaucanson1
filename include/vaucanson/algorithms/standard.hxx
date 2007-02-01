@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -75,46 +75,45 @@ namespace vcsn {
 				 const rhs_t& rhs)
   {
     TIMER_SCOPED("union_of_standard");
-    typedef typename std::set<htransition_t>		edelta_ret_t;
-    edelta_ret_t	dst;
-    hstate_t		new_i, old_i;
+    typedef typename std::set<htransition_t> edelta_ret_t;
+    edelta_ret_t dst;
 
-    new_i = *lhs.initial().begin();
+    // The resulting initial state is that of lhs.
+    hstate_t new_i = *lhs.initial().begin();
     sum_here(lhs, rhs);
+
+    // Adjust new_i, and handle old_i, the state that was the initial
+    // state of rhs.
     typename lhs_t::initial_support_t initial = lhs.initial();
-    for (typename lhs_t::initial_iterator i = initial.begin();
-	 i != initial.end();
-	 ++i)
-      // FIXME: is there something like an iterator over the support
-      // of initial ?
-      if (*i != new_i)
-      {
-	old_i = *i;
-	lhs.set_final(new_i,
-		      lhs.get_final(new_i) +
-		      lhs.get_final(old_i));
 
-	dst.clear();
-	lhs.deltac(dst, old_i, delta_kind::transitions());
-	for_all_const_ (edelta_ret_t, d, dst)
-	{
-	  lhs.add_transition(new_i,
-			     lhs.dst_of(*d),
-			     lhs.label_of(*d));
-	  lhs.del_transition(*d);
-	}
+    // There are two initial states, old_i is the other.
+    assertion (initial.size() == 2);
+    typename lhs_t::initial_iterator i = initial.begin();
+    hstate_t old_i = *i != new_i ? *i : *++i;
 
-	dst.clear();
-	lhs.rdeltac(dst, old_i, delta_kind::transitions());
-	for_all_const_ (edelta_ret_t, d, dst)
-	{
-	  lhs.add_transition(lhs.src_of(*d),
-			     new_i,
-			     lhs.label_of(*d));
-	  lhs.del_transition(*d);
-	}
-      lhs.del_state(*i);
-      }
+    lhs.set_final(new_i,
+		  lhs.get_final(new_i) + lhs.get_final(old_i));
+
+    dst.clear();
+    lhs.deltac(dst, old_i, delta_kind::transitions());
+    for_all_const_ (edelta_ret_t, d, dst)
+    {
+      lhs.add_transition(new_i,
+			 lhs.dst_of(*d),
+			 lhs.label_of(*d));
+      lhs.del_transition(*d);
+    }
+
+    dst.clear();
+    lhs.rdeltac(dst, old_i, delta_kind::transitions());
+    for_all_const_ (edelta_ret_t, d, dst)
+    {
+      lhs.add_transition(lhs.src_of(*d),
+			 new_i,
+			 lhs.label_of(*d));
+      lhs.del_transition(*d);
+    }
+    lhs.del_state(old_i);
   }
 
   template<typename A, typename T, typename U>
