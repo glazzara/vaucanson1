@@ -274,24 +274,15 @@ namespace vcsn {
 	 ++f)
     {
       if (*f != new_i)
+      {
+	series_set_elt_t f_mult = a.get_final(*f) * out_mult;
+	a.set_final(*f, f_mult);
 	for (typename edelta_ret_t::iterator d = dst.begin();
 	     d != dst.end();
 	     ++d)
-	  // FIXME: it is wanted that we can create two similar transitions.
-	  // FIXME: is it a good thing ?
-	  a.add_transition(*f, a.dst_of(*d), a.label_of(*d));
+	  a.add_series_transition(*f, a.dst_of(*d), f_mult * a.label_of(*d));
+      }
     }
-
-    for (typename edelta_ret_t::iterator d = dst.begin();
-	 d != dst.end();
-	 ++d)
-    {
-      series_set_elt_t st = out_mult * a.series_of(*d);
-      hstate_t to = a.dst_of(*d);
-      a.del_transition(*d);
-      a.add_series_transition(new_i, to, st);
-    }
-
     a.set_final(new_i, out_mult);
   }
 

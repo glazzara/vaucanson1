@@ -1,5 +1,11 @@
 2007-02-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Correct star_of_standard.
+	* include/vaucanson/algorithms/standard.hxx: Set weight on transitions
+	added between final states and the initial one.
+
+2007-02-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Reoganize and correct concat_of_standard.
 	* include/vaucanson/algorithms/standard.hxx: Do it. Set correctly weigth
 	of final transitions of the resulting automaton.
