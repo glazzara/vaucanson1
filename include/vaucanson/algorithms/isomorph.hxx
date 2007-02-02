@@ -39,19 +39,39 @@ namespace vcsn
 
   class Trie
   {
-    public:
-      Trie* insert(std::vector<int>&);
+  public:
+    Trie();
+    /// Needed to avoid the copy of singular iterator when L is not set.
+    Trie(const Trie& t);
 
-    public:
-      std::list<int> A, B;
+    Trie* insert(std::vector<int>&);
 
-      // Node in list C pointing to this node
-      std::list<Trie*>::iterator L;
+  public:
+    std::list<int> A, B;
 
-    private:
-      Trie* insert_suffix(std::vector<int>&, unsigned int);
-      std::map<int, Trie> children;
+    // Node in list C pointing to this node
+    std::list<Trie*>::iterator L;
+
+  private:
+    /// Whether Trie::L was set.
+    bool L_is_valid;
+    Trie* insert_suffix(std::vector<int>&, unsigned int);
+    std::map<int, Trie> children;
   };
+
+  Trie::Trie ()
+    : A(), B(), L(), L_is_valid(false), children()
+  {
+  }
+
+  Trie::Trie (const Trie& t)
+    : A(t.A), B(t.B),
+      L(), L_is_valid(t.L_is_valid), children(t.children)
+  {
+    if (L_is_valid)
+      L = t.L;
+  }
+
 
   // Find node associated to the insertion of a vector of integers.
   inline Trie* Trie::insert(std::vector<int>& S)
@@ -90,23 +110,10 @@ namespace vcsn
 
     std::list<int>::iterator it_int, it_int_B, it_int_aux;
 
-    // Vector indexed by states that points to the corresponding
-    // node of the list of states of each class of states stored in
-    // the Tries (for automata A & B).
-    // NB: Calling the vector constructor results in several copies
-    // of the default constructed object.  Here, the object is an
-    // iterator, which default ctor produces a so called singular
-    // iterator, which is write-only.  In particular, copying to
-    // fill the vector is prohibited.
-    std::vector<std::list<int>::iterator> T_L_A, T_L_B;
-    T_L_A.reserve(a.states().size());
-    T_L_B.reserve(b.states().size());
-
 
     // Tries of classes of normal, initial and final states.
     Trie T_Q_IT, T_I, T_T;
 
-    std::list<Trie*> C;
     // List of fixed states emerged from classes stored in C.
     std::list<int> U;
     // class_state_A[i] = class (node of a Trie) of state i for automaton A
@@ -268,6 +275,20 @@ namespace vcsn
 	}
       }
     }
+
+
+    // Vector indexed by states that points to the corresponding node
+    // of the list of states of each class of states stored in the
+    // Tries (for automata A & B).
+    //
+    // We have to build the vector using a valid iterator (i.e., not a
+    // singular one).  We use a dummy int list to this end.
+    std::list<int> dummy;
+    std::vector<std::list<int>::iterator>
+      T_L_A (a.states().size(), dummy.end()),
+      T_L_B (b.states().size(), dummy.end());
+
+    std::list<Trie*> C;
 
     // Constructs Tries of classes of states with the same sequence of
     // ingoing and outgoing transitions in lex. order (for automaton A)
@@ -494,7 +515,6 @@ namespace vcsn
 
 		// Removes class T_aux from C
 		C.erase(T_aux->L);
-
 	      }
 	    }
       }
