@@ -76,7 +76,6 @@ namespace vcsn {
   {
     TIMER_SCOPED("union_of_standard");
     typedef typename std::set<htransition_t> edelta_ret_t;
-    edelta_ret_t dst;
 
     // The resulting initial state is that of lhs.
     hstate_t new_i = *lhs.initial().begin();
@@ -94,22 +93,13 @@ namespace vcsn {
     lhs.set_final(new_i,
 		  lhs.get_final(new_i) + lhs.get_final(old_i));
 
-    dst.clear();
+    // Add output transitions of old_i to new_i.
+    edelta_ret_t dst;
     lhs.deltac(dst, old_i, delta_kind::transitions());
     for_all_const_ (edelta_ret_t, d, dst)
     {
       lhs.add_transition(new_i,
 			 lhs.dst_of(*d),
-			 lhs.label_of(*d));
-      lhs.del_transition(*d);
-    }
-
-    dst.clear();
-    lhs.rdeltac(dst, old_i, delta_kind::transitions());
-    for_all_const_ (edelta_ret_t, d, dst)
-    {
-      lhs.add_transition(lhs.src_of(*d),
-			 new_i,
 			 lhs.label_of(*d));
       lhs.del_transition(*d);
     }
