@@ -1,3 +1,10 @@
+2007-02-02  Akim Demaille  <akim@lrde.epita.fr>
+
+	Cleansing.
+	* include/vaucanson/algorithms/isomorph.hh,
+	* include/vaucanson/algorithms/isomorph.hxx: Remove useless parens.
+	Shorten scopes
+
 2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
 
 	Duplicate macro definition.

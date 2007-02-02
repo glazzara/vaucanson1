@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -30,7 +30,8 @@
 # include <list>
 # include <utility>
 
-namespace vcsn {
+namespace vcsn
+{
 
   /*--------------------------------------.
   | Helper for are_isomorphic algorithm.  |
@@ -52,7 +53,7 @@ namespace vcsn {
       std::map<int, Trie> children;
   };
 
-  // Finds node associated to the insertion of a vector of integers
+  // Find node associated to the insertion of a vector of integers.
   inline Trie* Trie::insert(std::vector<int>& S)
   {
     return insert_suffix(S, 0);
@@ -81,14 +82,12 @@ namespace vcsn {
     AUTOMATON_TYPES(automaton_t);
 
     // We can start with good suppositions.
-    if ((a.states().size() != b.states().size())
-	|| (a.transitions().size() != b.transitions().size())
-	|| (a.initial().size() != b.initial().size())
-	|| (a.final().size() != b.final().size()))
+    if (a.states().size() != b.states().size()
+	|| a.transitions().size() != b.transitions().size()
+	|| a.initial().size() != b.initial().size()
+	|| a.final().size() != b.final().size())
       return false;
 
-    int i, j , k, l;
-    bool iso;
     std::list<int>::iterator it_int, it_int_B, it_int_aux;
 
     // Vector indexed by states that points to the corresponding
@@ -101,11 +100,10 @@ namespace vcsn {
 
 
     // Tries of classes of normal, initial and final states.
-    Trie *T_Q_IT, *T_I, *T_T, *T_aux;
-
-    T_Q_IT = new Trie();
-    T_I = new Trie();
-    T_T = new Trie();
+    Trie *T_Q_IT = new Trie();
+    Trie *T_I = new Trie();
+    Trie *T_T = new Trie();
+    Trie *T_aux;
 
     std::list<Trie*> C;
     // List of fixed states emerged from classes stored in C.
@@ -125,7 +123,7 @@ namespace vcsn {
     Skeleton<A, T> Sb(b);
 
     // The automata are isomorphic unless one proves the contrary
-    iso = true;
+    bool iso = true;
 
     // Constructs lists of deterministic ingoing and outgoing transitions
     // for each state (delta_det_in[i] = list of deterministic ingoing
@@ -137,18 +135,18 @@ namespace vcsn {
     std::vector< std::list<int> > delta_det_out_B(b.states().size());
 
     // Automaton A
-    for (i = 0; i < static_cast<int>(a.states().size()); i++)
+    for (int i = 0; i < static_cast<int>(a.states().size()); i++)
     {
-      if ((Sa.delta_in[i]).size() > 0)
+      if (Sa.delta_in[i].size() > 0)
       {
 	it_int = Sa.delta_in[i].begin();
 	// Number of transitions with the same label
-	j = 1;
+	int j = 1;
 	for (it_int++; it_int != Sa.delta_in[i].end(); it_int++)
 	{
 	  // It seems there is no iterator arithmetics in C++:
 	  // *(it_int - 1) doesn't compile.
-	  k = *(--it_int);
+	  int k = *(--it_int);
 	  it_int++;
 	  // New label?
 	  if (Sa.transitions_labels[*it_int] != Sa.transitions_labels[k])
@@ -170,16 +168,16 @@ namespace vcsn {
 	  it_int++;
 	}
       }
-      if ((Sa.delta_out[i]).size() > 0)
+      if (Sa.delta_out[i].size() > 0)
       {
 	it_int = Sa.delta_out[i].begin();
 	// Number of transitions with the same label
-	j = 1;
+	int j = 1;
 	for (it_int++; it_int != Sa.delta_out[i].end(); it_int++)
 	{
 	  // It seems there is no iterator arithmetics in C++:
 	  // *(it_int - 1) doesn't compile.
-	  k = *(--it_int);
+	  int k = *(--it_int);
 	  it_int++;
 	  // New label?
 	  if (Sa.transitions_labels[*it_int] != Sa.transitions_labels[k])
@@ -204,18 +202,18 @@ namespace vcsn {
     }
 
     // Automaton B
-    for (i = 0; i < static_cast<int>(a.states().size()); i++)
+    for (int i = 0; i < static_cast<int>(a.states().size()); i++)
     {
-      if ((Sb.delta_in[i]).size() > 0)
+      if (Sb.delta_in[i].size() > 0)
       {
 	it_int = Sb.delta_in[i].begin();
 	// Number of transitions with the same label
-	j = 1;
+	int j = 1;
 	for (it_int++; it_int != Sb.delta_in[i].end(); it_int++)
 	{
 	  // It seems there is no iterator arithmetics in C++:
 	  // *(it_int - 1) doesn't compile.
-	  k = *(--it_int);
+	  int k = *(--it_int);
 	  it_int++;
 	  // New label?
 	  if (Sb.transitions_labels[*it_int] != Sb.transitions_labels[k])
@@ -237,16 +235,16 @@ namespace vcsn {
 	  ++it_int;
 	}
       }
-      if ((Sb.delta_out[i]).size() > 0)
+      if (Sb.delta_out[i].size() > 0)
       {
 	it_int = Sb.delta_out[i].begin();
 	// Number of transitions with the same label
-	j = 1;
+	int j = 1;
 	for (it_int++; it_int != Sb.delta_out[i].end(); it_int++)
 	{
 	  // It seems there is no iterator arithmetics in C++:
 	  // *(it_int - 1) doesn't compile.
-	  k = *(--it_int);
+	  int k = *(--it_int);
 	  it_int++;
 	  // New label?
 	  if (Sb.transitions_labels[*it_int] != Sb.transitions_labels[k])
@@ -272,13 +270,13 @@ namespace vcsn {
 
     // Constructs Tries of classes of states with the same sequence of
     // ingoing and outgoing transitions in lex. order (for automaton A)
-    for (i = 0; i < static_cast<int>(a.states().size()); i++)
+    for (int i = 0; i < static_cast<int>(a.states().size()); i++)
     {
       // Vector all_transitions_lex contains the sequence of labels of
       // ingoing and outgoing transitions of state i in lex. order,
       // separated by a mark (-1)
-      std::vector<int> all_transitions_lex((Sa.delta_in[i]).size() +
-					   (Sa.delta_out[i]).size() + 1);
+      std::vector<int> all_transitions_lex(Sa.delta_in[i].size() +
+					   Sa.delta_out[i].size() + 1);
 
       // First stores the sequence of ingoing transitions
       for (it_int = Sa.delta_in[i].begin();
@@ -302,7 +300,7 @@ namespace vcsn {
 	  T_aux = T_Q_IT->insert(all_transitions_lex);
 
       // New class?
-      if ((T_aux->A).size() == 0)
+      if (T_aux->A.size() == 0)
       {
 	// Inserts in list C of classes (nodes of Tries)
 	C.push_front(T_aux);
@@ -312,23 +310,23 @@ namespace vcsn {
       }
 
       // Inserts the state in the list A of its corresponding class
-      (T_aux->A).push_front(i);
+      T_aux->A.push_front(i);
       // Defines class of state i
       class_state_A[i] = T_aux;
       // T_L_A[i] = node of the list of states of class of state i
-      T_L_A[i] = (T_aux->A).begin();
+      T_L_A[i] = T_aux->A.begin();
     }
 
 
     // Constructs Tries of classes of states with the same sequence of
     // ingoing and outgoing transitions in lex. order (for automaton B)
-    for (i = 0; (i < static_cast<int>(b.states().size())) && iso; i++)
+    for (int i = 0; i < static_cast<int>(b.states().size()) && iso; i++)
     {
       // Vector all_transitions_lex contains the sequence of labels of
       // ingoing and outgoing transitions of state i in lex. order,
       // separated by a mark (-1)
-      std::vector<int> all_transitions_lex((Sb.delta_in[i]).size() +
-					   (Sb.delta_out[i]).size() + 1);
+      std::vector<int> all_transitions_lex(Sb.delta_in[i].size() +
+					   Sb.delta_out[i].size() + 1);
       // First stores the sequence of ingoing transitions
       for (it_int = Sb.delta_in[i].begin();
 	   it_int != Sb.delta_in[i].end(); ++it_int)
@@ -352,16 +350,16 @@ namespace vcsn {
 
       // Does the class of state i have more states for automaton B
       // than those for automaton A ?
-      if ((T_aux->A).size() == (T_aux->B).size())
+      if (T_aux->A.size() == T_aux->B.size())
 	iso = false;
       else
       {
 	// Inserts the state in the list B of its corresponding class
-	(T_aux->B).push_front(i);
+	T_aux->B.push_front(i);
 	// Defines class of state i
 	class_state_B[i] = T_aux;
 	// T_L_B[i] = node of the list of states of class of state i
-	T_L_B[i] = (T_aux->B).begin();
+	T_L_B[i] = T_aux->B.begin();
       }
     }
 
@@ -369,7 +367,7 @@ namespace vcsn {
     if (!iso)
       return false;
 
-    for (i = 0; i < static_cast<int>(a.states().size()); i++)
+    for (int i = 0; i < static_cast<int>(a.states().size()); i++)
       perm_A[i] = perm_B[i] = -1;
 
 
@@ -383,28 +381,30 @@ namespace vcsn {
 
     itr_C = C.begin();
 
-    while ((itr_C != C.end()) && iso)
+    while (itr_C != C.end() && iso)
     {
       // Do automata A and B have the same number of states in the
       // current class?
-      if (((*itr_C)->A).size() != ((*itr_C)->B).size())
+      if ((*itr_C)->A.size() != (*itr_C)->B.size())
       {
 	iso = false;
 	itr_C++;
       }
       else
 	// Class *itr_C contains only one state of each automata?
-	if (((*itr_C)->A).size() == 1)
+	if ((*itr_C)->A.size() == 1)
 	{
 	  // States *((*itr_C).A.begin()) and
 	  // *((*itr_C).B.begin()) have to be identified.
-	  U.push_front(k = (*(((*itr_C)->A).begin())));
-	  perm_A[k] = l = *(((*itr_C)->B).begin());
+	  int k = *((*itr_C)->A.begin());
+	  U.push_front(k);
+	  int l = *((*itr_C)->B.begin());
+	  perm_A[k] = l;
 	  perm_B[l] = k;
 
 	  // Just for coherence, lists A and B of class *itr_C are voided
-	  ((*itr_C)->A).erase(((*itr_C)->A).begin());
-	  ((*itr_C)->B).erase(((*itr_C)->B).begin());
+	  ((*itr_C)->A).erase((*itr_C)->A.begin());
+	  ((*itr_C)->B).erase((*itr_C)->B.begin());
 	  // Deletes current node and points to the next.
 	  itr_C = C.erase(itr_C);
 	}
@@ -427,7 +427,8 @@ namespace vcsn {
       // defined for this state)
 
       // i = current state in automaton A, j = its image in automaton B
-      j = perm_A[i = U.front()];
+      int i = U.front();
+      int j = perm_A[i];
       U.pop_front();
 
       // Deterministic ingoing and outgoing transitions are analyzed
@@ -444,8 +445,8 @@ namespace vcsn {
 
 	// The states being considered are the sources of current
 	// co-deterministic transitions (k for automaton A, l for B)
-	k = Sa.src_transitions[*it_int];
-	l = Sb.src_transitions[*it_int_aux];
+	int k = Sa.src_transitions[*it_int];
+	int l = Sb.src_transitions[*it_int_aux];
 
 	// Has state k already been visited?
 	if (perm_A[k] >= 0)
@@ -472,10 +473,10 @@ namespace vcsn {
 	      perm_A[perm_B[l] = k] = l;
 	      // Removes k and l from theirs lists of states in theirs
 	      // classes (O(1))
-	      (class_state_A[k]->A).erase(T_L_A[k]);
-	      (class_state_B[l]->B).erase(T_L_B[l]);
+	      class_state_A[k]->A.erase(T_L_A[k]);
+	      class_state_B[l]->B.erase(T_L_B[l]);
 	      U.push_front(k);
-	      if ((class_state_A[k]->A).size() == 1)
+	      if (class_state_A[k]->A.size() == 1)
 	      {
 		// If it remains only one state of each
 		// automaton in the class of the current states,
@@ -485,8 +486,8 @@ namespace vcsn {
 		// From now on k and l represent these states.
 
 		T_aux = class_state_A[k];
-		k = (T_aux->A).front();
-		l = (T_aux->B).front();
+		k = T_aux->A.front();
+		l = T_aux->B.front();
 		perm_A[perm_B[l] = k] = l;
 
 		U.push_front(k);
@@ -507,8 +508,8 @@ namespace vcsn {
 
 	// The states being considered are the ends of current
 	// deterministic transitions (k for automaton A, l for B)
-	k = Sa.dst_transitions[*it_int];
-	l = Sb.dst_transitions[*it_int_aux];
+	int k = Sa.dst_transitions[*it_int];
+	int l = Sb.dst_transitions[*it_int_aux];
 
 	// Has state k already been visited?
 	if (perm_A[k] >= 0)
@@ -534,11 +535,11 @@ namespace vcsn {
 	      perm_A[perm_B[l] = k] = l;
 	      // Removes k and l from theirs lists of states in theirs
 	      // classes (O(1))
-	      (class_state_A[k]->A).erase(T_L_A[k]);
-	      (class_state_B[l]->B).erase(T_L_B[l]);
+	      class_state_A[k]->A.erase(T_L_A[k]);
+	      class_state_B[l]->B.erase(T_L_B[l]);
 	      U.push_front(k);
 
-	      if ((class_state_A[k]->A).size() == 1)
+	      if (class_state_A[k]->A.size() == 1)
 	      {
 		// If it remains only one state of each
 		// automaton in the class of the current states,
@@ -548,8 +549,8 @@ namespace vcsn {
 		// From now on k and l represent these states.
 
 		T_aux = class_state_A[k];
-		k = (T_aux->A).front();
-		l = (T_aux->B).front();
+		k = T_aux->A.front();
+		l = T_aux->B.front();
 		perm_A[perm_B[l] = k] = l;
 
 		U.push_front(k);
@@ -572,7 +573,7 @@ namespace vcsn {
     // in C). This is the backtracking phase.
 
     // Stores in l the number of non-fixed states
-    l = 0;
+    int l = 0;
     for (itr_C = C.begin(); itr_C != C.end(); ++itr_C)
       l += (*itr_C)->A.size();
 
@@ -592,21 +593,21 @@ namespace vcsn {
     // attributed
     std::vector<int> correspondence_transitions(a.states().size());
 
-    for (i = 0; i < static_cast<int>(a.states().size()); ++i)
+    for (int i = 0; i < static_cast<int>(a.states().size()); ++i)
       correspondence_transitions[i] = 0;
 
     // Stores states in C_A and C_B. Partial results of the
     // backtracking are stored in vector current, that is initialized
     // with the first element of each class.
-    i = j = 0;
+    int i = 0, j = 0;
     for (itr_C = C.begin(); itr_C != C.end(); itr_C++)
     {
-      it_int = ((*itr_C)->A).begin();
-      it_int_B = ((*itr_C)->B).begin();
+      it_int = (*itr_C)->A.begin();
+      it_int_B = (*itr_C)->B.begin();
       C_A[i] = *it_int;
       C_B[j] = *it_int_B;
       current[i++] = j++;
-      for (it_int++, it_int_B++; it_int != ((*itr_C)->A).end();
+      for (it_int++, it_int_B++; it_int != (*itr_C)->A.end();
 	   it_int++, it_int_B++)
       {
 	C_A[i] = *it_int;
@@ -677,7 +678,7 @@ namespace vcsn {
 	  // label that have already been associated. For each state
 	  // visited, its position in correspondence_transitions is
 	  // incremented.
-	  k = 0;
+	  int k = 0;
 	  for (it_int_aux = it_int;
 	       (it_int_aux != Sa.delta_in[C_A[i]].end()) &&
 		 (Sa.transitions_labels[*it_int_aux] ==
@@ -738,7 +739,7 @@ namespace vcsn {
 	    // label that have already been associated. For each
 	    // state visited, its position in correspondence_transitions
 	    // is incremented.
-	    k = 0;
+	    int k = 0;
 	    for (it_int_aux = it_int;
 		 (it_int_aux != Sa.delta_out[C_A[i]].end()) &&
 		   (Sa.transitions_labels[*it_int_aux] ==
@@ -752,7 +753,7 @@ namespace vcsn {
 
 	    // Idem for outgoing transitions of state C_B[j], but positions in
 	    // correspondence_transitions are decremented.
-	    for (; (k > 0) && b; it_int_B++, k--)
+	    for (; k > 0 && b; it_int_B++, k--)
 	      // Has the end of current transition already been visited?
 	      if (perm_B[Sb.dst_transitions[*it_int_B]] >= 0)
 		// Trying to decrement a position with 0 means that
@@ -801,7 +802,7 @@ namespace vcsn {
 
     } // end of backtracking loop
 
-    return (iso);
+    return iso;
 
   } // end of are_isomorphic
 
