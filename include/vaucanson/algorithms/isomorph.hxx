@@ -59,11 +59,13 @@ namespace vcsn
     std::map<int, Trie> children;
   };
 
+  inline
   Trie::Trie ()
     : A(), B(), L(), L_is_valid(false), children()
   {
   }
 
+  inline
   Trie::Trie (const Trie& t)
     : A(t.A), B(t.B),
       L(), L_is_valid(t.L_is_valid), children(t.children)
