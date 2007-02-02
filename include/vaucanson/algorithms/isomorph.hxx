@@ -92,18 +92,19 @@ namespace vcsn
 
     // Vector indexed by states that points to the corresponding
     // node of the list of states of each class of states stored in
-    // the Tries (for automaton A).
-    std::vector<std::list<int>::iterator> T_L_A(a.states().size());
-
-    // Idem for automaton B.
-    std::vector<std::list<int>::iterator> T_L_B(b.states().size());
+    // the Tries (for automata A & B).
+    // NB: Calling the vector constructor results in several copies
+    // of the default constructed object.  Here, the object is an
+    // iterator, which default ctor produces a so called singular
+    // iterator, which is write-only.  In particular, copying to
+    // fill the vector is prohibited.
+    std::vector<std::list<int>::iterator> T_L_A, T_L_B;
+    T_L_A.reserve(a.states().size());
+    T_L_B.reserve(b.states().size());
 
 
     // Tries of classes of normal, initial and final states.
-    Trie *T_Q_IT = new Trie();
-    Trie *T_I = new Trie();
-    Trie *T_T = new Trie();
-    Trie *T_aux;
+    Trie T_Q_IT, T_I, T_T;
 
     std::list<Trie*> C;
     // List of fixed states emerged from classes stored in C.
@@ -291,13 +292,13 @@ namespace vcsn
 
       // Gets the node of the correct Trie (Trie of initial, final or normal
       // states) for the sequence of transitions of state i
+      Trie *T_aux;
       if (a.is_initial(Sa.states[i]))
-	T_aux = T_I->insert(all_transitions_lex);
+	T_aux = T_I.insert(all_transitions_lex);
+      else if (a.is_final(Sa.states[i]))
+	T_aux = T_T.insert(all_transitions_lex);
       else
-	if (a.is_final(Sa.states[i]))
-	  T_aux = T_T->insert(all_transitions_lex);
-	else
-	  T_aux = T_Q_IT->insert(all_transitions_lex);
+	T_aux = T_Q_IT.insert(all_transitions_lex);
 
       // New class?
       if (T_aux->A.size() == 0)
@@ -340,13 +341,13 @@ namespace vcsn
 
       // Gets the node of the correct Trie (Trie of initial, final or
       // normal states) for the sequence of transitions of state i
+      Trie *T_aux;
       if (b.is_initial(Sa.states[i]))
-	T_aux = T_I->insert(all_transitions_lex);
+	T_aux = T_I.insert(all_transitions_lex);
+      else if (b.is_final(Sa.states[i]))
+	T_aux = T_T.insert(all_transitions_lex);
       else
-	if (b.is_final(Sa.states[i]))
-	  T_aux = T_T->insert(all_transitions_lex);
-	else
-	  T_aux = T_Q_IT->insert(all_transitions_lex);
+	T_aux = T_Q_IT.insert(all_transitions_lex);
 
       // Does the class of state i have more states for automaton B
       // than those for automaton A ?
@@ -484,8 +485,7 @@ namespace vcsn
 		// putted in list U, and the class are removed
 		// from C.
 		// From now on k and l represent these states.
-
-		T_aux = class_state_A[k];
+		Trie* T_aux = class_state_A[k];
 		k = T_aux->A.front();
 		l = T_aux->B.front();
 		perm_A[perm_B[l] = k] = l;
@@ -547,8 +547,7 @@ namespace vcsn
 		// inserted in list U, and the class are removed
 		// from C.
 		// From now on k and l represent these states.
-
-		T_aux = class_state_A[k];
+		Trie* T_aux = class_state_A[k];
 		k = T_aux->A.front();
 		l = T_aux->B.front();
 		perm_A[perm_B[l] = k] = l;
@@ -557,7 +556,6 @@ namespace vcsn
 
 		// Removes class T_aux from C
 		C.erase(T_aux->L);
-
 	      }
 	    }
       }
