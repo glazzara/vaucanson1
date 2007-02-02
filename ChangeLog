@@ -1,5 +1,11 @@
 2007-02-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Reoganize and correct concat_of_standard.
+	* include/vaucanson/algorithms/standard.hxx: Do it. Set correctly weigth
+	of final transitions of the resulting automaton.
+
+2007-02-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Remove dead code in union_of_standard
 	* algorithms/standard.hxx: Do it. Remove operations on ingoing
 	transitions of initial state.
