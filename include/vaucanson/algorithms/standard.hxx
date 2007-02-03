@@ -39,12 +39,13 @@ namespace vcsn {
   {
     TIMER_SCOPED("standardize");
     AUTOMATON_TYPES(Auto_);
+
     hstate_t i = a.add_state();
     std::set<htransition_t> transition_oi;
+
     for_all_initial_states(oi, a)
     {
       series_set_elt_t s = a.get_initial(*oi);
-      std::set<htransition_t> transition_oi;
       transition_oi.clear();
       a.deltac(transition_oi, *oi, delta_kind::transitions());
       for_all_const_(std::set<htransition_t>, oil, transition_oi)
@@ -169,14 +170,14 @@ namespace vcsn {
     typedef std::map<hstate_t, hstate_t>	map_t;
     typedef std::set<htransition_t>		delta_ret_t;
 
-    /*-----------------.
-    | Concat of states |
-    `-----------------*/
+    /*------------------.
+    | Concat of states. |
+    `------------------*/
     map_t	map_h;
     delta_ret_t	dst;
     hstate_t	new_state;
 
-    // Add states except the initial one
+    // Add states except the initial one.
     for (typename rhs_t::state_iterator s = rhs.states().begin();
 	 s != rhs.states().end();
 	 ++s)
@@ -186,7 +187,7 @@ namespace vcsn {
 	map_h[*s] = new_state;
       }
 
-    // Add transitions
+    // Add transitions.
     for (typename rhs_t::state_iterator i = rhs.states().begin();
 	 i != rhs.states().end();
 	 ++i)
@@ -201,13 +202,8 @@ namespace vcsn {
 			     map_h[rhs.dst_of(*d)],
 			     rhs.label_of(*d));
       }
-    for (typename map_t::const_iterator nf = map_h.begin();
-	 nf != map_h.end();
-	 ++nf)
-      if (rhs.is_final(nf->first))
-	lhs.set_final(nf->second, rhs.get_final(nf->first));
 
-    // Concat final states of lhs to the initial state of rhs
+    // Concat final states of lhs to the initial state of rhs.
     hstate_t rhs_i = *rhs.initial().begin();
     dst.clear();
     rhs.deltac(dst, rhs_i, delta_kind::transitions());
@@ -224,11 +220,20 @@ namespace vcsn {
 				  weight * rhs.label_of(*d));
     }
 
+    // Multiply final transitions of lhs by the final multiplicity of the
+    // initial state of rhs.
     typename lhs_t::series_set_elt_t rhs_iw = rhs.get_final(rhs_i);
-    for (typename lhs_t::final_iterator s = lhs.final().begin();
-	 s != lhs.final().end();
-	 ++s)
-      lhs.set_final(*s, lhs.get_final(*s) * rhs_iw);
+    for (typename lhs_t::final_iterator f = lhs.final().begin();
+	 f != lhs.final().end();
+	 ++f)
+      lhs.set_final(*f, lhs.get_final(*f) * rhs_iw);
+
+    // Set transitions coming from rhs to final if needed.
+    for (typename map_t::const_iterator nf = map_h.begin();
+	 nf != map_h.end();
+	 ++nf)
+      if (rhs.is_final(nf->first))
+	lhs.set_final(nf->second, rhs.get_final(nf->first));
   }
 
   template<typename A, typename T, typename U>
@@ -259,16 +264,14 @@ namespace vcsn {
   {
     TIMER_SCOPED("star_of_standard");
     AUTOMATON_TYPES(auto_t);
-
     typedef std::set<htransition_t>		edelta_ret_t;
-    edelta_ret_t			dst;
 
+    edelta_ret_t			dst;
     hstate_t				new_i = *a.initial().begin();
     series_set_elt_t			out_mult = a.get_final(new_i);
+
     out_mult.star();
-
     a.deltac(dst, new_i, delta_kind::transitions());
-
     for (typename auto_t::final_iterator f = a.final().begin();
 	 f != a.final().end();
 	 ++f)

@@ -1,3 +1,10 @@
+2007-02-03  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Fix final transitions handling in concat_of_standard.
+	* ChangeLog: Correct some typo.
+	* include/vaucanson/algorithms/standard.hxx: Here. And some final point
+	to comments.
+
 2007-02-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Correct star_of_standard.
@@ -6,7 +13,7 @@
 
 2007-02-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
-	Reoganize and correct concat_of_standard.
+	Reorganize and correct concat_of_standard.
 	* include/vaucanson/algorithms/standard.hxx: Do it. Set correctly weigth
 	of final transitions of the resulting automaton.
 
@@ -60,7 +67,7 @@
 	Simplify Timer.
 	* include/vaucanson/misc/timer.hh,
 	* include/vaucanson/misc/timer.cc (Timer::TimeVar::last): Remove.
-	Now a local variable for Timer::TimeVar::stop. 
+	Now a local variable for Timer::TimeVar::stop.
 	Remove a few this->.
 
 2007-02-01  Akim Demaille  <akim@lrde.epita.fr>
