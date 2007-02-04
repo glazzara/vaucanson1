@@ -2,12 +2,12 @@ class Vcs
 
   # See http://rubyforge.org/projects/vcs
   # and http://vcs.rubyforge.org
-  
+
   protocol_version '0.1'
 
   def vcn_commit! ( *args )
 
-    common_commit! "[<%= rev %>] <%= title %>", *args  do |subject|
+    common_commit! "<%= rev %> <%= title %>", *args  do |subject|
       mail! :to => %w[vaucanson-patches@lrde.epita.fr], :subject => subject
     end
 

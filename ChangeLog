@@ -1,3 +1,38 @@
+2007-02-04  SIGOURE Benoit  <tsuna@lrde.epita.fr>
+
+	Remove argp.
+	* argp/ChangeLog: Remove.
+	* argp/Makefile.am: Remove.
+	* argp/TODO: Remove.
+	* argp/Versions: Remove.
+	* argp/acinclude.m4: Remove.
+	* argp/argp-ba.c: Remove.
+	* argp/argp-eexst.c: Remove.
+	* argp/argp-fmtstream.c: Remove.
+	* argp/argp-fmtstream.h: Remove.
+	* argp/argp-fs-xinl.c: Remove.
+	* argp/argp-help.c: Remove.
+	* argp/argp-namefrob.h: Remove.
+	* argp/argp-parse.c: Remove.
+	* argp/argp-pv.c: Remove.
+	* argp/argp-pvh.c: Remove.
+	* argp/argp-test.c: Remove.
+	* argp/argp-xinl.c: Remove.
+	* argp/argp.h: Remove.
+	* argp/configure.ac: Remove.
+	* argp/mempcpy.c: Remove.
+	* argp/strchrnul.c: Remove.
+	* argp/strndup.c: Remove.
+	* argp/testsuite/Makefile.am: Remove.
+	* argp/testsuite/ex1-test: Remove.
+	* argp/testsuite/ex1.c: Remove.
+	* argp/testsuite/ex3.c: Remove.
+	* argp/testsuite/ex4.c: Remove.
+	* argp/testsuite/permute-test: Remove.
+	* argp/testsuite/run-tests: Remove.
+	* argp/testsuite: Remove.
+	* argp: Remove.
+
 2007-02-03  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Fix final transitions handling in concat_of_standard.
