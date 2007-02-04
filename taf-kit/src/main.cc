@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2007 The Vaucanson Group.
+// Copyright (C) 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@
 const char* argp_program_version =
 "VCSN TAF-Kit (" PACKAGE_STRING ")\n"
 "\n"
-"Copyright (C) 2006 The Vaucanson Group.\n"
+"Copyright (C) 2006, 2007 The Vaucanson Group.\n"
 "This is free software; see the source for copying conditions.  There is NO\n"
 "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE,\n"
 "to the extent permitted by law.";
