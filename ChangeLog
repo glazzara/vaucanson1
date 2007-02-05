@@ -1,3 +1,12 @@
+2007-02-05  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	standard of the empty language should give a automaton with one state ans zero transition.
+	See ticket #99: https://trac.lrde.org/vaucanson/trac.cgi/ticket/99 .
+	* include/vaucanson/algorithms/standard_of.hxx: Do it.
+	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh:
+	Adapt test accordingly to the definition of the standard automaton of
+	the empty language.
+
 2007-02-05  Akim Demaille  <akim@lrde.epita.fr>
 
 	DevDoc: headers.

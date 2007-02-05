@@ -174,6 +174,8 @@ namespace vcsn {
 	MATCH(Zero)
 	{
 	  automaton_ptr_t auto_ = new automaton_t(automata_set_);
+	  hstate_t s = auto_->add_state();
+	  auto_->set_initial(s);
 	  return auto_;
 	}
 	END
