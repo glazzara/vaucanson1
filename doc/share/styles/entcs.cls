@@ -6,10 +6,11 @@
 %% the copyright notice in the file esl.dtx .
 %%
 \def\esp@fileversion{2e-1.15}
-\def\esp@filedate{1994/01/12}
-%% esl.dtx Copyright (C) 1994 Elsevier Science
+\def\esp@filedate{2003/9/14}
+%% esl.dtx Copyright (C) 2003 Elsevier 
 \def\@shortjnl{\relax}
- \def\@journal{Elsevier Preprint} \def\@company{}
+ \def\@journal{Electronic Notes in Theoretical Computer Science} 
+\def\@company{}
   \def\@shortjid{entcs}
  \NeedsTeXFormat{LaTeX2e}
  \ProvidesClass{\@shortjid}
@@ -88,29 +89,33 @@
 \def\indexname{Index}
 \def\figurename{Fig.}
 \def\tablename{Table}
-\def\abstractname{Abstract}
+\def\abstractname{\textbf{Abstract}}
 \lineskip 1\p@
 \normallineskip 1\p@
-\def\baselinestretch{1}
+\def\baselinestretch{.95}
 \nonfrenchspacing
+\def\cropwidth{297mm}
+\def\cropheight{210mm}
+\def\cropleft{0mm}
+\def\croptop{0mm}
 \def\@overtitleskip{69pt}
 \def\@bibliosize{\frenchspacing\small}
 \def\@historysize{\small}
 \def\@keywordsize{\small}
 \def\@titlesize{\Large}
 \def\@authorsize{\large}
-\def\@keywordheading{{\it Key words: \ }}
+\def\@keywordheading{{\it Keywords: \ }}
 \def\@addressstyle{\small\itshape}
 \def\@captionsize{\small}
-\def\@abstractsize{\fontsize{\@ixpt}{11pt}\selectfont}
-\def\@articletypesize{\fontsize{\@xiiipt}{13pt}\selectfont}
-\def\normalsize{\@setfontsize\normalsize\@xiipt{14.5}%
+\def\@abstractsize{\fontsize{\@viiipt}{8pt}\selectfont}
+\def\@articletypesize{\fontsize{\@xipt}{11pt}\selectfont}
+\def\normalsize{\@setfontsize\normalsize\@xipt{14.5}%
 \abovedisplayskip 12\p@ \@plus 2\p@ \@minus 2\p@%
 \belowdisplayskip \abovedisplayskip
 \abovedisplayshortskip \z@ \@plus 2\p@%
 \belowdisplayshortskip 3.5\p@ \@plus 2\p@ \@minus 2\p@
 \let\@listi\@listI}
-\def\small{\@setfontsize\small\@xipt{13.6}%
+\def\small{\@setfontsize\small\@viiipt{8}%{13.6}%
 \abovedisplayskip 11\p@ plus3\p@ minus6\p@
 \belowdisplayskip \abovedisplayskip
 \abovedisplayshortskip  \z@ plus3\p@
@@ -118,28 +123,28 @@
 \def\@listi{\leftmargin\leftmargini
  \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep 5\p@%\parsep
             \topsep 9\p@ plus3\p@ minus5\p@}}
-%\let\footnotesize=\small
-\def\footnotesize{\@setsize\footnotesize{12\p@}\xpt\@xpt}
-\def\scriptsize{\@setfontsize\scriptsize\@viiipt{9.5}}
+\let\footnotesize=\small
+%\def\footnotesize{\@setsize\footnotesize{9\p@}\ixpt\@xpt}
+\def\scriptsize{\@setfontsize\scriptsize\@viiipt{8}}
 \def\tiny{\@setfontsize\tiny\@vipt{7}}
 \def\large{\@setfontsize\large\@xivpt{18}}
 \def\Large{\@setfontsize\Large\@xviipt{22}}
 \def\LARGE{\@setfontsize\LARGE\@xxpt{22}}
 \def\huge{\@setfontsize\huge\@xxvpt{27}}
 \let\Huge=\huge
-\def\baselinestretch{1}
+%\def\baselinestretch{1}
 \normalsize                                % Choose the normalsize font.
 \newdimen\@bls                             % Several dimensions are
 \@bls=\baselineskip                        % expressed in terms of this.
-\if@twoside                  % Values for two-sided printing:
-   \oddsidemargin   50\p@    %   Left margin on odd-numbered pages.
-   \evensidemargin  10\p@    %   Left margin on even-numbered pages.
-   \marginparwidth  10\p@    %   \@Width of marginal notes.
-\else                        % Values for one-sided printing:
-   \oddsidemargin   35\p@    %   Left margin on odd-numbered pages.
-   \evensidemargin  35\p@    %   Left margin on even-numbered pages.
+%\if@twoside                  % Values for two-sided printing:
+%   \oddsidemargin   50\p@    %   Left margin on odd-numbered pages.
+%   \evensidemargin  10\p@    %   Left margin on even-numbered pages.
+%   \marginparwidth  10\p@    %   \@Width of marginal notes.
+%\else                        % Values for one-sided printing:
+   \oddsidemargin   37.25\p@    %   Left margin on odd-numbered pages.
+   \evensidemargin  37.25\p@    %   Left margin on even-numbered pages.
    \marginparwidth   2pc
-\fi
+%\fi
 \marginparsep 20\p@          % Horizontal space between outer margin and
                              % marginal note
 \topmargin \z@           %    Nominal distance from top of page to top of
@@ -150,8 +155,8 @@
 \bigskipamount=\@bls \@plus 0.3\@bls \@minus 0.3\@bls % 1/1 line
 \medskipamount=0.5\bigskipamount                  % 1/2 line
 \smallskipamount=0.25\bigskipamount               % 1/4 line
-\textheight 42\baselineskip  %44? \@Height of text (including footnotes and 
-\advance\textheight\topskip  % figures, excluding running head and foot).
+\textheight 44\baselineskip  %44? 42? \@Height of text (including footnotes 
+\advance\textheight\topskip  %  and figures, excluding running head and foot).
 \textwidth 33pc              % \@Width of text line.
                              % For two-column mode:
 \columnsep 2pc               %   Space between columns
@@ -194,6 +199,9 @@
 \@itempenalty     -\@lowpenalty    % Between list items.
 % \def\section{\@startsection{section}{1}{\z@}{1.5\@bls
 %   \@plus .4\@bls \@minus .1\@bls}{\@bls}{\normalsize\bfseries}}
+\def\part{\@startsection{part}{1}{\z@}{2\@bls \@plus
+  0.4\@bls}{\@bls}{\normalsize}}
+\def\partmark#1{}
 \def\section{\@startsection{section}{1}{\z@}%
         {-3ex plus -1ex minus -.2ex}%
         {2ex plus .2ex}{\large\bfseries}}
@@ -729,7 +737,7 @@ Acknowledgement
 %  \kern 2.6\p@} \let\report@elt\@gobble
 \def\frontmatter{%
   \label{FirstPage}
-  \NoHyper
+  %\NoHyper
   \let\@corresp@note\relax
   \global\t@glob@notes={}\global\c@author\z@
   \global\c@collab\z@ \global\c@address\z@
@@ -755,19 +763,19 @@ Acknowledgement
   \newcount\c@sv@footnote
   \global\c@sv@footnote=\c@footnote     % save current footnote number
   \if@hasabstract                       % IF abstract/ keywords THEN
-   \vskip 24\p@ \@plus 6\p@ \@minus 3\p@ % Space above rule
+   \vskip 18\p@ \@plus 4\p@ \@minus 2\p@ % Space above rule
     \hrule height 0.4pt
-    \vskip 8\p@
+    \vskip 6\p@
     \unvbox\t@abstract                  % print abstract, if any
     \unvbox\t@keyword                   % Keyword abstract, if any
-    \vskip 10\p@
+    \vskip 8\p@
     \hrule height 0.4pt
   \fi                                   % FI
   \dedicated@fmt                        % print dedication
-  \vskip 18\p@                          % Vertical space below frontmatter
+  \vskip 12\p@                          % Vertical space below frontmatter
   \fi                                   % FI
   \close@fm                             % Close front matter material.
-  \endNoHyper
+  %\endNoHyper
   \output@glob@notes                   % Put notes at bottom of 1st page
   \global\c@footnote=\c@sv@footnote     % restore footnote number
   \global\@prefacefalse
@@ -787,7 +795,8 @@ Acknowledgement
   \hsize=\textwidth                         % Front matter is page-wide
   \centering                                % and centered
   \sv@hyphenpenalty\hyphenpenalty           % (save \hyphenpenalty)
-  \hyphenpenalty\@M}                        % and not hyphenated
+  \hyphenpenalty\@M%}                        % and not hyphenated
+  \vbox{\vspace{38mm}}}
 \def\close@fm{\egroup                       % close \vbox (\fm@box)
   \fm@size=\dp\fm@box \advance\fm@size by \ht\fm@box
   \@whiledim\fm@size>\t@xtheight \do{%
@@ -836,11 +845,11 @@ Acknowledgement
 \def\title@fmt#1#2{%
 \@ifundefined{@runtitle}{\gdef\@runtitle{#1}}{}%
  \vspace*{16pt}                         % Vertical space above title
-  {\LARGE #1\,\hbox{$^{#2}$}\par}%
- \vskip 24\p@                           % Vertical space below title
+  {\Large \textbf{#1}{\normalsize \,$^{^{#2}}$}\par}%
+ \vskip 10\p@                           % Vertical space below title
   }
 \def\subtitle@fmt#1#2{%                 % No vertical space above sub-title
-  {\@titlesize #1\,\hbox{$^{#2}$}}\par}
+  {\@titlesize #1{$^{#2}$}}\par}
 \def\title@note@fmt{\def\thefootnote{\fnstar{footnote}}}
 \def\author{\@ifnextchar[{\author@optarg}{\author@optarg[]}}
 \def\author@optarg[#1]#2{\stepcounter{author}%
@@ -856,7 +865,7 @@ Acknowledgement
   \if@newelem \author@fmt@init \fi
   \edef\@tempb{#2}\ifx\@tempb\@empty
     \hbox{{\author@font #3}}\else
-    \hbox{{\author@font #3}\,$^{\mathrm{#2}}$}%
+    \hbox{{\author@font #3}$^{\mathrm{\scriptsize #2}}$}%
   \fi}
 \def\first@author{\author@note@fmt  % re-define \thefootnote as
                                     % appropriate for author/address
@@ -864,7 +873,8 @@ Acknowledgement
     {\author@note@fmt\@corresp@note}}%
 \def\author@fmt@init{%
   \par
-  \vskip 8\p@ \@plus 4\p@ \@minus 2\p@
+  %\vskip 8\p@ \@plus 4\p@ \@minus 2\p@
+  \vskip 6\p@ \@plus 2\p@ \@minus 1\p@
   \@authorsize
   \leavevmode}                        % Vertical space above author list
  \def\and{\unskip~and~}
@@ -928,27 +938,27 @@ Acknowledgement
   \par                                % Start new paragraph
    \vskip 6\p@ \@plus 3\p@ \@minus 1.5pt}
 \def\abstract{\@ifnextchar[{\@abstract}{\@abstract[]}}
-% \def\@abstract[#1]{%
-%   \global\@hasabstracttrue
-%   \hyphenpenalty\sv@hyphenpenalty     % restore \hyphenpenalty
-%   \global\setbox\t@abstract=\vbox\bgroup
-%    \small
-%    \hbox to \textwidth\bgroup\hfill\begin{minipage}{.8\textwidth}
-%  \abstractname
-%   \ignorespaces}
-%  \def\endabstract{\end{minipage}\hfill\egroup\egroup}
-\def\@abstract[#1]{%
-  \global\@hasabstracttrue
-  \hyphenpenalty\sv@hyphenpenalty
-  \global\setbox\t@abstract=\vbox\bgroup
-  \leftskip\z@%
-  \@rightskip\z@ \rightskip\@rightskip \parfillskip\@flushglue
-  \small
-  \parindent 1em
-  \noindent {\bf\abstractname}
-  \par\noindent %\vskip 0.5\@bls Changed 23-2-95 by MWM
-  \ignorespaces}
-\def\endabstract{\par \egroup}
+ \def\@abstract[#1]{%
+   \global\@hasabstracttrue
+   \hyphenpenalty\sv@hyphenpenalty     % restore \hyphenpenalty
+   \global\setbox\t@abstract=\vbox\bgroup
+   \small
+    \hbox to \textwidth\bgroup\hfill\begin{minipage}{\textwidth}
+  \noindent \abstractname\par\medbreak\noindent
+   \ignorespaces}
+  \def\endabstract{\end{minipage}\hfill\egroup\egroup}
+%\def\@abstract[#1]{%
+%  \global\@hasabstracttrue
+%  \hyphenpenalty\sv@hyphenpenalty
+%  \global\setbox\t@abstract=\vbox\bgroup
+%  \leftskip\z@%
+%  \@rightskip\z@ \rightskip\@rightskip \parfillskip\@flushglue
+%  \small
+%  \parindent 1em
+%  \noindent {\bf\abstractname}
+%  \par\noindent %\vskip 0.5\@bls Changed 23-2-95 by MWM
+%  \ignorespaces}
+%\def\endabstract{\par \egroup}
 \def\keyword{%
   \global\@hasabstracttrue             % Implies rules are to be printed
   \hyphenpenalty\sv@hyphenpenalty      % restore \hyphenpenalty
@@ -956,7 +966,7 @@ Acknowledgement
   \def\MSC{\par\leavevmode\hbox {\it 1991 MSC:\ }}%
   \def\PACS{\par\leavevmode\hbox {\it PACS:\ }}%
   \global\setbox\t@keyword=\vbox\bgroup
-   \hbox to \textwidth\bgroup\hfill\begin{minipage}{.8\textwidth}
+   \hbox to \textwidth\bgroup\hfill\begin{minipage}{\textwidth}
   \@keywordsize
   \parskip\z@
   \vskip 10\p@ \@plus 2\p@ \@minus 2\p@  % One line of space above keywords.

@@ -133,7 +133,8 @@
   \end{minipage}
   \hfill
   \begin{minipage}{.385\textwidth}
-    {\LARGE{\bfseries \@kind} \@numero}
+    {\LARGE{\bfseries \@kind}\par
+      \@numero}
   \end{minipage}
   \thispagestyle{empty}
 
@@ -181,5 +182,37 @@
   \@footer}
 
 \endinput
+
+%% # Utilisation de la class 'facture' -- Didier Verna.
+%% # Un exemple vaut mieux qu'un long discours.
+%%
+%% \documentclass[OPTION]{facture} %% Utiliser l'OPTION 'epita' ou 'transfia'.
+%%
+%% \date{\today}
+%%
+%% %% Dans tous les champs suivants, utiliser \par pour changer de ligne.
+%%
+%% \numero{...}               %% Numéro de la facture.
+%% \nom{...}                  %% Nom de la société.
+%% \adresse{...}              %% Adresse.
+%% \responsable{...}          %% Nom du responsable.
+%% \telephone{...}            %% Numéro de téléphone du responsable.
+%% \reference{...}            %% Référence de la facture.
+%%
+%% \begin{document}
+%%
+%% \begin{liste}
+%%   %% \element{Référence}{Quantité}{Description}{Code T.V.A.}{P.U.}{Montant}
+%%   \element{...}{...}{...}{...}{...}{...}
+%%   \element{...}{...}{...}{...}{...}{...}
+%%   %% etc etc.
+%%
+%%   \espace{...}             %% Pour étirer le tableau vers le bas.
+%%   \totalht{...}            %% Total hors taxe.
+%%   \tva{...}{...}           %% T.V.A. (pourcentage et montant)
+%%   \totalttc{...}           %% Total T.T.C.
+%% \end{liste}
+%%
+%% \end{document}
 
 %% facture.cls ends here.

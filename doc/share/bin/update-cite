@@ -53,16 +53,17 @@ sub learn_from_bib ($)
   my $key;
   while ($_ = $fh->getline)
     {
-      if (/^@\w+\{(.+?),$/)
+      if (/^@\w+\{\s*(\S+?),$/)
 	{
 	  $key = $1;
 	}
       elsif (/oldkeys\s*=\s*\{(.+?)\}/)
 	{
 	  my $older = '\Q' . join ('\E|\Q', split (/,\s*/, $1)) . '\E';
-	  $updater = $updater . "s/$older/$key/gm;\n";
+	  $updater = $updater . "s<\b$older\b><$key>gm;\n";
 	}
     }
+  print "$updater\n";
 }
 
 # Backup this FILE.

@@ -2,9 +2,10 @@
 # supported by pdflatex (png, jpg, pdf).
 
 # Formats to convert to PDF.
-SHARE_EXTS_TO_PDF = dot fig fdp gif id tif
+SHARE_EXTS_TO_PDF = \
+  dot fig fdp gif id tif tiff pbm pgm ppm pdffig plt $(EXTS_TO_PDF)
 # Formats to convert to PNG.
-SHARE_EXTS_TO_PNG = dia
+SHARE_EXTS_TO_PNG = dia $(EXTS_TO_PNG)
 
 # FILES
 # convert_ext SRC-EXT, DST-EXT, FILEs
@@ -31,7 +32,7 @@ $(foreach ext,					\
 # share_convert_to_pdf FILES
 # --------------------------
 # Choose the most appropriate format for PDFLaTeX for the FILES.
-# Beware that no recognized formats are left out.
+# Beware that unknown formats are left out.
 share_convert_to_pdf =						\
     $(call share_convert_exts,$(SHARE_EXTS_TO_PDF),pdf,$(1))	\
     $(call share_convert_exts,$(SHARE_EXTS_TO_PNG),png,$(1))
@@ -66,6 +67,55 @@ share_convert_to_pdf =						\
 %.pdf: %.fig
 	fig2dev -Lpdf -p dummy $< $@
 
+%.eps: %.fig
+	fig2dev -Leps -p dummy $< $@
+
+
+## pdftex/pdftex_t combined XFig pictures.
+##
+## To avoid problems, the PDF file should end with .pdf, not .pdftex
+## as suggested in xfig documentation.  And to avoid ambiguity on
+## *.fig -> *.pdf, let's use *.pdffig as input extension instead of
+## *.fig.
+##
+## A single Make rule with two commands because it simplifies the use:
+## depend on one file, not two.  Generate the PDF last, since it bears
+## the dependency.
+%.pdf %.eps %.pdftex_t: %.pdffig
+	-rm -f $*.{pdf,pdftex_t}
+	fig2dev -Lpdftex_t -p $*.pdf $< $*.pdftex_t
+# Some versions of fig2dev produce code for epsfig instead of graphicx.
+# Do not force the extension to PDF.
+	perl -pi -e 's/\\epsfig\{file=/\\includegraphics{/;' \
+		 -e 's/(\\includegraphics\{.*)\.pdf/$$1/;'   \
+	  $*.pdftex_t
+	fig2dev -Lpdftex    -p dummy $< $*.pdf
+	fig2dev -Lpstex    -p dummy $< $*.eps
+
+
+## pdftex/pdftex_t combined GNU Plot pictures.
+##
+## The GNU Plot file needs not set the output file name, nor the terminal:
+## set are properly set by default.
+##
+## A single Make rule with two commands because it simplifies the use:
+## depend on one file, not two.
+%.pdftex_t %.eps %.pdf: %.plt
+# gnuplot creates an output, even if it failed.  remove it.
+	rm -f $*.{tex,eps,pdf,pdftex_t}
+# Put the output first, before the plotting command, and before
+# requests from the user.  Set the terminal too there for the same
+# reasons.
+	{					\
+	  echo 'set output "$*.eps"';		\
+	  echo 'set terminal epslatex color';	\
+	  cat $<;				\
+	} > $*.plt.tmp
+	LC_ALL=C gnuplot $*.plt.tmp
+	mv $*.tex $*.pdftex_t
+	epstopdf $*.eps -o $*.pdf
+	rm $*.plt.tmp
+
 %.pdf: %.gif
 	convert $< $@
 
@@ -82,4 +132,16 @@ share_convert_to_pdf =						\
 	convert $< $@
 
 %.pdf: %.tif
+	convert $< $@
+
+%.pdf: %.tiff
+	convert $< $@
+
+%.pdf: %.pbm
+	convert $< $@
+
+%.pdf: %.pgm
+	convert $< $@
+
+%.pdf: %.ppm
 	convert $< $@

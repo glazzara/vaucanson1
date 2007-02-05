@@ -1,3 +1,9 @@
+\ifhevea
+  \usepackage{xspace}
+\else
+  \RequirePackage{xspace}
+\fi
+
 \newcommand{\lisp}{\textsc{Lisp}\xspace}
 \newcommand{\cl}{\textsc{Common} \textsc{Lisp}\xspace}
 \newcommand{\clos}{\textsc{Clos}\xspace}
@@ -14,3 +20,7 @@
 \newcommand{\cti}{CTI\xspace}
 
 \newcommand{\bslash}{\texttt{\symbol{92}}}
+
+%% Local Variables:
+%% mode: latex
+%% End:

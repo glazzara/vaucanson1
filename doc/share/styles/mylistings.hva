@@ -14,10 +14,12 @@
 \input{ldf/asn1.ldf}
 \input{ldf/aterm.ldf}
 \input{ldf/box.ldf}
+\input{ldf/grammar.ldf}
 \input{ldf/hir.ldf}
 \input{ldf/lex.ldf}
 \input{ldf/mips.ldf}
 \input{ldf/parse-testsuite.ldf}
+\input{ldf/prism.ldf}
 \input{ldf/reactive-modules.ldf}
 \input{ldf/rtg.ldf}
 \input{ldf/sdf.ldf}

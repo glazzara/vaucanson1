@@ -4,7 +4,8 @@
 %% Language definition of Stratego for listings package
 %%
 \lstdefinelanguage{Stratego}
-  {otherkeywords={+,<+,+>,;,\{,\},\{|,|\}},
+  {alsoletter={-},
+   otherkeywords={+,<+,+>,;},
    morekeywords=[1]{all,constructors,end,extend,fail,id,imports,in,let,
      module,not,one,overlays,override,prim,rec,rules,script,signature,
      some,sorts,strategies,stratego,test,thread,where},
@@ -14,7 +15,13 @@
    morecomment=[l]{//},
    morecomment=[n]{(*}{*)},
    morecomment=[n]{/*}{*/},
-   morestring=[b]"%,
+   morestring=[b]",
+   literate={|[}{{\texttt{|$\!\!$[}}}1{]|}{{\texttt{]$\!\!$|}}}1
 %   alsoletter={=-'<>}%,
 %   alsoletter={<>}
   }[keywords,comments,strings]
+
+
+%% Local Variables:
+%% mode: LaTeX
+%% End:

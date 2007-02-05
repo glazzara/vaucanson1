@@ -1,3 +1,717 @@
+2007-02-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	* styles/texi.hva (\mailto, \http): New.
+	(\email): Use for former.
+
+2007-01-31  Akim Demaille  <akim@lrde.epita.fr>
+
+	More builtins in KB.
+	* styles/beamerthemeKremlinBicetre.sty (xspace, eurosym): Use.
+	(\csi, \epita, \lrde): New.
+
+2007-01-30  Roland Levillain  <roland@lrde.epita.fr>
+
+	* styles/rotating.hva: New.
+	Dummy header, to pacify HeVeA.
+
+2007-01-29  Akim Demaille  <akim@lrde.epita.fr>
+
+	make -k.
+	* Makefile (check-warning): New.
+
+2007-01-29  Akim Demaille  <akim@epita.fr>
+
+	* bib/lrde.bib: RIVF cannot claim to be IEEE.
+	Use isbn instead of annote to store isbn numbers.
+	(berger.07.icip): Sort properly.
+	(darbon.07.mirage): Add.
+
+2007-01-26  Akim Demaille  <akim@lrde.epita.fr>
+
+	Improve HeVeA's \og & \fg.
+	* styles/mybabel.hva: Using xspace and ~.
+
+2007-01-26  Roland Levillain  <roland@lrde.epita.fr>
+
+	* styles/atbeginend.sty: New style (imported).
+	* doc/share.txt: Document it.
+
+2007-01-26  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add an IEEE bibliography style and its abbreviated version.
+
+	* styles/IEEEbib.bst, styles/IEEEbib-abrv.bst: New.
+	* doc/share.txt: Document them.
+
+2007-01-26  Roland Levillain  <roland@lrde.epita.fr>
+
+	* README: Document the use of acronyms in bibliographies.
+	Typos.
+
+2007-01-25  Roland Levillain  <roland@lrde.epita.fr>
+
+	Start a bibliography on Signal and Image Processing in share,
+	from contents.bib files from /lrde/doc.
+
+	* bib/lrde.bib: Have French first names starting with `Ch' and
+	`Th' keep the `h' when abbreviated.
+	* bib/sip.bib,
+	* bib/acronyms.bib, bib/acronyms-abrv.bib: New.
+	* doc/share.txt: Mention them.
+
+2007-01-24  Akim Demaille  <akim@lrde.epita.fr>
+
+	waddington.05.ldta.
+	* doc/share.txt: One more example, to highlight the use of the
+	file extension.
+	* bib/transformers.bib (waddington.05.ldta): New.
+	* Makefile (update): Remove write permissions from download bibs.
+
+2007-01-24  Akim Demaille  <akim@lrde.epita.fr>
+
+	lrde/doc.
+	* doc/share.txt: s,/mnt,/lrde,g.
+	Introduce the "lrdedoc" field in BibTeX entries.
+	* bib/gp.bib (gamma.95.gp): Be an example.
+
+2007-01-24  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix kernighan.bib.
+	* bib/kernighan.bib: Add many missing commas.
+	* Makefile (update): Do this automatically in the future.
+
+2007-01-24  Akim Demaille  <akim@lrde.epita.fr>
+
+	/lrde/doc.
+	* Makefile: Adjust paths.
+
+2007-01-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update IEEEtran.cls.
+	* styles/IEEEtran.cls: Version 1.7, from upstream.
+	* doc/share.txt: Update location of doc.
+
+2007-01-22  Didier Verna  <didier@lrde.epita.fr>
+
+	* bib/lrde.bib (verna.07.imecs): New.
+
+2007-01-22  Thierry GERAUD  <theo@tegucigalpa.lrde.epita.fr>
+
+	* bib/lrde.bib (fouquier.07.icassp): Fix entry.
+	* bib/lrde.bib (berger.07.icip): New.
+
+2007-01-22  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add support for PBM and PPM files for PDF.
+
+	* make/pdf-figs.mk (SHARE_EXTS_TO_PDF): Add pbm and ppm.
+	(%.pdf): New rule to create PDF files from PBM and PPM images.
+
+2007-01-19  Akim Demaille  <akim@lrde.epita.fr>
+
+	Aleluia, hevea now supports xspace.
+	This is hevea 1.09.
+	* styles/misc.hva, styles/misc.sty: Include the package xspace
+	for hevea too.
+
+2007-01-16  Akim Demaille  <akim@lrde.epita.fr>
+
+	Sync with master.
+	* bin/texi2dvi: here.
+
+2007-01-16  Akim Demaille  <akim@lrde.epita.fr>
+
+	remove hevea trailing spaces.
+	* bin/texi2dvi (run_hevea): here.
+
+2007-01-15  Akim Demaille  <akim@lrde.epita.fr>
+
+	\acr.
+	* styles/myacronym.sty (\acr, \acrp): New.
+	* doc/share.txt: Doc them.
+
+2007-01-10  Akim Demaille  <akim@lrde.epita.fr>
+
+	Don't include figs/ by default.
+	* make/tex.mk(TEXI2DVI_FLAGS): Don't pass -I figs.
+	It is safer to use qualified file names with includegraphics etc.
+	Besides, that make DVI work easier (dvips and xdvi don't have -I figs,
+	but if the file name is qualified, they will find the files).
+
+2007-01-09  Akim Demaille  <akim.demaille@free.fr>
+
+	Add eps support to pdf-figs.mk
+	* make/pdf-figs.mk: here.
+	This is messy, Q&D, but I need that now :(
+
+2007-01-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	mysig-alternate.
+	* styles/mysig-alternate.cls: New.
+	* doc/share.txt: Doc it.
+
+2007-01-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	More precise entries.
+	* bib/compilation.bib: here.
+
+2007-01-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix dist.
+	* make/dist.mk: Don't use pipes to avoid hiding failures.
+
+2007-01-05  Roland Levillain  <roland@lrde.epita.fr>
+
+	Add support for PGM files.
+
+	* make/pdf-figs.mk (SHARE_EXTS_TO_PDF): Add pgm.
+	(%.pdf): New rule to convert PGM images to PDF files.
+
+2007-01-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Complete bibs.
+	* bib/lrde.bib, bib/compilation.bib: Complete entries, to
+	please picky reviewers.
+
+2007-01-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Use the long title.
+	* styles/beamerthemeKremlinBicetre.sty (\maketoc): here.
+
+2007-01-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix share-up.
+	* make/share-am.mk: here.
+
+2007-01-05  Akim Demaille  <akim@lrde.epita.fr>
+
+	More pdf output.
+	* make/pdf-figs.mk: Add support for GNU Plot files output in
+	PDF + TeX parts.
+	Workaround fig2dev portability issues.
+	* doc/share.txt: Update.
+
+2006-12-18  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix share-up.
+	* make/share-am.mk: Here.
+
+2006-12-18  Akim Demaille  <akim@lrde.epita.fr>
+
+	grammar.ldf.
+	* styles/ldf/grammar.ldf: New.
+	* styles/mylistings.hva: Use it.
+	* doc/share.txt: Doc it.
+	* make/share-am.mk: Initialize CLEANFILES for real.
+
+2006-12-11  Akim Demaille  <akim.demaille@free.fr>
+
+	camlp4.manual
+	* bib/transformers.bib: New.
+
+2006-12-11  Valentin David  <valentin@ii.uib.no>
+
+	Add a space after arrows in SDF syntax
+	* styles/ldf/sdf.ldf: Add a space.
+
+2006-12-11  Akim Demaille  <akim.demaille@free.fr>
+
+	Don't use courier, it's real ugly
+	* styles/myentcs.cls: here.
+
+2006-12-11  Akim Demaille  <akim.demaille@free.fr>
+
+	Use rightarrow in SDF
+	* styles/ldf/sdf.ldf: Here.
+
+2006-12-11  Akim Demaille  <akim.demaille@free.fr>
+
+	Found the quotes!
+	* styles/ldf/stratego.ldf: Finally found the right way to
+	type set the Stratego quotes.
+
+2006-12-11  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix SDF definition.
+	* styles/ldf/sdf.ldf: context and free are not keywords,
+	context-free is.
+
+2006-12-11  Akim Demaille  <akim@lrde.epita.fr>
+
+	Improve Stratego style.
+	* styles/ldf/stratego.ldf: Don't highlight {}.
+	- is valid in identifiers.
+
+2006-12-11  Akim Demaille  <akim@lrde.epita.fr>
+
+	Candy for |[]|.
+	* styles/ldf/stratego.ldf: here.
+
+2006-12-11  Akim Demaille  <akim@lrde.epita.fr>
+
+	|[ ]|.
+	* styles/ldf/stratego.ldf: Add candy for quotes.
+
+2006-12-11  Valentin David  <valentin@ii.uib.no>
+
+	Add a SAGA bibtex file.
+	* bib/saga.bib: New.
+
+2006-12-11  Akim Demaille  <akim@lrde.epita.fr>
+
+	More oldkeys, fix update-cite.
+	* bin/update-cite: Don't match too easily.
+	* bib/transformers.bib, bib/cwi.bib: Add missing oldkeys.
+
+2006-12-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	More transformer.bib.
+	* doc/share.txt: Use zzzref for cross-refs.
+	* bib/transformers.bib (zook.04.gpce): New.
+	Rekey some entries.
+
+2006-12-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	psbbox: Fix gs invocation.
+	* bin/psbbox: Pass - to gs.
+
+2006-12-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	psbbox --pages.
+	* bin/psbbox: Support --pages.
+	(&backup): Copy instead of moving.
+
+2006-12-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	myentcs.
+	* styles/myentcs.cls: New.
+	* doc/share.txt: Doc it.
+
+2006-12-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	Remove anisko.05.ldta.
+	* bib/lrde.bib: Was rejected anyway.
+
+2006-12-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update foreign bibs.
+	* make/share-am.mk (update): Remove.
+	* Makefile (update): New.
+	* bib/strategoxt.bib: Update.
+	* bib/kernighan.bib: Update.
+	* bib/dmr.bib: Rename as...
+	* bib/richie.bib: this.
+	Update.
+
+2006-12-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	Clean transformers.bib and csi.bib.
+	* bib/transformers.bib, bib/csi.bib: Run reformat.
+	Move student reports from the former to the latter.
+	Sort.
+
+2006-12-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix bib entry key.
+	* bib/lrde.bib (bellot.07.rivf): Rename as...
+	(le-quoc.07.rivf): this.
+
+2006-12-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix an urllrde.
+	* bib/lrde.bib (bellot.07.rivf): here.
+
+2006-12-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	bellot.07.rivf.
+	* bib/lrde.bib: New.
+	Run Emacs' reformatting.
+
+2006-12-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	Typo in previous checkin.
+	* make/dload.mk: Check whether there is something to install,
+	not whether there is a place for it to be installed.
+
+2006-12-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	dload.mk: also handle lrde/papers.
+
+	* make/dload.mk: .
+
+2006-12-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add phony.
+	* make/dload.mk: here.
+
+2006-12-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update ENTCS style.
+	* styles/entcs.cls: Updated from http://www.entcs.org/prelim.html.
+	* styles/prentcsmacro.sty: Remove, as this file is
+	specific to each conference, it should not be shared.
+
+2006-12-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix entcsmacro.sty.
+	* styles/entcsmacro.sty: What are they waiting for to update
+	their url?
+
+2006-12-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	entsmacro.
+	* styles/entcsmacro.sty: New.
+
+2006-11-29  mefyl  <mefyl@lrde.epita.fr>
+
+	Add Hocquet and Moulard techreps to csi.bib.
+	* bib/csi.bib: Add Hocquet and Moulard techreps.
+
+2006-11-28  Christophe Berger  <christophe.berger@lrde.epita.fr>
+
+	Fix seminar techrep name (introduced in rev 1713).
+
+	* bib/csi.bib: Fix the name.
+
+2006-11-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	Display the keys of the papers in the private version.
+	* bin/make-bib.pl: Do that.
+	* bib/lrde.bib (geraud.06.lcsd_abstract): Rename as...
+	(geraud.06.lcsd-abstract): this, to avoid LaTeX issues with _.
+
+2006-11-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	compactemize -> compactitemize.
+	* styles/beamerthemeKremlinBicetre.sty: here.
+
+2006-11-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	Remove a spurious period.
+	* styles/lrde-bst.sty: here.
+
+2006-11-28  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fixes in lrde.bib.
+	* bib/lrde.bib (konukoglu.0X.itip): Complete and rename as
+	(konukoglu.06.itip): this.
+	(geraud.04.iccvg): Fix the year (my bad).
+
+2006-11-27  Christophe Berger  <christophe.berger@lrde.epita.fr>
+
+	Add seminar techreps to csi.bib.
+
+	* bib/csi.bib: Add 0517 and 0603 seminar techreps.
+
+2006-11-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Issue the total of publications.
+	* bin/make-bib.pl: Generate the total.
+	Put the submissions before.
+	* Makefile: Don't use >$@, that's dangerous.
+
+2006-11-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Prepare lrde.bib to be online.
+	* bib/lrde.bib: Comment changes.
+	* Makefile: Install it.
+
+2006-11-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	lrde-private.pdf.
+	* Makefile: It can appear in /mnt/doc/papers/lrde.
+
+2006-11-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Enumerate the publications.
+	* bin/make-bib.pl (&section_by_key): Use &bibliography.
+	(&bibliography): Use {enumerate}.
+
+2006-11-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	pgfdeclare logos.
+	* styles/beamerthemeKremlinBicetre.sty (lrde-logo-mask, lrde-logo)
+	(lrde-logo-red): New pgf images.
+
+2006-11-23  Roland Levillain  <roland@lrde.epita.fr>
+
+	Fix bin/pdfbook.
+
+	* bin/pdfbook (work_dir): New.  Use it to define...
+	(in_ps, book_ps): ...these.
+	Pass an output filename as second argument to ps2pdf14, instead of
+	writing the standard output of ps2psd14 to this file.
+
+2006-11-22  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add \photo.
+	* styles/lrde-bulletin.sty: here.
+	With help from Didier Verna.
+
+2006-11-18  Akim Demaille  <akim.demaille@free.fr>
+
+	Update svn-externals
+	* bin/svn-externals: Support arguments: directories to update.
+	* make/share-am.mk: Use that feature.
+
+2006-11-18  Akim Demaille  <akim.demaille@free.fr>
+
+	Changes in KB style
+	* styles/beamerthemeKremlinBicetre.sty: Use dynamic uncovering scheme.
+	* styles/numberslides.sty: Fix comment.
+
+2006-11-16  Akim Demaille  <akim.demaille@free.fr>
+
+	Beamer things
+	* figs/lrde-red.png, figs/lrdemask.jpg: New.
+	* styles/numberslides.sty: Also include the instution.
+
+2006-11-16  Akim Demaille  <akim.demaille@gmail.com>
+
+	prism.ldf
+	* styles/ldf/prism.ldf: New.
+	From Benoit Sigoure.
+	* styles/mylistings.hva: Use it.
+	* doc/share.txt: Adjust.
+
+2006-11-10  Akim Demaille  <akim@lrde.epita.fr>
+
+	More ps tools.
+	* bin/pdfbook: Don't optimize PS for speed.
+	* bin/psfit: Use better margin default values.
+	Document the a2ps binding.
+	($verbose): Rename as...
+	($verbose_p): this.
+	Use the latest psbbox interface.
+	* bin/psbbox: More TODO.
+
+2006-11-09  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix psfit, improve psbbox.
+	* bin/psbbox: Support -e, -c, -f.
+	* bin/psfit: Fix the computation of odd side inner margins.
+
+2006-11-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	darbon.07.ei.
+	* bib/lrde.bib (darbon.07.ei): New.
+	Sort entries.
+
+2006-11-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	lrde.bib fixes.
+	* bib/lrde.bib (herault.06.qest): Year is 2006.
+	(verna.06.ecoop): Flag as best paper.
+
+2006-11-03  Akim Demaille  <akim@lrde.epita.fr>
+
+	Use rich frames for tocs.
+	* styles/beamerthemeKremlinBicetre.sty: Don't pass [plain] to
+	toc frames.
+
+2006-11-03  Akim Demaille  <akim@lrde.epita.fr>
+
+	Don't use AtEndDocumentation.
+	* styles/beamerthemeKremlinBicetre.sty: For some reason, the
+	toc is not issued, but there is a empty slide.
+
+2006-11-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	Also install the README.
+	* Makefile: install README-lrde.bib to keep up to date.
+
+2006-11-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	Move the checkin machinery of lrde.bib into share.
+	* doc/update-lrde-bib.txt: New.
+	* README-lrde.bib: New.
+	* Makefile: Merge in, and adjust, what was in lrde-publis.
+
+2006-11-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix entry.
+	* bib/lrde.bib (darbon.06b.jmiv): Rename as.
+	(darbon.06.jmivb)
+
+2006-11-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	Protect from bibtex.
+	* bib/lrde.bib: The use of \LaTeX.
+
+2006-11-01  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update svn-externals.
+
+	* bin/svn-externals: More aliases.
+	Simplify some checks.
+	More assertions.
+	* make/share-am.mk (SVN): New, use it.
+	Upgrade the svn-externals invocation.
+
+2006-10-30  Roland Levillain  <roland@lrde.epita.fr>
+
+	* bib/compilation.bib (bordeleau.03)
+	* bib/model-checking.bib (arora, hightower): Remove extended
+	characters to please BibTeX.
+
+2006-10-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	Updates.
+	* styles/lrde-bst.sty: New.
+	* styles/misc.sty (\CurVe): New.
+	* bin/make-bib.pl: --verbose.
+	* bib/lrde.bib: Typo.
+
+2006-10-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update lrde.bib.
+	* bib/lrde.bib (darbin.06.tr): New.
+	I found this definition in /mnt/doc.  It was not checked in.
+
+2006-10-30  Akim Demaille  <akim@lrde.epita.fr>
+
+	More styles for talks.
+	* styles/numberslides.sty: New.
+	* styles/beamerthemeKremlinBicetre.sty: New.
+	* doc/share.txt: Adjust.
+
+2006-10-27  Akim Demaille  <akim@lrde.epita.fr>
+
+	Upgrades.
+	* bin/psfit: Support -d/-i.
+	Does not work as cleanly as expected :(
+	* bin/svn-externals: Support -S, -U, -u, and recursive aliases.
+
+2006-10-23  Akim Demaille  <akim.demaille@free.fr>
+
+	Pass -p to fig2dev
+	* make/pdf-figs.mk: to keep it landscape.
+
+2006-10-22  Akim Demaille  <akim.demaille@free.fr>
+
+	update svn-externals
+	* bin/svn-externals: More aliases.
+	More options.
+
+2006-10-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	Trailing spaces.
+	* styles/IEEEtranS.bst: Kill them.
+
+2006-10-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	dos2unix.
+	* styles/IEEEtran.bst: Do that.
+	Kill trailing spaces.
+
+2006-10-20  Akim Demaille  <akim@lrde.epita.fr>
+
+	pdffig support.
+	* make/pdf-figs.mk: Support pdffig.
+
+2006-10-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	dload.mk.
+	* make/dload.mk: New.
+	* doc/share.txt: Document it.
+
+2006-10-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	Upgrade psfit and psbbox.
+	* bin/psfit, bin/psbbox: Accept more options.
+	Accept - for input and output.
+
+2006-10-11  Akim Demaille  <akim@lrde.epita.fr>
+
+	psbbox: work also as a filter.
+	* bin/psbbox: Implement that.
+	The support for --help is tbd.
+
+2006-10-09  Akim Demaille  <akim@lrde.epita.fr>
+
+	Update svn-externals.
+
+	* bin/svn-externals (usage): New.
+	Don't expect sed to be nice, OSX is out there.
+	Simplify the handling of aliases.
+
+2006-10-09  Akim Demaille  <akim@lrde.epita.fr>
+
+	psfit todo.
+
+	* bin/psfit: Add some.
+
+2006-10-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix psfit.
+
+	* styles/facture.cls: Add some useful comments I found somewhere.
+	* bin/psfit: Support --margin, 24pt by default.
+	Use correct A4 dimensions, not Letter ;)
+
+2006-10-06  Akim Demaille  <akim@lrde.epita.fr>
+
+	psfit.
+
+	* doc/share.txt: Update.
+	* bin/pdfbook: Pass -optimizeForSpeed.
+	Support PS/PDF output.
+	* bin/psfit: New.
+	* bin/psbbox: Keep %%Page DSCs.
+
+2006-10-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	Leave room for the bill key.
+
+	* styles/facture.cls: Do that.
+
+2006-10-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	Support *.tiff.
+
+	* make/pdf-figs.mk: Do that.
+
+2006-10-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	pdf-figs.
+
+	* doc/share.txt: Typo.
+	* doc/svn.txt: About not checking in products.
+	* make/pdf-figs.mk: Support EXTS_TO_PDF and EXTS_TO_PNG.
+
+2006-10-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	Fix svn-externals.
+
+	* bin/svn-externals: Variables changes in pipes don't affect the
+	environment...
+	(svn_externals_update_stream): New.
+	(svn_externals_update): Adjust.
+
+2006-10-04  Akim Demaille  <akim@lrde.epita.fr>
+
+	svn-externals.
+
+	* doc/hevea.txt: New, extracted from...
+	* README: here.
+	Rename as...
+	* make/share-am.mk: this.
+	* README: New symlink.
+	* doc/share.txt: New.
+	* doc/README.svn: Rename as...
+	* doc/svn.txt: this.
+
+	* bin/update-share: Remove.
+	* bin/svn-externals: New.
+
+2006-09-29  Akim Demaille  <akim@lrde.epita.fr>
+
+	Add README.svn.
+
+	* doc: New.
+	* doc/README.svn: New.
+	* README: Update.
+
 2006-09-27  Florent Terrones  <terron_f@lrde.epita.fr>
 
 	* bib/vaucanson.bib: Add some misc urls.

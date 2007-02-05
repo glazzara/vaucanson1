@@ -7,7 +7,7 @@ share_bib_dir = $(share_dir)/bib
 ChangeLog ?= ChangeLog
 
 TEXI2DVI = $(share_bin_dir)/texi2dvi
-TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch -I figs -I $(share_style_dir) -I $(share_bib_dir)
+TEXI2DVI_FLAGS = --tidy --build-dir=tmp.t2d --batch -I $(share_style_dir) -I $(share_bib_dir)
 
 TEXI2PDF = $(TEXI2DVI) --pdf
 TEXI2PDF_FLAGS = $(TEXI2DVI_FLAGS)

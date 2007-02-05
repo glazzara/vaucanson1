@@ -60,7 +60,7 @@ Category            & Semiring values  & Monoid values  & Series          &Serie
 \code{usual}        & \code{bool}      &  \code{string} &   B<<A*>>       & \code{polynom}&   \code{exp}\\
 \code{numerical}    & \code{int}       &  \code{string} &   Z<<A*>>       & \code{polynom}&   \code{exp}\\
 \code{tropical\_min} & \code{int}       &  \code{string} &   Z(min,+)<<A*>>& \code{polynom}&   \code{exp}\\
-\code{tropical\_max} & \code{int}       &  \code{string} &   Z(max,+)<<A*>>& \code{polynom}&   \code{exp}\\  
+\code{tropical\_max} & \code{int}       &  \code{string} &   Z(max,+)<<A*>>& \code{polynom}&   \code{exp}\\
 \hline
 \end{tabular}
 
@@ -89,8 +89,8 @@ the target language.
 For  a   given  category  *D*,   the  module  \code{vaucanswig\_D\_context}
 contains the following **classes**:
 
-\code{D\_alphabet\_t}: 
-     Alphabet element with constructor from a string of generator 
+\code{D\_alphabet\_t}:
+     Alphabet element with constructor from a string of generator
      letters::
 
         (constructor): string -> D\_alphabet\_t
@@ -99,16 +99,16 @@ contains the following **classes**:
      Monoid structural element with the following members:
 
      - standard \Vauc constructors and operators,
-     
+
      - method to construct a word element from a simple string::
 
         make: string -> D\_monoid\_elt\_t
 
      - method to generate the identity value::
 
-        identity: -> D\_monoid\_elt\_t 
+        identity: -> D\_monoid\_elt\_t
 
-\code{D\_monoid\_elt\_t}: 
+\code{D\_monoid\_elt\_t}:
      Word  (monoid element) with  standard \Vauc  constructors and
      operators.
 
@@ -127,7 +127,7 @@ contains the following **classes**:
          identity: -> D\_semiring\_elt\_t
          zero: -> D\_semiring\_elt\_t
 
-\code{D\_semiring\_elt\_t}: 
+\code{D\_semiring\_elt\_t}:
      Weight  (semiring element)  with standard  \Vauc constructors
      and operators.
 
@@ -150,7 +150,7 @@ contains the following **classes**:
           exp\_identity: -> D\_exp\_t
           exp\_zero: -> D\_exp\_t
 
-\code{D\_series\_set\_elt\_t}, \code{D\_exp\_t}: 
+\code{D\_series\_set\_elt\_t}, \code{D\_exp\_t}:
       Polynom  and  expressions  (series  elements  with  polynom  and
       expression implementations) with standard \Vauc constructors
       and operators.
@@ -184,7 +184,7 @@ contains the following **classes**:
          series: word -> D\_series\_set\_elt\_t
          series: D\_exp\_t -> D\_series\_set\_elt\_t
          exp: D\_series\_set\_elt\_t -> D\_exp\_t
-         exp: string -> D\_expt\_t 
+         exp: string -> D\_expt\_t
 
 In  addition  to these  classes,  the module  \code{vaucanswig\_D\_context}
 contains the following **function**::
@@ -213,7 +213,7 @@ textual representation of values. Example use (Python):
 >>> c.series().identity().describe()
 'tropical_min_serie_t@0x81ad8b8 = 0'
 >>> c.series().zero().describe()
-'tropical_min_serie_t@0x81a6de8 = +oo'  
+'tropical_min_serie_t@0x81a6de8 = +oo'
 \end{lstlisting}
 
 \subsubsection{Automata}
@@ -221,7 +221,7 @@ textual representation of values. Example use (Python):
 For  a  given  category  *D*,  the  module  \code{vaucanswig\_D\_automaton}
 contains the following **classes**:
 
-\code{D\_auto\_t}: 
+\code{D\_auto\_t}:
   The standard automaton type for this category.
 
 \code{gen\_D\_auto\_t}:
@@ -268,12 +268,12 @@ Example use:
 0
 >>> a.add_state()
 1
->>> a.add_state() 
+>>> a.add_state()
 2
 >>> a.del_state(1)
 >>> for i in a.states():
 ...   print i
-...  
+...
 0
 2
 >>> a.dot_run("tmp", "dot_view")
@@ -326,7 +326,7 @@ Element<S, T> foo1(const Element<S, T>& exp);
 
 // INTERFACE: Exp foo1(const Exp& other1, const Exp& other2) { return vcsn::foo2(other1, other2); }
 template<typename S, typename T>
-Element<S, T> foo1(const Element<S, T>& exp);  
+Element<S, T> foo1(const Element<S, T>& exp);
 \end{lstlisting}
 
 Then,  after  running  \code{expand.sh}  (the Vaucanswig  generator)  for
@@ -336,10 +336,10 @@ category *D*, the module \code{vaucanswig\_D\_alg\_foo} becomes available::
    foo1: D_exp_t -> D_exp_t
    foo2: (D_exp_t, D_exp_t) -> D_exp_t
 \end{lstlisting}
- 
+
 In   addition,  the   special  algorithm   class  \code{D},   defined  in
 \code{vaucanswig\_D\_algorithms}, also contains 'foo1' and 'foo2'.
-  
+
 \subsubsection{Limitations}
 
 When writing  \code{// INTERFACE:} comments, the following  notes must be
@@ -364,7 +364,7 @@ taken into consideration:
 
 \item When accessing automata, a special behavior stands. Instead of
   writing:
- 
+
   \begin{lstlisting}[language=C++]
     // INTERFACE: void foo(Automaton& a) { return vcsn::foo(a); }
     // INTERFACE: void foo(GenAutomaton& a) { return vcsn::foo(a); }
@@ -374,9 +374,9 @@ taken into consideration:
 
   \begin{lstlisting}[language=C++]
     // INTERFACE: void foo(Automaton& a) { return vcsn::foo(*a); }
-    // INTERFACE: void foo(GenAutomaton& a) { return vcsn::foo(*a); }    
+    // INTERFACE: void foo(GenAutomaton& a) { return vcsn::foo(*a); }
   \end{lstlisting}
-    
+
   Indeed,  \code{Automaton}   and  \code{GenAutomaton}  do   not  expand  to
   \Vauc automata types, but to  a wrapper type. The real automaton
   can be reached by means of operator*().
@@ -391,7 +391,7 @@ installed with \Vauc if enabled.  To enable these modules, run the
 \code{configure} script like this:
 
 \begin{lstlisting}
-configure --enable-vaucanswig  
+configure --enable-vaucanswig
 \end{lstlisting}
 
 \subsection{Licence}
@@ -445,35 +445,35 @@ To use \Vauc in a target scripting language, two steps are necessary:
 
 \subsection{SWIG modules (\texttt{MODULES})}
 
-Vaucanswig defines a number of SWIG modules. 
+Vaucanswig defines a number of SWIG modules.
 
 The list of SWIG modules, hereinafter named \texttt{MODULES}, contains:
 
 \begin{tabular}{|l|p{.6\linewidth}|}
   \hline
   Name of module      & Description
-  \\                   
-  \hline               
+  \\
+  \hline
   \code{core}	     & the core of vaucanswig.
-  \\                   
+  \\
    \code{K\_context}    & for each \var{K}, the definition of the
                          algebraic context \var{K} (\var{K} can be
                          \code{usual}, \code{numerical},
                          \code{tropical} and so on)
-  \\                   
+  \\
    \code{K\_automaton}  & definition of the Automaton and Expression
    		       types in context \var{K}
-  \\                   
+  \\
    \code{K\_alg\_A}	     & for each algorithm *A*, the definition of the
                          specific instance of *A* in context
                          \var{K}. (*A* can be "complete", "standard",
                          "product" and so on)
-  \\                   
+  \\
    \code{K\_algorithms} & a convienient wrapper for context \var{K} with
                          "shortcuts" to all the algorithms instanciated
                          for \var{K}.
   \\
-  \hline  
+  \hline
 \end{tabular}
 
 Note that the name of SWIG modules are closely related to the namespace
@@ -486,7 +486,7 @@ Then, for each module *M*, two items are available:
   Item                     & Description\\
   \hline
    \file{src/vaucanswig\_M.i} &  the dedicated SWIG source file\\
-  
+
    \file{src/M.deps} &		 (optional, may not exist) a file containing a list
    			 of modules that *M* is dependent upon. If the file is
   			 empty, two cases apply:
@@ -516,7 +516,7 @@ SWIG by running the following pseudo-algorithm::
 	 -I${VAUCANSWIGDIR}/meta \
 	 -I${VAUCANSON_INCLUDES}  \
  	 ${VAUCANSWIGDIR}/src/vaucanswig_${M}.i
-    done  
+    done
 \end{lstlisting}%$
 
 Where:
@@ -599,7 +599,7 @@ pyexec_LTLIBRARIES += libvs_$(MODULE).la
 # for each MODULE:
 python_PYTHON += vaucanswig_$(MODULE).py
 \end{lstlisting}%$
-   
+
 \item[Build specifications for binary targets]~\\
 
 \begin{lstlisting}[language=Make]
@@ -619,7 +619,7 @@ libvs_$(MODULE)_la_SOURCES = vaucanswig_$(MODULE)_wrap.cxx
 #	        libvs_$(MODULE)_la_LIBADD += libvs_$(DEPENDENCY).la
 \end{lstlisting}%$
 \end{description}
-   
+
 Additionnaly, the following (not important) parts are generated for
 convenience purposes:
 
@@ -631,7 +631,7 @@ vaucanswig_*_wrap.cxx vaucanswig_*.py: ../src/vaucanswig_*.i
 	               -o vaucanswig_*_wrap.cxx \
 		       ../src/vaucanswig_*.i
 \end{lstlisting}%$
-                     
+
 \item Installation and uninstallation hooks.
 \end{itemize}
 
@@ -647,6 +647,7 @@ source files, of the form: \file{vaucanswig\_\$(MODULE).i}.
 
 
 \section{Generating and extending Vaucanswig sources}
+\label{sec:swig:meta}
 
 The \autoref{sec:swig:build} describes how to use Vaucanswig to create
 a wrapper for \Vauc in a scripting language.  (read it first)
@@ -662,9 +663,9 @@ list of module names is as follows:
 
 \begin{enumerate}
 \item put \code{core} in the \code{MODULES} list.
-  
+
 \item create an auxiliary list \code{ALGS} of algorithm families.
-  
+
   (detailed below, gives \code{alg\_sum}, \code{alg\_complete}, ...)
 
 \item create an auxiliary list \code{KINDS} of algebra contexts
@@ -695,7 +696,7 @@ Each family source file contains the following items:
 
 \begin{itemize}
 \item a link to its \Cxx header.
- 
+
 \item the definition of a bunch of SWIG macros which are able to
   instanciate the algorithm *declarations* for the type set given as
   parameters.
@@ -704,7 +705,7 @@ Each family source file contains the following items:
   instanciate algorithm *wrappers* for the set of types given as
   parameters.
 \end{itemize}
- 
+
 To create the list of algorithm families and associated SWIG sources,
 the geneeration script proceeds as follows:
 
@@ -763,7 +764,7 @@ Now the rest is quite simple. Since we have two lists \code{KINDS}
 
     # the following step is not fundamental, but required for later
     # compilation:
-  
+
     # Step 5.3 (still in the K loop)
     add "${K}_context" to src/${K}_automaton.deps
 
@@ -771,9 +772,9 @@ Now the rest is quite simple. Since we have two lists \code{KINDS}
 
        # Step 5.4
        add "${K}_automaton" to src/${K}_${F}.deps
-     
+
        # Step 5.5
-       add "${K}_${F}" to src/${K}_algorithms.deps  
+       add "${K}_${F}" to src/${K}_algorithms.deps
 \end{lstlisting}
 
 The result of steps 5.3, 5.4 and 5.5 above can later be used to create
@@ -784,10 +785,10 @@ dynamic link dependencies between object code for modules (see
   core -> K1_context -> K1_automaton -> K1_F1 -> K1_algorithms
                                      -> K1_F2 ->
 				     -> K1_F3 ->
-				     
+
        -> K2_context -> K2_automaton -> K2_F1 -> K2_algorithms
                                      -> K2_F2 ->
-				     -> K2_F3 ->  
+				     -> K2_F3 ->
 \end{lstlisting}
 
   (and so on)
@@ -806,7 +807,7 @@ At every level, a property can be recognized. If an algorithm
   scripting language you can write::
   \begin{lstlisting}[language=sh]
 K_bar.foo()
-# (or equivalent)	     
+# (or equivalent)
   \end{lstlisting}
 \end{itemize}
 
@@ -861,8 +862,8 @@ required to change Vaucanswig to support this case.
 
 
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% ispell-local-dictionary: "american"
 %%% TeX-master: "vaucanson-user-manual"
-%%% End: 
+%%% End:

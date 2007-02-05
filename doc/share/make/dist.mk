@@ -20,11 +20,14 @@ dist: distdir
 DIST_IGNORE = \
   -name '*~' -o -name '.svn' -o -name '+committed'
 distdir:
-	rm -rf $(DISTDIR)
+	rm -rf $(DISTDIR) $(DISTDIR).tmp.tar
 	mkdir $(DISTDIR)
-# Use tar, not cp, to preserve the directory parts (cp bar/baz foo/ yields
-# foo/baz, not foo/bar/baz).
-	tar cf - $(data_DATA) | (cd $(DISTDIR) && tar xf -)
+# Use tar, not cp, to preserve the directory parts (cp bar/baz foo/
+# yields foo/baz, not foo/bar/baz).  To catch failures (e.g., missing
+# files), don't use a pipe to connect the two "tar"s.
+	tar cf $(DISTDIR).tmp.tar $(data_DATA)
+	cd $(DISTDIR) && tar xf ../$(DISTDIR).tmp.tar
+	rm -f $(DISTDIR).tmp.tar
 	find $(DISTDIR) $(DIST_IGNORE) | xargs rm -fr
 
 distcheck: dist

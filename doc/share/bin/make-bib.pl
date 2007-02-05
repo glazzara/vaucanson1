@@ -60,6 +60,18 @@ sub y2k ($)
   return $ref;
 }
 
+=item C<verbose (@message)>
+Report the C<@message> on C<STDERR>.
+=cut
+
+my $verbose = 0;
+sub verbose ($)
+{
+  print STDERR "$me: @_\n"
+    if $verbose;
+}
+
+
 =item C<display_help>
 Display help and exit
 =cut
@@ -73,7 +85,8 @@ Create a LaTeX file describing the contents of FILE.BIB.
 
 Options:
   --help             display this help and exit
-  --with-submitted   also include submitted papers.
+  --with-submitted   also include submitted papers
+  --verbose          display tool invocations
 EOF
   exit 0;
 }
@@ -91,7 +104,7 @@ sub bibgrep (@)
   my $cmd = ("bib2bib $bib -q -ob /dev/null -oc $tmp.cites "
 	     . join (' -c ', ('', @_)));
   $cmd =~ s/([<>|\"\\\$])/\\$1/g;
-  print STDERR "$me: @_\n";
+  verbose @_;
   system $cmd and die;
   my @res = ();
   if (-f $cites)
@@ -123,9 +136,9 @@ sub bibliography (@)
 {
   my $cites = citeitem (@_);
   <<EOF;
-\\begin{itemize}
+\\begin{biblist}
 $cites
-\\end{itemize}
+\\end{biblist}
 EOF
 }
 
@@ -250,9 +263,25 @@ sub section_by_publication_type ()
 =cut
 sub count_by_publication_type ()
 {
+  # The total foreach kind of publication and each year.
+  my @total = ("Total");
+  foreach my $year (@year)
+    {
+      my @count = count_by_publication_type_by_year ($year);
+      for my $i (1..$#count)
+	{
+	  $total[$i] += $count[$i];
+	}
+    }
+
+  # The count for each year.
+  my @count =
+    map (join (' & ', count_by_publication_type_by_year ($_)),
+	 @year);
+
   '\begin{center}'
   . "\n"
-  . '\begin{tabular}{|r|r|r|r|r|r|}'
+  . '\begin{tabular}{|*{6}{r|}}'
   . "\n"
   . '\hline'
   . "\n"
@@ -262,11 +291,11 @@ sub count_by_publication_type ()
   . "\n"
   . '\hline'
   . "\n"
-  . join ("\\\\\n",
-	  (map (join (' & ', count_by_publication_type_by_year ($_)),
-		@year)),
-	  # This guy to have a closing \\ for the last previous item.
-	  '')
+  . join ("\\\\\n", @count, '')
+  . '\hline'
+  . "\n"
+  . join (' & ', @total)
+  . "\\\\\n"
   . '\hline'
   . "\n"
   . '\end{tabular}'
@@ -308,13 +337,8 @@ List all the publications, sorted by keys, and with keys displayed.
 
 sub section_by_key ()
 {
-  my $cites = citeitem (bibgrep ("!$rejected"));
-  <<EOF;
-\\section{Publications classées par clé}
-\\begin{description}
-$cites
-\\end{description}
-EOF
+  return sectionning ("section", "Publications classées par clé",
+		      bibgrep ("!$rejected"));
 }
 
 
@@ -330,9 +354,10 @@ sub output ()
   \usepackage{bibentry,natbib}
   \usepackage[colorlinks,linkcolor=blue,urlcolor=blue]{hyperref}
   \usepackage[francais]{babel}
+  \usepackage[biblio]{lrde-bst}
+  \usepackage{misc} %% to get the definition of Curve.
 
 \bibliographystyle{lrde}
-
 %% This command is output by lrde.bst, based on apalike.bst,
 %% with special commands for urllrde BibTeX field.
 %% It was done with this macro, because when I (AD) tried to
@@ -340,11 +365,23 @@ sub output ()
 %% output, and I could not get rid of it.
 \newcommand{\urllrde}[1]{\url{http://publis.lrde.epita.fr/#1}}
 
-\newcommand{\citeitem}[1]{\item \bibentry{#1}.}
-
 \title{Bibliographie du LRDE}
 EOF
 
+  if ($with_submitted)
+  {
+    print <<'EOF';
+\newenvironment{biblist}{\begin{description}}{\end{description}}
+\newcommand{\citeitem}[1]{\item[#1] \bibentry{#1}.}
+EOF
+  }
+  else
+  {
+    print <<'EOF';
+\newenvironment{biblist}{\begin{enumerate}}{\end{enumerate}}
+\newcommand{\citeitem}[1]{\item \bibentry{#1}.}
+EOF
+  }
 
 my $svn_revision = `LANG=C svn info | sed -n 's/^Revision: \\(.*\\)/\\1/p'`;
 chomp $svn_revision;
@@ -392,12 +429,13 @@ Getopt::Long::GetOptions
   (
    'with-submitted' => \$with_submitted,
    'help'           => \&display_help,
+   'verbose'        => \$verbose,
    )
   or exit 1;
 $bib = $ARGV[0];
-@year = "soumission"
+unshift @year, reverse (1999 .. 2007);
+unshift @year, "soumission"
   if $with_submitted;
-unshift @year, reverse (1999 .. 2006);
 output ();
 
 

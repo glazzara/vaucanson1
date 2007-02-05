@@ -37,6 +37,10 @@
 
 \newcommand\key[1]{\textrm{#1}}
 
+\newcommand\http[1]{%
+  \href{http://#1}{\nolinkurl{#1}}%
+}
+
 \newcommand\link[2][\empty]{%
   \ifx#1\empty%
     \url{#2}%
@@ -44,10 +48,16 @@
     #1\footnote{\url{#2}}%
   \fi}
 
+% Override HeVeA's \mailto which is not nice-looking.
+\@ifundefined{mailto}{\newcommand}{\renewcommand}
+\mailto[1]{%
+  \href{mailto:#1}{\nolinkurl{#1}}%
+}
+
 \ifx\email\undefined
 \newcommand\email[2][\empty]{%
   \ifx#1\empty%
-    \url{#2}%
+    \mailto{#2}%
   \else%
     #1\footnote{\url{mailto:#2}}%
   \fi}

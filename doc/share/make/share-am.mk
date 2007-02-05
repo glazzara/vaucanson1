@@ -5,17 +5,15 @@ share_dir ?= $(srcdir)/share
 share_bin_dir = $(share_dir)/bin
 share_make_dir = $(share_dir)/make
 
-CLEANFILES ?=
+CLEANFILES =
 
-update:
-	echo "*** Use \`make share-up' instead of \`make update' ***"
-	$(MAKE) share-up
+SVN = vcs-svn
 
 share-up:
-	cd $(share_dir)/.. && share/bin/update-share
+	$(share_bin_dir)/svn-externals --update=share $(share_dir)/..
 
 share-ci:
-	cd $(share_dir) && vcs-svn ci
+	cd $(share_dir) && $(SVN) ci .
 	$(MAKE) share-up
 
 .PHONY: share-ci share-up

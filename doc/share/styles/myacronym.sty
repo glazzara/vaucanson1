@@ -3,6 +3,17 @@
 %% ---------- %%
 
 \RequirePackage{acronym}
+
+% Similar to \acl and \aclp, but the acronyms comes first.
+%
+% \acf{fubar} -> Fucked Up Beyong All Repair (FUBAR)
+% \acr{fubar} -> FUBAR (Fucked Up Beyong All Repair)
+%
+% `R' stands for reversed for lack of a better idea.
+\newcommand{\acr}[1]{\acs{#1} (\acl{#1})}
+\newcommand{\acrp}[1]{\acsp{#1} (\aclp{#1})}
+
+
 \RequirePackage{mycxx}
 \RequirePackage{myhyperref}
 

@@ -1,5 +1,16 @@
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{hevea}
-\RequirePackage{xspace}
+
+\newcommand{\CurVe}{%
+  \texorpdfstring{%
+    \mbox{\fontseries{b}\fontshape{it}\selectfont%
+      C%
+      \hspace{-.3ex}\protect\raisebox{-.3ex}{\textmd{u}}%
+      \hspace{-.1ex}\textmd{r}%
+      \hspace{-.2ex}V%
+      \hspace{-.6ex}\protect\raisebox{-.3ex}{\textmd{e}}}}{%
+    CurVe}%
+  \xspace}
+
 \input{misc.hva}
 \endinput

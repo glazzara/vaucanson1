@@ -6,9 +6,9 @@
 %% derived from 'RNews.sty' file
 %% kindly provided by the R Project..
 %%
-\def\fileversion{v0.3}
+\def\fileversion{v0.4}
 \def\filename{lrde-bulletin}
-\def\filedate{2006/06/05}
+\def\filedate{2006/11/22}
 \def\docdate {2001/10/31}
 %%
 %% Package `lrde-bulletin' to use with LaTeX2e
@@ -46,24 +46,30 @@
 \renewcommand{\author}[1]{\def\lrdebulletin@author{#1}}
 \renewcommand{\title}[1]{\def\lrdebulletin@title{#1}}
 \newcommand{\subtitle}[1]{\def\lrdebulletin@subtitle{#1}}
+\newcommand{\photo}[1]{\def\lrdebulletin@photo{#1}}
 \newenvironment{article}{%
-  \author{}\title{}\subtitle{}}{\end{multicols}}
+  \author{}\title{}\subtitle{}\photo{}}{\end{multicols}}
 \renewcommand{\maketitle}{
-  \begin{multicols}{2}[\chapter{\lrdebulletin@title}\refstepcounter{chapter}][3cm]%
-    \ifx\empty\Rnews@subtitle\else\noindent\textbf{\lrdebulletin@subtitle}%
+  \begin{multicols}{2}[\chapter{\lrdebulletin@title}\vspace{-.3cm}\refstepcounter{chapter}][3cm]%
+    \ifx\empty\lrdebulletin@subtitle\else\noindent\textbf{\lrdebulletin@subtitle}%
     \par\nobreak\fi%
-    \ifx\empty\lrdebulletin@author\else\noindent par
-      \textit{\lrdebulletin@author}%
-      \par\nobreak\addvspace{\baselineskip}%
+    \ifx\empty\lrdebulletin@photo\else%
+    \begin{wrapfigure}{l}{.3\linewidth}%
+      \includegraphics[width=\linewidth]{\lrdebulletin@photo}%
+    \end{wrapfigure}%
     \fi%
-    \@afterindentfalse\@nobreaktrue\@afterheading}
+    \ifx\empty\lrdebulletin@author\else\noindent%
+      par \textit{\lrdebulletin@author}%
+    \par\nobreak%\addvspace{\baselineskip}%
+    \fi%
+    \@afterindentfalse\@nobreaktrue\@afterheading\par\noindent}
 % \makesubtitle
 % -------------
 % Like \maketitle, but produces a \section instead of a \chapter.  Use
 % \title and \author to define its contents.
 \newcommand{\makesubtitle}{
   \section{\lrdebulletin@title}\refstepcounter{section}%
-    \ifx\empty\Rnews@subtitle\else\noindent\textbf{\lrdebulletin@subtitle}%
+    \ifx\empty\lrdebulletin@subtitle\else\noindent\textbf{\lrdebulletin@subtitle}%
     \par\nobreak\fi%
     \ifx\empty\lrdebulletin@author\else\noindent par
       \textit{\lrdebulletin@author}%

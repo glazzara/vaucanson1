@@ -1,17 +1,22 @@
 % -*- LaTeX -*-
 
 \lstdefinelanguage{SDF}%
-{otherkeywords={->,>,\{,\},;},%
-  morekeywords=[1]{sorts,definition,module,context,free,syntax,lexical,prefer,reject,avoid,%
-    priorities,exports,imports,cons,right,left,assoc,bracket,variables,restrictions},%
-    sensitive,%
-    morecomment=[l]{\%\%},%
-    morecomment=[s]{(*}{*)},%
-    morestring=[b]{"}%
+{%
+  literate={->}{$\rightarrow$ }2,
+  otherkeywords={>,\{,\},;},%
+  alsoletter={-},
+  morekeywords=[1]{sorts,definition,module,context-free,syntax,lexical,prefer,%
+    reject,avoid,priorities,exports,imports,cons,right,left,assoc,bracket,%
+    variables,restrictions},%
+  sensitive,%
+  morecomment=[l]{\%\%},%
+  morecomment=[s]{(*}{*)},%
+  morestring=[b]{"}%
 }[keywords,comments,strings]%
 
 \lstdefinelanguage[Boxed]{SDF}[]{SDF}%
   {morekeywords={pp,V,KW,H,is}}
+
 \lstdefinelanguage[AG]{SDF}[]{SDF}%
   {morekeywords={attributes,if,then,else, true, false}}
 

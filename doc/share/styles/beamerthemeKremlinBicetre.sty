@@ -1,0 +1,67 @@
+\usetheme{Copenhagen}
+\RequirePackage{numberslides}
+\RequirePackage{pxfonts}
+\RequirePackage{eurosym}
+\RequirePackage{xspace}
+
+%% Using our logo.
+\pgfdeclaremask{lrde-logo-mask}{share/figs/lrdemask}
+\pgfdeclareimage[mask=lrde-logo-mask,interpolate=true,width=.10\textwidth]
+		{lrde-logo}{share/figs/lrde-big}
+\pgfdeclareimage[mask=lrde-logo-mask,interpolate=true,width=.10\textwidth]
+		{lrde-logo-red}{share/figs/lrde-red}
+
+
+\newcommand{\csi}{CSI\xspace}
+\newcommand{\epita}{EPITA\xspace}
+\newcommand{\lrde}{LRDE\xspace}
+
+%% Covered stuff should be visible, but transparent.
+\setbeamercovered{dynamic}
+
+%% Itemize, but more compact.
+\newenvironment{compactitemize}{%
+  \begin{itemize}
+    \setlength\topsep{0pt}\setlength\partopsep{0pt}\setlength\parskip{0pt}%
+    \setlength\itemsep{0pt}\setlength\parsep{0pt}%
+  }{%
+  \end{itemize}}
+
+%% Make a frame with the whole toc.
+\newcommand{\maketoc}{
+  \frame{%
+    \frametitle{\inserttitle}%
+    \tableofcontents%
+  }%
+}
+
+%% Emphasized is blue.
+\renewcommand{\emph}[1]{\textcolor{blue}{#1}}
+
+%% Redefine maketitle to include the LRDE logo.
+\renewcommand{\maketitle}{%
+  \begin{frame}
+    \titlepage%
+    \center%
+    \includegraphics[width=3cm]{lrde-big}%
+    \endcenter%
+  \end{frame}%
+  %
+  \maketoc
+}
+
+%% Sections start with their title and local outline.
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{\insertsection}
+  \tableofcontents[currentsection,hideothersubsections]
+\end{frame}
+}
+
+%% Subsections start with their title and local outline.
+\AtBeginSubsection[]{
+\begin{frame}
+  \frametitle{\insertsubsection}
+  \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+\end{frame}
+}
