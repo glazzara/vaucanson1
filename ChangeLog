@@ -1,5 +1,15 @@
 2007-02-05  Akim Demaille  <akim@lrde.epita.fr>
 
+	Minimization coding style.
+	* include/vaucanson/algorithms/minimization_hopcroft.hxx: Use
+	typedefs to shorten the names.
+	Sort includes.
+	Shorten some identifiers.
+	Comment out the variable nb_final, which is not used.
+
+
+2007-02-05  Akim Demaille  <akim@lrde.epita.fr>
+
 	More dev doc.
 	* doc/manual/vaucanswig.tex: Add missing label.
 	White space changes.

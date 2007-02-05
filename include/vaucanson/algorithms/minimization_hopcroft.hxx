@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,21 +17,23 @@
 #ifndef VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HXX
 # define VCSN_ALGORITHMS_MINIMIZATION_HOPCROFT_HXX
 
-# include <vaucanson/algorithms/minimization_hopcroft.hh>
+# include <algorithm>
+# include <list>
+# include <queue>
+# include <set>
+# include <vector>
+
 # include <vaucanson/algebra/implementation/semiring/numerical_semiring.hh>
+# include <vaucanson/algorithms/minimization_hopcroft.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/misc/usual_macros.hh>
 
-# include <algorithm>
-# include <vector>
-# include <queue>
-# include <list>
-# include <set>
-
-namespace vcsn {
-
-  namespace internal {
-    namespace hopcroft_minimization_det {
+namespace vcsn
+{
+  namespace internal
+  {
+    namespace hopcroft_minimization_det
+    {
 
 # define HOPCROFT_TYPES()						\
       typedef std::set<hstate_t> hstates_t;				\
@@ -62,13 +64,13 @@ namespace vcsn {
 	      count_for_ (max_state)
 	  {}
 
-	  /// True if there's states going in states with letter `letter'.
-	  bool compute_states_going_in (const hstates_t& states, letter_t letter)
+	  /// True if there's states going in states with letter \a l.
+	  bool compute_states_going_in (const hstates_t& ss, letter_t l)
 	  {
 	    going_in_.clear ();
 	    maybe_splittable_.clear ();
-	    for_all_const (hstates_t, istate, states)
-	      input_.letter_rdeltaf (*this, *istate, letter, delta_kind::states ());
+	    for_all_const (hstates_t, i, ss)
+	      input_.letter_rdeltaf (*this, *i, l, delta_kind::states ());
 	    return not going_in_.empty ();
 	  }
 
@@ -302,21 +304,20 @@ namespace vcsn {
   {
     AUTOMATON_TYPES(input_t);
     AUTOMATON_FREEMONOID_TYPES(input_t);
-    typedef std::set<hstate_t>				      delta_ret_t;
+    typedef std::list<hstate_t> state_list;
+    typedef typename state_list::iterator state_list_iterator;
+    typedef std::set<hstate_t> delta_ret_t;
 
-    unsigned			max_states = 0;
-
+    unsigned max_states = 0;
     for_all_states(i, input)
       max_states = std::max(unsigned(*i), max_states);
     ++max_states;
     // to avoid special case problem (one state initial and final ...)
     max_states = std::max(max_states, 2u);
 
-    const alphabet_t&	   alphabet_(input.series().monoid().alphabet());
-
-    std::vector<letter_t>	alphabet(alphabet_.begin(),
-					 alphabet_.end());
-    unsigned			max_letters = alphabet.size();
+    const alphabet_t& alphabet_(input.series().monoid().alphabet());
+    std::vector<letter_t> alphabet(alphabet_.begin(), alphabet_.end());
+    unsigned max_letters = alphabet.size();
 
     /*--------------------------.
     | To label the subsets of Q |
@@ -326,36 +327,41 @@ namespace vcsn {
     /*-----------------------------------------.
     | To manage efficiently the partition of Q |
     `-----------------------------------------*/
-    std::vector<unsigned>				class_(max_states);
-    std::vector<std::list<hstate_t> >			part(max_states);
-    std::vector<typename std::list<hstate_t>::iterator> place(max_states);
+    std::vector<unsigned>         class_(max_states);
+    std::vector<state_list>       part(max_states);
+    // Avoid singular iterators in the construction.
+    std::vector<state_list_iterator> place(max_states, state_list().end());
 
     /*------------------------.
     | To manage the splitting |
     `------------------------*/
-    std::vector<bool>				split(max_states);
-    std::vector<unsigned>			twin(max_states);
+    std::vector<bool>     split(max_states);
+    std::vector<unsigned> twin(max_states);
 
     /*-------------------------.
     | To have a list of (P, a) |
     `-------------------------*/
     typedef std::pair<unsigned, unsigned> pair_t;
     std::list<pair_t>	list;
-    bool		**list_mat = new bool*[max_states];
-
+    // FIXME: There is no delete.
+    // FIXME: There is no better structure for a Boolean matrix?
+    // It looks expensive (I guess a bool is a char at best here).
+    // FIXME: RL says that vector<bool> is expected to be fast and
+    // space efficient: give it a try.
+    bool** list_mat = new bool*[max_states];
     for (unsigned p = 0; p < max_states; ++p)
       list_mat[p] = new bool[max_letters];
 
     /*-------------------------.
     | Initialize the partition |
     `-------------------------*/
-    unsigned nb_final = 0;
+    // unsigned nb_final = 0;
 
     for (typename input_t::state_iterator p = input.states().begin();
 	 p != input.states().end(); ++p)
     {
       unsigned c = input.is_final(*p) ? 1 : 0;
-      nb_final += c;
+      // nb_final += c;
       class_[*p] = c;
       place[*p] = part[c].insert(part[c].end(), *p);
     }
@@ -374,7 +380,6 @@ namespace vcsn {
       list_mat[1][e] = true;
     }
 
-    delta_ret_t				delta_ret;
 
     /*-------------------.
     | Initialize Inverse |
@@ -388,6 +393,7 @@ namespace vcsn {
 	inverse[i][j] = 0;
     }
 
+    delta_ret_t delta_ret;
     for (typename input_t::state_iterator p = input.states().begin();
 	 p != input.states().end();
 	 ++p)
@@ -424,7 +430,7 @@ namespace vcsn {
       | (b) |
       `----*/
       std::list<unsigned> met_class;
-      for_all_(std::list<hstate_t>, b, part[p])
+      for_all_(state_list, b, part[p])
 	if (inverse[*b][a] != 0)
 	  for_all_(std::set<hstate_t>, q, *inverse[*b][a])
 	  {
@@ -443,19 +449,19 @@ namespace vcsn {
       /*----.
       | (c) |
       `----*/
-      std::queue<typename std::list<hstate_t>::iterator> to_erase;
+      std::queue<state_list_iterator> to_erase;
 
       for_all_(std::list<unsigned>, b, met_class)
       {
-	bool t=met_set[part[*b].front()];
-	for_all_(std::list<hstate_t>, q, part[*b])
+	bool t = met_set[part[*b].front()];
+	for_all_(state_list, q, part[*b])
 	{
-	  if (t!=met_set[*q])
+	  if (t != met_set[*q])
 	  {
 	    if (twin[*b] == 0)
 	    {
 	      twin[*b] = max_partitions;
-	      max_partitions++;
+	      ++max_partitions;
 	    }
 	    to_erase.push(place[*q]);
 	  }
@@ -463,13 +469,12 @@ namespace vcsn {
       }
       while (!to_erase.empty())
       {
-	typename std::list<hstate_t>::iterator b=to_erase.front();
-	part[p].erase(b);
-	unsigned i=twin[class_[*b]];
-	place[*b] =
-	  part[i].insert(part[i].end(), *b);
-	class_[*b] = i;
+	state_list_iterator b = to_erase.front();
 	to_erase.pop();
+	unsigned i = twin[class_[*b]];
+	place[*b] = part[i].insert(part[i].end(), *b);
+	class_[*b] = i;
+	part[p].erase(b);
       }
 
       /*----.
@@ -499,7 +504,7 @@ namespace vcsn {
     /*------------------------------------.
     | Construction of the ouput automaton |
     `------------------------------------*/
-    std::vector<hstate_t>	out_states(max_partitions);
+    std::vector<hstate_t> out_states(max_partitions);
 
     // Create the states
     for (unsigned i = 0; i < max_partitions; ++i)
@@ -759,9 +764,9 @@ namespace vcsn {
 
 	while(not to_erase.empty())
 	{
-	  hstate_t state_to_erase = to_erase.front();
+	  hstate_t s = to_erase.front();
 	  to_erase.pop();
-	  classes[*class_id].erase(state_to_erase);
+	  classes[*class_id].erase(s);
 	}
 
 	// Push pairs <new_class_id, letter> into the queue.
