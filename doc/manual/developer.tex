@@ -204,11 +204,6 @@ Until this is written, please refer to
 
 Emacs users should use the indentation style of \file{data/vaucanson.el}.
 
-\paragraph{Be extremely conservative with header inclusions}
-Do not include something that is not needed \strong{by the file
-  itself}.  Do not include in a \file{*.hh} something that is required
-by the \file{*.hxx} file itself.
-
 \paragraph{Document in the \file{*.hh}}
 Do not document in the implementation files, but in the declaration
 files.  Unless, of course, the function is private and not
@@ -229,6 +224,17 @@ Inconsistency confuses users, peer developers, and... Doxygen too.
 \subsubsection{Includes}
 \index{\#include}
 
+\paragraph{Be extremely conservative with header inclusions}
+Do not include something that is not needed \strong{by the file
+  itself}.  Do not include in a \file{*.hh} something that is required
+by the \file{*.hxx} file itself.
+
+\paragraph{Sort the inclusions}
+Always include standard headers first, then foreign headers we might
+depend upon, and then Vaucanson headers.  Inside these groups, sort
+the includes.
+
+\paragraph{Qualify header names}
 Please, never use backward relative paths anywhere.  There are very
 difficult to follow (because several such strings can designate the
 same spot), they make renaming and moving virtually impossible etc.
