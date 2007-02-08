@@ -1,3 +1,9 @@
+2007-02-08  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Refactoring of are_isomorphic
+	* include/vaucanson/algorithms/isomorph.hxx:
+	  Refactoring of are_isomorphic.
+
 2007-02-05  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	standard of the empty language should give a automaton with one state ans zero transition.

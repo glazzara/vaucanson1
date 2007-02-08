@@ -34,29 +34,29 @@ namespace vcsn
 {
 
   /*--------------------------------------.
-  | Helper for are_isomorphic algorithm.  |
-  `--------------------------------------*/
+    | Helper for are_isomorphic algorithm.  |
+    `--------------------------------------*/
 
   class Trie
   {
-  public:
-    Trie();
-    /// Needed to avoid the copy of singular iterator when L is not set.
-    Trie(const Trie& t);
+    public:
+      Trie();
+      /// Needed to avoid the copy of singular iterator when L is not set.
+      Trie(const Trie& t);
 
-    Trie* insert(std::vector<int>&);
+      Trie* insert(std::vector<int>&);
 
-  public:
-    std::list<int> A, B;
+    public:
+      std::list<int> A, B;
 
-    // Node in list C pointing to this node
-    std::list<Trie*>::iterator L;
+      // Node in list C pointing to this node
+      std::list<Trie*>::iterator L;
 
-  private:
-    /// Whether Trie::L was set.
-    bool L_is_valid;
-    Trie* insert_suffix(std::vector<int>&, unsigned int);
-    std::map<int, Trie> children;
+    private:
+      /// Whether Trie::L was set.
+      bool L_is_valid;
+      Trie* insert_suffix(std::vector<int>&, unsigned int);
+      std::map<int, Trie> children;
   };
 
   inline
@@ -90,79 +90,264 @@ namespace vcsn
   }
 
 
-  /*---------------.
-  | are_isomorphic |
-  `---------------*/
+
+  /*--------------------------------------.
+    | Functor for are_isomorphic algorithm. |
+    `--------------------------------------*/
 
   template<typename A, typename T>
-  bool
-  are_isomorphic(const Element<A, T>& a, const Element<A, T>& b)
+  class Isomorpher
   {
-    TIMER_SCOPED("are_isomorphic");
-    typedef Element<A, T> automaton_t;
+    public:
 
-    AUTOMATON_TYPES(automaton_t);
+      typedef Element<A, T> auto_t;
+      AUTOMATON_TYPES(auto_t);
 
-    // We can start with good suppositions.
-    if (a.states().size() != b.states().size()
-	|| a.transitions().size() != b.transitions().size()
-	|| a.initial().size() != b.initial().size()
-	|| a.final().size() != b.final().size())
-      return false;
+      typedef std::vector< std::list<int> > delta_t;
+      typedef std::vector<int> trans_t;
 
-    std::list<int>::iterator it_int, it_int_B, it_int_aux;
-
-
-    // Tries of classes of normal, initial and final states.
-    Trie T_Q_IT, T_I, T_T;
-
-    // List of fixed states emerged from classes stored in C.
-    std::list<int> U;
-    // class_state_A[i] = class (node of a Trie) of state i for automaton A
-    std::vector<Trie*> class_state_A(a.states().size());
-    // class_state_A[i] = idem for automaton B
-    std::vector<Trie*> class_state_B(b.states().size());
-
-    // perm_A[i] = state of automaton B corresponding to state i in
-    // the isomorphism (idem for perm_B), or -1 when the association
-    // is yet undefined
-    std::vector<int> perm_A(a.states().size());
-    std::vector<int> perm_B(b.states().size());
-
-    Skeleton<A, T> Sa(a);
-    Skeleton<A, T> Sb(b);
-
-    // The automata are isomorphic unless one proves the contrary
-    bool iso = true;
-
-    // Constructs lists of deterministic ingoing and outgoing transitions
-    // for each state (delta_det_in[i] = list of deterministic ingoing
-    // transitions for state i, idem for delta_det_out[i])
-
-    std::vector< std::list<int> > delta_det_in_A(a.states().size());
-    std::vector< std::list<int> > delta_det_out_A(a.states().size());
-    std::vector< std::list<int> > delta_det_in_B(b.states().size());
-    std::vector< std::list<int> > delta_det_out_B(b.states().size());
-
-    // Automaton A
-    for (int i = 0; i < static_cast<int>(a.states().size()); i++)
-    {
-      if (Sa.delta_in[i].size() > 0)
+      struct automaton_vars
       {
-	it_int = Sa.delta_in[i].begin();
+	  // We have to build the vector T_L using a valid iterator (i.e., not a
+	  // singular one).  We use a temp int list to this end.
+	  automaton_vars(const Element<A, T>& aut)
+	    : s(aut),
+	      aut(aut),
+	      perm(aut.states().size(), -1),
+	      T_L(aut.states().size(), std::list<int>().end()),
+	      delta_det_in(aut.states().size()),
+	      delta_det_out(aut.states().size()),
+	      class_state(aut.states().size())
+	  {
+	  }
+
+	  void
+	  shrink_unused()
+	  {
+	    T_L.resize(0);
+	    delta_det_in.resize(0);
+	    delta_det_out.resize(0);
+	    class_state.resize(0);
+	    class_state.resize(0);
+	  }
+
+
+	  Skeleton<A, T> s;
+	  const Element<A, T> aut;
+
+	  // perm[i] = state of another automaton corresponding to state i in
+	  // the isomorphism, or -1 when the association
+	  // is yet undefined.
+	  trans_t perm;
+
+	  // Vector indexed by states that points to the corresponding node
+	  // of the list of states of each class of states stored in the
+	  // Tries.
+	  std::vector<std::list<int>::iterator> T_L;
+
+	  // Lists of deterministic ingoing and outgoing transitions
+	  // for each state (delta_det_in[i] = list of deterministic ingoing
+	  // transitions for state i, idem for delta_det_out[i])
+	  delta_t delta_det_in;
+	  delta_t delta_det_out;
+
+	  // class_state_A[i] = class (node of a Trie) of state i for automaton A
+	  std::vector<Trie*> class_state;
+      };
+
+      Isomorpher(const Element<A, T>& _a, const Element<A, T>& _b)
+	: a(_a), b(_b)
+      {
+      }
+
+      bool
+      operator()()
+      {
+	if (fails_on_quick_tests())
+	  return false;
+
+	list_in_out_det_trans(a);
+	list_in_out_det_trans(b);
+
+	if (!construct_tries())
+	  return false;
+
+	// Analyzes co-deterministic ingoing and outgoing transitions
+	//(obs: if the automata are deterministic, the isomorphism test
+	// ends here)
+	if (!analyse_det_trans())
+	  return false;
+
+	a.shrink_unused();
+	b.shrink_unused();
+
+	return backtracking();
+      }
+
+    private:
+      /*!
+	Performs quick and basic tests on both automata.
+	If the the automata are not isomorphic, this function
+	returns true.
+      */
+      bool
+      fails_on_quick_tests()
+      {
+	return a.aut.states().size() != b.aut.states().size()
+	  || a.aut.transitions().size() != b.aut.transitions().size()
+	  || a.aut.initial().size() != b.aut.initial().size()
+	  || a.aut.final().size() != b.aut.final().size();
+      }
+
+
+      /*!
+	Constructs lists of deterministic ingoing and outgoing transitions
+	for each state (delta_det_in[i] = list of deterministic ingoing
+	transitions for state i, idem for delta_det_out[i]).
+      */
+      void
+      list_in_out_det_trans(automaton_vars& av)
+      {
+	for (int i = 0; i < static_cast<int>(av.aut.states().size()); i++)
+	{
+	  if (av.s.delta_in[i].size() > 0)
+	    list_det_trans(av, av.delta_det_in, av.s.delta_in, i);
+
+	  if (av.s.delta_out[i].size() > 0)
+	    list_det_trans(av, av.delta_det_out, av.s.delta_out, i);
+	}
+      }
+
+
+      /*!
+	This function create tries of classes of states with the same sequence
+	of ingoing and outgoing transitions in lex. order for both automata.
+
+	This function returns false if it discovers that the two automata
+	are not isomorphic during the construction of the tries.
+      */
+      bool
+      construct_tries()
+      {
+	// Constructs Tries for Automaton A.
+	for (int i = 0; i < static_cast<int>(a.aut.states().size()); i++)
+	{
+	  Trie *T_aux = add_all_transitions_to_trie(a, i);
+
+	  // New class?
+	  if (T_aux->A.size() == 0)
+	  {
+	    // Inserts in list C of classes (nodes of Tries)
+	    C.push_front(T_aux);
+
+	    // Each Trie node points to its node in list C
+	    T_aux->L = C.begin();
+	  }
+
+	  // Inserts the state in the list A of its corresponding class
+	  T_aux->A.push_front(i);
+	  // Defines class of state i
+	  a.class_state[i] = T_aux;
+	  // T_L_A[i] = node of the list of states of class of state i
+	  a.T_L[i] = T_aux->A.begin();
+	}
+
+
+	// Constructs Tries for automaton B.
+	for (int i = 0; i < static_cast<int>(b.aut.states().size()); i++)
+	{
+	  Trie *T_aux = add_all_transitions_to_trie(b, i);
+
+	  if (T_aux->A.size() == T_aux->B.size())
+	    return false;
+
+	  // Inserts the state in the list B of its corresponding class
+	  T_aux->B.push_front(i);
+	  // Defines class of state i
+	  b.class_state[i] = T_aux;
+	  // T_L_B[i] = node of the list of states of class of state i
+	  b.T_L[i] = T_aux->B.begin();
+	}
+
+	return true;
+      }
+
+
+      /*!
+	Searches for classes having only one state for each
+	automaton. These states must be identified. These classes are
+	then stored in list U.
+	Also tests if all classes have the same number of states in
+	lists A and B.
+
+	This function return false if it finds that the two automata
+	are not isomorphic during the construction of the list.
+      */
+      bool
+      construct_list_of_classes_with_one_state(std::list<int>& U)
+      {
+	std::list<Trie*>::iterator itr_C = C.begin();
+
+	while (itr_C != C.end())
+	{
+	  // Do automata A and B have the same number of states in the
+	  // current class?
+	  if ((*itr_C)->A.size() != (*itr_C)->B.size())
+	    return false;
+
+	  // Class *itr_C contains only one state of each automata?
+	  if ((*itr_C)->A.size() == 1)
+	  {
+	    // States *((*itr_C).A.begin()) and
+	    // *((*itr_C).B.begin()) have to be identified.
+	    int k = *((*itr_C)->A.begin());
+	    U.push_front(k);
+	    int l = *((*itr_C)->B.begin());
+	    a.perm[k] = l;
+	    b.perm[l] = k;
+
+	    // Just for coherence, lists A and B of class *itr_C are voided
+	    ((*itr_C)->A).erase((*itr_C)->A.begin());
+	    ((*itr_C)->B).erase((*itr_C)->B.begin());
+	    // Deletes current node and points to the next.
+	    itr_C = C.erase(itr_C);
+	  }
+	  else
+	    itr_C++;
+	}
+	return true;
+      }
+
+      /*!
+	Fill a list of deterministic ingoing or outgoing transitions
+	(according to the 'delta_in_or_not' set passed to the function)
+	for a state 'i' (delta_det_in[i] = list of deterministic ingoing
+	transitions for state i, idem for delta_det_out[i]).
+
+	Usually, you would like to call this function with either S.delta_in
+	or S.delta_out as 'delta_in_or_out' parameter.
+      */
+      void
+      list_det_trans(automaton_vars& av,
+		     delta_t& delta_det,
+		     const delta_t& delta_in_or_out,
+		     int i)
+      {
+	std::list<int>::const_iterator it = delta_in_or_out[i].begin();
 	// Number of transitions with the same label
 	int j = 1;
-	for (it_int++; it_int != Sa.delta_in[i].end(); it_int++)
+
+	for (it++; it != delta_in_or_out[i].end(); it++)
 	{
 	  // It seems there is no iterator arithmetics in C++:
 	  // *(it_int - 1) doesn't compile.
-	  int k = *(--it_int);
-	  it_int++;
+	  int k = *(--it);
+	  it++;
 	  // New label?
-	  if (Sa.transitions_labels[*it_int] != Sa.transitions_labels[k])
+	  if (av.s.transitions_labels[*it] != av.s.transitions_labels[k])
 	    // The last transition is deterministic?
 	    if (j == 1)
-	      delta_det_in_A[i].push_back(k);
+	      delta_det[i].push_back(k);
 	  // Several transitions with the same label?
 	    else
 	      // Does nothing. A series of transitions with a new label begins.
@@ -174,554 +359,350 @@ namespace vcsn
 	// The last label visited is deterministic?
 	if (j == 1)
 	{
-	  delta_det_in_A[i].push_back(*(--it_int));
-	  it_int++;
+	  delta_det[i].push_back(*(--it));
+	  it++;
 	}
       }
-      if (Sa.delta_out[i].size() > 0)
+
+      /*!
+	Construct a list of all the given state's transitions and add them to
+	the correct Trie.
+
+	This function returns a pointer to the Trie where this list has been
+	added.
+      */
+      Trie *
+      add_all_transitions_to_trie(const automaton_vars& av,
+				  int i)
       {
-	it_int = Sa.delta_out[i].begin();
-	// Number of transitions with the same label
-	int j = 1;
-	for (it_int++; it_int != Sa.delta_out[i].end(); it_int++)
+	// Vector all_transitions_lex contains the sequence of labels of
+	// ingoing and outgoing transitions of state i in lex. order,
+	// separated by a mark (-1)
+	trans_t all_transitions_lex(av.s.delta_in[i].size() +
+				    av.s.delta_out[i].size() + 1);
+	std::list<int>::const_iterator it;
+
+	// First stores the sequence of ingoing transitions
+	for (it = av.s.delta_in[i].begin();
+	     it != av.s.delta_in[i].end(); ++it)
+	  all_transitions_lex.push_back(av.s.transitions_labels[*it]);
+
+	all_transitions_lex.push_back(-1);
+
+	// Next, outgoing transitions
+	for (it = av.s.delta_out[i].begin();
+	     it != av.s.delta_out[i].end(); ++it)
+	  all_transitions_lex.push_back(av.s.transitions_labels[*it]);
+
+	// Gets the node of the correct Trie (Trie of initial, final or normal
+	// states) for the sequence of transitions of state i
+	if (av.aut.is_initial(av.s.states[i]))
+	  return T_I.insert(all_transitions_lex);
+	if (av.aut.is_final(av.s.states[i]))
+	  return T_T.insert(all_transitions_lex);
+
+	return T_Q_IT.insert(all_transitions_lex);
+      }
+
+      /*!
+	Tries to discover more fixed states implied by states in U.
+	During the loop, a state i of A is in its Trie if perm_A[i] = -1
+	Time complexity: O(m).
+
+	Returns false if this function finds that the two automata are
+	not isomorphic.
+	(obs: if the automata are deterministic, the isomorphism test
+	ends here)
+      */
+      bool
+      analyse_det_trans()
+      {
+	std::list<int> U;
+
+	if (!construct_list_of_classes_with_one_state(U))
+	  return false;
+
+	while (!U.empty())
 	{
-	  // It seems there is no iterator arithmetics in C++:
-	  // *(it_int - 1) doesn't compile.
-	  int k = *(--it_int);
-	  it_int++;
-	  // New label?
-	  if (Sa.transitions_labels[*it_int] != Sa.transitions_labels[k])
-	    // The last transition is deterministic?
-	    if (j == 1)
-	      delta_det_out_A[i].push_back(k);
-	  // Several transitions with the same label?
-	    else
-	      // Does nothing. A series of transitions with a new label begins.
-	      j = 1;
-	  // Same label?
+	  if (!do_analyse_det_trans(U,
+				    a.delta_det_in,
+				    b.delta_det_in,
+				    a.s.src_transitions,
+				    b.s.src_transitions))
+	    return false;
+	  if (!do_analyse_det_trans(U,
+				    a.delta_det_out,
+				    b.delta_det_out,
+				    a.s.dst_transitions,
+				    b.s.dst_transitions))
+	    return false;
+	  U.pop_front();
+	}
+	return true;
+      }
+
+
+      bool
+      do_analyse_det_trans(std::list<int>& U,
+			   const delta_t& delta_det_A,
+			   const delta_t& delta_det_B,
+			   const std::vector<int>& transitions_A,
+			   const std::vector<int>& transitions_B)
+      {
+	// Each state in U has already an image (perm_A and perm_B are
+	// defined for this state)
+
+	// i = current state in automaton A, j = its image in automaton B
+	int i = U.front();
+	int j = a.perm[i];
+
+	// As states i and j are already associated, they belong to
+	// the same class, then have the same sequence of
+	// deterministic transitions.
+	std::list<int>::const_iterator it = delta_det_A[i].begin();
+	std::list<int>::const_iterator it_aux = delta_det_B[j].begin();
+	for (; it != delta_det_A[i].end(); ++it, ++it_aux)
+	{
+
+	  // The states being considered are the sources of current
+	  // co-deterministic transitions (k for automaton A, l for B)
+	  int k = transitions_A[*it];
+	  int l = transitions_B[*it_aux];
+
+	  // Has state k already been visited?
+	  if (a.perm[k] >= 0)
+	  {
+	    // If it has already been visited, does the current image
+	    // matches state l?
+	    if (a.perm[k] != l)
+	      return false;
+	  }
 	  else
-	    j++;
-	}
-	// The last label visited is deterministic?
-	if (j == 1)
-	{
-	  delta_det_out_A[i].push_back(*(--it_int));
-	  ++it_int;
-	}
-      }
-    }
+	  {
+	    // State k has not already been visited. The same must be
+	    // true for state l.
+	    if (b.perm[l] != -1)
+	      return false;
+	    // Tries to associate states k and l
 
-    // Automaton B
-    for (int i = 0; i < static_cast<int>(a.states().size()); i++)
-    {
-      if (Sb.delta_in[i].size() > 0)
-      {
-	it_int = Sb.delta_in[i].begin();
-	// Number of transitions with the same label
-	int j = 1;
-	for (it_int++; it_int != Sb.delta_in[i].end(); it_int++)
-	{
-	  // It seems there is no iterator arithmetics in C++:
-	  // *(it_int - 1) doesn't compile.
-	  int k = *(--it_int);
-	  it_int++;
-	  // New label?
-	  if (Sb.transitions_labels[*it_int] != Sb.transitions_labels[k])
-	    // The last transition is deterministic?
-	    if (j == 1)
-	      delta_det_in_B[i].push_back(k);
-	  // Several transitions with the same label?
-	    else
-	      // Does nothing. A series of transitions with a new label begins.
-	      j = 1;
-	  // Same label?
-	  else
-	    j++;
-	}
-	// The last label visited is deterministic?
-	if (j == 1)
-	{
-	  delta_det_in_B[i].push_back(*(--it_int));
-	  ++it_int;
-	}
-      }
-      if (Sb.delta_out[i].size() > 0)
-      {
-	it_int = Sb.delta_out[i].begin();
-	// Number of transitions with the same label
-	int j = 1;
-	for (it_int++; it_int != Sb.delta_out[i].end(); it_int++)
-	{
-	  // It seems there is no iterator arithmetics in C++:
-	  // *(it_int - 1) doesn't compile.
-	  int k = *(--it_int);
-	  it_int++;
-	  // New label?
-	  if (Sb.transitions_labels[*it_int] != Sb.transitions_labels[k])
-	    // The last transition is deterministic?
-	    if (j == 1)
-	      delta_det_out_B[i].push_back(k);
-	  // Several transitions with the same label?
-	    else
-	      // Does nothing. A series of transitions with a new label begins.
-	      j = 1;
-	  // Same label?
-	  else
-	    j++;
-	}
-	// The last label visited is deterministic?
-	if (j == 1)
-	{
-	  delta_det_out_B[i].push_back(*(--it_int));
-	  it_int++;
-	}
-      }
-    }
-
-
-    // Vector indexed by states that points to the corresponding node
-    // of the list of states of each class of states stored in the
-    // Tries (for automata A & B).
-    //
-    // We have to build the vector using a valid iterator (i.e., not a
-    // singular one).  We use a dummy int list to this end.
-    std::list<int> dummy;
-    std::vector<std::list<int>::iterator>
-      T_L_A (a.states().size(), dummy.end()),
-      T_L_B (b.states().size(), dummy.end());
-
-    std::list<Trie*> C;
-
-    // Constructs Tries of classes of states with the same sequence of
-    // ingoing and outgoing transitions in lex. order (for automaton A)
-    for (int i = 0; i < static_cast<int>(a.states().size()); i++)
-    {
-      // Vector all_transitions_lex contains the sequence of labels of
-      // ingoing and outgoing transitions of state i in lex. order,
-      // separated by a mark (-1)
-      std::vector<int> all_transitions_lex(Sa.delta_in[i].size() +
-					   Sa.delta_out[i].size() + 1);
-
-      // First stores the sequence of ingoing transitions
-      for (it_int = Sa.delta_in[i].begin();
-	   it_int != Sa.delta_in[i].end(); ++it_int)
-	all_transitions_lex.push_back(Sa.transitions_labels[*it_int]);
-
-      all_transitions_lex.push_back(-1);
-      // Next, outgoing transitions
-      for (it_int = Sa.delta_out[i].begin();
-	   it_int != Sa.delta_out[i].end(); ++it_int)
-	all_transitions_lex.push_back(Sa.transitions_labels[*it_int]);
-
-      // Gets the node of the correct Trie (Trie of initial, final or normal
-      // states) for the sequence of transitions of state i
-      Trie *T_aux;
-      if (a.is_initial(Sa.states[i]))
-	T_aux = T_I.insert(all_transitions_lex);
-      else if (a.is_final(Sa.states[i]))
-	T_aux = T_T.insert(all_transitions_lex);
-      else
-	T_aux = T_Q_IT.insert(all_transitions_lex);
-
-      // New class?
-      if (T_aux->A.size() == 0)
-      {
-	// Inserts in list C of classes (nodes of Tries)
-	C.push_front(T_aux);
-
-	// Each Trie node points to its node in list C
-	T_aux->L = C.begin();
-      }
-
-      // Inserts the state in the list A of its corresponding class
-      T_aux->A.push_front(i);
-      // Defines class of state i
-      class_state_A[i] = T_aux;
-      // T_L_A[i] = node of the list of states of class of state i
-      T_L_A[i] = T_aux->A.begin();
-    }
-
-
-    // Constructs Tries of classes of states with the same sequence of
-    // ingoing and outgoing transitions in lex. order (for automaton B)
-    for (int i = 0; i < static_cast<int>(b.states().size()) && iso; i++)
-    {
-      // Vector all_transitions_lex contains the sequence of labels of
-      // ingoing and outgoing transitions of state i in lex. order,
-      // separated by a mark (-1)
-      std::vector<int> all_transitions_lex(Sb.delta_in[i].size() +
-					   Sb.delta_out[i].size() + 1);
-      // First stores the sequence of ingoing transitions
-      for (it_int = Sb.delta_in[i].begin();
-	   it_int != Sb.delta_in[i].end(); ++it_int)
-	all_transitions_lex.push_back(Sb.transitions_labels[*it_int]);
-
-      all_transitions_lex.push_back(-1);
-      // Next, outgoing transitions
-      for (it_int = Sb.delta_out[i].begin();
-	   it_int != Sb.delta_out[i].end(); ++it_int)
-	all_transitions_lex.push_back(Sb.transitions_labels[*it_int]);
-
-      // Gets the node of the correct Trie (Trie of initial, final or
-      // normal states) for the sequence of transitions of state i
-      Trie *T_aux;
-      if (b.is_initial(Sa.states[i]))
-	T_aux = T_I.insert(all_transitions_lex);
-      else if (b.is_final(Sa.states[i]))
-	T_aux = T_T.insert(all_transitions_lex);
-      else
-	T_aux = T_Q_IT.insert(all_transitions_lex);
-
-      // Does the class of state i have more states for automaton B
-      // than those for automaton A ?
-      if (T_aux->A.size() == T_aux->B.size())
-	iso = false;
-      else
-      {
-	// Inserts the state in the list B of its corresponding class
-	T_aux->B.push_front(i);
-	// Defines class of state i
-	class_state_B[i] = T_aux;
-	// T_L_B[i] = node of the list of states of class of state i
-	T_L_B[i] = T_aux->B.begin();
-      }
-    }
-
-    // Have we discovered that the automata are not isomorphic?
-    if (!iso)
-      return false;
-
-    for (int i = 0; i < static_cast<int>(a.states().size()); i++)
-      perm_A[i] = perm_B[i] = -1;
-
-
-    // Searches for classes having only one state for each
-    // automaton. These states must be identified. These classes are
-    // then stored in list U.
-    // Also tests if all classes have the same number of states in
-    // lists A and B.
-
-    std::list<Trie*>::iterator itr_C;
-
-    itr_C = C.begin();
-
-    while (itr_C != C.end() && iso)
-    {
-      // Do automata A and B have the same number of states in the
-      // current class?
-      if ((*itr_C)->A.size() != (*itr_C)->B.size())
-      {
-	iso = false;
-	itr_C++;
-      }
-      else
-	// Class *itr_C contains only one state of each automata?
-	if ((*itr_C)->A.size() == 1)
-	{
-	  // States *((*itr_C).A.begin()) and
-	  // *((*itr_C).B.begin()) have to be identified.
-	  int k = *((*itr_C)->A.begin());
-	  U.push_front(k);
-	  int l = *((*itr_C)->B.begin());
-	  perm_A[k] = l;
-	  perm_B[l] = k;
-
-	  // Just for coherence, lists A and B of class *itr_C are voided
-	  ((*itr_C)->A).erase((*itr_C)->A.begin());
-	  ((*itr_C)->B).erase((*itr_C)->B.begin());
-	  // Deletes current node and points to the next.
-	  itr_C = C.erase(itr_C);
-	}
-	else
-	  itr_C++;
-    }
-
-    // Have we discovered that the automata are not isomorphic?
-    if (!iso)
-      return false;
-
-    // Tries to discover more fixed states implied by states in U
-    // During the loop, a state i of A is in its Trie iff perm_A[i] = -1
-    // Time complexity: O(m)
-    // (obs: if the automata are deterministic, the isomorphism test
-    // ends here)
-    while (!U.empty() && iso)
-    {
-      // Each state in U has already an image (perm_A and perm_B are
-      // defined for this state)
-
-      // i = current state in automaton A, j = its image in automaton B
-      int i = U.front();
-      int j = perm_A[i];
-      U.pop_front();
-
-      // Deterministic ingoing and outgoing transitions are analyzed
-
-      // As states i and j are already associated, they belong to
-      // the same class, then have the same sequence of
-      // deterministic transitions.
-
-      // First analyzes co-deterministic ingoing transitions
-      it_int = delta_det_in_A[i].begin();
-      it_int_aux = delta_det_in_B[j].begin();
-      for (; it_int != delta_det_in_A[i].end() and iso; ++it_int, ++it_int_aux)
-      {
-
-	// The states being considered are the sources of current
-	// co-deterministic transitions (k for automaton A, l for B)
-	int k = Sa.src_transitions[*it_int];
-	int l = Sb.src_transitions[*it_int_aux];
-
-	// Has state k already been visited?
-	if (perm_A[k] >= 0)
-	{
-	  // If it has already been visited, does the current image
-	  // matches state l?
-	  if (perm_A[k] != l)
-	    iso = false;
-	}
-	else
-	  // State k has not already been visited. The same must be
-	  // true for state l.
-	  if (perm_B[l] != -1)
-	    iso = false;
-	// Tries to associate states k and l
-	  else
 	    // Does k and l belongs to different classes?
-	    if (class_state_A[k] != class_state_B[l])
-	      iso = false;
-	// The states k and l belong to the same class and can be
-	// associated.
-	    else
+	    if (a.class_state[k] != b.class_state[l])
+	      return false;
+	    // The states k and l belong to the same class and can be
+	    // associated.
+	    a.perm[b.perm[l] = k] = l;
+	    // Removes k and l from theirs lists of states in theirs
+	    // classes (O(1))
+	    a.class_state[k]->A.erase(a.T_L[k]);
+	    b.class_state[l]->B.erase(b.T_L[l]);
+	    U.push_front(k);
+	    if (a.class_state[k]->A.size() == 1)
 	    {
-	      perm_A[perm_B[l] = k] = l;
-	      // Removes k and l from theirs lists of states in theirs
-	      // classes (O(1))
-	      class_state_A[k]->A.erase(T_L_A[k]);
-	      class_state_B[l]->B.erase(T_L_B[l]);
-	      U.push_front(k);
-	      if (class_state_A[k]->A.size() == 1)
-	      {
-		// If it remains only one state of each
-		// automaton in the class of the current states,
-		// they must be associated. Then they are
-		// putted in list U, and the class are removed
-		// from C.
-		// From now on k and l represent these states.
-		Trie* T_aux = class_state_A[k];
-		k = T_aux->A.front();
-		l = T_aux->B.front();
-		perm_A[perm_B[l] = k] = l;
+	      // If it remains only one state of each
+	      // automaton in the class of the current states,
+	      // they must be associated. Then they are
+	      // putted in list U, and the class are removed
+	      // from C.
+	      // From now on k and l represent these states.
+	      Trie* T_aux = a.class_state[k];
+	      k = T_aux->A.front();
+	      l = T_aux->B.front();
+	      a.perm[b.perm[l] = k] = l;
 
-		U.push_front(k);
-
-		// Removes class T_aux from C
-		C.erase(T_aux->L);
-	      }
-	    }
-      }
-
-
-      // Next analyzes deterministic outgoing transitions
-      it_int = delta_det_out_A[i].begin();
-      it_int_aux = delta_det_out_B[j].begin();
-      for (; it_int != delta_det_out_A[i].end() && iso; ++it_int, ++it_int_aux)
-      {
-
-	// The states being considered are the ends of current
-	// deterministic transitions (k for automaton A, l for B)
-	int k = Sa.dst_transitions[*it_int];
-	int l = Sb.dst_transitions[*it_int_aux];
-
-	// Has state k already been visited?
-	if (perm_A[k] >= 0)
-	{
-	  // If it has already been visited, does the current image
-	  // matches state l?
-	  if (perm_A[k] != l)
-	    iso = false;
-	}
-	else
-	  // State k has not already been visited. The same must be
-	  // true for state l.
-	  if (perm_B[l] != -1)
-	    iso = false;
-	// Tries to associate states k and l
-	  else
-	    // Does k and l belongs to different classes?
-	    if (class_state_A[k] != class_state_B[l])
-	      iso = false;
-	// The states belong to the same class and can be associated.
-	    else
-	    {
-	      perm_A[perm_B[l] = k] = l;
-	      // Removes k and l from theirs lists of states in theirs
-	      // classes (O(1))
-	      class_state_A[k]->A.erase(T_L_A[k]);
-	      class_state_B[l]->B.erase(T_L_B[l]);
 	      U.push_front(k);
 
-	      if (class_state_A[k]->A.size() == 1)
-	      {
-		// If it remains only one state of each
-		// automaton in the class of the current states,
-		// they must be associated. Then they are
-		// inserted in list U, and the class are removed
-		// from C.
-		// From now on k and l represent these states.
-		Trie* T_aux = class_state_A[k];
-		k = T_aux->A.front();
-		l = T_aux->B.front();
-		perm_A[perm_B[l] = k] = l;
-
-		U.push_front(k);
-
-		// Removes class T_aux from C
-		C.erase(T_aux->L);
-	      }
+	      // Removes class T_aux from C
+	      C.erase(T_aux->L);
 	    }
+	  }
+	}
+	return true;
       }
 
-    }
 
-    // Have we discovered that the automata are not isomorphic?
-    if (!iso)
-      return false;
-
-
-    // Next, Tries to associate remaining states (in remaining classes
-    // in C). This is the backtracking phase.
-
-    // Stores in l the number of non-fixed states
-    int l = 0;
-    for (itr_C = C.begin(); itr_C != C.end(); ++itr_C)
-      l += (*itr_C)->A.size();
-
-    // Vectors of classes of remaining states.	States in the same
-    // class are stored contiguously, and in the case of vector for
-    // automaton B, classes are separated by two enTries: one with -1,
-    // denoting the end of the class, and the following with the
-    // position where the class begins in this vector.
-    std::vector<int> C_A(l);
-    std::vector<int> C_B(l + 2 * C.size());
-    // current[i] = position in C_B of image of state C_A[i] during
-    // backtracking.
-    std::vector<int> current(l);
-
-
-    // Vector for test of correspondence of transitions of states already
-    // attributed
-    std::vector<int> correspondence_transitions(a.states().size());
-
-    for (int i = 0; i < static_cast<int>(a.states().size()); ++i)
-      correspondence_transitions[i] = 0;
-
-    // Stores states in C_A and C_B. Partial results of the
-    // backtracking are stored in vector current, that is initialized
-    // with the first element of each class.
-    int i = 0, j = 0;
-    for (itr_C = C.begin(); itr_C != C.end(); itr_C++)
-    {
-      it_int = (*itr_C)->A.begin();
-      it_int_B = (*itr_C)->B.begin();
-      C_A[i] = *it_int;
-      C_B[j] = *it_int_B;
-      current[i++] = j++;
-      for (it_int++, it_int_B++; it_int != (*itr_C)->A.end();
-	   it_int++, it_int_B++)
+      /*!
+	Tries to associate remaining states (in remaining classes
+	in C). This is the backtracking phase.
+      */
+      bool
+      backtracking()
       {
-	C_A[i] = *it_int;
-	C_B[j++] = *it_int_B;
-	current[i] = current[i - 1];
-	i++;
-      }
-      // End of class
-      C_B[j++] = -1;
-      // Position where the class begins
-      C_B[j++] = current[i - 1];
-    }
+	// Stores in l the number of non-fixed states
+	int l = 0;
+	for (std::list<Trie*>::iterator it = C.begin();
+	     it != C.end(); ++it)
+	  l += (*it)->A.size();
 
-    // Tries to associate states of C_A and C_B
+	// Vectors of classes of remaining states.	States in the same
+	// class are stored contiguously, and in the case of vector for
+	// automaton B, classes are separated by two enTries: one with -1,
+	// denoting the end of the class, and the following with the
+	// position where the class begins in this vector.
+	trans_t C_A(l);
+	trans_t C_B(l + 2 * C.size());
+	// current[i] = position in C_B of image of state C_A[i] during
+	// backtracking.
+	std::vector<int> current(l);
 
-    i = 0;
 
-    // Backtracking loop. Each iteration Tries to associate state
-    // C_A[i]. If i = C_A.size(), the automata are isomorphic.
-    while (iso && (i < static_cast<int>(C_A.size())))
-    {
-      // Searches for the first free state in the class of C_A[i]
-      for (j = current[i]; (C_B[j] != -1) && (perm_B[C_B[j]] >= 0); j++)
-	;
+	// Vector for test of correspondence of transitions of states already
+	// attributed
+	trans_t correspondence_transitions(a.aut.states().size(), 0);
 
-      // There is no possibility for state C_A[i]
-      if (C_B[j] == -1)
-      {
-	// If there is no possibility for C_A[0], the automata are not
-	// isomorphic
-	if (i == 0)
-	  iso = false;
-	else
+	list_remaining(C_A, C_B, current);
+
+	// Tries to associate states of C_A and C_B
+
+	int i = 0;
+	bool rvalue = true;
+
+	// Backtracking loop. Each iteration Tries to associate state
+	// C_A[i]. If i = C_A.size(), the automata are isomorphic.
+	while (i < static_cast<int>(C_A.size()))
 	{
-	  // Prepares for backtracking in next iteration.
-	  // Image of C_A[i] is set to first state of its class
-	  current[i] = C_B[j + 1];
-	  // Next iteration will try to associate state i - 1
-	  // to next possible position
-	  i--;
-	  perm_B[perm_A[C_A[i]]] = -1;
-	  perm_A[C_A[i]] = -1;
-	  current[i]++;
+	  int j;
+	  // Searches for the first free state in the class of C_A[i]
+	  for (j = current[i]; (C_B[j] != -1) && (b.perm[C_B[j]] >= 0); j++)
+	    ;
+
+	  // There is no possibility for state C_A[i]
+	  if (C_B[j] == -1)
+	  {
+	    // If there is no possibility for C_A[0], the automata are not
+	    // isomorphic
+	    if (i == 0)
+	      return false;
+	    else
+	    {
+	      // Prepares for backtracking in next iteration.
+	      // Image of C_A[i] is set to first state of its class
+	      current[i] = C_B[j + 1];
+	      // Next iteration will try to associate state i - 1
+	      // to next possible position
+	      i--;
+	      b.perm[a.perm[C_A[i]]] = -1;
+	      a.perm[C_A[i]] = -1;
+	      current[i]++;
+	    }
+	  }
+	  // Tries to associate state C_A[i] to state C_B[j]
+	  else
+	  {
+	    current[i] = j;
+	    a.perm[C_A[i]] = C_B[j];
+	    b.perm[C_B[j]] = C_A[i];
+
+	    if ((rvalue = test_correspondence(a.s.delta_in, b.s.delta_in,
+					      a.s.src_transitions, b.s.src_transitions,
+					      C_A, C_B, i, j,
+					      correspondence_transitions)))
+	      rvalue = test_correspondence(a.s.delta_out, b.s.delta_out,
+					   a.s.dst_transitions, b.s.dst_transitions,
+					   C_A, C_B, i, j,
+					   correspondence_transitions);
+
+	    // States C_A[i] and C_B[j] can be associated.
+	    if (rvalue)
+	      // Tries to associate state in C_A[i + 1] in next iteration
+	      i++;
+	    // Impossible to associate C_A[i] to C_B[j]
+	    else
+	    {
+	      // Tries C_A[i] to C_B[j + 1] in next iteration
+	      b.perm[a.perm[C_A[i]]] = -1;
+	      a.perm[C_A[i]] = -1;
+	      current[i]++;
+	    }
+	  }
+	}
+	return rvalue;
+      }
+
+      /*!
+	Stores remaining states in C_A and C_B. Partial results of the
+	backtracking are stored in vector current, that is initialized
+	with the first element of each class.
+      */
+      void
+      list_remaining(trans_t& C_A,
+		     trans_t& C_B,
+		     trans_t& current)
+      {
+	int i = 0, j = 0;
+	for (std::list<Trie*>::iterator it = C.begin(); it != C.end();
+	     it++)
+	{
+	  std::list<int>::iterator it_A = (*it)->A.begin();
+	  std::list<int>::iterator it_B = (*it)->B.begin();
+	  C_A[i] = *it_A;
+	  C_B[j] = *it_B;
+	  current[i++] = j++;
+	  for (it_A++, it_B++; it_A != (*it)->A.end();
+	       it_A++, it_B++)
+	  {
+	    C_A[i] = *it_A;
+	    C_B[j++] = *it_B;
+	    current[i] = current[i - 1];
+	    i++;
+	  }
+	  // End of class
+	  C_B[j++] = -1;
+	  // Position where the class begins
+	  C_B[j++] = current[i - 1];
 	}
       }
-      // Tries to associate state C_A[i] to state C_B[j]
-      else
+
+      /*!
+      	Tests correspondence of transitions, considering
+	states that are already in the permutation.
+      */
+      bool
+      test_correspondence(const delta_t& delta_A,
+			  const delta_t& delta_B,
+			  const std::vector<int>& transitions_A,
+			  const std::vector<int>& transitions_B,
+			  trans_t& C_A,
+			  trans_t& C_B,
+			  int i,
+			  int j,
+			  trans_t& correspondence_transitions)
       {
-
-	current[i] = j;
-	perm_A[C_A[i]] = C_B[j];
-	perm_B[C_B[j]] = C_A[i];
-
-	// Tests correspondence of ingoing transitions, considering
-	// states that are already in the permutation.
-
-	std::list<int>::iterator int_itr_B;
-
-	it_int = Sa.delta_in[C_A[i]].begin();
-	it_int_B = Sb.delta_in[C_B[j]].begin();
-	bool b = true;
+	std::list<int>::const_iterator it_A = delta_A[C_A[i]].begin();
+	std::list<int>::const_iterator it_B = delta_B[C_B[j]].begin();
 
 	// Each iteration considers a sequence of ingoing labels
 	// with the same label. The sequence begins at it_int
-	while ((it_int != Sa.delta_in[C_A[i]].end()) && b)
+	while (it_A != delta_A[C_A[i]].end())
 	{
 	  // Searches for sources of ingoing transitions for current
 	  // label that have already been associated. For each state
 	  // visited, its position in correspondence_transitions is
 	  // incremented.
 	  int k = 0;
-	  for (it_int_aux = it_int;
-	       (it_int_aux != Sa.delta_in[C_A[i]].end()) &&
-		 (Sa.transitions_labels[*it_int_aux] ==
-		  Sa.transitions_labels[*it_int]);
-	       it_int_aux++, k++)
+	  std::list<int>::const_iterator it_aux;
+	  for (it_aux = it_A;
+	       (it_aux != delta_A[C_A[i]].end()) &&
+		 (a.s.transitions_labels[*it_aux] ==
+		  a.s.transitions_labels[*it_A]);
+	       it_aux++, k++)
 	    // Is the source of current transition associated?
-	    if (perm_A[Sa.src_transitions[*it_int_aux]] >= 0)
-	      correspondence_transitions[Sa.src_transitions[*it_int_aux]]++;
+	    if (a.perm[transitions_A[*it_aux]] >= 0)
+	      correspondence_transitions[transitions_A[*it_aux]]++;
 
 	  // Here, k = number of ingoing transitions for current label
 
 	  // Idem for ingoing transitions of state C_B[j], but positions in
 	  // correspondence_transitions are decremented.
-	  for (; (k > 0) && b; it_int_B++, k--)
+	  for (; (k > 0); it_B++, k--)
 	    // Has the source of current transition already been visited?
-	    if (perm_B[Sb.src_transitions[*it_int_B]] >= 0)
+	    if (b.perm[transitions_B[*it_B]] >= 0)
 	      // Trying to decrement a position with 0 means that the
 	      // corresponding state in A is not correct.
-	      if (correspondence_transitions[perm_B[Sb.src_transitions[*it_int_B]]] == 0)
+	      if (correspondence_transitions[b.perm[transitions_B[*it_B]]] == 0)
 		// The association of C_A[i] and C_B[j] is impossible
-		b = false;
+		return false;
 	      else
-		correspondence_transitions[perm_B[Sb.src_transitions[*it_int_B]]]--;
+		correspondence_transitions[b.perm[transitions_B[*it_B]]]--;
 
 	  // Verifies correspondence_transitions. The correspondence for
 	  // current label is correct iff correspondence_transitions[l] = 0
@@ -729,102 +710,46 @@ namespace vcsn
 	  // the current label.
 	  // For this, int_itr visits all transitions until int_itr_aux.
 
-	  for (; it_int != it_int_aux; it_int++)
+	  for (; it_A != it_aux; it_A++)
 	  {
-	    if (perm_A[Sa.src_transitions[*it_int]] >= 0)
-	      if (correspondence_transitions[Sa.src_transitions[*it_int]] != 0)
-		b = false;
+	    if (a.perm[transitions_A[*it_A]] >= 0)
+	      if (correspondence_transitions[transitions_A[*it_A]] != 0)
+		return false;
 	    // All positions must be 0 for next iteration
-	    correspondence_transitions[Sa.src_transitions[*it_int]] = 0;
+	    correspondence_transitions[transitions_A[*it_A]] = 0;
 	  }
 
-	} // end while for ingoing transitions
-
-	// Ok for ingoing transitions? Tests outgoing transitions.
-	if (b)
-	{
-	  // Tests correspondence of outgoing transitions, considering
-	  // states that are already in the permutation.
-
-	  std::list<int>::iterator int_itr_B;
-
-	  it_int = Sa.delta_out[C_A[i]].begin();
-	  it_int_B = Sb.delta_out[C_B[j]].begin();
-
-	  // Each iteration considers a sequence of outgoing labels
-	  // with the same label. The sequence begins at it_int
-	  while ((it_int != Sa.delta_out[C_A[i]].end()) && b)
-	  {
-	    // Searches for ends of outgoing transitions for current
-	    // label that have already been associated. For each
-	    // state visited, its position in correspondence_transitions
-	    // is incremented.
-	    int k = 0;
-	    for (it_int_aux = it_int;
-		 (it_int_aux != Sa.delta_out[C_A[i]].end()) &&
-		   (Sa.transitions_labels[*it_int_aux] ==
-		    Sa.transitions_labels[*it_int]);
-		 it_int_aux++, k++)
-	      // Is the end of current transition associated?
-	      if (perm_A[Sa.dst_transitions[*it_int_aux]] >= 0)
-		correspondence_transitions[Sa.dst_transitions[*it_int_aux]]++;
-
-	    // Here, k = number of outgoing transitions for current label
-
-	    // Idem for outgoing transitions of state C_B[j], but positions in
-	    // correspondence_transitions are decremented.
-	    for (; k > 0 && b; it_int_B++, k--)
-	      // Has the end of current transition already been visited?
-	      if (perm_B[Sb.dst_transitions[*it_int_B]] >= 0)
-		// Trying to decrement a position with 0 means that
-		// the corresponding state in A is not correct.
-		if (correspondence_transitions[perm_B[Sb.dst_transitions[*it_int_B]]] == 0)
-		  // The association of C_A[i] and C_B[j] is
-		  // impossible
-		  b = false;
-		else
-		  correspondence_transitions[perm_B[Sb.dst_transitions[*it_int_B]]]--;
-
-	    // Verifies correspondence_transitions. The correspondence
-	    // for current label is correct iff
-	    // correspondence_transitions[l] = 0 for all end l of
-	    // outgoing transitions of C_A[i] labelled by the current
-	    // label.
-	    // For this, int_itr visits all transitions until int_itr_aux.
-
-	    for (; it_int != it_int_aux; it_int++)
-	    {
-	      if (perm_A[Sa.dst_transitions[*it_int]] >= 0)
-		if (correspondence_transitions[Sa.dst_transitions[*it_int]] != 0)
-		  b = false;
-	      // All positions must be 0 for next iteration
-	      correspondence_transitions[Sa.dst_transitions[*it_int]] = 0;
-	    }
-
-	  } // End while for outgoing transitions
-
-	} // End of test of outgoing transitions
-
-	// States C_A[i] and C_B[j] can be associated.
-	if (b)
-	  // Tries to associate state in C_A[i + 1] in next iteration
-	  i++;
-	// Impossible to associate C_A[i] to C_B[j]
-	else
-	{
-	  // Tries C_A[i] to C_B[j + 1] in next iteration
-	  perm_B[perm_A[C_A[i]]] = -1;
-	  perm_A[C_A[i]] = -1;
-	  current[i]++;
 	}
+	return true;
+      }
 
-      } // end of association of states C_A[i] and C_B[j]
 
-    } // end of backtracking loop
 
-    return iso;
+      //Private Attributes
+      automaton_vars a;
+      automaton_vars b;
+      std::list<Trie*> C;
+      // Tries of classes of normal, initial and final states.
+      Trie T_Q_IT;
+      Trie T_I;
+      Trie T_T;
+  };
 
-  } // end of are_isomorphic
+
+  /*---------------.
+    | are_isomorphic |
+    `---------------*/
+
+  template<typename A, typename T>
+  bool
+  are_isomorphic(const Element<A, T>& a, const Element<A, T>& b)
+  {
+    TIMER_SCOPED("are_isomorphic");
+
+    Isomorpher<A, T> isomorpher(a, b);
+
+    return isomorpher();
+  }
 
 } // vcsn
 
