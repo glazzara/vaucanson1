@@ -1,3 +1,19 @@
+2007-02-09  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Adding some standard algorithms and tests to TAF-KIT.
+	Add tests for is_standard. In particular, we check that
+	is_standard of the empty automaton returns false.
+	* src/b_commands.cc: Uncomment is_standard.
+	* src/common_automaton_commands.hh: Uncomment standardize. Add
+	union, concatenantion and star of standard automata.
+	* src/z_commands.cc: Uncomment is_standard.
+	* tests/defs.in: Define the following automata.
+	* tests/standard_c1.xml: New.
+	* tests/vcsn-b.test: Add tests on standard and is_standard.
+	* tests/vcsn-z.test: Add tests on is_standard and star_of_standard.
+	* tests/void_b_automaton.xml: New. Use by is_standard.
+	* tests/void_z_automaton.xml: New. Use by is_standard.
+
 2007-02-09  Akim Demaille  <akim@lrde.epita.fr>
 
 	* build-aux/check.mk: Update from master.
@@ -10,9 +26,11 @@
 
 2007-02-05  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
-	standard of the empty language should give a automaton with one state ans zero transition.
-	See ticket #99: https://trac.lrde.org/vaucanson/trac.cgi/ticket/99 .
-	* include/vaucanson/algorithms/standard_of.hxx: Do it.
+	Standard of the empty language should give a automaton with one
+	state and zero transition.
+	See ticket #99.
+	* include/vaucanson/algorithms/standard_of.hxx: Change the part of
+	matching the empty language. Construct a one-state automaton.
 	* src/tests/include/tests/automata/algos/label_aware_graphs/glushkov_test.hh:
 	Adapt test accordingly to the definition of the standard automaton of
 	the empty language.
@@ -445,8 +463,10 @@
 
 	Fix final transitions handling in concat_of_standard.
 	* ChangeLog: Correct some typo.
-	* include/vaucanson/algorithms/standard.hxx: Here. And some final point
-	to comments.
+	* include/vaucanson/algorithms/standard.hxx: Here. Set states to
+	final at the end of the algorithm.
+	Backward closure was generating false transitions.
+	Add some final points to comments.
 
 2007-02-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
@@ -456,7 +476,8 @@
 
 2007-02-02  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
-	Reorganize and correct concat_of_standard.
+	Reorganize and correct concat_of_standard. Weight of final
+	transitions where not set.
 	* include/vaucanson/algorithms/standard.hxx: Do it. Set correctly weigth
 	of final transitions of the resulting automaton.
 

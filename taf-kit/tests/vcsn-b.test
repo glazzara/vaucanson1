@@ -97,8 +97,9 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 ! vcsn-b is-realtime $a1
 
 # is-standard
-#! vcsn-b is-standard $a1
-#  vcsn-b standardize $a1 | vcsn-b is-standard -
+! vcsn-b is-standard $a1
+! vcsn-b is-standard $void_b_automaton
+  vcsn-b standardize $a1 | vcsn-b is-standard -
 
 
 ## --------------------------------- ##
@@ -121,5 +122,13 @@ all=$(vcsn-b aut-to-exp all.xml)
 test $all = '(a+b)*'
 vcsn-b --alphabet=ab exp-to-aut "$all" >aut2.xml
 
+# standard
+vcsn-b -a a standard 0 | vcsn-b is-standard -
+vcsn-b -a a standard a | vcsn-b is-standard -
+vcsn-b -a ab standard 'a+b' | vcsn-b is-standard -
+vcsn-b -a ab standard '(a+b)*' | vcsn-b is-standard -
+vcsn-b -a ab standard 'a.b' | vcsn-b is-standard -
+vcsn-b -a ab standard '(a.b)*' | vcsn-b is-standard -
+vcsn-b -a ab standard '(a*.b*)*' | vcsn-b is-standard -
 
 exit 0

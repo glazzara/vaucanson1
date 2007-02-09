@@ -132,8 +132,9 @@ u1=$automata_dir/tdc/u1.xml
 non_ambiguous1=$automata_tests_dir/non_ambiguous.xml
 non_ambiguous2=$automata_tests_dir/non_ambiguous2.xml
 ambiguous=$automata_tests_dir/ambiguous.xml
-
-
+void_b_automaton=$automata_tests_dir/void_b_automaton.xml
+void_z_automaton=$automata_tests_dir/void_z_automaton.xml
+standard_c1=$automata_tests_dir/standard_c1.xml
 
 ## ---------- ##
 ## Test dir.  ##

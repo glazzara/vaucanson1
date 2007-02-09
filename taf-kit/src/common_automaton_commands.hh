@@ -62,7 +62,7 @@ DEFINE_IS_PROPERTY_COMMAND (complete);
 
 DEFINE_IS_PROPERTY_COMMAND (realtime);
 
-//DEFINE_IS_PROPERTY_COMMAND (standard);
+DEFINE_IS_PROPERTY_COMMAND (standard);
 
 // FIXME: This one should go back to common_commands.hh once fixed for
 // TDCs.
@@ -113,11 +113,38 @@ DEFINE_COMMAND (NAME (power)
 		OUTPUT (automaton_saver (p, string_out (), XML ()))
 		RETURNVALUE (0));
 
-//DEFINE_COMMAND (NAME (standardize)
-//		CODE (automaton_t a = get_aut (args.args[1]);
-//		      standardize (a))
-//		OUTPUT (automaton_saver (a, string_out (), XML ()))
-//		RETURNVALUE (0));
+DEFINE_COMMAND (NAME (standardize)
+		CODE (automaton_t a = get_aut (args.args[1]);
+		      standardize (a))
+		OUTPUT (automaton_saver (a, string_out (), XML ()))
+		RETURNVALUE (0));
+
+# define DEFINE_COMMAND_OF_STANDARD(Algo)					\
+  DEFINE_COMMAND (NAME (Algo ## _of_standard)					\
+		  CODE (automaton_t a = get_aut (args.args[1]);			\
+			automaton_t b = get_aut (args.args[2]);			\
+			if (!is_standard (a))					\
+			  standardize (a);					\
+			if (!is_standard (b))					\
+			  standardize (b);					\
+			Algo ## _of_standard_here (a, b))			\
+		  OUTPUT (automaton_saver (a, string_out (), XML ()))		\
+		  RETURNVALUE(0))
+
+DEFINE_COMMAND_OF_STANDARD(union);
+
+DEFINE_COMMAND_OF_STANDARD(concat);
+
+#undef DEFINE_COMMAND_OF_STANDARD
+
+DEFINE_COMMAND (NAME (star_of_standard)
+		CODE (automaton_t a = get_aut (args.args[1]);
+		      if (!is_standard (a))
+		        standardize (a);
+		      star_of_standard_here (a))
+		OUTPUT (automaton_saver(a, string_out (), XML ()))
+		RETURNVALUE(0));
+
 
 # define USE_GENERIC_AUTOMATON_COMMAND_GROUP()				\
   COMMAND_GROUP (							\
@@ -134,11 +161,16 @@ DEFINE_COMMAND (NAME (power)
     /*  COMMAND_ENTRY (normalize, Aut,					\
         "Give the Thompson-normalized automaton of `aut'."), */		\
     COMMAND_ENTRY (power, AutInt, "Give the power of `aut' by `n'."),	\
-    COMMAND_ENTRY (product, AutAut, "Give the product of `aut1' by `aut2'." ), \
+    COMMAND_ENTRY (product, AutAut, "Give the product of `aut1' by `aut2'." ),	\
     COMMAND_ENTRY (quotient, Aut, "Give the quotient of `aut'."),	\
     COMMAND_ENTRY (realtime, Aut, "Give the realtime version of `aut'."), \
-    /* COMMAND_ENTRY (standardize, Aut,					\
-       "Give the standard automaton of `aut'."), */			\
+    COMMAND_ENTRY (standardize, Aut, "Give the standard automaton of `aut'."),	\
+    COMMAND_ENTRY (union_of_standard, AutAut,				\
+		   "Give the union of standard automata."),		\
+    COMMAND_ENTRY (concat_of_standard, AutAut,				\
+		   "Give the concatenation of standard automata."),	\
+    COMMAND_ENTRY (star_of_standard, Aut,				\
+		   "Give the star of automaton `aut'."),	\
     COMMAND_ENTRY (sum, AutAut, "Give the sum of `aut1' and `aut2'."),	\
     COMMAND_ENTRY (transpose, Aut, "Transpose the automaton `aut'."),	\
     COMMAND_ENTRY (trim, Aut, "Trim the automaton `aut'.")		\

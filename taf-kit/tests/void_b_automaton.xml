@@ -1,0 +1,14 @@
+<automaton xmlns="http://vaucanson.lrde.epita.fr">
+  <labelType>
+    <monoid generatorType="letters" type="free">
+      <generator value="a"/>
+    </monoid>
+    <semiring operations="classical" set="B"/>
+  </labelType>
+  <content>
+    <states>
+    </states>
+    <transitions>
+    </transitions>
+  </content>
+</automaton>

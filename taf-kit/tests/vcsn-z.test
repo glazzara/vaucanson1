@@ -24,7 +24,6 @@ set -e
 vcsn-z dot-dump $c1
 vcsn-z info $c1
 
-
 ## ---------------------------------- ##
 ## Tests and evaluation on automata.  ##
 ## ---------------------------------- ##
@@ -33,13 +32,37 @@ vcsn-z info $c1
 test $(vcsn-z eval $c1 bababa) -eq 42
 ! vcsn-z is-ambiguous $c1
 ! vcsn-z is-empty $c1
-#! vcsn-z is-normalized $c1
+! vcsn-z is-normalized $c1
 ! vcsn-z is-realtime $c1
-#! vcsn-z is-standard $c1
-
+! vcsn-z is-standard $c1
+! vcsn-z is-standard $void_z_automaton
+  vcsn-z is-standard $standard_c1
+  vcsn-z -a ab standard '(2 a).(4 1)' > 2a_41.xml
+  vcsn-z is-standard 2a_41.xml
 
 ## --------------------------------- ##
 ## Generic algorithms for automata.  ##
 ## --------------------------------- ##
+
+# star-of-standard
+vcsn-z star-of-standard $standard_c1 | \
+    vcsn-z is-standard -
+
+# construct ((2 a).(4 1))*
+vcsn-z star-of-standard 2a_41.xml > star_2a_41.xml
+
+vcsn-z is-standard star_2a_41.xml
+test $(vcsn-z eval star_2a_41.xml a) -eq 8
+test $(vcsn-z eval star_2a_41.xml aa) -eq 64
+test $(vcsn-z eval star_2a_41.xml aaa) -eq 512
+
+# union-of-standard
+vcsn-z union-of-standard $standard_c1 $standard_c1 | \
+    vcsn-z is-standard -
+vcsn-z concat-of-standard $standard_c1 $standard_c1 | \
+    vcsn-z is-standard -
+
+# concat-of-standard
+
 
 exit 0
