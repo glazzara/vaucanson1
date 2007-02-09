@@ -30,6 +30,7 @@
 
 namespace vcsn
 {
+
   namespace internal
   {
     namespace hopcroft_minimization_det
@@ -192,16 +193,16 @@ namespace vcsn
       int n_finals = -1, n_others = -1,
 	count_finals = 0, count_others = 0;
 
-# define add_to_class(Name)				\
-      do {						\
-	if (not Name)					\
-	{						\
-	  Name = &(partition[n_partition]);		\
-	  n_ ## Name = n_partition++;			\
-	}						\
-	count_ ## Name ++;				\
-	(*Name).insert (*state);			\
-	class_of[*state] = n_ ## Name;			\
+# define add_to_class(Name)			\
+      do {					\
+	if (not Name)				\
+	{					\
+	  Name = &(partition[n_partition]);	\
+	  n_ ## Name = n_partition++;		\
+	}					\
+	count_ ## Name ++;			\
+	(*Name).insert (*state);		\
+	class_of[*state] = n_ ## Name;		\
       } while (0)
 
       for_all_states (state, input)
@@ -327,15 +328,15 @@ namespace vcsn
     /*-----------------------------------------.
     | To manage efficiently the partition of Q |
     `-----------------------------------------*/
-    std::vector<unsigned>         class_(max_states);
-    std::vector<state_list>       part(max_states);
+    std::vector<unsigned>	  class_(max_states);
+    std::vector<state_list>	  part(max_states);
     // Avoid singular iterators in the construction.
     std::vector<state_list_iterator> place(max_states, state_list().end());
 
     /*------------------------.
     | To manage the splitting |
     `------------------------*/
-    std::vector<bool>     split(max_states);
+    std::vector<bool>	  split(max_states);
     std::vector<unsigned> twin(max_states);
 
     /*-------------------------.
@@ -415,9 +416,9 @@ namespace vcsn
 
     while (!list.empty())
     {
-      /*----.
-      | (a) |
-      `----*/
+	/*----.
+	| (a) |
+	`----*/
       pair_t c = list.front();
       list.pop_front();
       unsigned p = c.first;
@@ -426,9 +427,9 @@ namespace vcsn
       std::vector<bool>	  met_set(max_states);
 
       //	std::cerr << "Part by : " << p << "," << a << std::endl;
-      /*----.
-      | (b) |
-      `----*/
+	/*----.
+	| (b) |
+	`----*/
       std::list<unsigned> met_class;
       for_all_(state_list, b, part[p])
 	if (inverse[*b][a] != 0)
@@ -446,9 +447,9 @@ namespace vcsn
 	    }
 	  }
 
-      /*----.
-      | (c) |
-      `----*/
+	/*----.
+	| (c) |
+	`----*/
       std::queue<state_list_iterator> to_erase;
 
       for_all_(std::list<unsigned>, b, met_class)
@@ -477,9 +478,9 @@ namespace vcsn
 	part[p].erase(b);
       }
 
-      /*----.
-      | (d) |
-      `----*/
+	/*----.
+	| (d) |
+	`----*/
       for_all_(std::list<unsigned>, b, met_class)
 	if (twin[*b] != 0)
 	{
