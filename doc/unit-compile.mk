@@ -1,18 +1,18 @@
 # Makefile
 # vcsn-Makefile: this file is part of the Vaucanson project.
-# 
+#
 # Vaucanson, a generic library for finite state machines.
-# 
-# Copyright (C) 2001, 2002, 2003, 2004 The Vaucanson Group.
-# 
+#
+# Copyright (C) 2001, 2002, 2003, 2004, 2007 The Vaucanson Group.
+#
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # The complete GNU General Public Licence Notice can be found as the
 # `COPYING' file in the root directory.
-# 
+#
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 #
 
@@ -46,7 +46,7 @@ OBJECTS=$(FAKE_SOURCES:.unitcc=.unito) $(SOURCES:.cc=.o)
 all: $(TARGET)
 
 # No dependency with the source.
-%.unitcc: 
+%.unitcc:
 	@ SOURCE=`echo $@ | sed 's,.unitcc,.cc,'` \
 	  && echo Collecting Vaucanson code in $$SOURCE. \
 	  && $(GREP) '#include' $$SOURCE > $@ \
@@ -57,7 +57,7 @@ all: $(TARGET)
 # The fake unit is compiled using all Vaucanson's code.
 # It is very slow.
 %.unito:%.unitcc
-	$(CXX) -x c++ -c $(CPPFLAGS) $(CXXFLAGS) $< -o $@ 
+	$(CXX) -x c++ -c $(CPPFLAGS) $(CXXFLAGS) $< -o $@
 
 # Your source may only need the interface of Vaucanson if you do
 # not use a code that is not already in the fake unit.
@@ -66,7 +66,7 @@ all: $(TARGET)
 	$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $< -o $@ -DINTERFACE_ONLY
 
 # The t-time: will your code be compiled quickly ?
-$(TARGET): $(OBJECTS) 
+$(TARGET): $(OBJECTS)
 	@ echo "Try to link."
 	@ $(CXX) -o $@ $^ \
 	  || (echo 'Sorry, it failed: we must recompile everything.' \
