@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,16 +21,18 @@
 # include <vaucanson/misc/contract.hh>
 # include <sstream>
 
-namespace vcsn {
-  namespace misc {
+namespace vcsn
+{
+  namespace misc
+  {
 
   /*------------------.
   | SupportIterator.  |
   `------------------*/
 
     template <class C>
-    SupportIterator<C>::SupportIterator (map_iterator mp):
-      i (mp)
+    SupportIterator<C>::SupportIterator (map_iterator mp)
+      : i (mp)
     {}
 
     template <class C>
@@ -78,14 +80,14 @@ namespace vcsn {
 
     /// support<map<U, T> > is a const adapter of std::map to container.
     template <class U, class T>
-    Support<std::map<U, T> >::Support (const Support& s):
-      m_ (s.m_)
+    Support<std::map<U, T> >::Support (const Support& s)
+      : m_ (s.m_)
     {
     }
 
     template <class U, class T>
-    Support<std::map<U, T> >::Support (const std::map<U, T>& m):
-      m_ (m)
+    Support<std::map<U, T> >::Support (const std::map<U, T>& m)
+      : m_ (m)
     {
     }
 
@@ -148,9 +150,9 @@ namespace vcsn {
     template <class Integer, class ExcludedContainer>
     SparseIterator<Integer, ExcludedContainer>::
     SparseIterator (integer_t from,
-		    const excluded_container_t& c):
-      excluded_ (&c),
-      integer_ (from)
+		    const excluded_container_t& c)
+      : excluded_ (&c),
+	integer_ (from)
     {}
 
     template <class Integer, class ExcludedContainer>
@@ -244,10 +246,10 @@ namespace vcsn {
     /// SparseInterval verifies the container concept.
     template <class Integer, class ExcludedContainer>
     SparseInterval<Integer, ExcludedContainer>
-    ::SparseInterval (integer_t f, integer_t t, const excluded_container_t& c):
-      excluded_ (c),
-      from_ (f),
-      to_ (t)
+    ::SparseInterval (integer_t f, integer_t t, const excluded_container_t& c)
+      : excluded_ (c),
+	from_ (f),
+	to_ (t)
     {
       precondition (from_ <= to_ + 1);
       precondition (excluded_.find (to_ + 1) == excluded_.end ());
@@ -255,10 +257,10 @@ namespace vcsn {
 
     template <class Integer, class ExcludedContainer>
     SparseInterval<Integer, ExcludedContainer>
-    ::SparseInterval (const SparseInterval& a) :
-      excluded_ (a.excluded_),
-      from_ (a.from_),
-      to_ (a.to_)
+    ::SparseInterval (const SparseInterval& a)
+      : excluded_ (a.excluded_),
+	from_ (a.from_),
+	to_ (a.to_)
     {
     }
 

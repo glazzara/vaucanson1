@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
 # define VCSN_MISC_SUPPORT_HH
 
 /**
- * @file   support.hh
+ * @file   misc/support.hh
  * @brief  Stuff to adapt containers.
  *
  */
@@ -27,8 +27,10 @@
 # include <map>
 # include <string>
 
-namespace vcsn {
-  namespace misc {
+namespace vcsn
+{
+  namespace misc
+  {
 
     /** @addtogroup misc *//** @{ */
 
@@ -124,7 +126,8 @@ namespace vcsn {
   } // misc
 } // vcsn
 
-namespace std {
+namespace std
+{
 
   template <class Integer, class ExcludedContainer>
   struct iterator_traits<vcsn::misc::SparseIterator
@@ -139,8 +142,10 @@ namespace std {
 
 } // std
 
-namespace vcsn {
-  namespace misc {
+namespace vcsn
+{
+  namespace misc
+  {
 
     /** @addtogroup misc *//** @{ */
 
@@ -180,9 +185,9 @@ namespace vcsn {
     class SelfIterator
     {
       public:
-	SelfIterator (const C<T>& c):
-	  c_ (&c),
-	  pos_ (c.begin ())
+	SelfIterator (const C<T>& c)
+	  : c_ (&c),
+	    pos_ (c.begin ())
 	{}
 
 	SelfIterator ():
@@ -190,9 +195,9 @@ namespace vcsn {
 	  pos_ ()
 	{}
 
-	SelfIterator (const SelfIterator& s):
-	  c_ (s.c_),
-	  pos_ (s.pos_)
+	SelfIterator (const SelfIterator& s)
+	  : c_ (s.c_),
+	    pos_ (s.pos_)
 	{}
 
 	const T& operator* () const
@@ -229,14 +234,10 @@ namespace vcsn {
 	bool operator== (const SelfIterator& o) const
 	{
 	  if (c_ == 0)
-	    if (o.c_ == 0)
-	      return true;
-	    else
-	      return o.pos_ == o.c_->end ();
+	    return o.c_ == 0 || o.pos_ == o.c_->end ();
 	  else if (o.c_ == 0)
 	    return pos_ == c_->end ();
-	  return (o.c_ == c_ &&
-		  o.pos_ == pos_);
+	  return o.c_ == c_ && o.pos_ == pos_;
 	}
 
       private:
