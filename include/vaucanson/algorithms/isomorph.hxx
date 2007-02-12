@@ -155,8 +155,8 @@ namespace vcsn
 	  std::vector<Trie*> class_state;
       };
 
-      Isomorpher(const Element<A, T>& _a, const Element<A, T>& _b)
-	: a(_a), b(_b)
+      Isomorpher(const Element<A, T>& a, const Element<A, T>& b)
+	: a_(a), b_(b)
       {
       }
 
@@ -166,8 +166,8 @@ namespace vcsn
 	if (fails_on_quick_tests())
 	  return false;
 
-	list_in_out_det_trans(a);
-	list_in_out_det_trans(b);
+	list_in_out_det_trans(a_);
+	list_in_out_det_trans(b_);
 
 	if (!construct_tries())
 	  return false;
@@ -178,8 +178,8 @@ namespace vcsn
 	if (!analyse_det_trans())
 	  return false;
 
-	a.shrink_unused();
-	b.shrink_unused();
+	a_.shrink_unused();
+	b_.shrink_unused();
 
 	return backtracking();
       }
@@ -193,10 +193,10 @@ namespace vcsn
       bool
       fails_on_quick_tests()
       {
-	return a.aut.states().size() != b.aut.states().size()
-	  || a.aut.transitions().size() != b.aut.transitions().size()
-	  || a.aut.initial().size() != b.aut.initial().size()
-	  || a.aut.final().size() != b.aut.final().size();
+	return a_.aut.states().size() != b_.aut.states().size()
+	  || a_.aut.transitions().size() != b_.aut.transitions().size()
+	  || a_.aut.initial().size() != b_.aut.initial().size()
+	  || a_.aut.final().size() != b_.aut.final().size();
       }
 
 
@@ -230,43 +230,45 @@ namespace vcsn
       construct_tries()
       {
 	// Constructs Tries for Automaton A.
-	for (int i = 0; i < static_cast<int>(a.aut.states().size()); i++)
+	for (int i = 0; i < static_cast<int>(a_.aut.states().size()); i++)
 	{
-	  Trie *T_aux = add_all_transitions_to_trie(a, i);
+	  Trie *T_aux = add_all_transitions_to_trie(a_, i);
 
 	  // New class?
 	  if (T_aux->A.size() == 0)
 	  {
 	    // Inserts in list C of classes (nodes of Tries)
-	    C.push_front(T_aux);
+	    C_.push_front(T_aux);
 
 	    // Each Trie node points to its node in list C
-	    T_aux->L = C.begin();
+	    T_aux->L = C_.begin();
 	  }
 
 	  // Inserts the state in the list A of its corresponding class
 	  T_aux->A.push_front(i);
 	  // Defines class of state i
-	  a.class_state[i] = T_aux;
+	  a_.class_state[i] = T_aux;
 	  // T_L_A[i] = node of the list of states of class of state i
-	  a.T_L[i] = T_aux->A.begin();
+	  a_.T_L[i] = T_aux->A.begin();
 	}
 
 
 	// Constructs Tries for automaton B.
-	for (int i = 0; i < static_cast<int>(b.aut.states().size()); i++)
+	for (int i = 0; i < static_cast<int>(b_.aut.states().size()); i++)
 	{
-	  Trie *T_aux = add_all_transitions_to_trie(b, i);
+	  Trie *T_aux = add_all_transitions_to_trie(b_, i);
 
+          // Does the class of state i have more states for automaton B
+	  // than those for automaton A ?
 	  if (T_aux->A.size() == T_aux->B.size())
 	    return false;
 
 	  // Inserts the state in the list B of its corresponding class
 	  T_aux->B.push_front(i);
 	  // Defines class of state i
-	  b.class_state[i] = T_aux;
+	  b_.class_state[i] = T_aux;
 	  // T_L_B[i] = node of the list of states of class of state i
-	  b.T_L[i] = T_aux->B.begin();
+	  b_.T_L[i] = T_aux->B.begin();
 	}
 
 	return true;
@@ -286,9 +288,9 @@ namespace vcsn
       bool
       construct_list_of_classes_with_one_state(std::list<int>& U)
       {
-	std::list<Trie*>::iterator itr_C = C.begin();
+	std::list<Trie*>::iterator itr_C = C_.begin();
 
-	while (itr_C != C.end())
+	while (itr_C != C_.end())
 	{
 	  // Do automata A and B have the same number of states in the
 	  // current class?
@@ -303,14 +305,14 @@ namespace vcsn
 	    int k = *((*itr_C)->A.begin());
 	    U.push_front(k);
 	    int l = *((*itr_C)->B.begin());
-	    a.perm[k] = l;
-	    b.perm[l] = k;
+	    a_.perm[k] = l;
+	    b_.perm[l] = k;
 
 	    // Just for coherence, lists A and B of class *itr_C are voided
 	    ((*itr_C)->A).erase((*itr_C)->A.begin());
 	    ((*itr_C)->B).erase((*itr_C)->B.begin());
 	    // Deletes current node and points to the next.
-	    itr_C = C.erase(itr_C);
+	    itr_C = C_.erase(itr_C);
 	  }
 	  else
 	    itr_C++;
@@ -380,28 +382,27 @@ namespace vcsn
 	// separated by a mark (-1)
 	trans_t all_transitions_lex(av.s.delta_in[i].size() +
 				    av.s.delta_out[i].size() + 1);
-	std::list<int>::const_iterator it;
 
 	// First stores the sequence of ingoing transitions
-	for (it = av.s.delta_in[i].begin();
+	for (std::list<int>::const_iterator it = av.s.delta_in[i].begin();
 	     it != av.s.delta_in[i].end(); ++it)
 	  all_transitions_lex.push_back(av.s.transitions_labels[*it]);
 
 	all_transitions_lex.push_back(-1);
 
 	// Next, outgoing transitions
-	for (it = av.s.delta_out[i].begin();
+	for (std::list<int>::const_iterator it = av.s.delta_out[i].begin();
 	     it != av.s.delta_out[i].end(); ++it)
 	  all_transitions_lex.push_back(av.s.transitions_labels[*it]);
 
 	// Gets the node of the correct Trie (Trie of initial, final or normal
 	// states) for the sequence of transitions of state i
 	if (av.aut.is_initial(av.s.states[i]))
-	  return T_I.insert(all_transitions_lex);
+	  return T_I_.insert(all_transitions_lex);
 	if (av.aut.is_final(av.s.states[i]))
-	  return T_T.insert(all_transitions_lex);
+	  return T_T_.insert(all_transitions_lex);
 
-	return T_Q_IT.insert(all_transitions_lex);
+	return T_Q_IT_.insert(all_transitions_lex);
       }
 
       /*!
@@ -422,22 +423,19 @@ namespace vcsn
 	if (!construct_list_of_classes_with_one_state(U))
 	  return false;
 
-	while (!U.empty())
-	{
+	for (; !U.empty(); U.pop_front())
 	  if (!do_analyse_det_trans(U,
-				    a.delta_det_in,
-				    b.delta_det_in,
-				    a.s.src_transitions,
-				    b.s.src_transitions))
+				    a_.delta_det_in,
+				    b_.delta_det_in,
+				    a_.s.src_transitions,
+				    b_.s.src_transitions)
+	      || !do_analyse_det_trans(U,
+				       a_.delta_det_out,
+				       b_.delta_det_out,
+				       a_.s.dst_transitions,
+				       b_.s.dst_transitions))
 	    return false;
-	  if (!do_analyse_det_trans(U,
-				    a.delta_det_out,
-				    b.delta_det_out,
-				    a.s.dst_transitions,
-				    b.s.dst_transitions))
-	    return false;
-	  U.pop_front();
-	}
+
 	return true;
       }
 
@@ -454,7 +452,7 @@ namespace vcsn
 
 	// i = current state in automaton A, j = its image in automaton B
 	int i = U.front();
-	int j = a.perm[i];
+	int j = a_.perm[i];
 
 	// As states i and j are already associated, they belong to
 	// the same class, then have the same sequence of
@@ -470,33 +468,33 @@ namespace vcsn
 	  int l = transitions_B[*it_aux];
 
 	  // Has state k already been visited?
-	  if (a.perm[k] >= 0)
+	  if (a_.perm[k] >= 0)
 	  {
 	    // If it has already been visited, does the current image
 	    // matches state l?
-	    if (a.perm[k] != l)
+	    if (a_.perm[k] != l)
 	      return false;
 	  }
 	  else
 	  {
 	    // State k has not already been visited. The same must be
 	    // true for state l.
-	    if (b.perm[l] != -1)
+	    if (b_.perm[l] != -1)
 	      return false;
 	    // Tries to associate states k and l
 
 	    // Does k and l belongs to different classes?
-	    if (a.class_state[k] != b.class_state[l])
+	    if (a_.class_state[k] != b_.class_state[l])
 	      return false;
 	    // The states k and l belong to the same class and can be
 	    // associated.
-	    a.perm[b.perm[l] = k] = l;
+	    a_.perm[b_.perm[l] = k] = l;
 	    // Removes k and l from theirs lists of states in theirs
 	    // classes (O(1))
-	    a.class_state[k]->A.erase(a.T_L[k]);
-	    b.class_state[l]->B.erase(b.T_L[l]);
+	    a_.class_state[k]->A.erase(a_.T_L[k]);
+	    b_.class_state[l]->B.erase(b_.T_L[l]);
 	    U.push_front(k);
-	    if (a.class_state[k]->A.size() == 1)
+	    if (a_.class_state[k]->A.size() == 1)
 	    {
 	      // If it remains only one state of each
 	      // automaton in the class of the current states,
@@ -504,15 +502,15 @@ namespace vcsn
 	      // putted in list U, and the class are removed
 	      // from C.
 	      // From now on k and l represent these states.
-	      Trie* T_aux = a.class_state[k];
+	      Trie* T_aux = a_.class_state[k];
 	      k = T_aux->A.front();
 	      l = T_aux->B.front();
-	      a.perm[b.perm[l] = k] = l;
+	      a_.perm[b_.perm[l] = k] = l;
 
 	      U.push_front(k);
 
 	      // Removes class T_aux from C
-	      C.erase(T_aux->L);
+	      C_.erase(T_aux->L);
 	    }
 	  }
 	}
@@ -529,8 +527,8 @@ namespace vcsn
       {
 	// Stores in l the number of non-fixed states
 	int l = 0;
-	for (std::list<Trie*>::iterator it = C.begin();
-	     it != C.end(); ++it)
+	for (std::list<Trie*>::iterator it = C_.begin();
+	     it != C_.end(); ++it)
 	  l += (*it)->A.size();
 
 	// Vectors of classes of remaining states.	States in the same
@@ -539,7 +537,7 @@ namespace vcsn
 	// denoting the end of the class, and the following with the
 	// position where the class begins in this vector.
 	trans_t C_A(l);
-	trans_t C_B(l + 2 * C.size());
+	trans_t C_B(l + 2 * C_.size());
 	// current[i] = position in C_B of image of state C_A[i] during
 	// backtracking.
 	std::vector<int> current(l);
@@ -547,7 +545,7 @@ namespace vcsn
 
 	// Vector for test of correspondence of transitions of states already
 	// attributed
-	trans_t correspondence_transitions(a.aut.states().size(), 0);
+	trans_t correspondence_transitions(a_.aut.states().size(), 0);
 
 	list_remaining(C_A, C_B, current);
 
@@ -562,8 +560,8 @@ namespace vcsn
 	{
 	  int j;
 	  // Searches for the first free state in the class of C_A[i]
-	  for (j = current[i]; (C_B[j] != -1) && (b.perm[C_B[j]] >= 0); j++)
-	    ;
+	  for (j = current[i]; C_B[j] != -1 && b_.perm[C_B[j]] >= 0; j++)
+	    continue;
 
 	  // There is no possibility for state C_A[i]
 	  if (C_B[j] == -1)
@@ -580,8 +578,8 @@ namespace vcsn
 	      // Next iteration will try to associate state i - 1
 	      // to next possible position
 	      i--;
-	      b.perm[a.perm[C_A[i]]] = -1;
-	      a.perm[C_A[i]] = -1;
+	      b_.perm[a_.perm[C_A[i]]] = -1;
+	      a_.perm[C_A[i]] = -1;
 	      current[i]++;
 	    }
 	  }
@@ -589,17 +587,19 @@ namespace vcsn
 	  else
 	  {
 	    current[i] = j;
-	    a.perm[C_A[i]] = C_B[j];
-	    b.perm[C_B[j]] = C_A[i];
+	    a_.perm[C_A[i]] = C_B[j];
+	    b_.perm[C_B[j]] = C_A[i];
 
-	    if ((rvalue = test_correspondence(a.s.delta_in, b.s.delta_in,
-					      a.s.src_transitions, b.s.src_transitions,
-					      C_A, C_B, i, j,
-					      correspondence_transitions)))
-	      rvalue = test_correspondence(a.s.delta_out, b.s.delta_out,
-					   a.s.dst_transitions, b.s.dst_transitions,
-					   C_A, C_B, i, j,
-					   correspondence_transitions);
+	    rvalue = (test_correspondence(a_.s.delta_in, b_.s.delta_in,
+					  a_.s.src_transitions,
+					  b_.s.src_transitions,
+					  C_A, C_B, i, j,
+					  correspondence_transitions)
+		      && test_correspondence(a_.s.delta_out, b_.s.delta_out,
+					     a_.s.dst_transitions,
+					     b_.s.dst_transitions,
+					     C_A, C_B, i, j,
+					     correspondence_transitions));
 
 	    // States C_A[i] and C_B[j] can be associated.
 	    if (rvalue)
@@ -609,8 +609,8 @@ namespace vcsn
 	    else
 	    {
 	      // Tries C_A[i] to C_B[j + 1] in next iteration
-	      b.perm[a.perm[C_A[i]]] = -1;
-	      a.perm[C_A[i]] = -1;
+	      b_.perm[a_.perm[C_A[i]]] = -1;
+	      a_.perm[C_A[i]] = -1;
 	      current[i]++;
 	    }
 	  }
@@ -629,7 +629,7 @@ namespace vcsn
 		     trans_t& current)
       {
 	int i = 0, j = 0;
-	for (std::list<Trie*>::iterator it = C.begin(); it != C.end();
+	for (std::list<Trie*>::iterator it = C_.begin(); it != C_.end();
 	     it++)
 	{
 	  std::list<int>::iterator it_A = (*it)->A.begin();
@@ -682,11 +682,11 @@ namespace vcsn
 	  std::list<int>::const_iterator it_aux;
 	  for (it_aux = it_A;
 	       (it_aux != delta_A[C_A[i]].end()) &&
-		 (a.s.transitions_labels[*it_aux] ==
-		  a.s.transitions_labels[*it_A]);
+		 (a_.s.transitions_labels[*it_aux] ==
+		  a_.s.transitions_labels[*it_A]);
 	       it_aux++, k++)
 	    // Is the source of current transition associated?
-	    if (a.perm[transitions_A[*it_aux]] >= 0)
+	    if (a_.perm[transitions_A[*it_aux]] >= 0)
 	      correspondence_transitions[transitions_A[*it_aux]]++;
 
 	  // Here, k = number of ingoing transitions for current label
@@ -695,14 +695,14 @@ namespace vcsn
 	  // correspondence_transitions are decremented.
 	  for (; (k > 0); it_B++, k--)
 	    // Has the source of current transition already been visited?
-	    if (b.perm[transitions_B[*it_B]] >= 0)
+	    if (b_.perm[transitions_B[*it_B]] >= 0)
 	      // Trying to decrement a position with 0 means that the
 	      // corresponding state in A is not correct.
-	      if (correspondence_transitions[b.perm[transitions_B[*it_B]]] == 0)
+	      if (correspondence_transitions[b_.perm[transitions_B[*it_B]]] == 0)
 		// The association of C_A[i] and C_B[j] is impossible
 		return false;
 	      else
-		correspondence_transitions[b.perm[transitions_B[*it_B]]]--;
+		correspondence_transitions[b_.perm[transitions_B[*it_B]]]--;
 
 	  // Verifies correspondence_transitions. The correspondence for
 	  // current label is correct iff correspondence_transitions[l] = 0
@@ -712,7 +712,7 @@ namespace vcsn
 
 	  for (; it_A != it_aux; it_A++)
 	  {
-	    if (a.perm[transitions_A[*it_A]] >= 0)
+	    if (a_.perm[transitions_A[*it_A]] >= 0)
 	      if (correspondence_transitions[transitions_A[*it_A]] != 0)
 		return false;
 	    // All positions must be 0 for next iteration
@@ -726,13 +726,13 @@ namespace vcsn
 
 
       //Private Attributes
-      automaton_vars a;
-      automaton_vars b;
-      std::list<Trie*> C;
+      automaton_vars a_;
+      automaton_vars b_;
+      std::list<Trie*> C_;
       // Tries of classes of normal, initial and final states.
-      Trie T_Q_IT;
-      Trie T_I;
-      Trie T_T;
+      Trie T_Q_IT_;
+      Trie T_I_;
+      Trie T_T_;
   };
 
 
