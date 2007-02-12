@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -126,7 +126,7 @@ namespace vcsn
       final_support_t		final() const;
 
       /** @name State's manipulation
-	 ** @{ */
+       ** @{ */
     public:
       bool has_state(hstate_t n) const;
 
@@ -157,7 +157,7 @@ namespace vcsn
 
 
       /** @name Edge's manipulation
-	 ** @{ */
+       ** @{ */
     public:
       bool			has_edge(hedge_t n) const;
 
@@ -176,7 +176,7 @@ namespace vcsn
       /** @} */
 
       /** @name Only automaton related methods
-	 ** @{ */
+       ** @{ */
     public:
       template <class S>
       bool			exists(const AutomataBase<S>& s) const;
@@ -231,7 +231,7 @@ namespace vcsn
       self_t&			clone() const;
 
       /** @name Tag access
-	 ** @{ */
+       ** @{ */
     public:
       typedef Tag tag_t;
       tag_t& tag();
@@ -239,7 +239,7 @@ namespace vcsn
       /** @}*/
 
       /** @name Geometry access
-	 ** @{ */
+       ** @{ */
     public:
       typedef Geometry geometry_t;
       geometry_t& geometry();
@@ -341,23 +341,23 @@ namespace vcsn
 				Tag,
 				Geometry>  >
   {
-      typedef SeriesValue					series_set_elt_value_t;
+      typedef SeriesValue				series_set_elt_value_t;
       typedef WordValue					word_value_t;
       typedef WordValue					monoid_elt_value_t;
-      typedef WeightValue					semiring_elt_value_t;
+      typedef WeightValue				semiring_elt_value_t;
       typedef Letter					letter_t;
       typedef typename LabelOf<Kind, WordValue, WeightValue, SeriesValue, Letter>
       ::ret						label_t;
-      typedef Tag						tag_t;
-      typedef edge_value<label_t>				transition_value_t;
-      typedef state_value					state_value_t;
-      typedef std::vector<state_value_t>			state_data_t;
+      typedef Tag					tag_t;
+      typedef edge_value<label_t>			transition_value_t;
+      typedef state_value				state_value_t;
+      typedef std::vector<state_value_t>		state_data_t;
       typedef std::vector<transition_value_t>		transition_data_t;
 
       typedef StateContainer				states_t;
       typedef EdgeContainer				transitions_t;
 
-      typedef typename states_t::iterator			state_iterator;
+      typedef typename states_t::iterator		state_iterator;
       typedef typename transitions_t::iterator		transition_iterator;
 
       typedef std::map<hstate_t, series_set_elt_value_t>	initial_t;
@@ -365,7 +365,7 @@ namespace vcsn
       typedef misc::Support<initial_t>			initial_support_t;
       typedef misc::Support<final_t>			final_support_t;
       typedef typename initial_support_t::iterator	initial_iterator;
-      typedef typename final_support_t::iterator		final_iterator;
+      typedef typename final_support_t::iterator	final_iterator;
 
       typedef Geometry					geometry_t;
   };
