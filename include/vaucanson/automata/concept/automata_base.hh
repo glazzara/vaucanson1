@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -113,163 +113,163 @@ namespace vcsn {
 
    */
 
+  // FIXME: Use some of the TYPEDEF_IMPORT macros.
   template <typename Self, typename T>
   struct MetaElement<AutomataBase<Self>, T>
     : MetaElement<Structure<Self>, T>
   {
-      /** Type of the interface of an automaton. */
+      /// Type of the interface of an automaton.
       typedef MetaElement<AutomataBase<Self>, T>	self_t;
 
-      /** Type the series set from which is build the automaton. */
+      /// Type the series set from which is build the automaton.
       typedef typename AutomataBase<Self>::series_set_t	series_set_t;
 
-      /** Type of the implementation of series that holds the automaton. */
+      /// Type of the implementation of series that holds the automaton.
       typedef typename automaton_traits<T>::series_set_elt_value_t
       series_set_elt_value_t;
 
-      /** Type of the element of the set of series that holds the automaton. */
+      /// Type of the element of the set of series that holds the automaton.
       typedef Element<series_set_t, series_set_elt_value_t> series_set_elt_t;
 
-      /** Type of the free monoid. */
+      /// Type of the free monoid.
       typedef typename series_set_t::monoid_t		monoid_t;
 
-      /** Type of the free monoid element. */
+      /// Type of the free monoid element.
       typedef typename series_set_elt_t::monoid_elt_t	monoid_elt_t;
 
-      /** Type of the implementation of a word. */
+      /// Type of the implementation of a word.
       typedef typename monoid_elt_t::value_t		monoid_elt_value_t;
 
-      /** Type of the letter. */
+      /// Type of the letter.
       typedef typename monoid_t::letter_t		letter_t;
 
-      /** Type of the semiring set. */
+      /// Type of the semiring set.
       typedef typename series_set_t::semiring_t		semiring_t;
 
-      /** Type of the free monoid element. */
+      /// Type of the free monoid element.
       typedef typename series_set_elt_t::semiring_elt_t	semiring_elt_t;
 
-      /** Type of the implementation of a semiring_elt. */
+      /// Type of the implementation of a semiring_elt.
       typedef typename series_set_elt_t::semiring_elt_value_t
       semiring_elt_value_t;
 
-      /** Type of additional information that is aggregated to the automaton. */
+      /// Type of additional information that is aggregated to the automaton.
       typedef typename automaton_traits<T>::tag_t		tag_t;
 
-      /** Type of the label of the automaton implementation. */
+      /// Type of the label of the automaton implementation.
       typedef typename automaton_traits<T>::label_t	label_t;
 
-      /** Type of the states container. */
+      /// Type of the states container.
       typedef typename automaton_traits<T>::states_t	states_t;
 
-      /** Type of the iterator over the states set. */
+      /// Type of the iterator over the states set.
       typedef typename automaton_traits<T>::state_iterator state_iterator;
 
-      /** Type of the transitions set. */
+      /// Type of the transitions set.
       typedef typename automaton_traits<T>::transitions_t transitions_t;
 
-      /** Type of the iterator over the transitions. */
+      /// Type of the iterator over the transitions.
       typedef typename automaton_traits<T>::transition_iterator transition_iterator;
 
-      /** Type of the initial application. */
+      /// Type of the initial application.
       typedef typename automaton_traits<T>::initial_t	initial_t;
 
-      /** Type of the initial application support. */
+      /// Type of the initial application support.
       typedef typename automaton_traits<T>::initial_support_t initial_support_t;
 
-      /** Type of the iterator of the initial application support. */
+      /// Type of the iterator of the initial application support.
       typedef typename automaton_traits<T>::initial_iterator initial_iterator;
 
-      /** Type of the final application. */
+      /// Type of the final application.
       typedef typename automaton_traits<T>::final_t	final_t;
 
-      /** Type of the iterator of the final application support. */
+      /// Type of the final application support.
+      typedef typename automaton_traits<T>::final_support_t final_support_t;
+
+      /// Type of the iterator of the final application support.
       typedef typename automaton_traits<T>::final_iterator final_iterator;
 
-      /** Type of the geometry map containing state coordinates. */
+      /// Type of the geometry map containing state coordinates.
       typedef typename automaton_traits<T>::geometry_t	geometry_t;
 
-      /** The set of series from which is build the automaton (const version). */
+      /// The set of series from which is build the automaton (const version).
       const series_set_t& series() const;
 
-      /** The optional information aggregated to the automaton. */
+      /// The optional information aggregated to the automaton.
       tag_t& tag();
 
-      /** The optional information aggregated to the automaton. */
+      /// The optional information aggregated to the automaton.
       const tag_t& tag() const;
 
-      /** The optional geometry information aggregated to the automaton. */
+      /// The optional geometry information aggregated to the automaton.
       geometry_t& geometry();
 
-      /** The optional geometry information aggregated to the automaton. */
+      /// The optional geometry information aggregated to the automaton.
       const geometry_t& geometry() const;
 
-      /** Return true if the automaton is consistent. */
+      /// Return true if the automaton is consistent.
       bool exists() const;
 
-      /** Accessor to the set of states. (const version) */
-      typename automaton_traits<T>::states_t
-      states() const;
+      /// Accessor to the set of states. (const version)
+      states_t states() const;
 
-      /** Accessor to the set of states. (const version) */
-      typename automaton_traits<T>::transitions_t
-      transitions() const;
+      /// Accessor to the set of states. (const version)
+      transitions_t transitions() const;
 
-      /** Accessor to the initial application. */
-      typename automaton_traits<T>::initial_support_t
-      initial() const;
+      /// Accessor to the initial application.
+      initial_support_t initial() const;
 
-      /** Accessor to the final application. */
-      typename automaton_traits<T>::final_support_t
-      final() const;
+      /// Accessor to the final application.
+      final_support_t final() const;
 
       /** Return true if the state is initial (ie it is in the initial
        support) . */
       bool is_initial(hstate_t state) const;
 
-      /** Return true if the state is final (ie it is in the final support). */
+      /// Return true if the state is final (ie it is in the final support).
       bool is_final(hstate_t state) const;
 
-      /** Set the state to be initial. */
+      /// Set the state to be initial.
       void set_initial(hstate_t state);
 
-      /** Set an initial multiplicity to the state. */
+      /// Set an initial multiplicity to the state.
       void set_initial(hstate_t state, const series_set_elt_t& m);
 
-      /** Set the state to be final. */
+      /// Set the state to be final.
       void set_final(hstate_t state);
 
-      /** Set a final multiplicity to the state. */
+      /// Set a final multiplicity to the state.
       void set_final(hstate_t state, const series_set_elt_t& m);
 
-      /** Set the state not to be initial. */
+      /// Set the state not to be initial.
       void unset_initial(hstate_t state);
 
-      /** Set the set not to be final. */
+      /// Set the set not to be final.
       void unset_final(hstate_t state);
 
-      /** Make the support of the initial application to be empty. */
+      /// Make the support of the initial application to be empty.
       void clear_initial();
 
-      /** Make the support of the final application to be empty. */
+      /// Make the support of the final application to be empty.
       void clear_final();
 
-      /** Return the initial multiplicity of the state. */
+      /// Return the initial multiplicity of the state.
       Element<series_set_t, series_set_elt_value_t>
       get_initial(hstate_t state) const;
 
-      /** Return the final multiplicity of the state. */
+      /// Return the final multiplicity of the state.
       Element<series_set_t, series_set_elt_value_t>
       get_final(hstate_t what) const;
 
-      /** Add a new state to the automaton. */
+      /// Add a new state to the automaton.
       hstate_t add_state();
 
       /** Return a randomly chosen state. (valid only if the automaton
        is not empty) */
       hstate_t choose_state() const;
 
-      /** Add a new transition between @c src and @c dst labelled by @c label */
-      htransition_t add_transition(hstate_t src, hstate_t dst, 
+      /// Add a new transition between @c src and @c dst labelled by @c label
+      htransition_t add_transition(hstate_t src, hstate_t dst,
 				   const label_t& label);
 
       /** Add a new weighted transition, specifying a semiring element
@@ -278,66 +278,66 @@ namespace vcsn {
 					    const semiring_elt_t& w,
 					    const monoid_elt_value_t& m);
 
-      /** Add a transition using a series. */
+      /// Add a transition using a series.
       /** If the underlying implementation is not sufficiently general
        *  to support this operation, you will have several transitions
        *  created. */
       htransition_t add_series_transition(hstate_t src, hstate_t dst,
 					  const series_set_elt_t& e);
 
-      /** Add a spontaneous transition between @c src and @c dst. */
+      /// Add a spontaneous transition between @c src and @c dst.
       htransition_t add_spontaneous(hstate_t src, hstate_t dst,
 				    const semiring_elt_t& w);
 
       htransition_t add_spontaneous(hstate_t src, hstate_t dst);
 
-      /** Add a transition between @c src and @c dst labelled by a letter. */
+      /// Add a transition between @c src and @c dst labelled by a letter.
       htransition_t add_letter_transition(hstate_t src, hstate_t dst,
 					  const letter_t& l);
 
-      /** Update the label of a transition. */
+      /// Update the label of a transition.
       void update(htransition_t e, const label_t& l);
 
-      /** Delete the state @c s. */
+      /// Delete the state @c s.
       void del_state(hstate_t s);
 
-      /** Delete the transition @c e. */
+      /// Delete the transition @c e.
       void del_transition(htransition_t e);
 
-      /** Check if the state @c s is in the automaton. */
+      /// Check if the state @c s is in the automaton.
       bool has_state(hstate_t s) const;
 
-      /** Check if the transition @c e is in the automaton. */
+      /// Check if the transition @c e is in the automaton.
       bool has_transition(htransition_t e) const;
 
-      /** Return the origin of the transition @c e. */
+      /// Return the origin of the transition @c e.
       hstate_t src_of(htransition_t e) const;
 
-      /** Return the aim of the transition @c e. */
+      /// Return the aim of the transition @c e.
       hstate_t dst_of(htransition_t e) const;
 
-      /** Return the label of the transition @c e. */
+      /// Return the label of the transition @c e.
       typename automaton_traits<T>::label_t label_of(htransition_t e) const;
 
-      /** Return the label seen as a series. */
+      /// Return the label seen as a series.
       series_set_elt_t series_of(htransition_t e) const;
 
-      /** Return the label seen as a series implementation. */
+      /// Return the label seen as a series implementation.
       series_set_elt_value_t series_value_of(htransition_t e) const;
 
-      /** Return true if the transition is spontaneous. */
+      /// Return true if the transition is spontaneous.
       bool is_spontaneous(htransition_t e) const;
 
-      /** Return the label seen as a word. */
+      /// Return the label seen as a word.
       monoid_elt_t word_of(htransition_t e) const;
 
-      /** Return the label seen as a weight. */
+      /// Return the label seen as a weight.
       semiring_elt_t weight_of(htransition_t e) const;
 
-      /** Returns the label seen as word implementation. */
+      /// Returns the label seen as word implementation.
       monoid_elt_value_t word_value_of(htransition_t e) const;
 
-      /** Return the label seen as a letter. */
+      /// Return the label seen as a letter.
       /** Be careful, when you have more general label this method is
        *! probably invalidated (in that case, an exception should be
        *! raised.) */
@@ -371,7 +371,7 @@ namespace vcsn {
 			delta_kind::kind<Kind> k) const;
 
       /** Store the output spontaneous transitions or states reached
-       *  from @a src by an epsilon-transition.  */
+       *  from @a src by an epsilon-transition.	 */
       template <typename OutputIterator, typename Kind>
       void spontaneous_delta(OutputIterator res,
 			     hstate_t src,
@@ -404,7 +404,7 @@ namespace vcsn {
 			 delta_kind::kind<Kind> k) const;
 
       /** Store the output spontaneous transitions or states reached
-       *  from @a src by an epsilon-transition in the container @a res.  */
+       *  from @a src by an epsilon-transition in the container @a res.	 */
       template <typename Container, typename Kind>
       void spontaneous_deltac(Container& res,
 			      hstate_t src,
@@ -477,7 +477,7 @@ namespace vcsn {
 			 delta_kind::kind<Kind> k) const;
 
       /** Store every input spontaneous transitions or every states that
-       *  reach @a src with an epsilon-transition using @a res.  */
+       *  reach @a src with an epsilon-transition using @a res.	 */
       template <typename OutputIterator, typename Kind>
       void spontaneous_rdelta(OutputIterator res,
 			      hstate_t src,
@@ -542,7 +542,7 @@ namespace vcsn {
 			  delta_kind::kind<Kind> k) const;
 
       /** Call the functor @a fun on every input spontaneous transitions
-       *  or every states that reach @a src with an epsilon-transition.  */
+       *  or every states that reach @a src with an epsilon-transition.	 */
       template <typename Functor, typename Kind>
       void spontaneous_rdeltaf(Functor& fun,
 			       hstate_t src,
@@ -553,8 +553,8 @@ namespace vcsn {
       MetaElement(const MetaElement& other);
   };
 
-  /** @} */
-  /** @} */
+  /// @}
+  /// @}
 
   template <typename S, typename St, typename T>
   St& op_rout(const AutomataBase<S>& s, St& st, const T& r);

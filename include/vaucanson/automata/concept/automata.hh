@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,7 +20,8 @@
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/design_pattern/slots.hh>
 
-namespace vcsn {
+namespace vcsn
+{
 
   template <class Series>
   struct Automata;
@@ -30,7 +31,7 @@ namespace vcsn {
   struct dynamic_traits<Automata<Series> >
     : dynamic_traits<AutomataBase<Automata<Series> > >
   {
-    static const bool ret = dynamic_traits<Series>::ret;
+      static const bool ret = dynamic_traits<Series>::ret;
   };
 
   /// MetaElement specialization for automata.
@@ -44,7 +45,7 @@ namespace vcsn {
   struct virtual_types<Automata<Series> >
     : virtual_types<AutomataBase<Automata<Series> > >
   {
-    typedef Series series_set_t;
+      typedef Series series_set_t;
   };
 
 
@@ -54,13 +55,13 @@ namespace vcsn {
     : public AutomataBase<Automata<Series> >,
       private SetSlot<Series>
   {
-  public:
-    typedef Automata<Series> self_t;
-    typedef Series series_set_t;
+    public:
+      typedef Automata<Series> self_t;
+      typedef Series series_set_t;
 
-    Automata(const series_set_t&);
+      Automata(const series_set_t&);
 
-    const series_set_t&	series() const;
+      const series_set_t&	series() const;
   };
 
   template <class Series>
@@ -70,9 +71,9 @@ namespace vcsn {
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
-# include <vaucanson/automata/concept/automata.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/automata/concept/automata.hxx>
+# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_AUTOMATA_HH
