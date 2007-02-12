@@ -34,8 +34,8 @@ namespace vcsn
 {
 
   /*--------------------------------------.
-    | Helper for are_isomorphic algorithm.  |
-    `--------------------------------------*/
+  | Helper for are_isomorphic algorithm.  |
+  `--------------------------------------*/
 
   class Trie
   {
@@ -92,8 +92,8 @@ namespace vcsn
 
 
   /*--------------------------------------.
-    | Functor for are_isomorphic algorithm. |
-    `--------------------------------------*/
+  | Functor for are_isomorphic algorithm. |
+  `--------------------------------------*/
 
   template<typename A, typename T>
   class Isomorpher
@@ -124,11 +124,11 @@ namespace vcsn
 	  void
 	  shrink_unused()
 	  {
-	    T_L.resize(0);
-	    delta_det_in.resize(0);
-	    delta_det_out.resize(0);
-	    class_state.resize(0);
-	    class_state.resize(0);
+	    T_L.clear();
+	    delta_det_in.clear();
+	    delta_det_out.clear();
+	    class_state.clear();
+	    class_state.clear();
 	  }
 
 
@@ -186,10 +186,10 @@ namespace vcsn
 
     private:
       /*!
-	Performs quick and basic tests on both automata.
-	If the the automata are not isomorphic, this function
-	returns true.
-      */
+       Performs quick and basic tests on both automata.
+       If the the automata are not isomorphic, this function
+       returns true.
+       */
       bool
       fails_on_quick_tests()
       {
@@ -201,10 +201,10 @@ namespace vcsn
 
 
       /*!
-	Constructs lists of deterministic ingoing and outgoing transitions
-	for each state (delta_det_in[i] = list of deterministic ingoing
-	transitions for state i, idem for delta_det_out[i]).
-      */
+       Constructs lists of deterministic ingoing and outgoing transitions
+       for each state (delta_det_in[i] = list of deterministic ingoing
+       transitions for state i, idem for delta_det_out[i]).
+       */
       void
       list_in_out_det_trans(automaton_vars& av)
       {
@@ -220,12 +220,12 @@ namespace vcsn
 
 
       /*!
-	This function create tries of classes of states with the same sequence
-	of ingoing and outgoing transitions in lex. order for both automata.
+       This function create tries of classes of states with the same sequence
+       of ingoing and outgoing transitions in lex. order for both automata.
 
-	This function returns false if it discovers that the two automata
-	are not isomorphic during the construction of the tries.
-      */
+       This function returns false if it discovers that the two automata
+       are not isomorphic during the construction of the tries.
+       */
       bool
       construct_tries()
       {
@@ -276,15 +276,15 @@ namespace vcsn
 
 
       /*!
-	Searches for classes having only one state for each
-	automaton. These states must be identified. These classes are
-	then stored in list U.
-	Also tests if all classes have the same number of states in
-	lists A and B.
+       Searches for classes having only one state for each
+       automaton. These states must be identified. These classes are
+       then stored in list U.
+       Also tests if all classes have the same number of states in
+       lists A and B.
 
-	This function return false if it finds that the two automata
-	are not isomorphic during the construction of the list.
-      */
+       This function return false if it finds that the two automata
+       are not isomorphic during the construction of the list.
+       */
       bool
       construct_list_of_classes_with_one_state(std::list<int>& U)
       {
@@ -321,14 +321,14 @@ namespace vcsn
       }
 
       /*!
-	Fill a list of deterministic ingoing or outgoing transitions
-	(according to the 'delta_in_or_not' set passed to the function)
-	for a state 'i' (delta_det_in[i] = list of deterministic ingoing
-	transitions for state i, idem for delta_det_out[i]).
+       Fill a list of deterministic ingoing or outgoing transitions
+       (according to the 'delta_in_or_not' set passed to the function)
+       for a state 'i' (delta_det_in[i] = list of deterministic ingoing
+       transitions for state i, idem for delta_det_out[i]).
 
-	Usually, you would like to call this function with either S.delta_in
-	or S.delta_out as 'delta_in_or_out' parameter.
-      */
+       Usually, you would like to call this function with either S.delta_in
+       or S.delta_out as 'delta_in_or_out' parameter.
+       */
       void
       list_det_trans(automaton_vars& av,
 		     delta_t& delta_det,
@@ -367,12 +367,12 @@ namespace vcsn
       }
 
       /*!
-	Construct a list of all the given state's transitions and add them to
-	the correct Trie.
+       Construct a list of all the given state's transitions and add them to
+       the correct Trie.
 
-	This function returns a pointer to the Trie where this list has been
-	added.
-      */
+       This function returns a pointer to the Trie where this list has been
+       added.
+       */
       Trie *
       add_all_transitions_to_trie(const automaton_vars& av,
 				  int i)
@@ -406,15 +406,15 @@ namespace vcsn
       }
 
       /*!
-	Tries to discover more fixed states implied by states in U.
-	During the loop, a state i of A is in its Trie if perm_A[i] = -1
-	Time complexity: O(m).
+       Tries to discover more fixed states implied by states in U.
+       During the loop, a state i of A is in its Trie if perm_A[i] = -1
+       Time complexity: O(m).
 
-	Returns false if this function finds that the two automata are
-	not isomorphic.
-	(obs: if the automata are deterministic, the isomorphism test
-	ends here)
-      */
+       Returns false if this function finds that the two automata are
+       not isomorphic.
+       (obs: if the automata are deterministic, the isomorphism test
+       ends here)
+       */
       bool
       analyse_det_trans()
       {
@@ -519,9 +519,9 @@ namespace vcsn
 
 
       /*!
-	Tries to associate remaining states (in remaining classes
-	in C). This is the backtracking phase.
-      */
+       Tries to associate remaining states (in remaining classes
+       in C). This is the backtracking phase.
+       */
       bool
       backtracking()
       {
@@ -619,10 +619,10 @@ namespace vcsn
       }
 
       /*!
-	Stores remaining states in C_A and C_B. Partial results of the
-	backtracking are stored in vector current, that is initialized
-	with the first element of each class.
-      */
+       Stores remaining states in C_A and C_B. Partial results of the
+       backtracking are stored in vector current, that is initialized
+       with the first element of each class.
+       */
       void
       list_remaining(trans_t& C_A,
 		     trans_t& C_B,
@@ -653,9 +653,9 @@ namespace vcsn
       }
 
       /*!
-      	Tests correspondence of transitions, considering
-	states that are already in the permutation.
-      */
+       Tests correspondence of transitions, considering
+       states that are already in the permutation.
+       */
       bool
       test_correspondence(const delta_t& delta_A,
 			  const delta_t& delta_B,
@@ -737,8 +737,8 @@ namespace vcsn
 
 
   /*---------------.
-    | are_isomorphic |
-    `---------------*/
+  | are_isomorphic |
+  `---------------*/
 
   template<typename A, typename T>
   bool

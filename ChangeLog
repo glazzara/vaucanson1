@@ -1,5 +1,11 @@
 2007-02-12  Akim Demaille  <akim@lrde.epita.fr>
 
+	clear instead of resize(0).
+	* include/vaucanson/algorithms/isomorph.hxx (shrink_unused):
+	Use clear.
+
+2007-02-12  Akim Demaille  <akim@lrde.epita.fr>
+
 	Formatting changes.
 	* include/vaucanson/misc/support.hh,
 	* include/vaucanson/misc/support.hxx: here.
