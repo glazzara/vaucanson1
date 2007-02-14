@@ -1,3 +1,10 @@
+2007-02-14  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Use macros and add references to documentation.
+	* include/vaucanson/algorithms/standard.hh: Add references to
+	ETA for standard algorithms.
+	* include/vaucanson/algorithms/standard.hxx: Use for_* macros.
+
 2007-02-12  Akim Demaille  <akim@lrde.epita.fr>
 
 	White space changes.
@@ -33,7 +40,7 @@
 
 2007-02-09  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
-	Adding some standard algorithms and tests to TAF-KIT.
+	Add some standard algorithms and tests to TAF-KIT.
 	Add tests for is_standard. In particular, we check that
 	is_standard of the empty automaton returns false.
 	* src/b_commands.cc: Uncomment is_standard.

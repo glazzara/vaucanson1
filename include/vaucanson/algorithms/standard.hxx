@@ -97,7 +97,7 @@ namespace vcsn {
     // Add output transitions of old_i to new_i.
     edelta_ret_t dst;
     lhs.deltac(dst, old_i, delta_kind::transitions());
-    for_all_const_ (edelta_ret_t, d, dst)
+    for_all_const_(edelta_ret_t, d, dst)
     {
       lhs.add_transition(new_i,
 			 lhs.dst_of(*d),
@@ -167,6 +167,7 @@ namespace vcsn {
 				  const rhs_t& rhs)
   {
     TIMER_SCOPED("concat_of_standard");
+    AUTOMATON_TYPES(lhs_t);
     typedef std::map<hstate_t, hstate_t>	map_t;
     typedef std::set<htransition_t>		delta_ret_t;
 
@@ -195,9 +196,7 @@ namespace vcsn {
       {
 	dst.clear();
 	rhs.deltac(dst, *i, delta_kind::transitions());
-	for (typename delta_ret_t::const_iterator d = dst.begin();
-	     d != dst.end();
-	     ++d)
+	for_all_const_(delta_ret_t, d, dst)
 	  lhs.add_transition(map_h[*i],
 			     map_h[rhs.dst_of(*d)],
 			     rhs.label_of(*d));
@@ -207,14 +206,10 @@ namespace vcsn {
     hstate_t rhs_i = *rhs.initial().begin();
     dst.clear();
     rhs.deltac(dst, rhs_i, delta_kind::transitions());
-    for (typename lhs_t::final_iterator f = lhs.final().begin();
-	 f != lhs.final().end();
-	 ++f)
+    for_all_final_states(f, lhs)
     {
       typename lhs_t::series_set_elt_t weight = lhs.get_final(*f);
-      for (typename delta_ret_t::const_iterator d = dst.begin();
-	   d != dst.end();
-	   ++d)
+      for_all_const_(delta_ret_t, d, dst)
 	lhs.add_series_transition(*f,
 				  map_h[rhs.dst_of(*d)],
 				  weight * rhs.label_of(*d));
@@ -223,15 +218,11 @@ namespace vcsn {
     // Multiply final transitions of lhs by the final multiplicity of the
     // initial state of rhs.
     typename lhs_t::series_set_elt_t rhs_iw = rhs.get_final(rhs_i);
-    for (typename lhs_t::final_iterator f = lhs.final().begin();
-	 f != lhs.final().end();
-	 ++f)
+    for_all_final_states(f, lhs)
       lhs.set_final(*f, lhs.get_final(*f) * rhs_iw);
 
     // Set transitions coming from rhs to final if needed.
-    for (typename map_t::const_iterator nf = map_h.begin();
-	 nf != map_h.end();
-	 ++nf)
+    for_all_const_(map_t, nf, map_h)
       if (rhs.is_final(nf->first))
 	lhs.set_final(nf->second, rhs.get_final(nf->first));
   }
@@ -272,17 +263,13 @@ namespace vcsn {
 
     out_mult.star();
     a.deltac(dst, new_i, delta_kind::transitions());
-    for (typename auto_t::final_iterator f = a.final().begin();
-	 f != a.final().end();
-	 ++f)
+    for_all_final_states(f, a)
     {
       if (*f != new_i)
       {
 	series_set_elt_t f_mult = a.get_final(*f) * out_mult;
 	a.set_final(*f, f_mult);
-	for (typename edelta_ret_t::iterator d = dst.begin();
-	     d != dst.end();
-	     ++d)
+	for_all_const_(edelta_ret_t, d, dst)
 	  a.add_series_transition(*f, a.dst_of(*d), f_mult * a.label_of(*d));
       }
     }
