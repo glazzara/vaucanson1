@@ -1,4 +1,4 @@
-#! /bin/sh -x
+#! /bin/sh
 
 # Change all the latin 1 accents to TeX accents.  We don't use recode,
 # because we don't want to convert { into \{ and so forth.
@@ -20,6 +20,7 @@ s/ô/\\^o/g;
 s/ö/\\\"o/g;
 s/ø/\\o{}/g;
 s/ü/\\\"u/g;
+s/ç/\\,c{}/g;
 " | sed -e 's/[\\`"]/\\&/g')
 
 recode_upper=$(echo "$recode_lower" |

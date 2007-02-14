@@ -19,7 +19,9 @@ all: check lrde.pdf
 ## Check.  ##
 ## ------- ##
 
-check: check-warning check-bib check-mnt-dload
+check: check-warning check-bib check-mnt-dload check-urllrde
+
+maintainer-check: check check-wiki
 
 check-warning:
 	$(QUIET)echo >&2 "***"
@@ -28,9 +30,12 @@ check-warning:
 	$(QUIET)echo >&2 "***"
 
 check-bib:
+	$(QUIET)echo >&2 "*** Checking for invalid characters: ..."
 	$(QUIET)LC_ALL=C grep '[^[:print:][:blank:]]' bib/*.bib || exit 0
+	$(QUIET)echo >&2 "*** Checking for invalid characters: OK"
 
 check-mnt-dload:
+	$(QUIET)echo >&2 "*** Checking for BibTeX/PDF correspondance: ..."
 	$(QUIET)(cd $(papersdir) && ls -1 *.pdf) | \
 	   grep -Ev '^lrde(-private)?\.pdf$$' | \
 	   sed -e 's/\.pdf$$//' | \
@@ -46,6 +51,29 @@ check-mnt-dload:
 	  echo;								\
 	  exit 2;							\
 	fi
+	$(QUIET)echo >&2 "*** Checking for BibTeX/PDF correspondance: OK"
+
+check-urllrde:
+	$(QUIET)echo >&2 "*** Checking for urllrde: ..."
+	$(QUIET)bib2bib -c 'not urllrde : "."' -oc check.bib $(share_bib_dir)/lrde.bib >/dev/null 2>&1
+	$(QUIET)if test -s check.bib; then					\
+	  echo >&2 "lrde.bib entries that lack a urllrde field:";	\
+	  sed >&2 -e 's/^/  /' check.bib;				\
+	  exit 2;							\
+	fi
+	rm -f check.bib
+	$(QUIET)echo >&2 "*** Checking for urllrde: OK"
+
+check-wiki:
+	$(QUIET)sed -ne 's/.*urllrde.*{\(.*\)\}.*/\1/p' $(share_bib_dir)/lrde.bib | \
+	  while read u;								    \
+	  do									    \
+	    if ! wget -q -O /dev/null http://publis.lrde.epita.fr/$$; then	    \
+	      echo >&2 "broken urllrde: $$u";					    \
+	      fail=1;								    \
+	    fi;									    \
+	  done;									    \
+	test -z "$$fail"
 
 ## ------------------------------- ##
 ## lrde.pdf and lrde-private.pdf.  ##

@@ -1,3 +1,43 @@
+2007-02-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	One more simplification.
+	* bib/lrde.bib: here.
+
+2007-02-12  Akim Demaille  <akim@lrde.epita.fr>
+
+	Bib fixes.
+	* bin/latin2tex: Beware of "c,".
+	* bib/rivf-06.bib: Remove useless braces.
+	* Makefile: Let the checks be more explicit.
+
+2007-02-09  Akim Demaille  <akim@lrde.epita.fr>
+
+	rivf-06.bib.
+	* bib/rivf-06.bib: New.
+
+2007-02-09  Akim Demaille  <akim@lrde.epita.fr>
+
+	More lrde.bib checks.
+	* Makefile (check-urllrde, check-wiki, maintainer-check): New.
+
+2007-02-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	Typos.
+	* bib/lrde.bib: Complete first names, protect upper cases in
+	titles.
+
+2007-02-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	{CLOS}.
+	* bib/lrde.bib: Use braces to protect upper cases.
+
+2007-02-08  Akim Demaille  <akim@lrde.epita.fr>
+
+	Simple fixes.
+	* styles/misc.sty: We need hyperref for \texorpdfstring.
+	* bib/lrde.bib: Add a missing volume.
+	* bib/IEEEfull.bib, bib/IEEEabrv.bib: White spaces changes.
+
 2007-02-05  Akim Demaille  <akim@lrde.epita.fr>
 
 	* styles/texi.hva (\mailto, \http): New.
