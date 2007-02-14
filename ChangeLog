@@ -1,5 +1,46 @@
 2007-02-14  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Reorganize test automata of TAF-KIT.
+	Move automata in taf-kit/tests in taf-kit/tests/automata/{b,z,tdc}
+	* Makefile.am: Adapt path in EXTRA_DIST.
+	* README: Reorganize and document void_b_automaton and void_z_automaton.
+	* defs.in: Add variables containing path to automata.
+	* vcsn-b.test,
+	* vcsn-tdc.test:  Use variables instead of the hand-written path.
+	* ambiguous.xml: Remove.
+	* b_to_transpose.xml: Remove.
+	* b_transposed.xml: Remove.
+	* inverted_t1.xml: Remove.
+	* non_ambiguous.xml: Remove.
+	* non_ambiguous2.xml: Remove.
+	* standard_c1.xml: Remove.
+	* t1_compose_u1.xml: Remove.
+	* t2.xml: Remove.
+	* t2_u-compose_u2.xml: Remove.
+	* u2.xml: Remove.
+	* void_b_automaton.xml: Remove.
+	* void_z_automaton.xml: Remove.
+	* automata: New.
+	* automata/b/ambiguous.xml: New.
+	* automata/b/b_to_transpose.xml: New.
+	* automata/b/b_transposed.xml: New.
+	* automata/b/non_ambiguous.xml: New.
+	* automata/b/non_ambiguous2.xml: New.
+	* automata/b/void_b_automaton.xml: New.
+	* automata/b: New.
+	* automata/tdc-rw: New.
+	* automata/tdc/inverted_t1.xml: New.
+	* automata/tdc/t1_compose_u1.xml: New.
+	* automata/tdc/t2.xml: New.
+	* automata/tdc/t2_u-compose_u2.xml: New.
+	* automata/tdc/u2.xml: New.
+	* automata/tdc: New.
+	* automata/z/standard_c1.xml: New.
+	* automata/z/void_z_automaton.xml: New.
+	* automata/z: New.
+
+2007-02-14  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Use macros and add references to documentation.
 	* include/vaucanson/algorithms/standard.hh: Add references to
 	ETA for standard algorithms.

@@ -2,14 +2,26 @@
 | Description of automata.  |
 `--------------------------*/
 
-t1_compose_u1.xml : Result of the composition of the transducers t1
-                    and u1.
 
-t2.xml : Described in Inside Vaucanson (Fig. 3.)
-u2.xml : Same as above.
-t2_u-compose_u2.xml : Result of the unambiguous composition of the
-		      transducers t2 and u2.
+*** Boolean automata
 
-b_to_transpose.xml : Automaton with special transition labels, initial and final
-		     states to test the transpose algorithm.
-b_transposed.xml : Result of the transpose of the automaton above.
+* b_to_transpose.xml : Automaton with special transition labels, initial and final
+		       states to test the transpose algorithm.
+* b_transposed.xml : Result of the transpose of the automaton above.
+* void_b_automaton.xml : Empty automaton, use to test is-standard. It should
+			return false.
+
+
+*** Z automata
+
+* void_z_automaton.xml : Empty automaton, use to test is-standard. It should
+			return false.
+
+
+*** FMP transducers
+
+* t1_compose_u1.xml : Result of the composition of the transducers t1 and u1.
+* t2.xml : Described in Inside Vaucanson (Fig. 3.)
+* u2.xml : Same as above.
+* t2_u-compose_u2.xml : Result of the unambiguous composition of the transducers
+			t2 and u2.

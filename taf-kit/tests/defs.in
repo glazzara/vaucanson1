@@ -123,18 +123,25 @@ fi
 ## ---------- ##
 
 automata_dir=$top_srcdir/data/automata
-automata_tests_dir=$top_srcdir/taf-kit/tests
+automata_tests_dir=$top_srcdir/taf-kit/tests/automata
 a1=$automata_dir/b/a1.xml
 b1=$automata_dir/b/b1.xml
 c1=$automata_dir/z/c1.xml
 t1=$automata_dir/tdc/t1.xml
 u1=$automata_dir/tdc/u1.xml
-non_ambiguous1=$automata_tests_dir/non_ambiguous.xml
-non_ambiguous2=$automata_tests_dir/non_ambiguous2.xml
-ambiguous=$automata_tests_dir/ambiguous.xml
-void_b_automaton=$automata_tests_dir/void_b_automaton.xml
-void_z_automaton=$automata_tests_dir/void_z_automaton.xml
-standard_c1=$automata_tests_dir/standard_c1.xml
+non_ambiguous1=$automata_tests_dir/b/non_ambiguous.xml
+non_ambiguous2=$automata_tests_dir/b/non_ambiguous2.xml
+ambiguous=$automata_tests_dir/b/ambiguous.xml
+void_b_automaton=$automata_tests_dir/b/void_b_automaton.xml
+b_to_transpose=$automata_tests_dir/b/b_to_transpose.xml
+b_transposed=$automata_tests_dir/b/b_transposed.xml
+void_z_automaton=$automata_tests_dir/z/void_z_automaton.xml
+standard_c1=$automata_tests_dir/z/standard_c1.xml
+t1_compose_u1=$automata_tests_dir/tdc/t1_compose_u1.xml
+t2=$automata_tests_dir/tdc/t2.xml
+u2=$automata_tests_dir/tdc/u2.xml
+t2_ucompose_u2=$automata_tests_dir/tdc/t2_u-compose_u2.xml
+inverted_t1=$automata_tests_dir/tdc/inverted_t1.xml
 
 ## ---------- ##
 ## Test dir.  ##

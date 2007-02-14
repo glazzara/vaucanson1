@@ -22,16 +22,19 @@ vcsn-tdc.test					\
 completeness.test
 
 EXTRA_DIST = $(TESTS) 		\
-	ambiguous.xml 		\
-	non_ambiguous.xml 	\
-	non_ambiguous2.xml	\
-	t1_compose_u1.xml	\
-	t2.xml			\
-	u2.xml			\
-	t2_u-compose_u2.xml	\
-	inverted_t1.xml		\
-	b_transposed.xml	\
-	b_to_transpose.xml
+	automata/b/ambiguous.xml 		\
+	automata/b/non_ambiguous.xml		\
+	automata/b/non_ambiguous2.xml		\
+	automata/tdc/t1_compose_u1.xml		\
+	automata/tdc/t2.xml			\
+	automata/tdc/u2.xml			\
+	automata/tdc/t2_u-compose_u2.xml	\
+	automata/tdc/inverted_t1.xml		\
+	automata/b/b_transposed.xml		\
+	automata/b/b_to_transpose.xml		\
+	automata/b/void_b_automaton.xml		\
+	automata/z/void_z_automaton.xml		\
+	automata/z/standard_c1.xml
 
 # Each test case depends on defs.
 check_SCRIPTS =					\

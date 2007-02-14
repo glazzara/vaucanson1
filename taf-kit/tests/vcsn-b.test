@@ -107,8 +107,8 @@ test "$(vcsn-b eval $a1 'aaaabbb')" = 1
 ## --------------------------------- ##
 
 # transpose
-  vcsn-b transpose $automata_tests_dir/b_to_transpose.xml |
-      vcsn-b are-isomorphic $automata_tests_dir/b_transposed.xml -
+  vcsn-b transpose $b_to_transpose |
+      vcsn-b are-isomorphic $b_transposed -
 
 ## --------------------------------------- ##
 ## Boolean automaton specific algorithms.  ##
