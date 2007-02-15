@@ -20,15 +20,18 @@
 # include <set>
 # include <map>
 # include <vector>
+
+# include <vaucanson/misc/sparse_interval.hh>
+# include <vaucanson/misc/support.hh>
+# include <vaucanson/misc/static.hh>
+# include <vaucanson/misc/usual_macros.hh>
+
 # include <vaucanson/automata/concept/handlers.hh>
 # include <vaucanson/automata/concept/automata_base.hh>
 # include <vaucanson/automata/concept/transducer_base.hh>
 # include <vaucanson/automata/concept/automata_kind.hh>
 # include <vaucanson/automata/concept/tags.hh>
 # include <vaucanson/automata/implementation/kind_adapter.hh>
-# include <vaucanson/misc/support.hh>
-# include <vaucanson/misc/static.hh>
-# include <vaucanson/misc/usual_macros.hh>
 # include <vaucanson/automata/implementation/geometry.hh>
 
 

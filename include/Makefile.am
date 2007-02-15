@@ -58,6 +58,8 @@ vaucanson/misc/random.hxx			\
 vaucanson/misc/selectors.hh			\
 vaucanson/misc/self_iterator.hh			\
 vaucanson/misc/self_iterator.hxx		\
+vaucanson/misc/sparse_interval.hh		\
+vaucanson/misc/sparse_interval.hxx		\
 vaucanson/misc/special_char_traits.hh		\
 vaucanson/misc/static.hh			\
 vaucanson/misc/support.hh			\
