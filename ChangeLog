@@ -1,5 +1,12 @@
 2007-02-15  Akim Demaille  <akim@lrde.epita.fr>
 
+	self-iterator.*.
+	* include/vaucanson/misc/self_iterator.hxx,
+	* include/vaucanson/misc/self_iterator.hh: New.
+	* include/vaucanson/misc/support.hh: Extracted from here.
+
+2007-02-15  Akim Demaille  <akim@lrde.epita.fr>
+
 	Factor for_all macros.
 	* include/vaucanson/misc/usual_macros.hh (for_all_iterator): New.
 	Rewrite the others using it.
