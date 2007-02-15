@@ -56,6 +56,8 @@ vaucanson/misc/misc.hh				\
 vaucanson/misc/random.hh			\
 vaucanson/misc/random.hxx			\
 vaucanson/misc/selectors.hh			\
+vaucanson/misc/self_iterator.hh			\
+vaucanson/misc/self_iterator.hxx		\
 vaucanson/misc/special_char_traits.hh		\
 vaucanson/misc/static.hh			\
 vaucanson/misc/support.hh			\
