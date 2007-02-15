@@ -1,5 +1,13 @@
 2007-02-15  Akim Demaille  <akim@lrde.epita.fr>
 
+	sparse-interval.*.
+	* include/vaucanson/misc/sparse_interval.hh,
+	* include/vaucanson/misc/sparse_interval.hxx: New.
+	* include/vaucanson/misc/support.hh: Extracted from here.
+	* include/vaucanson/automata/implementation/graph.hh: Include it.
+
+2007-02-15  Akim Demaille  <akim@lrde.epita.fr>
+
 	self-iterator.*.
 	* include/vaucanson/misc/self_iterator.hxx,
 	* include/vaucanson/misc/self_iterator.hh: New.
