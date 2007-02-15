@@ -2,7 +2,7 @@
 //
 // Vaucanson, a generic library for finite state machines.
 //
-// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 The Vaucanson Group.
+// Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 The Vaucanson Group.
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -110,44 +110,52 @@
   typedef typename alphabet_t::letter_t		letter_t;
 
 
+
+/*------------.
+| Iterating.  |
+`------------*/
+
+/// Iteration given an iterator type, iterator name, and container.
+# define for_all_iterator(IteratorType, I, C)		\
+  for (IteratorType I = (C).begin(), I ## _end = (C).end(); I != I ## _end; ++I)
+
+
+/// Iteration given a non-template container type.
 # define for_all_const(T, I, C)				\
-  for (T::const_iterator I = (C).begin(),		\
-	 I ## _end = (C).end(); I != I ## _end; ++I)
+  for_all_iterator(T::const_iterator, I, C)
 
 # define for_all(T, I, C)				\
-  for (T::iterator I = (C).begin(),			\
-	 I ## _end = (C).end(); I != I ## _end; ++I)
+  for_all_iterator(T::iterator, I, C)
 
+
+/// Iteration given a template container type.
 # define for_all_const_(T, I, C)			\
-  for (typename T::const_iterator I = (C).begin(),	\
-	 I ## _end = (C).end(); I != I ## _end; ++I)
+  for_all_iterator(typename T::const_iterator, I, C)
 
 # define for_all_(T, I, C)				\
-  for (typename T::iterator I = (C).begin(),		\
-	 I ## _end = (C).end(); I != I ## _end; ++I)
+  for_all_iterator(typename T::iterator, I, C)
+
 
 // The following macros assume you have used a macro AUTOMATON_TYPES*
 // previously.
 
-# define for_all_letters(I, A)				\
-  for (alphabet_iterator I = (A).begin(),		\
-	 I ## _end = (A).end(); I != I ## _end; ++I)
+# define for_all_letters(I, A)			\
+  for_all_iterator (alphabet_iterator, I, A)
 
-# define for_all_states(I, A)					\
-  for (state_iterator I = (A).states().begin(),			\
-	 I ## _end = (A).states().end(); I != I ## _end; ++I)
+# define for_all_states(I, A)			\
+  for_all_iterator (state_iterator, I, (A).states())
 
-# define for_all_transitions(I, A)					\
-  for (transition_iterator I = (A).transitions().begin(),		\
-	 I ## _end = (A).transitions().end(); I != I ## _end; ++I)
+# define for_all_transitions(I, A)			\
+  for_all_iterator (transition_iterator, I, (A).transitions())
 
-# define for_all_final_states(I, A)				\
-  for (final_iterator I = (A).final().begin(),			\
-	 I ## _end = (A).final().end(); I != I ## _end; ++I)
+# define for_all_initial_states(I, A)			\
+  for_all_iterator (initial_iterator, I, (A).initial())
 
-# define for_all_initial_states(I, A)				\
-  for (initial_iterator I = (A).initial().begin(),		\
-	 I ## _end = (A).initial().end(); I != I ## _end; ++I)
+# define for_all_final_states(I, A)			\
+  for_all_iterator (final_iterator, I, (A).final())
+
+
+
 
 # define remove_in(S, V)				\
   S.erase(std::remove(S.begin(), S.end(), V), S.end())
@@ -175,7 +183,10 @@
 # define empty_	identity(SELECT(typename monoid_elt_t::value_t))
 # define wzero_	zero(SELECT(typename semiring_elt_t::value_t))
 
-// Use of a timer.
+
+/*-----------------.
+| Use of a timer.  |
+`-----------------*/
 # ifdef GLOBAL_TIMER
 #  include <vaucanson/misc/timer.hh>
 #  define TIMER_START()      GLOBAL_TIMER.start ()
