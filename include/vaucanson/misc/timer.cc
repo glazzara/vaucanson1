@@ -116,19 +116,13 @@ namespace misc
   Timer::TimeVar Timer::TimeVar::operator+ (const TimeVar& rhs) const
   {
     Timer::TimeVar res(*this);
-
-    res.begin += rhs.begin;
-    res.elapsed += rhs.elapsed;
-    res.cumulated += rhs.cumulated;
-    res.first += rhs.first;
-    res.initial = false;
-
-    return res;
+    return res += rhs;
   }
 
   INLINE_TIMER_CC
   Timer::TimeVar Timer::TimeVar::operator+= (const TimeVar& rhs)
   {
+    // FIXME: A lot of this does not make sense.
     begin += rhs.begin;
     elapsed += rhs.elapsed;
     cumulated += rhs.cumulated;
@@ -142,14 +136,7 @@ namespace misc
   Timer::TimeVar Timer::TimeVar::operator/ (const unsigned n) const
   {
     Timer::TimeVar res(*this);
-
-    res.begin /= n;
-    res.elapsed /= n;
-    res.cumulated /= n;
-    res.first /= n;
-    res.initial = false;
-
-    return res;
+    return res /= n;
   }
 
   INLINE_TIMER_CC
@@ -209,8 +196,8 @@ namespace misc
 
 
   /*--------.
-    | Timer.  |
-    `--------*/
+  | Timer.  |
+  `--------*/
 
   INLINE_TIMER_CC
   Timer::Timer ()
@@ -451,8 +438,8 @@ namespace misc
 
 
   /*--------------------------.
-    | Free standing functions.  |
-    `--------------------------*/
+  | Free standing functions.  |
+  `--------------------------*/
 
   /// Dump \a t on \a o.
   inline std::ostream&
@@ -465,8 +452,8 @@ namespace misc
 
 
   /*--------.
-    | Tests.  |
-    `--------*/
+  | Tests.  |
+  `--------*/
 
 # if TEST_TIMER
 

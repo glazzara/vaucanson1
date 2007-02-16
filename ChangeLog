@@ -1,5 +1,11 @@
 2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
 
+	Factor operator implementations.
+	* include/vaucanson/misc/timer.cc: Implement in-place using
+	out-of-place.
+
+2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
+
 	Remove initial_t and final_t from the automaton interface.
 	At the automaton level, one should only use the *_support_t
 	variants.
