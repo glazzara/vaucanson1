@@ -58,7 +58,8 @@ namespace vcsn {
 
   // traits for automaton implementation.
   template <typename T>
-  struct automaton_traits {
+  struct automaton_traits
+  {
       typedef undefined_type label_t;
       typedef undefined_type series_set_elt_value_t;
       typedef undefined_type word_value_t;
@@ -71,10 +72,8 @@ namespace vcsn {
       typedef undefined_type transitions_t;
       typedef undefined_type transition_data_t;
       typedef undefined_type transition_iterator;
-      typedef undefined_type initial_t;
       typedef undefined_type initial_iterator;
       typedef undefined_type initial_support_t;
-      typedef undefined_type final_t;
       typedef undefined_type final_iterator;
       typedef undefined_type final_support_t;
       typedef undefined_type geometry_t;
@@ -171,17 +170,11 @@ namespace vcsn {
       /// Type of the iterator over the transitions.
       typedef typename automaton_traits<T>::transition_iterator transition_iterator;
 
-      /// Type of the initial application.
-      typedef typename automaton_traits<T>::initial_t	initial_t;
-
       /// Type of the initial application support.
       typedef typename automaton_traits<T>::initial_support_t initial_support_t;
 
       /// Type of the iterator of the initial application support.
       typedef typename automaton_traits<T>::initial_iterator initial_iterator;
-
-      /// Type of the final application.
-      typedef typename automaton_traits<T>::final_t	final_t;
 
       /// Type of the final application support.
       typedef typename automaton_traits<T>::final_support_t final_support_t;

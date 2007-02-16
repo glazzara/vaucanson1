@@ -1,3 +1,13 @@
+2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
+
+	Remove initial_t and final_t from the automaton interface.
+	At the automaton level, one should only use the *_support_t
+	variants.
+	* include/vaucanson/automata/concept/automata_base.hh
+	(initial_t, final_t): Remove.
+	* include/vaucanson/misc/usual_macros.hh: Adjust.
+	* include/vaucanson/automata/concept/transducer_base.hh: Adjust.
+
 2007-02-15  Akim Demaille  <akim@lrde.epita.fr>
 
 	sparse-interval.*.

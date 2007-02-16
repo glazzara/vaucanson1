@@ -166,17 +166,11 @@ namespace vcsn {
       /// Type of the iterator over the transitions.
       IMPORT_TYPEDEF_(automaton_t, transition_iterator);
 
-      /// Type of the initial application.
-      IMPORT_TYPEDEF_(automaton_t, initial_t);
-
       /// Type of the initial application support.
       IMPORT_TYPEDEF_(automaton_t, initial_support_t);
 
       /// Type of the iterator of the initial application support.
       IMPORT_TYPEDEF_(automaton_t, initial_iterator);
-
-      /// Type of the final application.
-      IMPORT_TYPEDEF_(automaton_t, final_t);
 
       /// Type of the final application support.
       IMPORT_TYPEDEF_(automaton_t, final_support_t);

@@ -52,8 +52,6 @@
   typedef Typename AutoType::state_iterator			Prefix##state_iterator;	\
   typedef Typename AutoType::transitions_t			Prefix##transitions_t; \
   typedef Typename AutoType::transition_iterator		Prefix##transition_iterator; \
-  typedef Typename AutoType::initial_t				Prefix##initial_t; \
-  typedef Typename AutoType::final_t				Prefix##final_t; \
   typedef Typename AutoType::initial_iterator			Prefix##initial_iterator; \
   typedef Typename AutoType::final_iterator			Prefix##final_iterator;	\
   typedef Typename AutoType::monoid_t				Prefix##monoid_t; \
