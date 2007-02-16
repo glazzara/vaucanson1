@@ -33,11 +33,8 @@ namespace misc
   class Bencher
   {
   public:
-    // Fixme
-    // ~Bencher ();
-
-    /// Add t to timers list
-    void push (const Timer t);
+    /// Add \a t to timers list.
+    void push (const Timer& t);
 
     /// Display all timers + summary
     void print (std::ostream& o);

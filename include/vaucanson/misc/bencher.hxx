@@ -29,15 +29,9 @@ namespace misc
 {
 
   void
-  Bencher::push (const Timer t)
+  Bencher::push (const Timer& t)
   {
-    if (this->timers_.empty ())
-      this->timers_.push_back (t);
-    else
-    {
-      // FIXME : Assert timers are compatible
-      this->timers_.push_back (t);
-    }
+    timers_.push_back (t);
   }
 
   void
