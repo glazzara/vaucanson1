@@ -1,5 +1,18 @@
 2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
 
+	Fixes in Bencher.
+	* include/vaucanson/misc/timer.cc, 
+	* include/vaucanson/misc/timer.hxx,
+	* include/vaucanson/misc/bencher.cc,
+	* include/vaucanson/misc/bencher.hxx,
+	* include/vaucanson/misc/timer.hh:
+	Don't allocate on the heap when the stack is enough
+	(besides, where are all these deletes???).
+	Better use of "inline".
+	Improve portability to other projects.
+
+2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
+
 	Factor operator implementations.
 	* include/vaucanson/misc/timer.cc: Implement in-place using
 	out-of-place.

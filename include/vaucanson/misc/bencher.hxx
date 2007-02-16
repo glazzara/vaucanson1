@@ -18,8 +18,9 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
-#ifndef   	BENCHER_HXX_
-# define   	BENCHER_HXX_
+#ifndef MISC_BENCHER_HXX_
+# define MISC_BENCHER_HXX_
+
 # include <vaucanson/misc/bencher.hh>
 
 NAMESPACE_VCSN_BEGIN
@@ -189,4 +190,4 @@ namespace misc
 
 NAMESPACE_VCSN_END
 
-#endif /* !BENCHER_HXX_ */
+#endif // !MISC_BENCHER_HXX_

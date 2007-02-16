@@ -24,7 +24,6 @@
 # define VCSN_MISC_TIMER_HXX
 
 # include <vaucanson/misc/timer.hh>
-# include <vaucanson/misc/contract.hh>
 
 NAMESPACE_VCSN_BEGIN
 
@@ -190,7 +189,7 @@ namespace misc
   Timer::Time
   Timer::Time::min (const Timer::Time& rhs) const
   {
-    Timer::Time res = *new Timer::Time ();
+    Timer::Time res;
     res.wall = std::min (this->wall, rhs.wall);
     res.user = std::min (this->user, rhs.user);
     res.sys = std::min (this->sys, rhs.sys);
@@ -201,7 +200,7 @@ namespace misc
   Timer::Time
   Timer::Time::max (const Timer::Time& rhs) const
   {
-    Timer::Time res = *new Timer::Time ();
+    Timer::Time res;
     res.wall = std::max (this->wall, rhs.wall);
     res.user = std::max (this->user, rhs.user);
     res.sys = std::max (this->sys, rhs.sys);

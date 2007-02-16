@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007  The Vaucanson Group.
  *
  * This program is free software; you can redistribute it and/or
@@ -16,21 +16,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
  * USA.
  */
+
 # if TEST_BENCHER
 
 # include <iostream>
 # include <vaucanson/misc/bencher.hh>
 # include <fstream>
 
-using namespace vcsn;
-using namespace misc;
-using namespace std;
-
 /// Test the bencher.
 int
 main ()
 {
-  Bencher b;
+  misc::Bencher b;
   misc::Timer timer;
   enum timevar
     {
@@ -40,10 +37,10 @@ main ()
       Four
     };
 
-  ofstream outfile;
-  outfile.open ("test.plot", ofstream::out | ofstream::trunc);
+  std::ofstream outfile;
+  outfile.open ("test.plot", std::ofstream::out | std::ofstream::trunc);
 
-  for (int i = 1; i <= 2; i++)
+  for (int i = 0; i < 5; i++)
   {
     timer.clear();
 
@@ -83,4 +80,6 @@ main ()
 
 # endif
 
-/// g++ -I ../.. -I ../../../_build/include -DTEST_BENCHER timer.cc bencher.cc -o test-bencher -Wall && ./test-bencher
+/// Local Variables:
+/// compile-command: "g++ -I ../.. -I ../../../_build/include -DTEST_BENCHER timer.cc bencher.cc -o test-bencher -Wall && ./test-bencher"
+/// End:

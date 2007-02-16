@@ -32,9 +32,12 @@
 # if VAUCANSON
 #  define NAMESPACE_VCSN_BEGIN namespace vcsn {
 #  define NAMESPACE_VCSN_END   } // namespace vcsn
+#  include <vaucanson/misc/contract.hh>
 # else
 #  define NAMESPACE_VCSN_BEGIN
 #  define NAMESPACE_VCSN_END
+#  include <cassert>
+#  define precondition(C) assert(C)
 # endif
 
 NAMESPACE_VCSN_BEGIN
@@ -259,7 +262,7 @@ namespace misc
   };
 
   /// Dump \a t on \a o.
-  inline std::ostream& operator<< (std::ostream& o, const Timer& t);
+  std::ostream& operator<< (std::ostream& o, const Timer& t);
 
   /// A timer which starts at its construction, and stops at its destruction.
   class ScopedTimer

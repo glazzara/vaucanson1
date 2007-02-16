@@ -30,13 +30,14 @@
 # include <unistd.h>
 
 # include <vaucanson/misc/timer.hh>
-# include <vaucanson/misc/contract.hh>
 
 /// This file is also used in Tiger Compiler, where it is compiled in
 /// a C library, so INLINE_TIMER_CC should be defined to empty in that
 /// case.
 # if VAUCANSON
 #  define INLINE_TIMER_CC inline
+# else
+#  define INLINE_TIMER_CC
 # endif
 
 NAMESPACE_VCSN_BEGIN
@@ -45,8 +46,8 @@ namespace misc
 {
 
   /*--------------.
-    | Timer::Time.  |
-    `--------------*/
+  | Timer::Time.  |
+  `--------------*/
 
   INLINE_TIMER_CC
   void
@@ -67,9 +68,9 @@ namespace misc
     sys	 = 0;
   }
 
-    /*-----------------.
-    | Timer::TimeVar.  |
-    `-----------------*/
+  /*-----------------.
+  | Timer::TimeVar.  |
+  `-----------------*/
 
   INLINE_TIMER_CC
   Timer::TimeVar::TimeVar ()
@@ -82,14 +83,14 @@ namespace misc
   {
     begin.now ();
     if (initial)
-    {
-      initial = false;
+      {
+	initial = false;
 
-      // First time task is seen
-      // cumulated is set to 0.
-      saved_accumulated_times = cumulated;
-      first = begin;
-    }
+	// First time task is seen
+	// cumulated is set to 0.
+	saved_accumulated_times = cumulated;
+	first = begin;
+      }
   }
 
   INLINE_TIMER_CC
@@ -154,7 +155,7 @@ namespace misc
   INLINE_TIMER_CC
   Timer::TimeVar Timer::TimeVar::min (const Timer::TimeVar& rhs) const
   {
-    Timer::TimeVar res = *(new Timer::TimeVar());
+    Timer::TimeVar res;
 
     res.begin = begin.min (rhs.begin);
     res.first = first.min (rhs.first);
@@ -169,7 +170,7 @@ namespace misc
   INLINE_TIMER_CC
   Timer::TimeVar Timer::TimeVar::max (const Timer::TimeVar& rhs) const
   {
-    Timer::TimeVar res = *(new Timer::TimeVar());
+    Timer::TimeVar res;
 
     res.begin = begin.max (rhs.begin);
     res.first = first.max (rhs.first);
@@ -208,13 +209,12 @@ namespace misc
   INLINE_TIMER_CC
   // Duplicate a Timer. No tasks should be running.
   Timer::Timer (const Timer& rhs)
-    :
-    tab_to_disp (rhs.tab_to_disp),
-    task_ordered (rhs.task_ordered),
-    intmap (rhs.intmap),
-    total (rhs.total),
-    dump_stream (rhs.dump_stream),
-    clocks_per_sec (rhs.clocks_per_sec)
+    : tab_to_disp (rhs.tab_to_disp),
+      task_ordered (rhs.task_ordered),
+      intmap (rhs.intmap),
+      total (rhs.total),
+      dump_stream (rhs.dump_stream),
+      clocks_per_sec (rhs.clocks_per_sec)
 
   {
     precondition (rhs.tasks.empty ());
@@ -248,18 +248,18 @@ namespace misc
   {
     // If magic is asked on destruction, let it happen completely.
     if (dump_stream)
-    {
-      // Consider that if the tasks were not properly closed, then
-      // stop was not invoked either.
-      if (!tasks.empty ())
       {
-	do
-	  pop ();
-	while (!tasks.empty ());
-	stop ();
+	// Consider that if the tasks were not properly closed, then
+	// stop was not invoked either.
+	if (!tasks.empty ())
+	  {
+	    do
+	      pop ();
+	    while (!tasks.empty ());
+	    stop ();
+	  }
+	print (*dump_stream, true);
       }
-      print (*dump_stream, true);
-    }
 
     // Deallocate all our TimeVar.
     for (task_map_type::iterator i = tasksmap.begin ();
@@ -324,23 +324,23 @@ namespace misc
     o << "Execution times (seconds)" << std::endl;
     for (std::list<std::string>::const_iterator i = task_ordered.begin ();
 	 i != task_ordered.end (); ++i)
-    {
-      task_map_type::const_iterator ii = tasksmap.find(*i);
-      if (ii->second)
-	print_time (ii->first, ii->second->elapsed,
-		    total.elapsed, o, tree_mode);
-    }
+      {
+	task_map_type::const_iterator ii = tasksmap.find(*i);
+	if (ii->second)
+	  print_time (ii->first, ii->second->elapsed,
+		      total.elapsed, o, tree_mode);
+      }
     o << std::endl;
 
     o << "Cumulated times (seconds)" << std::endl;
     for (std::list<std::string>::const_iterator i = task_ordered.begin ();
 	 i != task_ordered.end (); ++i)
-    {
-      task_map_type::const_iterator ii = tasksmap.find(*i);
-      if (ii->second)
-	print_time (ii->first, ii->second->cumulated,
-		    total.elapsed, o, tree_mode);
-    }
+      {
+	task_map_type::const_iterator ii = tasksmap.find(*i);
+	if (ii->second)
+	  print_time (ii->first, ii->second->cumulated,
+		      total.elapsed, o, tree_mode);
+      }
     o << std::endl;
 
     if (tree_mode)
@@ -348,21 +348,21 @@ namespace misc
     else
       o << " TOTAL (seconds)"	 << std::setw (5) << ": ";
     o  << std::setiosflags (std::ios::left) << std::setw (7)
-      << (float) total.elapsed.user / clocks_per_sec
-      << std::setw (11)
-      << "user,"
+       << (float) total.elapsed.user / clocks_per_sec
+       << std::setw (11)
+       << "user,"
 
-      << std::setw (7)
-      << (float) total.elapsed.sys / clocks_per_sec
-      << std::setw (11)
-      << "system,"
+       << std::setw (7)
+       << (float) total.elapsed.sys / clocks_per_sec
+       << std::setw (11)
+       << "system,"
 
-      << std::setw (7)
-      << (float) total.elapsed.wall / clocks_per_sec
-      << "wall"
+       << std::setw (7)
+       << (float) total.elapsed.wall / clocks_per_sec
+       << "wall"
 
-      << std::resetiosflags (std::ios::left)
-      << std::endl;
+       << std::resetiosflags (std::ios::left)
+       << std::endl;
 
     return o;
   }
@@ -378,17 +378,17 @@ namespace misc
       tasks.top ()->stop ();
 
     if (tasksmap.find (task_name) == tasksmap.end ())
-    {
-      // Adjustment for Display
-      task_ordered.push_back(task_name);
-      for (unsigned i = 1; i <= tasks.size (); ++i)
-	if (i == tasks.size ())
-	  tabs += "|___";
-	else
-	  tabs += "   ";
+      {
+	// Adjustment for Display
+	task_ordered.push_back(task_name);
+	for (unsigned i = 1; i <= tasks.size (); ++i)
+	  if (i == tasks.size ())
+	    tabs += "|___";
+	  else
+	    tabs += "   ";
 
-      tasksmap[task_name] = new TimeVar;
-    }
+	tasksmap[task_name] = new TimeVar;
+      }
 
     if (tab_to_disp.find (task_name) == tab_to_disp.end ())
       tab_to_disp[task_name] = tabs;
@@ -442,7 +442,8 @@ namespace misc
   `--------------------------*/
 
   /// Dump \a t on \a o.
-  inline std::ostream&
+  INLINE_TIMER_CC
+  std::ostream&
   operator<< (std::ostream& o, const Timer& t)
   {
     return t.print (o);
