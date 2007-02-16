@@ -46,7 +46,7 @@ namespace misc
   void
   Timer::pop (const std::string& task_name)
   {
-    precondition (tasksmap[task_name] == tasks.top ());
+    precondition (tasksmap[task_name] == *tasks.top ());
     pop ();
   }
 
@@ -92,14 +92,11 @@ namespace misc
     this->task_ordered.clear ();
   }
 
-  // Fixme
   inline
-  Timer::TimeVar&
-  Timer::operator[] (std::string s)
+  const Timer::TimeVar&
+  Timer::operator[] (const std::string& s)
   {
-    Timer::TimeVar* tmp = this->tasksmap[s];
-    Timer::TimeVar* res = new Timer::TimeVar(*tmp);
-    return *res;
+    return tasksmap[s];
   }
 
 

@@ -23,6 +23,8 @@
 # include <vaucanson/misc/bencher.hh>
 # include <fstream>
 
+# define msleep(MilliSecond) usleep(MilliSecond * 1000)
+
 /// Test the bencher.
 int
 main ()
@@ -40,7 +42,7 @@ main ()
   std::ofstream outfile;
   outfile.open ("test.plot", std::ofstream::out | std::ofstream::trunc);
 
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < 10; i++)
   {
     timer.clear();
 
@@ -52,19 +54,19 @@ main ()
     timer.start ();
 
     timer.push (One);
-    sleep (1);
+    msleep (i * 10);
 
     timer.push ("Two");
-    sleep (1);
+    msleep (i * 10);
     timer.push ("Four");
-    sleep (1);
+    msleep (i * 10);
 
     timer.pop ("Four");
     timer.pop ("Two");
     timer.pop (1);
 
     timer.push ("Three");
-    sleep (1);
+    msleep (i * 10);
     timer.pop (Three);
 
     timer.stop ();

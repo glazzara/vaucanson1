@@ -1,5 +1,18 @@
 2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
 
+	More Timer/Bencher simplifications.
+	* include/vaucanson/misc/timer.hh (task_map_type): Store the TimerVar
+	instead of referencing them.
+	* include/vaucanson/misc/timer.cc: Simplify accordingly.
+	Now we can rely on the semantics of the usual algorithms on
+	containers.
+	* include/vaucanson/misc/timer.hxx: Idem.
+	* include/vaucanson/misc/bencher.hxx: Ditto.
+	* include/vaucanson/misc/bencher.cc: Use usleep instead of sleep.
+	Also, shorten scopes.
+
+2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fixes in Bencher.
 	* include/vaucanson/misc/timer.cc, 
 	* include/vaucanson/misc/timer.hxx,

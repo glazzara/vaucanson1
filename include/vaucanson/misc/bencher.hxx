@@ -79,36 +79,18 @@ namespace misc
   void
   Bencher::arithmetical_means_set ()
   {
-    std::vector< Timer >::const_iterator i;
-    Timer::task_map_type::const_iterator j;
     unsigned int n1 = this->timers_.size ();
 
     // Summarize total times by classic mean
-    for (i = this->timers_.begin ();
-	 i != this->timers_.end ();
-	 ++i)
+    for (std::vector< Timer >::const_iterator i = this->timers_.begin ();
+	 i != this->timers_.end (); ++i)
     {
-      this->arith_means_.total = this->arith_means_.total + i->total;
+      this->arith_means_.total += i->total;
 
       // Summarize sub-timers
-      for (j = i->tasksmap.begin ();
-	   j != i->tasksmap.end ();
-	   ++j)
-      {
-	// First time task is seen
-	if (not this->arith_means_.tasksmap[j->first])
-	{
-	  this->arith_means_.tasksmap[j->first] =
-	    new Timer::TimeVar (*j->second);
-	  *(this->arith_means_.tasksmap[j->first]) /= n1;
-	}
-	else
-	{
-	  Timer::TimeVar* t_ptr =
-	    new Timer::TimeVar (*j->second);
-	  *(this->arith_means_.tasksmap[j->first]) += (*t_ptr) / n1;
-	}
-      }
+      for (Timer::task_map_type::const_iterator j = i->tasksmap.begin ();
+	   j != i->tasksmap.end (); ++j)
+	this->arith_means_.tasksmap[j->first] += j->second / n1;
     }
 
     this->arith_means_.total /= n1;
@@ -118,13 +100,10 @@ namespace misc
   Bencher::min_max_set ()
   {
     bool first = true;
-    std::vector< Timer >::const_iterator i;
-    Timer::task_map_type::const_iterator j;
 
     // Summarize total times by classic mean
-    for (i = this->timers_.begin ();
-	 i != this->timers_.end ();
-	 ++i)
+    for (std::vector< Timer >::const_iterator i = this->timers_.begin ();
+	 i != this->timers_.end (); ++i)
     {
       if (first)
       {
@@ -138,28 +117,18 @@ namespace misc
       }
 
       // Summarize sub-timers
-      for (j = i->tasksmap.begin ();
-	   j != i->tasksmap.end ();
-	   ++j)
+      for (Timer::task_map_type::const_iterator j = i->tasksmap.begin ();
+	   j != i->tasksmap.end (); ++j)
       {
 	if (first)
 	{
-	  this->min_.tasksmap[j->first] =
-	    new Timer::TimeVar (*j->second);
-
-	  this->max_.tasksmap[j->first] =
-	    new Timer::TimeVar (*j->second);
+	  this->min_.tasksmap[j->first] = j->second;
+	  this->max_.tasksmap[j->first] = j->second;
 	}
 	else
 	{
-	  Timer::TimeVar* t_ptr =
-	    new Timer::TimeVar (*j->second);
-	  *(this->min_.tasksmap[j->first]) =
-	    this->min_.tasksmap[j->first]->min((*t_ptr));
-
-	  t_ptr = new Timer::TimeVar (*j->second);
-	  *(this->max_.tasksmap[j->first]) =
-	    this->max_.tasksmap[j->first]->max((*t_ptr));
+	  this->min_.tasksmap[j->first].min(j->second);
+	  this->max_.tasksmap[j->first].max(j->second);
 	}
       }
       first = false;

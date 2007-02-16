@@ -209,20 +209,16 @@ namespace misc
   INLINE_TIMER_CC
   // Duplicate a Timer. No tasks should be running.
   Timer::Timer (const Timer& rhs)
-    : tab_to_disp (rhs.tab_to_disp),
+    : tasksmap (rhs.tasksmap),
+      tab_to_disp (rhs.tab_to_disp),
       task_ordered (rhs.task_ordered),
       intmap (rhs.intmap),
       total (rhs.total),
       dump_stream (rhs.dump_stream),
       clocks_per_sec (rhs.clocks_per_sec)
-
   {
+    // Hardly a precondition here...
     precondition (rhs.tasks.empty ());
-
-    for (task_map_type::const_iterator i = rhs.tasksmap.begin ();
-	 i != rhs.tasksmap.end (); ++i)
-      if (tasksmap.find (i->first) == tasksmap.end ())
-	tasksmap[i->first] = new TimeVar (*i->second);
   }
 
   INLINE_TIMER_CC
@@ -234,12 +230,7 @@ namespace misc
     //clocks_per_sec = rhs.clocks_per_sec;
 
     precondition (rhs.tasks.empty ());
-
-    for (task_map_type::const_iterator i = rhs.tasksmap.begin ();
-	 i != rhs.tasksmap.end (); ++i)
-      if (tasksmap.find (i->first) == tasksmap.end ())
-	tasksmap[i->first] = new TimeVar (*i->second);
-
+    tasksmap = rhs.tasksmap;
     return rhs;
   }
 
@@ -260,11 +251,6 @@ namespace misc
 	  }
 	print (*dump_stream, true);
       }
-
-    // Deallocate all our TimeVar.
-    for (task_map_type::iterator i = tasksmap.begin ();
-	 i != tasksmap.end (); ++i)
-      delete i->second;
   }
 
 
@@ -327,7 +313,7 @@ namespace misc
       {
 	task_map_type::const_iterator ii = tasksmap.find(*i);
 	if (ii->second)
-	  print_time (ii->first, ii->second->elapsed,
+	  print_time (ii->first, ii->second.elapsed,
 		      total.elapsed, o, tree_mode);
       }
     o << std::endl;
@@ -338,7 +324,7 @@ namespace misc
       {
 	task_map_type::const_iterator ii = tasksmap.find(*i);
 	if (ii->second)
-	  print_time (ii->first, ii->second->cumulated,
+	  print_time (ii->first, ii->second.cumulated,
 		      total.elapsed, o, tree_mode);
       }
     o << std::endl;
@@ -386,21 +372,21 @@ namespace misc
 	    tabs += "|___";
 	  else
 	    tabs += "   ";
-
-	tasksmap[task_name] = new TimeVar;
       }
 
     if (tab_to_disp.find (task_name) == tab_to_disp.end ())
       tab_to_disp[task_name] = tabs;
-    TimeVar* current = tasksmap[task_name]; // FIXME : Bug is task is
+    TimeVar& current = tasksmap[task_name]; // FIXME : Bug is task is
 					    // already in taskmap
 					    // (first is not
 					    // reinitialized)
     // Reset current to initial
-    current->initial = true;
+    current.initial = true;
 
-    tasks.push (current);
-    current->start ();
+    // FIXME: Do we know for a fact that maps don't move their
+    // content?  We might need an iterator here.
+    tasks.push (&current);
+    current.start ();
   }
 
   INLINE_TIMER_CC
@@ -430,7 +416,7 @@ namespace misc
     for (task_map_type::const_iterator i = rhs.tasksmap.begin ();
 	 i != rhs.tasksmap.end (); ++i)
       if (tasksmap.find (i->first) == tasksmap.end ())
-	tasksmap[i->first] = new TimeVar (*i->second);
+	tasksmap[i->first] = i->second;
 
     intmap.insert (rhs.intmap.begin (), rhs.intmap.end ());
     return *this;

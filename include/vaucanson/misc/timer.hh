@@ -52,7 +52,7 @@ namespace misc
     friend class Bencher;
 
     class TimeVar;
-    typedef std::map<const std::string, TimeVar*> task_map_type;
+    typedef std::map<const std::string, TimeVar> task_map_type;
 
     Timer ();
     Timer (const Timer& rhs);
@@ -110,8 +110,7 @@ namespace misc
     /// Reset all timers to zero.
     void clear();
 
-    //FIXME : Buggued
-    TimeVar& operator[] (std::string s);
+    const TimeVar& operator[] (const std::string& s);
 
   public :
     /// User, system and wall clock time convenient interface.
@@ -152,8 +151,10 @@ namespace misc
       Time operator/ (const long n) const;
       /// \}
 
-      /// Fixme : Document
+      /// Return a new Time with the min of all three fields.
+      /// It does not necessarily return the smallest of \a this and \a rhs.
       Time min (const Time& rhs) const;
+      /// See min().
       Time max (const Time& rhs) const;
 
     private:
