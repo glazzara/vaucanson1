@@ -41,20 +41,24 @@ namespace misc
 
     void plot (std::ostream& o);
 
-    /// Analyse data
-    void finalize ();
+    /// Sum of all the timers.
+    Timer sum() const;
+
+    /// Arithmetic mean of all the timers.
+    Timer mean() const;
+
+    /// Smallest profile.
+    Timer min() const;
+
+    /// Largest profile.
+    Timer max() const;
 
   private:
-    void arithmetical_means_set();
-    void min_max_set ();
+    /// Ensure they all use the same visual appearance.
+    Timer prepare (Timer t) const;
 
     /// Collected timers
     std::vector<Timer> timers_;
-
-    /// Summarized results
-    Timer arith_means_;
-    Timer min_;
-    Timer max_;
   };
 }
 

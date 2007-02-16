@@ -72,7 +72,6 @@ main ()
     timer.stop ();
     b.push (timer);
   }
-  b.finalize();
   b.print(std::cerr);
   b.plot(outfile);
 

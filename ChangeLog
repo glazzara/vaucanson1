@@ -1,5 +1,20 @@
 2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
 
+	More Bencher factoring.
+	* include/vaucanson/misc/timer.hh,
+	* include/vaucanson/misc/timer.hxx,
+	* include/vaucanson/misc/timer.cc
+	(operator/): Fix the signature.
+	(operator+=, operator/=, operator/, min, max): New.
+	* include/vaucanson/misc/bencher.hh,
+	* include/vaucanson/misc/bencher.cc,
+	* include/vaucanson/misc/bencher.hxx
+	(finalize, arithmetical_means_set, min_max_set)
+	(arith_means, min_, max_): Remove.
+	(sum, mean, min, max, prepare): New.
+
+2007-02-16  Akim Demaille  <akim@lrde.epita.fr>
+
 	Bencher Simplification.
 	* include/vaucanson/misc/bencher.hh,
 	* include/vaucanson/misc/bencher.hxx: Pass const ref objects

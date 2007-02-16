@@ -106,11 +106,25 @@ namespace misc
     /// Total execution time of \a rhs is ignored.
     Timer& operator<< (const Timer& rhs);
 
+    /// \brief Accumulate another timer.
+    Timer& operator+= (const Timer& rhs);
+
+    /// \brief Divide in place.
+    Timer& operator/= (unsigned rhs);
+
+    /// \brief Divide.
+    Timer operator/ (unsigned rhs) const;
+
+    /// \brief Min.
+    Timer min (const Timer& rhs) const;
+
+    /// \brief Max.
+    Timer max (const Timer& rhs) const;
 
     /// Reset all timers to zero.
     void clear();
 
-    const TimeVar& operator[] (const std::string& s);
+    TimeVar& operator[] (const std::string& s);
 
   public :
     /// User, system and wall clock time convenient interface.
@@ -147,8 +161,8 @@ namespace misc
       /// Return the subtraction of \a this and \a lhs.
       Time operator - (const Time& lhs) const;
 
-      Time& operator/= (const long n);
-      Time operator/ (const long n) const;
+      Time& operator/= (unsigned n);
+      Time operator/ (unsigned n) const;
       /// \}
 
       /// Return a new Time with the min of all three fields.
@@ -189,8 +203,8 @@ namespace misc
 
       TimeVar operator+ (const TimeVar& rhs) const;
       TimeVar operator+= (const TimeVar& rhs);
-      TimeVar operator/ (const unsigned n) const;
-      TimeVar operator/= (const unsigned n);
+      TimeVar operator/ (unsigned n) const;
+      TimeVar operator/= (unsigned n);
 
       /// Fixme : Document
       TimeVar min (const TimeVar& rhs) const;

@@ -93,7 +93,7 @@ namespace misc
   }
 
   inline
-  const Timer::TimeVar&
+  Timer::TimeVar&
   Timer::operator[] (const std::string& s)
   {
     return tasksmap[s];
@@ -166,7 +166,7 @@ namespace misc
 
   inline
   Timer::Time&
-  Timer::Time::operator/= (const long n)
+  Timer::Time::operator/= (unsigned n)
   {
     wall /= n;
     user /= n;
@@ -176,7 +176,7 @@ namespace misc
 
   inline
   Timer::Time
-  Timer::Time::operator/ (const long n) const
+  Timer::Time::operator/ (unsigned n) const
   {
     Timer::Time res = *this;
     return res /= n;

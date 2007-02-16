@@ -134,14 +134,14 @@ namespace misc
   }
 
   INLINE_TIMER_CC
-  Timer::TimeVar Timer::TimeVar::operator/ (const unsigned n) const
+  Timer::TimeVar Timer::TimeVar::operator/ (unsigned n) const
   {
     Timer::TimeVar res(*this);
     return res /= n;
   }
 
   INLINE_TIMER_CC
-  Timer::TimeVar Timer::TimeVar::operator/= (const unsigned n)
+  Timer::TimeVar Timer::TimeVar::operator/= (unsigned n)
   {
     begin /= n;
     elapsed /= n;
@@ -421,6 +421,77 @@ namespace misc
     intmap.insert (rhs.intmap.begin (), rhs.intmap.end ());
     return *this;
   }
+
+
+  INLINE_TIMER_CC
+  Timer&
+  Timer::operator+= (const Timer& rhs)
+  {
+    // FIXME: This is not sufficient, it's just an approximation.
+    for (task_map_type::const_iterator i = rhs.tasksmap.begin ();
+	 i != rhs.tasksmap.end (); ++i)
+      tasksmap[i->first] += i->second;
+    intmap.insert (rhs.intmap.begin (), rhs.intmap.end ());
+    return *this;
+  }
+
+  INLINE_TIMER_CC
+  Timer&
+  Timer::operator/= (unsigned rhs)
+  {
+    // FIXME: This is not sufficient, it's just an approximation.
+    for (task_map_type::iterator i = tasksmap.begin ();
+	 i != tasksmap.end (); ++i)
+      i->second /= rhs;
+    return *this;
+  }
+
+
+  INLINE_TIMER_CC
+  Timer
+  Timer::operator/ (unsigned rhs) const
+  {
+    Timer res = *this;
+    return res /= rhs;
+  }
+
+
+  INLINE_TIMER_CC
+  Timer
+  Timer::min (const Timer& rhs) const
+  {
+    Timer res = *this;
+    for (task_map_type::const_iterator i = tasksmap.begin ();
+	 i != tasksmap.end (); ++i)
+      {
+	task_map_type::const_iterator j = rhs.tasksmap.find(i->first);
+	if (j != rhs.tasksmap.end())
+	  res[i->first] = i->second.min(j->second);
+	else
+	  res[i->first] = i->second;
+      }
+    return res;
+  }
+
+
+  INLINE_TIMER_CC
+  Timer
+  Timer::max (const Timer& rhs) const
+  {
+    Timer res = *this;
+    for (task_map_type::const_iterator i = tasksmap.begin ();
+	 i != tasksmap.end (); ++i)
+      {
+	task_map_type::const_iterator j = rhs.tasksmap.find(i->first);
+	if (j != rhs.tasksmap.end())
+	  res[i->first] = i->second.max(j->second);
+	else
+	  res[i->first] = i->second;
+      }
+    return res;
+  }
+
+
 
 
   /*--------------------------.

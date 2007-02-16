@@ -48,15 +48,15 @@ namespace misc
     o << "-------------------------" << std::endl;
     o << "ARITHMETIC MEANS" << std::endl
       << std::endl;
-    o << this->arith_means_;
+    o << prepare(mean());
     o << "-------------------------" << std::endl;
     o << "MIN" << std::endl
       << std::endl;
-    o << this->min_;
+    o << prepare(min());
     o << "-------------------------" << std::endl;
     o << "MAX" << std::endl
       << std::endl;
-    o << this->max_;
+    o << prepare(max());
   }
 
   void
@@ -70,85 +70,55 @@ namespace misc
     }
   }
 
-  void
-  Bencher::arithmetical_means_set ()
+  Timer
+  Bencher::sum () const
   {
-    unsigned int n1 = this->timers_.size ();
-
-    // Summarize total times by classic mean
+    Timer res;
+    // Summarize total times by classic mean.
     for (std::vector< Timer >::const_iterator i = this->timers_.begin ();
 	 i != this->timers_.end (); ++i)
-    {
-      this->arith_means_.total += i->total;
-
-      // Summarize sub-timers
-      for (Timer::task_map_type::const_iterator j = i->tasksmap.begin ();
-	   j != i->tasksmap.end (); ++j)
-	this->arith_means_.tasksmap[j->first] += j->second / n1;
-    }
-
-    this->arith_means_.total /= n1;
+      res += *i;
+    return res;
   }
 
-  void
-  Bencher::min_max_set ()
+  Timer
+  Bencher::mean () const
   {
-    bool first = true;
-
-    // Summarize total times by classic mean
-    for (std::vector< Timer >::const_iterator i = this->timers_.begin ();
-	 i != this->timers_.end (); ++i)
-    {
-      if (first)
-      {
-	this->min_.total = i->total;
-	this->max_.total = i->total;
-      }
-      else
-      {
-	this->min_.total = this->min_.total.min (i->total);
-	this->max_.total = this->max_.total.max (i->total);
-      }
-
-      // Summarize sub-timers
-      for (Timer::task_map_type::const_iterator j = i->tasksmap.begin ();
-	   j != i->tasksmap.end (); ++j)
-      {
-	if (first)
-	{
-	  this->min_.tasksmap[j->first] = j->second;
-	  this->max_.tasksmap[j->first] = j->second;
-	}
-	else
-	{
-	  this->min_.tasksmap[j->first].min(j->second);
-	  this->max_.tasksmap[j->first].max(j->second);
-	}
-      }
-      first = false;
-    }
+    precondition (!timers_.empty());
+    return sum() / timers_.size();
   }
 
-  void
-  Bencher::finalize ()
+  Timer
+  Bencher::min () const
   {
-    //Fixme
-    // Recuperation des elements pour l'affichage
-    if (this->timers_.begin () != this->timers_.end ())
-    {
-      this->arith_means_.tab_to_disp = this->timers_.begin()->tab_to_disp;
-      this->arith_means_.task_ordered = this->timers_.begin()->task_ordered;
-
-      this->min_.tab_to_disp = this->timers_.begin()->tab_to_disp;
-      this->min_.task_ordered = this->timers_.begin()->task_ordered;
-
-      this->max_.tab_to_disp = this->timers_.begin()->tab_to_disp;
-      this->max_.task_ordered = this->timers_.begin()->task_ordered;
-    }
-
-    this->arithmetical_means_set ();
-    this->min_max_set ();
+    precondition (!timers_.empty());
+    std::vector< Timer >::const_iterator i = timers_.begin ();
+    Timer res = *i;
+    for (/* nothing. */; i != this->timers_.end (); ++i)
+      res = res.min (*i);
+    return res;
   }
+
+  Timer
+  Bencher::max () const
+  {
+    precondition (!timers_.empty());
+    std::vector< Timer >::const_iterator i = timers_.begin ();
+    Timer res = *i;
+    for (/* nothing. */; i != this->timers_.end (); ++i)
+      res = res.max (*i);
+    return res;
+  }
+
+  Timer
+  Bencher::prepare (Timer t) const
+  {
+    precondition (!timers_.empty());
+    t.tab_to_disp = timers_.begin()->tab_to_disp;
+    t.task_ordered = timers_.begin()->task_ordered;
+    return t;
+  }
+
 }
 
 NAMESPACE_VCSN_END
