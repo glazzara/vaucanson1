@@ -26,85 +26,97 @@
 
 namespace vcsn {
 
-  /*--------------.
-  | eps_removal.  |
-  `--------------*/
-  template <class A_, typename Auto>
-  void
-  do_eps_removal_here(const AutomataBase<A_>&, Auto& a,
-		      misc::direction_type dir)
+
+  template
+  <class A_, typename Auto>
+  class EpsilonRemover
   {
-    TIMER_SCOPED("eps_removal");
     AUTOMATON_TYPES(Auto);
     typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
     typedef std::vector<series_set_elt_t>		vector_series_t;
 
-    series_set_elt_t	null_series = a.series().zero_;
-    semiring_elt_t	semiring_elt_zero = a.series().semiring().wzero_;
-    monoid_elt_t	monoid_identity = a.series().monoid().empty_;
-
-    int			  i, j, k, size = a.states().size();
-
-    matrix_semiring_elt_t	m_semiring_elt (size);
-
-    for (i = 0; i < size; i++)
-      m_semiring_elt[i].resize(size, semiring_elt_zero);
-
-    /// @bug FIXME: This converters should be removed
-    // Initialize converters between matrix index and states.
-    std::vector<hstate_t>	index_to_state (size);
-    std::map<hstate_t, int>	state_to_index;
-    i = 0;
-    for_all_states(s, a)
+  public:
+    EpsilonRemover(const AutomataBase<A_>&, Auto& aut)
+      : a(aut),
+	size(aut.states().size()),
+	null_series(aut.series().zero_),
+	semiring_elt_zero(aut.series().semiring().wzero_),
+	monoid_identity(aut.series().monoid().empty_)
     {
-      index_to_state[i] = *s;
-      state_to_index[*s] = i++;
-    }
 
-    // Initialize the matrix m_semiring_elt
-    // with the original automaton and delete epsilon-transitions
-    for_all_states(s, a)
-    {
-      std::list<htransition_t>	transition_list;
-      a.deltac(transition_list, *s, delta_kind::transitions());
-
-      int src = state_to_index[*s];
-
-      for_all_const_(std::list<htransition_t>, e, transition_list)
+      /// @bug FIXME: This converters should be removed
+      // Initialize converters between matrix index and states.
+      index_to_state.resize(size);
+      int i = 0;
+      for_all_states(s, a)
       {
-	int dst = state_to_index[a.dst_of(*e)];
-	series_set_elt_t t = a.series_of(*e);
-	m_semiring_elt[src][dst] += t.get(monoid_identity);
-	t.assoc(monoid_identity.value(), semiring_elt_zero.value());
-	if(t != null_series)
-	  a.add_series_transition(*s, a.dst_of(*e), t);
-	a.del_transition(*e);
+	index_to_state[i] = *s;
+	state_to_index[*s] = i++;
+      }
+
+      // Initialize m_semiring_elt matrix with epsilon transitions,
+      // and suppress them.
+      m_semiring_elt.resize(size);
+      for (int i = 0; i < size; i++)
+	m_semiring_elt[i].resize(size, semiring_elt_zero);
+
+      for_all_states(s, a)
+      {
+	std::list<htransition_t>	transition_list;
+	int src = state_to_index[*s];
+
+	a.deltac(transition_list, *s, delta_kind::transitions());
+	for_all_const_(std::list<htransition_t>, e, transition_list)
+	{
+	  int dst = state_to_index[a.dst_of(*e)];
+	  series_set_elt_t t = a.series_of(*e);
+
+	  m_semiring_elt[src][dst] += t.get(monoid_identity);
+	  t.assoc(monoid_identity.value(), semiring_elt_zero.value());
+	  if(t != null_series)
+	    a.add_series_transition(*s, a.dst_of(*e), t);
+	  a.del_transition(*e);
+	}
       }
     }
 
-    // Compute star(m_semiring_elt) <--> epsilon-eps_removal
-    for (int r = 0; r < size; r++)
+    void run(misc::direction_type dir)
     {
-      result_not_computable_if(!m_semiring_elt[r][r].starable());
-
-      semiring_elt_t w = m_semiring_elt[r][r].star();
-      m_semiring_elt[r][r] = w;
-      for (i = 0; i < size; i++)
-	if (i != r)
-	{
-	  semiring_elt_t z = m_semiring_elt[i][r] * w;
-	  m_semiring_elt[i][r] = z;
-	  if(z != semiring_elt_zero)
-	    for (j = 0; j < size; j++)
-	      if (j != r)
-		m_semiring_elt[i][j] += z * m_semiring_elt[r][j];
-	}
-      for (j = 0; j < size; j++)
-	if (j != r)
-	  m_semiring_elt[r][j] = w * m_semiring_elt[r][j];
+      star_matrix();
+      if (dir == misc::backward)
+	backward_remove();
+      else
+	forward_remove();
     }
 
-    if (dir == misc::backward)
+  private:
+    // Compute the star of the matrix,
+    // it's equivalent to a transitive closure.
+    void star_matrix()
+    {
+      for (int r = 0; r < size; r++)
+      {
+	result_not_computable_if(!m_semiring_elt[r][r].starable());
+
+	semiring_elt_t w = m_semiring_elt[r][r].star();
+	m_semiring_elt[r][r] = w;
+	for (int i = 0; i < size; i++)
+	  if (i != r)
+	  {
+	    semiring_elt_t z = m_semiring_elt[i][r] * w;
+	    m_semiring_elt[i][r] = z;
+	    if(z != semiring_elt_zero)
+	      for (int j = 0; j < size; j++)
+		if (j != r)
+		  m_semiring_elt[i][j] += z * m_semiring_elt[r][j];
+	  }
+	for (int j = 0; j < size; j++)
+	  if (j != r)
+	    m_semiring_elt[r][j] = w * m_semiring_elt[r][j];
+      }
+    }
+
+    void backward_remove()
     {
       // Backward_eps_removal
       // Initialize the m_wfinal
@@ -115,30 +127,31 @@ namespace vcsn {
 
       // Compute the backward_eps_removal
       for_all_states(s, a)
-      {
-	std::list<htransition_t> transition_list;
-	a.rdeltac(transition_list, *s, delta_kind::transitions());
-	int dst = state_to_index[*s];
-	for_all_const_(std::list<htransition_t>, e, transition_list)
 	{
-	  int src = state_to_index[a.src_of(*e)];
-	  series_set_elt_t t = a.series_of(*e);
-	  for (k = 0; k < size; k++)
-	  {
-	    semiring_elt_t w = m_semiring_elt[k][src];
-	    if (w != semiring_elt_zero)
-	      a.add_series_transition(index_to_state[k], *s, w * t);
-	  }
-	  a.del_transition(*e);
+	  std::list<htransition_t> transition_list;
+	  a.rdeltac(transition_list, *s, delta_kind::transitions());
+	  int dst = state_to_index[*s];
+	  for_all_const_(std::list<htransition_t>, e, transition_list)
+	    {
+	      int src = state_to_index[a.src_of(*e)];
+	      series_set_elt_t t = a.series_of(*e);
+	      for (int k = 0; k < size; k++)
+	      {
+		semiring_elt_t w = m_semiring_elt[k][src];
+		if (w != semiring_elt_zero)
+		  a.add_series_transition(index_to_state[k], *s, w * t);
+	      }
+	      a.del_transition(*e);
+	    }
+	  series_set_elt_t tw = null_series;
+	  for (int k = 0; k < size; k++)
+	    tw += m_semiring_elt[dst][k] * m_wfinal[k];
+	  if (tw != null_series)
+	    a.set_final(*s, tw);
 	}
-	series_set_elt_t tw = null_series;
-	for (k = 0; k < size; k++)
-	  tw += m_semiring_elt[dst][k] * m_wfinal[k];
-	if (tw != null_series)
-	  a.set_final(*s, tw);
-      }
     }
-    else
+
+    void forward_remove()
     {
       // Forward eps_removal
       // Initialize the m_wfinal
@@ -157,7 +170,7 @@ namespace vcsn {
 	{
 	  int dst = state_to_index[a.dst_of(*e)];
 	  series_set_elt_t t = a.series_of(*e);
-	  for (k = 0; k < size; k++)
+	  for (int k = 0; k < size; k++)
 	  {
 	    semiring_elt_t w = m_semiring_elt[dst][k];
 	    if (w != semiring_elt_zero)
@@ -166,12 +179,36 @@ namespace vcsn {
 	  a.del_transition(*e);
 	}
 	series_set_elt_t tw = null_series;
-	for (k = 0; k < size; k++)
+	for (int k = 0; k < size; k++)
 	  tw += m_winitial[k] * m_semiring_elt[k][src];
 	if (tw != null_series)
 	  a.set_initial(*s, tw);
       }
     }
+
+    automaton_t&	a;
+    int			size;
+    series_set_elt_t	null_series;
+    semiring_elt_t	semiring_elt_zero;
+    monoid_elt_t	monoid_identity;
+    matrix_semiring_elt_t	m_semiring_elt;
+    std::vector<hstate_t>	index_to_state;
+    std::map<hstate_t, int>	state_to_index;
+  };
+
+
+  /*--------------.
+    | eps_removal.  |
+    `--------------*/
+  template <class A_, typename Auto>
+  void
+  do_eps_removal_here(const AutomataBase<A_>& a_set, Auto& a,
+		      misc::direction_type dir)
+  {
+    TIMER_SCOPED("eps_removal");
+
+    EpsilonRemover<A_, Auto> algo(a_set, a);
+    algo.run(dir);
   }
 
   template<typename  A, typename  T>
