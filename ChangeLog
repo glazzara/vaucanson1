@@ -1,5 +1,10 @@
 2007-02-18  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
+	Fix typo in doxygen documentation of standard.hh.
+	* include/vaucanson/algorithms/standard.hh: Change boolean to Boolean.
+
+2007-02-18  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
 	Refactoring of eps_removal.hxx
 	* include/vaucanson/algorithms/eps_removal.hxx: Refactor. Reduce variable
 	scopes. Use functor.

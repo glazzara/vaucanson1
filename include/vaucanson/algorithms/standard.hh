@@ -26,7 +26,7 @@
  * This  file contains different  operations which  can be  applied on
  * standard automata.
  *
- * For boolean automata, see ETA Chapter 1, Section 5.1.
+ * For Boolean automata, see ETA Chapter 1, Section 5.1.
  * For K-automata, see ETA Chapter 3, Section 2.
  * See also the correction of the exercice 2.24 p.540.
  *
