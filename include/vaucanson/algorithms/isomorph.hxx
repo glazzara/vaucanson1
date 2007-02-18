@@ -103,18 +103,19 @@ namespace vcsn
       typedef Element<A, T> auto_t;
       AUTOMATON_TYPES(auto_t);
 
-      typedef std::vector< std::list<int> > delta_t;
       typedef std::vector<int> trans_t;
+      typedef std::list<int> state_list_t;
+      typedef std::vector<state_list_t> delta_t;
 
       struct automaton_vars
       {
 	  // We have to build the vector T_L using a valid iterator (i.e., not a
 	  // singular one).  We use a temp int list to this end.
-	  automaton_vars(const Element<A, T>& aut)
+	  automaton_vars(const automaton_t& aut)
 	    : s(aut),
 	      aut(aut),
 	      perm(aut.states().size(), -1),
-	      T_L(aut.states().size(), std::list<int>().end()),
+	      T_L(aut.states().size(), state_list_t().end()),
 	      delta_det_in(aut.states().size()),
 	      delta_det_out(aut.states().size()),
 	      class_state(aut.states().size())
@@ -133,7 +134,7 @@ namespace vcsn
 
 
 	  Skeleton<A, T> s;
-	  const Element<A, T> aut;
+	  const automaton_t aut;
 
 	  // perm[i] = state of another automaton corresponding to state i in
 	  // the isomorphism, or -1 when the association
@@ -143,7 +144,7 @@ namespace vcsn
 	  // Vector indexed by states that points to the corresponding node
 	  // of the list of states of each class of states stored in the
 	  // Tries.
-	  std::vector<std::list<int>::iterator> T_L;
+	  std::vector<state_list_t::iterator> T_L;
 
 	  // Lists of deterministic ingoing and outgoing transitions
 	  // for each state (delta_det_in[i] = list of deterministic ingoing
@@ -155,7 +156,7 @@ namespace vcsn
 	  std::vector<Trie*> class_state;
       };
 
-      Isomorpher(const Element<A, T>& a, const Element<A, T>& b)
+      Isomorpher(const automaton_t& a, const automaton_t& b)
 	: a_(a), b_(b)
       {
       }
@@ -335,7 +336,7 @@ namespace vcsn
 		     const delta_t& delta_in_or_out,
 		     int i)
       {
-	std::list<int>::const_iterator it = delta_in_or_out[i].begin();
+	state_list_t::const_iterator it = delta_in_or_out[i].begin();
 	// Number of transitions with the same label
 	int j = 1;
 
@@ -384,14 +385,14 @@ namespace vcsn
 				    av.s.delta_out[i].size() + 1);
 
 	// First stores the sequence of ingoing transitions
-	for (std::list<int>::const_iterator it = av.s.delta_in[i].begin();
+	for (state_list_t::const_iterator it = av.s.delta_in[i].begin();
 	     it != av.s.delta_in[i].end(); ++it)
 	  all_transitions_lex.push_back(av.s.transitions_labels[*it]);
 
 	all_transitions_lex.push_back(-1);
 
 	// Next, outgoing transitions
-	for (std::list<int>::const_iterator it = av.s.delta_out[i].begin();
+	for (state_list_t::const_iterator it = av.s.delta_out[i].begin();
 	     it != av.s.delta_out[i].end(); ++it)
 	  all_transitions_lex.push_back(av.s.transitions_labels[*it]);
 
@@ -418,7 +419,7 @@ namespace vcsn
       bool
       analyse_det_trans()
       {
-	std::list<int> U;
+	state_list_t U;
 
 	if (!construct_list_of_classes_with_one_state(U))
 	  return false;
@@ -444,8 +445,8 @@ namespace vcsn
       do_analyse_det_trans(std::list<int>& U,
 			   const delta_t& delta_det_A,
 			   const delta_t& delta_det_B,
-			   const std::vector<int>& transitions_A,
-			   const std::vector<int>& transitions_B)
+			   const trans_t& transitions_A,
+			   const trans_t& transitions_B)
       {
 	// Each state in U has already an image (perm_A and perm_B are
 	// defined for this state)
@@ -457,8 +458,8 @@ namespace vcsn
 	// As states i and j are already associated, they belong to
 	// the same class, then have the same sequence of
 	// deterministic transitions.
-	std::list<int>::const_iterator it = delta_det_A[i].begin();
-	std::list<int>::const_iterator it_aux = delta_det_B[j].begin();
+	state_list_t::const_iterator it = delta_det_A[i].begin();
+	state_list_t::const_iterator it_aux = delta_det_B[j].begin();
 	for (; it != delta_det_A[i].end(); ++it, ++it_aux)
 	{
 
@@ -540,7 +541,7 @@ namespace vcsn
 	trans_t C_B(l + 2 * C_.size());
 	// current[i] = position in C_B of image of state C_A[i] during
 	// backtracking.
-	std::vector<int> current(l);
+	trans_t current(l);
 
 
 	// Vector for test of correspondence of transitions of states already
@@ -632,8 +633,8 @@ namespace vcsn
 	for (std::list<Trie*>::iterator it = C_.begin(); it != C_.end();
 	     it++)
 	{
-	  std::list<int>::iterator it_A = (*it)->A.begin();
-	  std::list<int>::iterator it_B = (*it)->B.begin();
+	  state_list_t::iterator it_A = (*it)->A.begin();
+	  state_list_t::iterator it_B = (*it)->B.begin();
 	  C_A[i] = *it_A;
 	  C_B[j] = *it_B;
 	  current[i++] = j++;
@@ -659,16 +660,16 @@ namespace vcsn
       bool
       test_correspondence(const delta_t& delta_A,
 			  const delta_t& delta_B,
-			  const std::vector<int>& transitions_A,
-			  const std::vector<int>& transitions_B,
+			  const trans_t& transitions_A,
+			  const trans_t& transitions_B,
 			  trans_t& C_A,
 			  trans_t& C_B,
 			  int i,
 			  int j,
 			  trans_t& correspondence_transitions)
       {
-	std::list<int>::const_iterator it_A = delta_A[C_A[i]].begin();
-	std::list<int>::const_iterator it_B = delta_B[C_B[j]].begin();
+	state_list_t::const_iterator it_A = delta_A[C_A[i]].begin();
+	state_list_t::const_iterator it_B = delta_B[C_B[j]].begin();
 
 	// Each iteration considers a sequence of ingoing labels
 	// with the same label. The sequence begins at it_int
@@ -679,7 +680,7 @@ namespace vcsn
 	  // visited, its position in correspondence_transitions is
 	  // incremented.
 	  int k = 0;
-	  std::list<int>::const_iterator it_aux;
+	  state_list_t::const_iterator it_aux;
 	  for (it_aux = it_A;
 	       (it_aux != delta_A[C_A[i]].end()) &&
 		 (a_.s.transitions_labels[*it_aux] ==
