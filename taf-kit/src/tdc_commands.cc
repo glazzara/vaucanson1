@@ -126,8 +126,9 @@ DEFINE_COMMAND (NAME (intersection)
 		CODE (
 		  boolean_automaton::automaton_t a =
 		  get_boolean_aut(args.args[1]);
-		  automaton_t fmp = make_automaton(first_alphabet_t(),
-						   second_alphabet_t());
+		  boolean_automaton::alphabet_t A =
+		  a.structure().series().monoid().alphabet();
+		  automaton_t fmp = make_automaton(A,A);
 		  identity(a, fmp))
 		OUTPUT (
 		  automaton_saver(fmp, string_out (), XML ()))
