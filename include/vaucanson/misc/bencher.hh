@@ -68,16 +68,15 @@ NAMESPACE_VCSN_END
         Bencher b_;				\
 	unsigned i_;				\
 	for (i_ = 1;		\
-	     i_ <= (N); ++i_, b_.push((TIMER)), (TIMER).clear())
+	     i_ <= (N); ++i_, b_.push(TIMER), (TIMER).clear())
 
-# define BENCH_STOP()				\
- 	b_.finalize ()
+# define BENCH_STOP() ((void) 0)
 
 # define BENCH_PRINT(O)				\
- 	b_.print ((O))
+ 	b_.print (O)
 
 # define BENCH_PLOT(O)				\
- 	b_.plot ((O))
+ 	b_.plot (O)
 
 # include <vaucanson/misc/bencher.hxx>
 
