@@ -42,7 +42,8 @@ library.tex					\
 developer.tex					\
 theory.tex					\
 automata.tex					\
-xml.tex
+xml.tex						\
+specification.tex
 
 $(srcdir)/automata.tex: generate-automata.sh
 # Use the TAF-Kit wrappers.
