@@ -29,7 +29,9 @@
 # include <string>
 # include <iosfwd>
 
-# if VAUCANSON
+# define VAUCANSON 1
+
+# if defined VAUCANSON
 #  define NAMESPACE_VCSN_BEGIN namespace vcsn {
 #  define NAMESPACE_VCSN_END   } // namespace vcsn
 #  include <vaucanson/misc/contract.hh>
