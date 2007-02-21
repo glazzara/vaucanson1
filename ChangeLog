@@ -1,3 +1,9 @@
+2007-02-21  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
+
+	Correct the title of vaucanson-developer-manual.pdf
+	from "User's Manual" to "Developer's Manual"
+	* vaucanson-user-manual.tex: Add the required condition
+
 2007-02-21  Akim Demaille  <akim@lrde.epita.fr>
 
 	Prepare timer.hh for sanity checks.

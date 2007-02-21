@@ -160,7 +160,11 @@
 %
 \newcommand{\execdisplay}[3]{\includegenerated{#1}}
 
-\title{The \Vauc \TFKv \\ User's Manual}
+\ifthenelse{\boolean{developer}}{
+  \title{The \Vauc \TFKv \\ Developer's Manual}
+}{
+  \title{The \Vauc \TFKv \\ User's Manual}
+}
 \author{The \Vauc \textsc{Group}}
 \date{July 28th, 2006}
 
