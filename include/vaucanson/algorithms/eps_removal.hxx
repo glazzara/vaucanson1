@@ -23,12 +23,16 @@
 # include <vaucanson/misc/usual_macros.hh>
 
 # include <vector>
+# include <queue>
 
 namespace vcsn {
 
+  /*--------------------------------------.
+  | EpsilonRemover for weighted automaton |
+  `--------------------------------------*/
 
   template
-  <class A_, typename Auto>
+  <class A_, typename Auto, typename Weight>
   class EpsilonRemover
   {
     AUTOMATON_TYPES(Auto);
@@ -36,7 +40,8 @@ namespace vcsn {
     typedef std::vector<series_set_elt_t>		vector_series_t;
 
   public:
-    EpsilonRemover(const AutomataBase<A_>&, Auto& aut)
+    EpsilonRemover(const AutomataBase<A_>&,
+		   Auto& aut)
       : a(aut),
 	size(aut.states().size()),
 	null_series(aut.series().zero_),
@@ -49,10 +54,10 @@ namespace vcsn {
       index_to_state.resize(size);
       int i = 0;
       for_all_states(s, a)
-      {
-	index_to_state[i] = *s;
-	state_to_index[*s] = i++;
-      }
+	{
+	  index_to_state[i] = *s;
+	  state_to_index[*s] = i++;
+	}
 
       // Initialize m_semiring_elt matrix with epsilon transitions,
       // and suppress them.
@@ -80,7 +85,7 @@ namespace vcsn {
       }
     }
 
-    void run(misc::direction_type dir)
+    void operator() (misc::direction_type dir)
     {
       star_matrix();
       if (dir == misc::backward)
@@ -127,28 +132,28 @@ namespace vcsn {
 
       // Compute the backward_eps_removal
       for_all_states(s, a)
-	{
-	  std::list<htransition_t> transition_list;
+      {
+	std::list<htransition_t> transition_list;
 	  a.rdeltac(transition_list, *s, delta_kind::transitions());
 	  int dst = state_to_index[*s];
 	  for_all_const_(std::list<htransition_t>, e, transition_list)
+	  {
+	    int src = state_to_index[a.src_of(*e)];
+	    series_set_elt_t t = a.series_of(*e);
+	    for (int k = 0; k < size; k++)
 	    {
-	      int src = state_to_index[a.src_of(*e)];
-	      series_set_elt_t t = a.series_of(*e);
-	      for (int k = 0; k < size; k++)
-	      {
-		semiring_elt_t w = m_semiring_elt[k][src];
-		if (w != semiring_elt_zero)
-		  a.add_series_transition(index_to_state[k], *s, w * t);
-	      }
-	      a.del_transition(*e);
+	      semiring_elt_t w = m_semiring_elt[k][src];
+	      if (w != semiring_elt_zero)
+		a.add_series_transition(index_to_state[k], *s, w * t);
 	    }
+	    a.del_transition(*e);
+	  }
 	  series_set_elt_t tw = null_series;
 	  for (int k = 0; k < size; k++)
 	    tw += m_semiring_elt[dst][k] * m_wfinal[k];
 	  if (tw != null_series)
 	    a.set_final(*s, tw);
-	}
+      }
     }
 
     void forward_remove()
@@ -186,44 +191,262 @@ namespace vcsn {
       }
     }
 
+
     automaton_t&	a;
+    // Number of states in a.
+    // Use as the dimension of the matrix m_semiring_elt.
     int			size;
+
+    // zero and identity of used algebraic structure.
     series_set_elt_t	null_series;
     semiring_elt_t	semiring_elt_zero;
     monoid_elt_t	monoid_identity;
+
+    // Matrix of epsilon transition.
     matrix_semiring_elt_t	m_semiring_elt;
+
+    // Maps between states and matrix indexes.
     std::vector<hstate_t>	index_to_state;
     std::map<hstate_t, int>	state_to_index;
   };
 
 
-  /*--------------.
-    | eps_removal.  |
-    `--------------*/
+  /*----------------------------------------------------.
+  | Find a transition (src, label, dst), using deltaf.  |
+  `----------------------------------------------------*/
+
+  template <typename Auto>
+  class Finder
+  {
+    AUTOMATON_TYPES(Auto);
+
+  public:
+    Finder(const automaton_t& aut)
+      : a_(aut), find_(false)
+    {}
+
+    bool find(const hstate_t src, const label_t l, const hstate_t dst)
+    {
+      find_ = false;
+      dst_ = dst;
+      l_ = l;
+      a_.deltaf(*this, src, delta_kind::transitions());
+      return find_;
+    }
+
+    bool operator() (htransition_t t)
+    {
+      return !(find_ = (a_.label_of(t) == l_ && a_.dst_of(t) == dst_));
+    }
+
+  private:
+    const automaton_t& a_;
+    hstate_t dst_;
+    label_t l_;
+    bool find_;
+  };
+
+
+
+  /*------------------------------------------------------.
+  | EpsilonRemover for automaton with multiplicity in B.  |
+  `------------------------------------------------------*/
+
   template <class A_, typename Auto>
+  class EpsilonRemover<A_, Auto, bool>
+  {
+    AUTOMATON_TYPES(Auto);
+    typedef std::vector<std::vector<semiring_elt_t> >	matrix_semiring_elt_t;
+    typedef std::vector<series_set_elt_t>		vector_series_t;
+    typedef std::queue<htransition_t>			tr_queue_t;
+    typedef std::queue<hstate_t>			state_queue_t;
+    typedef std::list<htransition_t>			list_t;
+    typedef std::list<hstate_t>				state_list_t;
+
+  public:
+    EpsilonRemover(const AutomataBase<A_>&,
+		   Auto& aut)
+      : a(aut),
+	null_series(aut.series().zero_),
+	semiring_elt_zero(aut.series().semiring().wzero_),
+	monoid_identity(aut.series().monoid().empty_)
+    {
+      for_all_transitions(t, a)
+	tr_q.push(*t);
+    }
+
+    void operator() (misc::direction_type dir)
+    {
+      if (dir == misc::forward)
+	forward_closure();
+      else
+	backward_closure();
+      suppress_epsilon_transitions();
+    }
+
+    void suppress_epsilon_transitions ()
+    {
+      for_all_transitions(t, a)
+      {
+	series_set_elt_t s = a.series_of(*t);
+	if (s.get(monoid_identity) != semiring_elt_zero)
+	  s.assoc(monoid_identity.value(), semiring_elt_zero.value());
+	if (s != null_series)
+	  a.add_series_transition(a.src_of(*t), a.dst_of(*t), s);
+	a.del_transition(*t);
+      }
+    }
+
+    void forward_closure ()
+    {
+      // Closure.
+      Finder<automaton_t> f(a);
+      state_list_t st_out;
+
+      while (!tr_q.empty())
+      {
+	htransition_t t = tr_q.front();
+	hstate_t src = a.src_of(t);
+	hstate_t mid = a.dst_of(t);
+	label_t l = a.label_of(t);
+
+	st_out.clear();
+	a.spontaneous_deltac(st_out, mid, delta_kind::states());
+	for_all_const(state_list_t, dst, st_out)
+	{
+	  if (!f.find(src, l, *dst))
+	  {
+	    htransition_t new_tr = a.add_transition(src, *dst, l);
+	    tr_q.push(new_tr);
+	  }
+	}
+	tr_q.pop();
+      }
+      // Set initial state.
+      state_queue_t sq;
+
+      for_all_initial_states(s, a)
+	sq.push(*s);
+      while (!sq.empty())
+      {
+	hstate_t i = sq.front();
+
+	st_out.clear();
+	a.spontaneous_deltac(st_out, i, delta_kind::states());
+	for_all_const(state_list_t, s, st_out)
+	{
+	  if (!a.is_initial(*s))
+	  {
+	    a.set_initial(*s);
+	    sq.push(*s);
+	  }
+	}
+	sq.pop();
+      }
+    }
+
+
+    void backward_closure ()
+    {
+      // Closure.
+      Finder<automaton_t> f(a);
+      state_list_t st_in;
+
+      while (!tr_q.empty())
+      {
+	htransition_t t = tr_q.front();
+	hstate_t mid = a.src_of(t);
+	hstate_t dst = a.dst_of(t);
+	label_t l = a.label_of(t);
+
+	st_in.clear();
+	a.spontaneous_rdeltac(st_in, mid, delta_kind::states());
+	for_all_const(state_list_t, src, st_in)
+	{
+	  if (!f.find(*src, l, dst))
+	  {
+	    htransition_t new_tr = a.add_transition(*src, dst, l);
+	    tr_q.push(new_tr);
+	  }
+	}
+	tr_q.pop();
+      }
+      // Set final state.
+      state_queue_t sq;
+
+      for_all_final_states(s, a)
+	sq.push(*s);
+      while (!sq.empty())
+      {
+	hstate_t i = sq.front();
+
+	st_in.clear();
+	a.spontaneous_rdeltac(st_in, i, delta_kind::states());
+	for_all_const(state_list_t, s, st_in)
+	{
+	  if (!a.is_final(*s))
+	  {
+	    a.set_final(*s);
+	    sq.push(*s);
+	  }
+	}
+	sq.pop();
+      }
+    }
+
+  private:
+    automaton_t&	a;
+
+    // zero and identity of used algebraic structure.
+    series_set_elt_t	null_series;
+    semiring_elt_t	semiring_elt_zero;
+    monoid_elt_t	monoid_identity;
+
+    // Queue of transitions.
+    tr_queue_t		tr_q;
+  };
+
+
+  /*--------------.
+  | eps_removal.  |
+  `--------------*/
+
+  template<class A_, typename Auto, typename Weight>
   void
-  do_eps_removal_here(const AutomataBase<A_>& a_set, Auto& a,
+  do_eps_removal_here(const AutomataBase<A_>& a_set,
+		      const Weight&,
+		      Auto& a,
 		      misc::direction_type dir)
   {
     TIMER_SCOPED("eps_removal");
 
-    EpsilonRemover<A_, Auto> algo(a_set, a);
-    algo.run(dir);
+    EpsilonRemover<A_, Auto, Weight> algo(a_set, a);
+    algo(dir);
   }
 
   template<typename  A, typename  T>
   void
   eps_removal_here(Element<A, T>& a, misc::direction_type dir)
   {
-    do_eps_removal_here(a.structure(), a, dir);
+    typedef Element<A, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
+    do_eps_removal_here(a.structure(),
+			SELECT(semiring_elt_value_t),
+			a, dir);
   }
 
   template<typename  A, typename  T>
   Element<A, T>
   eps_removal(const Element<A, T>& a, misc::direction_type dir)
   {
+    typedef Element<A, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(), ret, dir);
+    do_eps_removal_here(ret.structure(),
+			SELECT(semiring_elt_value_t),
+			ret, dir);
     return ret;
   }
 
@@ -231,15 +454,25 @@ namespace vcsn {
   void
   backward_eps_removal_here(Element<A, T>& a)
   {
-    do_eps_removal_here(a.structure(), a, misc::backward);
+    typedef Element<A, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
+    do_eps_removal_here(a.structure(),
+			SELECT(semiring_elt_value_t),
+			a, misc::backward);
   }
 
   template<typename  A, typename  T>
   Element<A, T>
   backward_eps_removal(const Element<A, T>& a)
   {
+    typedef Element<A, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(), ret, misc::backward);
+    do_eps_removal_here(ret.structure(),
+			SELECT(semiring_elt_value_t),
+			ret, misc::backward);
     return ret;
   }
 
@@ -247,15 +480,25 @@ namespace vcsn {
   void
   forward_eps_removal_here(Element<A, T>& a)
   {
-    do_eps_removal_here(a.structure(), a, misc::forward);
+    typedef Element<A, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
+    do_eps_removal_here(a.structure(),
+			SELECT(semiring_elt_value_t),
+			a, misc::forward);
   }
 
   template<typename  A, typename  T>
   Element<A, T>
   forward_eps_removal(const Element<A, T>& a)
   {
+    typedef Element<A, T> auto_t;
+    AUTOMATON_TYPES(auto_t);
+
     Element<A, T> ret(a);
-    do_eps_removal_here(ret.structure(), ret, misc::forward);
+    do_eps_removal_here(ret.structure(),
+			SELECT(semiring_elt_value_t),
+			ret, misc::forward);
     return ret;
   }
 

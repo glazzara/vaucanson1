@@ -1,3 +1,12 @@
+2007-02-22  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
+
+	Add a implementation of eps-removal for automaton with multiplicity in B.
+	* include/vaucanson/algorithms/eps_removal.hxx: Do it. Adapt facade to
+	call the boolean version.
+	* taf-kit/tests/automata/tdc/t2_u-compose_u2.xml: Adapt it.
+	t2_u-compose_u2.xml is still the same, but the new implementation of
+	eps-removal does not give the same state order as before.
+
 2007-02-22  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Add libvcsn-b

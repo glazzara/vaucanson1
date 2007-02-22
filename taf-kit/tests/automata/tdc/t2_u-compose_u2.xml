@@ -23,15 +23,15 @@
       <state name="s10"/>
     </states>
     <transitions>
-      <transition src="s9" dst="s0" out="v"/>
-      <transition src="s0" dst="s2" in="b"/>
-      <transition src="s2" dst="s4" in="a"/>
-      <transition src="s4" dst="s9" out="u"/>
-      <transition src="s8" dst="s10" out="u"/>
-      <transition src="s0" dst="s1" in="b"/>
-      <transition src="s4" dst="s8" in="a"/>
       <transition src="s1" dst="s0" out="v"/>
+      <transition src="s2" dst="s4" in="a"/>
+      <transition src="s8" dst="s10" out="u"/>
+      <transition src="s9" dst="s0" out="v"/>
+      <transition src="s0" dst="s1" in="b"/>
+      <transition src="s0" dst="s2" in="b"/>
+      <transition src="s4" dst="s8" in="a"/>
       <transition src="s10" dst="s8" in="a"/>
+      <transition src="s4" dst="s9" out="u"/>
       <transition src="s10" dst="s9" out="u"/>
       <initial state="s0"/>
       <initial state="s1"/>
