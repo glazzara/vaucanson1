@@ -1,3 +1,17 @@
+2007-02-22  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Add libvcsn-b
+	This patch includes a script which generates the cc files needed
+	to generate libvcsn-b.a.
+	At this point, only a static library is generated, in the future
+	a shared library shall be built.
+	* bootstrap.sh: Add a call to generate_libvcsn.rb.
+	* configure.ac: Add the Makefiles to generate libvcsn-b.
+	* lib/Makefile.am: New.
+	* lib/generate_libvcsn.rb: New.
+	* lib/vcsn-b: New.
+	* lib: New.
+
 2007-02-21  Florian Lesaint  <florian.lesaint@lrde.epita.fr>
 
 	Correct the title of vaucanson-developer-manual.pdf

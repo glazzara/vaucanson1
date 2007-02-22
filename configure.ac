@@ -203,6 +203,8 @@ AC_CONFIG_FILES([
 	    data/automata/tdc/Makefile
 	    data/automata/tdc-rw/Makefile
 	    data/automata/z/Makefile
+	lib/Makefile
+	  lib/vcsn-b/Makefile
 	src/Makefile
 	  src/demos/Makefile
 	    src/demos/vgrep/Makefile
