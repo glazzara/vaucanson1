@@ -52,11 +52,29 @@ namespace vcsn
     for_all_states (p, t)
       map_t_u[*p] = u.add_state ();
 
-    for_all_initial_states (p, t)
-      u.set_initial (map_t_u[*p]);
+    initial_iterator i_it;
+    for_all_initial_states (next, t)
+    {
+      //We need to store the next iterator before using the current one
+      //to avoid an invalid iterator after having called set_final.
+      //Indeed, set_final can delete the iterator if its second parameter
+      //is the zero of the serie.
+      i_it = next;
+      next++;
+      u.set_initial (map_t_u[*i_it]);
+    }
 
-    for_all_final_states (p, t)
-      u.set_final (map_t_u[*p]);
+    final_iterator f_it;
+    for_all_final_states (next, t)
+    {
+      //We need to store the next iterator before using the current one
+      //to avoid an invalid iterator after having called set_final.
+      //Indeed, set_final can delete the iterator if its second parameter
+      //is the zero of the serie.
+      f_it = next;
+      next++;
+      u.set_final (map_t_u[*f_it]);
+    }
 
     for_all_transitions (e, t)
     {

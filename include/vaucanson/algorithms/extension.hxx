@@ -50,10 +50,10 @@ namespace vcsn {
 
     vector<hstate_t>	conv(a.states().size());
 
-    for_all_states(s, a)
+    for_all_states (s, a)
       conv[t_ret.add_state()] = *s;
 
-    for_all_transitions(e, a)
+    for_all_transitions (e, a)
     {
       series_set_elt_t t = a.series_of(*e);
       series_set_elt_t s(t);
@@ -72,16 +72,31 @@ namespace vcsn {
 						    os);
     }
 
-    for_all_initial_states(i, a)
+    initial_iterator i;
+    for_all_initial_states(next, a)
     {
+      //We need to store the next iterator before using the current one
+      //to avoid an invalid iterator after having called set_final.
+      //Indeed, set_final can delete the iterator if its second parameter
+      //is the zero of the serie.
+      i = next;
+      next++;
+
       series_set_elt_t a_series = a.get_initial(*i);
       t_series_set_elt_t s;
       s.set(t_neutre, a_series);
       t_ret.set_initial(conv[*i], s);
     }
 
-    for_all_final_states(f, a)
+    final_iterator f;
+    for_all_final_states(next, a)
     {
+      //We need to store the next iterator before using the current one
+      //to avoid an invalid iterator after having called set_final.
+      //Indeed, set_final can delete the iterator if its second parameter
+      //is the zero of the serie.
+      f = next;
+      next++;
       series_set_elt_t a_series = a.get_final(*f);
       t_series_set_elt_t s;
       s.value_set(t_neutre, a_series);
@@ -149,31 +164,43 @@ namespace vcsn {
       tt.add_series_transition(conv[a.src_of(*e)], conv[a.dst_of(*e)], os);
     }
 
-    for(a_initial_iterator p = a.initial().begin();
-	p != a.initial().end();
-	++p)
+    a_initial_iterator i;
+    for (a_initial_iterator next = a.initial().begin();
+	 next != a.initial().end();)
     {
-      a_series_set_elt_t a_series = a.get_initial(*p);
+      //We need to store the next iterator before using the current one
+      //to avoid an invalid iterator after having called set_final.
+      //Indeed, set_final can delete the iterator if its second parameter
+      //is the zero of the serie.
+      i = next;
+      next++;
+      a_series_set_elt_t a_series = a.get_initial(*i);
       t_series_set_elt_t s (t.structure().series());
       s.assoc(t_neutre, a_series);
-      tt.set_initial(conv[*p], s);
+      tt.set_initial(conv[*i], s);
     }
 
-    for(a_final_iterator p = a.final().begin();
-	p != a.final().end();
-	++p)
+    a_final_iterator f;
+    for (a_final_iterator next = a.final().begin();
+	 next != a.final().end();)
     {
-      a_series_set_elt_t a_series = a.get_final(*p);
+      //We need to store the next iterator before using the current one
+      //to avoid an invalid iterator after having called set_final.
+      //Indeed, set_final can delete the iterator if its second parameter
+      //is the zero of the serie.
+      f = next;
+      next++;
+      a_series_set_elt_t a_series = a.get_final(*f);
       t_series_set_elt_t s (t.structure().series());
       s.assoc(t_neutre, a_series);
-      tt.set_final(conv[*p], s);
+      tt.set_final(conv[*f], s);
     }
 
     return tt;
   }
 
   template<typename SA, typename TA, typename ST, typename TT>
-  Element<ST, TT> 
+  Element<ST, TT>
   extension(const Element<SA, TA>& a, const Element<ST, TT>& t)
   {
     TIMER_SCOPED("extension/2");

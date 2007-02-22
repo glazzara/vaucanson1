@@ -22,6 +22,8 @@
 # include <vaucanson/algebra/implementation/series/krat_exp_pattern.hh>
 # include <vaucanson/algorithms/standard.hh>
 
+# include <vaucanson/misc/usual_macros.hh>
+
 namespace vcsn {
 
   namespace algebra {
@@ -144,10 +146,17 @@ namespace vcsn {
 	  const semiring_elt_t	weight (semiring, w);
 	  automaton_ptr_t	auto_ = match(node);
 
-	  for (typename automaton_t::final_iterator i = auto_->final().begin();
-	       i != auto_->final().end();
-	       ++i)
-	    auto_->set_final(*i, auto_->get_final(*i) * weight);
+	  for (typename automaton_t::final_iterator f, next = auto_->final().begin();
+	       next != auto_->final().end();)
+	  {
+	    //We need to store the next iterator before using the current one
+	    //to avoid an invalid iterator after having called set_final.
+	    //Indeed, set_final can delete the iterator if its second parameter
+	    //is the zero of the serie.
+	    f = next;
+	    next++;
+	    auto_->set_final(*f, auto_->get_final(*f) * weight);
+	  }
 	  return auto_;
 	}
 	END

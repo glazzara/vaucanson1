@@ -1,3 +1,17 @@
+2007-02-22  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Fix invalid iterator after deletion of an item
+	Calling the set_final method in a loop iterating on the final states
+	set can lead to invalid iterators, since set_final can delete an
+	item in this set under certain circumstancies.
+	This patch fix this problem.
+	* include/vaucanson/algebra/implementation/letter/couple_letter.hxx: .
+	* include/vaucanson/algorithms/extension.hxx: .
+	* include/vaucanson/algorithms/fmp_to_realtime.hxx: .
+	* include/vaucanson/algorithms/invert.hxx: .
+	* include/vaucanson/algorithms/realtime_to_fmp.hxx: .
+	* include/vaucanson/algorithms/standard_of.hxx: .
+
 2007-02-22  Guillaume Leroi  <guillaume.leroi@lrde.epita.fr>
 
 	Add a implementation of eps-removal for automaton with multiplicity in B.

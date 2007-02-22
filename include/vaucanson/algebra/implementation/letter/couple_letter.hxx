@@ -34,7 +34,7 @@ namespace vcsn {
     typename std::string::const_iterator j = i;
 
     while (i != s.end ()) {
-      if (*i != ' (')
+      if (*i != '(')
 	break ;
       std::string sub (i, s.end ());
       std::istringstream is (sub);
@@ -72,7 +72,7 @@ namespace vcsn {
     std::istream& operator>> (std::istream& i, std::pair<U, V>& p)
     {
       char c = i.get ();
-      if (c != ' (')
+      if (c != '(')
 	i.unget ();
       i >> p.first;
       c = i.get ();

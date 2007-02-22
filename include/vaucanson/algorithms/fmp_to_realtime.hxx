@@ -60,10 +60,15 @@ namespace vcsn
     | Setting initial states.  |
     `-------------------------*/
 
-    for (typename FMP_t::initial_iterator St = fmp.initial().begin();
-	 St != fmp.initial().end();
-	 ++St)
+    for (typename FMP_t::initial_iterator St, next = fmp.initial().begin();
+	 next != fmp.initial().end();)
     {
+      //We need to store the next iterator before using the current one
+      //to avoid an invalid iterator after having called set_final.
+      //Indeed, set_final can delete the iterator if its second parameter
+      //is the zero of the serie.
+      St = next;
+      next++;
       //Series to be created
       typename Trans_t::series_set_elt_t s(res.structure().series());
 
@@ -101,10 +106,15 @@ namespace vcsn
     | Setting final states.   |
     `------------------------*/
 
-    for (typename FMP_t::final_iterator St = fmp.final().begin();
-	 St != fmp.final().end();
-	 ++St)
+    for (typename FMP_t::final_iterator St, next = fmp.final().begin();
+	 next != fmp.final().end();)
     {
+      //We need to store the next iterator before using the current one
+      //to avoid an invalid iterator after having called set_final.
+      //Indeed, set_final can delete the iterator if its second parameter
+      //is the zero of the serie.
+      St = next;
+      next++;
       //Series to be created
       typename Trans_t::series_set_elt_t s(res.structure().series());
 
