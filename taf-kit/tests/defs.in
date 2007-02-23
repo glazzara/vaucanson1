@@ -1,7 +1,7 @@
 # -*- shell-script -*-
 # @configure_input@
 #
-# Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2006
+# Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2006, 2007
 # Free Software Foundation, Inc.
 #
 # This file is part of Vaucanson.
@@ -143,17 +143,19 @@ u2=$automata_tests_dir/tdc/u2.xml
 t2_ucompose_u2=$automata_tests_dir/tdc/t2_u-compose_u2.xml
 inverted_t1=$automata_tests_dir/tdc/inverted_t1.xml
 
+
 ## ---------- ##
 ## Test dir.  ##
 ## ---------- ##
 
-test -d testSubDir ||
-  mkdir testSubDir
-testSubDir=testSubDir/$me
-chmod -R a+rwx $testSubDir > /dev/null 2>&1
-rm -rf $testSubDir > /dev/null 2>&1
-mkdir $testSubDir
-cd $testSubDir
+testSubDir=$me.dir
+test -d $testSubDir ||
+  mkdir $testSubDir
+$testSubDir=$testSubDir/$me
+chmod -R a+rwx $$testSubDir > /dev/null 2>&1
+rm -rf $$testSubDir > /dev/null 2>&1
+mkdir $$testSubDir
+cd $$testSubDir
 
 
 

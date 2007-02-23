@@ -1,5 +1,11 @@
 2007-02-23  Akim Demaille  <akim@lrde.epita.fr>
 
+	Enable parallel checks in TAF-Kit.
+	* taf-kit/tests/defs.in (testSubdir): New variable.
+	* taf-kit/tests/Makefile.am (distclean-local): Adjust.
+
+2007-02-23  Akim Demaille  <akim@lrde.epita.fr>
+
 	Fix double occurrence of XFAIL_TESTS.
 	* taf-kit/tests/Makefile.am: here.
 

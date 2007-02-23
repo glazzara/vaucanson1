@@ -44,4 +44,4 @@ vcsn-tdc					\
 vcsn-z
 
 distclean-local:
-	-rm -rf testSubDir
+	-rm -rf $(TESTS:.test=.dir)
