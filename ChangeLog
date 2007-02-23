@@ -1,3 +1,10 @@
+2007-02-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Add a default constructor to SupportIterator
+	Add a default constructor to SupportIterator and the associated
+	documentation.
+	* include/vaucanson/misc/support.hh: here.
+
 2007-02-22  Guillaume Lazzara  <z@lrde.epita.fr>
 
 	Fix invalid iterator after deletion of an item

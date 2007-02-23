@@ -53,6 +53,31 @@ namespace vcsn
 	typedef key_type*				 pointer;
 	typedef key_type&				 reference;
 
+	/*
+	 * This is a default constructor. 
+	 * WARNING: this constructor instantiates an invalid iterator.
+	 * 	    To use an iterator instantiated by this constructor,
+	 * 	    you need to initialize it thanks to the '=' operator.
+	 *
+	 * This constructor is useful whenever you want to use an iterator as
+	 * a temporary variable in a loop. For instance:
+	 *
+	 * for (SupportIterator tmp, it = aut.final().begin(); 
+	 * 	it != aut.final().end();)
+	 * {
+	 *	tmp = it++;
+	 *	if (something)
+	 *		del_state(*tmp);
+	 * }
+	 *
+	 * In this example, we delete an object in a set we are already iterating on.
+	 * So we need to save a copy of the next element before deleting the current one.
+	 * Since declaring a temporary variable inside a loop can slow down performances,
+	 * it is declared inside the 'for loop' declaration and, in that case, we are really
+	 * interested in such a constructor.
+	 *
+	 */
+	SupportIterator () {}
 	SupportIterator (map_iterator);
 
 	key_type operator* () const;
