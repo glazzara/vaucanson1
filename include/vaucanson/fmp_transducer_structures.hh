@@ -19,11 +19,9 @@
 # define VCSN_FMP_TDC_HH_
 
 # include <vaucanson/boolean_automaton_structures.hh>
-# undef VCSN_CONTEXT
 
 # define AUTOMATON_CONTEXT boolean_automaton
-# define VCSN_CONTEXT fmp_transducer
-# define VCSN_CONTEXT_NAMESPACE namespace VCSN_CONTEXT
+# define VCSN_CONTEXT_NAMESPACE namespace fmp_transducer
 
 namespace vcsn
 {

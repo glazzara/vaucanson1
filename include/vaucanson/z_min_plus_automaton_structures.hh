@@ -18,8 +18,7 @@
 #ifndef VCSN_Z_MIN_HH_
 # define VCSN_Z_MIN_HH_
 
-# define VCSN_CONTEXT z_min_plus_automaton
-# define VCSN_CONTEXT_NAMESPACE namespace VCSN_CONTEXT
+# define VCSN_CONTEXT_NAMESPACE namespace z_min_plus_automaton
 
 # include <vaucanson/contexts/char_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>

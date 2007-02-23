@@ -18,8 +18,7 @@
 #ifndef VCSN_B_HH_
 # define VCSN_B_HH_
 
-# define VCSN_CONTEXT boolean_automaton
-# define VCSN_CONTEXT_NAMESPACE namespace VCSN_CONTEXT
+# define VCSN_CONTEXT_NAMESPACE namespace boolean_automaton
 
 # include <vaucanson/contexts/char_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>

@@ -19,11 +19,9 @@
 # define VCSN_TDC_HH_
 
 # include <vaucanson/boolean_automaton_structures.hh>
-# undef VCSN_CONTEXT
 
 # define AUTOMATON_CONTEXT boolean_automaton
-# define VCSN_CONTEXT boolean_transducer
-# define VCSN_CONTEXT_NAMESPACE namespace VCSN_CONTEXT
+# define VCSN_CONTEXT_NAMESPACE namespace boolean_transducer
 
 # include <vaucanson/contexts/char_letter.thh>
 # include <vaucanson/contexts/dynamic_alphabet.thh>

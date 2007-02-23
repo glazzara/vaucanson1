@@ -121,7 +121,7 @@ def create?(type, file)
 end
 
 # write a *.mk for `type`
-def write_makefile(type)
+def write_makefile(type, context)
   puts("Generating " + type + "/lib" + type + ".mk")
   File.open(type + "/lib" + type + ".mk", "w") { |out|
     out.puts("## Vaucanson, a generic library for finite state machines.",
@@ -140,6 +140,7 @@ def write_makefile(type)
 	     "",
 #	     "INCLUDES\t\t=  -I$(top_builddir)/include -I$(top_srcdir)/include",
 	     "noinst_LTLIBRARIES\t+= lib" + type + ".la",
+	     "lib" + type.gsub(/-/, "_") + "_la_CXXFLAGS\t= $(CXXFLAGS) -DVCSN_CONTEXT=" + context,
 	     "lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)")
     out.print "lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= "
     files = Dir.glob(type + "/*cc").sort!
@@ -229,5 +230,5 @@ files.each { |file|
 }
 
 # writing Makefiles
-vcsn.each_key { |type| write_makefile(type) }
+vcsn.each { |type, context| write_makefile(type, context) }
 
