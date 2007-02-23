@@ -37,9 +37,9 @@ namespace misc
     void push (const Timer& t);
 
     /// Display all timers + summary
-    void print (std::ostream& o);
+    std::ostream& print (std::ostream& o) const;
 
-    void plot (std::ostream& o);
+    void plot (std::ostream& o) const;
 
     /// Sum of all the timers.
     Timer sum() const;
@@ -60,24 +60,19 @@ namespace misc
     /// Collected timers
     std::vector<Timer> timers_;
   };
+
+
+  /// Dump \a b on \a o.
+  std::ostream& operator<< (std::ostream& o, const Bencher& t);
 }
 
 NAMESPACE_VCSN_END
 
-# define BENCH_START(N, TIMER)			\
-        Bencher b_;				\
-	unsigned i_;				\
-	for (i_ = 1;		\
-	     i_ <= (N); ++i_, b_.push(TIMER), (TIMER).clear())
-
-# define BENCH_STOP() ((void) 0)
-
-# define BENCH_PRINT(O)				\
- 	b_.print (O)
-
-# define BENCH_PLOT(O)				\
- 	b_.plot (O)
-
-# include <vaucanson/misc/bencher.hxx>
+# ifndef VCSN_USE_INTERFACE_ONLY
+#  include <vaucanson/misc/bencher.hxx>
+#  if VAUCANSON
+#   include <vaucanson/misc/bencher.cc>
+#  endif
+# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // !BENCHER_HH

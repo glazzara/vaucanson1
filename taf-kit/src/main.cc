@@ -47,8 +47,11 @@ const char* argp_program_version =
 
 const char* argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";
 
-/** A global timer.  */
+/// A global timer.
 vcsn::misc::Timer timer;
+
+/// A global bencher.
+vcsn::misc::Bencher bencher;
 
 /**
  * Documentation of the program, of the arguments we accept and the
@@ -154,7 +157,7 @@ namespace
 
       case 'B':
 	args.bench = true;
-	args.nb_iteration = atoi(arg);
+	args.nb_iterations = atoi(arg);
 	break;
 
       case 'O':
@@ -194,7 +197,7 @@ int main (int argc, char* argv[])
 
   int status = 0;
 
-  if (not args.bench)
+  BENCH_DO(args.nb_iterations)
   {
     TIMER_START ();
     try {
@@ -207,33 +210,12 @@ int main (int argc, char* argv[])
     TIMER_STOP ();
 
     if (args.report_time)
-      std::cerr << timer;
+      TIMER_PRINT(std::cerr);
   }
-  else
-  {
-    BENCH_START(args.nb_iteration, GLOBAL_TIMER)
-      {
-	std::cerr << i_ << std::endl;
-	TIMER_START ();
-	try {
-	  status = execute_command (args);
-	}
-	catch (const std::logic_error& err) {
-	  warn (argv[0] << ": " << err.what ());
-	  status = -1;
-	}
-	TIMER_STOP ();
-      }
-    BENCH_STOP();
+
+  if (args.bench)
     BENCH_PRINT(std::cerr);
-    if (args.plot_output_filename != "")
-    {
-      std::ofstream outfile;
-      outfile.open (args.plot_output_filename.c_str(),
-		    std::ofstream::out | std::ofstream::trunc);
-      BENCH_PLOT(outfile);
-      outfile.close();
-    }
-  }
+  if (!args.plot_output_filename.empty())
+    BENCH_SAVE_PLOT(args.plot_output_filename.c_str());
   return status;
 }

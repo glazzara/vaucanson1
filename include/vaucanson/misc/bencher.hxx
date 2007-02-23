@@ -34,93 +34,12 @@ namespace misc
     timers_.push_back (t);
   }
 
-  void
-  Bencher::print (std::ostream& o)
-  {
-    std::vector< Timer >::const_iterator i;
-    for (i = this->timers_.begin (); i != this->timers_.end (); ++i)
-    {
-      o << "------------------------" << std::endl;
-      o << (*i);
-    }
-    o<< std::endl << "-------------------------" << std::endl;
-    o << "        SUMMARY" << std::endl;
-    o << "-------------------------" << std::endl;
-    o << "ARITHMETIC MEANS" << std::endl
-      << std::endl;
-    o << prepare(mean());
-    o << "-------------------------" << std::endl;
-    o << "MIN" << std::endl
-      << std::endl;
-    o << prepare(min());
-    o << "-------------------------" << std::endl;
-    o << "MAX" << std::endl
-      << std::endl;
-    o << prepare(max());
-  }
-
-  void
-  Bencher::plot (std::ostream& o)
-  {
-    std::vector< Timer >::const_iterator i;
-    for (i = this->timers_.begin (); i != this->timers_.end (); ++i)
-    {
-      o << (float) i->total.elapsed.wall / i->clocks_per_sec
-	<< std::endl;
-    }
-  }
-
-  Timer
-  Bencher::sum () const
-  {
-    Timer res;
-    // Summarize total times by classic mean.
-    for (std::vector< Timer >::const_iterator i = this->timers_.begin ();
-	 i != this->timers_.end (); ++i)
-      res += *i;
-    return res;
-  }
-
-  Timer
-  Bencher::mean () const
-  {
-    precondition (!timers_.empty());
-    return sum() / timers_.size();
-  }
-
-  Timer
-  Bencher::min () const
-  {
-    precondition (!timers_.empty());
-    std::vector< Timer >::const_iterator i = timers_.begin ();
-    Timer res = *i;
-    for (/* nothing. */; i != this->timers_.end (); ++i)
-      res = res.min (*i);
-    return res;
-  }
-
-  Timer
-  Bencher::max () const
-  {
-    precondition (!timers_.empty());
-    std::vector< Timer >::const_iterator i = timers_.begin ();
-    Timer res = *i;
-    for (/* nothing. */; i != this->timers_.end (); ++i)
-      res = res.max (*i);
-    return res;
-  }
-
-  Timer
-  Bencher::prepare (Timer t) const
-  {
-    precondition (!timers_.empty());
-    t.tab_to_disp = timers_.begin()->tab_to_disp;
-    t.task_ordered = timers_.begin()->task_ordered;
-    return t;
-  }
-
 }
 
 NAMESPACE_VCSN_END
+
+# if VAUCANSON
+#  include <vaucanson/misc/bencher.cc>
+# endif
 
 #endif // !MISC_BENCHER_HXX_

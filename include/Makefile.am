@@ -49,6 +49,7 @@ vaucanson/misc/escaper.hh			\
 vaucanson/misc/escaper.hxx			\
 vaucanson/misc/functors.hh			\
 vaucanson/misc/functors.hxx			\
+vaucanson/misc/global_timer.hh			\
 vaucanson/misc/iomanip.hh			\
 vaucanson/misc/iomanip.hxx			\
 vaucanson/misc/limits.hh			\
@@ -67,8 +68,9 @@ vaucanson/misc/support.hxx			\
 vaucanson/misc/timer.hh				\
 vaucanson/misc/timer.hxx			\
 vaucanson/misc/timer.cc				\
-vaucanson/misc/bencher.hh				\
+vaucanson/misc/bencher.hh			\
 vaucanson/misc/bencher.hxx			\
+vaucanson/misc/bencher.cc			\
 vaucanson/misc/unique.hh			\
 vaucanson/misc/unique.hxx			\
 vaucanson/misc/usual_escaped_characters.hh	\

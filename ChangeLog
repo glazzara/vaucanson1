@@ -1,3 +1,31 @@
+2007-02-23  Akim Demaille  <akim@lrde.epita.fr>
+
+	Continue to clean the Bencher mess.
+	* include/vaucanson/misc/global_timer.hh: New, extracted and
+	extended from...
+	* include/vaucanson/misc/usual_macros.hh: here.
+	Include it.
+	* include/Makefile.am: Adjust.
+	* include/vaucanson/misc/bencher.hh: Make most methods const.
+	(BENCH_START, BENCH_STOP, BENCH_PRINT, BENCH_PLOT): Remove,
+	replaced by macros in global_timer.hh.
+	Also include bencher.cc for Vaucanson.
+	* include/vaucanson/misc/bencher.hxx: Move most methods to...
+	* include/vaucanson/misc/bencher.cc: here.
+	Spread the missing consts.
+	(print): Return the stream.
+	(operator<< (ostream, Bencher)): New.
+
+	* include/vaucanson/misc/timer.hh: Also include the cc file.
+	* include/vaucanson/misc/timer.hxx: Don't.
+
+	* taf-kit/src/common.hh: Adjust to these changes.
+	* taf-kit/src/main.cc: Have a single main loop.
+	Make sure the default number of iterations is 1.
+
+
+	* taf-kit/tests/Makefile.am (XFAIL_TESTS): Add completeness.test.
+
 2007-02-23  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Add support for libvcsn-*.la

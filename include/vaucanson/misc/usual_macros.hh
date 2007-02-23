@@ -181,23 +181,6 @@
 # define empty_	identity(SELECT(typename monoid_elt_t::value_t))
 # define wzero_	zero(SELECT(typename semiring_elt_t::value_t))
 
-
-/*-----------------.
-| Use of a timer.  |
-`-----------------*/
-# ifdef GLOBAL_TIMER
-#  include <vaucanson/misc/timer.hh>
-#  define TIMER_START()      GLOBAL_TIMER.start ()
-#  define TIMER_PUSH(Task)   GLOBAL_TIMER.push (Task)
-#  define TIMER_POP(Task)    GLOBAL_TIMER.pop (Task)
-#  define TIMER_STOP()       GLOBAL_TIMER.stop ()
-#  define TIMER_SCOPED(Task) vcsn::misc::ScopedTimer stimer (GLOBAL_TIMER, Task)
-# else
-#  define TIMER_START()      (void) 0
-#  define TIMER_PUSH(Task)   (void) 0
-#  define TIMER_POP(Task)    (void) 0
-#  define TIMER_STOP()       (void) 0
-#  define TIMER_SCOPED(Task) (void) 0
-# endif
+# include <vaucanson/misc/global_timer.hh>
 
 #endif // ! VCSN_MISC_USUAL_MACROS_HH

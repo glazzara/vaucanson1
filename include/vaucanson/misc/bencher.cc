@@ -17,6 +17,142 @@
  * USA.
  */
 
+/**
+ ** \file misc/bencher.cc
+ ** \brief Implementation for misc/bencher.hh.
+ */
+
+#ifndef VCSN_MISC_BENCHER_CC
+# define VCSN_MISC_BENCHER_CC
+
+/// This file is also used in Tiger Compiler, where it is compiled in
+/// a C library, so INLINE_TIMER_CC should be defined to empty in that
+/// case.
+# if VAUCANSON
+#  define INLINE_BENCHER_CC inline
+# else
+#  define INLINE_BENCHER_CC
+# endif
+
+
+NAMESPACE_VCSN_BEGIN
+
+namespace misc
+{
+
+  INLINE_BENCHER_CC
+  Timer
+  Bencher::sum () const
+  {
+    Timer res;
+    // Summarize total times by classic mean.
+    for (std::vector< Timer >::const_iterator i = this->timers_.begin ();
+	 i != this->timers_.end (); ++i)
+      res += *i;
+    return res;
+  }
+
+  INLINE_BENCHER_CC
+  Timer
+  Bencher::mean () const
+  {
+    precondition (!timers_.empty());
+    return sum() / timers_.size();
+  }
+
+  INLINE_BENCHER_CC
+  Timer
+  Bencher::min () const
+  {
+    precondition (!timers_.empty());
+    std::vector< Timer >::const_iterator i = timers_.begin ();
+    Timer res = *i;
+    for (/* nothing. */; i != this->timers_.end (); ++i)
+      res = res.min (*i);
+    return res;
+  }
+
+  INLINE_BENCHER_CC
+  Timer
+  Bencher::max () const
+  {
+    precondition (!timers_.empty());
+    std::vector< Timer >::const_iterator i = timers_.begin ();
+    Timer res = *i;
+    for (/* nothing. */; i != this->timers_.end (); ++i)
+      res = res.max (*i);
+    return res;
+  }
+
+  INLINE_BENCHER_CC
+  Timer
+  Bencher::prepare (Timer t) const
+  {
+    precondition (!timers_.empty());
+    t.tab_to_disp = timers_.begin()->tab_to_disp;
+    t.task_ordered = timers_.begin()->task_ordered;
+    return t;
+  }
+
+  INLINE_BENCHER_CC
+  std::ostream&
+  Bencher::print (std::ostream& o) const
+  {
+    const char* line = "-------------------------";
+    std::vector< Timer >::const_iterator i;
+    for (i = this->timers_.begin (); i != this->timers_.end (); ++i)
+    {
+      o << "------------------------" << std::endl
+	<< (*i);
+    }
+    o << std::endl
+      << line << std::endl
+      << "        SUMMARY" << std::endl
+      << line << std::endl
+      << "ARITHMETIC MEANS" << std::endl
+      << std::endl
+      << prepare(mean())
+      << line << std::endl
+      << "MIN" << std::endl
+      << std::endl
+      << prepare(min())
+      << line << std::endl
+      << "MAX" << std::endl
+      << std::endl
+      << prepare(max());
+    return o;
+  }
+
+  INLINE_BENCHER_CC
+  void
+  Bencher::plot (std::ostream& o) const
+  {
+    std::vector< Timer >::const_iterator i;
+    for (i = this->timers_.begin (); i != this->timers_.end (); ++i)
+    {
+      o << (float) i->total.elapsed.wall / i->clocks_per_sec
+	<< std::endl;
+    }
+  }
+
+
+  /*--------------------------.
+  | Free standing functions.  |
+  `--------------------------*/
+
+  /// Dump \a t on \a o.
+  INLINE_BENCHER_CC
+  std::ostream&
+  operator<< (std::ostream& o, const Bencher& t)
+  {
+    return t.print (o);
+  }
+
+}// namespace misc
+
+NAMESPACE_VCSN_END
+
+
 # if TEST_BENCHER
 
 # include <iostream>
@@ -39,8 +175,8 @@ main ()
       Four
     };
 
-  std::ofstream outfile;
-  outfile.open ("test.plot", std::ofstream::out | std::ofstream::trunc);
+  std::ofstream outfile ("test.plot",
+			 std::ofstream::out | std::ofstream::trunc);
 
   for (int i = 0; i < 10; i++)
   {
@@ -79,7 +215,9 @@ main ()
   return 0;
 }
 
-# endif
+# endif // TEST_BENCHER
+
+#endif // !VCSN_MISC_BENCHER_CC
 
 /// Local Variables:
 /// compile-command: "g++ -I ../.. -I ../../../_build/include -DTEST_BENCHER timer.cc bencher.cc -o test-bencher -Wall && ./test-bencher"

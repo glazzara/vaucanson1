@@ -225,8 +225,4 @@ namespace misc
 
 NAMESPACE_VCSN_END
 
-# if VAUCANSON
-#  include <vaucanson/misc/timer.cc>
-# endif
-
 #endif // !VCSN_MISC_TIMER_HXX
