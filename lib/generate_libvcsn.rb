@@ -30,7 +30,7 @@ def create?(type, file)
     (
       ( "vcsn-b" == type or "vcsn-r" == type or "vcsn-z" == type or
 	"vcsn-z-max" == type or "vcsn-z-min" == type ) and
-      file !~ /backward_realtime.hh/ and	# realtime 
+      file !~ /backward_realtime.hh/ and	# realtime
       file !~ /realtime_decl.hh/ and		# realtime
       file !~ /composition_cover.hh/ and	# transducer
       file !~ /extension.hh/ and		# transducer
@@ -127,12 +127,12 @@ def write_makefile(type)
 	     "",
 	     "INCLUDES\t\t=  -I$(top_builddir)/include -I$(top_srcdir)/include -I.",
 	     "noinst_LTLIBRARIES\t= ../lib" + type + ".la",
-	     "___lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= @LIBOBJS@")
+	     "___lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)")
     out.print "___lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= "
     files = Dir.glob(type + "/*cc").sort!
     files.each { |filename| out.print "\\\n\t\t\t", File.basename(filename), "\t" }
     out.print "\n\n"
-    out.puts("distclean-local:", "\trm -f *.cc")
+    out.puts("MAINTAINERCLEANFILES = *.cc")
   }
 end
 
