@@ -13,8 +13,6 @@
 
 include $(top_srcdir)/build-aux/check.mk
 
-XFAIL_TESTS =
-
 TESTS =						\
 vcsn-b.test					\
 vcsn-z.test					\
