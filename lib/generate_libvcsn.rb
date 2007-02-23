@@ -14,15 +14,27 @@
 #
 # The Vaucanson Group consists of people listed in the `AUTHORS' file.
 
-# Array filled with the supported types of automaton
-vcsn = [ "vcsn-b", "vcsn-r", "vcsn-z", "vcsn-z-max", "vcsn-z-min",
-	 "vcsn-fmp-tdc", "vcsn-tdc", "vcsn-z-fmp-tdc", "vcsn-z-tdc" ]
+# Hash table filled with the supported types of automaton
+vcsn = Hash[
+  "vcsn-b" => "boolean_automaton",
+  "vcsn-r" => "r_automaton",
+  "vcsn-z" => "z_automaton",
+  "vcsn-z-max" => "z_max_plus_automaton",
+  "vcsn-z-min" => "z_min_plus_automaton",
+  "vcsn-fmp-tdc" => "fmp_transducer",
+  "vcsn-tdc" => "boolean_transducer",
+  "vcsn-z-fmp-tdc" => "z_fmp_transducer",
+  "vcsn-z-tdc" => "z_transducer"
+]
+
+# Creating directories in lib/
+vcsn.each_key { |type| system("mkdir -p " + type) }
 
 # testing if a source file needs to be created
 def create?(type, file)
   (
-    ! File.exist?(type + "/" + File.basename(file, ".hh") + ".cc") or
-    File.new(file, "r").stat > File.new(type + "/" + File.basename(file, ".hh") + ".cc").stat
+    ! File.exist?(type + "/" + type + "_" + File.basename(file, ".hh") + ".cc") or
+    File.new(file, "r").stat > File.new(type + "/" + type + "_" + File.basename(file, ".hh") + ".cc").stat
   ) and
   # FIXME list of ignored files for each shall be removed later
   file !~ /krat_exp_linearize.hh/ and	# weird parsing which shall be done soon
@@ -108,9 +120,10 @@ def create?(type, file)
   )
 end
 
-# write a Makefile for `type`
+# write a *.mk for `type`
 def write_makefile(type)
-  File.open(type + "/Makefile.am.tmp", "w") { |out|
+  puts("Generating " + type + "/lib" + type + ".mk")
+  File.open(type + "/lib" + type + ".mk", "w") { |out|
     out.puts("## Vaucanson, a generic library for finite state machines.",
 	     "## Copyright (C) " + Time.now.strftime("%Y") + " The Vaucanson Group.",
 	     "##",
@@ -125,22 +138,23 @@ def write_makefile(type)
 	     "## The Vaucanson Group consists of people listed in the `AUTHORS' file.",
 	     "##",
 	     "",
-	     "INCLUDES\t\t=  -I$(top_builddir)/include -I$(top_srcdir)/include -I.",
-	     "noinst_LTLIBRARIES\t= ../lib" + type + ".la",
-	     "___lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)")
-    out.print "___lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= "
+#	     "INCLUDES\t\t=  -I$(top_builddir)/include -I$(top_srcdir)/include",
+	     "noinst_LTLIBRARIES\t+= lib" + type + ".la",
+	     "lib" + type.gsub(/-/, "_") + "_la_LIBADD\t= $(LIBOBJS)")
+    out.print "lib" + type.gsub(/-/, "_") + "_la_SOURCES\t= "
     files = Dir.glob(type + "/*cc").sort!
-    files.each { |filename| out.print "\\\n\t\t\t", File.basename(filename), "\t" }
+    files.each { |filename| out.print "\\\n\t\t\t", filename, "\t" }
     out.print "\n\n"
-    out.puts("MAINTAINERCLEANFILES = *.cc")
+    out.puts("MAINTAINERCLEANFILES += $(lib" + type.gsub(/-/, "_") + "_la_SOURCES) " +
+	      type + "/lib" + type + ".mk")
   }
 end
 
 # write the output file `type`/`fname` with `contents`
 # headers are written according to the `type`
-def write_src(type, fname, contents)
-  puts "Generating " + type + "/" + fname
-  File.open(type + '/' + fname, "w") { |out|
+def write_src(type, context, fname, contents)
+  puts "Generating " + type + "/" + type + "_" + fname
+  File.open(type + '/' + type + "_" + fname, "w") { |out|
     out.puts("// " + fname + ": this file is part of the Vaucanson project.",
 	     "//",
 	     "// Vaucanson, a generic library for finite state machines.",
@@ -158,7 +172,7 @@ def write_src(type, fname, contents)
 	     "// The Vaucanson Group consists of people listed in the `AUTHORS' file.",
 	     "//",
 	     "",
-	     "#include <" + type.gsub(/-/, "_") + ".hh>",
+	     "#include <vaucanson/" + context + "_structures.hh>",
 	     "#include <vaucanson/algorithms/" + File.basename(fname, ".cc") + ".hh>",
 	     "")
     out.puts(contents)
@@ -171,7 +185,6 @@ files = Dir.glob("../include/vaucanson/algorithms/*.hh")
 
 # read the directory
 files.each { |file|
-#  if create?("vcsn-b", file)
   empty = true
   File.open(file, "r") { |f|
     contents = f.readlines
@@ -205,29 +218,16 @@ files.each { |file|
       i = i.next
     end
 
-    vcsn.each { |type|
+    vcsn.each { |type, context|
       if create?(type, file) and ! empty
 	# file has template to instanciate, write it down!
 	# checking if there was any declaration kept from the current header
-	write_src(type, File.basename(file, ".hh") + ".cc", output)
+	write_src(type, context, File.basename(file, ".hh") + ".cc", output)
       end
     }
   }
 }
 
 # writing Makefiles
-vcsn.each { |type|
-  write_makefile(type)
-  if File.exist?(type + "/Makefile.am")
-    system("diff " + type + "/Makefile.am " + type + "/Makefile.am.tmp > /dev/null")
-    if $? != 0
-      puts "Generating " + type + "/Makefile.am"
-      system("mv -f " + type + "/Makefile.am.tmp " + type + "/Makefile.am")
-    else
-      File.delete(type + "/Makefile.am.tmp")
-    end
-  else
-    puts "Generating " + type + "/Makefile.am"
-    system("mv " + type + "/Makefile.am.tmp " + type + "/Makefile.am")
-  end
-}
+vcsn.each_key { |type| write_makefile(type) }
+

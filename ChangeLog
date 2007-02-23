@@ -1,3 +1,29 @@
+2007-02-23  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
+
+	Reorganize libvcsn 
+	Remove the sub-Makefiles in lib/vcsn-*/
+	* configure.ac: Remove lib/vcsn-*/Makefile
+	* lib/Makefile.am: Update.
+	* lib/generate_libvcsn.rb: Update.
+	* lib/vcsn-b/vcsn_b.hh: Remove.
+	* lib/vcsn-b: Remove.
+	* lib/vcsn-fmp-tdc/vcsn_fmp_tdc.hh: Remove.
+	* lib/vcsn-fmp-tdc: Remove.
+	* lib/vcsn-r/vcsn_r.hh: Remove.
+	* lib/vcsn-r: Remove.
+	* lib/vcsn-tdc/vcsn_tdc.hh: Remove.
+	* lib/vcsn-tdc: Remove.
+	* lib/vcsn-z-fmp-tdc/vcsn_z_fmp_tdc.hh: Remove.
+	* lib/vcsn-z-fmp-tdc: Remove.
+	* lib/vcsn-z-max/vcsn_z_max.hh: Remove.
+	* lib/vcsn-z-max: Remove.
+	* lib/vcsn-z-min/vcsn_z_min.hh: Remove.
+	* lib/vcsn-z-min: Remove.
+	* lib/vcsn-z-tdc/vcsn_z_tdc.hh: Remove.
+	* lib/vcsn-z-tdc: Remove.
+	* lib/vcsn-z/vcsn_z.hh: Remove.
+	* lib/vcsn-z: Remove.
+
 2007-02-23  Akim Demaille  <akim@lrde.epita.fr>
 
 	Automake style.
