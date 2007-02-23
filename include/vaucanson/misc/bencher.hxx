@@ -28,6 +28,7 @@ NAMESPACE_VCSN_BEGIN
 namespace misc
 {
 
+  inline
   void
   Bencher::push (const Timer& t)
   {
@@ -37,9 +38,5 @@ namespace misc
 }
 
 NAMESPACE_VCSN_END
-
-# if VAUCANSON
-#  include <vaucanson/misc/bencher.cc>
-# endif
 
 #endif // !MISC_BENCHER_HXX_
