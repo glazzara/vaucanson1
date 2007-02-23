@@ -17,50 +17,10 @@
 #ifndef VCSN_BOOLEAN_TRANSDUCER_HH
 # define VCSN_BOOLEAN_TRANSDUCER_HH
 
-# include <vaucanson/boolean_automaton.hh>
+# include <vaucanson/boolean_transducer_structures.hh>
 
 # define VCSN_CONTEXT_NAMESPACE namespace boolean_transducer
 # define AUTOMATON_CONTEXT boolean_automaton
-
-# include <vaucanson/contexts/char_letter.thh>
-# include <vaucanson/contexts/dynamic_alphabet.thh>
-# include <vaucanson/contexts/free_monoid.thh>
-
-namespace vcsn
-{
-
-  VCSN_CONTEXT_NAMESPACE
-  {
-
-    typedef boolean_automaton::semiring_elt_t	output_semiring_elt_t;
-    typedef output_semiring_elt_t::set_t	output_semiring_t;
-    typedef output_semiring_elt_t::value_t	output_semiring_elt_value_t;
-
-    typedef boolean_automaton::rat_exp_t	output_series_set_elt_t;
-    typedef output_series_set_elt_t::set_t	output_series_set_t;
-    typedef output_series_set_elt_t::value_t	output_series_set_elt_value_t;
-
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
-
-} // End of namespace vcsn.
-
-# include <vaucanson/contexts/ratseries_semiring.thh>
-# include <vaucanson/contexts/polynom_series.thh>
-# include <vaucanson/contexts/generic_automaton_impl.thh>
-# include <vaucanson/contexts/transducer.thh>
-
-namespace vcsn
-{
-
-  VCSN_CONTEXT_NAMESPACE
-  {
-
-    AUTOMATON_TYPES_EXACT(automaton_t);
-    AUTOMATON_FREEMONOID_TYPES_EXACT(automaton_t);
-
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
-
-} // End of namespace vcsn.
 
 # include <vaucanson/contexts/transducer_functions.thh>
 

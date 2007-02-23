@@ -17,34 +17,11 @@
 #ifndef VCSN_Z_FMP_TRANSDUCER_HH
 # define VCSN_Z_FMP_TRANSDUCER_HH
 
-# include <vaucanson/z_automaton.hh>
+# include <vaucanson/z_fmp_transducers_structures.hh>
 
 # define VCSN_CONTEXT_NAMESPACE namespace z_fmp_transducer
 # define AUTOMATON_CONTEXT z_automaton
 
-namespace vcsn
-{
-
-  VCSN_CONTEXT_NAMESPACE
-  {
-    typedef z_automaton::monoid_elt_t		first_monoid_elt_t;
-    typedef first_monoid_elt_t::set_t		first_monoid_t;
-    typedef first_monoid_elt_t::value_t		first_monoid_elt_value_t;
-    typedef first_monoid_t::alphabet_t		first_alphabet_t;
-
-    typedef z_automaton::monoid_elt_t		second_monoid_elt_t;
-    typedef second_monoid_elt_t::set_t		second_monoid_t;
-    typedef second_monoid_elt_t::value_t	second_monoid_elt_value_t;
-    typedef second_monoid_t::alphabet_t		second_alphabet_t;
-  } // End of namespace VCSN_CONTEXT_NAMESPACE.
-
-} // End of namespace vcsn.
-
-# include <vaucanson/contexts/free_monoid_product.thh>
-# include <vaucanson/contexts/z_semiring.thh>
-# include <vaucanson/contexts/polynom_series.thh>
-# include <vaucanson/contexts/generic_automaton_impl.thh>
-# include <vaucanson/contexts/automaton.thh>
 # include <vaucanson/contexts/fmp_transducer_functions.thh>
 
 # undef VCSN_CONTEXT_NAMESPACE

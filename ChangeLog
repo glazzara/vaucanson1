@@ -1,5 +1,30 @@
 2007-02-23  Guillaume Lazzara  <z@lrde.epita.fr>
 
+	Add new automaton structures headers
+	Split the current headers in two different headers.
+	One with the basic structures to instantiate automata and another one
+	which also includes the algorithms.
+	* boolean_automaton.hh: .
+	* boolean_automaton_structures.hh: New.
+	* boolean_transducer.hh: .
+	* boolean_transducer_structures.hh: New.
+	* fmp_transducer.hh: .
+	* fmp_transducer_structures.hh: New.
+	* r_automaton.hh: .
+	* r_automaton_structures.hh: New.
+	* z_automaton.hh: .
+	* z_automaton_structures.hh: New.
+	* z_fmp_transducer.hh: .
+	* z_fmp_transducer_structures.hh: New.
+	* z_max_plus_automaton.hh: .
+	* z_max_plus_automaton_structures.hh: New.
+	* z_min_plus_automaton.hh: .
+	* z_min_plus_automaton_structures.hh: New.
+	* z_transducer.hh: .
+	* z_transducer_structures.hh: New.
+
+2007-02-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
 	Remove useless ifndef
 	Remove the ifndef related to VCSN_USE_INTERFACE_ONLY in files declaring
 	automata structures.
