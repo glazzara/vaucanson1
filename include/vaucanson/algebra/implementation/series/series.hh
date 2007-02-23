@@ -107,9 +107,7 @@ namespace vcsn {
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
 # include <vaucanson/algebra/implementation/series/series.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_SERIES_HH

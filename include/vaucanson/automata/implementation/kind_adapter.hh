@@ -145,8 +145,6 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/automata/implementation/kind_adapter.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_KIND_ADAPTER_HH

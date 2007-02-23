@@ -98,8 +98,6 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/design_pattern/meta_element_root.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_DESIGN_PATTERN_META_ELEMENT_ROOT_HH

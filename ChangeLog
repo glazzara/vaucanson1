@@ -1,3 +1,91 @@
+2007-02-23  Guillaume Lazzara  <z@lrde.epita.fr>
+
+	Remove useless ifndef
+	Remove the ifndef related to VCSN_USE_INTERFACE_ONLY in files declaring
+	automata structures.
+	Indeed, most of the automata structures can't be explicitly
+	instantiated and can't be part of libvcsn-*. Thus, while building
+	an application linked against libvcsn, we always want to include
+	.hxx files for these structures.
+	* algebra/concept/alphabets_base.hh: .
+	* algebra/concept/freemonoid_base.hh: .
+	* algebra/concept/freemonoid_product.hh: .
+	* algebra/concept/freemonoid_product_base.hh: .
+	* algebra/concept/monoid_base.hh: .
+	* algebra/concept/numerical_semiring.hh: .
+	* algebra/concept/semigroup_base.hh: .
+	* algebra/concept/semiring_base.hh: .
+	* algebra/concept/series_base.hh: .
+	* algebra/concept/tropical_semiring.hh: .
+	* algebra/implementation/alphabets/decorated_alphabet.hh: .
+	* algebra/implementation/alphabets/set_alphabet.hh: .
+	* algebra/implementation/free_monoid/str_words.hh: .
+	* algebra/implementation/free_monoid/tools.hh: .
+	* algebra/implementation/free_monoid/words.hh: .
+	* algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hh: .
+	* algebra/implementation/letter/couple_letter.hh: .
+	* algebra/implementation/letter/int_letter.hh: .
+	* algebra/implementation/letter/range.hh: .
+	* algebra/implementation/semiring/numerical_semiring.hh: .
+	* algebra/implementation/semiring/rational_number.hh: .
+	* algebra/implementation/semiring/tropical_semiring.hh: .
+	* algebra/implementation/series/generalized.hh: .
+	* algebra/implementation/series/krat.hh: .
+	* algebra/implementation/series/krat_coefficient.hh: .
+	* algebra/implementation/series/krat_conversion.hh: .
+	* algebra/implementation/series/krat_exp_parser.hh: .
+	* algebra/implementation/series/krat_exp_pattern.hh: .
+	* algebra/implementation/series/polynoms.hh: .
+	* algebra/implementation/series/rat/depth_visitor.hh: .
+	* algebra/implementation/series/rat/dispatch_visitor.hh: .
+	* algebra/implementation/series/rat/dump_visitor.hh: .
+	* algebra/implementation/series/rat/exp.hh: .
+	* algebra/implementation/series/rat/nodes.hh: .
+	* algebra/implementation/series/rat/random_visitor.hh: .
+	* algebra/implementation/series/rat/reverse_visitor.hh: .
+	* algebra/implementation/series/rat/xml_exp_visitor.hh: .
+	* algebra/implementation/series/series.hh: .
+	* algebra/implementation/series/transpose.hh: .
+	* automata/concept/automata.hh: .
+	* automata/concept/automata_base.hh: .
+	* automata/concept/automata_ops.hh: .
+	* automata/concept/copy.hh: .
+	* automata/concept/handlers.hh: .
+	* automata/concept/history.hh: .
+	* automata/concept/kinds.hh: .
+	* automata/concept/tags.hh: .
+	* automata/concept/transducer.hh: .
+	* automata/concept/transducer_base.hh: .
+	* automata/concept/transducer_ops.hh: .
+	* automata/concept/translate.hh: .
+	* automata/implementation/automaton_view.hh: .
+	* automata/implementation/generalized.hh: .
+	* automata/implementation/geometry.hh: .
+	* automata/implementation/graph.hh: .
+	* automata/implementation/kind_adapter.hh: .
+	* automata/implementation/transpose_view.hh: .
+	* design_pattern/default_ops.hh: .
+	* design_pattern/element.hh: .
+	* design_pattern/element_ops.hh: .
+	* design_pattern/meta_element_root.hh: .
+	* design_pattern/slots.hh: .
+	* design_pattern/structure.hh: .
+	* design_pattern/syntactic_decorator.hh: .
+	* misc/bitset.hh: .
+	* misc/char_traits.hh: .
+	* misc/container_ops.hh: .
+	* misc/deferrer.hh: .
+	* misc/escaper.hh: .
+	* misc/functors.hh: .
+	* misc/iomanip.hh: .
+	* misc/random.hh: .
+	* misc/sparse_interval.hh: .
+	* misc/support.hh: .
+	* misc/timer.hh: .
+	* misc/unique.hh: .
+	* misc/usual_escaped_characters.hh: .
+	* misc/window.hh: .
+
 2007-02-23  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Reorganize libvcsn 

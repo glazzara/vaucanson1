@@ -124,9 +124,7 @@ namespace vcsn
 } // vcsn
 
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/misc/sparse_interval.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_MISC_SPARSE_INTERVAL_HH

@@ -96,9 +96,7 @@ namespace vcsn {
 } // vcsn
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
 # include <vaucanson/automata/concept/transducer_ops.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_TRANSDUCER_OPS_HH

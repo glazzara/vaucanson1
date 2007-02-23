@@ -137,8 +137,6 @@ namespace vcsn
   } // misc
 } // vcsn
 
-# ifndef INTERFACE_ONLY
 #  include <vaucanson/misc/unique.hxx>
-# endif // INTERFACE_ONLY
 
 #endif // ! VCSN_MISC_UNIQUE_HH

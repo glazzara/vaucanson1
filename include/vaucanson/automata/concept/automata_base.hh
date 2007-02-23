@@ -554,8 +554,6 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/automata/concept/automata_base.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_AUTOMATA_BASE_HH

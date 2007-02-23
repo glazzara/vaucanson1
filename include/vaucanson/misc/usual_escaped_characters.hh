@@ -38,9 +38,7 @@ namespace vcsn {
 
 } // End of namespace vcsn.
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/misc/usual_escaped_characters.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_MISC_USUAL_ESCAPED_CHARACTERS_HH

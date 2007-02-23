@@ -103,8 +103,6 @@ namespace vcsn
   } // End of namespace misc.
 } // End of namespace vcsn.
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/misc/escaper.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_MISC_ESCAPER_HH

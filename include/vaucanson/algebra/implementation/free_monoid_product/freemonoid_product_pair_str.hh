@@ -85,8 +85,6 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/free_monoid_product/freemonoid_product_pair_str.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_FREE_MONOID_PRODUCT_FREEMONOID_PRODUCT_PAIR_STR_HH

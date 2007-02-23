@@ -148,8 +148,6 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/alphabets/decorated_alphabet.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_ALPHABETS_DECORATED_ALPHABET_HH

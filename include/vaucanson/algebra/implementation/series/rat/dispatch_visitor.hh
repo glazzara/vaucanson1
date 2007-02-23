@@ -95,8 +95,6 @@ namespace vcsn
 
 } // End of namespace vcsn.
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/series/rat/dispatch_visitor.hxx>
-# endif // ! VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_SERIES_RAT_DISPATCH_VISITOR_HH

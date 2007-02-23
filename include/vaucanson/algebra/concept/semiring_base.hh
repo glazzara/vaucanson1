@@ -166,8 +166,6 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/concept/semiring_base.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_SEMIRING_BASE_HH

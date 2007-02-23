@@ -85,9 +85,7 @@ namespace vcsn {
 } // vcsn
 
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/implementation/letter/range.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_ALGEBRA_IMPLEMENTATION_LETTER_RANGE_HH

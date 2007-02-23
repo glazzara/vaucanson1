@@ -193,8 +193,6 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/algebra/concept/alphabets_base.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_ALGEBRA_CONCEPT_ALPHABETS_BASE_HH

@@ -280,9 +280,7 @@ namespace vcsn {
 }
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
 # include <vaucanson/automata/concept/kinds.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_AUTOMATA_CONCEPT_KINDS_HH

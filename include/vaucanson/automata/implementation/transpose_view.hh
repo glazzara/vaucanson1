@@ -538,9 +538,7 @@ namespace vcsn {
 # undef AutoType
 
 
-#ifndef VCSN_USE_INTERFACE_ONLY
 # include <vaucanson/automata/implementation/transpose_view.hxx>
-#endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_AUTOMATA_IMPLEMENTATION_TRANSPOSE_VIEW_HH

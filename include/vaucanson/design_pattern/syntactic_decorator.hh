@@ -142,8 +142,6 @@ namespace vcsn {
 
 } // vcsn
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/design_pattern/syntactic_decorator.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 #endif // ! VCSN_DESIGN_PATTERN_SYNTACTIC_DECORATOR_HH

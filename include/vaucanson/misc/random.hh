@@ -145,9 +145,7 @@ namespace vcsn {
 } // end of namespace vcsn.
 
 
-# ifndef VCSN_USE_INTERFACE_ONLY
 #  include <vaucanson/misc/random.hxx>
-# endif // VCSN_USE_INTERFACE_ONLY
 
 
 #endif // ! VCSN_MISC_RANDOM_HH
