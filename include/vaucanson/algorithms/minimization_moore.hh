@@ -41,6 +41,10 @@ namespace vcsn {
    * O(n2). See  minimize_hopcroft for O(nlogn).
    *
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
+   * @see ETA p123-125
+   *
+   * @pre is boolean automaton and is deterministic
+   *
    * @bug Put the precondition.
    */
   template<typename A, typename T>
@@ -56,6 +60,10 @@ namespace vcsn {
    * O(n2).
    *
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
+   * @see ETA p123-125
+   *
+   * @pre is boolean automaton and is co-deterministic
+   *
    * @bug Put the precondition.
    */
   template<typename A, typename T>
@@ -71,6 +79,10 @@ namespace vcsn {
    * minimize_hopcroft for O(nlogn).
    *
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
+   * @see ETA p123-125
+   *
+   * @pre is boolean automaton and is deterministic
+   *
    */
   template<typename A, typename T>
   void
@@ -85,6 +97,10 @@ namespace vcsn {
    * minimize_hopcroft for O(nlogn).
    *
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
+   * @see ETA p123-125
+   *
+   * @pre is boolean automaton and is co-deterministic
+   *
    */
   template<typename A, typename T>
   void

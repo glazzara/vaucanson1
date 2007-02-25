@@ -44,30 +44,26 @@ namespace vcsn {
 			 std::map<hstate_t, std::set<hstate_t> >& m =
 			 std::map<hstate_t, std::set<hstate_t> >())
   {
+
+    /*--------.
+    | Typedef |
+    `--------*/
+
     AUTOMATON_TYPES(input_t);
     AUTOMATON_FREEMONOID_TYPES(input_t);
-    typedef typename input_t::series_set_t		    series_set_t;
     typedef typename std::set<hstate_t>			    subset_t;
     typedef typename std::map<subset_t, hstate_t>	    subset_set_t;
     typedef std::pair<subset_t, hstate_t>		    subset_set_pair_t;
     typedef std::vector<hstate_t>			    delta_ret_t;
 
-    hstate_t qi_hstate = output.add_state();
-    subset_t qi;
-    subset_set_t subset_set;
-    const alphabet_t& alphabet(input.structure().series().monoid().alphabet());
-    subset_t q;
-    subset_t s;
-    delta_ret_t dst;
-    hstate_t s_hstate;
-    typename subset_set_t::const_iterator current;
 
     /*---------------.
     | Initialization |
     `---------------*/
-    bool is_final = false;
-    dst.reserve(input.states().size());
 
+    hstate_t qi_hstate = output.add_state();
+    subset_t qi;
+    bool is_final = false;
     for_all_initial_states(i, input)
     {
       qi.insert(*i);
@@ -78,6 +74,7 @@ namespace vcsn {
     if (is_final)
       output.set_final(qi_hstate);
 
+    subset_set_t subset_set;
     subset_set[qi] = qi_hstate;
     m[qi_hstate] = qi;
 
@@ -85,17 +82,22 @@ namespace vcsn {
     /*----------.
     | Main loop |
     `----------*/
+
+    subset_t s;
+    subset_t q;
+    const alphabet_t& alphabet(input.structure().series().monoid().alphabet());
+    delta_ret_t dst;
+    dst.reserve(input.states().size());
     std::queue<subset_t> path;
     path.push(qi);
-
     do {
-      s	       = path.front();
-      s_hstate = subset_set[s];
+      s = path.front();
+      hstate_t s_hstate = subset_set[s];
       path.pop();
 
       for_all_letters(e, alphabet)
       {
-	q.clear();
+	q.clear ();
 	is_final = false;
 	for (typename subset_t::const_iterator j = s.begin();
 	     j != s.end(); ++j)
@@ -110,7 +112,7 @@ namespace vcsn {
 	    is_final   |= input.is_final(state);
 	  }
 	}
-	current = subset_set.find(q);
+	typename subset_set_t::const_iterator current = subset_set.find(q);
 	if (current == subset_set.end())
 	{
 	  hstate_t qs = output.add_state();

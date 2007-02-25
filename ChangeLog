@@ -1,3 +1,11 @@
+2007-02-25  Vivien Delmon  <vivien.delmon@lrde.epita.fr>
+
+	Reduce variable scope and add reference.
+	* include/vaucanson/algorithms/determinize.hh: .
+	* include/vaucanson/algorithms/determinize.hxx: .
+	* include/vaucanson/algorithms/minimization_moore.hh: .
+	* include/vaucanson/algorithms/minimization_moore.hxx: .
+
 2007-02-23  Jimmy Ma  <jimmy.ma@lrde.epita.fr>
 
 	Remove define VCSN_CONTEXT

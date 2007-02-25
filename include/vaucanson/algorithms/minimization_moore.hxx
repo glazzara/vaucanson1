@@ -83,31 +83,23 @@ namespace vcsn {
     typedef map<hstate_t, groupid_t>		state_to_groupid_t;
     typedef map<letter_t,  letterid_t>		letter_to_letterid_t;
 
-    // Variables.
-
-    letter_to_letterid_t			letter_to_letterid;
-    state_to_groupid_t				state_to_groupid;
-    group_t					delta_ret;
-
-    // Store successors if non-inverted, predecessors otherwise.
-    state_to_letterid_to_state_t		aut_view;
-
-    groupid_to_group_t	groupid_to_group(input.states().size());
-
-    int						letter_count = 0;
-    int						i;
-
     /*---------------.
     | Initialization |
     `---------------*/
 
     precondition(input.exists());
 
+    groupid_to_group_t	groupid_to_group(input.states().size());
+
+    state_to_groupid_t state_to_groupid;
     state_to_groupid[NullState] = NullGroup;
 
+    letter_to_letterid_t letter_to_letterid;
+    int	letter_count = 0;
     for_all_letters(iletter, alphabet)
       letter_to_letterid[*iletter] = letter_count++;
 
+    state_to_letterid_to_state_t aut_view;
     for_all_states(istate, input)
     {
       aut_view[*istate] = letterid_to_state_t(letter_count, NullState);
@@ -124,11 +116,12 @@ namespace vcsn {
       }
     }
 
+    group_t delta_ret;
     for_all_states(istate, input)
     {
       for_all_const_(letter_to_letterid_t, iletter, letter_to_letterid)
       {
-	delta_ret.clear();
+	delta_ret.clear ();
 	if (not Transposed)
 	  input.letter_deltac(delta_ret, *istate, iletter->first,
 			      delta_kind::states());
@@ -146,12 +139,9 @@ namespace vcsn {
     `-----*/
 
     int	 last_group = 1;
-    bool group_modified;
-
-    do
+    for (bool group_modified = true; group_modified;)
     {
       group_modified = false;
-
       for_all_groups(igroup, groupid_to_group)
       {
 	if (igroup->empty())
@@ -162,6 +152,7 @@ namespace vcsn {
 
 	for_all_state_in_groups(istate, *igroup)
 	{
+	  int i;
 	  for (i = 0; i < letter_count; ++i)
 	    if (state_to_groupid[aut_view[first_state][i]] !=
 		state_to_groupid[aut_view[*istate][i]])
@@ -185,7 +176,6 @@ namespace vcsn {
 	}
       }
     }
-    while (group_modified);
 
 
     /*-----------------------.
@@ -195,11 +185,11 @@ namespace vcsn {
     std::vector<hstate_t> new_states(last_group + 1);
 
     // Create all states.
-    for (i = 0; i <= last_group; ++i)
+    for (int i = 0; i <= last_group; ++i)
       new_states[i] = output.add_state();
 
     // Create all transitions.
-    for (i = 0; i <= last_group; ++i)
+    for (int i = 0; i <= last_group; ++i)
     {
       hstate_t repres = *(groupid_to_group[i].begin());
 

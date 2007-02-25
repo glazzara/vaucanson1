@@ -49,6 +49,10 @@ namespace vcsn {
    *
    * @param a The Boolean automaton to determinize.
    *
+   * @see ETA p114-117
+   *
+   * @pre is boolean automaton
+   *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
   template<typename A, typename T>
@@ -62,6 +66,10 @@ namespace vcsn {
    * @param m A map which will be augmented with the correspondance
    *          from one state of the resulting automaton to the set
    *          of states of the input automaton.
+   *
+   * @see ETA p114-117
+   *
+   * @pre is boolean automaton
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
