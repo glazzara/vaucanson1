@@ -43,7 +43,7 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre is boolean automaton and is deterministic
+   * @pre is Boolean automaton and is deterministic.
    *
    * @bug Put the precondition.
    */
@@ -62,7 +62,7 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre is boolean automaton and is co-deterministic
+   * @pre is Boolean automaton and is co-deterministic.
    *
    * @bug Put the precondition.
    */
@@ -81,7 +81,7 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre is boolean automaton and is deterministic
+   * @pre is Boolean automaton and is deterministic.
    *
    */
   template<typename A, typename T>
@@ -99,7 +99,7 @@ namespace vcsn {
    * @see http://cs.engr.uky.edu/~lewis/essays/compilers/min-fa.html
    * @see ETA p123-125
    *
-   * @pre is boolean automaton and is co-deterministic
+   * @pre is Boolean automaton and is co-deterministic.
    *
    */
   template<typename A, typename T>

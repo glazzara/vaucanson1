@@ -51,7 +51,7 @@ namespace vcsn {
    *
    * @see ETA p114-117
    *
-   * @pre is boolean automaton
+   * @pre is Boolean automaton.
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
@@ -69,7 +69,7 @@ namespace vcsn {
    *
    * @see ETA p114-117
    *
-   * @pre is boolean automaton
+   * @pre is Boolean automaton.
    *
    * @return A fresh Boolean automaton that is the determinization of 'a'.
    */
