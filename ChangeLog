@@ -1,5 +1,10 @@
 2007-02-26  Akim Demaille  <akim@lrde.epita.fr>
 
+	Comments changes.
+	* include/vaucanson/misc/timer.hh: Here.
+
+2007-02-26  Akim Demaille  <akim@lrde.epita.fr>
+
 	Formatting changes.
 	* include/vaucanson/misc/timer.hh: here,
 	* include/vaucanson/misc/timer.cc: and there.

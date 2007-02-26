@@ -140,7 +140,7 @@ namespace misc
       Time ();
       /// Set to the current time.
       void now ();
-
+      /// Reset to 0.
       void clear ();
 
       /// \name Comparison to 0.
@@ -153,17 +153,19 @@ namespace misc
 
       /// \name Arithmetics.
       /// \{
-      /// Accumulate \c lhs into \a this.
-      Time& operator += (const Time& lhs);
-      /// Return the sum of \a this and \a lhs
-      Time operator + (const Time& lhs) const;
+      /// Accumulate \c rhs into \a this.
+      Time& operator += (const Time& rhs);
+      /// Return the sum of \a this and \a rhs.
+      Time operator + (const Time& rhs) const;
 
-      /// Subtract \c lhs from \a this.
-      Time& operator -= (const Time& lhs);
-      /// Return the subtraction of \a this and \a lhs.
-      Time operator - (const Time& lhs) const;
+      /// Subtract \c rhs from \a this.
+      Time& operator -= (const Time& rhs);
+      /// Return the subtraction of \a this and \a rhs.
+      Time operator - (const Time& rhs) const;
 
+      /// Divide times in place by \a n.
       Time& operator/= (unsigned n);
+      /// Return the division of \a this and \a n.
       Time operator/ (unsigned n) const;
       /// \}
 
